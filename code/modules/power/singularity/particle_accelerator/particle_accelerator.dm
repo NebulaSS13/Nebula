@@ -110,7 +110,7 @@ So, hopefully this is helpful if any more icons are to be added/changed/wonderin
 	..()
 	if(master && master.active)
 		master.toggle_power()
-		investigate_log("was moved whilst active; it <font color='red'>powered down</font>.","singulo")
+		log_and_message_admins("[src] was moved while active and has powered down at ([x],[y],[z]).")
 
 /obj/structure/particle_accelerator/explosion_act(severity)
 	. = ..()

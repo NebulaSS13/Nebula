@@ -88,8 +88,7 @@ field_generator power level display
 					"You turn on the [src.name].", \
 					"You hear heavy droning.")
 				turn_on()
-				investigate_log("<font color='green'>activated</font> by [user.key].","singulo")
-
+				log_and_message_admins("\the [src] activated by [user.key] at ([x],[y],[z]).")
 				src.add_fingerprint(user)
 				return TRUE
 	else
@@ -211,7 +210,7 @@ field_generator power level display
 		for(var/mob/M in viewers(src))
 			M.show_message("<span class='warning'>\The [src] shuts down!</span>")
 		turn_off()
-		investigate_log("ran out of power and <font color='red'>deactivated</font>","singulo")
+		log_and_message_admins("[src] ran out of power and deactivated at ([x],[y],[z]).")
 		src.power = 0
 		return 0
 
@@ -334,6 +333,5 @@ field_generator power level display
 			if(O.last_warning && temp)
 				if((world.time - O.last_warning) > 50) //to stop message-spam
 					temp = 0
-					message_admins("A singulo exists and a containment field has failed.",1)
-					investigate_log("has <font color='red'>failed</font> whilst a singulo exists.","singulo")
+					log_and_message_admins("A singulo exists and a containment field has failed at ([x],[y],[z]).")
 			O.last_warning = world.time

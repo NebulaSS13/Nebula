@@ -1,5 +1,3 @@
-#define I_SINGULO "singulo"
-
 /atom/proc/singularity_act()
 	return
 
@@ -7,7 +5,7 @@
 	return
 
 /mob/living/singularity_act()
-	investigate_log("has been consumed by a singularity", I_SINGULO)
+	log_and_message_admins("[src] has been consumed by a singularity at ([x],[y],[z]).")
 	gib()
 	return 20
 

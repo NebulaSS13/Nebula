@@ -199,7 +199,7 @@ By design, d1 is the smallest direction and d2 is the highest
 
 	new/obj/item/stack/cable_coil(T, (src.d1 ? 2 : 1), color)
 
-	visible_message("<span class='warning'>[user] cuts the cable.</span>")
+	log_and_message_admins("cuts [src] at ([x],[y],[z]).")
 
 	if(HasBelow(z))
 		for(var/turf/turf in GetBelow(src))
@@ -207,7 +207,7 @@ By design, d1 is the smallest direction and d2 is the highest
 				if(c.d1 == UP || c.d2 == UP)
 					qdel(c)
 
-	investigate_log("was cut by [key_name(usr, usr.client)] in [get_area(user)]","wires")
+	log_game("[src] was cut by [key_name(usr, usr.client)] in [get_area(user)] at ([x],[y],[z]).")
 
 	qdel(src)
 

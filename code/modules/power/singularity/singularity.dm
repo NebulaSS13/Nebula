@@ -59,7 +59,7 @@ var/global/list/singularities = list()
 	switch(severity)
 		if(1.0)
 			if(prob(25))
-				investigate_log("has been destroyed by an explosion.", I_SINGULO)
+				log_game("[src] has been destroyed by an explosion at ([x],[y],[z]).")
 				qdel(src)
 				return
 			else
@@ -95,11 +95,7 @@ var/global/list/singularities = list()
 /obj/singularity/proc/admin_investigate_setup()
 	last_warning = world.time
 	var/count = locate(/obj/machinery/containment_field) in orange(30, src)
-
-	if (!count)
-		message_admins("A singulo has been created without containment fields active ([x], [y], [z] - <A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[x];Y=[y];Z=[z]'>JMP</a>).")
-
-	investigate_log("was created. [count ? "" : "<font color='red'>No containment fields were active.</font>"]", I_SINGULO)
+	log_and_message_admins("A singulo has been created[!count ? " without containment fields active" : ""] at ([x], [y], [z] - <A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[x];Y=[y];Z=[z]'>JMP</a>).")
 
 /obj/singularity/proc/dissipate()
 	if (!dissipate)
@@ -235,7 +231,7 @@ var/global/list/singularities = list()
 			visible_message("<span class='sinister'><font size='3'>You witness the creation of a destructive force that cannot possibly be stopped by human hands.</font></span>")
 
 	if (current_size == allowed_size)
-		investigate_log("<font color='red'>grew to size [current_size].</font>", I_SINGULO)
+		log_game("[src] grew to size [current_size] at ([x],[y],[z]).")
 		return 1
 	else if (current_size < (--temp_allowed_size) && current_size != STAGE_SUPER)
 		expand(temp_allowed_size)
@@ -244,7 +240,7 @@ var/global/list/singularities = list()
 
 /obj/singularity/proc/check_energy()
 	if (energy <= 0)
-		investigate_log("collapsed.", I_SINGULO)
+		log_game("[src] collapsed at ([x],[y],[z]).")
 		qdel(src)
 		return 0
 

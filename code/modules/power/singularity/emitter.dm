@@ -42,8 +42,7 @@
 	state = 2
 
 /obj/machinery/emitter/Destroy()
-	log_and_message_admins("deleted \the [src]")
-	investigate_log("<font color='red'>deleted</font> at ([x],[y],[z])","singulo")
+	log_and_message_admins("deleted \the [src] at ([x],[y],[z]).")
 	return ..()
 
 /obj/machinery/emitter/on_update_icon()
@@ -67,8 +66,7 @@
 			if(active==1)
 				active = 0
 				to_chat(user, "You turn off \the [src].")
-				log_and_message_admins("turned off \the [src]")
-				investigate_log("turned <font color='red'>off</font> by [key_name_admin(user || usr)]","singulo")
+				log_and_message_admins("turned off \the [src] at ([x],[y],[z]).")
 			else
 				active = 1
 				if(user)
@@ -77,8 +75,7 @@
 				to_chat(user, "You turn on \the [src].")
 				shot_number = 0
 				fire_delay = get_initial_fire_delay()
-				log_and_message_admins("turned on \the [src]")
-				investigate_log("turned <font color='green'>on</font> by [key_name_admin(user || usr)]","singulo")
+				log_and_message_admins("turned on \the [src] at ([x],[y],[z]).")
 			update_icon()
 		else
 			to_chat(user, "<span class='warning'>The controls are locked!</span>")
