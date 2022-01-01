@@ -934,7 +934,7 @@ var/global/list/gamemode_cache = list()
 
 		switch (name)
 			if ("enabled")
-				sqlenabled = TRUE
+				sql_enabled = TRUE
 			if ("address")
 				sqladdress = value
 			if ("port")

@@ -1,5 +1,3 @@
-var/global/datum/configuration/config = null
-
 /// Directory to store all logs.
 GLOBAL_PROTECTED_UNTYPED(log_directory, null)
 
@@ -9,3 +7,5 @@ GLOBAL_PROTECTED_UNTYPED(world_main_log, null)
 GLOBAL_PROTECTED_UNTYPED(world_href_log, null)
 /// Stores GC deletion logs.
 GLOBAL_PROTECTED_UNTYPED(world_qdel_log, null)
+/// Stores GC deletion logs.
+GLOBAL_PROTECTED_UNTYPED(world_config_log, null)

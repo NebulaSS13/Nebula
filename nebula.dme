@@ -174,7 +174,6 @@
 #include "code\controllers\admin.dm"
 #include "code\controllers\autotransfer.dm"
 #include "code\controllers\communications.dm"
-#include "code\controllers\configuration.dm"
 #include "code\controllers\controller.dm"
 #include "code\controllers\failsafe.dm"
 #include "code\controllers\hooks-defs.dm"

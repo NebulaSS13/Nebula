@@ -1,4 +1,5 @@
 var/global/church_name = null
+
 /proc/church_name()
 	if (church_name)
 		return church_name

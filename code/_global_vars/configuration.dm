@@ -3,7 +3,7 @@ var/global/max_explosion_range = 14
 var/global/href_logfile        = null
 var/global/game_version        = "Nebula13"
 var/global/changelog_hash      = ""
-var/global/join_motd = null
+var/global/motd = null
 
 var/global/secret_force_mode = "secret"   // if this is anything but "secret", the secret rotation will forceably choose this mode.
 
