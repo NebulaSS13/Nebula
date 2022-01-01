@@ -29,7 +29,7 @@ var/global/log_end= world.system_type == UNIX ? ascii2text(13) : ""
 	to_world_log("## TESTING: [msg][log_end]")
 
 /proc/game_log(category, text)
-	direct_output(diary, "\[[time_stamp()]] [game_id] [category]: [text][log_end]")
+	direct_output(global.world_main_log, "\[[server_time()]] [game_id] [category]: [text][log_end]")
 
 /proc/log_admin(text)
 	global.admin_log.Add(text)
@@ -109,7 +109,7 @@ var/global/log_end= world.system_type == UNIX ? ascii2text(13) : ""
 	log_debug(text)
 
 /proc/log_qdel(text)
-	to_file(global.world_qdel_log, "\[[time_stamp()]]QDEL: [text]")
+	to_file(global.world_qdel_log, "\[[server_time()]\] [game_id] QDEL: [text][log_end]")
 
 //This replaces world.log so it displays both in DD and the file
 /proc/log_world(text)

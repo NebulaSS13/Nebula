@@ -64,6 +64,6 @@
 	set name = "Show Server Log"
 	set desc = "Shows today's server log."
 
-	direct_output(usr, run(diary))
+	direct_output(usr, run(global.world_main_log))
 	SSstatistics.add_field_details("admin_verb","VTL") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 	return
