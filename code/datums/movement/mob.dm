@@ -13,12 +13,15 @@
 		control_object.set_dir(direction)
 
 // Death handling
-/datum/movement_handler/mob/death/DoMove()
-	if(mob.stat != DEAD)
+/datum/movement_handler/mob/death/DoMove(var/direction, var/mob/mover)
+	if(mob != mover || mob.stat != DEAD)
 		return
+
 	. = MOVEMENT_HANDLED
+
 	if(!mob.client)
 		return
+
 	mob.ghostize()
 
 // Incorporeal/Ghost movement
