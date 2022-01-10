@@ -655,7 +655,6 @@
 	if(species)
 		species.remove_base_auras(src)
 		species.remove_inherent_verbs(src)
-		holder_type = null
 
 	//Update our species
 	species = new_species
