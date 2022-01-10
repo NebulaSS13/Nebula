@@ -190,7 +190,7 @@ var/global/const/DEFAULT_SPECIES_HEALTH = 200
 	var/list/override_organ_types // Used for species that only need to change one or two entries in has_organ.
 
 	//List of organ tags, with the amount and type required for living by this specie
-	//#TODO: Change this when/if we have species with multiple organs that may be vital
+	//#REMOVEME: The vital organ stuff was apparently mostly dropped, so its a bit pointless to improve it...
 	var/list/vital_organs = list(
 		BP_HEART = list("path" = /obj/item/organ/internal/heart),
 		BP_LUNGS = list("path" = /obj/item/organ/internal/lungs),
@@ -467,7 +467,7 @@ var/global/const/DEFAULT_SPECIES_HEALTH = 200
 
 /decl/species/proc/is_missing_vital_organ(var/mob/living/carbon/human/H)
 	for(var/tag in vital_organs)
-		var/obj/item/organ/internal/I = H.get_internal_organ(tag)
+		var/obj/item/organ/internal/I = H.get_organ(tag)
 		var/list/organ_data = vital_organs[tag]
 		//#TODO: whenever we implement having several organs of the same type change this to check for the minimum amount!
 		if(!I || !ispath(I.type, organ_data["path"]))
@@ -485,69 +485,54 @@ var/global/const/DEFAULT_SPECIES_HEALTH = 200
 
 //fully_replace: If true, all existing organs will be discarded. Useful when doing mob transformations, and not caring about the existing organs
 /decl/species/proc/create_missing_organs(var/mob/living/carbon/human/H, var/fully_replace = FALSE)
-	//Clear named organ lists cause the mob apparently lost control of its life
-	H.organs_by_name = list()
-	H.internal_organs_by_name = list()
-
-
+	testing("decl/species/create_missing_organs(): For '[H]', fully_replace=[fully_replace?"true":"false"]")
 	if(fully_replace)
-		for(var/obj/item/organ/O in (H.organs | H.internal_organs))
-			H.remove_organ(O, FALSE, FALSE, TRUE, TRUE, FALSE) //Remove them first so we don't trigger removal effects by just calling delete on them
-			qdel(O)
-		H.organs = null
-		H.internal_organs = null
+		H.delete_organs()
 
 	//Clear invalid limbs
-	if(!islist(H.organs))
-		H.organs = list()
-		testing("Created limb list from scratch")
-	else
-		var/list/new_organ = list()
-		for(var/obj/item/organ/external/E in H.organs)
+	if(H.has_external_organs())
+		testing("*** Removing non-default limbs.. ***")
+		for(var/obj/item/organ/external/E in H.get_external_organs())
 			if(!is_default_limb(E))
+				testing("-- Removing '[E]'")
 				H.remove_organ(E, FALSE, FALSE, TRUE, TRUE, FALSE) //Remove them first so we don't trigger removal effects by just calling delete on them
 				qdel(E)
-			else
-				//Update limbs that stay
-				H.organs_by_name[E.organ_tag] = E
-				new_organ += E
-		H.organs = new_organ
 
 	//Clear invalid internal organs
-	if(!islist(H.internal_organs))
-		H.internal_organs = list()
-	else
-		var/list/new_organ = list()
-		for(var/obj/item/organ/O in H.internal_organs)
+	if(H.has_internal_organs())
+		testing("*** Removing non-default organs.. ***")
+		for(var/obj/item/organ/O in H.get_internal_organs())
 			if(!is_default_organ(O))
+				testing("-- Removing '[O]'")
 				H.remove_organ(O, FALSE, FALSE, TRUE, TRUE, FALSE) //Remove them first so we don't trigger removal effects by just calling delete on them
 				qdel(O)
-			else
-				//Update organs that stay
-				H.internal_organs_by_name[O.organ_tag] = O
-				new_organ += O
-		H.internal_organs = new_organ
 
 	//Create missing limbs
+	testing("*** Creating missing limbs.. ***")
 	for(var/limb_type in has_limbs)
-		if(H.organs_by_name[limb_type]) //Skip existing
+		if(H.get_organ(limb_type)) //Skip existing
+			testing("!! '[limb_type]' already exists on the mob! Skipping!")
 			continue
+		testing("++ Creating '[limb_type]'")
 		var/list/organ_data = has_limbs[limb_type]
 		var/limb_path = organ_data["path"]
 		var/obj/item/organ/external/E = new limb_path(H, null, H.dna) //explicitly specify the dna
-		H.add_organ(E)
+		H.add_organ(E, null, FALSE, FALSE)
 		post_organ_rejuvenate(E, H)
 
 	//Create missing internal organs
+	testing("*** Creating missing organs.. ***")
 	for(var/organ_tag in has_organ)
-		if(H.internal_organs_by_name[organ_tag]) //Skip existing
+		if(H.get_organ(organ_tag)) //Skip existing
+			testing("!! '[organ_tag]' already exists on the mob! Skipping!")
 			continue
+		testing("++ Creating '[organ_tag]'")
 		var/organ_type = has_organ[organ_tag]
 		var/obj/item/organ/O = new organ_type(H, null, H.dna)
 		if(organ_tag != O.organ_tag)
 			warning("[O.type] has a default organ tag \"[O.organ_tag]\" that differs from the species' organ tag \"[organ_tag]\". Updating organ_tag to match.")
 			O.organ_tag = organ_tag
-		H.add_organ(O, H.organs_by_name[O.parent_organ])
+		H.add_organ(O, H.get_organ(O.parent_organ), FALSE, FALSE)
 		post_organ_rejuvenate(O, H)
 
 /decl/species/proc/add_base_auras(var/mob/living/carbon/human/H)
@@ -750,7 +735,7 @@ var/global/const/DEFAULT_SPECIES_HEALTH = 200
 
 //Mostly for toasters
 /decl/species/proc/handle_limbs_setup(var/mob/living/carbon/human/H)
-	for(var/thing in H.organs)
+	for(var/thing in H.get_external_organs())
 		post_organ_rejuvenate(thing, H)
 
 // Impliments different trails for species depending on if they're wearing shoes.
@@ -926,7 +911,7 @@ var/global/const/DEFAULT_SPECIES_HEALTH = 200
 		var/synthetic = H.isSynthetic()
 		if (synthetic)
 			if (exertion_charge_scale)
-				var/obj/item/organ/internal/cell/cell = locate() in H.internal_organs
+				var/obj/item/organ/internal/cell/cell = H.get_organ(BP_CELL)
 				if (cell)
 					cell.use(cell.get_power_drain() * exertion_charge_scale)
 		else

@@ -39,19 +39,17 @@
 	QDEL_NULL(attack_selector)
 	LAZYCLEARLIST(smell_cooldown)
 	. = ..()
-	QDEL_NULL_LIST(organs)
-	QDEL_NULL_LIST(internal_organs)
 
 /mob/living/carbon/human/get_ingested_reagents()
 	if(should_have_organ(BP_STOMACH))
-		var/obj/item/organ/internal/stomach/stomach = get_internal_organ(BP_STOMACH)
+		var/obj/item/organ/internal/stomach/stomach = get_organ(BP_STOMACH)
 		if(stomach)
 			return stomach.ingested
 	return get_contact_reagents() // Kind of a shitty hack, but makes more sense to me than digesting them.
 
 /mob/living/carbon/human/metabolize_ingested_reagents()
 	if(should_have_organ(BP_STOMACH))
-		var/obj/item/organ/internal/stomach/stomach = get_internal_organ(BP_STOMACH)
+		var/obj/item/organ/internal/stomach/stomach = get_organ(BP_STOMACH)
 		if(stomach)
 			stomach.metabolize()
 		return stomach?.ingested
@@ -59,7 +57,7 @@
 /mob/living/carbon/human/get_fullness()
 	if(!should_have_organ(BP_STOMACH))
 		return ..()
-	var/obj/item/organ/internal/stomach/stomach = get_internal_organ(BP_STOMACH)
+	var/obj/item/organ/internal/stomach/stomach = get_organ(BP_STOMACH)
 	if(stomach)
 		return nutrition + (stomach.ingested?.total_volume * 10)
 	return 0 //Always hungry, but you can't actually eat. :(
@@ -83,7 +81,7 @@
 				stat("Tank Pressure", internal.air_contents.return_pressure())
 				stat("Distribution Pressure", internal.distribute_pressure)
 
-		var/obj/item/organ/internal/cell/potato = get_internal_organ(BP_CELL)
+		var/obj/item/organ/internal/cell/potato = get_organ(BP_CELL)
 		if(potato && potato.cell)
 			stat("Battery charge:", "[potato.get_charge()]/[potato.cell.maxcharge]")
 
@@ -104,7 +102,7 @@
 	var/obj/item/implant/loyalty/L = new/obj/item/implant/loyalty(M)
 	L.imp_in = M
 	L.implanted = 1
-	var/obj/item/organ/external/affected = M.organs_by_name[BP_HEAD]
+	var/obj/item/organ/external/affected = M.get_organ(BP_HEAD)
 	LAZYDISTINCTADD(affected.implants, L)
 	L.part = affected
 	L.implanted(src)
@@ -112,7 +110,7 @@
 /mob/living/carbon/human/proc/is_loyalty_implanted(mob/living/carbon/human/M)
 	for(var/L in M.contents)
 		if(istype(L, /obj/item/implant/loyalty))
-			for(var/obj/item/organ/external/O in M.organs)
+			for(var/obj/item/organ/external/O in M.get_external_organs())
 				if(L in O.implants)
 					return 1
 	return 0
@@ -152,7 +150,7 @@
 
 	for(var/bp in held_item_slots)
 		var/datum/inventory_slot/inv_slot = held_item_slots[bp]
-		var/obj/item/organ/external/E = organs_by_name[bp]
+		var/obj/item/organ/external/E = get_organ(bp)
 		dat += "<BR><b>[capitalize(E.name)]:</b> <A href='?src=\ref[src];item=[bp]'>[inv_slot.holding?.name || "nothing"]</A>"
 
 	// Do they get an option to set internals?
@@ -422,7 +420,7 @@
 
 /mob/living/carbon/human/proc/get_darksight_range()
 	if(species.vision_organ)
-		var/obj/item/organ/internal/eyes/I = get_internal_organ(species.vision_organ)
+		var/obj/item/organ/internal/eyes/I = get_organ(species.vision_organ)
 		if(istype(I))
 			return I.darksight_range
 	return species.darksight_range
@@ -467,7 +465,7 @@
 /mob/living/carbon/human/empty_stomach()
 	SET_STATUS_MAX(src, STAT_STUN, 3)
 
-	var/obj/item/organ/internal/stomach/stomach = get_internal_organ(BP_STOMACH)
+	var/obj/item/organ/internal/stomach/stomach = get_organ(BP_STOMACH)
 	var/nothing_to_puke = FALSE
 	if(should_have_organ(BP_STOMACH))
 		if(!istype(stomach) || (stomach.ingested.total_volume <= 0 && stomach.contents.len == 0))
@@ -574,7 +572,7 @@
 	else
 		germ_level = 0
 
-	for(var/obj/item/organ/external/organ in organs)
+	for(var/obj/item/organ/external/organ in get_external_organs())
 		//TODO check that organ is not covered
 		if(clean_feet || (organ.organ_tag in list(BP_L_HAND,BP_R_HAND)))
 			organ.clean()
@@ -585,7 +583,7 @@
 /mob/living/carbon/human/get_visible_implants(var/class = 0)
 
 	var/list/visible_implants = list()
-	for(var/obj/item/organ/external/organ in src.organs)
+	for(var/obj/item/organ/external/organ in get_external_organs())
 		for(var/obj/item/O in organ.implants)
 			if(!istype(O,/obj/item/implant) && (O.w_class > class) && !istype(O,/obj/item/shard/shrapnel))
 				visible_implants += O
@@ -593,7 +591,7 @@
 	return(visible_implants)
 
 /mob/living/carbon/human/embedded_needs_process()
-	for(var/obj/item/organ/external/organ in src.organs)
+	for(var/obj/item/organ/external/organ in src.get_external_organs())
 		for(var/obj/item/O in organ.implants)
 			if(!istype(O, /obj/item/implant)) //implant type items do not cause embedding effects, see handle_embedded_objects()
 				return 1
@@ -602,14 +600,14 @@
 /mob/living/carbon/human/handle_embedded_and_stomach_objects()
 
 	if(embedded_flag)
-		for(var/obj/item/organ/external/organ in organs)
+		for(var/obj/item/organ/external/organ in get_external_organs())
 			if(organ.splinted)
 				continue
 			for(var/obj/item/O in organ.implants)
 				if(!istype(O,/obj/item/implant) && O.w_class > ITEM_SIZE_TINY && prob(5)) //Moving with things stuck in you could be bad.
 					jostle_internal_object(organ, O)
 
-	var/obj/item/organ/internal/stomach/stomach = get_internal_organ(BP_STOMACH)
+	var/obj/item/organ/internal/stomach/stomach = get_organ(BP_STOMACH)
 	if(stomach && stomach.contents.len)
 		for(var/obj/item/O in stomach.contents)
 			if((O.edge || O.sharp) && prob(5))
@@ -860,10 +858,10 @@
 	..()
 
 /mob/living/carbon/human/has_brain()
-	. = istype(get_internal_organ(BP_BRAIN), /obj/item/organ/internal)
+	. = istype(get_organ(BP_BRAIN), /obj/item/organ/internal)
 
 /mob/living/carbon/human/check_has_eyes()
-	var/obj/item/organ/internal/eyes = get_internal_organ(BP_EYES)
+	var/obj/item/organ/internal/eyes = get_organ(BP_EYES)
 	. = istype(eyes) && eyes.is_usable()
 
 /mob/living/carbon/human/slip(var/slipped_on, stun_duration = 8)
@@ -891,7 +889,7 @@
 
 // Similar to get_pulse, but returns only integer numbers instead of text.
 /mob/living/carbon/human/proc/get_pulse_as_number()
-	var/obj/item/organ/internal/heart/heart_organ = get_internal_organ(BP_HEART)
+	var/obj/item/organ/internal/heart/heart_organ = get_organ(BP_HEART)
 	if(!heart_organ)
 		return 0
 
@@ -912,7 +910,7 @@
 
 //generates realistic-ish pulse output based on preset levels as text
 /mob/living/carbon/human/proc/get_pulse(var/method)	//method 0 is for hands, 1 is for machines, more accurate
-	var/obj/item/organ/internal/heart/heart_organ = get_internal_organ(BP_HEART)
+	var/obj/item/organ/internal/heart/heart_organ = get_organ(BP_HEART)
 	if(!heart_organ)
 		// No heart, no pulse
 		return "0"
@@ -928,7 +926,7 @@
 // output for machines ^	 ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ output for people
 
 /mob/living/carbon/human/proc/pulse()
-	var/obj/item/organ/internal/heart/H = get_internal_organ(BP_HEART)
+	var/obj/item/organ/internal/heart/H = get_organ(BP_HEART)
 	return H ? H.pulse : PULSE_NONE
 
 /mob/living/carbon/human/can_devour(atom/movable/victim, var/silent = FALSE)
@@ -936,7 +934,7 @@
 	if(!should_have_organ(BP_STOMACH))
 		return ..()
 
-	var/obj/item/organ/internal/stomach/stomach = get_internal_organ(BP_STOMACH)
+	var/obj/item/organ/internal/stomach/stomach = get_organ(BP_STOMACH)
 	if(!stomach || !stomach.is_usable())
 		if(!silent)
 			to_chat(src, SPAN_WARNING("Your stomach is not functional!"))
@@ -955,7 +953,7 @@
 	. = stomach.get_devour_time(victim) || ..()
 
 /mob/living/carbon/human/move_to_stomach(atom/movable/victim)
-	var/obj/item/organ/internal/stomach/stomach = get_internal_organ(BP_STOMACH)
+	var/obj/item/organ/internal/stomach/stomach = get_organ(BP_STOMACH)
 	if(istype(stomach))
 		victim.forceMove(stomach)
 
@@ -963,9 +961,9 @@
 
 	var/obj/item/organ/external/affecting
 	if(organ_check in list(BP_HEART, BP_LUNGS))
-		affecting = organs_by_name[BP_CHEST]
+		affecting = get_organ(BP_CHEST)
 	else if(organ_check in list(BP_LIVER, BP_KIDNEYS))
-		affecting = organs_by_name[BP_GROIN]
+		affecting = get_organ(BP_GROIN)
 
 	if(affecting && BP_IS_PROSTHETIC(affecting))
 		return 0
@@ -982,7 +980,7 @@
 
 /mob/living/carbon/human/get_breath_volume()
 	. = ..()
-	var/obj/item/organ/internal/heart/H = get_internal_organ(BP_HEART)
+	var/obj/item/organ/internal/heart/H = get_organ(BP_HEART)
 	if(H && !H.open)
 		. *= (!BP_IS_PROSTHETIC(H)) ? pulse()/PULSE_NORM : 1.5
 
@@ -1004,11 +1002,11 @@
 	else
 		var/decl/pronouns/G = get_pronouns()
 		visible_message( \
-			"<span class='notice'>[src] examines [G.self].</span>", \
-			"<span class='notice'>You check yourself for injuries.</span>" \
+			SPAN_NOTICE("[src] examines [G.self]."), \
+			SPAN_NOTICE("You check yourself for injuries.") \
 			)
 
-		for(var/obj/item/organ/external/org in organs)
+		for(var/obj/item/organ/external/org in get_external_organs())
 			var/list/status = list()
 
 			var/feels = 1 + round(org.pain/100, 0.1)
@@ -1059,12 +1057,12 @@
 /mob/living/carbon/human/proc/resuscitate()
 	if(!is_asystole() || !should_have_organ(BP_HEART))
 		return
-	var/obj/item/organ/internal/heart/heart = get_internal_organ(BP_HEART)
+	var/obj/item/organ/internal/heart/heart = get_organ(BP_HEART)
 	if(istype(heart) && !(heart.status & ORGAN_DEAD))
 		var/species_organ = species.breathing_organ
 		var/active_breaths = 0
 		if(species_organ)
-			var/obj/item/organ/internal/lungs/L = get_internal_organ(species_organ)
+			var/obj/item/organ/internal/lungs/L = get_organ(species_organ)
 			if(L)
 				active_breaths = L.active_breathing
 		if(!nervous_system_failure() && active_breaths)
@@ -1124,7 +1122,7 @@
 
 /mob/living/carbon/human/can_drown()
 	if(!internal && (!istype(wear_mask) || !wear_mask.filters_water()))
-		var/obj/item/organ/internal/lungs/L = locate() in internal_organs
+		var/obj/item/organ/internal/lungs/L = get_organ(BP_LUNGS)
 		return (!L || L.can_drown())
 	return FALSE
 
@@ -1137,7 +1135,7 @@
 				return ..(volume_needed, T.above)
 		var/can_breathe_water = (istype(wear_mask) && wear_mask.filters_water()) ? TRUE : FALSE
 		if(!can_breathe_water)
-			var/obj/item/organ/internal/lungs/lungs = get_internal_organ(BP_LUNGS)
+			var/obj/item/organ/internal/lungs/lungs = get_organ(BP_LUNGS)
 			if(lungs && lungs.can_drown())
 				can_breathe_water = TRUE
 		if(can_breathe_water)
@@ -1170,7 +1168,7 @@
 /mob/living/carbon/human/needs_wheelchair()
 	var/stance_damage = 0
 	for(var/limb_tag in list(BP_L_LEG, BP_R_LEG, BP_L_FOOT, BP_R_FOOT))
-		var/obj/item/organ/external/E = organs_by_name[limb_tag]
+		var/obj/item/organ/external/E = get_organ(limb_tag)
 		if(!E || !E.is_usable())
 			stance_damage += 2
 	return stance_damage >= 4
@@ -1182,7 +1180,7 @@
 /mob/living/carbon/human/handle_additional_vomit_reagents(var/obj/effect/decal/cleanable/vomit/vomit)
 	..()
 	if(should_have_organ(BP_STOMACH))
-		var/obj/item/organ/internal/stomach/stomach = get_internal_organ(BP_STOMACH)
+		var/obj/item/organ/internal/stomach/stomach = get_organ(BP_STOMACH)
 		if(!stomach || stomach.is_broken() || (stomach.is_bruised() && prob(stomach.damage)))
 			if(should_have_organ(BP_HEART))
 				vessel.trans_to_obj(vomit, 5)
@@ -1224,7 +1222,7 @@
 /mob/living/carbon/human/check_dexterity(var/dex_level = DEXTERITY_FULL, var/silent, var/force_active_hand)
 	if(isnull(force_active_hand))
 		force_active_hand = get_active_held_item_slot()
-	var/obj/item/organ/external/active_hand = organs_by_name[force_active_hand]
+	var/obj/item/organ/external/active_hand = get_organ(force_active_hand)
 	var/dex_malus = 0
 	if(getBrainLoss() && getBrainLoss() > config.dex_malus_brainloss_threshold) ///brainloss shouldn't instantly cripple you, so the effects only start once past the threshold and escalate from there.
 		dex_malus = round(clamp(round(getBrainLoss()-config.dex_malus_brainloss_threshold)/10, DEXTERITY_NONE, DEXTERITY_FULL))
@@ -1249,7 +1247,7 @@
 		. = TRUE
 	if(species.handle_additional_hair_loss(src))
 		. = TRUE
-	for(var/obj/item/organ/external/E in organs)
+	for(var/obj/item/organ/external/E in get_external_organs())
 		for(var/mark in E.markings)
 			var/decl/sprite_accessory/marking/mark_datum = GET_DECL(mark)
 			if(mark_datum.flags & HAIR_LOSS_VULNERABLE)
@@ -1266,8 +1264,8 @@
 /mob/living/carbon/human/proc/get_hands_organs()
 	. = list()
 	for(var/bp in held_item_slots)
-		if(organs_by_name[bp])
-			. |= organs_by_name[bp]
+		if(get_organ(bp))
+			. |= get_organ(bp)
 
 /mob/living/carbon/human/get_admin_job_string()
 	return job || uppertext(species.name)
@@ -1346,7 +1344,7 @@
 	species.handle_pre_spawn(src)
 	apply_species_cultural_info()
 	apply_species_appearance()
-	if(!length(organs))
+	if(!LAZYLEN(get_external_organs()))
 		species.create_missing_organs(src) //Syncs DNA when adding organs
 	species.handle_post_spawn(src)
 

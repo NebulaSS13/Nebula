@@ -45,7 +45,7 @@
 	var/voice = ""	//Instead of new say code calling GetVoice() over and over and over, we're just going to ask this variable, which gets updated in Life()
 
 	var/last_dam = -1	//Used for determining if we need to process all organs or just some or even none.
-	var/list/bad_external_organs = list()// organs we check until they are good.
+	var/list/bad_external_organs = list() // organs we check until they are good.
 
 	var/xylophone = 0 //For the spoooooooky xylophone cooldown
 

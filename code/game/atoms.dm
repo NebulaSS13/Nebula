@@ -521,7 +521,7 @@ its easier to just keep the beam vertical.
 				M.adjustBruteLoss(damage)
 				return
 
-			var/obj/item/organ/external/affecting = pick(H.organs)
+			var/obj/item/organ/external/affecting = pick(H.get_external_organs())
 			if(affecting)
 				to_chat(M, "<span class='danger'>You land heavily on your [affecting.name]!</span>")
 				affecting.take_external_damage(damage, 0)

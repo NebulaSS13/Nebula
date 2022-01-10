@@ -120,7 +120,7 @@
 /decl/surgery_step/internal/detatch_organ/end_step(mob/living/user, mob/living/target, target_zone, obj/item/tool)
 	user.visible_message("<span class='notice'>[user] has separated [target]'s [LAZYACCESS(global.surgeries_in_progress["\ref[target]"], target_zone)] with \the [tool].</span>" , \
 	"<span class='notice'>You have separated [target]'s [LAZYACCESS(global.surgeries_in_progress["\ref[target]"], target_zone)] with \the [tool].</span>")
-	var/obj/item/organ/I = target.get_internal_organ(LAZYACCESS(global.surgeries_in_progress["\ref[target]"], target_zone))
+	var/obj/item/organ/I = target.get_organ(LAZYACCESS(global.surgeries_in_progress["\ref[target]"], target_zone))
 	if(I && istype(I))
 		I.cut_away(user)
 
@@ -256,7 +256,7 @@
 			else if(O.w_class > affected.cavity_max_w_class)
 				to_chat(user, SPAN_WARNING("\The [O.name] [G.is] too big for [affected.cavity_name] cavity!"))
 			else
-				var/obj/item/organ/internal/I = target.get_internal_organ(O.organ_tag)
+				var/obj/item/organ/internal/I = target.get_organ(O.organ_tag)
 				if(I && (I.parent_organ == affected.organ_tag))
 					to_chat(user, SPAN_WARNING("\The [target] already has \a [O.name]."))
 				else
@@ -352,7 +352,7 @@
 		user.visible_message("<span class='notice'>[target]'s biology has rejected the attempts to attach \the [organ_to_replace].</span>")
 		return FALSE
 
-	var/obj/item/organ/internal/I = target.get_internal_organ(organ_to_replace.organ_tag)
+	var/obj/item/organ/internal/I = target.get_organ(organ_to_replace.organ_tag)
 	if(I && (I.parent_organ == affected.organ_tag))
 		to_chat(user, SPAN_WARNING("\The [target] already has \a [organ_to_replace]."))
 		return FALSE

@@ -83,7 +83,7 @@
 /obj/item/organ/internal/eyes/proc/additional_flash_effects(var/intensity)
 	return -1
 
-/obj/item/organ/internal/eyes/install(mob/living/carbon/human/target, affected, in_place, update_icon)
+/obj/item/organ/internal/eyes/do_install(mob/living/carbon/human/target, affected, in_place, update_icon)
 	// Apply our eye colour to the target.
 	if(istype(target) && eye_colour)
 		target.eye_colour = eye_colour
@@ -93,7 +93,7 @@
 		verbs |= /obj/item/organ/internal/eyes/proc/toggle_eye_glow
 	. = ..()
 
-/obj/item/organ/internal/eyes/uninstall(in_place, detach, ignore_children, update_icon)
+/obj/item/organ/internal/eyes/do_uninstall(in_place, detach, ignore_children, update_icon)
 	. = ..()
 	verbs -= /obj/item/organ/internal/eyes/proc/change_eye_color
 	verbs -= /obj/item/organ/internal/eyes/proc/toggle_eye_glow

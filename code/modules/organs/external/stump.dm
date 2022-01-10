@@ -3,7 +3,7 @@
 	icon_name = ""
 	dislocated = -1
 
-/obj/item/organ/external/stump/on_removal()
+/obj/item/organ/external/stump/on_remove_effects(mob/living/last_owner)
 	if(!(. = ..()))
 		return
 	qdel(src)

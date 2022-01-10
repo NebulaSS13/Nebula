@@ -500,7 +500,7 @@ meteor_act
 //Checks that the species has a "head" (brain containing organ) and that hit_zone refers to it.
 /mob/living/carbon/human/proc/headcheck(var/target_zone, var/brain_tag = BP_BRAIN)
 
-	var/obj/item/organ/affecting = get_internal_organ(brain_tag)
+	var/obj/item/organ/affecting = get_organ(brain_tag)
 
 	target_zone = check_zone(target_zone, src)
 	if(!affecting || affecting.parent_organ != target_zone)
@@ -521,7 +521,7 @@ meteor_act
 /mob/living/carbon/human/eyecheck()
 	var/total_protection = flash_protection
 	if(species.has_organ[species.vision_organ])
-		var/obj/item/organ/internal/eyes/I = get_internal_organ(species.vision_organ)
+		var/obj/item/organ/internal/eyes/I = get_organ(species.vision_organ)
 		if(!I?.is_usable())
 			return FLASH_PROTECTION_MAJOR
 		total_protection = I.get_total_protection(flash_protection)
@@ -531,14 +531,14 @@ meteor_act
 
 /mob/living/carbon/human/flash_eyes(var/intensity = FLASH_PROTECTION_MODERATE, override_blindness_check = FALSE, affect_silicon = FALSE, visual = FALSE, type = /obj/screen/fullscreen/flash)
 	if(species.has_organ[species.vision_organ])
-		var/obj/item/organ/internal/eyes/I = get_internal_organ(species.vision_organ)
+		var/obj/item/organ/internal/eyes/I = get_organ(species.vision_organ)
 		if(!isnull(I))
 			I.additional_flash_effects(intensity)
 	return ..()
 
 /mob/living/carbon/human/proc/getFlashMod()
 	if(species.vision_organ)
-		var/obj/item/organ/internal/eyes/I = get_internal_organ(species.vision_organ)
+		var/obj/item/organ/internal/eyes/I = get_organ(species.vision_organ)
 		if(istype(I))
 			return I.flash_mod
 	return species.flash_mod

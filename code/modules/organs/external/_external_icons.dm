@@ -47,10 +47,10 @@ var/global/list/limb_icon_cache = list()
 
 /obj/item/organ/external/head/sync_colour_to_human(var/mob/living/carbon/human/human)
 	..()
-	var/obj/item/organ/internal/eyes/eyes = human.get_internal_organ(BP_EYES)
+	var/obj/item/organ/internal/eyes/eyes = human.get_organ(BP_EYES)
 	if(eyes) eyes.update_colour()
 
-/obj/item/organ/external/head/on_removal(mob/living/carbon/human/last_owner)
+/obj/item/organ/external/head/on_remove_effects(mob/living/last_owner)
 	update_icon(1)
 	if(last_owner)
 		SetName("[last_owner.real_name]'s head")

@@ -271,7 +271,7 @@
 /obj/item/shockpaddles/proc/check_blood_level(mob/living/carbon/human/H)
 	if(!H.should_have_organ(BP_HEART))
 		return FALSE
-	var/obj/item/organ/internal/heart/heart = H.get_internal_organ(BP_HEART)
+	var/obj/item/organ/internal/heart/heart = H.get_organ(BP_HEART)
 	if(!heart || H.get_blood_volume() < BLOOD_VOLUME_SURVIVE)
 		return TRUE
 	return FALSE
@@ -334,8 +334,8 @@
 	if(check_blood_level(H))
 		make_announcement("buzzes, \"Warning - Patient is in hypovolemic shock and may require a blood transfusion.\"", "warning") //also includes heart damage
 
-	if(H.internal_organs_by_name[BP_HEART]) //People may need more direct instruction
-		var/obj/item/organ/internal/heart/heart = H.internal_organs_by_name[BP_HEART]
+	if(H.get_organ(BP_HEART)) //People may need more direct instruction
+		var/obj/item/organ/internal/heart/heart = H.get_organ(BP_HEART)
 		if(heart.is_bruised())
 			make_announcement("buzzes, \"Danger! The patient has sustained a cardiac contusion and will require surgical treatment for full recovery!\"", "danger")
 
@@ -367,7 +367,7 @@
 	make_announcement("pings, \"Resuscitation successful.\"", "notice")
 	playsound(get_turf(src), 'sound/machines/defib_success.ogg', 50, 0)
 	H.resuscitate()
-	var/obj/item/organ/internal/cell/potato = H.get_internal_organ(BP_CELL)
+	var/obj/item/organ/internal/cell/potato = H.get_organ(BP_CELL)
 	if(istype(potato) && potato.cell)
 		var/obj/item/cell/C = potato.cell
 		C.give(chargecost)
@@ -390,21 +390,21 @@
 	return 1
 
 /obj/item/shockpaddles/proc/do_electrocute(mob/living/carbon/human/H, mob/user, var/target_zone)
-	var/obj/item/organ/external/affecting = H.get_organ(target_zone)
+	var/obj/item/organ/external/affecting = H.get_organ(check_zone(target_zone, H, TRUE)) //Shouldn't defib someone's eyes or mouth
 	if(!affecting)
-		to_chat(user, "<span class='warning'>They are missing that body part!</span>")
+		to_chat(user, SPAN_WARNING("They are missing that body part!"))
 		return
 
 	//no need to spend time carefully placing the paddles, we're just trying to shock them
-	user.visible_message("<span class='danger'>\The [user] slaps [src] onto [H]'s [affecting.name].</span>", "<span class='danger'>You overcharge [src] and slap them onto [H]'s [affecting.name].</span>")
+	user.visible_message(SPAN_DANGER("\The [user] slaps [src] onto [H]'s [affecting.name]."), SPAN_DANGER("You overcharge [src] and slap them onto [H]'s [affecting.name]."))
 
 	//Just stop at awkwardly slapping electrodes on people if the safety is enabled
 	if(safety)
-		to_chat(user, "<span class='warning'>You can't do that while the safety is enabled.</span>")
+		to_chat(user, SPAN_WARNING("You can't do that while the safety is enabled."))
 		return
 
 	playsound(get_turf(src), 'sound/machines/defib_charge.ogg', 50, 0)
-	audible_message("<span class='warning'>\The [src] lets out a steadily rising hum...</span>")
+	audible_message(SPAN_WARNING("\The [src] lets out a steadily rising hum..."))
 
 	if(!do_after(user, chargetime, H))
 		return
@@ -415,7 +415,7 @@
 		playsound(get_turf(src), 'sound/machines/defib_failed.ogg', 50, 0)
 		return
 
-	user.visible_message("<span class='danger'><i>\The [user] shocks [H] with \the [src]!</i></span>", "<span class='warning'>You shock [H] with \the [src]!</span>")
+	user.visible_message(SPAN_DANGER("<i>\The [user] shocks [H] with \the [src]!</i>"), SPAN_WARNING("You shock [H] with \the [src]!"))
 	playsound(get_turf(src), 'sound/machines/defib_zap.ogg', 100, 1, -1)
 	playsound(loc, 'sound/weapons/Egloves.ogg', 100, 1, -1)
 	set_cooldown(cooldowntime)
@@ -424,9 +424,9 @@
 	var/burn_damage = H.electrocute_act(burn_damage_amt*2, src, def_zone = target_zone)
 	if(burn_damage > 15 && H.can_feel_pain())
 		H.emote("scream")
-	var/obj/item/organ/internal/heart/doki = locate(/obj/item/organ/internal/heart) in affecting.internal_organs
+	var/obj/item/organ/internal/heart/doki = locate() in affecting.internal_organs
 	if(istype(doki) && doki.pulse && !doki.open && prob(10))
-		to_chat(doki, "<span class='danger'>Your [doki] has stopped!</span>")
+		to_chat(doki, SPAN_DANGER("Your [doki] has stopped!"))
 		doki.pulse = PULSE_NONE
 
 	admin_attack_log(user, H, "Electrocuted using \a [src]", "Was electrocuted with \a [src]", "used \a [src] to electrocute")
@@ -451,7 +451,7 @@
 
 	if(!H.should_have_organ(BP_BRAIN)) return //no brain
 
-	var/obj/item/organ/internal/brain/brain = H.get_internal_organ(BP_BRAIN)
+	var/obj/item/organ/internal/brain/brain = H.get_organ(BP_BRAIN)
 	if(!brain) return //no brain
 
 	var/brain_damage = Clamp((deadtime - DEFIB_TIME_LOSS)/(DEFIB_TIME_LIMIT - DEFIB_TIME_LOSS)*brain.max_damage, H.getBrainLoss(), brain.max_damage)

@@ -6,7 +6,7 @@
 	scan["time"] = stationtime2text()
 	var/brain_result
 	if(H.should_have_organ(BP_BRAIN))
-		var/obj/item/organ/internal/brain/brain = H.get_internal_organ(BP_BRAIN)
+		var/obj/item/organ/internal/brain/brain = H.get_organ(BP_BRAIN)
 		if(!brain || H.stat == DEAD || (H.status_flags & FAKEDEATH))
 			brain_result = 0
 		else if(H.stat != DEAD)
@@ -17,7 +17,7 @@
 
 	var/pulse_result
 	if(H.should_have_organ(BP_HEART))
-		var/obj/item/organ/internal/heart/heart = H.get_internal_organ(BP_HEART)
+		var/obj/item/organ/internal/heart/heart = H.get_organ(BP_HEART)
 		if(!heart)
 			pulse_result = 0
 		else if(BP_IS_PROSTHETIC(heart))
@@ -58,7 +58,7 @@
 			scan["reagents"] += list(reagent)
 
 	scan["external_organs"] = list()
-	for(var/obj/item/organ/external/E in H.organs)
+	for(var/obj/item/organ/external/E in H.get_external_organs())
 		var/list/O =               list()
 		O["name"] =                E.name
 		O["is_stump"] =            E.is_stump()
@@ -73,7 +73,8 @@
 		scan["external_organs"] += list(O)
 
 	scan["internal_organs"] = list()
-	for(var/obj/item/organ/internal/I in H.internal_organs)
+	var/list/internal_organs = H.get_internal_organs()
+	for(var/obj/item/organ/internal/I in internal_organs)
 		var/list/O =               list()
 		O["name"] =                I.name
 		O["is_broken"] =           I.is_broken()
@@ -86,7 +87,7 @@
 	scan["missing_organs"] = list()
 
 	for(var/organ_name in H.species.has_organ)
-		if(!locate(H.species.has_organ[organ_name]) in H.internal_organs)
+		if(!locate(H.species.has_organ[organ_name]) in internal_organs)
 			scan["missing_organs"] += organ_name
 	if(H.sdisabilities & BLINDED)
 		scan["blind"] = TRUE

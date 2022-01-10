@@ -32,7 +32,7 @@
 			var/species_organ = H.species.breathing_organ
 			var/obj/item/organ/internal/lungs/L
 			H.apply_effect(20, STUN, 0)
-			L = H.get_internal_organ(species_organ)
+			L = H.get_organ(species_organ)
 			L.last_successful_breath = -INFINITY
 			test_subjects[S.name] = list(H, damage_check(H, OXY))
 	return 1
@@ -107,7 +107,7 @@ var/global/default_mobloc = null
 			loss = M.getOxyLoss()
 			if(istype(M,/mob/living/carbon/human))
 				var/mob/living/carbon/human/H = M
-				var/obj/item/organ/internal/lungs/L = H.get_internal_organ(BP_LUNGS)
+				var/obj/item/organ/internal/lungs/L = H.get_organ(BP_LUNGS)
 				if(L)
 					loss = L.oxygen_deprivation
 		if(CLONE)
@@ -180,7 +180,7 @@ var/global/default_mobloc = null
 		var/species_organ = H.species.breathing_organ
 		var/obj/item/organ/internal/lungs/L
 		if(species_organ)
-			L = H.get_internal_organ(species_organ)
+			L = H.get_organ(species_organ)
 		if(L)
 			L.last_successful_breath = -INFINITY
 
@@ -326,7 +326,7 @@ var/global/default_mobloc = null
 	var/failed = FALSE
 	for(var/species_name in get_all_species())
 		var/mob/living/carbon/human/H = new(null, species_name)
-		for(var/obj/item/organ/external/E in H.organs)
+		for(var/obj/item/organ/external/E in H.get_external_organs())
 			for(var/obj/item/organ/internal/I in E.internal_organs)
 				if(I.w_class > E.cavity_max_w_class)
 					failed = TRUE

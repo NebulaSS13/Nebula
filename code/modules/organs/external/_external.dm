@@ -362,7 +362,7 @@
 		owner.shock_stage += 20
 
 		//check to see if we still need the verb
-		for(var/obj/item/organ/external/limb in owner.organs)
+		for(var/obj/item/organ/external/limb in owner.get_external_organs())
 			if(limb.dislocated == 1)
 				return
 		owner.verbs -= /mob/living/carbon/human/proc/undislocate
@@ -372,7 +372,7 @@
 	return
 
 //If "in_place" is TRUE will make organs skip their install/uninstall effects and  the sub-limbs and internal organs
-/obj/item/organ/external/install(mob/living/carbon/human/target, obj/item/organ/external/affected, in_place, update_icon)
+/obj/item/organ/external/do_install(mob/living/carbon/human/target, obj/item/organ/external/affected, in_place, update_icon)
 	if(!(. = ..()))
 		return
 
@@ -394,12 +394,12 @@
 		//
 		//Add any existing organs in the owner that have us as parent
 		//
-		for(var/obj/item/organ/internal/I in owner.internal_organs)
+		for(var/obj/item/organ/internal/I in owner.get_internal_organs())
 			if(I.parent_organ == organ_tag)
 				LAZYDISTINCTADD(I, internal_organs)
 		update_internal_organs_cost()
 
-		for(var/obj/item/organ/external/E in owner.organs)
+		for(var/obj/item/organ/external/E in owner.get_external_organs())
 			if(E.parent_organ == organ_tag)
 				E.parent = src
 				LAZYDISTINCTADD(E, children)
@@ -525,12 +525,10 @@ This function completely restores a damaged organ to perfect condition.
 	if(!QDELETED(src) && species)
 		species.post_organ_rejuvenate(src, owner)
 
+//#TODO: Rejuvination hacks should probably be removed
 /obj/item/organ/external/remove_rejuv()
 	if(owner)
-		owner.organs -= src
-		owner.organs_by_name[organ_tag] = null
-		owner.organs_by_name -= organ_tag
-		while(null in owner.organs) owner.organs -= null
+		owner.remove_organ(src, FALSE, FALSE, TRUE, TRUE, FALSE)
 	for(var/obj/item/organ/external/E in children)
 		E.remove_rejuv()
 	LAZYCLEARLIST(children)
@@ -949,7 +947,7 @@ Note that amputating the affected organ does in fact remove the infection from t
 
 	var/mob/living/carbon/human/last_owner = owner
 	owner.remove_organ(src, TRUE, FALSE, ignore_children)
-	if(istype(last_owner) && !QDELETED(last_owner) && length(last_owner.organs) <= 1)
+	if(istype(last_owner) && !QDELETED(last_owner) && LAZYLEN(last_owner.get_external_organs()) <= 1)
 		last_owner.physically_destroyed(FALSE, disintegrate)
 
 	if(QDELETED(src))
@@ -1013,7 +1011,7 @@ Note that amputating the affected organ does in fact remove the infection from t
 			gore.throw_at(get_edge_target_turf(src,pick(global.alldirs)),rand(1,3),30)
 
 			for(var/obj/item/organ/I in internal_organs)
-				I.uninstall()
+				I.do_uninstall() //No owner so run uninstall directly
 				I.dropInto(get_turf(loc))
 				if(!QDELETED(I) && isturf(loc))
 					I.throw_at(get_edge_target_turf(src,pick(global.alldirs)),rand(1,3),30)
@@ -1286,7 +1284,7 @@ Note that amputating the affected organ does in fact remove the infection from t
 		H.drop_from_inventory(W)
 	W.forceMove(owner)
 
-/obj/item/organ/external/uninstall(in_place, detach, ignore_children, update_icon)
+/obj/item/organ/external/do_uninstall(in_place, detach, ignore_children, update_icon)
 	var/mob/living/carbon/human/victim = owner
 	. = ..()
 
@@ -1335,7 +1333,7 @@ Note that amputating the affected organ does in fact remove the infection from t
 		LAZYREMOVE(parent.children, src)
 		parent = null
 
-/obj/item/organ/external/on_removal(mob/living/carbon/human/last_owner)
+/obj/item/organ/external/on_remove_effects(mob/living/last_owner)
 	. = ..()
 	drop_equipped_clothing()
 	remove_splint()
@@ -1487,11 +1485,12 @@ Note that amputating the affected organ does in fact remove the infection from t
 	if(!BP_IS_PROSTHETIC(src) && !BP_IS_CRYSTAL(src))
 		var/decay_rate = damage/(max_damage*2)
 		germ_level += round(rand(decay_rate,decay_rate*1.5)) //So instead, we're going to say the damage is so severe its functions are slowly failing due to the extensive damage
-	else //TODO: more advanced system for synths
-		if(istype(src,/obj/item/organ/external/chest) || istype(src,/obj/item/organ/external/groin))
-			return
+	else
 		status |= ORGAN_DEAD
 	if(status & ORGAN_DEAD) //The organic dying part is covered in germ handling
 		STOP_PROCESSING(SSobj, src)
 		QDEL_NULL_LIST(ailments)
 		death_time = REALTIMEOFDAY
+
+/obj/item/organ/external/is_internal()
+	return FALSE

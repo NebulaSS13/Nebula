@@ -161,7 +161,7 @@
 	to_chat(brainmob, "<span class='notice'>You feel slightly disoriented. That's normal when you're just \a [initial(src.name)].</span>")
 	callHook("debrain", list(brainmob))
 
-/obj/item/organ/internal/posibrain/on_replacement()
+/obj/item/organ/internal/posibrain/on_add_effects()
 	if(brainmob)
 		if(brainmob.mind)
 			if(owner.key)
@@ -171,18 +171,18 @@
 			owner.key = brainmob.key
 	return ..()
 
-/obj/item/organ/internal/posibrain/on_removal()
+/obj/item/organ/internal/posibrain/on_remove_effects()
 	if(istype(owner))
 		transfer_identity(owner)
 	return ..()
 
-/obj/item/organ/internal/posibrain/install(var/mob/living/target)
+/obj/item/organ/internal/posibrain/do_install(var/mob/living/target)
 	if(!(. = ..())) 
 		return
 	if(istype(owner))
 		SetName(initial(name)) //Reset the organ's name to stay coherent if we're put back into someone's skull
 
-/obj/item/organ/internal/posibrain/uninstall(in_place, detach, ignore_children)
+/obj/item/organ/internal/posibrain/do_uninstall(in_place, detach, ignore_children)
 	if(!in_place && istype(owner) && name == initial(name))
 		SetName("\the [owner.real_name]'s [initial(name)]")
 	return ..()
@@ -295,7 +295,7 @@
 				cell = W
 				to_chat(user, "<span class = 'notice'>You insert \the [cell].</span>")
 
-/obj/item/organ/internal/cell/on_replacement()
+/obj/item/organ/internal/cell/on_add_effects()
 	. = ..()
 	// This is very ghetto way of rebooting an IPC. TODO better way.
 	if(owner && owner.stat == DEAD)
@@ -358,17 +358,17 @@
 /obj/item/organ/internal/mmi_holder/cut_away(var/mob/living/user)
 	var/obj/item/organ/external/parent = owner.get_organ(parent_organ)
 	if(istype(parent))
-		uninstall(detach = TRUE)
+		do_uninstall(detach = TRUE) //#TODO: detach proc for organs/mobs so we have less args to pass..
 		var/brain = transfer_and_delete()
 		if(brain)
 			LAZYADD(parent.implants, brain)
 
-/obj/item/organ/internal/mmi_holder/on_removal(mob/living/last_owner)
+/obj/item/organ/internal/mmi_holder/on_remove_effects(mob/living/last_owner)
 	if(last_owner && last_owner.mind)
 		persistantMind = last_owner.mind
 		if(last_owner.ckey)
 			ownerckey = last_owner.ckey
-	..()
+	. = ..()
 
 /obj/item/organ/internal/mmi_holder/proc/transfer_and_delete()
 	if(stored_mmi)

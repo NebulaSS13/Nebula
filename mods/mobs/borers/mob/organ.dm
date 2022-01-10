@@ -31,7 +31,7 @@
 			goo.basecolor = "#412464"
 			goo.update_icon()
 
-/obj/item/organ/internal/borer/on_removal(mob/living/last_owner)
+/obj/item/organ/internal/borer/on_remove_effects(mob/living/last_owner)
 	..()
 
 	var/mob/living/simple_animal/borer/B = last_owner.has_brain_worms()

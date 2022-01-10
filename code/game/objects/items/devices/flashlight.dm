@@ -109,7 +109,7 @@
 				to_chat(user, "<span class='warning'>You can't find anything on [H] to direct [src] into!</span>")
 				return
 
-			vision = H.get_internal_organ(H.species.vision_organ)
+			vision = H.get_organ(H.species.vision_organ)
 			if(!vision)
 				vision = H.species.has_organ[H.species.vision_organ]
 				var/decl/pronouns/G = H.get_pronouns()

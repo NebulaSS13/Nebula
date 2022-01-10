@@ -32,6 +32,12 @@
 	if( L && L.is_bruised())
 		. += "Lung ruptured"
 
+/obj/item/organ/external/chest/die() 
+	//Special handling for synthetics 
+	if(BP_IS_PROSTHETIC(src) || BP_IS_CRYSTAL(src))
+		return
+	. = ..()
+
 /obj/item/organ/external/groin
 	name = "lower body"
 	organ_tag = BP_GROIN
@@ -48,6 +54,12 @@
 	artery_name = "iliac artery"
 	cavity_name = "abdominal"
 	limb_flags = ORGAN_FLAG_CAN_AMPUTATE | ORGAN_FLAG_CAN_BREAK
+
+/obj/item/organ/external/groin/die() 
+	//Special handling for synthetics 
+	if(BP_IS_PROSTHETIC(src) || BP_IS_CRYSTAL(src))
+		return
+	. = ..()
 
 /obj/item/organ/external/arm
 	organ_tag = BP_L_ARM
@@ -144,12 +156,12 @@
 	var/gripper_ui_loc = ui_lhand
 	var/overlay_slot_id = BP_L_HAND
 
-/obj/item/organ/external/hand/install(mob/living/carbon/human/target, affected, in_place, update_icon)
+/obj/item/organ/external/hand/do_install(mob/living/carbon/human/target, affected, in_place, update_icon)
 	if(!(. = ..()))
 		return
 	owner?.add_held_item_slot(organ_tag, gripper_ui_loc, overlay_slot_id, gripper_ui_label)
 
-/obj/item/organ/external/hand/uninstall(in_place, detach, ignore_children, update_icon)
+/obj/item/organ/external/hand/do_uninstall(in_place, detach, ignore_children, update_icon)
 	owner?.remove_held_item_slot(organ_tag)
 	. = ..()
 

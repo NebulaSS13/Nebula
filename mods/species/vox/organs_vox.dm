@@ -200,7 +200,7 @@
 /obj/item/organ/internal/voxstack/proc/backup_inviable()
 	return 	(!istype(backup) || backup == owner.mind || (backup.current && backup.current.stat != DEAD))
 
-/obj/item/organ/internal/voxstack/on_replacement()
+/obj/item/organ/internal/voxstack/on_add_effects()
 	if(!..() || prompting) // Don't spam the player with twenty dialogs because someone doesn't know what they're doing or panicking.
 		return FALSE
 
@@ -220,7 +220,7 @@
 	sleep(-1)
 	do_backup()
 
-/obj/item/organ/internal/voxstack/on_removal(mob/living/last_owner)
+/obj/item/organ/internal/voxstack/on_remove_effects(mob/living/last_owner)
 	var/obj/item/organ/external/head = last_owner.get_organ(parent_organ)
 	last_owner.visible_message(SPAN_DANGER("\The [src] rips gaping holes in \the [last_owner]'s [head.name] as it is torn loose!"))
 	head.take_external_damage(rand(15,20))

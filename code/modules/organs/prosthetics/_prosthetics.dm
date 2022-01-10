@@ -58,7 +58,7 @@
 // Checks the organ list for limbs meeting a predicate. Way overengineered for such a limited use 
 // case but I can see it being expanded in the future if meat limbs or doona limbs use it.
 /mob/living/carbon/human/proc/get_modular_limbs(var/return_first_found = FALSE, var/validate_proc)
-	for(var/bp in organs)
+	for(var/bp in get_external_organs())
 		var/obj/item/organ/external/E = bp
 		if(!validate_proc || call(E, validate_proc)(src) > MODULAR_BODYPART_INVALID)
 			LAZYADD(., E)

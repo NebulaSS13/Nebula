@@ -53,10 +53,10 @@
 /obj/item/organ/internal/powered/Process()
 	. = ..()
 	if(owner)
-		var/obj/item/organ/internal/cell/cell = locate() in owner.internal_organs
+		var/obj/item/organ/internal/cell/cell = owner.get_organ(BP_CELL)
 		if(active && !(cell && cell.use(maintenance_cost)))
 			active = FALSE
-			to_chat(owner, "<span class='danger'>Your [name] [gender == PLURAL ? "are" : "is"] out of power!</span>")
+			to_chat(owner, SPAN_DANGER("Your [name] [gender == PLURAL ? "are" : "is"] out of power!"))
 			refresh_action_button()
 
 /obj/item/organ/internal/powered/refresh_action_button()

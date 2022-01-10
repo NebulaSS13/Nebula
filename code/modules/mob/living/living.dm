@@ -481,7 +481,7 @@ default behaviour is:
 /mob/living/carbon/basic_revival(var/repair_brain = TRUE)
 	if(repair_brain && should_have_organ(BP_BRAIN))
 		repair_brain = FALSE
-		var/obj/item/organ/internal/brain/brain = get_internal_organ(BP_BRAIN)
+		var/obj/item/organ/internal/brain/brain = get_organ(BP_BRAIN)
 		if(brain.damage > (brain.max_damage/2))
 			brain.damage = (brain.max_damage/2)
 		if(brain.status & ORGAN_DEAD)
@@ -628,16 +628,13 @@ default behaviour is:
 /mob/living/carbon/human/canUnEquip(obj/item/I)
 	if(!..())
 		return
-	if(I in internal_organs)
-		return
-	if(I in organs)
+	if(I in get_organs())
 		return
 	return 1
 
 /mob/living/carbon/get_contained_external_atoms()
 	. = ..()
-	LAZYREMOVE(., internal_organs)
-	LAZYREMOVE(., organs)
+	LAZYREMOVE(., get_organs())
 
 /mob/proc/can_be_possessed_by(var/mob/observer/ghost/possessor)
 	return istype(possessor) && possessor.client
@@ -1018,7 +1015,3 @@ default behaviour is:
 
 /mob/living/proc/apply_fall_damage(var/turf/landing)
 	adjustBruteLoss(rand(max(1, CEILING(mob_size * 0.33)), max(1, CEILING(mob_size * 0.66))))
-
-//Needed for organ surgery, since it assumes humans are mob/living always
-/mob/living/proc/add_organ(var/obj/item/organ/O, var/obj/item/organ/external/affected = null, var/in_place = FALSE)
-/mob/living/proc/remove_organ(var/obj/item/organ/O, var/drop_organ = TRUE, var/detach = TRUE, var/ignore_children = FALSE, var/in_place = FALSE)

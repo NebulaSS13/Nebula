@@ -29,20 +29,11 @@
 /obj/item/organ/proc/cut_away(var/mob/living/user)
 	var/obj/item/organ/external/parent = owner.get_organ(parent_organ)
 	if(istype(parent)) //TODO ensure that we don't have to check this.
-		uninstall(detach = TRUE)
+		do_uninstall(detach = TRUE) //
 		LAZYADD(parent.implants, src)
 
-/obj/item/organ/internal/install(mob/living/carbon/human/target, obj/item/organ/external/affected, in_place)
-	if(status & ORGAN_CUT_AWAY)
-		return
-
-	//#FIXME: This feels like a hack
-		//# Also it probably should be of the species of the parent limb tbh..
-	// robotic organs emulate behavior of the equivalent flesh organ of the species
-	// if(BP_IS_PROSTHETIC(src) || !species)
-	// 	set_species(target.species)
-
-	if(!(. = ..()))
+/obj/item/organ/internal/do_install(mob/living/carbon/human/target, obj/item/organ/external/affected, in_place)
+	if(status & ORGAN_CUT_AWAY || !(. = ..()))
 		return
 
 	STOP_PROCESSING(SSobj, src)
@@ -50,7 +41,7 @@
 	affected.cavity_max_w_class = max(affected.cavity_max_w_class, w_class)
 	affected.update_internal_organs_cost()
 
-/obj/item/organ/internal/uninstall(in_place, detach, ignore_children)
+/obj/item/organ/internal/do_uninstall(in_place, detach, ignore_children)
 	//Make sure we're removed from whatever parent organ we have, either in a mob or not
 	var/obj/item/organ/external/P = null
 	if(owner)
@@ -65,8 +56,9 @@
 		P.update_internal_organs_cost()
 	. = ..()
 
+//#TODO: Remove rejuv hacks
 /obj/item/organ/internal/remove_rejuv()
-	uninstall()
+	do_uninstall()
 	..()
 
 /obj/item/organ/internal/is_usable()
@@ -184,3 +176,6 @@
 		icon_state = ((status & ORGAN_DEAD) && prosthetic_dead_icon)? 	prosthetic_dead_icon : prosthetic_icon 
 	else
 		icon_state = ((status & ORGAN_DEAD) && dead_icon)? 				dead_icon : alive_icon
+
+/obj/item/organ/internal/is_internal()
+	return TRUE

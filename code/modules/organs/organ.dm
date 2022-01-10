@@ -33,9 +33,9 @@
 
 /obj/item/organ/Destroy()
 	if(owner)
-		owner.remove_organ(src, FALSE, FALSE, TRUE, TRUE, FALSE)
+		owner.remove_organ(src, FALSE, FALSE, TRUE, TRUE, FALSE) //Tell our parent we're unisntalling silently
 	else
-		uninstall(TRUE, FALSE, FALSE, FALSE) //Don't ignore children here since we might own them
+		do_uninstall(TRUE, FALSE, FALSE, FALSE) //Don't ignore children here since we might own/contain them
 	owner = null
 	dna = null
 	QDEL_NULL_LIST(ailments)
@@ -333,44 +333,6 @@
 /obj/item/organ/proc/mechassist() //Used to add things like pacemakers, etc
 	status = ORGAN_ASSISTED
 
-//Handles only the installation of the organ, without triggering any callbacks.
-//if we're an internal organ, having a null "target" is legal if we have an "affected"
-//CASES:
-// 1. When creating organs and running their init this is called to properly set them up
-// 2. When installing an organ through surgery via replaced this is called.
-// The organ may be inside an external organ that's not inside a mob, or inside a mob
-/obj/item/organ/proc/install(var/mob/living/carbon/human/target, var/obj/item/organ/external/affected, var/in_place = FALSE, var/update_icon = TRUE)
-	owner = target
-	action_button_name = initial(action_button_name)
-
-	if(owner)
-		forceMove(owner)
-		for(var/datum/ailment/ailment in ailments)
-			ailment.begin_ailment_event()
-	else if(affected)
-		forceMove(affected) //When installed in a limb with no owner
-
-	return src
-
-//Handles uninstalling the organ from its owner and parent limb, without triggering any callbacks.
-//CASES:
-// 1. Before deletion. 
-// 2. Called through removed on surgery or dismemberement
-// 3. Called when we're changing a mob's species.
-// Case 1 and 3 shouldn't cause deep updates
-/obj/item/organ/proc/uninstall(var/in_place = FALSE, var/detach = FALSE, var/ignore_children = FALSE, var/update_icon = TRUE)
-	action_button_name = null
-	screen_loc = null
-	owner = null
-	rejecting = null
-	for(var/datum/ailment/ailment in ailments)
-		if(ailment.timer_id)
-			deltimer(ailment.timer_id)
-			ailment.timer_id = null
-	if(detach)
-		set_detached(TRUE)
-	return src
-
 /obj/item/organ/attack(var/mob/target, var/mob/user)
 	if(status & ORGAN_PROSTHETIC || !istype(target) || !istype(user) || (user != target && user.a_intent == I_HELP))
 		return ..()
@@ -525,12 +487,47 @@ var/global/list/ailment_reference_cache = list()
 		else if(ailment.scanner_diagnosis_string && scanner)
 			LAZYADD(., ailment.replace_tokens(message = ailment.scanner_diagnosis_string, user = user))
 
+//Handles only the installation of the organ, without triggering any callbacks.
+//if we're an internal organ, having a null "target" is legal if we have an "affected"
+//CASES:
+// 1. When creating organs and running their init this is called to properly set them up
+// 2. When installing an organ through surgery via replaced this is called.
+// The organ may be inside an external organ that's not inside a mob, or inside a mob
+/obj/item/organ/proc/do_install(var/mob/living/carbon/human/target, var/obj/item/organ/external/affected, var/in_place = FALSE, var/update_icon = TRUE)
+	owner = target
+	action_button_name = initial(action_button_name)
+	if(owner)
+		forceMove(owner)
+		for(var/datum/ailment/ailment in ailments)
+			ailment.begin_ailment_event()
+	else if(affected)
+		forceMove(affected) //When installed in a limb with no owner
+	return src
+
+//Handles uninstalling the organ from its owner and parent limb, without triggering effects or deep updates
+//CASES:
+// 1. Before deletion to clear our references. 
+// 2. Called through removal on surgery or dismemberement
+// 3. Called when we're changing a mob's species.
+/obj/item/organ/proc/do_uninstall(var/in_place = FALSE, var/detach = FALSE, var/ignore_children = FALSE, var/update_icon = TRUE)
+	action_button_name = null
+	screen_loc = null
+	owner = null
+	rejecting = null
+	for(var/datum/ailment/ailment in ailments)
+		if(ailment.timer_id)
+			deltimer(ailment.timer_id)
+			ailment.timer_id = null
+	if(detach)
+		set_detached(TRUE)
+	return src
+
 //Events handling for checks and effects that should happen when removing the organ through interactions. Called by the owner mob.
-/obj/item/organ/proc/on_removal(var/mob/living/last_owner)
+/obj/item/organ/proc/on_remove_effects(var/mob/living/last_owner)
 	START_PROCESSING(SSobj, src)
 
 //Events handling for checks and effects that should happen when installing the organ through interactions. Called by the owner mob.
-/obj/item/organ/proc/on_replacement()
+/obj/item/organ/proc/on_add_effects()
 	STOP_PROCESSING(SSobj, src)
 
 //Since some types of organs completely ignore being detached, moved it to an overridable organ proc for external prosthetics
@@ -539,3 +536,8 @@ var/global/list/ailment_reference_cache = list()
 		status |= ORGAN_CUT_AWAY
 	else
 		status &= ~ORGAN_CUT_AWAY
+
+//Some checks to avoid doing type checks for nothing
+/obj/item/organ/proc/is_internal()
+	return FALSE
+

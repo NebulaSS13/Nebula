@@ -107,7 +107,7 @@
 	if(!ishuman(M))
 		return
 	var/mob/living/carbon/human/H = M
-	for(var/obj/item/organ/external/E in H.organs)
+	for(var/obj/item/organ/external/E in H.get_external_organs())
 		for(var/obj/effect/spider/spider in E.implants)
 			if(prob(25))
 				E.implants -= spider

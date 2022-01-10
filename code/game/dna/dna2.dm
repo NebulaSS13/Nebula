@@ -154,7 +154,7 @@ var/global/list/datum/dna/gene/dna_genes[0]
 	SetUIValueRange(DNA_UI_BEARD_STYLE, beard_types.Find(character.f_style), length(beard_types), 1)
 
 	body_markings.Cut()
-	for(var/obj/item/organ/external/E in character.organs)
+	for(var/obj/item/organ/external/E in character.get_external_organs())
 		if(LAZYLEN(E.markings))
 			body_markings[E.organ_tag] = E.markings.Copy()
 
