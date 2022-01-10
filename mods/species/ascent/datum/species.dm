@@ -190,7 +190,10 @@
 	override_limb_types = list(
 		BP_HEAD = /obj/item/organ/external/head/insectoid/mantid,
 		BP_GROIN = /obj/item/organ/external/groin/insectoid/mantid/gyne,
-		BP_EGG = /obj/item/organ/internal/egg_sac/insectoid
+	)
+
+	override_organ_types = list(
+		BP_EGG = /obj/item/organ/internal/egg_sac/insectoid,
 	)
 
 	appearance_descriptors = list(
