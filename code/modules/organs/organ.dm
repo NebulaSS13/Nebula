@@ -280,9 +280,6 @@
 						else
 							owner.reagents.add_reagent(/decl/material/liquid/coagulated_blood, rand(1,2))
 
-/obj/item/organ/proc/receive_chem(chemical)
-	return 0
-
 /obj/item/organ/proc/remove_rejuv()
 	qdel(src)
 

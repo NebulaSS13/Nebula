@@ -197,17 +197,6 @@
 	if(eyecheck() < intensity || override_blindness_check)
 		return ..()
 
-// ++++ROCKDTBEN++++ MOB PROCS -- Ask me before touching.
-// Stop! ... Hammertime! ~Carn
-
-/mob/living/carbon/proc/getDNA()
-	return dna
-
-/mob/living/carbon/proc/setDNA(var/datum/dna/newDNA)
-	dna = newDNA
-
-// ++++ROCKDTBEN++++ MOB PROCS //END
-
 //Throwing stuff
 /mob/proc/throw_item(atom/target)
 	return

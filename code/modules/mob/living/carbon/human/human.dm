@@ -843,20 +843,6 @@
 	else
 		return ..()
 
-/mob/living/carbon/human/getDNA()
-	if(species.species_flags & SPECIES_FLAG_NO_SCAN)
-		return null
-	if(isSynthetic())
-		return
-	..()
-
-/mob/living/carbon/human/setDNA()
-	if(species.species_flags & SPECIES_FLAG_NO_SCAN)
-		return
-	if(isSynthetic())
-		return
-	..()
-
 /mob/living/carbon/human/has_brain()
 	. = istype(get_organ(BP_BRAIN), /obj/item/organ/internal)
 
