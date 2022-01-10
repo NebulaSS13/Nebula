@@ -123,7 +123,6 @@
 	name = "gyne egg-sac"
 	action_button_name = "Produce Egg"
 	organ_tag = BP_EGG
-	parent_organ = BP_GROIN
 	var/egg_metabolic_cost = 100
 
 /obj/item/organ/internal/egg_sac/insectoid/refresh_action_button()
