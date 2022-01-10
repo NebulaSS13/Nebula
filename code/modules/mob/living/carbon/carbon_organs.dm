@@ -1,6 +1,3 @@
-/mob/living/carbon/get_organ(var/zone)
-	return get_organ(check_zone(zone, src, base_zone_only = TRUE))
-
 /mob/living/carbon/get_organ(var/organ_tag)
 	return LAZYACCESS(organs_by_tag, organ_tag)
 

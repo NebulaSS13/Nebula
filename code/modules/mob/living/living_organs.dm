@@ -20,7 +20,7 @@
 /mob/living/proc/has_internal_organs()
 	return LAZYLEN(get_internal_organs()) > 0
 
-//Needed for organ surgery, since it assumes humans are mob/living always
+//Needed for organ surgery
 /mob/living/proc/add_organ(var/obj/item/organ/O, var/obj/item/organ/external/affected = null, var/in_place = FALSE, var/update_icon = TRUE)
 	if(!in_place)
 		on_gained_organ(O)
