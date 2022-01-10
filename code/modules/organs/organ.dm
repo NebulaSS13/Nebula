@@ -64,37 +64,21 @@
 	else
 		max_damage = min_broken_damage * 2
 
-	if(!owner && iscarbon(loc)) //#TODO: investigate if this can cause carried items to be mistaken with organs when created on a mob..
-		owner = loc
-		if(owner && QDELETED(owner))
-			owner = null
-			return INITIALIZE_HINT_QDEL
-
 	if(!BP_IS_PROSTHETIC(src))
 		setup_as_organic(given_dna)
 	else
 		setup_as_prosthetic()
 
-	//Attempt auto-installing on the owner, and self-destruct if it fails
-	if(!try_autoinstall())
-		return INITIALIZE_HINT_QDEL
-	
 	update_icon()
 
-//Overridable organ install handling on init
-//Returns FALSE if we should abort init
-/obj/item/organ/proc/try_autoinstall()
-	if(owner)
-		owner.add_organ(src)
-	return TRUE //When nothing to install we assume success
-
 /obj/item/organ/proc/setup_as_organic(var/datum/dna/given_dna)
+	//Null DNA setup
 	if(!given_dna)
 		if(dna)
-			given_dna = dna
+			given_dna = dna //Use existing if possible
 		else if(owner) 
 			if(owner.dna) 
-				given_dna = owner.dna
+				given_dna = owner.dna //Grab our owner's dna if we don't have any, and they have
 			else
 				//The owner having no DNA can be a valid reason to keep our dna null in some cases
 				dna = null
@@ -102,7 +86,7 @@
 		else
 			//If we have NO OWNER and given_dna, just make one up for consistency
 			given_dna = new/datum/dna()
-			given_dna.check_integrity() //Default everything
+			given_dna.check_integrity() //Defaults everything
 	
 	set_dna(given_dna)
 	setup_reagents()

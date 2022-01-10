@@ -201,16 +201,16 @@
 	return 	(!istype(backup) || backup == owner.mind || (backup.current && backup.current.stat != DEAD))
 
 /obj/item/organ/internal/voxstack/on_replacement()
-	if(!..()) return 0
-	if(prompting) // Don't spam the player with twenty dialogs because someone doesn't know what they're doing or panicking.
-		return 0
-	
+	if(!..() || prompting) // Don't spam the player with twenty dialogs because someone doesn't know what they're doing or panicking.
+		return FALSE
+
 	//Need spawn here so that this interactive bit doesn't lock up init
 	if(owner && !backup_inviable())
-		addtimer(CALLBACK(src, .proc/prompt_revive_callback, owner), 0)
-	return 1
+		prompt_revive_callback(owner)
+	return TRUE
 
 /obj/item/organ/internal/voxstack/proc/prompt_revive_callback(var/mob/living/carbon/C)
+	set waitfor = FALSE
 	if(C && !backup_inviable())
 		prompting = TRUE
 		var/response = alert(find_dead_player(ownerckey, 1), "Your neural backup has been placed into a new body. Do you wish to return to life as the mind of [backup.name]?", "Resleeving", "Yes", "No")

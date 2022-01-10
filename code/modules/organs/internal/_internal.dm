@@ -19,16 +19,6 @@
 		min_bruised_damage = FLOOR(max_damage / 4)
 	. = ..()
 
-//Returns FALSE if we should abort init
-/obj/item/organ/internal/try_autoinstall()
-	if(owner)
-		var/obj/item/organ/external/E = owner.get_organ(parent_organ)
-		if(!E)
-			PRINT_STACK_TRACE("[src] spawned in [owner] without a parent organ: [parent_organ].")
-			return FALSE
-		owner.add_organ(src, E)
-	return TRUE
-
 /obj/item/organ/internal/set_species(species_name)
 	. = ..()
 	if(species.organs_icon)

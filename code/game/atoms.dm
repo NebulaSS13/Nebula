@@ -322,7 +322,7 @@ its easier to just keep the beam vertical.
 	blood_color = COLOR_BLOOD_HUMAN
 	if(istype(M))
 		if (!istype(M.dna, /datum/dna))
-			M.dna = new /datum/dna(null)
+			M.dna = new /datum/dna()
 			M.dna.real_name = M.real_name
 		M.check_dna()
 		blood_color = M.species.get_blood_color(M)

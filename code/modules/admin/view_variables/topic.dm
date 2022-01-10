@@ -361,7 +361,7 @@
 			to_chat(usr, "Mob doesn't exist anymore")
 			return
 
-		if(H.set_species(new_species))
+		if(H.change_species(new_species))
 			to_chat(usr, "Set species of [H] to [H.species].")
 		else
 			to_chat(usr, "Failed! Something went wrong.")
