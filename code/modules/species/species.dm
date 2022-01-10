@@ -480,54 +480,40 @@ var/global/const/DEFAULT_SPECIES_HEALTH = 200
 	if(!organ_data || !ispath(O.type, organ_data["path"]))
 		return FALSE
 	//#TODO: whenever we implement having several organs of the same type change this to check for the minimum amount!
-	//Also make sure that negative results will also return true
 	return TRUE
 
 //fully_replace: If true, all existing organs will be discarded. Useful when doing mob transformations, and not caring about the existing organs
 /decl/species/proc/create_missing_organs(var/mob/living/carbon/human/H, var/fully_replace = FALSE)
-	//#REMOVEME: Remove the debug text before merging!!!!
-	//testing("decl/species/create_missing_organs(): For '[H]', fully_replace=[fully_replace?"true":"false"]")
 	if(fully_replace)
 		H.delete_organs()
 
 	//Clear invalid limbs
 	if(H.has_external_organs())
-	//	testing("*** Removing non-default limbs.. ***")
 		for(var/obj/item/organ/external/E in H.get_external_organs())
 			if(!is_default_limb(E))
-	//			testing("-- Removing '[E]'")
 				H.remove_organ(E, FALSE, FALSE, TRUE, TRUE, FALSE) //Remove them first so we don't trigger removal effects by just calling delete on them
 				qdel(E)
 
 	//Clear invalid internal organs
 	if(H.has_internal_organs())
-	//	testing("*** Removing non-default organs.. ***")
 		for(var/obj/item/organ/O in H.get_internal_organs())
 			if(!is_default_organ(O))
-	//			testing("-- Removing '[O]'")
 				H.remove_organ(O, FALSE, FALSE, TRUE, TRUE, FALSE) //Remove them first so we don't trigger removal effects by just calling delete on them
 				qdel(O)
 
 	//Create missing limbs
-	//testing("*** Creating missing limbs.. ***")
 	for(var/limb_type in has_limbs)
 		if(H.get_organ(limb_type)) //Skip existing
-	//		testing("!! '[limb_type]' already exists on the mob! Skipping!")
 			continue
-	//	testing("++ Creating '[limb_type]'")
 		var/list/organ_data = has_limbs[limb_type]
 		var/limb_path = organ_data["path"]
 		var/obj/item/organ/external/E = new limb_path(H, null, H.dna) //explicitly specify the dna
 		H.add_organ(E, null, FALSE, FALSE)
-		post_organ_rejuvenate(E, H)
 
 	//Create missing internal organs
-	//testing("*** Creating missing organs.. ***")
 	for(var/organ_tag in has_organ)
 		if(H.get_organ(organ_tag)) //Skip existing
-	//		testing("!! '[organ_tag]' already exists on the mob! Skipping!")
 			continue
-	//	testing("++ Creating '[organ_tag]'")
 		var/organ_type = has_organ[organ_tag]
 		var/obj/item/organ/O = new organ_type(H, null, H.dna)
 		if(organ_tag != O.organ_tag)
@@ -566,11 +552,7 @@ var/global/const/DEFAULT_SPECIES_HEALTH = 200
 /decl/species/proc/handle_post_spawn(var/mob/living/carbon/human/H) //Handles anything not already covered by basic species assignment.
 	add_inherent_verbs(H)
 	add_base_auras(H)
-	H.mob_bump_flag = bump_flag
-	H.mob_swap_flags = swap_flags
-	H.mob_push_flags = push_flags
-	H.pass_flags = pass_flags
-	handle_limbs_setup(H)
+	handle_movement_flags_setup(H)
 
 /decl/species/proc/handle_pre_spawn(var/mob/living/carbon/human/H)
 	return
@@ -973,3 +955,9 @@ var/global/const/DEFAULT_SPECIES_HEALTH = 200
 			preview_icon_path = "species_preview_[ckey(name)].png"
 
 	return preview_icon
+
+/decl/species/proc/handle_movement_flags_setup(var/mob/living/carbon/human/H)
+	H.mob_bump_flag = bump_flag
+	H.mob_swap_flags = swap_flags
+	H.mob_push_flags = push_flags
+	H.pass_flags = pass_flags

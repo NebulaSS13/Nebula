@@ -26,7 +26,7 @@
 		on_gained_organ(O)
 	. = O.do_install(src, affected, in_place, update_icon)
 
-/mob/living/proc/remove_organ(var/obj/item/organ/O, var/drop_organ = TRUE, var/detach = TRUE, var/ignore_children = FALSE, var/in_place = FALSE)
+/mob/living/proc/remove_organ(var/obj/item/organ/O, var/drop_organ = TRUE, var/detach = TRUE, var/ignore_children = FALSE, var/in_place = FALSE, var/update_icon = TRUE)
 	if(!in_place)
 		on_lost_organ(O)
 	. = O.do_uninstall(in_place, detach, ignore_children, update_icon)

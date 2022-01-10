@@ -250,7 +250,8 @@
 /mob/living/carbon/human/add_organ(var/obj/item/organ/O, var/obj/item/organ/external/affected = null, var/in_place = FALSE, var/update_icon = TRUE)
 	if(!(. = ..()))
 		return
-	refresh_modular_limb_verbs()
+	if(!O.is_internal())
+		refresh_modular_limb_verbs()
 
 	//#TODO: wish we could invalidate the human icons to trigger a single update when the organ state changes multiple times in a row
 	if(update_icon)
@@ -270,7 +271,8 @@
 /mob/living/carbon/human/remove_organ(var/obj/item/organ/O, var/drop_organ = TRUE, var/detach = TRUE, var/ignore_children = FALSE,  var/in_place = FALSE, var/update_icon = TRUE)
 	if(!(. = ..()))
 		return
-	refresh_modular_limb_verbs()
+	if(!O.is_internal())
+		refresh_modular_limb_verbs()
 
 	//#TODO: wish we could invalidate the human icons to trigger a single update when the organ state changes multiple times in a row
 	if(update_icon)

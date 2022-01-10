@@ -130,8 +130,8 @@
 	else
 		species = specie_name 
 	if(!species)
-		PRINT_STACK_TRACE("Invalid species. Expected a valid species name as string, was: [log_info_line(specie_name)]")
 		species = get_species_by_key(global.using_map.default_species)
+		PRINT_STACK_TRACE("Invalid species. Expected a valid species name as string, was: [log_info_line(specie_name)]")
 	bodytype = owner?.bodytype || species.default_bodytype
 	species.resize_organ(src)
 
