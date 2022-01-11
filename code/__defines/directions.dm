@@ -16,6 +16,8 @@
 #define CORNER_EASTWEST         CORNER_COUNTERCLOCKWISE
 #define CORNER_NORTHSOUTH       CORNER_CLOCKWISE
 
+#define FIRST_DIR(X) ((X) & -(X))
+
 /*
 	turn() is weird:
 		turn(icon, angle) turns icon by angle degrees clockwise
