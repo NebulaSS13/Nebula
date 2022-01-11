@@ -52,7 +52,7 @@
 		. = TOPIC_REFRESH
 		switch(href_list["option"])
 			if("name")
-				t = sanitizeName(input(user, "Enter a name for your pAI", "Global Preference", candidate.name) as text|null, MAX_NAME_LEN, 1)
+				t = sanitize_name(input(user, "Enter a name for your pAI", "Global Preference", candidate.name) as text|null, MAX_NAME_LEN, 1)
 				if(t && CanUseTopic(user))
 					candidate.name = t
 			if("desc")

@@ -62,7 +62,7 @@
 	if(pref.cultural_info[TAG_CULTURE])
 		var/decl/cultural_info/check = GET_DECL(pref.cultural_info[TAG_CULTURE])
 		if(check)
-			pref.real_name = check.sanitize_name(pref.real_name, pref.species)
+			pref.real_name = check.sanitize_cultural_name(pref.real_name, pref.species)
 			if(!pref.real_name)
 				pref.real_name = check.get_random_name(preference_mob(), pref.gender)
 

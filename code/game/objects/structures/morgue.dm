@@ -82,7 +82,7 @@
 
 /obj/structure/morgue/attackby(P, mob/user)
 	if(istype(P, /obj/item/pen))
-		var/new_label = sanitizeSafe(input(user, "What would you like the label to be?", capitalize(name), null) as text|null, MAX_NAME_LEN)
+		var/new_label = sanitize_safe(input(user, "What would you like the label to be?", capitalize(name), null) as text|null, MAX_NAME_LEN)
 
 		if((!Adjacent(user) || loc == user))
 			return
