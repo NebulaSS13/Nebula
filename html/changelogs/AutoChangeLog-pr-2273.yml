@@ -1,4 +1,0 @@
-author: Gaxeer
-delete-after: true
-changes:
-  - bugfix: fix the bug with grab-moving dead mob
