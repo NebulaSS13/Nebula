@@ -82,6 +82,7 @@ INITIALIZE_IMMEDIATE(/obj/effect/gas_overlay)
 	var/default_solid_form = /obj/item/stack/material/sheet
 
 	var/affect_blood_on_ingest = TRUE
+	var/affect_blood_on_inhale = TRUE
 
 	var/narcosis = 0 // Not a great word for it. Constant for causing mild confusion when ingested.
 	var/toxicity = 0 // Organ damage from ingestion.
@@ -516,6 +517,8 @@ INITIALIZE_IMMEDIATE(/obj/effect/gas_overlay)
 				affect_ingest(M, alien, effective, holder)
 			if(CHEM_TOUCH)
 				affect_touch(M, alien, effective, holder)
+			if(CHEM_TOUCH)
+				affect_inhale(M, alien, effective, holder)
 	holder.remove_reagent(type, removed)
 
 /decl/material/proc/affect_blood(var/mob/living/M, var/alien, var/removed, var/datum/reagents/holder)
@@ -554,6 +557,10 @@ INITIALIZE_IMMEDIATE(/obj/effect/gas_overlay)
 
 /decl/material/proc/affect_ingest(var/mob/living/M, var/alien, var/removed, var/datum/reagents/holder)
 	if(affect_blood_on_ingest)
+		affect_blood(M, alien, removed * 0.5, holder)
+
+/decl/material/proc/affect_inhale(var/mob/living/M, var/alien, var/removed, var/datum/reagents/holder)
+	if(affect_blood_on_inhale)
 		affect_blood(M, alien, removed * 0.5, holder)
 
 /decl/material/proc/affect_touch(var/mob/living/M, var/alien, var/removed, var/datum/reagents/holder)
