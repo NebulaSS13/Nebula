@@ -113,7 +113,7 @@ Single Use Emergency Pouches
 
 	startswith = list(
 		/obj/item/chems/hypospray/autoinjector/pouch_auto/stabilizer,
-		/obj/item/chems/hypospray/autoinjector/pouch_auto/oxy_meds,
+		/obj/item/chems/inhaler/pouch_auto/oxy_meds,
 		/obj/item/chems/hypospray/autoinjector/pouch_auto/adrenaline,
 		/obj/item/chems/pill/pouch_pill/stabilizer,
 		/obj/item/chems/pill/pouch_pill/oxy_meds
@@ -165,9 +165,11 @@ Single Use Emergency Pouches
 	6) Stay in place once they respond.\
 		"}
 
+// Pills
+
 /obj/item/chems/pill/pouch_pill
 	name       = "emergency pill"
-	desc       = "An emergency pill from an emergency medical pouch"
+	desc       = "An emergency pill from an emergency medical pouch."
 	icon_state = "pill2"
 	volume     = 15
 	abstract_type = /obj/item/chems/pill/pouch_pill
@@ -200,9 +202,11 @@ Single Use Emergency Pouches
 /obj/item/chems/pill/pouch_pill/burn_meds/populate_reagents()
 	reagents.add_reagent(/decl/material/liquid/burn_meds, reagents.maximum_volume)
 
+// Injectors
+
 /obj/item/chems/hypospray/autoinjector/pouch_auto
 	name = "emergency autoinjector"
-	desc = "An emergency autoinjector from an emergency medical pouch"
+	desc = "An emergency autoinjector from an emergency medical pouch."
 
 /obj/item/chems/hypospray/autoinjector/pouch_auto/stabilizer
 	name = "emergency stabilizer autoinjector"
@@ -234,3 +238,17 @@ Single Use Emergency Pouches
 	name = "emergency nanoblood autoinjector"
 /obj/item/chems/hypospray/autoinjector/pouch_auto/nanoblood/populate_reagents()
 	reagents.add_reagent(/decl/material/liquid/nanoblood, 5)
+
+// Inhalers
+
+/obj/item/chems/inhaler/pouch_auto
+	name = "emergency autoinhaler"
+	desc = "An emergency autoinhaler from an emergency medical pouch."
+
+/obj/item/chems/inhaler/pouch_auto/oxy_meds
+	name = "emergency oxygel autoinjector"
+	band_color = COLOR_BLUE
+
+/obj/item/chems/inhaler/pouch_auto/oxy_meds/populate_reagents()
+	reagents.add_reagent((/decl/material/liquid/oxy_meds, 5)
+
