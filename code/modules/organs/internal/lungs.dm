@@ -216,7 +216,7 @@
 			continue
 		// Little bit of sanity so we aren't trying to add 0.0000000001 units of CO2, and so we don't end up with 99999 units of CO2.
 		var/reagent_amount = breath.gas[gasname] * REAGENT_UNITS_PER_GAS_MOLE * ratio
-		if(reagent_amount < 0.05)
+		if(reagent_amount < MINIMUM_CHEMICAL_VOLUME)
 			continue
 		inhaled.add_reagent(gasname, reagent_amount)
 		breath.adjust_gas(gasname, -breath.gas[gasname], update = 0) //update after
