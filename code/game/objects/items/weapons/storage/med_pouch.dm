@@ -112,7 +112,7 @@ Single Use Emergency Pouches
 
 	startswith = list(
 		/obj/item/chems/hypospray/autoinjector/pouch_auto/stabilizer,
-		/obj/item/chems/hypospray/autoinjector/pouch_auto/oxy_meds,
+		/obj/item/chems/inhaler/pouch_auto/oxy_meds,
 		/obj/item/chems/hypospray/autoinjector/pouch_auto/adrenaline,
 		/obj/item/chems/pill/pouch_pill/stabilizer,
 		/obj/item/chems/pill/pouch_pill/oxy_meds
@@ -164,9 +164,11 @@ Single Use Emergency Pouches
 	6) Stay in place once they respond.\
 		"}
 
+// Pills
+
 /obj/item/chems/pill/pouch_pill
 	name = "emergency pill"
-	desc = "An emergency pill from an emergency medical pouch"
+	desc = "An emergency pill from an emergency medical pouch."
 	icon_state = "pill2"
 	var/decl/material/chem_type
 	var/chem_amount = 15
@@ -188,9 +190,11 @@ Single Use Emergency Pouches
 	var/decl/material/reagent = GET_DECL(chem_type)
 	SetName("emergency [reagent.liquid_name] pill ([reagents.total_volume]u)")
 
+// Injectors
+
 /obj/item/chems/hypospray/autoinjector/pouch_auto
 	name = "emergency autoinjector"
-	desc = "An emergency autoinjector from an emergency medical pouch"
+	desc = "An emergency autoinjector from an emergency medical pouch."
 
 /obj/item/chems/hypospray/autoinjector/pouch_auto/stabilizer
 	name = "emergency stabilizer autoinjector"
@@ -212,3 +216,14 @@ Single Use Emergency Pouches
 	name = "emergency adrenaline autoinjector"
 	amount_per_transfer_from_this = 8
 	starts_with = list(/decl/material/liquid/adrenaline = 8)
+
+// Inhalers
+
+/obj/item/chems/inhaler/pouch_auto
+	name = "emergency autoinhaler"
+	desc = "An emergency autoinhaler from an emergency medical pouch."
+
+/obj/item/chems/inhaler/pouch_auto/oxy_meds
+	name = "emergency oxygel autoinjector"
+	starts_with = list(/decl/material/liquid/oxy_meds = 5)
+	band_color = COLOR_BLUE
