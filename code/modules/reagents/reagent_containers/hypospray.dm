@@ -153,6 +153,10 @@
 	origin_tech = "{'materials':2,'biotech':2}"
 	slot_flags = SLOT_LOWER_BODY | SLOT_EARS
 	w_class = ITEM_SIZE_TINY
+	matter = list(
+		/decl/material/solid/fiberglass = MATTER_AMOUNT_REINFORCEMENT,
+		/decl/material/solid/metal/aluminium = MATTER_AMOUNT_TRACE
+	)
 	var/list/starts_with = list(/decl/material/liquid/adrenaline = 5)
 	var/band_color = COLOR_CYAN
 
