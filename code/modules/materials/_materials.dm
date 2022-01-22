@@ -520,7 +520,7 @@ INITIALIZE_IMMEDIATE(/obj/effect/gas_overlay)
 				affect_ingest(M, alien, effective, holder)
 			if(CHEM_TOUCH)
 				affect_touch(M, alien, effective, holder)
-			if(CHEM_TOUCH)
+			if(CHEM_INHALE)
 				affect_inhale(M, alien, effective, holder)
 	holder.remove_reagent(type, removed)
 
