@@ -33,6 +33,9 @@ Single Use Emergency Pouches
 	for(var/obj/item/chems/hypospray/autoinjector/A in contents)
 		A.band_color = color
 		A.update_icon()
+	for(var/obj/item/chems/inhaler/I in contents)
+		I.band_color = color
+		I.update_icon()
 
 /obj/item/storage/med_pouch/on_update_icon()
 	overlays.Cut()
@@ -247,9 +250,7 @@ Single Use Emergency Pouches
 /obj/item/chems/inhaler/pouch_auto/oxy_meds
 	name = "emergency oxygel autoinjector"
 	starts_with = list(/decl/material/liquid/oxy_meds = 5)
-	band_color = COLOR_BLUE
 
 /obj/item/chems/inhaler/pouch_auto/detoxifier
 	name = "emergency detoxifier autoinjector"
 	starts_with = list(/decl/material/liquid/detoxifier = 5)
-	band_color = COLOR_PALE_BLUE_GRAY
