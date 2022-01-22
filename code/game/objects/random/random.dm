@@ -178,7 +178,8 @@
 				/obj/item/storage/med_pouch/burn = 2,
 				/obj/item/storage/med_pouch/toxin = 2,
 				/obj/item/storage/med_pouch/radiation = 2,
-				/obj/item/storage/med_pouch/oxyloss = 2)
+				/obj/item/storage/med_pouch/oxyloss = 2,
+				/obj/item/storage/med_pouch/overdose = 2)
 
 /obj/random/firstaid
 	name = "Random First Aid Kit"
