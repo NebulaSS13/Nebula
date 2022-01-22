@@ -8,7 +8,7 @@
 		if(player.current.faction != MOB_FACTION_NEUTRAL)
 			return FALSE
 
-	if(!player.assigned_job || is_type_in_list(player.assigned_job, blacklisted_jobs))
+	if(player.assigned_job && is_type_in_list(player.assigned_job, blacklisted_jobs))
 		return FALSE
 
 	if(!ignore_role)
