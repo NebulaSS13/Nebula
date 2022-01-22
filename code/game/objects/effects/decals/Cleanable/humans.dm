@@ -109,7 +109,7 @@ var/global/list/image/splatter_cache=list()
 		if(l_foot)
 			l_foot.add_coating(chemical, amount, transferred_data)
 		if(r_foot)
-			l_foot.add_coating(chemical, amount, transferred_data)
+			r_foot.add_coating(chemical, amount, transferred_data)
 	else if (perp.buckled && istype(perp.buckled, /obj/structure/bed/chair/wheelchair))
 		var/obj/structure/bed/chair/wheelchair/W = perp.buckled
 		W.bloodiness = 4
