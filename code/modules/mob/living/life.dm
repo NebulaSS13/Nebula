@@ -64,8 +64,8 @@
 		for(var/T in chem_doses)
 			if(bloodstr_reagents?.has_reagent(T) || ingested_reagents?.has_reagent(T) || touching_reagents?.has_reagent(T) || inhaled_reagents?.has_reagent(T))
 				continue
-			var/decl/material/R = T
-			var/dose = LAZYACCESS(chem_doses, T) - initial(R.metabolism)*2
+			var/decl/material/R = GET_DECL(T)
+			var/dose = LAZYACCESS(chem_doses, T) - R.metabolism*2
 			LAZYSET(chem_doses, T, dose)
 			if(LAZYACCESS(chem_doses, T) <= 0)
 				LAZYREMOVE(chem_doses, T)
