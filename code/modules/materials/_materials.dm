@@ -209,6 +209,7 @@ INITIALIZE_IMMEDIATE(/obj/effect/gas_overlay)
 	var/metabolism = REM // This would be 0.2 normally
 	var/ingest_met = 0
 	var/touch_met = 0
+	var/inhale_met = 0
 	var/overdose = 0
 	var/scannable = 0 // Shows up on health analyzers.
 	var/color = COLOR_BEIGE
@@ -548,6 +549,8 @@ INITIALIZE_IMMEDIATE(/obj/effect/gas_overlay)
 			removed = touch_met
 	if(!removed)
 		removed = metabolism
+	if(inhale_met && (location == CHEM_INHALE))
+		removed = inhale_met
 	removed = M.get_adjusted_metabolism(removed)
 
 	//adjust effective amounts - removed, dose, and max_dose - for mob size
