@@ -174,6 +174,7 @@
 		/obj/item/clothing/head/surgery,
 		/obj/item/clothing/gloves/latex,
 		/obj/item/chems/hypospray,
+		/obj/item/chems/inhaler,
 		/obj/item/clothing/glasses/hud/health,
 		/obj/item/crowbar,
 		/obj/item/flashlight,

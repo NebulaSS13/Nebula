@@ -4,7 +4,20 @@
 	icon = 'icons/clothing/suit/labcoat/default.dmi'
 	blood_overlay_type = "coat"
 	body_parts_covered = SLOT_UPPER_BODY|SLOT_ARMS
-	allowed = list(/obj/item/scanner/gas,/obj/item/stack/medical,/obj/item/chems/dropper,/obj/item/chems/syringe,/obj/item/chems/hypospray,/obj/item/scanner/health,/obj/item/flashlight/pen,/obj/item/chems/glass/bottle,/obj/item/chems/glass/beaker,/obj/item/chems/pill,/obj/item/storage/pill_bottle,/obj/item/paper)
+	allowed = list(
+		/obj/item/scanner/gas,
+		/obj/item/stack/medical,
+		/obj/item/chems/dropper,
+		/obj/item/chems/syringe,
+		/obj/item/chems/hypospray,
+		/obj/item/chems/inhaler,
+		/obj/item/scanner/health,
+		/obj/item/flashlight/pen,
+		/obj/item/chems/glass/bottle,
+		/obj/item/chems/glass/beaker,
+		/obj/item/chems/pill,
+		/obj/item/storage/pill_bottle,
+		/obj/item/paper)
 	armor = list(
 		bio = ARMOR_BIO_RESISTANT
 		)

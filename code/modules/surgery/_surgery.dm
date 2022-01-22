@@ -6,6 +6,7 @@ var/global/list/surgery_tool_exceptions = list(
 	/obj/item/scanner/health,
 	/obj/item/shockpaddles,
 	/obj/item/chems/hypospray,
+	/obj/item/chems/inhaler,
 	/obj/item/modular_computer,
 	/obj/item/chems/syringe,
 	/obj/item/chems/borghypo
