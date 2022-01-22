@@ -82,9 +82,8 @@
 					break
 			if(still_processing_reagent)
 				continue
-
-			var/decl/material/R = T
-			var/dose = LAZYACCESS(chem_doses, T) - initial(R.metabolism)*2
+			var/decl/material/R = GET_DECL(T)
+			var/dose = LAZYACCESS(chem_doses, T) - R.metabolism*2
 			LAZYSET(chem_doses, T, dose)
 			if(LAZYACCESS(chem_doses, T) <= 0)
 				LAZYREMOVE(chem_doses, T)
