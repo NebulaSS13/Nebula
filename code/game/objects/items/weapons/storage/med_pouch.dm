@@ -164,6 +164,27 @@ Single Use Emergency Pouches
 	6) Stay in place once they respond.\
 		"}
 
+/obj/item/storage/med_pouch/overdose
+	name = "overdose treatment pouch"
+	injury_type = "overdose"
+	color = COLOR_PALE_BLUE_GRAY
+
+	startswith = list(
+		/obj/item/chems/hypospray/autoinjector/pouch_auto/stabilizer,
+		/obj/item/chems/inhaler/pouch_auto/oxy_meds,
+		/obj/item/chems/inhaler/pouch_auto/detoxifier,
+		/obj/item/chems/hypospray/autoinjector/pouch_auto/adrenaline
+	)
+	instructions = {"
+	1) Tear open the emergency medical pack using the easy open tab at the top.\n\
+	\t2) Carefully remove all items from the pouch and discard the pouch.\n\
+	\t3) Apply all autoinjectors and autoinhalers to the injured party. DO NOT give the injured party any pills, foods, or liquids.\n\
+	\t5) Contact the medical team with your location.\n\
+	\t6) Find a source of oxygen if possible.\n\
+	\t7) Update the medical team with your new location.\n\
+	8) Stay in place once they respond.\
+		"}
+
 // Pills
 
 /obj/item/chems/pill/pouch_pill
@@ -227,3 +248,8 @@ Single Use Emergency Pouches
 	name = "emergency oxygel autoinjector"
 	starts_with = list(/decl/material/liquid/oxy_meds = 5)
 	band_color = COLOR_BLUE
+
+/obj/item/chems/inhaler/pouch_auto/detoxifier
+	name = "emergency detoxifier autoinjector"
+	starts_with = list(/decl/material/liquid/detoxifier = 5)
+	band_color = COLOR_PALE_BLUE_GRAY
