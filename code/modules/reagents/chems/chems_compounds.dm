@@ -368,7 +368,7 @@
 		M.heal_organ_damage(30 * removed, 30 * removed, affect_robo = 1)
 		if(ishuman(M))
 			var/mob/living/carbon/human/H = M
-			for(var/obj/item/organ/internal/I in H.internal_organs)
+			for(var/obj/item/organ/internal/I in H.get_internal_organs())
 				if(BP_IS_PROSTHETIC(I))
 					I.heal_damage(20*removed)
 
@@ -394,7 +394,9 @@
 	var/result_mat = do_material_check(M)
 	if(ishuman(M))
 		var/mob/living/carbon/human/H = M
-		for(var/obj/item/organ/external/E in shuffle(H.organs.Copy()))
+		var/list/limbs = H.get_external_organs()
+		var/list/shuffled_limbs = LAZYLEN(limbs) ? shuffle(limbs.Copy()) : null
+		for(var/obj/item/organ/external/E in shuffled_limbs)
 			if(E.is_stump() || BP_IS_PROSTHETIC(E))
 				continue
 
@@ -421,7 +423,9 @@
 					E.status |= ORGAN_BRITTLE
 				break
 
-		for(var/obj/item/organ/internal/I in shuffle(H.internal_organs.Copy()))
+		var/list/internal_organs = H.get_internal_organs()
+		var/list/shuffled_organs = LAZYLEN(internal_organs) ? shuffle(internal_organs.Copy()) : null
+		for(var/obj/item/organ/internal/I in shuffled_organs)
 			if(BP_IS_PROSTHETIC(I) || !BP_IS_CRYSTAL(I) || I.damage <= 0 || I.organ_tag == BP_BRAIN)
 				continue
 			if(prob(35))

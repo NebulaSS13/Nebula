@@ -2,7 +2,6 @@
 	name = "stomach"
 	desc = "Gross. This is hard to stomach."
 	icon_state = "stomach"
-	dead_icon = "stomach"
 	organ_tag = BP_STOMACH
 	parent_organ = BP_GROIN
 	var/stomach_capacity
@@ -13,20 +12,27 @@
 	QDEL_NULL(ingested)
 	. = ..()
 
-/obj/item/organ/internal/stomach/Initialize()
+/obj/item/organ/internal/stomach/set_species(species_name)
+	if(species?.gluttonous)
+		verbs -= /obj/item/organ/internal/stomach/proc/throw_up
 	. = ..()
-	ingested = new/datum/reagents/metabolism(240, (owner || src), CHEM_INGEST)
-	if(!ingested.my_atom)
-		ingested.my_atom = src
 	if(species.gluttonous)
 		verbs |= /obj/item/organ/internal/stomach/proc/throw_up
 
-/obj/item/organ/internal/stomach/removed()
+/obj/item/organ/internal/stomach/setup_reagents()
 	. = ..()
-	ingested.my_atom = src
-	ingested.parent = null
+	if(!ingested)
+		ingested = new/datum/reagents/metabolism(240, (owner || src), CHEM_INGEST)
+	if(!ingested.my_atom)
+		ingested.my_atom = src
 
-/obj/item/organ/internal/stomach/replaced()
+/obj/item/organ/internal/stomach/do_uninstall(in_place, detach, ignore_children)
+	. = ..()
+	if(ingested) //Don't bother if we're destroying
+		ingested.my_atom = src
+		ingested.parent = null
+
+/obj/item/organ/internal/stomach/do_install()
 	. = ..()
 	ingested.my_atom = owner
 	ingested.parent = owner

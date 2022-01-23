@@ -481,7 +481,7 @@ default behaviour is:
 /mob/living/carbon/basic_revival(var/repair_brain = TRUE)
 	if(repair_brain && should_have_organ(BP_BRAIN))
 		repair_brain = FALSE
-		var/obj/item/organ/internal/brain/brain = get_internal_organ(BP_BRAIN)
+		var/obj/item/organ/internal/brain/brain = get_organ(BP_BRAIN)
 		if(brain.damage > (brain.max_damage/2))
 			brain.damage = (brain.max_damage/2)
 		if(brain.status & ORGAN_DEAD)
@@ -628,16 +628,13 @@ default behaviour is:
 /mob/living/carbon/human/canUnEquip(obj/item/I)
 	if(!..())
 		return
-	if(I in internal_organs)
-		return
-	if(I in organs)
+	if(I in get_organs())
 		return
 	return 1
 
 /mob/living/carbon/get_contained_external_atoms()
 	. = ..()
-	LAZYREMOVE(., internal_organs)
-	LAZYREMOVE(., organs)
+	LAZYREMOVE(., get_organs())
 
 /mob/proc/can_be_possessed_by(var/mob/observer/ghost/possessor)
 	return istype(possessor) && possessor.client
@@ -936,17 +933,6 @@ default behaviour is:
 /mob/living/proc/get_eye_overlay()
 	return
 
-/mob/living/handle_fall_effect(var/turf/landing)
-	..()
-	apply_fall_damage(landing)
-	if(client)
-		var/area/A = get_area(landing)
-		if(A)
-			A.alert_on_fall(src)
-
-/mob/living/proc/apply_fall_damage(var/turf/landing)
-	adjustBruteLoss(rand(max(1, CEILING(mob_size * 0.33)), max(1, CEILING(mob_size * 0.66))))
-
 /mob/living/proc/empty_stomach()
 	return
 
@@ -1018,3 +1004,14 @@ default behaviour is:
 			hud_used.hide_actions_toggle.screen_loc = hud_used.ButtonNumberToScreenCoords(button_number+1)
 			//hud_used.SetButtonCoords(hud_used.hide_actions_toggle,button_number+1)
 		client.screen += hud_used.hide_actions_toggle
+
+/mob/living/handle_fall_effect(var/turf/landing)
+	..()
+	apply_fall_damage(landing)
+	if(client)
+		var/area/A = get_area(landing)
+		if(A)
+			A.alert_on_fall(src)
+
+/mob/living/proc/apply_fall_damage(var/turf/landing)
+	adjustBruteLoss(rand(max(1, CEILING(mob_size * 0.33)), max(1, CEILING(mob_size * 0.66))))

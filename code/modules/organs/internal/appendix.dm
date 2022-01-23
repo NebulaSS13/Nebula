@@ -40,5 +40,4 @@
 				E.sever_artery()
 				E.germ_level = max(INFECTION_LEVEL_TWO, E.germ_level)
 				owner.adjustToxLoss(25)
-				removed()
 				qdel(src)

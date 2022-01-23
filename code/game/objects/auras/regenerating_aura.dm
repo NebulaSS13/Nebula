@@ -49,17 +49,17 @@
 		return 1
 	if(organ_mult)
 		if(prob(10) && H.nutrition >= 150 && !H.getBruteLoss() && !H.getFireLoss())
-			var/obj/item/organ/external/head/D = H.organs_by_name["head"]
+			var/obj/item/organ/external/head/D = H.get_organ(BP_HEAD)
 			if (D.status & ORGAN_DISFIGURED)
 				if (H.nutrition >= 20)
 					D.status &= ~ORGAN_DISFIGURED
 					H.adjust_nutrition(-20)
 				else
-					low_nut_warning("head")
+					low_nut_warning(BP_HEAD)
 
-		for(var/bpart in shuffle(H.internal_organs_by_name - BP_BRAIN))
-			var/obj/item/organ/internal/regen_organ = H.get_internal_organ(bpart)
-			if(BP_IS_PROSTHETIC(regen_organ))
+		var/list/organs = H.get_internal_organs()
+		for(var/obj/item/organ/internal/regen_organ in shuffle(organs.Copy()))
+			if(BP_IS_PROSTHETIC(regen_organ) || regen_organ.organ_tag == BP_BRAIN)
 				continue
 			if(istype(regen_organ))
 				if(regen_organ.damage > 0 && !(regen_organ.status & ORGAN_DEAD))
@@ -73,10 +73,10 @@
 
 	if(prob(grow_chance))
 		for(var/limb_type in H.species.has_limbs)
-			var/obj/item/organ/external/E = H.organs_by_name[limb_type]
+			var/obj/item/organ/external/E = H.get_organ(limb_type)
 			if(E && E.organ_tag != BP_HEAD && !E.vital && !E.is_usable())	//Skips heads and vital bits...
 				if (H.nutrition > grow_threshold)
-					E.removed()			//...because no one wants their head to explode to make way for a new one.
+					H.remove_organ(E) 		//...because no one wants their head to explode to make way for a new one.
 					qdel(E)
 					E= null
 				else

@@ -5,32 +5,23 @@
 	icon = 'icons/mob/human.dmi'
 	icon_state = "body_m_s"
 	mob_sort_value = 6
+	dna = new /datum/dna()
 
 	var/list/hud_list[10]
 	var/embedded_flag	  //To check if we've need to roll for damage on movement while an item is imbedded in us.
 	var/obj/item/rig/wearing_rig // This is very not good, but it's much much better than calling get_rig() every update_canmove() call.
 	var/step_count
 
-/mob/living/carbon/human/Initialize(mapload, var/new_species = null)
+/mob/living/carbon/human/Initialize(mapload, var/species_name = null, var/datum/dna/new_dna = null)
+	setup_hud_overlays()
+	var/list/newargs = args.Copy(2)
+	setup(arglist(newargs))
+	global.human_mob_list |= src
+	. = ..()
+	if(. != INITIALIZE_HINT_QDEL)
+		post_setup(arglist(newargs))
 
-	if(!dna)
-		dna = new /datum/dna(null)
-
-	if(!species)
-		if(new_species)
-			set_species(new_species,1)
-		else
-			set_species()
-		name = species.get_default_name()
-
-	if(!real_name || real_name == "unknown")
-		var/newname = species.get_default_name()
-		if(newname && newname != name)
-			real_name = newname
-			SetName(real_name)
-			if(mind)
-				mind.name = real_name
-
+/mob/living/carbon/human/proc/setup_hud_overlays()
 	hud_list[HEALTH_HUD]      = new /image/hud_overlay('icons/mob/hud_med.dmi', src, "100")
 	hud_list[STATUS_HUD]      = new /image/hud_overlay('icons/mob/hud.dmi', src, "hudhealthy")
 	hud_list[LIFE_HUD]	      = new /image/hud_overlay('icons/mob/hud.dmi', src, "hudhealthy")
@@ -42,34 +33,23 @@
 	hud_list[SPECIALROLE_HUD] = new /image/hud_overlay('icons/mob/hud.dmi', src, "hudblank")
 	hud_list[STATUS_HUD_OOC]  = new /image/hud_overlay('icons/mob/hud.dmi', src, "hudhealthy")
 
-	global.human_mob_list |= src
-	. = ..()
-
-	if(dna)
-		dna.ready_dna(src)
-		dna.real_name = real_name
-		sync_organ_dna()
-	make_blood()
-
 /mob/living/carbon/human/Destroy()
 	global.human_mob_list -= src
 	worn_underwear = null
 	QDEL_NULL(attack_selector)
 	LAZYCLEARLIST(smell_cooldown)
 	. = ..()
-	QDEL_NULL_LIST(organs)
-	QDEL_NULL_LIST(internal_organs)
 
 /mob/living/carbon/human/get_ingested_reagents()
 	if(should_have_organ(BP_STOMACH))
-		var/obj/item/organ/internal/stomach/stomach = get_internal_organ(BP_STOMACH)
+		var/obj/item/organ/internal/stomach/stomach = get_organ(BP_STOMACH)
 		if(stomach)
 			return stomach.ingested
 	return get_contact_reagents() // Kind of a shitty hack, but makes more sense to me than digesting them.
 
 /mob/living/carbon/human/metabolize_ingested_reagents()
 	if(should_have_organ(BP_STOMACH))
-		var/obj/item/organ/internal/stomach/stomach = get_internal_organ(BP_STOMACH)
+		var/obj/item/organ/internal/stomach/stomach = get_organ(BP_STOMACH)
 		if(stomach)
 			stomach.metabolize()
 		return stomach?.ingested
@@ -77,7 +57,7 @@
 /mob/living/carbon/human/get_fullness()
 	if(!should_have_organ(BP_STOMACH))
 		return ..()
-	var/obj/item/organ/internal/stomach/stomach = get_internal_organ(BP_STOMACH)
+	var/obj/item/organ/internal/stomach/stomach = get_organ(BP_STOMACH)
 	if(stomach)
 		return nutrition + (stomach.ingested?.total_volume * 10)
 	return 0 //Always hungry, but you can't actually eat. :(
@@ -101,7 +81,7 @@
 				stat("Tank Pressure", internal.air_contents.return_pressure())
 				stat("Distribution Pressure", internal.distribute_pressure)
 
-		var/obj/item/organ/internal/cell/potato = get_internal_organ(BP_CELL)
+		var/obj/item/organ/internal/cell/potato = get_organ(BP_CELL)
 		if(potato && potato.cell)
 			stat("Battery charge:", "[potato.get_charge()]/[potato.cell.maxcharge]")
 
@@ -122,7 +102,7 @@
 	var/obj/item/implant/loyalty/L = new/obj/item/implant/loyalty(M)
 	L.imp_in = M
 	L.implanted = 1
-	var/obj/item/organ/external/affected = M.organs_by_name[BP_HEAD]
+	var/obj/item/organ/external/affected = M.get_organ(BP_HEAD)
 	LAZYDISTINCTADD(affected.implants, L)
 	L.part = affected
 	L.implanted(src)
@@ -130,7 +110,7 @@
 /mob/living/carbon/human/proc/is_loyalty_implanted(mob/living/carbon/human/M)
 	for(var/L in M.contents)
 		if(istype(L, /obj/item/implant/loyalty))
-			for(var/obj/item/organ/external/O in M.organs)
+			for(var/obj/item/organ/external/O in M.get_external_organs())
 				if(L in O.implants)
 					return 1
 	return 0
@@ -170,7 +150,7 @@
 
 	for(var/bp in held_item_slots)
 		var/datum/inventory_slot/inv_slot = held_item_slots[bp]
-		var/obj/item/organ/external/E = organs_by_name[bp]
+		var/obj/item/organ/external/E = get_organ(bp)
 		dat += "<BR><b>[capitalize(E.name)]:</b> <A href='?src=\ref[src];item=[bp]'>[inv_slot.holding?.name || "nothing"]</A>"
 
 	// Do they get an option to set internals?
@@ -440,7 +420,7 @@
 
 /mob/living/carbon/human/proc/get_darksight_range()
 	if(species.vision_organ)
-		var/obj/item/organ/internal/eyes/I = get_internal_organ(species.vision_organ)
+		var/obj/item/organ/internal/eyes/I = get_organ(species.vision_organ)
 		if(istype(I))
 			return I.darksight_range
 	return species.darksight_range
@@ -485,7 +465,7 @@
 /mob/living/carbon/human/empty_stomach()
 	SET_STATUS_MAX(src, STAT_STUN, 3)
 
-	var/obj/item/organ/internal/stomach/stomach = get_internal_organ(BP_STOMACH)
+	var/obj/item/organ/internal/stomach/stomach = get_organ(BP_STOMACH)
 	var/nothing_to_puke = FALSE
 	if(should_have_organ(BP_STOMACH))
 		if(!istype(stomach) || (stomach.ingested.total_volume <= 0 && stomach.contents.len == 0))
@@ -558,7 +538,7 @@
 
 /mob/living/carbon/human/revive()
 
-	species.create_organs(src) // Reset our organs/limbs.
+	species.create_missing_organs(src) // Reset our organs/limbs.
 	restore_all_organs()       // Reapply robotics/amputated status from preferences.
 	reset_blood()
 
@@ -592,7 +572,7 @@
 	else
 		germ_level = 0
 
-	for(var/obj/item/organ/external/organ in organs)
+	for(var/obj/item/organ/external/organ in get_external_organs())
 		//TODO check that organ is not covered
 		if(clean_feet || (organ.organ_tag in list(BP_L_HAND,BP_R_HAND)))
 			organ.clean()
@@ -603,7 +583,7 @@
 /mob/living/carbon/human/get_visible_implants(var/class = 0)
 
 	var/list/visible_implants = list()
-	for(var/obj/item/organ/external/organ in src.organs)
+	for(var/obj/item/organ/external/organ in get_external_organs())
 		for(var/obj/item/O in organ.implants)
 			if(!istype(O,/obj/item/implant) && (O.w_class > class) && !istype(O,/obj/item/shard/shrapnel))
 				visible_implants += O
@@ -611,7 +591,7 @@
 	return(visible_implants)
 
 /mob/living/carbon/human/embedded_needs_process()
-	for(var/obj/item/organ/external/organ in src.organs)
+	for(var/obj/item/organ/external/organ in src.get_external_organs())
 		for(var/obj/item/O in organ.implants)
 			if(!istype(O, /obj/item/implant)) //implant type items do not cause embedding effects, see handle_embedded_objects()
 				return 1
@@ -620,14 +600,14 @@
 /mob/living/carbon/human/handle_embedded_and_stomach_objects()
 
 	if(embedded_flag)
-		for(var/obj/item/organ/external/organ in organs)
+		for(var/obj/item/organ/external/organ in get_external_organs())
 			if(organ.splinted)
 				continue
 			for(var/obj/item/O in organ.implants)
 				if(!istype(O,/obj/item/implant) && O.w_class > ITEM_SIZE_TINY && prob(5)) //Moving with things stuck in you could be bad.
 					jostle_internal_object(organ, O)
 
-	var/obj/item/organ/internal/stomach/stomach = get_internal_organ(BP_STOMACH)
+	var/obj/item/organ/internal/stomach/stomach = get_organ(BP_STOMACH)
 	if(stomach && stomach.contents.len)
 		for(var/obj/item/O in stomach.contents)
 			if((O.edge || O.sharp) && prob(5))
@@ -659,68 +639,43 @@
 			force_update_limbs()
 			update_body()
 
-/mob/living/carbon/human/proc/set_species(var/new_species, var/default_colour = 1)
-	if(!dna)
-		if(!new_species)
-			new_species = global.using_map.default_species
-	else
-		if(!new_species)
-			new_species = dna.species
+//set_species should not handle the entirety of initing the mob, and should not trigger deep updates
+//It focuses on setting up specie related data, without force applying them uppon organs and the mob's appearence.
+// For transforming an existing mob, look at change_species()
+/mob/living/carbon/human/proc/set_species(var/new_species_name)
+	if(!new_species_name)
+		CRASH("set_species on mob '[src]' was passed a null species name '[new_species_name]'!")
+	var/new_species = get_species_by_key(new_species_name)
+	if(species?.name == new_species_name)
+		return
+	if(!new_species)
+		CRASH("set_species on mob '[src]' was passed a bad species name '[new_species_name]'!")
 
-	// No more invisible screaming wheelchairs because of set_species() typos.
-	if(!get_species_by_key(new_species))
-		new_species = global.using_map.default_species
-
-	if(dna)
-		dna.species = new_species
-
+	//Handle old species transition
 	if(species)
-
-		if(species.name && species.name == new_species)
-			return
-
-		// Clear out their species abilities.
 		species.remove_base_auras(src)
 		species.remove_inherent_verbs(src)
-		holder_type = null
 
-	species = get_species_by_key(new_species)
-	species.handle_pre_spawn(src)
-
-	skin_colour = (species.base_color && default_colour) ? species.base_color : COLOR_BLACK
-
+	//Update our species
+	species = new_species
+	if(dna)
+		dna.species = new_species_name
+	holder_type = null
 	if(species.holder_type)
 		holder_type = species.holder_type
+	maxHealth = species.total_health
+	mob_size = species.mob_size
+	remove_extension(src, /datum/extension/armor)
+	if(species.natural_armour_values)
+		set_extension(src, /datum/extension/armor, species.natural_armour_values)
 
 	var/decl/pronouns/new_pronouns = get_pronouns_by_gender(get_sex())
 	if(!istype(new_pronouns) || !(new_pronouns in species.available_pronouns))
 		new_pronouns = species.default_pronouns
 		set_gender(new_pronouns.name)
 
-	icon_state = lowertext(species.name)
-	set_bodytype(species.default_bodytype, TRUE)
-
-	species.create_organs(src)
-	species.handle_post_spawn(src)
-
-	maxHealth = species.total_health
-	remove_extension(src, /datum/extension/armor)
-	if(species.natural_armour_values)
-		set_extension(src, /datum/extension/armor, species.natural_armour_values)
-
-	default_pixel_x = initial(pixel_x) + bodytype.pixel_offset_x
-	default_pixel_y = initial(pixel_y) + bodytype.pixel_offset_y
-	default_pixel_z = initial(pixel_z) + bodytype.pixel_offset_z
-	reset_offsets()
-
-	appearance_descriptors = null
-	if(LAZYLEN(species.appearance_descriptors))
-		for(var/desctype in species.appearance_descriptors)
-			var/datum/appearance_descriptor/descriptor = species.appearance_descriptors[desctype]
-			LAZYSET(appearance_descriptors, descriptor.name, descriptor.default_value)
-
-	if(!(species.appearance_flags & HAS_UNDERWEAR))
-		QDEL_NULL_LIST(worn_underwear)
+	//Handle bodytype
+	set_bodytype(species.get_bodytype_by_pronouns(new_pronouns), FALSE)
 
 	available_maneuvers = species.maneuvers.Copy()
 
@@ -731,20 +686,19 @@
 	bone_material = species.bone_material
 	bone_amount =   species.bone_amount
 
-	refresh_visible_overlays()
+	full_prosthetic = null //code dum thinks ur robot always
+	default_walk_intent = null
+	default_run_intent = null
+	move_intent = null
+	move_intents = species.move_intents.Copy()
+	set_move_intent(GET_DECL(move_intents[1]))
+	if(!istype(move_intent))
+		set_next_usable_move_intent()
+	update_emotes()
+	return TRUE
 
-	if(!(b_type in species.blood_types))
-		b_type = pickweight(species.blood_types)
-		if(dna)
-			dna.b_type = b_type
-	reset_blood()
-
-	// Rebuild the HUD and visual elements.
-	if(client)
-		Login()
-
-	full_prosthetic = null
-
+//Syncs cultural tokens to the currently set specie, and may trigger a language update
+/mob/living/carbon/human/proc/apply_species_cultural_info()
 	var/update_lang
 	for(var/token in ALL_CULTURAL_TAGS)
 		if(species.force_cultural_info && species.force_cultural_info[token])
@@ -754,29 +708,43 @@
 			update_lang = TRUE
 			set_cultural_value(token, species.default_cultural_info[token], defer_language_update = TRUE)
 
-	default_walk_intent = null
-	default_run_intent = null
-	move_intent = null
-	move_intents = species.move_intents.Copy()
-	set_move_intent(GET_DECL(move_intents[1]))
-	if(!istype(move_intent))
-		set_next_usable_move_intent()
-
 	if(update_lang)
-		languages.Cut()
-		default_language = null
 		update_languages()
+
+//Drop anything that cannot be worn by the current specie of the mob
+/mob/living/carbon/human/proc/apply_species_inventory_restrictions()
+	if(species)
+		if(!(species.appearance_flags & HAS_UNDERWEAR))
+			QDEL_NULL_LIST(worn_underwear)
 
 	//recheck species-restricted clothing
 	for(var/slot in global.all_inventory_slots)
 		var/obj/item/clothing/C = get_equipped_item(slot)
-		if(istype(C) && !C.mob_can_equip(src, slot, 1))
+		if(istype(C) && !C.mob_can_equip(src, slot, TRUE, TRUE))
 			unEquip(C)
 
-	update_emotes()
-	return 1
+//This handles actually updating our visual appearance
+// Triggers deep update of limbs and hud
+/mob/living/carbon/human/proc/apply_species_appearance()
+	if(!species)
+		icon_state = lowertext(SPECIES_HUMAN)
+		skin_colour = COLOR_BLACK
+	else
+		species.apply_appearence(src)
+
+	force_update_limbs() //updates bodytype
+	default_pixel_x = initial(pixel_x) + bodytype.pixel_offset_x
+	default_pixel_y = initial(pixel_y) + bodytype.pixel_offset_y
+	default_pixel_z = initial(pixel_z) + bodytype.pixel_offset_z
+
+	reset_offsets()
+
+	// Rebuild the HUD and visual elements only if we got a client.
+	hud_reset(TRUE)
 
 /mob/living/carbon/human/proc/update_languages()
+	if(!length(cultural_info))
+		log_warning("'[src]'([x], [y], [z]) doesn't have any cultural info set and is attempting to update its language!!")
 
 	var/list/permitted_languages = list()
 	var/list/free_languages =      list()
@@ -874,25 +842,11 @@
 	else
 		return ..()
 
-/mob/living/carbon/human/getDNA()
-	if(species.species_flags & SPECIES_FLAG_NO_SCAN)
-		return null
-	if(isSynthetic())
-		return
-	..()
-
-/mob/living/carbon/human/setDNA()
-	if(species.species_flags & SPECIES_FLAG_NO_SCAN)
-		return
-	if(isSynthetic())
-		return
-	..()
-
 /mob/living/carbon/human/has_brain()
-	. = istype(get_internal_organ(BP_BRAIN), /obj/item/organ/internal)
+	. = istype(get_organ(BP_BRAIN), /obj/item/organ/internal)
 
 /mob/living/carbon/human/check_has_eyes()
-	var/obj/item/organ/internal/eyes = get_internal_organ(BP_EYES)
+	var/obj/item/organ/internal/eyes = get_organ(BP_EYES)
 	. = istype(eyes) && eyes.is_usable()
 
 /mob/living/carbon/human/slip(var/slipped_on, stun_duration = 8)
@@ -920,7 +874,7 @@
 
 // Similar to get_pulse, but returns only integer numbers instead of text.
 /mob/living/carbon/human/proc/get_pulse_as_number()
-	var/obj/item/organ/internal/heart/heart_organ = get_internal_organ(BP_HEART)
+	var/obj/item/organ/internal/heart/heart_organ = get_organ(BP_HEART)
 	if(!heart_organ)
 		return 0
 
@@ -941,7 +895,7 @@
 
 //generates realistic-ish pulse output based on preset levels as text
 /mob/living/carbon/human/proc/get_pulse(var/method)	//method 0 is for hands, 1 is for machines, more accurate
-	var/obj/item/organ/internal/heart/heart_organ = get_internal_organ(BP_HEART)
+	var/obj/item/organ/internal/heart/heart_organ = get_organ(BP_HEART)
 	if(!heart_organ)
 		// No heart, no pulse
 		return "0"
@@ -957,7 +911,7 @@
 // output for machines ^	 ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ output for people
 
 /mob/living/carbon/human/proc/pulse()
-	var/obj/item/organ/internal/heart/H = get_internal_organ(BP_HEART)
+	var/obj/item/organ/internal/heart/H = get_organ(BP_HEART)
 	return H ? H.pulse : PULSE_NONE
 
 /mob/living/carbon/human/can_devour(atom/movable/victim, var/silent = FALSE)
@@ -965,7 +919,7 @@
 	if(!should_have_organ(BP_STOMACH))
 		return ..()
 
-	var/obj/item/organ/internal/stomach/stomach = get_internal_organ(BP_STOMACH)
+	var/obj/item/organ/internal/stomach/stomach = get_organ(BP_STOMACH)
 	if(!stomach || !stomach.is_usable())
 		if(!silent)
 			to_chat(src, SPAN_WARNING("Your stomach is not functional!"))
@@ -984,7 +938,7 @@
 	. = stomach.get_devour_time(victim) || ..()
 
 /mob/living/carbon/human/move_to_stomach(atom/movable/victim)
-	var/obj/item/organ/internal/stomach/stomach = get_internal_organ(BP_STOMACH)
+	var/obj/item/organ/internal/stomach/stomach = get_organ(BP_STOMACH)
 	if(istype(stomach))
 		victim.forceMove(stomach)
 
@@ -992,9 +946,9 @@
 
 	var/obj/item/organ/external/affecting
 	if(organ_check in list(BP_HEART, BP_LUNGS))
-		affecting = organs_by_name[BP_CHEST]
+		affecting = get_organ(BP_CHEST)
 	else if(organ_check in list(BP_LIVER, BP_KIDNEYS))
-		affecting = organs_by_name[BP_GROIN]
+		affecting = get_organ(BP_GROIN)
 
 	if(affecting && BP_IS_PROSTHETIC(affecting))
 		return 0
@@ -1011,7 +965,7 @@
 
 /mob/living/carbon/human/get_breath_volume()
 	. = ..()
-	var/obj/item/organ/internal/heart/H = get_internal_organ(BP_HEART)
+	var/obj/item/organ/internal/heart/H = get_organ(BP_HEART)
 	if(H && !H.open)
 		. *= (!BP_IS_PROSTHETIC(H)) ? pulse()/PULSE_NORM : 1.5
 
@@ -1033,11 +987,11 @@
 	else
 		var/decl/pronouns/G = get_pronouns()
 		visible_message( \
-			"<span class='notice'>[src] examines [G.self].</span>", \
-			"<span class='notice'>You check yourself for injuries.</span>" \
+			SPAN_NOTICE("[src] examines [G.self]."), \
+			SPAN_NOTICE("You check yourself for injuries.") \
 			)
 
-		for(var/obj/item/organ/external/org in organs)
+		for(var/obj/item/organ/external/org in get_external_organs())
 			var/list/status = list()
 
 			var/feels = 1 + round(org.pain/100, 0.1)
@@ -1088,12 +1042,12 @@
 /mob/living/carbon/human/proc/resuscitate()
 	if(!is_asystole() || !should_have_organ(BP_HEART))
 		return
-	var/obj/item/organ/internal/heart/heart = get_internal_organ(BP_HEART)
+	var/obj/item/organ/internal/heart/heart = get_organ(BP_HEART)
 	if(istype(heart) && !(heart.status & ORGAN_DEAD))
 		var/species_organ = species.breathing_organ
 		var/active_breaths = 0
 		if(species_organ)
-			var/obj/item/organ/internal/lungs/L = get_internal_organ(species_organ)
+			var/obj/item/organ/internal/lungs/L = get_organ(species_organ)
 			if(L)
 				active_breaths = L.active_breathing
 		if(!nervous_system_failure() && active_breaths)
@@ -1153,7 +1107,7 @@
 
 /mob/living/carbon/human/can_drown()
 	if(!internal && (!istype(wear_mask) || !wear_mask.filters_water()))
-		var/obj/item/organ/internal/lungs/L = locate() in internal_organs
+		var/obj/item/organ/internal/lungs/L = get_organ(BP_LUNGS)
 		return (!L || L.can_drown())
 	return FALSE
 
@@ -1166,7 +1120,7 @@
 				return ..(volume_needed, T.above)
 		var/can_breathe_water = (istype(wear_mask) && wear_mask.filters_water()) ? TRUE : FALSE
 		if(!can_breathe_water)
-			var/obj/item/organ/internal/lungs/lungs = get_internal_organ(BP_LUNGS)
+			var/obj/item/organ/internal/lungs/lungs = get_organ(BP_LUNGS)
 			if(lungs && lungs.can_drown())
 				can_breathe_water = TRUE
 		if(can_breathe_water)
@@ -1199,7 +1153,7 @@
 /mob/living/carbon/human/needs_wheelchair()
 	var/stance_damage = 0
 	for(var/limb_tag in list(BP_L_LEG, BP_R_LEG, BP_L_FOOT, BP_R_FOOT))
-		var/obj/item/organ/external/E = organs_by_name[limb_tag]
+		var/obj/item/organ/external/E = get_organ(limb_tag)
 		if(!E || !E.is_usable())
 			stance_damage += 2
 	return stance_damage >= 4
@@ -1211,7 +1165,7 @@
 /mob/living/carbon/human/handle_additional_vomit_reagents(var/obj/effect/decal/cleanable/vomit/vomit)
 	..()
 	if(should_have_organ(BP_STOMACH))
-		var/obj/item/organ/internal/stomach/stomach = get_internal_organ(BP_STOMACH)
+		var/obj/item/organ/internal/stomach/stomach = get_organ(BP_STOMACH)
 		if(!stomach || stomach.is_broken() || (stomach.is_bruised() && prob(stomach.damage)))
 			if(should_have_organ(BP_HEART))
 				vessel.trans_to_obj(vomit, 5)
@@ -1253,7 +1207,7 @@
 /mob/living/carbon/human/check_dexterity(var/dex_level = DEXTERITY_FULL, var/silent, var/force_active_hand)
 	if(isnull(force_active_hand))
 		force_active_hand = get_active_held_item_slot()
-	var/obj/item/organ/external/active_hand = organs_by_name[force_active_hand]
+	var/obj/item/organ/external/active_hand = get_organ(force_active_hand)
 	var/dex_malus = 0
 	if(getBrainLoss() && getBrainLoss() > config.dex_malus_brainloss_threshold) ///brainloss shouldn't instantly cripple you, so the effects only start once past the threshold and escalate from there.
 		dex_malus = round(clamp(round(getBrainLoss()-config.dex_malus_brainloss_threshold)/10, DEXTERITY_NONE, DEXTERITY_FULL))
@@ -1278,7 +1232,7 @@
 		. = TRUE
 	if(species.handle_additional_hair_loss(src))
 		. = TRUE
-	for(var/obj/item/organ/external/E in organs)
+	for(var/obj/item/organ/external/E in get_external_organs())
 		for(var/mark in E.markings)
 			var/decl/sprite_accessory/marking/mark_datum = GET_DECL(mark)
 			if(mark_datum.flags & HAIR_LOSS_VULNERABLE)
@@ -1295,8 +1249,8 @@
 /mob/living/carbon/human/proc/get_hands_organs()
 	. = list()
 	for(var/bp in held_item_slots)
-		if(organs_by_name[bp])
-			. |= organs_by_name[bp]
+		if(get_organ(bp))
+			. |= get_organ(bp)
 
 /mob/living/carbon/human/get_admin_job_string()
 	return job || uppertext(species.name)
@@ -1323,3 +1277,74 @@
 		"right pocket" = list(r_store,                 "in"),
 		"rig" =          list(wearing_rig?.air_supply, "in")
 	)
+
+//Set and force the mob to update according to the given DNA
+// Will reset the entire mob's state, regrow limbs/organ etc
+/mob/living/carbon/human/proc/apply_dna(var/datum/dna/new_dna)
+	if(!new_dna)
+		CRASH("mob/living/carbon/human/proc/apply_dna() : Got null dna")
+	src.dna = new_dna
+
+	//Set species and real name data
+	set_real_name(new_dna.real_name)
+	set_species(new_dna.species)
+	//Revive actually regen organs, reset their appearence and makes sure if the player is kicked out they get reinserted in
+	revive()
+
+	species.handle_pre_spawn(src)
+	apply_species_appearance()
+	apply_species_cultural_info()
+	apply_species_inventory_restrictions()
+	species.handle_post_spawn(src)
+
+	refresh_visible_overlays()
+
+//Sets the mob's real name and update all the proper fields
+/mob/living/carbon/human/proc/set_real_name(var/newname)
+	if(!newname)
+		return
+	real_name = newname
+	SetName(newname)
+	if(dna)
+		dna.real_name = newname
+	if(mind)
+		mind.name = newname
+
+//Human mob specific init code. Meant to be used only on init.
+/mob/living/carbon/human/proc/setup(var/species_name = null, var/datum/dna/new_dna = null)
+	if(new_dna)
+		species_name = new_dna.species
+		src.dna = new_dna
+	else if(!species_name)
+		species_name = global.using_map.default_species //Humans cannot exist without a species!
+
+	set_species(species_name)
+
+	if(new_dna)
+		set_real_name(new_dna.real_name)
+	else
+		try_generate_default_name()
+		dna.ready_dna(src) //regen dna filler only if we haven't forced the dna already
+
+	species.handle_pre_spawn(src)
+	apply_species_cultural_info()
+	apply_species_appearance()
+	if(!LAZYLEN(get_external_organs()))
+		species.create_missing_organs(src) //Syncs DNA when adding organs
+	species.handle_post_spawn(src)
+
+	UpdateAppearance() //Apply dna appearence to mob, causes DNA to change because filler values are regenerated
+	reset_blood()
+
+//If the mob has its default name it'll try to generate /obtain a proper one
+/mob/living/carbon/human/proc/try_generate_default_name()
+	if(name != initial(name))
+		return
+	if(species)
+		set_real_name(species.get_default_name())
+	else
+		SetName(initial(name))
+
+//Runs last after setup and after the parent init has been executed.
+/mob/living/carbon/human/proc/post_setup(var/species_name = null, var/datum/dna/new_dna = null)
+	refresh_visible_overlays() //Do this exactly once per setup

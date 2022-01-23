@@ -24,7 +24,7 @@
 	. = ..()
 	var/jitteriness = amount
 	if(jitteriness >= 400)
-		var/obj/item/organ/internal/heart/L = victim.get_internal_organ(BP_HEART)
+		var/obj/item/organ/internal/heart/L = victim.get_organ(BP_HEART)
 		if(!istype(L))
 			return 
 		if(BP_IS_PROSTHETIC(L))

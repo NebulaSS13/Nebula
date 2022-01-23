@@ -30,5 +30,5 @@
 		to_chat(user, SPAN_DANGER("Your [organ_to_implant_into.name] is not prosthetic, and therefore \the [src] can not be installed!"))
 		return ..()
 
-	replaced(user, organ_to_implant_into)
+	user.add_organ(src, organ_to_implant_into)
 	to_chat(user, SPAN_NOTICE("Your [organ_to_implant_into.name] has been replaced with \the [src]."))

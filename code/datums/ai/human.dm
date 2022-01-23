@@ -22,7 +22,7 @@
 	if(!H.restrained() && H.shock_stage < 40 && prob(3))
 		var/maxdam = 0
 		var/obj/item/organ/external/damaged_organ = null
-		for(var/obj/item/organ/external/E in H.organs)
+		for(var/obj/item/organ/external/E in H.get_external_organs())
 			if(!E.can_feel_pain()) continue
 			var/dam = E.get_damage()
 			// make the choice of the organ depend on damage,
@@ -41,7 +41,7 @@
 			else
 				H.custom_emote("rubs [G.his] [damaged_organ.name] carefully.")
 
-		for(var/obj/item/organ/I in H.internal_organs)
+		for(var/obj/item/organ/I in H.get_internal_organs())
 			if((I.status & ORGAN_DEAD) || BP_IS_PROSTHETIC(I)) continue
 			if(I.damage > 2) if(prob(2))
 				var/obj/item/organ/external/parent = H.get_organ(I.parent_organ)

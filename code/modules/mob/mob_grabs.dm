@@ -8,15 +8,11 @@
 /mob/proc/apply_effect(var/effect = 0,var/effecttype = STUN, var/blocked = 0)
 	return
 // See /mob/living/carbon/human for this one.
-/mob/proc/get_organ(var/zone)
-	return
+/mob/proc/get_organ(var/organ_tag)
+	return //Returns the organ matching the tag
 /mob/proc/get_organs()
 	return
 // End grab casting stubs.
-/mob/proc/get_internal_organ(var/organ_tag)
-	return
-/mob/proc/get_internal_organs()
-	return
 
 /mob/can_be_grabbed(var/mob/grabber, var/target_zone)
 	if(!grabber.can_pull_mobs)

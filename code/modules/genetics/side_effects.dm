@@ -55,7 +55,7 @@
 	H.visible_message("<B>\The [H]</B>'s limbs start shivering uncontrollably.")
 /datum/genetics/side_effect/bone_snap/finish(mob/living/carbon/human/H)
 	if(!H.reagents.has_reagent(/decl/material/liquid/brute_meds))
-		var/obj/item/organ/external/E = pick(H.organs)
+		var/obj/item/organ/external/E = pick(H.get_external_organs())
 		if(E)
 			E.take_external_damage(20, 0, 0)
 			E.fracture()

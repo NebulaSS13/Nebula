@@ -3,6 +3,11 @@
 	icon_name = ""
 	dislocated = -1
 
+/obj/item/organ/external/stump/on_remove_effects(mob/living/last_owner)
+	if(!(. = ..()))
+		return
+	qdel(src)
+
 /obj/item/organ/external/stump/Initialize(mapload, var/internal, var/obj/item/organ/external/limb)
 	if(istype(limb))
 		SetName("stump of \a [limb.name]")

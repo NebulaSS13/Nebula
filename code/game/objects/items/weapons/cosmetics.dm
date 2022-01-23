@@ -42,7 +42,7 @@
 
 	if(ishuman(A))
 		var/mob/living/carbon/human/H = A
-		var/obj/item/organ/external/head/head = H.organs_by_name[BP_HEAD]
+		var/obj/item/organ/external/head/head = H.get_organ(BP_HEAD)
 
 		if(!istype(head))
 			return

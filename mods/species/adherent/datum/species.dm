@@ -105,13 +105,19 @@
 		BP_CELL =         /obj/item/organ/internal/cell/adherent,
 		BP_COOLING_FINS = /obj/item/organ/internal/powered/cooling_fins
 		)
+
+	vital_organs = list(
+		BP_BRAIN = list("path" = /obj/item/organ/internal/brain/adherent),
+		BP_GROIN = list("path" = /obj/item/organ/external/groin/crystal),
+		BP_CHEST = list("path" = /obj/item/organ/external/chest/crystal),
+	)
 	move_trail = /obj/effect/decal/cleanable/blood/tracks/snake
 	max_players = 3
 
 /decl/species/adherent/can_overcome_gravity(var/mob/living/carbon/human/H)
 	. = FALSE
 	if(H && H.stat == CONSCIOUS)
-		for(var/obj/item/organ/internal/powered/float/float in H.internal_organs)
+		for(var/obj/item/organ/internal/powered/float/float in H.get_internal_organs())
 			if(float.active && float.is_usable())
 				. = TRUE
 				break
@@ -125,7 +131,7 @@
 /decl/species/adherent/handle_fall_special(var/mob/living/carbon/human/H, var/turf/landing)
 	var/float_is_usable = FALSE
 	if(H && H.stat == CONSCIOUS)
-		for(var/obj/item/organ/internal/powered/float/float in H.internal_organs)
+		for(var/obj/item/organ/internal/powered/float/float in H.get_internal_organs())
 			if(float.is_usable())
 				float_is_usable = TRUE
 				break

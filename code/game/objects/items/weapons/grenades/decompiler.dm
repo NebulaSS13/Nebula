@@ -100,7 +100,7 @@
 
 				if(ishuman(thing))
 					var/mob/living/carbon/human/H = thing
-					for(var/obj/item/organ/external/limb in H.organs)
+					for(var/obj/item/organ/external/limb in H.get_external_organs())
 						if(BP_IS_PROSTHETIC(limb) && !limb.is_stump() && !length(limb.children))
 							limb.dismember()
 							limb.forceMove(src)
