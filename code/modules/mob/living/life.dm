@@ -76,7 +76,7 @@
 
 /mob/living/proc/apply_chemical_effects()
 	var/burn_regen = GET_CHEMICAL_EFFECT(src, CE_REGEN_BURN)
-	var/brute_regen = GET_CHEMICAL_EFFECT(src, CE_REGEN_BURN)
+	var/brute_regen = GET_CHEMICAL_EFFECT(src, CE_REGEN_BRUTE)
 	if(burn_regen || brute_regen)
 		heal_organ_damage(brute_regen, burn_regen)
 		return TRUE
