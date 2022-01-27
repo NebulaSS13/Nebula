@@ -174,7 +174,7 @@ INITIALIZE_IMMEDIATE(/obj/effect/gas_overlay)
 	var/gas_symbol
 	var/gas_flags = 0
 	var/gas_tile_overlay = "generic"
-	var/gas_condensation_point = 0
+	var/gas_condensation_point = null
 	var/gas_metabolically_inert = FALSE // If false, material will move into the bloodstream when breathed.
 	// Armor values generated from properties
 	var/list/basic_armor
