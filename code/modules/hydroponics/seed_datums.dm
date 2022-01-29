@@ -391,7 +391,7 @@
 	kitchen_tag = "mushroom"
 
 /datum/seed/mushroom/make_splat(var/turf/T, var/obj/item/thrown)
-	if(!splat_type || locate(splat_type) in T)
+	if(!splat_type || (locate(splat_type) in T))
 		return
 	new splat_type(T, src)
 	// No further logic; the vine will handle it.

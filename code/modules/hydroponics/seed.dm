@@ -201,10 +201,10 @@
 		environment.adjust_gas(/decl/material/gas/oxygen, req_CO2_moles, 1)
 
 /datum/seed/proc/make_splat(var/turf/T, var/obj/item/thrown)
-	if(!splat_type || locate(splat_type) in T)
+	if(!splat_type || (locate(splat_type) in T))
 		return
 	var/atom/splat = new splat_type(T, src)
-	splat.SetName("[name] [pick("smear","smudge","splatter")]")
+	splat.SetName("[seed_name] [pick("smear","smudge","splatter")]")
 	if(get_trait(TRAIT_BIOLUM))
 		var/clr
 		if(get_trait(TRAIT_BIOLUM_COLOUR))
@@ -222,14 +222,14 @@
 		splat_reagents = new /datum/reagents(INFINITY, global.temp_reagents_holder)
 		var/potency = get_trait(TRAIT_POTENCY)
 		for(var/rid in chems)
-			var/list/reagent_data = chems[rid]
-			if(reagent_data && reagent_data.len)
-				var/rtotal = reagent_data[1]
-				var/list/data = list()
-				if(reagent_data.len > 1 && potency > 0)
-					rtotal += round(potency/reagent_data[2])
+			var/list/reagent_amounts = chems[rid]
+			if(LAZYLEN(reagent_amounts))
+				var/rtotal = reagent_amounts[1]
+				var/list/data = null
+				if(reagent_amounts?[2] && potency > 0)
+					rtotal += round(potency/reagent_amounts[2])
 				if(rid == /decl/material/liquid/nutriment)
-					data[seed_name] = max(1,rtotal)
+					LAZYSET(data, seed_name, max(1,rtotal))
 				splat_reagents.add_reagent(rid,max(1,rtotal),data)
 	if(splat_reagents)
 		var/splat_range = min(10,max(1,get_trait(TRAIT_POTENCY)/15))
