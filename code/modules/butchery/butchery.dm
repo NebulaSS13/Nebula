@@ -35,8 +35,8 @@
 
 /mob/living/carbon/human/harvest_meat()
 	. = ..()
-	for(var/obj/item/organ/internal/I in internal_organs)
-		I.removed()
+	for(var/obj/item/organ/internal/I in get_internal_organs())
+		remove_organ(I)
 		LAZYADD(., I)
 
 /mob/living/proc/harvest_skin()

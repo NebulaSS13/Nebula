@@ -103,7 +103,7 @@
 				gas_info+= "<li>It contaminates exposed clothing with residue.</li>"
 			if(mat.flags & MAT_FLAG_FUSION_FUEL)
 				gas_info+= "<li>It can be used as fuel in a fusion reaction.</li>"
-			if(mat.gas_condensation_point > 0 && mat.gas_condensation_point < INFINITY)
+			if(!isnull(mat.gas_condensation_point) && mat.gas_condensation_point < INFINITY)
 				gas_info += "<li>It condenses at [mat.gas_condensation_point] K.</li>"
 			material_info += "</ul>"
 

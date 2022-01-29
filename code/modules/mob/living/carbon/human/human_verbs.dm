@@ -147,20 +147,20 @@
 
 	if(usr.stat || usr.restrained() || !isliving(usr)) return
 
-	for(var/obj/item/organ/external/o in organs)
+	for(var/obj/item/organ/external/o in get_external_organs())
 		if (o && o.splinted)
 			var/obj/item/S = o.splinted
 			if(!istype(S) || S.loc != o) //can only remove splints that are actually worn on the organ (deals with hardsuit splints)
-				to_chat(user, "<span class='warning'>You cannot remove any splints on [src]'s [o.name] - [o.splinted] is supporting some of the breaks.</span>")
+				to_chat(user, SPAN_WARNING("You cannot remove any splints on [src]'s [o.name] - [o.splinted] is supporting some of the breaks."))
 			else
 				S.add_fingerprint(user)
 				if(o.remove_splint())
 					user.put_in_active_hand(S)
 					removed_splint = 1
 	if(removed_splint)
-		user.visible_message("<span class='danger'>\The [user] removes \the [src]'s splints!</span>")
+		user.visible_message(SPAN_DANGER("\The [user] removes \the [src]'s splints!"))
 	else
-		to_chat(user, "<span class='warning'>\The [src] has no splints that can be removed.</span>")
+		to_chat(user, SPAN_WARNING("\The [src] has no splints that can be removed."))
 	verbs -= /mob/living/carbon/human/proc/remove_splints
 
 /mob/living/carbon/human/verb/check_pulse()
@@ -283,8 +283,7 @@
 		self = 1 // Removing object from yourself.
 
 	var/list/limbs = list()
-	for(var/limb in organs_by_name)
-		var/obj/item/organ/external/current_limb = organs_by_name[limb]
+	for(var/obj/item/organ/external/current_limb in get_external_organs())
 		if(current_limb && current_limb.dislocated > 0 && !current_limb.is_parent_dislocated()) //if the parent is also dislocated you will have to relocate that first
 			limbs |= current_limb
 	var/obj/item/organ/external/current_limb = input(usr,"Which joint do you wish to relocate?") as null|anything in limbs

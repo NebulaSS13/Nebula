@@ -59,8 +59,8 @@
 		to_chat(user, SPAN_WARNING("\The [H]'s [cover] is in the way."))
 		return
 
-	for(var/tag in list(BP_R_HAND,BP_L_HAND))
-		var/obj/item/organ/external/O = H.organs_by_name[tag]
+	for(var/tag in list(BP_R_HAND,BP_L_HAND)) //#FIXME: Alien prints??
+		var/obj/item/organ/external/O = H.get_organ(tag)
 		if(istype(O) && !O.is_stump())
 			return TRUE
 	to_chat(user, SPAN_WARNING("They don't have any hands."))

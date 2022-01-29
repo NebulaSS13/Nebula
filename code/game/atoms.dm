@@ -322,7 +322,7 @@ its easier to just keep the beam vertical.
 	blood_color = COLOR_BLOOD_HUMAN
 	if(istype(M))
 		if (!istype(M.dna, /datum/dna))
-			M.dna = new /datum/dna(null)
+			M.dna = new /datum/dna()
 			M.dna.real_name = M.real_name
 		M.check_dna()
 		blood_color = M.species.get_blood_color(M)
@@ -521,7 +521,7 @@ its easier to just keep the beam vertical.
 				M.adjustBruteLoss(damage)
 				return
 
-			var/obj/item/organ/external/affecting = pick(H.organs)
+			var/obj/item/organ/external/affecting = pick(H.get_external_organs())
 			if(affecting)
 				to_chat(M, "<span class='danger'>You land heavily on your [affecting.name]!</span>")
 				affecting.take_external_damage(damage, 0)

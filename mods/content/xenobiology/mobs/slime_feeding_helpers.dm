@@ -30,12 +30,13 @@ var/global/list/slime_pain_messages = list(
 
 /mob/living/carbon/human/eaten_by_slime()
 	var/chomp_loc = loc
-	if(length(organs) > 1)
-		var/obj/item/organ/external/E = pick(organs)
+	var/list/limbs = get_external_organs()
+	if(LAZYLEN(limbs) > 1)
+		var/obj/item/organ/external/E = pick(limbs)
 		if(E.limb_flags & ORGAN_FLAG_CAN_AMPUTATE)
 			E.dismember(FALSE, DISMEMBER_METHOD_ACID)
 			. = 1
-	if((QDELETED(src) || length(organs) <= 1) && species.remains_type)
+	if((QDELETED(src) || LAZYLEN(limbs) <= 1) && species.remains_type)
 		new species.remains_type(get_turf(chomp_loc))
 		. = ..()
 

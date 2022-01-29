@@ -1,9 +1,10 @@
 /obj/item/organ/internal/heart
 	name = "heart"
-	icon_state = "heart-on"
 	organ_tag = "heart"
 	parent_organ = BP_CHEST
+	icon_state = "heart-on"
 	dead_icon = "heart-off"
+	prosthetic_icon = "heart-prosthetic"
 	var/pulse = PULSE_NORM
 	var/heartbeat = 0
 	var/beat_sound = 'sound/effects/singlebeat.ogg'
@@ -16,15 +17,6 @@
 
 /obj/item/organ/internal/heart/open
 	open = 1
-
-/obj/item/organ/internal/heart/die()
-	if(dead_icon)
-		icon_state = dead_icon
-	..()
-
-/obj/item/organ/internal/heart/robotize(var/company = /decl/prosthetics_manufacturer, var/skip_prosthetics, var/keep_organs, var/apply_material = /decl/material/solid/metal/steel)
-	. = ..()
-	icon_state = "heart-prosthetic"
 
 /obj/item/organ/internal/heart/Process()
 	if(owner)
@@ -124,7 +116,7 @@
 		//Bleeding out
 		var/blood_max = 0
 		var/list/do_spray = list()
-		for(var/obj/item/organ/external/temp in owner.organs)
+		for(var/obj/item/organ/external/temp in owner.get_external_organs())
 
 			if(BP_IS_PROSTHETIC(temp))
 				continue

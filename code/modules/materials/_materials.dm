@@ -174,7 +174,7 @@ INITIALIZE_IMMEDIATE(/obj/effect/gas_overlay)
 	var/gas_symbol
 	var/gas_flags = 0
 	var/gas_tile_overlay = "generic"
-	var/gas_condensation_point = 0
+	var/gas_condensation_point = null
 	var/gas_metabolically_inert = FALSE // If false, material will move into the bloodstream when breathed.
 	// Armor values generated from properties
 	var/list/basic_armor
@@ -527,7 +527,7 @@ INITIALIZE_IMMEDIATE(/obj/effect/gas_overlay)
 		var/dam = (toxicity * removed)
 		if(toxicity_targets_organ && ishuman(M))
 			var/mob/living/carbon/human/H = M
-			var/obj/item/organ/internal/I = H.get_internal_organ(toxicity_targets_organ)
+			var/obj/item/organ/internal/I = H.get_organ(toxicity_targets_organ)
 			if(I)
 				var/can_damage = I.max_damage - I.damage
 				if(can_damage > 0)
@@ -608,7 +608,7 @@ INITIALIZE_IMMEDIATE(/obj/effect/gas_overlay)
 
 			if(!H.unacidable)
 				var/screamed
-				for(var/obj/item/organ/external/affecting in H.organs)
+				for(var/obj/item/organ/external/affecting in H.get_external_organs())
 					if(!screamed && affecting.can_feel_pain())
 						screamed = TRUE
 						H.emote("scream")

@@ -41,7 +41,7 @@ Small, little HP, poisonous.
 		S.create_breaches(BRUTE, 20)
 		if(!length(S.breaches)) //unable to make a hole
 			return
-	var/obj/item/organ/external/chest = H.organs_by_name[BP_CHEST]
+	var/obj/item/organ/external/chest = H.get_organ(BP_CHEST)
 	var/obj/item/holder/slug/holder = new(get_turf(src))
 	src.forceMove(holder)
 	chest.embed(holder,0,"\The [src] latches itself onto \the [H]!")

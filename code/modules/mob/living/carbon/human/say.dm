@@ -1,10 +1,10 @@
 /mob/living/carbon/human/say(var/message, var/decl/language/speaking, var/verb = "says", var/alt_name = "", whispering)
 	if(!whispering)
-		var/obj/item/organ/internal/voicebox/voice = locate() in internal_organs
+		var/obj/item/organ/internal/voicebox/voice = locate() in get_internal_organs()
 		// Check if the language they're speaking is vocal and not supplied by a machine, and if they are currently suffocating.
 		whispering = (whispering || has_chemical_effect(CE_VOICELOSS, 1))
 		if((!speaking || !(speaking.flags & (NONVERBAL|SIGNLANG))) && (!voice || !voice.is_usable() || !voice.assists_languages[speaking]) && !isSynthetic() && need_breathe() && failed_last_breath)
-			var/obj/item/organ/internal/lungs/L = get_internal_organ(species.breathing_organ)
+			var/obj/item/organ/internal/lungs/L = get_organ(species.breathing_organ)
 			if(!L || L.breath_fail_ratio > 0.9)
 				if(L && world.time < L.last_successful_breath + 2 MINUTES) //if we're in grace suffocation period, give it up for last words
 					to_chat(src, SPAN_WARNING("You use your remaining air to say something!"))
@@ -195,7 +195,7 @@
 	if(ispath(speaking, /decl/language))
 		speaking = GET_DECL(speaking)
 	if(species && speaking && (speaking.name in species.assisted_langs))
-		for(var/obj/item/organ/internal/voicebox/I in src.internal_organs)
+		for(var/obj/item/organ/internal/voicebox/I in get_internal_organs())
 			if(I.is_usable() && I.assists_languages[speaking])
 				return TRUE
 		return FALSE

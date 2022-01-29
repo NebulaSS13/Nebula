@@ -97,7 +97,7 @@
 				break
 		if(emagged)
 			for(var/mob/living/carbon/human/H in input_turf)
-				for(var/obj/item/organ/external/eating in H.organs)
+				for(var/obj/item/organ/external/eating in H.get_external_organs())
 					if(!eating.simulated || eating.anchored || eating.is_stump() || !can_eat(eating) || !prob(5))
 						continue
 					visible_message(SPAN_DANGER("\The [src] rips \the [H]'s [eating.name] clean off!"))

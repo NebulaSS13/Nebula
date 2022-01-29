@@ -112,10 +112,10 @@ var/global/arrest_security_status =  "Arrest"
 			set_implants("Fully synthetic body")
 		else
 			var/organ_data = list("\[*\]")
-			for(var/obj/item/organ/external/E in H.organs)
+			for(var/obj/item/organ/external/E in H.get_external_organs())
 				if(BP_IS_PROSTHETIC(E))
 					organ_data += "[E.model ? "[E.model] " : null][E.name] prosthetic"
-			for(var/obj/item/organ/internal/I in H.internal_organs)
+			for(var/obj/item/organ/internal/I in H.get_internal_organs())
 				if(BP_IS_ASSISTED(I))
 					organ_data += I.get_mechanical_assisted_descriptor()
 				else if (BP_IS_PROSTHETIC(I))
