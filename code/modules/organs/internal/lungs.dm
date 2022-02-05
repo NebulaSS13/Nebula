@@ -52,8 +52,9 @@
 
 /obj/item/organ/internal/lungs/do_uninstall(in_place, detach, ignore_children)
 	. = ..()
-	inhaled.my_atom = src
-	inhaled.parent = null
+	if(inhaled)
+		inhaled.my_atom = src
+		inhaled.parent = null
 
 /obj/item/organ/internal/lungs/proc/can_drown()
 	return !has_gills || !is_usable()
