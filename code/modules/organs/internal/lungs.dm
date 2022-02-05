@@ -34,11 +34,14 @@
 	QDEL_NULL(inhaled)
 	. = ..()
 
-/obj/item/organ/internal/lungs/Initialize()
+/obj/item/organ/internal/lungs/setup_reagents()
 	. = ..()
-	inhaled = new/datum/reagents/metabolism(240, (owner || src), CHEM_INHALE)
+	if(!inhaled)
+		inhaled = new/datum/reagents/metabolism(240, (owner || src), CHEM_INHALE)
+	if(!inhaled.my_atom)
+		inhaled.my_atom = src
 
-/obj/item/organ/internal/lungs/do_install()
+/obj/item/organ/internal/lungs/do_install(mob/living/carbon/human/target, obj/item/organ/external/affected, in_place)
 	if(!(. = ..()))
 		return
 	inhaled.my_atom = owner
