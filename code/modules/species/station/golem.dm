@@ -11,7 +11,7 @@
 	available_bodytypes = list(/decl/bodytype/golem)
 
 	unarmed_attacks = list(/decl/natural_attack/stomp, /decl/natural_attack/kick, /decl/natural_attack/punch)
-	species_flags = SPECIES_FLAG_NO_PAIN | SPECIES_FLAG_NO_SCAN | SPECIES_FLAG_NO_POISON
+	species_flags = SPECIES_FLAG_NO_PAIN | SPECIES_FLAG_NO_SCAN | SPECIES_FLAG_NO_POISON | SPECIES_FLAG_CRYSTALLINE
 	spawn_flags = SPECIES_IS_RESTRICTED
 	siemens_coefficient = 0
 
@@ -44,8 +44,6 @@
 
 	death_message = "becomes completely motionless..."
 	available_pronouns = list(/decl/pronouns/neuter)
-
-	is_crystalline = TRUE
 
 	force_cultural_info = list(
 		TAG_CULTURE =   /decl/cultural_info/culture/hidden/cultist,

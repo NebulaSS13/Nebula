@@ -36,7 +36,7 @@
 			H.set_gender(M.get_sex())
 		H.name = "unknown" // This will cause set_species() to randomize the mob name.
 		H.real_name = H.name
-		H.set_species(choice)
+		H.change_species(choice)
 		H.universal_speak = TRUE
 		var/datum/preferences/A = new()
 		A.randomize_appearance_and_body_for(H)

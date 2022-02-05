@@ -13,7 +13,6 @@ var/global/const/DEFAULT_SPECIES_HEALTH = 200
 	var/ooc_codex_information
 	var/cyborg_noun = "Cyborg"
 	var/hidden_from_codex = TRUE
-	var/is_crystalline = FALSE
 
 	var/holder_icon
 	var/list/available_bodytypes = list()
@@ -458,6 +457,10 @@ var/global/const/DEFAULT_SPECIES_HEALTH = 200
 
 //Checks if an existing limbs is the specie's default
 /decl/species/proc/is_default_limb(var/obj/item/organ/external/E)
+	if((species_flags & SPECIES_FLAG_CRYSTALLINE) != BP_IS_CRYSTAL(E))
+		return FALSE
+	if((species_flags & SPECIES_FLAG_SYNTHETIC) != BP_IS_PROSTHETIC(E))
+		return FALSE
 	for(var/tag in has_limbs)
 		if(E.organ_tag == tag)
 			var/list/organ_data = has_limbs[tag]
@@ -865,7 +868,7 @@ var/global/const/DEFAULT_SPECIES_HEALTH = 200
 		else			. = 8
 
 /decl/species/proc/post_organ_rejuvenate(var/obj/item/organ/org, var/mob/living/carbon/human/H)
-	if(org && (org.species ? org.species.is_crystalline : is_crystalline))
+	if(org && (org.species ? (org.species.species_flags & SPECIES_FLAG_CRYSTALLINE) : (species_flags & SPECIES_FLAG_CRYSTALLINE)))
 		org.status |= (ORGAN_BRITTLE|ORGAN_CRYSTAL)
 
 /decl/species/proc/check_no_slip(var/mob/living/carbon/human/H)
@@ -945,7 +948,7 @@ var/global/const/DEFAULT_SPECIES_HEALTH = 200
 		var/mob/living/carbon/human/dummy/mannequin/mannequin = get_mannequin("#species_[ckey(name)]")
 		if(mannequin)
 
-			mannequin.set_species(name)
+			mannequin.change_species(name)
 			customize_preview_mannequin(mannequin)
 
 			preview_icon = getFlatIcon(mannequin)

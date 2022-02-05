@@ -396,13 +396,13 @@
 		//
 		for(var/obj/item/organ/internal/I in owner.get_internal_organs())
 			if(I.parent_organ == organ_tag)
-				LAZYDISTINCTADD(I, internal_organs)
+				LAZYDISTINCTADD(internal_organs, I)
 		update_internal_organs_cost()
 
 		for(var/obj/item/organ/external/E in owner.get_external_organs())
 			if(E.parent_organ == organ_tag)
 				E.parent = src
-				LAZYDISTINCTADD(E, children)
+				LAZYDISTINCTADD(children, E)
 
 		//Add any existing implants that should be refering us
 		for(var/obj/implant in implants)
