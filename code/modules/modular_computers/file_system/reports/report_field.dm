@@ -9,8 +9,8 @@
 	var/ignore_value = 0                 // Suggests that the value should not be displayed.
 	var/searchable = 0                   // Whether or not the field will be searchable in the crew records computer.
 	var/can_mod_access = TRUE            // Whether or not the access requirements of this field can be modified recursively from the record's access.
-	var/list/read_access = list(list())  // The access required to edit the field.
-	var/list/write_access = list(list()) // The access required to view the field.
+	var/list/read_access = list()  // The access required to edit the field.
+	var/list/write_access = list() // The access required to view the field.
 
 /datum/report_field/New(datum/computer_file/report/report)
 	owner = report
@@ -21,26 +21,41 @@
 	. = ..()
 
 //Access stuff. Can be given access constants or lists. See report access procs for documentation.
-/datum/report_field/proc/set_access(read_access, write_access, override = 1, recursive = FALSE)
+/datum/report_field/proc/set_access(read_access, write_access, override = 1, recursive = FALSE, access_group = 1)
 	if(recursive && !can_mod_access)
 		return
 	if(read_access)
 		if(!islist(read_access))
 			read_access = list(read_access)
-		override ? (src.read_access = list(read_access)) : (src.read_access += list(read_access))
+		if(override)
+			src.read_access = read_access
+		else
+			if(access_group && access_group <= src.read_access.len)
+				if(!islist(src.read_access[access_group]))
+					src.read_access[access_group] = list(src.read_access[access_group])
+				src.read_access[access_group] += read_access
+			else
+				src.read_access += list(read_access)
 	if(write_access)
 		if(!islist(write_access))
 			write_access = list(write_access)
-		override ? (src.write_access = list(write_access)) : (src.write_access += list(write_access))
+		if(override)
+			src.write_access = write_access
+		else
+			if(access_group && access_group <= src.write_access.len)
+				if(!islist(src.write_access[access_group]))
+					src.write_access[access_group] = list(src.write_access[access_group])
+			else
+				src.write_access[access_group] += write_access
 
-// Analogous to get_file_perms on reports.
+// Analogous to get_file_perms on reports. Read access is required to have write access.
 /datum/report_field/proc/get_perms(accesses, mob/user)
 	if(!accesses || (isghost(user) && check_rights(R_ADMIN, 0, user))) // For internal use/use by admin ghosts.
 		return (OS_READ_ACCESS | OS_WRITE_ACCESS)
-	if(!LAZYLEN(read_access) || has_access_pattern(read_access, accesses))
+	if(!LAZYLEN(read_access) || has_access(read_access, accesses))
 		. |= OS_READ_ACCESS
 		
-		if(!LAZYLEN(write_access) || has_access_pattern(write_access, accesses))
+		if(!LAZYLEN(write_access) || has_access(write_access, accesses))
 			. |= OS_WRITE_ACCESS
 
 //Assumes the old and new fields are of the same type. Override if the field stores information differently.

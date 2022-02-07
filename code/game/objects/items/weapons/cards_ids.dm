@@ -503,21 +503,21 @@ var/global/const/NO_EMAG_ACT = -50
 	var/login = associated_network_account["login"]
 	var/password = associated_network_account["password"]
 
-	var/account_lookup_failed = FALSE
+	var/error
 	var/datum/computer_file/data/account/check_account = current_account.resolve()
 	if(!network) // No network or connectivity.
-		account_lookup_failed = TRUE
+		error = "No network found"
 	else if(!istype(check_account))
-		account_lookup_failed = TRUE
+		error = "The specified account could not be found"
 	else if(check_account.login != login || check_account.password != password) // The most likely case - login or password were changed.
-		account_lookup_failed = TRUE
+		error = "Incorrect username or password"
 	// Check if the account can be located on the network in case it was moved.
 	else if(!(check_account in network.get_accounts()))
-		account_lookup_failed = TRUE
-	
-	if(account_lookup_failed)
+		error = "The specified account could not be found"
+
+	if(error)
 		current_account = null
-		visible_message(SPAN_WARNING("\The [src] emits a short buzz, indicating a network or login error"),null,null,1)
+		visible_message(SPAN_WARNING("\The [src] flashes an error: \'[error]!\'"), null, null,1)
 	else
 		return check_account
 

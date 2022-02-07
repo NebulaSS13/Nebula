@@ -102,7 +102,7 @@
 
 /datum/nano_module/program/power_monitor/proc/is_sysadmin(var/mob/user)
 	if(program)
-		return program.can_run(user, program.computer.get_network())
+		has_access(list(access_network), get_access(user))
 	return FALSE
 
 // Allows us to process UI clicks, which are relayed in form of hrefs.

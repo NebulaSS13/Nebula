@@ -5,8 +5,8 @@
 	var/form_name = "AB1"                                  //Form code, for maximum bureaucracy.
 	var/creator                                            //The name of the mob that made the report.
 	var/file_time                                          //Time submitted.
-	write_access = list(list())                            //The access required to submit the report. See documentation below.
-	read_access = list(list())                             //The access required to view the report.
+	write_access = list()                                  //The access required to submit the report. See documentation below.
+	read_access = list()                                   //The access required to view the report.
 	mod_access = list(list(access_bridge))                 //Changing the read/write access of the file should generally require higher access than the write access itself.
 	var/list/datum/report_field/fields = list()            //A list of fields the report comes with, in order that they should be displayed.
 	var/available_on_network = 0                           //Whether this report type should show up for download.
@@ -22,24 +22,41 @@
 	. = ..()
 
 /*
-This proc resets the access to the report, resulting in just one access pattern for read/write.
+This proc resets the access to the report, resulting in just one access requirement for read/write.
 Arguments can be access values (numbers) or lists of access values.
 If null is passed to one of the arguments, that access type is left alone. Pass list() to reset to no access needed instead.
 The recursive option resets access to all fields in the report as well.
-If the override option is set to 0, the access supplied will instead be added as another access pattern, rather than resetting the access.
+If the override option is set to 0, the access supplied will instead be added as another OR access field in the access list in the index access_group.
+If null is passed to access_group then a new access group will be added instead.
 */
-/datum/computer_file/report/proc/set_access(read_access, write_access, recursive = 1, override = 1)
+/datum/computer_file/report/proc/set_access(read_access, write_access, recursive = 1, override = 1, access_group = 1)
 	if(read_access)
 		if(!islist(read_access))
 			read_access = list(read_access)
-		override ? (src.read_access = list(read_access)) : (src.read_access += list(read_access))  //Note that this is a list of lists.
+		if(override)
+			src.read_access = read_access
+		else
+			if(access_group && access_group <= src.read_access.len) // Add the passed access as an OR access field in an existing access group
+				if(!islist(src.read_access[access_group]))			// If the index isn't actually a list, make it one.
+					src.read_access[access_group] = list(src.read_access[access_group])
+				src.read_access[access_group] += read_access
+			else // Add an entire new access group to the access requirements.
+				src.read_access += list(read_access)
 	if(write_access)
 		if(!islist(write_access))
 			write_access = list(write_access)
-		override ? (src.write_access = list(write_access)) : (src.write_access += list(write_access))
+		if(override)
+			src.write_access = write_access
+		else
+			if(access_group && access_group <= src.write_access.len)
+				if(!islist(src.write_access[access_group]))
+					src.write_access[access_group] = list(src.write_access[access_group])
+				src.write_access[access_group] += write_access
+			else
+				src.write_access += list(write_access)
 	if(recursive)
 		for(var/datum/report_field/field in fields)
-			field.set_access(read_access, write_access, override, TRUE)
+			field.set_access(read_access, write_access, override, TRUE, access_group)
 
 //Looking up fields. Names might not be unique unless you ensure otherwise.
 /datum/computer_file/report/proc/field_from_ID(ID)
@@ -157,23 +174,14 @@ no_html will strip any html, possibly killing useful formatting in the process.
 /*
 Access stuff. The report's read/write access should control whether it can be opened/submitted.
 For field editing or viewing, use the field's read/write access instead.
-Unlike other computer files, the report/report field access system is based on "access patterns", lists of access values.
-In addition, you must have read access to have write access.
-A user needs all access values in a pattern to be granted access.
-A user needs to only match one of the potentially several stored access patterns to be granted access.
-You must have read access to have write access.
+
+Overriden so that read access is required to have write access
 */
 /datum/computer_file/report/get_file_perms(list/accesses, mob/user)
-	if(!accesses || (isghost(user) && check_rights(R_ADMIN, 0, user))) // For internal use/use by admin ghosts.
-		return (OS_READ_ACCESS | OS_WRITE_ACCESS | OS_MOD_ACCESS)
-	if(!LAZYLEN(read_access) || has_access_pattern(read_access, accesses))
-		. |= OS_READ_ACCESS
-		
-		if(!LAZYLEN(write_access) || has_access_pattern(write_access, accesses))
-			. |= OS_WRITE_ACCESS
-
-	if(!LAZYLEN(mod_access) || has_access_pattern(mod_access, accesses))
-		. |= OS_MOD_ACCESS
+	var/perms = ..()
+	if(!(perms & OS_WRITE_ACCESS))
+		perms &= ~OS_READ_ACCESS
+	return perms
 
 // Manually changing the permissions of a report will change *all* contained fields to match.
 // TODO: Make report creation and access modification a bit more flexible.

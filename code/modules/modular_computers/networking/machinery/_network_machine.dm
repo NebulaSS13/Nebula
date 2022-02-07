@@ -16,7 +16,6 @@
 	var/inefficiency = 0.12			// How much power is waste heat.
 	var/heat_threshold = 90 CELSIUS	// At what temperature the machine will lock up.
 	var/overheated = FALSE
-	var/runtimeload // Use this for calling an even later lateload.
 
 /obj/machinery/network/Initialize()
 	set_extension(src, network_device_type, initial_network_id, initial_network_key, NETWORK_CONNECTION_STRONG_WIRELESS)
@@ -54,18 +53,11 @@
 		env.merge(removed)
 
 /obj/machinery/network/Process()
-	if(runtimeload)
-		RuntimeInitialize()
-		runtimeload = FALSE
-		
 	set_overheated(is_overheated())
 	if(stat & (BROKEN|NOPOWER))
 		return
 	produce_heat()
 
-/obj/machinery/network/proc/RuntimeInitialize()
-
-	
 /obj/machinery/network/interface_interact(user)
 	ui_interact(user)
 	return TRUE

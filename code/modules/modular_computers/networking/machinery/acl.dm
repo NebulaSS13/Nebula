@@ -1,6 +1,6 @@
 /obj/machinery/network/acl
 	name = "network access controller"
-	desc = "A mainframe that manages encryption keys tied to groups and sub-groups on its parent network."
+	desc = "A mainframe that manages encryption keys tied to groups and their children on its parent network."
 	icon = 'icons/obj/machines/tcomms/aas.dmi'
 	icon_state = "aas"
 	network_device_type =  /datum/extension/network_device/acl
@@ -9,9 +9,15 @@
 	uncreated_component_parts = null
 	stat_immune = 0
 	base_type = /obj/machinery/network/acl
-	runtimeload = TRUE
 
 	var/current_group				// The group currently being edited.
+	var/list/preset_groups = list("Engineering" = list("AtmosTechs", "EngineTechs"), "Security" = list("Officer", "Detective"))		// Dictionary of parent groups->list(child_groups)
+
+/obj/machinery/network/acl/Initialize()
+	. = ..()
+	if(preset_groups)
+		var/datum/extension/network_device/acl/D = get_extension(src, /datum/extension/network_device)
+		D.add_groups(preset_groups)
 
 /obj/machinery/network/acl/OnTopic(mob/user, href_list, datum/topic_state/state)
 	. = ..()
