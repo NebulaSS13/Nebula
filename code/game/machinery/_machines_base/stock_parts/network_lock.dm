@@ -10,8 +10,10 @@
 	var/initial_network_key							// network KEY
 	var/selected_parent_group						// Current selected parent_group for access assignment.
 	
-	var/list/groups									// List of groups whose members are permitted to access this device.
-	var/OR_mode = FALSE								// Whether or not network locks will use AND or OR access.
+	var/list/groups									// List of lists of groups. In order to access the device, users must have membership in at least one
+													// of the groups in each list.
+	var/selected_pattern							// Index of the group pattern selected.
+
 	var/emagged										// Whether or not this has been emagged.
 	var/error
 
@@ -44,14 +46,18 @@
 
 	LAZYINITLIST(groups)
 	var/list/resulting_access = list()
-	for(var/group in groups)
-		if(!(group in access_controller.get_all_groups()))
-			groups -= groups // This group doesn't exist anymore - delete it.
-			continue
-		resulting_access |= "[group].[D.network_id]"
-	if(!resulting_access.len)
+	for(var/list/pattern in groups)
+		var/list/resulting_pattern = list()
+		for(var/group in pattern)
+			if(!(group in access_controller.get_all_groups()))
+				pattern -= group // This group doesn't exist anymore - delete it.
+				continue
+			resulting_pattern |= "[group].[D.network_id]"
+		if(resulting_pattern.len)
+			resulting_access += list(resulting_pattern)
+	if(!length(resulting_access))
 		return
-	return OR_mode ? list(resulting_access) : resulting_access // List of lists is an OR type access configuration.
+	return resulting_access
 
 /obj/item/stock_parts/network_receiver/network_lock/proc/get_default_access()
 	if(auto_deny_all)
@@ -62,6 +68,14 @@
 	. = ..()
 	if(emagged && user.skill_check_multiple(list(SKILL_FORENSICS = SKILL_EXPERT, SKILL_COMPUTER = SKILL_EXPERT)))
 		to_chat(user, SPAN_WARNING("On close inspection, there is something odd about the interface. You suspect it may have been tampered with."))
+
+/obj/item/stock_parts/network_receiver/network_lock/attackby(obj/item/W, mob/user)
+	. = ..()
+	if(istype(W, /obj/item/card/id))
+		if(check_access(W))
+			playsound(src, 'sound/machines/ping.ogg', 20, 0)
+		else
+			playsound(src, 'sound/machines/buzz-two.ogg', 20, 0)
 
 /obj/item/stock_parts/network_receiver/network_lock/attack_self(var/mob/user)
 	ui_interact(user)
@@ -86,32 +100,46 @@
 	data["default_state"] = auto_deny_all
 	if(!network.access_controller)
 		return
+
+	data["patterns"] = list()
+	var/pattern_index = 0
+	for(var/list/pattern in groups)
+		pattern_index++
+		data["patterns"].Add(list(list(
+			"index" = "[pattern_index]",
+			"groups" = english_list(pattern, "No groups assigned!") 
+			)))
+
 	var/list/group_dictionary = network.access_controller.get_group_dict()
 	var/list/parent_groups_data
 	var/list/child_groups_data
-	if(selected_parent_group)
-		if(!(selected_parent_group in group_dictionary))
-			selected_parent_group = null
-		else
-			var/list/child_groups = group_dictionary[selected_parent_group]
-			if(child_groups)
-				child_groups_data = list()
-				for(var/child_group in child_groups)
-					child_groups_data.Add(list(list(
-						"child_group" = child_group,
-						"assigned" = (LAZYISIN(groups, child_group))
-					)))
-	if(!selected_parent_group) // Check again in case we ended up with a non-existent selected parent group instead of breaking the UI.
-		parent_groups_data = list()
-		for(var/parent_group in group_dictionary)
-			parent_groups_data.Add(list(list(
-				"parent_group" = parent_group,
-				"assigned" = (LAZYISIN(groups, parent_group))
-			)))
+
+	var/list/pattern = LAZYACCESS(groups, selected_pattern)
+
+	if(pattern)
+		if(selected_parent_group)
+			if(!(selected_parent_group in group_dictionary))
+				selected_parent_group = null
+			else
+				var/list/child_groups = group_dictionary[selected_parent_group]
+				if(child_groups)
+					child_groups_data = list()
+					for(var/child_group in child_groups)
+						child_groups_data.Add(list(list(
+							"child_group" = child_group,
+							"assigned" = (LAZYISIN(pattern, child_group))
+						)))
+		if(!selected_parent_group) // Check again in case we ended up with a non-existent selected parent group instead of breaking the UI.
+			parent_groups_data = list()
+			for(var/parent_group in group_dictionary)
+				parent_groups_data.Add(list(list(
+					"parent_group" = parent_group,
+					"assigned" = (LAZYISIN(pattern, parent_group))
+				)))
 	data["parent_groups"] = parent_groups_data
 	data["child_groups"] = child_groups_data
-	data["OR_mode"] = OR_mode
 	data["selected_parent_group"] = selected_parent_group
+	data["selected_pattern"] = "[selected_pattern]"
 
 /obj/item/stock_parts/network_receiver/network_lock/OnTopic(mob/user, href_list, datum/topic_state/state)
 	. = ..()
@@ -138,28 +166,49 @@
 		auto_deny_all = TRUE
 		return TOPIC_REFRESH
 
-	if(href_list["remove_group"])
-		LAZYREMOVE(groups, href_list["remove_group"])
+	if(href_list["add_pattern"])
+		LAZYADD(groups, list(list()))
 		return TOPIC_REFRESH
-
-	if(href_list["assign_group"])
-		LAZYDISTINCTADD(groups, href_list["assign_group"])
+	
+	if(href_list["remove_pattern"])
+		var/pattern_index = text2num(href_list["remove_pattern"])
+		LAZYREMOVE(groups, groups[pattern_index])
+		if(selected_pattern == pattern_index)
+			selected_pattern = null
+		else if(selected_pattern > pattern_index)
+			selected_pattern--
+		return TOPIC_REFRESH
+	
+	if(href_list["select_pattern"])
+		var/pattern_index = text2num(href_list["select_pattern"])
+		if(pattern_index > LAZYLEN(groups))
+			return TOPIC_HANDLED
+		selected_pattern = pattern_index
 		return TOPIC_REFRESH
 
 	if(href_list["select_parent_group"])
 		selected_parent_group = href_list["select_parent_group"]
 		return TOPIC_REFRESH
-
-	if(href_list["toggle_OR_mode"])
-		OR_mode = !OR_mode
-		return TOPIC_REFRESH
 	
 	if(href_list["info"])
 		switch(href_list["info"])
-			if("OR_mode")
-				to_chat(user, SPAN_NOTICE("While in OR MODE, the device will require membership in only one of the assigned groups in order to access the device."))
+			if("pattern")
+				to_chat(user, SPAN_NOTICE("In order to access the device, users must be a member of at least one group in each access pattern."))
 			if("parent_groups")
-				to_chat(user, SPAN_NOTICE("Assigning a parent group to the access list will permit any member of its respective child groups to access the device."))
+				to_chat(user, SPAN_NOTICE("Assigning a parent group to an access pattern will permit any member of its child groups access to the pattern."))
+
+	var/list/pattern_list = LAZYACCESS(groups, selected_pattern)
+	if(!pattern_list)
+		return TOPIC_REFRESH
+
+	if(href_list["assign_group"])
+		pattern_list |= href_list["assign_group"]
+		return TOPIC_REFRESH
+
+	if(href_list["remove_group"])
+		pattern_list -= href_list["remove_group"]
+		return TOPIC_REFRESH
+
 
 /obj/item/stock_parts/network_receiver/network_lock/ui_interact(mob/user, ui_key, datum/nanoui/ui, force_open, datum/nanoui/master_ui, datum/topic_state/state)
 	var/data = ui_data(user)

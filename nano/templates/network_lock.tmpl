@@ -19,12 +19,20 @@
 				{{:helper.link('DENY ALL', null, { "deny_all" : 1 }, data.default_state ? 'disabled' : null)}}
 			</div>
 		</div>
-		<div class='item'>
-			<div class='itemLabel'>Membership requirement mode:</div>
-			<div class='itemBody'>
-				{{:helper.link(data.OR_mode ? 'OR MODE' : 'AND MODE', null, { "toggle_OR_mode" : 1 }, null)}} {{:helper.link('?', null, { "info" : "OR_mode" }, null)}}
-			</div>
-		</div>
+		<hr>
+		<table>
+			<tr><th>Pattern
+			<th>Groups
+			<th>Operations
+			{{for data.patterns}}
+				<tr><td>{{:helper.link("Pattern " + value.index, null, { "select_pattern" : value.index}, (data.selected_pattern == value.index) ? 'selected' : null)}}
+				<td>{{:value.groups}}
+				<td>{{:helper.link('Delete pattern', null, { "remove_pattern" : value.index})}}
+			{{/for}}
+		</table>
+		<br>
+		{{:helper.link('Add pattern', null, { "add_pattern" : 1}, null)}}
+		{{:helper.link('?', null, { "info" : "patterns" }, null)}}
 		<hr>
 		{{if data.parent_groups}}
 			<h2>Parent Groups:</h2>
@@ -65,8 +73,10 @@
 			<div class='item'>
 				{{:helper.link('Back to parent group listing', null, { "select_parent_group" : null })}}
 			</div>
-			{{else}}
-			<i>No groups found on network!</i>
+		{{else}}
+			{{if data.selected_pattern}}
+				<i>No groups found on network!</i>
+			{{/if}}
 		{{/if}}
 	{{/if}}
 {{/if}}

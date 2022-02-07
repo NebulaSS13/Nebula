@@ -10,13 +10,14 @@
 									// Otherwise, assignment is strictly by access to the network access controller
 	var/parent_account_creation = FALSE // If enabled, all users who are members of ANY parent group will be able to create new accounts.
 										// Otherwise, account creation is restricted to those with access to the account server(s)
-	var/current_group				// The group currently being edited.
+
 	has_commands = TRUE
 	device_methods = list(
 		/decl/public_access/public_method/add_group,
 		/decl/public_access/public_method/remove_group,
 		/decl/public_access/public_method/list_groups
 	)
+
 /datum/extension/network_device/acl/proc/get_group_dict()
 	return group_dict
 
@@ -98,6 +99,15 @@
 			return "No parent group with name \"[parent_group]\" found."
 		return "[parent_group]: [english_list(group_dict[parent_group])]"
 	return "Parent groups: [english_list(group_dict)]"
+
+// Helper proc for adding multiple groups at once for preset ACLs etc.
+/datum/extension/network_device/acl/proc/add_groups(list/preset_groups)
+	for(var/parent_group in preset_groups)
+		add_group(parent_group)
+		var/list/child_groups = preset_groups[parent_group]
+		if(islist(child_groups))
+			for(var/child_group in child_groups)
+				add_group(child_group, parent_group)
 
 /decl/public_access/public_method/add_group
 	name = "Add group"

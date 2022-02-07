@@ -91,70 +91,51 @@ var/global/file_uid = 0
 	if(!has_access(mod_access, changer_accesses))
 		return FALSE
 
-	switch(perm)
-		if(OS_READ_ACCESS)
-			if(change == "+")
-				if(!LAZYLEN(read_access))
-					read_access = list()
-					read_access += list(list())
-				read_access[1] += access_key
+	if(perm == (OS_READ_ACCESS || OS_WRITE_ACCESS))
+		var/list/modded_list = (perm == OS_READ_ACCESS ? read_access : write_access) 
+		if(change == "+")
+			if(!LAZYLEN(modded_list))
+				modded_list = list()
+				modded_list += list(list())
+			modded_list[1] += access_key
+			return TRUE
+		else if(change == "-")
+			if(!LAZYLEN(modded_list)) // There weren't any access requirements to begin with.
 				return TRUE
-			else if(change == "-")
-				if(!LAZYLEN(read_access)) // There weren't any access requirements to begin with.
-					return TRUE
-				read_access[1] -= access_key
-				if(!length(read_access[1]))
-					read_access[1] = null
-					read_access = null
-				return TRUE
-			else
-				return FALSE // Something unexpected was passed into the change argument.
-
-		if(OS_WRITE_ACCESS)
-			if(change == "+")
-				if(!LAZYLEN(write_access))
-					write_access = list()
-					write_access += list(list())
-				write_access[1] += access_key
-				return TRUE
-			else if(change == "-")
-				if(!LAZYLEN(write_access))
-					return TRUE
-				write_access[1] -= access_key
-				if(!length(write_access[1]))
-					write_access[1] = null
-					write_access = null
-				return TRUE
-			else
-				return FALSE
+			modded_list[1] -= access_key
+			if(!length(modded_list[1]))
+				modded_list[1] = null
+				modded_list = null
+			return TRUE
+		else
+			return FALSE // Something unexpected was passed into the change argument.
 			
-		if(OS_MOD_ACCESS)
-			var/list/test_list // You can't modify access such that you can't access the file any longer, so we test changes first.
-			if(change == "+")
-				if(!LAZYLEN(mod_access))
-					test_list = list(list(access_key))
-					if(!has_access(test_list, changer_accesses))
-						return FALSE
-					mod_access = list()
-					mod_access += list(list())
-					mod_access[1] += access_key
-					return TRUE
-				test_list = list(mod_access[1] + access_key)
+	else if(perm == OS_MOD_ACCESS)
+		var/list/test_list // You can't modify access such that you can't access the file any longer, so we test changes first.
+		if(change == "+")
+			if(!LAZYLEN(mod_access))
+				test_list = list(list(access_key))
 				if(!has_access(test_list, changer_accesses))
 					return FALSE
+				mod_access = list()
+				mod_access += list(list())
 				mod_access[1] += access_key
 				return TRUE
-			else if(change == "-")
-				if(!LAZYLEN(mod_access))
-					return TRUE
-				test_list = list(mod_access[1] - access_key)
-				if(!has_access(test_list, changer_accesses))
-					return FALSE
-				mod_access[1] -= access_key
-				if(!length(mod_access[1]))
-					mod_access[1] = null
-					mod_access = null
-				return TRUE
-			else
+			test_list = list(mod_access[1] + access_key)
+			if(!has_access(test_list, changer_accesses))
 				return FALSE
-		
+			mod_access[1] += access_key
+			return TRUE
+		else if(change == "-")
+			if(!LAZYLEN(mod_access))
+				return TRUE
+			test_list = list(mod_access[1] - access_key)
+			if(!has_access(test_list, changer_accesses))
+				return FALSE
+			mod_access[1] -= access_key
+			if(!length(mod_access[1]))
+				mod_access[1] = null
+				mod_access = null
+			return TRUE
+		else
+			return FALSE

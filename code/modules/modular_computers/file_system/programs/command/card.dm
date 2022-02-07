@@ -26,7 +26,7 @@
 	data["assignments"] = show_assignments
 	data["have_id_slot"] = !!card_slot
 	data["have_printer"] = program.computer.has_component(PART_PRINTER)
-	data["authenticated"] = program.can_run(user)
+	data["authenticated"] = program.get_file_perms(get_access(user), user) & OS_WRITE_ACCESS
 	if(!data["have_id_slot"] || !data["have_printer"])
 		mod_mode = 0 //We can't modify IDs when there is no card reader
 	if(card_slot)
@@ -155,29 +155,28 @@
 				return
 			if(computer.has_component(PART_PRINTER)) //This option should never be called if there is no printer
 				if(module.mod_mode)
-					if(can_run(user, 1))
-						var/contents = {"<h4>Access Report</h4>
-									<u>Prepared By:</u> [user_id_card.registered_name ? user_id_card.registered_name : "Unknown"]<br>
-									<u>For:</u> [id_card.registered_name ? id_card.registered_name : "Unregistered"]<br>
-									<hr>
-									<u>Assignment:</u> [id_card.assignment]<br>
-									<u>Account Number:</u> #[id_card.associated_account_number]<br>
-									<u>Network account:</u> [id_card.associated_network_account["login"]]
-									<u>Network password:</u> [stars(id_card.associated_network_account["password"], 0)]
-									<u>Blood Type:</u> [id_card.blood_type]<br><br>
-									<u>Age:</u> [id_card.age]<br><br>
-									<u>Sex:</u> [id_card.sex]<br><br>
-									<u>Access:</u><br>
-								"}
+					var/contents = {"<h4>Access Report</h4>
+								<u>Prepared By:</u> [user_id_card.registered_name ? user_id_card.registered_name : "Unknown"]<br>
+								<u>For:</u> [id_card.registered_name ? id_card.registered_name : "Unregistered"]<br>
+								<hr>
+								<u>Assignment:</u> [id_card.assignment]<br>
+								<u>Account Number:</u> #[id_card.associated_account_number]<br>
+								<u>Network account:</u> [id_card.associated_network_account["login"]]
+								<u>Network password:</u> [stars(id_card.associated_network_account["password"], 0)]
+								<u>Blood Type:</u> [id_card.blood_type]<br><br>
+								<u>Age:</u> [id_card.age]<br><br>
+								<u>Sex:</u> [id_card.sex]<br><br>
+								<u>Access:</u><br>
+							"}
 
-						var/known_access_rights = get_access_ids(ACCESS_TYPE_STATION|ACCESS_TYPE_CENTCOM)
-						for(var/A in id_card.access)
-							if(A in known_access_rights)
-								contents += "  [get_access_desc(A)]"
+					var/known_access_rights = get_access_ids(ACCESS_TYPE_STATION|ACCESS_TYPE_CENTCOM)
+					for(var/A in id_card.access)
+						if(A in known_access_rights)
+							contents += "  [get_access_desc(A)]"
 
-						if(!computer.print_paper(contents,"access report"))
-							to_chat(usr, "<span class='notice'>Hardware error: Printer was unable to print the file. It may be out of paper.</span>")
-							return
+					if(!computer.print_paper(contents,"access report"))
+						to_chat(usr, "<span class='notice'>Hardware error: Printer was unable to print the file. It may be out of paper.</span>")
+						return
 				else
 					var/contents = {"<h4>Crew Manifest</h4>
 									<br>
@@ -196,7 +195,7 @@
 			if(!(get_file_perms(module.get_access(user), user) & OS_WRITE_ACCESS))
 				to_chat(usr, SPAN_WARNING("Access denied."))
 				return
-			if(computer && can_run(user, 1))
+			if(computer)
 				id_card.assignment = "Terminated"
 				remove_nt_access(id_card)
 				callHook("terminate_employee", list(id_card))
@@ -204,7 +203,7 @@
 			if(!(get_file_perms(module.get_access(user), user) & OS_WRITE_ACCESS))
 				to_chat(usr, SPAN_WARNING("Access denied."))
 				return
-			if(computer && can_run(user, 1))
+			if(computer)
 				var/static/regex/hash_check = regex(@"^[0-9a-fA-F]{32}$")
 				if(href_list["name"])
 					var/temp_name = sanitize_name(input("Enter name.", "Name", id_card.registered_name),allow_numbers=TRUE)
@@ -278,7 +277,7 @@
 			if(!(get_file_perms(module.get_access(user), user) & OS_WRITE_ACCESS))
 				to_chat(usr, SPAN_WARNING("Access denied."))
 				return
-			if(computer && can_run(user, 1) && id_card)
+			if(computer && id_card)
 				var/t1 = href_list["assign_target"]
 				if(t1 == "Custom")
 					var/temp_t = sanitize(input("Enter a custom job assignment.","Assignment", id_card.assignment), 45)
