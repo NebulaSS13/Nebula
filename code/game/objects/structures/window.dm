@@ -333,6 +333,13 @@
 	set_dir(turn(dir, 90))
 	update_nearby_tiles(need_rebuild=1)
 
+/obj/structure/window/set_dir(ndir)
+	. = ..()
+	if(is_fulltile())
+		atom_flags &= ~ATOM_FLAG_CHECKS_BORDER
+	else
+		atom_flags |= ATOM_FLAG_CHECKS_BORDER
+
 /obj/structure/window/update_nearby_tiles(need_rebuild)
 	. = ..()
 	for(var/obj/structure/S in orange(loc, 1))
