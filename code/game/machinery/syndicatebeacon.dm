@@ -61,6 +61,8 @@
 				src.updateUsrDialog()
 				spawn(rand(50,200)) selfdestruct()
 				return
+			if(2)
+				break
 		if(istype(M, /mob/living/carbon/human))
 			var/mob/living/carbon/human/N = M
 			to_chat(M, "<B>You have joined the ranks of the Syndicate and become a traitor to the station!</B>")
