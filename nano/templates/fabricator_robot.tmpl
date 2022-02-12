@@ -1,0 +1,53 @@
+<!-------------------------------------------------------------------------------------------------
+	Include Shared
+-------------------------------------------------------------------------------------------------->
+{{#def.fab_shared}}
+
+<!-------------------------------------------------------------------------------------------------
+	UI Overrides
+------------------------------------------------------------------------------------------------->
+{{fab_page_contents = function(data){ }}
+	{{if data.functional}}
+		<!--Collapsable list-->
+		<dl class='collapsableList'> 
+			{{fab_resources_table(data.show_resources, data.material_storage);}}
+			{{fab_construction_queue(data.show_queue, data.build_queue, data.current_build);}} 
+			{{fab_display_filter( data.category, data.filtering );}}
+		</dl> 
+		
+		{{fab_robot}}
+
+	{{else}}
+		<p><span class = 'bad'>FABRICATOR OFFLINE. CONTACT SYSTEM ADMINISTRATOR.</span></p>
+	{{/if}}
+{{ }; }}
+
+<!-------------------------------------------------------------------------------------------------
+	Setup Layout
+------------------------------------------------------------------------------------------------->
+
+{{ fab_header( data.network, data.network_id ); }}
+{{ fab_page_contents(data); }}
+
+<div><p>Selected Species: {{:data.picked_prosthetic_species}}{{:helper.link('(Set)', null, {'pick_prosthetic_species' : 1})}}</p></div>
+
+{{if data.functional}}
+	{{ fab_header_network( data.network, data.network_id ); }}
+	<table width = '100%'>
+		<tr><td>{{ fab_resources_table( data.show_resources, data.material_storage ); }}</td></tr>
+		<tr><td>{{ fab_construction_queue( data.show_build_queue, data.build_queue, data.current_build ); }}</td></tr>
+		<tr><td>{{ fab_display_filter( data.category, data.filtering ); }}</td></tr>
+		<!--Special options-->
+		<tr><td>
+			<dl>
+				<dt>Settings</dt>
+				{{if data.color_selectable}}
+					<dd style={{ color_style(data.color); }}>Color: {{:helper.link('(Set)', null, {'color_select' : 1})}}</dd>
+				{{/if}}
+			</dl>
+		</td></tr>
+		<tr><td>{{ fab_build_options( data.build_options ); }}</td></tr>
+	</table>
+{{else}}
+	<p><span class = 'bad'>FABRICATOR OFFLINE. CONTACT SYSTEM ADMINISTRATOR.</span></p>
+{{/if}}

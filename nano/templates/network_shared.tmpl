@@ -1,0 +1,25 @@
+<!---------------------------------------------------------
+	Shared network UI functions
+----------------------------------------------------------->
+<style>
+	/**************************** 
+	 * Connection Header 
+	 ****************************/
+	 .netHdr{
+		width: 100%;
+		min-height: 1em;
+	}
+	.netHdrElem{
+		padding: 2px;
+	}
+</style>
+
+<!---------------------------------------------------------
+	Draws the standard network connection button/header
+---------------------------------------------------------->
+{{function net_connection_settings(network, network_id) { }}
+	<div class='netHdr'>
+		<div class='netHdrElem'>{{:helper.link(network ? (network + '.' +  network_id) : '---', network? 'signal-diag': 'close', { 'network_settings': 1 }, null)}}</div>
+	</div>
+	<br/>
+{{ } }}

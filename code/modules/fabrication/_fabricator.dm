@@ -63,6 +63,11 @@
 	// If TRUE, fills fabricator with material on initalize
 	var/prefilled = FALSE
 
+	//UI
+	var/ui_show_queue = FALSE
+	var/ui_show_resources = FALSE
+	var/ui_show_config = FALSE
+
 /obj/machinery/fabricator/Destroy()
 	QDEL_NULL(currently_building)
 	QDEL_NULL_LIST(queued_orders)

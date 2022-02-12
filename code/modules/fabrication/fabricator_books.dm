@@ -14,8 +14,13 @@
 	)
 	color_selectable = TRUE
 
-/obj/machinery/fabricator/book/do_build(datum/fabricator_recipe/recipe, amount)
-	. = recipe.build(get_turf(src), amount, selected_color)
+/obj/machinery/fabricator/book/make_order(datum/fabricator_recipe/recipe, multiplier)
+	var/datum/fabricator_build_order/order = ..()
+	LAZYSET(order.data, "selected_color", selected_color)
+	return order
+
+/obj/machinery/fabricator/book/do_build(datum/fabricator_build_order/order)
+	. = order.target_recipe.build(get_turf(src), order.multiplier, LAZYACCESS(order.data, "selected_color"))
 
 /datum/fabricator_recipe/book/skill/build(var/turf/location, var/amount = 1, var/color = COLOR_WHITE)
 	. = list()

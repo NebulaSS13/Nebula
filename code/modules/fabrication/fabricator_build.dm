@@ -9,13 +9,13 @@
 		return
 
 	// Print the item.
-	do_build(currently_building.target_recipe, currently_building.multiplier)
+	do_build(currently_building)
 	QDEL_NULL(currently_building)
 	get_next_build()
 	update_icon()
 
-/obj/machinery/fabricator/proc/do_build(var/datum/fabricator_recipe/recipe, var/amount)
-	. = recipe.build(get_turf(src), amount)
+/obj/machinery/fabricator/proc/do_build(var/datum/fabricator_build_order/order)
+	. = order.target_recipe.build(get_turf(src), order.multiplier)
 	if(output_dir)
 		for(var/atom/movable/product in .)
 			step(product, output_dir)
@@ -57,11 +57,8 @@
 			return
 
 	// Generate and track a new order.
-	var/datum/fabricator_build_order/order = new
-	order.remaining_time = recipe.build_time
-	order.target_recipe =  recipe
-	order.multiplier =     multiplier
-	queued_orders +=       order
+	var/datum/fabricator_build_order/order = make_order(recipe, multiplier)
+	queued_orders += order
 
 	// Remove/earmark resources.
 	for(var/material in recipe.resources)
@@ -73,3 +70,11 @@
 		get_next_build()
 	else
 		start_building()
+
+//Allow storing more details in the order for fabricator subclasses
+/obj/machinery/fabricator/proc/make_order(var/datum/fabricator_recipe/recipe, var/multiplier)
+	var/datum/fabricator_build_order/order = new
+	order.remaining_time = recipe.build_time
+	order.target_recipe =  recipe
+	order.multiplier =     multiplier
+	return order
