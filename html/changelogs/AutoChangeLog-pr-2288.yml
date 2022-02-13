@@ -1,0 +1,5 @@
+author: tag if you want to specify another name or several people. -->
+delete-after: true
+changes:
+  - bugfix: Network relays will now attempt reconnect on their own, so if router had
+      a blackout, they'll rejoin on their own without manual reboot.
