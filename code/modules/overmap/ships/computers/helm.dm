@@ -249,6 +249,9 @@ var/global/list/overmap_helm_computers
 /obj/machinery/computer/ship/helm/unlook(mob/user)
 	. = ..()
 	if (current_operator?.resolve() == user)
+		if (user.client)
+			user.client.pixel_x = 0
+			user.client.pixel_y = 0
 		set_operator(null)
 
 
