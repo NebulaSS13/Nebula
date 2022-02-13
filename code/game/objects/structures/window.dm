@@ -306,14 +306,16 @@
 	if(G.damage_stage() < 2)
 		G.affecting.visible_message(SPAN_DANGER("[G.assailant] bashes [G.affecting] against \the [src]!"))
 		if(prob(50))
-			SET_STATUS_MAX(affecting_mob, STAT_WEAK, 1)
+			SET_STATUS_MAX(affecting_mob, STAT_WEAK, 2)
 		affecting_mob.apply_damage(10, BRUTE, def_zone, used_weapon = src)
 		hit(25)
+		qdel(G)
 	else
 		G.affecting.visible_message(SPAN_DANGER("[G.assailant] crushes [G.affecting] against \the [src]!"))
 		SET_STATUS_MAX(affecting_mob, STAT_WEAK, 5)
 		affecting_mob.apply_damage(20, BRUTE, def_zone, used_weapon = src)
 		hit(50)
+		qdel(G)
 	return TRUE
 
 /obj/structure/window/proc/hit(var/damage, var/sound_effect = 1)
@@ -421,7 +423,7 @@
 		basestate = reinf_basestate
 	else
 		basestate = initial(basestate)
-	
+
 	..()
 
 	if (paint_color)
