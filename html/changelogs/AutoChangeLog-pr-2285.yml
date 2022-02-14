@@ -1,6 +1,0 @@
-author: tag if you want to specify another name or several people. -->
-delete-after: true
-changes:
-  - balance: if you hit a person against a window while they are in a grapple, you
-      release them from the grapple, also increased the duration of the weakness effect
-      from 1 to 2 seconds
