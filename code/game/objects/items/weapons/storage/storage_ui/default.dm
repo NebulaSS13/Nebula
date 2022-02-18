@@ -180,7 +180,7 @@
 /datum/storage_ui/default/proc/arrange_item_slots(var/rows, var/cols)
 	var/cx = 4
 	var/cy = 2+rows
-	boxes.screen_loc = "LEFT+4:16,BOTTOM+2:16 to LEFT+[4+cols]:16,BOTTOM+[2+rows]:16"
+	boxes.screen_loc = "LEFT+3:16,BOTTOM+1.7:16 to LEFT+[3+cols]:16,BOTTOM+[1.7+rows]:16"
 
 	for(var/obj/O in storage.contents)
 		O.screen_loc = "LEFT+[cx]:16,BOTTOM+[cy]:16"
@@ -206,9 +206,9 @@
 	M.Scale((storage_width-storage_cap_width*2+3)/32,1)
 	storage_continue.transform = M
 
-	storage_start.screen_loc = "LEFT+4:16,BOTTOM+2:16"
-	storage_continue.screen_loc = "LEFT+4:[storage_cap_width+(storage_width-storage_cap_width*2)/2+2],BOTTOM+2:16"
-	storage_end.screen_loc = "LEFT+4:[19+storage_width-storage_cap_width],BOTTOM+2:16"
+	storage_start.screen_loc = "LEFT+3:16,BOTTOM+1.7:16"
+	storage_continue.screen_loc = "LEFT+3:[storage_cap_width+(storage_width-storage_cap_width*2)/2+2],BOTTOM+1.7:16"
+	storage_end.screen_loc = "LEFT+3:[19+storage_width-storage_cap_width],BOTTOM+1.7:16"
 
 	var/startpoint = 0
 	var/endpoint = 1
@@ -231,11 +231,11 @@
 		storage_start.overlays += stored_continue
 		storage_start.overlays += stored_end
 
-		O.screen_loc = "LEFT+4:[round((startpoint+endpoint)/2)+2-O.pixel_x],BOTTOM+2:[16-O.pixel_y]"
+		O.screen_loc = "LEFT+3:[round((startpoint+endpoint)/2)+2-O.pixel_x],BOTTOM+1.7:[16-O.pixel_y]"
 		O.maptext = ""
 		O.hud_layerise()
 
-	closer.screen_loc = "LEFT+4:[storage_width+19],BOTTOM+2:16"
+	closer.screen_loc = "LEFT+3:[storage_width+19],BOTTOM+1.7:16"
 
 // Sets up numbered display to show the stack size of each stored mineral
 // NOTE: numbered display is turned off currently because it's broken
