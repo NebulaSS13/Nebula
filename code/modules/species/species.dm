@@ -457,9 +457,10 @@ var/global/const/DEFAULT_SPECIES_HEALTH = 200
 
 //Checks if an existing limbs is the specie's default
 /decl/species/proc/is_default_limb(var/obj/item/organ/external/E)
-	if((species_flags & SPECIES_FLAG_CRYSTALLINE) != BP_IS_CRYSTAL(E))
+	// We don't have ^^ (logical XOR), so !x != !y will suffice.
+	if(!(species_flags & SPECIES_FLAG_CRYSTALLINE) != !BP_IS_CRYSTAL(E))
 		return FALSE
-	if((species_flags & SPECIES_FLAG_SYNTHETIC) != BP_IS_PROSTHETIC(E))
+	if(!(species_flags & SPECIES_FLAG_SYNTHETIC) != !BP_IS_PROSTHETIC(E))
 		return FALSE
 	for(var/tag in has_limbs)
 		if(E.organ_tag == tag)
@@ -929,8 +930,8 @@ var/global/const/DEFAULT_SPECIES_HEALTH = 200
 /decl/species/proc/update_appearence_descriptors(var/mob/living/carbon/human/H)
 	if(!LAZYLEN(src.appearance_descriptors))
 		H.appearance_descriptors = null
-		return 
-	
+		return
+
 	var/list/new_descriptors = list()
 	//Add missing descriptors, and sanitize any existing ones
 	for(var/desctype in src.appearance_descriptors)
