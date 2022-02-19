@@ -1,0 +1,5 @@
+author: tag if you want to specify another name or several people. -->
+delete-after: true
+changes:
+  - bugfix: Cannot phase onto low walls through solid windows anymore.
+  - bugfix: Shuttle chairs now display their bars in raised state too
