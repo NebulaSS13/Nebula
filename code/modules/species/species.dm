@@ -188,7 +188,7 @@ var/global/const/DEFAULT_SPECIES_HEALTH = 200
 
 	var/list/override_organ_types // Used for species that only need to change one or two entries in has_organ.
 
-	//List of organ tags, with the amount and type required for living by this specie
+	//List of organ tags, with the amount and type required for living by this species
 	//#REMOVEME: The vital organ stuff was apparently mostly dropped, so its a bit pointless to improve it...
 	var/list/vital_organs = list(
 		BP_HEART = list("path" = /obj/item/organ/internal/heart),
@@ -447,7 +447,7 @@ var/global/const/DEFAULT_SPECIES_HEALTH = 200
 /decl/species/proc/get_manual_dexterity(var/mob/living/carbon/human/H)
 	. = manual_dexterity
 
-//Checks if an existing organ is the specie's default
+//Checks if an existing organ is the species default
 /decl/species/proc/is_default_organ(var/obj/item/organ/O)
 	for(var/tag in has_organ)
 		if(O.organ_tag == tag)
@@ -455,7 +455,7 @@ var/global/const/DEFAULT_SPECIES_HEALTH = 200
 				return TRUE
 	return FALSE
 
-//Checks if an existing limbs is the specie's default
+//Checks if an existing limbs is the species default
 /decl/species/proc/is_default_limb(var/obj/item/organ/external/E)
 	// We don't have ^^ (logical XOR), so !x != !y will suffice.
 	if(!(species_flags & SPECIES_FLAG_CRYSTALLINE) != !BP_IS_CRYSTAL(E))
@@ -920,14 +920,14 @@ var/global/const/DEFAULT_SPECIES_HEALTH = 200
 /decl/species/proc/get_holder_color(var/mob/living/carbon/human/H)
 	return
 
-//Called after a mob's specie is set, organs were created, and we're about to update the icon, color, and etc of the mob being created.
+//Called after a mob's species is set, organs were created, and we're about to update the icon, color, and etc of the mob being created.
 //Consider this might be called post-init
-/decl/species/proc/apply_appearence(var/mob/living/carbon/human/H)
+/decl/species/proc/apply_appearance(var/mob/living/carbon/human/H)
 	H.icon_state = lowertext(src.name)
 	H.skin_colour = src.base_color
-	update_appearence_descriptors(H)
+	update_appearance_descriptors(H)
 
-/decl/species/proc/update_appearence_descriptors(var/mob/living/carbon/human/H)
+/decl/species/proc/update_appearance_descriptors(var/mob/living/carbon/human/H)
 	if(!LAZYLEN(src.appearance_descriptors))
 		H.appearance_descriptors = null
 		return
