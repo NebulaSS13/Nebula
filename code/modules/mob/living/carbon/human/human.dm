@@ -695,7 +695,6 @@
 	if(!istype(move_intent))
 		set_next_usable_move_intent()
 	update_emotes()
-	species.update_appearence_descriptors(src)
 	return TRUE
 
 //Syncs cultural tokens to the currently set specie, and may trigger a language update
