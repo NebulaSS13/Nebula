@@ -56,10 +56,10 @@
 			return
 		charges -= 1
 		if(prob(50))
-				temptext = "<font color=red><i><b>Double-crosser. You planned to betray us from the start. Allow us to repay the favor in kind.</b></i></font>"
-				src.updateUsrDialog()
-				addtimer(CALLBACK(src, selfdestruct), rand(5, 20) SECONDS)
-				return
+			temptext = "<font color=red><i><b>Double-crosser. You planned to betray us from the start. Allow us to repay the favor in kind.</b></i></font>"
+			src.updateUsrDialog()
+			addtimer(CALLBACK(src, .proc/selfdestruct), rand(5, 20) SECONDS)
+			return
 		if(istype(M, /mob/living/carbon/human))
 			var/mob/living/carbon/human/N = M
 			to_chat(M, "<B>You have joined the ranks of the Syndicate and become a traitor to the station!</B>")
@@ -75,7 +75,7 @@
 
 /obj/machinery/syndicate_beacon/proc/selfdestruct()
 	selfdestructing = 1
-	spawn() explosion(src.loc, 1, rand(1,3), rand(3,8), 10)
+	INVOKE_ASYNC(GLOBAL_PROC, .proc/explosion, src.loc, 1, rand(1, 3), rand(3, 8), 10)
 
 ////////////////////////////////////////
 //Singularity beacon
