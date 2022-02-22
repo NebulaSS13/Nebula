@@ -40,7 +40,7 @@
 		return FALSE
 	return net.add_device(src)
 
-/datum/extension/network_device/proc/disconnect()
+/datum/extension/network_device/proc/disconnect(net_down)
 	var/datum/computer_network/net = SSnetworking.networks[network_id]
 	if(!net)
 		return FALSE

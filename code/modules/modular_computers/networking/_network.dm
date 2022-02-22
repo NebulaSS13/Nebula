@@ -33,7 +33,7 @@
 
 /datum/computer_network/Destroy()
 	for(var/datum/extension/network_device/D in devices)
-		D.disconnect()
+		D.disconnect(TRUE)
 	QDEL_NULL_LIST(chat_channels)
 	devices = null
 	mainframes = null
