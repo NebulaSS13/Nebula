@@ -46,7 +46,7 @@
 			I.appearance_flags |= RESET_COLOR
 			I.color = reinf_material.color
 		add_overlay(I)
-	if(has_special_overlay && buckled_mob)
+	if(has_special_overlay)
 		I = image(icon, "[icon_state]_special")
 		I.layer = buckled_mob ? ABOVE_HUMAN_LAYER : FLOAT_LAYER
 		if(material_alteration & MAT_FLAG_ALTERATION_COLOR)
