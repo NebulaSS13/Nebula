@@ -10,6 +10,8 @@
 #define SPECIES_FLAG_NO_BLOCK           BITFLAG(8) // Unable to block or defend itself from attackers.
 #define SPECIES_FLAG_NEED_DIRECT_ABSORB BITFLAG(9) // This species can only have their DNA taken by direct absorption.
 #define SPECIES_FLAG_LOW_GRAV_ADAPTED   BITFLAG(10) // This species is used to lower than standard gravity, affecting stamina in high-grav
+#define SPECIES_FLAG_CRYSTALLINE        BITFLAG(11) // This species is made of crystalline material. Replaces var/is_crystalline.
+#define SPECIES_FLAG_SYNTHETIC          BITFLAG(12) // This species is synthetic/robotic and spawns with prosthetic limbs.
 
 // Species spawn flags
 #define SPECIES_IS_WHITELISTED             BITFLAG(0) // Must be whitelisted to play.

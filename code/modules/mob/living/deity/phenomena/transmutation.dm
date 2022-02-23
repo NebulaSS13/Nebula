@@ -22,5 +22,5 @@
 /datum/phenomena/rock_form/activate(var/mob/living/carbon/human/H)
 	..()
 	to_chat(H, "<span class='danger'>You feel your body harden as it rapidly is transformed into living crystal!</span>")
-	H.set_species(SPECIES_GOLEM)
+	H.change_species(SPECIES_GOLEM)
 	SET_STATUS_MAX(H, STAT_WEAK, 5)

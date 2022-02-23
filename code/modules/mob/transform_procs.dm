@@ -30,7 +30,7 @@
 
 	for(var/obj/item/W in src)
 		drop_from_inventory(W)
-	set_species(species.primitive_form)
+	change_species(species.primitive_form)
 	dna.SetSEState(global.MONKEYBLOCK,1)
 	dna.SetSEValueRange(global.MONKEYBLOCK,0xDAC, 0xFFF)
 

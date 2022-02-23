@@ -20,7 +20,7 @@
 	available_bodytypes = list(/decl/bodytype/utility_frame)
 	age_descriptor =        /datum/appearance_descriptor/age/utility_frame
 	hidden_from_codex =     FALSE
-	species_flags =         SPECIES_FLAG_NO_PAIN | SPECIES_FLAG_NO_SCAN | SPECIES_FLAG_NO_POISON
+	species_flags =         SPECIES_FLAG_NO_PAIN | SPECIES_FLAG_NO_SCAN | SPECIES_FLAG_NO_POISON | SPECIES_FLAG_SYNTHETIC
 	spawn_flags =           SPECIES_CAN_JOIN
 	appearance_flags =      HAS_SKIN_COLOR | HAS_EYE_COLOR
 	strength =              STR_HIGH

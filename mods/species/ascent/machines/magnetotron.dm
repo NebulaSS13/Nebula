@@ -43,7 +43,7 @@
 		target.visible_message(SPAN_NOTICE("[target] molts away their shell, emerging as a new gyne."))
 		spark_at(src, cardinal_only = TRUE)
 		ADJ_STATUS(target, STAT_STUN, 6)
-		target.set_species(SPECIES_MANTID_GYNE)
+		target.change_species(SPECIES_MANTID_GYNE)
 		new /obj/effect/temp_visual/emp_burst(loc)
 		for(var/obj/item/organ/external/E in target.get_external_organs())
 			if(prob(60))

@@ -170,7 +170,7 @@
 	to_chat(user, "You can't speak any other languages by default. You can use translator implant that spawns on top of this monolith - it will give you knowledge of any language if you hear it enough times.")
 	var/mob/living/carbon/human/H = user
 	new /obj/item/implanter/translator(get_turf(src))
-	H.set_species(SPECIES_ALIEN)
+	H.change_species(SPECIES_ALIEN)
 	var/decl/cultural_info/culture = H.get_cultural_value(TAG_CULTURE)
 	H.fully_replace_character_name(culture.get_random_name(H, H.gender))
 	H.rename_self("Humanoid Alien", 1)

@@ -340,7 +340,7 @@ var/global/list/time_prefs_fixed = list()
 	// Sanitizing rather than saving as someone might still be editing when copy_to occurs.
 	player_setup.sanitize_setup()
 	character.personal_aspects = list()
-	character.set_species(species)
+	character.change_species(species)
 	character.set_bodytype((character.species.get_bodytype_by_name(bodytype) || character.species.default_bodytype), FALSE)
 
 	if(be_random_name)
