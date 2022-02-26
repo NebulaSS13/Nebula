@@ -23,10 +23,9 @@
 /datum/nano_module/program/accounts/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1, var/datum/topic_state/state = global.default_topic_state)
 	var/list/data = host.initial_data()
 	var/datum/computer_network/network = get_network()
-	data["prog_state"] = prog_state
 	if(!network)
 		data["error"] = "No accounts found. Check network connectivity."
-		return
+		prog_state = STATE_ERROR
 	switch(prog_state)
 		if(STATE_SELF)
 			data["account_name"] = selected_account.login
@@ -37,40 +36,42 @@
 			var/datum/extension/network_device/acl/net_acl = network.access_controller
 			if(!net_acl)
 				data["error"] = "No access controller found on the network!"
-				return
-			var/list/group_dict = net_acl.get_group_dict()
-			if(!istype(selected_account))
-				var/list/accounts = network.get_accounts()
-				data["accounts"] = list()
-				for(var/datum/computer_file/data/account/A in accounts)
-					data["accounts"] += list(list(
-						"account" = A.login,
-						"fullname" = A.fullname
-					))
+				prog_state = STATE_ERROR
 			else
-				data["account_name"] = selected_account.login
-				data["account_fullname"] = selected_account.fullname
-				if(!selected_parent_group)
-					data["parent_groups"] = list()
-					for(var/parent_group in group_dict)
-						data["parent_groups"] += list(list(
-									"name" = parent_group,
-									"member" = (parent_group in selected_account.groups)
-									))
+				var/list/group_dict = net_acl.get_group_dict()
+				if(!istype(selected_account))
+					var/list/accounts = network.get_accounts()
+					data["accounts"] = list()
+					for(var/datum/computer_file/data/account/A in accounts)
+						data["accounts"] += list(list(
+							"account" = A.login,
+							"fullname" = A.fullname
+						))
 				else
-					var/list/child_groups = group_dict[selected_parent_group]
-					if(!child_groups)
-						data["error"] = "Invalid parent selected!"
-						selected_parent_group = null
-						return
-					data["parent_group"] = selected_parent_group
-					data["child_groups"] = list()
-					for(var/child_group in child_groups)
-						data["child_groups"] += list(list(
-									"name" = child_group,
-									"member" = (child_group in selected_account.groups)
-								))
-			data["sub_management"] = net_acl.allow_submanagement
+					data["account_name"] = selected_account.login
+					data["account_fullname"] = selected_account.fullname
+					if(!selected_parent_group)
+						data["parent_groups"] = list()
+						for(var/parent_group in group_dict)
+							data["parent_groups"] += list(list(
+										"name" = parent_group,
+										"member" = (parent_group in selected_account.groups)
+										))
+					else
+						var/list/child_groups = group_dict[selected_parent_group]
+						if(!child_groups)
+							data["error"] = "Invalid parent selected!"
+							selected_parent_group = null
+							return
+						data["parent_group"] = selected_parent_group
+						data["child_groups"] = list()
+						for(var/child_group in child_groups)
+							data["child_groups"] += list(list(
+										"name" = child_group,
+										"member" = (child_group in selected_account.groups)
+									))
+				data["sub_management"] = net_acl.allow_submanagement
+	data["prog_state"] = prog_state
 	ui = SSnano.try_update_ui(user, src, ui_key, ui, data, force_open)
 	if (!ui)
 		ui = new(user, src, ui_key, "account_management.tmpl", name, 600, 700, state = state)

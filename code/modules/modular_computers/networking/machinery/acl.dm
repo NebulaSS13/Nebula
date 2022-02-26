@@ -11,7 +11,7 @@
 	base_type = /obj/machinery/network/acl
 
 	var/current_group				// The group currently being edited.
-	var/list/preset_groups = list("Engineering" = list("AtmosTechs", "EngineTechs"), "Security" = list("Officer", "Detective"))		// Dictionary of parent groups->list(child_groups)
+	var/list/preset_groups			// Dictionary of parent groups->list(child_groups)
 
 /obj/machinery/network/acl/Initialize()
 	. = ..()

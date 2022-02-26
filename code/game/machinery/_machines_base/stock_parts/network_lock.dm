@@ -172,7 +172,7 @@
 	
 	if(href_list["remove_pattern"])
 		var/pattern_index = text2num(href_list["remove_pattern"])
-		LAZYREMOVE(groups, groups[pattern_index])
+		LAZYREMOVE(groups, LAZYACCESS(groups, pattern_index))
 		if(selected_pattern == pattern_index)
 			selected_pattern = null
 		else if(selected_pattern > pattern_index)
@@ -208,7 +208,6 @@
 	if(href_list["remove_group"])
 		pattern_list -= href_list["remove_group"]
 		return TOPIC_REFRESH
-
 
 /obj/item/stock_parts/network_receiver/network_lock/ui_interact(mob/user, ui_key, datum/nanoui/ui, force_open, datum/nanoui/master_ui, datum/topic_state/state)
 	var/data = ui_data(user)
