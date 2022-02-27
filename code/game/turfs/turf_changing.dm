@@ -158,6 +158,12 @@
 	floor_type = other.floor_type
 	construction_stage = other.construction_stage
 
+	damage = other.damage
+	
+	// Do not set directly to other.can_open since it may be in the WALL_OPENING state.
+	if(other.can_open)
+		can_open = WALL_CAN_OPEN
+
 	update_material()
 	return TRUE
 
