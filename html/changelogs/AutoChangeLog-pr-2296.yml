@@ -1,0 +1,4 @@
+author: NataKilar
+delete-after: true
+changes:
+  - bugfix: Fixed a bug where wall damage would not be retained when moving a shuttle
