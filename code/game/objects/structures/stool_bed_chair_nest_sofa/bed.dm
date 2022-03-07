@@ -86,6 +86,7 @@
 			C.use(1)
 			if(!isturf(src.loc))
 				src.forceMove(get_turf(src))
+			playsound(src.loc, 'sound/effects/rustle5.ogg', 50, 1)
 			to_chat(user, "You add padding to \the [src].")
 			add_padding(padding_type)
 			return

@@ -220,6 +220,32 @@
 /obj/structure/bed/chair/office/comfy/yellow
 	reinf_material = /decl/material/solid/cloth/yellow
 
+/obj/structure/bed/chair/rounded
+	name = "rounded chair"
+	desc = "It's a rounded chair. It looks comfy."
+	icon_state = "roundedchair"
+
+/obj/structure/bed/chair/rounded/brown
+	reinf_material = /decl/material/solid/leather
+/obj/structure/bed/chair/rounded/red
+	reinf_material = /decl/material/solid/carpet
+/obj/structure/bed/chair/rounded/teal
+	reinf_material = /decl/material/solid/cloth/teal
+/obj/structure/bed/chair/rounded/black
+	reinf_material = /decl/material/solid/cloth/black
+/obj/structure/bed/chair/rounded/green
+	reinf_material = /decl/material/solid/cloth/green
+/obj/structure/bed/chair/rounded/purple
+	reinf_material = /decl/material/solid/cloth/purple
+/obj/structure/bed/chair/rounded/blue
+	reinf_material = /decl/material/solid/cloth/blue
+/obj/structure/bed/chair/rounded/beige
+	reinf_material = /decl/material/solid/cloth/beige
+/obj/structure/bed/chair/rounded/lime
+	reinf_material = /decl/material/solid/cloth/lime
+/obj/structure/bed/chair/rounded/yellow
+	reinf_material = /decl/material/solid/cloth/yellow
+
 /obj/structure/bed/chair/shuttle
 	name = "shuttle seat"
 	desc = "A comfortable, secure seat. It has a sturdy-looking buckling system for smoother flights."

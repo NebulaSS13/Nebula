@@ -24,10 +24,16 @@
 	return modifiers ? jointext(modifiers + title, " ") : title // Bypass material
 /datum/stack_recipe/furniture/chair/office/comfy
 	result_type = /obj/structure/bed/chair/office/comfy
+	title = "office comfy chair"
 /datum/stack_recipe/furniture/chair/comfy
 	result_type = /obj/structure/bed/chair/comfy
+	title = "comfy chair"
 /datum/stack_recipe/furniture/chair/arm
 	result_type = /obj/structure/bed/chair/armchair
+	title = "armchair"
+/datum/stack_recipe/furniture/chair/roundedchair
+	result_type = /obj/structure/bed/chair/rounded
+	title = "rounded chair"
 
 /datum/stack_recipe/furniture/chair/wood
 /datum/stack_recipe/furniture/chair/wood/normal
@@ -35,6 +41,18 @@
 /datum/stack_recipe/furniture/chair/wood/fancy
 	result_type = /obj/structure/bed/chair/wood/wings
 	modifiers = list("fancy")
+
+/datum/stack_recipe/furniture/sofa/m
+	result_type = /obj/structure/bed/sofa/m
+	title = "middle sofa"
+
+/datum/stack_recipe/furniture/sofa/l
+	result_type = /obj/structure/bed/sofa/l
+	title = "left sofa"
+
+/datum/stack_recipe/furniture/sofa/r
+	result_type = /obj/structure/bed/sofa/r
+	title = "right sofa"
 
 /datum/stack_recipe/furniture/door
 	title = "door"
