@@ -46,7 +46,7 @@
 		if(LAZYLEN(reagent_amounts))
 			var/rtotal = reagent_amounts[1]
 			var/list/data = null
-			if(reagent_amounts?[2] && potency > 0)
+			if(LAZYACCESS(reagent_amounts,2) && potency > 0)
 				rtotal += round(potency/reagent_amounts[2])
 			if(rid == /decl/material/liquid/nutriment)
 				LAZYSET(data, seed.seed_name, max(1,rtotal))
