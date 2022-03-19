@@ -1,6 +1,7 @@
-<!--Include shared network UI stuff-->
+<!--Include shared network UI stuff for network header-->
 {{#def.net_shared}}
 
+<!-- Style sheet -->
 <style>
 	/**************************** 
 	 * Build Options Table 
@@ -130,7 +131,7 @@
 	Utilities 
 -- ---------------------------------------------------------------------------------------------->
 
-<!-- Returns the length of the longest material name in the material storage list  -->
+<!-- Returns the length of the longest material name in the material storage list (Used for padding material names since IE11 doesn't do padding) -->
 {{function get_longest_material_name(material_storage){
 	let longest = 0;
 	for(let item in material_storage){
@@ -160,7 +161,7 @@
 	return String((fixed? amount.toFixed(3) : amount)); 
 } }}
 
-<!-- If a string is shorter than padlengnth, we add padchar until its as long as padlength -->
+<!-- If a string is shorter than padlengnth, we add padchar until its as long as padlength (Since IE11 doesn't support native padding we do it here) -->
 {{function pad_string(str, padlength, padchar) {
 	let padding = '';
 	let strlen = str.length;
@@ -173,7 +174,7 @@
 } }}
 
 <!-- Conditionally prepends the listname with either + or - depending if the list is shown or not. Used for collapsable lists -->
-{{function make_list_toggle(shown, list_name) {
+{{function make_list_toggle_prefix(shown, list_name) {
 	return (shown? '-' : '+') + ' ' + list_name;
 } }}
 
@@ -220,13 +221,13 @@
 {{ } }}
 
 <!-- Draws the materials section on for fabricators -->
-{{function fab_resources_table(show_resources, material_storage) { }}
+{{function fab_resources_table(expand_resources, material_storage) { }}
 	<!--Always show the toggle link/title button-->
 	<dt class='collapsableList'>
-		{{: helper.link( make_list_toggle(show_resources, 'Materials') + make_material_list_summary(material_storage), null, {'toggle_resources' : 1}, null, 'linkSubtle') }}
+		{{: helper.link( make_list_toggle_prefix(expand_resources, 'Materials') + make_material_list_summary(material_storage), null, {'toggle_resources' : 1}, null, 'linkSubtle') }}
 	</dt>
 	<!--When we're toggled on display the list of resources -->
-	{{if show_resources}}
+	{{if expand_resources}}
 		{{longest_material_name = get_longest_material_name(material_storage);}}
 		{{for material_storage}}
 			{{fab_resources_table_entry(value.name, shorten_number(value.stored, true), shorten_number(value.max, true), value.unit, longest_material_name, value.eject_key);}}
@@ -253,13 +254,13 @@
 } }}
 
 <!--Draws the construction queue section of the fabricator UI-->
-{{function fab_construction_queue(show_queue, build_queue, current_build) { }}
+{{function fab_construction_queue(expand_queue, build_queue, current_build) { }}
 	<!--Always show the toggle link/title button-->
 	<dt class='collapsableList'>
-		{{: helper.link( (make_list_toggle(show_queue, 'Queue') + make_queue_summary(current_build, build_queue)), null, {'toggle_queue' : 1}, null, 'linkSubtle') }}
+		{{: helper.link( (make_list_toggle_prefix(expand_queue, 'Queue') + make_queue_summary(current_build, build_queue)), null, {'toggle_queue' : 1}, null, 'linkSubtle') }}
 	</dt>
 	<!--When we're toggled on display the build queue -->
-	{{if show_queue}}
+	{{if expand_queue}}
 		<dt>Current:</dt>
 		<dd>
 			{{if current_build}}
@@ -295,8 +296,8 @@
 	</script>
 {{ } }}
 
-{{function fab_configuration_summary_color(show_config, color) { 
-	if(!show_config){
+{{function fab_configuration_summary_color(expand_config, color) { 
+	if(!expand_config){
 		return ' [' + '<span style=\'color:' + color + ';\'>Color</span>] ';
 	}
 	return '';
@@ -315,12 +316,12 @@
 	{{/if}}
 {{ } }}
 
-{{function fab_configuration(skip_config, show_config, data) { }}
+{{function fab_configuration(skip_config, expand_config, data) { }}
 	{{if !skip_config}}
 		<dt class='collapsableList'>
-			{{: helper.link( make_list_toggle(show_config, 'Configuration') + fab_configuration_summary_color(show_config, data.color), null, {'toggle_config' : 1}, null, 'linkSubtle') }}
+			{{: helper.link( make_list_toggle_prefix(expand_config, 'Configuration') + fab_configuration_summary_color(expand_config, data.color), null, {'toggle_config' : 1}, null, 'linkSubtle') }}
 		</dt>
-		{{if show_config}}
+		{{if expand_config}}
 			<dd style='margin-left:1em;'>
 				{{fab_configuration_color( data.color_selectable, data.color );}}
 			</dd>
@@ -331,17 +332,19 @@
 <!-- --------------------------------------------------------------------------------------------
 	Filtering Options
 -- --------------------------------------------------------------------------------------------->
-{{ function fab_display_filter( category, filtering ) { }}
+{{ function fab_display_filter( category, filtering, hide_categories ) { }}
 	<dt class='collapsableList'>Filtering</dt>
 	<dd>
-		<div>
-			<div class="itemLabel">
-				Category
+		{{if !hide_categories}}
+			<div>
+				<div class="itemLabel">
+					Category
+				</div>
+				<div class="itemContent">
+					{{:helper.link(category, null, {'change_category' : 1})}}
+				</div>
 			</div>
-			<div class="itemContent">
-				{{:helper.link(category, null, {'change_category' : 1})}}
-			</div>
-		</div>
+		{{/if}}
 		<div>
 			<div class="itemLabel">
 				Filter

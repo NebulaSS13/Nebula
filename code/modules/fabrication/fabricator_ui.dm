@@ -8,7 +8,7 @@
 /obj/machinery/fabricator/proc/get_nano_template()
 	return "fabricator.tmpl"
 
-//Returns a list of templates with the format "name" = "file.tmpl" to be loaded in addition to the main template
+//Returns a list of templates with the format "name" = "file.tmpl" to be loaded in addition to the main template. Name is used to access in the tmpl files.
 /obj/machinery/fabricator/proc/get_extra_templates()
 	return list(
 		"net_shared" = "network_shared.tmpl",     //Shared network UI stuff
@@ -79,9 +79,7 @@
 	if(material_costs)
 		build_option["unavailable"] = !(material_costs["available"])
 		var/list/mats = material_costs["materials"]
-		// build_option["cost"]       = length(mats) > 0? mats : null
 		build_option["materials"]  = length(mats) > 0? mats : null
-		testing("Cost: [length(build_option["cost"])]")
 
 	build_option["multiplier"] = ui_fabricator_build_option_entry_multiplier_data(R, max_sheets)
 	return build_option
@@ -91,7 +89,6 @@
 	//Make sure it's buildable and list required resources.
 	var/list/material_components = list()
 	var/has_missing_resource = FALSE
-	testing("OPTN: [R.name]")
 	for(var/material_path in R.resources)
 		var/required_amount = round(R.resources[material_path] * mat_efficiency)
 		var/sheets          = round(stored_material[material_path] / required_amount)
@@ -108,11 +105,12 @@
 				"name"       = stored_substances_to_names[material_path],
 				"amount"     = required_amount,
 				"has_enough" = has_enough, 
-				//"cost"       = "[required_amount][SHEET_UNIT] [stored_substances_to_names[material_path]]"
 			))
-		testing("\t[material_path] -> [R.resources[material_path]]")
-	testing("mat list len [length(material_components)]")
-	return list("available" = !has_missing_resource, "materials" = material_components)
+	return list("available" = !has_missing_resource && ui_fabricator_build_option_is_available(R, max_sheets), "materials" = material_components)
+
+//Override to add more checks to make a build option unavailable. EX: if the machine requires a setting to be set first
+/obj/machinery/fabricator/proc/ui_fabricator_build_option_is_available(var/datum/fabricator_recipe/R, var/max_sheets)
+	return TRUE
 
 /obj/machinery/fabricator/proc/ui_fabricator_build_option_entry_multiplier_data(var/datum/fabricator_recipe/R, var/max_sheets)
 	var/list/multiplier
@@ -149,7 +147,7 @@
 	if(!is_functioning())
 		return
 	var/list/data = list()
-	data["show_resources"]   = ui_show_resources
+	data["expand_resources"] = ui_expand_resources
 	data["material_storage"] = ui_fabricator_resource_data()
 	return data
 
@@ -157,16 +155,17 @@
 	if(!is_functioning())
 		return
 	var/list/data = list()
-	data["show_queue"]    = ui_show_queue
+	data["expand_queue"]  = ui_expand_queue
 	data["current_build"] = ui_fabricator_current_build_data()
 	data["build_queue"]   = ui_fabricator_build_queue_data()
 	return data
 
+//Handles populating config data, meant to be overriden
 /obj/machinery/fabricator/proc/ui_data_config(mob/user, ui_key)
 	if(!is_functioning())
 		return
 	var/list/data = list()
-	data["show_config"]      = ui_show_config
+	data["expand_config"]    = ui_expand_config
 	data["skip_config"]      = !ui_draw_config(user, ui_key) //Setting this to true just skip over drawing the config tab completely when its empty
 	data["color_selectable"] = color_selectable
 	data["color"]            = selected_color
@@ -176,8 +175,9 @@
 	if(!is_functioning())
 		return
 	var/list/data = list()
-	data["category"]  = show_category
-	data["filtering"] = filter_string || "No filter set."
+	data["category"]        = show_category
+	data["filtering"]       = filter_string || "No filter set."
+	data["hide_categories"] = ui_nb_categories <= 1 //Only show categories if we have more than one category of things
 	return data
 
 /obj/machinery/fabricator/proc/ui_data_build_options(mob/user, ui_key)
@@ -206,6 +206,6 @@
 
 //Returns whether we should bother drawing the config tab. Meant to be overriden
 /obj/machinery/fabricator/proc/ui_draw_config(mob/user, ui_key)
-	return color_selectable
+	return color_selectable //Only if we can pick a color by default
 
 #undef PRINT_MULTIPLIER_DIVISOR

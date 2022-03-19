@@ -12,14 +12,14 @@
 {{if data.functional}}
 	<!--Collapsable list-->
 	<dl class='collapsableList'> 
-		{{fab_resources_table(data.show_resources, data.material_storage);}}
-		{{fab_construction_queue(data.show_queue, data.build_queue, data.current_build);}}
-		{{fab_configuration( data.skip_config, data.show_config, data );}}
-		{{fab_display_filter( data.category, data.filtering );}}
+		{{ fab_resources_table(data.expand_resources, data.material_storage); }}
+		{{ fab_construction_queue(data.expand_queue, data.build_queue, data.current_build); }}
+		{{ fab_configuration( data.skip_config, data.expand_config, data); }}
+		{{ fab_display_filter( data.category, data.filtering, data.hide_categories); }}
 	</dl> 
 
 	<!--Build options list-->
-	{{fab_build_options( data.build_options );}}
+	{{ fab_build_options( data.build_options ); }}
 
 {{else}}
 	<p><span class = 'bad'>FABRICATOR OFFLINE. CONTACT SYSTEM ADMINISTRATOR.</span></p>

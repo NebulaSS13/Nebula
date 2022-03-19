@@ -3,51 +3,60 @@
 -------------------------------------------------------------------------------------------------->
 {{#def.fab_shared}}
 
-<!-------------------------------------------------------------------------------------------------
-	UI Overrides
-------------------------------------------------------------------------------------------------->
-{{fab_page_contents = function(data){ }}
-	{{if data.functional}}
-		<!--Collapsable list-->
-		<dl class='collapsableList'> 
-			{{fab_resources_table(data.show_resources, data.material_storage);}}
-			{{fab_construction_queue(data.show_queue, data.build_queue, data.current_build);}} 
-			{{fab_display_filter( data.category, data.filtering );}}
-		</dl> 
-		
-		{{fab_robot}}
+<style>
+	.orgMechanical{
+		color:steelblue;
+	}
+</style>
 
-	{{else}}
-		<p><span class = 'bad'>FABRICATOR OFFLINE. CONTACT SYSTEM ADMINISTRATOR.</span></p>
+ <!-- --------------------------------------------------------------------------------------------
+	Organ Filtering
+ ----------------------------------------------------------------------------------------------->
+ {{function fab_limb_config_summary(species) {
+	let summary = " [";
+
+	if(species != undefined) {
+		summary += species;
+	} else {
+		summary += "<span class=bad>!! No species !!</span> ";
+	};
+
+	return summary + "]";
+} }}
+
+{{function fab_limb_config( species, expand_config) { }}
+	<dt class='collapsableList'>
+		{{:helper.link(make_list_toggle_prefix(expand_config, 'Configuration') + (expand_config ? '' : fab_limb_config_summary(species) ), null, {'toggle_config' : 1}, null, 'linkSubtle') }}
+	</dt>
+	{{if expand_config}}
+		<dd style='margin-left: 1em; width:90%;'>
+			<!-- Mode Specifics -->
+			<div class='fabConfigEntry'>
+				<div class='itemLabel'>Current Species:</div> 
+				<div class='itemContent'>{{:helper.link( species, null, {'pick_species' : 1} ) }}</div>
+			</div>
+		</dd>
 	{{/if}}
-{{ }; }}
+{{ } }}
 
-<!-------------------------------------------------------------------------------------------------
-	Setup Layout
-------------------------------------------------------------------------------------------------->
-
-{{ fab_header( data.network, data.network_id ); }}
-{{ fab_page_contents(data); }}
-
-<div><p>Selected Species: {{:data.picked_prosthetic_species}}{{:helper.link('(Set)', null, {'pick_prosthetic_species' : 1})}}</p></div>
+<!-- --------------------------------------------------------------------------------------------
+	Base UI
+ ----------------------------------------------------------------------------------------------->
+<!--Standard fab header-->
+{{fab_header( data.network, data.network_id ); }}
 
 {{if data.functional}}
-	{{ fab_header_network( data.network, data.network_id ); }}
-	<table width = '100%'>
-		<tr><td>{{ fab_resources_table( data.show_resources, data.material_storage ); }}</td></tr>
-		<tr><td>{{ fab_construction_queue( data.show_build_queue, data.build_queue, data.current_build ); }}</td></tr>
-		<tr><td>{{ fab_display_filter( data.category, data.filtering ); }}</td></tr>
-		<!--Special options-->
-		<tr><td>
-			<dl>
-				<dt>Settings</dt>
-				{{if data.color_selectable}}
-					<dd style={{ color_style(data.color); }}>Color: {{:helper.link('(Set)', null, {'color_select' : 1})}}</dd>
-				{{/if}}
-			</dl>
-		</td></tr>
-		<tr><td>{{ fab_build_options( data.build_options ); }}</td></tr>
-	</table>
+	<!--Collapsable list-->
+	<dl class='collapsableList'> 
+		{{ fab_resources_table( data.expand_resources, data.material_storage ); }}
+		{{ fab_construction_queue( data.expand_queue, data.build_queue, data.current_build ); }} 
+		{{ fab_limb_config( data.picked_prosthetic_species, data.expand_config ); }}
+		{{ fab_display_filter( data.category, data.filtering, data.hide_categories ); }}
+	</dl> 
+
+	<!-- Display our design list + filter  -->
+	{{ fab_build_options(data.build_options); }}
+
 {{else}}
 	<p><span class = 'bad'>FABRICATOR OFFLINE. CONTACT SYSTEM ADMINISTRATOR.</span></p>
 {{/if}}

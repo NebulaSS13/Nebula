@@ -43,7 +43,6 @@
 	updateUsrDialog()
 
 /obj/machinery/fabricator/proc/try_queue_build(var/datum/fabricator_recipe/recipe, var/multiplier)
-
 	// Do some basic sanity checking.
 	if(!is_functioning() || !istype(recipe) || !(recipe in design_cache))
 		return
@@ -55,6 +54,10 @@
 	for(var/material in recipe.resources)
 		if(stored_material[material] < round(recipe.resources[material] * mat_efficiency) * multiplier)
 			return
+
+	//Ask subclass if its okay to print
+	if(!can_build(recipe, multiplier))
+		return
 
 	// Generate and track a new order.
 	var/datum/fabricator_build_order/order = make_order(recipe, multiplier)
@@ -78,3 +81,7 @@
 	order.target_recipe =  recipe
 	order.multiplier =     multiplier
 	return order
+
+//Override this to add more conditions to printing an object
+/obj/machinery/fabricator/proc/can_build(var/datum/fabricator_recipe/recipe, var/multiplier)
+	return TRUE

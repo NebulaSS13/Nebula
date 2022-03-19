@@ -42,13 +42,13 @@
 	
 	//Tab expanding/collapsing
 	if(href_list["toggle_resources"])
-		ui_show_resources = !ui_show_resources
+		ui_expand_resources = !ui_expand_resources
 		. = TOPIC_REFRESH
 	if(href_list["toggle_queue"])
-		ui_show_queue = !ui_show_queue
+		ui_expand_queue = !ui_expand_queue
 		. = TOPIC_REFRESH
 	if(href_list["toggle_config"])
-		ui_show_config = !ui_show_config
+		ui_expand_config = !ui_expand_config
 		. = TOPIC_REFRESH
 
 /obj/machinery/fabricator/proc/try_cancel_build(var/datum/fabricator_build_order/order)

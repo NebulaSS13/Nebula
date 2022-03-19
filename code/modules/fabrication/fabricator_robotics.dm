@@ -19,7 +19,11 @@
 		/decl/material/solid/metal/uranium =    SHEET_MATERIAL_AMOUNT * 100,
 		/decl/material/solid/gemstone/diamond = SHEET_MATERIAL_AMOUNT * 100
 	)
-	var/picked_prosthetic_species
+	var/picked_prosthetic_species //Prosthetics will be printed with this species
+
+/obj/machinery/fabricator/robotics/Initialize()
+	. = ..()
+	picked_prosthetic_species = global.using_map?.default_species //Set it by default to the base species to preserve earlier behavior for now
 
 /obj/machinery/fabricator/robotics/make_order(datum/fabricator_recipe/recipe, multiplier)
 	var/datum/fabricator_build_order/order = ..()
@@ -35,8 +39,8 @@
 		O.status |= ORGAN_CUT_AWAY
 
 /obj/machinery/fabricator/robotics/OnTopic(user, href_list, state)
-	if(href_list["pick_prosthetic_species"])
-		var/chosen_specie = input(user, "Choose a specie to produce prosthetics for", "Target Species", null) in get_all_species()
+	if(href_list["pick_species"])
+		var/chosen_specie = input(user, "Choose a specie to produce prosthetics for", "Target Species", null) in get_playable_species()
 		if(chosen_specie)
 			picked_prosthetic_species = chosen_specie
 		. = TOPIC_REFRESH
@@ -48,7 +52,3 @@
 
 /obj/machinery/fabricator/robotics/get_nano_template()
 	return "fabricator_robot.tmpl"
-
-/obj/machinery/fabricator/robotics/get_extra_templates()
-	. = ..()
-	LAZYSET( ., "fab", "fabricator.tmpl")
