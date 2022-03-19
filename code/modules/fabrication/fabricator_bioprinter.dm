@@ -2,7 +2,7 @@
 
 /obj/machinery/fabricator/bioprinter
 	name = "bioprinter"
-	desc = "Fabricator used for printing new biological or artificial limbs and organs."
+	desc = "Fabricator used for cloning organs from DNA."
 	icon = 'icons/obj/machines/fabricators/bioprinter.dmi'
 	icon_state = "bioprinter"
 	base_icon_state = "bioprinter"
