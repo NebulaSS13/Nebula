@@ -40,7 +40,7 @@
 				var/weakref/R = sample["donor"]
 				var/mob/living/carbon/human/H = R.resolve()
 				if(H && istype(H) && H.species && H.dna)
-					loaded_dna = H.dna && H.dna.Clone()
+					loaded_dna = H.dna.Clone()
 					to_chat(user, SPAN_INFO("You inject the blood sample into \the [src]."))
 					S.reagents.remove_any(BIOPRINTER_BLOOD_SAMPLE_SIZE) 
 					//Tell nano to do its job
