@@ -27,28 +27,21 @@
 
 /obj/machinery/fabricator/robotics/make_order(datum/fabricator_recipe/recipe, multiplier)
 	var/datum/fabricator_build_order/order = ..()
-	LAZYSET(order.data, "picked_prosthetic_species", picked_prosthetic_species)
+	order.set_data("species", picked_prosthetic_species)
 	return order
 
-/obj/machinery/fabricator/robotics/do_build(datum/fabricator_build_order/order)
-	. = ..()
-	var/decl/species/S = LAZYACCESS(order.data, "picked_prosthetic_species")
-	for(var/obj/item/organ/O in .)
-		if(S)
-			O.set_species(S)
-		O.status |= ORGAN_CUT_AWAY
 
 /obj/machinery/fabricator/robotics/OnTopic(user, href_list, state)
 	. = ..()
 	if(href_list["pick_species"])
-		var/chosen_specie = input(user, "Choose a specie to produce prosthetics for", "Target Species", null) in get_playable_species()
-		if(chosen_specie)
-			picked_prosthetic_species = chosen_specie
+		var/chosen_species = input(user, "Choose a specie to produce prosthetics for", "Target Species", null) in get_playable_species()
+		if(chosen_species)
+			picked_prosthetic_species = chosen_species
 		. = TOPIC_REFRESH
 
 /obj/machinery/fabricator/robotics/ui_data(mob/user, ui_key)
 	. = ..()
-	LAZYSET(., "picked_prosthetic_species", picked_prosthetic_species)
+	LAZYSET(., "species", picked_prosthetic_species)
 
 /obj/machinery/fabricator/robotics/get_nano_template()
 	return "fabricator_robot.tmpl"

@@ -35,11 +35,11 @@
 
 /obj/machinery/fabricator/pipe/make_order(datum/fabricator_recipe/recipe, multiplier)
 	var/datum/fabricator_build_order/order = ..()
-	LAZYSET(order.data, "selected_color", selected_color)
+	order.set_data("selected_color", selected_color)
 	return order
 
 /obj/machinery/fabricator/pipe/do_build(datum/fabricator_build_order/order)
-	. = order.target_recipe.build(get_turf(src), order.multiplier, pipe_colors[LAZYACCESS(order.data, "selected_color")])
+	. = order.target_recipe.build(get_turf(src), order)
 	use_power_oneoff(500 * order.multiplier)
 
 /obj/machinery/fabricator/pipe/disposal

@@ -18,10 +18,13 @@
 			LAZYSET(resources, /decl/material/solid/metal/steel, meat_amount)
 		LAZYREMOVE(resources, /decl/material/solid/meat)
 
-/datum/fabricator_recipe/robotics/organ/build()
+/datum/fabricator_recipe/robotics/organ/build(turf/location, datum/fabricator_build_order/order)
 	. = ..()
+	var/species = order.get_data("species", global.using_map.default_species)
 	for(var/obj/item/organ/internal/I in .)
+		I.set_species(species)
 		I.robotize()
+		I.status |= ORGAN_CUT_AWAY
 
 /datum/fabricator_recipe/robotics/organ/heart
 	path = /obj/item/organ/internal/heart

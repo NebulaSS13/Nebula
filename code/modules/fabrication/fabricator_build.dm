@@ -15,7 +15,7 @@
 	update_icon()
 
 /obj/machinery/fabricator/proc/do_build(var/datum/fabricator_build_order/order)
-	. = order.target_recipe.build(get_turf(src), order.multiplier)
+	. = order.target_recipe.build(get_turf(src), order)
 	if(output_dir)
 		for(var/atom/movable/product in .)
 			step(product, output_dir)

@@ -19,13 +19,13 @@
 /obj/machinery/fabricator/bioprinter/make_order(datum/fabricator_recipe/recipe, multiplier)
 	var/datum/fabricator_build_order/order = ..()
 	//Keep these in the order so changing settings while queueing things up won't screw up older orders in the queue
-	LAZYSET(order.data, "dna", loaded_dna)
+	order.set_data("dna", loaded_dna)
 	return order
 
 /obj/machinery/fabricator/bioprinter/do_build(datum/fabricator_build_order/order)
 	. = ..()
 	//Fetch params as they were when the order was passed
-	var/datum/dna/D = LAZYACCESS(order.data, "dna")
+	var/datum/dna/D = order.get_data("dna")
 	for(var/obj/item/organ/O in .)
 		if(D)
 			O.set_dna(D)

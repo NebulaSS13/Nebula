@@ -6,7 +6,7 @@
 		FABRICATOR_CLASS_ROBOTICS
 	)
 
-/datum/fabricator_recipe/protolathe/cell/build(var/turf/location, var/amount = 1)
+/datum/fabricator_recipe/protolathe/cell/build()
 	. = ..()
 	for(var/obj/item/cell/C in .)
 		C.charge = 0

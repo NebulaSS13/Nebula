@@ -20,14 +20,14 @@
 	return order
 
 /obj/machinery/fabricator/book/do_build(datum/fabricator_build_order/order)
-	. = order.target_recipe.build(get_turf(src), order.multiplier, LAZYACCESS(order.data, "selected_color"))
+	. = order.target_recipe.build(get_turf(src), order)
 
-/datum/fabricator_recipe/book/skill/build(var/turf/location, var/amount = 1, var/color = COLOR_WHITE)
+/datum/fabricator_recipe/book/skill/build(var/turf/location, var/datum/fabricator_build_order/order)
 	. = list()
-	for(var/i = 1, i <= amount, i++)
+	for(var/i = 1, i <= order.multiplier, i++)
 		var/obj/item/book/skill/custom/new_item = new path(location)
 		if(colorable)
-			new_item.color = color
+			new_item.color =  order.get_data("selected_color", COLOR_WHITE)
 			new_item.overlays += overlay_image('icons/obj/library.dmi', "tb_over_pages", null, RESET_COLOR)
 		. += new_item
 

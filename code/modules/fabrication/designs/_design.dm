@@ -24,7 +24,7 @@
 		name = get_product_name()
 	if(required_technology == TRUE)
 		if(ispath(path, /obj/item))
-			var/list/res = build(null, 1)
+			var/list/res = build(null, new/datum/fabricator_build_order(src, 1))
 			if(length(res))
 				var/obj/item/O = res[1]
 				var/tech = O.get_origin_tech()
@@ -63,10 +63,10 @@
 		for(var/R in reagents.reagent_volumes)
 			.[R] = REAGENT_VOLUME(reagents, R)
 
-/datum/fabricator_recipe/proc/build(var/turf/location, var/amount = 1)
+/datum/fabricator_recipe/proc/build(var/turf/location, var/datum/fabricator_build_order/order)
 	. = list()
 	if(ispath(path, /obj/item/stack))
-		. += new path(location, amount)
+		. += new path(location, order.multiplier)
 	else
-		for(var/i = 1, i <= amount, i++)
+		for(var/i = 1, i <= order.multiplier, i++)
 			. += new path(location)
