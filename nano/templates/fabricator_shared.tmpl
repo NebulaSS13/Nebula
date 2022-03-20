@@ -142,14 +142,14 @@
 	return longest;
 } }}
 
-<!-- Shortens a number, and appends K, M, or B respectively if in the thousands, millions, or billions -->
+<!-- Shortens a number, and appends K, M, or G respectively if in the thousands, millions, or billions -->
 {{function shorten_number(amount, fixed) {
 	var billions = amount / 1000000000;
 	var millions = amount / 1000000;
 	var thousands = amount / 1000;
 	
 	if(billions >= 1){
-		return String(fixed? billions.toFixed(3) : billions) + '<span style=\'font-size:smaller;\'>B</span>';
+		return String(fixed? billions.toFixed(3) : billions) + '<span style=\'font-size:smaller;\'>G</span>';
 	}
 	else if(millions >= 1){
 		return String(fixed? millions.toFixed(3) : millions) + '<span style=\'font-size:smaller;\'>M</span>';
