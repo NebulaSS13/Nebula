@@ -177,7 +177,7 @@
 	return ..()
 
 /obj/item/organ/internal/posibrain/do_install(var/mob/living/target)
-	if(!(. = ..())) 
+	if(!(. = ..()))
 		return
 	if(istype(owner))
 		SetName(initial(name)) //Reset the organ's name to stay coherent if we're put back into someone's skull
@@ -248,7 +248,7 @@
 		return 0
 	return cell && cell.use(amount)
 
-/obj/item/organ/internal/cell/proc/get_power_drain()	
+/obj/item/organ/internal/cell/proc/get_power_drain()
 	var/damage_factor = 1 + 10 * damage/max_damage
 	return servo_cost * damage_factor
 
@@ -321,10 +321,13 @@
 
 /obj/item/organ/internal/mmi_holder/Destroy()
 	stored_mmi = null
+	persistantMind = null
 	return ..()
 
-/obj/item/organ/internal/mmi_holder/Initialize(mapload, var/internal)
-	. = ..()
+/obj/item/organ/internal/mmi_holder/do_install(mob/living/carbon/human/target, obj/item/organ/external/affected, in_place)
+	if(status & ORGAN_CUT_AWAY || !(. = ..()))
+		return
+
 	if(!stored_mmi)
 		stored_mmi = new(src)
 	update_from_mmi()

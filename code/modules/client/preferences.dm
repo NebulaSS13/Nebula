@@ -374,8 +374,6 @@ var/global/list/time_prefs_fixed = list()
 	character.h_style = h_style
 	character.f_style = f_style
 
-	character.species.handle_limbs_setup(character)
-
 	QDEL_NULL_LIST(character.worn_underwear)
 	character.worn_underwear = list()
 
