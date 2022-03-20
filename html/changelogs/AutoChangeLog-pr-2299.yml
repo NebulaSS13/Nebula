@@ -1,0 +1,5 @@
+author: tag if you want to specify another name or several people. -->
+delete-after: true
+changes:
+  - bugfix: Fixes potential index out-of-bound error when filling grown foods with
+      reagents.
