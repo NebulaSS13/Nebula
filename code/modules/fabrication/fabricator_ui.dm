@@ -127,12 +127,13 @@
 /obj/machinery/fabricator/ui_data(mob/user, ui_key)
 	var/list/data = ..()
 	//Common fab data
-	data += ui_data_status(user, ui_key)
-	data += ui_data_resources(user, ui_key)
-	data += ui_data_queue(user, ui_key)
-	data += ui_data_config(user, ui_key)
-	data += ui_data_filter(user, ui_key)
-	data += ui_data_build_options(user, ui_key)
+	data += ui_data_status(user, ui_key) //status is still displayed when not working for convenience
+	if(is_functioning())
+		data += ui_data_resources(user, ui_key)
+		data += ui_data_queue(user, ui_key)
+		data += ui_data_config(user, ui_key)
+		data += ui_data_filter(user, ui_key)
+		data += ui_data_build_options(user, ui_key)
 	return data
 
 /obj/machinery/fabricator/proc/ui_data_status(mob/user, ui_key)
@@ -144,16 +145,12 @@
 	return data
 
 /obj/machinery/fabricator/proc/ui_data_resources(mob/user, ui_key)
-	if(!is_functioning())
-		return
 	var/list/data = list()
 	data["expand_resources"] = ui_expand_resources
 	data["material_storage"] = ui_fabricator_resource_data()
 	return data
 
 /obj/machinery/fabricator/proc/ui_data_queue(mob/user, ui_key)
-	if(!is_functioning())
-		return
 	var/list/data = list()
 	data["expand_queue"]  = ui_expand_queue
 	data["current_build"] = ui_fabricator_current_build_data()
@@ -162,8 +159,6 @@
 
 //Handles populating config data, meant to be overriden
 /obj/machinery/fabricator/proc/ui_data_config(mob/user, ui_key)
-	if(!is_functioning())
-		return
 	var/list/data = list()
 	data["expand_config"]    = ui_expand_config
 	data["skip_config"]      = !ui_draw_config(user, ui_key) //Setting this to true just skip over drawing the config tab completely when its empty
@@ -172,8 +167,6 @@
 	return data
 
 /obj/machinery/fabricator/proc/ui_data_filter(mob/user, ui_key)
-	if(!is_functioning())
-		return
 	var/list/data = list()
 	data["category"]        = show_category
 	data["filtering"]       = filter_string || "No filter set."
@@ -181,8 +174,6 @@
 	return data
 
 /obj/machinery/fabricator/proc/ui_data_build_options(mob/user, ui_key)
-	if(!is_functioning())
-		return
 	var/list/data = list()
 	data["build_options"] = ui_fabricator_build_options_data()
 	return data
