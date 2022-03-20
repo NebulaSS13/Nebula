@@ -39,12 +39,12 @@
 		O.status |= ORGAN_CUT_AWAY
 
 /obj/machinery/fabricator/robotics/OnTopic(user, href_list, state)
+	. = ..()
 	if(href_list["pick_species"])
 		var/chosen_specie = input(user, "Choose a specie to produce prosthetics for", "Target Species", null) in get_playable_species()
 		if(chosen_specie)
 			picked_prosthetic_species = chosen_specie
 		. = TOPIC_REFRESH
-	. = ..()
 
 /obj/machinery/fabricator/robotics/ui_data(mob/user, ui_key)
 	. = ..()

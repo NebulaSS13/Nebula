@@ -51,13 +51,13 @@
 	. = ..()
 
 /obj/machinery/fabricator/bioprinter/OnTopic(user, href_list, state)
+	. = ..()
 	if(href_list["flush_dna"])
 		if(fab_status_flags & FAB_BUSY)
 			state("Can't flush DNA while printing in progress!")
 		else
 			loaded_dna = null
 		. = TOPIC_REFRESH
-	. = ..()
 
 /obj/machinery/fabricator/bioprinter/proc/ui_data_dna(mob/user, ui_key)
 	if(!loaded_dna)
