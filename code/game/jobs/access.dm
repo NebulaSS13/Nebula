@@ -7,14 +7,23 @@
 		return FALSE
 	return check_access_list(M.GetAccess())
 
-/atom/movable/proc/GetAccess()
+/atom/movable/proc/GetAccess(var/union = FALSE)
 	. = list()
-	var/obj/item/card/id/id = GetIdCard()
+	if(union)
+		for(var/atom/movable/id in GetIdCards())
+			. |= id.GetAccess()
+		return .
+	var/atom/movable/id = GetIdCard()
 	if(id)
-		. += id.GetAccess()
+		. = id.GetAccess()
 
 /atom/movable/proc/GetIdCard()
-	return null
+	return LAZYACCESS(GetIdCards(), 1)
+
+/atom/movable/proc/GetIdCards()
+	var/datum/extension/access_provider/our_provider
+	if((our_provider = get_extension(src, /datum/extension/access_provider)))
+		LAZYDISTINCTADD(., our_provider.GetIdCards())
 
 /atom/movable/proc/check_access(atom/movable/A)
 	return check_access_list(A ? A.GetAccess() : list())
@@ -224,21 +233,21 @@ var/global/list/priv_region_access
 
 // Gets the ID card of a mob, but will not check types in the exceptions list
 /mob/living/carbon/human/GetIdCard(exceptions = null)
-	var/list/id_cards = get_held_items()
-	LAZYDISTINCTADD(id_cards, wear_id)
-	for(var/obj/item/I in id_cards)
-		if(is_type_in_list(I, exceptions))
-			continue
-		var/obj/item/card/id = I ? I.GetIdCard() : null
-		if(istype(id))
-			return id
+    return LAZYACCESS(GetIdCards(exceptions), 1)
 
-/mob/living/carbon/human/GetAccess()
-	. = list()
-	var/list/id_cards = get_held_items()
-	LAZYDISTINCTADD(id_cards, wear_id)
-	for(var/obj/item/I in id_cards)
-		. |= I.GetAccess()
+/mob/living/carbon/human/GetIdCards(exceptions = null)
+    . = ..()
+    var/list/candidates = get_held_items()
+    LAZYDISTINCTADD(candidates, wear_id)
+    for(var/atom/movable/candidate in candidates)
+        if(!candidate || is_type_in_list(candidate, exceptions))
+            continue
+        var/obj/item/card/id/id_card = candidate?.GetIdCard()
+        if(istype(id_card))
+            LAZYDISTINCTADD(., id_card)
+
+/mob/living/carbon/human/GetAccess(var/union = TRUE)
+	. = ..(union)
 
 /mob/living/silicon/GetIdCard()
 	if(stat || (ckey && !client))

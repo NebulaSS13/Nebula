@@ -38,15 +38,19 @@
 	var/obj/item/card/id/id_card = /obj/item/card/id/ascent
 
 /obj/item/organ/internal/controller/do_install(mob/living/carbon/human/target, obj/item/organ/external/affected)
-	. = ..()
-	if(owner)
-		owner.set_id_info(id_card)
-		owner.add_language(/decl/language/mantid/worldnet)
+	if(!(. = ..()) || !owner)
+		return
+	var/datum/extension/access_provider/owner_access = get_or_create_extension(owner, /datum/extension/access_provider)
+	owner_access?.register_id(src)
+	owner?.set_id_info(id_card)
+	owner?.add_language(/decl/language/mantid/worldnet)
 
 /obj/item/organ/internal/controller/do_uninstall(in_place, detach, ignore_children)
 	var/mob/living/carbon/H = owner
+	var/datum/extension/access_provider/owner_access = get_extension(owner, /datum/extension/access_provider)
+	owner_access?.unregister_id(src)
 	. = ..()
-	if(istype(H) && H != owner && !(locate(type) in H.get_internal_organs()))
+	if(H && !(locate(type) in H.get_internal_organs()))
 		H.remove_language(/decl/language/mantid/worldnet)
 
 /obj/item/organ/internal/controller/Initialize()
@@ -59,6 +63,10 @@
 	if(damage < min_broken_damage)
 		return id_card
 
+/obj/item/organ/internal/controller/GetIdCards()
+	if(damage < min_broken_damage)
+		return list(id_card)
+
 /obj/item/organ/internal/controller/GetAccess()
-	if(id_card && damage < min_broken_damage)
-		return id_card.GetAccess()
+	if(damage < min_broken_damage)
+		return id_card?.GetAccess()

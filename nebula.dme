@@ -298,6 +298,7 @@
 #include "code\datums\composite_sounds\_composite_sound.dm"
 #include "code\datums\composite_sounds\machinery_sounds.dm"
 #include "code\datums\extensions\_defines.dm"
+#include "code\datums\extensions\access_provider.dm"
 #include "code\datums\extensions\deity_be_near.dm"
 #include "code\datums\extensions\event_registration.dm"
 #include "code\datums\extensions\extensions.dm"
