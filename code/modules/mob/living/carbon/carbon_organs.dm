@@ -19,7 +19,7 @@
 /mob/living/carbon/proc/delete_organs()
 	for(var/obj/item/organ/O in get_organs())
 		remove_organ(O, FALSE, FALSE, TRUE, TRUE, FALSE) //Remove them first so we don't trigger removal effects by just calling delete on them
-	QDEL_LIST_ASSOC_VAL(organs_by_tag)
+		qdel(O)
 	organs_by_tag = null
 	internal_organs = null
 	external_organs = null
