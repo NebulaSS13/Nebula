@@ -851,7 +851,8 @@ default behaviour is:
 	if(!has_gravity())
 		return
 	if(isturf(loc) && pull_damage() && prob(getBruteLoss() / 6))
-		blood_splatter(loc, src, large = TRUE)
+		if (!should_have_organ(BP_HEART))
+			blood_splatter(loc, src, large = TRUE)
 		if(prob(25))
 			adjustBruteLoss(1)
 			visible_message(SPAN_DANGER("\The [src]'s [isSynthetic() ? "state worsens": "wounds open more"] from being dragged!"))

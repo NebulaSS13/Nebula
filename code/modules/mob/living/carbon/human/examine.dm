@@ -106,7 +106,7 @@
 				coating = E.coating
 				break
 		if(coating)
-			msg += "There's something <font color='[coating.get_color()]'>something on [G.his] hands</font>!\n"
+			msg += "There's <font color='[coating.get_color()]'>something on [G.his] hands</font>!\n"
 
 	//belt
 	if(belt)
