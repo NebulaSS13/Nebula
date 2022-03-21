@@ -310,6 +310,7 @@
 #include "code\datums\extensions\lockable.dm"
 #include "code\datums\extensions\parts_stash.dm"
 #include "code\datums\extensions\penetration.dm"
+#include "code\datums\extensions\radio_provider.dm"
 #include "code\datums\extensions\state_machine.dm"
 #include "code\datums\extensions\appearance\appearance.dm"
 #include "code\datums\extensions\appearance\base_icon_state.dm"

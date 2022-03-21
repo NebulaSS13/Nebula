@@ -23,9 +23,10 @@
 /obj/item/radio/headset/Initialize()
 	. = ..()
 	internal_channels.Cut()
-	for(var/T in encryption_keys)
+	for(var/i in 1 to LAZYLEN(encryption_keys))
+		var/T = encryption_keys[i]
 		if(ispath(T))
-			encryption_keys = new T(src)
+			encryption_keys[i] = new T(src)
 	if(ks1type)
 		encryption_keys += new ks1type(src)
 	if(ks2type)
