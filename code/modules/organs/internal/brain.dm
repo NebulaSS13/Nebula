@@ -85,10 +85,10 @@
 		SetName(initial(name)) //Reset the organ's name to stay coherent if we're putting it back into someone's skull
 
 /obj/item/organ/internal/brain/do_uninstall(in_place, detach, ignore_children, update_icon)
-	if(!(. = ..()))
-		return
 	if(!in_place && istype(owner) && name == initial(name))
 		SetName("\the [owner.real_name]'s [initial(name)]")
+	if(!(. = ..()))
+		return
 
 /obj/item/organ/internal/brain/on_remove_effects()
 	if(istype(owner))
