@@ -1,0 +1,5 @@
+author: tag if you want to specify another name or several people. -->
+delete-after: true
+changes:
+  - bugfix: Brains removed from someone's head now properly gets renamed to whoever
+      the brain owner was.
