@@ -1194,14 +1194,23 @@ Note that amputating the affected organ does in fact remove the infection from t
 
 	slowdown = 0
 
-	if(!ispath(company, /decl/prosthetics_manufacturer))
-		PRINT_STACK_TRACE("Limb [type] robotize() was supplied a null or non-decl manufacturer: '[company]'")
-		company = /decl/prosthetics_manufacturer
+	var/decl/prosthetics_manufacturer/R
+	if(istype(company, /decl/prosthetics_manufacturer))
+		//Handling for decl
+		R = company
+		company = R.type
+	else 
+		//Handling for paths
+		if(!ispath(company))
+			PRINT_STACK_TRACE("Limb [type] robotize() was supplied a null or non-decl manufacturer: '[company]'")
+			company = /decl/prosthetics_manufacturer
+		R = GET_DECL(company)
 	
-	var/decl/prosthetics_manufacturer/R = GET_DECL(company)
+	//If can't install fallback to default
 	if(!R.check_can_install(organ_tag, (owner?.get_bodytype_category() || global.using_map.default_bodytype), (owner?.get_species_name() || global.using_map.default_species)))
+		company = /decl/prosthetics_manufacturer
 		R = GET_DECL(/decl/prosthetics_manufacturer)
-
+		
 	model = company
 	name = "[R ? R.modifier_string : "robotic"] [initial(name)]"
 	desc = "[R.desc] It looks like it was produced by [R.name]."

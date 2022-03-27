@@ -67,9 +67,12 @@
 		var/decl/prosthetics_manufacturer/brand = GET_DECL(model)
 		return "[.] ([brand.name])"
 
-/datum/fabricator_recipe/robotics/prosthetic/build()
+/datum/fabricator_recipe/robotics/prosthetic/build(var/turf/location, var/datum/fabricator_build_order/order)
 	. = ..()
+	var/species = order.get_data("species", global.using_map.default_species)
 	for(var/obj/item/organ/external/E in .)
+		E.set_species(species)
 		E.robotize(model)
+		E.status |= ORGAN_CUT_AWAY
 
 DEFINE_ROBOLIMB_DESIGNS(/decl/prosthetics_manufacturer, generic)
