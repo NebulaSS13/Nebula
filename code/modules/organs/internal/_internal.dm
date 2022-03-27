@@ -24,14 +24,6 @@
 	if(species.organs_icon)
 		icon = species.organs_icon
 
-//disconnected the organ from it's owner but does not remove it, instead it becomes an implant that can be removed with implant surgery
-//TODO move this to organ/internal once the FPB port comes through
-/obj/item/organ/proc/cut_away(var/mob/living/user)
-	var/obj/item/organ/external/parent = owner.get_organ(parent_organ)
-	if(istype(parent)) //TODO ensure that we don't have to check this.
-		do_uninstall(detach = TRUE) //
-		LAZYADD(parent.implants, src)
-
 /obj/item/organ/internal/do_install(mob/living/carbon/human/target, obj/item/organ/external/affected, in_place)
 	if(status & ORGAN_CUT_AWAY || !(. = ..()))
 		return

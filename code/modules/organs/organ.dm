@@ -156,7 +156,7 @@
 
 /obj/item/organ/Process()
 
-	if(loc != owner)
+	if(loc != owner) //#FIXME: looks like someone was trying to hide a bug :P That probably could break organs placed inside a wrapper though
 		owner = null
 
 	//dead already, no need for more processing
@@ -538,3 +538,7 @@ var/global/list/ailment_reference_cache = list()
 /obj/item/organ/proc/is_internal()
 	return FALSE
 
+//Returns the organ that will be placed in the parent's "implants" table when detached during surgery.
+// Meant to wrap the behavior of the mmi_holder for now. Remove this if we finally fix that thing
+/obj/item/organ/proc/get_detached_organ()
+	return src

@@ -22,9 +22,10 @@
 
 //Needed for organ surgery
 /mob/living/proc/add_organ(var/obj/item/organ/O, var/obj/item/organ/external/affected = null, var/in_place = FALSE, var/update_icon = TRUE)
+	. = O.do_install(src, affected, in_place, update_icon)
+	updatehealth()
 	if(!in_place)
 		on_gained_organ(O)
-	. = O.do_install(src, affected, in_place, update_icon)
 
 /mob/living/proc/remove_organ(var/obj/item/organ/O, var/drop_organ = TRUE, var/detach = TRUE, var/ignore_children = FALSE, var/in_place = FALSE, var/update_icon = TRUE)
 	if(!in_place)
@@ -33,6 +34,7 @@
 
 	if(drop_organ)
 		O.dropInto(get_turf(src))
+	updatehealth()
 
 //Should handle vital organ checks, icon updates, events
 /mob/living/proc/on_lost_organ(var/obj/item/organ/O)
@@ -47,3 +49,12 @@
 		return FALSE //When deleting don't bother running effects
 	O.on_add_effects(src)
 	return TRUE
+
+//Called by surgeries when detaching an organ during organ detach surgery
+/mob/living/proc/surgical_detach_organ(var/obj/item/organ/O, var/obj/item/organ/external/parent)
+	remove_organ(O, FALSE, TRUE)
+	O.forceMove(src)
+
+//Called by surgery when placing an organ during organ attach surgery. Happens before attaching
+/mob/living/proc/surgical_place_organ(var/obj/item/organ/O, var/obj/item/organ/external/parent)
+	O.forceMove(src)

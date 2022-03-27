@@ -355,14 +355,6 @@
 		owner.switch_from_dead_to_living_mob_list()
 		owner.visible_message("<span class='danger'>\The [owner] twitches visibly!</span>")
 
-/obj/item/organ/internal/mmi_holder/cut_away(var/mob/living/user)
-	var/obj/item/organ/external/parent = owner.get_organ(parent_organ)
-	if(istype(parent))
-		do_uninstall(detach = TRUE) //#TODO: detach proc for organs/mobs so we have less args to pass..
-		var/brain = transfer_and_delete()
-		if(brain)
-			LAZYADD(parent.implants, brain)
-
 /obj/item/organ/internal/mmi_holder/on_remove_effects(mob/living/last_owner)
 	if(last_owner && last_owner.mind)
 		persistantMind = last_owner.mind
@@ -381,3 +373,8 @@
 			if(response == "Yes")
 				persistantMind.transfer_to(stored_mmi.brainmob)
 	qdel(src)
+
+//Make sure the organ that we detach fromn the mob isn't the holder
+//Remove the base proc if the mmi_holder is removed. Its the only thing that currently uses this
+/obj/item/organ/internal/mmi_holder/get_detached_organ()
+	return transfer_and_delete()

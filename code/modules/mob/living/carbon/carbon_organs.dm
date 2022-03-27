@@ -35,7 +35,6 @@
 		LAZYDISTINCTADD(internal_organs, O)
 	else
 		LAZYDISTINCTADD(external_organs, O)
-
 	. = ..()
 
 /mob/living/carbon/remove_organ(var/obj/item/organ/O, var/drop_organ = TRUE, var/detach = TRUE, var/ignore_children = FALSE,  var/in_place = FALSE, var/update_icon = TRUE)
@@ -61,3 +60,14 @@
 	//Check if we should die
 	if(species.is_vital_organ(src, O))
 		death()
+
+//Called by surgeries when detaching an organ during organ detach surgery
+/mob/living/carbon/surgical_detach_organ(var/obj/item/organ/O, var/obj/item/organ/external/parent)
+	remove_organ(O, FALSE, TRUE)
+	O.forceMove(src)
+	LAZYDISTINCTADD(parent.implants, O.get_detached_organ()) //#FIXME: get_detached_organ() is a placeholder for handling the weird behavior of the mmi_holder
+
+//Called by surgery when placing an organ during organ attach surgery. Happens before attaching
+/mob/living/carbon/surgical_place_organ(var/obj/item/organ/O, var/obj/item/organ/external/parent)
+	LAZYDISTINCTADD(parent.implants, O)
+	O.forceMove(src)

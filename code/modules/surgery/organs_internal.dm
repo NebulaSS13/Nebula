@@ -121,8 +121,9 @@
 	user.visible_message("<span class='notice'>[user] has separated [target]'s [LAZYACCESS(global.surgeries_in_progress["\ref[target]"], target_zone)] with \the [tool].</span>" , \
 	"<span class='notice'>You have separated [target]'s [LAZYACCESS(global.surgeries_in_progress["\ref[target]"], target_zone)] with \the [tool].</span>")
 	var/obj/item/organ/I = target.get_organ(LAZYACCESS(global.surgeries_in_progress["\ref[target]"], target_zone))
-	if(I && istype(I))
-		I.cut_away(user)
+	var/obj/item/organ/external/affected = target.get_organ(target_zone)
+	if(I && istype(I) && istype(affected))
+		target.surgical_detach_organ(I, affected)
 
 /decl/surgery_step/internal/detatch_organ/fail_step(mob/living/user, mob/living/target, target_zone, obj/item/tool)
 	var/obj/item/organ/external/affected = target.get_organ(target_zone)
@@ -194,14 +195,12 @@
 			playsound(target.loc, 'sound/effects/squelch1.ogg', 15, 1)
 		else
 			playsound(target.loc, 'sound/items/Ratchet.ogg', 50, 1)
-	if(istype(O, /obj/item/organ/internal/mmi_holder))
-		var/obj/item/organ/internal/mmi_holder/brain = O
-		brain.transfer_and_delete()
 
 	// Just in case somehow the organ we're extracting from an organic is an MMI
 	if(istype(O, /obj/item/organ/internal/mmi_holder))
 		var/obj/item/organ/internal/mmi_holder/brain = O
 		brain.transfer_and_delete()
+		log_warning("Organ removal surgery on '[target]' returned a mmi_holder '[O]' instead of a mmi!!")
 
 /decl/surgery_step/internal/remove_organ/fail_step(mob/living/user, mob/living/target, target_zone, obj/item/tool)
 	var/obj/item/organ/external/affected = target.get_organ(target_zone)
@@ -275,7 +274,7 @@
 	"<span class='notice'>You have [robotic_surgery ? "reinstalled" : "transplanted"] \the [tool] into [target]'s [affected.name].</span>")
 	var/obj/item/organ/O = tool
 	if(istype(O) && user.unEquip(O, target))
-		LAZYDISTINCTADD(affected.implants, O) //move the organ into the patient. The organ is properly reattached in the next step
+		target.surgical_place_organ(O, affected) //move the organ into the patient. The organ is properly reattached in the next step 
 		if(!(O.status & ORGAN_CUT_AWAY))
 			log_debug("[user] ([user.ckey]) replaced organ [O], which didn't have ORGAN_CUT_AWAY set, in [target] ([target.ckey])")
 			O.status |= ORGAN_CUT_AWAY
@@ -372,7 +371,7 @@
 
 	var/obj/item/organ/external/affected = target.get_organ(target_zone)
 	if(istype(I) && I.parent_organ == target_zone && affected && (I in affected.implants))
-		I.status &= ~ORGAN_CUT_AWAY //apply sutures
+		I.set_detached(FALSE) //apply sutures
 		LAZYREMOVE(affected.implants, I)
 		target.add_organ(I, affected)
 

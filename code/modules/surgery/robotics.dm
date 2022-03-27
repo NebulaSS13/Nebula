@@ -415,8 +415,9 @@
 	user.visible_message("<span class='notice'>[user] has decoupled [target]'s [LAZYACCESS(global.surgeries_in_progress["\ref[target]"], target_zone)] with \the [tool].</span>" , \
 	"<span class='notice'>You have decoupled [target]'s [LAZYACCESS(global.surgeries_in_progress["\ref[target]"], target_zone)] with \the [tool].</span>")
 	var/obj/item/organ/internal/I = target.get_organ(LAZYACCESS(global.surgeries_in_progress["\ref[target]"], target_zone))
-	if(I && istype(I))
-		I.cut_away(user)
+	var/obj/item/organ/external/affected = target.get_organ(target_zone)
+	if(I && istype(I) && istype(affected))
+		target.surgical_detach_organ(I, affected)
 
 /decl/surgery_step/robotics/detatch_organ_robotic/fail_step(mob/living/user, mob/living/target, target_zone, obj/item/tool)
 	user.visible_message("<span class='warning'>[user]'s hand slips, disconnecting \the [tool].</span>", \

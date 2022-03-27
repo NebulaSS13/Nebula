@@ -34,10 +34,6 @@
 	heat_level_2 = SYNTH_HEAT_LEVEL_2
 	heat_level_3 = SYNTH_HEAT_LEVEL_3
 
-	vital_organs = list(
-		BP_BRAIN = list("path" = /obj/item/organ/internal/brain/golem),
-	)
-
 	has_organ = list(
 		BP_BRAIN = /obj/item/organ/internal/brain/golem
 	)
