@@ -25,6 +25,8 @@
 		icon = species.organs_icon
 
 /obj/item/organ/internal/do_install(mob/living/carbon/human/target, obj/item/organ/external/affected, in_place)
+	if(status & ORGAN_CUT_AWAY)
+		log_warning("Tried to install '[log_info_line(src)]' which has its ORGAN_CUT_AWAY flag on! Mob: '[log_info_line(owner)]', Parent limb: '[log_info_line(affected)]'.")
 	if(status & ORGAN_CUT_AWAY || !(. = ..()))
 		return
 
