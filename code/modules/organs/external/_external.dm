@@ -1314,7 +1314,7 @@ Note that amputating the affected organ does in fact remove the infection from t
 			if(!ignore_children)
 				//Move our chilren limb into our contents
 				for(var/obj/item/organ/external/O in children)
-					victim.remove_organ(O, drop_organ = FALSE, ignore_children = TRUE)
+					victim.remove_organ(O, FALSE)
 					if(QDELETED(O))
 						continue
 					// if we didn't lose the organ we still want it as a child
@@ -1326,7 +1326,7 @@ Note that amputating the affected organ does in fact remove the infection from t
 			for(var/obj/item/organ/organ in internal_organs)
 				victim.remove_organ(organ, FALSE, FALSE, FALSE, in_place, update_icon) // Organ stays inside and connected
 				if(!QDELETED(organ))
-					organ.forceMove(src)
+					organ.do_install(null, src, TRUE) //Forcemove the organ and properly set it up in our internal data
 
 	// Remove parent references
 	if(parent)
