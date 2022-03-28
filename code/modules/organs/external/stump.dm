@@ -27,4 +27,4 @@
 			status |= ORGAN_CRYSTAL // Likewise with crystalline limbs.
 
 /obj/item/organ/external/stump/is_stump()
-	return 1
+	return TRUE
