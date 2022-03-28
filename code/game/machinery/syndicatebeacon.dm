@@ -105,7 +105,6 @@
 	if(user)
 		to_chat(user, "<span class='notice'>You activate the beacon.</span>")
 
-
 /obj/machinery/singularity_beacon/proc/Deactivate(mob/user = null)
 	for(var/obj/singularity/singulo in global.singularities)
 		if(singulo.target == src)
@@ -114,7 +113,6 @@
 	update_use_power(POWER_USE_OFF)
 	if(user)
 		to_chat(user, "<span class='notice'>You deactivate the beacon.</span>")
-
 
 /obj/machinery/singularity_beacon/physical_attack_hand(var/mob/user)
 	. = TRUE
@@ -152,10 +150,13 @@
 /obj/machinery/singularity_beacon/Destroy()
 	if(use_power)
 		Deactivate()
-	..()
+	. = ..()
 
-/obj/machinery/singularity_beacon/Process()
-	if(use_power && (stat & NOPOWER))
+/obj/machinery/singularity_beacon/power_change()
+	. = ..()
+	if(!. || !use_power)
+		return
+	if(stat & NOPOWER)
 		Deactivate()
 
 /obj/machinery/singularity_beacon/syndicate

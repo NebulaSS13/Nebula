@@ -165,7 +165,7 @@ This is /obj/machinery level code to properly manage power usage from the area.
 // Return the powernet of a cable node underneath the machine.
 /obj/machinery/proc/get_powernet()
 	var/turf/T = loc
-	if(!T || !istype(T))
+	if(!istype(T))
 		return
 
 	var/obj/structure/cable/C = T.get_cable_node()
