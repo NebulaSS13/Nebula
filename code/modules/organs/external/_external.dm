@@ -958,6 +958,7 @@ Note that amputating the affected organ does in fact remove the infection from t
 		var/obj/item/organ/external/damaged_organ = original_parent
 		if(!clean)
 			var/obj/item/organ/external/stump/stump = new (victim, 0, src)
+			victim.add_organ(stump, damaged_organ)
 			stump.add_pain(max_damage)
 			damaged_organ = stump
 			if(disintegrate != DISMEMBER_METHOD_BURN)
