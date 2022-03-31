@@ -71,3 +71,8 @@
 	LAZYDISTINCTADD(parent.implants, O)
 	O.forceMove(src)
 
+/mob/living/carbon/get_contained_external_atoms()
+	. = ..()
+	//Don't dump out stumps
+	for(var/obj/item/organ/external/stump/S in .)
+		. -= S
