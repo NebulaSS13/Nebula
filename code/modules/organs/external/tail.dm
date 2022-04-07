@@ -29,7 +29,7 @@
 	if(update_icon && !istype(H) && H != owner)
 		H.update_tail_showing(FALSE)
 
-/obj/item/organ/external/tail/do_install(mob/living/carbon/human/target, affected, in_place, update_icon)
+/obj/item/organ/external/tail/do_install(mob/living/carbon/human/target, affected, in_place, update_icon, detached)
 	. = ..()
 	if(update_icon && istype(owner))
 		owner.update_tail_showing(FALSE)

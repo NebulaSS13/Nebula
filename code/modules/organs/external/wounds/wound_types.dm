@@ -269,10 +269,12 @@
 
 /** EXTERNAL ORGAN LOSS **/
 /datum/wound/lost_limb
+	var/limb_tag
 
 /datum/wound/lost_limb/New(var/obj/item/organ/external/lost_limb, var/losstype, var/clean)
 	var/damage_amt = lost_limb.max_damage
 	if(clean) damage_amt /= 2
+	limb_tag = lost_limb.organ_tag
 
 	switch(losstype)
 		if(DISMEMBER_METHOD_EDGE, DISMEMBER_METHOD_BLUNT)

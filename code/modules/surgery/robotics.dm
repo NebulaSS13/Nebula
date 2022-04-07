@@ -417,7 +417,7 @@
 	var/obj/item/organ/internal/I = target.get_organ(LAZYACCESS(global.surgeries_in_progress["\ref[target]"], target_zone))
 	var/obj/item/organ/external/affected = target.get_organ(target_zone)
 	if(I && istype(I) && istype(affected))
-		target.surgical_detach_organ(I, affected)
+		target.remove_organ(I, detach = TRUE)
 
 /decl/surgery_step/robotics/detatch_organ_robotic/fail_step(mob/living/user, mob/living/target, target_zone, obj/item/tool)
 	user.visible_message("<span class='warning'>[user]'s hand slips, disconnecting \the [tool].</span>", \
@@ -467,9 +467,7 @@
 	var/obj/item/organ/external/affected = target.get_organ(target_zone)
 	for (var/obj/item/organ/I in affected.implants)
 		if (I.organ_tag == current_organ)
-			I.status &= ~ORGAN_CUT_AWAY
-			LAZYREMOVE(affected.implants, I)
-			target.add_organ(I, affected)
+			target.add_organ(I, affected, detached = TRUE)
 			break
 
 /decl/surgery_step/robotics/attach_organ_robotic/fail_step(mob/living/user, mob/living/target, target_zone, obj/item/tool)
@@ -529,7 +527,7 @@
 	var/obj/item/mmi/M = tool
 	var/obj/item/organ/internal/mmi_holder/holder = new(target, 1)
 	var/mob/living/carbon/human/H = target
-	H.add_organ(holder, null, TRUE, TRUE)
+	H.add_organ(holder, affected, TRUE)
 	tool.forceMove(holder)
 	holder.stored_mmi = tool
 	holder.update_from_mmi()

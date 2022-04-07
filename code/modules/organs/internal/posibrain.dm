@@ -176,7 +176,7 @@
 		transfer_identity(owner)
 	return ..()
 
-/obj/item/organ/internal/posibrain/do_install(var/mob/living/target)
+/obj/item/organ/internal/posibrain/do_install(mob/living/carbon/human/target, obj/item/organ/external/affected, in_place, update_icon, detached)
 	if(!(. = ..())) 
 		return
 	if(istype(owner))
@@ -374,7 +374,7 @@
 				persistantMind.transfer_to(stored_mmi.brainmob)
 	qdel(src)
 
-//Make sure the organ that we detach fromn the mob isn't the holder
-//Remove the base proc if the mmi_holder is removed. Its the only thing that currently uses this
-/obj/item/organ/internal/mmi_holder/get_detached_organ()
-	return transfer_and_delete()
+//Since the mmi_holder is an horrible hacky pos we turn it into a mmi on drop, since it shouldn't exist outside a mob
+/obj/item/organ/internal/mmi_holder/dropInto(atom/destination)
+	. = ..()
+	transfer_and_delete()

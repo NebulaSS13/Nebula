@@ -123,7 +123,8 @@
 	var/obj/item/organ/I = target.get_organ(LAZYACCESS(global.surgeries_in_progress["\ref[target]"], target_zone))
 	var/obj/item/organ/external/affected = target.get_organ(target_zone)
 	if(I && istype(I) && istype(affected))
-		target.surgical_detach_organ(I, affected)
+		//First only detach the organ, without fully removing it
+		target.remove_organ(I, FALSE, TRUE)
 
 /decl/surgery_step/internal/detatch_organ/fail_step(mob/living/user, mob/living/target, target_zone, obj/item/tool)
 	var/obj/item/organ/external/affected = target.get_organ(target_zone)
@@ -189,8 +190,9 @@
 	var/obj/item/organ/O = LAZYACCESS(global.surgeries_in_progress["\ref[target]"], target_zone)
 	var/obj/item/organ/external/affected = target.get_organ(target_zone)
 	if(istype(O) && istype(affected))
-		LAZYREMOVE(affected.implants, O)
-		O.dropInto(target.loc)
+		//Now call remove again with detach = FALSE so we fully remove it
+		target.remove_organ(O, TRUE, FALSE)
+
 		if(!BP_IS_PROSTHETIC(affected))
 			playsound(target.loc, 'sound/effects/squelch1.ogg', 15, 1)
 		else
@@ -274,11 +276,14 @@
 	"<span class='notice'>You have [robotic_surgery ? "reinstalled" : "transplanted"] \the [tool] into [target]'s [affected.name].</span>")
 	var/obj/item/organ/O = tool
 	if(istype(O) && user.unEquip(O, target))
-		target.surgical_place_organ(O, affected) //move the organ into the patient. The organ is properly reattached in the next step 
-		if(!(O.status & ORGAN_CUT_AWAY))
-			log_debug("[user] ([user.ckey]) replaced organ [O], which didn't have ORGAN_CUT_AWAY set, in [target] ([target.ckey])")
-			O.status |= ORGAN_CUT_AWAY
-		playsound(target.loc, 'sound/effects/squelch1.ogg', 15, 1)
+		//Place the organ but don't attach it yet
+		target.add_organ(O, affected, detached = TRUE)
+
+		if(!BP_IS_PROSTHETIC(affected))
+			playsound(target.loc, 'sound/effects/squelch1.ogg', 15, 1)
+		else
+			playsound(target.loc, 'sound/items/Ratchet.ogg', 50, 1)
+
 		if(BP_IS_PROSTHETIC(O) && prob(user.skill_fail_chance(SKILL_DEVICES, 50, SKILL_ADEPT)))
 			O.add_random_ailment()
 
@@ -371,9 +376,7 @@
 
 	var/obj/item/organ/external/affected = target.get_organ(target_zone)
 	if(istype(I) && I.parent_organ == target_zone && affected && (I in affected.implants))
-		I.set_detached(FALSE) //apply sutures
-		LAZYREMOVE(affected.implants, I)
-		target.add_organ(I, affected)
+		target.add_organ(I, affected, detached = FALSE)
 
 /decl/surgery_step/internal/attach_organ/fail_step(mob/living/user, mob/living/target, target_zone, obj/item/tool)
 	var/obj/item/organ/external/affected = target.get_organ(target_zone)

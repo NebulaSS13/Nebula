@@ -37,9 +37,9 @@
 	status = ORGAN_PROSTHETIC
 	var/obj/item/card/id/id_card = /obj/item/card/id/ascent
 
-/obj/item/organ/internal/controller/do_install(mob/living/carbon/human/target, obj/item/organ/external/affected)
+/obj/item/organ/internal/controller/do_install(mob/living/carbon/human/target, obj/item/organ/external/affected, in_place, update_icon, detached)
 	. = ..()
-	if(owner)
+	if(!detached && owner)
 		owner.set_id_info(id_card)
 		owner.add_language(/decl/language/mantid/worldnet)
 

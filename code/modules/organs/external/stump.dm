@@ -2,11 +2,7 @@
 	name = "limb stump"
 	icon_name = ""
 	dislocated = -1
-
-/obj/item/organ/external/stump/on_remove_effects(mob/living/last_owner)
-	if(!(. = ..()))
-		return
-	qdel(src)
+	limb_flags = ORGAN_FLAG_CAN_AMPUTATE //Needs this for limb replacement surgery. Since you need to remove stumps first
 
 /obj/item/organ/external/stump/Initialize(mapload, var/internal, var/obj/item/organ/external/limb)
 	if(istype(limb))
@@ -28,3 +24,18 @@
 
 /obj/item/organ/external/stump/is_stump()
 	return TRUE
+
+//Don't let stumps be dropped
+/obj/item/organ/external/stump/is_dropable()
+	return FALSE
+
+//Stumps don't generate droplimb messages
+/obj/item/organ/external/stump/get_droplimb_messages_for(droptype, clean)
+	return
+
+//Warn on dropping a stump. 
+/obj/item/organ/external/stump/dropInto(atom/destination)
+	. = ..()
+	//QDeleted stumps will be dropped due to how items works. But otherwise make sure to make a stack trace
+	if(!QDELETED(src))
+		CRASH("[src] was dropped into the world!")

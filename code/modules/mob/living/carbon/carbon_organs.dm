@@ -16,6 +16,7 @@
 /mob/living/carbon/has_internal_organs()
 	return LAZYLEN(internal_organs) > 0
 
+//Deletes all references to organs
 /mob/living/carbon/proc/delete_organs()
 	for(var/obj/item/organ/O in get_organs())
 		qdel(O)
@@ -23,16 +24,20 @@
 	internal_organs = null
 	external_organs = null
 
-/mob/living/carbon/add_organ(var/obj/item/organ/O, var/obj/item/organ/external/affected = null, var/in_place = FALSE, var/update_icon = TRUE)
-	if(LAZYACCESS(organs_by_tag, O.organ_tag))
-		CRASH("mob/living/carbon/add_organ(): '[O]' tried to overwrite [src]'s existing organ '[organs_by_tag[O.organ_tag]]' in slot '[O.organ_tag]'!")
+/mob/living/carbon/add_organ(obj/item/organ/O, obj/item/organ/external/affected, in_place, update_icon, detached)
+	var/obj/item/organ/existing = LAZYACCESS(organs_by_tag, O.organ_tag)
+	if(existing && O != existing)
+		CRASH("mob/living/carbon/add_organ(): '[O]' tried to overwrite [src]'s existing organ '[existing]' in slot '[O.organ_tag]'!")
 	if(O.parent_organ && !LAZYACCESS(organs_by_tag, O.parent_organ))
 		CRASH("mob/living/carbon/add_organ(): Tried to add an internal organ to a non-existing parent external organ!")
 
-	LAZYSET(organs_by_tag, O.organ_tag, O)
-	if(O.is_internal())
+	//We don't add internal organs to the lists if we're detached
+	if(O.is_internal() && !detached)
+		LAZYSET(organs_by_tag, O.organ_tag, O)
 		LAZYDISTINCTADD(internal_organs, O)
-	else
+	//External organs must always be in the organ list even when detached. Otherwise icon updates won't show the limb, and limb attach surgeries won't work
+	else if(!O.is_internal())
+		LAZYSET(organs_by_tag, O.organ_tag, O)
 		LAZYDISTINCTADD(external_organs, O)
 	. = ..()
 
@@ -45,6 +50,7 @@
 
 	if(client)
 		client.screen -= O
+	
 	LAZYREMOVE(organs_by_tag, O.organ_tag)
 	if(O.is_internal())
 		LAZYREMOVE(internal_organs, O)
@@ -59,20 +65,3 @@
 	//Check if we should die
 	if(species.is_vital_organ(src, O))
 		death()
-
-//Called by surgeries when detaching an organ during organ detach surgery
-/mob/living/carbon/surgical_detach_organ(var/obj/item/organ/O, var/obj/item/organ/external/parent)
-	remove_organ(O, FALSE, TRUE)
-	O.forceMove(src)
-	LAZYDISTINCTADD(parent.implants, O.get_detached_organ()) //#FIXME: get_detached_organ() is a placeholder for handling the weird behavior of the mmi_holder
-
-//Called by surgery when placing an organ during organ attach surgery. Happens before attaching
-/mob/living/carbon/surgical_place_organ(var/obj/item/organ/O, var/obj/item/organ/external/parent)
-	LAZYDISTINCTADD(parent.implants, O)
-	O.forceMove(src)
-
-/mob/living/carbon/get_contained_external_atoms()
-	. = ..()
-	//Don't dump out stumps
-	for(var/obj/item/organ/external/stump/S in .)
-		. -= S
