@@ -252,3 +252,140 @@
 		pass("All organs were removed and replaced correctly.")
 
 	return 1
+
+// ==============================================================================
+// Stumps shall not drop
+// ==============================================================================
+/datum/unit_test/stumps_shall_not_drop
+	name = "ORGAN: Stumps Shall Not Drop From a Gibbed Mob or Severed Limbs."
+
+/datum/unit_test/stumps_shall_not_drop/proc/find_stumps()
+	//Look for stumps that aren't deleted
+	var/list/found_stumps = (locate(/obj/item/organ/external/stump) in world)
+	for(var/obj/item/organ/external/stump/O in found_stumps)
+		if(QDELETED(O))
+			found_stumps -= O
+	return found_stumps
+
+/datum/unit_test/stumps_shall_not_drop/proc/fill_limb_with_stumps(var/obj/item/organ/external/E)
+	for(var/obj/item/organ/external/C in E.children)
+		//Gib child limbs to create stumps on our target organ
+		if(C.limb_flags & ORGAN_FLAG_CAN_AMPUTATE)
+			C.dismember(FALSE, DISMEMBER_METHOD_BLUNT, FALSE, TRUE)
+
+/datum/unit_test/stumps_shall_not_drop/proc/do_cleanup(var/mob/living/carbon/human/H)
+	if(H && !QDELETED(H) )
+		qdel(H)
+	for(var/obj/item/organ/O in (locate(/obj/item/organ) in world))
+		qdel(O)
+
+//Check whether using the proper tool on a removed limb to extract the contents drops any stumps
+/datum/unit_test/stumps_shall_not_drop/proc/test_removed_limb_dropping_stumps_on_interact(var/mob/living/carbon/human/H, var/mob/living/carbon/human/tester, var/list/details)
+	. = TRUE
+	details.Cut()
+
+	var/list/limbs_to_test
+	for(var/obj/item/organ/external/O in H.get_external_organs())
+		if(isnull(O.parent_organ) || !LAZYLEN(O.children) || !(O.limb_flags & ORGAN_FLAG_CAN_AMPUTATE))
+			continue //We don't want the root limb since it won't gib, or limbs with no child
+		fill_limb_with_stumps(O)
+		//Amputate the limb via edge damage so it doesn't get gibbed
+		O.dismember(FALSE, DISMEMBER_METHOD_EDGE, FALSE, TRUE)
+		LAZYDISTINCTADD(limbs_to_test, O)
+
+	//Test every single limbs we removed
+	var/obj/item/scalpel/tool = tester.get_active_hand() 
+	for(var/obj/item/organ/external/E in limbs_to_test)
+		//Skip to the actual part where we remove things
+		E.stage = 2
+
+		//Poke it enough times to remove everything inside at least once
+		for(var/i = 0, i < LAZYLEN(E.contents), i++)
+			E.attackby(tool, tester)
+
+		//Look for any dropped stumps
+		var/list/found_stumps = find_stumps()
+		if(LAZYLEN(found_stumps))
+			details[E.organ_tag] = "Found [LAZYLEN(found_stumps)] stumps after extracting from removed limb type '[E.type]'!"
+			. = FALSE
+
+	//Cleanup
+	do_cleanup(H)
+
+//Gib a limb with stumps inside and see if the stumps were dropped
+/datum/unit_test/stumps_shall_not_drop/proc/test_gibbing_limbs(var/mob/living/carbon/human/H, var/list/details)
+	. = TRUE
+	details.Cut()
+
+	//Gib limbs that have child stumps
+	for(var/obj/item/organ/external/O in H.get_external_organs())
+		if(isnull(O.parent_organ) || !LAZYLEN(O.children) || !(O.limb_flags & ORGAN_FLAG_CAN_AMPUTATE))
+			continue //We don't want the root limb since it won't gib, or limbs with no child
+		fill_limb_with_stumps(O)
+		//Then gib the part we just placed stumps on
+		O.dismember(FALSE, DISMEMBER_METHOD_BLUNT, FALSE, TRUE)
+
+		//Look for any dropped stumps
+		var/list/found_stumps = find_stumps()
+		if(LAZYLEN(found_stumps))
+			. = FALSE
+			details[O.organ_tag] = "Found [LAZYLEN(found_stumps)] stumps after gibbing limb type '[O.type]' with child stumps!"
+
+	//Cleanup
+	do_cleanup(H)
+
+//Gibs a mob with stumps inside and see if any were dropped
+/datum/unit_test/stumps_shall_not_drop/proc/test_gibbing(var/mob/living/carbon/human/H, var/list/details)
+	. = TRUE
+	details.Cut()
+
+	//Remove all limbs via dismember to create stumps
+	for(var/obj/item/organ/external/O in H.get_external_organs())
+		if(isnull(O.parent_organ) || !(O.limb_flags & ORGAN_FLAG_CAN_AMPUTATE))
+			continue //We don't want the root limb since it won't gib
+		O.dismember(FALSE, DISMEMBER_METHOD_BLUNT, FALSE, TRUE)
+	
+	//Then gib the mob, so it releases its contents
+	if(!QDELETED(H))
+		H.gib()
+	
+	//Look for any dropped stumps
+	var/list/found_stumps = find_stumps()
+	if(LAZYLEN(found_stumps))
+		details["msg"] = "Found [LAZYLEN(found_stumps)] stumps after amputating all limbs, and gibbing human of species '[H.species?.name]'!"
+		. = FALSE
+	
+	//Cleanup
+	do_cleanup(H)
+
+/datum/unit_test/stumps_shall_not_drop/start_test()
+	var/list/details = list()
+
+	//Equip our tester
+	var/mob/living/carbon/human/dummy/tester = new(null, SPECIES_HUMAN)
+	var/obj/item/scalpel/tool = new/obj/item/scalpel(tester)
+	tester.put_in_active_hand(tool)
+
+	//Run the tests
+	for(var/decl/species/species in get_all_species())
+
+		if(!test_gibbing(new/mob/living/carbon/human(null, species.name), details))
+			var/failtext = ""
+			for(var/k in details)
+				failtext = "[failtext]\n[k]: [details[k]]"
+			fail(failtext)
+
+		if(!test_gibbing_limbs(new/mob/living/carbon/human(null, species.name), details))
+			var/failtext = ""
+			for(var/k in details)
+				failtext = "[failtext]\n[k]: [details[k]]"
+			fail(failtext)
+
+		if(!test_removed_limb_dropping_stumps_on_interact(new/mob/living/carbon/human(null, species.name), tester, details))
+			var/failtext = ""
+			for(var/k in details)
+				failtext = "[failtext]\n[k]: [details[k]]"
+			fail(failtext)
+
+	pass("All stumps tested were not dropped!")
+	return TRUE
