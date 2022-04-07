@@ -5,14 +5,14 @@
 			I.throw_at(get_edge_target_turf(src, pick(global.alldirs)), rand(1,3), THROWFORCE_GIBS)
 
 	for(var/obj/item/organ/external/E in get_external_organs())
-		E.dismember(0,DISMEMBER_METHOD_EDGE,1)
+		E.dismember(FALSE, DISMEMBER_METHOD_EDGE, TRUE)
 
 	sleep(1)
 
-	for(var/obj/item/I in src)
+	for(var/obj/item/I in get_contained_external_atoms())
 		drop_from_inventory(I)
 		if(!QDELETED(I))
-			I.throw_at(get_edge_target_turf(src,pick(global.alldirs)), rand(1,3), round(THROWFORCE_GIBS/I.w_class))
+			I.throw_at(get_edge_target_turf(src, pick(global.alldirs)), rand(1,3), round(THROWFORCE_GIBS/I.w_class))
 
 	..(species.gibbed_anim)
 	gibs(loc, dna, null, species.get_flesh_colour(src), species.get_blood_color(src))
