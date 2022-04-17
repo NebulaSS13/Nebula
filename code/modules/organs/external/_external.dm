@@ -1535,5 +1535,5 @@ Note that amputating the affected organ does in fact remove the infection from t
 	. = ..()
 	//Prevent stumps and things that shouldn't be dropped from getting dumped out
 	for(var/obj/item/organ/O in .)
-		if(!O.is_dropable())
+		if(!O.is_droppable())
 			. -= O

@@ -41,7 +41,7 @@
 	
 	//Shall not drop undroppable things
 	if(drop_organ)
-		if(O.is_dropable())
+		if(O.is_droppable())
 			O.dropInto(get_turf(src))
 		else
 			qdel(O)

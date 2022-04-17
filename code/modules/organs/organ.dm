@@ -555,5 +555,5 @@ var/global/list/ailment_reference_cache = list()
 	return FALSE
 
 //Used to override organ drop behavior, so we don't drop organs that shouldn't be dropped into the world, like stumps and root limbs, or wrappers
-/obj/item/organ/proc/is_dropable()
+/obj/item/organ/proc/is_droppable()
 	return TRUE

@@ -1,13 +1,13 @@
 /mob/living/carbon/human/gib()
 	for(var/obj/item/organ/I in get_internal_organs())
-		if(!I.is_dropable())
+		if(!I.is_droppable())
 			continue //Skip anything that cannot be dropped
 		remove_organ(I)
 		if(!QDELETED(I) && isturf(loc))
 			I.throw_at(get_edge_target_turf(src, pick(global.alldirs)), rand(1,3), THROWFORCE_GIBS)
 
 	for(var/obj/item/organ/external/E in get_external_organs())
-		if(!E.parent_organ || !E.is_dropable())
+		if(!E.parent_organ || !E.is_droppable())
 			continue //Skip root organ, or undroppables
 		E.dismember(FALSE, DISMEMBER_METHOD_EDGE, TRUE)
 

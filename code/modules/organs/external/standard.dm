@@ -39,7 +39,7 @@
 	. = ..()
 
 //Can't drop root limb
-/obj/item/organ/external/chest/is_dropable()
+/obj/item/organ/external/chest/is_droppable()
 	return FALSE
 
 /obj/item/organ/external/groin

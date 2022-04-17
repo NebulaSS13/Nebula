@@ -26,7 +26,7 @@
 	return TRUE
 
 //Don't let stumps be dropped
-/obj/item/organ/external/stump/is_dropable()
+/obj/item/organ/external/stump/is_droppable()
 	return FALSE
 
 //Stumps don't generate droplimb messages
