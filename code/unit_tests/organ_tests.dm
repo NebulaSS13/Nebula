@@ -261,7 +261,7 @@
 
 /datum/unit_test/stumps_shall_not_drop/proc/find_stumps()
 	//Look for stumps that aren't deleted
-	for(var/obj/item/organ/external/stump/O in found_stumps)
+	for(var/obj/item/organ/external/stump/O in world)
 		if(QDELETED(O))
 			found_stumps -= O
 	return found_stumps
