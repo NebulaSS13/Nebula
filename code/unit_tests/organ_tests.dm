@@ -260,10 +260,11 @@
 	name = "ORGAN: Stumps Shall Not Drop From a Gibbed Mob or Severed Limbs."
 
 /datum/unit_test/stumps_shall_not_drop/proc/find_stumps()
+	var/list/found_stumps
 	//Look for stumps that aren't deleted
 	for(var/obj/item/organ/external/stump/O in world)
-		if(QDELETED(O))
-			found_stumps -= O
+		if(!QDELETED(O))
+			LAZYDISTINCTADD(found_stumps, O)
 	return found_stumps
 
 /datum/unit_test/stumps_shall_not_drop/proc/fill_limb_with_stumps(var/obj/item/organ/external/E)
@@ -273,7 +274,7 @@
 			C.dismember(FALSE, DISMEMBER_METHOD_BLUNT, FALSE, TRUE)
 
 /datum/unit_test/stumps_shall_not_drop/proc/do_cleanup(var/mob/living/carbon/human/H)
-	if(H && !QDELETED(H) )
+	if(H && !QDELETED(H))
 		qdel(H)
 	for(var/obj/item/organ/O in (locate(/obj/item/organ) in world))
 		qdel(O)
