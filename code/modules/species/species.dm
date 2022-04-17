@@ -473,7 +473,7 @@ var/global/const/DEFAULT_SPECIES_HEALTH = 200
 	return FALSE
 
 /decl/species/proc/is_vital_organ(var/mob/living/carbon/human/H, var/obj/item/organ/O)
-	if(!vital_organs)
+	if(!LAZYLEN(vital_organs))
 		return FALSE
 	//An organ organ is considered vital if there's less than the required amount of said organ type in the mob after we remove it
 	var/list/organ_data = vital_organs[O.organ_tag]
