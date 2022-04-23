@@ -337,7 +337,7 @@
 		if(no_stumps && child.is_stump())
 			continue
 		all_limbs += child
-		all_limbs.Add(child.get_limbs_recursive())
+		all_limbs.Add(child.get_limbs_recursive(no_stumps))
 	return all_limbs
 
 /obj/item/organ/external/proc/is_dislocated()
