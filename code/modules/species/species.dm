@@ -513,7 +513,7 @@ var/global/const/DEFAULT_SPECIES_HEALTH = 200
 		var/limb_path = organ_data["path"]
 		var/obj/item/organ/external/E = new limb_path(H, null, H.dna) //explicitly specify the dna
 		H.add_organ(E, null, FALSE, FALSE)
-		post_organ_rejuvenate(E, H) // FAZ-WORLD EDIT
+		post_organ_rejuvenate(E, H)
 
 	//Create missing internal organs
 	for(var/organ_tag in has_organ)
