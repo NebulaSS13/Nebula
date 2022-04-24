@@ -513,6 +513,7 @@ var/global/const/DEFAULT_SPECIES_HEALTH = 200
 		var/limb_path = organ_data["path"]
 		var/obj/item/organ/external/E = new limb_path(H, null, H.dna) //explicitly specify the dna
 		H.add_organ(E, null, FALSE, FALSE)
+		post_organ_rejuvenate(E, H)
 
 	//Create missing internal organs
 	for(var/organ_tag in has_organ)
@@ -719,11 +720,6 @@ var/global/const/DEFAULT_SPECIES_HEALTH = 200
 
 /decl/species/proc/handle_death_check(var/mob/living/carbon/human/H)
 	return FALSE
-
-//Mostly for toasters
-/decl/species/proc/handle_limbs_setup(var/mob/living/carbon/human/H)
-	for(var/thing in H.get_external_organs())
-		post_organ_rejuvenate(thing, H)
 
 // Impliments different trails for species depending on if they're wearing shoes.
 /decl/species/proc/get_move_trail(var/mob/living/carbon/human/H)

@@ -4,8 +4,8 @@
 
 	var/icon/pai_preview
 	var/datum/paiCandidate/candidate
-	var/icon/bgstate = DEFAULT_WALL_MATERIAL
-	var/list/bgstate_options = list("FFF", DEFAULT_WALL_MATERIAL, "white")
+	var/icon/bgstate = "steel"
+	var/list/bgstate_options = list("FFF", "steel", "white")
 
 /datum/category_item/player_setup_item/player_global/pai/load_preferences(datum/pref_record_reader/R)
 	if(!candidate)
@@ -81,7 +81,7 @@
 				bgstate = next_in_list(bgstate, bgstate_options)
 				update_pai_preview(user)
 				. = TOPIC_HARD_REFRESH
-		return 
+		return
 
 	return ..()
 
