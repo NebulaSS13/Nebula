@@ -42,6 +42,9 @@
 		if(I.organ_tag != organ_tag)
 			fail("[species.name] internal organ tag mismatch. Registered as \"[organ_tag]\", actual tag was \"[I.organ_tag]\".")
 			. = 0
+		if(!isnum(I.absolute_max_damage) || I.absolute_max_damage <= 0)
+			fail("[species.name] internal organ has invalid absolute_max_damage value ([I.absolute_max_damage]).")
+			. = 0
 
 /datum/unit_test/species_organ_creation/proc/check_external_organs(var/mob/living/carbon/human/H, var/decl/species/species)
 	. = 1
@@ -62,7 +65,10 @@
 			. = 0
 			continue
 		if(E.organ_tag != organ_tag)
-			fail("[species.name] internal organ tag mismatch. Registered as \"[organ_tag]\", actual tag was \"[E.organ_tag]\".")
+			fail("[species.name] external organ tag mismatch. Registered as \"[organ_tag]\", actual tag was \"[E.organ_tag]\".")
+			. = 0
+		if(!isnum(E.absolute_max_damage) || E.absolute_max_damage <= 0)
+			fail("[species.name] external organ has invalid absolute_max_damage value ([E.absolute_max_damage]).")
 			. = 0
 
 /datum/unit_test/species_organ_creation/proc/check_organ_parents(var/mob/living/carbon/human/H, var/decl/species/species)

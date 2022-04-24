@@ -26,7 +26,8 @@
 	// Damage vars.
 	var/damage = 0                         // Current damage to the organ
 	var/min_broken_damage = 30             // Damage before becoming broken
-	var/max_damage = 30                    // Damage cap
+	var/max_damage = 30                    // Damage cap, including scarring
+	var/absolute_max_damage = 0            // Lifetime damage cap, ignoring scarring.
 	var/rejecting                          // Is this organ already being rejected?
 	var/death_time                         // REALTIMEOFDAY at moment of death.
 	var/scale_max_damage_to_species_health // Whether or not we should scale the damage values of this organ to the owner species.
@@ -62,9 +63,11 @@
 		return
 	
 	if(max_damage)
-		min_broken_damage = FLOOR(max_damage / 2)
+		absolute_max_damage = max_damage
+		min_broken_damage = FLOOR(absolute_max_damage / 2)
 	else
-		max_damage = min_broken_damage * 2
+		absolute_max_damage = min_broken_damage * 2
+		max_damage = absolute_max_damage
 
 	if(!BP_IS_PROSTHETIC(src))
 		setup_as_organic(given_dna)
@@ -139,12 +142,13 @@
 
 	// Adjust limb health proportinate to total species health.
 	var/total_health_coefficient = scale_max_damage_to_species_health ? (species.total_health / DEFAULT_SPECIES_HEALTH) : 1
-	if(max_damage)
-		max_damage = max(1, FLOOR(max_damage * total_health_coefficient))
-		min_broken_damage = max(1, FLOOR(max_damage * 0.5))
+	if(absolute_max_damage)
+		absolute_max_damage = max(1, FLOOR(absolute_max_damage * total_health_coefficient))
+		min_broken_damage = max(1, FLOOR(absolute_max_damage * 0.5))
 	else
 		min_broken_damage = max(1, FLOOR(min_broken_damage * total_health_coefficient))
-		max_damage = max(1, FLOOR(min_broken_damage * 2))
+		absolute_max_damage = max(1, FLOOR(min_broken_damage * 2))
+	max_damage = absolute_max_damage // resets scarring, but ah well
 
 /obj/item/organ/proc/die()
 	damage = max_damage
