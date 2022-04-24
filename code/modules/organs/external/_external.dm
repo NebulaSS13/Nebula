@@ -265,55 +265,69 @@
 			E.update_icon()
 			return
 
-	//Allow removing sub-limbs
-	if(istype(W,/obj/item/circular_saw) && LAZYLEN(children))
-		var/list/removables = get_limbs_recursive(TRUE)
-		if(LAZYLEN(removables))
-			var/obj/item/organ/external/removing = pick(removables)
-			if(do_after(user, 3 SECONDS, removing, FALSE))
-				removing.do_uninstall()
-				removing.forceMove(get_turf(user))
-				compile_icon()
-				update_icon()
-				removing.compile_icon()
-				removing.update_icon()
-				if(user.get_empty_hand_slot())
-					user.put_in_hands(removing)
-				user.visible_message(SPAN_DANGER("<b>[user]</b> cuts off \the [removing] from [src] with [W]!"))
-				return
-			else
-				user.visible_message(SPAN_DANGER("<b>[user]</b> stops trying to cut \the [removing]."))
-				return
+	//Remove sub-limbs
+	if(istype(W,/obj/item/circular_saw) && LAZYLEN(children) && try_saw_off_child(W, user))
+		return
+	//Remove internal items/organs/implants
+	if(try_remove_internal_item(W, user))
+		return
+	..()
 
+//Handles removing internal organs/implants/items still in the detached limb.
+/obj/item/organ/external/proc/try_remove_internal_item(var/obj/item/W, var/mob/user)
 	switch(stage)
 		if(0)
 			if(W.sharp)
 				user.visible_message(SPAN_DANGER("<b>[user]</b> cuts [src] open with [W]!"))
 				stage++
-				return
+				return TRUE
 		if(1)
 			if(istype(W))
 				user.visible_message(SPAN_DANGER("<b>[user]</b> cracks [src] open like an egg with [W]!"))
 				stage++
-				return
+				return TRUE
 		if(2)
 			if(W.sharp || istype(W,/obj/item/hemostat) || isWirecutter(W))
 				var/list/removables = get_contents_recursive()
 				if(LAZYLEN(removables))
-					var/obj/item/removing = pick(removables)
-					if(istype(removing, /obj/item/organ))
-						var/obj/item/organ/O = removing
-						O.do_uninstall()
-					removing.forceMove(get_turf(user))
+					var/obj/item/removing = show_radial_menu(user, src, removables, radius = 42, require_near = TRUE, use_labels = TRUE, check_locs = list(src))
+					if(removing)
+						if(istype(removing, /obj/item/organ))
+							var/obj/item/organ/O = removing
+							O.do_uninstall()
+						removing.forceMove(get_turf(user))
 
-					if(user.get_empty_hand_slot())
-						user.put_in_hands(removing)
-					user.visible_message(SPAN_DANGER("<b>[user]</b> extracts [removing] from [src] with [W]!"))
+						if(user.get_empty_hand_slot())
+							user.put_in_hands(removing)
+						user.visible_message(SPAN_DANGER("<b>[user]</b> extracts [removing] from [src] with [W]!"))
 				else
 					user.visible_message(SPAN_DANGER("<b>[user]</b> fishes around fruitlessly in [src] with [W]."))
-				return
-	..()
+				return TRUE
+	return FALSE
 
+//Handles removing child limbs from the detached limb.
+/obj/item/organ/external/proc/try_saw_off_child(var/obj/item/W, var/mob/user)
+	var/list/removables = get_limbs_recursive(TRUE)
+	if(!LAZYLEN(removables))
+		return FALSE
+	var/obj/item/organ/external/removing = show_radial_menu(user, src, removables, radius = 42, require_near = TRUE, use_labels = TRUE, check_locs = list(src))
+	if(!istype(removing))
+		return FALSE
+
+	user.visible_message(SPAN_DANGER("<b>[user]</b> starts cutting off \the [removing] from [src] with \the [W]!"))
+	if(!do_after(user, 3 SECONDS, user, FALSE) || !(removing in children))
+		user.visible_message(SPAN_DANGER("<b>[user]</b> stops trying to cut \the [removing]."))
+		return FALSE
+	removing.do_uninstall()
+	removing.forceMove(get_turf(user))
+	compile_icon()
+	update_icon()
+	removing.compile_icon()
+	removing.update_icon()
+	if(user.get_empty_hand_slot())
+		user.put_in_hands(removing)
+	user.visible_message(SPAN_DANGER("<b>[user]</b> cuts off \the [removing] from [src] with [W]!"))
+	return TRUE
 
 /**
  *  Get a list of contents of this organ and all the child organs
