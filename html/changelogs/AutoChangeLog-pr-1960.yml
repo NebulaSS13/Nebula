@@ -1,0 +1,5 @@
+author: NataKilar
+delete-after: true
+changes:
+  - tweak: Machinery which previously connected to cables directly for power now require
+      terminals, which can be added by attacking the machine with a stack of cables.
