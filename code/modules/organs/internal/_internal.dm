@@ -151,7 +151,7 @@
 	heal_damage(damage)
 
 /obj/item/organ/internal/proc/get_scarring_level()
-	. = (initial(max_damage) - max_damage)/initial(max_damage)
+	. = (absolute_max_damage - max_damage)/absolute_max_damage
 
 /obj/item/organ/internal/get_scan_results()
 	. = ..()
