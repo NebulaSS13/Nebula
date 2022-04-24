@@ -64,7 +64,7 @@
 
 /obj/item/stock_parts/circuitboard/turbine/motor
 	name = "circuitboard (small turbine motor)"
-	build_path = /obj/machinery/power/turbinemotor
+	build_path = /obj/machinery/turbinemotor
 	board_type = "machine"
 	origin_tech = "{'powerstorage':4,'engineering':4}"
 	req_components = list(
@@ -87,7 +87,7 @@
 
 /obj/item/stock_parts/circuitboard/big_turbine/center
 	name = "circuitboard (large turbine motor)"
-	build_path = /obj/machinery/power/turbine
+	build_path = /obj/machinery/turbine
 	board_type = "machine"
 	origin_tech = "{'powerstorage':4,'engineering':4}"
 	req_components = list(
@@ -115,7 +115,7 @@
 
 /obj/item/stock_parts/circuitboard/teg_turbine/motor
 	name = "circuitboard (thermoelectric generator motor)"
-	build_path = /obj/machinery/power/generator
+	build_path = /obj/machinery/generator
 	board_type = "machine"
 	origin_tech = "{'powerstorage':4,'engineering':4}"
 	req_components = list(

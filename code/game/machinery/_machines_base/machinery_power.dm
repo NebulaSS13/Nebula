@@ -162,5 +162,22 @@ This is /obj/machinery level code to properly manage power usage from the area.
 	if(power_init_complete && (use_power_mode == use_power))
 		REPORT_POWER_CONSUMPTION_CHANGE(old_power, new_power_consumption)
 
+// Return the powernet of a cable node underneath the machine.
+/obj/machinery/proc/get_powernet()
+	var/turf/T = loc
+	if(!istype(T))
+		return
+
+	var/obj/structure/cable/C = T.get_cable_node()
+	if(C)
+		return C.powernet
+
+// Adds available power to a connected powernet, if available.
+/obj/machinery/proc/generate_power(var/amount)
+	var/datum/powernet/P = get_powernet()
+	if(!P)
+		return
+	P.newavail += amount
+
 #undef REPORT_POWER_CONSUMPTION_CHANGE
 #undef MACHINE_UPDATES_FROM_AREA_POWER

@@ -89,4 +89,4 @@
 // This comes with an additional terminal component and tries to set it up on init (you should map a terminal beneath it). This is for mapping only.
 /obj/machinery/atmospherics/unary/engine/terminal
 	uncreated_component_parts = list(/obj/item/stock_parts/power/terminal/buildable)
-	stock_part_presets = list(/decl/stock_part_preset/terminal_setup)
+	stock_part_presets = list(/decl/stock_part_preset/terminal_connect)

@@ -1588,7 +1588,7 @@
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/map_template/merc_shuttle/rear)
 "cS" = (
-/obj/machinery/power/port_gen/pacman,
+/obj/machinery/port_gen/pacman,
 /obj/structure/cable/yellow{
 	icon_state = "0-8"
 	},
@@ -2044,7 +2044,7 @@
 /turf/simulated/floor/plating,
 /area/map_template/merc_spawn)
 "nN" = (
-/obj/machinery/power/port_gen/pacman,
+/obj/machinery/port_gen/pacman,
 /obj/structure/railing/mapped/no_density{
 	dir = 4
 	},
@@ -2166,7 +2166,7 @@
 /turf/simulated/floor/tiled/airless,
 /area/space)
 "uG" = (
-/obj/machinery/power/port_gen/pacman,
+/obj/machinery/port_gen/pacman,
 /obj/structure/railing/mapped/no_density{
 	dir = 4
 	},
@@ -2599,7 +2599,7 @@
 /turf/simulated/floor/plating,
 /area/map_template/merc_spawn)
 "PK" = (
-/obj/machinery/power/port_gen/pacman/super,
+/obj/machinery/port_gen/pacman/super,
 /turf/simulated/floor/plating,
 /area/map_template/merc_spawn)
 "PZ" = (
@@ -2684,7 +2684,7 @@
 /turf/simulated/floor/plating,
 /area/map_template/merc_spawn)
 "Tu" = (
-/obj/machinery/power/port_gen/pacman/super,
+/obj/machinery/port_gen/pacman/super,
 /obj/structure/railing/mapped/no_density,
 /turf/simulated/floor/plating,
 /area/map_template/merc_spawn)

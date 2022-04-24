@@ -108,7 +108,7 @@
 /turf/simulated/floor/reinforced,
 /area/space)
 "au" = (
-/obj/machinery/power/port_gen/pacman/super,
+/obj/machinery/port_gen/pacman/super,
 /turf/simulated/floor/plating,
 /area/lar_maria/solar_control)
 "av" = (

@@ -60,9 +60,9 @@
 	antag_text = "People can be inserted into the disposal unit. If they're capable of moving however, it's easy for them to get out. Be careful though, putting things in disposal units doesn't always mean they're gone forever. <BR>If you turn it off, it can be used to hide in. Just be careful no one turns it back on while you're still in there!"
 
 /datum/codex_entry/emitter
-	associated_paths = list(/obj/machinery/power/emitter)
-	mechanics_text = "You must secure this in place with a wrench and weld it to the floor before using it. The emitter will only fire if it is installed above a cable endpoint. Clicking will toggle it on and off, at which point, so long as it remains powered, it will fire in a single direction in bursts of four."
-	lore_text = "Lasers like this one have been in use for ages, in applications such as mining, cutting, and in the startup sequence of many advanced space station and starship engines."
+	associated_paths = list(/obj/machinery/emitter)
+	mechanics_text = "You must secure this in place with a wrench and weld it to the floor before using it. Using cables on the emitter will allow you to connect it to the powernet with a terminal, placed over a cable node. Clicking will toggle it on and off, at which point, so long as it remains powered, it will fire in a single direction in bursts of four."
+	lore_text = "Lasers like this one have been in use for ages, in applications such as mining, cutting, and in the startup sequence of many advanced space station and starshipn engines."
 	antag_text = "This baby is capable of slicing through walls, sealed lockers, and people."
 
 /datum/codex_entry/fusion_fuel_injector
@@ -72,7 +72,7 @@
 	mechanics_text = "Accepts a fuel rod produced by the fuel compressor and regularly fires fuel pellets into the fusion field. Rods can be swapped by hand when the injector is not firing. Power outages will require the injector to be turned on again. If there is no electromagnetic field active to catch the injected fuel, the results can be very unhealthy for anyone standing in the firing path. <BR>Controlled via the fuel injection control computer."
 
 /datum/codex_entry/fusion_core
-	associated_paths = list(/obj/machinery/power/fusion_core, /obj/machinery/computer/fusion/core_control)
+	associated_paths = list(/obj/machinery/fusion_core, /obj/machinery/computer/fusion/core_control)
 	associated_strings = list("R-UST Mk. 8 Tokamak core","\improper R-UST Mk. 8 core control","rust","fusion","tokamak")
 	lore_text = "An old but more or less reliable fusion field generator. Probably sourced from a retired cargo freighter."
 	mechanics_text = "Generates the field used to contain reaction material from fuel injectors, and dumps power into the power network under it based on plasma heat. Needs 500W or more in the network to start the field. Field will become unstable if it intersects with windows or other objects, and from some reactions, and will eventually rupture violently if not stabilized by a gyrotron. Turning the field off without letting it cool below 1000K will cause a violent explosion and EMP depending on the contents of the field. <BR>Controlled via the R-UST Mk. 8 core control. Make careful note of the instability."
@@ -84,13 +84,13 @@
 	mechanics_text = "Uses sheets of material or units of reagents to produce fuel rods. Material/units are inserted by hand. Can also have some objects click-dragged onto it for more exotic fuel."
 
 /datum/codex_entry/gyrotron
-	associated_paths = list(/obj/machinery/power/emitter/gyrotron, /obj/machinery/computer/fusion/gyrotron)
+	associated_paths = list(/obj/machinery/emitter/gyrotron, /obj/machinery/computer/fusion/gyrotron)
 	associated_strings = list ("gyrotron","gyrotron control console")
 	lore_text = "A high-power industrial laser used to excite plasma for fusion reactions. Also used to excite careless engineers, usually fatally."
 	mechanics_text = "Fires in pulses and will heat up a plasma toroid that is below 1000K. Mostly used to lower field instability after heating it to ignition point. Very power hungry, uses 20k per point of power. <BR>Controlled via the gyrotron control console."
 
 /datum/codex_entry/pacman
-	associated_paths = list(/obj/machinery/power/port_gen/pacman)
+	associated_paths = list(/obj/machinery/port_gen/pacman)
 	mechanics_text = "Lends itself to being portable thanks to the small size and ease of use. Some versions use radioactive fuel and as such produces radiation, while others may produce dangerous byproducts as gasses. Ideally one should wear protective gear while interacting with an active generator. While active it also produces heat and will eventually overheat and explode. While the power output can be increased, doing this causes it to heat up faster. Must be secured using a wrench before use."
 	antag_text = "Can be used as a makeshift delayed explosive when power output is set to unsafe levels, though it may take some time to go off."
 
