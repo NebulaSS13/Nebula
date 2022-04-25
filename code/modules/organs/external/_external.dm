@@ -358,7 +358,7 @@
 		all_limbs += child
 		var/list/sublimbs = child.get_limbs_recursive(no_stumps)
 		if(sublimbs)
-			all_limbs.Add(sublimbs)
+			all_limbs += sublimbs
 	return all_limbs
 
 /obj/item/organ/external/proc/is_dislocated()
