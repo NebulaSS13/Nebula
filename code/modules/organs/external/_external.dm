@@ -288,9 +288,9 @@
 				return TRUE
 		if(2)
 			if(W.sharp || istype(W,/obj/item/hemostat) || isWirecutter(W))
-				var/list/removables = get_contents_recursive()
-				if(LAZYLEN(removables))
-					var/obj/item/removing = show_radial_menu(user, src, removables, radius = 42, require_near = TRUE, use_labels = TRUE, check_locs = list(src))
+				var/list/radial_buttons = make_item_radial_menu_choices(get_contents_recursive())
+				if(LAZYLEN(radial_buttons))
+					var/obj/item/removing = show_radial_menu(user, src, radial_buttons, radius = 42, require_near = TRUE, use_labels = TRUE, check_locs = list(src))
 					if(removing)
 						if(istype(removing, /obj/item/organ))
 							var/obj/item/organ/O = removing
@@ -307,22 +307,25 @@
 
 //Handles removing child limbs from the detached limb.
 /obj/item/organ/external/proc/try_saw_off_child(var/obj/item/W, var/mob/user)
-	var/list/removables = get_limbs_recursive(TRUE)
-	if(!LAZYLEN(removables))
-		return 
-	var/obj/item/organ/external/removing = show_radial_menu(user, src, removables, radius = 42, require_near = TRUE, use_labels = TRUE, check_locs = list(src))
+
+	//Add icons to radial menu
+	var/list/radial_buttons = make_item_radial_menu_choices(get_limbs_recursive(TRUE))
+	if(!LAZYLEN(radial_buttons))
+		return
+
+	//Display radial menu
+	var/obj/item/organ/external/removing = show_radial_menu(user, src, radial_buttons, radius = 42, require_near = TRUE, use_labels = TRUE, check_locs = list(src))
 	if(!istype(removing))
 		return TRUE
 
 	var/cutting_result = !W.do_tool_interaction(TOOL_SAW, user, src, W.get_tool_speed(TOOL_SAW) * 3 SECONDS, SPAN_DANGER("<b>[user]</b> starts cutting off \the [removing] from [src] with \the [W]!") )
-
 	//Check if the limb is still in the hierarchy
-	removables = get_limbs_recursive(TRUE)
-	if(cutting_result == 1 || !(removing in removables))
+	if(cutting_result == 1 || !(removing in get_limbs_recursive(TRUE)))
 		if(cutting_result != -1)
 			user.visible_message(SPAN_DANGER("<b>[user]</b> stops trying to cut \the [removing]."))
 		return TRUE
 	
+	//Actually remove it
 	removing.do_uninstall()
 	removing.forceMove(get_turf(user))
 	compile_icon()
