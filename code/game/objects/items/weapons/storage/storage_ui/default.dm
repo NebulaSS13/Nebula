@@ -177,21 +177,21 @@
 	arrange_item_slots(row_num, col_count)
 
 //This proc draws out the inventory and places the items on it. It uses the standard position.
-/datum/storage_ui/default/proc/arrange_item_slots(var/rows, var/cols)
-	var/cx = 4
-	var/cy = 2+rows
-	boxes.screen_loc = "LEFT+3:16,BOTTOM+1.7:16 to LEFT+[3+cols]:16,BOTTOM+[1.7+rows]:16"
+/datum/storage_ui/default/proc/arrange_item_slots(rows, cols)
+	var/cx = 3
+	var/cy = 1.7 + rows
+	boxes.screen_loc = "LEFT+3:16,BOTTOM+1.7:16 to LEFT+[3 + cols]:16,BOTTOM+[1.7 + rows]:16"
 
 	for(var/obj/O in storage.contents)
 		O.screen_loc = "LEFT+[cx]:16,BOTTOM+[cy]:16"
 		O.maptext = ""
 		O.hud_layerise()
 		cx++
-		if (cx > (4+cols))
-			cx = 4
+		if (cx > (3 + cols))
+			cx = 3
 			cy--
 
-	closer.screen_loc = "LEFT+[4+cols+1]:16,BOTTOM+2:16"
+	closer.screen_loc = "LEFT+[3 + cols + 1]:16,BOTTOM+1.7:16"
 
 /datum/storage_ui/default/proc/space_orient_objs()
 
