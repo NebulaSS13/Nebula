@@ -309,15 +309,20 @@
 /obj/item/organ/external/proc/try_saw_off_child(var/obj/item/W, var/mob/user)
 	var/list/removables = get_limbs_recursive(TRUE)
 	if(!LAZYLEN(removables))
-		return FALSE
+		return 
 	var/obj/item/organ/external/removing = show_radial_menu(user, src, removables, radius = 42, require_near = TRUE, use_labels = TRUE, check_locs = list(src))
 	if(!istype(removing))
-		return FALSE
+		return TRUE
 
 	user.visible_message(SPAN_DANGER("<b>[user]</b> starts cutting off \the [removing] from [src] with \the [W]!"))
-	if(!do_after(user, 3 SECONDS, user, FALSE) || !(removing in children))
+	var/cutting_failed = !do_after(user, 3 SECONDS, user, FALSE)
+
+	//Check if the limb is still in the hierarchy
+	removables = get_limbs_recursive(TRUE)
+	if(cutting_failed || !(removing in removables))
 		user.visible_message(SPAN_DANGER("<b>[user]</b> stops trying to cut \the [removing]."))
-		return FALSE
+		return TRUE
+	
 	removing.do_uninstall()
 	removing.forceMove(get_turf(user))
 	compile_icon()
