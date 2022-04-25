@@ -1,5 +1,7 @@
 //////////////////////////////
 // POWER MACHINERY BASE CLASS
+// This subtype is for machinery which needs to be directly referenced by its parent powernet during powernet processing.
+// This subtype does not encompass all power generating machinery, or machinery that needs to draw from a powernet in general.
 //////////////////////////////
 
 /////////////////////////////
@@ -42,12 +44,6 @@
 		powernet.trigger_warning()
 		return powernet.draw_power(amount)
 
-/obj/machinery/power/proc/add_avail(var/amount)
-	if(powernet)
-		powernet.newavail += amount
-		return 1
-	return 0
-
 /obj/machinery/power/proc/draw_power(var/amount)
 	if(powernet)
 		return powernet.draw_power(amount)
@@ -58,6 +54,11 @@
 		return powernet.avail-powernet.load
 	else
 		return 0
+/obj/machinery/power/proc/add_avail(var/amount)
+	if(powernet)
+		powernet.newavail += amount
+		return 1
+	return 0
 
 /obj/machinery/power/proc/avail()
 	if(powernet)
@@ -67,23 +68,17 @@
 
 // connect the machine to a powernet if a node cable is present on the turf
 /obj/machinery/power/proc/connect_to_network()
-	var/turf/T = src.loc
-	if(!T || !istype(T))
-		return 0
-
-	var/obj/structure/cable/C = T.get_cable_node() //check if we have a node cable on the machine turf, the first found is picked
-	if(!C || !C.powernet)
-		return 0
-
-	C.powernet.add_machine(src)
-	return 1
+	var/datum/powernet/P = get_powernet()
+	if(P)
+		P.add_machine(src)
+		return TRUE
 
 // remove and disconnect the machine from its current powernet
 /obj/machinery/power/proc/disconnect_from_network()
 	if(!powernet)
-		return 0
+		return
 	powernet.remove_machine(src)
-	return 1
+	return TRUE
 
 // attach a wire to a power machine - leads from the turf you are standing on
 //almost never called, overwritten by all power machines but terminal and generator
@@ -99,56 +94,6 @@
 			return
 		coil.turf_place(T, user)
 		return TRUE
-
-///////////////////////////////////////////
-// Powernet handling helpers
-//////////////////////////////////////////
-
-//returns all the cables WITHOUT a powernet in neighbors turfs,
-//pointing towards the turf the machine is located at
-/obj/machinery/power/proc/get_connections()
-
-	. = list()
-
-	var/cdir
-	var/turf/T
-
-	for(var/card in global.cardinal)
-		T = get_step(loc,card)
-		cdir = get_dir(T,loc)
-
-		for(var/obj/structure/cable/C in T)
-			if(C.powernet)	continue
-			if(C.d1 == cdir || C.d2 == cdir)
-				. += C
-	return .
-
-//returns all the cables in neighbors turfs,
-//pointing towards the turf the machine is located at
-/obj/machinery/power/proc/get_marked_connections()
-
-	. = list()
-
-	var/cdir
-	var/turf/T
-
-	for(var/card in global.cardinal)
-		T = get_step(loc,card)
-		cdir = get_dir(T,loc)
-
-		for(var/obj/structure/cable/C in T)
-			if(C.d1 == cdir || C.d2 == cdir)
-				. += C
-	return .
-
-//returns all the NODES (O-X) cables WITHOUT a powernet in the turf the machine is located at
-/obj/machinery/power/proc/get_indirect_connections()
-	. = list()
-	for(var/obj/structure/cable/C in loc)
-		if(C.powernet)	continue
-		if(C.d1 == 0) // the cable is a node cable
-			. += C
-	return .
 
 ///////////////////////////////////////////
 // GLOBAL PROCS for powernets handling

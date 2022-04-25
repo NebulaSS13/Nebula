@@ -24,7 +24,7 @@
 		var/turf/T = get_turf(holder)
 		if(!istype(T))
 			return
-		var/obj/machinery/power/geothermal/geothermal = locate() in T
+		var/obj/machinery/geothermal/geothermal = locate() in T
 		if(geothermal?.anchored)
 			geothermal.add_pressure(rand(pressure_min, pressure_max))
 			return

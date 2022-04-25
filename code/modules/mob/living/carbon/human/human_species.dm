@@ -45,7 +45,7 @@
 /mob/living/carbon/human/dummy/mannequin/add_to_dead_mob_list()
 	return FALSE
 
-/mob/living/carbon/human/dummy/mannequin/fully_replace_character_name(new_name)
+/mob/living/carbon/human/dummy/mannequin/fully_replace_character_name(new_name, in_depth = TRUE)
 	..("[new_name] (mannequin)", FALSE)
 
 /mob/living/carbon/human/dummy/mannequin/InitializeHud()

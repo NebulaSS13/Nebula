@@ -32,10 +32,15 @@
 	// Pipe objects do not contain matter, and will not provide a refund on materials used to make them, but can be recycled to prevent clutter.
 	if(istype(thing, /obj/item/pipe) && (. == SUBSTANCE_TAKEN_NONE))
 		return SUBSTANCE_TAKEN_ALL
-	
-/obj/machinery/fabricator/pipe/do_build(var/datum/fabricator_recipe/recipe, var/amount)
-	. = recipe.build(get_turf(src), amount, pipe_colors[selected_color])
-	use_power_oneoff(500 * amount)
+
+/obj/machinery/fabricator/pipe/make_order(datum/fabricator_recipe/recipe, multiplier)
+	var/datum/fabricator_build_order/order = ..()
+	order.set_data("selected_color", selected_color)
+	return order
+
+/obj/machinery/fabricator/pipe/do_build(datum/fabricator_build_order/order)
+	. = order.target_recipe.build(get_turf(src), order)
+	use_power_oneoff(500 * order.multiplier)
 
 /obj/machinery/fabricator/pipe/disposal
 	name = "disposal pipe dispenser"

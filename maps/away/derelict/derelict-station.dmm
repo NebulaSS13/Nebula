@@ -1393,7 +1393,7 @@
 /obj/structure/cable/blue{
 	icon_state = "0-2"
 	},
-/obj/machinery/power/port_gen/pacman,
+/obj/machinery/port_gen/pacman,
 /obj/effect/floor_decal/industrial/outline/yellow,
 /turf/simulated/floor/tiled/dark,
 /area/constructionsite/teleporter)
@@ -1461,7 +1461,7 @@
 /area/constructionsite/teleporter)
 "eW" = (
 /obj/structure/cable/blue,
-/obj/machinery/power/port_gen/pacman,
+/obj/machinery/port_gen/pacman,
 /obj/machinery/power/terminal,
 /obj/effect/floor_decal/industrial/outline/yellow,
 /turf/simulated/floor/tiled/dark,
@@ -2959,7 +2959,7 @@
 /turf/simulated/floor/airless,
 /area/constructionsite)
 "kr" = (
-/obj/machinery/power/shield_generator{
+/obj/machinery/shield_generator{
 	desc = "A heavy-duty shield generator and capacitor, capable of generating energy shields at large distances. This one seems to be in a state of disrepair.";
 	name = "disused shield generator"
 	},
@@ -3128,7 +3128,7 @@
 /turf/simulated/floor/airless,
 /area/constructionsite/engineering)
 "le" = (
-/obj/machinery/power/rad_collector,
+/obj/machinery/rad_collector,
 /turf/simulated/floor/airless,
 /area/constructionsite/engineering)
 "lf" = (
@@ -3379,7 +3379,7 @@
 /turf/simulated/floor/airless,
 /area/AIsattele)
 "lZ" = (
-/obj/machinery/power/emitter{
+/obj/machinery/emitter{
 	anchored = 1;
 	dir = 4;
 	state = 2
@@ -3391,7 +3391,7 @@
 /turf/simulated/floor/airless,
 /area/constructionsite/engineering)
 "mb" = (
-/obj/machinery/power/emitter{
+/obj/machinery/emitter{
 	anchored = 1;
 	dir = 8;
 	state = 2

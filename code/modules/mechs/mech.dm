@@ -12,7 +12,7 @@
 	status_flags = PASSEMOTES
 	a_intent =     I_HURT
 	mob_size =     MOB_SIZE_LARGE
-	atom_flags = ATOM_FLAG_SHIELD_CONTENTS | ATOM_FLAG_NO_TEMP_CHANGE
+	atom_flags = ATOM_FLAG_SHIELD_CONTENTS | ATOM_FLAG_NO_TEMP_CHANGE | ATOM_FLAG_BLOCK_DIAGONAL_FACING
 
 	meat_type = null
 	meat_amount = 0

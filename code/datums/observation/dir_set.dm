@@ -27,7 +27,7 @@
 /atom/set_dir(ndir)
 	var/old_dir = dir
 	// This attempts to mimic BYOND's handling of diagonal directions and cardinal icon states.
-	if(!(atom_flags & ATOM_FLAG_ALLOW_DIAGONAL_FACING) && !IsPowerOfTwo(ndir))
+	if((atom_flags & ATOM_FLAG_BLOCK_DIAGONAL_FACING) && !IsPowerOfTwo(ndir))
 		if(old_dir & ndir)
 			ndir = old_dir
 		else

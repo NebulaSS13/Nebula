@@ -5,7 +5,7 @@
 /obj/machinery/computer/fusion/core_control/OnTopic(var/mob/user, var/href_list, var/datum/topic_state/state)
 
 	if(href_list["toggle_active"] || href_list["str"])
-		var/obj/machinery/power/fusion_core/C = locate(href_list["machine"])
+		var/obj/machinery/fusion_core/C = locate(href_list["machine"])
 		if(!istype(C))
 			return TOPIC_NOACTION
 
@@ -13,7 +13,7 @@
 		if(!lan || !lan.is_connected(C))
 			return TOPIC_NOACTION
 
-		if(!C.check_core_status())
+		if(C.stat & BROKEN)
 			return TOPIC_NOACTION
 
 		if(href_list["toggle_active"])
@@ -38,10 +38,10 @@
 	var/datum/local_network/lan = fusion.get_local_network()
 	var/list/cores = list()
 	if(lan)
-		var/list/fusion_cores = lan.get_devices(/obj/machinery/power/fusion_core)
+		var/list/fusion_cores = lan.get_devices(/obj/machinery/fusion_core)
 		for(var/i = 1 to LAZYLEN(fusion_cores))
 			var/list/core = list()
-			var/obj/machinery/power/fusion_core/C = fusion_cores[i]
+			var/obj/machinery/fusion_core/C = fusion_cores[i]
 			core["id"] =          "#[i]"
 			core["ref"] =         "\ref[C]"
 			core["field"] =       !isnull(C.owned_field)
@@ -49,7 +49,7 @@
 			core["size"] =        C.owned_field ? "[C.owned_field.size] meter\s" : "Field offline."
 			core["instability"] = C.owned_field ? "[C.owned_field.percent_unstable * 100]%" : "Field offline."
 			core["temperature"] = C.owned_field ? "[C.owned_field.plasma_temperature + 295]K" : "Field offline."
-			core["powerstatus"] = "[C.avail()]/[C.active_power_usage] W"
+			core["powerstatus"] = "[C.active_power_usage] W"
 			var/fuel_string = "<table width = '100%'>"
 			if(C.owned_field && LAZYLEN(C.owned_field.reactants))
 				for(var/reactant in C.owned_field.reactants)

@@ -12,7 +12,7 @@
 
 /mob/living/carbon/has_external_organs()
 	return LAZYLEN(external_organs) > 0
-	
+
 /mob/living/carbon/has_internal_organs()
 	return LAZYLEN(internal_organs) > 0
 
@@ -60,7 +60,7 @@
 //Should handle vital organ checks, icon updates, events
 /mob/living/carbon/on_lost_organ(var/obj/item/organ/O)
 	if(!(. = ..()))
-		return 
+		return
 
 	//Check if we should die
 	if(species.is_vital_organ(src, O))

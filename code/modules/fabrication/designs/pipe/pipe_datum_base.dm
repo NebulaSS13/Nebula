@@ -25,9 +25,9 @@
 	for(var/path in building_cost)
 		resources[path] = building_cost[path] * FABRICATOR_EXTRA_COST_FACTOR
 
-/datum/fabricator_recipe/pipe/build(var/turf/location, var/amount = 1, var/color = PIPE_COLOR_WHITE)
+/datum/fabricator_recipe/pipe/build(var/turf/location, var/datum/fabricator_build_order/order)
 	. = list()
-	for(var/i = 1, i <= amount, i++)
+	for(var/i = 1, i <= order.multiplier, i++)
 		var/obj/item/pipe/new_item = new path(location)
 		if(istype(new_item))
 			if(connect_types != null)
@@ -36,7 +36,7 @@
 			new_item.rotate_class = rotate_class
 			new_item.constructed_path = constructed_path
 		if(colorable)
-			new_item.color = color
+			new_item.color = order.get_data("selected_color", PIPE_COLOR_WHITE)
 		else if (pipe_color != null)
 			new_item.color = pipe_color
 		new_item.SetName(name)
@@ -47,9 +47,9 @@
 		new_item.icon_state = build_icon_state
 		. += new_item
 
-/datum/fabricator_recipe/pipe/disposal_dispenser/build(var/turf/location, var/amount = 1, var/color = PIPE_COLOR_GREY)
+/datum/fabricator_recipe/pipe/disposal_dispenser/build(var/turf/location, var/datum/fabricator_build_order/order)
 	. = ..()
-	for(var/i = 1, i <= amount, i++)
+	for(var/i = 1, i <= order.multiplier, i++)
 		var/obj/structure/disposalconstruct/new_item = new path(location)
 		new_item.SetName(name)
 		if(desc)

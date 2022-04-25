@@ -339,7 +339,7 @@ This function restores all organs.
 	return
 
 /mob/living/carbon/human/apply_damage(var/damage = 0, var/damagetype = BRUTE, var/def_zone = null, var/damage_flags = 0, var/obj/used_weapon = null, var/armor_pen, var/silent = FALSE, var/obj/item/organ/external/given_organ = null)
-
+	if(status_flags & GODMODE)	return	//godmode
 	var/obj/item/organ/external/organ = given_organ
 	if(!organ)
 		if(isorgan(def_zone))

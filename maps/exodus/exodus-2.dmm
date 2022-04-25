@@ -46572,7 +46572,7 @@
 /turf/simulated/floor/tiled/white,
 /area/exodus/medical/medbay)
 "bSp" = (
-/obj/machinery/power/port_gen/pacman{
+/obj/machinery/port_gen/pacman{
 	sheets = 25
 	},
 /obj/effect/floor_decal/industrial/warning{
@@ -57522,7 +57522,7 @@
 /turf/simulated/floor/airless,
 /area/exodus/solar/starboard)
 "cpn" = (
-/obj/machinery/power/rad_collector,
+/obj/machinery/rad_collector,
 /turf/simulated/floor/plating,
 /area/exodus/engineering/storage)
 "cpo" = (
@@ -59423,7 +59423,7 @@
 /turf/simulated/floor/tiled/techfloor,
 /area/exodus/engineering/storage)
 "cuB" = (
-/obj/machinery/power/emitter,
+/obj/machinery/emitter,
 /turf/simulated/floor/plating,
 /area/exodus/engineering/storage)
 "cuC" = (
@@ -59510,7 +59510,7 @@
 /obj/structure/cable/yellow{
 	icon_state = "0-2"
 	},
-/obj/machinery/power/generator{
+/obj/machinery/generator{
 	anchored = 1;
 	dir = 4
 	},
@@ -62224,12 +62224,15 @@
 /turf/simulated/floor/plating,
 /area/exodus/engineering/engine_room)
 "cIa" = (
-/obj/machinery/power/emitter{
+/obj/machinery/emitter{
 	anchored = 1;
 	id_tag = "EngineEmitter";
 	state = 2
 	},
 /obj/structure/cable/cyan,
+/obj/machinery/power/terminal{
+	dir = 1
+	},
 /turf/simulated/floor/plating,
 /area/exodus/engineering/engine_room)
 "cIb" = (
@@ -62756,7 +62759,7 @@
 /turf/simulated/floor/plating,
 /area/exodus/maintenance/engi_engine)
 "cJZ" = (
-/obj/machinery/power/generator{
+/obj/machinery/generator{
 	anchored = 1;
 	dir = 4
 	},
@@ -63996,7 +63999,7 @@
 /turf/simulated/floor/tiled/steel_grid,
 /area/exodus/quartermaster/miningdock)
 "jko" = (
-/obj/machinery/power/rad_collector,
+/obj/machinery/rad_collector,
 /obj/effect/floor_decal/industrial/warning/corner{
 	dir = 8
 	},
@@ -64310,7 +64313,7 @@
 /turf/simulated/floor/tiled/steel_grid,
 /area/exodus/research/chargebay)
 "ohn" = (
-/obj/machinery/power/emitter,
+/obj/machinery/emitter,
 /obj/effect/floor_decal/industrial/warning{
 	dir = 8
 	},

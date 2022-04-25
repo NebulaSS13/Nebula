@@ -5,7 +5,7 @@
 	icon_state = "compressor"
 	anchored = 1
 	density = 1
-	var/obj/machinery/power/turbine/turbine
+	var/obj/machinery/turbine/turbine
 	var/datum/gas_mixture/gas_contained
 	var/turf/simulated/inturf
 	var/starter = 0
@@ -17,7 +17,7 @@
 	uncreated_component_parts = null
 	construct_state = /decl/machine_construction/default/panel_closed
 
-/obj/machinery/power/turbine
+/obj/machinery/turbine
 	name = "gas turbine generator"
 	desc = "A gas turbine used for backup power generation."
 	icon = 'icons/obj/pipes.dmi'
@@ -103,17 +103,17 @@
 		overlays += image('icons/obj/pipes.dmi', "comp-o1", FLY_LAYER)
 	 //TODO: DEFERRED
 
-/obj/machinery/power/turbine/Initialize()
+/obj/machinery/turbine/Initialize()
 	..()
 	outturf = get_step(src, dir)
 	return INITIALIZE_HINT_LATELOAD
 
-/obj/machinery/power/turbine/LateInitialize()
+/obj/machinery/turbine/LateInitialize()
 	..()
 	if(!compressor) // It should have found us and subscribed.
 		set_broken(TRUE)
 
-/obj/machinery/power/turbine/Destroy()
+/obj/machinery/turbine/Destroy()
 	if(compressor)
 		compressor.turbine = null
 		compressor.set_broken(TRUE)
@@ -124,7 +124,7 @@
 #define TURBGENQ 20000
 #define TURBGENG 0.8
 
-/obj/machinery/power/turbine/Process()
+/obj/machinery/turbine/Process()
 	if(!compressor.starter)
 		return
 	overlays.Cut()
@@ -132,7 +132,7 @@
 		return
 	lastgen = ((compressor.rpm / TURBGENQ)**TURBGENG) *TURBGENQ
 
-	add_avail(lastgen)
+	generate_power(lastgen)
 	var/newrpm = ((compressor.gas_contained.temperature) * compressor.gas_contained.total_moles)/4
 	newrpm = max(0, newrpm)
 
@@ -153,7 +153,7 @@
 			src.interact(M)
 	AutoUpdateAI(src)
 
-/obj/machinery/power/turbine/interact(mob/user)
+/obj/machinery/turbine/interact(mob/user)
 
 	if ( (get_dist(src, user) > 1 ) || (stat & (NOPOWER|BROKEN)) && (!istype(user, /mob/living/silicon/ai)) )
 		user.machine = null
@@ -178,12 +178,12 @@
 
 	return
 
-/obj/machinery/power/turbine/CanUseTopic(var/mob/user, href_list)
+/obj/machinery/turbine/CanUseTopic(var/mob/user, href_list)
 	if(!user.check_dexterity(DEXTERITY_KEYBOARDS))
 		return min(..(), STATUS_UPDATE)
 	return ..()
 
-/obj/machinery/power/turbine/OnTopic(user, href_list)
+/obj/machinery/turbine/OnTopic(user, href_list)
 	if(href_list["close"])
 		close_browser(usr, "window=turbine")
 		return TOPIC_HANDLED

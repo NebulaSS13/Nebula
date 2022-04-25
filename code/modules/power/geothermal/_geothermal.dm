@@ -31,33 +31,33 @@ var/global/const/MAX_GEOTHERMAL_PRESSURE =            2000
 	if(!QDELETED(src) && prob(100 - (25 * severity)))
 		physically_destroyed()
 
-/obj/machinery/power/geothermal
+/obj/machinery/geothermal
 	icon = 'icons/obj/machines/power/geothermal.dmi'
 	icon_state = "geothermal-base"
 	var/tmp/neighbors = 0
 	var/tmp/current_pressure = 0
 	var/efficiency = 0.5
 
-/obj/machinery/power/geothermal/RefreshParts()
+/obj/machinery/geothermal/RefreshParts()
 	..()
 	efficiency = Clamp(total_component_rating_of_type(/obj/item/stock_parts/capacitor) * GEOTHERMAL_EFFICIENCY_MOD, GEOTHERMAL_EFFICIENCY_MOD, 1)
 
-/obj/machinery/power/geothermal/proc/add_pressure(var/pressure)
+/obj/machinery/geothermal/proc/add_pressure(var/pressure)
 	current_pressure = Clamp(current_pressure + pressure, 0, MAX_GEOTHERMAL_PRESSURE)
 	if(!is_processing)
 		START_PROCESSING_MACHINE(src, MACHINERY_PROCESS_SELF)
 
-/obj/machinery/power/geothermal/Process()
+/obj/machinery/geothermal/Process()
 	if(anchored && !(stat & BROKEN) && loc)
 		var/consumed_pressure = current_pressure * GEOTHERMAL_PRESSURE_CONSUMED_PER_TICK
 		current_pressure -= consumed_pressure
 		var/remaining_pressure = consumed_pressure
 		consumed_pressure = round(consumed_pressure * efficiency)
 		remaining_pressure -= consumed_pressure
-		if(powernet)
-			var/generated_power = round(consumed_pressure * GEOTHERMAL_PRESSURE_TO_POWER)
-			if(generated_power)
-				add_avail(generated_power)
+		
+		var/generated_power = round(consumed_pressure * GEOTHERMAL_PRESSURE_TO_POWER)
+		if(generated_power)
+			generate_power(generated_power)
 		remaining_pressure = round(remaining_pressure * GEOTHERMAL_PRESSURE_LOSS)
 		if(remaining_pressure)
 			addtimer(CALLBACK(src, .proc/propagate_pressure, remaining_pressure), 5)
@@ -65,44 +65,44 @@ var/global/const/MAX_GEOTHERMAL_PRESSURE =            2000
 	if(current_pressure <= 10)
 		return PROCESS_KILL
 
-/obj/machinery/power/geothermal/proc/propagate_pressure(var/remaining_pressure)
+/obj/machinery/geothermal/proc/propagate_pressure(var/remaining_pressure)
 	var/list/neighbors
 	for(var/neighbordir in global.cardinal)
-		var/obj/machinery/power/geothermal/neighbor = (locate() in get_step(loc, neighbordir))
+		var/obj/machinery/geothermal/neighbor = (locate() in get_step(loc, neighbordir))
 		if(neighbor?.anchored && !(neighbor.stat & BROKEN))
 			LAZYADD(neighbors, neighbor)
 	if(LAZYLEN(neighbors))
 		remaining_pressure = round(remaining_pressure / LAZYLEN(neighbors))
 		if(remaining_pressure)
-			for(var/obj/machinery/power/geothermal/neighbor AS_ANYTHING in neighbors)
+			for(var/obj/machinery/geothermal/neighbor AS_ANYTHING in neighbors)
 				neighbor.add_pressure(remaining_pressure)
 
-/obj/machinery/power/geothermal/proc/refresh_neighbors()
+/obj/machinery/geothermal/proc/refresh_neighbors()
 	var/last_neighbors = neighbors
 	neighbors = 0
 	for(var/neighbordir in global.cardinal)
-		if(locate(/obj/machinery/power/geothermal) in get_step(loc, neighbordir))
+		if(locate(/obj/machinery/geothermal) in get_step(loc, neighbordir))
 			neighbors |= neighbordir
 	if(last_neighbors != neighbors)
 		update_icon()
 
-/obj/machinery/power/geothermal/Initialize()
+/obj/machinery/geothermal/Initialize()
 	. = ..()
 	refresh_neighbors()
 	for(var/turf/T AS_ANYTHING in RANGE_TURFS(loc, 1))
-		for(var/obj/machinery/power/geothermal/neighbor in T)
+		for(var/obj/machinery/geothermal/neighbor in T)
 			neighbor.refresh_neighbors()
 	STOP_PROCESSING_MACHINE(src, MACHINERY_PROCESS_SELF)
 
-/obj/machinery/power/geothermal/Destroy()
+/obj/machinery/geothermal/Destroy()
 	var/atom/last_loc = loc
 	. = ..()
 	if(istype(last_loc))
 		for(var/turf/T AS_ANYTHING in RANGE_TURFS(last_loc, 1))
-			for(var/obj/machinery/power/geothermal/neighbor in T)
+			for(var/obj/machinery/geothermal/neighbor in T)
 				neighbor.refresh_neighbors()
 
-/obj/machinery/power/geothermal/on_update_icon()
+/obj/machinery/geothermal/on_update_icon()
 
 	. = ..()
 

@@ -311,7 +311,7 @@
 	if(alert("Are you sure? This will start up the engine. Should only be used during debug!",,"Yes","No") != "Yes")
 		return
 
-	for(var/obj/machinery/power/emitter/E in SSmachines.machinery)
+	for(var/obj/machinery/emitter/E in SSmachines.machinery)
 		if(E.anchored)
 			E.active = 1
 
@@ -337,7 +337,7 @@
 				//S.dissipate_track = 0
 				//S.dissipate_strength = 10
 
-	for(var/obj/machinery/power/rad_collector/Rad in SSmachines.machinery)
+	for(var/obj/machinery/rad_collector/Rad in SSmachines.machinery)
 		if(Rad.anchored)
 			if(!Rad.loaded_tank)
 				Rad.loaded_tank = new /obj/item/tank/hydrogen(Rad)
