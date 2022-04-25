@@ -638,7 +638,7 @@ default behaviour is:
 	//Since organs are cleared on destroy, add this separate check here
 	for(var/obj/item/organ/O in .)
 		if(!O.is_droppable())
-			. -= O
+			LAZYREMOVE(., O)
 
 /mob/proc/can_be_possessed_by(var/mob/observer/ghost/possessor)
 	return istype(possessor) && possessor.client
