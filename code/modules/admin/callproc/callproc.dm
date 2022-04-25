@@ -120,7 +120,7 @@
 			return CANCEL
 		switch(input("Type of [arguments.len+1]\th variable", "argument [arguments.len+1]") as null|anything in list(
 				"finished", "null", "text", "num", "type", "obj reference", "mob reference",
-				"area/turf reference", "icon", "file", "client", "mob's area", "marked datum", "click on atom"))
+				"area/turf reference", "icon", "file", "client", "mob's area", "path", "marked datum", "click on atom"))
 			if(null)
 				return CANCEL
 
@@ -177,6 +177,11 @@
 						if("Cancel")
 							return CANCEL
 
+			if ("path")
+				current = text2path(input("Enter path for [arguments.len+1]\th argument") as null|text)
+				if (isnull(current))
+					return CANCEL
+
 			if("marked datum")
 				current = C.holder.marked_datum()
 				if(!current)
@@ -220,7 +225,7 @@
 			returnval = call(target, procname)()
 	else
 		log_admin("[key_name(src)] called [procname]() with [arguments.len ? "the arguments [list2params(arguments)]" : "no arguments"].")
-		returnval = call(procname)(arglist(arguments))
+		returnval = call(text2path("/proc/[procname]"))(arglist(arguments))
 
 	to_chat(usr, "<span class='info'>[procname]() returned: [json_encode(returnval)]</span>")
 	SSstatistics.add_field_details("admin_verb","APC") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
