@@ -266,7 +266,7 @@
 			return
 
 	//Remove sub-limbs
-	if(istype(W,/obj/item/circular_saw) && LAZYLEN(children) && try_saw_off_child(W, user))
+	if(W.get_tool_quality(TOOL_SAW) && LAZYLEN(children) && try_saw_off_child(W, user))
 		return
 	//Remove internal items/organs/implants
 	if(try_remove_internal_item(W, user))
@@ -314,13 +314,13 @@
 	if(!istype(removing))
 		return TRUE
 
-	user.visible_message(SPAN_DANGER("<b>[user]</b> starts cutting off \the [removing] from [src] with \the [W]!"))
-	var/cutting_failed = !do_after(user, 3 SECONDS, user, FALSE)
+	var/cutting_result = !W.do_tool_interaction(TOOL_SAW, user, src, W.get_tool_speed(TOOL_SAW) * 3 SECONDS, SPAN_DANGER("<b>[user]</b> starts cutting off \the [removing] from [src] with \the [W]!") )
 
 	//Check if the limb is still in the hierarchy
 	removables = get_limbs_recursive(TRUE)
-	if(cutting_failed || !(removing in removables))
-		user.visible_message(SPAN_DANGER("<b>[user]</b> stops trying to cut \the [removing]."))
+	if(cutting_result == 1 || !(removing in removables))
+		if(cutting_result != -1)
+			user.visible_message(SPAN_DANGER("<b>[user]</b> stops trying to cut \the [removing]."))
 		return TRUE
 	
 	removing.do_uninstall()
