@@ -34,9 +34,10 @@
 	//Only run effects if we're not already detached, and we're not doing a in-place removal
 	if(!in_place && !(O.status & ORGAN_CUT_AWAY)) //Gotta check the flag here, because of prosthetics handling detached state differently
 		on_lost_organ(O)
+		
 	. = O.do_uninstall(in_place, detach, ignore_children, update_icon)
 
-	if(!in_place && !(O.status & ORGAN_CUT_AWAY)) //Gotta check the flag here, because of prosthetics handling detached state differently
+	if(!in_place)
 		updatehealth()
 	
 	//Shall not drop undroppable things
