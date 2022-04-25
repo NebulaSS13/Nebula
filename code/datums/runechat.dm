@@ -20,9 +20,6 @@
 /// The number of z-layer 'slices' usable by the chat message layering
 #define RUNECHAT_LAYER_MAX_Z (RUNECHAT_LAYER_MAX - RUNECHAT_LAYER) / RUNECHAT_LAYER_Z_STEP
 
-/// Macro from Lummox used to get height from a MeasureText proc
-#define WXH_TO_HEIGHT(x)			text2num(copytext(x, findtextEx(x, "x") + 1))
-
 /**
  * # Chat Message Overlay
  *
@@ -158,7 +155,7 @@
 	approx_lines = max(1, mheight / RUNECHAT_MESSAGE_APPROX_LHEIGHT)
 
 	// Translate any existing messages upwards, apply exponential decay factors to timers
-	message_loc = get_atom_on_turf(target)
+	message_loc = isturf(target) ? target : get_atom_on_turf(target)
 	if (owned_by.seen_messages)
 		var/idx = 1
 		var/combined_height = approx_lines
@@ -183,7 +180,8 @@
 	message.plane = ABOVE_LIGHTING_PLANE
 	message.appearance_flags = APPEARANCE_UI_IGNORE_ALPHA | KEEP_APART
 	message.alpha = 0
-	message.pixel_z = owner.bound_height * 0.95
+	message.pixel_z = target.maptext_height
+	message.pixel_w = (target.maptext_width * 0.5) - (world.icon_size / 2)
 	message.maptext_width = RUNECHAT_MESSAGE_WIDTH
 	message.maptext_height = mheight
 	message.maptext_x = (RUNECHAT_MESSAGE_WIDTH - owner.bound_width) * -0.5

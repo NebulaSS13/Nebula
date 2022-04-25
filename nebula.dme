@@ -81,6 +81,7 @@
 #include "code\__defines\subsystems.dm"
 #include "code\__defines\targeting.dm"
 #include "code\__defines\temperature.dm"
+#include "code\__defines\text.dm"
 #include "code\__defines\time.dm"
 #include "code\__defines\tools.dm"
 #include "code\__defines\topic.dm"
