@@ -142,7 +142,7 @@ var/global/rollovercheck_last_timeofday = 0
 /proc/stoplag(initial_delay)
 	// If we're initializing, our tick limit might be over 100 (testing config), but stoplag() penalizes procs that go over.
 	// 	Unfortunately, this penalty slows down init a *lot*. So, we disable it during boot and lobby, when relatively few things should be calling this.
-	if (!Master || !(Master.current_runlevel & RUNLEVELS_DEFAULT))
+	if (!Master || Master.current_runlevel < 3)
 		sleep(world.tick_lag)
 		return 1
 
