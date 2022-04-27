@@ -210,8 +210,10 @@
 /mob/living/exosuit/return_air()
 	return (body && body.pilot_coverage >= 100 && hatch_closed && body.cockpit) ? body.cockpit : loc.return_air()
 
-/mob/living/exosuit/GetIdCard()
-	return access_card
+/mob/living/exosuit/GetIdCards()
+	. = ..()
+	if(istype(access_card))
+		LAZYDISTINCTADD(., access_card)
 
 /mob/living/exosuit/set_dir()
 	. = ..()

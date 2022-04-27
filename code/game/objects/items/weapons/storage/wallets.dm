@@ -88,19 +88,13 @@
 		tiny_image.appearance_flags = RESET_COLOR
 		overlays += tiny_image
 
-/obj/item/storage/wallet/GetIdCard()
-	return front_id
+/obj/item/storage/wallet/GetIdCards()
+	. = ..()
+	if(istype(front_id))
+		LAZYDISTINCTADD(., front_id)
 
 /obj/item/storage/wallet/GetChargeStick()
 	return front_stick
-
-/obj/item/storage/wallet/GetAccess()
-	var/obj/item/I = GetIdCard()
-	if(I)
-		return I.GetAccess()
-	else
-		return ..()
-
 
 /obj/item/storage/wallet/AltClick(mob/user)
 	if (user != loc || user.incapacitated() || !ishuman(user))

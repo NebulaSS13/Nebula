@@ -58,14 +58,11 @@
 		id_card = new id_card(src)
 	. = ..()
 
-/obj/item/organ/internal/controller/GetIdCard()
+/obj/item/organ/internal/controller/GetIdCards()
+	. = ..()
 	//Not using is_broken() because it should be able to function when CUT_AWAY is set
 	if(damage < min_broken_damage)
-		return id_card
-
-/obj/item/organ/internal/controller/GetIdCards()
-	if(damage < min_broken_damage)
-		return list(id_card)
+		LAZYDISTINCTADD(., id_card)
 
 /obj/item/organ/internal/controller/GetAccess()
 	if(damage < min_broken_damage)
