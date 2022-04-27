@@ -21,8 +21,8 @@
 	return LAZYACCESS(GetIdCards(), 1)
 
 /atom/movable/proc/GetIdCards()
-	var/datum/extension/access_provider/our_provider
-	if((our_provider = get_extension(src, /datum/extension/access_provider)))
+	var/datum/extension/access_provider/our_provider = get_extension(src, /datum/extension/access_provider)
+	if(our_provider)
 		LAZYDISTINCTADD(., our_provider.GetIdCards())
 
 /atom/movable/proc/check_access(atom/movable/A)
@@ -238,13 +238,14 @@ var/global/list/priv_region_access
 /mob/living/carbon/human/GetIdCards(exceptions = null)
 	. = ..()
 	var/list/candidates = get_held_items()
-	LAZYDISTINCTADD(candidates, wear_id)
+	if(wear_id)
+		LAZYDISTINCTADD(candidates, wear_id)
 	for(var/atom/movable/candidate in candidates)
 		if(!candidate || is_type_in_list(candidate, exceptions))
 			continue
-		var/obj/item/card/id/id_card = candidate?.GetIdCard()
-		if(istype(id_card))
-			LAZYDISTINCTADD(., id_card)
+		var/list/obj/item/card/id/id_cards = candidate.GetIdCards()
+		if(LAZYLEN(id_cards))
+			LAZYDISTINCTADD(., id_cards)
 
 /mob/living/carbon/human/GetAccess(var/union = TRUE)
 	. = ..(union)
