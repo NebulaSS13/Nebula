@@ -236,7 +236,7 @@ Please contact me on #coderbus IRC. ~Carn x
 			turn_angle = -90
 		else if(dir & EAST)
 			turn_angle = 90
-		else 
+		else
 			turn_angle = pick(-90, 90)
 		M.Turn(turn_angle)
 		M.Scale(desired_scale_y, desired_scale_x)
@@ -706,7 +706,7 @@ var/global/list/damage_icon_parts = list()
 /mob/living/carbon/human/proc/get_tail_icon(var/obj/item/organ/external/tail/tail_organ)
 	if(!istype(tail_organ))
 		return
-	var/icon_key = "[tail_organ.get_tail()][tail_organ.icon][tail_organ.get_tail_blend(src)][species.appearance_flags & HAS_SKIN_COLOR][skin_colour][tail_organ.get_tail_hair()][tail_organ.get_tail_hair_blend()][hair_colour]"
+	var/icon_key = "[tail_organ.get_tail()]\ref[tail_organ.icon][tail_organ.get_tail_blend(src)][species.appearance_flags & HAS_SKIN_COLOR][skin_colour][tail_organ.get_tail_hair()][tail_organ.get_tail_hair_blend()][hair_colour]"
 	var/icon/tail_icon = tail_icon_cache[icon_key]
 	if(!tail_icon)
 		//generate a new one
