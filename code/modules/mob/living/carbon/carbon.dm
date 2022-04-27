@@ -1,8 +1,10 @@
 /mob/living/carbon/Initialize()
 	//setup reagent holders
-	bloodstr = new/datum/reagents/metabolism(120, src, CHEM_INJECT)
-	touching = new/datum/reagents/metabolism(1000, src, CHEM_TOUCH)
-	reagents = bloodstr
+	if(!bloodstr && !reagents)
+		bloodstr = new/datum/reagents/metabolism(120, src, CHEM_INJECT)
+		reagents = bloodstr
+	if(!touching)
+		touching = new/datum/reagents/metabolism(1000, src, CHEM_TOUCH)
 
 	if (!default_language && species_language)
 		default_language = species_language
