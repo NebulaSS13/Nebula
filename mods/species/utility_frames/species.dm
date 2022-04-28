@@ -64,10 +64,6 @@
 		BP_POSIBRAIN = /obj/item/organ/internal/posibrain,
 		BP_EYES = /obj/item/organ/internal/eyes/robot
 	)
-	vital_organs = list(
-		BP_POSIBRAIN = list("path" = /obj/item/organ/internal/posibrain),
-		BP_CHEST     = list("path" = /obj/item/organ/external/chest),
-	)
 
 	exertion_effect_chance = 10
 	exertion_charge_scale = 1

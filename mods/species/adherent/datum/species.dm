@@ -106,11 +106,6 @@
 		BP_COOLING_FINS = /obj/item/organ/internal/powered/cooling_fins
 		)
 
-	vital_organs = list(
-		BP_BRAIN = list("path" = /obj/item/organ/internal/brain/adherent),
-		BP_GROIN = list("path" = /obj/item/organ/external/groin/crystal),
-		BP_CHEST = list("path" = /obj/item/organ/external/chest/crystal),
-	)
 	move_trail = /obj/effect/decal/cleanable/blood/tracks/snake
 	max_players = 3
 
