@@ -1334,7 +1334,9 @@
 	species.handle_post_spawn(src)
 
 	UpdateAppearance() //Apply dna appearance to mob, causes DNA to change because filler values are regenerated
-	reset_blood()
+	//Prevent attempting to create blood container if its already setup
+	if(!vessel)
+		reset_blood()
 
 //If the mob has its default name it'll try to generate /obtain a proper one
 /mob/living/carbon/human/proc/try_generate_default_name()
