@@ -342,7 +342,7 @@ var/global/list/radial_menus = list()
 	Helper to make a radial menu button with a name and icon for a given atom.
 */
 /proc/make_item_radial_menu_button(var/atom/movable/AM, var/name_prefix = "", var/name_suffix = "")
-	var/image/radial_button = image()
+	var/image/radial_button = new()
 	radial_button.appearance = AM
 	radial_button.plane = FLOAT_PLANE
 	radial_button.layer = FLOAT_LAYER
