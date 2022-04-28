@@ -42,7 +42,7 @@
 		if(writing_space <= 0)
 			to_chat(user, SPAN_WARNING("There is no room left on \the [src]."))
 			return
-		var/text = sanitizeSafe(input("What would you like to write?") as text, writing_space)
+		var/text = sanitize_safe(input("What would you like to write?") as text, writing_space)
 		if(!text || thing.loc != user || (!Adjacent(user) && loc != user) || user.incapacitated())
 			return
 		user.visible_message(SPAN_NOTICE("\The [user] jots a note down on \the [src]."))
@@ -89,6 +89,7 @@
 	color = COLOR_YELLOW
 	slot_flags = 0
 	layer = ABOVE_WINDOW_LAYER
+	persist_on_init = FALSE
 
 /obj/item/paper/sticky/Initialize()
 	. = ..()
@@ -137,14 +138,15 @@
 		if(params)
 			var/list/mouse_control = params2list(params)
 			if(mouse_control["icon-x"])
-				pixel_x = text2num(mouse_control["icon-x"]) - 16
+				default_pixel_x = text2num(mouse_control["icon-x"]) - 16
 				if(dir_offset & EAST)
-					pixel_x += 32
+					default_pixel_x += 32
 				else if(dir_offset & WEST)
-					pixel_x -= 32
+					default_pixel_x -= 32
 			if(mouse_control["icon-y"])
-				pixel_y = text2num(mouse_control["icon-y"]) - 16
+				default_pixel_y = text2num(mouse_control["icon-y"]) - 16
 				if(dir_offset & NORTH)
-					pixel_y += 32
+					default_pixel_y += 32
 				else if(dir_offset & SOUTH)
-					pixel_y -= 32
+					default_pixel_y -= 32
+			reset_offsets(0)

@@ -87,7 +87,6 @@ LINEN BINS
 	var/list/sheets = list()
 	var/obj/item/hidden = null
 
-
 /obj/structure/bedsheetbin/examine(mob/user)
 	. = ..()
 
@@ -99,13 +98,15 @@ LINEN BINS
 		return
 	to_chat(user, "There are [amount] bed sheets in the bin.")
 
-
 /obj/structure/bedsheetbin/on_update_icon()
+	..()
 	switch(amount)
-		if(0)				icon_state = "linenbin-empty"
-		if(1 to amount / 2)	icon_state = "linenbin-half"
-		else				icon_state = "linenbin-full"
-
+		if(0)
+			icon_state = "linenbin-empty"
+		if(1 to amount / 2)
+			icon_state = "linenbin-half"
+		else
+			icon_state = "linenbin-full"
 
 /obj/structure/bedsheetbin/attackby(obj/item/I, mob/user)
 	if(istype(I, /obj/item/bedsheet))

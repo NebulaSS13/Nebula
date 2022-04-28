@@ -3,96 +3,70 @@
 ****************************************************/
 /obj/item/organ/internal
 	scale_max_damage_to_species_health = TRUE
-	var/dead_icon // Icon to use when the organ has died.
+	var/tmp/alive_icon //icon to use when the organ is alive
+	var/tmp/dead_icon // Icon to use when the organ has died.
+	var/tmp/prosthetic_icon //Icon to use when the organ is robotic
+	var/tmp/prosthetic_dead_icon //Icon to use when the organ is robotic and dead
 	var/surface_accessible = FALSE
 	var/relative_size = 25   // Relative size of the organ. Roughly % of space they take in the target projection :D
 	var/min_bruised_damage = 10       // Damage before considered bruised
 	var/damage_reduction = 0.5     //modifier for internal organ injury
 
-/obj/item/organ/internal/Initialize(mapload, datum/dna/given_dna)
+/obj/item/organ/internal/Initialize(mapload, material_key, datum/dna/given_dna)
+	if(!alive_icon)
+		alive_icon = initial(icon_state)
 	if(max_damage)
 		min_bruised_damage = FLOOR(max_damage / 4)
 	. = ..()
-	if(. != INITIALIZE_HINT_QDEL && owner)
-		owner.internal_organs |= src
-		var/obj/item/organ/external/E = owner.get_organ(parent_organ)
-		if(!E)
-			PRINT_STACK_TRACE("[src] spawned in [owner] without a parent organ: [parent_organ].")
-			return INITIALIZE_HINT_QDEL
-		LAZYDISTINCTADD(E.internal_organs, src)
-		E.cavity_max_w_class = max(E.cavity_max_w_class, w_class)
-		E.update_internal_organs_cost()
 
-/obj/item/organ/internal/Destroy()
-	if(owner)
-		owner.internal_organs -= src
-		owner.internal_organs_by_name -= organ_tag
-		var/obj/item/organ/external/E = owner.organs_by_name[parent_organ]
-		if(istype(E))
-			LAZYREMOVE(E.internal_organs, src)
-	return ..()
-
-/obj/item/organ/internal/set_dna(var/datum/dna/new_dna)
-	..()
-	if(species && species.organs_icon)
+/obj/item/organ/internal/set_species(species_name)
+	. = ..()
+	if(species.organs_icon)
 		icon = species.organs_icon
 
-//disconnected the organ from it's owner but does not remove it, instead it becomes an implant that can be removed with implant surgery
-//TODO move this to organ/internal once the FPB port comes through
-/obj/item/organ/proc/cut_away(var/mob/living/user)
-	var/obj/item/organ/external/parent = owner.get_organ(parent_organ)
-	if(istype(parent)) //TODO ensure that we don't have to check this.
-		removed(user, 0)
-		LAZYADD(parent.implants, src)
+/obj/item/organ/internal/do_install(mob/living/carbon/human/target, obj/item/organ/external/affected, in_place, update_icon, detached)
+	. = ..()
 
-/obj/item/organ/internal/removed(var/mob/living/user, var/drop_organ=1, var/detach=1)
-	if(owner)
-		owner.internal_organs -= src
-		owner.internal_organs_by_name -= organ_tag
-		var/obj/item/organ/external/E = owner.get_organ(parent_organ)
-		E.update_internal_organs_cost()
+	if(!affected)
+		log_warning("'[src]' called obj/item/organ/internal/do_install(), but its expected parent organ is null!")
 
-		if(detach)
-			var/obj/item/organ/external/affected = owner.get_organ(parent_organ)
-			if(affected)
-				LAZYREMOVE(affected.internal_organs, src)
-				status |= ORGAN_CUT_AWAY
-	..()
-
-/obj/item/organ/internal/replaced(var/mob/living/carbon/human/target, var/obj/item/organ/external/affected)
-
-	if(!istype(target))
-		return 0
-
+	//The organ may only update and etc if its being attached, or isn't cut away. 
+	//Calls up the chain should have set the CUT_AWAY flag already
 	if(status & ORGAN_CUT_AWAY)
-		return 0 //organs don't work very well in the body when they aren't properly attached
+		LAZYDISTINCTADD(affected.implants, src) //Add us to the detached organs list
+		LAZYREMOVE(affected.internal_organs, src)
+	else
+		STOP_PROCESSING(SSobj, src)
+		LAZYREMOVE(affected.implants, src) //Make sure we're not in the implant list anymore
+		LAZYDISTINCTADD(affected.internal_organs, src)
+		affected.cavity_max_w_class = max(affected.cavity_max_w_class, w_class)
+		affected.update_internal_organs_cost()
 
-	// robotic organs emulate behavior of the equivalent flesh organ of the species
-	if(BP_IS_PROSTHETIC(src) || !species)
-		species = target.species
-
-	..()
-
-	STOP_PROCESSING(SSobj, src)
-	target.internal_organs |= src
-	target.internal_organs_by_name[organ_tag] = src
-	LAZYDISTINCTADD(affected.internal_organs, src)
-	return 1
-
-/obj/item/organ/internal/die()
-	..()
-	if((status & ORGAN_DEAD) && dead_icon)
-		icon_state = dead_icon
-
-/obj/item/organ/internal/remove_rejuv()
+/obj/item/organ/internal/do_uninstall(in_place, detach, ignore_children, update_icon)
+	//Make sure we're removed from whatever parent organ we have, either in a mob or not
+	var/obj/item/organ/external/affected
 	if(owner)
-		owner.internal_organs -= src
-		owner.internal_organs_by_name -= organ_tag
-		while(null in owner.internal_organs)
-			owner.internal_organs -= null
-		var/obj/item/organ/external/E = owner.organs_by_name[parent_organ]
-		if(istype(E))
-			LAZYREMOVE(E.internal_organs, src)
+		affected = owner.get_organ(parent_organ)
+	else if(istype(loc, /obj/item/organ/external))
+		var/obj/item/organ/external/E = loc
+		if(E.organ_tag == parent_organ)
+			affected = E
+	//We can be removed from a mob even if we have no parents, if we're in a detached state
+	if(affected)
+		LAZYREMOVE(affected.internal_organs, src)
+		affected.update_internal_organs_cost()
+	. = ..()
+
+	//Remove it from the implants if we are fully removing, or add it to the implants if we are detaching
+	if(affected)
+		if(status & ORGAN_CUT_AWAY)
+			LAZYDISTINCTADD(affected.implants, src)
+		else
+			LAZYREMOVE(affected.implants, src) 
+
+//#TODO: Remove rejuv hacks
+/obj/item/organ/internal/remove_rejuv()
+	do_uninstall()
 	..()
 
 /obj/item/organ/internal/is_usable()
@@ -185,7 +159,7 @@
 	heal_damage(damage)
 
 /obj/item/organ/internal/proc/get_scarring_level()
-	. = (initial(max_damage) - max_damage)/initial(max_damage)
+	. = (absolute_max_damage - max_damage)/absolute_max_damage
 
 /obj/item/organ/internal/get_scan_results()
 	. = ..()
@@ -203,3 +177,13 @@
 			take_internal_damage(9)
 		if (3)
 			take_internal_damage(6.5)
+
+/obj/item/organ/internal/on_update_icon()
+	. = ..()
+	if(BP_IS_PROSTHETIC(src) && prosthetic_icon)
+		icon_state = ((status & ORGAN_DEAD) && prosthetic_dead_icon)? 	prosthetic_dead_icon : prosthetic_icon 
+	else
+		icon_state = ((status & ORGAN_DEAD) && dead_icon)? 				dead_icon : alive_icon
+
+/obj/item/organ/internal/is_internal()
+	return TRUE

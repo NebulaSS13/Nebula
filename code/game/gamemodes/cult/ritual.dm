@@ -117,7 +117,7 @@
 
 /mob/living/carbon/human/get_blood_name()
 	if(species)
-		return species.get_blood_name()
+		return species.get_blood_name(src)
 	return "blood"
 
 /mob/living/simple_animal/construct/get_blood_name()
@@ -133,7 +133,7 @@
 	return "#c80000"
 
 /mob/living/carbon/human/get_rune_color()
-	return species.blood_color
+	return species.get_blood_color(src)
 
 var/global/list/Tier1Runes = list(
 	/mob/proc/convert_rune,

@@ -1,4 +1,4 @@
-/obj/machinery/power/generator
+/obj/machinery/generator
 	name = "thermoelectric generator"
 	desc = "It's a high efficiency thermoelectric generator."
 	icon_state = "teg-unassembled"
@@ -27,7 +27,7 @@
 	construct_state = /decl/machine_construction/default/panel_closed
 	stat_immune = 0
 
-/obj/machinery/power/generator/Initialize()
+/obj/machinery/generator/Initialize()
 	. = ..()
 	desc = initial(desc) + " Rated for [round(max_power/1000)] kW."
 	reconnect()
@@ -37,7 +37,7 @@
 //so a circulator to the NORTH of the generator connects first to the EAST, then to the WEST
 //and a circulator to the WEST of the generator connects first to the NORTH, then to the SOUTH
 //note that the circulator's outlet dir is it's always facing dir, and it's inlet is always the reverse
-/obj/machinery/power/generator/proc/reconnect()
+/obj/machinery/generator/proc/reconnect()
 	if(circ1)
 		circ1.temperature_overlay = null
 	if(circ2)
@@ -63,7 +63,7 @@
 				circ2 = null
 	update_icon()
 
-/obj/machinery/power/generator/on_update_icon()
+/obj/machinery/generator/on_update_icon()
 	icon_state = anchored ? "teg-assembled" : "teg-unassembled"
 	overlays.Cut()
 	if (circ1)
@@ -85,7 +85,7 @@
 					circ2.temperature_overlay = "circ-[extreme]cold"
 		return 1
 
-/obj/machinery/power/generator/Process()
+/obj/machinery/generator/Process()
 	if(!circ1 || !circ2 || !anchored || stat & (BROKEN|NOPOWER))
 		stored_energy = 0
 		return
@@ -149,36 +149,33 @@
 	if(genlev != lastgenlev)
 		lastgenlev = genlev
 		update_icon()
-	add_avail(effective_gen)
+	
+	generate_power(effective_gen)
 
-/obj/machinery/power/generator/attackby(obj/item/W, mob/user)
+/obj/machinery/generator/attackby(obj/item/W, mob/user)
 	if(isWrench(W))
 		playsound(src.loc, 'sound/items/Ratchet.ogg', 75, 1)
 		anchored = !anchored
 		user.visible_message("[user.name] [anchored ? "secures" : "unsecures"] the bolts holding [src.name] to the floor.", \
 					"You [anchored ? "secure" : "unsecure"] the bolts holding [src] to the floor.", \
-					"You hear a ratchet")
+					"You hear a ratchet.")
 		update_use_power(anchored)
-		if(anchored) // Powernet connection stuff.
-			connect_to_network()
-		else
-			disconnect_from_network()
 		reconnect()
 	else
 		..()
 
-/obj/machinery/power/generator/CanUseTopic(mob/user)
+/obj/machinery/generator/CanUseTopic(mob/user)
 	if(!anchored)
 		return STATUS_CLOSE
 	return ..()
 
-/obj/machinery/power/generator/interface_interact(mob/user)
+/obj/machinery/generator/interface_interact(mob/user)
 	if(!circ1 || !circ2) //Just incase the middle part of the TEG was not wrenched last.
 		reconnect()
 	ui_interact(user)
 	return TRUE
 
-/obj/machinery/power/generator/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1)
+/obj/machinery/generator/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1)
 	// this is the data which will be sent to the ui
 	var/vertical = 0
 	if (dir == NORTH || dir == SOUTH)
@@ -229,7 +226,7 @@
 		// auto update every Master Controller tick
 		ui.set_auto_update(1)
 
-/obj/machinery/power/generator/verb/rotate_clock()
+/obj/machinery/generator/verb/rotate_clock()
 	set category = "Object"
 	set name = "Rotate Generator (Clockwise)"
 	set src in view(1)
@@ -239,7 +236,7 @@
 
 	src.set_dir(turn(src.dir, 90))
 
-/obj/machinery/power/generator/verb/rotate_anticlock()
+/obj/machinery/generator/verb/rotate_anticlock()
 	set category = "Object"
 	set name = "Rotate Generator (Counterclockwise)"
 	set src in view(1)

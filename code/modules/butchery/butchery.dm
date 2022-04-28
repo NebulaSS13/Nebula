@@ -35,8 +35,8 @@
 
 /mob/living/carbon/human/harvest_meat()
 	. = ..()
-	for(var/obj/item/organ/internal/I in internal_organs)
-		I.removed()
+	for(var/obj/item/organ/internal/I in get_internal_organs())
+		remove_organ(I)
 		LAZYADD(., I)
 
 /mob/living/proc/harvest_skin()
@@ -149,7 +149,7 @@
 	return istype(victim) && ((victim.meat_type && victim.meat_amount) || (victim.skin_material && victim.skin_amount) || (victim.bone_material && victim.bone_amount))
 
 /obj/structure/kitchenspike/on_update_icon()
-	overlays.Cut()
+	..()
 	if(occupant)
 		occupant.set_dir(SOUTH)
 		var/image/I = image(null)
@@ -157,7 +157,7 @@
 		var/matrix/M = matrix()
 		M.Turn(occupant.butchery_rotation)
 		I.transform = M
-		overlays += I
+		add_overlay(I)
 
 /obj/structure/kitchenspike/mob_breakout(mob/living/escapee)
 	. = ..()

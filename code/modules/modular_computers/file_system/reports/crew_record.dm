@@ -1,5 +1,4 @@
 var/global/list/all_crew_records =  list()
-var/global/list/blood_types =       list("A-", "A+", "B-", "B+", "AB-", "AB+", "O-", "O+")
 var/global/list/physical_statuses = list("Active", "Disabled", "SSD", "Deceased", "MIA")
 var/global/list/security_statuses = list("None", "Released", "Parolled", "Incarcerated", "Arrest")
 
@@ -113,10 +112,10 @@ var/global/arrest_security_status =  "Arrest"
 			set_implants("Fully synthetic body")
 		else
 			var/organ_data = list("\[*\]")
-			for(var/obj/item/organ/external/E in H.organs)
+			for(var/obj/item/organ/external/E in H.get_external_organs())
 				if(BP_IS_PROSTHETIC(E))
 					organ_data += "[E.model ? "[E.model] " : null][E.name] prosthetic"
-			for(var/obj/item/organ/internal/I in H.internal_organs)
+			for(var/obj/item/organ/internal/I in H.get_internal_organs())
 				if(BP_IS_ASSISTED(I))
 					organ_data += I.get_mechanical_assisted_descriptor()
 				else if (BP_IS_PROSTHETIC(I))
@@ -282,7 +281,7 @@ FIELD_SHORT("Religion", religion, access_chapel_office, access_change_ids)
 FIELD_LONG("General Notes (Public)", public_record, null, access_bridge)
 
 // MEDICAL RECORDS
-FIELD_LIST("Blood Type", bloodtype, global.blood_types, access_medical, access_medical)
+FIELD_LIST("Blood Type", bloodtype, get_all_blood_types(), access_medical, access_medical)
 FIELD_LONG("Medical Record", medical_record, access_medical, access_medical)
 FIELD_LONG("Known Implants", implants, access_medical, access_medical)
 

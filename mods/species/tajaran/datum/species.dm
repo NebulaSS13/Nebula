@@ -25,6 +25,16 @@
 	spawn_flags = SPECIES_CAN_JOIN
 	appearance_flags = HAS_HAIR_COLOR | HAS_LIPS | HAS_UNDERWEAR | HAS_SKIN_COLOR | HAS_EYE_COLOR
 
+	blood_types = list(
+		/decl/blood_type/feline/mplus,
+		/decl/blood_type/feline/mminus,
+		/decl/blood_type/feline/rplus,
+		/decl/blood_type/feline/rminus,
+		/decl/blood_type/feline/mrplus,
+		/decl/blood_type/feline/mrminus,
+		/decl/blood_type/feline/oplus,
+		/decl/blood_type/feline/ominus
+	)
 
 	flesh_color = "#afa59e"
 	base_markings = list(/decl/sprite_accessory/marking/tajaran = "#888888")
@@ -33,7 +43,6 @@
 	base_eye_color = "#00aa00"
 	default_h_style = /decl/sprite_accessory/hair/taj
 
-	blood_color = "#862a51"
 	organs_icon = 'mods/species/tajaran/icons/organs.dmi'
 
 	darksight_range = 7

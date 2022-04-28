@@ -36,8 +36,7 @@
 	update_icon()
 
 /obj/structure/fuel_port/on_update_icon()
-	cut_overlays()
-
+	..()
 	if(open)
 		add_overlay("[icon_state]_open")
 		var/obj/item/tank/tank = locate_tank()

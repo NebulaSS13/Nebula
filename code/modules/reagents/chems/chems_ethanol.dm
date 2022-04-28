@@ -432,7 +432,7 @@
 		M.adjustToxLoss(2 * removed)
 	if(dose > 60 && ishuman(M) && prob(5))
 		var/mob/living/carbon/human/H = M
-		var/obj/item/organ/internal/heart/L = H.get_internal_organ(BP_HEART)
+		var/obj/item/organ/internal/heart/L = H.get_organ(BP_HEART)
 		if (L && istype(L))
 			if(dose < 120)
 				L.take_internal_damage(10 * removed, 0)

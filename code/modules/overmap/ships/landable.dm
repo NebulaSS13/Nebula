@@ -67,7 +67,7 @@
 			map_z += world.maxz
 
 		if(multiz)
-			new /obj/effect/landmark/map_data(locate(1, 1, world.maxz), (multiz + 1))
+			new /obj/abstract/map_data(locate(1, 1, world.maxz), (multiz + 1))
 	else
 		..()
 

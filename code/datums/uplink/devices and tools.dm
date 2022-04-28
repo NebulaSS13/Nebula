@@ -15,7 +15,7 @@
 	name = "Duct Tape"
 	desc = "A roll of duct tape. changes \"HELP\" into sexy \"mmm\"."
 	item_cost = 2
-	path = /obj/item/tape_roll
+	path = /obj/item/ducttape
 
 /datum/uplink_item/item/tools/money
 	name = "Operations Funding"
@@ -136,7 +136,7 @@
 
 /datum/uplink_item/item/tools/supply_beacon
 	name = "Hacked Supply Beacon (DANGER!)"
-	desc = "Wrench this large beacon onto an exposed power cable, in order to activate it. This will call in a \
+	desc = "Wrench this large beacon onto an exposed power cable and add some cabling, in order to activate it. This will call in a \
 	drop pod to the target location, containing a random assortment of (possibly useful) items. \
 	The ship's computer system will announce when this pod is enroute."
 	item_cost = 52

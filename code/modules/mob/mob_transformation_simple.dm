@@ -47,7 +47,7 @@
 
 	if(subspecies && istype(M,/mob/living/carbon/human))
 		var/mob/living/carbon/human/H = M
-		H.set_species(subspecies)
+		H.change_species(subspecies)
 
 	if(delete_old_mob)
 		QDEL_IN(src, 1)

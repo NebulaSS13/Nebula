@@ -23,7 +23,8 @@
 /obj/item/kitchen/utensil/Initialize()
 	. = ..()
 	if (prob(60))
-		src.pixel_y = rand(0, 4)
+		default_pixel_y = rand(0, 4)
+		reset_offsets(0)
 	create_reagents(5)
 	set_extension(src, /datum/extension/tool, list(
 		TOOL_RETRACTOR = TOOL_QUALITY_BAD,

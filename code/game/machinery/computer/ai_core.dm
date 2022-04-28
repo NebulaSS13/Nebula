@@ -96,6 +96,7 @@ var/global/list/empty_playable_ai_cores = list()
 		. = ..()
 
 /obj/structure/aicore/on_update_icon()
+	..()
 	if(glass_installed)
 		icon_state = "4"
 	else if(brain)

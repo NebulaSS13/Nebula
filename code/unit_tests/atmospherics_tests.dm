@@ -403,7 +403,7 @@
 		// then, pipes from machine datums are used to spawn machines ("player-built" behavior)
 		for(var/type in subtypesof(/datum/fabricator_recipe/pipe))
 			var/datum/fabricator_recipe/pipe/recipe = new type()
-			var/list/stuff = recipe.build(T)
+			var/list/stuff = recipe.build(T, new/datum/fabricator_build_order(recipe) )
 			var/obj/item/pipe/pipe = locate() in stuff
 			if(pipe)
 				stuff -= pipe

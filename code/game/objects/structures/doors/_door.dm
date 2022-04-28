@@ -1,19 +1,20 @@
-#define MATERIAL_DOOR_SOUND_VOLUME 25
 /obj/structure/door
 	name = "door"
 	icon = 'icons/obj/doors/material_doors.dmi'
 	icon_state = "metal"
 	hitsound = 'sound/weapons/genhit.ogg'
-	material_alteration = MAT_FLAG_ALTERATION_NAME | MAT_FLAG_ALTERATION_COLOR | MAT_FLAG_ALTERATION_COLOR
+	material_alteration = MAT_FLAG_ALTERATION_NAME | MAT_FLAG_ALTERATION_DESC | MAT_FLAG_ALTERATION_COLOR
 	maxhealth = 50
 	density =  TRUE
 	anchored = TRUE
 	opacity =  TRUE
 
+	var/datum/lock/lock
+
 	var/has_window = FALSE
 	var/changing_state = FALSE
 	var/icon_base
-	var/datum/lock/lock
+	var/door_sound_volume = 25
 
 /obj/structure/door/Initialize()
 	. = ..()
@@ -23,14 +24,10 @@
 		lock = new /datum/lock(src, lock)
 	if(!icon_base)
 		icon_base = material.door_icon_base
-	changing_state = FALSE
-	update_nearby_tiles(need_rebuild=TRUE)
-
-	if(material.luminescence)
+	update_icon()
+	update_nearby_tiles(need_rebuild = TRUE)
+	if(material?.luminescence)
 		set_light(material.luminescence, 0.5, material.color)
-
-	if(material.opacity < 0.5)
-		alpha = 180
 
 /obj/structure/door/Destroy()
 	update_nearby_tiles()
@@ -42,25 +39,22 @@
 
 /obj/structure/door/on_update_icon()
 	..()
-	if(density)
-		icon_state = "[icon_base]"
-	else
-		icon_state = "[icon_base]open"
+	icon_state = "[icon_base][!density ? "_open" : ""]"
 
 /obj/structure/door/proc/post_change_state()
 	update_nearby_tiles()
 	update_icon()
 	changing_state = FALSE
 
-/obj/structure/door/attack_hand(var/mob/user)
+/obj/structure/door/attack_hand(mob/user)
 	return density ? open() : close()
 
 /obj/structure/door/proc/close()
 	set waitfor = 0
 	if(!can_close())
 		return FALSE
-	flick("[icon_base]closing", src)
-	playsound(src.loc, material.dooropen_noise, MATERIAL_DOOR_SOUND_VOLUME, 1)
+	flick("[icon_base]_closing", src)
+	playsound(src, material.dooropen_noise, door_sound_volume, 1)
 
 	changing_state = TRUE
 	sleep(1 SECOND)
@@ -73,8 +67,8 @@
 	set waitfor = 0
 	if(!can_open())
 		return FALSE
-	flick("[icon_base]opening", src)
-	playsound(src.loc, material.dooropen_noise, MATERIAL_DOOR_SOUND_VOLUME, 1)
+	flick("[icon_base]_opening", src)
+	playsound(src, material.dooropen_noise, door_sound_volume, 1)
 
 	changing_state = TRUE
 	sleep(1 SECOND)
@@ -112,7 +106,6 @@
 		return FALSE
 
 /obj/structure/door/attackby(obj/item/I, mob/user)
-
 	add_fingerprint(user, 0, I)
 
 	if((user.a_intent == I_HURT && I.force) || istype(I, /obj/item/stack/material))
@@ -149,7 +142,7 @@
 		return !opacity
 	return !density
 
-/obj/structure/door/CanFluidPass(var/coming_from)
+/obj/structure/door/CanFluidPass(coming_from)
 	return !density
 
 /obj/structure/door/Bumped(atom/AM)
@@ -212,4 +205,3 @@
 
 /obj/structure/door/shuttle
 	material = /decl/material/solid/metal/steel
-#undef MATERIAL_DOOR_SOUND_VOLUME 

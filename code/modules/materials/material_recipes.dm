@@ -70,6 +70,7 @@
 		. += new/datum/stack_recipe/furniture/chair/office/comfy(src)
 		. += new/datum/stack_recipe/furniture/chair/comfy(src)
 		. += new/datum/stack_recipe/furniture/chair/arm(src)
+		. += new/datum/stack_recipe/furniture/chair/roundedchair(src)
 		. += new/datum/stack_recipe/lock(src)
 		. += new/datum/stack_recipe/key(src)
 		. += new/datum/stack_recipe/rod(src)

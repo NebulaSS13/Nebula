@@ -1,4 +1,4 @@
-/mob/living/exosuit/can_grab(atom/movable/target, target_zone)
+/mob/living/exosuit/can_grab(atom/movable/target, target_zone, defer_hand = FALSE)
 	return FALSE
 
 /mob/living/exosuit/can_be_grabbed(mob/grabber, target_zone)

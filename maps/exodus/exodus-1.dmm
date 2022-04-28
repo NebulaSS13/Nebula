@@ -593,7 +593,7 @@
 /turf/simulated/floor/plating,
 /area/exodus/maintenance/sub/port)
 "bY" = (
-/obj/effect/landmark{
+/obj/abstract/landmark{
 	name = "carpspawn"
 	},
 /turf/space,
@@ -3695,7 +3695,7 @@
 /obj/structure/bed/chair{
 	dir = 1
 	},
-/obj/effect/landmark/start{
+/obj/abstract/landmark/start{
 	name = "Atmospheric Technician"
 	},
 /turf/simulated/floor/tiled/steel_grid,
@@ -5592,7 +5592,7 @@
 /turf/simulated/floor/bluegrid,
 /area/exodus/maintenance/telecomms)
 "xM" = (
-/obj/effect/landmark{
+/obj/abstract/landmark{
 	name = "xeno_spawn";
 	pixel_x = -1
 	},
@@ -5677,7 +5677,7 @@
 /turf/simulated/floor/tiled/monotile,
 /area/exodus/maintenance/telecomms)
 "AE" = (
-/obj/level_data/main_level,
+/obj/abstract/level_data/main_level,
 /turf/space,
 /area/space)
 "AG" = (

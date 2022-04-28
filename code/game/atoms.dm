@@ -322,10 +322,10 @@ its easier to just keep the beam vertical.
 	blood_color = COLOR_BLOOD_HUMAN
 	if(istype(M))
 		if (!istype(M.dna, /datum/dna))
-			M.dna = new /datum/dna(null)
+			M.dna = new /datum/dna()
 			M.dna.real_name = M.real_name
 		M.check_dna()
-		blood_color = M.species.get_blood_colour(M)
+		blood_color = M.species.get_blood_color(M)
 	. = 1
 	return 1
 
@@ -521,7 +521,7 @@ its easier to just keep the beam vertical.
 				M.adjustBruteLoss(damage)
 				return
 
-			var/obj/item/organ/external/affecting = pick(H.organs)
+			var/obj/item/organ/external/affecting = pick(H.get_external_organs())
 			if(affecting)
 				to_chat(M, "<span class='danger'>You land heavily on your [affecting.name]!</span>")
 				affecting.take_external_damage(damage, 0)
@@ -580,7 +580,11 @@ its easier to just keep the beam vertical.
 	var/matrix/M = matrix()
 	M.Scale(icon_scale_x, icon_scale_y)
 	M.Turn(icon_rotation)
-	animate(src, transform = M, transform_animate_time)
+	if(transform_animate_time)
+		animate(src, transform = M, transform_animate_time)
+	else
+		transform = M
+	return transform
 
 // Walks up the loc tree until it finds a loc of the given loc_type
 /atom/get_recursive_loc_of_type(var/loc_type)

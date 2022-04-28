@@ -23,6 +23,8 @@
 	bone_material = null
 	skin_material = null
 
+	blood_types = list(/decl/blood_type/coolant)
+
 	available_pronouns = list(/decl/pronouns)
 	available_bodytypes = list(
 		/decl/bodytype/adherent,
@@ -57,11 +59,10 @@
 	heat_level_2 = SYNTH_HEAT_LEVEL_2
 	heat_level_3 = SYNTH_HEAT_LEVEL_3
 
-	species_flags = SPECIES_FLAG_NO_SCAN | SPECIES_FLAG_NO_PAIN | SPECIES_FLAG_NO_POISON | SPECIES_FLAG_NO_MINOR_CUT
+	species_flags = SPECIES_FLAG_NO_SCAN | SPECIES_FLAG_NO_PAIN | SPECIES_FLAG_NO_POISON | SPECIES_FLAG_NO_MINOR_CUT | SPECIES_FLAG_CRYSTALLINE
 	spawn_flags =   SPECIES_CAN_JOIN
 
 	appearance_flags = HAS_EYE_COLOR
-	blood_color = "#2de00d"
 	flesh_color = "#90edeb"
 	slowdown = -1
 	hud_type = /datum/hud_data/adherent
@@ -104,13 +105,14 @@
 		BP_CELL =         /obj/item/organ/internal/cell/adherent,
 		BP_COOLING_FINS = /obj/item/organ/internal/powered/cooling_fins
 		)
+
 	move_trail = /obj/effect/decal/cleanable/blood/tracks/snake
 	max_players = 3
 
 /decl/species/adherent/can_overcome_gravity(var/mob/living/carbon/human/H)
 	. = FALSE
 	if(H && H.stat == CONSCIOUS)
-		for(var/obj/item/organ/internal/powered/float/float in H.internal_organs)
+		for(var/obj/item/organ/internal/powered/float/float in H.get_internal_organs())
 			if(float.active && float.is_usable())
 				. = TRUE
 				break
@@ -124,7 +126,7 @@
 /decl/species/adherent/handle_fall_special(var/mob/living/carbon/human/H, var/turf/landing)
 	var/float_is_usable = FALSE
 	if(H && H.stat == CONSCIOUS)
-		for(var/obj/item/organ/internal/powered/float/float in H.internal_organs)
+		for(var/obj/item/organ/internal/powered/float/float in H.get_internal_organs())
 			if(float.is_usable())
 				float_is_usable = TRUE
 				break
@@ -135,9 +137,6 @@
 			H.visible_message("\The [H] floats gracefully down from \the [landing].", "You land gently on \the [landing].")
 		return TRUE
 	return FALSE
-
-/decl/species/adherent/get_blood_name()
-	return "coolant"
 
 /decl/species/adherent/skills_from_age(age)
 	switch(age)

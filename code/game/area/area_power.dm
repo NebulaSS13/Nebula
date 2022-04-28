@@ -23,8 +23,7 @@
 
 // called when power status changes
 /area/proc/power_change()
-	for(var/obj/machinery/M in src)	// for each machine in the area
-		M.power_change()			// reverify power status (to update icons etc.)
+	events_repository.raise_event(/decl/observ/area_power_change, src)
 	if (atmosalm || fire || eject || party)
 		update_icon()
 

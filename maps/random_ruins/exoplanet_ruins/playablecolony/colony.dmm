@@ -886,7 +886,7 @@
 /obj/machinery/light{
 	dir = 1
 	},
-/obj/machinery/power/port_gen/pacman/mrs,
+/obj/machinery/port_gen/pacman/mrs,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/map_template/colony/engineering)
 "cb" = (
@@ -922,7 +922,7 @@
 "cf" = (
 /obj/structure/catwalk,
 /obj/effect/decal/cleanable/dirt,
-/obj/machinery/power/emitter/gyrotron,
+/obj/machinery/emitter/gyrotron,
 /turf/exterior/concrete,
 /area/template_noop)
 "cg" = (
@@ -1411,7 +1411,7 @@
 /area/template_noop)
 "dn" = (
 /obj/structure/catwalk,
-/obj/machinery/power/rad_collector,
+/obj/machinery/rad_collector,
 /obj/effect/decal/cleanable/dirt,
 /turf/exterior/concrete,
 /area/template_noop)
@@ -2362,8 +2362,8 @@
 "fd" = (
 /obj/structure/table/steel_reinforced,
 /obj/item/storage/toolbox/syndicate,
-/obj/item/tape_roll,
-/obj/item/tape_roll,
+/obj/item/ducttape,
+/obj/item/ducttape,
 /obj/item/crowbar/brace_jack,
 /obj/item/clothing/head/hardhat/white,
 /obj/item/grenade/chem_grenade/metalfoam,

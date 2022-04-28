@@ -22,16 +22,17 @@
 	var/tail_icon = 'icons/effects/species.dmi'
 	var/tail_states = 1
 
-/obj/item/organ/external/tail/removed()
+/obj/item/organ/external/tail/do_uninstall(in_place, detach, ignore_children, update_icon)
 	var/mob/living/carbon/human/H = owner
-	. = ..()
-	if(istype(H) && H != owner)
-		H.update_tail_showing()
+	if(!(. = ..()))
+		return
+	if(update_icon && !istype(H) && H != owner)
+		H.update_tail_showing(FALSE)
 
-/obj/item/organ/external/tail/replaced()
+/obj/item/organ/external/tail/do_install(mob/living/carbon/human/target, affected, in_place, update_icon, detached)
 	. = ..()
-	if(owner)
-		owner.update_tail_showing()
+	if(update_icon && istype(owner))
+		owner.update_tail_showing(FALSE)
 
 /obj/item/organ/external/tail/proc/get_tail()
 	return tail

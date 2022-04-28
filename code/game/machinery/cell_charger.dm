@@ -38,7 +38,7 @@
 		var/obj/item/cell/cell = get_cell()
 		to_chat(user, "There's [cell ? "a" : "no"] cell in the charger.")
 		if(cell)
-			to_chat(user, "Current charge: [cell.charge]")
+			to_chat(user, "Current charge: [cell.charge].")
 
 /obj/machinery/cell_charger/component_stat_change(obj/item/stock_parts/part, old_stat, flag)
 	. = ..()

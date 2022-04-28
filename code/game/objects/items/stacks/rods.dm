@@ -70,7 +70,7 @@
 			use(2)
 		return
 
-	if (istype(W, /obj/item/tape_roll))
+	if (istype(W, /obj/item/ducttape))
 		var/obj/item/stack/medical/splint/ghetto/new_splint = new(user.loc)
 		new_splint.dropInto(loc)
 		new_splint.add_fingerprint(user)

@@ -35,6 +35,7 @@
 	..()
 
 /obj/structure/pit/on_update_icon()
+	..()
 	icon_state = "pit[open]"
 	if(istype(loc,/turf/exterior))
 		var/turf/exterior/E = loc

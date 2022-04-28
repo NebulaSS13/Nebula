@@ -259,17 +259,18 @@
 		update_coverage()
 
 /obj/machinery/camera/on_update_icon()
-	pixel_x = 0
-	pixel_y = 0
+	default_pixel_x = 0
+	default_pixel_y = 0
 
 	var/turf/T = get_step(get_turf(src), turn(src.dir, 180))
 	if(istype(T, /turf/simulated/wall))
 		if(dir == SOUTH)
-			pixel_y = 21
+			default_pixel_y = 21
 		else if(dir == WEST)
-			pixel_x = 10
+			default_pixel_x = 10
 		else if(dir == EAST)
-			pixel_x = -10
+			default_pixel_x = -10
+	reset_offsets(0)
 
 	if (!status || (stat & BROKEN))
 		icon_state = "[initial(icon_state)]1"

@@ -51,6 +51,7 @@
 #define SS_PRIORITY_CHAR_SETUP    25   // Writes player preferences to savefiles.
 #define SS_PRIORITY_COMPUTER_NETS 25   // Handles computer network devices hookups
 #define SS_PRIORITY_GARBAGE       20   // Garbage collection.
+#define SS_PRIORITY_WEATHER       10   // Weather processing.
 
 
 // Subsystem fire priority, from lowest to highest priority

@@ -21,7 +21,8 @@
 	return ..()
 
 /obj/structure/morgue/on_update_icon()
-	if (open)
+	..()
+	if(open)
 		icon_state = "morgue_open"
 	else if(contents.len > 1)
 		icon_state = "morgue_filled"
@@ -81,7 +82,7 @@
 
 /obj/structure/morgue/attackby(P, mob/user)
 	if(istype(P, /obj/item/pen))
-		var/new_label = sanitizeSafe(input(user, "What would you like the label to be?", capitalize(name), null) as text|null, MAX_NAME_LEN)
+		var/new_label = sanitize_safe(input(user, "What would you like the label to be?", capitalize(name), null) as text|null, MAX_NAME_LEN)
 
 		if((!Adjacent(user) || loc == user))
 			return

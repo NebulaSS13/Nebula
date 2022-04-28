@@ -228,7 +228,7 @@
 		repair_breaches(BRUTE, 3, user)
 		return
 
-	else if(istype(W, /obj/item/tape_roll))
+	else if(istype(W, /obj/item/ducttape))
 		var/datum/breach/target_breach		//Target the largest unpatched breach.
 		for(var/datum/breach/B in breaches)
 			if(B.patched)

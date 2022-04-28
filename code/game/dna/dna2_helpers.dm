@@ -157,7 +157,7 @@
 
 		//Body markings
 		for(var/tag in dna.body_markings)
-			var/obj/item/organ/external/E = H.organs_by_name[tag]
+			var/obj/item/organ/external/E = H.get_organ(tag)
 			if(E)
 				var/list/marklist = dna.body_markings[tag]
 				if(length(marklist))
@@ -166,7 +166,7 @@
 					LAZYCLEARLIST(E.markings)
 
 		//Base skin and blend
-		for(var/obj/item/organ/external/E in H.organs)
+		for(var/obj/item/organ/external/E in H.get_external_organs())
 			E.set_dna(E.dna)
 
 		//Hair

@@ -20,7 +20,7 @@
 
 /mob/living/carbon/human/proc/get_natural_attacks()
 	. = list()
-	for(var/obj/item/organ/external/limb in organs)
+	for(var/obj/item/organ/external/limb in get_external_organs())
 		if(length(limb.unarmed_attacks) && limb.is_usable())
 			. |= limb.unarmed_attacks
 
@@ -225,7 +225,7 @@
 			if(chest)
 				chest.fracture()
 
-		var/obj/item/organ/internal/heart/heart = get_internal_organ(BP_HEART)
+		var/obj/item/organ/internal/heart/heart = get_organ(BP_HEART)
 		if(heart)
 			heart.external_pump = list(world.time, 0.4 + 0.1*pumping_skill + rand(-0.1,0.1))
 
@@ -254,14 +254,14 @@
 			to_chat(H, SPAN_WARNING("You need to remove \the [src]'s mouth covering for mouth-to-mouth resuscitation!"))
 			return TRUE
 
-		if(!H.get_internal_organ(H.species.breathing_organ))
+		if(!H.get_organ(H.species.breathing_organ))
 			to_chat(H, SPAN_WARNING("You need lungs for mouth-to-mouth resuscitation!"))
 			return TRUE
 
 		if(!need_breathe())
 			return TRUE
 
-		var/obj/item/organ/internal/lungs/L = get_internal_organ(species.breathing_organ)
+		var/obj/item/organ/internal/lungs/L = get_organ(species.breathing_organ)
 
 		if(!L)
 			return

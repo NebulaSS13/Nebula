@@ -5,9 +5,10 @@ var/global/list/default_noblend_objects = list(/obj/machinery/door/window, /obj/
 	var/handle_generic_blending
 
 /obj/structure/on_update_icon()
+	..()
 	if(material_alteration & MAT_FLAG_ALTERATION_COLOR)
 		update_material_colour()
-	overlays.Cut()
+	cut_overlays()
 
 /obj/structure/proc/can_visually_connect()
 	return anchored && handle_generic_blending

@@ -203,7 +203,7 @@ Please contact me on #coderbus IRC. ~Carn x
 					overlay.transform = M
 				add_overlay(overlay)
 
-	var/obj/item/organ/external/head/head = organs_by_name[BP_HEAD]
+	var/obj/item/organ/external/head/head = get_organ(BP_HEAD)
 	if(istype(head) && !head.is_stump())
 		var/image/I = head.get_eye_overlay()
 		if(I)
@@ -220,9 +220,10 @@ Please contact me on #coderbus IRC. ~Carn x
 	var/desired_scale_x = icon_scale_values[1]
 	var/desired_scale_y = icon_scale_values[2]
 
-	// Apply KEEP_TOGETHER so all the component overlays don't ignore PIXEL_SCALE
-	// when scaling, or remove it if we aren't doing any scaling (due to cost).
-	if(desired_scale_x == 1 && desired_scale_y == 1)
+	// Apply KEEP_TOGETHER so all the component overlays move properly when
+	// applying a transform, or remove it if we aren't doing any transforms
+	// (due to cost).
+	if(!lying && desired_scale_x == 1 && desired_scale_y == 1)
 		appearance_flags &= ~KEEP_TOGETHER
 	else
 		appearance_flags |= KEEP_TOGETHER
@@ -230,13 +231,24 @@ Please contact me on #coderbus IRC. ~Carn x
 	// Scale/translate/rotate and apply the transform.
 	var/matrix/M = matrix()
 	if(lying)
-		M.Turn(pick(90, -90))
+		var/turn_angle
+		if(dir & WEST)
+			turn_angle = -90
+		else if(dir & EAST)
+			turn_angle = 90
+		else
+			turn_angle = pick(-90, 90)
+		M.Turn(turn_angle)
 		M.Scale(desired_scale_y, desired_scale_x)
 		M.Translate(1, -6-default_pixel_z)
 	else
 		M.Scale(desired_scale_x, desired_scale_y)
 		M.Translate(0, 16*(desired_scale_y-1))
-	animate(src, transform = M, time = transform_animate_time)
+	if(transform_animate_time)
+		animate(src, transform = M, time = transform_animate_time)
+	else
+		transform = M
+	return transform
 
 var/global/list/damage_icon_parts = list()
 
@@ -246,7 +258,7 @@ var/global/list/damage_icon_parts = list()
 
 	// first check whether something actually changed about damage appearance
 	var/damage_appearance = ""
-	for(var/obj/item/organ/external/O in organs)
+	for(var/obj/item/organ/external/O in get_external_organs())
 		if(O.is_stump())
 			continue
 		damage_appearance += O.damage_state
@@ -260,7 +272,7 @@ var/global/list/damage_icon_parts = list()
 	var/image/standing_image = image(bodytype.get_damage_overlays(src), icon_state = "00")
 
 	// blend the individual damage states with our icons
-	for(var/obj/item/organ/external/O in organs)
+	for(var/obj/item/organ/external/O in get_external_organs())
 		if(O.is_stump())
 			continue
 
@@ -268,7 +280,7 @@ var/global/list/damage_icon_parts = list()
 		O.update_icon()
 		if(O.damage_state == "00") continue
 		var/icon/DI
-		var/use_colour = (BP_IS_PROSTHETIC(O) ? SYNTH_BLOOD_COLOUR : O.species.get_blood_colour(src))
+		var/use_colour = (BP_IS_PROSTHETIC(O) ? SYNTH_BLOOD_COLOR : O.species.get_blood_color(src))
 		var/cache_index = "[O.damage_state]/[O.icon_name]/[use_colour]/[species.name]"
 		if(damage_icon_parts[cache_index] == null)
 			DI = new /icon(bodytype.get_damage_overlays(src), O.damage_state) // the damage icon for whole human
@@ -291,7 +303,7 @@ var/global/list/damage_icon_parts = list()
 		return
 	var/image/standing_image = overlays_standing[HO_DAMAGE_LAYER]
 	if(standing_image)
-		for(var/obj/item/organ/external/O in organs)
+		for(var/obj/item/organ/external/O in get_external_organs())
 			if(O.is_stump())
 				continue
 			var/bandage_level = O.bandage_level()
@@ -305,7 +317,8 @@ var/global/list/damage_icon_parts = list()
 //BASE MOB SPRITE
 /mob/living/carbon/human/update_body(var/update_icons=1)
 
-	if(!length(organs))
+	var/list/limbs = get_external_organs()
+	if(!LAZYLEN(limbs))
 		return // Something is trying to update our body pre-init (probably loading a preview image during world startup).
 
 	var/husk_color_mod = rgb(96,88,80)
@@ -329,11 +342,11 @@ var/global/list/damage_icon_parts = list()
 		icon_key += "[lip_style]"
 	else
 		icon_key += "nolips"
-	var/obj/item/organ/internal/eyes/eyes = get_internal_organ(species.vision_organ || BP_EYES)
+	var/obj/item/organ/internal/eyes/eyes = get_organ(species.vision_organ || BP_EYES)
 	icon_key += istype(eyes) ? eyes.eye_colour : COLOR_BLACK
 
 	for(var/organ_tag in species.has_limbs)
-		var/obj/item/organ/external/part = organs_by_name[organ_tag]
+		var/obj/item/organ/external/part = get_organ(organ_tag)
 		if(isnull(part) || part.is_stump() || part.organ_tag == BP_TAIL)
 			icon_key += "0"
 			continue
@@ -364,7 +377,7 @@ var/global/list/damage_icon_parts = list()
 		var/obj/item/organ/external/chest = get_organ(BP_CHEST)
 		base_icon = chest.get_icon()
 
-		for(var/obj/item/organ/external/part in (organs-chest))
+		for(var/obj/item/organ/external/part in (limbs - chest))
 			var/icon/temp = part.get_icon()
 			//That part makes left and right legs drawn topmost and lowermost when human looks WEST or EAST
 			//And no change in rendering for other parts (they icon_position is 0, so goes to 'else' part)
@@ -813,7 +826,7 @@ var/global/list/damage_icon_parts = list()
 /mob/living/carbon/human/proc/update_surgery(var/update_icons=1)
 	overlays_standing[HO_SURGERY_LAYER] = null
 	var/image/total = new
-	for(var/obj/item/organ/external/E in organs)
+	for(var/obj/item/organ/external/E in get_external_organs())
 		if(BP_IS_PROSTHETIC(E) || E.is_stump())
 			continue
 		var/how_open = round(E.how_open())
@@ -833,7 +846,7 @@ var/global/list/damage_icon_parts = list()
 		overlay_state = "[base_state]-blood"
 		if(overlay_state in surgery_states)
 			var/image/blood = image(icon = surgery_icon, icon_state = overlay_state, layer = -HO_SURGERY_LAYER)
-			blood.color = E.species.get_blood_colour(src)
+			blood.color = E.species.get_blood_color(src)
 			LAZYADD(overlays_to_add, blood)
 		overlay_state = "[base_state]-bones"
 		if(overlay_state in surgery_states)
@@ -844,6 +857,18 @@ var/global/list/damage_icon_parts = list()
 	overlays_standing[HO_SURGERY_LAYER] = total
 	if(update_icons)
 		queue_icon_update()
+
+//Ported from hud login stuff
+//
+/mob/living/carbon/hud_reset(full_reset = FALSE)
+	if(!(. = ..()))
+		return .
+	for(var/obj/item/gear in get_equipped_items(TRUE))
+		client.screen |= gear
+	if(hud_used)
+		hud_used.hidden_inventory_update()
+		hud_used.persistant_inventory_update()
+		update_action_buttons()
 
 //Human Overlays Indexes/////////
 #undef HO_MUTATIONS_LAYER

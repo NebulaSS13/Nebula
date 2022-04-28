@@ -120,7 +120,7 @@
 	add_fingerprint(user)
 
 /obj/structure/inflatable/can_repair_with(obj/item/tool)
-	. = istype(tool, /obj/item/tape_roll) && (health < maxhealth)
+	. = istype(tool, /obj/item/ducttape) && (health < maxhealth)
 
 /obj/structure/inflatable/handle_repair(mob/user, obj/item/tool)
 	if(taped)
@@ -252,6 +252,7 @@
 	isSwitchingStates = 0
 
 /obj/structure/inflatable/door/on_update_icon()
+	..()
 	if(state)
 		icon_state = "door_open"
 	else

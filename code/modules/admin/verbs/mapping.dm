@@ -30,8 +30,9 @@ var/global/intercom_range_display_status = 0
 
 /obj/effect/debugging/camera_range/Initialize()
 	. = ..()
-	src.pixel_x = -224
-	src.pixel_y = -224
+	default_pixel_x = -224
+	default_pixel_y = -224
+	reset_offsets(0)
 
 /obj/effect/debugging/marker
 	icon = 'icons/turf/areas.dmi'

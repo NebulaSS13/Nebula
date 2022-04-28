@@ -91,7 +91,7 @@
 	//held items
 	for(var/bp in held_item_slots)
 		var/datum/inventory_slot/inv_slot = LAZYACCESS(held_item_slots, bp)
-		var/obj/item/organ/external/E = organs_by_name[bp]
+		var/obj/item/organ/external/E = get_organ(bp)
 		if(inv_slot?.holding)
 			msg += "[G.He] [G.is] holding [inv_slot.holding.get_examine_line()] in [G.his] [E.name].\n"
 
@@ -106,7 +106,7 @@
 				coating = E.coating
 				break
 		if(coating)
-			msg += "There's something <font color='[coating.get_color()]'>something on [G.his] hands</font>!\n"
+			msg += "There's <font color='[coating.get_color()]'>something on [G.his] hands</font>!\n"
 
 	//belt
 	if(belt)
@@ -214,7 +214,7 @@
 	if (admin_paralyzed)
 		msg += SPAN_OCCULT("OOC: [G.He] [G.has] been paralyzed by staff. Please avoid interacting with [G.him] unless cleared to do so by staff.") + "\n"
 
-	var/obj/item/organ/external/head/H = organs_by_name[BP_HEAD]
+	var/obj/item/organ/external/head/H = get_organ(BP_HEAD)
 	if(istype(H) && H.forehead_graffiti && H.graffiti_style)
 		msg += "<span class='notice'>[G.He] [G.has] \"[H.forehead_graffiti]\" written on [G.his] [H.name] in [H.graffiti_style]!</span>\n"
 
@@ -232,7 +232,7 @@
 
 		var/list/organ_data = species.has_limbs[organ_tag]
 		var/organ_descriptor = organ_data["descriptor"]
-		var/obj/item/organ/external/E = organs_by_name[organ_tag]
+		var/obj/item/organ/external/E = get_organ(organ_tag)
 
 		if(!E)
 			wound_flavor_text[organ_descriptor] = "<b>[G.He] [G.is] missing [G.his] [organ_descriptor].</b>\n"

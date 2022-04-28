@@ -27,3 +27,6 @@
 
 /obj/machinery/fabricator/textile/filled
 	prefilled = TRUE
+
+/obj/machinery/fabricator/bioprinter/filled
+	prefilled = TRUE

@@ -246,13 +246,25 @@ Class Procs:
 		if(info)
 			to_chat(usr, jointext(info, "<br>"))
 			return TOPIC_HANDLED
-
+	if(href_list["power_text"]) // As above. Reports OOC info on how to use installed power sources.
+		var/list/info = get_power_sources_info()
+		if(info)
+			to_chat(usr, jointext(info, "<br>"))
+			return TOPIC_HANDLED
 	. = ..()
 	if(. == TOPIC_REFRESH)
 		updateUsrDialog() // Update legacy UIs to the extent possible.
 
 /obj/machinery/proc/get_tool_manipulation_info()
 	return construct_state?.mechanics_info()
+
+/obj/machinery/proc/get_power_sources_info()
+	. = list()
+	var/list/power_sources = get_all_components_of_type(/obj/item/stock_parts/power, FALSE)
+	if(!length(power_sources))
+		. += "The machine has no power sources installed."
+	for(var/obj/item/stock_parts/power/source in power_sources)
+		. += source.get_source_info()
 
 ////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -279,14 +291,6 @@ Class Procs:
 		return FALSE // The interactions below all assume physical access to the machine. If this is not the case, we let the machine take further action.
 	if(!user.check_dexterity(required_interaction_dexterity))
 		return TRUE
-	if(ishuman(user))
-		var/mob/living/carbon/human/H = user
-		if(H.getBrainLoss() >= 55)
-			visible_message("<span class='warning'>[H] stares cluelessly at \the [src].</span>")
-			return 1
-		else if(prob(H.getBrainLoss()))
-			to_chat(user, "<span class='warning'>You momentarily forget how to use \the [src].</span>")
-			return 1
 	if((. = component_attack_hand(user)))
 		return
 	if(wires && (. = wires.Interact(user)))
@@ -412,8 +416,13 @@ Class Procs:
 		to_chat(user, "It is missing a screen, making it hard to interact with.")
 	else if(stat & NOINPUT)
 		to_chat(user, "It is missing any input device.")
-	else if((stat & NOPOWER) && !interact_offline)
-		to_chat(user, "It is not receiving power.")
+	
+	if((stat & NOPOWER))
+		if(interact_offline)
+			to_chat(user, "It is not receiving <a href ='?src=\ref[src];power_text=1'>power</a>.")
+		else
+			to_chat(user, "It is not receiving <a href ='?src=\ref[src];power_text=1'>power</a>, making it hard to interact with.")
+
 	if(construct_state && construct_state.mechanics_info())
 		to_chat(user, "It can be <a href='?src=\ref[src];mechanics_text=1'>manipulated</a> using tools.")
 	var/list/missing = missing_parts()

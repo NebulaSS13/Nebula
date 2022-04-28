@@ -19,7 +19,7 @@
 	allowed_tools = list(
 		/obj/item/stack/medical/advanced/bruise_pack = 100,
 		/obj/item/stack/medical/bruise_pack = 40,
-		/obj/item/tape_roll = 20
+		/obj/item/ducttape = 20
 	)
 	min_duration = 70
 	max_duration = 90
@@ -120,9 +120,11 @@
 /decl/surgery_step/internal/detatch_organ/end_step(mob/living/user, mob/living/target, target_zone, obj/item/tool)
 	user.visible_message("<span class='notice'>[user] has separated [target]'s [LAZYACCESS(global.surgeries_in_progress["\ref[target]"], target_zone)] with \the [tool].</span>" , \
 	"<span class='notice'>You have separated [target]'s [LAZYACCESS(global.surgeries_in_progress["\ref[target]"], target_zone)] with \the [tool].</span>")
-	var/obj/item/organ/I = target.get_internal_organ(LAZYACCESS(global.surgeries_in_progress["\ref[target]"], target_zone))
-	if(I && istype(I))
-		I.cut_away(user)
+	var/obj/item/organ/I = target.get_organ(LAZYACCESS(global.surgeries_in_progress["\ref[target]"], target_zone))
+	var/obj/item/organ/external/affected = target.get_organ(target_zone)
+	if(I && istype(I) && istype(affected))
+		//First only detach the organ, without fully removing it
+		target.remove_organ(I, FALSE, TRUE)
 
 /decl/surgery_step/internal/detatch_organ/fail_step(mob/living/user, mob/living/target, target_zone, obj/item/tool)
 	var/obj/item/organ/external/affected = target.get_organ(target_zone)
@@ -188,20 +190,19 @@
 	var/obj/item/organ/O = LAZYACCESS(global.surgeries_in_progress["\ref[target]"], target_zone)
 	var/obj/item/organ/external/affected = target.get_organ(target_zone)
 	if(istype(O) && istype(affected))
-		LAZYREMOVE(affected.implants, O)
-		O.dropInto(target.loc)
+		//Now call remove again with detach = FALSE so we fully remove it
+		target.remove_organ(O, TRUE, FALSE)
+
 		if(!BP_IS_PROSTHETIC(affected))
 			playsound(target.loc, 'sound/effects/squelch1.ogg', 15, 1)
 		else
 			playsound(target.loc, 'sound/items/Ratchet.ogg', 50, 1)
-	if(istype(O, /obj/item/organ/internal/mmi_holder))
-		var/obj/item/organ/internal/mmi_holder/brain = O
-		brain.transfer_and_delete()
 
 	// Just in case somehow the organ we're extracting from an organic is an MMI
 	if(istype(O, /obj/item/organ/internal/mmi_holder))
 		var/obj/item/organ/internal/mmi_holder/brain = O
 		brain.transfer_and_delete()
+		log_warning("Organ removal surgery on '[target]' returned a mmi_holder '[O]' instead of a mmi!!")
 
 /decl/surgery_step/internal/remove_organ/fail_step(mob/living/user, mob/living/target, target_zone, obj/item/tool)
 	var/obj/item/organ/external/affected = target.get_organ(target_zone)
@@ -256,7 +257,7 @@
 			else if(O.w_class > affected.cavity_max_w_class)
 				to_chat(user, SPAN_WARNING("\The [O.name] [G.is] too big for [affected.cavity_name] cavity!"))
 			else
-				var/obj/item/organ/internal/I = target.get_internal_organ(O.organ_tag)
+				var/obj/item/organ/internal/I = target.get_organ(O.organ_tag)
 				if(I && (I.parent_organ == affected.organ_tag))
 					to_chat(user, SPAN_WARNING("\The [target] already has \a [O.name]."))
 				else
@@ -275,11 +276,14 @@
 	"<span class='notice'>You have [robotic_surgery ? "reinstalled" : "transplanted"] \the [tool] into [target]'s [affected.name].</span>")
 	var/obj/item/organ/O = tool
 	if(istype(O) && user.unEquip(O, target))
-		LAZYDISTINCTADD(affected.implants, O) //move the organ into the patient. The organ is properly reattached in the next step
-		if(!(O.status & ORGAN_CUT_AWAY))
-			log_debug("[user] ([user.ckey]) replaced organ [O], which didn't have ORGAN_CUT_AWAY set, in [target] ([target.ckey])")
-			O.status |= ORGAN_CUT_AWAY
-		playsound(target.loc, 'sound/effects/squelch1.ogg', 15, 1)
+		//Place the organ but don't attach it yet
+		target.add_organ(O, affected, detached = TRUE)
+
+		if(!BP_IS_PROSTHETIC(affected))
+			playsound(target.loc, 'sound/effects/squelch1.ogg', 15, 1)
+		else
+			playsound(target.loc, 'sound/items/Ratchet.ogg', 50, 1)
+
 		if(BP_IS_PROSTHETIC(O) && prob(user.skill_fail_chance(SKILL_DEVICES, 50, SKILL_ADEPT)))
 			O.add_random_ailment()
 
@@ -352,7 +356,7 @@
 		user.visible_message("<span class='notice'>[target]'s biology has rejected the attempts to attach \the [organ_to_replace].</span>")
 		return FALSE
 
-	var/obj/item/organ/internal/I = target.get_internal_organ(organ_to_replace.organ_tag)
+	var/obj/item/organ/internal/I = target.get_organ(organ_to_replace.organ_tag)
 	if(I && (I.parent_organ == affected.organ_tag))
 		to_chat(user, SPAN_WARNING("\The [target] already has \a [organ_to_replace]."))
 		return FALSE
@@ -372,9 +376,7 @@
 
 	var/obj/item/organ/external/affected = target.get_organ(target_zone)
 	if(istype(I) && I.parent_organ == target_zone && affected && (I in affected.implants))
-		I.status &= ~ORGAN_CUT_AWAY //apply sutures
-		LAZYREMOVE(affected.implants, I)
-		I.replaced(target, affected)
+		target.add_organ(I, affected, detached = FALSE)
 
 /decl/surgery_step/internal/attach_organ/fail_step(mob/living/user, mob/living/target, target_zone, obj/item/tool)
 	var/obj/item/organ/external/affected = target.get_organ(target_zone)

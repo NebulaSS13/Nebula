@@ -1,5 +1,5 @@
 /mob/living/carbon/human/proc/update_eyes()
-	var/obj/item/organ/internal/eyes/eyes = get_internal_organ(species.vision_organ || BP_EYES)
+	var/obj/item/organ/internal/eyes/eyes = species?.vision_organ ? get_organ(species.vision_organ) : get_organ(BP_EYES)
 	if(eyes)
 		eyes.update_colour()
 		refresh_visible_overlays()
@@ -10,7 +10,7 @@
 
 /mob/living/carbon/human/proc/recheck_bad_external_organs()
 	var/damage_this_tick = getToxLoss()
-	for(var/obj/item/organ/external/O in organs)
+	for(var/obj/item/organ/external/O in get_external_organs())
 		damage_this_tick += O.burn_dam + O.brute_dam
 
 	if(damage_this_tick > last_dam)
@@ -24,17 +24,17 @@
 
 	if(force_process)
 		bad_external_organs.Cut()
-		for(var/obj/item/organ/external/Ex in organs)
+		for(var/obj/item/organ/external/Ex in get_external_organs())
 			bad_external_organs |= Ex
 
 	//processing internal organs is pretty cheap, do that first.
-	for(var/obj/item/organ/I in internal_organs)
+	for(var/obj/item/organ/I in get_internal_organs())
 		I.Process()
 
 	handle_stance()
 	handle_grasp()
 
-	if(!force_process && !bad_external_organs.len)
+	if(!force_process && !length(bad_external_organs))
 		return
 
 	for(var/obj/item/organ/external/E in bad_external_organs)
@@ -88,7 +88,7 @@
 
 	var/limb_pain
 	for(var/limb_tag in list(BP_L_LEG, BP_R_LEG, BP_L_FOOT, BP_R_FOOT))
-		var/obj/item/organ/external/E = organs_by_name[limb_tag]
+		var/obj/item/organ/external/E = get_organ(limb_tag)
 		if(!E || !E.is_usable())
 			stance_damage += 2 // let it fail even if just foot&leg
 		else if (E.is_malfunctioning())
@@ -112,13 +112,17 @@
 
 	if(MOVING_DELIBERATELY(src)) //you don't suffer as much if you aren't trying to run
 		var/working_pair = 2
-		if(!organs_by_name[BP_L_LEG] || !organs_by_name[BP_L_FOOT]) //are we down a limb?
+		var/obj/item/organ/external/LF = get_organ(BP_L_FOOT)
+		var/obj/item/organ/external/LL = get_organ(BP_L_LEG)
+		var/obj/item/organ/external/RF = get_organ(BP_R_FOOT)
+		var/obj/item/organ/external/RL = get_organ(BP_R_LEG)
+		if(!LL || !LF) //are we down a limb?
 			working_pair -= 1
-		else if((!organs_by_name[BP_L_LEG].is_usable()) || (!organs_by_name[BP_L_FOOT].is_usable())) //if not, is it usable?
+		else if((!LL.is_usable()) || (!LF.is_usable())) //if not, is it usable?
 			working_pair -= 1
-		if(!organs_by_name[BP_R_LEG] || !organs_by_name[BP_R_FOOT])
+		if(!RL || !RF)
 			working_pair -= 1
-		else if((!organs_by_name[BP_R_LEG].is_usable()) || (!organs_by_name[BP_R_FOOT].is_usable()))
+		else if((!RL.is_usable()) || (!RF.is_usable()))
 			working_pair -= 1
 		if(working_pair >= 1)
 			stance_damage -= 1
@@ -147,7 +151,7 @@
 		var/datum/inventory_slot/inv_slot = held_item_slots[bp]
 		var/holding = inv_slot?.holding
 		if(holding)
-			var/obj/item/organ/external/E = organs_by_name[bp]
+			var/obj/item/organ/external/E = get_organ(bp)
 			if((!E || !E.is_usable() || E.is_parent_dislocated()) && unEquip(holding))
 				grasp_damage_disarm(inv_slot)
 
@@ -186,7 +190,7 @@
 	for(var/datum/inventory_slot/inv_slot in drop_held_item_slots)
 		if(!unEquip(inv_slot.holding))
 			continue
-		var/obj/item/organ/external/E = organs_by_name[inv_slot.slot_id]
+		var/obj/item/organ/external/E = get_organ(inv_slot.slot_id)
 		if(!E)
 			continue
 		if(E.is_robotic())
@@ -213,8 +217,7 @@
 			visible_message("<B>\The [src]</B> drops what they were holding in their [grasp_name]!")
 
 /mob/living/carbon/human/proc/sync_organ_dna()
-	var/list/all_bits = internal_organs|organs
-	for(var/obj/item/organ/O in all_bits)
+	for(var/obj/item/organ/O in get_organs())
 		O.set_dna(dna)
 
 /mob/living/proc/is_asystole()
@@ -222,12 +225,72 @@
 
 /mob/living/carbon/human/is_asystole()
 	if(isSynthetic())
-		var/obj/item/organ/internal/cell/C = get_internal_organ(BP_CELL)
+		var/obj/item/organ/internal/cell/C = get_organ(BP_CELL)
 		if(istype(C))
 			if(!C.is_usable() || !C.percent())
 				return TRUE
 	else if(should_have_organ(BP_HEART))
-		var/obj/item/organ/internal/heart/heart = get_internal_organ(BP_HEART)
+		var/obj/item/organ/internal/heart/heart = get_organ(BP_HEART)
 		if(!istype(heart) || !heart.is_working())
 			return TRUE
 	return FALSE
+
+/mob/living/carbon/human/proc/is_lung_ruptured()
+	var/obj/item/organ/internal/lungs/L = get_organ(BP_LUNGS)
+	return L && L.is_bruised()
+
+/mob/living/carbon/human/proc/rupture_lung()
+	var/obj/item/organ/internal/lungs/L = get_organ(BP_LUNGS)
+	if(L)
+		L.rupture()
+
+//Registers an organ and setup the organ hierachy properly.
+//affected  : Parent organ if applicable.
+//in_place  : If true, we're performing an in-place replacement, without triggering anything related to adding the organ in-game as part of surgery or else.
+/mob/living/carbon/human/add_organ(obj/item/organ/O, obj/item/organ/external/affected, in_place, update_icon, detached)
+	if(!(. = ..()))
+		return
+	if(!O.is_internal())
+		refresh_modular_limb_verbs()
+
+	//#TODO: wish we could invalidate the human icons to trigger a single update when the organ state changes multiple times in a row
+	if(update_icon)
+		update_inv_hands(FALSE)
+		update_body(FALSE)
+		update_bandages(FALSE)
+		UpdateDamageIcon(FALSE)
+		hud_reset()
+		queue_icon_update() //Avoids calling icon updates 50 times when adding multiple organs
+
+//Unregister and remove a given organ from the mob.
+//drop_organ     : Once the organ is removed its dropped to the ground.
+//detach         : Toggle the ORGAN_CUT_AWAY flag on the removed organ
+//ignore_children: Skips recursively removing this organ's child organs.
+//in_place       : If true we remove only the organ (no children items or implants) and avoid triggering mob changes and parent organs changes as much as possible.
+//  Meant to be used for init and species transforms, without triggering any updates to mob state or anything related to losing a limb as part of surgery or combat.
+/mob/living/carbon/human/remove_organ(obj/item/organ/O, drop_organ, detach, ignore_children,  in_place, update_icon)
+	if(!(. = ..()))
+		return
+	if(!O.is_internal())
+		refresh_modular_limb_verbs()
+		bad_external_organs -= O
+
+	//#TODO: wish we could invalidate the human icons to trigger a single update when the organ state changes multiple times in a row
+	if(update_icon)
+		update_inv_hands(FALSE)
+		update_body(FALSE)
+		update_bandages(FALSE)
+		UpdateDamageIcon(FALSE)
+		hud_reset()
+		queue_icon_update() //Avoids calling icon updates 50 times when removing multiple organs
+
+/mob/living/carbon/human/on_lost_organ(var/obj/item/organ/O)
+	if(!(. = ..()))
+		return 
+	//Move some blood over to the organ
+	if(!BP_IS_PROSTHETIC(O) && O.species && O.reagents?.total_volume < 5)
+		vessel.trans_to(O, 5 - O.reagents.total_volume, 1, 1)
+
+/mob/living/carbon/human/delete_organs()
+	. = ..()
+	bad_external_organs?.Cut()

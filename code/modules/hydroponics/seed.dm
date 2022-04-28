@@ -135,7 +135,7 @@
 			qdel(target)
 		return
 
-	var/obj/item/organ/external/affecting = target_limb ? target.get_organ(target_limb) : pick(target.organs)
+	var/obj/item/organ/external/affecting = target_limb ? target.get_organ(target_limb) : pick(target.get_external_organs())
 	if(affecting?.species?.species_flags & (SPECIES_FLAG_NO_EMBED|SPECIES_FLAG_NO_MINOR_CUT))
 		to_chat(target, "<span class='danger'>\The [fruit]'s thorns scratch against the armour on your [affecting.name]!</span>")
 		return
@@ -165,9 +165,10 @@
 	if(!get_trait(TRAIT_STINGS))
 		return
 
-	if(chems && chems.len && target.reagents && length(target.organs))
+	var/list/external_organs = target.get_external_organs()
+	if(chems && chems.len && target.reagents && LAZYLEN(external_organs))
 
-		var/obj/item/organ/external/affecting = pick(target.organs)
+		var/obj/item/organ/external/affecting = pick(external_organs)
 
 		for(var/obj/item/clothing/C in list(target.head, target.wear_mask, target.wear_suit, target.w_uniform, target.gloves, target.shoes))
 			if(C && (C.body_parts_covered & affecting.body_part) && (C.item_flags & ITEM_FLAG_THICKMATERIAL))
@@ -199,40 +200,42 @@
 		environment.adjust_gas(/decl/material/gas/carbon_dioxide, -req_CO2_moles, 1)
 		environment.adjust_gas(/decl/material/gas/oxygen, req_CO2_moles, 1)
 
-//Splatter a turf.
-/datum/seed/proc/splatter(var/turf/T,var/obj/item/thrown)
-	if(splat_type && !(locate(/obj/effect/vine) in T))
-		var/obj/effect/vine/splat = new splat_type(T, src)
-		if(!istype(splat)) // Plants handle their own stuff.
-			splat.SetName("[thrown.name] [pick("smear","smudge","splatter")]")
-			if(get_trait(TRAIT_BIOLUM))
-				var/clr
-				if(get_trait(TRAIT_BIOLUM_COLOUR))
-					clr = get_trait(TRAIT_BIOLUM_COLOUR)
-				splat.set_light(get_trait(TRAIT_BIOLUM), l_color = clr)
-			var/flesh_colour = get_trait(TRAIT_FLESH_COLOUR)
-			if(!flesh_colour) flesh_colour = get_trait(TRAIT_PRODUCT_COLOUR)
-			if(flesh_colour) splat.color = get_trait(TRAIT_PRODUCT_COLOUR)
+/datum/seed/proc/make_splat(var/turf/T, var/obj/item/thrown)
+	if(!splat_type || (locate(splat_type) in T))
+		return
+	var/atom/splat = new splat_type(T, src)
+	splat.SetName("[seed_name] [pick("smear","smudge","splatter")]")
+	if(get_trait(TRAIT_BIOLUM))
+		var/clr
+		if(get_trait(TRAIT_BIOLUM_COLOUR))
+			clr = get_trait(TRAIT_BIOLUM_COLOUR)
+		splat.set_light(get_trait(TRAIT_BIOLUM), l_color = clr)
+	splat.color = get_trait(TRAIT_FLESH_COLOUR) || get_trait(TRAIT_PRODUCT_COLOUR)
 
-	if(chems)
-		for(var/mob/living/M in T.contents)
-			if(!M.reagents)
-				continue
-			var/body_coverage = SLOT_HEAD|SLOT_FACE|SLOT_EYES|SLOT_UPPER_BODY|SLOT_LOWER_BODY|SLOT_LEGS|SLOT_FEET|SLOT_ARMS|SLOT_HANDS
-			var/held_items = M.get_held_items()
-			for(var/obj/item/clothing/clothes in M)
-				if(clothes in held_items)
-					continue
-				body_coverage &= ~(clothes.body_parts_covered)
-			if(!body_coverage)
-				continue
-			var/datum/reagents/R = M.reagents
-			var/mob/living/carbon/human/H = M
-			if(istype(H))
-				R = H.get_contact_reagents()
-			if(istype(R))
-				for(var/chem in chems)
-					R.add_reagent(chem,min(5,max(1,get_trait(TRAIT_POTENCY)/3)))
+//Splatter a turf.
+//Thrown can be null, but T cannot.
+/datum/seed/proc/splatter(var/turf/T, var/obj/item/thrown)
+	make_splat(T, thrown)
+
+	var/datum/reagents/splat_reagents = thrown?.reagents
+	if(!splat_reagents?.maximum_volume) // if thrown doesn't exist or has no reagents, use the seed's default reagents.
+		splat_reagents = new /datum/reagents(INFINITY, global.temp_reagents_holder)
+		var/potency = get_trait(TRAIT_POTENCY)
+		for(var/rid in chems)
+			var/list/reagent_amounts = chems[rid]
+			if(LAZYLEN(reagent_amounts))
+				var/rtotal = reagent_amounts[1]
+				var/list/data = null
+				if(reagent_amounts?[2] && potency > 0)
+					rtotal += round(potency/reagent_amounts[2])
+				if(rid == /decl/material/liquid/nutriment)
+					LAZYSET(data, seed_name, max(1,rtotal))
+				splat_reagents.add_reagent(rid,max(1,rtotal),data)
+	if(splat_reagents)
+		var/splat_range = min(10,max(1,get_trait(TRAIT_POTENCY)/15))
+		splat_reagents.splash_area(T, range = splat_range)
+	qdel(splat_reagents)
+	qdel(thrown)
 
 //Applies an effect to a target atom.
 /datum/seed/proc/thrown_at(var/obj/item/thrown,var/atom/target, var/force_explode)
@@ -241,65 +244,22 @@
 	var/turf/origin_turf = get_turf(target)
 
 	if(force_explode || get_trait(TRAIT_EXPLOSIVE))
-
 		create_spores(origin_turf)
-
-		var/flood_dist = min(10,max(1,get_trait(TRAIT_POTENCY)/15))
-		var/list/open_turfs = list()
-		var/list/closed_turfs = list()
-		var/list/valid_turfs = list()
-		open_turfs |= origin_turf
-
-		// Flood fill to get affected turfs.
-		while(open_turfs.len)
-			var/turf/T = pick(open_turfs)
-			open_turfs -= T
-			closed_turfs |= T
-			valid_turfs |= T
-
-			for(var/dir in global.alldirs)
-				var/turf/neighbor = get_step(T,dir)
-				if(!neighbor || (neighbor in closed_turfs) || (neighbor in open_turfs))
-					continue
-				if(neighbor.density || get_dist(neighbor,origin_turf) > flood_dist || isspaceturf(neighbor))
-					closed_turfs |= neighbor
-					continue
-				// Check for windows.
-				var/no_los
-				var/turf/last_turf = origin_turf
-				for(var/turf/target_turf in getline(origin_turf,neighbor))
-					if(!last_turf.Enter(target_turf) || target_turf.density)
-						no_los = 1
-						break
-					last_turf = target_turf
-				if(!no_los && !origin_turf.Enter(neighbor))
-					no_los = 1
-				if(no_los)
-					closed_turfs |= neighbor
-					continue
-				open_turfs |= neighbor
-
-		for(var/turf/T in valid_turfs)
-			for(var/mob/living/M in T.contents)
-				apply_special_effect(M)
-			splatter(T,thrown)
 		if(origin_turf)
-			origin_turf.visible_message("<span class='danger'>The [thrown.name] explodes!</span>")
-		qdel(thrown)
+			origin_turf.visible_message(SPAN_DANGER("\The [thrown] explodes!"))
+		splatter(origin_turf,thrown)
 		return
 
 	if(istype(target,/mob/living))
 		splatted = apply_special_effect(target,thrown)
 	else if(isturf(target))
-		splatted = 1
-		for(var/mob/living/M in target.contents)
-			apply_special_effect(M)
+		for(var/mob/living/M in target)
+			splatted |= apply_special_effect(M, thrown)
 
 	if(get_trait(TRAIT_JUICY) && splatted)
-		splatter(origin_turf,thrown)
 		if(origin_turf)
-			origin_turf.visible_message("<span class='danger'>The [thrown.name] splatters against [target]!</span>")
-		qdel(thrown)
+			origin_turf.visible_message(SPAN_DANGER("\The [thrown] splatters against [target]!"))
+		splatter(origin_turf,thrown)
 
 /datum/seed/proc/handle_environment(var/turf/current_turf, var/datum/gas_mixture/environment, var/light_supplied, var/check_only)
 
@@ -362,8 +322,6 @@
 	return health_change
 
 /datum/seed/proc/apply_special_effect(var/mob/living/target,var/obj/item/thrown)
-
-	var/impact = 1
 	do_sting(target,thrown)
 	do_thorns(target,thrown)
 
@@ -379,9 +337,7 @@
 			spark_at(target, cardinal_only = TRUE)
 			new/obj/effect/decal/cleanable/molten_item(get_turf(target)) // Leave a pile of goo behind for dramatic effect...
 			target.forceMove(T)                                     // And teleport them to the chosen location.
-			impact = 1
-
-	return impact
+	return TRUE
 
 /datum/seed/proc/generate_name()
 	var/prefix = ""

@@ -1,0 +1,414 @@
+<!--Include shared network UI stuff for network header-->
+{{#def.net_shared}}
+
+<!-- Style sheet -->
+<style>
+	/**************************** 
+	 * Build Options Table 
+	 ****************************/
+	.fabBuildOptnTbl{
+		width: 100%;
+		background: parent;
+	}
+	.fabBuildOptnTblHdrRow{
+		font-weight: bolder;
+		font-size:   medium;
+		background: #353535;
+	}
+	/*Cost list*/
+	.fabBuildOptnTbl ul{
+		width: 100%; 
+		font-size: small; 
+		white-space: nowrap;
+	}
+	.fabBuildOptnTbl tr{
+		border-bottom: 0.1em solid #777777;
+		background-color: #1a1a1a;
+		width: 100%;
+	}
+	.fabBuildOptnTbl tr:nth-child(odd){
+		background-color: #272727;
+	}
+	.fabBuildOptnTbl td{
+		vertical-align: top;
+	}
+
+	/****************************
+	 * Config Entry
+	*****************************/
+	.fabConfigEntry{
+		display: inline-block; 
+		white-space: nowrap; 
+		width: 100%;
+	}
+
+	/**************************** 
+	 * Collapsible List 
+	 ****************************/
+	dl.collapsableList{
+		font-family: monospace;
+		width: 100%;
+	}
+
+	dt.collapsableList{
+		width: 100%;
+		background:#2c2c2c;
+		white-space: normal;
+		display: inline-block;
+		overflow: hidden;
+		overflow-wrap: break-word;
+		height: 1.5em;
+	}
+	dt.collapsableList_grayedOutHdr{
+		/*For collapsible list entries that don't collapse at all*/
+		background:#181818;
+		padding-left: 1.2em; /*Pads out the leading +/- character and space*/
+	}
+	
+	.collapsableList dd{
+		display: inline-block;
+	}
+	dd.collapsableListElement_keepSpaces{
+		white-space: pre;
+		display: inline-block;
+	}
+
+	/**************************** 
+	 * Special Links 
+	 ****************************/
+	.linkSubtle{
+		background:none;
+		font-weight: bold;
+		font-size: larger;
+		border: none;
+		margin:0;
+	}
+	.linkSubtle:disabled{
+		color: #666666;
+		background:none;
+	}
+	.linkSubtle:hover{
+		color: #ffffff;
+		background: #003300;
+	}
+	.linkSubtle:visited{
+		color: #ffffff;
+		background:none;
+	}
+
+	.linkEject{
+		background:none;
+		border: none;
+	}
+	.linkEject:hover{
+		background:#003300;
+	}
+	.linkEject:disabled{
+		color: #666666;
+		background:#666666;
+	}
+
+
+	.linkCancel{
+		white-space:nowrap;
+	}
+	.linkCancel:hover{
+		color: red;
+		background:#330600;
+	}
+
+	/****************************
+	 * Descriptive Text 
+	 ****************************/
+	span.detail{
+		color: hsl(120, 100%, 30%);
+		font-family: monospace;
+		font-size: small;
+	}
+</style>
+
+<!-- --------------------------------------------------------------------------------------------
+	Utilities 
+-- ---------------------------------------------------------------------------------------------->
+
+<!-- Returns the length of the longest material name in the material storage list (Used for padding material names since IE11 doesn't do padding) -->
+{{function get_longest_material_name(material_storage){
+	let longest = 0;
+	for(let item in material_storage){
+		if(material_storage[item].name.length > longest){
+			longest = material_storage[item].name.length;
+		};
+	};
+	return longest;
+} }}
+
+<!-- Shortens a number, and appends K, M, or G respectively if in the thousands, millions, or billions -->
+{{function shorten_number(amount, fixed) {
+	var billions = amount / 1000000000;
+	var millions = amount / 1000000;
+	var thousands = amount / 1000;
+	
+	if(billions >= 1){
+		return String(fixed? billions.toFixed(3) : billions) + '<span style=\'font-size:smaller;\'>G</span>';
+	}
+	else if(millions >= 1){
+		return String(fixed? millions.toFixed(3) : millions) + '<span style=\'font-size:smaller;\'>M</span>';
+	}
+	else if(thousands >= 1){
+		return String(fixed? thousands.toFixed(3) : thousands) + '<span style=\'font-size:smaller;\'>K</span>';
+	}
+
+	return String((fixed? amount.toFixed(3) : amount)); 
+} }}
+
+<!-- If a string is shorter than padlengnth, we add padchar until its as long as padlength (Since IE11 doesn't support native padding we do it here) -->
+{{function pad_string(str, padlength, padchar) {
+	let padding = '';
+	let strlen = str.length;
+	if(padlength > strlen){
+		for(let i = 0; i < (padlength - strlen); i++) {
+			padding += padchar;
+		};
+	};
+	return str + padding;
+} }}
+
+<!-- Conditionally prepends the listname with either + or - depending if the list is shown or not. Used for collapsable lists -->
+{{function make_list_toggle_prefix(shown, list_name) {
+	return (shown? '-' : '+') + ' ' + list_name;
+} }}
+
+<!-- --------------------------------------------------------------------------------------------
+	Status Header 
+-- --------------------------------------------------------------------------------------------->
+{{function fab_header(network, network_id) { }}
+	{{net_connection_settings(network, network_id);}}
+{{ } }}
+
+<!-- --------------------------------------------------------------------------------------------
+	Toggleable Resource list
+ ----------------------------------------------------------------------------------------------->
+
+ <!-- Creates a short, one line string summing up the state of the materials in the fabricator -->
+ {{function make_material_list_summary(material_storage) {
+	let summary = '';
+	if(material_storage){
+		let nbempty = 0;
+		for(let item in material_storage){
+			let current =  material_storage[item].name.substr(0,2) + ':' +  shorten_number(material_storage[item].stored, true) + ' ';
+			if(material_storage[item].stored <= 0){
+				nbempty += 1;
+			};
+		};
+		if(nbempty >= material_storage.length){
+			summary = "<span class=\'bad\'>Materials Depleted!</span>";
+		}
+		else if(nbempty > 0) {
+			summary = '<span class=\'average\'>' + nbempty + ' depleted material(s)</span>';
+		};
+	}
+	if(summary.length){
+		summary = '<span class=\'detail\'> [ ' + summary + ']</span>';
+	}
+	return summary;
+} }}
+
+<!-- Makes a single entry for a material in the fabricator -->
+{{function fab_resources_table_entry(name, amount, max, unit, longestNameLen, ejectKey) { }}
+	<dd class='collapsableListElement_keepSpaces'>
+		{{:helper.link('', 'eject', {'eject_mat' : ejectKey}, null, 'link') }} {{:pad_string(name, longestNameLen, ' ') }} {{:pad_string(amount, 8, ' ') }}/{{:pad_string(max, 8, ' ')}} {{:unit}}
+	</dd>
+{{ } }}
+
+<!-- Draws the materials section on for fabricators -->
+{{function fab_resources_table(expand_resources, material_storage) { }}
+	<!--Always show the toggle link/title button-->
+	<dt class='collapsableList'>
+		{{: helper.link( make_list_toggle_prefix(expand_resources, 'Materials') + make_material_list_summary(material_storage), null, {'toggle_resources' : 1}, null, 'linkSubtle') }}
+	</dt>
+	<!--When we're toggled on display the list of resources -->
+	{{if expand_resources}}
+		{{longest_material_name = get_longest_material_name(material_storage);}}
+		{{for material_storage}}
+			{{fab_resources_table_entry(value.name, shorten_number(value.stored, true), shorten_number(value.max, true), value.unit, longest_material_name, value.eject_key);}}
+		{{/for}}
+	{{/if}}
+{{ } }}
+
+<!-- --------------------------------------------------------------------------------------------
+	Toggleable Build Queue
+ ----------------------------------------------------------------------------------------------->
+ <!-- Makes a one line short summary of build queue of the fabricator -->
+ {{function make_queue_summary(current_build, build_queue) { 
+	let summary = '';
+	if(current_build){
+		summary += current_build.name + ' (' + current_build.multiplier + ') ' + current_build.progress;
+	}
+	if(build_queue && build_queue.length > 0){
+		summary += ' (' + build_queue.length + ' queued)';
+	}
+	if(summary.length > 0){
+		summary = '<span class=\'detail\'> [' + summary + ']</span>'
+	}
+	return summary;
+} }}
+
+<!--Draws the construction queue section of the fabricator UI-->
+{{function fab_construction_queue(expand_queue, build_queue, current_build) { }}
+	<!--Always show the toggle link/title button-->
+	<dt class='collapsableList'>
+		{{: helper.link( (make_list_toggle_prefix(expand_queue, 'Queue') + make_queue_summary(current_build, build_queue)), null, {'toggle_queue' : 1}, null, 'linkSubtle') }}
+	</dt>
+	<!--When we're toggled on display the build queue -->
+	{{if expand_queue}}
+		<dt>Current:</dt>
+		<dd>
+			{{if current_build}}
+				{{:current_build.name}} {{:current_build.multiplier}} {{:current_build.progress}}
+			{{else}}
+				--
+			{{/if}}
+		</dd>
+		<dt>Queued:</dt>
+		<dd>
+		{{if build_queue && build_queue.length > 0}}
+			{{for build_queue}}
+				{{if value.reference}}{{:helper.link((value.name + ' x' + value.multiplier), 'cancel', {'cancel' : value.reference}, null, 'linkCancel')}}{{else}} {{:(value.name + ' x' + value.multiplier)}} {{/if}}
+			{{/for}}
+		{{else}}
+			--
+		{{/if}}
+		</dd>
+	{{/if}}
+{{ } }}
+
+<!-- --------------------------------------------------------------------------------------------
+	Configuration Options for the Printed Object
+-- --------------------------------------------------------------------------------------------->
+<!--Draws a 16x16 colored square -->
+{{function draw_colored_square(color) { }}
+	<canvas id='colorPick' width="16px" height="16px" style='float: left; margin-right: 1em; margin-top: 0.2em;border: #2c2c2c solid 1px;'></canvas>
+	<script>
+		var canvas = document.getElementById('colorPick');
+		var ctx = canvas.getContext("2d");
+		ctx.fillStyle = {{:'\"' + color + '\"'}};
+		ctx.fillRect(0, 0, 16, 16);
+	</script>
+{{ } }}
+
+{{function fab_configuration_summary_color(expand_config, color) { 
+	if(!expand_config){
+		return ' [' + '<span style=\'color:' + color + ';\'>Color</span>] ';
+	}
+	return '';
+} }}
+
+{{function fab_configuration_color(color_selectable, color) { }}
+	{{if color_selectable}}
+		<div class='fabConfigEntry' style="white-space:nowrap;">
+			<div style='text-align: left; margin-right: 1em; float: left;'>
+				Color:
+			</div>
+			<div style='text-align: right;'>
+				{{draw_colored_square(color);}} {{:helper.link( 'set', null, {'color_select' : 1}) }}
+			</div>
+		</div>
+	{{/if}}
+{{ } }}
+
+{{function fab_configuration(skip_config, expand_config, data) { }}
+	{{if !skip_config}}
+		<dt class='collapsableList'>
+			{{: helper.link( make_list_toggle_prefix(expand_config, 'Configuration') + fab_configuration_summary_color(expand_config, data.color), null, {'toggle_config' : 1}, null, 'linkSubtle') }}
+		</dt>
+		{{if expand_config}}
+			<dd style='margin-left:1em;'>
+				{{fab_configuration_color( data.color_selectable, data.color );}}
+			</dd>
+		{{/if}}
+	{{/if}}
+{{ } }}
+
+<!-- --------------------------------------------------------------------------------------------
+	Filtering Options
+-- --------------------------------------------------------------------------------------------->
+{{ function fab_display_filter( category, filtering, hide_categories ) { }}
+	<dt class='collapsableList'>Filtering</dt>
+	<dd>
+		{{if !hide_categories}}
+			<div>
+				<div class="itemLabel">
+					Category
+				</div>
+				<div class="itemContent">
+					{{:helper.link(category, null, {'change_category' : 1})}}
+				</div>
+			</div>
+		{{/if}}
+		<div>
+			<div class="itemLabel">
+				Filter
+			</div>
+			<div class="itemContent">
+				{{:helper.link(filtering, null, {'set_filter' : 1})}}
+			</div>
+		</div>
+	</dd>
+{{ } }}
+
+<!-- --------------------------------------------------------------------------------------------
+	Build Options list
+-- --------------------------------------------------------------------------------------------->
+{{function fab_make_cost_list( materials ) { }}
+	<ul class='fabBuildOptnTbl'>
+		{{if !materials}}
+			<li style='width:100%;'>--</li>
+		{{else}}
+			{{for materials :valMat :valIdx}}
+				<li style='width:100%;'>
+					{{if !valMat.has_enough}} <span class='bad'> {{/if}} <!-- Turns red when resource is missing -->
+					<span style='font-family: Fixed, monospace;'>{{:shorten_number(valMat.amount)}}</span> {{:valMat.name}}
+					{{if !valMat.has_enough}} </span> {{/if}}
+				</li>
+			{{/for}}
+		{{/if}}
+	</ul>
+{{ } }}
+
+<!-- Draws the multipliers buttons for an entry -->
+{{function fab_make_multiplier_buttons( unavailable, reference, multiplier ) { }}
+	{{:helper.link('x1', null, {'make' : reference, 'multiplier' : 1}, (unavailable ? 'disabled' : null))}}
+	{{for multiplier :multValue :multIndex}}
+		{{:helper.link(multValue.label, null, {'make' : reference, 'multiplier' : multValue.multiplier}, (unavailable ? 'disabled' : null) )}}
+	{{/for}}
+{{ } }}
+
+<!-- Prettyfies the name of a build option -->
+{{function fab_make_option_title(name, illegal) { }}
+	{{if illegal}}<span class='bad'>{{/if}}
+	{{:name}}
+	{{if illegal}}</span>{{/if}}
+{{ } }}
+
+<!-- List all the build options -->
+{{function fab_build_options( build_options ) { }}
+	<br/>
+	<table class='fabBuildOptnTbl'>
+		<tr class='fabBuildOptnTblHdrRow'>
+			<th>Design</th>
+			<th>Cost</th>
+			<th></th>
+		</tr>
+		{{for build_options}}
+			<tr>
+				<!--Name-->
+				<td style='padding-left: 0.5em;'>{{ fab_make_option_title(value.name, value.illegal); }}</td>
+				<!--Cost-->
+				<td>{{ fab_make_cost_list(value.materials); }}</td>
+				<!--Add to queue btn-->
+				<td style='padding-left: 0.5em;'>{{ fab_make_multiplier_buttons(value.unavailable, value.reference, value.multiplier); }}</td>
+			</tr>
+		{{/for}}
+	</table>
+{{ } }}
+

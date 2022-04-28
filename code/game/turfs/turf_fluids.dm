@@ -21,7 +21,7 @@
 	if(force || flooded)
 		flooded = FALSE
 		REMOVE_ACTIVE_FLUID_SOURCE(src)
-		vis_contents -= global.flood_object
+		remove_vis_contents(src, global.flood_object)
 		fluid_update() // We are now floodable, so wake up our neighbors.
 
 /turf/proc/make_flooded(var/force)
@@ -30,7 +30,7 @@
 		for(var/obj/effect/fluid/fluid in src)
 			qdel(fluid)
 		ADD_ACTIVE_FLUID_SOURCE(src)
-		vis_contents |= global.flood_object
+		add_vis_contents(src, global.flood_object)
 
 /turf/is_flooded(var/lying_mob, var/absolute)
 	return (flooded || (!absolute && check_fluid_depth(lying_mob ? FLUID_OVER_MOB_HEAD : FLUID_DEEP)))

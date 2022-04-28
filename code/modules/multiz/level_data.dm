@@ -7,17 +7,15 @@
 var/global/list/levels_by_z =  list()
 var/global/list/levels_by_id = list()
 
-/obj/level_data
-	simulated = FALSE
+/obj/abstract/level_data
 	var/my_z
 	var/level_id
 	var/base_turf
 	var/list/connects_to
 	var/level_flags
 
-
-INITIALIZE_IMMEDIATE(/obj/level_data)
-/obj/level_data/Initialize()
+INITIALIZE_IMMEDIATE(/obj/abstract/level_data)
+/obj/abstract/level_data/Initialize()
 	. = ..()
 	my_z = z
 	forceMove(null)
@@ -25,7 +23,7 @@ INITIALIZE_IMMEDIATE(/obj/level_data)
 		PRINT_STACK_TRACE("Duplicate level data created for z[z].")
 	global.levels_by_z["[my_z]"] = src
 	if(!level_id)
-		level_id = "leveldata_[my_z]_[sequential_id(/obj/level_data)]"
+		level_id = "leveldata_[my_z]_[sequential_id(/obj/abstract/level_data)]"
 	if(level_id in global.levels_by_id)
 		PRINT_STACK_TRACE("Duplicate level_id '[level_id]' for z[my_z].")
 	else
@@ -45,18 +43,18 @@ INITIALIZE_IMMEDIATE(/obj/level_data)
 	if(level_flags & ZLEVEL_SEALED)
 		global.using_map.sealed_levels  |= my_z
 
-/obj/level_data/Destroy(var/force)
+/obj/abstract/level_data/Destroy(var/force)
 	if(force)
 		new type(locate(round(world.maxx/2), round(world.maxy/2), my_z))
 		return ..()
 	return QDEL_HINT_LETMELIVE
 
-/obj/level_data/proc/find_connected_levels(var/list/found)
+/obj/abstract/level_data/proc/find_connected_levels(var/list/found)
 	for(var/other_id in connects_to)
-		var/obj/level_data/neighbor = global.levels_by_id[other_id] 
+		var/obj/abstract/level_data/neighbor = global.levels_by_id[other_id] 
 		neighbor.add_connected_levels(found)
 
-/obj/level_data/proc/add_connected_levels(var/list/found)
+/obj/abstract/level_data/proc/add_connected_levels(var/list/found)
 	. = found
 	if((my_z in found))
 		return
@@ -64,19 +62,19 @@ INITIALIZE_IMMEDIATE(/obj/level_data)
 	if(!length(connects_to))
 		return
 	for(var/other_id in connects_to)
-		var/obj/level_data/neighbor = global.levels_by_id[other_id] 
+		var/obj/abstract/level_data/neighbor = global.levels_by_id[other_id] 
 		neighbor.add_connected_levels(found)
 
 // Mappable subtypes.
-/obj/level_data/main_level
+/obj/abstract/level_data/main_level
 	name = "Main Station Level"
 	level_flags = (ZLEVEL_STATION|ZLEVEL_CONTACT|ZLEVEL_PLAYER)
 
-/obj/level_data/admin_level
+/obj/abstract/level_data/admin_level
 	name = "Admin Level"
 	level_flags = (ZLEVEL_ADMIN|ZLEVEL_SEALED)
 
-/obj/level_data/player_level
+/obj/abstract/level_data/player_level
 	name = "Player Level"
 	level_flags = (ZLEVEL_CONTACT|ZLEVEL_PLAYER)
 

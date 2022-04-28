@@ -13,13 +13,13 @@
 	var/obj/item/twohanded/fireaxe/fireaxe
 
 /obj/structure/fireaxecabinet/on_update_icon()
-	overlays.Cut()
+	..()
 	if(fireaxe)
-		overlays += image(icon, "fireaxe_item")
+		add_overlay("fireaxe_item")
 	if(shattered)
-		overlays += image(icon, "fireaxe_window_broken")
+		add_overlay("fireaxe_window_broken")
 	else if(!open)
-		overlays += image(icon, "fireaxe_window")
+		add_overlay("fireaxe_window")
 
 /obj/structure/fireaxecabinet/Initialize()
 	. = ..()

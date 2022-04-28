@@ -285,7 +285,7 @@
 
 		if(prob(1 + W.force * 5))
 
-			user.visible_message("<span class='warning'>[user.name] smashed the light!</span>", "<span class='warning'>You smash the light!</span>", "You hear a tinkle of breaking glass")
+			user.visible_message("<span class='warning'>[user.name] smashed the light!</span>", "<span class='warning'>You smash the light!</span>", "You hear a tinkle of breaking glass.")
 			if(on && (W.obj_flags & OBJ_FLAG_CONDUCTIBLE))
 				if (prob(12))
 					electrocute_mob(user, get_area(src), src, 0.3)
@@ -338,7 +338,7 @@
 	if(istype(user,/mob/living/carbon/human))
 		var/mob/living/carbon/human/H = user
 		if(H.species.can_shred(H))
-			visible_message("<span class='warning'>[user.name] smashed the light!</span>", 3, "You hear a tinkle of breaking glass")
+			visible_message("<span class='warning'>[user.name] smashed the light!</span>", 3, "You hear a tinkle of breaking glass.")
 			broken()
 			return TRUE
 
@@ -357,11 +357,11 @@
 			prot = 1
 
 		if(prot > 0 || (MUTATION_COLD_RESISTANCE in user.mutations))
-			to_chat(user, "You remove the [get_fitting_name()]")
+			to_chat(user, "You remove the [get_fitting_name()].")
 		else if(istype(user) && user.is_telekinetic())
 			to_chat(user, "You telekinetically remove the [get_fitting_name()].")
 		else if(user.a_intent != I_HELP)
-			var/obj/item/organ/external/hand = H.organs_by_name[user.get_active_held_item_slot()]
+			var/obj/item/organ/external/hand = H.get_organ(user.get_active_held_item_slot())
 			if(hand && hand.is_usable() && !hand.can_feel_pain())
 				user.apply_damage(3, BURN, hand.organ_tag, used_weapon = src)
 				var/decl/pronouns/G = user.get_pronouns()
@@ -462,7 +462,7 @@
 	. = ..()
 	if(!. && isMultitool(W))
 		delay = 5 + ((delay + 1) % 5)
-		to_chat(user, SPAN_NOTICE("You adjust the delay on \the [src]"))
+		to_chat(user, SPAN_NOTICE("You adjust the delay on \the [src]."))
 		return TRUE
 
 /obj/machinery/light/navigation/buildable

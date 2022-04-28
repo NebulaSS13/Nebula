@@ -169,7 +169,7 @@
 	//is probabilistic so we can't do that and it would be unfair to just check one.
 	if(ishuman(M))
 		var/mob/living/carbon/human/H = M
-		var/obj/item/organ/external/hand = H.organs_by_name[M.get_empty_hand_slot()]
+		var/obj/item/organ/external/hand = H.get_organ(M.get_empty_hand_slot())
 		if(istype(hand) && hand.is_usable())
 			return TRUE
 	return FALSE
@@ -651,7 +651,7 @@ var/global/list/slot_flags_enumeration = list(
 
 	if(istype(H))
 
-		var/obj/item/organ/internal/eyes/eyes = H.get_internal_organ(BP_EYES)
+		var/obj/item/organ/internal/eyes/eyes = H.get_organ(BP_EYES)
 
 		if(H != user)
 
@@ -971,3 +971,6 @@ modules/mob/living/carbon/human/life.dm if you die, you will be zoomed out.
 		client.screen |= src
 		if(!client.mob || !client.mob.hud_used || !slot || (!client.mob.hud_used.inventory_shown && (slot in client.mob.hud_used.hidden_inventory_slots)))
 			screen_loc = null
+
+/obj/item/proc/gives_weather_protection()
+	return FALSE

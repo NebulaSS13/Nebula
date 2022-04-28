@@ -157,7 +157,7 @@
 /turf/simulated/floor,
 /area/smugglers/base)
 "az" = (
-/obj/machinery/power/port_gen/pacman,
+/obj/machinery/port_gen/pacman,
 /obj/structure/cable{
 	icon_state = "0-2"
 	},
@@ -945,7 +945,7 @@
 /area/space)
 "db" = (
 /obj/effect/decal/cleanable/blood,
-/obj/effect/landmark/corpse/doctor,
+/obj/abstract/landmark/corpse/doctor,
 /turf/simulated/floor/asteroid,
 /area/mine/explored)
 "eb" = (

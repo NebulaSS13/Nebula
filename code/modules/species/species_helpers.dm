@@ -53,11 +53,11 @@ var/global/list/stored_shock_by_ref = list()
 		for(var/mark_type in base_markings)
 			var/decl/sprite_accessory/marking/mark_decl = GET_DECL(mark_type)
 			for(var/bp in mark_decl.body_parts)
-				var/obj/item/organ/external/O = mannequin.organs_by_name[bp]
+				var/obj/item/organ/external/O = mannequin.get_organ(bp)
 				if(O && !LAZYACCESS(O.markings, mark_type))
 					LAZYSET(O.markings, mark_type, base_markings[mark_type])
 
-	for(var/obj/item/organ/external/E in mannequin.organs)
+	for(var/obj/item/organ/external/E in mannequin.get_external_organs())
 		E.skin_colour = base_color
 
 	mannequin.eye_colour = base_eye_color
@@ -91,3 +91,9 @@ var/global/list/stored_shock_by_ref = list()
 /decl/species/proc/equip_default_fallback_uniform(var/mob/living/carbon/human/H)
 	if(istype(H))
 		H.equip_to_slot_or_del(new /obj/item/clothing/under/harness, slot_w_uniform_str)
+
+/decl/species/proc/is_blood_incompatible(var/my_blood_type, var/their_blood_type)
+	var/decl/blood_type/my_blood = get_blood_type_by_name(my_blood_type)
+	if(!istype(my_blood))
+		return FALSE
+	return !my_blood.can_take_donation_from(get_blood_type_by_name(their_blood_type))

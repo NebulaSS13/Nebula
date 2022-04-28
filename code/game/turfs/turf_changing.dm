@@ -20,7 +20,7 @@
 	SHOULD_CALL_PARENT(FALSE)
 	. = TRUE
 
-/turf/proc/ChangeTurf(var/turf/N, var/tell_universe = TRUE, var/force_lighting_update = FALSE, var/keep_air = FALSE)
+/turf/proc/ChangeTurf(var/turf/N, var/tell_universe = TRUE, var/force_lighting_update = FALSE, var/keep_air = FALSE, var/keep_outside = FALSE)
 
 	if (!N)
 		return
@@ -45,6 +45,7 @@
 	var/old_lighting_overlay = lighting_overlay
 	var/old_dynamic_lighting = TURF_IS_DYNAMICALLY_LIT_UNSAFE(src)
 	var/old_flooded =          flooded
+	var/old_outside =          is_outside
 
 	changing_turf = TRUE
 
@@ -102,6 +103,11 @@
 
 	// end of lighting stuff
 
+	// Outside/weather stuff. set_outside() updates weather already
+	// so only call it again if it doesn't already handle it.
+	if(!keep_outside || !W.set_outside(old_outside))
+		W.update_weather()
+
 /turf/proc/transport_properties_from(turf/other)
 	if(!istype(other, src.type))
 		return 0
@@ -118,14 +124,14 @@
 /turf/simulated/floor/transport_properties_from(turf/simulated/floor/other)
 	if(!..())
 		return FALSE
-	
+
 	broken = other.broken
 	burnt = other.burnt
 	if(broken || burnt)
 		queue_icon_update()
 	set_flooring(other.flooring)
 	return TRUE
-	
+
 //I would name this copy_from() but we remove the other turf from their air zone for some reason
 /turf/simulated/transport_properties_from(turf/simulated/other)
 	if(!..())
@@ -152,10 +158,16 @@
 	floor_type = other.floor_type
 	construction_stage = other.construction_stage
 
+	damage = other.damage
+	
+	// Do not set directly to other.can_open since it may be in the WALL_OPENING state.
+	if(other.can_open)
+		can_open = WALL_CAN_OPEN
+
 	update_material()
 	return TRUE
 
-//No idea why resetting the base appearence from New() isn't enough, but without this it doesn't work
+//No idea why resetting the base appearance from New() isn't enough, but without this it doesn't work
 /turf/simulated/shuttle/wall/corner/transport_properties_from(turf/simulated/other)
 	. = ..()
 	reset_base_appearance()

@@ -58,7 +58,7 @@
 			atmos_machines += A
 		if(istype(A, /obj/machinery))
 			machines += A
-		if(istype(A, /obj/effect/landmark/map_load_mark))
+		if(istype(A, /obj/abstract/landmark/map_load_mark))
 			LAZYADD(subtemplates_to_spawn, A)
 
 	var/notsuspended
@@ -133,7 +133,7 @@
 			global.using_map.accessible_z_levels[num2text(z_index)] = accessibility_weight
 		if (base_turf_for_zs)
 			global.using_map.base_turf_by_z[num2text(z_index)] = base_turf_for_zs
-		global.using_map.player_levels |= z_index // TODO: make maps handle this with /obj/level_data
+		global.using_map.player_levels |= z_index // TODO: make maps handle this with /obj/abstract/level_data
 
 	//initialize things that are normally initialized after map load
 	init_atoms(atoms_to_initialise)
@@ -187,7 +187,7 @@
 	return TRUE
 
 /datum/map_template/proc/after_load(z)
-	for(var/obj/effect/landmark/map_load_mark/mark AS_ANYTHING in subtemplates_to_spawn)
+	for(var/obj/abstract/landmark/map_load_mark/mark AS_ANYTHING in subtemplates_to_spawn)
 		subtemplates_to_spawn -= mark
 		mark.load_template()
 	subtemplates_to_spawn = null

@@ -22,7 +22,7 @@
 	var/target = href_list["target"]
 	var/value = text2num(href_list["value"])
 	if (href_list["value"] && !isnum(value))
-		to_chat(usr, "Non-numeric value was given")
+		to_chat(usr, "Non-numeric value was given.")
 		return 0
 
 
@@ -125,7 +125,7 @@
 					src.env_editor = new (src.player)
 				src.env_editor.ui_interact(usr)
 			else
-				to_chat(usr, "Virtual environment is disabled")
+				to_chat(usr, "Virtual environment is disabled.")
 
 		if ("show_echo_editor")
 			if (!src.echo_editor)

@@ -66,7 +66,7 @@
 
 	var/obj/item/organ/O = target.get_organ(LAZYACCESS(global.surgeries_in_progress["\ref[target]"], target_zone))
 	if(!istype(O)) //Blergh
-		O = target.get_internal_organ(LAZYACCESS(global.surgeries_in_progress["\ref[target]"], target_zone))
+		O = target.get_organ(LAZYACCESS(global.surgeries_in_progress["\ref[target]"], target_zone))
 	O.germ_level = min(INFECTION_LEVEL_ONE, O.germ_level * 0.4)
 	if(istype(O,/obj/item/organ/external))
 		var/obj/item/organ/external/E = O
@@ -146,7 +146,7 @@
 
 /decl/surgery_step/necrotic/regeneration/end_step(mob/living/user, mob/living/target, target_zone, obj/item/tool)
 	var/target_organ = LAZYACCESS(global.surgeries_in_progress["\ref[target]"], target_zone)
-	var/obj/item/organ/O = target.get_organ(target_organ) || target.get_internal_organ(target_organ)
+	var/obj/item/organ/O = target.get_organ(target_organ) || target.get_organ(target_organ)
 	var/obj/item/chems/C = tool
 	var/temp_holder = new /obj()
 	var/amount = C.amount_per_transfer_from_this
@@ -172,7 +172,7 @@
 	if(!istype(tool) || !tool.reagents)
 		return
 	var/obj/item/chems/container = tool
-	var/obj/item/organ/affected = target.get_organ(LAZYACCESS(global.surgeries_in_progress["\ref[target]"], target_zone)) || target.get_internal_organ(LAZYACCESS(global.surgeries_in_progress["\ref[target]"], target_zone))
+	var/obj/item/organ/affected = target.get_organ(LAZYACCESS(global.surgeries_in_progress["\ref[target]"], target_zone)) || target.get_organ(LAZYACCESS(global.surgeries_in_progress["\ref[target]"], target_zone))
 	tool.reagents.trans_to_mob(target, container.amount_per_transfer_from_this, CHEM_INJECT)
 	user.visible_message(
 		SPAN_DANGER("\The [user]'s hand slips, spilling \the [tool]'s contents over the [target]'s [affected.name]!") , \

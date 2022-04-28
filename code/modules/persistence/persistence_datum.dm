@@ -18,7 +18,7 @@
 
 /decl/persistence_handler/proc/SetFilename()
 	if(name)
-		filename = "data/persistent/[lowertext(global.using_map.name)]-[lowertext(name)].json"
+		filename = "data/persistent/[ckey(global.using_map.name)]-[ckey(name)].json"
 	if(!isnull(entries_decay_at) && !isnull(entries_expire_at))
 		entries_decay_at = FLOOR(entries_expire_at * entries_decay_at)
 
@@ -126,17 +126,6 @@
 	for(var/thing in SSpersistence.tracking_values[type])
 		if(IsValidEntry(thing))
 			entries += list(CompileEntry(thing))
-
-#if DM_VERSION < 513 || (DM_VERSION == 513 && DM_BUILD < 1540)
-	for(var/list/entry in entries)
-		for(var/i in 1 to entry.len)
-			var/item = entry[i]
-			var/encoded_value = (istext(entry[item]) ? url_encode(entry[item]) : entry[item])
-			var/encoded_key = url_encode(item)
-			entry[i] = encoded_key
-			entry[encoded_key] = encoded_value
-	entries.Insert(1, list(list("url_encoded" = TRUE)))
-#endif
 
 	if(fexists(filename))
 		fdel(filename)

@@ -197,7 +197,7 @@
 
 	if(malfunction_check(usr))
 		return
-	
+
 	if(!check_power_cost(usr, 0, 0, 0, 0))
 		return
 
@@ -217,8 +217,9 @@
 	var/obj/item/rig_module/module = input("Which module do you wish to select?") as null|anything in selectable
 
 	if(!istype(module))
-		deselect_module()
-		to_chat(usr, "<font color='blue'><b>Primary system is now: deselected.</b></font>")
+		if(selected_module)
+			deselect_module()
+			to_chat(usr, "<font color='blue'><b>Primary system is now: deselected.</b></font>")
 		return
 
 	module.select()

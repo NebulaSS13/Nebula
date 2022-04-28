@@ -12,7 +12,7 @@
 /decl/material/liquid/eyedrops/affect_blood(var/mob/living/M, var/alien, var/removed, var/datum/reagents/holder)
 	if(ishuman(M))
 		var/mob/living/carbon/human/H = M
-		var/obj/item/organ/internal/eyes/E = H.get_internal_organ(BP_EYES)
+		var/obj/item/organ/internal/eyes/E = H.get_organ(BP_EYES)
 		if(E && istype(E) && !E.is_broken())
 			ADJ_STATUS(M, STAT_BLURRY, -5) 
 			ADJ_STATUS(M, STAT_BLIND, -5)
@@ -52,7 +52,7 @@
 	if(ishuman(M))
 		M.add_chemical_effect(CE_BLOCKAGE, (15 + REAGENT_VOLUME(holder, type))/100)
 		var/mob/living/carbon/human/H = M
-		for(var/obj/item/organ/external/E in H.organs)
+		for(var/obj/item/organ/external/E in H.get_external_organs())
 			if(E.status & ORGAN_ARTERY_CUT && prob(2 + REAGENT_VOLUME(holder, type) / overdose))
 				E.status &= ~ORGAN_ARTERY_CUT
 
@@ -249,7 +249,7 @@
 	. = ..()
 	if(ishuman(M))
 		var/mob/living/carbon/human/H = M
-		for(var/obj/item/organ/external/E in H.organs)
+		for(var/obj/item/organ/external/E in H.get_external_organs())
 			if(!BP_IS_PROSTHETIC(E) && prob(25) && !(E.status & ORGAN_MUTATED))
 				E.mutate()
 				E.limb_flags |= ORGAN_FLAG_DEFORMED
@@ -296,7 +296,7 @@
 		if(ishuman(M))
 			var/mob/living/carbon/human/H = M
 			if(H.resuscitate())
-				var/obj/item/organ/internal/heart = H.get_internal_organ(BP_HEART)
+				var/obj/item/organ/internal/heart = H.get_organ(BP_HEART)
 				heart.take_internal_damage(heart.max_damage * 0.15)
 
 /decl/material/liquid/stabilizer

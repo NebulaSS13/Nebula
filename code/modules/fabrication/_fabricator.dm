@@ -63,6 +63,12 @@
 	// If TRUE, fills fabricator with material on initalize
 	var/prefilled = FALSE
 
+	//Collapsing Menus stuff
+	var/ui_expand_queue     = FALSE
+	var/ui_expand_resources = FALSE
+	var/ui_expand_config    = FALSE
+	var/ui_nb_categories    = 1      //Cached amount of categories in loaded designs. Used to decide if we display the category filter or not 
+
 /obj/machinery/fabricator/Destroy()
 	QDEL_NULL(currently_building)
 	QDEL_NULL_LIST(queued_orders)
@@ -142,7 +148,9 @@
 	if(length(unlocked_tech))
 		design_cache |= unlocked_tech
 
+	var/list/unique_categories
 	for(var/datum/fabricator_recipe/R in design_cache)
+		LAZYDISTINCTADD(unique_categories, R.category)
 		if(!length(R.species_locked))
 			continue
 
@@ -156,6 +164,7 @@
 				return
 
 	design_cache = sortTim(design_cache, /proc/cmp_name_asc)
+	ui_nb_categories = LAZYLEN(unique_categories)
 
 /obj/machinery/fabricator/state_transition(var/decl/machine_construction/default/new_state)
 	. = ..()

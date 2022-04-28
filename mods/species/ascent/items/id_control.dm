@@ -34,26 +34,25 @@
 	parent_organ = BP_CHEST
 	organ_tag = BP_SYSTEM_CONTROLLER
 	surface_accessible = TRUE
+	status = ORGAN_PROSTHETIC
 	var/obj/item/card/id/id_card = /obj/item/card/id/ascent
 
-/obj/item/organ/internal/controller/replaced(mob/living/carbon/human/target, obj/item/organ/external/affected)
+/obj/item/organ/internal/controller/do_install(mob/living/carbon/human/target, obj/item/organ/external/affected, in_place, update_icon, detached)
 	. = ..()
-	if(owner)
+	if(!detached && owner)
+		owner.set_id_info(id_card)
 		owner.add_language(/decl/language/mantid/worldnet)
 
-/obj/item/organ/internal/controller/removed(mob/living/user, drop_organ, detach)
+/obj/item/organ/internal/controller/do_uninstall(in_place, detach, ignore_children)
 	var/mob/living/carbon/H = owner
 	. = ..()
-	if(istype(H) && H != owner && !(locate(type) in H.internal_organs))
+	if(istype(H) && H != owner && !(locate(type) in H.get_internal_organs()))
 		H.remove_language(/decl/language/mantid/worldnet)
 
 /obj/item/organ/internal/controller/Initialize()
 	if(ispath(id_card))
 		id_card = new id_card(src)
 	. = ..()
-	robotize()
-	if(owner)
-		owner.set_id_info(id_card)
 
 /obj/item/organ/internal/controller/GetIdCard()
 	//Not using is_broken() because it should be able to function when CUT_AWAY is set

@@ -323,7 +323,7 @@
 	queue_icon_update()
 
 /obj/structure/fire_source/on_update_icon()
-	cut_overlays()
+	..()
 	if((fuel || length(contents)) && (lit != FIRE_DEAD))
 		add_overlay("[icon_state]_full")
 	switch(lit)

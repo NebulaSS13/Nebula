@@ -4,7 +4,7 @@
 	set desc = "Usage: Capture-Map-Part target_x_cord target_y_cord target_z_cord range (captures part of a map originating from bottom left corner)"
 
 	if(!check_rights(R_ADMIN|R_DEBUG|R_SERVER))
-		to_chat(usr, "You are not allowed to use this command")
+		to_chat(usr, "You are not allowed to use this command.")
 		return
 
 	if(isnull(tx) || isnull(ty) || isnull(tz) || isnull(range))
@@ -57,7 +57,7 @@
 	set desc = "Usage: Capture-Map target_z_cord (captures map)"
 
 	if(!check_rights(R_ADMIN|R_DEBUG|R_SERVER))
-		to_chat(usr, "You are not allowed to use this command")
+		to_chat(usr, "You are not allowed to use this command.")
 		return
 
 	if(isnull(tz))

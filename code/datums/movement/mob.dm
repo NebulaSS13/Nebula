@@ -13,12 +13,15 @@
 		control_object.set_dir(direction)
 
 // Death handling
-/datum/movement_handler/mob/death/DoMove()
-	if(mob.stat != DEAD)
+/datum/movement_handler/mob/death/DoMove(var/direction, var/mob/mover)
+	if(mob != mover || mob.stat != DEAD)
 		return
+
 	. = MOVEMENT_HANDLED
+
 	if(!mob.client)
 		return
+
 	mob.ghostize()
 
 // Incorporeal/Ghost movement
@@ -95,7 +98,7 @@
 
 /datum/movement_handler/mob/delay/DoMove(var/direction, var/mover, var/is_external)
 	if(!is_external)
-		var/delay = max(1, mob.movement_delay())
+		var/delay = max(1, mob.get_movement_delay(direction))
 		if(direction & (direction - 1)) //moved diagonally successfully
 			delay *= sqrt(2)
 		next_move = world.time + delay

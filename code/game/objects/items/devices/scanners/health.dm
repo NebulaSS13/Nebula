@@ -82,7 +82,7 @@
 	// Brain activity.
 	var/brain_result = "normal"
 	if(H.should_have_organ(BP_BRAIN))
-		var/obj/item/organ/internal/brain/brain = H.get_internal_organ(BP_BRAIN)
+		var/obj/item/organ/internal/brain/brain = H.get_organ(BP_BRAIN)
 		if(!brain || H.stat == DEAD || (H.status_flags & FAKEDEATH))
 			brain_result = "<span class='scan_danger'>none, patient is braindead</span>"
 		else if(H.stat != DEAD)
@@ -183,8 +183,7 @@
 		dat += "<span class='scan_red'>[b]Severe anatomical damage detected.[endb]</span>"
 
 	if(skill_level >= SKILL_BASIC)
-		for(var/name in H.organs_by_name)
-			var/obj/item/organ/external/e = H.organs_by_name[name]
+		for(var/obj/item/organ/external/e in H.get_external_organs())
 			if(!e)
 				continue
 			var/limb = e.name
@@ -196,8 +195,7 @@
 			if(e.has_growths())
 				dat += "<span class='scan_warning'>Abnormal internal growths detected in subject [limb]. Surgical removal recommended.</span>"
 
-		for(var/name in H.organs_by_name)
-			var/obj/item/organ/external/e = H.organs_by_name[name]
+		for(var/obj/item/organ/external/e in H.get_external_organs())
 			if(e && e.status & ORGAN_BROKEN)
 				dat += "<span class='scan_warning'>Bone fractures detected. Advanced scanner required for location.</span>"
 				break
@@ -205,7 +203,7 @@
 		var/found_bleed
 		var/found_tendon
 		var/found_disloc
-		for(var/obj/item/organ/external/e in H.organs)
+		for(var/obj/item/organ/external/e in H.get_external_organs())
 			if(e)
 				if(!found_disloc && e.dislocated == 2)
 					dat += "<span class='scan_warning'>Dislocation detected. Advanced scanner required for location.</span>"

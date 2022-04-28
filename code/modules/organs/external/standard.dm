@@ -26,18 +26,21 @@
 /obj/item/organ/external/chest/proc/get_current_skin()
 	return
 
-/obj/item/organ/external/chest/robotize(var/company = /decl/prosthetics_manufacturer, var/skip_prosthetics, var/keep_organs, var/apply_material = /decl/material/solid/metal/steel)
-	if(..())
-		// Give them a new cell.
-		var/obj/item/organ/internal/cell/C = owner.get_internal_organ(BP_CELL)
-		if(!istype(C))
-			owner.internal_organs_by_name[BP_CELL] = new /obj/item/organ/internal/cell(owner,1)
-
 /obj/item/organ/external/get_scan_results()
 	. = ..()
 	var/obj/item/organ/internal/lungs/L = locate() in src
 	if( L && L.is_bruised())
 		. += "Lung ruptured"
+
+/obj/item/organ/external/chest/die() 
+	//Special handling for synthetics 
+	if(BP_IS_PROSTHETIC(src) || BP_IS_CRYSTAL(src))
+		return
+	. = ..()
+
+//Can't drop root limb
+/obj/item/organ/external/chest/is_droppable()
+	return FALSE
 
 /obj/item/organ/external/groin
 	name = "lower body"
@@ -55,6 +58,12 @@
 	artery_name = "iliac artery"
 	cavity_name = "abdominal"
 	limb_flags = ORGAN_FLAG_CAN_AMPUTATE | ORGAN_FLAG_CAN_BREAK
+
+/obj/item/organ/external/groin/die() 
+	//Special handling for synthetics 
+	if(BP_IS_PROSTHETIC(src) || BP_IS_CRYSTAL(src))
+		return
+	. = ..()
 
 /obj/item/organ/external/arm
 	organ_tag = BP_L_ARM
@@ -151,19 +160,12 @@
 	var/gripper_ui_loc = ui_lhand
 	var/overlay_slot_id = BP_L_HAND
 
-/obj/item/organ/external/hand/Initialize()
-	. = ..()
+/obj/item/organ/external/hand/do_install(mob/living/carbon/human/target, affected, in_place, update_icon, detached)
+	if(!(. = ..()))
+		return
 	owner?.add_held_item_slot(organ_tag, gripper_ui_loc, overlay_slot_id, gripper_ui_label)
 
-/obj/item/organ/external/hand/replaced(mob/living/carbon/human/target)
-	. = ..()
-	owner?.add_held_item_slot(organ_tag, gripper_ui_loc, overlay_slot_id, gripper_ui_label)
-
-/obj/item/organ/external/hand/Destroy()
-	owner?.remove_held_item_slot(organ_tag)
-	. = ..()
-
-/obj/item/organ/external/hand/removed()
+/obj/item/organ/external/hand/do_uninstall(in_place, detach, ignore_children, update_icon)
 	owner?.remove_held_item_slot(organ_tag)
 	. = ..()
 

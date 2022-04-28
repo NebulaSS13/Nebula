@@ -172,14 +172,31 @@
 				qdel(terminal)
 		return TRUE
 
+/obj/item/stock_parts/power/terminal/get_source_info()
+	. =  "The machine can receive power by direct connection to the powernet. "
+	if(terminal)
+		if(!terminal.get_powernet())
+			. += "The power terminal must be connected to the powernet using additional cables."
+		else
+			. += "The connected powernet must be powered."
+	else
+		. += "Add cables to the machine to construct a power terminal."
+
 /obj/item/stock_parts/power/terminal/buildable
 	part_flags = PART_FLAG_HAND_REMOVE
 	material = /decl/material/solid/metal/steel
+
+/decl/stock_part_preset/terminal_connect
+	expected_part_type = /obj/item/stock_parts/power/terminal
+
+/decl/stock_part_preset/terminal_connect/apply(obj/machinery/machine, var/obj/item/stock_parts/power/terminal/part)
+	var/obj/machinery/power/terminal/term = locate() in machine.loc
+	if(istype(term) && !term.master)
+		part.set_terminal(machine, term)
 
 /decl/stock_part_preset/terminal_setup
 	expected_part_type = /obj/item/stock_parts/power/terminal
 
 /decl/stock_part_preset/terminal_setup/apply(obj/machinery/machine, var/obj/item/stock_parts/power/terminal/part)
-	var/obj/machinery/power/terminal/term = locate() in machine.loc
-	if(istype(term) && !term.master)
-		part.set_terminal(machine, term)
+	if(isturf(machine.loc))
+		part.make_terminal(machine)

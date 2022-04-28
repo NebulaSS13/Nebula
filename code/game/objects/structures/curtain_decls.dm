@@ -3,7 +3,7 @@
 //
 /decl/curtain_kind
 	var/name = "curtain"
-	var/color = "white"
+	var/color = COLOR_WHITE
 	var/alpha = 255
 	var/material_key = /decl/material/solid/plastic
 
@@ -56,7 +56,7 @@
 	color = "#ffa500"
 
 /decl/curtain_kind/plastic/shower/security
-	color = "#aa0000"
+	color = COLOR_DARK_RED
 
 /decl/curtain_kind/plastic/canteen
 	name = "privacy curtain"

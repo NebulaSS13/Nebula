@@ -90,7 +90,7 @@
 					 /obj/item/folder/red,
 					 /obj/item/folder/yellow,
 					 /obj/item/hand_labeler,
-					 /obj/item/tape_roll,
+					 /obj/item/ducttape,
 					 /obj/structure/filingcabinet/chestdrawer,
 					 /obj/item/paper_bin)
 	name = "Office supplies"

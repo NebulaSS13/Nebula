@@ -8,6 +8,7 @@
 	obj_flags = OBJ_FLAG_ROTATABLE
 
 	var/propelled = 0 // Check for fire-extinguisher-driven chairs
+	var/has_special_overlay = FALSE
 
 /obj/structure/bed/chair/do_simple_ranged_interaction(var/mob/user)
 	if(!buckled_mob && user)
@@ -20,33 +21,38 @@
 
 /obj/structure/bed/chair/on_update_icon()
 	..()
-	var/new_overlays
 	var/image/I = image(icon, "[icon_state]_over")
 	I.layer = buckled_mob ? ABOVE_HUMAN_LAYER : FLOAT_LAYER
 	if(material_alteration & MAT_FLAG_ALTERATION_COLOR)
 		I.appearance_flags |= RESET_COLOR
 		I.color = material.color
-	LAZYADD(new_overlays, I)
+	add_overlay(I)
 	I = image(icon, "[icon_state]_armrest")
 	I.layer = buckled_mob ? ABOVE_HUMAN_LAYER : FLOAT_LAYER
 	if(material_alteration & MAT_FLAG_ALTERATION_COLOR)
 		I.appearance_flags |= RESET_COLOR
 		I.color = material.color
-	LAZYADD(new_overlays, I)
+	add_overlay(I)
 	if(reinf_material)
 		I =  image(icon, "[icon_state]_padding_over")
 		I.layer = buckled_mob ? ABOVE_HUMAN_LAYER : FLOAT_LAYER
 		if(material_alteration & MAT_FLAG_ALTERATION_COLOR)
 			I.appearance_flags |= RESET_COLOR
 			I.color = reinf_material.color
-		LAZYADD(new_overlays, I)
+		add_overlay(I)
 		I = image(icon, "[icon_state]_padding_armrest")
 		I.layer = buckled_mob ? ABOVE_HUMAN_LAYER : FLOAT_LAYER
 		if(material_alteration & MAT_FLAG_ALTERATION_COLOR)
 			I.appearance_flags |= RESET_COLOR
 			I.color = reinf_material.color
-		LAZYADD(new_overlays, I)
-	overlays += new_overlays
+		add_overlay(I)
+	if(has_special_overlay)
+		I = image(icon, "[icon_state]_special")
+		I.layer = buckled_mob ? ABOVE_HUMAN_LAYER : FLOAT_LAYER
+		if(material_alteration & MAT_FLAG_ALTERATION_COLOR)
+			I.appearance_flags |= RESET_COLOR
+			I.color = material.color
+		add_overlay(I)
 
 /obj/structure/bed/chair/rotate(mob/user)
 	if(!CanPhysicallyInteract(user))
@@ -111,16 +117,7 @@
 	buckle_movable = 1
 	material = /decl/material/solid/metal/steel
 	reinf_material = /decl/material/solid/cloth/blue
-
-/obj/structure/bed/chair/comfy/captain/on_update_icon()
-	..()
-	if(buckled_mob)
-		var/image/I = image(icon, "[icon_state]_special")
-		I.layer = buckled_mob ? ABOVE_HUMAN_LAYER : FLOAT_LAYER
-		if(material_alteration & MAT_FLAG_ALTERATION_COLOR)
-			I.appearance_flags |= RESET_COLOR
-			I.color = material.color
-		overlays |= I
+	has_special_overlay = TRUE
 
 /obj/structure/bed/chair/armchair
 	name = "armchair"
@@ -153,7 +150,7 @@
 	icon_state = "officechair"
 	anchored = 0
 	buckle_movable = 1
-	atom_flags = ATOM_FLAG_WHEELED
+	movable_flags = MOVABLE_FLAG_WHEELED
 
 /obj/structure/bed/chair/office/Move()
 	. = ..()
@@ -223,12 +220,39 @@
 /obj/structure/bed/chair/office/comfy/yellow
 	reinf_material = /decl/material/solid/cloth/yellow
 
+/obj/structure/bed/chair/rounded
+	name = "rounded chair"
+	desc = "It's a rounded chair. It looks comfy."
+	icon_state = "roundedchair"
+
+/obj/structure/bed/chair/rounded/brown
+	reinf_material = /decl/material/solid/leather
+/obj/structure/bed/chair/rounded/red
+	reinf_material = /decl/material/solid/carpet
+/obj/structure/bed/chair/rounded/teal
+	reinf_material = /decl/material/solid/cloth/teal
+/obj/structure/bed/chair/rounded/black
+	reinf_material = /decl/material/solid/cloth/black
+/obj/structure/bed/chair/rounded/green
+	reinf_material = /decl/material/solid/cloth/green
+/obj/structure/bed/chair/rounded/purple
+	reinf_material = /decl/material/solid/cloth/purple
+/obj/structure/bed/chair/rounded/blue
+	reinf_material = /decl/material/solid/cloth/blue
+/obj/structure/bed/chair/rounded/beige
+	reinf_material = /decl/material/solid/cloth/beige
+/obj/structure/bed/chair/rounded/lime
+	reinf_material = /decl/material/solid/cloth/lime
+/obj/structure/bed/chair/rounded/yellow
+	reinf_material = /decl/material/solid/cloth/yellow
+
 /obj/structure/bed/chair/shuttle
 	name = "shuttle seat"
 	desc = "A comfortable, secure seat. It has a sturdy-looking buckling system for smoother flights."
 	icon_state = "shuttle_chair"
 	buckle_sound = 'sound/effects/metal_close.ogg'
 	material = /decl/material/solid/metal/steel
+	has_special_overlay = TRUE
 
 /obj/structure/bed/chair/shuttle/post_buckle_mob()
 	if(buckled_mob)
@@ -236,16 +260,6 @@
 	else
 		icon_state = "shuttle_chair"
 	..()
-
-/obj/structure/bed/chair/shuttle/on_update_icon()
-	..()
-	if(buckled_mob)
-		var/image/I = image(icon, "[icon_state]_special")
-		I.layer = buckled_mob ? ABOVE_HUMAN_LAYER : FLOAT_LAYER
-		if(material_alteration & MAT_FLAG_ALTERATION_COLOR)
-			I.appearance_flags |= RESET_COLOR
-			I.color = material.color
-		overlays |= I
 
 /obj/structure/bed/chair/shuttle/blue
 	reinf_material = /decl/material/solid/cloth/blue

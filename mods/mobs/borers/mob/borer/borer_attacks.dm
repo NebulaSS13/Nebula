@@ -18,7 +18,7 @@
 	// end TODO
 
 	var/mob/living/carbon/human/H = M
-	var/obj/item/organ/external/E = H.organs_by_name[BP_HEAD]
+	var/obj/item/organ/external/E = H.get_organ(BP_HEAD)
 	if(!E || E.is_stump())
 		to_chat(src, SPAN_WARNING("\The [H] does not have a head!"))
 		return
@@ -54,7 +54,7 @@
 		borers.add_antagonist_mind(host.mind, 1, borers.faction_name, borers.faction_welcome)
 
 	if(istype(host, /mob/living/carbon/human))
-		var/obj/item/organ/I = H.get_internal_organ(BP_BRAIN)
+		var/obj/item/organ/I = H.get_organ(BP_BRAIN)
 		if(!I) // No brain organ, so the borer moves in and replaces it permanently.
 			replace_brain()
 		else if(E) // If they're in normally, implant removal can get them out.

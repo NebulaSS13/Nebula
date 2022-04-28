@@ -15,7 +15,10 @@
 /obj/machinery/atmospherics/relaymove(mob/living/user, direction)
 	if(user.loc != src || !(direction & initialize_directions)) //can't go in a way we aren't connecting to
 		return
-	ventcrawl_to(user,findConnecting(direction),direction)
+
+	// Only cardinals allowed.
+	direction = FIRST_DIR(direction)
+	ventcrawl_to(user,findConnecting(direction), direction)
 
 /obj/machinery/atmospherics/proc/ventcrawl_to(var/mob/living/user, var/obj/machinery/atmospherics/target_move, var/direction)
 	if(target_move)
@@ -37,7 +40,7 @@
 			user.remove_ventcrawl()
 			user.forceMove(src.loc)
 			user.visible_message("You hear something squeezing through the pipes.", "You climb out the ventilation system.")
-	user.SetMoveCooldown(user.movement_delay())
+	user.SetMoveCooldown(user.get_movement_delay(direction))
 
 /obj/machinery/atmospherics/proc/can_crawl_through()
 	return 1

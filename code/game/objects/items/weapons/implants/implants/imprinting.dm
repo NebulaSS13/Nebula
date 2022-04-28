@@ -105,7 +105,7 @@
 /obj/item/implant/imprinting/can_implant(mob/M, mob/user, target_zone)
 	var/mob/living/carbon/human/H = M	
 	if(istype(H))
-		var/obj/item/organ/internal/B = H.get_internal_organ(BP_BRAIN)
+		var/obj/item/organ/internal/B = H.get_organ(BP_BRAIN)
 		if(!B || H.isSynthetic())
 			to_chat(user, "<span class='warning'>\The [M] cannot be imprinted.</span>")
 			return FALSE

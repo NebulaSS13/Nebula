@@ -43,7 +43,7 @@
 
 	if(!device.stored_stick)
 		if(usr)
-			to_chat(usr, "There is no [get_currency_name()]-stick in \the [src]")
+			to_chat(usr, "There is no [get_currency_name()]-stick in \the [src].")
 		return
 
 	device.eject_stick(usr)

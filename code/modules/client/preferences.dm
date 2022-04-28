@@ -83,7 +83,9 @@ var/global/list/time_prefs_fixed = list()
 	player_setup = new(src)
 	gender = pick(MALE, FEMALE)
 	real_name = get_random_name()
-	b_type = RANDOM_BLOOD_TYPE
+
+	var/decl/species/species = get_species_by_key(global.using_map.default_species)
+	b_type = pickweight(species.blood_types)
 
 	if(client)
 		if(IsGuestKey(client.key))
@@ -338,7 +340,7 @@ var/global/list/time_prefs_fixed = list()
 	// Sanitizing rather than saving as someone might still be editing when copy_to occurs.
 	player_setup.sanitize_setup()
 	character.personal_aspects = list()
-	character.set_species(species)
+	character.change_species(species)
 	character.set_bodytype((character.species.get_bodytype_by_name(bodytype) || character.species.default_bodytype), FALSE)
 
 	if(be_random_name)
@@ -372,8 +374,6 @@ var/global/list/time_prefs_fixed = list()
 	character.h_style = h_style
 	character.f_style = f_style
 
-	character.species.handle_limbs_setup(character)
-
 	QDEL_NULL_LIST(character.worn_underwear)
 	character.worn_underwear = list()
 
@@ -391,8 +391,7 @@ var/global/list/time_prefs_fixed = list()
 
 	character.backpack_setup = new(backpack, backpack_metadata["[backpack]"])
 
-	for(var/N in character.organs_by_name)
-		var/obj/item/organ/external/O = character.organs_by_name[N]
+	for(var/obj/item/organ/external/O in character.get_external_organs())
 		LAZYCLEARLIST(O.markings)
 
 	for(var/M in body_markings)
@@ -400,7 +399,7 @@ var/global/list/time_prefs_fixed = list()
 		var/mark_color = "[body_markings[M]]"
 
 		for(var/BP in mark_datum.body_parts)
-			var/obj/item/organ/external/O = character.organs_by_name[BP]
+			var/obj/item/organ/external/O = character.get_organ(BP)
 			if(O)
 				LAZYSET(O.markings, M, mark_color)
 

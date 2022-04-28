@@ -79,7 +79,7 @@
 							visible = TRUE
 							break
 				if(visible)
-					to_chat(mob, SPAN_NOTICE("You see a bright light to \the [dir2text(get_dir(T,TO))]"))
+					to_chat(mob, SPAN_NOTICE("You see a bright light to \the [dir2text(get_dir(T,TO))]."))
 			CHECK_TICK
 
 /obj/item/projectile/energy/electrode	//has more pain than a beam because it's harder to hit

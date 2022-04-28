@@ -320,7 +320,7 @@
 
 	spawn(0)
 		var/newname
-		newname = sanitizeName(input(src,"You are a robot. Enter a name, or leave blank for the default name.", "Name change","") as text, MAX_NAME_LEN, allow_numbers = 1)
+		newname = sanitize_name(input(src,"You are a robot. Enter a name, or leave blank for the default name.", "Name change","") as text, MAX_NAME_LEN, allow_numbers = 1)
 		if (newname)
 			custom_name = newname
 
@@ -623,7 +623,7 @@
 			to_chat(user, "Unable to locate a radio.")
 	else if (istype(W, /obj/item/card/id)||istype(W, /obj/item/modular_computer)||istype(W, /obj/item/card/robot))			// trying to unlock the interface with an ID card
 		if(emagged)//still allow them to open the cover
-			to_chat(user, "The interface seems slightly damaged")
+			to_chat(user, "The interface seems slightly damaged.")
 		if(opened)
 			to_chat(user, "You must close the cover to swipe an ID card.")
 		else
@@ -794,7 +794,7 @@
 			return TOPIC_HANDLED
 
 		if(activated(O))
-			to_chat(src, "Already activated")
+			to_chat(src, "Already activated.")
 			return TOPIC_HANDLED
 		if(!module_state_1)
 			module_state_1 = O
@@ -834,7 +834,7 @@
 			else
 				to_chat(src, "Module isn't activated.")
 		else
-			to_chat(src, "Module isn't activated")
+			to_chat(src, "Module isn't activated.")
 		installed_modules()
 		return TOPIC_HANDLED
 	return ..()
@@ -1037,7 +1037,7 @@
 		if(emagged)
 			return //Prevents the X has hit Y with Z message also you cant emag them twice
 		if(wiresexposed)
-			to_chat(user, "You must close the panel first")
+			to_chat(user, "You must close the panel first.")
 			return
 		else
 			sleep(6)

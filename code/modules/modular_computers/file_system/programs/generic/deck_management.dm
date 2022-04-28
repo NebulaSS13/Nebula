@@ -7,7 +7,7 @@
 	filename = "deckmngr"
 	filedesc = "Deck Management"
 	nanomodule_path = /datum/nano_module/deck_management
-	required_access = list(list(access_cargo, access_bridge))
+	required_access = list(list(access_mining, access_cargo, access_bridge))
 	program_icon_state = "request"
 	program_key_state = "rd_key"
 	program_menu_icon = "clock"

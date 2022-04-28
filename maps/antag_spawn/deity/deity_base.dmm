@@ -16,7 +16,7 @@
 	},
 /area/map_template/deity_spawn)
 "d" = (
-/obj/effect/landmark{
+/obj/abstract/landmark{
 	name = "DeitySpawn"
 	},
 /turf/unsimulated/floor{
@@ -25,7 +25,7 @@
 	},
 /area/map_template/deity_spawn)
 "e" = (
-/obj/effect/landmark{
+/obj/abstract/landmark{
 	name = "DeitySpawn"
 	},
 /turf/unsimulated/floor{

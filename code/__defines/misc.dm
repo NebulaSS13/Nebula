@@ -272,7 +272,20 @@
 #define INTENT_HOTKEY_LEFT  "left"
 #define INTENT_HOTKEY_RIGHT "right"
 
+//Turf/area values for 'this space is outside' checks
+#define OUTSIDE_AREA null
+#define OUTSIDE_NO   FALSE
+#define OUTSIDE_YES  TRUE
+
+// Weather exposure values for being rained on or hailed on.
+#define WEATHER_IGNORE    -1
+#define WEATHER_PROTECTED  0
+#define WEATHER_EXPOSED    1
+
 // Literacy check constants.
 #define WRITTEN_SKIP     0
 #define WRITTEN_PHYSICAL 1
 #define WRITTEN_DIGITAL  2
+
+// arbitrary low pressure bound for wind weather effects
+#define MIN_WIND_PRESSURE 10

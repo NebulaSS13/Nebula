@@ -7,7 +7,7 @@
 
 	idle_power_usage = 13600
 	var/initial_id_tag
-	var/obj/machinery/power/fusion_core/harvest_from
+	var/obj/machinery/fusion_core/harvest_from
 
 /obj/machinery/atmospherics/unary/engine/fusion/Initialize()
 	..()
@@ -30,7 +30,7 @@
 	var/datum/local_network/lan = lanm.get_local_network()
 
 	if(lan)	
-		var/list/fusion_cores = lan.get_devices(/obj/machinery/power/fusion_core)
+		var/list/fusion_cores = lan.get_devices(/obj/machinery/fusion_core)
 		if(fusion_cores && fusion_cores.len)
 			harvest_from = fusion_cores[1]
 	return harvest_from

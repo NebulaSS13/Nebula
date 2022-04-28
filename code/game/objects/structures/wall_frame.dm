@@ -94,10 +94,8 @@
 	if(istype(mover) && mover.checkpass(PASS_FLAG_TABLE))
 		return 1
 
-// icon related
-
 /obj/structure/wall_frame/on_update_icon()
-	overlays.Cut()
+	..()
 	var/image/I
 	var/new_color = stripe_color ? stripe_color : material.color
 
@@ -108,8 +106,7 @@
 		else
 			I = image(icon, "frame[conn]", dir = BITFLAG(i-1))
 		I.color = new_color
-		overlays += I
-
+		add_overlay(I)
 
 /obj/structure/wall_frame/proc/paint_wall_frame(var/new_paint_color)
 	paint_color = new_paint_color

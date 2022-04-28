@@ -94,6 +94,7 @@ var/global/list/admin_verbs_admin = list(
 	/datum/admins/proc/show_aspects
 )
 var/global/list/admin_verbs_ban = list(
+	/client/proc/DB_ban_panel,
 	/client/proc/unban_panel,
 	/client/proc/jobbans
 	)
@@ -214,7 +215,10 @@ var/global/list/admin_verbs_debug = list(
 	/client/proc/print_cargo_prices,
 	/client/proc/resend_nanoui_templates,
 	/client/proc/display_del_log,
-	/client/proc/spawn_ore_pile
+	/client/proc/spawn_ore_pile,
+	/datum/admins/proc/force_initialize_weather,
+	/datum/admins/proc/force_weather_state,
+	/datum/admins/proc/force_kill_weather
 	)
 
 var/global/list/admin_verbs_paranoid_debug = list(
@@ -658,7 +662,7 @@ var/global/list/admin_verbs_mod = list(
 	var/mob/living/silicon/S = input("Select silicon.", "Rename Silicon.") as null|anything in global.silicon_mob_list
 	if(!S) return
 
-	var/new_name = sanitizeSafe(input(src, "Enter new name. Leave blank or as is to cancel.", "[S.real_name] - Enter new silicon name", S.real_name))
+	var/new_name = sanitize_safe(input(src, "Enter new name. Leave blank or as is to cancel.", "[S.real_name] - Enter new silicon name", S.real_name))
 	if(new_name && new_name != S.real_name)
 		log_and_message_admins("has renamed the silicon '[S.real_name]' to '[new_name]'")
 		S.fully_replace_character_name(new_name)

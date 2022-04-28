@@ -10,7 +10,7 @@
 	set_status(STAT_STUN, 1)
 	icon = null
 	set_invisibility(101)
-	for(var/t in organs)
+	for(var/t in get_external_organs())
 		qdel(t)
 	var/atom/movable/overlay/animation = new /atom/movable/overlay(src)
 	animation.icon_state = "blank"
@@ -30,7 +30,7 @@
 
 	for(var/obj/item/W in src)
 		drop_from_inventory(W)
-	set_species(species.primitive_form)
+	change_species(species.primitive_form)
 	dna.SetSEState(global.MONKEYBLOCK,1)
 	dna.SetSEValueRange(global.MONKEYBLOCK,0xDAC, 0xFFF)
 
@@ -46,7 +46,7 @@
 /mob/living/carbon/human/AIize(move=1) // 'move' argument needs defining here too because BYOND is dumb
 	if (HAS_TRANSFORMATION_MOVEMENT_HANDLER(src))
 		return
-	for(var/t in organs)
+	for(var/t in get_external_organs())
 		qdel(t)
 	QDEL_NULL_LIST(worn_underwear)
 	return ..(move)
@@ -77,21 +77,21 @@
 
 	if(move)
 		var/obj/loc_landmark
-		for(var/obj/effect/landmark/start/sloc in global.landmarks_list)
+		for(var/obj/abstract/landmark/start/sloc in global.landmarks_list)
 			if (sloc.name != "AI")
 				continue
 			if (locate(/mob/living) in sloc.loc)
 				continue
 			loc_landmark = sloc
 		if (!loc_landmark)
-			for(var/obj/effect/landmark/tripai in global.landmarks_list)
+			for(var/obj/abstract/landmark/tripai in global.landmarks_list)
 				if (tripai.name == "tripai")
 					if((locate(/mob/living) in tripai.loc) || (locate(/obj/structure/aicore) in tripai.loc))
 						continue
 					loc_landmark = tripai
 		if (!loc_landmark)
 			to_chat(O, "Oh god sorry we can't find an unoccupied AI spawn location, so we're spawning you on top of someone.")
-			for(var/obj/effect/landmark/start/sloc in global.landmarks_list)
+			for(var/obj/abstract/landmark/start/sloc in global.landmarks_list)
 				if (sloc.name == "AI")
 					loc_landmark = sloc
 		O.forceMove(loc_landmark ? loc_landmark.loc : get_turf(src))
@@ -115,7 +115,7 @@
 	ADD_TRANSFORMATION_MOVEMENT_HANDLER(src)
 	icon = null
 	set_invisibility(101)
-	for(var/t in organs)
+	for(var/t in get_external_organs())
 		qdel(t)
 
 	var/mob/living/silicon/robot/O = new supplied_robot_type( loc )
@@ -152,7 +152,7 @@
 	ADD_TRANSFORMATION_MOVEMENT_HANDLER(src)
 	icon = null
 	set_invisibility(101)
-	for(var/t in organs)	//this really should not be necessary
+	for(var/t in get_external_organs())	//this really should not be necessary
 		qdel(t)
 
 	var/mob/living/simple_animal/corgi/new_corgi = new /mob/living/simple_animal/corgi (loc)
@@ -182,7 +182,7 @@
 	icon = null
 	set_invisibility(101)
 
-	for(var/t in organs)
+	for(var/t in get_external_organs())
 		qdel(t)
 
 	var/mob/new_mob = new mobpath(src.loc)
@@ -209,7 +209,7 @@
 
 	new_mob.key = key
 	new_mob.a_intent = I_HURT
-	to_chat(new_mob, "You feel more... animalistic")
+	to_chat(new_mob, "You feel more... animalistic.")
 
 	qdel(src)
 
@@ -274,7 +274,7 @@
 	SET_STATUS_MAX(src, STAT_WEAK, 5)
 	if (should_have_organ(BP_HEART))
 		adjust_blood(species.blood_volume - vessel.total_volume)
-	for (var/o in organs)
+	for (var/o in get_external_organs())
 		var/obj/item/organ/organ = o
 		organ.vital = 0
 		if (!BP_IS_PROSTHETIC(organ))

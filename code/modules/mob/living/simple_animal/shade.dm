@@ -8,8 +8,8 @@
 	universal_speak = TRUE
 	speak_emote = list("hisses")
 	emote_hear = list("wails","screeches")
-	response_help_1p = "You wave your hand through $TARGET."
-	response_help_3p = "$USER$ waves $USER_HIS$ hand through $TARGET."
+	response_help_1p = "You wave your hand through $TARGET$."
+	response_help_3p = "$USER$ waves $USER_HIS$ hand through $TARGET$."
 	response_disarm =  "flails at"
 	response_harm =    "punches"
 	natural_weapon = /obj/item/natural_weapon/shade

@@ -40,23 +40,23 @@ RSF
 	playsound(src.loc, 'sound/effects/pop.ogg', 50, 0)
 	if (mode == 1)
 		mode = 2
-		to_chat(user, "Changed dispensing mode to 'Drinking Glass'")
+		to_chat(user, "Changed dispensing mode to 'Drinking Glass'.")
 		return
 	if (mode == 2)
 		mode = 3
-		to_chat(user, "Changed dispensing mode to 'Paper'")
+		to_chat(user, "Changed dispensing mode to 'Paper'.")
 		return
 	if (mode == 3)
 		mode = 4
-		to_chat(user, "Changed dispensing mode to 'Pen'")
+		to_chat(user, "Changed dispensing mode to 'Pen'.")
 		return
 	if (mode == 4)
 		mode = 5
-		to_chat(user, "Changed dispensing mode to 'Dice Pack'")
+		to_chat(user, "Changed dispensing mode to 'Dice Pack'.")
 		return
 	if (mode == 5)
 		mode = 1
-		to_chat(user, "Changed dispensing mode to 'Cigarette'")
+		to_chat(user, "Changed dispensing mode to 'Cigarette'.")
 		return
 
 /obj/item/rsf/afterattack(atom/A, mob/user, proximity)

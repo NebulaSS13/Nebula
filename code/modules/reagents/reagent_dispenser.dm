@@ -115,7 +115,8 @@
 	possible_transfer_amounts = @"[10,25,50,100]"
 	initial_capacity = 7500
 	initial_reagent_types = list(/decl/material/liquid/water = 1)
-	atom_flags = ATOM_FLAG_NO_TEMP_CHANGE | ATOM_FLAG_CLIMBABLE | ATOM_FLAG_WHEELED
+	atom_flags = ATOM_FLAG_NO_TEMP_CHANGE | ATOM_FLAG_CLIMBABLE
+	movable_flags = MOVABLE_FLAG_WHEELED
 
 /obj/structure/reagent_dispensers/watertank/firefighter
 	name = "firefighting water reserve"
@@ -136,7 +137,8 @@
 	icon_state = "weldtank"
 	amount_per_transfer_from_this = 10
 	initial_reagent_types = list(/decl/material/liquid/fuel = 1)
-	atom_flags = ATOM_FLAG_CLIMBABLE | ATOM_FLAG_WHEELED
+	atom_flags = ATOM_FLAG_CLIMBABLE
+	movable_flags = MOVABLE_FLAG_WHEELED
 
 	var/obj/item/assembly_holder/rig = null
 
@@ -177,7 +179,7 @@
 	. = ..()
 
 /obj/structure/reagent_dispensers/fueltank/on_update_icon()
-	cut_overlays()
+	..()
 	if(rig)
 		var/image/I = new
 		I.appearance = rig

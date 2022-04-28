@@ -3,15 +3,15 @@
 /turf/template_noop,
 /area/template_noop)
 "ab" = (
-/obj/effect/landmark/scorcher,
+/obj/abstract/landmark/scorcher,
 /turf/simulated/wall/r_wall/hull,
 /area/map_template/ecship/cryo)
 "ac" = (
 /turf/simulated/wall/r_wall/hull,
 /area/map_template/ecship/cockpit)
 "ad" = (
-/obj/effect/landmark/scorcher,
-/obj/effect/landmark/clear,
+/obj/abstract/landmark/scorcher,
+/obj/abstract/landmark/clear,
 /turf/template_noop,
 /area/map_template/ecship/cockpit)
 "ae" = (
@@ -24,7 +24,7 @@
 	opacity = 0
 	},
 /obj/machinery/door/firedoor,
-/obj/effect/landmark/scorcher,
+/obj/abstract/landmark/scorcher,
 /turf/simulated/floor,
 /area/map_template/ecship/cockpit)
 "af" = (
@@ -107,7 +107,7 @@
 /area/map_template/ecship/cryo)
 "at" = (
 /obj/structure/lattice,
-/obj/effect/landmark/scorcher,
+/obj/abstract/landmark/scorcher,
 /turf/template_noop,
 /area/map_template/ecship/cryo)
 "au" = (
@@ -448,7 +448,7 @@
 /area/map_template/ecship/cryo)
 "bi" = (
 /obj/structure/catwalk,
-/obj/effect/landmark/scorcher,
+/obj/abstract/landmark/scorcher,
 /turf/template_noop,
 /area/map_template/ecship/engine)
 "bj" = (
@@ -468,7 +468,7 @@
 	dir = 8;
 	icon_state = "1-4"
 	},
-/obj/effect/landmark/scorcher,
+/obj/abstract/landmark/scorcher,
 /turf/template_noop,
 /area/map_template/ecship/engine)
 "bl" = (
@@ -578,7 +578,7 @@
 /obj/structure/cable{
 	icon_state = "4-8"
 	},
-/obj/effect/landmark/scorcher,
+/obj/abstract/landmark/scorcher,
 /turf/template_noop,
 /area/map_template/ecship/engine)
 "bx" = (
@@ -661,7 +661,7 @@
 	dir = 4;
 	icon_state = "1-2"
 	},
-/obj/effect/landmark/scorcher,
+/obj/abstract/landmark/scorcher,
 /turf/template_noop,
 /area/map_template/ecship/engine)
 "bD" = (
@@ -983,13 +983,13 @@
 /obj/structure/cable{
 	icon_state = "1-4"
 	},
-/obj/effect/landmark/scorcher,
+/obj/abstract/landmark/scorcher,
 /turf/template_noop,
 /area/map_template/ecship/engine)
 "cj" = (
 /obj/structure/catwalk,
 /obj/machinery/atmospherics/pipe/simple/visible/cyan,
-/obj/effect/landmark/scorcher,
+/obj/abstract/landmark/scorcher,
 /turf/template_noop,
 /area/map_template/ecship/engine)
 "ck" = (
@@ -1473,7 +1473,7 @@
 "dl" = (
 /obj/structure/catwalk,
 /obj/structure/handrail,
-/obj/effect/landmark/scorcher,
+/obj/abstract/landmark/scorcher,
 /turf/template_noop,
 /area/map_template/ecship/engine)
 "dm" = (
@@ -1482,7 +1482,7 @@
 /obj/machinery/atmospherics/pipe/simple/visible/cyan{
 	dir = 6
 	},
-/obj/effect/landmark/scorcher,
+/obj/abstract/landmark/scorcher,
 /turf/template_noop,
 /area/map_template/ecship/engine)
 "dn" = (
@@ -1594,7 +1594,7 @@
 /obj/machinery/atmospherics/pipe/simple/visible/cyan{
 	dir = 4
 	},
-/obj/effect/landmark/scorcher,
+/obj/abstract/landmark/scorcher,
 /turf/template_noop,
 /area/map_template/ecship/engine)
 "dw" = (
@@ -1602,13 +1602,13 @@
 /obj/machinery/atmospherics/pipe/simple/visible/cyan{
 	dir = 9
 	},
-/obj/effect/landmark/scorcher,
+/obj/abstract/landmark/scorcher,
 /turf/template_noop,
 /area/map_template/ecship/engine)
 "dx" = (
 /obj/structure/catwalk,
-/obj/effect/landmark/scorcher,
-/obj/effect/landmark/scorcher,
+/obj/abstract/landmark/scorcher,
+/obj/abstract/landmark/scorcher,
 /turf/template_noop,
 /area/map_template/ecship/engine)
 "dy" = (
@@ -1631,7 +1631,7 @@
 	dir = 4;
 	icon_state = "0-2"
 	},
-/obj/effect/landmark/scorcher,
+/obj/abstract/landmark/scorcher,
 /turf/template_noop,
 /area/map_template/ecship/engine)
 "dA" = (
@@ -1684,7 +1684,7 @@
 	dir = 4;
 	icon_state = "1-2"
 	},
-/obj/effect/landmark/scorcher,
+/obj/abstract/landmark/scorcher,
 /turf/template_noop,
 /area/map_template/ecship/engine)
 "dH" = (
@@ -1701,7 +1701,7 @@
 /obj/machinery/atmospherics/pipe/simple/visible/cyan{
 	dir = 4
 	},
-/obj/effect/landmark/scorcher,
+/obj/abstract/landmark/scorcher,
 /turf/template_noop,
 /area/map_template/ecship/engine)
 "dJ" = (
@@ -1734,7 +1734,7 @@
 	dir = 4;
 	icon_state = "1-4"
 	},
-/obj/effect/landmark/scorcher,
+/obj/abstract/landmark/scorcher,
 /turf/simulated/floor/airless,
 /area/map_template/ecship/engine)
 "dR" = (
@@ -1743,7 +1743,7 @@
 "dS" = (
 /obj/structure/catwalk,
 /obj/machinery/atmospherics/pipe/simple/visible/cyan,
-/obj/effect/landmark/scorcher,
+/obj/abstract/landmark/scorcher,
 /turf/simulated/floor/airless,
 /area/map_template/ecship/engine)
 "dT" = (
@@ -1772,7 +1772,7 @@
 /obj/machinery/atmospherics/pipe/simple/visible/cyan{
 	dir = 5
 	},
-/obj/effect/landmark/scorcher,
+/obj/abstract/landmark/scorcher,
 /turf/simulated/floor/airless,
 /area/map_template/ecship/engine)
 "dY" = (
@@ -1780,8 +1780,8 @@
 /obj/machinery/atmospherics/pipe/simple/visible/cyan{
 	dir = 4
 	},
-/obj/effect/landmark/scorcher,
-/obj/effect/landmark/clear,
+/obj/abstract/landmark/scorcher,
+/obj/abstract/landmark/clear,
 /turf/template_noop,
 /area/template_noop)
 "dZ" = (
@@ -1791,7 +1791,7 @@
 	target_pressure = 2500;
 	use_power = 1
 	},
-/obj/effect/landmark/clear,
+/obj/abstract/landmark/clear,
 /turf/template_noop,
 /area/template_noop)
 "ea" = (
@@ -1849,7 +1849,7 @@
 	target_pressure = 2500;
 	use_power = 1
 	},
-/obj/effect/landmark/clear,
+/obj/abstract/landmark/clear,
 /turf/template_noop,
 /area/map_template/ecship/engine)
 "eh" = (
@@ -1857,8 +1857,8 @@
 /obj/machinery/atmospherics/pipe/simple/visible/fuel{
 	dir = 10
 	},
-/obj/effect/landmark/scorcher,
-/obj/effect/landmark/clear,
+/obj/abstract/landmark/scorcher,
+/obj/abstract/landmark/clear,
 /turf/template_noop,
 /area/map_template/ecship/engine)
 "ei" = (
@@ -1870,8 +1870,8 @@
 /obj/machinery/atmospherics/pipe/simple/visible/cyan{
 	dir = 6
 	},
-/obj/effect/landmark/scorcher,
-/obj/effect/landmark/clear,
+/obj/abstract/landmark/scorcher,
+/obj/abstract/landmark/clear,
 /turf/template_noop,
 /area/map_template/ecship/engine)
 "ek" = (
@@ -1881,7 +1881,7 @@
 	target_pressure = 2500;
 	use_power = 1
 	},
-/obj/effect/landmark/clear,
+/obj/abstract/landmark/clear,
 /turf/template_noop,
 /area/map_template/ecship/engine)
 "el" = (
@@ -1907,37 +1907,37 @@
 "eo" = (
 /obj/structure/lattice,
 /obj/machinery/atmospherics/pipe/simple/visible/fuel,
-/obj/effect/landmark/clear,
+/obj/abstract/landmark/clear,
 /turf/template_noop,
 /area/template_noop)
 "ep" = (
 /obj/structure/lattice,
 /obj/machinery/atmospherics/pipe/simple/visible/cyan,
-/obj/effect/landmark/clear,
+/obj/abstract/landmark/clear,
 /turf/template_noop,
 /area/template_noop)
 "mD" = (
 /obj/structure/lattice,
-/obj/effect/landmark/scorcher,
+/obj/abstract/landmark/scorcher,
 /turf/template_noop,
 /area/template_noop)
 "qB" = (
-/obj/effect/landmark/clear,
+/obj/abstract/landmark/clear,
 /turf/template_noop,
 /area/template_noop)
 "yb" = (
 /obj/structure/lattice,
-/obj/effect/landmark/scorcher,
-/obj/effect/landmark/clear,
+/obj/abstract/landmark/scorcher,
+/obj/abstract/landmark/clear,
 /turf/template_noop,
 /area/template_noop)
 "yZ" = (
 /obj/structure/grille,
-/obj/effect/landmark/scorcher,
+/obj/abstract/landmark/scorcher,
 /turf/template_noop,
 /area/template_noop)
 "NM" = (
-/obj/effect/landmark/scorcher,
+/obj/abstract/landmark/scorcher,
 /turf/template_noop,
 /area/template_noop)
 "SX" = (
@@ -1949,7 +1949,7 @@
 /obj/machinery/atmospherics/portables_connector{
 	dir = 1
 	},
-/obj/effect/landmark/clear,
+/obj/abstract/landmark/clear,
 /turf/template_noop,
 /area/template_noop)
 "Vy" = (
@@ -1959,17 +1959,17 @@
 /area/map_template/ecship/science)
 "Wb" = (
 /obj/structure/lattice,
-/obj/effect/landmark/clear,
+/obj/abstract/landmark/clear,
 /turf/template_noop,
 /area/template_noop)
 "YW" = (
 /obj/structure/catwalk,
-/obj/effect/landmark/scorcher,
+/obj/abstract/landmark/scorcher,
 /turf/simulated/floor/airless,
 /area/map_template/ecship/engine)
 "ZF" = (
-/obj/effect/landmark/scorcher,
-/obj/effect/landmark/clear,
+/obj/abstract/landmark/scorcher,
+/obj/abstract/landmark/clear,
 /turf/template_noop,
 /area/template_noop)
 

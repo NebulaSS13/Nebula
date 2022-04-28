@@ -67,7 +67,6 @@
 	client.images = null				//remove the images such as AIs being unable to see runes
 	client.screen = list()				//remove hud items just in case
 	client.set_right_click_menu_mode(shift_to_open_context_menu)
-	InitializeHud()
 
 	next_move = 1
 	set_sight(sight|SEE_SELF)
@@ -86,28 +85,34 @@
 	if(eyeobj)
 		eyeobj.possess(src)
 
+	events_repository.raise_event(/decl/observ/logged_in, src)
+
+	hud_reset(TRUE)
+
+	client.update_skybox(1)
+
+	if(machine)
+		machine.on_user_login(src)
+
+/mob/proc/hud_reset(var/full_reset = FALSE)
+	if(!client)
+		return
+	if(full_reset)
+		client.images = null	//remove the images such as AIs being unable to see runes
+		client.screen = list()	//remove hud items just in case
+		client.set_right_click_menu_mode(shift_to_open_context_menu)
+		InitializeHud()
+
 	refresh_client_images()
 	reload_fullscreen() // Reload any fullscreen overlays this mob has.
 	add_click_catcher()
 	update_action_buttons()
 	update_mouse_pointer()
 
-	if(machine)
-		machine.on_user_login(src)
-
-	client.update_skybox(1)
 	if(ability_master)
-		ability_master.update_abilities(1, src)
+		ability_master.update_abilities(TRUE, src)
 		ability_master.toggle_open(1)
-	events_repository.raise_event(/decl/observ/logged_in, src)
-
-	if(mind)
-		if(!mind.learned_spells)
-			mind.learned_spells = list()
-		if(ability_master && ability_master.spell_objects)
-			for(var/obj/screen/ability/spell/screen in ability_master.spell_objects)
-				var/spell/S = screen.spell
-				mind.learned_spells |= S
+		ability_master.synch_spells_to_mind(mind)
 
 	if(get_preference_value(/datum/client_preference/show_status_markers) == PREF_SHOW)
 		if(status_markers)
@@ -115,8 +120,10 @@
 		for(var/datum/status_marker_holder/marker AS_ANYTHING in global.status_marker_holders)
 			if(marker != status_markers)
 				client.images |= marker.mob_image
+	return TRUE
 
-/mob/living/carbon/Login()
-	. = ..()
+/mob/living/carbon/hud_reset(full_reset = FALSE)
+	if(!(. = ..()))
+		return .
 	if(internals && internal)
 		internals.icon_state = "internal1"

@@ -134,6 +134,14 @@
 			return S
 	return null
 
+/obj/screen/movable/ability_master/proc/synch_spells_to_mind(var/datum/mind/M)
+	if(!M)
+		return
+	LAZYINITLIST(M.learned_spells)
+	for(var/obj/screen/ability/spell/screen in spell_objects)
+		var/spell/S = screen.spell
+		M.learned_spells |= S
+
 /mob/Initialize()
 	. = ..()
 	ability_master = new /obj/screen/movable/ability_master(null,src)

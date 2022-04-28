@@ -19,13 +19,12 @@
 
 /obj/structure/rubble/Initialize()
 	. = ..()
-	if(prob(emptyprob)) 
+	if(prob(emptyprob))
 		lootleft = 0
 	update_icon()
 
 /obj/structure/rubble/on_update_icon()
-	overlays.Cut()
-	var/list/parts = list()
+	..()
 	for(var/i = 1 to 7)
 		var/image/I = image(icon,"rubble[rand(1,76)]")
 		if(prob(10))
@@ -42,10 +41,10 @@
 		var/matrix/M = matrix()
 		M.Turn(rand(0,360))
 		I.transform = M
-		parts += I
-	overlays = parts
+		add_overlay(I)
+
 	if(lootleft)
-		overlays += image(icon,"twinkle[rand(1,3)]")
+		add_overlay("twinkle[rand(1,3)]")
 
 /obj/structure/rubble/attack_hand(mob/user)
 	if(!is_rummaging)
@@ -63,7 +62,7 @@
 		is_rummaging = 0
 	else
 		to_chat(user, "<span class='warning'>Someone is already rummaging here!</span>")
-		
+
 /obj/structure/rubble/attackby(var/obj/item/I, var/mob/user)
 	if (istype(I, /obj/item/pickaxe))
 		var/obj/item/pickaxe/P = I
@@ -81,7 +80,7 @@
 	SHOULD_CALL_PARENT(FALSE)
 	qdel(src)
 	. = TRUE
-	
+
 /obj/structure/rubble/physically_destroyed(var/skip_qdel)
 	SHOULD_CALL_PARENT(FALSE)
 	visible_message(SPAN_NOTICE("\The [src] is cleared away."))

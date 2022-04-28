@@ -34,7 +34,7 @@
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/exodus/security/meeting)
 "aac" = (
-/obj/effect/landmark{
+/obj/abstract/landmark{
 	name = "carpspawn"
 	},
 /turf/space,
@@ -79,7 +79,7 @@
 /turf/space,
 /area/space)
 "aag" = (
-/obj/effect/landmark{
+/obj/abstract/landmark{
 	name = "carpspawn"
 	},
 /turf/simulated/floor/airless,
@@ -1775,7 +1775,7 @@
 /area/exodus/security/main)
 "adV" = (
 /obj/structure/bed/chair/office/dark,
-/obj/effect/landmark/start{
+/obj/abstract/landmark/start{
 	name = "Security Officer"
 	},
 /turf/simulated/floor/tiled/steel_grid,
@@ -1964,7 +1964,7 @@
 /obj/structure/bed/chair/office/dark{
 	dir = 4
 	},
-/obj/effect/landmark/start{
+/obj/abstract/landmark/start{
 	name = "Security Officer"
 	},
 /turf/simulated/floor/tiled/steel_grid,
@@ -2313,7 +2313,7 @@
 /obj/structure/cable/green{
 	icon_state = "4-8"
 	},
-/obj/effect/landmark/start{
+/obj/abstract/landmark/start{
 	name = "Security Officer"
 	},
 /turf/simulated/floor/tiled/steel_grid,
@@ -3962,7 +3962,7 @@
 /obj/structure/bed/chair/office/dark{
 	dir = 8
 	},
-/obj/effect/landmark/start{
+/obj/abstract/landmark/start{
 	name = "Warden"
 	},
 /turf/simulated/floor/tiled/dark,
@@ -4157,7 +4157,7 @@
 /obj/structure/bed/chair/comfy/black{
 	dir = 1
 	},
-/obj/effect/landmark/start{
+/obj/abstract/landmark/start{
 	name = "Head of Security"
 	},
 /obj/machinery/button/alternate/door{
@@ -5526,7 +5526,7 @@
 /obj/structure/bed/chair/office/dark{
 	dir = 8
 	},
-/obj/effect/landmark/start{
+/obj/abstract/landmark/start{
 	name = "Detective"
 	},
 /turf/simulated/floor/carpet,
@@ -5899,7 +5899,7 @@
 	},
 /obj/item/clipboard,
 /obj/item/hand_labeler,
-/obj/item/tape_roll,
+/obj/item/ducttape,
 /turf/simulated/floor/tiled/dark,
 /area/exodus/lawoffice)
 "amt" = (
@@ -6125,7 +6125,7 @@
 /area/exodus/security/prison)
 "amP" = (
 /obj/structure/bed/chair/office/dark,
-/obj/effect/landmark/start{
+/obj/abstract/landmark/start{
 	name = "Internal Affairs Agent"
 	},
 /turf/simulated/floor/tiled/dark,
@@ -6718,7 +6718,7 @@
 "anU" = (
 /obj/effect/wallframe_spawn/reinforced,
 /obj/machinery/door/firedoor,
-/obj/effect/landmark{
+/obj/abstract/landmark{
 	name = "Syndicate Breach Area"
 	},
 /turf/simulated/floor/plating,
@@ -6790,7 +6790,7 @@
 /obj/structure/bed/chair/office/dark{
 	dir = 1
 	},
-/obj/effect/landmark/start{
+/obj/abstract/landmark/start{
 	name = "Detective"
 	},
 /turf/simulated/floor/carpet,
@@ -7942,7 +7942,7 @@
 /obj/structure/bed/chair/office/dark{
 	dir = 8
 	},
-/obj/effect/landmark/start{
+/obj/abstract/landmark/start{
 	name = "Internal Affairs Agent"
 	},
 /obj/structure/disposalpipe/segment{
@@ -8644,7 +8644,7 @@
 /obj/structure/table/reinforced,
 /obj/item/clipboard,
 /obj/item/hand_labeler,
-/obj/item/tape_roll,
+/obj/item/ducttape,
 /turf/simulated/floor/tiled/dark,
 /area/exodus/lawoffice)
 "arR" = (
@@ -8672,7 +8672,7 @@
 /obj/machinery/atmospherics/unary/vent_pump/on{
 	dir = 4
 	},
-/obj/effect/landmark{
+/obj/abstract/landmark{
 	name = "xeno_spawn";
 	pixel_x = -1
 	},
@@ -9500,7 +9500,7 @@
 /area/exodus/hallway/secondary/entry/starboard)
 "atK" = (
 /obj/machinery/atmospherics/unary/vent_scrubber/on,
-/obj/effect/landmark/latejoin/cryo,
+/obj/abstract/landmark/latejoin/cryo,
 /turf/simulated/floor/tiled/freezer,
 /area/exodus/crew_quarters/sleep/cryo)
 "atL" = (
@@ -9525,7 +9525,7 @@
 /obj/structure/cable/green{
 	icon_state = "0-2"
 	},
-/obj/effect/landmark/latejoin/cryo,
+/obj/abstract/landmark/latejoin/cryo,
 /turf/simulated/floor/tiled/freezer,
 /area/exodus/crew_quarters/sleep/cryo)
 "atN" = (
@@ -9849,7 +9849,7 @@
 /turf/simulated/floor/tiled/dark,
 /area/exodus/crew_quarters/sleep)
 "auD" = (
-/obj/effect/landmark/latejoin/cryo,
+/obj/abstract/landmark/latejoin/cryo,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /turf/simulated/floor/tiled/freezer,
 /area/exodus/crew_quarters/sleep/cryo)
@@ -9860,7 +9860,7 @@
 /turf/simulated/floor/tiled/white/monotile,
 /area/exodus/crew_quarters/sleep/cryo)
 "auF" = (
-/obj/effect/landmark/latejoin/cryo,
+/obj/abstract/landmark/latejoin/cryo,
 /obj/structure/cable/green{
 	icon_state = "1-2"
 	},
@@ -10317,7 +10317,7 @@
 /turf/simulated/floor/tiled/white/monotile,
 /area/exodus/crew_quarters/sleep/cryo)
 "avF" = (
-/obj/effect/landmark/latejoin/cryo,
+/obj/abstract/landmark/latejoin/cryo,
 /obj/structure/cable/green{
 	icon_state = "1-2"
 	},
@@ -10419,7 +10419,7 @@
 	icon_state = "1-2"
 	},
 /obj/machinery/hologram/holopad,
-/obj/effect/landmark/paperwork_finish_exodus,
+/obj/abstract/landmark/paperwork_finish_exodus,
 /turf/simulated/floor/tiled/steel_grid,
 /area/exodus/bridge)
 "avT" = (
@@ -13612,19 +13612,19 @@
 /obj/machinery/gateway{
 	dir = 10
 	},
-/obj/effect/landmark/latejoin/gateway,
+/obj/abstract/landmark/latejoin/gateway,
 /turf/simulated/floor/tiled/dark/monotile,
 /area/exodus/gateway)
 "aCN" = (
 /obj/machinery/gateway{
 	dir = 6
 	},
-/obj/effect/landmark/latejoin/gateway,
+/obj/abstract/landmark/latejoin/gateway,
 /turf/simulated/floor/tiled/dark/monotile,
 /area/exodus/gateway)
 "aCO" = (
 /obj/machinery/gateway,
-/obj/effect/landmark/latejoin/gateway,
+/obj/abstract/landmark/latejoin/gateway,
 /turf/simulated/floor/tiled/dark/monotile,
 /area/exodus/gateway)
 "aCP" = (
@@ -13787,7 +13787,7 @@
 /turf/simulated/wall/prepainted,
 /area/exodus/maintenance/substation/civilian_east)
 "aDf" = (
-/obj/effect/landmark{
+/obj/abstract/landmark{
 	name = "xeno_spawn";
 	pixel_x = -1
 	},
@@ -14158,7 +14158,7 @@
 /turf/simulated/floor/wood/walnut,
 /area/exodus/crew_quarters/bar/cabin)
 "aDW" = (
-/obj/effect/landmark{
+/obj/abstract/landmark{
 	name = "xeno_spawn";
 	pixel_x = -1
 	},
@@ -14517,7 +14517,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
 	},
-/obj/item/tape_roll,
+/obj/item/ducttape,
 /turf/simulated/floor/wood/walnut,
 /area/exodus/library)
 "aEG" = (
@@ -14880,7 +14880,7 @@
 /turf/simulated/floor/tiled/steel_grid,
 /area/exodus/storage/primary)
 "aFn" = (
-/obj/effect/landmark/start{
+/obj/abstract/landmark/start{
 	name = "Assistant"
 	},
 /turf/simulated/floor/tiled/steel_grid,
@@ -14893,13 +14893,13 @@
 /area/exodus/security/prison/restroom)
 "aFr" = (
 /obj/item/stool,
-/obj/effect/landmark/start{
+/obj/abstract/landmark/start{
 	name = "Assistant"
 	},
 /turf/simulated/floor/tiled/steel_grid,
 /area/exodus/storage/primary)
 "aFs" = (
-/obj/effect/landmark/start{
+/obj/abstract/landmark/start{
 	name = "Assistant"
 	},
 /obj/structure/cable/green{
@@ -16385,7 +16385,7 @@
 /turf/simulated/floor/plating,
 /area/exodus/maintenance/library)
 "aIc" = (
-/obj/effect/landmark/start{
+/obj/abstract/landmark/start{
 	name = "Assistant"
 	},
 /obj/machinery/atmospherics/unary/vent_pump/on{
@@ -16446,14 +16446,14 @@
 /turf/simulated/floor/tiled/freezer,
 /area/exodus/security/prison/restroom)
 "aIi" = (
-/obj/effect/landmark/start{
+/obj/abstract/landmark/start{
 	name = "Assistant"
 	},
 /obj/item/stool,
 /turf/simulated/floor/tiled/steel_grid,
 /area/exodus/storage/primary)
 "aIj" = (
-/obj/effect/landmark/start{
+/obj/abstract/landmark/start{
 	name = "Assistant"
 	},
 /obj/structure/cable/green{
@@ -16471,7 +16471,7 @@
 /obj/structure/bed/chair/shuttle/black{
 	dir = 8
 	},
-/obj/effect/landmark/latejoin,
+/obj/abstract/landmark/latejoin,
 /obj/machinery/light,
 /turf/simulated/floor/tiled/dark/monotile,
 /area/shuttle/arrival/station)
@@ -16483,7 +16483,7 @@
 /turf/simulated/floor/plating,
 /area/exodus/maintenance/evahallway)
 "aIm" = (
-/obj/effect/landmark/start{
+/obj/abstract/landmark/start{
 	name = "Assistant"
 	},
 /obj/machinery/atmospherics/unary/vent_scrubber/on{
@@ -16566,7 +16566,7 @@
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/exodus/research/xenobiology)
 "aIv" = (
-/obj/effect/landmark{
+/obj/abstract/landmark{
 	name = "Marauder Entry"
 	},
 /turf/space,
@@ -16594,7 +16594,7 @@
 /obj/structure/bed/chair/shuttle/black{
 	dir = 8
 	},
-/obj/effect/landmark/latejoin,
+/obj/abstract/landmark/latejoin,
 /turf/simulated/floor/tiled/dark/monotile,
 /area/shuttle/arrival/station)
 "aIz" = (
@@ -16875,7 +16875,7 @@
 /turf/simulated/wall/prepainted,
 /area/exodus/hallway/primary/central_two)
 "aJm" = (
-/obj/effect/landmark/start{
+/obj/abstract/landmark/start{
 	name = "Chaplain"
 	},
 /obj/structure/bed/chair,
@@ -18173,7 +18173,7 @@
 /turf/simulated/floor/tiled/white,
 /area/exodus/research)
 "aMe" = (
-/obj/effect/landmark{
+/obj/abstract/landmark{
 	name = "lightsout"
 	},
 /obj/machinery/door/firedoor,
@@ -18308,7 +18308,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 4
 	},
-/obj/effect/landmark/start{
+/obj/abstract/landmark/start{
 	name = "Chef"
 	},
 /obj/effect/floor_decal/corner/brown/diagonal{
@@ -19970,7 +19970,7 @@
 /turf/simulated/floor/lino,
 /area/exodus/crew_quarters/bar)
 "aPJ" = (
-/obj/effect/landmark/start{
+/obj/abstract/landmark/start{
 	name = "Bartender"
 	},
 /obj/structure/cable/green{
@@ -20617,7 +20617,7 @@
 	pixel_x = -38;
 	pixel_y = 2
 	},
-/obj/effect/landmark/start{
+/obj/abstract/landmark/start{
 	name = "Research Director"
 	},
 /obj/effect/floor_decal/corner/purple/diagonal{
@@ -22212,7 +22212,7 @@
 /turf/simulated/floor/tiled/steel_grid,
 /area/exodus/medical/sleeper)
 "aUN" = (
-/obj/effect/landmark/start{
+/obj/abstract/landmark/start{
 	name = "Gardener"
 	},
 /obj/item/stool/padded,
@@ -22517,7 +22517,7 @@
 /turf/simulated/floor/wood/walnut,
 /area/exodus/library)
 "aVy" = (
-/obj/effect/landmark{
+/obj/abstract/landmark{
 	name = "lightsout"
 	},
 /turf/simulated/floor/tiled/steel_grid,
@@ -22884,7 +22884,7 @@
 /turf/simulated/floor/tiled/steel_grid,
 /area/exodus/hydroponics/garden)
 "aWq" = (
-/obj/effect/landmark/start{
+/obj/abstract/landmark/start{
 	name = "Gardener"
 	},
 /obj/structure/cable/green{
@@ -22948,7 +22948,7 @@
 /turf/simulated/floor/wood/walnut,
 /area/exodus/library)
 "aWz" = (
-/obj/effect/landmark/start{
+/obj/abstract/landmark/start{
 	name = "Librarian"
 	},
 /obj/structure/bed/chair/office/dark,
@@ -23039,7 +23039,7 @@
 	dir = 8
 	},
 /obj/structure/disposalpipe/segment,
-/obj/effect/landmark/start{
+/obj/abstract/landmark/start{
 	name = "Chef"
 	},
 /turf/simulated/floor/tiled/white,
@@ -23244,7 +23244,7 @@
 	dir = 5
 	},
 /obj/structure/table/reinforced,
-/obj/effect/landmark/paperwork_spawn_exodus,
+/obj/abstract/landmark/paperwork_spawn_exodus,
 /turf/simulated/floor/tiled/steel_grid,
 /area/exodus/bridge)
 "aXl" = (
@@ -23329,7 +23329,7 @@
 	dir = 5
 	},
 /obj/structure/table/reinforced,
-/obj/effect/landmark/paperwork_spawn_exodus,
+/obj/abstract/landmark/paperwork_spawn_exodus,
 /turf/simulated/floor/tiled/steel_grid,
 /area/exodus/bridge)
 "aXu" = (
@@ -23496,7 +23496,7 @@
 /turf/simulated/floor/tiled/steel_grid,
 /area/exodus/quartermaster/storage)
 "aXN" = (
-/obj/effect/landmark/start{
+/obj/abstract/landmark/start{
 	name = "Gardener"
 	},
 /obj/item/stool/padded,
@@ -23878,7 +23878,7 @@
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
-/obj/item/tape_roll,
+/obj/item/ducttape,
 /obj/structure/table,
 /turf/simulated/floor/tiled/steel_grid,
 /area/exodus/crew_quarters/locker)
@@ -27877,7 +27877,7 @@
 /turf/simulated/floor/tiled/steel_grid,
 /area/exodus/hallway/primary/starboard)
 "bhk" = (
-/obj/effect/landmark{
+/obj/abstract/landmark{
 	name = "tripai"
 	},
 /obj/structure/cable/cyan{
@@ -28726,7 +28726,7 @@
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/exodus/maintenance/disposal)
 "biU" = (
-/obj/effect/landmark{
+/obj/abstract/landmark{
 	name = "xeno_spawn";
 	pixel_x = -1
 	},
@@ -28788,7 +28788,7 @@
 /turf/simulated/floor/tiled/steel_grid,
 /area/exodus/hallway/primary/central_one)
 "bjc" = (
-/obj/effect/landmark/start{
+/obj/abstract/landmark/start{
 	name = "AI"
 	},
 /obj/machinery/newscaster{
@@ -28845,7 +28845,7 @@
 /turf/simulated/floor/plating,
 /area/exodus/hallway/secondary/exit)
 "bje" = (
-/obj/effect/landmark{
+/obj/abstract/landmark{
 	name = "tripai"
 	},
 /obj/structure/cable/cyan{
@@ -29317,7 +29317,7 @@
 /turf/simulated/floor/wood/walnut,
 /area/exodus/crew_quarters/captain)
 "bjY" = (
-/obj/effect/landmark{
+/obj/abstract/landmark{
 	name = "lightsout"
 	},
 /turf/simulated/wall/prepainted,
@@ -30109,7 +30109,7 @@
 /obj/structure/bed/chair{
 	dir = 4
 	},
-/obj/effect/landmark/start{
+/obj/abstract/landmark/start{
 	name = "Cargo Technician"
 	},
 /turf/simulated/floor/tiled/steel_grid,
@@ -31260,7 +31260,7 @@
 /obj/structure/bed/chair/office/dark{
 	dir = 4
 	},
-/obj/effect/landmark/start{
+/obj/abstract/landmark/start{
 	name = "Chemist"
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
@@ -31472,7 +31472,7 @@
 /obj/structure/bed/chair/office/dark{
 	dir = 4
 	},
-/obj/effect/landmark/start{
+/obj/abstract/landmark/start{
 	name = "Captain"
 	},
 /turf/simulated/floor/wood/walnut,
@@ -31617,7 +31617,7 @@
 /obj/structure/bed/chair/office/light{
 	dir = 1
 	},
-/obj/effect/landmark/start{
+/obj/abstract/landmark/start{
 	name = "Roboticist"
 	},
 /turf/simulated/floor/tiled/white,
@@ -31694,7 +31694,7 @@
 /turf/simulated/floor/tiled/white,
 /area/exodus/medical/chemistry)
 "boS" = (
-/obj/effect/landmark/start{
+/obj/abstract/landmark/start{
 	name = "Scientist"
 	},
 /obj/effect/floor_decal/corner/purple{
@@ -31905,7 +31905,7 @@
 	pixel_x = -27;
 	pixel_y = 1
 	},
-/obj/item/tape_roll,
+/obj/item/ducttape,
 /obj/structure/table{
 	name = "plastic table frame"
 	},
@@ -33395,7 +33395,7 @@
 /obj/effect/floor_decal/industrial/warning{
 	dir = 4
 	},
-/obj/effect/landmark/latejoin/cyborg,
+/obj/abstract/landmark/latejoin/cyborg,
 /obj/machinery/computer/cryopod/robot{
 	pixel_x = -30
 	},
@@ -33976,7 +33976,7 @@
 /obj/structure/bed/chair/office/dark{
 	dir = 1
 	},
-/obj/effect/landmark/start{
+/obj/abstract/landmark/start{
 	name = "Medical Doctor"
 	},
 /turf/simulated/floor/tiled/steel_grid,
@@ -34124,7 +34124,7 @@
 /obj/structure/bed/chair/office/dark{
 	dir = 1
 	},
-/obj/effect/landmark/start{
+/obj/abstract/landmark/start{
 	name = "Medical Doctor"
 	},
 /turf/simulated/floor/tiled/steel_grid,
@@ -34405,7 +34405,7 @@
 /turf/simulated/floor/tiled/dark,
 /area/exodus/research/lab)
 "but" = (
-/obj/effect/landmark/start{
+/obj/abstract/landmark/start{
 	name = "Scientist"
 	},
 /turf/simulated/floor/tiled/dark,
@@ -35392,7 +35392,7 @@
 /turf/simulated/wall/prepainted,
 /area/exodus/medical/medbay2)
 "bwl" = (
-/obj/effect/landmark/start{
+/obj/abstract/landmark/start{
 	name = "Cargo Technician"
 	},
 /obj/structure/bed/chair/office/dark{
@@ -37634,7 +37634,7 @@
 /area/exodus/research/robotics)
 "bAN" = (
 /obj/item/stool/padded,
-/obj/effect/landmark/start{
+/obj/abstract/landmark/start{
 	name = "Roboticist"
 	},
 /turf/simulated/floor/tiled/white,
@@ -37860,7 +37860,7 @@
 /turf/simulated/floor/tiled/white,
 /area/exodus/crew_quarters/heads/hor)
 "bBh" = (
-/obj/effect/landmark/start{
+/obj/abstract/landmark/start{
 	name = "Assistant"
 	},
 /obj/structure/cable{
@@ -37878,7 +37878,7 @@
 /turf/simulated/floor/tiled/steel_grid,
 /area/exodus/storage/primary)
 "bBi" = (
-/obj/effect/landmark/start{
+/obj/abstract/landmark/start{
 	name = "Assistant"
 	},
 /obj/structure/cable{
@@ -38458,7 +38458,7 @@
 /turf/simulated/floor/tiled/white,
 /area/exodus/crew_quarters/heads/hor)
 "bCu" = (
-/obj/effect/landmark/start{
+/obj/abstract/landmark/start{
 	name = "Assistant"
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
@@ -38659,7 +38659,7 @@
 /obj/structure/bed/chair/office/dark{
 	dir = 4
 	},
-/obj/effect/landmark/start{
+/obj/abstract/landmark/start{
 	name = "Head of Personnel"
 	},
 /obj/machinery/button/blast_door{
@@ -38713,7 +38713,7 @@
 /turf/simulated/floor/tiled/dark,
 /area/exodus/turret_protected/ai_server_room)
 "bCW" = (
-/obj/effect/landmark/start{
+/obj/abstract/landmark/start{
 	name = "Cyborg"
 	},
 /obj/machinery/light/small{
@@ -38740,7 +38740,7 @@
 /turf/simulated/floor/tiled/dark,
 /area/exodus/turret_protected/ai_server_room)
 "bCY" = (
-/obj/effect/landmark/start{
+/obj/abstract/landmark/start{
 	name = "Cyborg"
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
@@ -41182,7 +41182,7 @@
 /area/exodus/research/misc_lab)
 "bHH" = (
 /obj/structure/bed/chair/office/dark,
-/obj/effect/landmark/start{
+/obj/abstract/landmark/start{
 	name = "Quartermaster"
 	},
 /obj/machinery/button/windowtint{
@@ -41725,7 +41725,7 @@
 /area/exodus/medical/genetics/cloning)
 "bIH" = (
 /obj/structure/bed/chair/office/dark,
-/obj/effect/landmark/start{
+/obj/abstract/landmark/start{
 	name = "Geneticist"
 	},
 /turf/simulated/floor/plating,
@@ -43299,7 +43299,7 @@
 /turf/simulated/floor/tiled/white,
 /area/exodus/research)
 "bLR" = (
-/obj/effect/landmark/start{
+/obj/abstract/landmark/start{
 	name = "Paramedic"
 	},
 /obj/item/stool/padded,
@@ -43441,7 +43441,7 @@
 /obj/structure/bed/chair/office/dark{
 	dir = 4
 	},
-/obj/effect/landmark/start{
+/obj/abstract/landmark/start{
 	name = "Shaft Miner"
 	},
 /turf/simulated/floor/tiled/steel_grid,
@@ -43660,7 +43660,7 @@
 	name = "Acute Separation Shutters";
 	pixel_y = -25
 	},
-/obj/effect/landmark/start{
+/obj/abstract/landmark/start{
 	name = "Paramedic"
 	},
 /obj/machinery/camera/network/medbay{
@@ -44499,7 +44499,7 @@
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/exodus/medical/medbay2)
 "bOm" = (
-/obj/effect/landmark/start{
+/obj/abstract/landmark/start{
 	name = "Medical Doctor"
 	},
 /obj/structure/cable/green{
@@ -44513,7 +44513,7 @@
 /turf/simulated/floor/tiled/white,
 /area/exodus/crew_quarters/medbreak)
 "bOn" = (
-/obj/effect/landmark/start{
+/obj/abstract/landmark/start{
 	name = "Medical Doctor"
 	},
 /obj/structure/cable/green{
@@ -44608,7 +44608,7 @@
 /turf/simulated/floor/reinforced,
 /area/exodus/research/misc_lab)
 "bOz" = (
-/obj/effect/landmark{
+/obj/abstract/landmark{
 	name = "xeno_spawn";
 	pixel_x = -1
 	},
@@ -45013,7 +45013,7 @@
 /area/exodus/medical/virology/access)
 "bPm" = (
 /obj/structure/disposalpipe/segment,
-/obj/effect/landmark/start{
+/obj/abstract/landmark/start{
 	name = "Shaft Miner"
 	},
 /obj/structure/cable/green{
@@ -45054,7 +45054,7 @@
 /area/exodus/hallway/primary/aft)
 "bPr" = (
 /obj/item/stool,
-/obj/effect/landmark/start{
+/obj/abstract/landmark/start{
 	name = "Janitor"
 	},
 /obj/structure/cable/green{
@@ -45271,7 +45271,7 @@
 /turf/simulated/floor/tiled/white,
 /area/exodus/medical/medbay2)
 "bPM" = (
-/obj/effect/landmark/start{
+/obj/abstract/landmark/start{
 	name = "Medical Doctor"
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
@@ -45311,7 +45311,7 @@
 /turf/simulated/floor/tiled/white,
 /area/exodus/crew_quarters/medbreak)
 "bPR" = (
-/obj/effect/landmark/start{
+/obj/abstract/landmark/start{
 	name = "Geneticist"
 	},
 /obj/item/stool/padded,
@@ -45887,7 +45887,7 @@
 /obj/structure/bed/chair/office/dark{
 	dir = 1
 	},
-/obj/effect/landmark/start{
+/obj/abstract/landmark/start{
 	name = "Chief Medical Officer"
 	},
 /obj/machinery/button/blast_door{
@@ -46117,7 +46117,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 5
 	},
-/obj/effect/landmark/start{
+/obj/abstract/landmark/start{
 	name = "Scientist"
 	},
 /turf/simulated/floor/tiled/white,
@@ -46418,7 +46418,7 @@
 /turf/simulated/floor/plating,
 /area/exodus/storage/tech)
 "bRY" = (
-/obj/effect/landmark{
+/obj/abstract/landmark{
 	name = "xeno_spawn";
 	pixel_x = -1
 	},
@@ -46572,7 +46572,7 @@
 /turf/simulated/floor/tiled/white,
 /area/exodus/medical/medbay)
 "bSp" = (
-/obj/machinery/power/port_gen/pacman{
+/obj/machinery/port_gen/pacman{
 	sheets = 25
 	},
 /obj/effect/floor_decal/industrial/warning{
@@ -46593,7 +46593,7 @@
 /turf/simulated/floor/tiled/white,
 /area/exodus/crew_quarters/heads/cmo)
 "bSs" = (
-/obj/effect/landmark/start{
+/obj/abstract/landmark/start{
 	name = "Chemist"
 	},
 /obj/item/stool/padded,
@@ -46611,7 +46611,7 @@
 /obj/structure/bed/chair/office/dark{
 	dir = 8
 	},
-/obj/effect/landmark/start{
+/obj/abstract/landmark/start{
 	name = "Atmospheric Technician"
 	},
 /turf/simulated/floor/tiled/steel_grid,
@@ -46652,7 +46652,7 @@
 	dir = 1;
 	pixel_y = -22
 	},
-/obj/effect/landmark/start{
+/obj/abstract/landmark/start{
 	name = "Chemist"
 	},
 /obj/item/stool/padded,
@@ -48603,7 +48603,7 @@
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/exodus/research/mixing)
 "bWD" = (
-/obj/effect/landmark{
+/obj/abstract/landmark{
 	name = "xeno_spawn";
 	pixel_x = -1
 	},
@@ -48630,7 +48630,7 @@
 /obj/structure/bed/chair/office/light{
 	dir = 1
 	},
-/obj/effect/landmark/start{
+/obj/abstract/landmark/start{
 	name = "Scientist"
 	},
 /obj/structure/cable/green{
@@ -48986,7 +48986,7 @@
 /turf/simulated/floor/tiled/white,
 /area/exodus/medical/medbay4)
 "bXu" = (
-/obj/effect/landmark/start{
+/obj/abstract/landmark/start{
 	name = "Station Engineer"
 	},
 /obj/structure/bed/chair/comfy/brown,
@@ -49292,7 +49292,7 @@
 /turf/simulated/wall/r_wall/prepainted,
 /area/exodus/maintenance/substation/research)
 "bYa" = (
-/obj/effect/landmark/start{
+/obj/abstract/landmark/start{
 	name = "Scientist"
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
@@ -49761,7 +49761,7 @@
 /turf/simulated/floor/tiled/steel_grid,
 /area/exodus/crew_quarters/heads/chief)
 "bYQ" = (
-/obj/effect/landmark/start{
+/obj/abstract/landmark/start{
 	name = "Station Engineer"
 	},
 /obj/structure/bed/chair/comfy/brown{
@@ -50115,7 +50115,7 @@
 /obj/machinery/light/small{
 	dir = 1
 	},
-/obj/effect/landmark{
+/obj/abstract/landmark{
 	name = "xeno_spawn";
 	pixel_x = -1
 	},
@@ -50337,7 +50337,7 @@
 /obj/structure/bed/chair/office/light{
 	dir = 4
 	},
-/obj/effect/landmark/start{
+/obj/abstract/landmark/start{
 	name = "Chief Engineer"
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
@@ -50870,7 +50870,7 @@
 /turf/simulated/floor/tiled/steel_grid,
 /area/exodus/engineering/engine_smes)
 "cbk" = (
-/obj/effect/landmark/start{
+/obj/abstract/landmark/start{
 	name = "Atmospheric Technician"
 	},
 /obj/structure/bed/chair/comfy/brown{
@@ -52302,7 +52302,7 @@
 /turf/simulated/floor/plating,
 /area/exodus/maintenance/research_starboard)
 "cdY" = (
-/obj/effect/landmark/start{
+/obj/abstract/landmark/start{
 	name = "Station Engineer"
 	},
 /obj/structure/bed/chair/comfy/brown{
@@ -52311,7 +52311,7 @@
 /turf/simulated/floor/carpet,
 /area/exodus/engineering/break_room)
 "cdZ" = (
-/obj/effect/landmark/start{
+/obj/abstract/landmark/start{
 	name = "Atmospheric Technician"
 	},
 /obj/structure/bed/chair/comfy/brown{
@@ -53351,7 +53351,7 @@
 /area/exodus/engineering/foyer)
 "cgp" = (
 /obj/structure/bed/chair/comfy/brown,
-/obj/effect/landmark/start{
+/obj/abstract/landmark/start{
 	name = "Psychiatrist"
 	},
 /turf/simulated/floor/carpet/blue,
@@ -53437,7 +53437,7 @@
 /obj/structure/bed/chair/office/light{
 	dir = 8
 	},
-/obj/effect/landmark/start{
+/obj/abstract/landmark/start{
 	name = "Xenobiologist"
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
@@ -54010,7 +54010,7 @@
 /obj/machinery/light/small{
 	dir = 4
 	},
-/obj/effect/landmark{
+/obj/abstract/landmark{
 	name = "xeno_spawn";
 	pixel_x = -1
 	},
@@ -54273,7 +54273,7 @@
 /obj/structure/bed/chair/office/dark{
 	dir = 4
 	},
-/obj/effect/landmark/start{
+/obj/abstract/landmark/start{
 	name = "Xenobiologist"
 	},
 /turf/simulated/floor/tiled/white,
@@ -54929,7 +54929,7 @@
 /obj/structure/bed/chair/office/light{
 	dir = 8
 	},
-/obj/effect/landmark/start{
+/obj/abstract/landmark/start{
 	name = "Xenobiologist"
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
@@ -54949,7 +54949,7 @@
 	},
 /obj/item/paper_bin,
 /obj/item/pen,
-/obj/item/tape_roll,
+/obj/item/ducttape,
 /turf/simulated/floor/tiled/white,
 /area/exodus/research/xenobiology/xenoflora)
 "cjD" = (
@@ -54972,7 +54972,7 @@
 /obj/structure/bed/chair/office/dark{
 	dir = 4
 	},
-/obj/effect/landmark/start{
+/obj/abstract/landmark/start{
 	name = "Xenobiologist"
 	},
 /turf/simulated/floor/tiled/white,
@@ -55628,7 +55628,7 @@
 "clf" = (
 /obj/structure/table/reinforced,
 /obj/item/clipboard,
-/obj/item/tape_roll,
+/obj/item/ducttape,
 /turf/simulated/floor/tiled/steel_grid,
 /area/exodus/engineering/foyer)
 "clg" = (
@@ -57488,7 +57488,7 @@
 /turf/simulated/floor/plating,
 /area/exodus/engineering/storage)
 "cpf" = (
-/obj/effect/landmark/map_data/exodus,
+/obj/abstract/map_data/exodus,
 /turf/space,
 /area/space)
 "cpg" = (
@@ -57522,7 +57522,7 @@
 /turf/simulated/floor/airless,
 /area/exodus/solar/starboard)
 "cpn" = (
-/obj/machinery/power/rad_collector,
+/obj/machinery/rad_collector,
 /turf/simulated/floor/plating,
 /area/exodus/engineering/storage)
 "cpo" = (
@@ -57804,7 +57804,7 @@
 /obj/structure/bed/chair/office/dark{
 	dir = 4
 	},
-/obj/effect/landmark/start{
+/obj/abstract/landmark/start{
 	name = "Station Engineer"
 	},
 /obj/machinery/atmospherics/unary/vent_pump/on{
@@ -58147,7 +58147,7 @@
 /obj/structure/bed/chair/office/dark{
 	dir = 4
 	},
-/obj/effect/landmark/start{
+/obj/abstract/landmark/start{
 	name = "Station Engineer"
 	},
 /obj/machinery/atmospherics/unary/vent_scrubber/on{
@@ -58877,7 +58877,7 @@
 /turf/space,
 /area/space)
 "ctn" = (
-/obj/effect/landmark{
+/obj/abstract/landmark{
 	name = "carpspawn"
 	},
 /obj/structure/lattice,
@@ -59192,7 +59192,7 @@
 	},
 /obj/item/paper_bin,
 /obj/item/pen,
-/obj/item/tape_roll,
+/obj/item/ducttape,
 /turf/simulated/floor/tiled/white,
 /area/exodus/research/xenobiology)
 "ctX" = (
@@ -59423,7 +59423,7 @@
 /turf/simulated/floor/tiled/techfloor,
 /area/exodus/engineering/storage)
 "cuB" = (
-/obj/machinery/power/emitter,
+/obj/machinery/emitter,
 /turf/simulated/floor/plating,
 /area/exodus/engineering/storage)
 "cuC" = (
@@ -59510,7 +59510,7 @@
 /obj/structure/cable/yellow{
 	icon_state = "0-2"
 	},
-/obj/machinery/power/generator{
+/obj/machinery/generator{
 	anchored = 1;
 	dir = 4
 	},
@@ -60142,7 +60142,7 @@
 /obj/structure/bed/chair/shuttle/black{
 	dir = 8
 	},
-/obj/effect/landmark/latejoin,
+/obj/abstract/landmark/latejoin,
 /obj/machinery/light{
 	dir = 1
 	},
@@ -60452,7 +60452,7 @@
 /area/exodus/engineering/workshop)
 "cyz" = (
 /obj/structure/bed/chair,
-/obj/effect/landmark/start{
+/obj/abstract/landmark/start{
 	name = "Station Engineer"
 	},
 /turf/simulated/floor/tiled/steel_grid,
@@ -61279,7 +61279,7 @@
 /obj/machinery/light{
 	dir = 1
 	},
-/obj/effect/landmark/latejoin/cyborg,
+/obj/abstract/landmark/latejoin/cyborg,
 /obj/effect/floor_decal/industrial/warning{
 	dir = 9
 	},
@@ -61791,7 +61791,7 @@
 /turf/simulated/floor/tiled/white,
 /area/exodus/research)
 "cGc" = (
-/obj/effect/landmark/latejoin/cyborg,
+/obj/abstract/landmark/latejoin/cyborg,
 /obj/effect/floor_decal/industrial/warning{
 	dir = 8
 	},
@@ -61849,7 +61849,7 @@
 /area/exodus/engineering/engine_monitoring)
 "cGn" = (
 /obj/structure/bed/chair/office/dark,
-/obj/effect/landmark/start{
+/obj/abstract/landmark/start{
 	name = "Station Engineer"
 	},
 /turf/simulated/floor/tiled/steel_grid,
@@ -62224,12 +62224,15 @@
 /turf/simulated/floor/plating,
 /area/exodus/engineering/engine_room)
 "cIa" = (
-/obj/machinery/power/emitter{
+/obj/machinery/emitter{
 	anchored = 1;
 	id_tag = "EngineEmitter";
 	state = 2
 	},
 /obj/structure/cable/cyan,
+/obj/machinery/power/terminal{
+	dir = 1
+	},
 /turf/simulated/floor/plating,
 /area/exodus/engineering/engine_room)
 "cIb" = (
@@ -62756,7 +62759,7 @@
 /turf/simulated/floor/plating,
 /area/exodus/maintenance/engi_engine)
 "cJZ" = (
-/obj/machinery/power/generator{
+/obj/machinery/generator{
 	anchored = 1;
 	dir = 4
 	},
@@ -63435,7 +63438,7 @@
 /turf/simulated/floor/tiled/steel_grid,
 /area/ship/exodus_pod_mining)
 "doN" = (
-/obj/level_data/main_level,
+/obj/abstract/level_data/main_level,
 /turf/space,
 /area/space)
 "drB" = (
@@ -63578,7 +63581,7 @@
 /obj/machinery/light/small{
 	dir = 8
 	},
-/obj/effect/landmark/latejoin,
+/obj/abstract/landmark/latejoin,
 /turf/simulated/floor/tiled/freezer,
 /area/shuttle/arrival/station)
 "eNu" = (
@@ -63754,7 +63757,7 @@
 /obj/structure/bed/chair/shuttle/black{
 	dir = 8
 	},
-/obj/effect/landmark/latejoin,
+/obj/abstract/landmark/latejoin,
 /obj/machinery/camera/network/exodus{
 	c_tag = "Arrivals - Main Shuttle";
 	dir = 8
@@ -63896,7 +63899,7 @@
 /area/ship/exodus_pod_mining)
 "igB" = (
 /obj/machinery/hologram/holopad,
-/obj/effect/landmark{
+/obj/abstract/landmark{
 	name = "Observer-Start"
 	},
 /turf/simulated/floor/tiled/dark/monotile,
@@ -63923,7 +63926,7 @@
 /obj/structure/bed/chair/shuttle/black{
 	dir = 8
 	},
-/obj/effect/landmark/latejoin,
+/obj/abstract/landmark/latejoin,
 /turf/simulated/floor/tiled/dark/monotile,
 /area/shuttle/arrival/station)
 "itS" = (
@@ -63990,13 +63993,13 @@
 /turf/simulated/floor/tiled/steel_grid,
 /area/exodus/hallway/primary/starboard)
 "jfD" = (
-/obj/effect/landmark/start{
+/obj/abstract/landmark/start{
 	name = "Shaft Miner"
 	},
 /turf/simulated/floor/tiled/steel_grid,
 /area/exodus/quartermaster/miningdock)
 "jko" = (
-/obj/machinery/power/rad_collector,
+/obj/machinery/rad_collector,
 /obj/effect/floor_decal/industrial/warning/corner{
 	dir = 8
 	},
@@ -64269,7 +64272,7 @@
 /obj/effect/floor_decal/corner/white{
 	dir = 6
 	},
-/obj/effect/landmark/latejoin,
+/obj/abstract/landmark/latejoin,
 /turf/simulated/floor/tiled/freezer,
 /area/shuttle/arrival/station)
 "nPR" = (
@@ -64310,7 +64313,7 @@
 /turf/simulated/floor/tiled/steel_grid,
 /area/exodus/research/chargebay)
 "ohn" = (
-/obj/machinery/power/emitter,
+/obj/machinery/emitter,
 /obj/effect/floor_decal/industrial/warning{
 	dir = 8
 	},
@@ -65079,7 +65082,7 @@
 /obj/structure/bed/chair/shuttle/black{
 	dir = 8
 	},
-/obj/effect/landmark/latejoin,
+/obj/abstract/landmark/latejoin,
 /turf/simulated/floor/tiled/dark/monotile,
 /area/shuttle/arrival/station)
 "xVT" = (

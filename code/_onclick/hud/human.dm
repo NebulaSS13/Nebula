@@ -147,7 +147,7 @@
 		mymob.healths.SetName("health")
 		mymob.healths.screen_loc = ui_health
 		hud_elements |= mymob.healths
-		
+
 		mymob.oxygen = new /obj/screen/oxygen()
 		mymob.oxygen.icon = 'icons/mob/status_indicators.dmi'
 		mymob.oxygen.icon_state = "oxy0"
@@ -264,7 +264,8 @@
 	if(length(hud_elements))
 		mymob.client.screen += hud_elements
 	mymob.client.screen += src.adding + src.hotkeybuttons
-	inventory_shown = 0
+
+	hide_inventory()
 
 	hidden_inventory_update()
 	persistant_inventory_update()
@@ -281,7 +282,7 @@
 		client.screen -= hud_used.hotkeybuttons
 		hud_used.hotkey_ui_hidden = 1
 
-// Yes, these use icon state. Yes, these are terrible. The alternative is duplicating 
+// Yes, these use icon state. Yes, these are terrible. The alternative is duplicating
 // a bunch of fairly blobby logic for every click override on these objects.
 
 /obj/screen/food/Click(var/location, var/control, var/params)
@@ -328,7 +329,7 @@
 			if("temp-3")
 				to_chat(usr, SPAN_DANGER("You are freezing cold!"))
 			if("temp-2")
-				to_chat(usr, SPAN_WARNING("You are dangerously chilled"))
+				to_chat(usr, SPAN_WARNING("You are dangerously chilled!"))
 			if("temp-1")
 				to_chat(usr, SPAN_NOTICE("You are uncomfortably cold."))
 			else

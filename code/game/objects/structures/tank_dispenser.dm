@@ -23,13 +23,17 @@
 	update_icon()
 
 /obj/structure/dispenser/on_update_icon()
-	overlays.Cut()
+	..()
 	switch(oxygentanks)
-		if(1 to 3)	overlays += "oxygen-[oxygentanks]"
-		if(4 to INFINITY) overlays += "oxygen-4"
+		if(1 to 3)
+			add_overlay("oxygen-[oxygentanks]")
+		if(4 to INFINITY)
+			add_overlay("oxygen-4")
 	switch(hydrogentanks)
-		if(1 to 4)	overlays += "hydrogen-[hydrogentanks]"
-		if(5 to INFINITY) overlays += "hydrogen-5"
+		if(1 to 4)
+			add_overlay("hydrogen-[hydrogentanks]")
+		if(5 to INFINITY)
+			add_overlay("hydrogen-5")
 
 /obj/structure/dispenser/attack_ai(mob/living/silicon/ai/user)
 	if(user.Adjacent(src))

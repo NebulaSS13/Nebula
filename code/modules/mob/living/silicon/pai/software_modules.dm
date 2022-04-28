@@ -179,7 +179,7 @@
 		P.cable = new /obj/item/pai_cable(get_turf(P))
 		P.visible_message( \
 			message = SPAN_NOTICE("A port on [P] opens to reveal [P.cable], which promptly falls to the floor."), \
-			blind_message = SPAN_NOTICE("You hear the soft click of something light and hard falling to the ground"))
+			blind_message = SPAN_NOTICE("You hear the soft click of something light and hard falling to the ground."))
 		return 1
 
 /mob/living/silicon/pai/proc/hackloop()

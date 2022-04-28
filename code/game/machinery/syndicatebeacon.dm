@@ -14,7 +14,7 @@
 
 	anchored = 1
 	density = 1
-
+	
 	var/temptext = ""
 	var/selfdestructing = 0
 	var/charges = 1
@@ -55,12 +55,11 @@
 			src.updateUsrDialog()
 			return
 		charges -= 1
-		switch(rand(1,2))
-			if(1)
-				temptext = "<font color=red><i><b>Double-crosser. You planned to betray us from the start. Allow us to repay the favor in kind.</b></i></font>"
-				src.updateUsrDialog()
-				spawn(rand(50,200)) selfdestruct()
-				return
+		if(prob(50))
+			temptext = "<font color=red><i><b>Double-crosser. You planned to betray us from the start. Allow us to repay the favor in kind.</b></i></font>"
+			src.updateUsrDialog()
+			addtimer(CALLBACK(src, .proc/selfdestruct), rand(5, 20) SECONDS)
+			return
 		if(istype(M, /mob/living/carbon/human))
 			var/mob/living/carbon/human/N = M
 			to_chat(M, "<B>You have joined the ranks of the Syndicate and become a traitor to the station!</B>")
@@ -76,94 +75,89 @@
 
 /obj/machinery/syndicate_beacon/proc/selfdestruct()
 	selfdestructing = 1
-	spawn() explosion(src.loc, 1, rand(1,3), rand(3,8), 10)
+	INVOKE_ASYNC(GLOBAL_PROC, .proc/explosion, src.loc, 1, rand(1, 3), rand(3, 8), 10)
 
 ////////////////////////////////////////
 //Singularity beacon
 ////////////////////////////////////////
-/obj/machinery/power/singularity_beacon
+/obj/machinery/singularity_beacon
 	name = "ominous beacon"
 	desc = "This looks suspicious..."
 	icon = 'icons/obj/singularity.dmi'
 	icon_state = "beacon"
 
+	uncreated_component_parts = list(/obj/item/stock_parts/power/terminal)
 	anchored = 0
 	density = 1
 	layer = BASE_ABOVE_OBJ_LAYER //so people can't hide it and it's REALLY OBVIOUS
 	stat = 0
+	use_power = POWER_USE_OFF
 
-	var/active = 0
 	var/icontype = "beacon"
 
-/obj/machinery/power/singularity_beacon/proc/Activate(mob/user = null)
-	if(surplus() < 1500)
-		if(user) to_chat(user, "<span class='notice'>The connected wire doesn't have enough current.</span>")
-		return
+/obj/machinery/singularity_beacon/proc/Activate(mob/user = null)
 	for(var/obj/singularity/singulo in global.singularities)
 		if(singulo.z == z)
 			singulo.target = src
 	icon_state = "[icontype]1"
-	active = 1
-
-	START_PROCESSING_MACHINE(src, MACHINERY_PROCESS_SELF)
+	update_use_power(POWER_USE_ACTIVE)
 	if(user)
 		to_chat(user, "<span class='notice'>You activate the beacon.</span>")
 
-
-/obj/machinery/power/singularity_beacon/proc/Deactivate(mob/user = null)
+/obj/machinery/singularity_beacon/proc/Deactivate(mob/user = null)
 	for(var/obj/singularity/singulo in global.singularities)
 		if(singulo.target == src)
 			singulo.target = null
 	icon_state = "[icontype]0"
-	active = 0
+	update_use_power(POWER_USE_OFF)
 	if(user)
 		to_chat(user, "<span class='notice'>You deactivate the beacon.</span>")
 
-
-/obj/machinery/power/singularity_beacon/physical_attack_hand(var/mob/user)
+/obj/machinery/singularity_beacon/physical_attack_hand(var/mob/user)
 	. = TRUE
 	if(anchored)
-		if(active)
+		if(use_power)
 			Deactivate(user)
 		else
 			Activate(user)
 	else
 		to_chat(user, "<span class='danger'>You need to screw the beacon to the floor first!</span>")
 
-/obj/machinery/power/singularity_beacon/attackby(obj/item/W, mob/user)
+/obj/machinery/singularity_beacon/attackby(obj/item/W, mob/user)
 	if(isScrewdriver(W))
-		if(active)
+		if(use_power)
 			to_chat(user, "<span class='danger'>You need to deactivate the beacon first!</span>")
 			return
 
 		if(anchored)
 			anchored = 0
 			to_chat(user, "<span class='notice'>You unscrew the beacon from the floor.</span>")
-			disconnect_from_network()
 			return
 		else
-			if(!connect_to_network())
-				to_chat(user, "This device must be placed over an exposed cable.")
-				return
 			anchored = 1
-			to_chat(user, "<span class='notice'>You screw the beacon to the floor and attach the cable.</span>")
+			to_chat(user, "<span class='notice'>You screw the beacon to the floor.</span>")
 			return
 	..()
 	return
 
+// Ensure the terminal is always accessible to be plugged in.
+/obj/machinery/singularity_beacon/components_are_accessible(var/path)
+	if(ispath(path, /obj/item/stock_parts/power/terminal))
+		return TRUE
+	return ..()
 
-/obj/machinery/power/singularity_beacon/Destroy()
-	if(active)
+/obj/machinery/singularity_beacon/Destroy()
+	if(use_power)
 		Deactivate()
-	..()
+	. = ..()
 
-//stealth direct power usage
-/obj/machinery/power/singularity_beacon/Process()
-	if(!active)
-		return PROCESS_KILL
-	if(draw_power(1500) < 1500)
+/obj/machinery/singularity_beacon/power_change()
+	. = ..()
+	if(!. || !use_power)
+		return
+	if(stat & NOPOWER)
 		Deactivate()
 
-/obj/machinery/power/singularity_beacon/syndicate
+/obj/machinery/singularity_beacon/syndicate
 	icontype = "beaconsynd"
 	icon_state = "beaconsynd0"

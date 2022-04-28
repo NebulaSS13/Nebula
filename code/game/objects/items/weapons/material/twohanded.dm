@@ -213,6 +213,10 @@
 	applies_material_name = TRUE
 	w_class = ITEM_SIZE_NO_CONTAINER
 
+/obj/item/twohanded/pipewrench/Initialize()
+	. = ..()
+	set_extension(src, /datum/extension/tool, list(TOOL_WRENCH = TOOL_QUALITY_DEFAULT))
+
 /obj/item/twohanded/pipewrench/get_tool_quality(archetype)
 	if(wielded && archetype == TOOL_WRENCH)
 		return ..()

@@ -2,8 +2,8 @@
 	name = "good feeling"
 	origin_type = EFFECT_PSIONIC
 	var/static/list/messages = list("You feel good.",
-		"Everything seems to be going alright",
-		"You've got a good feeling about this",
+		"Everything seems to be going alright.",
+		"You've got a good feeling about this.",
 		"Your instincts tell you everything is going to be getting better.",
 		"There's a good feeling in the air.",
 		"Something smells... good.",

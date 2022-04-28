@@ -16,14 +16,14 @@
 /mob/living/carbon/human/adjustBrainLoss(var/amount)
 	if(status_flags & GODMODE)	return 0	//godmode
 	if(should_have_organ(BP_BRAIN))
-		var/obj/item/organ/internal/brain/sponge = get_internal_organ(BP_BRAIN)
+		var/obj/item/organ/internal/brain/sponge = get_organ(BP_BRAIN)
 		if(sponge)
 			sponge.take_internal_damage(amount)
 
 /mob/living/carbon/human/setBrainLoss(var/amount)
 	if(status_flags & GODMODE)	return 0	//godmode
 	if(should_have_organ(BP_BRAIN))
-		var/obj/item/organ/internal/brain/sponge = get_internal_organ(BP_BRAIN)
+		var/obj/item/organ/internal/brain/sponge = get_organ(BP_BRAIN)
 		if(sponge)
 			sponge.damage = min(max(amount, 0),sponge.species.total_health)
 			updatehealth()
@@ -31,7 +31,7 @@
 /mob/living/carbon/human/getBrainLoss()
 	if(status_flags & GODMODE)	return 0	//godmode
 	if(should_have_organ(BP_BRAIN))
-		var/obj/item/organ/internal/brain/sponge = get_internal_organ(BP_BRAIN)
+		var/obj/item/organ/internal/brain/sponge = get_organ(BP_BRAIN)
 		if(sponge)
 			if(sponge.status & ORGAN_DEAD)
 				return sponge.species.total_health
@@ -44,7 +44,7 @@
 //Straight pain values, not affected by painkillers etc
 /mob/living/carbon/human/getHalLoss()
 	var/amount = 0
-	for(var/obj/item/organ/external/E in organs)
+	for(var/obj/item/organ/external/E in get_external_organs())
 		amount += E.get_pain()
 	return amount
 
@@ -54,23 +54,25 @@
 /mob/living/carbon/human/adjustHalLoss(var/amount)
 	var/heal = (amount < 0)
 	amount = abs(amount)
-	var/list/pick_organs = organs.Copy()
-	while(amount > 0 && pick_organs.len)
-		var/obj/item/organ/external/E = pick(pick_organs)
-		pick_organs -= E
-		if(!istype(E))
-			continue
+	var/list/limbs = get_external_organs()
+	if(LAZYLEN(limbs))
+		var/list/pick_organs = limbs.Copy()
+		while(amount > 0 && pick_organs.len)
+			var/obj/item/organ/external/E = pick(pick_organs)
+			pick_organs -= E
+			if(!istype(E))
+				continue
 
-		if(heal)
-			amount -= E.remove_pain(amount)
-		else
-			amount -= E.add_pain(amount)
+			if(heal)
+				amount -= E.remove_pain(amount)
+			else
+				amount -= E.add_pain(amount)
 	BITSET(hud_updateflag, HEALTH_HUD)
 
 //These procs fetch a cumulative total damage from all organs
 /mob/living/carbon/human/getBruteLoss()
 	var/amount = 0
-	for(var/obj/item/organ/external/O in organs)
+	for(var/obj/item/organ/external/O in get_external_organs())
 		if(BP_IS_PROSTHETIC(O) && !O.vital)
 			continue //robot limbs don't count towards shock and crit
 		amount += O.brute_dam
@@ -78,7 +80,7 @@
 
 /mob/living/carbon/human/getFireLoss()
 	var/amount = 0
-	for(var/obj/item/organ/external/O in organs)
+	for(var/obj/item/organ/external/O in get_external_organs())
 		if(BP_IS_PROSTHETIC(O) && !O.vital)
 			continue //robot limbs don't count towards shock and crit
 		amount += O.burn_dam
@@ -100,7 +102,7 @@
 
 /mob/living/carbon/human/getCloneLoss()
 	var/amount = 0
-	for(var/obj/item/organ/external/E in organs)
+	for(var/obj/item/organ/external/E in get_external_organs())
 		amount += E.get_genetic_damage()
 	return amount
 
@@ -110,15 +112,16 @@
 /mob/living/carbon/human/adjustCloneLoss(var/amount)
 	var/heal = amount < 0
 	amount = abs(amount)
-
-	var/list/pick_organs = organs.Copy()
-	while(amount > 0 && pick_organs.len)
-		var/obj/item/organ/external/E = pick(pick_organs)
-		pick_organs -= E
-		if(heal)
-			amount -= E.remove_genetic_damage(amount)
-		else
-			amount -= E.add_genetic_damage(amount)
+	var/list/limbs = get_external_organs()
+	if(LAZYLEN(limbs))
+		var/list/pick_organs = limbs.Copy()
+		while(amount > 0 && pick_organs.len)
+			var/obj/item/organ/external/E = pick(pick_organs)
+			pick_organs -= E
+			if(heal)
+				amount -= E.remove_genetic_damage(amount)
+			else
+				amount -= E.add_genetic_damage(amount)
 	BITSET(hud_updateflag, HEALTH_HUD)
 
 // Defined here solely to take species flags into account without having to recast at mob/living level.
@@ -126,7 +129,7 @@
 	if(!need_breathe())
 		return 0
 	else
-		var/obj/item/organ/internal/lungs/breathe_organ = get_internal_organ(species.breathing_organ)
+		var/obj/item/organ/internal/lungs/breathe_organ = get_organ(species.breathing_organ)
 		if(!breathe_organ)
 			return maxHealth/2
 		return breathe_organ.get_oxygen_deprivation()
@@ -141,7 +144,7 @@
 	if(!need_breathe())
 		return
 	var/heal = amount < 0
-	var/obj/item/organ/internal/lungs/breathe_organ = get_internal_organ(species.breathing_organ)
+	var/obj/item/organ/internal/lungs/breathe_organ = get_organ(species.breathing_organ)
 	if(breathe_organ)
 		if(heal)
 			breathe_organ.remove_oxygen_deprivation(abs(amount))
@@ -153,7 +156,7 @@
 	if((species.species_flags & SPECIES_FLAG_NO_POISON) || isSynthetic())
 		return 0
 	var/amount = 0
-	for(var/obj/item/organ/internal/I in internal_organs)
+	for(var/obj/item/organ/internal/I in get_internal_organs())
 		amount += I.getToxLoss()
 	return amount
 
@@ -176,21 +179,24 @@
 		if(antitox)
 			amount *= 1 - antitox * 0.25
 
-	var/list/pick_organs = shuffle(internal_organs.Copy())
+	var/list/pick_organs = get_internal_organs()
+	if(!LAZYLEN(pick_organs))
+		return
+	pick_organs = shuffle(pick_organs.Copy())
 
 	// Prioritize damaging our filtration organs first.
-	var/obj/item/organ/internal/kidneys/kidneys = get_internal_organ(BP_KIDNEYS)
+	var/obj/item/organ/internal/kidneys/kidneys = get_organ(BP_KIDNEYS)
 	if(kidneys)
 		pick_organs -= kidneys
 		pick_organs.Insert(1, kidneys)
-	var/obj/item/organ/internal/liver/liver = get_internal_organ(BP_LIVER)
+	var/obj/item/organ/internal/liver/liver = get_organ(BP_LIVER)
 	if(liver)
 		pick_organs -= liver
 		pick_organs.Insert(1, liver)
 
 	// Move the brain to the very end since damage to it is vastly more dangerous
 	// (and isn't technically counted as toxloss) than general organ damage.
-	var/obj/item/organ/internal/brain/brain = get_internal_organ(BP_BRAIN)
+	var/obj/item/organ/internal/brain/brain = get_organ(BP_BRAIN)
 	if(brain)
 		pick_organs -= brain
 		pick_organs += brain
@@ -229,7 +235,7 @@
 //Returns a list of damaged organs
 /mob/living/carbon/human/proc/get_damaged_organs(var/brute, var/burn)
 	var/list/obj/item/organ/external/parts = list()
-	for(var/obj/item/organ/external/O in organs)
+	for(var/obj/item/organ/external/O in get_external_organs())
 		if((brute && O.brute_dam) || (burn && O.burn_dam))
 			parts += O
 	return parts
@@ -237,7 +243,7 @@
 //Returns a list of damageable organs
 /mob/living/carbon/human/proc/get_damageable_organs()
 	var/list/obj/item/organ/external/parts = list()
-	for(var/obj/item/organ/external/O in organs)
+	for(var/obj/item/organ/external/O in get_external_organs())
 		if(O.is_damageable())
 			parts += O
 	return parts
@@ -316,8 +322,9 @@ In most cases it makes more sense to use apply_damage() instead! And make sure t
 This function restores all organs.
 */
 /mob/living/carbon/human/restore_all_organs(var/ignore_prosthetic_prefs)
+	species?.create_missing_organs(src)
 	for(var/bodypart in global.all_limb_tags_by_depth)
-		var/obj/item/organ/external/current_organ = organs_by_name[bodypart]
+		var/obj/item/organ/external/current_organ = get_organ(bodypart)
 		if(istype(current_organ))
 			current_organ.rejuvenate(ignore_prosthetic_prefs)
 	verbs -= /mob/living/carbon/human/proc/undislocate
@@ -331,20 +338,8 @@ This function restores all organs.
 		return 0
 	return
 
-/mob/living/carbon/human/get_organs()
-	return organs
-
-/mob/living/carbon/human/get_organ(var/zone)
-	return organs_by_name[check_zone(zone, src, base_zone_only = TRUE)]
-
-/mob/living/carbon/human/get_internal_organs()
-	return internal_organs
-
-/mob/living/carbon/human/get_internal_organ(var/organ_tag)
-	return internal_organs_by_name[organ_tag]
-
 /mob/living/carbon/human/apply_damage(var/damage = 0, var/damagetype = BRUTE, var/def_zone = null, var/damage_flags = 0, var/obj/used_weapon = null, var/armor_pen, var/silent = FALSE, var/obj/item/organ/external/given_organ = null)
-
+	if(status_flags & GODMODE)	return	//godmode
 	var/obj/item/organ/external/organ = given_organ
 	if(!organ)
 		if(isorgan(def_zone))
@@ -411,3 +406,81 @@ This function restores all organs.
 	if(stat == UNCONSCIOUS)
 		traumatic_shock *= 0.6
 	return max(0,traumatic_shock)
+
+//Electrical shock
+
+/mob/living/carbon/human/apply_shock(var/shock_damage, var/def_zone, var/base_siemens_coeff = 1.0)
+	var/obj/item/organ/external/initial_organ = get_organ(check_zone(def_zone, src))
+	if(!initial_organ)
+		initial_organ = pick(get_external_organs())
+
+	var/obj/item/organ/external/floor_organ
+
+	if(!lying)
+		var/list/obj/item/organ/external/standing = list()
+		for(var/limb_tag in list(BP_L_FOOT, BP_R_FOOT))
+			var/obj/item/organ/external/E = get_organ(limb_tag)
+			if(E && E.is_usable())
+				standing[E.organ_tag] = E
+		if((def_zone == BP_L_FOOT || def_zone == BP_L_LEG) && standing[BP_L_FOOT])
+			floor_organ = standing[BP_L_FOOT]
+		if((def_zone == BP_R_FOOT || def_zone == BP_R_LEG) && standing[BP_R_FOOT])
+			floor_organ = standing[BP_R_FOOT]
+		else
+			floor_organ = standing[pick(standing)]
+
+	if(!floor_organ)
+		floor_organ = pick(get_external_organs())
+
+	var/list/obj/item/organ/external/to_shock = trace_shock(initial_organ, floor_organ)
+
+	if(to_shock && to_shock.len)
+		shock_damage /= to_shock.len
+		shock_damage = round(shock_damage, 0.1)
+	else
+		return 0
+
+	var/total_damage = 0
+
+	for(var/obj/item/organ/external/E in to_shock)
+		total_damage += ..(shock_damage, E.organ_tag, base_siemens_coeff * get_siemens_coefficient_organ(E))
+
+	if(total_damage > 10)
+		local_emp(initial_organ, 3)
+
+	return total_damage
+
+/mob/living/carbon/human/proc/trace_shock(var/obj/item/organ/external/init, var/obj/item/organ/external/floor)
+	var/list/obj/item/organ/external/traced_organs = list(floor)
+
+	if(!init)
+		return
+
+	if(!floor || init == floor)
+		return list(init)
+
+	for(var/obj/item/organ/external/E in list(floor, init))
+		while(E && E.parent_organ)
+			var/candidate = get_organ(E.parent_organ)
+			if(!candidate || (candidate in traced_organs))
+				break // Organ parenthood is not guaranteed to be a tree
+			E = candidate
+			traced_organs += E
+			if(E == init)
+				return traced_organs
+
+	return traced_organs
+
+/mob/living/carbon/human/proc/local_emp(var/list/limbs, var/severity = 2)
+	if(!islist(limbs))
+		limbs = list(limbs)
+
+	var/list/EMP = list()
+	for(var/obj/item/organ/external/limb in limbs)
+		EMP += limb
+		if(LAZYLEN(limb.internal_organs))
+			EMP += limb.internal_organs
+		if(LAZYLEN(limb.implants))
+			EMP += limb.implants
+	for(var/atom/E in EMP)
+		E.emp_act(severity)

@@ -34,7 +34,7 @@
 			appearance_descriptors[descriptor.name] = descriptor.randomize_value()
 
 	backpack = GET_DECL(pick(subtypesof(/decl/backpack_outfit)))
-	b_type = RANDOM_BLOOD_TYPE
+	b_type = pickweight(current_species.blood_types)
 	if(H)
 		copy_to(H)
 
@@ -44,8 +44,10 @@
 		return
 
 	var/update_icon = FALSE
-	mannequin.rejuvenate()
 	copy_to(mannequin, TRUE)
+	mannequin.restore_all_organs()
+	mannequin.sync_organ_dna()
+	mannequin.force_update_limbs()
 
 	var/datum/job/previewJob
 	if(equip_preview_mob)

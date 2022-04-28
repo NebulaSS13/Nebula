@@ -101,15 +101,15 @@
 /turf/simulated/floor/tiled/white/usedup
 	initial_gas = list(/decl/material/gas/carbon_dioxide = MOLES_O2STANDARD, /decl/material/gas/nitrogen = MOLES_N2STANDARD)
 
-/obj/effect/landmark/deadcap
+/obj/abstract/landmark/deadcap
 	name = "Dead Captain"
 
-/obj/effect/landmark/deadcap/Initialize()
+/obj/abstract/landmark/deadcap/Initialize()
 	..()
 	return INITIALIZE_HINT_LATELOAD
 
 // chair may need to init first
-/obj/effect/landmark/deadcap/LateInitialize()
+/obj/abstract/landmark/deadcap/LateInitialize()
 	..()
 	var/turf/T = get_turf(src)
 	var/mob/living/carbon/human/corpse = new(T)

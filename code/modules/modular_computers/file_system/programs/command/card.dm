@@ -206,7 +206,7 @@
 			if(computer && can_run(user, 1))
 				var/static/regex/hash_check = regex(@"^[0-9a-fA-F]{32}$")
 				if(href_list["name"])
-					var/temp_name = sanitizeName(input("Enter name.", "Name", id_card.registered_name),allow_numbers=TRUE)
+					var/temp_name = sanitize_name(input("Enter name.", "Name", id_card.registered_name),allow_numbers=TRUE)
 					if(temp_name && CanUseTopic(user))
 						id_card.registered_name = temp_name
 						id_card.formal_name_suffix = initial(id_card.formal_name_suffix)
@@ -239,7 +239,7 @@
 					if(hash_check.Find(sug_dna_hash) && CanUseTopic(user))
 						id_card.dna_hash = sug_dna_hash
 				else if(href_list["blood_type"])
-					var/sug_blood_type = input("Select blood type.", "Blood type") as null|anything in global.blood_types
+					var/sug_blood_type = input("Select blood type.", "Blood type") as null|anything in get_all_blood_types()
 					if(!isnull(sug_blood_type) && CanUseTopic(user))
 						id_card.blood_type = sug_blood_type
 				else if(href_list["front_photo"])

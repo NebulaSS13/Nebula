@@ -92,7 +92,7 @@
 
 		if(href_list["pen"])
 			if(istype(haspen) && (haspen.loc == src))
-				usr.put_in_hands(haspen)
+				usr.put_in_hands_or_store_or_drop(haspen)
 				haspen = null
 
 		else if(href_list["addpen"])
@@ -119,7 +119,7 @@
 			var/obj/item/P = locate(href_list["remove"])
 
 			if(P && (P.loc == src) && (istype(P, /obj/item/paper) || istype(P, /obj/item/photo)) )
-				usr.put_in_hands(P)
+				usr.put_in_hands_or_store_or_drop(P)
 				if(P == toppaper)
 					toppaper = null
 					var/obj/item/paper/newtop = locate(/obj/item/paper) in src

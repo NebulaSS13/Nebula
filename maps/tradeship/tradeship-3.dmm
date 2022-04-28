@@ -168,7 +168,7 @@
 /turf/simulated/floor/airless,
 /area/space)
 "aK" = (
-/obj/effect/landmark/map_data{
+/obj/abstract/map_data{
 	height = 4
 	},
 /turf/space,
@@ -269,7 +269,7 @@
 /turf/simulated/floor/plating,
 /area/ship/trade/bridge_unused)
 "dm" = (
-/obj/level_data/main_level,
+/obj/abstract/level_data/main_level,
 /turf/space,
 /area/space)
 "dq" = (

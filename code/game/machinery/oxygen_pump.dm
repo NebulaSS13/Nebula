@@ -97,7 +97,7 @@
 	if(!user)
 		user = target
 	// Check target validity
-	if(!target.organs_by_name[BP_HEAD])
+	if(!target.get_organ(BP_HEAD))
 		to_chat(user, "<span class='warning'>\The [target] doesn't have a head.</span>")
 		return
 	if(!target.check_has_mouth())
@@ -152,7 +152,7 @@
 /obj/machinery/oxygen_pump/examine(mob/user)
 	. = ..()
 	if(tank)
-		to_chat(user, "The meter shows [round(tank.air_contents.return_pressure())]")
+		to_chat(user, "The meter shows [round(tank.air_contents.return_pressure())].")
 	else
 		to_chat(user, "<span class='warning'>It is missing a tank!</span>")
 

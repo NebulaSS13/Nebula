@@ -15,7 +15,7 @@
 /turf/simulated/floor/reinforced,
 /area/space)
 "ae" = (
-/obj/effect/landmark/map_data{
+/obj/abstract/map_data{
 	height = 2
 	},
 /turf/simulated/floor/reinforced,
@@ -108,7 +108,7 @@
 /turf/simulated/floor/reinforced,
 /area/space)
 "au" = (
-/obj/machinery/power/port_gen/pacman/super,
+/obj/machinery/port_gen/pacman/super,
 /turf/simulated/floor/plating,
 /area/lar_maria/solar_control)
 "av" = (
@@ -339,7 +339,7 @@
 /obj/structure/cable/yellow{
 	icon_state = "4-8"
 	},
-/obj/effect/landmark/corpse/lar_maria/test_subject,
+/obj/abstract/landmark/corpse/lar_maria/test_subject,
 /obj/effect/decal/cleanable/blood,
 /turf/simulated/floor/reinforced,
 /area/space)
@@ -504,7 +504,7 @@
 /turf/simulated/floor/plating,
 /area/lar_maria/solar_control)
 "bp" = (
-/obj/effect/landmark/corpse/lar_maria/zhp_guard,
+/obj/abstract/landmark/corpse/lar_maria/zhp_guard,
 /obj/effect/decal/cleanable/blood,
 /turf/simulated/floor/plating,
 /area/lar_maria/solar_control)
@@ -718,7 +718,7 @@
 /turf/simulated/floor/wood,
 /area/lar_maria/dorms)
 "ca" = (
-/obj/effect/landmark/corpse/lar_maria/virologist,
+/obj/abstract/landmark/corpse/lar_maria/virologist,
 /obj/effect/decal/cleanable/blood,
 /turf/simulated/floor/wood,
 /area/lar_maria/dorms)
@@ -740,7 +740,7 @@
 /turf/simulated/floor/tiled,
 /area/lar_maria/library)
 "cf" = (
-/obj/effect/landmark/corpse/lar_maria/virologist,
+/obj/abstract/landmark/corpse/lar_maria/virologist,
 /obj/effect/decal/cleanable/blood,
 /turf/simulated/floor/tiled,
 /area/lar_maria/library)
@@ -1012,7 +1012,7 @@
 /turf/simulated/floor/wood,
 /area/lar_maria/dorms)
 "cZ" = (
-/obj/effect/landmark/corpse/lar_maria/test_subject,
+/obj/abstract/landmark/corpse/lar_maria/test_subject,
 /obj/effect/decal/cleanable/blood,
 /turf/simulated/floor/wood,
 /area/lar_maria/dorms)
@@ -1220,7 +1220,7 @@
 /turf/simulated/floor/tiled,
 /area/lar_maria/library)
 "dK" = (
-/obj/effect/landmark/corpse/lar_maria/test_subject,
+/obj/abstract/landmark/corpse/lar_maria/test_subject,
 /obj/effect/decal/cleanable/blood,
 /turf/simulated/floor/tiled,
 /area/lar_maria/library)
@@ -1394,7 +1394,7 @@
 /turf/simulated/floor/wood,
 /area/lar_maria/dorms)
 "el" = (
-/obj/effect/landmark/corpse/lar_maria/virologist_female,
+/obj/abstract/landmark/corpse/lar_maria/virologist_female,
 /obj/effect/decal/cleanable/blood,
 /turf/simulated/floor/wood,
 /area/lar_maria/dorms)
@@ -1485,7 +1485,7 @@
 /area/lar_maria/office)
 "eD" = (
 /obj/structure/bed/chair/office/light,
-/obj/effect/landmark/corpse/lar_maria/virologist_female,
+/obj/abstract/landmark/corpse/lar_maria/virologist_female,
 /obj/effect/decal/cleanable/blood,
 /turf/simulated/floor/tiled,
 /area/lar_maria/office)
@@ -1537,7 +1537,7 @@
 	dir = 1
 	},
 /obj/random/trash,
-/obj/effect/landmark/corpse/lar_maria/test_subject,
+/obj/abstract/landmark/corpse/lar_maria/test_subject,
 /obj/effect/decal/cleanable/blood,
 /turf/simulated/floor/tiled/white,
 /area/lar_maria/head_m)
@@ -1573,7 +1573,7 @@
 /area/lar_maria/office)
 "eS" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
-/obj/effect/landmark/corpse/lar_maria/test_subject,
+/obj/abstract/landmark/corpse/lar_maria/test_subject,
 /obj/effect/decal/cleanable/blood,
 /turf/simulated/floor/tiled,
 /area/lar_maria/office)
@@ -1783,7 +1783,7 @@
 /turf/simulated/floor/tiled,
 /area/lar_maria/office)
 "fA" = (
-/obj/effect/landmark/corpse/lar_maria/test_subject,
+/obj/abstract/landmark/corpse/lar_maria/test_subject,
 /obj/effect/decal/cleanable/blood,
 /turf/simulated/floor/tiled,
 /area/lar_maria/office)
@@ -2022,12 +2022,12 @@
 /area/lar_maria/dorms)
 "go" = (
 /obj/structure/bed/padded,
-/obj/effect/landmark/corpse/lar_maria/virologist,
+/obj/abstract/landmark/corpse/lar_maria/virologist,
 /turf/simulated/floor/wood,
 /area/lar_maria/dorms)
 "gp" = (
 /obj/random/trash,
-/obj/effect/landmark/corpse/lar_maria/test_subject,
+/obj/abstract/landmark/corpse/lar_maria/test_subject,
 /obj/effect/decal/cleanable/blood,
 /turf/simulated/floor/tiled/white,
 /area/lar_maria/head_m)
@@ -2405,7 +2405,7 @@
 /obj/structure/cable{
 	icon_state = "4-8"
 	},
-/obj/effect/landmark/corpse/lar_maria/test_subject,
+/obj/abstract/landmark/corpse/lar_maria/test_subject,
 /obj/effect/decal/cleanable/blood,
 /turf/simulated/floor/tiled,
 /area/lar_maria/hallway)
@@ -2542,7 +2542,7 @@
 /turf/simulated/floor/plating,
 /area/lar_maria/hallway)
 "hT" = (
-/obj/effect/landmark/corpse/lar_maria/zhp_guard/dark,
+/obj/abstract/landmark/corpse/lar_maria/zhp_guard/dark,
 /obj/effect/decal/cleanable/blood,
 /turf/simulated/floor/tiled,
 /area/lar_maria/hallway)
@@ -2624,7 +2624,7 @@
 /turf/simulated/floor/tiled/freezer,
 /area/lar_maria/mess_hall)
 "ih" = (
-/obj/effect/landmark/corpse/lar_maria/test_subject,
+/obj/abstract/landmark/corpse/lar_maria/test_subject,
 /obj/effect/decal/cleanable/blood,
 /turf/simulated/floor/tiled/freezer,
 /area/lar_maria/mess_hall)
@@ -2761,7 +2761,7 @@
 /obj/structure/bed/chair{
 	dir = 4
 	},
-/obj/effect/landmark/corpse/lar_maria/virologist,
+/obj/abstract/landmark/corpse/lar_maria/virologist,
 /obj/effect/decal/cleanable/blood,
 /turf/simulated/floor/tiled,
 /area/lar_maria/mess_hall)
@@ -2782,7 +2782,7 @@
 /turf/simulated/floor/tiled/white,
 /area/lar_maria/mess_hall)
 "iD" = (
-/obj/effect/landmark/corpse/lar_maria/virologist_female,
+/obj/abstract/landmark/corpse/lar_maria/virologist_female,
 /obj/effect/decal/cleanable/blood,
 /turf/simulated/floor/tiled/white,
 /area/lar_maria/mess_hall)
@@ -2805,7 +2805,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 5
 	},
-/obj/effect/landmark/corpse/lar_maria/test_subject,
+/obj/abstract/landmark/corpse/lar_maria/test_subject,
 /obj/effect/decal/cleanable/blood,
 /turf/simulated/floor/tiled/white,
 /area/lar_maria/head_f)

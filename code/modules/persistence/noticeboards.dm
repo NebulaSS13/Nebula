@@ -44,17 +44,18 @@
 
 		switch(placing)
 			if(NORTH)
-				pixel_x = 0
-				pixel_y = 32
+				default_pixel_x = 0
+				default_pixel_y = 32
 			if(SOUTH)
-				pixel_x = 0
-				pixel_y = -32
+				default_pixel_x = 0
+				default_pixel_y = -32
 			if(EAST)
-				pixel_x = 32
-				pixel_y = 0
+				default_pixel_x = 32
+				default_pixel_y = 0
 			if(WEST)
-				pixel_x = -32
-				pixel_y = 0
+				default_pixel_x = -32
+				default_pixel_y = 0
+		reset_offsets(0)
 
 	update_icon()
 
@@ -88,6 +89,7 @@
 		physically_destroyed()
 
 /obj/structure/noticeboard/on_update_icon()
+	..()
 	icon_state = "[base_icon_state][LAZYLEN(notices)]"
 
 /obj/structure/noticeboard/attackby(var/obj/item/thing, var/mob/user)
@@ -98,19 +100,18 @@
 			var/choice = input("Which direction do you wish to place the noticeboard?", "Noticeboard Offset") as null|anything in list("North", "South", "East", "West")
 			if(choice && Adjacent(user) && thing.loc == user && !user.incapacitated())
 				playsound(loc, 'sound/items/Screwdriver.ogg', 50, 1)
+				default_pixel_x = 0
+				default_pixel_y = 0
 				switch(choice)
 					if("North")
-						pixel_x = 0
-						pixel_y = 32
+						default_pixel_y = 32
 					if("South")
-						pixel_x = 0
-						pixel_y = -32
+						default_pixel_y = -32
 					if("East")
-						pixel_x = 32
-						pixel_y = 0
+						default_pixel_x = 32
 					if("West")
-						pixel_x = -32
-						pixel_y = 0
+						default_pixel_x = -32
+				reset_offsets(0)
 			return TRUE
 
 		if(!istype(thing, /obj/item/paper/sticky) && (istype(thing, /obj/item/paper) || istype(thing, /obj/item/photo)))
@@ -120,7 +121,7 @@
 				add_fingerprint(user)
 				add_paper(thing)
 				to_chat(user, SPAN_NOTICE("You pin \the [thing] to \the [src]."))
-				SSpersistence.track_value(thing, /decl/persistence_handler/paper)
+				SSpersistence.track_value(thing, /decl/persistence_handler/paper/noticeboard)
 			else
 				to_chat(user, SPAN_WARNING("You hesitate, certain \the [thing] will not be seen among the many others already attached to \the [src]."))
 			return TRUE

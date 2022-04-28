@@ -841,7 +841,7 @@
 /turf/simulated/floor/plating,
 /area/errant_pisces/enginering)
 "cC" = (
-/obj/effect/landmark/corpse/engineer,
+/obj/abstract/landmark/corpse/engineer,
 /obj/effect/decal/cleanable/blood,
 /turf/simulated/floor/plating,
 /area/errant_pisces/enginering)
@@ -1574,7 +1574,7 @@
 	alarm_id = "xenobio1_alarm";
 	pixel_y = 24
 	},
-/obj/effect/landmark/corpse/carp_fisher,
+/obj/abstract/landmark/corpse/carp_fisher,
 /obj/effect/decal/cleanable/blood,
 /turf/simulated/floor/tiled/white,
 /area/errant_pisces/head_f)
@@ -1849,7 +1849,7 @@
 /turf/simulated/floor/plating,
 /area/errant_pisces/smes_room)
 "eQ" = (
-/obj/machinery/power/port_gen/pacman/mrs,
+/obj/machinery/port_gen/pacman/mrs,
 /obj/structure/cable/yellow{
 	icon_state = "0-8"
 	},
@@ -1978,7 +1978,7 @@
 /turf/simulated/floor/plating,
 /area/errant_pisces/smes_room)
 "ff" = (
-/obj/machinery/power/port_gen/pacman/mrs,
+/obj/machinery/port_gen/pacman/mrs,
 /obj/structure/cable/yellow{
 	icon_state = "0-8"
 	},
@@ -2014,7 +2014,7 @@
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
-/obj/effect/landmark/corpse/engineer,
+/obj/abstract/landmark/corpse/engineer,
 /turf/simulated/floor/plating,
 /area/errant_pisces/bow_maint)
 "fk" = (
@@ -2133,7 +2133,7 @@
 /turf/simulated/floor/plating,
 /area/errant_pisces/smes_room)
 "fx" = (
-/obj/machinery/power/port_gen/pacman/mrs,
+/obj/machinery/port_gen/pacman/mrs,
 /obj/structure/cable/yellow{
 	icon_state = "0-8"
 	},
@@ -2863,7 +2863,7 @@
 /turf/simulated/floor/wood,
 /area/errant_pisces/rooms)
 "hs" = (
-/obj/effect/landmark/corpse/bridgeofficer,
+/obj/abstract/landmark/corpse/bridgeofficer,
 /obj/effect/decal/cleanable/blood,
 /turf/simulated/floor/wood,
 /area/errant_pisces/rooms)
@@ -3114,7 +3114,7 @@
 /turf/simulated/floor/tiled,
 /area/errant_pisces/dorms)
 "im" = (
-/obj/effect/landmark/corpse/chef,
+/obj/abstract/landmark/corpse/chef,
 /obj/effect/decal/cleanable/blood,
 /turf/simulated/floor/tiled,
 /area/errant_pisces/dorms)
@@ -3166,7 +3166,7 @@
 /obj/machinery/light/small{
 	dir = 1
 	},
-/obj/effect/landmark/corpse/carp_fisher,
+/obj/abstract/landmark/corpse/carp_fisher,
 /obj/effect/decal/cleanable/blood,
 /turf/simulated/floor/plating,
 /area/errant_pisces/infirmary)
@@ -3321,7 +3321,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 4
 	},
-/obj/effect/landmark/corpse/doctor,
+/obj/abstract/landmark/corpse/doctor,
 /obj/effect/decal/cleanable/blood,
 /turf/simulated/floor/tiled,
 /area/errant_pisces/infirmary)
@@ -3509,7 +3509,7 @@
 /turf/simulated/floor/tiled,
 /area/errant_pisces/dorms)
 "jv" = (
-/obj/effect/landmark/corpse/carp_fisher,
+/obj/abstract/landmark/corpse/carp_fisher,
 /obj/effect/decal/cleanable/blood,
 /turf/simulated/floor/tiled/freezer,
 /area/errant_pisces/dorms)
@@ -4086,7 +4086,7 @@
 /turf/simulated/floor/tiled,
 /area/errant_pisces/science_wing)
 "le" = (
-/obj/effect/landmark/corpse/scientist,
+/obj/abstract/landmark/corpse/scientist,
 /obj/effect/decal/cleanable/blood,
 /turf/simulated/floor/tiled,
 /area/errant_pisces/science_wing)
@@ -4192,7 +4192,7 @@
 /area/errant_pisces/science_wing)
 "lx" = (
 /obj/structure/table,
-/obj/item/tape_roll,
+/obj/item/ducttape,
 /turf/simulated/floor/tiled,
 /area/errant_pisces/science_wing)
 "ly" = (
@@ -4632,7 +4632,7 @@
 /area/errant_pisces/science_wing)
 "mJ" = (
 /obj/machinery/light,
-/obj/effect/landmark/corpse/carp_fisher,
+/obj/abstract/landmark/corpse/carp_fisher,
 /obj/effect/decal/cleanable/blood,
 /turf/simulated/floor/tiled,
 /area/errant_pisces/cryo)
@@ -4874,7 +4874,7 @@
 /turf/simulated/wall/r_wall,
 /area/errant_pisces/aux_power)
 "nl" = (
-/obj/machinery/power/port_gen/pacman/mrs,
+/obj/machinery/port_gen/pacman/mrs,
 /obj/structure/cable/yellow{
 	icon_state = "0-4"
 	},
@@ -5179,7 +5179,7 @@
 /turf/simulated/floor/plating,
 /area/errant_pisces/aft_hallway)
 "nK" = (
-/obj/machinery/power/port_gen/pacman/mrs,
+/obj/machinery/port_gen/pacman/mrs,
 /obj/structure/cable/yellow{
 	icon_state = "0-2"
 	},
@@ -5230,7 +5230,7 @@
 /turf/simulated/floor/tiled,
 /area/errant_pisces/aft_hallway)
 "nR" = (
-/obj/effect/landmark/corpse/scientist,
+/obj/abstract/landmark/corpse/scientist,
 /turf/simulated/floor/tiled,
 /area/errant_pisces/aft_hallway)
 "nS" = (
@@ -5279,7 +5279,7 @@
 /turf/simulated/floor/tiled,
 /area/errant_pisces/aft_hallway)
 "oa" = (
-/obj/effect/landmark/corpse/bridgeofficer,
+/obj/abstract/landmark/corpse/bridgeofficer,
 /obj/effect/decal/cleanable/blood,
 /turf/simulated/floor/tiled,
 /area/errant_pisces/aft_hallway)
@@ -5513,7 +5513,7 @@
 	icon_state = "1-2"
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
-/obj/effect/landmark/corpse/bridgeofficer,
+/obj/abstract/landmark/corpse/bridgeofficer,
 /turf/simulated/floor/tiled,
 /area/errant_pisces/bridge)
 "oH" = (
@@ -5657,7 +5657,7 @@
 /obj/structure/cable/green{
 	icon_state = "4-8"
 	},
-/obj/effect/landmark/corpse/carp_fisher,
+/obj/abstract/landmark/corpse/carp_fisher,
 /turf/simulated/floor/tiled,
 /area/errant_pisces/fishing_wing)
 "pc" = (
@@ -6202,7 +6202,7 @@
 /turf/simulated/floor/plating,
 /area/errant_pisces/fishing_wing)
 "qL" = (
-/obj/effect/landmark/corpse/carp_fisher,
+/obj/abstract/landmark/corpse/carp_fisher,
 /obj/effect/decal/cleanable/blood,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /turf/simulated/floor/plating,

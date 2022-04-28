@@ -1,6 +1,7 @@
 /datum/extension/network_device/broadcaster/relay
 	connection_type = NETWORK_CONNECTION_STRONG_WIRELESS
 	expected_type = /obj/machinery
+	var/reconnect_time
 
 /datum/extension/network_device/broadcaster/relay/get_nearby_networks()
 	if(long_range)
@@ -21,7 +22,22 @@
 		return FALSE
 	if(!long_range && !(network_id in get_nearby_networks()))
 		return FALSE
-	return net.add_device(src)
+	. = net.add_device(src)
+	if(.)	
+		reconnect_time = null
 
+/datum/extension/network_device/broadcaster/relay/disconnect(net_down)
+	. = ..()
+	// Router went down, we should try to hook back up when it's up
+	if(net_down)
+		reconnect_time = world.time + 30 SECONDS
+		START_PROCESSING(SSprocessing, src)
+
+/datum/extension/network_device/broadcaster/relay/Process()
+	if(world.time > reconnect_time)
+		if(connect())
+			return PROCESS_KILL
+		reconnect_time = world.time + 30 SECONDS
+	
 /datum/extension/network_device/broadcaster/relay/long_range
 	long_range = TRUE

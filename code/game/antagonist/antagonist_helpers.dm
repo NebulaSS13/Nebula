@@ -8,20 +8,18 @@
 		if(player.current.faction != MOB_FACTION_NEUTRAL)
 			return FALSE
 
-	if(!player.assigned_job || is_type_in_list(player.assigned_job, blacklisted_jobs))
-		return FALSE
-
 	if(!ignore_role)
 		if(player.current && player.current.client)
 			var/client/C = player.current.client
 			// Limits antag status to clients above player age, if the age system is being used.
 			if(C && config.use_age_restriction_for_jobs && isnum(C.player_age) && isnum(min_player_age) && (C.player_age < min_player_age))
 				return FALSE
-		if(is_type_in_list(player.assigned_job, restricted_jobs))
-			return FALSE
-		for(var/event_tag in blocked_job_event_categories)
-			if(event_tag in player.assigned_job.event_categories)
+		if(player.assigned_job)
+			if(is_type_in_list(player.assigned_job, blacklisted_jobs) || is_type_in_list(player.assigned_job, restricted_jobs))
 				return FALSE
+			for(var/event_tag in blocked_job_event_categories)
+				if(event_tag in player.assigned_job.event_categories)
+					return FALSE
 		if(player.current && (player.current.status_flags & NO_ANTAG))
 			return FALSE
 	return TRUE

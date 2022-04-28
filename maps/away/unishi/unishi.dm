@@ -77,7 +77,7 @@
 	oxygen_release_modifier = 100000000000
 	radiation_release_modifier = 1
 
-/obj/machinery/power/emitter/anchored/on
+/obj/machinery/emitter/anchored/on
 	active = 1
 	powered = 1
 

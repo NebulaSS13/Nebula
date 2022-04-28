@@ -278,7 +278,7 @@
 
 	color = "#ffffff"
 	alpha = 255
-	cut_overlays()
+	..()
 
 	icon_state = "blank"
 	if(!is_flipped)
@@ -691,6 +691,7 @@
 	icon_state = "solid_preview"
 	color = WOOD_COLOR_GENERIC
 	material = /decl/material/solid/wood
+	reinf_material = /decl/material/solid/wood
 
 /obj/structure/table/woodentable/mahogany
 	color = WOOD_COLOR_RICH
