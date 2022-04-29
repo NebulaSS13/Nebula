@@ -1,4 +1,0 @@
-author: tag if you want to specify another name or several people. -->
-delete-after: true
-changes:
-  - bugfix: Manually spawned human mobs of the "human" species now spawn with a language.
