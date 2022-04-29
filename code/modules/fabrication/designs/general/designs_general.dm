@@ -153,3 +153,6 @@
 	fabricator_types = list(
 		FABRICATOR_CLASS_GENERAL
 	)
+
+/datum/fabricator_recipe/emergency_tank
+	path = /obj/item/tank/emergency

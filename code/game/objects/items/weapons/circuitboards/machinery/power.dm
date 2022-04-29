@@ -154,3 +154,14 @@
 							/obj/item/stock_parts/console_screen = 1,
 							/obj/item/stack/cable_coil = 5
 							)
+
+/obj/item/stock_parts/circuitboard/unary_atmos/stirling
+	name = "circuit board (stirling engine)"
+	build_path = /obj/machinery/atmospherics/binary/stirling
+	board_type = "machine"
+	origin_tech = "{'engineering':2,'powerstorage':1}"
+	req_components = list(
+		/obj/item/stack/cable_coil = 20,
+		/obj/item/stock_parts/matter_bin = 2,
+		/obj/item/stock_parts/manipulator = 2
+		)

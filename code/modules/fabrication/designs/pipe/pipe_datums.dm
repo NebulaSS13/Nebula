@@ -252,7 +252,7 @@
 /datum/fabricator_recipe/pipe/he/exchanger
 	name = "heat exchanger"
 	desc = "a heat exchanger"
-	connect_types = CONNECT_TYPE_REGULAR
+	connect_types = CONNECT_TYPE_REGULAR|CONNECT_TYPE_FUEL
 	build_icon_state = "heunary"
 	constructed_path = /obj/machinery/atmospherics/unary/heat_exchanger
 	pipe_class = PIPE_CLASS_UNARY
