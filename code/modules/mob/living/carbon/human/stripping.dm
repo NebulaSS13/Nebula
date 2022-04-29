@@ -60,11 +60,7 @@
 	
 			var/obj/item/clothing/accessory/A
 			if(LAZYLEN(holder.accessories) > 1)
-				var/list/options = list()
-				for(var/obj/item/clothing/accessory/i in holder.accessories)
-					var/image/radial_button = image(icon = i.icon, icon_state = i.icon_state)
-					options[i] = radial_button
-				A = show_radial_menu(user, user, options, radius = 42, tooltips = TRUE)
+				A = show_radial_menu(user, user, make_item_radial_menu_choices(holder.accessories), radius = 42, tooltips = TRUE)
 			else
 				A = holder.accessories[1]
 			
