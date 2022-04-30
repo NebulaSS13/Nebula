@@ -137,4 +137,12 @@ if(Datum.is_processing) {\
 		processing = SS##X.processing; \
 	}\
 }\
+/datum/controller/subsystem/processing/##X/fire() {..() /*just so it shows up on the profiler*/}\
 /datum/controller/subsystem/processing/##X
+
+#define TIMER_SUBSYSTEM_DEF(X) var/global/datum/controller/subsystem/timer/##X/SS##X;\
+/datum/controller/subsystem/timer/##X/New(){\
+	NEW_SS_GLOBAL(SS##X);\
+	PreInit();\
+}\
+/datum/controller/subsystem/timer/##X
