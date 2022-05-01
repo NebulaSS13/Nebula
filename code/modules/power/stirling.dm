@@ -10,7 +10,6 @@
 	density = 1
 	anchored = 1
 	layer = STRUCTURE_LAYER
-	use_power = POWER_USE_OFF
 	base_type = /obj/machinery/atmospherics/binary/stirling
 	construct_state = /decl/machine_construction/default/panel_closed
 	uncreated_component_parts = null
@@ -20,10 +19,13 @@
 	var/obj/item/tank/stirling/inserted_cylinder
 
 	var/cycle_frequency = MAX_FREQUENCY/2
+	var/active = FALSE
 
 	var/max_power = 100000
 	var/genlev = 0
-	var/lastgen = 0
+	var/last_genlev
+
+	var/last_gen = 0
 	var/skipped_cycle = FALSE
 
 	var/sound_id
@@ -48,10 +50,7 @@
 
 	if(!istype(inserted_cylinder))
 		return
-
-	if(use_power != POWER_USE_ACTIVE)
-		update_icon()
-		update_sound()
+	if(!active)
 		return
 
 	var/datum/gas_mixture/working_volume = inserted_cylinder.air_contents
@@ -110,11 +109,12 @@
 	air2.add_thermal_energy(air2_dq)
 	
 	generate_power(power_generated)
-	lastgen = power_generated
+	last_gen = power_generated
 	genlev = max(0, min(round(4*power_generated / max_power), 4))
-
-	update_icon()
-	update_sound()
+	if(genlev != last_genlev)
+		update_icon()
+		update_sound()
+	last_genlev = genlev
 	update_networks()
 
 /obj/machinery/atmospherics/binary/stirling/examine(mob/user, distance)
@@ -122,7 +122,7 @@
 	if(distance > 1)
 		return
 
-	to_chat(user, "\The [src] is generating [round(lastgen/1000, 0.1)] kW")
+	to_chat(user, "\The [src] is generating [round(last_gen/1000, 0.1)] kW")
 	if(!inserted_cylinder)
 		to_chat(user, "There is no piston cylinder inserted into \the [src].")
 
@@ -155,15 +155,15 @@
 	. = ..()
 
 /obj/machinery/atmospherics/binary/stirling/attack_hand(mob/user)
-	if(!(stat & BROKEN) && use_power != POWER_USE_ACTIVE)
+	if(!(stat & BROKEN) && !active)
 		if(!inserted_cylinder)
 			to_chat(user, SPAN_WARNING("You must insert a stirling piston cylinder into \the [src] before you can start it!"))
 			return
 		to_chat(user, "You start trying to manually rev up \the [src].")
-		if(do_after(user, 2 SECONDS, src) && use_power != POWER_USE_ACTIVE && inserted_cylinder && !(stat & BROKEN))
+		if(do_after(user, 2 SECONDS, src) && !active && inserted_cylinder && !(stat & BROKEN))
 			visible_message("[user] pulls on the starting cord of \the [src], revving it up!", "You pull on the starting cord of \the [src], revving it up!")
 			playsound(src.loc, 'sound/machines/engine.ogg', 35, 1)
-			update_use_power(POWER_USE_ACTIVE)
+			active = TRUE
 		return
 	. = ..()
 
@@ -177,7 +177,7 @@
 /obj/machinery/atmospherics/binary/stirling/proc/update_sound()
 	if(!sound_id)
 		sound_id = "[type]_[sequential_id(/obj/machinery/atmospherics/binary/stirling)]"
-	if(use_power == POWER_USE_ACTIVE)
+	if(active)
 		var/volume = 10 + 15*genlev
 		if(!sound_token)
 			sound_token = play_looping_sound(src, sound_id, 'sound/machines/engine.ogg', volume = volume)
@@ -187,9 +187,9 @@
 
 /obj/machinery/atmospherics/binary/stirling/proc/stop_engine()
 	skipped_cycle = FALSE
-	if(use_power == POWER_USE_ACTIVE)
+	if(active)
 		visible_message(SPAN_WARNING("\The [src] sputters to a violent halt!"))
-		update_use_power(POWER_USE_IDLE)
+		active = FALSE
 		update_sound()
 		update_icon()
 
@@ -200,7 +200,7 @@
 
 /obj/item/tank/stirling
 	name = "stirling piston cylinder"
-	desc = "A piston cylinder designed for use in a stirling engine. It must be charged with gas before it can be used. Rated for temperatures up to 1000 C"
+	desc = "A piston cylinder designed for use in a stirling engine. It must be charged with gas before it can be used."
 	icon = 'icons/obj/items/tanks/tank_stirling.dmi'
 	gauge_icon = null
 	obj_flags = OBJ_FLAG_CONDUCTIBLE
@@ -209,6 +209,10 @@
 
 	volume = 30
 	failure_temp = 1000
+
+/obj/item/tank/stirling/Initialize()
+	. = ..()
+	desc += "It's rated for temperatures up to [failure_temp] C."
 
 /obj/item/tank/stirling/empty
 	starting_pressure = list()
