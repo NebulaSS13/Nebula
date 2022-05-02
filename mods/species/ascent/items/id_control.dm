@@ -39,7 +39,7 @@
 
 /obj/item/organ/internal/controller/do_install(mob/living/carbon/human/target, obj/item/organ/external/affected, in_place, update_icon, detached)
 	. = ..()
-	if(!owner)
+	if(detached || !owner)
 		return
 	var/datum/extension/access_provider/owner_access = get_or_create_extension(owner, /datum/extension/access_provider)
 	owner_access?.register_id(src)
