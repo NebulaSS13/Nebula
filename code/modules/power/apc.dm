@@ -147,6 +147,7 @@ var/global/list/all_apcs = list()
 	uncreated_component_parts = list(
 		/obj/item/cell/apc
 	)
+	stock_part_presets = list(/decl/stock_part_preset/terminal_setup)
 
 /obj/machinery/power/apc/buildable
 	uncreated_component_parts = null
@@ -190,11 +191,10 @@ var/global/list/all_apcs = list()
 
 	. = ..()
 
-	if (populate_parts)
-		init_round_start()
-	else
+	if(!populate_parts)
 		operating = 0
-		queue_icon_update()
+	
+	queue_icon_update()
 
 	if(operating)
 		force_update_channels()
@@ -229,11 +229,6 @@ var/global/list/all_apcs = list()
 	if(!failure_timer && duration)
 		playsound(src, 'sound/machines/apc_nopower.ogg', 75, 0)
 	failure_timer = max(failure_timer, round(duration))
-
-/obj/machinery/power/apc/proc/init_round_start()
-	var/obj/item/stock_parts/power/terminal/term = get_component_of_type(/obj/item/stock_parts/power/terminal)
-	term.make_terminal(src) // intentional crash if there is no terminal
-	queue_icon_update()
 
 /obj/machinery/power/apc/proc/terminal(var/functional_only)
 	var/obj/item/stock_parts/power/terminal/term = get_component_of_type(/obj/item/stock_parts/power/terminal)

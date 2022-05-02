@@ -693,6 +693,7 @@
 	icon_state = "solid_preview"
 	color = WOOD_COLOR_GENERIC
 	material = /decl/material/solid/wood
+	reinf_material = /decl/material/solid/wood
 
 /obj/structure/table/woodentable/mahogany
 	color = WOOD_COLOR_RICH

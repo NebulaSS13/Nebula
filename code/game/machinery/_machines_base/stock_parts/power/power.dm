@@ -35,3 +35,6 @@
 
 // This alerts the part that it does not need to provide power anymore.
 /obj/item/stock_parts/power/proc/not_needed(var/obj/machinery/machine)
+
+// Returns OOC information about how to use this power source on examine, if the machine is not receiving power.
+/obj/item/stock_parts/power/proc/get_source_info()

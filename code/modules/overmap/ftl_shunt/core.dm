@@ -53,7 +53,7 @@
 	idle_power_usage = 1600
 	icon_state = "bsd"
 	light_color = COLOR_BLUE
-
+	stock_part_presets = list(/decl/stock_part_preset/terminal_setup)
 //Base procs
 
 /obj/machinery/ftl_shunt/core/Initialize(mapload, d, populate_parts)
@@ -65,10 +65,6 @@
 	find_ports()
 	set_light(2)
 	target_charge = max_charge * 0.25 //Target charge set to a quarter of our maximum charge, just for weirdness prevention
-	if(populate_parts)
-		var/obj/item/stock_parts/power/terminal/term = get_component_of_type(/obj/item/stock_parts/power/terminal)
-		if(!term.terminal)
-			term.make_terminal(src)
 
 /obj/machinery/ftl_shunt/core/modify_mapped_vars(map_hash)
 	..()

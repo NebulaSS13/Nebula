@@ -635,6 +635,10 @@ default behaviour is:
 /mob/living/carbon/get_contained_external_atoms()
 	. = ..()
 	LAZYREMOVE(., get_organs())
+	//Since organs are cleared on destroy, add this separate check here
+	for(var/obj/item/organ/O in .)
+		if(!O.is_droppable())
+			LAZYREMOVE(., O)
 
 /mob/proc/can_be_possessed_by(var/mob/observer/ghost/possessor)
 	return istype(possessor) && possessor.client
@@ -851,7 +855,8 @@ default behaviour is:
 	if(!has_gravity())
 		return
 	if(isturf(loc) && pull_damage() && prob(getBruteLoss() / 6))
-		blood_splatter(loc, src, large = TRUE)
+		if (!should_have_organ(BP_HEART))
+			blood_splatter(loc, src, large = TRUE)
 		if(prob(25))
 			adjustBruteLoss(1)
 			visible_message(SPAN_DANGER("\The [src]'s [isSynthetic() ? "state worsens": "wounds open more"] from being dragged!"))

@@ -4392,7 +4392,7 @@
 /turf/simulated/floor/tiled/usedup,
 /area/ship/scrap/maintenance/power)
 "in" = (
-/obj/machinery/power/shield_generator,
+/obj/machinery/shield_generator,
 /obj/structure/cable{
 	icon_state = "0-2";
 	pixel_y = 1
@@ -5377,7 +5377,7 @@
 /obj/structure/cable{
 	icon_state = "0-6"
 	},
-/obj/machinery/power/port_gen/pacman/super,
+/obj/machinery/port_gen/pacman/super,
 /turf/simulated/floor/usedup,
 /area/ship/scrap/hidden)
 "Qe" = (

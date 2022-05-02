@@ -30,9 +30,12 @@
 
 /obj/item/stock_parts/circuitboard/fusion_core
 	name = "circuitboard (fusion core)"
-	build_path = /obj/machinery/power/fusion_core
+	build_path = /obj/machinery/fusion_core
 	board_type = "machine"
 	origin_tech = "{'wormholes':2,'magnets':4,'powerstorage':4}"
+	additional_spawn_components = list(
+		/obj/item/stock_parts/power/terminal = 1
+	)
 	req_components = list(
 							/obj/item/stock_parts/manipulator/pico = 2,
 							/obj/item/stock_parts/micro_laser/ultra = 1,
@@ -56,9 +59,12 @@
 
 /obj/item/stock_parts/circuitboard/gyrotron
 	name = "circuitboard (gyrotron)"
-	build_path = /obj/machinery/power/emitter/gyrotron
+	build_path = /obj/machinery/emitter/gyrotron
 	board_type = "machine"
 	origin_tech = "{'powerstorage':4,'engineering':4}"
+	additional_spawn_components = list(
+		/obj/item/stock_parts/power/terminal = 1
+	)
 	req_components = list(
 							/obj/item/stack/cable_coil = 20,
 							/obj/item/stock_parts/micro_laser/ultra = 2

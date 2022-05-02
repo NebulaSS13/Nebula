@@ -215,7 +215,7 @@
 /turf/simulated/floor,
 /area/liberia/engineeringreactor)
 "aA" = (
-/obj/machinery/power/port_gen/pacman/super/potato,
+/obj/machinery/port_gen/pacman/super/potato,
 /obj/structure/cable{
 	icon_state = "0-8"
 	},
@@ -376,7 +376,7 @@
 /turf/simulated/floor/tiled/techfloor,
 /area/liberia/merchantstorage)
 "aR" = (
-/obj/machinery/power/shield_generator,
+/obj/machinery/shield_generator,
 /obj/structure/cable,
 /obj/structure/cable/blue{
 	icon_state = "1-2"
@@ -4912,7 +4912,7 @@
 /obj/machinery/light{
 	dir = 8
 	},
-/obj/machinery/power/port_gen/pacman/mrs,
+/obj/machinery/port_gen/pacman/mrs,
 /obj/effect/floor_decal/industrial/warning/full,
 /obj/structure/cable/blue{
 	icon_state = "0-4"

@@ -190,6 +190,9 @@
 /obj/item/stock_parts/power/battery/get_cell()
 	return cell
 
+/obj/item/stock_parts/power/battery/get_source_info()
+	return "The machine can receive power from an installed power cell."
+
 /obj/item/stock_parts/power/battery/buildable
 	part_flags = PART_FLAG_HAND_REMOVE
 	material = /decl/material/solid/metal/steel

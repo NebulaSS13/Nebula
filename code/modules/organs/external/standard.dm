@@ -38,6 +38,10 @@
 		return
 	. = ..()
 
+//Can't drop root limb
+/obj/item/organ/external/chest/is_droppable()
+	return FALSE
+
 /obj/item/organ/external/groin
 	name = "lower body"
 	organ_tag = BP_GROIN
@@ -156,7 +160,7 @@
 	var/gripper_ui_loc = ui_lhand
 	var/overlay_slot_id = BP_L_HAND
 
-/obj/item/organ/external/hand/do_install(mob/living/carbon/human/target, affected, in_place, update_icon)
+/obj/item/organ/external/hand/do_install(mob/living/carbon/human/target, affected, in_place, update_icon, detached)
 	if(!(. = ..()))
 		return
 	owner?.add_held_item_slot(organ_tag, gripper_ui_loc, overlay_slot_id, gripper_ui_label)

@@ -190,13 +190,7 @@ var/global/const/DEFAULT_SPECIES_HEALTH = 200
 
 	//List of organ tags, with the amount and type required for living by this species
 	//#REMOVEME: The vital organ stuff was apparently mostly dropped, so its a bit pointless to improve it...
-	var/list/vital_organs = list(
-		BP_HEART = list("path" = /obj/item/organ/internal/heart),
-		BP_LUNGS = list("path" = /obj/item/organ/internal/lungs),
-		BP_BRAIN = list("path" = /obj/item/organ/internal/brain),
-		BP_CHEST = list("path" = /obj/item/organ/external/chest),
-		BP_GROIN = list("path" = /obj/item/organ/external/groin),
-	)
+	var/list/vital_organs
 
 	var/obj/effect/decal/cleanable/blood/tracks/move_trail = /obj/effect/decal/cleanable/blood/tracks/footprints // What marks are left when walking
 
@@ -479,6 +473,8 @@ var/global/const/DEFAULT_SPECIES_HEALTH = 200
 	return FALSE
 
 /decl/species/proc/is_vital_organ(var/mob/living/carbon/human/H, var/obj/item/organ/O)
+	if(!LAZYLEN(vital_organs))
+		return FALSE
 	//An organ organ is considered vital if there's less than the required amount of said organ type in the mob after we remove it
 	var/list/organ_data = vital_organs[O.organ_tag]
 	if(!organ_data || !ispath(O.type, organ_data["path"]))
@@ -513,6 +509,7 @@ var/global/const/DEFAULT_SPECIES_HEALTH = 200
 		var/limb_path = organ_data["path"]
 		var/obj/item/organ/external/E = new limb_path(H, null, H.dna) //explicitly specify the dna
 		H.add_organ(E, null, FALSE, FALSE)
+		post_organ_rejuvenate(E, H)
 
 	//Create missing internal organs
 	for(var/organ_tag in has_organ)
@@ -719,11 +716,6 @@ var/global/const/DEFAULT_SPECIES_HEALTH = 200
 
 /decl/species/proc/handle_death_check(var/mob/living/carbon/human/H)
 	return FALSE
-
-//Mostly for toasters
-/decl/species/proc/handle_limbs_setup(var/mob/living/carbon/human/H)
-	for(var/thing in H.get_external_organs())
-		post_organ_rejuvenate(thing, H)
 
 // Impliments different trails for species depending on if they're wearing shoes.
 /decl/species/proc/get_move_trail(var/mob/living/carbon/human/H)

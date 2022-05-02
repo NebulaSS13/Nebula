@@ -1,8 +1,11 @@
 /mob/living/carbon/Initialize()
 	//setup reagent holders
-	bloodstr = new/datum/reagents/metabolism(120, src, CHEM_INJECT)
-	touching = new/datum/reagents/metabolism(1000, src, CHEM_TOUCH)
-	reagents = bloodstr
+	if(!bloodstr)
+		bloodstr = new/datum/reagents/metabolism(120, src, CHEM_INJECT)
+	if(!reagents)
+		reagents = bloodstr
+	if(!touching)
+		touching = new/datum/reagents/metabolism(1000, src, CHEM_TOUCH)
 
 	if (!default_language && species_language)
 		default_language = species_language
@@ -10,7 +13,8 @@
 
 /mob/living/carbon/Destroy()
 	QDEL_NULL(touching)
-	bloodstr = null // We don't qdel(bloodstr) because it's the same as qdel(reagents)
+	QDEL_NULL(bloodstr)
+	reagents = null //We assume reagents is a reference to bloodstr here
 	delete_organs()
 	QDEL_NULL_LIST(hallucinations)
 	if(loc)

@@ -176,8 +176,8 @@
 		transfer_identity(owner)
 	return ..()
 
-/obj/item/organ/internal/posibrain/do_install(var/mob/living/target)
-	if(!(. = ..())) 
+/obj/item/organ/internal/posibrain/do_install(mob/living/carbon/human/target, obj/item/organ/external/affected, in_place, update_icon, detached)
+	if(!(. = ..()))
 		return
 	if(istype(owner))
 		SetName(initial(name)) //Reset the organ's name to stay coherent if we're put back into someone's skull
@@ -248,7 +248,7 @@
 		return 0
 	return cell && cell.use(amount)
 
-/obj/item/organ/internal/cell/proc/get_power_drain()	
+/obj/item/organ/internal/cell/proc/get_power_drain()
 	var/damage_factor = 1 + 10 * damage/max_damage
 	return servo_cost * damage_factor
 
@@ -321,10 +321,13 @@
 
 /obj/item/organ/internal/mmi_holder/Destroy()
 	stored_mmi = null
+	persistantMind = null
 	return ..()
 
-/obj/item/organ/internal/mmi_holder/Initialize(mapload, var/internal)
-	. = ..()
+/obj/item/organ/internal/mmi_holder/do_install(mob/living/carbon/human/target, obj/item/organ/external/affected, in_place)
+	if(status & ORGAN_CUT_AWAY || !(. = ..()))
+		return
+
 	if(!stored_mmi)
 		stored_mmi = new(src)
 	update_from_mmi()
@@ -355,14 +358,6 @@
 		owner.switch_from_dead_to_living_mob_list()
 		owner.visible_message("<span class='danger'>\The [owner] twitches visibly!</span>")
 
-/obj/item/organ/internal/mmi_holder/cut_away(var/mob/living/user)
-	var/obj/item/organ/external/parent = owner.get_organ(parent_organ)
-	if(istype(parent))
-		do_uninstall(detach = TRUE) //#TODO: detach proc for organs/mobs so we have less args to pass..
-		var/brain = transfer_and_delete()
-		if(brain)
-			LAZYADD(parent.implants, brain)
-
 /obj/item/organ/internal/mmi_holder/on_remove_effects(mob/living/last_owner)
 	if(last_owner && last_owner.mind)
 		persistantMind = last_owner.mind
@@ -381,3 +376,8 @@
 			if(response == "Yes")
 				persistantMind.transfer_to(stored_mmi.brainmob)
 	qdel(src)
+
+//Since the mmi_holder is an horrible hacky pos we turn it into a mmi on drop, since it shouldn't exist outside a mob
+/obj/item/organ/internal/mmi_holder/dropInto(atom/destination)
+	. = ..()
+	transfer_and_delete()

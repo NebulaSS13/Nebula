@@ -9,7 +9,7 @@
 /turf/simulated/wall,
 /area/space)
 "ad" = (
-/obj/machinery/power/port_gen/pacman/super/potato,
+/obj/machinery/port_gen/pacman/super/potato,
 /obj/structure/cable/yellow{
 	icon_state = "0-4"
 	},
@@ -52,7 +52,7 @@
 /turf/simulated/wall,
 /area/unishi/engineering)
 "aj" = (
-/obj/machinery/power/port_gen/pacman/super/potato,
+/obj/machinery/port_gen/pacman/super/potato,
 /obj/structure/cable/yellow{
 	icon_state = "0-4"
 	},

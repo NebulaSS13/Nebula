@@ -217,6 +217,9 @@ meteor_act
 	if(W.damtype != BRUTE)
 		return
 
+	if(!should_have_organ(BP_HEART))
+		return
+
 	//make non-sharp low-force weapons less likely to be bloodied
 	if(W.sharp || prob(effective_force*4))
 		if(!(W.atom_flags & ATOM_FLAG_NO_BLOOD))

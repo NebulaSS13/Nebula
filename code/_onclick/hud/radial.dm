@@ -337,3 +337,22 @@ var/global/list/radial_menus = list()
 	return answer
 
 #define RADIAL_INPUT(user, choices) show_radial_menu(user, user, choices)
+
+/*
+	Helper to make a radial menu button with a name and icon for a given atom.
+*/
+/proc/make_item_radial_menu_button(var/atom/movable/AM, var/name_prefix = "", var/name_suffix = "")
+	var/image/radial_button = new
+	radial_button.appearance = AM
+	radial_button.plane = FLOAT_PLANE
+	radial_button.layer = FLOAT_LAYER
+	radial_button.name = "[name_prefix][AM.name][name_suffix]"
+	return radial_button
+
+/*
+	Helper to make a radial menu button for a set of atoms with their names and icons.
+*/
+/proc/make_item_radial_menu_choices(var/list/items, var/name_prefix = "", var/name_suffix = "")
+	for(var/atom/movable/AM in items)
+		LAZYSET(., AM, make_item_radial_menu_button(AM, name_prefix, name_suffix))
+	
