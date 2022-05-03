@@ -8,28 +8,28 @@
 /client/verb/open_wiki()
 	set name = "Wiki"
 	set desc = "Visit the wiki."
-	set hidden = TRUE
+	set category = "OOC"
 
 	open_external_page_wrap(config.wikiurl, "wiki")
 
 /client/verb/open_codebase()
 	set name = "Source Code"
 	set desc = "Visit the codebase repository."
-	set hidden = TRUE
+	set category = "OOC"
 
 	open_external_page_wrap(config.githuburl, "codebase")
 
 /client/verb/open_report_bug()
 	set name = "Bug Report"
 	set desc = "Visit the codebase repository to report an issue or bug."
-	set hidden = TRUE
+	set category = "OOC"
 
 	open_external_page_wrap(config.issuereporturl, "codebase")
 
 /client/verb/open_community()
 	set name = "Community"
 	set desc = "Visit the community page."
-	set hidden = TRUE
+	set category = "OOC"
 
 	open_external_page_wrap(config.forumurl, "community")
 
@@ -37,6 +37,6 @@
 /client/verb/open_rules()
 	set name = "Rules"
 	set desc = "Show Server Rules."
-	set hidden = TRUE
+	set category = "OOC"
 	show_browser(src, file(RULES_FILE), "window=rules;size=480x320")
 #undef RULES_FILE

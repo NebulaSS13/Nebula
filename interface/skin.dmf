@@ -244,7 +244,6 @@ window "window_output"
 		size = 50x20
 		anchor1 = 0,100
 		anchor2 = -1,-1
-		background-color = #c0c0c0
 		saved-params = "is-checked"
 		text = "Say"
 		command = ".winset \"button_say.is-checked=true?input.command=\"!say \\\"\":input.command=\""
@@ -272,8 +271,8 @@ window "window_panel_right"
 		is-pane = true
 	elem "panel_right_info"
 		type = CHILD
-		pos = 0,40
-		size = 640x440
+		pos = 0,20
+		size = 640x460
 		anchor1 = 0,0
 		anchor2 = 100,100
 		background-color = none
@@ -283,36 +282,45 @@ window "window_panel_right"
 		is-vert = false
 	elem "button_changelog"
 		type = BUTTON
-		pos = 0,0
+		pos = 100,0
 		size = 100x20
-		anchor1 = 0,0
-		anchor2 = 16,0
+		anchor1 = 16,0
+		anchor2 = 31,0
 		background-color = none
 		saved-params = "is-checked"
 		text = "Changelog"
 		command = "Changelog"
 	elem "button_info_hide"
 		type = BUTTON
-		pos = 0,20
+		pos = 0,0
 		size = 100x20
 		anchor1 = 0,0
 		anchor2 = 16,0
-		background-color = #c0c0c0
+		background-color = none
 		saved-params = "is-checked"
 		text = "Hide Verbs"
 		command = ".winset \"button_info_hide.is-checked!=true ? panel_right_info.left=window_info : panel_right_info.left=\""
 		button-type = pushbox
-	elem "tab_buttons"
-		type = TAB
-		pos = 100,0
-		size = 540x40
-		anchor1 = 16,0
-		anchor2 = 100,0
+	elem "button_rules"
+		type = BUTTON
+		pos = 300,0
+		size = 100x20
+		anchor1 = 47,0
+		anchor2 = 63,0
 		background-color = none
-		saved-params = "current-tab"
-		tabs = "tab_window_community,tab_window_references"
-		current-tab = "tab_window_community"
-		multi-line = false
+		saved-params = "is-checked"
+		text = "Rules"
+		command = "Rules"
+	elem "button_codex"
+		type = BUTTON
+		pos = 200,0
+		size = 100x20
+		anchor1 = 31,0
+		anchor2 = 47,0
+		background-color = none
+		saved-params = "is-checked"
+		text = "Codex"
+		command = "Codex"
 
 window "window_info"
 	elem "window_info"
@@ -360,106 +368,4 @@ window "window_preferences"
 		anchor2 = 100,100
 		right-click = true
 		saved-params = "zoom;letterbox;zoom-mode"
-
-window "tab_window_community"
-	elem "tab_window_community"
-		type = MAIN
-		pos = 281,0
-		size = 480x14
-		anchor1 = -1,-1
-		anchor2 = -1,-1
-		saved-params = "pos;size;is-minimized;is-maximized"
-		title = "Community"
-		titlebar = false
-		statusbar = false
-		can-close = false
-		can-minimize = false
-		can-resize = false
-		is-pane = true
-	elem "button_rules"
-		type = BUTTON
-		pos = 80,0
-		size = 80x14
-		anchor1 = 17,0
-		anchor2 = 33,0
-		background-color = #c0c0c0
-		saved-params = "is-checked"
-		text = "Rules"
-		command = "Rules"
-	elem "button_community"
-		type = BUTTON
-		pos = 0,0
-		size = 80x14
-		anchor1 = 0,0
-		anchor2 = 17,0
-		background-color = #c0c0c0
-		saved-params = "is-checked"
-		text = "Community"
-		command = "Community"
-	elem "button_codebase"
-		type = BUTTON
-		pos = 160,0
-		size = 80x14
-		anchor1 = 33,0
-		anchor2 = 50,0
-		background-color = #c0c0c0
-		saved-params = "is-checked"
-		text = "Codebase"
-		command = "Source-Code"
-	elem "button_report_bug"
-		type = BUTTON
-		pos = 240,0
-		size = 80x14
-		anchor1 = 50,0
-		anchor2 = 67,0
-		background-color = #c0c0c0
-		saved-params = "is-checked"
-		text = "Bug Report"
-		command = "Bug-Report"
-
-window "tab_window_references"
-	elem "tab_window_references"
-		type = MAIN
-		pos = 281,0
-		size = 480x14
-		anchor1 = -1,-1
-		anchor2 = -1,-1
-		saved-params = "pos;size;is-minimized;is-maximized"
-		title = "Game References"
-		titlebar = false
-		statusbar = false
-		can-close = false
-		can-minimize = false
-		can-resize = false
-		is-pane = true
-	elem "button_lore"
-		type = BUTTON
-		pos = 80,0
-		size = 80x14
-		anchor1 = 17,0
-		anchor2 = 33,0
-		background-color = #c0c0c0
-		saved-params = "is-checked"
-		text = "Lore"
-		command = "Lore"
-	elem "button_wiki"
-		type = BUTTON
-		pos = 160,0
-		size = 80x14
-		anchor1 = 33,0
-		anchor2 = 50,0
-		background-color = #c0c0c0
-		saved-params = "is-checked"
-		text = "Wiki"
-		command = "Wiki"
-	elem "button_codex"
-		type = BUTTON
-		pos = 0,0
-		size = 80x14
-		anchor1 = 0,0
-		anchor2 = 17,0
-		background-color = #c0c0c0
-		saved-params = "is-checked"
-		text = "Codex"
-		command = "Codex"
 
