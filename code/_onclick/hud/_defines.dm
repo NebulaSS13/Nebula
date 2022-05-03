@@ -56,7 +56,7 @@
 #define ui_movi "RIGHT-3:24,BOTTOM:5"
 #define ui_attack_selector "RIGHT-3:24,BOTTOM+1:-2"
 #define ui_zonesel "RIGHT-1:28,BOTTOM:5"
-#define ui_acti_alt "RIGHT-1:28,BOTTOM:5" //alternative intent switcher for when the interface is hidden (F12)
+#define ui_acti_alt "RIGHT-1:28,BOTTOM:5" //alternative intent switcher for when the interface is hidden
 #define ui_stamina "RIGHT-3:24,BOTTOM+1:5"
 
 #define ui_borg_pull "RIGHT-3:24,BOTTOM+1:7"

@@ -44,8 +44,7 @@
 	description = "Cycles the intent left"
 
 /datum/keybinding/robot/intent_cycle/down(client/user)
-	var/mob/living/silicon/robot/R = user.mob
-	R.a_intent_change(INTENT_HOTKEY_LEFT)
+	user.mob.a_intent_change(INTENT_HOTKEY_LEFT)
 	return TRUE
 
 /datum/keybinding/robot/module_cycle
