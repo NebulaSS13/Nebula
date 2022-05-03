@@ -1,0 +1,5 @@
+author: tag if you want to specify another name or several people. -->
+delete-after: true
+changes:
+  - tweak: Greeting message now check if your starting loadout actually gives you
+      a headset before advising you on how to talk through your headset..
