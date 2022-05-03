@@ -228,6 +228,7 @@ window "window_output"
 		anchor2 = -1,-1
 		saved-params = "pos;size;is-minimized;is-maximized"
 		is-pane = true
+		on-status = ".winset \"status_bar.text=[[*]]\" "
 	elem "output"
 		type = OUTPUT
 		pos = 0,0
@@ -332,6 +333,7 @@ window "window_info"
 		saved-params = "pos;size;is-minimized;is-maximized"
 		title = "Info"
 		is-pane = true
+		on-status = ".winset \"status_bar.text=[[*]]\" "
 	elem "info"
 		type = INFO
 		pos = 0,0
