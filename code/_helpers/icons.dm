@@ -921,15 +921,15 @@ The _flatIcons list is a cache for generated icon files.
 	capture.Scale(range * world.icon_size, range * world.icon_size)
 	capture.Blend(COLOR_BLACK, ICON_OVERLAY)
 	for(var/atom/A as anything in render_atoms)
-		var/icon/image = getFlatIcon(A)
+		var/icon/atom_icon = getFlatIcon(A)
 	
 		if(ismob(A))
 			var/mob/M = A
 			if(M.lying)
-				image.BecomeLying()
+				atom_icon.BecomeLying()
 
 		var/x_offset = (A.x - target_x) * world.icon_size
 		var/y_offset = (A.y - target_y) * world.icon_size
-		capture.Blend(image, blendMode2iconMode(A.blend_mode), A.pixel_x + x_offset, A.pixel_y + y_offset)
+		capture.Blend(atom_icon, blendMode2iconMode(A.blend_mode), A.pixel_x + x_offset, A.pixel_y + y_offset)
 
 	return capture
