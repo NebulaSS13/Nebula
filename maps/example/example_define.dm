@@ -1,10 +1,10 @@
-/datum/map/debug
+/datum/map/example
 	name = "Testing"
 	full_name = "Testing Site"
-	path = "debug"
+	path = "example"
 
 	lobby_screens = list(
-		'maps/debug/debug_lobby.png'
+		'maps/example/example_lobby.png'
 	)
 
 	lobby_tracks = list(
