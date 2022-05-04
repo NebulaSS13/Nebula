@@ -1,19 +1,23 @@
 /// How long the chat message's spawn-in animation will occur for
 #define RUNECHAT_MESSAGE_SPAWN_TIME 0.2 SECONDS
 /// How long the chat message will exist prior to any exponential decay
-#define RUNECHAT_MESSAGE_LIFESPAN 5 SECONDS
+#define RUNECHAT_MESSAGE_LIFESPAN 5.4 SECONDS
 /// How long the chat message's end of life fading animation will occur for
-#define RUNECHAT_MESSAGE_EOL_FADE 0.7 SECONDS
+#define RUNECHAT_MESSAGE_EOL_FADE 0.3 SECONDS
 /// Factor of how much the message index (number of messages) will account to exponential decay
 #define RUNECHAT_MESSAGE_EXP_DECAY 0.7
 /// Factor of how much height will account to exponential decay
 #define RUNECHAT_MESSAGE_HEIGHT_DECAY 0.9
 /// Approximate height in pixels of an 'average' line, used for height decay
-#define RUNECHAT_MESSAGE_APPROX_LHEIGHT 11
+#define RUNECHAT_MESSAGE_APPROX_LHEIGHT 10
 /// Max width of chat message in pixels
-#define RUNECHAT_MESSAGE_WIDTH 96
+#define RUNECHAT_MESSAGE_WIDTH 128
 /// Max length of chat message in characters
 #define RUNECHAT_MESSAGE_MAX_LENGTH 110
+/// How much the message moves up before fading out.
+#define RUNECHAT_MESSAGE_FADE_PIXEL_Y 10
+/// How much the message moves up before fading out.
+#define MESSAGE_FADE_PIXEL_Y 10
 
 /// Maximum precision of float before rounding errors occur (in this context)
 #define RUNECHAT_LAYER_Z_STEP 0.0001
@@ -47,85 +51,84 @@
  * Constructs a chat message overlay
  *
  * Arguments:
- * * text - The text content of the overlay
  * * target - The target atom to display the overlay at
  * * owner - The mob that owns this overlay, only this mob will be able to view it
+ * * text - The text content of the overlay
  * * language - The language this message was spoken in
  * * extra_classes - Extra classes to apply to the span that holds the text
  * * lifespan - The lifespan of the message in deciseconds
  */
-/datum/runechat/New(text, atom/target, mob/owner, decl/language/language, list/extra_classes = list(), lifespan = RUNECHAT_MESSAGE_LIFESPAN)
+/datum/runechat/New(atom/target, mob/owner, text,decl/language/language, list/extra_classes = list(), lifespan = RUNECHAT_MESSAGE_LIFESPAN)
 	. = ..()
-	if (!istype(target))
+	if(!istype(target))
 		CRASH("Invalid target given for runechat")
+
 	if(QDELETED(owner) || !istype(owner) || !owner.client)
 		PRINT_STACK_TRACE("runechat datum created with [isnull(owner) ? "null" : "invalid"] mob owner")
 		qdel(src)
 		return
-	generate_image(text, target, owner, language, extra_classes, lifespan)
+
+	generate_image(target, owner, text, language, extra_classes, lifespan)
 
 /datum/runechat/Destroy()
-	events_repository.unregister(/decl/observ/destroyed, owned_by, src, .proc/on_parent_qdel)
-	if (fadertimer)
+	events_repository.unregister(/decl/observ/destroyed, message_loc, src, .proc/qdel_self)
+
+	if(fadertimer)
 		deltimer(fadertimer)
 		fadertimer = null
-	if (owned_by)
+
+	if(owned_by)
 		if (owned_by.seen_messages)
 			LAZYREMOVEASSOC(owned_by.seen_messages, message_loc, src)
+
 		owned_by.images.Remove(message)
+
 	owned_by = null
 	message_loc = null
 	message = null
 	return ..()
 
 /**
- * Calls qdel on the chatmessage when its parent is deleted, used to register qdel signal
- */
-/datum/runechat/proc/on_parent_qdel()
-	qdel(src)
-
-/**
  * Generates a chat message image representation
  *
  * Arguments:
- * * text - The text content of the overlay
  * * target - The target atom to display the overlay at
  * * owner - The client that owns this overlay, only this mob will be able to view it
+ * * text - The text content of the overlay
  * * language - The language this message was spoken in
  * * extra_classes - Extra classes to apply to the span that holds the text
  * * lifespan - The lifespan of the message in deciseconds
  */
-/datum/runechat/proc/generate_image(text, atom/target, mob/owner, decl/language/language, list/extra_classes, lifespan)
+/datum/runechat/proc/generate_image(atom/target, mob/owner, text, decl/language/language, list/extra_classes, lifespan)
 	set waitfor = FALSE
 	
 	// Register client who owns this message
 	owned_by = owner.client
-	events_repository.register(/decl/observ/destroyed, owned_by, src, .proc/on_parent_qdel)
-
-	// Clip message
-	var/maxlen = RUNECHAT_MESSAGE_MAX_LENGTH
-	if (length_char(text) > maxlen)
-		text = copytext_char(text, 1, maxlen + 1) + "..." // BYOND index moment
+	events_repository.register(/decl/observ/destroyed, owned_by, src, .proc/qdel_self)
 
 	// Remove spans in the message from things like the recorder
 	var/static/regex/span_check = new(@"<\/?span[^>]*>", "gi")
 	text = replacetext(text, span_check, "")
 
-	// Calculate target color if not already present
-	if (!target.chat_color || target.chat_color_name != target.name)
-		target.chat_color = colorize_string(target.name)
-		target.chat_color_darkened = colorize_string(target.name, 0.85, 0.85)
-		target.chat_color_name = target.name
-
-	// Get rid of any URL schemes that might cause BYOND to automatically wrap something in an anchor tag
-	var/static/regex/url_scheme = new(@"[A-Za-z][A-Za-z0-9+-\.]*:\/\/", "g")
-	text = replacetext(text, url_scheme, "")
+	// Get rid of link schemes that might cause BYOND to automatically wrap something in an anchor tag
+	var/static/regex/link_scheme = new(@"(https?|byond):\/\/", "gi")
+	text = replacetext(text, link_scheme, "")
 
 	// Reject whitespace
 	var/static/regex/whitespace = new(@"^\s*$")
 	if (whitespace.Find(text))
 		qdel(src)
 		return
+
+	// Clip message
+	if (length_char(text) > RUNECHAT_MESSAGE_MAX_LENGTH)
+		text = copytext_char(text, 1, RUNECHAT_MESSAGE_MAX_LENGTH + 1) + "..." // BYOND index moment
+
+	// Calculate target color if not already present
+	if (!target.chat_color || target.chat_color_name != target.name)
+		target.chat_color = colorize_string(target.name)
+		target.chat_color_darkened = colorize_string(target.name, 0.85, 0.85)
+		target.chat_color_name = target.name
 
 	// Non mobs speakers can be small
 	if (!ismob(target))
@@ -156,6 +159,7 @@
 
 	// Translate any existing messages upwards, apply exponential decay factors to timers
 	message_loc = isturf(target) ? target : get_atom_on_turf(target)
+	events_repository.register(/decl/observ/destroyed, message_loc, src, .proc/qdel_self)
 	if (owned_by.seen_messages)
 		var/idx = 1
 		var/combined_height = approx_lines
@@ -168,7 +172,7 @@
 			// scheduled time once the EOL has been executed.
 			if (!m.isFading)
 				var/sched_remaining = timeleft(m.fadertimer, SSrunechat)
-				var/remaining_time = (sched_remaining) * (RUNECHAT_MESSAGE_EXP_DECAY ** idx++) * (RUNECHAT_MESSAGE_HEIGHT_DECAY ** combined_height)
+				var/remaining_time = (sched_remaining) * (RUNECHAT_MESSAGE_EXP_DECAY ** idx++) * (RUNECHAT_MESSAGE_HEIGHT_DECAY ** NONUNIT_CEILING(combined_height, 1))
 				if (remaining_time)
 					deltimer(m.fadertimer, SSrunechat)
 					m.fadertimer = addtimer(CALLBACK(m, .proc/end_of_life), remaining_time, TIMER_STOPPABLE|TIMER_LOOP, SSrunechat)
@@ -179,22 +183,30 @@
 	if (current_z_idx >= RUNECHAT_LAYER_MAX_Z)
 		current_z_idx = 0
 
+	var/bound_height = world.icon_size
+	var/bound_width = world.icon_size
+
+	if(ismovable(message_loc))
+		var/atom/movable/AM = message_loc
+		bound_height = AM.bound_height
+		bound_width = AM.bound_width
+
 	// Build message image
 	message = image(loc = message_loc, layer = RUNECHAT_LAYER + RUNECHAT_LAYER_Z_STEP * current_z_idx++)
 	message.plane = ABOVE_LIGHTING_PLANE
 	message.appearance_flags = APPEARANCE_UI_IGNORE_ALPHA | KEEP_APART
 	message.alpha = 0
-	message.pixel_z = target.maptext_height
-	message.pixel_w = (target.maptext_width * 0.5) - (world.icon_size / 2)
+	message.pixel_z = bound_height - RUNECHAT_MESSAGE_FADE_PIXEL_Y
+	message.pixel_w = (bound_width * 0.5) - (world.icon_size / 2)
 	message.maptext_width = RUNECHAT_MESSAGE_WIDTH
 	message.maptext_height = mheight
-	message.maptext_x = (RUNECHAT_MESSAGE_WIDTH - owner.bound_width) * -0.5
+	message.maptext_x = (RUNECHAT_MESSAGE_WIDTH - bound_width) * -0.5
 	message.maptext = MAPTEXT(complete_text)
 
 	// View the message
 	LAZYADDASSOCLIST(owned_by.seen_messages, message_loc, src)
 	owned_by.images |= message
-	animate(message, alpha = 255, time = RUNECHAT_MESSAGE_SPAWN_TIME)
+	animate(message, alpha = 255, pixel_z = bound_height, time = RUNECHAT_MESSAGE_SPAWN_TIME)
 
 	// Register with the runechat SS to handle EOL and destruction
 	var/duration = lifespan - RUNECHAT_MESSAGE_EOL_FADE
@@ -208,7 +220,8 @@
  * * fadetime - The amount of time to animate the message's fadeout for
  */
 /datum/runechat/proc/end_of_life(fadetime = RUNECHAT_MESSAGE_EOL_FADE)
-	animate(message, alpha = 0, time = fadetime, flags = ANIMATION_PARALLEL)
+	isFading = TRUE
+	animate(message, alpha = 0, pixel_y = message.pixel_y + RUNECHAT_MESSAGE_FADE_PIXEL_Y, time = fadetime, flags = ANIMATION_PARALLEL)
 	addtimer(CALLBACK(GLOBAL_PROC, /proc/qdel, src), fadetime, TIMER_LOOP, SSrunechat)
 
 /**
@@ -216,38 +229,44 @@
  *
  * Arguments:
  * * speaker - The atom who is saying this message
- * * language - The language that the message is said in
  * * raw_message - The text content of the message
+ * * language - The language that the message is said in
  * * spans - Additional classes to be added to the message
  * * runechat_flags - Additional flags to pass
  * * lifespan - How long the message will live
  */
-/mob/proc/show_runechat_message(atom/movable/speaker, decl/language/language, raw_message, list/spans, runechat_flags = 0, lifespan = RUNECHAT_MESSAGE_LIFESPAN)
-	if(!speaker || isobserver(speaker))
+/mob/proc/show_runechat_message(atom/speaker, raw_message, decl/language/language, list/spans, runechat_flags = 0, lifespan = RUNECHAT_MESSAGE_LIFESPAN)
+	if(!speaker)
+		return
+
+	if(see_invisible < speaker.invisibility)
+		return
+
+	if(stat == UNCONSCIOUS)
 		return
 
 	// Ensure the list we are using, if present, is a copy so we don't modify the list provided to us
 	spans = spans ? spans.Copy() : list()
 
 	if(runechat_flags & VISIBLE_MESSAGE)
-		new /datum/runechat(raw_message, speaker, src, null, list("emote", "italics"))
+		new /datum/runechat(speaker, src, raw_message, null, list("emote", "italics"))
 		return
 
 	if(is_deaf())
 		return
 
 	if(language && speaker != src)
-		show_scrambled_runechat(language, raw_message, speaker, spans, lifespan)
+		show_scrambled_runechat(speaker, src, raw_message, language, spans, lifespan)
 
 	if(say_understands(null, language))
-		new /datum/runechat(raw_message, speaker, src, null, spans, lifespan)
+		new /datum/runechat(speaker, src, raw_message, null, spans, lifespan)
 
-/mob/proc/show_scrambled_runechat(decl/language/language, raw_message, speaker, spans, lifespan)
-	new /datum/runechat(language.scramble(raw_message), speaker, src, language, spans, lifespan)
+/mob/proc/show_scrambled_runechat(speaker, raw_message, decl/language/language, spans, lifespan)
+	new /datum/runechat(speaker, src, language.scramble(raw_message), language, spans, lifespan)
 
-/mob/living/show_scrambled_runechat(decl/language/language, raw_message, speaker, spans, lifespan)
+/mob/living/show_scrambled_runechat(speaker, raw_message, decl/language/language, spans, lifespan)
 	if(default_language != GET_DECL(language))
-		new /datum/runechat(language.scramble(raw_message), speaker, src, language, spans, lifespan)
+		new /datum/runechat(speaker, src, language.scramble(raw_message), language, spans, lifespan)
 
 // Tweak these defines to change the available color ranges
 #define CM_COLOR_SAT_MIN 0.6

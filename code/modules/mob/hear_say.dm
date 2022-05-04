@@ -100,7 +100,8 @@
 				span_list.Add("yell")
 			if(italics)
 				span_list.Add("italics")
-			show_runechat_message(speaker, language, capitalize(message), span_list)
+
+			show_runechat_message(speaker, capitalize(message), language, span_list)
 
 /mob/proc/on_hear_say(var/message)
 	to_chat(src, message)
