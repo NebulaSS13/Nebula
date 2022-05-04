@@ -210,6 +210,8 @@ var/global/list/natural_walls = list()
 	if(prob(MAT_DROP_CHANCE))
 		pass_geodata_to(new /obj/item/ore(src, material.type))
 	destroy_artifacts(null, INFINITY)
+	// Let's add some effects
+	new /obj/particle_emitter/burst/rocks(src, 1 SECOND, paint_color || material.color)
 	playsound(src, 'sound/items/Welder.ogg', 100, 1)
 	. = ChangeTurf(floor_type || get_base_turf_by_area(src))
 	if(istype(., /turf/simulated/floor/asteroid))

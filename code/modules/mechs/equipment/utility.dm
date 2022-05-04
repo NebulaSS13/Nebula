@@ -479,11 +479,25 @@
 		SPAN_WARNING("\The [owner] starts to drill \the [target]."),
 		blind_message = SPAN_WARNING("You hear a large motor whirring.")
 	)
+
+	var/obj/particle_emitter/drill_sparks/EM
+	if (istype(target, /turf/exterior/wall))
+		EM = new /obj/particle_emitter/drill_sparks/debris(get_turf(target), delay, target.color)
+	else
+		EM = new(get_turf(target), delay)
+
+	EM.set_dir(reverse_dir[owner.dir])
+
 	if (!do_after(owner, delay, target))
+		EM?.particles.spawning = FALSE
 		return
+
+	EM?.particles.spawning = FALSE
+
 	if (src != owner.selected_system)
 		to_chat(user, SPAN_WARNING("You must keep \the [src] selected to use it."))
 		return
+
 	if (drill_head.durability <= 0)
 		drill_head.shatter()
 		drill_head = null

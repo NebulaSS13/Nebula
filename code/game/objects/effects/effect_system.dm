@@ -217,6 +217,18 @@ steam.start() -- spawns the effect
 	time_to_live=lifetime
 	. = ..()
 
+/obj/effect/effect/smoke/illumination/flare
+	opacity = TRUE
+	mouse_opacity = TRUE
+	anchored = TRUE
+	icon = null
+	icon_state = null
+
+/obj/effect/effect/smoke/illumination/flare/Initialize(mapload, lifetime = 1 SECOND, range = null, power = null, color = null)
+	. = ..()
+	new /obj/particle_emitter/smoke(mapload, time_to_live)
+	new /obj/particle_emitter/sparks_flare(mapload, time_to_live)
+
 /////////////////////////////////////////////
 // Bad smoke
 /////////////////////////////////////////////
