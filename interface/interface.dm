@@ -31,7 +31,7 @@
 	set desc = "Visit the community page."
 	set category = "OOC"
 
-	open_external_page_wrap(config.forumurl, "community")
+	open_external_page_wrap(config.communityurl, "community")
 
 #define RULES_FILE "config/rules.html"
 /client/verb/open_rules()

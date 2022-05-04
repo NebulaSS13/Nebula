@@ -94,7 +94,7 @@ var/global/list/gamemode_cache = list()
 	var/server
 	var/banappeals
 	var/wikiurl
-	var/forumurl
+	var/communityurl
 	var/githuburl
 	var/issuereporturl
 
@@ -243,7 +243,7 @@ var/global/list/gamemode_cache = list()
 	var/act_interval = 0.1 SECONDS //Interval for spam prevention.
 
 	var/panic_bunker = FALSE //is the panic bunker enabled?
-	var/panic_bunker_message = "Sorry! The panic bunker is enabled. Please head to our staff to get yourself added to the panic bunker bypass."
+	var/panic_bunker_message = "Sorry! The panic bunker is enabled. Please contact an admin to get yourself added to the panic bunker bypass."
 
 	var/lock_client_view_x
 	var/lock_client_view_y
@@ -475,8 +475,8 @@ var/global/list/gamemode_cache = list()
 				if ("wikiurl")
 					config.wikiurl = value
 
-				if ("forumurl")
-					config.forumurl = value
+				if ("communityurl")
+					config.communityurl = value
 
 				if ("githuburl")
 					config.githuburl = value
