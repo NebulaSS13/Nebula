@@ -351,22 +351,31 @@
 	return 1
 
 // Character setup stuff
-/obj/screen/setup_preview
+/obj/screen/character_preview
 	plane = DEFAULT_PLANE
 	layer = MOB_LAYER
 
-	var/datum/preferences/pref
-
-/obj/screen/setup_preview/Destroy()
-	pref = null
+/obj/screen/character_preview/background/Destroy()
+	preferences = null
 	return ..()
 
+/obj/screen/character_preview/background/Click(location, control, params)
+	var/list/modifiers = params2list(params)
+	if(modifiers["right"])
+		RightClick()
+		return TRUE
+
+	if(preferences)
+		preferences.background_state = next_in_list(preferences.background_state, preferences.background_options)
+		preferences.update_character_preview_background()
+
+/obj/screen/character_preview/background/RightClick()
+	if(preferences)
+		preferences.background_state = previous_in_list(preferences.background_state, preferences.background_options)
+		preferences.update_character_preview_background()
+
 // Background 'floor'
-/obj/screen/setup_preview/bg
+/obj/screen/character_preview/background
 	layer = TURF_LAYER
 	mouse_over_pointer = MOUSE_HAND_POINTER
-
-/obj/screen/setup_preview/bg/Click(params)
-	if(pref)
-		pref.bgstate = next_in_list(pref.bgstate, pref.bgstate_options)
-		pref.update_preview_icon()
+	var/datum/preferences/preferences

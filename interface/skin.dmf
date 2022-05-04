@@ -390,25 +390,25 @@ window "rpane"
 window "preferences_window"
 	elem "preferences_window"
 		type = MAIN
-		pos = 281,0
-		size = 1000x800
 		anchor1 = none
 		anchor2 = none
+		pos = 281,-30
+		size = 1200x864
 		is-visible = false
 		saved-params = "pos;size;is-minimized;is-maximized"
 		statusbar = false
 	elem "preferences_browser"
 		type = BROWSER
 		pos = 0,0
-		size = 800x800
+		size = 900x864
 		anchor1 = 0,0
-		anchor2 = 80,100
+		anchor2 = 75,100
 		saved-params = ""
 	elem "character_preview_map"
 		type = MAP
-		pos = 800,0
-		size = 200x800
-		anchor1 = 80,0
+		pos = 900,0
+		size = 300x864
+		anchor1 = 75,0
 		anchor2 = 100,100
 		right-click = true
 		saved-params = "zoom;letterbox;zoom-mode"

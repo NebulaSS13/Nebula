@@ -46,22 +46,22 @@ var/global/list/time_prefs_fixed = list()
 	//Saved changlog filesize to detect if there was a change
 	var/lastchangelog = ""
 
-	//Mob preview
-	//Should only be a key-value list of north/south/east/west = obj/screen.
-	var/list/char_render_holders
-	var/static/list/preview_screen_locs = list(
-		"1" = "character_preview_map:1,5:-12",
-		"2" = "character_preview_map:1,3:15",
-		"4"  = "character_preview_map:1,2:10",
-		"8"  = "character_preview_map:1,1:5",
-		"BG" = "character_preview_map:1,1 to 1,5"
-	)
-
 	var/client/client = null
 	var/client_ckey = null
 
 	var/datum/category_collection/player_setup_collection/player_setup
 	var/datum/browser/panel
+
+	/// A key-value list of associated screens
+	var/list/char_render_holders
+	/// A key-value list of associated map locations
+	var/static/list/character_preview_screen_locs = list(
+		"1" = "character_preview_map:2,8",
+		"2" = "character_preview_map:2,6",
+		"4"  = "character_preview_map:2,4",
+		"8"  = "character_preview_map:2,2",
+		"background" = "character_preview_map:1,1 to 3,9"
+	)
 
 /datum/preferences/New(client/C)
 	if(istype(C))
@@ -97,7 +97,7 @@ var/global/list/time_prefs_fixed = list()
 			is_byond_member = client.IsByondMember()
 
 	sanitize_preferences()
-	update_preview_icon()
+	update_character_preview_map()
 
 /datum/preferences/proc/load_data()
 	load_failed = null
@@ -185,9 +185,7 @@ var/global/list/time_prefs_fixed = list()
 		close_load_dialog(user)
 		return
 
-	if(!char_render_holders)
-		update_preview_icon()
-	show_character_previews()
+	show_character_preview()
 
 	var/dat = list("<center>")
 	if(is_guest)
@@ -219,7 +217,7 @@ var/global/list/time_prefs_fixed = list()
 		return
 
 	winshow(user, "preferences_window", TRUE)
-	var/datum/browser/popup = new(user, "preferences_browser", "Character Setup", 800, 800)
+	var/datum/browser/popup = new(user, "preferences_browser", "<div align='center'>Character Setup</div>", 712, 864)
 	var/content = {"
 	<script type='text/javascript'>
 		function update_content(data){
@@ -237,44 +235,52 @@ var/global/list/time_prefs_fixed = list()
 /datum/preferences/proc/update_setup_window(mob/user)
 	send_output(user, url_encode(get_content(user)), "preferences_browser:update_content")
 
-/datum/preferences/proc/update_character_previews(mutable_appearance/MA)
+/// Updates character preview mannequins.
+/datum/preferences/proc/update_character_preview_mannequin(mutable_appearance/MA, loc_group)
+	for(var/D in global.cardinal)
+		var/obj/screen/character_preview/O = LAZYACCESS(char_render_holders, "[D]")
+		if(!O)
+			O = new
+			LAZYSET(char_render_holders, "[D]", O)
+
+		O.appearance = MA
+		O.dir = D
+		O.reset_plane_and_layer()
+		O.screen_loc = character_preview_screen_locs["[D]"]
+
+#define CHAR_RENDER_BG "background"
+/// Updates character preview background.
+/datum/preferences/proc/update_character_preview_background()
+	var/obj/screen/character_preview/background/bg = LAZYACCESS(char_render_holders, CHAR_RENDER_BG)
+	if(!bg)
+		bg = new
+		LAZYSET(char_render_holders, CHAR_RENDER_BG, bg)
+		bg.preferences = src
+
+	bg.icon = background_options[background_state]["icon"]
+	bg.icon_state = background_options[background_state]["icon_state"]
+	bg.color = background_options[background_state]["color"]
+	bg.screen_loc = character_preview_screen_locs[CHAR_RENDER_BG]
+#undef CHAR_RENDER_BG
+
+/// Use this if you want to show cached renders without updating them.
+/datum/preferences/proc/show_character_preview()
 	if(!client)
 		return
 
-	var/obj/screen/setup_preview/bg/BG = LAZYACCESS(char_render_holders, "BG")
-	if(!BG)
-		BG = new
-		BG.icon = 'icons/effects/32x32.dmi'
-		BG.pref = src
-		LAZYSET(char_render_holders, "BG", BG)
-		client.screen |= BG
-	BG.icon_state = bgstate
-	BG.screen_loc = preview_screen_locs["BG"]
+	if(!char_render_holders)
+		update_character_preview_map()
 
-	for(var/D in global.cardinal)
-		var/obj/screen/setup_preview/O = LAZYACCESS(char_render_holders, "[D]")
-		if(!O)
-			O = new
-			O.pref = src
-			LAZYSET(char_render_holders, "[D]", O)
-			client.screen |= O
-		O.appearance = MA
-		O.dir = D
-		O.screen_loc = preview_screen_locs["[D]"]
-	update_setup_window(usr)
-
-/datum/preferences/proc/show_character_previews()
-	if(!client || !char_render_holders)
-		return
 	for(var/render_holder in char_render_holders)
-		client.screen |= char_render_holders[render_holder]
+		client?.screen |= char_render_holders[render_holder]
 
-/datum/preferences/proc/clear_character_previews()
+/datum/preferences/proc/clear_character_preview_map()
 	for(var/index in char_render_holders)
-		var/obj/screen/S = char_render_holders[index]
+		var/obj/screen/character_preview/S = char_render_holders[index]
 		client?.screen -= S
 		qdel(S)
-	char_render_holders = null
+
+	QDEL_NULL_LIST(char_render_holders)
 
 /datum/preferences/proc/process_link(mob/user, list/href_list)
 
@@ -319,18 +325,14 @@ var/global/list/time_prefs_fixed = list()
 			return FALSE
 		load_character(SAVE_RESET)
 		sanitize_preferences()
-	else if(href_list["close"])
-		// User closed preferences window, cleanup anything we need to.
-		clear_character_previews()
-		return TRUE
 	else if(href_list["toggle_preview_value"])
 		equip_preview_mob ^= text2num(href_list["toggle_preview_value"])
 	else if(href_list["cycle_bg"])
-		bgstate = next_in_list(bgstate, bgstate_options)
+		background_state = next_in_list(background_state, background_options)
 	else
 		return FALSE
 
-	update_preview_icon()
+	update_character_preview_map()
 	update_setup_window(usr)
 	return 1
 

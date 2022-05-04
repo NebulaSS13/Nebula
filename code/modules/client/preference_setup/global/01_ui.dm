@@ -12,6 +12,25 @@ var/global/list/valid_icon_sizes = list(32, 48, 64, 96, 128)
 	//Style for popup tooltips
 	var/tooltip_style = "Midnight"
 
+	var/list/background_options = list(
+		"Void" = list(
+			"icon" = 'icons/turf/areas.dmi',
+			"icon_state" = "dark",
+			"color" = null
+		),
+		"Dark" = list(
+			"icon" = 'icons/turf/flooring/techfloor.dmi',
+			"icon_state" = "techfloor_gray",
+			"color" = null
+		),
+		"Rusty" = list(
+			"icon" = 'icons/turf/flooring/tiles.dmi',
+			"icon_state" = "steel_dirty",
+			"color" = null
+		)
+	)
+	var/background_state = "Void"
+
 /datum/category_item/player_setup_item/player_global/ui
 	name = "UI"
 	sort_order = 1
@@ -25,6 +44,7 @@ var/global/list/valid_icon_sizes = list(32, 48, 64, 96, 128)
 	pref.UI_style_alpha =     R.read("UI_style_alpha")
 	pref.ooccolor =           R.read("ooccolor")
 	pref.clientfps =          R.read("clientfps")
+	pref.background_state =   R.read("background_state")
 
 /datum/category_item/player_setup_item/player_global/ui/save_preferences(datum/pref_record_writer/W)
 	W.write("icon_size",          pref.icon_size)
@@ -35,6 +55,7 @@ var/global/list/valid_icon_sizes = list(32, 48, 64, 96, 128)
 	W.write("UI_style_alpha",     pref.UI_style_alpha)
 	W.write("ooccolor",           pref.ooccolor)
 	W.write("clientfps",          pref.clientfps)
+	W.write("background_state",   pref.background_state)
 
 /datum/category_item/player_setup_item/player_global/ui/sanitize_preferences()
 	pref.UI_style		    = sanitize_inlist(pref.UI_style, all_ui_styles, initial(pref.UI_style))
