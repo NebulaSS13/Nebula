@@ -1,16 +1,16 @@
-/area/debug/first
+/area/example/first
 	name = "\improper Testing Site First Floor"
 	icon_state = "fsmaint"
 
-/area/debug/second
+/area/example/second
 	name = "\improper Testing Site Second Floor"
 	icon_state = "surgery"
 
-/area/debug/third
+/area/example/third
 	name = "\improper Testing Site Third Floor"
 	icon_state = "storage"
 
-/area/turbolift/debug
+/area/turbolift/example
 	name = "\improper Testing Site Elevator"
 	icon_state = "shuttle"
 	requires_power = FALSE
@@ -34,14 +34,14 @@
 
 	base_turf = /turf/simulated/open
 
-/area/turbolift/debug/first
+/area/turbolift/example/first
 	name = "Testing Site First Floor Lift"
 	base_turf = /turf/simulated/floor
 
-/area/turbolift/debug/second
+/area/turbolift/example/second
 	name = "Testing Site Second Floor Lift"
 
-/area/turbolift/debug/third
+/area/turbolift/example/third
 	name = "Testing Site Third Floor Lift"
 
 /area/shuttle/ferry

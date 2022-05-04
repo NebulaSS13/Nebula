@@ -7,14 +7,14 @@
 	dir = 4
 	},
 /turf/simulated/floor/tiled/steel_grid,
-/area/debug/first)
+/area/example/first)
 "aL" = (
 /obj/machinery/computer/arcade,
 /obj/effect/floor_decal/corner/orange/half{
 	dir = 1
 	},
 /turf/simulated/floor/tiled/dark/monotile,
-/area/debug/first)
+/area/example/first)
 "bK" = (
 /obj/machinery/atmospherics/pipe/simple/hidden{
 	dir = 4
@@ -23,7 +23,7 @@
 	pixel_y = 24
 	},
 /turf/simulated/floor/tiled/steel_grid,
-/area/debug/first)
+/area/example/first)
 "bY" = (
 /obj/effect/floor_decal/industrial/warning/corner{
 	dir = 1
@@ -32,7 +32,7 @@
 	dir = 10
 	},
 /turf/simulated/floor/tiled/steel_grid,
-/area/debug/first)
+/area/example/first)
 "ck" = (
 /obj/structure/lattice,
 /turf/space,
@@ -42,21 +42,21 @@
 	dir = 1
 	},
 /turf/simulated/floor/tiled/steel_grid,
-/area/debug/first)
+/area/example/first)
 "cy" = (
 /obj/machinery/vending/snack,
 /obj/effect/floor_decal/corner/orange/half{
 	dir = 1
 	},
 /turf/simulated/floor/tiled/dark/monotile,
-/area/debug/first)
+/area/example/first)
 "cF" = (
 /obj/structure/rack,
 /obj/item/gun/projectile/revolver,
 /obj/item/gun/projectile/revolver,
 /obj/item/gun/projectile/revolver,
 /turf/simulated/floor/tiled/steel_grid,
-/area/debug/first)
+/area/example/first)
 "cS" = (
 /obj/structure/grille,
 /turf/space,
@@ -74,7 +74,7 @@
 	pixel_y = -24
 	},
 /turf/simulated/floor/tiled/steel_grid,
-/area/debug/first)
+/area/example/first)
 "dE" = (
 /obj/structure/rack,
 /obj/item/stack/material/reinforced/mapped/plasteel/fifty,
@@ -90,13 +90,13 @@
 /obj/item/storage/belt/utility/full,
 /obj/item/stack/material/sheet/mapped/steel/fifty,
 /turf/simulated/floor/tiled/steel_grid,
-/area/debug/first)
+/area/example/first)
 "eh" = (
 /obj/machinery/atmospherics/unary/vent_scrubber/on{
 	dir = 1
 	},
 /turf/simulated/floor/tiled/steel_grid,
-/area/debug/first)
+/area/example/first)
 "eZ" = (
 /obj/effect/floor_decal/industrial/warning{
 	dir = 8
@@ -105,13 +105,13 @@
 	dir = 6
 	},
 /turf/simulated/floor/tiled/steel_grid,
-/area/debug/first)
+/area/example/first)
 "fa" = (
 /obj/machinery/atmospherics/unary/vent_pump/high_volume/external_air{
 	dir = 8
 	},
 /turf/simulated/floor,
-/area/debug/first)
+/area/example/first)
 "fb" = (
 /obj/machinery/computer/shuttle_control{
 	shuttle_tag = "Testing Site Ferry"
@@ -123,7 +123,7 @@
 	dir = 9
 	},
 /turf/simulated/floor/tiled/steel_grid,
-/area/debug/first)
+/area/example/first)
 "gk" = (
 /obj/machinery/vending/cola,
 /obj/machinery/light{
@@ -133,7 +133,7 @@
 	dir = 1
 	},
 /turf/simulated/floor/tiled/dark/monotile,
-/area/debug/first)
+/area/example/first)
 "gO" = (
 /turf/simulated/wall/titanium,
 /area/shuttle/ferry)
@@ -142,38 +142,38 @@
 	dir = 6
 	},
 /turf/simulated/floor/tiled/steel_grid,
-/area/debug/first)
+/area/example/first)
 "he" = (
 /obj/effect/floor_decal/industrial/warning{
 	dir = 4
 	},
 /obj/machinery/atmospherics/pipe/manifold/hidden,
 /turf/simulated/floor/tiled/steel_grid,
-/area/debug/first)
+/area/example/first)
 "hA" = (
 /obj/effect/floor_decal/corner/orange{
 	dir = 6
 	},
 /turf/simulated/floor/tiled/steel_grid,
-/area/debug/first)
+/area/example/first)
 "ii" = (
 /obj/effect/floor_decal/corner/orange{
 	dir = 10
 	},
 /turf/simulated/floor/tiled/steel_grid,
-/area/debug/first)
+/area/example/first)
 "jg" = (
 /obj/machinery/embedded_controller/radio/simple_docking_controller{
 	dir = 4;
-	id_tag = "debug_shuttle_port";
+	id_tag = "example_shuttle_port";
 	pixel_x = -19;
-	tag_door = "debug_shuttle_port_hatch"
+	tag_door = "example_shuttle_port_hatch"
 	},
 /obj/machinery/embedded_controller/radio/simple_docking_controller{
 	dir = 8;
-	id_tag = "debug_shuttle_starboard";
+	id_tag = "example_shuttle_starboard";
 	pixel_x = 19;
-	tag_door = "debug_shuttle_starboard_hatch"
+	tag_door = "example_shuttle_starboard_hatch"
 	},
 /obj/machinery/light/small,
 /turf/simulated/floor/plating,
@@ -181,7 +181,7 @@
 "jB" = (
 /obj/machinery/door/airlock,
 /turf/simulated/floor/tiled/steel_ridged,
-/area/debug/first)
+/area/example/first)
 "jP" = (
 /obj/machinery/atmospherics/portables_connector{
 	dir = 8
@@ -189,14 +189,14 @@
 /obj/machinery/portable_atmospherics/canister/air,
 /obj/effect/floor_decal/industrial/outline/blue,
 /turf/simulated/floor/tiled/dark/monotile,
-/area/debug/first)
+/area/example/first)
 "kw" = (
 /obj/abstract/landmark/start,
 /obj/machinery/atmospherics/pipe/simple/hidden{
 	dir = 4
 	},
 /turf/simulated/floor/tiled/steel_grid,
-/area/debug/first)
+/area/example/first)
 "la" = (
 /obj/machinery/door/airlock/external/bolted{
 	id_tag = "lower_level_dock_hatch_internal"
@@ -206,20 +206,20 @@
 	pixel_x = -21
 	},
 /turf/simulated/floor,
-/area/debug/first)
+/area/example/first)
 "lJ" = (
 /obj/machinery/atmospherics/pipe/simple/hidden,
 /obj/machinery/light{
 	dir = 4
 	},
 /turf/simulated/floor/tiled/steel_grid,
-/area/debug/first)
+/area/example/first)
 "lN" = (
 /obj/effect/floor_decal/industrial/outline/red,
 /obj/machinery/atmospherics/portables_connector,
 /obj/machinery/portable_atmospherics/canister/empty,
 /turf/simulated/floor/tiled/dark/monotile,
-/area/debug/first)
+/area/example/first)
 "mc" = (
 /obj/machinery/light{
 	dir = 1
@@ -229,43 +229,43 @@
 	dir = 4
 	},
 /turf/simulated/floor/tiled/dark/monotile,
-/area/debug/first)
+/area/example/first)
 "mo" = (
 /obj/effect/floor_decal/industrial/warning{
 	dir = 5
 	},
 /turf/simulated/floor/tiled/steel_grid,
-/area/debug/first)
+/area/example/first)
 "mr" = (
 /obj/machinery/light{
 	dir = 8
 	},
 /turf/simulated/floor/tiled/steel_grid,
-/area/debug/first)
+/area/example/first)
 "mu" = (
 /obj/effect/floor_decal/industrial/outline/blue,
 /obj/machinery/portable_atmospherics/canister/air,
 /obj/machinery/atmospherics/portables_connector,
 /turf/simulated/floor/tiled/dark/monotile,
-/area/debug/first)
+/area/example/first)
 "nL" = (
 /obj/machinery/vending/coffee,
 /obj/effect/floor_decal/corner/orange/half{
 	dir = 1
 	},
 /turf/simulated/floor/tiled/dark/monotile,
-/area/debug/first)
+/area/example/first)
 "on" = (
 /obj/effect/floor_decal/industrial/warning{
 	dir = 5
 	},
 /obj/machinery/atmospherics/unary/vent_pump/on,
 /turf/simulated/floor/tiled/steel_grid,
-/area/debug/first)
+/area/example/first)
 "ou" = (
 /obj/machinery/atmospherics/pipe/manifold/hidden,
 /turf/simulated/floor,
-/area/debug/first)
+/area/example/first)
 "oy" = (
 /obj/effect/floor_decal/corner/orange{
 	dir = 9
@@ -274,12 +274,12 @@
 	dir = 8
 	},
 /turf/simulated/floor/tiled/steel_grid,
-/area/debug/first)
+/area/example/first)
 "oz" = (
 /obj/structure/table,
 /obj/effect/floor_decal/corner/blue/mono,
 /turf/simulated/floor/tiled/dark/monotile,
-/area/debug/first)
+/area/example/first)
 "oB" = (
 /obj/effect/floor_decal/industrial/warning{
 	dir = 8
@@ -288,7 +288,7 @@
 	dir = 4
 	},
 /turf/simulated/floor/tiled/steel_grid,
-/area/debug/first)
+/area/example/first)
 "oI" = (
 /obj/effect/floor_decal/corner/orange{
 	dir = 6
@@ -298,7 +298,7 @@
 	pixel_x = 24
 	},
 /turf/simulated/floor/tiled/steel_grid,
-/area/debug/first)
+/area/example/first)
 "oS" = (
 /obj/effect/floor_decal/corner/orange{
 	dir = 6
@@ -307,14 +307,14 @@
 	dir = 4
 	},
 /turf/simulated/floor/tiled/steel_grid,
-/area/debug/first)
+/area/example/first)
 "oZ" = (
 /obj/machinery/atmospherics/pipe/simple/hidden,
 /obj/machinery/light{
 	dir = 8
 	},
 /turf/simulated/floor/tiled/steel_grid,
-/area/debug/first)
+/area/example/first)
 "pv" = (
 /obj/structure/rack,
 /obj/item/gun/energy/laser,
@@ -322,34 +322,34 @@
 /obj/item/gun/energy/laser,
 /obj/machinery/light,
 /turf/simulated/floor/tiled/steel_grid,
-/area/debug/first)
+/area/example/first)
 "qs" = (
 /obj/machinery/atmospherics/pipe/manifold/hidden{
 	dir = 4
 	},
 /turf/simulated/floor,
-/area/debug/first)
+/area/example/first)
 "qB" = (
 /obj/machinery/teleport/hub,
 /turf/simulated/floor/tiled/dark/monotile,
-/area/debug/first)
+/area/example/first)
 "qR" = (
 /obj/machinery/power/debug_items/infinite_generator,
 /obj/structure/cable/yellow,
 /turf/simulated/floor,
-/area/debug/first)
+/area/example/first)
 "rg" = (
 /obj/machinery/atmospherics/pipe/simple/hidden{
 	dir = 6
 	},
 /turf/simulated/floor,
-/area/debug/first)
+/area/example/first)
 "rH" = (
 /obj/machinery/door/airlock/external/bolted{
-	id_tag = "debug_first_hatch_external"
+	id_tag = "example_first_hatch_external"
 	},
 /turf/simulated/floor,
-/area/debug/first)
+/area/example/first)
 "se" = (
 /obj/machinery/atmospherics/unary/vent_pump/high_volume/external_air{
 	id_tag = "lower_level_dock_pump"
@@ -358,7 +358,7 @@
 	dir = 1
 	},
 /turf/simulated/floor,
-/area/debug/first)
+/area/example/first)
 "sQ" = (
 /obj/machinery/atmospherics/portables_connector,
 /obj/machinery/portable_atmospherics/canister/air/airlock,
@@ -366,32 +366,32 @@
 	dir = 1
 	},
 /turf/simulated/floor/tiled/dark/monotile,
-/area/debug/first)
+/area/example/first)
 "sT" = (
 /obj/effect/floor_decal/industrial/warning/corner{
 	dir = 4
 	},
 /obj/effect/floor_decal/corner/orange/three_quarters,
 /turf/simulated/floor/tiled/steel_grid,
-/area/debug/first)
+/area/example/first)
 "th" = (
 /obj/machinery/light{
 	dir = 4
 	},
 /turf/simulated/floor/tiled/steel_grid,
-/area/debug/first)
+/area/example/first)
 "tl" = (
 /obj/effect/floor_decal/corner/orange{
 	dir = 9
 	},
 /turf/simulated/floor/tiled/steel_grid,
-/area/debug/first)
+/area/example/first)
 "to" = (
 /obj/machinery/light{
 	dir = 8
 	},
 /turf/simulated/floor,
-/area/debug/first)
+/area/example/first)
 "tq" = (
 /obj/machinery/atmospherics/unary/vent_pump/high_volume/external_air{
 	id_tag = "lower_level_dock_pump"
@@ -409,7 +409,7 @@
 	tag_interior_door = "lower_level_dock_hatch_internal"
 	},
 /turf/simulated/floor,
-/area/debug/first)
+/area/example/first)
 "tt" = (
 /obj/effect/floor_decal/industrial/warning{
 	dir = 4
@@ -418,87 +418,87 @@
 	dir = 1
 	},
 /turf/simulated/floor/tiled/steel_grid,
-/area/debug/first)
+/area/example/first)
 "ty" = (
 /obj/effect/floor_decal/corner/orange{
 	dir = 10
 	},
 /obj/machinery/light,
 /turf/simulated/floor/tiled/steel_grid,
-/area/debug/first)
+/area/example/first)
 "tA" = (
-/obj/turbolift_map_holder/debug,
+/obj/turbolift_map_holder/example,
 /turf/simulated/floor,
-/area/turbolift/debug/first)
+/area/turbolift/example/first)
 "uD" = (
 /obj/machinery/light,
 /turf/simulated/floor,
-/area/debug/first)
+/area/example/first)
 "uZ" = (
 /obj/structure/railing/mapped{
 	dir = 8
 	},
 /turf/simulated/floor,
-/area/debug/first)
+/area/example/first)
 "vg" = (
 /obj/machinery/door/airlock/external/bolted{
-	id_tag = "debug_shuttle_starboard_hatch"
+	id_tag = "example_shuttle_starboard_hatch"
 	},
 /turf/simulated/floor/plating,
 /area/shuttle/ferry)
 "vi" = (
 /obj/structure/railing/mapped,
 /turf/simulated/floor,
-/area/debug/first)
+/area/example/first)
 "vl" = (
 /obj/machinery/atmospherics/pipe/simple/hidden{
 	dir = 5
 	},
 /turf/simulated/floor/tiled/steel_grid,
-/area/debug/first)
+/area/example/first)
 "vK" = (
 /obj/machinery/door/airlock/external/bolted{
 	id_tag = "lower_level_dock_hatch_internal"
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden,
 /turf/simulated/floor,
-/area/debug/first)
+/area/example/first)
 "vZ" = (
 /obj/structure/table,
 /obj/item/card/id/captains_spare,
 /turf/simulated/floor/tiled/steel_grid,
-/area/debug/first)
+/area/example/first)
 "wj" = (
 /obj/effect/floor_decal/industrial/warning,
 /obj/effect/floor_decal/corner/orange{
 	dir = 5
 	},
 /turf/simulated/floor/tiled/steel_grid,
-/area/debug/first)
+/area/example/first)
 "wo" = (
 /obj/structure/ladder,
 /turf/simulated/floor/tiled/dark/monotile,
-/area/debug/first)
+/area/example/first)
 "wv" = (
 /obj/machinery/door/airlock/external/glass/bolted{
-	id_tag = "debug_first_hatch_internal"
+	id_tag = "example_first_hatch_internal"
 	},
 /turf/simulated/floor,
-/area/debug/first)
+/area/example/first)
 "wG" = (
 /obj/machinery/vending/cigarette,
 /obj/effect/floor_decal/corner/orange/half{
 	dir = 1
 	},
 /turf/simulated/floor/tiled/dark/monotile,
-/area/debug/first)
+/area/example/first)
 "wP" = (
 /obj/structure/closet/firecloset/chief,
 /obj/effect/floor_decal/corner/blue/half{
 	dir = 1
 	},
 /turf/simulated/floor/tiled/dark/monotile,
-/area/debug/first)
+/area/example/first)
 "xq" = (
 /obj/abstract/level_data/main_level,
 /turf/space,
@@ -506,19 +506,19 @@
 "xR" = (
 /obj/structure/ladder,
 /turf/simulated/floor,
-/area/debug/first)
+/area/example/first)
 "xT" = (
 /obj/effect/floor_decal/industrial/warning{
 	dir = 4
 	},
 /turf/simulated/floor/tiled/steel_grid,
-/area/debug/first)
+/area/example/first)
 "ya" = (
 /obj/structure/railing/mapped{
 	dir = 4
 	},
 /turf/simulated/floor,
-/area/debug/first)
+/area/example/first)
 "yc" = (
 /obj/effect/floor_decal/industrial/warning/corner{
 	dir = 8
@@ -527,18 +527,18 @@
 	dir = 5
 	},
 /turf/simulated/floor/tiled/steel_grid,
-/area/debug/first)
+/area/example/first)
 "yf" = (
 /obj/machinery/atmospherics/unary/vent_pump/on,
 /obj/effect/floor_decal/industrial/outline/grey,
 /turf/simulated/floor,
-/area/debug/first)
+/area/example/first)
 "za" = (
 /obj/machinery/light{
 	dir = 1
 	},
 /turf/simulated/floor,
-/area/debug/first)
+/area/example/first)
 "AF" = (
 /obj/effect/floor_decal/corner/orange{
 	dir = 10
@@ -548,7 +548,7 @@
 	pixel_y = -19
 	},
 /turf/simulated/floor/tiled/steel_grid,
-/area/debug/first)
+/area/example/first)
 "AJ" = (
 /obj/effect/shuttle_landmark/lower_level,
 /turf/simulated/floor/plating,
@@ -556,7 +556,7 @@
 "Bp" = (
 /obj/structure/stairs,
 /turf/simulated/floor,
-/area/debug/first)
+/area/example/first)
 "Bs" = (
 /obj/effect/floor_decal/industrial/warning{
 	dir = 1
@@ -565,11 +565,11 @@
 	dir = 10
 	},
 /turf/simulated/floor/tiled/steel_grid,
-/area/debug/first)
+/area/example/first)
 "BE" = (
 /obj/effect/wallframe_spawn/reinforced,
 /turf/simulated/floor/plating,
-/area/debug/first)
+/area/example/first)
 "BS" = (
 /obj/effect/floor_decal/industrial/warning{
 	dir = 8
@@ -578,7 +578,7 @@
 	dir = 5
 	},
 /turf/simulated/floor/tiled/steel_grid,
-/area/debug/first)
+/area/example/first)
 "BV" = (
 /obj/machinery/light{
 	dir = 1
@@ -588,7 +588,7 @@
 	dir = 1
 	},
 /turf/simulated/floor/tiled/dark/monotile,
-/area/debug/first)
+/area/example/first)
 "CO" = (
 /obj/effect/floor_decal/industrial/warning{
 	dir = 10
@@ -597,19 +597,19 @@
 	dir = 1
 	},
 /turf/simulated/floor/tiled/steel_grid,
-/area/debug/first)
+/area/example/first)
 "CQ" = (
 /obj/machinery/light,
 /turf/simulated/floor/tiled/steel_grid,
-/area/debug/first)
+/area/example/first)
 "CU" = (
 /turf/simulated/floor/tiled/steel_grid,
-/area/debug/first)
+/area/example/first)
 "DA" = (
 /obj/structure/table,
 /obj/machinery/recharger,
 /turf/simulated/floor/tiled/steel_grid,
-/area/debug/first)
+/area/example/first)
 "Ed" = (
 /obj/structure/cable/yellow{
 	icon_state = "1-2"
@@ -619,28 +619,28 @@
 	pixel_x = 26
 	},
 /turf/simulated/floor,
-/area/debug/first)
+/area/example/first)
 "Eh" = (
 /obj/structure/table,
 /obj/item/storage/backpack/holding,
 /turf/simulated/floor/tiled/steel_grid,
-/area/debug/first)
+/area/example/first)
 "Er" = (
 /obj/structure/table,
 /turf/simulated/floor/tiled/steel_grid,
-/area/debug/first)
+/area/example/first)
 "EM" = (
 /obj/structure/closet/secure_closet/captains,
 /obj/effect/floor_decal/corner/orange{
 	dir = 9
 	},
 /turf/simulated/floor/tiled/steel_grid,
-/area/debug/first)
+/area/example/first)
 "Ft" = (
 /obj/machinery/fabricator/hacked,
 /obj/machinery/light,
 /turf/simulated/floor/tiled/steel_grid,
-/area/debug/first)
+/area/example/first)
 "FZ" = (
 /obj/effect/floor_decal/industrial/warning/corner{
 	dir = 1
@@ -649,13 +649,13 @@
 	dir = 4
 	},
 /turf/simulated/floor,
-/area/debug/first)
+/area/example/first)
 "Gg" = (
 /obj/structure/railing/mapped{
 	dir = 1
 	},
 /turf/simulated/floor,
-/area/debug/first)
+/area/example/first)
 "Hk" = (
 /turf/space,
 /area/space)
@@ -666,21 +666,21 @@
 /obj/machinery/portable_atmospherics/canister/empty,
 /obj/effect/floor_decal/industrial/outline/red,
 /turf/simulated/floor/tiled/dark/monotile,
-/area/debug/first)
+/area/example/first)
 "HB" = (
 /obj/machinery/computer/teleporter,
 /turf/simulated/floor/tiled/dark/monotile,
-/area/debug/first)
+/area/example/first)
 "IR" = (
 /obj/effect/floor_decal/corner/orange/three_quarters{
 	dir = 4
 	},
 /turf/simulated/floor/tiled/steel_grid,
-/area/debug/first)
+/area/example/first)
 "Jc" = (
 /obj/machinery/door/airlock/glass,
 /turf/simulated/floor/tiled/steel_ridged,
-/area/debug/first)
+/area/example/first)
 "Jn" = (
 /obj/machinery/door/airlock/external/bolted{
 	id_tag = "lower_level_dock_hatch_external"
@@ -690,26 +690,26 @@
 	pixel_y = -21
 	},
 /turf/simulated/floor,
-/area/debug/first)
+/area/example/first)
 "JH" = (
 /obj/machinery/atmospherics/pipe/manifold/hidden{
 	dir = 1
 	},
 /turf/simulated/floor,
-/area/debug/first)
+/area/example/first)
 "JS" = (
 /obj/structure/closet/secure_closet/hos,
 /obj/effect/floor_decal/corner/blue/half{
 	dir = 1
 	},
 /turf/simulated/floor/tiled/dark/monotile,
-/area/debug/first)
+/area/example/first)
 "Kn" = (
 /obj/structure/stairs{
 	dir = 1
 	},
 /turf/simulated/floor,
-/area/debug/first)
+/area/example/first)
 "KJ" = (
 /obj/structure/cable/yellow{
 	icon_state = "0-2"
@@ -720,7 +720,7 @@
 	pixel_x = 24
 	},
 /turf/simulated/floor,
-/area/debug/first)
+/area/example/first)
 "KT" = (
 /obj/structure/table,
 /obj/machinery/light{
@@ -728,7 +728,7 @@
 	},
 /obj/effect/floor_decal/corner/blue/mono,
 /turf/simulated/floor/tiled/dark/monotile,
-/area/debug/first)
+/area/example/first)
 "La" = (
 /obj/effect/floor_decal/industrial/warning{
 	dir = 4
@@ -737,7 +737,7 @@
 	dir = 9
 	},
 /turf/simulated/floor/tiled/steel_grid,
-/area/debug/first)
+/area/example/first)
 "Ly" = (
 /obj/effect/floor_decal/industrial/warning,
 /obj/machinery/light{
@@ -747,54 +747,54 @@
 	dir = 5
 	},
 /turf/simulated/floor/tiled/steel_grid,
-/area/debug/first)
+/area/example/first)
 "LM" = (
 /obj/effect/floor_decal/industrial/warning{
 	dir = 1
 	},
 /turf/simulated/floor,
-/area/debug/first)
+/area/example/first)
 "LP" = (
 /turf/simulated/floor/plating,
-/area/turbolift/debug/first)
+/area/turbolift/example/first)
 "LW" = (
 /obj/machinery/teleport/station,
 /turf/simulated/floor/tiled/dark/monotile,
-/area/debug/first)
+/area/example/first)
 "Mc" = (
 /obj/machinery/alarm{
 	dir = 8;
 	pixel_x = 26
 	},
 /turf/simulated/floor/tiled/steel_grid,
-/area/debug/first)
+/area/example/first)
 "Mo" = (
 /obj/abstract/landmark/latejoin,
 /obj/machinery/atmospherics/pipe/simple/hidden{
 	dir = 4
 	},
 /turf/simulated/floor/tiled/steel_grid,
-/area/debug/first)
+/area/example/first)
 "Nu" = (
 /obj/machinery/atmospherics/portables_connector,
 /obj/machinery/portable_atmospherics/canister/air/airlock,
 /turf/simulated/floor/tiled/steel_grid,
-/area/debug/first)
+/area/example/first)
 "NC" = (
 /obj/effect/floor_decal/corner/orange{
 	dir = 9
 	},
 /obj/effect/floor_decal/industrial/warning,
 /turf/simulated/floor/tiled/steel_grid,
-/area/debug/first)
+/area/example/first)
 "NL" = (
 /obj/effect/floor_decal/corner/orange/three_quarters,
 /turf/simulated/floor/tiled/steel_grid,
-/area/debug/first)
+/area/example/first)
 "OI" = (
 /obj/machinery/atmospherics/pipe/simple/hidden,
 /turf/simulated/floor/tiled/steel_grid,
-/area/debug/first)
+/area/example/first)
 "OZ" = (
 /obj/machinery/atmospherics/portables_connector{
 	dir = 1
@@ -802,20 +802,20 @@
 /obj/machinery/portable_atmospherics/canister/empty,
 /obj/effect/floor_decal/industrial/outline/red,
 /turf/simulated/floor/tiled/dark/monotile,
-/area/debug/first)
+/area/example/first)
 "Pp" = (
 /obj/effect/floor_decal/industrial/warning/corner{
 	dir = 4
 	},
 /turf/simulated/floor,
-/area/debug/first)
+/area/example/first)
 "Pv" = (
 /obj/structure/rack,
 /obj/item/gun/projectile/shotgun/pump,
 /obj/item/gun/projectile/shotgun/pump,
 /obj/item/gun/projectile/shotgun/pump,
 /turf/simulated/floor/tiled/steel_grid,
-/area/debug/first)
+/area/example/first)
 "PE" = (
 /obj/item/radio/beacon,
 /obj/machinery/light{
@@ -823,14 +823,14 @@
 	},
 /obj/effect/floor_decal/industrial/outline/orange,
 /turf/simulated/floor/tiled/dark/monotile,
-/area/debug/first)
+/area/example/first)
 "Qc" = (
 /obj/structure/closet/emcloset,
 /obj/effect/floor_decal/corner/blue/half{
 	dir = 1
 	},
 /turf/simulated/floor/tiled/dark/monotile,
-/area/debug/first)
+/area/example/first)
 "Rj" = (
 /obj/effect/floor_decal/industrial/warning{
 	dir = 6
@@ -839,21 +839,21 @@
 	dir = 1
 	},
 /turf/simulated/floor/tiled/steel_grid,
-/area/debug/first)
+/area/example/first)
 "RB" = (
 /obj/effect/floor_decal/industrial/warning{
 	dir = 9
 	},
 /obj/machinery/atmospherics/unary/vent_pump/on,
 /turf/simulated/floor/tiled/steel_grid,
-/area/debug/first)
+/area/example/first)
 "RF" = (
 /obj/effect/floor_decal/industrial/warning/corner,
 /obj/effect/floor_decal/corner/orange/three_quarters{
 	dir = 8
 	},
 /turf/simulated/floor/tiled/steel_grid,
-/area/debug/first)
+/area/example/first)
 "RV" = (
 /obj/effect/floor_decal/industrial/warning{
 	dir = 8
@@ -863,28 +863,28 @@
 	pixel_y = -24
 	},
 /turf/simulated/floor/tiled/steel_grid,
-/area/debug/first)
+/area/example/first)
 "RW" = (
 /turf/simulated/floor,
-/area/turbolift/debug/first)
+/area/turbolift/example/first)
 "Ss" = (
 /obj/structure/dispenser/oxygen,
 /obj/effect/floor_decal/corner/orange/half{
 	dir = 1
 	},
 /turf/simulated/floor/tiled/dark/monotile,
-/area/debug/first)
+/area/example/first)
 "Sv" = (
 /obj/structure/table,
 /turf/simulated/floor,
-/area/debug/first)
+/area/example/first)
 "Tk" = (
 /obj/structure/closet/secure_closet/hop,
 /obj/effect/floor_decal/corner/orange{
 	dir = 6
 	},
 /turf/simulated/floor/tiled/steel_grid,
-/area/debug/first)
+/area/example/first)
 "Ts" = (
 /obj/effect/floor_decal/industrial/warning{
 	dir = 4
@@ -896,13 +896,13 @@
 	dir = 8
 	},
 /turf/simulated/floor/tiled/steel_grid,
-/area/debug/first)
+/area/example/first)
 "Uw" = (
 /obj/machinery/atmospherics/portables_connector,
 /obj/machinery/portable_atmospherics/canister/air,
 /obj/effect/floor_decal/industrial/outline/blue,
 /turf/simulated/floor/tiled/dark/monotile,
-/area/debug/first)
+/area/example/first)
 "UH" = (
 /obj/machinery/atmospherics/pipe/simple/hidden{
 	dir = 9
@@ -911,83 +911,83 @@
 	dir = 4
 	},
 /turf/simulated/floor/tiled/steel_grid,
-/area/debug/first)
+/area/example/first)
 "VY" = (
 /obj/effect/floor_decal/industrial/warning{
 	dir = 1
 	},
 /turf/simulated/floor/tiled/steel_grid,
-/area/debug/first)
+/area/example/first)
 "We" = (
 /obj/machinery/suit_cycler/security/prepared{
 	initial_access = list()
 	},
 /turf/simulated/floor,
-/area/debug/first)
+/area/example/first)
 "Wi" = (
 /obj/effect/floor_decal/industrial/warning/fulltile,
 /obj/effect/floor_decal/industrial/warning{
 	dir = 8
 	},
 /turf/simulated/floor/tiled/steel_grid,
-/area/debug/first)
+/area/example/first)
 "Wj" = (
 /obj/machinery/light{
 	dir = 1
 	},
 /turf/simulated/floor/tiled/steel_grid,
-/area/debug/first)
+/area/example/first)
 "Wr" = (
 /turf/simulated/floor/tiled/steel_ridged,
-/area/debug/first)
+/area/example/first)
 "WF" = (
 /obj/machinery/atmospherics/pipe/simple/hidden{
 	dir = 4
 	},
 /turf/simulated/floor,
-/area/debug/first)
+/area/example/first)
 "WK" = (
 /obj/effect/floor_decal/industrial/warning{
 	dir = 9
 	},
 /turf/simulated/floor/tiled/steel_grid,
-/area/debug/first)
+/area/example/first)
 "WS" = (
 /obj/machinery/light{
 	dir = 4
 	},
 /turf/simulated/floor,
-/area/debug/first)
+/area/example/first)
 "WU" = (
 /obj/machinery/atmospherics/unary/vent_scrubber/on{
 	dir = 1
 	},
 /obj/effect/floor_decal/industrial/outline/grey,
 /turf/simulated/floor,
-/area/debug/first)
+/area/example/first)
 "WW" = (
 /obj/effect/floor_decal/industrial/warning,
 /turf/simulated/floor/tiled/steel_grid,
-/area/debug/first)
+/area/example/first)
 "XZ" = (
 /turf/simulated/wall/r_wall/prepainted,
-/area/debug/first)
+/area/example/first)
 "Yo" = (
 /obj/effect/floor_decal/industrial/warning{
 	dir = 8
 	},
 /turf/simulated/floor/tiled/steel_grid,
-/area/debug/first)
+/area/example/first)
 "Yp" = (
 /turf/simulated/floor,
-/area/debug/first)
+/area/example/first)
 "Yt" = (
 /obj/structure/rack,
 /obj/item/gun/projectile/automatic/assault_rifle,
 /obj/item/gun/projectile/automatic/assault_rifle,
 /obj/item/gun/projectile/automatic/assault_rifle,
 /turf/simulated/floor/tiled/steel_grid,
-/area/debug/first)
+/area/example/first)
 "Zi" = (
 /obj/effect/floor_decal/industrial/warning{
 	dir = 1
@@ -997,28 +997,28 @@
 	},
 /obj/machinery/light,
 /turf/simulated/floor/tiled/steel_grid,
-/area/debug/first)
+/area/example/first)
 "ZF" = (
 /obj/machinery/door/airlock/external/bolted{
-	id_tag = "debug_shuttle_port_hatch"
+	id_tag = "example_shuttle_port_hatch"
 	},
 /turf/simulated/floor/plating,
 /area/shuttle/ferry)
 "ZO" = (
 /obj/machinery/door/airlock/external/glass/bolted{
-	id_tag = "debug_first_hatch_internal"
+	id_tag = "example_first_hatch_internal"
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden{
 	dir = 4
 	},
 /turf/simulated/floor,
-/area/debug/first)
+/area/example/first)
 "ZV" = (
 /obj/machinery/atmospherics/pipe/simple/hidden{
 	dir = 5
 	},
 /turf/simulated/floor,
-/area/debug/first)
+/area/example/first)
 
 (1,1,1) = {"
 Hk

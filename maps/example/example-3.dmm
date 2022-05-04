@@ -1,6 +1,6 @@
 //MAP CONVERTED BY dmm2tgm.py THIS HEADER COMMENT PREVENTS RECONVERSION, DO NOT REMOVE
 "bE" = (
-/obj/abstract/map_data/debug,
+/obj/abstract/map_data/example,
 /turf/space,
 /area/space)
 "cd" = (
@@ -9,16 +9,16 @@
 	},
 /obj/effect/floor_decal/industrial/warning/dust,
 /turf/simulated/floor,
-/area/debug/third)
+/area/example/third)
 "cj" = (
 /turf/simulated/open,
-/area/turbolift/debug/third)
+/area/turbolift/example/third)
 "cw" = (
 /obj/machinery/atmospherics/portables_connector,
 /obj/machinery/portable_atmospherics/canister/empty,
 /obj/effect/floor_decal/industrial/outline/red,
 /turf/simulated/floor/tiled/dark/monotile,
-/area/debug/third)
+/area/example/third)
 "dx" = (
 /obj/machinery/atmospherics/pipe/simple/hidden{
 	dir = 5
@@ -27,7 +27,7 @@
 	dir = 10
 	},
 /turf/simulated/floor,
-/area/debug/third)
+/area/example/third)
 "eg" = (
 /obj/machinery/light{
 	dir = 8
@@ -36,7 +36,7 @@
 	dir = 4
 	},
 /turf/simulated/floor/tiled/steel_grid,
-/area/debug/third)
+/area/example/third)
 "eD" = (
 /obj/machinery/atmospherics/pipe/simple/hidden{
 	dir = 6
@@ -45,31 +45,31 @@
 	dir = 8
 	},
 /turf/simulated/floor,
-/area/debug/third)
+/area/example/third)
 "hv" = (
 /obj/machinery/alarm{
 	dir = 1;
 	pixel_y = -21
 	},
 /turf/simulated/floor,
-/area/debug/third)
+/area/example/third)
 "iI" = (
 /obj/effect/floor_decal/industrial/warning/dust{
 	dir = 9
 	},
 /turf/simulated/floor/tiled/steel_grid,
-/area/debug/third)
+/area/example/third)
 "jb" = (
 /obj/machinery/light,
 /turf/simulated/open,
-/area/debug/third)
+/area/example/third)
 "lK" = (
 /turf/simulated/floor/glass,
-/area/debug/third)
+/area/example/third)
 "lY" = (
 /obj/machinery/atmospherics/unary/vent_pump/on,
 /turf/simulated/floor,
-/area/debug/third)
+/area/example/third)
 "nG" = (
 /turf/simulated/open,
 /area/space)
@@ -78,11 +78,11 @@
 	dir = 8
 	},
 /turf/simulated/floor/tiled/steel_grid,
-/area/debug/third)
+/area/example/third)
 "pB" = (
 /obj/effect/floor_decal/industrial/warning/dust,
 /turf/simulated/floor/tiled/steel_grid,
-/area/debug/third)
+/area/example/third)
 "pH" = (
 /obj/machinery/light{
 	dir = 1
@@ -91,7 +91,7 @@
 	dir = 9
 	},
 /turf/simulated/floor/tiled/steel_grid,
-/area/debug/third)
+/area/example/third)
 "rX" = (
 /obj/structure/railing/mapped{
 	dir = 8
@@ -101,18 +101,18 @@
 	dir = 4
 	},
 /turf/simulated/floor,
-/area/debug/third)
+/area/example/third)
 "sH" = (
 /obj/effect/wallframe_spawn/reinforced,
 /turf/simulated/floor/plating,
-/area/debug/third)
+/area/example/third)
 "uC" = (
 /obj/machinery/atmospherics/pipe/simple/hidden{
 	dir = 5
 	},
 /obj/effect/floor_decal/industrial/warning/dust,
 /turf/simulated/floor,
-/area/debug/third)
+/area/example/third)
 "uK" = (
 /obj/machinery/atmospherics/pipe/simple/hidden{
 	dir = 9
@@ -121,25 +121,25 @@
 	dir = 6
 	},
 /turf/simulated/floor,
-/area/debug/third)
+/area/example/third)
 "vo" = (
 /obj/effect/floor_decal/industrial/warning/dust{
 	dir = 5
 	},
 /turf/simulated/floor,
-/area/debug/third)
+/area/example/third)
 "ww" = (
 /obj/machinery/light{
 	dir = 8
 	},
 /turf/simulated/open,
-/area/debug/third)
+/area/example/third)
 "wD" = (
 /obj/effect/floor_decal/industrial/warning/dust{
 	dir = 4
 	},
 /turf/simulated/floor/tiled/steel_grid,
-/area/debug/third)
+/area/example/third)
 "xk" = (
 /turf/space,
 /area/space)
@@ -147,23 +147,23 @@
 /obj/machinery/atmospherics/pipe/manifold/hidden,
 /obj/effect/floor_decal/industrial/warning/dust,
 /turf/simulated/floor,
-/area/debug/third)
+/area/example/third)
 "yv" = (
 /obj/effect/floor_decal/industrial/warning/dust{
 	dir = 9
 	},
 /turf/simulated/floor,
-/area/debug/third)
+/area/example/third)
 "Al" = (
 /obj/machinery/atmospherics/pipe/simple/hidden,
 /obj/effect/floor_decal/industrial/warning/dust{
 	dir = 8
 	},
 /turf/simulated/floor,
-/area/debug/third)
+/area/example/third)
 "AD" = (
 /turf/simulated/floor/tiled/steel_grid,
-/area/debug/third)
+/area/example/third)
 "Em" = (
 /obj/machinery/atmospherics/pipe/simple/hidden{
 	dir = 10
@@ -172,22 +172,22 @@
 	dir = 4
 	},
 /turf/simulated/floor,
-/area/debug/third)
+/area/example/third)
 "Es" = (
 /turf/simulated/floor,
-/area/debug/third)
+/area/example/third)
 "EO" = (
 /obj/structure/railing/mapped{
 	dir = 1
 	},
 /turf/simulated/floor,
-/area/debug/third)
+/area/example/third)
 "Ff" = (
 /obj/machinery/atmospherics/portables_connector,
 /obj/machinery/portable_atmospherics/canister/air,
 /obj/effect/floor_decal/industrial/outline/blue,
 /turf/simulated/floor/tiled/dark/monotile,
-/area/debug/third)
+/area/example/third)
 "Fk" = (
 /obj/machinery/light{
 	dir = 1
@@ -196,36 +196,36 @@
 	dir = 5
 	},
 /turf/simulated/floor/tiled/steel_grid,
-/area/debug/third)
+/area/example/third)
 "GA" = (
 /obj/machinery/power/debug_items/infinite_generator,
 /obj/structure/cable/yellow{
 	icon_state = "0-2"
 	},
 /turf/simulated/floor,
-/area/debug/third)
+/area/example/third)
 "HC" = (
 /obj/effect/floor_decal/industrial/warning/dust,
 /turf/simulated/floor,
-/area/debug/third)
+/area/example/third)
 "Ke" = (
 /turf/simulated/open,
-/area/debug/third)
+/area/example/third)
 "KS" = (
 /obj/effect/floor_decal/industrial/warning/dust{
 	dir = 1
 	},
 /turf/simulated/floor/tiled/steel_grid,
-/area/debug/third)
+/area/example/third)
 "LP" = (
 /turf/simulated/wall/r_wall/prepainted,
-/area/debug/third)
+/area/example/third)
 "MG" = (
 /obj/structure/cable/yellow{
 	icon_state = "1-4"
 	},
 /turf/simulated/floor,
-/area/debug/third)
+/area/example/third)
 "MO" = (
 /obj/abstract/level_data/main_level,
 /turf/space,
@@ -236,27 +236,27 @@
 	},
 /obj/effect/floor_decal/industrial/warning/dust,
 /turf/simulated/floor,
-/area/debug/third)
+/area/example/third)
 "NO" = (
 /obj/machinery/light,
 /turf/simulated/floor,
-/area/debug/third)
+/area/example/third)
 "NP" = (
 /obj/effect/floor_decal/industrial/warning/dust{
 	dir = 1
 	},
 /turf/simulated/floor,
-/area/debug/third)
+/area/example/third)
 "OJ" = (
 /obj/machinery/door/airlock/external/glass,
 /turf/simulated/floor/tiled/steel_ridged,
-/area/debug/third)
+/area/example/third)
 "Qg" = (
 /obj/machinery/light{
 	dir = 1
 	},
 /turf/simulated/floor,
-/area/debug/third)
+/area/example/third)
 "QH" = (
 /obj/machinery/power/apc{
 	dir = 1;
@@ -270,56 +270,56 @@
 	pixel_y = 31
 	},
 /turf/simulated/floor,
-/area/debug/third)
+/area/example/third)
 "TM" = (
 /obj/structure/catwalk,
 /turf/simulated/open,
-/area/debug/third)
+/area/example/third)
 "TO" = (
 /obj/machinery/atmospherics/pipe/simple/hidden,
 /obj/effect/floor_decal/industrial/warning/dust{
 	dir = 4
 	},
 /turf/simulated/floor,
-/area/debug/third)
+/area/example/third)
 "UC" = (
 /obj/structure/ladder,
 /turf/simulated/open,
-/area/debug/third)
+/area/example/third)
 "UM" = (
 /obj/machinery/atmospherics/unary/vent_scrubber/on{
 	dir = 8
 	},
 /turf/simulated/floor,
-/area/debug/third)
+/area/example/third)
 "UV" = (
 /obj/machinery/light{
 	dir = 4
 	},
 /turf/simulated/floor/tiled/steel_grid,
-/area/debug/third)
+/area/example/third)
 "Wn" = (
 /obj/machinery/atmospherics/unary/vent_scrubber/on,
 /turf/simulated/floor,
-/area/debug/third)
+/area/example/third)
 "WU" = (
 /obj/effect/floor_decal/industrial/warning/dust{
 	dir = 6
 	},
 /turf/simulated/floor/tiled/steel_grid,
-/area/debug/third)
+/area/example/third)
 "Xg" = (
 /obj/structure/railing/mapped{
 	dir = 4
 	},
 /turf/simulated/floor,
-/area/debug/third)
+/area/example/third)
 "Ye" = (
 /obj/machinery/atmospherics/unary/vent_pump/on{
 	dir = 4
 	},
 /turf/simulated/floor,
-/area/debug/third)
+/area/example/third)
 "Zr" = (
 /obj/effect/floor_decal/industrial/warning/dust/corner{
 	dir = 1
@@ -328,7 +328,7 @@
 	dir = 4
 	},
 /turf/simulated/floor/tiled/steel_grid,
-/area/debug/third)
+/area/example/third)
 
 (1,1,1) = {"
 xk

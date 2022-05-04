@@ -1,35 +1,35 @@
 /obj/effect/shuttle_landmark/lower_level
 	name = "Lower Level Dock"
-	landmark_tag = "nav_debug_station"
+	landmark_tag = "nav_example_station"
 	docking_controller = "lower_level_dock"
 	special_dock_targets = list(
-		/datum/shuttle/autodock/ferry/debug = "STARBOARD"
+		/datum/shuttle/autodock/ferry/example = "STARBOARD"
 	)
 
 /obj/effect/shuttle_landmark/upper_level
 	name = "Upper Level Dock"
-	landmark_tag = "nav_debug_offsite"
+	landmark_tag = "nav_example_offsite"
 	docking_controller = "upper_level_dock"
 	special_dock_targets = list(
-		/datum/shuttle/autodock/ferry/debug = "PORT"
+		/datum/shuttle/autodock/ferry/example = "PORT"
 	)
 
-/datum/shuttle/autodock/ferry/debug
+/datum/shuttle/autodock/ferry/example
 	name = "Testing Site Ferry"
 	shuttle_area = /area/shuttle/ferry
-	dock_target = "debug_shuttle_starboard"
+	dock_target = "example_shuttle_starboard"
 	warmup_time = 10
 
 	location = 0
-	waypoint_station = "nav_debug_station"
-	waypoint_offsite = "nav_debug_offsite"
+	waypoint_station = "nav_example_station"
+	waypoint_offsite = "nav_example_offsite"
 	docking_cues = list(
-		"STARBOARD" = "debug_shuttle_starboard",
-		"PORT" = "debug_shuttle_port"
+		"STARBOARD" = "example_shuttle_starboard",
+		"PORT" = "example_shuttle_port"
 	)
 	ceiling_type = /turf/simulated/floor/shuttle_ceiling
 
-/obj/turbolift_map_holder/debug
+/obj/turbolift_map_holder/example
 	name = "Testing Site elevator placeholder"
 	icon = 'icons/obj/turbolift_preview_nowalls_3x3.dmi'
 	depth = 3
@@ -43,9 +43,9 @@
 	button_type = /obj/structure/lift/button/standalone
 	panel_type =  /obj/structure/lift/panel/standalone
 	areas_to_use = list(
-		/area/turbolift/debug/first,
-		/area/turbolift/debug/second,
-		/area/turbolift/debug/third
+		/area/turbolift/example/first,
+		/area/turbolift/example/second,
+		/area/turbolift/example/third
 	)
 	floor_departure_sound = 'sound/effects/lift_heavy_start.ogg'
 	floor_arrival_sound = 'sound/effects/lift_heavy_stop.ogg'
