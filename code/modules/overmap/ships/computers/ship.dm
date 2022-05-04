@@ -60,7 +60,11 @@ somewhere on that shuttle. Subtypes of these can be then used to perform ship ov
 	if(linked)
 		user.reset_view(linked)
 	if(user.client)
-		user.client.view = world.view + extra_view
+		if(istext(user.client.view))
+			var/list/retrieved_view = splittext(user.client.view, "x")
+			user.client.view = "[text2num(retrieved_view[1]) + extra_view]x[text2num(retrieved_view[2]) + extra_view]"
+		else
+			user.client.view = user.client.view + extra_view
 	if(linked)
 		for(var/obj/machinery/computer/ship/sensors/sensor in linked.get_linked_machines_of_type(/obj/machinery/computer/ship))
 			sensor.reveal_contacts(user)
@@ -75,9 +79,7 @@ somewhere on that shuttle. Subtypes of these can be then used to perform ship ov
 /obj/machinery/computer/ship/proc/unlook(var/mob/user)
 	user.reset_view()
 	if(user.client)
-		user.client.view = world.view
 		user.client.OnResize()
-		user.reset_view()
 	if(linked)
 		for(var/obj/machinery/computer/ship/sensors/sensor in linked.get_linked_machines_of_type(/obj/machinery/computer/ship))
 			sensor.hide_contacts(user)

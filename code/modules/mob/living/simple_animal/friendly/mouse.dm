@@ -54,10 +54,6 @@
 		else if(prob(5))
 			INVOKE_ASYNC(src, .proc/audible_emote, "snuffles.")
 
-/mob/living/simple_animal/mouse/lay_down()
-	..()
-	icon_state = resting ? "mouse_[body_color]_sleep" : "mouse_[body_color]"
-
 /mob/living/simple_animal/mouse/Initialize()
 	verbs += /mob/living/proc/ventcrawl
 	verbs += /mob/living/proc/hide

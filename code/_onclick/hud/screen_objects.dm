@@ -50,7 +50,7 @@
 	name = "default attack selector"
 	icon_state = "attack_selector"
 	screen_loc = ui_attack_selector
-	maptext_y = 5
+	maptext_y = 12
 	var/mob/living/carbon/human/owner
 
 /obj/screen/default_attack_selector/Click(location, control, params)
