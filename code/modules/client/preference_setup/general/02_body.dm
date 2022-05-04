@@ -14,9 +14,6 @@
 	var/list/appearance_descriptors = list()
 	var/equip_preview_mob = EQUIP_PREVIEW_ALL
 
-	var/icon/bgstate = "000"
-	var/list/bgstate_options = list("000", "midgrey", "FFF", "white", "steel", "techmaint", "dark", "plating", "reinforced")
-
 /datum/category_item/player_setup_item/physical/body
 	name = "Body"
 	sort_order = 2
@@ -29,7 +26,6 @@
 	pref.skin_tone =              R.read("skin_tone")
 	pref.b_type =                 R.read("b_type")
 	pref.appearance_descriptors = R.read("appearance_descriptors")
-	pref.bgstate =                R.read("bgstate")
 
 	pref.h_style =                R.read("hair_style_name")
 	pref.f_style =                R.read("facial_style_name")
@@ -69,7 +65,6 @@
 	W.write("eye_colour",             pref.eye_colour)
 	W.write("b_type",                 pref.b_type)
 	W.write("appearance_descriptors", pref.appearance_descriptors)
-	W.write("bgstate",                pref.bgstate)
 
 	// Get names of sprite accessories to serialize.
 	var/decl/sprite_accessory/sprite = GET_DECL(pref.h_style)
@@ -126,8 +121,8 @@
 			else
 				pref.appearance_descriptors[descriptor.name] = descriptor.sanitize_value(last_descriptors[descriptor.name])
 
-	if(!pref.bgstate || !(pref.bgstate in pref.bgstate_options))
-		pref.bgstate = "000"
+	if(!pref.background_state || !(pref.background_state in pref.background_options))
+		pref.background_state = initial(pref.background_state)
 
 /datum/category_item/player_setup_item/physical/body/content(var/mob/user)
 	. = list()

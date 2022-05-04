@@ -235,7 +235,7 @@ var/global/list/localhost_addresses = list(
 		tooltips = new /datum/tooltip(src)
 
 	if(holder)
-		src.control_freak = 0 //Devs need 0 for profiler access
+		control_freak = 0 //Devs need 0 for profiler access
 
 	if(prefs && !istype(mob, world.mob))
 		prefs.apply_post_login_preferences()

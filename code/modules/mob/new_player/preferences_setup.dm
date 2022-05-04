@@ -98,12 +98,15 @@
 	if(update_icon)
 		mannequin.update_icon()
 
-/datum/preferences/proc/update_preview_icon()
+/// Updates character preview map.
+/// If you don't need to update renders, use [/datum/preferences/proc/update_character_preview_background].
+/datum/preferences/proc/update_character_preview_map()
+	update_character_preview_background()
 	var/mob/living/carbon/human/dummy/mannequin/mannequin = get_mannequin(client_ckey)
 	if(mannequin)
 		mannequin.delete_inventory(TRUE)
 		dress_preview_mob(mannequin)
-		update_character_previews(new /mutable_appearance(mannequin))
+		update_character_preview_mannequin(new /mutable_appearance(mannequin))
 
 /datum/preferences/proc/get_random_name()
 	var/decl/cultural_info/culture/check_culture = cultural_info[TAG_CULTURE]

@@ -248,7 +248,7 @@ var/global/const/CHARACTER_PREFERENCE_INPUT_TITLE = "Character Preference"
 	if(!pref_mob || !pref_mob.client)
 		return 1
 	if(. & TOPIC_UPDATE_PREVIEW)
-		pref_mob.client.prefs.update_preview_icon()
+		pref_mob.client.prefs.update_character_preview_map()
 
 	// And again: above operation is slow/may sleep, clients disappear whenever.
 	pref_mob = preference_mob()

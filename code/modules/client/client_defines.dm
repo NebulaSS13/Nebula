@@ -41,7 +41,7 @@
 	var/warned_about_multikeying = 0
 
 	// comment out the line below when debugging locally to enable the options & messages menu
-	//control_freak = 1
+	control_freak = CONTROL_FREAK_ALL | CONTROL_FREAK_MACROS | CONTROL_FREAK_SKIN
 
 	// * Database related things *
 
