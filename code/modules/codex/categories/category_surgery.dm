@@ -66,7 +66,7 @@
 		</ol>
 	"}
 
-/decl/codex_category/surgery/Initialize()
+/decl/codex_category/surgery/Populate()
 	var/list/procedures = decls_repository.get_decls_of_subtype(/decl/surgery_step)
 	for(var/stype in procedures)
 		var/decl/surgery_step/procedure = procedures[stype]

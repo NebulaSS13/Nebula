@@ -1,8 +1,8 @@
-/decl/codex_category/species/
+/decl/codex_category/species
 	name = "Species"
 	desc = "Sapient species encountered in known space."
 
-/decl/codex_category/species/Initialize()
+/decl/codex_category/species/Populate()
 	for(var/thing in get_all_species())
 		var/decl/species/species = get_species_by_key(thing)
 		if(!species.hidden_from_codex)

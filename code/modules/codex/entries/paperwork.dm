@@ -1,5 +1,5 @@
 /datum/codex_entry/writing
-	associated_strings = list("writing", "pencode")
+	associated_strings = list("pencode")
 	associated_paths = list(/obj/item/pen, /obj/item/paper, /obj/item/book)
 	disambiguator = "writing"
 

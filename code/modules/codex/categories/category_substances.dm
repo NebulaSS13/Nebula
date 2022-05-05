@@ -2,7 +2,7 @@
 	name = "Substances"
 	desc = "Various natural and artificial substances."
 
-/decl/codex_category/substances/Initialize()
+/decl/codex_category/substances/Populate()
 	for(var/thing in SSmaterials.materials)
 		var/decl/material/mat = thing
 		if(!mat.hidden_from_codex)

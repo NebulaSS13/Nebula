@@ -28,7 +28,7 @@ SUBSYSTEM_DEF(codex)
 	for(var/ctype in categories)
 		var/decl/codex_category/cat = categories[ctype]
 		if(cat?.name)
-			cat.Initialize()
+			cat.Populate()
 
 	// Create the index file for later use.
 	for(var/thing in SScodex.all_entries)

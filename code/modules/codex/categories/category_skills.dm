@@ -1,8 +1,8 @@
-/decl/codex_category/skills/
+/decl/codex_category/skills
 	name = "Skills"
 	desc = "Certifiable skills."
 
-/decl/codex_category/skills/Initialize()
+/decl/codex_category/skills/Populate()
 	for(var/decl/hierarchy/skill/skill in global.skills)
 		var/list/skill_info = list()
 		if(skill.prerequisites)

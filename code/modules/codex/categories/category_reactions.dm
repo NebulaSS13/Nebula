@@ -3,7 +3,7 @@
 	desc = "Chemical reactions with mundane, interesting or spectacular effects."
 	guide_name = "Chemistry"
 
-/decl/codex_category/chemistry/Initialize()
+/decl/codex_category/chemistry/Populate()
 
 	guide_html = {"
 		<h1>Chemistry Basics</h1>

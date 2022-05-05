@@ -3,7 +3,7 @@
 	desc = "Recipes for a variety of different kinds of foods and condiments."
 	guide_name = "Cooking"
 
-/decl/codex_category/recipes/Initialize()
+/decl/codex_category/recipes/Populate()
 
 	var/list/entries_to_register = list()
 
@@ -101,7 +101,6 @@
 
 		entries_to_register += new /datum/codex_entry(             \
 		 _display_name =       "[recipe_name] (microwave recipe)", \
-		 _associated_strings = list(lowertext(recipe_name)),       \
 		 _lore_text =          lore_text,                          \
 		 _mechanics_text =     mechanics_text,                     \
 		 _antag_text =         recipe.antag_text                   \

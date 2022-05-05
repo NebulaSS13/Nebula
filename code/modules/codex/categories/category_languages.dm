@@ -2,7 +2,7 @@
 	name = "Languages"
 	desc = "Languages spoken in known space."
 
-/decl/codex_category/languages/Initialize()
+/decl/codex_category/languages/Populate()
 	var/example_line = "This is just some random words. What did you expect here? Hah hah!"
 	var/language_types = decls_repository.get_decls_of_subtype(/decl/language)
 	for(var/langname in language_types)

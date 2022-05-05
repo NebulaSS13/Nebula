@@ -7,8 +7,7 @@
 	var/guide_html
 
 //Children should call ..() at the end after filling the items list
-/decl/codex_category/Initialize()
-	. = ..()
+/decl/codex_category/proc/Populate()
 
 	if(items.len)
 		var/lore_text = desc + "<hr>"

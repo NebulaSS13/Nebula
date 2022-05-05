@@ -3,7 +3,7 @@
 	desc = "Various mixes of drinks, alcoholic and otherwise, that can be made by a skilled bartender."
 	guide_name = "Bartending"
 
-/decl/codex_category/cocktails/Initialize()
+/decl/codex_category/cocktails/Populate()
 
 	var/list/entries_to_register = list()
 	var/list/cocktails = decls_repository.get_decls_of_subtype(/decl/cocktail)

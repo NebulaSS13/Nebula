@@ -2,7 +2,7 @@
 	name = "Phenomena"
 	desc = "Rumoured esoteric effects, fringe pseudoscience, and the kind of nonsense our field researchers submit at 4:55 on a Friday before heading to the pub."
 
-/decl/codex_category/phenomena/Initialize()
+/decl/codex_category/phenomena/Populate()
 	for(var/thing in subtypesof(/spell))
 		var/spell/spell = thing
 		if(!initial(spell.hidden_from_codex) && initial(spell.desc) && initial(spell.name))

@@ -2,7 +2,7 @@
 	name = "Factions and Culture"
 	desc = "Prominent planets, cultures, factions and religions of known space."
 
-/decl/codex_category/cultures/Initialize()
+/decl/codex_category/cultures/Populate()
 	var/list/all_cultural_info = decls_repository.get_decls_of_subtype(/decl/cultural_info)
 	for(var/thing in all_cultural_info)
 		var/decl/cultural_info/culture = all_cultural_info[thing]
