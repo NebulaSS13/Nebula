@@ -36,16 +36,20 @@
 	var/atom/message_loc
 	/// The client who heard this message
 	var/client/owned_by
+	/// Contains the scheduled destruction time, used for scheduling EOL
+	var/scheduled_destruction
+	/// Contains the time that the EOL for the message will be complete, used for qdel scheduling
+	var/eol_complete
 	/// Contains the approximate amount of lines for height decay
 	var/approx_lines
+	/// Contains the reference to the next chatmessage in the bucket, used by runechat subsystem
+	var/datum/runechat/next
+	/// Contains the reference to the previous chatmessage in the bucket, used by runechat subsystem
+	var/datum/runechat/prev
 	/// The current index used for adjusting the layer of each sequential chat message such that recent messages will overlay older ones
 	var/static/current_z_idx = 0
 	/// Containt the path to icon file with states to display radio and emote icon.
 	var/runechat_icon = 'icons/runechat_icons.dmi'
-	/// Contains ID of assigned timer for end_of_life fading event
-	var/fadertimer = null
-	/// States if end_of_life is being executed
-	var/isFading = FALSE
 
 /**
  * Constructs a chat message overlay
@@ -73,10 +77,6 @@
 /datum/runechat/Destroy()
 	events_repository.unregister(/decl/observ/destroyed, message_loc, src, .proc/qdel_self)
 
-	if(fadertimer)
-		deltimer(fadertimer)
-		fadertimer = null
-
 	if(owned_by)
 		if (owned_by.seen_messages)
 			LAZYREMOVEASSOC(owned_by.seen_messages, message_loc, src)
@@ -86,6 +86,7 @@
 	owned_by = null
 	message_loc = null
 	message = null
+	leave_subsystem()
 	return ..()
 
 /**
@@ -169,15 +170,11 @@
 			combined_height += m.approx_lines
 
 			// When choosing to update the remaining time we have to be careful not to update the
-			// scheduled time once the EOL has been executed.
-			if (!m.isFading)
-				var/sched_remaining = timeleft(m.fadertimer, SSrunechat)
+			// scheduled time once the EOL completion time has been set.
+			var/sched_remaining = m.scheduled_destruction - world.time
+			if (!m.eol_complete)
 				var/remaining_time = (sched_remaining) * (RUNECHAT_MESSAGE_EXP_DECAY ** idx++) * (RUNECHAT_MESSAGE_HEIGHT_DECAY ** NONUNIT_CEILING(combined_height, 1))
-				if (remaining_time)
-					deltimer(m.fadertimer, SSrunechat)
-					m.fadertimer = addtimer(CALLBACK(m, .proc/end_of_life), remaining_time, TIMER_STOPPABLE|TIMER_LOOP, SSrunechat)
-				else
-					m.end_of_life()
+				m.enter_subsystem(world.time + remaining_time) // push updated time to runechat SS
 
 	// Reset z index if relevant
 	if (current_z_idx >= RUNECHAT_LAYER_MAX_Z)
@@ -209,20 +206,16 @@
 	animate(message, alpha = 255, pixel_z = bound_height, time = RUNECHAT_MESSAGE_SPAWN_TIME)
 
 	// Register with the runechat SS to handle EOL and destruction
-	var/duration = lifespan - RUNECHAT_MESSAGE_EOL_FADE
-	fadertimer = addtimer(CALLBACK(src, .proc/end_of_life), duration, TIMER_STOPPABLE|TIMER_LOOP, SSrunechat)
+	scheduled_destruction = world.time + (lifespan - RUNECHAT_MESSAGE_EOL_FADE)
+	enter_subsystem()
 
 /**
- * Applies final animations to overlay CHAT_MESSAGE_EOL_FADE deciseconds prior to message deletion,
- * sets timer for scheduling deletion
- *
- * Arguments:
- * * fadetime - The amount of time to animate the message's fadeout for
+ * Applies final animations to overlay RUNECHAT_MESSAGE_EOL_FADE deciseconds prior to message deletion
  */
 /datum/runechat/proc/end_of_life(fadetime = RUNECHAT_MESSAGE_EOL_FADE)
-	isFading = TRUE
+	eol_complete = scheduled_destruction + fadetime
 	animate(message, alpha = 0, pixel_y = message.pixel_y + RUNECHAT_MESSAGE_FADE_PIXEL_Y, time = fadetime, flags = ANIMATION_PARALLEL)
-	addtimer(CALLBACK(GLOBAL_PROC, /proc/qdel, src), fadetime, TIMER_LOOP, SSrunechat)
+	enter_subsystem(eol_complete) // re-enter the runechat SS with the EOL completion time to QDEL self
 
 /**
  * Creates a message overlay at a defined location for a given speaker
