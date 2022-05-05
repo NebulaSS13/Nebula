@@ -693,7 +693,6 @@
 				/obj/item/chems/food/candy/proteinbar,
 				/obj/item/chems/food/syndicake,
 				/obj/item/chems/food/donut,
-				/obj/item/chems/food/donut/cherryjelly,
 				/obj/item/chems/food/donut/jelly,
 				/obj/item/pizzabox/meat,
 				/obj/item/pizzabox/vegetable,
@@ -1242,8 +1241,8 @@ var/global/list/random_useful_
 /obj/random/mre/dessert/spawn_choices()
 	return list(/obj/item/chems/food/candy,
 				/obj/item/chems/food/candy/proteinbar,
-				/obj/item/chems/food/donut/normal,
-				/obj/item/chems/food/donut/cherryjelly,
+				/obj/item/chems/food/donut,
+				/obj/item/chems/food/donut/jelly,
 				/obj/item/chems/food/chocolatebar,
 				/obj/item/chems/food/cookie,
 				/obj/item/chems/food/poppypretzel,
@@ -1256,7 +1255,7 @@ var/global/list/random_useful_
 /obj/random/mre/dessert/vegan/spawn_choices()
 	return list(/obj/item/chems/food/candy,
 				/obj/item/chems/food/chocolatebar,
-				/obj/item/chems/food/donut/cherryjelly,
+				/obj/item/chems/food/donut/jelly,
 				/obj/item/chems/food/plumphelmetbiscuit)
 
 /obj/random/mre/drink

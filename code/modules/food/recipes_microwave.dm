@@ -54,21 +54,21 @@ I said no!
 	items = list(
 		/obj/item/chems/food/dough
 	)
-	result = /obj/item/chems/food/donut/cherryjelly
 
 /decl/recipe/donut
+	display_name = "plain donut" // override to make it distinct from other donuts
 	reagents = list(/decl/material/liquid/nutriment/sugar = 5)
 	items = list(
 		/obj/item/chems/food/dough
 	)
-	result = /obj/item/chems/food/donut/normal
+	result = /obj/item/chems/food/donut
 
-/decl/recipe/meatburger
+/decl/recipe/plainburger
 	items = list(
 		/obj/item/chems/food/bun,
 		/obj/item/chems/food/cutlet
 	)
-	result = /obj/item/chems/food/meatburger
+	result = /obj/item/chems/food/plainburger
 
 /decl/recipe/brainburger
 	items = list(
@@ -491,14 +491,14 @@ I said no!
 
 /decl/recipe/spellburger
 	items = list(
-		/obj/item/chems/food/meatburger,
+		/obj/item/chems/food/plainburger,
 		/obj/item/clothing/head/wizard,
 	)
 	result = /obj/item/chems/food/spellburger
 
 /decl/recipe/bigbiteburger
 	items = list(
-		/obj/item/chems/food/meatburger,
+		/obj/item/chems/food/plainburger,
 		/obj/item/chems/food/meat = 2,
 		/obj/item/chems/food/egg,
 	)

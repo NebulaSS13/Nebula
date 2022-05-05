@@ -55,22 +55,8 @@
 	. = ..()
 	reagents.add_reagent(/decl/material/liquid/nutriment/protein, 2)
 
-/obj/item/chems/food/meatburger
-	name = "burger"
-	desc = "The cornerstone of every nutritious breakfast."
-	icon_state = "hburger"
-	filling_color = "#d63c3c"
-	center_of_mass = @"{'x':16,'y':11}"
-	nutriment_desc = list("bun" = 2)
-	nutriment_amt = 3
-	bitesize = 2
-
-/obj/item/chems/food/meatburger/Initialize()
-	. = ..()
-	reagents.add_reagent(/decl/material/liquid/nutriment/protein, 3)
-
 /obj/item/chems/food/plainburger
-	name = "burger"
+	name = "plain burger"
 	desc = "The cornerstone of every nutritious breakfast."
 	icon = 'icons/obj/food_ingredients.dmi'
 	icon_state = "burger"

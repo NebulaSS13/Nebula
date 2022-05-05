@@ -9,6 +9,6 @@
 		if(culture.name && !culture.hidden_from_codex)
 			var/datum/codex_entry/entry = new(_display_name = "[culture.name] ([lowertext(culture.desc_type)])")
 			entry.lore_text = culture.description
-			SScodex.add_entry_by_string(culture.name, entry)
+			SScodex.add_entry_by_string(entry.name, entry)
 			items |= culture.name
 	. = ..()
