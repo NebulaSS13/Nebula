@@ -21,17 +21,29 @@
 	if(_mechanics_text)     mechanics_text =     _mechanics_text
 	if(_antag_text)         antag_text =         _antag_text
 
-	if(associated_paths && associated_paths.len)
+	if(length(associated_paths))
 		for(var/tpath in associated_paths)
 			var/atom/thing = tpath
-			var/thing_name = initial(thing.name)
+			var/thing_name = sanitize(initial(thing.name))
 			if(disambiguator)
 				thing_name = "[thing_name] ([disambiguator])"
-			LAZYADD(associated_strings, sanitize(lowertext(thing_name)))
+			LAZYDISTINCTADD(associated_strings, thing_name)
+		for(var/associated_path in associated_paths)
+			if(SScodex.entries_by_path[associated_path])
+				PRINT_STACK_TRACE("Trying to save codex entry for [name] by path [associated_path] but one already exists!")
+			SScodex.entries_by_path[associated_path] = src
+
 	if(name)
-		LAZYADD(associated_strings, name)
-	else if(associated_strings && associated_strings.len)
+		LAZYDISTINCTADD(associated_strings, name)
+	else if(length(associated_strings))
 		name = associated_strings[1]
+
+	for(var/associated_string in associated_strings)
+		var/key_string = lowertext(trim(associated_string))
+		if(SScodex.entries_by_string[key_string])
+			PRINT_STACK_TRACE("Trying to save codex entry for [name] by string [key_string] but one already exists!")
+		SScodex.entries_by_string[key_string] = src
+
 	..()
 
 /datum/codex_entry/Destroy(force)

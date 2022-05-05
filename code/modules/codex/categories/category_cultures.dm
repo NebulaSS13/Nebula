@@ -7,8 +7,9 @@
 	for(var/thing in all_cultural_info)
 		var/decl/cultural_info/culture = all_cultural_info[thing]
 		if(culture.name && !culture.hidden_from_codex)
-			var/datum/codex_entry/entry = new(_display_name = "[culture.name] ([lowertext(culture.desc_type)])")
-			entry.lore_text = culture.description
-			SScodex.add_entry_by_string(entry.name, entry)
-			items |= culture.name
+			var/datum/codex_entry/entry = new(
+				_display_name = "[culture.name] ([lowertext(culture.desc_type)])",
+				_lore_text = culture.description
+			)
+			items |= entry.name
 	. = ..()

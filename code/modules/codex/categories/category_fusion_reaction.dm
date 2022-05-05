@@ -26,6 +26,5 @@
 		else
 			reaction_info += "Nothing is produced in the process of [p_mat.name]-[s_mat.name] fusion."
 		var/datum/codex_entry/entry = new(_display_name = lowertext(trim("[p_mat.name]-[s_mat.name] (fusion reaction)")), _mechanics_text = jointext(reaction_info, "<br>"))
-		SScodex.add_entry_by_string(entry.name, entry)
 		items |= entry.name
 	. = ..()

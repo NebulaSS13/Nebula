@@ -6,14 +6,10 @@
 	for(var/thing in SSmaterials.materials)
 		var/decl/material/mat = thing
 		if(!mat.hidden_from_codex)
-			var/datum/codex_entry/entry = new(_display_name = "[mat.codex_name || mat.name] (substance)", _associated_strings = list("[mat.name] pill"))
 			var/new_lore_text = initial(mat.lore_text) 
 			if(mat.taste_description)
 				new_lore_text = "[new_lore_text]<br>It apparently tastes of [mat.taste_description]."
-			entry.lore_text = new_lore_text
-			entry.antag_text = mat.antag_text
 			var/list/material_info = list(mat.mechanics_text)
-
 			var/list/production_strings = list()
 			for(var/react in SSmaterials.chemical_reactions_by_result[thing])
 				var/decl/chemical_reaction/reaction = react
@@ -157,7 +153,12 @@
 				material_info += "<li>It can be used to pad furniture.</li>"
 			material_info += "</ul>"
 
-			entry.mechanics_text = jointext(material_info, null)
-			SScodex.add_entry_by_string(entry.name, entry)
+			var/datum/codex_entry/entry = new(
+				_display_name = "[mat.codex_name || mat.name] (substance)", 
+				_associated_strings = list("[mat.name] pill"),
+				_lore_text = new_lore_text,
+				_antag_text = mat.antag_text,
+				_mechanics_text = jointext(material_info, null)
+			)
 			items |= entry.name
 	. = ..()

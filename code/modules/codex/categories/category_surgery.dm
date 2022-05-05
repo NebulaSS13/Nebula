@@ -112,7 +112,10 @@
 		if(procedure.additional_codex_lines)
 			surgery_info += procedure.additional_codex_lines
 
-		var/datum/codex_entry/entry = new(_display_name = lowertext(trim("[lowertext(procedure.name)] (surgery)")), _lore_text = procedure.description, _mechanics_text = jointext(surgery_info, "<br>"))
-		SScodex.add_entry_by_string(entry.name, entry)
+		var/datum/codex_entry/entry = new(
+			_display_name = lowertext(trim("[lowertext(procedure.name)] (surgery)")), 
+			_lore_text = procedure.description, 
+			_mechanics_text = jointext(surgery_info, "<br>")
+		)
 		items |= entry.name
 	. = ..()

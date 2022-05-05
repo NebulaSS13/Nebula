@@ -6,8 +6,9 @@
 	for(var/thing in subtypesof(/spell))
 		var/spell/spell = thing
 		if(!initial(spell.hidden_from_codex) && initial(spell.desc))
-			var/datum/codex_entry/entry = new(_display_name = "[initial(spell.name)] (phenomena)")
-			entry.antag_text = initial(spell.desc)
-			SScodex.add_entry_by_string(entry.name, entry)
+			var/datum/codex_entry/entry = new(
+				_display_name = "[initial(spell.name)] (phenomena)",
+				_antag_text = initial(spell.desc)
+			)
 			items |= entry.name
 	. = ..()

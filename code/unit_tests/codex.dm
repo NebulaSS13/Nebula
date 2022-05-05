@@ -5,11 +5,6 @@
 	var/list/failures = list()
 	var/list/seen_strings = list()
 	for(var/datum/codex_entry/entry AS_ANYTHING in SScodex.all_entries)
-
-		if(entry.name in seen_strings)
-			failures |= "name - [entry.name]"
-		seen_strings |= entry.name
-
 		for(var/associated_string in entry.associated_strings)
 			if(associated_string in seen_strings)
 				failures |= "associated string - [associated_string] - [entry.name]"

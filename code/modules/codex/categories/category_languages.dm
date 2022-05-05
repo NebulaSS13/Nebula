@@ -29,9 +29,12 @@
 			lang_lore += ""
 			lang_lore += "<b>CodexBot</b> [lang_example]"
 			
-		var/datum/codex_entry/entry = new(_display_name = "[L.name] (language)", _lore_text = jointext(lang_lore, "<br>"), _mechanics_text = jointext(lang_info, "<br>"))
-		entry.associated_strings += L.name
-		entry.associated_strings += L.shorthand
-		SScodex.add_entry_by_string(entry.name, entry)
+		var/datum/codex_entry/entry = new(
+			_display_name = "[L.name] (language)",
+			_associated_strings = list("[L.shorthand] (language)"),
+			_lore_text = jointext(lang_lore, "<br>"),
+			_mechanics_text = jointext(lang_info, "<br>")
+		)
 		items |= entry.name
+
 	. = ..()
