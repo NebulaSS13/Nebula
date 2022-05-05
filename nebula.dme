@@ -3375,6 +3375,7 @@
 #include "code\unit_tests\chemistry_tests.dm"
 #include "code\unit_tests\closets.dm"
 #include "code\unit_tests\clothing.dm"
+#include "code\unit_tests\codex.dm"
 #include "code\unit_tests\culture.dm"
 #include "code\unit_tests\decls.dm"
 #include "code\unit_tests\economics.dm"
