@@ -1734,6 +1734,7 @@
 #include "code\modules\codex\categories\category_cultures.dm"
 #include "code\modules\codex\categories\category_fusion_reaction.dm"
 #include "code\modules\codex\categories\category_languages.dm"
+#include "code\modules\codex\categories\category_phenomena.dm"
 #include "code\modules\codex\categories\category_reactions.dm"
 #include "code\modules\codex\categories\category_recipes.dm"
 #include "code\modules\codex\categories\category_skills.dm"
