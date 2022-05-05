@@ -293,6 +293,7 @@
 
 /decl/material/liquid/ethanol/vodka
 	name = "vodka"
+	codex_name = "plain vodka"
 	lore_text = "Number one drink AND fueling choice for Independents around the galaxy."
 	taste_description = "grain alcohol"
 	color = "#0064c8" // rgb: 0, 100, 200
