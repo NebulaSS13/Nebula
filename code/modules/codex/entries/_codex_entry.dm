@@ -12,6 +12,8 @@
 
 /datum/codex_entry/New(var/_display_name, var/list/_associated_paths, var/list/_associated_strings, var/_lore_text, var/_mechanics_text, var/_antag_text)
 
+	SScodex.all_entries += src
+
 	if(_display_name)       name =               _display_name
 	if(_associated_paths)   associated_paths =   _associated_paths
 	if(_associated_strings) associated_strings = _associated_strings
@@ -32,6 +34,10 @@
 		name = associated_strings[1]
 	..()
 
+/datum/codex_entry/Destroy(force)
+	SScodex.all_entries -= src
+	. = ..()
+	
 /datum/codex_entry/proc/get_header(var/mob/presenting_to)
 	var/list/dat = list()
 	var/datum/codex_entry/linked_entry = SScodex.get_entry_by_string("nexus")

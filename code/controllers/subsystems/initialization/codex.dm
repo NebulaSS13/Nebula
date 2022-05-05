@@ -4,6 +4,7 @@ SUBSYSTEM_DEF(codex)
 	init_order = SS_INIT_MISC_CODEX
 	var/regex/linkRegex
 
+	var/list/all_entries =       list()
 	var/list/entries_by_path =   list()
 	var/list/entries_by_string = list()
 	var/list/index_file =        list()
