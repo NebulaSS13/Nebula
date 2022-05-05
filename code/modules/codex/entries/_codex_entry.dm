@@ -34,15 +34,23 @@
 			SScodex.entries_by_path[associated_path] = src
 
 	if(name)
-		LAZYDISTINCTADD(associated_strings, name)
+		var/clean_name = lowertext(sanitize(name))
+		LAZYDISTINCTADD(associated_strings, clean_name)
 	else if(length(associated_strings))
 		name = associated_strings[1]
 
-	for(var/associated_string in associated_strings)
-		var/key_string = lowertext(trim(associated_string))
-		if(SScodex.entries_by_string[key_string])
-			PRINT_STACK_TRACE("Trying to save codex entry for [name] by string [key_string] but one already exists!")
-		SScodex.entries_by_string[key_string] = src
+	if(length(associated_strings))
+
+		var/list/cleaned_strings = list()
+		for(var/associated_string in associated_strings)
+			cleaned_strings |= lowertext(trim(associated_string))
+		associated_strings = cleaned_strings
+
+		if(length(associated_strings))
+			for(var/key_string in associated_strings)
+				if(SScodex.entries_by_string[key_string])
+					PRINT_STACK_TRACE("Trying to save codex entry for [name] by string [key_string] but one already exists!")
+				SScodex.entries_by_string[key_string] = src
 
 	..()
 

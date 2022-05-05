@@ -1,5 +1,5 @@
 /obj/item/inflatable
-	name = "inflatable"
+	name = "inflatable item"
 	w_class = ITEM_SIZE_NORMAL
 	icon = 'icons/obj/structures/inflatable.dmi'
 	var/deploy_path = null
@@ -37,7 +37,7 @@
 	deploy_path = /obj/structure/inflatable/door
 
 /obj/structure/inflatable
-	name = "inflatable"
+	name = "inflatable structure"
 	desc = "An inflated membrane. Do not puncture."
 	density = 1
 	anchored = 1

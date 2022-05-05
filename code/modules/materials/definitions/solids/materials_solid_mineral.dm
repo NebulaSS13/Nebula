@@ -28,6 +28,7 @@
 
 /decl/material/solid/graphite
 	name = "graphite"
+	codex_name = "loose graphite"
 	uid = "solid_graphite"
 	color = "#444444"
 	ore_name = "graphite"
