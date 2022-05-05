@@ -62,7 +62,7 @@
  * * extra_classes - Extra classes to apply to the span that holds the text
  * * lifespan - The lifespan of the message in deciseconds
  */
-/datum/runechat/New(atom/target, mob/owner, text,decl/language/language, list/extra_classes = list(), lifespan = RUNECHAT_MESSAGE_LIFESPAN)
+/datum/runechat/New(atom/target, mob/owner, text, decl/language/language, list/extra_classes = list(), lifespan = RUNECHAT_MESSAGE_LIFESPAN)
 	. = ..()
 	if(!istype(target))
 		CRASH("Invalid target given for runechat")
@@ -76,10 +76,11 @@
 
 /datum/runechat/Destroy()
 	events_repository.unregister(/decl/observ/destroyed, message_loc, src, .proc/qdel_self)
+	events_repository.unregister(/decl/observ/destroyed, owned_by, src, .proc/qdel_self)
 
 	if(owned_by)
 		if (owned_by.seen_messages)
-			LAZYREMOVEASSOC(owned_by.seen_messages, message_loc, src)
+			LAZYASSOCLISTREMOVE(owned_by.seen_messages, message_loc, src)
 
 		owned_by.images.Remove(message)
 
@@ -201,7 +202,7 @@
 	message.maptext = MAPTEXT(complete_text)
 
 	// View the message
-	LAZYADDASSOCLIST(owned_by.seen_messages, message_loc, src)
+	LAZYASSOCLISTADD(owned_by.seen_messages, message_loc, src)
 	owned_by.images |= message
 	animate(message, alpha = 255, pixel_z = bound_height, time = RUNECHAT_MESSAGE_SPAWN_TIME)
 

@@ -29,10 +29,10 @@
 #define LAZYISIN(L, I) (L ? (I in L) : FALSE)
 // Null-safe L.Cut()
 #define LAZYCLEARLIST(L) if(L) { L.Cut(); L = null; }
-// This is used to add onto lazy assoc list when the value you're adding is a /list/. This one has extra safety over lazyaddassoc because the value could be null (and thus cant be used to += objects)
-#define LAZYADDASSOCLIST(L, K, V) if(!L) { L = list(); } L[K] += list(V);
+// This is used to add onto lazy assoc list when the value you're adding is a /list/. This one has extra safety because the value could be null (and thus cant be used to += objects)
+#define LAZYASSOCLISTADD(L, K, V) if(!L) { L = list(); } L[K] += list(V);
 // Removes value V and key K from associative list L
-#define LAZYREMOVEASSOC(L, K, V) if(L) { if(L[K]) { L[K] -= V; if(!length(L[K])) L -= K; } if(!length(L)) L = null; }
+#define LAZYASSOCLISTREMOVE(L, K, V) if(L) { if(L[K]) { L[K] -= V; if(!length(L[K])) L -= K; } if(!length(L)) L = null; }
 // Reads L or an empty list if L is not a list.  Note: Does NOT assign, L may be an expression.
 #define SANITIZE_LIST(L) ( islist(L) ? L : list() )
 
