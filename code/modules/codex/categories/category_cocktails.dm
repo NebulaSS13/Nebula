@@ -30,7 +30,6 @@
 
 		entries_to_register += new /datum/codex_entry(         \
 		 _display_name =       "[cocktail.name] (cocktail)",   \
-		 _associated_strings = list(lowertext(cocktail.name)), \
 		 _lore_text =          cocktail.description,           \
 		 _mechanics_text =     mechanics_text,                 \
 		)

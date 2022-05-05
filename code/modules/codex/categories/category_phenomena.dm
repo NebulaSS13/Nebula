@@ -5,7 +5,7 @@
 /decl/codex_category/phenomena/Initialize()
 	for(var/thing in subtypesof(/spell))
 		var/spell/spell = thing
-		if(!initial(spell.hidden_from_codex) && initial(spell.desc))
+		if(!initial(spell.hidden_from_codex) && initial(spell.desc) && initial(spell.name))
 			var/datum/codex_entry/entry = new(
 				_display_name = "[initial(spell.name)] (phenomena)",
 				_antag_text = initial(spell.desc)

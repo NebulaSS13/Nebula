@@ -27,7 +27,6 @@
 
 		var/mechanics_text
 		var/lore_text
-		var/product_name
 		var/category_name
 		if(istype(food, /decl/chemical_reaction/recipe/food))
 			var/decl/chemical_reaction/recipe/food/food_ref = food
@@ -35,14 +34,12 @@
 			if(!product)
 				continue
 			category_name = "mix recipe"
-			product_name = initial(product.name)
 			lore_text = initial(product.desc)
 			mechanics_text = "This recipe produces \a [initial(product.name)].<br>It should be performed in a mixing bowl or beaker, and requires the following ingredients:"
 		else
 			var/decl/material/product = food.result
 			if(!product)
 				continue
-			product_name = initial(product.name)
 			lore_text = initial(product.lore_text)
 			if(ispath(food.result, /decl/material/liquid/drink) || ispath(food.result, /decl/material/liquid/ethanol))
 				category_name = "drink recipe"
@@ -69,9 +66,6 @@
 
 		entries_to_register += new /datum/codex_entry(                     \
 		 _display_name =       "[lowertext(food.name)] ([category_name])", \
-		 _associated_strings = list(                                       \
-		 	lowertext(food.name),                                          \
-			lowertext(product_name)),                                      \
 		 _lore_text =          lore_text,                                  \
 		 _mechanics_text =     mechanics_text,                             \
 		)
