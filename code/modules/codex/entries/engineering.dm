@@ -25,17 +25,8 @@
 	Wires can be pulsed remotely with a signaler attached to it.  A powersink will also drain any APCs connected to the same wire the powersink is on."
 
 /datum/codex_entry/inflatable_item
-	associated_paths = list(/obj/item/inflatable)
-	mechanics_text = "Inflate by using it in your hand.  The inflatable barrier will inflate on your tile.  To deflate it, use the 'deflate' verb."
-
-/datum/codex_entry/inflatable_deployed
-	associated_paths = list(/obj/structure/inflatable)
-	mechanics_text = "To remove these safely, use the 'deflate' verb.  Hitting these with any objects will probably puncture and break it forever."
-
-/datum/codex_entry/inflatable_door
-	associated_paths = list(/obj/structure/inflatable/door)
-	mechanics_text = "Click the door to open or close it.  It only stops air while closed.<br>\
-	To remove these safely, use the 'deflate' verb.  Hitting these with any objects will probably puncture and break it forever."
+	associated_paths = list(/obj/item/inflatable, /obj/structure/inflatable, /obj/structure/inflatable/door)
+	mechanics_text = "Inflate by using it in your hand.  The inflatable barrier will inflate on your tile.  To deflate it, use the 'deflate' verb. Hitting this with any object will probably puncture and break it forever.<br>Walls are static, but doors may be clicked to open or close them. They only stop air while closed."
 
 /datum/codex_entry/welding_pack
 	associated_paths = list(/obj/item/weldpack)

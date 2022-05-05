@@ -1,92 +1,10 @@
 /datum/codex_entry/atmos_pipe
 	associated_paths = list(/obj/machinery/atmospherics/pipe)
-	mechanics_text = "This pipe, and all other pipes, can be connected or disconnected by a wrench.  The internal pressure of the pipe must \
-	be below 300 kPa to do this.  More pipes can be obtained from the pipe dispenser."
-
-//HE pipes
-/datum/codex_entry/atmos_he
-	associated_paths = list(/obj/machinery/atmospherics/pipe/simple/heat_exchanging)
-	mechanics_text = "This radiates heat from the pipe's gas to space, cooling it down."
-
-//Supply/Scrubber pipes
-/datum/codex_entry/atmos_visible_scrub
-	associated_paths = list(/obj/machinery/atmospherics/pipe/simple/visible/scrubbers)
-	mechanics_text = "This is a special 'scrubber' pipe, which does not connect to 'normal' pipes.  If you want to connect it, use \
-	a Universal Adapter pipe."
-
-/datum/codex_entry/atmos_visible_supply
-	associated_paths = list(/obj/machinery/atmospherics/pipe/simple/visible/supply)
-	mechanics_text = "This is a special 'supply' pipe, which does not connect to 'normal' pipes.  If you want to connect it, use \
-	a Universal Adapter pipe."
-
-/datum/codex_entry/atmos_hidden_supply
-	associated_paths = list(/obj/machinery/atmospherics/pipe/simple/hidden/supply)
-	mechanics_text = "This is a special 'supply' pipe, which does not connect to 'normal' pipes.  If you want to connect it, use \
-	a Universal Adapter pipe."
-
-/datum/codex_entry/atmos_hidden_scrub
-	associated_paths = list(/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers)
-	mechanics_text = "This is a special 'scrubber' pipe, which does not connect to 'normal' pipes.  If you want to connect it, use \
-	a Universal Adapter pipe."
-
-//Universal adapters
-/datum/codex_entry/atmos_visible_universal
-	associated_paths = list(/obj/machinery/atmospherics/pipe/simple/visible/universal)
-	mechanics_text = "This allows you to connect 'normal' pipes, red 'scrubber' pipes, and blue 'supply' pipes."
-
-/datum/codex_entry/atmos_hidden_universal
-	associated_paths = list(/obj/machinery/atmospherics/pipe/simple/hidden/universal)
-	mechanics_text = "This allows you to connect 'normal' pipes, red 'scrubber' pipes, and blue 'supply' pipes."
-
-//Three way manifolds
-/datum/codex_entry/atmos_manifold
-	associated_paths = list(/obj/machinery/atmospherics/pipe/manifold)
-	mechanics_text = "A normal pipe with three ends to connect to."
-
-/datum/codex_entry/atmos_manifold_visible_scrub
-	associated_paths = list(/obj/machinery/atmospherics/pipe/manifold/visible/scrubbers)
-	mechanics_text = "This is a special 'scrubber' pipe, which does not connect to 'normal' pipes.  If you want to connect it, use \
-	a Universal Adapter pipe."
-
-/datum/codex_entry/atmos_manifold_visible_supply
-	associated_paths = list(/obj/machinery/atmospherics/pipe/manifold/visible/supply)
-	mechanics_text = "This is a special 'supply' pipe, which does not connect to 'normal' pipes.  If you want to connect it, use \
-	a Universal Adapter pipe."
-
-/datum/codex_entry/atmos_manifold_hidden_scrub
-	associated_paths = list(/obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers)
-	mechanics_text = "This is a special 'scrubber' pipe, which does not connect to 'normal' pipes.  If you want to connect it, use \
-	a Universal Adapter pipe."
-
-/datum/codex_entry/atmos_manifold_hidden_supply
-	associated_paths = list(/obj/machinery/atmospherics/pipe/manifold/hidden/supply)
-	mechanics_text = "This is a special 'supply' pipe, which does not connect to 'normal' pipes.  If you want to connect it, use \
-	a Universal Adapter pipe."
-
-//Four way manifolds
-/datum/codex_entry/atmos_manifold_manifold_four
-	associated_paths = list(/obj/machinery/atmospherics/pipe/manifold4w)
-	mechanics_text = "This is a four-way pipe."
-
-/datum/codex_entry/atmos_manifold_manifold_four_visible_scrub
-	associated_paths = list(/obj/machinery/atmospherics/pipe/manifold4w/visible/scrubbers)
-	mechanics_text = "This is a special 'scrubber' pipe, which does not connect to 'normal' pipes.  If you want to connect it, use \
-	a Universal Adapter pipe."
-
-/datum/codex_entry/atmos_manifold_manifold_four_visible_supply
-	associated_paths = list(/obj/machinery/atmospherics/pipe/manifold4w/hidden/supply)
-	mechanics_text = "This is a special 'supply' pipe, which does not connect to 'normal' pipes.  If you want to connect it, use \
-	a Universal Adapter pipe."
-
-/datum/codex_entry/atmos_manifold_manifold_four_hidden_scrub
-	associated_paths = list(/obj/machinery/atmospherics/pipe/manifold4w/hidden/scrubbers)
-	mechanics_text = "This is a special 'scrubber' pipe, which does not connect to 'normal' pipes.  If you want to connect it, use \
-	a Universal Adapter pipe."
-
-//Endcaps
-/datum/codex_entry/atmos_cap
-	associated_paths = list(/obj/machinery/atmospherics/pipe/cap)
-	mechanics_text = "This is a cosmetic attachment, as pipes currently do not spill their contents into the air."
+	mechanics_text = "All pipes can be connected or disconnected with a wrench.  The internal pressure of the pipe must be below 300 kPa to do this.  More pipes can be obtained from a pipe dispenser. \
+	<br>Some pipes, like scrubbers and supply pipes, do not connect to 'normal' pipes. If you want to connect them, use a universal adapter pipe. \
+	<br>Pipes generally do not exchange thermal energy with the environment (ie. they do not heat up or cool down their turf), but heat exchange pipes are an exception. \
+	<br>To join three or more pipe segments, you can use a pipe manifold.\
+	<br>To terminate a pipeline, use a cap to prevent the gas escaping into the environment."
 
 //T-shaped valves
 /datum/codex_entry/atmos_tvalve

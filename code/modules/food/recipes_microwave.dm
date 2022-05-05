@@ -151,6 +151,7 @@ I said no!
 	result = /obj/item/chems/food/pancakesblu
 
 /decl/recipe/pancakes
+	display_name = "plain pancakes"
 	reagents = list(/decl/material/liquid/nutriment/batter = 20)
 	result = /obj/item/chems/food/pancakes
 
@@ -351,6 +352,7 @@ I said no!
 	result = /obj/item/chems/food/popcorn
 
 /decl/recipe/cookie
+	display_name = "plain cookie"
 	reagents = list(/decl/material/liquid/nutriment/batter/cakebatter = 5, /decl/material/liquid/nutriment/coco = 5)
 	reagent_mix = REAGENT_REPLACE // no raw batter
 	result = /obj/item/chems/food/cookie
@@ -542,6 +544,7 @@ I said no!
 	result = /obj/item/chems/food/fishandchips
 
 /decl/recipe/bread
+	display_name = "loaf of bread"
 	items = list(
 		/obj/item/chems/food/dough = 2,
 		/obj/item/chems/food/egg
@@ -733,6 +736,7 @@ I said no!
 	result = /obj/item/chems/food/chocolateegg
 
 /decl/recipe/sausage
+	display_name = "plain sausage"
 	items = list(
 		/obj/item/chems/food/rawmeatball,
 		/obj/item/chems/food/rawcutlet,
@@ -857,6 +861,7 @@ I said no!
 	result = /obj/item/chems/food/taco
 
 /decl/recipe/bun
+	display_name = "plain bun"
 	items = list(
 		/obj/item/chems/food/dough
 	)
@@ -881,6 +886,7 @@ I said no!
 	result = /obj/item/chems/food/cutlet
 
 /decl/recipe/fries
+	display_name = "potato chips"
 	items = list(
 		/obj/item/chems/food/rawsticks
 	)

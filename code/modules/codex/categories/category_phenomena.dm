@@ -1,3 +1,5 @@
+// TODO: move these to a category, and make it possible to hide categories.
+
 /datum/codex_entry/eternal_darkness
 	associated_paths = list(/spell/targeted/shatter)
 	antag_text = "Assaults the mind of the target with fear of the unknown, shattering their sanity and causing brain damage."
