@@ -74,7 +74,7 @@
 	)
 
 /decl/material/solid/pyrite
-	name = "pyrite"
+	name = "fool's gold"
 	uid = "solid_pyrite"
 	ore_name = "pyrite"
 	ore_result_amount = 10
