@@ -1,5 +1,5 @@
 /obj/machinery/computer/modular
-	name = "console"
+	name = "modular console"
 	maximum_component_parts = list(/obj/item/stock_parts = 14)	//There's a lot of stuff that goes in these
 	var/list/interact_sounds = list("keyboard", "keystroke")
 	var/wired_connection = FALSE // Whether or not this console will start with a wired connection beneath it.

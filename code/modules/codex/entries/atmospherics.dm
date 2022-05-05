@@ -89,6 +89,7 @@
 	mechanics_text = "Invaluable for filling air in a room rapidly after a breach repair.  The internal gas container can be filled by \
 	connecting it to a connector port.  The pump can pump the air in (sucking) or out (blowing), at a specific target pressure.  The powercell inside can be \
 	replaced by using a screwdriver, and then adding a new cell.  A tank of gas can also be attached to the air pump."
+	disambiguator = "machine"
 
 //Portable scrubbers
 /datum/codex_entry/atmos_power_scrubber
@@ -96,6 +97,7 @@
 	mechanics_text = "Filters the air, placing harmful gases into the internal gas container.  The container can be emptied by \
 	connecting it to a connector port.  The pump can pump the air in (sucking) or out (blowing), at a specific target pressure.  The powercell inside can be \
 	replaced by using a screwdriver, and then adding a new cell.  A tank of gas can also be attached to the scrubber. "
+	disambiguator = "machine"
 
 //Meters
 /datum/codex_entry/atmos_meter

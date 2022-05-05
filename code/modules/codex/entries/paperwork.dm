@@ -1,6 +1,8 @@
 /datum/codex_entry/writing
 	associated_strings = list("writing", "pencode")
 	associated_paths = list(/obj/item/pen, /obj/item/paper, /obj/item/book)
+	disambiguator = "writing"
+
 	mechanics_text = {"Used for writing down your thoughts, on paper or elsewhere. The following special commands are available:<br><br>
 \[br\] : Creates a linebreak.<br>
 \[center\] - \[/center\] : Centers the text.<br>

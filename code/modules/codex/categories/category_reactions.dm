@@ -1,10 +1,10 @@
-/decl/codex_category/reactions
-	name = "Reactions"
+/decl/codex_category/chemistry
+	name = "Chemical Reactions"
 	desc = "Chemical reactions with mundane, interesting or spectacular effects."
 	guide_name = "Chemistry"
 	guide_strings = list("chemist", "reactions")
 
-/decl/codex_category/reactions/Initialize()
+/decl/codex_category/chemistry/Initialize()
 
 	guide_html = {"
 		<h1>Chemistry Basics</h1>

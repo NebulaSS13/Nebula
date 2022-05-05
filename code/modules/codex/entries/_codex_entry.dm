@@ -5,6 +5,7 @@
 	var/lore_text
 	var/mechanics_text
 	var/antag_text
+	var/disambiguator
 
 /datum/codex_entry/dd_SortValue()
 	return name
@@ -21,7 +22,10 @@
 	if(associated_paths && associated_paths.len)
 		for(var/tpath in associated_paths)
 			var/atom/thing = tpath
-			LAZYADD(associated_strings, sanitize(lowertext(initial(thing.name))))
+			var/thing_name = initial(thing.name)
+			if(disambiguator)
+				thing_name = "[thing_name] ([disambiguator])"
+			LAZYADD(associated_strings, sanitize(lowertext(thing_name)))
 	if(name)
 		LAZYADD(associated_strings, name)
 	else if(associated_strings && associated_strings.len)
