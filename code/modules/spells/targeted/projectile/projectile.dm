@@ -6,12 +6,8 @@ If the spell_projectile is seeking, it will update its target every process and 
 */
 
 /spell/targeted/projectile
-	name = "projectile spell"
-
 	range = 7
-
 	var/proj_type = /obj/item/projectile/spell_projectile //use these. They are very nice
-
 	var/proj_step_delay = 1 //lower = faster
 	var/cast_prox_range = 1
 

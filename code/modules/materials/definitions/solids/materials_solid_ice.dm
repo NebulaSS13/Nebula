@@ -87,7 +87,7 @@
 	rich_material_weight = 16
 
 /decl/material/solid/ice/hydrogen
-	name = "hydrogen"
+	name = "hydrogen ice"
 	uid = "solid_ice_hydrogen"
 	heating_products = list(
 		/decl/material/gas/hydrogen = 0.2,

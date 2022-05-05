@@ -33,9 +33,9 @@
 	return "You've doubled the range of [src]."
 
 /spell/aoe_turf/knock/slow
-	name = "Slow Knock"
 	charge_max = 200
+	hidden_from_codex = TRUE
 
 /spell/aoe_turf/knock/tower
-	desc = "Allows you to open nearby doors without the keys."
 	charge_max = 2
+	hidden_from_codex = TRUE

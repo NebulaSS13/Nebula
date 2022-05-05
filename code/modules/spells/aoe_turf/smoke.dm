@@ -26,5 +26,5 @@
 	return "[src] will now create more smoke."
 
 /spell/aoe_turf/smoke/tower
-	desc = "Allows you to distill the nearby air into smoke."
 	charge_max = 2
+	hidden_from_codex = TRUE

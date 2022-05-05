@@ -14,7 +14,7 @@
 	result_amount = 3
 
 /decl/chemical_reaction/alloy/steel
-	name = "Steel Alloy"
+	name = "Carbon Steel Alloy"
 	result = /decl/material/solid/metal/steel
 	required_reagents = list(
 		/decl/material/solid/metal/iron = 1, 
@@ -32,7 +32,7 @@
 	result_amount = 3
 
 /decl/chemical_reaction/alloy/ocp
-	name = "Osmium Carbide Plasteel Alloy"
+	name = "Osmium Carbide Plasteel"
 	result = /decl/material/solid/metal/plasteel/ocp
 	required_reagents = list(
 		/decl/material/solid/metal/plasteel = 2, 
