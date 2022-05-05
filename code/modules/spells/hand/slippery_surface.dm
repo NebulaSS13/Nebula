@@ -18,4 +18,5 @@
 	return ..()
 
 /spell/hand/slippery_surface/tower
+	desc = "Allows you to slicken a small patch of floor. Anyone without sure-footing will find it hard to stay upright."
 	charge_max = 2

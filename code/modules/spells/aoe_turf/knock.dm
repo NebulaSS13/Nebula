@@ -37,4 +37,5 @@
 	charge_max = 200
 
 /spell/aoe_turf/knock/tower
+	desc = "Allows you to open nearby doors without the keys."
 	charge_max = 2
