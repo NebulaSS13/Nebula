@@ -198,7 +198,8 @@ I said no!
 			warm_up(being_cooked)
 			return list(being_cooked)
 
-/decl/recipe/meatbread
+/decl/recipe
+	display_name = "plain meatbread loaf"
 	items = list(
 		/obj/item/chems/food/dough = 2,
 		/obj/item/chems/food/cutlet = 2,

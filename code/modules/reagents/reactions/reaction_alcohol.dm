@@ -14,7 +14,7 @@
 	result_amount = 10
 
 /decl/chemical_reaction/recipe/wine
-	name = "Wine"
+	name = "Red Wine"
 	result = /decl/material/liquid/ethanol/wine
 	required_reagents = list(/decl/material/liquid/drink/juice/grape = 10)
 	catalysts = list(/decl/material/liquid/enzyme = 5)

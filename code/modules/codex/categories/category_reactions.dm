@@ -96,11 +96,10 @@
 			guide_html += reaction.lore_text
 		guide_html += "</td></tr>"
 
-		entries_to_register += new /datum/codex_entry(                                   \
-		 _display_name =       "[reaction_name] (reaction)",                             \
-		 _associated_strings = list(lowertext(reaction.name), lowertext(reaction_name)), \
-		 _lore_text =          reaction.lore_text,                                       \
-		 _mechanics_text =     mechanics_text                                            \
+		entries_to_register += new /datum/codex_entry(       \
+		 _display_name =       "[reaction_name] (reaction)", \
+		 _lore_text =          reaction.lore_text,           \
+		 _mechanics_text =     mechanics_text                \
 		)
 	guide_html += "</table>"
 

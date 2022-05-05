@@ -217,7 +217,7 @@
 	glass_desc = "A relatively sweet and fruity 46 proof liquor."
 
 /decl/material/liquid/ethanol/rum
-	name = "rum"
+	name = "dark rum"
 	lore_text = "Yohoho and all that."
 	taste_description = "spiked butterscotch"
 	taste_mult = 1.1
@@ -325,7 +325,7 @@
 	glass_desc = "The silky, smokey whiskey goodness inside the glass makes the drink look very classy."
 
 /decl/material/liquid/ethanol/wine
-	name = "wine"
+	name = "red wine"
 	lore_text = "An premium alchoholic beverage made from distilled grape juice."
 	taste_description = "bitter sweetness"
 	color = "#7e4043" // rgb: 126, 64, 67
@@ -333,7 +333,7 @@
 	exoplanet_rarity = MAT_RARITY_NOWHERE
 	uid = "chem_ethanol_wine"
 
-	glass_name = "wine"
+	glass_name = "red wine"
 	glass_desc = "A very classy looking drink."
 
 /decl/material/liquid/ethanol/wine/premium

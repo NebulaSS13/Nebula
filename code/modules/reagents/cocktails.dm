@@ -67,7 +67,7 @@
 	)
 
 /decl/cocktail/classic_martini
-	name = "martini"
+	name = "gin martini"
 	description = "Vermouth with gin. The classiest of all cocktails."
 	ratios = list(
 		/decl/material/liquid/ethanol/gin =      0.4,
