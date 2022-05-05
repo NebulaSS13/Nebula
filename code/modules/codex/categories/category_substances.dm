@@ -154,8 +154,7 @@
 			material_info += "</ul>"
 
 			var/datum/codex_entry/entry = new(
-				_display_name = "[mat.codex_name || mat.name] (substance)", 
-				_associated_strings = list("[mat.name] pill"),
+				_display_name = "[mat.codex_name || mat.name] (substance)",
 				_lore_text = new_lore_text,
 				_antag_text = mat.antag_text,
 				_mechanics_text = jointext(material_info, null)

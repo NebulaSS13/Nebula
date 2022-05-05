@@ -2,7 +2,6 @@
 	name = "Cocktails"
 	desc = "Various mixes of drinks, alcoholic and otherwise, that can be made by a skilled bartender."
 	guide_name = "Bartending"
-	guide_strings = list("bartender", "cocktails", "bartending")
 
 /decl/codex_category/cocktails/Initialize()
 

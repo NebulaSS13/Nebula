@@ -5,7 +5,6 @@
 
 	var/guide_name
 	var/guide_html
-	var/list/guide_strings
 
 //Children should call ..() at the end after filling the items list
 /decl/codex_category/Initialize()
@@ -25,10 +24,7 @@
 		)
 
 	if(guide_html)
-		if(guide_name)
-			LAZYDISTINCTADD(guide_strings, lowertext(guide_name))
 		new /datum/codex_entry(
 			_display_name = "Guide to [capitalize(guide_name || name)]",
-			_associated_strings = guide_strings,
 			_mechanics_text = guide_html
 		)

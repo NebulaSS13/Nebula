@@ -2,7 +2,6 @@
 	name = "Recipes"
 	desc = "Recipes for a variety of different kinds of foods and condiments."
 	guide_name = "Cooking"
-	guide_strings = list("chef", "cooking", "recipes")
 
 /decl/codex_category/recipes/Initialize()
 

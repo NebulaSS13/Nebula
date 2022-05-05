@@ -2,7 +2,6 @@
 	name = "Chemical Reactions"
 	desc = "Chemical reactions with mundane, interesting or spectacular effects."
 	guide_name = "Chemistry"
-	guide_strings = list("chemist", "reactions")
 
 /decl/codex_category/chemistry/Initialize()
 

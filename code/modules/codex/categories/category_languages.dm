@@ -31,7 +31,6 @@
 			
 		var/datum/codex_entry/entry = new(
 			_display_name = "[L.name] (language)",
-			_associated_strings = list("[L.shorthand] (language)"),
 			_lore_text = jointext(lang_lore, "<br>"),
 			_mechanics_text = jointext(lang_info, "<br>")
 		)

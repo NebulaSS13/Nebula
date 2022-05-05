@@ -3,7 +3,6 @@
 	desc = "A list of surgeries, their requirements and their effects."
 
 	guide_name = "Surgery Basics"
-	guide_strings = list("surgery")
 	guide_html = {"
 		<h1>Surgery Basics</h1>
 		This guide contains some quick and dirty basic outlines of common surgical procedures.
