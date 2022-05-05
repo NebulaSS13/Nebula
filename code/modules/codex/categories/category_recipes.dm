@@ -72,7 +72,7 @@
 	var/list/all_recipes = decls_repository.get_decls_of_subtype(/decl/recipe)
 	for(var/rtype in all_recipes)
 		var/decl/recipe/recipe = all_recipes[rtype]
-		if(!istype(recipe) || recipe.hidden_from_codex || !recipe.result)
+		if(!istype(recipe) || recipe.hidden_from_codex || !recipe.result || recipe.is_abstract())
 			continue
 
 		var/mechanics_text = ""

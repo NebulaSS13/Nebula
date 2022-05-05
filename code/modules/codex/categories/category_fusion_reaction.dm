@@ -6,7 +6,7 @@
 	var/list/reactions = decls_repository.get_decls_of_subtype(/decl/fusion_reaction)
 	for(var/rtype in reactions)
 		var/decl/fusion_reaction/reaction = reactions[rtype]
-		if(reaction.hidden_from_codex)
+		if(reaction.hidden_from_codex || reaction.is_abstract())
 			continue
 
 		var/decl/material/p_mat = GET_DECL(reaction.p_react)
@@ -25,8 +25,9 @@
 			reaction_info += "In the process of [p_mat.name]-[s_mat.name] fusion, [english_list(products_list)] [LAZYLEN(products_list) == 1 ? "is" : "are"] produced."
 		else
 			reaction_info += "Nothing is produced in the process of [p_mat.name]-[s_mat.name] fusion."
+		
 		var/datum/codex_entry/entry = new(
-			_display_name = lowertext(trim("[p_mat.name]-[s_mat.name] (fusion reaction)")),
+			_display_name = lowertext(trim("[reaction.codex_name || "[p_mat.name]-[s_mat.name]"] (fusion reaction)")),
 			_mechanics_text = jointext(reaction_info, "<br>")
 		)
 		items |= entry.name

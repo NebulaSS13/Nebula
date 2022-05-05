@@ -334,6 +334,7 @@
 
 /decl/material/solid/metal/plasteel/ocp
 	name = "osmium-carbide plasteel"
+	codex_name = null
 	uid = "solid_osmium_carbide_plasteel"
 	integrity = 200
 	melting_point = 12000

@@ -33,6 +33,7 @@
 
 /decl/material/solid/glass/borosilicate
 	name = "borosilicate glass"
+	codex_name = null
 	uid = "solid_borosilicate_glass"
 	lore_text = "An extremely heat-resistant form of glass."
 	flags = MAT_FLAG_BRITTLE

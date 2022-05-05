@@ -42,26 +42,22 @@ I said no!
 	)
 	result = /obj/item/chems/food/classichotdog
 
-/decl/recipe/jellydonut
-	reagents = list(/decl/material/liquid/drink/juice/berry = 5, /decl/material/liquid/nutriment/sugar = 5)
-	items = list(
-		/obj/item/chems/food/dough
-	)
-	result = /obj/item/chems/food/donut/jelly
-
-/decl/recipe/jellydonut/cherry
-	reagents = list(/decl/material/liquid/nutriment/cherryjelly = 5, /decl/material/liquid/nutriment/sugar = 5)
-	items = list(
-		/obj/item/chems/food/dough
-	)
-
 /decl/recipe/donut
-	display_name = "plain donut" // override to make it distinct from other donuts
+	display_name = "Plain Donut"
 	reagents = list(/decl/material/liquid/nutriment/sugar = 5)
 	items = list(
 		/obj/item/chems/food/dough
 	)
 	result = /obj/item/chems/food/donut
+
+/decl/recipe/donut/jelly
+	display_name = "Berry Jelly Donut"
+	reagents = list(/decl/material/liquid/drink/juice/berry = 5, /decl/material/liquid/nutriment/sugar = 5)
+	result = /obj/item/chems/food/donut/jelly
+
+/decl/recipe/donut/jelly/cherry
+	display_name = "Cherry Jelly Donut"
+	reagents = list(/decl/material/liquid/nutriment/cherryjelly = 5, /decl/material/liquid/nutriment/sugar = 5)
 
 /decl/recipe/plainburger
 	display_name = "plain burger"
@@ -171,12 +167,14 @@ I said no!
 		warm_up(being_cooked)
 
 /decl/recipe/donkpocket/rawmeatball
+	display_name = "Raw Donk-Pocket"
 	items = list(
 		/obj/item/chems/food/doughslice,
 		/obj/item/chems/food/rawmeatball
 	)
 
 /decl/recipe/donkpocket/warm
+	display_name = "Warm Donk-Pocket"
 	reagents = list() //This is necessary since this is a child object of the above recipe and we don't want donk pockets to need flour
 	items = list(
 		/obj/item/chems/food/donkpocket
@@ -198,7 +196,7 @@ I said no!
 			warm_up(being_cooked)
 			return list(being_cooked)
 
-/decl/recipe
+/decl/recipe/meatbread
 	display_name = "plain meatbread loaf"
 	items = list(
 		/obj/item/chems/food/dough = 2,
@@ -727,6 +725,7 @@ I said no!
 /decl/recipe/bloodsoup
 	reagents = list(/decl/material/liquid/blood = 30)
 	result = /obj/item/chems/food/bloodsoup
+	hidden_from_codex = TRUE
 
 /decl/recipe/chocolateegg
 	items = list(
@@ -785,6 +784,7 @@ I said no!
 	result = /obj/item/chems/food/plumphelmetbiscuit
 
 /decl/recipe/plumphelmetbiscuitvegan
+	display_name = "Vegan Plump Biscuit"
 	fruit = list("plumphelmet" = 1)
 	reagents = list(/decl/material/liquid/nutriment/flour = 10, /decl/material/liquid/water = 10)
 	result = /obj/item/chems/food/plumphelmetbiscuit

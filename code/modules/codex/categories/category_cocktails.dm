@@ -10,7 +10,7 @@
 	guide_html = "<h1>Mixology 101</h1>Here's a guide for mixing decent cocktails."
 	for(var/ctype in cocktails)
 		var/decl/cocktail/cocktail = cocktails[ctype]
-		if(cocktail.hidden_from_codex)
+		if(cocktail.hidden_from_codex || cocktail.is_abstract())
 			continue
 
 		var/mechanics_text = "Cocktails will change the name of bartending glasses when mixed properly.<br><br>"

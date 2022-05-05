@@ -301,11 +301,12 @@
 	bitesize = 3
 	nutriment_type = /decl/material/liquid/nutriment/bread
 	var/overlay_state = "box-donut1"
+	var/donut_state = "donut"
 
 /obj/item/chems/food/donut/Initialize()
 	. = ..()
 	if(prob(30))
-		icon_state = "donut2"
+		icon_state = "[donut_state]2"
 		overlay_state = "box-donut2"
 		SetName("frosted [name]]")
 		reagents.add_reagent(/decl/material/liquid/nutriment/sprinkles, 2)
@@ -344,6 +345,7 @@
 	nutriment_amt = 3
 	bitesize = 5
 	nutriment_type = /decl/material/liquid/nutriment/bread
+	donut_state = "jdonut"
 
 /obj/item/chems/food/donut/jelly/Initialize()
 	. = ..()

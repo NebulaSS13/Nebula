@@ -12,6 +12,7 @@
 	var/minimum_reaction_temperature = 100
 	var/priority = 100
 	var/hidden_from_codex = FALSE
+	var/codex_name
 
 /decl/fusion_reaction/proc/handle_reaction_special(var/obj/effect/fusion_em_field/holder)
 	return 0
@@ -22,6 +23,7 @@
 /decl/fusion_reaction/deuterium_deuterium
 	p_react = /decl/material/gas/hydrogen/deuterium
 	s_react = /decl/material/gas/hydrogen/deuterium
+	codex_name = "deuterium-deuterium (He3)"
 	energy_consumption = 1 * FUSION_PROCESSING_TIME_MULT
 	energy_production = 1 * FUSION_PROCESSING_TIME_MULT
 	radiation = 1 * FUSION_PROCESSING_TIME_MULT
@@ -32,6 +34,7 @@
 /decl/fusion_reaction/deuterium_deuterium_alternate //There are two fusion pathways in D-D fusion - one makes He3, one makes Tritium. That's why this is here.
 	p_react = /decl/material/gas/hydrogen/deuterium
 	s_react = /decl/material/gas/hydrogen/deuterium
+	codex_name = "deuterium-deuterium (H-3)"
 	energy_consumption = 1 * FUSION_PROCESSING_TIME_MULT
 	energy_production = 1 * FUSION_PROCESSING_TIME_MULT
 	radiation = 1 * FUSION_PROCESSING_TIME_MULT

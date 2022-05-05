@@ -112,6 +112,7 @@
 
 /decl/material/liquid/ethanol/beer
 	name = "beer"
+	codex_name = "plain beer"
 	lore_text = "An alcoholic beverage made from malted grains, hops, yeast, and water."
 	taste_description = "piss water"
 	color = "#ffd300"
@@ -125,6 +126,7 @@
 
 /decl/material/liquid/ethanol/beer/good
 	uid = "chem_ethanol_beer_good"
+	codex_name = "premium beer"
 	taste_description = "beer"
 
 /decl/material/liquid/ethanol/beer/affect_ingest(var/mob/living/M, var/alien, var/removed, var/datum/reagents/holder)
@@ -173,7 +175,16 @@
 
 //Base type for alchoholic drinks containing coffee
 /decl/material/liquid/ethanol/coffee
-	abstract_type = /decl/material/liquid/ethanol/coffee
+	name = "coffee liqueur"
+	lore_text = "A widely known, Mexican coffee-flavoured liqueur. In production since 1936!"
+	taste_description = "spiked coffee"
+	taste_mult = 1.1
+	color = "#4c3100"
+	strength = 15
+	exoplanet_rarity = MAT_RARITY_NOWHERE
+	uid = "chem_ethanol_coffee"
+	glass_name = "coffee liqueur"
+	glass_desc = "Guaranteed to perk you up."
 	overdose = 45
 
 /decl/material/liquid/ethanol/coffee/affect_ingest(var/mob/living/M, var/alien, var/removed, var/datum/reagents/holder)
@@ -190,19 +201,6 @@
 
 /decl/material/liquid/ethanol/coffee/affect_overdose(var/mob/living/M, var/alien, var/datum/reagents/holder)
 	ADJ_STATUS(M, STAT_JITTER, 5)
-
-/decl/material/liquid/ethanol/coffee/kahlua
-	name = "coffee liqueur"
-	lore_text = "A widely known, Mexican coffee-flavoured liqueur. In production since 1936!"
-	taste_description = "spiked coffee"
-	taste_mult = 1.1
-	color = "#4c3100"
-	strength = 15
-	exoplanet_rarity = MAT_RARITY_NOWHERE
-	uid = "chem_ethanol_coffee"
-
-	glass_name = "RR coffee liquor"
-	glass_desc = "DAMN, THIS THING LOOKS ROBUST"
 
 /decl/material/liquid/ethanol/melonliquor
 	name = "melon liqueur"
@@ -306,6 +304,7 @@
 
 /decl/material/liquid/ethanol/vodka/premium
 	name = "premium vodka"
+	codex_name = null
 	lore_text = "Premium distilled vodka imported directly from the Gilgamesh Colonial Confederation."
 	taste_description = "clear kvass"
 	color = "#aaddff" // rgb: 170, 221, 255 - very light blue.
