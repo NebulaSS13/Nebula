@@ -1,6 +1,5 @@
 /datum/codex_entry/airlock
 	associated_paths = list(/obj/machinery/door/airlock)
-	associated_strings = list("airlock", "door", "hatch")
 	mechanics_text = "An airtight mechanical door. Most airlocks require an ID to open (wearing it on your ID slot is enough), and many have special access requirements to be on your ID. You can open an airlock by clicking on one, or simply walking into it, and clicking on an open airlock will close it. If the lights on the door flash red, you don't have the required access to open the airlock, and if they're consistently red, the door is bolted. Airlocks also require power to operate. In a situation without power, a crowbar can be used to force it open. <BR><BR>Airlocks can also be <span codexlink='hacking'>hacked</span>.<BR>Airlock hacking information:<BR>* Door bolts will lock the door, preventing it from being opened by any means until the bolts are raised again. Pulsing the correct wire will toggle the bolts, but cutting it will only drop them.<BR>* IDscan light indicates the door can scan ID cards. If the wire for this is pulsed it will cause the door to flash red, and cutting it will cause doors with restricted access to be unable to scan ID, essentially locking it.<BR>* The AI control light shows whether or not AI and robots can control the door. Pulsing is only temporary, while cutting is more permanent.<BR>* The test light shows whether the door has power or not. When turned off, the door can be opened with a crowbar.<BR>* If the door sparks, it is electrified. Pulsing the corresponding wire causes this to happen for 30 seconds, and cutting it electrifies the door until mended.<BR>* The check wiring light will turn on if the safety is turned off. This causes the airlock to close even when someone is standing on it, crushing them.<BR>* If the Check Timing Mechanism light is on then the door will close much faster than normal. Dangerous in conjuction with the Check Wiring light.<BR><BR><B>Deconstruction</B><BR>To pull apart an airlock, you must open the maintenance panel, disable the power via hacking (or any other means), weld the door shut, and crowbar the electroncs out, cut the wires with a wirecutter, unsecure the whole assembly with a wrench, and then cut it into metal sheets with a welding tool."
 	antag_text = "Electrifying a door makes for a good trap, hurting and stunning whoever touches it. The same goes for a combination of disabling the safety and timing mechanisms. Bolting a door can also help ensure privacy, or slow down those in search of you. It's also a good idea to disable AI interaction when needed."
 
@@ -42,7 +41,7 @@
 	associated_paths = list(/obj/machinery/conveyor, /obj/item/conveyor_construct)
 	mechanics_text = "This device must be connected to a switch assembly before placement by clicking the switch on the conveyor belt assembly. When active it will move objects on top of it to the adjacent space based on its direction and if it is runnnig in forward or reverse mode. Can be removed with a crowbar."
 
-/datum/codex_entry/conveyor_construct
+/datum/codex_entry/conveyor_switch
 	associated_paths = list(/obj/machinery/conveyor_switch,/obj/machinery/conveyor_switch/oneway,/obj/item/conveyor_switch_construct,/obj/item/conveyor_switch_construct/oneway)
 	mechanics_text = "This device can connect to a number of conveyor belts and control their movement. A two-way switch will allow you to make the conveyors run in forward and reverse mode, the one-way switch will only allow one direction. Can be removed with a crowbar."
 
@@ -67,13 +66,11 @@
 
 /datum/codex_entry/fusion_fuel_injector
 	associated_paths = list(/obj/machinery/fusion_fuel_injector, /obj/machinery/computer/fusion/fuel_control)
-	associated_strings = list("fuel injector","fuel injection control computer")
 	lore_text = "A simple magnetic accelerator used to inject small pellets of fuel into a fusion field."
 	mechanics_text = "Accepts a fuel rod produced by the fuel compressor and regularly fires fuel pellets into the fusion field. Rods can be swapped by hand when the injector is not firing. Power outages will require the injector to be turned on again. If there is no electromagnetic field active to catch the injected fuel, the results can be very unhealthy for anyone standing in the firing path. <BR>Controlled via the fuel injection control computer."
 
 /datum/codex_entry/fusion_core
 	associated_paths = list(/obj/machinery/fusion_core, /obj/machinery/computer/fusion/core_control)
-	associated_strings = list("R-UST Mk. 8 Tokamak core","\improper R-UST Mk. 8 core control","rust","fusion","tokamak")
 	lore_text = "An old but more or less reliable fusion field generator. Probably sourced from a retired cargo freighter."
 	mechanics_text = "Generates the field used to contain reaction material from fuel injectors, and dumps power into the power network under it based on plasma heat. Needs 500W or more in the network to start the field. Field will become unstable if it intersects with windows or other objects, and from some reactions, and will eventually rupture violently if not stabilized by a gyrotron. Turning the field off without letting it cool below 1000K will cause a violent explosion and EMP depending on the contents of the field. <BR>Controlled via the R-UST Mk. 8 core control. Make careful note of the instability."
 	antag_text = "Be careful when blowing this thing up. The blast is fairly large and can happen instantly depending how you do it."
@@ -85,7 +82,6 @@
 
 /datum/codex_entry/gyrotron
 	associated_paths = list(/obj/machinery/emitter/gyrotron, /obj/machinery/computer/fusion/gyrotron)
-	associated_strings = list ("gyrotron","gyrotron control console")
 	lore_text = "A high-power industrial laser used to excite plasma for fusion reactions. Also used to excite careless engineers, usually fatally."
 	mechanics_text = "Fires in pulses and will heat up a plasma toroid that is below 1000K. Mostly used to lower field instability after heating it to ignition point. Very power hungry, uses 20k per point of power. <BR>Controlled via the gyrotron control console."
 
@@ -104,6 +100,6 @@
 
 /datum/codex_entry/vending
 	associated_paths = list(/obj/machinery/vending)
-	associated_strings = list("vendomat","vending machine")
+	associated_strings = list("vending machine", "vendor")
 	mechanics_text = "A machine that dispenses items from a category of items at the user's selection.<BR>Vending machines sometimes require payment via an ID card, cash or charge card. Some dispense items for free, and such vending machines are usually access restricted. Items that have been dispensed can sometimes be returned simply by inserting it back into the vending machine by hand. Vending machines can also be restocked with an appropriate Vendor Restock, usually ordered via supply management, and then click+dragged onto the vending machine.<BR><BR>Vending machines can be <span codexlink='hacking'>hacked</span>.<BR><b>Vending machine hacking</b><BR>* The orange light shows if the vending machine is electrified.<BR>* The red light indicates whether or not the vending machine is firing out its contents randomly. Sometimes this can happen as a random event.<BR>* The green light indicates whether or not the vending machine is dispensing it's hidden inventory. Nearly every vending machine has a list of secret goods that are usually considered to be contraband.<BR>* The purple or yellow light shows whether or not the ID scanner for the vending machine is working. When this function is disabled, anyone can access the vending machine, even if it normally has restricted access."
 	antag_text = "Accessing the secret inventory of a vending machine can sometimes be very useful, especially for department focused machines."

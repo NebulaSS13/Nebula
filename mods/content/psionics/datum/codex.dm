@@ -25,7 +25,7 @@
 
 /datum/codex_entry/psionics
 	name = "Psionics"
-	associated_strings = list("Psychic", "Psychic Powers", "Psi")
+	associated_strings = list("psychic", "psychic powers")
 	associated_paths = list(
 		/obj/item/book/manual/psionics,
 		/obj/item/clothing/head/helmet/space/psi_amp,

@@ -64,11 +64,12 @@ I said no!
 	result = /obj/item/chems/food/donut
 
 /decl/recipe/plainburger
+	display_name = "plain burger"
 	items = list(
 		/obj/item/chems/food/bun,
 		/obj/item/chems/food/cutlet
 	)
-	result = /obj/item/chems/food/plainburger
+	result = /obj/item/chems/food/burger
 
 /decl/recipe/brainburger
 	items = list(
@@ -133,6 +134,7 @@ I said no!
 	result = /obj/item/chems/food/bunbun
 
 /decl/recipe/hotdog
+	display_name = "plain hotdog"
 	items = list(
 		/obj/item/chems/food/bun,
 		/obj/item/chems/food/sausage
@@ -491,14 +493,14 @@ I said no!
 
 /decl/recipe/spellburger
 	items = list(
-		/obj/item/chems/food/plainburger,
+		/obj/item/chems/food/burger,
 		/obj/item/clothing/head/wizard,
 	)
 	result = /obj/item/chems/food/spellburger
 
 /decl/recipe/bigbiteburger
 	items = list(
-		/obj/item/chems/food/plainburger,
+		/obj/item/chems/food/burger,
 		/obj/item/chems/food/meat = 2,
 		/obj/item/chems/food/egg,
 	)
@@ -548,6 +550,7 @@ I said no!
 	result = /obj/item/chems/food/sliceable/bread
 
 /decl/recipe/sandwich
+	display_name = "plain sandwich"
 	items = list(
 		/obj/item/chems/food/meatsteak,
 		/obj/item/chems/food/slice/bread = 2,

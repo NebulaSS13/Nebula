@@ -55,8 +55,8 @@
 	. = ..()
 	reagents.add_reagent(/decl/material/liquid/nutriment/protein, 2)
 
-/obj/item/chems/food/plainburger
-	name = "plain burger"
+/obj/item/chems/food/burger
+	name = "burger"
 	desc = "The cornerstone of every nutritious breakfast."
 	icon = 'icons/obj/food_ingredients.dmi'
 	icon_state = "burger"
@@ -66,7 +66,7 @@
 	nutriment_amt = 3
 	bitesize = 2
 
-/obj/item/chems/food/plainburger/Initialize()
+/obj/item/chems/food/burger/Initialize()
 	. = ..()
 	reagents.add_reagent(/decl/material/liquid/nutriment/protein, 3)
 
