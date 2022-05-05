@@ -300,6 +300,7 @@
 
 /decl/material/gas/hydrogen
 	name = "hydrogen"
+	codex_name = "elemental hydrogen"
 	uid = "gas_hydrogen"
 	lore_text = "A colorless, flammable gas."
 	flags = MAT_FLAG_FUSION_FUEL

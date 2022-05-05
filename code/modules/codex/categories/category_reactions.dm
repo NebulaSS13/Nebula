@@ -34,14 +34,14 @@
 		var/list/reactant_values = list()
 		for(var/reactant_id in reaction.required_reagents)
 			var/decl/material/reactant = GET_DECL(reactant_id)
-			var/reactant_name = "<span codexlink='[reactant.name] (substance)'>[reactant.name]</span>"
+			var/reactant_name = "<span codexlink='[reactant.codex_name || reactant.name] (substance)'>[reactant.name]</span>"
 			reactant_values += "[reaction.required_reagents[reactant_id]]u [reactant_name]"
 		mechanics_text += " [jointext(reactant_values, " + ")]"
 		var/list/inhibitors = list()
 
 		for(var/inhibitor_id in reaction.inhibitors)
 			var/decl/material/inhibitor = GET_DECL(inhibitor_id)
-			var/inhibitor_name = "<span codexlink='[inhibitor.name] (substance)'>[inhibitor.name]</span>"
+			var/inhibitor_name = "<span codexlink='[inhibitor.codex_name || inhibitor.name] (substance)'>[inhibitor.name]</span>"
 			inhibitors += inhibitor_name
 		if(length(inhibitors))
 			mechanics_text += " (inhibitors: [jointext(inhibitors, ", ")])"
@@ -49,7 +49,7 @@
 		var/list/catalysts = list()
 		for(var/catalyst_id in reaction.catalysts)
 			var/decl/material/catalyst = GET_DECL(catalyst_id)
-			var/catalyst_name = "<span codexlink='[catalyst.name] (substance)'>[catalyst.name]</span>"
+			var/catalyst_name = "<span codexlink='[catalyst.codex_name || catalyst.name] (substance)'>[catalyst.name]</span>"
 			catalysts += "[reaction.catalysts[catalyst_id]]u [catalyst_name]"
 		if(length(catalysts))
 			mechanics_text += " (catalysts: [jointext(catalysts, ", ")])"
@@ -57,7 +57,7 @@
 		var/produces
 		if(reaction.result && reaction.result_amount)
 			var/decl/material/product = GET_DECL(reaction.result)
-			produces = product.name
+			produces = product.codex_name || product.name
 			mechanics_text += "<br>It will produce [reaction.result_amount]u [produces]."
 		if(reaction.maximum_temperature != INFINITY)
 			mechanics_text += "<br>The reaction will not occur if the temperature is above [reaction.maximum_temperature]K."
@@ -97,7 +97,7 @@
 		guide_html += "</td></tr>"
 
 		entries_to_register += new /datum/codex_entry(       \
-		 _display_name =       "[reaction_name] (reaction)", \
+		 _display_name =       "[reaction.name] (reaction)", \
 		 _lore_text =          reaction.lore_text,           \
 		 _mechanics_text =     mechanics_text                \
 		)

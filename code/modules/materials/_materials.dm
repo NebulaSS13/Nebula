@@ -67,14 +67,15 @@ INITIALIZE_IMMEDIATE(/obj/effect/gas_overlay)
 
 	abstract_type = /decl/material
 
-	var/name                      // Prettier name for display.
+	var/name               // Prettier name for display.
+	var/codex_name         // Override for the codex article name.
 	var/adjective_name
 	var/solid_name
 	var/gas_name
 	var/liquid_name
 	var/use_name
-	var/wall_name = "wall"                // Name given to walls of this material
-	var/flags = 0                         // Various status modifiers.
+	var/wall_name = "wall" // Name given to walls of this material
+	var/flags = 0          // Various status modifiers.
 	var/hidden_from_codex
 	var/lore_text
 	var/mechanics_text

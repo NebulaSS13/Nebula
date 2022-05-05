@@ -313,7 +313,7 @@
 	uid = "chem_ethanol_premiumvodka"
 
 /decl/material/liquid/ethanol/whiskey
-	name = "whiskey"
+	name = "malt whiskey"
 	lore_text = "A superb and well-aged single-malt whiskey. Damn."
 	taste_description = "molasses"
 	color = "#4c3100"
