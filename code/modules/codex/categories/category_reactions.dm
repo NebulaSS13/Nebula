@@ -58,7 +58,7 @@
 		if(reaction.result && reaction.result_amount)
 			var/decl/material/product = GET_DECL(reaction.result)
 			produces = product.codex_name || product.name
-			mechanics_text += "<br>It will produce [reaction.result_amount]u [produces]."
+			mechanics_text += "<br>It will produce [reaction.result_amount]u [product.name]."
 		if(reaction.maximum_temperature != INFINITY)
 			mechanics_text += "<br>The reaction will not occur if the temperature is above [reaction.maximum_temperature]K."
 		if(reaction.minimum_temperature > 0)

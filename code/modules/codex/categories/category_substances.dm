@@ -6,7 +6,7 @@
 	for(var/thing in SSmaterials.materials)
 		var/decl/material/mat = thing
 		if(!mat.hidden_from_codex)
-			var/datum/codex_entry/entry = new(_display_name = "[mat.name] (substance)", _associated_strings = list("[mat.name] pill"))
+			var/datum/codex_entry/entry = new(_display_name = "[mat.codex_name || mat.name] (substance)", _associated_strings = list("[mat.name] pill"))
 			var/new_lore_text = initial(mat.lore_text) 
 			if(mat.taste_description)
 				new_lore_text = "[new_lore_text]<br>It apparently tastes of [mat.taste_description]."
