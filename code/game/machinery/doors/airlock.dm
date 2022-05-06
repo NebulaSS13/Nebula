@@ -238,10 +238,10 @@ About the new airlock wires panel:
 		src.electrified_until = 0
 	else if(duration)	//electrify door for the given duration seconds
 		if(usr)
-			shockedby += text("\[[time_stamp()]\] - [key_name(usr)]")
+			shockedby += text("\[[time_stamp_system()]\] - [key_name(usr)]")
 			admin_attacker_log(usr, "electrified \the [name] [duration == -1 ? "permanently" : "for [duration] second\s"]")
 		else
-			shockedby += text("\[[time_stamp()]\] - EMP)")
+			shockedby += text("\[[time_stamp_system()]\] - EMP)")
 		message = "The door is now electrified [duration == -1 ? "permanently" : "for [duration] second\s"]."
 		src.electrified_until = duration == -1 ? -1 : world.time + SecondsToTicks(duration)
 		. = 1

@@ -144,11 +144,11 @@ var/global/list/ticket_panels = list()
 	var/msg
 	var/time_stamp
 
-/datum/ticket_msg/New(var/msg_from, var/msg_to, var/msg)
-	src.msg_from = msg_from
-	src.msg_to = msg_to
-	src.msg = msg
-	src.time_stamp = time_stamp()
+/datum/ticket_msg/New(param_msg_from, param_msg_to, param_msg)
+	msg_from = param_msg_from
+	msg_to = param_msg_to
+	msg = param_msg
+	time_stamp = time_stamp_system()
 
 /datum/ticket_panel
 	var/datum/ticket/open_ticket = null

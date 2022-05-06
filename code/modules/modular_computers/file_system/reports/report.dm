@@ -83,12 +83,12 @@ If the override option is set to 0, the access supplied will instead be added as
 			to_chat(user, "<span class='notice'>You are missing a required field!</span>")
 			return 0
 	creator = user.name
-	file_time = time_stamp()
+	file_time = time_stamp_game()
 	rename_file(file_time)
 	return 1
 
 /datum/computer_file/report/proc/rename_file(append)
-	append = append || time_stamp()
+	append = append || time_stamp_game()
 	append = replacetext(append, ":", "_")
 	filename = "[form_name]_[append]"
 

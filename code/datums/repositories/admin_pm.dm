@@ -31,14 +31,15 @@ var/global/repository/admin_pm/admin_pm_repository = new()
 	return cl
 
 /datum/admin_privat_message
-	var/station_time
 	var/datum/client_lite/sender // We don't store the proper client because it gets deleted if banned
 	var/datum/client_lite/receiver
 	var/message
+	var/time
 
-/datum/admin_privat_message/New(var/sender, var/receiver, var/message)
-	station_time = time_stamp()
-	src.message = message
-	src.sender = sender
-	src.receiver = receiver
+
+/datum/admin_privat_message/New(param_sender, param_receiver, param_message)
+	time = time_stamp_system()
+	message = param_message
+	sender = param_sender
+	receiver = param_receiver
 

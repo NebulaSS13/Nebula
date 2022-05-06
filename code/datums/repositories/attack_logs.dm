@@ -12,7 +12,7 @@ var/global/repository/attack_logs/attack_log_repository = new()
 	attack_logs_.Insert(1, new/datum/attack_log(attacker, victim, action_message))
 
 /datum/attack_log
-	var/station_time
+	var/time
 	var/intent
 	var/zone_sel
 	var/datum/mob_lite/attacker      // We don't store the proper mob in case it gets deleted
@@ -21,7 +21,7 @@ var/global/repository/attack_logs/attack_log_repository = new()
 	var/message
 
 /datum/attack_log/New(var/mob/mob_attacker, var/mob/mob_victim, var/action_message)
-	station_time = time_stamp()
+	time = time_stamp_system()
 
 	attacker = mob_repository.get_lite_mob(mob_attacker)
 	victim = mob_repository.get_lite_mob(mob_victim)

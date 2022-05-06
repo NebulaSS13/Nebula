@@ -5,7 +5,7 @@ var/global/regex/actual_error_file_line
 #ifdef DEBUG
 /world/Error(exception/E)
 	if(!istype(E)) //Something threw an unusual exception
-		log_world("\[[time_stamp()]] Uncaught exception: [E]")
+		log_world("\[[time_stamp_system()]] Uncaught exception: [E]")
 		return ..()
 
 	if (!global.actual_error_file_line)
@@ -68,7 +68,7 @@ var/global/regex/actual_error_file_line
 			var/skipcount = abs(error_cooldown[erroruid]) - 1
 			error_cooldown[erroruid] = 0
 			if(skipcount > 0)
-				to_world_log("\[[time_stamp()]] Skipped [skipcount] runtimes in [erroruid].")
+				to_world_log("\[[time_stamp_system()]] Skipped [skipcount] runtimes in [erroruid].")
 				if(istype(global.error_cache))
 					global.error_cache.log_error(E, skip_count = skipcount)
 
@@ -106,7 +106,7 @@ var/global/regex/actual_error_file_line
 	if(istype(global.error_cache)) // istype() rather than nullcheck to avoid new ordering weirdness
 		global.error_cache.log_error(E, desclines)
 
-	error_write_log("\[[time_stamp()]] Runtime in [erroruid]: [E]")
+	error_write_log("\[[time_stamp_system()]] Runtime in [erroruid]: [E]")
 	for(var/line in desclines)
 		error_write_log(line)
 

@@ -23,9 +23,9 @@
 			continue
 
 		if(receiver)
-			dat += "<tr><td>[pm.station_time]</td><td>[sender.key_name(FALSE)] <a href='?src=\ref[src];filter=[html_encode(sender.ckey)]'>F</a></td><td>[receiver.key_name(FALSE)] <a href='?src=\ref[src];filter=[receiver.ckey]'>F</a></td></tr>"
+			dat += "<tr><td>[pm.time]</td><td>[sender.key_name(FALSE)] <a href='?src=\ref[src];filter=[html_encode(sender.ckey)]'>F</a></td><td>[receiver.key_name(FALSE)] <a href='?src=\ref[src];filter=[receiver.ckey]'>F</a></td></tr>"
 		else
-			dat += "<tr><td>[pm.station_time]</td><td>[sender.key_name(FALSE)] <a href='?src=\ref[src];filter=[html_encode(sender.ckey)]'>F</a></td><td></td></tr>"
+			dat += "<tr><td>[pm.time]</td><td>[sender.key_name(FALSE)] <a href='?src=\ref[src];filter=[html_encode(sender.ckey)]'>F</a></td><td></td></tr>"
 		dat += "<tr><td colspan=3>[pm.message]</td></tr>"
 	dat += "</table>"
 

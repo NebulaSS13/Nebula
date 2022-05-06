@@ -1,3 +1,4 @@
+var/global/datum/configuration/config = null
 var/global/list/gamemode_cache = list()
 
 /datum/configuration
@@ -934,17 +935,17 @@ var/global/list/gamemode_cache = list()
 
 		switch (name)
 			if ("enabled")
-				sql_enabled = TRUE
+				global.sql_enabled = TRUE
 			if ("address")
-				sqladdress = value
+				global.sql_address = value
 			if ("port")
-				sqlport = value
+				global.sql_port = value
 			if ("database")
-				sqldb = value
+				global.sql_db = value
 			if ("login")
-				sqllogin = value
+				global.sql_login = value
 			if ("password")
-				sqlpass = value
+				global.sql_password = value
 			else
 				log_misc("Unknown setting in configuration: '[name]'")
 

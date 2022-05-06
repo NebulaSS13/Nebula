@@ -81,17 +81,20 @@ var/global/next_station_date_change = 1 DAY
 		station_date = num2text(global.using_map.game_year) + "-" + time2text(timeofday, "MM-DD")
 	return station_date
 
-/proc/time_stamp()
+/**
+ * Returns current in-game time.
+ */
+/proc/time_stamp_game()
 	return time2text(station_time_in_ticks, "hh:mm:ss")
 
 /**
- * Returns current server time.
+ * Returns current system time.
  * 
  * Arguments:
  * * format = desired time format. By default "hh:mm:ss".
  * * utc = desired UTC timezone offset. By default uses system timezone.
  */
-/proc/server_time(format = "hh:mm:ss", utc = world.timezone)
+/proc/time_stamp_system(format = "hh:mm:ss", utc = world.timezone)
 	return time2text(world.timeofday, format, utc)
 
 /* Returns 1 if it is the selected month and day */

@@ -54,16 +54,16 @@
 		if (attacker.zone_sel?.selecting)
 			zone_sel = "(ZONE_SEL: [uppertext(attacker.zone_sel.selecting)])"
 		if(victim)
-			attacker.attack_logs_ += text("\[[time_stamp()]\] <font color='red'>[key_name(victim)] - [attacker_message] [intent] [zone_sel]</font>")
+			attacker.attack_logs_ += text("\[[time_stamp_system()]\] <font color='red'>[key_name(victim)] - [attacker_message] [intent] [zone_sel]</font>")
 		else
-			attacker.attack_logs_ += text("\[[time_stamp()]\] <font color='red'>[attacker_message] [intent] [zone_sel]</font>")
+			attacker.attack_logs_ += text("\[[time_stamp_system()]\] <font color='red'>[attacker_message] [intent] [zone_sel]</font>")
 		attacker.last_attacked_ = mob_repository.get_lite_mob(victim)
 		attack_location = get_turf(attacker)
 	if(victim)
 		if(attacker)
-			victim.attack_logs_ += text("\[[time_stamp()]\] <font color='orange'>[key_name(attacker)] - [victim_message] [intent] [zone_sel]</font>")
+			victim.attack_logs_ += text("\[[time_stamp_system()]\] <font color='orange'>[key_name(attacker)] - [victim_message] [intent] [zone_sel]</font>")
 		else
-			victim.attack_logs_ += text("\[[time_stamp()]\] <font color='orange'>[victim_message]</font>")
+			victim.attack_logs_ += text("\[[time_stamp_system()]\] <font color='orange'>[victim_message]</font>")
 		victim.last_attacker_ = mob_repository.get_lite_mob(attacker)
 		if(!attack_location)
 			attack_location = get_turf(victim)

@@ -146,7 +146,7 @@ var/global/world_topic_last = world.timeofday
 		to_world("<span class=danger>World reboot waiting for external scripts. Please be patient.</span>")
 		return
 
-	game_log("World rebooted at [time_stamp()]")
+	game_log("World rebooted at [time_stamp_system()].")
 
 	callHook("reboot")
 
@@ -180,7 +180,7 @@ var/global/world_topic_last = world.timeofday
 	return 1
 
 /world/proc/load_motd()
-	join_motd = safe_file2text("config/motd.txt", FALSE)
+	global.server_motd = safe_file2text("config/motd.txt", FALSE)
 
 /proc/load_configuration()
 	config = new /datum/configuration()
@@ -264,13 +264,13 @@ var/global/world_topic_last = world.timeofday
 
 /world/proc/SetupLogs()
 	global.log_directory = "data/logs/[time2text(world.realtime, "YYYY/MM/DD")]/round-"
-	global.log_directory += global.game_id ? "[global.game_id]" : "[server_time("hh-mm-ss")]"
+	global.log_directory += global.game_id ? "[global.game_id]" : "[time_stamp_system("hh-mm-ss")]"
 
 	global.world_main_log = file("[global.log_directory]/main.log")
 	global.world_href_log = file("[global.log_directory]/href.log")
 	global.world_qdel_log = file("[global.log_directory]/qdel.log")
 
-	var/header_message = "[log_end]\n[log_end]\n\[[server_time()]\] Starting up with ID [game_id].[log_end]\n----------------------------------------[log_end]"
+	var/header_message = "[global.log_end]\n[global.log_end]\n\[[time_stamp_system()]\] Starting up with ID [global.game_id].[global.log_end]\n----------------------------------------[global.log_end]"
 	to_file(global.world_main_log, header_message)
 	to_file(global.world_href_log, header_message)
 	to_file(global.world_qdel_log, header_message)
@@ -297,11 +297,11 @@ var/global/failed_db_connections = 0
 	if(!dbcon)
 		dbcon = new()
 
-	var/user =    sqllogin
-	var/pass =    sqlpass
-	var/db =      sqldb
-	var/address = sqladdress
-	var/port =    sqlport
+	var/user = global.sql_login
+	var/pass = global.sql_password
+	var/db = global.sql_db
+	var/address = global.sql_address
+	var/port = global.sql_port
 
 	dbcon.Connect("dbi:mysql:[db]:[address]:[port]","[user]","[pass]")
 	. = dbcon.IsConnected()

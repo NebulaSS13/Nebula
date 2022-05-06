@@ -23,7 +23,7 @@
 		if(filter_log(user, al))
 			continue
 
-		dat += "<tr><td>[al.station_time]</td>"
+		dat += "<tr><td>[al.time]</td>"
 
 		if(al.attacker)
 			dat += "<td>[al.attacker.key_name(check_if_offline = FALSE)] <a HREF='?_src_=holder;adminplayeropts=[al.attacker.ref]'>PP</a></td>"
