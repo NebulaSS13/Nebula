@@ -34,8 +34,8 @@
 		return TOPIC_REFRESH
 	
 	if(href_list["create_group"])
-		var/group_name = sanitize(input(usr, "Enter the name of the new group. Maximum 15 characters:", "Create Group"))
-		if(!group_name)
+		var/group_name = sanitize_for_group(input(usr, "Enter the name of the new group. Maximum 15 characters, only alphanumeric characters, _ and - are allowed:", "Create Group"))
+		if(!length(group_name))
 			return TOPIC_HANDLED
 		if(!CanInteract(user, global.default_topic_state))
 			return TOPIC_REFRESH

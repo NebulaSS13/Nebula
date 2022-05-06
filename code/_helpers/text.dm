@@ -162,6 +162,24 @@
 		dat.Cut(length(dat))
 	return jointext(dat, null)
 
+// Strips text of everything alphanumeric characters, '_' and '-'. Converts spaces to '_'
+/proc/sanitize_for_group(text)
+	if(!text) return ""
+	var/list/dat = list()
+	for(var/i=1, i<=length(text), i++)
+		var/ascii_char = text2ascii(text,i)
+		switch(ascii_char)
+			if(65 to 90)	//A-Z
+				dat += ascii2text(ascii_char)
+			if(97 to 122)	//a-z
+				dat += ascii2text(ascii_char)
+			if(48 to 57)	//0-9
+				dat += ascii2text(ascii_char)
+			if(45, 95)			//-, _
+				dat += ascii2text(ascii_char)
+			if(32)			//space
+				dat += "_"
+	return jointext(dat, null)
 // UNICODE: Convert to regex?
 
 //Returns null if there is any bad text in the string
