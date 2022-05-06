@@ -34,8 +34,8 @@
 	return FALSE
 
 /datum/extension/network_device/acl/proc/add_group(group_name, parent_group)
-	group_name = "[group_name]"
-	if(!istext(group_name) || (parent_group && !istext(parent_group)))
+	group_name = sanitize_for_group("[group_name]")
+	if(!length(group_name) || !istext(group_name) || (parent_group && !istext(parent_group)))
 		return "Input Error"
 	if(length(group_name) > 15)
 		return "Maximum group name length is 15 characters."
