@@ -126,10 +126,14 @@
 		P.update_access(user)
 
 /datum/extension/interactive/os/proc/login_prompt(var/mob/user)
-	var/new_login = sanitize(input(user, "Enter your account login:", "Account login", login) as text|null)
+	var/obj/item/card/id/I = user.GetIdCard()
+	var/default_login = I?.associated_network_account["login"]
+	var/default_password = I?.associated_network_account["password"]
+
+	var/new_login = sanitize(input(user, "Enter your account login:", "Account login", default_login) as text|null)
 	if(!new_login || !CanUseTopic(user, global.default_topic_state))
 		return
-	var/new_password = sanitize(input(user, "Enter your account password:", "Account password") as text|null)
+	var/new_password = sanitize(input(user, "Enter your account password:", "Account password", default_password) as text|null)
 	if(!new_password || !CanUseTopic(user, global.default_topic_state))
 		return
 	
