@@ -107,7 +107,7 @@
 		pattern_index++
 		data["patterns"].Add(list(list(
 			"index" = "[pattern_index]",
-			"groups" = english_list(pattern, "No groups assigned!") 
+			"groups" = english_list(pattern, "No groups assigned!", and_text = "or") 
 			)))
 
 	var/list/group_dictionary = network.access_controller.get_group_dict()
