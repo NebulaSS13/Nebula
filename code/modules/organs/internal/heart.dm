@@ -218,4 +218,7 @@
 
 /obj/item/organ/internal/heart/rejuvenate(ignore_prosthetic_prefs)
 	. = ..()
-	pulse = PULSE_NORM
+	if(!BP_IS_PROSTHETIC(src))
+		pulse = PULSE_NORM
+	else 
+		pulse = PULSE_NONE
