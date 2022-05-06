@@ -410,7 +410,7 @@ SUBSYSTEM_DEF(garbage)
 	testing("Beginning search for references to a [type].")
 	last_find_references = world.time
 
-	DoSearchVar(global) //globals
+	DoSearchVar(global.vars) //globals
 	for(var/datum/thing in world) //atoms (don't believe its lies)
 		DoSearchVar(thing, "World -> [thing]")
 
