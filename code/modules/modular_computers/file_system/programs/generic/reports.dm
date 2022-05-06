@@ -65,7 +65,8 @@
 	if(!program.computer || !program.computer.has_component(PART_HDD))
 		to_chat(user, "Unable to find hard drive.")
 		return
-	selected_report.rename_file()
+	if(save_as) // We're copying, so don't overwrite the actual report.
+		selected_report.rename_file()
 	if(program.computer.store_file(selected_report))
 		saved_report = selected_report
 		selected_report = saved_report.clone()
@@ -115,9 +116,10 @@
 	if(href_list["save"])
 		if(!selected_report)
 			return 1
-		if(!(selected_report.get_file_perms(get_access(user), user) & OS_READ_ACCESS))
-			return 1
 		var/save_as = text2num(href_list["save_as"])
+		var/req_access = save_as ? OS_READ_ACCESS : OS_WRITE_ACCESS
+		if(!(selected_report.get_file_perms(get_access(user), user) & req_access))
+			return 1
 		save_report(user, save_as)
 	if(href_list["submit"])
 		if(!selected_report)
