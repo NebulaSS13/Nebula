@@ -169,7 +169,7 @@ INITIALIZE_IMMEDIATE(/obj/effect/gas_overlay)
 
 	// Gas behavior.
 	var/gas_overlay_limit
-	var/gas_specific_heat
+	var/gas_specific_heat = 20    // J/(mol*K)
 	var/gas_symbol_html
 	var/gas_symbol
 	var/gas_flags = 0
