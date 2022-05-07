@@ -325,7 +325,7 @@
 	if (can_recover())
 		damage = between(0, damage - round(amount, 0.1), max_damage)
 
-/obj/item/organ/proc/robotize(var/company, var/skip_prosthetics = 0, var/keep_organs = 0, var/apply_material = /decl/material/solid/metal/steel)
+/obj/item/organ/proc/robotize(var/company = /decl/prosthetics_manufacturer, var/skip_prosthetics = 0, var/keep_organs = 0, var/apply_material = /decl/material/solid/metal/steel, var/check_bodytype, var/check_species)
 	status = ORGAN_PROSTHETIC
 	QDEL_NULL(dna)
 	reagents?.clear_reagents()

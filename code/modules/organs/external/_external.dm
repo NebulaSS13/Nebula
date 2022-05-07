@@ -1242,7 +1242,7 @@ Note that amputating the affected organ does in fact remove the infection from t
 /obj/item/organ/external/setup_as_prosthetic()
 	. = ..(model ? model : /decl/prosthetics_manufacturer)
 
-/obj/item/organ/external/robotize(var/company = /decl/prosthetics_manufacturer, var/skip_prosthetics = 0, var/keep_organs = 0, var/apply_material = /decl/material/solid/metal/steel)
+/obj/item/organ/external/robotize(var/company = /decl/prosthetics_manufacturer, var/skip_prosthetics = 0, var/keep_organs = 0, var/apply_material = /decl/material/solid/metal/steel, var/check_bodytype, var/check_species)
 	. = ..()
 
 	slowdown = 0
@@ -1260,7 +1260,7 @@ Note that amputating the affected organ does in fact remove the infection from t
 		R = GET_DECL(company)
 	
 	//If can't install fallback to default
-	if(!R.check_can_install(organ_tag, (owner?.get_bodytype_category() || global.using_map.default_bodytype), (owner?.get_species_name() || global.using_map.default_species)))
+	if(!R.check_can_install(organ_tag, (check_bodytype || owner?.get_bodytype_category() || global.using_map.default_bodytype), (check_species || owner?.get_species_name() || global.using_map.default_species)))
 		company = /decl/prosthetics_manufacturer
 		R = GET_DECL(/decl/prosthetics_manufacturer)
 		
