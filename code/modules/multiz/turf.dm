@@ -218,7 +218,7 @@
 		if(M.movable_flags & MOVABLE_FLAG_Z_INTERACT)
 			return M.attackby(C, user)
 
-/turf/simulated/open/attack_hand(mob/user)
+/turf/exterior/open/attack_hand(mob/user)
 	for(var/atom/movable/M in below)
 		if(M.movable_flags & MOVABLE_FLAG_Z_INTERACT)
 			return M.attack_hand(user)
