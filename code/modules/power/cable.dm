@@ -767,6 +767,11 @@ By design, d1 is the smallest direction and d2 is the highest
 		C.denode()// this call may have disconnected some cables that terminated on the centre of the turf, if so split the powernets.
 		return TRUE
 
+	else if(C.d1 == UP) //Special cases for zcables, since they behave weirdly
+		. = turf_place(T, user)
+		if(.)
+			to_chat(user, SPAN_NOTICE("You connect the cable hanging from the ceiling."))
+		return .
 
 /obj/item/stack/cable_coil/proc/put_cable(turf/F, mob/user, d1, d2)
 	if(!istype(F))
