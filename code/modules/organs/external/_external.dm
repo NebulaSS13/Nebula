@@ -389,18 +389,22 @@
 	if(!(limb_flags & ORGAN_FLAG_CAN_DISLOCATE))
 		return
 
-	dislocated = 1
+	dislocated = TRUE
 	if(owner)
+		if(owner.can_feel_pain(src))
+			add_pain(20)
+			owner.apply_effect(5, WEAKEN)
 		owner.verbs |= /mob/living/carbon/human/proc/undislocate
 
 /obj/item/organ/external/proc/undislocate(var/skip_pain = FALSE)
 	if(!(limb_flags & ORGAN_FLAG_CAN_DISLOCATE))
 		return
 
-	dislocated = 0
+	dislocated = FALSE
 	if(owner)
-		if(!skip_pain)
-			owner.shock_stage += 20 //#FIXME: use add_pain instead
+		if(!skip_pain && owner.can_feel_pain(src))
+			add_pain(20)
+			owner.apply_effect(2, WEAKEN)
 
 		//check to see if we still need the verb
 		for(var/obj/item/organ/external/limb in owner.get_external_organs())
