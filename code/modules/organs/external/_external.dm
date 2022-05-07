@@ -399,7 +399,8 @@
 
 	dislocated = 0
 	if(owner)
-		owner.shock_stage += 20
+		if(!skip_pain)
+			owner.shock_stage += 20 //#FIXME: use add_pain instead
 
 		//check to see if we still need the verb
 		for(var/obj/item/organ/external/limb in owner.get_external_organs())
@@ -581,6 +582,8 @@ This function completely restores a damaged organ to perfect condition.
 			if(aspect.applies_to_organ(organ_tag))
 				aspect.apply(owner)
 		owner.updatehealth()
+	
+	undislocate(TRUE)
 
 	if(!QDELETED(src) && species)
 		species.post_organ_rejuvenate(src, owner)
