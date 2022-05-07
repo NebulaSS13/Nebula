@@ -139,7 +139,7 @@
 /obj/structure/foamedmetal/Destroy()
 	set_density(0)
 	update_nearby_tiles(1)
-	..()
+	return ..()
 
 /obj/structure/foamedmetal/on_update_icon()
 	..()

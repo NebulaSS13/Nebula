@@ -307,7 +307,7 @@ var/global/list/solars_list = list()
 		M.unset_control()
 	if(connected_tracker)
 		connected_tracker.unset_control()
-	..()
+	return ..()
 
 /obj/machinery/power/solar_control/disconnect_from_network()
 	..()
