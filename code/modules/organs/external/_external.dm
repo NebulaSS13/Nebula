@@ -384,8 +384,6 @@
 		internal_organs_size += org.get_storage_cost()
 
 /obj/item/organ/external/proc/dislocate()
-	if(owner && (owner.status_flags & GODMODE))
-		return
 	if(!(limb_flags & ORGAN_FLAG_CAN_DISLOCATE))
 		return
 
@@ -586,7 +584,7 @@ This function completely restores a damaged organ to perfect condition.
 			if(aspect.applies_to_organ(organ_tag))
 				aspect.apply(owner)
 		owner.updatehealth()
-	
+
 	undislocate(TRUE)
 
 	if(!QDELETED(src) && species)
