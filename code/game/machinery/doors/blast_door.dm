@@ -82,6 +82,13 @@
 // Parameters: None
 // Description: Updates icon of this object. Uses icon state variables.
 /obj/machinery/door/blast/on_update_icon()
+
+	if(set_dir_on_update)
+		if(connections & (NORTH|SOUTH))
+			set_dir(EAST)
+		else
+			set_dir(SOUTH)
+
 	if(density)
 		if(stat & BROKEN)
 			icon_state = icon_state_closed_broken
