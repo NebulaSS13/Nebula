@@ -98,7 +98,7 @@
 			return TRUE
 		affecting.visible_message(SPAN_WARNING("\The [assailant] fails to dislocate \the [affecting]'s [O.joint]."))
 		return FALSE
-		
+
 	if(O.limb_flags & ORGAN_FLAG_CAN_DISLOCATE)
 		to_chat(assailant, SPAN_WARNING("\The [affecting]'s [O.joint] is already dislocated!"))
 	else
