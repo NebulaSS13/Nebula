@@ -284,7 +284,7 @@
 
 	var/list/limbs = list()
 	for(var/obj/item/organ/external/current_limb in get_external_organs())
-		if(current_limb && current_limb.dislocated > 0 && !current_limb.is_parent_dislocated()) //if the parent is also dislocated you will have to relocate that first
+		if(current_limb && current_limb.is_dislocated() && !current_limb.is_parent_dislocated()) //if the parent is also dislocated you will have to relocate that first
 			limbs |= current_limb
 	var/obj/item/organ/external/current_limb = input(usr,"Which joint do you wish to relocate?") as null|anything in limbs
 

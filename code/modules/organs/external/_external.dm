@@ -368,19 +368,15 @@
 	return all_limbs
 
 /obj/item/organ/external/proc/is_dislocated()
-	if(dislocated > 0)
-		return 1
-	if(is_parent_dislocated())
-		return 1//if any parent is dislocated, we are considered dislocated as well
-	return 0
+	return (dislocated > 0) || is_parent_dislocated() //if any parent is dislocated, we are considered dislocated as well
 
 /obj/item/organ/external/proc/is_parent_dislocated()
 	var/obj/item/organ/external/O = parent
 	while(O && O.dislocated != -1)
 		if(O.dislocated == 1)
-			return 1
+			return TRUE
 		O = O.parent
-	return 0
+	return FALSE
 
 /obj/item/organ/external/proc/update_internal_organs_cost()
 	internal_organs_size = 0
@@ -407,7 +403,7 @@
 
 		//check to see if we still need the verb
 		for(var/obj/item/organ/external/limb in owner.get_external_organs())
-			if(limb.dislocated == 1)
+			if(limb.is_dislocated())
 				return
 		owner.verbs -= /mob/living/carbon/human/proc/undislocate
 
