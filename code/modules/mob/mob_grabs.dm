@@ -32,7 +32,7 @@
 /mob/proc/handle_grab_damage()
 	set waitfor = FALSE
 
-/mob/proc/handle_grabs_after_move()
+/mob/proc/handle_grabs_after_move(var/turf/old_loc, var/direction)
 	set waitfor = FALSE
 
 /mob/proc/add_grab(var/obj/item/grab/grab, var/defer_hand = FALSE)
