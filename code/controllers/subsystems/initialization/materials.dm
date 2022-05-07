@@ -127,7 +127,7 @@ SUBSYSTEM_DEF(materials)
 	var/list/all_random_reagents = decls_repository.get_decls_of_type(/decl/material/liquid/random)
 	for(var/rtype in all_random_reagents)
 		var/decl/material/liquid/random/random = all_random_reagents[rtype]
-		if(only_if_unique && random.initialized)
+		if(only_if_unique && random.data_initialized)
 			continue
 		if(random.randomize_data(temperature))
 			return random.type
