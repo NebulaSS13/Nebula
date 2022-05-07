@@ -188,7 +188,7 @@
 
 /atom/movable/proc/handle_fall(var/turf/landing)
 	var/turf/previous = get_turf(loc)
-	forceMove(landing)
+	Move(landing, get_dir(previous, landing))
 	if(locate(/obj/structure/stairs) in landing)
 		return 1
 	if(landing.get_fluid_depth() >= FLUID_DEEP)
