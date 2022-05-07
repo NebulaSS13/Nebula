@@ -43,12 +43,16 @@
 		return FALSE
 
 	var/mob/living/assailant = G.assailant
-	if(!assailant || !assailant.skill_check(SKILL_COMBAT, SKILL_ADEPT))
+	if(!assailant)
 		return FALSE
 
 	var/obj/item/organ/external/O = G.get_targeted_organ()
 	if(!O)
 		to_chat(assailant, SPAN_WARNING("\The [affecting] is missing that body part!"))
+		return FALSE
+
+	if(!assailant.skill_check(SKILL_COMBAT, SKILL_ADEPT))
+		to_chat(assailant, SPAN_WARNING("You attempt clumsily but struggle to do a proper jointlock with \the [affecting]'s [O.name]!"))
 		return FALSE
 
 	assailant.visible_message(SPAN_DANGER("\The [assailant] begins to [pick("bend", "twist")] \the [affecting]'s [O.name] into a jointlock!"))
@@ -72,7 +76,7 @@
 		return FALSE
 
 	var/mob/living/assailant = G.assailant
-	if(!assailant || !assailant.skill_check(SKILL_COMBAT, SKILL_ADEPT))
+	if(!assailant)
 		return FALSE
 
 	var/obj/item/organ/external/O = G.get_targeted_organ()
@@ -80,11 +84,15 @@
 		to_chat(assailant, SPAN_WARNING("\The [affecting] is missing that body part!"))
 		return  FALSE
 
-	if(!O.is_dislocated())
+	if(!assailant.skill_check(SKILL_COMBAT, SKILL_ADEPT))
+		to_chat(assailant, SPAN_WARNING("You attempt clumsily but can't seem to dislocate \the [affecting]'s [O.joint]!"))
+		return FALSE
+
+	if(!O.is_dislocated() && (O.limb_flags & ORGAN_FLAG_CAN_DISLOCATE))
 		assailant.visible_message(SPAN_DANGER("\The [assailant] begins to dislocate \the [affecting]'s [O.joint]!"))
 		if(do_mob(assailant, affecting, action_cooldown - 1))
 			G.action_used()
-			O.dislocate(1)
+			O.dislocate()
 			assailant.visible_message(SPAN_DANGER("\The [affecting]'s [O.joint] [pick("gives way","caves in","crumbles","collapses")]!"))
 			playsound(assailant.loc, 'sound/weapons/thudswoosh.ogg', 50, 1, -1)
 			return TRUE
