@@ -844,7 +844,7 @@
 		mind.changeling.regenerate()
 
 /mob/living/carbon/human/proc/handle_shock()
-	if(!can_feel_pain() || status_flags & GODMODE)
+	if(!can_feel_pain() || (status_flags & GODMODE))
 		shock_stage = 0
 		return
 
