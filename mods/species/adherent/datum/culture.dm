@@ -12,7 +12,7 @@
 	)
 
 /decl/cultural_info/culture/adherent/get_random_name(gender)
-	return "[uppertext("[pick(global.full_alphabet)][pick(global.full_alphabet)]-[pick(global.full_alphabet)] [rand(1000,9999)]")]"
+	return "[uppertext("[pick(global.alphabet)][pick(global.alphabet)]-[pick(global.alphabet)] [rand(1000,9999)]")]"
 
 /decl/cultural_info/culture/adherent/sanitize_cultural_name(name)
 	return sanitize_name(name, allow_numbers = TRUE)
