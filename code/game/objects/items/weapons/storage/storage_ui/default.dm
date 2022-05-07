@@ -176,9 +176,9 @@
 		row_num = round((adjusted_contents-1) / 7) // 7 is the maximum allowed width.
 	arrange_item_slots(row_num, col_count)
 
-#define SCREEN_LOC_MOD_FIRST 3
-#define SCREEN_LOC_MOD_SECOND 1.7
-#define SCREEN_LOC_MOD_DIVIDED (1.5 * world.icon_size)
+#define SCREEN_LOC_MOD_FIRST   3
+#define SCREEN_LOC_MOD_SECOND  1.7
+#define SCREEN_LOC_MOD_DIVIDED (0.5 * world.icon_size)
 
 //This proc draws out the inventory and places the items on it. It uses the standard position.
 /datum/storage_ui/default/proc/arrange_item_slots(rows, cols)
