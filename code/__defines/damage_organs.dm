@@ -58,6 +58,7 @@
 #define ORGAN_FLAG_FINGERPRINT    BITFLAG(4) // The organ has a fingerprint.
 #define ORGAN_FLAG_HEALS_OVERKILL BITFLAG(5) // The organ heals from overkill damage.
 #define ORGAN_FLAG_DEFORMED       BITFLAG(6) // The organ is permanently disfigured.
+#define ORGAN_FLAG_CAN_DISLOCATE  BITFLAG(7) // The organ can be dislocated.
 
 // Droplimb types.
 #define DISMEMBER_METHOD_EDGE  0

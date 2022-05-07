@@ -111,7 +111,7 @@
 
 /datum/ailment/sore_joint/can_apply_to(obj/item/organ/_organ)
 	var/obj/item/organ/external/E = _organ
-	. = ..() && !isnull(E.joint) && E.dislocated > -1
+	. = ..() && !isnull(E.joint) && (E.limb_flags & ORGAN_FLAG_CAN_DISLOCATE)
 
 /datum/ailment/sore_back
 	name = "sore back"

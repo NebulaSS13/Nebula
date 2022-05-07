@@ -26,7 +26,7 @@
 	var/pain_disability_threshold      // Point at which a limb becomes unusable due to pain.
 
 	// A bitfield for a collection of limb behavior flags.
-	var/limb_flags = ORGAN_FLAG_CAN_AMPUTATE | ORGAN_FLAG_CAN_BREAK
+	var/limb_flags = ORGAN_FLAG_CAN_AMPUTATE | ORGAN_FLAG_CAN_BREAK | ORGAN_FLAG_CAN_DISLOCATE
 
 	// Appearance vars.
 	var/icon_name = null               // Icon state base.
@@ -58,7 +58,7 @@
 	// Joint/state stuff.
 	var/joint = "joint"                // Descriptive string used in dislocation.
 	var/amputation_point               // Descriptive string used in amputation.
-	var/dislocated = 0                 // If you target a joint, you can dislocate the limb, causing temporary damage to the organ.
+	var/dislocated = 0                 // If you target a joint, you can dislocate the limb, causing temporary damage to the organ. Boolean.
 	var/encased                        // Needs to be opened with a saw to access the organs.
 	var/artery_name = "artery"         // Flavour text for cartoid artery, aorta, etc.
 	var/arterial_bleed_severity = 1    // Multiplier for bleeding in a limb.
@@ -100,12 +100,12 @@
 		F.completeness = rand(10,90)
 		forensics.add_data(/datum/forensics/fingerprints, F)
 
-/obj/item/organ/external/Initialize(mapload, material_key, datum/dna/given_dna)	
+/obj/item/organ/external/Initialize(mapload, material_key, datum/dna/given_dna)
 	. = ..()
 	if(. == INITIALIZE_HINT_QDEL)
 		return
 	if(isnull(pain_disability_threshold))
-		pain_disability_threshold = (max_damage * 0.75)	
+		pain_disability_threshold = (max_damage * 0.75)
 
 /obj/item/organ/external/Destroy()
 	//Update the hierarchy BEFORE clearing all the vars and refs
@@ -327,7 +327,7 @@
 		if(cutting_result != -1)
 			user.visible_message(SPAN_DANGER("<b>[user]</b> stops trying to cut \the [removing]."))
 		return TRUE
-	
+
 	//Actually remove it
 	removing.do_uninstall()
 	removing.forceMove(get_turf(user))
@@ -372,8 +372,8 @@
 
 /obj/item/organ/external/proc/is_parent_dislocated()
 	var/obj/item/organ/external/O = parent
-	while(O && O.dislocated != -1)
-		if(O.dislocated == 1)
+	while(O && (O.limb_flags & ORGAN_FLAG_CAN_DISLOCATE))
+		if(O.dislocated > 0)
 			return TRUE
 		O = O.parent
 	return FALSE
@@ -386,15 +386,15 @@
 /obj/item/organ/external/proc/dislocate()
 	if(owner && (owner.status_flags & GODMODE))
 		return
-	if(dislocated == -1)
+	if(!(limb_flags & ORGAN_FLAG_CAN_DISLOCATE))
 		return
 
 	dislocated = 1
 	if(owner)
 		owner.verbs |= /mob/living/carbon/human/proc/undislocate
 
-/obj/item/organ/external/proc/undislocate()
-	if(dislocated == -1)
+/obj/item/organ/external/proc/undislocate(var/skip_pain = FALSE)
+	if(!(limb_flags & ORGAN_FLAG_CAN_DISLOCATE))
 		return
 
 	dislocated = 0
@@ -461,7 +461,7 @@
 		if(istype(affected))
 			if(parent_organ != affected.organ_tag)
 				log_warning("obj/item/organ/external/do_install(): The parent organ in the parameters '[affected]'('[affected.organ_tag]') doesn't match the expected parent organ ('[parent_organ]') for '[src]'!")
-			parent = affected 
+			parent = affected
 
 		//When no owner, make sure we update all our children. Everything else should be implicitely at the right place
 		for(var/obj/item/organ/external/organ in children)
@@ -481,7 +481,7 @@
 			if(W.limb_tag == organ_tag)
 				qdel(W) //Removes itself from parent.wounds
 				break
-		
+
 		if(!in_place)
 			parent.update_wounds()
 
@@ -1257,18 +1257,18 @@ Note that amputating the affected organ does in fact remove the infection from t
 		//Handling for decl
 		R = company
 		company = R.type
-	else 
+	else
 		//Handling for paths
 		if(!ispath(company))
 			PRINT_STACK_TRACE("Limb [type] robotize() was supplied a null or non-decl manufacturer: '[company]'")
 			company = /decl/prosthetics_manufacturer
 		R = GET_DECL(company)
-	
+
 	//If can't install fallback to default
 	if(!R.check_can_install(organ_tag, (check_bodytype || owner?.get_bodytype_category() || global.using_map.default_bodytype), (check_species || owner?.get_species_name() || global.using_map.default_species)))
 		company = /decl/prosthetics_manufacturer
 		R = GET_DECL(/decl/prosthetics_manufacturer)
-		
+
 	model = company
 	name = "[R ? R.modifier_string : "robotic"] [initial(name)]"
 	desc = "[R.desc] It looks like it was produced by [R.name]."
@@ -1276,7 +1276,8 @@ Note that amputating the affected organ does in fact remove the infection from t
 	slowdown = R.movement_slowdown
 	max_damage *= R.hardiness
 	min_broken_damage *= R.hardiness
-	dislocated = -1
+	dislocated = 0
+	limb_flags &= (~ORGAN_FLAG_CAN_DISLOCATE)
 	remove_splint()
 	update_icon(1)
 	unmutate()
@@ -1355,7 +1356,7 @@ Note that amputating the affected organ does in fact remove the infection from t
 	var/mob/living/carbon/human/victim = owner //parent proc clears owner
 	if(!(. = ..()))
 		return
-	
+
 	if(victim)
 		if(in_place)
 			//When removing in place, we don't bother with moving child organs and implants, we just clear the refs
