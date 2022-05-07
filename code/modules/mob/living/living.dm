@@ -513,7 +513,6 @@ default behaviour is:
 		if(G.assailant_reverse_facing())
 			set_dir(global.reverse_dir[direction])
 		G.assailant_moved()
-		G.adjust_position()
 		if(QDELETED(G) || QDELETED(G.affecting))
 			mygrabs -= G
 
@@ -561,7 +560,7 @@ default behaviour is:
 /mob/living/Move(NewLoc, Dir)
 	if (buckled)
 		return
-	var/old_loc = loc
+	var/turf/old_loc = loc
 	. = ..()
 	if(.)
 		handle_grabs_after_move(old_loc, Dir)

@@ -107,7 +107,7 @@
 	return ..()
 
 /obj/structure/ladder/attackby(obj/item/I, mob/user)
-	. = ..()
+	. = !istype(I, /obj/item/grab) && ..()
 	if(!.)
 		climb(user, I)
 
@@ -163,16 +163,11 @@
 
 	add_fingerprint(M)
 
-	for(var/obj/item/grab/G in M.get_active_grabs())
-		G.adjust_position()
-
 	var/direction = target_ladder == target_up ? "up" : "down"
 	M.visible_message(SPAN_NOTICE("\The [M] begins climbing [direction] \the [src]."))
 	target_ladder.audible_message(SPAN_NOTICE("You hear something coming [direction] \the [src]."))
 	if(do_after(M, climb_time, src))
 		climbLadder(M, target_ladder, I)
-		for (var/obj/item/grab/G in M)
-			G.adjust_position(force = 1)
 
 /obj/structure/ladder/attack_ghost(var/mob/M)
 	instant_climb(M)
@@ -221,13 +216,15 @@
 	if(incapacitated())
 		to_chat(src, SPAN_WARNING("You are physically unable to climb \the [ladder]."))
 		return FALSE
-	var/carry_count = 0
+
+	var/can_carry = can_pull_size
+	if(loc?.has_gravity())
+		can_carry = FLOOR(can_carry * 0.75)
 	for(var/obj/item/grab/G in get_active_grabs())
-		to_chat(src, SPAN_WARNING("You can't carry \the [G.affecting] up \the [ladder]."))
-		return FALSE
-	if(carry_count > 1)
-		to_chat(src, SPAN_WARNING("You can't carry more than one person up \the [ladder]."))
-		return FALSE
+		can_carry -= G.affecting.get_object_size()
+		if(can_carry < 0)
+			to_chat(src, SPAN_WARNING("You can't carry \the [G.affecting] up \the [ladder]."))
+			return FALSE
 
 	return TRUE
 
@@ -242,14 +239,14 @@
 			//We cannot use the ladder, but we probably can remove the obstruction
 			var/atom/movable/M = A
 			if(istype(M) && M.movable_flags & MOVABLE_FLAG_Z_INTERACT)
-				if(isnull(I))
+				if(isnull(I) || istype(I, /obj/item/grab))
 					M.attack_hand(user)
 				else
 					M.attackby(I, user)
 			return FALSE
 	playsound(src, pick(climbsounds), 50)
 	playsound(target_ladder, pick(climbsounds), 50)
-	return user.Move(T)
+	return user.Move(T, (loc.z > T.z) ? DOWN : UP)
 
 /obj/structure/ladder/CanPass(obj/mover, turf/source, height, airflow)
 	return airflow || !density

@@ -242,11 +242,14 @@
 	current_grab.handle_resist(src)
 
 /obj/item/grab/proc/adjust_position(var/force = 0)
-	if(force)
+
+	if(!QDELETED(assailant) && force)
 		affecting.forceMove(assailant.loc)
-	if(!assailant || !affecting || !assailant.Adjacent(affecting))
+
+	if(QDELETED(assailant) || QDELETED(affecting) || !assailant.IsMultiZAdjacent(affecting))
 		qdel(src)
 		return 0
+
 	var/adir = get_dir(assailant, affecting)
 	if(assailant)
 		assailant.set_dir(adir)
