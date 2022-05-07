@@ -151,7 +151,7 @@
 		for(var/atom/A in below)
 			if(!A.CanPass(src, location_override))
 				return FALSE
-		
+
 		//We cannot sink if we can swim
 		if(location_override.get_fluid_depth() >= FLUID_DEEP && (below == loc))
 			if(!(below.get_fluid_depth() >= 0.95 * FLUID_MAX_DEPTH)) //No salmon skipping up a stream of falling water
@@ -325,7 +325,7 @@
 
 /mob/living/simple_animal/aquatic/can_float()
 	return TRUE
-	
+
 /mob/living/simple_animal/hostile/aquatic/can_float()
 	return TRUE
 
