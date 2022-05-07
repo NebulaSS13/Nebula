@@ -21,13 +21,7 @@ var/global/list/vowels =                     list("a","e","i","o","u")
 var/global/list/alphabet =                   list("a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z")
 /// Alphabet A-Z.
 var/global/list/alphabet_capital =           list("A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z")
-/// Alphabet a-z without vowels.
-var/global/list/alphabet_vowelless =         list("b","c","d","f","g","h","j","k","l","m","n","p","q","r","s","t","v","w","x","z")
-/// Alphabet A-Z without vowels.
-var/global/list/alphabet_vowelless_capital = list("B","C","D","F","G","H","J","K","L","M","N","P","Q","R","S","T","V","W","X","Z")
 /// Numbers 0-9.
 var/global/list/numbers =                    list("0","1","2","3","4","5","6","7","8","9")
-/// Numbers 1-0.
-var/global/list/numbers_alt =                list("1","2","3","4","5","6","7","8","9","0")
 
 var/global/list/meteor_list = list()
