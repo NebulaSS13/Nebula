@@ -21,7 +21,7 @@ var/global/list/random_chem_interaction_blacklist = list(
 	uid = "chem_random"
 	var/max_effect_number = 8
 	var/list/data = list()
-	var/initialized = FALSE
+	var/data_initialized = FALSE
 
 /decl/material/liquid/random/proc/randomize_data(temperature)
 	data = list()
@@ -50,7 +50,7 @@ var/global/list/random_chem_interaction_blacklist = list(
 	for(var/i in 1 to heat_num)
 		heating_products[pick_n_take(whitelist)] = 1 / heat_num
 
-	initialized = TRUE
+	data_initialized = TRUE
 
 /decl/material/liquid/random/proc/stable_at_temperature(temperature)
 	if(temperature > chilling_point && temperature < heating_point)
