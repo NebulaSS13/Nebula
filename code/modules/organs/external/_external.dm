@@ -588,6 +588,8 @@ This function completely restores a damaged organ to perfect condition.
 
 	undislocate(TRUE)
 
+	undislocate(TRUE)
+
 	if(!QDELETED(src) && species)
 		species.post_organ_rejuvenate(src, owner)
 
