@@ -80,7 +80,7 @@
 		to_chat(assailant, SPAN_WARNING("\The [affecting] is missing that body part!"))
 		return  FALSE
 
-	if(!O.dislocated)
+	if(!O.is_dislocated())
 		assailant.visible_message(SPAN_DANGER("\The [assailant] begins to dislocate \the [affecting]'s [O.joint]!"))
 		if(do_mob(assailant, affecting, action_cooldown - 1))
 			G.action_used()

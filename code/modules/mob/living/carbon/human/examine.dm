@@ -267,7 +267,7 @@
 				if(wounddesc != "nothing")
 					wound_flavor_text[E.name] += "[G.He] [G.has] [wounddesc] on [G.his] [E.name].<br>"
 		if(!hidden || distance <=1)
-			if(E.dislocated > 0)
+			if(E.is_dislocated())
 				wound_flavor_text[E.name] += "[G.His] [E.joint] is dislocated!<br>"
 			if(((E.status & ORGAN_BROKEN) && E.brute_dam > E.min_broken_damage) || (E.status & ORGAN_MUTATED))
 				wound_flavor_text[E.name] += "[G.His] [E.name] is dented and swollen!<br>"
