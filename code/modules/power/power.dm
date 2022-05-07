@@ -88,7 +88,7 @@
 	if(isCoil(W))
 		var/obj/item/stack/cable_coil/coil = W
 		var/turf/T = user.loc
-		if(!istype(T) || T.density || !T.is_plating())
+		if(!istype(T) || T.density || !T.can_build_cable(user))
 			return
 		if(get_dist(src, user) > 1)
 			return

@@ -437,3 +437,13 @@ var/global/const/enterloopsanity = 100
 		LAZYADD(., weather)
 	if(flooded)
 		LAZYADD(., global.flood_object)
+
+/**Whether we can place a cable here */
+/turf/proc/can_build_cable(var/mob/user)
+	return FALSE
+
+/**Place a cable if possible, if not warn the user appropriately */
+/turf/proc/try_build_cable(var/obj/item/stack/cable_coil/C, var/mob/user)
+	if(!can_build_cable(user))
+		return FALSE
+	return C.turf_place(src, user)

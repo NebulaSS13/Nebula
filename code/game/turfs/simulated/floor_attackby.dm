@@ -173,11 +173,15 @@
 	update_icon()
 	return 1
 
+/turf/simulated/floor/try_build_cable(obj/item/stack/cable_coil/C, mob/user)
+	if(!can_build_cable(user))
+		if(!is_plating() || flooring)
+			to_chat(user, SPAN_WARNING("Removing the tiling first."))
+		if(broken || burnt)
+			to_chat(user, SPAN_WARNING("This section is too damaged to support anything. Use a welder to fix the damage."))
+		return FALSE
+	return ..()
+
 /turf/simulated/floor/can_build_cable(var/mob/user)
-	if(!is_plating() || flooring)
-		to_chat(user, "<span class='warning'>Removing the tiling first.</span>")
-		return 0
-	if(broken || burnt)
-		to_chat(user, "<span class='warning'>This section is too damaged to support anything. Use a welder to fix the damage.</span>")
-		return 0
-	return 1
+	//Need to check 'flooring' again since some floor types override is_plating to check for something else than flooring..
+	return is_plating() && !flooring && !broken && !burnt

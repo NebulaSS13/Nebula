@@ -16,6 +16,9 @@
 			return 0
 	return 1
 
+////////////////////////////////
+// Open SIMULATED
+////////////////////////////////
 /turf/simulated/open
 	name = "open space"
 	icon = 'icons/turf/space.dmi'
@@ -23,6 +26,10 @@
 	density = 0
 	pathweight = 100000 //Seriously, don't try and path over this one numbnuts
 	z_flags = ZM_MIMIC_DEFAULTS | ZM_MIMIC_OVERWRITE | ZM_MIMIC_NO_AO | ZM_ALLOW_ATMOS
+
+/turf/simulated/open/flooded
+	name = "open water"
+	flooded = TRUE
 
 /turf/simulated/open/CanZPass(atom/A, direction)
 	if(locate(/obj/structure/catwalk, src))
@@ -105,9 +112,7 @@
 		return TRUE
 
 	//To lay cable.
-	if(isCoil(C))
-		var/obj/item/stack/cable_coil/coil = C
-		coil.turf_place(src, user)
+	if(isCoil(C) && try_build_cable(C, user))
 		return TRUE
 
 	for(var/atom/movable/M in below)
@@ -121,13 +126,14 @@
 
 //Most things use is_plating to test if there is a cover tile on top (like regular floors)
 /turf/simulated/open/is_plating()
-	return 1
+	return TRUE
 
-/turf/simulated/open/flooded
-	name = "open water"
-	flooded = TRUE
+/turf/simulated/open/can_build_cable()
+	return TRUE
 
-// Whole lot of copypaste below sorry.
+////////////////////////////////
+// Open EXTERIOR
+////////////////////////////////
 /turf/exterior/open
 	name = "open space"
 	icon = 'icons/turf/space.dmi'
@@ -205,9 +211,7 @@
 		return TRUE
 
 	//To lay cable.
-	if(isCoil(C))
-		var/obj/item/stack/cable_coil/coil = C
-		coil.turf_place(src, user)
+	if(isCoil(C) && try_build_cable(C, user))
 		return TRUE
 
 	for(var/atom/movable/M in below)
@@ -218,3 +222,6 @@
 	for(var/atom/movable/M in below)
 		if(M.movable_flags & MOVABLE_FLAG_Z_INTERACT)
 			return M.attack_hand(user)
+
+/turf/exterior/open/can_build_cable()
+	return TRUE

@@ -676,6 +676,7 @@ By design, d1 is the smallest direction and d2 is the highest
 	put_cable(F, user, end_dir, dirn)
 	if(end_dir == DOWN)
 		put_cable(GetBelow(F), user, UP, 0)
+	return TRUE
 
 // called when cable_coil is click on an installed obj/cable
 // or click on a turf that already contains a "node" cable
@@ -694,8 +695,7 @@ By design, d1 is the smallest direction and d2 is the highest
 		return
 
 	if(U == T) //if clicked on the turf we're standing on, try to put a cable in the direction we're facing
-		turf_place(T,user)
-		return
+		return turf_place(T,user)
 
 	var/dirn = get_dir(C, user)
 
@@ -715,7 +715,7 @@ By design, d1 is the smallest direction and d2 is the highest
 					to_chat(user, "There's already a cable at that position.")
 					return
 			put_cable(U,user,0,fdirn)
-			return
+			return TRUE
 
 	// exisiting cable doesn't point at our position, so see if it's a stub
 	else if(C.d1 == 0)
@@ -765,11 +765,12 @@ By design, d1 is the smallest direction and d2 is the highest
 				return
 
 		C.denode()// this call may have disconnected some cables that terminated on the centre of the turf, if so split the powernets.
-		return
+		return TRUE
+
 
 /obj/item/stack/cable_coil/proc/put_cable(turf/F, mob/user, d1, d2)
 	if(!istype(F))
-		return
+		return FALSE
 
 	var/obj/structure/cable/C = new(F)
 	C.cableColor(color)
@@ -792,11 +793,12 @@ By design, d1 is the smallest direction and d2 is the highest
 	if(C.d2 & (C.d2 - 1))// if the cable is layed diagonally, check the others 2 possible directions
 		C.mergeDiagonalsNetworks(C.d2)
 
-	use(1)
+	. = use(1)
 	if (C.shock(user, 50))
 		if (prob(50)) //fail
 			new/obj/item/stack/cable_coil(C.loc, 1, C.color)
 			qdel(C)
+			return FALSE
 
 //////////////////////////////
 // Misc.
