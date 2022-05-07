@@ -228,6 +228,8 @@
 	return BASE_STORAGE_COST(w_class)
 
 /mob/living/carbon/human/apply_fall_damage(var/turf/landing)
+	if(status_flags & GODMODE)
+		return
 	if(species && species.handle_fall_special(src, landing))
 		return
 	var/min_damage = 7
