@@ -188,47 +188,6 @@
 		mob.moving = FALSE
 		return
 
-	var/turf/new_loc = mob.loc
-	if(istype(new_loc))
-		for(var/atom/movable/AM AS_ANYTHING in mob.ret_grab())
-			if(AM != src && AM.loc != mob.loc && !AM.anchored && old_turf.Adjacent(AM))
-				AM.glide_size = mob.glide_size // This is adjusted by grabs again from events/some of the procs below, but doing it here makes it more likely to work with recursive movement.
-				AM.DoMove(get_dir(get_turf(AM), old_turf), mob, TRUE)
-
-	for(var/obj/item/grab/G AS_ANYTHING in mob.get_active_grabs())
-		if(G.assailant_reverse_facing())
-			mob.set_dir(global.reverse_dir[direction])
-		G.assailant_moved()
-		G.adjust_position()
-
-	if(length(mob.grabbed_by))
-		mob.reset_offsets()
-		mob.reset_plane_and_layer()
-
-	if(direction & (UP|DOWN))
-		var/txt_dir = (direction & UP) ? "upwards" : "downwards"
-		old_turf.visible_message(SPAN_NOTICE("[mob] moves [txt_dir]."))
-		for(var/obj/item/grab/G AS_ANYTHING in mob.get_active_grabs())
-			if(!G.affecting)
-				continue
-			var/turf/start = G.affecting.loc
-			var/turf/destination = (direction == UP) ? GetAbove(G.affecting) : GetBelow(G.affecting)
-			if(!start.CanZPass(G.affecting, direction))
-				to_chat(mob, SPAN_WARNING("\The [start] blocked your pulled object!"))
-				qdel(G)
-				continue
-			if(!destination.CanZPass(G.affecting, direction))
-				to_chat(mob, SPAN_WARNING("The [G.affecting] you were pulling bumps up against \the [destination]."))
-				qdel(G)
-				continue
-			for(var/atom/A in destination)
-				if(!A.CanMoveOnto(G.affecting, start, 1.5, direction))
-					to_chat(mob, SPAN_WARNING("\The [A] blocks the [G.affecting] you were pulling."))
-					qdel(G)
-					continue
-			G.affecting.forceMove(destination)
-			continue
-
 	// Sprinting uses up stamina and causes exertion effects.
 	if(MOVING_QUICKLY(mob))
 		mob.last_quick_move_time = world.time
