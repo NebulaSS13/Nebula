@@ -184,7 +184,7 @@
 /datum/storage_ui/default/proc/arrange_item_slots(rows, cols)
 	var/cx = SCREEN_LOC_MOD_FIRST
 	var/cy = SCREEN_LOC_MOD_SECOND + rows
-	boxes.screen_loc = "LEFT+[SCREEN_LOC_MOD_FIRST]:[SCREEN_LOC_MOD_DIVIDED],BOTTOM+[SCREEN_LOC_MOD_SECOND]:[SCREEN_LOC_MOD_DIVIDED] to LEFT+[SCREEN_LOC_MOD_FIRST] + cols]:[SCREEN_LOC_MOD_DIVIDED],BOTTOM+[SCREEN_LOC_MOD_SECOND] + rows]:[SCREEN_LOC_MOD_DIVIDED]"
+	boxes.screen_loc = "LEFT+[SCREEN_LOC_MOD_FIRST]:[SCREEN_LOC_MOD_DIVIDED],BOTTOM+[SCREEN_LOC_MOD_SECOND]:[SCREEN_LOC_MOD_DIVIDED] to LEFT+[SCREEN_LOC_MOD_FIRST + cols]:[SCREEN_LOC_MOD_DIVIDED],BOTTOM+[SCREEN_LOC_MOD_SECOND + rows]:[SCREEN_LOC_MOD_DIVIDED]"
 
 	for(var/obj/O in storage.contents)
 		O.screen_loc = "LEFT+[cx]:[SCREEN_LOC_MOD_DIVIDED],BOTTOM+[cy]:[SCREEN_LOC_MOD_DIVIDED]"
@@ -195,7 +195,7 @@
 			cx = SCREEN_LOC_MOD_FIRST
 			cy--
 
-	closer.screen_loc = "LEFT+[SCREEN_LOC_MOD_FIRST] + cols + 1]:[SCREEN_LOC_MOD_DIVIDED],BOTTOM+[SCREEN_LOC_MOD_SECOND]:[SCREEN_LOC_MOD_DIVIDED]"
+	closer.screen_loc = "LEFT+[SCREEN_LOC_MOD_FIRST + cols + 1]:[SCREEN_LOC_MOD_DIVIDED],BOTTOM+[SCREEN_LOC_MOD_SECOND]:[SCREEN_LOC_MOD_DIVIDED]"
 
 /datum/storage_ui/default/proc/space_orient_objs()
 
@@ -236,7 +236,7 @@
 		storage_start.overlays += stored_end
 
 		O.reset_offsets()
-		O.screen_loc = "LEFT+[SCREEN_LOC_MOD_FIRST]:[round((startpoint+endpoint)/2)+2-O.pixel_x],BOTTOM+[SCREEN_LOC_MOD_SECOND]:[SCREEN_LOC_MOD_DIVIDED]-O.pixel_y]"
+		O.screen_loc = "LEFT+[SCREEN_LOC_MOD_FIRST]:[round((startpoint+endpoint)/2)+2-O.pixel_x],BOTTOM+[SCREEN_LOC_MOD_SECOND]:[SCREEN_LOC_MOD_DIVIDED-O.pixel_y]"
 		O.maptext = ""
 		O.hud_layerise()
 
