@@ -551,17 +551,21 @@
 This function completely restores a damaged organ to perfect condition.
 */
 /obj/item/organ/external/rejuvenate(var/ignore_prosthetic_prefs)
-	damage_state = "00"
 
+	damage_state = "00"
 	status = 0
 	brute_dam = 0
 	burn_dam = 0
 	germ_level = 0
-	pain = 0
 	genetic_degradation = 0
+
 	for(var/datum/wound/wound in wounds)
 		qdel(wound)
 	number_wounds = 0
+
+	dislocated = initial(dislocated)
+	damage = 0
+	pain = 0
 
 	// handle internal organs
 	for(var/obj/item/organ/current_organ in internal_organs)
