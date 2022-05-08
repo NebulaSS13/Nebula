@@ -110,26 +110,48 @@ INITIALIZE_IMMEDIATE(/obj/effect/gas_overlay)
 	var/list/stack_origin_tech = "{'materials':1}" // Research level for stacks.
 
 	// Attributes
-	var/exoplanet_rarity = MAT_RARITY_MUNDANE // How rare is this material generally?
-	var/cut_delay = 0                         // Delay in ticks when cutting through this wall.
-	var/radioactivity                         // Radiation var. Used in wall and object processing to irradiate surroundings.
-	var/ignition_point                        // K, point at which the material catches on fire.
-	var/melting_point = 1800                  // K, walls will take damage if they're next to a fire hotter than this
-	var/boiling_point = 3000                  // K, point that material will become a gas.
-	var/latent_heat = 7000                    // kJ/kg, enthalpy of vaporization
-	var/molar_mass = 0.06                     // kg/mol, 
-	var/brute_armor = 2	                      // Brute damage to a wall is divided by this value if the wall is reinforced by this material.
-	var/burn_armor                            // Same as above, but for Burn damage type. If blank brute_armor's value is used.
-	var/integrity = 150                       // General-use HP value for products.
-	var/opacity = 1                           // Is the material transparent? 0.5< makes transparent walls/doors.
-	var/explosion_resistance = 5              // Only used by walls currently.
-	var/conductive = 1                        // Objects with this var add CONDUCTS to flags on spawn.
-	var/luminescence                          // Does this material glow?
-	var/wall_support_value = 30               // Used for checking if a material can function as a wall support.
-	var/sparse_material_weight                // Ore generation constant for rare materials.
-	var/rich_material_weight                  // Ore generation constant for common materials.
-	var/min_fluid_opacity = FLUID_MIN_ALPHA   // How transparent can fluids be?
-	var/max_fluid_opacity = FLUID_MAX_ALPHA   // How opaque can fluids be?
+	/// How rare is this material generally?
+	var/exoplanet_rarity = MAT_RARITY_MUNDANE 
+    /// Delay in ticks when cutting through this wall.
+	var/cut_delay = 0
+	/// Radiation var. Used in wall and object processing to irradiate surroundings.
+	var/radioactivity
+	/// K, point at which the material catches on fire.
+	var/ignition_point
+	/// K, walls will take damage if they're next to a fire hotter than this
+	var/melting_point = 1800
+	/// K, point that material will become a gas.
+	var/boiling_point = 3000
+	/// kJ/kg, enthalpy of vaporization
+	var/latent_heat = 7000
+	/// kg/mol, 
+	var/molar_mass = 0.06
+	/// Brute damage to a wall is divided by this value if the wall is reinforced by this material.
+	var/brute_armor = 2
+	/// Same as above, but for Burn damage type. If blank brute_armor's value is used.
+	var/burn_armor
+	/// General-use HP value for products.
+	var/integrity = 150
+	/// Is the material transparent? 0.5< makes transparent walls/doors.
+	var/opacity = 1
+	/// Only used by walls currently.
+	var/explosion_resistance = 5
+	/// Objects with this var add CONDUCTS to flags on spawn.
+	var/conductive = 1
+	/// Does this material glow?
+	var/luminescence
+	/// Used for checking if a material can function as a wall support.
+	var/wall_support_value = 30
+	/// Ore generation constant for rare materials.
+	var/sparse_material_weight                
+	/// Ore generation constant for common materials.
+	var/rich_material_weight                  
+	/// How transparent can fluids be?
+	var/min_fluid_opacity = FLUID_MIN_ALPHA   
+	/// How opaque can fluids be?
+	var/max_fluid_opacity = FLUID_MAX_ALPHA
+	/// Point at which the fluid will proc turf interaction logic. Workaround for mops being ruined forever by 1u of anything else being added.
+	var/turf_touch_threshold = FLUID_QDEL_POINT 
 
 	// Damage values.
 	var/hardness = MAT_VALUE_HARD            // Prob of wall destruction by hulk, used for edge damage in weapons.
@@ -459,7 +481,7 @@ INITIALIZE_IMMEDIATE(/obj/effect/gas_overlay)
 
 /decl/material/proc/touch_turf(var/turf/T, var/amount, var/datum/reagents/holder) // Cleaner cleaning, lube lubbing, etc, all go here
 
-	if(REAGENT_VOLUME(holder, type) < FLUID_QDEL_POINT)
+	if(REAGENT_VOLUME(holder, type) < turf_touch_threshold)
 		return
 
 	if(istype(T, /turf/simulated))
