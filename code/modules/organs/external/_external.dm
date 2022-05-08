@@ -58,7 +58,6 @@
 	// Joint/state stuff.
 	var/joint = "joint"                // Descriptive string used in dislocation.
 	var/amputation_point               // Descriptive string used in amputation.
-	var/dislocated = 0                 // If you target a joint, you can dislocate the limb, causing temporary damage to the organ. Boolean.
 	var/encased                        // Needs to be opened with a saw to access the organs.
 	var/artery_name = "artery"         // Flavour text for cartoid artery, aorta, etc.
 	var/arterial_bleed_severity = 1    // Multiplier for bleeding in a limb.
@@ -368,12 +367,12 @@
 	return all_limbs
 
 /obj/item/organ/external/proc/is_dislocated()
-	return (dislocated > 0) || is_parent_dislocated() //if any parent is dislocated, we are considered dislocated as well
+	return (status & ORGAN_DISLOCATED) || is_parent_dislocated() //if any parent is dislocated, we are considered dislocated as well
 
 /obj/item/organ/external/proc/is_parent_dislocated()
 	var/obj/item/organ/external/O = parent
 	while(O && (O.limb_flags & ORGAN_FLAG_CAN_DISLOCATE))
-		if(O.dislocated > 0)
+		if(O.status & ORGAN_DISLOCATED)
 			return TRUE
 		O = O.parent
 	return FALSE
@@ -387,7 +386,7 @@
 	if(!(limb_flags & ORGAN_FLAG_CAN_DISLOCATE))
 		return
 
-	dislocated = TRUE
+	status |= ORGAN_DISLOCATED
 	if(owner)
 		if(owner.can_feel_pain(src))
 			add_pain(20)
@@ -398,7 +397,7 @@
 	if(!(limb_flags & ORGAN_FLAG_CAN_DISLOCATE))
 		return
 
-	dislocated = FALSE
+	status &= (~ORGAN_DISLOCATED)
 	if(owner)
 		if(!skip_pain && owner.can_feel_pain(src))
 			add_pain(20)
@@ -1281,7 +1280,7 @@ Note that amputating the affected organ does in fact remove the infection from t
 	slowdown = R.movement_slowdown
 	max_damage *= R.hardiness
 	min_broken_damage *= R.hardiness
-	dislocated = 0
+	status &= (~ORGAN_DISLOCATED)
 	limb_flags &= (~ORGAN_FLAG_CAN_DISLOCATE)
 	remove_splint()
 	update_icon(1)

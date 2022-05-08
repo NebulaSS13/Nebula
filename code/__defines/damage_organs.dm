@@ -49,6 +49,7 @@
 #define ORGAN_PROSTHETIC BITFLAG(11) // The organ is prosthetic. Changes numerous behaviors, search BP_IS_PROSTHETIC for checks.
 #define ORGAN_BRITTLE    BITFLAG(12) // The organ takes additional blunt damage. If robotic, cannot be repaired through normal means.
 #define ORGAN_CRYSTAL    BITFLAG(13) // The organ does not suffer laser damage, but shatters on droplimb.
+#define ORGAN_DISLOCATED BITFLAG(14)
 
 // Organ flag defines.
 #define ORGAN_FLAG_CAN_AMPUTATE   BITFLAG(0) // The organ can be amputated.
