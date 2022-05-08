@@ -30,7 +30,7 @@
 	return 1
 
 /obj/item/shield
-	name = "shield"
+	name = "abstract shield"
 	var/base_block_chance = 60
 
 /obj/item/shield/handle_shield(mob/user, var/damage, atom/damage_source = null, mob/attacker = null, var/def_zone = null, var/attack_text = "the attack")
@@ -111,7 +111,7 @@
 
 /obj/item/shield/buckler
 	name = "buckler"
-	desc = "A wooden buckler used to block sharp things from entering your body back in the day.."
+	desc = "A wooden buckler used to block sharp things from entering your body back in the day."
 	icon = 'icons/obj/items/shield/buckler.dmi'
 	icon_state = "buckler"
 	slot_flags = SLOT_BACK
