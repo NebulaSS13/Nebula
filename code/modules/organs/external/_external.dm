@@ -385,6 +385,8 @@
 		internal_organs_size += org.get_storage_cost()
 
 /obj/item/organ/external/proc/dislocate()
+	if(owner && (owner.status_flags & GODMODE))
+		return
 	if(dislocated == -1)
 		return
 
