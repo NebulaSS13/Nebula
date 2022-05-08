@@ -52,7 +52,7 @@
 		return FALSE
 
 	if(!assailant.skill_check(SKILL_COMBAT, SKILL_ADEPT))
-		to_chat(assailant, SPAN_WARNING("You attempt clumsily but struggle to do a proper jointlock with \the [affecting]'s [O.name]!"))
+		to_chat(assailant, SPAN_WARNING("You clumsily attempt to jointlock \the [affecting]'s [O.name], but fail!"))
 		return FALSE
 
 	assailant.visible_message(SPAN_DANGER("\The [assailant] begins to [pick("bend", "twist")] \the [affecting]'s [O.name] into a jointlock!"))
@@ -85,7 +85,7 @@
 		return  FALSE
 
 	if(!assailant.skill_check(SKILL_COMBAT, SKILL_ADEPT))
-		to_chat(assailant, SPAN_WARNING("You attempt clumsily but can't seem to dislocate \the [affecting]'s [O.joint]!"))
+		to_chat(assailant, SPAN_WARNING("You clumsily attempt to dislocate \the [affecting]'s [O.name], but fail!"))
 		return FALSE
 
 	if(!O.is_dislocated() && (O.limb_flags & ORGAN_FLAG_CAN_DISLOCATE))
