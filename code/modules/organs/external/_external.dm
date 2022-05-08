@@ -566,7 +566,6 @@ This function completely restores a damaged organ to perfect condition.
 		qdel(wound)
 	number_wounds = 0
 
-	dislocated = initial(dislocated)
 	damage = 0
 	pain = 0
 
