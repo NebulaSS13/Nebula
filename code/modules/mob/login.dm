@@ -91,7 +91,7 @@
 
 	client.update_skybox(1)
 
-	if(machine)
+	if(istype(machine))
 		machine.on_user_login(src)
 
 /mob/proc/hud_reset(var/full_reset = FALSE)
