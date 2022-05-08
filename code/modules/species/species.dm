@@ -25,7 +25,8 @@ var/global/const/DEFAULT_SPECIES_HEALTH = 200
 		/decl/blood_type/bminus,
 		/decl/blood_type/abplus,
 		/decl/blood_type/abminus,
-		/decl/blood_type/oplus
+		/decl/blood_type/oplus,
+		/decl/blood_type/ominus
 	)
 
 	var/flesh_color = "#ffc896"             // Pink.
