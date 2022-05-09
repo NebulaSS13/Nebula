@@ -84,10 +84,6 @@
 		/obj/item/chems/spray/waterflower = 1
 	)
 
-/obj/machinery/vending/hydroseeds/vend(var/datum/stored_items/vending_products/R, mob/user)
-	..()
-	flick("[icon_state]-shelf[rand(3)]", src)
-
 /obj/machinery/vending/hydroseeds/generic
 	icon_state = "seeds_generic"
 	icon_vend = "seeds_generic-vend"
