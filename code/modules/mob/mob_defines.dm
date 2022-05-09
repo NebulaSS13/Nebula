@@ -43,8 +43,6 @@
 	var/obj/screen/purged = null
 	var/obj/screen/internals = null
 	var/obj/screen/oxygen = null
-	var/obj/screen/i_select = null
-	var/obj/screen/m_select = null
 	var/obj/screen/toxin = null
 	var/obj/screen/fire = null
 	var/obj/screen/bodytemp = null
