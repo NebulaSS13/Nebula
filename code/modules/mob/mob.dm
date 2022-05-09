@@ -28,7 +28,6 @@
 		client.screen = list()
 	if(mind && mind.current == src)
 		spellremove(src)
-	teleop = null
 	ghostize()
 	..()
 	return QDEL_HINT_HARDDEL

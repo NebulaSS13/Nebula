@@ -121,7 +121,7 @@
 	LAZYCLEARLIST(implants)
 
 	if(owner)
-		owner.bad_external_organs -= src
+		LAZYREMOVE(owner.bad_external_organs, src)
 
 /obj/item/organ/external/set_species(specie_name)
 	. = ..()
@@ -1560,7 +1560,7 @@ Note that amputating the affected organ does in fact remove the infection from t
 /obj/item/organ/external/add_ailment(var/datum/ailment/ailment)
 	. = ..()
 	if(. && owner)
-		owner.bad_external_organs |= src
+		LAZYDISTINCTADD(owner.bad_external_organs, src)
 
 /obj/item/organ/external/die() //External organs dying on a dime causes some real issues in combat
 	if(!BP_IS_PROSTHETIC(src) && !BP_IS_CRYSTAL(src))

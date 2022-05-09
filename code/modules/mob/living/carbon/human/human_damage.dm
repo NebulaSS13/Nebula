@@ -327,7 +327,7 @@ This function restores all organs.
 		var/obj/item/organ/external/current_organ = get_organ(bodypart)
 		if(istype(current_organ))
 			current_organ.rejuvenate(ignore_prosthetic_prefs)
-	bad_external_organs.Cut() // otherwise hanging refs will prevent gc after rejuv
+	recheck_bad_external_organs()
 	verbs -= /mob/living/carbon/human/proc/undislocate
 
 /mob/living/carbon/human/proc/HealDamage(zone, brute, burn)
