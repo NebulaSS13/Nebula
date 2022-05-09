@@ -23,6 +23,17 @@
 	var/const/WIRE_RADIO_RECEIVE = 8		//Allows Pulsed(1) to call Activate()
 	var/const/WIRE_RADIO_PULSE = 16		//Allows Pulse(1) to send a radio message
 
+/obj/item/assembly/Destroy()
+	if(!QDELETED(holder))
+		if(holder.a_left == src)
+			holder.a_left = null
+		if(holder.a_right == src)
+			holder.a_right = null
+		QDEL_NULL(holder)
+	else
+		holder = null
+	return ..()
+
 /obj/item/assembly/proc/activate()									//What the device does when turned on
 	return
 

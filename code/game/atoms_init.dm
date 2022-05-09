@@ -89,7 +89,7 @@
 	if (!follow_repository.excluded_subtypes[type] && follow_repository.followed_subtypes_tcache[type])
 		follow_repository.add_subject(src)
 
-	if (virtual_mob && ispath(initial(virtual_mob)))
+	if(ispath(virtual_mob))
 		virtual_mob = new virtual_mob(get_turf(src), src)
 
 	// Fire Entered events for freshly created movables.
@@ -104,9 +104,8 @@
 	if (bound_overlay)
 		QDEL_NULL(bound_overlay)
 
-	if(virtual_mob && !ispath(virtual_mob))
-		qdel(virtual_mob)
-		virtual_mob = null
+	if(ismob(virtual_mob))
+		QDEL_NULL(virtual_mob)
 
 #ifdef DISABLE_DEBUG_CRASH
 	// meh do nothing. we know what we're doing. pro engineers.
@@ -121,6 +120,6 @@
 	forceMove(null)
 
 	vis_locs = null //clears this atom out of all vis_contents
-	vis_contents.Cut()
+	clear_vis_contents(src)
 
 	. = ..() // called last so that events are unregistered before the parent call
