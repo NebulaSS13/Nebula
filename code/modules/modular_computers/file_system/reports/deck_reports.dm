@@ -6,10 +6,7 @@
 	var/datum/report_field/people/leader     //Give these a special name for easier access.
 	var/datum/report_field/people/manifest
 	var/datum/report_field/planned_depart
-
-/datum/computer_file/report/flight_plan/New()
-	..()
-	set_access(null, access_bridge)
+	write_access = list(access_bridge)
 
 /datum/computer_file/report/flight_plan/Destroy()
 	leader = null
@@ -31,11 +28,8 @@
 /datum/computer_file/report/recipient/shuttle
 	var/datum/report_field/shuttle
 	var/datum/report_field/mission
-	var/access_shuttle = 0 //Set to 1 to give the shuttle's logging access as an access_edit pattern.
-
-/datum/computer_file/report/recipient/shuttle/New()
-	..()
-	set_access(null, access_bridge)
+	var/access_shuttle = 0 //Set to 1 to give the shuttle's logging access write permissions when created
+	write_access = list(access_bridge)
 
 /datum/computer_file/report/recipient/shuttle/Destroy()
 	shuttle = null
@@ -52,10 +46,7 @@
 /datum/computer_file/report/recipient/shuttle/damage
 	form_name = "DC243"
 	title = "Post-flight Damage Assessment"
-
-/datum/computer_file/report/recipient/shuttle/damage/New()
-	..()
-	set_access(null, access_cargo, override = 0)
+	write_access = list(list(access_bridge, access_cargo))
 
 /datum/computer_file/report/recipient/shuttle/damage/generate_fields()
 	..()
@@ -68,10 +59,7 @@
 /datum/computer_file/report/recipient/shuttle/fuel
 	form_name = "DC12"
 	title = "Post-flight Refueling Report"
-
-/datum/computer_file/report/recipient/shuttle/fuel/New()
-	..()
-	set_access(null, access_cargo, override = 0)
+	write_access = list(list(access_bridge, access_cargo))
 
 /datum/computer_file/report/recipient/shuttle/fuel/generate_fields()
 	..()
@@ -83,10 +71,7 @@
 /datum/computer_file/report/recipient/shuttle/atmos
 	form_name = "DC245"
 	title = "Post-flight Atmospherics Assessment"
-
-/datum/computer_file/report/recipient/shuttle/atmos/New()
-	..()
-	set_access(null, access_cargo, override = 0)
+	write_access = list(list(access_bridge, access_cargo))
 
 /datum/computer_file/report/recipient/shuttle/atmos/generate_fields()
 	..()
@@ -98,10 +83,7 @@
 /datum/computer_file/report/recipient/shuttle/gear
 	form_name = "DC248b"
 	title = "Post-flight Emergency Supply Inventory; Summary Version"
-
-/datum/computer_file/report/recipient/shuttle/gear/New()
-	..()
-	set_access(null, access_cargo, override = 0)
+	write_access = list(list(access_bridge, access_cargo))
 
 /datum/computer_file/report/recipient/shuttle/gear/generate_fields()
 	..()

@@ -47,14 +47,6 @@
 			return FALSE
 	return TRUE
 
-//Checks if the access (constant or list) is contained in one of the entries of access_patterns, a list of lists.
-/proc/has_access_pattern(list/access_patterns, access)
-	if(!islist(access))
-		access = list(access)
-	for(var/access_pattern in access_patterns)
-		if(has_access(access_pattern, access))
-			return 1
-
 // Used for retrieving required access information, if available
 /atom/movable/proc/get_req_access()
 	return null

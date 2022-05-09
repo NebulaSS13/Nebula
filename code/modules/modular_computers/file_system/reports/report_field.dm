@@ -21,32 +21,18 @@
 	. = ..()
 
 //Access stuff. Can be given access constants or lists. See report access procs for documentation.
-/datum/report_field/proc/set_access(read_access, write_access, override = 1, recursive = FALSE, access_group = 1)
+//For fields, the recursive argument indicates whether this access set is being propogated onto the whole report at once or not.
+/datum/report_field/proc/set_access(read_access, write_access, recursive = FALSE)
 	if(recursive && !can_mod_access)
 		return
 	if(read_access)
 		if(!islist(read_access))
 			read_access = list(read_access)
-		if(override)
-			src.read_access = read_access
-		else
-			if(access_group && access_group <= src.read_access.len)
-				if(!islist(src.read_access[access_group]))
-					src.read_access[access_group] = list(src.read_access[access_group])
-				src.read_access[access_group] += read_access
-			else
-				src.read_access += list(read_access)
+		src.read_access = read_access
 	if(write_access)
 		if(!islist(write_access))
 			write_access = list(write_access)
-		if(override)
-			src.write_access = write_access
-		else
-			if(access_group && access_group <= src.write_access.len)
-				if(!islist(src.write_access[access_group]))
-					src.write_access[access_group] = list(src.write_access[access_group])
-			else
-				src.write_access[access_group] += write_access
+		src.write_access = write_access
 
 // Analogous to get_file_perms on reports. Read access is required to have write access.
 /datum/report_field/proc/get_perms(accesses, mob/user)

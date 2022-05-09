@@ -185,11 +185,21 @@
 		prototype_shuttle = selected_shuttle
 		report_prototypes = list()
 		for(var/report_type in subtypesof(/datum/computer_file/report/recipient/shuttle))
-			var/datum/computer_file/report/recipient/shuttle/new_report = new report_type
-			if(new_report.access_shuttle)
-				new_report.set_access(null, selected_shuttle.logging_access, override = 0)
-			report_prototypes += new_report
+			report_prototypes += create_report(report_type, selected_shuttle)
 	return 1
+
+/datum/nano_module/deck_management/proc/create_report(report_type, datum/shuttle/given_shuttle)
+	var/datum/computer_file/report/recipient/shuttle/new_report = new report_type
+	if(new_report.access_shuttle && given_shuttle.logging_access)
+		var/old_access = new_report.write_access?.Copy()
+		var/new_access = list()
+		for(var/group in old_access) // We add logging_access as an OR option to every AND requirement
+			var/new_group = list()
+			new_group += group // this listifies it if it was not already a list
+			new_group |= given_shuttle.logging_access
+			new_access += list(new_group)
+		new_report.set_access(null, new_access, TRUE)
+	return new_report
 
 /datum/nano_module/deck_management/proc/set_mission(mission_ID)
 	var/datum/shuttle_log/my_log = SSshuttle.shuttle_logs[selected_shuttle]
@@ -256,8 +266,7 @@
 				if(selected_mission.flight_plan)
 					selected_report = selected_mission.flight_plan.clone()//We always make a new one to buffer changes until submitted.
 				else
-					selected_report = new /datum/computer_file/report/flight_plan
-					selected_report.set_access(null, selected_shuttle.logging_access, override = 0)
+					selected_report = create_report(/datum/computer_file/report/flight_plan, selected_shuttle)
 			else
 				if(selected_mission.stage in list(SHUTTLE_MISSION_PLANNED, SHUTTLE_MISSION_QUEUED))
 					return 1 //Hold your horses until the mission is started on these reports.
