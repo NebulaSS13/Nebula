@@ -1,5 +1,0 @@
-author: tag if you want to specify another name or several people. -->
-delete-after: true
-changes:
-  - bugfix: Godmode human now properly ignore fall damage, shock, and dislocation
-      effects.
