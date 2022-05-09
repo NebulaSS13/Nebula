@@ -112,6 +112,7 @@
 
 /decl/material/liquid/ethanol/beer
 	name = "beer"
+	codex_name = "plain beer"
 	lore_text = "An alcoholic beverage made from malted grains, hops, yeast, and water."
 	taste_description = "piss water"
 	color = "#ffd300"
@@ -125,6 +126,7 @@
 
 /decl/material/liquid/ethanol/beer/good
 	uid = "chem_ethanol_beer_good"
+	codex_name = "premium beer"
 	taste_description = "beer"
 
 /decl/material/liquid/ethanol/beer/affect_ingest(var/mob/living/M, var/alien, var/removed, var/datum/reagents/holder)
@@ -173,7 +175,16 @@
 
 //Base type for alchoholic drinks containing coffee
 /decl/material/liquid/ethanol/coffee
-	abstract_type = /decl/material/liquid/ethanol/coffee
+	name = "coffee liqueur"
+	lore_text = "A widely known, Mexican coffee-flavoured liqueur. In production since 1936!"
+	taste_description = "spiked coffee"
+	taste_mult = 1.1
+	color = "#4c3100"
+	strength = 15
+	exoplanet_rarity = MAT_RARITY_NOWHERE
+	uid = "chem_ethanol_coffee"
+	glass_name = "coffee liqueur"
+	glass_desc = "Guaranteed to perk you up."
 	overdose = 45
 
 /decl/material/liquid/ethanol/coffee/affect_ingest(var/mob/living/M, var/alien, var/removed, var/datum/reagents/holder)
@@ -191,19 +202,6 @@
 /decl/material/liquid/ethanol/coffee/affect_overdose(var/mob/living/M, var/alien, var/datum/reagents/holder)
 	ADJ_STATUS(M, STAT_JITTER, 5)
 
-/decl/material/liquid/ethanol/coffee/kahlua
-	name = "coffee liqueur"
-	lore_text = "A widely known, Mexican coffee-flavoured liqueur. In production since 1936!"
-	taste_description = "spiked coffee"
-	taste_mult = 1.1
-	color = "#4c3100"
-	strength = 15
-	exoplanet_rarity = MAT_RARITY_NOWHERE
-	uid = "chem_ethanol_coffee"
-
-	glass_name = "RR coffee liquor"
-	glass_desc = "DAMN, THIS THING LOOKS ROBUST"
-
 /decl/material/liquid/ethanol/melonliquor
 	name = "melon liqueur"
 	lore_text = "A relatively sweet and fruity 46 proof liqueur."
@@ -217,7 +215,7 @@
 	glass_desc = "A relatively sweet and fruity 46 proof liquor."
 
 /decl/material/liquid/ethanol/rum
-	name = "rum"
+	name = "dark rum"
 	lore_text = "Yohoho and all that."
 	taste_description = "spiked butterscotch"
 	taste_mult = 1.1
@@ -293,6 +291,7 @@
 
 /decl/material/liquid/ethanol/vodka
 	name = "vodka"
+	codex_name = "plain vodka"
 	lore_text = "Number one drink AND fueling choice for Independents around the galaxy."
 	taste_description = "grain alcohol"
 	color = "#0064c8" // rgb: 0, 100, 200
@@ -305,6 +304,7 @@
 
 /decl/material/liquid/ethanol/vodka/premium
 	name = "premium vodka"
+	codex_name = null
 	lore_text = "Premium distilled vodka imported directly from the Gilgamesh Colonial Confederation."
 	taste_description = "clear kvass"
 	color = "#aaddff" // rgb: 170, 221, 255 - very light blue.
@@ -313,7 +313,7 @@
 	uid = "chem_ethanol_premiumvodka"
 
 /decl/material/liquid/ethanol/whiskey
-	name = "whiskey"
+	name = "malt whiskey"
 	lore_text = "A superb and well-aged single-malt whiskey. Damn."
 	taste_description = "molasses"
 	color = "#4c3100"
@@ -325,7 +325,7 @@
 	glass_desc = "The silky, smokey whiskey goodness inside the glass makes the drink look very classy."
 
 /decl/material/liquid/ethanol/wine
-	name = "wine"
+	name = "red wine"
 	lore_text = "An premium alchoholic beverage made from distilled grape juice."
 	taste_description = "bitter sweetness"
 	color = "#7e4043" // rgb: 126, 64, 67
@@ -333,7 +333,7 @@
 	exoplanet_rarity = MAT_RARITY_NOWHERE
 	uid = "chem_ethanol_wine"
 
-	glass_name = "wine"
+	glass_name = "red wine"
 	glass_desc = "A very classy looking drink."
 
 /decl/material/liquid/ethanol/wine/premium

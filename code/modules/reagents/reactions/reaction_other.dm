@@ -32,7 +32,7 @@
 	mix_message = "The solution thickens slowly into a glossy liquid."
 
 /decl/chemical_reaction/anfo
-	name = "ANFO"
+	name = "Fertilizer ANFO"
 	result = /decl/material/liquid/anfo
 	required_reagents = list(
 		/decl/material/liquid/fertilizer = 20,
@@ -62,7 +62,7 @@
 	mix_message = "The solution gives off the eye-watering reek of spilled fertilizer and petroleum."
 
 /decl/chemical_reaction/crystal_agent
-	name = "Crystallizing agent"
+	name = "Crystallizing Agent"
 	result = /decl/material/liquid/crystal_agent
 	required_reagents = list(/decl/material/solid/silicon = 1, /decl/material/solid/metal/tungsten = 1, /decl/material/liquid/acid/polyacid = 1)
 	minimum_temperature = 150 CELSIUS

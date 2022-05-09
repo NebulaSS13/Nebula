@@ -99,7 +99,7 @@
 	return
 
 /spell/aoe_turf/conjure/forcewall/lesser
-	name = "Shield"
+	name = "Force Shield"
 	desc = "Allows you to pull up a shield to protect yourself and allies from incoming threats"
 
 	charge_max = 300

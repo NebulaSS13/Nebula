@@ -300,6 +300,7 @@
 
 /decl/material/gas/hydrogen
 	name = "hydrogen"
+	codex_name = "elemental hydrogen"
 	uid = "gas_hydrogen"
 	lore_text = "A colorless, flammable gas."
 	flags = MAT_FLAG_FUSION_FUEL
@@ -320,6 +321,7 @@
 
 /decl/material/gas/hydrogen/tritium
 	name = "tritium"
+	codex_name = null
 	uid = "gas_tritium"
 	lore_text = "A radioactive isotope of hydrogen. Useful as a fusion reactor fuel material."
 	mechanics_text = "Tritium is useable as a fuel in some forms of portable generator. It can also be converted into a fuel rod suitable for a R-UST fusion plant injector by using a fuel compressor. It fuses hotter than deuterium but is correspondingly more unstable."
@@ -332,6 +334,7 @@
 
 /decl/material/gas/hydrogen/deuterium
 	name = "deuterium"
+	codex_name = null
 	uid = "gas_deuterium"
 	lore_text = "One of the two stable isotopes of hydrogen; also known as heavy hydrogen. Useful as a chemically synthesised fusion reactor fuel material."
 	mechanics_text = "Deuterium can be converted into a fuel rod suitable for a R-UST fusion plant injector by using a fuel compressor. It is the most 'basic' fusion fuel."

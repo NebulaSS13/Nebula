@@ -42,33 +42,30 @@ I said no!
 	)
 	result = /obj/item/chems/food/classichotdog
 
-/decl/recipe/jellydonut
-	reagents = list(/decl/material/liquid/drink/juice/berry = 5, /decl/material/liquid/nutriment/sugar = 5)
-	items = list(
-		/obj/item/chems/food/dough
-	)
-	result = /obj/item/chems/food/donut/jelly
-
-/decl/recipe/jellydonut/cherry
-	reagents = list(/decl/material/liquid/nutriment/cherryjelly = 5, /decl/material/liquid/nutriment/sugar = 5)
-	items = list(
-		/obj/item/chems/food/dough
-	)
-	result = /obj/item/chems/food/donut/cherryjelly
-
 /decl/recipe/donut
+	display_name = "Plain Donut"
 	reagents = list(/decl/material/liquid/nutriment/sugar = 5)
 	items = list(
 		/obj/item/chems/food/dough
 	)
-	result = /obj/item/chems/food/donut/normal
+	result = /obj/item/chems/food/donut
 
-/decl/recipe/meatburger
+/decl/recipe/donut/jelly
+	display_name = "Berry Jelly Donut"
+	reagents = list(/decl/material/liquid/drink/juice/berry = 5, /decl/material/liquid/nutriment/sugar = 5)
+	result = /obj/item/chems/food/donut/jelly
+
+/decl/recipe/donut/jelly/cherry
+	display_name = "Cherry Jelly Donut"
+	reagents = list(/decl/material/liquid/nutriment/cherryjelly = 5, /decl/material/liquid/nutriment/sugar = 5)
+
+/decl/recipe/plainburger
+	display_name = "plain burger"
 	items = list(
 		/obj/item/chems/food/bun,
 		/obj/item/chems/food/cutlet
 	)
-	result = /obj/item/chems/food/meatburger
+	result = /obj/item/chems/food/burger
 
 /decl/recipe/brainburger
 	items = list(
@@ -133,6 +130,7 @@ I said no!
 	result = /obj/item/chems/food/bunbun
 
 /decl/recipe/hotdog
+	display_name = "plain hotdog"
 	items = list(
 		/obj/item/chems/food/bun,
 		/obj/item/chems/food/sausage
@@ -149,6 +147,7 @@ I said no!
 	result = /obj/item/chems/food/pancakesblu
 
 /decl/recipe/pancakes
+	display_name = "plain pancakes"
 	reagents = list(/decl/material/liquid/nutriment/batter = 20)
 	result = /obj/item/chems/food/pancakes
 
@@ -168,12 +167,14 @@ I said no!
 		warm_up(being_cooked)
 
 /decl/recipe/donkpocket/rawmeatball
+	display_name = "Raw Donk-Pocket"
 	items = list(
 		/obj/item/chems/food/doughslice,
 		/obj/item/chems/food/rawmeatball
 	)
 
 /decl/recipe/donkpocket/warm
+	display_name = "Warm Donk-Pocket"
 	reagents = list() //This is necessary since this is a child object of the above recipe and we don't want donk pockets to need flour
 	items = list(
 		/obj/item/chems/food/donkpocket
@@ -196,6 +197,7 @@ I said no!
 			return list(being_cooked)
 
 /decl/recipe/meatbread
+	display_name = "plain meatbread loaf"
 	items = list(
 		/obj/item/chems/food/dough = 2,
 		/obj/item/chems/food/cutlet = 2,
@@ -349,6 +351,7 @@ I said no!
 	result = /obj/item/chems/food/popcorn
 
 /decl/recipe/cookie
+	display_name = "plain cookie"
 	reagents = list(/decl/material/liquid/nutriment/batter/cakebatter = 5, /decl/material/liquid/nutriment/coco = 5)
 	reagent_mix = REAGENT_REPLACE // no raw batter
 	result = /obj/item/chems/food/cookie
@@ -491,14 +494,14 @@ I said no!
 
 /decl/recipe/spellburger
 	items = list(
-		/obj/item/chems/food/meatburger,
+		/obj/item/chems/food/burger,
 		/obj/item/clothing/head/wizard,
 	)
 	result = /obj/item/chems/food/spellburger
 
 /decl/recipe/bigbiteburger
 	items = list(
-		/obj/item/chems/food/meatburger,
+		/obj/item/chems/food/burger,
 		/obj/item/chems/food/meat = 2,
 		/obj/item/chems/food/egg,
 	)
@@ -540,6 +543,7 @@ I said no!
 	result = /obj/item/chems/food/fishandchips
 
 /decl/recipe/bread
+	display_name = "loaf of bread"
 	items = list(
 		/obj/item/chems/food/dough = 2,
 		/obj/item/chems/food/egg
@@ -548,6 +552,7 @@ I said no!
 	result = /obj/item/chems/food/sliceable/bread
 
 /decl/recipe/sandwich
+	display_name = "plain sandwich"
 	items = list(
 		/obj/item/chems/food/meatsteak,
 		/obj/item/chems/food/slice/bread = 2,
@@ -720,6 +725,7 @@ I said no!
 /decl/recipe/bloodsoup
 	reagents = list(/decl/material/liquid/blood = 30)
 	result = /obj/item/chems/food/bloodsoup
+	hidden_from_codex = TRUE
 
 /decl/recipe/chocolateegg
 	items = list(
@@ -730,6 +736,7 @@ I said no!
 	result = /obj/item/chems/food/chocolateegg
 
 /decl/recipe/sausage
+	display_name = "plain sausage"
 	items = list(
 		/obj/item/chems/food/rawmeatball,
 		/obj/item/chems/food/rawcutlet,
@@ -777,6 +784,7 @@ I said no!
 	result = /obj/item/chems/food/plumphelmetbiscuit
 
 /decl/recipe/plumphelmetbiscuitvegan
+	display_name = "Vegan Plump Biscuit"
 	fruit = list("plumphelmet" = 1)
 	reagents = list(/decl/material/liquid/nutriment/flour = 10, /decl/material/liquid/water = 10)
 	result = /obj/item/chems/food/plumphelmetbiscuit
@@ -854,6 +862,7 @@ I said no!
 	result = /obj/item/chems/food/taco
 
 /decl/recipe/bun
+	display_name = "plain bun"
 	items = list(
 		/obj/item/chems/food/dough
 	)
@@ -878,6 +887,7 @@ I said no!
 	result = /obj/item/chems/food/cutlet
 
 /decl/recipe/fries
+	display_name = "potato chips"
 	items = list(
 		/obj/item/chems/food/rawsticks
 	)

@@ -43,7 +43,7 @@
 
 //batter reaction as food precursor, for things that don't use pliable dough precursor.
 /decl/chemical_reaction/recipe/batter
-	name = "Batter"
+	name = "Plain Batter"
 	result = /decl/material/liquid/nutriment/batter
 	required_reagents = list(/decl/material/liquid/nutriment/protein/egg = 3, /decl/material/liquid/nutriment/flour = 5, /decl/material/liquid/drink/milk = 5)
 	result_amount = 10

@@ -4,6 +4,7 @@
 		/decl/material/liquid/water = 1
 	)
 	name = "water"
+	codex_name = "water ice"
 	taste_description = "ice"
 	ore_spread_chance = 25
 	ore_scan_icon = "mineral_common"
@@ -29,6 +30,7 @@
 	
 /decl/material/solid/ice/aspium
 	name = "aspium"
+	codex_name = null
 	heating_products = list(
 		/decl/material/liquid/fuel/hydrazine = 0.3,
 		/decl/material/liquid/water = 0.7
@@ -40,6 +42,7 @@
 
 /decl/material/solid/ice/lukrite
 	name = "lukrite"
+	codex_name = null
 	heating_products = list(
 		/decl/material/solid/sulfur = 0.4,
 		/decl/material/liquid/water = 0.2,
@@ -52,6 +55,7 @@
 
 /decl/material/solid/ice/rubenium
 	name = "rubenium"
+	codex_name = null
 	heating_products = list(
 		/decl/material/solid/metal/radium  = 0.4,
 		/decl/material/liquid/water = 0.4,
@@ -64,6 +68,7 @@
 
 /decl/material/solid/ice/trigarite
 	name = "trigarite"
+	codex_name = null
 	heating_products = list(
 		/decl/material/liquid/acid/hydrochloric = 0.2,
 		/decl/material/liquid/water             = 0.2,
@@ -76,6 +81,7 @@
 
 /decl/material/solid/ice/ediroite
 	name = "ediroite"
+	codex_name = null
 	heating_products = list(
 		/decl/material/gas/ammonia  = 0.4,
 		/decl/material/liquid/water = 0.2,
@@ -87,7 +93,8 @@
 	rich_material_weight = 16
 
 /decl/material/solid/ice/hydrogen
-	name = "hydrogen"
+	name = "hydrogen ice"
+	codex_name = null
 	uid = "solid_ice_hydrogen"
 	heating_products = list(
 		/decl/material/gas/hydrogen = 0.2,
@@ -105,13 +112,15 @@
 
 //Hydrates gas are basically bubbles of gas trapped in water ice lattices
 /decl/material/solid/ice/hydrate
+	codex_name = null
 	uid = "solid_hydrate"
 	heating_point = T0C //the melting point is always water's
+	abstract_type = /decl/material/solid/ice/hydrate
 
 //Little helper macro, since hydrates are all basically the same
 // DISPLAY_NAME is needed because of compounds with white spaces in their names
 #define DECLARE_HYDRATE_DNAME_PATH(PATH, NAME, DISPLAY_NAME)                \
-/decl/material/solid/ice/hydrate/##NAME/uid = "solid_hydrate_##NAME";           \
+/decl/material/solid/ice/hydrate/##NAME/uid = "solid_hydrate_##NAME";       \
 /decl/material/solid/ice/hydrate/##NAME/Initialize(){                       \
 	name = "[##DISPLAY_NAME] hydrate";                                      \
 	heating_products = list(PATH = 0.2, /decl/material/liquid/water = 0.8); \

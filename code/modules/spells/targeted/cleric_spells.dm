@@ -33,6 +33,7 @@
 	return "[src] will now heal more."
 
 /spell/targeted/heal_target/tower
+	desc = "Allows you to heal yourself, or others, for a slight amount."
 	charge_max = 2
 
 /spell/targeted/heal_target/touch
@@ -85,6 +86,7 @@
 /spell/targeted/heal_target/major/tower
 	charge_max = 1
 	spell_flags = INCLUDEUSER | SELECTABLE
+	desc = "Allows you to heal others for a great amount."
 
 /spell/targeted/heal_target/area
 	name = "Cure Area"
@@ -113,6 +115,7 @@
 	return "[src] now heals more in a wider area."
 
 /spell/targeted/heal_target/area/tower
+	desc = "Allows you to heal everyone in an area for minor damage."
 	charge_max = 1
 
 /spell/targeted/heal_target/area/slow

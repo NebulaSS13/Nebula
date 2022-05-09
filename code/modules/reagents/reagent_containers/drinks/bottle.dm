@@ -338,7 +338,7 @@
 
 /obj/item/chems/drinks/bottle/kahlua/Initialize()
 	. = ..()
-	reagents.add_reagent(/decl/material/liquid/ethanol/coffee/kahlua, 100)
+	reagents.add_reagent(/decl/material/liquid/ethanol/coffee, 100)
 
 /obj/item/chems/drinks/bottle/goldschlager
 	name = "College Girl Goldschlager"

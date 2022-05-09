@@ -6,7 +6,7 @@
 	icon = 'icons/atmos/injector.dmi'
 	icon_state = "off"
 
-	name = "injector"
+	name = "injector outlet"
 	desc = "Passively injects air into its surroundings. Has a valve attached to it that can control flow rate."
 
 	use_power = POWER_USE_OFF

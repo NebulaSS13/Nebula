@@ -27,6 +27,5 @@
 	You can replenish your supply of metal as a synthetic by recharging."
 
 /datum/codex_entry/material_sheet
-	name = "material sheet"
 	associated_paths = list(/obj/item/stack/material)
 	mechanics_text = "Use in your hand to bring up the recipe menu.  If you have enough sheets, click on something on the list to build it."

@@ -33,7 +33,7 @@ Skill books that increase your skills while you activate and hold them
 */
 
 /obj/item/book/skill
-	name = "default textbook" // requires default names for tradershop, cant rely on Initialize for names
+	name = "textbook" // requires default names for tradershop, cant rely on Initialize for names
 	desc = "A blank textbook. (Notify admin)"
 	author = "The Oracle of Bakersroof"
 	icon_state = "book2"

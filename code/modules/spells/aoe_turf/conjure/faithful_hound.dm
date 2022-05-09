@@ -19,5 +19,6 @@
 	newVars = list("password" = password, "allowed_mobs" = list(usr))
 
 /spell/aoe_turf/conjure/faithful_hound/tower
+	desc = "This spell allows you to summon a singular spectral dog that guards the nearby area. Anyone without the password is barked at or bitten."
 	charge_max = 1
 	spell_flags = 0

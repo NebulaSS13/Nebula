@@ -2,7 +2,7 @@
 	name = "Languages"
 	desc = "Languages spoken in known space."
 
-/decl/codex_category/languages/Initialize()
+/decl/codex_category/languages/Populate()
 	var/example_line = "This is just some random words. What did you expect here? Hah hah!"
 	var/language_types = decls_repository.get_decls_of_subtype(/decl/language)
 	for(var/langname in language_types)
@@ -29,9 +29,11 @@
 			lang_lore += ""
 			lang_lore += "<b>CodexBot</b> [lang_example]"
 			
-		var/datum/codex_entry/entry = new(_display_name = "[L.name] (language)", _lore_text = jointext(lang_lore, "<br>"), _mechanics_text = jointext(lang_info, "<br>"))
-		entry.associated_strings += L.name
-		entry.associated_strings += L.shorthand
-		SScodex.add_entry_by_string(entry.name, entry)
+		var/datum/codex_entry/entry = new(
+			_display_name = "[L.name] (language)",
+			_lore_text = jointext(lang_lore, "<br>"),
+			_mechanics_text = jointext(lang_info, "<br>")
+		)
 		items |= entry.name
+
 	. = ..()

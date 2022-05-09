@@ -5,11 +5,14 @@
 	var/lore_text
 	var/mechanics_text
 	var/antag_text
+	var/disambiguator
 
 /datum/codex_entry/dd_SortValue()
 	return name
 
 /datum/codex_entry/New(var/_display_name, var/list/_associated_paths, var/list/_associated_strings, var/_lore_text, var/_mechanics_text, var/_antag_text)
+
+	SScodex.all_entries += src
 
 	if(_display_name)       name =               _display_name
 	if(_associated_paths)   associated_paths =   _associated_paths
@@ -18,16 +21,43 @@
 	if(_mechanics_text)     mechanics_text =     _mechanics_text
 	if(_antag_text)         antag_text =         _antag_text
 
-	if(associated_paths && associated_paths.len)
+	if(length(associated_paths))
 		for(var/tpath in associated_paths)
 			var/atom/thing = tpath
-			LAZYADD(associated_strings, sanitize(lowertext(initial(thing.name))))
+			var/thing_name = sanitize(initial(thing.name))
+			if(disambiguator)
+				thing_name = "[thing_name] ([disambiguator])"
+			LAZYDISTINCTADD(associated_strings, thing_name)
+		for(var/associated_path in associated_paths)
+			if(SScodex.entries_by_path[associated_path])
+				PRINT_STACK_TRACE("Trying to save codex entry for [name] by path [associated_path] but one already exists!")
+			SScodex.entries_by_path[associated_path] = src
+
 	if(name)
-		LAZYADD(associated_strings, name)
-	else if(associated_strings && associated_strings.len)
+		var/clean_name = lowertext(sanitize(name))
+		LAZYDISTINCTADD(associated_strings, clean_name)
+	else if(length(associated_strings))
 		name = associated_strings[1]
+
+	if(length(associated_strings))
+
+		var/list/cleaned_strings = list()
+		for(var/associated_string in associated_strings)
+			cleaned_strings |= lowertext(trim(associated_string))
+		associated_strings = cleaned_strings
+
+		if(length(associated_strings))
+			for(var/key_string in associated_strings)
+				if(SScodex.entries_by_string[key_string])
+					PRINT_STACK_TRACE("Trying to save codex entry for [name] by string [key_string] but one already exists!")
+				SScodex.entries_by_string[key_string] = src
+
 	..()
 
+/datum/codex_entry/Destroy(force)
+	SScodex.all_entries -= src
+	. = ..()
+	
 /datum/codex_entry/proc/get_header(var/mob/presenting_to)
 	var/list/dat = list()
 	var/datum/codex_entry/linked_entry = SScodex.get_entry_by_string("nexus")

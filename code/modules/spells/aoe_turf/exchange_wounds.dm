@@ -1,6 +1,6 @@
 /spell/aoe_turf/exchange_wounds
 	name = "Exchange Wounds"
-	desc = "Syphon the wounds from your allies."
+	desc = "Allows you to sacrifice your own well-being for that of those around you."
 	feedback = "EW"
 	school = "transmutation"
 	invocation = "Esh Yek Vai!"
