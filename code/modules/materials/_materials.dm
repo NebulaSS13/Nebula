@@ -112,7 +112,7 @@ INITIALIZE_IMMEDIATE(/obj/effect/gas_overlay)
 	// Attributes
 	/// How rare is this material generally?
 	var/exoplanet_rarity = MAT_RARITY_MUNDANE 
-    /// Delay in ticks when cutting through this wall.
+	/// Delay in ticks when cutting through this wall.
 	var/cut_delay = 0
 	/// Radiation var. Used in wall and object processing to irradiate surroundings.
 	var/radioactivity
