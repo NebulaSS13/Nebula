@@ -225,6 +225,15 @@
 	sleep(5 SECONDS)
 	close()
 
+/obj/machinery/door/blast/dismantle()
+	var/obj/structure/door_assembly/da = ..()
+	. = da
+
+	da.anchored = 1
+	da.state = 1
+	da.created_name = name
+	da.update_icon()
+
 /decl/public_access/public_method/close_door_delayed
 	name = "delayed close door"
 	desc = "Closes the door if possible, after a short delay."
