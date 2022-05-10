@@ -128,8 +128,8 @@
 /turf/simulated/open/is_plating()
 	return TRUE
 
-/turf/simulated/open/can_build_cable()
-	return TRUE
+/turf/simulated/open/cannot_build_cable()
+	return 0
 
 ////////////////////////////////
 // Open EXTERIOR
@@ -223,5 +223,5 @@
 		if(M.movable_flags & MOVABLE_FLAG_Z_INTERACT)
 			return M.attack_hand(user)
 
-/turf/exterior/open/can_build_cable()
-	return TRUE
+/turf/exterior/open/cannot_build_cable()
+	return 0
