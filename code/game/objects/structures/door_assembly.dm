@@ -45,6 +45,28 @@
 		bound_width = world.icon_size
 		bound_height = width * world.icon_size
 
+/obj/structure/door_assembly/examine(mob/user)
+	. = ..()
+	switch(state)
+		if(0)
+			to_chat(user, "Use a wrench to [anchored ? "un" : ""]anchor it.")
+			if(!anchored)
+				if(glass == 1)
+					var/decl/material/glass_material_datum = GET_DECL(glass_material)
+					if(glass_material_datum)
+						var/mat_name = glass_material_datum.solid_name || glass_material_datum.name
+						to_chat(user, "Use a welder to remove the [mat_name] plating currently attached.")
+				else
+					to_chat(user, "Use a welder to disassemble completely.")
+			else
+				to_chat(user, "Use a cable coil to wire in preparation for electronics.")
+		if(1)
+			to_chat(user, "Use a wirecutter to remove the wiring and expose the frame.")
+			to_chat(user, "Insert electronics to proceed with construction.")
+		if(2)
+			to_chat(user, "Use a crowbar to remove the electronics.")
+			to_chat(user, "Use a screwdriver to complete assembly.")
+
 /obj/structure/door_assembly/door_assembly_hatch
 	icon = 'icons/obj/doors/hatch/door.dmi'
 	panel_icon = 'icons/obj/doors/hatch/panel.dmi'
