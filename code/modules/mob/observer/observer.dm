@@ -63,7 +63,7 @@ var/global/const/GHOST_IMAGE_ALL = ~GHOST_IMAGE_NONE
 	stat = DEAD // They are also always dead
 
 /mob/observer/touch_map_edge(var/overmap_id = OVERMAP_ID_SPACE)
-	if(z in global.using_map.sealed_levels)
+	if(isSealedLevel(z))
 		return
 
 	var/new_x = x
