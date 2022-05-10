@@ -24,7 +24,7 @@
 	create_matter()
 
 /obj/proc/HandleObjectHeating(var/obj/item/heated_by, var/mob/user, var/adjust_temp)
-	if(ATOM_IS_TEMPERATURE_SENSITIVE(src))
+	if(ATOM_SHOULD_TEMPERATURE_ENQUEUE(src))
 		visible_message(SPAN_NOTICE("\The [user] carefully heats \the [src] with \the [heated_by]."))
 		var/diff_temp = (adjust_temp - temperature)
 		if(diff_temp >= 0)

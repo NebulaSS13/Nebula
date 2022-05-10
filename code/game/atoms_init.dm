@@ -66,6 +66,8 @@
 	return
 
 /atom/Destroy()
+	UNQUEUE_TEMPERATURE_ATOM(src)
+
 	QDEL_NULL(reagents)
 
 	LAZYCLEARLIST(our_overlays)
