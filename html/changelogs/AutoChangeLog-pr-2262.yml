@@ -1,7 +1,0 @@
-author: tag if you want to specify another name or several people. -->
-delete-after: true
-changes:
-  - rscadd: Adds user accounts and network groups which allows for custom access systems
-      tied to computer networks
-  - rscadd: Adds access requirements tied to computer files for read/write
-  - rscdel: Removes previous grant based computer network access system
