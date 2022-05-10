@@ -5,7 +5,7 @@
 	var/form_name = "AB1"                                  //Form code, for maximum bureaucracy.
 	var/creator                                            //The name of the mob that made the report.
 	var/file_time                                          //Time submitted.
-	write_access = list()                                  //The access required to submit the report. See documentation below.
+	write_access = list()                                  //The access required to submit the report.
 	read_access = list()                                   //The access required to view the report.
 	mod_access = list(list(access_bridge))                 //Changing the read/write access of the file should generally require higher access than the write access itself.
 	var/list/datum/report_field/fields = list()            //A list of fields the report comes with, in order that they should be displayed.
@@ -16,6 +16,7 @@
 /datum/computer_file/report/New()
 	..()
 	generate_fields()
+	initialize_access()
 
 /datum/computer_file/report/Destroy()
 	QDEL_NULL_LIST(fields)
@@ -23,40 +24,26 @@
 
 /*
 This proc resets the access to the report, resulting in just one access requirement for read/write.
-Arguments can be access values (numbers) or lists of access values.
 If null is passed to one of the arguments, that access type is left alone. Pass list() to reset to no access needed instead.
 The recursive option resets access to all fields in the report as well.
-If the override option is set to 0, the access supplied will instead be added as another OR access field in the access list in the index access_group.
-If null is passed to access_group then a new access group will be added instead.
 */
-/datum/computer_file/report/proc/set_access(read_access, write_access, recursive = 1, override = 1, access_group = 1)
+/datum/computer_file/report/proc/set_access(read_access, write_access, recursive = TRUE)
 	if(read_access)
 		if(!islist(read_access))
 			read_access = list(read_access)
-		if(override)
-			src.read_access = read_access
-		else
-			if(access_group && access_group <= src.read_access.len) // Add the passed access as an OR access field in an existing access group
-				if(!islist(src.read_access[access_group]))			// If the index isn't actually a list, make it one.
-					src.read_access[access_group] = list(src.read_access[access_group])
-				src.read_access[access_group] += read_access
-			else // Add an entire new access group to the access requirements.
-				src.read_access += list(read_access)
+		src.read_access = read_access
 	if(write_access)
 		if(!islist(write_access))
 			write_access = list(write_access)
-		if(override)
-			src.write_access = write_access
-		else
-			if(access_group && access_group <= src.write_access.len)
-				if(!islist(src.write_access[access_group]))
-					src.write_access[access_group] = list(src.write_access[access_group])
-				src.write_access[access_group] += write_access
-			else
-				src.write_access += list(write_access)
+		src.write_access = write_access
 	if(recursive)
 		for(var/datum/report_field/field in fields)
-			field.set_access(read_access, write_access, override, TRUE, access_group)
+			field.set_access(read_access, write_access, TRUE)
+
+// The default behavior propagates (non-empty) preset access to the fields which allow such propogation.
+// You can override or modify this behavior on subtypes.
+/datum/computer_file/report/proc/initialize_access()
+	set_access(length(read_access) ? read_access : null, length(write_access) ? write_access : null, TRUE)
 
 //Looking up fields. Names might not be unique unless you ensure otherwise.
 /datum/computer_file/report/proc/field_from_ID(ID)
@@ -190,4 +177,4 @@ Overriden so that read access is required to have write access
 	if(!.)
 		return
 	for(var/datum/report_field/field in fields)
-		field.set_access(read_access, write_access, TRUE, TRUE)
+		field.set_access(read_access, write_access, TRUE)
