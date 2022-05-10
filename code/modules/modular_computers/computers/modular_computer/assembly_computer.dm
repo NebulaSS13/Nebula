@@ -84,7 +84,7 @@
 		if(force_synth || issynth)
 			to_chat(user, SPAN_WARNING("You send an activation signal to \the [assembly_name], but it does not respond."))
 		else
-			to_chat(user, SPAN_WARNING("You press the power button but \the [assembly_name], does not respond."))
+			to_chat(user, SPAN_WARNING("You press the power button but \the [assembly_name] does not respond."))
 		shutdown_device()
 
 /datum/extension/assembly/modular_computer/shutdown_device()

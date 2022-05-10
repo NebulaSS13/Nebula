@@ -37,6 +37,7 @@
 	global.human_mob_list -= src
 	worn_underwear = null
 	QDEL_NULL(attack_selector)
+	QDEL_NULL(vessel)
 	LAZYCLEARLIST(smell_cooldown)
 	. = ..()
 

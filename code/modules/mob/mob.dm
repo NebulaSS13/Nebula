@@ -26,11 +26,11 @@
 			if(!istype(screenobj) || !screenobj.globalscreen)
 				qdel(screenobj)
 		client.screen = list()
-	if(mind && mind.current == src)
-		spellremove(src)
+	if(mind)
+		mind.handle_mob_deletion(src)
+	teleop = null
 	ghostize()
-	..()
-	return QDEL_HINT_HARDDEL
+	return ..()
 
 /mob/proc/remove_screen_obj_references()
 	hands = null
@@ -224,6 +224,8 @@
 
 /mob/proc/Life()
 	SHOULD_NOT_SLEEP(TRUE)
+	if(QDELETED(src))
+		return PROCESS_KILL
 	if(ability_master)
 		ability_master.update_spells(0)
 
@@ -1034,7 +1036,7 @@
 		return
 
 	client.mouse_pointer_icon = initial(client.mouse_pointer_icon)
-	
+
 	if(examine_cursor_icon && client.keys_held["Shift"])
 		client.mouse_pointer_icon = examine_cursor_icon
 
@@ -1083,11 +1085,11 @@
 	var/turf/T = loc
 
 	// We're inside something else.
-	if(!istype(T)) 
+	if(!istype(T))
 		return WEATHER_PROTECTED
-	
+
 	// Either we're outside being rained on, or we're in turf-local weather being rained on.
-	if(T.is_outside() || T.weather == weather) 
+	if(T.is_outside() || T.weather == weather)
 		var/list/weather_protection = get_weather_protection()
 		if(LAZYLEN(weather_protection))
 			return WEATHER_PROTECTED
