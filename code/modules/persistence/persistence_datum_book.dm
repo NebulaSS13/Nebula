@@ -6,8 +6,8 @@
 
 /decl/persistence_handler/book/CreateEntryInstance(var/turf/creating, var/list/tokens)
 	var/obj/item/book/book = new(creating)
-	book.dat =                tokens["message"] 
-	book.title =              tokens["title"] 
+	book.dat =                tokens["message"]
+	book.title =              tokens["title"]
 	book.author =             tokens["writer"]
 	book.icon_state =         tokens["icon_state"]
 	book.last_modified_ckey = tokens["author"] || "unknown"
@@ -36,7 +36,7 @@
 	.["icon_state"] = book.icon_state         || "book"
 
 	var/turf/T = get_turf(entry)
-	if(!T || !(T.z in global.using_map.station_levels))
+	if(!T || !isStationLevel(T.z))
 		.["x"] = 0
 		.["y"] = 0
 		.["z"] = 0

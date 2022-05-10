@@ -117,17 +117,17 @@
 			var/datum/extension/armor/A = get_extension(under, /datum/extension/armor)
 			if(A)
 				A.armor_values = list(
-					melee = ARMOR_MELEE_VERY_HIGH, 
-					bullet = ARMOR_BALLISTIC_PISTOL, 
-					laser = ARMOR_LASER_SMALL, 
+					melee = ARMOR_MELEE_VERY_HIGH,
+					bullet = ARMOR_BALLISTIC_PISTOL,
+					laser = ARMOR_LASER_SMALL,
 					energy = ARMOR_ENERGY_SMALL
 					) //More armor
 			A = get_extension(head, /datum/extension/armor)
 			if(A)
 				A.armor_values = list(
-					melee = ARMOR_MELEE_RESISTANT, 
-					bullet = ARMOR_BALLISTIC_MINOR, 
-					laser = ARMOR_LASER_MINOR, 
+					melee = ARMOR_MELEE_RESISTANT,
+					bullet = ARMOR_BALLISTIC_MINOR,
+					laser = ARMOR_LASER_MINOR,
 					energy = ARMOR_ENERGY_MINOR
 					)
 			familiar_type = /mob/living/simple_animal/hostile/bear
@@ -241,7 +241,7 @@
 	w_class = ITEM_SIZE_TINY
 
 /obj/item/summoning_stone/attack_self(var/mob/user)
-	if(user.z in global.using_map.admin_levels)
+	if(isAdminLevel(user.z))
 		to_chat(user, "<span class='warning'>You cannot use \the [src] here.</span>")
 		return
 	user.set_machine(src)

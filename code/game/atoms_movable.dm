@@ -321,7 +321,7 @@
 	if(!simulated)
 		return
 
-	if(!z || (z in global.using_map.sealed_levels))
+	if(!z || isSealedLevel(z))
 		return
 
 	if(!global.universe.OnTouchMapEdge(src))
