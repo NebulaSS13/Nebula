@@ -1,5 +1,4 @@
 {
-	// Lets you preview .dmi files in the editor
 	"files.associations": {
 		"*.tmpl": "html"
 	},
