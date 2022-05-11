@@ -390,7 +390,7 @@
 
 	status |= ORGAN_DISLOCATED
 	if(owner)
-		if(owner.can_feel_pain(src))
+		if(can_feel_pain())
 			add_pain(20)
 			owner.apply_effect(5, STUN)
 		owner.verbs |= /mob/living/carbon/human/proc/undislocate
@@ -401,7 +401,7 @@
 
 	status &= (~ORGAN_DISLOCATED)
 	if(owner)
-		if(!skip_pain && owner.can_feel_pain(src))
+		if(!skip_pain && can_feel_pain())
 			add_pain(20)
 			owner.apply_effect(2, STUN)
 
