@@ -32,6 +32,5 @@ jobs:
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           branch: gh-pages-dmdoc
-          single-commit: true
           folder: dmdoc
-          clean: true
+          force: false
