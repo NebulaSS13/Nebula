@@ -16,7 +16,6 @@
 	vital = 1
 	amputation_point = "spine"
 	joint = "neck"
-	dislocated = -1
 	parent_organ = null
 	encased = "ribcage"
 	artery_name = "aorta"
@@ -54,7 +53,6 @@
 	parent_organ = BP_CHEST
 	amputation_point = "lumbar"
 	joint = "hip"
-	dislocated = -1
 	artery_name = "iliac artery"
 	cavity_name = "abdominal"
 	limb_flags = ORGAN_FLAG_CAN_AMPUTATE | ORGAN_FLAG_CAN_BREAK
@@ -79,7 +77,7 @@
 	tendon_name = "palmaris longus tendon"
 	artery_name = "basilic vein"
 	arterial_bleed_severity = 0.75
-	limb_flags = ORGAN_FLAG_CAN_AMPUTATE | ORGAN_FLAG_HAS_TENDON | ORGAN_FLAG_CAN_BREAK
+	limb_flags = ORGAN_FLAG_CAN_AMPUTATE | ORGAN_FLAG_HAS_TENDON | ORGAN_FLAG_CAN_BREAK | ORGAN_FLAG_CAN_DISLOCATE
 
 /obj/item/organ/external/arm/right
 	organ_tag = BP_R_ARM
@@ -104,7 +102,7 @@
 	tendon_name = "cruciate ligament"
 	artery_name = "femoral artery"
 	arterial_bleed_severity = 0.75
-	limb_flags = ORGAN_FLAG_CAN_AMPUTATE | ORGAN_FLAG_CAN_STAND | ORGAN_FLAG_HAS_TENDON | ORGAN_FLAG_CAN_BREAK
+	limb_flags = ORGAN_FLAG_CAN_AMPUTATE | ORGAN_FLAG_CAN_STAND | ORGAN_FLAG_HAS_TENDON | ORGAN_FLAG_CAN_BREAK | ORGAN_FLAG_CAN_DISLOCATE
 
 /obj/item/organ/external/leg/right
 	organ_tag = BP_R_LEG
@@ -129,7 +127,7 @@
 	amputation_point = "left ankle"
 	tendon_name = "Achilles tendon"
 	arterial_bleed_severity = 0.5
-	limb_flags = ORGAN_FLAG_CAN_AMPUTATE | ORGAN_FLAG_CAN_STAND | ORGAN_FLAG_HAS_TENDON | ORGAN_FLAG_CAN_BREAK
+	limb_flags = ORGAN_FLAG_CAN_AMPUTATE | ORGAN_FLAG_CAN_STAND | ORGAN_FLAG_HAS_TENDON | ORGAN_FLAG_CAN_BREAK | ORGAN_FLAG_CAN_DISLOCATE
 
 /obj/item/organ/external/foot/right
 	organ_tag = BP_R_FOOT
@@ -155,7 +153,7 @@
 	amputation_point = "left wrist"
 	tendon_name = "carpal ligament"
 	arterial_bleed_severity = 0.5
-	limb_flags = ORGAN_FLAG_CAN_AMPUTATE | ORGAN_FLAG_FINGERPRINT | ORGAN_FLAG_HAS_TENDON | ORGAN_FLAG_CAN_BREAK
+	limb_flags = ORGAN_FLAG_CAN_AMPUTATE | ORGAN_FLAG_FINGERPRINT | ORGAN_FLAG_HAS_TENDON | ORGAN_FLAG_CAN_BREAK | ORGAN_FLAG_CAN_DISLOCATE
 	var/gripper_ui_label = "L"
 	var/gripper_ui_loc = ui_lhand
 	var/overlay_slot_id = BP_L_HAND

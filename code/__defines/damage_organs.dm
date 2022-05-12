@@ -49,6 +49,7 @@
 #define ORGAN_PROSTHETIC BITFLAG(11) // The organ is prosthetic. Changes numerous behaviors, search BP_IS_PROSTHETIC for checks.
 #define ORGAN_BRITTLE    BITFLAG(12) // The organ takes additional blunt damage. If robotic, cannot be repaired through normal means.
 #define ORGAN_CRYSTAL    BITFLAG(13) // The organ does not suffer laser damage, but shatters on droplimb.
+#define ORGAN_DISLOCATED BITFLAG(14)
 
 // Organ flag defines.
 #define ORGAN_FLAG_CAN_AMPUTATE   BITFLAG(0) // The organ can be amputated.
@@ -58,6 +59,7 @@
 #define ORGAN_FLAG_FINGERPRINT    BITFLAG(4) // The organ has a fingerprint.
 #define ORGAN_FLAG_HEALS_OVERKILL BITFLAG(5) // The organ heals from overkill damage.
 #define ORGAN_FLAG_DEFORMED       BITFLAG(6) // The organ is permanently disfigured.
+#define ORGAN_FLAG_CAN_DISLOCATE  BITFLAG(7) // The organ can be dislocated.
 
 // Droplimb types.
 #define DISMEMBER_METHOD_EDGE  0
