@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    
+    <link rel="stylesheet" href="dmdoc.css" />
+    <title>&#x2F;turf - Space Station 13 - Nebula13</title>
+</head>
+<body>
+<header>
+    <a href="index.html">Space Station 13 - Nebula13</a> -
+    <a href="index.html#modules">Modules</a> -
+    <a href="index.html#types">Types</a>
+ &mdash; <a href="turf.html#var">Var Details</a> - <a href="turf.html#proc">Proc Details</a></header>
+<main>
+<h1>turf <aside>/<a href="turf.html">turf</a></aside><aside> inherits /<a href="atom.html">atom</a></aside>
+        
+    
+            <a href="https://github.com/NebulaSS13/Nebula/blob/9fe84243abed50dff63a8ebdff51b106a80db8a8/code/game/atoms_temperature.dm#L18">
+        <img src="git.png" width="16" height="16" title="code&#x2F;game&#x2F;atoms_temperature.dm 18"/></a></h1>
+
+<table class="summary" cellspacing="0"><tr><td colspan="2"><h2>Vars</h2></td></tr>
+            <tr><th><a href="turf.html#var/mimic_above_copy">mimic_above_copy</a></th><td>If this is a delegate (non-overwrite) Z-turf with a z-turf above, this is the delegate copy that's copying us.</td></tr>
+            <tr><th><a href="turf.html#var/mimic_proxy">mimic_proxy</a></th><td>If we're a non-overwrite z-turf, this holds the appearance of the bottom-most Z-turf in the z-stack.</td></tr>
+            <tr><th><a href="turf.html#var/mimic_underlay">mimic_underlay</a></th><td>If we're at the bottom of the stack, a proxy used to fake a below space turf.</td></tr>
+            <tr><th><a href="turf.html#var/shadower">shadower</a></th><td>Overlay used to multiply color of all OO overlays at once.</td></tr>
+            <tr><th><a href="turf.html#var/z_eventually_space">z_eventually_space</a></th><td>If this Z-turf leads to space, uninterrupted.</td></tr>
+            <tr><th><a href="turf.html#var/z_queued">z_queued</a></th><td>How many times this turf is currently queued - multiple queue occurrences are allowed to ensure update consistency.</td></tr><tr><td colspan="2"><h2>Procs</h2></td></tr>
+            <tr><th><a href="turf.html#proc/cleanup_zmimic">cleanup_zmimic</a></th><td>Cleans up Z-mimic objects for this turf. You shouldn't call this directly 99% of the time.</td></tr>
+            <tr><th><a href="turf.html#proc/disable_zmimic">disable_zmimic</a></th><td>Disables Z-mimic for a turf.</td></tr>
+            <tr><th><a href="turf.html#proc/enable_zmimic">enable_zmimic</a></th><td>Enables Z-mimic for a turf that didn't already have it enabled.</td></tr>
+            <tr><th><a href="turf.html#proc/setup_zmimic">setup_zmimic</a></th><td>Sets up Z-mimic for this turf. You shouldn't call this directly 99% of the time.</td></tr></table>
+    <h2 id="var">Var Details</h2><h3 id="var/mimic_above_copy"><aside class="declaration">var </aside>mimic_above_copy
+            <aside>&ndash; /tmp/<a href="atom.html">atom</a>/<a href="atom/movable.html">movable</a>/openspace/turf_mimic</aside>
+        
+    
+            <a href="https://github.com/NebulaSS13/Nebula/blob/9fe84243abed50dff63a8ebdff51b106a80db8a8/code/modules/multiz/zmimic/mimic_turf.dm#L10">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;multiz&#x2F;zmimic&#x2F;mimic_turf.dm 10"/></a></h3>
+        <p>If this is a delegate (non-overwrite) Z-turf with a z-turf above, this is the delegate copy that's copying us.</p><h3 id="var/mimic_proxy"><aside class="declaration">var </aside>mimic_proxy
+            <aside>&ndash; /tmp/<a href="atom.html">atom</a>/<a href="atom/movable.html">movable</a>/openspace/turf_proxy</aside>
+        
+    
+            <a href="https://github.com/NebulaSS13/Nebula/blob/9fe84243abed50dff63a8ebdff51b106a80db8a8/code/modules/multiz/zmimic/mimic_turf.dm#L6">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;multiz&#x2F;zmimic&#x2F;mimic_turf.dm 6"/></a></h3>
+        <p>If we're a non-overwrite z-turf, this holds the appearance of the bottom-most Z-turf in the z-stack.</p><h3 id="var/mimic_underlay"><aside class="declaration">var </aside>mimic_underlay
+            <aside>&ndash; /tmp/<a href="atom.html">atom</a>/<a href="atom/movable.html">movable</a>/openspace/turf_proxy</aside>
+        
+    
+            <a href="https://github.com/NebulaSS13/Nebula/blob/9fe84243abed50dff63a8ebdff51b106a80db8a8/code/modules/multiz/zmimic/mimic_turf.dm#L12">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;multiz&#x2F;zmimic&#x2F;mimic_turf.dm 12"/></a></h3>
+        <p>If we're at the bottom of the stack, a proxy used to fake a below space turf.</p><h3 id="var/shadower"><aside class="declaration">var </aside>shadower
+            <aside>&ndash; /tmp/<a href="atom.html">atom</a>/<a href="atom/movable.html">movable</a>/openspace/multiplier</aside>
+        
+    
+            <a href="https://github.com/NebulaSS13/Nebula/blob/9fe84243abed50dff63a8ebdff51b106a80db8a8/code/modules/multiz/zmimic/mimic_turf.dm#L8">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;multiz&#x2F;zmimic&#x2F;mimic_turf.dm 8"/></a></h3>
+        <p>Overlay used to multiply color of all OO overlays at once.</p><h3 id="var/z_eventually_space"><aside class="declaration">var </aside>z_eventually_space
+            <aside>&ndash; /tmp</aside>
+        
+    
+            <a href="https://github.com/NebulaSS13/Nebula/blob/9fe84243abed50dff63a8ebdff51b106a80db8a8/code/modules/multiz/zmimic/mimic_turf.dm#L16">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;multiz&#x2F;zmimic&#x2F;mimic_turf.dm 16"/></a></h3>
+        <p>If this Z-turf leads to space, uninterrupted.</p><h3 id="var/z_queued"><aside class="declaration">var </aside>z_queued
+            <aside>&ndash; /tmp</aside>
+        
+    
+            <a href="https://github.com/NebulaSS13/Nebula/blob/9fe84243abed50dff63a8ebdff51b106a80db8a8/code/modules/multiz/zmimic/mimic_turf.dm#L14">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;multiz&#x2F;zmimic&#x2F;mimic_turf.dm 14"/></a></h3>
+        <p>How many times this turf is currently queued - multiple queue occurrences are allowed to ensure update consistency.</p><h2 id="proc">Proc Details</h2><h3 id="proc/cleanup_zmimic"><aside class="declaration">proc </aside>cleanup_zmimic<aside>() 
+        
+    
+            <a href="https://github.com/NebulaSS13/Nebula/blob/9fe84243abed50dff63a8ebdff51b106a80db8a8/code/modules/multiz/zmimic/mimic_turf.dm#L75">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;multiz&#x2F;zmimic&#x2F;mimic_turf.dm 75"/></a></aside>
+        </h3>
+        <p>Cleans up Z-mimic objects for this turf. You shouldn't call this directly 99% of the time.</p><h3 id="proc/disable_zmimic"><aside class="declaration">proc </aside>disable_zmimic<aside>() 
+        
+    
+            <a href="https://github.com/NebulaSS13/Nebula/blob/9fe84243abed50dff63a8ebdff51b106a80db8a8/code/modules/multiz/zmimic/mimic_turf.dm#L50">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;multiz&#x2F;zmimic&#x2F;mimic_turf.dm 50"/></a></aside>
+        </h3>
+        <p>Disables Z-mimic for a turf.</p><h3 id="proc/enable_zmimic"><aside class="declaration">proc </aside>enable_zmimic<aside>(additional_flags) 
+        
+    
+            <a href="https://github.com/NebulaSS13/Nebula/blob/9fe84243abed50dff63a8ebdff51b106a80db8a8/code/modules/multiz/zmimic/mimic_turf.dm#L41">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;multiz&#x2F;zmimic&#x2F;mimic_turf.dm 41"/></a></aside>
+        </h3>
+        <p>Enables Z-mimic for a turf that didn't already have it enabled.</p><h3 id="proc/setup_zmimic"><aside class="declaration">proc </aside>setup_zmimic<aside>(mapload) 
+        
+    
+            <a href="https://github.com/NebulaSS13/Nebula/blob/9fe84243abed50dff63a8ebdff51b106a80db8a8/code/modules/multiz/zmimic/mimic_turf.dm#L59">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;multiz&#x2F;zmimic&#x2F;mimic_turf.dm 59"/></a></aside>
+        </h3>
+        <p>Sets up Z-mimic for this turf. You shouldn't call this directly 99% of the time.</p></main>
+<footer>
+    nebula.dme
+    <a href="https://github.com/NebulaSS13/Nebula/tree/9fe84243abed50dff63a8ebdff51b106a80db8a8">9fe8424</a>
+        (dev) &mdash; <a href="https://github.com/SpaceManiac/SpacemanDMM/blob/master/src/dmdoc/README.md">dmdoc 1.4.1</a></footer>
+</body>
+</html>

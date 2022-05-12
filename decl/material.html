@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <base href="../" />
+    <link rel="stylesheet" href="dmdoc.css" />
+    <title>&#x2F;decl&#x2F;material - Space Station 13 - Nebula13</title>
+</head>
+<body>
+<header>
+    <a href="index.html">Space Station 13 - Nebula13</a> -
+    <a href="index.html#modules">Modules</a> -
+    <a href="index.html#types">Types</a>
+ &mdash; <a href="decl/material.html#var">Var Details</a></header>
+<main>
+<h1>material <aside>/<a href="decl/material.html">decl/material</a></aside>
+        
+    
+            <a href="https://github.com/NebulaSS13/Nebula/blob/9fe84243abed50dff63a8ebdff51b106a80db8a8/code/modules/materials/_materials.dm#L66">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;materials&#x2F;_materials.dm 66"/></a></h1>
+
+<table class="summary" cellspacing="0"><tr><td colspan="2"><h2>Vars</h2></td></tr>
+            <tr><th><a href="decl/material.html#var/boiling_point">boiling_point</a></th><td>K, point that material will become a gas.</td></tr>
+            <tr><th><a href="decl/material.html#var/brute_armor">brute_armor</a></th><td>Brute damage to a wall is divided by this value if the wall is reinforced by this material.</td></tr>
+            <tr><th><a href="decl/material.html#var/burn_armor">burn_armor</a></th><td>Same as above, but for Burn damage type. If blank brute_armor's value is used.</td></tr>
+            <tr><th><a href="decl/material.html#var/conductive">conductive</a></th><td>Objects with this var add CONDUCTS to flags on spawn.</td></tr>
+            <tr><th><a href="decl/material.html#var/cut_delay">cut_delay</a></th><td>Delay in ticks when cutting through this wall.</td></tr>
+            <tr><th><a href="decl/material.html#var/exoplanet_rarity">exoplanet_rarity</a></th><td>How rare is this material generally?</td></tr>
+            <tr><th><a href="decl/material.html#var/explosion_resistance">explosion_resistance</a></th><td>Only used by walls currently.</td></tr>
+            <tr><th><a href="decl/material.html#var/ignition_point">ignition_point</a></th><td>K, point at which the material catches on fire.</td></tr>
+            <tr><th><a href="decl/material.html#var/integrity">integrity</a></th><td>General-use HP value for products.</td></tr>
+            <tr><th><a href="decl/material.html#var/latent_heat">latent_heat</a></th><td>kJ/kg, enthalpy of vaporization</td></tr>
+            <tr><th><a href="decl/material.html#var/luminescence">luminescence</a></th><td>Does this material glow?</td></tr>
+            <tr><th><a href="decl/material.html#var/max_fluid_opacity">max_fluid_opacity</a></th><td>How opaque can fluids be?</td></tr>
+            <tr><th><a href="decl/material.html#var/melting_point">melting_point</a></th><td>K, walls will take damage if they're next to a fire hotter than this</td></tr>
+            <tr><th><a href="decl/material.html#var/min_fluid_opacity">min_fluid_opacity</a></th><td>How transparent can fluids be?</td></tr>
+            <tr><th><a href="decl/material.html#var/molar_mass">molar_mass</a></th><td>kg/mol,</td></tr>
+            <tr><th><a href="decl/material.html#var/opacity">opacity</a></th><td>Is the material transparent? 0.5&lt; makes transparent walls/doors.</td></tr>
+            <tr><th><a href="decl/material.html#var/radioactivity">radioactivity</a></th><td>Radiation var. Used in wall and object processing to irradiate surroundings.</td></tr>
+            <tr><th><a href="decl/material.html#var/rich_material_weight">rich_material_weight</a></th><td>Ore generation constant for common materials.</td></tr>
+            <tr><th><a href="decl/material.html#var/sparse_material_weight">sparse_material_weight</a></th><td>Ore generation constant for rare materials.</td></tr>
+            <tr><th><a href="decl/material.html#var/turf_touch_threshold">turf_touch_threshold</a></th><td>Point at which the fluid will proc turf interaction logic. Workaround for mops being ruined forever by 1u of anything else being added.</td></tr>
+            <tr><th><a href="decl/material.html#var/wall_support_value">wall_support_value</a></th><td>Used for checking if a material can function as a wall support.</td></tr></table>
+    <h2 id="var">Var Details</h2><h3 id="var/boiling_point"><aside class="declaration">var </aside>boiling_point
+            <aside>&ndash; </aside>
+        
+    
+            <a href="https://github.com/NebulaSS13/Nebula/blob/9fe84243abed50dff63a8ebdff51b106a80db8a8/code/modules/materials/_materials.dm#L125">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;materials&#x2F;_materials.dm 125"/></a></h3>
+        <p>K, point that material will become a gas.</p><h3 id="var/brute_armor"><aside class="declaration">var </aside>brute_armor
+            <aside>&ndash; </aside>
+        
+    
+            <a href="https://github.com/NebulaSS13/Nebula/blob/9fe84243abed50dff63a8ebdff51b106a80db8a8/code/modules/materials/_materials.dm#L131">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;materials&#x2F;_materials.dm 131"/></a></h3>
+        <p>Brute damage to a wall is divided by this value if the wall is reinforced by this material.</p><h3 id="var/burn_armor"><aside class="declaration">var </aside>burn_armor
+            <aside>&ndash; </aside>
+        
+    
+            <a href="https://github.com/NebulaSS13/Nebula/blob/9fe84243abed50dff63a8ebdff51b106a80db8a8/code/modules/materials/_materials.dm#L133">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;materials&#x2F;_materials.dm 133"/></a></h3>
+        <p>Same as above, but for Burn damage type. If blank brute_armor's value is used.</p><h3 id="var/conductive"><aside class="declaration">var </aside>conductive
+            <aside>&ndash; </aside>
+        
+    
+            <a href="https://github.com/NebulaSS13/Nebula/blob/9fe84243abed50dff63a8ebdff51b106a80db8a8/code/modules/materials/_materials.dm#L141">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;materials&#x2F;_materials.dm 141"/></a></h3>
+        <p>Objects with this var add CONDUCTS to flags on spawn.</p><h3 id="var/cut_delay"><aside class="declaration">var </aside>cut_delay
+            <aside>&ndash; </aside>
+        
+    
+            <a href="https://github.com/NebulaSS13/Nebula/blob/9fe84243abed50dff63a8ebdff51b106a80db8a8/code/modules/materials/_materials.dm#L117">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;materials&#x2F;_materials.dm 117"/></a></h3>
+        <p>Delay in ticks when cutting through this wall.</p><h3 id="var/exoplanet_rarity"><aside class="declaration">var </aside>exoplanet_rarity
+            <aside>&ndash; </aside>
+        
+    
+            <a href="https://github.com/NebulaSS13/Nebula/blob/9fe84243abed50dff63a8ebdff51b106a80db8a8/code/modules/materials/_materials.dm#L115">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;materials&#x2F;_materials.dm 115"/></a></h3>
+        <p>How rare is this material generally?</p><h3 id="var/explosion_resistance"><aside class="declaration">var </aside>explosion_resistance
+            <aside>&ndash; </aside>
+        
+    
+            <a href="https://github.com/NebulaSS13/Nebula/blob/9fe84243abed50dff63a8ebdff51b106a80db8a8/code/modules/materials/_materials.dm#L139">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;materials&#x2F;_materials.dm 139"/></a></h3>
+        <p>Only used by walls currently.</p><h3 id="var/ignition_point"><aside class="declaration">var </aside>ignition_point
+            <aside>&ndash; </aside>
+        
+    
+            <a href="https://github.com/NebulaSS13/Nebula/blob/9fe84243abed50dff63a8ebdff51b106a80db8a8/code/modules/materials/_materials.dm#L121">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;materials&#x2F;_materials.dm 121"/></a></h3>
+        <p>K, point at which the material catches on fire.</p><h3 id="var/integrity"><aside class="declaration">var </aside>integrity
+            <aside>&ndash; </aside>
+        
+    
+            <a href="https://github.com/NebulaSS13/Nebula/blob/9fe84243abed50dff63a8ebdff51b106a80db8a8/code/modules/materials/_materials.dm#L135">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;materials&#x2F;_materials.dm 135"/></a></h3>
+        <p>General-use HP value for products.</p><h3 id="var/latent_heat"><aside class="declaration">var </aside>latent_heat
+            <aside>&ndash; </aside>
+        
+    
+            <a href="https://github.com/NebulaSS13/Nebula/blob/9fe84243abed50dff63a8ebdff51b106a80db8a8/code/modules/materials/_materials.dm#L127">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;materials&#x2F;_materials.dm 127"/></a></h3>
+        <p>kJ/kg, enthalpy of vaporization</p><h3 id="var/luminescence"><aside class="declaration">var </aside>luminescence
+            <aside>&ndash; </aside>
+        
+    
+            <a href="https://github.com/NebulaSS13/Nebula/blob/9fe84243abed50dff63a8ebdff51b106a80db8a8/code/modules/materials/_materials.dm#L143">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;materials&#x2F;_materials.dm 143"/></a></h3>
+        <p>Does this material glow?</p><h3 id="var/max_fluid_opacity"><aside class="declaration">var </aside>max_fluid_opacity
+            <aside>&ndash; </aside>
+        
+    
+            <a href="https://github.com/NebulaSS13/Nebula/blob/9fe84243abed50dff63a8ebdff51b106a80db8a8/code/modules/materials/_materials.dm#L153">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;materials&#x2F;_materials.dm 153"/></a></h3>
+        <p>How opaque can fluids be?</p><h3 id="var/melting_point"><aside class="declaration">var </aside>melting_point
+            <aside>&ndash; </aside>
+        
+    
+            <a href="https://github.com/NebulaSS13/Nebula/blob/9fe84243abed50dff63a8ebdff51b106a80db8a8/code/modules/materials/_materials.dm#L123">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;materials&#x2F;_materials.dm 123"/></a></h3>
+        <p>K, walls will take damage if they're next to a fire hotter than this</p><h3 id="var/min_fluid_opacity"><aside class="declaration">var </aside>min_fluid_opacity
+            <aside>&ndash; </aside>
+        
+    
+            <a href="https://github.com/NebulaSS13/Nebula/blob/9fe84243abed50dff63a8ebdff51b106a80db8a8/code/modules/materials/_materials.dm#L151">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;materials&#x2F;_materials.dm 151"/></a></h3>
+        <p>How transparent can fluids be?</p><h3 id="var/molar_mass"><aside class="declaration">var </aside>molar_mass
+            <aside>&ndash; </aside>
+        
+    
+            <a href="https://github.com/NebulaSS13/Nebula/blob/9fe84243abed50dff63a8ebdff51b106a80db8a8/code/modules/materials/_materials.dm#L129">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;materials&#x2F;_materials.dm 129"/></a></h3>
+        <p>kg/mol,</p><h3 id="var/opacity"><aside class="declaration">var </aside>opacity
+            <aside>&ndash; </aside>
+        
+    
+            <a href="https://github.com/NebulaSS13/Nebula/blob/9fe84243abed50dff63a8ebdff51b106a80db8a8/code/modules/materials/_materials.dm#L137">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;materials&#x2F;_materials.dm 137"/></a></h3>
+        <p>Is the material transparent? 0.5&lt; makes transparent walls/doors.</p><h3 id="var/radioactivity"><aside class="declaration">var </aside>radioactivity
+            <aside>&ndash; </aside>
+        
+    
+            <a href="https://github.com/NebulaSS13/Nebula/blob/9fe84243abed50dff63a8ebdff51b106a80db8a8/code/modules/materials/_materials.dm#L119">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;materials&#x2F;_materials.dm 119"/></a></h3>
+        <p>Radiation var. Used in wall and object processing to irradiate surroundings.</p><h3 id="var/rich_material_weight"><aside class="declaration">var </aside>rich_material_weight
+            <aside>&ndash; </aside>
+        
+    
+            <a href="https://github.com/NebulaSS13/Nebula/blob/9fe84243abed50dff63a8ebdff51b106a80db8a8/code/modules/materials/_materials.dm#L149">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;materials&#x2F;_materials.dm 149"/></a></h3>
+        <p>Ore generation constant for common materials.</p><h3 id="var/sparse_material_weight"><aside class="declaration">var </aside>sparse_material_weight
+            <aside>&ndash; </aside>
+        
+    
+            <a href="https://github.com/NebulaSS13/Nebula/blob/9fe84243abed50dff63a8ebdff51b106a80db8a8/code/modules/materials/_materials.dm#L147">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;materials&#x2F;_materials.dm 147"/></a></h3>
+        <p>Ore generation constant for rare materials.</p><h3 id="var/turf_touch_threshold"><aside class="declaration">var </aside>turf_touch_threshold
+            <aside>&ndash; </aside>
+        
+    
+            <a href="https://github.com/NebulaSS13/Nebula/blob/9fe84243abed50dff63a8ebdff51b106a80db8a8/code/modules/materials/_materials.dm#L155">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;materials&#x2F;_materials.dm 155"/></a></h3>
+        <p>Point at which the fluid will proc turf interaction logic. Workaround for mops being ruined forever by 1u of anything else being added.</p><h3 id="var/wall_support_value"><aside class="declaration">var </aside>wall_support_value
+            <aside>&ndash; </aside>
+        
+    
+            <a href="https://github.com/NebulaSS13/Nebula/blob/9fe84243abed50dff63a8ebdff51b106a80db8a8/code/modules/materials/_materials.dm#L145">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;materials&#x2F;_materials.dm 145"/></a></h3>
+        <p>Used for checking if a material can function as a wall support.</p></main>
+<footer>
+    nebula.dme
+    <a href="https://github.com/NebulaSS13/Nebula/tree/9fe84243abed50dff63a8ebdff51b106a80db8a8">9fe8424</a>
+        (dev) &mdash; <a href="https://github.com/SpaceManiac/SpacemanDMM/blob/master/src/dmdoc/README.md">dmdoc 1.4.1</a></footer>
+</body>
+</html>
