@@ -1,7 +1,0 @@
-author: tag if you want to specify another name or several people. -->
-delete-after: true
-changes:
-  - bugfix: Dislocated limbs now show in medical scans again.
-  - bugfix: Dislocating someone's limb now causes pain again.
-  - tweak: Now get feedback when trying to use a jointlock or dislocate someone's
-      limbs and don't have the required skills.
