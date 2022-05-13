@@ -187,11 +187,11 @@ By design, d1 is the smallest direction and d2 is the highest
 		return
 
 	if(d1 == UP || d2 == UP)
-		to_chat(user, SPAN_WARNING("You must cut this [src] from above."))
+		to_chat(user, SPAN_WARNING("You must cut this [name] from above."))
 		return
 
 	if(breaker_box)
-		to_chat(user, SPAN_WARNING("This [src] is connected to a nearby breaker box. Use the breaker box to interact with it."))
+		to_chat(user, SPAN_WARNING("This [name] is connected to a nearby breaker box. Use the breaker box to interact with it."))
 		return
 
 	if (shock(user, 50))
@@ -602,7 +602,7 @@ By design, d1 is the smallest direction and d2 is the highest
 	if(ishuman(M) && !M.incapacitated())
 		if(!isturf(usr.loc)) return
 		if(!src.use(15))
-			to_chat(usr, SPAN_WARNING("You need at least 15 [singular_name] of cable to make restraints!"))
+			to_chat(usr, SPAN_WARNING("You need at least 15 [plural_name] of cable to make restraints!"))
 			return
 		var/obj/item/handcuffs/cable/B = new /obj/item/handcuffs/cable(usr.loc)
 		B.color = color
