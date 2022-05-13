@@ -42,7 +42,7 @@
 	F.full_print = M.get_full_print()
 	F.completeness = 100
 	var/datum/forensics/fingerprints/FP = new()
-	FP.data = F
+	FP.data = list(F)
 	merge_evidence_list(list(FP))
 	SetName("[initial(name)] (\the [M])")
 	update_icon()
