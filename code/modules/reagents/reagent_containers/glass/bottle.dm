@@ -100,6 +100,7 @@
 	initial_reagents = list(/decl/material/gas/ammonia = 60)
 
 /obj/item/chems/glass/bottle/eznutrient
+	name = "EZ NUtrient"
 	label_text = "EZ NUtrient"
 	label_color = COLOR_PALE_BTL_GREEN
 	lid_color = COLOR_PALE_BTL_GREEN
@@ -107,6 +108,7 @@
 	initial_reagents = list(/decl/material/liquid/fertilizer = 60)
 
 /obj/item/chems/glass/bottle/left4zed
+	name = "Left-4-Zed"
 	label_text = "Left-4-Zed"
 	label_color = COMMS_COLOR_SCIENCE
 	lid_color = COMMS_COLOR_SCIENCE
@@ -117,6 +119,7 @@
 	)
 
 /obj/item/chems/glass/bottle/robustharvest
+	name = "Robust Harvest"
 	label_text = "Robust Harvest"
 	label_color = COLOR_ASSEMBLY_GREEN
 	lid_color = COLOR_ASSEMBLY_GREEN
