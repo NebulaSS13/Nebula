@@ -10,6 +10,7 @@ var/global/const/DEFAULT_SPECIES_HEALTH = 200
 	var/name_plural                           // Pluralized name (since "[name]s" is not always valid)
 	var/description
 	var/codex_description
+	var/roleplay_summary
 	var/ooc_codex_information
 	var/cyborg_noun = "Cyborg"
 	var/hidden_from_codex = TRUE
