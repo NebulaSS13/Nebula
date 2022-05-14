@@ -20,7 +20,7 @@
 	var/check_flags = 0
 	var/processing = 0
 	var/active = 0
-	var/obj/screen/movable/action_button/button = null
+	var/obj/screen/action_button/button = null
 	var/button_icon = 'icons/obj/action_buttons/actions.dmi'
 	var/button_icon_state = "default"
 	var/background_icon_state = "bg_default"
@@ -120,21 +120,17 @@
 /datum/action/proc/UpdateDesc()
 	return desc
 
-/obj/screen/movable/action_button
+/obj/screen/action_button
 	var/datum/action/owner
 	screen_loc = "LEFT,TOP"
 
-/obj/screen/movable/action_button/Click(location,control,params)
-	var/list/modifiers = params2list(params)
-	if(modifiers["shift"])
-		moved = 0
-		return 1
-	if(usr.next_move >= world.time) // Is this needed ?
-		return
-	owner.Trigger()
-	return 1
+/obj/screen/action_button/Click(location,control,params)
+	if(owner && usr && usr.next_move < world.time)
+		owner.Trigger()
+		return TRUE
+	return FALSE
 
-/obj/screen/movable/action_button/proc/UpdateIcon()
+/obj/screen/action_button/proc/UpdateIcon()
 	if(!owner)
 		return
 	icon = owner.button_icon
@@ -156,26 +152,26 @@
 	else
 		color = rgb(255,255,255,255)
 
-/obj/screen/movable/action_button/MouseEntered(location, control, params)
+/obj/screen/action_button/MouseEntered(location, control, params)
 	openToolTip(user = usr, tip_src = src, params = params, title = name, content = desc)
 	..()
 
-/obj/screen/movable/action_button/MouseDown()
+/obj/screen/action_button/MouseDown()
 	closeToolTip(usr)
 	..()
 
-/obj/screen/movable/action_button/MouseExited()
+/obj/screen/action_button/MouseExited()
 	closeToolTip(usr)
 	..()
 
 //Hide/Show Action Buttons ... Button
-/obj/screen/movable/action_button/hide_toggle
+/obj/screen/action_button/hide_toggle
 	name = "Hide Buttons"
 	icon = 'icons/obj/action_buttons/actions.dmi'
 	icon_state = "bg_default"
 	var/hidden = 0
 
-/obj/screen/movable/action_button/hide_toggle/Click()
+/obj/screen/action_button/hide_toggle/Click()
 	usr.hud_used.action_buttons_hidden = !usr.hud_used.action_buttons_hidden
 
 	hidden = usr.hud_used.action_buttons_hidden
@@ -187,7 +183,7 @@
 	usr.update_action_buttons()
 
 
-/obj/screen/movable/action_button/hide_toggle/proc/InitialiseIcon(var/mob/living/user)
+/obj/screen/action_button/hide_toggle/proc/InitialiseIcon(var/mob/living/user)
 	if(isalien(user))
 		icon_state = "bg_alien"
 	else
@@ -195,7 +191,7 @@
 	UpdateIcon()
 	return
 
-/obj/screen/movable/action_button/hide_toggle/UpdateIcon()
+/obj/screen/action_button/hide_toggle/UpdateIcon()
 	overlays.Cut()
 	var/image/img = image(icon,src,hidden?"show":"hide")
 	overlays += img

@@ -34,7 +34,7 @@
 	var/list/other
 	var/list/obj/screen/hotkeybuttons
 
-	var/obj/screen/movable/action_button/hide_toggle/hide_actions_toggle
+	var/obj/screen/action_button/hide_toggle/hide_actions_toggle
 	var/action_buttons_hidden = FALSE
 
 	var/static/list/hidden_inventory_slots = list(
