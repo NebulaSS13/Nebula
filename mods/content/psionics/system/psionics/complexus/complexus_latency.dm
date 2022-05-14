@@ -8,6 +8,7 @@
 		return FALSE
 
 	var/faculty = pick(latencies)
+	LAZYREMOVE(latencies, faculty)
 	var/new_rank = rand(2,5)
 	owner.set_psi_rank(faculty, new_rank)
 	var/decl/psionic_faculty/faculty_decl = SSpsi.get_faculty(faculty)
