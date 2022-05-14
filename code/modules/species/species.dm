@@ -69,6 +69,8 @@ var/global/const/DEFAULT_SPECIES_HEALTH = 200
 
 	// Combat vars.
 	var/total_health = DEFAULT_SPECIES_HEALTH  // Point at which the mob will enter crit.
+	var/fibrillation_threshold                 // shock_stage at which the mob will have a chance of heart disruption.
+
 	var/list/unarmed_attacks = list(           // Possible unarmed attacks that the mob will use in combat,
 		/decl/natural_attack,
 		/decl/natural_attack/bite
@@ -283,6 +285,9 @@ var/global/const/DEFAULT_SPECIES_HEALTH = 200
 /decl/species/Initialize()
 
 	. = ..()
+
+	if(isnull(fibrillation_threshold))
+		fibrillation_threshold = FLOOR(total_health * 0.6)
 
 	if(!codex_description)
 		codex_description = description

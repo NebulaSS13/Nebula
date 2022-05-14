@@ -77,8 +77,7 @@
 	pulse = Clamp(PULSE_NORM + pulse_mod, PULSE_SLOW, PULSE_2FAST)
 
 	// If fibrillation, then it can be PULSE_THREADY
-	var/fibrillation = oxy <= BLOOD_VOLUME_SURVIVE || (prob(30) && owner.shock_stage > 120)
-	if(pulse && fibrillation)	//I SAID MOAR OXYGEN
+	if(pulse && (oxy <= BLOOD_VOLUME_SURVIVE || (prob(30) && owner.shock_stage > species.fibrillation_threshold)))
 		pulse = PULSE_THREADY
 
 	// Stablising chemicals pull the heartbeat towards the center
