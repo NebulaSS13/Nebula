@@ -202,7 +202,7 @@
 
 /decl/material/liquid/glowsap/gleam/affect_blood(var/mob/living/M, var/alien, var/removed, var/datum/reagents/holder)
 	. = ..()
-	M.add_client_color(/datum/client_color/thirdeye)
+	M.add_client_color(/datum/client_color/noir/thirdeye)
 	M.add_chemical_effect(CE_THIRDEYE, 1)
 	M.add_chemical_effect(CE_MIND, -2)
 	M.set_hallucination(50, 50)
@@ -215,9 +215,11 @@
 	if(prob(5))
 		to_chat(M, SPAN_WARNING("<font size = [rand(1,3)]>[pick(dose_messages)]</font>"))
 
-/decl/material/liquid/glowsap/gleam/on_leaving_metabolism(var/mob/parent, var/metabolism_class)
+/decl/material/liquid/glowsap/gleam/on_leaving_metabolism(var/atom/parent, var/metabolism_class)
 	. = ..()
-	parent.remove_client_color(/datum/client_color/thirdeye)
+	var/mob/M = parent
+	if(istype(M))
+		M.remove_client_color(/datum/client_color/noir/thirdeye)
 
 /decl/material/liquid/glowsap/gleam/affect_overdose(var/mob/living/M, var/alien, var/datum/reagents/holder)
 	M.adjustBrainLoss(rand(1, 5))
