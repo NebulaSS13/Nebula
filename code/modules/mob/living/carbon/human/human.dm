@@ -1057,7 +1057,7 @@
 			var/decl/pronouns/G = get_pronouns()
 			visible_message(SPAN_NOTICE("\The [src] twitches a bit as [G.his] [heart.name] restarts!"))
 
-		shock_stage = min(shock_stage, 100) // 120 is the point at which the heart stops.
+		shock_stage = min(shock_stage, FLOOR(species.fibrillation_threshold * 0.8))
 		if(getOxyLoss() >= 75)
 			setOxyLoss(75)
 		heart.pulse = PULSE_NORM

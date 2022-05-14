@@ -311,7 +311,6 @@
 		)
 		current_limb.add_pain(30)
 		current_limb.take_external_damage(5)
-		shock_stage += 20
 	else
 		visible_message( \
 		"<span class='danger'>[U] pops [self ? "[G.his]" : "[S]'s"] [current_limb.joint] back in!</span>", \

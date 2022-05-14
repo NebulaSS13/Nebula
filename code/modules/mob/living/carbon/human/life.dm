@@ -559,7 +559,7 @@
 			handle_hallucinations()
 
 		if(get_shock() >= species.total_health)
-			if(!stat)
+			if(!incapacitated())
 				to_chat(src, "<span class='warning'>[species.halloss_message_self]</span>")
 				src.visible_message("<B>[src]</B> [species.halloss_message]")
 			SET_STATUS_MAX(src, STAT_PARA, 10)
@@ -702,7 +702,7 @@
 				var/no_damage = 1
 				var/trauma_val = 0 // Used in calculating softcrit/hardcrit indicators.
 				if(can_feel_pain())
-					trauma_val = max(shock_stage,get_shock())/(species.total_health-100)
+					trauma_val = max(shock_stage, get_shock()) / species.fibrillation_threshold
 				// Collect and apply the images all at once to avoid appearance churn.
 				var/list/health_images = list()
 				for(var/obj/item/organ/external/E in get_external_organs())
@@ -862,43 +862,45 @@
 			recovery++
 		shock_stage = max(shock_stage - recovery, 0)
 		return
-	if(stat) return 0
+	if(stat) 
+		return 0
 
-	if(shock_stage == 10)
+	if(shock_stage == FLOOR(species.fibrillation_threshold * 0.1))
 		// Please be very careful when calling custom_pain() from within code that relies on pain/trauma values. There's the
 		// possibility of a feedback loop from custom_pain() being called with a positive power, incrementing pain on a limb,
 		// which triggers this proc, which calls custom_pain(), etc. Make sure you call it with nohalloss = TRUE in these cases!
 		custom_pain("[pick("It hurts so much", "You really need some painkillers", "Dear god, the pain")]!", 10, nohalloss = TRUE)
 
-	if(shock_stage >= 30)
-		if(shock_stage == 30)
+	if(shock_stage >= species.fibrillation_threshold * 1.2)
+		if(!incapacitated() && !lying)
+			visible_message("<b>[src]</b> can no longer stand, collapsing!")
+		SET_STATUS_MAX(src, STAT_PARA, 5)
+
+	if(shock_stage >= species.fibrillation_threshold && !HAS_STATUS(src, STAT_PARA) && prob(2))
+		custom_pain("[pick("You black out", "You feel like you could die any moment now", "You're about to lose consciousness")]!", shock_stage, nohalloss = TRUE)
+		SET_STATUS_MAX(src, STAT_WEAK, 5)
+
+	if(shock_stage >= species.fibrillation_threshold * 0.65)
+		if (prob(5))
+			custom_pain("[pick("The pain is excruciating", "Please, just end the pain", "Your whole body is going numb")]!", shock_stage, nohalloss = TRUE)
+			SET_STATUS_MAX(src, STAT_STUN, 5)
+
+	var/half_val = FLOOR(species.fibrillation_threshold * 0.5)
+	if (shock_stage >= half_val)
+		if(shock_stage == half_val)
+			visible_message("<b>[src]</b>'s body becomes limp.")
+		if(prob(2))
+			custom_pain("[pick("The pain is excruciating", "Please, just end the pain", "Your whole body is going numb")]!", shock_stage, nohalloss = TRUE)
+			SET_STATUS_MAX(src, STAT_STUN, 3)
+
+	var/quarter_val = FLOOR(species.fibrillation_threshold * 0.25)
+	if(shock_stage >= quarter_val)
+		if(shock_stage == quarter_val)
 			var/decl/pronouns/G = get_pronouns()
 			visible_message("<b>\The [src]</b> is having trouble keeping [G.his] eyes open.")
 		if(prob(30))
 			SET_STATUS_MAX(src, STAT_BLURRY, 2)
 			SET_STATUS_MAX(src, STAT_STUTTER, 5)
-
-	if (shock_stage >= 60)
-		if(shock_stage == 60) visible_message("<b>[src]</b>'s body becomes limp.")
-		if (prob(2))
-			custom_pain("[pick("The pain is excruciating", "Please, just end the pain", "Your whole body is going numb")]!", shock_stage, nohalloss = TRUE)
-			SET_STATUS_MAX(src, STAT_WEAK, 3)
-
-	if(shock_stage >= 80)
-		if (prob(5))
-			custom_pain("[pick("The pain is excruciating", "Please, just end the pain", "Your whole body is going numb")]!", shock_stage, nohalloss = TRUE)
-			SET_STATUS_MAX(src, STAT_WEAK, 5)
-
-	if(shock_stage >= 120)
-		if(!HAS_STATUS(src, STAT_PARA) && prob(2))
-			custom_pain("[pick("You black out", "You feel like you could die any moment now", "You're about to lose consciousness")]!", shock_stage, nohalloss = TRUE)
-			SET_STATUS_MAX(src, STAT_PARA, 5)
-
-	if(shock_stage == 150)
-		visible_message("<b>[src]</b> can no longer stand, collapsing!")
-
-	if(shock_stage >= 150)
-		SET_STATUS_MAX(src, STAT_WEAK, 5)
 
 /*
 	Called by life(), instead of having the individual hud items update icons each tick and check for status changes

@@ -110,8 +110,6 @@ var/global/list/gamemode_cache = list()
 	var/organ_regeneration_multiplier = 0.25
 	var/organs_decay
 
-	//Paincrit knocks someone down once they hit 60 shock_stage, so by default make it so that close to 100 additional damage needs to be dealt,
-	//so that it's similar to PAIN. Lowered it a bit since hitting paincrit takes much longer to wear off than a halloss stun.
 	var/organ_damage_spillover_multiplier = 0.5
 
 	var/bones_can_break = 1

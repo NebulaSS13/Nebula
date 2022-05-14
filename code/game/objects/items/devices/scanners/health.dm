@@ -168,7 +168,7 @@
 	// Traumatic shock.
 	if(H.is_asystole())
 		dat += "<span class='scan_danger'>Patient is suffering from cardiovascular shock. Administer CPR immediately.</span>"
-	else if(H.shock_stage > 80)
+	else if(H.shock_stage > H.species.fibrillation_threshold * 0.8)
 		dat += "<span class='scan_warning'>Patient is at serious risk of going into shock. Pain relief recommended.</span>"
 
 	// Other general warnings.
