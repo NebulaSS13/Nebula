@@ -437,3 +437,21 @@ var/global/const/enterloopsanity = 100
 		LAZYADD(., weather)
 	if(flooded)
 		LAZYADD(., global.flood_object)
+
+/**Whether we can place a cable here 
+ * If you cannot build a cable will return an error code explaining why you cannot.
+*/
+/turf/proc/cannot_build_cable()
+	return 1
+
+/**Sends a message to the user explaining why they can't build a cable here */
+/turf/proc/why_cannot_build_cable(var/mob/user, var/cable_error)
+	to_chat(user, SPAN_WARNING("You cannot place a cable here!"))
+
+/**Place a cable if possible, if not warn the user appropriately */
+/turf/proc/try_build_cable(var/obj/item/stack/cable_coil/C, var/mob/user)
+	var/cable_error = cannot_build_cable(user)
+	if(cable_error)
+		why_cannot_build_cable(user, cable_error)
+		return FALSE
+	return C.turf_place(src, user)

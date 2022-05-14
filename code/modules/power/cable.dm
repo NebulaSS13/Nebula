@@ -87,9 +87,9 @@ By design, d1 is the smallest direction and d2 is the highest
 		user.examinate(src)
 		// following code taken from attackby (multitool)
 		if(powernet && (powernet.avail > 0))
-			to_chat(user, "<span class='warning'>[get_wattage()] in power network.</span>")
+			to_chat(user, SPAN_WARNING("[get_wattage()] in power network."))
 		else
-			to_chat(user, "<span class='warning'>The cable is not powered.</span>")
+			to_chat(user, SPAN_WARNING("\The [src] is not powered."))
 	return
 
 ///////////////////////////////////
@@ -97,10 +97,10 @@ By design, d1 is the smallest direction and d2 is the highest
 ///////////////////////////////////
 
 /obj/structure/cable/proc/get_wattage()
-	if(powernet.avail >= 1000000000)
-		return "[round(powernet.avail/1000000, 0.01)] MW"
-	if(powernet.avail >= 1000000)
-		return "[round(powernet.avail/1000, 0.01)] kW"
+	if(powernet.avail >=  1 GIGAWATTS)
+		return "[round(powernet.avail/(1 MEGAWATTS), 0.01)] MW"
+	if(powernet.avail >= 1 MEGAWATTS)
+		return "[round(powernet.avail/(1 KILOWATTS), 0.01)] kW"
 	return "[round(powernet.avail)] W"
 
 //If underfloor, hide the cable
@@ -153,10 +153,10 @@ By design, d1 is the smallest direction and d2 is the highest
 	else if(isMultitool(W))
 
 		if(powernet && (powernet.avail > 0))		// is it powered?
-			to_chat(user, "<span class='warning'>[get_wattage()] in power network.</span>")
+			to_chat(user, SPAN_WARNING("[get_wattage()] in power network."))
 
 		else
-			to_chat(user, "<span class='warning'>The cable is not powered.</span>")
+			to_chat(user, SPAN_WARNING("\The [src] is not powered."))
 
 		shock(user, 5, 0.2)
 
@@ -166,10 +166,10 @@ By design, d1 is the smallest direction and d2 is the highest
 		var/delay_holder
 
 		if(W.force < 5)
-			visible_message("<span class='warning'>[user] starts sawing away roughly at the cable with \the [W].</span>")
+			visible_message(SPAN_WARNING("[user] starts sawing away roughly at \the [src] with \the [W]."))
 			delay_holder = 8 SECONDS
 		else
-			visible_message("<span class='warning'>[user] begins to cut through the cable with \the [W].</span>")
+			visible_message(SPAN_WARNING("[user] begins to cut through \the [src] with \the [W]."))
 			delay_holder = 3 SECONDS
 
 		if(user.do_skilled(delay_holder, SKILL_ELECTRICAL, src))
@@ -177,7 +177,7 @@ By design, d1 is the smallest direction and d2 is the highest
 			if(W.obj_flags & OBJ_FLAG_CONDUCTIBLE)
 				shock(user, 66, 0.7)
 		else
-			visible_message("<span class='warning'>[user] stops cutting before any damage is done.</span>")
+			visible_message(SPAN_WARNING("[user] stops cutting before any damage is done."))
 
 	src.add_fingerprint(user)
 
@@ -187,11 +187,11 @@ By design, d1 is the smallest direction and d2 is the highest
 		return
 
 	if(d1 == UP || d2 == UP)
-		to_chat(user, "<span class='warning'>You must cut this cable from above.</span>")
+		to_chat(user, SPAN_WARNING("You must cut this [name] from above."))
 		return
 
 	if(breaker_box)
-		to_chat(user, "<span class='warning'>This cable is connected to a nearby breaker box. Use the breaker box to interact with it.</span>")
+		to_chat(user, SPAN_WARNING("This [name] is connected to a nearby breaker box. Use the breaker box to interact with it."))
 		return
 
 	if (shock(user, 50))
@@ -199,7 +199,7 @@ By design, d1 is the smallest direction and d2 is the highest
 
 	new/obj/item/stack/cable_coil(T, (src.d1 ? 2 : 1), color)
 
-	visible_message("<span class='warning'>[user] cuts the cable.</span>")
+	visible_message(SPAN_WARNING("[user] cuts \the [src]."))
 
 	if(HasBelow(z))
 		for(var/turf/turf in GetBelow(src))
@@ -535,7 +535,7 @@ By design, d1 is the smallest direction and d2 is the highest
 			return ..()
 
 		if(BP_IS_BRITTLE(S))
-			to_chat(user, "<span class='warning'>\The [H]'s [S.name] is hard and brittle - \the [src] cannot repair it.</span>")
+			to_chat(user, SPAN_WARNING("\The [H]'s [S.name] is hard and brittle - \the [src] cannot repair it."))
 			return 1
 
 		var/use_amt = min(src.amount, CEILING(S.burn_dam/3), 5)
@@ -573,7 +573,7 @@ By design, d1 is the smallest direction and d2 is the highest
 		selected_color = "Red"
 		final_color = possible_cable_colours[selected_color]
 	color = final_color
-	to_chat(user, "<span class='notice'>You change \the [src]'s color to [lowertext(selected_color)].</span>")
+	to_chat(user, SPAN_NOTICE("You change \the [src]'s color to [lowertext(selected_color)]."))
 
 /obj/item/stack/cable_coil/proc/update_wclass()
 	if(amount == 1)
@@ -587,11 +587,11 @@ By design, d1 is the smallest direction and d2 is the highest
 		return
 
 	if(get_amount() == 1)
-		to_chat(user, "A short piece of power cable.")
+		to_chat(user, "A [singular_name] of cable.")
 	else if(get_amount() == 2)
-		to_chat(user, "A piece of power cable.")
+		to_chat(user, "Two [plural_name] of cable.")
 	else
-		to_chat(user, "A coil of power cable. There are [get_amount()] lengths of cable in the coil.")
+		to_chat(user, "A coil of power cable. There are [get_amount()] [plural_name] of cable in the coil.")
 
 
 /obj/item/stack/cable_coil/verb/make_restraint()
@@ -602,13 +602,13 @@ By design, d1 is the smallest direction and d2 is the highest
 	if(ishuman(M) && !M.incapacitated())
 		if(!isturf(usr.loc)) return
 		if(!src.use(15))
-			to_chat(usr, "<span class='warning'>You need at least 15 lengths to make restraints!</span>")
+			to_chat(usr, SPAN_WARNING("You need at least 15 [plural_name] of cable to make restraints!"))
 			return
 		var/obj/item/handcuffs/cable/B = new /obj/item/handcuffs/cable(usr.loc)
 		B.color = color
-		to_chat(usr, "<span class='notice'>You wind some cable together to make some restraints.</span>")
+		to_chat(usr, SPAN_NOTICE("You wind some [plural_name] of cable together to make some restraints."))
 	else
-		to_chat(usr, "<span class='notice'>You cannot do that.</span>")
+		to_chat(usr, SPAN_NOTICE("You cannot do that."))
 
 /obj/item/stack/cable_coil/cyborg/verb/set_colour()
 	set name = "Change Colour"
@@ -644,15 +644,15 @@ By design, d1 is the smallest direction and d2 is the highest
 		return
 
 	if(get_amount() < 1) // Out of cable
-		to_chat(user, "There is no cable left.")
+		to_chat(user, SPAN_WARNING("There is no [plural_name] of cable left."))
 		return
 
 	if(get_dist(F,user) > 1) // Too far
-		to_chat(user, "You can't lay cable at a place that far away.")
+		to_chat(user, SPAN_WARNING("You can't lay cable at a place that far away."))
 		return
 
 	if(!F.is_plating())		// Ff floor is intact, complain
-		to_chat(user, "You can't lay cable there unless the floor tiles are removed.")
+		to_chat(user, SPAN_WARNING("You can't lay cable there unless the floor tiles are removed."))
 		return
 
 	var/dirn
@@ -664,18 +664,19 @@ By design, d1 is the smallest direction and d2 is the highest
 	var/end_dir = 0
 	if(istype(F) && F.is_open())
 		if(!can_use(2))
-			to_chat(user, "You don't have enough cable to do this!")
+			to_chat(user, SPAN_WARNING("You don't have enough [plural_name] of cable to do this!"))
 			return
 		end_dir = DOWN
 
 	for(var/obj/structure/cable/LC in F)
 		if((LC.d1 == dirn && LC.d2 == end_dir ) || ( LC.d2 == dirn && LC.d1 == end_dir))
-			to_chat(user, "<span class='warning'>There's already a cable at that position.</span>")
+			to_chat(user, SPAN_WARNING("There's already a cable at that position."))
 			return
 
 	put_cable(F, user, end_dir, dirn)
 	if(end_dir == DOWN)
 		put_cable(GetBelow(F), user, UP, 0)
+	return TRUE
 
 // called when cable_coil is click on an installed obj/cable
 // or click on a turf that already contains a "node" cable
@@ -690,19 +691,18 @@ By design, d1 is the smallest direction and d2 is the highest
 		return
 
 	if(get_dist(C, user) > 1)		// make sure it's close enough
-		to_chat(user, "You can't lay cable at a place that far away.")
+		to_chat(user, SPAN_WARNING("You can't lay cable at a place that far away."))
 		return
 
 	if(U == T) //if clicked on the turf we're standing on, try to put a cable in the direction we're facing
-		turf_place(T,user)
-		return
+		return turf_place(T,user)
 
 	var/dirn = get_dir(C, user)
 
 	// one end of the clicked cable is pointing towards us
 	if(C.d1 == dirn || C.d2 == dirn)
 		if(!U.is_plating())						// can't place a cable if the floor is complete
-			to_chat(user, "You can't lay cable there unless the floor tiles are removed.")
+			to_chat(user, SPAN_WARNING("You can't lay cable there unless the floor tiles are removed."))
 			return
 		else
 			// cable is pointing at us, we're standing on an open tile
@@ -712,10 +712,10 @@ By design, d1 is the smallest direction and d2 is the highest
 
 			for(var/obj/structure/cable/LC in U)		// check to make sure there's not a cable there already
 				if(LC.d1 == fdirn || LC.d2 == fdirn)
-					to_chat(user, "There's already a cable at that position.")
+					to_chat(user, SPAN_WARNING("There's already a cable at that position."))
 					return
 			put_cable(U,user,0,fdirn)
-			return
+			return TRUE
 
 	// exisiting cable doesn't point at our position, so see if it's a stub
 	else if(C.d1 == 0)
@@ -733,7 +733,7 @@ By design, d1 is the smallest direction and d2 is the highest
 			if(LC == C)			// skip the cable we're interacting with
 				continue
 			if((LC.d1 == nd1 && LC.d2 == nd2) || (LC.d1 == nd2 && LC.d2 == nd1) )	// make sure no cable matches either direction
-				to_chat(user, "There's already a cable at that position.")
+				to_chat(user, SPAN_WARNING("There's already a cable at that position."))
 				return
 
 
@@ -765,11 +765,17 @@ By design, d1 is the smallest direction and d2 is the highest
 				return
 
 		C.denode()// this call may have disconnected some cables that terminated on the centre of the turf, if so split the powernets.
-		return
+		return TRUE
+
+	else if(C.d1 == UP) //Special cases for zcables, since they behave weirdly
+		. = turf_place(T, user)
+		if(.)
+			to_chat(user, SPAN_NOTICE("You connect the cable hanging from the ceiling."))
+		return .
 
 /obj/item/stack/cable_coil/proc/put_cable(turf/F, mob/user, d1, d2)
 	if(!istype(F))
-		return
+		return FALSE
 
 	var/obj/structure/cable/C = new(F)
 	C.cableColor(color)
@@ -792,11 +798,12 @@ By design, d1 is the smallest direction and d2 is the highest
 	if(C.d2 & (C.d2 - 1))// if the cable is layed diagonally, check the others 2 possible directions
 		C.mergeDiagonalsNetworks(C.d2)
 
-	use(1)
+	. = use(1)
 	if (C.shock(user, 50))
 		if (prob(50)) //fail
 			new/obj/item/stack/cable_coil(C.loc, 1, C.color)
 			qdel(C)
+			return FALSE
 
 //////////////////////////////
 // Misc.
