@@ -60,7 +60,7 @@
 		animate(holder, alpha = 255, time = animation_time_appear, easing = SINE_EASING | EASE_OUT, flags = ANIMATION_PARALLEL)
 
 /datum/progress_bar/Destroy()
-	stop()
+	cleanup()
 	client?.images -= holder
 	QDEL_NULL(holder)
 	QDEL_NULL(backdrop)
@@ -71,12 +71,21 @@
 	return ..()
 
 /**
-  * Stops the progress bar and removes it after a bit.
+  * Stops the progress bar and destoy it after a bit.
   */
 /datum/progress_bar/proc/stop()
-	if(stopping)
-		return
+	set waitfor = FALSE
 
+	shift_down_all()
+	update(last_progress)
+	animate(holder, alpha = 0, time = animation_time_fade, flags = ANIMATION_PARALLEL)
+	sleep(animation_time_fade)
+	qdel(src)
+
+/**
+  * Calls the shift animation on all attached bars.
+  */
+/datum/progress_bar/proc/shift_down_all()
 	if(user?.progress_bars[target])
 		var/list/bars = user.progress_bars[target]
 		var/list_index = bars.Find(src)
@@ -84,15 +93,16 @@
 			var/datum/progress_bar/P = bars[i]
 			P.shift()
 
+/**
+  * Cleanups before deletion.
+  */
+/datum/progress_bar/proc/cleanup()
+	if(user?.progress_bars[target])
+		var/list/bars = user.progress_bars[target]
 		bars -= src
 		if(!length(bars))
 			LAZYREMOVE(user.progress_bars, target)
 
-	if(!QDELING(src))
-		stopping = TRUE
-		update(last_progress)
-		animate(holder, alpha = 0, time = animation_time_fade, flags = ANIMATION_PARALLEL)
-		QDEL_IN(src, animation_time_fade)
 /**
   * Initializes the visual elements.
   *
