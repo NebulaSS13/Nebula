@@ -12,7 +12,7 @@
 	if(status & PART_STAT_ACTIVE)
 		machine.update_power_channel(cached_channel)
 		unset_status(machine, PART_STAT_ACTIVE)
-	unset_terminal(loc, terminal)
+	qdel(terminal) // Will call unset_terminal().
 	..()
 
 /obj/item/stock_parts/power/terminal/Destroy()
@@ -26,8 +26,6 @@
 			machine.update_power_channel(cached_channel)
 			machine.power_change()
 		return
-
-
 
 	var/surplus = terminal.surplus()
 	var/usage = machine.get_power_usage()
@@ -73,7 +71,9 @@
 		unset_terminal(machine, terminal)
 	terminal = new_terminal
 	terminal.master = src
+
 	events_repository.register(/decl/observ/destroyed, terminal, src, .proc/unset_terminal)
+	terminal.queue_icon_update()
 
 	set_extension(src, /datum/extension/event_registration/shuttle_stationary, GET_DECL(/decl/observ/moved), machine, .proc/machine_moved, get_area(src))
 	set_status(machine, PART_STAT_CONNECTED)
@@ -149,27 +149,6 @@
 					"<span class='warning'>\The [user] has added cables to the \the [machine]!</span>",\
 					"You add cables to the \the [machine].")
 				make_terminal(machine)
-		return TRUE
-
-	if(isWirecutter(I) && terminal)
-		var/turf/T = get_step(machine, terminal_dir)
-		if(terminal_dir && user.loc != T)
-			return FALSE // Wrong terminal handler.
-		if(istype(T) && !T.is_plating())
-			to_chat(user, "<span class='warning'>You must remove the floor plating in front of \the [machine] first.</span>")
-			return TRUE
-		user.visible_message("<span class='warning'>\The [user] dismantles the power terminal from \the [machine].</span>", \
-							"You begin to cut the cables...")
-		playsound(src.loc, 'sound/items/Deconstruct.ogg', 50, 1)
-		if(do_after(user, 50, machine))
-			if(terminal && (machine == loc) && machine.components_are_accessible(type))
-				if (prob(50) && electrocute_mob(user, terminal.powernet, terminal))
-					spark_at(machine, amount=5, cardinal_only = TRUE)
-					if(HAS_STATUS(user, STAT_STUN))
-						return TRUE
-				new /obj/item/stack/cable_coil(T, 10)
-				to_chat(user, "<span class='notice'>You cut the cables and dismantle the power terminal.</span>")
-				qdel(terminal)
 		return TRUE
 
 /obj/item/stock_parts/power/terminal/get_source_info()
