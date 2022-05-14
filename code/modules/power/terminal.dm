@@ -12,13 +12,54 @@
 	var/obj/item/stock_parts/power/terminal/master
 	anchored = 1
 
+	stat_immune = NOINPUT | NOSCREEN | NOPOWER
+	interact_offline = TRUE
 	uncreated_component_parts = null
-	construct_state = /decl/machine_construction/noninteractive // Axiliary entity; all interactions pass through owner machine part instead.
+	construct_state = /decl/machine_construction/noninteractive/terminal // Auxiliary entity; all interactions pass through owner machine part instead.
 
 /obj/machinery/power/terminal/Initialize()
 	. = ..()
 	var/turf/T = src.loc
-	if(level==1) hide(!T.is_plating())
+	if(level == 1)
+		hide(!T.is_plating())
+
+/obj/machinery/power/terminal/Destroy()
+	master = null
+	. = ..()
+
+/obj/machinery/power/terminal/attackby(obj/item/W, mob/user)
+	if(isWirecutter(W))
+		var/turf/T = get_turf(src)
+		var/obj/machinery/machine = master_machine()
+
+		if(istype(T) && !T.is_plating())
+			to_chat(user, SPAN_WARNING("You must remove the floor plating in front of \the [machine] first!"))
+			return
+
+		 // If this is a terminal that's somehow been left behind, let it be removed freely. 
+		if(machine && !machine.components_are_accessible(/obj/item/stock_parts/power/terminal))
+			to_chat(user, SPAN_WARNING("You must open the panel on \the [machine] first!"))
+			return
+
+		user.visible_message(SPAN_WARNING("\The [user] dismantles the power terminal from \the [machine]."), \
+										  "You begin to cut the cables...")
+		playsound(src.loc, 'sound/items/Deconstruct.ogg', 50, 1)
+		if(do_after(user, 50, src))
+			if(!QDELETED(src) && (!master || !machine || machine.components_are_accessible(/obj/item/stock_parts/power/terminal)))
+				if (prob(50) && electrocute_mob(user, powernet, src))
+					spark_at(machine, amount=5, cardinal_only = TRUE)
+					if(HAS_STATUS(user, STAT_STUN))
+						return TRUE
+				new /obj/item/stack/cable_coil(T, 10)
+				to_chat(user, SPAN_NOTICE("You cut the cables and dismantle the power terminal."))
+				qdel_self()
+	. = ..()
+
+/obj/machinery/power/terminal/examine(mob/user)
+	. = ..()
+	var/obj/machinery/machine = master_machine()
+	if(machine)
+		to_chat(user, "It is attached to \the [machine].")
 
 /obj/machinery/power/terminal/proc/master_machine()
 	var/obj/machinery/machine = master && master.loc
@@ -42,3 +83,14 @@
 	var/obj/machinery/machine = master_machine()
 	if(machine)
 		machine.power_change()
+
+/obj/machinery/power/terminal/on_update_icon()
+	. = ..()
+	if(master)
+		var/obj/machinery/machine = master_machine()
+		
+		// Wall frames and SMES have directional terminals.
+		if(!master.terminal_dir && !ispath(machine.frame_type, /obj/item/frame))
+			icon_state = "term-omni"
+		else
+			icon_state = "term"
