@@ -1,0 +1,6 @@
+author: tag if you want to specify another name or several people. -->
+delete-after: true
+changes:
+  - tweak: Upward pointing cable stubs now give proper feedback, and install properly
+      when clicked on with a cable coil in hands. You used to need to click on the
+      turf instead before, which was a bit confusing.
