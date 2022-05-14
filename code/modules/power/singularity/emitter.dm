@@ -135,7 +135,7 @@
 
 /obj/machinery/emitter/attackby(obj/item/W, mob/user)
 
-	if(isWrench(W))
+	if(IS_WRENCH(W))
 		if(active)
 			to_chat(user, "Turn off [src] first.")
 			return
@@ -158,7 +158,7 @@
 				to_chat(user, "<span class='warning'>\The [src] needs to be unwelded from the floor.</span>")
 		return
 
-	if(isWelder(W))
+	if(IS_WELDER(W))
 		var/obj/item/weldingtool/WT = W
 		if(active)
 			to_chat(user, "Turn off [src] first.")

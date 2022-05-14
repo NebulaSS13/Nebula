@@ -208,7 +208,7 @@
 			repair_breaches(BURN, use_amt * repair_power, user)
 		return
 
-	else if(isWelder(W))
+	else if(IS_WELDER(W))
 
 		if(istype(loc,/mob/living/carbon/human))
 			var/mob/living/carbon/human/H = loc

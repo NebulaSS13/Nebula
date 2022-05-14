@@ -20,7 +20,7 @@
 /obj/machinery/telecomms/attackby(obj/item/P, mob/user)
 
 	// Using a multitool lets you access the receiver's interface
-	if(isMultitool(P))
+	if(IS_MULTITOOL(P))
 		interface_interact(user)
 		return TRUE
 
@@ -60,7 +60,7 @@
 	// You need a multitool to use this, or be silicon
 	if(!issilicon(user))
 		// istype returns false if the value is null
-		if(!isMultitool(user.get_active_hand()))
+		if(!IS_MULTITOOL(user.get_active_hand()))
 			return STATUS_CLOSE
 	return ..()
 
@@ -146,13 +146,13 @@
 
 	var/obj/item/multitool/P = null
 	// Let's double check
-	if(!issilicon(user) && isMultitool(user.get_active_hand()))
+	if(!issilicon(user) && IS_MULTITOOL(user.get_active_hand()))
 		P = user.get_active_hand()
 	else if(isAI(user))
 		var/mob/living/silicon/ai/U = user
 		P = U.aiMulti
 	else if(isrobot(user) && in_range(user, src))
-		if(isMultitool(user.get_active_hand()))
+		if(IS_MULTITOOL(user.get_active_hand()))
 			P = user.get_active_hand()
 	return P
 
@@ -208,7 +208,7 @@
 	if(..())
 		return 1
 	if(!issilicon(usr))
-		if(!isMultitool(usr.get_active_hand()))
+		if(!IS_MULTITOOL(usr.get_active_hand()))
 			return
 
 	if(stat & (BROKEN|NOPOWER))

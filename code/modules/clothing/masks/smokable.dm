@@ -160,7 +160,7 @@
 			text = zippomes
 		else if(istype(W, /obj/item/flame/lighter))
 			text = lightermes
-		else if(isWelder(W))
+		else if(IS_WELDER(W))
 			text = weldermes
 		else if(istype(W, /obj/item/assembly/igniter))
 			text = ignitermes

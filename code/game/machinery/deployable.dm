@@ -38,7 +38,7 @@
 				visible_message("<span class='warning'>BZZzZZzZZzZT</span>")
 				return
 		return
-	else if(isWrench(W))
+	else if(IS_WRENCH(W))
 		if (src.health < src.maxhealth)
 			src.health = src.maxhealth
 			src.emagged = 0

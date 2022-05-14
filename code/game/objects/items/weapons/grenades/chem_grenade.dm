@@ -72,7 +72,7 @@
 			det_time = 10*T.time
 		SetName("unsecured grenade with [beakers.len] containers[detonator?" and detonator":""]")
 		stage = 1
-	else if(isScrewdriver(W) && path != 2)
+	else if(IS_SCREWDRIVER(W) && path != 2)
 		if(stage == 1)
 			path = 1
 			if(beakers.len)

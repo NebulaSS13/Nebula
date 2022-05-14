@@ -23,7 +23,7 @@
 	set_overlays(image(icon = 'icons/obj/furniture.dmi', icon_state = "w_overlay", layer = ABOVE_HUMAN_LAYER))
 
 /obj/structure/bed/chair/wheelchair/attackby(obj/item/W, mob/user)
-	if(isWrench(W) || istype(W,/obj/item/stack) || isWirecutter(W))
+	if(IS_WRENCH(W) || istype(W,/obj/item/stack) || IS_WIRECUTTER(W))
 		return
 	..()
 

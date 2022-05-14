@@ -41,7 +41,7 @@
 /obj/structure/mech_wreckage/attackby(var/obj/item/W, var/mob/user)
 
 	var/cutting
-	if(isWelder(W))
+	if(IS_WELDER(W))
 		var/obj/item/weldingtool/WT = W
 		if(WT.isOn())
 			cutting = TRUE
@@ -58,7 +58,7 @@
 			to_chat(user, SPAN_WARNING("\The [src] has already been weakened."))
 		return 1
 
-	else if(isWrench(W))
+	else if(IS_WRENCH(W))
 		if(prepared)
 			to_chat(user, SPAN_NOTICE("You finish dismantling \the [src]."))
 			SSmaterials.create_object(/decl/material/solid/metal/steel, get_turf(src), rand(5, 10))

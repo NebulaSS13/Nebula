@@ -87,7 +87,7 @@
 		add_cartridge(W, user)
 		return TRUE
 
-	if(isCrowbar(W) && !panel_open && length(cartridges))
+	if(IS_CROWBAR(W) && !panel_open && length(cartridges))
 		var/label = input(user, "Which cartridge would you like to remove?", "Chemical Dispenser") as null|anything in cartridges
 		if(!label) return
 		var/obj/item/chems/chem_disp_cartridge/C = remove_cartridge(label)

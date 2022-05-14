@@ -104,12 +104,12 @@
 		to_chat(user,"<span class='warning'>Shut \the [src] off first!</span>")
 		return
 
-	if(isMultitool(W))
+	if(IS_MULTITOOL(W))
 		var/datum/extension/local_network_member/fusion = get_extension(src, /datum/extension/local_network_member)
 		fusion.get_new_tag(user)
 		return
 
-	else if(isWrench(W))
+	else if(IS_WRENCH(W))
 		anchored = !anchored
 		playsound(src.loc, 'sound/items/Ratchet.ogg', 75, 1)
 		if(anchored)

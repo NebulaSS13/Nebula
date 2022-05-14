@@ -20,7 +20,7 @@
 	. = ..()
 
 /obj/item/weldpack/attackby(obj/item/W, mob/user)
-	if(isWelder(W))
+	if(IS_WELDER(W))
 		var/obj/item/weldingtool/T = W
 		if(T.welding & prob(50))
 			log_and_message_admins("triggered a fueltank explosion.", user)

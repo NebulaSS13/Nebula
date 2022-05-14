@@ -44,7 +44,7 @@
 	var/generated_thrust = 2.5
 
 /obj/machinery/ion_thruster/attackby(obj/item/I, mob/user)
-	if(isMultitool(I) && !panel_open)
+	if(IS_MULTITOOL(I) && !panel_open)
 		var/datum/extension/ship_engine/engine = get_extension(src, /datum/extension/ship_engine)
 		if(engine.sync_to_ship())
 			to_chat(user, SPAN_NOTICE("\The [src] emits a ping as it syncs its controls to a nearby ship."))

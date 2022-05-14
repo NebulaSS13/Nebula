@@ -595,7 +595,7 @@ var/global/list/custom_ai_icons_by_ckey_and_name = list()
 		var/obj/item/aicard/card = W
 		card.grab_ai(src, user)
 
-	else if(isWrench(W))
+	else if(IS_WRENCH(W))
 		if(anchored)
 			user.visible_message("<span class='notice'>\The [user] starts to unbolt \the [src] from the plating...</span>")
 			if(!do_after(user,40, src))

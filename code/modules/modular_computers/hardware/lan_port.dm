@@ -83,7 +83,7 @@
 				user.visible_message(SPAN_NOTICE("\The [user] has added cables to the \the [parent]!"), "You add cables to the \the [parent].")
 				set_terminal()
 		return TRUE
-	if(isWirecutter(I) && terminal)
+	if(IS_WIRECUTTER(I) && terminal)
 		var/turf/T = get_turf(parent)
 		if(istype(T) && !T.is_plating())
 			to_chat(user, SPAN_WARNING("You must remove the floor plating beneath \the [parent] first."))

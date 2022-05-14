@@ -276,7 +276,7 @@
 	material = /decl/material/solid/wood
 
 /obj/structure/bed/chair/wood/attackby(obj/item/W, mob/user)
-	if(istype(W,/obj/item/stack) || isWirecutter(W))
+	if(istype(W,/obj/item/stack) || IS_WIRECUTTER(W))
 		return
 	..()
 

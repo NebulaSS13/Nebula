@@ -12,7 +12,7 @@
 
 /obj/item/stock_parts/computer/attackby(var/obj/item/W, var/mob/user)
 	// Multitool. Runs diagnostics
-	if(isMultitool(W))
+	if(IS_MULTITOOL(W))
 		to_chat(user, "***** DIAGNOSTICS REPORT *****")
 		to_chat(user, jointext(diagnostics(), "\n"))
 		to_chat(user, "******************************")

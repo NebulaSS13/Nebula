@@ -13,7 +13,7 @@
 		docking_program.display_name = display_name
 
 /obj/machinery/embedded_controller/radio/airlock/docking_port/attackby(obj/item/W, mob/user)
-	if(isMultitool(W)) //give them part of code, would take few tries to get full
+	if(IS_MULTITOOL(W)) //give them part of code, would take few tries to get full
 		var/datum/computer/file/embedded_program/docking/airlock/docking_program = program
 		var/code = docking_program.docking_codes
 		if(!code)

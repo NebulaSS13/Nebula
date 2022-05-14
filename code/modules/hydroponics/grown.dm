@@ -160,7 +160,7 @@ var/global/list/_wood_materials = list(
 /obj/item/chems/food/grown/attackby(var/obj/item/W, var/mob/user)
 
 	if(seed)
-		if(seed.get_trait(TRAIT_PRODUCES_POWER) && isCoil(W))
+		if(seed.get_trait(TRAIT_PRODUCES_POWER) && IS_COIL(W))
 			var/obj/item/stack/cable_coil/C = W
 			if(C.use(5))
 				//TODO: generalize this.
@@ -180,7 +180,7 @@ var/global/list/_wood_materials = list(
 				return TRUE
 
 			if(seed.chems)
-				if(isHatchet(W))
+				if(IS_HATCHET(W))
 					for(var/wood_mat in global._wood_materials)
 						if(!isnull(seed.chems[wood_mat]))
 							user.visible_message("<span class='notice'>\The [user] makes planks out of \the [src].</span>")

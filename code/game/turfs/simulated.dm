@@ -168,7 +168,7 @@
 		new /obj/effect/decal/cleanable/blood/oil(src)
 
 /turf/simulated/attackby(var/obj/item/thing, var/mob/user)
-	if(isCoil(thing) && try_build_cable(thing, user))
+	if(IS_COIL(thing) && try_build_cable(thing, user))
 		return TRUE
 	return ..()
 

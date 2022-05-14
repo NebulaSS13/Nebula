@@ -86,7 +86,7 @@ var/global/list/all_conveyor_switches = list()
 		var/obj/item/grab/G = I
 		step(G.affecting, get_dir(G.affecting.loc, src))
 		return
-	if(isCrowbar(I))
+	if(IS_CROWBAR(I))
 		if(!(stat & BROKEN))
 			var/obj/item/conveyor_construct/C = new/obj/item/conveyor_construct(src.loc)
 			C.id_tag = id_tag
@@ -206,7 +206,7 @@ var/global/list/all_conveyor_switches = list()
 		position = 0
 
 /obj/machinery/conveyor_switch/attackby(obj/item/I, mob/user, params)
-	if(isCrowbar(I))
+	if(IS_CROWBAR(I))
 		var/obj/item/conveyor_switch_construct/C = new/obj/item/conveyor_switch_construct(src.loc)
 		C.id_tag = id_tag
 		transfer_fingerprints_to(C)

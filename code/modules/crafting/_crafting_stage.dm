@@ -88,7 +88,7 @@
 	playsound(user.loc, 'sound/items/Screwdriver.ogg', 100, 1)
 
 /decl/crafting_stage/screwdriver/progress_to(obj/item/thing, mob/user)
-	. = ..() && isScrewdriver(thing)
+	. = ..() && IS_SCREWDRIVER(thing)
 
 /decl/crafting_stage/tape
 	consume_completion_trigger = FALSE

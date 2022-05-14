@@ -81,7 +81,7 @@
 
 /obj/machinery/destructive_analyzer/attackby(var/obj/item/O, var/mob/user)
 
-	if(isMultitool(O) && user.a_intent != I_HURT)
+	if(IS_MULTITOOL(O) && user.a_intent != I_HURT)
 		var/datum/extension/local_network_member/fabnet = get_extension(src, /datum/extension/local_network_member)
 		fabnet.get_new_tag(user)
 		return TRUE

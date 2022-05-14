@@ -277,7 +277,7 @@
 
 		return TRUE
 
-	if(repairing && isWelder(I))
+	if(repairing && IS_WELDER(I))
 		if(!density)
 			to_chat(user, "<span class='warning'>\The [src] must be closed before you can repair it.</span>")
 			return TRUE
@@ -294,7 +294,7 @@
 				repairing = null
 		return TRUE
 
-	if(repairing && isCrowbar(I))
+	if(repairing && IS_CROWBAR(I))
 		to_chat(user, "<span class='notice'>You remove \the [repairing].</span>")
 		playsound(src.loc, 'sound/items/Crowbar.ogg', 100, 1)
 		repairing.dropInto(user.loc)

@@ -595,7 +595,7 @@
 		to_chat(user, "<span class='notice'>Someone else is attempting to open this.</span>")
 		return
 	if (closed)
-		if (isCrowbar(W))
+		if (IS_CROWBAR(W))
 			busy = 1
 			visible_message("[user] starts to pry the glass cover off of \the [src].")
 			if (!do_after(user, 50, src))
