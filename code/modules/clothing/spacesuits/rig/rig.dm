@@ -285,7 +285,7 @@
 
 				if(!failed_to_seal && wearer.back == src && piece == compare_piece)
 
-					if(seal_delay && !instant && !do_after(wearer,seal_delay,src,needhand=0))
+					if(seal_delay && !instant && !do_after(wearer,seal_delay,src,check_holding=0))
 						failed_to_seal = 1
 
 					switch(msg_type)

@@ -71,7 +71,7 @@
 /proc/get_exposed_defense_zone(var/atom/movable/target)
 	return pick(BP_HEAD, BP_L_HAND, BP_R_HAND, BP_L_FOOT, BP_R_FOOT, BP_L_ARM, BP_R_ARM, BP_L_LEG, BP_R_LEG, BP_CHEST, BP_GROIN)
 
-/proc/do_mob(mob/user , mob/target, time = 30, target_zone = 0, uninterruptible = 0, progress = 1, var/incapacitation_flags = INCAPACITATION_DEFAULT)
+/proc/do_mob(mob/user , mob/target, time = 30, target_zone = 0, uninterruptible = 0, progress = 1, incapacitation_flags = INCAPACITATION_DEFAULT, check_holding = TRUE)
 	if(!user || !target)
 		return 0
 	var/user_loc = user.loc
@@ -82,7 +82,7 @@
 
 	var/target_loc = target.loc
 
-	var/holding = user.get_active_hand()
+	var/holding = check_holding && user.get_active_hand()
 	var/datum/progressbar/progbar
 	if (progress)
 		progbar = new(user, time, target)
@@ -112,7 +112,7 @@
 			. = 0
 			break
 
-		if(user.get_active_hand() != holding)
+		if(check_holding && user.get_active_hand() != holding)
 			. = 0
 			break
 
@@ -123,7 +123,7 @@
 	if (progbar)
 		qdel(progbar)
 
-/proc/do_after(mob/user, delay, atom/target = null, needhand = 1, progress = 1, var/incapacitation_flags = INCAPACITATION_DEFAULT, var/same_direction = 0, var/can_move = 0)
+/proc/do_after(mob/user, delay, atom/target = null, check_holding = 1, progress = 1, var/incapacitation_flags = INCAPACITATION_DEFAULT, var/same_direction = 0, var/can_move = 0)
 	if(!user)
 		return 0
 	var/atom/target_loc = null
@@ -167,7 +167,7 @@
 			. = 0
 			break
 
-		if(needhand)
+		if(check_holding)
 			if(user.get_active_hand() != holding)
 				. = 0
 				break
