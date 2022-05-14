@@ -96,6 +96,7 @@ var/global/list/empty_playable_ai_cores = list()
 		. = ..()
 
 /obj/structure/aicore/on_update_icon()
+	..()
 	if(glass_installed)
 		icon_state = "4"
 	else if(brain)
@@ -195,6 +196,7 @@ var/global/list/empty_playable_ai_cores = list()
 				to_chat(usr, "Law module applied.")
 				return TRUE
 
+var/global/list/deactivated_ai_cores = list()
 /obj/structure/aicore/deactivated
 	name = "inactive AI"
 	icon = 'icons/mob/AI.dmi'
@@ -202,7 +204,12 @@ var/global/list/empty_playable_ai_cores = list()
 	anchored = 1
 	tool_interaction_flags =  (TOOL_INTERACTION_ANCHOR | TOOL_INTERACTION_DECONSTRUCT)
 
+/obj/structure/aicore/deactivated/Initialize()
+	. = ..()
+	global.deactivated_ai_cores += src
+
 /obj/structure/aicore/deactivated/Destroy()
+	global.deactivated_ai_cores -= src
 	empty_playable_ai_cores -= src
 	. = ..()
 
@@ -240,14 +247,15 @@ var/global/list/empty_playable_ai_cores = list()
 	set category = "Admin"
 
 	var/list/cores = list()
-	for(var/obj/structure/aicore/deactivated/D in world)
-		cores["[D] ([D.loc.loc])"] = D
+	for(var/obj/structure/aicore/deactivated/D in global.deactivated_ai_cores)
+		cores["[D] ([get_area(D)])"] = D
 
 	var/id = input("Which core?", "Toggle AI Core Latejoin", null) as null|anything in cores
 	if(!id) return
 
 	var/obj/structure/aicore/deactivated/D = cores[id]
-	if(!D) return
+	if(!istype(D) || QDELETED(D) || !(D in global.deactivated_ai_cores))
+		return
 
 	if(D in empty_playable_ai_cores)
 		empty_playable_ai_cores -= D

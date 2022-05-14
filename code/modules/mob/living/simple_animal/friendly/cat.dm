@@ -2,10 +2,7 @@
 /mob/living/simple_animal/cat
 	name = "cat"
 	desc = "A domesticated, feline pet. Has a tendency to adopt crewmembers."
-	icon_state = "cat2"
-	item_state = "cat2"
-	icon_living = "cat2"
-	icon_dead = "cat2_dead"
+	icon = 'icons/mob/simple_animal/cat_calico.dmi'
 	speak = list("Meow!","Esp!","Purr!","HSSSSS")
 	speak_emote = list("purrs", "meows")
 	emote_hear = list("meows","mews")
@@ -114,10 +111,10 @@
 	if(O.force)
 		set_flee_target(user? user : src.loc)
 
-/mob/living/simple_animal/cat/attack_hand(mob/M)
+/mob/living/simple_animal/cat/default_hurt_interaction(mob/user)
 	. = ..()
-	if(M.a_intent == I_HURT)
-		set_flee_target(M)
+	if(.)
+		set_flee_target(user)
 
 /mob/living/simple_animal/cat/explosion_act()
 	. = ..()
@@ -131,13 +128,23 @@
 	. = ..()
 	set_flee_target(TT.thrower? TT.thrower : src.loc)
 
+/mob/living/simple_animal/cat/harvest_skin()
+	. = ..()
+	. += new/obj/item/cat_hide(get_turf(src))
+
+/obj/item/cat_hide
+	name = "cat hide"
+	desc = "The by-product of cat farming."
+	icon = 'icons/obj/items/sheet_hide.dmi'
+	icon_state = "sheet-cat"
+
 //Basic friend AI
 /mob/living/simple_animal/cat/fluff
 	var/mob/living/carbon/human/friend
 	var/befriend_job = null
 
 /mob/living/simple_animal/cat/fluff/handle_movement_target()
-	if (friend)
+	if (!QDELETED(friend))
 		var/follow_dist = 4
 		if (friend.stat >= DEAD || friend.is_asystole()) //danger
 			follow_dist = 1
@@ -165,12 +172,12 @@
 			if (prob(10))
 				say("Meow!")
 
-	if (!friend || movement_target != friend)
+	if (QDELETED(friend) || movement_target != friend)
 		..()
 
 /mob/living/simple_animal/cat/fluff/do_delayed_life_action()
 	..()
-	if (stat || !friend)
+	if (stat || QDELETED(friend))
 		return
 	if (get_dist(src, friend) <= 1)
 		if (friend.stat >= DEAD || friend.is_asystole())
@@ -216,10 +223,7 @@
 	name = "Runtime"
 	desc = "Her fur has the look and feel of velvet, and her tail quivers occasionally."
 	gender = FEMALE
-	icon_state = "cat"
-	item_state = "cat"
-	icon_living = "cat"
-	icon_dead = "cat_dead"
+	icon = 'icons/mob/simple_animal/cat_black.dmi'
 	skin_material = /decl/material/solid/skin/fur/black
 	holder_type = /obj/item/holder/runtime
 
@@ -229,10 +233,7 @@
 /mob/living/simple_animal/cat/kitten
 	name = "kitten"
 	desc = "D'aaawwww"
-	icon_state = "kitten"
-	item_state = "kitten"
-	icon_living = "kitten"
-	icon_dead = "kitten_dead"
+	icon = 'icons/mob/simple_animal/kitten.dmi'
 	gender = NEUTER
 	meat_amount = 1
 	bone_amount = 3
@@ -253,18 +254,4 @@
 	name = "Runtime"
 	desc = "Under no circumstances is this feline allowed inside the atmospherics system."
 	gender = FEMALE
-	icon_state = "cat2"
-	item_state = "cat2"
-	icon_living = "cat2"
-	icon_dead = "cat2_dead"
 	holder_type = /obj/item/holder/runtime
-
-/mob/living/simple_animal/cat/harvest_skin()
-	. = ..()
-	. += new/obj/item/cat_hide(get_turf(src))
-
-/obj/item/cat_hide
-	name = "cat hide"
-	desc = "The by-product of cat farming."
-	icon = 'icons/obj/items/sheet_hide.dmi'
-	icon_state = "sheet-cat"

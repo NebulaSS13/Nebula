@@ -67,11 +67,11 @@
 		if(status.status_marker_icon && status.status_marker_state)
 
 			var/obj/status_marker/marker = new(null, status)
-			mob_image.vis_contents += marker
+			add_vis_contents(mob_image, marker)
 			LAZYSET(markers, status, marker)
 
 			marker = new(null, status)
-			mob_image_personal.vis_contents += marker
+			add_vis_contents(mob_image_personal, marker)
 			LAZYSET(markers_personal, status, marker)
 
 	global.status_marker_holders += src
@@ -88,10 +88,10 @@
 		C.images -= mob_image_personal
 	global.status_marker_holders -= src
 	if(mob_image)
-		mob_image.vis_contents.Cut()
+		clear_vis_contents(mob_image)
 		mob_image = null
 	if(mob_image_personal)
-		mob_image_personal.vis_contents.Cut()
+		clear_vis_contents(mob_image_personal)
 		mob_image_personal = null
 	for(var/key in markers)
 		qdel(markers[key])

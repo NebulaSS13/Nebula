@@ -41,7 +41,7 @@
 	parts += P
 	if(user)
 		user.unEquip(P, holder)
-		to_chat(user, "You install \the [P] into \the [assembly_name]")
+		to_chat(user, "You install \the [P] into \the [assembly_name].")
 	return TRUE
 
 /datum/extension/assembly/proc/uninstall_component(var/mob/living/user, var/obj/item/stock_parts/P)

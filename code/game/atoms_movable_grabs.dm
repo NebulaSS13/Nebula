@@ -3,18 +3,21 @@
 		return FALSE
 	if(!CanPhysicallyInteract(grabber))
 		return FALSE
-	if(grabber.anchored || grabber.buckled)
+	if(!buckled_grab_check(grabber))
 		return FALSE
 	if(anchored)
 		to_chat(grabber, SPAN_WARNING("\The [src] won't budge!"))
 		return FALSE
 	return TRUE
 
-/atom/movable/proc/reset_pixel_offsets_for_grab(var/obj/item/grab/G)
-	reset_plane_and_layer()
-
-/atom/movable/proc/adjust_pixel_offsets_for_grab(var/obj/item/grab/G, var/grab_dir)
-	reset_plane_and_layer()
-
 /atom/movable/proc/get_object_size()
 	return ITEM_SIZE_NORMAL
+
+/atom/movable/proc/buckled_grab_check(var/mob/grabber)
+	if(grabber.buckled == src && buckled_mob == grabber)
+		return TRUE
+	if(grabber.anchored)
+		return FALSE
+	if(grabber.buckled)
+		return FALSE
+	return TRUE

@@ -3,7 +3,6 @@
 	desc = "A list of surgeries, their requirements and their effects."
 
 	guide_name = "Surgery Basics"
-	guide_strings = list("surgery")
 	guide_html = {"
 		<h1>Surgery Basics</h1>
 		This guide contains some quick and dirty basic outlines of common surgical procedures.
@@ -67,11 +66,11 @@
 		</ol>
 	"}
 
-/decl/codex_category/surgery/Initialize()
+/decl/codex_category/surgery/Populate()
 	var/list/procedures = decls_repository.get_decls_of_subtype(/decl/surgery_step)
 	for(var/stype in procedures)
 		var/decl/surgery_step/procedure = procedures[stype]
-		if(procedure.hidden_from_codex || !procedure.name)
+		if(procedure.hidden_from_codex || !procedure.name || procedure.is_abstract())
 			continue
 
 		var/list/surgery_info = list()
@@ -112,7 +111,10 @@
 		if(procedure.additional_codex_lines)
 			surgery_info += procedure.additional_codex_lines
 
-		var/datum/codex_entry/entry = new(_display_name = lowertext(trim("[lowertext(procedure.name)] (surgery)")), _lore_text = procedure.description, _mechanics_text = jointext(surgery_info, "<br>"))
-		SScodex.add_entry_by_string(entry.name, entry)
+		var/datum/codex_entry/entry = new(
+			_display_name = lowertext(trim("[lowertext(procedure.name)] (surgery)")), 
+			_lore_text = procedure.description, 
+			_mechanics_text = jointext(surgery_info, "<br>")
+		)
 		items |= entry.name
 	. = ..()

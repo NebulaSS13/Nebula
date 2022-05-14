@@ -19,8 +19,7 @@
 		extras += FS
 		if(!user.unEquip(FS, src))
 			return
-		FS.pixel_x = 0 // Reset its pixel offsets so the icons work!
-		FS.pixel_y = 0
+		reset_offsets(0) // Reset its pixel offsets so the icons work!
 		to_chat(user, "<span class=notice>You add \the [FS] to \the [src].</span>")
 		update_icon()
 	else

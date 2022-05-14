@@ -5,7 +5,7 @@
 		if(!assembly.enabled)
 			return
 
-	var/datum/extension/interactive/ntos/os = get_extension(src, /datum/extension/interactive/ntos)
+	var/datum/extension/interactive/os/os = get_extension(src, /datum/extension/interactive/os)
 	if(os)
 		os.Process()
 
@@ -15,7 +15,7 @@
 		playsound(src.loc, pick(beepsounds),15,1,10, is_ambiance = 1)
 
 /obj/item/modular_computer/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1)
-	var/datum/extension/interactive/ntos/os = get_extension(src, /datum/extension/interactive/ntos)
+	var/datum/extension/interactive/os/os = get_extension(src, /datum/extension/interactive/os)
 	if(os)
 		os.ui_interact(user)
 
@@ -27,7 +27,7 @@
 
 // Used to install preset-specific programs
 /obj/item/modular_computer/proc/install_default_programs()
-	var/mob/living/carbon/human/H = get_holder_of_type(src, /mob)
+	var/mob/living/carbon/human/H = get_recursive_loc_of_type(/mob)
 	var/list/job_programs = list()
 	if(H)
 		var/datum/job/jb = SSjobs.get_by_title(H.job)
@@ -45,7 +45,7 @@
 
 /obj/item/modular_computer/Initialize()
 	START_PROCESSING(SSobj, src)
-	set_extension(src, /datum/extension/interactive/ntos/device)
+	set_extension(src, /datum/extension/interactive/os/device)
 	set_extension(src, computer_type)
 
 	if(stores_pen && ispath(stored_pen))
@@ -89,7 +89,7 @@
 		I.color = decals[decal_state]
 		I.appearance_flags |= RESET_COLOR
 		add_overlay(I)
-	var/datum/extension/interactive/ntos/os = get_extension(src, /datum/extension/interactive/ntos)
+	var/datum/extension/interactive/os/os = get_extension(src, /datum/extension/interactive/os)
 	var/image/screen_overlay = os?.get_screen_overlay()
 	if(screen_overlay)
 		add_overlay(screen_overlay)
@@ -99,7 +99,7 @@
 	update_lighting()
 
 /obj/item/modular_computer/proc/update_lighting()
-	var/datum/extension/interactive/ntos/os = get_extension(src, /datum/extension/interactive/ntos)
+	var/datum/extension/interactive/os/os = get_extension(src, /datum/extension/interactive/os)
 	var/datum/extension/assembly/modular_computer/assembly = get_extension(src, /datum/extension/assembly)
 	if(assembly && assembly.enabled)
 		set_light(light_strength, l_color = (assembly.bsod || os?.updating) ? "#0000ff" : light_color)

@@ -13,6 +13,8 @@
 
 	var/list/relays = list()
 
+	var/list/cameras_by_channel = list()
+
 	var/datum/extension/network_device/broadcaster/router/router
 	var/datum/extension/network_device/acl/access_controller
 
@@ -31,7 +33,7 @@
 
 /datum/computer_network/Destroy()
 	for(var/datum/extension/network_device/D in devices)
-		D.disconnect()
+		D.disconnect(TRUE)
 	QDEL_NULL_LIST(chat_channels)
 	devices = null
 	mainframes = null
@@ -45,9 +47,6 @@
 		return FALSE
 	if(D in devices)
 		return TRUE
-	D.network_tag = get_unique_tag(D.network_tag)
-	devices |= D
-	devices_by_tag[D.network_tag] = D
 	if(istype(D, /datum/extension/network_device/mainframe))
 		var/datum/extension/network_device/mainframe/M = D
 		mainframes |= M
@@ -57,8 +56,18 @@
 	else if(istype(D, /datum/extension/network_device/broadcaster/relay))
 		relays |= D
 		add_log("Relay ONLINE", D.network_tag)
-	else if(istype(D, /datum/extension/network_device/acl) && !access_controller)
-		set_access_controller(D)
+	else if(istype(D, /datum/extension/network_device/acl))
+		if(access_controller)
+			return FALSE
+		access_controller = D
+		add_log("New main access controller set.", D.network_tag)
+	else if(istype(D, /datum/extension/network_device/camera))
+		var/datum/extension/network_device/camera/C = D
+		add_camera_to_channels(C, C.channels)
+	
+	D.network_tag = get_unique_tag(D.network_tag)
+	devices |= D
+	devices_by_tag[D.network_tag] = D
 	return TRUE
 
 /datum/computer_network/proc/remove_device(datum/extension/network_device/D)
@@ -73,6 +82,10 @@
 	else if(D in relays)
 		relays -= D
 		add_log("Relay OFFLINE", D.network_tag)
+	else if(istype(D, /datum/extension/network_device/camera))
+		var/datum/extension/network_device/camera/C = D
+		remove_camera_from_channels(C, C.channels)
+	
 	if(D == router)
 		router = null
 		for(var/datum/extension/network_device/broadcaster/router/R in devices)
@@ -117,11 +130,15 @@
 	if(specific_action && !(network_features_enabled & specific_action))
 		return FALSE
 	var/list/broadcasters = relays + router
+	var/datum/graph/device_graph = D.get_wired_connection()
 	for(var/datum/extension/network_device/broadcaster/R in broadcasters)
-		var/wired_connection = R.get_wired_connection()
-		if(!isnull(wired_connection) && wired_connection == D.get_wired_connection())
-			return WIRED_CONNECTION
-		else if(R.allow_wifi && (R.long_range || (get_z(R.holder) == get_z(D.holder))))
+		if(device_graph)
+			var/wired_connection = R.get_wired_connection()
+			if(!isnull(wired_connection) && wired_connection == device_graph)
+				return WIRED_CONNECTION
+		else if(.) // If we're not checking for wired connections, return at the first found connection.
+			return
+		if(R.allow_wifi && (R.long_range || (get_z(R.holder) == get_z(D.holder))))
 			. = WIRELESS_CONNECTION
 
 /datum/computer_network/proc/get_signal_strength(datum/extension/network_device/D)
@@ -179,10 +196,10 @@
 /datum/computer_network/proc/get_os_by_nid(nid)
 	for(var/datum/extension/network_device/D in devices)
 		if(D.address == uppertext(nid))
-			var/datum/extension/interactive/ntos/os = get_extension(D.holder, /datum/extension/interactive/ntos)
+			var/datum/extension/interactive/os/os = get_extension(D.holder, /datum/extension/interactive/os)
 			if(!os)
 				var/atom/A = D.holder
-				os = get_extension(A.loc, /datum/extension/interactive/ntos)
+				os = get_extension(A.loc, /datum/extension/interactive/os)
 			return os
 
 /datum/computer_network/proc/get_router_z()
@@ -196,31 +213,22 @@
 		if(net.router && ARE_Z_CONNECTED(get_z(net.router.holder), get_z(T)))
 			return net
 
-/datum/computer_network/proc/get_mainframes_by_role(mainframe_role = MF_ROLE_FILESERVER, mob/user)
-	// if administrator, give full access.
-	if(!user)
-		return mainframes_by_role[mainframe_role]
-	var/obj/item/card/id/network/id = user.GetIdCard()
-	if(id && istype(id, /obj/item/card/id/network) && access_controller && (id.user_id in access_controller.administrators))
+/datum/computer_network/proc/get_mainframes_by_role(mainframe_role = MF_ROLE_FILESERVER, list/accesses)
+	// Don't check for access if none is passed, for internal usage.
+	if(!accesses)
 		return mainframes_by_role[mainframe_role]
 	var/list/allowed_mainframes = list()
 	for(var/datum/extension/network_device/D in mainframes_by_role[mainframe_role])
-		if(D.has_access(user))
+		if(D.has_access(accesses))
 			allowed_mainframes |= D
 	return allowed_mainframes
 
-/datum/computer_network/proc/get_devices_by_type(var/type, var/mob/user)
-	var/bypass_auth = !user
-	if(!bypass_auth)
-		// Check for admin.
-		var/obj/item/card/id/network/id = user.GetIdCard()
-		if(id && istype(id, /obj/item/card/id/network) && access_controller && (id.user_id in access_controller.administrators))
-			bypass_auth = TRUE
-
+/datum/computer_network/proc/get_devices_by_type(type, list/accesses)
 	var/list/results = list()
+	var/bypass_auth = !accesses
 	for(var/datum/extension/network_device/device in devices)
 		if(istype(device.holder, type))
-			if(bypass_auth || device.has_access(user))
+			if(bypass_auth || device.has_access(accesses))
 				results += device.holder
 	return results
 
@@ -231,3 +239,19 @@
 		if(istype(device.holder, type))
 			results |= tag
 	return results
+
+/datum/computer_network/proc/add_camera_to_channels(var/datum/extension/network_device/camera/added, var/list/channels)
+	if(!islist(channels))
+		channels = list(channels)
+	for(var/channel in channels)
+		if(!cameras_by_channel[channel])
+			cameras_by_channel[channel] = list()
+		cameras_by_channel[channel] |= added
+
+/datum/computer_network/proc/remove_camera_from_channels(var/datum/extension/network_device/camera/removed, var/list/channels)
+	if(!islist(channels))
+		channels = list(channels)
+	for(var/channel in channels)
+		cameras_by_channel[channel] -= removed
+		if(!length(cameras_by_channel))
+			cameras_by_channel -= channel

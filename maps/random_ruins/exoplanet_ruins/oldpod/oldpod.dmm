@@ -66,7 +66,7 @@
 /area/map_template/oldpod)
 "ak" = (
 /obj/structure/bed,
-/obj/effect/landmark/corpse/doctor,
+/obj/abstract/landmark/corpse/doctor,
 /obj/effect/decal/cleanable/blood,
 /obj/effect/decal/cleanable/dirt,
 /turf/simulated/floor/tiled/monotile,
@@ -247,7 +247,6 @@
 /area/map_template/oldpod)
 "aH" = (
 /obj/structure/cable/cyan{
-	d2 = 4;
 	icon_state = "0-4"
 	},
 /obj/item/frame/apc,
@@ -258,8 +257,6 @@
 /area/map_template/oldpod)
 "aI" = (
 /obj/structure/cable/cyan{
-	d1 = 2;
-	d2 = 8;
 	icon_state = "2-8"
 	},
 /obj/effect/decal/cleanable/filth,
@@ -268,7 +265,7 @@
 /turf/simulated/floor/tiled/monotile,
 /area/map_template/oldpod)
 "aJ" = (
-/obj/effect/landmark/corpse/pirate,
+/obj/abstract/landmark/corpse/pirate,
 /obj/item/gun/energy/captain,
 /obj/effect/decal/cleanable/dirt,
 /obj/effect/decal/cleanable/dirt,
@@ -289,7 +286,7 @@
 /turf/simulated/floor/tiled/monotile,
 /area/map_template/oldpod)
 "aM" = (
-/obj/effect/landmark/corpse/scientist,
+/obj/abstract/landmark/corpse/scientist,
 /obj/item/baton/cattleprod,
 /obj/item/shard,
 /obj/effect/decal/cleanable/blood,
@@ -397,7 +394,6 @@
 	dir = 1
 	},
 /obj/structure/cable/cyan{
-	d2 = 2;
 	icon_state = "0-2"
 	},
 /obj/effect/floor_decal/industrial/warning{
@@ -454,7 +450,7 @@
 /turf/simulated/floor/plating,
 /area/map_template/oldpod)
 "bc" = (
-/obj/machinery/power/port_gen/pacman,
+/obj/machinery/port_gen/pacman,
 /obj/structure/cable/cyan,
 /obj/effect/floor_decal/industrial/warning{
 	dir = 4
@@ -462,7 +458,7 @@
 /turf/simulated/floor/plating,
 /area/map_template/oldpod)
 "bd" = (
-/obj/effect/landmark/corpse/bridgeofficer,
+/obj/abstract/landmark/corpse/bridgeofficer,
 /obj/effect/decal/cleanable/blood,
 /turf/simulated/floor/tiled/monotile,
 /area/map_template/oldpod)

@@ -390,6 +390,12 @@
 	splat_type = /obj/effect/vine
 	kitchen_tag = "mushroom"
 
+/datum/seed/mushroom/make_splat(var/turf/T, var/obj/item/thrown)
+	if(!splat_type || (locate(splat_type) in T))
+		return
+	new splat_type(T, src)
+	// No further logic; the vine will handle it.
+
 /datum/seed/mushroom/New()
 	..()
 	set_trait(TRAIT_MATURATION,7)

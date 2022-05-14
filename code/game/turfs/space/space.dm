@@ -15,7 +15,7 @@
 	/// Force this one to pretend it's an overedge turf.
 	var/forced_dirs = 0 
 
-/turf/space/proc/update_starlight()
+/turf/space/update_ambient_light(var/mapload)
 	if(config.starlight && (locate(/turf/simulated) in RANGE_TURFS(src, 1)))
 		set_light(config.starlight, 0.75, l_color = SSskybox.background_color)
 	else
@@ -26,7 +26,7 @@
 	SHOULD_CALL_PARENT(FALSE)
 	atom_flags |= ATOM_FLAG_INITIALIZED
 
-	update_starlight()
+	update_ambient_light(mapload)
 
 	//We might be an edge
 	if(y == world.maxy || forced_dirs & NORTH)
@@ -134,7 +134,7 @@
 	..()
 	if(A && A.loc == src && !density) // !density so 'fake' space turfs don't fling ghosts everywhere
 		if (A.x <= TRANSITIONEDGE || A.x >= (world.maxx - TRANSITIONEDGE + 1) || A.y <= TRANSITIONEDGE || A.y >= (world.maxy - TRANSITIONEDGE + 1))
-			A.touch_map_edge()
+			A.touch_map_edge(OVERMAP_ID_SPACE)
 
 /turf/space/proc/Sandbox_Spacemove(atom/movable/A)
 	var/cur_x
@@ -249,8 +249,8 @@
 					A.loc.Entered(A)
 	return
 
-/turf/space/ChangeTurf(var/turf/N, var/tell_universe = TRUE, var/force_lighting_update = FALSE, var/keep_air = FALSE)
-	return ..(N, tell_universe, TRUE, keep_air)
+/turf/space/ChangeTurf(var/turf/N, var/tell_universe = TRUE, var/force_lighting_update = FALSE, var/keep_air = FALSE, var/keep_outside = FALSE)
+	return ..(N, tell_universe, TRUE, keep_air, keep_outside)
 
 /turf/space/is_open()
 	return TRUE

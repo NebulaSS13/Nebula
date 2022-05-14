@@ -20,166 +20,164 @@
 
 /mob/living/carbon/human/proc/get_natural_attacks()
 	. = list()
-	for(var/obj/item/organ/external/limb in organs)
+	for(var/obj/item/organ/external/limb in get_external_organs())
 		if(length(limb.unarmed_attacks) && limb.is_usable())
 			. |= limb.unarmed_attacks
+
+/mob/living/carbon/human/default_help_interaction(mob/user)
+	if(user != src && ishuman(user) && (is_asystole() || (status_flags & FAKEDEATH) || failed_last_breath) && !on_fire && !(user.zone_sel.selecting == BP_R_ARM || user.zone_sel.selecting == BP_L_ARM))
+		if (performing_cpr)
+			performing_cpr = FALSE
+		else
+			performing_cpr = TRUE
+			start_compressions(user, TRUE)
+		return TRUE
+	if(!(user == src && apply_pressure(user, user.zone_sel.selecting)))
+		help_shake_act(user)
+		return TRUE
+	. = ..()
+
+/mob/living/carbon/human/default_disarm_interaction(mob/user)
+	var/decl/species/user_species = user.get_species()
+	if(user_species)
+		admin_attack_log(user, src, "Disarmed their victim.", "Was disarmed.", "disarmed")
+		user_species.disarm_attackhand(user, src)
+		return TRUE
+	. = ..()
+
+/mob/living/carbon/human/default_hurt_interaction(mob/user)
+	. = ..()
+	if(.)
+		return TRUE
+
+	if(user.incapacitated())
+		to_chat(user, SPAN_WARNING("You can't attack while incapacitated."))
+		return TRUE
+
+	if(!ishuman(user))
+		attack_generic(user, rand(1,3), "punched")
+		return TRUE
+
+	var/mob/living/carbon/human/H = user
+	var/rand_damage = rand(1, 5)
+	var/block = 0
+	var/accurate = 0
+	var/hit_zone = H.zone_sel.selecting
+	var/obj/item/organ/external/affecting = get_organ(hit_zone)
+
+	// See what attack they use
+	var/decl/natural_attack/attack = H.get_unarmed_attack(src, hit_zone)
+	if(!attack)
+		return TRUE
+
+	if(world.time < H.last_attack + attack.delay)
+		to_chat(H, SPAN_NOTICE("You can't attack again so soon."))
+		return TRUE
+
+	last_handled_by_mob = weakref(H)
+	H.last_attack = world.time
+
+
+	if(!affecting || affecting.is_stump())
+		to_chat(user, SPAN_DANGER("They are missing that limb!"))
+		return TRUE
+
+	switch(src.a_intent)
+		if(I_HELP)
+			// We didn't see this coming, so we get the full blow
+			rand_damage = 5
+			accurate = 1
+		if(I_HURT, I_GRAB)
+			// We're in a fighting stance, there's a chance we block
+			if(MayMove() && src!=H && prob(20))
+				block = 1
+
+	if (LAZYLEN(user.grabbed_by))
+		// Someone got a good grip on them, they won't be able to do much damage
+		rand_damage = max(1, rand_damage - 2)
+
+	if(LAZYLEN(grabbed_by) || !src.MayMove() || src==H || H.species.species_flags & SPECIES_FLAG_NO_BLOCK)
+		accurate = 1 // certain circumstances make it impossible for us to evade punches
+		rand_damage = 5
+
+	// Process evasion and blocking
+	var/miss_type = 0
+	var/attack_message
+	if(!accurate)
+		/* ~Hubblenaut
+			This place is kind of convoluted and will need some explaining.
+			ran_zone() will pick out of 11 zones, thus the chance for hitting
+			our target where we want to hit them is circa 9.1%.
+			Now since we want to statistically hit our target organ a bit more
+			often than other organs, we add a base chance of 20% for hitting it.
+			This leaves us with the following chances:
+			If aiming for chest:
+				27.3% chance you hit your target organ
+				70.5% chance you hit a random other organ
+				 2.2% chance you miss
+			If aiming for something else:
+				23.2% chance you hit your target organ
+				56.8% chance you hit a random other organ
+				15.0% chance you miss
+			Note: We don't use get_zone_with_miss_chance() here since the chances
+				  were made for projectiles.
+			TODO: proc for melee combat miss chances depending on organ?
+		*/
+		if(prob(80))
+			hit_zone = ran_zone(hit_zone, target = src)
+		if(prob(15) && hit_zone != BP_CHEST) // Missed!
+			if(!src.lying)
+				attack_message = "\The [H] attempted to strike \the [src], but missed!"
+			else
+				var/decl/pronouns/G = get_pronouns()
+				attack_message = "\The [H] attempted to strike \the [src], but [G.he] rolled out of the way!"
+				src.set_dir(pick(global.cardinal))
+			miss_type = 1
+
+	if(!miss_type && block)
+		attack_message = "[H] went for [src]'s [affecting.name] but was blocked!"
+		miss_type = 2
+
+	H.do_attack_animation(src)
+	if(!attack_message)
+		attack.show_attack(H, src, hit_zone, rand_damage)
+	else
+		H.visible_message(SPAN_DANGER("[attack_message]"))
+
+	playsound(loc, ((miss_type) ? (miss_type == 1 ? attack.miss_sound : 'sound/weapons/thudswoosh.ogg') : attack.attack_sound), 25, 1, -1)
+	admin_attack_log(H, src, "[miss_type ? (miss_type == 1 ? "Has missed" : "Was blocked by") : "Has [pick(attack.attack_verb)]"] their victim.", "[miss_type ? (miss_type == 1 ? "Missed" : "Blocked") : "[pick(attack.attack_verb)]"] their attacker", "[miss_type ? (miss_type == 1 ? "has missed" : "was blocked by") : "has [pick(attack.attack_verb)]"]")
+
+	if(miss_type)
+		return TRUE
+
+	var/real_damage = rand_damage
+	real_damage += attack.get_unarmed_damage(H)
+	real_damage *= damage_multiplier
+	rand_damage *= damage_multiplier
+	if(MUTATION_HULK in H.mutations)
+		real_damage *= 2 // Hulks do twice the damage
+		rand_damage *= 2
+	real_damage = max(1, real_damage)
+	// Apply additional unarmed effects.
+	attack.apply_effects(H, src, rand_damage, hit_zone)
+	// Finally, apply damage to target
+	apply_damage(real_damage, attack.get_damage_type(), hit_zone, damage_flags=attack.damage_flags())
+	return TRUE
 
 /mob/living/carbon/human/attack_hand(mob/user)
 
 	remove_cloaking_source(species)
-
-	// Grabs are handled at a lower level.
-	if(user.a_intent == I_GRAB)
-		return ..()
-
+	if(user.a_intent != I_GRAB)
+		for (var/obj/item/grab/G in user.get_active_grabs())
+			if(G.assailant == user && G.affecting == src && G.resolve_openhand_attack())
+				return TRUE
 	// Should this all be in Touch()?
-	var/mob/living/carbon/human/H = user
-	if(istype(H))
-		if(H != src && check_shields(0, null, H, H.zone_sel.selecting, H.name))
-			H.do_attack_animation(src)
-			return TRUE
-
-		for (var/obj/item/grab/G in H)
-			if (G.assailant == H && G.affecting == src)
-				if(G.resolve_openhand_attack())
-					return TRUE
-
-	switch(user.a_intent)
-		if(I_HELP)
-			if(H != src && istype(H) && (is_asystole() || (status_flags & FAKEDEATH) || failed_last_breath) && !on_fire && !(H.zone_sel.selecting == BP_R_ARM || H.zone_sel.selecting == BP_L_ARM))
-				if (performing_cpr)
-					performing_cpr = FALSE
-					return
-
-				performing_cpr = TRUE
-				start_compressions(H, TRUE)
-
-			else if(!(user == src && apply_pressure(user, user.zone_sel.selecting)))
-				help_shake_act(user)
-			return TRUE
-
-		if(I_HURT)
-			if(H.incapacitated())
-				to_chat(H, "<span class='notice'>You can't attack while incapacitated.</span>")
+		var/mob/living/carbon/human/H = user
+		if(istype(H))
+			if(H != src && check_shields(0, null, H, H.zone_sel.selecting, H.name))
+				H.do_attack_animation(src)
 				return TRUE
 
-			if(!istype(H))
-				attack_generic(H,rand(1,3),"punched")
-				return TRUE
-
-			var/rand_damage = rand(1, 5)
-			var/block = 0
-			var/accurate = 0
-			var/hit_zone = H.zone_sel.selecting
-			var/obj/item/organ/external/affecting = get_organ(hit_zone)
-
-			// See what attack they use
-			var/decl/natural_attack/attack = H.get_unarmed_attack(src, hit_zone)
-			if(!attack)
-				return TRUE
-			if(world.time < H.last_attack + attack.delay)
-				to_chat(H, "<span class='notice'>You can't attack again so soon.</span>")
-				return TRUE
-			else
-				last_handled_by_mob = weakref(H)
-				H.last_attack = world.time
-
-			if(!affecting || affecting.is_stump())
-				to_chat(user, "<span class='danger'>They are missing that limb!</span>")
-				return TRUE
-
-			switch(src.a_intent)
-				if(I_HELP)
-					// We didn't see this coming, so we get the full blow
-					rand_damage = 5
-					accurate = 1
-				if(I_HURT, I_GRAB)
-					// We're in a fighting stance, there's a chance we block
-					if(MayMove() && src!=H && prob(20))
-						block = 1
-
-			if (LAZYLEN(user.grabbed_by))
-				// Someone got a good grip on them, they won't be able to do much damage
-				rand_damage = max(1, rand_damage - 2)
-
-			if(LAZYLEN(grabbed_by) || !src.MayMove() || src==H || H.species.species_flags & SPECIES_FLAG_NO_BLOCK)
-				accurate = 1 // certain circumstances make it impossible for us to evade punches
-				rand_damage = 5
-
-			// Process evasion and blocking
-			var/miss_type = 0
-			var/attack_message
-			if(!accurate)
-				/* ~Hubblenaut
-					This place is kind of convoluted and will need some explaining.
-					ran_zone() will pick out of 11 zones, thus the chance for hitting
-					our target where we want to hit them is circa 9.1%.
-
-					Now since we want to statistically hit our target organ a bit more
-					often than other organs, we add a base chance of 20% for hitting it.
-
-					This leaves us with the following chances:
-
-					If aiming for chest:
-						27.3% chance you hit your target organ
-						70.5% chance you hit a random other organ
-						 2.2% chance you miss
-
-					If aiming for something else:
-						23.2% chance you hit your target organ
-						56.8% chance you hit a random other organ
-						15.0% chance you miss
-
-					Note: We don't use get_zone_with_miss_chance() here since the chances
-						  were made for projectiles.
-					TODO: proc for melee combat miss chances depending on organ?
-				*/
-				if(prob(80))
-					hit_zone = ran_zone(hit_zone, target = src)
-				if(prob(15) && hit_zone != BP_CHEST) // Missed!
-					if(!src.lying)
-						attack_message = "\The [H] attempted to strike \the [src], but missed!"
-					else
-						var/decl/pronouns/G = get_pronouns()
-						attack_message = "\The [H] attempted to strike \the [src], but [G.he] rolled out of the way!"
-						src.set_dir(pick(global.cardinal))
-					miss_type = 1
-
-			if(!miss_type && block)
-				attack_message = "[H] went for [src]'s [affecting.name] but was blocked!"
-				miss_type = 2
-
-			H.do_attack_animation(src)
-			if(!attack_message)
-				attack.show_attack(H, src, hit_zone, rand_damage)
-			else
-				H.visible_message("<span class='danger'>[attack_message]</span>")
-
-			playsound(loc, ((miss_type) ? (miss_type == 1 ? attack.miss_sound : 'sound/weapons/thudswoosh.ogg') : attack.attack_sound), 25, 1, -1)
-			admin_attack_log(H, src, "[miss_type ? (miss_type == 1 ? "Has missed" : "Was blocked by") : "Has [pick(attack.attack_verb)]"] their victim.", "[miss_type ? (miss_type == 1 ? "Missed" : "Blocked") : "[pick(attack.attack_verb)]"] their attacker", "[miss_type ? (miss_type == 1 ? "has missed" : "was blocked by") : "has [pick(attack.attack_verb)]"]")
-
-			if(miss_type)
-				return TRUE
-
-			var/real_damage = rand_damage
-			real_damage += attack.get_unarmed_damage(H)
-			real_damage *= damage_multiplier
-			rand_damage *= damage_multiplier
-			if(MUTATION_HULK in H.mutations)
-				real_damage *= 2 // Hulks do twice the damage
-				rand_damage *= 2
-			real_damage = max(1, real_damage)
-			// Apply additional unarmed effects.
-			attack.apply_effects(H, src, rand_damage, hit_zone)
-			// Finally, apply damage to target
-			apply_damage(real_damage, attack.get_damage_type(), hit_zone, damage_flags=attack.damage_flags())
-			return TRUE
-
-		if(I_DISARM)
-			if(H.species)
-				admin_attack_log(user, src, "Disarmed their victim.", "Was disarmed.", "disarmed")
-				H.species.disarm_attackhand(H, src)
-				return TRUE
 	. = ..()
 
 /mob/living/carbon/human/proc/start_compressions(mob/living/carbon/human/H, starting = FALSE, cpr_mode)
@@ -227,7 +225,7 @@
 			if(chest)
 				chest.fracture()
 
-		var/obj/item/organ/internal/heart/heart = get_internal_organ(BP_HEART)
+		var/obj/item/organ/internal/heart/heart = get_organ(BP_HEART)
 		if(heart)
 			heart.external_pump = list(world.time, 0.4 + 0.1*pumping_skill + rand(-0.1,0.1))
 
@@ -256,14 +254,14 @@
 			to_chat(H, SPAN_WARNING("You need to remove \the [src]'s mouth covering for mouth-to-mouth resuscitation!"))
 			return TRUE
 
-		if(!H.get_internal_organ(H.species.breathing_organ))
+		if(!H.get_organ(H.species.breathing_organ))
 			to_chat(H, SPAN_WARNING("You need lungs for mouth-to-mouth resuscitation!"))
 			return TRUE
 
 		if(!need_breathe())
 			return TRUE
 
-		var/obj/item/organ/internal/lungs/L = get_internal_organ(species.breathing_organ)
+		var/obj/item/organ/internal/lungs/L = get_organ(species.breathing_organ)
 
 		if(!L)
 			return

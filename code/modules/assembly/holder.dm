@@ -15,6 +15,28 @@
 	var/obj/item/assembly/a_right = null
 	var/obj/special_assembly = null
 
+/obj/item/assembly_holder/Initialize()
+	. = ..()
+	global.listening_objects += src
+
+/obj/item/assembly_holder/Destroy()
+	global.listening_objects -= src
+	if(!QDELETED(a_left))
+		a_left.holder = null
+		QDEL_NULL(a_left)
+	else 
+		a_left = null
+	if(!QDELETED(a_right))
+		a_right.holder = null
+		QDEL_NULL(a_right)
+	else 
+		a_right = null
+	if(!QDELETED(special_assembly))
+		QDEL_NULL(special_assembly)
+	else 
+		special_assembly = null
+	return ..()
+
 /obj/item/assembly_holder/proc/attach(var/obj/item/D, var/obj/item/D2, var/mob/user)
 	return
 
@@ -181,16 +203,6 @@
 //		if(!special_assembly == D)
 //			special_assembly.dothings()
 	return 1
-
-
-/obj/item/assembly_holder/Initialize()
-	. = ..()
-	global.listening_objects += src
-
-/obj/item/assembly_holder/Destroy()
-	global.listening_objects -= src
-	return ..()
-
 
 /obj/item/assembly_holder/hear_talk(mob/living/M, msg, verb, decl/language/speaking)
 	if(a_right)

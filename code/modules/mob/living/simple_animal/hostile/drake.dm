@@ -2,9 +2,6 @@
 	name = "drake"
 	desc = "A large reptilian creature, with vicious looking claws."
 	icon = 'icons/mob/simple_animal/drake.dmi'
-	icon_state = "drake"
-	icon_living = "drake"
-	icon_dead = "drake_dead"
 	mob_size = MOB_SIZE_LARGE
 	speak_emote = list("hisses")
 	emote_hear = list("clicks")

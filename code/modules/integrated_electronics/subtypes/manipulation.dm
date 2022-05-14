@@ -458,7 +458,7 @@
 	var/atom/movable/AM = get_object()
 	events_repository.unregister(/decl/observ/moved, pulling, src)
 	events_repository.unregister(/decl/observ/moved, AM, src)
-	AM.visible_message("\The [AM] stops pulling \the [pulling]")
+	AM.visible_message("\The [AM] stops pulling \the [pulling].")
 	events_repository.unregister(/decl/observ/destroyed, pulling, src)
 	pulling = null
 	set_pin_data(IC_OUTPUT, 1, FALSE)
@@ -636,7 +636,7 @@
 		controlling = L
 		card.dropInto(src)
 		aicard = card
-		user.visible_message("\The [user] loads \the [card] into \the [src]'s device slot")
+		user.visible_message("\The [user] loads \the [card] into \the [src]'s device slot.")
 		to_chat(L, "<span class='notice'>### IICC FIRMWARE LOADED ###</span>")
 
 /obj/item/integrated_circuit/manipulation/ai/proc/unload_ai()

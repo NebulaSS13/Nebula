@@ -52,7 +52,7 @@
 	. = ..()
 	
 /mob/observer/eye/blueprints/proc/create_area()
-	var/area_name = sanitizeSafe(input("New area name:","Area Creation", ""), MAX_NAME_LEN)
+	var/area_name = sanitize_safe(input("New area name:","Area Creation", ""), MAX_NAME_LEN)
 	if(!area_name || !length(area_name))
 		return
 	if(length(area_name) > 50)
@@ -89,7 +89,7 @@
 	if(!check_modification_validity())
 		return
 	var/prevname = A.name
-	var/new_area_name = sanitizeSafe(input("Edit area name:","Area Editing", prevname), MAX_NAME_LEN)
+	var/new_area_name = sanitize_safe(input("Edit area name:","Area Editing", prevname), MAX_NAME_LEN)
 	if(!new_area_name || !LAZYLEN(new_area_name) || new_area_name==prevname)
 		return
 	if(length(new_area_name) > 50)

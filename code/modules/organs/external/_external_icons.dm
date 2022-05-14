@@ -47,15 +47,15 @@ var/global/list/limb_icon_cache = list()
 
 /obj/item/organ/external/head/sync_colour_to_human(var/mob/living/carbon/human/human)
 	..()
-	var/obj/item/organ/internal/eyes/eyes = owner.get_internal_organ(BP_EYES)
+	var/obj/item/organ/internal/eyes/eyes = human.get_organ(BP_EYES)
 	if(eyes) eyes.update_colour()
 
-/obj/item/organ/external/head/removed()
+/obj/item/organ/external/head/on_remove_effects(mob/living/last_owner)
 	update_icon(1)
-	if(owner)
-		SetName("[owner.real_name]'s head")
-		addtimer(CALLBACK(owner, /mob/living/carbon/human/proc/update_hair), 1, TIMER_UNIQUE)
-	..()
+	if(last_owner)
+		SetName("[last_owner.real_name]'s head")
+		addtimer(CALLBACK(last_owner, /mob/living/carbon/human/proc/update_hair), 1, TIMER_UNIQUE)
+	. = ..()
 	//Head markings, duplicated (sadly) below.
 	for(var/M in markings)
 		var/decl/sprite_accessory/marking/mark_style = GET_DECL(M)
@@ -83,7 +83,7 @@ var/global/list/limb_icon_cache = list()
 /obj/item/organ/external/on_update_icon(var/regenerate = 0)
 
 	icon_state = "[icon_name]"
-	icon_cache_key = "[icon_state]_[species ? species.name : "unknown"]"
+	icon_cache_key = "[icon_state]_[species ? species.name : "unknown"][render_alpha]"
 	if(model)
 		icon_cache_key += "_model_[model]"
 
@@ -101,6 +101,10 @@ var/global/list/limb_icon_cache = list()
 			icon_cache_key += "[M][markings[M]]"
 
 	set_dir(EAST, TRUE)
+
+	if(render_alpha < 255)
+		mob_icon += rgb(,,,render_alpha)
+
 	icon = mob_icon
 
 /obj/item/organ/external/proc/get_icon()

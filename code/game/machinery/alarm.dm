@@ -85,7 +85,7 @@
 
 	var/datum/radio_frequency/radio_connection
 
-	var/list/TLV = list()
+	var/list/TLV = list() // stands for Threshold Limit Value, since it handles exposure amounts
 	var/list/trace_gas = list() //list of other gases that this air alarm is able to detect
 
 	var/danger_level = 0
@@ -309,18 +309,19 @@
 
 /obj/machinery/alarm/on_update_icon()
 	// Set pixel offsets
-	pixel_x = 0
-	pixel_y = 0
+	default_pixel_x = 0
+	default_pixel_y = 0
 	var/turf/T = get_step(get_turf(src), turn(dir, 180))
 	if(istype(T) && T.density)
 		if(dir == NORTH)
-			pixel_y = -21
+			default_pixel_y = -21
 		else if(dir == SOUTH)
-			pixel_y = 21
+			default_pixel_y = 21
 		else if(dir == WEST)
-			pixel_x = 21
+			default_pixel_x = 21
 		else if(dir == EAST)
-			pixel_x = -21
+			default_pixel_x = -21
+	reset_offsets(0)
 
 	// Broken or deconstructed states
 	if(!istype(construct_state, /decl/machine_construction/wall_frame/panel_closed))
@@ -595,6 +596,8 @@
 				var/decl/material/mat = GET_DECL(g)
 				thresholds[++thresholds.len] = list("name" = (mat?.gas_symbol_html || "Other"), "settings" = list())
 				selected = TLV[g]
+				if(!selected)
+					continue
 				for(var/i = 1, i <= 4, i++)
 					thresholds[thresholds.len]["settings"] += list(list("env" = g, "val" = i, "selected" = selected[i]))
 
@@ -653,7 +656,7 @@
 		var/input_temperature = input(user, "What temperature would you like the system to maintain? (Capped between [min_temperature] and [max_temperature]C)", "Thermostat Controls", target_temperature - T0C) as num|null
 		if(isnum(input_temperature) && CanUseTopic(user, state))
 			if(input_temperature > max_temperature || input_temperature < min_temperature)
-				to_chat(user, "Temperature must be between [min_temperature]C and [max_temperature]C")
+				to_chat(user, "Temperature must be between [min_temperature]C and [max_temperature]C.")
 			else
 				target_temperature = input_temperature + T0C
 		return TOPIC_REFRESH
@@ -847,19 +850,20 @@ FIRE ALARM
 /obj/machinery/firealarm/on_update_icon()
 	overlays.Cut()
 
-	pixel_x = 0
-	pixel_y = 0
+	default_pixel_x = 0
+	default_pixel_y = 0
 	var/walldir = (dir & (NORTH|SOUTH)) ? global.reverse_dir[dir] : dir
 	var/turf/T = get_step(get_turf(src), walldir)
 	if(istype(T) && T.density)
 		if(dir == SOUTH)
-			pixel_y = 21
+			default_pixel_y = 21
 		else if(dir == NORTH)
-			pixel_y = -21
+			default_pixel_y = -21
 		else if(dir == EAST)
-			pixel_x = 21
+			default_pixel_x = 21
 		else if(dir == WEST)
-			pixel_x = -21
+			default_pixel_x = -21
+	reset_offsets(0)
 
 	icon_state = "casing"
 	if(construct_state && !istype(construct_state, /decl/machine_construction/wall_frame/panel_closed))
@@ -1021,7 +1025,7 @@ FIRE ALARM
 /obj/machinery/firealarm/Destroy()
 	QDEL_NULL(sound_token)
 	. = ..()
-	
+
 /obj/machinery/firealarm/Initialize(mapload, dir)
 	. = ..()
 	if(dir)

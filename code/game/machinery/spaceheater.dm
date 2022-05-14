@@ -9,6 +9,7 @@
 	required_interaction_dexterity = DEXTERITY_SIMPLE_MACHINES
 
 	atom_flags = ATOM_FLAG_NO_TEMP_CHANGE | ATOM_FLAG_CLIMBABLE
+	movable_flags = MOVABLE_FLAG_WHEELED
 	clicksound = "switch"
 
 	light_power = 0.5

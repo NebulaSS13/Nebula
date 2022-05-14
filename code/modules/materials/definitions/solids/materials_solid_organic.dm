@@ -9,7 +9,7 @@
 	use_reinf_state = null
 	color = COLOR_EGGSHELL
 	door_icon_base = "plastic"
-	hardness = MAT_VALUE_FLEXIBLE
+	hardness = MAT_VALUE_FLEXIBLE + 10
 	weight = MAT_VALUE_LIGHT
 	melting_point = T0C+371 //assuming heat resistant plastic
 	stack_origin_tech = "{'materials':3}"
@@ -40,6 +40,7 @@
 	uid = "solid_holographic_plastic"
 	shard_type = SHARD_NONE
 	hidden_from_codex = TRUE
+	exoplanet_rarity = MAT_RARITY_NOWHERE
 
 /decl/material/solid/plastic/holographic/get_recipes(reinf_mat)
 	return list()
@@ -68,6 +69,7 @@
 	reflectiveness = MAT_VALUE_DULL
 	wall_support_value = MAT_VALUE_EXTREMELY_LIGHT
 	default_solid_form = /obj/item/stack/material/cardstock
+	exoplanet_rarity = MAT_RARITY_NOWHERE
 
 /decl/material/solid/cardboard/generate_recipes(var/reinforce_material)
 	. = ..()
@@ -97,6 +99,7 @@
 	weight = MAT_VALUE_EXTREMELY_LIGHT
 	wall_support_value = MAT_VALUE_EXTREMELY_LIGHT
 	default_solid_form = /obj/item/stack/material/bolt
+	exoplanet_rarity = MAT_RARITY_NOWHERE
 
 /decl/material/solid/cloth/yellow
 	name = "yellow"
@@ -148,12 +151,13 @@
 
 /decl/material/solid/cloth/red
 	name = "red"
+	uid = "solid_cotton_red"
 	use_name = "red cloth"
 	color = "#9d2300"
 
 /decl/material/solid/carpet
 	name = "red"
-	uid = "solid_cotton_red"
+	uid = "solid_carpet"
 	use_name = "red upholstery"
 	color = "#9d2300"
 	flags = MAT_FLAG_PADDING
@@ -167,6 +171,7 @@
 	wall_support_value = MAT_VALUE_EXTREMELY_LIGHT
 	hidden_from_codex = TRUE
 	default_solid_form = /obj/item/stack/material/bolt
+	exoplanet_rarity = MAT_RARITY_NOWHERE
 
 /decl/material/solid/plantmatter
 	name = "plant matter"
@@ -240,6 +245,7 @@
 	tans_to = /decl/material/solid/leather/lizard
 	hardness = MAT_VALUE_FLEXIBLE
 	weight = MAT_VALUE_VERY_LIGHT
+	exoplanet_rarity = MAT_RARITY_NOWHERE
 
 /decl/material/solid/skin/insect
 	name = "chitin"
@@ -350,12 +356,14 @@
 	uid = "solid_fishbone"
 	hardness = MAT_VALUE_FLEXIBLE
 	weight = MAT_VALUE_VERY_LIGHT
+	exoplanet_rarity = MAT_RARITY_NOWHERE
 
 /decl/material/solid/bone/cartilage
 	name = "cartilage"
 	uid = "solid_cartilage"
 	hardness = 0
 	weight = MAT_VALUE_EXTREMELY_LIGHT
+	exoplanet_rarity = MAT_RARITY_NOWHERE
 
 /decl/material/solid/leather
 	name = "leather"
@@ -374,6 +382,7 @@
 	reflectiveness = MAT_VALUE_MATTE
 	wall_support_value = MAT_VALUE_EXTREMELY_LIGHT
 	default_solid_form = /obj/item/stack/material/skin
+	exoplanet_rarity = MAT_RARITY_NOWHERE
 
 /decl/material/solid/leather/generate_recipes(var/reinforce_material)
 	. = ..()
@@ -395,7 +404,7 @@
 	uid = "solid_scaled_hide"
 	color = "#434b31"
 	integrity = 75
-	hardness = MAT_VALUE_RIGID
+	hardness = MAT_VALUE_FLEXIBLE + 5
 	weight = MAT_VALUE_LIGHT
 	reflectiveness = MAT_VALUE_SHINY
 

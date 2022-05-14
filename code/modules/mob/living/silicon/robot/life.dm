@@ -24,6 +24,7 @@
 		process_killswitch()
 		process_locks()
 		process_queued_alarms()
+		process_os()
 	UpdateLyingBuckledAndVerbStatus()
 
 /mob/living/silicon/robot/proc/clamp_values()
@@ -68,13 +69,6 @@
 		set_light(0)
 
 /mob/living/silicon/robot/handle_regular_status_updates()
-
-	if(src.camera && !scrambledcodes)
-		if(src.stat == 2 || wires.IsIndexCut(BORG_WIRE_CAMERA))
-			src.camera.set_status(0)
-		else
-			src.camera.set_status(1)
-
 	updatehealth()
 
 	if(HAS_STATUS(src, STAT_ASLEEP))
@@ -103,6 +97,7 @@
 			src.set_stat(CONSCIOUS)
 
 	else //Dead.
+		cameranet.update_visibility(src, FALSE)
 		src.blinded = 1
 		src.set_stat(DEAD)
 
@@ -130,6 +125,7 @@
 		src.blinded = 0
 	else
 		src.blinded = 1
+		cameranet.update_visibility(src, FALSE)
 
 	return 1
 

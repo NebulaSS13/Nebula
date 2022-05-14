@@ -525,7 +525,7 @@ var/global/list/supermatter_delam_accent_sounds = list(
 		env.merge(removed)
 
 	for(var/mob/living/carbon/human/subject in view(src, min(7, round(sqrt(power/6)))))
-		var/obj/item/organ/internal/eyes/eyes = subject.get_internal_organ(BP_EYES)
+		var/obj/item/organ/internal/eyes/eyes = subject.get_organ(BP_EYES)
 		if (!eyes)
 			continue
 		if (BP_IS_PROSTHETIC(eyes))
@@ -621,7 +621,7 @@ var/global/list/supermatter_delam_accent_sounds = list(
 
 /obj/machinery/power/supermatter/attackby(obj/item/W, mob/user)
 
-	if(istype(W, /obj/item/tape_roll))
+	if(istype(W, /obj/item/ducttape))
 		to_chat(user, "You repair some of the damage to \the [src] with \the [W].")
 		damage = max(damage -10, 0)
 

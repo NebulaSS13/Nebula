@@ -171,7 +171,7 @@
 	next_sonar_ping += 10 SECONDS
 	var/heard_something = FALSE
 	to_chat(src, "<span class='notice'>You take a moment to listen in to your environment...</span>")
-	for(var/mob/living/L in range(get_effective_view(client), src))
+	for(var/mob/living/L in range(client?.view || world.view, src))
 		var/turf/T = get_turf(L)
 		if(!T || L == src || L.stat == DEAD || is_below_sound_pressure(T))
 			continue
@@ -206,19 +206,11 @@
 	if(!heard_something)
 		to_chat(src, "<span class='notice'>You hear no movement but your own.</span>")
 
-/mob/living/carbon/human/reset_layer()
-	if(hiding)
-		layer = HIDING_MOB_LAYER
-	else if(lying)
-		layer = LYING_HUMAN_LAYER
-	else
-		..()
-
 /mob/living/carbon/human/proc/has_headset_in_ears()
 	return istype(get_equipped_item(slot_l_ear_str), /obj/item/radio/headset) || istype(get_equipped_item(slot_r_ear_str), /obj/item/radio/headset)
 
 /mob/living/carbon/human/welding_eyecheck()
-	var/obj/item/organ/internal/eyes/E = src.get_internal_organ(species.vision_organ)
+	var/obj/item/organ/internal/eyes/E = get_organ(species.vision_organ)
 	if(!E)
 		return
 	var/safety = eyecheck()

@@ -5,6 +5,8 @@
 /datum/artifact_trigger/chemical/New()
 	if(isnull(required_chemicals))
 		required_chemicals = list(pick(/decl/material/liquid/acid, /decl/material/liquid/bromide, /decl/material/liquid/water))
+		var/decl/material/M = GET_DECL(required_chemicals[1])
+		name = "presence of [M.name]"
 
 /datum/artifact_trigger/chemical/copy()
 	var/datum/artifact_trigger/chemical/C = ..()
@@ -14,7 +16,7 @@
 	. = ..()
 	if(istype(O, /obj/item/chems))
 		for(var/reagent in required_chemicals)
-			if(O.reagents.remove_reagent(reagent, 5))
+			if(O.reagents.remove_reagent(reagent, 1))
 				return TRUE
 
 /datum/artifact_trigger/chemical/water

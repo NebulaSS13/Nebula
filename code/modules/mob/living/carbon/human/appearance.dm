@@ -14,11 +14,23 @@
 		return
 
 	set_species(new_species)
+
+	//Handle spawning stuff
+	species.handle_pre_spawn(src)
+	species.create_missing_organs(src, TRUE) //Not fully replacing would cause problem with organs not being updated
+	apply_species_appearance()
+	apply_species_cultural_info()
+	species.handle_post_spawn(src)
+	reset_blood()
+	full_prosthetic = null	
+	apply_species_inventory_restrictions()
+
 	var/decl/special_role/antag = mind && player_is_antag(mind)
 	if (antag && antag.required_language)
 		add_language(antag.required_language)
 		set_default_language(antag.required_language)
 	reset_hair()
+	refresh_visible_overlays()
 	return 1
 
 /mob/living/carbon/human/set_gender(var/new_gender, var/update_body = FALSE)
@@ -134,6 +146,6 @@
 	return species.get_facial_hair_style_types(bodytype.associated_gender, check_gender)
 
 /mob/living/carbon/human/proc/force_update_limbs()
-	for(var/obj/item/organ/external/O in organs)
+	for(var/obj/item/organ/external/O in get_external_organs())
 		O.sync_colour_to_human(src)
 	update_body(0)

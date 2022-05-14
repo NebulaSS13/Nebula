@@ -5,7 +5,7 @@
 		"Service" = TRUE,
 		"Supply" = TRUE
 		)
-	sprites = list("Drone" = "drone-service")
+	module_sprites = list("Drone" = 'icons/mob/robots/flying/flying_service.dmi')
 	equipment = list(
 		/obj/item/flash,
 		/obj/item/pen/robopen,

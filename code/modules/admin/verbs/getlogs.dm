@@ -51,7 +51,7 @@
 		return
 
 	message_admins("[key_name_admin(src)] accessed file: [path]")
-	src << run(file(path))
+	direct_output(src, run(file(path)))
 	to_chat(src, "Attempting to send file, this may take a fair few minutes if the file is very large.")
 	return
 
@@ -64,6 +64,6 @@
 	set name = "Show Server Log"
 	set desc = "Shows today's server log."
 
-	usr << run(diary)
+	direct_output(usr, run(diary))
 	SSstatistics.add_field_details("admin_verb","VTL") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 	return

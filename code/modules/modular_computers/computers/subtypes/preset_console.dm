@@ -24,7 +24,7 @@
 
 /obj/machinery/computer/modular/preset/Initialize()
 	. = ..()
-	var/datum/extension/interactive/ntos/os = get_extension(src, /datum/extension/interactive/ntos)
+	var/datum/extension/interactive/os/os = get_extension(src, /datum/extension/interactive/os)
 	if(os)
 		for(var/program_type in default_software)
 			os.store_file(new program_type())
@@ -79,7 +79,8 @@
 		/datum/computer_file/program/records,
 		/datum/computer_file/program/docking,
 		/datum/computer_file/program/records,
-		/datum/computer_file/program/wordprocessor
+		/datum/computer_file/program/wordprocessor,
+		/datum/computer_file/program/accounts
 	)
 
 /obj/machinery/computer/modular/preset/security

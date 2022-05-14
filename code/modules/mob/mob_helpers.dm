@@ -19,10 +19,11 @@
 /mob/living/carbon/human/isSynthetic()
 	if(isnull(full_prosthetic))
 		robolimb_count = 0
-		for(var/obj/item/organ/external/E in organs)
+		var/list/limbs = get_external_organs()
+		for(var/obj/item/organ/external/E in limbs)
 			if(BP_IS_PROSTHETIC(E))
 				robolimb_count++
-		full_prosthetic = (robolimb_count == organs.len)
+		full_prosthetic = robolimb_count > 0 && (robolimb_count == LAZYLEN(limbs)) //If no organs, no way to tell
 		update_emotes()
 	return full_prosthetic
 
@@ -246,6 +247,7 @@ var/global/list/global/organ_rel_size = list(
 			if(1,3,5,8)	newletter="[lowertext(newletter)]"
 			if(2,4,6,15)	newletter="[uppertext(newletter)]"
 			if(7)	newletter+="'"
+			if(9 to 14)	break
 			//if(9,10)	newletter="<b>[newletter]</b>"
 			//if(11,12)	newletter="<big>[newletter]</big>"
 			//if(13)	newletter="<small>[newletter]</small>"
@@ -580,22 +582,22 @@ var/global/list/intents = list(I_HELP,I_DISARM,I_GRAB,I_HURT)
 	return ..(aiMulti)
 
 /mob/proc/refresh_client_images()
-	if(client)
+	if(client && LAZYLEN(client_images))
 		client.images |= client_images
 
 /mob/proc/hide_client_images()
-	if(client)
+	if(client && LAZYLEN(client_images))
 		client.images -= client_images
 
 /mob/proc/add_client_image(var/image)
 	if(image in client_images)
 		return
-	client_images += image
+	LAZYADD(client_images, image)
 	if(client)
 		client.images += image
 
 /mob/proc/remove_client_image(var/image)
-	client_images -= image
+	LAZYREMOVE(client_images, image)
 	if(client)
 		client.images -= image
 
@@ -659,7 +661,7 @@ var/global/list/intents = list(I_HELP,I_DISARM,I_GRAB,I_HURT)
 		if(mob.real_name == real_name)
 			if(!mob.mind)
 				return
-			return mob.mind.initial_email_login["login"]
+			return mob.mind.initial_account_login["login"] + "@[mob.mind.account_network]"
 
 //This gets an input while also checking a mob for whether it is incapacitated or not.
 /mob/proc/get_input(var/message, var/title, var/default, var/choice_type, var/obj/required_item)

@@ -9,7 +9,7 @@
 
 	remove_ai_verbs(src)
 
-	for(var/obj/machinery/ai_status_display/O in world)
+	for(var/obj/machinery/ai_status_display/O in SSmachines.machinery)
 		O.mode = 2
 
 	if (istype(loc, /obj/item/aicard))

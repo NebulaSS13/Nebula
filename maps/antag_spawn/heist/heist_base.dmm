@@ -248,7 +248,7 @@
 	},
 /area/map_template/syndicate_mothership/raider_base)
 "aL" = (
-/obj/effect/landmark{
+/obj/abstract/landmark{
 	name = "raiderstart"
 	},
 /obj/effect/floor_decal/carpet{
@@ -356,7 +356,7 @@
 	},
 /area/map_template/syndicate_mothership/raider_base)
 "aX" = (
-/obj/effect/landmark{
+/obj/abstract/landmark{
 	name = "raiderstart"
 	},
 /turf/unsimulated/floor{
@@ -625,7 +625,6 @@
 	},
 /area/map_template/syndicate_mothership/raider_base)
 "bz" = (
-/obj/item/cat_hide,
 /turf/unsimulated/floor{
 	icon_state = "asteroid"
 	},
@@ -1263,7 +1262,7 @@
 /area/map_template/skipjack_station/start)
 "de" = (
 /obj/structure/rack,
-/obj/item/energy_blade/sword/pirate,
+/obj/item/energy_blade/cutlass,
 /obj/item/clothing/suit/armor/pirate,
 /obj/item/clothing/suit/armor/pirate,
 /obj/item/tank/oxygen,
@@ -1278,7 +1277,7 @@
 /area/map_template/skipjack_station/start)
 "df" = (
 /obj/structure/rack,
-/obj/item/energy_blade/sword/pirate,
+/obj/item/energy_blade/cutlass,
 /obj/item/clothing/suit/armor/pirate,
 /obj/item/clothing/suit/armor/pirate,
 /obj/item/tank/oxygen,

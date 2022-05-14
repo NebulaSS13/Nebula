@@ -38,5 +38,6 @@
 
 /decl/maneuver/leap/grab/end_leap(var/mob/living/user, var/atom/target)
 	. = ..()
-	if(!user.lying && ismob(target) && user.Adjacent(target))
-		user.make_grab(target)
+	if(!user.lying && ismob(target) && user.Adjacent(target) && istype(target, /atom/movable))
+		var/atom/movable/AM = target
+		AM.try_make_grab(user)

@@ -1,5 +1,4 @@
 /datum/codex_entry/maint_drone
-	name = "maintenance drone"
 	associated_paths = list(/mob/living/silicon/robot/drone)
 	mechanics_text = "Drones are player-controlled synthetics which are lawed to maintain their assigned vessel and not \
 	interfere with anyone else, except for other drones. They hold a wide array of tools to build, repair, maintain, and clean. \
@@ -8,6 +7,7 @@
 	An inactive drone can be rebooted by swiping an ID card on it with engineering or robotics access, and an active drone can be shut down in the same manner. \
 	Maintenance drone presence can be requested to specific areas from any maintenance drone control console."
 	antag_text = "A crypotgraphic sequencer, available via a traitor uplink, can be used to subvert the drone to your cause."
+	disambiguator = "synthetic"
 
 /datum/codex_entry/uncertified_module
 	associated_paths = list(/obj/item/borg/upgrade/uncertified)

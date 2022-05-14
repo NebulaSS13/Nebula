@@ -22,7 +22,6 @@
 	secure = TRUE
 
 /obj/item/stock_parts/circuitboard/airlock_electronics/windoor
-	icon_state = "door_electronics_smoked"
 	name = "window door electronics"
 	build_path = /obj/machinery/door/window
 	additional_spawn_components = list()

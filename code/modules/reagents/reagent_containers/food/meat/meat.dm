@@ -176,7 +176,7 @@
 	reagents.add_reagent(/decl/material/liquid/nutriment/protein, 6)
 
 /obj/item/chems/food/fatsausage
-	name = "fat sausage"
+	name = "spiced sausage"
 	desc = "A piece of mixed, long meat, with some bite to it."
 	icon_state = "sausage"
 	filling_color = "#db0000"

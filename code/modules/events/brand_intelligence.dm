@@ -49,8 +49,10 @@
 								 "You don't want to buy anything? Yeah, well I didn't want to buy your mom either."))
 
 /datum/event/brand_intelligence/end()
-	originMachine.shut_up = 1
-	originMachine.shooting_chance = initial(originMachine.shooting_chance)
+	if(istype(originMachine))
+		originMachine.shut_up = 1
+		originMachine.shooting_chance = initial(originMachine.shooting_chance)
+		originMachine = null
 	for(var/weakref/W in infectedVendingMachines)
 		var/obj/machinery/vending/infectedMachine = W.resolve()
 		if(!infectedMachine)
@@ -58,6 +60,5 @@
 		infectedMachine.shut_up = 1
 		infectedMachine.shoot_inventory = 0
 	command_announcement.Announce("All traces of the rampant brand intelligence have disappeared from the systems.", "[location_name()] Firewall Subroutines")
-	originMachine = null
 	infectedVendingMachines.Cut()
 	vendingMachines.Cut()

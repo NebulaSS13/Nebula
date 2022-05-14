@@ -7,6 +7,8 @@
 	name = "sealant tank injector"
 	icon = 'icons/obj/structures/sealant_props.dmi'
 	icon_state = "injector"
+	density = TRUE
+	anchored = TRUE
 
 	var/list/cartridges
 	var/obj/item/sealant_tank/loaded_tank
@@ -18,7 +20,7 @@
 	. = ..()
 
 /obj/structure/sealant_injector/on_update_icon()
-	cut_overlays()
+	..()
 	if(loaded_tank)
 		add_overlay("tank")
 	if(length(cartridges))	

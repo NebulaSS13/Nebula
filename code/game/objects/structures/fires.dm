@@ -180,7 +180,7 @@
 
 /obj/structure/fire_source/attackby(var/obj/item/thing, var/mob/user)
 
-	if(ATOM_IS_TEMPERATURE_SENSITIVE(thing) && user.a_intent != I_HURT)
+	if(ATOM_SHOULD_TEMPERATURE_ENQUEUE(thing) && user.a_intent != I_HURT)
 		thing.HandleObjectHeating(src, user, DIRECT_HEAT)
 		return TRUE
 
@@ -323,7 +323,7 @@
 	queue_icon_update()
 
 /obj/structure/fire_source/on_update_icon()
-	cut_overlays()
+	..()
 	if((fuel || length(contents)) && (lit != FIRE_DEAD))
 		add_overlay("[icon_state]_full")
 	switch(lit)

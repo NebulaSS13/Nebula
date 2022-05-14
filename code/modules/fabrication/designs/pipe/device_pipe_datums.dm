@@ -166,7 +166,7 @@
 	pipe_class = PIPE_CLASS_OTHER
 
 /datum/fabricator_recipe/pipe/device/outlet_injector
-	name = "injector"
+	name = "injector outlet"
 	desc = "Passively injects gas into its surroundings. Has a valve attached to it that can control flow rate."
 	build_icon = 'icons/atmos/injector.dmi'
 	build_icon_state = "map_injector"

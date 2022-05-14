@@ -41,6 +41,7 @@
 		pending_status_counters = null
 	if(rebuild_markers)
 		rebuild_status_markers()
+		update_icon()
 
 /mob/living/proc/status_change(var/condition, var/new_amount, var/last_amount)
 	var/decl/status_condition/status = GET_DECL(condition)
@@ -48,15 +49,22 @@
 
 /mob/living/handle_status_effects()
 	. = ..()
+	var/refresh_icon = FALSE
 	for(var/condition in status_counters)
 		var/decl/status_condition/status = GET_DECL(condition)
 		status.handle_status(src, status_counters[condition])
 		if(GET_STATUS(src, condition) <= 0)
 			status_counters -= condition
+			refresh_icon = TRUE
+	if(refresh_icon)
+		update_icon()
 
 /mob/living/clear_status_effects()
+	var/had_counters = !!LAZYLEN(status_counters)
 	for(var/stype in status_counters)
 		set_status(stype, 0)
 	status_counters = null
 	pending_status_counters = null
-	rebuild_status_markers()
+	if(had_counters)
+		rebuild_status_markers()
+		update_icon()

@@ -1,9 +1,12 @@
 /proc/get_mech_image(var/decal, var/cache_key, var/cache_icon, var/image_colour, var/overlay_layer = FLOAT_LAYER)
-	var/use_key = "[cache_key]-[cache_icon]-[decal ? decal : "none"]-[image_colour ? image_colour : "none"]"
+	var/use_key = "[cache_key]-[cache_icon]-[overlay_layer]-[decal ? decal : "none"]-[image_colour ? image_colour : "none"]"
 	if(!global.mech_image_cache[use_key])
 		var/image/I = image(icon = cache_icon, icon_state = cache_key)
 		if(image_colour)
-			I.color = image_colour
+			var/image/masked_color = image(icon = cache_icon, icon_state = "[cache_key]_mask")
+			masked_color.color = image_colour
+			masked_color.blend_mode = BLEND_MULTIPLY
+			I.overlays += masked_color
 		if(decal)
 			var/decal_key = "[decal]-[cache_key]"
 			if(!global.mech_icon_cache[decal_key])
@@ -13,7 +16,9 @@
 				var/icon/decal_icon = icon('icons/mecha/mech_decals.dmi',decal)
 				decal_icon.AddAlphaMask(global.mech_icon_cache[template_key])
 				global.mech_icon_cache[decal_key] = decal_icon
-			I.overlays += get_mech_image(null, decal_key, global.mech_icon_cache[decal_key])
+			var/image/decal_image = get_mech_image(null, decal_key, global.mech_icon_cache[decal_key])
+			decal_image.blend_mode = BLEND_MULTIPLY
+			I.overlays += decal_image
 		I.appearance_flags |= RESET_COLOR
 		I.layer = overlay_layer
 		I.plane = FLOAT_PLANE
@@ -27,29 +32,38 @@
 	return all_images
 
 /mob/living/exosuit/on_update_icon()
-
 	..()
-	for(var/overlay in get_mech_images(list(body, head), MECH_BASE_LAYER))
-		add_overlay(overlay)
-
-	if(body && !hatch_closed)
-		add_overlay(get_mech_image(body.decal, "[body.icon_state]_cockpit", body.on_mech_icon, COLOR_WHITE, MECH_INTERMEDIATE_LAYER))
+	var/list/new_overlays = get_mech_images(list(body, head), MECH_BASE_LAYER)
+	if(body)
+		new_overlays += get_mech_image(body.decal, "[body.icon_state]_cockpit", body.on_mech_icon, overlay_layer = MECH_INTERMEDIATE_LAYER)
 	update_pilots(FALSE)
 	if(LAZYLEN(pilot_overlays))
-		for(var/overlay in pilot_overlays)
-			add_overlay(overlay)
+		new_overlays += pilot_overlays
 	if(body)
-		add_overlay(get_mech_image(body.decal, "[body.icon_state]_overlay[hatch_closed ? "" : "_open"]", body.on_mech_icon, body.color, MECH_COCKPIT_LAYER))
+		new_overlays += get_mech_image(body.decal, "[body.icon_state]_overlay[hatch_closed ? "" : "_open"]", body.on_mech_icon, body.color, MECH_COCKPIT_LAYER)
 	if(arms)
-		add_overlay(get_mech_image(arms.decal, arms.icon_state, arms.on_mech_icon, arms.color, MECH_ARM_LAYER))
+		new_overlays += get_mech_image(arms.decal, arms.icon_state, arms.on_mech_icon, arms.color, MECH_ARM_LAYER)
 	if(legs)
-		add_overlay(get_mech_image(legs.decal, legs.icon_state, legs.on_mech_icon, legs.color, MECH_LEG_LAYER))
+		new_overlays += get_mech_image(legs.decal, legs.icon_state, legs.on_mech_icon, legs.color, MECH_LEG_LAYER)
 	for(var/hardpoint in hardpoints)
 		var/obj/item/mech_equipment/hardpoint_object = hardpoints[hardpoint]
 		if(hardpoint_object)
 			var/use_icon_state = "[hardpoint_object.icon_state]_[hardpoint]"
 			if(use_icon_state in global.mech_weapon_overlays)
-				add_overlay(get_mech_image(null, use_icon_state, 'icons/mecha/mech_weapon_overlays.dmi', null, hardpoint_object.mech_layer))
+				var/color = COLOR_WHITE
+				var/decal = null
+				if(hardpoint in list(HARDPOINT_BACK, HARDPOINT_RIGHT_SHOULDER, HARDPOINT_LEFT_SHOULDER))
+					color = body.color
+					decal = body.decal
+				else if(hardpoint in list(HARDPOINT_RIGHT_HAND, HARDPOINT_LEFT_HAND))
+					color = arms.color
+					decal = arms.decal
+				else
+					color = head.color
+					decal = head.decal
+
+				new_overlays += get_mech_image(decal, use_icon_state, 'icons/mecha/mech_weapon_overlays.dmi', color, hardpoint_object.mech_layer )
+	set_overlays(new_overlays)
 
 /mob/living/exosuit/proc/update_pilots(var/update_overlays = TRUE)
 	if(update_overlays && LAZYLEN(pilot_overlays))
@@ -60,7 +74,8 @@
 			var/mob/pilot = pilots[i]
 			var/image/draw_pilot = new
 			draw_pilot.appearance = pilot
-			draw_pilot.layer = MECH_PILOT_LAYER + (body ? ((LAZYLEN(body.pilot_positions)-i)*0.001) : 0)
+			var/rel_pos = dir == NORTH ? -1 : 1
+			draw_pilot.layer = MECH_PILOT_LAYER + (body ? ((LAZYLEN(body.pilot_positions)-i)*0.001 * rel_pos) : 0)
 			draw_pilot.plane = FLOAT_PLANE
 			draw_pilot.appearance_flags = KEEP_TOGETHER
 			if(body && i <= LAZYLEN(body.pilot_positions))

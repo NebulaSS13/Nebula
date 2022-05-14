@@ -275,11 +275,13 @@
 		return FALSE
 	var/list/available_colors = list()
 	for (var/image/I in F.decals)
-		available_colors |= I.color
+		available_colors |= isnull(I.color) ? COLOR_WHITE : I.color
+	if (!LAZYLEN(available_colors))
+		return FALSE
 	var/picked_color = available_colors[1]
 	if (available_colors.len > 1)
 		picked_color = input(user, "Which color do you wish to select?") as null|anything in available_colors
-		if (user.incapacitated() || !user.Adjacent(F))
+		if (user.incapacitated() || !user.Adjacent(F)) // must check due to input blocking
 			return FALSE
 	return picked_color
 

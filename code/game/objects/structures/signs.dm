@@ -43,15 +43,16 @@
 			var/obj/structure/sign/S = new(user.loc)
 			switch(direction)
 				if("North")
-					S.pixel_y = 32
+					S.default_pixel_y = 32
 				if("East")
-					S.pixel_x = 32
+					S.default_pixel_x = 32
 				if("South")
-					S.pixel_y = -32
+					S.default_pixel_y = -32
 				if("West")
-					S.pixel_x = -32
+					S.default_pixel_x = -32
 				else
 					return
+			S.reset_offsets(0)
 			S.SetName(name)
 			S.desc = desc
 			S.icon_state = sign_state

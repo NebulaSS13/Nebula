@@ -148,10 +148,9 @@ var/global/list/wall_fullblend_objects = list(
 		if(!plant.floor) //shrooms drop to the floor
 			plant.floor = 1
 			plant.update_icon()
-			plant.pixel_x = 0
-			plant.pixel_y = 0
+			plant.reset_offsets(0)
 
-/turf/simulated/wall/ChangeTurf(var/turf/N, var/tell_universe = TRUE, var/force_lighting_update = FALSE, var/keep_air = FALSE)
+/turf/simulated/wall/ChangeTurf(var/turf/N, var/tell_universe = TRUE, var/force_lighting_update = FALSE, var/keep_air = FALSE, var/keep_outside = FALSE)
 	clear_plants()
 	. = ..()
 

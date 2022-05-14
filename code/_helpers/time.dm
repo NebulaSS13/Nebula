@@ -134,10 +134,11 @@ var/global/rollovercheck_last_timeofday = 0
 	global.rollovercheck_last_timeofday = world.timeofday
 	return global.midnight_rollovers
 
-//Increases delay as the server gets more overloaded,
-//as sleeps aren't cheap and sleeping only to wake up and sleep again is wasteful
-#define DELTA_CALC max(((max(world.tick_usage, world.cpu) / 100) * max(Master.sleep_delta-1,1)), 1)
+/// Increases delay as the server gets more overloaded 
+/// as sleeps aren't cheap and sleeping only to wake up and sleep again is wasteful
+#define DELTA_CALC max(((max(TICK_USAGE, world.cpu) / 100) * max(Master.sleep_delta-1,1)), 1)
 
+/// returns the number of ticks slept
 /proc/stoplag(initial_delay)
 	// If we're initializing, our tick limit might be over 100 (testing config), but stoplag() penalizes procs that go over.
 	// 	Unfortunately, this penalty slows down init a *lot*. So, we disable it during boot and lobby, when relatively few things should be calling this.
@@ -152,9 +153,9 @@ var/global/rollovercheck_last_timeofday = 0
 	var/i = DS2TICKS(initial_delay)
 	do
 		. += NONUNIT_CEILING(i*DELTA_CALC, 1)
-		sleep(i*world.tick_lag*DELTA_CALC)
+		sleep(i * world.tick_lag * DELTA_CALC)
 		i *= 2
-	while (world.tick_usage > min(TICK_LIMIT_TO_RUN, Master.current_ticklimit))
+	while (TICK_USAGE > min(TICK_LIMIT_TO_RUN, Master.current_ticklimit))
 
 #undef DELTA_CALC
 

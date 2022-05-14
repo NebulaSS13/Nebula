@@ -47,7 +47,7 @@ Right Click       - List/Create Area
 	if (mode == "Pick")
 		var/area/path = select_subpath((selected_area?.type || /area/space), /area)
 		if (path)
-			for (var/area/R in world)
+			for (var/area/R in global.areas)
 				if (R.type == path)
 					SelectArea(R)
 					to_chat(user, "Picked area [selected_area.name]")
@@ -73,7 +73,7 @@ Right Click       - List/Create Area
 	var/used_colors = 0
 	var/list/max_colors = length(distinct_colors)
 	var/list/vision_colors = list()
-	for (var/turf/T in range(get_effective_view(user.client), user))
+	for (var/turf/T in range(user?.client?.view || world.view, user))
 		var/image/I = new('icons/turf/overlays.dmi', T, "whiteOverlay")
 		var/ref = "\ref[T.loc]"
 		if (!vision_colors[ref])

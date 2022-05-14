@@ -404,12 +404,8 @@
 //Holocarp
 
 /mob/living/simple_animal/hostile/carp/holodeck
-	icon = 'icons/mob/hologram.dmi'
-	icon_state = "Carp"
-	icon_living = "Carp"
-	icon_dead = "Carp"
+	icon = 'icons/mob/simple_animal/holocarp.dmi'
 	alpha = 127
-	icon_gib = null
 	meat_amount = 0
 	meat_type = null
 

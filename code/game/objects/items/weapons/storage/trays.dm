@@ -123,11 +123,11 @@
 
 /obj/item/storage/tray/on_update_icon()
 	..()
-	vis_contents.Cut()
+	clear_vis_contents(src)
 	for(var/obj/item/I in contents)
 		I.vis_flags |= VIS_INHERIT_PLANE | VIS_INHERIT_LAYER
 		I.appearance_flags |= RESET_COLOR
-		vis_contents |= I
+		add_vis_contents(src, I)
 
 /obj/item/storage/tray/remove_from_storage(obj/item/W, atom/new_location, var/NoUpdate = 0)
 	. = ..()

@@ -3,7 +3,7 @@
 /// Helper for getting the correct bucket for a given timer
 #define BUCKET_POS(timer) (((round((timer.timeToRun - timer.timer_subsystem.head_offset) / world.tick_lag)+1) % BUCKET_LEN)||BUCKET_LEN)
 /// Gets the maximum time at which timers will be invoked from buckets, used for deferring to secondary queue
-#define TIMER_MAX(timer_ss) (world.time + TICKS2DS(min(BUCKET_LEN-(timer_ss.practical_offset-DS2TICKS(world.time - timer_ss.head_offset))-1, BUCKET_LEN-1)))
+#define TIMER_MAX(timer_ss) (timer_ss.head_offset + TICKS2DS(BUCKET_LEN + timer_ss.practical_offset - 1))
 /// Max float with integer precision
 #define TIMER_ID_MAX (2**24)
 
@@ -21,6 +21,7 @@ SUBSYSTEM_DEF(timer)
 	wait = 1 //SS_TICKER subsystem, so wait is in ticks
 	priority = SS_PRIORITY_TIMER
 	flags = SS_NO_INIT | SS_TICKER
+	runlevels = RUNLEVELS_DEFAULT | RUNLEVEL_LOBBY
 
 	/// Queue used for storing timers that do not fit into the current buckets
 	var/list/datum/timedevent/second_queue = list()
@@ -258,6 +259,12 @@ SUBSYSTEM_DEF(timer)
 	// Add all timed events from the secondary queue as well
 	alltimers += second_queue
 
+	for (var/datum/timedevent/t as anything in alltimers)
+		t.bucket_joined = FALSE
+		t.bucket_pos = -1
+		t.prev = null
+		t.next = null
+
 	// If there are no timers being tracked by the subsystem,
 	// there is no need to do any further rebuilding
 	if (!length(alltimers))
@@ -301,6 +308,7 @@ SUBSYSTEM_DEF(timer)
 		new_bucket_count++
 		var/bucket_pos = BUCKET_POS(timer)
 		timer.bucket_pos = bucket_pos
+		timer.bucket_joined = TRUE
 
 		var/datum/timedevent/bucket_head = bucket_list[bucket_pos]
 		if (!bucket_head)
@@ -452,7 +460,7 @@ SUBSYSTEM_DEF(timer)
 	if(buckethead == src)
 		bucket_list[bucket_pos] = next
 		timer_subsystem.bucket_count--
-	else if(timeToRun < TIMER_MAX(timer_subsystem))
+	else if(bucket_joined)
 		timer_subsystem.bucket_count--
 	else
 		var/l = length(second_queue)

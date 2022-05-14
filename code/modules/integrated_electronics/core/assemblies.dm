@@ -273,7 +273,7 @@
 	if(!check_interactivity(M))
 		return
 	var/input = input("What do you want to name this?", "Rename", src.name) as null|text
-	input = sanitizeName(input,allow_numbers = 1)
+	input = sanitize_name(input,allow_numbers = 1)
 	if(!check_interactivity(M))
 		return
 	if(!QDELETED(src) && input)
@@ -478,7 +478,7 @@
 	else if(isCoil(I))
 		var/obj/item/stack/cable_coil/C = I
 		if(health != initial(health) && do_after(user, 10, src) && C.use(1))
-			user.visible_message("\The [user] patches up \the [src]")
+			user.visible_message("\The [user] patches up \the [src].")
 			health = min(initial(health), health + 5)
 	else
 		if(user.a_intent == I_HURT) // Kill it
@@ -729,20 +729,21 @@
 		var/matrix/M = matrix()
 		switch(ndir)
 			if(NORTH)
-				pixel_y = -32
-				pixel_x = 0
+				default_pixel_y = -32
+				default_pixel_x = 0
 				M.Turn(180)
 			if(SOUTH)
-				pixel_y = 21
-				pixel_x = 0
+				default_pixel_y = 21
+				default_pixel_x = 0
 			if(EAST)
-				pixel_x = -27
-				pixel_y = 0
+				default_pixel_x = -27
+				default_pixel_y = 0
 				M.Turn(270)
 			if(WEST)
-				pixel_x = 27
-				pixel_y = 0
+				default_pixel_x = 27
+				default_pixel_y = 0
 				M.Turn(90)
+		reset_offsets(0)
 		transform = M
 
 #undef IC_MAX_SIZE_BASE

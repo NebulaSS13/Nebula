@@ -110,7 +110,7 @@
 	set category = "Object"
 	set name = "Adjust Eyewear"
 	set src in usr
-	attack_self()
+	attack_self(usr)
 
 /obj/item/clothing/glasses/proc/network_setup()
 	set name = "Setup HUD Network"

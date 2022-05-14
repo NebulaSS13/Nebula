@@ -21,7 +21,7 @@
 /decl/slime_colour/orange/handle_uranium_reaction(var/datum/reagents/holder)
 	. = TRUE
 	sleep(5 SECONDS)
-	if(holder?.my_atom?.loc)
-		var/turf/location = get_turf(holder.my_atom)
+	var/turf/location = get_turf(holder.get_reaction_loc())
+	if(location)
 		location.assume_gas(/decl/material/gas/hydrogen, 250, 1400)
 		location.hotspot_expose(700, 400)

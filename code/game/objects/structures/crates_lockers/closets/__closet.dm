@@ -1,3 +1,5 @@
+var/global/list/closets = list()
+
 /obj/structure/closet
 	name = "closet"
 	desc = "It's a basic storage unit."
@@ -26,9 +28,13 @@
 	var/opened = FALSE
 	var/locked = FALSE
 
+/obj/structure/closet/Destroy()
+	global.closets -= src
+	. = ..()
+
 /obj/structure/closet/Initialize()
 	..()
-
+	global.closets += src
 	if((setup & CLOSET_HAS_LOCK))
 		verbs += /obj/structure/closet/proc/togglelock_verb
 
@@ -158,7 +164,7 @@
 /obj/structure/closet/proc/store_mobs(var/stored_units)
 	. = 0
 	for(var/mob/living/M in loc)
-		if(M.buckled || M.pinned.len || M.anchored)
+		if(M.buckled || LAZYLEN(M.pinned) || M.anchored)
 			continue
 		var/mob_size = content_size(M)
 		if(CLOSET_CHECK_TOO_BIG(mob_size))
@@ -271,8 +277,9 @@
 			W.pixel_z = 0
 			W.pixel_w = 0
 		return
-	else if(istype(W, /obj/item/energy_blade/blade))
-		if(emag_act(INFINITY, user, "<span class='danger'>The locker has been sliced open by [user] with \an [W]</span>!", "<span class='danger'>You hear metal being sliced and sparks flying.</span>"))
+	else if(istype(W, /obj/item/energy_blade))
+		var/obj/item/energy_blade/blade = W
+		if(blade.is_special_cutting_tool() && emag_act(INFINITY, user, "<span class='danger'>The locker has been sliced open by [user] with \an [W]</span>!", "<span class='danger'>You hear metal being sliced and sparks flying.</span>"))
 			spark_at(src.loc, amount=5)
 			playsound(src.loc, 'sound/weapons/blade1.ogg', 50, 1)
 			open()
@@ -345,18 +352,15 @@
 		to_chat(usr, "<span class='warning'>This mob type can't use this verb.</span>")
 
 /obj/structure/closet/on_update_icon()
+	..()
 	if(opened)
 		icon_state = "open"
-		overlays.Cut()
+	else if(broken)
+		icon_state = "closed_emagged[welded ? "_welded" : ""]"
+	else if(locked)
+		icon_state = "closed_locked[welded ? "_welded" : ""]"
 	else
-		if(broken)
-			icon_state = "closed_emagged[welded ? "_welded" : ""]"
-		else
-			if(locked)
-				icon_state = "closed_locked[welded ? "_welded" : ""]"
-			else
-				icon_state = "closed_unlocked[welded ? "_welded" : ""]"
-			overlays.Cut()
+		icon_state = "closed_unlocked[welded ? "_welded" : ""]"
 
 /obj/structure/closet/proc/req_breakout()
 	if(opened)

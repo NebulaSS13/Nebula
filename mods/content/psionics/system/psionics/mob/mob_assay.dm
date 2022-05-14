@@ -90,7 +90,7 @@
 		machine.last_assay = dat
 		return
 
-	var/interface_type = machine ? /datum/browser/written : /datum/browser 
+	var/interface_type = machine ? /datum/browser/written_digital : /datum/browser 
 	var/datum/browser/popup = new interface_type(viewer, "psi_assay_\ref[src]", "Psi-Assay")
 	popup.set_content(jointext(dat,null))
 	popup.open()

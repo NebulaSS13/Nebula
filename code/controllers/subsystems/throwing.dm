@@ -26,8 +26,16 @@ SUBSYSTEM_DEF(throwing)
 		var/atom/movable/AM = currentrun[currentrun.len]
 		var/datum/thrownthing/TT = currentrun[AM]
 		currentrun.len--
-		if (QDELETED(AM) || QDELETED(TT))
-			processing -= AM
+		if (QDELETED(AM))
+			if(!QDELETED(TT))
+				qdel(TT) // handles removing from processing list
+			if (MC_TICK_CHECK)
+				return
+			continue
+		if (QDELETED(TT))
+			if(!QDELETED(AM))
+				AM.throwing = null
+				processing -= AM
 			if (MC_TICK_CHECK)
 				return
 			continue
@@ -168,10 +176,10 @@ SUBSYSTEM_DEF(throwing)
 				hit = TRUE
 				thrownthing.throw_impact(A, src)
 				break
-		
+
 		if(QDELETED(thrownthing))
 			return
-		
+
 		if(!hit)
 			thrownthing.throw_impact(get_turf(thrownthing), src)  // we haven't hit something yet and we still must, let's hit the ground.
 			thrownthing.space_drift(init_dir)

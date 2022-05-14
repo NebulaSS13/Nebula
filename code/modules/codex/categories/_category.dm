@@ -5,29 +5,25 @@
 
 	var/guide_name
 	var/guide_html
-	var/list/guide_strings
 
 //Children should call ..() at the end after filling the items list
-/decl/codex_category/Initialize()
-	. = ..()
+/decl/codex_category/proc/Populate()
 
 	if(items.len)
-		var/datum/codex_entry/entry = new(_display_name = "[name] (category)")
-		entry.lore_text = desc + "<hr>"
+		var/lore_text = desc + "<hr>"
 		if(guide_name && guide_html)
-			entry.lore_text += "This category has <span codexlink='Guide to [capitalize(guide_name || name)]'>an associated guide</span>.<hr>"
+			lore_text += "This category has <span codexlink='Guide to [capitalize(guide_name || name)]'>an associated guide</span>.<hr>"
 		var/list/links = list()
 		for(var/item in items)
 			links+= "<l>[item]</l>"
-		entry.lore_text += jointext(links, "<br>")
-		SScodex.add_entry_by_string(lowertext(entry.name), entry)
+		lore_text += jointext(links, "<br>")
+		new /datum/codex_entry(
+			_display_name = "[name] (category)",
+			_lore_text = lore_text
+		)
 
 	if(guide_html)
-		if(guide_name)
-			LAZYDISTINCTADD(guide_strings, lowertext(guide_name))
-		var/datum/codex_entry/entry = new(      \
-			_display_name = "Guide to [capitalize(guide_name || name)]",  \
-			_associated_strings = guide_strings \
-			)
-		entry.mechanics_text = guide_html
-		SScodex.add_entry_by_string(lowertext(entry.name), entry)
+		new /datum/codex_entry(
+			_display_name = "Guide to [capitalize(guide_name || name)]",
+			_mechanics_text = guide_html
+		)

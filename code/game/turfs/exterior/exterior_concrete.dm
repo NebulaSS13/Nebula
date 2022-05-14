@@ -18,6 +18,10 @@ var/global/exterior_broken_states = icon_states('icons/turf/exterior/broken.dmi'
 	var/broken 
 	var/burned
 
+/turf/exterior/concrete/flooded
+	flooded = TRUE
+	color = COLOR_LIQUID_WATER
+
 /turf/exterior/concrete/Initialize(var/ml)
 	if(broken)
 		set_broken(TRUE)

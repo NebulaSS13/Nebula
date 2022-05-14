@@ -23,7 +23,7 @@
 	item_flags = ITEM_FLAG_INVALID_FOR_CHAMELEON
 
 /obj/item/gun/energy/gun/secure/mounted/Initialize()
-	var/mob/borg = get_holder_of_type(src, /mob/living/silicon/robot)
+	var/mob/borg = get_recursive_loc_of_type(/mob/living/silicon/robot)
 	if(!borg)
 		. = INITIALIZE_HINT_QDEL
 		CRASH("Invalid spawn location.")

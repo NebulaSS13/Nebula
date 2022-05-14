@@ -140,11 +140,9 @@
 		update_icon()
 
 /obj/structure/curtain/on_update_icon()
-	. = ..()
-
+	..()
 	icon_state = opacity ? "closed" : "open"
 	layer = opacity ? ABOVE_HUMAN_LAYER : ABOVE_WINDOW_LAYER
-
 	if(curtain_kind_path)
 		var/decl/curtain_kind/kind = GET_DECL(curtain_kind_path)
 		alpha = kind.alpha

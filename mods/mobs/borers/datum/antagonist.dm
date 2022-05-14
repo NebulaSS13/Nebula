@@ -46,7 +46,7 @@
 			var/obj/item/organ/external/head = host.get_organ(BP_HEAD)
 			if(head)
 				borer.host = host
-				head.implants += borer
+				LAZYDISTINCTADD(head.implants, borer)
 				borer.forceMove(head)
 				if(!borer.host_brain)
 					borer.host_brain = new(borer)

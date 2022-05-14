@@ -32,7 +32,7 @@
 	is_floating = 1
 
 	var/amplitude = 2 //maximum displacement from original position
-	var/period = 36 //time taken for the mob to go up >> down >> original position, in deciseconds. Should be multiple of 4
+	var/period = 36 //time taken for the mob to go up > down > original position, in deciseconds. Should be multiple of 4
 
 	var/top = default_pixel_z + amplitude
 	var/bottom = default_pixel_z - amplitude
@@ -49,6 +49,8 @@
 	is_floating = 0
 
 /atom/movable/proc/do_attack_animation(atom/A, atom/movable/weapon)
+
+	set waitfor = FALSE
 
 	var/pixel_x_diff = 0
 	var/pixel_y_diff = 0
@@ -68,18 +70,17 @@
 		pixel_x_diff = -8
 		turn_dir = -1
 
-	var/default_pixel_x = initial(pixel_x)
-	var/default_pixel_y = initial(pixel_y)
-	var/mob/mob = src
-	if(istype(mob))
-		default_pixel_x = mob.default_pixel_x
-		default_pixel_y = mob.default_pixel_y
-
 	var/matrix/initial_transform = matrix(transform)
 	var/matrix/rotated_transform = transform.Turn(15 * turn_dir)
 
 	animate(src, pixel_x = pixel_x + pixel_x_diff, pixel_y = pixel_y + pixel_y_diff, transform = rotated_transform, time = 2, easing = BACK_EASING | EASE_IN)
-	animate(pixel_x = default_pixel_x, pixel_y = default_pixel_y, transform = initial_transform, time = 2, easing = SINE_EASING)
+	animate(pixel_x = pixel_x, pixel_y = pixel_y, transform = initial_transform, time = 2, easing = BACK_EASING | EASE_IN)
+
+	if(buckled_mob)
+		buckled_mob.do_attack_animation(A, weapon)
+
+	sleep(4)
+	reset_offsets()
 
 /mob/proc/clear_shown_overlays(var/list/show_to, var/image/I)
 	for(var/client/C in show_to)
@@ -167,30 +168,3 @@
 		return
 	playsound(T, "sparks", 50, 1)
 	anim(src,'icons/mob/mob.dmi',,"phaseout",,dir)
-
-/mob/living/proc/on_structure_offset(var/offset = 0)
-
-	var/next_x = default_pixel_x
-	var/next_y = default_pixel_y
-	var/next_z = default_pixel_z
-
-	if(offset)
-		next_z += offset
-	else if(pixel_z != default_pixel_z)
-		var/turf/T = get_turf(src)
-		for(var/obj/structure/S in T.contents)
-			if(S && S.mob_offset)
-				return
-
-	if(buckled && buckled.buckle_pixel_shift)
-		var/list/pixel_shift = cached_json_decode(buckled.buckle_pixel_shift)
-		next_x = default_pixel_x + pixel_shift["x"]
-		next_y = default_pixel_y + pixel_shift["y"]
-		next_z = default_pixel_z + pixel_shift["z"]
-
-	if(pixel_x != next_x || pixel_y != next_y || pixel_z != next_z)
-		animate(src, pixel_x = next_x, pixel_y = next_y, pixel_z = next_z, 2, 1, SINE_EASING)
-
-/mob/living/Move()
-	. = ..()
-	on_structure_offset(0)

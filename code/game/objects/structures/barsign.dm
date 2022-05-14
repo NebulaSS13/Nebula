@@ -24,7 +24,7 @@
 		if("on", "empty")
 			to_chat(user, "The lights are on, but there's no picture.")
 		else
-			to_chat(user, "It says '[icon_state]'")
+			to_chat(user, "It says '[icon_state]'.")
 
 /obj/structure/sign/double/barsign/Initialize()
 	. = ..()

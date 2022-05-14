@@ -259,9 +259,7 @@
 	return FALSE
 
 /atom/movable/CtrlClick(var/mob/living/user)
-	if(istype(user) && CanPhysicallyInteract(user) && !user.lying)
-		return user.make_grab(src)
-	. = ..()
+	return try_make_grab(user, defer_hand = TRUE) || ..()
 
 /*
 	Alt click

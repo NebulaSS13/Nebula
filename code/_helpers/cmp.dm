@@ -85,8 +85,8 @@
 /proc/cmp_program(var/datum/computer_file/program/A, var/datum/computer_file/program/B)
 	return cmp_text_asc(A.filedesc, B.filedesc)
 
-/proc/cmp_emails_asc(var/datum/computer_file/data/email_account/A, var/datum/computer_file/data/email_account/B)
-	return cmp_text_asc(A.login,B.login)
+/proc/cmp_accounts_asc(var/datum/computer_file/data/account/A, var/datum/computer_file/data/account/B)
+	return cmp_text_asc(A.login, B.login)
 
 /proc/cmp_planelayer(atom/A, atom/B)
 	return (B.plane - A.plane) || (B.layer - A.layer)
@@ -105,3 +105,12 @@
 
 /proc/cmp_rcon_tag_asc(var/obj/machinery/power/smes/buildable/a, var/obj/machinery/power/smes/buildable/b)
 	return sorttext(b.RCon_tag, a.RCon_tag)
+
+/proc/cmp_category_groups(var/datum/category_group/A, var/datum/category_group/B)
+	return A.sort_order - B.sort_order
+
+/proc/cmp_job_asc(var/datum/job/A, var/datum/job/B)
+	return A.get_occupations_tab_sort_score() - B.get_occupations_tab_sort_score()
+
+/proc/cmp_job_desc(var/datum/job/A, var/datum/job/B)
+	return B.get_occupations_tab_sort_score() - A.get_occupations_tab_sort_score()

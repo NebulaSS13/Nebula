@@ -20,6 +20,9 @@
 	var/transform_animate_time = 0 // If greater than zero, transform-based adjustments (scaling, rotating) will visually occur over this time.
 
 	var/tmp/currently_exploding = FALSE
+	var/tmp/default_pixel_x
+	var/tmp/default_pixel_y
+	var/tmp/default_pixel_z
 
 // This is called by the maploader prior to Initialize to perform static modifications to vars set on the map. Intended use case: adjust tag vars on duplicate templates.
 /atom/proc/modify_mapped_vars(map_hash)
@@ -319,10 +322,10 @@ its easier to just keep the beam vertical.
 	blood_color = COLOR_BLOOD_HUMAN
 	if(istype(M))
 		if (!istype(M.dna, /datum/dna))
-			M.dna = new /datum/dna(null)
+			M.dna = new /datum/dna()
 			M.dna.real_name = M.real_name
 		M.check_dna()
-		blood_color = M.species.get_blood_colour(M)
+		blood_color = M.species.get_blood_color(M)
 	. = 1
 	return 1
 
@@ -416,14 +419,6 @@ its easier to just keep the beam vertical.
 
 /atom/movable/onDropInto(var/atom/movable/AM)
 	return loc // If onDropInto returns something, then dropInto will attempt to drop AM there.
-
-//all things climbable
-/atom/attack_hand(mob/user)
-	..()
-	if(LAZYLEN(climbers) && !(user in climbers))
-		user.visible_message("<span class='warning'>[user.name] shakes \the [src].</span>", \
-					"<span class='notice'>You shake \the [src].</span>")
-		object_shaken()
 
 // Called when hitting the atom with a grab.
 // Will skip attackby() and afterattack() if returning TRUE.
@@ -526,7 +521,7 @@ its easier to just keep the beam vertical.
 				M.adjustBruteLoss(damage)
 				return
 
-			var/obj/item/organ/external/affecting = pick(H.organs)
+			var/obj/item/organ/external/affecting = pick(H.get_external_organs())
 			if(affecting)
 				to_chat(M, "<span class='danger'>You land heavily on your [affecting.name]!</span>")
 				affecting.take_external_damage(damage, 0)
@@ -585,4 +580,16 @@ its easier to just keep the beam vertical.
 	var/matrix/M = matrix()
 	M.Scale(icon_scale_x, icon_scale_y)
 	M.Turn(icon_rotation)
-	animate(src, transform = M, transform_animate_time)
+	if(transform_animate_time)
+		animate(src, transform = M, transform_animate_time)
+	else
+		transform = M
+	return transform
+
+// Walks up the loc tree until it finds a loc of the given loc_type
+/atom/get_recursive_loc_of_type(var/loc_type)
+	var/atom/check_loc = loc
+	while(check_loc)
+		if(istype(check_loc, loc_type))
+			return check_loc
+		check_loc = check_loc.loc

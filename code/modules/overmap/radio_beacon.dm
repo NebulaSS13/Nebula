@@ -46,7 +46,7 @@
 		to_chat(user, SPAN_NOTICE("You deactivate \the [src], cutting short it's radio broadcast."))
 		QDEL_NULL(signal)
 		return
-	var/obj/effect/overmap/visitable/O = map_sectors["[get_z(src)]"]
+	var/obj/effect/overmap/visitable/O = global.overmap_sectors["[get_z(src)]"]
 	if(!O)
 		to_chat(user, SPAN_WARNING("You cannot deploy \the [src] here."))
 		return

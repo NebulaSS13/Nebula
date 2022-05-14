@@ -1,19 +1,15 @@
 /mob/living/simple_animal/borer
 	name = "cortical borer"
 	real_name = "cortical borer"
+	icon = 'mods/mobs/borers/icons/borer.dmi'
 	desc = "A small, quivering sluglike creature."
 	speak_emote = list("chirrups")
 	emote_hear = list("chirrups")
-
 	response_help_3p = "$USER$ pokes $TARGET$."
 	response_help_1p = "You poke $TARGET$."
 	response_disarm =  "prods"
 	response_harm =    "stamps on"
 
-	icon_state = "brainslug"
-	item_state = "slug" // For the lack of a better sprite...
-	icon_living = "brainslug"
-	icon_dead = "brainslug_dead"
 	speed = 5
 	a_intent = I_HURT
 	stop_automated_movement = 1
@@ -194,7 +190,7 @@
 	if(istype(host,/mob/living/carbon/human))
 		var/mob/living/carbon/human/H = host
 		var/obj/item/organ/external/head = H.get_organ(BP_HEAD)
-		head.implants -= src
+		LAZYREMOVE(head.implants, src)
 
 	controlling = 0
 

@@ -1,9 +1,9 @@
 /turf/proc/ReplaceWithLattice(var/material)
-	var base_turf = get_base_turf_by_area(src);
-	if(type != base_turf)
-		src.ChangeTurf(get_base_turf_by_area(src))
-	if(!locate(/obj/structure/lattice) in src)
-		new /obj/structure/lattice(src, material)
+	var/base_turf = get_base_turf_by_area(src)
+	if(base_turf && type != base_turf)
+		. = ChangeTurf(base_turf)
+	if(!(locate(/obj/structure/lattice) in .))
+		new /obj/structure/lattice(., material)
 
 // Removes all signs of lattice on the pos of the turf -Donkieyo
 /turf/proc/RemoveLattice()
@@ -20,7 +20,7 @@
 	SHOULD_CALL_PARENT(FALSE)
 	. = TRUE
 
-/turf/proc/ChangeTurf(var/turf/N, var/tell_universe = TRUE, var/force_lighting_update = FALSE, var/keep_air = FALSE)
+/turf/proc/ChangeTurf(var/turf/N, var/tell_universe = TRUE, var/force_lighting_update = FALSE, var/keep_air = FALSE, var/keep_outside = FALSE)
 
 	if (!N)
 		return
@@ -29,7 +29,8 @@
 	if(ispath(N, /turf/space))
 		var/turf/below = GetBelow(src)
 		if(istype(below) && !isspaceturf(below))
-			N = /turf/simulated/open
+			var/area/A = get_area(src)
+			N = A?.open_turf || open_turf_type || /turf/simulated/open
 
 	// Track a number of old values for the purposes of raising
 	// state change events after changing the turf to the new type.
@@ -43,6 +44,8 @@
 	var/old_affecting_lights = affecting_lights
 	var/old_lighting_overlay = lighting_overlay
 	var/old_dynamic_lighting = TURF_IS_DYNAMICALLY_LIT_UNSAFE(src)
+	var/old_flooded =          flooded
+	var/old_outside =          is_outside
 
 	changing_turf = TRUE
 
@@ -64,6 +67,12 @@
 			W.fire = old_fire
 		else if(old_fire)
 			qdel(old_fire)
+
+	if(isnull(W.flooded) && old_flooded != W.flooded)
+		if(old_flooded && !W.density)
+			W.make_flooded()
+		else
+			W.make_unflooded()
 
 	// Raise appropriate events.
 	W.post_change()
@@ -94,6 +103,11 @@
 
 	// end of lighting stuff
 
+	// Outside/weather stuff. set_outside() updates weather already
+	// so only call it again if it doesn't already handle it.
+	if(!keep_outside || !W.set_outside(old_outside))
+		W.update_weather()
+
 /turf/proc/transport_properties_from(turf/other)
 	if(!istype(other, src.type))
 		return 0
@@ -110,14 +124,14 @@
 /turf/simulated/floor/transport_properties_from(turf/simulated/floor/other)
 	if(!..())
 		return FALSE
-	
+
 	broken = other.broken
 	burnt = other.burnt
 	if(broken || burnt)
 		queue_icon_update()
 	set_flooring(other.flooring)
 	return TRUE
-	
+
 //I would name this copy_from() but we remove the other turf from their air zone for some reason
 /turf/simulated/transport_properties_from(turf/simulated/other)
 	if(!..())
@@ -144,10 +158,16 @@
 	floor_type = other.floor_type
 	construction_stage = other.construction_stage
 
+	damage = other.damage
+	
+	// Do not set directly to other.can_open since it may be in the WALL_OPENING state.
+	if(other.can_open)
+		can_open = WALL_CAN_OPEN
+
 	update_material()
 	return TRUE
 
-//No idea why resetting the base appearence from New() isn't enough, but without this it doesn't work
+//No idea why resetting the base appearance from New() isn't enough, but without this it doesn't work
 /turf/simulated/shuttle/wall/corner/transport_properties_from(turf/simulated/other)
 	. = ..()
 	reset_base_appearance()

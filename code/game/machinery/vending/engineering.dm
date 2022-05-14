@@ -18,7 +18,7 @@
 		/obj/item/screwdriver = 5,
 		/obj/item/flashlight/flare/glowstick = 3,
 		/obj/item/flashlight/flare/glowstick/red = 3,
-		/obj/item/tape_roll = 8,
+		/obj/item/ducttape = 8,
 		/obj/item/clothing/gloves/insulated/cheap = 2
 	)
 	contraband = list(

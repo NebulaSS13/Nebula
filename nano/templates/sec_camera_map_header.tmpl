@@ -36,13 +36,9 @@
 </div>
 
 <div class='item'>
-	<div class='itemLabel'>Networks:</div>
+	<div class='itemLabel'>Channels:</div>
 </div>
 
-{{for data.networks}}
-	{{if value.has_access}}
-		{{:helper.link(value.tag, '', {'switch_network' : value.tag}, null, data.current_network == value.tag ? 'selected' : null)}}
-	{{else}}
-		{{:helper.link(value.tag, '', {}, null, data.current_network == value.tag ? 'selected' : 'redButton')}}
-	{{/if}}
+{{for data.channels}}
+	{{:helper.link(value.tag, '', {'switch_channel' : value.tag}, null, data.current_channel == value.tag ? 'selected' : null)}}
 {{/for}}

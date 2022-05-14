@@ -1,11 +1,9 @@
 //Corgi
 /mob/living/simple_animal/corgi
-	name = "\improper corgi"
+	name = "corgi"
 	real_name = "corgi"
 	desc = "It's a corgi."
-	icon_state = "corgi"
-	icon_living = "corgi"
-	icon_dead = "corgi_dead"
+	icon = 'icons/mob/simple_animal/corgi.dmi'
 	speak = list("YAP", "Woof!", "Bark!", "AUUUUUU")
 	speak_emote = list("barks", "woofs")
 	emote_hear = list("barks", "woofs", "yaps","pants")
@@ -32,6 +30,16 @@
 			"[WEST]" =  list(-7, -8)
 		)
 	. = ..()
+
+/mob/living/simple_animal/corgi/harvest_skin()
+	. = ..()
+	. += new/obj/item/corgi_hide(get_turf(src))
+
+/obj/item/corgi_hide
+	name = "corgi hide"
+	desc = "The by-product of corgi farming."
+	icon = 'icons/obj/items/sheet_hide.dmi'
+	icon_state = "sheet-corgi"
 
 //IAN! SQUEEEEEEEEE~
 /mob/living/simple_animal/corgi/Ian
@@ -113,9 +121,7 @@
 	name = "\improper corgi puppy"
 	real_name = "corgi"
 	desc = "It's a corgi puppy."
-	icon_state = "puppy"
-	icon_living = "puppy"
-	icon_dead = "puppy_dead"
+	icon = 'icons/mob/simple_animal/puppy.dmi'
 	meat_amount = 1
 	skin_amount = 3
 	bone_amount = 3
@@ -144,9 +150,7 @@
 	real_name = "Lisa"
 	gender = FEMALE
 	desc = "It's a corgi with a cute pink bow."
-	icon_state = "lisa"
-	icon_living = "lisa"
-	icon_dead = "lisa_dead"
+	icon = 'icons/mob/simple_animal/corgi_lisa.dmi'
 	var/turns_since_scan = 0
 	var/puppies = 0
 
@@ -180,7 +184,6 @@
 					return
 				new /mob/living/simple_animal/corgi/puppy(loc)
 
-
 		if(prob(1))
 			visible_emote(pick("dances around","chases her tail"))
 			for(var/i in list(1,2,4,8,4,2,1,2,4,8,4,2,1,2,4,8,4,2))
@@ -188,13 +191,3 @@
 				sleep(1)
 				if(QDELETED(src) || client)
 					return
-
-/mob/living/simple_animal/corgi/harvest_skin()
-	. = ..()
-	. += new/obj/item/corgi_hide(get_turf(src))
-
-/obj/item/corgi_hide
-	name = "corgi hide"
-	desc = "The by-product of corgi farming."
-	icon = 'icons/obj/items/sheet_hide.dmi'
-	icon_state = "sheet-corgi"

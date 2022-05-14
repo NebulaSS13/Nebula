@@ -26,44 +26,53 @@ var/global/all_tooltip_styles = list(
 
 /client/verb/change_ui()
 	set name = "Change UI"
-	set category = "OOC"
 	set desc = "Configure your user interface"
+	set category = "OOC"
 
-	if(!ishuman(usr))
-		to_chat(usr, "<span class='warning'>You must be human to use this verb.</span>")
+	if(!ishuman(mob))
+		to_chat(src, SPAN_WARNING("You must be human to use this verb."))
 		return
 
-	var/UI_style_new = input(usr, "Select a style. White is recommended for customization") as null|anything in all_ui_styles
-	if(!UI_style_new) return
-
-	var/UI_style_alpha_new = input(usr, "Select a new alpha (transparency) parameter for your UI, between 50 and 255") as null|num
-	if(!UI_style_alpha_new || !(UI_style_alpha_new <= 255 && UI_style_alpha_new >= 50))
+	var/UI_style_new = input(src, "Select a style. White is recommended for customization", "Change UI: Style", prefs.UI_style) as null|anything in global.all_ui_styles
+	if(!UI_style_new)
 		return
 
-	var/UI_style_color_new = input(usr, "Choose your UI color. Dark colors are not recommended!") as color|null
+	var/UI_style_color_new = input(src, "Choose your UI color. Dark colors are not recommended!", "Change UI: Color", prefs.UI_style_color) as color|null
 	if(!UI_style_color_new)
 		return
 
-	//update UI
-	var/list/icons = usr.hud_used.adding + usr.hud_used.other + usr.hud_used.hotkeybuttons
-	icons.Add(usr.zone_sel)
-	icons.Add(usr.gun_setting_icon)
-	icons.Add(usr.item_use_icon)
-	icons.Add(usr.gun_move_icon)
-	icons.Add(usr.radio_use_icon)
+	var/UI_style_alpha_new = input(src, "Select a new alpha (transparency) parameter for your UI, between 50 and 255", "Change UI: Alpha", prefs.UI_style_alpha) as null|num
+	if(!UI_style_alpha_new)
+		return
 
-	var/icon/ic = all_ui_styles[UI_style_new]
+	UI_style_alpha_new = clamp(UI_style_alpha_new, 50, 255)
 
-	for(var/obj/screen/I in icons)
-		if(I.name in list(I_HELP, I_HURT, I_DISARM, I_GRAB)) continue
-		I.icon = ic
-		I.color = UI_style_color_new
-		I.alpha = UI_style_alpha_new
+	var/list/icons = mob.hud_used.adding + mob.hud_used.other + mob.hud_used.hotkeybuttons
 
+	icons.Add(
+		mob.zone_sel,
+		mob.gun_setting_icon,
+		mob.item_use_icon,
+		mob.gun_move_icon,
+		mob.radio_use_icon
+	)
+
+	var/icon/UI_style_icon_new = all_ui_styles[UI_style_new]
+
+	apply_ui_style(icons, UI_style_icon_new, UI_style_color_new, UI_style_alpha_new)
 
 	if(alert("Like it? Save changes?",,"Yes", "No") == "Yes")
 		prefs.UI_style = UI_style_new
 		prefs.UI_style_alpha = UI_style_alpha_new
 		prefs.UI_style_color = UI_style_color_new
 		SScharacter_setup.queue_preferences_save(prefs)
-		to_chat(usr, "UI was saved")
+		to_chat(usr, "Your UI settings were saved.")
+	else
+		apply_ui_style(icons)
+
+/client/proc/apply_ui_style(list/atoms, ui_icon = all_ui_styles[prefs.UI_style], ui_color = prefs.UI_style_color, ui_alpha = prefs.UI_style_alpha)
+	for(var/obj/screen/S in atoms)
+		if(!(S.name in list(I_HELP, I_HURT, I_DISARM, I_GRAB)))
+			S.icon = ui_icon
+			S.color = ui_color
+			S.alpha = ui_alpha

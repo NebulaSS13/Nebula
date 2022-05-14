@@ -33,7 +33,7 @@
 
 /obj/item/chems/condiment/attackby(var/obj/item/W, var/mob/user)
 	if(istype(W, /obj/item/pen) || istype(W, /obj/item/flashlight/pen))
-		var/tmp_label = sanitizeSafe(input(user, "Enter a label for [name]", "Label", label_text), MAX_NAME_LEN)
+		var/tmp_label = sanitize_safe(input(user, "Enter a label for [name]", "Label", label_text), MAX_NAME_LEN)
 		if(tmp_label == label_text)
 			return
 		if(length(tmp_label) > 10)

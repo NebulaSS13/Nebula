@@ -132,15 +132,15 @@
 		return
 
 	for(var/i = 1 to 4)
-		I = image(material_icon_base, "[wall_connections[i]]", dir = 1<<(i-1))
+		I = image(material_icon_base, "[wall_connections[i]]", dir = BITFLAG(i-1))
 		I.color = base_color
 		add_overlay(I)
 		if(paint_color)
-			I = image(icon, "paint[wall_connections[i]]", dir = 1<<(i-1))
+			I = image(icon, "paint[wall_connections[i]]", dir = BITFLAG(i-1))
 			I.color = paint_color
 			add_overlay(I)
 		if(stripe_color)
-			I = image(icon, "stripe[wall_connections[i]]", dir = 1<<(i-1))
+			I = image(icon, "stripe[wall_connections[i]]", dir = BITFLAG(i-1))
 			I.color = stripe_color
 			add_overlay(I)
 
@@ -158,13 +158,13 @@
 			else
 				// Directional icon
 				for(var/i = 1 to 4)
-					I = image(reinf_material.icon_reinf, "[wall_connections[i]]", dir = 1<<(i-1))
+					I = image(reinf_material.icon_reinf, "[wall_connections[i]]", dir = BITFLAG(i-1))
 					I.color = reinf_color
 					add_overlay(I)
 
 	if(material.wall_flags & WALL_HAS_EDGES)
 		for(var/i = 1 to 4)
-			I = image(material_icon_base, "other[other_connections[i]]", dir = 1<<(i-1))
+			I = image(material_icon_base, "other[other_connections[i]]", dir = BITFLAG(i-1))
 			I.color = stripe_color ? stripe_color : base_color
 			add_overlay(I)
 

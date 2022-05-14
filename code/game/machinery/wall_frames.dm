@@ -137,6 +137,18 @@
 	material = /decl/material/solid/metal/steel
 	build_machine_type = /obj/machinery/button/buildable
 
+/obj/item/frame/camera
+	name = "security camera frame"
+	icon = 'icons/obj/monitors.dmi'
+	icon_state = "cameracase"
+	material = /decl/material/solid/metal/aluminium
+	build_machine_type = /obj/machinery/camera
+
+/obj/item/frame/camera/kit
+	fully_construct = TRUE
+	name = "security camera kit"
+	desc = "An all-in-one wall-mounted security camera kit, comes preassembled."
+
 /obj/item/frame/button/modify_positioning(var/obj/machinery/button/product, _dir, click_params)
 	var/list/params = params2list(click_params)
 	var/_pixel_x = text2num(params["icon-x"]) - WORLD_ICON_SIZE/2 //Make it relative to center instead of bottom left
@@ -154,8 +166,9 @@
 		if(WEST)
 			_pixel_x = min(_pixel_x, 0)
 			_pixel_x += WORLD_ICON_SIZE
-	product.pixel_x = _pixel_x
-	product.pixel_y = _pixel_y
+	product.default_pixel_x = _pixel_x
+	product.default_pixel_y = _pixel_y
+	product.reset_offsets(0)
 
 /obj/item/frame/button/wall_charger
 	name = "wall charger frame"
@@ -183,13 +196,14 @@
 /obj/item/frame/stock_offset/modify_positioning(var/obj/machinery/product, _dir, click_params)
 	switch(_dir)
 		if(NORTH)
-			product.pixel_y = WORLD_ICON_SIZE
+			product.default_pixel_y = WORLD_ICON_SIZE
 		if(SOUTH)
-			product.pixel_y = - WORLD_ICON_SIZE
+			product.default_pixel_y = - WORLD_ICON_SIZE
 		if(EAST)
-			product.pixel_x = WORLD_ICON_SIZE
+			product.default_pixel_x = WORLD_ICON_SIZE
 		if(WEST)
-			product.pixel_x = - WORLD_ICON_SIZE
+			product.default_pixel_x = - WORLD_ICON_SIZE
+	reset_offsets(0)
 
 /obj/item/frame/stock_offset/request_console
 	name = "request console frame"

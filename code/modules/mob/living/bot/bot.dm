@@ -120,8 +120,11 @@
 /mob/living/bot/attack_ai(var/mob/living/user)
 	Interact(user)
 
-/mob/living/bot/attack_hand(var/mob/user)
-	Interact(user)
+/mob/living/bot/default_interaction(mob/user)
+	. = ..()
+	if(!.)
+		Interact(user)
+		return TRUE
 
 /mob/living/bot/proc/Interact(var/mob/user)
 	add_fingerprint(user)

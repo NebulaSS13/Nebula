@@ -2311,7 +2311,7 @@
 /obj/structure/bed/chair{
 	dir = 1
 	},
-/obj/effect/landmark{
+/obj/abstract/landmark{
 	name = "tdomeadmin"
 	},
 /turf/unsimulated/floor{
@@ -2653,7 +2653,7 @@
 	dir = 1
 	},
 /obj/structure/disposalpipe/segment,
-/obj/effect/landmark{
+/obj/abstract/landmark{
 	name = "tdomeadmin"
 	},
 /turf/unsimulated/floor{
@@ -2776,7 +2776,7 @@
 /area/tdome)
 "kfk" = (
 /obj/structure/bed/chair,
-/obj/effect/landmark{
+/obj/abstract/landmark{
 	name = "tdomeobserve"
 	},
 /turf/unsimulated/floor{
@@ -2900,7 +2900,7 @@
 "lQy" = (
 /obj/structure/bed/chair,
 /obj/structure/disposalpipe/segment,
-/obj/effect/landmark{
+/obj/abstract/landmark{
 	name = "tdomeobserve"
 	},
 /turf/unsimulated/floor{
@@ -3017,7 +3017,7 @@
 /turf/simulated/floor/tiled,
 /area/shuttle/escape_shuttle)
 "nKw" = (
-/obj/effect/landmark{
+/obj/abstract/landmark{
 	name = "tdome2"
 	},
 /turf/unsimulated/floor{
@@ -3055,7 +3055,7 @@
 /obj/machinery/recharger{
 	pixel_y = 4
 	},
-/obj/effect/landmark{
+/obj/abstract/landmark{
 	name = "tdome2"
 	},
 /turf/unsimulated/floor{
@@ -3064,10 +3064,10 @@
 	},
 /area/tdome/tdome2)
 "oVC" = (
-/obj/effect/landmark{
+/obj/abstract/landmark{
 	name = "tdome2"
 	},
-/obj/machinery/camera/network/thunder{
+/obj/machinery/camera/network/television{
 	c_tag = "Thunderdome - Red Team";
 	invisibility = 101
 	},
@@ -3102,10 +3102,10 @@
 	},
 /area/tdome/tdomeadmin)
 "pyW" = (
-/obj/effect/landmark{
+/obj/abstract/landmark{
 	name = "tdome1"
 	},
-/obj/machinery/camera/network/thunder{
+/obj/machinery/camera/network/television{
 	c_tag = "Green Team";
 	invisibility = 101
 	},
@@ -3121,7 +3121,7 @@
 	},
 /area/tdome)
 "pQZ" = (
-/obj/machinery/camera/network/thunder{
+/obj/machinery/camera/network/television{
 	c_tag = "Thunderdome Arena";
 	invisibility = 101
 	},
@@ -3203,6 +3203,10 @@
 	icon_state = "lino"
 	},
 /area/tdome/tdomeadmin)
+"sKA" = (
+/obj/abstract/level_data/admin_level,
+/turf/space,
+/area/space)
 "sMD" = (
 /obj/effect/shuttle_landmark/escape_pod/out/pod4,
 /turf/space,
@@ -3257,7 +3261,7 @@
 /obj/machinery/recharger{
 	pixel_y = 4
 	},
-/obj/effect/landmark{
+/obj/abstract/landmark{
 	name = "tdome1"
 	},
 /turf/unsimulated/floor{
@@ -3370,7 +3374,7 @@
 	},
 /area/tdome)
 "xog" = (
-/obj/effect/landmark{
+/obj/abstract/landmark{
 	name = "tdome1"
 	},
 /turf/unsimulated/floor{
@@ -4426,7 +4430,7 @@ aab
 aab
 aab
 aab
-aab
+sKA
 aab
 aab
 aab

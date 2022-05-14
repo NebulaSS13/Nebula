@@ -206,7 +206,7 @@
 /obj/item/pen/robopen/proc/RenamePaper(mob/user, obj/item/paper/paper)
 	if ( !user || !paper )
 		return
-	var/n_name = sanitizeSafe(input(user, "What would you like to label the paper?", "Paper Labelling", null)  as text, 32)
+	var/n_name = sanitize_safe(input(user, "What would you like to label the paper?", "Paper Labelling", null)  as text, 32)
 	if ( !user || !paper )
 		return
 
@@ -363,7 +363,7 @@
 		visible_message("\The [user] picks up \the [A] with \the [src]!")
 		return
 
-	to_chat(user, "You fail to pick up \the [A] with \the [src]")
+	to_chat(user, "You fail to pick up \the [A] with \the [src].")
 	return
 
 /obj/item/chems/spray/cleaner/drone

@@ -1,6 +1,10 @@
 /mob/living/simple_animal/hostile/retaliate
 	var/list/enemies = list()
 
+/mob/living/simple_animal/hostile/retaliate/Destroy()
+	LAZYCLEARLIST(enemies)
+	return ..()
+
 /mob/living/simple_animal/hostile/retaliate/Found(var/atom/A)
 	if(isliving(A))
 		var/mob/living/L = A
@@ -10,15 +14,17 @@
 		else
 			enemies -= weakref(L)
 
-/mob/living/simple_animal/hostile/retaliate/ListTargets()
-	. = list()
-	if(!enemies.len)
+/mob/living/simple_animal/hostile/retaliate/ListTargets(var/dist = 7)
+	if(!length(enemies))
 		return
-	var/list/see = ..()
-	for(var/weakref/W in enemies) // Remove all entries that aren't in enemies
-		var/mob/M = W.resolve()
-		if(M in see)
-			. += M
+	. = ..()
+	if(length(.))
+		var/list/filtered_enemies = list()
+		for(var/weakref/enemy in enemies) // Remove all entries that aren't in enemies
+			var/M = enemy.resolve()
+			if(M in .)
+				filtered_enemies += M
+		. = filtered_enemies
 
 /mob/living/simple_animal/hostile/retaliate/proc/Retaliate()
 	var/list/around = view(src, 7)
@@ -38,4 +44,12 @@
 
 /mob/living/simple_animal/hostile/retaliate/adjustBruteLoss(var/damage)
 	..(damage)
+	Retaliate()
+
+/mob/living/simple_animal/hostile/retaliate/buckle_mob(mob/living/M)
+	. = ..()
+	Retaliate()
+
+/mob/living/simple_animal/hostile/retaliate/try_make_grab(mob/living/user, defer_hand = FALSE)
+	. = ..()
 	Retaliate()

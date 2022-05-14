@@ -21,6 +21,8 @@
 	)
 
 /decl/slime_colour/gold/handle_uranium_reaction(var/datum/reagents/holder)
-	var/type = pick(possible_mobs)
-	new type(get_turf(holder.my_atom))
+	var/location = get_turf(holder.get_reaction_loc())
+	if(location)
+		var/mob_type = pick(possible_mobs)
+		new mob_type(location)
 	return TRUE

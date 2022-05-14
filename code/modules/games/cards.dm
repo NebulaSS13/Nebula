@@ -17,10 +17,19 @@
 	else
 		return image(use_custom_front || deck_icon, "[card_icon]")
 
+var/global/list/card_decks = list()
 /obj/item/deck
 	w_class = ITEM_SIZE_SMALL
 	icon = 'icons/obj/items/playing_cards.dmi'
 	var/list/cards = list()
+
+/obj/item/deck/Initialize()
+	. = ..()
+	global.card_decks += src
+
+/obj/item/deck/Destroy()
+	. = ..()
+	global.card_decks -= src
 
 /obj/item/deck/inherit_custom_item_data(var/datum/custom_item/citem)
 	. = ..()
@@ -125,11 +134,14 @@
 			P.back_icon = "card_back"
 			cards += P
 
-/obj/item/deck/attack_hand()
-	if(!usr)
+/obj/item/deck/attack_hand(mob/user)
+	if(!istype(user))
 		return
-
-	draw_card(usr)
+	if (user.a_intent == I_GRAB)
+		return ..()
+	else
+		draw_card(user)
+		return TRUE
 
 /obj/item/deck/examine(mob/user)
 	. = ..()
@@ -254,7 +266,7 @@
 	user.visible_message("\The [user] shuffles [src].")
 
 /obj/item/deck/handle_mouse_drop(atom/over, mob/user)
-	if(over == user && loc == user && in_range(src, user) && user.get_empty_hand_slot())
+	if(over == user && (loc == user || in_range(src, user)) && user.get_empty_hand_slot())
 		user.put_in_hands(src)
 		return TRUE
 	. = ..()
@@ -327,7 +339,7 @@
 /obj/item/hand/examine(mob/user)
 	. = ..()
 	if((!concealed || src.loc == user) && cards.len)
-		to_chat(user, "It contains: ")
+		to_chat(user, "It contains:")
 		for(var/datum/playingcard/P in cards)
 			to_chat(user, "\The [APPEND_FULLSTOP_IF_NEEDED(P.name)]")
 
@@ -405,7 +417,7 @@
 /obj/item/hand/missing_card/Initialize()
 	. = ..()
 	var/list/deck_list = list()
-	for(var/obj/item/deck/D in world)
+	for(var/obj/item/deck/D in global.card_decks)
 		if(isturf(D.loc))		//Decks hiding in inventories are safe. Respect the sanctity of loadout items.
 			deck_list += D
 

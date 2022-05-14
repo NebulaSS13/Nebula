@@ -22,10 +22,6 @@
 	name = "cosmoshark"
 	desc = "Enormous creature that resembles a shark with magenta glowing lines along its body and set of long deep-purple teeth."
 	icon = 'maps/away/errant_pisces/icons/cosmoshark.dmi'
-	icon_state = "shark"
-	icon_living = "shark"
-	icon_dead = "shark_dead"
-	icon_gib = "shark_dead"
 	turns_per_move = 5
 	meat_type = /obj/item/chems/food/sharkmeat
 	speed = 2
@@ -36,10 +32,6 @@
 	faction = "shark"
 
 /mob/living/simple_animal/hostile/carp/shark/carp_randomify()
-	return
-
-/mob/living/simple_animal/hostile/carp/shark/on_update_icon()
-	SHOULD_CALL_PARENT(FALSE)
 	return
 
 /mob/living/simple_animal/hostile/carp/shark/death()
@@ -238,7 +230,7 @@
 	desc = "A suit in a shape of a space carp. Usually worn by corporate interns who are sent to entertain children during HQ excursions."
 	icon = 'maps/away/errant_pisces/icons/carpsuit.dmi'
 
-/obj/effect/landmark/corpse/carp_fisher
+/obj/abstract/landmark/corpse/carp_fisher
 	name = "carp fisher"
 	corpse_outfits = list(/decl/hierarchy/outfit/corpse/carp_fisher)
 

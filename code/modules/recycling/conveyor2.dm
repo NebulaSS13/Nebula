@@ -264,7 +264,7 @@ var/global/list/all_conveyor_switches = list()
 	qdel(src)
 
 /obj/item/conveyor_switch_construct
-	name = "conveyor switch assembly"
+	name = "two-way conveyor switch assembly"
 	desc = "A conveyor control switch assembly."
 	icon = 'icons/obj/recycling.dmi'
 	icon_state = "switch-off"

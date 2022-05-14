@@ -39,10 +39,6 @@ SUBSYSTEM_DEF(jobs)
 			job = new jobtype
 		primary_job_datums += job
 
-	for(var/datum/job/job in primary_job_datums)
-		if(isnull(job.primary_department) && length(job.department_types))
-			job.primary_department = job.department_types[1]
-
 	// Create abstract submap archetype jobs for use in prefs, etc.
 	archetype_job_datums.Cut()
 
@@ -89,6 +85,7 @@ SUBSYSTEM_DEF(jobs)
 
 	// Update title and path tracking, submap list, etc.
 	// Populate/set up map job lists.
+	primary_job_datums = sortTim(primary_job_datums, /proc/cmp_job_desc)
 	job_lists_by_map_name = list("[global.using_map.full_name]" = list("jobs" = primary_job_datums, "default_to_hidden" = FALSE))
 
 	for(var/atype in submap_archetypes)
@@ -99,6 +96,7 @@ SUBSYSTEM_DEF(jobs)
 			if(job)
 				LAZYADD(submap_job_datums, job)
 		if(LAZYLEN(submap_job_datums))
+			submap_job_datums = sortTim(submap_job_datums, /proc/cmp_job_desc)
 			job_lists_by_map_name[arch.descriptor] = list("jobs" = submap_job_datums, "default_to_hidden" = TRUE)
 
 	// Update global map blacklists and whitelists.
@@ -486,10 +484,10 @@ SUBSYSTEM_DEF(jobs)
 		H.skillset.obtain_from_client(job, H.client)
 
 		//Equip job items.
-		job.setup_account(H)
 		job.equip(H, H.mind ? H.mind.role_alt_title : "", H.char_branch, H.char_rank)
 		job.apply_fingerprints(H)
 		spawn_in_storage = equip_custom_loadout(H, job)
+		job.setup_account(H)
 	else
 		to_chat(H, "Your job is [rank] and the game just can't handle it! Please report this bug to an administrator.")
 
@@ -498,7 +496,7 @@ SUBSYSTEM_DEF(jobs)
 	if(!joined_late || job.latejoin_at_spawnpoints)
 		var/obj/S = job.get_roundstart_spawnpoint()
 
-		if(istype(S, /obj/effect/landmark/start) && isturf(S.loc))
+		if(istype(S, /obj/abstract/landmark/start) && isturf(S.loc))
 			H.forceMove(S.loc)
 		else
 			var/decl/spawnpoint/spawnpoint = job.get_spawnpoint(H.client)
@@ -511,12 +509,9 @@ SUBSYSTEM_DEF(jobs)
 			H.buckled.set_dir(H.dir)
 
 	if(!(ASSIGNMENT_ROBOT in job.event_categories) && !(ASSIGNMENT_COMPUTER in job.event_categories)) //These guys get their emails later.
-		var/domain = "freemail.net"
-		if(H.char_branch?.email_domain)
-			domain = H.char_branch.email_domain
 		var/datum/computer_network/network = get_local_network_at(get_turf(H))
 		if(network)
-			network.create_email(H, H.real_name, domain, rank)
+			network.create_account(H, H.real_name, null, H.real_name, null, TRUE)
 
 	// If they're head, give them the account info for their department
 	if(H.mind && job.head_position)
@@ -531,10 +526,11 @@ SUBSYSTEM_DEF(jobs)
 		H.StoreMemory(remembered_info, /decl/memory_options/system)
 
 	var/alt_title = null
-	if(H.mind)
-		H.mind.assigned_job = job
-		H.mind.assigned_role = rank
-		alt_title = H.mind.role_alt_title
+	if(!H.mind)
+		H.mind_initialize()
+	H.mind.assigned_job = job
+	H.mind.assigned_role = rank
+	alt_title = H.mind.role_alt_title
 
 	var/mob/other_mob = job.handle_variant_join(H, alt_title)
 	if(other_mob)
@@ -550,7 +546,8 @@ SUBSYSTEM_DEF(jobs)
 	if(job.supervisors)
 		to_chat(H, "<b>As the [alt_title ? alt_title : rank] you answer directly to [job.supervisors]. Special circumstances may change this.</b>")
 
-	to_chat(H, "<b>To speak on your department's radio channel use :h. For the use of other channels, examine your headset.</b>")
+	if(H.has_headset_in_ears())
+		to_chat(H, "<b>To speak on your department's radio channel use :h. For the use of other channels, examine your headset.</b>")
 
 	if(job.req_admin_notify)
 		to_chat(H, "<b>You are playing a job that is important for Game Progression. If you have to disconnect, please notify the admins via adminhelp.</b>")
@@ -572,7 +569,7 @@ SUBSYSTEM_DEF(jobs)
 	return positions_by_department[dept] || list()
 
 /datum/controller/subsystem/jobs/proc/spawn_empty_ai()
-	for(var/obj/effect/landmark/start/S in landmarks_list)
+	for(var/obj/abstract/landmark/start/S in global.landmarks_list)
 		if(S.name != "AI")
 			continue
 		if(locate(/mob/living) in S.loc)
@@ -613,5 +610,6 @@ SUBSYSTEM_DEF(jobs)
 /proc/fade_location_blurb(client/C, obj/T)
 	animate(T, alpha = 0, time = 5)
 	sleep(5)
-	C.screen -= T
+	if(C)
+		C.screen -= T
 	qdel(T)

@@ -7,7 +7,7 @@
 /decl/department/command
 	name = "Command"
 	colour = "#800080"
-	display_priority = 3
+	display_priority = 5
 	display_color = "#ccccff"
 
 /obj/machinery/network/pager
@@ -30,7 +30,7 @@
 	goals = list(/datum/goal/department/medical_fatalities)
 	announce_channel = "Medical"
 	colour = "#008000"
-	display_priority = 2
+	display_priority = 3
 	display_color = "#ffeef0"
 
 /obj/item/robot_module/medical
@@ -56,7 +56,7 @@
 	name = "Security"
 	announce_channel = "Security"
 	colour = "#dd0000"
-	display_priority = 2
+	display_priority = 4
 	display_color = "#ffddf0"
 
 /obj/item/robot_module/security

@@ -14,6 +14,6 @@
 
 #elif !defined(MAP_OVERRIDE)
 
-	#warn A map has already been included, ignoring Example
+	#warn A map has already been included, ignoring Testing Site
 
 #endif

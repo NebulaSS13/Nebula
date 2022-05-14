@@ -24,7 +24,7 @@ Class Vars:
 
 	connection_edge/unsimulated
 
-		B - This holds an unsimulated turf which has the gas values this edge is mimicing.
+		B - This holds an unsimulated turf which has the gas values this edge is mimicking.
 
 		air - Retrieved from B on creation and used as an argument for the legacy ShareSpace() proc.
 
@@ -95,32 +95,9 @@ Class Procs:
 /connection_edge/proc/recheck()
 
 /connection_edge/proc/flow(list/movable, differential, repelled)
-	for(var/i = 1; i <= movable.len; i++)
-		var/atom/movable/M = movable[i]
-
+	for(var/atom/movable/M AS_ANYTHING in movable)
 		//If they're already being tossed, don't do it again.
-		if(M.last_airflow > world.time - vsc.airflow_delay) continue
-		if(M.airflow_speed) continue
-
-		//Check for knocking people over
-		if(ismob(M) && differential > vsc.airflow_stun_pressure)
-			if(M:status_flags & GODMODE) continue
-			M:airflow_stun()
-
-		if(M.check_airflow_movable(differential))
-			//Check for things that are in range of the midpoint turfs.
-			var/list/close_turfs = list()
-			for(var/turf/U in connecting_turfs)
-				if(get_dist(M,U) < world.view) close_turfs += U
-			if(!close_turfs.len) continue
-
-			M.airflow_dest = pick(close_turfs) //Pick a random midpoint to fly towards.
-
-			if(repelled) spawn if(M) M.RepelAirflowDest(differential/5)
-			else spawn if(M) M.GotoAirflowDest(differential/10)
-
-
-
+		M.handle_airflow(differential, connecting_turfs, repelled)
 
 /connection_edge/zone/var/zone/B
 
@@ -231,8 +208,7 @@ Class Procs:
 
 	var/differential = A.air.return_pressure() - air.return_pressure()
 	if(abs(differential) >= vsc.airflow_lightest_pressure)
-		var/list/attracted = A.movables()
-		flow(attracted, abs(differential), differential < 0)
+		flow(A.movables(), abs(differential), differential < 0)
 
 	if(equiv)
 		A.air.copy_from(air)

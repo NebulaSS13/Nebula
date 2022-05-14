@@ -2,8 +2,8 @@
 	channels = list(
 		"Security" = TRUE
 	)
-	networks = list(
-		NETWORK_SECURITY
+	camera_channels = list(
+		CAMERA_CHANNEL_SECURITY
 	)
 	software = list(
 		/datum/computer_file/program/suit_sensors,
@@ -37,13 +37,12 @@
 	name = "security robot module"
 	display_name = "Security"
 	crisis_locked = TRUE
-	sprites = list(
-		"Basic" = "secborg",
-		"Red Knight" = "Security",
-		"Black Knight" = "securityrobot",
-		"Bloodhound" = "bloodhound",
-		"Bloodhound - Treaded" = "secborg+tread",
-		"Tridroid" = "orb-security"
+	module_sprites = list(
+		"Basic"                = 'icons/mob/robots/robot_security_old.dmi',
+		"Black Knight"         = 'icons/mob/robots/robot_secborg.dmi',
+		"Bloodhound"           = 'icons/mob/robots/robot_security.dmi',
+		"Bloodhound - Treaded" = 'icons/mob/robots/robot_security_tread.dmi',
+		"Tridroid"             = 'icons/mob/robots/robot_orb.dmi'
 	)
 	equipment = list(
 		/obj/item/flash,
@@ -64,8 +63,8 @@
 	display_name = "Combat"
 	crisis_locked = TRUE
 	hide_on_manifest = TRUE
-	sprites = list(
-		"Combat Android" = "droid-combat"
+	module_sprites = list(
+		"Combat Android" = 'icons/mob/robots/robot_combat.dmi'
 	)
 	equipment = list(
 		/obj/item/flash,

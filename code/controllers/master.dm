@@ -587,8 +587,43 @@ var/global/datum/controller/master/Master = new
 	if(!statclick)
 		statclick = new/obj/effect/statclick/debug(null, "Initializing...", src)
 
-	stat("Byond:", "(FPS:[world.fps]) (TickCount:[world.time/world.tick_lag]) (TickDrift:[round(Master.tickdrift,1)]([round((Master.tickdrift/(world.time/world.tick_lag))*100,0.1)]%))")
+	stat("Byond:", "(FPS:[world.fps]) (TickCount:[world.time/world.tick_lag]) (TickDrift:[round(Master.tickdrift,1)]([round((Master.tickdrift/(world.time/world.tick_lag))*100,0.1)]%)) (Internal Tick Usage: [round(MAPTICK_LAST_INTERNAL_TICK_USAGE,0.1)]%)")
 	stat("Master Controller:", statclick.update("(TickRate:[Master.processing]) (Iteration:[Master.iteration])"))
+
+/// Colors cpu number before output.
+/datum/controller/master/proc/format_color_cpu()
+	switch(world.cpu)
+		// 0-80 = green
+		if(0 to 80)
+			. = "<font color='#32a852'>[world.cpu]</font>"
+		// 80-90 = orange
+		if(80 to 90)
+			. = "<font color='#fcba03'>[world.cpu]</font>"
+		// 90-100 = red
+		if(90 to 100)
+			. = "<font color='#eb4034'>[world.cpu]</font>"
+		// >100 = bold red
+		if(100 to INFINITY)
+			. = "<font color='#eb4034'><b>[world.cpu]</b></font>"
+
+/// Colors map cpu number before output.
+/// Same as before, but specially for map cpu.
+/// It uses same colors, but need different number range.
+/datum/controller/master/proc/format_color_cpu_map()
+	var/current_map_cpu = MAPTICK_LAST_INTERNAL_TICK_USAGE
+	switch(current_map_cpu)
+		// 0-30 = green
+		if(0 to 30)
+			. = "<font color='#32a852'>[current_map_cpu]</font>"
+		// 30-60 = orange
+		if(30 to 60)
+			. = "<font color='#fcba03'>[current_map_cpu]</font>"
+		// 60-80 = red
+		if(60 to 80)
+			. = "<font color='#eb4034'>[current_map_cpu]</font>"
+		// >100 = bold red
+		if(80 to INFINITY)
+			. = "<font color='#eb4034'><b>[current_map_cpu]</b></font>"
 
 /datum/controller/master/StartLoadingMap()
 	//disallow more than one map to load at once, multithreading it will just cause race conditions

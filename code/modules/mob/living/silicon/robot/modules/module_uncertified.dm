@@ -1,8 +1,6 @@
 /obj/item/robot_module/uncertified
 	name = "uncertified robot module"
-	sprites = list(
-		"Roller" = "omoikane"
-	)
+	module_sprites = list("Roller" = 'icons/mob/robots/robot_service_bro.dmi') //sadly rollersprites seem to have been lost
 	upgrade_locked = TRUE
 	skills = list(
 		SKILL_LITERACY = SKILL_ADEPT,
@@ -16,8 +14,8 @@
 		"Service" = TRUE,
 		"Entertainment" = TRUE
 	)
-	networks = list(
-		NETWORK_THUNDER
+	camera_channels = list(
+		CAMERA_CHANNEL_TELEVISION
 	)
 	equipment = list(
 		/obj/item/boombox,

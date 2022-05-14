@@ -569,7 +569,7 @@
 		if(!charges)
 			return statuses
 	if(charges >= 15)
-		for(var/obj/item/organ/external/e in user.organs)
+		for(var/obj/item/organ/external/e in user.get_external_organs())
 			if(e && e.status & ORGAN_BROKEN)
 				e.status &= ~ORGAN_BROKEN
 				statuses += "bones in your [e.name] snap into place"

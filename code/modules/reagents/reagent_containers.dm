@@ -10,6 +10,7 @@
 	var/possible_transfer_amounts = @"[5,10,15,25,30]"
 	var/volume = 30
 	var/label_text
+	var/show_reagent_name = FALSE
 
 /obj/item/chems/proc/cannot_interact(mob/user)
 	if(!CanPhysicallyInteract(user))
@@ -26,7 +27,7 @@
 	. = base_name
 
 /obj/item/chems/on_reagent_change()
-	if(atom_flags & ATOM_FLAG_SHOW_REAGENT_NAME)
+	if(show_reagent_name)
 		var/decl/material/R = reagents?.get_primary_reagent_decl()
 		var/newname = get_base_name()
 		if(R)
@@ -59,7 +60,7 @@
 
 /obj/item/chems/attackby(obj/item/W, mob/user)
 	if(istype(W, /obj/item/pen) || istype(W, /obj/item/flashlight/pen))
-		var/tmp_label = sanitizeSafe(input(user, "Enter a label for [name]", "Label", label_text), MAX_NAME_LEN)
+		var/tmp_label = sanitize_safe(input(user, "Enter a label for [name]", "Label", label_text), MAX_NAME_LEN)
 		if(length(tmp_label) > 10)
 			to_chat(user, "<span class='notice'>The label can be at most 10 characters long.</span>")
 		else

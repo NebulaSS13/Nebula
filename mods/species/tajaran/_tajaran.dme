@@ -4,6 +4,7 @@
 #include "datum/accessory.dm"
 #include "datum/culture.dm"
 #include "datum/emotes.dm"
+#include "datum/blood.dm"
 #include "datum/language.dm"
 #include "datum/species.dm"
 #include "datum/species_bodytypes.dm"

@@ -15,7 +15,7 @@
 	name = "\improper Ejected Data Capsule"
 	icon_state = "blue"
 
-/obj/effect/landmark/corpse/zombiescience
+/obj/abstract/landmark/corpse/zombiescience
 	name = "Dead Scientist"
 	corpse_outfits = list(/decl/hierarchy/outfit/zombie_science)
 
@@ -27,6 +27,7 @@
 
 /decl/material/liquid/zombie/science
 	name = "isolated corruption"
+	uid = "liquid_corruption_isolated"
 	lore_text = "An incredibly dark, oily substance. Moves very slightly."
 	taste_description = "decayed blood"
 	color = "#800000"
@@ -61,7 +62,7 @@
 		return TRUE
 	. = ..()
 		
-/obj/effect/landmark/map_load_mark/ejected_datapod
+/obj/abstract/landmark/map_load_mark/ejected_datapod
 	name = "random datapod contents"
 	templates = list(/datum/map_template/ejected_datapod_contents, /datum/map_template/ejected_datapod_contents/type2, /datum/map_template/ejected_datapod_contents/type3)
 

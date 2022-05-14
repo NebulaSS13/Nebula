@@ -4,10 +4,6 @@
 	path = "nexus"
 	ground_noun = "plated covering"
 
-	station_levels = list(1, 2)
-	contact_levels = list(1, 2)
-	player_levels  = list(1, 2)
-
 	station_name  = "Independent Space Complex \"Nexus\""
 	station_short = "Nexus"
 
@@ -20,8 +16,7 @@
 	lobby_screens = list('maps/nexus/lobby/nexus_lobby.png')
 	welcome_sound = 'sound/effects/alarm.ogg'
 
-	overmap_event_areas = 11
-	use_overmap = 1
+	overmap_ids = list(OVERMAP_ID_SPACE)
 	num_exoplanets = 1
 
 	emergency_shuttle_leaving_dock = "Attention all hands: the escape pods have been launched, maintaining burn for %ETA%."

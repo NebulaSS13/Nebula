@@ -110,13 +110,13 @@
 					to_chat(user, "<span class='notice'>Age has been set to '[age]'.</span>")
 					. = 1
 			if("Prefix")
-				var/new_prefix = sanitizeSafe(input(user,"What title prefix would you like to put on this card?","Agent Card Prefix", age) as text, MAX_NAME_LEN)
+				var/new_prefix = sanitize_safe(input(user,"What title prefix would you like to put on this card?","Agent Card Prefix", age) as text, MAX_NAME_LEN)
 				if(!isnull(new_prefix) && CanUseTopic(user, state))
 					formal_name_prefix = new_prefix
 					to_chat(user, "<span class='notice'>Title prefix has been set to '[formal_name_prefix]'.</span>")
 					. = 1
 			if("Suffix")
-				var/new_suffix = sanitizeSafe(input(user,"What title suffix would you like to put on this card?","Agent Card Suffix", age) as text, MAX_NAME_LEN)
+				var/new_suffix = sanitize_safe(input(user,"What title suffix would you like to put on this card?","Agent Card Suffix", age) as text, MAX_NAME_LEN)
 				if(!isnull(new_suffix) && CanUseTopic(user, state))
 					formal_name_suffix = new_suffix
 					to_chat(user, "<span class='notice'>Title suffix has been set to '[formal_name_suffix]'.</span>")
@@ -172,7 +172,7 @@
 					to_chat(user, "<span class='notice'>Fingerprint hash changed to '[new_fingerprint_hash]'.</span>")
 					. = 1
 			if("Name")
-				var/new_name = sanitizeName(input(user,"What name would you like to put on this card?","Agent Card Name", registered_name) as null|text, allow_numbers=TRUE)
+				var/new_name = sanitize_name(input(user,"What name would you like to put on this card?","Agent Card Name", registered_name) as null|text, allow_numbers=TRUE)
 				if(!isnull(new_name) && CanUseTopic(user, state))
 					src.registered_name = new_name
 					to_chat(user, "<span class='notice'>Name changed to '[new_name]'.</span>")

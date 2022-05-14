@@ -10,16 +10,17 @@
 
 /obj/structure/lift/set_dir(var/newdir)
 	. = ..()
-	pixel_x = 0
-	pixel_y = 0
+	default_pixel_x = 0
+	default_pixel_y = 0
 	if(dir & NORTH)
-		pixel_y = -32
+		default_pixel_y = -32
 	else if(dir & SOUTH)
-		pixel_y = 32
+		default_pixel_y = 32
 	else if(dir & EAST)
-		pixel_x = -32
+		default_pixel_x = -32
 	else if(dir & WEST)
-		pixel_x = 32
+		default_pixel_x = 32
+	reset_offsets(0)
 
 /obj/structure/lift/proc/pressed(var/mob/user)
 	if(!istype(user, /mob/living/silicon))
@@ -86,6 +87,7 @@
 	icon_state = "plinth"
 
 /obj/structure/lift/button/on_update_icon()
+	..()
 	if(light_up)
 		icon_state = "[initial(icon_state)]_lit"
 	else
@@ -129,7 +131,7 @@
 	dat += "<a href='?src=\ref[src];emergency_stop=1'>Emergency Stop</a>"
 	dat += "<hr></body></html>"
 
-	var/datum/browser/written/popup = new(user, "turbolift_panel", "Lift Panel", 230, 260)
+	var/datum/browser/written_digital/popup = new(user, "turbolift_panel", "Lift Panel", 230, 260)
 	popup.set_content(jointext(dat, null))
 	popup.open()
 	return

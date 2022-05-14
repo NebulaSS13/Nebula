@@ -2,6 +2,8 @@
 	name = null
 	melting_point = 1000
 	boiling_point = 30000
+	molar_mass = 0.232 //iron Fe3O4
+	latent_heat = 6120 //iron
 	door_icon_base = "stone"
 	icon_base = 'icons/turf/walls/stone.dmi'
 	table_icon_base = "stone"

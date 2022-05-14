@@ -6,7 +6,7 @@
 
 /mob/living/carbon/get_single_monetary_worth()
 	. = ..()
-	for(var/atom/movable/organ in (internal_organs|organs))
+	for(var/atom/movable/organ in get_organs())
 		. += organ.get_combined_monetary_worth()
 
 /mob/living/carbon/get_value_multiplier()

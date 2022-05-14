@@ -55,7 +55,7 @@
 		if(EVENT_LEVEL_MAJOR)
 			command_announcement.Announce("The [location_name()] has cleared the meteor storm.", "[location_name()] Sensor Array", zlevels = affecting_z)
 		else
-			command_announcement.Announce("The [location_name()] has cleared the meteor shower", "[location_name()] Sensor Array", zlevels = affecting_z)
+			command_announcement.Announce("The [location_name()] has cleared the meteor shower.", "[location_name()] Sensor Array", zlevels = affecting_z)
 
 /datum/event/meteor_wave/proc/get_meteors()
 	switch(severity)

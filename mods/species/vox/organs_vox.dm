@@ -200,25 +200,29 @@
 /obj/item/organ/internal/voxstack/proc/backup_inviable()
 	return 	(!istype(backup) || backup == owner.mind || (backup.current && backup.current.stat != DEAD))
 
-/obj/item/organ/internal/voxstack/replaced()
-	if(!..()) return 0
-	if(prompting) // Don't spam the player with twenty dialogs because someone doesn't know what they're doing or panicking.
-		return 0
+/obj/item/organ/internal/voxstack/on_add_effects()
+	if(!..() || prompting) // Don't spam the player with twenty dialogs because someone doesn't know what they're doing or panicking.
+		return FALSE
+
+	//Need spawn here so that this interactive bit doesn't lock up init
 	if(owner && !backup_inviable())
-		var/current_owner = owner
+		prompt_revive_callback(owner)
+	return TRUE
+
+/obj/item/organ/internal/voxstack/proc/prompt_revive_callback(var/mob/living/carbon/C)
+	set waitfor = FALSE
+	if(C && !backup_inviable())
 		prompting = TRUE
 		var/response = alert(find_dead_player(ownerckey, 1), "Your neural backup has been placed into a new body. Do you wish to return to life as the mind of [backup.name]?", "Resleeving", "Yes", "No")
 		prompting = FALSE
-		if(src && response == "Yes" && owner == current_owner)
+		if(src && response == "Yes" && owner == C)
 			overwrite()
 	sleep(-1)
 	do_backup()
 
-	return 1
-
-/obj/item/organ/internal/voxstack/removed()
-	var/obj/item/organ/external/head = owner.get_organ(parent_organ)
-	owner.visible_message(SPAN_DANGER("\The [src] rips gaping holes in \the [owner]'s [head.name] as it is torn loose!"))
+/obj/item/organ/internal/voxstack/on_remove_effects(mob/living/last_owner)
+	var/obj/item/organ/external/head = last_owner.get_organ(parent_organ)
+	last_owner.visible_message(SPAN_DANGER("\The [src] rips gaping holes in \the [last_owner]'s [head.name] as it is torn loose!"))
 	head.take_external_damage(rand(15,20))
 	for(var/obj/item/organ/internal/O in head.contents)
 		O.take_internal_damage(rand(30,70))

@@ -1,7 +1,7 @@
 // Bomb cap!
 var/global/max_explosion_range = 14
 var/global/href_logfile        = null
-var/global/game_version        = "Nebula13"
+var/global/game_version        = "Nebula"
 var/global/changelog_hash      = ""
 var/global/join_motd = null
 

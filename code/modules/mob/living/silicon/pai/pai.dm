@@ -1,12 +1,12 @@
 var/global/list/possible_chassis = list(
-	"Drone" =    "drone",
-	"Cat" =      "cat",
-	"Mouse" =    "mouse",
-	"Monkey" =   "monkey",
-	"Rabbit" =   "rabbit",
-	"Mushroom" = "mushroom",
-	"Corgi" =    "corgi",
-	"Crow" =     "crow"
+	"Drone" =    'icons/mob/robots/pai/pai_drone.dmi',
+	"Cat" =      'icons/mob/robots/pai/pai_cat.dmi',
+	"Mouse" =    'icons/mob/robots/pai/pai_mouse.dmi',
+	"Monkey" =   'icons/mob/robots/pai/pai_monkey.dmi',
+	"Rabbit" =   'icons/mob/robots/pai/pai_rabbit.dmi',
+	"Mushroom" = 'icons/mob/robots/pai/pai_mushroom.dmi',
+	"Corgi" =    'icons/mob/robots/pai/pai_corgi.dmi',
+	"Crow" =     'icons/mob/robots/pai/pai_crow.dmi'
 )
 
 var/global/list/possible_say_verbs = list(
@@ -21,8 +21,8 @@ var/global/list/possible_say_verbs = list(
 
 /mob/living/silicon/pai
 	name = "pAI"
-	icon = 'icons/mob/pai.dmi'
-	icon_state = "drone"
+	icon = 'icons/mob/robots/pai/pai_drone.dmi'
+	icon_state = ICON_STATE_WORLD
 	mob_sort_value = 3
 	hud_type = /datum/hud/pai
 	emote_type = 2		// pAIs emotes are heard, not seen, so they can be seen through a container (eg. person)
@@ -35,7 +35,7 @@ var/global/list/possible_say_verbs = list(
 	idcard = /obj/item/card/id
 	silicon_radio = null // pAIs get their radio from the card they belong to.
 
-	ntos_type =	/datum/extension/interactive/ntos/silicon/small
+	os_type =	/datum/extension/interactive/os/silicon/small
 	starting_stock_parts = list(
 		/obj/item/stock_parts/computer/processor_unit/small,
 		/obj/item/stock_parts/computer/hard_drive/silicon,
@@ -51,7 +51,7 @@ var/global/list/possible_say_verbs = list(
 	var/obj/item/paicard/card	// The card we inhabit
 
 	var/is_in_card = TRUE
-	var/chassis = "drone"
+	var/chassis
 	var/obj/item/pai_cable/cable		// The cable we produce and use when door or camera jacking
 
 	var/master				// Name of the one who commands us
@@ -92,6 +92,9 @@ var/global/list/possible_say_verbs = list(
 	light_wedge = 45
 
 /mob/living/silicon/pai/Initialize()
+
+	chassis = global.possible_chassis[1]
+
 	set_extension(src, /datum/extension/base_icon_state, icon_state)
 	status_flags |= NO_ANTAG
 	card = loc
@@ -192,10 +195,10 @@ var/global/list/possible_say_verbs = list(
 		var/mob/holder = card.loc
 		if(ishuman(holder))
 			var/mob/living/carbon/human/H = holder
-			for(var/obj/item/organ/external/affecting in H.organs)
+			for(var/obj/item/organ/external/affecting in H.get_external_organs())
 				if(card in affecting.implants)
 					affecting.take_external_damage(rand(30,50))
-					affecting.implants -= card
+					LAZYREMOVE(affecting.implants, card)
 					H.visible_message("<span class='danger'>\The [src] explodes out of \the [H]'s [affecting.name] in a shower of gore!</span>")
 					break
 		holder.drop_from_inventory(card)
@@ -285,9 +288,12 @@ var/global/list/possible_say_verbs = list(
 		if(stat != 2) fold()
 	return
 
-/mob/living/silicon/pai/attack_hand(mob/user)
-	visible_message(SPAN_DANGER("[user] boops [src] on the head."))
-	fold()
+/mob/living/silicon/pai/default_interaction(mob/user)
+	. = ..()
+	if(!.)
+		visible_message(SPAN_NOTICE("\The [user] boops \the [src] on the head."))
+		fold()
+		return TRUE
 
 // No binary for pAIs.
 /mob/living/silicon/pai/binarycheck()

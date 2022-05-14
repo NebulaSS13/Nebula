@@ -59,7 +59,7 @@ Frequency:
 			if (sr)
 				src.temp += "<B>Located Beacons:</B><BR>"
 
-				for(var/obj/item/radio/beacon/W in world)
+				for(var/obj/item/radio/beacon/W in global.radio_beacons)
 					if(!W.functioning)
 						continue
 					if (W.frequency == src.frequency)
@@ -79,7 +79,7 @@ Frequency:
 							src.temp += "[W.code]-[dir2text(get_dir(sr, tr))]-[direct]<BR>"
 
 				src.temp += "<B>Extranneous Signals:</B><BR>"
-				for (var/obj/item/implant/tracking/W in world)
+				for (var/obj/item/implant/tracking/W in global.tracking_implants)
 					if (!W.implanted || !(istype(W.loc,/obj/item/organ/external) || ismob(W.loc)))
 						continue
 					else

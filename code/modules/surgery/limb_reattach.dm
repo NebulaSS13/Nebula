@@ -91,25 +91,16 @@
 /decl/surgery_step/limb/attach/end_step(mob/living/user, mob/living/target, target_zone, obj/item/tool)
 	if(!user.unEquip(tool))
 		return
+	var/obj/item/organ/external/P = target.get_organ(target_zone)
 	var/obj/item/organ/external/E = tool
 	user.visible_message("<span class='notice'>[user] has attached [target]'s [E.name] to the [E.amputation_point].</span>",	\
 	"<span class='notice'>You have attached [target]'s [E.name] to the [E.amputation_point].</span>")
-	E.replaced(target)
 
-	// Modular bodyparts (like prosthetics) do not need to be reconnected.
-	if(E.get_modular_limb_category() != MODULAR_BODYPART_INVALID)
-		E.status &= ~ORGAN_CUT_AWAY
-		for(var/obj/item/organ/external/child in E.children)
-			child.status &= ~ORGAN_CUT_AWAY
-	else
-		E.status |= ORGAN_CUT_AWAY
+	//Add the organ but in a detached state
+	target.add_organ(E, P, FALSE, TRUE, TRUE)
 
 	if(BP_IS_PROSTHETIC(E) && prob(user.skill_fail_chance(SKILL_DEVICES, 50, SKILL_ADEPT)))
 		E.add_random_ailment()
-
-	target.update_body()
-	target.updatehealth()
-	target.UpdateDamageIcon()
 
 /decl/surgery_step/limb/attach/fail_step(mob/living/user, mob/living/target, target_zone, obj/item/tool)
 	var/obj/item/organ/external/E = tool
@@ -152,15 +143,12 @@
 
 /decl/surgery_step/limb/connect/end_step(mob/living/user, mob/living/target, target_zone, obj/item/tool)
 	var/obj/item/organ/external/E = target.get_organ(target_zone)
+	var/obj/item/organ/external/P = target.get_organ(E.parent_organ)
 	user.visible_message("<span class='notice'>[user] has connected tendons and muscles in [target]'s [E.amputation_point] with [tool].</span>",	\
 	"<span class='notice'>You have connected tendons and muscles in [target]'s [E.amputation_point] with [tool].</span>")
-	E.status &= ~ORGAN_CUT_AWAY
-	if(E.children)
-		for(var/obj/item/organ/external/C in E.children)
-			C.status &= ~ORGAN_CUT_AWAY
-	target.update_body()
-	target.updatehealth()
-	target.UpdateDamageIcon()
+
+	//This time we call add_organ but we want it to install in a non detached state
+	target.add_organ(E, P, FALSE, TRUE, FALSE)
 
 /decl/surgery_step/limb/connect/fail_step(mob/living/user, mob/living/target, target_zone, obj/item/tool)
 	var/obj/item/organ/external/E = target.get_organ(target_zone)

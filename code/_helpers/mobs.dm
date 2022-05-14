@@ -1,28 +1,11 @@
-/atom/movable/proc/get_mob()
-	return
-
-/obj/vehicle/train/get_mob()
-	return buckled_mob
-
-/mob/get_mob()
-	return src
-
-/mob/living/bot/mulebot/get_mob()
-	if(load && istype(load, /mob/living))
-		return list(src, load)
-	return src
-
 //helper for inverting armor blocked values into a multiplier
 #define blocked_mult(blocked) max(1 - (blocked/100), 0)
 
 /proc/mobs_in_view(var/range, var/source)
-	var/list/mobs = list()
 	for(var/atom/movable/AM in view(range, source))
 		var/M = AM.get_mob()
 		if(M)
-			mobs += M
-
-	return mobs
+			LAZYDISTINCTADD(., M)
 
 /proc/random_hair_style(gender, species)
 	var/decl/species/mob_species = get_species_by_key(species || global.using_map.default_species)
@@ -108,7 +91,7 @@
 	var/starttime = world.time
 	. = 1
 	while (world.time < endtime)
-		sleep(1)
+		stoplag(1)
 		if (progress)
 			progbar.update(world.time - starttime)
 		if(!user || !target)
@@ -168,7 +151,7 @@
 	var/starttime = world.time
 	. = 1
 	while (world.time < endtime)
-		sleep(1)
+		stoplag(1)
 		if (progress)
 			progbar.update(world.time - starttime)
 

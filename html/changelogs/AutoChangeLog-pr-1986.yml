@@ -1,4 +1,0 @@
-author: PsyCommando
-delete-after: true
-changes:
-  - tweak: Make curtains use decl instead of several subtypes.

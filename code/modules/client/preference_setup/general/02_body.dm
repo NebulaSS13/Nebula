@@ -1,5 +1,3 @@
-var/global/list/valid_bloodtypes = list("A+", "A-", "B+", "B-", "AB+", "AB-", "O+", "O-")
-
 /datum/preferences
 	var/species
 	var/b_type                           //blood type
@@ -22,10 +20,8 @@ var/global/list/valid_bloodtypes = list("A+", "A-", "B+", "B-", "AB+", "AB-", "O
 /datum/category_item/player_setup_item/physical/body
 	name = "Body"
 	sort_order = 2
-	var/hide_species = TRUE
 
 /datum/category_item/player_setup_item/physical/body/load_character(datum/pref_record_reader/R)
-	pref.species =                R.read("species")
 	pref.hair_colour =            R.read("hair_colour")
 	pref.facial_hair_colour =     R.read("facial_hair_colour")
 	pref.skin_colour =            R.read("skin_colour")
@@ -66,7 +62,6 @@ var/global/list/valid_bloodtypes = list("A+", "A-", "B+", "B-", "AB+", "AB-", "O
 				break
 
 /datum/category_item/player_setup_item/physical/body/save_character(datum/pref_record_writer/W)
-	W.write("species",                pref.species)
 	W.write("skin_tone",              pref.skin_tone)
 	W.write("hair_colour",            pref.hair_colour)
 	W.write("facial_hair_colour",     pref.facial_hair_colour)
@@ -96,13 +91,12 @@ var/global/list/valid_bloodtypes = list("A+", "A-", "B+", "B-", "AB+", "AB-", "O
 
 	pref.b_type = sanitize_text(pref.b_type, initial(pref.b_type))
 
-	if(!pref.b_type || !(pref.b_type in global.valid_bloodtypes))
-		pref.b_type = RANDOM_BLOOD_TYPE
-
 	if(!pref.species || !(pref.species in get_playable_species()))
 		pref.species = global.using_map.default_species
 
 	var/decl/species/mob_species = get_species_by_key(pref.species)
+	if(!pref.b_type || !(pref.b_type in mob_species.blood_types))
+		pref.b_type = pickweight(mob_species.blood_types)
 
 	var/low_skin_tone = mob_species ? (35 - mob_species.max_skin_tone()) : -185
 	sanitize_integer(pref.skin_tone, low_skin_tone, 34, initial(pref.skin_tone))
@@ -139,14 +133,6 @@ var/global/list/valid_bloodtypes = list("A+", "A-", "B+", "B-", "AB+", "AB-", "O
 	. = list()
 
 	var/decl/species/mob_species = get_species_by_key(pref.species)
-	var/title = "<b>Species<a href='?src=\ref[src];show_species=1'><small>?</small></a>:</b> <a href='?src=\ref[src];set_species=1'>[mob_species.name]</a>"
-	var/append_text = "<a href='?src=\ref[src];toggle_species_verbose=1'>[hide_species ? "Expand" : "Collapse"]</a>"
-	. += "<hr>"
-	. += mob_species.get_description(title, append_text, verbose = !hide_species, skip_detail = TRUE, skip_photo = TRUE)
-	. += "<table><tr style='vertical-align:top'><td><b>Body</b> "
-	. += "(<a href='?src=\ref[src];random=1'>&reg;</A>)"
-	. += "<br>"
-
 	. += "Blood Type: <a href='?src=\ref[src];blood_type=1'>[pref.b_type]</a><br>"
 
 	if(has_flag(mob_species, HAS_A_SKIN_TONE))
@@ -160,9 +146,9 @@ var/global/list/valid_bloodtypes = list("A+", "A-", "B+", "B-", "AB+", "AB-", "O
 			var/datum/appearance_descriptor/descriptor = mob_species.appearance_descriptors[entry]
 			. += "<tr><td><b>[capitalize(descriptor.chargen_label)]</b></td>"
 			if(descriptor.has_custom_value())
-				. += "<td align = 'center' width = '50px'><a href='?src=\ref[src];set_descriptor=\ref[descriptor];set_descriptor_custom=1'>[descriptor.get_value_text(pref.appearance_descriptors[entry])]</a></td><td align = 'center'>"
+				. += "<td align = 'left' width = '50px'><a href='?src=\ref[src];set_descriptor=\ref[descriptor];set_descriptor_custom=1'>[descriptor.get_value_text(pref.appearance_descriptors[entry])]</a></td><td align = 'left'>"
 			else
-				. += "<td align = 'center' colspan = 2>"
+				. += "<td align = 'left' colspan = 2>"
 			for(var/i = descriptor.chargen_min_index to descriptor.chargen_max_index)
 				var/use_string = descriptor.chargen_value_descriptors[i]
 				var/desc_index = descriptor.get_index_from_value(pref.appearance_descriptors[entry])
@@ -220,12 +206,7 @@ var/global/list/valid_bloodtypes = list("A+", "A-", "B+", "B-", "AB+", "AB-", "O
 	return mob_species && (mob_species.appearance_flags & flag)
 
 /datum/category_item/player_setup_item/physical/body/OnTopic(var/href,var/list/href_list, var/mob/user)
-
 	var/decl/species/mob_species = get_species_by_key(pref.species)
-	if(href_list["toggle_species_verbose"])
-		hide_species = !hide_species
-		return TOPIC_REFRESH
-
 	if(href_list["set_descriptor"])
 
 		var/datum/appearance_descriptor/descriptor = locate(href_list["set_descriptor"])
@@ -246,61 +227,12 @@ var/global/list/valid_bloodtypes = list("A+", "A-", "B+", "B-", "AB+", "AB-", "O
 		return TOPIC_REFRESH_UPDATE_PREVIEW
 
 	else if(href_list["blood_type"])
-		var/new_b_type = input(user, "Choose your character's blood-type:", CHARACTER_PREFERENCE_INPUT_TITLE) as null|anything in global.valid_bloodtypes
+		var/new_b_type = input(user, "Choose your character's blood type:", CHARACTER_PREFERENCE_INPUT_TITLE) as null|anything in mob_species.blood_types
 		if(new_b_type && CanUseTopic(user))
-			pref.b_type = new_b_type
-			return TOPIC_REFRESH
-
-	else if(href_list["show_species"])
-		var/choice = input("Which species would you like to look at?") as null|anything in get_playable_species()
-		if(choice)
-			var/decl/species/current_species = get_species_by_key(choice)
-			show_browser(user, current_species.get_description(), "window=species;size=700x400")
-			return TOPIC_HANDLED
-
-	else if(href_list["set_species"])
-
-		var/list/species_to_pick = list()
-		for(var/species in get_playable_species())
-			if(!check_rights(R_ADMIN, 0) && config.usealienwhitelist)
-				var/decl/species/current_species = get_species_by_key(species)
-				if(!(current_species.spawn_flags & SPECIES_CAN_JOIN))
-					continue
-				else if((current_species.spawn_flags & SPECIES_IS_WHITELISTED) && !is_alien_whitelisted(preference_mob(),current_species))
-					continue
-			species_to_pick += species
-
-		var/choice = input("Select a species to play as.") as null|anything in species_to_pick
-		if(!choice || !(choice in get_all_species()))
-			return
-
-		var/prev_species = pref.species
-		pref.species = choice
-		if(prev_species != pref.species)
 			mob_species = get_species_by_key(pref.species)
-			var/decl/pronouns/pronouns = get_pronouns_by_gender(pref.gender)
-			if(!istype(pronouns) || !(pronouns in mob_species.available_pronouns))
-				pronouns = mob_species.available_pronouns[1]
-				pref.gender = pronouns.name
-
-			ResetAllHair()
-
-			//reset hair colour and skin colour
-			pref.hair_colour = COLOR_BLACK
-			pref.skin_tone = 0
-			pref.body_markings.Cut() // Basically same as above.
-
-			prune_occupation_prefs()
-			pref.skills_allocated = pref.sanitize_skills(pref.skills_allocated)
-
-			pref.cultural_info = mob_species.default_cultural_info.Copy()
-
-			mob_species.handle_post_species_pref_set(pref)
-
-			if(!has_flag(get_species_by_key(pref.species), HAS_UNDERWEAR))
-				pref.all_underwear.Cut()
-
-			return TOPIC_REFRESH_UPDATE_PREVIEW
+			if(new_b_type in mob_species.blood_types)
+				pref.b_type = new_b_type
+				return TOPIC_REFRESH
 
 	else if(href_list["hair_color"])
 		if(!has_flag(mob_species, HAS_HAIR_COLOR))

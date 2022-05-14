@@ -106,10 +106,12 @@
 /datum/extension/lockable/proc/attackby(var/obj/item/W, var/mob/user)
 	var/obj/item/A = holder
 	if(locked)
-		if (!is_digital_lock && istype(W, /obj/item/energy_blade/blade) && emag_act(INFINITY, user, "You slice through the lock of \the [holder]"))
-			spark_at(A.loc, amount=5)
-			playsound(A.loc, 'sound/weapons/blade1.ogg', 50, 1)
-			return TRUE
+		if(!is_digital_lock && istype(W, /obj/item/energy_blade))
+			var/obj/item/energy_blade/blade = W
+			if(blade.is_special_cutting_tool() && emag_act(INFINITY, user, "You slice through the lock of \the [holder]."))
+				spark_at(A.loc, amount=5)
+				playsound(A.loc, 'sound/weapons/blade1.ogg', 50, 1)
+				return TRUE
 
 		if(isScrewdriver(W))
 			if (do_after(user, 20 * user.skill_delay_mult(SKILL_DEVICES), holder))

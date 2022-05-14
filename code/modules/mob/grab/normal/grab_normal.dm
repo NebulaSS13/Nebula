@@ -7,111 +7,116 @@
 	harm_action = "dislocate"
 	var/drop_headbutt = 1
 
-/decl/grab/normal/on_hit_help(var/obj/item/grab/G)
-	var/obj/item/organ/external/O = G.get_targeted_organ()
-	if(O)
-		return O.inspect(G.assailant)
+/decl/grab/normal/on_hit_help(var/obj/item/grab/G, var/atom/A, var/proximity)
 
-/decl/grab/normal/on_hit_disarm(var/obj/item/grab/G)
+	var/obj/item/organ/external/O = G.get_targeted_organ()
+	if(!O || !proximity || (A && A != G.get_affecting_mob()))
+		return FALSE
+	return O.inspect(G.assailant)
+
+/decl/grab/normal/on_hit_disarm(var/obj/item/grab/G, var/atom/A, var/proximity)
+
+	if(!proximity)
+		return FALSE
+
 	var/mob/living/affecting = G.get_affecting_mob()
 	var/mob/living/assailant = G.assailant
-	if(!affecting)
-		return
-	if(!G.attacking && !affecting.lying)
+	if(affecting && A && A == affecting && !affecting.lying)
 
-		affecting.visible_message("<span class='notice'>[assailant] is trying to pin [affecting] to the ground!</span>")
-		G.attacking = 1
-
+		affecting.visible_message(SPAN_DANGER("\The [assailant] is trying to pin \the [affecting] to the ground!"))
 		if(do_mob(assailant, affecting, action_cooldown - 1))
-			G.attacking = 0
 			G.action_used()
 			SET_STATUS_MAX(affecting, STAT_WEAK, 2)
-			affecting.visible_message("<span class='notice'>[assailant] pins [affecting] to the ground!</span>")
+			affecting.visible_message(SPAN_DANGER("\The [assailant] pins \the [affecting] to the ground!"))
+			return TRUE
+		affecting.visible_message(SPAN_WARNING("\The [assailant] fails to pin \the [affecting] to the ground."))
 
-			return 1
-		else
-			affecting.visible_message("<span class='notice'>[assailant] fails to pin [affecting] to the ground.</span>")
-			G.attacking = 0
-			return 0
-	else
-		return 0
+	return FALSE
 
-/decl/grab/normal/on_hit_grab(var/obj/item/grab/G)
+/decl/grab/normal/on_hit_grab(var/obj/item/grab/G, var/atom/A, var/proximity)
+
+	if(!proximity)
+		return FALSE
+
 	var/mob/living/affecting = G.get_affecting_mob()
-	var/mob/living/assailant = G.assailant
-	if(!affecting)
-		return
+	if(!affecting || (A && A != affecting))
+		return FALSE
 
-	if(!assailant.skill_check(SKILL_COMBAT, SKILL_ADEPT))
-		return
+	var/mob/living/assailant = G.assailant
+	if(!assailant)
+		return FALSE
 
 	var/obj/item/organ/external/O = G.get_targeted_organ()
 	if(!O)
-		to_chat(assailant, "<span class='warning'>[affecting] is missing that body part!</span>")
-		return 0
+		to_chat(assailant, SPAN_WARNING("\The [affecting] is missing that body part!"))
+		return FALSE
 
-	assailant.visible_message("<span class='danger'>[assailant] begins to [pick("bend", "twist")] [affecting]'s [O.name] into a jointlock!</span>")
-	G.attacking = 1
+	if(!assailant.skill_check(SKILL_COMBAT, SKILL_ADEPT))
+		to_chat(assailant, SPAN_WARNING("You clumsily attempt to jointlock \the [affecting]'s [O.name], but fail!"))
+		return FALSE
 
+	assailant.visible_message(SPAN_DANGER("\The [assailant] begins to [pick("bend", "twist")] \the [affecting]'s [O.name] into a jointlock!"))
 	if(do_mob(assailant, affecting, action_cooldown - 1))
-		G.attacking = 0
 		G.action_used()
 		O.jointlock(assailant)
-		assailant.visible_message("<span class='danger'>[affecting]'s [O.name] is twisted!</span>")
+		assailant.visible_message(SPAN_DANGER("\The [affecting]'s [O.name] is twisted!"))
 		playsound(assailant.loc, 'sound/weapons/thudswoosh.ogg', 50, 1, -1)
-		return 1
-	else
-		affecting.visible_message("<span class='notice'>[assailant] fails to jointlock [affecting]'s [O.name].</span>")
-		G.attacking = 0
-		return 0
+		return TRUE
 
-/decl/grab/normal/on_hit_harm(var/obj/item/grab/G)
+	affecting.visible_message(SPAN_WARNING("\The [assailant] fails to jointlock \the [affecting]'s [O.name]."))
+	return FALSE
+
+/decl/grab/normal/on_hit_harm(var/obj/item/grab/G, var/atom/A, var/proximity)
+
+	if(!proximity)
+		return FALSE
+
 	var/mob/living/affecting = G.get_affecting_mob()
+	if(!affecting || (A && A != affecting))
+		return FALSE
+
 	var/mob/living/assailant = G.assailant
-	if(!affecting)
-		return
-	if(!assailant.skill_check(SKILL_COMBAT, SKILL_ADEPT))
-		return
+	if(!assailant)
+		return FALSE
 
 	var/obj/item/organ/external/O = G.get_targeted_organ()
 	if(!O)
-		to_chat(assailant, "<span class='warning'>[affecting] is missing that body part!</span>")
-		return 0
+		to_chat(assailant, SPAN_WARNING("\The [affecting] is missing that body part!"))
+		return  FALSE
 
-	if(!O.dislocated)
-		assailant.visible_message("<span class='warning'>[assailant] begins to dislocate [affecting]'s [O.joint]!</span>")
-		G.attacking = 1
+	if(!assailant.skill_check(SKILL_COMBAT, SKILL_ADEPT))
+		to_chat(assailant, SPAN_WARNING("You clumsily attempt to dislocate \the [affecting]'s [O.name], but fail!"))
+		return FALSE
+
+	if(!O.is_dislocated() && (O.limb_flags & ORGAN_FLAG_CAN_DISLOCATE))
+		assailant.visible_message(SPAN_DANGER("\The [assailant] begins to dislocate \the [affecting]'s [O.joint]!"))
 		if(do_mob(assailant, affecting, action_cooldown - 1))
-			G.attacking = 0
 			G.action_used()
-			O.dislocate(1)
-			assailant.visible_message("<span class='danger'>[affecting]'s [O.joint] [pick("gives way","caves in","crumbles","collapses")]!</span>")
+			O.dislocate()
+			assailant.visible_message(SPAN_DANGER("\The [affecting]'s [O.joint] [pick("gives way","caves in","crumbles","collapses")]!"))
 			playsound(assailant.loc, 'sound/weapons/thudswoosh.ogg', 50, 1, -1)
-			return 1
-		else
-			affecting.visible_message("<span class='notice'>[assailant] fails to dislocate [affecting]'s [O.joint].</span>")
-			G.attacking = 0
-			return 0
+			return TRUE
+		affecting.visible_message(SPAN_WARNING("\The [assailant] fails to dislocate \the [affecting]'s [O.joint]."))
+		return FALSE
 
-	else if (O.dislocated > 0)
-		to_chat(assailant, "<span class='warning'>[affecting]'s [O.joint] is already dislocated!</span>")
-		return 0
+	if(O.limb_flags & ORGAN_FLAG_CAN_DISLOCATE)
+		to_chat(assailant, SPAN_WARNING("\The [affecting]'s [O.joint] is already dislocated!"))
 	else
-		to_chat(assailant, "<span class='warning'>You can't dislocate [affecting]'s [O.joint]!</span>")
-		return 0
+		to_chat(assailant, SPAN_WARNING("You can't dislocate \the [affecting]'s [O.joint]!"))
+	return FALSE
 
 /decl/grab/normal/resolve_openhand_attack(var/obj/item/grab/G)
 	if(G.assailant.a_intent != I_HELP)
 		if(G.target_zone == BP_HEAD)
 			if(G.assailant.zone_sel.selecting == BP_EYES)
 				if(attack_eye(G))
-					return 1
+					return TRUE
 			else
 				if(headbutt(G))
 					if(drop_headbutt)
 						let_go()
-					return 1
-	return 0
+					return TRUE
+	return FALSE
 
 /decl/grab/normal/proc/attack_eye(var/obj/item/grab/G)
 	var/mob/living/carbon/human/target = G.get_affecting_mob()

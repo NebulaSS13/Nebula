@@ -46,6 +46,9 @@
 	. += new/datum/stack_recipe/sandals(src)
 	. += new/datum/stack_recipe/tile/wood(src)
 	. += create_recipe_list(/datum/stack_recipe/furniture/chair/wood)
+	. += new/datum/stack_recipe/furniture/sofa/m(src)
+	. += new/datum/stack_recipe/furniture/sofa/l(src)
+	. += new/datum/stack_recipe/furniture/sofa/r(src)
 	. += new/datum/stack_recipe/crossbowframe(src)
 	. += new/datum/stack_recipe/furniture/coffin/wooden(src)
 	. += new/datum/stack_recipe/beehive_assembly(src)
@@ -95,6 +98,7 @@
 	shard_type = SHARD_NONE
 	value = 0
 	hidden_from_codex = TRUE
+	exoplanet_rarity = MAT_RARITY_NOWHERE
 
 /decl/material/solid/wood/holographic/get_recipes(reinf_mat)
 	return list()

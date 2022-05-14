@@ -9,7 +9,7 @@
 	origin_tech = "{'esoteric':3}"
 	var/list/clothing_choices = list()
 	siemens_coefficient = 0.8
-	bodytype_restricted = null
+	bodytype_equip_flags = null
 	matter = list(/decl/material/solid/metal/steel = MATTER_AMOUNT_REINFORCEMENT)
 
 /obj/item/clothing/shoes/jackboots/swat
@@ -84,7 +84,7 @@
 	name = "sandals"
 	desc = "A pair of rather plain wooden sandals."
 	icon = 'icons/clothing/feet/sandals.dmi'
-	bodytype_restricted = null
+	bodytype_equip_flags = null
 	body_parts_covered = 0
 	wizard_garb = 1
 	can_add_hidden_item = FALSE
@@ -102,7 +102,7 @@
 	name = "clown shoes"
 	icon = 'icons/clothing/feet/clown.dmi'
 	force = 0
-	bodytype_restricted = null
+	bodytype_equip_flags = null
 	can_add_hidden_item = FALSE
 	var/footstep = 1	//used for squeeks whilst walking
 
@@ -131,14 +131,14 @@
 	min_cold_protection_temperature = SHOE_MIN_COLD_PROTECTION_TEMPERATURE
 	heat_protection = SLOT_FEET
 	max_heat_protection_temperature = SHOE_MAX_HEAT_PROTECTION_TEMPERATURE
-	bodytype_restricted = null
+	bodytype_equip_flags = null
 
 /obj/item/clothing/shoes/slippers
 	name = "bunny slippers"
 	desc = "Fluffy!"
 	icon = 'icons/clothing/feet/bunny_slippers.dmi'
 	force = 0
-	bodytype_restricted = null
+	bodytype_equip_flags = null
 	w_class = ITEM_SIZE_SMALL
 	can_add_hidden_item = FALSE
 	can_add_cuffs = FALSE
@@ -148,7 +148,7 @@
 	desc = "Help you swim good."
 	icon = 'icons/clothing/feet/flippers.dmi'
 	item_flags = ITEM_FLAG_NOSLIP
-	bodytype_restricted = null
+	bodytype_equip_flags = null
 	can_add_hidden_item = FALSE
 	can_add_cuffs = FALSE
 

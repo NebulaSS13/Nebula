@@ -22,6 +22,8 @@
 	)
 	relative_size = 60
 	req_access = list(access_robotics)
+	status = ORGAN_PROSTHETIC //triggers robotization on init
+	scale_max_damage_to_species_health = FALSE
 
 	var/mob/living/silicon/sil_brainmob/brainmob = null
 	var/searching = 0
@@ -35,14 +37,12 @@
 /obj/item/organ/internal/posibrain/Initialize()
 	. = ..()
 	if(!brainmob && iscarbon(loc))
-		init(loc)
-	robotize()
-	unshackle()
-	update_icon()
+		init(loc) //Not sure why we're creating a braimob on load, and also why not installing it in the owner...
 
 /obj/item/organ/internal/posibrain/proc/init(var/mob/living/carbon/H)
+	if(brainmob)
+		return
 	brainmob = new(src)
-
 	if(istype(H))
 		brainmob.SetName(H.real_name)
 		brainmob.real_name = H.real_name
@@ -52,6 +52,11 @@
 /obj/item/organ/internal/posibrain/Destroy()
 	QDEL_NULL(brainmob)
 	return ..()
+
+/obj/item/organ/internal/posibrain/setup_as_prosthetic()
+	. = ..()
+	unshackle()
+	update_icon()
 
 /obj/item/organ/internal/posibrain/attack_self(mob/user)
 	if(brainmob && !brainmob.key && searching == 0)
@@ -156,31 +161,31 @@
 	to_chat(brainmob, "<span class='notice'>You feel slightly disoriented. That's normal when you're just \a [initial(src.name)].</span>")
 	callHook("debrain", list(brainmob))
 
-/obj/item/organ/internal/posibrain/removed(var/mob/living/user)
-	if(!istype(owner))
-		return ..()
-
-	if(name == initial(name))
-		SetName("\the [owner.real_name]'s [initial(name)]")
-
-	transfer_identity(owner)
-
-	..()
-
-/obj/item/organ/internal/posibrain/replaced(var/mob/living/target)
-
-	if(!..()) return 0
-
-	if(target.key)
-		target.ghostize()
-
+/obj/item/organ/internal/posibrain/on_add_effects()
 	if(brainmob)
 		if(brainmob.mind)
-			brainmob.mind.transfer_to(target)
-		else
-			target.key = brainmob.key
+			if(owner.key)
+				owner.ghostize()
+			brainmob.mind.transfer_to(owner)
+		else if(brainmob.key) //posibrain init with a dummy brainmob for some reasons, so gotta do this or its gonna disconnect the client on mob transformation
+			owner.key = brainmob.key
+	return ..()
 
-	return 1
+/obj/item/organ/internal/posibrain/on_remove_effects()
+	if(istype(owner))
+		transfer_identity(owner)
+	return ..()
+
+/obj/item/organ/internal/posibrain/do_install(mob/living/carbon/human/target, obj/item/organ/external/affected, in_place, update_icon, detached)
+	if(!(. = ..()))
+		return
+	if(istype(owner))
+		SetName(initial(name)) //Reset the organ's name to stay coherent if we're put back into someone's skull
+
+/obj/item/organ/internal/posibrain/do_uninstall(in_place, detach, ignore_children)
+	if(!in_place && istype(owner) && name == initial(name))
+		SetName("\the [owner.real_name]'s [initial(name)]")
+	return ..()
 
 /*
 	This is for law stuff directly. This is how a human mob will be able to communicate with the posi_brainmob in the
@@ -210,6 +215,7 @@
 	organ_tag = BP_CELL
 	parent_organ = BP_CHEST
 	vital = 1
+	status = ORGAN_PROSTHETIC //triggers robotization on init
 	var/open
 	var/obj/item/cell/cell = /obj/item/cell/hyper
 	//at 0.8 completely depleted after 60ish minutes of constant walking or 130 minutes of standing still
@@ -242,7 +248,7 @@
 		return 0
 	return cell && cell.use(amount)
 
-/obj/item/organ/internal/cell/proc/get_power_drain()	
+/obj/item/organ/internal/cell/proc/get_power_drain()
 	var/damage_factor = 1 + 10 * damage/max_damage
 	return servo_cost * damage_factor
 
@@ -289,8 +295,8 @@
 				cell = W
 				to_chat(user, "<span class = 'notice'>You insert \the [cell].</span>")
 
-/obj/item/organ/internal/cell/replaced()
-	..()
+/obj/item/organ/internal/cell/on_add_effects()
+	. = ..()
 	// This is very ghetto way of rebooting an IPC. TODO better way.
 	if(owner && owner.stat == DEAD)
 		owner.set_stat(CONSCIOUS)
@@ -306,17 +312,22 @@
 	icon_state = "mmi-empty"
 	organ_tag = BP_BRAIN
 	parent_organ = BP_HEAD
-	vital = 1
+	vital = TRUE
+	status = ORGAN_PROSTHETIC //triggers robotization on init
+	scale_max_damage_to_species_health = FALSE
 	var/obj/item/mmi/stored_mmi
 	var/datum/mind/persistantMind //Mind that the organ will hold on to after being removed, used for transfer_and_delete
 	var/ownerckey // used in the event the owner is out of body
 
 /obj/item/organ/internal/mmi_holder/Destroy()
 	stored_mmi = null
+	persistantMind = null
 	return ..()
 
-/obj/item/organ/internal/mmi_holder/Initialize(mapload, var/internal)
-	. = ..()
+/obj/item/organ/internal/mmi_holder/do_install(mob/living/carbon/human/target, obj/item/organ/external/affected, in_place)
+	if(status & ORGAN_CUT_AWAY || !(. = ..()))
+		return
+
 	if(!stored_mmi)
 		stored_mmi = new(src)
 	update_from_mmi()
@@ -347,18 +358,12 @@
 		owner.switch_from_dead_to_living_mob_list()
 		owner.visible_message("<span class='danger'>\The [owner] twitches visibly!</span>")
 
-/obj/item/organ/internal/mmi_holder/cut_away(var/mob/living/user)
-	var/obj/item/organ/external/parent = owner.get_organ(parent_organ)
-	if(istype(parent))
-		removed(user, 0)
-		parent.implants += transfer_and_delete()
-
-/obj/item/organ/internal/mmi_holder/removed()
-	if(owner && owner.mind)
-		persistantMind = owner.mind
-		if(owner.ckey)
-			ownerckey = owner.ckey
-	..()
+/obj/item/organ/internal/mmi_holder/on_remove_effects(mob/living/last_owner)
+	if(last_owner && last_owner.mind)
+		persistantMind = last_owner.mind
+		if(last_owner.ckey)
+			ownerckey = last_owner.ckey
+	. = ..()
 
 /obj/item/organ/internal/mmi_holder/proc/transfer_and_delete()
 	if(stored_mmi)
@@ -371,3 +376,8 @@
 			if(response == "Yes")
 				persistantMind.transfer_to(stored_mmi.brainmob)
 	qdel(src)
+
+//Since the mmi_holder is an horrible hacky pos we turn it into a mmi on drop, since it shouldn't exist outside a mob
+/obj/item/organ/internal/mmi_holder/dropInto(atom/destination)
+	. = ..()
+	transfer_and_delete()

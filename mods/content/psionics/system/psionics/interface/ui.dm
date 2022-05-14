@@ -6,7 +6,7 @@
 /obj/screen/psi/Initialize(var/ml, var/mob/_owner)
 	. = ..()
 	owner = _owner
-	loc = null
+	forceMove(null)
 	update_icon()
 
 /obj/screen/psi/Destroy()

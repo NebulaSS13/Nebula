@@ -42,12 +42,11 @@
 
 	var/datum/random_map/M
 	if(alert("Do you wish to customise the map?",,"Yes","No") == "Yes")
-		var/seed = input("Seed? (blank for none)")       as text|null
 		var/lx =   input("X-size? (blank for default)")  as num|null
 		var/ly =   input("Y-size? (blank for default)")  as num|null
-		M = new map_datum(seed,null,null,null,lx,ly,1)
+		M = new map_datum(null,null,null,lx,ly,TRUE)
 	else
-		M = new map_datum(null,null,null,null,null,null,1)
+		M = new map_datum(null,null,null,null,null,TRUE)
 
 	if(M)
 		message_admins("[key_name_admin(usr)] has created [M.name].")

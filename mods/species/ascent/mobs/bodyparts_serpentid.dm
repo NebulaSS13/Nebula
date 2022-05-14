@@ -164,7 +164,7 @@
 	vital = 0
 
 /obj/item/organ/external/head/insectoid/serpentid/get_eye_overlay()
-	var/obj/item/organ/internal/eyes/eyes = owner.get_internal_organ(owner.species.vision_organ || BP_EYES)
+	var/obj/item/organ/internal/eyes/eyes = owner.get_organ(owner.species.vision_organ || BP_EYES)
 	if(eyes)
 		return eyes.get_special_overlay()
 

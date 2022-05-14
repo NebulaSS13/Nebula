@@ -11,7 +11,7 @@
 	available_bodytypes = list(/decl/bodytype/golem)
 
 	unarmed_attacks = list(/decl/natural_attack/stomp, /decl/natural_attack/kick, /decl/natural_attack/punch)
-	species_flags = SPECIES_FLAG_NO_PAIN | SPECIES_FLAG_NO_SCAN | SPECIES_FLAG_NO_POISON
+	species_flags = SPECIES_FLAG_NO_PAIN | SPECIES_FLAG_NO_SCAN | SPECIES_FLAG_NO_POISON | SPECIES_FLAG_CRYSTALLINE
 	spawn_flags = SPECIES_IS_RESTRICTED
 	siemens_coefficient = 0
 
@@ -22,7 +22,8 @@
 	breath_type = null
 	poison_types = null
 
-	blood_color = "#515573"
+	blood_types = list(/decl/blood_type/coolant)
+
 	flesh_color = "#137e8f"
 
 	cold_level_1 = SYNTH_COLD_LEVEL_1
@@ -35,12 +36,10 @@
 
 	has_organ = list(
 		BP_BRAIN = /obj/item/organ/internal/brain/golem
-		)
+	)
 
 	death_message = "becomes completely motionless..."
 	available_pronouns = list(/decl/pronouns/neuter)
-
-	is_crystalline = TRUE
 
 	force_cultural_info = list(
 		TAG_CULTURE =   /decl/cultural_info/culture/hidden/cultist,

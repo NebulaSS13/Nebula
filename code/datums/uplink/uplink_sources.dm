@@ -84,7 +84,7 @@ var/global/list/default_uplink_source_priority = list(
 	if(!istype(H))
 		return SETUP_FAILED
 
-	var/obj/item/organ/external/head = H.organs_by_name[BP_HEAD]
+	var/obj/item/organ/external/head = H.get_organ(BP_HEAD)
 	if(!head)
 		return SETUP_FAILED
 
@@ -92,7 +92,7 @@ var/global/list/default_uplink_source_priority = list(
 	U.imp_in = H
 	U.implanted = TRUE
 	U.part = head
-	head.implants += U
+	LAZYADD(head.implants, U)
 
 	U.implanted(H) // This proc handles the installation feedback
 

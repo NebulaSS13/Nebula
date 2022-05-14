@@ -17,6 +17,7 @@
 
 /decl/material/solid/metal/uranium
 	name = "uranium"
+	codex_name = "elemental uranium"
 	uid = "solid_uranium"
 	lore_text = "A silvery-white metallic chemical element in the actinide series, weakly radioactive. Commonly used as fuel in fission reactors."
 	mechanics_text = "Uranium can be used as fuel in fission reactors."
@@ -33,6 +34,7 @@
 	reflectiveness = MAT_VALUE_MATTE
 	value = 1.5
 	default_solid_form = /obj/item/stack/material/puck
+	exoplanet_rarity = MAT_RARITY_UNCOMMON
 
 	neutron_cross_section = 10
 	neutron_interactions = list(
@@ -65,6 +67,7 @@
 
 /decl/material/solid/metal/gold
 	name = "gold"
+	codex_name = "elemental gold"
 	uid = "solid_gold"
 	lore_text = "A heavy, soft, ductile metal. Once considered valuable enough to back entire currencies, now predominantly used in corrosion-resistant electronics."
 	color = COLOR_GOLD
@@ -84,6 +87,7 @@
 
 /decl/material/solid/metal/bronze
 	name = "bronze"
+	codex_name = "bronze alloy"
 	uid = "solid_bronze"
 	lore_text = "An alloy of copper and tin. Once used in weapons and laboring tools."
 	color = "#ccbc63"
@@ -109,6 +113,7 @@
 	wall_flags = PAINT_PAINTABLE|PAINT_STRIPABLE|WALL_HAS_EDGES
 	use_reinf_state = null
 	value = 1.4
+	exoplanet_rarity = MAT_RARITY_UNCOMMON
 
 /decl/material/solid/metal/redgold
 	name = "red gold"
@@ -117,6 +122,7 @@
 	color = "#ff7a59"
 	reflectiveness = MAT_VALUE_SHINY
 	value = 1.4
+	exoplanet_rarity = MAT_RARITY_UNCOMMON
 
 /decl/material/solid/metal/brass
 	name = "brass"
@@ -126,6 +132,7 @@
 	reflectiveness = MAT_VALUE_VERY_SHINY
 	value = 1.2
 	default_solid_form = /obj/item/stack/material/sheet
+	exoplanet_rarity = MAT_RARITY_UNCOMMON
 
 /decl/material/solid/metal/copper
 	name = "copper"
@@ -156,6 +163,7 @@
 
 /decl/material/solid/metal/steel
 	name = "steel"
+	codex_name = "carbon steel"
 	uid = "solid_steel"
 	lore_text = "A strong, flexible alloy of iron and carbon. Probably the single most fundamentally useful and ubiquitous substance in human space."
 	weight = MAT_VALUE_NORMAL
@@ -207,6 +215,7 @@
 	conductive = 0
 	hidden_from_codex = TRUE
 	value = 0
+	exoplanet_rarity = MAT_RARITY_NOWHERE
 
 /decl/material/solid/metal/steel/holographic/get_recipes(reinf_mat)
 	return list()
@@ -227,6 +236,7 @@
 	construction_difficulty = MAT_VALUE_VERY_HARD_DIY
 	reflectiveness = MAT_VALUE_MIRRORED
 	value = 1.3
+	exoplanet_rarity = MAT_RARITY_UNCOMMON
 
 /decl/material/solid/metal/aluminium
 	name = "aluminium"
@@ -255,12 +265,14 @@
 	shard_type = SHARD_NONE
 	conductive = 0
 	hidden_from_codex = TRUE
+	exoplanet_rarity = MAT_RARITY_NOWHERE
 
 /decl/material/solid/metal/aluminium/holographic/get_recipes(reinf_mat)
 	return list()
 
 /decl/material/solid/metal/plasteel
 	name = "plasteel"
+	codex_name = "plasteel alloy"
 	uid = "solid_plasteel"
 	lore_text = "An alloy of steel and platinum. When regular high-tensile steel isn't tough enough to get the job done, the smart consumer turns to frankly absurd alloys of steel and platinum."
 	integrity = 400
@@ -279,6 +291,7 @@
 	value = 1.4
 	reflectiveness = MAT_VALUE_MATTE
 	default_solid_form = /obj/item/stack/material/reinforced
+	exoplanet_rarity = MAT_RARITY_UNCOMMON
 
 /decl/material/solid/metal/plasteel/generate_recipes(var/reinforce_material)
 	. = ..()
@@ -321,6 +334,7 @@
 
 /decl/material/solid/metal/plasteel/ocp
 	name = "osmium-carbide plasteel"
+	codex_name = null
 	uid = "solid_osmium_carbide_plasteel"
 	integrity = 200
 	melting_point = 12000
@@ -334,6 +348,7 @@
 	stack_origin_tech = "{'materials':3}"
 	construction_difficulty = MAT_VALUE_VERY_HARD_DIY
 	value = 1.8
+	exoplanet_rarity = MAT_RARITY_UNCOMMON
 
 /decl/material/solid/metal/osmium
 	name = "osmium"
@@ -440,6 +455,7 @@
 	hidden_from_codex = TRUE
 	value = 3
 	default_solid_form = /obj/item/stack/material/cubes
+	exoplanet_rarity = MAT_RARITY_NOWHERE
 
 // Likewise.
 /decl/material/solid/metal/alienalloy/elevatorium
@@ -448,6 +464,7 @@
 	color = "#666666"
 	hidden_from_codex = TRUE
 	default_solid_form = /obj/item/stack/material/sheet
+	exoplanet_rarity = MAT_RARITY_NOWHERE
 
 /decl/material/solid/metal/tungsten
 	name = "tungsten"

@@ -23,7 +23,12 @@
 
 /mob/new_player/Initialize()
 	. = ..()
+	forceMove(null)
 	verbs += /mob/proc/toggle_antag_pool
+
+/mob/new_player/Destroy()
+	QDEL_NULL(panel)
+	. = ..()
 
 /mob/new_player/proc/show_lobby_menu(force = FALSE)
 	if(!SScharacter_setup.initialized && !force)
@@ -236,7 +241,7 @@
 			AnnounceArrival(character, job, spawnpoint.msg)
 		else
 			AnnounceCyborg(character, job, spawnpoint.msg)
-		matchmaker.do_matchmaking()
+	callHook("player_latejoin", list(job, character))
 	log_and_message_admins("has joined the round as [character.mind.assigned_role].", character)
 
 	qdel(src)
@@ -365,7 +370,7 @@
 			return null
 		new_character = new(spawn_turf, chosen_species.name)
 		if(chosen_species.has_organ[BP_POSIBRAIN] && client && client.prefs.is_shackled)
-			var/obj/item/organ/internal/posibrain/B = new_character.get_internal_organ(BP_POSIBRAIN)
+			var/obj/item/organ/internal/posibrain/B = new_character.get_organ(BP_POSIBRAIN)
 			if(B)	B.shackle(client.prefs.get_lawset())
 
 	if(!new_character)
@@ -389,13 +394,6 @@
 		var/memory = client.prefs.records[PREF_MEM_RECORD]
 		if(memory)
 			mind.StoreMemory(memory)
-		if(client.prefs.relations.len)
-			for(var/T in client.prefs.relations)
-				var/TT = matchmaker.relation_types[T]
-				var/datum/relation/R = new TT
-				R.holder = mind
-				R.info = client.prefs.relations_info[T]
-			mind.gen_relations_info = client.prefs.relations_info["general"]
 		mind.transfer_to(new_character)					//won't transfer key since the mind is not active
 
 	new_character.dna.ready_dna(new_character)
@@ -460,7 +458,7 @@
 /mob/new_player/MayRespawn()
 	return 1
 
-/mob/new_player/touch_map_edge()
+/mob/new_player/touch_map_edge(var/overmap_id = OVERMAP_ID_SPACE)
 	return
 
 /mob/new_player/say(var/message)
@@ -476,7 +474,7 @@
 	if(new_track)
 		new_track.play_to(src)
 
-/mob/new_player/handle_reading_literacy(var/mob/user, var/text_content, var/skip_delays)
+/mob/new_player/handle_reading_literacy(var/mob/user, var/text_content, var/skip_delays, var/digital = FALSE)
 	. = text_content
 
 /mob/new_player/handle_writing_literacy(var/mob/user, var/text_content, var/skip_delays)

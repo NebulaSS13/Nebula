@@ -56,7 +56,7 @@
 #define ui_movi "RIGHT-3:24,BOTTOM:5"
 #define ui_attack_selector "RIGHT-3:24,BOTTOM+1:-2"
 #define ui_zonesel "RIGHT-1:28,BOTTOM:5"
-#define ui_acti_alt "RIGHT-1:28,BOTTOM:5" //alternative intent switcher for when the interface is hidden (F12)
+#define ui_acti_alt "RIGHT-1:28,BOTTOM:5" //alternative intent switcher for when the interface is hidden
 #define ui_stamina "RIGHT-3:24,BOTTOM+1:5"
 
 #define ui_borg_pull "RIGHT-3:24,BOTTOM+1:7"
@@ -132,7 +132,7 @@
 #define ui_ai_announcement "LEFT+1:10,BOTTOM:5"
 #define ui_ai_cam_track "LEFT+2:12,BOTTOM:5"
 #define ui_ai_cam_light "LEFT+3:14,BOTTOM:5"
-#define ui_ai_cam_change_network "LEFT+4:16,BOTTOM:5"
+#define ui_ai_cam_change_channel "LEFT+4:16,BOTTOM:5"
 #define ui_ai_sensor "CENTER-2:18,BOTTOM:5"
 #define ui_ai_crew_manifest "CENTER-1:20,BOTTOM:5"
 #define ui_ai_take_image "CENTER:22,BOTTOM:5"

@@ -8,6 +8,9 @@
 	material_alteration =    MAT_FLAG_ALTERATION_NAME | MAT_FLAG_ALTERATION_COLOR
 	tool_interaction_flags = (TOOL_INTERACTION_ANCHOR | TOOL_INTERACTION_DECONSTRUCT)
 	maxhealth = 100
+	parts_amount = 2
+	parts_type = /obj/item/stack/material/strut
+
 	var/cover = 50
 	var/prepped_for_fakewall
 
@@ -43,7 +46,7 @@
 	return TRUE
 
 /obj/structure/girder/on_update_icon()
-	. = ..()
+	..()
 	if(!anchored)
 		icon_state = "displaced"
 	else if(reinf_material)

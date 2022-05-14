@@ -9,11 +9,11 @@
 
 /datum/extension/armor/toggle/get_capabilities_description()
 	. = ..()
-	. += "It only provides protection when activated"
+	. += "It only provides protection when activated."
 
 /datum/extension/armor/ablative/get_capabilities_description()
 	. = ..()
-	. += "It degrades as it blocks damage"
+	. += "It degrades as it blocks damage."
 
 
 // Generic non-bomb brute damage
@@ -25,7 +25,7 @@
 		if(1 to ARMOR_MELEE_SMALL - 1)
 			. = "It provides minimal protection against blunt and edged weapons"
 		if(ARMOR_MELEE_SMALL to ARMOR_MELEE_KNIVES - 1)
-			. = "It provides a bit of protection against blunt and edged weapons" 
+			. = "It provides a bit of protection against blunt and edged weapons"
 		if(ARMOR_MELEE_KNIVES to ARMOR_MELEE_RESISTANT - 1)
 			. = "It will blunt most knife attacks and provides some padding against blunt weapons"
 		if(ARMOR_MELEE_RESISTANT to ARMOR_MELEE_MAJOR - 1)
@@ -102,7 +102,7 @@
 			. = "It provides padding and insulation against the explosions"
 		if(ARMOR_ENERGY_RESISTANT to INFINITY - 1)
 			. = "It provides major padding and insulation against the explosions"
-	
+
 // Biohazards
 /decl/protection_type/bio
 	armor_key = "bio"

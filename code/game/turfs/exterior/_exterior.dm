@@ -4,6 +4,7 @@
 	footstep_type = /decl/footsteps/asteroid
 	icon_state = "0"
 	layer = PLATING_LAYER
+	open_turf_type = /turf/exterior/open
 	var/diggable = 1
 	var/dirt_color = "#7c5e42"
 	var/possible_states = 0
@@ -14,7 +15,22 @@
 	var/obj/effect/overmap/visitable/sector/exoplanet/owner
 
 /turf/exterior/Initialize(mapload, no_update_icon = FALSE)
+
+	color = null
+
+	if(possible_states > 0)
+		icon_state = "[rand(0, possible_states)]"
+	owner = LAZYACCESS(global.overmap_sectors, "[z]")
+	if(!istype(owner))
+		owner = null
+	else
+		//Must be done here, as light data is not fully carried over by ChangeTurf (but overlays are).
+		set_light(owner.lightlevel)
+		if(owner.planetary_area && istype(loc, world.area))
+			ChangeArea(src, owner.planetary_area)
+
 	. = ..(mapload)	// second param is our own, don't pass to children
+
 	if (no_update_icon)
 		return
 
@@ -29,12 +45,29 @@
 			else
 				T.update_icon()
 
-/turf/exterior/ChangeTurf(var/turf/N, var/tell_universe = TRUE, var/force_lighting_update = FALSE, var/keep_air = FALSE)
+/turf/exterior/ChangeTurf(var/turf/N, var/tell_universe = TRUE, var/force_lighting_update = FALSE, var/keep_air = FALSE, var/keep_outside = FALSE)
 	var/last_affecting_heat_sources = affecting_heat_sources
 	var/turf/exterior/ext = ..()
 	if(istype(ext))
 		ext.affecting_heat_sources = last_affecting_heat_sources
 	return ext
+
+/turf/exterior/initialize_ambient_light(var/mapload)
+	update_ambient_light(mapload)
+
+/turf/exterior/update_ambient_light(var/mapload)
+	if(is_outside())
+		if(owner) // Exoplanets do their own lighting shenanigans.
+			//Must be done here, as light data is not fully carried over by ChangeTurf (but overlays are).
+			set_light(owner.lightlevel)
+			return
+		if(config.starlight)
+			var/area/A = get_area(src)
+			if(A.show_starlight)
+				set_light(config.starlight, 0.75, l_color = SSskybox.background_color)
+				return
+	if(!mapload)
+		set_light(0)
 
 /turf/exterior/is_plating()
 	return !density
@@ -57,26 +90,16 @@
 		gas.copy_from(owner.atmosphere)
 	else
 		gas = global.using_map.get_exterior_atmosphere()
+
 	var/initial_temperature = gas.temperature
+	if(weather)
+		initial_temperature = weather.adjust_temperature(initial_temperature)
 	for(var/thing in affecting_heat_sources)
 		if((gas.temperature - initial_temperature) >= 100)
 			break
 		var/obj/structure/fire_source/heat_source = thing
 		gas.temperature = gas.temperature + heat_source.exterior_temperature / max(1, get_dist(src, get_turf(heat_source)))
 	return gas
-
-/turf/exterior/Initialize(var/ml)
-	if(possible_states > 0)
-		icon_state = "[rand(0, possible_states)]"
-	owner = LAZYACCESS(map_sectors, "[z]")
-	if(!istype(owner))
-		owner = null
-	else
-		//Must be done here, as light data is not fully carried over by ChangeTurf (but overlays are).
-		set_light(owner.lightlevel)
-		if(owner.planetary_area && istype(loc, world.area))
-			ChangeArea(src, owner.planetary_area)
-	. = ..()
 
 /turf/exterior/levelupdate()
 	for(var/obj/O in src)
@@ -107,7 +130,7 @@
 	SHOULD_CALL_PARENT(FALSE)
 	if(!istype(src, get_base_turf_by_area(src)) && (severity == 1 || (severity == 2 && prob(40))))
 		ChangeTurf(get_base_turf_by_area(src))
-
+	
 /turf/exterior/on_update_icon()
 	. = ..() // Recalc AO and flooding overlay.
 	cut_overlays()
@@ -164,9 +187,3 @@
 					else if(direction & WEST)
 						I.pixel_x -= world.icon_size
 					add_overlay(I)
-
-	var/datum/gas_mixture/air = (owner ? owner.atmosphere : global.using_map.exterior_atmosphere)
-	if(length(air?.graphic))
-		vis_contents += air.graphic
-	else
-		vis_contents.Cut()

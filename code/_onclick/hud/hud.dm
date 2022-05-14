@@ -19,10 +19,10 @@
 /datum/hud
 	var/mob/mymob
 
-	var/hud_shown = 1			//Used for the HUD toggle (F12)
-	var/inventory_shown = 1		//the inventory
-	var/show_intent_icons = 0
-	var/hotkey_ui_hidden = 0	//This is to hide the buttons that can be used via hotkeys. (hotkeybuttons list of buttons)
+	var/hud_shown           = 1         //Used for the HUD toggle (F12)
+	var/inventory_shown     = TRUE      //the inventory
+	var/show_intent_icons   = FALSE
+	var/hotkey_ui_hidden    = FALSE     //This is to hide the buttons that can be used via hotkeys. (hotkeybuttons list of buttons)
 
 	var/obj/screen/lingchemdisplay
 	var/list/hand_hud_objects
@@ -35,7 +35,19 @@
 	var/list/obj/screen/hotkeybuttons
 
 	var/obj/screen/movable/action_button/hide_toggle/hide_actions_toggle
-	var/action_buttons_hidden = 0
+	var/action_buttons_hidden = FALSE
+
+	var/static/list/hidden_inventory_slots = list(
+		slot_head_str,
+		slot_shoes_str,
+		slot_l_ear_str,
+		slot_r_ear_str,
+		slot_gloves_str,
+		slot_glasses_str,
+		slot_w_uniform_str,
+		slot_wear_suit_str,
+		slot_wear_mask_str
+	)
 
 /datum/hud/New(mob/owner)
 	mymob = owner
@@ -61,6 +73,16 @@
 		if(stamina < 100)
 			stamina_bar.invisibility = 0
 			stamina_bar.icon_state = "prog_bar_[FLOOR(stamina/5)*5][(stamina >= 5) && (stamina <= 25) ? "_fail" : null]"
+
+/datum/hud/proc/hide_inventory()
+	inventory_shown = FALSE
+	hidden_inventory_update()
+	persistant_inventory_update()
+
+/datum/hud/proc/show_inventory()
+	inventory_shown = TRUE
+	hidden_inventory_update()
+	persistant_inventory_update()
 
 /datum/hud/proc/hidden_inventory_update()
 	if(!mymob) return
@@ -214,10 +236,9 @@
 		if(!skip_client_update)
 			mymob.client?.screen |= inv_box
 
-//Triggered when F12 is pressed (Unless someone changed something in the DMF)
-/mob/verb/button_pressed_F12(var/full = 0 as null)
-	set name = "F12"
-	set hidden = 1
+/mob/verb/minimize_hud(full = FALSE as null)
+	set name = "Minimize Hud"
+	set hidden = TRUE
 
 	if(!hud_used)
 		to_chat(usr, "<span class='warning'>This mob type does not use a HUD.</span>")
@@ -275,7 +296,7 @@
 	hud_used.persistant_inventory_update()
 	update_action_buttons()
 
-//Similar to button_pressed_F12() but keeps zone_sel, gun_setting_icon, and healths.
+//Similar to minimize_hud() but keeps zone_sel, gun_setting_icon, and healths.
 /mob/proc/toggle_zoom_hud()
 	if(!hud_used)
 		return

@@ -123,7 +123,7 @@
 	var/turf/T = get_turf(src)
 	var/zlevels = GetConnectedZlevels(T.z)
 	var/cur_dist = world.maxx+world.maxy
-	for(var/obj/item/radio/beacon/R in world)
+	for(var/obj/item/radio/beacon/R in global.radio_beacons)
 		if(!R.functioning)
 			continue
 		if((R.z in zlevels) && R.frequency == tracking_freq)
@@ -193,7 +193,7 @@
 			var/turf/Z = get_turf(src)
 			var/turf/location = locate(locationx,locationy,Z.z)
 
-			to_chat(usr, "You set the pinpointer to locate [locationx],[locationy]")
+			to_chat(usr, "You set the pinpointer to locate [locationx],[locationy].")
 
 			target = weakref(location)
 
@@ -207,7 +207,7 @@
 			if(!item)
 				to_chat(usr, "Failed to locate [targetitem]!")
 				return
-			to_chat(usr, "You set the pinpointer to locate [targetitem]")
+			to_chat(usr, "You set the pinpointer to locate [targetitem].")
 			target = weakref(item)
 
 		if("DNA")

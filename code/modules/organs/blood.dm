@@ -48,7 +48,7 @@
 		"donor" =        weakref(src),
 		"species" =      species.name,
 		"blood_DNA" =    dna?.unique_enzymes,
-		"blood_colour" = species.get_blood_colour(src),
+		"blood_color" = species.get_blood_color(src),
 		"blood_type" =   dna?.b_type,
 		"trace_chem" = null
 	))
@@ -172,32 +172,19 @@
 		reagents.add_reagent(species.blood_reagent, amount, REAGENT_DATA(donor, species.blood_reagent))
 		return
 	var/injected_data = REAGENT_DATA(donor, species.blood_reagent)
-	if(blood_incompatible(LAZYACCESS(injected_data, "blood_type"), LAZYACCESS(injected_data, "species")))
-		reagents.add_reagent(/decl/material/liquid/coagulated_blood, amount * 0.5)
+	var/injected_b_type = LAZYACCESS(injected_data, "blood_type")
+	if(blood_incompatible(injected_b_type))
+		var/decl/blood_type/blood_decl = injected_b_type && get_blood_type_by_name(injected_b_type)
+		if(istype(blood_decl))
+			reagents.add_reagent(blood_decl.transfusion_fail_reagent, amount * blood_decl.transfusion_fail_percentage)
+		else
+			reagents.add_reagent(/decl/material/liquid/coagulated_blood, amount * 0.5)
 	else
 		adjust_blood(amount, injected_data)
 	..()
 
-/mob/living/carbon/human/proc/blood_incompatible(blood_type, blood_species)
-	if(blood_species && species.name)
-		if(blood_species != species.name)
-			return 1
-
-	var/donor_antigen = copytext(blood_type, 1, length(blood_type))
-	var/receiver_antigen = copytext(dna.b_type, 1, length(dna.b_type))
-	var/donor_rh = (findtext(blood_type, "+") > 0)
-	var/receiver_rh = (findtext(dna.b_type, "+") > 0)
-
-	if(donor_rh && !receiver_rh) return 1
-	switch(receiver_antigen)
-		if("A")
-			if(donor_antigen != "A" && donor_antigen != "O") return 1
-		if("B")
-			if(donor_antigen != "B" && donor_antigen != "O") return 1
-		if("O")
-			if(donor_antigen != "O") return 1
-		//AB is a universal receiver.
-	return 0
+/mob/living/carbon/human/proc/blood_incompatible(blood_type)
+	return species.is_blood_incompatible(dna?.b_type, blood_type)
 
 /mob/living/carbon/human/proc/regenerate_blood(var/amount)
 	amount *= (species.blood_volume / SPECIES_BLOOD_DEFAULT)
@@ -219,7 +206,7 @@
 		temp_chem[R] = REAGENT_VOLUME(reagents, R)
 	data["trace_chem"] = temp_chem
 	data["dose_chem"] = chem_doses ? chem_doses.Copy() : list()
-	data["blood_colour"] = species.get_blood_colour(src)
+	data["blood_color"] = species.get_blood_color(src)
 	return data
 
 /proc/blood_splatter(var/target, var/source, var/large, var/spray_dir)
@@ -252,33 +239,45 @@
 
 	// If there's no data to copy, call it quits here.
 	var/blood_data
+	var/blood_type
 	if(ishuman(source))
 		var/mob/living/carbon/human/donor = source
 		blood_data = REAGENT_DATA(donor.vessel, donor.species.blood_reagent)
+		blood_type = donor.b_type
 	else if(isatom(source))
 		var/atom/donor = source
 		blood_data = REAGENT_DATA(donor.reagents, /decl/material/liquid/blood)
 	if(!islist(blood_data))
 		return splatter
 
-	// Update appearance.
-	if(blood_data["blood_colour"])
-		splatter.basecolor = blood_data["blood_colour"]
-		splatter.update_icon()
 	if(spray_dir)
 		splatter.icon_state = "squirt"
 		splatter.set_dir(spray_dir)
 	// Update blood information.
-	if(blood_data["blood_DNA"])
+	if(LAZYACCESS(blood_data, "blood_DNA"))
 		LAZYSET(splatter.blood_data, blood_data["blood_DNA"], blood_data)
 		splatter.blood_DNA = list()
-		if(blood_data["blood_type"])
+		if(LAZYACCESS(blood_data, "blood_type"))
 			splatter.blood_DNA[blood_data["blood_DNA"]] = blood_data["blood_type"]
 		else
 			splatter.blood_DNA[blood_data["blood_DNA"]] = "O+"
 		var/datum/extension/forensic_evidence/forensics = get_or_create_extension(splatter, /datum/extension/forensic_evidence)
 		forensics.add_data(/datum/forensics/blood_dna, blood_data["blood_DNA"])
 
+	if(!blood_type && LAZYACCESS(blood_data, "blood_type"))
+		blood_type = LAZYACCESS(blood_data, "blood_type")
+
+	// Update appearance.
+	if(blood_type)
+		var/decl/blood_type/blood_type_decl = get_blood_type_by_name(blood_type)
+		splatter.name =      blood_type_decl.splatter_name
+		splatter.desc =      blood_type_decl.splatter_desc
+		splatter.basecolor = blood_type_decl.splatter_colour
+
+	if(LAZYACCESS(blood_data, "blood_color"))
+		splatter.basecolor = blood_data["blood_color"]
+
+	splatter.update_icon()
 	splatter.fluorescent  = 0
 	splatter.set_invisibility(0)
 	return splatter
@@ -289,7 +288,7 @@
 
 //Percentage of maximum blood volume, affected by the condition of circulation organs
 /mob/living/carbon/human/proc/get_blood_circulation()
-	var/obj/item/organ/internal/heart/heart = get_internal_organ(BP_HEART)
+	var/obj/item/organ/internal/heart/heart = get_organ(BP_HEART)
 	var/blood_volume = get_blood_volume()
 	if(!heart)
 		return 0.25 * blood_volume

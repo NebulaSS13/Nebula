@@ -21,8 +21,7 @@
 	var/failed = 0
 	var/list/found_cables = list()
 
-	//there is a cable list, but for testing purposes we search every cable in the world
-	for(var/obj/structure/cable/C in world)
+	for(var/obj/structure/cable/C in global.cable_list)
 		if(C in found_cables)
 			continue
 		var/list/to_search = list(C)
@@ -84,6 +83,10 @@
 			if(abs(old_values[i] - new_values[i]) > 1) // Round because there can in fact be roundoff error here apparently.
 				failed = TRUE
 				log_bad("The area [A.name] had improper power use values on the [channel_names[i]] channel: was [old_values[i]] but should be [new_values[i]].")
+				log_bad("This area contained the following power-using machines on this channel:")
+				for(var/obj/machinery/machine in A)
+					if(machine.power_channel == i)
+						log_bad(log_info_line(machine) + " with power use [machine.get_power_usage()]")
 
 	if(failed)
 		fail("At least one area had improper power use values")

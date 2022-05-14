@@ -1,3 +1,5 @@
+var/global/list/radio_beacons = list()
+
 /obj/item/radio/beacon
 	name = "tracking beacon"
 	desc = "A beacon used by a teleporter."
@@ -10,6 +12,14 @@
 
 	var/code = "electronic"
 	var/functioning = TRUE
+
+/obj/item/radio/beacon/Initialize()
+	. = ..()
+	global.radio_beacons += src
+
+/obj/item/radio/beacon/Destroy()
+	global.radio_beacons -= src
+	. = ..()
 
 /obj/item/radio/beacon/hear_talk()
 	return

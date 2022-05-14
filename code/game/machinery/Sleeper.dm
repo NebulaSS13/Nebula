@@ -128,16 +128,25 @@
 		occupant.SetStasis(stasis)
 
 /obj/machinery/sleeper/on_update_icon()
-	overlays.Cut()
+	cut_overlays()
 	icon_state = "med_pod"
+
 	if(occupant)
-		var/image/pickle = new
-		pickle.appearance = occupant
+		var/mutable_appearance/pickle = new /mutable_appearance(occupant)
+		var/list/icon_scale_values = occupant.get_icon_scale_mult()
+		var/desired_scale_x = icon_scale_values[1]
+		var/desired_scale_y = icon_scale_values[2]
+		
+		var/matrix/M = matrix()
+		M.Scale(desired_scale_x, desired_scale_y)
+		M.Translate(0, (1.5 * world.icon_size) * (desired_scale_y - 1))
+		pickle.transform = M
+
 		pickle.layer = FLOAT_LAYER
 		pickle.pixel_z = 12
-		overlays += pickle
-	var/image/I = image(icon, "med_lid[!!(occupant && !(stat & (BROKEN|NOPOWER)))]")
-	overlays += I
+		add_overlay(pickle)
+
+	add_overlay(image(icon, "med_lid[!!(occupant && !(stat & (BROKEN|NOPOWER)))]"))
 
 /obj/machinery/sleeper/DefaultTopicState()
 	return global.outside_topic_state
@@ -366,9 +375,11 @@
 	if(!occupant || !occupant.reagents)
 		to_chat(user, SPAN_WARNING("There's no suitable occupant in \the [src]."))
 		return
-	if(occupant.reagents.total_volume + amount > 20 && !emagged)
-		to_chat(user, SPAN_WARNING("Injecting more chemicals presents an overdose risk to the subject."))
-		return
+	if(!emagged && canister.reagents?.primary_reagent)
+		var/decl/material/chem = GET_DECL(canister.reagents.primary_reagent)
+		if(chem.overdose && REAGENT_VOLUME(occupant.reagents, canister.reagents.primary_reagent) + amount >= chem.overdose)
+			to_chat(user, SPAN_WARNING("Injecting more [chem.name] presents an overdose risk to the subject."))
+			return
 	canister.reagents.trans_to_mob(occupant, amount, target_transfer_type)
 	to_chat(user, SPAN_NOTICE("You use \the [src] to [target_transfer_type == CHEM_INJECT ? "inject" : "infuse"] [amount] unit\s from \the [canister] into \the [occupant]."))
 

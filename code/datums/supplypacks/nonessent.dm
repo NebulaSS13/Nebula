@@ -233,13 +233,13 @@
 
 /decl/hierarchy/supply_pack/nonessent/exosuit_mod_ripl3
 	name = "Mod - \"Firestarter\" exosuit modkit"
-	contains = list(/obj/item/kit/paint/powerloader/flames_red)
+	contains = list(/obj/item/kit/paint/flames_red)
 	containername = "heavy exosuit modkit crate"
 
 /decl/hierarchy/supply_pack/nonessent/exosuit_mod_ripl4
 	num_contained = 1
 	name = "Mod - \"Burning Chrome\" exosuit modkit"
-	contains = list(/obj/item/kit/paint/powerloader/flames_blue)
+	contains = list(/obj/item/kit/paint/flames_blue)
 	containername = "heavy exosuit modkit crate"
 
 /decl/hierarchy/supply_pack/nonessent/aromatherapy

@@ -27,5 +27,5 @@
 
 /datum/preferences/copy_to(mob/living/carbon/human/character, is_preview_copy = FALSE)
 	character = ..()
-	if(istype(character) && character.psi)
+	if(istype(character) && character.psi && !is_preview_copy)
 		character.psi.update()

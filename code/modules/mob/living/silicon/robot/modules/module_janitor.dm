@@ -4,10 +4,10 @@
 	channels = list(
 		"Service" = TRUE
 	)
-	sprites = list(
-		"Basic" = "JanBot2",
-		"Mopbot"  = "janitorrobot",
-		"Mop Gear Rex" = "mopgearrex"
+	module_sprites = list(
+		"Basic"        = 'icons/mob/robots/robot_janbot.dmi',
+		"Mopbot"       = 'icons/mob/robots/robot_janitor_old.dmi',
+		"Mop Gear Rex" = 'icons/mob/robots/robot_janitor.dmi'
 	)
 	equipment = list(
 		/obj/item/flash,

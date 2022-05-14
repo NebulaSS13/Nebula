@@ -5,16 +5,18 @@
 	density = 1
 	pixel_x = -16
 	layer = ABOVE_HUMAN_LAYER
+	var/protects_against_weather = FALSE
 
 /obj/structure/flora/tree/pine
 	name = "pine tree"
 	icon = 'icons/obj/flora/pinetrees.dmi'
 	icon_state = "pine_1"
+	protects_against_weather = TRUE
 
 /obj/structure/flora/tree/pine/Initialize()
 	. = ..()
 	icon_state = "pine_[rand(1, 3)]"
-
+	
 /obj/structure/flora/tree/pine/xmas
 	name = "\improper Christmas tree"
 	desc = "O Christmas tree, O Christmas tree..."
@@ -76,12 +78,12 @@
 
 /obj/structure/flora/pottedplant
 	name = "potted plant"
+	desc = "Really brings the room together."
 	icon = 'icons/obj/structures/potted_plants.dmi'
-	icon_state = "plant-26"
+	icon_state = "plant-01"
 	layer = ABOVE_HUMAN_LAYER
 
 //newbushes
-
 /obj/structure/flora/ausbushes
 	name = "bush"
 	icon = 'icons/obj/flora/ausflora.dmi'
@@ -200,13 +202,6 @@
 
 //potted plants credit: Flashkirby
 //potted plants 27-30: Cajoes
-/obj/structure/flora/pottedplant
-	name = "potted plant"
-	desc = "Really brings the room together."
-	icon = 'icons/obj/structures/potted_plants.dmi'
-	icon_state = "plant-01"
-	layer = ABOVE_HUMAN_LAYER
-
 /obj/structure/flora/pottedplant/fern
 	name = "potted fern"
 	desc = "This is an ordinary looking fern. It looks like it could do with some water."

@@ -36,6 +36,7 @@
 	return ..()
 
 /obj/structure/hygiene/drain/on_update_icon()
+	..()
 	icon_state = "[initial(icon_state)][welded ? "-welded" : ""]"
 
 /obj/structure/hygiene/drain/Process()
@@ -77,6 +78,7 @@
 	return TRUE
 
 /obj/structure/hygiene/drain/bath/on_update_icon()
+	..()
 	if(welded)
 		icon_state = "[initial(icon_state)]-welded"
 	else

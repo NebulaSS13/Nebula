@@ -25,6 +25,7 @@
 	return ..()
 
 /obj/structure/crematorium/on_update_icon()
+	..()
 	if(cremating)
 		icon_state = "crematorium_active"
 	else if (open)
@@ -91,7 +92,7 @@
 
 /obj/structure/crematorium/attackby(P, mob/user)
 	if(istype(P, /obj/item/pen))
-		var/new_label = sanitizeSafe(input(user, "What would you like the label to be?", capitalize(name), null) as text|null, MAX_NAME_LEN)
+		var/new_label = sanitize_safe(input(user, "What would you like the label to be?", capitalize(name), null) as text|null, MAX_NAME_LEN)
 
 		if((!Adjacent(user) || loc == user))
 			return

@@ -5,10 +5,7 @@ Small, little HP, poisonous.
 /mob/living/simple_animal/hostile/slug
 	name = "slug"
 	desc = "A vicious, viscous little creature, it has a mouth of too many teeth and a penchant for blood."
-	icon_state = "slug"
-	icon_living = "slug"
-	item_state = "slug"
-	icon_dead = "slug_dead"
+	icon = 'icons/mob/simple_animal/slug.dmi'
 	response_harm = "stomps on"
 	destroy_surroundings = 0
 	health = 15
@@ -24,25 +21,19 @@ Small, little HP, poisonous.
 	holder_type = /obj/item/holder/slug
 	faction = "Hostile Fauna"
 
-/mob/living/simple_animal/hostile/slug/proc/check_friendly_species(var/mob/living/carbon/human/H)
-	if(isliving(H))
-		var/mob/living/M = H
-		if(M.faction == faction)
-			return TRUE
-	return FALSE
+/mob/living/simple_animal/hostile/slug/proc/check_friendly_species(var/mob/living/M)
+	return istype(M) && M.faction == faction
 
 /mob/living/simple_animal/hostile/slug/ListTargets(var/dist = 7)
-	var/list/L = list()
-	for(var/a in hearers(src, dist))
-		if(!check_friendly_species(a))
-			L += a
-	return L
+	. = ..()
+	for(var/mob/living/M in .)
+		if(M.faction == faction)
+			. -= M
 
-/mob/living/simple_animal/hostile/slug/get_scooped(var/mob/living/carbon/grabber)
-	if(check_friendly_species(grabber))
-		..()
-	else
-		to_chat(grabber, "<span class='warning'>\The [src] wriggles out of your hands before you can pick it up!</span>")
+/mob/living/simple_animal/hostile/slug/get_scooped(var/mob/living/carbon/target, var/mob/living/initiator)
+	if(target == initiator || (istype(initiator) && initiator.faction == faction))
+		return ..()
+	to_chat(initiator, SPAN_WARNING("\The [src] wriggles out of your hands before you can pick it up!"))
 
 /mob/living/simple_animal/hostile/slug/proc/attach(var/mob/living/carbon/human/H)
 	var/obj/item/clothing/suit/space/S = H.get_covering_equipped_item_by_zone(BP_CHEST)
@@ -50,7 +41,7 @@ Small, little HP, poisonous.
 		S.create_breaches(BRUTE, 20)
 		if(!length(S.breaches)) //unable to make a hole
 			return
-	var/obj/item/organ/external/chest = H.organs_by_name[BP_CHEST]
+	var/obj/item/organ/external/chest = H.get_organ(BP_CHEST)
 	var/obj/item/holder/slug/holder = new(get_turf(src))
 	src.forceMove(holder)
 	chest.embed(holder,0,"\The [src] latches itself onto \the [H]!")

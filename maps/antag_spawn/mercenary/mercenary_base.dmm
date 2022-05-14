@@ -6,7 +6,6 @@
 /obj/structure/catwalk,
 /obj/machinery/power/terminal,
 /obj/structure/cable{
-	d2 = 2;
 	icon_state = "0-2"
 	},
 /obj/machinery/pointdefense{
@@ -17,8 +16,6 @@
 "ac" = (
 /obj/structure/catwalk,
 /obj/structure/cable{
-	d1 = 1;
-	d2 = 2;
 	icon_state = "1-2"
 	},
 /obj/machinery/porta_turret{
@@ -29,8 +26,6 @@
 "ad" = (
 /obj/structure/catwalk,
 /obj/structure/cable{
-	d1 = 1;
-	d2 = 2;
 	icon_state = "1-2"
 	},
 /obj/machinery/light/spot{
@@ -45,7 +40,6 @@
 "af" = (
 /obj/effect/wallframe_spawn/reinforced/titanium,
 /obj/structure/cable{
-	d2 = 4;
 	icon_state = "0-4"
 	},
 /obj/effect/paint/red,
@@ -59,12 +53,9 @@
 "ag" = (
 /obj/effect/wallframe_spawn/reinforced/titanium,
 /obj/structure/cable{
-	d2 = 2;
 	icon_state = "0-2"
 	},
 /obj/structure/cable{
-	d1 = 2;
-	d2 = 8;
 	icon_state = "2-8"
 	},
 /obj/effect/paint/red,
@@ -78,8 +69,6 @@
 "ah" = (
 /obj/structure/catwalk,
 /obj/structure/cable{
-	d1 = 1;
-	d2 = 4;
 	icon_state = "1-4"
 	},
 /obj/machinery/shipsensors,
@@ -88,12 +77,9 @@
 "ai" = (
 /obj/effect/wallframe_spawn/reinforced/titanium,
 /obj/structure/cable{
-	d1 = 2;
-	d2 = 8;
 	icon_state = "2-8"
 	},
 /obj/structure/cable{
-	d2 = 2;
 	icon_state = "0-2"
 	},
 /obj/machinery/door/blast/regular/open{
@@ -117,8 +103,6 @@
 	uncreated_component_parts = list(/obj/item/stock_parts/power/battery/buildable/responsive = 1, /obj/item/cell/high = 1)
 	},
 /obj/structure/cable{
-	d1 = 1;
-	d2 = 2;
 	icon_state = "1-2"
 	},
 /obj/machinery/light/spot{
@@ -149,12 +133,9 @@
 "ao" = (
 /obj/effect/wallframe_spawn/reinforced/titanium,
 /obj/structure/cable{
-	d2 = 4;
 	icon_state = "0-4"
 	},
 /obj/structure/cable{
-	d1 = 1;
-	d2 = 4;
 	icon_state = "1-4"
 	},
 /obj/machinery/door/blast/regular/open{
@@ -169,8 +150,6 @@
 "ap" = (
 /obj/structure/table/steel_reinforced,
 /obj/structure/cable{
-	d1 = 4;
-	d2 = 8;
 	icon_state = "4-8"
 	},
 /obj/machinery/button/blast_door{
@@ -185,26 +164,18 @@
 	dir = 1
 	},
 /obj/structure/cable{
-	d1 = 2;
-	d2 = 8;
 	icon_state = "2-8"
 	},
 /obj/structure/cable{
-	d1 = 2;
-	d2 = 4;
 	icon_state = "2-4"
 	},
 /obj/structure/cable{
-	d1 = 1;
-	d2 = 2;
 	icon_state = "1-2"
 	},
 /turf/simulated/floor/shuttle/darkred,
 /area/map_template/merc_shuttle)
 "ar" = (
 /obj/structure/cable{
-	d1 = 4;
-	d2 = 8;
 	icon_state = "4-8"
 	},
 /obj/machinery/computer/ship/engines{
@@ -223,7 +194,6 @@
 "as" = (
 /obj/effect/wallframe_spawn/reinforced/titanium,
 /obj/structure/cable{
-	d2 = 8;
 	icon_state = "0-8"
 	},
 /obj/machinery/door/blast/regular/open{
@@ -234,8 +204,6 @@
 	},
 /obj/effect/paint/red,
 /obj/structure/cable{
-	d1 = 2;
-	d2 = 8;
 	icon_state = "2-8"
 	},
 /turf/simulated/floor/plating,
@@ -243,7 +211,6 @@
 "at" = (
 /obj/effect/wallframe_spawn/reinforced/titanium,
 /obj/structure/cable{
-	d2 = 2;
 	icon_state = "0-2"
 	},
 /obj/machinery/door/blast/regular/open{
@@ -283,8 +250,6 @@
 "ay" = (
 /obj/machinery/atmospherics/unary/vent_scrubber/on,
 /obj/structure/cable{
-	d1 = 1;
-	d2 = 2;
 	icon_state = "1-2"
 	},
 /turf/simulated/floor/shuttle/darkred,
@@ -298,12 +263,9 @@
 "aA" = (
 /obj/effect/wallframe_spawn/reinforced/titanium,
 /obj/structure/cable{
-	d1 = 1;
-	d2 = 4;
 	icon_state = "1-4"
 	},
 /obj/structure/cable{
-	d2 = 4;
 	icon_state = "0-4"
 	},
 /obj/machinery/door/blast/regular/open{
@@ -320,8 +282,6 @@
 	dir = 1
 	},
 /obj/structure/cable{
-	d1 = 2;
-	d2 = 8;
 	icon_state = "2-8"
 	},
 /turf/simulated/floor/reinforced,
@@ -357,8 +317,6 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/machinery/atmospherics/unary/vent_pump/on,
 /obj/structure/cable{
-	d1 = 1;
-	d2 = 2;
 	icon_state = "1-2"
 	},
 /turf/simulated/floor/shuttle/darkred,
@@ -368,8 +326,6 @@
 	dir = 1
 	},
 /obj/structure/cable{
-	d1 = 1;
-	d2 = 4;
 	icon_state = "1-4"
 	},
 /obj/structure/ship_munition/disperser_charge/emp,
@@ -377,8 +333,6 @@
 /area/map_template/merc_shuttle)
 "aG" = (
 /obj/structure/cable{
-	d1 = 4;
-	d2 = 8;
 	icon_state = "4-8"
 	},
 /obj/effect/floor_decal/industrial/loading{
@@ -393,8 +347,6 @@
 /area/map_template/merc_shuttle)
 "aH" = (
 /obj/structure/cable{
-	d1 = 2;
-	d2 = 8;
 	icon_state = "2-8"
 	},
 /turf/simulated/floor/shuttle/darkred,
@@ -410,8 +362,6 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/structure/cable{
-	d1 = 1;
-	d2 = 2;
 	icon_state = "1-2"
 	},
 /obj/machinery/hologram/holopad/longrange/remoteship,
@@ -440,17 +390,12 @@
 	dir = 6
 	},
 /obj/structure/cable{
-	d1 = 2;
-	d2 = 4;
 	icon_state = "2-4"
 	},
 /obj/structure/cable{
-	d2 = 4;
 	icon_state = "0-4"
 	},
 /obj/structure/cable{
-	d1 = 1;
-	d2 = 4;
 	icon_state = "1-4"
 	},
 /obj/machinery/power/apc/hyper{
@@ -465,8 +410,6 @@
 	dir = 4
 	},
 /obj/structure/cable{
-	d1 = 4;
-	d2 = 8;
 	icon_state = "4-8"
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
@@ -477,18 +420,12 @@
 /area/map_template/merc_shuttle)
 "aO" = (
 /obj/structure/cable{
-	d1 = 4;
-	d2 = 8;
 	icon_state = "4-8"
 	},
 /obj/structure/cable{
-	d1 = 1;
-	d2 = 8;
 	icon_state = "1-8"
 	},
 /obj/structure/cable{
-	d1 = 2;
-	d2 = 8;
 	icon_state = "2-8"
 	},
 /obj/effect/floor_decal/industrial/warning,
@@ -509,8 +446,6 @@
 	icon_state = "warningcorner"
 	},
 /obj/structure/cable{
-	d1 = 4;
-	d2 = 8;
 	icon_state = "4-8"
 	},
 /obj/machinery/computer/ship/navigation/telescreen{
@@ -521,7 +456,6 @@
 "aQ" = (
 /obj/effect/wallframe_spawn/reinforced/titanium,
 /obj/structure/cable{
-	d2 = 8;
 	icon_state = "0-8"
 	},
 /obj/machinery/door/blast/regular/open{
@@ -532,8 +466,6 @@
 	},
 /obj/effect/paint/red,
 /obj/structure/cable{
-	d1 = 4;
-	d2 = 8;
 	icon_state = "4-8"
 	},
 /turf/simulated/floor/plating,
@@ -568,8 +500,6 @@
 "aU" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/structure/cable{
-	d1 = 1;
-	d2 = 2;
 	icon_state = "1-2"
 	},
 /obj/machinery/atmospherics/pipe/manifold/hidden/supply{
@@ -608,8 +538,6 @@
 "ba" = (
 /obj/effect/paint/red,
 /obj/structure/cable{
-	d1 = 1;
-	d2 = 2;
 	icon_state = "1-2"
 	},
 /turf/simulated/wall/titanium,
@@ -626,8 +554,6 @@
 "bd" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/structure/cable{
-	d1 = 1;
-	d2 = 2;
 	icon_state = "1-2"
 	},
 /obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers{
@@ -689,7 +615,6 @@
 	},
 /obj/effect/paint/red,
 /obj/structure/cable{
-	d2 = 2;
 	icon_state = "0-2"
 	},
 /obj/machinery/atmospherics/pipe/manifold/hidden{
@@ -702,16 +627,12 @@
 	dir = 4
 	},
 /obj/structure/cable{
-	d1 = 4;
-	d2 = 8;
 	icon_state = "4-8"
 	},
 /turf/simulated/floor/tiled/white,
 /area/map_template/merc_shuttle)
 "bk" = (
 /obj/structure/cable{
-	d1 = 4;
-	d2 = 8;
 	icon_state = "4-8"
 	},
 /obj/machinery/atmospherics/unary/vent_pump/on{
@@ -727,8 +648,6 @@
 	dir = 4
 	},
 /obj/structure/cable{
-	d1 = 4;
-	d2 = 8;
 	icon_state = "4-8"
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
@@ -741,18 +660,12 @@
 	dir = 4
 	},
 /obj/structure/cable{
-	d1 = 1;
-	d2 = 8;
 	icon_state = "1-8"
 	},
 /obj/structure/cable{
-	d1 = 1;
-	d2 = 2;
 	icon_state = "1-2"
 	},
 /obj/structure/cable{
-	d1 = 2;
-	d2 = 4;
 	icon_state = "2-4"
 	},
 /obj/machinery/atmospherics/pipe/manifold/hidden/supply{
@@ -765,8 +678,6 @@
 	dir = 4
 	},
 /obj/structure/cable{
-	d1 = 4;
-	d2 = 8;
 	icon_state = "4-8"
 	},
 /turf/simulated/floor/shuttle/darkred,
@@ -776,8 +687,6 @@
 	dir = 1
 	},
 /obj/structure/cable{
-	d1 = 4;
-	d2 = 8;
 	icon_state = "4-8"
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden{
@@ -791,8 +700,6 @@
 	name = "Ship External Access"
 	},
 /obj/structure/cable{
-	d1 = 4;
-	d2 = 8;
 	icon_state = "4-8"
 	},
 /obj/machinery/atmospherics/pipe/manifold4w/hidden,
@@ -812,8 +719,6 @@
 	name = "Ship External Access"
 	},
 /obj/structure/cable{
-	d1 = 1;
-	d2 = 8;
 	icon_state = "1-8"
 	},
 /obj/machinery/atmospherics/pipe/manifold/hidden{
@@ -848,8 +753,6 @@
 /area/map_template/merc_shuttle)
 "bw" = (
 /obj/structure/cable{
-	d1 = 1;
-	d2 = 2;
 	icon_state = "1-2"
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
@@ -911,8 +814,6 @@
 	id_tag = "merc_shuttle_pump_out_internal"
 	},
 /obj/structure/cable{
-	d1 = 4;
-	d2 = 8;
 	icon_state = "4-8"
 	},
 /turf/simulated/floor/tiled/techfloor/grid,
@@ -923,8 +824,6 @@
 	id_tag = "merc_shuttle_pump"
 	},
 /obj/structure/cable{
-	d1 = 4;
-	d2 = 8;
 	icon_state = "4-8"
 	},
 /turf/simulated/floor/tiled/techfloor/grid,
@@ -946,8 +845,6 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/structure/cable{
-	d1 = 1;
-	d2 = 2;
 	icon_state = "1-2"
 	},
 /turf/simulated/floor/tiled/techfloor/grid,
@@ -970,8 +867,6 @@
 /area/map_template/merc_shuttle/rear)
 "bH" = (
 /obj/structure/cable{
-	d1 = 1;
-	d2 = 2;
 	icon_state = "1-2"
 	},
 /obj/effect/floor_decal/industrial/warning{
@@ -1051,8 +946,6 @@
 /area/map_template/merc_shuttle/rear)
 "bO" = (
 /obj/structure/cable{
-	d1 = 4;
-	d2 = 8;
 	icon_state = "4-8"
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/blue,
@@ -1060,13 +953,9 @@
 /area/map_template/merc_shuttle/rear)
 "bP" = (
 /obj/structure/cable{
-	d1 = 1;
-	d2 = 2;
 	icon_state = "1-2"
 	},
 /obj/structure/cable{
-	d1 = 2;
-	d2 = 8;
 	icon_state = "2-8"
 	},
 /obj/effect/floor_decal/industrial/warning{
@@ -1137,8 +1026,6 @@
 /area/map_template/merc_shuttle/rear)
 "bX" = (
 /obj/structure/cable{
-	d1 = 1;
-	d2 = 2;
 	icon_state = "1-2"
 	},
 /obj/effect/floor_decal/industrial/warning{
@@ -1211,7 +1098,6 @@
 "cc" = (
 /obj/effect/wallframe_spawn/reinforced/titanium,
 /obj/structure/cable{
-	d2 = 2;
 	icon_state = "0-2"
 	},
 /obj/machinery/door/blast/regular/open{
@@ -1225,8 +1111,6 @@
 	dir = 4
 	},
 /obj/structure/cable{
-	d1 = 1;
-	d2 = 2;
 	icon_state = "1-2"
 	},
 /turf/simulated/floor/plating,
@@ -1250,7 +1134,6 @@
 "ce" = (
 /obj/structure/catwalk,
 /obj/structure/cable{
-	d2 = 4;
 	icon_state = "0-4"
 	},
 /obj/machinery/power/terminal{
@@ -1289,7 +1172,6 @@
 	dir = 10
 	},
 /obj/structure/cable{
-	d2 = 4;
 	icon_state = "0-4"
 	},
 /obj/structure/handrail,
@@ -1298,8 +1180,6 @@
 "ci" = (
 /obj/machinery/atmospherics/unary/vent_scrubber/on,
 /obj/structure/cable{
-	d1 = 4;
-	d2 = 8;
 	icon_state = "4-8"
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
@@ -1310,18 +1190,12 @@
 "cj" = (
 /obj/effect/floor_decal/industrial/shutoff,
 /obj/structure/cable{
-	d1 = 4;
-	d2 = 8;
 	icon_state = "4-8"
 	},
 /obj/structure/cable{
-	d1 = 2;
-	d2 = 4;
 	icon_state = "2-4"
 	},
 /obj/structure/cable{
-	d1 = 1;
-	d2 = 4;
 	icon_state = "1-4"
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
@@ -1333,8 +1207,6 @@
 	dir = 4
 	},
 /obj/structure/cable{
-	d1 = 4;
-	d2 = 8;
 	icon_state = "4-8"
 	},
 /turf/simulated/floor/tiled/techfloor/grid,
@@ -1357,8 +1229,6 @@
 /obj/item/stack/material/pane/mapped/rglass/fifty,
 /obj/item/stack/material/pane/mapped/rborosilicate/ten,
 /obj/structure/cable{
-	d1 = 1;
-	d2 = 2;
 	icon_state = "1-2"
 	},
 /obj/item/storage/briefcase/inflatable,
@@ -1375,24 +1245,18 @@
 	dir = 4
 	},
 /obj/structure/cable{
-	d1 = 4;
-	d2 = 8;
 	icon_state = "4-8"
 	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/map_template/merc_shuttle/rear)
 "cn" = (
 /obj/structure/cable{
-	d1 = 2;
-	d2 = 4;
 	icon_state = "2-4"
 	},
 /obj/machinery/atmospherics/unary/vent_pump/on{
 	dir = 8
 	},
 /obj/structure/cable{
-	d1 = 2;
-	d2 = 8;
 	icon_state = "2-8"
 	},
 /obj/structure/handrail,
@@ -1401,12 +1265,9 @@
 "co" = (
 /obj/effect/wallframe_spawn/reinforced/titanium,
 /obj/structure/cable{
-	d2 = 8;
 	icon_state = "0-8"
 	},
 /obj/structure/cable{
-	d1 = 1;
-	d2 = 8;
 	icon_state = "1-8"
 	},
 /obj/machinery/door/blast/regular/open{
@@ -1422,7 +1283,6 @@
 /obj/structure/catwalk,
 /obj/machinery/power/terminal,
 /obj/structure/cable{
-	d2 = 2;
 	icon_state = "0-2"
 	},
 /obj/machinery/pointdefense{
@@ -1461,13 +1321,9 @@
 	dir = 4
 	},
 /obj/structure/cable{
-	d1 = 4;
-	d2 = 8;
 	icon_state = "4-8"
 	},
 /obj/structure/cable{
-	d1 = 2;
-	d2 = 4;
 	icon_state = "2-4"
 	},
 /obj/machinery/meter,
@@ -1501,8 +1357,6 @@
 	icon_state = "warning"
 	},
 /obj/structure/cable{
-	d1 = 1;
-	d2 = 4;
 	icon_state = "1-4"
 	},
 /obj/machinery/atmospherics/pipe/simple/visible/fuel{
@@ -1515,7 +1369,6 @@
 /area/map_template/merc_shuttle/rear)
 "cy" = (
 /obj/structure/cable{
-	d2 = 8;
 	icon_state = "0-8"
 	},
 /obj/effect/floor_decal/industrial/hatch/yellow,
@@ -1559,7 +1412,6 @@
 "cD" = (
 /obj/effect/wallframe_spawn/reinforced/titanium,
 /obj/structure/cable{
-	d2 = 4;
 	icon_state = "0-4"
 	},
 /obj/machinery/door/blast/regular/open{
@@ -1569,8 +1421,6 @@
 	id_tag = "merc_external"
 	},
 /obj/structure/cable{
-	d1 = 4;
-	d2 = 8;
 	icon_state = "4-8"
 	},
 /obj/effect/paint/black,
@@ -1582,8 +1432,6 @@
 	},
 /obj/effect/floor_decal/industrial/outline/yellow,
 /obj/structure/cable{
-	d1 = 1;
-	d2 = 2;
 	icon_state = "1-2"
 	},
 /obj/structure/ship_munition/disperser_charge/explosive,
@@ -1599,7 +1447,6 @@
 	icon_state = "warning"
 	},
 /obj/structure/cable/yellow{
-	d2 = 2;
 	icon_state = "0-2"
 	},
 /obj/effect/floor_decal/steeldecal/steel_decals_central6,
@@ -1669,8 +1516,6 @@
 /area/map_template/merc_shuttle/rear)
 "cL" = (
 /obj/structure/cable/yellow{
-	d1 = 1;
-	d2 = 2;
 	icon_state = "1-2"
 	},
 /obj/machinery/atmospherics/unary/vent_scrubber/on{
@@ -1732,8 +1577,6 @@
 /obj/structure/table/steel_reinforced,
 /obj/machinery/cell_charger,
 /obj/structure/cable/yellow{
-	d1 = 1;
-	d2 = 4;
 	icon_state = "1-4"
 	},
 /obj/item/storage/toolbox/syndicate,
@@ -1745,9 +1588,8 @@
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/map_template/merc_shuttle/rear)
 "cS" = (
-/obj/machinery/power/port_gen/pacman,
+/obj/machinery/port_gen/pacman,
 /obj/structure/cable/yellow{
-	d2 = 8;
 	icon_state = "0-8"
 	},
 /obj/effect/floor_decal/industrial/hatch/yellow,
@@ -1771,7 +1613,7 @@
 	dir = 4
 	},
 /obj/effect/floor_decal/industrial/outline/yellow,
-/obj/effect/landmark{
+/obj/abstract/landmark{
 	name = "Nuclear-Bomb"
 	},
 /obj/structure/railing/mapped{
@@ -1821,7 +1663,7 @@
 /turf/simulated/floor/tiled,
 /area/map_template/merc_spawn)
 "eb" = (
-/obj/effect/landmark{
+/obj/abstract/landmark{
 	name = "Syndicate-Spawn"
 	},
 /obj/effect/floor_decal/industrial/warning{
@@ -1910,7 +1752,6 @@
 	dir = 8
 	},
 /obj/structure/cable{
-	d2 = 8;
 	icon_state = "0-8"
 	},
 /obj/machinery/pointdefense{
@@ -1991,7 +1832,7 @@
 /obj/item/gun/projectile/revolver,
 /obj/item/ammo_magazine/speedloader,
 /obj/item/ammo_magazine/speedloader,
-/obj/effect/landmark/delete_on_shuttle{
+/obj/abstract/landmark/delete_on_shuttle{
 	shuttle_name = "Desperado"
 	},
 /turf/simulated/floor/plating,
@@ -2009,7 +1850,7 @@
 /obj/item/ammo_magazine/pistol,
 /obj/item/ammo_magazine/pistol,
 /obj/item/ammo_magazine/pistol,
-/obj/effect/landmark/delete_on_shuttle{
+/obj/abstract/landmark/delete_on_shuttle{
 	shuttle_name = "Desperado"
 	},
 /turf/simulated/floor/plating,
@@ -2058,7 +1899,7 @@
 "jP" = (
 /obj/machinery/acting/changer,
 /obj/machinery/light/spot,
-/obj/effect/landmark/delete_on_shuttle{
+/obj/abstract/landmark/delete_on_shuttle{
 	shuttle_name = "Desperado"
 	},
 /turf/simulated/floor/plating,
@@ -2073,7 +1914,7 @@
 /obj/structure/rack,
 /obj/item/gun/energy/gun,
 /obj/item/gun/energy/gun,
-/obj/effect/landmark/delete_on_shuttle{
+/obj/abstract/landmark/delete_on_shuttle{
 	shuttle_name = "Desperado"
 	},
 /turf/simulated/floor/plating,
@@ -2088,7 +1929,7 @@
 /turf/simulated/floor/plating,
 /area/map_template/merc_spawn)
 "ks" = (
-/obj/effect/landmark{
+/obj/abstract/landmark{
 	name = "Syndicate-Spawn"
 	},
 /obj/effect/floor_decal/industrial/warning/corner{
@@ -2129,7 +1970,7 @@
 /obj/structure/rack,
 /obj/item/gun/energy/gun/small,
 /obj/item/gun/energy/gun/small,
-/obj/effect/landmark/delete_on_shuttle{
+/obj/abstract/landmark/delete_on_shuttle{
 	shuttle_name = "Desperado"
 	},
 /turf/simulated/floor/plating,
@@ -2203,7 +2044,7 @@
 /turf/simulated/floor/plating,
 /area/map_template/merc_spawn)
 "nN" = (
-/obj/machinery/power/port_gen/pacman,
+/obj/machinery/port_gen/pacman,
 /obj/structure/railing/mapped/no_density{
 	dir = 4
 	},
@@ -2231,8 +2072,6 @@
 /area/map_template/merc_spawn)
 "oY" = (
 /obj/structure/cable{
-	d1 = 2;
-	d2 = 4;
 	icon_state = "2-4"
 	},
 /turf/simulated/floor/tiled/techfloor/grid,
@@ -2251,7 +2090,7 @@
 /turf/simulated/floor/plating,
 /area/map_template/merc_spawn)
 "qa" = (
-/obj/effect/landmark{
+/obj/abstract/landmark{
 	name = "Syndicate-Uplink"
 	},
 /obj/effect/overmap/visitable/merc_base{
@@ -2327,7 +2166,7 @@
 /turf/simulated/floor/tiled/airless,
 /area/space)
 "uG" = (
-/obj/machinery/power/port_gen/pacman,
+/obj/machinery/port_gen/pacman,
 /obj/structure/railing/mapped/no_density{
 	dir = 4
 	},
@@ -2335,7 +2174,7 @@
 /area/map_template/merc_spawn)
 "uV" = (
 /obj/structure/table,
-/obj/effect/landmark{
+/obj/abstract/landmark{
 	name = "Nuclear-Code"
 	},
 /turf/simulated/floor/tiled,
@@ -2363,7 +2202,6 @@
 /area/map_template/merc_spawn)
 "vO" = (
 /obj/structure/cable{
-	d2 = 8;
 	icon_state = "0-8"
 	},
 /obj/machinery/power/smes/buildable/preset{
@@ -2576,7 +2414,7 @@
 "IB" = (
 /obj/structure/rack,
 /obj/item/gun/energy/ionrifle,
-/obj/effect/landmark/delete_on_shuttle{
+/obj/abstract/landmark/delete_on_shuttle{
 	shuttle_name = "Desperado"
 	},
 /turf/simulated/floor/plating,
@@ -2683,7 +2521,7 @@
 /obj/item/assembly/signaler{
 	pixel_y = 2
 	},
-/obj/effect/landmark/delete_on_shuttle{
+/obj/abstract/landmark/delete_on_shuttle{
 	shuttle_name = "Desperado"
 	},
 /turf/simulated/floor/plating,
@@ -2761,7 +2599,7 @@
 /turf/simulated/floor/plating,
 /area/map_template/merc_spawn)
 "PK" = (
-/obj/machinery/power/port_gen/pacman/super,
+/obj/machinery/port_gen/pacman/super,
 /turf/simulated/floor/plating,
 /area/map_template/merc_spawn)
 "PZ" = (
@@ -2814,7 +2652,7 @@
 /turf/simulated/floor/plating,
 /area/map_template/merc_spawn)
 "RT" = (
-/obj/effect/landmark{
+/obj/abstract/landmark{
 	name = "Syndicate-Spawn"
 	},
 /obj/effect/floor_decal/industrial/warning{
@@ -2846,13 +2684,13 @@
 /turf/simulated/floor/plating,
 /area/map_template/merc_spawn)
 "Tu" = (
-/obj/machinery/power/port_gen/pacman/super,
+/obj/machinery/port_gen/pacman/super,
 /obj/structure/railing/mapped/no_density,
 /turf/simulated/floor/plating,
 /area/map_template/merc_spawn)
 "Ua" = (
 /obj/machinery/mech_recharger,
-/obj/effect/landmark/delete_on_shuttle{
+/obj/abstract/landmark/delete_on_shuttle{
 	shuttle_name = "Desperado"
 	},
 /mob/living/exosuit/premade/heavy/merc,
@@ -2877,7 +2715,7 @@
 /turf/simulated/floor/plating,
 /area/map_template/merc_spawn)
 "UT" = (
-/obj/effect/landmark{
+/obj/abstract/landmark{
 	name = "Syndicate-Spawn"
 	},
 /obj/effect/floor_decal/industrial/warning/corner{

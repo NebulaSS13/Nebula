@@ -37,16 +37,10 @@
 	{{/for}}
 </div>
 {{else}}
-{{if data.creation}}
-	{{:helper.link('New Record', 'document', {'new_record' : 1}, null)}}
-{{/if}}
-{{:helper.link('Name Search', 'search', {'search' : 'Name'}, null)}}
-{{if data.dnasearch}}
-	{{:helper.link('DNA Search', 'search', {'search' : 'DNA'}, null)}}
-{{/if}}
-{{if data.fingersearch}}
-	{{:helper.link('Fingerprint Search', 'search', {'search' : 'Fingerprint'}, null)}}
-{{/if}}
+{{:helper.link('New Record', 'document', {'new_record' : 1}, null)}}
+{{for data.searchable}}
+	{{:helper.link(value + ' Search', 'search', {'search' : value}, null)}}
+{{/for}}
 <br><br>
 <h2>Available records:</h2>
 <table style="width:100%">

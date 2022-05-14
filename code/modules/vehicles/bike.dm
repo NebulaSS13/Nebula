@@ -1,4 +1,4 @@
-/obj/vehicle/bike/
+/obj/vehicle/bike
 	name = "space-bike"
 	desc = "Space wheelies! Woo!"
 	icon = 'icons/obj/bike.dmi'
@@ -6,13 +6,14 @@
 	dir = SOUTH
 
 	load_item_visible = 1
-	buckle_pixel_shift = @"{'x':0,'y':0,'z':5}"
+	buckle_pixel_shift = list("x" = 0, "y" = 0, "z" = 5)
 	health = 100
 	maxhealth = 100
 
 	locked = 0
 	fire_dam_coeff = 0.6
 	brute_dam_coeff = 0.5
+
 	var/protection_percent = 40 //0 is no protection, 100 is full protection (afforded to the pilot) from projectiles fired at this vehicle
 
 	var/land_speed = 10 //if 0 it can't go on turf
@@ -133,7 +134,7 @@
 /obj/vehicle/bike/attack_hand(var/mob/user)
 	if(user == load)
 		unload(load)
-		to_chat(user, "You unbuckle yourself from \the [src]")
+		to_chat(user, "You unbuckle yourself from \the [src].")
 
 /obj/vehicle/bike/relaymove(mob/user, direction)
 	if(user != load || !on)

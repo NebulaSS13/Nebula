@@ -2,7 +2,7 @@
 	if(card)
 		card.removePersonality()
 		if(gibbed)
-			dropInto(loc.loc)
+			dropInto(loc)
 			qdel(card)
 		else
 			fold()

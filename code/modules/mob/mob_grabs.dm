@@ -8,13 +8,11 @@
 /mob/proc/apply_effect(var/effect = 0,var/effecttype = STUN, var/blocked = 0)
 	return
 // See /mob/living/carbon/human for this one.
-/mob/proc/get_organ(var/zone)
+/mob/proc/get_organ(var/organ_tag)
+	return //Returns the organ matching the tag
+/mob/proc/get_organs()
 	return
 // End grab casting stubs.
-/mob/proc/get_internal_organ(var/organ_tag)
-	return
-/mob/proc/get_internal_organs()
-	return
 
 /mob/can_be_grabbed(var/mob/grabber, var/target_zone)
 	if(!grabber.can_pull_mobs)
@@ -34,10 +32,10 @@
 /mob/proc/handle_grab_damage()
 	set waitfor = FALSE
 
-/mob/proc/handle_grabs_after_move()
+/mob/proc/handle_grabs_after_move(var/turf/old_loc, var/direction)
 	set waitfor = FALSE
 
-/mob/proc/add_grab(var/obj/item/grab/grab)
+/mob/proc/add_grab(var/obj/item/grab/grab, var/defer_hand = FALSE)
 	return FALSE
 
 /mob/proc/ProcessGrabs()
@@ -49,4 +47,4 @@
 		. += grab
 
 /mob/get_object_size()
-	return mob_size	
+	return mob_size

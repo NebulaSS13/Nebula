@@ -11,13 +11,14 @@
 
 /decl/aspect/prosthetic_limb/Initialize()
 	. = ..()
-	if(model && model != /decl/prosthetics_manufacturer)
-		var/decl/prosthetics_manufacturer/model_manufacturer = GET_DECL(model)
-		name = "[model_manufacturer.name] [bodypart_name]"
-		desc = "You have been fitted with [ADD_ARTICLE(model_manufacturer.name)] [lowertext(bodypart_name)] prosthesis."
-	else
-		name = "Prosthetic [bodypart_name]"
-		desc = "You have been fitted with a basic [lowertext(bodypart_name)] prosthesis."
+	if(bodypart_name)
+		if(model && model != /decl/prosthetics_manufacturer)
+			var/decl/prosthetics_manufacturer/model_manufacturer = GET_DECL(model)
+			name = "[model_manufacturer.name] [bodypart_name]"
+			desc = "You have been fitted with [ADD_ARTICLE(model_manufacturer.name)] [lowertext(bodypart_name)] prosthesis."
+		else
+			name = "Prosthetic [bodypart_name]"
+			desc = "You have been fitted with a basic [lowertext(bodypart_name)] prosthesis."
 	if(base_type)
 		LAZYINITLIST(incompatible_with)
 		incompatible_with |= typesof(base_type)
@@ -55,7 +56,7 @@
 
 	// Robotize the selected limb.
 	if(. && apply_to_limb)
-		var/obj/item/organ/external/E = holder.organs_by_name[apply_to_limb]
+		var/obj/item/organ/external/E = holder.get_organ(apply_to_limb)
 		if(!istype(E))
 			var/list/organ_data = holder.species.has_limbs[apply_to_limb]
 			if("path" in organ_data)

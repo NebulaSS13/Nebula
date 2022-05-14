@@ -38,13 +38,16 @@
 #define	CE_VOICELOSS     "whispers"     // Lowers the subject's voice to a whisper
 #define CE_GLOWINGEYES   "eyeglow"      // Causes eyes to glow.
 
+#define CE_REGEN_BRUTE   "bruteheal"    // Causes brute damage to regenerate.
+#define CE_REGEN_BURN    "burnheal"     // Causes burn damage to regenerate.
+
 #define GET_CHEMICAL_EFFECT(X, C) (LAZYACCESS(X.chem_effects, C) || 0)
 
 //reagent flags
 #define IGNORE_MOB_SIZE BITFLAG(0)
 #define AFFECTS_DEAD    BITFLAG(1)
 
-#define HANDLE_REACTIONS(_reagents)  SSmaterials.active_holders[_reagents] = TRUE
+#define HANDLE_REACTIONS(_reagents)  if(!QDELETED(_reagents)) { SSmaterials.active_holders[_reagents] = TRUE; }
 #define UNQUEUE_REACTIONS(_reagents) SSmaterials.active_holders -= _reagents
 
 #define REAGENT_LIST(R) (R.reagents?.get_reagents() || "No reagent holder")

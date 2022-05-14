@@ -17,7 +17,7 @@ SUBSYSTEM_DEF(mapping)
 	overmap_event_handler = GET_DECL(/decl/overmap_event_handler)
 
 	// Load templates and build away sites.
-	for(var/obj/effect/landmark/map_load_mark/marker AS_ANYTHING in compile_time_map_markers)
+	for(var/obj/abstract/landmark/map_load_mark/marker AS_ANYTHING in compile_time_map_markers)
 		compile_time_map_markers -= marker
 		marker.load_template()
 

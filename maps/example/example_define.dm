@@ -1,6 +1,6 @@
 /datum/map/example
-	name = "Example"
-	full_name = "The Example"
+	name = "Testing"
+	full_name = "Testing Site"
 	path = "example"
 
 	lobby_screens = list(
@@ -11,10 +11,9 @@
 		/decl/music_track/absconditus
 	)
 
-	station_levels = list(1, 2, 3)
-	contact_levels = list(1, 2, 3)
-	player_levels = list(1, 2, 3)
-	allowed_spawns = list(/decl/spawnpoint/arrivals)
+	allowed_spawns = list(
+		/decl/spawnpoint/arrivals
+	)
 
 	shuttle_docked_message = "The shuttle has docked."
 	shuttle_leaving_dock = "The shuttle has departed from home dock."

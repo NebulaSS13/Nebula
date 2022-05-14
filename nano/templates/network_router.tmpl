@@ -30,6 +30,14 @@
 			BACKUP ROUTER / RELAY
 		</div>
 	{{/if}}
+	{{if data.reconnect}}
+		<div class="item">
+			<span class="bad">CONNECTION LOST, ATTEMPTING RECONNECT IN {{:data.reconnect}}s</span>
+		</div>
+		<div class="item">
+			{{:helper.link("RECONNECT NOW", null, { "reconnect" : 1 })}}
+		</div>
+	{{/if}}
 	<div class="itemLabel">
 		Wi-Fi Connections:
 	</div>

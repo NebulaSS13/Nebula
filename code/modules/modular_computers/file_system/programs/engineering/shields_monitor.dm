@@ -13,13 +13,13 @@
 
 /datum/nano_module/program/shields_monitor
 	name = "Shields monitor"
-	var/obj/machinery/power/shield_generator/active = null
+	var/obj/machinery/shield_generator/active = null
 
 /datum/nano_module/program/shields_monitor/Destroy()
 	. = ..()
 	deselect_shield()
 
-/datum/nano_module/program/shields_monitor/proc/can_connect_to_shield(obj/machinery/power/shield_generator/S)
+/datum/nano_module/program/shields_monitor/proc/can_connect_to_shield(obj/machinery/shield_generator/S)
 	var/datum/computer_network/network = get_network()
 	if(!network)
 		return FALSE
@@ -27,7 +27,7 @@
 
 /datum/nano_module/program/shields_monitor/proc/get_shields()
 	var/list/shields = list()
-	for(var/obj/machinery/power/shield_generator/S in SSmachines.machinery)
+	for(var/obj/machinery/shield_generator/S in SSmachines.machinery)
 		if(!can_connect_to_shield(S))
 			continue
 		shields.Add(S)
@@ -71,7 +71,7 @@
 		data["active"] = null
 		var/list/shields = get_shields()
 		var/list/shields_info = list()
-		for(var/obj/machinery/power/shield_generator/S in shields)
+		for(var/obj/machinery/shield_generator/S in shields)
 			var/area/A = get_area(S)
 			var/list/temp = list(list(
 				"shield_status" = S.running,
@@ -100,7 +100,7 @@
 		return 1
 	if( href_list["ref"] )
 		var/list/shields = get_shields()
-		var/obj/machinery/power/shield_generator/S = locate(href_list["ref"]) in shields
+		var/obj/machinery/shield_generator/S = locate(href_list["ref"]) in shields
 		if(S)
 			deselect_shield()
 			events_repository.register(/decl/observ/destroyed, S, src, /datum/nano_module/program/shields_monitor/proc/deselect_shield)

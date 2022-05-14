@@ -11,7 +11,7 @@
 
 		for(var/i = authorized_modes.len + 1 to firemodes.len)
 			authorized_modes.Add(default_mode_authorization)
-		
+
 		set_extension(src, /datum/extension/network_device/lazy)
 		verbs |= /obj/item/gun/proc/network_setup
 
@@ -24,7 +24,7 @@
 /obj/item/gun/examine(mob/user, distance)
 	. = ..()
 	if(distance <= 0 && is_secure_gun())
-		to_chat(user, "The registration screen shows, \"" + (registered_owner ? "[registered_owner]" : "unregistered") + "\"")
+		to_chat(user, "The registration screen shows, \"" + (registered_owner ? "[registered_owner]" : "unregistered") + "\".")
 
 /obj/item/gun/attackby(obj/item/W, mob/user)
 	if(istype(W, /obj/item/card/id) && is_secure_gun())
@@ -84,7 +84,7 @@
 	if(mode == sel_mode && !authorized)
 		switch_firemodes()
 
-	var/mob/user = get_holder_of_type(src, /mob)
+	var/mob/user = get_recursive_loc_of_type(/mob)
 	if(user)
 		to_chat(user, SPAN_NOTICE("Your [src.name] has been [authorized ? "granted" : "denied"] [firemodes[mode]] fire authorization by [by]."))
 

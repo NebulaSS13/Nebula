@@ -2,8 +2,8 @@
 /obj/item/clothing/suit/poncho/colored
 	name = "poncho"
 	desc = "A simple, comfortable poncho."
-	bodytype_restricted = null
 	icon = 'icons/clothing/suit/poncho/classic.dmi'
+	bodytype_equip_flags = null
 
 /obj/item/clothing/suit/poncho/colored/green
 	name = "green poncho"
@@ -26,7 +26,7 @@
 	icon = 'icons/clothing/suit/poncho/blue.dmi'
 
 /obj/item/clothing/suit/poncho/roles
-	bodytype_restricted = null
+	bodytype_equip_flags = null
 
 /obj/item/clothing/suit/poncho/roles/security
 	name = "security poncho"

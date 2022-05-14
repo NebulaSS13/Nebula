@@ -146,21 +146,27 @@
 		H.update_eyes()
 		H.skin_tone   = 35 - dna.GetUIValueRange(DNA_UI_SKIN_TONE, 220) // Value can be negative.
 
+		// TODO: update DNA gender to not be a bool - use bodytype and pronouns
+		/*
 		if(H.gender != NEUTER)
 			if (dna.GetUIState(DNA_UI_GENDER))
 				H.set_gender(FEMALE)
 			else
 				H.set_gender(MALE)
+		*/
 
 		//Body markings
 		for(var/tag in dna.body_markings)
-			var/obj/item/organ/external/E = H.organs_by_name[tag]
+			var/obj/item/organ/external/E = H.get_organ(tag)
 			if(E)
 				var/list/marklist = dna.body_markings[tag]
-				E.markings = marklist.Copy()
+				if(length(marklist))
+					E.markings = marklist.Copy()
+				else
+					LAZYCLEARLIST(E.markings)
 
 		//Base skin and blend
-		for(var/obj/item/organ/external/E in H.organs)
+		for(var/obj/item/organ/external/E in H.get_external_organs())
 			E.set_dna(E.dna)
 
 		//Hair

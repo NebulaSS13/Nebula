@@ -66,6 +66,7 @@
 	lore_text = "The most ubiquitous building material of old Earth, now in space. Consists of mineral aggregate bound with some sort of cementing solution."
 	color = COLOR_GRAY
 	value = 0.9
+	exoplanet_rarity = MAT_RARITY_NOWHERE
 	var/image/texture
 
 /decl/material/solid/stone/concrete/Initialize()
@@ -87,9 +88,10 @@
 	construction_difficulty = MAT_VALUE_NORMAL_DIY
 	hidden_from_codex = TRUE
 	reflectiveness = MAT_VALUE_DULL
+	exoplanet_rarity = MAT_RARITY_NOWHERE
 
 /decl/material/solid/stone/cult/place_dismantled_girder(var/turf/target)
-	new /obj/structure/girder/cult(target)
+	return list(new /obj/structure/girder/cult(target))
 
 /decl/material/solid/stone/cult/reinforced
 	name = "runic inscriptions"

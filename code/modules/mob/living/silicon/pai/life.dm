@@ -20,6 +20,8 @@
 	if(src.medHUD == 1)
 		process_med_hud(src, 1, network = get_computer_network())
 
+	process_os() // better safe than sorry, in case some pAI has it
+
 	if(silence_time)
 		if(world.timeofday >= silence_time)
 			silence_time = null

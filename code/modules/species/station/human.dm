@@ -14,13 +14,6 @@
 		/decl/bodytype/human/masculine
 	)
 
-	available_cultural_info = list(
-		TAG_CULTURE = list(
-			/decl/cultural_info/culture/other,
-			/decl/cultural_info/culture/human
-		)
-	)
-
 	exertion_effect_chance = 10
 	exertion_hydration_scale = 1
 	exertion_charge_scale = 1

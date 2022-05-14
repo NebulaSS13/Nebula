@@ -99,11 +99,8 @@
 #ifndef CUSTOM_ITEM_CONFIG
 #define CUSTOM_ITEM_CONFIG "config/custom_items/"
 #endif
-#ifndef CUSTOM_ITEM_SYNTH_CONFIG
-#define CUSTOM_ITEM_SYNTH_CONFIG "config/custom_sprites.txt"
-#endif
-#ifndef CUSTOM_ITEM_SYNTH
-#define CUSTOM_ITEM_SYNTH 'icons/mob/custom_synthetic.dmi'
+#ifndef CUSTOM_ICON_CONFIG
+#define CUSTOM_ICON_CONFIG "config/custom_icons/"
 #endif
 
 #define WALL_CAN_OPEN 1
@@ -118,11 +115,6 @@
 // Special return values from bullet_act(). Positive return values are already used to indicate the blocked level of the projectile.
 #define PROJECTILE_CONTINUE   -1 //if the projectile should continue flying after calling bullet_act()
 #define PROJECTILE_FORCE_MISS -2 //if the projectile should treat the attack as a miss (suppresses attack and admin logs) - only applies to mobs.
-
-//Camera capture modes
-#define CAPTURE_MODE_REGULAR 0 //Regular polaroid camera mode
-#define CAPTURE_MODE_ALL 1 //Admin camera mode
-#define CAPTURE_MODE_PARTIAL 3 //Simular to regular mode, but does not do dummy check
 
 //objectives
 #define CONFIG_OBJECTIVE_NONE 2
@@ -274,3 +266,21 @@
 //they are here to support hotkeys
 #define INTENT_HOTKEY_LEFT  "left"
 #define INTENT_HOTKEY_RIGHT "right"
+
+//Turf/area values for 'this space is outside' checks
+#define OUTSIDE_AREA null
+#define OUTSIDE_NO   FALSE
+#define OUTSIDE_YES  TRUE
+
+// Weather exposure values for being rained on or hailed on.
+#define WEATHER_IGNORE    -1
+#define WEATHER_PROTECTED  0
+#define WEATHER_EXPOSED    1
+
+// Literacy check constants.
+#define WRITTEN_SKIP     0
+#define WRITTEN_PHYSICAL 1
+#define WRITTEN_DIGITAL  2
+
+// arbitrary low pressure bound for wind weather effects
+#define MIN_WIND_PRESSURE 10

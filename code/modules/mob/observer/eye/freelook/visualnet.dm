@@ -112,7 +112,7 @@
 	for_all_chunks_in_range(source, /datum/chunk/proc/visibility_changed, list())
 
 /datum/visualnet/proc/add_source(var/atom/source, var/update_visibility = TRUE, var/opacity_check = FALSE)
-	if(!(source && is_type_in_list(source, valid_source_types)))
+	if(!(source && is_valid_source(source)))
 		log_visualnet("Was given an unhandled source", source)
 		return FALSE
 	if(source in sources)
@@ -135,6 +135,10 @@
 	if(update_visibility)
 		update_visibility(source, opacity_check)
 	return TRUE
+
+/datum/visualnet/proc/is_valid_source(var/atom/source)
+	if(is_type_in_list(source, valid_source_types))
+		return TRUE
 
 /datum/visualnet/proc/source_moved(var/atom/movable/source, var/old_loc, var/new_loc)
 	var/turf/old_turf = get_turf(old_loc)

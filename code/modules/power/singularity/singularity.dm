@@ -1,6 +1,5 @@
-//This file was auto-corrected by findeclaration.exe on 25.5.2012 20:42:33
-
-/obj/singularity/
+var/global/list/singularities = list()
+/obj/singularity
 	name = "gravitational singularity"
 	desc = "A gravitational singularity."
 	icon = 'icons/obj/singularity.dmi'
@@ -35,16 +34,17 @@
 	//CARN: admin-alert for chuckle-fuckery.
 	admin_investigate_setup()
 	energy = starting_energy
-
+	global.singularities += src
 	if (temp)
 		QDEL_IN(src, temp)
 	START_PROCESSING(SSobj, src)
-	for(var/obj/machinery/power/singularity_beacon/singubeacon in SSmachines.machinery)
-		if(singubeacon.active)
+	for(var/obj/machinery/singularity_beacon/singubeacon in SSmachines.machinery)
+		if(singubeacon.use_power == POWER_USE_ACTIVE)
 			target = singubeacon
 			break
 
 /obj/singularity/Destroy()
+	global.singularities -= src
 	STOP_PROCESSING(SSobj, src)
 	. = ..()
 
@@ -352,10 +352,10 @@
 	var/dir2 = 0
 	var/dir3 = 0
 	switch(direction)
-		if(NORTH||SOUTH)
+		if(NORTH,SOUTH)
 			dir2 = 4
 			dir3 = 8
-		if(EAST||WEST)
+		if(EAST,WEST)
 			dir2 = 1
 			dir3 = 2
 	var/turf/T2 = T
@@ -461,7 +461,7 @@
 	return
 
 /obj/singularity/proc/pulse()
-	for(var/obj/machinery/power/rad_collector/R in rad_collectors)
+	for(var/obj/machinery/rad_collector/R in rad_collectors)
 		if (get_dist(R, src) <= 15) //Better than using orange() every process.
 			R.receive_pulse(energy)
 

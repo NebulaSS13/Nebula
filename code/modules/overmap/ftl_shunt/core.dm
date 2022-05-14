@@ -53,7 +53,7 @@
 	idle_power_usage = 1600
 	icon_state = "bsd"
 	light_color = COLOR_BLUE
-
+	stock_part_presets = list(/decl/stock_part_preset/terminal_setup)
 //Base procs
 
 /obj/machinery/ftl_shunt/core/Initialize(mapload, d, populate_parts)
@@ -65,10 +65,6 @@
 	find_ports()
 	set_light(2)
 	target_charge = max_charge * 0.25 //Target charge set to a quarter of our maximum charge, just for weirdness prevention
-	if(populate_parts)
-		var/obj/item/stock_parts/power/terminal/term = get_component_of_type(/obj/item/stock_parts/power/terminal)
-		if(!term.terminal)
-			term.make_terminal(src)
 
 /obj/machinery/ftl_shunt/core/modify_mapped_vars(map_hash)
 	..()
@@ -242,12 +238,14 @@
 	return FTL_START_CONFIRMED
 
 /obj/machinery/ftl_shunt/core/proc/calculate_jump_requirements()
-	var/shunt_distance
-	var/vessel_mass = ftl_computer.linked.get_vessel_mass()
-	var/shunt_turf = locate(shunt_x, shunt_y, global.using_map.overmap_z)
-	shunt_distance = get_dist(get_turf(ftl_computer.linked), shunt_turf)
-	required_fuel_joules = (vessel_mass * JOULES_PER_TON) * shunt_distance
-	required_charge = required_fuel_joules * REQUIRED_CHARGE_MULTIPLIER
+	var/obj/effect/overmap/visitable/O = global.overmap_sectors["[z]"]
+	if(O)
+		var/shunt_distance
+		var/vessel_mass = ftl_computer.linked.get_vessel_mass()
+		var/shunt_turf = locate(shunt_x, shunt_y, O.z)
+		shunt_distance = get_dist(get_turf(ftl_computer.linked), shunt_turf)
+		required_fuel_joules = (vessel_mass * JOULES_PER_TON) * shunt_distance
+		required_charge = required_fuel_joules * REQUIRED_CHARGE_MULTIPLIER
 
 //Cancels the in-progress shunt.
 /obj/machinery/ftl_shunt/core/proc/cancel_shunt(var/silent = FALSE)
@@ -277,17 +275,19 @@
 		cancel_shunt()
 		return //If for some reason we don't have fuel now, just return.
 
-	var/destination = locate(shunt_x, shunt_y, global.using_map.overmap_z)
-	var/jumpdist = get_dist(get_turf(ftl_computer.linked), destination)
-	var/obj/effect/portal/wormhole/W = new(destination) //Generate a wormhole effect on overmap to give some indication that something is about to happen.
-	QDEL_IN(W, 6 SECONDS)
-	addtimer(CALLBACK(src, .proc/do_shunt, shunt_x, shunt_y, jumpdist, destination), 6 SECONDS)
-	jumping = TRUE
-	update_icon()
-	for(var/mob/living/carbon/M in global.living_mob_list_)
-		if(!(M.z in ftl_computer.linked.map_z))
-			continue
-		sound_to(M, 'sound/machines/hyperspace_begin.ogg')
+	var/obj/effect/overmap/visitable/O = global.overmap_sectors["[z]"]
+	if(O)
+		var/destination = locate(shunt_x, shunt_y, O.z)
+		var/jumpdist = get_dist(get_turf(ftl_computer.linked), destination)
+		var/obj/effect/portal/wormhole/W = new(destination) //Generate a wormhole effect on overmap to give some indication that something is about to happen.
+		QDEL_IN(W, 6 SECONDS)
+		addtimer(CALLBACK(src, .proc/do_shunt, shunt_x, shunt_y, jumpdist, destination), 6 SECONDS)
+		jumping = TRUE
+		update_icon()
+		for(var/mob/living/carbon/M in global.living_mob_list_)
+			if(!(M.z in ftl_computer.linked.map_z))
+				continue
+			sound_to(M, 'sound/machines/hyperspace_begin.ogg')
 
 /obj/machinery/ftl_shunt/core/proc/do_shunt(var/turfx, var/turfy, var/jumpdist, var/destination) //this does the actual teleportation, execute_shunt is there to give us time to do our fancy effects
 	ftl_computer.linked.forceMove(destination)

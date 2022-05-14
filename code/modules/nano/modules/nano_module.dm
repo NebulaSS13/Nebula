@@ -26,11 +26,11 @@
 
 //returns a list.
 /datum/nano_module/proc/get_access(mob/user)
-	. = using_access
-	if(istype(user))
+	. = using_access.Copy()
+	if(user) // Insist on scanning ID again to make things a little less clunky.
 		var/obj/item/card/id/I = user.GetIdCard()
 		if(I)
-			. |= I.access
+			. |= I.GetAccess()
 
 /datum/nano_module/proc/check_access(var/mob/user, var/access)
 	if(!access)
@@ -50,11 +50,11 @@
 	return get_z(nano_host())
 
 /datum/nano_module/proc/print_text(var/text, var/mob/user)
-	var/datum/extension/interactive/ntos/os = get_extension(nano_host(), /datum/extension/interactive/ntos)
+	var/datum/extension/interactive/os/os = get_extension(nano_host(), /datum/extension/interactive/os)
 	if(os)
 		os.print_paper(text)
 	else
-		to_chat(user, "Error: Unable to detect compatible printer interface. Are you running NTOSv2 compatible system?")
+		to_chat(user, "Error: Unable to detect compatible printer interface. Are you running a GOOSEv2 compatible system?")
 
 /datum/proc/initial_data()
 	return list()

@@ -4,11 +4,11 @@
 	channels = list(
 		"Science" = TRUE
 	)
-	networks = list(
-		NETWORK_RESEARCH
+	camera_channels = list(
+		CAMERA_CHANNEL_RESEARCH
 	)
-	sprites = list(
-		"Droid" = "droid-science"
+	module_sprites = list(
+		"Droid" = 'icons/mob/robots/robot_droid.dmi'
 	)
 	equipment = list(
 		/obj/item/flash,

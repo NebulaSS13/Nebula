@@ -295,10 +295,12 @@ About the new airlock wires panel:
 		return 0
 
 /obj/machinery/door/airlock/on_update_icon(state=0, override=0)
-	if(connections & (NORTH|SOUTH))
-		set_dir(EAST)
-	else
-		set_dir(SOUTH)
+
+	if(set_dir_on_update)
+		if(connections & (NORTH|SOUTH))
+			set_dir(EAST)
+		else
+			set_dir(SOUTH)
 
 	switch(state)
 		if(0)
@@ -634,17 +636,20 @@ About the new airlock wires panel:
 	if(isWelder(item))
 		var/obj/item/weldingtool/WT = item
 		if(!WT.remove_fuel(0,user))
-			return 0
+			return FALSE
 		cut_verb = "cutting"
 		cut_sound = 'sound/items/Welder.ogg'
 	else if(istype(item,/obj/item/gun/energy/plasmacutter)) //They could probably just shoot them out, but who cares!
 		var/obj/item/gun/energy/plasmacutter/cutter = item
 		if(!cutter.slice(user))
-			return 0
+			return FALSE
 		cut_verb = "cutting"
 		cut_sound = 'sound/items/Welder.ogg'
 		cut_delay *= 0.66
-	else if(istype(item,/obj/item/energy_blade/blade) || istype(item,/obj/item/energy_blade/sword))
+	else if(istype(item, /obj/item/energy_blade)) // Sharp check is to avoid toys working for this
+		var/obj/item/energy_blade/blade = item
+		if(!blade.is_special_cutting_tool(TRUE))
+			return FALSE
 		cut_verb = "slicing"
 		cut_sound = "sparks"
 		cut_delay *= 0.66
@@ -656,21 +661,21 @@ About the new airlock wires panel:
 	else if(istype(item,/obj/item/twohanded/fireaxe))
 		//special case - zero delay, different message
 		if (src.lock_cut_state == BOLTS_EXPOSED)
-			return 0 //can't actually cut the bolts, go back to regular smashing
+			return FALSE //can't actually cut the bolts, go back to regular smashing
 		var/obj/item/twohanded/fireaxe/F = item
 		if (!F.wielded)
-			return 0
+			return FALSE
 		user.visible_message(
 			SPAN_DANGER("\The [user] smashes the bolt cover open!"),
 			SPAN_DANGER("You smash the bolt cover open!")
 			)
 		playsound(src, 'sound/weapons/smash.ogg', 100, 1)
 		src.lock_cut_state = BOLTS_EXPOSED
-		return 0
+		return FALSE
 
 	else
 		// I guess you can't cut bolts with that item. Never mind then.
-		return 0
+		return FALSE
 
 	if (src.lock_cut_state == BOLTS_FINE)
 		user.visible_message(
@@ -681,11 +686,11 @@ About the new airlock wires panel:
 		playsound(src, cut_sound, 100, 1)
 		if (do_after(user, cut_delay, src))
 			user.visible_message(
-				SPAN_NOTICE("\The [user] removes the bolt cover from [src]"),
+				SPAN_NOTICE("\The [user] removes the bolt cover from [src]."),
 				SPAN_NOTICE("You remove the cover and expose the door bolts.")
 				)
 			src.lock_cut_state = BOLTS_EXPOSED
-		return 1
+		return TRUE
 
 	if (src.lock_cut_state == BOLTS_EXPOSED)
 		user.visible_message(
@@ -700,7 +705,7 @@ About the new airlock wires panel:
 				)
 			src.lock_cut_state = BOLTS_CUT
 			src.unlock(1) //force it
-		return 1
+		return TRUE
 
 /obj/machinery/door/airlock/attackby(var/obj/item/C, var/mob/user)
 	// Brace is considered installed on the airlock, so interacting with it is protected from electrification.
@@ -727,6 +732,9 @@ About the new airlock wires panel:
 		if(src.isElectrified())
 			if(src.shock(user, 75))
 				return TRUE
+
+	if(bash(C, user))
+		return TRUE
 
 	if (!repairing && (reason_broken & MACHINE_BROKEN_GENERIC) && src.locked) //bolted and broken
 		. = cut_bolts(C, user)

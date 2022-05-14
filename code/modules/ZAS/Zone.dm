@@ -181,7 +181,7 @@ Class Procs:
 	condensing = TRUE
 	for(var/g in air.gas)
 		var/decl/material/mat = GET_DECL(g)
-		if(air.temperature <= mat.gas_condensation_point)
+		if(!isnull(mat.gas_condensation_point) && (air.temperature <= mat.gas_condensation_point))
 			var/condensation_area = air.group_multiplier / length(air.gas)
 			while(condensation_area > 0 && length(contents))
 				condensation_area--

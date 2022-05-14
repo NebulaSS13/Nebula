@@ -2,8 +2,8 @@
 	name = "drone module"
 	hide_on_manifest = 1
 	no_slip = 1
-	networks = list(
-		NETWORK_ENGINEERING
+	camera_channels = list(
+		CAMERA_CAMERA_CHANNEL_ENGINEERING
 	)
 	languages = list(
 		/decl/language/human/common = FALSE
@@ -31,6 +31,7 @@
 		/obj/item/matter_decompiler,
 		/obj/item/stack/material/cyborg/steel,
 		/obj/item/stack/material/rods/cyborg,
+		/obj/item/stack/material/strut/cyborg,
 		/obj/item/stack/tile/floor/cyborg,
 		/obj/item/stack/material/cyborg/glass,
 		/obj/item/stack/material/cyborg/glass/reinforced,
@@ -82,6 +83,7 @@
 	for(var/thing in list(
 		 /obj/item/stack/material/cyborg/steel,
 		 /obj/item/stack/material/rods/cyborg,
+		 /obj/item/stack/material/strut/cyborg,
 		 /obj/item/stack/tile/floor/cyborg,
 		 /obj/item/stack/material/cyborg/glass/reinforced
 		))

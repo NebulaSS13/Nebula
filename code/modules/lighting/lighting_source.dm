@@ -348,9 +348,7 @@
 
 	var/should_do_wedge = light_angle && !facing_opaque
 
-	FOR_DVIEW(T, NONUNIT_CEILING(actual_range, 1), source_turf, 0)
-		check_t:
-
+	FOR_DVIEW(T, NONUNIT_CEILING(actual_range, 1), source_turf, 0) do
 		if (should_do_wedge)	// Directional lighting coordinate filter.
 			test_x = T.x - test_x_offset
 			test_y = T.y - test_y_offset
@@ -382,13 +380,9 @@
 
 		turfs += T
 
-		// Note: above is defined on ALL turfs, but below is only defined on OPEN TURFS.
-
-		// Upwards lights are handled at the corner level, so only search down.
-		if (T && (T.z_flags & ZM_ALLOW_LIGHTING) && T.below)
-			T = T.below
-			goto check_t
-
+	// Upwards lights are handled at the corner level, so only search down.
+	//  This is a do-while associated with the FOR_DVIEW above.
+	while (T && (T.z_flags & ZM_ALLOW_LIGHTING) && (T = T.below))
 	END_FOR_DVIEW
 
 	LAZYINITLIST(affecting_turfs)

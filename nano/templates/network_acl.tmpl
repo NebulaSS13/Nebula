@@ -7,112 +7,46 @@
 		{{:helper.link("NETWORK SETTINGS", null, { "settings" : 1 })}}
 	</div>
 {{else}}
-	<i>Welcome to the Network Firewall Controller system. Please consult your system administrator if you have any questions about your device.</i><hr>
+	<i>Welcome to the Network Access Controller system. Please consult your system administrator if you have any questions about your device.</i><hr>
 	<div class="itemContent">
 		{{:helper.link("NETWORK SETTINGS", null, { "settings" : 1 })}}
 	</div>
 	{{if !data.connected}}
 		<h2>Disconnected from network.</h2>
+	{{else !data.current_group}}
+		<h2>Network Group Settings:</h2>
+		<table><th>Setting<th>Toggle<th>Info
+			<tr><td>PARENT GROUP SUBMANAGEMENT
+				<td>{{:helper.link(data.allow_submanagement ? 'ON' : 'OFF', null, { "toggle_submanagement" : 1 })}}
+				<td>{{:helper.link('?', null, { "info" : "submanagement"})}}
+			<tr><td>PARENT ACCOUNT CREATION
+				<td>{{:helper.link(data.parent_account_creation ? 'ON' : 'OFF', null, { "toggle_parent_account_creation" : 1 })}}
+				<td>{{:helper.link('?', null, { "info" : "parent_account_creation"})}}
+		</table>
+		<h2>Viewing Parent Groups:</h2>
+		<table>
+			<tr><th>Group
+			<th>Operations
+			{{for data.parent_groups}}
+				<tr><td>{{:helper.link(value.group_name, null, {"view_child_groups" : value.group_name})}}
+				<td>
+					{{:helper.link('Remove', null, { "remove_group" : value.group_name})}}
+			{{/for}}
+		</table>
+		{{:helper.link('Create Group', null, { "create_group" : 1})}}
 	{{else}}
-		<h2>Viewing File System:</h2>
-		<div class='item'>
-			{{:helper.link(data.file_server, null, { "change_file_server" : 1 })}}
-		</div><hr>
-		{{if data.editing_user}}
-			<h2>Viewing User Record: {{:data.desired_name}}</h2>
-			<div class='item'>
-				<div class='itemLabel'>NAME:</div>
-				<div class='itemBody'>{{:data.desired_name}}</div>
-			</div>
-			<div class='item'>
-				<div class='itemLabel'>USER ID:</div>
-				<div class='itemBody'>{{:data.user_id}}</div>
-			</div>
-			<div class='item'>
-				<div class='itemLabel'>GRANT COUNT:</div>
-				<div class='itemBody'>{{:data.grant_count}}</div>
-			</div>
-			<div class='item'>
-				<div class='itemLabel'>RECORD SIZE:</div>
-				<div class='itemBody'>{{:data.size}}GQ</div>
-			</div>
-			<div class='item'>
-				{{:helper.link('CREATE GRANT', null, { "create_grant" : data.user_id })}}
-				{{if data.is_admin}}
-					{{:helper.link('REMOVE ADMIN', null, { "remove_admin": 1})}}
-				{{else}}
-					{{:helper.link('GRANT ADMIN', null, { "add_admin": 1})}}
-				{{/if}}
-				{{:helper.link('WRITE ID', null, { "write_id": 1}, !data.card_inserted ? 'disabled' : null)}}
-				{{:helper.link('EJECT ID', null, { "eject_id": 1}, !data.card_inserted ? 'disabled' : null)}}
-			</div>
-			<hr>
-			<table>
-				<tr><th>Grant
-				<th>Operations
-				{{for data.grants}}
-					<tr><td>{{:value.grant_name}}
-					<td>
-						{{if value.assigned}}
-							{{:helper.link('REMOVE', null, { "remove_grant" : value.grant_name })}}
-						{{else}}
-							{{:helper.link('ASSIGN', null, { "assign_grant" : value.grant_name })}}
-						{{/if}}
-						{{:helper.link('DELETE', null, { "delete_grant" : value.grant_name })}}
-				{{/for}}
-			</table>
-			{{:helper.link('Back to menu', null, { "back" : 1 })}}
-		{{else data.editing_program}}
-			<h2>Editing Program: {{:data.program_name}}</h2>
-			<hr>
-			<table>
-				{{:helper.link('REMOVE ACCESS REQUIREMENT', null, { "clear_program_access" : 1}, data.cleared_control ? 'selected' : null)}}
-				<tr><th>Grant
-				<th>Operations
-				{{for data.grants}}
-					<tr><td>{{:value.grant_name}}
-					<td>
-						{{if value.assigned}}
-							{{:helper.link('REMOVE', null, { "remove_grant" : value.grant_name })}}
-						{{else}}
-							{{:helper.link('ASSIGN', null, { "assign_grant" : value.grant_name })}}
-						{{/if}}
-				{{/for}}
-			</table>
-			{{:helper.link('Back to menu', null, { "back" : 1 })}}
-		{{else}}
-			<h2>Available Users ({{:data.file_server}}):</h2>
-			<table>
-				<tr><th>User ID
-				<th>Grants
-				<th>File size (GQ)
-				<th>Operations
-				{{for data.users}}
-					<tr><td>{{:value.desired_name}}
-					<td>{{:value.grant_count}}
-					<td>{{:value.size}}GQ
-					<td>
-						{{:helper.link('VIEW', null, { "view_user" : value.user_id })}}
-				{{/for}}
-			</table>
-			<hr>
-			<h2>Available Programs:</h2>
-			{{if data.program_control}}
-				{{:helper.link('DISABLE PROGRAM ACCESS CONTROL', null, { "toggle_program_control" : 1})}}
-				<table>
-					<tr><th>Program
-					<th>Grants
-					<th>Access
-				{{for data.programs}}
-					<tr><td>{{:value.name}}
-					<td>{{:value.grants}}
-					<td>
-						{{:helper.link('EDIT', null, { "view_program" : value.name})}}
-				{{/for}}
-				</table>
-			{{else}}
-				{{:helper.link('ENABLE PROGRAM ACCESS CONTROL', null, { "toggle_program_control" : 1})}}
-			{{/if}}
-		{{/if}}
+		<h2>Parent Group: {{:data.current_group}}</h2>
+		<hr>
+		<table>
+			<tr><th>Group
+			<th>Operations
+			{{for data.child_groups}}
+				<tr><td>{{:value.group_name}}
+				<td>
+					{{:helper.link('Remove', null, { "remove_group" : value.group_name})}}
+			{{/for}}
+		</table>
+		{{:helper.link('Create Group', null, { "create_group" : 1})}}
+		{{:helper.link('Back to parent group listing', null, { "view_child_groups" : null })}}
 	{{/if}}
 {{/if}}

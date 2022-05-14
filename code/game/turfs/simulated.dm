@@ -1,6 +1,12 @@
 /turf/simulated
 	name = "station"
-	initial_gas = list(/decl/material/gas/oxygen = MOLES_O2STANDARD, /decl/material/gas/nitrogen = MOLES_N2STANDARD)
+	initial_gas = list(
+		/decl/material/gas/oxygen = MOLES_O2STANDARD, 
+		/decl/material/gas/nitrogen = MOLES_N2STANDARD
+	)
+	open_turf_type = /turf/simulated/open
+	is_outside = OUTSIDE_NO
+
 	var/wet = 0
 	var/image/wet_overlay = null
 	var/to_be_destroyed = 0 //Used for fire, if a melting temperature was reached, it will be destroyed
@@ -11,7 +17,7 @@
 // This is not great.
 /turf/simulated/proc/wet_floor(var/wet_val = 1, var/overwrite = FALSE)
 
-	if(locate(/obj/effect/flood) in src)
+	if(is_flooded(absolute = TRUE))
 		return
 
 	if(get_fluid_depth() > FLUID_QDEL_POINT)
@@ -116,6 +122,7 @@
 			if(istype(stomper) && !stomper.is_stump() && stomper.coating && stomper.coating.total_volume > 1)
 				source = stomper
 	if(!source)
+		species.handle_trail(src, T)
 		return
 
 	var/list/bloodDNA
@@ -142,11 +149,9 @@
 
 	if(istype(M))
 		for(var/obj/effect/decal/cleanable/blood/B in contents)
-			if(!B.blood_DNA)
-				B.blood_DNA = list()
-			if(!B.blood_DNA[M.dna.unique_enzymes])
-				B.blood_DNA[M.dna.unique_enzymes] = M.dna.b_type
-				B.blood_data[M.dna.unique_enzymes] = REAGENT_DATA(M.vessel, M.species.blood_reagent)
+			if(!LAZYACCESS(B.blood_DNA, M.dna.unique_enzymes))
+				LAZYSET(B.blood_DNA, M.dna.unique_enzymes, M.dna.b_type)
+				LAZYSET(B.blood_data, M.dna.unique_enzymes, REAGENT_DATA(M.vessel, M.species.blood_reagent))
 				var/datum/extension/forensic_evidence/forensics = get_or_create_extension(B, /datum/extension/forensic_evidence)
 				forensics.add_data(/datum/forensics/blood_dna, M.dna.unique_enzymes)
 			return 1 //we bloodied the floor
@@ -162,13 +167,8 @@
 	else if( istype(M, /mob/living/silicon/robot ))
 		new /obj/effect/decal/cleanable/blood/oil(src)
 
-/turf/simulated/proc/can_build_cable(var/mob/user)
-	return 0
-
 /turf/simulated/attackby(var/obj/item/thing, var/mob/user)
-	if(isCoil(thing) && can_build_cable(user))
-		var/obj/item/stack/cable_coil/coil = thing
-		coil.turf_place(src, user)
+	if(isCoil(thing) && try_build_cable(thing, user))
 		return TRUE
 	return ..()
 
@@ -176,12 +176,11 @@
 	var/area/A = loc
 	holy = istype(A) && (A.area_flags & AREA_FLAG_HOLY)
 	levelupdate()
-	if(GAME_STATE >= RUNLEVEL_GAME)
-		fluid_update()
 	. = ..()
-	if(!ml)
-		for(var/turf/space/space in RANGE_TURFS(src, 1))
-			space.update_starlight()
+
+/turf/simulated/initialize_ambient_light(var/mapload)
+	for(var/turf/T AS_ANYTHING in RANGE_TURFS(src, 1))
+		T.update_ambient_light(mapload)
 
 /turf/simulated/Destroy()
 	if (zone)
@@ -190,4 +189,4 @@
 			zone.remove(src)
 		else
 			zone.rebuild()
-	. = ..() 
+	. = ..()

@@ -15,7 +15,6 @@ SUBSYSTEM_DEF(materials)
 
 	// Chemistry vars.
 	var/list/active_holders =                  list()
-	var/list/chemical_reactions =              list()
 	var/list/chemical_reactions_by_type =      list()
 	var/list/chemical_reactions_by_id =        list()
 	var/list/chemical_reactions_by_result =    list()
@@ -29,16 +28,16 @@ SUBSYSTEM_DEF(materials)
 /datum/controller/subsystem/materials/Initialize()
 
 	// Init reaction list.
-	//Chemical Reactions - Initialises all /datum/chemical_reaction into a list
+	// Chemical Reactions - Organizes /decl/chemical_reaction subtypes into a list
 	// It is filtered into multiple lists within a list.
 	// For example:
 	// chemical_reaction_list[/decl/material/foo] is a list of all reactions relating to Foo
 	// Note that entries in the list are NOT duplicated. So if a reaction pertains to
 	// more than one chemical it will still only appear in only one of the sublists.
 
-	for(var/path in subtypesof(/datum/chemical_reaction))
-		var/datum/chemical_reaction/D = new path()
-		chemical_reactions[path] = D
+	var/list/all_reactions = decls_repository.get_decls_of_subtype(/decl/chemical_reaction)
+	for(var/path in all_reactions)
+		var/decl/chemical_reaction/D = all_reactions[path]
 		if(!chemical_reactions_by_result[D.result])
 			chemical_reactions_by_result[D.result] = list()
 		chemical_reactions_by_result[D.result] += D
@@ -128,7 +127,7 @@ SUBSYSTEM_DEF(materials)
 	var/list/all_random_reagents = decls_repository.get_decls_of_type(/decl/material/liquid/random)
 	for(var/rtype in all_random_reagents)
 		var/decl/material/liquid/random/random = all_random_reagents[rtype]
-		if(only_if_unique && random.initialized)
+		if(only_if_unique && random.data_initialized)
 			continue
 		if(random.randomize_data(temperature))
 			return random.type
@@ -139,7 +138,7 @@ SUBSYSTEM_DEF(materials)
 /datum/controller/subsystem/materials/proc/get_strata(var/turf/exterior/wall/location)
 	if(!istype(location))
 		return
-	var/obj/effect/overmap/visitable/sector/exoplanet/planet = map_sectors["[location.z]"]
+	var/obj/effect/overmap/visitable/sector/exoplanet/planet = global.overmap_sectors["[location.z]"]
 	if(istype(planet))
 		return planet.get_strata(location)
 	var/s_key = "[location.z]"

@@ -108,22 +108,26 @@
 	STOP_PROCESSING(SSobj, src)
 	if(istype(loc, /obj/item/organ/external))
 		var/obj/item/organ/external/O = loc
-		O.implants -= src
+		LAZYREMOVE(O.implants, src)
 	. = ..()
 
 /obj/effect/spider/eggcluster/Process()
+
+	if(!loc)
+		qdel(src)
+		return
+
 	if(prob(80))
 		amount_grown += rand(0,2)
+
 	if(amount_grown >= 100)
 		var/num = rand(3,9)
-		var/obj/item/organ/external/O = null
 		if(istype(loc, /obj/item/organ/external))
-			O = loc
-
-		for(var/i=0, i<num, i++)
-			var/spiderling = new /obj/effect/spider/spiderling(loc, src)
-			if(O)
-				O.implants += spiderling
+			var/obj/item/organ/external/O = loc
+			for(var/i=0, i<num, i++)
+				LAZYADD(O.implants, new /obj/effect/spider/spiderling(O, src))
+		else
+			new /obj/effect/spider/spiderling(loc, src)
 		qdel(src)
 
 /obj/effect/spider/proc/disturbed()
@@ -137,7 +141,7 @@
 /obj/effect/spider/spiderling
 	name = "spiderling"
 	desc = "It never stays still for long."
-	icon_state = "guard"
+	icon_state = "lesser"
 	anchored = 0
 	layer = BELOW_OBJ_LAYER
 	health = 3
@@ -158,7 +162,7 @@
 
 /obj/effect/spider/spiderling/Initialize(var/mapload, var/atom/parent)
 	greater_form = pickweight(castes)
-	icon_state = initial(greater_form.icon_state)
+	icon = initial(greater_form.icon)
 	pixel_x = rand(-shift_range, shift_range)
 	pixel_y = rand(-shift_range, shift_range)
 

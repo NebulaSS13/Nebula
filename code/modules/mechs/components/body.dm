@@ -77,25 +77,27 @@
 
 /obj/item/mech_component/chassis/Initialize()
 	. = ..()
-	cockpit = new
-	cockpit.volume = 200
-	if(loc)
-		var/datum/gas_mixture/air = loc.return_air()
-		if(air)
-			//Essentially at this point its like we created a vacuum, but realistically making a bottle doesnt actually increase volume of a room and neither should a mech
-			for(var/g in air.gas)
-				var/amount = air.gas[g]
-				amount/= air.volume
-				cockpit.gas[g] = amount * cockpit.volume
+	if(pilot_coverage >= 100) //Open cockpits dont get to have air
+		cockpit = new
+		cockpit.volume = 200
+		if(loc)
+			var/datum/gas_mixture/air = loc.return_air()
+			if(air)
+				//Essentially at this point its like we created a vacuum, but realistically making a bottle doesnt actually increase volume of a room and neither should a mech
+				for(var/g in air.gas)
+					cockpit.gas[g] = (air.gas[g] / air.volume) * cockpit.volume
 
-			cockpit.temperature = air.temperature
-			cockpit.update_values()
-	air_supply = new /obj/machinery/portable_atmospherics/canister/air(src)
+				cockpit.temperature = air.temperature
+				cockpit.update_values()
+
+		air_supply = new /obj/machinery/portable_atmospherics/canister/air(src)
 	storage_compartment = new(src)
 
 /obj/item/mech_component/chassis/proc/update_air(var/take_from_supply)
 
 	var/changed
+	if(!cockpit)
+		return
 	if(!take_from_supply || pilot_coverage < 100)
 		var/turf/T = get_turf(src)
 		if(!T)
@@ -163,15 +165,19 @@
 	. = ..()
 	if(!. && istype(dropping, /obj/machinery/portable_atmospherics/canister))
 		var/obj/machinery/portable_atmospherics/canister/C = dropping
-		if(!do_after(user, 5, src) || QDELETED(C) || C.anchored)
-			return TRUE
-		to_chat(user, SPAN_NOTICE("You install the canister in the [src]."))
-		if(air_supply)
-			air_supply.dropInto(get_turf(src))
-			air_supply = null
-		C.forceMove(src)
-		update_components()
-	return TRUE
+		if(pilot_coverage < 100)
+			to_chat(user, SPAN_NOTICE("This type of chassis doesn't support internals."))
+			return TRUE	
+		if(!C.anchored && do_after(user, 5, src))
+			if(C.anchored)
+				return
+			to_chat(user, SPAN_NOTICE("You install the canister in the [src]."))
+			if(air_supply)
+				air_supply.dropInto(get_turf(src))
+				air_supply = null
+			C.forceMove(src)
+			update_components()
+		return TRUE
 
 /obj/item/mech_component/chassis/handle_mouse_drop(atom/over, mob/user)
 	if(storage_compartment)

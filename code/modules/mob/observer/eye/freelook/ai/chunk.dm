@@ -5,12 +5,11 @@
 
 /datum/chunk/camera/acquire_visible_turfs(var/list/visible)
 	for(var/source in sources)
-		if(istype(source,/obj/machinery/camera))
-			var/obj/machinery/camera/c = source
-			if(!c.can_use())
+		var/datum/extension/network_device/camera/camera_device  = get_extension(source, /datum/extension/network_device)
+		if(istype(camera_device))
+			if(!camera_device.is_functional())
 				continue
-
-			for(var/turf/t in c.can_see())
+			for(var/turf/t in camera_device.can_see())
 				visible[t] = t
 		else if(isAI(source))
 			var/mob/living/silicon/ai/AI = source

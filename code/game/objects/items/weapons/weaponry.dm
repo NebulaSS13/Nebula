@@ -61,7 +61,7 @@
 		F.ChangeTurf(/turf/simulated/floor)
 
 
-/obj/item/energy_blade_net
+/obj/item/energy_net
 	name = "energy net"
 	desc = "It's a net made of green energy."
 	icon = 'icons/effects/effects.dmi'
@@ -70,22 +70,22 @@
 	force = 0
 	var/net_type = /obj/effect/energy_net
 
-/obj/item/energy_blade_net/safari
+/obj/item/energy_net/safari
 	name = "animal net"
 	desc = "An energized net meant to subdue animals."
 	net_type = /obj/effect/energy_net/safari
 
-/obj/item/energy_blade_net/dropped()
+/obj/item/energy_net/dropped()
 	..()
 	spawn(10)
 		if(src) qdel(src)
 
-/obj/item/energy_blade_net/throw_impact(atom/hit_atom)
+/obj/item/energy_net/throw_impact(atom/hit_atom)
 	..()
 	try_capture_mob(hit_atom)
 
 // This will validate the hit_atom, then spawn an energy_net effect and qdel itself
-/obj/item/energy_blade_net/proc/try_capture_mob(mob/living/M)
+/obj/item/energy_net/proc/try_capture_mob(mob/living/M)
 
 	if(!istype(M) || locate(/obj/effect/energy_net) in M.loc)
 		qdel(src)
@@ -179,6 +179,7 @@
 	return 1
 
 /obj/effect/energy_net/post_buckle_mob(mob/living/M)
+	..()
 	if(buckled_mob)
 		layer = ABOVE_HUMAN_LAYER
 		visible_message("\The [M] was caught in [src]!")

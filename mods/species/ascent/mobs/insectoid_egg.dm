@@ -14,7 +14,7 @@ var/global/default_gyne
 	desc = "A semi-translucent alien egg."
 	health = 100
 	maxhealth = 100
-	icon = 'mods/species/ascent/icons/species/nymph.dmi'
+	icon = 'mods/species/ascent/icons/egg.dmi'
 	icon_state = "egg"
 
 	var/maturity_rate = 1 MINUTES		// How often to do a gestation tick.
@@ -41,7 +41,7 @@ var/global/default_gyne
 	. = ..()
 
 /obj/structure/insectoid_egg/on_update_icon()
-	. = ..()
+	..()
 	if(hatched || !health)
 		icon_state = "egg_broken"
 	else if(hatching)
@@ -97,7 +97,6 @@ var/global/default_gyne
 		return
 
 	var/mob/living/carbon/alien/ascent_nymph/new_nymph = new(src, SPECIES_MANTID_NYMPH) // Spawn in the egg.
-	new_nymph.loc = src
 	new_nymph.lastarea = get_area(src)
 	new_nymph.key = C.ckey
 	new_nymph.real_name = "[random_id(/decl/species/mantid, 10000, 99999)] [lineage]"
@@ -112,5 +111,5 @@ var/global/default_gyne
 	hatching = FALSE
 	update_icon()
 	for(var/mob/M in src)
-		M.loc = get_turf(src) // Pop!
+		M.forceMove(get_turf(src)) // Pop!
 		visible_message(SPAN_NOTICE("\icon[src] \The [M] hatches out of \the [src]."))

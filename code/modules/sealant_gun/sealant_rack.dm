@@ -2,6 +2,8 @@
 	name = "sealant tank rack"
 	icon = 'icons/obj/structures/sealant_props.dmi'
 	icon_state = "rack"
+	density = TRUE
+	anchored = TRUE
 	var/obj/item/gun/launcher/sealant/loaded_gun
 	var/list/tanks
 	var/max_tanks = 5
@@ -18,7 +20,7 @@
 		tanks += new /obj/item/sealant_tank(src)
 
 /obj/structure/sealant_rack/on_update_icon()
-	cut_overlays()
+	..()
 	if(loaded_gun)
 		add_overlay("gun")
 	if(length(tanks))

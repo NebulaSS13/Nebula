@@ -71,7 +71,7 @@
 	var/heldname = "default name"
 
 /obj/item/borg/upgrade/rename/attack_self(mob/user)
-	heldname = sanitizeSafe(input(user, "Enter new robot name", "Robot Reclassification", heldname), MAX_NAME_LEN)
+	heldname = sanitize_safe(input(user, "Enter new robot name", "Robot Reclassification", heldname), MAX_NAME_LEN)
 
 /obj/item/borg/upgrade/rename/action(var/mob/living/silicon/robot/R)
 	if(..()) return 0
@@ -91,7 +91,7 @@
 	if(..()) return 0
 
 	if(R.intenselight)
-		to_chat(usr, "This cyborg's light was already upgraded")
+		to_chat(usr, "This cyborg's light was already upgraded.")
 		return 0
 	else
 		R.intenselight = 1

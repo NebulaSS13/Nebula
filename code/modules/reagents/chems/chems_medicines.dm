@@ -7,11 +7,12 @@
 	scannable = 1
 	flags = IGNORE_MOB_SIZE
 	value = 1.5
+	uid = "chem_eyedrops"
 
 /decl/material/liquid/eyedrops/affect_blood(var/mob/living/M, var/alien, var/removed, var/datum/reagents/holder)
 	if(ishuman(M))
 		var/mob/living/carbon/human/H = M
-		var/obj/item/organ/internal/eyes/E = H.get_internal_organ(BP_EYES)
+		var/obj/item/organ/internal/eyes/E = H.get_organ(BP_EYES)
 		if(E && istype(E) && !E.is_broken())
 			ADJ_STATUS(M, STAT_BLURRY, -5) 
 			ADJ_STATUS(M, STAT_BLIND, -5)
@@ -27,6 +28,7 @@
 	scannable = 1
 	flags = IGNORE_MOB_SIZE
 	value = 1.5
+	uid = "chem_antirads"
 
 /decl/material/liquid/antirads/affect_blood(var/mob/living/M, var/alien, var/removed, var/datum/reagents/holder)
 	M.radiation = max(M.radiation - 30 * removed, 0)
@@ -42,19 +44,23 @@
 	flags = IGNORE_MOB_SIZE
 	value = 1.5
 	fruit_descriptor = "medicinal"
+	uid = "chem_styptic"
+	var/effectiveness = 1
 
 /decl/material/liquid/brute_meds/affect_overdose(mob/living/M, alien, var/datum/reagents/holder)
 	..()
 	if(ishuman(M))
 		M.add_chemical_effect(CE_BLOCKAGE, (15 + REAGENT_VOLUME(holder, type))/100)
 		var/mob/living/carbon/human/H = M
-		for(var/obj/item/organ/external/E in H.organs)
+		for(var/obj/item/organ/external/E in H.get_external_organs())
 			if(E.status & ORGAN_ARTERY_CUT && prob(2 + REAGENT_VOLUME(holder, type) / overdose))
 				E.status &= ~ORGAN_ARTERY_CUT
 
+//This is a logistic function that effectively doubles the healing rate as brute amounts get to around 200. Any injury below 60 is essentially unaffected and there's a scaling inbetween.
+#define ADJUSTED_REGEN_VAL(X) (6+(6/(1+200*2.71828**(-0.05*(X)))))
 /decl/material/liquid/brute_meds/affect_blood(var/mob/living/M, var/alien, var/removed, var/datum/reagents/holder)
-	var/overkill_healing = 6/(1+200*2.71828**(-0.05*M.getBruteLoss())) //This is a logistic function that effectively doubles the healing rate as brute amounts get to around 200. Any injury below 60 is essentially unaffected and there's a scaling inbetween.
-	M.heal_organ_damage((6+overkill_healing) * removed, 0)
+	..()
+	M.add_chemical_effect_max(CE_REGEN_BRUTE, round(effectiveness*ADJUSTED_REGEN_VAL(M.getBruteLoss())))
 	M.add_chemical_effect(CE_PAINKILLER, 10)
 
 /decl/material/liquid/burn_meds
@@ -66,11 +72,14 @@
 	scannable = 1
 	flags = IGNORE_MOB_SIZE
 	value = 1.5
+	uid = "chem_synthskin"
+	var/effectiveness = 1
 
 /decl/material/liquid/burn_meds/affect_blood(mob/living/M, alien, removed, var/datum/reagents/holder)
-	var/overkill_healing = 6/(1+200*2.71828**(-0.05*M.getFireLoss()))	
-	M.heal_organ_damage(0, (6+overkill_healing) * removed)
+	..()
+	M.add_chemical_effect_max(CE_REGEN_BURN, round(effectiveness*ADJUSTED_REGEN_VAL(M.getFireLoss())))
 	M.add_chemical_effect(CE_PAINKILLER, 10)
+#undef ADJUSTED_REGEN_VAL
 
 /decl/material/liquid/adminordrazine //An OP chemical for admins
 	name = "Adminordrazine"
@@ -78,6 +87,8 @@
 	taste_description = "100% abuse"
 	color = "#c8a5dc"
 	flags = AFFECTS_DEAD //This can even heal dead people.
+	exoplanet_rarity = MAT_RARITY_NOWHERE
+	uid = "chem_adminorazine"
 
 	glass_name = "liquid gold"
 	glass_desc = "It's magic. We don't have to explain it."
@@ -97,6 +108,7 @@
 	flags = IGNORE_MOB_SIZE
 	value = 1.5
 	fruit_descriptor = "astringent"
+	uid = "chem_antitoxins"
 	var/remove_generic = 1
 	var/list/remove_toxins = list(
 		/decl/material/liquid/zombiepowder
@@ -131,6 +143,7 @@
 	overdose = REAGENTS_OVERDOSE
 	value = 1.5
 	scannable = 1
+	uid = "chem_immunobooster"
 
 /decl/material/liquid/immunobooster/affect_blood(var/mob/living/M, var/alien, var/removed, var/datum/reagents/holder)
 	if(ishuman(M) && REAGENT_VOLUME(holder, type) < REAGENTS_OVERDOSE)
@@ -152,6 +165,7 @@
 	scannable = 1
 	metabolism = 0.01
 	value = 1.5
+	uid = "chem_stimulants"
 
 /decl/material/liquid/stimulants/affect_blood(var/mob/living/M, var/alien, var/removed, var/datum/reagents/holder)
 	var/volume = REAGENT_VOLUME(holder, type)
@@ -175,6 +189,7 @@
 	scannable = 1
 	metabolism = 0.01
 	value = 1.5
+	uid = "chem_antidepressants"
 
 /decl/material/liquid/antidepressants/affect_blood(var/mob/living/M, var/alien, var/removed, var/datum/reagents/holder)
 	var/volume = REAGENT_VOLUME(holder, type)
@@ -197,6 +212,7 @@
 	overdose = REAGENTS_OVERDOSE/2
 	scannable = 1
 	value = 1.5
+	uid = "chem_antibiotics"
 
 /decl/material/liquid/antibiotics/affect_blood(var/mob/living/M, var/alien, var/removed, var/datum/reagents/holder)
 	var/mob/living/carbon/human/H = M
@@ -227,12 +243,13 @@
 	scannable = 1
 	overdose = REAGENTS_OVERDOSE
 	value = 1.5
+	uid = "chem_retrovirals"
 
 /decl/material/liquid/retrovirals/affect_overdose(mob/living/M, alien, datum/reagents/holder)
 	. = ..()
 	if(ishuman(M))
 		var/mob/living/carbon/human/H = M
-		for(var/obj/item/organ/external/E in H.organs)
+		for(var/obj/item/organ/external/E in H.get_external_organs())
 			if(!BP_IS_PROSTHETIC(E) && prob(25) && !(E.status & ORGAN_MUTATED))
 				E.mutate()
 				E.limb_flags |= ORGAN_FLAG_DEFORMED
@@ -261,6 +278,7 @@
 	overdose = 20
 	metabolism = 0.1
 	value = 1.5
+	uid = "chem_adrenaline"
 
 /decl/material/liquid/adrenaline/affect_blood(var/mob/living/M, var/alien, var/removed, var/datum/reagents/holder)
 	var/volume = REAGENT_VOLUME(holder, type)
@@ -278,7 +296,7 @@
 		if(ishuman(M))
 			var/mob/living/carbon/human/H = M
 			if(H.resuscitate())
-				var/obj/item/organ/internal/heart = H.get_internal_organ(BP_HEART)
+				var/obj/item/organ/internal/heart = H.get_organ(BP_HEART)
 				heart.take_internal_damage(heart.max_damage * 0.15)
 
 /decl/material/liquid/stabilizer
@@ -289,6 +307,7 @@
 	scannable = 1
 	metabolism = 0.5 * REM
 	value = 1.5
+	uid = "chem_stabilizer"
 
 /decl/material/liquid/stabilizer/affect_blood(var/mob/living/M, var/alien, var/removed, var/datum/reagents/holder)
 	..()
@@ -302,9 +321,12 @@
 	scannable = 1
 	flags = IGNORE_MOB_SIZE
 	value = 1.5
+	uid = "chem_regenerative_serum"
 
 /decl/material/liquid/regenerator/affect_blood(var/mob/living/M, var/alien, var/removed, var/datum/reagents/holder)
-	M.heal_organ_damage(3 * removed, 3 * removed)
+	..()
+	M.add_chemical_effect_max(CE_REGEN_BRUTE, 3 * removed)
+	M.add_chemical_effect_max(CE_REGEN_BURN, 3 * removed)
 
 /decl/material/liquid/neuroannealer
 	name = "neuroannealer"
@@ -316,6 +338,7 @@
 	scannable = 1
 	flags = IGNORE_MOB_SIZE
 	value = 1.5
+	uid = "chem_neuroannealer"
 
 /decl/material/liquid/neuroannealer/affect_blood(var/mob/living/M, var/alien, var/removed, var/datum/reagents/holder)
 	M.add_chemical_effect(CE_PAINKILLER, 10)
@@ -331,6 +354,7 @@
 	taste_description = "tasteless slickness"
 	scannable = 1
 	color = COLOR_GRAY80
+	uid = "chem_oxygel"
 
 /decl/material/liquid/oxy_meds/affect_blood(var/mob/living/M, var/alien, var/removed, var/datum/reagents/holder)
 	M.add_chemical_effect(CE_OXYGENATED, 1)

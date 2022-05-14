@@ -1,73 +1,87 @@
 /*
-Contains helper procs for airflow, handled in /connection_group.
+Contains helper procs for airflow, called by /connection_group.
 */
+/atom/movable/proc/handle_airflow(var/differential, var/list/connecting_turfs, var/repelled)
+	if(last_airflow > world.time - vsc.airflow_delay || airflow_speed)
+		return FALSE
 
-/mob/var/tmp/last_airflow_stun = 0
-/mob/proc/airflow_stun()
-	if(stat == 2)
-		return 0
-	if(last_airflow_stun > world.time - vsc.airflow_stun_cooldown)	return 0
+	// Knock mobs etc over.
+	. = handle_airflow_stun(differential)
 
-	if(!(status_flags & CANSTUN) && !(status_flags & CANWEAKEN))
-		to_chat(src, "<span class='notice'>You stay upright as the air rushes past you.</span>")
-		return 0
-	if(buckled)
-		to_chat(src, "<span class='notice'>Air suddenly rushes past you!</span>")
-		return 0
-	if(!lying)
-		to_chat(src, "<span class='warning'>The sudden rush of air knocks you over!</span>")
-	SET_STATUS_MAX(src, STAT_WEAK, 5)
-	last_airflow_stun = world.time
+	// Shove things around.
+	if(check_airflow_movable(differential) && length(connecting_turfs))
+		//Check for things that are in range of the midpoint turfs.
+		var/list/close_turfs
+		for(var/turf/connecting_turf AS_ANYTHING in connecting_turfs)
+			if(get_dist(src, connecting_turf) < world.view)
+				LAZYADD(close_turfs, connecting_turf)
+			if(LAZYLEN(close_turfs))
+				airflow_dest = pick(close_turfs) //Pick a random midpoint to fly towards.
+				addtimer(CALLBACK(src, .proc/RepelAirflowDest, differential / (repelled ? 5 : 10)), 0)
 
-/mob/living/silicon/airflow_stun()
+/atom/movable/proc/handle_airflow_stun(var/differential)
 	return
 
-/mob/living/carbon/human/airflow_stun()
+/mob/var/tmp/last_airflow_stun = 0
+/mob/handle_airflow_stun(var/differential)
+	if(differential < vsc.airflow_stun_pressure || stat == DEAD || (status_flags & GODMODE))
+		return FALSE
+	if(last_airflow_stun > world.time - vsc.airflow_stun_cooldown)
+		return FALSE
+	if(!(status_flags & CANSTUN) && !(status_flags & CANWEAKEN))
+		to_chat(src, SPAN_NOTICE("You stay upright as the air rushes past you."))
+		return FALSE
+	if(buckled)
+		to_chat(src, SPAN_NOTICE("Air suddenly rushes past you!"))
+		return FALSE
+	if(!lying)
+		to_chat(src, SPAN_DANGER("The sudden rush of air knocks you over!"))
+	SET_STATUS_MAX(src, STAT_WEAK, 5)
+	last_airflow_stun = world.time
+	return TRUE
+
+/mob/living/silicon/handle_airflow_stun()
+	return FALSE
+
+/mob/living/silicon/handle_airflow()
+	return FALSE
+
+/mob/living/carbon/human/handle_airflow_stun()
 	if(!slip_chance())
-		to_chat(src, "<span class='notice'>Air suddenly rushes past you!</span>")
-		return 0
-	..()
+		to_chat(src, SPAN_NOTICE("Air suddenly rushes past you!"))
+		return FALSE
+	. = ..()
 
 /atom/movable/proc/check_airflow_movable(n)
-
-	if(anchored && !ismob(src)) return 0
-
-	if(!isobj(src) && n < vsc.airflow_dense_pressure) return 0
-
-	return 1
+	return !anchored
 
 /mob/check_airflow_movable(n)
-	if(n < vsc.airflow_heavy_pressure)
-		return 0
-	return 1
+	return (n >= vsc.airflow_heavy_pressure)
 
 /mob/living/silicon/check_airflow_movable()
-	return 0
-
+	return FALSE
 
 /obj/check_airflow_movable(n)
-	if(isnull(w_class))
-		if(n < vsc.airflow_dense_pressure) return 0 //most non-item objs don't have a w_class yet
-	else
-		switch(w_class)
-			if(1,2)
-				if(n < vsc.airflow_lightest_pressure) return 0
-			if(3)
-				if(n < vsc.airflow_light_pressure) return 0
-			if(4,5)
-				if(n < vsc.airflow_medium_pressure) return 0
-			if(6)
-				if(n < vsc.airflow_heavy_pressure) return 0
-			if(7 to INFINITY)
-				if(n < vsc.airflow_dense_pressure) return 0
+	var/threshold = vsc.airflow_dense_pressure
+	switch(w_class)
+		if(1, 2)
+			threshold = vsc.airflow_lightest_pressure
+		if(3)
+			threshold = vsc.airflow_light_pressure
+		if(4, 5)
+			threshold = vsc.airflow_medium_pressure
+		if(6)
+			threshold = vsc.airflow_heavy_pressure
+	if(n < threshold)
+		return FALSE
 	return ..()
 
-
-/atom/movable/var/tmp/turf/airflow_dest
-/atom/movable/var/tmp/airflow_speed = 0
-/atom/movable/var/tmp/airflow_time = 0
-/atom/movable/var/tmp/last_airflow = 0
-/atom/movable/var/tmp/airborne_acceleration = 0
+/atom/movable
+	var/tmp/turf/airflow_dest
+	var/tmp/airflow_speed = 0
+	var/tmp/airflow_time = 0
+	var/tmp/last_airflow = 0
+	var/tmp/airborne_acceleration = 0
 
 /atom/movable/proc/AirflowCanMove(n)
 	return 1

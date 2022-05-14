@@ -53,27 +53,23 @@
 	pulse(0)
 
 /obj/item/assembly/mousetrap/proc/toggle_arming(var/mob/user)
-	if(!armed)
-		to_chat(user, SPAN_NOTICE("You arm [src]."))
-		return TRUE
-
 	if((MUTATION_CLUMSY in user.mutations) && prob(50))
 		var/which_hand = user.get_active_held_item_slot()
 		triggered(user, which_hand)
 		user.visible_message(SPAN_DANGER("\The [user] accidentally sets off [src], hurting their fingers."), \
 							 SPAN_DANGER("You accidentally trigger [src]!"))
 		return TRUE
-
-	to_chat(user, SPAN_NOTICE("You disarm [src]."))
+	
+	if(!armed)
+		to_chat(user, SPAN_NOTICE("You arm [src]."))
+	else
+		to_chat(user, SPAN_NOTICE("You disarm [src]."))
 	armed = !armed
 	update_icon()
 	playsound(user.loc, 'sound/weapons/handcuffs.ogg', 30, 1, -3)
 	return TRUE
 
 /obj/item/assembly/mousetrap/attack_self(mob/user)
-	. = toggle_arming(user) || ..()
-
-/obj/item/assembly/mousetrap/attack_hand(mob/user)
 	. = toggle_arming(user) || ..()
 
 /obj/item/assembly/mousetrap/Crossed(atom/movable/AM)

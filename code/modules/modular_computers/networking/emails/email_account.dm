@@ -24,6 +24,7 @@
 
 /datum/computer_file/data/email_account/New(_login, _fullname, _assignment)
 	login = _login
+	filename = "email[sequential_id(type)]" // shouldn't be immediately apparent whose email it is
 	if(_fullname)
 		fullname = _fullname
 	if(_assignment)

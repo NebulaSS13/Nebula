@@ -61,7 +61,7 @@
 
 /decl/hierarchy/supply_pack/engineering/emitter
 	name = "Equipment - Emitter"
-	contains = list(/obj/machinery/power/emitter = 2)
+	contains = list(/obj/machinery/emitter = 2)
 	containertype = /obj/structure/closet/crate/secure/large
 	containername = "emitter crate"
 	access = access_engine_equip
@@ -82,7 +82,7 @@
 
 /decl/hierarchy/supply_pack/engineering/collector
 	name = "Power - Collector"
-	contains = list(/obj/machinery/power/rad_collector = 2)
+	contains = list(/obj/machinery/rad_collector = 2)
 	containertype = /obj/structure/closet/crate/secure/large
 	containername = "collector crate"
 	access = access_engine_equip
@@ -122,7 +122,7 @@
 
 /decl/hierarchy/supply_pack/engineering/teg
 	name = "Power - Mark I Thermoelectric Generator"
-	contains = list(/obj/machinery/power/generator)
+	contains = list(/obj/machinery/generator)
 	containertype = /obj/structure/closet/crate/secure/large
 	containername = "\improper Mk1 TEG crate"
 	access = access_engine_equip

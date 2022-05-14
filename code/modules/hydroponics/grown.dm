@@ -42,14 +42,14 @@
 	reagents.clear_reagents()
 	// Fill the object up with the appropriate reagents.
 	for(var/rid in seed.chems)
-		var/list/reagent_data = seed.chems[rid]
-		if(reagent_data && reagent_data.len)
-			var/rtotal = reagent_data[1]
-			var/list/data = list()
-			if(reagent_data.len > 1 && potency > 0)
-				rtotal += round(potency/reagent_data[2])
+		var/list/reagent_amounts = seed.chems[rid]
+		if(LAZYLEN(reagent_amounts))
+			var/rtotal = reagent_amounts[1]
+			var/list/data = null
+			if(LAZYACCESS(reagent_amounts,2) && potency > 0)
+				rtotal += round(potency/reagent_amounts[2])
 			if(rid == /decl/material/liquid/nutriment)
-				data[seed.seed_name] = max(1,rtotal)
+				LAZYSET(data, seed.seed_name, max(1,rtotal))
 			reagents.add_reagent(rid,max(1,rtotal),data)
 	update_desc()
 	if(reagents.total_volume > 0)
@@ -184,8 +184,8 @@ var/global/list/_wood_materials = list(
 					for(var/wood_mat in global._wood_materials)
 						if(!isnull(seed.chems[wood_mat]))
 							user.visible_message("<span class='notice'>\The [user] makes planks out of \the [src].</span>")
-							var/obj/item/stack/material/stack = SSmaterials.create_object(wood_mat, user.loc, rand(1,2))
-							stack.add_to_stacks(user, TRUE)
+							for(var/obj/item/stack/material/stack in SSmaterials.create_object(wood_mat, user.loc, rand(1,2)))
+								stack.add_to_stacks(user, TRUE)
 							qdel(src)
 							return TRUE
 

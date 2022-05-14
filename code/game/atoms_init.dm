@@ -32,9 +32,23 @@
 /atom/proc/Initialize(mapload, ...)
 	SHOULD_CALL_PARENT(TRUE)
 	SHOULD_NOT_SLEEP(TRUE)
+
 	if(atom_flags & ATOM_FLAG_INITIALIZED)
 		PRINT_STACK_TRACE("Warning: [src]([type]) initialized multiple times!")
 	atom_flags |= ATOM_FLAG_INITIALIZED
+
+	if(isnull(default_pixel_x))
+		default_pixel_x = pixel_x
+	else
+		pixel_x = default_pixel_x
+	if(isnull(default_pixel_y))
+		default_pixel_y = pixel_y
+	else
+		pixel_y = default_pixel_y
+	if(isnull(default_pixel_z))
+		default_pixel_z = pixel_z
+	else
+		pixel_z = default_pixel_z
 
 	if(light_power && light_range)
 		update_light()
@@ -52,10 +66,14 @@
 	return
 
 /atom/Destroy()
+	UNQUEUE_TEMPERATURE_ATOM(src)
+
 	QDEL_NULL(reagents)
 
 	LAZYCLEARLIST(our_overlays)
 	LAZYCLEARLIST(priority_overlays)
+
+	LAZYCLEARLIST(climbers)
 
 	QDEL_NULL(light)
 
@@ -71,7 +89,7 @@
 	if (!follow_repository.excluded_subtypes[type] && follow_repository.followed_subtypes_tcache[type])
 		follow_repository.add_subject(src)
 
-	if (virtual_mob && ispath(initial(virtual_mob)))
+	if(ispath(virtual_mob))
 		virtual_mob = new virtual_mob(get_turf(src), src)
 
 	// Fire Entered events for freshly created movables.
@@ -79,7 +97,11 @@
 		loc.Entered(src, null)
 
 /atom/movable/Destroy()
+
+	unregister_all_movement(loc, src) // unregister events before destroy to avoid expensive checking
+
 	. = ..()
+
 #ifdef DISABLE_DEBUG_CRASH
 	// meh do nothing. we know what we're doing. pro engineers.
 #else
@@ -98,6 +120,8 @@
 	if (bound_overlay)
 		QDEL_NULL(bound_overlay)
 
-	if(virtual_mob && !ispath(virtual_mob))
-		qdel(virtual_mob)
-		virtual_mob = null
+	if(ismob(virtual_mob))
+		QDEL_NULL(virtual_mob)
+
+	vis_locs = null //clears this atom out of all vis_contents
+	clear_vis_contents(src)

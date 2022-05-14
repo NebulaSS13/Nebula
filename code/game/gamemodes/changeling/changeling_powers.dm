@@ -13,7 +13,7 @@ var/global/list/possible_changeling_IDs = list("Alpha","Beta","Gamma","Delta","E
 	var/isabsorbing = 0
 	var/geneticpoints = 25
 	var/purchasedpowers = list()
-	var/mimicing = ""
+	var/mimicking = ""
 
 /datum/changeling/Destroy()
 	purchasedpowers = null
@@ -309,7 +309,8 @@ var/global/list/possible_changeling_IDs = list("Alpha","Beta","Gamma","Delta","E
 	if(ishuman(src))
 		var/mob/living/carbon/human/H = src
 		var/newSpecies = chosen_dna.speciesName
-		H.set_species(newSpecies,1)
+		H.set_species(newSpecies)
+		H.apply_species_appearance()
 		H.b_type = chosen_dna.dna.b_type
 		H.sync_organ_dna()
 
@@ -650,14 +651,14 @@ var/global/list/datum/absorbed_dna/hivemind_bank = list()
 /mob/proc/changeling_mimicvoice()
 	set category = "Changeling"
 	set name = "Mimic Voice"
-	set desc = "Shape our vocal glands to form a voice of someone we choose. We cannot regenerate chemicals when mimicing."
+	set desc = "Shape our vocal glands to form a voice of someone we choose. We cannot regenerate chemicals when mimicking."
 
 
 	var/datum/changeling/changeling = changeling_power()
 	if(!changeling)	return
 
-	if(changeling.mimicing)
-		changeling.mimicing = ""
+	if(changeling.mimicking)
+		changeling.mimicking = ""
 		to_chat(src, SPAN_NOTICE("We return our vocal glands to their original location."))
 		return
 
@@ -665,18 +666,18 @@ var/global/list/datum/absorbed_dna/hivemind_bank = list()
 	if(!mimic_voice)
 		return
 
-	changeling.mimicing = mimic_voice
+	changeling.mimicking = mimic_voice
 
 	to_chat(src, SPAN_NOTICE("We shape our glands to take the voice of <b>[mimic_voice]</b>, this will stop us from regenerating chemicals while active."))
 	to_chat(src, SPAN_NOTICE("Use this power again to return to our original voice and reproduce chemicals again."))
 	SSstatistics.add_field_details("changeling_powers","MV")
 
 	spawn(0)
-		while(src && src.mind && src.mind.changeling && src.mind.changeling.mimicing)
+		while(src && src.mind && src.mind.changeling && src.mind.changeling.mimicking)
 			src.mind.changeling.chem_charges = max(src.mind.changeling.chem_charges - 1, 0)
 			sleep(40)
 		if(src && src.mind && src.mind.changeling)
-			src.mind.changeling.mimicing = ""
+			src.mind.changeling.mimicking = ""
 	//////////
 	//STINGS//	//They get a pretty header because there's just so fucking many of them ;_;
 	//////////

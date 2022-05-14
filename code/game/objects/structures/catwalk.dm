@@ -11,6 +11,8 @@
 	handle_generic_blending = TRUE
 	tool_interaction_flags = TOOL_INTERACTION_DECONSTRUCT
 	material = /decl/material/solid/metal/steel
+	parts_type = /obj/item/stack/material/rods
+	parts_amount = 2
 
 	var/hatch_open = FALSE
 	var/decl/flooring/tiling/plated_tile
@@ -56,23 +58,17 @@
 
 /obj/structure/catwalk/on_update_icon()
 	update_connections()
-	overlays.Cut()
+	..()
 	icon_state = ""
-	var/image/I
 	if(!hatch_open)
 		for(var/i = 1 to 4)
-			I = image(icon, "catwalk[connections ? connections[i] : "0"]", dir = 1<<(i-1))
-			overlays += I
+			add_overlay(image(icon, "catwalk[connections ? connections[i] : "0"]", dir = BITFLAG(i-1)))
 	if(plated_tile)
-		I = image(icon, "plated")
+		var/image/I = image(icon, "plated")
 		I.color = plated_tile.color
-		overlays += I
+		add_overlay(I)
 
 /obj/structure/catwalk/create_dismantled_products(var/turf/T)
-	if(material)
-		material.create_object(get_turf(src), 2, /obj/item/stack/material/rods)
-		matter -= material.type
-		material = null
 	if(plated_tile)
 		var/plate_path = plated_tile.build_type
 		new plate_path(T)
@@ -82,6 +78,19 @@
 	..()
 	if(!QDELETED(src) && severity != 3)
 		physically_destroyed()
+
+/obj/structure/catwalk/grab_attack(var/obj/item/grab/G)
+	var/mob/living/affecting_mob = G.get_affecting_mob()
+	if(atom_flags & ATOM_FLAG_CLIMBABLE)
+		var/obj/occupied = turf_is_crowded()
+		if (occupied)
+			to_chat(G.assailant, SPAN_WARNING("There's \a [occupied] in the way."))
+			return TRUE
+		G.affecting.forceMove(src.loc)
+		if(affecting_mob)
+			SET_STATUS_MAX(affecting_mob, STAT_WEAK, rand(2,5))
+		visible_message(SPAN_DANGER("[G.assailant] puts [G.affecting] on \the [src]."))
+		return TRUE
 
 /obj/structure/catwalk/attack_robot(var/mob/user)
 	if(Adjacent(user))

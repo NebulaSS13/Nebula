@@ -1,27 +1,26 @@
 /obj/item/grab
 	name = "grab"
-	canremove = 0
-	item_flags = ITEM_FLAG_NO_BLUDGEON
-	w_class = ITEM_SIZE_NO_CONTAINER
-
+	canremove =    FALSE
+	item_flags =   ITEM_FLAG_NO_BLUDGEON
+	w_class =      ITEM_SIZE_NO_CONTAINER
 	pickup_sound = null
 	drop_sound =   null
 	equip_sound =  null
 
-	var/atom/movable/affecting = null
-	var/mob/assailant = null
-	var/decl/grab/current_grab
-	var/last_action
-	var/last_upgrade
-	var/special_target_functional = 1
-	var/attacking = 0
-	var/target_zone
-	var/done_struggle = FALSE // Used by struggle grab datum to keep track of state.
+	var/atom/movable/affecting             // Atom being targeted by this grab.
+	var/mob/assailant                      // Mob that instantiated this grab.
+	var/decl/grab/current_grab             // Current grab archetype, used to handle actions/overrides/etc.
+	var/last_action                        // Tracks world.time of last action.
+	var/last_upgrade                       // Tracks world.time of last upgrade.
+	var/special_target_functional = TRUE   // Indicates if the current grab has special interactions applied to the target organ (eyes and mouth at time of writing)
+	var/is_currently_resolving_hit = FALSE // Used to avoid stacking interactions that sleep during /decl/grab/proc/on_hit_foo() (ie. do_after() is used)
+	var/target_zone                        // Records a specific bodypart that was targetted by this grab.
+	var/done_struggle = FALSE              // Used by struggle grab datum to keep track of state.
 
 /*
 	This section is for overrides of existing procs.
 */
-/obj/item/grab/Initialize(mapload, atom/movable/target, var/use_grab_state)
+/obj/item/grab/Initialize(mapload, atom/movable/target, var/use_grab_state, var/defer_hand)
 	. = ..(mapload)
 	if(. == INITIALIZE_HINT_QDEL)
 		return
@@ -30,7 +29,7 @@
 	if(!istype(current_grab))
 		return INITIALIZE_HINT_QDEL
 	assailant = loc
-	if(!istype(assailant) || !assailant.add_grab(src))
+	if(!istype(assailant) || !assailant.add_grab(src, defer_hand = defer_hand))
 		return INITIALIZE_HINT_QDEL
 	affecting = target
 	if(!istype(affecting))
@@ -48,7 +47,7 @@
 	LAZYADD(affecting.grabbed_by, src) // This is how we handle affecting being deleted.
 	adjust_position()
 	action_used()
-	assailant.do_attack_animation(affecting)
+	INVOKE_ASYNC(assailant, /atom/movable/proc/do_attack_animation, affecting)
 	playsound(affecting.loc, 'sound/weapons/thudswoosh.ogg', 50, 1, -1)
 	update_icon()
 
@@ -94,18 +93,21 @@
 			upgrade()
 
 /obj/item/grab/attack(mob/M, mob/living/user)
-	current_grab.hit_with_grab(src)
+	return FALSE
+
+/obj/item/grab/afterattack(atom/target, mob/user, proximity_flag, click_parameters)
+	if(QDELETED(src) || !current_grab || !assailant || proximity_flag) // Close-range is handled in resolve_attackby().
+		return
+	if(current_grab.hit_with_grab(src, target, proximity_flag))
+		return
+	. = ..()
 
 /obj/item/grab/resolve_attackby(atom/A, mob/user, var/click_params)
-	if(QDELETED(src) || !assailant)
+	if(QDELETED(src) || !current_grab || !assailant)
 		return TRUE
-	assailant.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
-	if(!A.grab_attack(src))
-		return ..()
-	action_used()
-	if (current_grab.downgrade_on_action)
-		downgrade()
-	return TRUE
+	if(A.grab_attack(src) || current_grab.hit_with_grab(src, A, get_dist(user, A) <= 1))
+		return TRUE
+	. = ..()
 
 /obj/item/grab/dropped()
 	..()
@@ -117,10 +119,10 @@
 		return TRUE
 
 /obj/item/grab/Destroy()
+	var/atom/old_affecting = affecting
 	if(affecting)
 		events_repository.unregister(/decl/observ/dismembered, affecting, src)
 		events_repository.unregister(/decl/observ/moved, affecting, src)
-		reset_position()
 		LAZYREMOVE(affecting.grabbed_by, src)
 		affecting.reset_plane_and_layer()
 		affecting = null
@@ -128,7 +130,10 @@
 		if(assailant.zone_sel)
 			events_repository.unregister(/decl/observ/zone_selected, assailant.zone_sel, src)
 		assailant = null
-	return ..()
+	. = ..()
+	if(old_affecting)
+		old_affecting.reset_offsets(5)
+		old_affecting.reset_plane_and_layer()
 
 /*
 	This section is for newly defined useful procs.
@@ -221,6 +226,7 @@
 	var/decl/grab/downgrab = current_grab.downgrade(src)
 	if(downgrab)
 		current_grab = downgrab
+		adjust_position()
 		update_icon()
 
 /obj/item/grab/on_update_icon()
@@ -236,21 +242,22 @@
 	current_grab.handle_resist(src)
 
 /obj/item/grab/proc/adjust_position(var/force = 0)
-	if(force)
+
+	if(!QDELETED(assailant) && force)
 		affecting.forceMove(assailant.loc)
-	if(!assailant || !affecting || !assailant.Adjacent(affecting))
+
+	if(QDELETED(assailant) || QDELETED(affecting) || !assailant.IsMultiZAdjacent(affecting))
 		qdel(src)
 		return 0
+
 	var/adir = get_dir(assailant, affecting)
 	if(assailant)
 		assailant.set_dir(adir)
 	if(current_grab.same_tile)
 		affecting.forceMove(get_turf(assailant))
 		affecting.set_dir(assailant.dir)
-	affecting.adjust_pixel_offsets_for_grab(src, adir)
-
-/obj/item/grab/proc/reset_position()
-	affecting.reset_pixel_offsets_for_grab(src)
+	affecting.reset_offsets(5)
+	affecting.reset_plane_and_layer()
 
 /*
 	This section is for the simple procs used to return things from current_grab.
@@ -281,7 +288,9 @@
 	return current_grab.force_danger
 
 /obj/item/grab/proc/grab_slowdown()
-	return max(CEILING(affecting?.get_object_size() * current_grab.grab_slowdown), 1)
+	. = CEILING(affecting?.get_object_size() * current_grab.grab_slowdown)
+	. /= (affecting?.movable_flags & MOVABLE_FLAG_WHEELED) ? 2 : 1
+	. = max(.,1)
 
 /obj/item/grab/proc/assailant_moved()
 	affecting.glide_size = assailant.glide_size // Note that this is called _after_ the Move() call resolves, so while it adjusts affecting's move animation, it won't adjust anything else depending on it.

@@ -31,7 +31,7 @@
 		transfer_amount = N
 
 /obj/structure/iv_drip/on_update_icon()
-	cut_overlays()
+	..()
 
 	var/mutable_appearance/base = mutable_appearance(icon, "nothing")
 	base.icon_state = "[beaker ? "beaker" : "nothing"][attached ? "_hooked" : ""]"

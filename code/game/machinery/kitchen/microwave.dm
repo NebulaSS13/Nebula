@@ -263,9 +263,8 @@
 	//Any leftover reagents are divided amongst the foods
 	var/total = reagents.total_volume
 	for (var/obj/item/I in cooked_items)
-		if(I.reagents)
-			reagents.trans_to_holder(I.reagents, total/cooked_items.len)
-			I.dropInto(loc) // since eject only ejects ingredients!
+		reagents.trans_to_holder(I.reagents, total/cooked_items.len)
+		I.dropInto(loc) // since eject only ejects ingredients!
 
 	dispose(message = FALSE) //clear out anything left
 
@@ -309,13 +308,13 @@
 		icon_state = "mw1"
 
 	set_light(1, 1.5)
-	soundloop.start()
+	soundloop.start(src)
 	update_icon()
 	SSnano.update_uis(src)
 
 /obj/machinery/microwave/proc/after_finish_loop()
 	set_light(0)
-	soundloop.stop()
+	soundloop.stop(src)
 	update_icon()
 
 /obj/machinery/microwave/proc/stop(var/abort = FALSE)

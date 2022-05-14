@@ -30,6 +30,9 @@
 	rag = null
 	return ..()
 
+/obj/item/chems/drinks/bottle/on_reagent_change()
+	return
+
 //when thrown on impact, bottles smash and spill their contents
 /obj/item/chems/drinks/bottle/throw_impact(atom/hit_atom, var/datum/thrownthing/TT)
 	..()
@@ -335,7 +338,7 @@
 
 /obj/item/chems/drinks/bottle/kahlua/Initialize()
 	. = ..()
-	reagents.add_reagent(/decl/material/liquid/ethanol/coffee/kahlua, 100)
+	reagents.add_reagent(/decl/material/liquid/ethanol/coffee, 100)
 
 /obj/item/chems/drinks/bottle/goldschlager
 	name = "College Girl Goldschlager"

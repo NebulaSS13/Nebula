@@ -2,6 +2,7 @@
 /obj/item/organ/internal/liver
 	name = "liver"
 	icon_state = "liver"
+	prosthetic_icon = "liver-prosthetic"
 	w_class = ITEM_SIZE_SMALL
 	organ_tag = BP_LIVER
 	parent_organ = BP_GROIN
@@ -9,10 +10,6 @@
 	min_broken_damage = 45
 	max_damage = 70
 	relative_size = 60
-
-/obj/item/organ/internal/liver/robotize(var/company = /decl/prosthetics_manufacturer, var/skip_prosthetics, var/keep_organs, var/apply_material = /decl/material/solid/metal/steel)
-	. = ..()
-	icon_state = "liver-prosthetic"
 
 /obj/item/organ/internal/liver/Process()
 

@@ -1,11 +1,11 @@
 /obj/machinery/computer/modular
-	name = "console"
+	name = "modular console"
 	maximum_component_parts = list(/obj/item/stock_parts = 14)	//There's a lot of stuff that goes in these
 	var/list/interact_sounds = list("keyboard", "keystroke")
 	var/wired_connection = FALSE // Whether or not this console will start with a wired connection beneath it.
 
 /obj/machinery/computer/modular/Initialize()
-	set_extension(src, /datum/extension/interactive/ntos/console)
+	set_extension(src, /datum/extension/interactive/os/console)
 	. = ..()
 
 /obj/machinery/computer/modular/populate_parts(full_populate)
@@ -16,20 +16,20 @@
 /obj/machinery/computer/modular/Process()
 	if(stat & NOPOWER)
 		return
-	var/datum/extension/interactive/ntos/os = get_extension(src, /datum/extension/interactive/ntos)
+	var/datum/extension/interactive/os/os = get_extension(src, /datum/extension/interactive/os)
 	if(os)
 		os.Process()
 
 /obj/machinery/computer/modular/power_change()
 	. = ..()
 	if(. && (stat & NOPOWER))
-		var/datum/extension/interactive/ntos/os = get_extension(src, /datum/extension/interactive/ntos)
+		var/datum/extension/interactive/os/os = get_extension(src, /datum/extension/interactive/os)
 		if(os)
 			os.event_powerfailure()
 			os.system_shutdown()
 
 /obj/machinery/computer/modular/interface_interact(mob/user)
-	var/datum/extension/interactive/ntos/os = get_extension(src, /datum/extension/interactive/ntos)
+	var/datum/extension/interactive/os/os = get_extension(src, /datum/extension/interactive/os)
 	if(os)
 		if(!os.on)
 			if(!CanInteract(user, DefaultTopicState()))
@@ -40,12 +40,12 @@
 	return TRUE
 
 /obj/machinery/computer/modular/get_screen_overlay()
-	var/datum/extension/interactive/ntos/os = get_extension(src, /datum/extension/interactive/ntos)
+	var/datum/extension/interactive/os/os = get_extension(src, /datum/extension/interactive/os)
 	if(os)
 		return os.get_screen_overlay()
 
 /obj/machinery/computer/modular/get_keyboard_overlay()
-	var/datum/extension/interactive/ntos/os = get_extension(src, /datum/extension/interactive/ntos)
+	var/datum/extension/interactive/os/os = get_extension(src, /datum/extension/interactive/os)
 	if(os)
 		return os.get_keyboard_overlay()
 
@@ -78,7 +78,7 @@
 /obj/machinery/computer/modular/CtrlAltClick(mob/user)
 	if(!CanPhysicallyInteract(user))
 		return
-	var/datum/extension/interactive/ntos/os = get_extension(src, /datum/extension/interactive/ntos)
+	var/datum/extension/interactive/os/os = get_extension(src, /datum/extension/interactive/os)
 	if(os)
 		os.open_terminal(user)
 
@@ -90,7 +90,7 @@
 	if(!CanPhysicallyInteract(usr))
 		return
 
-	var/datum/extension/interactive/ntos/os = get_extension(src, /datum/extension/interactive/ntos)
+	var/datum/extension/interactive/os/os = get_extension(src, /datum/extension/interactive/os)
 	if(os && os.on)
 		to_chat(usr, "You press a hard-reset button on \the [src].")
 		os.system_shutdown()

@@ -44,6 +44,7 @@ STACK_SUBTYPES(iron,           "iron",                          solid/metal/iron
 STACK_SUBTYPES(copper,         "copper",                        solid/metal/copper,         ingot,      null)
 STACK_SUBTYPES(sandstone,      "sandstone",                     solid/stone/sandstone,      brick,      null)
 STACK_SUBTYPES(marble,         "marble",                        solid/stone/marble,         brick,      null)
+STACK_SUBTYPES(graphite,       "graphite",                      solid/graphite,             brick,      null)
 STACK_SUBTYPES(diamond,        "diamond",                       solid/gemstone/diamond,     gemstone,   null)
 STACK_SUBTYPES(uranium,        "uranium",                       solid/metal/uranium,        puck,       null)
 STACK_SUBTYPES(plastic,        "plastic",                       solid/plastic,              panel,      null)
@@ -94,5 +95,8 @@ STACK_SUBTYPES(blue,           "blue cloth",                    solid/cloth/blue
 STACK_SUBTYPES(beige,          "beige cloth",                   solid/cloth/beige,          bolt,       null)
 STACK_SUBTYPES(lime,           "lime cloth",                    solid/cloth/lime,           bolt,       null)
 STACK_SUBTYPES(red,            "red cloth",                     solid/cloth/red,            bolt,       null)
+STACK_SUBTYPES(steel,          "steel",                         solid/metal/steel,          strut,      null)
+STACK_SUBTYPES(aluminium,      "aluminium",                     solid/metal/aluminium,      strut,      null)
+STACK_SUBTYPES(titanium,       "titanium",                      solid/metal/titanium,       strut,      null)
 
 #undef STACK_SUBTYPES

@@ -1,6 +1,6 @@
 /spell/targeted/torment
 	name = "Torment"
-	desc = "this spell causes pain to all those in its radius."
+	desc = "Darkness stabs at the bodies of those around you. All within a medium range will suffer significant pain."
 	feedback = "TM"
 	school = "illusion"
 	charge_max = 150

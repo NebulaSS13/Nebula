@@ -825,7 +825,7 @@
 	},
 /area/map_template/rescue_base/base)
 "bV" = (
-/obj/effect/landmark{
+/obj/abstract/landmark{
 	name = "Response Team"
 	},
 /turf/unsimulated/floor{
@@ -2101,7 +2101,7 @@
 	},
 /area/map_template/rescue_base/base)
 "eu" = (
-/obj/machinery/power/emitter,
+/obj/machinery/emitter,
 /turf/unsimulated/floor{
 	dir = 1;
 	icon_state = "vault"
@@ -2225,10 +2225,10 @@
 /obj/item/taperoll/atmos,
 /obj/item/multitool,
 /obj/item/multitool,
-/obj/item/tape_roll,
-/obj/item/tape_roll,
-/obj/item/tape_roll,
-/obj/item/tape_roll,
+/obj/item/ducttape,
+/obj/item/ducttape,
+/obj/item/ducttape,
+/obj/item/ducttape,
 /obj/item/cell/high,
 /obj/item/cell/high,
 /obj/item/cell/high,

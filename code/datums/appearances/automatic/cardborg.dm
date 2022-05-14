@@ -34,9 +34,9 @@
 	var/decl/cardborg_appearance/ca = appearances[H.back.type]
 	if(!ca) ca = appearances[/obj/item/storage/backpack]
 
-	var/image/I = image(icon = 'icons/mob/robots.dmi', icon_state = ca.icon_state, loc = H)
+	var/image/I = image(icon = ca.icon, icon_state = ca.icon_state, loc = H)
 	I.override = 1
-	I.overlays += image(icon = 'icons/mob/robots.dmi', icon_state = "eyes-[ca.icon_state]") //gotta look realistic
+	I.overlays += image(icon = ca.icon, icon_state = "[ca.icon_state]-eyes") //gotta look realistic
 	return I
 
 /decl/appearance_handler/cardborg/proc/init_appearances()
@@ -47,11 +47,11 @@
 
 /decl/cardborg_appearance
 	var/backpack_type
-	var/icon_state
+	var/icon_state = ICON_STATE_WORLD
+	var/icon = 'icons/mob/robots/robot.dmi'
 	backpack_type = /obj/item/storage/backpack
 
 /decl/cardborg_appearance/standard
-	icon_state = "robot"
 
 /decl/cardborg_appearance/standard/satchel1
 	backpack_type = /obj/item/storage/backpack/satchel
@@ -60,39 +60,39 @@
 	backpack_type = /obj/item/storage/backpack/satchel/grey
 
 /decl/cardborg_appearance/engineering
-	icon_state = "engineerrobot"
+	icon = 'icons/mob/robots/robot_engineer_old.dmi'
 	backpack_type = /obj/item/storage/backpack/industrial
 
 /decl/cardborg_appearance/engineering/satchel
 	backpack_type = /obj/item/storage/backpack/satchel/eng
 
 /decl/cardborg_appearance/medical
-	icon_state = "Medbot"
+	icon = 'icons/mob/robots/robot_medical_old.dmi'
 	backpack_type = /obj/item/storage/backpack/medic
 
 /decl/cardborg_appearance/medical/satchel
 	backpack_type = /obj/item/storage/backpack/satchel/med
 
 /decl/cardborg_appearance/science
-	icon_state = "droid-science"
+	icon = 'icons/mob/robots/robot_droid_science.dmi'
 	backpack_type = /obj/item/storage/backpack/toxins
 
 /decl/cardborg_appearance/security
-	icon_state = "securityrobot"
+	icon = 'icons/mob/robots/robot_security_old.dmi'
 	backpack_type = /obj/item/storage/backpack/security
 
 /decl/cardborg_appearance/security/satchel
 	backpack_type = /obj/item/storage/backpack/satchel/sec
 
 /decl/cardborg_appearance/centcom
-	icon_state = "centcomborg"
+	icon = 'icons/mob/robots/robot_centcomm.dmi'
 	backpack_type = /obj/item/storage/backpack/captain
 
 /decl/cardborg_appearance/centcom/satchel
 	backpack_type = /obj/item/storage/backpack/satchel/cap
 
 /decl/cardborg_appearance/syndicate
-	icon_state = "droid-combat"
+	icon = 'icons/mob/robots/robot_combat.dmi'
 	backpack_type = /obj/item/storage/backpack/dufflebag/syndie
 
 /decl/cardborg_appearance/syndicate/med

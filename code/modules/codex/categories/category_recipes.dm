@@ -2,9 +2,8 @@
 	name = "Recipes"
 	desc = "Recipes for a variety of different kinds of foods and condiments."
 	guide_name = "Cooking"
-	guide_strings = list("chef", "cooking", "recipes")
 
-/decl/codex_category/recipes/Initialize()
+/decl/codex_category/recipes/Populate()
 
 	var/list/entries_to_register = list()
 
@@ -20,29 +19,26 @@
 		<li>Mix flour and protein (ground meat) to make meatballs.</li>
 		</ul>"}
 
-	for(var/reactiontype in subtypesof(/datum/chemical_reaction/recipe))
-		var/datum/chemical_reaction/recipe/food = SSmaterials.chemical_reactions[reactiontype]
-		if(!food || !food.name || food.hidden_from_codex)
+	for(var/reactiontype in subtypesof(/decl/chemical_reaction/recipe))
+		var/decl/chemical_reaction/recipe/food = GET_DECL(reactiontype)
+		if(!food || !food.name || food.hidden_from_codex || food.is_abstract())
 			continue
 
 		var/mechanics_text
 		var/lore_text
-		var/product_name
 		var/category_name
-		if(istype(food, /datum/chemical_reaction/recipe/food))
-			var/datum/chemical_reaction/recipe/food/food_ref = food
+		if(istype(food, /decl/chemical_reaction/recipe/food))
+			var/decl/chemical_reaction/recipe/food/food_ref = food
 			var/obj/item/product = food_ref.obj_result
 			if(!product)
 				continue
 			category_name = "mix recipe"
-			product_name = initial(product.name)
 			lore_text = initial(product.desc)
 			mechanics_text = "This recipe produces \a [initial(product.name)].<br>It should be performed in a mixing bowl or beaker, and requires the following ingredients:"
 		else
 			var/decl/material/product = food.result
 			if(!product)
 				continue
-			product_name = initial(product.name)
 			lore_text = initial(product.lore_text)
 			if(ispath(food.result, /decl/material/liquid/drink) || ispath(food.result, /decl/material/liquid/ethanol))
 				category_name = "drink recipe"
@@ -54,14 +50,14 @@
 		var/list/reactant_values = list()
 		for(var/reactant_id in food.required_reagents)
 			var/decl/material/reactant = reactant_id
-			reactant_values += "[food.required_reagents[reactant_id]]u [lowertext(initial(reactant.name))]"
+			reactant_values += "[food.required_reagents[reactant_id]]u <l>[lowertext(initial(reactant.name))]</l>"
 		mechanics_text += " [jointext(reactant_values, " + ")]"
 		var/list/catalysts = list()
 		for(var/catalyst_id in food.catalysts)
 			var/decl/material/catalyst = catalyst_id
-			catalysts += "[food.catalysts[catalyst_id]]u [lowertext(initial(catalyst.name))]"
+			catalysts += "[food.catalysts[catalyst_id]]u <l>[lowertext(initial(catalyst.name))]</l>"
 		if(catalysts.len)
-			mechanics_text += " [jointext(reactant_values, " + ")] (catalysts: [jointext(catalysts, ", ")])]"
+			mechanics_text += " (catalysts: [jointext(catalysts, ", ")])]"
 		if(food.maximum_temperature != INFINITY)
 			mechanics_text += "<br>The recipe will not succeed if the temperature is above [food.maximum_temperature]K."
 		if(food.minimum_temperature > 0)
@@ -69,9 +65,6 @@
 
 		entries_to_register += new /datum/codex_entry(                     \
 		 _display_name =       "[lowertext(food.name)] ([category_name])", \
-		 _associated_strings = list(                                       \
-		 	lowertext(food.name),                                          \
-			lowertext(product_name)),                                      \
 		 _lore_text =          lore_text,                                  \
 		 _mechanics_text =     mechanics_text,                             \
 		)
@@ -79,7 +72,7 @@
 	var/list/all_recipes = decls_repository.get_decls_of_subtype(/decl/recipe)
 	for(var/rtype in all_recipes)
 		var/decl/recipe/recipe = all_recipes[rtype]
-		if(!istype(recipe) || recipe.hidden_from_codex || !recipe.result)
+		if(!istype(recipe) || recipe.hidden_from_codex || !recipe.result || recipe.is_abstract())
 			continue
 
 		var/mechanics_text = ""
@@ -89,10 +82,11 @@
 		var/list/ingredients = list()
 		for(var/thing in recipe.reagents)
 			var/decl/material/thing_reagent = thing
-			ingredients += "[recipe.reagents[thing]]u [initial(thing_reagent.name)]"
+			ingredients += "[recipe.reagents[thing]]u <l>[initial(thing_reagent.name)]</l>"
 		for(var/thing in recipe.items)
 			var/atom/thing_atom = thing
-			ingredients += "\a [initial(thing_atom.name)]"
+			var/count = recipe.items[thing]
+			ingredients += (count > 1) ? "[count]x <l>[initial(thing_atom.name)]</l>" : "\a <l>[initial(thing_atom.name)]</l>"
 		for(var/thing in recipe.fruit)
 			ingredients += "[recipe.fruit[thing]] [thing]\s"
 		mechanics_text += "<ul><li>[jointext(ingredients, "</li><li>")]</li></ul>"
@@ -107,14 +101,12 @@
 
 		entries_to_register += new /datum/codex_entry(             \
 		 _display_name =       "[recipe_name] (microwave recipe)", \
-		 _associated_strings = list(lowertext(recipe_name)),       \
 		 _lore_text =          lore_text,                          \
 		 _mechanics_text =     mechanics_text,                     \
 		 _antag_text =         recipe.antag_text                   \
 		)
 
 	for(var/datum/codex_entry/entry in entries_to_register)
-		SScodex.add_entry_by_string(entry.name, entry)
 		items |= entry.name
 
 	. = ..()

@@ -40,7 +40,7 @@
 			target_amount = 1
 			loot = "a gravitational generator"
 		if(3)
-			target = /obj/machinery/power/emitter
+			target = /obj/machinery/emitter
 			target_amount = 4
 			loot = "four emitters"
 		if(4)

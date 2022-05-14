@@ -101,6 +101,20 @@
 	else
 		return ..()
 
+
+/obj/item/storage/wallet/AltClick(mob/user)
+	if (user != loc || user.incapacitated() || !ishuman(user))
+		return ..()
+
+	var/obj/item/card/id/id = GetIdCard()
+	if (istype(id))
+		remove_from_storage(id)
+		user.put_in_hands(id)
+		return
+
+	return ..()
+
+
 /obj/item/storage/wallet/random/Initialize()
 	. = ..()
 	var/item1_type = pick( /obj/item/cash/c10,/obj/item/cash/c100,/obj/item/cash/c1000,/obj/item/cash/c20,/obj/item/cash/c200,/obj/item/cash/c50, /obj/item/cash/c500)

@@ -1,8 +1,8 @@
 /obj/item/storage/messenger
 	name = "messenger bag"
 	desc = "A small green-grey messenger bag with a blue Corvid Couriers logo on it."
-	icon = 'icons/mob/simple_animal/crow.dmi'
-	icon_state = "messenger_bag"
+	icon = 'icons/obj/items/messenger_bag.dmi'
+	icon_state = ICON_STATE_WORLD
 	storage_slots = 7
 	w_class = ITEM_SIZE_SMALL
 	max_w_class = ITEM_SIZE_SMALL
@@ -11,9 +11,6 @@
 	name = "crow"
 	desc = "A large crow. Caw caw."
 	icon = 'icons/mob/simple_animal/crow.dmi'
-	icon_state = "crow"
-	icon_living = "crow"
-	icon_dead = "crow_dead"
 	pass_flags = PASS_FLAG_TABLE
 	mob_size = MOB_SIZE_SMALL
 
@@ -133,10 +130,7 @@
 /mob/living/simple_animal/crow/on_update_icon()
 	..()
 	if(messenger_bag)
-		if(icon_state != icon_dead)
-			add_overlay("bag")
-		else
-			add_overlay("bag_dead")
+		add_overlay("[icon_state]-bag")
 
 /mob/living/simple_animal/crow/cyber
 	name = "cybercrow"
@@ -145,8 +139,5 @@
 
 /mob/living/simple_animal/crow/cyber/on_update_icon()
 	..()
-	if(icon_state != icon_dead)
-		add_overlay("cyber")
-	else
-		add_overlay("cyber_dead")
+	add_overlay("[icon_state]-cyber")
 

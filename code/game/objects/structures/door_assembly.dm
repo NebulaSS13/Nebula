@@ -45,6 +45,28 @@
 		bound_width = world.icon_size
 		bound_height = width * world.icon_size
 
+/obj/structure/door_assembly/examine(mob/user)
+	. = ..()
+	switch(state)
+		if(0)
+			to_chat(user, "Use a wrench to [anchored ? "un" : ""]anchor it.")
+			if(!anchored)
+				if(glass == 1)
+					var/decl/material/glass_material_datum = GET_DECL(glass_material)
+					if(glass_material_datum)
+						var/mat_name = glass_material_datum.solid_name || glass_material_datum.name
+						to_chat(user, "Use a welder to remove the [mat_name] plating currently attached.")
+				else
+					to_chat(user, "Use a welder to disassemble completely.")
+			else
+				to_chat(user, "Use a cable coil to wire in preparation for electronics.")
+		if(1)
+			to_chat(user, "Use a wirecutter to remove the wiring and expose the frame.")
+			to_chat(user, "Insert electronics to proceed with construction.")
+		if(2)
+			to_chat(user, "Use a crowbar to remove the electronics.")
+			to_chat(user, "Use a screwdriver to complete assembly.")
+
 /obj/structure/door_assembly/door_assembly_hatch
 	icon = 'icons/obj/doors/hatch/door.dmi'
 	panel_icon = 'icons/obj/doors/hatch/panel.dmi'
@@ -86,6 +108,7 @@
 	paintable = 0
 
 /obj/structure/door_assembly/blast/on_update_icon()
+	return
 
 /obj/structure/door_assembly/blast/morgue
 	name = "morgue door assembly"
@@ -102,7 +125,7 @@
 /obj/structure/door_assembly/attackby(obj/item/W, mob/user)
 
 	if(istype(W, /obj/item/pen))
-		var/t = sanitizeSafe(input(user, "Enter the name for the door.", src.name, src.created_name), MAX_NAME_LEN)
+		var/t = sanitize_safe(input(user, "Enter the name for the door.", src.name, src.created_name), MAX_NAME_LEN)
 		if(!t)	return
 		if(!in_range(src, usr) && src.loc != usr)	return
 		created_name = t
@@ -239,7 +262,7 @@
 		..()
 
 /obj/structure/door_assembly/on_update_icon()
-	overlays.Cut()
+	..()
 	var/image/filling_overlay
 	var/image/panel_overlay
 	var/final_name = ""
@@ -259,5 +282,5 @@
 			panel_overlay = image(panel_icon, "construction1")
 	final_name += "[glass == 1 ? "Window " : ""][istext(glass) ? "[glass] Airlock" : base_name] Assembly"
 	SetName(final_name)
-	overlays += filling_overlay
-	overlays += panel_overlay
+	add_overlay(filling_overlay)
+	add_overlay(panel_overlay)

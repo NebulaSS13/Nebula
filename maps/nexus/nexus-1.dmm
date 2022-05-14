@@ -305,7 +305,7 @@
 /obj/machinery/alarm{
 	dir = 1
 	},
-/obj/effect/landmark/latejoin/cryo,
+/obj/abstract/landmark/latejoin/cryo,
 /turf/simulated/floor/tiled/white,
 /area/nexus/civilian)
 "cQ" = (
@@ -357,7 +357,7 @@
 /obj/machinery/power/apc{
 	dir = 1
 	},
-/obj/effect/landmark/latejoin/cryo,
+/obj/abstract/landmark/latejoin/cryo,
 /turf/simulated/floor/tiled/white,
 /area/nexus/civilian)
 "de" = (
@@ -778,7 +778,7 @@
 /obj/structure/window/borosilicate_reinforced{
 	dir = 1
 	},
-/obj/machinery/power/emitter/gyrotron/anchored{
+/obj/machinery/emitter/gyrotron/anchored{
 	dir = 1;
 	initial_id_tag = "main"
 	},
@@ -789,6 +789,7 @@
 	icon_state = "0-8"
 	},
 /obj/structure/catwalk,
+/obj/machinery/power/terminal,
 /turf/simulated/floor/plating,
 /area/nexus/engineering/engine)
 "hn" = (
@@ -1903,7 +1904,7 @@
 /obj/machinery/atmospherics/unary/vent_scrubber/on{
 	dir = 4
 	},
-/obj/effect/landmark/latejoin/cryo,
+/obj/abstract/landmark/latejoin/cryo,
 /turf/simulated/floor/tiled/white,
 /area/nexus/civilian)
 "rP" = (
@@ -2360,10 +2361,7 @@
 /turf/simulated/floor/tiled,
 /area/nexus/hallway/starboard/fore)
 "we" = (
-/obj/structure/sealant_injector{
-	anchored = 1;
-	density = 1
-	},
+/obj/structure/sealant_injector,
 /obj/item/gun/launcher/sealant/mapped,
 /obj/effect/floor_decal/corner/yellow/diagonal,
 /obj/effect/floor_decal/industrial/outline/yellow,
@@ -2557,6 +2555,10 @@
 /obj/structure/catwalk,
 /turf/simulated/floor/plating,
 /area/nexus/command)
+"xX" = (
+/obj/abstract/level_data/main_level,
+/turf/space,
+/area/space)
 "yf" = (
 /obj/effect/floor_decal/corner/lightgrey/diagonal,
 /obj/structure/cable{
@@ -2605,7 +2607,7 @@
 /turf/simulated/floor/tiled,
 /area/nexus/hallway/starboard/aft)
 "yE" = (
-/obj/machinery/power/port_gen/pacman/super,
+/obj/machinery/port_gen/pacman/super,
 /obj/structure/cable,
 /obj/effect/floor_decal/industrial/warning{
 	dir = 1
@@ -2760,7 +2762,7 @@
 /turf/simulated/floor/tiled/white,
 /area/nexus/civilian)
 "Ay" = (
-/obj/structure/stairs/west,
+/obj/structure/stairs/long/west,
 /turf/simulated/floor/plating,
 /area/nexus/civilian)
 "AA" = (
@@ -3684,7 +3686,7 @@
 /obj/structure/sign/warning/secure_area{
 	pixel_y = -24
 	},
-/obj/effect/landmark/latejoin/cryo,
+/obj/abstract/landmark/latejoin/cryo,
 /turf/simulated/floor/tiled/white,
 /area/nexus/civilian)
 "IQ" = (
@@ -3779,7 +3781,7 @@
 /turf/simulated/floor/tiled/white,
 /area/nexus/civilian)
 "JR" = (
-/obj/machinery/power/fusion_core/mapped{
+/obj/machinery/fusion_core/mapped{
 	initial_id_tag = "main"
 	},
 /obj/structure/cable{
@@ -3999,7 +4001,7 @@
 /obj/structure/sign/warning/secure_area{
 	pixel_y = -24
 	},
-/obj/effect/landmark/latejoin/cryo,
+/obj/abstract/landmark/latejoin/cryo,
 /turf/simulated/floor/tiled/white,
 /area/nexus/civilian)
 "MD" = (
@@ -4883,7 +4885,7 @@
 /turf/simulated/floor/tiled,
 /area/nexus/hallway/port)
 "Ug" = (
-/obj/structure/stairs/east,
+/obj/structure/stairs/long/east,
 /turf/simulated/floor/plating,
 /area/nexus/civilian)
 "Uk" = (
@@ -5352,7 +5354,7 @@
 /obj/machinery/computer/cryopod{
 	pixel_y = -32
 	},
-/obj/effect/landmark/latejoin/cryo,
+/obj/abstract/landmark/latejoin/cryo,
 /turf/simulated/floor/tiled/white,
 /area/nexus/civilian)
 "Ys" = (
@@ -5419,7 +5421,7 @@
 /obj/effect/floor_decal/corner/b_green{
 	dir = 1
 	},
-/obj/effect/landmark/latejoin/cryo,
+/obj/abstract/landmark/latejoin/cryo,
 /turf/simulated/floor/tiled/white,
 /area/nexus/civilian)
 "YG" = (
@@ -5452,7 +5454,7 @@
 /obj/machinery/atmospherics/unary/vent_pump/on{
 	dir = 4
 	},
-/obj/effect/landmark/latejoin/cryo,
+/obj/abstract/landmark/latejoin/cryo,
 /turf/simulated/floor/tiled/white,
 /area/nexus/civilian)
 "Zy" = (
@@ -6205,7 +6207,7 @@ tS
 tS
 tS
 tS
-tS
+xX
 tS
 tS
 tS

@@ -57,11 +57,11 @@
 		if(!skilled_setup && prob(20))
 			var/obj/item/organ/external/E = H.get_organ(BP_CHEST)
 			E.add_pain(15)
-			to_chat(H, "<span class='danger'>Your [E] is compressed painfully!</span>")	
+			to_chat(H, "<span class='danger'>Your [E] is compressed painfully!</span>")
 			if(prob(5))
 				E.fracture()
 		else
-			var/obj/item/organ/internal/heart/heart = H.get_internal_organ(BP_HEART)
+			var/obj/item/organ/internal/heart/heart = H.get_organ(BP_HEART)
 			if(heart)
 				heart.external_pump = list(world.time, 0.6)
 

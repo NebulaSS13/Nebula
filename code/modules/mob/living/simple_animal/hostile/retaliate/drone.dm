@@ -3,9 +3,7 @@
 /mob/living/simple_animal/hostile/retaliate/malf_drone
 	name = "combat drone"
 	desc = "An automated combat drone armed with state of the art weaponry and shielding."
-	icon_state = "drone"
-	icon_living = "drone"
-	icon_dead = "drone_dead"
+	icon = 'icons/mob/simple_animal/drone_combat.dmi'
 	ranged = 1
 	rapid = 0
 	speak_chance = 5
@@ -80,17 +78,11 @@
 			src.visible_message("<span class='warning'>[html_icon(src)] [src] suddenly lights up, and additional targetting vanes slide into place.</span>")
 			hostile_drone = 1
 
-/mob/living/simple_animal/hostile/retaliate/malf_drone/ListTargets()
-	if(hostile_drone)
-		var/list/targets = list()
-		for(var/mob/M in view(src, hostile_range))
-			if(M == src || istype(M, type))
-				continue
-			targets |= M
-
-		return targets
-	else
-		return ..()
+/mob/living/simple_animal/hostile/retaliate/malf_drone/ListTargets(var/dist = 7)
+	. = ..(hostile_drone ? hostile_range : dist)
+	for(var/mob/M in .)
+		if(istype(M, type))
+			. -= M
 
 //self repair systems have a chance to bring the drone back to life
 /mob/living/simple_animal/hostile/retaliate/malf_drone/Life()
@@ -98,13 +90,11 @@
 	//emps and lots of damage can temporarily shut us down
 	if(disabled > 0)
 		set_stat(UNCONSCIOUS)
-		icon_state = "[initial(icon_state)]_dead"
 		disabled--
 		wander = 0
 		speak_chance = 0
 		if(disabled <= 0)
 			set_stat(CONSCIOUS)
-			icon_state = "[initial(icon_state)]0"
 			wander = 1
 			speak_chance = 5
 
@@ -122,20 +112,15 @@
 	Haywire()
 
 	if(health / maxHealth > 0.9)
-		icon_state = "[initial(icon_state)]"
 		explode_chance = 0
 	else if(health / maxHealth > 0.7)
-		icon_state = "[initial(icon_state)]2"
 		explode_chance = 0
 	else if(health / maxHealth > 0.5)
-		icon_state = "[initial(icon_state)]1"
 		explode_chance = 0.5
 	else if(health / maxHealth > 0.3)
-		icon_state = "[initial(icon_state)]0"
 		explode_chance = 5
 	else if(health > 0)
 		//if health gets too low, shut down
-		icon_state = "[initial(icon_state)]_dead"
 		exploding = 0
 		if(!disabled)
 			if(prob(50))
@@ -162,6 +147,17 @@
 				explosion(get_turf(src), 0, 1, 4, 7)
 				death()
 	..()
+	update_icon()
+
+/mob/living/simple_animal/hostile/retaliate/malf_drone/on_update_icon()
+	. = ..()
+	if(stat != DEAD)
+		if(health / maxHealth <= 0.3)
+			icon_state += "-shield3"
+		else if(health / maxHealth <= 0.5)
+			icon_state += "-shield1"
+		else if(health / maxHealth <= 0.7)
+			icon_state += "-shield2"
 
 //ion rifle!
 /mob/living/simple_animal/hostile/retaliate/malf_drone/emp_act(severity)
@@ -175,6 +171,7 @@
 	qdel(src)
 
 /mob/living/simple_animal/hostile/retaliate/malf_drone/Destroy()
+	QDEL_NULL(ion_trail)
 	//some random debris left behind
 	if(has_loot)
 		spark_at(src, cardinal_only = TRUE)

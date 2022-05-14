@@ -85,7 +85,7 @@
 		riftimage.pixel_y = new_y
 		riftimage.loc = T_mob
 
-		src << riftimage
+		direct_output(src, riftimage)
 
 	else
 		QDEL_NULL(riftimage)

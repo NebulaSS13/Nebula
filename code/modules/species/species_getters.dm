@@ -19,9 +19,6 @@
 /decl/species/proc/get_ssd(var/mob/living/carbon/human/H)
 	return ((H && H.isSynthetic()) ? "flashing a 'system offline' glyph on their monitor" : show_ssd)
 
-/decl/species/proc/get_blood_colour(var/mob/living/carbon/human/H)
-	return ((H && H.isSynthetic()) ? SYNTH_BLOOD_COLOUR : blood_color)
-
 /decl/species/proc/get_flesh_colour(var/mob/living/carbon/human/H)
 	return ((H && H.isSynthetic()) ? SYNTH_FLESH_COLOUR : flesh_color)
 
@@ -51,7 +48,7 @@
 	return vision_flags
 
 /decl/species/proc/get_sex(var/mob/living/carbon/H)
-	return H.gender
+	return H?.get_sex() || NEUTER
 
 /decl/species/proc/get_surgery_overlay_icon(var/mob/living/carbon/human/H)
 	return 'icons/mob/surgery.dmi'

@@ -77,11 +77,14 @@ var/global/photo_count = 0
 
 /obj/item/photo/proc/show(mob/user)
 	send_rsc(user, img, "tmp_photo_[id].png")
-	user << browse("<html><head><title>[name]</title></head>" \
-		+ "<body style='overflow:hidden;margin:0;text-align:center'>" \
-		+ "<img src='tmp_photo_[id].png' width='[64*photo_size]' style='-ms-interpolation-mode:nearest-neighbor' />" \
-		+ "[scribble ? "<br>Written on the back:<br><i>[scribble]</i>" : ""]"\
-		+ "</body></html>", "window=book;size=[64*photo_size]x[scribble ? 400 : 64*photo_size]")
+	var/photo_html = {"
+		<html><head><title>[name]</title></head>
+		<body style='overflow:hidden;margin:0;text-align:center'>
+		<img src='tmp_photo_[id].png' width='[64*photo_size]' style='-ms-interpolation-mode:nearest-neighbor' />
+		[scribble ? "<br>Written on the back:<br><i>[scribble]</i>" : ""]
+		</body></html>
+	"}
+	show_browser(user, photo_html, "window=book;size=[64*photo_size]x[scribble ? 400 : 64*photo_size]")
 	onclose(user, "[name]")
 
 /obj/item/photo/verb/rename()
@@ -89,7 +92,7 @@ var/global/photo_count = 0
 	set category = "Object"
 	set src in usr
 
-	var/n_name = sanitizeSafe(input(usr, "What would you like to label the photo?", "Photo Labelling", null)  as text, MAX_NAME_LEN)
+	var/n_name = sanitize_safe(input(usr, "What would you like to label the photo?", "Photo Labelling", null)  as text, MAX_NAME_LEN)
 	//loc.loc check is for making possible renaming photos in clipboards
 	if(!n_name || !CanInteract(usr, global.deep_inventory_topic_state))
 		return
@@ -145,12 +148,14 @@ var/global/photo_count = 0
 	var/icon_on = "camera"
 	var/icon_off = "camera_off"
 	var/size = 3
+
 /obj/item/camera/on_update_icon()
 	var/datum/extension/base_icon_state/bis = get_extension(src, /datum/extension/base_icon_state)
 	if(on)
 		icon_state = "[bis.base_icon_state]"
 	else
 		icon_state = "[bis.base_icon_state]_off"
+
 /obj/item/camera/Initialize()
 	set_extension(src, /datum/extension/base_icon_state, icon_state)
 	update_icon()
@@ -246,7 +251,7 @@ var/global/photo_count = 0
 	var/x_c = target.x - (size-1)/2
 	var/y_c = target.y - (size-1)/2
 	var/z_c	= target.z
-	var/icon/photoimage = generate_image(x_c, y_c, z_c, size, CAPTURE_MODE_REGULAR, user, 0)
+	var/icon/photoimage = create_area_image(x_c, y_c, z_c, size, TRUE, user)
 
 	var/obj/item/photo/p = new()
 	p.img = photoimage

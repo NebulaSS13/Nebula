@@ -14,7 +14,12 @@ menu "menu"
 		command = ""
 		saved-params = "is-checked"
 	elem
-		name = "&Save screenshot as...\tShift+F2"
+		name = "&Save screenshot\tF2"
+		command = ".auto"
+		category = "&File"
+		saved-params = "is-checked"
+	elem
+		name = "&Save screenshot as..."
 		command = ".screenshot"
 		category = "&File"
 		saved-params = "is-checked"
@@ -129,6 +134,7 @@ window "mainwindow"
 		anchor1 = none
 		anchor2 = none
 		is-default = true
+		background-color = #000000
 		saved-params = "pos;size;is-minimized;is-maximized"
 		on-size = "OnResize"
 		is-maximized = true

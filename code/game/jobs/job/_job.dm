@@ -68,6 +68,8 @@
 
 	if(!length(department_types) && autoset_department)
 		department_types = list(global.using_map.default_department_type)
+	if(isnull(primary_department) && length(department_types))
+		primary_department = department_types[1]
 
 	if(prob(100-availablity_chance))	//Close positions, blah blah.
 		total_positions = 0
@@ -416,7 +418,7 @@
 
 /datum/job/proc/get_roundstart_spawnpoint()
 	var/list/loc_list = list()
-	for(var/obj/effect/landmark/start/sloc in landmarks_list)
+	for(var/obj/abstract/landmark/start/sloc in global.landmarks_list)
 		if(sloc.name != title)	continue
 		if(locate(/mob/living) in sloc.loc)	continue
 		loc_list += sloc
@@ -475,3 +477,9 @@
 
 /datum/job/proc/do_spawn_special(var/mob/living/character, var/mob/new_player/new_player_mob, var/latejoin = FALSE)
 	return FALSE
+
+/datum/job/proc/get_occupations_tab_sort_score()
+	. = (0.1 * head_position)
+	if(primary_department)
+		var/decl/department/dept = GET_DECL(primary_department)
+		. += dept.display_priority

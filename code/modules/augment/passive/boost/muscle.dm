@@ -19,9 +19,9 @@
 	//1.st Determine where we are and who we should be asking for guidance
 	//we must be second to activate buff
 	if(organ_tag == BP_AUGMENT_L_LEG)
-		other = owner.get_internal_organ(BP_AUGMENT_R_LEG)
+		other = owner.get_organ(BP_AUGMENT_R_LEG)
 	else if(organ_tag == BP_AUGMENT_R_LEG)
-		other = owner.get_internal_organ(BP_AUGMENT_L_LEG)
+		other = owner.get_organ(BP_AUGMENT_L_LEG)
 	if(other && istype(other))
 		var/succesful = TRUE
 		if(owner.get_skill_value(SKILL_HAULING) < SKILL_PROF)

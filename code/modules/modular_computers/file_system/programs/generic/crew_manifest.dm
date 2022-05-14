@@ -16,7 +16,7 @@
 /datum/nano_module/program/crew_manifest/ui_interact(mob/user, ui_key = "main", datum/nanoui/ui = null, force_open = 1, state = global.default_topic_state)
 	var/list/data = host.initial_data()
 
-	var/datum/computer_network/network = program.computer.get_network()
+	var/datum/computer_network/network = program?.computer?.get_network()
 	if(!network)
 		return
 	data["crew_manifest"] = html_crew_manifest(TRUE, records = network.get_crew_records())

@@ -1,3 +1,5 @@
+var/global/list/overmap_unknown_ids = list()
+
 /obj/effect/overmap
 	name = "map object"
 	icon = 'icons/obj/overmap.dmi'
@@ -6,7 +8,7 @@
 	animate_movement = NO_STEPS
 
 	var/scannable                       // if set to TRUE will show up on ship sensors for detailed scans, and will ping when detected by scanners.
-
+	var/unknown_id                      // A unique identifier used when this entity is scanned. Assigned in Initialize().
 	var/requires_contact = FALSE        // whether or not the effect must be identified by ship sensors before being seen.
 	var/instant_contact  = FALSE        // do we instantly identify ourselves to any ship in sensors range?
 	var/halted = FALSE
@@ -23,6 +25,11 @@
 	var/last_burn = 0                   // worldtime when ship last acceleated
 	var/burn_delay = 1 SECOND           // how often ship can do burns
 
+	var/overmap_id = OVERMAP_ID_SPACE
+
+/obj/effect/overmap/touch_map_edge(var/overmap_id)
+	return
+
 //Overlay of how this object should look on other skyboxes
 /obj/effect/overmap/proc/get_skybox_representation()
 	return
@@ -33,11 +40,15 @@
 /obj/effect/overmap/Initialize()
 	. = ..()
 
-	if(!global.using_map.use_overmap)
+	if(!length(global.using_map.overmap_ids))
 		return INITIALIZE_HINT_QDEL
 
 	if(requires_contact)
 		invisibility = INVISIBILITY_OVERMAP // Effects that require identification have their images cast to the client via sensors.
+
+	if(scannable)
+		unknown_id = "[pick(global.phonetic_alphabet)]-[random_id(/obj/effect/overmap, 100, 999)]"
+
 	update_icon()
 
 /obj/effect/overmap/Crossed(var/obj/effect/overmap/visitable/other)
@@ -55,23 +66,27 @@
 	filters = filter(type="drop_shadow", color = color + "F0", size = 2, offset = 1,x = 0, y = 0)
 
 /obj/effect/overmap/proc/handle_wraparound()
+
+	var/turf/T = get_turf(src)
+	if(!istype(T) || !global.overmaps_by_z["[T.z]"])
+		PRINT_STACK_TRACE("Overmap effect handling wraparound on a non-overmap z-level.")
+
+	var/datum/overmap/overmap = global.overmaps_by_z["[T.z]"]
 	var/nx = x
 	var/ny = y
-	var/low_edge = 1
-	var/high_edge = global.using_map.overmap_size
 
-	if((dir & WEST) && x == low_edge)
-		nx = high_edge - 1
-	else if((dir & EAST) && x == high_edge)
-		nx = low_edge + 1
-	if((dir & SOUTH)  && y == low_edge)
-		ny = high_edge - 1
-	else if((dir & NORTH) && y == high_edge)
-		ny = low_edge + 1
+	if((dir & WEST) && x == 1)
+		nx = overmap.map_size_y - 1
+	else if((dir & EAST) && x == overmap.map_size_y)
+		nx = 2
+	if((dir & SOUTH)  && y == 1)
+		ny = overmap.map_size_y - 1
+	else if((dir & NORTH) && y == overmap.map_size_y)
+		ny = 2
 	if((x == nx) && (y == ny))
 		return //we're not flying off anywhere
 
-	var/turf/T = locate(nx,ny,z)
+	T = locate(nx,ny,z)
 	if(T)
 		forceMove(T)
 

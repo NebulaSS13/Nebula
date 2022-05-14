@@ -7,6 +7,7 @@
 	hidden_from_codex = FALSE
 
 	available_bodytypes = list(/decl/bodytype/monkey)
+	holder_icon = 'icons/mob/human_races/species/monkey/holder.dmi'
 
 	greater_form = SPECIES_HUMAN
 	mob_size = MOB_SIZE_SMALL
@@ -23,8 +24,6 @@
 
 	rarity_value = 0.1
 	total_health = 150
-	brute_mod = 1.5
-	burn_mod = 1.5
 
 	spawn_flags = SPECIES_IS_RESTRICTED
 
@@ -34,7 +33,10 @@
 
 	pass_flags = PASS_FLAG_TABLE
 	holder_type = /obj/item/holder
-	override_limb_types = list(BP_HEAD = /obj/item/organ/external/head/no_eyes)
+	override_limb_types = list(
+		BP_HEAD = /obj/item/organ/external/head/no_eyes,
+		BP_TAIL = /obj/item/organ/external/tail/monkey
+	)
 
 	appearance_descriptors = list(
 		/datum/appearance_descriptor/height = 0.6,

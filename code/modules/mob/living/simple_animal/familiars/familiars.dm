@@ -21,10 +21,7 @@
 /mob/living/simple_animal/familiar/carcinus
 	name = "carcinus"
 	desc = "A small crab said to be made of stone and starlight."
-	icon = 'icons/mob/simple_animal/animal.dmi'
-	icon_state = "evilcrab"
-	icon_living = "evilcrab"
-	icon_dead = "evilcrab_dead"
+	icon = 'icons/mob/simple_animal/evilcrab.dmi'
 
 	speak_emote = list("chitters","clicks")
 
@@ -44,11 +41,7 @@
 /mob/living/simple_animal/familiar/pike
 	name = "space pike"
 	desc = "A bigger, more magical cousin of the space carp."
-
 	icon = 'icons/mob/simple_animal/spaceshark.dmi'
-	icon_state = "shark"
-	icon_living = "shark"
-	icon_dead = "shark_dead"
 	pixel_x = -16
 
 	speak_emote = list("gnashes")
@@ -68,10 +61,7 @@
 /mob/living/simple_animal/familiar/horror
 	name = "horror"
 	desc = "Looking at it fills you with dread."
-	icon = 'icons/mob/mob.dmi'
-	icon_state = "horror"
-	icon_living = "horror"
-
+	icon = 'icons/mob/simple_animal/horror.dmi'
 	speak_emote = list("moans", "groans")
 
 	response_help_1p = "You think better of touching $TARGET$."
@@ -100,42 +90,20 @@
 /mob/living/simple_animal/familiar/minor_amaros
 	name = "minor amaros"
 	desc = "A small fluffy alien creature."
-	icon = 'icons/mob/mob.dmi'
-	icon_state = "baby roro"
-	icon_living = "baby roro"
-	icon_dead   = "baby roro dead"
-
+	icon = 'icons/mob/simple_animal/amaros.dmi'
 	speak_emote = list("entones")
 	mob_size = MOB_SIZE_SMALL
-
 	health = 25
 	maxHealth = 25
-
-	wizardy_spells = list(/spell/targeted/heal_target,
-						/spell/targeted/heal_target/area)
-
-
-
-/mob/living/simple_animal/familiar/pet //basically variants of normal animals with spells.
-	icon = 'icons/mob/simple_animal/animal.dmi'
-	var/icon_rest //so that we can have resting little guys.
-
-/mob/living/simple_animal/familiar/pet/Life()
-	. = ..()
-	if(!.)
-		return FALSE
-	if(!icon_rest)
-		return
-	if(stat == UNCONSCIOUS || resting)
-		icon_state = icon_rest
+	wizardy_spells = list(
+		/spell/targeted/heal_target,
+		/spell/targeted/heal_target/area
+	)
 
 /mob/living/simple_animal/familiar/pet/mouse
 	name = "elderly mouse"
 	desc = "A small rodent. It looks very old."
-	icon_state = "mouse_gray"
-	icon_living = "mouse_gray"
-	icon_dead = "mouse_gray_dead"
-	icon_rest = "mouse_gray_sleep"
+	icon = 'icons/mob/simple_animal/mouse_gray.dmi'
 
 	speak_emote = list("squeeks")
 	holder_type = /obj/item/holder/mouse
@@ -160,18 +128,11 @@
 /mob/living/simple_animal/familiar/pet/cat
 	name = "black cat"
 	desc = "A pitch black cat. Said to be especially unlucky."
-	icon_state = "cat3"
-	icon_living = "cat3"
-	icon_dead = "cat3_dead"
-	icon_rest = "cat3_rest"
-
-
+	icon = 'icons/mob/simple_animal/cat_black.dmi'
 	speak_emote = list("meows", "purrs")
 	holder_type = /obj/item/holder
 	mob_size = MOB_SIZE_SMALL
-
 	health = 25
 	maxHealth = 25
 	natural_weapon = /obj/item/natural_weapon/claws/weak
-
 	wizardy_spells = list(/spell/targeted/subjugation)

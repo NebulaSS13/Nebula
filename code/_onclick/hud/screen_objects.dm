@@ -50,7 +50,7 @@
 	name = "default attack selector"
 	icon_state = "attack_selector"
 	screen_loc = ui_attack_selector
-	maptext_y = 5
+	maptext_y = 12
 	var/mob/living/carbon/human/owner
 
 /obj/screen/default_attack_selector/Click(location, control, params)
@@ -155,6 +155,8 @@
 					new_selecting = BP_R_LEG
 				if(17 to 22)
 					new_selecting = BP_L_LEG
+				if(23 to 28)
+					new_selecting = BP_TAIL
 				else
 					return 1
 		if(10 to 13) //Hands and groin
@@ -235,13 +237,11 @@
 	switch(name)
 		if("toggle")
 			if(usr.hud_used.inventory_shown)
-				usr.hud_used.inventory_shown = 0
 				usr.client.screen -= usr.hud_used.other
+				usr.hud_used.hide_inventory()
 			else
-				usr.hud_used.inventory_shown = 1
 				usr.client.screen += usr.hud_used.other
-
-			usr.hud_used.hidden_inventory_update()
+				usr.hud_used.show_inventory()
 
 		if("equip")
 			if(ishuman(usr))

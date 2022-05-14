@@ -21,7 +21,7 @@
 	goals = list(/datum/goal/department/medical_fatalities)
 	announce_channel = "Medical"
 	colour = "#008000"
-	display_priority = 2
+	display_priority = 3
 	display_color = "#ffeef0"
 
 /obj/item/robot_module/medical
@@ -46,7 +46,7 @@
 /decl/department/command
 	name = "Command"
 	colour = "#800080"
-	display_priority = 3
+	display_priority = 4
 	display_color = "#ccccff"
 	goals = list(/datum/goal/department/paperwork/tradeship)
 
