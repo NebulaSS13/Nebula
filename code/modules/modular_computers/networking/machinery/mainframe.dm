@@ -20,6 +20,7 @@
 	. = ..()
 	var/datum/extension/network_device/mainframe/M = get_extension(src, /datum/extension/network_device)
 	M.roles |= initial_roles
+	M.update_roles()
 
 /obj/machinery/network/mainframe/ui_data(mob/user, ui_key)
 	var/data = ..()
