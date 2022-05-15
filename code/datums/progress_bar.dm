@@ -41,33 +41,32 @@
 	if(!istype(param_target))
 		throw EXCEPTION("datum/progress_bar: Invalid param given - param_target")
 
-	target = param_target
 	user = param_user
 	goal = param_goal
+	target = param_target
 	init_images(target)
 
 	if(user)
 		client = user.client
 		client?.images |= holder
-
-		LAZYINITLIST(user.progress_bars)
-		LAZYINITLIST(user.progress_bars[target])
-		var/list/bars = user.progress_bars[target]
-		bars += src
-		list_index = length(bars)
-		animate(holder, pixel_z = world.icon_size + (height * (list_index - 1)), alpha = 255, time = animation_time_appear, easing = SINE_EASING | EASE_OUT, flags = ANIMATION_PARALLEL)
+		LAZYASSOCLISTADD(user.progress_bars, target, src)
+		animate(holder, pixel_z = world.icon_size + (height * LAZYLEN(user.progress_bars[target]) - 1), alpha = 255, time = animation_time_appear, easing = SINE_EASING | EASE_OUT, flags = ANIMATION_PARALLEL)
 	else
 		animate(holder, alpha = 255, time = animation_time_appear, easing = SINE_EASING | EASE_OUT, flags = ANIMATION_PARALLEL)
 
 /datum/progress_bar/Destroy()
-	cleanup()
 	client?.images -= holder
+
 	QDEL_NULL(holder)
 	QDEL_NULL(backdrop)
 	QDEL_NULL(fill)
+
+	LAZYASSOCLISTREMOVE(user.progress_bars, target, src)
+
 	target = null
 	user = null
 	client = null
+
 	return ..()
 
 /**
@@ -79,6 +78,8 @@
 	shift_down_all()
 	update(last_progress)
 	animate(holder, alpha = 0, time = animation_time_fade, flags = ANIMATION_PARALLEL)
+	LAZYASSOCLISTREMOVE(user.progress_bars, target, src)
+
 	sleep(animation_time_fade)
 	qdel(src)
 
@@ -88,20 +89,9 @@
 /datum/progress_bar/proc/shift_down_all()
 	if(user?.progress_bars[target])
 		var/list/bars = user.progress_bars[target]
-		var/list_index = bars.Find(src)
-		for(var/i = list_index, i <= length(bars), i++)
+		for(var/i = bars.Find(src), i <= length(bars), i++)
 			var/datum/progress_bar/P = bars[i]
 			P.shift()
-
-/**
-  * Cleanups before deletion.
-  */
-/datum/progress_bar/proc/cleanup()
-	if(user?.progress_bars[target])
-		var/list/bars = user.progress_bars[target]
-		bars -= src
-		if(!length(bars))
-			LAZYREMOVE(user.progress_bars, target)
 
 /**
   * Initializes the visual elements.
