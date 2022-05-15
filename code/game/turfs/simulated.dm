@@ -178,10 +178,6 @@
 	levelupdate()
 	. = ..()
 
-/turf/simulated/initialize_ambient_light(var/mapload)
-	for(var/turf/T as anything in RANGE_TURFS(src, 1))
-		T.update_ambient_lighting(mapload)
-
 /turf/simulated/Destroy()
 	if (zone)
 		if (can_safely_remove_from_zone())

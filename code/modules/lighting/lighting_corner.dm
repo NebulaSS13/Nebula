@@ -118,6 +118,8 @@ var/global/list/REVERSE_LIGHTING_CORNER_DIAGONAL = list(0, 0, 0, 0, 3, 4, 0, 0, 
 
 #define GET_ABOVE(T) (HasAbove(T:z) ? get_step(T, UP) : null)
 
+#define UPDATE_APPARENT apparent_r = self_r + below_r + ambient_r; apparent_b = self_b + below_b + ambient_b; apparent_g = self_g + below_g + ambient_g
+
 // God that was a mess, now to do the rest of the corner code! Hooray!
 /datum/lighting_corner/proc/update_lumcount(delta_r, delta_g, delta_b, now = FALSE)
 	if (!(delta_r + delta_g + delta_b))
@@ -127,9 +129,7 @@ var/global/list/REVERSE_LIGHTING_CORNER_DIAGONAL = list(0, 0, 0, 0, 3, 4, 0, 0, 
 	self_g += delta_g
 	self_b += delta_b
 
-	apparent_r = self_r + below_r + ambient_r
-	apparent_g = self_g + below_g + ambient_g
-	apparent_b = self_b + below_b + ambient_b
+	UPDATE_APPARENT
 
 	var/turf/T
 	var/Ti
@@ -171,9 +171,7 @@ var/global/list/REVERSE_LIGHTING_CORNER_DIAGONAL = list(0, 0, 0, 0, 3, 4, 0, 0, 
 	below_g += delta_g
 	below_b += delta_b
 
-	apparent_r = self_r + below_r + ambient_r
-	apparent_g = self_g + below_g + ambient_g
-	apparent_b = self_b + below_b + ambient_b
+	UPDATE_APPARENT
 
 	// This needs to be down here instead of the above if so the lum values are properly updated.
 	if (needs_update)
@@ -194,9 +192,7 @@ var/global/list/REVERSE_LIGHTING_CORNER_DIAGONAL = list(0, 0, 0, 0, 3, 4, 0, 0, 
 	ambient_g = ag
 	ambient_b = ab
 
-	apparent_r = self_r + below_r + ar
-	apparent_g = self_g + below_g + ag
-	apparent_b = self_b + below_b + ab
+	UPDATE_APPARENT
 
 	if (needs_update || skip_update)
 		return
@@ -204,6 +200,8 @@ var/global/list/REVERSE_LIGHTING_CORNER_DIAGONAL = list(0, 0, 0, 0, 3, 4, 0, 0, 
 	// Always queue for this, not important enough to hit the synchronous path.
 	needs_update = TRUE
 	SSlighting.corner_queue += src
+
+#undef UPDATE_APPARENT
 
 /datum/lighting_corner/proc/update_overlays(now = FALSE)
 	var/lr = apparent_r

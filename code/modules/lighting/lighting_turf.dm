@@ -11,11 +11,25 @@
 	var/tmp/list/datum/lighting_corner/corners
 	var/tmp/has_opaque_atom = FALSE // Not to be confused with opacity, this will be TRUE if there's any opaque atom on the tile.
 
-/turf/proc/update_ambient_light(skip_update = FALSE)
-	// No, you're not allowed to light up space.
-	if (!TURF_IS_DYNAMICALLY_LIT_UNSAFE(src))
+/turf/proc/set_ambient_light(color, multiplier, skip_update = FALSE)
+	if (color == ambient_light && multiplier == ambient_light_multiplier)
 		return
 
+	ambient_light = color || ambient_light
+	ambient_light_multiplier = multiplier || ambient_light_multiplier
+	if (!ambient_light_multiplier)
+		ambient_light_multiplier = initial(ambient_light_multiplier)
+
+	update_ambient_light(skip_update)
+
+/turf/proc/clear_ambient_light(skip_update = FALSE)
+	if (ambient_light == null)
+		return
+
+	ambient_light = null
+	update_ambient_light(skip_update)
+
+/turf/proc/update_ambient_light(skip_update = FALSE)
 	var/ambient_r = 0
 	var/ambient_g = 0
 	var/ambient_b = 0
@@ -24,7 +38,6 @@
 		ambient_g = (HEX_GREEN(ambient_light) / 255) * ambient_light_multiplier
 		ambient_b = (HEX_BLUE(ambient_light) / 255) * ambient_light_multiplier
 
-	// hell if I know why there's nulls in here
 	if (!corners || (null in corners))
 		generate_missing_corners()
 

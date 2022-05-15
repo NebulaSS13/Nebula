@@ -76,20 +76,12 @@
 	if(flooded && !density)
 		make_flooded(TRUE)
 
-	initialize_ambient_light(mapload)
-
 	return INITIALIZE_HINT_NORMAL
 
 /turf/examine(mob/user, distance, infix, suffix)
 	. = ..()
 	if(user && weather)
 		weather.examine(user)
-
-/turf/proc/initialize_ambient_light(var/mapload)
-	return
-
-/turf/proc/update_ambient_lighting(var/mapload)
-	return
 
 /turf/Destroy()
 

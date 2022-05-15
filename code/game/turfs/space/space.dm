@@ -15,18 +15,25 @@
 	/// Force this one to pretend it's an overedge turf.
 	var/forced_dirs = 0
 
-/turf/space/update_ambient_lighting(var/mapload)
-	if(config.starlight && (locate(/turf/simulated) in RANGE_TURFS(src, 1)))
-		set_light(config.starlight, 0.75, l_color = SSskybox.background_color)
-	else
-		set_light(0)
+/turf/space/proc/update_starlight(mapload)
+	for (var/turf/T in RANGE_TURFS(src, 1))
+		// Fuck if I know how these turfs are located in an area that is not an area.
+		if (!isloc(T.loc) || !TURF_IS_DYNAMICALLY_LIT_UNSAFE(T))
+			continue
+
+		set_ambient_light(SSskybox.background_color, skip_update = mapload)
+		return
+
+	if (ambient_light)
+		set_ambient_light(skip_update = mapload)
 
 /turf/space/Initialize(var/mapload)
 
 	SHOULD_CALL_PARENT(FALSE)
 	atom_flags |= ATOM_FLAG_INITIALIZED
 
-	update_ambient_lighting(mapload)
+	if (config.starlight)
+		update_starlight(mapload)
 
 	//We might be an edge
 	if(y == world.maxy || forced_dirs & NORTH)
