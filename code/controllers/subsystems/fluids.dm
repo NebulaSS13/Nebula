@@ -219,7 +219,7 @@ SUBSYSTEM_DEF(fluids)
 		current_turf = current_fluid.loc
 		var/pushed_something = FALSE
 		if(reagent_holder.total_volume > FLUID_SHALLOW && current_fluid.last_flow_strength >= 10)
-			for(var/atom/movable/AM AS_ANYTHING in current_turf.get_contained_external_atoms())
+			for(var/atom/movable/AM as anything in current_turf.get_contained_external_atoms())
 				if(AM.is_fluid_pushable(current_fluid.last_flow_strength))
 					AM.pushed(current_fluid.last_flow_dir)
 					pushed_something = TRUE

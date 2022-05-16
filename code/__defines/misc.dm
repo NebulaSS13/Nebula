@@ -256,12 +256,6 @@
 
 #define Z_ALL_TURFS(Z) block(locate(1, 1, Z), locate(world.maxx, world.maxy, Z))
 
-#if DM_BUILD < 1540
-#define AS_ANYTHING as()
-#else
-#define AS_ANYTHING as anything
-#endif
-
 //NOTE: INTENT_HOTKEY_* defines are not actual intents!
 //they are here to support hotkeys
 #define INTENT_HOTKEY_LEFT  "left"

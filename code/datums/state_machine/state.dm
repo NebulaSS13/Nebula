@@ -16,7 +16,7 @@
 // Returns a list of transitions that a FSM could switch to.
 // Note that `holder` is NOT the FSM, but instead the thing the FSM is attached to.
 /decl/state/proc/get_open_transitions(datum/holder)
-	for(var/decl/state_transition/T AS_ANYTHING in transitions)
+	for(var/decl/state_transition/T as anything in transitions)
 		if(T.is_open(holder))
 			LAZYADD(., T)
 

@@ -266,7 +266,7 @@
 
 /datum/unit_test/correct_allowed_spawn_test/start_test()
 	var/list/failed = list()
-	for(var/decl/spawnpoint/spawnpoint AS_ANYTHING in global.using_map.allowed_spawns)
+	for(var/decl/spawnpoint/spawnpoint as anything in global.using_map.allowed_spawns)
 		if(!length(spawnpoint.turfs))
 			log_unit_test("Map allows spawning in [spawnpoint.name], but [spawnpoint.name] has no associated spawn turfs.")
 			failed += spawnpoint.type

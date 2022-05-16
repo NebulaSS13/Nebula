@@ -77,7 +77,7 @@ var/global/universe_has_ended = 0
 	universe_has_ended = TRUE
 
 /datum/universal_state/supermatter_cascade/proc/AreaSet()
-	for(var/area/A AS_ANYTHING in global.areas)
+	for(var/area/A as anything in global.areas)
 		var/invalid_area = FALSE
 		for(var/check_area in global.using_map.get_universe_end_evac_areas())
 			if(istype(A, check_area))

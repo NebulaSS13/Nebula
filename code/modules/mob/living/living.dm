@@ -503,13 +503,13 @@ default behaviour is:
 			return
 
 	if(isturf(old_loc))
-		for(var/atom/movable/AM AS_ANYTHING in ret_grab())
+		for(var/atom/movable/AM as anything in ret_grab())
 			if(AM != src && AM.loc != loc && !AM.anchored && old_loc.Adjacent(AM))
 				AM.glide_size = glide_size // This is adjusted by grabs again from events/some of the procs below, but doing it here makes it more likely to work with recursive movement.
 				AM.DoMove(get_dir(get_turf(AM), old_loc), src, TRUE)
 
 	var/list/mygrabs = get_active_grabs()
-	for(var/obj/item/grab/G AS_ANYTHING in mygrabs)
+	for(var/obj/item/grab/G as anything in mygrabs)
 		if(G.assailant_reverse_facing())
 			set_dir(global.reverse_dir[direction])
 		G.assailant_moved()
@@ -527,7 +527,7 @@ default behaviour is:
 		var/txt_dir = (direction & UP) ? "upwards" : "downwards"
 		if(old_loc)
 			old_loc.visible_message(SPAN_NOTICE("\The [src] moves [txt_dir]."))
-		for(var/obj/item/grab/G AS_ANYTHING in mygrabs)
+		for(var/obj/item/grab/G as anything in mygrabs)
 			var/turf/start = G.affecting.loc
 			var/turf/destination = (direction == UP) ? GetAbove(G.affecting) : GetBelow(G.affecting)
 			if(!start.CanZPass(G.affecting, direction))
@@ -552,7 +552,7 @@ default behaviour is:
 			continue
 
 	if(length(mygrabs) && !skill_check(SKILL_MEDICAL, SKILL_BASIC))
-		for(var/obj/item/grab/grab AS_ANYTHING in mygrabs)
+		for(var/obj/item/grab/grab as anything in mygrabs)
 			var/mob/living/affecting_mob = grab.get_affecting_mob()
 			if(affecting_mob)
 				affecting_mob.handle_grab_damage()
@@ -761,7 +761,7 @@ default behaviour is:
 	..()
 	cut_overlays()
 	if(auras)
-		for(var/obj/aura/aura AS_ANYTHING in auras)
+		for(var/obj/aura/aura as anything in auras)
 			var/image/A = new()
 			A.appearance = aura
 			add_overlay(A)
