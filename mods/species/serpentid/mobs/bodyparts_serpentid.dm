@@ -3,7 +3,7 @@
 	innate_flash_protection = FLASH_PROTECTION_VULNERABLE
 	contaminant_guard = 1
 	action_button_name = "Toggle Eye Shields"
-	eye_icon = 'mods/species/ascent/icons/species/body/serpentid/eyes.dmi'
+	eye_icon = 'mods/species/serpentid/icons/eyes.dmi'
 	var/eyes_shielded
 
 /obj/item/organ/internal/eyes/insectoid/serpentid/get_special_overlay()

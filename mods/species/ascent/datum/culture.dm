@@ -68,11 +68,12 @@ var/global/list/gyne_architecture = list(
 	additional_langs = list(/decl/language/mantid/worldnet, /decl/language/mantid)
 	hidden = TRUE
 	description = "The Ascent is an ancient, isolated stellar empire composed of the mantid-cephalopodean \
-	Kharmaani, the Serpentids, and their gaggle of AI servitors. Day to day existence in the Ascent is \
-	largely a matter of navigating a bewildering labyrinth of social obligations, gyne power dynamics, factional \
-	tithing, protection rackets, industry taxes and plain old interpersonal backstabbing. Both member cultures of \
+	Kharmaani and their gaggle of AI servitors. Day to day existence in the Ascent is largely a matter of \
+	navigating a bewildering labyrinth of social obligations, gyne power dynamics, factional tithing, \
+	protection rackets, industry taxes and plain old interpersonal backstabbing. Both member cultures of \
 	this stellar power are eusocial to an extent, and their society is shaped around the teeming masses \
-	of workers, soldiers, technicians and 'lesser' citizens supporting a throng of imperious and all-powerful queens."
+	of workers, soldiers, technicians and 'lesser' citizens supporting a throng of imperious and all-powerful \
+	queens."
 
 /decl/cultural_info/culture/ascent/get_random_name(var/mob/M, var/gender)
 	var/mob/living/carbon/human/H = M
@@ -92,16 +93,6 @@ var/global/list/gyne_architecture = list(
 	populace call their motherland. While the planet's orbit is thickly populated with habitats, factories \
 	and defense platforms, each belonging to a different node in the ever-shifting political web of Ascent \
 	social culture, the surface itself is a pristine monument to the Kharmaan evolutionary past."
-	hidden = TRUE
-
-/decl/cultural_info/faction/ascent_serpentid
-	name = "Ascent Serpentid"
-	language = /decl/language/mantid/nonvocal
-	description = "Members of the Ascent tend to be organized along the natural lines of their respective species. \
-	For Kharmaani, this is oriented around individual gynes and their power structures. Serpentids have a slightly less \
-	manipulative approach, as well as more numerous and less self-absorbed queens. They tend to cluster in broad social groups, \
-	usually within the designated oxygen-rich 'mezzanines' each fortress-nest happily allocates to them. As mild as they are by \
-	comparison to their fellows, Serpentid political and social culture is still factional and often vicious."
 	hidden = TRUE
 
 /decl/cultural_info/faction/ascent_alate
