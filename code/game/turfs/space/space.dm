@@ -21,11 +21,11 @@
 		if (!isloc(T.loc) || !TURF_IS_DYNAMICALLY_LIT_UNSAFE(T))
 			continue
 
-		set_ambient_light(SSskybox.background_color, skip_update = mapload)
+		set_ambient_light(SSskybox.background_color)
 		return
 
 	if (ambient_light)
-		set_ambient_light(skip_update = mapload)
+		clear_ambient_light()
 
 /turf/space/Initialize(var/mapload)
 

@@ -82,14 +82,6 @@ SUBSYSTEM_DEF(lighting)
 			new /atom/movable/lighting_overlay(T)
 			. += 1
 
-		// Non-dyn light turfs might be ambient sources.
-		else if (T.ambient_light)
-			T.generate_missing_corners()
-			for (var/datum/lighting_corner/C as anything in T.corners)
-				if (!C.needs_update)
-					C.needs_update = TRUE
-					corner_queue += C
-
 		CHECK_TICK
 
 // It's safe to pass a list of non-turfs to this list - it'll only check turfs.

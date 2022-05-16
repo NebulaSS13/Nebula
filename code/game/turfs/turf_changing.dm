@@ -44,8 +44,6 @@
 	var/old_affecting_lights = affecting_lights
 	var/old_lighting_overlay = lighting_overlay
 	var/old_dynamic_lighting = TURF_IS_DYNAMICALLY_LIT_UNSAFE(src)
-	var/old_ambient_light    = ambient_light
-	var/old_ambient_mult     = ambient_light_multiplier
 	var/old_flooded =          flooded
 	var/old_outside =          is_outside
 
@@ -91,11 +89,6 @@
 	corners = old_corners
 
 	lighting_overlay = old_lighting_overlay
-
-	if (ambient_light != old_ambient_light || ambient_light_multiplier != old_ambient_mult)
-		ambient_light = old_ambient_light || ambient_light	// If null, don't inherit.
-		ambient_light_multiplier = old_ambient_mult || ambient_light_multiplier
-		update_ambient_light()
 
 	recalc_atom_opacity()
 

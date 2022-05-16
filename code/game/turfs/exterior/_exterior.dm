@@ -55,13 +55,13 @@
 /turf/exterior/proc/setup_environmental_lighting(mapload)
 	if (is_outside())
 		if (owner)
-			set_ambient_light(COLOR_WHITE, owner.lightlevel, mapload)
+			set_ambient_light(COLOR_WHITE, owner.lightlevel)
 			return
 
 		if (config.starlight)
 			var/area/A = loc
 			if (A.show_starlight)
-				set_ambient_light(SSskybox.background_color, skip_update = mapload)
+				set_ambient_light(SSskybox.background_color)
 			else if (ambient_light)
 				clear_ambient_light()
 	else if (ambient_light)
