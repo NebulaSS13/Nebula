@@ -1136,3 +1136,9 @@
 		return A.is_open() && neighbor.Adjacent(A)
 
 	return FALSE
+
+/mob/proc/handle_flashed(var/obj/item/flash/flash, var/flash_strength)
+	return FALSE
+
+/mob/proc/do_flash_animation()
+	return
