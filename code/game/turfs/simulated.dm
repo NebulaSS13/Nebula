@@ -179,7 +179,7 @@
 	. = ..()
 
 /turf/simulated/initialize_ambient_light(var/mapload)
-	for(var/turf/T AS_ANYTHING in RANGE_TURFS(src, 1))
+	for(var/turf/T as anything in RANGE_TURFS(src, 1))
 		T.update_ambient_light(mapload)
 
 /turf/simulated/Destroy()

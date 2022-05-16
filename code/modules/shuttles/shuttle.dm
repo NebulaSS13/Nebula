@@ -291,9 +291,9 @@
 			var/datum/powernet/NewPN = new()
 			NewPN.add_cable(C)
 			propagate_network(C,C.powernet)
-	for(var/obj/machinery/atmospherics/pipe AS_ANYTHING in pipes)
+	for(var/obj/machinery/atmospherics/pipe as anything in pipes)
 		pipe.atmos_init() // this will clear pipenet/pipeline
-	for(var/obj/machinery/atmospherics/pipe AS_ANYTHING in pipes)
+	for(var/obj/machinery/atmospherics/pipe as anything in pipes)
 		pipe.build_network()
 
 //returns 1 if the shuttle has a valid arrive time

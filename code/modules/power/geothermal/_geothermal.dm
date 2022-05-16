@@ -74,7 +74,7 @@ var/global/const/MAX_GEOTHERMAL_PRESSURE =            2000
 	if(LAZYLEN(neighbors))
 		remaining_pressure = round(remaining_pressure / LAZYLEN(neighbors))
 		if(remaining_pressure)
-			for(var/obj/machinery/geothermal/neighbor AS_ANYTHING in neighbors)
+			for(var/obj/machinery/geothermal/neighbor as anything in neighbors)
 				neighbor.add_pressure(remaining_pressure)
 
 /obj/machinery/geothermal/proc/refresh_neighbors()
@@ -89,7 +89,7 @@ var/global/const/MAX_GEOTHERMAL_PRESSURE =            2000
 /obj/machinery/geothermal/Initialize()
 	. = ..()
 	refresh_neighbors()
-	for(var/turf/T AS_ANYTHING in RANGE_TURFS(loc, 1))
+	for(var/turf/T as anything in RANGE_TURFS(loc, 1))
 		for(var/obj/machinery/geothermal/neighbor in T)
 			neighbor.refresh_neighbors()
 	STOP_PROCESSING_MACHINE(src, MACHINERY_PROCESS_SELF)
@@ -98,7 +98,7 @@ var/global/const/MAX_GEOTHERMAL_PRESSURE =            2000
 	var/atom/last_loc = loc
 	. = ..()
 	if(istype(last_loc))
-		for(var/turf/T AS_ANYTHING in RANGE_TURFS(last_loc, 1))
+		for(var/turf/T as anything in RANGE_TURFS(last_loc, 1))
 			for(var/obj/machinery/geothermal/neighbor in T)
 				neighbor.refresh_neighbors()
 

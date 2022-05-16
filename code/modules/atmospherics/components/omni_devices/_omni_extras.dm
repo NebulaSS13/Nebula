@@ -44,14 +44,14 @@
 	if(LAZYLEN(nodes))
 		return
 	master.atmos_init()
-	for(var/obj/machinery/atmospherics/node AS_ANYTHING in nodes)
+	for(var/obj/machinery/atmospherics/node as anything in nodes)
 		node.atmos_init()
 	master.build_network()
-	for(var/obj/machinery/atmospherics/node AS_ANYTHING in nodes)
+	for(var/obj/machinery/atmospherics/node as anything in nodes)
 		node.build_network()
 
 /datum/omni_port/proc/disconnect()
-	for(var/obj/machinery/atmospherics/node AS_ANYTHING in nodes)
+	for(var/obj/machinery/atmospherics/node as anything in nodes)
 		node.disconnect(master)
 		master.disconnect(node)
 

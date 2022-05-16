@@ -4,7 +4,7 @@
 /datum/unit_test/codex_string_uniqueness/start_test()
 	var/list/failures = list()
 	var/list/seen_strings = list()
-	for(var/datum/codex_entry/entry AS_ANYTHING in SScodex.all_entries)
+	for(var/datum/codex_entry/entry as anything in SScodex.all_entries)
 		for(var/associated_string in entry.associated_strings)
 			if(seen_strings[associated_string])
 				failures |= "'[associated_string]' - \ref[entry]#[entry.name] - first seen: [seen_strings[associated_string]]"

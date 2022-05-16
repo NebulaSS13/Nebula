@@ -214,7 +214,7 @@
 #undef ENCUMBERANCE_MOVEMENT_MOD
 
 /mob/proc/encumbrance()
-	for(var/obj/item/grab/G AS_ANYTHING in get_active_grabs())
+	for(var/obj/item/grab/G as anything in get_active_grabs())
 		. = max(., G.grab_slowdown())
 	. *= (0.8 ** size_strength_mod())
 	. *= (0.5 + 1.5 * (SKILL_MAX - get_skill_value(SKILL_HAULING))/(SKILL_MAX - SKILL_MIN))
@@ -1065,7 +1065,7 @@
 		if(brolly.gives_weather_protection())
 			LAZYADD(., brolly)
 	if(!LAZYLEN(.))
-		for(var/turf/T AS_ANYTHING in RANGE_TURFS(loc, 1))
+		for(var/turf/T as anything in RANGE_TURFS(loc, 1))
 			for(var/obj/structure/flora/tree/tree in T)
 				if(tree.protects_against_weather)
 					LAZYADD(., tree)

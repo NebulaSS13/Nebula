@@ -470,7 +470,7 @@
 	var/mob/living/M = unbuckle_mob()
 	if(M)
 		show_unbuckle_message(M, user)
-		for(var/obj/item/grab/G AS_ANYTHING in (M.grabbed_by|grabbed_by))
+		for(var/obj/item/grab/G as anything in (M.grabbed_by|grabbed_by))
 			qdel(G)
 		add_fingerprint(user)
 	return M
