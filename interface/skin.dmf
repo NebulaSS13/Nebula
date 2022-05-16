@@ -149,6 +149,7 @@ window "window_main"
 		is-maximized = true
 		macro = "default"
 		menu = "menu"
+		on-status = ".winset \"status_bar.text=[[*]]\" "
 	elem "split"
 		type = CHILD
 		pos = 0,0
@@ -170,9 +171,9 @@ window "window_main"
 	elem "tooltip"
 		type = BROWSER
 		pos = 0,0
-		size = 999x999
-		anchor1 = -1,-1
-		anchor2 = -1,-1
+		size = 640x440
+		anchor1 = 0,0
+		anchor2 = 100,100
 		is-visible = false
 		saved-params = ""
 
@@ -184,6 +185,7 @@ window "window_map"
 		anchor1 = -1,-1
 		anchor2 = -1,-1
 		saved-params = "pos;size;is-minimized;is-maximized"
+		statusbar = false
 		is-pane = true
 		on-status = ".winset \"status_bar.text=[[*]]\" "
 	elem "map"
@@ -227,6 +229,7 @@ window "window_output"
 		anchor1 = -1,-1
 		anchor2 = -1,-1
 		saved-params = "pos;size;is-minimized;is-maximized"
+		statusbar = false
 		is-pane = true
 		on-status = ".winset \"status_bar.text=[[*]]\" "
 	elem "output"
@@ -242,18 +245,17 @@ window "window_output"
 	elem "button_say"
 		type = BUTTON
 		pos = 0,460
-		size = 50x20
+		size = 40x20
 		anchor1 = 0,100
 		anchor2 = -1,-1
 		saved-params = "is-checked"
 		text = "Say"
 		command = ".winset \"button_say.is-checked=true?input.command=\"!say \\\"\":input.command=\""
-		is-flat = true
 		button-type = pushbox
 	elem "input"
 		type = INPUT
-		pos = 50,460
-		size = 590x20
+		pos = 40,460
+		size = 600x20
 		anchor1 = 0,100
 		anchor2 = 100,100
 		background-color = #d3b5b5
@@ -269,11 +271,13 @@ window "window_panel_right"
 		anchor1 = -1,-1
 		anchor2 = -1,-1
 		saved-params = "pos;size;is-minimized;is-maximized"
+		statusbar = false
 		is-pane = true
+		on-status = ".winset \"status_bar.text=[[*]]\" "
 	elem "panel_right_info"
 		type = CHILD
-		pos = 0,20
-		size = 640x460
+		pos = 0,30
+		size = 640x450
 		anchor1 = 0,0
 		anchor2 = 100,100
 		background-color = none
@@ -283,20 +287,20 @@ window "window_panel_right"
 		is-vert = false
 	elem "button_changelog"
 		type = BUTTON
-		pos = 100,0
-		size = 100x20
-		anchor1 = 16,0
-		anchor2 = 31,0
+		pos = 555,5
+		size = 80x20
+		anchor1 = 87,0
+		anchor2 = 99,0
 		background-color = none
 		saved-params = "is-checked"
 		text = "Changelog"
 		command = "Changelog"
 	elem "button_info_hide"
 		type = BUTTON
-		pos = 0,0
-		size = 100x20
-		anchor1 = 0,0
-		anchor2 = 16,0
+		pos = 5,5
+		size = 80x20
+		anchor1 = 1,0
+		anchor2 = 13,0
 		background-color = none
 		saved-params = "is-checked"
 		text = "Hide Verbs"
@@ -304,20 +308,20 @@ window "window_panel_right"
 		button-type = pushbox
 	elem "button_rules"
 		type = BUTTON
-		pos = 300,0
-		size = 100x20
-		anchor1 = 47,0
-		anchor2 = 63,0
+		pos = 470,5
+		size = 80x20
+		anchor1 = 73,0
+		anchor2 = 86,0
 		background-color = none
 		saved-params = "is-checked"
 		text = "Rules"
 		command = "Rules"
 	elem "button_codex"
 		type = BUTTON
-		pos = 200,0
-		size = 100x20
-		anchor1 = 31,0
-		anchor2 = 47,0
+		pos = 90,5
+		size = 80x20
+		anchor1 = 14,0
+		anchor2 = 27,0
 		background-color = none
 		saved-params = "is-checked"
 		text = "Codex"
@@ -332,6 +336,7 @@ window "window_info"
 		anchor2 = -1,-1
 		saved-params = "pos;size;is-minimized;is-maximized"
 		title = "Info"
+		statusbar = false
 		is-pane = true
 		on-status = ".winset \"status_bar.text=[[*]]\" "
 	elem "info"
