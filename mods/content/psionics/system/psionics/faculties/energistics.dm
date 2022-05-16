@@ -89,7 +89,7 @@
 			pew.current = target
 			pew.starting = get_turf(user)
 			pew.shot_from = user
-			pew.launch(target, user.zone_sel.selecting, (target.x-user.x), (target.y-user.y))
+			pew.launch(target, user.zone_sel.selecting, user)
 			return TRUE
 
 /decl/psionic_power/energistics/spark
