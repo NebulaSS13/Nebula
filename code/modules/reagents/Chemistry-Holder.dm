@@ -27,10 +27,13 @@ var/global/obj/temp_reagents_holder = new
 /datum/reagents/proc/get_reaction_loc()
 	return my_atom
 
-/datum/reagents/proc/get_primary_reagent_name() // Returns the name of the reagent with the biggest volume.
+/datum/reagents/proc/get_primary_reagent_name(var/codex = FALSE) // Returns the name of the reagent with the biggest volume.
 	var/decl/material/reagent = get_primary_reagent_decl()
 	if(reagent)
-		. = reagent.name
+		if(codex && reagent.codex_name)
+			. = reagent.codex_name
+		else
+			. = reagent.name
 
 /datum/reagents/proc/get_primary_reagent_decl()
 	. = primary_reagent && GET_DECL(primary_reagent)

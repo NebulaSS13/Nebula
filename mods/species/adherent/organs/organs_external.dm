@@ -7,7 +7,6 @@
 	body_part =               SLOT_LOWER_BODY
 	organ_tag =               BP_CHEST
 	parent_organ =            null
-	dislocated =              -1
 	max_damage =              50
 	min_broken_damage =       25
 	arterial_bleed_severity = 0
@@ -23,7 +22,6 @@
 	name =                    "trailing tendrils"
 	joint =                   "base"
 	arterial_bleed_severity = 0
-	dislocated =              -1
 	max_damage =              50
 	min_broken_damage =       25
 	encased = "ceramic hull"
@@ -40,7 +38,6 @@
 	joint =                   "connector socket"
 	glowing_eyes =            TRUE
 	arterial_bleed_severity = 0
-	dislocated =              -1
 	max_damage =              50
 	min_broken_damage =       25
 	cavity_max_w_class =      ITEM_SIZE_NORMAL // Apparently their brains change w_class to this.
@@ -57,7 +54,6 @@
 	amputation_point =        "midpoint"
 	joint =                   "base"
 	arterial_bleed_severity = 0
-	dislocated =              -1
 	max_damage =              20
 	min_broken_damage =       10
 	status = ORGAN_PROSTHETIC
@@ -71,7 +67,6 @@
 	amputation_point =        "midpoint"
 	joint =                   "base"
 	arterial_bleed_severity = 0
-	dislocated =              -1
 	max_damage =              20
 	min_broken_damage =       10
 	icon = 'mods/species/adherent/icons/body_turquoise.dmi'
@@ -86,7 +81,6 @@
 	amputation_point =        "midpoint"
 	joint =                   "base"
 	arterial_bleed_severity = 0
-	dislocated =              -1
 	max_damage =              20
 	min_broken_damage =       10
 	icon = 'mods/species/adherent/icons/body_turquoise.dmi'
@@ -101,7 +95,6 @@
 	amputation_point =        "midpoint"
 	joint =                   "base"
 	arterial_bleed_severity = 0
-	dislocated =              -1
 	max_damage =              20
 	min_broken_damage =       10
 	icon = 'mods/species/adherent/icons/body_turquoise.dmi'
@@ -119,7 +112,6 @@
 	organ_tag =               BP_L_LEG
 	parent_organ =            BP_CHEST
 	arterial_bleed_severity = 0
-	dislocated =              -1
 	max_damage =              20
 	min_broken_damage =       10
 	icon = 'mods/species/adherent/icons/body_turquoise.dmi'

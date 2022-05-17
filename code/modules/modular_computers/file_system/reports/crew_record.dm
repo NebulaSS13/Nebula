@@ -11,51 +11,15 @@ var/global/arrest_security_status =  "Arrest"
 	size = 2
 	var/icon/photo_front = null
 	var/icon/photo_side = null
-	//More variables below.
-	var/list/grants = list()	// List of weakrefs to grant files.
-	var/user_id					// A unique identifier linking a mob/player/user to this access record and their grants.
-	
+
 /datum/computer_file/report/crew_record/New()
 	..()
 	filename = "record[random_id(type, 100,999)]"
-	user_id = "[sequential_id("datum/computer_file/report/crew_record")]"
 	load_from_mob(null)
 
 /datum/computer_file/report/crew_record/Destroy()
 	. = ..()
 	global.all_crew_records.Remove(src)
-
-/datum/computer_file/report/crew_record/proc/add_grant(var/datum/computer_file/data/grant_record/new_grant)
-	grants |= weakref(new_grant)
-
-/datum/computer_file/report/crew_record/proc/remove_grant(var/grant_name)
-	for(var/weakref/grant in grants)
-		var/datum/computer_file/data/grant_record/GR = grant.resolve()
-		if(!GR)
-			grants -= grant
-			continue
-		if(GR.stored_data == grant_name)
-			grants -= grant
-			return
-
-/datum/computer_file/report/crew_record/proc/calculate_size()
-	size = max(1, round(length(user_id) + length(grants) / 20))
-
-/datum/computer_file/report/crew_record/proc/get_access(var/network_id)
-	var/list/access_grants = list()
-	for(var/datum/computer_file/data/grant_record/grant in get_valid_grants())
-		LAZYDISTINCTADD(access_grants, uppertext("[network_id].[grant.stored_data]"))
-	return access_grants
-
-/datum/computer_file/report/crew_record/proc/get_valid_grants()
-	var/list/valid_grants = list()
-	for(var/weakref/grant in grants)
-		var/datum/computer_file/data/grant_record/GR = grant.resolve()
-		if(!istype(GR) || GR.holder != holder)
-			grants.Remove(grant)
-			continue // This is a bad grant. File is gone or moved.
-		LAZYDISTINCTADD(valid_grants, GR)
-	return valid_grants
 
 /datum/computer_file/report/crew_record/proc/load_from_mob(var/mob/living/carbon/human/H)
 
@@ -225,7 +189,7 @@ var/global/arrest_security_status =  "Arrest"
 	var/dat = "<tt><H2>RECORD DATABASE DATA DUMP</H2><i>Generated on: [stationdate2text()] [stationtime2text()]</i><br>******************************<br>"
 	dat += "<table>"
 	for(var/datum/report_field/F in CR.fields)
-		if(F.verify_access(access))
+		if(F.get_perms(access) & OS_READ_ACCESS)
 			dat += "<tr><td><b>[F.display_name()]</b>"
 			if(F.needs_big_box)
 				dat += "<tr>"
@@ -251,54 +215,54 @@ var/global/arrest_security_status =  "Arrest"
 
 #define GETTER_SETTER(PATH, KEY) /datum/computer_file/report/crew_record/proc/get_##KEY(){var/datum/report_field/F = locate(/datum/report_field/##PATH/##KEY) in fields; if(F) return F.get_value()} \
 /datum/computer_file/report/crew_record/proc/set_##KEY(given_value){var/datum/report_field/F = locate(/datum/report_field/##PATH/##KEY) in fields; if(F) F.set_value(given_value)}
-#define SETUP_FIELD(NAME, KEY, PATH, ACCESS, ACCESS_EDIT) GETTER_SETTER(PATH, KEY); /datum/report_field/##PATH/##KEY;\
-/datum/computer_file/report/crew_record/generate_fields(){..(); var/datum/report_field/##KEY = add_field(/datum/report_field/##PATH/##KEY, ##NAME);\
+#define SETUP_FIELD(NAME, KEY, PATH, ACCESS, ACCESS_EDIT, CAN_MOD_ACCESS, SEARCHABLE) GETTER_SETTER(PATH, KEY); /datum/report_field/##PATH/##KEY;\
+/datum/computer_file/report/crew_record/generate_fields(){..(); var/datum/report_field/##KEY = add_field(/datum/report_field/##PATH/##KEY, ##NAME, searchable = SEARCHABLE, can_mod_access = CAN_MOD_ACCESS);\
 KEY.set_access(ACCESS, ACCESS_EDIT || ACCESS || access_bridge)}
 
 // Fear not the preprocessor, for it is a friend. To add a field, use one of these, depending on value type and if you need special access to see it.
 // It will also create getter/setter procs for record datum, named like /get_[key here]() /set_[key_here](value) e.g. get_name() set_name(value)
 // Use getter setters to avoid errors caused by typoing the string key.
-#define FIELD_SHORT(NAME, KEY, ACCESS, ACCESS_EDIT) SETUP_FIELD(NAME, KEY, simple_text/crew_record, ACCESS, ACCESS_EDIT)
-#define FIELD_LONG(NAME, KEY, ACCESS, ACCESS_EDIT) SETUP_FIELD(NAME, KEY, pencode_text/crew_record, ACCESS, ACCESS_EDIT)
-#define FIELD_NUM(NAME, KEY, ACCESS, ACCESS_EDIT) SETUP_FIELD(NAME, KEY, number/crew_record, ACCESS, ACCESS_EDIT)
-#define FIELD_LIST(NAME, KEY, OPTIONS, ACCESS, ACCESS_EDIT) FIELD_LIST_EDIT(NAME, KEY, OPTIONS, ACCESS, ACCESS_EDIT)
-#define FIELD_LIST_EDIT(NAME, KEY, OPTIONS, ACCESS, ACCESS_EDIT) SETUP_FIELD(NAME, KEY, options/crew_record, ACCESS, ACCESS_EDIT);\
+#define FIELD_SHORT(NAME, KEY, ACCESS, ACCESS_EDIT, SEARCHABLE, CAN_MOD_ACCESS) SETUP_FIELD(NAME, KEY, simple_text/crew_record, ACCESS, ACCESS_EDIT, CAN_MOD_ACCESS, SEARCHABLE)
+#define FIELD_LONG(NAME, KEY, ACCESS, ACCESS_EDIT, CAN_MOD_ACCESS) SETUP_FIELD(NAME, KEY, pencode_text/crew_record, ACCESS, ACCESS_EDIT, CAN_MOD_ACCESS, FALSE)
+#define FIELD_NUM(NAME, KEY, ACCESS, ACCESS_EDIT, CAN_MOD_ACCESS) SETUP_FIELD(NAME, KEY, number/crew_record, ACCESS, ACCESS_EDIT, CAN_MOD_ACCESS, FALSE)
+#define FIELD_LIST(NAME, KEY, OPTIONS, ACCESS, ACCESS_EDIT, CAN_MOD_ACCESS) FIELD_LIST_EDIT(NAME, KEY, OPTIONS, ACCESS, ACCESS_EDIT, CAN_MOD_ACCESS)
+#define FIELD_LIST_EDIT(NAME, KEY, OPTIONS, ACCESS, ACCESS_EDIT, CAN_MOD_ACCESS) SETUP_FIELD(NAME, KEY, options/crew_record, ACCESS, ACCESS_EDIT, CAN_MOD_ACCESS, FALSE);\
 /datum/report_field/options/crew_record/##KEY/get_options(){return OPTIONS}
 
 // GENERIC RECORDS
-FIELD_SHORT("Name", name, null, access_change_ids)
-FIELD_SHORT("Formal Name", formal_name, null, access_change_ids)
-FIELD_SHORT("Job", job, null, access_change_ids)
-FIELD_LIST("Sex", sex, record_genders(), null, access_change_ids)
-FIELD_NUM("Age", age, null, access_change_ids)
-FIELD_LIST_EDIT("Status", status, global.physical_statuses, null, access_medical)
+FIELD_SHORT("Name", name, null, access_change_ids, TRUE, TRUE)
+FIELD_SHORT("Formal Name", formal_name, null, access_change_ids, FALSE, TRUE)
+FIELD_SHORT("Job", job, null, access_change_ids, FALSE, TRUE)
+FIELD_LIST("Sex", sex, record_genders(), null, access_change_ids, TRUE)
+FIELD_NUM("Age", age, null, access_change_ids, TRUE)
+FIELD_LIST_EDIT("Status", status, global.physical_statuses, null, access_medical, TRUE)
 
-FIELD_SHORT("Species",species_name, null, access_change_ids)
-FIELD_LIST("Branch", branch, record_branches(), null, access_change_ids)
-FIELD_LIST("Rank", rank, record_ranks(), null, access_change_ids)
-FIELD_SHORT("Religion", religion, access_chapel_office, access_change_ids)
+FIELD_SHORT("Species",species_name, null, access_change_ids, FALSE, TRUE)
+FIELD_LIST("Branch", branch, record_branches(), null, access_change_ids, TRUE)
+FIELD_LIST("Rank", rank, record_ranks(), null, access_change_ids, TRUE)
+FIELD_SHORT("Religion", religion, access_chapel_office, access_change_ids, FALSE, TRUE)
 
-FIELD_LONG("General Notes (Public)", public_record, null, access_bridge)
+FIELD_LONG("General Notes (Public)", public_record, null, access_bridge, TRUE)
 
 // MEDICAL RECORDS
-FIELD_LIST("Blood Type", bloodtype, get_all_blood_types(), access_medical, access_medical)
-FIELD_LONG("Medical Record", medical_record, access_medical, access_medical)
-FIELD_LONG("Known Implants", implants, access_medical, access_medical)
+FIELD_LIST("Blood Type", bloodtype, get_all_blood_types(), access_medical, access_medical, TRUE)
+FIELD_LONG("Medical Record", medical_record, access_medical, access_medical, TRUE)
+FIELD_LONG("Known Implants", implants, access_medical, access_medical, TRUE)
 
 // SECURITY RECORDS
-FIELD_LIST("Criminal Status", criminalStatus, global.security_statuses, access_security, access_security)
-FIELD_LONG("Security Record", security_record, access_security, access_security)
-FIELD_SHORT("DNA", dna, access_security, access_security)
-FIELD_SHORT("Fingerprint", fingerprint, access_security, access_security)
+FIELD_LIST("Criminal Status", criminalStatus, global.security_statuses, access_security, access_security, TRUE)
+FIELD_LONG("Security Record", security_record, access_security, access_security, TRUE)
+FIELD_SHORT("DNA", dna, access_security, access_security, TRUE, TRUE)
+FIELD_SHORT("Fingerprint", fingerprint, access_security, access_security, TRUE, TRUE)
 
 // EMPLOYMENT RECORDS
-FIELD_LONG("Employment Record", employment_record, access_bridge, access_bridge)
-FIELD_SHORT("Home System", homeSystem, access_bridge, access_change_ids)
-FIELD_SHORT("Faction", faction, access_bridge, access_bridge)
-FIELD_LONG("Qualifications", skillset, access_bridge, access_bridge)
+FIELD_LONG("Employment Record", employment_record, access_bridge, access_bridge, TRUE)
+FIELD_SHORT("Home System", homeSystem, access_bridge, access_change_ids, FALSE, TRUE)
+FIELD_SHORT("Faction", faction, access_bridge, access_bridge, FALSE, TRUE)
+FIELD_LONG("Qualifications", skillset, access_bridge, access_bridge, TRUE)
 
 // ANTAG RECORDS
-FIELD_LONG("Exploitable Information", antag_record, access_syndicate, access_syndicate)
+FIELD_LONG("Exploitable Information", antag_record, access_syndicate, access_syndicate, FALSE)
 
 //Options builderes
 /datum/report_field/options/crew_record/rank/proc/record_ranks()

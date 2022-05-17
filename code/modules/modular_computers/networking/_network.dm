@@ -47,9 +47,6 @@
 		return FALSE
 	if(D in devices)
 		return TRUE
-	D.network_tag = get_unique_tag(D.network_tag)
-	devices |= D
-	devices_by_tag[D.network_tag] = D
 	if(istype(D, /datum/extension/network_device/mainframe))
 		var/datum/extension/network_device/mainframe/M = D
 		mainframes |= M
@@ -59,11 +56,18 @@
 	else if(istype(D, /datum/extension/network_device/broadcaster/relay))
 		relays |= D
 		add_log("Relay ONLINE", D.network_tag)
-	else if(istype(D, /datum/extension/network_device/acl) && !access_controller)
-		set_access_controller(D)
+	else if(istype(D, /datum/extension/network_device/acl))
+		if(access_controller)
+			return FALSE
+		access_controller = D
+		add_log("New main access controller set.", D.network_tag)
 	else if(istype(D, /datum/extension/network_device/camera))
 		var/datum/extension/network_device/camera/C = D
 		add_camera_to_channels(C, C.channels)
+	
+	D.network_tag = get_unique_tag(D.network_tag)
+	devices |= D
+	devices_by_tag[D.network_tag] = D
 	return TRUE
 
 /datum/computer_network/proc/remove_device(datum/extension/network_device/D)
@@ -136,6 +140,7 @@
 			return
 		if(R.allow_wifi && (R.long_range || (get_z(R.holder) == get_z(D.holder))))
 			. = WIRELESS_CONNECTION
+
 /datum/computer_network/proc/get_signal_strength(datum/extension/network_device/D)
 	var/connection_status = check_connection(D)
 	if(!connection_status)
@@ -208,31 +213,22 @@
 		if(net.router && ARE_Z_CONNECTED(get_z(net.router.holder), get_z(T)))
 			return net
 
-/datum/computer_network/proc/get_mainframes_by_role(mainframe_role = MF_ROLE_FILESERVER, mob/user)
-	// if administrator, give full access.
-	if(!user)
-		return mainframes_by_role[mainframe_role]
-	var/obj/item/card/id/network/id = user.GetIdCard()
-	if(id && istype(id, /obj/item/card/id/network) && access_controller && (id.user_id in access_controller.administrators))
+/datum/computer_network/proc/get_mainframes_by_role(mainframe_role = MF_ROLE_FILESERVER, list/accesses)
+	// Don't check for access if none is passed, for internal usage.
+	if(!accesses)
 		return mainframes_by_role[mainframe_role]
 	var/list/allowed_mainframes = list()
 	for(var/datum/extension/network_device/D in mainframes_by_role[mainframe_role])
-		if(D.has_access(user))
+		if(D.has_access(accesses))
 			allowed_mainframes |= D
 	return allowed_mainframes
 
-/datum/computer_network/proc/get_devices_by_type(var/type, var/mob/user)
-	var/bypass_auth = !user
-	if(!bypass_auth)
-		// Check for admin.
-		var/obj/item/card/id/network/id = user.GetIdCard()
-		if(id && istype(id, /obj/item/card/id/network) && access_controller && (id.user_id in access_controller.administrators))
-			bypass_auth = TRUE
-
+/datum/computer_network/proc/get_devices_by_type(type, list/accesses)
 	var/list/results = list()
+	var/bypass_auth = !accesses
 	for(var/datum/extension/network_device/device in devices)
 		if(istype(device.holder, type))
-			if(bypass_auth || device.has_access(user))
+			if(bypass_auth || device.has_access(accesses))
 				results += device.holder
 	return results
 

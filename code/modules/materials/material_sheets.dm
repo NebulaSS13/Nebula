@@ -1,5 +1,6 @@
 // Stacked resources. They use a material datum for a lot of inherited values.
 /obj/item/stack/material
+	name = "material sheet"
 	force = 5.0
 	throwforce = 5
 	w_class = ITEM_SIZE_LARGE

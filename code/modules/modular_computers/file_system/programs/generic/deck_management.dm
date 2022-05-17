@@ -7,7 +7,7 @@
 	filename = "deckmngr"
 	filedesc = "Deck Management"
 	nanomodule_path = /datum/nano_module/deck_management
-	required_access = list(list(access_mining, access_cargo, access_bridge))
+	read_access = list(list(access_mining, access_cargo, access_bridge))
 	program_icon_state = "request"
 	program_key_state = "rd_key"
 	program_menu_icon = "clock"
@@ -103,7 +103,7 @@
 					L["name"] = report.display_name()
 					L["index"] = i
 					L["exists"] = locate(report) in selected_mission.other_reports
-					L["access_edit"] = report.verify_access_edit(get_access(user))
+					L["access_edit"] = report.get_file_perms(get_access(user), user) & OS_WRITE_ACCESS
 					other_reports += list(L)
 				data["other_reports"] = other_reports
 
@@ -113,7 +113,7 @@
 			if(!istype(selected_report))
 				prog_state = DECK_MISSION_DETAILS
 				return
-			data["report_data"] = selected_report.generate_nano_data(get_access(user))
+			data["report_data"] = selected_report.generate_nano_data(get_access(user), user)
 			data["shuttle_name"] = selected_shuttle.name
 			data["mission_data"] = generate_mission_data(selected_mission)
 			data["view_only"] = can_view_only
@@ -185,11 +185,21 @@
 		prototype_shuttle = selected_shuttle
 		report_prototypes = list()
 		for(var/report_type in subtypesof(/datum/computer_file/report/recipient/shuttle))
-			var/datum/computer_file/report/recipient/shuttle/new_report = new report_type
-			if(new_report.access_shuttle)
-				new_report.set_access(null, selected_shuttle.logging_access, override = 0)
-			report_prototypes += new_report
+			report_prototypes += create_report(report_type, selected_shuttle)
 	return 1
+
+/datum/nano_module/deck_management/proc/create_report(report_type, datum/shuttle/given_shuttle)
+	var/datum/computer_file/report/recipient/shuttle/new_report = new report_type
+	if(new_report.access_shuttle && given_shuttle.logging_access)
+		var/old_access = new_report.write_access?.Copy()
+		var/new_access = list()
+		for(var/group in old_access) // We add logging_access as an OR option to every AND requirement
+			var/new_group = list()
+			new_group += group // this listifies it if it was not already a list
+			new_group |= given_shuttle.logging_access
+			new_access += list(new_group)
+		new_report.set_access(null, new_access, TRUE)
+	return new_report
 
 /datum/nano_module/deck_management/proc/set_mission(mission_ID)
 	var/datum/shuttle_log/my_log = SSshuttle.shuttle_logs[selected_shuttle]
@@ -256,8 +266,7 @@
 				if(selected_mission.flight_plan)
 					selected_report = selected_mission.flight_plan.clone()//We always make a new one to buffer changes until submitted.
 				else
-					selected_report = new /datum/computer_file/report/flight_plan
-					selected_report.set_access(null, selected_shuttle.logging_access, override = 0)
+					selected_report = create_report(/datum/computer_file/report/flight_plan, selected_shuttle)
 			else
 				if(selected_mission.stage in list(SHUTTLE_MISSION_PLANNED, SHUTTLE_MISSION_QUEUED))
 					return 1 //Hold your horses until the mission is started on these reports.
@@ -287,14 +296,14 @@
 			return 1
 		var/field_ID = text2num(href_list["ID"])
 		var/datum/report_field/field = selected_report.field_from_ID(field_ID)
-		if(!field || !field.verify_access_edit(get_access(user)))
+		if(!field || !(field.get_perms(get_access(user), user) & OS_WRITE_ACCESS))
 			return 1
 		field.ask_value(user) //Handles the remaining IO.
 		return 1
 	if(href_list["submit"])
 		if(!ensure_valid_mission() || !selected_report)
 			return 1
-		if(!selected_report.verify_access_edit(get_access(user)))
+		if(!(selected_report.get_file_perms(get_access(user), user) & OS_WRITE_ACCESS))
 			return 1
 		var/datum/shuttle_log/my_log = SSshuttle.shuttle_logs[selected_shuttle]
 		if(my_log.submit_report(selected_mission, selected_report, user))
@@ -346,7 +355,7 @@
 		var/datum/report_field/people/manifest = selected_mission.flight_plan.manifest
 		if(!manifest.get_value())
 			return 1
-		manifest.send_email(user)
+		manifest.send_email(user, get_access(user))
 		return 1
 
 #undef DECK_HOME

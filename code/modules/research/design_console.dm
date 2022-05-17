@@ -94,7 +94,7 @@
 		data["tech_levels"] = show_tech_levels
 
 		var/list/found_databases = list()
-		for(var/obj/machinery/design_database/db in network?.get_devices_by_type(/obj/machinery/design_database, user))
+		for(var/obj/machinery/design_database/db in network?.get_devices_by_type(/obj/machinery/design_database, user.GetAccess()))
 			var/list/database = list("name" = db.name, "ref" = "\ref[db]")
 			if(db.stat & (BROKEN|NOPOWER))
 				database["status"] = "Offline"
@@ -105,7 +105,7 @@
 		data["connected_databases"] = found_databases
 
 		var/list/found_analyzers = list()
-		for(var/obj/machinery/destructive_analyzer/az in network?.get_devices_by_type(/obj/machinery/destructive_analyzer, user))
+		for(var/obj/machinery/destructive_analyzer/az in network?.get_devices_by_type(/obj/machinery/destructive_analyzer, user.GetAccess()))
 			var/list/analyzer = list("name" = az.name, "ref" = "\ref[az]")
 			if(az.stat & (BROKEN|NOPOWER))
 				analyzer["status"] = "Offline"

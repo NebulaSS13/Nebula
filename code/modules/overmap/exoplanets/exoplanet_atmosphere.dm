@@ -37,6 +37,8 @@
 	var/list/all_materials = decls_repository.get_decls_of_subtype(/decl/material)
 	for(var/mat_type in all_materials)
 		var/decl/material/mat = all_materials[mat_type]
+		if(mat.is_abstract())
+			continue
 		if(mat.exoplanet_rarity == MAT_RARITY_NOWHERE)
 			continue
 		if(isnull(mat.boiling_point) || mat.boiling_point > target_temp)

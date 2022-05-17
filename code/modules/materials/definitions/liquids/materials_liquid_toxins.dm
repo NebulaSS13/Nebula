@@ -246,6 +246,7 @@
 
 /decl/material/liquid/bromide
 	name = "bromide"
+	codex_name = "elemental bromide"
 	uid = "liquid_bromide"
 	lore_text = "A dark, nearly opaque, red-orange, toxic element."
 	taste_description = "pestkiller"

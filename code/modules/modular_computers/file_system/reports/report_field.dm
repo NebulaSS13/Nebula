@@ -7,8 +7,10 @@
 	var/ID                               // A unique (per report) id; don't set manually.
 	var/needs_big_box = 0                // Suggests that the output won't look good in-line. Useful in nanoui logic.
 	var/ignore_value = 0                 // Suggests that the value should not be displayed.
-	var/list/access_edit = list(list())  // The access required to edit the field.
-	var/list/access = list(list())       // The access required to view the field.
+	var/searchable = 0                   // Whether or not the field will be searchable in the crew records computer.
+	var/can_mod_access = TRUE            // Whether or not the access requirements of this field can be modified recursively from the record's access.
+	var/list/read_access = list()  // The access required to edit the field.
+	var/list/write_access = list() // The access required to view the field.
 
 /datum/report_field/New(datum/computer_file/report/report)
 	owner = report
@@ -19,29 +21,34 @@
 	. = ..()
 
 //Access stuff. Can be given access constants or lists. See report access procs for documentation.
-/datum/report_field/proc/set_access(access, access_edit, override = 1)
-	if(access)
-		if(!islist(access))
-			access = list(access)
-		override ? (src.access = list(access)) : (src.access += list(access))
-	if(access_edit)
-		if(!islist(access_edit))
-			access_edit = list(access_edit)
-		override ? (src.access_edit = list(access_edit)) : (src.access_edit += list(access_edit))
-
-/datum/report_field/proc/verify_access(given_access)
-	return has_access_pattern(access, given_access)
-
-/datum/report_field/proc/verify_access_edit(given_access)
-	if(!verify_access(given_access))
+//For fields, the recursive argument indicates whether this access set is being propogated onto the whole report at once or not.
+/datum/report_field/proc/set_access(read_access, write_access, recursive = FALSE)
+	if(recursive && !can_mod_access)
 		return
-	return has_access_pattern(access_edit, given_access)
+	if(read_access)
+		if(!islist(read_access))
+			read_access = list(read_access)
+		src.read_access = read_access
+	if(write_access)
+		if(!islist(write_access))
+			write_access = list(write_access)
+		src.write_access = write_access
+
+// Analogous to get_file_perms on reports. Read access is required to have write access.
+/datum/report_field/proc/get_perms(accesses, mob/user)
+	if(!accesses || (isghost(user) && check_rights(R_ADMIN, 0, user))) // For internal use/use by admin ghosts.
+		return (OS_READ_ACCESS | OS_WRITE_ACCESS)
+	if(!LAZYLEN(read_access) || has_access(read_access, accesses))
+		. |= OS_READ_ACCESS
+		
+		if(!LAZYLEN(write_access) || has_access(write_access, accesses))
+			. |= OS_WRITE_ACCESS
 
 //Assumes the old and new fields are of the same type. Override if the field stores information differently.
 /datum/report_field/proc/copy_value(datum/report_field/old_field)
 	value = old_field.value
-	access = old_field.access
-	access_edit = old_field.access_edit
+	read_access = old_field.read_access
+	write_access = old_field.write_access
 
 //Gives the user prompts to fill out the field.
 /datum/report_field/proc/ask_value(mob/user)
@@ -58,11 +65,11 @@
 /datum/report_field/proc/display_name()
 	return name
 
-/datum/report_field/proc/generate_row_pencode(access, with_fields)
+/datum/report_field/proc/generate_row_pencode(access, mob/user, with_fields)
 	if(!ignore_value)
 		. += "\[row\]\[cell\]\[b\][display_name()]:\[/b\]"
 		var/field = ((with_fields && can_edit) ? "\[field\]" : "" )
-		if(!access || verify_access(access))
+		if(!access || (get_perms(access, user) & OS_READ_ACCESS))
 			. += (needs_big_box ? "\[/grid\][get_value()][field]\[grid\]" : "\[cell\][get_value()][field]")
 		else
 			. += "\[cell\]\[REDACTED\][field]"
@@ -70,11 +77,12 @@
 		. += "\[/grid\][display_name()]\[grid\]"
 	. = JOINTEXT(.)
 
-/datum/report_field/proc/generate_nano_data(list/given_access)
+/datum/report_field/proc/generate_nano_data(list/given_access, mob/user)
 	var/dat = list()
 	if(given_access)
-		dat["access"] = verify_access(given_access)
-		dat["access_edit"] = verify_access_edit(given_access)
+		var/access_flags = get_perms(given_access, user)
+		dat["access"] = access_flags & OS_READ_ACCESS
+		dat["access_edit"] = access_flags & OS_WRITE_ACCESS
 	dat["name"] = display_name()
 	dat["value"] = get_value()
 	dat["can_edit"] = can_edit

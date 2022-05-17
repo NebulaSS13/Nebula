@@ -140,7 +140,7 @@
 	for(var/g in gas)
 		var/decl/material/mat = GET_DECL(g)
 		. += mat.gas_specific_heat * gas[g]
-	. *= group_multiplier
+	. *= max(1, group_multiplier)
 
 
 //Adds or removes thermal energy. Returns the actual thermal energy change, as in the case of removing energy we can't go below TCMB.
@@ -150,6 +150,9 @@
 		return 0
 
 	var/heat_capacity = heat_capacity()
+	if(heat_capacity <= 0)
+		return 0
+
 	if (thermal_energy < 0)
 		if (temperature < TCMB)
 			return 0

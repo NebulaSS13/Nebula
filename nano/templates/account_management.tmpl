@@ -1,0 +1,87 @@
+{{if data.prog_state == -1}} <!--Error-->
+	<div class='item'>
+		<div class='itemLabel'>
+			Error Encountered:
+		</div>
+		<div class='itemContent'>
+			{{:data.error}}
+		</div>
+	</div>
+	{{:helper.link('Go back', 'arrowthickstop-1-w', {'back' : 1}, null)}}
+{{else data.prog_state == 0}} <!--Menu-->
+	<h2>Welcome to the network account management utility:</h2>
+	{{:helper.link('Self account management', null, {'self_mode' : 1}, null)}}
+	{{:helper.link('Manage other accounts', null, {'other_mode' : 1}, null)}}
+{{else data.prog_state == 1}}<!--Self management-->
+	<h2>Welcome, {{:data.account_fullname}}</h2>
+	<div class='item'>		
+		<div class='itemLabel'>
+			Login:
+		</div>
+		<div class='itemContent'>
+			{{:data.account_name}}
+		</div>
+	</div>
+	<div class='item'>		
+		<div class='itemLabel'>
+			Password:
+		</div>
+		<div class='itemContent'>
+			{{:helper.link('*******', null, {'change_password' : 1}, null)}}
+		</div>
+	</div>
+	<div class="statusDisplay" style="min-height: 120px;">
+		<div class="item">
+			<div class="itemLabel">
+				Groups:
+			</div>
+			<div class="itemContent" style="width: 100%;">
+				{{for data.account_groups}}
+					{{:value}}<br>
+				{{/for}}
+			</div>
+		</div>
+	</div>
+	{{:helper.link('Change name', null, {'change_fullname' : 1}, null)}}
+	{{:helper.link('Go back', 'arrowthickstop-1-w', {'back' : 1}, null)}}
+{{else data.prog_state == 2}}<!--Other Management-->
+	{{if data.accounts}}
+		<h2>Network Accounts:</h2>
+		<h3>Some accounts may not be visible depending on your access to account servers.</h3>
+		<table style="width:100%">
+		<tr><td style="width:40%">Account Login<th>Real Name
+		{{for data.accounts}}
+			<tr class="candystripe">
+			<td>{{:helper.link(value.account, '', {'select_account' : value.account})}}
+			<td>{{:value.fullname}}
+		{{/for}}
+		</table>
+		{{:helper.link('Create account', '', {'create_account' : 1})}}
+		{{:helper.link('Recover account from backup', '', {'recover_account' : 1})}}
+		{{:helper.link('Go back', 'arrowthickstop-1-w', {'back' : 1}, null)}}
+	{{else data.parent_groups}}
+		<h2>Modifying account for {{:data.account_name}}:</h2>
+		<h3>Viewing parent groups. Group sub management is {{:data.sub_management ? 'enabled' : 'disabled'}}.</h3>
+		<table style="width:100%">
+		<tr><td style="width:40%">Parent Group<th>Membership
+		{{for data.parent_groups}}
+			<tr class="candystripe">
+			<td>{{:helper.link(value.name, '', {'select_parent_group' : value.name})}}
+			<td>{{:helper.link(value.member ? 'Member' : 'Not a member', '', {'mod_group' : value.name})}}
+		{{/for}}
+		</table>
+		{{:helper.link('Go back', 'arrowthickstop-1-w', {'back' : 1}, null)}}
+	{{else data.child_groups}}
+		<h2>Modifying account for {{:data.account_name}}:</h2>
+		<h3>Viewing child groups of {{:data.parent_group}}. Group sub management is {{:data.sub_management ? 'enabled' : 'disabled'}}.</h3>
+		<table style="width:100%">
+		<tr><td style="width:40%">Child Group<th>Membership
+		{{for data.child_groups}}
+			<tr class="candystripe">
+			<td>{{:value.name}}
+			<td>{{:helper.link(value.member ? 'Member' : 'Not a member', '', {'mod_group' : value.name})}}
+		{{/for}}
+		</table>
+		{{:helper.link('Go back', 'arrowthickstop-1-w', {'back' : 1}, null)}}
+	{{/if}}
+{{/if}}

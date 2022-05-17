@@ -18,6 +18,14 @@ var/global/datum/matchmaker/matchmaker = new()
 		return TRUE
 	matchmaker.do_matchmaking()
 	return TRUE
+
+/datum/mind
+	var/list/known_connections //list of known (RNG) relations between people
+
+/datum/mind/Destroy()
+	QDEL_NULL_LIST(known_connections)
+	. = ..()
+
 /datum/matchmaker
 	var/list/relation_types = list()
 	var/list/relations = list()

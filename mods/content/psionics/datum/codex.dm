@@ -1,6 +1,5 @@
 /datum/codex_entry/cuchulain_foundation
 	name = "Cuchulain Foundation"
-	associated_strings = list("Cuchulain", "Foundation")
 	associated_paths = list(
 		/obj/item/storage/briefcase/foundation,
 		/obj/item/gun/projectile/revolver/foundation,
@@ -25,7 +24,7 @@
 
 /datum/codex_entry/psionics
 	name = "Psionics"
-	associated_strings = list("Psychic", "Psychic Powers", "Psi")
+	associated_strings = list("psychic powers")
 	associated_paths = list(
 		/obj/item/book/manual/psionics,
 		/obj/item/clothing/head/helmet/space/psi_amp,

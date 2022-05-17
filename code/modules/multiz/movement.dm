@@ -151,7 +151,7 @@
 		for(var/atom/A in below)
 			if(!A.CanPass(src, location_override))
 				return FALSE
-		
+
 		//We cannot sink if we can swim
 		if(location_override.get_fluid_depth() >= FLUID_DEEP && (below == loc))
 			if(!(below.get_fluid_depth() >= 0.95 * FLUID_MAX_DEPTH)) //No salmon skipping up a stream of falling water
@@ -188,7 +188,7 @@
 
 /atom/movable/proc/handle_fall(var/turf/landing)
 	var/turf/previous = get_turf(loc)
-	forceMove(landing)
+	Move(landing, get_dir(previous, landing))
 	if(locate(/obj/structure/stairs) in landing)
 		return 1
 	if(landing.get_fluid_depth() >= FLUID_DEEP)
@@ -228,6 +228,8 @@
 	return BASE_STORAGE_COST(w_class)
 
 /mob/living/carbon/human/apply_fall_damage(var/turf/landing)
+	if(status_flags & GODMODE)
+		return
 	if(species && species.handle_fall_special(src, landing))
 		return
 	var/min_damage = 7
@@ -246,7 +248,7 @@
 		var/list/victims = list()
 		for(var/tag in list(BP_L_FOOT, BP_R_FOOT, BP_L_ARM, BP_R_ARM))
 			var/obj/item/organ/external/E = get_organ(tag)
-			if(E && !E.is_stump() && !E.dislocated && !BP_IS_PROSTHETIC(E))
+			if(E && !E.is_stump() && !E.is_dislocated() && (E.limb_flags & ORGAN_FLAG_CAN_DISLOCATE) && !BP_IS_PROSTHETIC(E))
 				victims += E
 		if(victims.len)
 			var/obj/item/organ/external/victim = pick(victims)
@@ -323,7 +325,7 @@
 
 /mob/living/simple_animal/aquatic/can_float()
 	return TRUE
-	
+
 /mob/living/simple_animal/hostile/aquatic/can_float()
 	return TRUE
 

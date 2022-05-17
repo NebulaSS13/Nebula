@@ -25,4 +25,5 @@
 		environment.adjust_gas(gas, air_change[gas])
 
 /spell/create_air/tower
+	desc = "Allows you to generate a livable atmosphere in the area you are in."
 	charge_max = 5

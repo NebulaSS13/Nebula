@@ -1,5 +1,5 @@
 /datum/keybinding/living
-	category = CATEGORY_HUMAN
+	category = CATEGORY_LIVING
 
 /datum/keybinding/living/can_use(client/user)
 	return isliving(user.mob)
@@ -24,15 +24,4 @@
 /datum/keybinding/living/resist/down(client/user)
 	var/mob/living/L = user.mob
 	L.resist()
-	return TRUE
-
-/datum/keybinding/living/drop_item
-	hotkey_keys = list("Q", "Northwest") // HOME
-	name = "drop_item"
-	full_name = "Drop Item"
-	description = ""
-
-/datum/keybinding/living/drop_item/down(client/user)
-	var/mob/living/L = user.mob
-	L.drop_item()
 	return TRUE

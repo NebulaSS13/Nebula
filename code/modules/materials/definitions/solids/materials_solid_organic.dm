@@ -9,7 +9,7 @@
 	use_reinf_state = null
 	color = COLOR_EGGSHELL
 	door_icon_base = "plastic"
-	hardness = MAT_VALUE_FLEXIBLE
+	hardness = MAT_VALUE_FLEXIBLE + 10
 	weight = MAT_VALUE_LIGHT
 	melting_point = T0C+371 //assuming heat resistant plastic
 	stack_origin_tech = "{'materials':3}"
@@ -404,7 +404,7 @@
 	uid = "solid_scaled_hide"
 	color = "#434b31"
 	integrity = 75
-	hardness = MAT_VALUE_RIGID
+	hardness = MAT_VALUE_FLEXIBLE + 5
 	weight = MAT_VALUE_LIGHT
 	reflectiveness = MAT_VALUE_SHINY
 

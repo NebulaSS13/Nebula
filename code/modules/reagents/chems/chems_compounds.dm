@@ -379,6 +379,7 @@
 	color = "#c8a5dc"
 	touch_met = 5
 	dirtiness = DIRTINESS_STERILE
+	turf_touch_threshold = 0.1
 	uid = "chem_antiseptic"
 
 /decl/material/liquid/crystal_agent

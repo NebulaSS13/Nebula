@@ -2721,7 +2721,7 @@
 /turf/simulated/floor/plating,
 /area/lar_maria/cells)
 "hd" = (
-/obj/structure/stairs/south,
+/obj/structure/stairs/long,
 /turf/simulated/floor/tiled,
 /area/lar_maria/vir_access)
 "he" = (

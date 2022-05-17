@@ -43,6 +43,7 @@
 		return
 
 	var/mob/user = usr
+	var/list/accesses = computer.get_access(user)
 
 	if(href_list["PRG_change_filesource"])
 		. = TOPIC_HANDLED
@@ -60,7 +61,7 @@
 				if(!network)
 					return TOPIC_REFRESH
 				// Helper for some user-friendliness. Try to select the first available mainframe.
-				var/list/file_servers = network.get_file_server_tags(MF_ROLE_FILESERVER, user)
+				var/list/file_servers = network.get_file_server_tags(MF_ROLE_FILESERVER, accesses)
 				var/datum/file_storage/network/N = current_filesource
 				if(!file_servers.len)
 					N.server = null // Don't allow players to see files on mainframes they cannot access.
@@ -73,7 +74,7 @@
 		var/datum/computer_network/network = computer.get_network()
 		if(!network)
 			return
-		var/list/file_servers = network.get_file_server_tags(MF_ROLE_FILESERVER, user)
+		var/list/file_servers = network.get_file_server_tags(MF_ROLE_FILESERVER, accesses)
 		var/file_server = input(usr, "Choose a fileserver to view files on:", "Select File Server") as null|anything in file_servers
 		if(file_server)
 			var/datum/file_storage/network/N = file_sources[/datum/file_storage/network]
@@ -87,8 +88,13 @@
 
 	if(href_list["PRG_openfile"])
 		. = TOPIC_HANDLED
-		open_file = href_list["PRG_openfile"]
-
+		var/datum/computer_file/data/F = current_filesource.get_file(href_list["PRG_openfile"])
+		if(F && (F.get_file_perms(accesses, user)) & OS_READ_ACCESS)
+			open_file = href_list["PRG_openfile"]
+			. = TOPIC_REFRESH
+		else
+			to_chat(user, SPAN_WARNING("You do not have permission to read this file."))
+			. = TOPIC_HANDLED
 	if(href_list["PRG_newtextfile"])
 		. = TOPIC_HANDLED
 		var/newname = sanitize(input(usr, "Enter file name or leave blank to cancel:", "File rename"))
@@ -136,7 +142,9 @@
 		if(F.read_only)
 			error = "This file is read only. You cannot edit it."
 			return
-
+		if(!(F.get_file_perms(accesses, user) & OS_WRITE_ACCESS))
+			error = "You do not have write access to this file."
+			return
 		var/oldtext = html_decode(F.stored_data)
 		oldtext = replacetext(oldtext, "\[br\]", "\n")
 
@@ -145,7 +153,7 @@
 			return
 
 		if(F)
-			current_filesource.save_file(F.filename, newtext)
+			current_filesource.save_file(F.filename, newtext, accesses, user)
 			return TOPIC_REFRESH
 
 	if(href_list["PRG_printfile"])
@@ -170,6 +178,15 @@
 		if(!F || !istype(F) || F.unsendable)
 			error = "I/O ERROR: Unable to transfer file."
 			return
+		var/copying = alert(usr, "Would you like to copy the file or transfer it? Transfering files requires write access.", "Copying file", "Copy", "Transfer")
+		if(copying == "Transfer")
+			if(!(F.get_file_perms(accesses, user) & OS_WRITE_ACCESS))
+				error = "ACCESS ERROR: You do not have permission to transfer this file"
+				return
+		else
+			if(!(F.get_file_perms(accesses, user) & OS_READ_ACCESS))
+				error = "ACCESS ERROR: You do not have permission to copy this file"
+				return			
 		var/list/choices = list()
 		for(var/T in file_sources)
 			var/datum/file_storage/FS = file_sources[T]
@@ -183,7 +200,7 @@
 			if(nope)
 				to_chat(user, SPAN_WARNING("Cannot transfer file to [dst] for following reason: [nope]"))
 				return
-			current_transfer = new(current_filesource, dst, F, FALSE)
+			current_transfer = new(current_filesource, dst, F, copying == "Copy" ? TRUE : FALSE)
 			ui_header = "downloader_running.gif"
 
 /datum/computer_file/program/filemanager/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1, var/datum/topic_state/state = global.default_topic_state)

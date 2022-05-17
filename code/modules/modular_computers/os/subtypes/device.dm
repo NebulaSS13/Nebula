@@ -32,12 +32,6 @@
 		if(assembly && assembly.enabled)
 			assembly.shutdown_device()
 
-/datum/extension/interactive/os/device/system_boot()
-	..()
-	if(holder)
-		var/datum/extension/assembly/modular_computer/assembly = get_extension(holder, /datum/extension/assembly)
-		return assembly && assembly.turn_on()
-
 /datum/extension/interactive/os/device/extension_act(href, href_list, user)
 	. = ..()
 	var/obj/item/modular_computer/C = holder

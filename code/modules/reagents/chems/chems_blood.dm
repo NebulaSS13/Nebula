@@ -1,5 +1,6 @@
 /decl/material/liquid/blood
 	name = "blood"
+	codex_name = "whole blood"
 	uid = "chem_blood"
 	lore_text = "A red (or blue) liquid commonly found inside animals, most of whom are pretty insistent about it being left where you found it."
 	metabolism = REM * 5

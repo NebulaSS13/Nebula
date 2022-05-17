@@ -19,39 +19,40 @@
 	clear_fullscreen()
 	if(istype(ai))
 		QDEL_NULL(ai)
+	remove_screen_obj_references()
 	if(client)
-		remove_screen_obj_references()
 		for(var/atom/movable/AM in client.screen)
 			var/obj/screen/screenobj = AM
-			if(!istype(screenobj) || !screenobj.globalscreen)
+			if(istype(screenobj) && !screenobj.globalscreen)
 				qdel(screenobj)
 		client.screen = list()
-	if(mind && mind.current == src)
-		spellremove(src)
+	if(mind)
+		mind.handle_mob_deletion(src)
+	teleop = null
 	ghostize()
-	..()
-	return QDEL_HINT_HARDDEL
+	return ..()
 
 /mob/proc/remove_screen_obj_references()
-	hands = null
-	purged = null
-	internals = null
-	oxygen = null
-	i_select = null
-	m_select = null
-	toxin = null
-	fire = null
-	bodytemp = null
-	healths = null
-	throw_icon = null
-	nutrition_icon = null
-	pressure = null
-	pain = null
-	item_use_icon = null
-	gun_move_icon = null
-	gun_setting_icon = null
-	ability_master = null
-	zone_sel = null
+	QDEL_NULL_SCREEN(hands)
+	QDEL_NULL_SCREEN(purged)
+	QDEL_NULL_SCREEN(internals)
+	QDEL_NULL_SCREEN(oxygen)
+	QDEL_NULL_SCREEN(toxin)
+	QDEL_NULL_SCREEN(fire)
+	QDEL_NULL_SCREEN(bodytemp)
+	QDEL_NULL_SCREEN(healths)
+	QDEL_NULL_SCREEN(throw_icon)
+	QDEL_NULL_SCREEN(nutrition_icon)
+	QDEL_NULL_SCREEN(hydration_icon)
+	QDEL_NULL_SCREEN(pressure)
+	QDEL_NULL_SCREEN(pain)
+	QDEL_NULL_SCREEN(up_hint)
+	QDEL_NULL_SCREEN(item_use_icon)
+	QDEL_NULL_SCREEN(radio_use_icon)
+	QDEL_NULL_SCREEN(gun_move_icon)
+	QDEL_NULL_SCREEN(gun_setting_icon)
+	QDEL_NULL_SCREEN(ability_master)
+	QDEL_NULL_SCREEN(zone_sel)
 
 /mob/Initialize()
 	. = ..()
@@ -213,7 +214,7 @@
 #undef ENCUMBERANCE_MOVEMENT_MOD
 
 /mob/proc/encumbrance()
-	for(var/obj/item/grab/G AS_ANYTHING in get_active_grabs())
+	for(var/obj/item/grab/G as anything in get_active_grabs())
 		. = max(., G.grab_slowdown())
 	. *= (0.8 ** size_strength_mod())
 	. *= (0.5 + 1.5 * (SKILL_MAX - get_skill_value(SKILL_HAULING))/(SKILL_MAX - SKILL_MIN))
@@ -224,6 +225,8 @@
 
 /mob/proc/Life()
 	SHOULD_NOT_SLEEP(TRUE)
+	if(QDELETED(src))
+		return PROCESS_KILL
 	if(ability_master)
 		ability_master.update_spells(0)
 
@@ -1034,7 +1037,7 @@
 		return
 
 	client.mouse_pointer_icon = initial(client.mouse_pointer_icon)
-	
+
 	if(examine_cursor_icon && client.keys_held["Shift"])
 		client.mouse_pointer_icon = examine_cursor_icon
 
@@ -1062,7 +1065,7 @@
 		if(brolly.gives_weather_protection())
 			LAZYADD(., brolly)
 	if(!LAZYLEN(.))
-		for(var/turf/T AS_ANYTHING in RANGE_TURFS(loc, 1))
+		for(var/turf/T as anything in RANGE_TURFS(loc, 1))
 			for(var/obj/structure/flora/tree/tree in T)
 				if(tree.protects_against_weather)
 					LAZYADD(., tree)
@@ -1083,11 +1086,11 @@
 	var/turf/T = loc
 
 	// We're inside something else.
-	if(!istype(T)) 
+	if(!istype(T))
 		return WEATHER_PROTECTED
-	
+
 	// Either we're outside being rained on, or we're in turf-local weather being rained on.
-	if(T.is_outside() || T.weather == weather) 
+	if(T.is_outside() || T.weather == weather)
 		var/list/weather_protection = get_weather_protection()
 		if(LAZYLEN(weather_protection))
 			return WEATHER_PROTECTED
@@ -1100,3 +1103,36 @@
 
 	// We're inside, and more than one z-level below the roof, so ignore it.
 	return WEATHER_IGNORE
+
+/mob/proc/IsMultiZAdjacent(var/atom/neighbor)
+
+	var/turf/T = get_turf(src)
+	var/turf/N = get_turf(neighbor)
+
+	// Not on valid turfs.
+	if(QDELETED(src) || QDELETED(neighbor) || !istype(T) || !istype(N))
+		return FALSE
+
+	// On the same z-level, we don't need to care about multiz.
+	if(N.z == T.z)
+		return Adjacent(neighbor)
+
+	// More than one z-level away from each other.
+	if(abs(N.x - T.x) > 1 || abs(N.y - T.y) > 1 || abs(N.z - T.z) > 1)
+		return FALSE
+
+	// Not in a connected z-volume.
+	if(!(N.z in GetConnectedZlevels(T.z)))
+		return FALSE
+
+	// Are they below us?
+	if(N.z < T.z && HasBelow(T.z))
+		var/turf/B = GetBelow(T)
+		return T.is_open() && neighbor.Adjacent(B)
+
+	// Are they above us?
+	if(HasAbove(T.z))
+		var/turf/A = GetAbove(T)
+		return A.is_open() && neighbor.Adjacent(A)
+
+	return FALSE

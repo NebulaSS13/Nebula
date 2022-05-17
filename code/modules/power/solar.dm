@@ -4,7 +4,7 @@ var/global/solar_gen_rate = 1500
 var/global/list/solars_list = list()
 
 /obj/machinery/power/solar
-	name = "solar panel"
+	name = "basic solar panel"
 	desc = "A solar electrical generator."
 	icon = 'icons/obj/power.dmi'
 	icon_state = "sp_base"
@@ -305,7 +305,7 @@ var/global/list/solars_list = list()
 		M.unset_control()
 	if(connected_tracker)
 		connected_tracker.unset_control()
-	..()
+	return ..()
 
 /obj/machinery/power/solar_control/disconnect_from_network()
 	..()

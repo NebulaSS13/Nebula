@@ -146,12 +146,14 @@ var/global/photo_count = 0
 	var/pictures_left = 10
 	var/on = 1
 	var/size = 3
+
 /obj/item/camera/on_update_icon()
 	var/datum/extension/base_icon_state/bis = get_extension(src, /datum/extension/base_icon_state)
 	if(on)
 		icon_state = "[bis.base_icon_state]"
 	else
 		icon_state = "[bis.base_icon_state]_off"
+
 /obj/item/camera/Initialize()
 	set_extension(src, /datum/extension/base_icon_state, icon_state)
 	update_icon()
@@ -247,7 +249,7 @@ var/global/photo_count = 0
 	var/x_c = target.x - (size-1)/2
 	var/y_c = target.y - (size-1)/2
 	var/z_c	= target.z
-	var/icon/photoimage = generate_image(x_c, y_c, z_c, size, CAPTURE_MODE_REGULAR, user, 0)
+	var/icon/photoimage = create_area_image(x_c, y_c, z_c, size, TRUE, user)
 
 	var/obj/item/photo/p = new()
 	p.img = photoimage

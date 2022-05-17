@@ -1,11 +1,15 @@
 // Currently not actually represented in file systems, though the support for it is in place already.
-/datum/computer_file/data/email_message/
+/datum/computer_file/data/email_message
 	stored_data = ""
 	var/title = ""
 	var/source = ""
 	var/spam = FALSE
 	var/timestamp = ""
 	var/datum/computer_file/attachment = null
+
+/datum/computer_file/data/email_message/Destroy()
+	. = ..()
+	QDEL_NULL(attachment)
 
 /datum/computer_file/data/email_message/clone()
 	var/datum/computer_file/data/email_message/temp = ..()
@@ -16,7 +20,6 @@
 	if(attachment)
 		temp.attachment = attachment.clone()
 	return temp
-
 
 // Turns /email_message/ file into regular /data/ file.
 /datum/computer_file/data/email_message/proc/export()

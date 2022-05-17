@@ -17,6 +17,7 @@
 
 /decl/material/solid/metal/uranium
 	name = "uranium"
+	codex_name = "elemental uranium"
 	uid = "solid_uranium"
 	lore_text = "A silvery-white metallic chemical element in the actinide series, weakly radioactive. Commonly used as fuel in fission reactors."
 	mechanics_text = "Uranium can be used as fuel in fission reactors."
@@ -66,6 +67,7 @@
 
 /decl/material/solid/metal/gold
 	name = "gold"
+	codex_name = "elemental gold"
 	uid = "solid_gold"
 	lore_text = "A heavy, soft, ductile metal. Once considered valuable enough to back entire currencies, now predominantly used in corrosion-resistant electronics."
 	color = COLOR_GOLD
@@ -85,6 +87,7 @@
 
 /decl/material/solid/metal/bronze
 	name = "bronze"
+	codex_name = "bronze alloy"
 	uid = "solid_bronze"
 	lore_text = "An alloy of copper and tin. Once used in weapons and laboring tools."
 	color = "#ccbc63"
@@ -160,6 +163,7 @@
 
 /decl/material/solid/metal/steel
 	name = "steel"
+	codex_name = "carbon steel"
 	uid = "solid_steel"
 	lore_text = "A strong, flexible alloy of iron and carbon. Probably the single most fundamentally useful and ubiquitous substance in human space."
 	weight = MAT_VALUE_NORMAL
@@ -268,6 +272,7 @@
 
 /decl/material/solid/metal/plasteel
 	name = "plasteel"
+	codex_name = "plasteel alloy"
 	uid = "solid_plasteel"
 	lore_text = "An alloy of steel and platinum. When regular high-tensile steel isn't tough enough to get the job done, the smart consumer turns to frankly absurd alloys of steel and platinum."
 	integrity = 400
@@ -329,6 +334,7 @@
 
 /decl/material/solid/metal/plasteel/ocp
 	name = "osmium-carbide plasteel"
+	codex_name = null
 	uid = "solid_osmium_carbide_plasteel"
 	integrity = 200
 	melting_point = 12000

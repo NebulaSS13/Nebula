@@ -102,7 +102,7 @@ var/global/list/localhost_addresses = list(
 
 	//byond bug ID:2694120
 	if(href_list["reset_macros"])
-		reset_macros(skip_alert = TRUE)
+		reset_macros(TRUE)
 		return
 
 	..()	//redirect to hsrc.Topic()
@@ -529,22 +529,23 @@ var/global/const/MAX_VIEW = 41
 	if(mob)
 		mob.reload_fullscreen()
 
-/client/proc/toggle_fullscreen(new_value)
-	if((new_value == PREF_BASIC) || (new_value == PREF_FULL))
-		winset(src, "mainwindow", "is-maximized=false;can-resize=false;titlebar=false")
-		if(new_value == PREF_FULL)
-			winset(src, "mainwindow", "menu=null;statusbar=false")
-		winset(src, "mainwindow.split", "pos=0x0")
-	else
-		winset(src, "mainwindow", "is-maximized=false;can-resize=true;titlebar=true")
-		winset(src, "mainwindow", "menu=menu;statusbar=true")
-		winset(src, "mainwindow.split", "pos=3x0")
-	winset(src, "mainwindow", "is-maximized=true")
+/client/proc/toggle_fullscreen(value)
+	set waitfor = FALSE
+
+	winset(src, null, {"
+	mainwindow.is-maximized = false;
+	mainwindow.can-resize = [(value == PREF_BASIC) || (value == PREF_FULL) ? "false" : "true"];
+	mainwindow.titlebar = [(value == PREF_BASIC) || (value == PREF_FULL) ? "false" : "true"];
+	mainwindow.menu = [value == PREF_FULL ? "null" : "menu"];
+	mainwindow.statusbar = [value == PREF_FULL ? "false" : "true"];
+	mainwindow.split.pos = [(value == PREF_BASIC) || (value == PREF_FULL) ? "0x0" : "3x0"];
+	"})
+	winset(src, null, "mainwindow.is-maximized = true;")
 
 /client/verb/fit_viewport()
 	set name = "Fit Viewport"
-	set category = "OOC"
 	set desc = "Fit the width of the map window to match the viewport"
+	set category = "OOC"
 	set waitfor = FALSE
 
 	// Fetch aspect ratio
@@ -631,7 +632,7 @@ var/global/const/MAX_VIEW = 41
  *
  * Handles adding macros for the keys that need it
  * And adding movement keys to the clients movement_keys list
- * At the time of writing this, communication(OOC, Say, IC) require macros
+ * At the time of writing this, communication(OOC, LOOC, Say, Me) require macros
  * Arguments:
  * * direct_prefs - the preference we're going to get keybinds from
  */
@@ -644,31 +645,34 @@ var/global/const/MAX_VIEW = 41
 	for(var/key in D.key_bindings)
 		for(var/kb_name in D.key_bindings[key])
 			switch(kb_name)
-				if("North")
+				if("north")
 					movement_keys[key] = NORTH
-				if("East")
+				if("east")
 					movement_keys[key] = EAST
-				if("West")
+				if("west")
 					movement_keys[key] = WEST
-				if("South")
+				if("south")
 					movement_keys[key] = SOUTH
-				if("Say")
-					winset(src, "default-\ref[key]", "parent=default;name=[key];command=say")
+				if("admin_help")
+					winset(src, "default-\ref[key]", "parent=default;name=[key];command=adminhelp")
 					communication_hotkeys += key
-				if("OOC")
+				if("ooc")
 					winset(src, "default-\ref[key]", "parent=default;name=[key];command=ooc")
 					communication_hotkeys += key
-				if("LOOC")
+				if("looc")
 					winset(src, "default-\ref[key]", "parent=default;name=[key];command=looc")
 					communication_hotkeys += key
-				if("Me")
+				if("say")
+					winset(src, "default-\ref[key]", "parent=default;name=[key];command=.say")
+					communication_hotkeys += key
+				if("me")
 					winset(src, "default-\ref[key]", "parent=default;name=[key];command=.me")
 					communication_hotkeys += key
 
 	// winget() does not work for F1 and F2
 	for(var/key in communication_hotkeys)
 		if(!(key in list("F1","F2")) && !winget(src, "default-\ref[key]", "command"))
-			to_chat(src, "You probably entered the game with a different keyboard layout.\n<a href='?src=\ref[src];reset_macros=1'>Please switch to the English layout and click here to fix the communication hotkeys.</a>")
+			to_chat(src, SPAN_WARNING("You probably entered the game with a different keyboard layout.\n<a href='?src=\ref[src];reset_macros=1'>Please switch to the English layout and click here to fix the communication hotkeys.</a>"))
 			break
 
 /client/proc/get_byond_membership()

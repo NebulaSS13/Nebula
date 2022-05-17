@@ -84,7 +84,7 @@
 		. += "[capitalize(artery_name)] ruptured"
 	if(status & ORGAN_TENDON_CUT)
 		. += "Severed [tendon_name]"
-	if(dislocated == 2) // non-magical constants when
+	if(is_dislocated())
 		. += "Dislocated"
 	if(splinted)
 		. += "Splinted"
@@ -163,7 +163,7 @@
 
 	if(status & ORGAN_TENDON_CUT)
 		to_chat(user, "<span class='warning'>The tendons in [name] are severed!</span>")
-	if(dislocated == 2)
+	if(is_dislocated())
 		to_chat(user, "<span class='warning'>The [joint] is dislocated!</span>")
 	return 1
 

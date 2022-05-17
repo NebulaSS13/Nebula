@@ -21,7 +21,7 @@
 		var/ligths = 0
 		if(alert("Do you want lighting to be included in capture?", "Map Capture", "No", "Yes") == "Yes")
 			ligths = 1
-		var/cap = generate_image(tx ,ty ,tz ,range, CAPTURE_MODE_PARTIAL, null, ligths, 1)
+		var/cap = create_area_image(tx ,ty ,tz, range, ligths)
 		var/file_name = "map_capture_x[tx]_y[ty]_z[tz]_r[range].png"
 		to_chat(usr, "Saved capture in cache as [file_name].")
 		send_rsc(usr, cap, file_name)
@@ -30,7 +30,7 @@
 
 /datum/admins/proc/capture_map_capture_next(currentz, currentx, currenty, ligths)
 	if(locate(currentx, currenty, currentz))
-		var/cap = generate_image(currentx ,currenty ,currentz ,32, CAPTURE_MODE_PARTIAL, null, ligths, 1)
+		var/cap = create_area_image(currentx,currenty, currentz, 32, ligths)
 		var/file_name = "map_capture_x[currentx]_y[currenty]_z[currentz]_r32.png"
 		to_chat(usr, "Saved capture in cache as [file_name].")
 		send_rsc(usr, cap, file_name)
@@ -41,7 +41,7 @@
 		currenty = currenty + 32
 		currentx = 1
 		if(locate(currentx, currenty, currentz))
-			var/cap = generate_image(currentx ,currenty ,currentz ,32, CAPTURE_MODE_PARTIAL, null, ligths, 1)
+			var/cap = create_area_image(currentx,currenty, currentz, 32, ligths)
 			var/file_name = "map_capture_x[currentx]_y[currenty]_z[currentz]_r32.png"
 			to_chat(usr, "Saved capture in cache as [file_name].")
 			send_rsc(usr, cap, file_name)

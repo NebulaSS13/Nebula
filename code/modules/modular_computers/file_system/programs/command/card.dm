@@ -7,6 +7,7 @@
 	program_menu_icon = "key"
 	extended_desc = "Program for programming crew ID cards."
 	size = 8
+	write_access = list(access_change_ids)
 	category = PROG_COMMAND
 
 /datum/nano_module/program/card_mod
@@ -25,15 +26,15 @@
 	data["assignments"] = show_assignments
 	data["have_id_slot"] = !!card_slot
 	data["have_printer"] = program.computer.has_component(PART_PRINTER)
-	data["authenticated"] = program.can_run(user)
+	data["authenticated"] = program.get_file_perms(get_access(user), user) & OS_WRITE_ACCESS
 	if(!data["have_id_slot"] || !data["have_printer"])
 		mod_mode = 0 //We can't modify IDs when there is no card reader
 	if(card_slot)
 		var/obj/item/card/id/id_card = card_slot.stored_card
 		data["has_id"] = !!id_card
 		data["id_account_number"] = id_card ? id_card.associated_account_number : null
-		data["id_email_login"] = id_card ? id_card.associated_email_login["login"] : null
-		data["id_email_password"] = id_card ? stars(id_card.associated_email_login["password"], 0) : null
+		data["network_account_login"] = id_card ? id_card.associated_network_account["login"] : null
+		data["network_account_password"] = id_card ? stars(id_card.associated_network_account["password"], 0) : null
 		data["id_rank"] = id_card && id_card.assignment ? id_card.assignment : "Unassigned"
 		data["id_owner"] = id_card && id_card.registered_name ? id_card.registered_name : "-----"
 		data["id_name"] = id_card ? id_card.name : "-----"
@@ -149,34 +150,33 @@
 			else
 				module.show_assignments = 1
 		if("print")
-			if(!authorized(user_id_card))
-				to_chat(usr, "<span class='warning'>Access denied.</span>")
+			if(!(get_file_perms(module.get_access(user), user) & OS_WRITE_ACCESS))
+				to_chat(usr, SPAN_WARNING("Access denied."))
 				return
 			if(computer.has_component(PART_PRINTER)) //This option should never be called if there is no printer
 				if(module.mod_mode)
-					if(can_run(user, 1))
-						var/contents = {"<h4>Access Report</h4>
-									<u>Prepared By:</u> [user_id_card.registered_name ? user_id_card.registered_name : "Unknown"]<br>
-									<u>For:</u> [id_card.registered_name ? id_card.registered_name : "Unregistered"]<br>
-									<hr>
-									<u>Assignment:</u> [id_card.assignment]<br>
-									<u>Account Number:</u> #[id_card.associated_account_number]<br>
-									<u>Email account:</u> [id_card.associated_email_login["login"]]
-									<u>Email password:</u> [stars(id_card.associated_email_login["password"], 0)]
-									<u>Blood Type:</u> [id_card.blood_type]<br><br>
-									<u>Age:</u> [id_card.age]<br><br>
-									<u>Sex:</u> [id_card.sex]<br><br>
-									<u>Access:</u><br>
-								"}
+					var/contents = {"<h4>Access Report</h4>
+								<u>Prepared By:</u> [user_id_card.registered_name ? user_id_card.registered_name : "Unknown"]<br>
+								<u>For:</u> [id_card.registered_name ? id_card.registered_name : "Unregistered"]<br>
+								<hr>
+								<u>Assignment:</u> [id_card.assignment]<br>
+								<u>Account Number:</u> #[id_card.associated_account_number]<br>
+								<u>Network account:</u> [id_card.associated_network_account["login"]]
+								<u>Network password:</u> [stars(id_card.associated_network_account["password"], 0)]
+								<u>Blood Type:</u> [id_card.blood_type]<br><br>
+								<u>Age:</u> [id_card.age]<br><br>
+								<u>Sex:</u> [id_card.sex]<br><br>
+								<u>Access:</u><br>
+							"}
 
-						var/known_access_rights = get_access_ids(ACCESS_TYPE_STATION|ACCESS_TYPE_CENTCOM)
-						for(var/A in id_card.access)
-							if(A in known_access_rights)
-								contents += "  [get_access_desc(A)]"
+					var/known_access_rights = get_access_ids(ACCESS_TYPE_STATION|ACCESS_TYPE_CENTCOM)
+					for(var/A in id_card.access)
+						if(A in known_access_rights)
+							contents += "  [get_access_desc(A)]"
 
-						if(!computer.print_paper(contents,"access report"))
-							to_chat(usr, "<span class='notice'>Hardware error: Printer was unable to print the file. It may be out of paper.</span>")
-							return
+					if(!computer.print_paper(contents,"access report"))
+						to_chat(usr, "<span class='notice'>Hardware error: Printer was unable to print the file. It may be out of paper.</span>")
+						return
 				else
 					var/contents = {"<h4>Crew Manifest</h4>
 									<br>
@@ -192,18 +192,18 @@
 			else
 				card_slot.insert_id(user.get_active_hand(), user)
 		if("terminate")
-			if(!authorized(user_id_card))
-				to_chat(usr, "<span class='warning'>Access denied.</span>")
+			if(!(get_file_perms(module.get_access(user), user) & OS_WRITE_ACCESS))
+				to_chat(usr, SPAN_WARNING("Access denied."))
 				return
-			if(computer && can_run(user, 1))
+			if(computer)
 				id_card.assignment = "Terminated"
 				remove_nt_access(id_card)
 				callHook("terminate_employee", list(id_card))
 		if("edit")
-			if(!authorized(user_id_card))
-				to_chat(usr, "<span class='warning'>Access denied.</span>")
+			if(!(get_file_perms(module.get_access(user), user) & OS_WRITE_ACCESS))
+				to_chat(usr, SPAN_WARNING("Access denied."))
 				return
-			if(computer && can_run(user, 1))
+			if(computer)
 				var/static/regex/hash_check = regex(@"^[0-9a-fA-F]{32}$")
 				if(href_list["name"])
 					var/temp_name = sanitize_name(input("Enter name.", "Name", id_card.registered_name),allow_numbers=TRUE)
@@ -216,12 +216,12 @@
 				else if(href_list["account"])
 					var/account_num = text2num(input("Enter account number.", "Account", id_card.associated_account_number))
 					id_card.associated_account_number = account_num
-				else if(href_list["elogin"])
-					var/email_login = input("Enter email login.", "Email login", id_card.associated_email_login["login"])
-					id_card.associated_email_login["login"] = email_login
-				else if(href_list["epswd"])
-					var/email_password = input("Enter email password.", "Email password")
-					id_card.associated_email_login["password"] = email_password
+				else if(href_list["alogin"])
+					var/account_login = input("Enter network account login.", "Network account login", id_card.associated_network_account["login"])
+					id_card.associated_network_account["login"] = account_login
+				else if(href_list["apswd"])
+					var/account_password = input("Enter network account password.", "Network account password")
+					id_card.associated_network_account["password"] = account_password
 				else if(href_list["sex"])
 					var/sex = input("Type gender.", "Gender", id_card.sex)
 					if(!isnull(sex) && CanUseTopic(user))
@@ -274,10 +274,10 @@
 						remove_nt_access(id_card)
 						apply_access(id_card, access)
 		if("assign")
-			if(!authorized(user_id_card))
-				to_chat(usr, "<span class='warning'>Access denied.</span>")
+			if(!(get_file_perms(module.get_access(user), user) & OS_WRITE_ACCESS))
+				to_chat(usr, SPAN_WARNING("Access denied."))
 				return
-			if(computer && can_run(user, 1) && id_card)
+			if(computer && id_card)
 				var/t1 = href_list["assign_target"]
 				if(t1 == "Custom")
 					var/temp_t = sanitize(input("Enter a custom job assignment.","Assignment", id_card.assignment), 45)
@@ -298,11 +298,11 @@
 
 				callHook("reassign_employee", list(id_card))
 		if("access")
-			if(href_list["allowed"] && computer && can_run(user, 1) && id_card)
+			if(href_list["allowed"] && id_card)
 				var/access_type = href_list["access_target"]
 				var/access_allowed = text2num(href_list["allowed"])
 				if(access_type in get_access_ids(ACCESS_TYPE_STATION|ACCESS_TYPE_CENTCOM))
-					for(var/access in user_id_card.access)
+					for(var/access in module.get_access(user))
 						var/region_type = get_access_region_by_id(access_type)
 						if(access in global.using_map.access_modify_region[region_type])
 							id_card.access -= access_type
@@ -320,6 +320,3 @@
 
 /datum/computer_file/program/card_mod/proc/apply_access(var/obj/item/card/id/id_card, var/list/accesses)
 	id_card.access |= accesses
-
-/datum/computer_file/program/card_mod/proc/authorized(var/obj/item/card/id/id_card)
-	return id_card && (access_change_ids in id_card.access)

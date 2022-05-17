@@ -42,6 +42,6 @@
 		var/list/reagent_strings = list()
 		for(var/reagent_id in slime_data.reaction_strings)
 			var/decl/material/mat = GET_DECL(reagent_id)
-			reagent_strings += "<b><span codexlink='[mat.name] (substance)'>[capitalize(mat.name)]</span></b>- [slime_data.reaction_strings[reagent_id]]"
+			reagent_strings += "<b><span codexlink='[mat.codex_name || mat.name] (substance)'>[capitalize(mat.name)]</span></b>- [slime_data.reaction_strings[reagent_id]]"
 		extra_mechanics_text += "[length(reagent_strings) ? jointext(reagent_strings, "<br>") : "None."]</td></tr>"
 	mechanics_text = "[mechanics_text]<br>[jointext(extra_mechanics_text, "")]"

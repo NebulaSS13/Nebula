@@ -1,7 +1,6 @@
 /obj/item/organ/external/stump
 	name = "limb stump"
 	icon_name = ""
-	dislocated = -1
 	limb_flags = ORGAN_FLAG_CAN_AMPUTATE //Needs this for limb replacement surgery. Since you need to remove stumps first
 
 /obj/item/organ/external/stump/Initialize(mapload, var/internal, var/obj/item/organ/external/limb)

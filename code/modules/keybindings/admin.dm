@@ -4,14 +4,24 @@
 /datum/keybinding/admin/can_use(client/user)
 	return !!user.holder
 
-/datum/keybinding/admin/admin_say
+/datum/keybinding/admin/mod_say
 	hotkey_keys = list("F5")
+	name = "mod_say"
+	full_name = "Mod Say"
+	description = "Talk with other moderators."
+
+/datum/keybinding/admin/mod_say/down(client/user)
+	user.cmd_mod_say(input(user, null, "dsay \"text\"") as text|null)
+	return TRUE
+
+/datum/keybinding/admin/admin_say
+	hotkey_keys = list("ShiftF5")
 	name = "admin_say"
 	full_name = "Admin Say"
 	description = "Talk with other admins."
 
 /datum/keybinding/admin/admin_say/down(client/user)
-	user.get_admin_say()
+	user.cmd_admin_say(input(user, null, "asay \"text\"") as text|null)
 	return TRUE
 
 /datum/keybinding/admin/admin_ghost
@@ -61,11 +71,11 @@
 	description = "Allows you to send a message to dead chat"
 
 /datum/keybinding/admin/dead_say/down(client/user)
-	user.get_dead_say()
+	user.dsay(input(src, null, "dsay \"text\"") as text|null)
 	return TRUE
 
 /datum/keybinding/admin/deadmin
-	hotkey_keys = list("None")
+	hotkey_keys = list("Unbound")
 	name = "deadmin"
 	full_name = "De-Admin"
 	description = "Shed your admin powers"
@@ -75,7 +85,7 @@
 	return TRUE
 
 /datum/keybinding/admin/readmin
-	hotkey_keys = list("None")
+	hotkey_keys = list("Unbound")
 	name = "readmin"
 	full_name = "Re-Admin"
 	description = "Regain your admin powers"
@@ -83,11 +93,3 @@
 /datum/keybinding/admin/readmin/down(client/user)
 	user.readmin_self()
 	return TRUE
-
-/client/proc/get_admin_say()
-	var/msg = input(src, null, "asay \"text\"") as text|null
-	cmd_admin_say(msg)
-
-/client/proc/get_dead_say()
-	var/msg = input(src, null, "dsay \"text\"") as text
-	dsay(msg)

@@ -14,7 +14,7 @@
 	result_amount = 3
 
 /decl/chemical_reaction/alloy/steel
-	name = "Steel"
+	name = "Carbon Steel Alloy"
 	result = /decl/material/solid/metal/steel
 	required_reagents = list(
 		/decl/material/solid/metal/iron = 1, 
@@ -23,7 +23,7 @@
 	result_amount = 2
 
 /decl/chemical_reaction/alloy/plasteel
-	name = "Plasteel"
+	name = "Plasteel Alloy"
 	result = /decl/material/solid/metal/plasteel
 	required_reagents = list(
 		/decl/material/solid/metal/steel = 2, 
@@ -41,7 +41,7 @@
 	result_amount = 3
 
 /decl/chemical_reaction/alloy/bronze
-	name = "Bronze"
+	name = "Bronze Alloy"
 	result = /decl/material/solid/metal/bronze
 	required_reagents = list(
 		/decl/material/solid/metal/copper = 4, 
@@ -50,7 +50,7 @@
 	result_amount = 5
 
 /decl/chemical_reaction/alloy/brass
-	name = "Brass"
+	name = "Brass Alloy"
 	result = /decl/material/solid/metal/brass
 	required_reagents = list(
 		/decl/material/solid/metal/copper = 2, 
@@ -59,7 +59,7 @@
 	result_amount = 3
 
 /decl/chemical_reaction/alloy/blackbronze
-	name = "Black Bronze"
+	name = "Black Bronze Billon"
 	result = /decl/material/solid/metal/blackbronze
 	required_reagents = list(
 		/decl/material/solid/metal/copper = 2, 
@@ -68,7 +68,7 @@
 	result_amount = 3
 
 /decl/chemical_reaction/alloy/redgold
-	name = "Red Gold"
+	name = "Red Gold Billon"
 	result = /decl/material/solid/metal/redgold
 	required_reagents = list(
 		/decl/material/solid/metal/copper = 2, 
@@ -77,7 +77,7 @@
 	result_amount = 3
 
 /decl/chemical_reaction/alloy/stainlesssteel
-	name = "Stainless Steel"
+	name = "Stainless Steel Alloy"
 	result = /decl/material/solid/metal/stainlesssteel
 	required_reagents = list(
 		/decl/material/solid/metal/steel = 9, 

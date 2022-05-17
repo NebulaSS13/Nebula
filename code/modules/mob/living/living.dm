@@ -493,21 +493,79 @@ default behaviour is:
 /mob/living/proc/UpdateDamageIcon()
 	return
 
-/mob/living/handle_grabs_after_move()
+/mob/living/handle_grabs_after_move(var/turf/old_loc, var/direction)
+
 	..()
-	if(!skill_check(SKILL_MEDICAL, SKILL_BASIC))
-		for(var/obj/item/grab/grab in get_active_grabs())
+
+	if(!isturf(loc))
+		for(var/G in get_active_grabs())
+			qdel(G)
+			return
+
+	if(isturf(old_loc))
+		for(var/atom/movable/AM as anything in ret_grab())
+			if(AM != src && AM.loc != loc && !AM.anchored && old_loc.Adjacent(AM))
+				AM.glide_size = glide_size // This is adjusted by grabs again from events/some of the procs below, but doing it here makes it more likely to work with recursive movement.
+				AM.DoMove(get_dir(get_turf(AM), old_loc), src, TRUE)
+
+	var/list/mygrabs = get_active_grabs()
+	for(var/obj/item/grab/G as anything in mygrabs)
+		if(G.assailant_reverse_facing())
+			set_dir(global.reverse_dir[direction])
+		G.assailant_moved()
+		if(QDELETED(G) || QDELETED(G.affecting))
+			mygrabs -= G
+
+	if(!length(mygrabs))
+		return
+
+	if(length(grabbed_by))
+		reset_offsets()
+		reset_plane_and_layer()
+
+	if(direction & (UP|DOWN))
+		var/txt_dir = (direction & UP) ? "upwards" : "downwards"
+		if(old_loc)
+			old_loc.visible_message(SPAN_NOTICE("\The [src] moves [txt_dir]."))
+		for(var/obj/item/grab/G as anything in mygrabs)
+			var/turf/start = G.affecting.loc
+			var/turf/destination = (direction == UP) ? GetAbove(G.affecting) : GetBelow(G.affecting)
+			if(!start.CanZPass(G.affecting, direction))
+				to_chat(src, SPAN_WARNING("\The [start] blocked your pulled object!"))
+				mygrabs -= G
+				qdel(G)
+				continue
+			if(!destination.CanZPass(G.affecting, direction))
+				to_chat(src, SPAN_WARNING("The [G.affecting] you were pulling bumps up against \the [destination]."))
+				mygrabs -= G
+				qdel(G)
+				continue
+			for(var/atom/A in destination)
+				if(!A.CanMoveOnto(G.affecting, start, 1.5, direction))
+					to_chat(src, SPAN_WARNING("\The [A] blocks the [G.affecting] you were pulling."))
+					mygrabs -= G
+					qdel(G)
+					continue
+			G.affecting.forceMove(destination)
+			if(QDELETED(G) || QDELETED(G.affecting))
+				mygrabs -= G
+			continue
+
+	if(length(mygrabs) && !skill_check(SKILL_MEDICAL, SKILL_BASIC))
+		for(var/obj/item/grab/grab as anything in mygrabs)
 			var/mob/living/affecting_mob = grab.get_affecting_mob()
 			if(affecting_mob)
 				affecting_mob.handle_grab_damage()
 
-/mob/living/Move(a, b, flag)
+/mob/living/Move(NewLoc, Dir)
 	if (buckled)
 		return
+	var/turf/old_loc = loc
 	. = ..()
-	handle_grabs_after_move()
-	if (s_active && !( s_active in contents ) && get_turf(s_active) != get_turf(src))	//check !( s_active in contents ) first so we hopefully don't have to call get_turf() so much.
-		s_active.close(src)
+	if(.)
+		handle_grabs_after_move(old_loc, Dir)
+		if (s_active && !( s_active in contents ) && get_turf(s_active) != get_turf(src))	//check !( s_active in contents ) first so we hopefully don't have to call get_turf() so much.
+			s_active.close(src)
 
 /mob/living/verb/resist()
 	set name = "Resist"
@@ -602,6 +660,7 @@ default behaviour is:
 			return
 		resting = !resting
 		UpdateLyingBuckledAndVerbStatus()
+		update_icon()
 		to_chat(src, SPAN_NOTICE("You are now [resting ? "resting" : "getting up"]."))
 
 //called when the mob receives a bright flash
@@ -702,7 +761,7 @@ default behaviour is:
 	..()
 	cut_overlays()
 	if(auras)
-		for(var/obj/aura/aura AS_ANYTHING in auras)
+		for(var/obj/aura/aura as anything in auras)
 			var/image/A = new()
 			A.appearance = aura
 			add_overlay(A)

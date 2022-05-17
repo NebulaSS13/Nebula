@@ -25,7 +25,7 @@ var/global/datum/topic_state/default/default_topic_state = new
 		return
 
 	// robots can interact with things they can see within their view range
-	if((src_object in view(src)) && get_dist(src_object, src) <= get_effective_view(client))
+	if((src_object in view(client?.view || world.view, src)) && get_dist(src_object, src) <= get_effective_view(client))
 		return STATUS_INTERACTIVE	// interactive (green visibility)
 	return STATUS_DISABLED			// no updates, completely disabled (red visibility)
 
@@ -42,7 +42,7 @@ var/global/datum/topic_state/default/default_topic_state = new
 		return STATUS_CLOSE
 
 	// If an object is in view then we can interact with it
-	if(src_object in view(get_effective_view(client), src))
+	if(src_object in view(client.view, src))
 		return STATUS_INTERACTIVE
 
 	// If we're installed in a chassi, rather than transfered to an inteliCard or other container, then check if we have camera view

@@ -1,6 +1,6 @@
 /spell/targeted/shatter
 	name = "Shatter Mind"
-	desc = "this spell allows the caster to literally break an enemy's mind. Permanently."
+	desc = "Assaults the mind of the target with fear of the unknown, shattering their sanity and causing brain damage."
 	feedback = "SM"
 	school = "illusion"
 	charge_max = 300

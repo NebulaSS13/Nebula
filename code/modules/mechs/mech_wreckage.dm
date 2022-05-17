@@ -79,4 +79,4 @@
 			thing.forceMove(get_turf(src))
 		else
 			qdel(thing)
-	..()
+	return ..()

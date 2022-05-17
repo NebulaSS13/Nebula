@@ -339,7 +339,7 @@
 /datum/unit_test/atmos_machinery_node_reciprocity/start_test()
 	var/fail = FALSE
 	for(var/obj/machinery/atmospherics/machine in SSmachines.machinery)
-		for(var/obj/machinery/atmospherics/node AS_ANYTHING in machine.nodes_to_networks)
+		for(var/obj/machinery/atmospherics/node as anything in machine.nodes_to_networks)
 			if(node == machine)
 				log_bad("[log_info_line(machine)] was its own node.")
 				fail = TRUE

@@ -295,38 +295,28 @@
 	desc = "Goes great with Robust Coffee."
 	icon_state = "donut1"
 	filling_color = "#d9c386"
-	var/overlay_state = "box-donut1"
-	center_of_mass = @"{'x':13,'y':16}"
+	center_of_mass = @"{'x':19,'y':16}"
 	nutriment_desc = list("sweetness", "donut")
-	nutriment_type = /decl/material/liquid/nutriment/bread
-
-/obj/item/chems/food/donut/normal
-	name = "donut"
-	desc = "Goes great with Robust Coffee."
-	icon_state = "donut1"
 	nutriment_amt = 3
 	bitesize = 3
 	nutriment_type = /decl/material/liquid/nutriment/bread
+	var/overlay_state = "box-donut1"
+	var/donut_state = "donut"
 
-/obj/item/chems/food/donut/normal/Initialize()
+/obj/item/chems/food/donut/Initialize()
 	. = ..()
-	reagents.add_reagent(/decl/material/liquid/nutriment/sprinkles, 1)
-
 	if(prob(30))
-		src.icon_state = "donut2"
-		src.overlay_state = "box-donut2"
-		src.SetName("frosted donut")
-	reagents.add_reagent(/decl/material/liquid/nutriment/sprinkles, 2)
-	center_of_mass = @"{'x':19,'y':16}"
+		icon_state = "[donut_state]2"
+		overlay_state = "box-donut2"
+		SetName("frosted [name]]")
+		reagents.add_reagent(/decl/material/liquid/nutriment/sprinkles, 2)
 
 /obj/item/chems/food/donut/chaos
 	name = "chaos donut"
 	desc = "Like life, it never quite tastes the same."
-	icon_state = "donut1"
 	filling_color = "#ed11e6"
 	nutriment_amt = 2
 	bitesize = 10
-	nutriment_type = /decl/material/liquid/nutriment/bread
 
 /obj/item/chems/food/donut/chaos/proc/get_random_fillings()
 	. = list(
@@ -344,13 +334,7 @@
 
 /obj/item/chems/food/donut/chaos/Initialize()
 	. = ..()
-	reagents.add_reagent(/decl/material/liquid/nutriment/sprinkles, 1)
 	reagents.add_reagent(pick(get_random_fillings()), 3)
-	if(prob(30))
-		src.icon_state = "donut2"
-		src.overlay_state = "box-donut2"
-		src.SetName("frosted chaos donut")
-	reagents.add_reagent(/decl/material/liquid/nutriment/sprinkles, 2)
 
 /obj/item/chems/food/donut/jelly
 	name = "jelly donut"
@@ -361,38 +345,13 @@
 	nutriment_amt = 3
 	bitesize = 5
 	nutriment_type = /decl/material/liquid/nutriment/bread
+	donut_state = "jdonut"
 
 /obj/item/chems/food/donut/jelly/Initialize()
 	. = ..()
-	reagents.add_reagent(/decl/material/liquid/nutriment/sprinkles, 1)
 	reagents.add_reagent(/decl/material/liquid/nutriment/cherryjelly, 5)
-	if(prob(30))
-		src.icon_state = "jdonut2"
-		src.overlay_state = "box-donut2"
-		src.SetName("frosted jelly donut")
-	reagents.add_reagent(/decl/material/liquid/nutriment/sprinkles, 2)
-
-/obj/item/chems/food/donut/cherryjelly
-	name = "jelly donut"
-	desc = "You jelly?"
-	icon_state = "jdonut1"
-	filling_color = "#ed1169"
-	center_of_mass = @"{'x':16,'y':11}"
-	nutriment_amt = 3
-	bitesize = 5
-
-/obj/item/chems/food/donut/cherryjelly/Initialize()
-	. = ..()
-	reagents.add_reagent(/decl/material/liquid/nutriment/sprinkles, 1)
-	reagents.add_reagent(/decl/material/liquid/nutriment/cherryjelly, 5)
-	if(prob(30))
-		src.icon_state = "jdonut2"
-		src.overlay_state = "box-donut2"
-		src.SetName("frosted jelly donut")
-	reagents.add_reagent(/decl/material/liquid/nutriment/sprinkles, 2)
 
 //Sol Vendor
-
 /obj/item/chems/food/lunacake
 	name = "moon cake"
 	icon_state = "lunacake_wrapped"

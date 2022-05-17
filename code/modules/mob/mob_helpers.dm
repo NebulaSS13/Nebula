@@ -661,7 +661,7 @@ var/global/list/intents = list(I_HELP,I_DISARM,I_GRAB,I_HURT)
 		if(mob.real_name == real_name)
 			if(!mob.mind)
 				return
-			return mob.mind.initial_email_login["login"]
+			return mob.mind.initial_account_login["login"] + "@[mob.mind.account_network]"
 
 //This gets an input while also checking a mob for whether it is incapacitated or not.
 /mob/proc/get_input(var/message, var/title, var/default, var/choice_type, var/obj/required_item)

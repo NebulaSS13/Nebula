@@ -173,11 +173,19 @@
 	update_icon()
 	return 1
 
-/turf/simulated/floor/can_build_cable(var/mob/user)
-	if(!is_plating() || flooring)
-		to_chat(user, "<span class='warning'>Removing the tiling first.</span>")
-		return 0
+/turf/simulated/floor/why_cannot_build_cable(var/mob/user, var/cable_error)
+	switch(cable_error)
+		if(0)
+			return
+		if(1)
+			to_chat(user, SPAN_WARNING("Removing the tiling first."))
+		if(2)
+			to_chat(user, SPAN_WARNING("This section is too damaged to support anything. Use a welder to fix the damage."))
+		else //Fallback
+			. = ..()
+
+/turf/simulated/floor/cannot_build_cable()
 	if(broken || burnt)
-		to_chat(user, "<span class='warning'>This section is too damaged to support anything. Use a welder to fix the damage.</span>")
-		return 0
-	return 1
+		return 2
+	if(!is_plating())
+		return 1

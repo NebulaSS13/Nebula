@@ -236,10 +236,9 @@
 		if(!skip_client_update)
 			mymob.client?.screen |= inv_box
 
-//Triggered when F12 is pressed (Unless someone changed something in the DMF)
-/mob/verb/button_pressed_F12(var/full = 0 as null)
-	set name = "F12"
-	set hidden = 1
+/mob/verb/minimize_hud(full = FALSE as null)
+	set name = "Minimize Hud"
+	set hidden = TRUE
 
 	if(!hud_used)
 		to_chat(usr, "<span class='warning'>This mob type does not use a HUD.</span>")
@@ -297,7 +296,7 @@
 	hud_used.persistant_inventory_update()
 	update_action_buttons()
 
-//Similar to button_pressed_F12() but keeps zone_sel, gun_setting_icon, and healths.
+//Similar to minimize_hud() but keeps zone_sel, gun_setting_icon, and healths.
 /mob/proc/toggle_zoom_hud()
 	if(!hud_used)
 		return
