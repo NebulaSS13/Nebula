@@ -117,7 +117,7 @@
 	if(get_preference_value(/datum/client_preference/show_status_markers) == PREF_SHOW)
 		if(status_markers)
 			client.images |= status_markers.mob_image_personal
-		for(var/datum/status_marker_holder/marker AS_ANYTHING in global.status_marker_holders)
+		for(var/datum/status_marker_holder/marker as anything in global.status_marker_holders)
 			if(marker != status_markers)
 				client.images |= marker.mob_image
 	return TRUE

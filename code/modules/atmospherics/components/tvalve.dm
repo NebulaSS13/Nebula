@@ -62,7 +62,7 @@
 		. |= nodes_in_dir(other_dir)
 
 /obj/machinery/atmospherics/tvalve/network_expand(datum/pipe_network/new_network, obj/machinery/atmospherics/pipe/reference)
-	for(var/obj/machinery/atmospherics/node AS_ANYTHING in get_nodes_connected_to(reference))
+	for(var/obj/machinery/atmospherics/node as anything in get_nodes_connected_to(reference))
 		if(nodes_to_networks[node] != new_network)
 			QDEL_NULL(nodes_to_networks[node])
 			nodes_to_networks[node] = new_network

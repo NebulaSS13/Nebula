@@ -3,7 +3,7 @@
 	return
 
 /mob/living/trigger_aiming(var/trigger_type)
-	for(var/obj/aiming_overlay/AO AS_ANYTHING in aimed_at_by)
+	for(var/obj/aiming_overlay/AO as anything in aimed_at_by)
 		if(AO.aiming_at == src)
 			AO.update_aiming()
 			if(AO.aiming_at == src)

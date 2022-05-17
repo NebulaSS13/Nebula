@@ -187,7 +187,7 @@
 	return TRUE
 
 /datum/map_template/proc/after_load(z)
-	for(var/obj/abstract/landmark/map_load_mark/mark AS_ANYTHING in subtemplates_to_spawn)
+	for(var/obj/abstract/landmark/map_load_mark/mark as anything in subtemplates_to_spawn)
 		subtemplates_to_spawn -= mark
 		mark.load_template()
 	subtemplates_to_spawn = null

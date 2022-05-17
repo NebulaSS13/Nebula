@@ -261,7 +261,7 @@ var/global/list/_client_preferences_by_type
 /datum/client_preference/show_status_markers/changed(mob/preference_mob, new_value)
 	. = ..()
 	if(preference_mob.client)
-		for(var/datum/status_marker_holder/marker AS_ANYTHING in global.status_marker_holders)
+		for(var/datum/status_marker_holder/marker as anything in global.status_marker_holders)
 			var/marker_image = (preference_mob.status_markers == marker) ? marker.mob_image_personal : marker.mob_image
 			if(new_value == PREF_HIDE)
 				preference_mob.client.images -= marker_image
