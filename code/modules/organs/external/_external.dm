@@ -558,7 +558,9 @@ This function completely restores a damaged organ to perfect condition.
 	damage_state = "00"
 	status = 0
 	brute_dam = 0
+	brute_ratio = 0
 	burn_dam = 0
+	burn_ratio = 0
 	germ_level = 0
 	genetic_degradation = 0
 
