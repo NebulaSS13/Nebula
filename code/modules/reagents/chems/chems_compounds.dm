@@ -137,7 +137,7 @@
 	var/mouth_covered = 0
 	var/partial_mouth_covered = 0
 	var/stun_probability = 50
-	var/no_pain = 0
+	var/no_pain = !M.can_feel_pain()
 	var/obj/item/eye_protection = null
 	var/obj/item/face_protection = null
 	var/obj/item/partial_face_protection = null
@@ -148,8 +148,6 @@
 	if(istype(M, /mob/living/carbon/human))
 		var/mob/living/carbon/human/H = M
 		protection = list(H.head, H.glasses, H.wear_mask)
-		if(!H.can_feel_pain())
-			no_pain = 1 //TODO: living-level can_feel_pain() proc
 	else
 		protection = list(M.wear_mask)
 
