@@ -53,9 +53,9 @@
 		return
 	else
 		switch(W.damtype)
-			if("fire")
+			if(BURN)
 				src.health -= W.force * 0.75
-			if("brute")
+			if(BRUTE)
 				src.health -= W.force * 0.5
 			else
 		if (src.health <= 0)
