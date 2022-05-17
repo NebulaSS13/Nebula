@@ -188,6 +188,7 @@ window "window_map"
 		statusbar = false
 		is-pane = true
 		on-status = ".winset \"status_bar.text=[[*]]\" "
+		on-size = "OnResize"
 	elem "map"
 		type = MAP
 		pos = 0,0
