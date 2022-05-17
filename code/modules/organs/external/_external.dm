@@ -320,7 +320,7 @@
 	if(!istype(removing))
 		return TRUE
 
-	var/cutting_result = !W.do_tool_interaction(TOOL_SAW, user, src, W.get_tool_speed(TOOL_SAW) * 3 SECONDS, SPAN_DANGER("<b>[user]</b> starts cutting off \the [removing] from [src] with \the [W]!") )
+	var/cutting_result = !W.do_tool_interaction(TOOL_SAW, user, src, 3 SECONDS, "cutting \the [removing] off")
 	//Check if the limb is still in the hierarchy
 	if(cutting_result == 1 || !(removing in get_limbs_recursive(TRUE)))
 		if(cutting_result != -1)
