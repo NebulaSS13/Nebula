@@ -559,12 +559,12 @@
 			return
 
 		switch(Text)
-			if("brute")	L.adjustBruteLoss(amount)
-			if("fire")	L.adjustFireLoss(amount)
-			if("toxin")	L.adjustToxLoss(amount)
-			if("oxygen")L.adjustOxyLoss(amount)
-			if("brain")	L.adjustBrainLoss(amount)
-			if("clone")	L.adjustCloneLoss(amount)
+			if(BRUTE)    L.adjustBruteLoss(amount)
+			if(BURN)     L.adjustFireLoss(amount)
+			if(TOX)      L.adjustToxLoss(amount)
+			if(OXY)      L.adjustOxyLoss(amount)
+			if(BP_BRAIN) L.adjustBrainLoss(amount)
+			if(CLONE)    L.adjustCloneLoss(amount)
 			else
 				to_chat(usr, "You caused an error. DEBUG: Text:[Text] Mob:[L]")
 				return
