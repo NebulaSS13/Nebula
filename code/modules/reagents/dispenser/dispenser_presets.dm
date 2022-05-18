@@ -44,7 +44,7 @@
 			/obj/item/chems/chem_disp_cartridge/antibiotics,
 			/obj/item/chems/chem_disp_cartridge/sedatives
 		)
-	
+
 	buildable = FALSE
 
 
@@ -57,6 +57,8 @@
 	core_skill = SKILL_COOKING
 	can_contaminate = FALSE //It's not a complex panel, and I'm fairly sure that most people don't haymaker the control panel on a soft drinks machine. -- Chaoko99
 	base_type = /obj/machinery/chemical_dispenser/bar_soft
+	beaker_offset = -2
+	beaker_positions = list(-1,3,7,11,15)
 
 /obj/machinery/chemical_dispenser/bar_soft/full
 	spawn_cartridges = list(
@@ -93,6 +95,8 @@
 	core_skill = SKILL_COOKING
 	can_contaminate = FALSE //See above.
 	base_type = /obj/machinery/chemical_dispenser/bar_alc
+	beaker_offset = -2
+	beaker_positions = list(-3,2,7,12,17)
 
 
 /obj/machinery/chemical_dispenser/bar_alc/full
@@ -116,7 +120,7 @@
 			/obj/item/chems/chem_disp_cartridge/ale,
 			/obj/item/chems/chem_disp_cartridge/mead
 		)
-	
+
 	buildable = FALSE
 
 /obj/machinery/chemical_dispenser/bar_coffee
@@ -128,6 +132,8 @@
 	core_skill = SKILL_COOKING
 	can_contaminate = FALSE //See above.
 	base_type = /obj/machinery/chemical_dispenser/bar_coffee
+	beaker_offset = -2
+	beaker_positions = list(0,14)
 
 
 /obj/machinery/chemical_dispenser/bar_coffee/full
