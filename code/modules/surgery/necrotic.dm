@@ -53,7 +53,7 @@
 	var/obj/item/organ/external/affected = target.get_organ(target_zone)
 	var/target_organ = LAZYACCESS(global.surgeries_in_progress["\ref[target]"], target_zone)
 	user.visible_message("\The [user] slowly starts removing necrotic tissue from \the [target]'s [target_organ] with \the [tool].", \
-	"You slowly start removing necrotic tissue from \the [target]'s [target_organ)] with \the [tool].")
+	"You slowly start removing necrotic tissue from \the [target]'s [target_organ] with \the [tool].")
 	target.custom_pain("You feel sporadic spikes of pain from points around your [affected.name]!",20, affecting = affected)
 	..()
 
