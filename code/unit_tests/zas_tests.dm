@@ -153,7 +153,7 @@
 	if(world.time < testtime)
 		return 0
 	for(var/area/A in shuttle.shuttle_area)
-		var/list/test = test_air_in_area(A.type)
+		var/list/test = test_air_in_area(A.type, global.using_map.shuttle_atmos_expectation)
 		if(isnull(test))
 			fail("Check Runtimed")
 			return 1
