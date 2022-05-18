@@ -287,3 +287,12 @@ else if(##equipment_var) {\
 	if(overlay && tank && slot == slot_back_str)
 		overlay.overlays += tank.get_mob_overlay(user_mob, slot_back_str)
 	. = ..()
+/obj/item/clothing/suit/space/void/refit_for_bodytype(target_bodytype)
+	..()
+	icon = get_icon_for_bodytype(target_bodytype)
+	queue_icon_update()
+
+/obj/item/clothing/head/helmet/space/void/refit_for_bodytype(target_bodytype)
+	..()
+	icon = get_icon_for_bodytype(target_bodytype)
+	queue_icon_update()
