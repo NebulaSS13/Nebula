@@ -19,12 +19,9 @@
 	#include "../../mods/species/ascent/_ascent.dme"
 	#include "../../mods/species/serpentid/_serpentid.dme"
 	#include "../../mods/species/utility_frames/_utility_frames.dme"
-	#include "../../mods/species/tajaran/_tajaran.dme"
-	#include "../../mods/species/tritonian/_tritonian.dme"
 	#include "../../mods/species/neoavians/_neoavians.dme"
-	#include "../../mods/species/lizard/_lizard.dme"
+	#include "../../mods/species/bayliens/_bayliens.dme"
 	#include "../../mods/species/vox/_vox.dme"
-	#include "../../mods/species/adherent/_adherent.dme"
 
 	#include "../away/bearcat/bearcat.dm"
 	#include "../away/casino/casino.dm"
