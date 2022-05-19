@@ -85,7 +85,7 @@
 	var/holding = user.get_active_hand()
 	var/datum/progress_bar/progbar
 	if (progress)
-		progbar = create_progress_bar(user, time, target, theme)
+		progbar = new theme(user, time, target)
 
 	var/endtime = world.time+time
 	var/starttime = world.time
@@ -145,7 +145,7 @@
 
 	var/datum/progress_bar/progbar
 	if (progress)
-		progbar = create_progress_bar(user, delay, target, theme)
+		progbar = new theme(user, delay, target)
 
 	var/endtime = world.time + delay
 	var/starttime = world.time

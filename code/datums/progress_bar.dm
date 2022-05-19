@@ -61,7 +61,8 @@
 	QDEL_NULL(backdrop)
 	QDEL_NULL(fill)
 
-	LAZYASSOCLISTREMOVE(user.progress_bars, target, src)
+	if(!QDELETED(user) && !QDELETED(target))
+		LAZYASSOCLISTREMOVE(user.progress_bars, target, src)
 
 	target = null
 	user = null
@@ -78,7 +79,9 @@
 	shift_down_all()
 	update(last_progress)
 	animate(holder, alpha = 0, time = animation_time_fade, flags = ANIMATION_PARALLEL)
-	LAZYASSOCLISTREMOVE(user.progress_bars, target, src)
+
+	if(!QDELETED(user) && !QDELETED(target))
+		LAZYASSOCLISTREMOVE(user.progress_bars, target, src)
 
 	sleep(animation_time_fade)
 	qdel(src)
@@ -87,7 +90,7 @@
   * Calls the shift animation on all attached bars.
   */
 /datum/progress_bar/proc/shift_down_all()
-	if(user?.progress_bars[target])
+	if(LAZYISIN(user.progress_bars, target))
 		var/list/bars = user.progress_bars[target]
 		for(var/i = bars.Find(src), i <= length(bars), i++)
 			var/datum/progress_bar/P = bars[i]
@@ -111,8 +114,7 @@
 	fill = image(icon, target, "fill")
 	fill.filters = filter(type = "alpha", icon = icon(icon, "mask"), x = -fill_width)
 
-	holder.overlays += backdrop
-	holder.overlays += fill
+	holder.overlays += list(backdrop, fill)
 
 /**
   * Call periodically to update the progress bar's progress.
@@ -125,9 +127,9 @@
 		qdel(src)
 		return
 
-	if(user?.client != client)
-		client?.images -= holder
-		if(!QDELETED(user) && user?.client)
+	if(client && (user?.client != client))
+		client.images -= holder
+		if(client && !QDELETED(user) && user?.client)
 			client = user.client
 			client.images += holder
 
@@ -199,15 +201,3 @@
 	name = "warning (slim)"
 	icon = 'icons/effects/progress_bar/warning_slim.dmi'
 	height = 5
-
-/**
-  * Creates a new progress bar datum with the given theme.
-  *
-  * Arguments:
-  * * user - The mob seeing the progress bar.
-  * * goal - The goal number.
-  * * target - The atom to display the bar on.
-  * * theme - The progress bar's theme (type).
-  */
-/proc/create_progress_bar(mob/user, goal, atom/target, theme = /datum/progress_bar/default)
-	return new theme(user, goal, target)
