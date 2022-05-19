@@ -272,7 +272,7 @@
 			to_chat(user, SPAN_WARNING("Unbuckle the subject before attempting to move them."))
 		else if(panel_open)
 			to_chat(user, SPAN_WARNING("Close the maintenance panel before attempting to place the subject in the sleeper."))
-		else 
+		else
 			go_in(target, user)
 		return TRUE
 
@@ -306,7 +306,7 @@
 	pump = !pump
 
 /obj/machinery/sleeper/proc/go_in(var/mob/M, var/mob/user)
-	if(!M)
+	if(!M || M.anchored)
 		return
 	if(stat & (BROKEN|NOPOWER))
 		return

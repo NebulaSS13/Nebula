@@ -127,11 +127,13 @@
 	check_victim()
 	if(src.victim && get_turf(victim) == get_turf(src) && victim.lying)
 		to_chat(usr, "<span class='warning'>\The [src] is already occupied!</span>")
-		return 0
+		return FALSE
 	if(patient.buckled)
 		to_chat(usr, "<span class='notice'>Unbuckle \the [patient] first!</span>")
-		return 0
-	return 1
+		return FALSE
+	if(patient.anchored)
+		return FALSE
+	return TRUE
 
 /obj/machinery/optable/power_change()
 	. = ..()

@@ -948,7 +948,7 @@ default behaviour is:
 	return "Living"
 
 /mob/living/handle_mouse_drop(atom/over, mob/user)
-	if(user == src && user != over)
+	if(!anchored && user == src && user != over)
 
 		if(isturf(over))
 			var/turf/T = over
