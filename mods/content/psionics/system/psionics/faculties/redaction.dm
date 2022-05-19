@@ -7,6 +7,7 @@
 /decl/psionic_power/redaction
 	faculty = PSI_REDACTION
 	admin_log = FALSE
+	abstract_type = /decl/psionic_power/redaction
 
 /decl/psionic_power/redaction/proc/check_dead(var/mob/living/target)
 	if(!istype(target))
