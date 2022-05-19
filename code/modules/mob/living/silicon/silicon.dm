@@ -441,3 +441,7 @@
 	var/datum/extension/interactive/os = get_extension(src, /datum/extension/interactive/os)
 	if(os)
 		os.Process()
+
+/mob/living/silicon/handle_flashed(var/obj/item/flash/flash, var/flash_strength)
+	SET_STATUS_MAX(src, STAT_WEAK, flash_strength)
+	return TRUE

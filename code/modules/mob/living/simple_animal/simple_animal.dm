@@ -595,3 +595,15 @@
 
 /mob/living/simple_animal/get_telecomms_race_info()
 	return list("Domestic Animal", FALSE)
+
+/mob/living/simple_animal/handle_flashed(var/obj/item/flash/flash, var/flash_strength)
+	var/safety = eyecheck()
+	if(safety < FLASH_PROTECTION_MAJOR)
+		SET_STATUS_MAX(src, STAT_WEAK, 2)
+		if(safety < FLASH_PROTECTION_MODERATE)
+			SET_STATUS_MAX(src, STAT_STUN, (flash_strength - 2))
+			SET_STATUS_MAX(src, STAT_BLURRY, flash_strength)
+			SET_STATUS_MAX(src, STAT_CONFUSE, flash_strength)
+			flash_eyes(2)
+		return TRUE
+	return FALSE

@@ -1351,3 +1351,11 @@
 //Runs last after setup and after the parent init has been executed.
 /mob/living/carbon/human/proc/post_setup(var/species_name = null, var/datum/dna/new_dna = null)
 	refresh_visible_overlays() //Do this exactly once per setup
+
+/mob/living/carbon/human/handle_flashed(var/obj/item/flash/flash, var/flash_strength)
+	var/safety = eyecheck()
+	if(safety < FLASH_PROTECTION_MODERATE)
+		flash_strength = round(getFlashMod() * flash_strength)
+		if(safety > FLASH_PROTECTION_NONE)
+			flash_strength = (flash_strength / 2)
+	. = ..()
