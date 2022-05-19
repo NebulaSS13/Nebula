@@ -166,7 +166,7 @@
 	. += "<td><a href='?src=\ref[src];hair_style=1'>[GET_DECL(pref.h_style)]</a></td>"
 	. += "<td>"
 	if(has_flag(mob_species, HAS_HAIR_COLOR))
-		. += "[COLORED_SQUARE(pref.hair_colour)]<tr><td>__</td></tr></table></font> <a href='?src=\ref[src];hair_color=1'>Change</a>"
+		. += "[COLORED_SQUARE(pref.hair_colour)] <a href='?src=\ref[src];hair_color=1'>Change</a>"
 	. += "</td>"
 	. += "<tr>"
 	. += "</tr>"
@@ -174,18 +174,18 @@
 	. += "<td><a href='?src=\ref[src];facial_style=1'>[GET_DECL(pref.f_style)]</a></td>"
 	. += "<td>"
 	if(has_flag(mob_species, HAS_HAIR_COLOR))
-		. += "[COLORED_SQUARE(pref.facial_hair_colour)]<tr><td>__</td></tr></table></font> <a href='?src=\ref[src];facial_color=1'>Change</a>"
+		. += "[COLORED_SQUARE(pref.facial_hair_colour)] <a href='?src=\ref[src];facial_color=1'>Change</a>"
 	. += "</td>"
 	. += "</tr>"
 	if(has_flag(mob_species, HAS_EYE_COLOR))
 		. += "<tr>"
 		. += "<td><b>Eyes</b></td>"
-		. += "<td>[COLORED_SQUARE(pref.eye_colour)]<tr><td>__</td></tr></table></font> <a href='?src=\ref[src];eye_color=1'>Change</a></td>"
+		. += "<td>[COLORED_SQUARE(pref.eye_colour)] <a href='?src=\ref[src];eye_color=1'>Change</a></td>"
 		. += "</tr>"
 	if(has_flag(mob_species, HAS_SKIN_COLOR))
 		. += "<tr>"
 		. += "<td><b>Body</b></td>"
-		. += "<td>[COLORED_SQUARE(pref.skin_colour)]<tr><td>__</td></tr></table></font> <a href='?src=\ref[src];skin_color=1'>Change</a></td>"
+		. += "<td>[COLORED_SQUARE(pref.skin_colour)] <a href='?src=\ref[src];skin_color=1'>Change</a></td>"
 		. += "</tr>"
 	. += "</table>"
 
@@ -195,7 +195,7 @@
 		var/decl/sprite_accessory/mark = GET_DECL(M)
 		. += "<tr>"
 		. += "<td>[mark.name]</td><td><a href='?src=\ref[src];marking_remove=\ref[mark]'>Remove</a></td>"
-		. += "<td>[COLORED_SQUARE(pref.body_markings[M])]<tr><td>__</td></tr></table></font><a href='?src=\ref[src];marking_color=\ref[mark]'>Change</a></td>"
+		. += "<td>[COLORED_SQUARE(pref.body_markings[M])] <a href='?src=\ref[src];marking_color=\ref[mark]'>Change</a></td>"
 		. += "</tr>"
 	. += "<tr><td colspan = 3><a href='?src=\ref[src];marking_style=1'>Add marking</a></td></tr>"
 	. += "</table>"
