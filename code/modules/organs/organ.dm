@@ -59,22 +59,11 @@
 //Third rgument may be a dna datum; if null will be set to holder's dna.
 /obj/item/organ/Initialize(mapload, material_key, var/datum/dna/given_dna)
 	. = ..(mapload, material_key)
-	if(. == INITIALIZE_HINT_QDEL)
-		return
-	
-	if(max_damage)
-		absolute_max_damage = max_damage
-		min_broken_damage = FLOOR(absolute_max_damage / 2)
-	else
-		absolute_max_damage = min_broken_damage * 2
-		max_damage = absolute_max_damage
-
-	if(!BP_IS_PROSTHETIC(src))
-		setup_as_organic(given_dna)
-	else
-		setup_as_prosthetic()
-
-	update_icon()
+	if(. != INITIALIZE_HINT_QDEL)
+		if(!BP_IS_PROSTHETIC(src))
+			setup_as_organic(given_dna)
+		else
+			setup_as_prosthetic()
 
 /obj/item/organ/proc/setup_as_organic(var/datum/dna/given_dna)
 	//Null DNA setup
@@ -137,11 +126,13 @@
 	if(!species)
 		species = get_species_by_key(global.using_map.default_species)
 		PRINT_STACK_TRACE("Invalid species. Expected a valid species name as string, was: [log_info_line(specie_name)]")
+
 	bodytype = owner?.bodytype || species.default_bodytype
 	species.resize_organ(src)
 
 	// Adjust limb health proportinate to total species health.
 	var/total_health_coefficient = scale_max_damage_to_species_health ? (species.total_health / DEFAULT_SPECIES_HEALTH) : 1
+	absolute_max_damage = initial(absolute_max_damage)
 	if(absolute_max_damage)
 		absolute_max_damage = max(1, FLOOR(absolute_max_damage * total_health_coefficient))
 		min_broken_damage = max(1, FLOOR(absolute_max_damage * 0.5))

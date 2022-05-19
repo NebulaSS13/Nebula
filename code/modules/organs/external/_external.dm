@@ -101,9 +101,7 @@
 
 /obj/item/organ/external/Initialize(mapload, material_key, datum/dna/given_dna)
 	. = ..()
-	if(. == INITIALIZE_HINT_QDEL)
-		return
-	if(isnull(pain_disability_threshold))
+	if(. != INITIALIZE_HINT_QDEL && isnull(pain_disability_threshold))
 		pain_disability_threshold = (max_damage * 0.75)
 
 /obj/item/organ/external/Destroy()
