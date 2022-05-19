@@ -15,7 +15,7 @@ var/global/list/station_bookcases = list()
 	for(var/obj/item/I in loc)
 		if(istype(I, /obj/item/book))
 			I.forceMove(src)
-	if(z in global.using_map.station_levels)
+	if(isStationLevel(z))
 		global.station_bookcases += src
 	. = ..()
 
