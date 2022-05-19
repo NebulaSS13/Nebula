@@ -63,7 +63,7 @@ var/global/list/overmap_unknown_ids = list()
 			SSskybox.rebuild_skyboxes(O.map_z)
 
 /obj/effect/overmap/on_update_icon()
-	filters = filter(type="drop_shadow", color = color + "F0", size = 2, offset = 1,x = 0, y = 0)
+	add_filter("glow", 1, list("drop_shadow", color = color + "F0", size = 2, offset = 1,x = 0, y = 0))
 
 /obj/effect/overmap/proc/handle_wraparound()
 
