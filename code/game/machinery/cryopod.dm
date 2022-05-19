@@ -116,12 +116,12 @@
 		. = TOPIC_REFRESH
 
 /obj/item/stock_parts/circuitboard/cryopodcontrol
-	name = "Circuit board (Cryogenic Oversight Console)"
+	name = "circuit board (Cryogenic Oversight Console)"
 	build_path = /obj/machinery/computer/cryopod
 	origin_tech = "{'programming':3}"
 
 /obj/item/stock_parts/circuitboard/robotstoragecontrol
-	name = "Circuit board (Robotic Storage Console)"
+	name = "circuit board (Robotic Storage Console)"
 	build_path = /obj/machinery/computer/cryopod/robot
 	origin_tech = "{'programming':3}"
 
