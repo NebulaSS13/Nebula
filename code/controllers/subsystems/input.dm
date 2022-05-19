@@ -18,8 +18,7 @@ SUBSYSTEM_DEF(input)
 	macro_set = list(
 	"Any" = "\"KeyDown \[\[*\]\]\"",
 	"Any+UP" = "\"KeyUp \[\[*\]\]\"",
-	"Back" = "\".winset \\\"window_output.input.text=\\\"\\\"\\\"\"",
-	"Escape" = "Reset-Held-Keys"
+	"Back" = "\".winset \\\"window_output.input.text=\\\"\\\"\\\"\""
 	)
 
 // Badmins just wanna have fun ♪
