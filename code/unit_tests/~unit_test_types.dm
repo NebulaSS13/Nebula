@@ -64,3 +64,9 @@
 
 /area/test_area/edge_of_map
 	name = "Edge of Map - Only map space turfs here"
+
+/obj/item/paper/secret_note/example
+	secret_key = "secret_note_example_single"
+
+/obj/item/paper/secret_note/random/example
+	secret_key = "secret_category_example_random_notes"
