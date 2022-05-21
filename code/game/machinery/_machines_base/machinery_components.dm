@@ -148,7 +148,7 @@ var/global/list/machine_path_to_circuit_type
 		. = part
 
 	if(istype(part))
-		LAZYADD(component_parts, part)
+		LAZYDISTINCTADD(component_parts, part)
 		part.on_install(src)
 		events_repository.register(/decl/observ/destroyed, part, src, .proc/component_destroyed)
 	else if(ispath(part))
