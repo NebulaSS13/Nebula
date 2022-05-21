@@ -396,7 +396,7 @@
 		return TRUE
 
 /mob/living/silicon/proc/try_stock_parts_removal(obj/item/W, mob/user)
-	if(!isCrowbar(W) || user.a_intent == I_HURT)
+	if(!IS_CROWBAR(W) || user.a_intent == I_HURT)
 		return
 	if(!length(stock_parts))
 		to_chat(user, SPAN_WARNING("No parts left to remove"))

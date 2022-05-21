@@ -39,7 +39,7 @@
 			airtank = W
 			to_chat(user, "You install \the [W] in \the [src].")
 			return 1
-	else if(airtank && isScrewdriver(W))
+	else if(airtank && IS_SCREWDRIVER(W))
 		to_chat(user, "You remove \the [airtank] from \the [src].")
 		airtank.dropInto(loc)
 		airtank = null
@@ -94,7 +94,7 @@
 			set_tank(W)
 			to_chat(user, "You install \the [W] in \the [src].")
 			return 1
-	else if(airtank && isScrewdriver(W))
+	else if(airtank && IS_SCREWDRIVER(W))
 		to_chat(user, "You remove \the [airtank] from \the [src].")
 		airtank.dropInto(loc)
 		airtank = null

@@ -151,7 +151,7 @@
 				make_terminal(machine)
 		return TRUE
 
-	if(isWirecutter(I) && terminal)
+	if(IS_WIRECUTTER(I) && terminal)
 		var/turf/T = get_step(machine, terminal_dir)
 		if(terminal_dir && user.loc != T)
 			return FALSE // Wrong terminal handler.

@@ -129,7 +129,7 @@ Using robohead because of restricting to roboticist */
 				desc = "This TV camera assembly has a camera and audio module."
 				return
 		if(2)
-			if(isCoil(W))
+			if(IS_COIL(W))
 				var/obj/item/stack/cable_coil/C = W
 				if(!C.use(3))
 					to_chat(user, "<span class='notice'>You need three cable coils to wire the devices.</span>")
@@ -140,7 +140,7 @@ Using robohead because of restricting to roboticist */
 				desc = "This TV camera assembly has wires sticking out"
 				return
 		if(3)
-			if(isWirecutter(W))
+			if(IS_WIRECUTTER(W))
 				to_chat(user, "<span class='notice'> You trim the wires.</span>")
 				buildstep++
 				desc = "This TV camera assembly needs casing."

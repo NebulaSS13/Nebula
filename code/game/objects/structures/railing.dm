@@ -227,7 +227,7 @@
 			return
 
 	// Dismantle
-	if(isWrench(W))
+	if(IS_WRENCH(W))
 		if(!anchored)
 			playsound(src.loc, 'sound/items/Ratchet.ogg', 50, 1)
 			if(do_after(user, 20, src))
@@ -249,7 +249,7 @@
 			update_icon()
 			return
 	// Repair
-	if(isWelder(W))
+	if(IS_WELDER(W))
 		var/obj/item/weldingtool/F = W
 		if(F.isOn())
 			if(health >= maxhealth)
@@ -264,7 +264,7 @@
 			return
 
 	// Install
-	if(isScrewdriver(W))
+	if(IS_SCREWDRIVER(W))
 		if(!density)
 			to_chat(user, "<span class='notice'>You need to wrench \the [src] from back into place first.</span>")
 			return

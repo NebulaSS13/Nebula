@@ -91,7 +91,7 @@
 			to_chat(user, "<span class='notice'>You install a cell in \the [src].</span>")
 			update_icon()
 
-	else if(isScrewdriver(W))
+	else if(IS_SCREWDRIVER(W))
 		if(bcell)
 			bcell.update_icon()
 			bcell.dropInto(loc)

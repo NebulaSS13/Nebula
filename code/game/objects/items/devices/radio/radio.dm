@@ -567,7 +567,7 @@
 /obj/item/radio/attackby(obj/item/W, mob/user)
 	..()
 	user.set_machine(src)
-	if(isScrewdriver(W))
+	if(IS_SCREWDRIVER(W))
 		b_stat = !b_stat
 		if(!istype(src, /obj/item/radio/beacon))
 			if (b_stat)
@@ -643,10 +643,10 @@
 /obj/item/radio/borg/attackby(obj/item/W, mob/user)
 //	..()
 	user.set_machine(src)
-	if (!( isScrewdriver(W) || (istype(W, /obj/item/encryptionkey/ ))))
+	if (!( IS_SCREWDRIVER(W) || (istype(W, /obj/item/encryptionkey/ ))))
 		return
 
-	if(isScrewdriver(W))
+	if(IS_SCREWDRIVER(W))
 		if(keyslot)
 			for(var/ch_name in channels)
 				radio_controller.remove_object(src, radiochannels[ch_name])

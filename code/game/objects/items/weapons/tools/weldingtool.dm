@@ -91,7 +91,7 @@
 		to_chat(user, SPAN_WARNING("Stop welding first!"))
 		return
 
-	if(isScrewdriver(W))
+	if(IS_SCREWDRIVER(W))
 		if(isrobot(loc))
 			to_chat(user, SPAN_WARNING("You cannot modify your own welder!"))
 			return

@@ -167,11 +167,11 @@
 		update_icon()
 
 /obj/structure/grille/attackby(obj/item/W, mob/user)
-	if(isWirecutter(W))
+	if(IS_WIRECUTTER(W))
 		if(!material.conductive || !shock(user, 100))
 			cut_grille()
 
-	else if((isScrewdriver(W)) && (istype(loc, /turf/simulated) || anchored))
+	else if((IS_SCREWDRIVER(W)) && (istype(loc, /turf/simulated) || anchored))
 		if(!shock(user, 90))
 			playsound(loc, 'sound/items/Screwdriver.ogg', 100, 1)
 			anchored = !anchored

@@ -497,7 +497,7 @@
 		if(try_stock_parts_install(W, user))
 			return
 
-	if(isWelder(W) && user.a_intent != I_HURT)
+	if(IS_WELDER(W) && user.a_intent != I_HURT)
 		if (src == user)
 			to_chat(user, "<span class='warning'>You lack the reach to be able to repair yourself.</span>")
 			return
@@ -527,7 +527,7 @@
 			updatehealth()
 			user.visible_message(SPAN_NOTICE("\The [user] has fixed some of the burnt wires on \the [src]!"))
 
-	else if(isCrowbar(W) && user.a_intent != I_HURT)	// crowbar means open or close the cover - we all know what a crowbar is by now
+	else if(IS_CROWBAR(W) && user.a_intent != I_HURT)	// crowbar means open or close the cover - we all know what a crowbar is by now
 		if(opened)
 			if(cell)
 				user.visible_message("<span class='notice'>\The [user] begins clasping shut \the [src]'s maintenance hatch.</span>", "<span class='notice'>You begin closing up \the [src].</span>")
@@ -605,17 +605,17 @@
 			C.brute_damage = 0
 			C.electronics_damage = 0
 
-	else if(isWirecutter(W) || isMultitool(W))
+	else if(IS_WIRECUTTER(W) || IS_MULTITOOL(W))
 		if (wiresexposed)
 			wires.Interact(user)
 		else
 			to_chat(user, "You can't reach the wiring.")
-	else if(isScrewdriver(W) && opened && !cell)	// haxing
+	else if(IS_SCREWDRIVER(W) && opened && !cell)	// haxing
 		wiresexposed = !wiresexposed
 		to_chat(user, "The wires have been [wiresexposed ? "exposed" : "unexposed"].")
 		update_icon()
 
-	else if(isScrewdriver(W) && opened && cell)	// radio
+	else if(IS_SCREWDRIVER(W) && opened && cell)	// radio
 		if(silicon_radio)
 			silicon_radio.attackby(W,user)//Push it to the radio to let it handle everything
 		else

@@ -247,7 +247,7 @@
 		return TRUE
 	if(component_attackby(W, user))
 		return TRUE
-	if(isWrench(W))
+	if(IS_WRENCH(W))
 
 		if(isspaceturf(get_turf(src)))
 			to_chat(user, "<span class='notice'>You can't anchor something to empty space. Idiot.</span>")

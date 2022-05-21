@@ -289,7 +289,7 @@
 				stage++
 				return TRUE
 		if(2)
-			if(W.sharp || istype(W,/obj/item/hemostat) || isWirecutter(W))
+			if(W.sharp || istype(W,/obj/item/hemostat) || IS_WIRECUTTER(W))
 				var/list/radial_buttons = make_item_radial_menu_choices(get_contents_recursive())
 				if(LAZYLEN(radial_buttons))
 					var/obj/item/removing = show_radial_menu(user, src, radial_buttons, radius = 42, require_near = TRUE, use_labels = TRUE, check_locs = list(src))

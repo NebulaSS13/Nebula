@@ -231,7 +231,7 @@ var/global/list/deactivated_ai_cores = list()
 	qdel(src)
 
 /obj/structure/aicore/deactivated/attackby(var/obj/item/W, var/mob/user)
-	if(isWrench(W) || isWelder(W))
+	if(IS_WRENCH(W) || IS_WELDER(W))
 		. = ..()
 	else if(istype(W, /obj/item/aicard))
 		var/obj/item/aicard/card = W

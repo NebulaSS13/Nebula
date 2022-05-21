@@ -174,7 +174,7 @@
 	if (istype(W, /obj/item/cash))
 		attack_hand(user)
 		return TRUE
-	if(isMultitool(W) || isWirecutter(W))
+	if(IS_MULTITOOL(W) || IS_WIRECUTTER(W))
 		if(panel_open)
 			attack_hand(user)
 			return TRUE
@@ -182,7 +182,7 @@
 		return TRUE
 	if((. = component_attackby(W, user)))
 		return
-	if((obj_flags & OBJ_FLAG_ANCHORABLE) && isWrench(W))
+	if((obj_flags & OBJ_FLAG_ANCHORABLE) && IS_WRENCH(W))
 		wrench_floor_bolts(user)
 		power_change()
 		return

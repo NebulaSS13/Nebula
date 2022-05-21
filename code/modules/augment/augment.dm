@@ -34,7 +34,7 @@
 	return
 
 /obj/item/organ/internal/augment/attackby(obj/item/W, mob/user)
-	if(isScrewdriver(W) && allowed_organs.len > 1)
+	if(IS_SCREWDRIVER(W) && allowed_organs.len > 1)
 		//Here we can adjust location for implants that allow multiple slots
 		organ_tag = input(user, "Adjust installation parameters") as null|anything in allowed_organs
 		update_parent_organ()

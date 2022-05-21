@@ -166,7 +166,7 @@
 		to_chat(user, "<span class='danger'>\The [src] is not compatible with \the [W].</span>")
 		return TRUE
 
-	else if(isCrowbar(W) && user.a_intent != I_HURT)
+	else if(IS_CROWBAR(W) && user.a_intent != I_HURT)
 		to_chat(user, "<span class='danger'>\The [src] is hermetically sealed. You can't open the case.</span>")
 		return
 

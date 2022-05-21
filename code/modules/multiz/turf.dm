@@ -112,7 +112,7 @@
 		return TRUE
 
 	//To lay cable.
-	if(isCoil(C) && try_build_cable(C, user))
+	if(IS_COIL(C) && try_build_cable(C, user))
 		return TRUE
 
 	for(var/atom/movable/M in below)
@@ -211,7 +211,7 @@
 		return TRUE
 
 	//To lay cable.
-	if(isCoil(C) && try_build_cable(C, user))
+	if(IS_COIL(C) && try_build_cable(C, user))
 		return TRUE
 
 	for(var/atom/movable/M in below)

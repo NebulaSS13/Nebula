@@ -169,7 +169,7 @@
 		else
 			to_chat(user, "<span class='notice'>[src] already has a cell installed.</span>")
 
-	else if(isScrewdriver(W))
+	else if(IS_SCREWDRIVER(W))
 		if(cell)
 			var/obj/item/C = cell
 			C.dropInto(user.loc)

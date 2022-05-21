@@ -13,7 +13,7 @@
 		to_chat(user, "The maintenance panel is open.")
 
 /obj/machinery/disperser/attackby(obj/item/I, mob/user)
-	if(isWrench(I))
+	if(IS_WRENCH(I))
 		if(panel_open)
 			user.visible_message("<span class='notice'>\The [user] rotates \the [src] with \the [I].</span>", "<span class='notice'>You rotate \the [src] with \the [I].</span>")
 			set_dir(turn(dir, 90))

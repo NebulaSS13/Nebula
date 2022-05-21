@@ -115,7 +115,7 @@
 			material.reinforce(user, W, src)
 		return TRUE
 
-	if(reinf_material && reinf_material.default_solid_form && isWelder(W))
+	if(reinf_material && reinf_material.default_solid_form && IS_WELDER(W))
 		var/obj/item/weldingtool/WT = W
 		if(WT.isOn() && WT.get_fuel() > 2 && use(2))
 			WT.remove_fuel(2, user)

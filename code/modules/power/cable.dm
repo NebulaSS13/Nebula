@@ -140,17 +140,17 @@ By design, d1 is the smallest direction and d2 is the highest
 //
 
 /obj/structure/cable/attackby(obj/item/W, mob/user)
-	if(isWirecutter(W))
+	if(IS_WIRECUTTER(W))
 		cut_wire(W, user)
 
-	else if(isCoil(W))
+	else if(IS_COIL(W))
 		var/obj/item/stack/cable_coil/coil = W
 		if (coil.get_amount() < 1)
 			to_chat(user, "You don't have enough cable to lay down.")
 			return
 		coil.cable_join(src, user)
 
-	else if(isMultitool(W))
+	else if(IS_MULTITOOL(W))
 
 		if(powernet && (powernet.avail > 0))		// is it powered?
 			to_chat(user, SPAN_WARNING("[get_wattage()] in power network."))

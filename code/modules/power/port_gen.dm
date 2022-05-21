@@ -314,7 +314,7 @@
 		addstack.use(amount)
 		updateUsrDialog()
 		return
-	if(isWrench(O) && !active)
+	if(IS_WRENCH(O) && !active)
 		if(!anchored)
 			to_chat(user, "<span class='notice'>You secure \the [src] to the floor.</span>")
 		else

@@ -27,7 +27,7 @@
 		qdel(src)
 		return
 
-	if(isWelder(I))
+	if(IS_WELDER(I))
 		var/obj/item/weldingtool/W = I
 		if(W.isOn())
 			if(W.remove_fuel(2))

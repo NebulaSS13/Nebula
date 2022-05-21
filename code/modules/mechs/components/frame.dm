@@ -86,7 +86,7 @@
 /obj/structure/heavy_vehicle_frame/attackby(var/obj/item/thing, var/mob/user)
 
 	// Removing components.
-	if(isCrowbar(thing))
+	if(IS_CROWBAR(thing))
 		if(is_reinforced == FRAME_REINFORCED)
 			if(!do_after(user, 5 * user.skill_delay_mult(SKILL_DEVICES)) || !material)
 				return
@@ -116,7 +116,7 @@
 		return
 
 	// Final construction step.
-	else if(isScrewdriver(thing))
+	else if(IS_SCREWDRIVER(thing))
 
 		// Check for basic components.
 		if(!(arms && legs && head && body))
@@ -162,7 +162,7 @@
 		return
 
 	// Installing wiring.
-	else if(isCoil(thing))
+	else if(IS_COIL(thing))
 
 		if(is_wired)
 			to_chat(user, SPAN_WARNING("\The [src] has already been wired."))
@@ -186,7 +186,7 @@
 		playsound(user.loc, 'sound/items/Deconstruct.ogg', 50, 1)
 		is_wired = FRAME_WIRED
 	// Securing wiring.
-	else if(isWirecutter(thing))
+	else if(IS_WIRECUTTER(thing))
 		if(!is_wired)
 			to_chat(user, "There is no wiring in \the [src] to neaten.")
 			return
@@ -223,7 +223,7 @@
 		else
 			return ..()
 	// Securing metal.
-	else if(isWrench(thing))
+	else if(IS_WRENCH(thing))
 		if(!is_reinforced)
 			to_chat(user, SPAN_WARNING("There is no metal to secure inside \the [src]."))
 			return
@@ -241,7 +241,7 @@
 		playsound(user.loc, 'sound/items/Ratchet.ogg', 100, 1)
 		is_reinforced = (is_reinforced == FRAME_REINFORCED_SECURE) ? FRAME_REINFORCED : FRAME_REINFORCED_SECURE
 	// Welding metal.
-	else if(isWelder(thing))
+	else if(IS_WELDER(thing))
 		var/obj/item/weldingtool/WT = thing
 		if(!is_reinforced)
 			to_chat(user, SPAN_WARNING("There is no metal to secure inside \the [src]."))

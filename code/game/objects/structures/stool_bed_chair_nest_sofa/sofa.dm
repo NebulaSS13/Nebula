@@ -23,7 +23,7 @@
 	. = ..()
 	if(.)
 		return
-	if(!isWrench(W))
+	if(!IS_WRENCH(W))
 		return
 	playsound(src.loc, 'sound/items/Ratchet.ogg', 50, 1)
 	anchored = !anchored

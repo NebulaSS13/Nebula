@@ -72,7 +72,7 @@
 	. = ..()
 
 /obj/item/powersink/attackby(var/obj/item/I, var/mob/user)
-	if(isScrewdriver(I))
+	if(IS_SCREWDRIVER(I))
 		if(mode == DISCONNECTED)
 			var/turf/T = loc
 			if(isturf(T) && !!T.is_plating())

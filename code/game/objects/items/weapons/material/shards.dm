@@ -63,7 +63,7 @@
 		alpha = 255
 
 /obj/item/shard/attackby(obj/item/W, mob/user)
-	if(isWelder(W) && material.shard_can_repair)
+	if(IS_WELDER(W) && material.shard_can_repair)
 		var/obj/item/weldingtool/WT = W
 		if(WT.remove_fuel(0, user))
 			material.create_object(get_turf(src))

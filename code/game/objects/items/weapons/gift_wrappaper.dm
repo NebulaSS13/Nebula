@@ -35,7 +35,7 @@
 /obj/effect/spresent/attackby(obj/item/W, mob/user)
 	..()
 
-	if(!isWirecutter(W))
+	if(!IS_WIRECUTTER(W))
 		to_chat(user, "<span class='warning'>I need wirecutters for that.</span>")
 		return
 
@@ -162,7 +162,7 @@
 
 	var/found_scissors = FALSE
 	for(var/obj/item/thing in user.get_held_items())
-		if(isWirecutter(thing))
+		if(IS_WIRECUTTER(thing))
 			found_scissors = TRUE
 			break
 

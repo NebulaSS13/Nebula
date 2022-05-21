@@ -50,7 +50,7 @@
 	var/disk_looted
 
 /obj/structure/backup_server/attackby(obj/item/W, mob/user, var/click_params)
-	if(isCrowbar(W))
+	if(IS_CROWBAR(W))
 		if(disk_looted)
 			to_chat(user, SPAN_WARNING("There's no disk in \the [src]."))
 		else
