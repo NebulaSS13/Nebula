@@ -348,17 +348,17 @@
 		visible_message("\The [user] deflates \the [A] with \the [src]!")
 		return
 	if(istype(A, /obj/item/inflatable))
-		if(istype(A, /obj/item/inflatable/wall))
-			if(stored_walls >= max_walls)
-				to_chat(user, "\The [src] is full.")
-				return
-			stored_walls++
-			qdel(A)
-		else
+		if(istype(A, /obj/item/inflatable/door))
 			if(stored_doors >= max_doors)
 				to_chat(usr, "\The [src] is full!")
 				return
 			stored_doors++
+			qdel(A)
+		else
+			if(stored_walls >= max_walls)
+				to_chat(user, "\The [src] is full.")
+				return
+			stored_walls++
 			qdel(A)
 		visible_message("\The [user] picks up \the [A] with \the [src]!")
 		return
