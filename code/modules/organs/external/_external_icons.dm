@@ -15,22 +15,45 @@ var/global/list/limb_icon_cache = list()
 				overlays += child.mob_icon
 		overlays += organ.mob_icon
 
-/obj/item/organ/external/proc/sync_colour_to_human(var/mob/living/carbon/human/human)
-	skin_tone = null
-	skin_colour = null
-	hair_colour = human.hair_colour
-	bodytype = human.bodytype
-	if(BP_IS_PROSTHETIC(src) && model)
-		var/decl/prosthetics_manufacturer/franchise = GET_DECL(model)
-		if(!(franchise && franchise.skintone))
-			return
-		skin_blend = franchise.limb_blend
-	if(species && human.species && species.name != human.species.name)
-		return
-	if(!isnull(human.skin_tone) && (human.species.appearance_flags & HAS_A_SKIN_TONE))
-		skin_tone = human.skin_tone
-	if(human.species.appearance_flags & HAS_SKIN_COLOR)
-		skin_colour = human.skin_colour
+/obj/item/organ/external/setup_organ(var/datum/dna/given_dna)
+	. = ..()
+	sync_appearance_to_owner(TRUE)
+
+/obj/item/organ/external/proc/sync_appearance_to_owner(var/update_limbs_bodytype = FALSE)
+
+	skin_blend =  initial(skin_blend)
+	skin_tone =   initial(skin_tone)
+	skin_colour = initial(skin_colour)
+	hair_colour = initial(hair_colour)
+
+	if(owner)
+
+		if(!bodytype || update_limbs_bodytype)
+			bodytype = owner.bodytype
+
+		var/apply_skin_colours = FALSE
+		if(BP_IS_PROSTHETIC(src))
+			if(model)
+				var/decl/prosthetics_manufacturer/franchise = GET_DECL(model)
+				if(franchise?.skintone)
+					skin_blend = franchise.limb_blend
+					apply_skin_colours = TRUE
+		else
+			skin_blend = bodytype.limb_blend
+			apply_skin_colours = TRUE
+
+		if(apply_skin_colours)
+			hair_colour = owner.hair_colour
+			if(!isnull(owner.skin_tone) && (owner.species.appearance_flags & HAS_A_SKIN_TONE))
+				skin_tone = owner.skin_tone
+			else
+				skin_tone = null
+			if(owner.species.appearance_flags & HAS_SKIN_COLOR)
+				skin_colour = owner.skin_colour
+			else
+				skin_colour = null
+
+	update_icon()
 
 /obj/item/organ/external/proc/sync_colour_to_dna()
 	skin_tone = null
@@ -45,10 +68,11 @@ var/global/list/limb_icon_cache = list()
 	if(species.appearance_flags & HAS_SKIN_COLOR)
 		skin_colour = rgb(dna.GetUIValue(DNA_UI_SKIN_R), dna.GetUIValue(DNA_UI_SKIN_G), dna.GetUIValue(DNA_UI_SKIN_B))
 
-/obj/item/organ/external/head/sync_colour_to_human(var/mob/living/carbon/human/human)
+/obj/item/organ/external/head/sync_appearance_to_owner(var/update_limbs_bodytype = FALSE)
 	..()
-	var/obj/item/organ/internal/eyes/eyes = human.get_organ(BP_EYES)
-	if(eyes) eyes.update_colour()
+	var/obj/item/organ/internal/eyes/eyes = owner?.get_organ(BP_EYES)
+	if(eyes) 
+		eyes.update_colour()
 
 /obj/item/organ/external/head/on_remove_effects(mob/living/last_owner)
 	update_icon(1)

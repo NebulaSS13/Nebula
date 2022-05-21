@@ -17,7 +17,7 @@
 		alive_icon = initial(icon_state)
 	. = ..()
 
-/obj/item/organ/internal/set_species(species_name)
+/obj/item/organ/internal/set_species(species_name, force_bodytype)
 	. = ..()
 	if(species.organs_icon)
 		icon = species.organs_icon

@@ -39,8 +39,8 @@ var/global/list/wrapped_species_by_ref = list()
 
 /decl/species/shapeshifter/post_organ_rejuvenate(var/obj/item/organ/org, var/mob/living/carbon/human/H)
 	var/obj/item/organ/external/E = org
-	if(H && istype(E))
-		E.sync_colour_to_human(H)
+	if(istype(E))
+		E.sync_appearance_to_owner()
 
 /decl/species/shapeshifter/get_pain_emote(var/mob/living/carbon/human/H, var/pain_power)
 	var/decl/species/S = get_species_by_key(wrapped_species_by_ref["\ref[H]"])
@@ -128,6 +128,6 @@ var/global/list/wrapped_species_by_ref = list()
 		facial_hair_colour = skin_colour
 
 	for(var/obj/item/organ/external/E in get_external_organs())
-		E.sync_colour_to_human(src)
+		E.sync_appearance_to_owner()
 
 	refresh_visible_overlays()

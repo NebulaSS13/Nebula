@@ -120,9 +120,8 @@
 	if(owner)
 		LAZYREMOVE(owner.bad_external_organs, src)
 
-/obj/item/organ/external/set_species(specie_name)
+/obj/item/organ/external/set_species(specie_name, force_bodytype)
 	. = ..()
-	skin_blend = bodytype.limb_blend
 	slowdown = species.get_slowdown(owner) // TODO make this a getter so octopodes can override it based on flooding
 	for(var/attack_type in species.unarmed_attacks)
 		var/decl/natural_attack/attack = GET_DECL(attack_type)

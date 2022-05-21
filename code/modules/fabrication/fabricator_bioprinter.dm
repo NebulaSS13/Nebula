@@ -66,7 +66,8 @@
 		"real_name" = loaded_dna.real_name,
 		"UE"        = loaded_dna.unique_enzymes,
 		"species"   = loaded_dna.species,
-		"btype"     = loaded_dna.b_type,
+		"bodytype"  = loaded_dna.bodytype,
+		"btype"     = loaded_dna.b_type
 	) 
 
 /obj/machinery/fabricator/bioprinter/ui_draw_config(mob/user, ui_key)

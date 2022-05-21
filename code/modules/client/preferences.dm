@@ -341,9 +341,16 @@ var/global/list/time_prefs_fixed = list()
 
 	// Sanitizing rather than saving as someone might still be editing when copy_to occurs.
 	player_setup.sanitize_setup()
-	character.personal_aspects = list()
-	character.change_species(species)
-	character.set_bodytype((character.species.get_bodytype_by_name(bodytype) || character.species.default_bodytype), FALSE)
+
+	// Apply species and bodytype, and blood type.
+	var/decl/species/setting_species = get_species_by_key(species)
+	var/decl/bodytype/setting_bodytype = setting_species.get_bodytype_by_name(bodytype)
+	character.change_species(setting_species.name, setting_bodytype.type)
+	character.b_type = b_type
+	character.dna.b_type = b_type
+
+	// Refresh missing limbs and apply prosthetics etc.
+	character.restore_all_organs()
 
 	if(be_random_name)
 		var/decl/cultural_info/culture = GET_DECL(cultural_info[TAG_CULTURE])
@@ -360,7 +367,6 @@ var/global/list/time_prefs_fixed = list()
 	character.fully_replace_character_name(real_name)
 
 	character.set_gender(gender)
-	character.b_type = b_type
 
 	character.eye_colour = eye_colour
 
@@ -408,7 +414,6 @@ var/global/list/time_prefs_fixed = list()
 	if(LAZYLEN(appearance_descriptors))
 		character.appearance_descriptors = appearance_descriptors.Copy()
 
-	character.force_update_limbs()
 	character.update_mutations(0)
 	character.update_body(0)
 	character.update_underwear(0)

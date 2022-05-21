@@ -312,7 +312,7 @@ var/global/list/possible_changeling_IDs = list("Alpha","Beta","Gamma","Delta","E
 		H.set_species(newSpecies)
 		H.apply_species_appearance()
 		H.b_type = chosen_dna.dna.b_type
-		H.sync_organ_dna()
+		H.setup_organs()
 
 	domutcheck(src, null)
 	src.UpdateAppearance()

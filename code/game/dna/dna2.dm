@@ -78,8 +78,8 @@ var/global/list/datum/dna/gene/dna_genes[0]
 	var/b_type = "A+"  // Should probably change to an integer => string map but I'm lazy.
 	var/real_name          // Stores the real name of the person who originally got this dna datum. Used primarily for changelings,
 
-	// New stuff
 	var/species
+	var/bodytype
 	var/list/body_markings = list()
 	var/lineage
 	//#TODO: Keep track of bodytype!!!!!
@@ -93,6 +93,7 @@ var/global/list/datum/dna/gene/dna_genes[0]
 	new_dna.b_type=b_type
 	new_dna.real_name=real_name
 	new_dna.species=species || global.using_map.default_species
+	new_dna.bodytype=bodytype || global.using_map.default_bodytype
 	new_dna.body_markings=body_markings.Copy()
 	for(var/b=1;b<=DNA_SE_LENGTH;b++)
 		new_dna.SE[b]=SE[b]
@@ -361,6 +362,8 @@ var/global/list/datum/dna/gene/dna_genes[0]
 	else
 		if(!species)
 			species = global.using_map.default_species
+		if(!bodytype)
+			bodytype = global.using_map.default_bodytype
 		if(length(uni_identity) != 3*DNA_UI_LENGTH)
 			uni_identity = "00600200A00E0110148FC01300B0095BD7FD3F4"
 		if(length(struc_enzymes)!= 3*DNA_SE_LENGTH)

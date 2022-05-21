@@ -524,6 +524,9 @@ var/global/const/DEFAULT_SPECIES_HEALTH = 200
 		H.add_organ(O, H.get_organ(O.parent_organ), FALSE, FALSE)
 		post_organ_rejuvenate(O, H)
 
+	if(fully_replace)
+		H.force_update_limbs(FALSE)
+
 /decl/species/proc/add_base_auras(var/mob/living/carbon/human/H)
 	if(base_auras)
 		for(var/type in base_auras)

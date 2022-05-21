@@ -222,12 +222,9 @@
 		else
 			visible_message("<B>\The [src]</B> drops what they were holding in their [grasp_name]!")
 
-/mob/living/carbon/human/proc/sync_organ_dna()
+/mob/living/carbon/human/proc/setup_organs()
 	for(var/obj/item/organ/O in get_organs())
-		if(!BP_IS_PROSTHETIC(O))
-			O.setup_as_organic(dna)
-		else
-			O.setup_as_prosthetic()
+		O.setup_organ()
 
 /mob/living/proc/is_asystole()
 	return FALSE

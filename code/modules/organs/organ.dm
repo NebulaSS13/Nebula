@@ -56,14 +56,17 @@
 /obj/item/organ/proc/is_broken()
 	return (damage >= min_broken_damage || (status & ORGAN_CUT_AWAY) || (status & ORGAN_BROKEN))
 
-//Third rgument may be a dna datum; if null will be set to holder's dna.
+//Third argument may be a dna datum; if null will be set to holder's dna.
 /obj/item/organ/Initialize(mapload, material_key, var/datum/dna/given_dna)
 	. = ..(mapload, material_key)
 	if(. != INITIALIZE_HINT_QDEL)
-		if(!BP_IS_PROSTHETIC(src))
-			setup_as_organic(given_dna)
-		else
-			setup_as_prosthetic()
+		setup_organ(given_dna)
+
+/obj/item/organ/proc/setup_organ(var/datum/dna/given_dna)
+	if(!BP_IS_PROSTHETIC(src))
+		setup_as_organic(given_dna)
+	else
+		setup_as_prosthetic()
 
 /obj/item/organ/proc/setup_as_organic(var/datum/dna/given_dna)
 	//Null DNA setup
@@ -118,7 +121,7 @@
 	blood_DNA[dna.unique_enzymes] = dna.b_type
 	set_species(dna.species)
 
-/obj/item/organ/proc/set_species(var/specie_name)
+/obj/item/organ/proc/set_species(var/specie_name, var/force_bodytype)
 	if(istext(specie_name))
 		species = get_species_by_key(specie_name)
 	else
@@ -127,7 +130,10 @@
 		species = get_species_by_key(global.using_map.default_species)
 		PRINT_STACK_TRACE("Invalid species. Expected a valid species name as string, was: [log_info_line(specie_name)]")
 
-	bodytype = owner?.bodytype || species.default_bodytype
+	if(force_bodytype)
+		bodytype = GET_DECL(force_bodytype)
+	else if(!(bodytype in species.available_bodytypes))
+		bodytype = owner?.bodytype || species.default_bodytype
 	species.resize_organ(src)
 
 	// Adjust limb health proportinate to total species health.

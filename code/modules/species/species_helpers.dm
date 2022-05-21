@@ -65,7 +65,6 @@ var/global/list/stored_shock_by_ref = list()
 	mannequin.facial_hair_colour = base_hair_color
 	set_default_hair(mannequin)
 
-	mannequin.force_update_limbs()
 	mannequin.update_mutations(0)
 	mannequin.update_body(0)
 	mannequin.update_underwear(0)

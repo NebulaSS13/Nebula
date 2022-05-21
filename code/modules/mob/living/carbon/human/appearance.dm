@@ -3,7 +3,7 @@
 	AC.flags = flags
 	AC.ui_interact(user, state = state)
 
-/mob/living/carbon/human/proc/change_species(var/new_species)
+/mob/living/carbon/human/proc/change_species(var/new_species, var/force_bodytype)
 	if(!new_species)
 		return
 
@@ -13,11 +13,12 @@
 	if(!(new_species in get_all_species()))
 		return
 
-	set_species(new_species)
+	set_species(new_species, force_bodytype)
 
 	//Handle spawning stuff
 	species.handle_pre_spawn(src)
 	species.create_missing_organs(src, TRUE) //Not fully replacing would cause problem with organs not being updated
+
 	apply_species_appearance()
 	apply_species_cultural_info()
 	species.handle_post_spawn(src)
@@ -87,7 +88,7 @@
 /mob/living/carbon/human/proc/change_hair_color(var/new_colour)
 	if(hair_colour != new_colour)
 		hair_colour = new_colour
-		force_update_limbs()
+		force_update_limbs(update_limbs_bodytype = FALSE)
 		update_body()
 		update_hair()
 		return TRUE
@@ -104,7 +105,7 @@
 	if(skin_colour == new_colour || !(species.appearance_flags & HAS_SKIN_COLOR))
 		return FALSE
 	skin_colour = new_colour
-	force_update_limbs()
+	force_update_limbs(update_limbs_bodytype = FALSE)
 	update_body()
 	return TRUE
 
@@ -112,7 +113,7 @@
 	if(skin_tone == tone || !(species.appearance_flags & HAS_A_SKIN_TONE))
 		return
 	skin_tone = tone
-	force_update_limbs()
+	force_update_limbs(update_limbs_bodytype = FALSE)
 	update_body()
 	return 1
 
@@ -145,7 +146,7 @@
 /mob/living/carbon/human/proc/get_valid_facial_hairstyle_types(var/check_gender = TRUE)
 	return species.get_facial_hair_style_types(bodytype.associated_gender, check_gender)
 
-/mob/living/carbon/human/proc/force_update_limbs()
+/mob/living/carbon/human/proc/force_update_limbs(var/update_limbs_bodytype = FALSE)
 	for(var/obj/item/organ/external/O in get_external_organs())
-		O.sync_colour_to_human(src)
+		O.sync_appearance_to_owner(update_limbs_bodytype)
 	update_body(0)

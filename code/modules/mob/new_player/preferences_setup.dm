@@ -45,9 +45,6 @@
 
 	var/update_icon = FALSE
 	copy_to(mannequin, TRUE)
-	mannequin.restore_all_organs()
-	mannequin.sync_organ_dna()
-	mannequin.force_update_limbs()
 
 	var/datum/job/previewJob
 	if(equip_preview_mob)

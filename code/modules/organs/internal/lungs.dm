@@ -50,7 +50,7 @@
 		return 100
 	return round((oxygen_deprivation/species.total_health)*100)
 
-/obj/item/organ/internal/lungs/set_species(species_name)
+/obj/item/organ/internal/lungs/set_species(species_name, force_bodytype)
 	. = ..()
 	sync_breath_types()
 

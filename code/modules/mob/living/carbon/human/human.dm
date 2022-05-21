@@ -539,8 +539,7 @@
 
 /mob/living/carbon/human/revive()
 
-	species.create_missing_organs(src) // Reset our organs/limbs.
-	restore_all_organs()       // Reapply robotics/amputated status from preferences.
+	restore_all_organs()
 	reset_blood()
 
 	if(!client || !key) //Don't boot out anyone already in the mob.
@@ -636,14 +635,14 @@
 /mob/living/carbon/human/proc/set_bodytype(var/decl/bodytype/new_bodytype, var/rebuild_body = FALSE)
 	if(bodytype != new_bodytype)
 		bodytype = new_bodytype
-		if(bodytype && rebuild_body)
-			force_update_limbs()
-			update_body()
+	if(rebuild_body)
+		force_update_limbs(update_limbs_bodytype = TRUE)
 
 //set_species should not handle the entirety of initing the mob, and should not trigger deep updates
 //It focuses on setting up species-related data, without force applying them uppon organs and the mob's appearance.
 // For transforming an existing mob, look at change_species()
-/mob/living/carbon/human/proc/set_species(var/new_species_name)
+/mob/living/carbon/human/proc/set_species(var/new_species_name, var/force_bodytype)
+
 	if(!new_species_name)
 		CRASH("set_species on mob '[src]' was passed a null species name '[new_species_name]'!")
 	var/new_species = get_species_by_key(new_species_name)
@@ -659,8 +658,6 @@
 
 	//Update our species
 	species = new_species
-	if(dna)
-		dna.species = new_species_name
 	holder_type = null
 	if(species.holder_type)
 		holder_type = species.holder_type
@@ -676,7 +673,19 @@
 		set_gender(new_pronouns.name)
 
 	//Handle bodytype
-	set_bodytype(species.get_bodytype_by_pronouns(new_pronouns), FALSE)
+	if(force_bodytype)
+		set_bodytype(force_bodytype, TRUE)
+	else
+		set_bodytype(species.get_bodytype_by_pronouns(get_pronouns()), TRUE)
+
+	if(!dna)
+		dna = new /datum/dna
+		dna.ready_dna(src)
+	else
+		dna.species = new_species_name
+		dna.bodytype = bodytype.type
+
+	setup_organs()
 
 	available_maneuvers = species.maneuvers.Copy()
 
@@ -733,7 +742,7 @@
 	else
 		species.apply_appearance(src)
 
-	force_update_limbs() //updates bodytype
+	force_update_limbs(update_limbs_bodytype = TRUE) 
 	default_pixel_x = initial(pixel_x) + bodytype.pixel_offset_x
 	default_pixel_y = initial(pixel_y) + bodytype.pixel_offset_y
 	default_pixel_z = initial(pixel_z) + bodytype.pixel_offset_z

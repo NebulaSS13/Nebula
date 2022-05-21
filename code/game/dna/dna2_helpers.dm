@@ -181,7 +181,7 @@
 		if((0 < beard) && (beard <= length(beard_subtypes)))
 			H.f_style = beard_subtypes[beard]
 
-		H.force_update_limbs()
+		H.force_update_limbs(update_limbs_bodytype = TRUE)
 		H.update_body()
 		H.update_eyes()
 		H.update_hair()
