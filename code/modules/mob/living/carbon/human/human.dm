@@ -549,7 +549,6 @@
 				qdel(brain.loc)
 				break
 	losebreath = 0
-	UpdateAppearance()
 	..()
 
 /mob/living/carbon/human/add_blood(mob/living/carbon/human/M, amount = 2, blood_data)
@@ -1349,7 +1348,6 @@
 	apply_species_appearance()
 	species.handle_post_spawn(src)
 
-	UpdateAppearance() //Apply dna appearance to mob, causes DNA to change because filler values are regenerated
 	//Prevent attempting to create blood container if its already setup
 	if(!vessel)
 		reset_blood()

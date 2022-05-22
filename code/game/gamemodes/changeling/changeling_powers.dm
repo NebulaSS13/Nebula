@@ -315,8 +315,6 @@ var/global/list/possible_changeling_IDs = list("Alpha","Beta","Gamma","Delta","E
 		H.setup_organs()
 
 	domutcheck(src, null)
-	src.UpdateAppearance()
-
 
 //Transform into a monkey.
 /mob/proc/changeling_lesser_form()
@@ -403,7 +401,6 @@ var/global/list/possible_changeling_IDs = list("Alpha","Beta","Gamma","Delta","E
 
 	O.dropInto(C.loc)
 
-	O.UpdateAppearance()
 	domutcheck(O, null)
 	O.setToxLoss(C.getToxLoss())
 	O.adjustBruteLoss(C.getBruteLoss())

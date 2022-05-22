@@ -124,7 +124,6 @@
 		H = new(get_turf(src), daddy.species.name)
 		H.dna = daddy.dna.Clone()
 		H.setup_organs()
-		H.UpdateAppearance()
 		for(var/obj/item/entry in daddy.get_equipped_items(TRUE))
 			daddy.remove_from_mob(entry) //steals instead of copies so we don't end up with duplicates
 			H.equip_to_appropriate_slot(entry)

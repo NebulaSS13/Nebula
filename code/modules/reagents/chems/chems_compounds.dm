@@ -243,7 +243,6 @@
 			else
 				randmutg(M)
 			domutcheck(M, null)
-			M.UpdateAppearance()
 	M.apply_damage(10 * removed, IRRADIATE, armor_pen = 100)
 
 /decl/material/liquid/lactate
