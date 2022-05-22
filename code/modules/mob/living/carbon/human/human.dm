@@ -633,9 +633,15 @@
 	organ.take_external_damage(rand(1,3) + O.w_class, DAM_EDGE, 0)
 
 /mob/living/carbon/human/proc/set_bodytype(var/decl/bodytype/new_bodytype, var/rebuild_body = FALSE)
+	world << "[world.time] \ref[src] BODYTYPE SET 1 [new_bodytype]"
+	if(ispath(new_bodytype))
+		new_bodytype = GET_DECL(new_bodytype)
+		world << "[world.time] \ref[src] BODYTYPE SET 2 [new_bodytype]"
 	if(bodytype != new_bodytype)
 		bodytype = new_bodytype
+		world << "[world.time] \ref[src] BODYTYPE SET 3 [bodytype]"
 	if(rebuild_body)
+		world << "[world.time] \ref[src] BODYTYPE SET 4"
 		force_update_limbs(update_limbs_bodytype = TRUE)
 
 //set_species should not handle the entirety of initing the mob, and should not trigger deep updates

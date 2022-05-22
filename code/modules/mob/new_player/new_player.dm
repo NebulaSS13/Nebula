@@ -136,6 +136,7 @@
 
 			var/mob/living/carbon/human/dummy/mannequin = get_mannequin(client.ckey)
 			if(mannequin)
+				world << "[world.time] \ref[src] DRESS PREVIEW MOB CALL 1"
 				client.prefs.dress_preview_mob(mannequin)
 				observer.set_appearance(mannequin)
 

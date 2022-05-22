@@ -97,6 +97,7 @@ var/global/list/time_prefs_fixed = list()
 			is_byond_member = client.IsByondMember()
 
 	sanitize_preferences()
+	world << "[world.time] \ref[src] UPDATE PREVIEW ICON 1"
 	update_preview_icon()
 
 /datum/preferences/proc/load_data()
@@ -186,6 +187,7 @@ var/global/list/time_prefs_fixed = list()
 		return
 
 	if(!char_render_holders)
+		world << "[world.time] \ref[src] UPDATE PREVIEW ICON 2"
 		update_preview_icon()
 	show_character_previews()
 
@@ -330,6 +332,7 @@ var/global/list/time_prefs_fixed = list()
 	else
 		return FALSE
 
+	world << "[world.time] \ref[src] UPDATE PREVIEW ICON 3"
 	update_preview_icon()
 	update_setup_window(usr)
 	return 1
@@ -342,10 +345,18 @@ var/global/list/time_prefs_fixed = list()
 	// Sanitizing rather than saving as someone might still be editing when copy_to occurs.
 	player_setup.sanitize_setup()
 
+	world << "[world.time] \ref[src] COPY PREF 1 [species] [bodytype]"
+
 	// Apply species and bodytype, and blood type.
 	var/decl/species/setting_species = get_species_by_key(species)
 	var/decl/bodytype/setting_bodytype = setting_species.get_bodytype_by_name(bodytype)
+
+	world << "[world.time] \ref[src] COPY PREF 2 [setting_species] [setting_bodytype]"
+
 	character.change_species(setting_species.name, setting_bodytype.type)
+
+	world << "[world.time] \ref[src] COPY PREF 3 [character.species.name] [character.bodytype.name]"
+
 	character.b_type = b_type
 	character.dna.b_type = b_type
 

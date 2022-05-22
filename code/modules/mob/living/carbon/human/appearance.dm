@@ -4,6 +4,9 @@
 	AC.ui_interact(user, state = state)
 
 /mob/living/carbon/human/proc/change_species(var/new_species, var/force_bodytype)
+
+	world << "[world.time] \ref[src] CHANGE SPECIES 1 [new_species] [force_bodytype]"
+
 	if(!new_species)
 		return
 
@@ -13,7 +16,11 @@
 	if(!(new_species in get_all_species()))
 		return
 
+	world << "[world.time] \ref[src] CHANGE SPECIES 2 [new_species] [force_bodytype]"
+
 	set_species(new_species, force_bodytype)
+
+	world << "[world.time] \ref[src] CHANGE SPECIES 3 [species.name] [bodytype.type]"
 
 	//Handle spawning stuff
 	species.handle_pre_spawn(src)

@@ -44,6 +44,7 @@
 		return
 
 	var/update_icon = FALSE
+	world << "[world.time] \ref[src] DRESS PREVIEW MOB INNER 1"
 	copy_to(mannequin, TRUE)
 
 	var/datum/job/previewJob
@@ -99,6 +100,7 @@
 	var/mob/living/carbon/human/dummy/mannequin/mannequin = get_mannequin(client_ckey)
 	if(mannequin)
 		mannequin.delete_inventory(TRUE)
+		world << "[world.time] \ref[src] DRESS PREVIEW MOB CALL 2"
 		dress_preview_mob(mannequin)
 		update_character_previews(new /mutable_appearance(mannequin))
 

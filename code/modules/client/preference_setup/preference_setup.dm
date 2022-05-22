@@ -248,6 +248,7 @@ var/global/const/CHARACTER_PREFERENCE_INPUT_TITLE = "Character Preference"
 	if(!pref_mob || !pref_mob.client)
 		return 1
 	if(. & TOPIC_UPDATE_PREVIEW)
+		world << "[world.time] \ref[src] UPDATE PREVIEW ICON 4"
 		pref_mob.client.prefs.update_preview_icon()
 
 	// And again: above operation is slow/may sleep, clients disappear whenever.
