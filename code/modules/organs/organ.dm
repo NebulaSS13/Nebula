@@ -75,7 +75,8 @@
 				given_dna = owner.dna //Grab our owner's dna if we don't have any, and they have
 			else
 				//The owner having no DNA can be a valid reason to keep our dna null in some cases
-				dna = null
+				log_debug("obj/item/organ/setup_as_organic(): [src] had null dna, with a owner with null dna!")
+				dna = null //#TODO: Not sure that's really legal
 				return
 		else
 			//If we have NO OWNER and given_dna, just make one up for consistency
@@ -109,8 +110,7 @@
 	reagents.add_reagent(/decl/material/liquid/nutriment/protein, reagents.maximum_volume)
 
 /obj/item/organ/proc/set_dna(var/datum/dna/new_dna)
-	if(!new_dna)
-		return
+	QDEL_NULL(dna)
 	dna = new_dna.Clone()
 	if(!blood_DNA)
 		blood_DNA = list()
@@ -132,7 +132,12 @@
 
 	// Adjust limb health proportinate to total species health.
 	var/total_health_coefficient = scale_max_damage_to_species_health ? (species.total_health / DEFAULT_SPECIES_HEALTH) : 1
+
+	//Use initial value to prevent scaling down each times we change the species during init
 	absolute_max_damage = initial(absolute_max_damage)
+	min_broken_damage = initial(min_broken_damage)
+	max_damage = initial(max_damage)
+
 	if(absolute_max_damage)
 		absolute_max_damage = max(1, FLOOR(absolute_max_damage * total_health_coefficient))
 		min_broken_damage = max(1, FLOOR(absolute_max_damage * 0.5))
