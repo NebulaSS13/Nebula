@@ -714,7 +714,7 @@ The _flatIcons list is a cache for generated icon files.
 	var/addY2
 
 	var/icon/add // Icon of overlay being added
-	for(var/image/I AS_ANYTHING in layers)
+	for(var/image/I as anything in layers)
 
 		if(I.alpha == 0)
 			continue

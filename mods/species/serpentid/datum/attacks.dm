@@ -1,4 +1,3 @@
-
 /decl/natural_attack/serpentid
 	attack_verb = list("mauled", "slashed", "struck", "pierced")
 	attack_noun = list("forelimb")

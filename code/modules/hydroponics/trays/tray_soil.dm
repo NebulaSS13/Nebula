@@ -54,7 +54,7 @@
 	if(!seed)
 		qdel_self()
 		return
-	if(z in global.using_map.station_levels) //plants on station always tick
+	if(isStationLevel(z)) //plants on station always tick
 		return ..()
 	if(living_observers_present(connected_zlevels))
 		return ..()

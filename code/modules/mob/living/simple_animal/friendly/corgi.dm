@@ -101,7 +101,7 @@
 					return
 
 /obj/item/chems/food/meat/corgi
-	name = "Corgi meat"
+	name = "corgi meat"
 	desc = "Tastes like... well you know..."
 
 /mob/living/simple_animal/corgi/attackby(var/obj/item/O, var/mob/user)  //Marker -Agouri

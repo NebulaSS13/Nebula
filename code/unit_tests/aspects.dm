@@ -32,7 +32,7 @@
 		var/decl/aspect/aspect = all_aspects[atype]
 		if(initial(aspect.parent) && !istype(aspect.parent))
 			failures += "[atype] - invalid parent - [aspect.parent || "NULL"]"
-		for(var/decl/aspect/A AS_ANYTHING in aspect.children)
+		for(var/decl/aspect/A as anything in aspect.children)
 			if(!istype(A))
 				failures += "[atype] - invalid child - [A || "NULL"]"
 			else if(A.parent != aspect)
