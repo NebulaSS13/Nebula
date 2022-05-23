@@ -393,52 +393,57 @@
 				flick("door_deny", src)
 				playsound(src.loc, 'sound/machines/buzz-two.ogg', 50, 0)
 
-/obj/machinery/door/proc/open(var/forced = 0)
+/obj/machinery/door/proc/open(forced = FALSE)
 	if(!can_open(forced))
 		return
+
 	operating = 1
 
 	do_animate("opening")
 	icon_state = "door0"
-	set_opacity(0)
-	sleep(3)
-	src.set_density(0)
+	set_opacity(FALSE)
+
+	sleep(0.5 SECONDS)
+	src.set_density(FALSE)
 	update_nearby_tiles()
-	sleep(7)
+
+	sleep(0.5 SECONDS)
 	src.layer = open_layer
 	update_icon()
-	set_opacity(0)
+	set_opacity(FALSE)
 	operating = 0
 
 	if(autoclose)
 		close_door_at = next_close_time()
 
-	return 1
+	return TRUE
 
 /obj/machinery/door/proc/next_close_time()
 	return world.time + (normalspeed ? 150 : 5)
 
-/obj/machinery/door/proc/close(var/forced = 0)
+/obj/machinery/door/proc/close(forced = FALSE)
 	if(!can_close(forced))
 		return
+
 	operating = 1
 
 	close_door_at = 0
 	do_animate("closing")
-	sleep(3)
-	src.set_density(1)
-	src.layer = closed_layer
+
+	sleep(0.5 SECONDS)
+	src.set_density(TRUE)
 	update_nearby_tiles()
-	sleep(7)
+	src.layer = closed_layer
+
+	sleep(0.5 SECONDS)
 	update_icon()
 	if(visible && !glass)
-		set_opacity(1)	//caaaaarn!
+		set_opacity(TRUE)
 	operating = 0
 
 	//I shall not add a check every x ticks if a door has closed over some fire.
 	var/obj/fire/fire = locate() in loc
-	if(fire)
-		qdel(fire)
+	qdel(fire)
 
 /obj/machinery/door/proc/toggle(to_open = density)
 	if(to_open)
