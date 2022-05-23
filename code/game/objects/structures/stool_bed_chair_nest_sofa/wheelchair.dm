@@ -5,8 +5,8 @@
 	anchored = FALSE
 	buckle_movable = TRUE
 	movement_handlers = list(
-		/datum/movement_handler/deny_multiz, 
-		/datum/movement_handler/delay = list(5), 
+		/datum/movement_handler/deny_multiz,
+		/datum/movement_handler/delay = list(5),
 		/datum/movement_handler/move_relay_self
 	)
 
@@ -112,7 +112,7 @@
 	if(!mob.has_held_item_slot())
 		return // No hands to drive your chair? Tough luck!
 	//drunk wheelchair driving
-	direction = mob.AdjustMovementDirection(direction)
+	direction = mob.AdjustMovementDirection(direction, mover)
 	DoMove(direction, mob)
 
 /obj/item/wheelchair_kit
