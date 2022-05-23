@@ -14,8 +14,7 @@ var/global/all_tooltip_styles = list(
 	"Plasmafire",
 	"Retro",
 	"Slimecore",
-	"Operative",
-	"Clockwork"
+	"Operative"
 	)
 
 /proc/ui_style2icon(ui_style)
