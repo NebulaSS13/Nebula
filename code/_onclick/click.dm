@@ -369,7 +369,18 @@
 var/global/list/click_catchers
 /proc/get_click_catchers()
 	if(!global.click_catchers)
-		global.click_catchers = create_click_catcher()
+		global.click_catchers = list()
+		var/ox = -(round(config.max_client_view_x*0.5))
+		for(var/i = 0 to config.max_client_view_x)
+			var/oy = -(round(config.max_client_view_y*0.5))
+			var/tx = ox + i
+			for(var/j = 0 to config.max_client_view_y)
+				var/ty = oy + j
+				var/obj/screen/click_catcher/CC = new
+				CC.screen_loc = "CENTER[tx < 0 ? tx : "+[tx]"],CENTER[ty < 0 ? ty : "+[ty]"]"
+				CC.x_offset = tx
+				CC.y_offset = ty
+				global.click_catchers += CC
 	return global.click_catchers
 
 /obj/screen/click_catcher
@@ -378,18 +389,12 @@ var/global/list/click_catchers
 	plane = CLICKCATCHER_PLANE
 	mouse_opacity = 2
 	screen_loc = "CENTER-7,CENTER-7"
+	var/x_offset = 0
+	var/y_offset = 0
 
 /obj/screen/click_catcher/Destroy()
 	SHOULD_CALL_PARENT(FALSE)
 	return QDEL_HINT_LETMELIVE
-
-/proc/create_click_catcher()
-	. = list()
-	for(var/i = 0, i<15, i++)
-		for(var/j = 0, j<15, j++)
-			var/obj/screen/click_catcher/CC = new()
-			CC.screen_loc = "TOP-[i],RIGHT-[j]"
-			. += CC
 
 /obj/screen/click_catcher/Click(location, control, params)
 	var/list/modifiers = params2list(params)
@@ -397,7 +402,9 @@ var/global/list/click_catchers
 		var/mob/living/carbon/C = usr
 		C.swap_hand()
 	else
-		var/turf/T = screen_loc2turf(screen_loc, get_turf(usr))
-		if(T)
-			T.Click(location, control, params)
+		var/turf/origin = get_turf(usr)
+		if(isturf(origin))
+			var/turf/clicked = locate(origin.x + x_offset, origin.y + y_offset, origin.z)
+			if(clicked)
+				clicked.Click(location, control, params)
 	. = 1
