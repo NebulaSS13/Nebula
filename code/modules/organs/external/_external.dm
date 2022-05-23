@@ -663,7 +663,7 @@ This function completely restores a damaged organ to perfect condition.
 	var/wound_type = get_wound_type(type, damage)
 
 	if(wound_type)
-		var/datum/wound/W = new wound_type(damage, src)
+		var/datum/wound/W = new wound_type(damage, src, surgical)
 
 		//Check whether we can add the wound to an existing wound
 		if(surgical)
