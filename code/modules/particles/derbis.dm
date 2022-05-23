@@ -13,10 +13,10 @@
 	icon_state = list("rock1", "rock2", "rock3", "rock4", "rock5")
 	rotation = generator("num", 0, 360, NORMAL_RAND)
 
-/obj/particle_emitter/burst/Initialize(mapload, time)
+/atom/movable/particle_holder/burst/Initialize(mapload, time)
 	. = ..()
 	//Burst emitters turn off after 1 tick
-	addtimer(CALLBACK(src, .proc/enable, FALSE), 1, TIMER_CLIENT_TIME)
+	addtimer(CALLBACK(src, .proc/toggle, FALSE), 1, TIMER_CLIENT_TIME)
 
-/obj/particle_emitter/burst/rocks
+/atom/movable/particle_holder/burst/rocks
 	particles = new/particles/debris

@@ -12,10 +12,10 @@
 	drift = generator("vector", list(-0.2, -0.3), list(0.2, 0.3))
 	color = "white"
 
-/obj/particle_emitter/smoke
+/atom/movable/particle_holder/smoke
 	layer = FIRE_LAYER
 	particles = new/particles/smoke
 
-/obj/particle_emitter/smoke/Initialize(mapload, time, _color)
+/atom/movable/particle_holder/smoke/Initialize(mapload, time, _color)
 	. = ..()
-	filters = filter(type="blur", size=1.5)
+	add_filter("blur", 1, list(type = "blur", size = 1.5))

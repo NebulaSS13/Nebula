@@ -480,13 +480,13 @@
 		blind_message = SPAN_WARNING("You hear a large motor whirring.")
 	)
 
-	var/obj/particle_emitter/drill_sparks/EM
+	var/atom/movable/particle_holder/drill_sparks/EM
 	if (istype(target, /turf/exterior/wall))
-		EM = new /obj/particle_emitter/drill_sparks/debris(get_turf(target), delay, target.color)
+		EM = new /atom/movable/particle_holder/drill_sparks/debris(get_turf(target), delay, target.color)
 	else
 		EM = new(get_turf(target), delay)
 
-	EM.set_dir(reverse_dir[owner.dir])
+	EM.set_dir(global.reverse_dir[owner.dir])
 
 	if (!do_after(owner, delay, target))
 		EM?.particles.spawning = FALSE

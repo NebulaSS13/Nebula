@@ -50,11 +50,11 @@
 	icon = 'icons/effects/particles/rock.dmi'
 	icon_state = list("rock1", "rock2", "rock3", "rock4", "rock5")
 
-/obj/particle_emitter/drill_sparks
+/atom/movable/particle_holder/drill_sparks
 	particles = new/particles/drill_sparks
 	plane = ABOVE_LIGHTING_PLANE
 
-/obj/particle_emitter/drill_sparks/set_dir(dir)
+/atom/movable/particle_holder/drill_sparks/set_dir(dir)
 	..()
 	var/list/min
 	var/list/max
@@ -73,15 +73,15 @@
 
 	particles.velocity = generator("box", min, max, NORMAL_RAND)
 
-/obj/particle_emitter/drill_sparks/debris
+/atom/movable/particle_holder/drill_sparks/debris
 	plane = DEFAULT_PLANE
 	particles = new/particles/drill_sparks/debris
 
-/obj/particle_emitter/sparks_flare
+/atom/movable/particle_holder/sparks_flare
 	plane = ABOVE_LIGHTING_PLANE
 	particles = new/particles/flare_sparks
 	mouse_opacity = 1
 
-/obj/particle_emitter/sparks_flare/Initialize(mapload, time, _color)
+/atom/movable/particle_holder/sparks_flare/Initialize(mapload, time, _color)
 	. = ..()
-	filters = filter(type="bloom", size=3, offset = 0.5, alpha = 220)
+	add_filter("bloom", 1, list(type = "bloom", size = 3, offset = 0.5, alpha = 220))

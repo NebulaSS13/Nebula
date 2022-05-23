@@ -226,8 +226,8 @@ steam.start() -- spawns the effect
 
 /obj/effect/effect/smoke/illumination/flare/Initialize(mapload, lifetime = 1 SECOND, range = null, power = null, color = null)
 	. = ..()
-	new /obj/particle_emitter/smoke(mapload, time_to_live)
-	new /obj/particle_emitter/sparks_flare(mapload, time_to_live)
+	new /atom/movable/particle_holder/smoke(mapload, time_to_live)
+	new /atom/movable/particle_holder/sparks_flare(mapload, time_to_live)
 
 /////////////////////////////////////////////
 // Bad smoke
