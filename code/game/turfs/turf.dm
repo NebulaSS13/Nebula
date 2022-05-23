@@ -173,6 +173,9 @@
 
 	if(istype(W, /obj/item/grab))
 		var/obj/item/grab/G = W
+		if (G.affecting == G.assailant)
+			return TRUE
+
 		step(G.affecting, get_dir(G.affecting.loc, src))
 		return TRUE
 
@@ -438,7 +441,7 @@ var/global/const/enterloopsanity = 100
 	if(flooded)
 		LAZYADD(., global.flood_object)
 
-/**Whether we can place a cable here 
+/**Whether we can place a cable here
  * If you cannot build a cable will return an error code explaining why you cannot.
 */
 /turf/proc/cannot_build_cable()
