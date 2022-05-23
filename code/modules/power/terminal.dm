@@ -18,7 +18,7 @@
 /obj/machinery/power/terminal/Initialize()
 	. = ..()
 	var/turf/T = src.loc
-	if(level==1) hide(!T.is_plating())
+	if(level==1 && isturf(T)) hide(!T.is_plating())
 
 /obj/machinery/power/terminal/proc/master_machine()
 	var/obj/machinery/machine = master && master.loc
