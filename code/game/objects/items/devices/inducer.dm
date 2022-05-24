@@ -56,7 +56,7 @@
 
 
 /obj/item/inducer/attackby(obj/item/W, mob/user)
-	if(isScrewdriver(W))
+	if(IS_SCREWDRIVER(W))
 		opened = !opened
 		to_chat(user, "<span class='notice'>You [opened ? "open" : "close"] the battery compartment.</span>")
 		update_icon()
@@ -179,7 +179,7 @@
 	cell = null
 
 /obj/item/inducer/borg/attackby(obj/item/W, mob/user)
-	if(isScrewdriver(W))
+	if(IS_SCREWDRIVER(W))
 		return
 	. = ..()
 

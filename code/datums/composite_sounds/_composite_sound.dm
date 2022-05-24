@@ -68,7 +68,7 @@
 
 /datum/composite_sound/proc/play(soundfile)
 	var/sound/S = sound(soundfile)
-	for(var/atom/thing AS_ANYTHING in output_atoms)
+	for(var/atom/thing as anything in output_atoms)
 		playsound(thing, S, volume)
 
 /datum/composite_sound/proc/get_sound(starttime, _mid_sounds)

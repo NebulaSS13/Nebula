@@ -81,7 +81,7 @@
 		T.hotspot_expose(700,125)
 
 /obj/item/grenade/attackby(obj/item/W, mob/user)
-	if(isScrewdriver(W))
+	if(IS_SCREWDRIVER(W))
 		switch(det_time)
 			if (1)
 				det_time = 10

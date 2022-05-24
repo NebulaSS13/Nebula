@@ -97,7 +97,7 @@
 	qdel(src)
 
 /obj/item/stool/attackby(obj/item/W, mob/user)
-	if(isWrench(W))
+	if(IS_WRENCH(W))
 		playsound(src.loc, 'sound/items/Ratchet.ogg', 50, 1)
 		dismantle()
 		qdel(src)
@@ -126,7 +126,7 @@
 		to_chat(user, "You add padding to \the [src].")
 		add_padding(padding_type)
 		return
-	else if(isWirecutter(W))
+	else if(IS_WIRECUTTER(W))
 		if(!padding_material)
 			to_chat(user, "\The [src] has no padding to remove.")
 			return

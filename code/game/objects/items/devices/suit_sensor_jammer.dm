@@ -45,7 +45,7 @@
 	return bcell
 
 /obj/item/suit_sensor_jammer/attackby(obj/item/I, mob/user)
-	if(isCrowbar(I))
+	if(IS_CROWBAR(I))
 		if(bcell)
 			to_chat(user, "<span class='notice'>You remove \the [bcell].</span>")
 			disable()

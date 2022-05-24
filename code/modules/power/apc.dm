@@ -439,7 +439,7 @@ var/global/list/all_apcs = list()
 	queue_icon_update()
 
 /obj/machinery/power/apc/attackby(obj/item/W, mob/user)
-	if (istype(construct_state, /decl/machine_construction/wall_frame/panel_closed/hackable/hacking) && (isMultitool(W) || isWirecutter(W) || istype(W, /obj/item/assembly/signaler)))
+	if (istype(construct_state, /decl/machine_construction/wall_frame/panel_closed/hackable/hacking) && (IS_MULTITOOL(W) || IS_WIRECUTTER(W) || istype(W, /obj/item/assembly/signaler)))
 		return wires.Interact(user)
 	return ..()
 

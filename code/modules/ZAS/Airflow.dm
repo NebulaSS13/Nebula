@@ -12,7 +12,7 @@ Contains helper procs for airflow, called by /connection_group.
 	if(check_airflow_movable(differential) && length(connecting_turfs))
 		//Check for things that are in range of the midpoint turfs.
 		var/list/close_turfs
-		for(var/turf/connecting_turf AS_ANYTHING in connecting_turfs)
+		for(var/turf/connecting_turf as anything in connecting_turfs)
 			if(get_dist(src, connecting_turf) < world.view)
 				LAZYADD(close_turfs, connecting_turf)
 			if(LAZYLEN(close_turfs))

@@ -52,7 +52,7 @@
 			update_icon()
 		return
 
-	if(portable && isWrench(G) && !panel_open)
+	if(portable && IS_WRENCH(G) && !panel_open)
 		. = TRUE
 		if(charging)
 			to_chat(user, "<span class='warning'>Remove [charging] first!</span>")

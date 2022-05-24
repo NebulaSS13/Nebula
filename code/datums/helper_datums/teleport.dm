@@ -21,8 +21,8 @@
 
 /decl/teleport/proc/can_reach_z(var/oz, var/tz)
 
-	if(oz in global.using_map.admin_levels)
-		return (tz in global.using_map.admin_levels) || (tz in global.using_map.station_levels) || (tz in global.using_map.contact_levels)
+	if(isAdminLevel(oz))
+		return isAdminLevel(tz) || isStationLevel(tz) || isContactLevel(tz)
 
 	var/list/accessible_z_levels = GetConnectedZlevels(oz)
 	var/obj/effect/overmap/sector = global.overmap_sectors["[oz]"]
@@ -45,7 +45,7 @@
 			accessible_z_levels |= neighbor.map_z
 
 	return (tz in accessible_z_levels)
-	
+
 /decl/teleport/proc/can_teleport(var/atom/movable/target, var/atom/destination)
 	if(!destination || !target?.loc)
 		return FALSE

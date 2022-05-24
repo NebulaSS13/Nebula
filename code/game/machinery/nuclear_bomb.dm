@@ -47,7 +47,7 @@ var/global/bomb_set
 		SSnano.update_uis(src)
 
 /obj/machinery/nuclearbomb/attackby(obj/item/O, mob/user, params)
-	if(isScrewdriver(O))
+	if(IS_SCREWDRIVER(O))
 		add_fingerprint(user)
 		if(auth)
 			if(panel_open == 0)
@@ -71,7 +71,7 @@ var/global/bomb_set
 			flick("lock", src)
 		return
 
-	if(panel_open && (isMultitool(O) || isWirecutter(O)))
+	if(panel_open && (IS_MULTITOOL(O) || IS_WIRECUTTER(O)))
 		return attack_hand(user)
 
 	if(extended)
@@ -85,7 +85,7 @@ var/global/bomb_set
 	if(anchored)
 		switch(removal_stage)
 			if(0)
-				if(isWelder(O))
+				if(IS_WELDER(O))
 					var/obj/item/weldingtool/WT = O
 					if(!WT.isOn()) return
 					if(WT.get_fuel() < 5) // uses up 5 fuel.
@@ -101,7 +101,7 @@ var/global/bomb_set
 				return
 
 			if(1)
-				if(isCrowbar(O))
+				if(IS_CROWBAR(O))
 					user.visible_message("[user] starts forcing open the bolt covers on [src].", "You start forcing open the anchoring bolt covers with [O]...")
 
 					if(do_after(user, 15, src))
@@ -111,7 +111,7 @@ var/global/bomb_set
 				return
 
 			if(2)
-				if(isWelder(O))
+				if(IS_WELDER(O))
 					var/obj/item/weldingtool/WT = O
 					if(!WT.isOn()) return
 					if (WT.get_fuel() < 5) // uses up 5 fuel.
@@ -127,7 +127,7 @@ var/global/bomb_set
 				return
 
 			if(3)
-				if(isWrench(O))
+				if(IS_WRENCH(O))
 					user.visible_message("[user] begins unwrenching the anchoring bolts on [src].", "You begin unwrenching the anchoring bolts...")
 					if(do_after(user, 50, src))
 						if(!src || !user) return
@@ -136,7 +136,7 @@ var/global/bomb_set
 				return
 
 			if(4)
-				if(isCrowbar(O))
+				if(IS_CROWBAR(O))
 					user.visible_message("[user] begins lifting [src] off of the anchors.", "You begin lifting the device off the anchors...")
 					if(do_after(user, 80, src))
 						if(!src || !user) return
@@ -472,7 +472,7 @@ var/global/bomb_set
 		inserters += ch
 
 /obj/machinery/nuclearbomb/station/attackby(obj/item/O, mob/user)
-	if(isWrench(O))
+	if(IS_WRENCH(O))
 		return
 
 /obj/machinery/nuclearbomb/station/Topic(href, href_list)

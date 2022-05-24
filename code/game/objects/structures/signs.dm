@@ -12,7 +12,7 @@
 		physically_destroyed()
 
 /obj/structure/sign/attackby(obj/item/W, mob/user)	//deconstruction
-	if(isScrewdriver(W) && !istype(src, /obj/structure/sign/double))
+	if(IS_SCREWDRIVER(W) && !istype(src, /obj/structure/sign/double))
 		if(!QDELETED(src) && do_after(user, 30, src))
 			to_chat(user, "You unfasten the sign with your [W].")
 			var/obj/item/sign/S = new(src.loc)
@@ -35,7 +35,7 @@
 	var/sign_state = ""
 
 /obj/item/sign/attackby(obj/item/W, mob/user)	//construction
-	if(isScrewdriver(W) && isturf(user.loc))
+	if(IS_SCREWDRIVER(W) && isturf(user.loc))
 		var/direction = input("In which direction?", "Select direction.") in list("North", "East", "South", "West", "Cancel")
 		if(direction == "Cancel")
 			return

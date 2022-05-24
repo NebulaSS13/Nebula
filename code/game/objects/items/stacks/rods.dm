@@ -54,7 +54,7 @@
 		icon_state = base_state
 
 /obj/item/stack/material/rods/attackby(obj/item/W, mob/user)
-	if(isWelder(W))
+	if(IS_WELDER(W))
 		var/obj/item/weldingtool/WT = W
 
 		if(!can_use(2))

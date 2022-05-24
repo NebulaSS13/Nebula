@@ -21,6 +21,7 @@
 
 	#include "../../mods/species/adherent/_adherent.dme"
 	#include "../../mods/species/ascent/_ascent.dme"
+	#include "../../mods/species/serpentid/_serpentid.dme"
 	#include "../../mods/species/lizard/_lizard.dme"
 	#include "../../mods/species/neoavians/_neoavians.dme"
 	#include "../../mods/species/tajaran/_tajaran.dme"

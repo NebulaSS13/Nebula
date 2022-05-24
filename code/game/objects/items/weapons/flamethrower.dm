@@ -119,7 +119,7 @@
 	if(user.incapacitated())
 		return TRUE
 	
-	if(isWrench(W) && !secured)//Taking this apart
+	if(IS_WRENCH(W) && !secured)//Taking this apart
 		var/turf/T = get_turf(src)
 		if(welding_tool)
 			welding_tool.dropInto(T)
@@ -137,7 +137,7 @@
 		qdel(src)
 		return TRUE
 
-	if(isScrewdriver(W) && igniter && !lit)
+	if(IS_SCREWDRIVER(W) && igniter && !lit)
 		secured = !secured
 		to_chat(user, SPAN_NOTICE("\The [igniter] is now [secured ? "secured" : "unsecured"]!"))
 		update_icon()

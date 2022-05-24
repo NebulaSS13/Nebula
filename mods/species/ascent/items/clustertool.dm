@@ -16,11 +16,11 @@
 
 /obj/item/clustertool/on_update_icon()
 	icon_state = initial(icon_state)
-	if(isWrench(src))
+	if(IS_WRENCH(src))
 		icon_state = "[icon_state]-wrench"
-	else if(isWirecutter(src))
+	else if(IS_WIRECUTTER(src))
 		icon_state = "[icon_state]-wirecutters"
-	else if(isCrowbar(src))
+	else if(IS_CROWBAR(src))
 		icon_state = "[icon_state]-crowbar"
-	else if(isScrewdriver(src))
+	else if(IS_SCREWDRIVER(src))
 		icon_state = "[icon_state]-screwdriver"

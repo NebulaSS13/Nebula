@@ -472,7 +472,7 @@ var/global/list/diversion_junctions = list()
 	return ..()
 
 /obj/machinery/disposal_switch/attackby(obj/item/I, mob/user, params)
-	if(isCrowbar(I))
+	if(IS_CROWBAR(I))
 		var/obj/item/disposal_switch_construct/C = new/obj/item/disposal_switch_construct(src.loc, id_tag)
 		transfer_fingerprints_to(C)
 		user.visible_message("<span class='notice'>\The [user] deattaches \the [src]</span>")
@@ -574,7 +574,7 @@ var/global/list/diversion_junctions = list()
 	if(!I || !user)
 		return
 	src.add_fingerprint(user, 0, I)
-	if(isScrewdriver(I))
+	if(IS_SCREWDRIVER(I))
 		if(mode==0)
 			mode=1
 			playsound(src.loc, 'sound/items/Screwdriver.ogg', 50, 1)

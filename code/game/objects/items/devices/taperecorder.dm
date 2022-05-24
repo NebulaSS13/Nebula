@@ -45,7 +45,7 @@
 
 
 /obj/item/taperecorder/attackby(obj/item/I, mob/user, params)
-	if(isScrewdriver(I))
+	if(IS_SCREWDRIVER(I))
 		maintenance = !maintenance
 		to_chat(user, "<span class='notice'>You [maintenance ? "open" : "secure"] the lid.</span>")
 		return
@@ -441,7 +441,7 @@
 /obj/item/magnetic_tape/attackby(obj/item/I, mob/user, params)
 	if(user.incapacitated())
 		return
-	if(ruined && isScrewdriver(I))
+	if(ruined && IS_SCREWDRIVER(I))
 		if(!max_capacity)
 			to_chat(user, "<span class='notice'>There is no tape left inside.</span>")
 			return
@@ -462,7 +462,7 @@
 				SetName("tape")
 				to_chat(user, "<span class='notice'>You scratch off the label.</span>")
 		return
-	else if(isWirecutter(I))
+	else if(IS_WIRECUTTER(I))
 		cut(user)
 	else if(istype(I, /obj/item/magnetic_tape/loose))
 		join(user, I)

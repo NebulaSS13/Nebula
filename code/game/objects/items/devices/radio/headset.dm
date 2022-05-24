@@ -277,10 +277,10 @@
 /obj/item/radio/headset/attackby(obj/item/W, mob/user)
 //	..()
 	user.set_machine(src)
-	if (!( isScrewdriver(W) || (istype(W, /obj/item/encryptionkey/ ))))
+	if (!( IS_SCREWDRIVER(W) || (istype(W, /obj/item/encryptionkey/ ))))
 		return
 
-	if(isScrewdriver(W))
+	if(IS_SCREWDRIVER(W))
 		if(encryption_keys.len)
 			for(var/ch_name in channels)
 				radio_controller.remove_object(src, radiochannels[ch_name])

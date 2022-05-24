@@ -123,7 +123,7 @@
 		return
 
 /obj/machinery/gateway/centerstation/attackby(obj/item/W, mob/user)
-	if(isMultitool(W))
+	if(IS_MULTITOOL(W))
 		to_chat(user, "The gate is already calibrated, there is no work for you to do here.")
 		return
 
@@ -215,7 +215,7 @@
 	M.set_dir(SOUTH)
 
 /obj/machinery/gateway/centeraway/attackby(obj/item/W, mob/user)
-	if(isMultitool(W))
+	if(IS_MULTITOOL(W))
 		if(calibrated)
 			to_chat(user, "The gate is already calibrated, there is no work for you to do here.")
 			return

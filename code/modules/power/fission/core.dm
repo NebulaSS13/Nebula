@@ -199,7 +199,7 @@
 	return neutron_flux >= ACTIVE_THRESHOLD
 
 /obj/machinery/atmospherics/unary/fission_core/attackby(var/obj/item/W, var/mob/user)
-	if(isMultitool(W))
+	if(IS_MULTITOOL(W))
 		var/datum/extension/local_network_member/fission = get_extension(src, /datum/extension/local_network_member)
 		fission.get_new_tag(user)
 		return

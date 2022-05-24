@@ -633,7 +633,7 @@ About the new airlock wires panel:
 	var/cut_verb
 	var/cut_sound
 
-	if(isWelder(item))
+	if(IS_WELDER(item))
 		var/obj/item/weldingtool/WT = item
 		if(!WT.remove_fuel(0,user))
 			return FALSE
@@ -742,7 +742,7 @@ About the new airlock wires panel:
 			. = ..()
 		return
 
-	if(!repairing && isWelder(C) && !operating && density)
+	if(!repairing && IS_WELDER(C) && !operating && density)
 		var/obj/item/weldingtool/W = C
 		if(!W.remove_fuel(0,user))
 			to_chat(user, SPAN_NOTICE("Your [W.name] doesn't have enough fuel."))
@@ -760,10 +760,10 @@ About the new airlock wires panel:
 			to_chat(user, SPAN_NOTICE("You must remain still to complete this task."))
 			return TRUE
 
-	else if(isWirecutter(C) || isMultitool(C) || istype(C, /obj/item/assembly/signaler))
+	else if(IS_WIRECUTTER(C) || IS_MULTITOOL(C) || istype(C, /obj/item/assembly/signaler))
 		return wires.Interact(user)
 
-	else if(isCrowbar(C))
+	else if(IS_CROWBAR(C))
 		if(density && !can_open(TRUE) && component_attackby(C, user))
 			return TRUE
 		else if(!repairing)
@@ -992,7 +992,7 @@ About the new airlock wires panel:
 	. = ..()
 	//wires
 	var/turf/T = get_turf(loc)
-	if(T && (T.z in global.using_map.admin_levels))
+	if(T && isAdminLevel(T.z))
 		secured_wires = TRUE
 	if (secured_wires)
 		wires = new/datum/wires/airlock/secure(src)

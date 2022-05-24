@@ -16,7 +16,7 @@
 
 /obj/item/modular_computer/telescreen/attackby(var/obj/item/W, var/mob/user)
 	var/datum/extension/assembly/modular_computer/assembly = get_extension(src, /datum/extension/assembly/modular_computer)
-	if(isCrowbar(W))
+	if(IS_CROWBAR(W))
 		if(anchored)
 			shutdown_computer()
 			anchored = FALSE

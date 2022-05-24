@@ -47,7 +47,7 @@
 	if(W.edge)
 		damage += 5
 
-	if(isWelder(W))
+	if(IS_WELDER(W))
 		var/obj/item/weldingtool/WT = W
 
 		if(WT.remove_fuel(0, user))

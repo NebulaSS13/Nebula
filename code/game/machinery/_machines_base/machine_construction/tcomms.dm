@@ -18,7 +18,7 @@
 /decl/machine_construction/tcomms/panel_closed/attackby(obj/item/I, mob/user, obj/machinery/machine)
 	if((. = ..()))
 		return
-	if(isScrewdriver(I))
+	if(IS_SCREWDRIVER(I))
 		TRANSFER_STATE(/decl/machine_construction/tcomms/panel_open)
 		machine.panel_open = TRUE
 		to_chat(user, "You unfasten the bolts.")
@@ -50,13 +50,13 @@
 	return state_interactions(I, user, machine)
 
 /decl/machine_construction/tcomms/panel_open/proc/state_interactions(obj/item/I, mob/user, obj/machinery/machine)
-	if(isScrewdriver(I))
+	if(IS_SCREWDRIVER(I))
 		TRANSFER_STATE(/decl/machine_construction/tcomms/panel_closed)
 		machine.panel_open = FALSE
 		to_chat(user, "You fasten the bolts.")
 		playsound(machine.loc, 'sound/items/Screwdriver.ogg', 50, 1)
 		return
-	if(isWrench(I))
+	if(IS_WRENCH(I))
 		TRANSFER_STATE(/decl/machine_construction/tcomms/panel_open/unwrenched)
 		to_chat(user, "You dislodge the external plating.")
 		playsound(machine.loc, 'sound/items/Ratchet.ogg', 75, 1)
@@ -67,12 +67,12 @@
 	. += "Use a wrench to remove the external plating."
 
 /decl/machine_construction/tcomms/panel_open/unwrenched/state_interactions(obj/item/I, mob/user, obj/machinery/machine)
-	if(isWrench(I))
+	if(IS_WRENCH(I))
 		TRANSFER_STATE(/decl/machine_construction/tcomms/panel_open)
 		to_chat(user, "You secure the external plating.")
 		playsound(machine.loc, 'sound/items/Ratchet.ogg', 75, 1)
 		return
-	if(isWirecutter(I))
+	if(IS_WIRECUTTER(I))
 		TRANSFER_STATE(/decl/machine_construction/tcomms/panel_open/no_cable)
 		playsound(machine.loc, 'sound/items/Wirecutter.ogg', 50, 1)
 		to_chat(user, "You remove the cables.")
@@ -86,7 +86,7 @@
 	. += "Use wirecutters to remove the cabling."
 
 /decl/machine_construction/tcomms/panel_open/no_cable/state_interactions(obj/item/I, mob/user, obj/machinery/machine)
-	if(isCoil(I))
+	if(IS_COIL(I))
 		var/obj/item/stack/cable_coil/A = I
 		if (A.can_use(5))
 			TRANSFER_STATE(/decl/machine_construction/tcomms/panel_open/unwrenched)
@@ -97,7 +97,7 @@
 		else
 			to_chat(user, "<span class='warning'>You need five coils of wire for this.</span>")
 			return TRUE
-	if(isCrowbar(I))
+	if(IS_CROWBAR(I))
 		TRANSFER_STATE(/decl/machine_construction/default/deconstructed)
 		playsound(get_turf(machine), 'sound/items/Crowbar.ogg', 50, 1)
 		machine.visible_message(SPAN_NOTICE("\The [user] deconstructs \the [machine]."))
@@ -107,7 +107,7 @@
 	if(istype(I, /obj/item/storage/part_replacer))
 		return machine.part_replacement(I, user)
 
-	if(isWrench(I))
+	if(IS_WRENCH(I))
 		return machine.part_removal(user)
 
 	if(istype(I))

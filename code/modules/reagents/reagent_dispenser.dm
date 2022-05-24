@@ -49,7 +49,7 @@
 	STOP_PROCESSING(SSprocessing, src)
 
 /obj/structure/reagent_dispensers/attackby(obj/item/W, mob/user)
-	if(isWrench(W))
+	if(IS_WRENCH(W))
 		unwrenched = !unwrenched
 		visible_message(SPAN_NOTICE("\The [user] wrenches \the [src]'s tap [unwrenched ? "open" : "shut"]."))
 		if(unwrenched)

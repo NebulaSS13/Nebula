@@ -460,7 +460,7 @@
 
 /obj/machinery/light/navigation/attackby(obj/item/W, mob/user)
 	. = ..()
-	if(!. && isMultitool(W))
+	if(!. && IS_MULTITOOL(W))
 		delay = 5 + ((delay + 1) % 5)
 		to_chat(user, SPAN_NOTICE("You adjust the delay on \the [src]."))
 		return TRUE

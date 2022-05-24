@@ -41,7 +41,7 @@
 			user.drop_from_inventory(I)
 			I.forceMove(src)
 		return 1
-	else if(isCrowbar(I))
+	else if(IS_CROWBAR(I))
 		if(cell)
 			to_chat(user, "You pry out \the [cell].")
 			cell.dropInto(loc)

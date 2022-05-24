@@ -10,6 +10,7 @@ var/global/list/levels_by_id = list()
 /obj/abstract/level_data
 	var/my_z
 	var/level_id
+	var/level_name
 	var/base_turf
 	var/list/connects_to
 	var/level_flags

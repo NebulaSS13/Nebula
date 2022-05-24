@@ -150,7 +150,7 @@
 
 	if(!istype(W) || W.item_flags & ITEM_FLAG_NO_BLUDGEON) return
 
-	if(isScrewdriver(W) || isCrowbar(W) || isWrench(W))
+	if(IS_SCREWDRIVER(W) || IS_CROWBAR(W) || IS_WRENCH(W))
 		to_chat(user, ("<span class='notice'>It's a holowindow, you can't dismantle it!</span>"))
 	else
 		if(W.damtype == BRUTE || W.damtype == BURN)
@@ -207,7 +207,7 @@
 	qdel(src)
 
 /obj/structure/bed/chair/holochair/attackby(obj/item/W, mob/user)
-	if(isWrench(W))
+	if(IS_WRENCH(W))
 		to_chat(user, ("<span class='notice'>It's a holochair, you can't dismantle it!</span>"))
 
 /obj/item/holo

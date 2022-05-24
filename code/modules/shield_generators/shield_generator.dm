@@ -222,7 +222,7 @@
 	return ..()
 
 /obj/machinery/shield_generator/attackby(obj/item/O, mob/user)
-	if(panel_open && (isMultitool(O) || isWirecutter(O)))
+	if(panel_open && (IS_MULTITOOL(O) || IS_WIRECUTTER(O)))
 		attack_hand(user)
 		return TRUE
 	return component_attackby(O, user)

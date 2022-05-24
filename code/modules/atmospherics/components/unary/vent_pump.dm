@@ -257,7 +257,7 @@
 	toggle_input_toggle()
 
 /obj/machinery/atmospherics/unary/vent_pump/attackby(obj/item/W, mob/user)
-	if(isWelder(W))
+	if(IS_WELDER(W))
 
 		var/obj/item/weldingtool/WT = W
 
@@ -290,7 +290,7 @@
 			"<span class='notice'>You [welded ? "weld \the [src] shut" : "unweld \the [src]"].</span>", \
 			"You hear welding.")
 		return 1
-	if(isMultitool(W))
+	if(IS_MULTITOOL(W))
 		var/datum/browser/written_digital/popup = new(user, "Vent Configuration Utility", "[src] Configuration Panel", 600, 200)
 		popup.set_content(jointext(get_console_data(),"<br>"))
 		popup.open()
@@ -313,7 +313,7 @@
 			return SPAN_WARNING("You cannot unwrench \the [src], turn it off first.")
 		var/turf/T = src.loc
 		var/hidden_pipe_check = FALSE
-		for(var/obj/machinery/atmospherics/node AS_ANYTHING in nodes_to_networks)
+		for(var/obj/machinery/atmospherics/node as anything in nodes_to_networks)
 			if(node.level)
 				hidden_pipe_check = TRUE
 				break

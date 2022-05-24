@@ -132,7 +132,7 @@
 	if(.) //We moved
 
 		var/stamina_cost = 0
-		for(var/obj/item/grab/G AS_ANYTHING in get_active_grabs())
+		for(var/obj/item/grab/G as anything in get_active_grabs())
 			stamina_cost -= G.grab_slowdown()
 		stamina_cost = round(stamina_cost)
 		if(stamina_cost < 0)

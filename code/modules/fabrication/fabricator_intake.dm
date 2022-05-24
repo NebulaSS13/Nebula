@@ -77,10 +77,10 @@
 /obj/machinery/fabricator/attackby(var/obj/item/O, var/mob/user)
 	if(component_attackby(O, user))
 		return TRUE
-	if(panel_open && (isMultitool(O) || isWirecutter(O)))
+	if(panel_open && (IS_MULTITOOL(O) || IS_WIRECUTTER(O)))
 		attack_hand(user)
 		return TRUE
-	if((obj_flags & OBJ_FLAG_ANCHORABLE) && isWrench(O))
+	if((obj_flags & OBJ_FLAG_ANCHORABLE) && IS_WRENCH(O))
 		return ..()
 	if(stat & (NOPOWER | BROKEN))
 		return
@@ -89,7 +89,7 @@
 	if(user.a_intent != I_HURT)
 
 		// Set or update our local network.
-		if(isMultitool(O))
+		if(IS_MULTITOOL(O))
 			var/datum/extension/local_network_member/fabnet = get_extension(src, /datum/extension/local_network_member)
 			fabnet.get_new_tag(user)
 			return

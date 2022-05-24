@@ -105,7 +105,7 @@ var/global/photo_count = 0
 * photo album *
 **************/
 /obj/item/storage/photo_album
-	name = "Photo album"
+	name = "photo album"
 	icon = 'icons/obj/photography.dmi'
 	icon_state = "album"
 	item_state = "briefcase"

@@ -18,7 +18,7 @@
 
 /obj/structure/hygiene/drain/attackby(var/obj/item/thing, var/mob/user)
 	..()
-	if(isWelder(thing))
+	if(IS_WELDER(thing))
 		var/obj/item/weldingtool/WT = thing
 		if(WT.isOn())
 			welded = !welded
@@ -27,7 +27,7 @@
 			to_chat(user, "<span class='warning'>Turn \the [thing] on, first.</span>")
 		update_icon()
 		return
-	if(isWrench(thing))
+	if(IS_WRENCH(thing))
 		new /obj/item/drain(src.loc)
 		playsound(src.loc, 'sound/items/Ratchet.ogg', 50, 1)
 		to_chat(user, "<span class='warning'>[user] unwrenches the [src].</span>")
@@ -54,7 +54,7 @@
 	var/constructed_type = /obj/structure/hygiene/drain
 
 /obj/item/drain/attackby(var/obj/item/thing, var/mob/user)
-	if(isWrench(thing))
+	if(IS_WRENCH(thing))
 		new constructed_type(get_turf(src))
 		playsound(src, 'sound/items/Ratchet.ogg', 50, 1)
 		to_chat(user, SPAN_NOTICE("\The [user] wrenches the [src] down."))

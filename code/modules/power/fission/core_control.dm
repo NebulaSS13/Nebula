@@ -19,7 +19,7 @@
 		fission.set_tag(null, initial_id_tag)
 
 /obj/machinery/computer/fission/attackby(var/obj/item/W, var/mob/user)
-	if(isMultitool(W))
+	if(IS_MULTITOOL(W))
 		var/datum/extension/local_network_member/fission = get_extension(src, /datum/extension/local_network_member)
 		fission.get_new_tag(user)
 		return TRUE

@@ -62,7 +62,7 @@
 
 	var/list/shields = list()
 	if(overmap_only)
-		for(var/obj/effect/overmap/visitable/sector AS_ANYTHING in overmap_sectors)
+		for(var/obj/effect/overmap/visitable/sector as anything in overmap_sectors)
 			var/list/sector_shields = sector.get_linked_machines_of_type(/obj/machinery/shield_generator)
 			if(length(sector_shields))
 				shields |= sector_shields
@@ -71,7 +71,7 @@
 			if(G.z in affecting_z)
 				shields |= G
 
-	for(var/obj/machinery/shield_generator/G AS_ANYTHING in shields)
+	for(var/obj/machinery/shield_generator/G as anything in shields)
 		if(!(G.running) || !G.check_flag(MODEFLAG_EM))
 			shields -= G
 
@@ -83,7 +83,7 @@
 			shielded = TRUE
 
 	valid_apcs = list()
-	for(var/obj/machinery/power/apc/A AS_ANYTHING in global.all_apcs)
+	for(var/obj/machinery/power/apc/A as anything in global.all_apcs)
 		if(!A.is_critical && (A.z in affecting_z))
 			valid_apcs.Add(A)
 
@@ -94,7 +94,7 @@
 		for(var/i=0, i< severity*2, i++) // up to 2/4/6 APCs per tick depending on severity
 			picked_apcs |= pick(valid_apcs)
 
-		for(var/obj/machinery/power/apc/T AS_ANYTHING in picked_apcs)
+		for(var/obj/machinery/power/apc/T as anything in picked_apcs)
 			// Main breaker is turned off. Consider this APC protected.
 			if(!T.operating || T.failure_timer)
 				continue
