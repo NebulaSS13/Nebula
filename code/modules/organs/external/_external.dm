@@ -1074,17 +1074,17 @@ Note that amputating the affected organ does in fact remove the infection from t
 					G.basecolor =  use_blood_color
 					G.update_icon()
 
-			gore.throw_at(get_edge_target_turf(src,pick(global.alldirs)),rand(1,3),30)
+			gore.throw_at(get_edge_target_turf(src,pick(global.alldirs)), rand(1,3), THROWFORCE_GIBS)
 
 			for(var/obj/item/organ/I in internal_organs)
 				I.do_uninstall() //No owner so run uninstall directly
 				I.dropInto(get_turf(loc))
 				if(!QDELETED(I) && isturf(loc))
-					I.throw_at(get_edge_target_turf(src,pick(global.alldirs)),rand(1,3),30)
+					I.throw_at(get_edge_target_turf(src,pick(global.alldirs)), rand(1,3), THROWFORCE_GIBS)
 
 			for(var/obj/item/I in src)
 				I.dropInto(loc)
-				I.throw_at(get_edge_target_turf(src,pick(global.alldirs)),rand(1,3),30)
+				I.throw_at(get_edge_target_turf(src,pick(global.alldirs)), rand(1,3), THROWFORCE_GIBS)
 
 			qdel(src)
 
