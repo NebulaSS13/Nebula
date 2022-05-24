@@ -34,15 +34,11 @@
 
 SUBSYSTEM_DEF(secrets)
 	name = "Secret Content"
-	init_order = SS_INIT_EARLY
+	init_order = SS_INIT_SECRETS
 	flags = SS_NO_FIRE
 
-	/// Root locations of content to load; terminating / is important for example dir check.
-	var/static/list/load_directories = list(
-		"data/secrets/",
-		"maps/",
-		"mods/"
-	)
+	/// Root locations of content to load; terminating / is important for example dir check. Maps and mods inject their own directories into this list pre-init.
+	var/static/list/load_directories = list("data/secrets/")
 	/// Defines a list of paths that secrets are allowed to create. Anything loaded that isn't of a type or subtype in this list will throw an error.
 	var/static/list/permitted_paths = list(
 		/datum
@@ -154,6 +150,7 @@ SUBSYSTEM_DEF(secrets)
 			if(!length(loaded_data))
 				log_warning("Invalid or empty json loaded from [checkfile]!")
 				continue
+
 			var/secret_key = loaded_data["secret_key"]
 			if(!istext(secret_key))
 				log_warning("Undefined or invalid secret_key in [checkfile] ([isnull(secret_key) ? "NULL" : secret_key])!")
