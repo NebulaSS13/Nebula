@@ -85,6 +85,7 @@
 #include "code\__defines\tools.dm"
 #include "code\__defines\topic.dm"
 #include "code\__defines\turfs.dm"
+#include "code\__defines\unit_tests.dm"
 #include "code\__defines\webhooks.dm"
 #include "code\__defines\xenoarcheaology.dm"
 #include "code\__defines\ZAS.dm"

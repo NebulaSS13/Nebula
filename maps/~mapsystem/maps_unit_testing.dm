@@ -3,7 +3,8 @@
 	var/const/NO_VENT = 2
 	var/const/NO_SCRUBBER = 4
 
-	var/shuttle_atmos_expectation = TRUE
+	/// Defines the expected result of the atmospherics shuttle unit test for atmosphere.
+	var/shuttle_atmos_expectation = UT_NORMAL
 
 	// Unit test vars
 	var/list/apc_test_exempt_areas = list(
