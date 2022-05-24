@@ -224,7 +224,10 @@
 
 /mob/living/carbon/human/proc/sync_organ_dna()
 	for(var/obj/item/organ/O in get_organs())
-		O.set_dna(dna)
+		if(!BP_IS_PROSTHETIC(O))
+			O.setup_as_organic(dna)
+		else
+			O.setup_as_prosthetic()
 
 /mob/living/proc/is_asystole()
 	return FALSE

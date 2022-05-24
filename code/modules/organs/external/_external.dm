@@ -101,9 +101,7 @@
 
 /obj/item/organ/external/Initialize(mapload, material_key, datum/dna/given_dna)
 	. = ..()
-	if(. == INITIALIZE_HINT_QDEL)
-		return
-	if(isnull(pain_disability_threshold))
+	if(. != INITIALIZE_HINT_QDEL && isnull(pain_disability_threshold))
 		pain_disability_threshold = (max_damage * 0.75)
 
 /obj/item/organ/external/Destroy()
@@ -320,7 +318,7 @@
 	if(!istype(removing))
 		return TRUE
 
-	var/cutting_result = !W.do_tool_interaction(TOOL_SAW, user, src, W.get_tool_speed(TOOL_SAW) * 3 SECONDS, SPAN_DANGER("<b>[user]</b> starts cutting off \the [removing] from [src] with \the [W]!") )
+	var/cutting_result = !W.do_tool_interaction(TOOL_SAW, user, src, 3 SECONDS, "cutting \the [removing] off")
 	//Check if the limb is still in the hierarchy
 	if(cutting_result == 1 || !(removing in get_limbs_recursive(TRUE)))
 		if(cutting_result != -1)
@@ -558,7 +556,9 @@ This function completely restores a damaged organ to perfect condition.
 	damage_state = "00"
 	status = 0
 	brute_dam = 0
+	brute_ratio = 0
 	burn_dam = 0
+	burn_ratio = 0
 	germ_level = 0
 	genetic_degradation = 0
 

@@ -93,6 +93,7 @@
 		virtual_mob = new virtual_mob(get_turf(src), src)
 
 	// Fire Entered events for freshly created movables.
+	// Changing this behavior will almost certainly break power; update accordingly.
 	if (!ml && loc)
 		loc.Entered(src, null)
 

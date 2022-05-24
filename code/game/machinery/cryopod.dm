@@ -278,19 +278,24 @@
 		control_computer = null
 
 /obj/machinery/cryopod/proc/check_occupant_allowed(mob/M)
+
+	if(!istype(M) || M.anchored)
+		return FALSE
+
 	var/correct_type = 0
 	for(var/type in allow_occupant_types)
 		if(istype(M, type))
 			correct_type = 1
 			break
 
-	if(!correct_type) return 0
+	if(!correct_type)
+		return FALSE
 
 	for(var/type in disallow_occupant_types)
 		if(istype(M, type))
-			return 0
+			return FALSE
 
-	return 1
+	return TRUE
 
 /obj/machinery/cryopod/examine(mob/user)
 	. = ..()

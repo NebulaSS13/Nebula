@@ -110,11 +110,12 @@
 	operating = 1
 	playsound(src.loc, open_sound, 100, 1)
 	flick(icon_state_opening, src)
-	set_density(0)
+
+	sleep(0.6 SECONDS)
+	set_density(FALSE)
 	update_nearby_tiles()
 	update_icon()
-	set_opacity(0)
-	sleep(15)
+	set_opacity(FALSE)
 	layer = open_layer
 	operating = 0
 
@@ -126,11 +127,12 @@
 	playsound(src.loc, close_sound, 100, 1)
 	layer = closed_layer
 	flick(icon_state_closing, src)
-	set_density(1)
+
+	sleep(0.6 SECONDS)
+	set_density(TRUE)
 	update_nearby_tiles()
 	update_icon()
-	set_opacity(1)
-	sleep(15)
+	set_opacity(TRUE)
 	operating = 0
 
 // Proc: force_toggle()
@@ -186,20 +188,23 @@
 // Parameters: None
 // Description: Opens the door. Does necessary checks. Automatically closes if autoclose is true
 /obj/machinery/door/blast/open()
-	if (operating || (stat & BROKEN || stat & NOPOWER))
+	if (!can_open() || (stat & BROKEN || stat & NOPOWER))
 		return
+
 	force_open()
+
 	if(autoclose)
-		spawn(150)
-			close()
-	return 1
+		addtimer(CALLBACK(src, .proc/close), 15 SECONDS, TIMER_UNIQUE|TIMER_OVERRIDE)
+
+	return TRUE
 
 // Proc: close()
 // Parameters: None
 // Description: Closes the door. Does necessary checks.
 /obj/machinery/door/blast/close()
-	if (operating || (stat & BROKEN || stat & NOPOWER))
+	if (!can_close() || (stat & BROKEN || stat & NOPOWER))
 		return
+
 	force_close()
 
 /obj/machinery/door/blast/toggle(to_open = density)

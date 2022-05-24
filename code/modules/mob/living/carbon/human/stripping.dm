@@ -69,7 +69,7 @@
 			
 			visible_message("<span class='danger'>\The [user] is trying to remove \the [src]'s [A.name]!</span>")
 
-			if(!do_after(user, HUMAN_STRIP_DELAY, src, progress = 0))
+			if(!do_after(user, HUMAN_STRIP_DELAY, src, check_holding = FALSE, progress = FALSE))
 				return
 
 			if(!A || holder.loc != src || !(A in holder.accessories))
@@ -98,7 +98,7 @@
 	else
 		visible_message("<span class='danger'>\The [user] is trying to put \a [held] on \the [src]!</span>")
 
-	if(!do_mob(user, src, HUMAN_STRIP_DELAY))
+	if(!do_mob(user, src, HUMAN_STRIP_DELAY, check_holding = FALSE))
 		return
 
 	if(stripping)

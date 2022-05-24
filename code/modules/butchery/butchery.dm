@@ -111,7 +111,7 @@
 		return TRUE
 
 /obj/structure/kitchenspike/proc/try_spike(var/mob/living/target, var/mob/living/user)
-	if(!istype(target) || !Adjacent(user) || user.incapacitated())
+	if(!istype(target) || !Adjacent(user) || user.incapacitated() || target.anchored)
 		return
 
 	if(!anchored)

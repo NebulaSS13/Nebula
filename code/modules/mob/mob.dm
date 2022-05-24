@@ -510,7 +510,7 @@
 	if(over == user && user != src && !istype(user, /mob/living/silicon/ai))
 		show_inv(user)
 		return TRUE
-	if(istype(over, /obj/vehicle/train))
+	if(!anchored && istype(over, /obj/vehicle/train))
 		var/obj/vehicle/train/beep = over
 		if(!beep.load(src))
 			to_chat(user, SPAN_WARNING("You were unable to load \the [src] onto \the [over]."))

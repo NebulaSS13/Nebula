@@ -129,6 +129,9 @@ var/global/list/diversion_junctions = list()
 
 		// Todo rewrite all of this.
 		var/atom/movable/AM = dropping
+		if(AM.anchored)
+			return FALSE 
+
 		// Determine object type and run necessary checks
 		var/mob/M = AM
 		var/is_dangerous // To determine css style in messages

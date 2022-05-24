@@ -149,7 +149,7 @@
 
 	if(istype(M))
 		for(var/obj/effect/decal/cleanable/blood/B in contents)
-			if(!LAZYACCESS(B.blood_DNA, M.dna.unique_enzymes))
+			if(M.dna?.unique_enzymes && !LAZYACCESS(B.blood_DNA, M.dna.unique_enzymes))
 				LAZYSET(B.blood_DNA, M.dna.unique_enzymes, M.dna.b_type)
 				LAZYSET(B.blood_data, M.dna.unique_enzymes, REAGENT_DATA(M.vessel, M.species.blood_reagent))
 				var/datum/extension/forensic_evidence/forensics = get_or_create_extension(B, /datum/extension/forensic_evidence)

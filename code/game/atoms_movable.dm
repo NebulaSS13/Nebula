@@ -384,7 +384,7 @@
 	return buckled_mob
 
 /atom/movable/proc/can_buckle_mob(var/mob/living/dropping)
-	. = (can_buckle && istype(dropping) && !dropping.buckled && !dropping.buckled_mob && !buckled_mob)
+	. = (can_buckle && istype(dropping) && !dropping.buckled && !dropping.anchored && !dropping.buckled_mob && !buckled_mob)
 
 /atom/movable/receive_mouse_drop(atom/dropping, mob/living/user)
 	. = ..()

@@ -12,8 +12,10 @@
 	var/obj/item/stock_parts/power/terminal/master
 	anchored = 1
 
+	stat_immune = NOINPUT | NOSCREEN | NOPOWER
+	interact_offline = TRUE
 	uncreated_component_parts = null
-	construct_state = /decl/machine_construction/noninteractive // Axiliary entity; all interactions pass through owner machine part instead.
+	construct_state = /decl/machine_construction/noninteractive/terminal // Auxiliary entity; all interactions pass through owner machine part instead.
 
 /obj/machinery/power/terminal/Initialize()
 	. = ..()
@@ -42,3 +44,14 @@
 	var/obj/machinery/machine = master_machine()
 	if(machine)
 		machine.power_change()
+
+/obj/machinery/power/terminal/on_update_icon()
+	. = ..()
+	if(master)
+		var/obj/machinery/machine = master_machine()
+		
+		// Wall frames and SMES have directional terminals.
+		if(!master.terminal_dir && !ispath(machine.frame_type, /obj/item/frame))
+			icon_state = "term-omni"
+		else
+			icon_state = "term"
