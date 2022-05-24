@@ -79,7 +79,7 @@
 	qdel(parent)
 	..()
 	var/turf/T = loc
-	if(level == 1 && !T.is_plating())
+	if(level == 1 && isturf(T) && !T.is_plating())
 		hide(1)
 
 /obj/machinery/atmospherics/pipe/return_air()
