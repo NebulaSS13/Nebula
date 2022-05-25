@@ -1,6 +1,7 @@
 var/global/list/banned_ruin_names = list()
 
-/proc/seedRuins(list/z_levels = null, budget = 0, whitelist = /area/space, list/potentialRuins, var/maxx = world.maxx, var/maxy = world.maxy)
+/obj/effect/overmap/visitable/sector/exoplanet/proc/seed_ruins(list/z_levels = null, budget = 0, whitelist = /area/space, list/potentialRuins, var/maxx = world.maxx, var/maxy = world.maxy)
+
 	if(!z_levels || !z_levels.len)
 		UNLINT(WARNING("No Z levels provided - Not generating ruins"))
 		return
@@ -13,17 +14,17 @@ var/global/list/banned_ruin_names = list()
 
 	var/list/ruins = potentialRuins.Copy()
 	for(var/R in potentialRuins)
-		var/datum/map_template/ruin/ruin = R
+		var/datum/map_template/ruin = R
 		if(ruin.name in global.banned_ruin_names)
 			ruins -= ruin //remove all prohibited ids from the candidate list; used to forbit global duplicates.
 	var/list/spawned_ruins = list()
 //Each iteration needs to either place a ruin or strictly decrease either the budget or ruins.len (or break).
 	while(budget > 0)
 		// Pick a ruin
-		var/datum/map_template/ruin/ruin = null
+		var/datum/map_template/ruin = null
 		if(ruins && ruins.len)
 			ruin = pick(ruins)
-			if(ruin.cost > budget)
+			if(ruin.get_template_cost() > budget)
 				ruins -= ruin
 				continue //Too expensive, get rid of it and try again
 		else
@@ -65,14 +66,14 @@ var/global/list/banned_ruin_names = list()
 				budget -= ruin_cost
 			if(!(ruin.template_flags & TEMPLATE_FLAG_ALLOW_DUPLICATES))
 				for(var/other_ruin_datum in ruins)
-					var/datum/map_template/ruin/other_ruin = other_ruin_datum
+					var/datum/map_template/other_ruin = other_ruin_datum
 					if(ruin.name == other_ruin.name)
 						ruins -= ruin //Remove all ruins with the same name if we don't allow duplicates
 				global.banned_ruin_names += ruin.name //and ban them globally too
 			break
 	return spawned_ruins
 
-/proc/load_ruin(turf/central_turf, datum/map_template/template)
+/obj/effect/overmap/visitable/sector/exoplanet/proc/load_ruin(turf/central_turf, datum/map_template/template)
 	if(!template)
 		return FALSE
 	for(var/i in template.get_affected_turfs(central_turf, 1))

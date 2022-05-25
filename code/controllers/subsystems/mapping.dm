@@ -15,8 +15,6 @@ SUBSYSTEM_DEF(mapping)
 
 	var/decl/overmap_event_handler/overmap_event_handler
 
-	var/tmp/valid_new_key = "YISUN" // remove after debugging
-
 /datum/controller/subsystem/mapping/Initialize(timeofday)
 
 	// Fetch and track all templates before doing anything that might need one.
@@ -72,8 +70,8 @@ SUBSYSTEM_DEF(mapping)
 	. = list()
 	for(var/template_type in subtypesof(/datum/map_template))
 		var/datum/map_template/template = template_type
-		if(initial(template.template_category_type) != template_type && initial(template.name))
-			. += new template_type(valid_new_key)
+		if(initial(template.template_parent_type) != template_type && initial(template.name))
+			. += new template_type(name) // send name as a param to catch people doing illegal ad hoc creation
 
 /datum/controller/subsystem/mapping/proc/get_template(var/template_name)
 	return map_templates[template_name]

@@ -12,15 +12,21 @@
 	var/template_flags = TEMPLATE_FLAG_ALLOW_DUPLICATES
 	var/modify_tag_vars = TRUE // Will modify tag vars so that duplicate templates are handled properly. May have compatibility issues with legacy maps (esp. with ferry shuttles).
 	var/list/template_categories // List of strings to store the templates under for mass retrieval.
-	var/template_category_type = /datum/map_template // If this is equal to current type, the datum is abstract and should not be created.
+	var/template_parent_type = /datum/map_template // If this is equal to current type, the datum is abstract and should not be created.
 
 /datum/map_template/New(var/created_ad_hoc)
-	if(created_ad_hoc != SSmapping.valid_new_key)
+	if(created_ad_hoc != SSmapping.name)
 		PRINT_STACK_TRACE("Ad hoc map template created ([type])!")
 	if(length(mappaths))
 		preload_size()
 
+/datum/map_template/proc/get_spawn_weight()
+	return 0
+
 /datum/map_template/proc/get_template_cost()
+	return 0
+
+/datum/map_template/proc/get_ruin_tags()
 	return 0
 
 /datum/map_template/proc/preload_size()

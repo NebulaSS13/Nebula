@@ -1,7 +1,7 @@
 /datum/map_template/ruin
 	name = null
 	template_flags = 0 // No duplicates by default
-	template_category_type = /datum/map_template/ruin
+	template_parent_type = /datum/map_template/ruin
 	var/description
 	var/cost = 0
 	var/prefix
