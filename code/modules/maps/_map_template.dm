@@ -17,8 +17,11 @@
 /datum/map_template/New(var/created_ad_hoc)
 	if(created_ad_hoc != SSmapping.name)
 		PRINT_STACK_TRACE("Ad hoc map template created ([type])!")
+
+/datum/map_template/proc/preload()
 	if(length(mappaths))
 		preload_size()
+	return TRUE
 
 /datum/map_template/proc/get_spawn_weight()
 	return 0

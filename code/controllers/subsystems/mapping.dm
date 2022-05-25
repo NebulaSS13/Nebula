@@ -8,6 +8,7 @@ SUBSYSTEM_DEF(mapping)
 	var/list/compile_time_map_markers =  list()
 	var/list/map_templates_by_category = list()
 	var/list/map_templates_by_type =     list()
+	var/list/banned_maps =               list()
 
 	// Listing .dmm filenames in the file at this location will blacklist any templates that include them from being used.
 	// Maps must be the full file path to be properly included. ex. "maps/random_ruins/away_sites/example.dmm"
@@ -17,21 +18,13 @@ SUBSYSTEM_DEF(mapping)
 
 /datum/controller/subsystem/mapping/Initialize(timeofday)
 
-	// Fetch and track all templates before doing anything that might need one.
-	// Generate templates based on subtypes with id.
-	var/list/banned_maps
+	// Load our banned map list, if we have one.
 	if(banned_dmm_location && fexists(banned_dmm_location))
 		banned_maps = cached_json_decode(safe_file2text(banned_dmm_location))
 
+	// Fetch and track all templates before doing anything that might need one.
 	for(var/datum/map_template/MT as anything in get_all_template_instances())
-		if(!validate_map_template(MT, banned_maps))
-			continue
-		map_templates[MT.name] = MT
-		if(!length(MT.template_categories))
-			continue
-		for(var/temple_cat in MT.template_categories) // :3
-			LAZYINITLIST(map_templates_by_category[temple_cat])
-			LAZYSET(map_templates_by_category[temple_cat], MT.name, MT)
+		register_map_template(MT)
 
 	// Populate overmap.
 	if(length(global.using_map.overmap_ids))
@@ -56,7 +49,18 @@ SUBSYSTEM_DEF(mapping)
 	map_templates_by_category = SSmapping.map_templates_by_category
 	map_templates_by_type =     SSmapping.map_templates_by_type
 
-/datum/controller/subsystem/mapping/proc/validate_map_template(var/datum/map_template/map_template, var/list/banned_maps)
+/datum/controller/subsystem/mapping/proc/register_map_template(var/datum/map_template/map_template)
+	if(!validate_map_template(map_template) || !map_template.preload())
+		return FALSE
+	map_templates[map_template.name] = map_template
+	for(var/temple_cat in map_template.template_categories) // :3
+		LAZYINITLIST(map_templates_by_category[temple_cat])
+		LAZYSET(map_templates_by_category[temple_cat], map_template.name, map_template)
+	return TRUE
+
+/datum/controller/subsystem/mapping/proc/validate_map_template(var/datum/map_template/map_template)
+	if(!istype(map_template))
+		return FALSE
 	if(length(banned_maps) && length(map_template.mappaths))
 		for(var/mappath in map_template.mappaths)
 			if(mappath in banned_maps)
