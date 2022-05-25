@@ -39,16 +39,13 @@ SUBSYSTEM_DEF(secrets)
 
 	/// Root locations of content to load; terminating / is important for example dir check. Maps and mods inject their own directories into this list pre-init.
 	var/static/list/load_directories = list("data/secrets/")
+
 	/// Defines a list of paths that secrets are allowed to create. Anything loaded that isn't of a type or subtype in this list will throw an error.
-	var/static/list/permitted_paths = list(
-		/datum
-	)
+	var/static/list/permitted_paths = list(/datum/secret_note)
 	/// Defines a list of paths that secrets are not allowed to create. Anything loaded that is of a type or subtype in this list will throw an error.
-	var/static/list/forbidden_paths = list(
-		/atom,
-		/decl,
-		/spell
-	)
+	var/static/list/forbidden_paths = list()
+	// Defines a list of types that should be logged on creation for later admin reference (ex. random chemical recipes or exploitable secrets)
+	var/static/list/dangerous_paths = list()
 
 	// Secrets indexed by category that have already been randomly selected before.
 	var/list/retrieved_secrets =   list()
@@ -184,6 +181,12 @@ SUBSYSTEM_DEF(secrets)
 			if(checking_path_result)
 				log_warning("Forbidden path ([datum_path]) loaded from [checkfile]!")
 				continue
+
+			for(var/checkpath in dangerous_paths)
+				if(ispath(datum_path, checkpath))
+					// Not a dealbreaker, but something that should be logged for reference.
+					to_world_log("## SECRETS ##: Dangerous type [datum_path] instanced from [checkfile] with payload '[json_encode(loaded_data)]'.")
+					break
 
 			// Set our metadata (used in theory by secrets like map templates or things loading icons/text files from a directory).
 			if(loaded_data["_source_dir"])
