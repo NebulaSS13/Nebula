@@ -37,7 +37,7 @@
 	owner.remove_organ(src, FALSE, FALSE, TRUE, TRUE, FALSE)
 	qdel(src)
 	if(tmp_owner)
-		var/obj/item/organ/org = new replace_path(tmp_owner, given_dna = dna)
+		var/obj/item/organ/org = new replace_path(tmp_owner, null, dna)
 		tmp_owner.add_organ(org, tmp_owner.get_organ(org.parent_organ), TRUE, TRUE)
 		tmp_owner = null
 

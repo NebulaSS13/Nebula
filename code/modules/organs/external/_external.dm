@@ -663,7 +663,7 @@ This function completely restores a damaged organ to perfect condition.
 	var/wound_type = get_wound_type(type, damage)
 
 	if(wound_type)
-		var/datum/wound/W = new wound_type(damage, src)
+		var/datum/wound/W = new wound_type(damage, src, surgical)
 
 		//Check whether we can add the wound to an existing wound
 		if(surgical)
@@ -1484,8 +1484,9 @@ Note that amputating the affected organ does in fact remove the infection from t
 			if(encased && (status & ORGAN_BROKEN))
 				. = SURGERY_ENCASED
 		else
-			var/smol_threshold = min_broken_damage * 0.4
-			var/beeg_threshold = min_broken_damage * 0.6
+			var/total_health_coefficient = scale_max_damage_to_species_health ? (species.total_health / DEFAULT_SPECIES_HEALTH) : 1
+			var/smol_threshold = max(1, FLOOR(min_broken_damage * 0.4 * total_health_coefficient))
+			var/beeg_threshold = max(1, FLOOR(min_broken_damage * 0.6 * total_health_coefficient))
 			if(!incision.autoheal_cutoff == 0) //not clean incision
 				smol_threshold *= 1.5
 				beeg_threshold = max(beeg_threshold, min(beeg_threshold * 1.5, incision.damage_list[1])) //wounds can't achieve bigger
