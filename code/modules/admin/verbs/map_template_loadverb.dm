@@ -60,17 +60,6 @@
 
 	if (!check_rights(R_FUN)) return
 
-	var/map = input(usr, "Choose a Map Template to upload to template storage","Upload Map Template") as null|file
-	if(!map)
-		return
-	if(copytext("[map]",-4) != ".dmm")
-		to_chat(usr, "Bad map file: [map]")
-		return
-
-	var/datum/map_template/M = new(list(map), "[map]")
-	if(M.preload_size())
-		to_chat(usr, "Map template '[map]' ready to place ([M.width]x[M.height])")
-		SSmapping.map_templates[M.name] = M
-		message_admins("<span class='adminnotice'>[key_name_admin(usr)] has uploaded a map template ([map])</span>")
-	else
-		to_chat(usr, "Map template '[map]' failed to load properly")
+	// Going to make this take a JSON file/folder location rather than a single
+	// .dmm file, after the secrets system is merged; will reimplement then.
+	to_chat(usr, SPAN_WARNING("Not reimplemented yet, sorry."))

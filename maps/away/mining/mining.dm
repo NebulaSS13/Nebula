@@ -25,7 +25,6 @@
 
 /datum/map_template/ruin/away_site/mining_asteroid
 	name = "Mining - Asteroid"
-	id = "awaysite_mining_asteroid"
 	description = "A medium-sized asteroid full of minerals."
 	suffixes = list("mining/mining-asteroid.dmm")
 	cost = 1
@@ -95,7 +94,6 @@
 
 /datum/map_template/ruin/away_site/mining_signal
 	name = "Mining - Planetoid"
-	id = "awaysite_mining_signal"
 	description = "A mineral-rich, formerly-volcanic site on a planetoid."
 	suffixes = list("mining/mining-signal.dmm")
 	cost = 1
@@ -162,7 +160,6 @@
 
 /datum/map_template/ruin/away_site/orb
 	name = "Mining - Orb"
-	id = "awaysite_mining_orb"
 	description = "A sort of circular asteroid with a bird."
 	suffixes = list("mining/mining-orb.dmm")
 	cost = 1

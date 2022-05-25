@@ -1,6 +1,5 @@
 /datum/map_template/ruin/antag_spawn/ert
 	name = "ERT Base"
-	id = "ert_spawn"
 	suffixes = list("ert/ert_base.dmm")
 	modify_tag_vars = FALSE
 	shuttles_to_initialise = list(/datum/shuttle/autodock/multi/antag/rescue)

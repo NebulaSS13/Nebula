@@ -2,7 +2,6 @@
 
 /datum/map_template/ruin/exoplanet/playablecolony
 	name = "established colony"
-	id = "playablecolony"
 	description = "a fully functional colony on the frontier of settled space"
 	suffixes = list("playablecolony/colony.dmm")
 	cost = 2

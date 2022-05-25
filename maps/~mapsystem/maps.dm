@@ -229,7 +229,7 @@ var/global/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 
 		if((site.template_flags & TEMPLATE_FLAG_SPAWN_GUARANTEED) && site.load_new_z()) // no check for budget, but guaranteed means guaranteed
 			report_progress("Loaded guaranteed away site [site]!")
-			away_site_budget -= site.cost
+			away_site_budget -= site.get_template_cost()
 			continue
 
 		sites_by_spawn_weight[site] = site.spawn_weight
@@ -238,11 +238,13 @@ var/global/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 		if (!selected_site)
 			break
 		sites_by_spawn_weight -= selected_site
-		if(selected_site.cost > away_site_budget)
+		var/site_cost = selected_site.get_template_cost()
+		if(site_cost > away_site_budget)
 			continue
 		if (selected_site.load_new_z())
 			report_progress("Loaded away site [selected_site]!")
-			away_site_budget -= selected_site.cost
+			away_site_budget -= site_cost
+
 	report_progress("Finished loading away sites, remaining budget [away_site_budget], remaining sites [sites_by_spawn_weight.len]")
 #endif
 

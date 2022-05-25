@@ -14,7 +14,6 @@
 
 /datum/map_template/ruin/away_site/magshield
 	name = "Magshield"
-	id = "awaysite_magshield"
 	description = "It's an orbital shield station."
 	suffixes = list("magshield/magshield.dmm")
 	cost = 1

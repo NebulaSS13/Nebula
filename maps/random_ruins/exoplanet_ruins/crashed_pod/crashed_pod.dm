@@ -2,7 +2,6 @@ var/global/list/crashed_pod_areas = list()
 
 /datum/map_template/ruin/exoplanet/crashed_pod
 	name = "crashed survival pod"
-	id = "crashed_pod"
 	description = "A crashed survival pod from a destroyed ship."
 	suffixes = list("crashed_pod/crashed_pod.dmm")
 	cost = 2

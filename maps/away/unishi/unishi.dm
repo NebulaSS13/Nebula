@@ -28,7 +28,6 @@
 
 /datum/map_template/ruin/away_site/unishi
 	name = "University Ship"
-	id = "awaysite_unishi"
 	description = "CTI research ship.."
 	suffixes = list("unishi/unishi-1.dmm", "unishi/unishi-2.dmm", "unishi/unishi-3.dmm")
 	cost = 2

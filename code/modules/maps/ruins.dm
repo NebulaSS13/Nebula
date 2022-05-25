@@ -1,4 +1,4 @@
-var/global/list/banned_ruin_ids = list()
+var/global/list/banned_ruin_names = list()
 
 /proc/seedRuins(list/z_levels = null, budget = 0, whitelist = /area/space, list/potentialRuins, var/maxx = world.maxx, var/maxy = world.maxy)
 	if(!z_levels || !z_levels.len)
@@ -14,7 +14,7 @@ var/global/list/banned_ruin_ids = list()
 	var/list/ruins = potentialRuins.Copy()
 	for(var/R in potentialRuins)
 		var/datum/map_template/ruin/ruin = R
-		if(ruin.id in global.banned_ruin_ids)
+		if(ruin.name in global.banned_ruin_names)
 			ruins -= ruin //remove all prohibited ids from the candidate list; used to forbit global duplicates.
 	var/list/spawned_ruins = list()
 //Each iteration needs to either place a ruin or strictly decrease either the budget or ruins.len (or break).
@@ -60,14 +60,15 @@ var/global/list/banned_ruin_ids = list()
 
 			load_ruin(T, ruin)
 			spawned_ruins += ruin
-			if(ruin.cost >= 0)
-				budget -= ruin.cost
+			var/ruin_cost = ruin.get_template_cost()
+			if(ruin_cost >= 0)
+				budget -= ruin_cost
 			if(!(ruin.template_flags & TEMPLATE_FLAG_ALLOW_DUPLICATES))
 				for(var/other_ruin_datum in ruins)
 					var/datum/map_template/ruin/other_ruin = other_ruin_datum
-					if(ruin.id == other_ruin.id)
-						ruins -= ruin //Remove all ruins with the same id if we don't allow duplicates
-				global.banned_ruin_ids += ruin.id //and ban them globally too
+					if(ruin.name == other_ruin.name)
+						ruins -= ruin //Remove all ruins with the same name if we don't allow duplicates
+				global.banned_ruin_names += ruin.name //and ban them globally too
 			break
 	return spawned_ruins
 
@@ -79,7 +80,4 @@ var/global/list/banned_ruin_ids = list()
 		for(var/mob/living/simple_animal/monster in T)
 			qdel(monster)
 	template.load(central_turf,centered = TRUE)
-	var/datum/map_template/ruin = template
-	if(istype(ruin))
-		new /obj/abstract/landmark/ruin(central_turf, ruin)
 	return TRUE

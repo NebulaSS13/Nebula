@@ -3,7 +3,6 @@
 
 /datum/map_template/ruin/antag_spawn/heist
 	name = "Heist Base"
-	id = "heist_spawn"
 	suffixes = list("heist/heist_base.dmm")
 	modify_tag_vars = FALSE
 	shuttles_to_initialise = list(/datum/shuttle/autodock/multi/antag/skipjack)

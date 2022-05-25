@@ -5,7 +5,6 @@
 
 /datum/map_template/ruin/exoplanet/radshrine
 	name = "radshrine"
-	id = "radshrine"
 	description = "A small radioactive shrine dedicated to an anomaly."
 	suffixes = list("radshrine/radshrine.dmm")
 	cost = 1

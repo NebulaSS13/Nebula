@@ -15,6 +15,8 @@ SUBSYSTEM_DEF(mapping)
 
 	var/decl/overmap_event_handler/overmap_event_handler
 
+	var/tmp/valid_new_key = "YISUN" // remove after debugging
+
 /datum/controller/subsystem/mapping/Initialize(timeofday)
 
 	// Fetch and track all templates before doing anything that might need one.
@@ -58,23 +60,23 @@ SUBSYSTEM_DEF(mapping)
 
 /datum/controller/subsystem/mapping/proc/validate_map_template(var/datum/map_template/map_template, var/list/banned_maps)
 	if(length(banned_maps) && length(map_template.mappaths))
-		for(var/mappath in MT.mappaths)
+		for(var/mappath in map_template.mappaths)
 			if(mappath in banned_maps)
 				return FALSE
+	if(!isnull(map_templates[map_template.name]))
+		PRINT_STACK_TRACE("Duplicate map name '[map_template.name]' on type [map_template.type]!")
+		return FALSE
 	return TRUE
 	
 /datum/controller/subsystem/mapping/proc/get_all_template_instances()
 	. = list()
 	for(var/template_type in subtypesof(/datum/map_template))
 		var/datum/map_template/template = template_type
-		if(initial(template.id))
-			. += new template_type
+		if(initial(template.template_category_type) != template_type && initial(template.name))
+			. += new template_type(valid_new_key)
 
 /datum/controller/subsystem/mapping/proc/get_template(var/template_name)
 	return map_templates[template_name]
 
 /datum/controller/subsystem/mapping/proc/get_templates_by_category(var/temple_cat) // :33
 	return map_templates_by_category[temple_cat]
-
-/datum/controller/subsystem/mapping/proc/get_template_by_type(var/template_type)
-	return new template_type // todo: find in cache and return preloaded template
