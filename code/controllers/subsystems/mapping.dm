@@ -5,7 +5,6 @@ SUBSYSTEM_DEF(mapping)
 
 	var/list/map_templates =             list()
 	var/list/submaps =                   list()
-	var/list/compile_time_map_markers =  list()
 	var/list/map_templates_by_category = list()
 	var/list/map_templates_by_type =     list()
 	var/list/banned_maps =               list()
@@ -34,11 +33,7 @@ SUBSYSTEM_DEF(mapping)
 	// This needs to be non-null even if the overmap isn't created for this map.
 	overmap_event_handler = GET_DECL(/decl/overmap_event_handler)
 
-	// Load templates and build away sites.
-	for(var/obj/abstract/landmark/map_load_mark/marker as anything in compile_time_map_markers)
-		compile_time_map_markers -= marker
-		marker.load_template()
-
+	// Build away sites.
 	global.using_map.build_away_sites()
 
 	. = ..()
@@ -60,6 +55,7 @@ SUBSYSTEM_DEF(mapping)
 
 /datum/controller/subsystem/mapping/proc/validate_map_template(var/datum/map_template/map_template)
 	if(!istype(map_template))
+		PRINT_STACK_TRACE("Null or incorrectly typed map template attempted validation.")
 		return FALSE
 	if(length(banned_maps) && length(map_template.mappaths))
 		for(var/mappath in map_template.mappaths)
@@ -75,7 +71,7 @@ SUBSYSTEM_DEF(mapping)
 	for(var/template_type in subtypesof(/datum/map_template))
 		var/datum/map_template/template = template_type
 		if(initial(template.template_parent_type) != template_type && initial(template.name))
-			. += new template_type(name) // send name as a param to catch people doing illegal ad hoc creation
+			. += new template_type(type) // send name as a param to catch people doing illegal ad hoc creation
 
 /datum/controller/subsystem/mapping/proc/get_template(var/template_name)
 	return map_templates[template_name]

@@ -15,7 +15,7 @@
 	var/template_parent_type = /datum/map_template // If this is equal to current type, the datum is abstract and should not be created.
 
 /datum/map_template/New(var/created_ad_hoc)
-	if(created_ad_hoc != SSmapping.name)
+	if(created_ad_hoc != SSmapping.type)
 		PRINT_STACK_TRACE("Ad hoc map template created ([type])!")
 
 /datum/map_template/proc/preload()
@@ -196,7 +196,9 @@
 /datum/map_template/proc/after_load(z)
 	for(var/obj/abstract/landmark/map_load_mark/mark as anything in subtemplates_to_spawn)
 		subtemplates_to_spawn -= mark
-		mark.load_template()
+		mark.load_subtemplate()
+		if(!QDELETED(mark))
+			qdel(mark)
 	subtemplates_to_spawn = null
 
 /datum/map_template/proc/extend_bounds_if_needed(var/list/existing_bounds, var/list/new_bounds)

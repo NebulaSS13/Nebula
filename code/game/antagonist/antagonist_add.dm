@@ -8,7 +8,7 @@
 		if(istext(base))
 			base = SSmapping.get_template(base)
 		if(!istype(base))
-			log_warning("Map template '[base]' could not be found, skipping load for [name].")
+			PRINT_STACK_TRACE("Map template '[base]' could not be found for [name].")
 			return FALSE
 		if(base.loaded > 0)
 			report_progress("Map template '[base]' is already loaded, skipping additional load for [name].")
