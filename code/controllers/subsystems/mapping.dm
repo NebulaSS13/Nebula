@@ -4,16 +4,23 @@ SUBSYSTEM_DEF(mapping)
 	flags = SS_NO_FIRE
 
 	var/list/map_templates =             list()
-	var/list/space_ruins_templates =     list()
-	var/list/exoplanet_ruins_templates = list()
-	var/list/away_sites_templates =      list()
 	var/list/submaps =                   list()
 	var/list/compile_time_map_markers =  list()
+	var/list/map_templates_by_category = list()
 
 	var/decl/overmap_event_handler/overmap_event_handler
 
 /datum/controller/subsystem/mapping/Initialize(timeofday)
 
+	// Fetch and track all templates before doing anything that might need one.
+	preloadTemplates()
+
+	// Populate overmap.
+	if(length(global.using_map.overmap_ids))
+		for(var/overmap_id in global.using_map.overmap_ids)
+			var/overmap_type = global.using_map.overmap_ids[overmap_id] || /datum/overmap
+			new overmap_type(overmap_id)
+	// This needs to be non-null even if the overmap isn't created for this map.
 	overmap_event_handler = GET_DECL(/decl/overmap_event_handler)
 
 	// Load templates and build away sites.
@@ -21,16 +28,14 @@ SUBSYSTEM_DEF(mapping)
 		compile_time_map_markers -= marker
 		marker.load_template()
 
-	preloadTemplates()
 	global.using_map.build_away_sites()
+
 	. = ..()
 
 /datum/controller/subsystem/mapping/Recover()
 	flags |= SS_NO_INIT
 	map_templates = SSmapping.map_templates
-	space_ruins_templates = SSmapping.space_ruins_templates
-	exoplanet_ruins_templates = SSmapping.exoplanet_ruins_templates
-	away_sites_templates = SSmapping.away_sites_templates
+	map_templates_by_category = SSmapping.map_templates_by_category
 
 /datum/controller/subsystem/mapping/proc/preloadTemplates(path = "maps/templates/") //see master controller setup
 	var/list/filelist = flist(path)
@@ -63,12 +68,14 @@ SUBSYSTEM_DEF(mapping)
 
 	for(var/item in sortTim(subtypesof(/datum/map_template), /proc/cmp_ruincost_priority))
 		var/datum/map_template/MT = includeTemplate(item, banned_maps)
-		if(!MT)
+		if(!MT || !length(MT.template_categories))
 			continue
-		// This is nasty..
-		if(istype(MT, /datum/map_template/ruin/exoplanet))
-			exoplanet_ruins_templates[MT.name] = MT
-		else if(istype(MT, /datum/map_template/ruin/space))
-			space_ruins_templates[MT.name] = MT
-		else if(istype(MT, /datum/map_template/ruin/away_site))
-			away_sites_templates[MT.name] = MT
+		for(var/temple_cat in MT.template_categories) // :3
+			LAZYINITLIST(map_templates_by_category[temple_cat])
+			LAZYSET(map_templates_by_category[temple_cat], MT.name, MT)
+
+/datum/controller/subsystem/mapping/proc/get_templates_by_category(var/temple_cat) // :33
+	return map_templates_by_category[temple_cat]
+
+/datum/controller/subsystem/mapping/proc/get_template_by_type(var/template_type)
+	return new template_type // todo: find in cache and return preloaded template

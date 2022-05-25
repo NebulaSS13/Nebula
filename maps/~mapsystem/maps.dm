@@ -191,8 +191,6 @@ var/global/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 	if(default_spawn && !(default_spawn in allowed_spawns))
 		PRINT_STACK_TRACE("Map datum [type] has default spawn point [default_spawn] not in the allowed spawn list.")
 
-	create_overmaps()
-
 	for(var/spawn_type in allowed_spawns)
 		allowed_spawns -= spawn_type
 		allowed_spawns += GET_DECL(spawn_type)
@@ -225,8 +223,9 @@ var/global/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 #else
 	report_progress("Loading away sites...")
 	var/list/sites_by_spawn_weight = list()
-	for (var/site_name in SSmapping.away_sites_templates)
-		var/datum/map_template/ruin/away_site/site = SSmapping.away_sites_templates[site_name]
+	var/list/away_sites_templates = SSmapping.get_templates_by_category(MAP_TEMPLATE_CATEGORY_AWAYSITE)
+	for (var/site_name in away_sites_templates)
+		var/datum/map_template/ruin/away_site/site = away_sites_templates[site_name]
 
 		if((site.template_flags & TEMPLATE_FLAG_SPAWN_GUARANTEED) && site.load_new_z()) // no check for budget, but guaranteed means guaranteed
 			report_progress("Loaded guaranteed away site [site]!")
@@ -421,11 +420,6 @@ var/global/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 		pass.set_info(H)
 	if(!H.equip_to_slot(pass, slot_in_backpack_str))
 		H.put_in_hands(pass)
-
-/datum/map/proc/create_overmaps()
-	for(var/overmap_id in overmap_ids)
-		var/overmap_type = overmap_ids[overmap_id] || /datum/overmap
-		new overmap_type(overmap_id)
 
 /datum/map/proc/populate_overmap_events()
 	for(var/overmap_id in global.overmaps_by_name)

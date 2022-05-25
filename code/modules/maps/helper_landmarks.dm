@@ -7,12 +7,13 @@
 	. = LAZYLEN(templates) && pick(templates)
 
 /obj/abstract/landmark/map_load_mark/proc/load_template()
-	var/template = get_template()
+	var/datum/map_template/template = get_template()
 	var/turf/spawn_loc = get_turf(src)
 	qdel(src)
 	if(ispath(template, /datum/map_template) && istype(spawn_loc))
-		var/datum/map_template/M = new template
-		M.load(spawn_loc, TRUE)
+		template = SSmapping.get_template_by_type(template)
+		if(template)
+			template.load(spawn_loc, TRUE)
 
 INITIALIZE_IMMEDIATE(/obj/abstract/landmark/map_load_mark/non_template)
 /obj/abstract/landmark/map_load_mark/non_template

@@ -1,9 +1,10 @@
 // Hey! Listen! Update \config\away_site_blacklist.txt with your new ruins!
 
 /datum/map_template/ruin/away_site
+	prefix = "maps/away/"
+	template_categories = list(MAP_TEMPLATE_CATEGORY_AWAYSITE)
 	var/spawn_weight = 1
 	var/list/generate_mining_by_z
-	prefix = "maps/away/"
 
 /datum/map_template/ruin/away_site/after_load(z)
 	if(islist(generate_mining_by_z))

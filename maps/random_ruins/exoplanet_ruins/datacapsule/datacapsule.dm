@@ -64,7 +64,11 @@
 		
 /obj/abstract/landmark/map_load_mark/ejected_datapod
 	name = "random datapod contents"
-	templates = list(/datum/map_template/ejected_datapod_contents, /datum/map_template/ejected_datapod_contents/type2, /datum/map_template/ejected_datapod_contents/type3)
+	templates = list(
+		/datum/map_template/ejected_datapod_contents, 
+		/datum/map_template/ejected_datapod_contents/type2, 
+		/datum/map_template/ejected_datapod_contents/type3
+	)
 
 /datum/map_template/ejected_datapod_contents
 	name = "random datapod contents #1 (chem vials)"
