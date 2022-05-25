@@ -15,7 +15,7 @@
 	id_type = /obj/item/card/id/syndicate
 
 	faction = "ninja"
-	base_to_load = /datum/map_template/ruin/antag_spawn/ninja
+	base_to_load = "Ninja Base"
 
 	default_outfit = /decl/hierarchy/outfit/ninja
 	id_title = "Infiltrator"

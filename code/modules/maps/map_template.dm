@@ -14,15 +14,12 @@
 	var/modify_tag_vars = TRUE // Will modify tag vars so that duplicate templates are handled properly. May have compatibility issues with legacy maps (esp. with ferry shuttles).
 	var/list/template_categories // List of strings to store the templates under for mass retrieval.
 
-/datum/map_template/New(var/list/paths = null, var/rename = null)
-	if(paths && !islist(paths))
-		PRINT_STACK_TRACE("Non-list paths passed into map template constructor.")
-	if(paths)
-		mappaths = paths
-	if(mappaths)
-		preload_size(mappaths)
-	if(rename)
-		name = rename
+/datum/map_template/proc/get_placement_cost()
+	return 0
+
+/datum/map_template/New()
+	if(length(mappaths))
+		preload_size()
 	if(!name && id)
 		name = id
 

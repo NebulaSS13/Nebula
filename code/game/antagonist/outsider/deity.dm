@@ -12,4 +12,4 @@
 	initial_spawn_req = 1
 	initial_spawn_target = 1
 
-	base_to_load = /datum/map_template/ruin/antag_spawn/deity
+	base_to_load = "Deity Base"

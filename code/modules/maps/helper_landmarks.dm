@@ -1,18 +1,19 @@
 //Load a random map template from the list. Maploader handles it to avoid order of init madness
 /obj/abstract/landmark/map_load_mark
 	name = "map loader landmark"
-	var/list/templates	//list of template types to pick from
+	var/list/map_template_names	//list of template types to pick from
 
 /obj/abstract/landmark/map_load_mark/proc/get_template()
-	. = LAZYLEN(templates) && pick(templates)
+	. = LAZYLEN(map_template_names) && pick(map_template_names)
 
 /obj/abstract/landmark/map_load_mark/proc/load_template()
 	var/datum/map_template/template = get_template()
 	var/turf/spawn_loc = get_turf(src)
 	qdel(src)
-	if(ispath(template, /datum/map_template) && istype(spawn_loc))
-		template = SSmapping.get_template_by_type(template)
-		if(template)
+	if(istype(spawn_loc))
+		if(istext(template))
+			template = SSmapping.get_template(template)
+		if(istype(template))
 			template.load(spawn_loc, TRUE)
 
 INITIALIZE_IMMEDIATE(/obj/abstract/landmark/map_load_mark/non_template)

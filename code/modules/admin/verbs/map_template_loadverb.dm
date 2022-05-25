@@ -9,7 +9,7 @@
 	if(!map)
 		return
 
-	var/datum/map_template/template = SSmapping.map_templates[map]
+	var/datum/map_template/template = SSmapping.get_template(map)
 
 	var/turf/T = get_turf(usr)
 	if(!T)
@@ -41,7 +41,7 @@
 	if(!map)
 		return
 
-	var/datum/map_template/template = SSmapping.map_templates[map]
+	var/datum/map_template/template = SSmapping.get_template(map)
 
 	if(template.loaded && !(template.template_flags & TEMPLATE_FLAG_ALLOW_DUPLICATES))
 		to_chat(usr, SPAN_WARNING("That template has already been loaded and is flagged against being loaded again."))

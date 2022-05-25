@@ -7,13 +7,31 @@ SUBSYSTEM_DEF(mapping)
 	var/list/submaps =                   list()
 	var/list/compile_time_map_markers =  list()
 	var/list/map_templates_by_category = list()
+	var/list/map_templates_by_type =     list()
+
+	// Listing .dmm filenames in the file at this location will blacklist any templates that include them from being used.
+	// Maps must be the full file path to be properly included. ex. "maps/random_ruins/away_sites/example.dmm"
+	var/banned_dmm_location = "config/banned_map_paths.json"
 
 	var/decl/overmap_event_handler/overmap_event_handler
 
 /datum/controller/subsystem/mapping/Initialize(timeofday)
 
 	// Fetch and track all templates before doing anything that might need one.
-	preloadTemplates()
+	// Generate templates based on subtypes with id.
+	var/list/banned_maps
+	if(banned_dmm_location && fexists(banned_dmm_location))
+		banned_maps = cached_json_decode(safe_file2text(banned_dmm_location))
+
+	for(var/datum/map_template/MT as anything in get_all_template_instances())
+		if(!validate_map_template(MT, banned_maps))
+			continue
+		map_templates[MT.name] = MT
+		if(!length(MT.template_categories))
+			continue
+		for(var/temple_cat in MT.template_categories) // :3
+			LAZYINITLIST(map_templates_by_category[temple_cat])
+			LAZYSET(map_templates_by_category[temple_cat], MT.name, MT)
 
 	// Populate overmap.
 	if(length(global.using_map.overmap_ids))
@@ -34,45 +52,26 @@ SUBSYSTEM_DEF(mapping)
 
 /datum/controller/subsystem/mapping/Recover()
 	flags |= SS_NO_INIT
-	map_templates = SSmapping.map_templates
+	map_templates =             SSmapping.map_templates
 	map_templates_by_category = SSmapping.map_templates_by_category
+	map_templates_by_type =     SSmapping.map_templates_by_type
 
-/datum/controller/subsystem/mapping/proc/preloadTemplates(path = "maps/templates/") //see master controller setup
-	var/list/filelist = flist(path)
-	for(var/map in filelist)
-		var/datum/map_template/T = new(paths = "[path][map]", rename = "[map]")
-		map_templates[T.name] = T
-	preloadBlacklistableTemplates()
-
-/datum/controller/subsystem/mapping/proc/includeTemplate(var/datum/map_template/map_template, var/list/banned_maps)
-	if(!initial(map_template.id))
-		return
-	var/datum/map_template/MT = new map_template()
-	if(banned_maps)
+/datum/controller/subsystem/mapping/proc/validate_map_template(var/datum/map_template/map_template, var/list/banned_maps)
+	if(length(banned_maps) && length(map_template.mappaths))
 		for(var/mappath in MT.mappaths)
-			if(banned_maps.Find(mappath))
-				return
-	map_templates[MT.name] = MT
-	. = MT
+			if(mappath in banned_maps)
+				return FALSE
+	return TRUE
+	
+/datum/controller/subsystem/mapping/proc/get_all_template_instances()
+	. = list()
+	for(var/template_type in subtypesof(/datum/map_template))
+		var/datum/map_template/template = template_type
+		if(initial(template.id))
+			. += new template_type
 
-/datum/controller/subsystem/mapping/proc/preloadBlacklistableTemplates()
-	// Still supporting bans by filename
-	var/list/banned_exoplanet_dmms = generateMapList("config/exoplanet_ruin_blacklist.txt")
-	var/list/banned_space_dmms = generateMapList("config/space_ruin_blacklist.txt")
-	var/list/banned_away_site_dmms = generateMapList("config/away_site_blacklist.txt")
-
-	if (!banned_exoplanet_dmms || !banned_space_dmms || !banned_away_site_dmms)
-		report_progress("One or more map blacklist files are not present in the config directory!")
-
-	var/list/banned_maps = list() + banned_exoplanet_dmms + banned_space_dmms + banned_away_site_dmms
-
-	for(var/item in sortTim(subtypesof(/datum/map_template), /proc/cmp_ruincost_priority))
-		var/datum/map_template/MT = includeTemplate(item, banned_maps)
-		if(!MT || !length(MT.template_categories))
-			continue
-		for(var/temple_cat in MT.template_categories) // :3
-			LAZYINITLIST(map_templates_by_category[temple_cat])
-			LAZYSET(map_templates_by_category[temple_cat], MT.name, MT)
+/datum/controller/subsystem/mapping/proc/get_template(var/template_name)
+	return map_templates[template_name]
 
 /datum/controller/subsystem/mapping/proc/get_templates_by_category(var/temple_cat) // :33
 	return map_templates_by_category[temple_cat]
