@@ -3417,6 +3417,7 @@
 #include "code\unit_tests\security_state.dm"
 #include "code\unit_tests\seed_tests.dm"
 #include "code\unit_tests\shuttle_tests.dm"
+#include "code\unit_tests\special_roles.dm"
 #include "code\unit_tests\submaps.dm"
 #include "code\unit_tests\subsystem_tests.dm"
 #include "code\unit_tests\surgery.dm"
