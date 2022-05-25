@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <base href="../" />
+    <link rel="stylesheet" href="dmdoc.css" />
+    <title>&#x2F;datum&#x2F;progress_bar - Space Station 13 - Nebula13</title>
+</head>
+<body>
+<header>
+    <a href="index.html">Space Station 13 - Nebula13</a> -
+    <a href="index.html#modules">Modules</a> -
+    <a href="index.html#types">Types</a>
+ &mdash; <a href="datum/progress_bar.html#var">Var Details</a> - <a href="datum/progress_bar.html#proc">Proc Details</a></header>
+<main>
+<h1>progress_bar <aside>/<a href="datum.html">datum</a>/<a href="datum/progress_bar.html">progress_bar</a></aside>
+        
+    
+            <a href="https://github.com/NebulaSS13/Nebula/blob/e9e7a12f363936a0e496da1edcdb9564f96bd3f3/code/datums/progress_bar.dm#L1">
+        <img src="git.png" width="16" height="16" title="code&#x2F;datums&#x2F;progress_bar.dm 1"/></a></h1>
+
+<table class="summary" cellspacing="0"><tr><td colspan="2"><h2>Vars</h2></td></tr>
+            <tr><th><a href="datum/progress_bar.html#var/animation_time_appear">animation_time_appear</a></th><td>The total time that determines the speed for appear animation.</td></tr>
+            <tr><th><a href="datum/progress_bar.html#var/animation_time_fade">animation_time_fade</a></th><td>The total time that determines the speed for fade animation.</td></tr>
+            <tr><th><a href="datum/progress_bar.html#var/animation_time_shift">animation_time_shift</a></th><td>The total time that determines the speed for shift down animation.</td></tr>
+            <tr><th><a href="datum/progress_bar.html#var/backdrop">backdrop</a></th><td>The backdrop visual element. Contains the fill and mask as overlays.</td></tr>
+            <tr><th><a href="datum/progress_bar.html#var/client">client</a></th><td>The client currently owning the progress bar for display.</td></tr>
+            <tr><th><a href="datum/progress_bar.html#var/fill">fill</a></th><td>The fill visual element.</td></tr>
+            <tr><th><a href="datum/progress_bar.html#var/fill_width">fill_width</a></th><td>The width in pixels of the theme's fill sprite.</td></tr>
+            <tr><th><a href="datum/progress_bar.html#var/goal">goal</a></th><td>The goal value to reach. When <a href="datum/progress_bar.html#proc/update" title="/datum/progress_bar">/datum/progress_bar/proc/update</a> is called, a fraction is calculated with the goal.</td></tr>
+            <tr><th><a href="datum/progress_bar.html#var/height">height</a></th><td>The total height in pixels of the theme's progress bar.</td></tr>
+            <tr><th><a href="datum/progress_bar.html#var/holder">holder</a></th><td>The main visual element holding everything up.</td></tr>
+            <tr><th><a href="datum/progress_bar.html#var/icon">icon</a></th><td>The icon file to use for the visual element.</td></tr>
+            <tr><th><a href="datum/progress_bar.html#var/last_progress">last_progress</a></th><td>Stored progress number for the goal fail effect.</td></tr>
+            <tr><th><a href="datum/progress_bar.html#var/list_index">list_index</a></th><td>The bar's index number within the owning mob's active progress bar list.</td></tr>
+            <tr><th><a href="datum/progress_bar.html#var/stopping">stopping</a></th><td>Whether the bar is stopping.</td></tr>
+            <tr><th><a href="datum/progress_bar.html#var/target">target</a></th><td>The target to display the progress bar on.</td></tr>
+            <tr><th><a href="datum/progress_bar.html#var/user">user</a></th><td>The mob currently owning the progress bar, used to calculate the bar's vertical position.</td></tr><tr><td colspan="2"><h2>Procs</h2></td></tr>
+            <tr><th><a href="datum/progress_bar.html#proc/init_images">init_images</a></th><td>Initializes the visual elements.</td></tr>
+            <tr><th><a href="datum/progress_bar.html#proc/shift">shift</a></th><td>Shifts the progress bar down.</td></tr>
+            <tr><th><a href="datum/progress_bar.html#proc/shift_down_all">shift_down_all</a></th><td>Calls the shift animation on all attached bars.</td></tr>
+            <tr><th><a href="datum/progress_bar.html#proc/stop">stop</a></th><td>Stops the progress bar and destoy it after a bit.</td></tr>
+            <tr><th><a href="datum/progress_bar.html#proc/update">update</a></th><td>Call periodically to update the progress bar's progress.</td></tr>
+            <tr><th><a href="datum/progress_bar.html#proc/update_fill">update_fill</a></th><td>Updates the fill. Do your visual changes here.</td></tr></table>
+    <h2 id="var">Var Details</h2><h3 id="var/animation_time_appear"><aside class="declaration">var </aside>animation_time_appear
+            <aside>&ndash; </aside>
+        
+    
+            <a href="https://github.com/NebulaSS13/Nebula/blob/e9e7a12f363936a0e496da1edcdb9564f96bd3f3/code/datums/progress_bar.dm#L13">
+        <img src="git.png" width="16" height="16" title="code&#x2F;datums&#x2F;progress_bar.dm 13"/></a></h3>
+        <p>The total time that determines the speed for appear animation.</p><h3 id="var/animation_time_fade"><aside class="declaration">var </aside>animation_time_fade
+            <aside>&ndash; </aside>
+        
+    
+            <a href="https://github.com/NebulaSS13/Nebula/blob/e9e7a12f363936a0e496da1edcdb9564f96bd3f3/code/datums/progress_bar.dm#L15">
+        <img src="git.png" width="16" height="16" title="code&#x2F;datums&#x2F;progress_bar.dm 15"/></a></h3>
+        <p>The total time that determines the speed for fade animation.</p><h3 id="var/animation_time_shift"><aside class="declaration">var </aside>animation_time_shift
+            <aside>&ndash; </aside>
+        
+    
+            <a href="https://github.com/NebulaSS13/Nebula/blob/e9e7a12f363936a0e496da1edcdb9564f96bd3f3/code/datums/progress_bar.dm#L17">
+        <img src="git.png" width="16" height="16" title="code&#x2F;datums&#x2F;progress_bar.dm 17"/></a></h3>
+        <p>The total time that determines the speed for shift down animation.</p><h3 id="var/backdrop"><aside class="declaration">var </aside>backdrop
+            <aside>&ndash; /image</aside>
+        
+    
+            <a href="https://github.com/NebulaSS13/Nebula/blob/e9e7a12f363936a0e496da1edcdb9564f96bd3f3/code/datums/progress_bar.dm#L25">
+        <img src="git.png" width="16" height="16" title="code&#x2F;datums&#x2F;progress_bar.dm 25"/></a></h3>
+        <p>The backdrop visual element. Contains the fill and mask as overlays.</p><h3 id="var/client"><aside class="declaration">var </aside>client
+            <aside>&ndash; /<a href="client.html">client</a></aside>
+        
+    
+            <a href="https://github.com/NebulaSS13/Nebula/blob/e9e7a12f363936a0e496da1edcdb9564f96bd3f3/code/datums/progress_bar.dm#L31">
+        <img src="git.png" width="16" height="16" title="code&#x2F;datums&#x2F;progress_bar.dm 31"/></a></h3>
+        <p>The client currently owning the progress bar for display.</p><h3 id="var/fill"><aside class="declaration">var </aside>fill
+            <aside>&ndash; /image</aside>
+        
+    
+            <a href="https://github.com/NebulaSS13/Nebula/blob/e9e7a12f363936a0e496da1edcdb9564f96bd3f3/code/datums/progress_bar.dm#L27">
+        <img src="git.png" width="16" height="16" title="code&#x2F;datums&#x2F;progress_bar.dm 27"/></a></h3>
+        <p>The fill visual element.</p><h3 id="var/fill_width"><aside class="declaration">var </aside>fill_width
+            <aside>&ndash; </aside>
+        
+    
+            <a href="https://github.com/NebulaSS13/Nebula/blob/e9e7a12f363936a0e496da1edcdb9564f96bd3f3/code/datums/progress_bar.dm#L11">
+        <img src="git.png" width="16" height="16" title="code&#x2F;datums&#x2F;progress_bar.dm 11"/></a></h3>
+        <p>The width in pixels of the theme's fill sprite.</p><h3 id="var/goal"><aside class="declaration">var </aside>goal
+            <aside>&ndash; </aside>
+        
+    
+            <a href="https://github.com/NebulaSS13/Nebula/blob/e9e7a12f363936a0e496da1edcdb9564f96bd3f3/code/datums/progress_bar.dm#L5">
+        <img src="git.png" width="16" height="16" title="code&#x2F;datums&#x2F;progress_bar.dm 5"/></a></h3>
+        <p>The goal value to reach. When <a href="datum/progress_bar.html#proc/update" title="/datum/progress_bar">/datum/progress_bar/proc/update</a> is called, a fraction is calculated with the goal.</p><h3 id="var/height"><aside class="declaration">var </aside>height
+            <aside>&ndash; </aside>
+        
+    
+            <a href="https://github.com/NebulaSS13/Nebula/blob/e9e7a12f363936a0e496da1edcdb9564f96bd3f3/code/datums/progress_bar.dm#L9">
+        <img src="git.png" width="16" height="16" title="code&#x2F;datums&#x2F;progress_bar.dm 9"/></a></h3>
+        <p>The total height in pixels of the theme's progress bar.</p><h3 id="var/holder"><aside class="declaration">var </aside>holder
+            <aside>&ndash; /image</aside>
+        
+    
+            <a href="https://github.com/NebulaSS13/Nebula/blob/e9e7a12f363936a0e496da1edcdb9564f96bd3f3/code/datums/progress_bar.dm#L23">
+        <img src="git.png" width="16" height="16" title="code&#x2F;datums&#x2F;progress_bar.dm 23"/></a></h3>
+        <p>The main visual element holding everything up.</p><h3 id="var/icon"><aside class="declaration">var </aside>icon
+            <aside>&ndash; </aside>
+        
+    
+            <a href="https://github.com/NebulaSS13/Nebula/blob/e9e7a12f363936a0e496da1edcdb9564f96bd3f3/code/datums/progress_bar.dm#L7">
+        <img src="git.png" width="16" height="16" title="code&#x2F;datums&#x2F;progress_bar.dm 7"/></a></h3>
+        <p>The icon file to use for the visual element.</p><h3 id="var/last_progress"><aside class="declaration">var </aside>last_progress
+            <aside>&ndash; </aside>
+        
+    
+            <a href="https://github.com/NebulaSS13/Nebula/blob/e9e7a12f363936a0e496da1edcdb9564f96bd3f3/code/datums/progress_bar.dm#L37">
+        <img src="git.png" width="16" height="16" title="code&#x2F;datums&#x2F;progress_bar.dm 37"/></a></h3>
+        <p>Stored progress number for the goal fail effect.</p><h3 id="var/list_index"><aside class="declaration">var </aside>list_index
+            <aside>&ndash; </aside>
+        
+    
+            <a href="https://github.com/NebulaSS13/Nebula/blob/e9e7a12f363936a0e496da1edcdb9564f96bd3f3/code/datums/progress_bar.dm#L33">
+        <img src="git.png" width="16" height="16" title="code&#x2F;datums&#x2F;progress_bar.dm 33"/></a></h3>
+        <p>The bar's index number within the owning mob's active progress bar list.</p><h3 id="var/stopping"><aside class="declaration">var </aside>stopping
+            <aside>&ndash; </aside>
+        
+    
+            <a href="https://github.com/NebulaSS13/Nebula/blob/e9e7a12f363936a0e496da1edcdb9564f96bd3f3/code/datums/progress_bar.dm#L35">
+        <img src="git.png" width="16" height="16" title="code&#x2F;datums&#x2F;progress_bar.dm 35"/></a></h3>
+        <p>Whether the bar is stopping.</p><h3 id="var/target"><aside class="declaration">var </aside>target
+            <aside>&ndash; /<a href="atom.html">atom</a></aside>
+        
+    
+            <a href="https://github.com/NebulaSS13/Nebula/blob/e9e7a12f363936a0e496da1edcdb9564f96bd3f3/code/datums/progress_bar.dm#L21">
+        <img src="git.png" width="16" height="16" title="code&#x2F;datums&#x2F;progress_bar.dm 21"/></a></h3>
+        <p>The target to display the progress bar on.</p><h3 id="var/user"><aside class="declaration">var </aside>user
+            <aside>&ndash; /<a href="mob.html">mob</a></aside>
+        
+    
+            <a href="https://github.com/NebulaSS13/Nebula/blob/e9e7a12f363936a0e496da1edcdb9564f96bd3f3/code/datums/progress_bar.dm#L29">
+        <img src="git.png" width="16" height="16" title="code&#x2F;datums&#x2F;progress_bar.dm 29"/></a></h3>
+        <p>The mob currently owning the progress bar, used to calculate the bar's vertical position.</p><h2 id="proc">Proc Details</h2><h3 id="proc/init_images"><aside class="declaration">proc </aside>init_images<aside>(target) 
+        
+    
+            <a href="https://github.com/NebulaSS13/Nebula/blob/e9e7a12f363936a0e496da1edcdb9564f96bd3f3/code/datums/progress_bar.dm#L105">
+        <img src="git.png" width="16" height="16" title="code&#x2F;datums&#x2F;progress_bar.dm 105"/></a></aside>
+        </h3>
+        <p>Initializes the visual elements.</p>
+<p>Arguments:</p>
+<ul>
+<li>target - The atom to parent the images to.</li>
+</ul><h3 id="proc/shift"><aside class="declaration">proc </aside>shift<aside>() 
+        
+    
+            <a href="https://github.com/NebulaSS13/Nebula/blob/e9e7a12f363936a0e496da1edcdb9564f96bd3f3/code/datums/progress_bar.dm#L155">
+        <img src="git.png" width="16" height="16" title="code&#x2F;datums&#x2F;progress_bar.dm 155"/></a></aside>
+        </h3>
+        <p>Shifts the progress bar down.</p><h3 id="proc/shift_down_all"><aside class="declaration">proc </aside>shift_down_all<aside>() 
+        
+    
+            <a href="https://github.com/NebulaSS13/Nebula/blob/e9e7a12f363936a0e496da1edcdb9564f96bd3f3/code/datums/progress_bar.dm#L92">
+        <img src="git.png" width="16" height="16" title="code&#x2F;datums&#x2F;progress_bar.dm 92"/></a></aside>
+        </h3>
+        <p>Calls the shift animation on all attached bars.</p><h3 id="proc/stop"><aside class="declaration">proc </aside>stop<aside>() 
+        
+    
+            <a href="https://github.com/NebulaSS13/Nebula/blob/e9e7a12f363936a0e496da1edcdb9564f96bd3f3/code/datums/progress_bar.dm#L76">
+        <img src="git.png" width="16" height="16" title="code&#x2F;datums&#x2F;progress_bar.dm 76"/></a></aside>
+        </h3>
+        <p>Stops the progress bar and destoy it after a bit.</p><h3 id="proc/update"><aside class="declaration">proc </aside>update<aside>(progress) 
+        
+    
+            <a href="https://github.com/NebulaSS13/Nebula/blob/e9e7a12f363936a0e496da1edcdb9564f96bd3f3/code/datums/progress_bar.dm#L125">
+        <img src="git.png" width="16" height="16" title="code&#x2F;datums&#x2F;progress_bar.dm 125"/></a></aside>
+        </h3>
+        <p>Call periodically to update the progress bar's progress.</p>
+<p>Arguments:</p>
+<ul>
+<li>progress - The new value, divided with the given goal on creation to calculate the fraction.</li>
+</ul><h3 id="proc/update_fill"><aside class="declaration">proc </aside>update_fill<aside>(fraction) 
+        
+    
+            <a href="https://github.com/NebulaSS13/Nebula/blob/e9e7a12f363936a0e496da1edcdb9564f96bd3f3/code/datums/progress_bar.dm#L149">
+        <img src="git.png" width="16" height="16" title="code&#x2F;datums&#x2F;progress_bar.dm 149"/></a></aside>
+        </h3>
+        <p>Updates the fill. Do your visual changes here.</p>
+<p>Arguments:</p>
+<ul>
+<li>fraction - The new (value / goal) fraction.</li>
+</ul></main>
+<footer>
+    nebula.dme
+    <a href="https://github.com/NebulaSS13/Nebula/tree/e9e7a12f363936a0e496da1edcdb9564f96bd3f3">e9e7a12</a>
+        (dev) &mdash; <a href="https://github.com/SpaceManiac/SpacemanDMM/blob/master/src/dmdoc/README.md">dmdoc 1.4.1</a></footer>
+</body>
+</html>
