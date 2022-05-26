@@ -1,5 +1,0 @@
-author: quardbreak
-delete-after: true
-changes:
-  - rscadd: Progress bars use gradient function for transit animation now.
-  - rscdel: Failure animation for progress bars has been removed.
