@@ -34,40 +34,40 @@
 
 	species_to_job_whitelist = list(
 		/decl/species/adherent = list(
-			/datum/job/computer, 
-			/datum/job/robot, 
-			/datum/job/assistant, 
-			/datum/job/janitor, 
-			/datum/job/chef, 
-			/datum/job/bartender, 
+			/datum/job/computer,
+			/datum/job/robot,
+			/datum/job/assistant,
+			/datum/job/janitor,
+			/datum/job/chef,
+			/datum/job/bartender,
 			/datum/job/cargo_tech,
-			/datum/job/engineer, 
-			/datum/job/roboticist, 
+			/datum/job/engineer,
+			/datum/job/roboticist,
 			/datum/job/chemist,
-			/datum/job/scientist, 
+			/datum/job/scientist,
 			/datum/job/mining
 		),
 		/decl/species/utility_frame = list(
-			/datum/job/computer, 
-			/datum/job/robot, 
-			/datum/job/assistant, 
-			/datum/job/janitor, 
-			/datum/job/chef, 
-			/datum/job/bartender, 
+			/datum/job/computer,
+			/datum/job/robot,
+			/datum/job/assistant,
+			/datum/job/janitor,
+			/datum/job/chef,
+			/datum/job/bartender,
 			/datum/job/cargo_tech,
-			/datum/job/engineer, 
-			/datum/job/roboticist, 
+			/datum/job/engineer,
+			/datum/job/roboticist,
 			/datum/job/chemist,
-			/datum/job/scientist, 
+			/datum/job/scientist,
 			/datum/job/mining
 		),
 		/decl/species/serpentid = list(
-			/datum/job/computer, 
-			/datum/job/robot, 
-			/datum/job/assistant, 
-			/datum/job/janitor, 
-			/datum/job/chef, 
-			/datum/job/bartender, 
+			/datum/job/computer,
+			/datum/job/robot,
+			/datum/job/assistant,
+			/datum/job/janitor,
+			/datum/job/chef,
+			/datum/job/bartender,
 			/datum/job/cargo_tech,
 			/datum/job/roboticist,
 			/datum/job/chemist
@@ -76,7 +76,7 @@
 
 #define HUMAN_ONLY_JOBS /datum/job/captain, /datum/job/hop, /datum/job/hos
 	species_to_job_blacklist = list(
-		/decl/species/lizard = list(
+		/decl/species/unathi = list(
 			HUMAN_ONLY_JOBS
 		),
 		/decl/species/tajaran = list(
