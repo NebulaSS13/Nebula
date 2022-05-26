@@ -98,6 +98,12 @@
 	if(update_icon)
 		mannequin.update_icon()
 
+/// Updates character mannequin without rebuilding the inventory or overlays of the mannequin.
+/datum/preferences/proc/refresh_character_preview()
+	var/mob/living/carbon/human/dummy/mannequin/mannequin = get_mannequin(client_ckey)
+	if(mannequin)
+		update_character_preview_mannequin(new /mutable_appearance(mannequin))
+
 /// Updates character preview map.
 /// If you don't need to update renders, use [/datum/preferences/proc/update_character_preview_background].
 /datum/preferences/proc/update_character_preview_map()

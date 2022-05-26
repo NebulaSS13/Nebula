@@ -55,6 +55,8 @@ var/global/const/CHARACTER_PREFERENCE_INPUT_TITLE = "Character Preference"
 	sort_order = 10
 	category_item_type = /datum/category_item/player_setup_item/player_global
 
+/datum/category_group/player_setup_category/global_preferences/selected(var/datum/preferences/prefs)
+	prefs.update_pai_preview()
 
 /****************************
 * Category Collection Setup *
@@ -115,9 +117,10 @@ var/global/const/CHARACTER_PREFERENCE_INPUT_TITLE = "Character Preference"
 		return 1
 
 	if(href_list["category"])
-		var/category = locate(href_list["category"])
-		if(category && (category in categories))
+		var/datum/category_group/player_setup_category/category = locate(href_list["category"])
+		if(istype(category) && (category in categories))
 			selected_category = category
+			category.selected(user.client.prefs)
 		. = 1
 
 	if(.)
@@ -126,6 +129,9 @@ var/global/const/CHARACTER_PREFERENCE_INPUT_TITLE = "Character Preference"
 /**************************
 * Category Category Setup *
 **************************/
+/datum/category_group/player_setup_category/proc/selected(var/datum/preferences/prefs)
+	prefs.refresh_character_preview()
+
 /datum/category_group/player_setup_category/proc/sanitize_setup()
 	for(var/datum/category_item/player_setup_item/PI in items)
 		PI.sanitize_preferences()

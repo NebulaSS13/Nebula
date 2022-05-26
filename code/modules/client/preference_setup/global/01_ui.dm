@@ -12,7 +12,7 @@ var/global/list/valid_icon_sizes = list(32, 48, 64, 96, 128)
 	//Style for popup tooltips
 	var/tooltip_style = "Midnight"
 
-	var/list/background_options = list(
+	var/static/list/background_options = list(
 		"Void" = list(
 			"icon" = 'icons/turf/areas.dmi',
 			"icon_state" = "dark",

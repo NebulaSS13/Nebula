@@ -12,7 +12,7 @@
 		return
 
 	candidate.savefile_load(preference_mob())
-	update_pai_preview()
+	pref.update_pai_preview(candidate.chassis)
 
 /datum/category_item/player_setup_item/player_global/pai/save_preferences(datum/pref_record_writer/W)
 	if(!candidate)
@@ -27,7 +27,7 @@
 	if(!candidate)
 		candidate = new()
 
-	update_pai_preview()
+	pref.update_pai_preview(candidate.chassis)
 
 	. += "<b>pAI:</b><br>"
 	if(!candidate)
@@ -65,7 +65,7 @@
 				t = input(usr,"What would you like to use for your mobile chassis icon?") as null|anything in global.possible_chassis
 				if(!isnull(t) && CanUseTopic(user))
 					candidate.chassis = t
-				update_pai_preview()
+				pref.update_pai_preview(candidate.chassis)
 				. = TOPIC_HARD_REFRESH
 			if("say")
 				t = input(usr,"What theme would you like to use for your speech verbs?") as null|anything in global.possible_say_verbs
@@ -75,8 +75,8 @@
 
 	return ..()
 
-/datum/category_item/player_setup_item/player_global/pai/proc/update_pai_preview()
-	var/mutable_appearance/MA = mutable_appearance(global.possible_chassis[candidate.chassis], ICON_STATE_WORLD)
+/datum/preferences/proc/update_pai_preview(var/chassis)
+	var/mutable_appearance/MA = mutable_appearance(global.possible_chassis[chassis], ICON_STATE_WORLD)
 	MA.invisibility = 0 // Byond makes pAI icon with visibility = 0; this is the workaround
-	pref.update_character_preview_mannequin(MA)
-	pref.update_character_preview_background()
+	update_character_preview_mannequin(MA)
+	update_character_preview_background()
