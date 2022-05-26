@@ -56,6 +56,9 @@ Thus, the two variables affect pump operation are set in New():
 	construct_state = /decl/machine_construction/default/panel_closed/item_chassis
 	base_type = /obj/machinery/atmospherics/binary/pump/buildable
 
+/obj/machinery/atmospherics/binary/pump/get_alt_interactions(var/mob/user)
+	. = ..() | /decl/interaction_handler/binary_pump_toggle
+
 /obj/machinery/atmospherics/binary/pump/buildable
 	uncreated_component_parts = null
 
@@ -63,9 +66,6 @@ Thus, the two variables affect pump operation are set in New():
 	. = ..()
 	air1.volume = ATMOS_DEFAULT_VOLUME_PUMP
 	air2.volume = ATMOS_DEFAULT_VOLUME_PUMP
-
-/obj/machinery/atmospherics/binary/pump/AltClick()
-	Topic(src, list("power" = "1"))
 
 /obj/machinery/atmospherics/binary/pump/on
 	icon_state = "map_on"

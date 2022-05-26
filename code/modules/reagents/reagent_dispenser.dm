@@ -22,6 +22,9 @@
 		var/reagent_ratio = initial_reagent_types[reagent_type]
 		reagents.add_reagent(reagent_type, reagent_ratio * initial_capacity)
 
+/obj/structure/reagent_dispensers/get_alt_interactions(var/mob/user)
+	. = ..() | /decl/interaction_handler/set_transfer/reagent_dispenser
+
 /obj/structure/reagent_dispensers/is_pressurized_fluid_source()
 	return TRUE
 
@@ -98,12 +101,6 @@
 	. = ..()
 	if(. && (severity == 1) || (severity == 2 && prob(50)) || (severity == 3 && prob(5)))
 		physically_destroyed()
-
-/obj/structure/reagent_dispensers/AltClick(var/mob/user)
-	if(possible_transfer_amounts)
-		set_amount_per_transfer_from_this()
-	else
-		return ..()
 
 //Dispensers
 /obj/structure/reagent_dispensers/watertank

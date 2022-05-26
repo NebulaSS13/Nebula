@@ -24,6 +24,9 @@
 		clear_sample()
 	return ..()
 
+/obj/machinery/forensic/get_alt_interactions(var/mob/user)
+	. = ..() | /decl/interaction_handler/forensics_remove_sample
+
 /obj/machinery/forensic/proc/set_sample(var/obj/O)
 	if(O != sample && O)
 		clear_sample()
@@ -107,9 +110,6 @@
 	to_chat(remover, SPAN_NOTICE("You remove \the [sample] from \the [src]."))
 	remover.put_in_hands(sample)
 	clear_sample()
-
-/obj/machinery/forensic/AltClick()
-	remove_sample(usr)
 
 /obj/machinery/forensic/handle_mouse_drop(var/atom/over, var/mob/user)
 	if(user == over)

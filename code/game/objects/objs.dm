@@ -170,11 +170,6 @@
 /obj/proc/can_embed()
 	return is_sharp(src)
 
-/obj/AltClick(mob/user)
-	if(obj_flags & OBJ_FLAG_ROTATABLE)
-		rotate(user)
-	..()
-
 /obj/examine(mob/user)
 	. = ..()
 	if((obj_flags & OBJ_FLAG_ROTATABLE))

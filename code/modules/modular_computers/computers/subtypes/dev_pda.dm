@@ -21,16 +21,6 @@
 	computer_type = /datum/extension/assembly/modular_computer/pda
 	color = COLOR_GRAY80
 
-/obj/item/modular_computer/pda/AltClick(var/mob/user)
-	if(!CanPhysicallyInteract(user))
-		return
-	var/datum/extension/assembly/assembly = get_extension(src, /datum/extension/assembly)
-	var/obj/item/stock_parts/computer/card_slot/card_slot = assembly.get_component(PART_CARD)
-	if(card_slot && istype(card_slot.stored_card))
-		card_slot.eject_id(user)
-	else
-		..()
-
 /obj/item/modular_computer/pda/on_update_icon()
 	. = ..()
 	add_overlay(image(icon, "blank_screen"))
