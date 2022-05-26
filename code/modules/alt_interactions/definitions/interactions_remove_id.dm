@@ -8,8 +8,7 @@
 	. = ..()
 	if(.)
 		var/datum/extension/assembly/assembly = get_extension(src, /datum/extension/assembly)
-		var/obj/item/stock_parts/computer/card_slot/card_slot = assembly?.get_component(PART_CARD)
-		. =  card_slot
+		. = !!(assembly?.get_component(PART_CARD))
 
 /decl/interaction_handler/remove_id/modular_computer/invoked(atom/target, mob/user)
 	var/datum/extension/assembly/assembly = get_extension(target, /datum/extension/assembly)

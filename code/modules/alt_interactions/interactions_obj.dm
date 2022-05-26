@@ -1,5 +1,5 @@
 /obj/get_alt_interactions(var/mob/user)
-	. = list(/decl/interaction_handler/rotate)
+	. = ..() | /decl/interaction_handler/rotate
 	if(config.expanded_alt_interactions)
 		. += list(
 			/decl/interaction_handler/look,

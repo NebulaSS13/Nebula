@@ -1070,3 +1070,6 @@ default behaviour is:
 
 /mob/living/proc/apply_fall_damage(var/turf/landing)
 	adjustBruteLoss(rand(max(1, CEILING(mob_size * 0.33)), max(1, CEILING(mob_size * 0.66))))
+
+/mob/living/get_alt_interactions(mob/user)
+	. = ..() | /decl/interaction_handler/admin_kill

@@ -15,6 +15,8 @@
 
 /decl/interaction_handler/proc/is_possible(var/atom/target, var/mob/user)
 
+	SHOULD_CALL_PARENT(TRUE)
+
 	if(QDELETED(target) || QDELETED(user))
 		return FALSE
 
@@ -46,4 +48,5 @@
 	return TRUE
 
 /decl/interaction_handler/proc/invoked(var/atom/target, var/mob/user)
+	SHOULD_CALL_PARENT(FALSE)
 	PRINT_STACK_TRACE("Alt interaction handler called with no invoked logic defined: [type]")

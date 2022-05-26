@@ -1,6 +1,7 @@
 /atom/proc/get_alt_interactions(var/mob/user)
-	return
-	
+	SHOULD_CALL_PARENT(TRUE)
+	. = list()
+
 /atom/proc/try_handle_alt_interactions(var/mob/user)
 
 	var/list/interactions = get_alt_interactions(user)

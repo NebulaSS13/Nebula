@@ -8,7 +8,7 @@
 	. = ..()
 	if(.)
 		var/obj/machinery/design_database/D = target
-		. = D.disk
+		. = !!D.disk
 
 /decl/interaction_handler/remove_disk/designs/invoked(atom/target, mob/user)
 	var/obj/machinery/design_database/D = target
@@ -21,7 +21,7 @@
 	. = ..()
 	if(.)
 		var/obj/machinery/computer/design_console/D = target
-		. = D.disk
+		. = !!D.disk
 
 /decl/interaction_handler/remove_disk/console/invoked(atom/target, mob/user)
 	var/obj/machinery/computer/design_console/D = target

@@ -266,9 +266,6 @@
 	Unused except for AI
 */
 /mob/proc/AltClickOn(var/atom/A)
-	var/datum/extension/on_click/alt = get_extension(A, /datum/extension/on_click/alt)
-	if(alt && alt.on_click(src))
-		return
 	A.AltClick(src)
 
 /atom/proc/AltClick(var/mob/user)

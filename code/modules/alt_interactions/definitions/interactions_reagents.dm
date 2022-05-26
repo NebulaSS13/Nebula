@@ -8,7 +8,7 @@
 	. = ..()
 	if(.)
 		var/obj/structure/reagent_dispensers/R = target
-		return R.possible_transfer_amounts
+		return !!R.possible_transfer_amounts
 
 /decl/interaction_handler/set_transfer/reagent_dispenser/invoked(var/atom/target, var/mob/user)
 	var/obj/structure/reagent_dispensers/R = target
@@ -21,7 +21,7 @@
 	. = ..()
 	if(.)
 		var/obj/item/chems/C = target
-		return C.possible_transfer_amounts
+		return !!C.possible_transfer_amounts
 
 /decl/interaction_handler/set_transfer/chems/invoked(var/atom/target, var/mob/user)
 	var/obj/item/chems/C = target
