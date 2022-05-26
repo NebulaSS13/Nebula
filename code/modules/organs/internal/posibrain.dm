@@ -380,4 +380,5 @@
 //Since the mmi_holder is an horrible hacky pos we turn it into a mmi on drop, since it shouldn't exist outside a mob
 /obj/item/organ/internal/mmi_holder/dropInto(atom/destination)
 	. = ..()
-	transfer_and_delete()
+	if (!QDELETED(src))
+		transfer_and_delete()
