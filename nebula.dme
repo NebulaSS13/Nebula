@@ -1460,7 +1460,6 @@
 #include "code\modules\alarm\power_alarm.dm"
 #include "code\modules\alt_interactions\_interactions.dm"
 #include "code\modules\alt_interactions\interactions_atom.dm"
-#include "code\modules\alt_interactions\interactions_obj.dm"
 #include "code\modules\alt_interactions\definitions\interactions_effects.dm"
 #include "code\modules\alt_interactions\definitions\interactions_eject_disk.dm"
 #include "code\modules\alt_interactions\definitions\interactions_generic.dm"

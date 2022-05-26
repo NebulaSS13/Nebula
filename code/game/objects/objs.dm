@@ -204,3 +204,6 @@
 
 /obj/get_mob()
 	return buckled_mob
+
+/obj/get_alt_interactions(var/mob/user)
+	. = ..() | /decl/interaction_handler/rotate

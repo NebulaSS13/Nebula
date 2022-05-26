@@ -4,7 +4,6 @@
 	interaction_flags = INTERACTION_NEEDS_PHYSICAL_INTERACTION | INTERACTION_NEEDS_INVENTORY
 
 /decl/interaction_handler/paint_sprayer_colour/invoked(atom/target, mob/user)
-	. = ..()
 	var/obj/item/paint_sprayer/sprayer = target
 	sprayer.choose_preset_color()
 

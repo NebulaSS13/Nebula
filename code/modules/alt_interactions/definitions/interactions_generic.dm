@@ -12,7 +12,6 @@
 	interaction_flags = INTERACTION_NEEDS_PHYSICAL_INTERACTION | INTERACTION_NEEDS_TURF
 
 /decl/interaction_handler/grab/invoked(atom/target, mob/user)
-	. = ..()
 	var/atom/movable/AM = target
 	AM.try_make_grab(user, defer_hand = TRUE)
 
@@ -21,7 +20,6 @@
 	expected_target_type = /obj/item
 
 /decl/interaction_handler/use/invoked(atom/target, mob/user)
-	. = ..()
 	var/obj/item/I = target
 	I.attack_self(user)
 
@@ -30,7 +28,6 @@
 	expected_target_type = /obj/item
 
 /decl/interaction_handler/pick_up/invoked(atom/target, mob/user)
-	. = ..()
 	target.attack_hand(user)
 
 /decl/interaction_handler/drop

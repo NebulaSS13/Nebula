@@ -492,3 +492,8 @@
 
 /atom/movable/proc/try_make_grab(var/mob/living/user, var/defer_hand = FALSE)
 	return istype(user) && CanPhysicallyInteract(user) && !user.lying && user.make_grab(src)
+
+/atom/movable/get_alt_interactions(var/mob/user)
+	. = ..()
+	if(config.expanded_alt_interactions)
+		. += /decl/interaction_handler/grab

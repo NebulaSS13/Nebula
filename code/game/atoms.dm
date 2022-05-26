@@ -593,3 +593,9 @@ its easier to just keep the beam vertical.
 		if(istype(check_loc, loc_type))
 			return check_loc
 		check_loc = check_loc.loc
+
+/atom/proc/get_alt_interactions(var/mob/user)
+	SHOULD_CALL_PARENT(TRUE)
+	. = list()
+	if(config.expanded_alt_interactions)
+		. += /decl/interaction_handler/look
