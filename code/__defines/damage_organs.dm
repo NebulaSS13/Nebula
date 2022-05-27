@@ -58,6 +58,7 @@
 #define ORGAN_FLAG_HEALS_OVERKILL BITFLAG(5) // The organ heals from overkill damage.
 #define ORGAN_FLAG_DEFORMED       BITFLAG(6) // The organ is permanently disfigured.
 #define ORGAN_FLAG_CAN_DISLOCATE  BITFLAG(7) // The organ can be dislocated.
+#define ORGAN_FLAG_SKELETAL       BITFLAG(8) // The organ has been skeletonized.
 
 // Droplimb types.
 #define DISMEMBER_METHOD_EDGE  0

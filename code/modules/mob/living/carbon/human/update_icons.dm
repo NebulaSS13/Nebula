@@ -1,8 +1,8 @@
 /*
 	Global associative list for caching humanoid icons.
-	Index format m or f, followed by a string of 0 and 1 to represent bodyparts followed by husk skeleton 1 or 0.
+	Index format m or f, followed by a string of 0 and 1 to represent bodyparts followed by husk 1 or 0.
 	TODO: Proper documentation
-	icon_key is [bodytype.get_icon_cache_uid(src)][g][husk][skeleton][skin_tone]
+	icon_key is [bodytype.get_icon_cache_uid(src)][g][husk][skin_tone]
 */
 var/global/list/human_icon_cache = list()
 var/global/list/tail_icon_cache = list() //key is [bodytype.get_icon_cache_uid(src)][skin_colour]
@@ -325,7 +325,6 @@ var/global/list/damage_icon_parts = list()
 
 	var/husk_color_mod = rgb(96,88,80)
 	var/husk =     (MUTATION_HUSK in src.mutations)
-	var/skeleton = (MUTATION_SKELETON in src.mutations)
 
 	//CACHING: Generate an index key from visible bodyparts.
 	//0 = destroyed, 1 = normal, 2 = robotic, 3 = necrotic.
@@ -365,7 +364,7 @@ var/global/list/damage_icon_parts = list()
 		else
 			icon_key += "1"
 
-	icon_key = "[icon_key][husk ? 1 : 0][skeleton ? 1 : 0]"
+	icon_key = "[icon_key][husk ? 1 : 0]"
 
 	var/icon/base_icon
 	if(human_icon_cache[icon_key])
@@ -400,7 +399,7 @@ var/global/list/damage_icon_parts = list()
 			else
 				base_icon.Blend(temp, ICON_OVERLAY)
 
-		if(!skeleton && husk)
+		if(husk)
 			base_icon.ColorTone(husk_color_mod)
 
 		//Handle husk overlay.

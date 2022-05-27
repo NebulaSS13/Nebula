@@ -8,7 +8,6 @@
 #define MUTATION_CLUMSY          3
 #define MUTATION_HUSK            4
 #define MUTATION_SPACERES        5 // Can't be harmed via pressure damage.
-#define MUTATION_SKELETON        6
 
 // Other Mutations:
 #define mNobreath      100 // No need to breathe.

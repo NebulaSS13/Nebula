@@ -77,18 +77,6 @@
 	mutations |= MUTATION_HUSK
 	return
 
-/mob/living/carbon/human/proc/ChangeToSkeleton()
-	if(MUTATION_SKELETON in src.mutations)	return
-	f_style = /decl/sprite_accessory/facial_hair/shaved
-	h_style = /decl/sprite_accessory/hair/bald
-	update_hair(0)
-
-	mutations.Add(MUTATION_SKELETON)
-	for(var/obj/item/organ/external/E in get_external_organs())
-		E.status |= ORGAN_DISFIGURED
-	update_body(1)
-	return
-
 /mob/living/carbon/human/physically_destroyed(var/skip_qdel, var/droplimb_type = DISMEMBER_METHOD_BLUNT)
 	for(var/obj/item/organ/external/limb in get_external_organs())
 		var/limb_can_amputate = (limb.limb_flags & ORGAN_FLAG_CAN_AMPUTATE)
