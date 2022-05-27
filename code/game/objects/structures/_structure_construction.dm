@@ -138,3 +138,19 @@
 	if(.)
 		user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
 		add_fingerprint(user)
+
+/obj/structure/attack_generic(var/mob/user, var/damage, var/attack_verb, var/environment_smash)
+	if(environment_smash >= 1)
+		damage = max(damage, 10)
+
+	if(istype(user))
+		user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
+		user.do_attack_animation(src)
+	if(!damage)
+		return FALSE
+	if(damage >= 10)
+		visible_message(SPAN_DANGER("\The [user] [attack_verb] into [src]!"))
+		take_damage(damage)
+	else
+		visible_message(SPAN_NOTICE("\The [user] bonks \the [src] harmlessly."))
+	return TRUE
