@@ -25,7 +25,7 @@
 					M = new /mob/living/carbon/human()
 					var/mob/living/carbon/human/H = M
 					H.set_species(type)
-					H.ChangeToHusk()
+					H.make_husked()
 				else
 					M = new type()
 				M.death(0)
@@ -41,7 +41,7 @@
 					M = new /mob/living/carbon/human()
 					var/mob/living/carbon/human/H = M
 					H.set_species(type)
-					H.ChangeToHusk()
+					H.make_husked()
 				else
 					M = new type()
 				M.death(0)

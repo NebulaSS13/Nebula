@@ -59,8 +59,12 @@
 			playsound(loc, species.death_sound, 80, 1, 1)
 	handle_hud_list()
 
-/mob/living/carbon/human/proc/ChangeToHusk()
-	if(MUTATION_HUSK in mutations)	return
+/mob/living/carbon/human/proc/is_husked()
+	return (MUTATION_HUSK in mutations)
+
+/mob/living/carbon/human/proc/make_husked()
+	if(is_husked())
+		return
 
 	f_style = /decl/sprite_accessory/facial_hair/shaved
 	h_style = /decl/sprite_accessory/hair/bald
@@ -70,12 +74,6 @@
 	for(var/obj/item/organ/external/E in get_external_organs())
 		E.status |= ORGAN_DISFIGURED
 	update_body(1)
-	return
-
-/mob/living/carbon/human/proc/Drain()
-	ChangeToHusk()
-	mutations |= MUTATION_HUSK
-	return
 
 /mob/living/carbon/human/physically_destroyed(var/skip_qdel, var/droplimb_type = DISMEMBER_METHOD_BLUNT)
 	for(var/obj/item/organ/external/limb in get_external_organs())

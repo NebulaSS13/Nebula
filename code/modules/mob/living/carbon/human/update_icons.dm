@@ -324,7 +324,7 @@ var/global/list/damage_icon_parts = list()
 		return // Something is trying to update our body pre-init (probably loading a preview image during world startup).
 
 	var/husk_color_mod = rgb(96,88,80)
-	var/husk =     (MUTATION_HUSK in src.mutations)
+	var/husk = is_husked()
 
 	//CACHING: Generate an index key from visible bodyparts.
 	//0 = destroyed, 1 = normal, 2 = robotic, 3 = necrotic.
