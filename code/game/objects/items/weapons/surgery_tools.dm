@@ -179,7 +179,7 @@
 
 /obj/item/incision_manager/Initialize()
 	. = ..()
-	set_extension(src, /datum/extension/tool, list(
+	set_extension(src, /datum/extension/tool/variable, list(
 		TOOL_SAW =       TOOL_QUALITY_GOOD,
 		TOOL_SCALPEL =   TOOL_QUALITY_GOOD, 
 		TOOL_RETRACTOR = TOOL_QUALITY_GOOD, 
