@@ -216,9 +216,6 @@
 			health -= rand(10, 20)
 		else
 			health -= rand(1,3)
-
-	else if (MUTATION_HULK in user.mutations)
-		health = 0
 	else
 		health -= rand(5,8)
 

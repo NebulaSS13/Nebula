@@ -14,6 +14,3 @@
 /decl/status_condition/stunned/handle_status(mob/living/victim, amount)
 	. = ..()
 	victim.UpdateLyingBuckledAndVerbStatus()
-
-/decl/status_condition/stunned/check_can_set(mob/living/victim)
-	. = !(MUTATION_HULK in victim.mutations) && ..()

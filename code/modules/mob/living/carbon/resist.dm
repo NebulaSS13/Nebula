@@ -100,9 +100,6 @@
 /mob/living/proc/can_break_cuffs()
 	. = FALSE
 
-/mob/living/carbon/can_break_cuffs()
-	. = ..() || (MUTATION_HULK in mutations)
-
 /mob/living/carbon/proc/break_handcuffs()
 	visible_message(
 		"<span class='danger'>[src] is trying to break \the [handcuffed]!</span>",
@@ -117,9 +114,6 @@
 			"<span class='danger'>[src] manages to break \the [handcuffed]!</span>",
 			"<span class='warning'>You successfully break your [handcuffed.name].</span>"
 			)
-
-		if(MUTATION_HULK in mutations)
-			say(pick(";RAAAAAAAARGH!", ";HNNNNNNNNNGGGGGGH!", ";GWAAAAAAAARRRHHH!", "NNNNNNNNGGGGGGGGHH!", ";AAAAAAARRRGH!" ))
 
 		qdel(handcuffed)
 		handcuffed = null

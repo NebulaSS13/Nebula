@@ -84,13 +84,6 @@
 	radiate()
 	add_fingerprint(user)
 	user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
-	var/rotting = (locate(/obj/effect/overlay/wallrot) in src)
-	if (MUTATION_HULK in user.mutations)
-		if (rotting || !prob(material.hardness))
-			success_smash(user)
-		else
-			fail_smash(user)
-		return TRUE
 	if(ishuman(user))
 		var/mob/living/carbon/human/H = user
 		var/obj/item/hand = H.get_organ(H.get_active_held_item_slot())
@@ -98,7 +91,7 @@
 			return TRUE
 	. = ..()
 	if(!.)
-		return try_touch(user, rotting)
+		return try_touch(user, (locate(/obj/effect/overlay/wallrot) in src))
 
 /turf/simulated/wall/attackby(var/obj/item/W, var/mob/user, click_params)
 

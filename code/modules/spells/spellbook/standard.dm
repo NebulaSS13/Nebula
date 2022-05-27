@@ -22,7 +22,6 @@
 		/spell/aoe_turf/conjure/forcewall =            1,
 		/spell/aoe_turf/blink =                        1,
 		/spell/area_teleport =                         1,
-		/spell/targeted/genetic/mutate =               1,
 		/spell/targeted/ethereal_jaunt =               1,
 		/spell/targeted/heal_target =                  1,
 		/spell/aoe_turf/knock =                        1,

@@ -146,13 +146,7 @@
 
 /obj/structure/window/attack_hand(mob/user)
 	user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
-	if(MUTATION_HULK in user.mutations)
-		user.say(pick(";RAAAAAAAARGH!", ";HNNNNNNNNNGGGGGGH!", ";GWAAAAAAAARRRHHH!", "NNNNNNNNGGGGGGGGHH!", ";AAAAAAARRRGH!"))
-		user.visible_message(SPAN_DANGER("[user] smashes through [src]!"))
-		user.do_attack_animation(src)
-		shatter()
-
-	else if (user.a_intent && user.a_intent == I_HURT)
+	if (user.a_intent && user.a_intent == I_HURT)
 
 		if (istype(user,/mob/living/carbon/human))
 			var/mob/living/carbon/human/H = user

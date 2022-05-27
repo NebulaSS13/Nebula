@@ -15,6 +15,3 @@
 	if(victim.aiming)
 		victim.stop_aiming(no_message=1)
 	victim.UpdateLyingBuckledAndVerbStatus()
-
-/decl/status_condition/weakened/check_can_set(mob/living/victim)
-	. = !(MUTATION_HULK in victim.mutations) && ..()
