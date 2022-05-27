@@ -15,8 +15,6 @@
 /obj/item/organ/internal/Initialize(mapload, material_key, datum/dna/given_dna)
 	if(!alive_icon)
 		alive_icon = initial(icon_state)
-	if(max_damage)
-		min_bruised_damage = FLOOR(max_damage / 4)
 	. = ..()
 
 /obj/item/organ/internal/set_species(species_name)

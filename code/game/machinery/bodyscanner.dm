@@ -77,7 +77,7 @@
 	return ..()
 
 /obj/machinery/bodyscanner/proc/user_can_move_target_inside(var/mob/target, var/mob/user)
-	if(!istype(user) || !istype(target))
+	if(!istype(user) || !istype(target) || target.anchored)
 		return FALSE
 	if(occupant)
 		to_chat(user, "<span class='warning'>The scanner is already occupied!</span>")
@@ -113,6 +113,9 @@
 /obj/machinery/bodyscanner/receive_mouse_drop(var/atom/dropping, var/mob/user)
 	. = ..()
 	if(!. && isliving(dropping))
+		var/mob/living/M = dropping
+		if(M.anchored)
+			return FALSE
 		user.visible_message( \
 			SPAN_NOTICE("\The [user] begins placing \the [dropping] into \the [src]."), \
 			SPAN_NOTICE("You start placing \the [dropping] into \the [src]."))

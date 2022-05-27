@@ -167,7 +167,7 @@
 
 		//Base skin and blend
 		for(var/obj/item/organ/external/E in H.get_external_organs())
-			E.set_dna(E.dna)
+			E.set_dna(H.dna)
 
 		//Hair
 		var/list/hair_subtypes = subtypesof(/decl/sprite_accessory/hair)

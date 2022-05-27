@@ -103,11 +103,8 @@
 	icon_state = "[src.base_state]open"
 	flick("[src.base_state]opening", src)
 	playsound(src.loc, 'sound/machines/windowdoor.ogg', 100, 1)
-	addtimer(CALLBACK(src, .proc/open_final), 10, TIMER_UNIQUE | TIMER_OVERRIDE)
 
-	return 1
-
-/obj/machinery/door/window/proc/open_final()
+	sleep(0.9 SECONDS)
 	explosion_resistance = 0
 	set_density(FALSE)
 	update_icon()
@@ -116,22 +113,24 @@
 	if(operating == 1) //emag again
 		operating = 0
 
+	return TRUE
+
 /obj/machinery/door/window/close()
 	if (src.operating)
 		return 0
+
 	operating = 1
 	flick(text("[]closing", src.base_state), src)
 	playsound(src.loc, 'sound/machines/windowdoor.ogg', 100, 1)
-	set_density(1)
+	set_density(TRUE)
 	update_icon()
 	explosion_resistance = initial(explosion_resistance)
 	update_nearby_tiles()
 
-	addtimer(CALLBACK(src, .proc/close_final), 10, TIMER_UNIQUE | TIMER_OVERRIDE)
-	return 1
-
-/obj/machinery/door/window/proc/close_final()
+	sleep(0.9 SECONDS)
 	operating = 0
+
+	return TRUE
 
 /obj/machinery/door/window/take_damage(var/damage)
 	src.health = max(0, src.health - damage)

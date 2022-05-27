@@ -34,7 +34,7 @@
 	var/list/other
 	var/list/obj/screen/hotkeybuttons
 
-	var/obj/screen/movable/action_button/hide_toggle/hide_actions_toggle
+	var/obj/screen/action_button/hide_toggle/hide_actions_toggle
 	var/action_buttons_hidden = FALSE
 
 	var/static/list/hidden_inventory_slots = list(
@@ -333,8 +333,22 @@
 	hud_used.persistant_inventory_update()
 	update_action_buttons()
 
+/client/proc/reset_click_catchers()
+
+	var/xmin = -(round(last_view_x_dim*0.5))
+	var/xmax = last_view_x_dim - abs(xmin)
+	var/ymin = -(round(last_view_y_dim*0.5))
+	var/ymax = last_view_y_dim - abs(ymin)
+
+	var/list/click_catchers = get_click_catchers()
+	for(var/obj/screen/click_catcher/catcher in click_catchers)
+		if(catcher.x_offset <= xmin || catcher.x_offset >= xmax || catcher.y_offset <= ymin || catcher.y_offset >= ymax)
+			screen -= catcher
+		else
+			screen |= catcher
+
 /mob/proc/add_click_catcher()
-	client.screen |= get_click_catchers()
+	client.reset_click_catchers()
 
 /mob/new_player/add_click_catcher()
 	return

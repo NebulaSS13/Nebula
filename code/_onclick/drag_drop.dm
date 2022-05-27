@@ -26,14 +26,11 @@
 /atom/proc/check_mousedrop_adjacency(var/atom/over, var/mob/user)
 	. = (Adjacent(user) && over.Adjacent(user))
 
-/mob/can_mouse_drop(var/atom/over, var/mob/user = usr, var/incapacitation_flags = INCAPACITATION_DEFAULT)
-	. = !anchored && ..()
-
 // Receive a mouse drop.
 // Returns false if the atom is valid for dropping further up the chain, true if the drop has been handled.
 /atom/proc/receive_mouse_drop(var/atom/dropping, var/mob/user)
 	var/mob/living/H = user
-	if(istype(H) && can_climb(H) && dropping == user)
+	if(istype(H) && !H.anchored && can_climb(H) && dropping == user)
 		do_climb(dropping)
 		return TRUE
 	return FALSE

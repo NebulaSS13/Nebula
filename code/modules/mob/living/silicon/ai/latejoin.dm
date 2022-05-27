@@ -26,3 +26,11 @@
 
 	//Handle job slot/tater cleanup.
 	clear_client()
+
+/obj/effect/landmark/start/ai
+	name = "AI"
+
+/obj/effect/landmark/start/ai/Initialize()
+	. = ..()
+	//The job subsystem does its thing before we can, so we've got to handle this
+	empty_playable_ai_cores += new /obj/structure/aicore/deactivated(get_turf(loc))
