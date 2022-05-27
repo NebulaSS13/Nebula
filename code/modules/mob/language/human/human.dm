@@ -5,7 +5,7 @@
 	speech_verb = "says"
 	whisper_verb = "whispers"
 	colour = "solcom"
-	flags = WHITELISTED
+	flags = WHITELISTED | RESTRICTED
 	shorthand = "???"
 	space_chance = 40
 	abstract_type = /decl/language/human
