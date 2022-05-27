@@ -29,7 +29,7 @@ var/global/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 	var/list/player_levels =  list() // Z-levels a character can typically reach
 	var/list/sealed_levels =  list() // Z-levels that don't allow random transit at edge
 
-	var/list/map_levels              // Z-levels available to various consoles, such as the crew monitor. Defaults to station_levels if unset.
+	var/list/map_levels =     list() // Z-levels available to various consoles, such as the crew monitor. Defaults to station_levels if unset.
 
 	var/list/base_turf_by_z = list() // Custom base turf by Z-level. Defaults to world.turf for unlisted Z-levels
 
@@ -195,8 +195,7 @@ var/global/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 		allowed_spawns -= spawn_type
 		allowed_spawns += GET_DECL(spawn_type)
 
-	if(!map_levels)
-		map_levels = station_levels.Copy()
+	map_levels |= station_levels.Copy()
 
 	if(!LAZYLEN(planet_size))
 		planet_size = list(world.maxx, world.maxy)
@@ -260,6 +259,7 @@ var/global/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 		var/exoplanet_type = pick_exoplanet()
 		INCREMENT_WORLD_Z_SIZE
 		var/obj/effect/overmap/visitable/sector/exoplanet/new_planet = new exoplanet_type(null, world.maxz)
+		new_planet.map_z = GetConnectedZlevels(world.maxz)
 		new_planet.build_level(planet_size[1], planet_size[2])
 
 /datum/map/proc/pick_exoplanet()

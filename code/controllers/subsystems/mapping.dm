@@ -36,6 +36,9 @@ SUBSYSTEM_DEF(mapping)
 	// Build away sites.
 	global.using_map.build_away_sites()
 
+	// Build exoplanet
+	global.using_map.build_exoplanets()
+
 	. = ..()
 
 /datum/controller/subsystem/mapping/Recover()
@@ -65,7 +68,7 @@ SUBSYSTEM_DEF(mapping)
 		PRINT_STACK_TRACE("Duplicate map name '[map_template.name]' on type [map_template.type]!")
 		return FALSE
 	return TRUE
-	
+
 /datum/controller/subsystem/mapping/proc/get_all_template_instances()
 	. = list()
 	for(var/template_type in subtypesof(/datum/map_template))

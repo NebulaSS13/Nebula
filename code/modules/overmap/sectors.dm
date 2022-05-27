@@ -98,7 +98,11 @@ var/global/list/known_overmap_sectors
 			initial_restricted_waypoints[shuttle_type] = new_restricted
 
 /obj/effect/overmap/visitable/proc/move_to_starting_location()
+
 	var/datum/overmap/overmap = global.overmaps_by_name[overmap_id]
+	if(!overmap)
+		return
+
 	var/location
 
 	if(start_x && start_y)

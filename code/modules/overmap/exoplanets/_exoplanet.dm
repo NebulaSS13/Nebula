@@ -100,8 +100,8 @@
 
 /obj/effect/overmap/visitable/sector/exoplanet/proc/build_level(max_x, max_y)
 
-	maxx = max_x ? max_x : world.maxx
-	maxy = max_y ? max_y : world.maxy
+	maxx = max_x || world.maxx
+	maxy = max_y || world.maxy
 	x_origin = TRANSITIONEDGE + 1
 	y_origin = TRANSITIONEDGE + 1
 	x_size = maxx - 2 * (TRANSITIONEDGE + 1)
