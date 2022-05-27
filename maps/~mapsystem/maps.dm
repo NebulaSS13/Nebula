@@ -153,6 +153,7 @@ var/global/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 		ACCESS_REGION_GENERAL = list(access_change_ids),
 		ACCESS_REGION_SUPPLY = list(access_change_ids)
 	)
+	var/secrets_directory
 
 /datum/map/proc/get_lobby_track(var/exclude)
 	var/lobby_track_type
@@ -165,6 +166,16 @@ var/global/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 	return GET_DECL(lobby_track_type)
 
 /datum/map/proc/setup_map()
+
+	if(secrets_directory)
+		secrets_directory = trim(lowertext(secrets_directory))
+		if(!length(secrets_directory))
+			log_warning("[type] secrets_directory is zero length after trim.")
+		if(copytext(secrets_directory, -1) != "/")
+			secrets_directory = "[secrets_directory]/"
+		if(!fexists(secrets_directory))
+			log_warning("[type] secrets_directory does not exist.")
+		SSsecrets.load_directories |= secrets_directory
 
 	if(!allowed_jobs)
 		allowed_jobs = list()
