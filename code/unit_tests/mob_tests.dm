@@ -8,9 +8,6 @@
  *
  */
 
-#define SUCCESS 1
-#define FAILURE 0
-
 //
 // Tests Life() and mob breathing in space.
 //
@@ -293,8 +290,6 @@ var/global/default_mobloc = null
 	return 1
 
 #undef IMMUNE
-#undef SUCCESS
-#undef FAILURE
 
 /datum/unit_test/mob_nullspace
 	name = "MOB: Mob in nullspace shall not cause runtimes"

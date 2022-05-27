@@ -461,8 +461,8 @@ var/global/list/localhost_addresses = list(
 	OnResize()
 
 /client
-	var/last_view_x_dim = 7
-	var/last_view_y_dim = 7
+	var/last_view_x_dim = 15
+	var/last_view_y_dim = 15
 
 /client/verb/force_onresize_view_update()
 	set name = "Force Client View Update"
@@ -513,8 +513,9 @@ var/global/const/MAX_VIEW = 41
 	winset(src, "menu.icon[divisor]", "is-checked=true")
 
 	view = "[last_view_x_dim]x[last_view_y_dim]"
-
+	
 	// Reset eye/perspective
+	reset_click_catchers()
 	var/last_perspective = perspective
 	perspective = MOB_PERSPECTIVE
 	if(perspective != last_perspective)

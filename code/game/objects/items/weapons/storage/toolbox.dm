@@ -67,7 +67,7 @@
 	startswith = list(/obj/item/clothing/gloves/insulated, /obj/item/screwdriver, /obj/item/wrench, /obj/item/weldingtool, /obj/item/crowbar, /obj/item/wirecutters, /obj/item/multitool)
 
 /obj/item/storage/toolbox/repairs
-	name = "electrician toolbox"
+	name = "electronics toolbox"
 	desc = "A box full of boxes, with electrical machinery parts and tools needed to get them where they're needed."
 	icon_state = "yellow_striped"
 	item_state = "toolbox_yellow"

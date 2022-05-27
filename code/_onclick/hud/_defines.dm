@@ -124,8 +124,7 @@
 #define ui_iarrowleft "BOTTOM-1,RIGHT-4"
 #define ui_iarrowright "BOTTOM-1,RIGHT-2"
 
-#define ui_spell_master "RIGHT-1:16,TOP-1:16"
-#define ui_genetic_master "RIGHT-1:16,TOP-3:16"
+#define ui_ability_master "RIGHT-2:16,TOP-1:16"
 
 // AI
 #define ui_ai_core "LEFT:6,BOTTOM:5"

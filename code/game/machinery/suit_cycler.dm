@@ -463,8 +463,15 @@
 	if(suit)   suit.refit_for_bodytype(target_flags)
 	if(boots)  boots.refit_for_bodytype(target_flags)
 
-	target_modification.RefitItem(helmet)
-	target_modification.RefitItem(suit)
+
+	if(helmet)
+		target_modification.RefitItem(helmet)
+		helmet.refit_for_bodytype(target_bodytype)
+	if(suit)
+		suit.refit_for_bodytype(target_bodytype)
+		target_modification.RefitItem(suit)
+	if(boots)
+		boots.refit_for_bodytype(target_bodytype)
 
 	if(helmet) helmet.SetName("refitted [helmet.name]")
 	if(suit)   suit.SetName("refitted [suit.name]")

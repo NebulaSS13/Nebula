@@ -249,7 +249,7 @@
 	return beaconlist
 
 /mob/living/bot/mulebot/proc/load(var/atom/movable/C)
-	if(busy || load || get_dist(C, src) > 1 || !isturf(C.loc))
+	if(busy || load || get_dist(C, src) > 1 || !isturf(C.loc) || C.anchored)
 		return
 
 	for(var/obj/structure/plasticflaps/P in src.loc)//Takes flaps into account

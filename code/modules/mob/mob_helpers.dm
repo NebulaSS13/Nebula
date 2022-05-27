@@ -244,13 +244,10 @@ var/global/list/global/organ_rel_size = list(
 			if(lowertext(newletter)=="a")	newletter="ah"
 			if(lowertext(newletter)=="c")	newletter="k"
 		switch(rand(1,15))
-			if(1,3,5,8)	newletter="[lowertext(newletter)]"
-			if(2,4,6,15)	newletter="[uppertext(newletter)]"
-			if(7)	newletter+="'"
-			if(9 to 14)	break
-			//if(9,10)	newletter="<b>[newletter]</b>"
-			//if(11,12)	newletter="<big>[newletter]</big>"
-			//if(13)	newletter="<small>[newletter]</small>"
+			if(1 to 4)	newletter="[lowertext(newletter)]"
+			if(5 to 8)	newletter="[uppertext(newletter)]"
+			if(9)	newletter+="'"
+			else	newletter = newletter
 		newphrase+="[newletter]";counter-=1
 	return newphrase
 

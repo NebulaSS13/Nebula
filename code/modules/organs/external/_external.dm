@@ -101,9 +101,7 @@
 
 /obj/item/organ/external/Initialize(mapload, material_key, datum/dna/given_dna)
 	. = ..()
-	if(. == INITIALIZE_HINT_QDEL)
-		return
-	if(isnull(pain_disability_threshold))
+	if(. != INITIALIZE_HINT_QDEL && isnull(pain_disability_threshold))
 		pain_disability_threshold = (max_damage * 0.75)
 
 /obj/item/organ/external/Destroy()
@@ -320,7 +318,7 @@
 	if(!istype(removing))
 		return TRUE
 
-	var/cutting_result = !W.do_tool_interaction(TOOL_SAW, user, src, W.get_tool_speed(TOOL_SAW) * 3 SECONDS, SPAN_DANGER("<b>[user]</b> starts cutting off \the [removing] from [src] with \the [W]!") )
+	var/cutting_result = !W.do_tool_interaction(TOOL_SAW, user, src, 3 SECONDS, "cutting \the [removing] off")
 	//Check if the limb is still in the hierarchy
 	if(cutting_result == 1 || !(removing in get_limbs_recursive(TRUE)))
 		if(cutting_result != -1)
@@ -558,7 +556,9 @@ This function completely restores a damaged organ to perfect condition.
 	damage_state = "00"
 	status = 0
 	brute_dam = 0
+	brute_ratio = 0
 	burn_dam = 0
+	burn_ratio = 0
 	germ_level = 0
 	genetic_degradation = 0
 
@@ -663,7 +663,7 @@ This function completely restores a damaged organ to perfect condition.
 	var/wound_type = get_wound_type(type, damage)
 
 	if(wound_type)
-		var/datum/wound/W = new wound_type(damage, src)
+		var/datum/wound/W = new wound_type(damage, src, surgical)
 
 		//Check whether we can add the wound to an existing wound
 		if(surgical)
@@ -1074,17 +1074,17 @@ Note that amputating the affected organ does in fact remove the infection from t
 					G.basecolor =  use_blood_color
 					G.update_icon()
 
-			gore.throw_at(get_edge_target_turf(src,pick(global.alldirs)),rand(1,3),30)
+			gore.throw_at(get_edge_target_turf(src,pick(global.alldirs)), rand(1,3), THROWFORCE_GIBS)
 
 			for(var/obj/item/organ/I in internal_organs)
 				I.do_uninstall() //No owner so run uninstall directly
 				I.dropInto(get_turf(loc))
 				if(!QDELETED(I) && isturf(loc))
-					I.throw_at(get_edge_target_turf(src,pick(global.alldirs)),rand(1,3),30)
+					I.throw_at(get_edge_target_turf(src,pick(global.alldirs)), rand(1,3), THROWFORCE_GIBS)
 
 			for(var/obj/item/I in src)
 				I.dropInto(loc)
-				I.throw_at(get_edge_target_turf(src,pick(global.alldirs)),rand(1,3),30)
+				I.throw_at(get_edge_target_turf(src,pick(global.alldirs)), rand(1,3), THROWFORCE_GIBS)
 
 			qdel(src)
 
@@ -1484,8 +1484,9 @@ Note that amputating the affected organ does in fact remove the infection from t
 			if(encased && (status & ORGAN_BROKEN))
 				. = SURGERY_ENCASED
 		else
-			var/smol_threshold = min_broken_damage * 0.4
-			var/beeg_threshold = min_broken_damage * 0.6
+			var/total_health_coefficient = scale_max_damage_to_species_health ? (species.total_health / DEFAULT_SPECIES_HEALTH) : 1
+			var/smol_threshold = max(1, FLOOR(min_broken_damage * 0.4 * total_health_coefficient))
+			var/beeg_threshold = max(1, FLOOR(min_broken_damage * 0.6 * total_health_coefficient))
 			if(!incision.autoheal_cutoff == 0) //not clean incision
 				smol_threshold *= 1.5
 				beeg_threshold = max(beeg_threshold, min(beeg_threshold * 1.5, incision.damage_list[1])) //wounds can't achieve bigger
@@ -1568,7 +1569,9 @@ Note that amputating the affected organ does in fact remove the infection from t
 	if(!BP_IS_PROSTHETIC(src) && !BP_IS_CRYSTAL(src))
 		var/decay_rate = damage/(max_damage*2)
 		germ_level += round(rand(decay_rate,decay_rate*1.5)) //So instead, we're going to say the damage is so severe its functions are slowly failing due to the extensive damage
-	else
+	else //TODO: more advanced system for synths
+		if(istype(src,/obj/item/organ/external/chest) || istype(src,/obj/item/organ/external/groin))
+			return
 		status |= ORGAN_DEAD
 	if(status & ORGAN_DEAD) //The organic dying part is covered in germ handling
 		STOP_PROCESSING(SSobj, src)

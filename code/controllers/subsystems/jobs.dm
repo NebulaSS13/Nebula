@@ -128,9 +128,6 @@ SUBSYSTEM_DEF(jobs)
 	syndicate_code_phrase = generate_code_phrase()
 	syndicate_code_response	= generate_code_phrase()
 
-	// Set up AI spawn locations
-	spawn_empty_ai()
-
 	. = ..()
 
 /datum/controller/subsystem/jobs/proc/guest_jobbans(var/job)

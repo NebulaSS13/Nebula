@@ -334,10 +334,10 @@
 	if(check_blood_level(H))
 		make_announcement("buzzes, \"Warning - Patient is in hypovolemic shock and may require a blood transfusion.\"", "warning") //also includes heart damage
 
-	if(H.get_organ(BP_HEART)) //People may need more direct instruction
-		var/obj/item/organ/internal/heart/heart = H.get_organ(BP_HEART)
-		if(heart.is_bruised())
-			make_announcement("buzzes, \"Danger! The patient has sustained a cardiac contusion and will require surgical treatment for full recovery!\"", "danger")
+	//People may need more direct instruction
+	var/obj/item/organ/internal/heart/heart = H.get_organ(BP_HEART)
+	if(heart?.is_bruised())
+		make_announcement("buzzes, \"Danger! The patient has sustained a cardiac contusion and will require surgical treatment for full recovery!\"", "danger")
 
 	//placed on chest and short delay to shock for dramatic effect, revive time is 5sec total
 	if(!do_after(user, chargetime, H))

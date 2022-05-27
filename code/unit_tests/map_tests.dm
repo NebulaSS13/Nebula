@@ -5,11 +5,6 @@
  *
  *
  */
-
-#define FAILURE 0
-#define SUCCESS 1
-
-
 /datum/unit_test/apc_area_test
 	name = "MAP: Area Test APC / Scrubbers / Vents"
 
@@ -836,6 +831,3 @@
 	else
 		pass("All doors are on appropriate turfs")
 	return TRUE
-
-#undef SUCCESS
-#undef FAILURE

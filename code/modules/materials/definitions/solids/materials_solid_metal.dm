@@ -193,7 +193,7 @@
 	. += new/datum/stack_recipe/furniture/canister(src)
 	. += new/datum/stack_recipe/furniture/tank(src)
 	. += new/datum/stack_recipe/cannon(src)
-	. += create_recipe_list(/datum/stack_recipe/tile/metal)
+	. += new/datum/stack_recipe_list("tiling", create_recipe_list(/datum/stack_recipe/tile/metal))
 	. += new/datum/stack_recipe/furniture/computerframe(src)
 	. += new/datum/stack_recipe/furniture/machine(src)
 	. += new/datum/stack_recipe/furniture/turret(src)

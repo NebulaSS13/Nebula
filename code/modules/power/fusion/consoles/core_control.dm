@@ -42,6 +42,7 @@
 		for(var/i = 1 to LAZYLEN(fusion_cores))
 			var/list/core = list()
 			var/obj/machinery/fusion_core/C = fusion_cores[i]
+			var/datum/powernet/p_network = C.get_powernet()
 			core["id"] =          "#[i]"
 			core["ref"] =         "\ref[C]"
 			core["field"] =       !isnull(C.owned_field)
@@ -49,7 +50,7 @@
 			core["size"] =        C.owned_field ? "[C.owned_field.size] meter\s" : "Field offline."
 			core["instability"] = C.owned_field ? "[C.owned_field.percent_unstable * 100]%" : "Field offline."
 			core["temperature"] = C.owned_field ? "[C.owned_field.plasma_temperature + 295]K" : "Field offline."
-			core["powerstatus"] = "[C.active_power_usage] W"
+			core["powerstatus"] = "[p_network ? p_network.avail : 0]/[C.active_power_usage] W"
 			var/fuel_string = "<table width = '100%'>"
 			if(C.owned_field && LAZYLEN(C.owned_field.reactants))
 				for(var/reactant in C.owned_field.reactants)

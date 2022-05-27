@@ -69,8 +69,9 @@ Single Use Emergency Pouches
 
 	startswith = list(
 	/obj/item/chems/hypospray/autoinjector/pouch_auto/stabilizer,
+	/obj/item/chems/hypospray/autoinjector/pouch_auto/painkillers,
 	/obj/item/chems/pill/pouch_pill/stabilizer,
-	/obj/item/chems/pill/pouch_pill/painkillers,
+	/obj/item/chems/pill/pouch_pill/brute_meds,
 	/obj/item/stack/medical/bruise_pack = 2,
 		)
 	instructions = {"
@@ -89,10 +90,10 @@ Single Use Emergency Pouches
 	color = COLOR_SEDONA
 
 	startswith = list(
-	/obj/item/chems/hypospray/autoinjector/pouch_auto/stabilizer,
+	/obj/item/chems/hypospray/autoinjector/pouch_auto/nanoblood,
 	/obj/item/chems/hypospray/autoinjector/pouch_auto/painkillers,
 	/obj/item/chems/hypospray/autoinjector/pouch_auto/adrenaline,
-	/obj/item/chems/pill/pouch_pill/painkillers,
+	/obj/item/chems/pill/pouch_pill/burn_meds,
 	/obj/item/stack/medical/ointment = 2,
 		)
 	instructions = {"
@@ -183,6 +184,12 @@ Single Use Emergency Pouches
 /obj/item/chems/pill/pouch_pill/painkillers
 	chem_type = /decl/material/liquid/painkillers
 
+/obj/item/chems/pill/pouch_pill/brute_meds
+	chem_type = /decl/material/liquid/brute_meds
+
+/obj/item/chems/pill/pouch_pill/burn_meds
+	chem_type = /decl/material/liquid/burn_meds
+
 /obj/item/chems/pill/pouch_pill/initialize_reagents()
 	reagents.add_reagent(chem_type, chem_amount)
 	var/decl/material/reagent = GET_DECL(chem_type)
@@ -212,3 +219,7 @@ Single Use Emergency Pouches
 	name = "emergency adrenaline autoinjector"
 	amount_per_transfer_from_this = 8
 	starts_with = list(/decl/material/liquid/adrenaline = 8)
+
+/obj/item/chems/hypospray/autoinjector/pouch_auto/nanoblood
+	name = "emergency nanoblood autoinjector"
+	starts_with = list(/decl/material/liquid/nanoblood = 5)
