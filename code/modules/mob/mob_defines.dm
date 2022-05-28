@@ -166,8 +166,7 @@
 
 	var/list/additional_vision_handlers // A lazylist of atoms from which additional vision data is retrieved
 
-	/// A list for stacking do_after bars
-	var/list/progress_bars = null
+	var/list/progressbars = null //for stacking do_after bars
 
 	var/datum/ai/ai						// Type abused. Define with path and will automagically create. Determines behaviour for clientless mobs.
 
