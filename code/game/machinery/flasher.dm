@@ -52,7 +52,7 @@
 		return
 
 /obj/machinery/flasher/proc/flash()
-	if (!(powered()))
+	if (stat & NOPOWER)
 		return
 
 	if ((src.disable) || (src.last_flash && world.time < src.last_flash + 150))

@@ -109,7 +109,7 @@ var/global/list/default_initial_tech_levels
 
 /obj/machinery/design_database/Process()
 	..()
-	if((stat & BROKEN) || (stat & NOPOWER) || !use_power || !powered())
+	if((stat & BROKEN) || (stat & NOPOWER) || !use_power)
 		return
 
 	// Read or write from a loaded disk.

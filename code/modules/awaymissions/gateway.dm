@@ -77,9 +77,12 @@
 
 
 /obj/machinery/gateway/centerstation/proc/toggleon(mob/user)
-	if(!ready)			return
-	if(linked.len != 8)	return
-	if(!powered())		return
+	if(!ready)
+		return
+	if(linked.len != 8)
+		return
+	if(stat & NOPOWER)
+		return
 	if(!awaygate)
 		to_chat(user, "<span class='notice'>Error: No destination found.</span>")
 		return
