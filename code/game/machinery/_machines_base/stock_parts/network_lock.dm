@@ -1,3 +1,5 @@
+#define MAX_PATTERNS 10
+
 /obj/item/stock_parts/network_receiver/network_lock
 	name = "network access lock"
 	desc = "An id-based access lock preventing tampering with a machine's hardware and software. Connects wirelessly to network."
@@ -34,6 +36,10 @@
 
 // Override. This checks the network and builds a dynamic req_access list for the device it's attached to.
 /obj/item/stock_parts/network_receiver/network_lock/get_req_access()
+	// Broken network locks require no access.
+	if(!is_functional())
+		return list()
+
 	. = get_default_access()
 	var/datum/extension/network_device/D = get_extension(src, /datum/extension/network_device)
 	var/datum/computer_network/network = D.get_network()
@@ -76,6 +82,15 @@
 			playsound(src, 'sound/machines/ping.ogg', 20, 0)
 		else
 			playsound(src, 'sound/machines/buzz-two.ogg', 20, 0)
+
+/obj/item/stock_parts/network_receiver/network_lock/afterattack(atom/target, mob/user, proximity_flag, click_parameters)
+	if(istype(target, /obj/item/stock_parts/network_receiver/network_lock))
+		var/obj/item/stock_parts/network_receiver/network_lock/other_lock = target
+		if(length(other_lock.groups)) // Prevent mistakingly copying from a blank lock instead of vice versa.
+			groups = other_lock.groups.Copy()
+			playsound(src, 'sound/machines/ping.ogg', 20, 0)
+			to_chat(user, SPAN_NOTICE("\The [src] pings as it successfully copies its access requirements from the other network lock."))
+
 
 /obj/item/stock_parts/network_receiver/network_lock/attack_self(var/mob/user)
 	ui_interact(user)
@@ -167,12 +182,15 @@
 		return TOPIC_REFRESH
 
 	if(href_list["add_pattern"])
+		if(length(groups) >= MAX_PATTERNS)
+			to_chat(usr, SPAN_WARNING("You cannot add more than [MAX_PATTERNS] patterns to \the [src]!"))
+			return TOPIC_HANDLED
 		LAZYADD(groups, list(list()))
 		return TOPIC_REFRESH
 	
 	if(href_list["remove_pattern"])
 		var/pattern_index = text2num(href_list["remove_pattern"])
-		LAZYREMOVE(groups, LAZYACCESS(groups, pattern_index))
+		LAZYREMOVE(groups, list(LAZYACCESS(groups, pattern_index))) // We have to encapsulate the pattern in another list to actually delete it.
 		if(selected_pattern == pattern_index)
 			selected_pattern = null
 		else if(selected_pattern > pattern_index)
@@ -238,3 +256,5 @@
 			if(!lock.check_access(user))
 				return SPAN_WARNING("\The [lock] flashes red! You lack the access to unlock this.")
 	return ..()
+
+#undef MAX_PATTERNS
