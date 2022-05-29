@@ -37,7 +37,7 @@
 		sound_id = "[type]_[sequential_id(/obj/machinery/computer/ship/sensors)]"
 
 	var/obj/machinery/shipsensors/sensors = get_sensors()
-	if(sensors && linked && sensors.use_power ** sensors.powered())
+	if(linked && sensors?.use_power && !(sensors.stat & NOPOWER))
 		var/volume = 10
 		if(!sound_token)
 			sound_token = play_looping_sound(src, sound_id, working_sound, volume = volume, range = 10)
@@ -62,7 +62,7 @@
 		data["critical_heat"] = sensors.critical_heat
 		if(sensors.is_broken())
 			data["status"] = "DESTROYED"
-		else if(!sensors.powered())
+		else if(sensors.stat & NOPOWER)
 			data["status"] = "NO POWER"
 		else if(!sensors.in_vacuum())
 			data["status"] = "VACUUM SEAL BROKEN"
@@ -213,7 +213,7 @@
 
 /obj/machinery/shipsensors/power_change()
 	. = ..()
-	if(use_power && !powered())
+	if(use_power && (stat & NOPOWER))
 		toggle()
 
 /obj/machinery/shipsensors/proc/set_range(nrange)

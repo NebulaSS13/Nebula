@@ -90,9 +90,6 @@
 	. = ..()
 	setup()
 
-/obj/machinery/porta_turret/Destroy()
-	. = ..()
-
 /obj/machinery/porta_turret/proc/setup()
 	var/obj/item/gun/energy/E = installation	//All energy-based weapons are applicable
 	//var/obj/item/ammo_casing/shottype = E.projectile_type
@@ -143,7 +140,7 @@ var/global/list/turret_icons
 	if(stat & BROKEN)
 		icon_state = "destroyed_target_prism"
 	else if(raised || raising)
-		if(powered() && enabled)
+		if(!(stat & NOPOWER) && enabled)
 			if(iconholder)
 				//lasers have a orange icon
 				icon_state = "orange_target_prism"
@@ -238,15 +235,6 @@ var/global/list/turret_icons
 			check_anomalies = value
 
 		return 1
-
-/obj/machinery/porta_turret/power_change()
-	if(powered())
-		stat &= ~NOPOWER
-		queue_icon_update()
-	else
-		spawn(rand(0, 15))
-			stat |= NOPOWER
-			queue_icon_update()
 
 /obj/machinery/porta_turret/physically_destroyed(skip_qdel)
 	if(installation)

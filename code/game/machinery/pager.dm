@@ -31,7 +31,7 @@
 	return TRUE
 
 /obj/machinery/network/pager/proc/activate(mob/living/user)
-	if(!powered())
+	if(stat & NOPOWER)
 		return
 	var/obj/machinery/network/message_server/MS = get_message_server(z)
 	if(!MS)
@@ -50,7 +50,7 @@
 /obj/machinery/network/pager/Topic(href, href_list)
 	if(..())
 		return 1
-	if(!powered())
+	if(stat & NOPOWER)
 		return
 	if(!acknowledged && href_list["ack"])
 		playsound(src, 'sound/machines/ping.ogg', 60)

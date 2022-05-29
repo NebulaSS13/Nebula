@@ -107,7 +107,7 @@
 		if(prob(lightbulb.broken_chance))
 			broken(1)
 
-	on = powered()
+	on = expected_to_be_on()
 	update_icon(0)
 
 /obj/machinery/light/Destroy()
@@ -244,7 +244,7 @@
 	L.forceMove(src)
 	lightbulb = L
 
-	on = powered()
+	on = expected_to_be_on()
 	update_icon()
 
 /obj/machinery/light/proc/remove_bulb()
@@ -297,17 +297,17 @@
 	// attempt to stick weapon into light socket
 	else if(!lightbulb)
 		to_chat(user, "You stick \the [W] into the light socket!")
-		if(powered() && (W.obj_flags & OBJ_FLAG_CONDUCTIBLE))
+		if(expected_to_be_on() && (W.obj_flags & OBJ_FLAG_CONDUCTIBLE))
 			spark_at(src, cardinal_only = TRUE)
 			if (prob(75))
 				electrocute_mob(user, get_area(src), src, rand(0.7,1.0))
 
 
-// returns whether this light has power
+// returns whether this light is expected to be on, disregarding internal state other than power
 // true if area has power and lightswitch is on
-/obj/machinery/light/powered()
+/obj/machinery/light/proc/expected_to_be_on()
 	var/area/A = get_area(src)
-	return A && A.lightswitch && ..(power_channel)
+	return A?.lightswitch && !(stat & NOPOWER)
 
 /obj/machinery/light/proc/flicker(var/amount = rand(10, 20))
 	if(flickering) return
@@ -420,8 +420,14 @@
 
 // called when area power state changes
 /obj/machinery/light/power_change()
-	spawn(10)
-		seton(powered())
+	. = ..()
+	if(.)
+		delay_and_set_on(expected_to_be_on(), 1 SECOND)
+
+/obj/machinery/light/proc/delay_and_set_on(var/new_state, var/delay)
+	set waitfor = FALSE
+	sleep(delay)
+	seton(new_state)
 
 // called when on fire
 
@@ -480,8 +486,8 @@
 /obj/machinery/light/navigation/delay5
 	delay = 5
 
-/obj/machinery/light/navigation/powered()
-	return TRUE
+/obj/machinery/light/navigation
+	stat_immune = NOPOWER | NOINPUT | NOSCREEN
 
 
 // the light item

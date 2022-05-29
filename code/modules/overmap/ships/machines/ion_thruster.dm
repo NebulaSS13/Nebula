@@ -13,7 +13,7 @@
 
 /datum/extension/ship_engine/ion_thruster/has_fuel()
 	var/obj/machinery/ion_thruster/thruster = holder
-	. = istype(thruster) && thruster.powered() && !(thruster.stat & NOPOWER)
+	. = istype(thruster) && !(thruster.stat & NOPOWER)
 
 /datum/extension/ship_engine/ion_thruster/get_status()
 	. = list()
@@ -21,7 +21,7 @@
 	var/obj/machinery/ion_thruster/thruster = holder
 	if(!istype(thruster))
 		. += "Hardware failure - check machinery."
-	else if(!thruster.powered())
+	else if(thruster.stat & NOPOWER)
 		. += "Insufficient power or hardware offline."
 	else
 		. += "Online."
@@ -55,7 +55,7 @@
 	. = ..()
 
 /obj/machinery/ion_thruster/proc/burn(var/partial)
-	if(!use_power || !powered())
+	if(!use_power || (stat & NOPOWER))
 		return 0
 	use_power_oneoff(burn_cost)
 	. = thrust_limit * generated_thrust
