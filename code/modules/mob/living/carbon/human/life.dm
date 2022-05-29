@@ -202,8 +202,7 @@
 	if(stat != DEAD)
 		if ((disabilities & COUGHING) && prob(5) && GET_STATUS(src, STAT_PARA) <= 1)
 			drop_held_items()
-			spawn(0)
-				emote("cough")
+			cough()
 
 /mob/living/carbon/human/handle_mutations_and_radiation()
 	if(getFireLoss())
