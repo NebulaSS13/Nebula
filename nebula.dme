@@ -269,7 +269,7 @@
 #include "code\datums\mil_ranks.dm"
 #include "code\datums\mutable_appearance.dm"
 #include "code\datums\position_point_vector.dm"
-#include "code\datums\progress_bar.dm"
+#include "code\datums\progressbar.dm"
 #include "code\datums\recipe.dm"
 #include "code\datums\ruins.dm"
 #include "code\datums\security_state.dm"
