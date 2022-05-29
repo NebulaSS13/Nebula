@@ -12,30 +12,33 @@
 
 /mob/living/carbon/has_external_organs()
 	return LAZYLEN(external_organs) > 0
-	
+
 /mob/living/carbon/has_internal_organs()
 	return LAZYLEN(internal_organs) > 0
 
+//Deletes all references to organs
 /mob/living/carbon/proc/delete_organs()
 	for(var/obj/item/organ/O in get_organs())
-		remove_organ(O, FALSE, FALSE, TRUE, TRUE, FALSE) //Remove them first so we don't trigger removal effects by just calling delete on them
-	QDEL_LIST_ASSOC_VAL(organs_by_tag)
+		qdel(O)
 	organs_by_tag = null
 	internal_organs = null
 	external_organs = null
 
-/mob/living/carbon/add_organ(var/obj/item/organ/O, var/obj/item/organ/external/affected = null, var/in_place = FALSE, var/update_icon = TRUE)
-	if(LAZYACCESS(organs_by_tag, O.organ_tag))
-		CRASH("mob/living/carbon/add_organ(): '[O]' tried to overwrite [src]'s existing organ '[organs_by_tag[O.organ_tag]]' in slot '[O.organ_tag]'!")
+/mob/living/carbon/add_organ(obj/item/organ/O, obj/item/organ/external/affected, in_place, update_icon, detached)
+	var/obj/item/organ/existing = LAZYACCESS(organs_by_tag, O.organ_tag)
+	if(existing && O != existing)
+		CRASH("mob/living/carbon/add_organ(): '[O]' tried to overwrite [src]'s existing organ '[existing]' in slot '[O.organ_tag]'!")
 	if(O.parent_organ && !LAZYACCESS(organs_by_tag, O.parent_organ))
 		CRASH("mob/living/carbon/add_organ(): Tried to add an internal organ to a non-existing parent external organ!")
 
-	LAZYSET(organs_by_tag, O.organ_tag, O)
-	if(O.is_internal())
+	//We don't add internal organs to the lists if we're detached
+	if(O.is_internal() && !detached)
+		LAZYSET(organs_by_tag, O.organ_tag, O)
 		LAZYDISTINCTADD(internal_organs, O)
-	else
+	//External organs must always be in the organ list even when detached. Otherwise icon updates won't show the limb, and limb attach surgeries won't work
+	else if(!O.is_internal())
+		LAZYSET(organs_by_tag, O.organ_tag, O)
 		LAZYDISTINCTADD(external_organs, O)
-
 	. = ..()
 
 /mob/living/carbon/remove_organ(var/obj/item/organ/O, var/drop_organ = TRUE, var/detach = TRUE, var/ignore_children = FALSE,  var/in_place = FALSE, var/update_icon = TRUE)
@@ -47,6 +50,7 @@
 
 	if(client)
 		client.screen -= O
+	
 	LAZYREMOVE(organs_by_tag, O.organ_tag)
 	if(O.is_internal())
 		LAZYREMOVE(internal_organs, O)
@@ -56,7 +60,7 @@
 //Should handle vital organ checks, icon updates, events
 /mob/living/carbon/on_lost_organ(var/obj/item/organ/O)
 	if(!(. = ..()))
-		return 
+		return
 
 	//Check if we should die
 	if(species.is_vital_organ(src, O))

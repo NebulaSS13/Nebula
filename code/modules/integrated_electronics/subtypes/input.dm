@@ -363,7 +363,7 @@
 		activate_pin(2)
 
 /obj/item/integrated_circuit/input/turfpoint
-	name = "Tile pointer"
+	name = "tile pointer"
 	desc = "This circuit will get a tile ref with the provided absolute coordinates."
 	extended_desc = "If the machine	cannot see the target, it will not be able to calculate the correct direction.\
 	This circuit only works while inside an assembly."
@@ -1031,9 +1031,9 @@
 	power_draw_per_use = 40
 	var/list/mtypes = list(
 		/decl/material/solid/metal/steel,
-		/decl/material/solid/metal/silver, 
-		/decl/material/solid/metal/gold, 
-		/decl/material/solid/gemstone/diamond, 
+		/decl/material/solid/metal/silver,
+		/decl/material/solid/metal/gold,
+		/decl/material/solid/gemstone/diamond,
 		/decl/material/solid/metal/uranium,
 		/decl/material/solid/metal/plasteel,
 		/decl/material/solid/metal/titanium,

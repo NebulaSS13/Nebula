@@ -407,7 +407,7 @@
 /turf/simulated/floor,
 /area/unishi/common)
 "bq" = (
-/obj/structure/stairs/east,
+/obj/structure/stairs/long/east,
 /obj/structure/railing/mapped,
 /turf/simulated/floor,
 /area/unishi/common)
@@ -2450,13 +2450,14 @@
 /turf/simulated/floor/tiled/techfloor,
 /area/unishi/smresearch)
 "gF" = (
-/obj/machinery/power/emitter/anchored/on,
+/obj/machinery/emitter/anchored/on,
 /obj/machinery/atmospherics/pipe/simple/visible/black{
 	dir = 4
 	},
 /obj/structure/cable/yellow{
 	icon_state = "0-8"
 	},
+/obj/machinery/power/terminal,
 /obj/machinery/atmospherics/binary/pump/high_power,
 /obj/effect/floor_decal/industrial/warning,
 /turf/simulated/floor/tiled/techfloor,

@@ -94,7 +94,7 @@
 	additional_reinf_material = null
 	. = ..()
 	if(istype(oldloc))
-		for(var/turf/turf AS_ANYTHING in RANGE_TURFS(oldloc, 1))
+		for(var/turf/turf as anything in RANGE_TURFS(oldloc, 1))
 			for(var/obj/structure/table/table in turf)
 				table.update_connections(FALSE)
 				table.update_icon()
@@ -693,6 +693,7 @@
 	icon_state = "solid_preview"
 	color = WOOD_COLOR_GENERIC
 	material = /decl/material/solid/wood
+	reinf_material = /decl/material/solid/wood
 
 /obj/structure/table/woodentable/mahogany
 	color = WOOD_COLOR_RICH

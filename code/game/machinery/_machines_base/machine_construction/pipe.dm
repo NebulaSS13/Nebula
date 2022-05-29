@@ -7,7 +7,7 @@
 	return TRUE
 
 /decl/machine_construction/pipe/proc/deconstruct_transition(obj/item/I, mob/user, obj/machinery/machine)
-	if(isWrench(I))
+	if(IS_WRENCH(I))
 		TRANSFER_STATE(/decl/machine_construction/default/deconstructed)
 		playsound(get_turf(machine), 'sound/items/Ratchet.ogg', 50, 1)
 		machine.visible_message(SPAN_NOTICE("\The [user] unfastens \the [machine]."))
@@ -24,7 +24,7 @@
 
 // Same, but uses different tool.
 /decl/machine_construction/pipe/welder/deconstruct_transition(obj/item/I, mob/user, obj/machinery/machine)
-	if(isWelder(I))
+	if(IS_WELDER(I))
 		var/obj/item/weldingtool/WT = I
 		if(!WT.isOn())
 			return FALSE

@@ -22,8 +22,8 @@ var/global/list/terminal_commands
 	regex = new (pattern, regex_flags)
 	..()
 
-/datum/terminal_command/proc/check_access(mob/user)
-	return has_access(req_access, user.GetAccess())
+/datum/terminal_command/proc/check_access(list/access)
+	return has_access(req_access, access)
 
 /datum/terminal_command/proc/get_nid(text)
 	if(!nid_regex)
@@ -41,7 +41,7 @@ var/global/list/terminal_commands
 		return
 	if(!user.skill_check(core_skill, skill_needed))
 		return skill_fail_message()
-	if(!check_access(user))
+	if(!check_access(terminal.get_access(user)))
 		return "[name]: ACCESS DENIED"
 	if(needs_network && !terminal.computer.get_network_status())
 		return "NETWORK ERROR: Check connection and try again."
@@ -287,7 +287,7 @@ Subtypes
 		var/datum/extension/network_device/mainframe/M = network.get_device_by_tag(network_tag)
 		if(!istype(M))
 			return "cd: Could not locate file server with tag [network_tag]."
-		if(!M.has_access(user))
+		if(!M.has_access(terminal.get_access(user)))
 			return "cd: Access denied to file server with tag [network_tag]"
 		terminal.current_disk = terminal.disks[/datum/file_storage/network]
 		if(!terminal.current_disk)
@@ -336,15 +336,15 @@ Subtypes
 	
 	var/file_name = copytext(text, 4)
 
-	var/deleted = terminal.current_disk.delete_file(file_name)
+	var/deleted = terminal.current_disk.delete_file(file_name, terminal.get_access(user), user)
 	if(deleted)
 		return "rm: Removed file [file_name]."
 	else
-		return "rm: Failed to remove file [file_name]."
+		return "rm: Failed to remove file [file_name]. Additional access may be required."
 
 /datum/terminal_command/move
 	name = "mv"
-	man_entry = list("Format: mv \[file name\] \[destination\]", "Moves a file in the current disk to another.")
+	man_entry = list("Format: mv \[file name\] \[destination\] \[copying (0/1) \]", "Moves a file in the current disk to another.")
 	pattern = @"^mv"
 
 /datum/terminal_command/move/proper_input_entered(text, mob/user, datum/terminal/terminal)
@@ -353,11 +353,17 @@ Subtypes
 	
 	var/list/mv_args = get_arguments(text)
 	if(length(mv_args) < 2)
-		return "mv: Improper syntax, use mv \[file name\] \[destination\]."
+		return "mv: Improper syntax, use mv \[file name\] \[destination\] \[copying (0/1) \]."
 	var/datum/computer_file/F = terminal.current_disk.get_file(mv_args[1])
 	if(!F)
 		return "mv: Could not find file with name [mv_args[1]]."
-
+	var/copying = length(mv_args > 2) ? text2num(mv_args[3]) : FALSE
+	if(copying == TRUE)
+		if(!(F.get_file_perms(terminal.get_access(user), user) & OS_READ_ACCESS))
+			return "mv: You do not have read access to this file."
+	else
+		if(!(F.get_file_perms(terminal.get_access(user), user) & OS_WRITE_ACCESS))
+			return "mv: You do not have write access to this file. Write access is required when not copying files with mv"
 	// Find the destination.
 	var/datum/file_storage/dest
 	var/target = uppertext(mv_args[2])
@@ -383,7 +389,7 @@ Subtypes
 		var/datum/extension/network_device/mainframe/M = network.get_device_by_tag(target)
 		if(!istype(M))
 			return "mv: Could not locate destination with tag [target]."
-		if(!M.has_access(user))
+		if(!M.has_access(terminal.get_access(user)))
 			return "mv: Access denied to destination with tag [target]"
 		dest = terminal.disks[/datum/file_storage/network]
 		if(!dest)
@@ -398,7 +404,7 @@ Subtypes
 	if(!dest)
 		return "mv: Could not locate file destination."
 	
-	terminal.current_move = new(terminal.current_disk, dest, F)
+	terminal.current_move = new(terminal.current_disk, dest, F, copying)
 	return "mv: Beginning file move..."
 
 /datum/terminal_command/copy
@@ -462,6 +468,106 @@ Subtypes
 	terminal.network_target = uppertext(target_args[1])
 	return "target: Changed network target to [terminal.network_target]."
 
+/datum/terminal_command/login
+	name = "login"
+	man_entry = list("Format: login \[account login\] \[account password\]", "Logs in to the given user account.")
+	pattern = @"^login"
+	needs_network = TRUE
+
+/datum/terminal_command/login/proper_input_entered(text, mob/user, datum/terminal/terminal)
+
+	var/list/login_args = get_arguments(text)
+
+	if(length(login_args) < 2)
+		return "login: Improper syntax, use login \[account login\] \[account password\]."
+
+	var/datum/extension/interactive/os/account_computer = terminal.get_account_computer()
+	var/login_success = account_computer.login_account(login_args[1], login_args[2])
+	if(login_success)
+		return "login: Login successful. Welcome [login_args[1]]!"
+	return "login: Could not log in to account [login_args[1]]. Check password or network connectivity."
+
+/datum/terminal_command/logout
+	name = "logout"
+	man_entry = list("Format: logout", "Logs out of the current user account.")
+	pattern = @"^logout"
+	needs_network =  TRUE
+
+/datum/terminal_command/logout/proper_input_entered(text, mob/user, datum/terminal/terminal)
+	var/datum/extension/interactive/os/account_computer = terminal.get_account_computer()
+	account_computer.logout_account()
+	return "logout: Log out successful."
+
+/datum/terminal_command/permmod
+	name = "permmod"
+	man_entry = list("Format: permmod \[file name\] \[access key\] \[permission mod flags\]", "Modifies or lists the permissions of the given file. Do not pass an access key to list permissions.",
+	"Supported flags are as follows:",
+	"'+/-' - Add or Remove access requirement",
+	"'r/w/m' - Target read/write/modification access",
+	"'u/g' - Add group or individual user access requirement",
+	"For example, the command 'permmod TestFile bronte.lowe +ru' would add bronte.lowe to the read permissions list of the file TestFile."
+	) // TODO: Add an actual flags option for terminal commands in addition to arguments
+	pattern = @"^permmod"
+	needs_network = TRUE
+
+/datum/terminal_command/permmod/proper_input_entered(text, mob/user, datum/terminal/terminal)
+
+	if(!terminal.current_disk)
+		return "permmod: No disk selected."
+
+	var/list/permmod_args = get_arguments(text)
+	if(!length(permmod_args))
+		return "permmod: Improper syntax, use permmod \[file name\] \[access key\] \[permission mod flags\]."
+
+	var/datum/computer_file/F = terminal.current_disk.get_file(permmod_args[1])
+	if(!F)
+		return "permmod: Could not find file with name [permmod_args[1]]."
+	
+	if(length(permmod_args) < 3)
+		return F.get_perms_readable()
+
+	var/flags = permmod_args[3]
+	var/mode
+	var/access_key
+	var/perm
+	if(findtext(flags, "-"))
+		mode = "-"
+	else if(findtext(flags, "+"))
+		mode = "+"
+	if(!mode)
+		return "permmod: Invalid flag syntax. Use man command to learn more about permmod flag syntax."
+	
+	if(findtext(flags, "r"))
+		perm = OS_READ_ACCESS
+	else if(findtext(flags, "w"))
+		perm = OS_WRITE_ACCESS 
+	else if(findtext(flags, "m"))
+		perm = OS_MOD_ACCESS
+	else
+		return "permmod: Invalid flag syntax. Use man command to learn more about permmod flag syntax."
+	var/datum/computer_network/network = terminal.computer.get_network()
+	if(findtext(flags, "u"))
+		var/account_login = permmod_args[2]
+		if(!network.find_account_by_login(account_login))
+			return "permmod: No user account with login '[account_login]' found."
+		access_key = "[account_login]@[network.network_id]"
+	else if(findtext(flags, "g"))
+		var/group_name = permmod_args[2]
+		var/datum/extension/network_device/acl/acl = network.access_controller
+		if(!istype(acl))
+			return "permmod: No active ACL could be located on the network."
+		if(!(group_name in acl.get_all_groups()))
+			return "permmod: No group with name '[group_name]' found."
+		access_key = "[group_name].[network.network_id]"
+	else
+		return "permmod: Invalid flag syntax. Use man command to learn more about permmod flag syntax."
+
+	var/success = F.change_perms(mode, perm, access_key, terminal.get_access(user))
+	if(success)
+		return "permmod: Successfully changed permissions for [F.filename]."
+	else
+		return "permmod: Could not change permissions for [F.filename]. You may lack permission modification access."
+
 // Terminal commands for passing information to public variables and methods follows
 /datum/terminal_command/com
 	name = "com"
@@ -510,7 +616,7 @@ Subtypes
 	else if(length(com_args) == 2)
 		called_args = com_args[2]
 
-	return D.on_command(com_args[1], called_args, user)
+	return D.on_command(com_args[1], called_args, terminal.get_access(user))
 
 // Lists the commands available on the target device.
 /datum/terminal_command/listcom

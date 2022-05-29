@@ -27,7 +27,7 @@
 
 /obj/structure/mineral_bath/proc/enter_bath(var/mob/living/patient, var/mob/user)
 
-	if(!istype(patient))
+	if(!istype(patient) || patient.anchored)
 		return FALSE
 
 	var/self_drop = (user == patient)
@@ -107,7 +107,7 @@
 		var/repaired_organ
 
 		// Replace limbs for crystalline species.
-		if(H.species.is_crystalline && prob(10))
+		if((H.species.species_flags & SPECIES_FLAG_CRYSTALLINE) && prob(10))
 			for(var/limb_type in H.species.has_limbs)
 				var/obj/item/organ/external/E = H.get_organ(limb_type)
 				if(E && !E.is_usable() && !(E.limb_flags & ORGAN_FLAG_HEALS_OVERKILL))

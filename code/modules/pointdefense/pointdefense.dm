@@ -86,7 +86,7 @@
 	return data
 
 /obj/machinery/pointdefense_control/attackby(var/obj/item/thing, var/mob/user)
-	if(isMultitool(thing))
+	if(IS_MULTITOOL(thing))
 		var/datum/extension/local_network_member/pointdefense = get_extension(src, /datum/extension/local_network_member)
 		pointdefense.get_new_tag(user)
 		//Check if there is more than 1 controller
@@ -109,7 +109,7 @@
 	idle_power_usage = 0.1 KILOWATTS
 	construct_state = /decl/machine_construction/default/panel_closed
 	base_type = /obj/machinery/pointdefense
-	stock_part_presets = list(/decl/stock_part_preset/terminal_setup)
+	stock_part_presets = list(/decl/stock_part_preset/terminal_connect)
 	uncreated_component_parts = null
 	appearance_flags = PIXEL_SCALE | LONG_GLIDE
 	var/active = TRUE
@@ -138,7 +138,7 @@
 	. = ..()
 
 /obj/machinery/pointdefense/attackby(var/obj/item/thing, var/mob/user)
-	if(isMultitool(thing))
+	if(IS_MULTITOOL(thing))
 		var/datum/extension/local_network_member/pointdefense = get_extension(src, /datum/extension/local_network_member)
 		pointdefense.get_new_tag(user)
 		return TRUE

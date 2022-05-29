@@ -58,7 +58,7 @@
 			src.SetName("body bag")
 		src.update_icon()
 		return
-	else if(isWirecutter(W))
+	else if(IS_WIRECUTTER(W))
 		src.SetName("body bag")
 		has_label = FALSE
 		to_chat(user, "You cut the tag off \the [src].")

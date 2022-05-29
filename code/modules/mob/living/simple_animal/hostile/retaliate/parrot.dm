@@ -104,6 +104,15 @@
 
 	update_icon()
 
+/mob/living/simple_animal/hostile/retaliate/parrot/Destroy()
+	QDEL_NULL(ears)
+	parrot_interest = null
+	parrot_perch = null
+	if(held_item)
+		held_item.dropInto(loc)
+		held_item = null
+	return ..()
+
 /mob/living/simple_animal/hostile/retaliate/parrot/death(gibbed, deathmessage, show_dead_message)
 	if(held_item)
 		held_item.dropInto(loc)
@@ -517,6 +526,8 @@
 	return null
 
 /mob/living/simple_animal/hostile/retaliate/parrot/proc/give_up()
+	if(!length(enemies))
+		return
 	enemies = list()
 	LoseTarget()
 	visible_message(SPAN_NOTICE("\The [src] seems to calm down."))

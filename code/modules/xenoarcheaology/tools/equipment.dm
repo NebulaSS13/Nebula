@@ -1,11 +1,11 @@
 /obj/item/clothing/suit/bio_suit/anomaly
-	name = "Anomaly suit"
+	name = "anomaly suit"
 	desc = "A suit that protects against exotic alien energies and biological contamination."
 	anomaly_shielding = 0.7
 	icon = 'icons/clothing/suit/biosuit/anomaly.dmi'
 
 /obj/item/clothing/head/bio_hood/anomaly
-	name = "Anomaly hood"
+	name = "anomaly hood"
 	desc = "A hood that protects the head and face from exotic alien energies and biological contamination."
 	icon = 'icons/clothing/head/biosuit/anomaly.dmi'
 	anomaly_shielding = 0.3
@@ -15,10 +15,10 @@
 	desc = "A specially shielded voidsuit that insulates against some exotic alien energies, as well as the more mundane dangers of excavation."
 	icon = 'icons/clothing/spacesuit/void/excavation/suit.dmi'
 	armor = list(
-		melee = ARMOR_MELEE_RESISTANT, 
-		energy = ARMOR_ENERGY_RESISTANT, 
-		bomb = ARMOR_BOMB_PADDED, 
-		bio = ARMOR_BIO_SHIELDED, 
+		melee = ARMOR_MELEE_RESISTANT,
+		energy = ARMOR_ENERGY_RESISTANT,
+		bomb = ARMOR_BOMB_PADDED,
+		bio = ARMOR_BIO_SHIELDED,
 		rad = ARMOR_RAD_SHIELDED
 	)
 	anomaly_shielding = 0.6
@@ -29,10 +29,10 @@
 	desc = "A sophisticated voidsuit helmet, capable of protecting the wearer from many exotic alien energies."
 	icon = 'icons/clothing/spacesuit/void/excavation/helmet.dmi'
 	armor = list(
-		melee = ARMOR_MELEE_RESISTANT, 
-		energy = ARMOR_ENERGY_RESISTANT, 
-		bomb = ARMOR_BOMB_PADDED, 
-		bio = ARMOR_BIO_SHIELDED, 
+		melee = ARMOR_MELEE_RESISTANT,
+		energy = ARMOR_ENERGY_RESISTANT,
+		bomb = ARMOR_BOMB_PADDED,
+		bio = ARMOR_BIO_SHIELDED,
 		rad = ARMOR_RAD_SHIELDED
 	)
 	anomaly_shielding = 0.2

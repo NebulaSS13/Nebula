@@ -54,9 +54,9 @@
 	//So admins know why it isn't working - Used to determine what other accounts previously logged in from this computer id
 	var/related_accounts_cid = "Requires database"
 
-	///custom movement keys for this client
+	/// Custom movement keys for this client
 	var/list/movement_keys = list()
-	///Are we locking our movement input?
+	/// Are we locking our movement input?
 	var/movement_locked = FALSE
 
 	/// A buffer of currently held keys.

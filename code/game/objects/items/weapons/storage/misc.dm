@@ -33,7 +33,7 @@
 	can_hold = list(/obj/item/chems/food/donut)
 	foldable = /obj/item/stack/material/cardstock
 
-	startswith = list(/obj/item/chems/food/donut/normal = 6)
+	startswith = list(/obj/item/chems/food/donut = 6)
 
 /obj/item/storage/box/donut/on_update_icon()
 	overlays.Cut()

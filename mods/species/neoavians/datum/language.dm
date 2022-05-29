@@ -49,6 +49,7 @@
 	name = "Neo-Avian Milieu"
 	description = "Neo-avians form a loose coalition of family and flock groupings, and are usually in an extreme minority in human settlements. \
 	They tend to cope poorly with confined, crowded spaces like human habs, and often make their homes in hab domes or other spacious facilities."
+	language = /decl/language/neoavian
 	secondary_langs = list(
 		/decl/language/corvid,
 		/decl/language/neoavian,

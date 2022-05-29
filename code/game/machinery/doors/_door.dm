@@ -277,7 +277,7 @@
 
 		return TRUE
 
-	if(repairing && isWelder(I))
+	if(repairing && IS_WELDER(I))
 		if(!density)
 			to_chat(user, "<span class='warning'>\The [src] must be closed before you can repair it.</span>")
 			return TRUE
@@ -294,7 +294,7 @@
 				repairing = null
 		return TRUE
 
-	if(repairing && isCrowbar(I))
+	if(repairing && IS_CROWBAR(I))
 		to_chat(user, "<span class='notice'>You remove \the [repairing].</span>")
 		playsound(src.loc, 'sound/items/Crowbar.ogg', 100, 1)
 		repairing.dropInto(user.loc)
@@ -393,52 +393,57 @@
 				flick("door_deny", src)
 				playsound(src.loc, 'sound/machines/buzz-two.ogg', 50, 0)
 
-/obj/machinery/door/proc/open(var/forced = 0)
+/obj/machinery/door/proc/open(forced = FALSE)
 	if(!can_open(forced))
 		return
+
 	operating = 1
 
 	do_animate("opening")
 	icon_state = "door0"
-	set_opacity(0)
-	sleep(3)
-	src.set_density(0)
+	set_opacity(FALSE)
+
+	sleep(0.5 SECONDS)
+	src.set_density(FALSE)
 	update_nearby_tiles()
-	sleep(7)
+
+	sleep(0.5 SECONDS)
 	src.layer = open_layer
 	update_icon()
-	set_opacity(0)
+	set_opacity(FALSE)
 	operating = 0
 
 	if(autoclose)
 		close_door_at = next_close_time()
 
-	return 1
+	return TRUE
 
 /obj/machinery/door/proc/next_close_time()
 	return world.time + (normalspeed ? 150 : 5)
 
-/obj/machinery/door/proc/close(var/forced = 0)
+/obj/machinery/door/proc/close(forced = FALSE)
 	if(!can_close(forced))
 		return
+
 	operating = 1
 
 	close_door_at = 0
 	do_animate("closing")
-	sleep(3)
-	src.set_density(1)
-	src.layer = closed_layer
+
+	sleep(0.5 SECONDS)
+	src.set_density(TRUE)
 	update_nearby_tiles()
-	sleep(7)
+	src.layer = closed_layer
+
+	sleep(0.5 SECONDS)
 	update_icon()
 	if(visible && !glass)
-		set_opacity(1)	//caaaaarn!
+		set_opacity(TRUE)
 	operating = 0
 
 	//I shall not add a check every x ticks if a door has closed over some fire.
 	var/obj/fire/fire = locate() in loc
-	if(fire)
-		qdel(fire)
+	qdel(fire)
 
 /obj/machinery/door/proc/toggle(to_open = density)
 	if(to_open)
@@ -543,6 +548,9 @@
 	for(var/obj/item/stock_parts/access_lock/lock in get_all_components_of_type(/obj/item/stock_parts/access_lock))
 		if(lock.locked && length(lock.req_access))
 			. |= lock.req_access
+
+	for(var/obj/item/stock_parts/network_receiver/network_lock/lock in get_all_components_of_type(/obj/item/stock_parts/network_receiver/network_lock))
+		. |= lock.get_req_access()
 
 /obj/machinery/door/do_simple_ranged_interaction(var/mob/user)
 	if((!requiresID() || allowed(null)) && can_operate(user) && can_open_manually)

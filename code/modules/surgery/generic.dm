@@ -49,7 +49,7 @@
 	var/obj/item/organ/external/affected = target.get_organ(target_zone)
 	user.visible_message("<span class='notice'>[user] has made [access_string] on [target]'s [affected.name] with \the [tool].</span>", \
 	"<span class='notice'>You have made [access_string] on [target]'s [affected.name] with \the [tool].</span>",)
-	affected.createwound(CUT, affected.min_broken_damage/2, 1)
+	affected.createwound(CUT, CEILING(affected.min_broken_damage/2), TRUE)
 	playsound(target.loc, 'sound/weapons/bladeslice.ogg', 15, 1)
 	if(tool.damtype == BURN)
 		affected.clamp_organ()

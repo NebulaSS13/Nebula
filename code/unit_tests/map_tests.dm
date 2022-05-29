@@ -5,11 +5,6 @@
  *
  *
  */
-
-#define FAILURE 0
-#define SUCCESS 1
-
-
 /datum/unit_test/apc_area_test
 	name = "MAP: Area Test APC / Scrubbers / Vents"
 
@@ -266,7 +261,7 @@
 
 /datum/unit_test/correct_allowed_spawn_test/start_test()
 	var/list/failed = list()
-	for(var/decl/spawnpoint/spawnpoint AS_ANYTHING in global.using_map.allowed_spawns)
+	for(var/decl/spawnpoint/spawnpoint as anything in global.using_map.allowed_spawns)
 		if(!length(spawnpoint.turfs))
 			log_unit_test("Map allows spawning in [spawnpoint.name], but [spawnpoint.name] has no associated spawn turfs.")
 			failed += spawnpoint.type
@@ -836,6 +831,3 @@
 	else
 		pass("All doors are on appropriate turfs")
 	return TRUE
-
-#undef SUCCESS
-#undef FAILURE

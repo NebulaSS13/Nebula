@@ -29,7 +29,7 @@
 	var/tmp/list/desc_list = list()
 	var/tmp/list/damage_list = list()
 
-/datum/wound/New(var/damage, var/obj/item/organ/external/organ = null)
+/datum/wound/New(var/damage, var/obj/item/organ/external/organ = null, var/surgical)
 
 	created = world.time
 
@@ -38,6 +38,10 @@
 	for(var/V in stages)
 		desc_list += V
 		damage_list += stages[V]
+
+	// Surgical wounds need to be at minimum big enough to be considered open, which is max_bleeding_stage.
+	if(surgical)
+		damage = max(damage, damage_list[Clamp(max_bleeding_stage, 1, length(damage_list))]+1)
 
 	src.damage = damage
 

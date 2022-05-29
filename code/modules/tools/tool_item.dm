@@ -18,8 +18,11 @@
 		return FALSE
 
 	if(. == TOOL_USE_SUCCESS)
-		var/decl/tool_archetype/tool_archetype = GET_DECL(archetype)
-		user.visible_message(SPAN_NOTICE("\The [user] finishes [success_message || tool_archetype.use_message] \the [target] with \the [src]."), SPAN_NOTICE("You finish [success_message || tool_archetype.use_message] \the [target] with \the [src]."))
+		if(success_message)
+			user.visible_message(
+				SPAN_NOTICE("\The [user] finishes [success_message] \the [target] with \the [src]."), 
+				SPAN_NOTICE("You finish [success_message] \the [target] with \the [src].")
+			)
 		return TRUE
 
 	if(. == TOOL_USE_FAILURE_NOMESSAGE && failure_message)

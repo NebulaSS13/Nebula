@@ -1056,7 +1056,7 @@
 /area/ship/trade/shuttle/outgoing)
 "cI" = (
 /obj/structure/cable,
-/obj/machinery/power/port_gen/pacman/super,
+/obj/machinery/port_gen/pacman/super,
 /turf/simulated/floor/plating,
 /area/ship/trade/shuttle/outgoing)
 "cL" = (
@@ -3528,7 +3528,7 @@
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/ship/trade/maintenance/power)
 "iU" = (
-/obj/machinery/power/shield_generator,
+/obj/machinery/shield_generator,
 /obj/structure/cable{
 	icon_state = "0-2";
 	pixel_y = 1
@@ -4035,7 +4035,7 @@
 /obj/structure/cable{
 	icon_state = "0-4"
 	},
-/obj/machinery/power/fusion_core/mapped{
+/obj/machinery/fusion_core/mapped{
 	initial_id_tag = "main_drive"
 	},
 /turf/simulated/floor/reinforced/airless,
@@ -4059,7 +4059,7 @@
 "kc" = (
 /obj/structure/cable,
 /obj/machinery/light,
-/obj/machinery/power/port_gen/pacman/super,
+/obj/machinery/port_gen/pacman/super,
 /obj/item/wrench,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/ship/trade/maintenance/power)
@@ -5889,7 +5889,7 @@
 /obj/structure/cable{
 	icon_state = "0-4"
 	},
-/obj/machinery/power/port_gen/pacman/super,
+/obj/machinery/port_gen/pacman/super,
 /turf/simulated/floor/plating,
 /area/ship/trade/shieldbay)
 "IM" = (
@@ -6140,7 +6140,7 @@
 /turf/simulated/floor/plating,
 /area/ship/trade/crew/hallway/starboard)
 "Lm" = (
-/obj/machinery/power/shield_generator,
+/obj/machinery/shield_generator,
 /obj/structure/cable{
 	icon_state = "0-8"
 	},
@@ -6366,12 +6366,13 @@
 /obj/machinery/meter,
 /obj/machinery/atmospherics/pipe/manifold/visible/fuel,
 /obj/structure/window/borosilicate_reinforced,
-/obj/machinery/power/emitter/gyrotron/anchored{
+/obj/machinery/emitter/gyrotron/anchored{
 	initial_id_tag = "main_drive"
 	},
 /obj/structure/cable{
 	icon_state = "0-4"
 	},
+/obj/machinery/power/terminal,
 /turf/simulated/floor/plating,
 /area/ship/trade/maintenance/engine/aft)
 "OP" = (

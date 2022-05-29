@@ -2576,7 +2576,7 @@
 /turf/simulated/floor/plating,
 /area/lar_maria/sec_wing)
 "gJ" = (
-/obj/machinery/power/port_gen/pacman/mrs,
+/obj/machinery/port_gen/pacman/mrs,
 /obj/structure/cable/yellow{
 	icon_state = "0-8"
 	},
@@ -2721,7 +2721,7 @@
 /turf/simulated/floor/plating,
 /area/lar_maria/cells)
 "hd" = (
-/obj/structure/stairs/south,
+/obj/structure/stairs/long,
 /turf/simulated/floor/tiled,
 /area/lar_maria/vir_access)
 "he" = (

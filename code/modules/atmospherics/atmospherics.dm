@@ -48,7 +48,7 @@ Pipelines + Other Objects -> Pipe network
 	. = ..()
 
 /obj/machinery/atmospherics/Destroy()
-	for(var/obj/machinery/atmospherics/node AS_ANYTHING in nodes_to_networks)
+	for(var/obj/machinery/atmospherics/node as anything in nodes_to_networks)
 		QDEL_NULL(nodes_to_networks[node])
 		node.disconnect(src)
 	nodes_to_networks = null
@@ -56,7 +56,7 @@ Pipelines + Other Objects -> Pipe network
 
 /obj/machinery/atmospherics/proc/atmos_init()
 	atmos_initalized = TRUE
-	for(var/obj/machinery/atmospherics/node AS_ANYTHING in nodes_to_networks)
+	for(var/obj/machinery/atmospherics/node as anything in nodes_to_networks)
 		QDEL_NULL(nodes_to_networks[node])
 	nodes_to_networks = null
 	for(var/direction in global.cardinal)
@@ -105,7 +105,7 @@ Pipelines + Other Objects -> Pipe network
 		return
 	var/disconnected_directions = initialize_directions
 	var/visible_directions = 0
-	for(var/obj/machinery/atmospherics/node AS_ANYTHING in nodes_to_networks)
+	for(var/obj/machinery/atmospherics/node as anything in nodes_to_networks)
 		var/node_dir = get_dir(src, node)
 		disconnected_directions &= ~node_dir
 		if(hide_hidden_pipes && !T.is_plating() && node.level == 1 && istype(node, /obj/machinery/atmospherics/pipe))
@@ -144,7 +144,7 @@ Pipelines + Other Objects -> Pipe network
 	// Note don't forget to have neighbors look as well!
 
 	// Default behavior is: one network for all nodes in a given dir
-	for(var/obj/machinery/atmospherics/node AS_ANYTHING in nodes_in_dir(get_dir(src, reference)))
+	for(var/obj/machinery/atmospherics/node as anything in nodes_in_dir(get_dir(src, reference)))
 		if(nodes_to_networks[node] != new_network)
 			qdel(nodes_to_networks[node])
 			nodes_to_networks[node] = new_network
@@ -260,8 +260,8 @@ Pipelines + Other Objects -> Pipe network
 // called after being built by hand, before the pipe item or circuit is deleted
 /obj/machinery/atmospherics/proc/build(obj/item/builder)
 	atmos_init()
-	for(var/obj/machinery/atmospherics/node AS_ANYTHING in nodes_to_networks)
+	for(var/obj/machinery/atmospherics/node as anything in nodes_to_networks)
 		node.atmos_init()
 	build_network()
-	for(var/obj/machinery/atmospherics/node AS_ANYTHING in nodes_to_networks)
+	for(var/obj/machinery/atmospherics/node as anything in nodes_to_networks)
 		node.build_network()

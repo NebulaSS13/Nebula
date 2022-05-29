@@ -70,7 +70,7 @@
 		update_icon()
 		return
 
-	if(isScrewdriver(W))
+	if(IS_SCREWDRIVER(W))
 		crafting = !crafting
 		if(!crafting)
 			to_chat(user, "<span class='notice'>You reassemble the RCD</span>")

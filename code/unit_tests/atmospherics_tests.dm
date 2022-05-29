@@ -339,7 +339,7 @@
 /datum/unit_test/atmos_machinery_node_reciprocity/start_test()
 	var/fail = FALSE
 	for(var/obj/machinery/atmospherics/machine in SSmachines.machinery)
-		for(var/obj/machinery/atmospherics/node AS_ANYTHING in machine.nodes_to_networks)
+		for(var/obj/machinery/atmospherics/node as anything in machine.nodes_to_networks)
 			if(node == machine)
 				log_bad("[log_info_line(machine)] was its own node.")
 				fail = TRUE
@@ -403,7 +403,7 @@
 		// then, pipes from machine datums are used to spawn machines ("player-built" behavior)
 		for(var/type in subtypesof(/datum/fabricator_recipe/pipe))
 			var/datum/fabricator_recipe/pipe/recipe = new type()
-			var/list/stuff = recipe.build(T)
+			var/list/stuff = recipe.build(T, new/datum/fabricator_build_order(recipe) )
 			var/obj/item/pipe/pipe = locate() in stuff
 			if(pipe)
 				stuff -= pipe

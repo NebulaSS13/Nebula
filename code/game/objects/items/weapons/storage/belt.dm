@@ -456,17 +456,20 @@
 	name = "firefighting equipment belt"
 	desc = "A belt specially designed for firefighting."
 	icon = 'icons/clothing/belt/firefighter.dmi'
-	storage_slots = 5
+	storage_slots = 6
 	overlay_flags = BELT_OVERLAY_ITEMS
 	can_hold = list(
 		/obj/item/grenade/chem_grenade/water,
 		/obj/item/extinguisher/mini,
+		/obj/item/inflatable,
 		/obj/item/inflatable/door
 		)
 
 
 /obj/item/storage/belt/fire_belt/full
 	startswith = list(
+		/obj/item/inflatable,
+		/obj/item/inflatable,
 		/obj/item/inflatable/door,
 		/obj/item/extinguisher/mini,
 		/obj/item/grenade/chem_grenade/water = 2

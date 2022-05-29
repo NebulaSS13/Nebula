@@ -23,7 +23,7 @@
 	var/healed_threshold = 1
 	var/oxygen_reserve = 6
 
-/obj/item/organ/internal/brain/robotize(var/company = /decl/prosthetics_manufacturer, var/skip_prosthetics, var/keep_organs, var/apply_material = /decl/material/solid/metal/steel)
+/obj/item/organ/internal/brain/robotize(var/company = /decl/prosthetics_manufacturer, var/skip_prosthetics = 0, var/keep_organs = 0, var/apply_material = /decl/material/solid/metal/steel, var/check_bodytype, var/check_species)
 	replace_self_with(/obj/item/organ/internal/posibrain)
 
 /obj/item/organ/internal/brain/mechassist()
@@ -37,7 +37,7 @@
 	owner.remove_organ(src, FALSE, FALSE, TRUE, TRUE, FALSE)
 	qdel(src)
 	if(tmp_owner)
-		var/obj/item/organ/org = new replace_path(tmp_owner, given_dna = dna)
+		var/obj/item/organ/org = new replace_path(tmp_owner, null, dna)
 		tmp_owner.add_organ(org, tmp_owner.get_organ(org.parent_organ), TRUE, TRUE)
 		tmp_owner = null
 
@@ -78,17 +78,17 @@
 	else
 		to_chat(user, "This one seems particularly lifeless. Perhaps it will regain some of its luster later..")
 
-/obj/item/organ/internal/brain/do_install(mob/living/carbon/target, affected, in_place, update_icon)
+/obj/item/organ/internal/brain/do_install(mob/living/carbon/target, affected, in_place, update_icon, detached)
 	if(!(. = ..())) 
 		return
 	if(istype(owner))
 		SetName(initial(name)) //Reset the organ's name to stay coherent if we're putting it back into someone's skull
 
 /obj/item/organ/internal/brain/do_uninstall(in_place, detach, ignore_children, update_icon)
-	if(!(. = ..()))
-		return
 	if(!in_place && istype(owner) && name == initial(name))
 		SetName("\the [owner.real_name]'s [initial(name)]")
+	if(!(. = ..()))
+		return
 
 /obj/item/organ/internal/brain/on_remove_effects()
 	if(istype(owner))

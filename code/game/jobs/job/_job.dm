@@ -449,7 +449,7 @@
 		spawnpos = null
 	if(!spawnpos)
 		// Step through all spawnpoints and pick first appropriate for job
-		for(var/decl/spawnpoint/candidate AS_ANYTHING in global.using_map.allowed_spawns)
+		for(var/decl/spawnpoint/candidate as anything in global.using_map.allowed_spawns)
 			if(candidate?.check_job_spawning(src))
 				spawnpos = candidate
 				break

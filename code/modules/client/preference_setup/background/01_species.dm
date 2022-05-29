@@ -66,7 +66,10 @@
 	else
 		. += "<td width = '200px' align='center'>No preview available.</td>"
 		
-	var/desc = current_species.description || "No additional details."
+	var/desc = current_species.description ? "<h3>Species Summary</h3><p>[current_species.description]</p>" : null
+	if(current_species.roleplay_summary)
+		desc = "[desc]<h3>Roleplaying Summary</h3><p>[current_species.roleplay_summary]</p>"
+		
 	if(hide_species && length(desc) > 200)
 		desc = "[copytext(desc, 1, 194)] <small>\[...\]</small>"
 	. += "<td width>[desc]</td>"

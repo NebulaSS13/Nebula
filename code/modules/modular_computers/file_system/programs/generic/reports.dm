@@ -24,7 +24,7 @@
 	switch(prog_state)
 		if(REPORTS_VIEW)
 			if(selected_report)
-				data["report_data"] = selected_report.generate_nano_data(get_access(user))
+				data["report_data"] = selected_report.generate_nano_data(get_access(user), user)
 			data["view_only"] = can_view_only
 			data["printer"] = program.computer.has_component(PART_PRINTER)
 		if(REPORTS_DOWNLOAD)
@@ -65,7 +65,8 @@
 	if(!program.computer || !program.computer.has_component(PART_HDD))
 		to_chat(user, "Unable to find hard drive.")
 		return
-	selected_report.rename_file()
+	if(save_as) // We're copying, so don't overwrite the actual report.
+		selected_report.rename_file()
 	if(program.computer.store_file(selected_report))
 		saved_report = selected_report
 		selected_report = saved_report.clone()
@@ -85,12 +86,12 @@
 		var/datum/computer_file/report/chosen_report = choices[choice]
 		var/editing = alert(user, "Would you like to view or edit the report", "Loading Report", "View", "Edit")
 		if(editing == "View")
-			if(!chosen_report.verify_access(get_access(user)))
+			if(!(chosen_report.get_file_perms(get_access(user), user) & OS_READ_ACCESS))
 				to_chat(user, "<span class='warning'>You lack access to view this report.</span>")
 				return
 			can_view_only = 1
 		else
-			if(!chosen_report.verify_access_edit(get_access(user)))
+			if(!(chosen_report.get_file_perms(get_access(user), user) & OS_WRITE_ACCESS))
 				to_chat(user, "<span class='warning'>You lack access to edit this report.</span>")
 				return
 			can_view_only = 0
@@ -115,16 +116,17 @@
 	if(href_list["save"])
 		if(!selected_report)
 			return 1
-		if(!selected_report.verify_access(get_access(user)))
-			return 1
 		var/save_as = text2num(href_list["save_as"])
+		var/req_access = save_as ? OS_READ_ACCESS : OS_WRITE_ACCESS
+		if(!(selected_report.get_file_perms(get_access(user), user) & req_access))
+			return 1
 		save_report(user, save_as)
 	if(href_list["submit"])
 		if(!selected_report)
 			return 1
-		if(!selected_report.verify_access_edit(get_access(user)))
+		if(!(selected_report.get_file_perms(get_access(user), user) & OS_WRITE_ACCESS))
 			return 1
-		if(selected_report.submit(user))
+		if(selected_report.submit(user, get_access(user)))
 			to_chat(user, "The [src] has been submitted.")
 			if(alert(user, "Would you like to save a copy?","Save Report", "Yes.", "No.") == "Yes.")
 				save_report(user)
@@ -139,24 +141,24 @@
 			return 1
 		var/field_ID = text2num(href_list["ID"])
 		var/datum/report_field/field = selected_report.field_from_ID(field_ID)
-		if(!field || !field.verify_access_edit(get_access(user)))
+		if(!field || !(field.get_perms(get_access(usr), usr) & OS_WRITE_ACCESS))
 			return 1
 		field.ask_value(user) //Handles the remaining IO.
 		return 1
 	if(href_list["print"])
-		if(!selected_report || !selected_report.verify_access(get_access(user)))
+		if(!selected_report || !(selected_report.get_file_perms(get_access(user), user) & OS_READ_ACCESS))
 			return 1
 		var/with_fields = text2num(href_list["print_mode"])
-		var/text = selected_report.generate_pencode(get_access(user), with_fields)
+		var/text = selected_report.generate_pencode(get_access(user), user, with_fields)
 		if(!program.computer.print_paper(text, selected_report.display_name()))
 			to_chat(user, "Hardware error: Printer was unable to print the file. It may be out of paper.")
 		return 1
 	if(href_list["export"])
-		if(!selected_report || !selected_report.verify_access(get_access(user)))
+		if(!selected_report || !(selected_report.get_file_perms(get_access(user), user) & OS_READ_ACCESS))
 			return 1
 		var/datum/computer_file/data/text/file = new
 		selected_report.rename_file()
-		file.stored_data = selected_report.generate_pencode(get_access(user), no_html = 1) //TXT files can't have html; they use pencode only.
+		file.stored_data = selected_report.generate_pencode(get_access(user), user, no_html = 1) //TXT files can't have html; they use pencode only.
 		file.filename = selected_report.filename
 		if(program.computer.store_file(file))
 			to_chat(user, "The report has been exported as '[file.filename].[file.filetype]'.")
@@ -170,7 +172,7 @@
 	if(href_list["get_report"])
 		var/uid = text2num(href_list["report"])
 		var/datum/computer_network/net = program.computer.get_network()
-		for(var/datum/computer_file/report/report in net.fetch_reports(get_access(user)))
+		for(var/datum/computer_file/report/report in net.fetch_reports(get_access(user), user))
 			if(report.uid == uid)
 				selected_report = report.clone()
 				can_view_only = 0

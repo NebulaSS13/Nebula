@@ -143,6 +143,8 @@
 
 /obj/item/clothing/proc/refit_for_bodytype(var/target_bodytype)
 	bodytype_equip_flags = target_bodytype
+	if(sprite_sheets[target_bodytype])
+		icon = sprite_sheets[target_bodytype]
 
 /obj/item/clothing/get_examine_line()
 	. = ..()

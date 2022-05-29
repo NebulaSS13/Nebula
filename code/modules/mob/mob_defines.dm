@@ -43,8 +43,6 @@
 	var/obj/screen/purged = null
 	var/obj/screen/internals = null
 	var/obj/screen/oxygen = null
-	var/obj/screen/i_select = null
-	var/obj/screen/m_select = null
 	var/obj/screen/toxin = null
 	var/obj/screen/fire = null
 	var/obj/screen/bodytemp = null
@@ -58,10 +56,9 @@
 	var/obj/screen/gun/item/item_use_icon = null
 	var/obj/screen/gun/radio/radio_use_icon = null
 	var/obj/screen/gun/move/gun_move_icon = null
-	var/obj/screen/gun/run/gun_run_icon = null
 	var/obj/screen/gun/mode/gun_setting_icon = null
 
-	var/obj/screen/movable/ability_master/ability_master = null
+	var/obj/screen/ability_master/ability_master = null
 
 	/*A bunch of this stuff really needs to go under their own defines instead of being globally attached to mob.
 	A variable should only be globally attached to turfs/objects/whatever, when it is in fact needed as such.
@@ -136,8 +133,8 @@
 	var/blinded = null
 
 	//The last mob/living/carbon to push/drag/grab this mob (mostly used by slimes friend recognition)
-	var/weakref/last_handled_by_mob 
-	
+	var/weakref/last_handled_by_mob
+
 	mouse_drag_pointer = MOUSE_ACTIVE_POINTER
 
 	var/update_icon = 1 //Set to 1 to trigger update_icon() at the next life() call
@@ -169,7 +166,8 @@
 
 	var/list/additional_vision_handlers // A lazylist of atoms from which additional vision data is retrieved
 
-	var/list/progressbars = null //for stacking do_after bars
+	/// A list for stacking do_after bars
+	var/list/progress_bars = null
 
 	var/datum/ai/ai						// Type abused. Define with path and will automagically create. Determines behaviour for clientless mobs.
 

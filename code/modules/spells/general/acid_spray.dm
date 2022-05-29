@@ -27,4 +27,5 @@
 			chem.set_up(get_ranged_target_turf(target, angle2dir(angle+mod), 3))
 
 /spell/acid_spray/tower
+	desc = "The simplest form of aggressive conjuration: acid spray is quite effective in melting both man and object."
 	charge_max = 2

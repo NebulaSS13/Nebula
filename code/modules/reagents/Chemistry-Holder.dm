@@ -27,10 +27,13 @@ var/global/obj/temp_reagents_holder = new
 /datum/reagents/proc/get_reaction_loc()
 	return my_atom
 
-/datum/reagents/proc/get_primary_reagent_name() // Returns the name of the reagent with the biggest volume.
+/datum/reagents/proc/get_primary_reagent_name(var/codex = FALSE) // Returns the name of the reagent with the biggest volume.
 	var/decl/material/reagent = get_primary_reagent_decl()
 	if(reagent)
-		. = reagent.name
+		if(codex && reagent.codex_name)
+			. = reagent.codex_name
+		else
+			. = reagent.name
 
 /datum/reagents/proc/get_primary_reagent_decl()
 	. = primary_reagent && GET_DECL(primary_reagent)
@@ -41,9 +44,7 @@ var/global/obj/temp_reagents_holder = new
 	for(var/R in reagent_volumes)
 		var/vol = reagent_volumes[R]
 		if(vol < MINIMUM_CHEMICAL_VOLUME)
-			LAZYREMOVE(reagent_volumes, R)
-			LAZYREMOVE(reagent_data, R)
-			cached_color = null
+			clear_reagent(R, defer_update = TRUE, force = TRUE) // defer_update is important to avoid infinite recursion
 		else
 			total_volume += vol
 			if(!primary_reagent || reagent_volumes[primary_reagent] < vol)
@@ -202,8 +203,8 @@ var/global/obj/temp_reagents_holder = new
 		handle_update(safety)
 	return TRUE
 
-/datum/reagents/proc/clear_reagent(var/reagent_type, var/defer_update = FALSE)
-	. = !!(REAGENT_VOLUME(src, reagent_type) || REAGENT_DATA(src, reagent_type))
+/datum/reagents/proc/clear_reagent(var/reagent_type, var/defer_update = FALSE, var/force = FALSE)
+	. = force || !!(REAGENT_VOLUME(src, reagent_type) || REAGENT_DATA(src, reagent_type))
 	if(.)
 		var/amount = LAZYACCESS(reagent_volumes, reagent_type)
 		LAZYREMOVE(reagent_volumes, reagent_type)
@@ -238,8 +239,10 @@ var/global/obj/temp_reagents_holder = new
 	return TRUE
 
 /datum/reagents/proc/clear_reagents()
-	reagent_volumes = null
-	reagent_data = null
+	for(var/reagent in reagent_volumes)
+		clear_reagent(reagent, TRUE)
+	LAZYCLEARLIST(reagent_volumes)
+	LAZYCLEARLIST(reagent_data)
 	total_volume = 0
 
 /datum/reagents/proc/get_overdose(var/decl/material/current)

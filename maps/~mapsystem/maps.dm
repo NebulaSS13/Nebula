@@ -32,7 +32,6 @@ var/global/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 	var/list/map_levels              // Z-levels available to various consoles, such as the crew monitor. Defaults to station_levels if unset.
 
 	var/list/base_turf_by_z = list() // Custom base turf by Z-level. Defaults to world.turf for unlisted Z-levels
-	var/list/usable_email_tlds = list("freemail.net")
 
 	var/base_floor_type = /turf/simulated/floor/airless // The turf type used when generating floors between Z-levels at startup.
 	var/base_floor_area                                 // Replacement area, if a base_floor_type is generated. Leave blank to skip.
@@ -154,6 +153,7 @@ var/global/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 		ACCESS_REGION_GENERAL = list(access_change_ids),
 		ACCESS_REGION_SUPPLY = list(access_change_ids)
 	)
+	var/secrets_directory
 
 /datum/map/proc/get_lobby_track(var/exclude)
 	var/lobby_track_type
@@ -166,6 +166,16 @@ var/global/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 	return GET_DECL(lobby_track_type)
 
 /datum/map/proc/setup_map()
+
+	if(secrets_directory)
+		secrets_directory = trim(lowertext(secrets_directory))
+		if(!length(secrets_directory))
+			log_warning("[type] secrets_directory is zero length after trim.")
+		if(copytext(secrets_directory, -1) != "/")
+			secrets_directory = "[secrets_directory]/"
+		if(!fexists(secrets_directory))
+			log_warning("[type] secrets_directory does not exist.")
+		SSsecrets.load_directories |= secrets_directory
 
 	if(!allowed_jobs)
 		allowed_jobs = list()
@@ -420,3 +430,15 @@ var/global/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 /datum/map/proc/populate_overmap_events()
 	for(var/overmap_id in global.overmaps_by_name)
 		SSmapping.overmap_event_handler.create_events(global.overmaps_by_name[overmap_id])
+
+/datum/map/proc/get_zlevel_name(var/z)
+	z = "[z]"
+	if(!z)
+		return "Unknown Sector"
+	var/obj/abstract/level_data/level = global.levels_by_z[z]
+	if(level?.level_name)
+		return level.level_name
+	var/obj/effect/overmap/overmap_entity = global.overmap_sectors[z]
+	if(overmap_entity?.name)
+		return overmap_entity.name
+	return "Sector #[z]"

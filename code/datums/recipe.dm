@@ -6,11 +6,11 @@
  * * * * * * * * * * * * * * * * * * * * * * * * * */
 
 /decl/recipe
-	var/display_name              // Descriptive name of the recipe, should be unique to avoid codex pages being unsearchable.
+	var/display_name              // Descriptive name of the recipe, should be unique to avoid codex pages being unsearchable. If not set, codex uses initial name of product.
 	var/list/reagents             // example: = list(/decl/material/liquid/drink/juice/berry = 5) // do not list same reagent twice
 	var/list/items                // example: = list(/obj/item/crowbar, /obj/item/welder, /obj/item/screwdriver = 2) // place /foo/bar before /foo
 	var/list/fruit                // example: = list("fruit" = 3)
-	var/result                    // example: = /obj/item/chems/food/donut/normal
+	var/result                    // example: = /obj/item/chems/food/donut
 	var/time = 100                // Cooking time in deciseconds.
 	var/result_quantity = 1       // How many items to create. Where possible, just use fewer ingredients instead.
 
@@ -214,6 +214,6 @@
 		//If we're here, then holder is a buffer containing the total reagents for all the results.
 		//So now we redistribute it among them
 		var/total = holder.total_volume
-		for(var/atom/a AS_ANYTHING in results)
+		for(var/atom/a as anything in results)
 			holder.trans_to(a, total / length(results))
 	return results

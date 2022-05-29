@@ -22,6 +22,7 @@
 	glass_desc = "The father of all refreshments."
 	slipperiness = 8
 	dirtiness = DIRTINESS_CLEAN
+	turf_touch_threshold = 0.1
 	chilling_point = T0C
 	chilling_products = list(
 		/decl/material/solid/ice = 1

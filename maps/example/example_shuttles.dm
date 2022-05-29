@@ -15,8 +15,8 @@
 	)
 
 /datum/shuttle/autodock/ferry/example
-	name = "Example"
-	shuttle_area = /area/shuttle/escape
+	name = "Testing Site Ferry"
+	shuttle_area = /area/shuttle/ferry
 	dock_target = "example_shuttle_starboard"
 	warmup_time = 10
 
@@ -27,9 +27,10 @@
 		"STARBOARD" = "example_shuttle_starboard",
 		"PORT" = "example_shuttle_port"
 	)
+	ceiling_type = /turf/simulated/floor/shuttle_ceiling
 
 /obj/turbolift_map_holder/example
-	name = "Example elevator placeholder"
+	name = "Testing Site elevator placeholder"
 	icon = 'icons/obj/turbolift_preview_nowalls_3x3.dmi'
 	depth = 3
 	lift_size_x = 2
@@ -42,9 +43,9 @@
 	button_type = /obj/structure/lift/button/standalone
 	panel_type =  /obj/structure/lift/panel/standalone
 	areas_to_use = list(
-		/area/turbolift/first,
-		/area/turbolift/second,
-		/area/turbolift/third
+		/area/turbolift/example/first,
+		/area/turbolift/example/second,
+		/area/turbolift/example/third
 	)
 	floor_departure_sound = 'sound/effects/lift_heavy_start.ogg'
-	floor_arrival_sound =   'sound/effects/lift_heavy_stop.ogg'
+	floor_arrival_sound = 'sound/effects/lift_heavy_stop.ogg'

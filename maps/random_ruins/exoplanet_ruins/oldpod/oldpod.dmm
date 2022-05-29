@@ -450,7 +450,7 @@
 /turf/simulated/floor/plating,
 /area/map_template/oldpod)
 "bc" = (
-/obj/machinery/power/port_gen/pacman,
+/obj/machinery/port_gen/pacman,
 /obj/structure/cable/cyan,
 /obj/effect/floor_decal/industrial/warning{
 	dir = 4

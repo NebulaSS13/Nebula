@@ -60,11 +60,7 @@
 	
 			var/obj/item/clothing/accessory/A
 			if(LAZYLEN(holder.accessories) > 1)
-				var/list/options = list()
-				for(var/obj/item/clothing/accessory/i in holder.accessories)
-					var/image/radial_button = image(icon = i.icon, icon_state = i.icon_state)
-					options[i] = radial_button
-				A = show_radial_menu(user, user, options, radius = 42, tooltips = TRUE)
+				A = show_radial_menu(user, user, make_item_radial_menu_choices(holder.accessories), radius = 42, tooltips = TRUE)
 			else
 				A = holder.accessories[1]
 			
@@ -73,7 +69,7 @@
 			
 			visible_message("<span class='danger'>\The [user] is trying to remove \the [src]'s [A.name]!</span>")
 
-			if(!do_after(user, HUMAN_STRIP_DELAY, src, progress = 0))
+			if(!do_after(user, HUMAN_STRIP_DELAY, src, check_holding = FALSE, progress = FALSE))
 				return
 
 			if(!A || holder.loc != src || !(A in holder.accessories))
@@ -102,7 +98,7 @@
 	else
 		visible_message("<span class='danger'>\The [user] is trying to put \a [held] on \the [src]!</span>")
 
-	if(!do_mob(user, src, HUMAN_STRIP_DELAY))
+	if(!do_mob(user, src, HUMAN_STRIP_DELAY, check_holding = FALSE))
 		return
 
 	if(stripping)

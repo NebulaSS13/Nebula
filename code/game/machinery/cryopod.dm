@@ -116,12 +116,12 @@
 		. = TOPIC_REFRESH
 
 /obj/item/stock_parts/circuitboard/cryopodcontrol
-	name = "Circuit board (Cryogenic Oversight Console)"
+	name = "circuit board (Cryogenic Oversight Console)"
 	build_path = /obj/machinery/computer/cryopod
 	origin_tech = "{'programming':3}"
 
 /obj/item/stock_parts/circuitboard/robotstoragecontrol
-	name = "Circuit board (Robotic Storage Console)"
+	name = "circuit board (Robotic Storage Console)"
 	build_path = /obj/machinery/computer/cryopod/robot
 	origin_tech = "{'programming':3}"
 
@@ -278,19 +278,24 @@
 		control_computer = null
 
 /obj/machinery/cryopod/proc/check_occupant_allowed(mob/M)
+
+	if(!istype(M) || M.anchored)
+		return FALSE
+
 	var/correct_type = 0
 	for(var/type in allow_occupant_types)
 		if(istype(M, type))
 			correct_type = 1
 			break
 
-	if(!correct_type) return 0
+	if(!correct_type)
+		return FALSE
 
 	for(var/type in disallow_occupant_types)
 		if(istype(M, type))
-			return 0
+			return FALSE
 
-	return 1
+	return TRUE
 
 /obj/machinery/cryopod/examine(mob/user)
 	. = ..()
@@ -595,7 +600,7 @@
 		to_chat(user, "<span class='notice'>Someone else is attempting to open this.</span>")
 		return
 	if (closed)
-		if (isCrowbar(W))
+		if (IS_CROWBAR(W))
 			busy = 1
 			visible_message("[user] starts to pry the glass cover off of \the [src].")
 			if (!do_after(user, 50, src))

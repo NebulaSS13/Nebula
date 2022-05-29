@@ -1,6 +1,5 @@
 /datum/codex_entry/ascent
 	name = "The Ascent"
-	associated_strings = list("ascent")
 	associated_paths = list(
 		/mob/living/silicon/robot/flying/ascent,
 		/obj/item/multitool/mantid,

@@ -239,7 +239,7 @@ var/global/list/custom_ai_icons_by_ckey_and_name = list()
 		if(global.custom_ai_icons_by_ckey_and_name["[ckey][real_name]"])
 			selected_sprite = global.custom_ai_icons_by_ckey_and_name["[ckey][real_name]"]
 		else
-			for(var/datum/custom_icon/cicon AS_ANYTHING in SScustomitems.custom_icons_by_ckey[ckey])
+			for(var/datum/custom_icon/cicon as anything in SScustomitems.custom_icons_by_ckey[ckey])
 				if(cicon.category == "AI Icon" && lowertext(real_name) == cicon.character_name)
 					selected_sprite = new /datum/ai_icon("Custom Icon - [cicon.character_name]", cicon.ids_to_icons[1], cicon.ids_to_icons[2], COLOR_WHITE, cicon.ids_to_icons[cicon.ids_to_icons[1]])
 					global.custom_ai_icons_by_ckey_and_name["[ckey][real_name]"] = selected_sprite
@@ -595,7 +595,7 @@ var/global/list/custom_ai_icons_by_ckey_and_name = list()
 		var/obj/item/aicard/card = W
 		card.grab_ai(src, user)
 
-	else if(isWrench(W))
+	else if(IS_WRENCH(W))
 		if(anchored)
 			user.visible_message("<span class='notice'>\The [user] starts to unbolt \the [src] from the plating...</span>")
 			if(!do_after(user,40, src))

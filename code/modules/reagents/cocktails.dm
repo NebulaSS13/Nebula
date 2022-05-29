@@ -67,7 +67,7 @@
 	)
 
 /decl/cocktail/classic_martini
-	name = "martini"
+	name = "gin martini"
 	description = "Vermouth with gin. The classiest of all cocktails."
 	ratios = list(
 		/decl/material/liquid/ethanol/gin =      0.4,
@@ -120,7 +120,7 @@
 	description = "Similar to a white Russian, but fit for the lactose-intolerant."
 	ratios = list(
 		/decl/material/liquid/ethanol/vodka =         0.4,
-		/decl/material/liquid/ethanol/coffee/kahlua = 0.2
+		/decl/material/liquid/ethanol/coffee = 0.2
 	)
 
 /decl/cocktail/white_russian
@@ -128,7 +128,7 @@
 	description = "A straightforward cocktail of coffee liqueur and vodka. Popular in a lot of places, but that's just, like, an opinion, man."
 	ratios = list(
 		/decl/material/liquid/ethanol/vodka =         0.3,
-		/decl/material/liquid/ethanol/coffee/kahlua = 0.15,
+		/decl/material/liquid/ethanol/coffee = 0.15,
 		/decl/material/liquid/drink/milk/cream =      0.15
 	)
 
@@ -165,7 +165,7 @@
 	description = "A strong cocktail of tequila and coffee liquor."
 	ratios = list(
 		/decl/material/liquid/ethanol/tequila =      0.45,
-		/decl/material/liquid/ethanol/coffee/kahlua = 0.25
+		/decl/material/liquid/ethanol/coffee = 0.25
 	)
 
 /decl/cocktail/toxins_special
@@ -219,7 +219,7 @@
 	ratios = list(
 		/decl/material/liquid/ethanol/cognac =        0.3,
 		/decl/material/liquid/ethanol/irish_cream =   0.2,
-		/decl/material/liquid/ethanol/coffee/kahlua = 0.2
+		/decl/material/liquid/ethanol/coffee = 0.2
 	)
 
 /decl/cocktail/atomicbomb
@@ -228,7 +228,7 @@
 	ratios = list(
 		/decl/material/liquid/ethanol/cognac =        0.3,
 		/decl/material/liquid/ethanol/irish_cream =   0.2,
-		/decl/material/liquid/ethanol/coffee/kahlua = 0.2,
+		/decl/material/liquid/ethanol/coffee = 0.2,
 		/decl/material/solid/metal/uranium
 	)
 
@@ -440,7 +440,7 @@
 	ratios = list(
 		/decl/material/liquid/ethanol/rum =           0.4,
 		/decl/material/liquid/blood =                 0.1, 
-		/decl/material/liquid/ethanol/coffee/kahlua = 0.2
+		/decl/material/liquid/ethanol/coffee = 0.2
 	)
 
 /decl/cocktail/hippiesdelight

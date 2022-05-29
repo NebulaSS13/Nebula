@@ -74,7 +74,7 @@
 	desc = "Commonly found on paramedics, these assorted pill bottles contain all the basics."
 
 	startswith = list(
-			/obj/item/chems/pill/adrenaline = 6,
+			/obj/item/chems/pill/stabilizer = 6,
 			/obj/item/chems/pill/antitoxins = 6,
 			/obj/item/chems/pill/sugariron = 2,
 			/obj/item/chems/pill/painkillers = 2,

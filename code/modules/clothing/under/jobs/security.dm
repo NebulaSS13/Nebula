@@ -102,7 +102,7 @@
 	icon = 'icons/clothing/head/detective.dmi'
 	color = "#725443"
 	armor = list(
-		melee = ARMOR_MELEE_RESISTANT, 
+		melee = ARMOR_MELEE_RESISTANT,
 		laser = ARMOR_LASER_SMALL,
 		energy = ARMOR_ENERGY_MINOR
 		)
@@ -144,7 +144,7 @@
 	origin_tech = "{'materials':1,'engineering':1, 'combat':1}"
 
 /obj/item/clothing/head/HoS
-	name = "Head of Security Hat"
+	name = "Head of Security hat"
 	desc = "The hat of the Head of Security. For showing the officers who's in charge."
 	icon = 'icons/clothing/head/hos.dmi'
 	body_parts_covered = 0
@@ -157,10 +157,10 @@
 	icon = 'icons/clothing/suit/hos.dmi'
 	body_parts_covered = SLOT_UPPER_BODY|SLOT_LOWER_BODY|SLOT_ARMS|SLOT_LEGS
 	armor = list(
-		melee = ARMOR_MELEE_MAJOR, 
-		bullet = ARMOR_BALLISTIC_PISTOL, 
-		laser = ARMOR_LASER_HANDGUNS, 
-		energy = ARMOR_ENERGY_MINOR, 
+		melee = ARMOR_MELEE_MAJOR,
+		bullet = ARMOR_BALLISTIC_PISTOL,
+		laser = ARMOR_LASER_HANDGUNS,
+		energy = ARMOR_ENERGY_MINOR,
 		bomb = ARMOR_BOMB_PADDED
 		)
 	flags_inv = HIDEJUMPSUIT

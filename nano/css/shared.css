@@ -41,8 +41,18 @@ hr {
 	border: 1px solid #00ff00;
 	padding: 0px 4px 4px 4px;
 	margin: 0 2px 2px 0;
-	cursor: default;
 	white-space: nowrap;
+	cursor: pointer;
+}
+
+.link:hover, .greenButton:hover{
+	background: #009c00 !important;
+}
+.redButton:hover{
+	background: #9c0202 !important;
+}
+.yellowButton:hover{
+	background: #848601 !important;
 }
 
 .hasIcon {
@@ -86,10 +96,11 @@ a.white:hover {
 	background: #2f943c;
 }
 
-.linkOff, a.linkOff:link, a.linkOff:visited, a.linkOff:active, a.linkOff:hover, .disabled, a.disabled:link, a.disabled:visited, a.disabled:active, a.disabled:hover {
+.linkOff, a.linkOff:link, a.linkOff:visited, a.linkOff:active, a.linkOff:hover, .disabled, .disabled:hover, a.disabled:link, a.disabled:visited, a.disabled:active, a.disabled:hover {
 	color: #ffffff;
-	background: #999999;
+	background: #999999 !important;
 	border-color: #666666;
+	cursor: default;
 }
 
 a.icon, .linkOn.icon, .linkOff.icon, .selected.icon, .disabled.icon {

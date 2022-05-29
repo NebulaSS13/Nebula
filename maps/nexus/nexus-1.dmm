@@ -778,7 +778,7 @@
 /obj/structure/window/borosilicate_reinforced{
 	dir = 1
 	},
-/obj/machinery/power/emitter/gyrotron/anchored{
+/obj/machinery/emitter/gyrotron/anchored{
 	dir = 1;
 	initial_id_tag = "main"
 	},
@@ -789,6 +789,7 @@
 	icon_state = "0-8"
 	},
 /obj/structure/catwalk,
+/obj/machinery/power/terminal,
 /turf/simulated/floor/plating,
 /area/nexus/engineering/engine)
 "hn" = (
@@ -2606,7 +2607,7 @@
 /turf/simulated/floor/tiled,
 /area/nexus/hallway/starboard/aft)
 "yE" = (
-/obj/machinery/power/port_gen/pacman/super,
+/obj/machinery/port_gen/pacman/super,
 /obj/structure/cable,
 /obj/effect/floor_decal/industrial/warning{
 	dir = 1
@@ -2761,7 +2762,7 @@
 /turf/simulated/floor/tiled/white,
 /area/nexus/civilian)
 "Ay" = (
-/obj/structure/stairs/west,
+/obj/structure/stairs/long/west,
 /turf/simulated/floor/plating,
 /area/nexus/civilian)
 "AA" = (
@@ -3780,7 +3781,7 @@
 /turf/simulated/floor/tiled/white,
 /area/nexus/civilian)
 "JR" = (
-/obj/machinery/power/fusion_core/mapped{
+/obj/machinery/fusion_core/mapped{
 	initial_id_tag = "main"
 	},
 /obj/structure/cable{
@@ -4884,7 +4885,7 @@
 /turf/simulated/floor/tiled,
 /area/nexus/hallway/port)
 "Ug" = (
-/obj/structure/stairs/east,
+/obj/structure/stairs/long/east,
 /turf/simulated/floor/plating,
 /area/nexus/civilian)
 "Uk" = (

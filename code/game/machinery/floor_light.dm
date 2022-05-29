@@ -25,13 +25,17 @@ var/global/list/floor_light_cache = list()
 /obj/machinery/floor_light/prebuilt
 	anchored = 1
 
+/obj/machinery/floor_light/Initialize()
+	. = ..()
+	update_icon()
+
 /obj/machinery/floor_light/attackby(var/obj/item/W, var/mob/user)
-	if(isScrewdriver(W))
+	if(IS_SCREWDRIVER(W))
 		anchored = !anchored
 		if(use_power)
 			update_use_power(POWER_USE_OFF)
 		visible_message("<span class='notice'>\The [user] has [anchored ? "attached" : "detached"] \the [src].</span>")
-	else if(isWelder(W) && (damaged || (stat & BROKEN)))
+	else if(IS_WELDER(W) && (damaged || (stat & BROKEN)))
 		var/obj/item/weldingtool/WT = W
 		if(!WT.remove_fuel(0, user))
 			to_chat(user, "<span class='warning'>\The [src] must be on to complete this task.</span>")
@@ -44,7 +48,7 @@ var/global/list/floor_light_cache = list()
 		visible_message("<span class='notice'>\The [user] has repaired \the [src].</span>")
 		set_broken(FALSE)
 		damaged = null
-	else if(isWrench(W))
+	else if(IS_WRENCH(W))
 		playsound(src.loc, 'sound/items/Ratchet.ogg', 75, 1)
 		to_chat(user, "<span class='notice'>You dismantle the floor light.</span>")
 
@@ -100,7 +104,7 @@ var/global/list/floor_light_cache = list()
 			set_light(0)
 
 /obj/machinery/floor_light/on_update_icon()
-	overlays.Cut()
+	cut_overlays()
 	if((use_power == POWER_USE_ACTIVE) && !(stat & (NOPOWER | BROKEN)))
 		if(isnull(damaged))
 			var/cache_key = "floorlight-[default_light_color]"
@@ -110,7 +114,7 @@ var/global/list/floor_light_cache = list()
 				I.plane = plane
 				I.layer = layer+0.001
 				floor_light_cache[cache_key] = I
-			overlays |= floor_light_cache[cache_key]
+			add_overlay(floor_light_cache[cache_key])
 		else
 			if(damaged == 0) //Needs init.
 				damaged = rand(1,4)
@@ -121,7 +125,7 @@ var/global/list/floor_light_cache = list()
 				I.plane = plane
 				I.layer = layer+0.001
 				floor_light_cache[cache_key] = I
-			overlays |= floor_light_cache[cache_key]
+			add_overlay(floor_light_cache[cache_key])
 	update_brightness()
 
 /obj/machinery/floor_light/explosion_act(severity)

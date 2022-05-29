@@ -20,20 +20,20 @@
 	body_parts_covered = SLOT_HEAD|SLOT_FACE
 
 /obj/item/clothing/head/wizard/marisa
-	name = "Witch Hat"
+	name = "witch hat"
 	desc = "Strange-looking hat-wear, makes you want to cast fireballs."
 	icon = 'icons/clothing/head/wizard/marisa.dmi'
 	siemens_coefficient = 0.8
 
 /obj/item/clothing/head/wizard/magus
-	name = "Magus Helm"
+	name = "magus helm"
 	desc = "A mysterious helmet that hums with an unearthly power."
 	icon = 'icons/clothing/head/wizard/magus.dmi'
 	siemens_coefficient = 0.8
 	body_parts_covered = SLOT_HEAD|SLOT_FACE|SLOT_EYES
 
 /obj/item/clothing/head/wizard/cap
-	name = "Gentlemans Cap"
+	name = "gentleman's cap"
 	desc = "A checkered gray flat cap woven together with the rarest of threads."
 	icon = 'icons/clothing/head/flatcap.dmi'
 	siemens_coefficient = 0.8
@@ -63,18 +63,18 @@
 	icon = 'icons/clothing/suit/wizard/red.dmi'
 
 /obj/item/clothing/suit/wizrobe/marisa
-	name = "Witch Robe"
+	name = "witch robe"
 	desc = "Magic is all about the spell power, ZE!"
 	icon = 'icons/clothing/suit/wizard/marisa.dmi'
 
 /obj/item/clothing/suit/wizrobe/magusblue
-	name = "Magus Robe"
+	name = "magus robe"
 	desc = "A set of armoured robes that seem to radiate a dark power."
 	icon = 'icons/clothing/suit/wizard/magusblue.dmi'
 	body_parts_covered = SLOT_UPPER_BODY|SLOT_LOWER_BODY|SLOT_ARMS|SLOT_HANDS|SLOT_LEGS|SLOT_FEET
 
 /obj/item/clothing/suit/wizrobe/magusred
-	name = "Magus Robe"
+	name = "magus robe"
 	desc = "A set of armoured robes that seem to radiate a dark power."
 	icon = 'icons/clothing/suit/wizard/magusred.dmi'
 	body_parts_covered = SLOT_UPPER_BODY|SLOT_LOWER_BODY|SLOT_ARMS|SLOT_HANDS|SLOT_LEGS|SLOT_FEET
@@ -86,7 +86,7 @@
 	gender = PLURAL
 
 /obj/item/clothing/suit/wizrobe/gentlecoat
-	name = "Gentlemans Coat"
+	name = "gentleman's coat"
 	desc = "A heavy threaded tweed gray jacket. For a different sort of Gentleman."
 	icon = 'icons/clothing/suit/wizard/gentleman.dmi'
 	body_parts_covered = SLOT_UPPER_BODY|SLOT_LOWER_BODY|SLOT_ARMS
@@ -99,13 +99,13 @@
 	siemens_coefficient = 1.0
 
 /obj/item/clothing/head/wizard/marisa/fake
-	name = "Witch Hat"
+	name = "witch hat"
 	desc = "Strange-looking hat-wear, makes you want to cast fireballs."
 	armor = null
 	siemens_coefficient = 1.0
 
 /obj/item/clothing/suit/wizrobe/marisa/fake
-	name = "Witch Robe"
+	name = "witch robe"
 	desc = "Magic is all about the spell power, ZE!"
 	body_parts_covered = SLOT_UPPER_BODY|SLOT_LOWER_BODY|SLOT_ARMS|SLOT_LEGS
 	armor = null

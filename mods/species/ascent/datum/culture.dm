@@ -2,8 +2,7 @@
 	return dna?.lineage || create_gyne_name()
 
 /proc/create_gyne_name()
-	var/gynename = "[capitalize(pick(global.gyne_architecture))] [capitalize(pick(global.gyne_geoforms))]"
-	return gynename
+	return "[capitalize(pick(global.gyne_architecture))] [capitalize(pick(global.gyne_geoforms))]"
 
 //Thanks to:
 // - https://en.wikipedia.org/wiki/List_of_landforms
@@ -63,17 +62,18 @@ var/global/list/gyne_architecture = list(
 )
 
 /decl/cultural_info/culture/ascent
-	name =             "The Ascent"
-	language =         /decl/language/mantid/nonvocal
+	name = "Ascent Milieu"
+	language = /decl/language/mantid/nonvocal
 	default_language = /decl/language/mantid
 	additional_langs = list(/decl/language/mantid/worldnet, /decl/language/mantid)
 	hidden = TRUE
 	description = "The Ascent is an ancient, isolated stellar empire composed of the mantid-cephalopodean \
-	Kharmaani, the Serpentids, and their gaggle of AI servitors. Day to day existence in the Ascent is \
-	largely a matter of navigating a bewildering labyrinth of social obligations, gyne power dynamics, factional \
-	tithing, protection rackets, industry taxes and plain old interpersonal backstabbing. Both member cultures of \
+	Kharmaani and their gaggle of AI servitors. Day to day existence in the Ascent is largely a matter of \
+	navigating a bewildering labyrinth of social obligations, gyne power dynamics, factional tithing, \
+	protection rackets, industry taxes and plain old interpersonal backstabbing. Both member cultures of \
 	this stellar power are eusocial to an extent, and their society is shaped around the teeming masses \
-	of workers, soldiers, technicians and 'lesser' citizens supporting a throng of imperious and all-powerful queens."
+	of workers, soldiers, technicians and 'lesser' citizens supporting a throng of imperious and all-powerful \
+	queens."
 
 /decl/cultural_info/culture/ascent/get_random_name(var/mob/M, var/gender)
 	var/mob/living/carbon/human/H = M
@@ -86,8 +86,8 @@ var/global/list/gyne_architecture = list(
 		return "[random_id(/decl/species/mantid, 1, 99)] [lineage]"
 
 /decl/cultural_info/location/kharmaani
-	name = "Core"
-	language =    /decl/language/mantid/nonvocal
+	name = "Ascent Core"
+	language = /decl/language/mantid/nonvocal
 	description = "The Kharmaani are not terribly imaginative when it comes to naming their worlds. Core, \
 	their birth star, supports the humid greenhouse-gas-choked giant called Home, which the majority of the \
 	populace call their motherland. While the planet's orbit is thickly populated with habitats, factories \
@@ -95,19 +95,9 @@ var/global/list/gyne_architecture = list(
 	social culture, the surface itself is a pristine monument to the Kharmaan evolutionary past."
 	hidden = TRUE
 
-/decl/cultural_info/faction/ascent_serpentid
-	name =        "Ascent Serpentid"
-	language =    /decl/language/mantid/nonvocal
-	description = "Members of the Ascent tend to be organized along the natural lines of their respective species. \
-	For Kharmaani, this is oriented around individual gynes and their power structures. Serpentids have a slightly less \
-	manipulative approach, as well as more numerous and less self-absorbed queens. They tend to cluster in broad social groups, \
-	usually within the designated oxygen-rich 'mezzanines' each fortress-nest happily allocates to them. As mild as they are by \
-	comparison to their fellows, Serpentid political and social culture is still factional and often vicious."
-	hidden = TRUE
-
 /decl/cultural_info/faction/ascent_alate
-	name =        "Ascent Alate"
-	language =    /decl/language/mantid/nonvocal
+	name = "Ascent Alate"
+	language = /decl/language/mantid/nonvocal
 	description = "The life of an alate is a difficult and frequently short one. Those who survive \
 	to maturity have had the violent and uncompromising culture of the Ascent beaten into them with \
 	bladed forelimbs for their entire lives. There is no formal schooling within the Kharmaani \
@@ -120,8 +110,8 @@ var/global/list/gyne_architecture = list(
 	hidden = TRUE
 
 /decl/cultural_info/faction/ascent_gyne
-	name =        "Ascent Gyne"
-	language =    /decl/language/mantid/nonvocal
+	name = "Ascent Gyne"
+	language = /decl/language/mantid/nonvocal
 	description = "By the time a gyne has survived her 'childhood' and shed the exoskeleton of an \
 	alate during a breeding frenzy, she has obtained a master class education in murdering and eating \
 	her rivals at the first opportunity, as well as a sideline in a technical or practical field. The \

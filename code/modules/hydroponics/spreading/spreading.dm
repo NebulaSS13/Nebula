@@ -103,6 +103,7 @@
 
 /obj/effect/vine/Destroy()
 	wake_neighbors()
+	parent = null
 	STOP_PROCESSING(SSvines, src)
 	return ..()
 

@@ -26,6 +26,10 @@
 	forceMove(null)
 	verbs += /mob/proc/toggle_antag_pool
 
+/mob/new_player/Destroy()
+	QDEL_NULL(panel)
+	. = ..()
+
 /mob/new_player/proc/show_lobby_menu(force = FALSE)
 	if(!SScharacter_setup.initialized && !force)
 		return // Not ready yet.

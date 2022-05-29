@@ -284,6 +284,8 @@
 	src.show_message(message)
 
 /mob/proc/hear_sleep(var/message)
+	if (is_deaf())
+		return
 	var/heard = ""
 	if(prob(15))
 		var/list/punctuation = list(",", "!", ".", ";", "?")

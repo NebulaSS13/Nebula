@@ -150,30 +150,54 @@
 
 //Used to strip text of everything but letters and numbers, make letters lowercase, and turn spaces into .'s.
 //Make sure the text hasn't been encoded if using this.
-/proc/sanitize_for_email(text)
+/proc/sanitize_for_account(text)
 	if(!text) return ""
 	var/list/dat = list()
-	var/last_was_space = 1
+	var/last_was_fullstop = 1
 	for(var/i=1, i<=length(text), i++)
 		var/ascii_char = text2ascii(text,i)
 		switch(ascii_char)
 			if(65 to 90)	//A-Z, make them lowercase
 				dat += ascii2text(ascii_char + 32)
+				last_was_fullstop = 0
 			if(97 to 122)	//a-z
 				dat += ascii2text(ascii_char)
-				last_was_space = 0
+				last_was_fullstop = 0
 			if(48 to 57)	//0-9
 				dat += ascii2text(ascii_char)
-				last_was_space = 0
+				last_was_fullstop = 0
 			if(32)			//space
-				if(last_was_space)
+				if(last_was_fullstop)
 					continue
 				dat += "."		//We turn these into ., but avoid repeats or . at start.
-				last_was_space = 1
+				last_was_fullstop = 1
+			if(46)			//.
+				if(last_was_fullstop)
+					continue
+				dat += "."
+				last_was_fullstop = 1
 	if(dat[length(dat)] == ".")	//kill trailing .
 		dat.Cut(length(dat))
 	return jointext(dat, null)
 
+// Strips text of everything alphanumeric characters, '_' and '-'. Converts spaces to '_'
+/proc/sanitize_for_group(text)
+	if(!text) return ""
+	var/list/dat = list()
+	for(var/i=1, i<=length(text), i++)
+		var/ascii_char = text2ascii(text,i)
+		switch(ascii_char)
+			if(65 to 90)	//A-Z
+				dat += ascii2text(ascii_char)
+			if(97 to 122)	//a-z
+				dat += ascii2text(ascii_char)
+			if(48 to 57)	//0-9
+				dat += ascii2text(ascii_char)
+			if(45, 95)			//-, _
+				dat += ascii2text(ascii_char)
+			if(32)			//space
+				dat += "_"
+	return jointext(dat, null)
 // UNICODE: Convert to regex?
 
 //Returns null if there is any bad text in the string

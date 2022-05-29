@@ -1,6 +1,6 @@
 SUBSYSTEM_DEF(webhooks)
 	name = "Webhooks"
-	init_order = SS_INIT_EARLY
+	init_order = SS_INIT_WEBHOOKS
 	flags = SS_NO_FIRE
 	var/list/webhook_decls = list()
 

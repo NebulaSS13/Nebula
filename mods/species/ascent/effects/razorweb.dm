@@ -32,8 +32,7 @@
 	var/image/web
 	var/static/species_immunity_list = list(
 		SPECIES_MANTID_ALATE   = TRUE,
-		SPECIES_MANTID_GYNE    = TRUE,
-		SPECIES_SERPENTID      = TRUE
+		SPECIES_MANTID_GYNE    = TRUE
 	)
 
 /obj/effect/razorweb/Destroy()

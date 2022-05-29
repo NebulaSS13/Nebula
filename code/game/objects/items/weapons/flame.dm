@@ -11,7 +11,7 @@
 
 /obj/item/flame/proc/extinguish(var/mob/user, var/no_message)
 	lit = 0
-	damtype = "brute"
+	damtype = BRUTE
 	STOP_PROCESSING(SSobj, src)
 
 /obj/item/flame/fluid_act(var/datum/reagents/fluids)

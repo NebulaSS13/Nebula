@@ -124,7 +124,7 @@
 				return
 			src.cell = W
 			to_chat(user, "<span class='notice'>You insert the cell!</span>")
-	if(isCoil(W))
+	if(IS_COIL(W))
 		if(src.wires)
 			to_chat(user, "<span class='warning'>You have already inserted wire!</span>")
 			return

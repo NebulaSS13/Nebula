@@ -7,7 +7,7 @@
 	program_menu_icon = "battery-3"
 	extended_desc = "This program connects to sensors to provide information about electrical systems"
 	ui_header = "power_norm.gif"
-	required_access = list(access_engine)
+	read_access = list(access_engine)
 	requires_network = 1
 	network_destination = "power monitoring system"
 	size = 9
@@ -102,7 +102,7 @@
 
 /datum/nano_module/program/power_monitor/proc/is_sysadmin(var/mob/user)
 	if(program)
-		return program.can_run(user, program.computer.get_network())
+		has_access(list(access_network), get_access(user))
 	return FALSE
 
 // Allows us to process UI clicks, which are relayed in form of hrefs.

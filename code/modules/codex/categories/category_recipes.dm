@@ -2,9 +2,8 @@
 	name = "Recipes"
 	desc = "Recipes for a variety of different kinds of foods and condiments."
 	guide_name = "Cooking"
-	guide_strings = list("chef", "cooking", "recipes")
 
-/decl/codex_category/recipes/Initialize()
+/decl/codex_category/recipes/Populate()
 
 	var/list/entries_to_register = list()
 
@@ -27,7 +26,6 @@
 
 		var/mechanics_text
 		var/lore_text
-		var/product_name
 		var/category_name
 		if(istype(food, /decl/chemical_reaction/recipe/food))
 			var/decl/chemical_reaction/recipe/food/food_ref = food
@@ -35,14 +33,12 @@
 			if(!product)
 				continue
 			category_name = "mix recipe"
-			product_name = initial(product.name)
 			lore_text = initial(product.desc)
 			mechanics_text = "This recipe produces \a [initial(product.name)].<br>It should be performed in a mixing bowl or beaker, and requires the following ingredients:"
 		else
 			var/decl/material/product = food.result
 			if(!product)
 				continue
-			product_name = initial(product.name)
 			lore_text = initial(product.lore_text)
 			if(ispath(food.result, /decl/material/liquid/drink) || ispath(food.result, /decl/material/liquid/ethanol))
 				category_name = "drink recipe"
@@ -69,9 +65,6 @@
 
 		entries_to_register += new /datum/codex_entry(                     \
 		 _display_name =       "[lowertext(food.name)] ([category_name])", \
-		 _associated_strings = list(                                       \
-		 	lowertext(food.name),                                          \
-			lowertext(product_name)),                                      \
 		 _lore_text =          lore_text,                                  \
 		 _mechanics_text =     mechanics_text,                             \
 		)
@@ -79,7 +72,7 @@
 	var/list/all_recipes = decls_repository.get_decls_of_subtype(/decl/recipe)
 	for(var/rtype in all_recipes)
 		var/decl/recipe/recipe = all_recipes[rtype]
-		if(!istype(recipe) || recipe.hidden_from_codex || !recipe.result)
+		if(!istype(recipe) || recipe.hidden_from_codex || !recipe.result || recipe.is_abstract())
 			continue
 
 		var/mechanics_text = ""
@@ -108,14 +101,12 @@
 
 		entries_to_register += new /datum/codex_entry(             \
 		 _display_name =       "[recipe_name] (microwave recipe)", \
-		 _associated_strings = list(lowertext(recipe_name)),       \
 		 _lore_text =          lore_text,                          \
 		 _mechanics_text =     mechanics_text,                     \
 		 _antag_text =         recipe.antag_text                   \
 		)
 
 	for(var/datum/codex_entry/entry in entries_to_register)
-		SScodex.add_entry_by_string(entry.name, entry)
 		items |= entry.name
 
 	. = ..()

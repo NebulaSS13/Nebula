@@ -33,6 +33,9 @@
 		/obj/item/chems/drinks		
 	)
 
+	var/beaker_offset = 0
+	var/beaker_positions = list(0,1)
+
 /obj/machinery/chemical_dispenser/Initialize(mapload, d=0, populate_parts = TRUE)
 	. = ..()
 	if(spawn_cartridges && populate_parts)
@@ -87,7 +90,7 @@
 		add_cartridge(W, user)
 		return TRUE
 
-	if(isCrowbar(W) && !panel_open && length(cartridges))
+	if(IS_CROWBAR(W) && !panel_open && length(cartridges))
 		var/label = input(user, "Which cartridge would you like to remove?", "Chemical Dispenser") as null|anything in cartridges
 		if(!label) return
 		var/obj/item/chems/chem_disp_cartridge/C = remove_cartridge(label)
@@ -196,5 +199,6 @@
 	if(container)
 		var/mutable_appearance/beaker_overlay
 		beaker_overlay = image(src, src, "lil_beaker")
-		beaker_overlay.pixel_x = rand(-10, 5)
+		beaker_overlay.pixel_y = beaker_offset
+		beaker_overlay.pixel_x = pick(beaker_positions)
 		overlays += beaker_overlay

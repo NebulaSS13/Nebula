@@ -213,7 +213,7 @@ else if(##equipment_var) {\
 	if(istype(W,/obj/item/clothing/accessory) || istype(W, /obj/item/hand_labeler))
 		return ..()
 
-	if(isScrewdriver(W))
+	if(IS_SCREWDRIVER(W))
 		if(user.get_inventory_slot(src) == slot_wear_suit_str)//maybe I should make this into a proc?
 			to_chat(user, "<span class='warning'>You cannot modify \the [src] while it is being worn.</span>")
 			return
@@ -287,3 +287,12 @@ else if(##equipment_var) {\
 	if(overlay && tank && slot == slot_back_str)
 		overlay.overlays += tank.get_mob_overlay(user_mob, slot_back_str)
 	. = ..()
+/obj/item/clothing/suit/space/void/refit_for_bodytype(target_bodytype)
+	..()
+	icon = get_icon_for_bodytype(target_bodytype)
+	queue_icon_update()
+
+/obj/item/clothing/head/helmet/space/void/refit_for_bodytype(target_bodytype)
+	..()
+	icon = get_icon_for_bodytype(target_bodytype)
+	queue_icon_update()

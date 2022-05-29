@@ -188,7 +188,7 @@ default behaviour is:
 
 /mob/living/proc/updatehealth()
 	if(status_flags & GODMODE)
-		health = 100
+		health = maxHealth
 		set_stat(CONSCIOUS)
 	else
 		health = maxHealth - getOxyLoss() - getToxLoss() - getFireLoss() - getBruteLoss() - getCloneLoss() - getHalLoss()
@@ -496,21 +496,79 @@ default behaviour is:
 /mob/living/proc/UpdateDamageIcon()
 	return
 
-/mob/living/handle_grabs_after_move()
+/mob/living/handle_grabs_after_move(var/turf/old_loc, var/direction)
+
 	..()
-	if(!skill_check(SKILL_MEDICAL, SKILL_BASIC))
-		for(var/obj/item/grab/grab in get_active_grabs())
+
+	if(!isturf(loc))
+		for(var/G in get_active_grabs())
+			qdel(G)
+			return
+
+	if(isturf(old_loc))
+		for(var/atom/movable/AM as anything in ret_grab())
+			if(AM != src && AM.loc != loc && !AM.anchored && old_loc.Adjacent(AM))
+				AM.glide_size = glide_size // This is adjusted by grabs again from events/some of the procs below, but doing it here makes it more likely to work with recursive movement.
+				AM.DoMove(get_dir(get_turf(AM), old_loc), src, TRUE)
+
+	var/list/mygrabs = get_active_grabs()
+	for(var/obj/item/grab/G as anything in mygrabs)
+		if(G.assailant_reverse_facing())
+			set_dir(global.reverse_dir[direction])
+		G.assailant_moved()
+		if(QDELETED(G) || QDELETED(G.affecting))
+			mygrabs -= G
+
+	if(!length(mygrabs))
+		return
+
+	if(length(grabbed_by))
+		reset_offsets()
+		reset_plane_and_layer()
+
+	if(direction & (UP|DOWN))
+		var/txt_dir = (direction & UP) ? "upwards" : "downwards"
+		if(old_loc)
+			old_loc.visible_message(SPAN_NOTICE("\The [src] moves [txt_dir]."))
+		for(var/obj/item/grab/G as anything in mygrabs)
+			var/turf/start = G.affecting.loc
+			var/turf/destination = (direction == UP) ? GetAbove(G.affecting) : GetBelow(G.affecting)
+			if(!start.CanZPass(G.affecting, direction))
+				to_chat(src, SPAN_WARNING("\The [start] blocked your pulled object!"))
+				mygrabs -= G
+				qdel(G)
+				continue
+			if(!destination.CanZPass(G.affecting, direction))
+				to_chat(src, SPAN_WARNING("The [G.affecting] you were pulling bumps up against \the [destination]."))
+				mygrabs -= G
+				qdel(G)
+				continue
+			for(var/atom/A in destination)
+				if(!A.CanMoveOnto(G.affecting, start, 1.5, direction))
+					to_chat(src, SPAN_WARNING("\The [A] blocks the [G.affecting] you were pulling."))
+					mygrabs -= G
+					qdel(G)
+					continue
+			G.affecting.forceMove(destination)
+			if(QDELETED(G) || QDELETED(G.affecting))
+				mygrabs -= G
+			continue
+
+	if(length(mygrabs) && !skill_check(SKILL_MEDICAL, SKILL_BASIC))
+		for(var/obj/item/grab/grab as anything in mygrabs)
 			var/mob/living/affecting_mob = grab.get_affecting_mob()
 			if(affecting_mob)
 				affecting_mob.handle_grab_damage()
 
-/mob/living/Move(a, b, flag)
+/mob/living/Move(NewLoc, Dir)
 	if (buckled)
 		return
+	var/turf/old_loc = loc
 	. = ..()
-	handle_grabs_after_move()
-	if (s_active && !( s_active in contents ) && get_turf(s_active) != get_turf(src))	//check !( s_active in contents ) first so we hopefully don't have to call get_turf() so much.
-		s_active.close(src)
+	if(.)
+		handle_grabs_after_move(old_loc, Dir)
+		if (s_active && !( s_active in contents ) && get_turf(s_active) != get_turf(src))	//check !( s_active in contents ) first so we hopefully don't have to call get_turf() so much.
+			s_active.close(src)
 
 /mob/living/verb/resist()
 	set name = "Resist"
@@ -605,6 +663,7 @@ default behaviour is:
 			return
 		resting = !resting
 		UpdateLyingBuckledAndVerbStatus()
+		update_icon()
 		to_chat(src, SPAN_NOTICE("You are now [resting ? "resting" : "getting up"]."))
 
 //called when the mob receives a bright flash
@@ -638,6 +697,10 @@ default behaviour is:
 /mob/living/carbon/get_contained_external_atoms()
 	. = ..()
 	LAZYREMOVE(., get_organs())
+	//Since organs are cleared on destroy, add this separate check here
+	for(var/obj/item/organ/O in .)
+		if(!O.is_droppable())
+			LAZYREMOVE(., O)
 
 /mob/proc/can_be_possessed_by(var/mob/observer/ghost/possessor)
 	return istype(possessor) && possessor.client
@@ -701,7 +764,7 @@ default behaviour is:
 	..()
 	cut_overlays()
 	if(auras)
-		for(var/obj/aura/aura AS_ANYTHING in auras)
+		for(var/obj/aura/aura as anything in auras)
 			var/image/A = new()
 			A.appearance = aura
 			add_overlay(A)
@@ -862,7 +925,8 @@ default behaviour is:
 	if(!has_gravity())
 		return
 	if(isturf(loc) && pull_damage() && prob(getBruteLoss() / 6))
-		blood_splatter(loc, src, large = TRUE)
+		if (!should_have_organ(BP_HEART))
+			blood_splatter(loc, src, large = TRUE)
 		if(prob(25))
 			adjustBruteLoss(1)
 			visible_message(SPAN_DANGER("\The [src]'s [isSynthetic() ? "state worsens": "wounds open more"] from being dragged!"))
@@ -898,7 +962,7 @@ default behaviour is:
 	return "Living"
 
 /mob/living/handle_mouse_drop(atom/over, mob/user)
-	if(user == src && user != over)
+	if(!anchored && user == src && user != over)
 
 		if(isturf(over))
 			var/turf/T = over
@@ -981,11 +1045,7 @@ default behaviour is:
 		if(!hud_used.hide_actions_toggle)
 			hud_used.hide_actions_toggle = new(hud_used)
 			hud_used.hide_actions_toggle.UpdateIcon()
-
-		if(!hud_used.hide_actions_toggle.moved)
-			hud_used.hide_actions_toggle.screen_loc = hud_used.ButtonNumberToScreenCoords(1)
-			//hud_used.SetButtonCoords(hud_used.hide_actions_toggle,1)
-
+		hud_used.hide_actions_toggle.screen_loc = hud_used.ButtonNumberToScreenCoords(1)
 		client.screen += hud_used.hide_actions_toggle
 		return
 
@@ -993,11 +1053,11 @@ default behaviour is:
 	for(var/datum/action/A in actions)
 		button_number++
 		if(A.button == null)
-			var/obj/screen/movable/action_button/N = new(hud_used)
+			var/obj/screen/action_button/N = new(hud_used)
 			N.owner = A
 			A.button = N
 
-		var/obj/screen/movable/action_button/B = A.button
+		var/obj/screen/action_button/B = A.button
 
 		B.UpdateIcon()
 
@@ -1005,18 +1065,13 @@ default behaviour is:
 		B.desc = A.UpdateDesc()
 
 		client.screen += B
-
-		if(!B.moved)
-			B.screen_loc = hud_used.ButtonNumberToScreenCoords(button_number)
-			//hud_used.SetButtonCoords(B,button_number)
+		B.screen_loc = hud_used.ButtonNumberToScreenCoords(button_number)
 
 	if(button_number > 0)
 		if(!hud_used.hide_actions_toggle)
 			hud_used.hide_actions_toggle = new(hud_used)
 			hud_used.hide_actions_toggle.InitialiseIcon(src)
-		if(!hud_used.hide_actions_toggle.moved)
-			hud_used.hide_actions_toggle.screen_loc = hud_used.ButtonNumberToScreenCoords(button_number+1)
-			//hud_used.SetButtonCoords(hud_used.hide_actions_toggle,button_number+1)
+		hud_used.hide_actions_toggle.screen_loc = hud_used.ButtonNumberToScreenCoords(button_number+1)
 		client.screen += hud_used.hide_actions_toggle
 
 /mob/living/handle_fall_effect(var/turf/landing)

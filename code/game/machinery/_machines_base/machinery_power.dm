@@ -83,12 +83,13 @@ This is /obj/machinery level code to properly manage power usage from the area.
 			return
 
 // Do not do power stuff in New/Initialize until after ..()
-/obj/machinery/Initialize()
+/obj/machinery/Initialize(mapload)
 	if(MACHINE_UPDATES_FROM_AREA_POWER)
 		var/area/my_area = get_area(src)
 		if(istype(my_area))
 			events_repository.register(/decl/observ/area_power_change, my_area, src, .proc/power_change)
-	REPORT_POWER_CONSUMPTION_CHANGE(0, get_power_usage())
+	if(mapload) // currently outside mapload, movables trigger loc/Entered(src, null) in ..(), which will update power.
+		REPORT_POWER_CONSUMPTION_CHANGE(0, get_power_usage())
 	events_repository.register(/decl/observ/moved, src, src, .proc/update_power_on_move)
 	power_init_complete = TRUE
 	. = ..()
@@ -107,6 +108,9 @@ This is /obj/machinery level code to properly manage power usage from the area.
 	area_changed(get_area(old_loc), get_area(new_loc))
 
 /obj/machinery/proc/area_changed(area/old_area, area/new_area)
+	if(!power_init_complete)
+		return // this is possible if called externally
+
 	if(old_area == new_area)
 		return
 	var/power = get_power_usage()
@@ -161,6 +165,23 @@ This is /obj/machinery level code to properly manage power usage from the area.
 			return
 	if(power_init_complete && (use_power_mode == use_power))
 		REPORT_POWER_CONSUMPTION_CHANGE(old_power, new_power_consumption)
+
+// Return the powernet of a cable node underneath the machine.
+/obj/machinery/proc/get_powernet()
+	var/turf/T = loc
+	if(!istype(T))
+		return
+
+	var/obj/structure/cable/C = T.get_cable_node()
+	if(C)
+		return C.powernet
+
+// Adds available power to a connected powernet, if available.
+/obj/machinery/proc/generate_power(var/amount)
+	var/datum/powernet/P = get_powernet()
+	if(!P)
+		return
+	P.newavail += amount
 
 #undef REPORT_POWER_CONSUMPTION_CHANGE
 #undef MACHINE_UPDATES_FROM_AREA_POWER

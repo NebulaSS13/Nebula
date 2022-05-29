@@ -2,7 +2,7 @@
 #define CONSTRUCT_SPELL_TYPE 2
 
 /spell/construction
-	name = "Construction"
+	name = "Basic Construction"
 	desc = "This ability will let you summon a structure of your choosing."
 
 	cast_delay = 10

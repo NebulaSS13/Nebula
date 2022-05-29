@@ -37,6 +37,7 @@
 	global.human_mob_list -= src
 	worn_underwear = null
 	QDEL_NULL(attack_selector)
+	QDEL_NULL(vessel)
 	LAZYCLEARLIST(smell_cooldown)
 	. = ..()
 
@@ -654,7 +655,7 @@
 			update_body()
 
 //set_species should not handle the entirety of initing the mob, and should not trigger deep updates
-//It focuses on setting up specie related data, without force applying them uppon organs and the mob's appearence.
+//It focuses on setting up species-related data, without force applying them uppon organs and the mob's appearance.
 // For transforming an existing mob, look at change_species()
 /mob/living/carbon/human/proc/set_species(var/new_species_name)
 	if(!new_species_name)
@@ -711,7 +712,7 @@
 	update_emotes()
 	return TRUE
 
-//Syncs cultural tokens to the currently set specie, and may trigger a language update
+//Syncs cultural tokens to the currently set species, and may trigger a language update
 /mob/living/carbon/human/proc/apply_species_cultural_info()
 	var/update_lang
 	for(var/token in ALL_CULTURAL_TAGS)
@@ -725,7 +726,7 @@
 	if(update_lang)
 		update_languages()
 
-//Drop anything that cannot be worn by the current specie of the mob
+//Drop anything that cannot be worn by the current species of the mob
 /mob/living/carbon/human/proc/apply_species_inventory_restrictions()
 	if(species)
 		if(!(species.appearance_flags & HAS_UNDERWEAR))
@@ -744,7 +745,7 @@
 		icon_state = lowertext(SPECIES_HUMAN)
 		skin_colour = COLOR_BLACK
 	else
-		species.apply_appearence(src)
+		species.apply_appearance(src)
 
 	force_update_limbs() //updates bodytype
 	default_pixel_x = initial(pixel_x) + bodytype.pixel_offset_x
@@ -1032,7 +1033,7 @@
 				status += "MISSING"
 			if(org.status & ORGAN_MUTATED)
 				status += "misshapen"
-			if(org.dislocated == 2)
+			if(org.is_dislocated())
 				status += "dislocated"
 			if(org.status & ORGAN_BROKEN)
 				status += "hurts when touched"
@@ -1302,7 +1303,7 @@
 	//Set species and real name data
 	set_real_name(new_dna.real_name)
 	set_species(new_dna.species)
-	//Revive actually regen organs, reset their appearence and makes sure if the player is kicked out they get reinserted in
+	//Revive actually regen organs, reset their appearance and makes sure if the player is kicked out they get reinserted in
 	revive()
 
 	species.handle_pre_spawn(src)
@@ -1341,14 +1342,16 @@
 		dna.ready_dna(src) //regen dna filler only if we haven't forced the dna already
 
 	species.handle_pre_spawn(src)
-	apply_species_cultural_info()
-	apply_species_appearance()
 	if(!LAZYLEN(get_external_organs()))
 		species.create_missing_organs(src) //Syncs DNA when adding organs
+	apply_species_cultural_info()
+	apply_species_appearance()
 	species.handle_post_spawn(src)
 
-	UpdateAppearance() //Apply dna appearence to mob, causes DNA to change because filler values are regenerated
-	reset_blood()
+	UpdateAppearance() //Apply dna appearance to mob, causes DNA to change because filler values are regenerated
+	//Prevent attempting to create blood container if its already setup
+	if(!vessel)
+		reset_blood()
 
 //If the mob has its default name it'll try to generate /obtain a proper one
 /mob/living/carbon/human/proc/try_generate_default_name()
@@ -1362,3 +1365,11 @@
 //Runs last after setup and after the parent init has been executed.
 /mob/living/carbon/human/proc/post_setup(var/species_name = null, var/datum/dna/new_dna = null)
 	refresh_visible_overlays() //Do this exactly once per setup
+
+/mob/living/carbon/human/handle_flashed(var/obj/item/flash/flash, var/flash_strength)
+	var/safety = eyecheck()
+	if(safety < FLASH_PROTECTION_MODERATE)
+		flash_strength = round(getFlashMod() * flash_strength)
+		if(safety > FLASH_PROTECTION_NONE)
+			flash_strength = (flash_strength / 2)
+	. = ..()

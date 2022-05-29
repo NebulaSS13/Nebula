@@ -144,7 +144,7 @@ var/global/list/hygiene_props = list()
 	icon_state = "toilet[open][cistern]"
 
 /obj/structure/hygiene/toilet/attackby(obj/item/I, var/mob/user)
-	if(isCrowbar(I))
+	if(IS_CROWBAR(I))
 		to_chat(user, SPAN_NOTICE("You start to [cistern ? "replace the lid on the cistern" : "lift the lid off the cistern"]."))
 		playsound(loc, 'sound/effects/stonedoor_openclose.ogg', 50, 1)
 		if(do_after(user, 30, src))
@@ -279,7 +279,7 @@ var/global/list/hygiene_props = list()
 		to_chat(user, SPAN_NOTICE("The water temperature seems to be [watertemp]."))
 		return
 
-	if(isWrench(I))
+	if(IS_WRENCH(I))
 		var/newtemp = input(user, "What setting would you like to set the temperature valve to?", "Water Temperature Valve") in temperature_settings
 		if(newtemp != watertemp && !QDELETED(I) && !QDELETED(user) && !QDELETED(src) && user.Adjacent(src) && I.loc == src)
 			to_chat(user, SPAN_NOTICE("You begin to adjust the temperature valve with \the [I]."))

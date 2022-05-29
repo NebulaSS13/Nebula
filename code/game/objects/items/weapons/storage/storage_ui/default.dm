@@ -176,22 +176,26 @@
 		row_num = round((adjusted_contents-1) / 7) // 7 is the maximum allowed width.
 	arrange_item_slots(row_num, col_count)
 
+#define SCREEN_LOC_MOD_FIRST   3
+#define SCREEN_LOC_MOD_SECOND  1.7
+#define SCREEN_LOC_MOD_DIVIDED (0.5 * world.icon_size)
+
 //This proc draws out the inventory and places the items on it. It uses the standard position.
-/datum/storage_ui/default/proc/arrange_item_slots(var/rows, var/cols)
-	var/cx = 4
-	var/cy = 2+rows
-	boxes.screen_loc = "LEFT+4:16,BOTTOM+2:16 to LEFT+[4+cols]:16,BOTTOM+[2+rows]:16"
+/datum/storage_ui/default/proc/arrange_item_slots(rows, cols)
+	var/cx = SCREEN_LOC_MOD_FIRST
+	var/cy = SCREEN_LOC_MOD_SECOND + rows
+	boxes.screen_loc = "LEFT+[SCREEN_LOC_MOD_FIRST]:[SCREEN_LOC_MOD_DIVIDED],BOTTOM+[SCREEN_LOC_MOD_SECOND]:[SCREEN_LOC_MOD_DIVIDED] to LEFT+[SCREEN_LOC_MOD_FIRST + cols]:[SCREEN_LOC_MOD_DIVIDED],BOTTOM+[SCREEN_LOC_MOD_SECOND + rows]:[SCREEN_LOC_MOD_DIVIDED]"
 
 	for(var/obj/O in storage.contents)
-		O.screen_loc = "LEFT+[cx]:16,BOTTOM+[cy]:16"
+		O.screen_loc = "LEFT+[cx]:[SCREEN_LOC_MOD_DIVIDED],BOTTOM+[cy]:[SCREEN_LOC_MOD_DIVIDED]"
 		O.maptext = ""
 		O.hud_layerise()
 		cx++
-		if (cx > (4+cols))
-			cx = 4
+		if (cx > (SCREEN_LOC_MOD_FIRST + cols))
+			cx = SCREEN_LOC_MOD_FIRST
 			cy--
 
-	closer.screen_loc = "LEFT+[4+cols+1]:16,BOTTOM+2:16"
+	closer.screen_loc = "LEFT+[SCREEN_LOC_MOD_FIRST + cols + 1]:[SCREEN_LOC_MOD_DIVIDED],BOTTOM+[SCREEN_LOC_MOD_SECOND]:[SCREEN_LOC_MOD_DIVIDED]"
 
 /datum/storage_ui/default/proc/space_orient_objs()
 
@@ -206,9 +210,9 @@
 	M.Scale((storage_width-storage_cap_width*2+3)/32,1)
 	storage_continue.transform = M
 
-	storage_start.screen_loc = "LEFT+4:16,BOTTOM+2:16"
-	storage_continue.screen_loc = "LEFT+4:[storage_cap_width+(storage_width-storage_cap_width*2)/2+2],BOTTOM+2:16"
-	storage_end.screen_loc = "LEFT+4:[19+storage_width-storage_cap_width],BOTTOM+2:16"
+	storage_start.screen_loc = "LEFT+[SCREEN_LOC_MOD_FIRST]:[SCREEN_LOC_MOD_DIVIDED],BOTTOM+[SCREEN_LOC_MOD_SECOND]:[SCREEN_LOC_MOD_DIVIDED]"
+	storage_continue.screen_loc = "LEFT+[SCREEN_LOC_MOD_FIRST]:[storage_cap_width+(storage_width-storage_cap_width*2)/2+2],BOTTOM+[SCREEN_LOC_MOD_SECOND]:[SCREEN_LOC_MOD_DIVIDED]"
+	storage_end.screen_loc = "LEFT+[SCREEN_LOC_MOD_FIRST]:[19+storage_width-storage_cap_width],BOTTOM+[SCREEN_LOC_MOD_SECOND]:[SCREEN_LOC_MOD_DIVIDED]"
 
 	var/startpoint = 0
 	var/endpoint = 1
@@ -231,11 +235,12 @@
 		storage_start.overlays += stored_continue
 		storage_start.overlays += stored_end
 
-		O.screen_loc = "LEFT+4:[round((startpoint+endpoint)/2)+2-O.pixel_x],BOTTOM+2:[16-O.pixel_y]"
+		O.reset_offsets()
+		O.screen_loc = "LEFT+[SCREEN_LOC_MOD_FIRST]:[round((startpoint+endpoint)/2)+2-O.pixel_x],BOTTOM+[SCREEN_LOC_MOD_SECOND]:[SCREEN_LOC_MOD_DIVIDED-O.pixel_y]"
 		O.maptext = ""
 		O.hud_layerise()
 
-	closer.screen_loc = "LEFT+4:[storage_width+19],BOTTOM+2:16"
+	closer.screen_loc = "LEFT+[SCREEN_LOC_MOD_FIRST]:[storage_width+19],BOTTOM+[SCREEN_LOC_MOD_SECOND]:[SCREEN_LOC_MOD_DIVIDED]"
 
 // Sets up numbered display to show the stack size of each stored mineral
 // NOTE: numbered display is turned off currently because it's broken
@@ -249,3 +254,7 @@
 	arrange_item_slots(row_num, col_count)
 	if(user && user.s_active)
 		user.s_active.show_to(user)
+
+#undef SCREEN_LOC_MOD_FIRST
+#undef SCREEN_LOC_MOD_SECOND
+#undef SCREEN_LOC_MOD_DIVIDED

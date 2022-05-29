@@ -21,7 +21,7 @@
 
 /obj/structure/boulder/Destroy()
 	QDEL_NULL(artifact_find)
-	..()
+	return ..()
 
 /obj/structure/boulder/attackby(var/obj/item/I, var/mob/user)
 	if(istype(I, /obj/item/depth_scanner))

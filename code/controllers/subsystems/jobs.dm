@@ -128,9 +128,6 @@ SUBSYSTEM_DEF(jobs)
 	syndicate_code_phrase = generate_code_phrase()
 	syndicate_code_response	= generate_code_phrase()
 
-	// Set up AI spawn locations
-	spawn_empty_ai()
-
 	. = ..()
 
 /datum/controller/subsystem/jobs/proc/guest_jobbans(var/job)
@@ -509,12 +506,9 @@ SUBSYSTEM_DEF(jobs)
 			H.buckled.set_dir(H.dir)
 
 	if(!(ASSIGNMENT_ROBOT in job.event_categories) && !(ASSIGNMENT_COMPUTER in job.event_categories)) //These guys get their emails later.
-		var/domain = "freemail.net"
-		if(H.char_branch?.email_domain)
-			domain = H.char_branch.email_domain
 		var/datum/computer_network/network = get_local_network_at(get_turf(H))
 		if(network)
-			network.create_email(H, H.real_name, domain, rank)
+			network.create_account(H, H.real_name, null, H.real_name, null, TRUE)
 
 	// If they're head, give them the account info for their department
 	if(H.mind && job.head_position)
@@ -549,7 +543,8 @@ SUBSYSTEM_DEF(jobs)
 	if(job.supervisors)
 		to_chat(H, "<b>As the [alt_title ? alt_title : rank] you answer directly to [job.supervisors]. Special circumstances may change this.</b>")
 
-	to_chat(H, "<b>To speak on your department's radio channel use :h. For the use of other channels, examine your headset.</b>")
+	if(H.has_headset_in_ears())
+		to_chat(H, "<b>To speak on your department's radio channel use :h. For the use of other channels, examine your headset.</b>")
 
 	if(job.req_admin_notify)
 		to_chat(H, "<b>You are playing a job that is important for Game Progression. If you have to disconnect, please notify the admins via adminhelp.</b>")

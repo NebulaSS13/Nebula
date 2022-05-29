@@ -43,6 +43,11 @@
 												/obj/structure/wall_frame,
 												/obj/structure/railing)
 
+/mob/living/simple_animal/hostile/Destroy()
+	LAZYCLEARLIST(friends)
+	target_mob = null
+	return ..()
+
 /mob/living/simple_animal/hostile/proc/can_act()
 	if(QDELETED(src) || stat || stop_automation || incapacitated())
 		return FALSE
@@ -101,7 +106,7 @@
 		walk_to(src, pick(orange(2, src)), 1, move_to_delay)
 		return
 	stop_automated_movement = 1
-	if(!target_mob || SA_attackable(target_mob))
+	if(QDELETED(target_mob) || SA_attackable(target_mob))
 		stance = HOSTILE_STANCE_IDLE
 	if(target_mob in ListTargets(10))
 		if(ranged)
@@ -240,18 +245,10 @@
 	visible_message("<span class='danger'>\The [src] [fire_desc] at \the [target]!</span>", 1)
 
 	if(rapid)
-		spawn(1)
-			Shoot(target, src.loc, src)
-			if(casingtype)
-				new casingtype(get_turf(src))
-		spawn(4)
-			Shoot(target, src.loc, src)
-			if(casingtype)
-				new casingtype(get_turf(src))
-		spawn(6)
-			Shoot(target, src.loc, src)
-			if(casingtype)
-				new casingtype(get_turf(src))
+		var/datum/callback/shoot_cb = CALLBACK(src, .proc/shoot_wrapper, target, loc, src)
+		addtimer(shoot_cb, 1)
+		addtimer(shoot_cb, 4)
+		addtimer(shoot_cb, 6)
 	else
 		Shoot(target, src.loc, src)
 		if(casingtype)
@@ -260,6 +257,11 @@
 	stance = HOSTILE_STANCE_IDLE
 	target_mob = null
 	return
+
+/mob/living/simple_animal/hostile/proc/shoot_wrapper(target, location, user)
+	Shoot(target, location, user)
+	if (casingtype)
+		new casingtype(loc)
 
 /mob/living/simple_animal/hostile/proc/Shoot(var/target, var/start, var/user, var/bullet = 0)
 	if(target == start)

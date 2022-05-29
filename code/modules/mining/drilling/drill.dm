@@ -121,7 +121,7 @@
 /obj/machinery/mining/drill/physical_attack_hand(mob/user)
 	check_supports()
 	if(need_player_check)
-		if(can_use_power_oneoff(10 KILOWATTS))
+		if(can_use_power_oneoff(10 KILOWATTS) <= 0)
 			system_error("insufficient charge")
 		else if(anchored)
 			get_resource_field()
@@ -247,7 +247,7 @@
 		return TRUE
 	if(component_attackby(W, user))
 		return TRUE
-	if(isWrench(W))
+	if(IS_WRENCH(W))
 
 		if(isspaceturf(get_turf(src)))
 			to_chat(user, "<span class='notice'>You can't anchor something to empty space. Idiot.</span>")

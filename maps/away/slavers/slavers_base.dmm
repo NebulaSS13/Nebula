@@ -2993,14 +2993,14 @@
 /turf/simulated/floor/airless/ceiling,
 /area/slavers_base/powatm)
 "iq" = (
-/obj/machinery/power/port_gen/pacman/super,
+/obj/machinery/port_gen/pacman/super,
 /obj/structure/cable/green{
 	icon_state = "0-4"
 	},
 /turf/simulated/floor/airless/ceiling,
 /area/slavers_base/powatm)
 "ir" = (
-/obj/machinery/power/port_gen/pacman/super,
+/obj/machinery/port_gen/pacman/super,
 /obj/structure/cable/green{
 	icon_state = "0-4"
 	},
@@ -3010,7 +3010,7 @@
 /turf/simulated/floor/airless/ceiling,
 /area/slavers_base/powatm)
 "is" = (
-/obj/machinery/power/port_gen/pacman/super,
+/obj/machinery/port_gen/pacman/super,
 /obj/structure/cable/green{
 	icon_state = "0-4"
 	},

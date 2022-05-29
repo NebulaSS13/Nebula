@@ -25,10 +25,10 @@
 	return ..()
 
 /obj/item/plastique/attackby(var/obj/item/I, var/mob/user)
-	if(isScrewdriver(I))
+	if(IS_SCREWDRIVER(I))
 		open_panel = !open_panel
 		to_chat(user, "<span class='notice'>You [open_panel ? "open" : "close"] the wire panel.</span>")
-	else if(isWirecutter(I) || isMultitool(I) || istype(I, /obj/item/assembly/signaler ))
+	else if(IS_WIRECUTTER(I) || IS_MULTITOOL(I) || istype(I, /obj/item/assembly/signaler ))
 		wires.Interact(user)
 	else
 		..()

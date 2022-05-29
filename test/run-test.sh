@@ -221,6 +221,7 @@ function run_byond_tests {
     else msg "configured map is '$MAP_PATH'"
     fi
     cp config/example/* config/
+    cp data/secrets/example/* data/secrets/
     if [[ "$CI" == "true" ]]; then
         msg "installing BYOND"
         ./install-byond.sh || exit 1

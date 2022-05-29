@@ -17,7 +17,7 @@
 			.[key] += cost[key]
 
 /obj/item/frame/attackby(obj/item/W, mob/user)
-	if(isWrench(W))
+	if(IS_WRENCH(W))
 		for(var/key in matter)
 			SSmaterials.create_object(key, get_turf(src), round(matter[key]/SHEET_MATERIAL_AMOUNT))
 		qdel(src)

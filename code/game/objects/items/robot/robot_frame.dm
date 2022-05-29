@@ -35,7 +35,7 @@
 /obj/item/robot_parts/robot_suit/attackby(obj/item/W, mob/user)
 
 	// Uninstall a robotic part.
-	if(isCrowbar(W))
+	if(IS_CROWBAR(W))
 		if(!parts.len)
 			to_chat(user, SPAN_WARNING("\The [src] has no parts to remove."))
 			return

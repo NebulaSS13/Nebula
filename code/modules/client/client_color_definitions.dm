@@ -78,8 +78,8 @@
 	client_color = list(0.299,0.299,0.299, 0.587,0.587,0.587, 0.114,0.114,0.114)
 	priority = 200
 
-/datum/client_color/thirdeye
-	client_color = list(0.1, 0.1, 0.1, 0.2, 0.2, 0.2, 0.05, 0.05, 0.05)
+// Defining this twice so a detective dosing on Gleam doesn't lose the overlay.
+/datum/client_color/noir/thirdeye
 	priority = 300
 
 /datum/client_color/berserk

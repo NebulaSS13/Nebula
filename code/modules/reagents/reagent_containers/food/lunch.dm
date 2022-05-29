@@ -15,7 +15,6 @@ var/global/list/lunchables_lunches_ = list(
 
 var/global/list/lunchables_snacks_ = list(
 									/obj/item/chems/food/donut/jelly,
-									/obj/item/chems/food/donut/cherryjelly,
 									/obj/item/chems/food/muffin,
 									/obj/item/chems/food/popcorn,
 									/obj/item/chems/food/sosjerky,

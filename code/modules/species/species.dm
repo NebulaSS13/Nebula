@@ -10,10 +10,10 @@ var/global/const/DEFAULT_SPECIES_HEALTH = 200
 	var/name_plural                           // Pluralized name (since "[name]s" is not always valid)
 	var/description
 	var/codex_description
+	var/roleplay_summary
 	var/ooc_codex_information
 	var/cyborg_noun = "Cyborg"
 	var/hidden_from_codex = TRUE
-	var/is_crystalline = FALSE
 
 	var/holder_icon
 	var/list/available_bodytypes = list()
@@ -26,7 +26,8 @@ var/global/const/DEFAULT_SPECIES_HEALTH = 200
 		/decl/blood_type/bminus,
 		/decl/blood_type/abplus,
 		/decl/blood_type/abminus,
-		/decl/blood_type/oplus
+		/decl/blood_type/oplus,
+		/decl/blood_type/ominus
 	)
 
 	var/flesh_color = "#ffc896"             // Pink.
@@ -189,21 +190,14 @@ var/global/const/DEFAULT_SPECIES_HEALTH = 200
 
 	var/list/override_organ_types // Used for species that only need to change one or two entries in has_organ.
 
-	//List of organ tags, with the amount and type required for living by this specie
+	//List of organ tags, with the amount and type required for living by this species
 	//#REMOVEME: The vital organ stuff was apparently mostly dropped, so its a bit pointless to improve it...
-	var/list/vital_organs = list(
-		BP_HEART = list("path" = /obj/item/organ/internal/heart),
-		BP_LUNGS = list("path" = /obj/item/organ/internal/lungs),
-		BP_BRAIN = list("path" = /obj/item/organ/internal/brain),
-		BP_CHEST = list("path" = /obj/item/organ/external/chest),
-		BP_GROIN = list("path" = /obj/item/organ/external/groin),
-	)
+	var/list/vital_organs
 
 	var/obj/effect/decal/cleanable/blood/tracks/move_trail = /obj/effect/decal/cleanable/blood/tracks/footprints // What marks are left when walking
 
 	// An associative list of target zones (ex. BP_CHEST, BP_MOUTH) mapped to all possible keys associated
-	// with the zone. Used for species with body layouts that do not map directly to the standard humanoid
-	// body, currently serpentids and mantids.
+	// with the zone. Used for species with body layouts that do not map directly to a standard humanoid body.
 	var/list/limb_mapping
 
 	var/list/has_limbs = list(
@@ -448,7 +442,7 @@ var/global/const/DEFAULT_SPECIES_HEALTH = 200
 /decl/species/proc/get_manual_dexterity(var/mob/living/carbon/human/H)
 	. = manual_dexterity
 
-//Checks if an existing organ is the specie's default
+//Checks if an existing organ is the species default
 /decl/species/proc/is_default_organ(var/obj/item/organ/O)
 	for(var/tag in has_organ)
 		if(O.organ_tag == tag)
@@ -456,8 +450,13 @@ var/global/const/DEFAULT_SPECIES_HEALTH = 200
 				return TRUE
 	return FALSE
 
-//Checks if an existing limbs is the specie's default
+//Checks if an existing limbs is the species default
 /decl/species/proc/is_default_limb(var/obj/item/organ/external/E)
+	// We don't have ^^ (logical XOR), so !x != !y will suffice.
+	if(!(species_flags & SPECIES_FLAG_CRYSTALLINE) != !BP_IS_CRYSTAL(E))
+		return FALSE
+	if(!(species_flags & SPECIES_FLAG_SYNTHETIC) != !BP_IS_PROSTHETIC(E))
+		return FALSE
 	for(var/tag in has_limbs)
 		if(E.organ_tag == tag)
 			var/list/organ_data = has_limbs[tag]
@@ -475,6 +474,8 @@ var/global/const/DEFAULT_SPECIES_HEALTH = 200
 	return FALSE
 
 /decl/species/proc/is_vital_organ(var/mob/living/carbon/human/H, var/obj/item/organ/O)
+	if(!LAZYLEN(vital_organs))
+		return FALSE
 	//An organ organ is considered vital if there's less than the required amount of said organ type in the mob after we remove it
 	var/list/organ_data = vital_organs[O.organ_tag]
 	if(!organ_data || !ispath(O.type, organ_data["path"]))
@@ -509,6 +510,7 @@ var/global/const/DEFAULT_SPECIES_HEALTH = 200
 		var/limb_path = organ_data["path"]
 		var/obj/item/organ/external/E = new limb_path(H, null, H.dna) //explicitly specify the dna
 		H.add_organ(E, null, FALSE, FALSE)
+		post_organ_rejuvenate(E, H)
 
 	//Create missing internal organs
 	for(var/organ_tag in has_organ)
@@ -716,11 +718,6 @@ var/global/const/DEFAULT_SPECIES_HEALTH = 200
 /decl/species/proc/handle_death_check(var/mob/living/carbon/human/H)
 	return FALSE
 
-//Mostly for toasters
-/decl/species/proc/handle_limbs_setup(var/mob/living/carbon/human/H)
-	for(var/thing in H.get_external_organs())
-		post_organ_rejuvenate(thing, H)
-
 // Impliments different trails for species depending on if they're wearing shoes.
 /decl/species/proc/get_move_trail(var/mob/living/carbon/human/H)
 	if(H.lying)
@@ -865,7 +862,7 @@ var/global/const/DEFAULT_SPECIES_HEALTH = 200
 		else			. = 8
 
 /decl/species/proc/post_organ_rejuvenate(var/obj/item/organ/org, var/mob/living/carbon/human/H)
-	if(org && (org.species ? org.species.is_crystalline : is_crystalline))
+	if(org && (org.species ? (org.species.species_flags & SPECIES_FLAG_CRYSTALLINE) : (species_flags & SPECIES_FLAG_CRYSTALLINE)))
 		org.status |= (ORGAN_BRITTLE|ORGAN_CRYSTAL)
 
 /decl/species/proc/check_no_slip(var/mob/living/carbon/human/H)
@@ -916,18 +913,18 @@ var/global/const/DEFAULT_SPECIES_HEALTH = 200
 /decl/species/proc/get_holder_color(var/mob/living/carbon/human/H)
 	return
 
-//Called after a mob's specie is set, organs were created, and we're about to update the icon, color, and etc of the mob being created.
+//Called after a mob's species is set, organs were created, and we're about to update the icon, color, and etc of the mob being created.
 //Consider this might be called post-init
-/decl/species/proc/apply_appearence(var/mob/living/carbon/human/H)
+/decl/species/proc/apply_appearance(var/mob/living/carbon/human/H)
 	H.icon_state = lowertext(src.name)
 	H.skin_colour = src.base_color
-	update_appearence_descriptors(H)
+	update_appearance_descriptors(H)
 
-/decl/species/proc/update_appearence_descriptors(var/mob/living/carbon/human/H)
+/decl/species/proc/update_appearance_descriptors(var/mob/living/carbon/human/H)
 	if(!LAZYLEN(src.appearance_descriptors))
 		H.appearance_descriptors = null
-		return 
-	
+		return
+
 	var/list/new_descriptors = list()
 	//Add missing descriptors, and sanitize any existing ones
 	for(var/desctype in src.appearance_descriptors)
@@ -945,7 +942,7 @@ var/global/const/DEFAULT_SPECIES_HEALTH = 200
 		var/mob/living/carbon/human/dummy/mannequin/mannequin = get_mannequin("#species_[ckey(name)]")
 		if(mannequin)
 
-			mannequin.set_species(name)
+			mannequin.change_species(name)
 			customize_preview_mannequin(mannequin)
 
 			preview_icon = getFlatIcon(mannequin)

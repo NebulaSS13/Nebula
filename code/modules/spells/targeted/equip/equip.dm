@@ -1,13 +1,9 @@
 //You can set duration to 0 to have the items last forever
 
 /spell/targeted/equip_item
-	name = "equipment spell"
 	cast_sound = 'sound/magic/summonitems_generic.ogg'
-
 	var/list/equipped_summons = list() //assoc list of text ids and paths to spawn
-
 	var/list/summoned_items = list() //list of items we summoned and will dispose when the spell runs out
-
 	var/delete_old = 1 //if the item previously in the slot is deleted - otherwise, it's dropped
 
 /spell/targeted/equip_item/cast(list/targets, mob/user = usr)

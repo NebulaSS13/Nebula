@@ -101,7 +101,7 @@ var/global/list/laser_wavelengths
 	if(charging)
 		return ..()
 
-	if(isScrewdriver(W))
+	if(IS_SCREWDRIVER(W))
 		if(length(capacitors))
 			var/obj/item/stock_parts/capacitor/capacitor = capacitors[1]
 			capacitor.charge = 0
@@ -281,7 +281,7 @@ var/global/list/laser_wavelengths
 	wiring_color = COLOR_GOLD
 
 /obj/item/gun/energy/capacitor/rifle/linear_fusion/attackby(obj/item/W, mob/user)
-	if(isScrewdriver(W))
+	if(IS_SCREWDRIVER(W))
 		to_chat(user, SPAN_WARNING("\The [src] is hermetically sealed; you can't get the components out."))
 		return TRUE
 	. = ..()

@@ -25,9 +25,9 @@
 	mob.ghostize()
 
 // Incorporeal/Ghost movement
-/datum/movement_handler/mob/incorporeal/DoMove(var/direction)
+/datum/movement_handler/mob/incorporeal/DoMove(var/direction, var/mob/mover)
 	. = MOVEMENT_HANDLED
-	direction = mob.AdjustMovementDirection(direction)
+	direction = mob.AdjustMovementDirection(direction, mover)
 	mob.set_glide_size(0)
 
 	var/turf/T = get_step(mob, direction)
@@ -156,7 +156,7 @@
 			to_chat(mob, SPAN_WARNING("You're pinned down by \a [mob.pinned[1]]!"))
 		return MOVEMENT_STOP
 
-	for(var/obj/item/grab/G AS_ANYTHING in mob.grabbed_by)
+	for(var/obj/item/grab/G as anything in mob.grabbed_by)
 		if(G.assailant != mob && G.assailant != mover && (mob.restrained() || G.stop_move()))
 			if(mover == mob)
 				to_chat(mob, SPAN_WARNING("You're restrained and cannot move!"))
@@ -178,7 +178,7 @@
 	//We are now going to move
 	mob.moving = 1
 
-	direction = mob.AdjustMovementDirection(direction)
+	direction = mob.AdjustMovementDirection(direction, mover)
 	var/turf/old_turf = get_turf(mob)
 	step(mob, direction)
 
@@ -187,47 +187,6 @@
 	if(mob.loc == old_turf) // Did not move for whatever reason.
 		mob.moving = FALSE
 		return
-
-	var/turf/new_loc = mob.loc
-	if(istype(new_loc))
-		for(var/atom/movable/AM AS_ANYTHING in mob.ret_grab())
-			if(AM != src && AM.loc != mob.loc && !AM.anchored && old_turf.Adjacent(AM))
-				AM.glide_size = mob.glide_size // This is adjusted by grabs again from events/some of the procs below, but doing it here makes it more likely to work with recursive movement.
-				AM.DoMove(get_dir(get_turf(AM), old_turf), mob, TRUE)
-
-	for(var/obj/item/grab/G AS_ANYTHING in mob.get_active_grabs())
-		if(G.assailant_reverse_facing())
-			mob.set_dir(global.reverse_dir[direction])
-		G.assailant_moved()
-		G.adjust_position()
-
-	if(length(mob.grabbed_by))
-		mob.reset_offsets()
-		mob.reset_plane_and_layer()
-
-	if(direction & (UP|DOWN))
-		var/txt_dir = (direction & UP) ? "upwards" : "downwards"
-		old_turf.visible_message(SPAN_NOTICE("[mob] moves [txt_dir]."))
-		for(var/obj/item/grab/G AS_ANYTHING in mob.get_active_grabs())
-			if(!G.affecting)
-				continue
-			var/turf/start = G.affecting.loc
-			var/turf/destination = (direction == UP) ? GetAbove(G.affecting) : GetBelow(G.affecting)
-			if(!start.CanZPass(G.affecting, direction))
-				to_chat(mob, SPAN_WARNING("\The [start] blocked your pulled object!"))
-				qdel(G)
-				continue
-			if(!destination.CanZPass(G.affecting, direction))
-				to_chat(mob, SPAN_WARNING("The [G.affecting] you were pulling bumps up against \the [destination]."))
-				qdel(G)
-				continue
-			for(var/atom/A in destination)
-				if(!A.CanMoveOnto(G.affecting, start, 1.5, direction))
-					to_chat(mob, SPAN_WARNING("\The [A] blocks the [G.affecting] you were pulling."))
-					qdel(G)
-					continue
-			G.affecting.forceMove(destination)
-			continue
 
 	// Sprinting uses up stamina and causes exertion effects.
 	if(MOVING_QUICKLY(mob))
@@ -262,8 +221,22 @@
 /mob/proc/MayEnterTurf(var/turf/T)
 	return T && !((mob_flags & MOB_FLAG_HOLY_BAD) && check_is_holy_turf(T))
 
-/mob/proc/AdjustMovementDirection(var/direction)
+/**
+ * This proc adjusts movement direction for mobs with STAT_CONFUSE.
+ *
+ * Returns a direction, randomly adjusted if the mob had STAT_CONFUSE.
+ *
+ * Arguments:
+ * * direction: The direction, mob was going to move before adjustment
+ * * mover: The initiator of movement
+ */
+/mob/proc/AdjustMovementDirection(var/direction, var/mob/mover)
 	. = direction
+
+	// If we are moved not on our own, we don't get move debuff
+	if(src != mover)
+		return
+
 	if(!HAS_STATUS(src, STAT_CONFUSE))
 		return
 

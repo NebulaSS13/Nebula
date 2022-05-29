@@ -28,6 +28,7 @@
 
 /decl/material/solid/graphite
 	name = "graphite"
+	codex_name = "loose graphite"
 	uid = "solid_graphite"
 	color = "#444444"
 	ore_name = "graphite"
@@ -74,7 +75,7 @@
 	)
 
 /decl/material/solid/pyrite
-	name = "pyrite"
+	name = "fool's gold"
 	uid = "solid_pyrite"
 	ore_name = "pyrite"
 	ore_result_amount = 10

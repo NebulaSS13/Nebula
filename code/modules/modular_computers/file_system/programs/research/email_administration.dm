@@ -9,13 +9,13 @@
 	requires_network = 1
 	available_on_network = 1
 	nanomodule_path = /datum/nano_module/program/email_administration
-	required_access = list(access_network)
+	read_access = list(access_network)
 	category = PROG_ADMIN
 
 /datum/nano_module/program/email_administration
 	name = "Email Administration"
 	available_to_ai = TRUE
-	var/datum/computer_file/data/email_account/current_account = null
+	var/datum/computer_file/data/account/current_account = null
 	var/datum/computer_file/data/email_message/current_message = null
 	var/error = ""
 
@@ -26,13 +26,13 @@
 	if(!user.skill_check(SKILL_COMPUTER, SKILL_BASIC))
 		var/datum/extension/fake_data/fake_data = get_or_create_extension(src, /datum/extension/fake_data, 15)
 		data["skill_fail"] = fake_data.update_and_return_data()
-	data["terminal"] = !!program
 
 	var/datum/computer_network/network = program?.computer?.get_network()
 	if(!network)
 		error = "NETWORK FAILURE: Check connection to the network."
-	else if(!length(network.get_mainframes_by_role(MF_ROLE_EMAIL_SERVER, user)))
-		error = "NETWORK FAILURE: No email servers detected."
+
+	else if(!length(network.get_mainframes_by_role(MF_ROLE_ACCOUNT_SERVER, user)))
+		error = "NETWORK FAILURE: No account servers detected."
 
 	if(error)
 		data["error"] = error
@@ -56,12 +56,11 @@
 		data["messagecount"] = all_messages.len
 	else
 		var/list/all_accounts = list()
-		for(var/datum/computer_file/data/email_account/account in network.get_email_addresses())
+		for(var/datum/computer_file/data/account/account in network.get_accounts(get_access(user)))
 			if(!account.can_login)
 				continue
 			all_accounts.Add(list(list(
-				"login" = account.login,
-				"uid" = account.uid
+				"login" = account.login
 			)))
 		data["accounts"] = all_accounts
 		data["accountcount"] = all_accounts.len
@@ -91,14 +90,9 @@
 	var/datum/computer_network/network = program?.computer?.get_network()
 	if(!network)
 		return TOPIC_HANDLED
-	if(!length(network.mainframes[MF_ROLE_EMAIL_SERVER]))
-		error = "NETWORK FAILURE: No email servers detected."
-		return TOPIC_HANDLED
 
-	// High security - can only be operated when the user has an ID with access on them.
-	var/obj/item/card/id/I = user.GetIdCard()
-	if(!istype(I) || !(access_network in I.access))
-		return TOPIC_HANDLED
+	// This is just for logging, not access checking so don't bother actually checking if the account has changed.
+	var/datum/computer_file/data/account/user_account = program.computer.get_account_nocheck()
 
 	if(href_list["back"])
 		if(error)
@@ -115,20 +109,8 @@
 
 		current_account.suspended = !current_account.suspended
 		if(network.intrusion_detection_enabled)
-			program.computer.add_log("EMAIL LOG: SA-EDIT Account [current_account.login] has been [current_account.suspended ? "" : "un" ]suspended by SA [I.registered_name] ([I.assignment]).")
+			program.computer.add_log("EMAIL LOG: SA-EDIT Account [current_account.login] has been [current_account.suspended ? "" : "un" ]suspended by SA [user_account.login].")
 		error = "Account [current_account.login] has been [current_account.suspended ? "" : "un" ]suspended."
-		return TOPIC_REFRESH
-
-	if(href_list["changepass"])
-		if(!current_account)
-			return TOPIC_HANDLED
-
-		var/newpass = sanitize(input(user,"Enter new password for account [current_account.login]", "Password"), 100)
-		if(!newpass || !CanUseTopic(user, state))
-			return TOPIC_HANDLED
-		current_account.password = newpass
-		if(network.intrusion_detection_enabled)
-			program.computer.add_log("EMAIL LOG: SA-EDIT Password for account [current_account.login] has been changed by SA [I.registered_name] ([I.assignment]).")
 		return TOPIC_REFRESH
 
 	if(href_list["viewmail"])
@@ -142,28 +124,5 @@
 		return TOPIC_REFRESH
 
 	if(href_list["viewaccount"])
-		for(var/datum/computer_file/data/email_account/email_account in network.get_email_addresses())
-			if(email_account.uid == text2num(href_list["viewaccount"]))
-				current_account = email_account
-				break
-		return TOPIC_REFRESH
-
-	if(href_list["newaccount"])
-		var/newdomain = sanitize(input(user,"Pick domain:", "Domain name") as null|anything in global.using_map.usable_email_tlds)
-		if(!newdomain)
-			return TOPIC_HANDLED
-		var/newlogin = sanitize(input(user,"Pick account name (@[newdomain]):", "Account name"), 100)
-		if(!newlogin || !CanUseTopic(user, state))
-			return TOPIC_HANDLED
-
-		var/complete_login = "[newlogin]@[newdomain]"
-		if(network.find_email_by_name(complete_login))
-			error = "Error creating account: An account with same address already exists."
-			return TOPIC_REFRESH
-
-		var/datum/computer_file/data/email_account/new_account = new/datum/computer_file/data/email_account()
-		new_account.login = complete_login
-		new_account.password = GenerateKey()
-		network.add_email_account(new_account)
-		error = "Email [new_account.login] has been created, with generated password [new_account.password]"
+		current_account = network.find_account_by_login(href_list["viewaccount"], get_access(user))
 		return TOPIC_REFRESH

@@ -2,9 +2,14 @@
 	base_type = /datum/extension/interactive/os
 	expected_type = /atom/movable
 	flags = EXTENSION_FLAG_IMMEDIATE
+
 	var/on = FALSE
 	var/datum/computer_file/program/active_program = null	// A currently active program running on the computer.
 	var/list/running_programs = list()						// All programms currently running, background or active.
+
+	var/login												// The current network account login
+	var/password											// The current network account password.
+	var/weakref/current_account								// Reference to the current account to improve lookup speed.
 
 	var/screen_icon_file									// dmi where the screen overlays are kept, defaults to holder's icon if unset
 	var/menu_icon = "menu"									// Icon state overlay when the computer is turned on, but no program is loaded that would override the screen.
@@ -51,6 +56,92 @@
 	if(D)
 		return D.get_network()
 
+/datum/extension/interactive/os/proc/get_access(var/mob/user)
+	. = list()
+	var/datum/computer_file/data/account/access_account = get_account()
+	if(access_account)
+		var/datum/computer_network/network = get_network()
+		if(network) 	
+			var/location = "[network.network_id]"
+			. += "[access_account.login]@[location]" // User access uses '@'
+			for(var/group in access_account.groups)
+				. += "[group].[location]"	// Group access uses '.'
+			for(var/group in access_account.parent_groups) // Membership in a child group grants access to anything with an access requirement set to the parent group.
+				. += "[group].[location]"
+	if(user)
+		var/obj/item/card/id/I = user.GetIdCard()
+		if(I)
+			. += I.GetAccess(access_account?.login) // Ignore any access that's already on the user account.
+	
+// Returns the current account, if possible. User var is passed only for updating program access from ID, if no account is found.
+/datum/extension/interactive/os/proc/get_account(var/mob/user)
+	if(!current_account)
+		return null
+	var/datum/computer_file/data/account/check_account = current_account?.resolve()
+	if(!istype(check_account))
+		logout_account(user)
+		return null
+	if(check_account.login != login || check_account.password != password) // The most likely case - login or password were changed.
+		logout_account(user)
+		return null
+	// Check if the account can be located on the network.
+	var/datum/computer_network/network = get_network()
+	if(!network || !(check_account in network.get_accounts_unsorted()))
+		logout_account(user)
+		return null
+	return check_account
+
+// Returns the current account without bothering to check if it can still be found.
+/datum/extension/interactive/os/proc/get_account_nocheck()
+	return current_account?.resolve()
+
+/datum/extension/interactive/os/proc/login_account(var/new_login, var/new_password, var/mob/user)
+	var/datum/computer_network/network = get_network()
+	var/datum/computer_file/data/account/prev_acount = get_account(user)
+	if(prev_acount)
+		if(prev_acount.login == new_login && (prev_acount.password == new_password))
+			return TRUE
+		else // Log out of the current account first if we're trying to log into something else.
+			logout_account(user)
+	if(network)
+		for(var/datum/computer_file/data/account/check_account in network.get_accounts())
+			if(check_account.login == new_login && check_account.password == new_password)
+				login = new_login
+				password = new_password
+				current_account = weakref(check_account)
+				check_account.logged_in_os += weakref(src)
+
+				for(var/datum/computer_file/program/P in running_programs)
+					P.update_access(user)
+				return TRUE
+
+/datum/extension/interactive/os/proc/logout_account(var/mob/user)
+	var/datum/computer_file/data/account/check_account = current_account?.resolve()
+	if(check_account)
+		check_account.logged_in_os -= weakref(src)
+	current_account = null
+	login = null
+	password = null
+	for(var/datum/computer_file/program/P in running_programs)
+		P.update_access(user)
+
+/datum/extension/interactive/os/proc/login_prompt(var/mob/user)
+	var/obj/item/card/id/I = user.GetIdCard()
+	var/default_login = I?.associated_network_account["login"]
+	var/default_password = I?.associated_network_account["password"]
+
+	var/new_login = sanitize(input(user, "Enter your account login:", "Account login", default_login) as text|null)
+	if(!new_login || !CanUseTopic(user, global.default_topic_state))
+		return
+	var/new_password = sanitize(input(user, "Enter your account password:", "Account password", default_password) as text|null)
+	if(!new_password || !CanUseTopic(user, global.default_topic_state))
+		return
+	
+	if(login_account(new_login, new_password, user))
+		to_chat(user, SPAN_NOTICE("Account login successful: Welcome [new_login]!"))
+	else
+		to_chat(user, SPAN_NOTICE("Account login failed: Check login or password."))
+
 /datum/extension/interactive/os/proc/system_shutdown()
 	on = FALSE
 	for(var/datum/computer_file/program/P in running_programs)
@@ -60,6 +151,7 @@
 	if(network_card)
 		var/datum/extension/network_device/D = get_extension(network_card, /datum/extension/network_device)
 		D?.disconnect()
+	logout_account()
 
 	if(updating)
 		updating = FALSE
@@ -113,7 +205,7 @@
 	if(P in running_programs)
 		P.program_state = PROGRAM_STATE_ACTIVE
 		active_program = P
-	else if(P.can_run(user, 1, null, get_network()))
+	else if(P.can_run(get_access(user), user, TRUE))
 		P.on_startup(user, src)
 		active_program = P
 	else
@@ -200,3 +292,8 @@
 /datum/extension/interactive/os/proc/get_processing_power()
 	var/obj/item/stock_parts/computer/processor_unit/CPU = get_component(PART_CPU)
 	return CPU?.processing_power
+
+/datum/extension/interactive/os/proc/mail_received(datum/computer_file/data/email_message/received)
+	var/datum/computer_file/program/email_client/e_client = locate() in running_programs
+	if(e_client)
+		e_client.mail_received(received)

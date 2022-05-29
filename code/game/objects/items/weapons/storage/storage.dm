@@ -38,7 +38,7 @@
 	. = (loc == user && istype(over, /obj/screen)) || ..()
 
 /obj/item/storage/handle_mouse_drop(var/atom/over, var/mob/user)
-	if(canremove && (ishuman(user) || isrobot(user)))
+	if(canremove && (ishuman(user) || isrobot(user) || isanimal(user)) && !user.incapacitated(INCAPACITATION_DISRUPTED))
 		if(over == user)
 			open(user)
 			return TRUE
@@ -49,6 +49,21 @@
 				user.equip_to_slot_if_possible(src, inv.slot_id)
 				return TRUE
 	. = ..()
+
+/obj/item/storage/AltClick(mob/user)
+	if(!canremove)
+		return
+
+	if(!Adjacent(user))
+		return
+
+	if(!(ishuman(user) || isrobot(user) || issmall(user)))
+		return
+	
+	if(user.incapacitated(INCAPACITATION_DISRUPTED))
+		return
+	
+	open(user)
 
 /obj/item/storage/proc/return_inv()
 
@@ -189,7 +204,7 @@
 			for(var/mob/M in viewers(usr, null))
 				if (M == usr)
 					to_chat(usr, "<span class='notice'>You put \the [W] into [src].</span>")
-				else if (M in range(1, src)) //If someone is standing close enough, they can tell what it is... TODO replace with distance check
+				else if (get_dist(src, M) <= 1) //If someone is standing close enough, they can tell what it is...
 					M.show_message("<span class='notice'>\The [usr] puts [W] into [src].</span>", VISIBLE_MESSAGE)
 				else if (W && W.w_class >= ITEM_SIZE_NORMAL) //Otherwise they can only see large or normal items from a distance...
 					M.show_message("<span class='notice'>\The [usr] puts [W] into [src].</span>", VISIBLE_MESSAGE)

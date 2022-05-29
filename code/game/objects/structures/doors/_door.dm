@@ -39,7 +39,7 @@
 
 /obj/structure/door/on_update_icon()
 	..()
-	icon_state = "[icon_base][!density ? "open" : ""]"
+	icon_state = "[icon_base][!density ? "_open" : ""]"
 
 /obj/structure/door/proc/post_change_state()
 	update_nearby_tiles()

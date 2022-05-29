@@ -241,7 +241,7 @@ var/global/list/closets = list()
 	if(user.a_intent == I_HURT && W.force)
 		return ..()
 
-	if(!opened && (istype(W, /obj/item/stack/material) || isWrench(W)) )
+	if(!opened && (istype(W, /obj/item/stack/material) || IS_WRENCH(W)) )
 		return ..()
 
 	if(src.opened)
@@ -249,7 +249,7 @@ var/global/list/closets = list()
 			var/obj/item/grab/G = W
 			src.receive_mouse_drop(G.affecting, user)      //act like they were dragged onto the closet
 			return 0
-		if(isWelder(W))
+		if(IS_WELDER(W))
 			var/obj/item/weldingtool/WT = W
 			if(WT.remove_fuel(0,user))
 				slice_into_parts(WT, user)
@@ -285,7 +285,7 @@ var/global/list/closets = list()
 			open()
 	else if(istype(W, /obj/item/stack/package_wrap))
 		return
-	else if(isWelder(W) && (setup & CLOSET_CAN_BE_WELDED))
+	else if(IS_WELDER(W) && (setup & CLOSET_CAN_BE_WELDED))
 		var/obj/item/weldingtool/WT = W
 		if(!WT.remove_fuel(0,user))
 			if(!WT.isOn())

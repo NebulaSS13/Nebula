@@ -26,18 +26,21 @@
 	// Damage vars.
 	var/damage = 0                         // Current damage to the organ
 	var/min_broken_damage = 30             // Damage before becoming broken
-	var/max_damage = 30                    // Damage cap
+	var/max_damage = 30                    // Damage cap, including scarring
+	var/absolute_max_damage = 0            // Lifetime damage cap, ignoring scarring.
 	var/rejecting                          // Is this organ already being rejected?
-	var/death_time                         // world.time at moment of death.
+	var/death_time                         // REALTIMEOFDAY at moment of death.
 	var/scale_max_damage_to_species_health // Whether or not we should scale the damage values of this organ to the owner species.
 
 /obj/item/organ/Destroy()
 	if(owner)
-		owner.remove_organ(src, FALSE, FALSE, TRUE, TRUE, FALSE) //Tell our parent we're unisntalling silently
+		owner.remove_organ(src, FALSE, FALSE, TRUE, TRUE, FALSE) //Tell our parent we're unisntalling in place
 	else
 		do_uninstall(TRUE, FALSE, FALSE, FALSE) //Don't ignore children here since we might own/contain them
 	owner = null
 	dna = null
+	species = null
+	bodytype = null
 	QDEL_NULL_LIST(ailments)
 	return ..()
 
@@ -56,20 +59,11 @@
 //Third rgument may be a dna datum; if null will be set to holder's dna.
 /obj/item/organ/Initialize(mapload, material_key, var/datum/dna/given_dna)
 	. = ..(mapload, material_key)
-	if(. == INITIALIZE_HINT_QDEL)
-		return
-	
-	if(max_damage)
-		min_broken_damage = FLOOR(max_damage / 2)
-	else
-		max_damage = min_broken_damage * 2
-
-	if(!BP_IS_PROSTHETIC(src))
-		setup_as_organic(given_dna)
-	else
-		setup_as_prosthetic()
-
-	update_icon()
+	if(. != INITIALIZE_HINT_QDEL)
+		if(!BP_IS_PROSTHETIC(src))
+			setup_as_organic(given_dna)
+		else
+			setup_as_prosthetic()
 
 /obj/item/organ/proc/setup_as_organic(var/datum/dna/given_dna)
 	//Null DNA setup
@@ -81,7 +75,8 @@
 				given_dna = owner.dna //Grab our owner's dna if we don't have any, and they have
 			else
 				//The owner having no DNA can be a valid reason to keep our dna null in some cases
-				dna = null
+				log_debug("obj/item/organ/setup_as_organic(): [src] had null dna, with a owner with null dna!")
+				dna = null //#TODO: Not sure that's really legal
 				return
 		else
 			//If we have NO OWNER and given_dna, just make one up for consistency
@@ -115,8 +110,7 @@
 	reagents.add_reagent(/decl/material/liquid/nutriment/protein, reagents.maximum_volume)
 
 /obj/item/organ/proc/set_dna(var/datum/dna/new_dna)
-	if(!new_dna)
-		return
+	QDEL_NULL(dna)
 	dna = new_dna.Clone()
 	if(!blood_DNA)
 		blood_DNA = list()
@@ -132,17 +126,25 @@
 	if(!species)
 		species = get_species_by_key(global.using_map.default_species)
 		PRINT_STACK_TRACE("Invalid species. Expected a valid species name as string, was: [log_info_line(specie_name)]")
+
 	bodytype = owner?.bodytype || species.default_bodytype
 	species.resize_organ(src)
 
 	// Adjust limb health proportinate to total species health.
 	var/total_health_coefficient = scale_max_damage_to_species_health ? (species.total_health / DEFAULT_SPECIES_HEALTH) : 1
-	if(max_damage)
-		max_damage = max(1, FLOOR(max_damage * total_health_coefficient))
-		min_broken_damage = max(1, FLOOR(max_damage * 0.5))
+
+	//Use initial value to prevent scaling down each times we change the species during init
+	absolute_max_damage = initial(absolute_max_damage)
+	min_broken_damage = initial(min_broken_damage)
+	max_damage = initial(max_damage)
+
+	if(absolute_max_damage)
+		absolute_max_damage = max(1, FLOOR(absolute_max_damage * total_health_coefficient))
+		min_broken_damage = max(1, FLOOR(absolute_max_damage * 0.5))
 	else
 		min_broken_damage = max(1, FLOOR(min_broken_damage * total_health_coefficient))
-		max_damage = max(1, FLOOR(min_broken_damage * 2))
+		absolute_max_damage = max(1, FLOOR(min_broken_damage * 2))
+	max_damage = absolute_max_damage // resets scarring, but ah well
 
 /obj/item/organ/proc/die()
 	damage = max_damage
@@ -156,7 +158,7 @@
 
 /obj/item/organ/Process()
 
-	if(loc != owner)
+	if(loc != owner) //#FIXME: looks like someone was trying to hide a bug :P That probably could break organs placed inside a wrapper though
 		owner = null
 
 	//dead already, no need for more processing
@@ -319,7 +321,7 @@
 	if (can_recover())
 		damage = between(0, damage - round(amount, 0.1), max_damage)
 
-/obj/item/organ/proc/robotize(var/company, var/skip_prosthetics = 0, var/keep_organs = 0, var/apply_material = /decl/material/solid/metal/steel)
+/obj/item/organ/proc/robotize(var/company = /decl/prosthetics_manufacturer, var/skip_prosthetics = 0, var/keep_organs = 0, var/apply_material = /decl/material/solid/metal/steel, var/check_bodytype, var/check_species)
 	status = ORGAN_PROSTHETIC
 	QDEL_NULL(dna)
 	reagents?.clear_reagents()
@@ -488,15 +490,21 @@ var/global/list/ailment_reference_cache = list()
 //if we're an internal organ, having a null "target" is legal if we have an "affected"
 //CASES:
 // 1. When creating organs and running their init this is called to properly set them up
-// 2. When installing an organ through surgery via replaced this is called.
+// 2. When installing an organ through surgery this is called.
+// 3. When attaching a detached organ through surgery this is called.
 // The organ may be inside an external organ that's not inside a mob, or inside a mob
-/obj/item/organ/proc/do_install(var/mob/living/carbon/human/target, var/obj/item/organ/external/affected, var/in_place = FALSE, var/update_icon = TRUE)
+//detached : If true, the organ will be installed in a detached state, otherwise it will be added in an attached state
+/obj/item/organ/proc/do_install(var/mob/living/carbon/human/target, var/obj/item/organ/external/affected, var/in_place = FALSE, var/update_icon = TRUE, var/detached = FALSE)
+	//Make sure to force the flag accordingly
+	set_detached(detached)
+	
 	owner = target
 	action_button_name = initial(action_button_name)
 	if(owner)
 		forceMove(owner)
-		for(var/datum/ailment/ailment in ailments)
-			ailment.begin_ailment_event()
+		if(!(status & ORGAN_CUT_AWAY)) //Don't run ailments if we're still detached
+			for(var/datum/ailment/ailment in ailments)
+				ailment.begin_ailment_event()
 	else if(affected)
 		forceMove(affected) //When installed in a limb with no owner
 	return src
@@ -506,6 +514,8 @@ var/global/list/ailment_reference_cache = list()
 // 1. Before deletion to clear our references. 
 // 2. Called through removal on surgery or dismemberement
 // 3. Called when we're changing a mob's species.
+//detach: If detach is true, we're going to set the organ to detached, and add it to the detached organs list, and remove it from processing lists. 
+//        If its false, we just remove the organ from all lists
 /obj/item/organ/proc/do_uninstall(var/in_place = FALSE, var/detach = FALSE, var/ignore_children = FALSE, var/update_icon = TRUE)
 	action_button_name = null
 	screen_loc = null
@@ -515,6 +525,8 @@ var/global/list/ailment_reference_cache = list()
 		if(ailment.timer_id)
 			deltimer(ailment.timer_id)
 			ailment.timer_id = null
+	
+	//When we detach, we set the ORGAN_CUT_AWAY flag on, depending on whether the organ supports it or not
 	if(detach)
 		set_detached(TRUE)
 	return src
@@ -538,3 +550,10 @@ var/global/list/ailment_reference_cache = list()
 /obj/item/organ/proc/is_internal()
 	return FALSE
 
+//Used to tell stumps from other organs. Stumps don't behave like regular organs, and require special handling.
+/obj/item/organ/proc/is_stump()
+	return FALSE
+
+//Used to override organ drop behavior, so we don't drop organs that shouldn't be dropped into the world, like stumps and root limbs, or wrappers
+/obj/item/organ/proc/is_droppable()
+	return TRUE
