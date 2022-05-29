@@ -110,7 +110,7 @@
 
 	if (germ_level > INFECTION_LEVEL_ONE && active_breathing)
 		if(prob(5))
-			owner.emote("cough")		//respitory tract infection
+			owner.cough()		//respitory tract infection
 
 	if(is_bruised() && !owner.is_asystole())
 		if(prob(2))
@@ -367,3 +367,26 @@
 /obj/item/organ/internal/lungs/gills
 	name = "lungs and gills"
 	has_gills = TRUE
+
+/mob/living/carbon/var/lastcough
+/mob/living/carbon/proc/cough(var/deliberate = FALSE)
+	var/obj/item/organ/internal/lungs/lung = get_organ(BP_LUNGS)
+	if(!lung || !lung.active_breathing || isSynthetic() || stat == DEAD || (deliberate && lastcough + 3 SECONDS > world.time))
+		return
+
+	if(lung.breath_fail_ratio > 0.9 && world.time > lung.last_successful_breath + 2 MINUTES)
+		if(deliberate)
+			to_chat(src, SPAN_WARNING("You try to cough, but no air comes out!"))
+		return
+
+	if(deliberate && incapacitated())
+		to_chat(src, SPAN_WARNING("You cannot do that right now."))
+		return
+
+	audible_message("<b>[src]</b> coughs!", "You cough!", radio_message = "coughs!") // styled like an emote
+
+	lastcough = world.time
+
+	// Coughing clears out 1-2 reagents from the lungs.
+	if(lung.inhaled.total_volume > 0 && loc)
+		lung.inhaled.splash(loc, rand(1, 2))
