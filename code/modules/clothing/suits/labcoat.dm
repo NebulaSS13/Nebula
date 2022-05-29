@@ -12,6 +12,7 @@
 		/obj/item/chems/hypospray,
 		/obj/item/chems/inhaler,
 		/obj/item/scanner/health,
+		/obj/item/scanner/breath,
 		/obj/item/flashlight/pen,
 		/obj/item/chems/glass/bottle,
 		/obj/item/chems/glass/beaker,
@@ -73,4 +74,3 @@
 	body_parts_covered = SLOT_UPPER_BODY|SLOT_LOWER_BODY|SLOT_LEGS|SLOT_ARMS
 	markings_color = COLOR_BOTTLE_GREEN
 	markings_icon = "_marking"
-	

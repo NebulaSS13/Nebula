@@ -42,6 +42,7 @@
 	sacrifice_objects = list(
 		/obj/item/stack/nanopaste,
 		/obj/item/scanner/health,
+		/obj/item/scanner/breath,
 		/obj/item/stack/medical/advanced/bruise_pack,
 		/obj/item/stack/medical/advanced/ointment,
 		/obj/item/bodybag/rescue,

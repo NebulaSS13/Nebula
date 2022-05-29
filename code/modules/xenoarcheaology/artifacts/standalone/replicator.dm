@@ -34,6 +34,7 @@
 	/obj/item/flash,
 	/obj/item/flashlight,
 	/obj/item/scanner/health,
+	/obj/item/scanner/breath,
 	/obj/item/multitool,
 	/obj/item/paicard,
 	/obj/item/radio,
