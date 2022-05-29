@@ -18,10 +18,11 @@
 		/obj/item/chems/syringe/antibiotic = 4,
 		/obj/item/chems/syringe = 12,
 		/obj/item/scanner/health = 5,
-		/obj/item/chems/glass/beaker = 4, 
+		/obj/item/scanner/breath = 5,
+		/obj/item/chems/glass/beaker = 4,
 		/obj/item/chems/dropper = 2,
-		/obj/item/stack/medical/advanced/bruise_pack = 3, 
-		/obj/item/stack/medical/advanced/ointment = 3, 
+		/obj/item/stack/medical/advanced/bruise_pack = 3,
+		/obj/item/stack/medical/advanced/ointment = 3,
 		/obj/item/stack/medical/splint = 2,
 		/obj/item/chems/hypospray/autoinjector/pain = 4
 	)

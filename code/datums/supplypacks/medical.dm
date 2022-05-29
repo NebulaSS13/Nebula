@@ -106,6 +106,7 @@
 					/obj/item/clothing/shoes/color/white,
 					/obj/item/clothing/gloves/latex,
 					/obj/item/scanner/health,
+					/obj/item/scanner/breath,
 					/obj/item/flashlight/pen,
 					/obj/item/chems/syringe)
 	containertype = /obj/structure/closet/crate/secure
@@ -125,6 +126,7 @@
 					/obj/item/clothing/shoes/color/white,
 					/obj/item/clothing/gloves/latex,
 					/obj/item/scanner/health,
+					/obj/item/scanner/breath,
 					/obj/item/flashlight/pen,
 					/obj/item/chems/syringe)
 	containertype = /obj/structure/closet/crate/secure
@@ -144,6 +146,7 @@
 					/obj/item/clothing/gloves/latex,
 					/obj/item/chems/dropper,
 					/obj/item/scanner/health,
+					/obj/item/scanner/breath,
 					/obj/item/storage/box/pillbottles,
 					/obj/item/chems/syringe)
 	containertype = /obj/structure/closet/crate/secure
@@ -167,6 +170,7 @@
 					/obj/item/clothing/shoes/jackboots,
 					/obj/item/clothing/gloves/latex,
 					/obj/item/scanner/health,
+					/obj/item/scanner/breath,
 					/obj/item/flashlight/pen,
 					/obj/item/chems/syringe,
 					/obj/item/clothing/accessory/storage/vest)

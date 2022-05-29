@@ -439,7 +439,7 @@
 			else
 				L.take_internal_damage(100, 0)
 
-/decl/material/liquid/ethanol/aged_whiskey // I have no idea what this is and where it comes from.  //It comes from Dinnlan now 
+/decl/material/liquid/ethanol/aged_whiskey // I have no idea what this is and where it comes from.  //It comes from Dinnlan now
 	name = "aged whiskey"
 	lore_text = "A well-aged whiskey of high quality. Probably imported. Just a sip'll do it, but that burn will leave you wanting more."
 	color = "#523600"

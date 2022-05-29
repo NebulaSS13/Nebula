@@ -14,6 +14,7 @@
 		/obj/item/flash,
 		/obj/item/borg/sight/hud/med,
 		/obj/item/scanner/health,
+		/obj/item/scanner/breath,
 		/obj/item/scanner/reagent/adv,
 		/obj/item/chems/borghypo/crisis,
 		/obj/item/extinguisher/mini,

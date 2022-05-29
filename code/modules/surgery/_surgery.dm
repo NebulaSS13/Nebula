@@ -4,6 +4,7 @@ var/global/list/surgeries_in_progress = list()
 var/global/list/surgery_tool_exceptions = list(
 	/obj/item/auto_cpr,
 	/obj/item/scanner/health,
+	/obj/item/scanner/breath,
 	/obj/item/shockpaddles,
 	/obj/item/chems/hypospray,
 	/obj/item/chems/inhaler,
