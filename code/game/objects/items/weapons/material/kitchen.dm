@@ -26,7 +26,7 @@
 		default_pixel_y = rand(0, 4)
 		reset_offsets(0)
 	create_reagents(5)
-	set_extension(src, /datum/extension/tool, list(
+	set_extension(src, /datum/extension/tool/variable, list(
 		TOOL_RETRACTOR = TOOL_QUALITY_BAD,
 		TOOL_HEMOSTAT =  TOOL_QUALITY_MEDIOCRE
 	))

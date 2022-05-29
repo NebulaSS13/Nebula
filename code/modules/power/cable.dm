@@ -496,7 +496,7 @@ By design, d1 is the smallest direction and d2 is the highest
 
 /obj/item/stack/cable_coil/Initialize()
 	. = ..()
-	set_extension(src, /datum/extension/tool, list(
+	set_extension(src, /datum/extension/tool/variable, list(
 		TOOL_CABLECOIL = TOOL_QUALITY_DEFAULT,
 		TOOL_SUTURES =   TOOL_QUALITY_MEDIOCRE
 	))
