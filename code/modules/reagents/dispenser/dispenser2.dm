@@ -30,7 +30,7 @@
 	var/static/list/acceptable_containers = list(
 		/obj/item/chems/glass,
 		/obj/item/chems/condiment,
-		/obj/item/chems/drinks		
+		/obj/item/chems/drinks
 	)
 
 /obj/machinery/chemical_dispenser/Initialize(mapload, d=0, populate_parts = TRUE)
@@ -117,7 +117,7 @@
 		to_chat(user, "<span class='notice'>You set \the [RC] on \the [src].</span>")
 		SSnano.update_uis(src) // update all UIs attached to src
 		return TRUE
-	
+
 	return ..()
 
 /obj/machinery/chemical_dispenser/ui_interact(mob/user, ui_key = "main",var/datum/nanoui/ui = null, var/force_open = 1)
@@ -179,13 +179,18 @@
 		return TOPIC_HANDLED
 
 	else if(href_list["ejectBeaker"])
-		if(container)
-			var/obj/item/chems/B = container
+		if(!container)
+			return TOPIC_HANDLED
+
+		var/obj/item/chems/B = container
+		if(CanPhysicallyInteract(user))
+			user.put_in_hands(B)
+		else
 			B.dropInto(loc)
-			container = null
-			update_icon()
-			return TOPIC_REFRESH
-		return TOPIC_HANDLED
+
+		container = null
+		update_icon()
+		return TOPIC_REFRESH
 
 /obj/machinery/chemical_dispenser/interface_interact(mob/user)
 	ui_interact(user)
