@@ -100,7 +100,7 @@
 	return TRUE
 
 /obj/item/chems/inhaler/attackby(obj/item/tool, mob/user)
-	if(isScrewdriver(tool) && !ATOM_IS_OPEN_CONTAINER(src))
+	if(IS_SCREWDRIVER(tool) && !ATOM_IS_OPEN_CONTAINER(src))
 		to_chat(user, SPAN_NOTICE("Using \the [tool], you unsecure the inhaler's lid.")) // it locks shut after being secured
 		atom_flags |= ATOM_FLAG_OPEN_CONTAINER
 		update_icon()
