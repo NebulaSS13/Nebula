@@ -1,6 +1,7 @@
 /obj/machinery/generator
 	name = "thermoelectric generator"
 	desc = "It's a high efficiency thermoelectric generator."
+	icon = 'icons/obj/power.dmi'
 	icon_state = "teg-unassembled"
 	density = 1
 	anchored = 0
@@ -149,7 +150,7 @@
 	if(genlev != lastgenlev)
 		lastgenlev = genlev
 		update_icon()
-	
+
 	generate_power(effective_gen)
 
 /obj/machinery/generator/attackby(obj/item/W, mob/user)
