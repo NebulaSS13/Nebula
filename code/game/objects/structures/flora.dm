@@ -10,13 +10,17 @@
 	var/protects_against_weather = FALSE
 
 /obj/structure/flora/tree/attackby(var/obj/item/I, mob/user)
-	if(I.sharp && I.edge && (I.force > 1) )
+	//Axes can bypass having to damage the tree to break it
+	if(I.sharp && I.edge && (I.force > 5) )
 		visible_message(SPAN_NOTICE("\The [user] starts chopping at \the [src] with \a [I]."), SPAN_NOTICE("You begin chopping \the [src]."))
 		if(do_after(user, 5 SECONDS))
 			visible_message(SPAN_NOTICE("\The [user] fell \the [src]!"), SPAN_NOTICE("You fell \the [src]."))
-			playsound(src, 'sound/effects/plants/tree_fall.ogg', 40, TRUE, 2, 1)
-			qdel(src)
+			physically_destroyed()
 		return
+	. = ..()
+
+/obj/structure/flora/tree/physically_destroyed(skip_qdel)
+	playsound(src, 'sound/effects/plants/tree_fall.ogg', 40, TRUE, 2, 1)
 	. = ..()
 
 /obj/structure/flora/tree/pine
