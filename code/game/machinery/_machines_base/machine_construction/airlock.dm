@@ -27,7 +27,7 @@
 /decl/machine_construction/default/panel_closed/door/mechanics_info()
 	. = list()
 	. += "Use a screwdriver to open a small hatch and expose some logic wires."
-	. += "Use a crowbar on the secured (bolted, welded or braced) airlock to pry open the main cover."
+	. += "Use a wrench to open the main cover."
 	. += "Use a parts replacer to view installed parts."
 
 /decl/machine_construction/default/panel_closed/door/hacking
