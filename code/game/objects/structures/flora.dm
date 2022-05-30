@@ -1,10 +1,12 @@
 //trees
 /obj/structure/flora/tree
-	name = "tree"
-	anchored = 1
-	density = 1
-	pixel_x = -16
-	layer = ABOVE_HUMAN_LAYER
+	name      = "tree"
+	anchored  = TRUE
+	density   = TRUE
+	pixel_x   = -16
+	layer     = ABOVE_HUMAN_LAYER
+	material  = /decl/material/solid/wood
+	w_class   = ITEM_SIZE_STRUCTURE
 	var/protects_against_weather = FALSE
 
 /obj/structure/flora/tree/pine
@@ -38,9 +40,24 @@
 
 //grass
 /obj/structure/flora/grass
-	name = "grass"
-	icon = 'icons/obj/flora/snowflora.dmi'
-	anchored = 1
+	name      = "grass"
+	icon      = 'icons/obj/flora/snowflora.dmi'
+	anchored  = TRUE
+	material  = /decl/material/solid/plantmatter
+	w_class   = ITEM_SIZE_NORMAL
+
+/obj/structure/flora/pottedplant/get_material_health_modifier()
+	return 0.03
+
+/obj/structure/flora/grass/attackby(var/obj/item/I, mob/user)
+	if(I.sharp && I.force > 1)
+		physically_destroyed()
+		return
+	. = ..()
+
+/obj/structure/flora/grass/physically_destroyed(skip_qdel)
+	playsound(src, 'sound/effects/plants/brush_leaves.ogg', 35, TRUE, 0, 8)
+	. = ..()
 
 /obj/structure/flora/grass/brown
 	icon_state = "snowgrass1bb"
@@ -67,28 +84,68 @@
 
 //bushes
 /obj/structure/flora/bush
-	name = "bush"
-	icon = 'icons/obj/flora/snowflora.dmi'
+	name       = "bush"
+	icon       = 'icons/obj/flora/snowflora.dmi'
 	icon_state = "snowbush1"
-	anchored = 1
+	anchored   = TRUE
+	material   = /decl/material/solid/plantmatter
+	w_class    = ITEM_SIZE_HUGE
 
 /obj/structure/flora/bush/Initialize()
 	. = ..()
 	icon_state = "snowbush[rand(1, 6)]"
 
+/obj/structure/flora/bush/attackby(var/obj/item/I, mob/user)
+	//Can insta break with the proper tool
+	if(I.sharp && I.force > 1)
+		physically_destroyed()
+		return
+	. = ..()
+
+/obj/structure/flora/bush/physically_destroyed(skip_qdel)
+	playsound(src, 'sound/effects/plants/brush_leaves.ogg', 35, TRUE, 0, 8)
+	. = ..()
+
 /obj/structure/flora/pottedplant
-	name = "potted plant"
-	desc = "Really brings the room together."
-	icon = 'icons/obj/structures/potted_plants.dmi'
+	name       = "potted plant"
+	desc       = "Really brings the room together."
+	icon       = 'icons/obj/structures/potted_plants.dmi'
 	icon_state = "plant-01"
-	layer = ABOVE_HUMAN_LAYER
+	layer      = ABOVE_HUMAN_LAYER
+	w_class    = ITEM_SIZE_LARGE
+	material   = /decl/material/solid/clay
+	matter     = list(
+		/decl/material/solid/clay = MATTER_AMOUNT_PRIMARY,
+		/decl/material/solid/sand = MATTER_AMOUNT_SECONDARY,
+		/decl/material/solid/plantmatter = MATTER_AMOUNT_SECONDARY,
+	)
+
+/obj/structure/flora/pottedplant/get_material_health_modifier()
+	return 0.05 //Fragile
+
+/obj/structure/flora/pottedplant/physically_destroyed()
+	playsound(src, 'sound/effects/ceramic_smash1.ogg', 35, TRUE, 0, 8)
+	. = ..()
 
 //newbushes
 /obj/structure/flora/ausbushes
-	name = "bush"
-	icon = 'icons/obj/flora/ausflora.dmi'
+	name       = "bush"
+	icon       = 'icons/obj/flora/ausflora.dmi'
 	icon_state = "firstbush_1"
-	anchored = 1
+	anchored   = TRUE
+	material   = /decl/material/solid/plantmatter
+	w_class    = ITEM_SIZE_HUGE
+
+/obj/structure/flora/ausbushes/attackby(var/obj/item/I, mob/user)
+	//Can insta break with the proper tool
+	if(I.sharp && I.force > 1)
+		physically_destroyed()
+		return
+	. = ..()
+
+/obj/structure/flora/bush/physically_destroyed(skip_qdel)
+	playsound(src, 'sound/effects/plants/brush_leaves.ogg', 35, TRUE, 0, 8)
+	. = ..()
 
 /obj/structure/flora/ausbushes/Initialize()
 	. = ..()
@@ -198,7 +255,6 @@
 /obj/structure/flora/ausbushes/fullgrass/Initialize()
 	. = ..()
 	icon_state = "fullgrass_[rand(1, 3)]"
-
 
 //potted plants credit: Flashkirby
 //potted plants 27-30: Cajoes
