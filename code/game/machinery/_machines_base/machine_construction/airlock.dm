@@ -10,7 +10,7 @@
 		to_chat(user, SPAN_NOTICE("You release some of the logic wiring on \the [machine]. The cover panel remains closed."))
 		machine.update_icon()
 		return
-	if(isCrowbar(I))
+	if(isWrench(I))
 		TRANSFER_STATE(down_state)
 		playsound(get_turf(machine), 'sound/items/Crowbar.ogg', 50, 1)
 		machine.panel_open = TRUE
