@@ -12237,9 +12237,6 @@
 /turf/simulated/floor/tiled,
 /area/ministation/engine)
 "Gu" = (
-/obj/structure/cable{
-	icon_state = "0-8"
-	},
 /obj/machinery/power/smes/buildable/preset,
 /turf/simulated/floor/tiled,
 /area/ministation/engine)
@@ -12276,15 +12273,6 @@
 	dir = 6
 	},
 /turf/simulated/floor/tiled/techfloor,
-/area/ministation/engine)
-"GA" = (
-/obj/machinery/door/blast/regular/open{
-	dir = 2;
-	id_tag = "SupermatterPort";
-	name = "Reactor Blast Door"
-	},
-/obj/effect/wallframe_spawn/reinforced_borosilicate,
-/turf/space,
 /area/ministation/engine)
 "GB" = (
 /obj/structure/cable{
@@ -12739,9 +12727,6 @@
 /turf/simulated/floor/reinforced/airless,
 /area/ministation/engine)
 "HU" = (
-/obj/structure/cable{
-	icon_state = "1-2"
-	},
 /obj/machinery/door/blast/regular{
 	id_tag = "EngineVent";
 	name = "Reactor Vent"
@@ -14572,12 +14557,6 @@
 "NY" = (
 /obj/effect/decal/cleanable/dirt,
 /obj/machinery/atmospherics/omni/filter{
-	tag_east = 1;
-	tag_north = 4;
-	tag_west = 2;
-	use_power = 0
-	},
-/obj/machinery/atmospherics/omni/filter{
 	tag_east = 4;
 	tag_north = 2;
 	use_power = 0;
@@ -15357,8 +15336,8 @@
 /area/ministation/hall/s)
 "RJ" = (
 /obj/machinery/door/airlock/external/glass,
-/obj/machinery/atmospherics/pipe/simple/visible/green{
-	dir = 8
+/obj/machinery/atmospherics/pipe/simple/visible/black{
+	dir = 4
 	},
 /turf/simulated/floor/plating,
 /area/space)
@@ -15904,7 +15883,7 @@
 	use_power = 1
 	},
 /turf/simulated/floor/plating,
-/area/space)
+/area/ministation/engine)
 "UA" = (
 /obj/machinery/camera/network/ministation/sat{
 	dir = 8
@@ -49327,7 +49306,7 @@ aa
 aa
 aa
 aa
-GA
+HD
 Hw
 If
 ie
