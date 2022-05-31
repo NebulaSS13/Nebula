@@ -612,7 +612,7 @@ INITIALIZE_IMMEDIATE(/obj/effect/gas_overlay)
 
 /decl/material/proc/affect_inhale(var/mob/living/M, var/removed, var/datum/reagents/holder)
 	if(affect_blood_on_inhale)
-		affect_blood(M, removed * 0.5, holder)
+		affect_blood(M, removed * 0.75, holder)
 
 /decl/material/proc/affect_touch(var/mob/living/M, var/removed, var/datum/reagents/holder)
 
