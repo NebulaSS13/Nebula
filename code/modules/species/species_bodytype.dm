@@ -1,3 +1,5 @@
+var/global/list/bodytypes_by_category = list()
+
 /decl/bodytype
 	var/name = "default"
 	var/icon_base
@@ -61,6 +63,7 @@
 
 /decl/bodytype/Initialize()
 	. = ..()
+	LAZYDISTINCTADD(global.bodytypes_by_category[bodytype_category], src)
 	if(!icon_deformed)
 		icon_deformed = icon_base
 
