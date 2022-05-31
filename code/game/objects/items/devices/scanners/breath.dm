@@ -89,10 +89,10 @@
 	. += "[b]Reagent scan:[endb]"
 
 	var/print_reagent_default_message = TRUE
-	if (C.has_chemical_effect(CE_ALCOHOL))
+	if (C.has_chemical_effect(CE_ALCOHOL, 1))
 		. += "<span class='scan_orange'>Alcohol detected in subject's breath.</span>"
 		print_reagent_default_message = FALSE
-	if (C.has_chemical_effect(CE_ALCOHOL_TOXIC))
+	if (C.has_chemical_effect(CE_ALCOHOL_TOXIC, 1))
 		. += "<span class='scan_red'>Subject is suffering from alcohol poisoning.</span>"
 		print_reagent_default_message = FALSE
 
