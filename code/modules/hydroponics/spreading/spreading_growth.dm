@@ -1,34 +1,26 @@
 #define NEIGHBOR_REFRESH_TIME 100
 
 /obj/effect/vine/proc/get_cardinal_neighbors()
-	var/list/cardinal_neighbors = list()
+	. = list()
 	for(var/check_dir in global.cardinal)
 		var/turf/simulated/T = get_step(get_turf(src), check_dir)
 		if(istype(T))
-			cardinal_neighbors |= T
-	return cardinal_neighbors
+			. |= T
 
 /obj/effect/vine/proc/get_zlevel_neighbors()
-	var/list/zlevel_neighbors = list()
-
+	. = list()
 	var/turf/start = loc
-	var/turf/up = GetAbove(loc)
-	var/turf/down = GetBelow(loc)
-
-	if(start && start.CanZPass(src, DOWN))
-		zlevel_neighbors += down
-	if(up && up.CanZPass(src, UP))
-		zlevel_neighbors += up
-
-	return zlevel_neighbors
+	if(isturf(start))
+		if(start.CanZPass(src, DOWN))
+			. += GetBelow(loc)
+		if(start.CanZPass(src, UP))
+			. += GetAbove(loc)
 
 /obj/effect/vine/proc/get_neighbors()
-	var/list/neighbors = list()
-
+	. = list()
 	for(var/turf/simulated/floor in get_cardinal_neighbors())
 		if(get_dist(parent, floor) > spread_distance)
 			continue
-
 		var/blocked = 0
 		for(var/obj/effect/vine/other in floor.contents)
 			if(other.seed == src.seed)
@@ -36,19 +28,14 @@
 				break
 		if(blocked)
 			continue
-
 		if(floor.density)
 			if(!isnull(seed.chems[/decl/material/liquid/acid/polyacid]))
 				spawn(rand(5,25)) floor.explosion_act(3)
 			continue
-
 		if(!Adjacent(floor) || !floor.Enter(src))
 			continue
-
-		neighbors |= floor
-
-	neighbors |= get_zlevel_neighbors()
-	return neighbors
+		. |= floor
+	. |= get_zlevel_neighbors()
 
 /obj/effect/vine/Process()
 	var/turf/simulated/T = get_turf(src)

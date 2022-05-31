@@ -12,10 +12,6 @@
 		to_chat(mob, "<span class='warning'>\The [start] is in the way.</span>")
 		return MOVEMENT_HANDLED
 
-	if(!destination.CanZPass(mob, direction))
-		to_chat(mob, "<span class='warning'>You bump against \the [destination].</span>")
-		return MOVEMENT_HANDLED
-
 	var/area/area = get_area(mob)
 	if(direction == UP && area.has_gravity() && !mob.can_overcome_gravity())
 		to_chat(mob, "<span class='warning'>Gravity stops you from moving upward.</span>")
