@@ -113,7 +113,7 @@
 		user.drop_from_inventory(src)
 		var/obj/item/flamethrower/F = new(get_turf(src), src)
 		user.put_in_hands(F)
-		return
+		qdel(src)		return
 
 	if (istype(W, /obj/item/welder_tank))
 		if(tank)
