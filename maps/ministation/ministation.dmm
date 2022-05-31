@@ -12740,7 +12740,11 @@
 /turf/space,
 /area/space)
 "HW" = (
-/turf/space,
+/obj/machinery/door/firedoor{
+	dir = 8
+	},
+/obj/machinery/camera/network/engineering,
+/turf/simulated/floor/tiled/techfloor/grid,
 /area/ministation/engine)
 "HY" = (
 /obj/effect/floor_decal/corner/yellow{
@@ -49054,8 +49058,8 @@ Vh
 HT
 Vh
 Oy
-HW
-HW
+aa
+aa
 aa
 aa
 aa
@@ -49311,8 +49315,8 @@ Hw
 If
 ie
 HU
-HW
-HW
+aa
+aa
 aa
 aa
 aa
@@ -49568,8 +49572,8 @@ Vh
 HC
 Vh
 Oy
-HW
-HW
+aa
+aa
 aa
 aa
 aa
@@ -50078,7 +50082,7 @@ aa
 aa
 ad
 Oy
-Hv
+HW
 IM
 HL
 HL
