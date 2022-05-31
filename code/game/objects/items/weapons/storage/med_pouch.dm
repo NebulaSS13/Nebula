@@ -270,14 +270,15 @@ Single Use Emergency Pouches
 	desc = "An emergency autoinhaler from an emergency medical pouch."
 
 /obj/item/chems/inhaler/pouch_auto/oxy_meds
-	name = "emergency oxygel autoinjector"
+	name = "emergency oxygel autoinhaler"
+	band_color = COLOR_CYAN
 
 /obj/item/chems/inhaler/pouch_auto/oxy_meds/populate_reagents()
 	reagents.add_reagent((/decl/material/liquid/oxy_meds, 5)
 
 /obj/item/chems/inhaler/pouch_auto/detoxifier
-	name = "emergency detoxifier autoinjector"
-	band_color = COLOR_PALE_BLUE_GRAY
+	name = "emergency detoxifier autoinhaler"
+	band_color = COLOR_GREEN
 
 /obj/item/chems/inhaler/pouch_auto/detoxifier/populate_reagents()
 	reagents.add_reagent(/decl/material/liquid/detoxifier, 5)
