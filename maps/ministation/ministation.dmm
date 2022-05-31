@@ -11297,6 +11297,7 @@
 	name = "Engineering RC";
 	pixel_y = 30
 	},
+/obj/structure/reagent_dispensers/fueltank,
 /turf/simulated/floor/tiled,
 /area/ministation/engine)
 "DZ" = (
@@ -12450,9 +12451,9 @@
 /turf/simulated/floor/tiled/techfloor,
 /area/ministation/engine)
 "Hg" = (
-/obj/structure/reagent_dispensers/fueltank,
 /obj/machinery/camera/network/engineering,
-/turf/simulated/floor/tiled,
+/obj/machinery/portable_atmospherics/canister/nitrogen/engine_setup,
+/turf/simulated/floor/tiled/techfloor,
 /area/ministation/engine)
 "Hh" = (
 /obj/structure/reagent_dispensers/watertank,
@@ -12671,19 +12672,19 @@
 /obj/item/stack/cable_coil,
 /obj/item/stock_parts/circuitboard/airlock_electronics,
 /obj/item/stock_parts/circuitboard/airlock_electronics,
-/turf/simulated/floor/tiled,
+/turf/simulated/floor/tiled/techfloor,
 /area/ministation/engine)
 "HJ" = (
 /obj/structure/table,
 /obj/item/folder/yellow,
 /obj/item/clothing/head/earmuffs,
-/turf/simulated/floor/tiled,
+/turf/simulated/floor/tiled/techfloor,
 /area/ministation/engine)
 "HK" = (
 /obj/structure/table,
 /obj/item/scanner/gas,
 /obj/item/stack/material/rods/fifty,
-/turf/simulated/floor/tiled,
+/turf/simulated/floor/tiled/techfloor,
 /area/ministation/engine)
 "HL" = (
 /turf/simulated/wall/r_wall/prepainted,
@@ -13041,7 +13042,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/effect/decal/cleanable/dirt,
 /obj/machinery/atmospherics/pipe/simple/visible/cyan,
-/turf/simulated/floor/tiled,
+/turf/simulated/floor/tiled/techfloor,
 /area/ministation/engine)
 "Je" = (
 /obj/machinery/light/small{
@@ -16181,7 +16182,7 @@
 /obj/machinery/atmospherics/binary/circulator{
 	anchored = 1
 	},
-/turf/simulated/floor/tiled,
+/turf/simulated/floor/tiled/techfloor,
 /area/ministation/engine)
 "VZ" = (
 /obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers{
