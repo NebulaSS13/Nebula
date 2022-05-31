@@ -27,6 +27,8 @@
 	. = ..()
 	for(var/T in starts_with)
 		reagents.add_reagent(T, starts_with[T])
+	if(ATOM_IS_OPEN_CONTAINER(src) && reagents.total_volume > 0)
+		atom_flags &= ~ATOM_FLAG_OPEN_CONTAINER
 	update_icon()
 
 /obj/item/chems/inhaler/on_update_icon()
