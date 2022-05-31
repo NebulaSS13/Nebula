@@ -994,6 +994,13 @@
 /obj/random/trash,
 /turf/simulated/floor/plating,
 /area/ministation/maint/w)
+"cI" = (
+/obj/machinery/door/firedoor{
+	dir = 8
+	},
+/obj/machinery/camera/network/engineering,
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/ministation/engine)
 "cJ" = (
 /turf/simulated/floor/plating,
 /area/ministation/maint/ne)
@@ -12741,12 +12748,10 @@
 /turf/space,
 /area/space)
 "HW" = (
-/obj/machinery/door/firedoor{
-	dir = 8
-	},
-/obj/machinery/camera/network/engineering,
-/turf/simulated/floor/tiled/techfloor/grid,
-/area/ministation/engine)
+/obj/structure/grille,
+/obj/structure/lattice,
+/turf/space,
+/area/space)
 "HY" = (
 /obj/effect/floor_decal/corner/yellow{
 	dir = 5
@@ -14606,6 +14611,12 @@
 /obj/effect/decal/cleanable/dirt,
 /turf/simulated/floor/tiled,
 /area/ministation/hall/n)
+"Oj" = (
+/obj/structure/grille,
+/obj/structure/grille,
+/obj/structure/lattice,
+/turf/space,
+/area/space)
 "Om" = (
 /obj/item/stool,
 /obj/machinery/alarm{
@@ -46234,7 +46245,7 @@ OG
 Gp
 Ht
 aa
-aa
+HW
 aa
 aa
 aa
@@ -46492,7 +46503,7 @@ Gq
 ad
 ad
 ad
-aa
+HW
 aa
 aa
 aa
@@ -47004,7 +47015,7 @@ YL
 HI
 Dt
 aa
-aa
+HW
 aa
 aa
 aa
@@ -47262,7 +47273,7 @@ HJ
 Dt
 aa
 aa
-aa
+HW
 aa
 aa
 aa
@@ -47520,7 +47531,7 @@ Dt
 aa
 aa
 aa
-aa
+HW
 aa
 aa
 aa
@@ -47778,7 +47789,7 @@ aa
 aa
 aa
 aa
-aa
+Oj
 aa
 aa
 aa
@@ -48031,11 +48042,11 @@ Hu
 bL
 HL
 ad
-aa
-aa
-aa
-aa
-aa
+ad
+ad
+ad
+ad
+HW
 aa
 aa
 aa
@@ -48292,7 +48303,7 @@ aa
 aa
 aa
 aa
-aa
+HW
 aa
 aa
 aa
@@ -48550,7 +48561,7 @@ aa
 aa
 aa
 aa
-aa
+Ht
 aa
 aa
 aa
@@ -48807,7 +48818,7 @@ aa
 aa
 aa
 aa
-aa
+Ht
 aa
 aa
 aa
@@ -49835,7 +49846,7 @@ aa
 aa
 aa
 aa
-aa
+Ht
 aa
 aa
 aa
@@ -50083,7 +50094,7 @@ aa
 aa
 ad
 Oy
-HW
+cI
 IM
 HL
 HL
@@ -50092,7 +50103,7 @@ aa
 aa
 aa
 aa
-aa
+Ht
 aa
 aa
 aa
@@ -50348,7 +50359,7 @@ aa
 aa
 aa
 aa
-aa
+Ht
 aa
 aa
 aa
@@ -50601,11 +50612,11 @@ Gy
 Oa
 HL
 ad
-aa
-aa
-aa
-aa
-aa
+ad
+ad
+ad
+ad
+Ht
 aa
 aa
 aa
@@ -50862,7 +50873,7 @@ aa
 aa
 aa
 aa
-aa
+Ht
 aa
 aa
 aa
@@ -51118,7 +51129,7 @@ Dt
 aa
 aa
 aa
-aa
+Ht
 aa
 aa
 aa
@@ -51374,7 +51385,7 @@ HQ
 Dt
 aa
 aa
-aa
+Ht
 aa
 aa
 aa
@@ -51630,7 +51641,7 @@ HG
 HR
 Dt
 aa
-aa
+Ht
 aa
 aa
 aa
@@ -52920,7 +52931,7 @@ aa
 aa
 aa
 aa
-aa
+HW
 aa
 aa
 aa
@@ -53176,7 +53187,7 @@ aa
 aa
 aa
 aa
-aa
+HW
 aa
 aa
 aa
@@ -53432,7 +53443,7 @@ aa
 aa
 aa
 aa
-aa
+HW
 ad
 aa
 aa
@@ -53688,7 +53699,7 @@ ad
 aa
 aa
 aa
-aa
+HW
 aa
 ad
 aa
