@@ -144,6 +144,7 @@
 /obj/item/clothing/proc/refit_for_bodytype(var/target_bodytype)
 
 	bodytype_equip_flags = 0
+	decls_repository.get_decls_of_subtype(/decl/bodytype) // Make sure they're prefetched so the below list is populated
 	for(var/decl/bodytype/bod in global.bodytypes_by_category[target_bodytype])
 		bodytype_equip_flags |= bod.bodytype_flag
 
