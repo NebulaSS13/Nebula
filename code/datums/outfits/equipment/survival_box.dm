@@ -2,7 +2,7 @@ var/global/list/survival_box_choices = list()
 
 /decl/survival_box_option
 	var/name = "survival kit"
-	var/box_type = /obj/item/storage/box
+	var/box_type = /obj/item/storage/box/survival
 
 /decl/survival_box_option/Initialize()
 	. = ..()
