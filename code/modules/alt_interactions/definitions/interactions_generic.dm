@@ -46,7 +46,7 @@
 	. = ..()
 	if(.)
 		var/obj/O = target
-		. = (O.obj_flags & OBJ_FLAG_ROTATABLE)
+		. = !!(O.obj_flags & OBJ_FLAG_ROTATABLE)
 
 /decl/interaction_handler/rotate/invoked(atom/target, mob/user)
 	var/obj/O = target

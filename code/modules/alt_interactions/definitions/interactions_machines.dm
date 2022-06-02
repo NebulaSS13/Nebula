@@ -26,4 +26,4 @@
 
 /decl/interaction_handler/binary_pump_toggle/invoked(atom/target, mob/user)
 	var/obj/machinery/atmospherics/binary/pump/P = target
-	P.Topic(P, list("power" = "1"))
+	P.update_use_power(!P.use_power)
