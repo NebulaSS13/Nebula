@@ -11,7 +11,7 @@ var/global/list/areas = list()
 	luminosity =    0
 	mouse_opacity = 0
 
-	var/display_name /// Automatically set by SetName and Initialize; cached result of strip_improper(name).
+	var/proper_name /// Automatically set by SetName and Initialize; cached result of strip_improper(name).
 
 	var/fire
 	var/party
@@ -81,7 +81,7 @@ var/global/list/areas = list()
 	icon_state = "white"
 	blend_mode = BLEND_MULTIPLY
 
-	display_name = strip_improper(name)
+	proper_name = strip_improper(name)
 
 /area/Del()
 	global.areas -= src
@@ -449,4 +449,4 @@ var/global/list/mob/living/forced_ambiance_list = new
 
 /area/SetName(new_name)
 	. = ..()
-	display_name = strip_improper(new_name)
+	proper_name = strip_improper(new_name)

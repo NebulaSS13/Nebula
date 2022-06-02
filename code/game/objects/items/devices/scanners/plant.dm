@@ -20,7 +20,7 @@
 	return FALSE
 
 /obj/item/scanner/plant/scan(atom/A, mob/user)
-	scan_title = "[A] at [get_area(A).display_name]"
+	scan_title = "[A] at [get_area(A).proper_name]"
 	scan_data = plant_scan_results(A)
 	show_menu(user)
 

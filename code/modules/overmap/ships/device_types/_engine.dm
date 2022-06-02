@@ -53,7 +53,7 @@ var/global/list/ship_engines = list()
 	. = list()
 	var/obj/machinery/M = holder
 
-	.+= "Location: [get_area(holder).display_name]."
+	.+= "Location: [get_area(holder).proper_name]."
 	if(M.stat & NOPOWER)
 		.+= "<span class='average'>Insufficient power to operate.</span>"
 	if(!has_fuel())

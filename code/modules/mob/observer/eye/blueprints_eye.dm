@@ -80,15 +80,15 @@
 	if(A.apc)
 		to_chat(owner, SPAN_WARNING("You must remove the APC from this area before you can remove it from the blueprints!"))
 		return
-	to_chat(owner, SPAN_NOTICE("You scrub [A.display_name] off the blueprints."))
-	log_and_message_admins("deleted area [A.display_name] via station blueprints.")
+	to_chat(owner, SPAN_NOTICE("You scrub [A.proper_name] off the blueprints."))
+	log_and_message_admins("deleted area [A.proper_name] via station blueprints.")
 	qdel(A)
 
 /mob/observer/eye/blueprints/proc/edit_area()
 	var/area/A = get_area(src)
 	if(!check_modification_validity())
 		return
-	var/prevname = A.display_name
+	var/prevname = replacetext(A.name, "\improper ", "the ")
 	var/new_area_name = sanitize_safe(input("Edit area name:","Area Editing", prevname), MAX_NAME_LEN)
 	if(!new_area_name || !LAZYLEN(new_area_name) || new_area_name==prevname)
 		return
@@ -248,7 +248,7 @@
 		var/area/A = get_area(src)
 		if(!A)
 			return
-		area_name_effect.maptext = "<span style=\"[style]\">[area_prefix], [A.display_name]</span>"
+		area_name_effect.maptext = "<span style=\"[style]\">[area_prefix], [A.proper_name]</span>"
 
 /mob/observer/eye/blueprints/apply_visual(var/mob/M)
 	. = ..()

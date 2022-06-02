@@ -17,15 +17,13 @@
 	return FALSE
 
 /proc/get_area(O)
+	RETURN_TYPE(/area)
 	var/turf/loc = get_turf(O)
-	if(loc)
-		var/area/res = loc.loc
-		.= res
+	return loc?.loc
 
 /proc/get_area_name(N) //get area by its name
-	N = strip_improper(N)
 	for(var/area/A in global.areas)
-		if(A.display_name == N)
+		if(A.proper_name == N)
 			return A
 	return 0
 

@@ -35,7 +35,7 @@
 	var/area/location = get_area(M)
 	if (cause == "emp" && prob(50))
 		location = pick(teleportlocs)
-	var/death_message = "[mobname] has died in [location.display_name]!"
+	var/death_message = "[mobname] has died in [location.proper_name]!"
 	if(!cause)
 		death_message = "[mobname] has died-zzzzt in-in-in..."
 	STOP_PROCESSING(SSobj, src)

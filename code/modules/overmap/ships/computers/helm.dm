@@ -276,7 +276,7 @@ var/global/list/overmap_helm_computers
 	if (!autopilot && old_operator && viewing_overmap(old_operator))
 		addtimer(CALLBACK(src, /obj/machinery/computer/ship/.proc/unlook, old_operator), 0) // Workaround for linter SHOULD_NOT_SLEEP checks.
 
-	log_debug("HELM CONTROL: [current_operator_actual ? current_operator_actual : "NO PILOT"] taking control of [src] from [old_operator ? old_operator : "NO PILOT"] in [get_area(src).display_name]. [autopilot ? "(AUTOPILOT MODE)" : null]")
+	log_debug("HELM CONTROL: [current_operator_actual ? current_operator_actual : "NO PILOT"] taking control of [src] from [old_operator ? old_operator : "NO PILOT"] in [get_area(src).proper_name]. [autopilot ? "(AUTOPILOT MODE)" : null]")
 
 	if (!silent)
 		display_operator_change_message(old_operator, current_operator_actual, autopilot)

@@ -150,7 +150,7 @@
 /obj/effect/rune/teleport/Initialize()
 	. = ..()
 	var/area/A = get_area(src)
-	destination = A.display_name
+	destination = A.proper_name
 	var/decl/special_role/cultist/cult = GET_DECL(/decl/special_role/cultist)
 	cult.teleport_runes += src
 
@@ -779,7 +779,7 @@
 	log_and_message_admins_many(cultists, "started summoning Nar-sie.")
 
 	var/area/A = get_area(src)
-	command_announcement.Announce("High levels of gravitational disruption detected at \the [A.display_name]. Suspected wormhole forming. Investigate it immediately.")
+	command_announcement.Announce("High levels of gravitational disruption detected at \the [A.proper_name]. Suspected wormhole forming. Investigate it immediately.")
 	while(cultists.len > 4 || the_end_comes)
 		cultists = get_cultists()
 		if(cultists.len > 8)

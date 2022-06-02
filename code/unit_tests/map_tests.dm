@@ -348,12 +348,12 @@
 
 	for(var/obj/machinery/cryopod/C in SSmachines.machinery)
 		if(!C.control_computer)
-			log_bad("[get_area(C).display_name] lacks a cryopod control computer while holding a cryopod.")
+			log_bad("[get_area(C).proper_name] lacks a cryopod control computer while holding a cryopod.")
 			pass = FALSE
 
 	for(var/obj/machinery/computer/cryopod/C in SSmachines.machinery)
 		if(!(locate(/obj/machinery/cryopod) in get_area(C)))
-			log_bad("[get_area(C).display_name] lacks a cryopod while holding a control computer.")
+			log_bad("[get_area(C).proper_name] lacks a cryopod while holding a control computer.")
 			pass = FALSE
 
 	if(pass)
