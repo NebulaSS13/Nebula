@@ -88,7 +88,7 @@
 	var/area/A = get_area(src)
 	if(!check_modification_validity())
 		return
-	var/prevname = A.name
+	var/prevname = A.display_name
 	var/new_area_name = sanitize_safe(input("Edit area name:","Area Editing", prevname), MAX_NAME_LEN)
 	if(!new_area_name || !LAZYLEN(new_area_name) || new_area_name==prevname)
 		return

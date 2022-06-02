@@ -23,8 +23,9 @@
 		.= res
 
 /proc/get_area_name(N) //get area by its name
+	N = strip_improper(N)
 	for(var/area/A in global.areas)
-		if(A.name == N)
+		if(A.display_name == N)
 			return A
 	return 0
 

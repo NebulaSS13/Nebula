@@ -36,7 +36,7 @@
 		var/area/A = get_area(src)
 		if(!A)
 			return // in nullspace
-		id_tag = "[A.name] #[sequential_id(A.name + "power/sensor")]"
+		id_tag = "[A.display_name] #[sequential_id(A.name + "power/sensor")]"
 	name = "[id_tag] - Powernet Sensor"
 
 // Proc: check_grid_warning()

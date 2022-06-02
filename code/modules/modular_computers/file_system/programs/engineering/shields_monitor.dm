@@ -76,7 +76,7 @@
 			var/list/temp = list(list(
 				"shield_status" = S.running,
 				"shield_ref" = any2ref(S),
-				"area" = A.name))
+				"area" = A.display_name))
 			shields_info.Add(temp)
 		data["shields"] = shields_info
 

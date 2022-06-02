@@ -87,7 +87,7 @@
 					if(C == src) continue
 					if(C.number)
 						number = max(number, C.number+1)
-				c_tag = "[A.name][number == 1 ? "" : " #[number]"]"
+				c_tag = "[A.display_name][number == 1 ? "" : " #[number]"]"
 		if(!c_tag)	// Add a default c_tag in case the camera has been placed in an invalid location or inside another object.
 			c_tag = "Security Camera - [random_id(/obj/machinery/camera, 100,999)]"
 
