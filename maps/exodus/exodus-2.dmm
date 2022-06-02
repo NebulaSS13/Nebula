@@ -10710,7 +10710,7 @@
 /area/exodus/security/prison)
 "awt" = (
 /obj/structure/table,
-/obj/structure/bedsheetbin,
+/obj/structure/bedsheetbin/mapped,
 /turf/simulated/floor/tiled/steel_grid,
 /area/exodus/security/prison)
 "awu" = (
@@ -54102,7 +54102,7 @@
 /turf/simulated/floor/tiled/white,
 /area/exodus/medical/biostorage)
 "chM" = (
-/obj/structure/bedsheetbin,
+/obj/structure/bedsheetbin/mapped,
 /obj/structure/table,
 /obj/machinery/power/apc{
 	dir = 8;

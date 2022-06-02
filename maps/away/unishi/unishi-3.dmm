@@ -286,7 +286,7 @@
 /turf/simulated/floor/tiled,
 /area/unishi/bridge)
 "bb" = (
-/obj/structure/bedsheetbin,
+/obj/structure/bedsheetbin/mapped,
 /obj/structure/closet/wardrobe,
 /obj/random/handgun,
 /turf/simulated/floor,
