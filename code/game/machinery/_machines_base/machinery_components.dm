@@ -148,6 +148,8 @@ var/global/list/machine_path_to_circuit_type
 		. = part
 
 	if(istype(part))
+		if(part in component_parts)
+			CRASH("Tried to insert \a '[part]' twice in \the [src] ([x], [y], [z])!")
 		LAZYADD(component_parts, part)
 		part.on_install(src)
 		events_repository.register(/decl/observ/destroyed, part, src, .proc/component_destroyed)
