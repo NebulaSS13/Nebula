@@ -1,274 +1,252 @@
-//trees
+////////////////////////////////////////
+// Base Flora
+////////////////////////////////////////
+/obj/structure/flora
+	desc                   = "A form of vegetation."
+	anchored               = TRUE
+	density                = FALSE                                  //Plants usually have no collisions
+	w_class                = ITEM_SIZE_NORMAL                       //Size determines material yield
+	material               = /decl/material/solid/plantmatter       //Generic plantstuff
+	tool_interaction_flags = 0 
+	hitsound               = 'sound/effects/hit_bush.ogg'
+	var/tmp/snd_cut        = 'sound/effects/plants/brush_leaves.ogg' //Sound to play when cutting the plant down
+
+/obj/structure/flora/Initialize(ml, _mat, _reinf_mat)
+	. = ..()
+	init_appearance()
+
+/**Picks and sets the appearance exactly once for the plant if randomly picked. */
+/obj/structure/flora/proc/init_appearance()
+	return
+
+/obj/structure/flora/attackby(obj/item/O, mob/user)
+	if(can_cut_down(O, user))
+		return cut_down(O, user)
+	. = ..()
+
+/**Whether the item used by user can cause cut_down to be called. Used to bypass default attack proc for some specific items/tools. */
+/obj/structure/flora/proc/can_cut_down(var/obj/item/I, var/mob/user)
+	return (I.force >= 5) && I.sharp
+
+/**What to do when the can_cut_down check returns true. Normally simply calls dismantle. */
+/obj/structure/flora/proc/cut_down(var/obj/item/I, var/mob/user)
+	if(snd_cut)
+		playsound(src, snd_cut, 40, TRUE)
+	dismantle()
+
+////////////////////////////////////////
+// Trees
+////////////////////////////////////////
 /obj/structure/flora/tree
 	name      = "tree"
-	anchored  = TRUE
 	density   = TRUE
 	pixel_x   = -16
 	layer     = ABOVE_HUMAN_LAYER
 	material  = /decl/material/solid/wood
 	w_class   = ITEM_SIZE_STRUCTURE
-	var/protects_against_weather = FALSE
+	hitsound  = 'sound/effects/hit_wood.ogg'
+	snd_cut   = 'sound/effects/plants/tree_fall.ogg'
+	var/protects_against_weather = TRUE
 
-/obj/structure/flora/tree/attackby(var/obj/item/I, mob/user)
-	//Axes can bypass having to damage the tree to break it
-	if(I.sharp && I.edge && (I.force > 5) )
-		visible_message(SPAN_NOTICE("\The [user] starts chopping at \the [src] with \a [I]."), SPAN_NOTICE("You begin chopping \the [src]."))
-		if(do_after(user, 5 SECONDS))
-			visible_message(SPAN_NOTICE("\The [user] fell \the [src]!"), SPAN_NOTICE("You fell \the [src]."))
-			physically_destroyed()
-		return
-	. = ..()
+/obj/structure/flora/tree/can_cut_down(obj/item/I, mob/user)
+	return I.sharp && I.edge && (I.force >= 10) //Axes can bypass having to damage the tree to break it
 
-/obj/structure/flora/tree/physically_destroyed(skip_qdel)
-	playsound(src, 'sound/effects/plants/tree_fall.ogg', 40, TRUE, 2, 1)
-	. = ..()
+/obj/structure/flora/tree/cut_down(obj/item/I, mob/user)
+	visible_message(SPAN_NOTICE("\The [user] starts chopping at \the [src] with \a [I]."), SPAN_NOTICE("You begin chopping \the [src]."))
+	if(do_after(user, 5 SECONDS))
+		visible_message(SPAN_NOTICE("\The [user] fell \the [src]!"), SPAN_NOTICE("You fell \the [src]."))
+		. = ..()
 
 /obj/structure/flora/tree/pine
-	name = "pine tree"
-	icon = 'icons/obj/flora/pinetrees.dmi'
+	name       = "pine tree"
+	desc       = "A pine tree."
+	icon       = 'icons/obj/flora/pinetrees.dmi'
 	icon_state = "pine_1"
-	protects_against_weather = TRUE
 
-/obj/structure/flora/tree/pine/Initialize()
-	. = ..()
+/obj/structure/flora/tree/pine/init_appearance()
 	icon_state = "pine_[rand(1, 3)]"
 	
 /obj/structure/flora/tree/pine/xmas
-	name = "\improper Christmas tree"
-	desc = "O Christmas tree, O Christmas tree..."
-	icon = 'icons/obj/flora/pinetrees.dmi'
+	name       = "\improper Christmas tree"
+	desc       = "O Christmas tree, O Christmas tree..."
+	icon       = 'icons/obj/flora/pinetrees.dmi'
 	icon_state = "pine_c"
 
-/obj/structure/flora/tree/pine/xmas/Initialize()
-	. = ..()
-	icon_state = "pine_c"
+/obj/structure/flora/tree/pine/xmas/init_appearance()
+	return
 
 /obj/structure/flora/tree/dead
-	icon = 'icons/obj/flora/deadtrees.dmi'
-	icon_state = "tree_1"
+	name                     = "dead tree"
+	desc                     = "A dead looking tree."
+	icon                     = 'icons/obj/flora/deadtrees.dmi'
+	icon_state               = "tree_1"
+	protects_against_weather = FALSE
 
-/obj/structure/flora/tree/dead/Initialize()
-	. = ..()
+/obj/structure/flora/tree/dead/init_appearance()
 	icon_state = "tree_[rand(1, 6)]"
 
-
-//grass
+////////////////////////////////////////
+// Grass
+////////////////////////////////////////
 /obj/structure/flora/grass
-	name      = "grass"
-	icon      = 'icons/obj/flora/snowflora.dmi'
-	anchored  = TRUE
-	material  = /decl/material/solid/plantmatter
-	w_class   = ITEM_SIZE_NORMAL
+	name    = "grass"
+	icon    = 'icons/obj/flora/snowflora.dmi'
 
-/obj/structure/flora/pottedplant/get_material_health_modifier()
+/obj/structure/flora/grass/get_material_health_modifier()
 	return 0.03
-
-/obj/structure/flora/grass/attackby(var/obj/item/I, mob/user)
-	if(I.sharp && I.force > 1)
-		physically_destroyed()
-		return
-	. = ..()
-
-/obj/structure/flora/grass/physically_destroyed(skip_qdel)
-	playsound(src, 'sound/effects/plants/brush_leaves.ogg', 35, TRUE, 0, 8)
-	. = ..()
 
 /obj/structure/flora/grass/brown
 	icon_state = "snowgrass1bb"
 
-/obj/structure/flora/grass/brown/Initialize()
-	. = ..()
+/obj/structure/flora/grass/brown/init_appearance()
 	icon_state = "snowgrass[rand(1, 3)]bb"
-
 
 /obj/structure/flora/grass/green
 	icon_state = "snowgrass1gb"
 
-/obj/structure/flora/grass/green/Initialize()
-	. = ..()
+/obj/structure/flora/grass/green/init_appearance()
 	icon_state = "snowgrass[rand(1, 3)]gb"
 
 /obj/structure/flora/grass/both
 	icon_state = "snowgrassall1"
 
-/obj/structure/flora/grass/both/Initialize()
-	. = ..()
+/obj/structure/flora/grass/both/init_appearance()
 	icon_state = "snowgrassall[rand(1, 3)]"
 
-
-//bushes
+////////////////////////////////////////
+// bushes
+////////////////////////////////////////
 /obj/structure/flora/bush
 	name       = "bush"
-	icon       = 'icons/obj/flora/snowflora.dmi'
-	icon_state = "snowbush1"
-	anchored   = TRUE
-	material   = /decl/material/solid/plantmatter
+	icon       = 'icons/obj/flora/ausflora.dmi'
+	icon_state = "firstbush_1"
 	w_class    = ITEM_SIZE_HUGE
 
-/obj/structure/flora/bush/Initialize()
-	. = ..()
+/obj/structure/flora/bush/get_material_health_modifier()
+	return 0.5
+
+/obj/structure/flora/bush/init_appearance()
+	icon_state = "firstbush_[rand(1, 4)]"
+
+/obj/structure/flora/bush/snow
+	icon       = 'icons/obj/flora/snowflora.dmi'
+	icon_state = "snowbush1"
+
+/obj/structure/flora/bush/snow/init_appearance()
 	icon_state = "snowbush[rand(1, 6)]"
 
-/obj/structure/flora/bush/attackby(var/obj/item/I, mob/user)
-	//Can insta break with the proper tool
-	if(I.sharp && I.force > 1)
-		physically_destroyed()
-		return
-	. = ..()
+/obj/structure/flora/bush/reedbush
+	icon_state = "reedbush_1"
 
-/obj/structure/flora/bush/physically_destroyed(skip_qdel)
-	playsound(src, 'sound/effects/plants/brush_leaves.ogg', 35, TRUE, 0, 8)
-	. = ..()
+/obj/structure/flora/bush/reedbush/init_appearance()
+	icon_state = "reedbush_[rand(1, 4)]"
 
+/obj/structure/flora/bush/leafybush
+	icon_state = "leafybush_1"
+
+/obj/structure/flora/bush/leafybush/init_appearance()
+	icon_state = "leafybush_[rand(1, 3)]"
+
+/obj/structure/flora/bush/palebush
+	icon_state = "palebush_1"
+
+/obj/structure/flora/bush/palebush/init_appearance()
+	icon_state = "palebush_[rand(1, 4)]"
+
+/obj/structure/flora/bush/stalkybush
+	icon_state = "stalkybush_1"
+
+/obj/structure/flora/bush/stalkybush/init_appearance()
+	icon_state = "stalkybush_[rand(1, 3)]"
+
+/obj/structure/flora/bush/grassybush
+	icon_state = "grassybush_1"
+
+/obj/structure/flora/bush/grassybush/init_appearance()
+	icon_state = "grassybush_[rand(1, 4)]"
+
+/obj/structure/flora/bush/fernybush
+	icon_state = "fernybush_1"
+
+/obj/structure/flora/bush/fernybush/init_appearance()
+	icon_state = "fernybush_[rand(1, 3)]"
+
+/obj/structure/flora/bush/sunnybush
+	icon_state = "sunnybush_1"
+
+/obj/structure/flora/bush/sunnybush/init_appearance()
+	icon_state = "sunnybush_[rand(1, 3)]"
+
+/obj/structure/flora/bush/genericbush
+	icon_state = "genericbush_1"
+
+/obj/structure/flora/bush/genericbush/init_appearance()
+	icon_state = "genericbush_[rand(1, 4)]"
+
+/obj/structure/flora/bush/pointybush
+	icon_state = "pointybush_1"
+
+/obj/structure/flora/bush/pointybush/init_appearance()
+	icon_state = "pointybush_[rand(1, 4)]"
+
+/obj/structure/flora/bush/lavendergrass
+	icon_state = "lavendergrass_1"
+
+/obj/structure/flora/bush/lavendergrass/init_appearance()
+	icon_state = "lavendergrass_[rand(1, 4)]"
+
+/obj/structure/flora/bush/ywflowers
+	icon_state = "ywflowers_1"
+
+/obj/structure/flora/bush/ywflowers/init_appearance()
+	icon_state = "ywflowers_[rand(1, 3)]"
+
+/obj/structure/flora/bush/brflowers
+	icon_state = "brflowers_1"
+
+/obj/structure/flora/bush/brflowers/init_appearance()
+	icon_state = "brflowers_[rand(1, 3)]"
+
+/obj/structure/flora/bush/ppflowers
+	icon_state = "ppflowers_1"
+
+/obj/structure/flora/bush/ppflowers/init_appearance()
+	icon_state = "ppflowers_[rand(1, 4)]"
+
+/obj/structure/flora/bush/sparsegrass
+	icon_state = "sparsegrass_1"
+
+/obj/structure/flora/bush/sparsegrass/init_appearance()
+	icon_state = "sparsegrass_[rand(1, 3)]"
+
+/obj/structure/flora/bush/fullgrass
+	icon_state = "fullgrass_1"
+
+/obj/structure/flora/bush/fullgrass/init_appearance()
+	icon_state = "fullgrass_[rand(1, 3)]"
+
+////////////////////////////////////////
+// Potted Plants
+////////////////////////////////////////
 /obj/structure/flora/pottedplant
 	name       = "potted plant"
 	desc       = "Really brings the room together."
 	icon       = 'icons/obj/structures/potted_plants.dmi'
 	icon_state = "plant-01"
+	anchored   = FALSE
 	layer      = ABOVE_HUMAN_LAYER
 	w_class    = ITEM_SIZE_LARGE
-	material   = /decl/material/solid/clay
+	hitsound   = 'sound/effects/glass_crack2.ogg'
+	snd_cut    = 'sound/effects/break_ceramic.ogg'
+	material   = /decl/material/solid/stone/ceramic
 	matter     = list(
-		/decl/material/solid/clay = MATTER_AMOUNT_PRIMARY,
-		/decl/material/solid/sand = MATTER_AMOUNT_SECONDARY,
-		/decl/material/solid/plantmatter = MATTER_AMOUNT_SECONDARY,
+		/decl/material/solid/clay        = MATTER_AMOUNT_REINFORCEMENT,
+		/decl/material/solid/sand        = MATTER_AMOUNT_REINFORCEMENT,
+		/decl/material/solid/plantmatter = MATTER_AMOUNT_SECONDARY,     //#TODO: Maybe eventually drop the plant, or some seeds or something?
 	)
 
 /obj/structure/flora/pottedplant/get_material_health_modifier()
-	return 0.05 //Fragile
-
-/obj/structure/flora/pottedplant/physically_destroyed()
-	playsound(src, 'sound/effects/ceramic_smash1.ogg', 35, TRUE, 0, 8)
-	. = ..()
-
-//newbushes
-/obj/structure/flora/ausbushes
-	name       = "bush"
-	icon       = 'icons/obj/flora/ausflora.dmi'
-	icon_state = "firstbush_1"
-	anchored   = TRUE
-	material   = /decl/material/solid/plantmatter
-	w_class    = ITEM_SIZE_HUGE
-
-/obj/structure/flora/ausbushes/attackby(var/obj/item/I, mob/user)
-	//Can insta break with the proper tool
-	if(I.sharp && I.force > 1)
-		physically_destroyed()
-		return
-	. = ..()
-
-/obj/structure/flora/bush/physically_destroyed(skip_qdel)
-	playsound(src, 'sound/effects/plants/brush_leaves.ogg', 35, TRUE, 0, 8)
-	. = ..()
-
-/obj/structure/flora/ausbushes/Initialize()
-	. = ..()
-	icon_state = "firstbush_[rand(1, 4)]"
-
-/obj/structure/flora/ausbushes/reedbush
-	icon_state = "reedbush_1"
-
-/obj/structure/flora/ausbushes/reedbush/Initialize()
-	. = ..()
-	icon_state = "reedbush_[rand(1, 4)]"
-
-/obj/structure/flora/ausbushes/leafybush
-	icon_state = "leafybush_1"
-
-/obj/structure/flora/ausbushes/leafybush/Initialize()
-	. = ..()
-	icon_state = "leafybush_[rand(1, 3)]"
-
-/obj/structure/flora/ausbushes/palebush
-	icon_state = "palebush_1"
-
-/obj/structure/flora/ausbushes/palebush/Initialize()
-	. = ..()
-	icon_state = "palebush_[rand(1, 4)]"
-
-/obj/structure/flora/ausbushes/stalkybush
-	icon_state = "stalkybush_1"
-
-/obj/structure/flora/ausbushes/stalkybush/Initialize()
-	. = ..()
-	icon_state = "stalkybush_[rand(1, 3)]"
-
-/obj/structure/flora/ausbushes/grassybush
-	icon_state = "grassybush_1"
-
-/obj/structure/flora/ausbushes/grassybush/Initialize()
-	. = ..()
-	icon_state = "grassybush_[rand(1, 4)]"
-
-/obj/structure/flora/ausbushes/fernybush
-	icon_state = "fernybush_1"
-
-/obj/structure/flora/ausbushes/fernybush/Initialize()
-	. = ..()
-	icon_state = "fernybush_[rand(1, 3)]"
-
-/obj/structure/flora/ausbushes/sunnybush
-	icon_state = "sunnybush_1"
-
-/obj/structure/flora/ausbushes/sunnybush/Initialize()
-	. = ..()
-	icon_state = "sunnybush_[rand(1, 3)]"
-
-/obj/structure/flora/ausbushes/genericbush
-	icon_state = "genericbush_1"
-
-/obj/structure/flora/ausbushes/genericbush/Initialize()
-	. = ..()
-	icon_state = "genericbush_[rand(1, 4)]"
-
-/obj/structure/flora/ausbushes/pointybush
-	icon_state = "pointybush_1"
-
-/obj/structure/flora/ausbushes/pointybush/Initialize()
-	. = ..()
-	icon_state = "pointybush_[rand(1, 4)]"
-
-/obj/structure/flora/ausbushes/lavendergrass
-	icon_state = "lavendergrass_1"
-
-/obj/structure/flora/ausbushes/lavendergrass/Initialize()
-	. = ..()
-	icon_state = "lavendergrass_[rand(1, 4)]"
-
-/obj/structure/flora/ausbushes/ywflowers
-	icon_state = "ywflowers_1"
-
-/obj/structure/flora/ausbushes/ywflowers/Initialize()
-	. = ..()
-	icon_state = "ywflowers_[rand(1, 3)]"
-
-/obj/structure/flora/ausbushes/brflowers
-	icon_state = "brflowers_1"
-
-/obj/structure/flora/ausbushes/brflowers/Initialize()
-	. = ..()
-	icon_state = "brflowers_[rand(1, 3)]"
-
-/obj/structure/flora/ausbushes/ppflowers
-	icon_state = "ppflowers_1"
-
-/obj/structure/flora/ausbushes/ppflowers/Initialize()
-	. = ..()
-	icon_state = "ppflowers_[rand(1, 4)]"
-
-/obj/structure/flora/ausbushes/sparsegrass
-	icon_state = "sparsegrass_1"
-
-/obj/structure/flora/ausbushes/sparsegrass/Initialize()
-	. = ..()
-	icon_state = "sparsegrass_[rand(1, 3)]"
-
-/obj/structure/flora/ausbushes/fullgrass
-	icon_state = "fullgrass_1"
-
-/obj/structure/flora/ausbushes/fullgrass/Initialize()
-	. = ..()
-	icon_state = "fullgrass_[rand(1, 3)]"
+	return 0.05
 
 //potted plants credit: Flashkirby
 //potted plants 27-30: Cajoes

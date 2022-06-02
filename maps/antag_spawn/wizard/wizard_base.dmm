@@ -545,7 +545,7 @@
 	},
 /area/map_template/wizard_station)
 "bv" = (
-/obj/structure/flora/ausbushes/fullgrass,
+/obj/structure/flora/bush/fullgrass,
 /turf/unsimulated/floor{
 	icon_state = "grass0";
 	name = "grass"
@@ -600,7 +600,7 @@
 	},
 /area/map_template/wizard_station)
 "bC" = (
-/obj/structure/flora/ausbushes/grassybush,
+/obj/structure/flora/bush/grassybush,
 /turf/unsimulated/floor{
 	icon_state = "grass0";
 	name = "grass"

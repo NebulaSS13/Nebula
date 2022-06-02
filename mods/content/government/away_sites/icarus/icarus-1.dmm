@@ -33,7 +33,7 @@
 /turf/simulated/floor/wood,
 /area/icarus/vessel)
 "al" = (
-/obj/structure/flora/ausbushes/palebush,
+/obj/structure/flora/bush/palebush,
 /turf/exterior/wildgrass,
 /area/icarus/open)
 "am" = (

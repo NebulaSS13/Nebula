@@ -654,7 +654,7 @@
 	},
 /area/map_template/rescue_base/base)
 "bC" = (
-/obj/structure/flora/ausbushes/fullgrass,
+/obj/structure/flora/bush/fullgrass,
 /turf/unsimulated/floor{
 	icon_state = "asteroidplating"
 	},
@@ -721,7 +721,7 @@
 	},
 /area/map_template/rescue_base/base)
 "bK" = (
-/obj/structure/flora/ausbushes/fullgrass,
+/obj/structure/flora/bush/fullgrass,
 /turf/unsimulated/floor{
 	icon_state = "asteroid"
 	},
@@ -1550,7 +1550,7 @@
 	},
 /area/map_template/rescue_base/base)
 "dd" = (
-/obj/structure/flora/ausbushes/palebush,
+/obj/structure/flora/bush/palebush,
 /turf/unsimulated/floor{
 	icon_state = "asteroid"
 	},
@@ -1643,7 +1643,7 @@
 	},
 /area/map_template/rescue_base/base)
 "dp" = (
-/obj/structure/flora/ausbushes/sunnybush,
+/obj/structure/flora/bush/sunnybush,
 /turf/unsimulated/floor{
 	icon_state = "asteroid"
 	},
@@ -2691,7 +2691,7 @@
 /turf/simulated/floor/plating,
 /area/map_template/rescue_base/start)
 "fB" = (
-/obj/structure/flora/ausbushes/palebush,
+/obj/structure/flora/bush/palebush,
 /turf/unsimulated/floor{
 	icon_state = "asteroidplating"
 	},

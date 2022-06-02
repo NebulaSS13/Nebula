@@ -581,7 +581,7 @@
 	},
 /area/map_template/ninja_dojo/dojo)
 "bt" = (
-/obj/structure/flora/ausbushes/palebush,
+/obj/structure/flora/bush/palebush,
 /turf/unsimulated/floor{
 	icon_state = "snow"
 	},
