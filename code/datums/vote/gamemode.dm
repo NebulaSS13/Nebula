@@ -1,6 +1,6 @@
 /datum/vote/gamemode
 	name = "game mode"
-	additional_header = "<td align = 'center'><b>Minimum Players</b></td></tr>"
+	additional_header = "<td align = 'center'><b>Minimum Players</b></td>"
 	win_x = 500
 	win_y = 1100
 	show_leading = TRUE

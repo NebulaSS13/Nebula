@@ -24,8 +24,6 @@
 
 	var/show_leading = 0           // Colours leading choice based on votes count.
 	var/manual_allowed = 1         // Whether humans can start it.
-	var/percent_votes = TRUE       // Total votes in current choose. If FALSE - shows total num of voted people for this choose.
-	var/show_votes_count = TRUE    // Show total votes for something. Staff with R_INVESTIGATE can bypass this.
 
 	var/list/vote_start_sounds = list(
 		'sound/ambience/alarm4.ogg'
@@ -62,7 +60,7 @@
 	var/text = get_start_text()
 
 	log_vote(text)
-	to_world("<font color='purple'><b>[text]</b>\nType <b>vote</b> or click <a href='?src=\ref[SSvote];vote_panel=1'>here</a> to place your votes.\nYou have [time_set/10] seconds to vote.</font>")
+	to_world("<font color='purple'><b>[text]</b>\nType <b>vote</b> or click <a href='?src=\ref[SSvote];vote_panel=1'>here</a> to place your votes.\nYou have [round(time_set/10)] seconds to vote.</font>")
 	to_world(sound(pick(vote_start_sounds), repeat = 0, wait = 0, volume = 50, channel = sound_channels.vote_channel))
 
 /datum/vote/proc/get_start_text()
@@ -98,11 +96,11 @@
 	if(!(result[result[1]] > 0)) // No one voted.
 		text += "<b>Vote Result: Inconclusive - No Votes!</b>"
 	else
-		text += "<b>Vote Result: [display_choices[result[1]]][choices[result[1]] >= 1 ? " - \"[choices[result[1]]]\"" : null]</b>"
+		text += "<b>Vote Result: [display_choices[result[1]]]</b>"
 		if(length(result) >= 2 && result[result[2]])
-			text += "\nSecond place: [display_choices[result[2]]][choices[result[2]] >= 1 ? " - \"[choices[result[2]]]\"" : null]"
+			text += "\nSecond place: [display_choices[result[2]]]"
 		if(length(result) >= 3 && result[result[3]])
-			text += "\nThird place: [display_choices[result[3]]][choices[result[3]] >= 1 ? " - \"[choices[result[3]]]\"" : null]"
+			text += "\nThird place: [display_choices[result[3]]]"
 
 	return JOINTEXT(text)
 
@@ -163,9 +161,9 @@
 		. += "<h2>Vote: [capitalize(name)]</h2>"
 	. += "Time Left: [time_remaining] s<hr>"
 	. += "<div class='statusDisplay'>"
-	var/votes_count =  show_votes_count || check_rights(R_INVESTIGATE, 0, user) ? "<td align = 'center'><b>Votes</b></td>" : null
-	. += "<table width = '100%'><tr><td align = 'center'><b>Choices</b></td><td colspan='[priorities.len]' align = 'center'></td>[votes_count]"
+	. += "<table width = '100%'><tr><td align = 'center'><b>Choices</b></td><td colspan='[length(priorities)]' align = 'center'><b>Your Vote</b></td><td align = 'center'><b>Votes</b></td>"
 	. += additional_header
+	. += "</tr>"
 
 	var/totalvotes = 0
 	for(var/i = 1, i <= choices.len, i++)
@@ -174,23 +172,12 @@
 	for(var/j = 1, j <= choices.len, j++)
 		var/choice = choices[j]
 		var/number_of_votes = choices[choice] || 0
-		var/votepercent = 0
-		if(totalvotes)
-			votepercent = percent_votes ? "[round((number_of_votes/totalvotes)*100)]%" : number_of_votes
+		var/votepercent = "0%"
+		if(totalvotes > 0)
+			votepercent = "[round((number_of_votes/totalvotes)*100)]%"
 
 		. += "<tr><td align = 'center'>"
-
-		if(show_leading && number_of_votes > 0)
-			if(number_of_votes >= 15)
-				. += "<font color='#a30000'><b>[display_choices[choice]]</b></font>"
-			else if(number_of_votes >= 10)
-				. += "<font color='#ffa700'><b>[display_choices[choice]]</b></font>"
-			else if(number_of_votes >= 5)
-				. += "<font color='#00cc00'><b>[display_choices[choice]]</b></font>"
-			else if(number_of_votes >= 1)
-				. += "<b>[display_choices[choice]]</b>"
-		else
-			. += "[display_choices[choice]]"
+		. += "[display_choices[choice]]"
 		. += "</td>"
 
 		for(var/i = 1, i <= length(priorities), i++)
@@ -200,8 +187,7 @@
 			else
 				. += "<a href='?src=\ref[src];choice=[j];priority=[i]'>[priorities[i]]</a>"
 			. += "</td>"
-		if(check_rights(R_INVESTIGATE, 0, user))
-			. += "</td><td align = 'center'>[votepercent]</td>"
+		. += "</td><td align = 'center'>[votepercent]</td>"
 		if (additional_text[choice])
 			. += "[additional_text[choice]]" //Note lack of cell wrapper, to allow for dynamic formatting.
 		. += "</tr>"
