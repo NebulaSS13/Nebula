@@ -10,7 +10,6 @@ var/global/default_gyne
 
 /obj/structure/insectoid_egg
 	name = "alien egg"
-	breakable = TRUE
 	desc = "A semi-translucent alien egg."
 	health = 100
 	maxhealth = 100

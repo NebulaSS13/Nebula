@@ -7,7 +7,6 @@
 	var/health = 0
 	var/maxhealth = 50
 	var/hitsound = 'sound/weapons/smash.ogg'
-	var/breakable
 	var/parts_type
 	var/parts_amount
 	var/footstep_type
@@ -178,18 +177,6 @@
 			for(var/atom/movable/AM in T)
 				AM.reset_offsets()	
 				AM.reset_plane_and_layer()
-
-/obj/structure/attack_hand(mob/user)
-	..()
-	if(breakable)
-		if(MUTATION_HULK in user.mutations)
-			user.say(pick(";RAAAAAAAARGH!", ";HNNNNNNNNNGGGGGGH!", ";GWAAAAAAAARRRHHH!", "NNNNNNNNGGGGGGGGHH!", ";AAAAAAARRRGH!" ))
-			attack_generic(user,1,"smashes")
-		else if(istype(user,/mob/living/carbon/human))
-			var/mob/living/carbon/human/H = user
-			if(H.species.can_shred(user))
-				attack_generic(user,1,"slices")
-	return ..()
 
 /obj/structure/grab_attack(var/obj/item/grab/G)
 	if (!G.force_danger())
