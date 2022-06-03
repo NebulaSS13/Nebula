@@ -333,9 +333,8 @@
 	if(mixture)
 		var/pressure = mixture.return_pressure()
 		if(pressure > 50)
-			var/turf/below = GetBelow(H)
 			var/turf/T = H.loc
-			if(!T.CanZPass(H, DOWN) || !below.CanZPass(H, DOWN))
+			if(istype(T) && !T.CanZPass(H, DOWN))
 				return TRUE
 
 	return FALSE

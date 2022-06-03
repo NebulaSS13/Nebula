@@ -535,11 +535,6 @@ default behaviour is:
 				mygrabs -= G
 				qdel(G)
 				continue
-			if(!destination.CanZPass(G.affecting, direction))
-				to_chat(src, SPAN_WARNING("The [G.affecting] you were pulling bumps up against \the [destination]."))
-				mygrabs -= G
-				qdel(G)
-				continue
 			for(var/atom/A in destination)
 				if(!A.CanMoveOnto(G.affecting, start, 1.5, direction))
 					to_chat(src, SPAN_WARNING("\The [A] blocks the [G.affecting] you were pulling."))
@@ -805,7 +800,7 @@ default behaviour is:
 	var/turf/T = get_turf(src)
 	if(!can_drown() || !loc.is_flooded(lying))
 		return FALSE
-	if(!lying && T.above && !T.above.is_flooded() && T.above.CanZPass(src, UP) && can_overcome_gravity())
+	if(!lying && T.above && T.above.is_open() && !T.above.is_flooded() && can_overcome_gravity())
 		return FALSE
 	if(prob(5))
 		var/obj/effect/fluid/F = locate() in loc
