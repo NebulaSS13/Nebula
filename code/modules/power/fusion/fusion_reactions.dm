@@ -19,37 +19,28 @@
 
 // Basic power production reactions.
 // This is not necessarily realistic, but it makes a basic failure more spectacular.
-//Proton-Proton chain things below.
+/decl/fusion_reaction/hydrogen_hydrogen
+	p_react = /decl/material/gas/hydrogen
+	s_react = /decl/material/gas/hydrogen
+	energy_consumption = 1 * FUSION_PROCESSING_TIME_MULT
+	energy_production =  2 * FUSION_PROCESSING_TIME_MULT
+	products = list(/decl/material/gas/helium = 1)
+	priority = 10
+
 /decl/fusion_reaction/deuterium_deuterium
 	p_react = /decl/material/gas/hydrogen/deuterium
 	s_react = /decl/material/gas/hydrogen/deuterium
-	codex_name = "deuterium-deuterium (He3)"
 	energy_consumption = 1 * FUSION_PROCESSING_TIME_MULT
-	energy_production = 1 * FUSION_PROCESSING_TIME_MULT
-	radiation = 1 * FUSION_PROCESSING_TIME_MULT
-	instability = 1 * FUSION_PROCESSING_TIME_MULT
-	products = list(/decl/material/gas/helium = 1)
-	priority = 3
+	energy_production =  2 * FUSION_PROCESSING_TIME_MULT
+	priority = 0
 
-/decl/fusion_reaction/deuterium_deuterium_alternate //There are two fusion pathways in D-D fusion - one makes He3, one makes Tritium. That's why this is here.
-	p_react = /decl/material/gas/hydrogen/deuterium
-	s_react = /decl/material/gas/hydrogen/deuterium
-	codex_name = "deuterium-deuterium (H-3)"
-	energy_consumption = 1 * FUSION_PROCESSING_TIME_MULT
-	energy_production = 1 * FUSION_PROCESSING_TIME_MULT
-	radiation = 1 * FUSION_PROCESSING_TIME_MULT
-	instability = 1 * FUSION_PROCESSING_TIME_MULT
-	products = list(/decl/material/gas/hydrogen/tritium = 1)
-	priority = 3
-
+// Advanced production reactions (todo)
 /decl/fusion_reaction/deuterium_helium
 	p_react = /decl/material/gas/hydrogen/deuterium
 	s_react = /decl/material/gas/helium
 	energy_consumption = 1 * FUSION_PROCESSING_TIME_MULT
 	energy_production =  5 * FUSION_PROCESSING_TIME_MULT
-	radiation = 2 * FUSION_PROCESSING_TIME_MULT
-	instability = 2 * FUSION_PROCESSING_TIME_MULT
-	priority = 4
+	radiation = 2
 
 /decl/fusion_reaction/deuterium_tritium
 	p_react = /decl/material/gas/hydrogen/deuterium
@@ -59,7 +50,15 @@
 	instability =      0.5 * FUSION_PROCESSING_TIME_MULT
 	radiation =          3 * FUSION_PROCESSING_TIME_MULT
 	products = list(/decl/material/gas/helium = 1)
-	priority = 3
+
+/decl/fusion_reaction/deuterium_lithium
+	p_react = /decl/material/gas/hydrogen/deuterium
+	s_react = /decl/material/solid/lithium
+	energy_production =  0
+	energy_consumption = 2 * FUSION_PROCESSING_TIME_MULT
+	radiation =          3 * FUSION_PROCESSING_TIME_MULT
+	instability =        1 * FUSION_PROCESSING_TIME_MULT
+	products = list(/decl/material/gas/hydrogen/tritium= 1)
 
 // Unideal/material production reactions
 /decl/fusion_reaction/oxygen_oxygen
