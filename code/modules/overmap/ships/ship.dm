@@ -6,6 +6,7 @@ var/global/const/OVERMAP_SPEED_CONSTANT = (1 SECOND)
 	icon_state = "ship"
 	requires_contact = TRUE
 	can_move = TRUE
+	appearance_flags = TILE_BOUND | LONG_GLIDE
 
 	var/moving_state = "ship_moving"
 
@@ -22,7 +23,6 @@ var/global/const/OVERMAP_SPEED_CONSTANT = (1 SECOND)
 	var/list/inertial_dampers = list()
 	var/damping_strength = null
 	var/vessel_size = SHIP_SIZE_LARGE	// arbitrary number, affects how likely are we to evade meteors
-
 
 	var/list/navigation_viewers // list of weakrefs to people viewing the overmap via this ship
 
@@ -80,7 +80,7 @@ var/global/const/OVERMAP_SPEED_CONSTANT = (1 SECOND)
 	. = ..()
 	. += "<br>Mass: [vessel_mass] tons."
 	if(!is_still())
-		. += "<br>Heading: [dir2angle(get_heading())], speed [get_speed() * KM_OVERMAP_RATE]"
+		. += "<br>Heading: [get_heading_angle()], speed [get_speed() * KM_OVERMAP_RATE]"
 	if(instant_contact)
 		. += "<br>It is broadcasting a distress signal."
 
@@ -125,9 +125,12 @@ var/global/const/OVERMAP_SPEED_CONSTANT = (1 SECOND)
 /obj/effect/overmap/visitable/ship/on_update_icon()
 	if(!is_still())
 		icon_state = moving_state
-		set_dir(get_heading())
+		var/matrix/M = matrix()
+		M.Turn(get_heading_angle())
+		transform = M
 	else
 		icon_state = initial(icon_state)
+		transform = null
 
 	..()
 
@@ -186,9 +189,6 @@ var/global/const/OVERMAP_SPEED_CONSTANT = (1 SECOND)
 
 /obj/effect/overmap/visitable/ship/proc/get_speed_sensor_increase()
 	return min(get_speed() * 1000, 50) //Engines should never increase sensor visibility by more than 50.
-
-/obj/effect/overmap/proc/get_vessel_mass() //Same as above.
-	return vessel_mass
 
 #undef MOVING
 #undef SANITIZE_SPEED

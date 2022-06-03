@@ -27,6 +27,11 @@ var/global/list/overmap_unknown_ids = list()
 
 	var/overmap_id = OVERMAP_ID_SPACE
 
+/obj/effect/overmap/proc/get_heading_angle()
+	. = round(Atan2(speed[2], speed[1]))
+	if(. < 0) // Speeds can be negative so invert the degree value.
+		. += 360
+
 /obj/effect/overmap/touch_map_edge(var/overmap_id)
 	return
 
@@ -96,7 +101,7 @@ var/global/list/overmap_unknown_ids = list()
 /obj/effect/overmap/proc/get_speed()
 	return round(sqrt(speed[1] ** 2 + speed[2] ** 2), SHIP_MOVE_RESOLUTION)
 
-/obj/effect/overmap/proc/get_heading()
+/obj/effect/overmap/proc/get_heading_dir()
 	var/res = 0
 	if(MOVING(speed[1], min_speed))
 		if(speed[1] > 0)
@@ -186,3 +191,6 @@ var/global/list/overmap_unknown_ids = list()
 
 /obj/effect/overmap/proc/get_delta_v()
 	return
+
+/obj/effect/overmap/proc/get_vessel_mass() //Same as above.
+	return vessel_mass

@@ -65,12 +65,11 @@
 	if(istype(C)) 
 		hud_power.maptext_x = initial(hud_power.maptext_x)
 		hud_power.maptext_y = initial(hud_power.maptext_y)
-		hud_power.maptext = SPAN_STYLE("font-family: 'Small Fonts'; -dm-text-outline: 1 black; font-size: 7px;",  "[round(get_cell().charge)]/[round(get_cell().maxcharge)]")
+		hud_power.maptext = STYLE_SMALLFONTS_OUTLINE("[round(get_cell().charge)]/[round(get_cell().maxcharge)]", 7, COLOR_WHITE, COLOR_BLACK)
 	else
 		hud_power.maptext_x = 16
 		hud_power.maptext_y = -8
-		hud_power.maptext = SPAN_STYLE("font-family: 'Small Fonts'; -dm-text-outline: 1 black; font-size: 7px;", "CHECK POWER")
-
+		hud_power.maptext = STYLE_SMALLFONTS_OUTLINE("CHECK POWER", 7, COLOR_WHITE, COLOR_BLACK)
 	refresh_hud()
 
 /mob/living/exosuit/handle_hud_icons_health()
