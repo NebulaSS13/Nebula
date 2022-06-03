@@ -155,7 +155,7 @@ INITIALIZE_IMMEDIATE(/obj/effect/gas_overlay)
 	var/turf_touch_threshold = FLUID_QDEL_POINT 
 
 	// Damage values.
-	var/hardness = MAT_VALUE_HARD            // Prob of wall destruction by hulk, used for edge damage in weapons.
+	var/hardness = MAT_VALUE_HARD            // Used for edge damage in weapons.
 	var/reflectiveness = MAT_VALUE_DULL
 
 	var/weight = MAT_VALUE_NORMAL             // Determines blunt damage/throwforce for weapons.

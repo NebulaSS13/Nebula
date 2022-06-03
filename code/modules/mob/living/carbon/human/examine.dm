@@ -180,9 +180,6 @@
 		if(o && o.splinted && o.splinted.loc == o)
 			msg += "<span class='warning'>[G.He] [G.has] \a [o.splinted] on [G.his] [o.name]!</span>\n"
 
-	if(mSmallsize in mutations)
-		msg += "[G.He] [G.is] small halfling!\n"
-
 	if (src.stat)
 		msg += "<span class='warning'>[G.He] [G.is]n't responding to anything around [G.him] and seems to be unconscious.</span>\n"
 		if((stat == DEAD || is_asystole() || src.losebreath) && distance <= 3)

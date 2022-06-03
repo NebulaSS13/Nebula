@@ -151,17 +151,6 @@
 		if(usr.client)
 			usr.client.cmd_assume_direct_control(M)
 
-	else if(href_list["make_skeleton"])
-		if(!check_rights(R_FUN))	return
-
-		var/mob/living/carbon/human/H = locate(href_list["make_skeleton"])
-		if(!istype(H))
-			to_chat(usr, "This can only be used on instances of type /mob/living/carbon/human")
-			return
-
-		H.ChangeToSkeleton()
-		href_list["datumrefresh"] = href_list["make_skeleton"]
-
 	else if(href_list["delthis"])
 		if(!check_rights(R_DEBUG|R_SERVER))	return
 

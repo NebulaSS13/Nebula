@@ -48,8 +48,6 @@
 	/// organs we check until they are good.
 	var/list/bad_external_organs
 	
-	var/xylophone = 0 //For the spoooooooky xylophone cooldown
-
 	var/mob/remoteview_target = null
 	var/hand_blood_color
 

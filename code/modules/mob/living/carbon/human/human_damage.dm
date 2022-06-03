@@ -10,7 +10,7 @@
 
 	//TODO: fix husking
 	if(((maxHealth - getFireLoss()) < config.health_threshold_dead) && stat == DEAD)
-		ChangeToHusk()
+		make_husked()
 	return
 
 /mob/living/carbon/human/adjustBrainLoss(var/amount)

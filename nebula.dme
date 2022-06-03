@@ -742,7 +742,6 @@
 #include "code\game\machinery\vitals_monitor.dm"
 #include "code\game\machinery\wall_frames.dm"
 #include "code\game\machinery\washing_machine.dm"
-#include "code\game\machinery\wishgranter.dm"
 #include "code\game\machinery\_machines_base\machinery.dm"
 #include "code\game\machinery\_machines_base\machinery_components.dm"
 #include "code\game\machinery\_machines_base\machinery_damage.dm"
