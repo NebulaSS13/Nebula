@@ -338,7 +338,7 @@ var/global/dmm_suite/preloader/_preloader = new
 			instance = new atype(null)
 			initialized_areas_by_type[atype] = instance
 		if(crds)
-			instance.contents.Add(crds)
+			ChangeArea(crds, instance)
 
 	//then instance the /turf and, if multiple tiles are presents, simulates the DMM underlays piling effect
 
