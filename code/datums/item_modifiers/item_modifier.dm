@@ -27,5 +27,9 @@
 
 	I.SetName(type_setup[SETUP_NAME])
 	I.icon = type_setup[SETUP_ICON]
+	if(istype(I, /obj/item/clothing))
+		var/list/type_spritesheets = type_setup[SETUP_SPRITE_SHEETS]
+		var/obj/item/clothing/C = I
+		C.sprite_sheets = type_spritesheets?.Copy()
 	I.reconsider_single_icon(TRUE)
 	return TRUE

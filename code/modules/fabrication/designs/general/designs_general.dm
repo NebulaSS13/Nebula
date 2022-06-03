@@ -116,6 +116,15 @@
 		/decl/material/solid/metal/steel =   CEILING((SHEET_MATERIAL_AMOUNT * FABRICATOR_EXTRA_COST_FACTOR)),
 	)
 
+/datum/fabricator_recipe/struts/plastic
+	name = "strut, plastic"
+	path = /obj/item/stack/material/strut/mapped/plastic
+
+/datum/fabricator_recipe/struts/plastic/get_resources()
+	resources = list(
+		/decl/material/solid/plastic =   CEILING((SHEET_MATERIAL_AMOUNT * FABRICATOR_EXTRA_COST_FACTOR)),
+	)
+
 /datum/fabricator_recipe/struts/aluminium
 	name = "strut, aluminium"
 	path = /obj/item/stack/material/strut/mapped/aluminium
