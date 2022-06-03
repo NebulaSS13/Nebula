@@ -94,7 +94,9 @@
 
 	changing_turf = FALSE
 
-	remove_cleanables()
+	if (contents.len > !!lighting_overlay)
+		remove_cleanables()
+
 	REMOVE_ACTIVE_FLUID_SOURCE(src)
 
 	if (ao_queued)
