@@ -35,7 +35,6 @@ var/global/const/OVERMAP_SPEED_CONSTANT = (1 SECOND)
 	base_sensor_visibility = round((vessel_mass/SENSOR_COEFFICENT),1)
 
 /obj/effect/overmap/visitable/ship/Destroy()
-	STOP_PROCESSING(SSobj, src)
 	SSshuttle.ships -= src
 	for(var/thing in get_linked_machines_of_type(/obj/machinery/computer/ship))
 		var/obj/machinery/computer/ship/machine = thing
@@ -114,8 +113,7 @@ var/global/const/OVERMAP_SPEED_CONSTANT = (1 SECOND)
 	var/burns_per_grid = 1/ (burn_delay * get_speed())
 	return round(num_burns / burns_per_grid)
 
-/obj/effect/overmap/visitable/ship/Process()
-	. = ..()
+/obj/effect/overmap/visitable/ship/Process(tick, wait)
 	damping_strength = 0
 	for(var/datum/ship_inertial_damper/I in inertial_dampers)
 		var/obj/machinery/inertial_damper/ID = I.holder
@@ -156,11 +154,12 @@ var/global/const/OVERMAP_SPEED_CONSTANT = (1 SECOND)
 
 /obj/effect/overmap/visitable/ship/proc/halt()
 	adjust_speed(-speed[1], -speed[2])
-	halted = 1
+	halted = TRUE
 
 /obj/effect/overmap/visitable/ship/proc/unhalt()
 	if(!SSshuttle.overmap_halted)
-		halted = 0
+		halted = FALSE
+		update_moving()
 
 /obj/effect/overmap/visitable/ship/Bump(var/atom/A)
 	if(istype(A,/turf/unsimulated/map/edge))

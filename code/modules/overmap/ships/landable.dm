@@ -46,8 +46,8 @@
 		return FALSE // Cannot encounter a shuttle while it is landed elsewhere.
 	. = ..()
 
-/obj/effect/overmap/visitable/ship/landable/Process()
-	. = ..()
+/obj/effect/overmap/visitable/ship/landable/Process(tick, wait)
+	..()
 	var/datum/shuttle/autodock/overmap/child_shuttle = SSshuttle.shuttles[shuttle]
 	if(!child_shuttle || !istype(child_shuttle))
 		return

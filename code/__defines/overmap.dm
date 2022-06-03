@@ -17,8 +17,8 @@
 
 #define KM_OVERMAP_RATE		100
 #define SHIP_MOVE_RESOLUTION 0.001
-#define MOVING(speed, min_speed) abs(speed) >= min_speed
-#define SANITIZE_SPEED(speed) SIGN(speed) * Clamp(abs(speed), 0, max_speed)
+#define MOVING(speed, min_speed) (abs(speed) >= min_speed)
+#define SANITIZE_SPEED(speed) (SIGN(speed) * Clamp(abs(speed), 0, max_speed))
 #define CHANGE_SPEED_BY(speed_var, v_diff, min_speed) \
 	v_diff = SANITIZE_SPEED(v_diff);\
 	if(!MOVING(speed_var + v_diff, min_speed)) \
