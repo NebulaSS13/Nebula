@@ -150,7 +150,7 @@
 	if(genlev != lastgenlev)
 		lastgenlev = genlev
 		update_icon()
-	
+
 	generate_power(effective_gen)
 
 /obj/machinery/generator/attackby(obj/item/W, mob/user)
