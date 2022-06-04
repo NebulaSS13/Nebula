@@ -31,6 +31,11 @@
 		obj_flags |= OBJ_FLAG_CONDUCTIBLE
 	else
 		obj_flags &= (~OBJ_FLAG_CONDUCTIBLE)
+	//Sound setup
+	if(material.sound_manipulate)
+		pickup_sound = material.sound_manipulate
+	if(material.sound_dropped)
+		drop_sound = material.sound_dropped
 	update_strings()
 
 /obj/item/stack/material/get_recipes()
