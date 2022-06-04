@@ -26,6 +26,7 @@
 
 /decl/tool_archetype/hatchet
 	name = "hatchet"
+	use_sound = 'sound/items/axe_wood.ogg'
 	use_message = "chopping"
 
 /decl/tool_archetype/wrench
