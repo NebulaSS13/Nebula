@@ -268,6 +268,9 @@ INITIALIZE_IMMEDIATE(/obj/effect/gas_overlay)
 	var/moderation_target		  // The 'target' neutron energy value that the fission environment shifts towards after a moderation event.
 								  // Neutron moderators can only slow down neutrons.
 
+	var/sound_manipulate          //Default sound something like a material stack made of this material does when picked up
+	var/sound_dropped             //Default sound something like a material stack made of this material does when hitting the ground or placed down
+
 // Placeholders for light tiles and rglass.
 /decl/material/proc/reinforce(var/mob/user, var/obj/item/stack/material/used_stack, var/obj/item/stack/material/target_stack, var/use_sheets = 1)
 	if(!used_stack.can_use(use_sheets))
