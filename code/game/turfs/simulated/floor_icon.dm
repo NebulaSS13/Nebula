@@ -120,7 +120,7 @@ var/global/list/flooring_cache = list()
 				is_linked = TRUE
 
 		//If we get here then its a normal floor
-		else if (T.is_floor())
+		else if (istype(T, /turf/simulated/floor))
 			var/turf/simulated/floor/t = T
 			//Check for window frames.
 			if(wall_smooth == SMOOTH_ALL)

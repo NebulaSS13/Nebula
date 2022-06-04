@@ -1117,7 +1117,7 @@
 	var/turf/T = get_turf(src)
 	if(istype(T) && T.is_flooded(lying) && should_have_organ(BP_LUNGS))
 		if(T == location) //Can we surface?
-			if(!lying && T.above && !T.above.is_flooded() && T.above.CanZPass(src, UP) && can_overcome_gravity())
+			if(!lying && T.above && !T.above.is_flooded() && T.above.is_open() && can_overcome_gravity())
 				return ..(volume_needed, T.above)
 		var/can_breathe_water = (istype(wear_mask) && wear_mask.filters_water()) ? TRUE : FALSE
 		if(!can_breathe_water)

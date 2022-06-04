@@ -43,6 +43,11 @@
 	. = ..()
 	if(reinforce_material)	//recipes below don't support composite materials
 		return
+
+	if(wall_support_value >= 10)
+		. += new/datum/stack_recipe/furniture/girder(src)
+		. += new/datum/stack_recipe/furniture/ladder(src)
+
 	. += new/datum/stack_recipe/sandals(src)
 	. += new/datum/stack_recipe/tile/wood(src)
 	. += create_recipe_list(/datum/stack_recipe/furniture/chair/wood)

@@ -351,6 +351,12 @@
 	wall_support_value = MAT_VALUE_NORMAL
 	default_solid_form = /obj/item/stack/material/bone
 
+/decl/material/solid/bone/generate_recipes(var/reinforce_material)
+	. = ..()
+	if(!reinforce_material && wall_support_value >= 10)
+		. += new/datum/stack_recipe/furniture/girder(src)
+		. += new/datum/stack_recipe/furniture/ladder(src)
+
 /decl/material/solid/bone/fish
 	name = "fishbone"
 	uid = "solid_fishbone"

@@ -2,6 +2,8 @@
 	var/base_turf = get_base_turf_by_area(src)
 	if(base_turf && type != base_turf)
 		. = ChangeTurf(base_turf)
+	else
+		. = src
 	if(!(locate(/obj/structure/lattice) in .))
 		new /obj/structure/lattice(., material)
 
