@@ -87,24 +87,27 @@ LINEN BINS
 	icon                   = 'icons/obj/structures/linen_bin.dmi'
 	icon_state             = "linenbin-full"
 	anchored               = TRUE
-	w_class                = ITEM_SIZE_HUGE
+	w_class                = ITEM_SIZE_STRUCTURE
 	material               = /decl/material/solid/plastic
 	tool_interaction_flags = TOOL_INTERACTION_ANCHOR | TOOL_INTERACTION_DECONSTRUCT
 	var/stored             = 0  //Currently stored unspawned bedsheets, mainly used by mapped bins
+	var/max_stored         = 20 //Maximum amount of bedsheets that can be put in here
 	var/list/sheets             //Currently spawned bedsheets it contains
 	var/obj/item/hidden         //Object hidden amidst the bedsheets
 
-/obj/structure/bedsheetbin/mapped
-	stored = 20 //Mapped ones start with some unspawned sheets
+/obj/structure/bedsheetbin/mapped/Initialize(ml, _mat, _reinf_mat)
+	stored = max_stored //Mapped ones start with some unspawned sheets
+	. = ..()
 
 /obj/structure/bedsheetbin/dump_contents()
-	. = ..()
-	//Be sure to dump the ones that weren't spawned yet
-	for(var/i in 1 to stored)
+	//Dump all sheets, even unspawned ones
+	for(var/i = 0, i < get_amount(), i++)
 		remove_sheet()
+	. = ..()
 
+/**Returns the total amount of sheets contained, including unspawned ones. */
 /obj/structure/bedsheetbin/proc/get_amount()
-	return stored + LAZYLEN(sheets)
+	return LAZYLEN(sheets)? stored + length(sheets) : stored
 
 /obj/structure/bedsheetbin/examine(mob/user)
 	. = ..()
@@ -120,25 +123,42 @@ LINEN BINS
 /obj/structure/bedsheetbin/on_update_icon()
 	..()
 	var/curamount = get_amount()
-	switch(curamount)
-		if(0)
-			icon_state = "linenbin-empty"
-		if(1 to (curamount / 2))
-			icon_state = "linenbin-half"
-		else
-			icon_state = "linenbin-full"
+	if(curamount < 1)
+		icon_state = "linenbin-empty"
+	else if(curamount <= (max_stored/2))
+		icon_state = "linenbin-half"
+	else
+		icon_state = "linenbin-full"
 
 /obj/structure/bedsheetbin/attackby(obj/item/I, mob/user)
+	var/curamount = get_amount()
 	if(istype(I, /obj/item/bedsheet))
+		if(curamount >= max_stored)
+			to_chat(user, SPAN_WARNING("\The [src] is full!"))
+			return
 		if(!user.unEquip(I, src))
 			return
 		LAZYDISTINCTADD(sheets, I)
+		update_icon()
 		to_chat(user, SPAN_NOTICE("You put [I] in [src]."))
-	else if(get_amount() && !hidden && I.w_class < w_class)	//make sure there's sheets to hide it among, make sure nothing else is hidden in there.
-		if(!user.unEquip(I, src))
-			return
-		hidden = I
-		to_chat(user, SPAN_NOTICE("You hide [I] among the sheets."))
+		return TRUE
+
+	//Let the parent attackby run to handle tool interactions
+	. = ..()
+
+	if(!.)
+		if(curamount && !hidden && I.w_class < w_class)	//make sure there's sheets to hide it among, make sure nothing else is hidden in there.
+			if(!user.unEquip(I, src))
+				return
+			hidden = I
+			to_chat(user, SPAN_NOTICE("You hide [I] among the sheets."))
+			return TRUE
+		else if(hidden)
+			to_chat(user, SPAN_WARNING("There's not enough space to hide \the [I]!"))
+		else if(I.w_class >= w_class)
+			to_chat(user, SPAN_WARNING("\The [I] is too big to hide in \the [src]!"))
+		else if(curamount < 1)
+			to_chat(user, SPAN_WARNING("You can't hide anything if there's no sheets to cover it!"))
 
 /obj/structure/bedsheetbin/attack_hand(var/mob/user)
 	var/obj/item/bedsheet/B = remove_sheet()
@@ -152,7 +172,7 @@ LINEN BINS
 	return TRUE
 
 /obj/structure/bedsheetbin/proc/remove_sheet()
-	if(get_amount() <= 0)
+	if(get_amount() < 1)
 		return
 
 	//Pick our sheet source
