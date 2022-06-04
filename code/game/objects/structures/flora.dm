@@ -10,6 +10,7 @@
 	tool_interaction_flags = 0 
 	hitsound               = 'sound/effects/hit_bush.ogg'
 	var/tmp/snd_cut        = 'sound/effects/plants/brush_leaves.ogg' //Sound to play when cutting the plant down
+	var/remains_type       = /obj/effect/decal/cleanable/plant_bits //What does the plant leaves behind in addition to the materials its made out of. (part_type is like this, but it drops instead of materials)
 
 /obj/structure/flora/Initialize(ml, _mat, _reinf_mat)
 	. = ..()
@@ -26,7 +27,7 @@
 
 /**Whether the item used by user can cause cut_down to be called. Used to bypass default attack proc for some specific items/tools. */
 /obj/structure/flora/proc/can_cut_down(var/obj/item/I, var/mob/user)
-	return (I.force >= 5) && I.sharp
+	return (I.force >= 5) && I.sharp //Anything sharp and relatively strong can cut us instantly
 
 /**What to do when the can_cut_down check returns true. Normally simply calls dismantle. */
 /obj/structure/flora/proc/cut_down(var/obj/item/I, var/mob/user)
@@ -34,46 +35,76 @@
 		playsound(src, snd_cut, 40, TRUE)
 	dismantle()
 
+//Drop some bits when destroyed
+/obj/structure/flora/physically_destroyed(skip_qdel)
+	var/turf/T = get_turf(src)
+	if(!(. = ..(TRUE))) //Tell parents we'll delete ourselves
+		return
+	if(T)
+		. = create_remains() != null
+	if(snd_cut)
+		playsound(src, snd_cut, 60, TRUE)
+	//qdel only after we do our thing, since we have to access members
+	if(!skip_qdel)
+		qdel(src)
+
+/**Returns an instance of the object the plant leaves behind when destroyed. Null means it leaves nothing. */
+/obj/structure/flora/proc/create_remains()
+	var/turf/T = get_turf(src)
+	return new remains_type(T, material, reinf_material)
+
 ////////////////////////////////////////
 // Trees
 ////////////////////////////////////////
 /obj/structure/flora/tree
-	name      = "tree"
-	density   = TRUE
-	pixel_x   = -16
-	layer     = ABOVE_HUMAN_LAYER
-	material  = /decl/material/solid/wood
-	w_class   = ITEM_SIZE_STRUCTURE
-	hitsound  = 'sound/effects/hit_wood.ogg'
-	snd_cut   = 'sound/effects/plants/tree_fall.ogg'
+	name         = "tree"
+	density      = TRUE
+	pixel_x      = -16
+	layer        = ABOVE_HUMAN_LAYER
+	material     = /decl/material/solid/wood
+	w_class      = ITEM_SIZE_STRUCTURE
+	hitsound     = 'sound/effects/hit_wood.ogg'
+	snd_cut      = 'sound/effects/plants/tree_fall.ogg'
 	var/protects_against_weather = TRUE
+	var/stump_type //What kind of tree stump we're leaving behind
+
+/obj/structure/flora/tree/get_material_health_modifier()
+	return 2.5 //Prefer removing via tools than bashing
 
 /obj/structure/flora/tree/can_cut_down(obj/item/I, mob/user)
-	return I.sharp && I.edge && (I.force >= 10) //Axes can bypass having to damage the tree to break it
+	return IS_HATCHET(I) //Axes can bypass having to damage the tree to break it
 
 /obj/structure/flora/tree/cut_down(obj/item/I, mob/user)
-	visible_message(SPAN_NOTICE("\The [user] starts chopping at \the [src] with \a [I]."), SPAN_NOTICE("You begin chopping \the [src]."))
-	if(do_after(user, 5 SECONDS))
-		visible_message(SPAN_NOTICE("\The [user] fell \the [src]!"), SPAN_NOTICE("You fell \the [src]."))
+	if(I.do_tool_interaction(TOOL_HATCHET, user, src, 5 SECONDS))
 		. = ..()
 
+/obj/structure/flora/tree/dismantle()
+	var/turf/T = get_turf(src)
+	if(T)
+		var/obj/structure/flora/stump/stump = new stump_type(T, material, reinf_material)
+		if(istype(stump))
+			stump.icon_state = icon_state //A bit dirty maybe, but its probably not worth writing a whole system for this when we have 3 kinds of trees..
+	. = ..()
+
 /obj/structure/flora/tree/pine
-	name       = "pine tree"
-	desc       = "A pine tree."
-	icon       = 'icons/obj/flora/pinetrees.dmi'
-	icon_state = "pine_1"
+	name         = "pine tree"
+	desc         = "A pine tree."
+	icon         = 'icons/obj/flora/pinetrees.dmi'
+	icon_state   = "pine_1"
+	stump_type   = /obj/structure/flora/stump/tree/pine
 
 /obj/structure/flora/tree/pine/init_appearance()
 	icon_state = "pine_[rand(1, 3)]"
 	
 /obj/structure/flora/tree/pine/xmas
-	name       = "\improper Christmas tree"
-	desc       = "O Christmas tree, O Christmas tree..."
-	icon       = 'icons/obj/flora/pinetrees.dmi'
-	icon_state = "pine_c"
+	name         = "\improper Christmas tree"
+	desc         = "O Christmas tree, O Christmas tree..."
+	icon         = 'icons/obj/flora/pinetrees.dmi'
+	icon_state   = "pine_c"
+	stump_type   = /obj/structure/flora/stump/tree/pine/xmas
 
 /obj/structure/flora/tree/pine/xmas/init_appearance()
-	return
+	return //Only one possible icon
 
 /obj/structure/flora/tree/dead
 	name                     = "dead tree"
@@ -81,9 +112,44 @@
 	icon                     = 'icons/obj/flora/deadtrees.dmi'
 	icon_state               = "tree_1"
 	protects_against_weather = FALSE
+	stump_type               = /obj/structure/flora/stump/tree/dead
 
 /obj/structure/flora/tree/dead/init_appearance()
 	icon_state = "tree_[rand(1, 6)]"
+
+////////////////////////////////////////
+// Stumps
+////////////////////////////////////////
+/obj/structure/flora/stump
+	name = "stump"
+
+
+//Base tree stump
+/obj/structure/flora/stump/tree
+	name       = "tree stump"
+	icon       = 'icons/obj/flora/tree_stumps.dmi'
+	w_class    = ITEM_SIZE_HUGE
+	pixel_x    = -16 //All trees are offset 16 pixels
+	material   = /decl/material/solid/wood
+
+//dead trees
+/obj/structure/flora/stump/tree/dead
+	name       = "dead tree stump"
+	icon_state = "tree_1"
+
+/obj/structure/flora/stump/tree/dead/init_appearance()
+	icon_state = "tree_[rand(1, 6)]"
+
+//pine trees
+/obj/structure/flora/stump/tree/pine
+	icon_state = "pine_1"
+
+/obj/structure/flora/stump/tree/pine/init_appearance()
+	icon_state = "pine_[rand(1, 3)]"
+
+//christmas tree
+/obj/structure/flora/stump/tree/pine/xmas
+	icon_state = "pine_c"
 
 ////////////////////////////////////////
 // Grass
@@ -229,24 +295,25 @@
 // Potted Plants
 ////////////////////////////////////////
 /obj/structure/flora/pottedplant
-	name       = "potted plant"
-	desc       = "Really brings the room together."
-	icon       = 'icons/obj/structures/potted_plants.dmi'
-	icon_state = "plant-01"
-	anchored   = FALSE
-	layer      = ABOVE_HUMAN_LAYER
-	w_class    = ITEM_SIZE_LARGE
-	hitsound   = 'sound/effects/glass_crack2.ogg'
-	snd_cut    = 'sound/effects/break_ceramic.ogg'
-	material   = /decl/material/solid/stone/ceramic
-	matter     = list(
+	name         = "potted plant"
+	desc         = "Really brings the room together."
+	icon         = 'icons/obj/structures/potted_plants.dmi'
+	icon_state   = "plant-01"
+	anchored     = FALSE
+	layer        = ABOVE_HUMAN_LAYER
+	w_class      = ITEM_SIZE_LARGE
+	remains_type = /obj/effect/decal/cleanable/dirt
+	hitsound     = 'sound/effects/glass_crack2.ogg'
+	snd_cut      = 'sound/effects/break_ceramic.ogg'
+	material     = /decl/material/solid/stone/ceramic
+	matter       = list(
 		/decl/material/solid/clay        = MATTER_AMOUNT_REINFORCEMENT,
 		/decl/material/solid/sand        = MATTER_AMOUNT_REINFORCEMENT,
 		/decl/material/solid/plantmatter = MATTER_AMOUNT_SECONDARY,     //#TODO: Maybe eventually drop the plant, or some seeds or something?
 	)
 
 /obj/structure/flora/pottedplant/get_material_health_modifier()
-	return 0.05
+	return 0.80
 
 //potted plants credit: Flashkirby
 //potted plants 27-30: Cajoes
@@ -407,3 +474,12 @@
 	name = "fancy trimmed ferny potted plant"
 	desc = "This leafy desk fern seems to have been trimmed too much."
 	icon_state = "plant-30"
+
+////////////////////////////////////////
+// Floral Remains
+////////////////////////////////////////
+/obj/effect/decal/cleanable/plant_bits
+	name            = "plant remains"
+	icon            = 'icons/effects/decals/plant_remains.dmi'
+	icon_state      = "leafy_bits"
+	cleanable_scent = "freshly cut plants"
