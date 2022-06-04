@@ -75,7 +75,7 @@ var/global/list/limb_icon_cache = list()
 			icon = R.icon
 	else if(status & ORGAN_MUTATED)
 		icon = bodytype.get_base_icon(owner, get_deform = TRUE)
-	else if(owner && (MUTATION_SKELETON in owner.mutations))
+	else if(owner && (limb_flags & ORGAN_FLAG_SKELETAL))
 		icon = bodytype.get_skeletal_icon(owner)
 	else
 		icon = bodytype.get_base_icon(owner)

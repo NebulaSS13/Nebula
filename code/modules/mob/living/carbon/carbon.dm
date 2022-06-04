@@ -41,10 +41,6 @@
 		return
 
 	if(stat != DEAD)
-
-		if((MUTATION_FAT in src.mutations) && (move_intent.flags & MOVE_INTENT_EXERTIVE) && src.bodytemperature <= 360)
-			bodytemperature += 2
-
 		var/nut_removed = DEFAULT_HUNGER_FACTOR/10
 		var/hyd_removed = DEFAULT_THIRST_FACTOR/10
 		if (move_intent.flags & MOVE_INTENT_EXERTIVE)

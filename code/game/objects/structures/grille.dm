@@ -93,6 +93,9 @@
 	playsound(loc, 'sound/effects/grillehit.ogg', 80, 1)
 	user.do_attack_animation(src)
 
+	if(shock(user, 70))
+		return
+
 	var/damage_dealt = 1
 	var/attack_message = "kicks"
 	if(istype(user,/mob/living/carbon/human))
@@ -100,14 +103,6 @@
 		if(H.species.can_shred(H))
 			attack_message = "mangles"
 			damage_dealt = 5
-
-	if(shock(user, 70))
-		return
-
-	if(MUTATION_HULK in user.mutations)
-		damage_dealt += 5
-	else
-		damage_dealt += 1
 
 	attack_generic(user,damage_dealt,attack_message)
 

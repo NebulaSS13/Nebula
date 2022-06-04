@@ -282,14 +282,15 @@ SUBSYSTEM_DEF(garbage)
 
 /datum/qdel_item
 	var/name = ""
-	var/qdels = 0			//Total number of times it's passed thru qdel.
-	var/destroy_time = 0	//Total amount of milliseconds spent processing this type's Destroy()
-	var/failures = 0		//Times it was queued for soft deletion but failed to soft delete.
-	var/hard_deletes = 0 	//Different from failures because it also includes QDEL_HINT_HARDDEL deletions
-	var/hard_delete_time = 0//Total amount of milliseconds spent hard deleting this type.
-	var/no_respect_force = 0//Number of times it's not respected force=TRUE
-	var/no_hint = 0			//Number of times it's not even bother to give a qdel hint
-	var/slept_destroy = 0	//Number of times it's slept in its destroy
+	var/qdels = 0			//! Total number of times its passed thru qdel.
+	var/destroy_time = 0	//! Total amount of milliseconds spent processing this type's Destroy().
+	var/failures = 0		//! Times it was queued for soft deletion but failed to soft delete.
+	var/hard_deletes = 0 	//! Different from failures because it also includes QDEL_HINT_HARDDEL deletions.
+	var/hard_delete_time = 0//! Total amount of milliseconds spent hard deleting this type.
+	var/no_respect_force = 0//! Number of times its not respected force=TRUE.
+	var/no_hint = 0			//! Number of times it hasn't bothered to give a qdel hint.
+	var/slept_destroy = 0	//! Number of times slept in its destroy.
+	var/early_destroy = 0	//! Number of times it was destroyed before Initialize().
 
 /datum/qdel_item/New(mytype)
 	name = "[mytype]"
@@ -312,20 +313,30 @@ SUBSYSTEM_DEF(garbage)
 	var/datum/qdel_item/I = SSgarbage.items[D.type]
 	if (!I)
 		I = SSgarbage.items[D.type] = new /datum/qdel_item(D.type)
-	I.qdels++
 
+	I.qdels++
 
 	if(isnull(D.gc_destroyed))
 		D.gc_destroyed = GC_CURRENTLY_BEING_QDELETED
 		var/start_time = world.time
 		var/start_tick = world.tick_usage
-		var/hint = D.Destroy(arglist(args.Copy(2))) // Let our friend know they're about to get fucked up.
+		var/hint
+
+		// Let our friend know they're about to get fucked up.
+		if (isloc(D) && !(D:atom_flags & ATOM_FLAG_INITIALIZED))
+			hint = D:EarlyDestroy(arglist(args.Copy(2)))
+			I.early_destroy += 1
+		else
+			hint = D.Destroy(arglist(args.Copy(2)))
+
 		if(world.time != start_time)
 			I.slept_destroy++
 		else
 			I.destroy_time += TICK_USAGE_TO_MS(start_tick)
+
 		if(!D)
 			return
+
 		switch(hint)
 			if (QDEL_HINT_QUEUE)		//qdel should queue the object for deletion.
 				GC_CHECK_AM_NULLSPACE(D, "QDEL_HINT_QUEUE")

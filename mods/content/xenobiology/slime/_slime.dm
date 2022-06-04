@@ -263,13 +263,6 @@
 				playsound(loc, 'sound/weapons/punchmiss.ogg', 25, 1, -1)
 				visible_message(SPAN_DANGER("\The [user] has attempted to punch \the [src]!"))
 				return TRUE
-			if(MUTATION_HULK in user.mutations)
-				damage += 5
-				if(feeding_on)
-					set_feeding_on()
-				if(istype(slime_ai) && slime_ai.current_target)
-					slime_ai.current_target = null
-				throw_at(get_edge_target_turf(src, get_dir(user, src)), 2, 10, user, FALSE)
 			playsound(loc, "punch", 25, 1, -1)
 			visible_message(SPAN_DANGER("\The [user] has punched \the [src]!"))
 			adjustBruteLoss(damage)

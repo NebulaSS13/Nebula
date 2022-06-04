@@ -231,7 +231,7 @@
 //Also used in AI tracking people by face, so added in checks for head coverings like masks and helmets
 /mob/living/carbon/human/proc/get_face_name()
 	var/obj/item/organ/external/H = get_organ(BP_HEAD)
-	if(!H || (H.status & ORGAN_DISFIGURED) || H.is_stump() || !real_name || (MUTATION_HUSK in mutations) || (wear_mask && (wear_mask.flags_inv&HIDEFACE)) || (head && (head.flags_inv&HIDEFACE)))	//Face is unrecognizeable, use ID if able
+	if(!H || (H.status & ORGAN_DISFIGURED) || H.is_stump() || !real_name || is_husked() || (wear_mask && (wear_mask.flags_inv&HIDEFACE)) || (head && (head.flags_inv&HIDEFACE)))	//Face is unrecognizeable, use ID if able
 		if(istype(wear_mask) && wear_mask.visible_name)
 			return wear_mask.visible_name
 		else if(istype(wearing_rig) && wearing_rig.visible_name)
@@ -441,20 +441,6 @@
 
 /mob/living/carbon/human/get_bodytype()
 	return bodytype
-
-/mob/living/carbon/human/proc/play_xylophone()
-	if(!xylophone)
-		var/decl/pronouns/G = get_pronouns()
-		visible_message( \
-			SPAN_NOTICE("\The [src] begins playing [G.his] ribcage like a xylophone. It's quite spooky."), \
-			SPAN_NOTICE("You begin to play a spooky refrain on your ribcage."), \
-			SPAN_NOTICE("You hear a spooky xylophone melody."))
-		playsound(loc, pick('sound/effects/xylophone1.ogg','sound/effects/xylophone2.ogg','sound/effects/xylophone3.ogg'), 50, 1, -1)
-		xylophone = TRUE
-		addtimer(CALLBACK(src, .proc/reset_xylophone_callback), 2 MINUTES)
-
-/mob/living/carbon/human/proc/reset_xylophone_callback()
-	xylophone = FALSE
 
 /mob/living/carbon/human/check_has_mouth()
 	// Todo, check stomach organ when implemented.
@@ -1036,9 +1022,6 @@
 				src.show_message("My [org.name] is <span class='warning'>[english_list(status)].</span>",1)
 			else
 				src.show_message("My [org.name] is <span class='notice'>OK.</span>",1)
-
-		if((MUTATION_SKELETON in mutations) && (!w_uniform) && (!wear_suit))
-			play_xylophone()
 
 /mob/living/carbon/human/proc/resuscitate()
 	if(!is_asystole() || !should_have_organ(BP_HEART))

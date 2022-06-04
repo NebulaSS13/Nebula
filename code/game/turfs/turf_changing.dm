@@ -21,7 +21,6 @@
 	. = TRUE
 
 /turf/proc/ChangeTurf(var/turf/N, var/tell_universe = TRUE, var/force_lighting_update = FALSE, var/keep_air = FALSE, var/keep_outside = FALSE)
-
 	if (!N)
 		return
 
@@ -31,6 +30,9 @@
 		if(istype(below) && !isspaceturf(below))
 			var/area/A = get_area(src)
 			N = A?.open_turf || open_turf_type || /turf/simulated/open
+
+	if (!(atom_flags & ATOM_FLAG_INITIALIZED))
+		return new N(src)
 
 	// Track a number of old values for the purposes of raising
 	// state change events after changing the turf to the new type.
@@ -79,7 +81,6 @@
 	if(tell_universe)
 		global.universe.OnTurfChange(W)
 
-	events_repository.raise_event(/decl/observ/turf_changed, W, old_density, W.density, old_opacity, W.opacity)
 	if(W.density != old_density)
 		events_repository.raise_event(/decl/observ/density_set, W, old_density, W.density)
 
