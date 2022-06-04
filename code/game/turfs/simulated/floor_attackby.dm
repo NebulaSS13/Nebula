@@ -64,7 +64,11 @@
 			make_plating(1)
 			playsound(src, 'sound/items/Ratchet.ogg', 80, 1)
 			return TRUE
-		else if(istype(C, /obj/item/shovel) && (flooring.flags & TURF_REMOVE_SHOVEL))
+		else if(IS_SHOVEL(C) && (flooring.flags & TURF_REMOVE_SHOVEL))
+			if(!user.do_skilled(flooring.remove_timer, SKILL_CONSTRUCTION, src))
+				return TRUE
+			if(!flooring)
+				return
 			to_chat(user, "<span class='notice'>You shovel off the [flooring.descriptor].</span>")
 			make_plating(1)
 			playsound(src, 'sound/items/Deconstruct.ogg', 80, 1)

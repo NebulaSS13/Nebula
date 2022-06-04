@@ -9,10 +9,8 @@
 	var/open = 1
 
 /obj/structure/pit/attackby(obj/item/W, mob/user)
-	if( istype(W,/obj/item/shovel) )
-		visible_message("<span class='notice'>\The [user] starts [open ? "filling" : "digging open"] \the [src]</span>")
-		if( do_after(user, 50) )
-			visible_message("<span class='notice'>\The [user] [open ? "fills" : "digs open"] \the [src]!</span>")
+	if(IS_SHOVEL(W))
+		if(W.do_tool_interaction(TOOL_SHOVEL, user, src, 5 SECONDS, "[open ? "filling up" : "digging open"]", "[open ? "fills up" : "digs open"]")))
 			if(open)
 				close(user)
 			else

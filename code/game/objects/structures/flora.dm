@@ -114,6 +114,23 @@
 	protects_against_weather = FALSE
 	stump_type               = /obj/structure/flora/stump/tree/dead
 
+////////////////////////////////////////
+// Stumps
+////////////////////////////////////////
+/obj/structure/flora/stump
+	name = "stump"
+
+/obj/structure/flora/stump/get_material_health_modifier()
+	return 2.5 //Make stumps worth removing with shovels instead of bashing them
+
+/obj/structure/flora/stump/can_cut_down(obj/item/I, mob/user)
+	return IS_SHOVEL(I)
+
+/obj/structure/flora/stump/cut_down(obj/item/I, mob/user)
+	if(I.do_tool_interaction(TOOL_SHOVEL, user, src, 8 SECONDS))
+		. = ..()
+	icon_state = "tree_1"
+
 /obj/structure/flora/tree/dead/init_appearance()
 	icon_state = "tree_[rand(1, 6)]"
 
