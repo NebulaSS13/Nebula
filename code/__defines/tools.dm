@@ -7,6 +7,7 @@
 #define TOOL_CROWBAR     /decl/tool_archetype/crowbar
 #define TOOL_HATCHET     /decl/tool_archetype/hatchet
 #define TOOL_WRENCH      /decl/tool_archetype/wrench
+#define TOOL_SHOVEL      /decl/tool_archetype/shovel
 
 // Surgical tools.
 #define TOOL_SCALPEL       /decl/tool_archetype/scalpel
@@ -44,6 +45,7 @@
 #define IS_MULTITOOL(A)   IS_TOOL(A, TOOL_MULTITOOL)
 #define IS_CROWBAR(A)     IS_TOOL(A, TOOL_CROWBAR)
 #define IS_HATCHET(A)     IS_TOOL(A, TOOL_HATCHET)
+#define IS_SHOVEL(A)      IS_TOOL(A, TOOL_SHOVEL)
 
 // Structure interaction flags
 #define TOOL_INTERACTION_ANCHOR      BITFLAG(0)

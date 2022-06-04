@@ -165,6 +165,10 @@
 	sharp = 0
 	edge = 1
 
+/obj/item/shovel/Initialize(ml, material_key)
+	. = ..()
+	set_extension(src, /datum/extension/tool, list(TOOL_SHOVEL = TOOL_QUALITY_DEFAULT))
+
 /obj/item/shovel/spade
 	name = "spade"
 	desc = "A small tool for digging and moving dirt."
@@ -174,6 +178,12 @@
 	force = 5.0
 	throwforce = 7
 	w_class = ITEM_SIZE_SMALL
+
+/obj/item/shovel/spade/Initialize(ml, material_key)
+	. = ..()
+	var/datum/extension/tool/ET = get_or_create_extension(src, /datum/extension/tool, list(TOOL_SHOVEL = TOOL_QUALITY_BAD))
+	if(istype(ET))
+		ET.tool_values = list(TOOL_SHOVEL = TOOL_QUALITY_BAD) //You're not gonna dig a trench with a garden spade..
 
 // Flags.
 /obj/item/stack/flag
