@@ -41,7 +41,6 @@
 		if(prob(probability))
 			if(istype(ad, /turf/space)) //if it's space turn it into asteroid
 				newasteroid = ad.ChangeTurf(/turf/exterior/wall/random/ministation)
-				world.log << "generating asteroid"
 				newasteroid.generate_asteroid(max(10,probability-10)) //reduce the probability of conversion with 10 percent for each turf away from the starting one.
 			if(istype(ad, /turf/exterior/wall/random/ministation)) //if it's asteroid prevent it from being deleted in it's own LateInitialize proc.
 				newasteroid = ad
