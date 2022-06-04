@@ -34,6 +34,7 @@
 	if(snd_cut)
 		playsound(src, snd_cut, 40, TRUE)
 	dismantle()
+	return TRUE
 
 //Drop some bits when destroyed
 /obj/structure/flora/physically_destroyed(skip_qdel)
