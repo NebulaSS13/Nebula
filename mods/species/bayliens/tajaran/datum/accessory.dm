@@ -4,7 +4,7 @@
 	. = ..()
 	species_allowed |= SPECIES_TAJARA
 
-/decl/sprite_accessory/hair/shaved/Initialize()
+/decl/sprite_accessory/hair/bald/Initialize()
 	. = ..()
 	species_allowed |= SPECIES_TAJARA
 
