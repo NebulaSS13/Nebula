@@ -6,8 +6,11 @@
 	var/key				// passkey for the network
 	var/address			// unique network address, cannot be set by user
 	var/network_tag		// human-readable network address, can be set by user. Networks enforce uniqueness, will change it if there's clash.
-	var/connection_type = NETWORK_CONNECTION_STRONG_WIRELESS  // affects signal strength
+	var/receiver_type = RECEIVER_STRONG_WIRELESS  // affects signal strength
 	var/connection_attempts = 0
+	var/internet_allowed = FALSE // Whether or not these devices can be connected over PLEXUS.
+
+	var/long_range = FALSE // Whether or not this device can connect to broadcasters across z-chunks.
 
 	var/has_commands = FALSE  // Whether or not this device can be configured to receive commands to modify and call public variables and methods.
 	var/list/command_and_call // alias -> public method to be called.
@@ -18,13 +21,13 @@
 	// These variables are for the *device's* public variables and methods, if they exist.
 	var/list/device_variables
 	var/list/device_methods
-
-/datum/extension/network_device/New(datum/holder, n_id, n_key, c_type, autojoin = TRUE)
+	
+/datum/extension/network_device/New(datum/holder, n_id, n_key, r_type, autojoin = TRUE)
 	..()
 	network_id = n_id
 	key = n_key
-	if(c_type)
-		connection_type = c_type
+	if(r_type)
+		receiver_type = r_type
 	address = uppertext(NETWORK_MAC)
 	var/obj/O = holder
 	network_tag = "[uppertext(replacetext(O.name, " ", "_"))]-[sequential_id(type)]"
@@ -59,24 +62,25 @@
 		return FALSE
 	return net.remove_device(src)
 
+// Returns list(signal type, signal strength) on success, null on failure.
 /datum/extension/network_device/proc/check_connection(specific_action)
 	var/datum/computer_network/net = SSnetworking.networks[network_id]
 	if(!net)
 		// We should already be queued for reconnect if it went down, so do nothing.
 		return FALSE
-	if(!net.check_connection(src, specific_action) || net.devices_by_tag[network_tag] != src)
+	if(!net.devices_by_tag[network_tag] != src)
 		// The connection has failed but the network is still up, so we try to reconnect.
-		if(connect())
-			net = SSnetworking.networks[network_id]
-		else
+		if(!connect())
 			return FALSE
-	return net.get_signal_strength(src)
+	return net.check_connection(src, specific_action)
 
 /datum/extension/network_device/proc/get_signal_wordlevel()
-	var/datum/computer_network/network = get_network()
-	if(!network)
-		return "Not Connected"
-	var/signal_strength = network.get_signal_strength(src)
+	var/list/signal_data = check_connection()
+	if(!islist(signal_data))
+		return "Not connected"
+	if(signal_data[1] == INTERNET_CONNECTION)
+		return "Connected over PLEXUS"
+	var/signal_strength = signal_data[2]
 	if(signal_strength <= 0)
 		return "Not Connected"
 	if(signal_strength < (NETWORK_BASE_BROADCAST_STRENGTH * 0.5))
@@ -84,18 +88,26 @@
 	else
 		return "High Signal"
 
+// Returns list(network_id -> connection type, ...)
 /datum/extension/network_device/proc/get_nearby_networks()
 	var/list/wired_networks = list()
 	var/list/wireless_networks = list()
+	var/list/internet_networks = list()
 	for(var/id in SSnetworking.networks)
 		var/datum/computer_network/net = SSnetworking.networks[id]
-		switch(net.check_connection(src))
+		var/list/signal_data = net.check_connection(src)
+		if(!islist(signal_data))
+			continue
+		switch(signal_data[1])
 			if(WIRED_CONNECTION)
-				wired_networks |= id
+				wired_networks[id] = WIRED_CONNECTION
 			if(WIRELESS_CONNECTION)
-				wireless_networks |= id
-	// We return it like this so that wired networks have their connections prioritized.
-	return wired_networks + wireless_networks
+				wireless_networks[id] = WIRELESS_CONNECTION
+			if(INTERNET_CONNECTION)
+				internet_networks[id] = INTERNET_CONNECTION
+
+	// We return it like this so that wired networks have their connections prioritized over wireless and internet connections.
+	return wired_networks + wireless_networks + internet_networks
 
 /datum/extension/network_device/proc/is_banned()
 	var/datum/computer_network/net = get_network()
@@ -103,8 +115,8 @@
 		return FALSE
 	return (address in net.banned_nids)
 
-/datum/extension/network_device/proc/get_network()
-	if(check_connection())
+/datum/extension/network_device/proc/get_network(specific_action)
+	if(check_connection(specific_action))
 		return SSnetworking.networks[network_id]
 
 /datum/extension/network_device/proc/add_log(text)
@@ -134,11 +146,15 @@
 	if(new_id in networks)
 		if(!SSnetworking[network_id]) // old network is down, so we should unqueue from its reconnect list
 			SSnetworking.unqueue_reconnect(src, network_id)
+		var/connection_type = networks[new_id]
 		disconnect()
 		network_id = new_id
 		to_chat(user, SPAN_NOTICE("Network ID changed to '[network_id]'."))
 		if(connect())
-			to_chat(user, SPAN_NOTICE("Connected to the network '[network_id]'."))
+			if(connection_type == INTERNET_CONNECTION)
+				to_chat(user, SPAN_NOTICE("Connected to the network '[network_id]' via PLEXUS connection. Certain actions on the network may be restricted."))
+			else
+				to_chat(user, SPAN_NOTICE("Connected to the network '[network_id]'."))
 		else
 			to_chat(user, SPAN_WARNING("Unable to connect to the network '[network_id]'. Check your passkey and try again."))
 	else

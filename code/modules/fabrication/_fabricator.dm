@@ -92,7 +92,7 @@
 	sound_id = "[fabricator_sound]"
 
 	// Get any local network we need to be part of.
-	set_extension(src, /datum/extension/network_device, initial_network_id, initial_network_key, NETWORK_CONNECTION_STRONG_WIRELESS)
+	set_extension(src, /datum/extension/network_device, initial_network_id, initial_network_key, RECEIVER_STRONG_WIRELESS)
 
 	// Initialize material storage lists.
 	stored_material = list()

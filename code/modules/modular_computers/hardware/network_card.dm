@@ -26,10 +26,7 @@
 		. += "OpenEth (Physical Connection) - Physical network connection port"
 
 /obj/item/stock_parts/computer/network_card/Initialize()
-	set_extension(src, /datum/extension/network_device/stock_part)
-	var/datum/extension/network_device/stock_part/D = get_extension(src, /datum/extension/network_device)
-	if(long_range)
-		D.connection_type = NETWORK_CONNECTION_STRONG_WIRELESS
+	set_extension(src, /datum/extension/network_device/stock_part, null, null, long_range ? RECEIVER_STRONG_WIRELESS : RECEIVER_WIRELESS)
 	. = ..()
 
 /obj/item/stock_parts/computer/network_card/advanced
@@ -61,7 +58,10 @@
 		return
 
 	var/datum/extension/network_device/D = get_extension(src, /datum/extension/network_device)
-	return D.check_connection(specific_action)
+	var/list/signal_data = D.check_connection(specific_action)
+	if(!islist(signal_data))
+		return
+	return signal_data[1]
 
 /obj/item/stock_parts/computer/network_card/on_disable()
 	var/datum/extension/network_device/D = get_extension(src, /datum/extension/network_device)

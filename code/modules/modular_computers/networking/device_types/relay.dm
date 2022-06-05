@@ -1,5 +1,4 @@
 /datum/extension/network_device/broadcaster/relay
-	connection_type = NETWORK_CONNECTION_STRONG_WIRELESS
 	expected_type = /obj/machinery
 
 /datum/extension/network_device/broadcaster/relay/get_nearby_networks()
@@ -18,8 +17,6 @@
 /datum/extension/network_device/broadcaster/relay/connect()
 	var/datum/computer_network/net = SSnetworking.networks[network_id]
 	if(!net)
-		return FALSE
-	if(!long_range && !(network_id in get_nearby_networks()))
 		return FALSE
 	return net.add_device(src)
 

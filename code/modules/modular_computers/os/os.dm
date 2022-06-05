@@ -200,6 +200,14 @@
 	if(!P.is_supported_by_hardware(get_hardware_flag(), user, TRUE))
 		return
 
+	if(P.requires_network)
+		if(!get_network()) // No network at all
+			show_error(user, "NETWORK ERROR - Unable to run [filename]")
+			return
+		if(!get_network_status(P.requires_network_feature))
+			show_error(user, "NETWORK ERROR - Network rejected use of [filename] on your current connection")
+			return
+
 	minimize_program(user)
 
 	if(P in running_programs)
