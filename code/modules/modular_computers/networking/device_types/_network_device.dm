@@ -207,6 +207,15 @@
 	var/obj/structure/network_cable/terminal/term = port.terminal
 	return term.get_graph()
 
+/datum/extension/network_device/proc/has_internet_connection(connecting_network)
+	// Overmap isn't used, a modem alone provides internet connection.
+	if(!length(global.using_map.overmap_ids))
+		return TRUE
+	var/obj/effect/overmap/visitable/sector = global.overmap_sectors["[get_z(holder)]"]
+	if(!istype(sector))
+		return
+	return sector.has_internet_connection(connecting_network)
+
 /datum/extension/network_device/nano_host()
 	return holder.nano_host()
 

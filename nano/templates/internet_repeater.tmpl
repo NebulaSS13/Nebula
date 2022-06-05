@@ -1,0 +1,20 @@
+<div class='item'>
+	<div class="itemLabel">
+		Power:
+	</div>
+	<div class="itemContent">
+		{{:helper.link(data.powered ? 'On' : 'Off', 'power', {'toggle' : 1 }, null)}}
+	</div>
+</div>
+<hr>
+<div class='item'>
+	<h2>Connected PLEXUS Uplinks:</h2>
+	<table>
+		<tr><th>Sector Position<th>Permitted Networks
+		{{for data.connections}}
+			<tr class="candystripe">
+			<td>{{:value.position}}
+			<td>{{:value.permitted}}
+		{{/for}}
+	</table>
+</div>

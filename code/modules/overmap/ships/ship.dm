@@ -171,7 +171,7 @@ var/global/const/OVERMAP_SPEED_CONSTANT = (1 SECOND)
 	..()
 	for(var/obj/machinery/computer/ship/S in SSmachines.machinery)
 		S.attempt_hook_up(src)
-	for(var/datum/extension/ship_engine/E in ship_engines)
+	for(var/datum/extension/ship_engine/E in global.ship_engines)
 		if(check_ownership(E.holder))
 			engines |= E
 	for(var/datum/ship_inertial_damper/I in global.ship_inertial_dampers)
