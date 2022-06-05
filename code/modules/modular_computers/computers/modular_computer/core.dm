@@ -67,7 +67,7 @@
 	install_default_programs()
 
 /obj/item/modular_computer/Destroy()
-	QDEL_NULL_LIST(terminals)
+	shutdown_computer(loud = FALSE)
 	STOP_PROCESSING(SSobj, src)
 	if(istype(stored_pen))
 		QDEL_NULL(stored_pen)
