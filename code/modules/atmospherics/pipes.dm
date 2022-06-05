@@ -120,6 +120,8 @@
 		if(liquid_temporary)
 			liquid_temporary.trans_to(loc, liquid_temporary.total_volume)
 			liquid_temporary = null
+	if(leaking)
+		STOP_PROCESSING_MACHINE(src, MACHINERY_PROCESS_SELF)
 	. = ..()
 
 /obj/machinery/atmospherics/pipe/deconstruction_pressure_check()
