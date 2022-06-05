@@ -131,6 +131,7 @@
 
 	STOP_PROCESSING(SSobj, src)
 	QDEL_NULL(hidden_uplink)
+	QDEL_NULL(coating)
 
 	if(ismob(loc))
 		var/mob/M = loc
