@@ -8,6 +8,8 @@
 	program_menu_icon = "alert"
 	extended_desc = "This program provides visual interface for the alarm system."
 	requires_network = 1
+	requires_network_feature = NET_FEATURE_SYSTEMCONTROL
+
 	network_destination = "alarm monitoring network"
 	size = 5
 	category = PROG_MONITOR

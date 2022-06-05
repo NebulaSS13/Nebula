@@ -55,11 +55,15 @@
 			choices[FS.name] = FS
 		var/file_source = input(usr, "Choose a storage medium to use:", "Select Storage Medium") as null|anything in choices
 		if(file_source)
-			current_filesource = choices[file_source]
 			if(istype(current_filesource, /datum/file_storage/network))
 				var/datum/computer_network/network = computer.get_network()
 				if(!network)
 					return TOPIC_REFRESH
+				if(!computer.get_network_status(NET_FEATURE_FILESYSTEM))
+					to_chat(usr, SPAN_WARNING("The network rejected access to the filesystems with the current connection."))
+					return TOPIC_HANDLED
+				
+				current_filesource = choices[file_source]
 				// Helper for some user-friendliness. Try to select the first available mainframe.
 				var/list/file_servers = network.get_file_server_tags(MF_ROLE_FILESERVER, accesses)
 				var/datum/file_storage/network/N = current_filesource
@@ -67,6 +71,8 @@
 					N.server = null // Don't allow players to see files on mainframes they cannot access.
 					return TOPIC_REFRESH
 				N.server = file_servers[1]
+			else
+				current_filesource = choices[file_source]
 			return TOPIC_REFRESH
 
 	if(href_list["PRG_changefileserver"])

@@ -7,6 +7,7 @@
 	program_menu_icon = "mail-open"
 	size = 12
 	requires_network = 1
+	requires_network_feature = NET_FEATURE_SYSTEMCONTROL
 	available_on_network = 1
 	nanomodule_path = /datum/nano_module/program/email_administration
 	read_access = list(access_network)

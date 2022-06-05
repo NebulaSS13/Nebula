@@ -8,6 +8,8 @@
 	program_menu_icon = "heart"
 	extended_desc = "This program connects to life signs monitoring system to provide basic information on crew health."
 	read_access = list(access_medical)
+	requires_network = 1
+	requires_network_feature = NET_FEATURE_SECURITY
 	network_destination = "crew lifesigns monitoring system"
 	size = 11
 	category = PROG_MONITOR

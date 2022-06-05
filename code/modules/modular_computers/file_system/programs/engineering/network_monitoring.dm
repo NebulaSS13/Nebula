@@ -4,6 +4,7 @@
 	program_icon_state = "comm_monitor"
 	program_key_state = "generic_key"
 	program_menu_icon = "wrench"
+	read_access = list(access_network)
 	extended_desc = "This program monitors the local computer network, provides access to logging systems, and allows for configuration changes"
 	size = 12
 	nanomodule_path = /datum/nano_module/program/network_monitor/
@@ -12,9 +13,14 @@
 /datum/nano_module/program/network_monitor
 	name = "Network Diagnostics and Monitoring"
 	var/static/list/all_network_features = list(
-		"Software Download" = NETWORK_SOFTWAREDOWNLOAD,
-		"Communication Systems" = NETWORK_COMMUNICATION,
-		"Remote System Control" = NETWORK_SYSTEMCONTROL
+		"Software Download" = NET_FEATURE_SOFTWAREDOWNLOAD,
+		"Communication Systems" = NET_FEATURE_COMMUNICATION,
+		"Remote System Control" = NET_FEATURE_SYSTEMCONTROL,
+		"Access systems" = NET_FEATURE_ACCESS,
+		"Personnel Administration" = NET_FEATURE_RECORDS,
+		"Security systems" = NET_FEATURE_SECURITY,
+		"Filesystem access" = NET_FEATURE_FILESYSTEM,
+		"Deck control" = NET_FEATURE_DECK
 		)
 
 /datum/nano_module/program/network_monitor/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1, var/datum/topic_state/state = global.default_topic_state)

@@ -13,6 +13,8 @@
 	extended_desc = "A management tool that allows for ordering of various supplies through the facility's cargo system. Some features may require additional access."
 	size = 21
 	available_on_network = 1
+	requires_network = 1
+	requires_network_feature = NET_FEATURE_DECK
 	category = PROG_SUPPLY
 
 /datum/computer_file/program/supply/is_supported_by_hardware(var/hardware_flag, var/mob/user, var/loud = FALSE)

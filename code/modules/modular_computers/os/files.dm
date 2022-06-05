@@ -153,6 +153,8 @@
 	var/datum/computer_network/network = os.get_network()
 	if(!network)
 		return "NETWORK ERROR: No connectivity to the network"
+	if(!os.get_network_status(NET_FEATURE_FILESYSTEM))
+		return "NETWORK ERROR: Network denied filesystem access"
 	if(!network.get_device_by_tag(server))
 		return "NETWORK ERROR: No connectivity to the file server '[server]'"
 	var/datum/extension/network_device/mainframe/M = network.get_device_by_tag(server)
@@ -189,7 +191,7 @@
 /datum/file_storage/network/get_transfer_speed()
 	if(check_errors())
 		return 0
-	return os.get_network_status()
+	return os.get_network_status(NET_FEATURE_FILESYSTEM)
 
 /*
  * Special subclass for network machines specifically.

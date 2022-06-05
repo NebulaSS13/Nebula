@@ -13,6 +13,7 @@
 	extended_desc = "Used to command and control. Can relay long-range communications. This program can not be run on tablet computers."
 	read_access = list(access_bridge)
 	requires_network = 1
+	requires_network_feature = NET_FEATURE_SYSTEMCONTROL
 	size = 12
 	usage_flags = PROGRAM_CONSOLE | PROGRAM_LAPTOP
 	network_destination = "long-range communication array"
@@ -46,8 +47,8 @@
 	var/list/data = host.initial_data()
 
 	if(program)
-		data["net_comms"] = !!program.get_signal(NETWORK_COMMUNICATION) //Double !! is needed to get 1 or 0 answer
-		data["net_syscont"] = !!program.get_signal(NETWORK_SYSTEMCONTROL)
+		data["net_comms"] = !!program.get_signal(NET_FEATURE_COMMUNICATION) //Double !! is needed to get 1 or 0 answer
+		data["net_syscont"] = !!program.get_signal(NET_FEATURE_SYSTEMCONTROL)
 		if(program.computer)
 			data["emagged"] = program.computer.emagged()
 			data["have_printer"] =  program.computer.has_component(PART_PRINTER)
@@ -144,8 +145,8 @@
 	if(..())
 		return 1
 	var/mob/user = usr
-	var/ntn_comm = program ? !!program.get_signal(NETWORK_COMMUNICATION) : 1
-	var/ntn_cont = program ? !!program.get_signal(NETWORK_SYSTEMCONTROL) : 1
+	var/ntn_comm = program ? !!program.get_signal(NET_FEATURE_COMMUNICATION) : 1
+	var/ntn_cont = program ? !!program.get_signal(NET_FEATURE_SYSTEMCONTROL) : 1
 	var/datum/comm_message_listener/l = obtain_message_listener()
 	switch(href_list["action"])
 		if("sw_menu")

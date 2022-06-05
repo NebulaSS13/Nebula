@@ -102,6 +102,9 @@
 					return TOPIC_HANDLED
 
 			if(href_list["other_mode"])
+				if(!computer.get_network_status(NET_FEATURE_RECORDS))
+					to_chat(user, SPAN_WARNING("NETWORK ERROR - The network rejected access to account servers from your current connection."))
+					return TOPIC_REFRESH
 				module.selected_account = null // Reset selected account just in case.
 				module.prog_state = STATE_OTHER
 				return TOPIC_REFRESH
@@ -133,6 +136,11 @@
 				return TOPIC_REFRESH
 
 		if(STATE_OTHER)
+			if(!computer.get_network_status(NET_FEATURE_RECORDS))
+				module.prog_state = STATE_MENU
+				to_chat(user, SPAN_WARNING("NETWORK ERROR - The network rejected access to account servers from your current connection."))
+				return TOPIC_REFRESH
+
 			if(href_list["select_account"])
 				var/account_login = href_list["select_account"]
 				for(var/datum/computer_file/data/account/A in network.get_accounts())

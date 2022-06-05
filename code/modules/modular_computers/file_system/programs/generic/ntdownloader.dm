@@ -8,7 +8,7 @@
 	unsendable = 1
 	undeletable = 1
 	size = 4
-	requires_network_feature = NETWORK_SOFTWAREDOWNLOAD
+	requires_network_feature = NET_FEATURE_SOFTWAREDOWNLOAD
 	available_on_network = 0
 	nanomodule_path = /datum/nano_module/program/computer_appdownloader/
 	ui_header = "downloader_finished.gif"

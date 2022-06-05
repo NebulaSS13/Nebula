@@ -42,7 +42,7 @@
 
 	. = get_default_access()
 	var/datum/extension/network_device/D = get_extension(src, /datum/extension/network_device)
-	var/datum/computer_network/network = D.get_network()
+	var/datum/computer_network/network = D.get_network(NET_FEATURE_ACCESS)
 	if(!network)
 		return
 
@@ -107,7 +107,7 @@
 	data["error"] = error
 	data += D.ui_data(user, ui_key)
 
-	var/datum/computer_network/network = D.get_network()
+	var/datum/computer_network/network = D.get_network(NET_FEATURE_ACCESS)
 	if(!network)
 		data["connected"] = FALSE
 		return

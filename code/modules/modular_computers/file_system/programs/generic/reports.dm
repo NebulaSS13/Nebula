@@ -54,7 +54,7 @@
 			prog_state = REPORTS_VIEW
 		if(REPORTS_DOWNLOAD)
 			close_report()
-			program.requires_network_feature = NETWORK_SOFTWAREDOWNLOAD
+			program.requires_network_feature = NET_FEATURE_SOFTWAREDOWNLOAD
 			prog_state = REPORTS_DOWNLOAD
 
 /datum/nano_module/program/reports/proc/close_report()

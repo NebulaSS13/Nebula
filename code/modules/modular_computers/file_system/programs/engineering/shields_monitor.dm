@@ -8,6 +8,8 @@
 	extended_desc = "This program connects to shield generators and monitors their statuses."
 	ui_header = "shield.gif"
 	network_destination = "shields monitoring system"
+	requires_network = 1
+	requires_network_feature = NET_FEATURE_SYSTEMCONTROL
 	size = 10
 	category = PROG_ENG
 

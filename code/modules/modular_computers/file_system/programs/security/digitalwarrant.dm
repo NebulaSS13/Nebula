@@ -9,6 +9,7 @@ var/global/list/all_warrants
 	program_key_state = "security_key"
 	program_menu_icon = "star"
 	requires_network = 1
+	requires_network_feature = NET_FEATURE_SECURITY
 	available_on_network = 1
 	read_access = list(access_security)
 	nanomodule_path = /datum/nano_module/program/digitalwarrant/
