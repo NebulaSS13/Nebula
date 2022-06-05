@@ -1,6 +1,0 @@
-author: tag if you want to specify another name or several people. -->
-delete-after: true
-changes:
-  - bugfix: Fixed the TEG icon
-  - maptweak: Added SM to engineering
-  - maptweak: Removed 2 of 3 solars
