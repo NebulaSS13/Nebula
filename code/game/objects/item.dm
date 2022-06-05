@@ -141,10 +141,11 @@
 			LAZYREMOVE(organ.implants, src)
 		M.drop_from_inventory(src)
 
+	// TODO: CONVERT TO USE OBSERVATIONS
 	var/obj/item/storage/storage = loc
 	if(istype(storage))
 		// some ui cleanup needs to be done
-		storage.on_item_pre_deletion(src) // must be done before deletion
+		storage.on_item_pre_deletion(src) // must be done before deletion // TODO: ADD PRE_DELETION OBSERVATION
 		. = ..()
 		storage.on_item_post_deletion(src) // must be done after deletion
 	else
