@@ -128,7 +128,7 @@
 	. = ..()
 
 /obj/machinery/alarm/Destroy()
-	events_repository.unregister(/decl/observ/name_set, src, get_area(src), .proc/change_area_name)
+	events_repository.unregister(/decl/observ/name_set, get_area(src), src, .proc/change_area_name)
 	unregister_radio(src, frequency)
 	return ..()
 
