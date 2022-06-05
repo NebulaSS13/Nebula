@@ -139,7 +139,7 @@
 					continue
 				var/datum/computer_file/report/crew_record/record = network.get_crew_record_by_name(account.fullname)
 				var/job = record ? record.get_job() : "Undefined"
-				var/domain = "@[network.network_id]" // TODO: Placeholder before cross-network email is a thing. 
+				var/domain = "@[network.network_id]"
 				all_accounts.Add(list(list(
 					"name" = account.fullname,
 					"job" = job,
@@ -341,7 +341,7 @@
 		message.stored_data = msg_body
 		message.source = current_account.login + "@[network.network_id]"
 		message.attachment = msg_attachment
-		if(!current_account.send_mail(msg_recipient, message, get_network()))
+		if(!network.send_email(current_account, msg_recipient, message))
 			error = "Error sending email: this address doesn't exist."
 			return 1
 		else

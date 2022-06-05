@@ -2602,7 +2602,6 @@
 #include "code\modules\modular_computers\networking\network_files.dm"
 #include "code\modules\modular_computers\networking\accounts\_network_accounts.dm"
 #include "code\modules\modular_computers\networking\accounts\account.dm"
-#include "code\modules\modular_computers\networking\accounts\email_message.dm"
 #include "code\modules\modular_computers\networking\accounts\id_card.dm"
 #include "code\modules\modular_computers\networking\device_types\_network_device.dm"
 #include "code\modules\modular_computers\networking\device_types\acl.dm"
