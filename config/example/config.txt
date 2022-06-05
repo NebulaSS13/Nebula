@@ -457,3 +457,6 @@ RADIATION_LOWER_LIMIT 0.15
 ## Whether or not to make localhost immune to throttling.
 ## Localhost will still be throttled internally; it just won't be affected by it.
 #NO_THROTTLE_LOCALHOST
+
+## Uncomment this to enable expanded alt interactions with objects.
+#EXPANDED_ALT_INTERACTIONS

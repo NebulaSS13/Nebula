@@ -27,16 +27,6 @@
 				overlay.overlays += I
 	. = ..()
 
-/obj/item/modular_computer/pda/wrist/AltClick(var/mob/user)
-	if(!CanPhysicallyInteract(user))
-		return
-	var/datum/extension/assembly/assembly = get_extension(src, /datum/extension/assembly)
-	var/obj/item/stock_parts/computer/card_slot/card_slot = assembly.get_component(PART_CARD)
-	if(card_slot?.stored_card)
-		card_slot.eject_id(user)
-	else
-		..()
-
 /obj/item/modular_computer/pda/wrist/attack_hand(var/mob/user)
 	if(loc == user)
 		if(user.incapacitated() || user.restrained())

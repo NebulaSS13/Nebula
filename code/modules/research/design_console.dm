@@ -13,6 +13,9 @@
 	. = ..()
 	set_extension(src, /datum/extension/network_device, initial_network_id, initial_network_key, NETWORK_CONNECTION_STRONG_WIRELESS)
 
+/obj/machinery/computer/design_console/get_alt_interactions(var/mob/user)
+	. = ..() | /decl/interaction_handler/remove_disk/console
+
 /obj/machinery/computer/design_console/modify_mapped_vars(map_hash)
 	..()
 	ADJUST_TAG_VAR(initial_network_id, map_hash)
@@ -43,11 +46,6 @@
 		disk = null
 		return TRUE
 	return FALSE
-
-/obj/machinery/computer/design_console/AltClick(mob/user)
-	if(disk)
-		eject_disk()
-	. = ..()
 
 /obj/machinery/computer/design_console/interface_interact(mob/user)
 	ui_interact(user)

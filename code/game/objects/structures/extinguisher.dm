@@ -12,6 +12,9 @@
 	. = ..()
 	has_extinguisher = new/obj/item/extinguisher(src)
 
+/obj/structure/extinguisher_cabinet/get_alt_interactions(var/mob/user)
+	. = ..() | /decl/interaction_handler/extinguisher_cabinet_open
+
 /obj/structure/extinguisher_cabinet/attackby(obj/item/O, mob/user)
 	if(isrobot(user))
 		return
@@ -58,11 +61,6 @@
 			icon_state = "extinguisher_full"
 	else
 		icon_state = "extinguisher_empty"
-
-/obj/structure/extinguisher_cabinet/AltClick(var/mob/user)
-	if(CanPhysicallyInteract(user))
-		opened = !opened
-		update_icon()
 
 /obj/structure/extinguisher_cabinet/do_simple_ranged_interaction(var/mob/user)
 	if(has_extinguisher)

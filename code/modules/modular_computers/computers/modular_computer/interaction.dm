@@ -10,6 +10,9 @@
 	else
 		verbs -= /obj/item/stock_parts/computer/card_slot/proc/verb_eject_id
 
+/obj/item/modular_computer/get_alt_interactions(var/mob/user)
+	. = ..() | /decl/interaction_handler/remove_id/modular_computer
+
 // Forcibly shut down the device. To be used when something bugs out and the UI is nonfunctional.
 /obj/item/modular_computer/verb/emergency_shutdown()
 	set name = "Forced Shutdown"

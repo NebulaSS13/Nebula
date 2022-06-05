@@ -55,6 +55,9 @@ var/global/list/closets = list()
 	if(!opened && mapload) // if closed and it's the map loading phase, relevant items at the crate's loc are put in the contents
 		store_contents()
 
+/obj/structure/closet/get_alt_interactions(var/mob/user)
+	. = ..() | /decl/interaction_handler/closet_lock_toggle
+
 /obj/structure/closet/proc/WillContain()
 	return null
 
@@ -463,12 +466,6 @@ var/global/list/closets = list()
 
 /obj/structure/closet/proc/CanToggleLock(var/mob/user, var/obj/item/card/id/id_card)
 	return allowed(user) || (istype(id_card) && check_access_list(id_card.GetAccess()))
-
-/obj/structure/closet/AltClick(var/mob/user)
-	if(!src.opened)
-		togglelock(user)
-	else
-		return ..()
 
 /obj/structure/closet/CtrlAltClick(var/mob/user)
 	verb_toggleopen()

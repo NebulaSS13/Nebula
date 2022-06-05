@@ -40,6 +40,9 @@
 	var/rolled_down = FALSE
 	var/rolled_sleeves = FALSE
 
+/obj/item/clothing/under/get_alt_interactions(var/mob/user)
+	. = ..() | /decl/interaction_handler/clothing_set_sensors
+
 /obj/item/clothing/under/Initialize()
 	. = ..()
 	if(check_state_in_icon("[BODYTYPE_HUMANOID]-[slot_w_uniform_str]-rolled", icon))
@@ -178,7 +181,3 @@
 /obj/item/clothing/under/Initialize()
 	sensor_mode = pick(0,1,2,3)
 	. = ..()
-
-/obj/item/clothing/under/AltClick(var/mob/user)
-	if(CanPhysicallyInteract(user))
-		set_sensors(user)

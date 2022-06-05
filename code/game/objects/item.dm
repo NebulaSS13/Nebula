@@ -981,3 +981,12 @@ modules/mob/living/carbon/human/life.dm if you die, you will be zoomed out.
 
 /obj/item/proc/gives_weather_protection()
 	return FALSE
+
+/obj/item/get_alt_interactions(var/mob/user)
+	. = ..()
+	if(config.expanded_alt_interactions)
+		. += list(
+			/decl/interaction_handler/pick_up,
+			/decl/interaction_handler/drop,
+			/decl/interaction_handler/use
+		)

@@ -18,9 +18,8 @@
 	one_hand_penalty = 2
 	bulk = 3
 
-/obj/item/gun/projectile/revolver/AltClick()
-	if(CanPhysicallyInteract(usr))
-		spin_cylinder()
+/obj/item/gun/projectile/revolver/get_alt_interactions(var/mob/user)
+	. = ..() | /decl/interaction_handler/revolver_spin_cylinder
 
 /obj/item/gun/projectile/revolver/verb/spin_cylinder()
 	set name = "Spin cylinder"

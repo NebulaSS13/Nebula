@@ -34,6 +34,9 @@
 		QDEL_NULL(storage_ui)
 	. = ..()
 
+/obj/item/storage/get_alt_interactions(mob/user)
+	. = ..() | /decl/interaction_handler/storage_open
+
 /obj/item/storage/check_mousedrop_adjacency(var/atom/over, var/mob/user)
 	. = (loc == user && istype(over, /obj/screen)) || ..()
 
@@ -49,21 +52,6 @@
 				user.equip_to_slot_if_possible(src, inv.slot_id)
 				return TRUE
 	. = ..()
-
-/obj/item/storage/AltClick(mob/user)
-	if(!canremove)
-		return
-
-	if(!Adjacent(user))
-		return
-
-	if(!(ishuman(user) || isrobot(user) || issmall(user)))
-		return
-	
-	if(user.incapacitated(INCAPACITATION_DISRUPTED))
-		return
-	
-	open(user)
 
 /obj/item/storage/proc/return_inv()
 
