@@ -1,3 +1,9 @@
+/obj/item/modular_computer/get_contained_external_atoms()
+	. = ..()
+	var/datum/extension/assembly/assembly = get_extension(src, /datum/extension/assembly)
+	if(assembly)
+		LAZYREMOVE(., assembly.parts)
+
 /obj/item/modular_computer/Process()
 	var/datum/extension/assembly/assembly = get_extension(src, /datum/extension/assembly)
 	if(assembly)
