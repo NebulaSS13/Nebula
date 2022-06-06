@@ -84,8 +84,10 @@
 	if(suit)
 		msg += "[G.He] [G.is] wearing [suit.get_examine_line()].\n"
 		//suit/armour storage
-		if(s_store && !skipsuitstorage)
-			msg += "[G.He] [G.is] carrying [s_store.get_examine_line()] on [G.his] [suit.name].\n"
+		if(!skipsuitstorage)
+			var/obj/item/stored = get_equipped_item(slot_s_store_str)
+			if(stored)
+				msg += "[G.He] [G.is] carrying [stored.get_examine_line()] on [G.his] [suit.name].\n"
 
 	//back
 	var/obj/item/back = get_equipped_item(slot_back_str)

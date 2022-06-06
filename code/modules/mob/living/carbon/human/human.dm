@@ -156,9 +156,12 @@
 		dat += "<BR><b>[capitalize(E.name)]:</b> <A href='?src=\ref[src];item=[bp]'>[inv_slot.holding?.name || "nothing"]</A>"
 
 	// Do they get an option to set internals?
-	if(istype(get_equipped_item(slot_wear_mask_str), /obj/item/clothing/mask) || istype(head, /obj/item/clothing/head/helmet/space))
-		if(istype(get_equipped_item(slot_back_str), /obj/item/tank) || istype(belt, /obj/item/tank) || istype(s_store, /obj/item/tank))
-			dat += "<BR><A href='?src=\ref[src];item=internals'>Toggle internals.</A>"
+	if(istype(get_equipped_item(slot_wear_mask_str), /obj/item/clothing/mask) || istype(get_equipped_item(slot_head_str), /obj/item/clothing/head/helmet/space))
+		for(var/slot in list(slot_back_str, slot_belt_str, slot_s_store_str))
+			var/obj/item/tank/tank = get_equipped_item(slot)
+			if(istype(tank))
+				dat += "<BR><A href='?src=\ref[src];item=internals'>Toggle internals.</A>"
+				break
 
 	var/obj/item/clothing/under/suit = get_equipped_item(slot_w_uniform_str)
 	// Other incidentals.

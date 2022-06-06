@@ -115,7 +115,7 @@ else if(##equipment_var) {\
 			helmet.canremove = 0
 
 	if(tank)
-		if(H.s_store) //In case someone finds a way.
+		if(H.get_equipped_item(slot_s_store_str)) //In case someone finds a way.
 			to_chat(M, "Alarmingly, the valve on your suit's installed tank fails to engage.")
 		else if (H.equip_to_slot_if_possible(tank, slot_s_store_str))
 			to_chat(M, "The valve on your suit's installed tank safely engages.")

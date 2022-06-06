@@ -89,8 +89,8 @@ This saves us from having to call add_fingerprint() any time something is put in
 	if(!.)
 		. = TRUE
 		if (W == _wear_suit)
-			if(s_store)
-				drop_from_inventory(s_store)
+			if(_s_store)
+				drop_from_inventory(_s_store)
 			_wear_suit = null
 			update_inv_wear_suit()
 		else if (W == _w_uniform)
@@ -148,8 +148,8 @@ This saves us from having to call add_fingerprint() any time something is put in
 		else if (W == _l_store)
 			_l_store = null
 			update_inv_pockets()
-		else if (W == s_store)
-			s_store = null
+		else if (W == _s_store)
+			_s_store = null
 			update_inv_s_store()
 		else if (W == _handcuffed)
 			_handcuffed = null
@@ -282,7 +282,7 @@ This saves us from having to call add_fingerprint() any time something is put in
 			W.equipped(src, slot)
 			update_inv_pockets(redraw_mob)
 		if(slot_s_store_str)
-			src.s_store = W
+			_s_store = W
 			W.equipped(src, slot)
 			update_inv_s_store(redraw_mob)
 		if(slot_in_backpack_str)
@@ -338,20 +338,20 @@ This saves us from having to call add_fingerprint() any time something is put in
 /mob/living/carbon/human/get_equipped_item(var/slot)
 
 	switch(slot)
+		if(slot_wear_id_str)    return wear_id
+		if(slot_glasses_str)    return glasses
+		if(slot_gloves_str)     return gloves
+		if(slot_head_str)       return head
+		if(slot_belt_str)       return belt
 		if(slot_back_str)       return _back
 		if(slot_handcuffed_str) return _handcuffed
 		if(slot_l_store_str)    return _l_store
 		if(slot_r_store_str)    return _r_store
 		if(slot_wear_mask_str)  return _wear_mask
-		if(slot_wear_id_str)    return wear_id
-		if(slot_glasses_str)    return glasses
-		if(slot_gloves_str)     return gloves
-		if(slot_head_str)       return head
 		if(slot_shoes_str)      return _shoes
-		if(slot_belt_str)       return belt
 		if(slot_wear_suit_str)  return _wear_suit
 		if(slot_w_uniform_str)  return _w_uniform
-		if(slot_s_store_str)    return s_store
+		if(slot_s_store_str)    return _s_store
 		if(slot_l_ear_str)      return _l_ear
 		if(slot_r_ear_str)      return _r_ear
 	. = ..()

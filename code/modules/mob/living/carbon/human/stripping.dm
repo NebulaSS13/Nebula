@@ -151,29 +151,25 @@
 // Set internals on or off.
 /mob/living/carbon/human/proc/toggle_internals(var/mob/living/user)
 	if(internal)
-		visible_message("<span class='danger'>\The [user] disables \the [src]'s internals!</span>")
+		visible_message(SPAN_NOTICE("\The [user] disables \the [src]'s internals!"))
 		internal.add_fingerprint(user)
 		set_internals(null)
 		return
-	else
-		// Check for airtight mask/helmet.
-		var/obj/item/mask = get_equipped_item(slot_wear_mask_str)
-		if(!(mask && mask.item_flags & ITEM_FLAG_AIRTIGHT))
-			if(!(head && head.item_flags & ITEM_FLAG_AIRTIGHT))
-				to_chat(user, "<span class='warning'>\The [src] does not have a suitable mask or helmet.</span>")
-				return
 
-		// Find an internal source.
-		var/obj/item/back = get_equipped_item(slot_back_str)
-		if(istype(back, /obj/item/tank))
-			set_internals(back)
-		else if(istype(s_store, /obj/item/tank))
-			set_internals(s_store)
-		else if(istype(belt, /obj/item/tank))
-			set_internals(belt)
-		else
-			to_chat(user, "<span class='warning'>You could not find a suitable tank!</span>")
+	// Check for airtight mask/helmet.
+	var/obj/item/mask = get_equipped_item(slot_wear_mask_str)
+	if(!(mask && mask.item_flags & ITEM_FLAG_AIRTIGHT))
+		if(!(head && head.item_flags & ITEM_FLAG_AIRTIGHT))
+			to_chat(user, SPAN_WARNING("\The [src] does not have a suitable mask or helmet."))
 			return
 
-		visible_message("<span class='warning'>\The [src] is now running on internals!</span>")
-		internal.add_fingerprint(user)
+	// Find an internal source.
+	for(var/slot in list(slot_back_str, slot_s_store_str, slot_belt_str))
+		var/obj/item/tank/tank = get_equipped_item(slot)
+		if(istype(tank))
+			set_internals(tank)
+			visible_message(SPAN_NOTICE("\The [src] is now running on internals!"))
+			internal.add_fingerprint(user)
+			return
+	
+	to_chat(user, SPAN_WARNING("You could not find a suitable tank!"))
