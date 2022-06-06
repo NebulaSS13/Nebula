@@ -37,9 +37,9 @@
 	var/obj/item/_head
 	var/obj/item/_belt
 	var/obj/item/_gloves
+	var/obj/item/_glasses
 	// END TODO
 
-	var/obj/item/glasses = null
 	var/obj/item/wear_id = null
 
 	var/icon/stand_icon = null

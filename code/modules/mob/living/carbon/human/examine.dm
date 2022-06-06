@@ -141,8 +141,10 @@
 		msg += "[G.He] [G.has] [mask.get_examine_line()] on [G.his] face.\n"
 
 	//eyes
-	if(glasses && !skipeyes)
-		msg += "[G.He] [G.has] [glasses.get_examine_line()] covering [G.his] eyes.\n"
+	if(!skipeyes)
+		var/obj/item/glasses = get_equipped_item(slot_glasses_str)
+		if(glasses)
+			msg += "[G.He] [G.has] [glasses.get_examine_line()] covering [G.his] eyes.\n"
 
 	if(!skipears)
 		var/obj/item/ear = get_equipped_item(slot_l_ear_str)
@@ -383,7 +385,7 @@
 	return
 
 /mob/living/carbon/human/getHUDsource(hudtype)
-	var/obj/item/clothing/glasses/G = glasses
+	var/obj/item/clothing/glasses/G = get_equipped_item(slot_glasses_str)
 	if(!istype(G))
 		return
 	if(G.hud_type & hudtype)

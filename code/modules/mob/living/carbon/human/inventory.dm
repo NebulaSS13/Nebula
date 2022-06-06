@@ -107,8 +107,8 @@ This saves us from having to call add_fingerprint() any time something is put in
 		else if (W == _gloves)
 			_gloves = null
 			update_inv_gloves()
-		else if (W == glasses)
-			glasses = null
+		else if (W == _glasses)
+			_glasses = null
 			update_inv_glasses()
 		else if (W == _head)
 			_head = null
@@ -236,7 +236,7 @@ This saves us from having to call add_fingerprint() any time something is put in
 			W.equipped(src, slot)
 			update_inv_ears(redraw_mob)
 		if(slot_glasses_str)
-			src.glasses = W
+			_glasses = W
 			W.equipped(src, slot)
 			update_inv_glasses(redraw_mob)
 		if(slot_gloves_str)
@@ -339,7 +339,7 @@ This saves us from having to call add_fingerprint() any time something is put in
 
 	switch(slot)
 		if(slot_wear_id_str)    return wear_id
-		if(slot_glasses_str)    return glasses
+		if(slot_glasses_str)    return _glasses
 		if(slot_gloves_str)     return _gloves
 		if(slot_belt_str)       return _belt
 		if(slot_head_str)       return _head

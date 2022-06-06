@@ -250,6 +250,7 @@ meteor_act
 				if(head)
 					head.add_blood(src)
 					update_inv_head(0)
+				var/obj/item/glasses = get_equipped_item(slot_glasses_str)
 				if(glasses && prob(33))
 					glasses.add_blood(src)
 					update_inv_glasses(0)

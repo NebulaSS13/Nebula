@@ -100,8 +100,9 @@
 		if(user_human && user_human.disabilities & NEARSIGHTED)
 			var/equipped = user_human.equip_to_slot_or_del(new /obj/item/clothing/glasses/prescription(user_human), slot_glasses_str)
 			if(equipped)
-				var/obj/item/clothing/glasses/G = user_human.glasses
-				G.prescription = 7
+				var/obj/item/clothing/glasses/G = user_human.get_equipped_item(slot_glasses_str)
+				if(istype(G))
+					G.prescription = 7
 
 		BITSET(character.hud_updateflag, ID_HUD)
 		BITSET(character.hud_updateflag, IMPLOYAL_HUD)
