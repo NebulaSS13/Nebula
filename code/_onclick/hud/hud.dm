@@ -37,18 +37,6 @@
 	var/obj/screen/action_button/hide_toggle/hide_actions_toggle
 	var/action_buttons_hidden = FALSE
 
-	var/static/list/hidden_inventory_slots = list(
-		slot_head_str,
-		slot_shoes_str,
-		slot_l_ear_str,
-		slot_r_ear_str,
-		slot_gloves_str,
-		slot_glasses_str,
-		slot_w_uniform_str,
-		slot_wear_suit_str,
-		slot_wear_mask_str
-	)
-
 /datum/hud/New(mob/owner)
 	mymob = owner
 	instantiate()
@@ -85,25 +73,37 @@
 	persistant_inventory_update()
 
 /datum/hud/proc/hidden_inventory_update()
-	if(!mymob) return
-	if(ishuman(mymob))
-		var/mob/living/carbon/human/H = mymob
-		for(var/gear_slot in H.species.hud.gear)
-			var/list/hud_data = H.species.hud.gear[gear_slot]
-			var/obj/item/gear = H.get_equipped_item(hud_data["slot"])
-			if(gear)
-				gear.screen_loc = (inventory_shown && hud_shown) ? hud_data["loc"] : null
+	var/decl/species/species = mymob?.get_species()
+	if(species?.hud)
+		refresh_inventory_slots(species.hud.hidden_slots, (inventory_shown && hud_shown))
 
 /datum/hud/proc/persistant_inventory_update()
-	if(!mymob)
-		return
-	if(ishuman(mymob))
-		var/mob/living/carbon/human/H = mymob
-		for(var/gear_slot in H.species.hud.gear)
-			var/list/hud_data = H.species.hud.gear[gear_slot]
-			var/obj/item/gear = H.get_equipped_item(hud_data["slot"])
-			if(istype(gear))
-				gear.screen_loc = hud_shown ? hud_data["loc"] : null
+	var/decl/species/species = mymob?.get_species()
+	if(species?.hud)
+		refresh_inventory_slots(species.hud.persistent_slots, hud_shown)
+
+/datum/hud/proc/refresh_inventory_slots(var/list/checking_slots, var/show_hud)
+
+	var/decl/species/species = mymob?.get_species()
+	for(var/hud_slot in checking_slots)
+
+		// Check if we're even wearing anything in that slot.
+		var/obj/item/gear = mymob.get_equipped_item(checking_slots[hud_slot])
+		if(!istype(gear))
+			continue
+
+		// We're not showing anything, hide it.
+		if(!show_hud)
+			gear.screen_loc = null
+			continue
+
+		var/list/hud_data = species.hud.gear[hud_slot]
+		if(!("loc" in hud_data))
+			gear.screen_loc = null
+			continue
+
+		// Set the loc.
+		gear.screen_loc = hud_data["loc"]
 
 /datum/hud/proc/instantiate()
 	if(!ismob(mymob)) return 0

@@ -34,7 +34,7 @@
 	var/obj/item/back = H.get_equipped_item(slot_back_str)
 	if(!istype(back))
 		return
-	var/decl/cardborg_appearance/ca = appearances[back]
+	var/decl/cardborg_appearance/ca = appearances[back.type]
 	if(!ca) ca = appearances[/obj/item/storage/backpack]
 
 	var/image/I = image(icon = ca.icon, icon_state = ca.icon_state, loc = H)

@@ -88,8 +88,12 @@
 /mob/living/get_equipped_item(var/slot)
 	. = ..()
 	if(!.)
-		var/datum/inventory_slot/inv_slot = LAZYACCESS(held_item_slots, slot)
-		. = inv_slot?.holding
+		var/datum/inventory_slot/inv_slot
+		if(LAZYLEN(inventory_slots))
+			inv_slot = inventory_slots[slot]
+		else if(LAZYLEN(held_item_slots))
+			inv_slot = held_item_slots[slot]
+		return inv_slot?.holding
 
 /mob/living/drop_from_hand(var/slot, var/atom/Target)
 	var/datum/inventory_slot/inv_slot = LAZYACCESS(held_item_slots, slot)
@@ -108,7 +112,3 @@
 				break
 		if(.)
 			update_inv_hands()
-
-/mob/living/get_equipped_item(slot)
-	var/datum/inventory_slot/inv_slot = LAZYACCESS(inventory_slots, slot)
-	return inv_slot?.holding || ..()

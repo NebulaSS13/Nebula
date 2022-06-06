@@ -101,15 +101,16 @@ var/global/list/outfits_decls_by_type_
 	pre_equip(H)
 
 	//Start with uniform,suit,backpack for additional slots
-	var/obj/item/uniform = H.get_equipped_item(slot_w_uniform_str)
 	if(uniform)
 		H.equip_to_slot_or_del(new uniform(H),slot_w_uniform_str)
 		if(!H.get_equipped_item(slot_w_uniform_str))
 			H.species.equip_default_fallback_uniform(H)
-		if(holster)
+
+		var/obj/item/equip_uniform = H.get_equipped_item(slot_w_uniform_str)
+		if(holster && equip_uniform)
 			var/obj/item/clothing/accessory/equip_holster = new holster
-			uniform.attackby(equip_holster, H)
-			if(equip_holster.loc != uniform && !QDELETED(equip_holster))
+			equip_uniform.attackby(equip_holster, H)
+			if(equip_holster.loc != equip_uniform && !QDELETED(equip_holster))
 				qdel(equip_holster)
 
 	if(suit)
