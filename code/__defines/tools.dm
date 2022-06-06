@@ -8,6 +8,7 @@
 #define TOOL_HATCHET     /decl/tool_archetype/hatchet
 #define TOOL_WRENCH      /decl/tool_archetype/wrench
 #define TOOL_SHOVEL      /decl/tool_archetype/shovel
+#define TOOL_PEN         /decl/tool_archetype/pen
 
 // Surgical tools.
 #define TOOL_SCALPEL       /decl/tool_archetype/scalpel
@@ -46,6 +47,7 @@
 #define IS_CROWBAR(A)     IS_TOOL(A, TOOL_CROWBAR)
 #define IS_HATCHET(A)     IS_TOOL(A, TOOL_HATCHET)
 #define IS_SHOVEL(A)      IS_TOOL(A, TOOL_SHOVEL)
+#define IS_PEN(A)         IS_TOOL(A, TOOL_PEN)
 
 // Structure interaction flags
 #define TOOL_INTERACTION_ANCHOR      BITFLAG(0)
@@ -60,3 +62,13 @@
 #define TOOL_CODEX_WELDER       "welder (tool)"
 #define TOOL_CODEX_CROWBAR      "crowbar (tool)"
 #define TOOL_CODEX_MULTITOOL    "multitool (tool)"
+
+// Tool properties for tool specific stuff
+#define TOOL_PROP_COLOR_NAME    "color_name"     //Property containing a color name for some tools. Namely the pen tool.
+#define TOOL_PROP_COLOR         "color"          //Property for specifying a color, for something like a pen.
+#define TOOL_PROP_USES          "uses_left"      //Property for things that have a fixed amount of uses. -1 is unlimited.
+
+//Pen specific stuff
+#define TOOL_PROP_PEN_FLAG        "pen_flag"     //Property for pens to specify additional properties about themselves
+#define TOOL_PROP_PEN_SIG         "signature"    //Property for pens specifically. Returns a stored forged signature if there's one.
+#define TOOL_PROP_PEN_SHADE_COLOR "shade_color"  //Property for pens returns the shade color if applicable

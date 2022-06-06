@@ -187,6 +187,10 @@
 	flashlight_range = 2
 	light_wedge = LIGHT_OMNI
 
+/obj/item/flashlight/pen/Initialize()
+	set_extension(src, /datum/extension/tool, list(TOOL_PEN = TOOL_QUALITY_DEFAULT), list(TOOL_PEN = list(TOOL_PROP_COLOR = "black", TOOL_PROP_COLOR_NAME = "black")))
+	. = ..()
+
 /obj/item/flashlight/maglight
 	name = "maglight"
 	desc = "A very, very heavy duty flashlight."
