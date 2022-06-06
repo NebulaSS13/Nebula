@@ -152,7 +152,7 @@
 		return
 
 	var/damage = 20
-	var/obj/item/clothing/hat = attacker.head
+	var/obj/item/clothing/hat = attacker.get_equipped_item(slot_head_str)
 	var/damage_flags = 0
 	if(istype(hat))
 		damage += hat.force * 3

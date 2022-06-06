@@ -39,23 +39,17 @@
 			if(!do_mob(user, target, time))
 				return
 
-			if(istype(target, /mob/living/carbon/human))
-				var/mob/living/carbon/human/victim = target
-
-				var/obj/item/safe_thing = null
-				var/obj/item/mask = victim.get_equipped_item(slot_wear_mask_str)
-				if(mask && (mask.body_parts_covered & SLOT_EYES))
-					safe_thing = mask
-				if(victim.head)
-					if (victim.head.body_parts_covered & SLOT_EYES)
-						safe_thing = victim.head
-				if(victim.glasses)
-					if (victim.glasses.body_parts_covered & SLOT_EYES)
-						safe_thing = victim.glasses
-				if(safe_thing)
-					trans = reagents.splash(safe_thing, amount_per_transfer_from_this, max_spill=30)
-					user.visible_message(SPAN_DANGER("\The [user] tries to squirt something into [target]'s eyes, but fails!"), SPAN_DANGER("You squirt [trans] unit\s at \the [target]'s eyes, but fail!"))
-					return
+			if(isliving(target))
+				var/mob/living/victim = target
+				for(var/slot in global.standard_headgear_slots)
+					var/obj/item/safe_thing = victim.get_equipped_item(slot)
+					if(safe_thing && (safe_thing.body_parts_covered & SLOT_EYES))
+						trans = reagents.splash(safe_thing, amount_per_transfer_from_this, max_spill=30)
+						user.visible_message(
+							SPAN_DANGER("\The [user] tries to squirt something into [target]'s eyes, but fails!"), 
+							SPAN_DANGER("You squirt [trans] unit\s at \the [target]'s eyes, but fail!")
+						)
+						return
 
 			var/mob/living/M = target
 			var/contained = REAGENT_LIST(src)

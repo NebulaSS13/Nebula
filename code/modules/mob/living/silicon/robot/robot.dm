@@ -874,8 +874,9 @@
 					else if(istype(A, /mob/living/carbon/human))
 						var/mob/living/carbon/human/cleaned_human = A
 						if(cleaned_human.lying)
-							if(cleaned_human.head)
-								cleaned_human.head.clean_blood()
+							var/obj/item/head = cleaned_human.get_equipped_item(slot_head_str)
+							if(head)
+								head.clean_blood()
 							var/obj/item/suit = cleaned_human.get_equipped_item(slot_wear_suit_str)
 							if(suit)
 								suit.clean_blood()

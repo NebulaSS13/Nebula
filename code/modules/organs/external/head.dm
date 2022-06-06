@@ -134,7 +134,8 @@
 
 	if(owner.h_style)
 		var/decl/sprite_accessory/hair/hair_style = GET_DECL(owner.h_style)
-		if(owner.head && (owner.head.flags_inv & BLOCKHEADHAIR))
+		var/obj/item/head = owner.get_equipped_item(slot_head_str)
+		if(head && (head.flags_inv & BLOCKHEADHAIR))
 			if(!(hair_style.flags & VERY_SHORT))
 				hair_style = GET_DECL(/decl/sprite_accessory/hair/short)
 		if(hair_style)

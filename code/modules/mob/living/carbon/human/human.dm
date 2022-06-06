@@ -236,6 +236,7 @@
 /mob/living/carbon/human/proc/get_face_name()
 	var/obj/item/organ/external/H = get_organ(BP_HEAD)
 	var/obj/item/clothing/mask/mask = get_equipped_item(slot_wear_mask_str)
+	var/obj/item/head = get_equipped_item(slot_head_str)
 	if(!H || (H.status & ORGAN_DISFIGURED) || H.is_stump() || !real_name || is_husked() || (mask && (mask.flags_inv&HIDEFACE)) || (head && (head.flags_inv&HIDEFACE)))	//Face is unrecognizeable, use ID if able
 		if(istype(mask) && mask.visible_name)
 			return mask.visible_name
@@ -1274,7 +1275,11 @@
 	return list("Sapient Race", TRUE)
 
 /mob/living/carbon/human/breathing_hole_covered()
-	. = ..() || (head && (head.item_flags & ITEM_FLAG_AIRTIGHT))
+	. = ..()
+	if(!.)
+		var/obj/item/head = get_equipped_item(slot_head_str)
+		if(head && (head.item_flags & ITEM_FLAG_AIRTIGHT))
+			return TRUE
 
 /mob/living/carbon/human/set_internals_to_best_available_tank(var/breathes_gas = /decl/material/gas/oxygen, var/list/poison_gas = list(/decl/material/gas/chlorine))
 	. = ..(species.breath_type, species.poison_types)

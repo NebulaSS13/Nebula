@@ -107,8 +107,9 @@ else if(##equipment_var) {\
 			boots.canremove = 0
 
 	if(helmet)
-		if(H.head)
-			to_chat(M, "You are unable to deploy your suit's helmet as \the [H.head] is in the way.")
+		var/obj/item/head = H.get_equipped_item(slot_head_str)
+		if(head)
+			to_chat(M, "You are unable to deploy your suit's helmet as \the [head] is in the way.")
 		else if (H.equip_to_slot_if_possible(helmet, slot_head_str))
 			to_chat(M, "Your suit's helmet deploys with a hiss.")
 			playsound(loc, helmet_deploy_sound, 30)
@@ -131,7 +132,7 @@ else if(##equipment_var) {\
 		helmet.canremove = 1
 		H = helmet.loc
 		if(istype(H))
-			if(helmet && H.head == helmet)
+			if(helmet && H.get_equipped_item(slot_head_str) == helmet)
 				H.drop_from_inventory(helmet, src)
 
 	if(boots)
@@ -163,14 +164,15 @@ else if(##equipment_var) {\
 	if(H.incapacitated()) return
 	if(H.get_equipped_item(slot_wear_suit_str) != src) return
 
-	if(H.head == helmet)
+	var/obj/item/head = H.get_equipped_item(slot_head_str)
+	if(head == helmet)
 		to_chat(H, "<span class='notice'>You retract your suit helmet.</span>")
 		helmet.canremove = 1
 		playsound(loc, helmet_retract_sound, 30)
 		H.drop_from_inventory(helmet, src)
 	else
-		if(H.head)
-			to_chat(H, "<span class='danger'>You cannot deploy your helmet while wearing \the [H.head].</span>")
+		if(head)
+			to_chat(H, "<span class='danger'>You cannot deploy your helmet while wearing \the [head].</span>")
 			return
 		if(H.equip_to_slot_if_possible(helmet, slot_head_str))
 			helmet.pickup(H)

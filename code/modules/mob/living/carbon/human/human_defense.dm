@@ -246,6 +246,7 @@ meteor_act
 				if(mask)
 					mask.add_blood(src)
 					update_inv_wear_mask(0)
+				var/obj/item/head = get_equipped_item(slot_head_str)
 				if(head)
 					head.add_blood(src)
 					update_inv_head(0)

@@ -52,13 +52,19 @@
 	equipment_overlays.Cut()
 
 	if (!client || client.eye == src || client.eye == src.loc) // !client is so the unit tests function
-		if(istype(src.head, /obj/item/clothing/head))
+
+		var/obj/item/clothing/head/head = get_equipped_item(slot_head_str)
+		if(istype(head))
 			add_clothing_protection(head)
-		if(istype(src.glasses, /obj/item/clothing/glasses))
+
+		var/obj/item/clothing/glasses/glasses = get_equipped_item(slot_glasses_str)
+		if(istype(glasses))
 			process_glasses(glasses)
-		var/obj/item/mask = get_equipped_item(slot_wear_mask_str)
-		if(istype(mask, /obj/item/clothing/mask))
+
+		var/obj/item/clothing/mask/mask = get_equipped_item(slot_wear_mask_str)
+		if(istype(mask))
 			add_clothing_protection(mask)
+
 		var/obj/item/rig/rig = get_equipped_item(slot_back_str)
 		if(rig)
 			process_rig(rig)
@@ -83,6 +89,7 @@
 			G.process_hud(src)
 
 /mob/living/carbon/human/proc/process_rig(var/obj/item/rig/O)
+	var/obj/item/head = get_equipped_item(slot_head_str)
 	if(O.visor && O.visor.active && O.visor.vision && O.visor.vision.glasses && (!O.helmet || (head && O.helmet == head)))
 		process_glasses(O.visor.vision.glasses)
 

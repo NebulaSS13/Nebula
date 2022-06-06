@@ -22,3 +22,8 @@ var/global/list/pocket_slots = list(
 		slot_l_store_str,
 		slot_r_store_str
 )
+
+var/global/list/airtight_slots = list(\
+	slot_wear_mask_str,
+	slot_head_str
+)

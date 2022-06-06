@@ -24,6 +24,8 @@
 		skipjumpsuit = suit.flags_inv & HIDEJUMPSUIT
 		skipshoes = suit.flags_inv & HIDESHOES
 
+
+	var/obj/item/head = get_equipped_item(slot_head_str)
 	if(head)
 		skipmask = head.flags_inv & HIDEMASK
 		skipeyes = head.flags_inv & HIDEEYES

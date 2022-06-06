@@ -286,9 +286,18 @@
 		if(istype(rig) && !rig.offline && (rig.air_supply && internal == rig.air_supply))
 			rig_supply = rig.air_supply
 
-		var/obj/item/mask = get_equipped_item(slot_wear_mask_str)
-		if (!rig_supply && (!contents.Find(internal) || !((mask && (mask.item_flags & ITEM_FLAG_AIRTIGHT)) || (head && (head.item_flags & ITEM_FLAG_AIRTIGHT)))))
-			set_internals(null)
+		if(!rig_supply)
+			if(!contents.Find(internal))
+				set_internals(null)
+			else
+				var/found_mask = FALSE
+				for(var/slot in global.airtight_slots)
+					var/obj/item/gear = get_equipped_item(slot)
+					if(gear && (gear.item_flags & ITEM_FLAG_AIRTIGHT))
+						found_mask = TRUE
+						break
+				if(!found_mask)
+					set_internals(null)
 
 		if(internal)
 			return internal.remove_air_volume(volume_needed)

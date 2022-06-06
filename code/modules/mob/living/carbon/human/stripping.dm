@@ -157,11 +157,15 @@
 		return
 
 	// Check for airtight mask/helmet.
-	var/obj/item/mask = get_equipped_item(slot_wear_mask_str)
-	if(!(mask && mask.item_flags & ITEM_FLAG_AIRTIGHT))
-		if(!(head && head.item_flags & ITEM_FLAG_AIRTIGHT))
-			to_chat(user, SPAN_WARNING("\The [src] does not have a suitable mask or helmet."))
-			return
+	var/found_mask = FALSE
+	for(var/slot in global.airtight_slots)
+		var/obj/item/gear = get_equipped_item(slot)
+		if(gear && (gear.item_flags & ITEM_FLAG_AIRTIGHT))
+			found_mask = TRUE
+			break
+	if(!found_mask)
+		to_chat(user, SPAN_WARNING("\The [src] does not have a suitable mask or helmet."))
+		return
 
 	// Find an internal source.
 	for(var/slot in list(slot_back_str, slot_s_store_str, slot_belt_str))

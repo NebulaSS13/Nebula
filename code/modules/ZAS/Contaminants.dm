@@ -123,6 +123,7 @@ var/global/image/contamination_overlay = image('icons/effects/contamination.dmi'
 
 /mob/living/carbon/human/proc/contaminant_head_protected()
 	//Checks if the head is adequately sealed.
+	var/obj/item/head = get_equipped_item(slot_head_str)
 	if(head)
 		if(vsc.contaminant_control.STRICT_PROTECTION_ONLY)
 			if(head.item_flags & ITEM_FLAG_NO_CONTAMINATION)

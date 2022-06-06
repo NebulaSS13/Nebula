@@ -110,8 +110,8 @@ This saves us from having to call add_fingerprint() any time something is put in
 		else if (W == glasses)
 			glasses = null
 			update_inv_glasses()
-		else if (W == head)
-			head = null
+		else if (W == _head)
+			_head = null
 			if(istype(W, /obj/item))
 				var/obj/item/I = W
 				if(I.flags_inv & (HIDEMASK|BLOCKHAIR|BLOCKHEADHAIR))
@@ -244,8 +244,8 @@ This saves us from having to call add_fingerprint() any time something is put in
 			W.equipped(src, slot)
 			update_inv_gloves(redraw_mob)
 		if(slot_head_str)
-			src.head = W
-			if(head.flags_inv & (BLOCKHAIR|BLOCKHEADHAIR|HIDEMASK))
+			_head = W
+			if(_head.flags_inv & (BLOCKHAIR|BLOCKHEADHAIR|HIDEMASK))
 				update_hair(redraw_mob)	//rebuild hair
 				update_inv_ears(0)
 				update_inv_wear_mask(0)
@@ -341,8 +341,8 @@ This saves us from having to call add_fingerprint() any time something is put in
 		if(slot_wear_id_str)    return wear_id
 		if(slot_glasses_str)    return glasses
 		if(slot_gloves_str)     return gloves
-		if(slot_head_str)       return head
 		if(slot_belt_str)       return belt
+		if(slot_head_str)       return _head
 		if(slot_back_str)       return _back
 		if(slot_handcuffed_str) return _handcuffed
 		if(slot_l_store_str)    return _l_store

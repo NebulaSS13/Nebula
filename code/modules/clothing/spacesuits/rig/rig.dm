@@ -491,13 +491,13 @@
 		data["valveOpen"] = (wearer.internal == air_supply)
 
 		if(!wearer.internal || wearer.internal == air_supply)	// if they have no active internals or if tank is current internal
-			var/obj/item/mask = wearer.get_equipped_item(slot_wear_mask_str)
-			if(mask && (mask.item_flags & ITEM_FLAG_AIRTIGHT))// mask
-				data["maskConnected"] = 1
-			else if(wearer.head && (wearer.head.item_flags & ITEM_FLAG_AIRTIGHT)) // Make sure they have a helmet and its airtight
-				data["maskConnected"] = 1
-			else
-				data["maskConnected"] = 0
+			var/found_mask = 0
+			for(var/slot in global.airtight_slots)
+				var/obj/item/gear = wearer.get_equipped_item(slot)
+				if(gear && (gear.item_flags & ITEM_FLAG_AIRTIGHT))
+					found_mask = 1
+					break
+			data["maskConnected"] = found_mask
 
 	data["tankPressure"] = round(air_supply && air_supply.air_contents && air_supply.air_contents.return_pressure() ? air_supply.air_contents.return_pressure() : 0)
 	data["releasePressure"] = round(air_supply && air_supply.distribute_pressure ? air_supply.distribute_pressure : 0)
