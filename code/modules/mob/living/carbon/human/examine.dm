@@ -116,6 +116,7 @@
 		msg += "[G.He] [G.has] [belt.get_examine_line()] about [G.his] waist.\n"
 
 	//shoes
+	var/obj/item/shoes = get_equipped_item(slot_shoes_str)
 	if(shoes && !skipshoes)
 		msg += "[G.He] [G.is] wearing [shoes.get_examine_line()] on [G.his] feet.\n"
 	else

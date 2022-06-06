@@ -121,6 +121,7 @@
 /mob/living/carbon/human/Check_Shoegrip()
 	if(species.check_no_slip(src))
 		return 1
+	var/obj/item/shoes = get_equipped_item(slot_shoes_str)
 	if(shoes && (shoes.item_flags & ITEM_FLAG_NOSLIP) && istype(shoes, /obj/item/clothing/shoes/magboots))  //magboots + dense_object = no floating
 		return 1
 	return 0

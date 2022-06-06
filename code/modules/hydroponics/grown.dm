@@ -132,7 +132,8 @@
 
 			if(istype(M,/mob/living/carbon/human))
 				var/mob/living/carbon/human/H = M
-				if(H.shoes && H.shoes.item_flags & ITEM_FLAG_NOSLIP)
+				var/obj/item/shoes = H.get_equipped_item(slot_shoes_str)
+				if(shoes && shoes.item_flags & ITEM_FLAG_NOSLIP)
 					return
 
 			to_chat(M, SPAN_DANGER("You slipped on \the [src]!"))

@@ -50,7 +50,7 @@
 	if(check_state_in_icon(new_state, icon))
 		icon_state = new_state
 	update_clothing_icon()
-	
+
 /obj/item/clothing/shoes/magboots/adjust_mob_overlay(var/mob/living/user_mob, var/bodytype,  var/image/overlay, var/slot, var/bodypart)
 	if(overlay)
 		var/new_state = overlay.icon_state
@@ -63,10 +63,10 @@
 /obj/item/clothing/shoes/magboots/mob_can_equip(mob/M, slot, disable_warning = 0, force = 0)
 	var/obj/item/clothing/shoes/check_shoes
 	var/mob/living/carbon/human/H = M
-	if(slot == slot_shoes_str && istype(H) && H.shoes)
-		check_shoes = H.shoes
+	if(slot == slot_shoes_str && istype(H))
+		check_shoes = H.get_equipped_item(slot_shoes_str)
 		if(!istype(check_shoes) || !check_shoes.can_fit_under_magboots || !H.unEquip(check_shoes, src))
-			to_chat(M, SPAN_WARNING("You are unable to wear \the [src] as \the [H.shoes] are in the way."))
+			to_chat(M, SPAN_WARNING("You are unable to wear \the [src] as \the [check_shoes] are in the way."))
 			return FALSE
 	. = ..()
 	if(check_shoes)
@@ -88,9 +88,11 @@
 		M.update_floating()
 	if(covering_shoes)
 		var/mob/living/carbon/human/H = M
-		if(istype(H) && H.shoes != src)
+		var/obj/item/shoes = H.get_equipped_item(slot_shoes_str)
+		if(istype(H) && shoes != src)
 			H.equip_to_slot_if_possible(covering_shoes, slot_shoes_str, disable_warning = TRUE)
-		if(!istype(H) || (H.shoes != src && H.shoes != covering_shoes))
+		shoes = H.get_equipped_item(slot_shoes_str)
+		if(!istype(H) || (shoes != src && shoes != covering_shoes))
 			covering_shoes.dropInto(get_turf(src))
 			covering_shoes = null
 
@@ -100,7 +102,7 @@
 	if(covering_shoes)
 		if(istype(H))
 			H.equip_to_slot_if_possible(covering_shoes, slot_shoes_str, disable_warning = TRUE)
-		if(!istype(H) || H.shoes != covering_shoes)
+		if(!istype(H) || H.get_equipped_item(slot_shoes_str) != covering_shoes)
 			covering_shoes.dropInto(loc)
 		covering_shoes = null
 	user.update_floating()

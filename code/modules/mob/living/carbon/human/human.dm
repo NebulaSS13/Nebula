@@ -853,8 +853,11 @@
 	. = istype(eyes) && eyes.is_usable()
 
 /mob/living/carbon/human/slip(var/slipped_on, stun_duration = 8)
-	if((species.check_no_slip(src)) || (shoes && (shoes.item_flags & ITEM_FLAG_NOSLIP)))
-		return 0
+	if(species.check_no_slip(src))
+		return FALSE
+	var/obj/item/shoes = get_equipped_item(slot_shoes_str)
+	if(shoes && (shoes.item_flags & ITEM_FLAG_NOSLIP))
+		return FALSE
 	return !!(..(slipped_on,stun_duration))
 
 

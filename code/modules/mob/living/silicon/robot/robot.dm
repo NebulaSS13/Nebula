@@ -881,8 +881,9 @@
 								suit.clean_blood()
 							else if(cleaned_human.w_uniform)
 								cleaned_human.w_uniform.clean_blood()
-							if(cleaned_human.shoes)
-								cleaned_human.shoes.clean_blood()
+							var/obj/item/shoes = cleaned_human.get_equipped_item(slot_shoes_str)
+							if(shoes)
+								shoes.clean_blood()
 							cleaned_human.clean_blood(1)
 							to_chat(cleaned_human, "<span class='warning'>[src] cleans your face!</span>")
 		return

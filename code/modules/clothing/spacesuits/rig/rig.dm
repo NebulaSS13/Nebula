@@ -189,11 +189,11 @@
 /obj/item/rig/proc/suit_is_deployed()
 	if(!istype(wearer) || src.loc != wearer || wearer.get_equipped_item(slot_back_str) != src)
 		return 0
-	if(helmet && wearer.head != helmet)
+	if(helmet && wearer.get_equipped_item(slot_head_str) != helmet)
 		return 0
-	if(gloves && wearer.gloves != gloves)
+	if(gloves && wearer.get_equipped_item(slot_gloves_str) != gloves)
 		return 0
-	if(boots && wearer.shoes != boots)
+	if(boots && wearer.get_equipped_item(slot_shoes_str) != boots)
 		return 0
 	if(chest && wearer.get_equipped_item(slot_wear_suit_str) != chest)
 		return 0
@@ -249,17 +249,17 @@
 		else
 			var/list/data_to_iterate = list(
 				list(
-					wearer.shoes,
+					wearer.get_equipped_item(slot_shoes_str),
 					boots,
 					"boots"
 				),
 				list(
-					wearer.gloves,
+					wearer.get_equipped_item(slot_gloves_str),
 					gloves,
 					"gloves"
 				),
 				list(
-					wearer.head,
+					wearer.get_equipped_item(slot_head_str),
 					helmet,
 					"helmet"
 				),
@@ -691,19 +691,17 @@
 		if("helmet")
 			equip_to = slot_head_str
 			use_obj = helmet
-			check_slot = wearer.head
 		if("gauntlets")
 			equip_to = slot_gloves_str
 			use_obj = gloves
-			check_slot = wearer.gloves
 		if("boots")
 			equip_to = slot_shoes_str
 			use_obj = boots
-			check_slot = wearer.shoes
 		if("chest")
 			equip_to = slot_wear_suit_str
 			use_obj = chest
-			check_slot = wearer.get_equipped_item(slot_wear_suit_str)
+	if(equip_to)
+		check_slot = wearer.get_equipped_item(equip_to)
 
 	if(use_obj)
 		if(check_slot == use_obj && deploy_mode != ONLY_DEPLOY)

@@ -257,7 +257,7 @@ var/global/list/sparring_attack_cache = list()
 	. = ..()
 
 /decl/natural_attack/kick/get_unarmed_damage(var/mob/living/carbon/human/user)
-	var/obj/item/clothing/shoes = user.shoes
+	var/obj/item/clothing/shoes = user.get_equipped_item(slot_shoes_str)
 	if(!istype(shoes))
 		return damage
 	return damage + (shoes ? shoes.force : 0)
@@ -300,7 +300,7 @@ var/global/list/sparring_attack_cache = list()
 		return 0
 
 /decl/natural_attack/stomp/get_unarmed_damage(var/mob/living/carbon/human/user)
-	var/obj/item/clothing/shoes = user.shoes
+	var/obj/item/clothing/shoes = user.get_equipped_item(slot_shoes_str)
 	return damage + (shoes ? shoes.force : 0)
 
 /decl/natural_attack/stomp/show_attack(var/mob/living/carbon/human/user, var/mob/living/carbon/human/target, var/zone, var/attack_damage)
@@ -309,7 +309,7 @@ var/global/list/sparring_attack_cache = list()
 	if(!affecting)
 		return ..()
 
-	var/obj/item/clothing/shoes = user.shoes
+	var/obj/item/clothing/shoes = user.get_equipped_item(slot_shoes_str)
 	attack_damage = Clamp(attack_damage, 1, 5)
 
 	var/shoe_text = shoes ? copytext(shoes.name, 1, -1) : "foot"

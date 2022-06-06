@@ -112,11 +112,12 @@
 			if(H.species.siemens_coefficient<0.5 || (H.species.species_flags & (SPECIES_FLAG_NO_EMBED|SPECIES_FLAG_NO_MINOR_CUT))) //Thick skin.
 				return
 
+			var/obj/item/shoes = H.get_equipped_item(slot_shoes_str)
 			var/obj/item/suit = H.get_equipped_item(slot_wear_suit_str)
-			if( H.shoes || ( suit && (suit.body_parts_covered & SLOT_FEET) ) )
+			if(shoes || (suit && (suit.body_parts_covered & SLOT_FEET)))
 				return
 
-			to_chat(M, "<span class='danger'>You step on \the [src]!</span>")
+			to_chat(M, SPAN_DANGER("You step on \the [src]!"))
 
 			var/list/check = list(BP_L_FOOT, BP_R_FOOT)
 			while(check.len)

@@ -71,7 +71,7 @@
 	randomize_clothing()
 	. = ..()
 	if(. && H)
-		if(!H.shoes)
+		if(!H.get_equipped_item(slot_shoes_str))
 			H.equip_to_slot_or_del(new /obj/item/clothing/shoes/sandal(H), slot_shoes_str)
 
 		var/new_gun = pick(raider_guns)

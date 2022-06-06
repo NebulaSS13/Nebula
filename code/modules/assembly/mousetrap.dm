@@ -32,7 +32,7 @@
 		var/mob/living/carbon/human/H = target
 		switch(type)
 			if("feet")
-				if(!H.shoes)
+				if(!H.get_equipped_item(slot_shoes_str))
 					affecting = H.get_organ(pick(BP_L_LEG, BP_R_LEG))
 					SET_STATUS_MAX(H, STAT_WEAK, 3)
 			if(BP_L_HAND, BP_R_HAND)
@@ -59,7 +59,7 @@
 		user.visible_message(SPAN_DANGER("\The [user] accidentally sets off [src], hurting their fingers."), \
 							 SPAN_DANGER("You accidentally trigger [src]!"))
 		return TRUE
-	
+
 	if(!armed)
 		to_chat(user, SPAN_NOTICE("You arm [src]."))
 	else

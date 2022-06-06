@@ -571,6 +571,7 @@ var/global/list/damage_icon_parts = list()
 		queue_icon_update()
 
 /mob/living/carbon/human/update_inv_shoes(var/update_icons=1)
+	var/obj/item/shoes = get_equipped_item(slot_shoes_str)
 	var/obj/item/suit = get_equipped_item(slot_wear_suit_str)
 	if(shoes && !((suit && suit.flags_inv & HIDESHOES) || (w_uniform && w_uniform.flags_inv & HIDESHOES)))
 		overlays_standing[HO_SHOES_LAYER] = shoes.get_mob_overlay(src,slot_shoes_str)

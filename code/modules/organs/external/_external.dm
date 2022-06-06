@@ -491,14 +491,14 @@
 	if(!owner)
 		return
 	if((body_part & SLOT_FOOT_LEFT) || (body_part & SLOT_FOOT_RIGHT))
-		owner.drop_from_inventory(owner.shoes)
+		owner.drop_from_inventory(owner.get_equipped_item(slot_shoes_str))
 	if((body_part & SLOT_HAND_LEFT) || (body_part & SLOT_HAND_RIGHT))
-		owner.drop_from_inventory(owner.gloves)
+		owner.drop_from_inventory(owner.get_equipped_item(slot_gloves_str))
 	if(body_part & SLOT_HEAD)
-		owner.drop_from_inventory(owner.head)
-		owner.drop_from_inventory(owner.glasses)
-		owner.drop_from_inventory(owner.l_ear)
-		owner.drop_from_inventory(owner.r_ear)
+		owner.drop_from_inventory(owner.get_equipped_item(slot_head_str))
+		owner.drop_from_inventory(owner.get_equipped_item(slot_glasses_str))
+		owner.drop_from_inventory(owner.get_equipped_item(slot_l_ear_str))
+		owner.drop_from_inventory(owner.get_equipped_item(slot_r_ear_str))
 		owner.drop_from_inventory(owner.get_equipped_item(slot_wear_mask_str))
 
 //Helper proc used by various tools for repairing robot limbs

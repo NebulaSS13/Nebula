@@ -612,8 +612,10 @@ INITIALIZE_IMMEDIATE(/obj/effect/gas_overlay)
 				suit.clean_blood()
 			else if(H.w_uniform)
 				H.w_uniform.clean_blood()
-			if(H.shoes)
-				H.shoes.clean_blood()
+
+			var/obj/item/shoes = H.get_equipped_item(slot_shoes_str)
+			if(shoes)
+				shoes.clean_blood()
 			else
 				H.clean_blood(1)
 				return

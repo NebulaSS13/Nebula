@@ -110,12 +110,11 @@
 /mob/living/carbon/human/HandleBloodTrail(turf/simulated/T)
 	// Tracking blood
 	var/obj/item/source
-	if(shoes)
-		var/obj/item/clothing/shoes/S = shoes
-		if(istype(S))
-			S.handle_movement(src, MOVING_QUICKLY(src))
-			if(S.coating && S.coating.total_volume > 1)
-				source = S
+	var/obj/item/clothing/shoes/shoes = get_equipped_item(slot_shoes_str)
+	if(istype(shoes))
+		shoes.handle_movement(src, MOVING_QUICKLY(src))
+		if(shoes.coating && shoes.coating.total_volume > 1)
+			source = shoes
 	else
 		for(var/bp in list(BP_L_FOOT, BP_R_FOOT))
 			var/obj/item/organ/external/stomper = get_organ(bp)

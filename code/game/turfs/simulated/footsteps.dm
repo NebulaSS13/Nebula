@@ -36,6 +36,7 @@
 	if(species.silent_steps || buckled || lying || throwing)
 		return //people flying, lying down or sitting do not step
 
+	var/obj/item/shoes = get_equipped_item(slot_shoes_str)
 	if(shoes && (shoes.item_flags & ITEM_FLAG_SILENT))
 		return // quiet shoes
 
@@ -65,7 +66,7 @@
 			if(MOVING_DELIBERATELY(src))
 				volume -= 45
 				range -= 0.333
-			if(!shoes)
+			if(!get_equipped_item(slot_shoes_str))
 				volume -= 60
 				range -= 0.333
 			playsound(T, footsound, volume, 1, range)

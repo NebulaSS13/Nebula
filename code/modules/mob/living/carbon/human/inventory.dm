@@ -133,8 +133,8 @@ This saves us from having to call add_fingerprint() any time something is put in
 			if(l_ear == W)
 				l_ear = null
 			update_inv_ears()
-		else if (W == shoes)
-			shoes = null
+		else if (W == _shoes)
+			_shoes = null
 			update_inv_shoes()
 		else if (W == belt)
 			belt = null
@@ -254,7 +254,7 @@ This saves us from having to call add_fingerprint() any time something is put in
 			W.equipped(src, slot)
 			update_inv_head(redraw_mob)
 		if(slot_shoes_str)
-			src.shoes = W
+			_shoes = W
 			W.equipped(src, slot)
 			update_inv_shoes(redraw_mob)
 		if(slot_wear_suit_str)
@@ -347,7 +347,7 @@ This saves us from having to call add_fingerprint() any time something is put in
 		if(slot_glasses_str)    return glasses
 		if(slot_gloves_str)     return gloves
 		if(slot_head_str)       return head
-		if(slot_shoes_str)      return shoes
+		if(slot_shoes_str)      return _shoes
 		if(slot_belt_str)       return belt
 		if(slot_wear_suit_str)  return _wear_suit
 		if(slot_w_uniform_str)  return w_uniform

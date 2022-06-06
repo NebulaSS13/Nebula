@@ -138,7 +138,7 @@ else if(##equipment_var) {\
 		boots.canremove = 1
 		H = boots.loc
 		if(istype(H))
-			if(boots && H.shoes == boots)
+			if(boots && H.get_equipped_item(slot_shoes_str) == boots)
 				H.drop_from_inventory(boots, src)
 
 	if(tank)

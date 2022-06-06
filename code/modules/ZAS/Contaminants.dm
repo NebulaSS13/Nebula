@@ -149,10 +149,10 @@ var/global/image/contamination_overlay = image('icons/effects/contamination.dmi'
 
 /mob/living/carbon/human/proc/suit_contamination()
 	//Runs over the things that can be contaminated and does so.
-	if(w_uniform) w_uniform.contaminate()
-	if(shoes) shoes.contaminate()
-	if(gloves) gloves.contaminate()
-
+	for(var/slot in list(slot_w_uniform_str, slot_shoes_str, slot_gloves_str))
+		var/obj/item/gear = get_equipped_item(slot)
+		if(istype(gear))
+			gear.contaminate()
 
 /turf/Entered(obj/item/I)
 	. = ..()

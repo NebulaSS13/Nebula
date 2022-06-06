@@ -26,11 +26,11 @@
 
 	// TODO REMOVE DIRECT REFERENCES
 	var/obj/item/_wear_suit
+	var/obj/item/_shoes
 	// END TODO
 
 	//Equipment slots
 	var/obj/item/w_uniform = null
-	var/obj/item/shoes = null
 	var/obj/item/belt = null
 	var/obj/item/gloves = null
 	var/obj/item/glasses = null
