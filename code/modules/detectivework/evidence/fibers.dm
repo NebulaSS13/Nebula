@@ -11,10 +11,12 @@
 	else if(ishuman(AM))
 		var/mob/living/carbon/human/M = AM
 		var/covered = 0
-		for(var/obj/item/clothing/C in list(M.wear_suit, M.gloves, M.w_uniform))
-			if(prob(15) && (C.body_parts_covered & ~covered))
-				LAZYADD(sources, C)
-			covered |= C.body_parts_covered
+		for(var/slot in list(slot_wear_suit_str, slot_gloves_str, slot_w_uniform_str))
+			var/obj/item/clothing/C = M.get_equipped_item(slot)
+			if(istype(C))
+				if(prob(15) && (C.body_parts_covered & ~covered))
+					LAZYADD(sources, C)
+				covered |= C.body_parts_covered
 
 	for(var/obj/item/clothing/C in sources)
 		add_data(C.get_fibers())

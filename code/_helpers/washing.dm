@@ -43,9 +43,10 @@
 	var/washears = 1
 	var/washglasses = 1
 
-	if(H.wear_suit)
-		washgloves = !(H.wear_suit.flags_inv & HIDEGLOVES)
-		washshoes = !(H.wear_suit.flags_inv & HIDESHOES)
+	var/obj/item/suit = H.get_equipped_item(slot_wear_suit_str)
+	if(suit)
+		washgloves = !(suit.flags_inv & HIDEGLOVES)
+		washshoes = !(suit.flags_inv & HIDESHOES)
 
 	if(H.head)
 		washmask = !(H.head.flags_inv & HIDEMASK)
@@ -61,8 +62,9 @@
 
 	if(H.head)
 		H.head.clean_blood()
-	if(H.wear_suit)
-		H.wear_suit.clean_blood()
+
+	if(suit)
+		suit.clean_blood()
 	else if(H.w_uniform)
 		H.w_uniform.clean_blood()
 	if(H.gloves && washgloves)

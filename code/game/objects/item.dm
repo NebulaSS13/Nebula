@@ -511,15 +511,16 @@ var/global/list/slot_flags_enumeration = list(
 			if(get_storage_cost() >= ITEM_SIZE_NO_CONTAINER)
 				return FALSE
 		if(slot_s_store_str)
-			if(!H.wear_suit && (slot_wear_suit_str in H.species.hud?.equip_slots))
+			var/obj/item/suit = H.get_equipped_item(slot_wear_suit_str)
+			if(!suit && (slot_wear_suit_str in H.species.hud?.equip_slots))
 				if(!disable_warning)
 					to_chat(H, SPAN_WARNING("You need a suit before you can attach this [name]."))
 				return FALSE
-			if(H.wear_suit && !H.wear_suit.allowed)
+			if(suit && !suit.allowed)
 				if(!disable_warning)
 					to_chat(usr, SPAN_WARNING("You somehow have a suit with no defined allowed items for suit storage, stop that."))
 				return FALSE
-			if( !(istype(src, /obj/item/modular_computer/pda) || istype(src, /obj/item/pen) || is_type_in_list(src, H.wear_suit.allowed)) )
+			if( !(istype(src, /obj/item/modular_computer/pda) || istype(src, /obj/item/pen) || is_type_in_list(src, suit.allowed)) )
 				return FALSE
 		if(slot_handcuffed_str)
 			if(!istype(src, /obj/item/handcuffs))
@@ -529,7 +530,8 @@ var/global/list/slot_flags_enumeration = list(
 			if(!istype(B) || !B.can_be_inserted(src,M,1))
 				return FALSE
 		if(slot_tie_str)
-			if((!H.w_uniform && (slot_w_uniform_str in H.species.hud?.equip_slots)) && (!H.wear_suit && (slot_wear_suit_str in H.species.hud?.equip_slots)))
+			var/obj/item/clothing/suit = H.get_equipped_item(slot_wear_suit_str)
+			if((!H.w_uniform && (slot_w_uniform_str in H.species.hud?.equip_slots)) && (!suit && (slot_wear_suit_str in H.species.hud?.equip_slots)))
 				if(!disable_warning)
 					to_chat(H, SPAN_WARNING("You need something you can attach \the [src] to."))
 				return FALSE
@@ -540,12 +542,10 @@ var/global/list/slot_flags_enumeration = list(
 						to_chat(H, SPAN_WARNING("You cannot equip \the [src] to \the [uniform]."))
 					return FALSE
 				return TRUE
-			if(H.wear_suit && (slot_wear_suit_str in H.species.hud?.equip_slots))
-				var/obj/item/clothing/suit/suit = H.wear_suit
-				if(suit && !suit.can_attach_accessory(src))
-					if (!disable_warning)
-						to_chat(H, SPAN_WARNING("You cannot equip \the [src] to \the [suit]."))
-					return FALSE
+			if(suit && (slot_wear_suit_str in H.species.hud?.equip_slots) && !suit.can_attach_accessory(src))
+				if (!disable_warning)
+					to_chat(H, SPAN_WARNING("You cannot equip \the [src] to \the [suit]."))
+				return FALSE
 	return TRUE
 
 /obj/item/proc/mob_can_unequip(mob/M, slot, disable_warning = 0)

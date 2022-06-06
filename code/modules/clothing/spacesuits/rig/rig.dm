@@ -195,7 +195,7 @@
 		return 0
 	if(boots && wearer.shoes != boots)
 		return 0
-	if(chest && wearer.wear_suit != chest)
+	if(chest && wearer.get_equipped_item(slot_wear_suit_str) != chest)
 		return 0
 	return 1
 
@@ -264,7 +264,7 @@
 					"helmet"
 				),
 				list(
-					wearer.wear_suit,
+					wearer.get_equipped_item(slot_wear_suit_str),
 					chest,
 					"chest"
 				)
@@ -703,7 +703,7 @@
 		if("chest")
 			equip_to = slot_wear_suit_str
 			use_obj = chest
-			check_slot = wearer.wear_suit
+			check_slot = wearer.get_equipped_item(slot_wear_suit_str)
 
 	if(use_obj)
 		if(check_slot == use_obj && deploy_mode != ONLY_DEPLOY)
@@ -745,25 +745,11 @@
 		return
 
 	if(sealed)
-		if(H.head)
-			var/obj/item/garbage = H.head
-			H.head = null
-			qdel(garbage)
-
-		if(H.gloves)
-			var/obj/item/garbage = H.gloves
-			H.gloves = null
-			qdel(garbage)
-
-		if(H.shoes)
-			var/obj/item/garbage = H.shoes
-			H.shoes = null
-			qdel(garbage)
-
-		if(H.wear_suit)
-			var/obj/item/garbage = H.wear_suit
-			H.wear_suit = null
-			qdel(garbage)
+		for(var/list/slot in list(slot_head_str, slot_gloves_str, slot_shoes_str, slot_wear_suit_str))
+			var/obj/item/garbage = H.get_equipped_item(slot)
+			if(garbage)
+				H.unEquip(garbage)
+				qdel(garbage)
 
 	for(var/piece in list("helmet","gauntlets","chest","boots"))
 		toggle_piece(piece, H, ONLY_DEPLOY)

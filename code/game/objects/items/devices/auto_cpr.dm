@@ -16,14 +16,15 @@
 
 /obj/item/auto_cpr/attack(mob/living/carbon/human/M, mob/living/user, var/target_zone)
 	if(istype(M) && user.a_intent == I_HELP)
-		if(M.wear_suit)
-			to_chat(user, SPAN_WARNING("Their [M.wear_suit] is in the way, remove it first!"))
+		var/obj/item/suit = M.get_equipped_item(slot_wear_suit_str)
+		if(suit)
+			to_chat(user, SPAN_WARNING("Their [suit] is in the way, remove it first!"))
 			return 1
 		user.visible_message(SPAN_NOTICE("[user] starts fitting [src] onto the [M]'s chest."))
 
 		if(!do_mob(user, M, 2 SECONDS))
 			return
-			
+
 		if(user.unEquip(src))
 			if(!M.equip_to_slot_if_possible(src, slot_wear_suit_str, del_on_fail=0, disable_warning=1, redraw_mob=1))
 				user.put_in_active_hand(src)
@@ -36,7 +37,7 @@
 	START_PROCESSING(SSobj,src)
 
 /obj/item/auto_cpr/attack_hand(mob/user)
-	skilled_setup = user.skill_check(SKILL_ANATOMY, SKILL_BASIC) && user.skill_check(SKILL_MEDICAL, SKILL_BASIC) 
+	skilled_setup = user.skill_check(SKILL_ANATOMY, SKILL_BASIC) && user.skill_check(SKILL_MEDICAL, SKILL_BASIC)
 	..()
 
 /obj/item/auto_cpr/dropped(mob/user)

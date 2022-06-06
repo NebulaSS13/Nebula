@@ -90,51 +90,9 @@
 		var/mob/living/carbon/human/H = mymob
 		for(var/gear_slot in H.species.hud.gear)
 			var/list/hud_data = H.species.hud.gear[gear_slot]
-			if(inventory_shown && hud_shown)
-				switch(hud_data["slot"])
-					if(slot_head_str)
-						if(H.head)      H.head.screen_loc =      hud_data["loc"]
-					if(slot_shoes_str)
-						if(H.shoes)     H.shoes.screen_loc =     hud_data["loc"]
-					if(slot_l_ear_str)
-						if(H.l_ear)     H.l_ear.screen_loc =     hud_data["loc"]
-					if(slot_r_ear_str)
-						if(H.r_ear)     H.r_ear.screen_loc =     hud_data["loc"]
-					if(slot_gloves_str)
-						if(H.gloves)    H.gloves.screen_loc =    hud_data["loc"]
-					if(slot_glasses_str)
-						if(H.glasses)   H.glasses.screen_loc =   hud_data["loc"]
-					if(slot_w_uniform_str)
-						if(H.w_uniform) H.w_uniform.screen_loc = hud_data["loc"]
-					if(slot_wear_suit_str)
-						if(H.wear_suit) H.wear_suit.screen_loc = hud_data["loc"]
-					if(slot_wear_mask_str)
-						var/obj/item/mask = H.get_equipped_item(slot_wear_mask_str)
-						if(mask)
-							mask.screen_loc = hud_data["loc"]
-			else
-				switch(hud_data["slot"])
-					if(slot_head_str)
-						if(H.head)      H.head.screen_loc =      null
-					if(slot_shoes_str)
-						if(H.shoes)     H.shoes.screen_loc =     null
-					if(slot_l_ear_str)
-						if(H.l_ear)     H.l_ear.screen_loc =     null
-					if(slot_r_ear_str)
-						if(H.r_ear)     H.r_ear.screen_loc =     null
-					if(slot_gloves_str)
-						if(H.gloves)    H.gloves.screen_loc =    null
-					if(slot_glasses_str)
-						if(H.glasses)   H.glasses.screen_loc =   null
-					if(slot_w_uniform_str)
-						if(H.w_uniform) H.w_uniform.screen_loc = null
-					if(slot_wear_suit_str)
-						if(H.wear_suit) H.wear_suit.screen_loc = null
-					if(slot_wear_mask_str)
-						var/obj/item/mask = H.get_equipped_item(slot_wear_mask_str)
-						if(mask)
-							mask.screen_loc = null
-
+			var/obj/item/gear = H.get_equipped_item(hud_data["slot"])
+			if(gear)
+				gear.screen_loc = (inventory_shown && hud_shown) ? hud_data["loc"] : null
 
 /datum/hud/proc/persistant_inventory_update()
 	if(!mymob)

@@ -286,7 +286,7 @@ steam.start() -- spawns the effect
 /obj/effect/effect/smoke/mustard/affect(var/mob/living/carbon/human/R)
 	if (!..())
 		return 0
-	if (R.wear_suit != null)
+	if (R.get_equipped_item(slot_wear_suit_str))
 		return 0
 
 	R.take_overall_damage(0, 0.75)

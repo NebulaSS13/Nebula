@@ -105,7 +105,7 @@ var/global/last_chew = 0
 	if (H.a_intent != I_HURT) return
 	if (H.zone_sel.selecting != BP_MOUTH) return
 	if (H.get_equipped_item(slot_wear_mask_str)) return
-	if (istype(H.wear_suit, /obj/item/clothing/suit/straight_jacket)) return
+	if (istype(H.get_equipped_item(slot_wear_suit_str), /obj/item/clothing/suit/straight_jacket)) return
 
 	var/obj/item/organ/external/O = H.get_organ(H.get_active_held_item_slot())
 	if (!O) return

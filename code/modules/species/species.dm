@@ -723,8 +723,9 @@ var/global/const/DEFAULT_SPECIES_HEALTH = 200
 /decl/species/proc/get_move_trail(var/mob/living/carbon/human/H)
 	if(H.lying)
 		return /obj/effect/decal/cleanable/blood/tracks/body
-	if(H.shoes || (H.wear_suit && (H.wear_suit.body_parts_covered & SLOT_FEET)))
-		var/obj/item/clothing/shoes = (H.wear_suit && (H.wear_suit.body_parts_covered & SLOT_FEET)) ? H.wear_suit : H.shoes // suits take priority over shoes
+	var/obj/item/suit = H.get_equipped_item(slot_wear_suit_str)
+	if(H.shoes || (suit && (suit.body_parts_covered & SLOT_FEET)))
+		var/obj/item/clothing/shoes = (suit && (suit.body_parts_covered & SLOT_FEET)) ? suit : H.shoes // suits take priority over shoes
 		return shoes.move_trail
 	else
 		return move_trail

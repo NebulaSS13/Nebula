@@ -134,8 +134,9 @@ var/global/image/contamination_overlay = image('icons/effects/contamination.dmi'
 /mob/living/carbon/human/proc/contaminant_suit_protected()
 	//Checks if the suit is adequately sealed.
 	var/coverage = 0
-	for(var/obj/item/protection in list(wear_suit, gloves, shoes))
-		if(!protection)
+	for(var/slot in list(slot_wear_suit_str, slot_gloves_str, slot_shoes_str))
+		var/obj/item/protection = get_equipped_item(slot)
+		if(!istype(protection))
 			continue
 		if(vsc.contaminant_control.STRICT_PROTECTION_ONLY && !(protection.item_flags & ITEM_FLAG_NO_CONTAMINATION))
 			return 0

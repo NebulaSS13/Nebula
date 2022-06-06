@@ -1073,10 +1073,10 @@
 /mob/living/carbon/human/get_weather_protection()
 	. = ..()
 	if(!LAZYLEN(.))
-		var/obj/item/clothing/head/check_head = head
+		var/obj/item/clothing/head/check_head = get_equipped_item(slot_head_str)
 		if(!istype(check_head) || !check_head.protects_against_weather)
 			return
-		var/obj/item/clothing/suit/check_body = wear_suit
+		var/obj/item/clothing/suit/check_body = get_equipped_item(slot_wear_suit_str)
 		if(!istype(check_body) || !check_body.protects_against_weather)
 			return
 		LAZYADD(., check_head)

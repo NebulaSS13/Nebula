@@ -44,7 +44,7 @@
 	if(!suittoggled)
 		if(ishuman(loc))
 			var/mob/living/carbon/human/H = src.loc
-			if(H.wear_suit != src)
+			if(H.get_equipped_item(slot_wear_suit_str) != src)
 				to_chat(H, "<span class='warning'>You must be wearing \the [src] to put up the hood!</span>")
 				return
 			if(H.head)

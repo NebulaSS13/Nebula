@@ -17,11 +17,12 @@
 			user.zone_sel.icon_state = "zone_sel"
 
 	//exosuits and helmets obscure our view and stuff.
-	if(wear_suit)
-		skipgloves = wear_suit.flags_inv & HIDEGLOVES
-		skipsuitstorage = wear_suit.flags_inv & HIDESUITSTORAGE
-		skipjumpsuit = wear_suit.flags_inv & HIDEJUMPSUIT
-		skipshoes = wear_suit.flags_inv & HIDESHOES
+	var/obj/item/suit = get_equipped_item(slot_wear_suit_str)
+	if(suit)
+		skipgloves = suit.flags_inv & HIDEGLOVES
+		skipsuitstorage = suit.flags_inv & HIDESUITSTORAGE
+		skipjumpsuit = suit.flags_inv & HIDEJUMPSUIT
+		skipshoes = suit.flags_inv & HIDESHOES
 
 	if(head)
 		skipmask = head.flags_inv & HIDEMASK
@@ -79,11 +80,11 @@
 		msg += "[G.He] [G.is] wearing [head.get_examine_line()] on [G.his] head.\n"
 
 	//suit/armour
-	if(wear_suit)
-		msg += "[G.He] [G.is] wearing [wear_suit.get_examine_line()].\n"
+	if(suit)
+		msg += "[G.He] [G.is] wearing [suit.get_examine_line()].\n"
 		//suit/armour storage
 		if(s_store && !skipsuitstorage)
-			msg += "[G.He] [G.is] carrying [s_store.get_examine_line()] on [G.his] [wear_suit.name].\n"
+			msg += "[G.He] [G.is] carrying [s_store.get_examine_line()] on [G.his] [suit.name].\n"
 
 	//back
 	var/obj/item/back = get_equipped_item(slot_back_str)

@@ -122,7 +122,7 @@
 		return 1
 	if(grab_restrained())
 		return 1
-	if (istype(wear_suit, /obj/item/clothing/suit/straight_jacket))
+	if (istype(get_equipped_item(slot_wear_suit_str), /obj/item/clothing/suit/straight_jacket))
 		return 1
 	return 0
 
@@ -430,8 +430,9 @@
 
 /mob/living/carbon/human/abiotic(var/full_body = TRUE)
 	if(full_body)
-		if(src.head || src.shoes || src.w_uniform || src.wear_suit || src.glasses || src.l_ear || src.r_ear || src.gloves)
-			return FALSE
+		for(var/slot in list(slot_head_str, slot_shoes_str, slot_w_uniform_str, slot_wear_suit_str, slot_glasses_str, slot_l_ear_str, slot_r_ear_str, slot_gloves_str))
+			if(get_equipped_item(slot))
+				return FALSE
 	return ..()
 
 /mob/living/carbon/human/proc/check_dna()

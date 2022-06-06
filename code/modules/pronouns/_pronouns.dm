@@ -78,6 +78,7 @@ var/global/list/byond_genders = list(MALE, FEMALE, NEUTER, PLURAL)
 
 // Human concealment helper.
 /mob/living/carbon/human/get_pronouns(var/ignore_coverings)
-	if(!ignore_coverings && (wear_suit && (wear_suit.flags_inv & HIDEJUMPSUIT)) && ((head && head.flags_inv & HIDEMASK) || get_equipped_item(slot_wear_mask_str)))
+	var/obj/item/suit = get_equipped_item(slot_wear_suit_str)
+	if(!ignore_coverings && (suit && (suit.flags_inv & HIDEJUMPSUIT)) && ((head && head.flags_inv & HIDEMASK) || get_equipped_item(slot_wear_mask_str)))
 		return GET_DECL(/decl/pronouns)
 	return ..()

@@ -110,7 +110,7 @@
 
 // Some space suits are equipped with reactive membranes that support broken limbs
 /obj/item/clothing/suit/space/rig/proc/can_support(var/mob/living/carbon/human/user)
-	if(user.wear_suit != src)
+	if(user.get_equipped_item(slot_wear_suit_str) != src)
 		return 0 //not wearing the suit
 	return user.check_rig_status(1)
 

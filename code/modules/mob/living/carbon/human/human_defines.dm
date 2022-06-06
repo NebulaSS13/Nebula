@@ -24,8 +24,11 @@
 
 	var/obj/screen/default_attack_selector/attack_selector
 
+	// TODO REMOVE DIRECT REFERENCES
+	var/obj/item/_wear_suit
+	// END TODO
+
 	//Equipment slots
-	var/obj/item/wear_suit = null
 	var/obj/item/w_uniform = null
 	var/obj/item/shoes = null
 	var/obj/item/belt = null
@@ -47,7 +50,7 @@
 	var/last_dam = -1	//Used for determining if we need to process all organs or just some or even none.
 	/// organs we check until they are good.
 	var/list/bad_external_organs
-	
+
 	var/mob/remoteview_target = null
 	var/hand_blood_color
 

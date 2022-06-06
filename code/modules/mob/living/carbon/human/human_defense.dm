@@ -117,7 +117,9 @@ meteor_act
 
 /mob/living/carbon/human/proc/check_shields(var/damage = 0, var/atom/damage_source = null, var/mob/attacker = null, var/def_zone = null, var/attack_text = "the attack")
 	var/list/checking_slots = get_held_items()
-	LAZYDISTINCTADD(checking_slots, wear_suit)
+	var/obj/item/suit = get_equipped_item(slot_wear_suit_str)
+	if(suit)
+		LAZYDISTINCTADD(checking_slots, suit)
 	for(var/obj/item/shield in checking_slots)
 		if(shield.handle_shield(src, damage, damage_source, attacker, def_zone, attack_text))
 			return TRUE
@@ -383,11 +385,13 @@ meteor_act
 	update_inv_gloves()		//updates on-mob overlays for bloody hands and/or bloody gloves
 
 /mob/living/carbon/human/proc/bloody_body(var/mob/living/source)
-	if(wear_suit)
-		wear_suit.add_blood(source)
+	var/obj/item/gear = get_equipped_item(slot_wear_suit_str)
+	if(gear)
+		gear.add_blood(source)
 		update_inv_wear_suit(0)
-	if(w_uniform)
-		w_uniform.add_blood(source)
+	gear = get_equipped_item(slot_w_uniform_str)
+	if(gear)
+		gear.add_blood(source)
 		update_inv_w_uniform(0)
 
 /mob/living/carbon/human/proc/handle_suit_punctures(var/damtype, var/damage, var/def_zone)
@@ -401,10 +405,9 @@ meteor_act
 		rig.take_hit(damage)
 
 	// We may also be taking a suit breach.
-	if(!wear_suit) return
-	if(!istype(wear_suit,/obj/item/clothing/suit/space)) return
-	var/obj/item/clothing/suit/space/SS = wear_suit
-	SS.create_breaches(damtype, damage)
+	var/obj/item/clothing/suit/space/suit = get_equipped_item(slot_wear_suit_str)
+	if(istype(suit))
+		suit.create_breaches(damtype, damage)
 
 /mob/living/carbon/human/reagent_permeability()
 	var/perm = 0

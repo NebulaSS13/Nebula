@@ -88,10 +88,10 @@ This saves us from having to call add_fingerprint() any time something is put in
 	. = ..()
 	if(!.)
 		. = TRUE
-		if (W == wear_suit)
+		if (W == _wear_suit)
 			if(s_store)
 				drop_from_inventory(s_store)
-			wear_suit = null
+			_wear_suit = null
 			update_inv_wear_suit()
 		else if (W == w_uniform)
 			if (r_store)
@@ -258,12 +258,12 @@ This saves us from having to call add_fingerprint() any time something is put in
 			W.equipped(src, slot)
 			update_inv_shoes(redraw_mob)
 		if(slot_wear_suit_str)
-			src.wear_suit = W
-			if(wear_suit.flags_inv & HIDESHOES)
+			_wear_suit = W
+			if(_wear_suit.flags_inv & HIDESHOES)
 				update_inv_shoes(0)
-			if(wear_suit.flags_inv & HIDEGLOVES)
+			if(_wear_suit.flags_inv & HIDEGLOVES)
 				update_inv_gloves(0)
-			if(wear_suit.flags_inv & HIDEJUMPSUIT)
+			if(_wear_suit.flags_inv & HIDEJUMPSUIT)
 				update_inv_w_uniform(0)
 			W.equipped(src, slot)
 			update_inv_wear_suit(redraw_mob)
@@ -319,15 +319,15 @@ This saves us from having to call add_fingerprint() any time something is put in
 
 	switch(slot)
 		if(slot_wear_mask_str)
-			covering = src.head
+			covering = get_equipped_item(slot_head_str)
 			check_flags = SLOT_FACE
 		if(slot_glasses_str)
-			covering = src.head
+			covering = get_equipped_item(slot_head_str)
 			check_flags = SLOT_EYES
 		if(slot_gloves_str, slot_w_uniform_str)
-			covering = src.wear_suit
+			covering = get_equipped_item(slot_wear_suit_str)
 		if(slot_l_ear_str, slot_r_ear_str)
-			covering = src.head
+			covering = get_equipped_item(slot_head_str)
 			check_flags = SLOT_EARS
 
 	if(covering && (covering.body_parts_covered & (I.body_parts_covered|check_flags)))
@@ -349,7 +349,7 @@ This saves us from having to call add_fingerprint() any time something is put in
 		if(slot_head_str)       return head
 		if(slot_shoes_str)      return shoes
 		if(slot_belt_str)       return belt
-		if(slot_wear_suit_str)  return wear_suit
+		if(slot_wear_suit_str)  return _wear_suit
 		if(slot_w_uniform_str)  return w_uniform
 		if(slot_s_store_str)    return s_store
 		if(slot_l_ear_str)      return l_ear

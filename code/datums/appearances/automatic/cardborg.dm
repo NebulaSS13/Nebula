@@ -12,7 +12,7 @@
 		return
 
 	var/mob/living/carbon/human/H = user
-	if(!(istype(H.wear_suit, /obj/item/clothing/suit/cardborg) && istype(H.head, /obj/item/clothing/head/cardborg) && istype(H.get_equipped_item(slot_back_str), /obj/item/storage/backpack)))
+	if(!(istype(H.get_equipped_item(slot_wear_suit_str), /obj/item/clothing/suit/cardborg) && istype(H.get_equipped_item(slot_head_str), /obj/item/clothing/head/cardborg) && istype(H.get_equipped_item(slot_back_str), /obj/item/storage/backpack)))
 		return
 
 	var/image/I = get_image_from_backpack(H)
