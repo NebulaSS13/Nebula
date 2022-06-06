@@ -117,7 +117,7 @@ var/global/photo_count = 0
 	if(istype(over, /obj/screen/inventory))
 		var/obj/screen/inventory/inv = over
 		playsound(loc, "rustle", 50, 1, -5)
-		if(user.back == src)
+		if(user.get_equipped_item(slot_back_str) == src)
 			add_fingerprint(user)
 			if(user.unEquip(src))
 				user.equip_to_slot_if_possible(src, inv.slot_id)

@@ -193,7 +193,8 @@ steam.start() -- spawns the effect
 	if (!istype(M))
 		return 0
 	if (M.internal != null)
-		if(M.wear_mask && (M.wear_mask.item_flags & ITEM_FLAG_AIRTIGHT))
+		var/obj/item/mask = M.get_equipped_item(slot_wear_mask_str)
+		if(mask && (mask.item_flags & ITEM_FLAG_AIRTIGHT))
 			return 0
 		if(istype(M,/mob/living/carbon/human))
 			var/mob/living/carbon/human/H = M

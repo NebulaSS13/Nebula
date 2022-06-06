@@ -29,10 +29,11 @@
 		skipears = head.flags_inv & HIDEEARS
 		skipface = head.flags_inv & HIDEFACE
 
-	if(wear_mask)
-		skipeyes |= wear_mask.flags_inv & HIDEEYES
-		skipears |= wear_mask.flags_inv & HIDEEARS
-		skipface |= wear_mask.flags_inv & HIDEFACE
+	var/obj/item/mask = get_equipped_item(slot_wear_mask_str)
+	if(mask)
+		skipeyes |= mask.flags_inv & HIDEEYES
+		skipears |= mask.flags_inv & HIDEEARS
+		skipface |= mask.flags_inv & HIDEFACE
 
 	//no accuately spotting headsets from across the room.
 	if(distance > 3)
@@ -85,6 +86,7 @@
 			msg += "[G.He] [G.is] carrying [s_store.get_examine_line()] on [G.his] [wear_suit.name].\n"
 
 	//back
+	var/obj/item/back = get_equipped_item(slot_back_str)
 	if(back)
 		msg += "[G.He] [G.has] [back.get_examine_line()] on [G.his] back.\n"
 
@@ -126,8 +128,8 @@
 			msg += "There's <font color='[coating.get_color()]'>something on [G.his] feet</font>!\n"
 
 	//mask
-	if(wear_mask && !skipmask)
-		msg += "[G.He] [G.has] [wear_mask.get_examine_line()] on [G.his] face.\n"
+	if(mask && !skipmask)
+		msg += "[G.He] [G.has] [mask.get_examine_line()] on [G.his] face.\n"
 
 	//eyes
 	if(glasses && !skipeyes)
@@ -241,8 +243,8 @@
 			applying_pressure = "<span class='info'>[G.He] [G.is] applying pressure to [G.his] [E.name].</span><br>"
 
 		var/obj/item/clothing/hidden
-		var/list/clothing_items = list(head, wear_mask, wear_suit, w_uniform, gloves, shoes)
-		for(var/obj/item/clothing/C in clothing_items)
+		for(var/slot in global.standard_clothing_slots)
+			var/obj/item/clothing/C = get_equipped_item(slot)
 			if(istype(C) && (C.body_parts_covered & E.body_part))
 				hidden = C
 				break

@@ -525,12 +525,8 @@ var/global/list/slot_flags_enumeration = list(
 			if(!istype(src, /obj/item/handcuffs))
 				return FALSE
 		if(slot_in_backpack_str) //used entirely for equipping spawned mobs or at round start
-			var/allow = FALSE
-			if(H.back && istype(H.back, /obj/item/storage/backpack))
-				var/obj/item/storage/backpack/B = H.back
-				if(B.can_be_inserted(src,M,1))
-					allow = TRUE
-			if(!allow)
+			var/obj/item/storage/backpack/B = H.get_equipped_item(slot_back_str)
+			if(!istype(B) || !B.can_be_inserted(src,M,1))
 				return FALSE
 		if(slot_tie_str)
 			if((!H.w_uniform && (slot_w_uniform_str in H.species.hud?.equip_slots)) && (!H.wear_suit && (slot_wear_suit_str in H.species.hud?.equip_slots)))
@@ -639,8 +635,9 @@ var/global/list/slot_flags_enumeration = list(
 
 	var/mob/living/carbon/human/H = M
 	if(istype(H))
-		for(var/obj/item/protection in list(H.head, H.wear_mask, H.glasses))
-			if(protection && (protection.body_parts_covered & SLOT_EYES))
+		for(var/slot in global.standard_headgear_slots)
+			var/obj/item/protection = H.get_equipped_item(slot)
+			if(istype(protection) && (protection.body_parts_covered & SLOT_EYES))
 				// you can't stab someone in the eyes wearing a mask!
 				to_chat(user, SPAN_WARNING("You're going to need to remove the eye covering first."))
 				return

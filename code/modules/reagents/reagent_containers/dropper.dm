@@ -43,9 +43,9 @@
 				var/mob/living/carbon/human/victim = target
 
 				var/obj/item/safe_thing = null
-				if(victim.wear_mask)
-					if (victim.wear_mask.body_parts_covered & SLOT_EYES)
-						safe_thing = victim.wear_mask
+				var/obj/item/mask = victim.get_equipped_item(slot_wear_mask_str)
+				if(mask && (mask.body_parts_covered & SLOT_EYES))
+					safe_thing = mask
 				if(victim.head)
 					if (victim.head.body_parts_covered & SLOT_EYES)
 						safe_thing = victim.head

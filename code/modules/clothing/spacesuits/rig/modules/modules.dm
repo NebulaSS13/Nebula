@@ -267,8 +267,8 @@
 /mob/living/carbon/human/Stat()
 	. = ..()
 
-	if(. && istype(back,/obj/item/rig))
-		var/obj/item/rig/R = back
+	var/obj/item/rig/R = get_equipped_item(slot_back_str)
+	if(. && istype(R))
 		SetupStat(R)
 
 /mob/proc/SetupStat(var/obj/item/rig/R)

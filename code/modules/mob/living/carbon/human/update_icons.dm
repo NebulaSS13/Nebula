@@ -453,7 +453,8 @@ var/global/list/damage_icon_parts = list()
 		return
 
 	//masks and helmets can obscure our hair.
-	if( (head && (head.flags_inv & BLOCKHAIR)) || (wear_mask && (wear_mask.flags_inv & BLOCKHAIR)))
+	var/obj/item/mask = get_equipped_item(slot_wear_mask_str)
+	if( (head && (head.flags_inv & BLOCKHAIR)) || (mask && (mask.flags_inv & BLOCKHAIR)))
 		if(update_icons)
 			queue_icon_update()
 		return
@@ -546,7 +547,8 @@ var/global/list/damage_icon_parts = list()
 
 /mob/living/carbon/human/update_inv_ears(var/update_icons=1)
 	overlays_standing[HO_EARS_LAYER] = null
-	if( (head && (head.flags_inv & (BLOCKHAIR | BLOCKHEADHAIR))) || (wear_mask && (wear_mask.flags_inv & (BLOCKHAIR | BLOCKHEADHAIR))))
+	var/obj/item/mask = get_equipped_item(slot_wear_mask_str)
+	if( (head && (head.flags_inv & (BLOCKHAIR | BLOCKHEADHAIR))) || (mask && (mask.flags_inv & (BLOCKHAIR | BLOCKHEADHAIR))))
 		if(update_icons)
 			queue_icon_update()
 		return
@@ -633,14 +635,16 @@ var/global/list/damage_icon_parts = list()
 		queue_icon_update()
 
 /mob/living/carbon/human/update_inv_wear_mask(var/update_icons=1)
-	if(wear_mask && !(head && head.flags_inv & HIDEMASK))
-		overlays_standing[HO_FACEMASK_LAYER] = wear_mask.get_mob_overlay(src,slot_wear_mask_str)
+	var/obj/item/mask = get_equipped_item(slot_wear_mask_str)
+	if(mask && !(head && head.flags_inv & HIDEMASK))
+		overlays_standing[HO_FACEMASK_LAYER] = mask.get_mob_overlay(src,slot_wear_mask_str)
 	else
 		overlays_standing[HO_FACEMASK_LAYER] = null
 	if(update_icons)
 		queue_icon_update()
 
 /mob/living/carbon/human/update_inv_back(var/update_icons=1)
+	var/obj/item/back = get_equipped_item(slot_back_str)
 	if(back)
 		overlays_standing[HO_BACK_LAYER] = back.get_mob_overlay(src,slot_back_str)
 	else

@@ -297,8 +297,8 @@
 		var/iscrayon = 0
 		var/isfancy = 0
 		if(!istype(I, /obj/item/pen))
-			if(usr.back && istype(usr.back,/obj/item/rig))
-				var/obj/item/rig/r = usr.back
+			var/obj/item/rig/r = usr.get_equipped_item(slot_back_str)
+			if(istype(r))
 				var/obj/item/rig_module/device/pen/m = locate(/obj/item/rig_module/device/pen) in r.installed_modules
 				if(!r.offline && m)
 					I = m.device

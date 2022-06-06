@@ -95,10 +95,11 @@
 	. = ..()
 
 /mob/living/carbon/human/proc/get_jetpack()
+	var/obj/item/back = get_equipped_item(slot_back_str)
 	if(back)
 		if(istype(back,/obj/item/tank/jetpack))
 			return back
-		else if(istype(back,/obj/item/rig))
+		if(istype(back,/obj/item/rig))
 			var/obj/item/rig/rig = back
 			for(var/obj/item/rig_module/maneuvering_jets/module in rig.installed_modules)
 				return module.jets

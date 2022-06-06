@@ -57,16 +57,16 @@
 		if("tie")
 			if(!istype(holder) || !holder.accessories.len)
 				return
-	
+
 			var/obj/item/clothing/accessory/A
 			if(LAZYLEN(holder.accessories) > 1)
 				A = show_radial_menu(user, user, make_item_radial_menu_choices(holder.accessories), radius = 42, tooltips = TRUE)
 			else
 				A = holder.accessories[1]
-			
+
 			if(!istype(A))
 				return
-			
+
 			visible_message("<span class='danger'>\The [user] is trying to remove \the [src]'s [A.name]!</span>")
 
 			if(!do_after(user, HUMAN_STRIP_DELAY, src, check_holding = FALSE, progress = FALSE))
@@ -159,12 +159,14 @@
 		return
 	else
 		// Check for airtight mask/helmet.
-		if(!(wear_mask && wear_mask.item_flags & ITEM_FLAG_AIRTIGHT))
+		var/obj/item/mask = get_equipped_item(slot_wear_mask_str)
+		if(!(mask && mask.item_flags & ITEM_FLAG_AIRTIGHT))
 			if(!(head && head.item_flags & ITEM_FLAG_AIRTIGHT))
 				to_chat(user, "<span class='warning'>\The [src] does not have a suitable mask or helmet.</span>")
 				return
 
 		// Find an internal source.
+		var/obj/item/back = get_equipped_item(slot_back_str)
 		if(istype(back, /obj/item/tank))
 			set_internals(back)
 		else if(istype(s_store, /obj/item/tank))

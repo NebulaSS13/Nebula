@@ -126,8 +126,9 @@
 	var/decl/natural_attack/attack = attacker.get_unarmed_attack(target, BP_EYES)
 	if(!istype(attack))
 		return
-	for(var/obj/item/protection in list(target.head, target.wear_mask, target.glasses))
-		if(protection && (protection.body_parts_covered & SLOT_EYES))
+	for(var/slot in global.standard_headgear_slots)
+		var/obj/item/protection = target.get_equipped_item(slot)
+		if(istype(protection) && (protection.body_parts_covered & SLOT_EYES))
 			to_chat(attacker, "<span class='danger'>You're going to need to remove the eye covering first.</span>")
 			return
 	if(!target.check_has_eyes())

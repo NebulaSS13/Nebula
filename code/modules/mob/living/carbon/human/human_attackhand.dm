@@ -243,11 +243,13 @@
 			to_chat(H, SPAN_WARNING("They don't have a mouth, you cannot do mouth-to-mouth resuscitation!"))
 			return TRUE
 
-		if((H.head && (H.head.body_parts_covered & SLOT_FACE)) || (H.wear_mask && (H.wear_mask.body_parts_covered & SLOT_FACE)))
+		var/obj/item/mask = H.get_equipped_item(slot_wear_mask_str)
+		if((H.head && (H.head.body_parts_covered & SLOT_FACE)) || (mask && (mask.body_parts_covered & SLOT_FACE)))
 			to_chat(H, SPAN_WARNING("You need to remove your mouth covering for mouth-to-mouth resuscitation!"))
 			return TRUE
 
-		if((head && (head.body_parts_covered & SLOT_FACE)) || (wear_mask && (wear_mask.body_parts_covered & SLOT_FACE)))
+		mask = get_equipped_item(slot_wear_mask_str)
+		if((head && (head.body_parts_covered & SLOT_FACE)) || (mask && (mask.body_parts_covered & SLOT_FACE)))
 			to_chat(H, SPAN_WARNING("You need to remove \the [src]'s mouth covering for mouth-to-mouth resuscitation!"))
 			return TRUE
 

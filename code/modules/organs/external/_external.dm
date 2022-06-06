@@ -499,7 +499,7 @@
 		owner.drop_from_inventory(owner.glasses)
 		owner.drop_from_inventory(owner.l_ear)
 		owner.drop_from_inventory(owner.r_ear)
-		owner.drop_from_inventory(owner.wear_mask)
+		owner.drop_from_inventory(owner.get_equipped_item(slot_wear_mask_str))
 
 //Helper proc used by various tools for repairing robot limbs
 /obj/item/organ/external/proc/robo_repair(var/repair_amount, var/damage_type, var/damage_desc, obj/item/tool, mob/living/user)

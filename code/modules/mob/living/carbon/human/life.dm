@@ -266,30 +266,28 @@
 			var/list/limbs = get_external_organs()
 			if(!isSynthetic() && LAZYLEN(limbs))
 				var/obj/item/organ/external/O = pick(limbs)
-				if(istype(O)) 
+				if(istype(O))
 					O.add_autopsy_data("Radiation Poisoning", damage)
 
 	/** breathing **/
 
 /mob/living/carbon/human/handle_chemical_smoke(var/datum/gas_mixture/environment)
-	if(wear_mask && (wear_mask.item_flags & ITEM_FLAG_BLOCK_GAS_SMOKE_EFFECT))
-		return
-	if(glasses && (glasses.item_flags & ITEM_FLAG_BLOCK_GAS_SMOKE_EFFECT))
-		return
-	if(head && (head.item_flags & ITEM_FLAG_BLOCK_GAS_SMOKE_EFFECT))
-		return
+	for(var/slot in global.standard_headgear_slots)
+		var/obj/item/gear = get_equipped_item(slot)
+		if(istype(gear) && (gear.item_flags & ITEM_FLAG_BLOCK_GAS_SMOKE_EFFECT))
+			return
 	..()
 
 /mob/living/carbon/human/get_breath_from_internal(volume_needed=STD_BREATH_VOLUME)
 	if(internal)
 
 		var/obj/item/tank/rig_supply
-		if(istype(back,/obj/item/rig))
-			var/obj/item/rig/rig = back
-			if(!rig.offline && (rig.air_supply && internal == rig.air_supply))
-				rig_supply = rig.air_supply
+		var/obj/item/rig/rig = get_equipped_item(slot_back_str)
+		if(istype(rig) && !rig.offline && (rig.air_supply && internal == rig.air_supply))
+			rig_supply = rig.air_supply
 
-		if (!rig_supply && (!contents.Find(internal) || !((wear_mask && (wear_mask.item_flags & ITEM_FLAG_AIRTIGHT)) || (head && (head.item_flags & ITEM_FLAG_AIRTIGHT)))))
+		var/obj/item/mask = get_equipped_item(slot_wear_mask_str)
+		if (!rig_supply && (!contents.Find(internal) || !((mask && (mask.item_flags & ITEM_FLAG_AIRTIGHT)) || (head && (head.item_flags & ITEM_FLAG_AIRTIGHT)))))
 			set_internals(null)
 
 		if(internal)
@@ -459,8 +457,9 @@
 /mob/living/carbon/human/proc/get_heat_protection_flags(temperature) //Temperature is the temperature you're being exposed to.
 	. = 0
 	//Handle normal clothing
-	for(var/obj/item/clothing/C in list(head,wear_suit,w_uniform,shoes,gloves,wear_mask))
-		if(C)
+	for(var/slot in global.standard_clothing_slots)
+		var/obj/item/clothing/C = get_equipped_item(slot)
+		if(istype(C))
 			if(C.max_heat_protection_temperature && C.max_heat_protection_temperature >= temperature)
 				. |= C.heat_protection
 			if(C.accessories.len)
@@ -472,8 +471,9 @@
 /mob/living/carbon/human/proc/get_cold_protection_flags(temperature)
 	. = 0
 	//Handle normal clothing
-	for(var/obj/item/clothing/C in list(head,wear_suit,w_uniform,shoes,gloves,wear_mask))
-		if(C)
+	for(var/slot in global.standard_clothing_slots)
+		var/obj/item/clothing/C = get_equipped_item(slot)
+		if(istype(C))
 			if(C.min_cold_protection_temperature && C.min_cold_protection_temperature <= temperature)
 				. |= C.cold_protection
 			if(C.accessories.len)

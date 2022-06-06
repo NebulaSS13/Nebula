@@ -141,18 +141,11 @@
 	var/obj/item/eye_protection = null
 	var/obj/item/face_protection = null
 	var/obj/item/partial_face_protection = null
-
 	var/effective_strength = 5
 
-	var/list/protection
-	if(istype(M, /mob/living/carbon/human))
-		var/mob/living/carbon/human/H = M
-		protection = list(H.head, H.glasses, H.wear_mask)
-	else
-		protection = list(M.wear_mask)
-
-	for(var/obj/item/I in protection)
-		if(I)
+	for(var/slot in global.standard_headgear_slots)
+		var/obj/item/I = M.get_equipped_item(slot)
+		if(istype(I))
 			if(I.body_parts_covered & SLOT_EYES)
 				eyes_covered = 1
 				eye_protection = I.name
@@ -431,7 +424,7 @@
 				to_chat(M, SPAN_NOTICE("You feel a deep, sharp tugging sensation as your [I.name] is mended."))
 			I.heal_damage(rand(1,3))
 			break
-	else		
+	else
 		to_chat(M, SPAN_DANGER("Your flesh is being lacerated from within!"))
 		M.adjustBruteLoss(rand(3,6))
 		if(prob(10))

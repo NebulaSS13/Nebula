@@ -73,7 +73,7 @@ var/global/list/slot_equipment_priority = list( \
 //puts the item "W" into an appropriate slot in a human's inventory
 //returns 0 if it cannot, 1 if successful
 /mob/proc/equip_to_appropriate_slot(obj/item/W, var/skip_store = 0)
-	if(!istype(W)) 
+	if(!istype(W))
 		return FALSE
 	for(var/slot in slot_equipment_priority)
 		if(skip_store)
@@ -85,11 +85,10 @@ var/global/list/slot_equipment_priority = list( \
 
 /mob/proc/equip_to_storage(obj/item/newitem)
 	// Try put it in their backpack
-	if(istype(src.back,/obj/item/storage))
-		var/obj/item/storage/backpack = src.back
-		if(backpack.can_be_inserted(newitem, null, 1))
-			newitem.forceMove(src.back)
-			return backpack
+	var/obj/item/storage/backpack = get_equipped_item(slot_back_str)
+	if(istype(backpack) && backpack.can_be_inserted(newitem, null, 1))
+		newitem.forceMove(backpack)
+		return backpack
 
 	// Try to place it in any item that can store stuff, on the mob.
 	for(var/obj/item/storage/S in src.contents)
@@ -211,18 +210,13 @@ var/global/list/slot_equipment_priority = list( \
 */
 /mob/proc/u_equip(obj/W)
 	SHOULD_CALL_PARENT(TRUE)
-	if(W == back)
-		back = null
+	if(W == get_equipped_item(slot_back_str))
 		update_inv_back(0)
 		return TRUE
-	if(W == wear_mask)
-		wear_mask = null
-		refresh_mask(W)
+	if(W == get_equipped_item(slot_wear_mask_str))
+		update_inv_wear_mask(0)
 		return TRUE
 	return FALSE
-
-/mob/proc/refresh_mask(var/obj/item/removed)
-	update_inv_wear_mask(0)
 
 /mob/proc/isEquipped(obj/item/I)
 	if(!I)
@@ -275,15 +269,17 @@ var/global/list/slot_equipment_priority = list( \
 /mob/proc/get_equipped_item(var/slot)
 	SHOULD_CALL_PARENT(TRUE)
 	switch(slot)
-		if(slot_back_str) 
-			return back
-		if(slot_wear_mask_str) 
-			return wear_mask
+		if(slot_back_str)
+			return _back
+		if(slot_wear_mask_str)
+			return _wear_mask
 
 /mob/proc/get_equipped_items(var/include_carried = 0)
 	SHOULD_CALL_PARENT(TRUE)
-	for(var/obj/item/thing in list(back, wear_mask))
-		LAZYADD(., thing)
+	for(var/slot in list(slot_back_str, slot_wear_mask_str))
+		var/obj/item/thing = get_equipped_item(slot)
+		if(istype(thing))
+			LAZYADD(., thing)
 	if(include_carried)
 		for(var/obj/item/thing in get_held_items())
 			LAZYADD(., thing)

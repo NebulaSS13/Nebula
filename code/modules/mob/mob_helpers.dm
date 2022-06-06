@@ -352,7 +352,7 @@ It's fairly easy to fix if dealing with single letters but not so much with comp
 	for(var/obj/item/thing in get_held_items())
 		if(thing.simulated)
 			return TRUE
-	if(full_body && (back || wear_mask))
+	if(full_body && (get_equipped_item(slot_back_str) || get_equipped_item(slot_wear_mask_str)))
 		return TRUE
 
 //converts intent-strings into numbers and back

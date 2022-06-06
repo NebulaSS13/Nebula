@@ -69,15 +69,13 @@
 /mob/living/carbon/human/GetVoice()
 
 	var/voice_sub
-	if(istype(back,/obj/item/rig))
-		var/obj/item/rig/rig = back
-		// todo: fix this shit
-		if(rig.speech && rig.speech.voice_holder && rig.speech.voice_holder.active && rig.speech.voice_holder.voice)
-			voice_sub = rig.speech.voice_holder.voice
+	var/obj/item/rig/rig = get_equipped_item(slot_back_str)
+	if(istype(rig) && rig.speech?.voice_holder?.active && rig.speech.voice_holder.voice)
+		voice_sub = rig.speech.voice_holder.voice
 
 	if(!voice_sub)
 
-		var/list/check_gear = list(wear_mask, head)
+		var/list/check_gear = list(get_equipped_item(slot_wear_mask_str), head)
 		if(wearing_rig)
 			var/datum/extension/armor/rig/armor_datum = get_extension(wearing_rig, /datum/extension/armor)
 			if(istype(armor_datum) && armor_datum.sealed && wearing_rig.helmet == head)
@@ -114,17 +112,15 @@
 	if(HAS_STATUS(src, STAT_SILENCE) || (sdisabilities & MUTED))
 		to_chat(src, SPAN_WARNING("You are unable to speak!"))
 		message_data[1] = ""
-		. = 1
+		return TRUE
 
-	else if(istype(wear_mask, /obj/item/clothing/mask))
-		var/obj/item/clothing/mask/M = wear_mask
-		if(M.voicechange)
-			message_data[1] = pick(M.say_messages)
-			message_data[2] = pick(M.say_verbs)
-			. = 1
+	var/obj/item/clothing/mask/M = get_equipped_item(slot_wear_mask_str)
+	if(istype(M) && M.voicechange)
+		message_data[1] = pick(M.say_messages)
+		message_data[2] = pick(M.say_verbs)
+		return TRUE
 
-	else
-		. = ..(message_data)
+	return ..(message_data)
 
 /mob/living/carbon/human/handle_message_mode(message_mode, message, verb, speaking, used_radios, alt_name)
 	var/use_mode = null

@@ -76,14 +76,13 @@ This saves us from having to call add_fingerprint() any time something is put in
 		else
 			return has_organ(slot)
 
-/mob/living/carbon/human/refresh_mask(var/obj/item/removed)
-	..()
-	if(istype(removed) && (removed.flags_inv & (BLOCKHAIR|BLOCKHEADHAIR)))
-		update_hair(0)	//rebuild hair
-		update_inv_ears(0)
+/mob/living/carbon/human/update_inv_wear_mask(update_icons)
+	update_hair(0)	//rebuild hair
+	update_inv_ears(0)
 	var/obj/item/clothing/mask/head = src.get_equipped_item(slot_head_str)
 	if(!(head && (head.item_flags & ITEM_FLAG_AIRTIGHT)))
 		set_internals(null)
+	. = ..()
 
 /mob/living/carbon/human/u_equip(obj/W)
 	. = ..()
@@ -120,8 +119,8 @@ This saves us from having to call add_fingerprint() any time something is put in
 					update_inv_ears(0)
 					update_inv_wear_mask(0)
 			if(src)
-				var/obj/item/clothing/mask/wear_mask = src.get_equipped_item(slot_wear_mask_str)
-				if(!(wear_mask && (wear_mask.item_flags & ITEM_FLAG_AIRTIGHT)))
+				var/obj/item/clothing/mask/mask = src.get_equipped_item(slot_wear_mask_str)
+				if(!(mask && (mask.item_flags & ITEM_FLAG_AIRTIGHT)))
 					set_internals(null)
 			update_inv_head()
 		else if (W == l_ear)
@@ -166,10 +165,10 @@ This saves us from having to call add_fingerprint() any time something is put in
 //set redraw_mob to 0 if you don't wish the hud to be updated - if you're doing it manually in your own proc.
 
 // Hands rewrite note July 2020 - prior to this commit, slot is always numerical (using the slot_blah constants)
-// but I need to pass it arbitrary bodypart flags for use in the new held items system. If slot is not a number, 
+// but I need to pass it arbitrary bodypart flags for use in the new held items system. If slot is not a number,
 // we assume it is expecting to map to a held item inventory slot. The explicit isnum() check is there because if
 // we go ahead and let it try to evaluate a number, the associative list will try to use it as a numerical index
-// and will runtime out the ass. 
+// and will runtime out the ass.
 // Post hands rewrite I plan to conver the rest of the inventory system to a string-based inventory slot system
 // so at that point the numerical flags will be removed and this proc (and the rest of the chain) can be rewritten.
 
@@ -200,18 +199,18 @@ This saves us from having to call add_fingerprint() any time something is put in
 			return TRUE
 	// End boilerplate.
 
-	if(!species || !species.hud || !(slot in species.hud.equip_slots)) 
+	if(!species || !species.hud || !(slot in species.hud.equip_slots))
 		return
 	W.forceMove(src)
 
 	switch(slot)
 		if(slot_back_str)
-			src.back = W
+			_back = W
 			W.equipped(src, slot)
 			update_inv_back(redraw_mob)
 		if(slot_wear_mask_str)
-			src.wear_mask = W
-			if(wear_mask.flags_inv & (BLOCKHAIR|BLOCKHEADHAIR))
+			_wear_mask = W
+			if(_wear_mask.flags_inv & (BLOCKHAIR|BLOCKHEADHAIR))
 				update_hair(redraw_mob)	//rebuild hair
 				update_inv_ears(0)
 			W.equipped(src, slot)
@@ -289,7 +288,8 @@ This saves us from having to call add_fingerprint() any time something is put in
 		if(slot_in_backpack_str)
 			if(src.get_active_hand() == W)
 				src.remove_from_mob(W)
-			W.forceMove(src.back)
+			var/obj/item/back = get_equipped_item(slot_back_str)
+			W.forceMove(back)
 		if(slot_tie_str)
 			var/obj/item/clothing/under/uniform = src.w_uniform
 			if(uniform)
@@ -338,11 +338,11 @@ This saves us from having to call add_fingerprint() any time something is put in
 /mob/living/carbon/human/get_equipped_item(var/slot)
 
 	switch(slot)
-		if(slot_back_str)       return back
+		if(slot_back_str)       return _back
 		if(slot_handcuffed_str) return handcuffed
 		if(slot_l_store_str)    return l_store
 		if(slot_r_store_str)    return r_store
-		if(slot_wear_mask_str)  return wear_mask
+		if(slot_wear_mask_str)  return _wear_mask
 		if(slot_wear_id_str)    return wear_id
 		if(slot_glasses_str)    return glasses
 		if(slot_gloves_str)     return gloves

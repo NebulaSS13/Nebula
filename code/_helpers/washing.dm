@@ -18,8 +18,10 @@
 	var/mob/living/carbon/M = washing
 	for(var/obj/item/thing in M.get_held_items())
 		thing.clean_blood()
-	if(M.back)
-		M.back.clean_blood()
+
+	var/obj/item/back = M.get_equipped_item(slot_back_str)
+	if(back)
+		back.clean_blood()
 
 	//flush away reagents on the skin
 	var/datum/reagents/touching_reagents = M.get_contact_reagents()
@@ -28,8 +30,9 @@
 		touching_reagents.remove_any(remove_amount)
 
 	if(!ishuman(M))
-		if(M.wear_mask)
-			M.wear_mask.clean_blood()
+		var/obj/item/mask = M.get_equipped_item(slot_wear_mask_str)
+		if(mask)
+			mask.clean_blood()
 		M.clean_blood()
 		return
 
@@ -49,11 +52,12 @@
 		washglasses = !(H.head.flags_inv & HIDEEYES)
 		washears = !(H.head.flags_inv & HIDEEARS)
 
-	if(H.wear_mask)
+	var/obj/item/mask = M.get_equipped_item(slot_wear_mask_str)
+	if(mask)
 		if (washears)
-			washears = !(H.wear_mask.flags_inv & HIDEEARS)
+			washears = !(mask.flags_inv & HIDEEARS)
 		if (washglasses)
-			washglasses = !(H.wear_mask.flags_inv & HIDEEYES)
+			washglasses = !(mask.flags_inv & HIDEEYES)
 
 	if(H.head)
 		H.head.clean_blood()
@@ -65,8 +69,8 @@
 		H.gloves.clean_blood()
 	if(H.shoes && washshoes)
 		H.shoes.clean_blood()
-	if(H.wear_mask && washmask)
-		H.wear_mask.clean_blood()
+	if(mask && washmask)
+		mask.clean_blood()
 	if(H.glasses && washglasses)
 		H.glasses.clean_blood()
 	if(H.l_ear && washears)

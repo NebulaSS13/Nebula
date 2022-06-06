@@ -69,7 +69,7 @@
 	if(!istype(H))
 		return 0
 
-	return (H.back == src) || (H.s_store == src)
+	return (H.get_equipped_item(slot_back_str) == src) || (H.s_store == src)
 
 /obj/item/suit_cooling_unit/proc/turn_on()
 	if(!cell)

@@ -205,7 +205,7 @@
 	src.throw_mode_off()
 	if(src.stat || !target)
 		return
-	if(target.type == /obj/screen) 
+	if(target.type == /obj/screen)
 		return
 
 	if(!item)
@@ -331,17 +331,19 @@
 
 /mob/living/carbon/show_inv(mob/user)
 	user.set_machine(src)
+	var/obj/item/mask = get_equipped_item(slot_wear_mask_str)
 	var/dat = {"
 	<B><HR><FONT size=3>[name]</FONT></B>
 	<BR><HR>
-	<BR><B>Head(Mask):</B> <A href='?src=\ref[src];item=mask'>[(wear_mask ? wear_mask : "Nothing")]</A>"}
+	<BR><B>Head(Mask):</B> <A href='?src=\ref[src];item=mask'>[(mask ? mask : "Nothing")]</A>"}
 
 	for(var/bp in held_item_slots)
 		var/datum/inventory_slot/inv_slot = held_item_slots[bp]
 		var/obj/item/organ/external/E = get_organ(bp)
 		dat += "<BR><b>[capitalize(E.name)]:</b> <A href='?src=\ref[src];item=[bp]'>[inv_slot.holding?.name || "nothing"]</A>"
 
-	dat += {"<BR><B>Back:</B> <A href='?src=\ref[src];item=back'>[(back ? back : "Nothing")]</A> [((istype(wear_mask, /obj/item/clothing/mask) && istype(back, /obj/item/tank) && !( internal )) ? text(" <A href='?src=\ref[];item=internal'>Set Internal</A>", src) : "")]
+	var/obj/item/back = get_equipped_item(slot_back_str)
+	dat += {"<BR><B>Back:</B> <A href='?src=\ref[src];item=back'>[(back || "Nothing")]</A> [((istype(mask, /obj/item/clothing/mask) && istype(back, /obj/item/tank) && !( internal )) ? text(" <A href='?src=\ref[];item=internal'>Set Internal</A>", src) : "")]
 	<BR>[(internal ? text("<A href='?src=\ref[src];item=internal'>Remove Internal</A>") : "")]
 	<BR><A href='?src=\ref[src];item=pockets'>Empty Pockets</A>
 	<BR><A href='?src=\ref[user];refresh=1'>Refresh</A>
@@ -447,10 +449,11 @@
 	return "Carbon-based"
 
 /mob/living/carbon/proc/get_possible_internals_sources()
-	. = list("back" = list(back, "on"))
+	. = list("back" = list(get_equipped_item(slot_back_str), "on"))
 
 /mob/living/carbon/proc/breathing_hole_covered()
-	. = (wear_mask && (wear_mask?.item_flags & ITEM_FLAG_AIRTIGHT))
+	var/obj/item/mask = get_equipped_item(slot_wear_mask_str)
+	. = (mask && (mask?.item_flags & ITEM_FLAG_AIRTIGHT))
 
 /mob/living/carbon/ui_toggle_internals()
 
@@ -505,7 +508,7 @@
 					break
 			if(!is_poison)
 				valid_tank = TRUE
-			
+
 		if(valid_tank && (!selected_obj || selected_obj.air_contents.gas[breathes_gas] <  checking.air_contents.gas[breathes_gas]))
 			selected_obj =  checking
 			selected_slot = slot_name

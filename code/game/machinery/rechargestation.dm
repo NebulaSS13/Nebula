@@ -87,10 +87,9 @@
 		var/obj/item/organ/internal/cell/potato = H.get_organ(BP_CELL)
 		if(potato)
 			target = potato.cell
-		if((!target || target.percent() > 95) && istype(H.back,/obj/item/rig))
-			var/obj/item/rig/R = H.back
-			if(R.cell && !R.cell.fully_charged())
-				target = R.cell
+		var/obj/item/rig/R = H.get_equipped_item(slot_back_str)
+		if((!target || target.percent() > 95) && istype(R) && R.cell && !R.cell.fully_charged())
+			target = R.cell
 
 	if(target && !target.fully_charged())
 		var/diff = min(target.maxcharge - target.charge, charging_power * CELLRATE) // Capped by charging_power / tick
@@ -199,8 +198,8 @@
 		var/mob/living/carbon/human/H = M
 		if(H.isSynthetic())
 			return 1
-		if(istype(H.back,/obj/item/rig))
-			var/obj/item/rig/R = H.back
+		var/obj/item/rig/R = H.get_equipped_item(slot_back_str)
+		if(istype(R))
 			return R.cell
 		return H.get_organ(BP_CELL)
 	return 0

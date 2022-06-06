@@ -22,7 +22,7 @@
 
 // Clumsy folks can't take the mask off themselves.
 /obj/item/clothing/mask/muzzle/attack_hand(mob/user)
-	if(user.wear_mask == src && !user.check_dexterity(DEXTERITY_GRIP))
+	if(user.get_equipped_item(slot_wear_mask_str) == src && !user.check_dexterity(DEXTERITY_GRIP))
 		return 0
 	..()
 

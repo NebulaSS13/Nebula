@@ -48,7 +48,7 @@
 			if(!H.check_has_mouth())
 				to_chat(user, "<span class='warning'>\The [H] doesn't have a mouth.</span>")
 				return
-			if(H.wear_mask)
+			if(H.get_equipped_item(slot_wear_mask_str))
 				to_chat(user, "<span class='warning'>\The [H] is already wearing a mask.</span>")
 				return
 			if(H.head && (H.head.body_parts_covered & SLOT_FACE))
@@ -61,7 +61,7 @@
 				return
 
 			// Repeat failure checks.
-			if(!H || !src || !H.get_organ(BP_HEAD) || !H.check_has_mouth() || H.wear_mask || (H.head && (H.head.body_parts_covered & SLOT_FACE)))
+			if(!H || !src || !H.get_organ(BP_HEAD) || !H.check_has_mouth() || H.get_equipped_item(slot_wear_mask_str) || (H.head && (H.head.body_parts_covered & SLOT_FACE)))
 				return
 			playsound(src, 'sound/effects/tape.ogg',25)
 			user.visible_message("<span class='danger'>\The [user] has taped up \the [H]'s mouth!</span>")

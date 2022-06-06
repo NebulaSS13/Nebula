@@ -109,7 +109,9 @@
 					if(slot_wear_suit_str)
 						if(H.wear_suit) H.wear_suit.screen_loc = hud_data["loc"]
 					if(slot_wear_mask_str)
-						if(H.wear_mask) H.wear_mask.screen_loc = hud_data["loc"]
+						var/obj/item/mask = H.get_equipped_item(slot_wear_mask_str)
+						if(mask)
+							mask.screen_loc = hud_data["loc"]
 			else
 				switch(hud_data["slot"])
 					if(slot_head_str)
@@ -129,46 +131,21 @@
 					if(slot_wear_suit_str)
 						if(H.wear_suit) H.wear_suit.screen_loc = null
 					if(slot_wear_mask_str)
-						if(H.wear_mask) H.wear_mask.screen_loc = null
+						var/obj/item/mask = H.get_equipped_item(slot_wear_mask_str)
+						if(mask)
+							mask.screen_loc = null
 
 
 /datum/hud/proc/persistant_inventory_update()
 	if(!mymob)
 		return
-
 	if(ishuman(mymob))
 		var/mob/living/carbon/human/H = mymob
 		for(var/gear_slot in H.species.hud.gear)
 			var/list/hud_data = H.species.hud.gear[gear_slot]
-			if(hud_shown)
-				switch(hud_data["slot"])
-					if(slot_s_store_str)
-						if(H.s_store) H.s_store.screen_loc = hud_data["loc"]
-					if(slot_wear_id_str)
-						if(H.wear_id) H.wear_id.screen_loc = hud_data["loc"]
-					if(slot_belt_str)
-						if(H.belt)    H.belt.screen_loc =    hud_data["loc"]
-					if(slot_back_str)
-						if(H.back)    H.back.screen_loc =    hud_data["loc"]
-					if(slot_l_store_str)
-						if(H.l_store) H.l_store.screen_loc = hud_data["loc"]
-					if(slot_r_store_str)
-						if(H.r_store) H.r_store.screen_loc = hud_data["loc"]
-			else
-				switch(hud_data["slot"])
-					if(slot_s_store_str)
-						if(H.s_store) H.s_store.screen_loc = null
-					if(slot_wear_id_str)
-						if(H.wear_id) H.wear_id.screen_loc = null
-					if(slot_belt_str)
-						if(H.belt)    H.belt.screen_loc =    null
-					if(slot_back_str)
-						if(H.back)    H.back.screen_loc =    null
-					if(slot_l_store_str)
-						if(H.l_store) H.l_store.screen_loc = null
-					if(slot_r_store_str)
-						if(H.r_store) H.r_store.screen_loc = null
-
+			var/obj/item/gear = H.get_equipped_item(hud_data["slot"])
+			if(istype(gear))
+				gear.screen_loc = hud_shown ? hud_data["loc"] : null
 
 /datum/hud/proc/instantiate()
 	if(!ismob(mymob)) return 0

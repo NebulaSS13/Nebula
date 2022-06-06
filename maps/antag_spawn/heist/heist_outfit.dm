@@ -99,7 +99,7 @@
 			primary.forceMove(holster)
 		else if(!H.belt && (primary.slot_flags & SLOT_LOWER_BODY))
 			H.equip_to_slot_or_del(primary, slot_belt_str)
-		else if(!H.back && (primary.slot_flags & SLOT_BACK))
+		else if(!H.get_equipped_item(slot_back_str) && (primary.slot_flags & SLOT_BACK))
 			H.equip_to_slot_or_del(primary, slot_back_str)
 		else
 			H.put_in_hands(primary)

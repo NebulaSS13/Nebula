@@ -95,7 +95,8 @@ var/global/image/contamination_overlay = image('icons/effects/contamination.dmi'
 	//Burn eyes if exposed.
 	if(vsc.contaminant_control.EYE_BURNS)
 		var/found_eyeguard = FALSE
-		for(var/obj/item/clothing/thing in list(head, wear_mask, glasses))
+		for(var/slot in global.standard_headgear_slots)
+			var/obj/item/clothing/thing = get_equipped_item(slot)
 			if(istype(thing) && (thing.body_parts_covered & SLOT_EYES))
 				found_eyeguard = TRUE
 				break
@@ -115,7 +116,7 @@ var/global/image/contamination_overlay = image('icons/effects/contamination.dmi'
 	if(E && !E.contaminant_guard)
 		if(prob(20)) to_chat(src, "<span class='danger'>Your eyes burn!</span>")
 		E.damage += 2.5
-		SET_STATUS_MAX(src, STAT_BLURRY, 50) 
+		SET_STATUS_MAX(src, STAT_BLURRY, 50)
 		if (prob(max(0,E.damage - 15) + 1) && !GET_STATUS(src, STAT_BLIND))
 			to_chat(src, "<span class='danger'>You are blinded!</span>")
 			SET_STATUS_MAX(src, STAT_BLIND, 20)

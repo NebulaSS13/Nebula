@@ -67,8 +67,10 @@ meteor_act
 		return ..()
 
 	. = list()
-	var/list/protective_gear = list(head, wear_mask, wear_suit, w_uniform, gloves, shoes)
-	for(var/obj/item/clothing/gear in protective_gear)
+	for(var/slot in global.standard_clothing_slots)
+		var/obj/item/clothing/gear = get_equipped_item(slot)
+		if(!istype(gear))
+			continue
 		if(gear.accessories.len)
 			for(var/obj/item/clothing/accessory/bling in gear.accessories)
 				if(bling.body_parts_covered & def_zone.body_part)
@@ -89,9 +91,8 @@ meteor_act
 		return 1.0
 
 	var/siemens_coefficient = max(species.siemens_coefficient,0)
-
-	var/list/clothing_items = list(head, wear_mask, wear_suit, w_uniform, gloves, shoes) // What all are we checking?
-	for(var/obj/item/clothing/C in clothing_items)
+	for(var/slot in global.standard_clothing_slots)
+		var/obj/item/clothing/C = get_equipped_item(slot)
 		if(istype(C) && (C.body_parts_covered & def_zone.body_part)) // Is that body part being targeted covered?
 			siemens_coefficient *= C.siemens_coefficient
 
@@ -99,19 +100,18 @@ meteor_act
 
 /mob/living/carbon/human/proc/check_head_coverage()
 
-	var/list/body_parts = list(head, wear_mask, wear_suit, w_uniform)
-	for(var/bp in body_parts)
-		if(!bp)	continue
+	for(var/slot in global.standard_headgear_slots)
+		var/bp = get_equipped_item(slot)
 		if(bp && istype(bp ,/obj/item/clothing))
 			var/obj/item/clothing/C = bp
 			if(C.body_parts_covered & SLOT_HEAD)
-				return 1
-	return 0
+				return TRUE
+	return FALSE
 
 //Used to check if they can be fed food/drinks/pills
 /mob/living/carbon/human/check_mouth_coverage()
-	var/list/protective_gear = list(head, wear_mask, wear_suit, w_uniform)
-	for(var/obj/item/gear in protective_gear)
+	for(var/slot in global.standard_headgear_slots)
+		var/obj/item/gear = get_equipped_item(slot)
 		if(istype(gear) && (gear.body_parts_covered & SLOT_FACE) && !(gear.item_flags & ITEM_FLAG_FLEXIBLEMATERIAL))
 			return gear
 
@@ -240,8 +240,9 @@ meteor_act
 
 		switch(hit_zone)
 			if(BP_HEAD)
-				if(wear_mask)
-					wear_mask.add_blood(src)
+				var/obj/item/mask = get_equipped_item(slot_wear_mask_str)
+				if(mask)
+					mask.add_blood(src)
 					update_inv_wear_mask(0)
 				if(head)
 					head.add_blood(src)
@@ -395,8 +396,8 @@ meteor_act
 	if(damtype != BURN && damtype != BRUTE) return
 
 	// The rig might soak this hit, if we're wearing one.
-	if(back && istype(back,/obj/item/rig))
-		var/obj/item/rig/rig = back
+	var/obj/item/rig/rig = get_equipped_item(slot_back_str)
+	if(istype(rig))
 		rig.take_hit(damage)
 
 	// We may also be taking a suit breach.
