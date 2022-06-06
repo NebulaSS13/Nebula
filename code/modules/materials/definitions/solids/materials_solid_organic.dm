@@ -373,6 +373,12 @@
 	sound_manipulate = 'sound/foley/stickspickup1.ogg'
 	sound_dropped = 'sound/foley/sticksdrop1.ogg'
 
+/decl/material/solid/bone/generate_recipes(var/reinforce_material)
+	. = ..()
+	if(!reinforce_material && wall_support_value >= 10)
+		. += new/datum/stack_recipe/furniture/girder(src)
+		. += new/datum/stack_recipe/furniture/ladder(src)
+
 /decl/material/solid/bone/fish
 	name = "fishbone"
 	uid = "solid_fishbone"

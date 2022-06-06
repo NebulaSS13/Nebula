@@ -8,7 +8,7 @@
 	icon = 'icons/obj/items/modkit.dmi'
 	icon_state = "modkit"
 	var/parts = MODKIT_FULL
-	var/target_bodytype
+	var/target_bodytype = BODYTYPE_HUMANOID
 
 	var/list/permitted_types = list(
 		/obj/item/clothing/head/helmet/space/void,
