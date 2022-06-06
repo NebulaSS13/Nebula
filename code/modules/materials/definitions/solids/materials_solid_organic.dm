@@ -451,3 +451,39 @@
 	weight = MAT_VALUE_NORMAL
 	brute_armor = 2
 	wall_support_value = MAT_VALUE_NORMAL
+
+/decl/material/solid/wax
+	name                    = "wax"
+	uid                     = "solid_wax"
+	lore_text               = "An aliphatic organic compound that melts at relatively low temperatures. Commonly used in making candles."
+	taste_description       = "plastic"
+	color                   = COLOR_OFF_WHITE
+	integrity               = 10
+	flags                   = MAT_FLAG_BRITTLE
+	weight                  = MAT_VALUE_LIGHT
+	reflectiveness          = MAT_VALUE_DULL
+	hardness                = MAT_VALUE_SOFT
+	melting_point           = T0C + 40
+	brute_armor             = 0
+	construction_difficulty = MAT_VALUE_EASY_DIY
+	exoplanet_rarity        = MAT_RARITY_NOWHERE
+	value                   = 0.2
+	stack_origin_tech       = "{'materials':1}"
+	default_solid_form      = /obj/item/stack/material/puck
+	sound_manipulate        = 'sound/foley/paperpickup2.ogg'
+	sound_dropped           = 'sound/foley/paperpickup1.ogg'
+	hitsound                = 'sound/effects/squelch1.ogg'
+
+/decl/material/solid/wax/generate_recipes(reinforce_material)
+	. = ..()
+	if(reinforce_material)
+		return
+	. += new/datum/stack_recipe/candle(src)
+
+/decl/material/solid/wax/bees
+	name                    = "beeswax"
+	uid                     = "solid_wax_bees"
+	taste_description       = "slightly of honey"
+	color                   = COLOR_PALE_YELLOW
+	melting_point           = T0C + 65
+	stack_origin_tech       = "{'materials':1,'biotech':1}"
