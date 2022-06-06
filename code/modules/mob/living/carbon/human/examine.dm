@@ -72,8 +72,9 @@
 	msg += "<br>"
 
 	//uniform
-	if(w_uniform && !skipjumpsuit)
-		msg += "[G.He] [G.is] wearing [w_uniform.get_examine_line()].\n"
+	var/obj/item/uniform = get_equipped_item(slot_w_uniform_str)
+	if(uniform && !skipjumpsuit)
+		msg += "[G.He] [G.is] wearing [uniform.get_examine_line()].\n"
 
 	//head
 	if(head)

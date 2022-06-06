@@ -879,8 +879,10 @@
 							var/obj/item/suit = cleaned_human.get_equipped_item(slot_wear_suit_str)
 							if(suit)
 								suit.clean_blood()
-							else if(cleaned_human.w_uniform)
-								cleaned_human.w_uniform.clean_blood()
+							else
+								var/obj/item/uniform = cleaned_human.get_equipped_item(slot_w_uniform_str)
+								if(uniform)
+									uniform.clean_blood()
 							var/obj/item/shoes = cleaned_human.get_equipped_item(slot_shoes_str)
 							if(shoes)
 								shoes.clean_blood()

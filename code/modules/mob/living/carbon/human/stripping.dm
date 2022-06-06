@@ -31,12 +31,12 @@
 				toggle_sensors(user)
 			return
 		if ("lock_sensors")
-			if (!istype(w_uniform, /obj/item/clothing/under))
+			var/obj/item/clothing/under/subject_uniform = get_equipped_item(slot_w_uniform_str)
+			if (!istype(subject_uniform, /obj/item/clothing/under))
 				return
-			var/obj/item/clothing/under/subject_uniform = w_uniform
 			visible_message(SPAN_DANGER("\The [user] is trying to [subject_uniform.has_sensor == SUIT_LOCKED_SENSORS ? "un" : ""]lock \the [src]'s sensors!"))
 			if (do_after(user, HUMAN_STRIP_DELAY, src, progress = 0))
-				if (subject_uniform != w_uniform)
+				if (subject_uniform != get_equipped_item(slot_w_uniform_str))
 					to_chat(user, SPAN_WARNING("\The [src] is not wearing \the [subject_uniform] anymore."))
 					return
 				if (!subject_uniform.has_sensor)
@@ -139,8 +139,8 @@
 
 // Modify the current target sensor level.
 /mob/living/carbon/human/proc/toggle_sensors(var/mob/living/user)
-	var/obj/item/clothing/under/suit = w_uniform
-	if(!suit)
+	var/obj/item/clothing/under/suit = get_equipped_item(slot_w_uniform_str)
+	if(!istype(suit))
 		to_chat(user, "<span class='warning'>\The [src] is not wearing a suit with sensors.</span>")
 		return
 	if (suit.has_sensor >= 2)

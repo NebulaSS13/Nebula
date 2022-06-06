@@ -497,12 +497,12 @@ var/global/list/slot_flags_enumeration = list(
 		if(slot_belt_str)
 			if(slot == slot_belt_str && (item_flags & ITEM_FLAG_IS_BELT))
 				return TRUE
-			else if(!H.w_uniform && (slot_w_uniform_str in H.species.hud?.equip_slots))
+			else if(!H.get_equipped_item(slot_w_uniform_str) && (slot_w_uniform_str in H.species.hud?.equip_slots))
 				if(!disable_warning)
 					to_chat(H, SPAN_WARNING("You need a jumpsuit before you can attach this [name]."))
 				return FALSE
 		if(slot_l_store_str, slot_r_store_str)
-			if(!H.w_uniform && (slot_w_uniform_str in H.species.hud?.equip_slots))
+			if(!H.get_equipped_item(slot_w_uniform_str) && (slot_w_uniform_str in H.species.hud?.equip_slots))
 				if(!disable_warning)
 					to_chat(H, SPAN_WARNING("You need a jumpsuit before you can attach this [name]."))
 				return FALSE
@@ -530,14 +530,14 @@ var/global/list/slot_flags_enumeration = list(
 			if(!istype(B) || !B.can_be_inserted(src,M,1))
 				return FALSE
 		if(slot_tie_str)
+			var/obj/item/clothing/under/uniform = H.get_equipped_item(slot_w_uniform_str)
 			var/obj/item/clothing/suit = H.get_equipped_item(slot_wear_suit_str)
-			if((!H.w_uniform && (slot_w_uniform_str in H.species.hud?.equip_slots)) && (!suit && (slot_wear_suit_str in H.species.hud?.equip_slots)))
+			if((!uniform && (slot_w_uniform_str in H.species.hud?.equip_slots)) && (!suit && (slot_wear_suit_str in H.species.hud?.equip_slots)))
 				if(!disable_warning)
 					to_chat(H, SPAN_WARNING("You need something you can attach \the [src] to."))
 				return FALSE
-			if(H.w_uniform && (slot_w_uniform_str in H.species.hud?.equip_slots))
-				var/obj/item/clothing/under/uniform = H.w_uniform
-				if(uniform && !uniform.can_attach_accessory(src))
+			if(istype(uniform) && (slot_w_uniform_str in H.species.hud?.equip_slots))
+				if(!uniform.can_attach_accessory(src))
 					if (!disable_warning)
 						to_chat(H, SPAN_WARNING("You cannot equip \the [src] to \the [uniform]."))
 					return FALSE

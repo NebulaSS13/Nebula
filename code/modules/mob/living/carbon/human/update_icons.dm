@@ -499,7 +499,7 @@ var/global/list/damage_icon_parts = list()
 	var/obj/item/suit = get_equipped_item(slot_wear_suit_str)
 	var/obj/item/uniform = get_equipped_item(slot_w_uniform_str)
 	if(uniform && (!suit || !(suit.flags_inv & HIDEJUMPSUIT)))
-		overlays_standing[HO_UNIFORM_LAYER]	= w_uniform.get_mob_overlay(src,slot_w_uniform_str)
+		overlays_standing[HO_UNIFORM_LAYER]	= uniform.get_mob_overlay(src,slot_w_uniform_str)
 	else
 		overlays_standing[HO_UNIFORM_LAYER]	= null
 	if(update_icons)
@@ -508,7 +508,7 @@ var/global/list/damage_icon_parts = list()
 /mob/living/carbon/human/update_inv_wear_id(var/update_icons=1)
 	overlays_standing[HO_ID_LAYER] = null
 	if(wear_id)
-		var/obj/item/clothing/under/U = w_uniform
+		var/obj/item/clothing/under/U = get_equipped_item(slot_w_uniform_str)
 		if(istype(U) && !U.displays_id && !U.rolled_down)
 			return
 		overlays_standing[HO_ID_LAYER] = wear_id.get_mob_overlay(src, slot_wear_id_str)
@@ -571,9 +571,10 @@ var/global/list/damage_icon_parts = list()
 		queue_icon_update()
 
 /mob/living/carbon/human/update_inv_shoes(var/update_icons=1)
-	var/obj/item/shoes = get_equipped_item(slot_shoes_str)
-	var/obj/item/suit = get_equipped_item(slot_wear_suit_str)
-	if(shoes && !((suit && suit.flags_inv & HIDESHOES) || (w_uniform && w_uniform.flags_inv & HIDESHOES)))
+	var/obj/item/shoes =   get_equipped_item(slot_shoes_str)
+	var/obj/item/suit =    get_equipped_item(slot_wear_suit_str)
+	var/obj/item/uniform = get_equipped_item(slot_w_uniform_str)
+	if(shoes && !((suit && suit.flags_inv & HIDESHOES) || (uniform && uniform.flags_inv & HIDESHOES)))
 		overlays_standing[HO_SHOES_LAYER] = shoes.get_mob_overlay(src,slot_shoes_str)
 	else
 		var/list/blood_color

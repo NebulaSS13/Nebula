@@ -160,7 +160,7 @@
 		if(istype(get_equipped_item(slot_back_str), /obj/item/tank) || istype(belt, /obj/item/tank) || istype(s_store, /obj/item/tank))
 			dat += "<BR><A href='?src=\ref[src];item=internals'>Toggle internals.</A>"
 
-	var/obj/item/clothing/under/suit = w_uniform
+	var/obj/item/clothing/under/suit = get_equipped_item(slot_w_uniform_str)
 	// Other incidentals.
 	if(istype(suit))
 		dat += "<BR><b>Pockets:</b> <A href='?src=\ref[src];item=pockets'>Empty or Place Item</A>"

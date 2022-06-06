@@ -117,7 +117,7 @@
 				H.put_in_hands(ammobox)
 
 		if(holster)
-			var/obj/item/clothing/under/uniform = H.w_uniform
+			var/obj/item/clothing/under/uniform = H.get_equipped_item(slot_w_uniform_str)
 			if(istype(uniform) && uniform.can_attach_accessory(holster))
 				uniform.attackby(holster, H)
 			else

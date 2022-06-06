@@ -1,9 +1,7 @@
 /mob/living/carbon/human/proc/monkeyize()
 	if (HAS_TRANSFORMATION_MOVEMENT_HANDLER(src))
 		return
-	for(var/obj/item/W in src)
-		if (W==w_uniform) // will be torn
-			continue
+	for(var/obj/item/W in get_contained_external_atoms())
 		drop_from_inventory(W)
 	refresh_visible_overlays()
 	ADD_TRANSFORMATION_MOVEMENT_HANDLER(src)

@@ -93,7 +93,7 @@ This saves us from having to call add_fingerprint() any time something is put in
 				drop_from_inventory(s_store)
 			_wear_suit = null
 			update_inv_wear_suit()
-		else if (W == w_uniform)
+		else if (W == _w_uniform)
 			if (r_store)
 				drop_from_inventory(r_store)
 			if (l_store)
@@ -102,7 +102,7 @@ This saves us from having to call add_fingerprint() any time something is put in
 				drop_from_inventory(wear_id)
 			if (belt)
 				drop_from_inventory(belt)
-			w_uniform = null
+			_w_uniform = null
 			update_inv_w_uniform()
 		else if (W == gloves)
 			gloves = null
@@ -268,8 +268,8 @@ This saves us from having to call add_fingerprint() any time something is put in
 			W.equipped(src, slot)
 			update_inv_wear_suit(redraw_mob)
 		if(slot_w_uniform_str)
-			src.w_uniform = W
-			if(w_uniform.flags_inv & HIDESHOES)
+			_w_uniform = W
+			if(_w_uniform.flags_inv & HIDESHOES)
 				update_inv_shoes(0)
 			W.equipped(src, slot)
 			update_inv_w_uniform(redraw_mob)
@@ -291,7 +291,7 @@ This saves us from having to call add_fingerprint() any time something is put in
 			var/obj/item/back = get_equipped_item(slot_back_str)
 			W.forceMove(back)
 		if(slot_tie_str)
-			var/obj/item/clothing/under/uniform = src.w_uniform
+			var/obj/item/clothing/under/uniform = get_equipped_item(slot_w_uniform_str)
 			if(uniform)
 				uniform.attackby(W,src)
 		else
@@ -350,7 +350,7 @@ This saves us from having to call add_fingerprint() any time something is put in
 		if(slot_shoes_str)      return _shoes
 		if(slot_belt_str)       return belt
 		if(slot_wear_suit_str)  return _wear_suit
-		if(slot_w_uniform_str)  return w_uniform
+		if(slot_w_uniform_str)  return _w_uniform
 		if(slot_s_store_str)    return s_store
 		if(slot_l_ear_str)      return l_ear
 		if(slot_r_ear_str)      return r_ear

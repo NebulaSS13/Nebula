@@ -26,18 +26,19 @@
 	if(H.incapacitated())
 		return
 
-	var/obj/item/clothing/under/U = H.w_uniform
-	for(var/obj/S in U.accessories)
-		if(istype(S, /obj/item/clothing/accessory/storage/holster))
-			var/datum/extension/holster/E = get_extension(S, /datum/extension/holster)
-			if(!E.holstered)
-				if(!H.get_active_hand())
-					to_chat(H, SPAN_WARNING("You're not holding anything to holster."))
-					return
-				E.holster(H.get_active_hand(), H)
-			else
-				E.unholster(H, TRUE)
-			return
+	var/obj/item/clothing/under/U = H.get_equipped_item(slot_w_uniform_str)
+	if(istype(U))
+		for(var/obj/S in U.accessories)
+			if(istype(S, /obj/item/clothing/accessory/storage/holster))
+				var/datum/extension/holster/E = get_extension(S, /datum/extension/holster)
+				if(!E.holstered)
+					if(!H.get_active_hand())
+						to_chat(H, SPAN_WARNING("You're not holding anything to holster."))
+						return
+					E.holster(H.get_active_hand(), H)
+				else
+					E.unholster(H, TRUE)
+				return
 
 	if(istype(H.belt, /obj/item/storage/belt/holster))
 		var/obj/item/storage/belt/holster/B = H.belt

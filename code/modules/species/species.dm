@@ -740,8 +740,9 @@ var/global/const/DEFAULT_SPECIES_HEALTH = 200
 /decl/species/proc/disarm_attackhand(var/mob/living/carbon/human/attacker, var/mob/living/carbon/human/target)
 	attacker.do_attack_animation(target)
 
-	if(target.w_uniform)
-		target.w_uniform.add_fingerprint(attacker)
+	var/obj/item/uniform = target.get_equipped_item(slot_w_uniform_str)
+	if(uniform)
+		uniform.add_fingerprint(attacker)
 	var/obj/item/organ/external/affecting = target.get_organ(ran_zone(attacker.zone_sel.selecting, target = target))
 
 	var/list/holding = list(target.get_active_hand() = 60)
