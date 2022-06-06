@@ -117,6 +117,7 @@
 			msg += "There's <font color='[coating.get_color()]'>something on [G.his] hands</font>!\n"
 
 	//belt
+	var/obj/item/belt = get_equipped_item(slot_belt_str)
 	if(belt)
 		msg += "[G.He] [G.has] [belt.get_examine_line()] about [G.his] waist.\n"
 

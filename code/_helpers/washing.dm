@@ -96,5 +96,5 @@
 
 	var/obj/item/belt = H.get_equipped_item(slot_belt_str)
 	if(belt)
-		H.belt.clean_blood()
+		belt.clean_blood()
 	H.clean_blood(washshoes)

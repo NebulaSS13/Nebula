@@ -100,8 +100,8 @@ This saves us from having to call add_fingerprint() any time something is put in
 				drop_from_inventory(_l_store)
 			if (wear_id)
 				drop_from_inventory(wear_id)
-			if (belt)
-				drop_from_inventory(belt)
+			if (_belt)
+				drop_from_inventory(_belt)
 			_w_uniform = null
 			update_inv_w_uniform()
 		else if (W == gloves)
@@ -136,8 +136,8 @@ This saves us from having to call add_fingerprint() any time something is put in
 		else if (W == _shoes)
 			_shoes = null
 			update_inv_shoes()
-		else if (W == belt)
-			belt = null
+		else if (W == _belt)
+			_belt = null
 			update_inv_belt()
 		else if (W == wear_id)
 			wear_id = null
@@ -220,7 +220,7 @@ This saves us from having to call add_fingerprint() any time something is put in
 			drop_held_items()
 			update_inv_handcuffed(redraw_mob)
 		if(slot_belt_str)
-			src.belt = W
+			_belt = W
 			W.equipped(src, slot)
 			update_inv_belt(redraw_mob)
 		if(slot_wear_id_str)
@@ -341,7 +341,7 @@ This saves us from having to call add_fingerprint() any time something is put in
 		if(slot_wear_id_str)    return wear_id
 		if(slot_glasses_str)    return glasses
 		if(slot_gloves_str)     return gloves
-		if(slot_belt_str)       return belt
+		if(slot_belt_str)       return _belt
 		if(slot_head_str)       return _head
 		if(slot_back_str)       return _back
 		if(slot_handcuffed_str) return _handcuffed

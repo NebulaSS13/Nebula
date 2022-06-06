@@ -97,7 +97,7 @@
 			var/datum/extension/holster/holster_extension = get_extension(holster, /datum/extension/holster)
 			holster_extension.holstered = primary
 			primary.forceMove(holster)
-		else if(!H.belt && (primary.slot_flags & SLOT_LOWER_BODY))
+		else if(!H.get_equipped_item(slot_belt_str) && (primary.slot_flags & SLOT_LOWER_BODY))
 			H.equip_to_slot_or_del(primary, slot_belt_str)
 		else if(!H.get_equipped_item(slot_back_str) && (primary.slot_flags & SLOT_BACK))
 			H.equip_to_slot_or_del(primary, slot_back_str)

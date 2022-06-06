@@ -40,8 +40,8 @@
 					E.unholster(H, TRUE)
 				return
 
-	if(istype(H.belt, /obj/item/storage/belt/holster))
-		var/obj/item/storage/belt/holster/B = H.belt
+	var/obj/item/storage/belt/holster/B = H.get_equipped_item(slot_belt_str)
+	if(istype(B))
 		var/datum/extension/holster/E = get_extension(B, /datum/extension/holster)
 		if(!E.holstered)
 			if(!H.get_active_hand())
