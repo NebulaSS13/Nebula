@@ -79,9 +79,6 @@
 /obj/machinery/camera/Initialize()
 	. = ..()
 	update_icon()
-	return INITIALIZE_HINT_LATELOAD
-
-/obj/machinery/camera/LateInitialize()
 	if(!c_tag)
 		var/area/A = get_area(src)
 		if(isturf(loc) && A)
