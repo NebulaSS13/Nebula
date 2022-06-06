@@ -29,7 +29,7 @@
 			ChangeArea(src, owner.planetary_area)
 
 	. = ..(mapload)	// second param is our own, don't pass to children
-	setup_environmental_lighting(mapload)
+	setup_environmental_lighting()
 
 	if (no_update_icon)
 		return
@@ -52,7 +52,7 @@
 		ext.affecting_heat_sources = last_affecting_heat_sources
 	return ext
 
-/turf/exterior/proc/setup_environmental_lighting(mapload)
+/turf/exterior/proc/setup_environmental_lighting()
 	if (is_outside())
 		if (owner)
 			set_ambient_light(COLOR_WHITE, owner.lightlevel)

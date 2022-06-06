@@ -15,7 +15,7 @@
 	/// Force this one to pretend it's an overedge turf.
 	var/forced_dirs = 0
 
-/turf/space/proc/update_starlight(mapload)
+/turf/space/proc/update_starlight()
 	for (var/turf/T in RANGE_TURFS(src, 1))
 		// Fuck if I know how these turfs are located in an area that is not an area.
 		if (!isloc(T.loc) || !TURF_IS_DYNAMICALLY_LIT_UNSAFE(T))
@@ -27,13 +27,13 @@
 	if (ambient_light)
 		clear_ambient_light()
 
-/turf/space/Initialize(var/mapload)
+/turf/space/Initialize()
 
 	SHOULD_CALL_PARENT(FALSE)
 	atom_flags |= ATOM_FLAG_INITIALIZED
 
 	if (config.starlight)
-		update_starlight(mapload)
+		update_starlight()
 
 	//We might be an edge
 	if(y == world.maxy || forced_dirs & NORTH)
@@ -83,7 +83,7 @@
 		if (AM.simulated && !AM.anchored)
 			AM.throw_at(get_step(src, global.reverse_dir[direction]), 5, 1)
 
-		if(istype(AM, /obj/effect/decal)) 
+		if(istype(AM, /obj/effect/decal))
 			qdel(AM)
 
 /turf/space/Destroy()
