@@ -40,9 +40,10 @@
 		to_chat(imp_in, "You feel a faint click.")
 
 /obj/item/implant/freedom/proc/remove_cuffs_and_unbuckle(mob/living/carbon/user)
-	if(!user.handcuffed)
+	var/obj/cuffs = user.get_equipped_item(slot_handcuffed_str)
+	if(!cuffs)
 		return 0
-	. = user.unEquip(user.handcuffed)
+	. = user.unEquip(cuffs)
 	if(. && user.buckled && user.buckled.buckle_require_restraints)
 		user.buckled.unbuckle_mob()
 	return

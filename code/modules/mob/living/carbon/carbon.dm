@@ -275,21 +275,19 @@
 	bodytemperature += temp_inc
 
 /mob/living/carbon/can_use_hands()
-	if(handcuffed)
+	if(get_equipped_item(slot_handcuffed_str))
 		return 0
 	if(buckled && ! istype(buckled, /obj/structure/bed/chair)) // buckling does not restrict hands
 		return 0
 	return 1
 
 /mob/living/carbon/restrained()
-	if (handcuffed)
-		return 1
-	return
+	return get_equipped_item(slot_handcuffed_str)
 
 /mob/living/carbon/u_equip(obj/item/W)
 	. = ..()
-	if(!. && W == handcuffed)
-		handcuffed = null
+	if(!. && W == get_equipped_item(slot_handcuffed_str))
+		_handcuffed = null
 		update_inv_handcuffed()
 		if(buckled && buckled.buckle_require_restraints)
 			buckled.unbuckle_mob()

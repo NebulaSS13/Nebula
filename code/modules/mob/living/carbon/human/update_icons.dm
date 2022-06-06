@@ -653,10 +653,11 @@ var/global/list/damage_icon_parts = list()
 		queue_icon_update()
 
 /mob/living/carbon/human/update_inv_handcuffed(var/update_icons=1)
-	if(handcuffed)
-		overlays_standing[HO_HANDCUFF_LAYER] = handcuffed.get_mob_overlay(src,slot_handcuffed_str)
+	var/obj/item/cuffs = get_equipped_item(slot_handcuffed_str)
+	if(cuffs)
+		overlays_standing[HO_HANDCUFF_LAYER] = cuffs.get_mob_overlay(src,slot_handcuffed_str)
 	else
-		overlays_standing[HO_HANDCUFF_LAYER]	= null
+		overlays_standing[HO_HANDCUFF_LAYER] = null
 	if(update_icons)
 		queue_icon_update()
 
@@ -667,7 +668,7 @@ var/global/list/damage_icon_parts = list()
 		var/obj/item/held = inv_slot?.holding
 		if(istype(held))
 			// This should be moved out of icon code
-			if(handcuffed)
+			if(get_equipped_item(slot_handcuffed_str))
 				drop_from_inventory(held)
 				continue
 			var/image/standing = held.get_mob_overlay(src, inv_slot.overlay_slot, bp)

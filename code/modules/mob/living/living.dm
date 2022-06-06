@@ -385,10 +385,9 @@ default behaviour is:
 		buckled.unbuckle_mob()
 	if(iscarbon(src))
 		var/mob/living/carbon/C = src
-
-		if (C.handcuffed && !initial(C.handcuffed))
-			C.drop_from_inventory(C.handcuffed)
-		C.handcuffed = initial(C.handcuffed)
+		var/obj/item/cuffs = get_equipped_item(slot_handcuffed_str)
+		if (cuffs)
+			C.unEquip(cuffs)
 	BITSET(hud_updateflag, HEALTH_HUD)
 	BITSET(hud_updateflag, STATUS_HUD)
 	BITSET(hud_updateflag, LIFE_HUD)

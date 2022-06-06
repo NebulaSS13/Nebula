@@ -1097,11 +1097,12 @@ Note that amputating the affected organ does in fact remove the infection from t
 		holder = owner
 	if(!holder)
 		return
-	if (holder.handcuffed && (body_part in list(SLOT_ARM_LEFT, SLOT_ARM_RIGHT, SLOT_HAND_LEFT, SLOT_HAND_RIGHT)))
+	var/obj/item/cuffs = holder.get_equipped_item(slot_handcuffed_str)
+	if(cuffs && (body_part in list(SLOT_ARM_LEFT, SLOT_ARM_RIGHT, SLOT_HAND_LEFT, SLOT_HAND_RIGHT)))
 		holder.visible_message(\
-			"\The [holder.handcuffed.name] falls off of [holder.name].",\
-			"\The [holder.handcuffed.name] falls off you.")
-		holder.drop_from_inventory(holder.handcuffed)
+			"\The [cuffs] falls off of [holder.name].",\
+			"\The [cuffs] falls off you.")
+		holder.unEquip(cuffs)
 
 // checks if all wounds on the organ are bandaged
 /obj/item/organ/external/proc/is_bandaged()

@@ -61,7 +61,7 @@
 /proc/iscuffed(A)
 	if(istype(A, /mob/living/carbon))
 		var/mob/living/carbon/C = A
-		if(C.handcuffed)
+		if(C.get_equipped_item(slot_handcuffed_str))
 			return 1
 	return 0
 
@@ -505,7 +505,7 @@ var/global/list/intents = list(I_HELP,I_DISARM,I_GRAB,I_HURT)
 	return 0
 
 /mob/living/carbon/assess_perp(var/obj/access_obj, var/check_access, var/auth_weapons, var/check_records, var/check_arrest)
-	if(handcuffed)
+	if(get_equipped_item(slot_handcuffed_str))
 		return SAFE_PERP
 
 	return ..()

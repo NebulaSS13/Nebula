@@ -151,8 +151,8 @@ This saves us from having to call add_fingerprint() any time something is put in
 		else if (W == s_store)
 			s_store = null
 			update_inv_s_store()
-		else if (W == handcuffed)
-			handcuffed = null
+		else if (W == _handcuffed)
+			_handcuffed = null
 			if(buckled && buckled.buckle_require_restraints)
 				buckled.unbuckle_mob()
 			update_inv_handcuffed()
@@ -216,7 +216,7 @@ This saves us from having to call add_fingerprint() any time something is put in
 			W.equipped(src, slot)
 			update_inv_wear_mask(redraw_mob)
 		if(slot_handcuffed_str)
-			src.handcuffed = W
+			_handcuffed = W
 			drop_held_items()
 			update_inv_handcuffed(redraw_mob)
 		if(slot_belt_str)
@@ -339,7 +339,7 @@ This saves us from having to call add_fingerprint() any time something is put in
 
 	switch(slot)
 		if(slot_back_str)       return _back
-		if(slot_handcuffed_str) return handcuffed
+		if(slot_handcuffed_str) return _handcuffed
 		if(slot_l_store_str)    return l_store
 		if(slot_r_store_str)    return r_store
 		if(slot_wear_mask_str)  return _wear_mask
@@ -358,11 +358,15 @@ This saves us from having to call add_fingerprint() any time something is put in
 
 /mob/living/carbon/human/get_equipped_items(var/include_carried = 0)
 	. = ..()
-	for(var/obj/item/thing in list(belt, l_ear, r_ear, glasses, gloves, head, shoes, wear_id, wear_suit, w_uniform))
-		LAZYADD(., thing)
-	if(include_carried)
-		for(var/obj/item/thing in list(l_store, r_store, handcuffed, s_store))
+	for(var/slot in list(slot_belt_str, slot_l_ear_str, slot_r_ear_str, slot_glasses_str, slot_gloves_str, slot_head_str, slot_shoes_str, slot_wear_id_str, slot_wear_suit_str, slot_w_uniform_str))
+		var/obj/item/thing = get_equipped_item(slot)
+		if(istype(thing))
 			LAZYADD(., thing)
+	if(include_carried)
+		for(var/slot in list(slot_l_store_str, slot_r_store_str, slot_handcuffed_str, slot_s_store_str))
+			var/obj/item/thing = get_equipped_item(slot)
+			if(istype(thing))
+				LAZYADD(., thing)
 
 //Same as get_covering_equipped_items, but using target zone instead of bodyparts flags
 /mob/living/carbon/human/proc/get_covering_equipped_item_by_zone(var/zone)

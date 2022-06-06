@@ -147,12 +147,10 @@
 	if(wear_id)
 		msg += "[G.He] [G.is] wearing [wear_id.get_examine_line()].\n"
 
-	//handcuffed?
-	if(handcuffed)
-		if(istype(handcuffed, /obj/item/handcuffs/cable))
-			msg += "<span class='warning'>[G.He] [G.is] [html_icon(handcuffed)] restrained with cable!</span>\n"
-		else
-			msg += "<span class='warning'>[G.He] [G.is] [html_icon(handcuffed)] handcuffed!</span>\n"
+	//handcuffs?
+	var/obj/item/cuffs = get_equipped_item(slot_handcuffed_str)
+	if(cuffs)
+		msg += "<span class='warning'>[G.He] [G.is] [html_icon(cuffs)] restrained with \the [cuffs]!</span>\n"
 
 	//buckled
 	if(buckled)

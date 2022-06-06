@@ -138,9 +138,6 @@
 	START_PROCESSING(SSobj, src)
 
 /obj/effect/energy_net/Destroy()
-	if(istype(captured, /mob/living/carbon))
-		if(captured.handcuffed == src)
-			captured.handcuffed = null
 	if(captured)
 		unbuckle_mob()
 	STOP_PROCESSING(SSobj, src)
@@ -172,10 +169,6 @@
 	if(M.buckled)
 		M.buckled.unbuckle_mob()
 	buckle_mob(M)
-	if(istype(M, /mob/living/carbon))
-		var/mob/living/carbon/C = M
-		if(!C.handcuffed)
-			C.handcuffed = src
 	return 1
 
 /obj/effect/energy_net/post_buckle_mob(mob/living/M)

@@ -37,9 +37,9 @@
 		place_handcuffs(user, user)
 		return
 
-	// only carbons can be handcuffed
+	// only carbons can be cuffed
 	if(istype(C))
-		if(!C.handcuffed)
+		if(!C.get_equipped_item(slot_handcuffed_str))
 			if (C == user)
 				place_handcuffs(user, user)
 				return
@@ -101,7 +101,7 @@ var/global/last_chew = 0
 	if (last_chew + 26 > world.time) return
 
 	var/mob/living/carbon/human/H = A
-	if (!H.handcuffed) return
+	if (!H.get_equipped_item(slot_handcuffed_str)) return
 	if (H.a_intent != I_HURT) return
 	if (H.zone_sel.selecting != BP_MOUTH) return
 	if (H.get_equipped_item(slot_wear_mask_str)) return
