@@ -114,9 +114,10 @@
 	// TODO: REMOVE DIRECT REFERENCES
 	var/obj/item/_back
 	var/obj/item/clothing/mask/_wear_mask
+	// END TODO
 
+	var/obj/item/storage/active_storage
 	var/obj/buckled = null//Living
-	var/obj/item/storage/s_active = null//Carbon
 	var/in_throw_mode = 0
 
 	var/can_pull_size = ITEM_SIZE_STRUCTURE // Maximum w_class the mob can pull.

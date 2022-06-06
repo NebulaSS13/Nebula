@@ -73,7 +73,7 @@
 		return 0
 
 	for(var/mob/M in range(1, master_item.loc))
-		if (M.s_active == src)
+		if (M.active_storage == src)
 			src.close(M)
 	return 1
 

@@ -122,8 +122,8 @@ var/global/photo_count = 0
 			if(user.unEquip(src))
 				user.equip_to_slot_if_possible(src, inv.slot_id)
 		else if(over == user && in_range(src, user) || loc == user)
-			if(user.s_active)
-				user.s_active.close(user)
+			if(user.active_storage)
+				user.active_storage.close(user)
 			show_to(user)
 		return TRUE
 	. = ..()

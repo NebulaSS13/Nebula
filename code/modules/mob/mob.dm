@@ -9,8 +9,8 @@
 
 	unset_machine()
 	QDEL_NULL(hud_used)
-	if(s_active)
-		s_active.close(src)
+	if(active_storage)
+		active_storage.close(src)
 	if(istype(ability_master))
 		QDEL_NULL(ability_master)
 	if(istype(skillset))
