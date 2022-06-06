@@ -113,7 +113,7 @@
 				"<span class='notice'>You activate \the [src].</span>",
 				"<span class='italics'>You hear a click.</span>")
 			message_admins("Power sink activated by [key_name_admin(user)] at (<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[src.x];Y=[src.y];Z=[src.z]'>JMP</a>)")
-			log_game("Power sink activated by [key_name(user)] at [get_area_name(src)]")
+			log_game("Power sink activated by [key_name(user)] at [get_area(src).name]")
 			set_mode(OPERATING)
 
 		if(OPERATING)

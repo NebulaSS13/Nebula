@@ -417,7 +417,7 @@
 /obj/item/integrated_circuit/input/turfscan/do_work()
 	var/turf/scanned_turf = get_pin_data_as_type(IC_INPUT, 1, /turf)
 	var/turf/circuit_turf = get_turf(src)
-	var/area_name = get_area_name(scanned_turf)
+	var/area_name = get_area(scanned_turf).proper_name
 	if(!istype(scanned_turf)) //Invalid input
 		activate_pin(3)
 		return
@@ -1031,9 +1031,9 @@
 	power_draw_per_use = 40
 	var/list/mtypes = list(
 		/decl/material/solid/metal/steel,
-		/decl/material/solid/metal/silver, 
-		/decl/material/solid/metal/gold, 
-		/decl/material/solid/gemstone/diamond, 
+		/decl/material/solid/metal/silver,
+		/decl/material/solid/metal/gold,
+		/decl/material/solid/gemstone/diamond,
 		/decl/material/solid/metal/uranium,
 		/decl/material/solid/metal/plasteel,
 		/decl/material/solid/metal/titanium,

@@ -176,7 +176,7 @@ var/global/list/all_apcs = list()
 /obj/machinery/power/apc/Initialize(mapload, var/ndir, var/populate_parts = TRUE)
 	global.all_apcs += src
 	if(areastring)
-		area = get_area_name(areastring)
+		area = get_area_name(strip_improper(areastring))
 	else
 		var/area/A = get_area(src)
 		//if area isn't specified use current
