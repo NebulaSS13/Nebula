@@ -1,5 +1,0 @@
-author: tag if you want to specify another name or several people. -->
-delete-after: true
-changes:
-  - tweak: Config `expanded_alt_interactions` allows for various generic actions (look,
-      grab, drop, rotate) to show up when alt-clicking.
