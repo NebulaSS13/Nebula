@@ -6,6 +6,12 @@
 	..()
 	broadcast()
 
+/datum/extension/network_device/broadcaster/router/connect()
+	. = ..()
+	if(!.)
+		broadcast()
+		return TRUE
+
 /datum/extension/network_device/broadcaster/router/proc/broadcast()
 	var/datum/computer_network/net = SSnetworking.networks[network_id]
 	if(!net)
