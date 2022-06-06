@@ -1,5 +1,4 @@
 /turf/exterior/wall/random/ministation/
-	var/starting = FALSE //if the turf was there on mapload
 	var/guaranteed = FALSE //only matters for starting turfs. it is guaranteed to be not deleted on mapload.
 	var/generatepercent = 70 //the percentage chance tof each surrounding turf turning into asteroids
 
@@ -21,12 +20,10 @@
 
 /turf/exterior/wall/random/ministation/Initialize(var/ml, var/materialtype, var/rmaterialtype)
 	..(ml, materialtype, rmaterialtype)
-	if(ml)
-		starting = TRUE
 	. = INITIALIZE_HINT_LATELOAD
 
-/turf/exterior/wall/random/ministation/LateInitialize()
-	if(starting) //only need to call generate_asteroid here if this is a first node, the others are called in the generate_asteroid function
+/turf/exterior/wall/random/ministation/LateInitialize(var/ml)
+	if(ml) //only need to call generate_asteroid here if this is a first node, the others are called in the generate_asteroid function
 		if(prob(99) && !guaranteed) //99% chance that the asteroid turns into space
 			ChangeTurf(/turf/space)
 		else //otherwise, try to convert the turfs in the cardinal direction into asteroid as well
@@ -46,6 +43,7 @@
 				newasteroid = ad
 				newasteroid.guaranteed = TRUE
 				newasteroid.generatepercent = max(10,probability-10) //reduce the probability of conversion with 10 percent for each turf away from the starting one.
+				//generate_asteroid will be called in newasteroids LateInitilaze so no point in calling here.
 		
 
 //trash bins
