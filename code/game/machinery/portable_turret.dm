@@ -785,14 +785,12 @@ var/global/list/turret_icons
 				build_step = 6
 				return
 
-	if(istype(I, /obj/item/pen))	//you can rename turrets like bots!
+	if(IS_PEN(I))	//you can rename turrets like bots!
+		if(!CanPhysicallyInteractWith(usr, src))
+			return
 		var/t = sanitize_safe(input(user, "Enter new turret name", name, finish_name) as text, MAX_NAME_LEN)
-		if(!t)
-			return
-		if(!in_range(src, usr) && loc != usr)
-			return
-
-		finish_name = t
+		if(t && I.do_tool_interaction(TOOL_PEN, user, src, 1 SECOND, fuel_expenditure = 1))
+			finish_name = t
 		return
 
 	..()

@@ -59,7 +59,7 @@
 	return
 
 /obj/item/chems/attackby(obj/item/W, mob/user)
-	if(istype(W, /obj/item/pen) || istype(W, /obj/item/flashlight/pen))
+	if(IS_PEN(W))
 		var/tmp_label = sanitize_safe(input(user, "Enter a label for [name]", "Label", label_text), MAX_NAME_LEN)
 		if(length(tmp_label) > 10)
 			to_chat(user, "<span class='notice'>The label can be at most 10 characters long.</span>")

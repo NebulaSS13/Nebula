@@ -98,7 +98,7 @@
 	overlays = list() //resets list
 	overlays += image(icon,"crayonbox")
 	for(var/obj/item/pen/crayon/crayon in contents)
-		overlays += image(icon,crayon.colourName)
+		overlays += image(icon,crayon.stroke_colour_name)
 
 ////////////
 //CIG PACK//

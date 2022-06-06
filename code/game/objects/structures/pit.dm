@@ -201,3 +201,17 @@
 	var/died = max(cur_year - rand(0,70),born)
 
 	message = "Here lies [nam], [born] - [died]."
+
+/obj/structure/gravemarker/attackby(obj/item/W, mob/user)
+	if(IS_HATCHET(W))
+		visible_message("<span class = 'warning'>\The [user] starts hacking away at \the [src] with \the [W].</span>")
+		if(do_after(user, 30))
+			visible_message("<span class = 'warning'>\The [user] hacks \the [src] apart.</span>")
+			physically_destroyed(FALSE)
+		return TRUE
+	if(IS_PEN(W) && CanPhysicallyInteractWith(user, src))
+		var/msg = sanitize(input(user, "What should it say?", "Grave marker", message) as text|null)
+		if(msg && W.do_tool_interaction(TOOL_PEN, user, src, 1 SECOND, fuel_expenditure = 1))
+			message = msg
+		return TRUE
+	. = ..()

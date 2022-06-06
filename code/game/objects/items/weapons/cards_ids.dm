@@ -36,7 +36,7 @@
 		to_chat(user, "It has a blank space for a signature.")
 
 /obj/item/card/union/attackby(var/obj/item/thing, var/mob/user)
-	if(istype(thing, /obj/item/pen))
+	if(IS_PEN(thing))
 		if(signed_by)
 			to_chat(user, SPAN_WARNING("\The [src] has already been signed."))
 		else

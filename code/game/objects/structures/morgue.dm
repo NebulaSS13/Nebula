@@ -80,8 +80,8 @@
 	if(Adjacent(user))
 		return attack_hand(user)
 
-/obj/structure/morgue/attackby(P, mob/user)
-	if(istype(P, /obj/item/pen))
+/obj/structure/morgue/attackby(obj/item/P, mob/user)
+	if(IS_PEN(P))
 		var/new_label = sanitize_safe(input(user, "What would you like the label to be?", capitalize(name), null) as text|null, MAX_NAME_LEN)
 
 		if((!Adjacent(user) || loc == user))

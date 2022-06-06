@@ -68,7 +68,7 @@
 		else
 			to_chat(user, "<span class='notice'>There's already something in [title]!</span>")
 			return
-	if(istype(W, /obj/item/pen))
+	if(IS_PEN(W))
 		if(unique)
 			to_chat(user, "These pages don't seem to take the ink well. Looks like you can't modify it.")
 			return
@@ -133,9 +133,11 @@
 /obj/item/book/proc/formatpencode(var/mob/user, var/t, var/obj/item/pen/P)
 	. = t
 	if(findtext(t, "\[sign\]"))
-		. = replacetext(t, "\[sign\]", "<font face=\"[signfont]\"><i>[P ? P.get_signature(user) : "Anonymous"]</i></font>")
+		var/decl/tool_archetype/pen/parch = GET_DECL(TOOL_PEN)
+		var/signature = parch.get_signature(user, P) 
+		. = replacetext(t, "\[sign\]", "<font face=\"[signfont]\"><i>[signature]</i></font>")
 	if(P)
-		if(P.iscrayon)
+		if(P.get_tool_property(TOOL_PEN, TOOL_PROP_PEN_FLAG) & PEN_FLAG_CRAYON)
 			. = replacetext(t, "\[*\]", "")
 			. = replacetext(t, "\[hr\]", "")
 			. = replacetext(t, "\[small\]", "")
@@ -147,11 +149,11 @@
 			. = replacetext(t, "\[row\]", "")
 			. = replacetext(t, "\[cell\]", "")
 			. = replacetext(t, "\[logo\]", "")
-			. = "<font face=\"[crayonfont]\" color=\"[P.colour]\"><b>[.]</b></font>"
-		else if(P.isfancy)
-			. = "<font face=\"[fancyfont]\" color=\"[P.colour]\"><i>[.]</i></font>"
+			. = "<font face=\"[crayonfont]\" color=\"[P.get_tool_property(TOOL_PEN, TOOL_PROP_COLOR)]\"><b>[.]</b></font>"
+		else if(P.get_tool_property(TOOL_PEN, TOOL_PROP_PEN_FLAG) & PEN_FLAG_FANCY)
+			. = "<font face=\"[fancyfont]\" color=\"[P.get_tool_property(TOOL_PEN, TOOL_PROP_COLOR)]\"><i>[.]</i></font>"
 		else
-			. = "<font face=\"[deffont]\" color=\"[P.colour]\">[.]</font>"
+			. = "<font face=\"[deffont]\" color=\"[P.get_tool_property(TOOL_PEN, TOOL_PROP_COLOR)]\">[.]</font>"
 	else
 		. = "<font face=\"[deffont]\" color=\"black\"]>[.]</font>"
 	. = pencode2html(.)

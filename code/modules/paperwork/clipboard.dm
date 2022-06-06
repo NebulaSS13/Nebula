@@ -53,7 +53,7 @@
 		to_chat(user, "<span class='notice'>You clip the [W] onto \the [src].</span>")
 		update_icon()
 
-	else if(istype(toppaper) && istype(W, /obj/item/pen))
+	else if(istype(toppaper) && IS_PEN(W))
 		toppaper.attackby(W, usr)
 		update_icon()
 
@@ -97,22 +97,18 @@
 
 		else if(href_list["addpen"])
 			if(!haspen)
-				var/obj/item/pen/W = usr.get_active_hand()
-				if(istype(W, /obj/item/pen))
+				var/obj/item/W = usr.get_active_hand()
+				if(IS_PEN(W) && (W.w_class <= ITEM_SIZE_TINY))
 					if(!usr.unEquip(W, src))
 						return
 					haspen = W
-					to_chat(usr, "<span class='notice'>You slot the pen into \the [src].</span>")
+					to_chat(usr, SPAN_NOTICE("You slot the pen into \the [src]."))
 
 		else if(href_list["write"])
 			var/obj/item/P = locate(href_list["write"])
-
 			if(P && (P.loc == src) && istype(P, /obj/item/paper) && (P == toppaper) )
-
 				var/obj/item/I = usr.get_active_hand()
-
-				if(istype(I, /obj/item/pen))
-
+				if(IS_PEN(I))
 					P.attackby(I, usr)
 
 		else if(href_list["remove"])

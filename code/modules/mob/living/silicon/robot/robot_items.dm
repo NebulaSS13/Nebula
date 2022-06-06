@@ -181,7 +181,8 @@
 /obj/item/pen/robopen/attack_self(mob/user)
 
 	var/choice = input("Would you like to change colour or mode?") as null|anything in list("Colour","Mode")
-	if(!choice) return
+	if(!choice) 
+		return
 
 	playsound(src.loc, 'sound/effects/pop.ogg', 50, 0)
 
@@ -189,7 +190,8 @@
 
 		if("Colour")
 			var/newcolour = input("Which colour would you like to use?") as null|anything in list("black","blue","red","green","yellow")
-			if(newcolour) colour = newcolour
+			if(newcolour) 
+				set_ink_color(newcolour, newcolour)
 
 		if("Mode")
 			if (mode == 1)
