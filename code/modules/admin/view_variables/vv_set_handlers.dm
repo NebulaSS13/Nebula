@@ -141,6 +141,28 @@
 
 #undef VV_LIGHTING_SET
 
+/decl/vv_set_handler/ambient_light_handler
+	handled_type = /turf
+	handled_vars = list("ambient_light", "ambient_light_multiplier")
+
+/decl/vv_set_handler/ambient_light_handler/handle_set_var(turf/T, variable, value, client)
+	switch (variable)
+		if ("ambient_light")
+			if (!istext(value) && !isnull(value))
+				to_chat(client, "<span class='alert'><pre>ambient_light</pre> must be text or null.</span>")
+				return
+			var/static/regex/color_regex = regex(@"^#[\dA-Fa-f]{6}$")
+			if (istext(value) && !color_regex.Find(value))
+				to_chat(client, "<span class='alert'><pre>ambient_light</pre> must be a 6 digit (<pre>#AABBCC</pre>) hexadecimal color string.</span>")
+				return
+			T.set_ambient_light(value)
+
+		if ("ambient_light_multiplier")
+			if (!isnum(value))
+				to_chat(client, "<span class='alert'><pre>ambient_light_multiplier</pre> must be num.</span>")
+				return
+			T.set_ambient_light(multiplier = value)
+
 /decl/vv_set_handler/icon_rotation_handler
 	handled_type = /atom
 	handled_vars = list("icon_rotation" = /atom/proc/set_rotation)
