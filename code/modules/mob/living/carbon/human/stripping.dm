@@ -116,25 +116,23 @@
 
 // Empty out everything in the target's pockets.
 /mob/living/carbon/human/proc/empty_pockets(var/mob/living/user)
-	if(!r_store && !l_store)
-		to_chat(user, "<span class='warning'>\The [src] has nothing in their pockets.</span>")
-		return
-	if(r_store)
-		unEquip(r_store)
-	if(l_store)
-		unEquip(l_store)
-	visible_message("<span class='danger'>\The [user] empties [src]'s pockets!</span>")
+	for(var/slot in global.pocket_slots)
+		var/obj/item/pocket = get_equipped_item(slot)
+		if(pocket)
+			unEquip(pocket)
+			. = TRUE
+	if(.)
+		visible_message(SPAN_DANGER("\The [user] empties \the [src]'s pockets!"))
+	else
+		to_chat(user, SPAN_WARNING("\The [src] has nothing in their pockets."))
 
 /mob/living/carbon/human/proc/place_in_pockets(obj/item/I, var/mob/living/user)
 	if(!user.unEquip(I))
 		return
-	if(!r_store)
-		if(equip_to_slot_if_possible(I, slot_r_store_str, del_on_fail=0, disable_warning=1, redraw_mob=1))
+	for(var/slot in global.pocket_slots)
+		if(!get_equipped_item(slot) && equip_to_slot_if_possible(I, slot, del_on_fail=0, disable_warning=1, redraw_mob=1))
 			return
-	if(!l_store)
-		if(equip_to_slot_if_possible(I, slot_l_store_str, del_on_fail=0, disable_warning=1, redraw_mob=1))
-			return
-	to_chat(user, "<span class='warning'>You are unable to place [I] in [src]'s pockets.</span>")
+	to_chat(user, SPAN_WARNING("You are unable to place [I] in [src]'s pockets."))
 	user.put_in_active_hand(I)
 
 // Modify the current target sensor level.

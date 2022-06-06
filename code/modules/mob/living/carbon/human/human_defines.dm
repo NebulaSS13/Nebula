@@ -29,17 +29,17 @@
 	var/obj/item/_w_uniform
 	var/obj/item/_wear_suit
 	var/obj/item/_shoes
+	var/obj/item/_l_ear
+	var/obj/item/_r_ear
+	var/obj/item/_r_store
+	var/obj/item/_l_store
 	// END TODO
 
 	var/obj/item/belt = null
 	var/obj/item/gloves = null
 	var/obj/item/glasses = null
 	var/obj/item/head = null
-	var/obj/item/l_ear = null
-	var/obj/item/r_ear = null
 	var/obj/item/wear_id = null
-	var/obj/item/r_store = null
-	var/obj/item/l_store = null
 	var/obj/item/s_store = null
 
 	var/icon/stand_icon = null

@@ -94,10 +94,10 @@ This saves us from having to call add_fingerprint() any time something is put in
 			_wear_suit = null
 			update_inv_wear_suit()
 		else if (W == _w_uniform)
-			if (r_store)
-				drop_from_inventory(r_store)
-			if (l_store)
-				drop_from_inventory(l_store)
+			if (_r_store)
+				drop_from_inventory(_r_store)
+			if (_l_store)
+				drop_from_inventory(_l_store)
 			if (wear_id)
 				drop_from_inventory(wear_id)
 			if (belt)
@@ -123,15 +123,15 @@ This saves us from having to call add_fingerprint() any time something is put in
 				if(!(mask && (mask.item_flags & ITEM_FLAG_AIRTIGHT)))
 					set_internals(null)
 			update_inv_head()
-		else if (W == l_ear)
-			l_ear = null
-			if(r_ear == W) //check for items that get equipped to both ear slots
-				r_ear = null
+		else if (W == _l_ear)
+			_l_ear = null
+			if(_r_ear == W) //check for items that get equipped to both ear slots
+				_r_ear = null
 			update_inv_ears()
-		else if (W == r_ear)
-			r_ear = null
-			if(l_ear == W)
-				l_ear = null
+		else if (W == _r_ear)
+			_r_ear = null
+			if(_l_ear == W)
+				_l_ear = null
 			update_inv_ears()
 		else if (W == _shoes)
 			_shoes = null
@@ -142,11 +142,11 @@ This saves us from having to call add_fingerprint() any time something is put in
 		else if (W == wear_id)
 			wear_id = null
 			update_inv_wear_id()
-		else if (W == r_store)
-			r_store = null
+		else if (W == _r_store)
+			_r_store = null
 			update_inv_pockets()
-		else if (W == l_store)
-			l_store = null
+		else if (W == _l_store)
+			_l_store = null
 			update_inv_pockets()
 		else if (W == s_store)
 			s_store = null
@@ -228,11 +228,11 @@ This saves us from having to call add_fingerprint() any time something is put in
 			W.equipped(src, slot)
 			update_inv_wear_id(redraw_mob)
 		if(slot_l_ear_str)
-			src.l_ear = W
+			_l_ear = W
 			W.equipped(src, slot)
 			update_inv_ears(redraw_mob)
 		if(slot_r_ear_str)
-			src.r_ear = W
+			_r_ear = W
 			W.equipped(src, slot)
 			update_inv_ears(redraw_mob)
 		if(slot_glasses_str)
@@ -274,11 +274,11 @@ This saves us from having to call add_fingerprint() any time something is put in
 			W.equipped(src, slot)
 			update_inv_w_uniform(redraw_mob)
 		if(slot_l_store_str)
-			src.l_store = W
+			_l_store = W
 			W.equipped(src, slot)
 			update_inv_pockets(redraw_mob)
 		if(slot_r_store_str)
-			src.r_store = W
+			_r_store = W
 			W.equipped(src, slot)
 			update_inv_pockets(redraw_mob)
 		if(slot_s_store_str)
@@ -340,8 +340,8 @@ This saves us from having to call add_fingerprint() any time something is put in
 	switch(slot)
 		if(slot_back_str)       return _back
 		if(slot_handcuffed_str) return _handcuffed
-		if(slot_l_store_str)    return l_store
-		if(slot_r_store_str)    return r_store
+		if(slot_l_store_str)    return _l_store
+		if(slot_r_store_str)    return _r_store
 		if(slot_wear_mask_str)  return _wear_mask
 		if(slot_wear_id_str)    return wear_id
 		if(slot_glasses_str)    return glasses
@@ -352,8 +352,8 @@ This saves us from having to call add_fingerprint() any time something is put in
 		if(slot_wear_suit_str)  return _wear_suit
 		if(slot_w_uniform_str)  return _w_uniform
 		if(slot_s_store_str)    return s_store
-		if(slot_l_ear_str)      return l_ear
-		if(slot_r_ear_str)      return r_ear
+		if(slot_l_ear_str)      return _l_ear
+		if(slot_r_ear_str)      return _r_ear
 	. = ..()
 
 /mob/living/carbon/human/get_equipped_items(var/include_carried = 0)

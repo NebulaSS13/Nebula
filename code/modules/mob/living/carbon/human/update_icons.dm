@@ -556,6 +556,8 @@ var/global/list/damage_icon_parts = list()
 			queue_icon_update()
 		return
 
+	var/obj/item/l_ear = get_equipped_item(slot_l_ear_str)
+	var/obj/item/r_ear = get_equipped_item(slot_r_ear_str)
 	if(l_ear || r_ear)
 		// Blank image upon which to layer left & right overlays.
 		var/image/both = image("icon" = 'icons/effects/effects.dmi', "icon_state" = "nothing")

@@ -1182,8 +1182,10 @@
 
 /mob/living/carbon/human/get_sound_volume_multiplier()
 	. = ..()
-	for(var/obj/item/clothing/C in list(l_ear, r_ear, head))
-		. = min(., C.volume_multiplier)
+	for(var/slot in list(slot_l_ear_str, slot_r_ear_str, slot_head_str))
+		var/obj/item/clothing/C = get_equipped_item(slot)
+		if(istype(C))
+			. = min(., C.volume_multiplier)
 
 /mob/living/carbon/human/get_bullet_impact_effect_type(var/def_zone)
 	var/obj/item/organ/external/E = get_organ(def_zone)
@@ -1276,10 +1278,10 @@
 
 /mob/living/carbon/human/get_possible_internals_sources()
 	. = ..() | list(
-		"suit" =         list(s_store,                 "on"),
-		"belt" =         list(belt,                    "on"),
-		"left_pocket" =  list(l_store,                 "in"),
-		"right pocket" = list(r_store,                 "in"),
+		"suit" =         list(get_equipped_item(slot_s_store_str), "on"),
+		"belt" =         list(get_equipped_item(slot_belt_str),    "on"),
+		"left_pocket" =  list(get_equipped_item(slot_l_store_str), "in"),
+		"right pocket" = list(get_equipped_item(slot_r_store_str), "in"),
 		"rig" =          list(wearing_rig?.air_supply, "in")
 	)
 

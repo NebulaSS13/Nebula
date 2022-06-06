@@ -125,44 +125,37 @@
 /mob/living/carbon/human/handle_message_mode(message_mode, message, verb, speaking, used_radios, alt_name)
 	var/use_mode = null
 	switch(message_mode)
+
 		if("intercom")
 			if(!restrained())
 				for(var/obj/item/radio/I in view(1))
 					if(I.intercom_handling)
 						used_radios += I
-		if("headset")
-			if(istype(l_ear,/obj/item/radio))
-				used_radios += l_ear
-			else if(istype(r_ear,/obj/item/radio))
-				used_radios += r_ear
-			else
-				used_radios += GetRadio("headset")
-		if("right ear")
-			var/datum/inventory_slot/inv_slot = LAZYACCESS(held_item_slots, BP_R_HAND)
-			if(istype(r_ear,/obj/item/radio))
-				used_radios += r_ear
-			else if(istype(inv_slot?.holding, /obj/item/radio))
-				used_radios += inv_slot.holding
-			else
-				used_radios += GetRadio("right ear")
-		if("left ear")
-			var/datum/inventory_slot/inv_slot = LAZYACCESS(held_item_slots, BP_L_HAND)
-			if(istype(l_ear,/obj/item/radio))
-				used_radios += l_ear
-			else if(istype(inv_slot?.holding, /obj/item/radio))
-				used_radios += inv_slot.holding
-			else
-				used_radios += GetRadio("left ear")
+
+		if("right ear", "left ear")
+			var/use_right = message_mode == "right ear"
+			var/obj/item/radio/R = get_equipped_item(use_right ? slot_r_ear_str : slot_l_ear_str)
+			if(!istype(R))
+				R = null
+				var/datum/inventory_slot/inv_slot = LAZYACCESS(held_item_slots, (use_right ? BP_R_HAND : BP_L_HAND))
+				if(istype(inv_slot?.holding, /obj/item/radio))
+					R = inv_slot.holding
+			if(R)
+				R.talk_into(src,message,null,verb,speaking)
+				used_radios += R
 		if("whisper") //It's going to get sanitized again immediately, so decode.
 			whisper_say(html_decode(message), speaking, alt_name)
 			return 1
+
 		else
+			// Headsets are default.
 			if(message_mode)
-				use_mode = message_mode
-				if(istype(l_ear,/obj/item/radio))
-					used_radios += l_ear
-				else if(istype(r_ear,/obj/item/radio))
-					used_radios += r_ear
+				for(var/slot in global.ear_slots)
+					var/obj/item/radio/R = get_equipped_item(slot)
+					if(istype(R))
+						R.talk_into(src,message,null,verb,speaking)
+						used_radios += R
+						break
 				else
 					used_radios += GetRadio()
 

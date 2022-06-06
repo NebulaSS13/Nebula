@@ -271,14 +271,12 @@
 /obj/item/storage/attack_hand(mob/user)
 	if(ishuman(user))
 		var/mob/living/carbon/human/H = user
-		if(H.l_store == src && !H.get_active_hand())	//Prevents opening if it's in a pocket.
-			H.put_in_hands(src)
-			H.l_store = null
-			return
-		if(H.r_store == src && !H.get_active_hand())
-			H.put_in_hands(src)
-			H.r_store = null
-			return
+		for(var/slot in global.pocket_slots)
+			var/obj/item/pocket = H.get_equipped_item(slot)
+			if(pocket == src && !H.get_active_hand()) //Prevents opening if it's in a pocket.
+				H.unEquip(src)
+				H.put_in_hands(src)
+				return
 
 	if (src.loc == user)
 		src.open(user)

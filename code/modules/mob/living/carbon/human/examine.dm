@@ -138,13 +138,13 @@
 	if(glasses && !skipeyes)
 		msg += "[G.He] [G.has] [glasses.get_examine_line()] covering [G.his] eyes.\n"
 
-	//left ear
-	if(l_ear && !skipears)
-		msg += "[G.He] [G.has] [l_ear.get_examine_line()] on [G.his] left ear.\n"
-
-	//right ear
-	if(r_ear && !skipears)
-		msg += "[G.He] [G.has] [r_ear.get_examine_line()] on [G.his] right ear.\n"
+	if(!skipears)
+		var/obj/item/ear = get_equipped_item(slot_l_ear_str)
+		if(ear)
+			msg += "[G.He] [G.has] [ear.get_examine_line()] on [G.his] left ear.\n"
+		ear = get_equipped_item(slot_r_ear_str)
+		if(ear)
+			msg += "[G.He] [G.has] [ear.get_examine_line()] on [G.his] right ear.\n"
 
 	//ID
 	if(wear_id)

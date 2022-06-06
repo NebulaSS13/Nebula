@@ -62,8 +62,9 @@
 		return ..(freq, level)
 	if(ishuman(src.loc))
 		var/mob/living/carbon/human/H = src.loc
-		if(H.l_ear == src || H.r_ear == src)
-			return ..(freq, level)
+		for(var/slot in global.ear_slots)
+			if(H.get_equipped_item(slot) == src)
+				return ..(freq, level)
 	return -1
 
 /obj/item/radio/headset/syndicate
