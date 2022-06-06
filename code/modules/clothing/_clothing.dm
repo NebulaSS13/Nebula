@@ -142,9 +142,21 @@
 	return ..()
 
 /obj/item/clothing/proc/refit_for_bodytype(var/target_bodytype)
-	bodytype_equip_flags = target_bodytype
-	if(sprite_sheets[target_bodytype])
-		icon = sprite_sheets[target_bodytype]
+
+	bodytype_equip_flags = 0
+	decls_repository.get_decls_of_subtype(/decl/bodytype) // Make sure they're prefetched so the below list is populated
+	for(var/decl/bodytype/bod in global.bodytypes_by_category[target_bodytype])
+		bodytype_equip_flags |= bod.bodytype_flag
+
+	var/last_icon = icon
+	var/species_icon = LAZYACCESS(sprite_sheets, target_bodytype)
+	if(species_icon && (check_state_in_icon(ICON_STATE_INV, species_icon) || check_state_in_icon(ICON_STATE_WORLD, species_icon)))
+		icon = species_icon
+	else
+		icon = initial(icon)
+	if(last_icon != icon)
+		reconsider_single_icon()
+		update_clothing_icon()
 
 /obj/item/clothing/get_examine_line()
 	. = ..()

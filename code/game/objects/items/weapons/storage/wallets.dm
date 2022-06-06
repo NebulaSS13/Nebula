@@ -26,6 +26,7 @@
 		/obj/item/flame,
 		/obj/item/paper,
 		/obj/item/paper_bundle,
+		/obj/item/passport,
 		/obj/item/pen,
 		/obj/item/photo,
 		/obj/item/chems/dropper,
