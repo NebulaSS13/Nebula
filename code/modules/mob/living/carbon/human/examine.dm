@@ -155,8 +155,9 @@
 			msg += "[G.He] [G.has] [ear.get_examine_line()] on [G.his] right ear.\n"
 
 	//ID
-	if(wear_id)
-		msg += "[G.He] [G.is] wearing [wear_id.get_examine_line()].\n"
+	var/obj/item/id = get_equipped_item(slot_wear_id_str)
+	if(id)
+		msg += "[G.He] [G.is] wearing [id.get_examine_line()].\n"
 
 	//handcuffs?
 	var/obj/item/cuffs = get_equipped_item(slot_handcuffed_str)
@@ -318,9 +319,9 @@
 		var/perpname = "wot"
 		var/criminal = "None"
 
-		var/obj/item/card/id/id = GetIdCard()
-		if(istype(id))
-			perpname = id.registered_name
+		var/obj/item/card/id/check_id = GetIdCard()
+		if(istype(check_id))
+			perpname = check_id.registered_name
 		else
 			perpname = src.name
 
@@ -338,9 +339,9 @@
 		var/perpname = "wot"
 		var/medical = "None"
 
-		var/obj/item/card/id/id = GetIdCard()
-		if(istype(id))
-			perpname = id.registered_name
+		var/obj/item/card/id/check_id = GetIdCard()
+		if(istype(check_id))
+			perpname = check_id.registered_name
 		else
 			perpname = src.name
 

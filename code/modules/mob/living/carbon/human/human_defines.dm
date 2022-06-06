@@ -38,9 +38,8 @@
 	var/obj/item/_belt
 	var/obj/item/_gloves
 	var/obj/item/_glasses
+	var/obj/item/_wear_id
 	// END TODO
-
-	var/obj/item/wear_id = null
 
 	var/icon/stand_icon = null
 	var/icon/lying_icon = null

@@ -98,8 +98,8 @@ This saves us from having to call add_fingerprint() any time something is put in
 				drop_from_inventory(_r_store)
 			if (_l_store)
 				drop_from_inventory(_l_store)
-			if (wear_id)
-				drop_from_inventory(wear_id)
+			if (_wear_id)
+				drop_from_inventory(_wear_id)
 			if (_belt)
 				drop_from_inventory(_belt)
 			_w_uniform = null
@@ -139,8 +139,8 @@ This saves us from having to call add_fingerprint() any time something is put in
 		else if (W == _belt)
 			_belt = null
 			update_inv_belt()
-		else if (W == wear_id)
-			wear_id = null
+		else if (W == _wear_id)
+			_wear_id = null
 			update_inv_wear_id()
 		else if (W == _r_store)
 			_r_store = null
@@ -224,7 +224,7 @@ This saves us from having to call add_fingerprint() any time something is put in
 			W.equipped(src, slot)
 			update_inv_belt(redraw_mob)
 		if(slot_wear_id_str)
-			src.wear_id = W
+			_wear_id = W
 			W.equipped(src, slot)
 			update_inv_wear_id(redraw_mob)
 		if(slot_l_ear_str)
@@ -338,7 +338,7 @@ This saves us from having to call add_fingerprint() any time something is put in
 /mob/living/carbon/human/get_equipped_item(var/slot)
 
 	switch(slot)
-		if(slot_wear_id_str)    return wear_id
+		if(slot_wear_id_str)    return _wear_id
 		if(slot_glasses_str)    return _glasses
 		if(slot_gloves_str)     return _gloves
 		if(slot_belt_str)       return _belt

@@ -250,5 +250,5 @@
 		var/mob/living/carbon/human/H = user
 		if (istype(H))
 			if (!read_authorization(H.get_active_hand()))	//try to read what's in their hand first
-				read_authorization(H.wear_id)
+				read_authorization(H.get_equipped_item(slot_wear_id_str))
 				. = TOPIC_REFRESH

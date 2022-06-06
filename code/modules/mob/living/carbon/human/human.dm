@@ -289,8 +289,9 @@
 
 			var/modified = 0
 			var/perpname = "wot"
-			if(wear_id)
-				var/obj/item/card/id/I = wear_id.GetIdCard()
+			var/obj/item/id = get_equipped_item(slot_wear_id_str)
+			if(id)
+				var/obj/item/card/id/I = id.GetIdCard()
 				if(I)
 					perpname = I.registered_name
 				else

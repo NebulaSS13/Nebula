@@ -170,7 +170,7 @@
 
 				// If I's display name is currently different from the voice name and using an agent ID then don't impersonate
 				// as this would allow the AI to track I and realize the mismatch.
-				if(I && !(I.name != speaker_name && I.wear_id && istype(I.wear_id,/obj/item/card/id/syndicate)))
+				if(I && !(I.name != speaker_name && istype(I.get_equipped_item(slot_wear_id_str),/obj/item/card/id/syndicate)))
 					impersonating = I
 					jobname = impersonating.get_assignment()
 				else

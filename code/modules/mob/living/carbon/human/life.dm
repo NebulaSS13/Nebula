@@ -954,8 +954,10 @@
 	if (BITTEST(hud_updateflag, ID_HUD) && hud_list[ID_HUD])
 		var/image/holder = hud_list[ID_HUD]
 		holder.icon_state = "hudunknown"
-		if(wear_id)
-			var/obj/item/card/id/I = wear_id.GetIdCard()
+		
+		var/obj/item/id = get_equipped_item(slot_wear_id_str)
+		if(id)
+			var/obj/item/card/id/I = id.GetIdCard()
 			if(I)
 				var/datum/job/J = SSjobs.get_by_title(I.GetJobName())
 				if(J)
@@ -967,8 +969,9 @@
 		var/image/holder = hud_list[WANTED_HUD]
 		holder.icon_state = "hudblank"
 		var/perpname = name
-		if(wear_id)
-			var/obj/item/card/id/I = wear_id.GetIdCard()
+		var/obj/item/id = get_equipped_item(slot_wear_id_str)
+		if(id)
+			var/obj/item/card/id/I = id.GetIdCard()
 			if(I)
 				perpname = I.registered_name
 
