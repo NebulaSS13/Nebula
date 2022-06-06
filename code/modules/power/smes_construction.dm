@@ -162,12 +162,10 @@
 
 	// Check if user has protected gloves.
 	var/user_protected = 0
-	if(h_user.gloves)
-		var/obj/item/clothing/gloves/G = h_user.gloves
-		if(G.siemens_coefficient == 0)
-			user_protected = 1
+	var/obj/item/clothing/gloves/G = h_user.get_equipped_item(slot_gloves_str)
+	if(istype(G) && G.siemens_coefficient == 0)
+		user_protected = 1
 	log_and_message_admins("SMES FAILURE: <b>[src.x]X [src.y]Y [src.z]Z</b> User: [usr.ckey], Intensity: [intensity]/100 - <A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[src.x];Y=[src.y];Z=[src.z]'>JMP</a>")
-
 
 	switch (intensity)
 		if (0 to 15)

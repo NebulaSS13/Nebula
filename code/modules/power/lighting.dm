@@ -344,17 +344,13 @@
 
 	// make it burn hands if not wearing fire-insulated gloves
 	if(on)
-		var/prot = 0
-		var/mob/living/carbon/human/H = user
 
+		var/prot = FALSE
+		var/mob/living/carbon/human/H = user
 		if(istype(H))
-			if(H.gloves)
-				var/obj/item/clothing/gloves/G = H.gloves
-				if(G.max_heat_protection_temperature)
-					if(G.max_heat_protection_temperature > LIGHT_BULB_TEMPERATURE)
-						prot = 1
-		else
-			prot = 1
+			var/obj/item/clothing/gloves/G = H.get_equipped_item(slot_gloves_str)
+			if(istype(G) && G.max_heat_protection_temperature > LIGHT_BULB_TEMPERATURE)
+				prot = TRUE
 
 		if(prot > 0 || (MUTATION_COLD_RESISTANCE in user.mutations))
 			to_chat(user, "You remove the [get_fitting_name()].")

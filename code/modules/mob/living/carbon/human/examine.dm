@@ -104,6 +104,7 @@
 			msg += "[G.He] [G.is] holding [inv_slot.holding.get_examine_line()] in [G.his] [E.name].\n"
 
 	//gloves
+	var/obj/item/gloves = get_equipped_item(slot_gloves_str)
 	if(gloves && !skipgloves)
 		msg += "[G.He] [G.has] [gloves.get_examine_line()] on [G.his] hands.\n"
 	else

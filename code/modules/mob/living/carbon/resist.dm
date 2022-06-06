@@ -49,7 +49,7 @@
 	var/breakouttime = istype(cuffs) ? cuffs.breakouttime : 2 MINUTES
 
 	var/mob/living/carbon/human/H = src
-	if(istype(H) && H.gloves && istype(H.gloves,/obj/item/clothing/gloves/rig))
+	if(istype(H) && istype(H.get_equipped_item(slot_gloves_str), /obj/item/clothing/gloves/rig))
 		breakouttime /= 2
 
 	breakouttime = max(5, breakouttime * get_cuff_breakout_mod())

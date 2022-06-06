@@ -520,6 +520,7 @@ var/global/list/damage_icon_parts = list()
 
 /mob/living/carbon/human/update_inv_gloves(var/update_icons=1)
 	var/obj/item/suit = get_equipped_item(slot_wear_suit_str)
+	var/obj/item/gloves = get_equipped_item(slot_gloves_str)
 	if(gloves && !(suit && suit.flags_inv & HIDEGLOVES))
 		overlays_standing[HO_GLOVES_LAYER]	= gloves.get_mob_overlay(src,slot_gloves_str)
 	else

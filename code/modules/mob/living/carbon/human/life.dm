@@ -616,6 +616,7 @@
 					SET_STATUS_MAX(src, STAT_ASLEEP, 5)
 
 		// If you're dirty, your gloves will become dirty, too.
+		var/obj/item/gloves = get_equipped_item(slot_gloves_str)
 		if(gloves && germ_level > gloves.germ_level && prob(10))
 			gloves.germ_level += 1
 

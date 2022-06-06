@@ -184,8 +184,9 @@ var/global/list/surgery_tool_exception_cache = list()
 	if(!istype(user) || !istype(E)) return
 
 	var/germ_level = user.germ_level
-	if(user.gloves)
-		germ_level = user.gloves.germ_level
+	var/obj/item/gloves = user.get_equipped_item(slot_gloves_str)
+	if(gloves)
+		germ_level = gloves.germ_level
 
 	E.germ_level = max(germ_level,E.germ_level) //as funny as scrubbing microbes out with clean gloves is - no.
 

@@ -525,6 +525,7 @@
 	lastpuke = FALSE
 
 /mob/living/carbon/human/proc/increase_germ_level(n)
+	var/obj/item/gloves = get_equipped_item(slot_gloves_str)
 	if(gloves)
 		gloves.germ_level += n
 	else
@@ -560,6 +561,7 @@
 
 /mob/living/carbon/human/clean_blood(var/clean_feet)
 	. = ..()
+	var/obj/item/gloves = get_equipped_item(slot_gloves_str)
 	if(gloves)
 		gloves.clean()
 		gloves.germ_level = 0

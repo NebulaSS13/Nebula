@@ -129,7 +129,7 @@ var/global/list/image/splatter_cache=list()
 	..()
 	if (amount && length(blood_data) && ishuman(user))
 		var/mob/living/carbon/human/H = user
-		if(H.gloves)
+		if(H.get_equipped_item(slot_gloves_str))
 			return
 		var/taken = rand(1,amount)
 		amount -= taken

@@ -65,8 +65,9 @@
 		to_chat(user, "<span class='danger'>\The [H] needs at least two wrists before you can cuff them together!</span>")
 		return 0
 
-	if((H.gloves && H.gloves.item_flags & ITEM_FLAG_NOCUFFS) && !elastic)
-		to_chat(user, "<span class='danger'>\The [src] won't fit around \the [H.gloves]!</span>")
+	var/obj/item/gloves = H.get_equipped_item(slot_gloves_str)
+	if((gloves && (gloves.item_flags & ITEM_FLAG_NOCUFFS)) && !elastic)
+		to_chat(user, "<span class='danger'>\The [src] won't fit around \the [gloves]!</span>")
 		return 0
 
 	user.visible_message("<span class='danger'>\The [user] is attempting to put [cuff_type] on \the [H]!</span>")

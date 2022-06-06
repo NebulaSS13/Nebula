@@ -16,7 +16,7 @@
 	// Special glove functions:
 	// If the gloves do anything, have them return 1 to stop
 	// normal attack_hand() here.
-	var/obj/item/clothing/gloves/G = gloves // not typecast specifically enough in defines
+	var/obj/item/clothing/gloves/G = get_equipped_item(slot_gloves_str) // not typecast specifically enough in defines
 	if(istype(G) && G.Touch(A,1))
 		return
 
@@ -53,10 +53,9 @@
 	if((istype(A, /turf/simulated/floor) || istype(A, /turf/unsimulated/floor) || istype(A, /obj/structure/lattice) || istype(A, /obj/structure/catwalk)) && isturf(loc) && bound_overlay && !is_physically_disabled()) //Climbing through openspace
 		return climb_up(A)
 
-	if(gloves)
-		var/obj/item/clothing/gloves/G = gloves
-		if(istype(G) && G.Touch(A,0)) // for magic gloves
-			return TRUE
+	var/obj/item/clothing/gloves/G = get_equipped_item(slot_gloves_str)
+	if(istype(G) && G.Touch(A,0)) // for magic gloves
+		return TRUE
 
 	. = ..()
 

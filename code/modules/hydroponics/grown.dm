@@ -298,7 +298,7 @@ var/global/list/_wood_materials = list(
 		return
 	if(seed.get_trait(TRAIT_STINGS))
 		var/mob/living/carbon/human/H = user
-		if(istype(H) && H.gloves)
+		if(istype(H) && H.get_equipped_item(slot_gloves_str))
 			return
 		if(!reagents || reagents.total_volume <= 0)
 			return

@@ -36,7 +36,7 @@
 					affecting = H.get_organ(pick(BP_L_LEG, BP_R_LEG))
 					SET_STATUS_MAX(H, STAT_WEAK, 3)
 			if(BP_L_HAND, BP_R_HAND)
-				if(!H.gloves)
+				if(!H.get_equipped_item(slot_gloves_str))
 					affecting = H.get_organ(type)
 					SET_STATUS_MAX(H, STAT_STUN, 3)
 		if(affecting)
