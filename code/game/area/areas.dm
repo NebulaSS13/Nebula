@@ -65,6 +65,7 @@ var/global/list/areas = list()
 /area/New()
 	icon_state = ""
 	uid = ++global_uid
+	proper_name = strip_improper(name)
 	luminosity = !dynamic_lighting
 	..()
 
@@ -80,8 +81,6 @@ var/global/list/areas = list()
 	icon = 'icons/turf/areas.dmi'
 	icon_state = "white"
 	blend_mode = BLEND_MULTIPLY
-
-	proper_name = strip_improper(name)
 
 /area/Del()
 	global.areas -= src
