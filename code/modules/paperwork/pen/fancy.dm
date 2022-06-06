@@ -1,6 +1,5 @@
 /obj/item/pen/fancy
-	name               = "fancy pen"
-	desc               = "A high quality traditional fountain pen with an internal reservoir and an extra fine gold-platinum nib. Guaranteed never to leak."
+	name               = "fountain pen"
 	icon               = 'icons/obj/items/pens/pen_fancy.dmi'
 	sharp              = 1 //pointy
 	stroke_colour      = "#1c1713" //dark ashy brownish
@@ -8,8 +7,14 @@
 	material           = /decl/material/solid/metal/steel
 	pen_flag           = PEN_FLAG_ACTIVE | PEN_FLAG_FANCY
 
+/obj/item/pen/fancy/make_pen_description()
+	desc = "A high quality [istype(material)?"[material.name] ":null]traditional [stroke_colour_name] [medium_name] fountain pen with an internal reservoir and an extra fine gold-platinum nib. Guaranteed never to leak."
+
 /obj/item/pen/fancy/quill
-	name   = "dire goose quill"
-	desc   = "A quill fashioned from a feather of the dire goose makes an excellent writing instrument, as well as a valuable trophy."
-	icon   = 'icons/obj/items/pens/pen_quill.dmi'
-	matter = null
+	name     = "dire goose quill"
+	icon     = 'icons/obj/items/pens/pen_quill.dmi'
+	sharp    = 0
+	material = /decl/material/solid/skin/feathers
+
+/obj/item/pen/fancy/quill/make_pen_description()
+	desc = "A quill fashioned from a feather of the dire goose makes an excellent writing instrument, as well as a valuable trophy."

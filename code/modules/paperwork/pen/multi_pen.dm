@@ -15,6 +15,9 @@
 	. = ..()
 	change_colour(colour_idx)
 
+/obj/item/pen/multi/make_pen_description()
+	desc = "It's a [istype(material)?"[material.name] ":""]pen with multiple colors of ink! Its currently set to [stroke_colour_name] [medium_name]."
+
 /obj/item/pen/multi/proc/change_colour(var/new_idx)
 	colour_idx = new_idx
 	if(colour_idx > length(stroke_colours))

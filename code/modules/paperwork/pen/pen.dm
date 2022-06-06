@@ -1,6 +1,6 @@
 /obj/item/pen
-	desc                   = "It's a normal black ink pen."
 	name                   = "pen"
+	desc                   = ""
 	icon                   = 'icons/obj/items/pens/pen.dmi'
 	icon_state             = ICON_STATE_WORLD
 	slot_flags             = SLOT_LOWER_BODY | SLOT_EARS
@@ -9,11 +9,11 @@
 	throw_speed            = 7
 	throw_range            = 15
 	material               = /decl/material/solid/plastic
-	var/pen_flag           = PEN_FLAG_ACTIVE                     //Properties of the pen used
-	var/stroke_colour      = "black"                             //what colour the ink is! Can be hex or string.
-	var/stroke_colour_name = "black"                             //Human readable name of the ink color.
-	var/medium_name        = "ink"                               //Whatever the pen uses to leave its mark
-	var/max_uses           = -1                                  //-1 for unlimited uses
+	var/pen_flag           = PEN_FLAG_ACTIVE                     //Properties/state of the pen used.
+	var/stroke_colour      = "black"                             //What colour the ink is! Can be hexadecimal colour or a colour name string.
+	var/stroke_colour_name = "black"                             //Human readable name of the stroke colour. Used in text strings, and to identify the nearest colour to the stroke colour.
+	var/medium_name        = "ink"                               //Whatever the pen uses to leave its mark. Used in text strings.
+	var/max_uses           = -1                                  //-1 for unlimited uses.
 
 /obj/item/pen/Initialize(ml, material_key)
 	. = ..()
@@ -27,6 +27,7 @@
 					TOOL_PROP_COLOR      = stroke_colour, 
 					TOOL_PROP_PEN_FLAG   = pen_flag,
 					TOOL_PROP_USES       = max_uses,)))
+	make_pen_description()
 
 /obj/item/pen/attack(atom/A, mob/user, target_zone)
 	if(ismob(A))
@@ -58,29 +59,30 @@
 	stroke_colour_name = _color_name
 	set_tool_property(TOOL_PEN, TOOL_PROP_COLOR,      stroke_colour)
 	set_tool_property(TOOL_PEN, TOOL_PROP_COLOR_NAME, stroke_colour_name)
+	make_pen_description()
+
+/obj/item/pen/proc/make_pen_description()
+	desc = "Its \a [stroke_colour_name] [medium_name] [istype(material)?material.name:null] pen."
 
 /obj/item/pen/blue
 	name               = "blue pen"
-	desc               = "It's a normal blue ink pen."
 	icon               = 'icons/obj/items/pens/pen_blue.dmi'
 	stroke_colour      = "blue"
 	stroke_colour_name = "blue"
 
 /obj/item/pen/red
 	name               = "red pen"
-	desc               = "It's a normal red ink pen."
 	icon               = 'icons/obj/items/pens/pen_red.dmi'
 	stroke_colour      = "red"
 	stroke_colour_name = "red"
 
 /obj/item/pen/green
 	name               = "green pen"
-	desc               = "It's a normal green ink pen."
 	icon               = 'icons/obj/items/pens/pen_green.dmi'
 	stroke_colour      = "green"
 	stroke_colour_name = "green"
 
 /obj/item/pen/invisible
-	desc               = "It's an invisble pen marker."
+	name               = "pen"
 	stroke_colour      = "white"
 	stroke_colour_name = "transluscent"

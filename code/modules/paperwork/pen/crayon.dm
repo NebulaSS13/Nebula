@@ -1,6 +1,5 @@
 /obj/item/pen/crayon
 	name               = "crayon"
-	desc               = "A colourful crayon. Please refrain from eating it or putting it in your nose."
 	icon               = 'icons/obj/items/crayons.dmi'
 	icon_state         = "crayonred"
 	w_class            = ITEM_SIZE_TINY
@@ -11,6 +10,9 @@
 	pen_flag           = PEN_FLAG_ACTIVE | PEN_FLAG_CRAYON | PEN_FLAG_DEL_EMPTY
 	max_uses           = 30
 	var/shade_colour   = "#220000" //RGB
+
+/obj/item/pen/crayon/make_pen_description()
+	desc = "A colourful [stroke_colour_name] [istype(material)?"[material.name] ":null][medium_name]. Please refrain from eating it or putting it in your nose."
 
 /obj/item/pen/crayon/set_medium_color(_color, _color_name, var/_shade_colour)
 	. = ..(_color, _color_name)
@@ -26,7 +28,7 @@
 		var/draw_message = "drawing"
 		switch(drawtype)
 			if("letter")
-				drawtype = input("Choose the letter.", "Crayon scribbles") in list("a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z")
+				drawtype = input("Choose the letter.", "Crayon scribbles") in list(global.alphabet)
 				draw_message = "drawing a letter"
 			if("graffiti")
 				draw_message = "drawing graffiti"
@@ -90,19 +92,15 @@
 	shade_colour       = "#810cff"
 	stroke_colour_name = "purple"
 
-/obj/item/pen/crayon/random/Initialize()
-	..()
-	var/crayon_type = pick(subtypesof(/obj/item/pen/crayon) - /obj/item/pen/crayon/random)
-	new crayon_type(loc)
-	return INITIALIZE_HINT_QDEL
-
 /obj/item/pen/crayon/mime
 	icon_state         = "crayonmime"
-	desc               = "A very sad-looking crayon."
 	stroke_colour      = "#ffffff"
 	shade_colour       = "#000000"
 	stroke_colour_name = "mime"
 	max_uses           = -1 //Infinite
+
+/obj/item/pen/crayon/mime/make_pen_description()
+	desc = "A very sad-looking crayon."
 
 /obj/item/pen/crayon/mime/attack_self(mob/user) //inversion
 	if(stroke_colour != "#ffffff" && shade_colour != "#000000")
@@ -120,8 +118,17 @@
 	stroke_colour_name = "rainbow"
 	max_uses           = -1
 
+/obj/item/pen/crayon/rainbow/make_pen_description()
+	desc = "A very colourful [istype(material)?"[material.name] ":null][medium_name]. Please refrain from eating it or putting it in your nose."
+
 /obj/item/pen/crayon/rainbow/attack_self(mob/user)
 	stroke_colour = input(user, "Please select the main colour.",  "Crayon colour") as color
 	shade_colour  = input(user, "Please select the shade colour.", "Crayon colour") as color
 	set_medium_color(stroke_colour, stroke_colour_name, shade_colour)
 	return
+
+/obj/item/pen/crayon/random/Initialize()
+	..()
+	var/crayon_type = pick(subtypesof(/obj/item/pen/crayon) - /obj/item/pen/crayon/random)
+	new crayon_type(loc)
+	return INITIALIZE_HINT_QDEL
