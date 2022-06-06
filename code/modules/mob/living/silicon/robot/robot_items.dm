@@ -191,7 +191,7 @@
 		if("Colour")
 			var/newcolour = input("Which colour would you like to use?") as null|anything in list("black","blue","red","green","yellow")
 			if(newcolour) 
-				set_ink_color(newcolour, newcolour)
+				set_medium_color(newcolour, newcolour)
 
 		if("Mode")
 			if (mode == 1)

@@ -12,7 +12,7 @@
 	max_uses           = 30
 	var/shade_colour   = "#220000" //RGB
 
-/obj/item/pen/crayon/set_ink_color(_color, _color_name, var/_shade_colour)
+/obj/item/pen/crayon/set_medium_color(_color, _color_name, var/_shade_colour)
 	. = ..(_color, _color_name)
 	shade_colour = _shade_colour
 	set_tool_property(TOOL_PEN, TOOL_PROP_PEN_SHADE_COLOR, shade_colour)
@@ -106,12 +106,10 @@
 
 /obj/item/pen/crayon/mime/attack_self(mob/user) //inversion
 	if(stroke_colour != "#ffffff" && shade_colour != "#000000")
-		set_ink_color("#ffffff", stroke_colour_name)
-		shade_colour = "#000000"
+		set_medium_color("#ffffff", stroke_colour_name, "#000000")
 		to_chat(user, "You will now draw in white and black with this crayon.")
 	else
-		stroke_colour = "#000000"
-		shade_colour = "#ffffff"
+		set_medium_color("#000000", stroke_colour_name, "#ffffff")
 		to_chat(user, "You will now draw in black and white with this crayon.")
 	return
 
@@ -125,4 +123,5 @@
 /obj/item/pen/crayon/rainbow/attack_self(mob/user)
 	stroke_colour = input(user, "Please select the main colour.",  "Crayon colour") as color
 	shade_colour  = input(user, "Please select the shade colour.", "Crayon colour") as color
+	set_medium_color(stroke_colour, stroke_colour_name, shade_colour)
 	return

@@ -53,7 +53,7 @@
 	set_tool_property(TOOL_PEN, TOOL_PROP_PEN_FLAG, pen_flag)
 	update_icon()
 
-/obj/item/pen/proc/set_ink_color(var/_color, var/_color_name)
+/obj/item/pen/proc/set_medium_color(var/_color, var/_color_name)
 	stroke_colour      = _color
 	stroke_colour_name = _color_name
 	set_tool_property(TOOL_PEN, TOOL_PROP_COLOR,      stroke_colour)

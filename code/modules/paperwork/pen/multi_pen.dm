@@ -20,7 +20,7 @@
 	if(colour_idx > length(stroke_colours))
 		colour_idx = 1
 	icon = colour_icons[colour_idx]
-	set_ink_color(stroke_colours[colour_idx], stroke_colour_names[colour_idx])
+	set_medium_color(stroke_colours[colour_idx], stroke_colour_names[colour_idx])
 	
 /obj/item/pen/multi/attack_self(mob/user)
 	change_colour((++colour_idx))
