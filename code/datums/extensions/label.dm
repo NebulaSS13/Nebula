@@ -48,6 +48,10 @@
 	atom_holder.name = replacetext(atom_holder.name, full_label, "", index, index + length(full_label))
 	events_repository.raise_event(/decl/observ/name_set, src, old_name, atom_holder.name)
 
+/datum/extension/labels/proc/RemoveAllLabels()
+	for(var/lbl in labels)
+		RemoveLabel(null, lbl)
+
 // We may have to do something more complex here
 // in case something appends strings to something that's labelled rather than replace the name outright
 // Non-printable characters should be of help if this comes up
@@ -92,3 +96,9 @@
 		if(has_extension(src, /datum/extension/labels))
 			var/datum/extension/labels/L = get_extension(src, /datum/extension/labels)
 			L.RemoveLabel(usr, label)
+
+//Single label allowed for this one
+/datum/extension/labels/single/CanAttachLabel(user, label)
+	if(LAZYLEN(labels) >= 1) //Only allow a single label
+		return FALSE
+	. = ..()
