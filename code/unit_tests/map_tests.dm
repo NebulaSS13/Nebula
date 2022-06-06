@@ -20,7 +20,7 @@
 			continue
 		area_test_count++
 		var/area_good = 1
-		var/bad_msg = "--------------- [A.name]([A.type])"
+		var/bad_msg = "--------------- [A.proper_name]([A.type])"
 
 		var/exemptions = get_exemptions(A)
 		if(!A.apc && !(exemptions & global.using_map.NO_APC))

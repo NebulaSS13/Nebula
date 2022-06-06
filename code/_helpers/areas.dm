@@ -23,7 +23,7 @@
 /proc/group_areas_by_name(var/list/predicates)
 	. = list()
 	for(var/area/A in get_filtered_areas(predicates))
-		group_by(., A.name, A)
+		group_by(., A.proper_name, A)
 
 /proc/group_areas_by_z_level(var/list/predicates)
 	. = list()

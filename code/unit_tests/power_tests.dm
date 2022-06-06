@@ -61,7 +61,7 @@
 				continue
 			if(failure)
 				failure = "[failure]\n"
-			failure = "[failure]Duplicated APCs in area: [A.name]. #1: [log_info_line(found_apc)]  #2: [log_info_line(APC)]"
+			failure = "[failure]Duplicated APCs in area: [A.proper_name]. #1: [log_info_line(found_apc)]  #2: [log_info_line(APC)]"
 
 	if(failure)
 		fail(failure)
@@ -84,7 +84,7 @@
 	for(var/i in 1 to length(old_values))
 		if(abs(old_values[i] - new_values[i]) > 1) // Round because there can in fact be roundoff error here apparently.
 			. = TRUE
-			log_bad("The area [A.name] had improper power use values on the [channel_names[i]] channel: was [old_values[i]] but should be [new_values[i]].")
+			log_bad("The area [A.proper_name] had improper power use values on the [channel_names[i]] channel: was [old_values[i]] but should be [new_values[i]].")
 			log_bad("This area contained the following power-using machines on this channel:")
 			for(var/obj/machinery/machine in A)
 				if(machine.power_channel == i)

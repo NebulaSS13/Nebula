@@ -121,10 +121,10 @@
 
 /atom/proc/get_alarm_name()
 	var/area/A = get_area(src)
-	return A.name
+	return A.get_alarm_name()
 
 /area/get_alarm_name()
-	return name
+	return proper_name
 
 /mob/get_alarm_name()
 	return name

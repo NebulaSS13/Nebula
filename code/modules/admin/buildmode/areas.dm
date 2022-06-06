@@ -35,10 +35,10 @@ Right Click       - List/Create Area
 		return
 	if (parameters["ctrl"] || parameters["middle"])
 		selected_area = R
-		to_chat(user, "Picked area [selected_area.name]")
+		to_chat(user, "Picked area [selected_area.proper_name]")
 	else if (selected_area)
 		ChangeArea(T, selected_area)
-		to_chat(user, "Set area of turf [T.name] to [selected_area.name]")
+		to_chat(user, "Set area of turf [T.name] to [selected_area.proper_name]")
 	else
 		to_chat(user, "Pick or create an area first")
 
@@ -50,7 +50,7 @@ Right Click       - List/Create Area
 			for (var/area/R in global.areas)
 				if (R.type == path)
 					SelectArea(R)
-					to_chat(user, "Picked area [selected_area.name]")
+					to_chat(user, "Picked area [selected_area.proper_name]")
 					break
 	else if (mode == "Create")
 		var/new_name = input("New area name:", "Build Mode: Areas") as text|null
@@ -64,7 +64,7 @@ Right Click       - List/Create Area
 		new_area.always_unpowered = 0
 		SelectArea(new_area)
 		user.client.debug_variables(selected_area)
-		to_chat(user, "Created area [new_area.name]")
+		to_chat(user, "Created area [new_area.proper_name]")
 
 /datum/build_mode/areas/TimerEvent()
 	user.client.images -= vision_images

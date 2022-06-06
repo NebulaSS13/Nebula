@@ -94,7 +94,7 @@ Subtypes
 	var/list/manargs = get_arguments(text)
 	if(!length(manargs) || isnum(text2num(manargs[1])))
 		var/selected_page = (length(manargs)) ? text2num(manargs[1]) : 1
-		
+
 		var/list/valid_commands = list()
 		for(var/comm in get_terminal_commands())
 			var/datum/terminal_command/command_datum = comm
@@ -191,7 +191,7 @@ Subtypes
 	if(!comp || !comp.host_status() || !comp.get_network_status())
 		return
 	var/area/A = get_area(comp.get_physical_host())
-	return "... Estimating location: \the [A.name]"
+	return "... Estimating location: \the [A.proper_name]"
 
 /datum/terminal_command/ping
 	name = "ping"
@@ -311,7 +311,7 @@ Subtypes
 /datum/terminal_command/ls/proper_input_entered(text, mob/user, datum/terminal/terminal)
 	if(!terminal.current_disk || ispath(terminal.current_disk))
 		return "ls: No disk selected."
-	
+
 	var/list/ls_args = get_arguments(text)
 
 	var/selected_page = (length(ls_args)) ? text2num(ls_args[1]) : 1
@@ -322,7 +322,7 @@ Subtypes
 	var/list/file_data = list()
 	for(var/datum/computer_file/F in files)
 		file_data += "[F.filename].[F.filetype] - [F.size] GQ"
-	
+
 	return print_as_page(file_data, "file", selected_page, terminal.history_max_length - 1)
 
 /datum/terminal_command/remove
@@ -333,7 +333,7 @@ Subtypes
 /datum/terminal_command/remove/proper_input_entered(text, mob/user, datum/terminal/terminal)
 	if(!terminal.current_disk)
 		return "rm: No disk selected."
-	
+
 	var/file_name = copytext(text, 4)
 
 	var/deleted = terminal.current_disk.delete_file(file_name, terminal.get_access(user), user)
@@ -350,7 +350,7 @@ Subtypes
 /datum/terminal_command/move/proper_input_entered(text, mob/user, datum/terminal/terminal)
 	if(!terminal.current_disk)
 		return "mv: No disk selected."
-	
+
 	var/list/mv_args = get_arguments(text)
 	if(length(mv_args) < 2)
 		return "mv: Improper syntax, use mv \[file name\] \[destination\] \[copying (0/1) \]."
@@ -403,7 +403,7 @@ Subtypes
 
 	if(!dest)
 		return "mv: Could not locate file destination."
-	
+
 	terminal.current_move = new(terminal.current_disk, dest, F, copying)
 	return "mv: Beginning file move..."
 
@@ -415,7 +415,7 @@ Subtypes
 /datum/terminal_command/copy/proper_input_entered(text, mob/user, datum/terminal/terminal)
 	if(!terminal.current_disk)
 		return "cp: No disk selected."
-	
+
 	if(length(text) < 4)
 		return "cp: Improper syntax, use copy \[file name\]."
 
@@ -446,7 +446,7 @@ Subtypes
 	var/datum/computer_file/F = terminal.current_disk.get_file(rename_args[1])
 	if(!F)
 		return "rename: Could not find file with name [rename_args[1]]."
-	
+
 	var/new_name = sanitize(rename_args[2])
 
 	if(length(new_name))
@@ -464,7 +464,7 @@ Subtypes
 	var/list/target_args = get_arguments(text)
 	if(!length(target_args))
 		return "target: The current target network tag is [terminal.network_target]."
-	
+
 	terminal.network_target = uppertext(target_args[1])
 	return "target: Changed network target to [terminal.network_target]."
 
@@ -522,7 +522,7 @@ Subtypes
 	var/datum/computer_file/F = terminal.current_disk.get_file(permmod_args[1])
 	if(!F)
 		return "permmod: Could not find file with name [permmod_args[1]]."
-	
+
 	if(length(permmod_args) < 3)
 		return F.get_perms_readable()
 
@@ -536,11 +536,11 @@ Subtypes
 		mode = "+"
 	if(!mode)
 		return "permmod: Invalid flag syntax. Use man command to learn more about permmod flag syntax."
-	
+
 	if(findtext(flags, "r"))
 		perm = OS_READ_ACCESS
 	else if(findtext(flags, "w"))
-		perm = OS_WRITE_ACCESS 
+		perm = OS_WRITE_ACCESS
 	else if(findtext(flags, "m"))
 		perm = OS_MOD_ACCESS
 	else
@@ -596,17 +596,17 @@ Subtypes
 	var/list/com_args = get_arguments(text)
 	if(!length(com_args))
 		return "com: Improper syntax, use com \[variable\] \[value\]."
-	
+
 	var/target_tag = terminal.network_target
 	if(!target_tag)
 		return "com: No network target set. Use 'target' to set a network target."
 
 	var/datum/computer_network/network = terminal.computer.get_network()
 	var/datum/extension/network_device/D = network.get_device_by_tag(target_tag)
-	
+
 	if(!istype(D))
 		return "com: Could not find target device with network tag [target_tag]."
-	
+
 	if(!D.has_commands)
 		return "com: Target device cannot receive commmands."
 
@@ -626,7 +626,7 @@ Subtypes
 	needs_network = TRUE
 	skill_needed = SKILL_EXPERT
 
-/datum/terminal_command/listcom/proper_input_entered(text, mob/user, datum/terminal/terminal)	
+/datum/terminal_command/listcom/proper_input_entered(text, mob/user, datum/terminal/terminal)
 	var/target_tag = terminal.network_target
 	if(!target_tag)
 		return "listcom: No network target set. Use 'target' to set a network target."
@@ -661,7 +661,7 @@ Subtypes
 		selected_ref = D.command_and_write[selected_alias]
 	else
 		return "listcom: No command with alias '[selected_alias]' found."
-	
+
 	. = list()
 	. += "[selected_ref.name]: [selected_ref.desc]"
 	if(istype(selected_ref, /decl/public_access/public_variable))
@@ -684,7 +684,7 @@ Subtypes
 	var/list/addcom_args = get_arguments(text)
 	if(!length(addcom_args))
 		return "addcom: Improper syntax, use addcom \[type\] \[alias\]. Accepts types 'METHOD' or 'VARIABLE'"
-	
+
 	var/target_tag = terminal.network_target
 	if(!target_tag)
 		return "addcom: No network target set. Use 'target' to set a network target."
@@ -718,7 +718,7 @@ Subtypes
 	var/list/modcom_args = get_arguments(text)
 	if(!length(modcom_args))
 		return "modcom: Improper syntax, use modcom \[alias\] \[index\].'"
-	
+
 	var/target_tag = terminal.network_target
 	if(!target_tag)
 		return "modcom: No network target set. Use 'target' to set a network target."
@@ -735,7 +735,7 @@ Subtypes
 	var/alias = modcom_args[1]
 	var/list/valid_commands = list()
 	var/list/device_command_list
-	// Find the valid methods or variables this command can reference 
+	// Find the valid methods or variables this command can reference
 	if(alias in D.command_and_call)
 		device_command_list = D.command_and_call
 		valid_commands = D.get_public_methods()
@@ -744,7 +744,7 @@ Subtypes
 		valid_commands = D.get_public_variables()
 	else
 		return "modcom: No command with [alias] found."
-	
+
 	var/selected_index = (length(modcom_args) >= 2) ? modcom_args[2] : null
 
 	// If there is no given index, return a list of available indexes.
@@ -757,7 +757,7 @@ Subtypes
 			options += "([index] - [reference.name])"
 			index++
 		return options
-	
+
 	selected_index = text2num(selected_index)
 	if(selected_index > length(valid_commands))
 		return "modcom: Invalid index."
@@ -779,11 +779,11 @@ Subtypes
 	var/list/namecom_args = get_arguments(text)
 	if(length(namecom_args) < 2)
 		return "namecom: Improper syntax, use namecom \[old alias\] \[new alias\]."
-	
+
 	var/target_tag = terminal.network_target
 	if(!target_tag)
 		return "namecom: No network target set. Use 'target' to set a network target."
-	
+
 	var/datum/computer_network/network = terminal.computer.get_network()
 	var/datum/extension/network_device/D = network.get_device_by_tag(target_tag)
 
@@ -809,11 +809,11 @@ Subtypes
 	var/list/rmcom_args = get_arguments(text)
 	if(!length(rmcom_args))
 		return "rmcom: Improper syntax, use rmcom \[alias\]."
-	
+
 	var/target_tag = terminal.network_target
 	if(!target_tag)
 		return "rmcom: No network target set. Use 'target' to set a network target."
-	
+
 	var/datum/computer_network/network = terminal.computer.get_network()
 	var/datum/extension/network_device/D = network.get_device_by_tag(target_tag)
 

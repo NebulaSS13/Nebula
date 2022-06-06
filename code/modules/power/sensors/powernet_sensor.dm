@@ -176,7 +176,7 @@
 			APC_entry["cell_status"] = cell ? chg[A.charging+1] : "N"
 			// Other info
 			APC_entry["total_load"] = reading_to_text(A.lastused_total)
-			APC_entry["name"] = A.area.name
+			APC_entry["name"] = A.area.proper_name
 			APC_entry["ref"] = "\ref[A]"
 			// Add data into main list of APC data.
 			APC_data += list(APC_entry)
