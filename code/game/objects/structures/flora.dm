@@ -39,12 +39,12 @@
 //Drop some bits when destroyed
 /obj/structure/flora/physically_destroyed(skip_qdel)
 	var/turf/T = get_turf(src)
-	if(!(. = ..(TRUE))) //Tell parents we'll delete ourselves
+	if(!..(TRUE)) //Tell parents we'll delete ourselves
 		return
 	if(T)
 		. = create_remains() != null
-	if(snd_cut)
-		playsound(src, snd_cut, 60, TRUE)
+		if(snd_cut)
+			playsound(src, snd_cut, 60, TRUE)
 	//qdel only after we do our thing, since we have to access members
 	if(!skip_qdel)
 		qdel(src)
