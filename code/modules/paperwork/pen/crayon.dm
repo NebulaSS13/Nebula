@@ -4,6 +4,7 @@
 	icon = 'icons/obj/items/crayons.dmi'
 	icon_state = "crayonred"
 	w_class = ITEM_SIZE_TINY
+	material           = /decl/material/solid/wax
 	attack_verb = list("attacked", "coloured")
 	colour = "#ff0000" //RGB
 	color_description = "red crayon"
