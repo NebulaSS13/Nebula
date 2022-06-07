@@ -139,7 +139,7 @@
 /obj/structure/foamedmetal/Destroy()
 	set_density(0)
 	update_nearby_tiles(1)
-	..()
+	return ..()
 
 /obj/structure/foamedmetal/on_update_icon()
 	..()
@@ -158,7 +158,7 @@
 		qdel(src)
 
 /obj/structure/foamedmetal/attack_hand(var/mob/user)
-	if ((MUTATION_HULK in user.mutations) || (prob(75 - metal * 25)))
+	if (prob(75 - metal * 25))
 		user.visible_message("<span class='warning'>[user] smashes through the foamed metal.</span>", "<span class='notice'>You smash through the metal foam wall.</span>")
 		qdel(src)
 	else

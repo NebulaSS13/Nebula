@@ -110,18 +110,15 @@
 	uncreated_component_parts = null
 
 /obj/machinery/sparker/on_update_icon()
-	..()
 	if(disable)
 		icon_state = "migniter-d"
-	else if(powered())
+	else if(!(stat & NOPOWER))
 		icon_state = "migniter"
-//		src.sd_SetLuminosity(2)
 	else
 		icon_state = "migniter-p"
-//		src.sd_SetLuminosity(0)
 
 /obj/machinery/sparker/attackby(obj/item/W, mob/user)
-	if(isScrewdriver(W))
+	if(IS_SCREWDRIVER(W))
 		add_fingerprint(user)
 		disable = !disable
 		if(disable)
@@ -139,7 +136,7 @@
 		return
 
 /obj/machinery/sparker/proc/ignite()
-	if (!powered())
+	if (stat & NOPOWER)
 		return
 
 	if (disable || (last_spark && world.time < last_spark + 50))

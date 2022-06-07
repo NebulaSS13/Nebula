@@ -82,10 +82,14 @@ var/global/repository/decls/decls_repository = new
 	var/uid
 	var/abstract_type = /decl
 	var/crash_on_abstract_init = FALSE
+	var/initialized = FALSE
 
 /decl/proc/Initialize()
 	SHOULD_CALL_PARENT(TRUE)
 	SHOULD_NOT_SLEEP(TRUE)
+	if(initialized)
+		CRASH("[type] initialized more than once!")
+	initialized = TRUE
 	return INITIALIZE_HINT_NORMAL
 
 /decl/Destroy()

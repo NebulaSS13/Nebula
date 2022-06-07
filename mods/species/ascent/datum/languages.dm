@@ -13,8 +13,7 @@
 	machine_understands = FALSE
 	var/list/correct_mouthbits = list(
 		SPECIES_MANTID_ALATE,
-		SPECIES_MANTID_GYNE,
-		SPECIES_SERPENTID
+		SPECIES_MANTID_GYNE
 	)
 
 /decl/language/mantid/can_be_spoken_properly_by(var/mob/speaker)

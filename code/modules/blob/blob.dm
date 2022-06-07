@@ -162,7 +162,7 @@
 	user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
 	user.do_attack_animation(src)
 	playsound(loc, 'sound/effects/attackblob.ogg', 50, 1)
-	if(isWirecutter(W))
+	if(IS_WIRECUTTER(W))
 		if(prob(user.skill_fail_chance(SKILL_SCIENCE, 90, SKILL_EXPERT)))
 			to_chat(user, SPAN_WARNING("You fail to collect a sample from \the [src]."))
 			return
@@ -178,11 +178,11 @@
 
 	var/damage = 0
 	switch(W.damtype)
-		if("fire")
+		if(BURN)
 			damage = (W.force / fire_resist)
-			if(isWelder(W))
+			if(IS_WELDER(W))
 				playsound(loc, 'sound/items/Welder.ogg', 100, 1)
-		if("brute")
+		if(BRUTE)
 			damage = (W.force / brute_resist)
 
 	take_damage(damage)

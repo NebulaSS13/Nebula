@@ -136,7 +136,7 @@
 			var/list/category_list[0]
 			for(var/datum/computer_file/program/P in net.get_software_list(category))
 				// Only those programs our user can run will show in the list
-				if(!P.can_run(user) && P.requires_access_to_download)
+				if(!P.can_run(get_access(user), user, FALSE) && P.requires_access_to_download)
 					continue
 				if(!P.is_supported_by_hardware(program.computer.get_hardware_flag(), user, TRUE))
 					continue

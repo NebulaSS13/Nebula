@@ -4,13 +4,13 @@
 	var/hacking_state = /decl/machine_construction/default/panel_closed/door/hacking
 
 /decl/machine_construction/default/panel_closed/door/attackby(obj/item/I, mob/user, obj/machinery/machine)
-	if(isScrewdriver(I))
+	if(IS_SCREWDRIVER(I))
 		TRANSFER_STATE(hacking_state)
 		playsound(get_turf(machine), 'sound/items/Screwdriver.ogg', 50, 1)
 		to_chat(user, SPAN_NOTICE("You release some of the logic wiring on \the [machine]. The cover panel remains closed."))
 		machine.update_icon()
 		return
-	if(isCrowbar(I))
+	if(IS_WRENCH(I))
 		TRANSFER_STATE(down_state)
 		playsound(get_turf(machine), 'sound/items/Crowbar.ogg', 50, 1)
 		machine.panel_open = TRUE
@@ -27,14 +27,14 @@
 /decl/machine_construction/default/panel_closed/door/mechanics_info()
 	. = list()
 	. += "Use a screwdriver to open a small hatch and expose some logic wires."
-	. += "Use a crowbar on the secured (bolted, welded or braced) airlock to pry open the main cover."
+	. += "Use a wrench to open the main cover."
 	. += "Use a parts replacer to view installed parts."
 
 /decl/machine_construction/default/panel_closed/door/hacking
 	up_state = /decl/machine_construction/default/panel_closed/door
 
 /decl/machine_construction/default/panel_closed/door/hacking/attackby(obj/item/I, mob/user, obj/machinery/machine)
-	if(isScrewdriver(I))
+	if(IS_SCREWDRIVER(I))
 		TRANSFER_STATE(up_state)
 		playsound(get_turf(machine), 'sound/items/Screwdriver.ogg', 50, 1)
 		to_chat(user, SPAN_NOTICE("You tuck the exposed wiring back into \the [machine] and screw the hatch back into place."))

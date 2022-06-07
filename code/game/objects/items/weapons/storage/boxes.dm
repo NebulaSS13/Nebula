@@ -68,7 +68,7 @@
 	..()
 	foldable = null //special form fitted boxes should not be foldable.
 
-/obj/item/storage/box/survival/
+/obj/item/storage/box/survival
 	name = "crew survival kit"
 	desc = "A box decorated in warning colors that contains a limited supply of survival tools. The panel and white stripe indicate this one contains oxygen."
 	icon_state = "survival"

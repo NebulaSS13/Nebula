@@ -38,11 +38,18 @@
 	wall_support_value = MAT_VALUE_NORMAL
 	fuel_value = 0.8
 	default_solid_form = /obj/item/stack/material/plank
+	sound_manipulate = 'sound/foley/woodpickup1.ogg'
+	sound_dropped = 'sound/foley/wooddrop1.ogg'
 
 /decl/material/solid/wood/generate_recipes(var/reinforce_material)
 	. = ..()
 	if(reinforce_material)	//recipes below don't support composite materials
 		return
+
+	if(wall_support_value >= 10)
+		. += new/datum/stack_recipe/furniture/girder(src)
+		. += new/datum/stack_recipe/furniture/ladder(src)
+
 	. += new/datum/stack_recipe/sandals(src)
 	. += new/datum/stack_recipe/tile/wood(src)
 	. += create_recipe_list(/datum/stack_recipe/furniture/chair/wood)

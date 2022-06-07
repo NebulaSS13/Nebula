@@ -47,7 +47,7 @@
 #define IGNORE_MOB_SIZE BITFLAG(0)
 #define AFFECTS_DEAD    BITFLAG(1)
 
-#define HANDLE_REACTIONS(_reagents)  SSmaterials.active_holders[_reagents] = TRUE
+#define HANDLE_REACTIONS(_reagents)  if(!QDELETED(_reagents)) { SSmaterials.active_holders[_reagents] = TRUE; }
 #define UNQUEUE_REACTIONS(_reagents) SSmaterials.active_holders -= _reagents
 
 #define REAGENT_LIST(R) (R.reagents?.get_reagents() || "No reagent holder")

@@ -12,6 +12,9 @@
 	var/label_text
 	var/show_reagent_name = FALSE
 
+/obj/item/chems/get_alt_interactions(var/mob/user)
+	. = ..() | /decl/interaction_handler/set_transfer/chems
+
 /obj/item/chems/proc/cannot_interact(mob/user)
 	if(!CanPhysicallyInteract(user))
 		to_chat(usr, SPAN_WARNING("You're in no condition to do that!"))
@@ -208,12 +211,6 @@
 
 /obj/item/chems/do_surgery(mob/living/carbon/M, mob/living/user)
 	if(user.zone_sel.selecting != BP_MOUTH) //in case it is ever used as a surgery tool
-		return ..()
-
-/obj/item/chems/AltClick(var/mob/user)
-	if(possible_transfer_amounts)
-		set_amount_per_transfer_from_this()
-	else
 		return ..()
 
 /obj/item/chems/examine(mob/user)

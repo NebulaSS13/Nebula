@@ -229,6 +229,9 @@
 	if(.)
 		SSnano.update_uis(src)
 
+/mob/announcer // used only for autosay
+	simulated = FALSE
+
 /obj/item/radio/proc/autosay(var/message, var/from, var/channel, var/sayverb = "states") //BS12 EDIT
 	var/datum/radio_frequency/connection = null
 	if(channel && channels && channels.len > 0)
@@ -240,7 +243,7 @@
 		channel = null
 	if (!istype(connection))
 		return
-	var/mob/living/silicon/ai/A = new /mob/living/silicon/ai(src, null, null, 1)
+	var/mob/announcer/A = new()
 	A.fully_replace_character_name(from)
 	talk_into(A, message, channel, sayverb)
 	qdel(A)
@@ -344,7 +347,7 @@
 		jobname = "No id"
 
 	// --- AI ---
-	else if (isAI(M))
+	else if (isAI(M) || istype(M, /mob/announcer))
 		jobname = ASSIGNMENT_COMPUTER
 
 	// --- Cyborg ---
@@ -567,7 +570,7 @@
 /obj/item/radio/attackby(obj/item/W, mob/user)
 	..()
 	user.set_machine(src)
-	if(isScrewdriver(W))
+	if(IS_SCREWDRIVER(W))
 		b_stat = !b_stat
 		if(!istype(src, /obj/item/radio/beacon))
 			if (b_stat)
@@ -643,10 +646,10 @@
 /obj/item/radio/borg/attackby(obj/item/W, mob/user)
 //	..()
 	user.set_machine(src)
-	if (!( isScrewdriver(W) || (istype(W, /obj/item/encryptionkey/ ))))
+	if (!( IS_SCREWDRIVER(W) || (istype(W, /obj/item/encryptionkey/ ))))
 		return
 
-	if(isScrewdriver(W))
+	if(IS_SCREWDRIVER(W))
 		if(keyslot)
 			for(var/ch_name in channels)
 				radio_controller.remove_object(src, radiochannels[ch_name])
@@ -818,7 +821,7 @@
 
 /obj/item/radio/phone/medbay
 	frequency = MED_I_FREQ
-	
+
 /obj/item/radio/phone/medbay/Initialize()
 	. = ..()
 	internal_channels = global.default_medbay_channels.Copy()

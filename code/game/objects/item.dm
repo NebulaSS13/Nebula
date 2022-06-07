@@ -432,6 +432,10 @@
 	if(user && (z_flags & ZMM_MANGLE_PLANES))
 		addtimer(CALLBACK(user, /mob/proc/check_emissive_equipment), 0, TIMER_UNIQUE)
 
+// As above but for items being equipped to an active module on a robot.
+/obj/item/proc/equipped_robot(var/mob/user)
+	return
+
 //Defines which slots correspond to which slot flags
 var/global/list/slot_flags_enumeration = list(
 	"[slot_wear_mask_str]" = SLOT_FACE,
@@ -977,3 +981,12 @@ modules/mob/living/carbon/human/life.dm if you die, you will be zoomed out.
 
 /obj/item/proc/gives_weather_protection()
 	return FALSE
+
+/obj/item/get_alt_interactions(var/mob/user)
+	. = ..()
+	if(config.expanded_alt_interactions)
+		. += list(
+			/decl/interaction_handler/pick_up,
+			/decl/interaction_handler/drop,
+			/decl/interaction_handler/use
+		)

@@ -3,11 +3,11 @@
 	var/mob/living/parent
 	var/last_metabolize_time = 0
 
-/datum/reagents/metabolism/clear_reagent(var/reagent_type)
-	if(REAGENT_VOLUME(src, reagent_type))
+/datum/reagents/metabolism/clear_reagent(var/reagent_type, var/defer_update = FALSE, var/force = FALSE)
+	. = ..()
+	if(.)
 		var/decl/material/current = GET_DECL(reagent_type)
 		current.on_leaving_metabolism(parent, metabolism_class)
-	. = ..()
 
 /datum/reagents/metabolism/New(var/max = 100, mob/living/parent_mob, var/met_class)
 	..(max, parent_mob)

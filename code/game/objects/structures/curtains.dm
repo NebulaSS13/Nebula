@@ -24,7 +24,7 @@
 	update_icon()
 
 /obj/item/curtain/attackby(obj/item/W, mob/user)
-	if(isScrewdriver(W))
+	if(IS_SCREWDRIVER(W))
 		if(!curtain_kind_path)
 			return
 
@@ -108,7 +108,7 @@
 	..()
 
 /obj/structure/curtain/attackby(obj/item/W, mob/user)
-	if(isScrewdriver(W))
+	if(IS_SCREWDRIVER(W))
 		if(!curtain_kind_path)
 			return
 

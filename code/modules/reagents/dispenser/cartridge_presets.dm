@@ -54,7 +54,7 @@
 /obj/item/chems/chem_disp_cartridge/beer
 	spawn_reagent = /decl/material/liquid/ethanol/beer
 /obj/item/chems/chem_disp_cartridge/kahlua
-	spawn_reagent = /decl/material/liquid/ethanol/coffee/kahlua
+	spawn_reagent = /decl/material/liquid/ethanol/coffee
 /obj/item/chems/chem_disp_cartridge/whiskey
 	spawn_reagent = /decl/material/liquid/ethanol/whiskey
 /obj/item/chems/chem_disp_cartridge/wine

@@ -79,7 +79,8 @@
 		/datum/computer_file/program/records,
 		/datum/computer_file/program/docking,
 		/datum/computer_file/program/records,
-		/datum/computer_file/program/wordprocessor
+		/datum/computer_file/program/wordprocessor,
+		/datum/computer_file/program/accounts
 	)
 
 /obj/machinery/computer/modular/preset/security

@@ -1,6 +1,10 @@
 /mob/living/simple_animal/hostile/retaliate
 	var/list/enemies = list()
 
+/mob/living/simple_animal/hostile/retaliate/Destroy()
+	LAZYCLEARLIST(enemies)
+	return ..()
+
 /mob/living/simple_animal/hostile/retaliate/Found(var/atom/A)
 	if(isliving(A))
 		var/mob/living/L = A

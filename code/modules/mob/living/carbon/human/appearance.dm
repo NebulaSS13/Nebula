@@ -14,6 +14,7 @@
 		return
 
 	set_species(new_species)
+	dna.ready_dna(src)
 
 	//Handle spawning stuff
 	species.handle_pre_spawn(src)

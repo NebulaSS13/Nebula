@@ -282,14 +282,15 @@ SUBSYSTEM_DEF(garbage)
 
 /datum/qdel_item
 	var/name = ""
-	var/qdels = 0			//Total number of times it's passed thru qdel.
-	var/destroy_time = 0	//Total amount of milliseconds spent processing this type's Destroy()
-	var/failures = 0		//Times it was queued for soft deletion but failed to soft delete.
-	var/hard_deletes = 0 	//Different from failures because it also includes QDEL_HINT_HARDDEL deletions
-	var/hard_delete_time = 0//Total amount of milliseconds spent hard deleting this type.
-	var/no_respect_force = 0//Number of times it's not respected force=TRUE
-	var/no_hint = 0			//Number of times it's not even bother to give a qdel hint
-	var/slept_destroy = 0	//Number of times it's slept in its destroy
+	var/qdels = 0			//! Total number of times its passed thru qdel.
+	var/destroy_time = 0	//! Total amount of milliseconds spent processing this type's Destroy().
+	var/failures = 0		//! Times it was queued for soft deletion but failed to soft delete.
+	var/hard_deletes = 0 	//! Different from failures because it also includes QDEL_HINT_HARDDEL deletions.
+	var/hard_delete_time = 0//! Total amount of milliseconds spent hard deleting this type.
+	var/no_respect_force = 0//! Number of times its not respected force=TRUE.
+	var/no_hint = 0			//! Number of times it hasn't bothered to give a qdel hint.
+	var/slept_destroy = 0	//! Number of times slept in its destroy.
+	var/early_destroy = 0	//! Number of times it was destroyed before Initialize().
 
 /datum/qdel_item/New(mytype)
 	name = "[mytype]"
@@ -312,20 +313,30 @@ SUBSYSTEM_DEF(garbage)
 	var/datum/qdel_item/I = SSgarbage.items[D.type]
 	if (!I)
 		I = SSgarbage.items[D.type] = new /datum/qdel_item(D.type)
-	I.qdels++
 
+	I.qdels++
 
 	if(isnull(D.gc_destroyed))
 		D.gc_destroyed = GC_CURRENTLY_BEING_QDELETED
 		var/start_time = world.time
 		var/start_tick = world.tick_usage
-		var/hint = D.Destroy(arglist(args.Copy(2))) // Let our friend know they're about to get fucked up.
+		var/hint
+
+		// Let our friend know they're about to get fucked up.
+		if (isloc(D) && !(D:atom_flags & ATOM_FLAG_INITIALIZED))
+			hint = D:EarlyDestroy(arglist(args.Copy(2)))
+			I.early_destroy += 1
+		else
+			hint = D.Destroy(arglist(args.Copy(2)))
+
 		if(world.time != start_time)
 			I.slept_destroy++
 		else
 			I.destroy_time += TICK_USAGE_TO_MS(start_tick)
+
 		if(!D)
 			return
+
 		switch(hint)
 			if (QDEL_HINT_QUEUE)		//qdel should queue the object for deletion.
 				GC_CHECK_AM_NULLSPACE(D, "QDEL_HINT_QUEUE")
@@ -397,7 +408,7 @@ SUBSYSTEM_DEF(garbage)
 			return
 
 		if(!skip_alert)
-			if(alert("Running this will lock everything up for about 5 minutes.  Would you like to begin the search?", "Find References", "Yes", "No") == "No")
+			if(UNLINT(alert("Running this will lock everything up for about 5 minutes.  Would you like to begin the search?", "Find References", "Yes", "No")) == "No")
 				running_find_references = null
 				return
 
@@ -410,15 +421,29 @@ SUBSYSTEM_DEF(garbage)
 	testing("Beginning search for references to a [type].")
 	last_find_references = world.time
 
-	DoSearchVar(global) //globals
-	for(var/datum/thing in world) //atoms (don't believe its lies)
-		DoSearchVar(thing, "World -> [thing]")
+	//Yes we do actually need to do this. The searcher refuses to read weird lists
+	//And global.vars is a really weird list
+	var/list/normal_globals = list()
+	for(var/global_var in global.vars)
+		normal_globals[global_var] = global.vars[global_var]
+	DoSearchVar(normal_globals, "(global) -> ") //globals
+	testing("Finished searching globals")
 
-	for (var/datum/thing) //datums
-		DoSearchVar(thing, "World -> [thing]")
+	for(var/atom/atom_thing) //atoms
+		DoSearchVar(atom_thing, "World -> [atom_thing]")
+	testing("Finished searching atoms")
 
-	for (var/client/thing) //clients
-		DoSearchVar(thing, "World -> [thing]")
+	for (var/datum/datum_thing) //datums
+		DoSearchVar(datum_thing, "World -> [datum_thing]")
+	testing("Finished searching datums")
+
+#ifndef FIND_REF_SKIP_CLIENTS
+	// DO NOT RUN THIS ON A LIVE SERVER
+	// IT WILL CRASH!!!
+	for (var/client/client_thing) //clients
+		DoSearchVar(client_thing, "World -> [client_thing]")
+	testing("Finished searching clients")
+#endif
 
 	testing("Completed search for references to a [type].")
 	if(usr && usr.client)
@@ -452,11 +477,15 @@ SUBSYSTEM_DEF(garbage)
 #define GET_TYPEID(ref) ( ( (length(ref) <= 10) ? "TYPEID_NULL" : copytext(ref, 4, length(ref)-6) ) )
 #define IS_NORMAL_LIST(L) (GET_TYPEID("\ref[L]") == TYPEID_NORMAL_LIST)
 
-/datum/proc/DoSearchVar(X, Xname, recursive_limit = 64)
+/datum/proc/DoSearchVar(X, Xname, recursive_limit = 128)
 	if(usr && usr.client && !usr.client.running_find_references)
 		return
 	if (!recursive_limit)
 		return
+
+	#ifndef FIND_REF_NO_CHECK_TICK
+	CHECK_TICK
+	#endif
 
 	if(istype(X, /datum))
 		var/datum/D = X
@@ -467,6 +496,9 @@ SUBSYSTEM_DEF(garbage)
 		var/list/L = D.vars
 
 		for(var/varname in L)
+			#ifndef FIND_REF_NO_CHECK_TICK
+			CHECK_TICK
+			#endif
 			if (varname == "vars")
 				continue
 			var/variable = L[varname]
@@ -475,22 +507,25 @@ SUBSYSTEM_DEF(garbage)
 				testing("Found [src.type] \ref[src] in [D.type]'s [varname] var. [Xname]")
 
 			else if(islist(variable))
-				DoSearchVar(variable, "[Xname] -> list", recursive_limit-1)
+				DoSearchVar(variable, "[Xname] -> [varname] (list)", recursive_limit-1)
 
 	else if(islist(X))
 		var/normal = IS_NORMAL_LIST(X)
 		for(var/I in X)
+			#ifndef FIND_REF_NO_CHECK_TICK
+			CHECK_TICK
+			#endif
 			if (I == src)
 				testing("Found [src.type] \ref[src] in list [Xname].")
 
-			else if (I && !isnum(I) && normal && X[I] == src)
-				testing("Found [src.type] \ref[src] in list [Xname]\[[I]\]")
+			else if (I && !isnum(I) && normal)
+				if(X[I] == src)
+					testing("Found [src.type] \ref[src] in list [Xname]\[[I]\]")
+				else if(islist(X[I]))
+					DoSearchVar(X[I], "[Xname]\[[I]\]", recursive_limit-1)
 
 			else if (islist(I))
-				DoSearchVar(I, "[Xname] -> list", recursive_limit-1)
-
-#ifndef FIND_REF_NO_CHECK_TICK
-	CHECK_TICK
-#endif
+				var/list/Xlist = X
+				DoSearchVar(I, "[Xname]\[[Xlist.Find(I)]\] -> list", recursive_limit-1)
 
 #endif

@@ -50,7 +50,7 @@ var/global/list/supermatter_delam_accent_sounds = list(
 	'sound/machines/sm/accent/delam/4.ogg',
 	'sound/machines/sm/accent/delam/5.ogg',
 
-	
+
 )
 
 // Returns a truthy value that is also used for power generation by the supermatter core itself.
@@ -413,7 +413,7 @@ var/global/list/supermatter_delam_accent_sounds = list(
 			global.using_map.unbolt_saferooms()
 			for(var/mob/M in global.player_list)
 				var/turf/T = get_turf(M)
-				if(T && (T.z in global.using_map.station_levels) && !istype(M,/mob/new_player) && !isdeaf(M))
+				if(T && isStationLevel(T.z) && !istype(M,/mob/new_player) && !isdeaf(M))
 					sound_to(M, 'sound/ambience/matteralarm.ogg')
 		else if(safe_warned && public_alert)
 			announcer.autosay(alert_msg, "Supermatter Monitor")
@@ -431,14 +431,14 @@ var/global/list/supermatter_delam_accent_sounds = list(
 
 	if(damage > explosion_point)
 		if(!exploded)
-			if(!isspaceturf(L) && (L.z in global.using_map.station_levels))
+			if(!isspaceturf(L) && isStationLevel(L.z))
 				announce_warning()
 			explode()
 	else if(damage > warning_point) // while the core is still damaged and it's still worth noting its status
 		shift_light(5, warning_color)
 		if(damage > emergency_point)
 			shift_light(7, emergency_color)
-		if(!isspaceturf(L) && ((world.timeofday - lastwarning) >= WARNING_DELAY * 10) && (L.z in global.using_map.station_levels))
+		if(!isspaceturf(L) && ((world.timeofday - lastwarning) >= WARNING_DELAY * 10) && isStationLevel(L.z))
 			announce_warning()
 	else
 		shift_light(4,base_color)
@@ -457,7 +457,7 @@ var/global/list/supermatter_delam_accent_sounds = list(
 		soundloop.mid_sounds = list('sound/machines/sm/loops/delamming.ogg' = 1)
 	else
 		soundloop.mid_sounds = list('sound/machines/sm/loops/calm.ogg' = 1)
-	
+
 	// Play Delam/Neutral sounds at rate determined by power and damage.
 	if(last_accent_sound < world.time && prob(20))
 		var/aggression = min(((damage / 800) * (power / 2500)), 1.0) * 100
@@ -558,7 +558,7 @@ var/global/list/supermatter_delam_accent_sounds = list(
 	power -= (power/decay_factor)**3		//energy losses due to radiation
 	handle_admin_warnings()
 
-	return 1	
+	return 1
 
 /obj/machinery/power/supermatter/bullet_act(var/obj/item/projectile/Proj)
 	var/turf/L = loc

@@ -83,7 +83,7 @@
 	. = ..()
 
 /obj/machinery/reagent_temperature/attackby(var/obj/item/thing, var/mob/user)
-	if(isWrench(thing))
+	if(IS_WRENCH(thing))
 		if(use_power == POWER_USE_ACTIVE)
 			to_chat(user, SPAN_WARNING("Turn \the [src] off first!"))
 		else

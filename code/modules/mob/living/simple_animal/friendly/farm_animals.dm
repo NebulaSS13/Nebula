@@ -114,6 +114,10 @@
 	. = ..()
 	udder = new(50, src)
 
+/mob/living/simple_animal/cow/Destroy()
+	QDEL_NULL(udder)
+	. = ..()
+
 /mob/living/simple_animal/cow/attackby(var/obj/item/O, var/mob/user)
 	var/obj/item/chems/glass/G = O
 	if(stat == CONSCIOUS && istype(G) && ATOM_IS_OPEN_CONTAINER(G))

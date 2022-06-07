@@ -91,7 +91,7 @@
 			add_padding(padding_type)
 			return
 
-		else if(isWirecutter(W))
+		else if(IS_WIRECUTTER(W))
 			if(!reinf_material)
 				to_chat(user, "\The [src] has no padding to remove.")
 				return
@@ -165,7 +165,7 @@
 		add_overlay(iv)
 
 /obj/structure/bed/roller/attackby(obj/item/I, mob/user)
-	if(isWrench(I) || istype(I, /obj/item/stack) || isWirecutter(I))
+	if(IS_WRENCH(I) || istype(I, /obj/item/stack) || IS_WIRECUTTER(I))
 		return 1
 	if(iv_stand && !beaker && istype(I, /obj/item/chems))
 		if(!user.unEquip(I, src))

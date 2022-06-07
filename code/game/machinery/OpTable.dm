@@ -1,5 +1,5 @@
 /obj/machinery/optable
-	name = "Operating Table"
+	name = "operating table"
 	desc = "Used for advanced medical procedures."
 	icon = 'icons/obj/surgery.dmi'
 	icon_state = "table2-idle"
@@ -44,11 +44,6 @@
 		updateUsrDialog()
 
 /obj/machinery/optable/physical_attack_hand(var/mob/user)
-	if(MUTATION_HULK in user.mutations)
-		visible_message("<span class='danger'>\The [usr] destroys \the [src]!</span>")
-		src.set_density(0)
-		qdel(src)
-		return TRUE
 
 	if(!victim)
 		to_chat(user, "<span class='warning'>There is nobody on \the [src]. It would be pointless to turn the suppressor on.</span>")
@@ -127,11 +122,13 @@
 	check_victim()
 	if(src.victim && get_turf(victim) == get_turf(src) && victim.lying)
 		to_chat(usr, "<span class='warning'>\The [src] is already occupied!</span>")
-		return 0
+		return FALSE
 	if(patient.buckled)
 		to_chat(usr, "<span class='notice'>Unbuckle \the [patient] first!</span>")
-		return 0
-	return 1
+		return FALSE
+	if(patient.anchored)
+		return FALSE
+	return TRUE
 
 /obj/machinery/optable/power_change()
 	. = ..()

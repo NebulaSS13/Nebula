@@ -60,6 +60,8 @@
 	if(!speaking)
 		if(istype(other, /mob/living/silicon))
 			return TRUE
+		if(istype(other, /mob/announcer))
+			return TRUE
 		if(istype(other, /mob/living/carbon/brain))
 			return TRUE
 	return ..()

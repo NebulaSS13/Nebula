@@ -1,5 +1,6 @@
 // Stacked resources. They use a material datum for a lot of inherited values.
 /obj/item/stack/material
+	name = "material sheet"
 	force = 5.0
 	throwforce = 5
 	w_class = ITEM_SIZE_LARGE
@@ -30,6 +31,11 @@
 		obj_flags |= OBJ_FLAG_CONDUCTIBLE
 	else
 		obj_flags &= (~OBJ_FLAG_CONDUCTIBLE)
+	//Sound setup
+	if(material.sound_manipulate)
+		pickup_sound = material.sound_manipulate
+	if(material.sound_dropped)
+		drop_sound = material.sound_dropped
 	update_strings()
 
 /obj/item/stack/material/get_recipes()
@@ -114,7 +120,7 @@
 			material.reinforce(user, W, src)
 		return TRUE
 
-	if(reinf_material && reinf_material.default_solid_form && isWelder(W))
+	if(reinf_material && reinf_material.default_solid_form && IS_WELDER(W))
 		var/obj/item/weldingtool/WT = W
 		if(WT.isOn() && WT.get_fuel() > 2 && use(2))
 			WT.remove_fuel(2, user)

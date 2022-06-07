@@ -2,9 +2,8 @@
 /datum/computer_file/program
 	filetype = "PRG"
 	filename = "UnknownProgram"						// File name. FILE NAME MUST BE UNIQUE IF YOU WANT THE PROGRAM TO BE DOWNLOADABLE FROM NETWORK!
-	var/list/required_access = list()				// List of required accesses to run/download the program.
-	var/requires_access_to_run = 1					// Whether the program checks for required_access when run.
-	var/requires_access_to_download = 1				// Whether the program checks for required_access when downloading.
+	var/requires_access_to_run = 1					// Whether the program checks for read_access when run.
+	var/requires_access_to_download = 1				// Whether the program checks for read_access when downloading.
 	var/datum/nano_module/NM = null					// If the program uses NanoModule, put it here and it will be automagically opened. Otherwise implement ui_interact.
 	var/nanomodule_path = null						// Path to nanomodule, make sure to set this if implementing new program.
 	var/program_state = PROGRAM_STATE_KILLED		// PROGRAM_STATE_KILLED or PROGRAM_STATE_BACKGROUND or PROGRAM_STATE_ACTIVE - specifies whether this program is running.
@@ -19,11 +18,13 @@
 	var/requires_network_feature = 0				// Optional, if above is set to 1 checks for specific function of network (currently NETWORK_SOFTWAREDOWNLOAD, NETWORK_PEERTOPEER, NETWORK_SYSTEMCONTROL and NETWORK_COMMUNICATION)
 	var/usage_flags = PROGRAM_ALL & ~PROGRAM_PDA	// Bitflags (PROGRAM_CONSOLE, PROGRAM_LAPTOP, PROGRAM_TABLET, PROGRAM_PDA combination) or PROGRAM_ALL
 	var/network_destination = null					// Optional string that describes what network server/system this program connects to. Used in default logging.
-	var/available_on_network = 1						// Whether the program can be downloaded from network. Set to 0 to disable.
+	var/available_on_network = 1					// Whether the program can be downloaded from network. Set to 0 to disable.
 	var/available_on_syndinet = 0					// Whether the program can be downloaded from SyndiNet (accessible via emagging the computer). Set to 1 to enable.
 	var/computer_emagged = 0						// Set to 1 if computer that's running us was emagged. Computer updates this every Process() tick
 	var/ui_header = null							// Example: "something.gif" - a header image that will be rendered in computer's UI when this program is running at background. Images are taken from /nano/images/status_icons. Be careful not to use too large images!
 	var/operator_skill = SKILL_MIN                  // Holder for skill value of current/recent operator for programs that tick.
+
+	mod_access = list(list(access_network))
 
 /datum/computer_file/program/Destroy()
 	if(computer && computer.active_program == src)
@@ -36,7 +37,7 @@
 
 /datum/computer_file/program/clone()
 	var/datum/computer_file/program/temp = ..()
-	temp.required_access = required_access
+	temp.read_access = read_access
 	temp.nanomodule_path = nanomodule_path
 	temp.filedesc = filedesc
 	temp.program_icon_state = program_icon_state
@@ -83,37 +84,16 @@
 // Check if the user can run program. Only humans can operate computer. Automatically called in run_program()
 // User has to wear their ID or have it inhand for ID Scan to work.
 // Can also be called manually, with optional parameter being access_to_check to scan the user's ID
-/datum/computer_file/program/proc/can_run(var/mob/living/user, var/loud = 0, var/list/accesses_to_check, var/datum/computer_network/network)
+/datum/computer_file/program/proc/can_run(var/list/accesses, var/mob/user, var/loud = 0)
 	if(!requires_access_to_run)
 		return TRUE
-	// Checks to see if network access is enabled, and then defaults to required_access if not.
-	if(!accesses_to_check)
-		if(network)
-			var/datum/extension/network_device/acl/access_controller = network.access_controller
-			if(access_controller && access_controller.program_control)
-				accesses_to_check = access_controller.get_program_access(filename)
-	
-	if(!length(accesses_to_check))
-		accesses_to_check = required_access
 
-	if(!length(accesses_to_check)) // No required_access, allow it.
-		return TRUE
-
-	// Admin override - allows operation of any computer as aghosted admin, as if you had any required access.
-	if(isghost(user) && check_rights(R_ADMIN, 0, user))
+	if(get_file_perms(accesses, user) & OS_READ_ACCESS)
 		return TRUE
 
 	if(!istype(user))
 		return FALSE
 
-	var/obj/item/card/id/I = user.GetIdCard()
-	if(!I)
-		if(loud)
-			to_chat(user, SPAN_WARNING("The OS flashes an \"RFID Error - Unable to scan ID\" warning."))
-		return FALSE
-
-	if(has_access(accesses_to_check, I.access))
-		return TRUE
 	if(loud)
 		to_chat(user, SPAN_WARNING("The OS flashes an \"Access Denied\" warning."))
 		return FALSE
@@ -133,10 +113,15 @@
 	if(nanomodule_path)
 		NM = new nanomodule_path(src, new /datum/topic_manager/program(src), src)
 		if(user)
-			NM.using_access = user.GetAccess()
+			NM.using_access = computer.get_access() // Programs nab access from users in their get_access() proc so don't bother adding it
+													// to the using list as well.
 	if(requires_network && network_destination)
 		generate_network_log("Connection opened to [network_destination].")
 	return 1
+
+/datum/computer_file/program/proc/update_access()
+	if(NM)
+		NM.using_access = computer.get_access()
 
 // Use this proc to kill the program. Designed to be implemented by each program if it requires on-quit logic, such as the NTNRC client.
 /datum/computer_file/program/proc/on_shutdown(var/forced = 0)

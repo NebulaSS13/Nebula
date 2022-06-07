@@ -272,7 +272,7 @@
 		cell.emp_act(severity)
 
 /obj/item/organ/internal/cell/attackby(obj/item/W, mob/user)
-	if(isScrewdriver(W))
+	if(IS_SCREWDRIVER(W))
 		if(open)
 			open = 0
 			to_chat(user, "<span class='notice'>You screw the battery panel in place.</span>")
@@ -280,7 +280,7 @@
 			open = 1
 			to_chat(user, "<span class='notice'>You unscrew the battery panel.</span>")
 
-	if(isCrowbar(W))
+	if(IS_CROWBAR(W))
 		if(open)
 			if(cell)
 				user.put_in_hands(cell)
@@ -380,4 +380,5 @@
 //Since the mmi_holder is an horrible hacky pos we turn it into a mmi on drop, since it shouldn't exist outside a mob
 /obj/item/organ/internal/mmi_holder/dropInto(atom/destination)
 	. = ..()
-	transfer_and_delete()
+	if (!QDELETED(src))
+		transfer_and_delete()

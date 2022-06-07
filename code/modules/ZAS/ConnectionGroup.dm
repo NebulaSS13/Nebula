@@ -95,7 +95,7 @@ Class Procs:
 /connection_edge/proc/recheck()
 
 /connection_edge/proc/flow(list/movable, differential, repelled)
-	for(var/atom/movable/M AS_ANYTHING in movable)
+	for(var/atom/movable/M as anything in movable)
 		//If they're already being tossed, don't do it again.
 		M.handle_airflow(differential, connecting_turfs, repelled)
 

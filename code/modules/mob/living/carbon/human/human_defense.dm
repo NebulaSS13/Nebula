@@ -269,7 +269,7 @@ meteor_act
 			C.update_clothing_icon()
 
 /mob/living/carbon/human/proc/attack_joint(var/obj/item/organ/external/organ, var/obj/item/W, var/effective_force, var/dislocate_mult, var/blocked)
-	if(!organ || (organ.dislocated == 2) || (organ.dislocated == -1) || blocked >= 100)
+	if(!organ || organ.is_dislocated() || !(organ.limb_flags & ORGAN_FLAG_CAN_DISLOCATE) || blocked >= 100)
 		return 0
 	if(W.damtype != BRUTE)
 		return 0

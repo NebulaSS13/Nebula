@@ -1,5 +1,6 @@
 /obj/machinery/network/acl
 	name = "network access controller"
+	desc = "A mainframe that manages encryption keys tied to groups and their children on its parent network."
 	icon = 'icons/obj/machines/tcomms/aas.dmi'
 	icon_state = "aas"
 	network_device_type =  /datum/extension/network_device/acl
@@ -8,274 +9,110 @@
 	uncreated_component_parts = null
 	stat_immune = 0
 	base_type = /obj/machinery/network/acl
-	runtimeload = TRUE
 
-	// Datum file source for where grants/records are.
-	var/datum/file_storage/network/file_source = /datum/file_storage/network/machine
-	var/editing_user	// Numerical user ID of the user being editing on this device.
-	var/editing_program // Name of current program being edited.
-	var/list/initial_grants  //defaults to all possible station accesses if left null
-
-/obj/machinery/network/acl/merchant
-	initial_grants = list(
-		access_crate_cash,
-		access_merchant
-	)
-
-/obj/machinery/network/acl/antag
-	initial_grants = list(
-		access_syndicate
-	)
+	var/current_group				// The group currently being edited.
+	var/list/preset_groups			// Dictionary of parent groups->list(child_groups)
 
 /obj/machinery/network/acl/Initialize()
 	. = ..()
-	if(isnull(initial_grants))
-		initial_grants = get_all_station_access()
-	if(ispath(file_source))
-		file_source = new file_source(null, src)
-
-/obj/machinery/network/acl/RuntimeInitialize()
-	// Get default file server.
-	var/datum/extension/network_device/acl/FW = get_extension(src, /datum/extension/network_device)
-	var/datum/computer_network/network = FW.get_network()
-	if(network)
-		var/datum/extension/network_device/file_server = network.get_file_server_by_role(MF_ROLE_CREW_RECORDS)
-		if(file_server)
-			file_source.server = file_server.network_tag
-			// Populate initial grants.
-			for(var/grant in initial_grants)
-				create_grant(grant)
-
-/obj/machinery/network/acl/attackby(var/obj/item/W, var/mob/user)
-	if(istype(W, /obj/item/card/id)) // ID Card, try to insert it.
-		var/obj/item/card/id/I = W
-		var/obj/item/stock_parts/computer/card_slot/card_slot = get_component_of_type(/obj/item/stock_parts/computer/card_slot)
-		if(!card_slot)
-			return
-		card_slot.insert_id(I, user)
-		return
-	. = ..()
+	if(preset_groups)
+		var/datum/extension/network_device/acl/D = get_extension(src, /datum/extension/network_device)
+		D.add_groups(preset_groups)
 
 /obj/machinery/network/acl/OnTopic(mob/user, href_list, datum/topic_state/state)
 	. = ..()
 	if(.)
 		return
-	var/datum/extension/network_device/acl/computer = get_extension(src, /datum/extension/network_device)
-	var/datum/computer_network/network = computer.get_network()
-	if(!network)
-		error = "NETWORK ERROR: Connection lost."
+	var/datum/extension/network_device/acl/D = get_extension(src, /datum/extension/network_device)
+	var/datum/computer_network/network = D.get_network()
+	if(!network || network.access_controller != D)
+		error = "NETWORK ERROR: Connection lost. Another access controller may be active on the network."
 		return TOPIC_REFRESH
 
 	if(href_list["back"])
-		editing_user = null
-		editing_program = null
+		current_group = null
 		return TOPIC_REFRESH
-
-	if(href_list["change_file_server"])
-		var/list/file_servers = network.get_file_server_tags(MF_ROLE_CREW_RECORDS)
-		var/file_server = input(usr, "Choose a fileserver to view access records on:", "Select File Server") as null|anything in file_servers
-		if(file_server)
-			file_source.server = file_server
-			return TOPIC_REFRESH
-
-	if(href_list["assign_grant"])
-		// Resolve our selection back to a file.
-		var/datum/computer_file/data/grant_record/grant = computer.get_grant(href_list["assign_grant"])
-		if(!grant)
-			error = "ERROR: Grant record not found."
-			return TOPIC_REFRESH
-		if(editing_user)
-			var/datum/computer_file/report/crew_record/AR = get_access_record()
-			if(!AR)
-				error = "ERROR: Access record not found."
-				return TOPIC_REFRESH
-			AR.add_grant(grant)
-		else if(editing_program)
-			var/list/program_access = computer.program_access[editing_program]
-			program_access |= grant.stored_data
-			return TOPIC_REFRESH
-
-	if(href_list["remove_grant"])
-		if(editing_user)
-			var/datum/computer_file/report/crew_record/AR = get_access_record()
-			if(!AR)
-				error = "ERROR: Access record not found."
-				return TOPIC_REFRESH
-			AR.remove_grant(href_list["remove_grant"]) // Add the grant to the record.
-		if(editing_program)
-			var/datum/computer_file/data/grant_record/grant = computer.get_grant(href_list["remove_grant"])
-			if(!grant)
-				error = "ERROR: Grant record not found."
-				return TOPIC_REFRESH
-			var/list/program_access = computer.program_access[editing_program]
-			program_access -= grant.stored_data
-			return TOPIC_REFRESH
-
-	if(href_list["clear_program_access"])
-		if(editing_program)
-			computer.program_access[editing_program] = list()
-		else
-			error = "ERROR: Program not found."
-		return TOPIC_REFRESH
-
-	if(href_list["toggle_program_control"])
-		computer.program_control = !computer.program_control
-		return TOPIC_REFRESH
-
-	if(href_list["create_grant"])
-		var/new_grant_name = uppertext(sanitize(input(usr, "Enter the name of the new grant:", "Create Grant")))
+	
+	if(href_list["create_group"])
+		var/group_name = sanitize_for_group(input(usr, "Enter the name of the new group. Maximum 15 characters, only alphanumeric characters, _ and - are allowed:", "Create Group"))
+		if(!length(group_name))
+			return TOPIC_HANDLED
 		if(!CanInteract(user, global.default_topic_state))
 			return TOPIC_REFRESH
-		if(!new_grant_name)
-			return TOPIC_REFRESH
-		if(!create_grant(new_grant_name))
-			error = "MAINFRAME ERROR: Unable to store grant on mainframe."
-			return TOPIC_REFRESH
-
-	if(href_list["delete_grant"])
-		if(!file_source.delete_file(href_list["delete_grant"]))
-			error = "FIREWALL ERROR: Unable to delete grant."
-			return TOPIC_REFRESH
-
-	if(href_list["view_user"])
-		editing_user = href_list["view_user"]
-		editing_program = null
+		
+		var/output = D.add_group(group_name, current_group)
+		if(group_name in D.all_groups)
+			to_chat(user, SPAN_NOTICE(output))
+		else // Failure!
+			to_chat(user, SPAN_WARNING(output))
 		return TOPIC_REFRESH
 
-	if(href_list["view_program"])
-		var/prog = href_list["view_program"]
-		var/list/programs = computer.program_access
-		if(!(prog in programs))
-			error = "ERROR: Program not found."
+	if(href_list["remove_group"])
+		var/group_name = href_list["remove_group"]
+		var/removal_check = alert(user, "Are you sure you want to remove the group [group_name]?", "Group Removal", "No", "Yes")
+		if(!CanInteract(user, global.default_topic_state))
 			return TOPIC_REFRESH
-		editing_program = prog
-		editing_user = null
+		if(removal_check == "Yes")
+			var/output = D.remove_group(group_name, current_group)
+			if(group_name in D.all_groups) // Failure!
+				to_chat(user, SPAN_WARNING(output))
+			else
+				to_chat(user, SPAN_NOTICE(output))
+			return TOPIC_REFRESH
+	
+	if(href_list["toggle_submanagement"])
+		D.toggle_submanagement()
 		return TOPIC_REFRESH
-
-	if(href_list["write_id"])
-		var/obj/item/stock_parts/computer/card_slot/card_slot = get_component_of_type(/obj/item/stock_parts/computer/card_slot)
-		if(!card_slot)
-			error = "HARDWARE ERROR: No GOOSE-v2 compatible device found."
-			return TOPIC_REFRESH
-		var/obj/item/card/id/network/card = card_slot.stored_card
-		if(!card)
-			error = "HARDWARE ERROR: No valid card inserted."
-			return TOPIC_REFRESH
-		// Write to the card.
-		var/datum/computer_file/report/crew_record/AR = get_access_record()
-		card.network_id = computer.network_id
-		card.user_id = AR.user_id
-		card.access_record = AR
-		visible_message(SPAN_NOTICE("\The [src] clicks and hums, writing new data to \a [card]."))
-
-	if(href_list["eject_id"])
-		var/obj/item/stock_parts/computer/card_slot/card_slot = get_component_of_type(/obj/item/stock_parts/computer/card_slot)
-		if(!card_slot)
-			error = "HARDWARE ERROR: No GOOSE-v2 compatible device found."
-			return TOPIC_REFRESH
-		if(!card_slot.stored_card)
-			error = "HARDWARE ERROR: No valid card inserted."
-			return TOPIC_REFRESH
-		card_slot.eject_id(user)
-
-	if(href_list["add_admin"])
-		network.access_controller.add_admin(editing_user)
-
-	if(href_list["remove_admin"])
-		network.access_controller.rem_admin(editing_user)
+	
+	if(href_list["toggle_parent_account_creation"])
+		D.toggle_parent_account_creation()
+		return TOPIC_REFRESH
+	
+	if(href_list["view_child_groups"])
+		var/parent_group = href_list["view_child_groups"]
+		if(parent_group && (parent_group in D.group_dict))
+			current_group = parent_group
+		else
+			current_group = null
+		return TOPIC_REFRESH
+	
+	if(href_list["info"])
+		switch(href_list["info"])
+			if("submanagement")
+				to_chat(user, SPAN_NOTICE("If parent group submanagement is toggled on, members of the parent group will be allowed to manage account membership in child groups. This may be useful for departmental heads."))
+			if("parent_account_creation")
+				to_chat(user, SPAN_NOTICE("If parent account creation is toggled on, members of any parent group will be allowed to create new user accounts. Otherwise, account creation requires access to an account server."))
 
 /obj/machinery/network/acl/ui_data(mob/user, ui_key)
 	. = ..()
 
 	if(error)
+		.["error"] = error
 		return
 
-	var/obj/item/stock_parts/computer/card_slot/card_slot = get_component_of_type(/obj/item/stock_parts/computer/card_slot)
-	if(card_slot)
-		.["card_inserted"] = !!card_slot.stored_card
-
-	var/datum/extension/network_device/acl/computer = get_extension(src, /datum/extension/network_device)
-	if(!computer.get_network())
+	var/datum/extension/network_device/acl/D = get_extension(src, /datum/extension/network_device)
+	if(!D.get_network())
 		.["connected"] = FALSE
 		return
 	.["connected"] = TRUE
-	.["file_server"] = file_source.server
-	.["editing_user"] = editing_user
-	.["editing_program"] = editing_program
+	.["allow_submanagement"] = D.allow_submanagement
+	.["parent_account_creation"] = D.parent_account_creation
 
-	// Let's build some data.
-	if(editing_user)
-		var/datum/computer_network/network = computer.get_network()
-		.["user_id"] = editing_user
-		.["is_admin"] = (editing_user in network.access_controller.administrators)
-		var/datum/computer_file/report/crew_record/AR = get_access_record()
-		if(!istype(AR))
-			// Something has gone wrong. Our AR file is missing.
-			error = "NETWORK ERROR: Unable to find access record for user [editing_user]."
-			return
-		var/list/grants[0]
-		var/list/assigned_grants = AR.get_valid_grants()
-		// We're editing a user, so we only need to build a subset of data.
-		.["desired_name"]	= AR.get_name()
-		.["grant_count"] 	= length(assigned_grants)
-		.["size"] 			= AR.size
-		for(var/datum/computer_file/data/grant_record/GR in computer.get_all_grants())
-			grants.Add(list(list(
-				"grant_name" = GR.stored_data,
-				"assigned" = (GR in assigned_grants)
-			)))
-		.["grants"] = grants
-	else if(editing_program) // Editing program access.
-		.["program_name"] = editing_program
-		var/list/program_access = computer.program_access[editing_program]
-		var/list/grants[0]
-		.["cleared_control"] = !length(program_access)
-		for(var/datum/computer_file/data/grant_record/GR in computer.get_all_grants())
-			grants.Add(list(list(
-				"grant_name" = GR.stored_data,
-				"assigned" = (GR.stored_data in program_access)
-			)))
-		.["grants"] = grants
+	// Modifying parent group, display child groups
+	if(current_group)
+		.["current_group"] = current_group
+		var/list/child_groups[0]
+		if(D.group_dict[current_group])
+			for(var/child_group in D.group_dict[current_group])
+				child_groups.Add(list(list(
+					"group_name" = child_group,
+				)))
+		.["child_groups"] = child_groups
 	else
-		// We're looking at all records. Or lack thereof.
-		var/list/users[0]
-		for(var/datum/computer_file/report/crew_record/AR in get_all_users())
-			users.Add(list(list(
-				"desired_name" = AR.get_name(),
-				"user_id" = AR.user_id,
-				"grant_count" = length(AR.get_valid_grants()),
-				"size" = AR.size
+		// We're looking at all parent groups.
+		var/list/parent_groups[0]
+		for(var/parent_group in D.group_dict)
+			parent_groups.Add(list(list(
+				"group_name" = parent_group,
 			)))
-		.["users"] = users
-		var/list/programs[0]
-		.["program_control"] = computer.program_control
-		for(var/prog_name in computer.program_access)
-			programs.Add(list(list(
-				"name" = prog_name,
-				"grants" = length(computer.program_access[prog_name])
-			)))
-		.["programs"] = programs
-
-/obj/machinery/network/acl/proc/get_all_users()
-	var/list/users = list()
-	for(var/datum/computer_file/report/crew_record/CR in file_source.get_all_files())
-		users |= CR
-	return users
-
-// Get the access record for the user we're *currently* editing.
-/obj/machinery/network/acl/proc/get_access_record(var/for_specific_id)
-	var/for_user = for_specific_id
-	if(!for_user)
-		for_user = editing_user
-	for(var/datum/computer_file/report/crew_record/AR in get_all_users())
-		if(AR.user_id != for_user)
-			continue
-		return AR
-
-/obj/machinery/network/acl/proc/create_grant(var/grant_data)
-	if(!file_source.create_file(grant_data, /datum/computer_file/data/grant_record))
-		return FALSE
-	var/datum/computer_file/data/grant_record/grant = file_source.get_file(grant_data)
-	grant.set_value(grant_data)
-	grant.calculate_size()
-	return TRUE
+		.["parent_groups"] = parent_groups

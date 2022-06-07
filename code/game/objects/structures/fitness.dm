@@ -40,7 +40,7 @@
 	var/list/fail_message = list(", lifting them part of the way and then letting them drop", ", unable to even budge them")
 
 /obj/structure/fitness/weightlifter/attackby(obj/item/W, mob/user)
-	if(isWrench(W))
+	if(IS_WRENCH(W))
 		playsound(src.loc, 'sound/items/Deconstruct.ogg', 75, 1)
 		weight = (weight % max_weight) + 1
 		to_chat(user, "You set the machine's weight level to [weight].")

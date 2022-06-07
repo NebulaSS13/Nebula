@@ -54,7 +54,7 @@
 	return TRUE
 
 /datum/keybinding/human/give
-	hotkey_keys = list("None")
+	hotkey_keys = list("G")
 	name = "give_item"
 	full_name = "Give Item"
 	description = "Give the item you're currently holding"

@@ -75,6 +75,8 @@ var/global/list/time_prefs_fixed = list()
 
 /datum/preferences/Destroy()
 	. = ..()
+	QDEL_NULL(player_setup)
+	QDEL_NULL(panel)
 	QDEL_LIST_ASSOC_VAL(char_render_holders)
 
 /datum/preferences/proc/setup()

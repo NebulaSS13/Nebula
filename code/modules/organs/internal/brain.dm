@@ -23,7 +23,7 @@
 	var/healed_threshold = 1
 	var/oxygen_reserve = 6
 
-/obj/item/organ/internal/brain/robotize(var/company = /decl/prosthetics_manufacturer, var/skip_prosthetics, var/keep_organs, var/apply_material = /decl/material/solid/metal/steel)
+/obj/item/organ/internal/brain/robotize(var/company = /decl/prosthetics_manufacturer, var/skip_prosthetics = 0, var/keep_organs = 0, var/apply_material = /decl/material/solid/metal/steel, var/check_bodytype, var/check_species)
 	replace_self_with(/obj/item/organ/internal/posibrain)
 
 /obj/item/organ/internal/brain/mechassist()
@@ -37,7 +37,7 @@
 	owner.remove_organ(src, FALSE, FALSE, TRUE, TRUE, FALSE)
 	qdel(src)
 	if(tmp_owner)
-		var/obj/item/organ/org = new replace_path(tmp_owner, given_dna = dna)
+		var/obj/item/organ/org = new replace_path(tmp_owner, null, dna)
 		tmp_owner.add_organ(org, tmp_owner.get_organ(org.parent_organ), TRUE, TRUE)
 		tmp_owner = null
 

@@ -47,7 +47,7 @@
 
 /obj/machinery/fusion_fuel_injector/attackby(obj/item/W, mob/user)
 
-	if(isMultitool(W))
+	if(IS_MULTITOOL(W))
 		var/datum/extension/local_network_member/fusion = get_extension(src, /datum/extension/local_network_member)
 		fusion.get_new_tag(user)
 		return
@@ -69,7 +69,7 @@
 		cur_assembly = W
 		return
 
-	if(isWrench(W))
+	if(IS_WRENCH(W))
 		if(injecting)
 			to_chat(user, "<span class='warning'>Shut \the [src] off first!</span>")
 			return

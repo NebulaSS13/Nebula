@@ -211,7 +211,6 @@
 			heal_organ_damage(0,1)
 
 	// DNA2 - Gene processing.
-	// The HULK stuff that was here is now in the hulk gene.
 	for(var/datum/dna/gene/gene in dna_genes)
 		if(!gene.block)
 			continue
@@ -844,8 +843,7 @@
 		mind.changeling.regenerate()
 
 /mob/living/carbon/human/proc/handle_shock()
-	if(status_flags & GODMODE)	return 0	//godmode
-	if(!can_feel_pain())
+	if(!can_feel_pain() || (status_flags & GODMODE))
 		shock_stage = 0
 		return
 

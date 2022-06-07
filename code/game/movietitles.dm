@@ -86,9 +86,9 @@ var/global/list/end_titles
 
 /obj/screen/credit/Destroy()
 	var/client/P = parent
-	if(parent)
+	if(istype(P))
 		P.screen -= src
-	LAZYREMOVE(P.credits, src)
+		LAZYREMOVE(P.credits, src)
 	parent = null
 	return ..()
 

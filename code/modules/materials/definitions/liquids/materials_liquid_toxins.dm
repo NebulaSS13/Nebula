@@ -150,8 +150,10 @@
 		M.timeofdeath = world.time
 	M.add_chemical_effect(CE_NOPULSE, 1)
 
-/decl/material/liquid/zombiepowder/on_leaving_metabolism(mob/parent, metabolism_class)
-	parent?.status_flags &= ~FAKEDEATH
+/decl/material/liquid/zombiepowder/on_leaving_metabolism(atom/parent, metabolism_class)
+	var/mob/M = parent
+	if(istype(M))
+		M.status_flags &= ~FAKEDEATH
 	. = ..()
 
 /decl/material/liquid/fertilizer //Reagents used for plant fertilizers.
@@ -246,6 +248,7 @@
 
 /decl/material/liquid/bromide
 	name = "bromide"
+	codex_name = "elemental bromide"
 	uid = "liquid_bromide"
 	lore_text = "A dark, nearly opaque, red-orange, toxic element."
 	taste_description = "pestkiller"

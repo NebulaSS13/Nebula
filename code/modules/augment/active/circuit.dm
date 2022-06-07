@@ -11,7 +11,7 @@
 	origin_tech = "{'materials':1,'magnets':1,'engineering':1,'programming':2}"
 
 /obj/item/organ/internal/augment/active/simple/circuit/attackby(obj/item/W, mob/user)
-	if(isCrowbar(W))
+	if(IS_CROWBAR(W))
 		//Remove internal circuit
 		if(holding)
 			holding.canremove = 1

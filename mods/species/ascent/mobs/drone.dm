@@ -137,6 +137,8 @@
 	N.charge_costs = list(1000)
 
 /mob/living/silicon/robot/flying/ascent
+	name = "\improper Ascent drone"
+	real_name = "\improper Ascent drone"
 	desc = "A small, sleek, dangerous-looking hover-drone."
 	speak_statement = "clicks"
 	speak_exclamation = "rasps"

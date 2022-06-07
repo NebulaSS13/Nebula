@@ -263,6 +263,8 @@ var/global/list/gamemode_cache = list()
 		"login_export_addr"
 	)
 
+	var/expanded_alt_interactions = FALSE // Set to true to enable look, grab, drop, etc. in the alt interaction menu.
+
 /datum/configuration/VV_hidden()
 	. = ..() | protected_vars
 
@@ -330,6 +332,9 @@ var/global/list/gamemode_cache = list()
 
 				if ("use_iterative_explosions")
 					use_iterative_explosions = 1
+
+				if ("expanded_alt_interactions")
+					expanded_alt_interactions = 1
 
 				if ("explosion_z_threshold")
 					iterative_explosives_z_threshold = text2num(value)

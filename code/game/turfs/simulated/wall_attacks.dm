@@ -84,13 +84,6 @@
 	radiate()
 	add_fingerprint(user)
 	user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
-	var/rotting = (locate(/obj/effect/overlay/wallrot) in src)
-	if (MUTATION_HULK in user.mutations)
-		if (rotting || !prob(material.hardness))
-			success_smash(user)
-		else
-			fail_smash(user)
-		return TRUE
 	if(ishuman(user))
 		var/mob/living/carbon/human/H = user
 		var/obj/item/hand = H.get_organ(H.get_active_held_item_slot())
@@ -98,7 +91,7 @@
 			return TRUE
 	. = ..()
 	if(!.)
-		return try_touch(user, rotting)
+		return try_touch(user, (locate(/obj/effect/overlay/wallrot) in src))
 
 /turf/simulated/wall/attackby(var/obj/item/W, var/mob/user, click_params)
 
@@ -119,7 +112,7 @@
 			burn(W.get_heat())
 
 	if(locate(/obj/effect/overlay/wallrot) in src)
-		if(isWelder(W))
+		if(IS_WELDER(W))
 			var/obj/item/weldingtool/WT = W
 			if( WT.remove_fuel(0,user) )
 				to_chat(user, "<span class='notice'>You burn away the fungi with \the [WT].</span>")
@@ -153,7 +146,7 @@
 		var/dismantle_verb
 		var/dismantle_sound
 
-		if(isWelder(W))
+		if(IS_WELDER(W))
 
 			if(material && !material.removed_by_welder)
 				to_chat(user, SPAN_WARNING("\The [src] is too delicate to be dismantled with \the [W]; try a crowbar."))
@@ -166,7 +159,7 @@
 			dismantle_sound = 'sound/items/Welder.ogg'
 			cut_delay *= 0.7
 
-		else if(isCrowbar(W))
+		else if(IS_CROWBAR(W))
 
 			if(material && material.removed_by_welder)
 				to_chat(user, SPAN_WARNING("\The [src] is too robust to be dismantled with \the [W]; try a welding tool."))
@@ -226,7 +219,7 @@
 					user.visible_message("<span class='warning'>The wall was torn open by [user]!</span>")
 					playsound(src, 'sound/items/Welder.ogg', 100, 1)
 
-				else if(isWirecutter(W))
+				else if(IS_WIRECUTTER(W))
 					playsound(src, 'sound/items/Wirecutter.ogg', 100, 1)
 					construction_stage = 5
 					SSmaterials.create_object(/decl/material/solid/metal/steel, src, 1, /obj/item/stack/material/rods)
@@ -234,7 +227,7 @@
 					update_icon()
 					return TRUE
 			if(5)
-				if(isScrewdriver(W))
+				if(IS_SCREWDRIVER(W))
 					to_chat(user, "<span class='notice'>You begin removing the support lines.</span>")
 					playsound(src, 'sound/items/Screwdriver.ogg', 100, 1)
 					. = TRUE
@@ -276,7 +269,7 @@
 					to_chat(user, "<span class='notice'>You press firmly on the cover, dislodging it.</span>")
 					return
 			if(3)
-				if(isCrowbar(W))
+				if(IS_CROWBAR(W))
 					to_chat(user, "<span class='notice'>You struggle to pry off the cover.</span>")
 					playsound(src, 'sound/items/Crowbar.ogg', 100, 1)
 					. = TRUE
@@ -287,7 +280,7 @@
 					to_chat(user, "<span class='notice'>You pry off the cover.</span>")
 					return
 			if(2)
-				if(isWrench(W))
+				if(IS_WRENCH(W))
 					to_chat(user, "<span class='notice'>You start loosening the anchoring bolts which secure the support rods to their frame.</span>")
 					playsound(src, 'sound/items/Ratchet.ogg', 100, 1)
 					. = TRUE
@@ -323,7 +316,7 @@
 					to_chat(user, "<span class='notice'>The support rods drop out as you cut them loose from the frame.</span>")
 					return
 			if(0)
-				if(isCrowbar(W))
+				if(IS_CROWBAR(W))
 					to_chat(user, "<span class='notice'>You struggle to pry off the outer sheath.</span>")
 					playsound(src, 'sound/items/Crowbar.ogg', 100, 1)
 					. = TRUE

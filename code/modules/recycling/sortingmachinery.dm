@@ -471,7 +471,7 @@
 	if(!I || !user)
 		return
 
-	if(isScrewdriver(I))
+	if(IS_SCREWDRIVER(I))
 		if(c_mode==0)
 			c_mode=1
 			playsound(src.loc, 'sound/items/Screwdriver.ogg', 50, 1)
@@ -482,7 +482,7 @@
 			playsound(src.loc, 'sound/items/Screwdriver.ogg', 50, 1)
 			to_chat(user, "You attach the screws around the power connection.")
 			return
-	else if(isWelder(I) && c_mode==1)
+	else if(IS_WELDER(I) && c_mode==1)
 		var/obj/item/weldingtool/W = I
 		if(W.remove_fuel(1,user))
 			to_chat(user, "You start slicing the floorweld off the delivery chute.")

@@ -10,16 +10,17 @@
 	base_type = /obj/machinery/network/mainframe
 	var/list/initial_roles = list(
 		MF_ROLE_FILESERVER,
-		MF_ROLE_EMAIL_SERVER,
 		MF_ROLE_LOG_SERVER,
 		MF_ROLE_CREW_RECORDS,
-		MF_ROLE_SOFTWARE
+		MF_ROLE_SOFTWARE,
+		MF_ROLE_ACCOUNT_SERVER
 		)
 
 /obj/machinery/network/mainframe/Initialize()
 	. = ..()
 	var/datum/extension/network_device/mainframe/M = get_extension(src, /datum/extension/network_device)
 	M.roles |= initial_roles
+	M.update_roles()
 
 /obj/machinery/network/mainframe/ui_data(mob/user, ui_key)
 	var/data = ..()
@@ -56,8 +57,8 @@
 /obj/machinery/network/mainframe/files
 	initial_roles = list(MF_ROLE_FILESERVER)
 
-/obj/machinery/network/mainframe/email
-	initial_roles = list(MF_ROLE_EMAIL_SERVER)
+/obj/machinery/network/mainframe/account
+	initial_roles = list(MF_ROLE_ACCOUNT_SERVER)
 
 /obj/machinery/network/mainframe/logs
 	initial_roles = list(MF_ROLE_LOG_SERVER)

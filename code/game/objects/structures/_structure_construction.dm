@@ -121,20 +121,36 @@
 		take_damage(O.force)
 		. = TRUE
 
-	else if(isWrench(O))
+	else if(IS_WRENCH(O))
 		. = handle_default_wrench_attackby(user, O)
-	else if(isScrewdriver(O))
+	else if(IS_SCREWDRIVER(O))
 		. = handle_default_screwdriver_attackby(user, O)
-	else if(isWelder(O))
+	else if(IS_WELDER(O))
 		. = handle_default_welder_attackby(user, O)
-	else if(isCrowbar(O))
+	else if(IS_CROWBAR(O))
 		. = handle_default_crowbar_attackby(user, O)
-	else if(isCoil(O))
+	else if(IS_COIL(O))
 		. = handle_default_cable_attackby(user, O)
-	else if(isWirecutter(O))
+	else if(IS_WIRECUTTER(O))
 		. = handle_default_wirecutter_attackby(user, O)
 	else if(can_repair_with(O) && can_repair(user))
 		. = handle_repair(user, O)
 	if(.)
 		user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
 		add_fingerprint(user)
+
+/obj/structure/attack_generic(var/mob/user, var/damage, var/attack_verb, var/environment_smash)
+	if(environment_smash >= 1)
+		damage = max(damage, 10)
+
+	if(istype(user))
+		user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
+		user.do_attack_animation(src)
+	if(!damage)
+		return FALSE
+	if(damage >= 10)
+		visible_message(SPAN_DANGER("\The [user] [attack_verb] into [src]!"))
+		take_damage(damage)
+	else
+		visible_message(SPAN_NOTICE("\The [user] bonks \the [src] harmlessly."))
+	return TRUE

@@ -11,7 +11,7 @@
 	var/sharp = 0		// whether this object cuts
 	var/edge = 0		// whether this object is more likely to dismember
 	var/in_use = 0 // If we have a user using us, this will be set on. We will check if the user has stopped using us, and thus stop updating and LAGGING EVERYTHING!
-	var/damtype = "brute"
+	var/damtype = BRUTE
 	var/armor_penetration = 0
 	var/anchor_fall = FALSE
 	var/holographic = 0 //if the obj is a holographic object spawned by the holodeck
@@ -141,7 +141,7 @@
 
 /obj/attackby(obj/item/O, mob/user)
 	if(obj_flags & OBJ_FLAG_ANCHORABLE)
-		if(isWrench(O))
+		if(IS_WRENCH(O))
 			wrench_floor_bolts(user)
 			update_icon()
 			return
@@ -169,11 +169,6 @@
 
 /obj/proc/can_embed()
 	return is_sharp(src)
-
-/obj/AltClick(mob/user)
-	if(obj_flags & OBJ_FLAG_ROTATABLE)
-		rotate(user)
-	..()
 
 /obj/examine(mob/user)
 	. = ..()
@@ -209,3 +204,6 @@
 
 /obj/get_mob()
 	return buckled_mob
+
+/obj/get_alt_interactions(var/mob/user)
+	. = ..() | /decl/interaction_handler/rotate

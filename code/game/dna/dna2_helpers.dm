@@ -39,7 +39,7 @@
 		if(!H.should_have_organ(BP_HEART))
 			return
 	M.dna.check_integrity()
-	var/block = pick(global.HULKBLOCK,global.XRAYBLOCK,global.FIREBLOCK,global.TELEBLOCK,global.NOBREATHBLOCK,global.REMOTEVIEWBLOCK,global.REGENERATEBLOCK,global.INCREASERUNBLOCK,global.REMOTETALKBLOCK,global.MORPHBLOCK,global.BLENDBLOCK,global.NOPRINTSBLOCK,global.SHOCKIMMUNITYBLOCK,global.SMALLSIZEBLOCK)
+	var/block = pick(global.XRAYBLOCK,global.FIREBLOCK,global.TELEBLOCK,global.NOBREATHBLOCK,global.REMOTEVIEWBLOCK,global.REGENERATEBLOCK,global.INCREASERUNBLOCK,global.REMOTETALKBLOCK,global.MORPHBLOCK,global.BLENDBLOCK,global.NOPRINTSBLOCK,global.SHOCKIMMUNITYBLOCK,global.SMALLSIZEBLOCK)
 	M.dna.SetSEState(block, 1)
 
 // Random Appearance Mutation
@@ -167,7 +167,7 @@
 
 		//Base skin and blend
 		for(var/obj/item/organ/external/E in H.get_external_organs())
-			E.set_dna(E.dna)
+			E.set_dna(H.dna)
 
 		//Hair
 		var/list/hair_subtypes = subtypesof(/decl/sprite_accessory/hair)

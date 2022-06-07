@@ -19,6 +19,9 @@
 	QDEL_NULL(loaded_tank)
 	. = ..()
 
+/obj/structure/sealant_injector/get_alt_interactions(var/mob/user)
+	. = ..() | /decl/interaction_handler/sealant_try_inject
+
 /obj/structure/sealant_injector/on_update_icon()
 	..()
 	if(loaded_tank)
@@ -55,10 +58,6 @@
 			return TRUE
 
 	. = ..()
-
-/obj/structure/sealant_injector/AltClick(mob/user)
-	if(Adjacent(user) && CanPhysicallyInteract(user))
-		try_inject(user)
 
 /obj/structure/sealant_injector/proc/try_inject(mob/user)
 

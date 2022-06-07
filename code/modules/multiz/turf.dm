@@ -1,21 +1,28 @@
-/turf/proc/CanZPass(atom/A, direction)
-	if(z == A.z) //moving FROM this turf
-		return direction == UP //can't go below
-	else
-		if(direction == UP) //on a turf below, trying to enter
-			return 0
-		if(direction == DOWN) //on a turf above, trying to enter
-			return !density
+/// `direction` is the direction the atom is trying to leave by.
+/turf/proc/CanZPass(atom/A, direction, check_neighbor_canzpass = TRUE)
 
-/turf/space/CanZPass(atom/A, direction)
-	if(locate(/obj/structure/catwalk, src))
-		if(z == A.z)
-			if(direction == DOWN)
-				return 0
-		else if(direction == UP)
-			return 0
-	return 1
+	if(direction == UP)
+		if(!HasAbove(z))
+			return FALSE
+		if(check_neighbor_canzpass)
+			var/turf/T = GetAbove(src)
+			if(!T.CanZPass(A, DOWN, FALSE))
+				return FALSE
 
+	else if(direction == DOWN)
+		if(!is_open() || !HasBelow(z) || (locate(/obj/structure/catwalk) in src))
+			return FALSE
+		if(check_neighbor_canzpass)
+			var/turf/T = GetBelow(src)
+			if(!T.CanZPass(A, UP, FALSE))
+				return FALSE
+
+	// Hate calling Enter() directly, but that's where obstacles are checked currently.
+	return Enter(A, A)
+
+////////////////////////////////
+// Open SIMULATED
+////////////////////////////////
 /turf/simulated/open
 	name = "open space"
 	icon = 'icons/turf/space.dmi'
@@ -24,14 +31,9 @@
 	pathweight = 100000 //Seriously, don't try and path over this one numbnuts
 	z_flags = ZM_MIMIC_DEFAULTS | ZM_MIMIC_OVERWRITE | ZM_MIMIC_NO_AO | ZM_ALLOW_ATMOS
 
-/turf/simulated/open/CanZPass(atom/A, direction)
-	if(locate(/obj/structure/catwalk, src))
-		if(z == A.z)
-			if(direction == DOWN)
-				return 0
-		else if(direction == UP)
-			return 0
-	return 1
+/turf/simulated/open/flooded
+	name = "open water"
+	flooded = TRUE
 
 /turf/simulated/open/update_dirt()
 	return 0
@@ -105,9 +107,7 @@
 		return TRUE
 
 	//To lay cable.
-	if(isCoil(C))
-		var/obj/item/stack/cable_coil/coil = C
-		coil.turf_place(src, user)
+	if(IS_COIL(C) && try_build_cable(C, user))
 		return TRUE
 
 	for(var/atom/movable/M in below)
@@ -121,13 +121,14 @@
 
 //Most things use is_plating to test if there is a cover tile on top (like regular floors)
 /turf/simulated/open/is_plating()
-	return 1
+	return TRUE
 
-/turf/simulated/open/flooded
-	name = "open water"
-	flooded = TRUE
+/turf/simulated/open/cannot_build_cable()
+	return 0
 
-// Whole lot of copypaste below sorry.
+////////////////////////////////
+// Open EXTERIOR
+////////////////////////////////
 /turf/exterior/open
 	name = "open space"
 	icon = 'icons/turf/space.dmi'
@@ -139,15 +140,6 @@
 /turf/exterior/open/flooded
 	name = "open water"
 	flooded = TRUE
-
-/turf/exterior/open/CanZPass(atom/A, direction)
-	if(locate(/obj/structure/catwalk, src))
-		if(z == A.z)
-			if(direction == DOWN)
-				return 0
-		else if(direction == UP)
-			return 0
-	return 1
 
 /turf/exterior/open/Entered(var/atom/movable/mover, var/atom/oldloc)
 	..()
@@ -205,16 +197,17 @@
 		return TRUE
 
 	//To lay cable.
-	if(isCoil(C))
-		var/obj/item/stack/cable_coil/coil = C
-		coil.turf_place(src, user)
+	if(IS_COIL(C) && try_build_cable(C, user))
 		return TRUE
 
 	for(var/atom/movable/M in below)
 		if(M.movable_flags & MOVABLE_FLAG_Z_INTERACT)
 			return M.attackby(C, user)
 
-/turf/simulated/open/attack_hand(mob/user)
+/turf/exterior/open/attack_hand(mob/user)
 	for(var/atom/movable/M in below)
 		if(M.movable_flags & MOVABLE_FLAG_Z_INTERACT)
 			return M.attack_hand(user)
+
+/turf/exterior/open/cannot_build_cable()
+	return 0

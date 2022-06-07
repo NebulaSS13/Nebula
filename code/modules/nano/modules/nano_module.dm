@@ -26,11 +26,11 @@
 
 //returns a list.
 /datum/nano_module/proc/get_access(mob/user)
-	. = using_access
-	if(istype(user))
+	. = using_access.Copy()
+	if(user) // Insist on scanning ID again to make things a little less clunky.
 		var/obj/item/card/id/I = user.GetIdCard()
 		if(I)
-			. |= I.access
+			. |= I.GetAccess()
 
 /datum/nano_module/proc/check_access(var/mob/user, var/access)
 	if(!access)

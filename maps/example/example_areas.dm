@@ -1,18 +1,17 @@
-/area/constructionsite
-	name = "\improper Construction Site"
-	icon_state = "storage"
-
-/area/maintenance/fsmaint2
-	name = "\improper Fore Starboard Maintenance - 2"
+/area/example/first
+	name = "\improper Testing Site First Floor"
 	icon_state = "fsmaint"
 
-/area/surgery
-	name = "\improper Operating Theatre"
+/area/example/second
+	name = "\improper Testing Site Second Floor"
 	icon_state = "surgery"
-	req_access = list(access_medical)
 
-/area/turbolift
-	name = "\improper Example Elevator"
+/area/example/third
+	name = "\improper Testing Site Third Floor"
+	icon_state = "storage"
+
+/area/turbolift/example
+	name = "\improper Testing Site Elevator"
 	icon_state = "shuttle"
 	requires_power = FALSE
 	dynamic_lighting = TRUE
@@ -33,23 +32,18 @@
 	arrival_sound = null
 	lift_announce_str = null
 
-/area/turbolift/alert_on_fall(var/mob/living/carbon/human/H)
-	if(H.client && SSpersistence.elevator_fall_shifts > 0)
-		SSwebhooks.send(WEBHOOK_ELEVATOR_FALL, list("text" = "We managed to make it [SSpersistence.elevator_fall_shifts] shift\s without someone falling down an elevator shaft."))
-		SSpersistence.elevator_fall_shifts = -1
+	base_turf = /turf/simulated/open
 
-/area/turbolift/first
-	name = "Lower Level"
+/area/turbolift/example/first
+	name = "Testing Site First Floor Lift"
 	base_turf = /turf/simulated/floor
 
-/area/turbolift/second
-	name = "Surgery Level"
-	base_turf = /turf/simulated/open
+/area/turbolift/example/second
+	name = "Testing Site Second Floor Lift"
 
-/area/turbolift/third
-	name = "Upper Level"
-	base_turf = /turf/simulated/open
+/area/turbolift/example/third
+	name = "Testing Site Third Floor Lift"
 
-/area/shuttle/escape
-	name = "\improper Emergency Shuttle"
+/area/shuttle/ferry
+	name = "\improper Testing Site Ferry"
 	icon_state = "shuttle"

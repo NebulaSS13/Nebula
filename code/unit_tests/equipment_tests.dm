@@ -1,7 +1,3 @@
-#define SUCCESS 1
-#define FAILURE 0
-
-
 /datum/unit_test/vision_glasses
 	name = "EQUIPMENT: Vision Template"
 	template = /datum/unit_test/vision_glasses
@@ -101,7 +97,3 @@
 		bad_tests++
 
 	return bad_tests
-
-#undef SUCCESS
-#undef FAILURE
-

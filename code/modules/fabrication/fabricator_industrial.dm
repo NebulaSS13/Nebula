@@ -10,6 +10,7 @@
 	fabricator_class = FABRICATOR_CLASS_INDUSTRIAL
 	base_storage_capacity = list(
 		/decl/material/solid/metal/steel =      SHEET_MATERIAL_AMOUNT * 100,
+		/decl/material/solid/metal/plasteel =   SHEET_MATERIAL_AMOUNT * 100,
 		/decl/material/solid/fiberglass =       SHEET_MATERIAL_AMOUNT * 100,
 		/decl/material/solid/metal/osmium =     SHEET_MATERIAL_AMOUNT * 100,
 		/decl/material/solid/metal/aluminium =  SHEET_MATERIAL_AMOUNT * 100,

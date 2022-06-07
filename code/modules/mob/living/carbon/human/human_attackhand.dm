@@ -154,9 +154,6 @@
 	real_damage += attack.get_unarmed_damage(H)
 	real_damage *= damage_multiplier
 	rand_damage *= damage_multiplier
-	if(MUTATION_HULK in H.mutations)
-		real_damage *= 2 // Hulks do twice the damage
-		rand_damage *= 2
 	real_damage = max(1, real_damage)
 	// Apply additional unarmed effects.
 	attack.apply_effects(H, src, rand_damage, hit_zone)

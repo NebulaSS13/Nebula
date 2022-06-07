@@ -15,8 +15,6 @@
 /obj/item/organ/internal/Initialize(mapload, material_key, datum/dna/given_dna)
 	if(!alive_icon)
 		alive_icon = initial(icon_state)
-	if(max_damage)
-		min_bruised_damage = FLOOR(max_damage / 4)
 	. = ..()
 
 /obj/item/organ/internal/set_species(species_name)
@@ -72,8 +70,8 @@
 /obj/item/organ/internal/is_usable()
 	return ..() && !is_broken()
 
-/obj/item/organ/internal/robotize(var/company = /decl/prosthetics_manufacturer, var/skip_prosthetics, var/keep_organs, var/apply_material = /decl/material/solid/metal/steel)
-	..()
+/obj/item/organ/internal/robotize(var/company = /decl/prosthetics_manufacturer, var/skip_prosthetics = 0, var/keep_organs = 0, var/apply_material = /decl/material/solid/metal/steel, var/check_bodytype, var/check_species)
+	. = ..()
 	min_bruised_damage += 5
 	min_broken_damage += 10
 

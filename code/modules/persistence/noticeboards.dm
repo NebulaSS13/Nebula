@@ -96,7 +96,7 @@
 	. = ..()
 	if(!.)
 
-		if(isScrewdriver(thing))
+		if(IS_SCREWDRIVER(thing))
 			var/choice = input("Which direction do you wish to place the noticeboard?", "Noticeboard Offset") as null|anything in list("North", "South", "East", "West")
 			if(choice && Adjacent(user) && thing.loc == user && !user.incapacitated())
 				playsound(loc, 'sound/items/Screwdriver.ogg', 50, 1)

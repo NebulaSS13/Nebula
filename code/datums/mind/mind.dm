@@ -36,7 +36,6 @@
 	var/mob/living/original	//TODO: remove.not used in any meaningful way ~Carn. First I'll need to tweak the way silicon-mobs handle minds.
 	var/active = 0
 
-	var/list/known_connections //list of known (RNG) relations between people
 	var/gen_relations_info
 
 	var/assigned_role
@@ -47,7 +46,6 @@
 	var/datum/job/assigned_job
 
 	var/list/datum/objective/objectives = list()
-	var/list/datum/objective/special_verbs = list()
 
 	var/has_been_rev = 0//Tracks if this mind has been a rev or not
 
@@ -62,7 +60,8 @@
 	//put this here for easier tracking ingame
 	var/datum/money_account/initial_account
 
-	var/list/initial_email_login = list("login" = "", "password" = "")
+	var/list/initial_account_login = list("login" = "", "password" = "")
+	var/account_network	// Network id of the network the account was created on.
 
 /datum/mind/New(var/key)
 	src.key = key
@@ -70,8 +69,18 @@
 
 /datum/mind/Destroy()
 	QDEL_NULL_LIST(memories)
+	QDEL_NULL_LIST(objectives)
+	QDEL_NULL(changeling)
 	SSticker.minds -= src
 	. = ..()
+
+/datum/mind/proc/handle_mob_deletion(mob/living/deleted_mob)
+	if (current == deleted_mob)
+		current.spellremove()
+		current = null
+
+	if (original == deleted_mob)
+		original = null
 
 /datum/mind/proc/transfer_to(mob/living/new_character)
 	if(!istype(new_character))
@@ -493,7 +502,6 @@
 	changeling =            null
 	initial_account =       null
 	objectives =            list()
-	special_verbs =         list()
 	has_been_rev =          0
 	rev_cooldown =          0
 	brigged_since =         -1

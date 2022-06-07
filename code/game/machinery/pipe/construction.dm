@@ -72,7 +72,7 @@ Buildable meters
 	return rotate(user)
 
 /obj/item/pipe/attackby(var/obj/item/W, var/mob/user)
-	if(!isWrench(W))
+	if(!IS_WRENCH(W))
 		return ..()
 	if (!isturf(loc))
 		return 1
@@ -122,7 +122,7 @@ Buildable meters
 		to_chat(user, "Use a wrench to secure \the [src] here.")
 
 /obj/item/machine_chassis/attackby(var/obj/item/W, var/mob/user)
-	if(!isWrench(W))
+	if(!IS_WRENCH(W))
 		return ..()
 	var/obj/machinery/machine = new build_type(get_turf(src), dir, TRUE)
 	var/datum/extension/parts_stash/stash = get_extension(src, /datum/extension/parts_stash)

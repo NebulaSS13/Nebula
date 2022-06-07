@@ -117,7 +117,7 @@
 /decl/surgery_step/hardsuit/can_use(mob/living/user, mob/living/target, target_zone, obj/item/tool)
 	if(!istype(target))
 		return FALSE
-	if(isWelder(tool))
+	if(IS_WELDER(tool))
 		var/obj/item/weldingtool/welder = tool
 		if(!welder.isOn() || !welder.remove_fuel(1,user))
 			return FALSE

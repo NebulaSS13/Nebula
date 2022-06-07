@@ -18,35 +18,43 @@
 		matter = null
 
 /obj/item/stack/material/cyborg/plastic
+	name = "cyborg plastic synthesiser"
 	icon_state = "sheet"
 	material = /decl/material/solid/plastic
 
 /obj/item/stack/material/cyborg/steel
+	name = "cyborg steel synthesiser"
 	icon_state = "sheet"
 	material = /decl/material/solid/metal/steel
 
 /obj/item/stack/material/cyborg/plasteel
+	name = "cyborg plasteel synthesiser"
 	icon_state = "sheet-reinf"
 	material = /decl/material/solid/metal/plasteel
 
 /obj/item/stack/material/cyborg/wood
+	name = "cyborg wood synthesiser"
 	icon_state = "sheet-wood"
 	material = /decl/material/solid/wood
 
 /obj/item/stack/material/cyborg/glass
+	name = "cyborg glass synthesiser"
 	icon_state = "sheet"
 	material = /decl/material/solid/glass
 
 /obj/item/stack/material/cyborg/fiberglass
+	name = "cyborg fiberglass synthesiser"
 	icon_state = "sheet"
 	material = /decl/material/solid/fiberglass
 
 /obj/item/stack/material/cyborg/glass/reinforced
+	name = "cyborg reinforced glass synthesiser"
 	icon_state = "sheet-reinf"
 	material = /decl/material/solid/glass
 	reinf_material = /decl/material/solid/metal/steel
 	charge_costs = list(500, 1000)
 
 /obj/item/stack/material/cyborg/aluminium
+	name = "cyborg aluminium synthesiser"
 	icon_state = "sheet"
 	material = /decl/material/solid/metal/aluminium

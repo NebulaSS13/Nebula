@@ -34,7 +34,7 @@
 		if(L.loc?.atom_flags & ATOM_FLAG_SHIELD_CONTENTS)
 			continue
 		var/turf/T = get_turf(L)
-		if(!T || !(T.z in global.using_map.player_levels))
+		if(!T || !isPlayerLevel(T.z))
 			continue
 
 		if(!istype(T.loc,/area/space) && !isspaceturf(T))	//Make sure you're in a space area or on a space turf
@@ -43,7 +43,7 @@
 		//Apply some heat or burn damage from the sun.
 		if(L.increaseBodyTemp(temp_incr))
 			continue
-			
+
 		L.adjustFireLoss(fire_loss)
 
 

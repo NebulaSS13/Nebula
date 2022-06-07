@@ -121,7 +121,7 @@
 	possible_transfer_amounts = @"[5,10,20,30]"
 	reagent_ids = list(
 		/decl/material/liquid/ethanol/beer,
-		/decl/material/liquid/ethanol/coffee/kahlua,
+		/decl/material/liquid/ethanol/coffee,
 		/decl/material/liquid/ethanol/whiskey,
 		/decl/material/liquid/ethanol/wine,
 		/decl/material/liquid/ethanol/vodka,
@@ -151,7 +151,7 @@
 		/decl/material/liquid/drink/tea/green,
 		/decl/material/liquid/drink/citrussoda,
 		/decl/material/liquid/ethanol/beer,
-		/decl/material/liquid/ethanol/coffee/kahlua
+		/decl/material/liquid/ethanol/coffee
 		)
 
 /obj/item/chems/borghypo/service/attack(var/mob/M, var/mob/user)

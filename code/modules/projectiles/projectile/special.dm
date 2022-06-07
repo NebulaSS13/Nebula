@@ -124,7 +124,7 @@
 
 /obj/item/projectile/energy/florayield/on_hit(var/atom/target, var/blocked = 0)
 	var/mob/M = target
-	if(ishuman(target)) //These rays make plantmen fat.
+	if(ishuman(target))
 		var/mob/living/carbon/human/H = M
 		if((H.species.species_flags & SPECIES_FLAG_IS_PLANT) && (H.nutrition < 500))
 			H.adjust_nutrition(30)

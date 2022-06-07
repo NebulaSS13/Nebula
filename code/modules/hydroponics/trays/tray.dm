@@ -119,11 +119,8 @@
 		/decl/material/liquid/mutagenics =  15
 	)
 
-/obj/machinery/portable_atmospherics/hydroponics/AltClick()
-	if(mechanical && !usr.incapacitated() && Adjacent(usr))
-		close_lid(usr)
-		return 1
-	return ..()
+/obj/machinery/portable_atmospherics/hydroponics/get_alt_interactions(var/mob/user)
+	. = ..() | /decl/interaction_handler/hydroponics_close_lid
 
 /obj/machinery/portable_atmospherics/hydroponics/attack_ghost(var/mob/observer/ghost/user)
 	if(!(harvest && seed && ispath(seed.product_type, /mob)))
@@ -490,7 +487,7 @@
 		qdel(O)
 		check_health()
 
-	else if(mechanical && isWrench(O))
+	else if(mechanical && IS_WRENCH(O))
 
 		//If there's a connector here, the portable_atmospherics setup can handle it.
 		if(locate(/obj/machinery/atmospherics/portables_connector/) in loc)

@@ -1,5 +1,5 @@
 /obj/item/slime_extract
-	name = "slime extract"
+	name = "slime core extract"
 	desc = "Goo extracted from a slime. Legends claim these to have \"magical powers\"."
 	icon = 'mods/content/xenobiology/icons/slimes/slime_extract.dmi'
 	icon_state = ICON_STATE_WORLD

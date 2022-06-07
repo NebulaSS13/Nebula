@@ -1,8 +1,8 @@
 /*
 	Global associative list for caching humanoid icons.
-	Index format m or f, followed by a string of 0 and 1 to represent bodyparts followed by husk fat hulk skeleton 1 or 0.
+	Index format m or f, followed by a string of 0 and 1 to represent bodyparts followed by husk 1 or 0.
 	TODO: Proper documentation
-	icon_key is [bodytype.get_icon_cache_uid(src)][g][husk][fat][hulk][skeleton][skin_tone]
+	icon_key is [bodytype.get_icon_cache_uid(src)][g][husk][skin_tone]
 */
 var/global/list/human_icon_cache = list()
 var/global/list/tail_icon_cache = list() //key is [bodytype.get_icon_cache_uid(src)][skin_colour]
@@ -236,18 +236,20 @@ Please contact me on #coderbus IRC. ~Carn x
 			turn_angle = -90
 		else if(dir & EAST)
 			turn_angle = 90
-		else 
+		else
 			turn_angle = pick(-90, 90)
 		M.Turn(turn_angle)
 		M.Scale(desired_scale_y, desired_scale_x)
-		M.Translate(1, -6-default_pixel_z)
+		M.Translate(turn_angle == 90 ? 1 : -2, (turn_angle == 90 ? -6 : -5) - default_pixel_z)
 	else
 		M.Scale(desired_scale_x, desired_scale_y)
-		M.Translate(0, 16*(desired_scale_y-1))
+		M.Translate(0, 16 * (desired_scale_y - 1))
+
 	if(transform_animate_time)
 		animate(src, transform = M, time = transform_animate_time)
 	else
 		transform = M
+
 	return transform
 
 var/global/list/damage_icon_parts = list()
@@ -322,12 +324,7 @@ var/global/list/damage_icon_parts = list()
 		return // Something is trying to update our body pre-init (probably loading a preview image during world startup).
 
 	var/husk_color_mod = rgb(96,88,80)
-	var/hulk_color_mod = rgb(48,224,40)
-
-	var/husk =     (MUTATION_HUSK in src.mutations)
-	var/fat =      (MUTATION_FAT in src.mutations)
-	var/hulk =     (MUTATION_HULK in src.mutations)
-	var/skeleton = (MUTATION_SKELETON in src.mutations)
+	var/husk = is_husked()
 
 	//CACHING: Generate an index key from visible bodyparts.
 	//0 = destroyed, 1 = normal, 2 = robotic, 3 = necrotic.
@@ -367,7 +364,7 @@ var/global/list/damage_icon_parts = list()
 		else
 			icon_key += "1"
 
-	icon_key = "[icon_key][husk ? 1 : 0][fat ? 1 : 0][hulk ? 1 : 0][skeleton ? 1 : 0]"
+	icon_key = "[icon_key][husk ? 1 : 0]"
 
 	var/icon/base_icon
 	if(human_icon_cache[icon_key])
@@ -378,6 +375,8 @@ var/global/list/damage_icon_parts = list()
 		base_icon = chest.get_icon()
 
 		for(var/obj/item/organ/external/part in (limbs - chest))
+			if (part.is_stump())
+				continue
 			var/icon/temp = part.get_icon()
 			//That part makes left and right legs drawn topmost and lowermost when human looks WEST or EAST
 			//And no change in rendering for other parts (they icon_position is 0, so goes to 'else' part)
@@ -400,12 +399,8 @@ var/global/list/damage_icon_parts = list()
 			else
 				base_icon.Blend(temp, ICON_OVERLAY)
 
-		if(!skeleton)
-			if(husk)
-				base_icon.ColorTone(husk_color_mod)
-			else if(hulk)
-				var/list/tone = ReadRGB(hulk_color_mod)
-				base_icon.MapColors(rgb(tone[1],0,0),rgb(0,tone[2],0),rgb(0,0,tone[3]))
+		if(husk)
+			base_icon.ColorTone(husk_color_mod)
 
 		//Handle husk overlay.
 		if(husk)
@@ -474,9 +469,6 @@ var/global/list/damage_icon_parts = list()
 		queue_icon_update()
 
 /mob/living/carbon/human/update_mutations(var/update_icons=1)
-	var/fat
-	if(MUTATION_FAT in mutations)
-		fat = "fat"
 
 	var/image/standing	= overlay_image('icons/effects/genetics.dmi', flags=RESET_COLOR)
 	var/add_image = 0
@@ -487,15 +479,11 @@ var/global/list/damage_icon_parts = list()
 		if(!gene.block)
 			continue
 		if(gene.is_active(src))
-			var/underlay=gene.OnDrawUnderlays(src,g,fat)
+			var/underlay=gene.OnDrawUnderlays(src,g)
 			if(underlay)
 				standing.underlays += underlay
 				add_image = 1
-	for(var/mut in mutations)
-		switch(mut)
-			if(MUTATION_LASER)
-				standing.overlays	+= "lasereyes_s"
-				add_image = 1
+
 	if(add_image)
 		overlays_standing[HO_MUTATIONS_LAYER]	= standing
 	else
@@ -704,7 +692,7 @@ var/global/list/damage_icon_parts = list()
 /mob/living/carbon/human/proc/get_tail_icon(var/obj/item/organ/external/tail/tail_organ)
 	if(!istype(tail_organ))
 		return
-	var/icon_key = "[tail_organ.get_tail()][tail_organ.icon][tail_organ.get_tail_blend(src)][species.appearance_flags & HAS_SKIN_COLOR][skin_colour][tail_organ.get_tail_hair()][tail_organ.get_tail_hair_blend()][hair_colour]"
+	var/icon_key = "[tail_organ.get_tail()]\ref[tail_organ.icon][tail_organ.get_tail_blend(src)][species.appearance_flags & HAS_SKIN_COLOR][skin_colour][tail_organ.get_tail_hair()][tail_organ.get_tail_hair_blend()][hair_colour]"
 	var/icon/tail_icon = tail_icon_cache[icon_key]
 	if(!tail_icon)
 		//generate a new one

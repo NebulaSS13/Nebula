@@ -30,8 +30,11 @@
 	var/static/list/acceptable_containers = list(
 		/obj/item/chems/glass,
 		/obj/item/chems/condiment,
-		/obj/item/chems/drinks		
+		/obj/item/chems/drinks
 	)
+
+	var/beaker_offset = 0
+	var/beaker_positions = list(0,1)
 
 /obj/machinery/chemical_dispenser/Initialize(mapload, d=0, populate_parts = TRUE)
 	. = ..()
@@ -87,7 +90,7 @@
 		add_cartridge(W, user)
 		return TRUE
 
-	if(isCrowbar(W) && !panel_open && length(cartridges))
+	if(IS_CROWBAR(W) && !panel_open && length(cartridges))
 		var/label = input(user, "Which cartridge would you like to remove?", "Chemical Dispenser") as null|anything in cartridges
 		if(!label) return
 		var/obj/item/chems/chem_disp_cartridge/C = remove_cartridge(label)
@@ -117,7 +120,7 @@
 		to_chat(user, "<span class='notice'>You set \the [RC] on \the [src].</span>")
 		SSnano.update_uis(src) // update all UIs attached to src
 		return TRUE
-	
+
 	return ..()
 
 /obj/machinery/chemical_dispenser/ui_interact(mob/user, ui_key = "main",var/datum/nanoui/ui = null, var/force_open = 1)
@@ -179,13 +182,18 @@
 		return TOPIC_HANDLED
 
 	else if(href_list["ejectBeaker"])
-		if(container)
-			var/obj/item/chems/B = container
+		if(!container)
+			return TOPIC_HANDLED
+
+		var/obj/item/chems/B = container
+		if(CanPhysicallyInteract(user))
+			user.put_in_hands(B)
+		else
 			B.dropInto(loc)
-			container = null
-			update_icon()
-			return TOPIC_REFRESH
-		return TOPIC_HANDLED
+
+		container = null
+		update_icon()
+		return TOPIC_REFRESH
 
 /obj/machinery/chemical_dispenser/interface_interact(mob/user)
 	ui_interact(user)
@@ -196,5 +204,6 @@
 	if(container)
 		var/mutable_appearance/beaker_overlay
 		beaker_overlay = image(src, src, "lil_beaker")
-		beaker_overlay.pixel_x = rand(-10, 5)
+		beaker_overlay.pixel_y = beaker_offset
+		beaker_overlay.pixel_x = pick(beaker_positions)
 		overlays += beaker_overlay

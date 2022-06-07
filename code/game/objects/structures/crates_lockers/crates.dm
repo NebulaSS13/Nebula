@@ -49,7 +49,7 @@
 				return
 			to_chat(user, "<span class='notice'>You attach [W] to [src].</span>")
 			return
-	else if(isWirecutter(W))
+	else if(IS_WIRECUTTER(W))
 		if(rigged)
 			to_chat(user, "<span class='notice'>You cut away the wiring.</span>")
 			playsound(loc, 'sound/items/Wirecutter.ogg', 100, 1)

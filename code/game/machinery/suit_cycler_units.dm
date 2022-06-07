@@ -102,7 +102,9 @@
 /obj/machinery/suit_cycler/generic
 	name = "generic suit cycler"
 	model_text = "Generic"
+	req_access = list()
 	initial_access = list()
+	locked = FALSE
 
 /obj/machinery/suit_cycler/generic/prepared
 	buildable = FALSE

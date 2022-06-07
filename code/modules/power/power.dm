@@ -85,10 +85,10 @@
 /obj/machinery/power/attackby(obj/item/W, mob/user)
 	if((. = ..()))
 		return
-	if(isCoil(W))
+	if(IS_COIL(W))
 		var/obj/item/stack/cable_coil/coil = W
 		var/turf/T = user.loc
-		if(!istype(T) || T.density || !T.is_plating())
+		if(!istype(T) || T.density || T.cannot_build_cable())
 			return
 		if(get_dist(src, user) > 1)
 			return

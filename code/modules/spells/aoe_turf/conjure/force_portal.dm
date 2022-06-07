@@ -12,5 +12,6 @@
 	hud_state = "wiz_force"
 
 /spell/aoe_turf/conjure/force_portal/tower
+	desc = "This spell allows you to summon a force portal. Anything that hits the portal gets sucked inside and is then thrown out when the portal explodes."
 	charge_max = 2
 	spell_flags = 0

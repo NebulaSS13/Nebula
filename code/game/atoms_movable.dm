@@ -321,7 +321,7 @@
 	if(!simulated)
 		return
 
-	if(!z || (z in global.using_map.sealed_levels))
+	if(!z || isSealedLevel(z))
 		return
 
 	if(!global.universe.OnTouchMapEdge(src))
@@ -384,7 +384,7 @@
 	return buckled_mob
 
 /atom/movable/proc/can_buckle_mob(var/mob/living/dropping)
-	. = (can_buckle && istype(dropping) && !dropping.buckled && !dropping.buckled_mob && !buckled_mob)
+	. = (can_buckle && istype(dropping) && !dropping.buckled && !dropping.anchored && !dropping.buckled_mob && !buckled_mob)
 
 /atom/movable/receive_mouse_drop(atom/dropping, mob/living/user)
 	. = ..()
@@ -470,7 +470,7 @@
 	var/mob/living/M = unbuckle_mob()
 	if(M)
 		show_unbuckle_message(M, user)
-		for(var/obj/item/grab/G AS_ANYTHING in (M.grabbed_by|grabbed_by))
+		for(var/obj/item/grab/G as anything in (M.grabbed_by|grabbed_by))
 			qdel(G)
 		add_fingerprint(user)
 	return M
@@ -492,3 +492,8 @@
 
 /atom/movable/proc/try_make_grab(var/mob/living/user, var/defer_hand = FALSE)
 	return istype(user) && CanPhysicallyInteract(user) && !user.lying && user.make_grab(src)
+
+/atom/movable/get_alt_interactions(var/mob/user)
+	. = ..()
+	if(config.expanded_alt_interactions)
+		. += /decl/interaction_handler/grab

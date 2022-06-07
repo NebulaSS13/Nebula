@@ -5,8 +5,8 @@
 	anchored = FALSE
 	buckle_movable = TRUE
 	movement_handlers = list(
-		/datum/movement_handler/deny_multiz, 
-		/datum/movement_handler/delay = list(5), 
+		/datum/movement_handler/deny_multiz,
+		/datum/movement_handler/delay = list(5),
 		/datum/movement_handler/move_relay_self
 	)
 
@@ -23,7 +23,7 @@
 	set_overlays(image(icon = 'icons/obj/furniture.dmi', icon_state = "w_overlay", layer = ABOVE_HUMAN_LAYER))
 
 /obj/structure/bed/chair/wheelchair/attackby(obj/item/W, mob/user)
-	if(isWrench(W) || istype(W,/obj/item/stack) || isWirecutter(W))
+	if(IS_WRENCH(W) || istype(W,/obj/item/stack) || IS_WIRECUTTER(W))
 		return
 	..()
 
@@ -112,7 +112,7 @@
 	if(!mob.has_held_item_slot())
 		return // No hands to drive your chair? Tough luck!
 	//drunk wheelchair driving
-	direction = mob.AdjustMovementDirection(direction)
+	direction = mob.AdjustMovementDirection(direction, mover)
 	DoMove(direction, mob)
 
 /obj/item/wheelchair_kit

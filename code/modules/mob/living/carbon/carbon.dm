@@ -41,10 +41,6 @@
 		return
 
 	if(stat != DEAD)
-
-		if((MUTATION_FAT in src.mutations) && (move_intent.flags & MOVE_INTENT_EXERTIVE) && src.bodytemperature <= 360)
-			bodytemperature += 2
-
 		var/nut_removed = DEFAULT_HUNGER_FACTOR/10
 		var/hyd_removed = DEFAULT_THIRST_FACTOR/10
 		if (move_intent.flags & MOVE_INTENT_EXERTIVE)
@@ -520,3 +516,18 @@
 			set_internals(selected_obj, "\the [selected_obj] [selected_from] your [selected_slot]")
 		else
 			set_internals(selected_obj, "\the [selected_obj]")
+
+/mob/living/carbon/handle_flashed(var/obj/item/flash/flash, var/flash_strength)
+
+	var/safety = eyecheck()
+	if(safety >= FLASH_PROTECTION_MODERATE || flash_strength <= 0) // May be modified by human proc.
+		return FALSE
+	
+	flash_eyes(FLASH_PROTECTION_MODERATE - safety)
+	SET_STATUS_MAX(src, STAT_STUN, (flash_strength / 2))
+	SET_STATUS_MAX(src, STAT_BLURRY, flash_strength)
+	SET_STATUS_MAX(src, STAT_CONFUSE, (flash_strength + 2))
+	if(flash_strength > 3)
+		drop_held_items()
+	if(flash_strength > 5)
+		SET_STATUS_MAX(src, STAT_WEAK, 2)

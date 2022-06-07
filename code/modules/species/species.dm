@@ -10,6 +10,7 @@ var/global/const/DEFAULT_SPECIES_HEALTH = 200
 	var/name_plural                           // Pluralized name (since "[name]s" is not always valid)
 	var/description
 	var/codex_description
+	var/roleplay_summary
 	var/ooc_codex_information
 	var/cyborg_noun = "Cyborg"
 	var/hidden_from_codex = TRUE
@@ -25,7 +26,8 @@ var/global/const/DEFAULT_SPECIES_HEALTH = 200
 		/decl/blood_type/bminus,
 		/decl/blood_type/abplus,
 		/decl/blood_type/abminus,
-		/decl/blood_type/oplus
+		/decl/blood_type/oplus,
+		/decl/blood_type/ominus
 	)
 
 	var/flesh_color = "#ffc896"             // Pink.
@@ -195,8 +197,7 @@ var/global/const/DEFAULT_SPECIES_HEALTH = 200
 	var/obj/effect/decal/cleanable/blood/tracks/move_trail = /obj/effect/decal/cleanable/blood/tracks/footprints // What marks are left when walking
 
 	// An associative list of target zones (ex. BP_CHEST, BP_MOUTH) mapped to all possible keys associated
-	// with the zone. Used for species with body layouts that do not map directly to the standard humanoid
-	// body, currently serpentids and mantids.
+	// with the zone. Used for species with body layouts that do not map directly to a standard humanoid body.
 	var/list/limb_mapping
 
 	var/list/has_limbs = list(

@@ -26,6 +26,7 @@
 		/obj/item/flame,
 		/obj/item/paper,
 		/obj/item/paper_bundle,
+		/obj/item/passport,
 		/obj/item/pen,
 		/obj/item/photo,
 		/obj/item/chems/dropper,
@@ -46,6 +47,9 @@
 
 	var/obj/item/card/id/front_id = null
 	var/obj/item/charge_stick/front_stick = null
+
+/obj/item/storage/wallet/get_alt_interactions(var/mob/user)
+	. = ..() | /decl/interaction_handler/remove_id/wallet
 
 /obj/item/storage/wallet/leather
 	color = COLOR_SEDONA
@@ -95,19 +99,6 @@
 
 /obj/item/storage/wallet/GetChargeStick()
 	return front_stick
-
-/obj/item/storage/wallet/AltClick(mob/user)
-	if (user != loc || user.incapacitated() || !ishuman(user))
-		return ..()
-
-	var/obj/item/card/id/id = GetIdCard()
-	if (istype(id))
-		remove_from_storage(id)
-		user.put_in_hands(id)
-		return
-
-	return ..()
-
 
 /obj/item/storage/wallet/random/Initialize()
 	. = ..()

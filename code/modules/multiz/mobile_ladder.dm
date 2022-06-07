@@ -24,7 +24,7 @@
 		else if(target.contains_dense_objects())
 			to_chat(user, SPAN_WARNING("Objects below block \the [src] from deploying!"))
 			return FALSE
-		else if(T.CanZPass(T,DOWN) && target.CanZPass(target,DOWN))
+		else if(T.CanZPass(T, DOWN))
 			to_chat(user, SPAN_WARNING("You can't find anything to support \the [src] on!"))
 			return FALSE
 	else if (istype(T, /turf/simulated/floor) || istype(T, /turf/unsimulated/floor))
@@ -82,14 +82,14 @@
 	tool_interaction_flags = 0
 	material_alteration = 0
 
+/obj/structure/ladder/mobile/get_alt_interactions(var/mob/user)
+	. = ..() | /decl/interaction_handler/ladder_fold
+
 /obj/structure/ladder/mobile/verb/fold_ladder()
 	set name = "Fold Ladder"
 	set category = "Object"
 	set src in oview(1)
 	fold(usr)
-
-/obj/structure/ladder/mobile/AltClick(mob/user)
-	fold(user)
 
 /obj/structure/ladder/mobile/proc/fold(mob/user)
 	if(user)

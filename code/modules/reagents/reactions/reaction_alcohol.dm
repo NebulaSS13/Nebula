@@ -14,7 +14,7 @@
 	result_amount = 10
 
 /decl/chemical_reaction/recipe/wine
-	name = "Wine"
+	name = "Red Wine"
 	result = /decl/material/liquid/ethanol/wine
 	required_reagents = list(/decl/material/liquid/drink/juice/grape = 10)
 	catalysts = list(/decl/material/liquid/enzyme = 5)
@@ -46,7 +46,7 @@
 	mix_message = "The solution roils as it rapidly ferments into a shockingly blue liquor."
 
 /decl/chemical_reaction/recipe/beer
-	name = "Beer"
+	name = "Plain Beer"
 	result = /decl/material/liquid/ethanol/beer
 	required_reagents = list(/decl/material/liquid/nutriment/cornoil = 10)
 	catalysts = list(/decl/material/liquid/enzyme = 5)
@@ -79,7 +79,7 @@
 
 /decl/chemical_reaction/recipe/kahlua
 	name = "Kahlua"
-	result = /decl/material/liquid/ethanol/coffee/kahlua
+	result = /decl/material/liquid/ethanol/coffee
 	required_reagents = list(/decl/material/liquid/drink/coffee = 5, /decl/material/liquid/nutriment/sugar = 5)
 	catalysts = list(/decl/material/liquid/enzyme = 5)
 	result_amount = 5

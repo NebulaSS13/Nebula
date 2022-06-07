@@ -14,7 +14,7 @@
 	base_type = /obj/machinery/atmospherics/unary/engine
 	use_power = POWER_USE_OFF
 	power_channel = EQUIP
-	idle_power_usage = 11600
+	idle_power_usage = 2320
 	var/engine_extension = /datum/extension/ship_engine/gas
 
 /obj/machinery/atmospherics/unary/engine/Initialize()
@@ -33,7 +33,7 @@
 		z_flags &= ~ZMM_MANGLE_PLANES
 
 /obj/machinery/atmospherics/unary/engine/attackby(obj/item/I, mob/user)
-	if(isMultitool(I) && !panel_open)
+	if(IS_MULTITOOL(I) && !panel_open)
 		var/datum/extension/ship_engine/engine = get_extension(src, /datum/extension/ship_engine)
 		if(engine.sync_to_ship())
 			to_chat(user, SPAN_NOTICE("\The [src] emits a ping as it syncs its controls to a nearby ship."))

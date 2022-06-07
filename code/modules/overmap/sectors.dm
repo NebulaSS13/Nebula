@@ -14,8 +14,11 @@ var/global/list/known_overmap_sectors
 	var/list/restricted_waypoints = list() //waypoints for specific shuttle types
 	var/docking_codes
 
-	var/start_x			//Coordinates for self placing
-	var/start_y			//will use random values if unset
+	// Custom spawn coordinates. Will pick random place if one of them or both not set.
+	/// Custom X coordinate to spawn. Require `start_y` set to work.
+	var/start_x
+	/// Custom Y coordinate to spawn. Require `start_x` set to work.
+	var/start_y
 
 	var/sector_flags = OVERMAP_SECTOR_IN_SPACE
 
@@ -71,7 +74,7 @@ var/global/list/known_overmap_sectors
 		LAZYADD(global.known_overmap_sectors, src)
 		layer = ABOVE_LIGHTING_LAYER
 		plane = ABOVE_LIGHTING_PLANE
-		for(var/obj/machinery/computer/ship/helm/H AS_ANYTHING in global.overmap_helm_computers)
+		for(var/obj/machinery/computer/ship/helm/H as anything in global.overmap_helm_computers)
 			H.add_known_sector(src)
 
 	LAZYADD(SSshuttle.sectors_to_initialize, src) //Queued for further init. Will populate the waypoint lists; waypoints not spawned yet will be added in as they spawn.
@@ -96,9 +99,24 @@ var/global/list/known_overmap_sectors
 
 /obj/effect/overmap/visitable/proc/move_to_starting_location()
 	var/datum/overmap/overmap = global.overmaps_by_name[overmap_id]
-	start_x = start_x || rand(OVERMAP_EDGE, overmap.map_size_x - OVERMAP_EDGE)
-	start_y = start_y || rand(OVERMAP_EDGE, overmap.map_size_y - OVERMAP_EDGE)
-	forceMove(locate(start_x, start_y, overmap.assigned_z))
+	var/location
+
+	if(start_x && start_y)
+		location = locate(start_x, start_y, overmap.assigned_z)
+	else
+		var/list/candidate_turfs = block(
+		locate(OVERMAP_EDGE, OVERMAP_EDGE, overmap.assigned_z),
+		locate(overmap.map_size_x - OVERMAP_EDGE, overmap.map_size_y - OVERMAP_EDGE, overmap.assigned_z)
+		)
+
+		candidate_turfs = where(candidate_turfs, /proc/can_not_locate, /obj/effect/overmap)
+		location = SAFEPICK(candidate_turfs) || locate(
+			rand(OVERMAP_EDGE, overmap.map_size_x - OVERMAP_EDGE),
+			rand(OVERMAP_EDGE, overmap.map_size_y - OVERMAP_EDGE),
+			overmap.assigned_z
+		)
+
+	forceMove(location)
 
 //This is called later in the init order by SSshuttle to populate sector objects. Importantly for subtypes, shuttles will be created by then.
 /obj/effect/overmap/visitable/proc/populate_sector_objects()

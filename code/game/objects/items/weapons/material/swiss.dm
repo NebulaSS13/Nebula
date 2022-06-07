@@ -25,7 +25,7 @@
 	var/static/list/sharp_tools = list(SWISSKNF_LBLADE, SWISSKNF_SBLADE, SWISSKNF_GBLADE, SWISSKNF_WBLADE)
 
 /obj/item/knife/folding/swiss/Initialize(ml, material_key)
-	set_extension(src, /datum/extension/tool, list(
+	set_extension(src, /datum/extension/tool/variable, list(
 		TOOL_CROWBAR =     TOOL_QUALITY_MEDIOCRE,
 		TOOL_SCREWDRIVER = TOOL_QUALITY_MEDIOCRE,
 		TOOL_WIRECUTTERS = TOOL_QUALITY_MEDIOCRE,

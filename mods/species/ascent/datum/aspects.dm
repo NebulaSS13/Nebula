@@ -1,7 +1,6 @@
 /decl/aspect/Initialize()
 	. = ..()
 	LAZYINITLIST(blocked_species)
-	blocked_species |= SPECIES_SERPENTID
 	blocked_species |= SPECIES_MANTID_ALATE
 	blocked_species |= SPECIES_MANTID_GYNE
 	blocked_species |= SPECIES_MANTID_NYMPH
@@ -9,7 +8,6 @@
 /decl/aspect/ascent/Initialize()
 	. = ..()
 	blocked_species = global.all_species.Copy()
-	blocked_species -= SPECIES_SERPENTID
 	blocked_species -= SPECIES_MANTID_ALATE
 	blocked_species -= SPECIES_MANTID_GYNE
 	blocked_species -= SPECIES_MANTID_NYMPH

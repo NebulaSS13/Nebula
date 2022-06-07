@@ -58,7 +58,7 @@
 		src.mind.assigned_special_role = "Borer Husk"
 		src.mind.transfer_to(host)
 
-	H.ChangeToHusk()
+	H.make_husked()
 
 	var/obj/item/organ/internal/borer/B = new(H)
 	if(islist(chemical_types))

@@ -19,6 +19,8 @@
 /obj/machinery/suit_cycler/tradeship
 	boots = /obj/item/clothing/shoes/magboots
 	req_access = list()
+	initial_access = list()
+	locked = FALSE
 
 /obj/machinery/suit_cycler/tradeship/Initialize()
 	if(prob(75))

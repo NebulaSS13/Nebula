@@ -27,7 +27,7 @@
 	obj_result = /obj/item/chems/food/rawmeatball
 
 /decl/chemical_reaction/recipe/food/dough
-	name = "Dough"
+	name = "Plain dough"
 	required_reagents = list(/decl/material/liquid/nutriment/protein/egg = 3, /decl/material/liquid/nutriment/flour = 10, /decl/material/liquid/water = 10)
 	mix_message = "The solution folds and thickens into a large ball of dough."
 	obj_result = /obj/item/chems/food/dough

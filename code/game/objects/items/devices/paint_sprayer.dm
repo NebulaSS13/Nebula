@@ -78,6 +78,8 @@
 	var/random_preset = pick(preset_colors)
 	change_color(preset_colors[random_preset])
 
+/obj/item/paint_sprayer/get_alt_interactions(mob/user)
+	. = ..() | /decl/interaction_handler/paint_sprayer_colour
 
 /obj/item/paint_sprayer/on_update_icon()
 	cut_overlays()
@@ -358,14 +360,6 @@
 /obj/item/paint_sprayer/examine(mob/user)
 	. = ..(user)
 	to_chat(user, "It is configured to produce the '[decal]' decal with a direction of '[paint_dir]' using [paint_color] paint.")
-
-
-/obj/item/paint_sprayer/AltClick()
-	if (!isturf(loc))
-		choose_preset_color()
-	else
-		. = ..()
-
 
 /obj/item/paint_sprayer/CtrlClick()
 	if (!isturf(loc))

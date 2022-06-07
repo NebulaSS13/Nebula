@@ -33,7 +33,7 @@
 		return
 	var/list/turfs = list()
 	for(var/turf/T in orange(origin, outer_range))
-		if(!(T.z in global.using_map.sealed_levels)) // Picking a turf outside the map edge isn't recommended
+		if(!isSealedLevel(T.z)) // Picking a turf outside the map edge isn't recommended
 			if(T.x >= world.maxx-TRANSITIONEDGE || T.x <= TRANSITIONEDGE)	continue
 			if(T.y >= world.maxy-TRANSITIONEDGE || T.y <= TRANSITIONEDGE)	continue
 		if(!inner_range || get_dist(origin, T) >= inner_range)
@@ -41,23 +41,9 @@
 	if(turfs.len)
 		return pick(turfs)
 
-/proc/screen_loc2turf(text, turf/origin)
-	if(!origin)
-		return null
-	var/tZ = splittext(text, ",")
-	var/tX = splittext(tZ[1], "-")
-	var/tY = text2num(tX[2])
-	tX = splittext(tZ[2], "-")
-	tX = text2num(tX[2])
-	tZ = origin.z
-	tX = max(1, min(origin.x + 7 - tX, world.maxx))
-	tY = max(1, min(origin.y + 7 - tY, world.maxy))
-	return locate(tX, tY, tZ)
-
 /*
 	Predicate helpers
 */
-
 
 /proc/is_holy_turf(var/turf/T)
 	return T && T.holy

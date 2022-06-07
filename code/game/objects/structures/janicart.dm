@@ -236,7 +236,7 @@
 	if(isspaceturf(loc))
 		return
 	. = MOVEMENT_HANDLED
-	DoMove(mob.AdjustMovementDirection(direction), mob)
+	DoMove(mob.AdjustMovementDirection(direction, mover), mob)
 
 /obj/structure/bed/chair/janicart/relaymove(mob/user, direction)
 	if(user.incapacitated(INCAPACITATION_DISRUPTED))

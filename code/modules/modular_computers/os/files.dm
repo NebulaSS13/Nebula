@@ -39,13 +39,14 @@
 		return FALSE
 	return disk.try_store_file(file)
 
-/datum/extension/interactive/os/proc/save_file(var/newname, var/data, var/file_type = /datum/computer_file/data, var/list/metadata, var/obj/item/stock_parts/computer/hard_drive/disk = get_component(PART_HDD))
+/datum/extension/interactive/os/proc/save_file(var/newname, var/data, var/file_type = /datum/computer_file/data, var/list/metadata, var/obj/item/stock_parts/computer/hard_drive/disk = get_component(PART_HDD), var/list/accesses, var/mob/user)
 	if(!disk)
 		return FALSE
 	var/datum/computer_file/data/F = disk.find_file_by_name(newname)
 	if(!F) //try to make one if it doesn't exist
 		return !!create_file(newname, data, file_type, metadata, disk)
-
+	if(!(F.get_file_perms(accesses, user) & OS_WRITE_ACCESS))
+		return FALSE
 	//Try to save file, possibly won't fit size-wise
 	var/datum/computer_file/data/backup = F.clone()
 	disk.remove_file(F)
@@ -57,7 +58,7 @@
 		return FALSE
 	return TRUE
 
-/datum/extension/interactive/os/proc/delete_file(var/filename, var/obj/item/stock_parts/computer/hard_drive/disk = get_component(PART_HDD))
+/datum/extension/interactive/os/proc/delete_file(var/filename, var/obj/item/stock_parts/computer/hard_drive/disk = get_component(PART_HDD), var/list/accesses, var/mob/user)
 	if(!disk)
 		return FALSE
 
@@ -65,26 +66,31 @@
 	if(!F || F.undeletable)
 		return FALSE
 
-	return disk.remove_file(F)
+	return disk.remove_file(F, accesses, user)
 
-/datum/extension/interactive/os/proc/clone_file(var/filename, var/obj/item/stock_parts/computer/hard_drive/disk = get_component(PART_HDD))
+/datum/extension/interactive/os/proc/clone_file(var/filename, var/obj/item/stock_parts/computer/hard_drive/disk = get_component(PART_HDD), var/list/accesses, var/mob/user)
 	if(!disk)
 		return FALSE
 
 	var/datum/computer_file/F = disk.find_file_by_name(filename)
 	if(!F)
 		return FALSE
+	
+	if(!(F.get_file_perms(accesses, user) & OS_READ_ACCESS))
+		return FALSE
 
 	var/datum/computer_file/C = F.clone(1)
 
 	return disk.store_file(C)
 
-/datum/extension/interactive/os/proc/copy_between_disks(var/filename, var/obj/item/stock_parts/computer/hard_drive/disk_from, var/obj/item/stock_parts/computer/hard_drive/disk_to)
+/datum/extension/interactive/os/proc/copy_between_disks(var/filename, var/obj/item/stock_parts/computer/hard_drive/disk_from, var/obj/item/stock_parts/computer/hard_drive/disk_to, var/list/accesses, var/mob/user)
 	if(!istype(disk_from) || !istype(disk_to))
 		return FALSE
 
 	var/datum/computer_file/F = disk_from.find_file_by_name(filename)
 	if(!istype(F))
+		return FALSE
+	if(!(F.get_file_perms(accesses, user) & OS_READ_ACCESS))
 		return FALSE
 	var/datum/computer_file/C = F.clone(0)
 	return disk_to.store_file(C)
@@ -172,9 +178,9 @@
 	var/datum/extension/network_device/mainframe/M = get_mainframe()
 	return M && M.store_file(stored)
 
-/datum/file_storage/network/delete_file(filename)
+/datum/file_storage/network/delete_file(filename, list/accesses, mob/user)
 	var/datum/extension/network_device/mainframe/M = get_mainframe()
-	return M && M.delete_file(filename)
+	return M && M.delete_file(filename, accesses, user)
 
 /datum/file_storage/network/save_file(filename, new_data)
 	var/datum/extension/network_device/mainframe/M = get_mainframe()
@@ -253,15 +259,15 @@
 		return FALSE
 	return os.store_file(stored, get_disk())
 
-/datum/file_storage/disk/save_file(filename, new_data)
+/datum/file_storage/disk/save_file(filename, new_data, list/accesses, mob/user)
 	if(check_errors())
 		return FALSE
-	return os.save_file(filename, new_data, get_disk())
+	return os.save_file(filename, new_data, get_disk(), accesses, user)
 
-/datum/file_storage/disk/delete_file(filename)
+/datum/file_storage/disk/delete_file(filename, list/accesses, mob/user)
 	if(check_errors())
 		return FALSE
-	return os.delete_file(filename, get_disk())
+	return os.delete_file(filename, get_disk(), accesses, user)
 
 /datum/file_storage/disk/get_transfer_speed()
 	if(check_errors())

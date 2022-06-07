@@ -121,12 +121,7 @@ var/global/list/channel_to_radio_key = new
 
 	. = 0
 
-	if((MUTATION_HULK in mutations) && health >= 25 && length(message))
-		message = "[uppertext(message)]!!!"
-		verb = pick("yells","roars","hollers")
-		message_data[3] = 0
-		. = 1
-	else if(HAS_STATUS(src, STAT_SLUR))
+	if(HAS_STATUS(src, STAT_SLUR))
 		message = slur(message)
 		verb = pick("slobbers","slurs")
 		. = 1

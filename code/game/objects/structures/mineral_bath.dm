@@ -27,7 +27,7 @@
 
 /obj/structure/mineral_bath/proc/enter_bath(var/mob/living/patient, var/mob/user)
 
-	if(!istype(patient))
+	if(!istype(patient) || patient.anchored)
 		return FALSE
 
 	var/self_drop = (user == patient)

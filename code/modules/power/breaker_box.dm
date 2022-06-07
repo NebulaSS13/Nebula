@@ -86,7 +86,7 @@
 	return TRUE
 
 /obj/machinery/power/breakerbox/attackby(var/obj/item/W, var/mob/user)
-	if(isMultitool(W))
+	if(IS_MULTITOOL(W))
 		var/newtag = input(user, "Enter new RCON tag. Use \"NO_TAG\" to disable RCON or leave empty to cancel.", "SMES RCON system") as text
 		if(!CanPhysicallyInteract(user))
 			return TRUE

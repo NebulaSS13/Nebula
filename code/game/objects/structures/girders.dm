@@ -187,14 +187,6 @@
 	update_icon()
 	return 1
 
-/obj/structure/girder/attack_hand(mob/user)
-	if (MUTATION_HULK in user.mutations)
-		visible_message(SPAN_DANGER("\The [user] smashes \the [src] apart!"))
-		dismantle()
-		return
-	return ..()
-
-
 /obj/structure/girder/explosion_act(severity)
 	..()
 	if(severity == 1 || (severity == 2 && prob(30)) || (severity == 3 && prob(5)))

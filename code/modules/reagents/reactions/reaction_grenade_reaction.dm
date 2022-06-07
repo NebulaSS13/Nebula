@@ -102,7 +102,7 @@
 	holder.clear_reagents()
 
 /decl/chemical_reaction/grenade_reaction/foam
-	name = "Foam"
+	name = "Expanding Foam"
 	lore_text = "This mixture explodes in a burst of foam. Good for cleaning!"
 	required_reagents = list(/decl/material/liquid/surfactant = 1, /decl/material/liquid/water = 1)
 	result_amount = 2

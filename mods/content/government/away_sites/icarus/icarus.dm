@@ -82,7 +82,7 @@
 	color = COLOR_GRAY40
 	label = "label_warning"
 /obj/item/paper/icarus/log
-	name = "Printed piece of paper"
+	name = "printed piece of paper"
 	info = "\[LOG\]: Orbit stabilized. Next correction burst, est.: 2 hrs 12 m<br>\
 			\[LOG\]: Orbit stabiliztion. Announcing...<br>\
 			\[ANN\]: Attention all hands, SEV Icarus is stabilizing orbit in 30 seconds. Prepare for possible gravitational spikes.<br>\

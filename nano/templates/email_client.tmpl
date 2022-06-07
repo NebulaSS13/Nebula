@@ -27,14 +27,12 @@
 {{else data.current_account}}
 	<b>Welcome to your account, {{:data.current_account}}</b><br>
 	{{:helper.link('New Message', 'mail-closed', {'new_message' : 1})}}
-	{{:helper.link('Change Password', 'locked', {'changepassword' : 1})}}
 	{{:helper.link('Set notification', 'alert', {'set_notification' : 1})}}
 	{{if data.notification_mute}}
-		{{:helper.link('Unmute', 'volume-on', {'mute' : 1})}}
+		{{:helper.link('Unmute', 'volume-off', {'mute' : 1})}}
 	{{else}}
-		{{:helper.link('Mute', 'volume-off', {'mute' : 1})}}
-	{{/if}}
-	{{:helper.link('Log Out', 'key', {'logout' : 1})}}<br><br>
+		{{:helper.link('Mute', 'volume-on', {'mute' : 1})}}
+	{{/if}}<br><br>
 	{{if data.addressbook}}
 		{{:helper.link('Back', null, {'close_addressbook' : 1})}}
 		{{:helper.link('Enter Email', 'pencil', {'edit_recipient' : 1})}}
@@ -42,7 +40,7 @@
 		<table>
 		<tr><td>Address book:
 		{{for data.accounts}}
-			<tr class="candystripe"><td>{{:value.name}}<td>{{:value.job}}<td>{{:helper.link(value.login, null, {'set_recipient' : value.login})}}
+			<tr class="candystripe"><td>{{:value.name}}<td>{{:value.job}}<td>{{:helper.link(value.address, null, {'set_recipient' : value.address})}}
 		{{/for}}
 		</table>
 	{{else data.new_message}}
@@ -173,28 +171,4 @@
 			<b>No messages found in selected folder</b>
 		{{/if}}
 	{{/if}}
-{{else}}
-	<b>Welcome to Email System. Please log in.</b>
-	<div class="item">
-		<div class="itemLabel">
-			Email address:
-		</div>
-		<div class="itemContent">
-			{{:data.stored_login}}&nbsp
-		</div>
-		<div class="itemLabel">
-			Password:
-		</div>
-		<div class="itemContent">
-			{{:data.stored_password}}&nbsp
-		</div>
-		<div class="itemLabel">
-			Options:
-		</div>
-		<div class="itemContent">
-			{{:helper.link('Enter Login', null, {'edit_login' : 1})}}
-			{{:helper.link('Enter Password', null, {'edit_password' : 1})}}
-			{{:helper.link('Log In', null, {'login' : 1})}}
-		</div>
-	</div>
 {{/if}}

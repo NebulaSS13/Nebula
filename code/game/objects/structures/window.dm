@@ -146,13 +146,7 @@
 
 /obj/structure/window/attack_hand(mob/user)
 	user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
-	if(MUTATION_HULK in user.mutations)
-		user.say(pick(";RAAAAAAAARGH!", ";HNNNNNNNNNGGGGGGH!", ";GWAAAAAAAARRRHHH!", "NNNNNNNNGGGGGGGGHH!", ";AAAAAAARRRGH!"))
-		user.visible_message(SPAN_DANGER("[user] smashes through [src]!"))
-		user.do_attack_animation(src)
-		shatter()
-
-	else if (user.a_intent && user.a_intent == I_HURT)
+	if (user.a_intent && user.a_intent == I_HURT)
 
 		if (istype(user,/mob/living/carbon/human))
 			var/mob/living/carbon/human/H = user
@@ -170,23 +164,6 @@
 		user.visible_message("[user.name] knocks on the [src.name].",
 							"You knock on the [src.name].",
 							"You hear a knocking sound.")
-	return
-
-/obj/structure/window/attack_generic(var/mob/user, var/damage, var/attack_verb, var/environment_smash)
-	if(environment_smash >= 1)
-		damage = max(damage, 10)
-
-	if(istype(user))
-		user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
-		user.do_attack_animation(src)
-	if(!damage)
-		return
-	if(damage >= 10)
-		visible_message(SPAN_DANGER("[user] [attack_verb] into [src]!"))
-		take_damage(damage)
-	else
-		visible_message(SPAN_NOTICE("\The [user] bonks \the [src] harmlessly."))
-	return 1
 
 /obj/structure/window/do_simple_ranged_interaction(var/mob/user)
 	visible_message(SPAN_NOTICE("Something knocks on \the [src]."))
@@ -198,7 +175,7 @@
 
 	if(W.item_flags & ITEM_FLAG_NO_BLUDGEON) return
 
-	if(isScrewdriver(W))
+	if(IS_SCREWDRIVER(W))
 		if(reinf_material && construction_state >= 1)
 			construction_state = 3 - construction_state
 			update_nearby_icons()
@@ -212,18 +189,18 @@
 			set_anchored(!anchored)
 			playsound(loc, 'sound/items/Screwdriver.ogg', 75, 1)
 			to_chat(user, (anchored ? SPAN_NOTICE("You have fastened the window to the floor.") : SPAN_NOTICE("You have unfastened the window.")))
-	else if(isCrowbar(W) && reinf_material && construction_state <= 1)
+	else if(IS_CROWBAR(W) && reinf_material && construction_state <= 1)
 		construction_state = 1 - construction_state
 		playsound(loc, 'sound/items/Crowbar.ogg', 75, 1)
 		to_chat(user, (construction_state ? SPAN_NOTICE("You have pried the window into the frame.") : SPAN_NOTICE("You have pried the window out of the frame.")))
-	else if(isWrench(W) && !anchored && (!construction_state || !reinf_material))
+	else if(IS_WRENCH(W) && !anchored && (!construction_state || !reinf_material))
 		if(!material)
 			to_chat(user, SPAN_NOTICE("You're not sure how to dismantle \the [src] properly."))
 		else
 			playsound(src.loc, 'sound/items/Ratchet.ogg', 75, 1)
 			visible_message(SPAN_NOTICE("[user] dismantles \the [src]."))
 			dismantle()
-	else if(isCoil(W) && is_fulltile())
+	else if(IS_COIL(W) && is_fulltile())
 		if (polarized)
 			to_chat(user, SPAN_WARNING("\The [src] is already polarized."))
 			return
@@ -232,7 +209,7 @@
 			playsound(src.loc, 'sound/effects/sparks1.ogg', 75, 1)
 			polarized = TRUE
 			to_chat(user, SPAN_NOTICE("You wire and polarize \the [src]."))
-	else if (isWirecutter(W))
+	else if (IS_WIRECUTTER(W))
 		if (!polarized)
 			to_chat(user, SPAN_WARNING("\The [src] is not polarized."))
 			return
@@ -243,7 +220,7 @@
 		id = null
 		playsound(loc, 'sound/items/Wirecutter.ogg', 75, 1)
 		to_chat(user, SPAN_NOTICE("You cut the wiring and remove the polarization from \the [src]."))
-	else if(isMultitool(W))
+	else if(IS_MULTITOOL(W))
 		if (!polarized)
 			to_chat(user, SPAN_WARNING("\The [src] is not polarized."))
 			return
@@ -576,7 +553,7 @@
 	uncreated_component_parts = null
 
 /obj/machinery/button/windowtint/attackby(obj/item/W, mob/user)
-	if(isMultitool(W))
+	if(IS_MULTITOOL(W))
 		var/t = sanitize_safe(input(user, "Enter the ID for the button.", name, id_tag), MAX_NAME_LEN)
 		if(!CanPhysicallyInteract(user))
 			return TRUE

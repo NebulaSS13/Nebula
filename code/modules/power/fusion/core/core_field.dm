@@ -35,6 +35,7 @@
 		/obj/effect,
 		/obj/structure/cable,
 		/obj/machinery/atmospherics,
+		/obj/machinery/air_sensor,
 		/obj/machinery/power/terminal
 		)
 

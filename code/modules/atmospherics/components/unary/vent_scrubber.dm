@@ -2,7 +2,7 @@
 	icon = 'icons/atmos/vent_scrubber.dmi'
 	icon_state = "map_scrubber_off"
 
-	name = "Air Scrubber"
+	name = "air scrubber"
 	desc = "Has a valve and pump attached to it."
 	use_power = POWER_USE_OFF
 	idle_power_usage = 150		//internal circuitry, friction losses and stuff
@@ -169,7 +169,7 @@
 			return SPAN_WARNING("You cannot take this [src] apart, turn it off first.")
 		var/turf/T = get_turf(src)
 		var/hidden_pipe_check = FALSE
-		for(var/obj/machinery/atmospherics/node AS_ANYTHING in nodes_to_networks)
+		for(var/obj/machinery/atmospherics/node as anything in nodes_to_networks)
 			if(node.level)
 				hidden_pipe_check = TRUE
 				break

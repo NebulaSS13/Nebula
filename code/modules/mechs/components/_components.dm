@@ -98,7 +98,7 @@
 		update_components()
 
 /obj/item/mech_component/attackby(var/obj/item/thing, var/mob/user)
-	if(isScrewdriver(thing))
+	if(IS_SCREWDRIVER(thing))
 		if(contents.len)
 			//Filter non movables
 			var/list/valid_contents = list()
@@ -117,10 +117,10 @@
 		else
 			to_chat(user, SPAN_WARNING("There is nothing to remove."))
 		return
-	if(isWelder(thing))
+	if(IS_WELDER(thing))
 		repair_brute_generic(thing, user)
 		return
-	if(isCoil(thing))
+	if(IS_COIL(thing))
 		repair_burn_generic(thing, user)
 		return
 	if(istype(thing, /obj/item/robotanalyzer))

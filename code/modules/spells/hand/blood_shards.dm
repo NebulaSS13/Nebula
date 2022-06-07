@@ -1,7 +1,6 @@
 /spell/hand/charges/blood_shard
 	name = "Blood Shards"
-	desc = "Invoke a corrupted projectile forward that causes an enemy's blood to fly out in painful shards."
-
+	desc = "Invoke a corrupted projectile forward that causes an enemy's blood to fly out in painful shards. Anyone hit by this will have their blood explode out of them in a spray of smaller shards. Stores two charges."
 	spell_flags = 0
 	charge_max = 600
 	invocation = "opens their hand, which bursts into vicious red light."

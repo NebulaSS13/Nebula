@@ -27,3 +27,4 @@
 
 /spell/aoe_turf/smoke/tower
 	charge_max = 2
+	hidden_from_codex = TRUE

@@ -56,9 +56,6 @@
 	if(facing_dir)
 		tally += 3 // Locking direction will slow you down.
 
-	if(MUTATION_FAT in src.mutations)
-		tally += 1.5
-
 	if (bodytemperature < species.cold_discomfort_level)
 		tally += (species.cold_discomfort_level - bodytemperature) / 10 * 1.75
 
@@ -132,7 +129,7 @@
 	if(.) //We moved
 
 		var/stamina_cost = 0
-		for(var/obj/item/grab/G AS_ANYTHING in get_active_grabs())
+		for(var/obj/item/grab/G as anything in get_active_grabs())
 			stamina_cost -= G.grab_slowdown()
 		stamina_cost = round(stamina_cost)
 		if(stamina_cost < 0)

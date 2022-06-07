@@ -1,8 +1,11 @@
 /obj/item/inflatable
-	name = "inflatable"
-	w_class = ITEM_SIZE_NORMAL
+	name = "inflatable wall"
+	desc = "A folded membrane which rapidly expands into a large cubical shape on activation."
 	icon = 'icons/obj/structures/inflatable.dmi'
-	var/deploy_path = null
+	icon_state = "folded_wall"
+	material = /decl/material/solid/plastic
+	w_class = ITEM_SIZE_NORMAL
+	var/deploy_path = /obj/structure/inflatable/wall
 	var/inflatable_health
 
 /obj/item/inflatable/attack_self(mob/user)
@@ -23,12 +26,6 @@
 		R.health = inflatable_health
 	qdel(src)
 
-/obj/item/inflatable/wall
-	name = "inflatable wall"
-	desc = "A folded membrane which rapidly expands into a large cubical shape on activation."
-	icon_state = "folded_wall"
-	deploy_path = /obj/structure/inflatable/wall
-
 /obj/item/inflatable/door
 	name = "inflatable door"
 	desc = "A folded membrane which rapidly expands into a simple door on activation."
@@ -37,7 +34,7 @@
 	deploy_path = /obj/structure/inflatable/door
 
 /obj/structure/inflatable
-	name = "inflatable"
+	name = "inflatable structure"
 	desc = "An inflated membrane. Do not puncture."
 	density = 1
 	anchored = 1
@@ -47,6 +44,7 @@
 	maxhealth = 20
 	hitsound = 'sound/effects/Glasshit.ogg'
 	atmos_canpass = CANPASS_DENSITY
+	material = /decl/material/solid/plastic
 
 	var/undeploy_path = null
 	var/taped
@@ -56,7 +54,7 @@
 
 /obj/structure/inflatable/wall
 	name = "inflatable wall"
-	undeploy_path = /obj/item/inflatable/wall
+	undeploy_path = /obj/item/inflatable
 
 /obj/structure/inflatable/Initialize()
 	. = ..()
@@ -154,7 +152,7 @@
 	playsound(loc, 'sound/machines/hiss.ogg', 75, 1)
 	if(violent)
 		visible_message("[src] rapidly deflates!")
-		var/obj/item/inflatable/torn/R = new /obj/item/inflatable/torn(loc)
+		var/obj/item/inflatable/torn/R = new(loc)
 		src.transfer_fingerprints_to(R)
 		qdel(src)
 	else
@@ -301,4 +299,4 @@
 	w_class = ITEM_SIZE_LARGE
 	max_storage_space = DEFAULT_LARGEBOX_STORAGE
 	can_hold = list(/obj/item/inflatable)
-	startswith = list(/obj/item/inflatable/door = 2, /obj/item/inflatable/wall = 3)
+	startswith = list(/obj/item/inflatable/door = 2, /obj/item/inflatable = 3)

@@ -81,7 +81,7 @@
 		forensics.add_from_atom(/datum/forensics/gunshot_residue, src)
 
 /obj/item/ammo_casing/attackby(obj/item/W, mob/user)
-	if(isScrewdriver(W))
+	if(IS_SCREWDRIVER(W))
 		if(!BB)
 			to_chat(user, "<span class='notice'>There is no bullet in the casing to inscribe anything into.</span>")
 			return

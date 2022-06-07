@@ -1,5 +1,5 @@
 /datum/computer_file/program/merchant/tradeship
-	required_access = list()
+	read_access = list()
 
 /obj/machinery/computer/modular/preset/merchant/tradeship
 	default_software = list(

@@ -61,7 +61,7 @@
 
 /obj/structure/fireaxecabinet/attackby(var/obj/item/O, var/mob/user)
 
-	if(isMultitool(O))
+	if(IS_MULTITOOL(O))
 		toggle_lock(user)
 		return
 

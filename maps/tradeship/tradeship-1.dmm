@@ -1115,7 +1115,7 @@
 /turf/simulated/floor/tiled/steel_grid,
 /area/ship/trade/cargo/lower)
 "dh" = (
-/obj/structure/stairs/east,
+/obj/structure/stairs/long/east,
 /obj/effect/floor_decal/industrial/warning{
 	dir = 1;
 	icon_state = "warning"
