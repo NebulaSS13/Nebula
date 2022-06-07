@@ -59,6 +59,8 @@
 			use_sound = pick(use_sound)
 		else 
 			use_sound = null
+	if(use_sound)
+		playsound(user.loc, use_sound, 100)
 
 	if(!do_after(user, max(5, CEILING(delay * get_tool_speed(archetype))), holder))
 		return TOOL_USE_FAILURE_NOMESSAGE
