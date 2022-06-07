@@ -101,7 +101,7 @@ LINEN BINS
 
 /obj/structure/bedsheetbin/dump_contents()
 	//Dump all sheets, even unspawned ones
-	for(var/i = 0, i < get_amount(), i++)
+	for(var/i = 1 to get_amount())
 		remove_sheet()
 	. = ..()
 

@@ -134,7 +134,7 @@
 		last_damage_message = 0.75
 
 /obj/structure/physically_destroyed(var/skip_qdel)
-	if(!(. = ..(TRUE)))
+	if(!..(TRUE))
 		return
 	return dismantle()
 
