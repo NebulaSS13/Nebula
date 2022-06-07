@@ -11,7 +11,7 @@
 
 /obj/structure/pit/attackby(obj/item/W, mob/user)
 	if(IS_SHOVEL(W))
-		if(W.do_tool_interaction(TOOL_SHOVEL, user, src, 5 SECONDS, "[open ? "filling up" : "digging open"]", "[open ? "fills up" : "digs open"]")))
+		if(W.do_tool_interaction(TOOL_SHOVEL, user, src, 5 SECONDS, "[open ? "filling up" : "digging open"]", "[open ? "fills up" : "digs open"]"))
 			if(open)
 				close(user)
 			else
@@ -172,7 +172,7 @@
 
 /obj/structure/gravemarker/attackby(obj/item/W, mob/user)
 	if(IS_HATCHET(W))
-		if(W.do_tool_interaction(TOOL_HATCHET, user, src, 3 SECONDS), "hacking away at", "hacking at")
+		if(W.do_tool_interaction(TOOL_HATCHET, user, src, 3 SECONDS, "hacking away at", "hacking at"))
 			physically_destroyed(FALSE)
 		return TRUE
 	if(istype(W,/obj/item/pen))
