@@ -80,7 +80,7 @@
 */
 /datum/sound_token
 	var/atom/source    // Where the sound originates from
-	var/list/listeners // Assoc: Atoms hearing this sound, and their sound datum
+	var/list/listeners // Atoms hearing this sound
 	var/range          // How many turfs away the sound will stop playing completely
 	var/prefer_mute    // If sound should be muted instead of stopped when mob moves out of range. In the general case this should be avoided because listeners will remain tracked.
 	var/sound/sound    // Sound datum, holds most sound relevant data
@@ -204,7 +204,7 @@
 	PrivUpdateListeners()
 
 /datum/sound_token/proc/PrivAddListener(var/atom/listener)
-	if(!check_preference(listener))
+	if(QDELETED(listener) || !check_preference(listener))
 		return
 
 	if(isvirtualmob(listener))
@@ -259,8 +259,8 @@
 	for(var/listener in listeners)
 		PrivUpdateListener(listener)
 
-/datum/sound_token/proc/PrivUpdateListener(var/listener, var/update_sound = TRUE)
-	if(!check_preference(listener))
+/datum/sound_token/proc/PrivUpdateListener(var/atom/listener, var/update_sound = TRUE)
+	if(QDELETED(listener) || !check_preference(listener))
 		PrivRemoveListener(listener)
 		return
 
@@ -271,7 +271,7 @@
 		sound.status |= SOUND_UPDATE
 	sound_to(listener, sound)
 
-/datum/sound_token/proc/PrivGetEnvironment(var/listener)
+/datum/sound_token/proc/PrivGetEnvironment(var/atom/listener)
 	var/area/A = get_area(listener)
 	return A && PrivIsValidEnvironment(A.sound_env) ? A.sound_env : sound.environment
 

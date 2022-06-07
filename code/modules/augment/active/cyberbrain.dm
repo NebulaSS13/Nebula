@@ -27,8 +27,14 @@
 	set_extension(src, /datum/extension/assembly/modular_computer/cyberbrain)
 
 	update_icon()
-	
+
 	install_default_hardware()
+
+/obj/item/organ/internal/augment/active/cyberbrain/get_contained_external_atoms()
+	. = ..()
+	var/datum/extension/assembly/assembly = get_extension(src, /datum/extension/assembly)
+	if(assembly)
+		LAZYREMOVE(., assembly.parts)
 
 // Used to perform preset-specific hardware changes.
 /obj/item/organ/internal/augment/active/cyberbrain/proc/install_default_hardware()
