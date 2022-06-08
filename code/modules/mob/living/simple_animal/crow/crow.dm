@@ -40,8 +40,10 @@
 	messenger_bag = new(src)
 	update_icon()
 
-/mob/living/simple_animal/crow/GetIdCard()
-	return access_card
+/mob/living/simple_animal/crow/GetIdCards()
+	. = ..()
+	if (istype(access_card))
+		LAZYDISTINCTADD(., access_card)
 
 /mob/living/simple_animal/crow/show_inv(var/mob/user)
 	if(user.incapacitated())

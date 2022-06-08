@@ -307,6 +307,9 @@ var/global/const/NO_EMAG_ACT = -50
 /obj/item/card/id/GetIdCard()
 	return src
 
+/obj/item/card/id/GetIdCards()
+	return list(src)
+
 /obj/item/card/id/verb/read()
 	set name = "Read ID Card"
 	set category = "Object"

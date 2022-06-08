@@ -98,16 +98,10 @@
 		return loc.loc
 	return ..()
 
-/obj/item/holder/GetIdCard()
+/obj/item/holder/GetIdCards()
+	. = ..()
 	for(var/mob/M in contents)
-		var/obj/item/I = M.GetIdCard()
-		if(I)
-			return I
-	return null
-
-/obj/item/holder/GetAccess()
-	var/obj/item/I = GetIdCard()
-	return I ? I.GetAccess() : ..()
+		LAZYDISTINCTADD(., M.GetIdCards())
 
 /obj/item/holder/attack_self()
 	for(var/mob/M in contents)
