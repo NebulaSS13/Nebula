@@ -1,6 +1,28 @@
-/turf/exterior/wall/random/ministation/
-	var/guaranteed = FALSE //only matters for starting turfs. it is guaranteed to be not deleted on mapload.
-	var/generatepercent = 70 //the percentage chance tof each surrounding turf turning into asteroids
+/obj/ministation/random_asteroid_spawner/
+	name = "random asteroid spawner"
+	icon = 'icons/misc/mark.dmi'
+	icon_state = "X"
+	color = COLOR_PURPLE
+
+/obj/ministation/random_asteroid_spawner/Initialize()
+	..()
+	. = INITIALIZE_HINT_LATELOAD
+
+/obj/ministation/random_asteroid_spawner/LateInitialize(var/ml)
+	var/turf/space/thisturf = src.loc
+	if(prob(1) && istype(thisturf)) //if this turf is space there is a one percent chance of turning it into an asteroid.
+		thisturf.ChangeTurf(/turf/exterior/wall/random/ministation).generate_asteroid(70) //turn the turf into an asteroid wall and call generate asteroid on it, which will generate more walls around it.
+	qdel(src)
+
+//tries to convert the space turfs around the asteroid into asteroids.
+/turf/exterior/wall/random/ministation/proc/generate_asteroid(var/probability)
+	var/turf/exterior/wall/random/ministation/newasteroid
+	for(var/ndir in global.cardinal)
+		var/turf/ad = get_step(src, ndir)
+		if(prob(probability))
+			if(istype(ad, /turf/space)) //if it's space turn it into asteroid
+				newasteroid = ad.ChangeTurf(/turf/exterior/wall/random/ministation)
+				newasteroid.generate_asteroid(max(10,probability-10)) //reduce the probability of conversion with 10 percent for each turf away from the starting one.
 
 /turf/exterior/wall/random/ministation/get_weighted_mineral_list()
 	if(prob(80))
@@ -16,35 +38,7 @@
 			var/decl/strata/strata_info = GET_DECL(strata)
 			. = strata_info.ores_rich
 		if(!.)
-			. = SSmaterials.weighted_minerals_rich
-
-/turf/exterior/wall/random/ministation/Initialize(var/ml, var/materialtype, var/rmaterialtype)
-	..(ml, materialtype, rmaterialtype)
-	. = INITIALIZE_HINT_LATELOAD
-
-/turf/exterior/wall/random/ministation/LateInitialize(var/ml)
-	if(ml) //only need to call generate_asteroid here if this is a first node, the others are called in the generate_asteroid function
-		if(prob(99) && !guaranteed) //99% chance that the asteroid turns into space
-			ChangeTurf(/turf/space)
-		else //otherwise, try to convert the turfs in the cardinal direction into asteroid as well
-			generate_asteroid(generatepercent)
-	. = ..()
-
-//tries to convert the space turfs around the asteroid into asteroids as well and tries to keep already existing asteroids around it from deleting in mapload.
-/turf/exterior/wall/random/ministation/proc/generate_asteroid(var/probability)
-	var/turf/exterior/wall/random/ministation/newasteroid
-	for(var/ndir in global.cardinal)
-		var/turf/ad = get_step(src, ndir)
-		if(prob(probability))
-			if(istype(ad, /turf/space)) //if it's space turn it into asteroid
-				newasteroid = ad.ChangeTurf(/turf/exterior/wall/random/ministation)
-				newasteroid.generate_asteroid(max(10,probability-10)) //reduce the probability of conversion with 10 percent for each turf away from the starting one.
-			if(istype(ad, /turf/exterior/wall/random/ministation)) //if it's asteroid prevent it from being deleted in it's own LateInitialize proc.
-				newasteroid = ad
-				newasteroid.guaranteed = TRUE
-				newasteroid.generatepercent = max(10,probability-10) //reduce the probability of conversion with 10 percent for each turf away from the starting one.
-				//generate_asteroid will be called in newasteroids LateInitilaze so no point in calling here.
-		
+			. = SSmaterials.weighted_minerals_rich	
 
 //trash bins
 /decl/closet_appearance/crate/ministation
