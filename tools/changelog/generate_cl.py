@@ -56,7 +56,7 @@ if not pr.body:
 
 pr_body = pr.body
 pr_number = pr.number
-pr_author = pr.user.login
+pr_author = pr.user.name or pr.user.login
 
 write_cl = {}
 try:
