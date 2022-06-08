@@ -11,18 +11,17 @@
 /obj/ministation/random_asteroid_spawner/LateInitialize(var/ml)
 	var/turf/space/thisturf = src.loc
 	if(prob(1) && istype(thisturf)) //if this turf is space there is a one percent chance of turning it into an asteroid.
-		thisturf.ChangeTurf(/turf/exterior/wall/random/ministation).generate_asteroid(70) //turn the turf into an asteroid wall and call generate asteroid on it, which will generate more walls around it.
+		generate_asteroid(70, thisturf.ChangeTurf(/turf/exterior/wall/random/ministation)) //turn the turf into an asteroid wall and call generate asteroid on it, which will generate more walls around it.
 	qdel(src)
 
 //tries to convert the space turfs around the asteroid into asteroids.
-/turf/exterior/wall/random/ministation/proc/generate_asteroid(var/probability)
-	var/turf/exterior/wall/random/ministation/newasteroid
+/obj/ministation/random_asteroid_spawner/proc/generate_asteroid(var/probability, var/turf/sourceasteroid)
 	for(var/ndir in global.cardinal)
-		var/turf/ad = get_step(src, ndir)
+		var/turf/ad = get_step(sourceasteroid, ndir)
 		if(prob(probability))
 			if(istype(ad, /turf/space)) //if it's space turn it into asteroid
-				newasteroid = ad.ChangeTurf(/turf/exterior/wall/random/ministation)
-				newasteroid.generate_asteroid(max(10,probability-10)) //reduce the probability of conversion with 10 percent for each turf away from the starting one.
+				//newasteroid = ad.ChangeTurf(/turf/exterior/wall/random/ministation)
+				generate_asteroid(max(10,probability-10), ad.ChangeTurf(/turf/exterior/wall/random/ministation)) //reduce the probability of conversion with 10 percent for each turf away from the starting one.
 
 /turf/exterior/wall/random/ministation/get_weighted_mineral_list()
 	if(prob(80))
