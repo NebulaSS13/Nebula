@@ -467,6 +467,7 @@
 	brute_armor             = 0
 	construction_difficulty = MAT_VALUE_EASY_DIY
 	exoplanet_rarity        = MAT_RARITY_NOWHERE
+	conductive              = FALSE
 	value                   = 0.2
 	stack_origin_tech       = "{'materials':1}"
 	default_solid_form      = /obj/item/stack/material/puck
