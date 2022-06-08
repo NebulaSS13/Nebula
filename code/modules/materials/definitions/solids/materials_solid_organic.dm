@@ -453,7 +453,7 @@
 	wall_support_value = MAT_VALUE_NORMAL
 
 /decl/material/solid/wax
-	name                    = "wax"
+	name                    = "paraffin wax"
 	uid                     = "solid_wax"
 	lore_text               = "An aliphatic organic compound that melts at relatively low temperatures. Commonly used in making candles."
 	taste_description       = "plastic"
