@@ -13,6 +13,8 @@ SUBSYSTEM_DEF(networking)
 	var/list/networks = list()
 	var/list/connection_queue = list()
 	var/list/tmp_queue = list()
+	/// Assoc list of network_id -> queue of devices that need to reconnect. This is checked when a new network is made.
+	var/list/list/reconnect_queues = list()
 
 /datum/controller/subsystem/networking/fire(resumed = FALSE)
 	if(!resumed)
@@ -45,5 +47,17 @@ SUBSYSTEM_DEF(networking)
 
 /datum/controller/subsystem/networking/proc/queue_connection(var/datum/extension/network_device/device)
 	connection_queue |= device
+
+/datum/controller/subsystem/networking/proc/queue_reconnect(var/datum/extension/network_device/device, var/network_id)
+	LAZYDISTINCTADD(reconnect_queues[network_id], device)
+
+/datum/controller/subsystem/networking/proc/unqueue_reconnect(var/datum/extension/network_device/device, var/network_id)
+	LAZYREMOVE(reconnect_queues[network_id], device)
+
+/datum/controller/subsystem/networking/proc/process_reconnections(var/network_id)
+	for (var/datum/extension/network_device/device in reconnect_queues[network_id])
+		if(device.network_id == network_id)
+			queue_connection(device)
+	LAZYCLEARLIST(reconnect_queues[network_id])
 
 #undef MAX_CONNECTION_ATTEMPTS
