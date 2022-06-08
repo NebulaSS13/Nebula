@@ -1,5 +1,7 @@
 /turf
 	var/dynamic_lighting = TRUE
+	var/ambient_light	// If non-null, a hex RGB light color that should be applied to this turf.
+	var/ambient_light_multiplier = 0.3	// The power of the above is multiplied by this. Setting too high may drown out normal lights on the same turf.
 	luminosity           = 1
 
 	var/tmp/lighting_corners_initialised = FALSE
@@ -8,6 +10,41 @@
 	var/tmp/atom/movable/lighting_overlay/lighting_overlay // Our lighting overlay.
 	var/tmp/list/datum/lighting_corner/corners
 	var/tmp/has_opaque_atom = FALSE // Not to be confused with opacity, this will be TRUE if there's any opaque atom on the tile.
+
+/turf/proc/set_ambient_light(color, multiplier)
+	if (color == ambient_light && multiplier == ambient_light_multiplier)
+		return
+
+	ambient_light = color || ambient_light
+	ambient_light_multiplier = multiplier || ambient_light_multiplier
+	if (!ambient_light_multiplier)
+		ambient_light_multiplier = initial(ambient_light_multiplier)
+
+	update_ambient_light()
+
+/turf/proc/clear_ambient_light()
+	if (ambient_light == null)
+		return
+
+	ambient_light = null
+	update_ambient_light()
+
+/turf/proc/update_ambient_light(no_corner_update = FALSE)
+	var/ambient_r = 0
+	var/ambient_g = 0
+	var/ambient_b = 0
+	if (ambient_light)
+		ambient_r = (HEX_RED(ambient_light) / 255) * ambient_light_multiplier
+		ambient_g = (HEX_GREEN(ambient_light) / 255) * ambient_light_multiplier
+		ambient_b = (HEX_BLUE(ambient_light) / 255) * ambient_light_multiplier
+
+	if (!corners || (null in corners))
+		generate_missing_corners()
+
+	for (var/thing in corners)
+		var/datum/lighting_corner/C = thing
+		C.set_ambient_lumcount(ambient_r, ambient_g, ambient_b, no_corner_update)
+
 
 // Causes any affecting light sources to be queued for a visibility update, for example a door got opened.
 /turf/proc/reconsider_lights()
@@ -152,7 +189,7 @@
 // This is inlined in lighting_source.dm.
 // Update it too if you change this.
 /turf/proc/generate_missing_corners()
-	if (!TURF_IS_DYNAMICALLY_LIT_UNSAFE(src) && !light_source_solo && !light_source_multi && !(z_flags & ZM_ALLOW_LIGHTING))
+	if (!TURF_IS_DYNAMICALLY_LIT_UNSAFE(src) && !light_source_solo && !light_source_multi && !(z_flags & ZM_ALLOW_LIGHTING) && !ambient_light)
 		return
 
 	lighting_corners_initialised = TRUE

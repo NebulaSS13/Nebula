@@ -47,8 +47,12 @@
 		PRINT_STACK_TRACE("Warning: [src]([type]) initialized multiple times!")
 	atom_flags |= ATOM_FLAG_INITIALIZED
 
-	if(light_power && light_range)
+	if (light_range && light_power)
+		if (ambient_light)
+			update_ambient_light(TRUE)
 		update_light()
+	else if (ambient_light)
+		update_ambient_light(FALSE)
 
 	if(dynamic_lighting)
 		luminosity = 0
@@ -72,20 +76,12 @@
 	if(flooded && !density)
 		make_flooded(TRUE)
 
-	initialize_ambient_light(mapload)
-
 	return INITIALIZE_HINT_NORMAL
 
 /turf/examine(mob/user, distance, infix, suffix)
 	. = ..()
 	if(user && weather)
 		weather.examine(user)
-
-/turf/proc/initialize_ambient_light(var/mapload)
-	return
-
-/turf/proc/update_ambient_light(var/mapload)
-	return
 
 /turf/Destroy()
 

@@ -50,6 +50,8 @@
 	var/old_dynamic_lighting = TURF_IS_DYNAMICALLY_LIT_UNSAFE(src)
 	var/old_flooded =          flooded
 	var/old_outside =          is_outside
+	var/old_ambience =         ambient_light
+	var/old_ambience_mult =    ambient_light_multiplier
 
 	changing_turf = TRUE
 
@@ -92,7 +94,11 @@
 	corners = old_corners
 
 	lighting_overlay = old_lighting_overlay
+
 	recalc_atom_opacity()
+
+	if (old_ambience != ambient_light || old_ambience_mult != ambient_light_multiplier)
+		update_ambient_light(FALSE)
 
 	var/tidlu = TURF_IS_DYNAMICALLY_LIT_UNSAFE(src)
 	if ((old_opacity != opacity) || (tidlu != old_dynamic_lighting) || force_lighting_update)
