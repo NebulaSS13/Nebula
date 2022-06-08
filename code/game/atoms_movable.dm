@@ -497,3 +497,4 @@
 	. = ..()
 	if(config.expanded_alt_interactions)
 		. += /decl/interaction_handler/grab
+		. += /decl/interaction_handler/look

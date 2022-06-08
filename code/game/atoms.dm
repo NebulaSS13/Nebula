@@ -596,6 +596,3 @@ its easier to just keep the beam vertical.
 
 /atom/proc/get_alt_interactions(var/mob/user)
 	SHOULD_CALL_PARENT(TRUE)
-	. = list()
-	if(config.expanded_alt_interactions)
-		. += /decl/interaction_handler/look
