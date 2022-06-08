@@ -37,10 +37,6 @@
 		return
 	. = ..()
 
-//Can't drop root limb
-/obj/item/organ/external/chest/is_droppable()
-	return FALSE
-
 /obj/item/organ/external/groin
 	name = "lower body"
 	organ_tag = BP_GROIN

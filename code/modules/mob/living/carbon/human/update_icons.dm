@@ -147,34 +147,40 @@ Please contact me on #coderbus IRC. ~Carn x
 	if(HasMovementHandler(/datum/movement_handler/mob/transformation) || QDELETED(src))
 		return
 
-	update_mutations(0)
-	update_body(0)
-	update_skin(0)
-	update_underwear(0)
-	update_hair(0)
-	update_inv_w_uniform(0)
-	update_inv_wear_id(0)
-	update_inv_gloves(0)
-	update_inv_glasses(0)
-	update_inv_ears(0)
-	update_inv_shoes(0)
-	update_inv_s_store(0)
-	update_inv_wear_mask(0)
-	update_inv_head(0)
-	update_inv_belt(0)
-	update_inv_back(0)
-	update_inv_wear_suit(0)
-	update_inv_hands(0)
-	update_inv_handcuffed(0)
-	update_inv_pockets(0)
-	update_fire(0)
-	update_surgery(0)
-	UpdateDamageIcon()
+	update_mutations(FALSE)
+	update_body(FALSE)
+	update_skin(FALSE)
+	update_underwear(FALSE)
+	update_hair(FALSE)
+	update_inv_w_uniform(FALSE)
+	update_inv_wear_id(FALSE)
+	update_inv_gloves(FALSE)
+	update_inv_glasses(FALSE)
+	update_inv_ears(FALSE)
+	update_inv_shoes(FALSE)
+	update_inv_s_store(FALSE)
+	update_inv_wear_mask(FALSE)
+	update_inv_head(FALSE)
+	update_inv_belt(FALSE)
+	update_inv_back(FALSE)
+	update_inv_wear_suit(FALSE)
+	update_inv_hands(FALSE)
+	update_inv_handcuffed(FALSE)
+	update_inv_pockets(FALSE)
+	update_fire(FALSE)
+	update_surgery(FALSE)
+	update_bandages(FALSE)
+	UpdateDamageIcon(FALSE)
 	update_icon()
 
 /mob/living/carbon/human/on_update_icon()
 
 	..()
+
+	if(regenerate_body_icon)
+		regenerate_body_icon = FALSE
+		update_body(FALSE)
+		refresh_visible_overlays()
 
 	var/list/visible_overlays
 	if(is_cloaked())
@@ -377,6 +383,9 @@ var/global/list/damage_icon_parts = list()
 	else
 		//BEGIN CACHED ICON GENERATION.
 		var/obj/item/organ/external/chest = get_organ(BP_CHEST)
+		if(!chest)
+			return // This should not be happening, but occasionally there is an ordering issue or a late call to update icon.
+
 		base_icon = chest.get_icon()
 
 		for(var/obj/item/organ/external/part in (limbs - chest))

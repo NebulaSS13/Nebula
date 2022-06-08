@@ -36,15 +36,22 @@
 		on_lost_organ(O)
 		
 	. = O.do_uninstall(in_place, detach, ignore_children, update_icon)
+	if(.)
 
-	if(!in_place)
-		updatehealth()
-	
-	//Shall not drop undroppable things
-	if(drop_organ)
-		if(O.is_droppable())
-			O.dropInto(get_turf(src))
-		else
+		if(client)
+			client.screen -= O
+
+		if(!in_place)
+			updatehealth()
+
+		if(drop_organ)
+			var/drop_loc = get_turf(src)
+			O.dropInto(drop_loc)
+			if(!BP_IS_PROSTHETIC(O))
+				playsound(drop_loc, 'sound/effects/squelch1.ogg', 15, 1)
+			else
+				playsound(drop_loc, 'sound/items/Ratchet.ogg', 50, 1)
+		else if(!QDELETED(O))
 			qdel(O)
 
 //Should handle vital organ checks, icon updates, events

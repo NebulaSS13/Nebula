@@ -553,7 +553,3 @@ var/global/list/ailment_reference_cache = list()
 //Used to tell stumps from other organs. Stumps don't behave like regular organs, and require special handling.
 /obj/item/organ/proc/is_stump()
 	return FALSE
-
-//Used to override organ drop behavior, so we don't drop organs that shouldn't be dropped into the world, like stumps and root limbs, or wrappers
-/obj/item/organ/proc/is_droppable()
-	return TRUE
