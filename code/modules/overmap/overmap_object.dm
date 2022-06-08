@@ -162,16 +162,23 @@ var/global/list/overmap_unknown_ids = list()
 
 
 /obj/effect/overmap/proc/decelerate()
-	if(((speed[1]) || (speed[2])) && can_burn())
-		if (speed[1])
-			var/partial_power = Clamp(speed[1] / (get_delta_v() / KM_OVERMAP_RATE), 0, 1)
-			var/delta_v = get_delta_v(TRUE, partial_power) / KM_OVERMAP_RATE
-			adjust_speed(-SIGN(speed[1]) * min(delta_v, abs(speed[1])), 0)
-		if (speed[2])
-			var/partial_power = Clamp(speed[2] / (get_delta_v() / KM_OVERMAP_RATE), 0, 1)
-			var/delta_v = get_delta_v(TRUE, partial_power) / KM_OVERMAP_RATE
-			adjust_speed(0, -SIGN(speed[2]) * min(delta_v, abs(speed[2])))
+	if(!can_burn())
+		return
+
+	var/burn = FALSE
+	. = list(0, 0)
+	for(var/i = 1 to 2)
+		var/spd = speed[i]
+		var/abs_spd = abs(spd)
+		if(abs_spd)
+			var/partial_power = Clamp(abs_spd / (get_delta_v() / KM_OVERMAP_RATE), 0, 1)
+			var/delta_v = min(get_delta_v(TRUE, partial_power) / KM_OVERMAP_RATE, abs_spd)
+			.[i] = -SIGN(spd) * delta_v
+			burn = TRUE
+
+	if(burn)
 		last_burn = world.time
+		adjust_speed(.[1], .[2])
 
 /obj/effect/overmap/proc/handle_overmap_pixel_movement()
 	pixel_x = position[1] * (world.icon_size/2)
