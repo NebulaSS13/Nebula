@@ -33,5 +33,5 @@
 /obj/effect/decal/cleanable/lichen/attackby(obj/item/I, mob/user)
 	if(I.sharp && I.force > 1)
 		qdel(src)
-		return
+		return TRUE
 	. = ..()

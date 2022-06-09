@@ -62,7 +62,7 @@
 		return
 
 	for(var/atom/movable/A in T)
-		if(!A.anchored && A != user)
+		if(!A.anchored && A != user && A.simulated)
 			A.forceMove(src)
 	update_icon()
 
