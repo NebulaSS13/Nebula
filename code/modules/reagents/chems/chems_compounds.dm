@@ -398,7 +398,7 @@
 		var/list/limbs = H.get_external_organs()
 		var/list/shuffled_limbs = LAZYLEN(limbs) ? shuffle(limbs.Copy()) : null
 		for(var/obj/item/organ/external/E in shuffled_limbs)
-			if(E.is_stump() || BP_IS_PROSTHETIC(E))
+			if(BP_IS_PROSTHETIC(E))
 				continue
 
 			if(BP_IS_CRYSTAL(E))

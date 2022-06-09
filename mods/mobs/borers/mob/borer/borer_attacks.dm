@@ -19,7 +19,7 @@
 
 	var/mob/living/carbon/human/H = M
 	var/obj/item/organ/external/E = H.get_organ(BP_HEAD)
-	if(!E || E.is_stump())
+	if(!E)
 		to_chat(src, SPAN_WARNING("\The [H] does not have a head!"))
 		return
 	if(!H.should_have_organ(BP_BRAIN))

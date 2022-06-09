@@ -82,7 +82,7 @@
 
 /obj/item/organ/external/proc/get_fingerprint()
 
-	if((limb_flags & ORGAN_FLAG_FINGERPRINT) && dna && !is_stump() && !BP_IS_PROSTHETIC(src))
+	if((limb_flags & ORGAN_FLAG_FINGERPRINT) && dna && !BP_IS_PROSTHETIC(src))
 		return md5(dna.uni_identity)
 
 	for(var/obj/item/organ/external/E in children)
@@ -309,7 +309,7 @@
 /obj/item/organ/external/proc/try_saw_off_child(var/obj/item/W, var/mob/user)
 
 	//Add icons to radial menu
-	var/list/radial_buttons = make_item_radial_menu_choices(get_limbs_recursive(TRUE))
+	var/list/radial_buttons = make_item_radial_menu_choices(get_limbs_recursive())
 	if(!LAZYLEN(radial_buttons))
 		return
 
@@ -320,7 +320,7 @@
 
 	var/cutting_result = !W.do_tool_interaction(TOOL_SAW, user, src, 3 SECONDS, "cutting \the [removing] off")
 	//Check if the limb is still in the hierarchy
-	if(cutting_result == 1 || !(removing in get_limbs_recursive(TRUE)))
+	if(cutting_result == 1 || !(removing in get_limbs_recursive()))
 		if(cutting_result != -1)
 			user.visible_message(SPAN_DANGER("<b>[user]</b> stops trying to cut \the [removing]."))
 		return TRUE
@@ -353,13 +353,11 @@
 
 	return all_items
 
-/obj/item/organ/external/proc/get_limbs_recursive(var/no_stumps = FALSE)
+/obj/item/organ/external/proc/get_limbs_recursive()
 	var/list/all_limbs = list()
 	for(var/obj/item/organ/external/child in children)
-		if(no_stumps && child.is_stump())
-			continue
 		all_limbs += child
-		var/list/sublimbs = child.get_limbs_recursive(no_stumps)
+		var/list/sublimbs = child.get_limbs_recursive()
 		if(sublimbs)
 			all_limbs += sublimbs
 	return all_limbs
@@ -1323,7 +1321,7 @@ Note that amputating the affected organ does in fact remove the infection from t
 /obj/item/organ/external/is_usable()
 	. = ..()
 	. = . && !is_malfunctioning()
-	. = . && (!is_broken() || splinted) && !is_stump()
+	. = . && (!is_broken() || splinted)
 	. = . && !(status & ORGAN_TENDON_CUT)
 	. = . && (!can_feel_pain() || get_pain() < pain_disability_threshold)
 	. = . && brute_ratio < 1 && burn_ratio < 1
@@ -1549,9 +1547,7 @@ Note that amputating the affected organ does in fact remove the infection from t
 // Added to the mob's move delay tally if this organ is being used to move with.
 /obj/item/organ/external/proc/get_movement_delay(max_delay)
 	. = 0
-	if(is_stump())
-		. += max_delay
-	else if(splinted)
+	if(splinted)
 		. += max_delay/8
 	else if(status & ORGAN_BROKEN)
 		. += max_delay * 3/8

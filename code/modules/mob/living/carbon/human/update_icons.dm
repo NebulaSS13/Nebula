@@ -210,7 +210,7 @@ Please contact me on #coderbus IRC. ~Carn x
 				add_overlay(overlay)
 
 	var/obj/item/organ/external/head/head = get_organ(BP_HEAD)
-	if(istype(head) && !head.is_stump())
+	if(istype(head))
 		var/image/I = head.get_eye_overlay()
 		if(I)
 			add_overlay(I)
@@ -267,8 +267,6 @@ var/global/list/damage_icon_parts = list()
 	// first check whether something actually changed about damage appearance
 	var/damage_appearance = ""
 	for(var/obj/item/organ/external/O in get_external_organs())
-		if(O.is_stump())
-			continue
 		damage_appearance += O.damage_state
 
 	if(damage_appearance == previous_damage_appearance)
@@ -281,12 +279,10 @@ var/global/list/damage_icon_parts = list()
 
 	// blend the individual damage states with our icons
 	for(var/obj/item/organ/external/O in get_external_organs())
-		if(O.is_stump())
-			continue
-
 		O.update_damstate()
 		O.update_icon()
-		if(O.damage_state == "00") continue
+		if(O.damage_state == "00")
+			continue
 		var/icon/DI
 		var/use_colour = (BP_IS_PROSTHETIC(O) ? SYNTH_BLOOD_COLOR : O.species.get_blood_color(src))
 		var/cache_index = "[O.damage_state]/[O.icon_name]/[use_colour]/[species.name]"
@@ -312,8 +308,6 @@ var/global/list/damage_icon_parts = list()
 	var/image/standing_image = overlays_standing[HO_DAMAGE_LAYER]
 	if(standing_image)
 		for(var/obj/item/organ/external/O in get_external_organs())
-			if(O.is_stump())
-				continue
 			var/bandage_level = O.bandage_level()
 			if(bandage_level)
 				standing_image.overlays += image(bandage_icon, "[O.icon_name][bandage_level]")
@@ -353,15 +347,15 @@ var/global/list/damage_icon_parts = list()
 	var/obj/item/organ/internal/eyes/eyes = get_organ(species.vision_organ || BP_EYES)
 	icon_key += istype(eyes) ? eyes.eye_colour : COLOR_BLACK
 
-	for(var/organ_tag in species.has_limbs)
+	for(var/organ_tag in species.has_limbs) // This means non-species limb slots won't draw, todo
 		var/obj/item/organ/external/part = get_organ(organ_tag)
-		if(isnull(part) || part.is_stump() || part.organ_tag == BP_TAIL)
+		if(isnull(part) || part.organ_tag == BP_TAIL)
 			icon_key += "0"
 			continue
 		for(var/M in part.markings)
 			icon_key += "[M][part.markings[M]]"
 		if(part)
-			icon_key += "[part.bodytype.get_icon_cache_uid(part.owner)][part.render_alpha]"
+			icon_key += "[part.bodytype?.get_icon_cache_uid(part.owner)][part.render_alpha]"
 			icon_key += "[part.skin_tone]"
 			if(part.skin_colour)
 				icon_key += "[part.skin_colour]"
@@ -458,7 +452,7 @@ var/global/list/damage_icon_parts = list()
 	overlays_standing[HO_HAIR_LAYER]	= null
 
 	var/obj/item/organ/external/head/head_organ = get_organ(BP_HEAD)
-	if(!head_organ || head_organ.is_stump() )
+	if(!head_organ)
 		if(update_icons)
 			queue_icon_update()
 		return
@@ -590,7 +584,7 @@ var/global/list/damage_icon_parts = list()
 		var/list/blood_color
 		for(var/bp in list(BP_L_FOOT, BP_R_FOOT))
 			var/obj/item/organ/external/stomper = get_organ(bp)
-			if(istype(stomper) && !stomper.is_stump() && stomper.coating)
+			if(istype(stomper) && stomper.coating)
 				blood_color = stomper.coating.get_color()
 
 		overlays_standing[HO_SHOES_LAYER] = null
@@ -833,7 +827,7 @@ var/global/list/damage_icon_parts = list()
 	overlays_standing[HO_SURGERY_LAYER] = null
 	var/image/total = new
 	for(var/obj/item/organ/external/E in get_external_organs())
-		if(BP_IS_PROSTHETIC(E) || E.is_stump())
+		if(BP_IS_PROSTHETIC(E))
 			continue
 		var/how_open = round(E.how_open())
 		if(how_open <= 0)

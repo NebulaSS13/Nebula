@@ -141,7 +141,7 @@
 		if(limbs)
 			limbs = limbs.Copy()
 		for(var/obj/item/organ/external/limb in shuffle(limbs))
-			if(!istype(limb) || limb.is_stump() || !(limb.limb_flags & ORGAN_FLAG_CAN_AMPUTATE))
+			if(!istype(limb) || !(limb.limb_flags & ORGAN_FLAG_CAN_AMPUTATE))
 				continue
 			var/is_vital = FALSE
 			for(var/obj/item/organ/internal/I in limb.internal_organs)

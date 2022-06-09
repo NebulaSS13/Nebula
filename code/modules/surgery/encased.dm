@@ -19,7 +19,7 @@
 	max_duration = 70
 	shock_level = 60
 	delicate = 1
-	surgery_candidate_flags = SURGERY_NO_ROBOTIC | SURGERY_NO_CRYSTAL | SURGERY_NO_STUMP | SURGERY_NEEDS_RETRACTED
+	surgery_candidate_flags = SURGERY_NO_ROBOTIC | SURGERY_NO_CRYSTAL | SURGERY_NEEDS_RETRACTED
 	strict_access_requirement = TRUE
 
 /decl/surgery_step/open_encased/assess_bodypart(mob/living/user, mob/living/target, target_zone, obj/item/tool)

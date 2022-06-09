@@ -62,7 +62,7 @@ var/global/list/sparring_attack_cache = list()
 	if(!user.restrained() && !user.incapacitated())
 		for(var/etype in usable_with_limbs)
 			var/obj/item/organ/external/E = user.get_organ(etype)
-			if(E && !E.is_stump())
+			if(E)
 				return TRUE
 	return FALSE
 
@@ -283,20 +283,14 @@ var/global/list/sparring_attack_cache = list()
 
 /decl/natural_attack/stomp/is_usable(var/mob/living/carbon/human/user, var/mob/living/carbon/human/target, var/zone)
 	if(!istype(target))
-		return 0
-
+		return FALSE
 	if (!user.lying && (target.lying || (zone in list(BP_L_FOOT, BP_R_FOOT))))
 		if((user in target.grabbed_by) && target.lying)
-			return 0
-		var/obj/item/organ/external/E = user.get_organ(BP_L_FOOT)
-		if(E && !E.is_stump())
-			return 1
-
-		E = user.get_organ(BP_R_FOOT)
-		if(E && !E.is_stump())
-			return 1
-
-		return 0
+			return FALSE
+		for(var/bp in list(BP_L_FOOT, BP_R_FOOT))
+			if(istype(user.get_organ(bp), /obj/item/organ/external))
+				return TRUE
+	return FALSE
 
 /decl/natural_attack/stomp/get_unarmed_damage(var/mob/living/carbon/human/user)
 	var/obj/item/clothing/shoes = user.shoes

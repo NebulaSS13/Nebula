@@ -35,12 +35,10 @@
 /obj/item/organ/Destroy()
 	if(owner)
 		owner.remove_organ(src, FALSE, FALSE, TRUE, TRUE, FALSE) //Tell our parent we're unisntalling in place
+		owner = null
 	else
 		do_uninstall(TRUE, FALSE, FALSE, FALSE) //Don't ignore children here since we might own/contain them
-	owner = null
-	dna = null
-	species = null
-	bodytype = null
+	QDEL_NULL(dna)
 	QDEL_NULL_LIST(ailments)
 	return ..()
 
@@ -548,8 +546,4 @@ var/global/list/ailment_reference_cache = list()
 
 //Some checks to avoid doing type checks for nothing
 /obj/item/organ/proc/is_internal()
-	return FALSE
-
-//Used to tell stumps from other organs. Stumps don't behave like regular organs, and require special handling.
-/obj/item/organ/proc/is_stump()
 	return FALSE

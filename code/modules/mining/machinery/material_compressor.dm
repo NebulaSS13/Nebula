@@ -27,7 +27,7 @@
 		if(emagged)
 			for(var/mob/living/carbon/human/H in input_turf)
 				for(var/obj/item/organ/external/crushing in H.get_external_organs())
-					if(!crushing.simulated || crushing.anchored || crushing.is_stump() || !prob(5))
+					if(!crushing.simulated || crushing.anchored || !prob(5))
 						continue
 					visible_message(SPAN_DANGER("\The [src] crushes \the [H]'s [crushing.name]!"))
 					for(var/mat in crushing.matter)
