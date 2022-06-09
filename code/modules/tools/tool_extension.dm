@@ -51,8 +51,14 @@
 
 	user.visible_message(SPAN_NOTICE("\The [user] begins [start_message || tool_archetype.use_message] \the [target] with \the [holder]."), SPAN_NOTICE("You begin [start_message || tool_archetype.use_message] \the [target] with \the [holder]."))
 	var/use_sound = LAZYACCESS(tool_use_sounds, archetype)
-	if(islist(use_sound) && length(use_sound))
-		use_sound = pick(use_sound)
+	 //If no sound overrides, grab the archetype's sound/sound list
+	if(!use_sound) 
+		use_sound = tool_archetype.use_sound
+	if(islist(use_sound))
+		if(length(use_sound))
+			use_sound = pick(use_sound)
+		else 
+			use_sound = null
 	if(use_sound)
 		playsound(user.loc, use_sound, 100)
 
