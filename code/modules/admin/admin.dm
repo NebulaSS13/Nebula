@@ -317,7 +317,7 @@ var/global/floorIsLava = 0
 			if(I.author == usr.key || I.author == "Adminbot" || ishost(usr))
 				dat += "<A href='?src=\ref[src];remove_player_info=[key];remove_index=[i]'>Remove</A>"
 			dat += "<hr></li>"
-		if(update_file) 
+		if(update_file)
 			direct_output(info, infos)
 
 	dat += "</ul><br><A href='?src=\ref[src];add_player_info=[key]'>Add Comment</A><br>"
@@ -1387,6 +1387,7 @@ var/global/floorIsLava = 0
 	log_admin("[key_name(usr)] stuffed [frommob.ckey] into [tomob.name].")
 	SSstatistics.add_field_details("admin_verb","CGD")
 	tomob.ckey = frommob.ckey
+	tomob.teleop = null // no longer (a)ghosting
 	qdel(frommob)
 	return 1
 
