@@ -141,8 +141,8 @@
 				if(istype(inv_slot?.holding, /obj/item/radio))
 					R = inv_slot.holding
 			if(R)
-				R.talk_into(src,message,null,verb,speaking)
 				used_radios += R
+
 		if("whisper") //It's going to get sanitized again immediately, so decode.
 			whisper_say(html_decode(message), speaking, alt_name)
 			return 1
@@ -150,14 +150,15 @@
 		else
 			// Headsets are default.
 			if(message_mode)
+				var/obj/item/radio/R
 				for(var/slot in global.ear_slots)
-					var/obj/item/radio/R = get_equipped_item(slot)
+					R = get_equipped_item(slot)
 					if(istype(R))
-						R.talk_into(src,message,null,verb,speaking)
-						used_radios += R
 						break
-				else
-					used_radios += GetRadio()
+				if(!istype(R))
+					R = GetRadio()
+				if(istype(R))
+					used_radios += R
 
 	for(var/obj/item/radio in used_radios)
 		radio.add_fingerprint(src)
