@@ -3,6 +3,7 @@
 	icon = 'icons/misc/mark.dmi'
 	icon_state = "X"
 	color = COLOR_PURPLE
+	alpha = 255 //so it's not invisible in map editor
 
 /obj/abstract/ministation/random_asteroid_spawner/Initialize()
 	..()
