@@ -42,7 +42,7 @@
 	if(!..(TRUE)) //Tell parents we'll delete ourselves
 		return
 	if(T)
-		. = create_remains() != null
+		. = !isnull(create_remains())
 		if(snd_cut)
 			playsound(src, snd_cut, 60, TRUE)
 	//qdel only after we do our thing, since we have to access members
@@ -51,8 +51,7 @@
 
 /**Returns an instance of the object the plant leaves behind when destroyed. Null means it leaves nothing. */
 /obj/structure/flora/proc/create_remains()
-	var/turf/T = get_turf(src)
-	return new remains_type(T, material, reinf_material)
+	return new remains_type(get_turf(src), material, reinf_material)
 
 ////////////////////////////////////////
 // Trees
