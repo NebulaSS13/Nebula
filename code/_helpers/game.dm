@@ -23,7 +23,7 @@
 
 /proc/get_area_name(O) //get area's proper name
 	var/area/A = get_area(O)
-	return A.proper_name
+	return A?.proper_name
 
 /proc/get_area_by_name(N) //get area by its name
 	for(var/area/A in global.areas)
