@@ -1,21 +1,21 @@
-/obj/ministation/random_asteroid_spawner/
+/obj/abstract/ministation/random_asteroid_spawner/
 	name = "random asteroid spawner"
 	icon = 'icons/misc/mark.dmi'
 	icon_state = "X"
 	color = COLOR_PURPLE
 
-/obj/ministation/random_asteroid_spawner/Initialize()
+/obj/abstract/ministation/random_asteroid_spawner/Initialize()
 	..()
 	. = INITIALIZE_HINT_LATELOAD
 
-/obj/ministation/random_asteroid_spawner/LateInitialize(var/ml)
+/obj/abstract/ministation/random_asteroid_spawner/LateInitialize(var/ml)
 	var/turf/space/thisturf = src.loc
 	if(prob(1) && istype(thisturf)) //if this turf is space there is a one percent chance of turning it into an asteroid.
 		generate_asteroid(70, thisturf.ChangeTurf(/turf/exterior/wall/random/ministation)) //turn the turf into an asteroid wall and call generate asteroid on it, which will generate more walls around it.
 	qdel(src)
 
 //tries to convert the space turfs around the asteroid into asteroids.
-/obj/ministation/random_asteroid_spawner/proc/generate_asteroid(var/probability, var/turf/sourceasteroid)
+/obj/abstract/ministation/random_asteroid_spawner/proc/generate_asteroid(var/probability, var/turf/sourceasteroid)
 	for(var/ndir in global.cardinal)
 		var/turf/ad = get_step(sourceasteroid, ndir)
 		if(prob(probability))
