@@ -38,9 +38,9 @@
 
 //Drop some bits when destroyed
 /obj/structure/flora/physically_destroyed(skip_qdel)
-	var/turf/T = get_turf(src)
 	if(!..(TRUE)) //Tell parents we'll delete ourselves
 		return
+	var/turf/T = get_turf(src)
 	if(T)
 		. = !isnull(create_remains())
 		if(snd_cut)
