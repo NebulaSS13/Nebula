@@ -382,29 +382,24 @@ var/global/list/damage_icon_parts = list()
 		base_icon = human_icon_cache[icon_key]
 	else
 		//BEGIN CACHED ICON GENERATION.
-		var/obj/item/organ/external/chest = get_organ(BP_CHEST)
-		if(!chest)
-			return // This should not be happening, but occasionally there is an ordering issue or a late call to update icon.
-
-		base_icon = chest.get_icon()
-
-		for(var/obj/item/organ/external/part in (limbs - chest))
+		base_icon = icon(bodytype.icon_template)
+		for(var/obj/item/organ/external/part in limbs)
 			var/icon/temp = part.get_icon()
 			//That part makes left and right legs drawn topmost and lowermost when human looks WEST or EAST
 			//And no change in rendering for other parts (they icon_position is 0, so goes to 'else' part)
 			if(part.icon_position & (LEFT | RIGHT))
-				var/icon/temp2 = new('icons/mob/human.dmi',"blank")
-				temp2.Insert(new/icon(temp,dir=NORTH),dir=NORTH)
-				temp2.Insert(new/icon(temp,dir=SOUTH),dir=SOUTH)
+				var/icon/temp2 = icon(bodytype.icon_template)
+				temp2.Insert(new /icon(temp,dir=NORTH),dir=NORTH)
+				temp2.Insert(new /icon(temp,dir=SOUTH),dir=SOUTH)
 				if(!(part.icon_position & LEFT))
-					temp2.Insert(new/icon(temp,dir=EAST),dir=EAST)
+					temp2.Insert(new /icon(temp,dir=EAST),dir=EAST)
 				if(!(part.icon_position & RIGHT))
-					temp2.Insert(new/icon(temp,dir=WEST),dir=WEST)
+					temp2.Insert(new /icon(temp,dir=WEST),dir=WEST)
 				base_icon.Blend(temp2, ICON_OVERLAY)
 				if(part.icon_position & LEFT)
-					temp2.Insert(new/icon(temp,dir=EAST),dir=EAST)
+					temp2.Insert(new /icon(temp,dir=EAST),dir=EAST)
 				if(part.icon_position & RIGHT)
-					temp2.Insert(new/icon(temp,dir=WEST),dir=WEST)
+					temp2.Insert(new /icon(temp,dir=WEST),dir=WEST)
 				base_icon.Blend(temp2, ICON_UNDERLAY)
 			else if(part.icon_position & UNDER)
 				base_icon.Blend(temp, ICON_UNDERLAY)

@@ -1056,7 +1056,11 @@ Note that amputating the affected organ does in fact remove the infection from t
 		LAZYADD(original_parent.wounds, W)
 		original_parent.update_damages()
 
-	handle_async_post_dismemberment(victim)
+	if(!QDELETED(victim))
+		victim.updatehealth()
+		victim.UpdateDamageIcon()
+		victim.refresh_visible_overlays()
+	set_dir(SOUTH, TRUE)
 
 	// Edged attacks cause the limb to sail off in an arc.
 	if(disintegrate == DISMEMBER_METHOD_EDGE)
@@ -1090,17 +1094,6 @@ Note that amputating the affected organ does in fact remove the infection from t
 					I.throw_at(get_edge_target_turf(src,pick(global.alldirs)), rand(1,3), THROWFORCE_GIBS)
 			if(!QDELETED(src))
 				qdel(src)
-
-/obj/item/organ/external/proc/handle_async_post_dismemberment(var/mob/living/carbon/human/victim)
-	set waitfor = FALSE
-	sleep(1)
-	if(QDELETED(src))
-		return
-	if(!QDELETED(victim))
-		victim.updatehealth()
-		victim.UpdateDamageIcon()
-		victim.refresh_visible_overlays()
-	set_dir(SOUTH, TRUE)
 
 /****************************************************
 			   HELPERS
