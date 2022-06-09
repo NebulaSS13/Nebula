@@ -41,7 +41,7 @@
 	A.on_mob_init()
 
 	if(latejoin)
-		new_player_mob.AnnounceCyborg(character, title, "has been downloaded to the empty core in \the [get_area(character).display_name]")
+		new_player_mob.AnnounceCyborg(character, title, "has been downloaded to the empty core in \the [get_area_name(src)]")
 	SSticker.mode.handle_latejoin(character)
 
 	qdel(C)
