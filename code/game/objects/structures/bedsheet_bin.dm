@@ -107,7 +107,7 @@ LINEN BINS
 
 /**Returns the total amount of sheets contained, including unspawned ones. */
 /obj/structure/bedsheetbin/proc/get_amount()
-	return LAZYLEN(sheets)? stored + length(sheets) : stored
+	return stored + LAZYLEN(sheets)
 
 /obj/structure/bedsheetbin/examine(mob/user)
 	. = ..()
