@@ -40,6 +40,7 @@
 	var/hair_colour                    // hair colour
 	var/list/markings                  // Markings (body_markings) to apply to the icon
 	var/render_alpha = 255
+	var/skip_body_icon_draw = FALSE    // Set to true to skip including this organ on the human body sprite.
 
 	// Wound and structural data.
 	var/wound_update_accuracy = 1      // how often wounds should be updated, a higher number means less often
@@ -988,7 +989,7 @@ Note that amputating the affected organ does in fact remove the infection from t
 			. = new /obj/effect/decal/cleanable/ash(dropturf)
 		if(DISMEMBER_METHOD_ACID)
 			. = new /obj/effect/decal/cleanable/mucus(dropturf)
-		else
+		if(DISMEMBER_METHOD_BLUNT)
 			if(BP_IS_CRYSTAL(src))
 				. = new /obj/item/shard(dropturf, /decl/material/solid/gemstone/crystal)
 			else if(BP_IS_PROSTHETIC(src))
@@ -1003,7 +1004,7 @@ Note that amputating the affected organ does in fact remove the infection from t
 		G.update_icon()
 
 //Handles dismemberment
-/obj/item/organ/external/proc/dismember(var/clean, var/disintegrate = DISMEMBER_METHOD_EDGE, var/ignore_children, var/silent)
+/obj/item/organ/external/proc/dismember(var/clean, var/disintegrate = DISMEMBER_METHOD_EDGE, var/ignore_children, var/silent, var/ignore_last_organ)
 
 	if(!(limb_flags & ORGAN_FLAG_CAN_AMPUTATE) || !owner)
 		return
@@ -1019,28 +1020,26 @@ Note that amputating the affected organ does in fact remove the infection from t
 			"<span class='moderate'><b>[organ_msgs[2]]</b></span>", \
 			"<span class='danger'>[organ_msgs[3]]</span>")
 
-	var/mob/living/carbon/human/victim = owner //Keep a reference for post-removed().
-	var/obj/item/organ/external/original_parent = parent
-
 	add_pain(60)
 	if(!clean)
-		victim.shock_stage += min_broken_damage
+		owner.shock_stage += min_broken_damage
 
-	var/mob/living/carbon/human/last_owner = owner
-	owner.remove_organ(src, TRUE, FALSE, ignore_children)
-	var/remaining_organs = last_owner.get_external_organs()
-	if(istype(last_owner) && !QDELETED(last_owner) && LAZYLEN(remaining_organs) <= 1)
-
-		for(var/obj/item/organ/external/organ in remaining_organs)
-			last_owner.remove_organ(organ, TRUE, TRUE, update_icon = FALSE)
-			if(organ.place_remains_from_dismember_method(disintegrate))
-				qdel(organ)
-
-		last_owner.dump_contents()
-		qdel(last_owner)
-
-	if(QDELETED(src))
-		return
+	var/obj/item/organ/external/original_parent = parent
+	var/mob/living/carbon/human/victim = owner //Keep a reference for post-removed().
+	owner.remove_organ(src, TRUE, FALSE, ignore_children, update_icon = FALSE)
+	var/remaining_organs = victim.get_external_organs()
+	if(istype(victim) && !QDELETED(victim))
+		// If they are down to their last organ, just spawn the organ and delete them.
+		if(!ignore_last_organ && LAZYLEN(remaining_organs) == 1)
+			for(var/obj/item/organ/external/organ in remaining_organs)
+				victim.remove_organ(organ, TRUE, TRUE, update_icon = FALSE)
+				if(organ.place_remains_from_dismember_method(disintegrate))
+					qdel(organ)
+			victim.dump_contents()
+			qdel(victim)
+		else // We deliberately skip queuing this via remove_organ() above due to potentially immediately deleting the mob.
+			victim.regenerate_body_icon = TRUE
+			victim.queue_icon_update()
 
 	if(original_parent)
 
@@ -1054,10 +1053,9 @@ Note that amputating the affected organ does in fact remove the infection from t
 		LAZYADD(original_parent.wounds, W)
 		original_parent.update_damages()
 
-	if(!QDELETED(victim))
-		victim.updatehealth()
-		victim.UpdateDamageIcon()
-		victim.refresh_visible_overlays()
+	if(QDELETED(src))
+		return
+
 	set_dir(SOUTH, TRUE)
 
 	// Edged attacks cause the limb to sail off in an arc.

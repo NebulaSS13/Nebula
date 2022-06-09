@@ -1003,7 +1003,6 @@
 
 /mob/physically_destroyed(var/skip_qdel)
 	SHOULD_CALL_PARENT(FALSE)
-	dump_contents()
 	gib()
 
 /mob/explosion_act()

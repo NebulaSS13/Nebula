@@ -38,6 +38,8 @@
 		owner = null
 	else
 		do_uninstall(TRUE, FALSE, FALSE, FALSE) //Don't ignore children here since we might own/contain them
+	species = null
+	bodytype = null
 	QDEL_NULL(dna)
 	QDEL_NULL_LIST(ailments)
 	return ..()

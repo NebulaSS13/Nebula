@@ -347,15 +347,15 @@ var/global/list/damage_icon_parts = list()
 	var/obj/item/organ/internal/eyes/eyes = get_organ(species.vision_organ || BP_EYES)
 	icon_key += istype(eyes) ? eyes.eye_colour : COLOR_BLACK
 
-	for(var/organ_tag in species.has_limbs) // This means non-species limb slots won't draw, todo
+	for(var/organ_tag in global.all_limb_tags)
 		var/obj/item/organ/external/part = get_organ(organ_tag)
-		if(isnull(part) || part.organ_tag == BP_TAIL)
+		if(isnull(part) || part.skip_body_icon_draw)
 			icon_key += "0"
 			continue
 		for(var/M in part.markings)
 			icon_key += "[M][part.markings[M]]"
 		if(part)
-			icon_key += "[part.bodytype?.get_icon_cache_uid(part.owner)][part.render_alpha]"
+			icon_key += "[part.bodytype.get_icon_cache_uid(part.owner)][part.render_alpha]"
 			icon_key += "[part.skin_tone]"
 			if(part.skin_colour)
 				icon_key += "[part.skin_colour]"

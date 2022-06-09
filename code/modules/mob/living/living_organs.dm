@@ -41,8 +41,7 @@
 		if(client)
 			client.screen -= O
 
-		if(!in_place)
-			updatehealth()
+		updatehealth()
 
 		if(drop_organ)
 			var/drop_loc = get_turf(src)

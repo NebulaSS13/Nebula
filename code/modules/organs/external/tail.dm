@@ -13,6 +13,7 @@
 	artery_name = "vein"
 	arterial_bleed_severity = 0.3
 	limb_flags = ORGAN_FLAG_CAN_AMPUTATE | ORGAN_FLAG_CAN_BREAK | ORGAN_FLAG_CAN_DISLOCATE
+	skip_body_icon_draw = TRUE
 
 	var/tail                                  // Name of tail state in species effects icon file.
 	var/tail_animation                        // If set, the icon to obtain tail animation states from.

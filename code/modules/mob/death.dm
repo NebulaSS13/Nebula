@@ -8,13 +8,15 @@
 	set_invisibility(101)
 	UpdateLyingBuckledAndVerbStatus()
 	remove_from_dead_mob_list()
+	dump_contents()
 
 	var/atom/movable/overlay/animation = new(src)
 	animation.icon_state = "blank"
 	animation.icon = 'icons/mob/mob.dmi'
 
 	flick(anim, animation)
-	if(do_gibs) gibs(loc, dna)
+	if(do_gibs)
+		gibs(loc, dna)
 
 	QDEL_IN(animation, 15)
 	QDEL_IN(src, 15)
@@ -56,7 +58,8 @@
 	adjust_stamina(-100)
 	reset_plane_and_layer()
 	UpdateLyingBuckledAndVerbStatus()
-	clear_status_effects()
+	if(!gibbed)
+		clear_status_effects()
 
 	set_sight(sight|SEE_TURFS|SEE_MOBS|SEE_OBJS)
 	set_see_in_dark(8)

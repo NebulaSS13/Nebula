@@ -35,6 +35,7 @@
 
 /mob/living/carbon/human/Destroy()
 	global.human_mob_list -= src
+	regenerate_body_icon = FALSE // don't bother regenerating if we happen to be queued to update icon
 	worn_underwear = null
 	QDEL_NULL(attack_selector)
 	QDEL_NULL(vessel)
