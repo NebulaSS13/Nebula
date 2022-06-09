@@ -386,7 +386,7 @@
 		if(MEDBOT_PANIC_ENDING)
 			messagevoice = list("Is this the end?" = 'sound/voice/medbot/is_this_the_end.ogg', "Nooo!" = 'sound/voice/medbot/nooo.ogg')
 		if(MEDBOT_PANIC_END)
-			broadcast_medical_hud_message("PSYCH ALERT: Crewmember [tipper_name] recorded displaying antisocial tendencies torturing bots in [get_area(src).proper_name]. Please schedule psych evaluation.", src)
+			broadcast_medical_hud_message("PSYCH ALERT: Crewmember [tipper_name] recorded displaying antisocial tendencies torturing bots in [get_area_name(src)]. Please schedule psych evaluation.", src)
 			set_right() // strong independent medbot
 
 	if(messagevoice && vocal)

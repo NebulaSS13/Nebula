@@ -21,7 +21,11 @@
 	var/turf/loc = get_turf(O)
 	return loc?.loc
 
-/proc/get_area_name(N) //get area by its name
+/proc/get_area_name(O) //get area's proper name
+	var/area/A = get_area(O)
+	return A.proper_name
+
+/proc/get_area_by_name(N) //get area by its name
 	for(var/area/A in global.areas)
 		if(A.proper_name == N)
 			return A

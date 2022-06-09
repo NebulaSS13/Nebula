@@ -53,7 +53,7 @@
 		unwrenched = !unwrenched
 		visible_message(SPAN_NOTICE("\The [user] wrenches \the [src]'s tap [unwrenched ? "open" : "shut"]."))
 		if(unwrenched)
-			log_and_message_admins("opened a tank at [get_area(loc).proper_name].")
+			log_and_message_admins("opened a tank at [get_area_name(loc)].")
 			START_PROCESSING(SSprocessing, src)
 		else
 			STOP_PROCESSING(SSprocessing, src)

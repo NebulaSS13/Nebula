@@ -417,7 +417,7 @@
 /obj/item/integrated_circuit/input/turfscan/do_work()
 	var/turf/scanned_turf = get_pin_data_as_type(IC_INPUT, 1, /turf)
 	var/turf/circuit_turf = get_turf(src)
-	var/area_name = get_area(scanned_turf).proper_name
+	var/area_name = get_area_name(scanned_turf)
 	if(!istype(scanned_turf)) //Invalid input
 		activate_pin(3)
 		return
