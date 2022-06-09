@@ -12,7 +12,7 @@ var/global/repository/area/area_repository = new()
 	..()
 
 /repository/area/proc/get_areas_by_name(var/list/area_predicates = /proc/is_not_space_area)
-	return priv_get_cached_areas(by_name_cache_data, /proc/group_areas_by_z_level, area_predicates, /proc/get_area_name)
+	return priv_get_cached_areas(by_name_cache_data, /proc/group_areas_by_z_level, area_predicates, /proc/get_area_proper_name)
 
 /repository/area/proc/get_areas_by_name_and_coords(var/list/area_predicates = /proc/is_not_space_area)
 	return priv_get_cached_areas(by_name_coords_cache_data, /proc/group_areas_by_z_level, area_predicates, /proc/get_area_proper_name_and_coordinates)
