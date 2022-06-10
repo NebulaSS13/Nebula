@@ -19,8 +19,22 @@
 		cut_overlays()
 		icon_state = icon_state_closed
 
-/obj/item/modular_computer/laptop/get_alt_interactions(var/mob/user)
-	. = ..() | /decl/interaction_handler/laptop_open
-
 /obj/item/modular_computer/laptop/preset
 	anchored = FALSE
+
+/obj/item/modular_computer/laptop/get_alt_interactions(var/mob/user)
+	. = ..()
+	LAZYADD(., /decl/interaction_handler/laptop_open)
+
+/decl/interaction_handler/laptop_open
+	name = "Open Laptop"
+	expected_target_type = /obj/item/modular_computer/laptop
+	interaction_flags = INTERACTION_NEEDS_PHYSICAL_INTERACTION | INTERACTION_NEEDS_TURF
+
+/decl/interaction_handler/laptop_open/invoked(atom/target, mob/user, obj/item/prop)
+	var/obj/item/modular_computer/laptop/L = target
+	L.anchored = !L.anchored
+	var/datum/extension/assembly/modular_computer/assembly = get_extension(L, L.computer_type)
+	if(assembly)
+		assembly.screen_on = L.anchored
+	L.update_icon()

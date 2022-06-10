@@ -119,9 +119,6 @@
 		/decl/material/liquid/mutagenics =  15
 	)
 
-/obj/machinery/portable_atmospherics/hydroponics/get_alt_interactions(var/mob/user)
-	. = ..() | /decl/interaction_handler/hydroponics_close_lid
-
 /obj/machinery/portable_atmospherics/hydroponics/attack_ghost(var/mob/observer/ghost/user)
 	if(!(harvest && seed && ispath(seed.product_type, /mob)))
 		return
@@ -631,3 +628,21 @@
 		harvest()
 	return TRUE
 
+
+/obj/machinery/portable_atmospherics/hydroponics/get_alt_interactions(var/mob/user)
+	. = ..()
+	LAZYADD(., /decl/interaction_handler/hydroponics_close_lid)
+
+/decl/interaction_handler/hydroponics_close_lid
+	name = "Open/Close Lid"
+	expected_target_type = /obj/machinery/portable_atmospherics/hydroponics
+
+/decl/interaction_handler/hydroponics_close_lid/is_possible(var/atom/target, var/mob/user)
+	. = ..()
+	if(.)
+		var/obj/machinery/portable_atmospherics/hydroponics/T = target
+		return T.mechanical
+
+/decl/interaction_handler/hydroponics_close_lid/invoked(var/atom/target, var/mob/user)
+	var/obj/machinery/portable_atmospherics/hydroponics/T = target
+	T.close_lid(user)

@@ -12,9 +12,6 @@
 	. = ..()
 	has_extinguisher = new/obj/item/extinguisher(src)
 
-/obj/structure/extinguisher_cabinet/get_alt_interactions(var/mob/user)
-	. = ..() | /decl/interaction_handler/extinguisher_cabinet_open
-
 /obj/structure/extinguisher_cabinet/attackby(obj/item/O, mob/user)
 	if(isrobot(user))
 		return
@@ -71,3 +68,16 @@
 		opened = !opened
 	update_icon()
 	return TRUE
+
+/obj/structure/extinguisher_cabinet/get_alt_interactions(var/mob/user)
+	. = ..()
+	LAZYADD(., /decl/interaction_handler/extinguisher_cabinet_open)
+
+/decl/interaction_handler/extinguisher_cabinet_open
+	name = "Open/Close"
+	expected_target_type = /obj/structure/extinguisher_cabinet
+
+/decl/interaction_handler/extinguisher_cabinet_open/invoked(var/atom/target, var/mob/user)
+	var/obj/structure/extinguisher_cabinet/C = target
+	C.opened = !C.opened
+	C.update_icon()

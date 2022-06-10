@@ -1,8 +1,3 @@
-#define INTERACTION_NEEDS_ADJACENCY            BITFLAG(0)
-#define INTERACTION_NEEDS_PHYSICAL_INTERACTION BITFLAG(1)
-#define INTERACTION_NEEDS_TURF                 BITFLAG(2)
-#define INTERACTION_NEEDS_INVENTORY            BITFLAG(3)
-
 /decl/interaction_handler
 	abstract_type = /decl/interaction_handler
 	var/name
@@ -13,7 +8,7 @@
 	var/interaction_flags = INTERACTION_NEEDS_PHYSICAL_INTERACTION
 	var/incapacitation_flags
 
-/decl/interaction_handler/proc/is_possible(var/atom/target, var/mob/user)
+/decl/interaction_handler/proc/is_possible(var/atom/target, var/mob/user, var/obj/item/prop)
 
 	SHOULD_CALL_PARENT(TRUE)
 

@@ -19,9 +19,6 @@
 	QDEL_NULL(loaded_tank)
 	. = ..()
 
-/obj/structure/sealant_injector/get_alt_interactions(var/mob/user)
-	. = ..() | /decl/interaction_handler/sealant_try_inject
-
 /obj/structure/sealant_injector/on_update_icon()
 	..()
 	if(loaded_tank)
@@ -98,3 +95,15 @@
 		return TRUE
 
 	. = ..()
+
+/obj/structure/sealant_injector/get_alt_interactions(var/mob/user)
+	. = ..()
+	LAZYADD(., /decl/interaction_handler/sealant_try_inject)
+
+/decl/interaction_handler/sealant_try_inject
+	name = "Inject Sealant"
+	expected_target_type = /obj/structure/sealant_injector
+
+/decl/interaction_handler/sealant_try_inject/invoked(var/atom/target, var/mob/user)
+	var/obj/structure/sealant_injector/SI = target
+	SI.try_inject(user)

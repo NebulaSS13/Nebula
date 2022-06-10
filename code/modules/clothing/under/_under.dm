@@ -40,10 +40,8 @@
 	var/rolled_down = FALSE
 	var/rolled_sleeves = FALSE
 
-/obj/item/clothing/under/get_alt_interactions(var/mob/user)
-	. = ..() | /decl/interaction_handler/clothing_set_sensors
-
 /obj/item/clothing/under/Initialize()
+	sensor_mode = pick(0,1,2,3)
 	. = ..()
 	if(check_state_in_icon("[BODYTYPE_HUMANOID]-[slot_w_uniform_str]-rolled", icon))
 		verbs |= /obj/item/clothing/under/proc/roll_down_clothes
@@ -178,6 +176,14 @@
 	set src in usr
 	set_sensors(usr)
 
-/obj/item/clothing/under/Initialize()
-	sensor_mode = pick(0,1,2,3)
+/decl/interaction_handler/clothing_set_sensors
+	name = "Set Sensors Level"
+	expected_target_type = /obj/item/clothing/under
+
+/decl/interaction_handler/clothing_set_sensors/invoked(var/atom/target, var/mob/user)
+	var/obj/item/clothing/under/U = target
+	U.set_sensors(user)
+
+/obj/item/clothing/under/get_alt_interactions(var/mob/user)
 	. = ..()
+	LAZYADD(., /decl/interaction_handler/clothing_set_sensors)

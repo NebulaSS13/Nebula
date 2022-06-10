@@ -56,9 +56,6 @@ Thus, the two variables affect pump operation are set in New():
 	construct_state = /decl/machine_construction/default/panel_closed/item_chassis
 	base_type = /obj/machinery/atmospherics/binary/pump/buildable
 
-/obj/machinery/atmospherics/binary/pump/get_alt_interactions(var/mob/user)
-	. = ..() | /decl/interaction_handler/binary_pump_toggle
-
 /obj/machinery/atmospherics/binary/pump/buildable
 	uncreated_component_parts = null
 
@@ -208,3 +205,15 @@ Thus, the two variables affect pump operation are set in New():
 		"set_power" = /decl/public_access/public_variable/use_power,
 		"set_output_pressure" = /decl/public_access/public_variable/pump_target_output
 	)
+
+/obj/machinery/atmospherics/binary/pump/get_alt_interactions(var/mob/user)
+	. = ..()
+	LAZYADD(., /decl/interaction_handler/binary_pump_toggle)
+
+/decl/interaction_handler/binary_pump_toggle
+	name = "Switch On/Off"
+	expected_target_type = /obj/machinery/atmospherics/binary/pump
+
+/decl/interaction_handler/binary_pump_toggle/invoked(atom/target, mob/user, obj/item/prop)
+	var/obj/machinery/atmospherics/binary/pump/P = target
+	P.update_use_power(!P.use_power)

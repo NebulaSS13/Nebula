@@ -34,9 +34,6 @@
 		QDEL_NULL(storage_ui)
 	. = ..()
 
-/obj/item/storage/get_alt_interactions(mob/user)
-	. = ..() | /decl/interaction_handler/storage_open
-
 /obj/item/storage/check_mousedrop_adjacency(var/atom/over, var/mob/user)
 	. = (loc == user && istype(over, /obj/screen)) || ..()
 
@@ -460,3 +457,22 @@
 /obj/item/proc/get_storage_cost()
 	//If you want to prevent stuff above a certain w_class from being stored, use max_w_class
 	return BASE_STORAGE_COST(w_class)
+
+/obj/item/storage/get_alt_interactions(mob/user)
+	. = ..()
+	LAZYADD(., /decl/interaction_handler/storage_open)
+
+/decl/interaction_handler/storage_open
+	name = "Open Storage"
+	expected_target_type = /obj/item/storage
+	incapacitation_flags = INCAPACITATION_DISRUPTED
+
+/decl/interaction_handler/storage_open/is_possible(atom/target, mob/user, obj/item/prop)
+	. = ..() && (ishuman(user) || isrobot(user) || issmall(user))
+	if(.)
+		var/obj/item/storage/S = target
+		. = S.canremove
+
+/decl/interaction_handler/storage_open/invoked(atom/target, mob/user, obj/item/prop)
+	var/obj/item/storage/S = target
+	S.open(user)

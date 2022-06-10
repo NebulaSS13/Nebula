@@ -13,9 +13,6 @@
 	. = ..()
 	set_extension(src, /datum/extension/network_device, initial_network_id, initial_network_key, NETWORK_CONNECTION_STRONG_WIRELESS)
 
-/obj/machinery/computer/design_console/get_alt_interactions(var/mob/user)
-	. = ..() | /decl/interaction_handler/remove_disk/console
-
 /obj/machinery/computer/design_console/modify_mapped_vars(map_hash)
 	..()
 	ADJUST_TAG_VAR(initial_network_id, map_hash)
@@ -222,3 +219,20 @@
 	var/list/techs = get_network_tech_levels()
 	for(var/obj/machinery/fabricator/fab in network.get_devices_by_type(/obj/machinery/fabricator))
 		fab.refresh_design_cache(techs)
+
+/obj/machinery/computer/design_console/get_alt_interactions(var/mob/user)
+	. = ..()
+	LAZYADD(., /decl/interaction_handler/remove_disk/console)
+
+/decl/interaction_handler/remove_disk/console
+	expected_target_type = /obj/machinery/computer/design_console
+
+/decl/interaction_handler/remove_disk/console/is_possible(atom/target, mob/user, obj/item/prop)
+	. = ..()
+	if(.)
+		var/obj/machinery/computer/design_console/D = target
+		. = !!D.disk
+
+/decl/interaction_handler/remove_disk/console/invoked(atom/target, mob/user, obj/item/prop)
+	var/obj/machinery/computer/design_console/D = target
+	D.eject_disk(user)
