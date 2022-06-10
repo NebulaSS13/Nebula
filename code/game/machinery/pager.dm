@@ -6,7 +6,7 @@
 	anchored = TRUE
 	density = FALSE
 	idle_power_usage = 2
-	var/location
+	var/area/location
 	var/last_paged
 	var/acknowledged = FALSE
 	var/department
@@ -16,8 +16,7 @@
 	if(!department)
 		department = SSjobs.departments_by_type[1]
 	if(!location)
-		var/area/A = get_area(src)
-		location = A.name
+		location = get_area(src)
 
 /obj/machinery/network/pager/attackby(obj/item/W, mob/user)
 	return attack_hand(user)
@@ -39,7 +38,7 @@
 	if(world.time < last_paged + 5 SECONDS)
 		return
 	last_paged = world.time
-	var/paged = MS.send_to_department(department,"Department page to <b>[location]</b> received. <a href='?src=\ref[src];ack=1'>Take</a>", "*page*")
+	var/paged = MS.send_to_department(department,"Department page to <b>[location.proper_name]</b> received. <a href='?src=\ref[src];ack=1'>Take</a>", "*page*")
 	acknowledged = 0
 	if(paged)
 		playsound(src, 'sound/machines/ping.ogg', 60)
@@ -59,4 +58,4 @@
 		var/obj/machinery/network/message_server/MS = get_message_server(z)
 		if(!MS)
 			return
-		MS.send_to_department(department,"Page to <b>[location]</b> was acknowledged.", "*ack*")
+		MS.send_to_department(department,"Page to <b>[location.proper_name]</b> was acknowledged.", "*ack*")

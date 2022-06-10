@@ -18,7 +18,7 @@
 			//make vine zero start off fully matured
 			new /obj/effect/vine(T, seed, null, 1)
 
-			log_and_message_admins("Spacevines spawned in \the [get_area(T)]", location = T)
+			log_and_message_admins("Spacevines spawned in \the [get_area_name(T)]", location = T)
 			return
 		log_and_message_admins("<span class='notice'>Event: Spacevines failed to find a viable turf.</span>")
 

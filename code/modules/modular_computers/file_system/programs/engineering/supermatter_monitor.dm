@@ -168,7 +168,7 @@
 				continue
 
 			SMS.Add(list(list(
-			"area_name" = A.name,
+			"area_name" = A.proper_name,
 			"integrity" = process_data_output(engine_skill, S.get_integrity()),
 			"uid" = S.uid
 			)))

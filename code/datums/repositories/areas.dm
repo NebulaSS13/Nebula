@@ -12,13 +12,13 @@ var/global/repository/area/area_repository = new()
 	..()
 
 /repository/area/proc/get_areas_by_name(var/list/area_predicates = /proc/is_not_space_area)
-	return priv_get_cached_areas(by_name_cache_data, /proc/group_areas_by_z_level, area_predicates, /proc/get_name)
+	return priv_get_cached_areas(by_name_cache_data, /proc/group_areas_by_z_level, area_predicates, /proc/get_area_proper_name)
 
 /repository/area/proc/get_areas_by_name_and_coords(var/list/area_predicates = /proc/is_not_space_area)
-	return priv_get_cached_areas(by_name_coords_cache_data, /proc/group_areas_by_z_level, area_predicates, /proc/get_name_and_coordinates)
+	return priv_get_cached_areas(by_name_coords_cache_data, /proc/group_areas_by_z_level, area_predicates, /proc/get_area_proper_name_and_coordinates)
 
 /repository/area/proc/get_areas_by_z_level(var/list/area_predicates = /proc/is_not_space_area)
-	return priv_get_cached_areas(by_z_level_cache_data, /proc/group_areas_by_z_level, area_predicates, /proc/get_name_and_coordinates)
+	return priv_get_cached_areas(by_z_level_cache_data, /proc/group_areas_by_z_level, area_predicates, /proc/get_area_proper_name_and_coordinates)
 
 /repository/area/proc/priv_get_cached_areas(var/list/area_cache, var/area_group_proc, var/list/area_predicates, var/naming_proc)
 	. = get_cache_entry(area_cache, area_predicates)

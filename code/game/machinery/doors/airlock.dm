@@ -1094,7 +1094,7 @@ About the new airlock wires panel:
 
 /obj/machinery/door/airlock/autoname/Initialize()
 	var/area/A = get_area(src)
-	name = A.name
+	name = A.proper_name
 	. = ..()
 
 /obj/machinery/door/airlock/proc/paint_airlock(var/paint_color)

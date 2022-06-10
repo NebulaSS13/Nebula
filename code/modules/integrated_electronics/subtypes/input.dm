@@ -1031,9 +1031,9 @@
 	power_draw_per_use = 40
 	var/list/mtypes = list(
 		/decl/material/solid/metal/steel,
-		/decl/material/solid/metal/silver, 
-		/decl/material/solid/metal/gold, 
-		/decl/material/solid/gemstone/diamond, 
+		/decl/material/solid/metal/silver,
+		/decl/material/solid/metal/gold,
+		/decl/material/solid/gemstone/diamond,
 		/decl/material/solid/metal/uranium,
 		/decl/material/solid/metal/plasteel,
 		/decl/material/solid/metal/titanium,

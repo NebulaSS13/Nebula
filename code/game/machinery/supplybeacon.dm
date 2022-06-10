@@ -79,7 +79,7 @@
 	icon_state = "beacon_active"
 	activated = TRUE
 	START_PROCESSING(SSobj, src)
-	admin_attacker_log(user, "has activated \a [src] at [get_area(src)]")
+	admin_attacker_log(user, "has activated \a [src] at [get_area_name(src)]")
 	if(user)
 		to_chat(user, SPAN_NOTICE("You activate \the [src]. The supply drop will be dispatched soon."))
 

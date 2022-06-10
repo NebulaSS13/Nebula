@@ -122,7 +122,7 @@
 		var/area/A = get_area(T)
 
 		if(istype(T) && istype(A) && (T.z in global.using_map.contact_levels))
-			robot["location"] = "[A.name] ([T.x], [T.y])"
+			robot["location"] = "[A.proper_name] ([T.x], [T.y])"
 		else
 			robot["location"] = "Unknown"
 

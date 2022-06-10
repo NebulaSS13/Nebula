@@ -217,3 +217,9 @@ var/global/syndicate_code_response//Code response for traitors.
 
 /proc/get_name_and_coordinates(var/atom/A)
 	return "[A.name] \[[A.x],[A.y],[A.z]\]"
+
+/proc/get_area_proper_name(var/area/A)
+	return A.proper_name
+
+/proc/get_area_proper_name_and_coordinates(var/area/A)
+	return "[A.proper_name] \[[A.x],[A.y],[A.z]\]"

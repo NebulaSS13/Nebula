@@ -37,7 +37,7 @@
 		connected_area = get_area(src)
 
 	if(connected_area && name == initial(name))
-		SetName("light switch ([connected_area.name])")
+		SetName("light switch ([connected_area.proper_name])")
 	return INITIALIZE_HINT_LATELOAD
 
 /obj/machinery/light_switch/LateInitialize()
