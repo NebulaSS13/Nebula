@@ -39,7 +39,7 @@
 		ambient_b = (HEX_BLUE(ambient_light) / 255) * ambient_light_multiplier
 
 	if (!corners || (null in corners))
-		generate_missing_corners()
+		lighting_build_overlay()
 
 	for (var/thing in corners)
 		var/datum/lighting_corner/C = thing
