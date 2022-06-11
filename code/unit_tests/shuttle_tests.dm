@@ -52,7 +52,7 @@
 	var/list/failures = list()
 
 	for(var/template_name in SSmapping.map_templates)
-		var/datum/map_template/template = SSmapping.map_templates[template_name]
+		var/datum/map_template/template = SSmapping.get_template(template_name)
 		if((template.template_flags & (TEMPLATE_FLAG_ALLOW_DUPLICATES | TEMPLATE_FLAG_TEST_DUPLICATES)) && !template.modify_tag_vars)
 			failures += template_name
 	if (length(failures))

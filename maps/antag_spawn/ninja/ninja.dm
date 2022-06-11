@@ -1,6 +1,5 @@
 /datum/map_template/ruin/antag_spawn/ninja
 	name = "Ninja Base"
-	id = "ninja_spawn"
 	suffixes = list("ninja/ninja_base.dmm")
 	modify_tag_vars = FALSE
 	shuttles_to_initialise = list(/datum/shuttle/autodock/multi/antag/ninja)

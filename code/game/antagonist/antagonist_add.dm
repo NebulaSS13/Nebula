@@ -2,14 +2,15 @@
 	if(!base_to_load)
 		return TRUE
 	. = FALSE
-	if(ispath(base_to_load))
+	if(base_to_load)
 		var/datum/map_template/base = base_to_load
 		base_to_load = null
-		if(SSmapping.map_templates[initial(base.name)])
-			base = SSmapping.map_templates[initial(base.name)]
-		if(!base)
-			base = new base()
-		else if(base.loaded > 0)
+		if(istext(base))
+			base = SSmapping.get_template(base)
+		if(!istype(base))
+			PRINT_STACK_TRACE("Map template '[base]' could not be found for [name].")
+			return FALSE
+		if(base.loaded > 0)
 			report_progress("Map template '[base]' is already loaded, skipping additional load for [name].")
 			return TRUE
 		report_progress("Loading map template '[base]' for [name].")

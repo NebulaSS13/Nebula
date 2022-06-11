@@ -1,6 +1,5 @@
 /datum/map_template/ruin/exoplanet/ec_old_crash
 	name = "Expeditionary Ship"
-	id = "ec_old_wreck"
 	description = "An abandoned ancient STL exploration ship."
 	prefix = "mods/content/government/ruins/"
 	suffixes = list("ec_old_crash/ec_old_crash.dmm")

@@ -6,7 +6,6 @@
 // Map template data.
 /datum/map_template/ruin/away_site/liberia
 	name = "Liberia"
-	id = "awaysite_liberia"
 	description = "A Merchant ship."
 	suffixes = list("liberia/liberia.dmm")
 	cost = 0.5

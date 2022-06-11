@@ -11,7 +11,6 @@
 
 /datum/map_template/ruin/away_site/smugglers
 	name = "Smugglers' Base"
-	id = "awaysite_smugglers"
 	description = "Yarr."
 	suffixes = list("smugglers/smugglers.dmm")
 	cost = 1

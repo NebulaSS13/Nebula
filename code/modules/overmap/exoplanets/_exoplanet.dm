@@ -205,14 +205,16 @@
 				new map_type(x_origin, y_origin, zlevel, x_size, y_size, FALSE, TRUE, planetary_area)
 
 /obj/effect/overmap/visitable/sector/exoplanet/proc/generate_features()
-	for(var/T in subtypesof(/datum/map_template/ruin/exoplanet))
-		var/datum/map_template/ruin/exoplanet/ruin = T
-		if(ruin_tags_whitelist && !(ruin_tags_whitelist & initial(ruin.ruin_tags)))
+	var/list/ruins = SSmapping.get_templates_by_category(MAP_TEMPLATE_CATEGORY_EXOPLANET)
+	for(var/ruin_name in ruins)
+		var/datum/map_template/ruin = ruins[ruin_name]
+		var/ruin_tags = ruin.get_ruin_tags()
+		if(ruin_tags_whitelist && !(ruin_tags_whitelist & ruin_tags))
 			continue
-		if(ruin_tags_blacklist & initial(ruin.ruin_tags))
+		if(ruin_tags_blacklist & ruin_tags)
 			continue
-		possible_features += new ruin
-	spawned_features = seedRuins(map_z, features_budget, /area/exoplanet, possible_features, maxx, maxy)
+		possible_features += ruin
+	spawned_features = seed_ruins(map_z, features_budget, /area/exoplanet, possible_features, maxx, maxy)
 
 /obj/effect/overmap/visitable/sector/exoplanet/proc/generate_daycycle()
 	if(lightlevel)
@@ -278,8 +280,8 @@
 
 	if(LAZYLEN(spawned_features) && user.skill_check(SKILL_SCIENCE, SKILL_ADEPT))
 		var/ruin_num = 0
-		for(var/datum/map_template/ruin/exoplanet/R in spawned_features)
-			if(!(R.ruin_tags & RUIN_NATURAL))
+		for(var/datum/map_template/R in spawned_features)
+			if(!(R.get_ruin_tags() & RUIN_NATURAL))
 				ruin_num++
 		if(ruin_num)
 			extra_data += "<br>[ruin_num] possible artificial structure\s detected."

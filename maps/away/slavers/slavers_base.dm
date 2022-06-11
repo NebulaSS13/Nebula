@@ -17,7 +17,6 @@
 
 /datum/map_template/ruin/away_site/slavers
 	name = "Slavers' Base"
-	id = "awaysite_slavers"
 	description = "Asteroid with slavers base inside."
 	suffixes = list("slavers/slavers_base.dmm")
 	cost = 1

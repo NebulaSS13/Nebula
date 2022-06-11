@@ -1,6 +1,5 @@
 /datum/map_template/ruin/antag_spawn/mercenary
 	name = "Mercenary Base"
-	id = "mercenary_spawn"
 	suffixes = list("mercenary/mercenary_base.dmm")
 	shuttles_to_initialise = list(/datum/shuttle/autodock/overmap/merc_shuttle)
 	template_flags = TEMPLATE_FLAG_TEST_DUPLICATES

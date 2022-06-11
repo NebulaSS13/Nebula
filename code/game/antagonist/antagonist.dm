@@ -86,8 +86,8 @@
 		Think through your actions and make the roleplay immersive! <b>Please remember all \
 		rules aside from those without explicit exceptions apply to antagonists.</b>"
 	
-	// Map template that antag needs to load before spawning. Nulled after it's loaded.
-	var/datum/map_template/base_to_load
+	// Map template name that antag needs to load before spawning. Nulled after it's loaded.
+	var/base_to_load
 
 /decl/special_role/Initialize()
 	. = ..()

@@ -16,7 +16,7 @@
 	id_type = /obj/item/card/id/syndicate
 
 	faction = "pirate"
-	base_to_load = /datum/map_template/ruin/antag_spawn/heist
+	base_to_load = "Heist Base"
 	default_outfit = /decl/hierarchy/outfit/raider
 	id_title = "Visitor"
 

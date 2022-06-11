@@ -21,7 +21,7 @@
 	initial_spawn_target = 7
 	show_objectives_on_creation = 0 //we are not antagonists, we do not need the antagonist shpiel/objectives
 
-	base_to_load = /datum/map_template/ruin/antag_spawn/ert
+	base_to_load = "ERT Base"
 
 /decl/special_role/ert/create_default(var/mob/source)
 	var/mob/living/carbon/human/M = ..()

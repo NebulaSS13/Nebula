@@ -13,7 +13,7 @@
 	min_player_age = 18
 
 	faction = "wizard"
-	base_to_load = /datum/map_template/ruin/antag_spawn/wizard
+	base_to_load = "Wizard Base"
 
 /decl/special_role/wizard/create_objectives(var/datum/mind/wizard)
 

@@ -1,6 +1,5 @@
 /datum/map_template
 	var/name = "Default Template Name"
-	var/id = null // All maps that should be loadable during runtime needs an id
 	var/width = 0
 	var/height = 0
 	var/tallness = 0
@@ -12,18 +11,26 @@
 	var/accessibility_weight = 0
 	var/template_flags = TEMPLATE_FLAG_ALLOW_DUPLICATES
 	var/modify_tag_vars = TRUE // Will modify tag vars so that duplicate templates are handled properly. May have compatibility issues with legacy maps (esp. with ferry shuttles).
+	var/list/template_categories // List of strings to store the templates under for mass retrieval.
+	var/template_parent_type = /datum/map_template // If this is equal to current type, the datum is abstract and should not be created.
 
-/datum/map_template/New(var/list/paths = null, var/rename = null)
-	if(paths && !islist(paths))
-		PRINT_STACK_TRACE("Non-list paths passed into map template constructor.")
-	if(paths)
-		mappaths = paths
-	if(mappaths)
-		preload_size(mappaths)
-	if(rename)
-		name = rename
-	if(!name && id)
-		name = id
+/datum/map_template/New(var/created_ad_hoc)
+	if(created_ad_hoc != SSmapping.type)
+		PRINT_STACK_TRACE("Ad hoc map template created ([type])!")
+
+/datum/map_template/proc/preload()
+	if(length(mappaths))
+		preload_size()
+	return TRUE
+
+/datum/map_template/proc/get_spawn_weight()
+	return 0
+
+/datum/map_template/proc/get_template_cost()
+	return 0
+
+/datum/map_template/proc/get_ruin_tags()
+	return 0
 
 /datum/map_template/proc/preload_size()
 	var/list/bounds = list(1.#INF, 1.#INF, 1.#INF, -1.#INF, -1.#INF, -1.#INF)
@@ -189,7 +196,9 @@
 /datum/map_template/proc/after_load(z)
 	for(var/obj/abstract/landmark/map_load_mark/mark as anything in subtemplates_to_spawn)
 		subtemplates_to_spawn -= mark
-		mark.load_template()
+		mark.load_subtemplate()
+		if(!QDELETED(mark))
+			qdel(mark)
 	subtemplates_to_spawn = null
 
 /datum/map_template/proc/extend_bounds_if_needed(var/list/existing_bounds, var/list/new_bounds)

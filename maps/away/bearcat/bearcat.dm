@@ -31,7 +31,6 @@
 
 /datum/map_template/ruin/away_site/bearcat_wreck
 	name = "Bearcat Wreck"
-	id = "awaysite_bearcat_wreck"
 	description = "A wrecked light freighter."
 	suffixes = list("bearcat/bearcat-1.dmm", "bearcat/bearcat-2.dmm")
 	cost = 1
