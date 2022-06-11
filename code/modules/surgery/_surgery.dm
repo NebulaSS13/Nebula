@@ -83,7 +83,7 @@ var/global/list/surgery_tool_exception_cache = list()
 
 /decl/surgery_step/proc/assess_bodypart(mob/living/user, mob/living/target, target_zone, obj/item/tool)
 	if(ishuman(target) && target_zone)
-		var/obj/item/organ/external/affected = target.get_organ(target_zone)
+		var/obj/item/organ/external/affected = GET_EXTERNAL_ORGAN(target, target_zone)
 		if(affected)
 			// Check various conditional flags.
 			if(((surgery_candidate_flags & SURGERY_NO_ROBOTIC) && BP_IS_PROSTHETIC(affected)) || \
@@ -122,7 +122,7 @@ var/global/list/surgery_tool_exception_cache = list()
 
 // does stuff to begin the step, usually just printing messages. Moved germs transfering and bloodying here too
 /decl/surgery_step/proc/begin_step(mob/living/user, mob/living/target, target_zone, obj/item/tool)
-	var/obj/item/organ/external/affected = target.get_organ(target_zone)
+	var/obj/item/organ/external/affected = GET_EXTERNAL_ORGAN(target, target_zone)
 	if (can_infect && affected)
 		spread_germs_to_organ(affected, user)
 	if(ishuman(user) && prob(60))
@@ -293,7 +293,7 @@ var/global/list/surgery_tool_exception_cache = list()
 	if(. != OPERATE_DENY && M == user)
 		var/hitzone = check_zone(user.zone_sel.selecting, M)
 		var/list/badzones = list(BP_HEAD)
-		var/obj/item/organ/external/E = M.get_organ(M.get_active_held_item_slot())
+		var/obj/item/organ/external/E = GET_EXTERNAL_ORGAN(M, M.get_active_held_item_slot())
 		if(E)
 			badzones |= E.organ_tag
 			badzones |= E.parent_organ

@@ -1,12 +1,12 @@
 /mob/living/carbon/human/proc/update_eyes()
-	var/obj/item/organ/internal/eyes/eyes = species?.vision_organ ? get_organ(species.vision_organ) : get_organ(BP_EYES)
+	var/obj/item/organ/internal/eyes/eyes = get_organ((species?.vision_organ || BP_EYES), /obj/item/organ/internal/eyes)
 	if(eyes)
 		eyes.update_colour()
 		refresh_visible_overlays()
 
 /mob/living/carbon/human/proc/get_bodypart_name(var/zone)
-	var/obj/item/organ/external/E = get_organ(zone)
-	if(E) . = E.name
+	var/obj/item/organ/external/E = GET_EXTERNAL_ORGAN(src, zone)
+	return E?.name
 
 /mob/living/carbon/human/proc/should_recheck_bad_external_organs()
 	var/damage_this_tick = getToxLoss()
@@ -94,7 +94,7 @@
 
 	var/limb_pain
 	for(var/limb_tag in list(BP_L_LEG, BP_R_LEG, BP_L_FOOT, BP_R_FOOT))
-		var/obj/item/organ/external/E = get_organ(limb_tag)
+		var/obj/item/organ/external/E = GET_EXTERNAL_ORGAN(src, limb_tag)
 		if(!E || !E.is_usable())
 			stance_damage += 2 // let it fail even if just foot&leg
 		else if (E.is_malfunctioning())
@@ -118,10 +118,10 @@
 
 	if(MOVING_DELIBERATELY(src)) //you don't suffer as much if you aren't trying to run
 		var/working_pair = 2
-		var/obj/item/organ/external/LF = get_organ(BP_L_FOOT)
-		var/obj/item/organ/external/LL = get_organ(BP_L_LEG)
-		var/obj/item/organ/external/RF = get_organ(BP_R_FOOT)
-		var/obj/item/organ/external/RL = get_organ(BP_R_LEG)
+		var/obj/item/organ/external/LF = GET_EXTERNAL_ORGAN(src, BP_L_FOOT)
+		var/obj/item/organ/external/LL = GET_EXTERNAL_ORGAN(src, BP_L_LEG)
+		var/obj/item/organ/external/RF = GET_EXTERNAL_ORGAN(src, BP_R_FOOT)
+		var/obj/item/organ/external/RL = GET_EXTERNAL_ORGAN(src, BP_R_LEG)
 		if(!LL || !LF) //are we down a limb?
 			working_pair -= 1
 		else if((!LL.is_usable()) || (!LF.is_usable())) //if not, is it usable?
@@ -157,7 +157,7 @@
 		var/datum/inventory_slot/inv_slot = held_item_slots[bp]
 		var/holding = inv_slot?.holding
 		if(holding)
-			var/obj/item/organ/external/E = get_organ(bp)
+			var/obj/item/organ/external/E = GET_EXTERNAL_ORGAN(src, bp)
 			if((!E || !E.is_usable() || E.is_parent_dislocated()) && unEquip(holding))
 				grasp_damage_disarm(inv_slot)
 
@@ -196,7 +196,7 @@
 	for(var/datum/inventory_slot/inv_slot in drop_held_item_slots)
 		if(!unEquip(inv_slot.holding))
 			continue
-		var/obj/item/organ/external/E = get_organ(inv_slot.slot_id)
+		var/obj/item/organ/external/E = GET_EXTERNAL_ORGAN(src, inv_slot.slot_id)
 		if(!E)
 			continue
 		if(E.is_robotic())
@@ -234,22 +234,21 @@
 
 /mob/living/carbon/human/is_asystole()
 	if(isSynthetic())
-		var/obj/item/organ/internal/cell/C = get_organ(BP_CELL)
-		if(istype(C))
-			if(!C.is_usable() || !C.percent())
-				return TRUE
+		var/obj/item/organ/internal/cell/C = get_organ(BP_CELL, /obj/item/organ/internal/cell)
+		if(!C || !C.is_usable() || !C.percent())
+			return TRUE
 	else if(should_have_organ(BP_HEART))
-		var/obj/item/organ/internal/heart/heart = get_organ(BP_HEART)
+		var/obj/item/organ/internal/heart/heart = get_organ(BP_HEART, /obj/item/organ/internal/heart)
 		if(!istype(heart) || !heart.is_working())
 			return TRUE
 	return FALSE
 
 /mob/living/carbon/human/proc/is_lung_ruptured()
-	var/obj/item/organ/internal/lungs/L = get_organ(BP_LUNGS)
+	var/obj/item/organ/internal/L = GET_INTERNAL_ORGAN(src, BP_LUNGS)
 	return L && L.is_bruised()
 
 /mob/living/carbon/human/proc/rupture_lung()
-	var/obj/item/organ/internal/lungs/L = get_organ(BP_LUNGS)
+	var/obj/item/organ/internal/lungs/L = get_organ(BP_LUNGS, /obj/item/organ/internal/lungs)
 	if(L)
 		L.rupture()
 

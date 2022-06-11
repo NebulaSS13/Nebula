@@ -88,12 +88,13 @@
 	if(ishuman(owner))
 		var/mob/living/carbon/human/pop = owner
 		if(pop.should_have_organ(BP_BRAIN))
-			var/obj/item/organ/internal/brain/sponge = pop.get_organ(BP_BRAIN)
+			var/obj/item/organ/internal/sponge = GET_INTERNAL_ORGAN(pop, BP_BRAIN)
 			if(sponge && sponge.damage >= sponge.max_damage)
-				var/obj/item/organ/external/affecting = pop.get_organ(sponge.parent_organ)
+				var/obj/item/organ/external/affecting = GET_EXTERNAL_ORGAN(pop, sponge.parent_organ)
 				if(affecting)
 					affecting.dismember(0, DISMEMBER_METHOD_BLUNT)
-					if(sponge) qdel(sponge)
+					if(sponge)
+						qdel(sponge)
 
 /datum/psi_complexus/proc/reset()
 	aura_color = initial(aura_color)

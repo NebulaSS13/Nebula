@@ -12,7 +12,7 @@
 /decl/material/liquid/eyedrops/affect_blood(var/mob/living/M, var/alien, var/removed, var/datum/reagents/holder)
 	if(ishuman(M))
 		var/mob/living/carbon/human/H = M
-		var/obj/item/organ/internal/eyes/E = H.get_organ(BP_EYES)
+		var/obj/item/organ/internal/E = GET_INTERNAL_ORGAN(H, BP_EYES)
 		if(E && istype(E) && !E.is_broken())
 			ADJ_STATUS(M, STAT_BLURRY, -5) 
 			ADJ_STATUS(M, STAT_BLIND, -5)
@@ -296,7 +296,7 @@
 		if(ishuman(M))
 			var/mob/living/carbon/human/H = M
 			if(H.resuscitate())
-				var/obj/item/organ/internal/heart = H.get_organ(BP_HEART)
+				var/obj/item/organ/internal/heart = GET_INTERNAL_ORGAN(H, BP_HEART)
 				heart.take_internal_damage(heart.max_damage * 0.15)
 
 /decl/material/liquid/stabilizer

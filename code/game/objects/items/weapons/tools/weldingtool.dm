@@ -314,7 +314,7 @@
 /obj/item/weldingtool/attack(mob/living/M, mob/living/user, target_zone)
 	if(ishuman(M))
 		var/mob/living/carbon/human/H = M
-		var/obj/item/organ/external/S = H.get_organ(target_zone)
+		var/obj/item/organ/external/S = GET_EXTERNAL_ORGAN(H, target_zone)
 
 		if(!S || !S.is_robotic() || user.a_intent != I_HELP)
 			return ..()

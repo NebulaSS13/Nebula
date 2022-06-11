@@ -361,7 +361,7 @@
 		else if(istype(user) && user.is_telekinetic())
 			to_chat(user, "You telekinetically remove the [get_fitting_name()].")
 		else if(user.a_intent != I_HELP)
-			var/obj/item/organ/external/hand = H.get_organ(user.get_active_held_item_slot())
+			var/obj/item/organ/external/hand = GET_EXTERNAL_ORGAN(H, user.get_active_held_item_slot())
 			if(hand && hand.is_usable() && !hand.can_feel_pain())
 				user.apply_damage(3, BURN, hand.organ_tag, used_weapon = src)
 				var/decl/pronouns/G = user.get_pronouns()

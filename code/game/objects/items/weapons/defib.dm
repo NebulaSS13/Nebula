@@ -269,11 +269,10 @@
 	return TRUE
 
 /obj/item/shockpaddles/proc/check_blood_level(mob/living/carbon/human/H)
-	if(!H.should_have_organ(BP_HEART))
-		return FALSE
-	var/obj/item/organ/internal/heart/heart = H.get_organ(BP_HEART)
-	if(!heart || H.get_blood_volume() < BLOOD_VOLUME_SURVIVE)
-		return TRUE
+	if(H.should_have_organ(BP_HEART))
+		var/obj/item/organ/internal/heart = GET_INTERNAL_ORGAN(H, BP_HEART)
+		if(!heart || H.get_blood_volume() < BLOOD_VOLUME_SURVIVE)
+			return TRUE
 	return FALSE
 
 /obj/item/shockpaddles/proc/check_charge(var/charge_amt)
@@ -335,7 +334,7 @@
 		make_announcement("buzzes, \"Warning - Patient is in hypovolemic shock and may require a blood transfusion.\"", "warning") //also includes heart damage
 
 	//People may need more direct instruction
-	var/obj/item/organ/internal/heart/heart = H.get_organ(BP_HEART)
+	var/obj/item/organ/internal/heart = GET_INTERNAL_ORGAN(H, BP_HEART)
 	if(heart?.is_bruised())
 		make_announcement("buzzes, \"Danger! The patient has sustained a cardiac contusion and will require surgical treatment for full recovery!\"", "danger")
 
@@ -367,8 +366,8 @@
 	make_announcement("pings, \"Resuscitation successful.\"", "notice")
 	playsound(get_turf(src), 'sound/machines/defib_success.ogg', 50, 0)
 	H.resuscitate()
-	var/obj/item/organ/internal/cell/potato = H.get_organ(BP_CELL)
-	if(istype(potato) && potato.cell)
+	var/obj/item/organ/internal/cell/potato = H.get_organ(BP_CELL, /obj/item/organ/internal/cell)
+	if(potato && potato.cell)
 		var/obj/item/cell/C = potato.cell
 		C.give(chargecost)
 
@@ -390,7 +389,7 @@
 	return 1
 
 /obj/item/shockpaddles/proc/do_electrocute(mob/living/carbon/human/H, mob/user, var/target_zone)
-	var/obj/item/organ/external/affecting = H.get_organ(check_zone(target_zone, H, TRUE)) //Shouldn't defib someone's eyes or mouth
+	var/obj/item/organ/external/affecting = GET_EXTERNAL_ORGAN(H, check_zone(target_zone, H, TRUE)) //Shouldn't defib someone's eyes or mouth
 	if(!affecting)
 		to_chat(user, SPAN_WARNING("They are missing that body part!"))
 		return
@@ -451,7 +450,7 @@
 
 	if(!H.should_have_organ(BP_BRAIN)) return //no brain
 
-	var/obj/item/organ/internal/brain/brain = H.get_organ(BP_BRAIN)
+	var/obj/item/organ/internal/brain = GET_INTERNAL_ORGAN(H, BP_BRAIN)
 	if(!brain) return //no brain
 
 	var/brain_damage = Clamp((deadtime - DEFIB_TIME_LOSS)/(DEFIB_TIME_LIMIT - DEFIB_TIME_LOSS)*brain.max_damage, H.getBrainLoss(), brain.max_damage)

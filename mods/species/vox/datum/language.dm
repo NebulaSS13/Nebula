@@ -16,7 +16,7 @@
 	if(!ishuman(speaker))
 		return FALSE
 	var/mob/living/carbon/human/H = speaker
-	var/obj/item/organ/internal/hindtongue/tongue = H.get_organ(BP_HINDTONGUE)
+	var/obj/item/organ/internal/tongue = GET_INTERNAL_ORGAN(H, BP_HINDTONGUE)
 	if(!istype(tongue) || !tongue.is_usable())
 		to_chat(speaker, SPAN_WARNING("You are not capable of speaking [name]!"))
 		return FALSE

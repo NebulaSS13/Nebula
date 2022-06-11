@@ -432,12 +432,12 @@
 		M.adjustToxLoss(2 * removed)
 	if(dose > 60 && ishuman(M) && prob(5))
 		var/mob/living/carbon/human/H = M
-		var/obj/item/organ/internal/heart/L = H.get_organ(BP_HEART)
-		if (L && istype(L))
+		var/obj/item/organ/internal/heart = GET_INTERNAL_ORGAN(H, BP_HEART)
+		if(heart)
 			if(dose < 120)
-				L.take_internal_damage(10 * removed, 0)
+				heart.take_internal_damage(10 * removed, 0)
 			else
-				L.take_internal_damage(100, 0)
+				heart.take_internal_damage(100, 0)
 
 /decl/material/liquid/ethanol/aged_whiskey // I have no idea what this is and where it comes from.  //It comes from Dinnlan now 
 	name = "aged whiskey"

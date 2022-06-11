@@ -202,7 +202,7 @@
 			if(process_projectile(P, user, user, pew_loc))
 				var/decl/pronouns/G = user.get_pronouns()
 				handle_post_fire(user, user)
-				var/obj/item/affecting = user.get_organ(pew_loc)
+				var/obj/item/affecting = GET_EXTERNAL_ORGAN(user, pew_loc)
 				pew_loc = affecting ? "\the [affecting]" : "the foot"
 				user.visible_message(
 					SPAN_DANGER("\The [user] shoots [G.self] in [pew_loc] with \the [src]!"),

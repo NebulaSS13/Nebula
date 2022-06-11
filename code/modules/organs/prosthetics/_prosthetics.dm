@@ -24,7 +24,7 @@
 	if(bodypart_cat == MODULAR_BODYPART_CYBERNETIC)
 		if(!parent_organ)
 			return FALSE
-		var/obj/item/organ/external/parent = user?.get_organ(parent_organ)
+		var/obj/item/organ/external/parent = user && GET_EXTERNAL_ORGAN(user, parent_organ)
 		if(!parent || parent.get_modular_limb_category(user) < MODULAR_BODYPART_CYBERNETIC)
 			return FALSE
 	. = (bodypart_cat != MODULAR_BODYPART_INVALID)
@@ -41,7 +41,7 @@
 		return FALSE
 	if(!parent_organ)
 		return FALSE
-	var/obj/item/organ/external/parent = user?.get_organ(parent_organ)
+	var/obj/item/organ/external/parent = user && GET_EXTERNAL_ORGAN(user, parent_organ)
 	if(!parent)
 		return FALSE
 	if(!parent.can_attach_modular_limb_here(user))
@@ -99,14 +99,13 @@
 	if(E.get_modular_limb_category() <= MODULAR_BODYPART_INVALID)
 		to_chat(src, SPAN_WARNING("\The [E] cannot be attached by your own hand."))
 		return FALSE
-	var/install_to_zone = E.organ_tag
-	if(!isnull(get_organ(install_to_zone)))
+	if(GET_EXTERNAL_ORGAN(src, E.organ_tag))
 		to_chat(src, SPAN_WARNING("There is already a limb attached at that part of your body."))
 		return FALSE
 	if(E.check_modular_limb_damage(src))
 		to_chat(src, SPAN_WARNING("\The [E] is too damaged to be attached."))
 		return FALSE
-	var/obj/item/organ/external/parent = E.parent_organ && get_organ(E.parent_organ)
+	var/obj/item/organ/external/parent = E.parent_organ && GET_EXTERNAL_ORGAN(src, E.parent_organ)
 	if(!parent)
 		to_chat(src, SPAN_WARNING("\The [E] needs an existing limb to be attached to."))
 		return FALSE
@@ -127,7 +126,7 @@
 	if(E.check_modular_limb_damage(src))
 		to_chat(src, SPAN_WARNING("That limb is too damaged to be removed!"))
 		return FALSE
-	var/obj/item/organ/external/parent = E.parent_organ && get_organ(E.parent_organ)
+	var/obj/item/organ/external/parent = E.parent_organ && GET_EXTERNAL_ORGAN(src, E.parent_organ)
 	if(!parent)
 		return FALSE
 	if(parent.check_modular_limb_damage(src))

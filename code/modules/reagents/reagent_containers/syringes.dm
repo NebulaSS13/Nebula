@@ -271,7 +271,7 @@
 		var/mob/living/carbon/human/H = target
 
 		var/target_zone = check_zone(user.zone_sel.selecting, H)
-		var/obj/item/organ/external/affecting = H.get_organ(target_zone)
+		var/obj/item/organ/external/affecting = GET_EXTERNAL_ORGAN(H, target_zone)
 
 		if (!affecting)
 			to_chat(user, "<span class='danger'>They are missing that limb!</span>")

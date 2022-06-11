@@ -25,9 +25,9 @@
 /datum/unit_test/species_organ_creation/proc/check_internal_organs(var/mob/living/carbon/human/H, var/decl/species/species)
 	. = 1
 	for(var/organ_tag in species.has_organ)
-		var/obj/item/organ/internal/I = H.get_organ(organ_tag)
+		var/obj/item/organ/I = GET_INTERNAL_ORGAN(H, organ_tag)
 		if(!istype(I))
-			fail("[species.name] failed to register internal organ for tag \"[organ_tag]\" to internal_organs_by_name.")
+			fail("[species.name] failed to register internal organ for tag \"[organ_tag]\" to organ list.")
 			. = 0
 			continue
 		if(!(I in H.get_internal_organs()))
@@ -49,7 +49,7 @@
 /datum/unit_test/species_organ_creation/proc/check_external_organs(var/mob/living/carbon/human/H, var/decl/species/species)
 	. = 1
 	for(var/organ_tag in species.has_limbs)
-		var/obj/item/organ/external/E = H.get_organ(organ_tag)
+		var/obj/item/organ/external/E = GET_EXTERNAL_ORGAN(H, organ_tag)
 		if(!istype(E))
 			fail("[species.name] failed to register external organ for tag \"[organ_tag]\" to organs_by_name.")
 			. = 0
@@ -77,7 +77,7 @@
 	for(var/obj/item/organ/external/E in external_organs)
 		if(!E.parent_organ)
 			continue
-		var/obj/item/organ/external/parent = H.get_organ(E.parent_organ)
+		var/obj/item/organ/external/parent = GET_EXTERNAL_ORGAN(H, E.parent_organ)
 		if(!istype(parent))
 			fail("[species.name] external organ [E] could not find its parent in organs_by_name. Parent tag was \"[E.parent_organ]\".")
 			. = 0
@@ -100,7 +100,7 @@
 			fail("[species.name] internal organ [I] did not have a parent_organ tag.")
 			. = 0
 			continue
-		var/obj/item/organ/external/parent = H.get_organ(I.parent_organ)
+		var/obj/item/organ/external/parent = GET_EXTERNAL_ORGAN(H, I.parent_organ)
 		if(!istype(parent))
 			fail("[species.name] internal organ [I] could not find its parent in organs_by_name. Parent tag was \"[I.parent_organ]\".")
 			. = 0
@@ -140,11 +140,11 @@
 	if(!(I in H.get_internal_organs()))
 		fail("[H.species.name] internal organ [I] not in internal_organs.")
 		return 0
-	var/found = H.get_organ(I.organ_tag)
+	var/found = GET_INTERNAL_ORGAN(H, I.organ_tag)
 	if(I != found)
-		fail("[H.species.name] internal organ [I] not in internal_organs_by_name. Organ tag was \"[I.organ_tag]\", found [found? found : "nothing"] instead.")
+		fail("[H.species.name] internal organ [I] not in organ list. Organ tag was \"[I.organ_tag]\", found [found? found : "nothing"] instead.")
 		return 0
-	var/obj/item/organ/external/parent = H.get_organ(I.parent_organ)
+	var/obj/item/organ/external/parent = GET_EXTERNAL_ORGAN(H, I.parent_organ)
 	if(!istype(parent))
 		fail("[H.species.name] internal organ [I] could not find its parent in organs_by_name. Parent tag was \"[I.parent_organ]\".")
 		return 0
@@ -157,9 +157,9 @@
 	if(I in H.get_internal_organs())
 		fail("[H.species.name] internal organ [I] was not removed from internal_organs.")
 		return 0
-	var/found = H.get_organ(I.organ_tag)
+	var/found = GET_INTERNAL_ORGAN(H, I.organ_tag)
 	if(found)
-		fail("[H.species.name] internal organ [I] was not removed from internal_organs_by_name. Organ tag was \"[I.organ_tag]\".")
+		fail("[H.species.name] internal organ [I] was not removed from organ list. Organ tag was \"[I.organ_tag]\".")
 		return 0
 	if(I in old_parent.internal_organs)
 		fail("[H.species.name] internal organ [I] was not removed from parent's internal_organs. Parent was [old_parent].")
@@ -170,9 +170,9 @@
 	if(!(E in H.get_external_organs()))
 		fail("[H.species.name] external organ [E] not in organs.")
 		return 0
-	var/found = H.get_organ(E.organ_tag)
+	var/found = GET_EXTERNAL_ORGAN(H, E.organ_tag)
 	if(E != found)
-		fail("[H.species.name] external organ [E] not in organs_by_name. Organ tag was \"[E.organ_tag]\", found [found? found : "nothing"] instead.")
+		fail("[H.species.name] external organ [E] not in organ list. Organ tag was \"[E.organ_tag]\", found [found? found : "nothing"] instead.")
 		return 0
 	if(E.parent_organ)
 		var/obj/item/organ/external/parent = E.parent
@@ -191,7 +191,7 @@
 	if(E in H.get_external_organs())
 		fail("[H.species.name] external organ [E] was not removed from organs.")
 		return 0
-	var/found = H.get_organ(E.organ_tag)
+	var/found = GET_EXTERNAL_ORGAN(H, E.organ_tag)
 	if(found)
 		fail("[H.species.name] external organ [E] was not removed from organs_by_name. Organ tag was \"[E.organ_tag]\".")
 		return 0
@@ -206,7 +206,7 @@
 		fail("[H.species.name] internal organ [I] failed initial presence check.")
 		return 0
 
-	var/obj/item/organ/external/parent = H.get_organ(I.parent_organ)
+	var/obj/item/organ/external/parent = GET_EXTERNAL_ORGAN(H, I.parent_organ)
 
 	H.remove_organ(I)
 	if(!check_internal_organ_removed(H, I, parent))

@@ -80,7 +80,7 @@ Proc returns a boolean if successful.
 		if(ishuman(target))
 
 			H = target
-			var/obj/item/organ/external/stabbed_part = H.get_organ(target_zone)
+			var/obj/item/organ/external/stabbed_part = GET_EXTERNAL_ORGAN(H, target_zone)
 			if( !prob(H.get_blocked_ratio(target_zone, BRUTE, damage_flags, 0, damage) * 100) && !isnull(stabbed_part) && LAZYLEN(stabbed_part.internal_organs) )
 				var/obj/item/organ/internal/damaged_organ = pick(stabbed_part.internal_organs) //This could be improved by checking the size of an internal organ.
 				var/organ_damage = damage * 0.20

@@ -13,7 +13,7 @@
 
 /obj/item/implant/AttemptAugmentation(mob/user, target_zone)
 	if(can_implant(user, user, target_zone) && implant_in_mob(user, user, target_zone))
-		var/obj/item/organ/organ = user.get_organ(target_zone)
+		var/obj/item/organ/organ = GET_EXTERNAL_ORGAN(user, target_zone)
 		to_chat(user, SPAN_NOTICE("You have \a [src] implanted in your [organ.name]."))
 	else
 		..()
@@ -22,7 +22,7 @@
 	if(!istype(user))
 		return ..()
 
-	var/obj/item/organ/external/organ_to_implant_into = user.get_organ(parent_organ)
+	var/obj/item/organ/external/organ_to_implant_into = GET_EXTERNAL_ORGAN(user, parent_organ)
 	if(!istype(organ_to_implant_into))
 		return ..()
 

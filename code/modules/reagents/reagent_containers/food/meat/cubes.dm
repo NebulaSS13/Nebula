@@ -46,7 +46,7 @@
 	if(ishuman(M))
 		var/mob/living/carbon/human/H = M
 		H.visible_message("<span class='warning'>A screeching creature bursts out of [M]'s chest!</span>")
-		var/obj/item/organ/external/organ = H.get_organ(BP_CHEST)
+		var/obj/item/organ/external/organ = GET_EXTERNAL_ORGAN(H, BP_CHEST)
 		organ.take_external_damage(50, 0, 0, "Animal escaping the ribcage")
 	Expand()
 

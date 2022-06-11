@@ -24,17 +24,15 @@
 	. = ..()
 	var/jitteriness = amount
 	if(jitteriness >= 400)
-		var/obj/item/organ/internal/heart/L = victim.get_organ(BP_HEART)
-		if(!istype(L))
-			return 
-		if(BP_IS_PROSTHETIC(L))
+		var/obj/item/organ/internal/heart = GET_INTERNAL_ORGAN(victim, BP_HEART)
+		if(!heart || BP_IS_PROSTHETIC(heart))
 			return
 		if(prob(5))
 			if(prob(1))
-				L.take_internal_damage(L.max_damage / 2, 0)
+				heart.take_internal_damage(heart.max_damage / 2, 0)
 				to_chat(victim, SPAN_DANGER("Something bursts in your heart."))
 				admin_victim_log(victim, "has taken <b>lethal heart damage</b> at jitteriness level [jitteriness].")
 			else
-				L.take_internal_damage(1, 0)
+				heart.take_internal_damage(heart, 0)
 				to_chat(victim, SPAN_DANGER("The jitters are killing you! You feel your heart beating out of your chest."))
 				admin_victim_log(victim, "has taken <i>minor heart damage</i> at jitteriness level [jitteriness].")

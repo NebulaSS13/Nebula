@@ -421,7 +421,7 @@
 	if(istype(owner))
 		//If we expect a parent organ set it up here
 		if(!affected && parent_organ)
-			parent = owner.get_organ(parent_organ)
+			parent = GET_EXTERNAL_ORGAN(owner, parent_organ)
 		else
 			parent = affected
 

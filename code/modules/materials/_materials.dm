@@ -550,7 +550,7 @@ INITIALIZE_IMMEDIATE(/obj/effect/gas_overlay)
 		var/dam = (toxicity * removed)
 		if(toxicity_targets_organ && ishuman(M))
 			var/mob/living/carbon/human/H = M
-			var/obj/item/organ/internal/I = H.get_organ(toxicity_targets_organ)
+			var/obj/item/organ/internal/I = GET_INTERNAL_ORGAN(H, toxicity_targets_organ)
 			if(I)
 				var/can_damage = I.max_damage - I.damage
 				if(can_damage > 0)

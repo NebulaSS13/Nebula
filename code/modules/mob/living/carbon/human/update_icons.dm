@@ -209,8 +209,8 @@ Please contact me on #coderbus IRC. ~Carn x
 					overlay.transform = M
 				add_overlay(overlay)
 
-	var/obj/item/organ/external/head/head = get_organ(BP_HEAD)
-	if(istype(head))
+	var/obj/item/organ/external/head/head = get_organ(BP_HEAD, /obj/item/organ/external/head)
+	if(head)
 		var/image/I = head.get_eye_overlay()
 		if(I)
 			add_overlay(I)
@@ -344,11 +344,11 @@ var/global/list/damage_icon_parts = list()
 		icon_key += "[lip_style]"
 	else
 		icon_key += "nolips"
-	var/obj/item/organ/internal/eyes/eyes = get_organ(species.vision_organ || BP_EYES)
+	var/obj/item/organ/internal/eyes/eyes = get_organ((species.vision_organ || BP_EYES), /obj/item/organ/internal/eyes)
 	icon_key += istype(eyes) ? eyes.eye_colour : COLOR_BLACK
 
 	for(var/organ_tag in global.all_limb_tags)
-		var/obj/item/organ/external/part = get_organ(organ_tag)
+		var/obj/item/organ/external/part = GET_EXTERNAL_ORGAN(src, organ_tag)
 		if(isnull(part) || part.skip_body_icon_draw)
 			icon_key += "0"
 			continue
@@ -451,7 +451,7 @@ var/global/list/damage_icon_parts = list()
 	//Reset our hair
 	overlays_standing[HO_HAIR_LAYER]	= null
 
-	var/obj/item/organ/external/head/head_organ = get_organ(BP_HEAD)
+	var/obj/item/organ/external/head/head_organ = get_organ(BP_HEAD, /obj/item/organ/external/head)
 	if(!head_organ)
 		if(update_icons)
 			queue_icon_update()
@@ -583,8 +583,8 @@ var/global/list/damage_icon_parts = list()
 	else
 		var/list/blood_color
 		for(var/bp in list(BP_L_FOOT, BP_R_FOOT))
-			var/obj/item/organ/external/stomper = get_organ(bp)
-			if(istype(stomper) && stomper.coating)
+			var/obj/item/organ/external/stomper = GET_EXTERNAL_ORGAN(src, bp)
+			if(stomper && stomper.coating)
 				blood_color = stomper.coating.get_color()
 
 		overlays_standing[HO_SHOES_LAYER] = null
@@ -689,7 +689,7 @@ var/global/list/damage_icon_parts = list()
 /mob/living/carbon/human/proc/update_tail_showing(var/update_icons=1)
 	overlays_standing[HO_TAIL_OVER_LAYER] =  null
 	overlays_standing[HO_TAIL_UNDER_LAYER] = null
-	var/obj/item/organ/external/tail/tail_organ = get_organ(BP_TAIL)
+	var/obj/item/organ/external/tail/tail_organ = get_organ(BP_TAIL, /obj/item/organ/external/tail)
 	if(!istype(tail_organ))
 		return
 	var/tail_state = tail_organ.get_tail(tail_organ)
@@ -724,17 +724,16 @@ var/global/list/damage_icon_parts = list()
 
 /mob/living/carbon/human/set_dir()
 	. = ..()
-	var/obj/item/organ/external/tail/tail_organ = get_organ(BP_TAIL)
-	if(!istype(tail_organ))
-		return
-	if(. && tail_organ.get_tail())
-		update_tail_showing()
+	if(.)
+		var/obj/item/organ/external/tail/tail_organ = get_organ(BP_TAIL, /obj/item/organ/external/tail)
+		if(tail_organ && tail_organ.get_tail())
+			update_tail_showing()
 
 
 /mob/living/carbon/human/proc/set_tail_state(var/t_state)
 	var/image/tail_overlay = overlays_standing[(dir == NORTH) ? HO_TAIL_OVER_LAYER : HO_TAIL_UNDER_LAYER]
-	var/obj/item/organ/external/tail/tail_organ = get_organ(BP_TAIL)
-	if(!istype(tail_organ))
+	var/obj/item/organ/external/tail/tail_organ = get_organ(BP_TAIL, /obj/item/organ/external/tail)
+	if(!tail_organ)
 		return null
 
 	if(tail_overlay && tail_organ.get_tail_animation())
@@ -744,8 +743,8 @@ var/global/list/damage_icon_parts = list()
 //Not really once, since BYOND can't do that.
 //Update this if the ability to flick() images or make looping animation start at the first frame is ever added.
 /mob/living/carbon/human/proc/animate_tail_once(var/update_icons=1)
-	var/obj/item/organ/external/tail/tail_organ = get_organ(BP_TAIL)
-	if(!istype(tail_organ))
+	var/obj/item/organ/external/tail/tail_organ = get_organ(BP_TAIL, /obj/item/organ/external/tail)
+	if(!tail_organ)
 		return
 	var/t_state = "[tail_organ.get_tail()]_once"
 
@@ -764,8 +763,8 @@ var/global/list/damage_icon_parts = list()
 		queue_icon_update()
 
 /mob/living/carbon/human/proc/animate_tail_start(var/update_icons=1)
-	var/obj/item/organ/external/tail/tail_organ = get_organ(BP_TAIL)
-	if(!istype(tail_organ))
+	var/obj/item/organ/external/tail/tail_organ = get_organ(BP_TAIL, /obj/item/organ/external/tail)
+	if(!tail_organ)
 		return
 	var/tail_states = tail_organ.get_tail_states()
 	if(tail_states)
@@ -774,8 +773,8 @@ var/global/list/damage_icon_parts = list()
 			queue_icon_update()
 
 /mob/living/carbon/human/proc/animate_tail_fast(var/update_icons=1)
-	var/obj/item/organ/external/tail/tail_organ = get_organ(BP_TAIL)
-	if(!istype(tail_organ))
+	var/obj/item/organ/external/tail/tail_organ = get_organ(BP_TAIL, /obj/item/organ/external/tail)
+	if(!tail_organ)
 		return
 	var/tail_states = tail_organ.get_tail_states()
 	if(tail_states)
@@ -784,8 +783,8 @@ var/global/list/damage_icon_parts = list()
 			queue_icon_update()
 
 /mob/living/carbon/human/proc/animate_tail_reset(var/update_icons=1)
-	var/obj/item/organ/external/tail/tail_organ = get_organ(BP_TAIL)
-	if(!istype(tail_organ))
+	var/obj/item/organ/external/tail/tail_organ = get_organ(BP_TAIL, /obj/item/organ/external/tail)
+	if(!tail_organ)
 		return
 	var/tail_states = tail_organ.get_tail_states(src)
 	if(stat != DEAD && tail_states)
@@ -797,8 +796,8 @@ var/global/list/damage_icon_parts = list()
 		queue_icon_update()
 
 /mob/living/carbon/human/proc/animate_tail_stop(var/update_icons=1)
-	var/obj/item/organ/external/tail/tail_organ = get_organ(BP_TAIL)
-	if(!istype(tail_organ))
+	var/obj/item/organ/external/tail/tail_organ = get_organ(BP_TAIL, /obj/item/organ/external/tail)
+	if(!tail_organ)
 		return
 	set_tail_state("[tail_organ.get_tail()]_static")
 

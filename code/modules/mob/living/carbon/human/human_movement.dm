@@ -4,8 +4,8 @@
 /mob/living/carbon/human/get_movement_delay(var/travel_dir)
 	var/tally = ..()
 
-	var/obj/item/organ/external/H = get_organ(BP_GROIN) // gets species slowdown, which can be reset by robotize()
-	if(istype(H))
+	var/obj/item/organ/external/H = GET_EXTERNAL_ORGAN(src, BP_GROIN) // gets species slowdown, which can be reset by robotize()
+	if(H)
 		tally += H.slowdown
 
 	tally += species.handle_movement_delay_special(src)
@@ -26,7 +26,7 @@
 
 	if(istype(buckled, /obj/structure/bed/chair/wheelchair))
 		for(var/organ_name in list(BP_L_HAND, BP_R_HAND, BP_L_ARM, BP_R_ARM))
-			var/obj/item/organ/external/E = get_organ(organ_name)
+			var/obj/item/organ/external/E = GET_EXTERNAL_ORGAN(src, organ_name)
 			tally += E ? E.get_movement_delay(4) : 4
 	else
 		var/total_item_slowdown = -1
@@ -41,7 +41,7 @@
 		tally += total_item_slowdown
 
 		for(var/organ_name in list(BP_L_LEG, BP_R_LEG, BP_L_FOOT, BP_R_FOOT))
-			var/obj/item/organ/external/E = get_organ(organ_name)
+			var/obj/item/organ/external/E = GET_EXTERNAL_ORGAN(src, organ_name)
 			tally += E ? E.get_movement_delay(4) : 4
 
 	if(shock_stage >= 10 || get_stamina() <= 0)
@@ -151,7 +151,7 @@
 	for(var/obj/item/cane/C in get_held_items())
 		crutches++
 	for(var/organ_name in list(BP_L_LEG, BP_R_LEG, BP_L_FOOT, BP_R_FOOT))
-		var/obj/item/organ/external/E = get_organ(organ_name)
+		var/obj/item/organ/external/E = GET_EXTERNAL_ORGAN(src, organ_name)
 		if(E && (E.is_dislocated() || E.is_broken()))
 			if(crutches)
 				crutches--

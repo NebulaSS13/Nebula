@@ -466,7 +466,7 @@ var/global/const/DEFAULT_SPECIES_HEALTH = 200
 
 /decl/species/proc/is_missing_vital_organ(var/mob/living/carbon/human/H)
 	for(var/tag in vital_organs)
-		var/obj/item/organ/internal/I = H.get_organ(tag)
+		var/obj/item/organ/internal/I = GET_INTERNAL_ORGAN(H, tag)
 		var/list/organ_data = vital_organs[tag]
 		//#TODO: whenever we implement having several organs of the same type change this to check for the minimum amount!
 		if(!I || !ispath(I.type, organ_data["path"]))
@@ -504,7 +504,7 @@ var/global/const/DEFAULT_SPECIES_HEALTH = 200
 
 	//Create missing limbs
 	for(var/limb_type in has_limbs)
-		if(H.get_organ(limb_type)) //Skip existing
+		if(GET_EXTERNAL_ORGAN(H, limb_type)) //Skip existing
 			continue
 		var/list/organ_data = has_limbs[limb_type]
 		var/limb_path = organ_data["path"]
@@ -514,14 +514,14 @@ var/global/const/DEFAULT_SPECIES_HEALTH = 200
 
 	//Create missing internal organs
 	for(var/organ_tag in has_organ)
-		if(H.get_organ(organ_tag)) //Skip existing
+		if(GET_INTERNAL_ORGAN(H, organ_tag)) //Skip existing
 			continue
 		var/organ_type = has_organ[organ_tag]
 		var/obj/item/organ/O = new organ_type(H, null, H.dna)
 		if(organ_tag != O.organ_tag)
 			warning("[O.type] has a default organ tag \"[O.organ_tag]\" that differs from the species' organ tag \"[organ_tag]\". Updating organ_tag to match.")
 			O.organ_tag = organ_tag
-		H.add_organ(O, H.get_organ(O.parent_organ), FALSE, FALSE)
+		H.add_organ(O, GET_EXTERNAL_ORGAN(H, O.parent_organ), FALSE, FALSE)
 		post_organ_rejuvenate(O, H)
 
 /decl/species/proc/add_base_auras(var/mob/living/carbon/human/H)
@@ -739,7 +739,7 @@ var/global/const/DEFAULT_SPECIES_HEALTH = 200
 
 	if(target.w_uniform)
 		target.w_uniform.add_fingerprint(attacker)
-	var/obj/item/organ/external/affecting = target.get_organ(ran_zone(attacker.zone_sel.selecting, target = target))
+	var/obj/item/organ/external/affecting = GET_EXTERNAL_ORGAN(target, ran_zone(attacker.zone_sel.selecting, target = target))
 
 	var/list/holding = list(target.get_active_hand() = 60)
 	for(var/thing in target.get_inactive_held_items())
@@ -891,7 +891,7 @@ var/global/const/DEFAULT_SPECIES_HEALTH = 200
 		var/synthetic = H.isSynthetic()
 		if (synthetic)
 			if (exertion_charge_scale)
-				var/obj/item/organ/internal/cell/cell = H.get_organ(BP_CELL)
+				var/obj/item/organ/internal/cell/cell = H.get_organ(BP_CELL, /obj/item/organ/internal/cell)
 				if (cell)
 					cell.use(cell.get_power_drain() * exertion_charge_scale)
 		else

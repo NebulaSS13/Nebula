@@ -1,7 +1,7 @@
 /turf/simulated/floor/attack_hand(mob/user)
 	if(ishuman(user))
 		var/mob/living/carbon/human/H = user
-		var/obj/item/hand = H.get_organ(H.get_active_held_item_slot())
+		var/obj/item/hand = GET_EXTERNAL_ORGAN(H, H.get_active_held_item_slot())
 		if(hand && try_graffiti(H, hand))
 			return TRUE
 	. = ..()

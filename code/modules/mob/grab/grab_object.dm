@@ -181,7 +181,7 @@
 /obj/item/grab/proc/get_targeted_organ()
 	var/mob/affecting_mob = get_affecting_mob()
 	if(istype(affecting_mob))
-		. = affecting_mob.get_organ(target_zone)
+		. = GET_EXTERNAL_ORGAN(affecting_mob, target_zone)
 
 /obj/item/grab/proc/resolve_item_attack(var/mob/living/M, var/obj/item/I, var/target_zone)
 	if(M && ishuman(M) && I)

@@ -26,7 +26,7 @@
 		var/mob/living/carbon/human/M = A
 		set_target(M, user)
 		timeofdeath = M.timeofdeath
-		var/obj/item/organ/external/S = M.get_organ(user.zone_sel.selecting)
+		var/obj/item/organ/external/S = GET_EXTERNAL_ORGAN(M, user.zone_sel.selecting)
 		if(!S)
 			visible_message(SPAN_WARNING("[src] states, 'The targeted bodypart is missing.'"))
 			return

@@ -27,7 +27,7 @@
 /decl/aspect/amputation/apply(var/mob/living/carbon/human/holder)
 	. = ..()
 	if(. && apply_to_limb)
-		var/obj/item/organ/external/O = holder.get_organ(apply_to_limb)
+		var/obj/item/organ/external/O = GET_EXTERNAL_ORGAN(holder, apply_to_limb)
 		if(istype(O))
 			qdel(O)
 

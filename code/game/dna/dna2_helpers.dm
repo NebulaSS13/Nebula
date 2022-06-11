@@ -157,7 +157,7 @@
 
 		//Body markings
 		for(var/tag in dna.body_markings)
-			var/obj/item/organ/external/E = H.get_organ(tag)
+			var/obj/item/organ/external/E = GET_EXTERNAL_ORGAN(H, tag)
 			if(E)
 				var/list/marklist = dna.body_markings[tag]
 				if(length(marklist))
