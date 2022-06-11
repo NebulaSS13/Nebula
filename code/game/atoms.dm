@@ -596,3 +596,4 @@ its easier to just keep the beam vertical.
 
 /atom/proc/get_alt_interactions(var/mob/user)
 	SHOULD_CALL_PARENT(TRUE)
+	return list()
