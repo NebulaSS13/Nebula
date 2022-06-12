@@ -5530,7 +5530,7 @@
 	icon_state = "4-8"
 	},
 /obj/structure/noticeboard{
-	pixel_y = 32
+	default_pixel_y = 32
 	},
 /turf/simulated/floor/tiled,
 /area/nexus/engineering)

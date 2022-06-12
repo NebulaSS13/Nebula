@@ -25,39 +25,29 @@
 			break
 
 	// Automatically place noticeboards that aren't mapped to specific positions.
-	if(pixel_x == 0 && pixel_y == 0)
-
+	if(default_pixel_x == 0 && default_pixel_y == 0)
 		var/turf/here = get_turf(src)
-		var/placing = 0
 		for(var/checkdir in global.cardinal)
 			var/turf/T = get_step(here, checkdir)
-			if(!T)
-				continue
-			if(T.density)
-				placing = checkdir
+			if(T && T.density)
+				set_dir(global.reverse_dir[checkdir])
 				break
-			for(var/thing in T)
-				var/atom/A = thing
-				if(A.simulated && !A.CanPass(src, T))
-					placing = checkdir
-					break
-
-		switch(placing)
-			if(NORTH)
-				default_pixel_x = 0
-				default_pixel_y = 32
-			if(SOUTH)
-				default_pixel_x = 0
-				default_pixel_y = -32
-			if(EAST)
-				default_pixel_x = 32
-				default_pixel_y = 0
-			if(WEST)
-				default_pixel_x = -32
-				default_pixel_y = 0
-		reset_offsets(0)
 
 	update_icon()
+
+/obj/structure/noticeboard/set_dir(var/ndir)
+	. = ..()
+	if(dir & SOUTH)
+		default_pixel_y = 32
+	else // NORTH is also 0-offset due to the icon.
+		default_pixel_y = 0
+	if(dir & WEST)
+		default_pixel_x = 32
+	else if(dir & EAST)
+		default_pixel_x = -32
+	else
+		default_pixel_x = 0
+	reset_offsets(0)
 
 /obj/structure/noticeboard/proc/add_paper(var/atom/movable/paper, var/skip_icon_update)
 	if(istype(paper))
@@ -98,20 +88,17 @@
 
 		if(isScrewdriver(thing))
 			var/choice = input("Which direction do you wish to place the noticeboard?", "Noticeboard Offset") as null|anything in list("North", "South", "East", "West")
-			if(choice && Adjacent(user) && thing.loc == user && !user.incapacitated())
+			if(choice && CanPhysicallyInteract(user))
 				playsound(loc, 'sound/items/Screwdriver.ogg', 50, 1)
-				default_pixel_x = 0
-				default_pixel_y = 0
 				switch(choice)
 					if("North")
-						default_pixel_y = 32
+						set_dir(SOUTH)
 					if("South")
-						default_pixel_y = -32
+						set_dir(NORTH)
 					if("East")
-						default_pixel_x = 32
+						set_dir(WEST)
 					if("West")
-						default_pixel_x = -32
-				reset_offsets(0)
+						set_dir(EAST)
 			return TRUE
 
 		if(!istype(thing, /obj/item/paper/sticky) && (istype(thing, /obj/item/paper) || istype(thing, /obj/item/photo)))

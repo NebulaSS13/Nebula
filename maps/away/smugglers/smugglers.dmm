@@ -786,7 +786,7 @@
 /area/smugglers/dorms)
 "ce" = (
 /obj/structure/noticeboard{
-	pixel_y = 30
+	default_pixel_y = 30
 	},
 /obj/effect/decal/cleanable/dirt,
 /obj/structure/table,

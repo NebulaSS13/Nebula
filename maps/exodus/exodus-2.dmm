@@ -1785,7 +1785,7 @@
 	dir = 4
 	},
 /obj/structure/noticeboard{
-	pixel_x = 32
+	default_pixel_x = 32
 	},
 /obj/effect/floor_decal/corner/red{
 	dir = 4
@@ -4972,7 +4972,7 @@
 	},
 /obj/structure/bookcase,
 /obj/structure/noticeboard{
-	pixel_y = 27
+	default_pixel_y = 27
 	},
 /turf/simulated/floor/lino,
 /area/exodus/security/detectives_office)
@@ -16413,7 +16413,7 @@
 /obj/structure/table/reinforced,
 /obj/item/chems/glass/rag,
 /obj/structure/noticeboard{
-	pixel_x = -30
+	default_pixel_x = -30
 	},
 /obj/machinery/door/blast/shutters{
 	dir = 2;
@@ -21002,7 +21002,7 @@
 	pixel_y = 2
 	},
 /obj/structure/noticeboard{
-	pixel_y = 27
+	default_pixel_y = 27
 	},
 /turf/simulated/floor/wood/walnut,
 /area/exodus/crew_quarters/bar)
@@ -23320,7 +23320,7 @@
 /area/exodus/crew_quarters/locker)
 "aXt" = (
 /obj/structure/noticeboard{
-	pixel_y = 27
+	default_pixel_y = 27
 	},
 /obj/machinery/camera/network/command{
 	c_tag = "Bridge East"
@@ -35454,7 +35454,7 @@
 	name = "Cargo Desk"
 	},
 /obj/structure/noticeboard{
-	pixel_y = 27
+	default_pixel_y = 27
 	},
 /obj/structure/table{
 	name = "plastic table frame"
@@ -39470,7 +39470,7 @@
 /area/exodus/turret_protected/ai_upload_foyer)
 "bEs" = (
 /obj/structure/noticeboard{
-	pixel_y = -27
+	default_pixel_y = -27
 	},
 /obj/effect/floor_decal/corner/brown{
 	dir = 8
@@ -40626,7 +40626,7 @@
 /area/exodus/quartermaster/qm)
 "bGL" = (
 /obj/structure/noticeboard{
-	pixel_y = 28
+	default_pixel_y = 28
 	},
 /obj/machinery/hologram/holopad,
 /obj/effect/floor_decal/corner/paleblue{
@@ -43844,7 +43844,7 @@
 /area/exodus/crew_quarters/medbreak)
 "bMR" = (
 /obj/structure/noticeboard{
-	pixel_y = 28
+	default_pixel_y = 28
 	},
 /obj/item/book/manual/medical_diagnostics_manual{
 	pixel_y = 7
@@ -44701,7 +44701,7 @@
 	dir = 1
 	},
 /obj/structure/noticeboard{
-	pixel_y = 27
+	default_pixel_y = 27
 	},
 /obj/effect/floor_decal/corner/lime{
 	dir = 4
@@ -51414,7 +51414,7 @@
 	dir = 4
 	},
 /obj/structure/noticeboard{
-	pixel_y = 27
+	default_pixel_y = 27
 	},
 /obj/machinery/door/firedoor,
 /obj/structure/cable/green{
@@ -52653,7 +52653,7 @@
 /area/exodus/hallway/secondary/entry/fore)
 "ceJ" = (
 /obj/structure/noticeboard{
-	pixel_x = 32
+	default_pixel_x = 32
 	},
 /obj/effect/floor_decal/corner/white/diagonal,
 /turf/simulated/floor/tiled/steel_grid,
@@ -61746,7 +61746,7 @@
 /obj/item/folder/cyan,
 /obj/structure/noticeboard{
 	dir = 4;
-	pixel_x = -28
+	default_pixel_x = -28
 	},
 /turf/simulated/floor/tiled/white,
 /area/exodus/research)

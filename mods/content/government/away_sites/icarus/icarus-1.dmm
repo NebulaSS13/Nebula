@@ -298,7 +298,7 @@
 /area/icarus/vessel)
 "bn" = (
 /obj/structure/noticeboard{
-	pixel_y = -25
+	default_pixel_y = -25
 	},
 /obj/machinery/atmospherics/unary/vent_pump/on{
 	dir = 4;

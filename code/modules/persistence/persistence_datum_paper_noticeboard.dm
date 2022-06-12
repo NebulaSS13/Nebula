@@ -12,6 +12,7 @@
 	if(!board || LAZYLEN(board.notices) >= board.max_notices)
 		return
 	. = ..()
+	board.set_dir(tokens["noticeboard_dir"])
 	board.add_paper(.)
 
 /decl/persistence_handler/paper/noticeboard/RemoveValue(var/atom/value)
