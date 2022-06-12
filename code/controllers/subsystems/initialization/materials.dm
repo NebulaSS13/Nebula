@@ -8,10 +8,10 @@ SUBSYSTEM_DEF(materials)
 	// Material vars.
 	var/list/materials
 	var/list/strata
-	var/list/materials_by_name
 	var/list/fusion_reactions
-	var/list/weighted_minerals_sparse = list()
-	var/list/weighted_minerals_rich = list()
+	var/list/materials_by_name =              list()
+	var/list/weighted_minerals_sparse =       list()
+	var/list/weighted_minerals_rich =         list()
 
 	// Chemistry vars.
 	var/list/active_holders =                  list()
@@ -145,6 +145,20 @@ SUBSYSTEM_DEF(materials)
 	if(!global.default_strata_type_by_z[s_key])
 		global.default_strata_type_by_z[s_key] = pick(subtypesof(/decl/strata))
 	return global.default_strata_type_by_z[s_key]
+
+/datum/controller/subsystem/materials/proc/get_material_by_name(var/mat_name)
+	if(!mat_name)
+		return
+	mat_name = lowertext(mat_name)
+	if(isnull(materials_by_name[mat_name]))
+		var/list/mats = decls_repository.get_decls_of_subtype(/decl/material)
+		for(var/mat in mats)
+			var/decl/material/mat_decl = mats[mat]
+			if(lowertext(mat_decl.name) == mat_name)
+				materials_by_name[mat_name] = mat_decl
+				return mat_decl
+		materials_by_name[mat_name] = FALSE
+	return materials_by_name[mat_name]
 
 /datum/controller/subsystem/materials/proc/get_strata_material(var/turf/exterior/wall/location)
 	if(!istype(location))

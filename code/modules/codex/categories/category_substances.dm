@@ -128,7 +128,7 @@
 				material_info += "<li>It is very heavy.</li>"
 			else
 				material_info += "<li>It is of average weight.</li>"
-			var/decl/material/steel = SSmaterials.materials_by_name[/decl/material/solid/metal/steel]
+			var/decl/material/steel = GET_DECL(/decl/material/solid/metal/steel)
 			var/comparison = round(mat.hardness / steel.hardness, 0.1)
 			if(comparison >= 0.9 && comparison <= 1.1)
 				material_info += "<li>It is as hard as steel.</li>"
