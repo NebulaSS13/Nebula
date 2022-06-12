@@ -147,6 +147,7 @@ SUBSYSTEM_DEF(materials)
 	return global.default_strata_type_by_z[s_key]
 
 /datum/controller/subsystem/materials/proc/get_material_by_name(var/mat_name)
+	RETURN_TYPE(/decl/material)
 	if(!mat_name)
 		return
 	mat_name = lowertext(mat_name)

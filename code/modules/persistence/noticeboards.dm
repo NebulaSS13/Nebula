@@ -12,17 +12,15 @@
 	var/base_icon_state = "nboard0"
 	var/const/max_notices = 5
 
-/obj/structure/noticeboard/Initialize()
-
+/obj/structure/noticeboard/Initialize(var/ml)
 	. = ..()
 
 	// Grab any mapped notices.
-	notices = list()
-	for(var/obj/item/paper/note in get_turf(src))
-		note.forceMove(src)
-		LAZYADD(notices, note)
-		if(LAZYLEN(notices) >= max_notices)
-			break
+	if(ml)
+		for(var/obj/item/paper/note in get_turf(src))
+			add_paper(note, skip_icon_update = TRUE)
+			if(LAZYLEN(notices) >= max_notices)
+				break
 
 	// Automatically place noticeboards that aren't mapped to specific positions.
 	if(default_pixel_x == 0 && default_pixel_y == 0)
@@ -60,7 +58,6 @@
 	if(istype(paper) && paper.loc == src)
 		paper.dropInto(loc)
 		LAZYREMOVE(notices, paper)
-		SSpersistence.forget_value(paper, /decl/persistence_handler/paper)
 		if(!skip_icon_update)
 			update_icon()
 
@@ -108,7 +105,6 @@
 				add_fingerprint(user)
 				add_paper(thing)
 				to_chat(user, SPAN_NOTICE("You pin \the [thing] to \the [src]."))
-				SSpersistence.track_value(thing, /decl/persistence_handler/paper/noticeboard)
 			else
 				to_chat(user, SPAN_WARNING("You hesitate, certain \the [thing] will not be seen among the many others already attached to \the [src]."))
 			return TRUE
