@@ -1056,8 +1056,6 @@ Note that amputating the affected organ does in fact remove the infection from t
 	if(QDELETED(src))
 		return
 
-	set_dir(SOUTH, TRUE)
-
 	// Edged attacks cause the limb to sail off in an arc.
 	if(disintegrate == DISMEMBER_METHOD_EDGE)
 
@@ -1069,7 +1067,7 @@ Note that amputating the affected organ does in fact remove the infection from t
 			// Throw limb around.
 			if(src && isturf(loc))
 				throw_at(get_edge_target_turf(src, pick(global.alldirs)), rand(1,3), THROWFORCE_GIBS)
-			set_dir(SOUTH, TRUE)
+
 	else
 		// Other attacks can destroy the limb entirely and place an item or decal.
 		var/atom/movable/gore = place_remains_from_dismember_method(disintegrate)
