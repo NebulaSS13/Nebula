@@ -145,11 +145,11 @@
 	if(target_zone == new_sel)
 		return
 	var/old_zone = target_zone
-	target_zone = new_sel
+	target_zone = check_zone(new_sel, affecting)
 	if(!istype(get_targeted_organ(), /obj/item/organ))
 		current_grab.let_go(src)
 		return
-	current_grab.on_target_change(src, old_zone, target_zone)
+	current_grab.on_target_change(src, old_zone, new_sel)
 
 /obj/item/grab/proc/on_organ_loss(mob/victim, obj/item/organ/lost)
 	if(affecting != victim)
@@ -181,8 +181,7 @@
 /obj/item/grab/proc/get_targeted_organ()
 	var/mob/affecting_mob = get_affecting_mob()
 	if(istype(affecting_mob))
-		. = GET_EXTERNAL_ORGAN(affecting_mob, target_zone)
-
+		. = GET_EXTERNAL_ORGAN(affecting_mob, check_zone(target_zone, affecting_mob))
 /obj/item/grab/proc/resolve_item_attack(var/mob/living/M, var/obj/item/I, var/target_zone)
 	if(M && ishuman(M) && I)
 		return current_grab.resolve_item_attack(src, M, I, target_zone)

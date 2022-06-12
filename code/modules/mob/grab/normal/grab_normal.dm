@@ -193,7 +193,7 @@
 
 // Handles when they change targeted areas and something is supposed to happen.
 /decl/grab/normal/special_target_change(var/obj/item/grab/G, old_zone, new_zone)
-	if(old_zone != BP_HEAD && old_zone != BP_CHEST || !G.get_affecting_mob())
+	if((old_zone != BP_HEAD && old_zone != BP_CHEST) || !G.get_affecting_mob())
 		return
 	switch(new_zone)
 		if(BP_MOUTH)
