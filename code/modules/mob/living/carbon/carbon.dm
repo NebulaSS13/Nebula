@@ -79,7 +79,7 @@
 				if(prob(src.getBruteLoss() - 50))
 					gib()
 
-/mob/living/carbon/gib()
+/mob/living/carbon/gib(anim="gibbed-m",do_gibs)
 	for(var/mob/M in contents)
 		M.dropInto(loc)
 		visible_message(SPAN_DANGER("\The [M] bursts out of \the [src]!"))

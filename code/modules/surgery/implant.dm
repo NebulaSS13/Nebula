@@ -10,7 +10,7 @@
 /decl/surgery_step/cavity
 	shock_level = 40
 	delicate = 1
-	surgery_candidate_flags = SURGERY_NO_CRYSTAL | SURGERY_NO_STUMP | SURGERY_NEEDS_ENCASEMENT
+	surgery_candidate_flags = SURGERY_NO_CRYSTAL | SURGERY_NEEDS_ENCASEMENT
 	surgery_step_category = /decl/surgery_step/cavity
 
 /decl/surgery_step/cavity/fail_step(mob/living/user, mob/living/target, target_zone, obj/item/tool)

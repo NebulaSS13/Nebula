@@ -32,7 +32,7 @@ This saves us from having to call add_fingerprint() any time something is put in
 
 /mob/living/carbon/human/proc/has_organ(name)
 	var/obj/item/organ/external/O = get_organ(name)
-	return (O && !O.is_stump())
+	return !!O
 
 /mob/living/carbon/human/proc/has_organ_for_slot(slot)
 	switch(slot)
@@ -369,10 +369,3 @@ This saves us from having to call add_fingerprint() any time something is put in
 	var/obj/item/organ/external/O = get_organ(zone)
 	if(O)
 		return get_covering_equipped_item(O.body_part)
-
-/mob/living/carbon/human/has_held_item_slot()
-	for(var/bp in held_item_slots)
-		var/obj/item/organ/external/E = get_organ(bp)
-		if(E && !E.is_stump())
-			return TRUE
-	return FALSE

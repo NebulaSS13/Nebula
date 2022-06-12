@@ -40,6 +40,7 @@
 	var/hair_colour                    // hair colour
 	var/list/markings                  // Markings (body_markings) to apply to the icon
 	var/render_alpha = 255
+	var/skip_body_icon_draw = FALSE    // Set to true to skip including this organ on the human body sprite.
 
 	// Wound and structural data.
 	var/wound_update_accuracy = 1      // how often wounds should be updated, a higher number means less often
@@ -82,7 +83,7 @@
 
 /obj/item/organ/external/proc/get_fingerprint()
 
-	if((limb_flags & ORGAN_FLAG_FINGERPRINT) && dna && !is_stump() && !BP_IS_PROSTHETIC(src))
+	if((limb_flags & ORGAN_FLAG_FINGERPRINT) && dna && !BP_IS_PROSTHETIC(src))
 		return md5(dna.uni_identity)
 
 	for(var/obj/item/organ/external/E in children)
@@ -309,7 +310,7 @@
 /obj/item/organ/external/proc/try_saw_off_child(var/obj/item/W, var/mob/user)
 
 	//Add icons to radial menu
-	var/list/radial_buttons = make_item_radial_menu_choices(get_limbs_recursive(TRUE))
+	var/list/radial_buttons = make_item_radial_menu_choices(get_limbs_recursive())
 	if(!LAZYLEN(radial_buttons))
 		return
 
@@ -320,7 +321,7 @@
 
 	var/cutting_result = !W.do_tool_interaction(TOOL_SAW, user, src, 3 SECONDS, "cutting \the [removing] off")
 	//Check if the limb is still in the hierarchy
-	if(cutting_result == 1 || !(removing in get_limbs_recursive(TRUE)))
+	if(cutting_result == 1 || !(removing in get_limbs_recursive()))
 		if(cutting_result != -1)
 			user.visible_message(SPAN_DANGER("<b>[user]</b> stops trying to cut \the [removing]."))
 		return TRUE
@@ -353,13 +354,11 @@
 
 	return all_items
 
-/obj/item/organ/external/proc/get_limbs_recursive(var/no_stumps = FALSE)
+/obj/item/organ/external/proc/get_limbs_recursive()
 	var/list/all_limbs = list()
 	for(var/obj/item/organ/external/child in children)
-		if(no_stumps && child.is_stump())
-			continue
 		all_limbs += child
-		var/list/sublimbs = child.get_limbs_recursive(no_stumps)
+		var/list/sublimbs = child.get_limbs_recursive()
 		if(sublimbs)
 			all_limbs += sublimbs
 	return all_limbs
@@ -982,9 +981,30 @@ Note that amputating the affected organ does in fact remove the infection from t
 					"Your [src.name] explodes[gore]!",
 					"You hear the [gore_sound]."
 					)
+/obj/item/organ/external/proc/place_remains_from_dismember_method(var/dismember)
+
+	var/dropturf = get_turf(src)
+	switch(dismember)
+		if(DISMEMBER_METHOD_BURN)
+			. = new /obj/effect/decal/cleanable/ash(dropturf)
+		if(DISMEMBER_METHOD_ACID)
+			. = new /obj/effect/decal/cleanable/mucus(dropturf)
+		if(DISMEMBER_METHOD_BLUNT)
+			if(BP_IS_CRYSTAL(src))
+				. = new /obj/item/shard(dropturf, /decl/material/solid/gemstone/crystal)
+			else if(BP_IS_PROSTHETIC(src))
+				. = new /obj/effect/decal/cleanable/blood/gibs/robot(dropturf)
+			else
+				. = new /obj/effect/decal/cleanable/blood/gibs(dropturf)
+
+	if(species && istype(., /obj/effect/decal/cleanable/blood/gibs))
+		var/obj/effect/decal/cleanable/blood/gibs/G = .
+		G.fleshcolor = species.get_flesh_colour(owner)
+		G.basecolor =  species.get_blood_color(owner)
+		G.update_icon()
 
 //Handles dismemberment
-/obj/item/organ/external/proc/dismember(var/clean, var/disintegrate = DISMEMBER_METHOD_EDGE, var/ignore_children, var/silent)
+/obj/item/organ/external/proc/dismember(var/clean, var/disintegrate = DISMEMBER_METHOD_EDGE, var/ignore_children, var/silent, var/ignore_last_organ)
 
 	if(!(limb_flags & ORGAN_FLAG_CAN_AMPUTATE) || !owner)
 		return
@@ -1000,93 +1020,76 @@ Note that amputating the affected organ does in fact remove the infection from t
 			"<span class='moderate'><b>[organ_msgs[2]]</b></span>", \
 			"<span class='danger'>[organ_msgs[3]]</span>")
 
-	var/mob/living/carbon/human/victim = owner //Keep a reference for post-removed().
-	var/obj/item/organ/external/original_parent = parent
-
-	var/use_flesh_colour = species.get_flesh_colour(owner)
-	var/use_blood_color = species.get_blood_color(owner)
-
 	add_pain(60)
 	if(!clean)
-		victim.shock_stage += min_broken_damage
+		owner.shock_stage += min_broken_damage
 
-	var/mob/living/carbon/human/last_owner = owner
-	owner.remove_organ(src, TRUE, FALSE, ignore_children)
-	if(istype(last_owner) && !QDELETED(last_owner) && LAZYLEN(last_owner.get_external_organs()) <= 1)
-		last_owner.physically_destroyed(FALSE, disintegrate)
-
-	if(QDELETED(src) || is_stump())
-		return
+	var/obj/item/organ/external/original_parent = parent
+	var/mob/living/carbon/human/victim = owner //Keep a reference for post-removed().
+	owner.remove_organ(src, TRUE, FALSE, ignore_children, update_icon = FALSE)
+	var/remaining_organs = victim.get_external_organs()
+	if(istype(victim) && !QDELETED(victim))
+		// If they are down to their last organ, just spawn the organ and delete them.
+		if(!ignore_last_organ && LAZYLEN(remaining_organs) == 1)
+			for(var/obj/item/organ/external/organ in remaining_organs)
+				victim.remove_organ(organ, TRUE, TRUE, update_icon = FALSE)
+				if(organ.place_remains_from_dismember_method(disintegrate))
+					qdel(organ)
+			victim.dump_contents()
+			qdel(victim)
+		else // We deliberately skip queuing this via remove_organ() above due to potentially immediately deleting the mob.
+			victim.regenerate_body_icon = TRUE
+			victim.queue_icon_update()
 
 	if(original_parent)
-		var/datum/wound/lost_limb/W = new (src, disintegrate, clean)
-		var/obj/item/organ/external/damaged_organ = original_parent
+
+		// Traumatic amputation is messy.
+		if(!clean && disintegrate != DISMEMBER_METHOD_BURN)
+			original_parent.sever_artery()
+
+		// Leave a big ol hole.
+		var/datum/wound/lost_limb/W = new(src, disintegrate, clean)
+		W.parent_organ = original_parent
+		LAZYADD(original_parent.wounds, W)
+		original_parent.update_damages()
+
+	if(QDELETED(src))
+		return
+
+	set_dir(SOUTH, TRUE)
+
+	// Edged attacks cause the limb to sail off in an arc.
+	if(disintegrate == DISMEMBER_METHOD_EDGE)
+
+		compile_icon()
+		add_blood(victim)
+		set_rotation(rand(180))
+		forceMove(get_turf(src))
 		if(!clean)
-			var/obj/item/organ/external/stump/stump = new (victim, 0, src)
-			victim.add_organ(stump, damaged_organ)
-			stump.add_pain(max_damage)
-			damaged_organ = stump
-			if(disintegrate != DISMEMBER_METHOD_BURN)
-				stump.sever_artery()
-		W.parent_organ = damaged_organ
-		LAZYADD(damaged_organ.wounds, W)
-		damaged_organ.update_damages()
-
-	spawn(1)
-		if(!QDELETED(victim))
-			victim.updatehealth()
-			victim.UpdateDamageIcon()
-			victim.refresh_visible_overlays()
-		if(!QDELETED(src))
+			// Throw limb around.
+			if(src && isturf(loc))
+				throw_at(get_edge_target_turf(src, pick(global.alldirs)), rand(1,3), THROWFORCE_GIBS)
 			set_dir(SOUTH, TRUE)
-
-	switch(disintegrate)
-		if(DISMEMBER_METHOD_EDGE)
-			compile_icon()
-			add_blood(victim)
-			set_rotation(rand(180))
-			forceMove(get_turf(src))
-			if(!clean)
-				// Throw limb around.
-				if(src && isturf(loc))
-					throw_at(get_edge_target_turf(src, pick(global.alldirs)), rand(1,3), THROWFORCE_GIBS)
-				set_dir(SOUTH, TRUE)
-		if(DISMEMBER_METHOD_BURN, DISMEMBER_METHOD_ACID)
-			if(disintegrate == DISMEMBER_METHOD_BURN)
-				new /obj/effect/decal/cleanable/ash(get_turf(victim))
-			else
-				new /obj/effect/decal/cleanable/mucus(get_turf(victim))
-			for(var/obj/item/I in src)
-				if(I.w_class > ITEM_SIZE_SMALL && !istype(I,/obj/item/organ))
+	else
+		// Other attacks can destroy the limb entirely and place an item or decal.
+		var/atom/movable/gore = place_remains_from_dismember_method(disintegrate)
+		if(gore)
+			if(disintegrate == DISMEMBER_METHOD_BURN || disintegrate == DISMEMBER_METHOD_ACID)
+				for(var/obj/item/I in src)
+					if(I.w_class > ITEM_SIZE_SMALL && !istype(I,/obj/item/organ))
+						I.dropInto(loc)
+			else if(disintegrate == DISMEMBER_METHOD_BLUNT)
+				gore.throw_at(get_edge_target_turf(src,pick(global.alldirs)), rand(1,3), THROWFORCE_GIBS)
+				for(var/obj/item/organ/I in internal_organs)
+					I.do_uninstall() //No owner so run uninstall directly
+					I.dropInto(get_turf(loc))
+					if(!QDELETED(I) && isturf(loc))
+						I.throw_at(get_edge_target_turf(src,pick(global.alldirs)), rand(1,3), THROWFORCE_GIBS)
+				for(var/obj/item/I in src)
 					I.dropInto(loc)
-			qdel(src)
-		if(DISMEMBER_METHOD_BLUNT)
-			var/obj/gore
-			if(BP_IS_CRYSTAL(src))
-				gore = new /obj/item/shard(get_turf(victim), /decl/material/solid/gemstone/crystal)
-			else if(BP_IS_PROSTHETIC(src))
-				gore = new /obj/effect/decal/cleanable/blood/gibs/robot(get_turf(victim))
-			else
-				gore = new /obj/effect/decal/cleanable/blood/gibs(get_turf(victim))
-				if(species)
-					var/obj/effect/decal/cleanable/blood/gibs/G = gore
-					G.fleshcolor = use_flesh_colour
-					G.basecolor =  use_blood_color
-					G.update_icon()
-
-			gore.throw_at(get_edge_target_turf(src,pick(global.alldirs)), rand(1,3), THROWFORCE_GIBS)
-
-			for(var/obj/item/organ/I in internal_organs)
-				I.do_uninstall() //No owner so run uninstall directly
-				I.dropInto(get_turf(loc))
-				if(!QDELETED(I) && isturf(loc))
 					I.throw_at(get_edge_target_turf(src,pick(global.alldirs)), rand(1,3), THROWFORCE_GIBS)
-
-			for(var/obj/item/I in src)
-				I.dropInto(loc)
-				I.throw_at(get_edge_target_turf(src,pick(global.alldirs)), rand(1,3), THROWFORCE_GIBS)
-
-			qdel(src)
+			if(!QDELETED(src))
+				qdel(src)
 
 /****************************************************
 			   HELPERS
@@ -1316,7 +1319,7 @@ Note that amputating the affected organ does in fact remove the infection from t
 /obj/item/organ/external/is_usable()
 	. = ..()
 	. = . && !is_malfunctioning()
-	. = . && (!is_broken() || splinted) && !is_stump()
+	. = . && (!is_broken() || splinted)
 	. = . && !(status & ORGAN_TENDON_CUT)
 	. = . && (!can_feel_pain() || get_pain() < pain_disability_threshold)
 	. = . && brute_ratio < 1 && burn_ratio < 1
@@ -1542,9 +1545,7 @@ Note that amputating the affected organ does in fact remove the infection from t
 // Added to the mob's move delay tally if this organ is being used to move with.
 /obj/item/organ/external/proc/get_movement_delay(max_delay)
 	. = 0
-	if(is_stump())
-		. += max_delay
-	else if(splinted)
+	if(splinted)
 		. += max_delay/8
 	else if(status & ORGAN_BROKEN)
 		. += max_delay * 3/8
@@ -1580,10 +1581,3 @@ Note that amputating the affected organ does in fact remove the infection from t
 
 /obj/item/organ/external/is_internal()
 	return FALSE
-
-/obj/item/organ/external/get_contained_external_atoms()
-	. = ..()
-	//Prevent stumps and things that shouldn't be dropped from getting dumped out
-	for(var/obj/item/organ/O in .)
-		if(!O.is_droppable())
-			. -= O

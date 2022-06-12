@@ -286,10 +286,7 @@
 
 	//#TODO: wish we could invalidate the human icons to trigger a single update when the organ state changes multiple times in a row
 	if(update_icon)
-		update_inv_hands(FALSE)
-		update_body(FALSE)
-		update_bandages(FALSE)
-		UpdateDamageIcon(FALSE)
+		regenerate_body_icon = TRUE
 		hud_reset()
 		queue_icon_update() //Avoids calling icon updates 50 times when removing multiple organs
 

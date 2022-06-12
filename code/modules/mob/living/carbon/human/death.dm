@@ -1,25 +1,23 @@
-/mob/living/carbon/human/gib()
+/mob/living/carbon/human/gib(anim="gibbed-m",do_gibs)
 	for(var/obj/item/organ/I in get_internal_organs())
-		if(!I.is_droppable())
-			continue //Skip anything that cannot be dropped
 		remove_organ(I)
 		if(!QDELETED(I) && isturf(loc))
 			I.throw_at(get_edge_target_turf(src, pick(global.alldirs)), rand(1,3), THROWFORCE_GIBS)
 
 	for(var/obj/item/organ/external/E in get_external_organs())
-		if(!E.parent_organ || !E.is_droppable())
-			continue //Skip root organ, or undroppables
-		E.dismember(FALSE, DISMEMBER_METHOD_EDGE, TRUE)
-
-	sleep(1)
+		if(!E.parent_organ)
+			continue //Skip root organ
+		E.dismember(FALSE, DISMEMBER_METHOD_EDGE, TRUE, ignore_last_organ = TRUE)
 
 	for(var/obj/item/I in get_contained_external_atoms())
 		drop_from_inventory(I)
 		if(!QDELETED(I))
 			I.throw_at(get_edge_target_turf(src, pick(global.alldirs)), rand(1,3), round(THROWFORCE_GIBS/I.w_class))
 
-	..(species.gibbed_anim)
-	gibs(loc, dna, null, species.get_flesh_colour(src), species.get_blood_color(src))
+	var/last_loc = loc
+	..(species.gibbed_anim, do_gibs = FALSE)
+	if(last_loc)
+		gibs(last_loc, dna, null, species.get_flesh_colour(src), species.get_blood_color(src))
 
 /mob/living/carbon/human/dust()
 	if(species)
@@ -88,14 +86,3 @@
 		E.status |= ORGAN_DISFIGURED
 	update_body(1)
 	return
-
-/mob/living/carbon/human/physically_destroyed(var/skip_qdel, var/droplimb_type = DISMEMBER_METHOD_BLUNT)
-	for(var/obj/item/organ/external/limb in get_external_organs())
-		var/limb_can_amputate = (limb.limb_flags & ORGAN_FLAG_CAN_AMPUTATE)
-		limb.limb_flags |= ORGAN_FLAG_CAN_AMPUTATE
-		limb.dismember(TRUE, droplimb_type, TRUE, TRUE)
-		if(!QDELETED(limb) && !limb_can_amputate)
-			limb.limb_flags &= ~ORGAN_FLAG_CAN_AMPUTATE
-	dump_contents()
-	if(!skip_qdel && !QDELETED(src))
-		qdel(src)

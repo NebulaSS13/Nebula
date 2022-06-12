@@ -40,15 +40,12 @@
 	var/obj/item/organ/external/P = target.get_organ(E.parent_organ)
 	var/obj/item/organ/external/T = target.get_organ(E.organ_tag)
 
-	if(!P || P.is_stump())
+	if(!P)
 		to_chat(user, SPAN_WARNING("The [E.amputation_point] is missing!"))
 		return FALSE
 
 	if(T)
-		if(T.is_stump())
-			to_chat(user, SPAN_WARNING("You cannot attach \a [E] when there is a stump!"))
-		else
-			to_chat(user, SPAN_WARNING("There is already \a [T]!"))
+		to_chat(user, SPAN_WARNING("There is already \a [T]!"))
 		return FALSE
 	if(BP_IS_PROSTHETIC(P))
 		if(!BP_IS_PROSTHETIC(E))
@@ -81,7 +78,7 @@
 	if(..())
 		var/obj/item/organ/external/E = tool
 		var/obj/item/organ/external/P = target.get_organ(E.parent_organ)
-		. = (P && !P.is_stump() && !(BP_IS_PROSTHETIC(P) && !BP_IS_PROSTHETIC(E)))
+		. = (P && !(BP_IS_PROSTHETIC(P) && !BP_IS_PROSTHETIC(E)))
 
 /decl/surgery_step/limb/attach/begin_step(mob/user, mob/living/target, target_zone, obj/item/tool)
 	var/obj/item/organ/external/E = tool
@@ -134,7 +131,7 @@
 /decl/surgery_step/limb/connect/can_use(mob/living/user, mob/living/target, target_zone, obj/item/tool)
 	if(..())
 		var/obj/item/organ/external/E = target.get_organ(target_zone)
-		return E && !E.is_stump() && (E.status & ORGAN_CUT_AWAY)
+		return E && (E.status & ORGAN_CUT_AWAY)
 
 /decl/surgery_step/limb/connect/begin_step(mob/user, mob/living/target, target_zone, obj/item/tool)
 	var/obj/item/organ/external/E = target.get_organ(target_zone)

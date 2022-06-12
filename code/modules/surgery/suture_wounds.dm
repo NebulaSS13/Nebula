@@ -7,7 +7,7 @@
 	max_duration = 100
 	can_infect = 1
 	shock_level = 1
-	surgery_candidate_flags = SURGERY_NO_ROBOTIC | SURGERY_NO_CRYSTAL |	 SURGERY_NO_STUMP
+	surgery_candidate_flags = SURGERY_NO_ROBOTIC | SURGERY_NO_CRYSTAL
 
 /decl/surgery_step/suture_wounds/pre_surgery_step(mob/living/user, mob/living/target, target_zone, obj/item/tool)
 	var/obj/item/organ/external/affected = target.get_organ(target_zone)

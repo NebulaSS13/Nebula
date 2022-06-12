@@ -122,6 +122,9 @@
 
 /obj/item/organ/external/head/proc/get_hair_icon()
 	var/image/res = image(bodytype.icon_template,"")
+	if(!owner)
+		return res
+
 	if(owner.f_style)
 		var/decl/sprite_accessory/facial_hair_style = GET_DECL(owner.f_style)
 		if(facial_hair_style)

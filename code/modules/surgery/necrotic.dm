@@ -2,7 +2,7 @@
 //	 Necrotic organ recovery
 //////////////////////////////////////////////////////////////////
 /decl/surgery_step/necrotic
-	surgery_candidate_flags = SURGERY_NO_CRYSTAL | SURGERY_NO_ROBOTIC | SURGERY_NO_STUMP | SURGERY_NEEDS_ENCASEMENT
+	surgery_candidate_flags = SURGERY_NO_CRYSTAL | SURGERY_NO_ROBOTIC | SURGERY_NEEDS_ENCASEMENT
 	blood_level = 1
 	shock_level = 30
 	surgery_step_category = /decl/surgery_step/necrotic

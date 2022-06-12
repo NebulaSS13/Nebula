@@ -223,13 +223,12 @@
 #endif
 
 // Surgery candidate flags.
-#define SURGERY_NO_ROBOTIC        1
-#define SURGERY_NO_CRYSTAL        2
-#define SURGERY_NO_STUMP          4
-#define SURGERY_NO_FLESH          8
-#define SURGERY_NEEDS_INCISION   16
-#define SURGERY_NEEDS_RETRACTED  32
-#define SURGERY_NEEDS_ENCASEMENT 64
+#define SURGERY_NO_ROBOTIC       BITFLAG(0)
+#define SURGERY_NO_CRYSTAL       BITFLAG(1)
+#define SURGERY_NO_FLESH         BITFLAG(2)
+#define SURGERY_NEEDS_INCISION   BITFLAG(3)
+#define SURGERY_NEEDS_RETRACTED  BITFLAG(4)
+#define SURGERY_NEEDS_ENCASEMENT BITFLAG(5)
 
 //Inserts 'a' or 'an' before X in ways \a doesn't allow
 #define ADD_ARTICLE(X) "[(lowertext(X[1]) in global.vowels) ? "an" : "a"] [X]"

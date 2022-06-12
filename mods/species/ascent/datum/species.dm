@@ -407,7 +407,7 @@
 
 			for(var/organ_tag in H.species.has_limbs)
 				var/obj/item/organ/external/part = H.get_organ(organ_tag)
-				if(isnull(part) || part.is_stump())
+				if(isnull(part))
 					image_key += "0"
 					continue
 				if(part)

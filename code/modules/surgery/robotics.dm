@@ -8,7 +8,7 @@
 //////////////////////////////////////////////////////////////////
 /decl/surgery_step/robotics
 	can_infect = 0
-	surgery_candidate_flags = SURGERY_NO_CRYSTAL | SURGERY_NO_FLESH | SURGERY_NO_STUMP
+	surgery_candidate_flags = SURGERY_NO_CRYSTAL | SURGERY_NO_FLESH
 	surgery_step_category = /decl/surgery_step/robotics
 
 /decl/surgery_step/robotics/get_skill_reqs(mob/living/user, mob/living/target, obj/item/tool)
@@ -334,7 +334,7 @@
 	)
 	min_duration = 70
 	max_duration = 90
-	surgery_candidate_flags = SURGERY_NO_STUMP
+	surgery_candidate_flags = 0
 
 /decl/surgery_step/robotics/fix_organ_robotic/get_skill_reqs(mob/living/user, mob/living/target, obj/item/tool)
 	if(target.isSynthetic())
@@ -392,7 +392,7 @@
 	)
 	min_duration = 90
 	max_duration = 110
-	surgery_candidate_flags = SURGERY_NO_CRYSTAL | SURGERY_NO_FLESH | SURGERY_NO_STUMP | SURGERY_NEEDS_ENCASEMENT
+	surgery_candidate_flags = SURGERY_NO_CRYSTAL | SURGERY_NO_FLESH | SURGERY_NEEDS_ENCASEMENT
 
 /decl/surgery_step/robotics/detatch_organ_robotic/pre_surgery_step(mob/living/user, mob/living/target, target_zone, obj/item/tool)
 	var/list/attached_organs
@@ -434,7 +434,7 @@
 	)
 	min_duration = 100
 	max_duration = 120
-	surgery_candidate_flags = SURGERY_NO_CRYSTAL | SURGERY_NO_FLESH | SURGERY_NO_STUMP | SURGERY_NEEDS_ENCASEMENT
+	surgery_candidate_flags = SURGERY_NO_CRYSTAL | SURGERY_NO_FLESH | SURGERY_NEEDS_ENCASEMENT
 
 /decl/surgery_step/robotics/attach_organ_robotic/pre_surgery_step(mob/living/user, mob/living/target, target_zone, obj/item/tool)
 	var/list/removable_organs
@@ -485,7 +485,7 @@
 	)
 	min_duration = 60
 	max_duration = 80
-	surgery_candidate_flags = SURGERY_NO_CRYSTAL | SURGERY_NO_FLESH | SURGERY_NO_STUMP | SURGERY_NEEDS_ENCASEMENT
+	surgery_candidate_flags = SURGERY_NO_CRYSTAL | SURGERY_NO_FLESH | SURGERY_NEEDS_ENCASEMENT
 
 /decl/surgery_step/robotics/install_mmi/pre_surgery_step(mob/living/user, mob/living/target, target_zone, obj/item/tool)
 	var/obj/item/mmi/M = tool
@@ -543,14 +543,14 @@
 	name = "Remove robotic component"
 	description = "This procedure removes a robotic component."
 	can_infect = 0
-	surgery_candidate_flags = SURGERY_NO_CRYSTAL | SURGERY_NO_FLESH | SURGERY_NO_STUMP | SURGERY_NEEDS_ENCASEMENT
+	surgery_candidate_flags = SURGERY_NO_CRYSTAL | SURGERY_NO_FLESH | SURGERY_NEEDS_ENCASEMENT
 
 /decl/surgery_step/internal/replace_organ/robotic
 	name = "Replace robotic component"
 	description = "This procedure installs a robotic component."
 	can_infect = 0
 	robotic_surgery = TRUE
-	surgery_candidate_flags = SURGERY_NO_CRYSTAL | SURGERY_NO_FLESH | SURGERY_NO_STUMP | SURGERY_NEEDS_ENCASEMENT
+	surgery_candidate_flags = SURGERY_NO_CRYSTAL | SURGERY_NO_FLESH | SURGERY_NEEDS_ENCASEMENT
 
 /decl/surgery_step/remove_mmi
 	name = "Remove MMI"
@@ -562,7 +562,7 @@
 		TOOL_WIRECUTTERS = 75,
 	)
 	can_infect = 0
-	surgery_candidate_flags = SURGERY_NO_CRYSTAL | SURGERY_NO_FLESH | SURGERY_NO_STUMP | SURGERY_NEEDS_ENCASEMENT
+	surgery_candidate_flags = SURGERY_NO_CRYSTAL | SURGERY_NO_FLESH | SURGERY_NEEDS_ENCASEMENT
 
 /decl/surgery_step/remove_mmi/get_skill_reqs(mob/living/user, mob/living/target, obj/item/tool)
 	return SURGERY_SKILLS_ROBOTIC
