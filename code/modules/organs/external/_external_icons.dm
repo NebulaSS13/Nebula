@@ -1,10 +1,7 @@
 var/global/list/limb_icon_cache = list()
 
-/obj/item/organ/external/set_dir(var/direction, var/forced)
-	SHOULD_CALL_PARENT(FALSE)
-	if(forced)
-		return ..(direction)
-	return FALSE
+/obj/item/organ/external/set_dir()
+	return ..(SOUTH)
 
 /obj/item/organ/external/proc/compile_icon()
 	overlays.Cut()
@@ -99,8 +96,6 @@ var/global/list/limb_icon_cache = list()
 			overlays |= mark_s //So when it's not on your body, it has icons
 			mob_icon.Blend(mark_s, mark_style.layer_blend) //So when it's on your body, it has icons
 			icon_cache_key += "[M][markings[M]]"
-
-	set_dir(EAST, TRUE)
 
 	if(render_alpha < 255)
 		mob_icon += rgb(,,,render_alpha)
