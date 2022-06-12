@@ -163,6 +163,13 @@
 		add_overlay("cart_sign[signs]")
 
 //old style retardo-cart
+/datum/movement_handler/move_relay_self/janicart/MayMove(mob/mover, is_external)
+	. = ..()
+	if(. == MOVEMENT_PROCEED && !is_external && !(locate(/obj/item/janicart_key) in mover.get_held_items()))
+		var/obj/structure/bed/chair/janicart/janicart = host
+		to_chat(mover, SPAN_WARNING("You'll need the keys in one of your hands to drive this [istype(janicart) ? janicart.callme : host.name]."))
+		return MOVEMENT_STOP
+
 /obj/structure/bed/chair/janicart
 	name = "janicart"
 	icon = 'icons/obj/vehicles.dmi'
@@ -175,7 +182,7 @@
 	movement_handlers = list(
 		/datum/movement_handler/deny_multiz,
 		/datum/movement_handler/delay = list(1),
-		/datum/movement_handler/move_relay_self
+		/datum/movement_handler/move_relay_self/janicart
 	)
 
 	//copypaste sorry
@@ -241,11 +248,9 @@
 /obj/structure/bed/chair/janicart/relaymove(mob/user, direction)
 	if(user.incapacitated(INCAPACITATION_DISRUPTED))
 		unbuckle_mob()
-	if(locate(/obj/item/janicart_key) in user.get_held_items())
-		step(src, direction)
-		set_dir(direction)
-	else
-		to_chat(user, SPAN_WARNING("You'll need the keys in one of your hands to drive this [callme]."))
+	user.glide_size = glide_size
+	step(src, direction)
+	set_dir(direction)
 
 /obj/structure/bed/chair/janicart/bullet_act(var/obj/item/projectile/Proj)
 	if(buckled_mob)
