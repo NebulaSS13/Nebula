@@ -49,6 +49,7 @@
 			try_change_state(machine, /decl/machine_construction/frame/unwrenched)
 
 /decl/machine_construction/frame/wrenched/attackby(obj/item/I, mob/user, obj/machinery/machine)
+
 	if(IS_WRENCH(I))
 		playsound(machine.loc, 'sound/items/Ratchet.ogg', 50, 1)
 		if(do_after(user, 20, machine))
@@ -56,6 +57,7 @@
 			to_chat(user, "<span class='notice'>You unfasten \the [machine].</span>")
 			machine.anchored = FALSE
 			return
+
 	if(IS_COIL(I))
 		var/obj/item/stack/cable_coil/C = I
 		if(C.get_amount() < 5)

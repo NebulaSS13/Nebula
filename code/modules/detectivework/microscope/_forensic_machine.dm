@@ -24,9 +24,6 @@
 		clear_sample()
 	return ..()
 
-/obj/machinery/forensic/get_alt_interactions(var/mob/user)
-	. = ..() | /decl/interaction_handler/forensics_remove_sample
-
 /obj/machinery/forensic/proc/set_sample(var/obj/O)
 	if(O != sample && O)
 		clear_sample()
@@ -116,3 +113,15 @@
 		remove_sample(usr)
 		return TRUE
 	. = ..()
+
+/obj/machinery/forensic/get_alt_interactions(var/mob/user)
+	. = ..()
+	LAZYADD(., /decl/interaction_handler/forensics_remove_sample)
+
+/decl/interaction_handler/forensics_remove_sample
+	name = "Remove Sample"
+	expected_target_type = /obj/machinery/forensic
+
+/decl/interaction_handler/forensics_remove_sample/invoked(var/atom/target, var/mob/user)
+	var/obj/machinery/forensic/F = target
+	F.remove_sample(usr)

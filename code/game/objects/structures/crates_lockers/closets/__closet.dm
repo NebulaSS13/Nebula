@@ -55,9 +55,6 @@ var/global/list/closets = list()
 	if(!opened && mapload) // if closed and it's the map loading phase, relevant items at the crate's loc are put in the contents
 		store_contents()
 
-/obj/structure/closet/get_alt_interactions(var/mob/user)
-	. = ..() | /decl/interaction_handler/closet_lock_toggle
-
 /obj/structure/closet/proc/WillContain()
 	return null
 
@@ -509,3 +506,21 @@ var/global/list/closets = list()
 
 /obj/structure/closet/CanUseTopicPhysical(mob/user)
 	return CanUseTopic(user, global.physical_no_access_topic_state)
+
+/obj/structure/closet/get_alt_interactions(var/mob/user)
+	. = ..()
+	LAZYADD(., /decl/interaction_handler/closet_lock_toggle)
+
+/decl/interaction_handler/closet_lock_toggle
+	name = "Toggle Lock"
+	expected_target_type = /obj/structure/closet
+
+/decl/interaction_handler/closet_lock_toggle/is_possible(atom/target, mob/user, obj/item/prop)
+	. = ..()
+	if(.)
+		var/obj/structure/closet/C = target
+		. = !C.opened && (C.setup & CLOSET_HAS_LOCK)
+	
+/decl/interaction_handler/closet_lock_toggle/invoked(atom/target, mob/user, obj/item/prop)
+	var/obj/structure/closet/C = target
+	C.togglelock(user)

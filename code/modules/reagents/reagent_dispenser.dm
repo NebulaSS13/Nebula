@@ -22,9 +22,6 @@
 		var/reagent_ratio = initial_reagent_types[reagent_type]
 		reagents.add_reagent(reagent_type, reagent_ratio * initial_capacity)
 
-/obj/structure/reagent_dispensers/get_alt_interactions(var/mob/user)
-	. = ..() | /decl/interaction_handler/set_transfer/reagent_dispenser
-
 /obj/structure/reagent_dispensers/is_pressurized_fluid_source()
 	return TRUE
 
@@ -264,3 +261,20 @@
 	amount_per_transfer_from_this = 10
 	anchored = 1
 	initial_reagent_types = list(/decl/material/liquid/acid = 1)
+
+/obj/structure/reagent_dispensers/get_alt_interactions(var/mob/user)
+	. = ..()
+	LAZYADD(., /decl/interaction_handler/set_transfer/reagent_dispenser)
+
+/decl/interaction_handler/set_transfer/reagent_dispenser
+	expected_target_type = /obj/structure/reagent_dispensers
+
+/decl/interaction_handler/set_transfer/reagent_dispenser/is_possible(var/atom/target, var/mob/user)
+	. = ..()
+	if(.)
+		var/obj/structure/reagent_dispensers/R = target
+		return !!R.possible_transfer_amounts
+
+/decl/interaction_handler/set_transfer/reagent_dispenser/invoked(var/atom/target, var/mob/user)
+	var/obj/structure/reagent_dispensers/R = target
+	R.set_amount_per_transfer_from_this()

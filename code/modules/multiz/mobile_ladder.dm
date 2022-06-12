@@ -82,9 +82,6 @@
 	tool_interaction_flags = 0
 	material_alteration = 0
 
-/obj/structure/ladder/mobile/get_alt_interactions(var/mob/user)
-	. = ..() | /decl/interaction_handler/ladder_fold
-
 /obj/structure/ladder/mobile/verb/fold_ladder()
 	set name = "Fold Ladder"
 	set category = "Object"
@@ -122,3 +119,15 @@
 	else if(target_up && istype(target_up, /obj/structure/ladder/mobile))
 		QDEL_NULL(target_up)
 		qdel(src)
+
+/obj/structure/ladder/mobile/get_alt_interactions(var/mob/user)
+	. = ..()
+	LAZYADD(., /decl/interaction_handler/ladder_fold)
+
+/decl/interaction_handler/ladder_fold
+	name = "Fold Ladder"
+	expected_target_type = /obj/structure/ladder/mobile
+
+/decl/interaction_handler/ladder_fold/invoked(var/atom/target, var/mob/user)
+	var/obj/structure/ladder/mobile/L
+	L.fold(user)

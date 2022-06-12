@@ -22,9 +22,6 @@ var/global/list/default_initial_tech_levels
 	var/obj/item/disk/tech_disk/disk
 	var/sync_policy = SYNC_PULL_NETWORK|SYNC_PUSH_NETWORK|SYNC_PULL_DISK
 
-/obj/machinery/design_database/get_alt_interactions(var/mob/user)
-	. = ..() | /decl/interaction_handler/remove_disk/designs
-
 /obj/machinery/design_database/proc/toggle_sync_policy_flag(var/sync_flag)
 	if(sync_policy & sync_flag)
 		sync_policy &= ~sync_flag
@@ -177,3 +174,20 @@ var/global/list/default_initial_tech_levels
 		disk = null
 		return TRUE
 	return FALSE
+
+/obj/machinery/design_database/get_alt_interactions(var/mob/user)
+	. = ..()
+	LAZYADD(., /decl/interaction_handler/remove_disk/designs)
+
+/decl/interaction_handler/remove_disk/designs
+	expected_target_type = /obj/machinery/design_database
+
+/decl/interaction_handler/remove_disk/designs/is_possible(atom/target, mob/user, obj/item/prop)
+	. = ..()
+	if(.)
+		var/obj/machinery/design_database/D = target
+		. = !!D.disk
+
+/decl/interaction_handler/remove_disk/designs/invoked(atom/target, mob/user, obj/item/prop)
+	var/obj/machinery/design_database/D = target
+	D.eject_disk(user)

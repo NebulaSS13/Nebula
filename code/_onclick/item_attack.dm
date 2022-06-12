@@ -30,7 +30,6 @@ avoid code duplication. This includes items that may sometimes act as a standard
 		add_fingerprint(user)
 	return A.attackby(src, user, click_params)
 
-// No comment
 /atom/proc/attackby(obj/item/W, mob/user, var/click_params)
 	return
 

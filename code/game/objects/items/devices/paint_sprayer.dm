@@ -78,9 +78,6 @@
 	var/random_preset = pick(preset_colors)
 	change_color(preset_colors[random_preset])
 
-/obj/item/paint_sprayer/get_alt_interactions(mob/user)
-	. = ..() | /decl/interaction_handler/paint_sprayer_colour
-
 /obj/item/paint_sprayer/on_update_icon()
 	cut_overlays()
 	add_overlay(overlay_image(icon, "[icon_state]_color", paint_color))
@@ -443,3 +440,16 @@
 #undef PAINT_REGION_PAINT
 #undef PAINT_REGION_STRIPE
 #undef PAINT_REGION_WINDOW
+
+/obj/item/paint_sprayer/get_alt_interactions(mob/user)
+	. = ..()
+	LAZYADD(., /decl/interaction_handler/paint_sprayer_colour)
+
+/decl/interaction_handler/paint_sprayer_colour
+	name = "Change Color Preset"
+	expected_target_type = /obj/item/paint_sprayer
+	interaction_flags = INTERACTION_NEEDS_PHYSICAL_INTERACTION | INTERACTION_NEEDS_INVENTORY
+
+/decl/interaction_handler/paint_sprayer_colour/invoked(atom/target, mob/user, obj/item/prop)
+	var/obj/item/paint_sprayer/sprayer = target
+	sprayer.choose_preset_color()
