@@ -20,7 +20,7 @@
 	var/blocked_by_gloves = TRUE
 
 /decl/natural_attack/claws/is_usable(var/mob/living/carbon/human/user, var/mob/living/carbon/human/target, var/zone)
-	return (!user.gloves || !blocked_by_gloves)
+	return (!user.get_equipped_item(slot_gloves_str) || !blocked_by_gloves)
 
 /decl/natural_attack/claws/show_attack(var/mob/living/carbon/human/user, var/mob/living/carbon/human/target, var/zone, var/attack_damage)
 	var/obj/item/organ/external/affecting = istype(target) && zone && target.get_organ(zone)

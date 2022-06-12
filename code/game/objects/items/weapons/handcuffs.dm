@@ -37,9 +37,9 @@
 		place_handcuffs(user, user)
 		return
 
-	// only carbons can be handcuffed
+	// only carbons can be cuffed
 	if(istype(C))
-		if(!C.handcuffed)
+		if(!C.get_equipped_item(slot_handcuffed_str))
 			if (C == user)
 				place_handcuffs(user, user)
 				return
@@ -65,8 +65,9 @@
 		to_chat(user, "<span class='danger'>\The [H] needs at least two wrists before you can cuff them together!</span>")
 		return 0
 
-	if((H.gloves && H.gloves.item_flags & ITEM_FLAG_NOCUFFS) && !elastic)
-		to_chat(user, "<span class='danger'>\The [src] won't fit around \the [H.gloves]!</span>")
+	var/obj/item/gloves = H.get_equipped_item(slot_gloves_str)
+	if((gloves && (gloves.item_flags & ITEM_FLAG_NOCUFFS)) && !elastic)
+		to_chat(user, "<span class='danger'>\The [src] won't fit around \the [gloves]!</span>")
 		return 0
 
 	user.visible_message("<span class='danger'>\The [user] is attempting to put [cuff_type] on \the [H]!</span>")
@@ -101,11 +102,11 @@ var/global/last_chew = 0
 	if (last_chew + 26 > world.time) return
 
 	var/mob/living/carbon/human/H = A
-	if (!H.handcuffed) return
+	if (!H.get_equipped_item(slot_handcuffed_str)) return
 	if (H.a_intent != I_HURT) return
 	if (H.zone_sel.selecting != BP_MOUTH) return
-	if (H.wear_mask) return
-	if (istype(H.wear_suit, /obj/item/clothing/suit/straight_jacket)) return
+	if (H.get_equipped_item(slot_wear_mask_str)) return
+	if (istype(H.get_equipped_item(slot_wear_suit_str), /obj/item/clothing/suit/straight_jacket)) return
 
 	var/obj/item/organ/external/O = H.get_organ(H.get_active_held_item_slot())
 	if (!O) return

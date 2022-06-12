@@ -99,12 +99,11 @@ var/global/list/image/splatter_cache=list()
 	var/hasfeet = 1
 	if((!l_foot || l_foot.is_stump()) && (!r_foot || r_foot.is_stump()))
 		hasfeet = 0
-	
+
 	var/transferred_data = blood_data ? blood_data[pick(blood_data)] : null
-	if(perp.shoes && !perp.buckled)//Adding blood to shoes
-		var/obj/item/clothing/shoes/S = perp.shoes
-		if(istype(S))
-			S.add_coating(chemical, amount, transferred_data)
+	var/obj/item/clothing/shoes/shoes = perp.get_equipped_item(slot_shoes_str)
+	if(istype(shoes) && !perp.buckled)//Adding blood to shoes
+		shoes.add_coating(chemical, amount, transferred_data)
 	else if (hasfeet)//Or feet
 		if(l_foot)
 			l_foot.add_coating(chemical, amount, transferred_data)
@@ -130,7 +129,7 @@ var/global/list/image/splatter_cache=list()
 	..()
 	if (amount && length(blood_data) && ishuman(user))
 		var/mob/living/carbon/human/H = user
-		if(H.gloves)
+		if(H.get_equipped_item(slot_gloves_str))
 			return
 		var/taken = rand(1,amount)
 		amount -= taken

@@ -61,24 +61,20 @@
 /proc/iscuffed(A)
 	if(istype(A, /mob/living/carbon))
 		var/mob/living/carbon/C = A
-		if(C.handcuffed)
+		if(C.get_equipped_item(slot_handcuffed_str))
 			return 1
 	return 0
 
 /proc/hassensorlevel(A, var/level)
-	var/mob/living/carbon/human/H = A
-	if(istype(H) && istype(H.w_uniform, /obj/item/clothing/under))
-		var/obj/item/clothing/under/U = H.w_uniform
-		return U.sensor_mode >= level
-	return 0
+	return getsensorlevel(A) >= level
 
 /proc/getsensorlevel(A)
-	var/mob/living/carbon/human/H = A
-	if(istype(H) && istype(H.w_uniform, /obj/item/clothing/under))
-		var/obj/item/clothing/under/U = H.w_uniform
-		return U.sensor_mode
+	var/mob/M = A
+	if(istype(M))
+		var/obj/item/clothing/under/U = M.get_equipped_item(slot_w_uniform_str)
+		if(istype(U))
+			return U.sensor_mode
 	return SUIT_SENSOR_OFF
-
 
 /proc/is_admin(var/mob/user)
 	return check_rights(R_ADMIN, 0, user) != 0
@@ -352,7 +348,7 @@ It's fairly easy to fix if dealing with single letters but not so much with comp
 	for(var/obj/item/thing in get_held_items())
 		if(thing.simulated)
 			return TRUE
-	if(full_body && (back || wear_mask))
+	if(full_body && (get_equipped_item(slot_back_str) || get_equipped_item(slot_wear_mask_str)))
 		return TRUE
 
 //converts intent-strings into numbers and back
@@ -505,7 +501,7 @@ var/global/list/intents = list(I_HELP,I_DISARM,I_GRAB,I_HURT)
 	return 0
 
 /mob/living/carbon/assess_perp(var/obj/access_obj, var/check_access, var/auth_weapons, var/check_records, var/check_arrest)
-	if(handcuffed)
+	if(get_equipped_item(slot_handcuffed_str))
 		return SAFE_PERP
 
 	return ..()
@@ -531,6 +527,7 @@ var/global/list/intents = list(I_HELP,I_DISARM,I_GRAB,I_HURT)
 			if(istype(thing, /obj/item/gun) || istype(thing, /obj/item/energy_blade) || istype(thing, /obj/item/baton))
 				threatcount += 4
 
+		var/obj/item/belt = get_equipped_item(slot_belt_str)
 		if(istype(belt, /obj/item/gun) || istype(belt, /obj/item/energy_blade) || istype(belt, /obj/item/baton))
 			threatcount += 2
 

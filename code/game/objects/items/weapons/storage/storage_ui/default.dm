@@ -67,38 +67,38 @@
 	. = ..()
 
 /datum/storage_ui/default/on_open(var/mob/user)
-	if (user.s_active)
-		user.s_active.close(user)
+	if (user.active_storage)
+		user.active_storage.close(user)
 
 /datum/storage_ui/default/after_close(var/mob/user)
-	user.s_active = null
+	user.active_storage = null
 
 /datum/storage_ui/default/on_insertion(var/mob/user)
-	if(user.s_active)
-		user.s_active.show_to(user)
+	if(user.active_storage)
+		user.active_storage.show_to(user)
 
 /datum/storage_ui/default/on_pre_remove(var/mob/user, var/obj/item/W)
 	for(var/mob/M in range(1, storage.loc))
-		if (M.s_active == storage)
+		if (M.active_storage == storage)
 			if (M.client)
 				M.client.screen -= W
 
 /datum/storage_ui/default/on_post_remove(var/mob/user)
-	if(user && user.s_active) // Using ?. here causes a runtime ('Cannot read 0.s_active'), it shouldn't but it does.
-		user.s_active.show_to(user)
+	if(user && user.active_storage) // Using ?. here causes a runtime ('Cannot read 0.active_storage'), it shouldn't but it does.
+		user.active_storage.show_to(user)
 
 /datum/storage_ui/default/on_hand_attack(var/mob/user)
 	for(var/mob/M in range(1))
-		if (M.s_active == storage)
+		if (M.active_storage == storage)
 			storage.close(M)
 
 /datum/storage_ui/default/show_to(var/mob/user)
-	if(user.s_active != storage)
+	if(user.active_storage != storage)
 		for(var/obj/item/I in storage)
 			if(I.on_found(user))
 				return
-	if(user.s_active)
-		user.s_active.hide_from(user)
+	if(user.active_storage)
+		user.active_storage.hide_from(user)
 	user.client.screen -= boxes
 	user.client.screen -= storage_start
 	user.client.screen -= storage_continue
@@ -114,7 +114,7 @@
 		user.client.screen += storage_continue
 		user.client.screen += storage_end
 	is_seeing |= user
-	user.s_active = storage
+	user.active_storage = storage
 
 /datum/storage_ui/default/hide_from(var/mob/user)
 	is_seeing -= user
@@ -126,8 +126,8 @@
 	user.client.screen -= storage_end
 	user.client.screen -= closer
 	user.client.screen -= storage.contents
-	if(user.s_active == storage)
-		user.s_active = null
+	if(user.active_storage == storage)
+		user.active_storage = null
 
 //Creates the storage UI
 /datum/storage_ui/default/prepare_ui()
@@ -145,7 +145,7 @@
 /datum/storage_ui/default/proc/can_see_contents()
 	var/list/cansee = list()
 	for(var/mob/M in is_seeing)
-		if(M.s_active == storage && M.client)
+		if(M.active_storage == storage && M.client)
 			cansee |= M
 		else
 			is_seeing -= M
@@ -252,8 +252,8 @@
 	if (adjusted_contents > 7)
 		row_num = round((adjusted_contents-1) / 7) // 7 is the maximum allowed width.
 	arrange_item_slots(row_num, col_count)
-	if(user && user.s_active)
-		user.s_active.show_to(user)
+	if(user && user.active_storage)
+		user.active_storage.show_to(user)
 
 #undef SCREEN_LOC_MOD_FIRST
 #undef SCREEN_LOC_MOD_SECOND

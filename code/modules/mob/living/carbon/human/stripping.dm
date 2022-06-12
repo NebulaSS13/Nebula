@@ -31,12 +31,12 @@
 				toggle_sensors(user)
 			return
 		if ("lock_sensors")
-			if (!istype(w_uniform, /obj/item/clothing/under))
+			var/obj/item/clothing/under/subject_uniform = get_equipped_item(slot_w_uniform_str)
+			if (!istype(subject_uniform, /obj/item/clothing/under))
 				return
-			var/obj/item/clothing/under/subject_uniform = w_uniform
 			visible_message(SPAN_DANGER("\The [user] is trying to [subject_uniform.has_sensor == SUIT_LOCKED_SENSORS ? "un" : ""]lock \the [src]'s sensors!"))
 			if (do_after(user, HUMAN_STRIP_DELAY, src, progress = 0))
-				if (subject_uniform != w_uniform)
+				if (subject_uniform != get_equipped_item(slot_w_uniform_str))
 					to_chat(user, SPAN_WARNING("\The [src] is not wearing \the [subject_uniform] anymore."))
 					return
 				if (!subject_uniform.has_sensor)
@@ -57,16 +57,16 @@
 		if("tie")
 			if(!istype(holder) || !holder.accessories.len)
 				return
-	
+
 			var/obj/item/clothing/accessory/A
 			if(LAZYLEN(holder.accessories) > 1)
 				A = show_radial_menu(user, user, make_item_radial_menu_choices(holder.accessories), radius = 42, tooltips = TRUE)
 			else
 				A = holder.accessories[1]
-			
+
 			if(!istype(A))
 				return
-			
+
 			visible_message("<span class='danger'>\The [user] is trying to remove \the [src]'s [A.name]!</span>")
 
 			if(!do_after(user, HUMAN_STRIP_DELAY, src, check_holding = FALSE, progress = FALSE))
@@ -116,31 +116,29 @@
 
 // Empty out everything in the target's pockets.
 /mob/living/carbon/human/proc/empty_pockets(var/mob/living/user)
-	if(!r_store && !l_store)
-		to_chat(user, "<span class='warning'>\The [src] has nothing in their pockets.</span>")
-		return
-	if(r_store)
-		unEquip(r_store)
-	if(l_store)
-		unEquip(l_store)
-	visible_message("<span class='danger'>\The [user] empties [src]'s pockets!</span>")
+	for(var/slot in global.pocket_slots)
+		var/obj/item/pocket = get_equipped_item(slot)
+		if(pocket)
+			unEquip(pocket)
+			. = TRUE
+	if(.)
+		visible_message(SPAN_DANGER("\The [user] empties \the [src]'s pockets!"))
+	else
+		to_chat(user, SPAN_WARNING("\The [src] has nothing in their pockets."))
 
 /mob/living/carbon/human/proc/place_in_pockets(obj/item/I, var/mob/living/user)
 	if(!user.unEquip(I))
 		return
-	if(!r_store)
-		if(equip_to_slot_if_possible(I, slot_r_store_str, del_on_fail=0, disable_warning=1, redraw_mob=1))
+	for(var/slot in global.pocket_slots)
+		if(!get_equipped_item(slot) && equip_to_slot_if_possible(I, slot, del_on_fail=0, disable_warning=1, redraw_mob=1))
 			return
-	if(!l_store)
-		if(equip_to_slot_if_possible(I, slot_l_store_str, del_on_fail=0, disable_warning=1, redraw_mob=1))
-			return
-	to_chat(user, "<span class='warning'>You are unable to place [I] in [src]'s pockets.</span>")
+	to_chat(user, SPAN_WARNING("You are unable to place [I] in [src]'s pockets."))
 	user.put_in_active_hand(I)
 
 // Modify the current target sensor level.
 /mob/living/carbon/human/proc/toggle_sensors(var/mob/living/user)
-	var/obj/item/clothing/under/suit = w_uniform
-	if(!suit)
+	var/obj/item/clothing/under/suit = get_equipped_item(slot_w_uniform_str)
+	if(!istype(suit))
 		to_chat(user, "<span class='warning'>\The [src] is not wearing a suit with sensors.</span>")
 		return
 	if (suit.has_sensor >= 2)
@@ -153,27 +151,29 @@
 // Set internals on or off.
 /mob/living/carbon/human/proc/toggle_internals(var/mob/living/user)
 	if(internal)
-		visible_message("<span class='danger'>\The [user] disables \the [src]'s internals!</span>")
+		visible_message(SPAN_NOTICE("\The [user] disables \the [src]'s internals!"))
 		internal.add_fingerprint(user)
 		set_internals(null)
 		return
-	else
-		// Check for airtight mask/helmet.
-		if(!(wear_mask && wear_mask.item_flags & ITEM_FLAG_AIRTIGHT))
-			if(!(head && head.item_flags & ITEM_FLAG_AIRTIGHT))
-				to_chat(user, "<span class='warning'>\The [src] does not have a suitable mask or helmet.</span>")
-				return
 
-		// Find an internal source.
-		if(istype(back, /obj/item/tank))
-			set_internals(back)
-		else if(istype(s_store, /obj/item/tank))
-			set_internals(s_store)
-		else if(istype(belt, /obj/item/tank))
-			set_internals(belt)
-		else
-			to_chat(user, "<span class='warning'>You could not find a suitable tank!</span>")
+	// Check for airtight mask/helmet.
+	var/found_mask = FALSE
+	for(var/slot in global.airtight_slots)
+		var/obj/item/gear = get_equipped_item(slot)
+		if(gear && (gear.item_flags & ITEM_FLAG_AIRTIGHT))
+			found_mask = TRUE
+			break
+	if(!found_mask)
+		to_chat(user, SPAN_WARNING("\The [src] does not have a suitable mask or helmet."))
+		return
+
+	// Find an internal source.
+	for(var/slot in list(slot_back_str, slot_s_store_str, slot_belt_str))
+		var/obj/item/tank/tank = get_equipped_item(slot)
+		if(istype(tank))
+			set_internals(tank)
+			visible_message(SPAN_NOTICE("\The [src] is now running on internals!"))
+			internal.add_fingerprint(user)
 			return
-
-		visible_message("<span class='warning'>\The [src] is now running on internals!</span>")
-		internal.add_fingerprint(user)
+	
+	to_chat(user, SPAN_WARNING("You could not find a suitable tank!"))

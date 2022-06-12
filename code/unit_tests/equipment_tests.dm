@@ -17,19 +17,15 @@
 		return 0
 
 	H = locate(test["mobref"])
-
-	var/obj/item/clothing/glasses/G = new glasses_type()
-	H.glasses = G
-
+	H.equip_to_slot(new glasses_type(H), slot_glasses_str)
 	return 1
-
 
 /datum/unit_test/vision_glasses/check_result()
 
 	if(isnull(H) || H.life_tick < 2)
 		return 0
 
-	if(isnull(H.glasses))
+	if(isnull(H.get_equipped_item(slot_glasses_str)))
 		fail("Mob doesn't have glasses on")
 
 	H.handle_vision()	// Because Life has a client check that bypasses updating vision

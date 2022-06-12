@@ -111,10 +111,13 @@
 	var/decl/move_intent/default_walk_intent
 	var/decl/move_intent/default_run_intent
 
+	// TODO: REMOVE DIRECT REFERENCES
+	var/obj/item/_back
+	var/obj/item/clothing/mask/_wear_mask
+	// END TODO
+
+	var/obj/item/storage/active_storage
 	var/obj/buckled = null//Living
-	var/obj/item/back = null//Human/Monkey
-	var/obj/item/storage/s_active = null//Carbon
-	var/obj/item/clothing/mask/wear_mask = null//Carbon
 	var/in_throw_mode = 0
 
 	var/can_pull_size = ITEM_SIZE_STRUCTURE // Maximum w_class the mob can pull.

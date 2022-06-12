@@ -90,22 +90,11 @@ var/global/list/channel_to_radio_key = new
 	return key
 
 /mob/living/proc/binarycheck()
-
-	if (istype(src, /mob/living/silicon/pai))
-		return
-
-	if (!ishuman(src))
-		return
-
-	var/mob/living/carbon/human/H = src
-	if (H.l_ear || H.r_ear)
-		var/obj/item/radio/headset/dongle
-		if(istype(H.l_ear,/obj/item/radio/headset))
-			dongle = H.l_ear
-		else
-			dongle = H.r_ear
-		if(!istype(dongle)) return
-		if(dongle.translate_binary) return 1
+	for(var/slot in global.ear_slots)
+		var/obj/item/radio/headset/dongle = get_equipped_item(slot)
+		if(istype(dongle) && dongle.translate_binary)
+			return TRUE
+	return FALSE
 
 /mob/living/proc/get_default_language()
 	. = ispath(default_language, /decl/language) && GET_DECL(default_language)

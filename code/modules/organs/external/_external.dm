@@ -491,15 +491,15 @@
 	if(!owner)
 		return
 	if((body_part & SLOT_FOOT_LEFT) || (body_part & SLOT_FOOT_RIGHT))
-		owner.drop_from_inventory(owner.shoes)
+		owner.drop_from_inventory(owner.get_equipped_item(slot_shoes_str))
 	if((body_part & SLOT_HAND_LEFT) || (body_part & SLOT_HAND_RIGHT))
-		owner.drop_from_inventory(owner.gloves)
+		owner.drop_from_inventory(owner.get_equipped_item(slot_gloves_str))
 	if(body_part & SLOT_HEAD)
-		owner.drop_from_inventory(owner.head)
-		owner.drop_from_inventory(owner.glasses)
-		owner.drop_from_inventory(owner.l_ear)
-		owner.drop_from_inventory(owner.r_ear)
-		owner.drop_from_inventory(owner.wear_mask)
+		owner.drop_from_inventory(owner.get_equipped_item(slot_head_str))
+		owner.drop_from_inventory(owner.get_equipped_item(slot_glasses_str))
+		owner.drop_from_inventory(owner.get_equipped_item(slot_l_ear_str))
+		owner.drop_from_inventory(owner.get_equipped_item(slot_r_ear_str))
+		owner.drop_from_inventory(owner.get_equipped_item(slot_wear_mask_str))
 
 //Helper proc used by various tools for repairing robot limbs
 /obj/item/organ/external/proc/robo_repair(var/repair_amount, var/damage_type, var/damage_desc, obj/item/tool, mob/living/user)
@@ -1097,11 +1097,12 @@ Note that amputating the affected organ does in fact remove the infection from t
 		holder = owner
 	if(!holder)
 		return
-	if (holder.handcuffed && (body_part in list(SLOT_ARM_LEFT, SLOT_ARM_RIGHT, SLOT_HAND_LEFT, SLOT_HAND_RIGHT)))
+	var/obj/item/cuffs = holder.get_equipped_item(slot_handcuffed_str)
+	if(cuffs && (body_part in list(SLOT_ARM_LEFT, SLOT_ARM_RIGHT, SLOT_HAND_LEFT, SLOT_HAND_RIGHT)))
 		holder.visible_message(\
-			"\The [holder.handcuffed.name] falls off of [holder.name].",\
-			"\The [holder.handcuffed.name] falls off you.")
-		holder.drop_from_inventory(holder.handcuffed)
+			"\The [cuffs] falls off of [holder.name].",\
+			"\The [cuffs] falls off you.")
+		holder.unEquip(cuffs)
 
 // checks if all wounds on the organ are bandaged
 /obj/item/organ/external/proc/is_bandaged()
@@ -1209,8 +1210,8 @@ Note that amputating the affected organ does in fact remove the infection from t
 	// This is mostly for the ninja suit to stop ninja being so crippled by breaks.
 	// TODO: consider moving this to a suit proc or process() or something during
 	// hardsuit rewrite.
-	if(!splinted && owner && istype(owner.wear_suit, /obj/item/clothing/suit/space/rig))
-		var/obj/item/clothing/suit/space/rig/suit = owner.wear_suit
+	var/obj/item/clothing/suit/space/rig/suit = owner.get_equipped_item(slot_wear_suit_str)
+	if(!splinted && owner && istype(suit))
 		suit.handle_fracture(owner, src)
 
 /obj/item/organ/external/proc/mend_fracture()

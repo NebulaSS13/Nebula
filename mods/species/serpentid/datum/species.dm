@@ -162,7 +162,7 @@
 	return FALSE
 
 /decl/species/serpentid/can_shred(var/mob/living/carbon/human/H, var/ignore_intent, var/ignore_antag)
-	if(!H.handcuffed || H.buckled)
+	if(!H.get_equipped_item(slot_handcuffed_str) || H.buckled)
 		return ..(H, ignore_intent, TRUE)
 	else
 		return 0

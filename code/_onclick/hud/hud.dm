@@ -37,18 +37,6 @@
 	var/obj/screen/action_button/hide_toggle/hide_actions_toggle
 	var/action_buttons_hidden = FALSE
 
-	var/static/list/hidden_inventory_slots = list(
-		slot_head_str,
-		slot_shoes_str,
-		slot_l_ear_str,
-		slot_r_ear_str,
-		slot_gloves_str,
-		slot_glasses_str,
-		slot_w_uniform_str,
-		slot_wear_suit_str,
-		slot_wear_mask_str
-	)
-
 /datum/hud/New(mob/owner)
 	mymob = owner
 	instantiate()
@@ -85,90 +73,37 @@
 	persistant_inventory_update()
 
 /datum/hud/proc/hidden_inventory_update()
-	if(!mymob) return
-	if(ishuman(mymob))
-		var/mob/living/carbon/human/H = mymob
-		for(var/gear_slot in H.species.hud.gear)
-			var/list/hud_data = H.species.hud.gear[gear_slot]
-			if(inventory_shown && hud_shown)
-				switch(hud_data["slot"])
-					if(slot_head_str)
-						if(H.head)      H.head.screen_loc =      hud_data["loc"]
-					if(slot_shoes_str)
-						if(H.shoes)     H.shoes.screen_loc =     hud_data["loc"]
-					if(slot_l_ear_str)
-						if(H.l_ear)     H.l_ear.screen_loc =     hud_data["loc"]
-					if(slot_r_ear_str)
-						if(H.r_ear)     H.r_ear.screen_loc =     hud_data["loc"]
-					if(slot_gloves_str)
-						if(H.gloves)    H.gloves.screen_loc =    hud_data["loc"]
-					if(slot_glasses_str)
-						if(H.glasses)   H.glasses.screen_loc =   hud_data["loc"]
-					if(slot_w_uniform_str)
-						if(H.w_uniform) H.w_uniform.screen_loc = hud_data["loc"]
-					if(slot_wear_suit_str)
-						if(H.wear_suit) H.wear_suit.screen_loc = hud_data["loc"]
-					if(slot_wear_mask_str)
-						if(H.wear_mask) H.wear_mask.screen_loc = hud_data["loc"]
-			else
-				switch(hud_data["slot"])
-					if(slot_head_str)
-						if(H.head)      H.head.screen_loc =      null
-					if(slot_shoes_str)
-						if(H.shoes)     H.shoes.screen_loc =     null
-					if(slot_l_ear_str)
-						if(H.l_ear)     H.l_ear.screen_loc =     null
-					if(slot_r_ear_str)
-						if(H.r_ear)     H.r_ear.screen_loc =     null
-					if(slot_gloves_str)
-						if(H.gloves)    H.gloves.screen_loc =    null
-					if(slot_glasses_str)
-						if(H.glasses)   H.glasses.screen_loc =   null
-					if(slot_w_uniform_str)
-						if(H.w_uniform) H.w_uniform.screen_loc = null
-					if(slot_wear_suit_str)
-						if(H.wear_suit) H.wear_suit.screen_loc = null
-					if(slot_wear_mask_str)
-						if(H.wear_mask) H.wear_mask.screen_loc = null
-
+	var/decl/species/species = mymob?.get_species()
+	if(species?.hud)
+		refresh_inventory_slots(species.hud.hidden_slots, (inventory_shown && hud_shown))
 
 /datum/hud/proc/persistant_inventory_update()
-	if(!mymob)
-		return
+	var/decl/species/species = mymob?.get_species()
+	if(species?.hud)
+		refresh_inventory_slots(species.hud.persistent_slots, hud_shown)
 
-	if(ishuman(mymob))
-		var/mob/living/carbon/human/H = mymob
-		for(var/gear_slot in H.species.hud.gear)
-			var/list/hud_data = H.species.hud.gear[gear_slot]
-			if(hud_shown)
-				switch(hud_data["slot"])
-					if(slot_s_store_str)
-						if(H.s_store) H.s_store.screen_loc = hud_data["loc"]
-					if(slot_wear_id_str)
-						if(H.wear_id) H.wear_id.screen_loc = hud_data["loc"]
-					if(slot_belt_str)
-						if(H.belt)    H.belt.screen_loc =    hud_data["loc"]
-					if(slot_back_str)
-						if(H.back)    H.back.screen_loc =    hud_data["loc"]
-					if(slot_l_store_str)
-						if(H.l_store) H.l_store.screen_loc = hud_data["loc"]
-					if(slot_r_store_str)
-						if(H.r_store) H.r_store.screen_loc = hud_data["loc"]
-			else
-				switch(hud_data["slot"])
-					if(slot_s_store_str)
-						if(H.s_store) H.s_store.screen_loc = null
-					if(slot_wear_id_str)
-						if(H.wear_id) H.wear_id.screen_loc = null
-					if(slot_belt_str)
-						if(H.belt)    H.belt.screen_loc =    null
-					if(slot_back_str)
-						if(H.back)    H.back.screen_loc =    null
-					if(slot_l_store_str)
-						if(H.l_store) H.l_store.screen_loc = null
-					if(slot_r_store_str)
-						if(H.r_store) H.r_store.screen_loc = null
+/datum/hud/proc/refresh_inventory_slots(var/list/checking_slots, var/show_hud)
 
+	var/decl/species/species = mymob?.get_species()
+	for(var/hud_slot in checking_slots)
+
+		// Check if we're even wearing anything in that slot.
+		var/obj/item/gear = mymob.get_equipped_item(checking_slots[hud_slot])
+		if(!istype(gear))
+			continue
+
+		// We're not showing anything, hide it.
+		if(!show_hud)
+			gear.screen_loc = null
+			continue
+
+		var/list/hud_data = species.hud.gear[hud_slot]
+		if(!("loc" in hud_data))
+			gear.screen_loc = null
+			continue
+
+		// Set the loc.
+		gear.screen_loc = hud_data["loc"]
 
 /datum/hud/proc/instantiate()
 	if(!ismob(mymob)) return 0

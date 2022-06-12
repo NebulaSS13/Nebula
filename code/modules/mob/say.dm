@@ -119,4 +119,5 @@
 	. = is_muzzled()
 
 /mob/proc/is_muzzled()
-	return istype(wear_mask, /obj/item/clothing/mask/muzzle) || istype(wear_mask, /obj/item/clothing/sealant)
+	var/obj/item/mask = get_equipped_item(slot_wear_mask_str)
+	return istype(mask, /obj/item/clothing/mask/muzzle) || istype(mask, /obj/item/clothing/sealant)

@@ -95,10 +95,11 @@
 	. = ..()
 
 /mob/living/carbon/human/proc/get_jetpack()
+	var/obj/item/back = get_equipped_item(slot_back_str)
 	if(back)
 		if(istype(back,/obj/item/tank/jetpack))
 			return back
-		else if(istype(back,/obj/item/rig))
+		if(istype(back,/obj/item/rig))
 			var/obj/item/rig/rig = back
 			for(var/obj/item/rig_module/maneuvering_jets/module in rig.installed_modules)
 				return module.jets
@@ -120,6 +121,7 @@
 /mob/living/carbon/human/Check_Shoegrip()
 	if(species.check_no_slip(src))
 		return 1
+	var/obj/item/shoes = get_equipped_item(slot_shoes_str)
 	if(shoes && (shoes.item_flags & ITEM_FLAG_NOSLIP) && istype(shoes, /obj/item/clothing/shoes/magboots))  //magboots + dense_object = no floating
 		return 1
 	return 0

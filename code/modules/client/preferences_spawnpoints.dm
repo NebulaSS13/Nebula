@@ -67,7 +67,7 @@
 		if(!C.occupant)
 
 			// Store any held or equipped items.
-			var/obj/item/storage/backpack/pack = victim.back
+			var/obj/item/storage/backpack/pack = victim.get_equipped_item(slot_back_str)
 			if(istype(pack))
 				for(var/atom/movable/thing in victim.get_held_items())
 					victim.drop_from_inventory(thing)

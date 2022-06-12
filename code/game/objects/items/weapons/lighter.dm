@@ -99,8 +99,8 @@
 	if(lit)
 		M.IgniteMob()
 
-		if(istype(M.wear_mask, /obj/item/clothing/mask/smokable/cigarette) && user.zone_sel.selecting == BP_MOUTH)
-			var/obj/item/clothing/mask/smokable/cigarette/cig = M.wear_mask
+		var/obj/item/clothing/mask/smokable/cigarette/cig = M.get_equipped_item(slot_wear_mask_str)
+		if(istype(cig) && user.zone_sel.selecting == BP_MOUTH)
 			if(M == user)
 				cig.attackby(src, user)
 			else

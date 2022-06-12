@@ -152,8 +152,8 @@
 		if(!S.amount)
 			qdel(S) // todo: there's probably something missing here
 	prepare_ui()
-	if(usr.s_active)
-		usr.s_active.show_to(usr)
+	if(usr.active_storage)
+		usr.active_storage.show_to(usr)
 	update_icon()
 
 // Instead of removing

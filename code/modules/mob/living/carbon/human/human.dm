@@ -86,10 +86,11 @@
 		if(potato && potato.cell)
 			stat("Battery charge:", "[potato.get_charge()]/[potato.cell.maxcharge]")
 
-		if(back && istype(back,/obj/item/rig))
-			var/obj/item/rig/suit = back
+		var/obj/item/rig/suit = get_equipped_item(slot_back_str)
+		if(istype(suit))
 			var/cell_status = "ERROR"
-			if(suit.cell) cell_status = "[suit.cell.charge]/[suit.cell.maxcharge]"
+			if(suit.cell)
+				cell_status = "[suit.cell.charge]/[suit.cell.maxcharge]"
 			stat(null, "Suit charge: [cell_status]")
 
 		if(mind)
@@ -117,11 +118,11 @@
 	return 0
 
 /mob/living/carbon/human/restrained()
-	if (handcuffed)
+	if(get_equipped_item(slot_handcuffed_str))
 		return 1
 	if(grab_restrained())
 		return 1
-	if (istype(wear_suit, /obj/item/clothing/suit/straight_jacket))
+	if (istype(get_equipped_item(slot_wear_suit_str), /obj/item/clothing/suit/straight_jacket))
 		return 1
 	return 0
 
@@ -155,11 +156,14 @@
 		dat += "<BR><b>[capitalize(E.name)]:</b> <A href='?src=\ref[src];item=[bp]'>[inv_slot.holding?.name || "nothing"]</A>"
 
 	// Do they get an option to set internals?
-	if(istype(wear_mask, /obj/item/clothing/mask) || istype(head, /obj/item/clothing/head/helmet/space))
-		if(istype(back, /obj/item/tank) || istype(belt, /obj/item/tank) || istype(s_store, /obj/item/tank))
-			dat += "<BR><A href='?src=\ref[src];item=internals'>Toggle internals.</A>"
+	if(istype(get_equipped_item(slot_wear_mask_str), /obj/item/clothing/mask) || istype(get_equipped_item(slot_head_str), /obj/item/clothing/head/helmet/space))
+		for(var/slot in list(slot_back_str, slot_belt_str, slot_s_store_str))
+			var/obj/item/tank/tank = get_equipped_item(slot)
+			if(istype(tank))
+				dat += "<BR><A href='?src=\ref[src];item=internals'>Toggle internals.</A>"
+				break
 
-	var/obj/item/clothing/under/suit = w_uniform
+	var/obj/item/clothing/under/suit = get_equipped_item(slot_w_uniform_str)
 	// Other incidentals.
 	if(istype(suit))
 		dat += "<BR><b>Pockets:</b> <A href='?src=\ref[src];item=pockets'>Empty or Place Item</A>"
@@ -167,7 +171,7 @@
 			dat += "<BR><A href='?src=\ref[src];item=sensors'>Set sensors</A>"
 		if (suit.has_sensor && user.get_multitool())
 			dat += "<BR><A href='?src=\ref[src];item=lock_sensors'>[suit.has_sensor == SUIT_LOCKED_SENSORS ? "Unl" : "L"]ock sensors</A>"
-	if(handcuffed)
+	if(get_equipped_item(slot_handcuffed_str))
 		dat += "<BR><A href='?src=\ref[src];item=[slot_handcuffed_str]'>Handcuffed</A>"
 
 	for(var/entry in worn_underwear)
@@ -231,9 +235,11 @@
 //Also used in AI tracking people by face, so added in checks for head coverings like masks and helmets
 /mob/living/carbon/human/proc/get_face_name()
 	var/obj/item/organ/external/H = get_organ(BP_HEAD)
-	if(!H || (H.status & ORGAN_DISFIGURED) || H.is_stump() || !real_name || is_husked() || (wear_mask && (wear_mask.flags_inv&HIDEFACE)) || (head && (head.flags_inv&HIDEFACE)))	//Face is unrecognizeable, use ID if able
-		if(istype(wear_mask) && wear_mask.visible_name)
-			return wear_mask.visible_name
+	var/obj/item/clothing/mask/mask = get_equipped_item(slot_wear_mask_str)
+	var/obj/item/head = get_equipped_item(slot_head_str)
+	if(!H || (H.status & ORGAN_DISFIGURED) || H.is_stump() || !real_name || is_husked() || (mask && (mask.flags_inv&HIDEFACE)) || (head && (head.flags_inv&HIDEFACE)))	//Face is unrecognizeable, use ID if able
+		if(istype(mask) && mask.visible_name)
+			return mask.visible_name
 		else if(istype(wearing_rig) && wearing_rig.visible_name)
 			return wearing_rig.visible_name
 		else
@@ -283,8 +289,9 @@
 
 			var/modified = 0
 			var/perpname = "wot"
-			if(wear_id)
-				var/obj/item/card/id/I = wear_id.GetIdCard()
+			var/obj/item/id = get_equipped_item(slot_wear_id_str)
+			if(id)
+				var/obj/item/card/id/I = id.GetIdCard()
 				if(I)
 					perpname = I.registered_name
 				else
@@ -428,8 +435,9 @@
 
 /mob/living/carbon/human/abiotic(var/full_body = TRUE)
 	if(full_body)
-		if(src.head || src.shoes || src.w_uniform || src.wear_suit || src.glasses || src.l_ear || src.r_ear || src.gloves)
-			return FALSE
+		for(var/slot in list(slot_head_str, slot_shoes_str, slot_w_uniform_str, slot_wear_suit_str, slot_glasses_str, slot_l_ear_str, slot_r_ear_str, slot_gloves_str))
+			if(get_equipped_item(slot))
+				return FALSE
 	return ..()
 
 /mob/living/carbon/human/proc/check_dna()
@@ -518,6 +526,7 @@
 	lastpuke = FALSE
 
 /mob/living/carbon/human/proc/increase_germ_level(n)
+	var/obj/item/gloves = get_equipped_item(slot_gloves_str)
 	if(gloves)
 		gloves.germ_level += n
 	else
@@ -553,6 +562,7 @@
 
 /mob/living/carbon/human/clean_blood(var/clean_feet)
 	. = ..()
+	var/obj/item/gloves = get_equipped_item(slot_gloves_str)
 	if(gloves)
 		gloves.clean()
 		gloves.germ_level = 0
@@ -780,7 +790,8 @@
 		return 0
 
 	. = CAN_INJECT
-	for(var/obj/item/clothing/C in list(head, wear_mask, wear_suit, w_uniform, gloves, shoes))
+	for(var/slot in list(slot_head_str, slot_wear_mask_str, slot_wear_suit_str, slot_w_uniform_str, slot_gloves_str, slot_shoes_str))
+		var/obj/item/clothing/C = get_equipped_item(slot)
 		if(C && (C.body_parts_covered & affecting.body_part) && (C.item_flags & ITEM_FLAG_THICKMATERIAL))
 			if(istype(C, /obj/item/clothing/suit/space))
 				. = INJECTION_PORT //it was going to block us, but it's a space suit so it doesn't because it has some kind of port
@@ -790,7 +801,7 @@
 
 
 /mob/living/carbon/human/print_flavor_text(var/shrink = 1)
-	var/list/equipment = list(src.head,src.wear_mask,src.glasses,src.w_uniform,src.wear_suit,src.gloves,src.shoes)
+
 	var/head_exposed = 1
 	var/face_exposed = 1
 	var/eyes_exposed = 1
@@ -800,7 +811,19 @@
 	var/hands_exposed = 1
 	var/feet_exposed = 1
 
-	for(var/obj/item/clothing/C in equipment)
+	var/list/equipment = list(
+		slot_head_str,
+		slot_wear_mask_str,
+		slot_glasses_str,
+		slot_w_uniform_str,
+		slot_wear_suit_str,
+		slot_gloves_str,
+		slot_shoes_str
+	)
+	for(var/slot in equipment)
+		var/obj/item/clothing/C = get_equipped_item(slot)
+		if(!istype(C))
+			continue
 		if(C.body_parts_covered & SLOT_HEAD)
 			head_exposed = 0
 		if(C.body_parts_covered & SLOT_FACE)
@@ -837,8 +860,11 @@
 	. = istype(eyes) && eyes.is_usable()
 
 /mob/living/carbon/human/slip(var/slipped_on, stun_duration = 8)
-	if((species.check_no_slip(src)) || (shoes && (shoes.item_flags & ITEM_FLAG_NOSLIP)))
-		return 0
+	if(species.check_no_slip(src))
+		return FALSE
+	var/obj/item/shoes = get_equipped_item(slot_shoes_str)
+	if(shoes && (shoes.item_flags & ITEM_FLAG_NOSLIP))
+		return FALSE
 	return !!(..(slipped_on,stun_duration))
 
 
@@ -1090,7 +1116,8 @@
 		. += 2
 
 /mob/living/carbon/human/can_drown()
-	if(!internal && (!istype(wear_mask) || !wear_mask.filters_water()))
+	var/obj/item/clothing/mask/mask = get_equipped_item(slot_wear_mask_str)
+	if(!internal && (!istype(mask) || !mask.filters_water()))
 		var/obj/item/organ/internal/lungs/L = get_organ(BP_LUNGS)
 		return (!L || L.can_drown())
 	return FALSE
@@ -1102,7 +1129,8 @@
 		if(T == location) //Can we surface?
 			if(!lying && T.above && !T.above.is_flooded() && T.above.is_open() && can_overcome_gravity())
 				return ..(volume_needed, T.above)
-		var/can_breathe_water = (istype(wear_mask) && wear_mask.filters_water()) ? TRUE : FALSE
+		var/obj/item/clothing/mask/mask = get_equipped_item(slot_wear_mask_str)
+		var/can_breathe_water = (istype(mask) && mask.filters_water()) ? TRUE : FALSE
 		if(!can_breathe_water)
 			var/obj/item/organ/internal/lungs/lungs = get_organ(BP_LUNGS)
 			if(lungs && lungs.can_drown())
@@ -1161,8 +1189,10 @@
 
 /mob/living/carbon/human/get_sound_volume_multiplier()
 	. = ..()
-	for(var/obj/item/clothing/C in list(l_ear, r_ear, head))
-		. = min(., C.volume_multiplier)
+	for(var/slot in list(slot_l_ear_str, slot_r_ear_str, slot_head_str))
+		var/obj/item/clothing/C = get_equipped_item(slot)
+		if(istype(C))
+			. = min(., C.volume_multiplier)
 
 /mob/living/carbon/human/get_bullet_impact_effect_type(var/def_zone)
 	var/obj/item/organ/external/E = get_organ(def_zone)
@@ -1248,17 +1278,21 @@
 	return list("Sapient Race", TRUE)
 
 /mob/living/carbon/human/breathing_hole_covered()
-	. = ..() || (head && (head.item_flags & ITEM_FLAG_AIRTIGHT))
+	. = ..()
+	if(!.)
+		var/obj/item/head = get_equipped_item(slot_head_str)
+		if(head && (head.item_flags & ITEM_FLAG_AIRTIGHT))
+			return TRUE
 
 /mob/living/carbon/human/set_internals_to_best_available_tank(var/breathes_gas = /decl/material/gas/oxygen, var/list/poison_gas = list(/decl/material/gas/chlorine))
 	. = ..(species.breath_type, species.poison_types)
 
 /mob/living/carbon/human/get_possible_internals_sources()
 	. = ..() | list(
-		"suit" =         list(s_store,                 "on"),
-		"belt" =         list(belt,                    "on"),
-		"left_pocket" =  list(l_store,                 "in"),
-		"right pocket" = list(r_store,                 "in"),
+		"suit" =         list(get_equipped_item(slot_s_store_str), "on"),
+		"belt" =         list(get_equipped_item(slot_belt_str),    "on"),
+		"left_pocket" =  list(get_equipped_item(slot_l_store_str), "in"),
+		"right pocket" = list(get_equipped_item(slot_r_store_str), "in"),
 		"rig" =          list(wearing_rig?.air_supply, "in")
 	)
 

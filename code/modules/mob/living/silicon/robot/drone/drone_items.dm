@@ -213,7 +213,7 @@
 
 		//We can grab the item, finally.
 		if(grab)
-			if(I == user.s_active)
+			if(I == user.active_storage)
 				var/obj/item/storage/storage = I
 				storage.close(user) //Closes the ui.
 			if(istype(I.loc, /obj/item/storage))

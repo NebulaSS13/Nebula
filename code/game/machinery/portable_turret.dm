@@ -246,7 +246,7 @@ var/global/list/turret_icons
 	if(prob(50))
 		new /obj/item/assembly/prox_sensor(loc)
 	. = ..()
-						
+
 /obj/machinery/porta_turret/attackby(obj/item/I, mob/user)
 	if(stat & BROKEN)
 		if(IS_CROWBAR(I))
@@ -458,7 +458,7 @@ var/global/list/turret_icons
 			return lethal ? TURRET_SECONDARY_TARGET : TURRET_NOT_TARGET
 		return TURRET_PRIORITY_TARGET
 
-	if(iscuffed(L)) // If the target is handcuffed, leave it alone
+	if(iscuffed(L)) // If the target is cuffed, leave it alone
 		return TURRET_NOT_TARGET
 
 	if(isanimal(L) || issmall(L)) // Animals are not so dangerous

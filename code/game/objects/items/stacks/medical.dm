@@ -45,12 +45,14 @@
 			return 1
 
 		if(affecting.organ_tag == BP_HEAD)
-			if(H.head && istype(H.head,/obj/item/clothing/head/helmet/space))
-				to_chat(user, SPAN_WARNING("You can't apply [src] through [H.head]!"))
+			var/obj/item/clothing/head/helmet/space/head = H.get_equipped_item(slot_head_str)
+			if(istype(head))
+				to_chat(user, SPAN_WARNING("You can't apply [src] through [head]!"))
 				return 1
 		else
-			if(H.wear_suit && istype(H.wear_suit,/obj/item/clothing/suit/space))
-				to_chat(user, SPAN_WARNING("You can't apply [src] through [H.wear_suit]!"))
+			var/obj/item/clothing/suit/space/suit = H.get_equipped_item(slot_wear_suit_str)
+			if(istype(suit))
+				to_chat(user, SPAN_WARNING("You can't apply [src] through [suit]!"))
 				return 1
 
 		H.UpdateDamageIcon()

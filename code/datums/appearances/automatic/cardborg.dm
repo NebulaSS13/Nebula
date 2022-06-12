@@ -12,7 +12,7 @@
 		return
 
 	var/mob/living/carbon/human/H = user
-	if(!(istype(H.wear_suit, /obj/item/clothing/suit/cardborg) && istype(H.head, /obj/item/clothing/head/cardborg) && istype(H.back, /obj/item/storage/backpack)))
+	if(!(istype(H.get_equipped_item(slot_wear_suit_str), /obj/item/clothing/suit/cardborg) && istype(H.get_equipped_item(slot_head_str), /obj/item/clothing/head/cardborg) && istype(H.get_equipped_item(slot_back_str), /obj/item/storage/backpack)))
 		return
 
 	var/image/I = get_image_from_backpack(H)
@@ -31,7 +31,10 @@
 
 /decl/appearance_handler/cardborg/proc/get_image_from_backpack(var/mob/living/carbon/human/H)
 	init_appearances()
-	var/decl/cardborg_appearance/ca = appearances[H.back.type]
+	var/obj/item/back = H.get_equipped_item(slot_back_str)
+	if(!istype(back))
+		return
+	var/decl/cardborg_appearance/ca = appearances[back.type]
 	if(!ca) ca = appearances[/obj/item/storage/backpack]
 
 	var/image/I = image(icon = ca.icon, icon_state = ca.icon_state, loc = H)

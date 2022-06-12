@@ -112,7 +112,7 @@ INITIALIZE_IMMEDIATE(/obj/effect/gas_overlay)
 
 	// Attributes
 	/// How rare is this material generally?
-	var/exoplanet_rarity = MAT_RARITY_MUNDANE 
+	var/exoplanet_rarity = MAT_RARITY_MUNDANE
 	/// Delay in ticks when cutting through this wall.
 	var/cut_delay = 0
 	/// Radiation var. Used in wall and object processing to irradiate surroundings.
@@ -125,7 +125,7 @@ INITIALIZE_IMMEDIATE(/obj/effect/gas_overlay)
 	var/boiling_point = 3000
 	/// kJ/kg, enthalpy of vaporization
 	var/latent_heat = 7000
-	/// kg/mol, 
+	/// kg/mol,
 	var/molar_mass = 0.06
 	/// Brute damage to a wall is divided by this value if the wall is reinforced by this material.
 	var/brute_armor = 2
@@ -144,15 +144,15 @@ INITIALIZE_IMMEDIATE(/obj/effect/gas_overlay)
 	/// Used for checking if a material can function as a wall support.
 	var/wall_support_value = 30
 	/// Ore generation constant for rare materials.
-	var/sparse_material_weight                
+	var/sparse_material_weight
 	/// Ore generation constant for common materials.
-	var/rich_material_weight                  
+	var/rich_material_weight
 	/// How transparent can fluids be?
-	var/min_fluid_opacity = FLUID_MIN_ALPHA   
+	var/min_fluid_opacity = FLUID_MIN_ALPHA
 	/// How opaque can fluids be?
 	var/max_fluid_opacity = FLUID_MAX_ALPHA
 	/// Point at which the fluid will proc turf interaction logic. Workaround for mops being ruined forever by 1u of anything else being added.
-	var/turf_touch_threshold = FLUID_QDEL_POINT 
+	var/turf_touch_threshold = FLUID_QDEL_POINT
 
 	// Damage values.
 	var/hardness = MAT_VALUE_HARD            // Used for edge damage in weapons.
@@ -600,18 +600,25 @@ INITIALIZE_IMMEDIATE(/obj/effect/gas_overlay)
 	if(dirtiness <= DIRTINESS_CLEAN)
 		for(var/obj/item/thing in M.get_held_items())
 			thing.clean_blood()
-		if(M.wear_mask)
-			M.wear_mask.clean_blood()
+		var/obj/item/mask = M.get_equipped_item(slot_wear_mask_str)
+		if(mask)
+			mask.clean_blood()
 		if(ishuman(M))
 			var/mob/living/carbon/human/H = M
-			if(H.head)
-				H.head.clean_blood()
-			if(H.wear_suit)
-				H.wear_suit.clean_blood()
-			else if(H.w_uniform)
-				H.w_uniform.clean_blood()
-			if(H.shoes)
-				H.shoes.clean_blood()
+			var/obj/item/head = H.get_equipped_item(slot_head_str)
+			if(head)
+				head.clean_blood()
+			var/obj/item/suit = H.get_equipped_item(slot_wear_suit_str)
+			if(suit)
+				suit.clean_blood()
+			else
+				var/obj/item/uniform = H.get_equipped_item(slot_w_uniform_str)
+				if(uniform)
+					uniform.clean_blood()
+
+			var/obj/item/shoes = H.get_equipped_item(slot_shoes_str)
+			if(shoes)
+				shoes.clean_blood()
 			else
 				H.clean_blood(1)
 				return
@@ -621,7 +628,10 @@ INITIALIZE_IMMEDIATE(/obj/effect/gas_overlay)
 
 		if(ishuman(M))
 			var/mob/living/carbon/human/H = M
-			for(var/obj/item/thing in list(H.head, H.wear_mask, H.glasses))
+			for(var/slot in global.standard_headgear_slots)
+				var/obj/item/thing = H.get_equipped_item(slot)
+				if(!istype(thing))
+					continue
 				if(thing.unacidable || !H.unEquip(thing))
 					to_chat(H, SPAN_NOTICE("Your [thing] protects you from the acid."))
 					holder.remove_reagent(type, REAGENT_VOLUME(holder, type))

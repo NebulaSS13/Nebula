@@ -234,8 +234,9 @@ var/global/list/priv_region_access
 /mob/living/carbon/human/GetIdCards(exceptions = null)
 	. = ..()
 	var/list/candidates = get_held_items()
-	if(wear_id)
-		LAZYDISTINCTADD(candidates, wear_id)
+	var/id = get_equipped_item(slot_wear_id_str)
+	if(id)
+		LAZYDISTINCTADD(candidates, id)
 	for(var/atom/movable/candidate in candidates)
 		if(!candidate || is_type_in_list(candidate, exceptions))
 			continue

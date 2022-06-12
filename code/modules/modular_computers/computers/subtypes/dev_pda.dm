@@ -25,7 +25,7 @@
 	. = ..()
 	add_overlay(image(icon, "blank_screen"))
 	var/mob/living/carbon/human/H = loc
-	if(istype(H) && H.wear_id == src)
+	if(istype(H) && H.get_equipped_item(slot_wear_id_str) == src)
 		H.update_inv_wear_id()
 
 // PDA box

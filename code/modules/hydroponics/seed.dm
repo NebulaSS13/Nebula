@@ -169,9 +169,9 @@
 	if(chems && chems.len && target.reagents && LAZYLEN(external_organs))
 
 		var/obj/item/organ/external/affecting = pick(external_organs)
-
-		for(var/obj/item/clothing/C in list(target.head, target.wear_mask, target.wear_suit, target.w_uniform, target.gloves, target.shoes))
-			if(C && (C.body_parts_covered & affecting.body_part) && (C.item_flags & ITEM_FLAG_THICKMATERIAL))
+		for(var/slot in global.standard_clothing_slots)
+			var/obj/item/clothing/C = target.get_equipped_item(slot)
+			if(istype(C) && (C.body_parts_covered & affecting.body_part) && (C.item_flags & ITEM_FLAG_THICKMATERIAL))
 				affecting = null
 
 		if(!(target.species && target.species.species_flags & (SPECIES_FLAG_NO_EMBED|SPECIES_FLAG_NO_MINOR_CUT)))	affecting = null

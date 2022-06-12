@@ -497,12 +497,12 @@ var/global/list/slot_flags_enumeration = list(
 		if(slot_belt_str)
 			if(slot == slot_belt_str && (item_flags & ITEM_FLAG_IS_BELT))
 				return TRUE
-			else if(!H.w_uniform && (slot_w_uniform_str in H.species.hud?.equip_slots))
+			else if(!H.get_equipped_item(slot_w_uniform_str) && (slot_w_uniform_str in H.species.hud?.equip_slots))
 				if(!disable_warning)
 					to_chat(H, SPAN_WARNING("You need a jumpsuit before you can attach this [name]."))
 				return FALSE
 		if(slot_l_store_str, slot_r_store_str)
-			if(!H.w_uniform && (slot_w_uniform_str in H.species.hud?.equip_slots))
+			if(!H.get_equipped_item(slot_w_uniform_str) && (slot_w_uniform_str in H.species.hud?.equip_slots))
 				if(!disable_warning)
 					to_chat(H, SPAN_WARNING("You need a jumpsuit before you can attach this [name]."))
 				return FALSE
@@ -511,45 +511,41 @@ var/global/list/slot_flags_enumeration = list(
 			if(get_storage_cost() >= ITEM_SIZE_NO_CONTAINER)
 				return FALSE
 		if(slot_s_store_str)
-			if(!H.wear_suit && (slot_wear_suit_str in H.species.hud?.equip_slots))
+			var/obj/item/suit = H.get_equipped_item(slot_wear_suit_str)
+			if(!suit && (slot_wear_suit_str in H.species.hud?.equip_slots))
 				if(!disable_warning)
 					to_chat(H, SPAN_WARNING("You need a suit before you can attach this [name]."))
 				return FALSE
-			if(H.wear_suit && !H.wear_suit.allowed)
+			if(suit && !suit.allowed)
 				if(!disable_warning)
 					to_chat(usr, SPAN_WARNING("You somehow have a suit with no defined allowed items for suit storage, stop that."))
 				return FALSE
-			if( !(istype(src, /obj/item/modular_computer/pda) || istype(src, /obj/item/pen) || is_type_in_list(src, H.wear_suit.allowed)) )
+			if( !(istype(src, /obj/item/modular_computer/pda) || istype(src, /obj/item/pen) || is_type_in_list(src, suit.allowed)) )
 				return FALSE
 		if(slot_handcuffed_str)
 			if(!istype(src, /obj/item/handcuffs))
 				return FALSE
 		if(slot_in_backpack_str) //used entirely for equipping spawned mobs or at round start
-			var/allow = FALSE
-			if(H.back && istype(H.back, /obj/item/storage/backpack))
-				var/obj/item/storage/backpack/B = H.back
-				if(B.can_be_inserted(src,M,1))
-					allow = TRUE
-			if(!allow)
+			var/obj/item/storage/backpack/B = H.get_equipped_item(slot_back_str)
+			if(!istype(B) || !B.can_be_inserted(src,M,1))
 				return FALSE
 		if(slot_tie_str)
-			if((!H.w_uniform && (slot_w_uniform_str in H.species.hud?.equip_slots)) && (!H.wear_suit && (slot_wear_suit_str in H.species.hud?.equip_slots)))
+			var/obj/item/clothing/under/uniform = H.get_equipped_item(slot_w_uniform_str)
+			var/obj/item/clothing/suit = H.get_equipped_item(slot_wear_suit_str)
+			if((!uniform && (slot_w_uniform_str in H.species.hud?.equip_slots)) && (!suit && (slot_wear_suit_str in H.species.hud?.equip_slots)))
 				if(!disable_warning)
 					to_chat(H, SPAN_WARNING("You need something you can attach \the [src] to."))
 				return FALSE
-			if(H.w_uniform && (slot_w_uniform_str in H.species.hud?.equip_slots))
-				var/obj/item/clothing/under/uniform = H.w_uniform
-				if(uniform && !uniform.can_attach_accessory(src))
+			if(istype(uniform) && (slot_w_uniform_str in H.species.hud?.equip_slots))
+				if(!uniform.can_attach_accessory(src))
 					if (!disable_warning)
 						to_chat(H, SPAN_WARNING("You cannot equip \the [src] to \the [uniform]."))
 					return FALSE
 				return TRUE
-			if(H.wear_suit && (slot_wear_suit_str in H.species.hud?.equip_slots))
-				var/obj/item/clothing/suit/suit = H.wear_suit
-				if(suit && !suit.can_attach_accessory(src))
-					if (!disable_warning)
-						to_chat(H, SPAN_WARNING("You cannot equip \the [src] to \the [suit]."))
-					return FALSE
+			if(suit && (slot_wear_suit_str in H.species.hud?.equip_slots) && !suit.can_attach_accessory(src))
+				if (!disable_warning)
+					to_chat(H, SPAN_WARNING("You cannot equip \the [src] to \the [suit]."))
+				return FALSE
 	return TRUE
 
 /obj/item/proc/mob_can_unequip(mob/M, slot, disable_warning = 0)
@@ -639,8 +635,9 @@ var/global/list/slot_flags_enumeration = list(
 
 	var/mob/living/carbon/human/H = M
 	if(istype(H))
-		for(var/obj/item/protection in list(H.head, H.wear_mask, H.glasses))
-			if(protection && (protection.body_parts_covered & SLOT_EYES))
+		for(var/slot in global.standard_headgear_slots)
+			var/obj/item/protection = H.get_equipped_item(slot)
+			if(istype(protection) && (protection.body_parts_covered & SLOT_EYES))
 				// you can't stab someone in the eyes wearing a mask!
 				to_chat(user, SPAN_WARNING("You're going to need to remove the eye covering first."))
 				return
@@ -976,7 +973,7 @@ modules/mob/living/carbon/human/life.dm if you die, you will be zoomed out.
 		screen_loc = null
 	else if(client)
 		client.screen |= src
-		if(!client.mob || !client.mob.hud_used || !slot || (!client.mob.hud_used.inventory_shown && (slot in client.mob.hud_used.hidden_inventory_slots)))
+		if(!client.mob || !client.mob.hud_used || !slot || (!client.mob.hud_used.inventory_shown && (slot in global.hidden_inventory_slots)))
 			screen_loc = null
 
 /obj/item/proc/gives_weather_protection()

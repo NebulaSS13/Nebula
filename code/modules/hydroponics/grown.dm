@@ -132,7 +132,8 @@
 
 			if(istype(M,/mob/living/carbon/human))
 				var/mob/living/carbon/human/H = M
-				if(H.shoes && H.shoes.item_flags & ITEM_FLAG_NOSLIP)
+				var/obj/item/shoes = H.get_equipped_item(slot_shoes_str)
+				if(shoes && shoes.item_flags & ITEM_FLAG_NOSLIP)
 					return
 
 			to_chat(M, SPAN_DANGER("You slipped on \the [src]!"))
@@ -297,7 +298,7 @@ var/global/list/_wood_materials = list(
 		return
 	if(seed.get_trait(TRAIT_STINGS))
 		var/mob/living/carbon/human/H = user
-		if(istype(H) && H.gloves)
+		if(istype(H) && H.get_equipped_item(slot_gloves_str))
 			return
 		if(!reagents || reagents.total_volume <= 0)
 			return

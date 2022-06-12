@@ -874,14 +874,19 @@
 					else if(istype(A, /mob/living/carbon/human))
 						var/mob/living/carbon/human/cleaned_human = A
 						if(cleaned_human.lying)
-							if(cleaned_human.head)
-								cleaned_human.head.clean_blood()
-							if(cleaned_human.wear_suit)
-								cleaned_human.wear_suit.clean_blood()
-							else if(cleaned_human.w_uniform)
-								cleaned_human.w_uniform.clean_blood()
-							if(cleaned_human.shoes)
-								cleaned_human.shoes.clean_blood()
+							var/obj/item/head = cleaned_human.get_equipped_item(slot_head_str)
+							if(head)
+								head.clean_blood()
+							var/obj/item/suit = cleaned_human.get_equipped_item(slot_wear_suit_str)
+							if(suit)
+								suit.clean_blood()
+							else
+								var/obj/item/uniform = cleaned_human.get_equipped_item(slot_w_uniform_str)
+								if(uniform)
+									uniform.clean_blood()
+							var/obj/item/shoes = cleaned_human.get_equipped_item(slot_shoes_str)
+							if(shoes)
+								shoes.clean_blood()
 							cleaned_human.clean_blood(1)
 							to_chat(cleaned_human, "<span class='warning'>[src] cleans your face!</span>")
 		return
@@ -998,8 +1003,8 @@
 	if(is_component_functioning("comms"))
 		var/datum/robot_component/RC = get_component("comms")
 		use_power(RC.active_usage)
-		return 1
-	return 0
+		return TRUE
+	return FALSE
 
 /mob/living/silicon/robot/proc/notify_ai(var/notifytype, var/first_arg, var/second_arg)
 	if(!connected_ai)

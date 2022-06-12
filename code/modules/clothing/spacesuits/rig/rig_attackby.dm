@@ -73,7 +73,7 @@
 
 			if(istype(src.loc,/mob/living/carbon/human))
 				var/mob/living/carbon/human/H = src.loc
-				if(H.back == src)
+				if(H.get_equipped_item(slot_back_str) == src)
 					to_chat(user, "<span class='danger'>You can't install a hardsuit module while the suit is being worn.</span>")
 					return 1
 
@@ -131,7 +131,7 @@
 
 			if(istype(src.loc,/mob/living/carbon/human) && to_remove != "cell" && to_remove != "tank")
 				var/mob/living/carbon/human/H = src.loc
-				if(H.back == src)
+				if(H.get_equipped_item(slot_back_str) == src)
 					to_chat(user, "You can't remove an installed device while the hardsuit is being worn.")
 					return
 

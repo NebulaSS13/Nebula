@@ -172,8 +172,9 @@ var/global/list/sparring_attack_cache = list()
 
 	if(user.is_muzzled())
 		return 0
-	for(var/obj/item/clothing/C in list(user.wear_mask, user.head, user.wear_suit))
-		if(C && (C.body_parts_covered & SLOT_FACE) && (C.item_flags & ITEM_FLAG_THICKMATERIAL))
+	for(var/slot in list(slot_wear_mask_str, slot_head_str, slot_wear_suit_str))
+		var/obj/item/clothing/C = user.get_equipped_item(slot)
+		if(istype(C) && (C.body_parts_covered & SLOT_FACE) && (C.item_flags & ITEM_FLAG_THICKMATERIAL))
 			return 0 //prevent biting through a space helmet or similar
 	if (user == target && (zone == BP_HEAD || zone == BP_EYES || zone == BP_MOUTH))
 		return 0 //how do you bite yourself in the head?
@@ -206,7 +207,7 @@ var/global/list/sparring_attack_cache = list()
 
 	var/decl/pronouns/user_gender =   user.get_pronouns()
 	var/decl/pronouns/target_gender = target.get_pronouns()
-	var/attack_string 
+	var/attack_string
 	if(!target.lying)
 		switch(zone)
 			if(BP_HEAD, BP_MOUTH, BP_EYES)
@@ -228,9 +229,9 @@ var/global/list/sparring_attack_cache = list()
 			else
 				// ----- BODY ----- //
 				switch(attack_damage)
-					if(1 to 2)	
+					if(1 to 2)
 						attack_string = "threw a glancing punch at [target]'s [affecting.name]"
-					if(1 to 4)	
+					if(1 to 4)
 						attack_string = "[pick(attack_verb)] [target] in \the [affecting]"
 					if(5)
 						attack_string = "smashed [user_gender.his] [pick(attack_noun)] into [target]'s [affecting.name]"
@@ -256,7 +257,7 @@ var/global/list/sparring_attack_cache = list()
 	. = ..()
 
 /decl/natural_attack/kick/get_unarmed_damage(var/mob/living/carbon/human/user)
-	var/obj/item/clothing/shoes = user.shoes
+	var/obj/item/clothing/shoes = user.get_equipped_item(slot_shoes_str)
 	if(!istype(shoes))
 		return damage
 	return damage + (shoes ? shoes.force : 0)
@@ -299,7 +300,7 @@ var/global/list/sparring_attack_cache = list()
 		return 0
 
 /decl/natural_attack/stomp/get_unarmed_damage(var/mob/living/carbon/human/user)
-	var/obj/item/clothing/shoes = user.shoes
+	var/obj/item/clothing/shoes = user.get_equipped_item(slot_shoes_str)
 	return damage + (shoes ? shoes.force : 0)
 
 /decl/natural_attack/stomp/show_attack(var/mob/living/carbon/human/user, var/mob/living/carbon/human/target, var/zone, var/attack_damage)
@@ -308,7 +309,7 @@ var/global/list/sparring_attack_cache = list()
 	if(!affecting)
 		return ..()
 
-	var/obj/item/clothing/shoes = user.shoes
+	var/obj/item/clothing/shoes = user.get_equipped_item(slot_shoes_str)
 	attack_damage = Clamp(attack_damage, 1, 5)
 
 	var/shoe_text = shoes ? copytext(shoes.name, 1, -1) : "foot"

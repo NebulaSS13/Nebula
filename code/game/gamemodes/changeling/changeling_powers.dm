@@ -721,7 +721,8 @@ var/global/list/datum/absorbed_dna/hivemind_bank = list()
 	else
 		visible_message(SPAN_DANGER("\The [src] fires an organic shard into [T]!"))
 
-	for(var/obj/item/clothing/clothes in list(T.head, T.wear_mask, T.wear_suit, T.w_uniform, T.gloves, T.shoes))
+	for(var/slot in global.standard_clothing_slots)
+		var/obj/item/clothing/clothes = T.get_equipped_item(slot)
 		if(istype(clothes) && (clothes.body_parts_covered & target_limb.body_part) && (clothes.item_flags & ITEM_FLAG_THICKMATERIAL))
 			to_chat(src, SPAN_WARNING("\The [T]'s armor has protected them."))
 			return //thick clothes will protect from the sting

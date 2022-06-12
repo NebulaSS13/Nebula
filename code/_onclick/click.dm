@@ -207,7 +207,7 @@
 /*
 	Restrained ClickOn
 
-	Used when you are handcuffed and click things.
+	Used when you are cuffed and click things.
 	Not currently used by anything but could easily be.
 */
 /mob/proc/RestrainedClickOn(var/atom/A)

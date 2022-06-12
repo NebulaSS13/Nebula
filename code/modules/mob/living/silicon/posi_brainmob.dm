@@ -59,26 +59,24 @@
 
 /mob/living/silicon/sil_brainmob/proc/update_owner_channels()
 	var/mob/living/carbon/human/owner = container.owner
-	if(!owner)	return
+	if(!owner)
+		return FALSE
 
 	owner_channels.Cut()
 
-	var/obj/item/radio/headset/R
-	if(owner.l_ear && istype(owner.l_ear,/obj/item/radio))
-		R = owner.l_ear
-	else if(owner.r_ear && istype(owner.r_ear,/obj/item/radio))
-		R = owner.r_ear
+	for(var/slot in global.ear_slots)
+		var/obj/item/radio/R = owner.get_equipped_item(slot)
+		if(istype(R))
+			var/list/new_channels = list()
+			new_channels["Common"] = ";"
+			for(var/i = 1 to R.channels.len)
+				var/channel = R.channels[i]
+				var/key = get_radio_key_from_channel(channel)
+				new_channels[channel] = key
+			owner_channels = new_channels
+			return TRUE
 
-	if(!R)	return 0
-
-	var/list/new_channels = list()
-	new_channels["Common"] = ";"
-	for(var/i = 1 to R.channels.len)
-		var/channel = R.channels[i]
-		var/key = get_radio_key_from_channel(channel)
-		new_channels[channel] = key
-	owner_channels = new_channels
-	return 1
+	return FALSE
 
 /mob/living/silicon/sil_brainmob/statelaw(var/law, var/mob/living/L = src)
 	if(container && container.owner)

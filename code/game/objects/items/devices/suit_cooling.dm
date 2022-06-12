@@ -68,8 +68,7 @@
 	var/mob/living/carbon/human/H = loc
 	if(!istype(H))
 		return 0
-
-	return (H.back == src) || (H.s_store == src)
+	return H.get_equipped_item(slot_back_str) == src || H.get_equipped_item(slot_s_store_str) == src
 
 /obj/item/suit_cooling_unit/proc/turn_on()
 	if(!cell)
