@@ -1,16 +1,18 @@
 
 /obj/item/organ/internal/eyes
-	name = "eyeballs"
-	icon_state = "eyes"
-	prosthetic_icon = "camera"
+	name                 = "eyeballs"
+	icon_state           = "eyes"
+	prosthetic_name      = "optical sensor"
+	prosthetic_icon_file = 'icons/obj/robot_component.dmi'
+	prosthetic_icon      = "camera"
 	prosthetic_dead_icon = "camera_broken"
-	gender = PLURAL
-	organ_tag = BP_EYES
-	parent_organ = BP_HEAD
-	surface_accessible = TRUE
-	relative_size = 5
-	max_damage = 45
-	z_flags = ZMM_MANGLE_PLANES
+	gender               = PLURAL
+	organ_tag            = BP_EYES
+	parent_organ         = BP_HEAD
+	surface_accessible   = TRUE
+	relative_size        = 5
+	max_damage           = 45
+	z_flags              = ZMM_MANGLE_PLANES
 
 	var/contaminant_guard = 0
 	var/eye_colour = COLOR_BLACK
@@ -24,7 +26,6 @@
 	var/eye_blend = ICON_ADD
 
 /obj/item/organ/internal/eyes/robot
-	name = "optical sensor"
 	organ_properties = ORGAN_PROP_PROSTHETIC
 
 /obj/item/organ/internal/eyes/proc/get_eye_cache_key()
@@ -100,9 +101,6 @@
 
 /obj/item/organ/internal/eyes/robotize(var/company = /decl/prosthetics_manufacturer, var/skip_prosthetics = 0, var/keep_organs = 0, var/apply_material = /decl/material/solid/metal/steel, var/check_bodytype, var/check_species)
 	. = ..()
-	name = "optical sensor"
-	icon = 'icons/obj/robot_component.dmi'
-
 	if(owner)
 		verbs |= /obj/item/organ/internal/eyes/proc/change_eye_color
 		verbs |= /obj/item/organ/internal/eyes/proc/toggle_eye_glow

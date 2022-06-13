@@ -114,6 +114,7 @@
 
 /obj/item/organ/internal/eyes/adherent
 	name = "receptor prism"
+	prosthetic_name = null //We don't replace the name when we're a prosthetic
 	icon = 'mods/species/bayliens/adherent/icons/organs.dmi'
 	eye_icon = 'mods/species/bayliens/adherent/icons/eyes.dmi'
 	icon_state = "eyes"

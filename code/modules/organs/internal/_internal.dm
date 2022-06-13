@@ -3,10 +3,12 @@
 ****************************************************/
 /obj/item/organ/internal
 	scale_max_damage_to_species_health = TRUE
+	var/tmp/prosthetic_name //Name given to the organ when robotized. Null means no changes
 	var/tmp/alive_icon //icon to use when the organ is alive
 	var/tmp/dead_icon // Icon to use when the organ has died.
 	var/tmp/prosthetic_icon //Icon to use when the organ is robotic
 	var/tmp/prosthetic_dead_icon //Icon to use when the organ is robotic and dead
+	var/tmp/prosthetic_icon_file //The path to the icon file for the prosthetic icons. Null means use the current 'icon' value.
 	var/surface_accessible = FALSE
 	var/relative_size = 25   // Relative size of the organ. Roughly % of space they take in the target projection :D
 	var/min_bruised_damage = 10       // Damage before considered bruised
@@ -72,8 +74,14 @@
 
 /obj/item/organ/internal/robotize(var/company = /decl/prosthetics_manufacturer, var/skip_prosthetics = 0, var/keep_organs = 0, var/apply_material = /decl/material/solid/metal/steel, var/check_bodytype, var/check_species)
 	. = ..()
+	if(length(prosthetic_name))
+		SetName(prosthetic_name)
+	if(prosthetic_icon_file)
+		icon = prosthetic_icon_file
+
 	min_bruised_damage += 5
 	min_broken_damage += 10
+	queue_icon_update()
 
 /obj/item/organ/internal/proc/getToxLoss()
 	if(BP_IS_PROSTHETIC(src))
