@@ -865,8 +865,8 @@ var/global/const/DEFAULT_SPECIES_HEALTH = 200
 		if(31 to 45)	. = 4
 		else			. = 8
 
+/**Runs extra processing after any organs member of this species goes through rejuvenation. */
 /decl/species/proc/post_organ_rejuvenate(var/obj/item/organ/org, var/mob/living/carbon/human/H)
-	if(org && (org.species ? (org.species.species_flags & SPECIES_FLAG_CRYSTALLINE) : (species_flags & SPECIES_FLAG_CRYSTALLINE)))
 		org.status |= (ORGAN_BRITTLE|ORGAN_CRYSTAL)
 
 /decl/species/proc/check_no_slip(var/mob/living/carbon/human/H)

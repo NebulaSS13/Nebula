@@ -205,10 +205,16 @@
 #define AUGMENTATION_ORGANIC  2
 
 // Prosthetic helpers.
-#define BP_IS_PROSTHETIC(org) (!QDELETED(org) && (org.status & ORGAN_PROSTHETIC))
-#define BP_IS_ASSISTED(org)   (!QDELETED(org) && (org.status & ORGAN_ASSISTED))
-#define BP_IS_BRITTLE(org)    (!QDELETED(org) && (org.status & ORGAN_BRITTLE))
-#define BP_IS_CRYSTAL(org)    (!QDELETED(org) && (org.status & ORGAN_CRYSTAL))
+#define BP_IS_PROSTHETIC(org) (!QDELETED(org) && (org.organ_properties & ORGAN_PROP_PROSTHETIC))
+#define BP_IS_ASSISTED(org)   (!QDELETED(org) && (org.organ_properties & ORGAN_PROP_ASSISTED))
+#define BP_IS_BRITTLE(org)    (!QDELETED(org) && (org.status           & ORGAN_BRITTLE))
+#define BP_IS_CRYSTAL(org)    (!QDELETED(org) && (org.organ_properties & ORGAN_PROP_CRYSTAL))
+
+//Prosthetics setter
+//Since assisted and prosthetic are mutually exclusive set them using this helper for convenience
+#define BP_SET_PROSTHETIC(org) org.organ_properties = ((org.organ_properties & (~ORGAN_PROP_ASSISTED))   | ORGAN_PROP_PROSTHETIC);
+#define BP_SET_ASSISTED(org)   org.organ_properties = ((org.organ_properties & (~ORGAN_PROP_PROSTHETIC)) | ORGAN_PROP_ASSISTED);
+#define BP_SET_CRYSTAL(org)    org.organ_properties |= ORGAN_PROP_CRYSTAL;
 
 // Limb flag helpers
 #define BP_IS_DEFORMED(org) (org.limb_flags & ORGAN_FLAG_DEFORMED)

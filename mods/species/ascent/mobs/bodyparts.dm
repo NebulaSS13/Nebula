@@ -88,3 +88,27 @@
 /obj/item/organ/external/head/insectoid/mantid/proc/reset_cooldown()
 	cooldown = FALSE
 	refresh_action_button()
+
+//Basically appends the crystal flag to all the types specified
+#define MANTIDIFY_ORGAN(ORGAN_PATH) ##ORGAN_PATH/Initialize(){BP_SET_CRYSTAL(src) . = ..();}
+//External organs
+MANTIDIFY_ORGAN(/obj/item/organ/external/groin/insectoid/mantid)
+MANTIDIFY_ORGAN(/obj/item/organ/external/head/insectoid/mantid)
+MANTIDIFY_ORGAN(/obj/item/organ/external/arm/insectoid/mantid)
+MANTIDIFY_ORGAN(/obj/item/organ/external/hand/insectoid/mantid)
+MANTIDIFY_ORGAN(/obj/item/organ/external/arm/right/insectoid/mantid)
+MANTIDIFY_ORGAN(/obj/item/organ/external/hand/right/insectoid/mantid)
+MANTIDIFY_ORGAN(/obj/item/organ/external/hand/insectoid/midlimb/mantid)
+MANTIDIFY_ORGAN(/obj/item/organ/external/leg/right/insectoid/mantid)
+MANTIDIFY_ORGAN(/obj/item/organ/external/leg/insectoid/mantid)
+MANTIDIFY_ORGAN(/obj/item/organ/external/foot/insectoid/mantid)
+MANTIDIFY_ORGAN(/obj/item/organ/external/foot/right/insectoid/mantid)
+//Internal organs
+MANTIDIFY_ORGAN(/obj/item/organ/internal/heart/insectoid/mantid)
+MANTIDIFY_ORGAN(/obj/item/organ/internal/stomach/insectoid/mantid)
+MANTIDIFY_ORGAN(/obj/item/organ/internal/lungs/insectoid/mantid)
+MANTIDIFY_ORGAN(/obj/item/organ/internal/liver/insectoid/mantid)
+MANTIDIFY_ORGAN(/obj/item/organ/internal/kidneys/insectoid/mantid)
+MANTIDIFY_ORGAN(/obj/item/organ/internal/brain/insectoid/mantid)
+MANTIDIFY_ORGAN(/obj/item/organ/internal/eyes/insectoid/mantid)
+#undef MANTIDIFY_ORGAN

@@ -1,3 +1,5 @@
+#define ADHERENT_LIMB_PROP_FLAG (ORGAN_PROP_PROSTHETIC | ORGAN_PROP_CRYSTAL) //Flag we use on all adherent limbs
+
 /obj/item/organ/external/chest/crystal
 	name =                    "tendril junction"
 	amputation_point =        "axis"
@@ -12,7 +14,7 @@
 	arterial_bleed_severity = 0
 	encased = "ceramic hull"
 	icon = 'mods/species/bayliens/adherent/icons/body_turquoise.dmi'
-	status = ORGAN_PROSTHETIC
+	organ_properties = ADHERENT_LIMB_PROP_FLAG
 	limb_flags = ORGAN_FLAG_CAN_BREAK | ORGAN_FLAG_HEALS_OVERKILL
 
 /obj/item/organ/external/chest/crystal/update_limb_icon_file()
@@ -26,7 +28,7 @@
 	min_broken_damage =       25
 	encased = "ceramic hull"
 	icon = 'mods/species/bayliens/adherent/icons/body_turquoise.dmi'
-	status = ORGAN_PROSTHETIC
+	organ_properties = ADHERENT_LIMB_PROP_FLAG
 	limb_flags = ORGAN_FLAG_CAN_AMPUTATE | ORGAN_FLAG_CAN_STAND | ORGAN_FLAG_CAN_BREAK
 
 /obj/item/organ/external/groin/crystal/update_limb_icon_file()
@@ -43,7 +45,7 @@
 	cavity_max_w_class =      ITEM_SIZE_NORMAL // Apparently their brains change w_class to this.
 	encased = "ceramic hull"
 	icon = 'mods/species/bayliens/adherent/icons/body_turquoise.dmi'
-	status = ORGAN_PROSTHETIC
+	organ_properties = ADHERENT_LIMB_PROP_FLAG
 	limb_flags = ORGAN_FLAG_CAN_AMPUTATE | ORGAN_FLAG_HEALS_OVERKILL | ORGAN_FLAG_CAN_BREAK
 
 /obj/item/organ/external/head/crystal/update_limb_icon_file()
@@ -56,7 +58,7 @@
 	arterial_bleed_severity = 0
 	max_damage =              20
 	min_broken_damage =       10
-	status = ORGAN_PROSTHETIC
+	organ_properties = ADHERENT_LIMB_PROP_FLAG
 	limb_flags = ORGAN_FLAG_CAN_AMPUTATE | ORGAN_FLAG_CAN_STAND | ORGAN_FLAG_CAN_BREAK
 
 /obj/item/organ/external/arm/crystal/update_limb_icon_file()
@@ -70,7 +72,7 @@
 	max_damage =              20
 	min_broken_damage =       10
 	icon = 'mods/species/bayliens/adherent/icons/body_turquoise.dmi'
-	status = ORGAN_PROSTHETIC
+	organ_properties = ADHERENT_LIMB_PROP_FLAG
 	limb_flags = ORGAN_FLAG_CAN_AMPUTATE | ORGAN_FLAG_CAN_STAND | ORGAN_FLAG_CAN_BREAK
 
 /obj/item/organ/external/arm/right/crystal/update_limb_icon_file()
@@ -84,7 +86,7 @@
 	max_damage =              20
 	min_broken_damage =       10
 	icon = 'mods/species/bayliens/adherent/icons/body_turquoise.dmi'
-	status = ORGAN_PROSTHETIC
+	organ_properties = ADHERENT_LIMB_PROP_FLAG
 	limb_flags = ORGAN_FLAG_CAN_AMPUTATE | ORGAN_FLAG_CAN_STAND | ORGAN_FLAG_CAN_BREAK
 
 /obj/item/organ/external/hand/crystal/update_limb_icon_file()
@@ -98,7 +100,7 @@
 	max_damage =              20
 	min_broken_damage =       10
 	icon = 'mods/species/bayliens/adherent/icons/body_turquoise.dmi'
-	status = ORGAN_PROSTHETIC
+	organ_properties = ADHERENT_LIMB_PROP_FLAG
 	limb_flags = ORGAN_FLAG_CAN_AMPUTATE | ORGAN_FLAG_CAN_STAND | ORGAN_FLAG_CAN_BREAK
 
 /obj/item/organ/external/hand/right/crystal/update_limb_icon_file()
@@ -115,7 +117,7 @@
 	max_damage =              20
 	min_broken_damage =       10
 	icon = 'mods/species/bayliens/adherent/icons/body_turquoise.dmi'
-	status = ORGAN_PROSTHETIC
+	organ_properties = ADHERENT_LIMB_PROP_FLAG
 	limb_flags = ORGAN_FLAG_CAN_AMPUTATE | ORGAN_FLAG_CAN_STAND | ORGAN_FLAG_CAN_BREAK
 
 /obj/item/organ/external/tendril/update_limb_icon_file()
@@ -135,3 +137,5 @@
 	name =                    "fourth tendril"
 	icon_name =               "r_foot"
 	organ_tag =               BP_R_FOOT
+
+#undef ADHERENT_LIMB_PROP_FLAG

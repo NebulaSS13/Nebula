@@ -157,6 +157,3 @@
 		"id" =    list("loc" = ui_id,        "name" = "ID",       "slot" = slot_wear_id_str, "state" = "id"),
 		"belt" =  list("loc" = ui_belt,      "name" = "Belt",     "slot" = slot_belt_str,    "state" = "belt")
 	)
-
-/decl/species/adherent/post_organ_rejuvenate(var/obj/item/organ/org, var/mob/living/carbon/human/H)
-	org.status |= (ORGAN_BRITTLE|ORGAN_CRYSTAL|ORGAN_PROSTHETIC)

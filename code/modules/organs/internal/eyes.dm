@@ -25,7 +25,7 @@
 
 /obj/item/organ/internal/eyes/robot
 	name = "optical sensor"
-	status = ORGAN_PROSTHETIC
+	organ_properties = ORGAN_PROP_PROSTHETIC
 
 /obj/item/organ/internal/eyes/proc/get_eye_cache_key()
 	last_cached_eye_colour = eye_colour
