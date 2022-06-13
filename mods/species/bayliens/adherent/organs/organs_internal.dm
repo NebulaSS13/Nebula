@@ -1,6 +1,6 @@
 #define PROTOCOL_ARTICLE "Protocol article [rand(100,999)]-[uppertext(pick(global.alphabet))] subsection #[rand(10,99)]"
 
-/obj/item/organ/internal/brain/adherent
+/obj/item/organ/internal/posibrain/adherent
 	name = "mentality matrix"
 	desc = "The self-contained, self-supporting internal 'brain' of an Adherent unit."
 	icon = 'mods/species/bayliens/adherent/icons/organs.dmi'
@@ -10,13 +10,17 @@
 	var/next_rename
 	var/rename_delay = 15 MINUTES
 
-/obj/item/organ/internal/brain/adherent/refresh_action_button()
+/obj/item/organ/internal/posibrain/adherent/Initialize()
+	BP_SET_CRYSTAL(src)
+	. = ..()
+
+/obj/item/organ/internal/posibrain/adherent/refresh_action_button()
 	. = ..()
 	if(.)
 		action.button_icon_state = "adherent-brain"
 		if(action.button) action.button.UpdateIcon()
 
-/obj/item/organ/internal/brain/adherent/attack_self(var/mob/user)
+/obj/item/organ/internal/posibrain/adherent/attack_self(var/mob/user)
 	. = ..()
 	if(.)
 
