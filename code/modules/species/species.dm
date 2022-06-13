@@ -867,7 +867,7 @@ var/global/const/DEFAULT_SPECIES_HEALTH = 200
 
 /**Runs extra processing after any organs member of this species goes through rejuvenation. */
 /decl/species/proc/post_organ_rejuvenate(var/obj/item/organ/org, var/mob/living/carbon/human/H)
-		org.status |= (ORGAN_BRITTLE|ORGAN_CRYSTAL)
+	return
 
 /decl/species/proc/check_no_slip(var/mob/living/carbon/human/H)
 	if(can_overcome_gravity(H))
