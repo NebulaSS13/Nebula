@@ -14,6 +14,7 @@
 
 	// Status tracking.
 	var/status = 0                         // Various status flags (such as robotic)
+	var/organ_properties = 0               // A flag for telling what capabilities this organ has. ORGAN_PROP_PROSTHETIC, ORGAN_PROP_CRYSTAL, etc..
 	var/vital                              // Lose a vital limb, die immediately.
 
 	// Reference data.
@@ -331,7 +332,7 @@
 		damage = between(0, damage - round(amount, 0.1), max_damage)
 
 /obj/item/organ/proc/robotize(var/company, var/skip_prosthetics = 0, var/keep_organs = 0, var/apply_material = /decl/material/solid/metal/steel, var/check_bodytype, var/check_species)
-	status = ORGAN_PROSTHETIC
+	BP_SET_PROSTHETIC(src) //Can't be assisted and prosthetic at the same time
 	QDEL_NULL(dna)
 	reagents?.clear_reagents()
 	material = GET_DECL(apply_material)
@@ -339,10 +340,10 @@
 	create_matter()
 
 /obj/item/organ/proc/mechassist() //Used to add things like pacemakers, etc
-	status = ORGAN_ASSISTED
+	BP_SET_ASSISTED(src) //Can't be assisted and prosthetic at the same time
 
 /obj/item/organ/attack(var/mob/target, var/mob/user)
-	if(status & ORGAN_PROSTHETIC || !istype(target) || !istype(user) || (user != target && user.a_intent == I_HELP))
+	if(BP_IS_PROSTHETIC(src) || !istype(target) || !istype(user) || (user != target && user.a_intent == I_HELP))
 		return ..()
 
 	if(alert("Do you really want to use this organ as food? It will be useless for anything else afterwards.",,"Ew, no.","Bon appetit!") == "Ew, no.")

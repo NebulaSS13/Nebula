@@ -1,3 +1,5 @@
+#define ADHERENT_LIMB_PROP_FLAG (ORGAN_PROP_PROSTHETIC | ORGAN_PROP_CRYSTAL) //Flag we use on all adherent limbs
+
 /obj/item/organ/external/chest/crystal
 	name = "tendril junction"
 	amputation_point = "axis"
@@ -9,6 +11,7 @@
 	parent_organ = null
 	max_damage = 50
 	min_broken_damage = 25
+	organ_properties = ADHERENT_LIMB_PROP_FLAG
 	limb_flags = ORGAN_FLAG_CAN_BREAK | ORGAN_FLAG_HEALS_OVERKILL
 
 /obj/item/organ/external/groin/crystal
@@ -16,6 +19,7 @@
 	joint = "base"
 	max_damage = 50
 	min_broken_damage = 25
+	organ_properties = ADHERENT_LIMB_PROP_FLAG
 	limb_flags = ORGAN_FLAG_CAN_AMPUTATE | ORGAN_FLAG_CAN_STAND | ORGAN_FLAG_CAN_BREAK
 
 /obj/item/organ/external/head/crystal
@@ -26,6 +30,7 @@
 	max_damage = 50
 	min_broken_damage = 25
 	cavity_max_w_class = ITEM_SIZE_NORMAL // Apparently their brains change w_class to this.
+	organ_properties = ADHERENT_LIMB_PROP_FLAG
 	limb_flags = ORGAN_FLAG_CAN_AMPUTATE | ORGAN_FLAG_HEALS_OVERKILL | ORGAN_FLAG_CAN_BREAK
 
 /obj/item/organ/external/arm/crystal
@@ -34,6 +39,7 @@
 	joint = "base"
 	max_damage = 20
 	min_broken_damage = 10
+	organ_properties = ADHERENT_LIMB_PROP_FLAG
 	limb_flags = ORGAN_FLAG_CAN_AMPUTATE | ORGAN_FLAG_CAN_STAND | ORGAN_FLAG_CAN_BREAK
 
 /obj/item/organ/external/arm/right/crystal
@@ -42,6 +48,7 @@
 	joint = "base"
 	max_damage = 20
 	min_broken_damage = 10
+	organ_properties = ADHERENT_LIMB_PROP_FLAG
 	limb_flags = ORGAN_FLAG_CAN_AMPUTATE | ORGAN_FLAG_CAN_STAND | ORGAN_FLAG_CAN_BREAK
 
 /obj/item/organ/external/hand/crystal
@@ -50,6 +57,7 @@
 	joint = "base"
 	max_damage =20
 	min_broken_damage =10
+	organ_properties = ADHERENT_LIMB_PROP_FLAG
 	limb_flags = ORGAN_FLAG_CAN_AMPUTATE | ORGAN_FLAG_CAN_STAND | ORGAN_FLAG_CAN_BREAK
 
 /obj/item/organ/external/hand/right/crystal
@@ -58,6 +66,7 @@
 	joint = "base"
 	max_damage = 20
 	min_broken_damage =10
+	organ_properties = ADHERENT_LIMB_PROP_FLAG
 	limb_flags = ORGAN_FLAG_CAN_AMPUTATE | ORGAN_FLAG_CAN_STAND | ORGAN_FLAG_CAN_BREAK
 
 /obj/item/organ/external/tendril
@@ -69,6 +78,7 @@
 	parent_organ =     BP_CHEST
 	max_damage =20
 	min_broken_damage =10
+	organ_properties = ADHERENT_LIMB_PROP_FLAG
 	limb_flags = ORGAN_FLAG_CAN_AMPUTATE | ORGAN_FLAG_CAN_STAND | ORGAN_FLAG_CAN_BREAK
 
 /obj/item/organ/external/tendril/two
@@ -82,6 +92,8 @@
 	organ_tag = BP_L_FOOT
 
 /obj/item/organ/external/tendril/four
-	name = "fourth tendril"
+	name      = "fourth tendril"
 	icon_name = "r_foot"
 	organ_tag = BP_R_FOOT
+
+#undef ADHERENT_LIMB_PROP_FLAG
