@@ -1,4 +1,6 @@
 #define BEE_SMOKE_TIME (10 SECONDS)
+#define BEE_RANGE 7 //Maximum range the beehive looks for plants
+
 ////////////////////////////////////////////////////////
 // Beehive
 ////////////////////////////////////////////////////////
@@ -11,10 +13,10 @@
 	anchored                 = TRUE
 	tool_interaction_flags   = TOOL_INTERACTION_ANCHOR | TOOL_INTERACTION_DECONSTRUCT
 	parts_type               = /obj/item/beehive_assembly
-	parts_amount             = 1 
-	material                 = /decl/material/solid/wood  
+	parts_amount             = 1
+	material                 = /decl/material/solid/wood
 	var/open                 = FALSE //Whether the lid of the hive is open
-	var/bee_count            = 0 
+	var/bee_count            = 0
 	var/tmp/max_bee_count    = 100
 	var/honeycombs           = 0 // Percent
 	var/tmp/notthebees       = null //Someone is currently re-enacting a scene from wickerman
@@ -22,7 +24,7 @@
 	var/tmp/time_last_search = 0 //The time we last checked for the nearest plants.
 	var/tmp/time_end_smoked  = 0 //The time when the smoked status ends or 0
 	var/list/frames              //A list of honey frames we contain
-	
+
 /obj/structure/beehive/Initialize()
 	. = ..()
 	START_PROCESSING(SSobj, src)
@@ -40,23 +42,23 @@
 	if(honeycombs >= 100)
 		overlays += "full[round(honeycombs / 100)]"
 	if(bee_count && REALTIMEOFDAY > time_end_smoked)
-		var/beeicon = between(1, round(bee_count / 20), 5) //1 to 5. 
-		overlays += "bees[beeicon]" 
+		var/beeicon = between(1, round(bee_count / 20), 5) //1 to 5.
+		overlays += "bees[beeicon]"
 
 /obj/structure/beehive/examine(mob/user)
 	. = ..()
 	if(open)
 		to_chat(user, "The lid is open.")
 
+/obj/structure/beehive/handle_default_screwdriver_attackby(mob/user, obj/item/screwdriver)
+	user.visible_message(SPAN_NOTICE("\The [user] [open ? "closes" : "opens"] \the [src]."), SPAN_NOTICE("You [open ? "close" : "open"] \the [src]."))
+	open = !open
+	update_icon()
+	return TRUE
+
 /obj/structure/beehive/attackby(var/obj/item/I, var/mob/user)
 
-	if(IS_SCREWDRIVER(I))
-		user.visible_message(SPAN_NOTICE("\The [user] [open ? "closes" : "opens"] \the [src]."), SPAN_NOTICE("You [open ? "close" : "open"] \the [src]."))
-		open = !open
-		update_icon()
-		return TRUE
-
-	else if(istype(I, /obj/item/bee_smoker))
+	if(istype(I, /obj/item/bee_smoker))
 		return smoke_out_bees(I, user)
 
 	else if(istype(I, /obj/item/honey_frame))
@@ -79,42 +81,66 @@
 		return TRUE
 
 	else if(istype(I, /obj/item/grab))
-		var/obj/item/grab/G = I
-		var/mob/living/GM   = G.get_affecting_mob()
-		if(!GM)
-			return
-		if(open && !notthebees && (bee_count >= 60) && (REALTIMEOFDAY > time_end_smoked))
-			user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
-			notthebees = GM
-			user.visible_message(SPAN_DANGER("\The [user] starts jamming \the [GM]'s face into \the [src]!"), SPAN_DANGER("You start jamming \the [GM]'s face into \the [src]!"))
-			add_fingerprint(user)
-			GM.say("What-is-that? What-is-that? WHAT-IS-IT?!!")
-			GM.forceMove(get_turf(src))
-			GM.set_dir(NORTH)
-			GM.apply_effect(2, STUN)
-			var/turns = 0
-			while(do_after(user, 5 SECONDS, src) && (LAZYLEN(GM.grabbed_by)) && !(QDELETED(src) || QDELETED(user) || QDELETED(G) || QDELETED(GM)) && turns < 4)
-				++turns
-				GM.apply_effect(rand(1,20), PAIN)
-				GM.apply_damage(rand(2,8), BRUTE, BP_HEAD, 0, "bee stings", 0, TRUE)
-				GM.emote("scream")
-				ADJ_STATUS(GM, STAT_JITTER, 10)
-				GM.say("[pick("Oh noo! Not the bees! NOT THE BEEEES!!", "AAAAAAAAAAAGH!", "AGH! THEY'RE IN MY EYES! MY EYES!")]")
+		return handle_grab_attack(I, user)
 
-			if(turns > 0)
-				GM.add_chemical_effect(CE_TOXIN, 1)
-			if(turns >= 4 && prob(10))
-				var/obj/item/organ/external/h = GM.get_organ(BP_HEAD)
-				if(h)
-					h.disfigure(PAIN) //Set it to PAIN since otherwise it has pre-written flavor text that completely doesn't fit the situation
-					user.visible_message(SPAN_WARNING("\The [GM]'s [h] has swollen beyond recognition!"))
-
-			user.visible_message(SPAN_NOTICE("\The [user] dislodge \the [GM] from \the [src]!"))
-			notthebees = null
-		return TRUE
-	
 	return ..()
-	
+
+/obj/structure/beehive/proc/handle_grab_attack(var/obj/item/grab/G, var/mob/user)
+	var/mob/living/GM = G.get_affecting_mob()
+	if(!GM || notthebees)
+		return
+	if(G.target_zone != BP_HEAD)
+		to_chat(user, SPAN_WARNING("You must have a head grab to do this!"))
+		return
+	if(!open)
+		to_chat(user, SPAN_WARNING("\The [src]'s lid must be opened to do this!"))
+		return
+	if(bee_count < 60 || (REALTIMEOFDAY <= time_end_smoked))
+		to_chat(user, SPAN_WARNING("\The [src] must contain at least 60 bees, and not have been recently smoked to do this!"))
+		return
+
+	//Prep
+	notthebees = GM
+	user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
+	add_fingerprint(user)
+
+	//Do the initial message and align the mob over the hive
+	user.visible_message(SPAN_DANGER("\The [user] starts jamming \the [GM]'s face into \the [src]!"), SPAN_DANGER("You start jamming \the [GM]'s face into \the [src]!"))
+	GM.say("What-is-that? What-is-that? WHAT-IS-IT?!!")
+	GM.forceMove(get_turf(src))
+	GM.set_dir(NORTH)
+	GM.apply_effect(2, STUN) //knock them down, hopefully face first into the hive
+
+	var/turns = 0
+	while(do_after(user, 5 SECONDS, src) && (LAZYLEN(GM.grabbed_by)) && !(QDELETED(src) || QDELETED(user) || QDELETED(G) || QDELETED(GM)) && turns < 4)
+		++turns
+		GM.apply_effect(rand(1,20), PAIN)
+		GM.apply_damage(rand(2,8), BRUTE, BP_HEAD, 0, "bee stings", 0, TRUE)
+		GM.emote("scream")
+		ADJ_STATUS(GM, STAT_JITTER, 10)
+		GM.say("[pick("Oh noo! Not the bees! NOT THE BEEEES!!", "AAAAAAAAAAAGH!", "AGH! THEY'RE IN MY EYES! MY EYES!")]")
+
+	//If something gets deleted meanwhile just return early
+	if(QDELETED(GM) || QDELETED(G) || QDELETED(src) || QDELETED(user) || !LAZYLEN(GM.grabbed_by))
+		notthebees = null
+		return
+
+	//Post attack
+	if(turns > 0)
+		GM.add_chemical_effect(CE_TOXIN, 1) //Bee venom
+	if(turns >= 4 && prob(10))
+		var/obj/item/organ/external/h = GM.get_organ(BP_HEAD)
+		if(h)
+			h.disfigure(PAIN) //Set it to PAIN since otherwise it has pre-written flavor text that completely doesn't fit the situation
+			user.visible_message(SPAN_WARNING("\The [GM]'s [h] has swollen beyond recognition!"))
+
+	//Just drop it next to the hive so they don't get stuck
+	GM.forceMove(get_turf(user))
+	GM.apply_effect(1, STUN) //Just knock them for a bit so they're not standing up on the same turf as the user
+	user.visible_message(SPAN_NOTICE("\The [user] dislodge \the [GM] from \the [src]!"))
+	notthebees = null
+	return TRUE
+
 /obj/structure/beehive/attack_hand(var/mob/user)
 	if(open)
 		return remove_frame(user)
@@ -124,13 +150,14 @@
 	if((REALTIMEOFDAY > time_end_smoked) && bee_count)
 		//#TODO: I just left this as it is, but it seems like this processes too fast, and is generally really gross
 		pollinate_flowers()
-		bee_count = min(bee_count * 1.005, max_bee_count)
-		queue_icon_update()
+		bee_count = min(bee_count * 1.005, max_bee_count) //Bees count just increases super fast to 100
+		update_icon()
 
 /obj/structure/beehive/proc/pollinate_flowers()
 	var/coef = bee_count / 100
 	var/trays = 0
-	for(var/obj/machinery/portable_atmospherics/hydroponics/H in view(7, src)) //#TODO: Seems really intensive to do that each tick
+	for(var/obj/machinery/portable_atmospherics/hydroponics/H in view(BEE_RANGE, src)) //#TODO: Seems really intensive to do that each tick
+
 		if(H.seed && !H.dead)
 			H.health += 0.05 * coef
 			++trays
@@ -193,7 +220,7 @@
 			user.visible_message(SPAN_NOTICE("\The [user] puts the queen and the bees from \the [B] into \the [src]."), SPAN_NOTICE("You put the queen and the bees from \the [B] into \the [src]."))
 			bee_count = 20
 			B.empty()
-	else 
+	else
 		if(bee_count < 90)
 			to_chat(user, SPAN_NOTICE("\The [src] is not ready to split."))
 			return
@@ -204,7 +231,7 @@
 			user.visible_message(SPAN_NOTICE("\The [user] puts bees and larvae from \the [src] into \the [B]."), SPAN_NOTICE("You put bees and larvae from \the [src] into \the [B]."))
 			bee_count /= 2
 			B.fill()
-	
+
 	update_icon()
 	return TRUE
 
@@ -221,8 +248,8 @@
 	construct_state                = /decl/machine_construction/default/panel_closed
 	uncreated_component_parts      = list(/obj/item/stock_parts/power/apc/buildable = 1)
 	stat_immune                    = NOSCREEN | NOINPUT
-	idle_power_usage               = 10 //W
-	active_power_usage             = 750 //W == ~1HP electric motor 
+	idle_power_usage               = 0 //W
+	active_power_usage             = 750 //W == ~1HP electric motor
 	required_interaction_dexterity = DEXTERITY_SIMPLE_MACHINES
 	core_skill                     = SKILL_BOTANY
 	waterproof                     = FALSE
@@ -317,15 +344,17 @@
 		icon_state = "centrifuge"
 
 /obj/machinery/honey_extractor/Process()
+	//Just abort the current batch if we lose power
 	if(inoperable())
 		time_done_processing = 0
 		on_update_icon()
 		return PROCESS_KILL
+
 	if(REALTIMEOFDAY >= time_done_processing && LAZYLEN(loaded_frames))
 		extract_honey()
 		update_use_power(POWER_USE_IDLE)
 		return PROCESS_KILL
-	
+
 /obj/machinery/honey_extractor/proc/extract_honey()
 	if(!LAZYLEN(loaded_frames))
 		return
@@ -385,7 +414,7 @@
 /obj/item/honey_frame/filled/Initialize()
 	. = ..()
 	honey = max_honey
-	
+
 ////////////////////////////////////////////////////////
 // Beehive Assembly
 ////////////////////////////////////////////////////////
@@ -395,6 +424,7 @@
 	icon       = 'icons/obj/apiary_bees_etc.dmi'
 	icon_state = "apiary"
 	material   = /decl/material/solid/wood
+	w_class    = ITEM_SIZE_LARGE
 
 /obj/item/beehive_assembly/attack_self(var/mob/user)
 	to_chat(user, SPAN_NOTICE("You start assembling a beehive..."))
@@ -412,6 +442,8 @@
 	desc       = "A stasis pack for moving bees."
 	icon       = 'icons/obj/beekeeping.dmi'
 	icon_state = "beepack"
+	material   = /decl/material/solid/plastic
+	w_class    = ITEM_SIZE_SMALL
 	var/full   = TRUE
 
 /obj/item/bee_pack/examine(mob/user, distance, infix, suffix)
@@ -453,3 +485,4 @@
 	)
 
 #undef BEE_SMOKE_TIME
+#undef BEE_RANGE
