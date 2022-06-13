@@ -62,7 +62,10 @@
 	)
 	has_organ = list(
 		BP_POSIBRAIN = /obj/item/organ/internal/posibrain,
-		BP_EYES = /obj/item/organ/internal/eyes/robot
+		BP_EYES = /obj/item/organ/internal/eyes/robot/utility_frame, //Eyes got a different icon file 
+	)
+	override_limb_types = list(
+		BP_HEAD = /obj/item/organ/external/head/utility_frame, //Needed for glowing eyes shennanigans
 	)
 
 	exertion_effect_chance = 10
@@ -73,6 +76,7 @@
 	)
 
 /decl/species/utility_frame/post_organ_rejuvenate(obj/item/organ/org, mob/living/carbon/human/H)
+	org.robotize(/decl/prosthetics_manufacturer/utility_frame) //utility frames are 100% robot guaranteed
 
 /decl/species/utility_frame/disfigure_msg(var/mob/living/carbon/human/H)
 	. = SPAN_DANGER("The faceplate is dented and cracked!\n")

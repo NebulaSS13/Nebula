@@ -8,3 +8,9 @@
 	modular_prosthetic_tier = MODULAR_BODYPART_CYBERNETIC
 
 DEFINE_ROBOLIMB_DESIGNS(/decl/prosthetics_manufacturer/utility_frame, utility_frame)
+
+/obj/item/organ/external/head/utility_frame
+	glowing_eyes = TRUE
+
+ /obj/item/organ/internal/eyes/robot/utility_frame
+	eye_icon = 'mods/species/utility_frames/icons/eyes.dmi'
