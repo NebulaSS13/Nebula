@@ -92,28 +92,28 @@
 	)
 
 	has_limbs = list(
-		BP_CHEST =  list("path" = /obj/item/organ/external/chest/insectoid),
+		BP_CHEST =  list("path" = /obj/item/organ/external/chest/insectoid/mantid),
 		BP_GROIN =  list("path" = /obj/item/organ/external/groin/insectoid/mantid),
-		BP_HEAD =   list("path" = /obj/item/organ/external/head/insectoid),
-		BP_L_ARM =  list("path" = /obj/item/organ/external/arm/insectoid),
-		BP_L_HAND = list("path" = /obj/item/organ/external/hand/insectoid),
-		BP_R_ARM =  list("path" = /obj/item/organ/external/arm/right/insectoid),
-		BP_R_HAND = list("path" = /obj/item/organ/external/hand/right/insectoid),
-		BP_M_HAND = list("path" = /obj/item/organ/external/hand/insectoid/midlimb),
-		BP_R_LEG =  list("path" = /obj/item/organ/external/leg/right/insectoid),
-		BP_L_LEG =  list("path" = /obj/item/organ/external/leg/insectoid),
-		BP_L_FOOT = list("path" = /obj/item/organ/external/foot/insectoid),
-		BP_R_FOOT = list("path" = /obj/item/organ/external/foot/right/insectoid)
+		BP_HEAD =   list("path" = /obj/item/organ/external/head/insectoid/mantid),
+		BP_L_ARM =  list("path" = /obj/item/organ/external/arm/insectoid/mantid),
+		BP_L_HAND = list("path" = /obj/item/organ/external/hand/insectoid/mantid),
+		BP_R_ARM =  list("path" = /obj/item/organ/external/arm/right/insectoid/mantid),
+		BP_R_HAND = list("path" = /obj/item/organ/external/hand/right/insectoid/mantid),
+		BP_M_HAND = list("path" = /obj/item/organ/external/hand/insectoid/midlimb/mantid),
+		BP_R_LEG =  list("path" = /obj/item/organ/external/leg/right/insectoid/mantid),
+		BP_L_LEG =  list("path" = /obj/item/organ/external/leg/insectoid/mantid),
+		BP_L_FOOT = list("path" = /obj/item/organ/external/foot/insectoid/mantid),
+		BP_R_FOOT = list("path" = /obj/item/organ/external/foot/right/insectoid/mantid)
 	)
 
 	has_organ = list(
-		BP_HEART =             /obj/item/organ/internal/heart/insectoid,
-		BP_STOMACH =           /obj/item/organ/internal/stomach/insectoid,
-		BP_LUNGS =             /obj/item/organ/internal/lungs/insectoid,
-		BP_LIVER =             /obj/item/organ/internal/liver/insectoid,
-		BP_KIDNEYS =           /obj/item/organ/internal/kidneys/insectoid,
-		BP_BRAIN =             /obj/item/organ/internal/brain/insectoid,
-		BP_EYES =              /obj/item/organ/internal/eyes/insectoid,
+		BP_HEART =             /obj/item/organ/internal/heart/insectoid/mantid,
+		BP_STOMACH =           /obj/item/organ/internal/stomach/insectoid/mantid,
+		BP_LUNGS =             /obj/item/organ/internal/lungs/insectoid/mantid,
+		BP_LIVER =             /obj/item/organ/internal/liver/insectoid/mantid,
+		BP_KIDNEYS =           /obj/item/organ/internal/kidneys/insectoid/mantid,
+		BP_BRAIN =             /obj/item/organ/internal/brain/insectoid/mantid,
+		BP_EYES =              /obj/item/organ/internal/eyes/insectoid/mantid,
 		BP_SYSTEM_CONTROLLER = /obj/item/organ/internal/controller
 	)
 
@@ -139,9 +139,6 @@
 
 /decl/species/mantid/handle_sleeping(var/mob/living/carbon/human/H)
 	return
-
-/decl/species/mantid/post_organ_rejuvenate(var/obj/item/organ/org, var/mob/living/carbon/human/H)
-	org.status |= ORGAN_CRYSTAL
 
 /decl/species/mantid/equip_survival_gear(var/mob/living/carbon/human/H, var/extendedtank = 1)
 	return
