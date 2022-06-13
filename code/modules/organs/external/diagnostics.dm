@@ -23,7 +23,7 @@
 		return english_list(descriptors)
 
 	var/list/flavor_text = list()
-	if((status & ORGAN_CUT_AWAY) && !is_stump() && !(parent && parent.status & ORGAN_CUT_AWAY))
+	if((status & ORGAN_CUT_AWAY) && !(parent && parent.status & ORGAN_CUT_AWAY))
 		flavor_text += "a tear at the [amputation_point] so severe that it hangs by a scrap of flesh"
 
 	var/list/wound_descriptors = list()
@@ -110,9 +110,6 @@
 			. += "[capitalize(aug.name)] implanted"
 
 /obj/item/organ/external/proc/inspect(mob/user)
-	if(is_stump())
-		to_chat(user, "<span class='notice'>[owner] is missing that bodypart.</span>")
-		return
 
 	user.visible_message("<span class='notice'>[user] starts inspecting [owner]'s [name] carefully.</span>")
 	for(var/ailment in has_diagnosable_ailments(user, scanner = FALSE))

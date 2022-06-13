@@ -4,7 +4,7 @@
 	. = ..()
 	var/area/A = get_area(src)
 	if(A)
-		SetName("hatch ([A.name])")
+		SetName("hatch ([A.proper_name])")
 
 /obj/machinery/door/airlock/hatch/autoname/general
 	stripe_color = COLOR_CIVIE_GREEN

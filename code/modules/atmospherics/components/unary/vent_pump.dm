@@ -225,7 +225,7 @@
 	if(controlled)
 		var/area/A = get_area(src)
 		if(A && !A.air_vent_names[id_tag])
-			var/new_name = "[A.name] Vent Pump #[A.air_vent_names.len+1]"
+			var/new_name = "[A.proper_name] Vent Pump #[A.air_vent_names.len+1]"
 			A.air_vent_names[id_tag] = new_name
 			SetName(new_name)
 			events_repository.register(/decl/observ/name_set, A, src, .proc/change_area_name)

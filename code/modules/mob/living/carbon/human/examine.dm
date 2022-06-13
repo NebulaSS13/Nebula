@@ -111,7 +111,7 @@
 		var/list/jazzhands = get_hands_organs()
 		var/datum/reagents/coating
 		for(var/obj/item/organ/external/E in jazzhands)
-			if(!E.is_stump() && E.coating)
+			if(E.coating)
 				coating = E.coating
 				break
 		if(coating)
@@ -130,7 +130,7 @@
 		var/datum/reagents/coating
 		for(var/bp in list(BP_L_FOOT, BP_R_FOOT))
 			var/obj/item/organ/external/E = get_organ(bp)
-			if(E && !E.is_stump() && E.coating)
+			if(E && E.coating)
 				coating = E.coating
 				break
 		if(coating)
@@ -265,16 +265,11 @@
 					hidden_bleeders[hidden] = list()
 				hidden_bleeders[hidden] += E.name
 		else
-			if(E.is_stump())
-				wound_flavor_text[E.name] += "<b>[G.He] [G.has] a stump where [G.his] [organ_descriptor] should be.</b>\n"
-				if(LAZYLEN(E.wounds) && E.parent)
-					wound_flavor_text[E.name] += "[G.He] [G.has] [E.get_wounds_desc()] on [G.his] [E.parent.name].<br>"
-			else
-				if(!is_synth && BP_IS_PROSTHETIC(E) && (E.parent && !BP_IS_PROSTHETIC(E.parent) && !BP_IS_ASSISTED(E.parent)))
-					wound_flavor_text[E.name] = "[G.He] [G.has] a [E.name].\n"
-				var/wounddesc = E.get_wounds_desc()
-				if(wounddesc != "nothing")
-					wound_flavor_text[E.name] += "[G.He] [G.has] [wounddesc] on [G.his] [E.name].<br>"
+			if(!is_synth && BP_IS_PROSTHETIC(E) && (E.parent && !BP_IS_PROSTHETIC(E.parent) && !BP_IS_ASSISTED(E.parent)))
+				wound_flavor_text[E.name] = "[G.He] [G.has] a [E.name].\n"
+			var/wounddesc = E.get_wounds_desc()
+			if(wounddesc != "nothing")
+				wound_flavor_text[E.name] += "[G.He] [G.has] [wounddesc] on [G.his] [E.name].<br>"
 		if(!hidden || distance <=1)
 			if(E.is_dislocated())
 				wound_flavor_text[E.name] += "[G.His] [E.joint] is dislocated!<br>"

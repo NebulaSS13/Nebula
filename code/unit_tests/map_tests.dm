@@ -20,7 +20,7 @@
 			continue
 		area_test_count++
 		var/area_good = 1
-		var/bad_msg = "--------------- [A.name]([A.type])"
+		var/bad_msg = "--------------- [A.proper_name]([A.type])"
 
 		var/exemptions = get_exemptions(A)
 		if(!A.apc && !(exemptions & global.using_map.NO_APC))
@@ -348,12 +348,12 @@
 
 	for(var/obj/machinery/cryopod/C in SSmachines.machinery)
 		if(!C.control_computer)
-			log_bad("[get_area(C)] lacks a cryopod control computer while holding a cryopod.")
+			log_bad("[get_area_name(C)] lacks a cryopod control computer while holding a cryopod.")
 			pass = FALSE
 
 	for(var/obj/machinery/computer/cryopod/C in SSmachines.machinery)
 		if(!(locate(/obj/machinery/cryopod) in get_area(C)))
-			log_bad("[get_area(C)] lacks a cryopod while holding a control computer.")
+			log_bad("[get_area_name(C)] lacks a cryopod while holding a control computer.")
 			pass = FALSE
 
 	if(pass)

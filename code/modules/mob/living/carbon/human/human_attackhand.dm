@@ -78,7 +78,7 @@
 	H.last_attack = world.time
 
 
-	if(!affecting || affecting.is_stump())
+	if(!affecting)
 		to_chat(user, SPAN_DANGER("They are missing that limb!"))
 		return TRUE
 

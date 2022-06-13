@@ -88,7 +88,6 @@ var/global/list/surgery_tool_exception_cache = list()
 			// Check various conditional flags.
 			if(((surgery_candidate_flags & SURGERY_NO_ROBOTIC) && BP_IS_PROSTHETIC(affected)) || \
 			 ((surgery_candidate_flags & SURGERY_NO_CRYSTAL) && BP_IS_CRYSTAL(affected))   || \
-			 ((surgery_candidate_flags & SURGERY_NO_STUMP) && affected.is_stump())         || \
 			 ((surgery_candidate_flags & SURGERY_NO_FLESH) && !(BP_IS_PROSTHETIC(affected) || BP_IS_CRYSTAL(affected))))
 				return FALSE
 			// Check if the surgery target is accessible.

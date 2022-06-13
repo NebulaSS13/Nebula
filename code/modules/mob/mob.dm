@@ -496,10 +496,7 @@
 /mob/living/carbon/human/pull_damage()
 	if(!lying || getBruteLoss() + getFireLoss() < 100)
 		return FALSE
-	for(var/thing in get_external_organs())
-		var/obj/item/organ/external/e = thing
-		if(!e || e.is_stump())
-			continue
+	for(var/obj/item/organ/external/e in get_external_organs())
 		if((e.status & ORGAN_BROKEN) && !e.splinted)
 			return TRUE
 		if(e.status & ORGAN_BLEEDING)

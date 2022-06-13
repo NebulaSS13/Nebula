@@ -96,9 +96,7 @@ var/global/list/image/splatter_cache=list()
 
 	var/obj/item/organ/external/l_foot = perp.get_organ(BP_L_FOOT)
 	var/obj/item/organ/external/r_foot = perp.get_organ(BP_R_FOOT)
-	var/hasfeet = 1
-	if((!l_foot || l_foot.is_stump()) && (!r_foot || r_foot.is_stump()))
-		hasfeet = 0
+	var/hasfeet = l_foot && r_foot
 
 	var/transferred_data = blood_data ? blood_data[pick(blood_data)] : null
 	var/obj/item/clothing/shoes/shoes = perp.get_equipped_item(slot_shoes_str)

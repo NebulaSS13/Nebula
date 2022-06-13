@@ -51,7 +51,7 @@
 	var/area/area = get_area(src)
 	if(!area || !isturf(loc))
 		return
-	var/t = "<TT><B>AI Liquid Dispenser</B> ([area.name])<HR>"
+	var/t = "<TT><B>AI Liquid Dispenser</B> ([area.proper_name])<HR>"
 
 	if(src.locked && (!istype(user, /mob/living/silicon)))
 		t += "<I>(Swipe ID card to unlock control panel.)</I><BR>"

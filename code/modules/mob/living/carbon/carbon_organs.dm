@@ -48,9 +48,6 @@
 	if(!(. = ..()))
 		return
 
-	if(client)
-		client.screen -= O
-	
 	LAZYREMOVE(organs_by_tag, O.organ_tag)
 	if(O.is_internal())
 		LAZYREMOVE(internal_organs, O)

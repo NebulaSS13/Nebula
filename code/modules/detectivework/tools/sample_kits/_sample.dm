@@ -11,7 +11,7 @@
 	if(supplied)
 		copy_evidence(supplied)
 		name = "[initial(name)] (\the [supplied])"
-		object = "[supplied], at [get_area(supplied)]"
+		object = "[supplied], at [get_area_name(supplied)]"
 	update_icon()
 
 /obj/item/forensics/sample/Destroy()

@@ -248,7 +248,7 @@ var/global/list/deactivated_ai_cores = list()
 
 	var/list/cores = list()
 	for(var/obj/structure/aicore/deactivated/D in global.deactivated_ai_cores)
-		cores["[D] ([get_area(D)])"] = D
+		cores["[D] ([get_area_name(D)])"] = D
 
 	var/id = input("Which core?", "Toggle AI Core Latejoin", null) as null|anything in cores
 	if(!id) return

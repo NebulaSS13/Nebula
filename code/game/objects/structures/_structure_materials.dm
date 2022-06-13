@@ -81,6 +81,7 @@
 	if(!dismantled)
 		dismantled = TRUE
 		create_dismantled_products(get_turf(src))
+		dump_contents()
 		if(!QDELETED(src))
 			qdel(src)
 	. = TRUE

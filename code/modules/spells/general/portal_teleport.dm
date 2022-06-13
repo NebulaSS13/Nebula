@@ -57,7 +57,7 @@
 	if(!chosenarea || !istype(chosenarea))
 		..()
 	else
-		invocation += "[uppertext(chosenarea.name)]"
+		invocation += "[uppertext(chosenarea.proper_name)]"
 		..()
 	return
 

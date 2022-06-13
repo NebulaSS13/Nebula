@@ -150,7 +150,7 @@
 /obj/effect/rune/teleport/Initialize()
 	. = ..()
 	var/area/A = get_area(src)
-	destination = A.name
+	destination = A.proper_name
 	var/decl/special_role/cultist/cult = GET_DECL(/decl/special_role/cultist)
 	cult.teleport_runes += src
 
@@ -419,7 +419,7 @@
 		user.equip_to_slot_or_del(new /obj/item/clothing/shoes/cult(user), slot_shoes_str)
 
 	O = user.get_equipped_item(slot_back_str)
-	if(istype(O, /obj/item/storage) && !istype(O, /obj/item/storage/backpack/cultpack) && user.unEquip(O)) 
+	if(istype(O, /obj/item/storage) && !istype(O, /obj/item/storage/backpack/cultpack) && user.unEquip(O))
 		var/obj/item/storage/backpack/cultpack/C = new /obj/item/storage/backpack/cultpack(user)
 		user.equip_to_slot_or_del(C, slot_back_str)
 		if(C)
@@ -779,7 +779,7 @@
 	log_and_message_admins_many(cultists, "started summoning Nar-sie.")
 
 	var/area/A = get_area(src)
-	command_announcement.Announce("High levels of gravitational disruption detected at \the [A]. Suspected wormhole forming. Investigate it immediately.")
+	command_announcement.Announce("High levels of gravitational disruption detected at \the [A.proper_name]. Suspected wormhole forming. Investigate it immediately.")
 	while(cultists.len > 4 || the_end_comes)
 		cultists = get_cultists()
 		if(cultists.len > 8)

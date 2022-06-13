@@ -35,6 +35,7 @@
 
 /mob/living/carbon/human/Destroy()
 	global.human_mob_list -= src
+	regenerate_body_icon = FALSE // don't bother regenerating if we happen to be queued to update icon
 	worn_underwear = null
 	QDEL_NULL(attack_selector)
 	QDEL_NULL(vessel)
@@ -237,7 +238,7 @@
 	var/obj/item/organ/external/H = get_organ(BP_HEAD)
 	var/obj/item/clothing/mask/mask = get_equipped_item(slot_wear_mask_str)
 	var/obj/item/head = get_equipped_item(slot_head_str)
-	if(!H || (H.status & ORGAN_DISFIGURED) || H.is_stump() || !real_name || is_husked() || (mask && (mask.flags_inv&HIDEFACE)) || (head && (head.flags_inv&HIDEFACE)))	//Face is unrecognizeable, use ID if able
+	if(!H || (H.status & ORGAN_DISFIGURED) || !real_name || is_husked() || (mask && (mask.flags_inv&HIDEFACE)) || (head && (head.flags_inv&HIDEFACE)))	//Face is unrecognizeable, use ID if able
 		if(istype(mask) && mask.visible_name)
 			return mask.visible_name
 		else if(istype(wearing_rig) && wearing_rig.visible_name)
@@ -553,8 +554,7 @@
 		return 0
 	var/bloodied
 	for(var/obj/item/organ/external/grabber in get_hands_organs())
-		if(!grabber.is_stump())
-			bloodied |= grabber.add_blood(M, amount, blood_data)
+		bloodied |= grabber.add_blood(M, amount, blood_data)
 	if(bloodied)
 		update_inv_gloves()	//handles bloody hands overlays and updating
 		verbs += /mob/living/carbon/human/proc/bloody_doodle
@@ -630,7 +630,9 @@
 	organ.take_external_damage(rand(1,3) + O.w_class, DAM_EDGE, 0)
 
 /mob/living/carbon/human/proc/set_bodytype(var/decl/bodytype/new_bodytype, var/rebuild_body = FALSE)
-	if(bodytype != new_bodytype)
+	if(ispath(new_bodytype))
+		new_bodytype = GET_DECL(new_bodytype)
+	if(istype(new_bodytype) && bodytype != new_bodytype)
 		bodytype = new_bodytype
 		if(bodytype && rebuild_body)
 			force_update_limbs()
@@ -1027,8 +1029,6 @@
 				if(40 to INFINITY)
 					status += "burning fiercely"
 
-			if(org.is_stump())
-				status += "MISSING"
 			if(org.status & ORGAN_MUTATED)
 				status += "misshapen"
 			if(org.is_dislocated())
@@ -1196,7 +1196,7 @@
 
 /mob/living/carbon/human/get_bullet_impact_effect_type(var/def_zone)
 	var/obj/item/organ/external/E = get_organ(def_zone)
-	if(!E || E.is_stump())
+	if(!E)
 		return BULLET_IMPACT_NONE
 	if(BP_IS_PROSTHETIC(E))
 		return BULLET_IMPACT_METAL

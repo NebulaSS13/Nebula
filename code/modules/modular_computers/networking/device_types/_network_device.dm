@@ -30,7 +30,7 @@
 	network_tag = "[uppertext(replacetext(O.name, " ", "_"))]-[sequential_id(type)]"
 	if(autojoin)
 		SSnetworking.queue_connection(src)
-	
+
 	if(length(device_variables))
 		for(var/path in device_variables)
 			device_variables[path] = GET_DECL(path)
@@ -53,6 +53,8 @@
 
 /datum/extension/network_device/proc/disconnect(net_down)
 	var/datum/computer_network/net = SSnetworking.networks[network_id]
+	if (net_down)
+		SSnetworking.queue_reconnect(src, network_id)
 	if(!net)
 		return FALSE
 	return net.remove_device(src)
@@ -60,9 +62,14 @@
 /datum/extension/network_device/proc/check_connection(specific_action)
 	var/datum/computer_network/net = SSnetworking.networks[network_id]
 	if(!net)
+		// We should already be queued for reconnect if it went down, so do nothing.
 		return FALSE
-	if(!net.check_connection(src, specific_action) || !net.add_device(src))
-		return FALSE
+	if(!net.check_connection(src, specific_action) || net.devices_by_tag[network_tag] != src)
+		// The connection has failed but the network is still up, so we try to reconnect.
+		if(connect())
+			net = SSnetworking.networks[network_id]
+		else
+			return FALSE
 	return net.get_signal_strength(src)
 
 /datum/extension/network_device/proc/get_signal_wordlevel()
@@ -125,6 +132,8 @@
 /datum/extension/network_device/proc/set_new_id(new_id, user)
 	var/list/networks = get_nearby_networks()
 	if(new_id in networks)
+		if(!SSnetworking[network_id]) // old network is down, so we should unqueue from its reconnect list
+			SSnetworking.unqueue_reconnect(src, network_id)
 		disconnect()
 		network_id = new_id
 		to_chat(user, SPAN_NOTICE("Network ID changed to '[network_id]'."))

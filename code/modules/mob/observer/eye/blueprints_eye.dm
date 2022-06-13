@@ -1,19 +1,19 @@
 #define MAX_AREA_SIZE 300
 
 /mob/observer/eye/blueprints
-	
+
 	var/list/selected_turfs // Associative list of turfs -> boolean validity that the player has selected for new area creation.
 	var/list/selection_images
 	var/turf/last_selected_turf
 	var/image/last_selected_image
-	
+
 	// On what Z-levels this can be used to modify or create areas.
 	var/list/valid_z_levels
 
 	// Displayed to the user to allow them to see what area they're hovering over.
 	var/obj/effect/overlay/area_name_effect
 	var/area_prefix
-	
+
 	// Displayed to the user on failed area creation.
 	var/list/errors
 
@@ -50,7 +50,7 @@
 	if(owner && owner.client && user == owner)
 		owner.client.images.Cut()
 	. = ..()
-	
+
 /mob/observer/eye/blueprints/proc/create_area()
 	var/area_name = sanitize_safe(input("New area name:","Area Creation", ""), MAX_NAME_LEN)
 	if(!area_name || !length(area_name))
@@ -80,21 +80,22 @@
 	if(A.apc)
 		to_chat(owner, SPAN_WARNING("You must remove the APC from this area before you can remove it from the blueprints!"))
 		return
-	to_chat(owner, SPAN_NOTICE("You scrub [A.name] off the blueprints."))
-	log_and_message_admins("deleted area [A.name] via station blueprints.")
+	to_chat(owner, SPAN_NOTICE("You scrub [A.proper_name] off the blueprints."))
+	log_and_message_admins("deleted area [A.proper_name] via station blueprints.")
 	qdel(A)
 
 /mob/observer/eye/blueprints/proc/edit_area()
 	var/area/A = get_area(src)
 	if(!check_modification_validity())
 		return
-	var/prevname = A.name
+	var/prevname = replacetext(A.name, "\improper ", "the ")
 	var/new_area_name = sanitize_safe(input("Edit area name:","Area Editing", prevname), MAX_NAME_LEN)
 	if(!new_area_name || !LAZYLEN(new_area_name) || new_area_name==prevname)
 		return
 	if(length(new_area_name) > 50)
 		to_chat(owner, SPAN_WARNING("Text too long."))
 		return
+	new_area_name = replacetext(new_area_name, regex(@"^the "), "\improper ")
 
 	A.SetName(new_area_name)
 	to_chat(owner, SPAN_NOTICE("You set the area '[prevname]' title to '[new_area_name]'."))
@@ -119,7 +120,7 @@
 
 	if(last_selected_turf.z != next_selected_turf.z) // No multi-Z areas. Contiguity checks this as well, but this is cheaper.
 		return
-	
+
 	var/list/new_selection = block(last_selected_turf, next_selected_turf)
 
 	if(params["shift"])		   // Shift click to remove areas from the selection.
@@ -133,7 +134,7 @@
 	update_images()
 	last_selected_turf = null
 
-// Completes all the necessary checks for creating new areas, starting at the turf level before checking contiguity. 
+// Completes all the necessary checks for creating new areas, starting at the turf level before checking contiguity.
 /mob/observer/eye/blueprints/proc/check_selection_validity()
 	. = TRUE
 	LAZYCLEARLIST(errors)
@@ -150,7 +151,7 @@
 		var/turf_valid = check_turf_validity(T)
 		. = min(., turf_valid)
 		LAZYSET(selected_turfs, T, turf_valid)
-	
+
 	if(!.) return // Skip checking contiguity if there's other errors with individual turfs.
 	. = check_contiguity()
 
@@ -179,7 +180,7 @@
 		return FALSE
 	var/list/pending_turfs = list(start_turf)
 	var/list/checked_turfs = list()
-	
+
 	while(pending_turfs.len)
 		if(LAZYLEN(checked_turfs) > MAX_AREA_SIZE)
 			LAZYDISTINCTADD(errors, "selection exceeds max size")
@@ -190,16 +191,16 @@
 			var/turf/NT = get_step(T, dir)
 			if(!isturf(NT) || !(NT in selected_turfs) || (NT in pending_turfs) || (NT in checked_turfs))
 				continue
-			pending_turfs += NT	
+			pending_turfs += NT
 
 		checked_turfs += T
-	
-	var/list/noncontiguous_turfs = (selected_turfs.Copy() - checked_turfs) 
+
+	var/list/noncontiguous_turfs = (selected_turfs.Copy() - checked_turfs)
 
 	if(LAZYLEN(noncontiguous_turfs)) // If turfs still remain in noncontiguous_turfs, then the selection has unconnected parts.
 		LAZYDISTINCTADD(errors, "selection must be contiguous")
 		return FALSE
-	
+
 	return TRUE
 
 // For checks independent of the selection.
@@ -223,7 +224,7 @@
 /mob/observer/eye/blueprints/proc/update_images()
 	if(!owner || !owner.client)
 		return
-	
+
 	if(LAZYLEN(selection_images))
 		owner.client.images -= selection_images
 	LAZYCLEARLIST(selection_images)
@@ -247,7 +248,7 @@
 		var/area/A = get_area(src)
 		if(!A)
 			return
-		area_name_effect.maptext = "<span style=\"[style]\">[area_prefix], [A.name]</span>"
+		area_name_effect.maptext = "<span style=\"[style]\">[area_prefix], [A.proper_name]</span>"
 
 /mob/observer/eye/blueprints/apply_visual(var/mob/M)
 	. = ..()

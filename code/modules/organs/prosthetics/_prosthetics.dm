@@ -52,7 +52,7 @@
 
 // Checks if an organ (or the parent of one) is in a fit state for modular limb stuff to happen.
 /obj/item/organ/external/proc/check_modular_limb_damage(var/mob/living/carbon/human/user)
-	. =  damage >= min_broken_damage || (status & ORGAN_BROKEN) || is_stump() // can't use is_broken() as the limb has ORGAN_CUT_AWAY
+	. =  damage >= min_broken_damage || (status & ORGAN_BROKEN) // can't use is_broken() as the limb has ORGAN_CUT_AWAY
 
 // Human mob procs:
 // Checks the organ list for limbs meeting a predicate. Way overengineered for such a limited use 

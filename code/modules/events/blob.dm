@@ -13,7 +13,7 @@
 		kill()
 		return
 
-	log_and_message_admins("Blob spawned in \the [get_area(T)]", location = T)
+	log_and_message_admins("Blob spawned in \the [get_area_name(T)]", location = T)
 	Blob = new /obj/effect/blob/core(T)
 	for(var/i = 1; i < rand(3, 4), i++)
 		Blob.Process()

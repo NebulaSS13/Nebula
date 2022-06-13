@@ -36,7 +36,7 @@
 /obj/machinery/network/on_update_icon()
 	icon_state = initial(icon_state)
 	if(panel_open)
-		icon_state = "[icon_state]_o" 
+		icon_state = "[icon_state]_o"
 	if(!operable())
 		icon_state = "[icon_state]_off"
 
@@ -116,7 +116,7 @@
 	if(!D)
 		return
 	if(operable())
-		D.connect()
+		SSnetworking.queue_connection(D) // must queue, due to router race conditions
 	else
 		D.disconnect()
 
