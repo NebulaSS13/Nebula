@@ -82,7 +82,7 @@ SUBSYSTEM_DEF(materials)
 			continue
 		new_mineral = GET_DECL(mtype)
 		materials += new_mineral
-		materials_by_name[mtype] = new_mineral
+		materials_by_name[lowertext(new_mineral.name)] = new_mineral
 		if(new_mineral.sparse_material_weight)
 			weighted_minerals_sparse[new_mineral.type] = new_mineral.sparse_material_weight
 		if(new_mineral.rich_material_weight)
@@ -147,19 +147,9 @@ SUBSYSTEM_DEF(materials)
 	return global.default_strata_type_by_z[s_key]
 
 /datum/controller/subsystem/materials/proc/get_material_by_name(var/mat_name)
-	RETURN_TYPE(/decl/material)
-	if(!mat_name)
-		return
-	mat_name = lowertext(mat_name)
-	if(isnull(materials_by_name[mat_name]))
-		var/list/mats = decls_repository.get_decls_of_subtype(/decl/material)
-		for(var/mat in mats)
-			var/decl/material/mat_decl = mats[mat]
-			if(lowertext(mat_decl.name) == mat_name)
-				materials_by_name[mat_name] = mat_decl
-				return mat_decl
-		materials_by_name[mat_name] = FALSE
-	return materials_by_name[mat_name]
+	if(mat_name)
+		mat_name = lowertext(mat_name)
+		return materials_by_name[mat_name]
 
 /datum/controller/subsystem/materials/proc/get_strata_material(var/turf/exterior/wall/location)
 	if(!istype(location))
