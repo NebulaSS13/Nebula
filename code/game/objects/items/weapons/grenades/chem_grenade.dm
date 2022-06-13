@@ -18,6 +18,11 @@
 	. = ..()
 	create_reagents(1000)
 
+/obj/item/grenade/chem_grenade/Destroy()
+	QDEL_NULL(detonator)
+	QDEL_NULL_LIST(beakers)
+	. = ..()
+
 /obj/item/grenade/chem_grenade/attack_self(mob/user)
 	if(!stage || stage==1)
 		if(detonator)
@@ -112,7 +117,7 @@
 	update_icon()
 
 /obj/item/grenade/chem_grenade/activate(mob/user)
-	if(active) 
+	if(active)
 		return
 	if(detonator)
 		if(!isigniter(detonator.a_left))
@@ -127,12 +132,12 @@
 
 /obj/item/grenade/chem_grenade/detonate()
 	set waitfor = 0
-	if(!stage || stage < 2) 
+	if(!stage || stage < 2)
 		return
 
 	var/has_reagents = 0
 	for(var/obj/item/chems/glass/G in beakers)
-		if(G.reagents.total_volume) 
+		if(G.reagents.total_volume)
 			has_reagents = TRUE
 			break
 
@@ -162,7 +167,7 @@
 	set_invisibility(INVISIBILITY_MAXIMUM)
 
 	// Visual effect to show the grenade going off.
-	if(reagents.total_volume) 
+	if(reagents.total_volume)
 		var/datum/effect/effect/system/steam_spread/steam = new
 		steam.set_up(10, 0, get_turf(src))
 		steam.attach(src)

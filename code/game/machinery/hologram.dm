@@ -61,7 +61,7 @@ var/global/const/HOLOPAD_MODE = RANGE_BASED
 /obj/machinery/hologram/holopad/Initialize()
 	. = ..()
 	var/area/A = get_area(src)
-	desc = "It's a floor-mounted device for projecting holographic images. Its ID is '[A.name]'"
+	desc = "It's a floor-mounted device for projecting holographic images. Its ID is '[A.proper_name]'"
 
 /obj/machinery/hologram/holopad/interface_interact(var/mob/living/carbon/human/user) //Carn: Hologram requests.
 	if(!CanInteract(user, DefaultTopicState()))
@@ -97,7 +97,7 @@ var/global/const/HOLOPAD_MODE = RANGE_BASED
 					if(!AI.client)	continue
 					if (holopadType != HOLOPAD_LONG_RANGE && !AreConnectedZLevels(AI.z, src.z))
 						continue
-					to_chat(AI, "<span class='info'>Your presence is requested at <a href='?src=\ref[AI];jumptoholopad=\ref[src]'>\the [area]</a>.</span>")
+					to_chat(AI, "<span class='info'>Your presence is requested at <a href='?src=\ref[AI];jumptoholopad=\ref[src]'>\the [area.proper_name]</a>.</span>")
 			else
 				to_chat(user, "<span class='notice'>A request for AI presence was already sent recently.</span>")
 		if("Holocomms")
@@ -118,9 +118,9 @@ var/global/const/HOLOPAD_MODE = RANGE_BASED
 					if (H.operable())
 						var/area/A = get_area(H)
 						if(H.z in zlevels)
-							holopadlist["[A.name]"] = H	//Define a list and fill it with the area of every holopad in the world
+							holopadlist["[A.proper_name]"] = H	//Define a list and fill it with the area of every holopad in the world
 						if (H.holopadType == HOLOPAD_LONG_RANGE && (H.z in zlevels_long))
-							holopadlist["[A.name]"] = H
+							holopadlist["[A.proper_name]"] = H
 				holopadlist = sortTim(holopadlist, /proc/cmp_text_asc)
 				var/temppad = input(user, "Which holopad would you like to contact?", "holopad list") as null|anything in holopadlist
 				targetpad = holopadlist["[temppad]"]
@@ -145,8 +145,8 @@ var/global/const/HOLOPAD_MODE = RANGE_BASED
 	targetpad.icon_state = "[targetpad.base_icon]1"
 	var/area/our_area = get_area(src)
 	var/area/target_area = get_area(targetpad)
-	targetpad.audible_message("<b>\The [src]</b> announces, \"Incoming communications request from [our_area].\"")
-	to_chat(user, "<span class='notice'>Trying to establish a connection to the holopad in [target_area]... Please await confirmation from recipient.</span>")
+	targetpad.audible_message("<b>\The [src]</b> announces, \"Incoming communications request from [our_area.proper_name].\"")
+	to_chat(user, "<span class='notice'>Trying to establish a connection to the holopad in [target_area.proper_name]... Please await confirmation from recipient.</span>")
 
 
 /obj/machinery/hologram/holopad/proc/take_call(mob/living/carbon/user)
@@ -157,7 +157,7 @@ var/global/const/HOLOPAD_MODE = RANGE_BASED
 		activate_holocall(caller_id)
 	var/area/source_area = get_area(sourcepad)
 	var/area/our_area = get_area(src)
-	log_admin("[key_name(caller_id)] just established a holopad connection from [source_area] to [our_area]")
+	log_admin("[key_name(caller_id)] just established a holopad connection from [source_area.proper_name] to [our_area.proper_name]")
 
 /obj/machinery/hologram/holopad/proc/end_call(mob/user)
 	if(!caller_id)

@@ -7,7 +7,7 @@
 	blood_level = 1
 	shock_level = 40
 	delicate = 1
-	surgery_candidate_flags = SURGERY_NO_ROBOTIC | SURGERY_NO_STUMP | SURGERY_NEEDS_ENCASEMENT
+	surgery_candidate_flags = SURGERY_NO_ROBOTIC | SURGERY_NEEDS_ENCASEMENT
 	surgery_step_category = /decl/surgery_step/internal
 
 //////////////////////////////////////////////////////////////////
@@ -23,7 +23,7 @@
 	)
 	min_duration = 70
 	max_duration = 90
-	surgery_candidate_flags = SURGERY_NO_CRYSTAL | SURGERY_NO_ROBOTIC | SURGERY_NO_STUMP
+	surgery_candidate_flags = SURGERY_NO_CRYSTAL | SURGERY_NO_ROBOTIC
 
 /decl/surgery_step/internal/fix_organ/assess_bodypart(mob/living/user, mob/living/target, target_zone, obj/item/tool)
 	var/obj/item/organ/external/affected = ..()
@@ -94,7 +94,7 @@
 	allowed_tools = list(TOOL_SCALPEL = 100)
 	min_duration = 90
 	max_duration = 110
-	surgery_candidate_flags = SURGERY_NO_CRYSTAL | SURGERY_NO_ROBOTIC | SURGERY_NO_STUMP | SURGERY_NEEDS_ENCASEMENT
+	surgery_candidate_flags = SURGERY_NO_CRYSTAL | SURGERY_NO_ROBOTIC | SURGERY_NEEDS_ENCASEMENT
 
 /decl/surgery_step/internal/detatch_organ/pre_surgery_step(mob/living/user, mob/living/target, target_zone, obj/item/tool)
 	var/list/attached_organs
@@ -192,11 +192,6 @@
 	if(istype(O) && istype(affected))
 		//Now call remove again with detach = FALSE so we fully remove it
 		target.remove_organ(O, TRUE, FALSE)
-
-		if(!BP_IS_PROSTHETIC(affected))
-			playsound(target.loc, 'sound/effects/squelch1.ogg', 15, 1)
-		else
-			playsound(target.loc, 'sound/items/Ratchet.ogg', 50, 1)
 
 	// Just in case somehow the organ we're extracting from an organic is an MMI
 	if(istype(O, /obj/item/organ/internal/mmi_holder))
@@ -306,7 +301,7 @@
 	)
 	min_duration = 100
 	max_duration = 120
-	surgery_candidate_flags = SURGERY_NO_CRYSTAL | SURGERY_NO_ROBOTIC | SURGERY_NO_STUMP | SURGERY_NEEDS_ENCASEMENT
+	surgery_candidate_flags = SURGERY_NO_CRYSTAL | SURGERY_NO_ROBOTIC | SURGERY_NEEDS_ENCASEMENT
 
 /decl/surgery_step/internal/attach_organ/get_skill_reqs(mob/living/user, mob/living/target, obj/item/tool)
 	var/target_zone = user.zone_sel.selecting

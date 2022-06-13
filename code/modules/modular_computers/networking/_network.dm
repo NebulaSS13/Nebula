@@ -64,7 +64,7 @@
 	else if(istype(D, /datum/extension/network_device/camera))
 		var/datum/extension/network_device/camera/C = D
 		add_camera_to_channels(C, C.channels)
-	
+
 	D.network_tag = get_unique_tag(D.network_tag)
 	devices |= D
 	devices_by_tag[D.network_tag] = D
@@ -85,7 +85,7 @@
 	else if(istype(D, /datum/extension/network_device/camera))
 		var/datum/extension/network_device/camera/C = D
 		remove_camera_from_channels(C, C.channels)
-	
+
 	if(D == router)
 		router = null
 		for(var/datum/extension/network_device/broadcaster/router/R in devices)
@@ -113,13 +113,8 @@
 	router = D
 	network_key = router.key
 	change_id(router.network_id)
-	devices |= D
+	add_device(D)
 	add_log("New main router set.", router.network_tag)
-
-/datum/computer_network/proc/set_access_controller(datum/extension/network_device/D)
-	access_controller = D
-	devices |= D
-	add_log("New main access controller set.", D.network_tag)
 
 /datum/computer_network/proc/check_connection(datum/extension/network_device/D, specific_action)
 	if(!router)
@@ -143,7 +138,7 @@
 
 /datum/computer_network/proc/get_signal_strength(datum/extension/network_device/D)
 	var/connection_status = check_connection(D)
-	if(!connection_status)
+	if(!connection_status || !devices_by_tag[D.network_tag])
 		return 0
 	// There is a direct wired connection between a broadcaster on the network and the device.
 	if(connection_status == WIRED_CONNECTION)
@@ -167,6 +162,10 @@
 /datum/computer_network/proc/change_id(new_id)
 	if(new_id == network_id)
 		return
+	// Move our old reconnect queue to the new id.
+	if(LAZYLEN(SSnetworking.reconnect_queues[network_id]))
+		SSnetworking.reconnect_queues[new_id] = SSnetworking.reconnect_queues[network_id]
+		SSnetworking.reconnect_queues[network_id] = null
 	// Update connected devices.
 	for(var/datum/extension/network_device/D in devices)
 		if(D.network_id != new_id)

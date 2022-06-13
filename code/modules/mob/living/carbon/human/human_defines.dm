@@ -8,6 +8,8 @@
 	var/skin_colour =        COLOR_BLACK
 	var/eye_colour =         COLOR_BLACK
 
+	var/regenerate_body_icon = FALSE // If true, the next icon update will also regenerate the body.
+
 	var/skin_tone = 0  //Skin tone
 
 	var/damage_multiplier = 1 //multiplies melee combat damage

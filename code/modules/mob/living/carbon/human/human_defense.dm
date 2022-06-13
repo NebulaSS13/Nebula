@@ -149,7 +149,7 @@ meteor_act
 		return null
 
 	var/obj/item/organ/external/affecting = get_organ(hit_zone)
-	if (!affecting || affecting.is_stump())
+	if (!affecting)
 		to_chat(user, "<span class='danger'>They are missing that limb!</span>")
 		return null
 

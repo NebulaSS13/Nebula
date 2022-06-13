@@ -135,7 +135,7 @@
 	visible_message("<span class='warning'>[src] is trying to inject [H]!</span>")
 	if(declare_treatment)
 		var/area/location = get_area(src)
-		broadcast_medical_hud_message("[src] is treating <b>[H]</b> in <b>[location]</b>", src)
+		broadcast_medical_hud_message("[src] is treating <b>[H]</b> in <b>[location.proper_name]</b>", src)
 	busy = 1
 	update_icon()
 	if(do_mob(src, H, 30))
@@ -386,7 +386,7 @@
 		if(MEDBOT_PANIC_ENDING)
 			messagevoice = list("Is this the end?" = 'sound/voice/medbot/is_this_the_end.ogg', "Nooo!" = 'sound/voice/medbot/nooo.ogg')
 		if(MEDBOT_PANIC_END)
-			broadcast_medical_hud_message("PSYCH ALERT: Crewmember [tipper_name] recorded displaying antisocial tendencies torturing bots in [get_area(src)]. Please schedule psych evaluation.", src)
+			broadcast_medical_hud_message("PSYCH ALERT: Crewmember [tipper_name] recorded displaying antisocial tendencies torturing bots in [get_area_name(src)]. Please schedule psych evaluation.", src)
 			set_right() // strong independent medbot
 
 	if(messagevoice && vocal)

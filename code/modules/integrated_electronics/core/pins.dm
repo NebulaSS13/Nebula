@@ -79,7 +79,7 @@ D [1]/  ||
 	if(isweakref(input))
 		var/weakref/w = input
 		var/atom/A = w.resolve()
-		return A ? "([A.name] \[Ref\])" : "(null)" // For refs, we want just the name displayed.
+		return A ? "([strip_improper(A.name)] \[Ref\])" : "(null)" // For refs, we want just the name displayed.
 
 	return "([input])" // Nothing special needed for numbers or other stuff.
 

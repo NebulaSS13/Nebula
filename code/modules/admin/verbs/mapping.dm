@@ -84,11 +84,11 @@ var/global/intercom_range_display_status = 0
 			var/area/C2_area = get_area(C2)
 			if(C1 != C2)
 				if(C1.c_tag == C2.c_tag)
-					output += "<li><font color='red'>c_tag match for sec. cameras at \[[C1.x], [C1.y], [C1.z]\] ([C1_area]) and \[[C2.x], [C2.y], [C2.z]\] ([C2_area]) - c_tag is [C1.c_tag]</font></li>"
+					output += "<li><font color='red'>c_tag match for sec. cameras at \[[C1.x], [C1.y], [C1.z]\] ([C1_area.proper_name]) and \[[C2.x], [C2.y], [C2.z]\] ([C2_area.proper_name]) - c_tag is [C1.c_tag]</font></li>"
 				if(C1.loc == C2.loc && C1.dir == C2.dir && C1.pixel_x == C2.pixel_x && C1.pixel_y == C2.pixel_y)
-					output += "<li><font color='red'>FULLY overlapping sec. cameras at \[[C1.x], [C1.y], [C1.z]\] ([C1_area]) Channels: [C1.preset_channels] and [C2.preset_channels]</font></li>"
+					output += "<li><font color='red'>FULLY overlapping sec. cameras at \[[C1.x], [C1.y], [C1.z]\] ([C1_area.proper_name]) Channels: [C1.preset_channels] and [C2.preset_channels]</font></li>"
 				if(C1.loc == C2.loc)
-					output += "<li>overlapping sec. cameras at \[[C1.x], [C1.y], [C1.z]\] ([C1_area]) Channels: [C1.preset_channels] and [C2.preset_channels]</font></li>"
+					output += "<li>overlapping sec. cameras at \[[C1.x], [C1.y], [C1.z]\] ([C1_area.proper_name]) Channels: [C1.preset_channels] and [C2.preset_channels]</font></li>"
 		var/turf/T = get_step(C1,turn(C1.dir,180))
 		if(!T || !isturf(T) || !T.density )
 			if(!(locate(/obj/structure/grille,T)))
@@ -98,7 +98,7 @@ var/global/intercom_range_display_status = 0
 						window_check = 1
 						break
 				if(!window_check)
-					output += "<li><font color='red'>Camera not connected to wall at \[[C1.x], [C1.y], [C1.z]\] ([C1_area]) Channels: [C1.preset_channels]</color></li>"
+					output += "<li><font color='red'>Camera not connected to wall at \[[C1.x], [C1.y], [C1.z]\] ([C1_area.proper_name]) Channels: [C1.preset_channels]</color></li>"
 
 	output += "</ul>"
 	show_browser(usr, output, "window=airreport;size=1000x500")

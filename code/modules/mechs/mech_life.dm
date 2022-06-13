@@ -115,7 +115,7 @@
 	..(gibbed, (gibbed ? "explodes!" : "grinds to a halt before collapsing!"))
 	if(!gibbed) qdel(src)
 
-/mob/living/exosuit/gib()
+/mob/living/exosuit/gib(anim="gibbed-m",do_gibs)
 	death(1)
 
 	// Get a turf to play with.

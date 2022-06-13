@@ -11,7 +11,7 @@
 	surgery_step_category = /decl/surgery_step/generic
 	can_infect = 1
 	shock_level = 10
-	surgery_candidate_flags = SURGERY_NO_ROBOTIC | SURGERY_NO_CRYSTAL | SURGERY_NO_STUMP
+	surgery_candidate_flags = SURGERY_NO_ROBOTIC | SURGERY_NO_CRYSTAL
 
 /decl/surgery_step/generic/assess_bodypart(mob/living/user, mob/living/target, target_zone, obj/item/tool)
 	if(target_zone != BP_EYES) //there are specific steps for eye surgery
@@ -79,7 +79,7 @@
 	)
 	min_duration = 40
 	max_duration = 60
-	surgery_candidate_flags = SURGERY_NO_ROBOTIC | SURGERY_NO_CRYSTAL | SURGERY_NO_STUMP | SURGERY_NEEDS_INCISION
+	surgery_candidate_flags = SURGERY_NO_ROBOTIC | SURGERY_NO_CRYSTAL | SURGERY_NEEDS_INCISION
 	strict_access_requirement = FALSE
 
 /decl/surgery_step/generic/clamp_bleeders/assess_bodypart(mob/living/user, mob/living/target, target_zone, obj/item/tool)
@@ -120,7 +120,7 @@
 	)
 	min_duration = 30
 	max_duration = 40
-	surgery_candidate_flags = SURGERY_NO_ROBOTIC | SURGERY_NO_CRYSTAL | SURGERY_NO_STUMP | SURGERY_NEEDS_INCISION
+	surgery_candidate_flags = SURGERY_NO_ROBOTIC | SURGERY_NO_CRYSTAL | SURGERY_NEEDS_INCISION
 	strict_access_requirement = TRUE
 
 /decl/surgery_step/generic/retract_skin/pre_surgery_step(mob/living/user, mob/living/target, target_zone, obj/item/tool)
@@ -169,27 +169,16 @@
 	var/post_cauterize_term = "cauterized"
 
 /decl/surgery_step/generic/cauterize/pre_surgery_step(mob/living/user, mob/living/target, target_zone, obj/item/tool)
-	. = FALSE
 	var/obj/item/organ/external/affected = target.get_organ(target_zone)
-	if(affected)
-		if(affected.is_stump())
-			if(affected.status & ORGAN_ARTERY_CUT)
-				. = TRUE
-			else
-				to_chat(user, SPAN_WARNING("There is no bleeding to repair within this stump."))
-		else if(!affected.get_incision(1))
-			to_chat(user, SPAN_WARNING("There are no incisions on [target]'s [affected.name] that can be closed cleanly with \the [tool]!"))
-		else
-			. = TRUE
+	if(!affected?.get_incision(1))
+		to_chat(user, SPAN_WARNING("There are no incisions on [target]'s [affected.name] that can be closed cleanly with \the [tool]!"))
+		return FALSE
+	return TRUE
 
 /decl/surgery_step/generic/cauterize/assess_bodypart(mob/living/user, mob/living/target, target_zone, obj/item/tool)
 	var/obj/item/organ/external/affected = ..()
-	if(affected)
-		if(affected.is_stump())
-			if(affected.status & ORGAN_ARTERY_CUT)
-				return affected
-		else if(affected.how_open())
-			return affected
+	if(affected && affected.how_open())
+		return affected
 
 /decl/surgery_step/generic/cauterize/begin_step(mob/user, mob/living/target, target_zone, obj/item/tool)
 	var/obj/item/organ/external/affected = target.get_organ(target_zone)
@@ -207,8 +196,6 @@
 	if(istype(W))
 		W.close()
 		affected.update_wounds()
-	if(affected.is_stump())
-		affected.status &= ~ORGAN_ARTERY_CUT
 	if(affected.clamped())
 		affected.remove_clamps()
 

@@ -91,7 +91,7 @@
 			var/obj/item/organ/internal/brain/sponge = pop.get_organ(BP_BRAIN)
 			if(sponge && sponge.damage >= sponge.max_damage)
 				var/obj/item/organ/external/affecting = pop.get_organ(sponge.parent_organ)
-				if(affecting && !affecting.is_stump())
+				if(affecting)
 					affecting.dismember(0, DISMEMBER_METHOD_BLUNT)
 					if(sponge) qdel(sponge)
 

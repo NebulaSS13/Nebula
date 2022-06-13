@@ -98,8 +98,6 @@
 			surgery_info += "It cannot be performed on prosthetic limbs."
 		if(procedure.surgery_candidate_flags & SURGERY_NO_CRYSTAL)
 			surgery_info += "It cannot be performed on crystalline limbs."
-		if(procedure.surgery_candidate_flags & SURGERY_NO_STUMP)
-			surgery_info += "It cannot be performed on the stump of severed limbs."
 		if(procedure.surgery_candidate_flags & SURGERY_NO_FLESH)
 			surgery_info += "It cannot be performed on non-prosthetic limbs."
 		if(procedure.surgery_candidate_flags & SURGERY_NEEDS_INCISION)

@@ -52,7 +52,7 @@
 	else
 		var/atom/movable/H = holder
 		P.dropInto(H.loc)
-	if(P.type in critical_parts)
+	if(enabled && (P.type in critical_parts))
 		critical_shutdown()
 
 /datum/extension/assembly/proc/add_replace_component(var/mob/living/user, var/part_type, var/obj/item/stock_parts/P)

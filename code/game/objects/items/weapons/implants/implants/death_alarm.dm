@@ -32,14 +32,10 @@
 /obj/item/implant/death_alarm/activate(var/cause = "emp")
 	if(malfunction) return
 	var/mob/M = imp_in
-	var/area/t = get_area(M)
-	var/location = t.name
+	var/area/location = get_area(M)
 	if (cause == "emp" && prob(50))
-		location =  pick(teleportlocs)
-	if(!t.requires_power) // We assume areas that don't use power are some sort of special zones
-		var/area/default = world.area
-		location = initial(default.name)
-	var/death_message = "[mobname] has died in [location]!"
+		location = pick(teleportlocs)
+	var/death_message = "[mobname] has died in [location.proper_name]!"
 	if(!cause)
 		death_message = "[mobname] has died-zzzzt in-in-in..."
 	STOP_PROCESSING(SSobj, src)

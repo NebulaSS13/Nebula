@@ -176,7 +176,7 @@ var/global/list/all_apcs = list()
 /obj/machinery/power/apc/Initialize(mapload, var/ndir, var/populate_parts = TRUE)
 	global.all_apcs += src
 	if(areastring)
-		area = get_area_name(areastring)
+		area = get_area_by_name(strip_improper(areastring))
 	else
 		var/area/A = get_area(src)
 		//if area isn't specified use current
@@ -184,7 +184,7 @@ var/global/list/all_apcs = list()
 	if(!area)
 		return ..() // Spawned in nullspace means it's a test entity or prototype.
 	if(autoname)
-		SetName("\improper [area.name] APC")
+		SetName("\improper [area.proper_name] APC")
 	area.apc = src
 
 	events_repository.register(/decl/observ/name_set, area, src, .proc/change_area_name)
@@ -193,7 +193,7 @@ var/global/list/all_apcs = list()
 
 	if(!populate_parts)
 		operating = 0
-	
+
 	queue_icon_update()
 
 	if(operating)
@@ -573,7 +573,7 @@ var/global/list/all_apcs = list()
 	if (!ui)
 		// the ui does not exist, so we'll create a new() one
 		// for a list of parameters and their descriptions see the code docs in \code\modules\nano\nanoui.dm
-		ui = new(user, src, ui_key, "apc.tmpl", "[area? area.name : "ERROR"] - APC", 520, data["siliconUser"] ? 465 : 440)
+		ui = new(user, src, ui_key, "apc.tmpl", "[area? area.proper_name : "ERROR"] - APC", 520, data["siliconUser"] ? 465 : 440)
 		// when the ui is first opened this is the data it will use
 		ui.set_initial_data(data)
 		// open the new ui window
@@ -583,7 +583,7 @@ var/global/list/all_apcs = list()
 
 /obj/machinery/power/apc/proc/report()
 	var/obj/item/cell/cell = get_cell()
-	return "[area.name] : [equipment]/[lighting]/[environ] ([lastused_equip+lastused_light+lastused_environ]) : [cell? cell.percent() : "N/C"] ([charging])"
+	return "[area.proper_name] : [equipment]/[lighting]/[environ] ([lastused_equip+lastused_light+lastused_environ]) : [cell? cell.percent() : "N/C"] ([charging])"
 
 /obj/machinery/power/apc/proc/update()
 	var/old_power_light = area.power_light

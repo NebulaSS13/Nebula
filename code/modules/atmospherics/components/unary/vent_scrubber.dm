@@ -92,7 +92,7 @@
 				scrubbing_gas += g
 	var/area/A = get_area(src)
 	if(A && !A.air_scrub_names[id_tag])
-		var/new_name = "[A.name] Vent Scrubber #[A.air_scrub_names.len+1]"
+		var/new_name = "[A.proper_name] Vent Scrubber #[A.air_scrub_names.len+1]"
 		A.air_scrub_names[id_tag] = new_name
 		SetName(new_name)
 		events_repository.register(/decl/observ/name_set, A, src, .proc/change_area_name)

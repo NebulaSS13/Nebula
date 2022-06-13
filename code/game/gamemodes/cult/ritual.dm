@@ -91,7 +91,7 @@
 			return
 		var/obj/effect/rune/R = new rune(T, get_rune_color(), get_blood_name())
 		var/area/A = get_area(R)
-		log_and_message_admins("created \an [R.cultname] rune at \the [A.name].")
+		log_and_message_admins("created \an [R.cultname] rune at \the [A.proper_name].")
 		R.add_fingerprint(src)
 		return 1
 	return 0

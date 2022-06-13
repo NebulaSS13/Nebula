@@ -430,7 +430,7 @@
 		faction = "carp"
 		natural_weapon.force = initial(natural_weapon.force)
 
-/mob/living/simple_animal/hostile/carp/holodeck/gib()
+/mob/living/simple_animal/hostile/carp/holodeck/gib(anim="gibbed-m",do_gibs)
 	death()
 
 /mob/living/simple_animal/hostile/carp/holodeck/death()

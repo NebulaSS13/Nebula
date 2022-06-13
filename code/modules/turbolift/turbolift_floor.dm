@@ -17,7 +17,7 @@
 
 	area_ref = ref
 	label = A.lift_floor_label
-	name = A.lift_floor_name ? A.lift_floor_name : A.name
+	name = A.lift_floor_name ? A.lift_floor_name : A.proper_name
 	announce_str = A.lift_announce_str
 	arrival_sound = A.arrival_sound
 
