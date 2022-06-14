@@ -63,7 +63,8 @@
 	)
 	has_organ = list(
 		BP_POSIBRAIN = /obj/item/organ/internal/posibrain,
-		BP_EYES = /obj/item/organ/internal/eyes/robot/utility_frame, //Eyes got a different icon file 
+		BP_EYES      = /obj/item/organ/internal/eyes/robot/utility_frame, //Eyes got a different icon file 
+		BP_CELL      = /obj/item/organ/internal/cell,
 	)
 	override_limb_types = list(
 		BP_HEAD = /obj/item/organ/external/head/utility_frame, //Needed for glowing eyes shennanigans
