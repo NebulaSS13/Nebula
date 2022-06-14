@@ -108,6 +108,7 @@
 
 	move_trail = /obj/effect/decal/cleanable/blood/tracks/snake
 	max_players = 3
+	blood_volume = 0
 
 /decl/species/adherent/can_overcome_gravity(var/mob/living/carbon/human/H)
 	. = FALSE
