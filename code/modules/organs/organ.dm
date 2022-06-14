@@ -297,7 +297,8 @@
 
 /obj/item/organ/proc/reset_status()
 	status = initial(status)
-	species.apply_species_organ_modifications(src)
+	if(species) // qdel clears species ref
+		species.apply_species_organ_modifications(src)
 
 //Germs
 /obj/item/organ/proc/handle_antibiotics()

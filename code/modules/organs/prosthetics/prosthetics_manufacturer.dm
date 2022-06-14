@@ -32,3 +32,6 @@
 				return FALSE
 		if(target_species && islist(species_restricted) && !(target_species in species_restricted))
 			return FALSE
+
+/decl/prosthetics_manufacturer/proc/get_base_icon(var/mob/living/carbon/human/owner)
+	return icon

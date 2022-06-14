@@ -69,7 +69,7 @@ var/global/list/limb_icon_cache = list()
 			icon = 'icons/mob/human_races/cyberlimbs/robotic.dmi'
 		else
 			var/decl/prosthetics_manufacturer/R = GET_DECL(model)
-			icon = R.icon
+			icon = R.get_base_icon(owner)
 	else if(status & ORGAN_MUTATED)
 		icon = bodytype.get_base_icon(owner, get_deform = TRUE)
 	else if(owner && (limb_flags & ORGAN_FLAG_SKELETAL))
