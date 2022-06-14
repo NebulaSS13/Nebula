@@ -248,14 +248,14 @@ var/global/list/gamemode_cache = list()
 
 	var/lock_client_view_x
 	var/lock_client_view_y
-	var/max_client_view_x
-	var/max_client_view_y
+	var/max_client_view_x = MAX_VIEW
+	var/max_client_view_y = MAX_VIEW
 
 	var/allow_diagonal_movement = FALSE
 
 	var/no_throttle_localhost
 
-	var/dex_malus_brainloss_threshold = 30 //The threshold of when brainloss begins to affect dexterity. 
+	var/dex_malus_brainloss_threshold = 30 //The threshold of when brainloss begins to affect dexterity.
 
 	var/static/list/protected_vars = list(
 		"comms_password",
