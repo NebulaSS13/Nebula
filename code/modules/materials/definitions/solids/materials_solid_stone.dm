@@ -25,6 +25,7 @@
 	if(wall_support_value >= 10)
 		. += new/datum/stack_recipe/furniture/girder(src)
 	. += new/datum/stack_recipe/furniture/planting_bed(src)
+	. += new/datum/stack_recipe/fountain(src)
 
 /decl/material/solid/stone/sandstone
 	name = "sandstone"

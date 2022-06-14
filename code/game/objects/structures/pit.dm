@@ -54,8 +54,15 @@
 	name = "mound"
 	desc = "Some things are better left buried."
 	open = 0
-	for(var/atom/movable/A in src.loc)
-		if(!A.anchored && A != user)
+
+	//If we close the pit without anything inside, just leave the soil undisturbed
+	var/turf/T = get_turf(src)
+	if(!length((T.contents - src)))
+		qdel(src)
+		return
+
+	for(var/atom/movable/A in T)
+		if(!A.anchored && A != user && A.simulated)
 			A.forceMove(src)
 	update_icon()
 

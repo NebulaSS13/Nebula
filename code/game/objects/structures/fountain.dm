@@ -1,17 +1,17 @@
 //the fountain of youth/unyouth
 
 /obj/structure/fountain
-	name = "strange fountain"
-	desc = "The water from the spout is still as if frozen in time, yet the water in the base ripples perpetually."
-	icon = 'icons/obj/fountain.dmi'
+	name       = "strange fountain"
+	desc       = "The water from the spout is still as if frozen in time, yet the water in the base ripples perpetually."
+	icon       = 'icons/obj/fountain.dmi'
 	icon_state = "fountain"
-	density = 1
-	anchored = 1
-	unacidable = 1
-	pixel_x = -16
-	var/used = FALSE
+	density    = TRUE
+	anchored   = TRUE
+	unacidable = TRUE
+	pixel_x    = -16
+	var/used   = FALSE
 
-/obj/structure/fountain/Initialize()
+/obj/structure/fountain/Initialize(ml, _mat, _reinf_mat)
 	. = ..()
 	light_color = get_random_colour(lower = 190)
 	set_light(5, 0.5, light_color)
@@ -59,10 +59,23 @@
 	desc = "The water flows beautifully from the spout, but the water in the pool does not ripple."
 
 /obj/structure/fountain/mundane
-	name = "fountain"
-	desc = "A beautifully constructed fountain."
-	icon_state = "fountain_g"
-	used = TRUE
+	name                   = "fountain"
+	desc                   = "A beautifully constructed fountain."
+	icon_state             = "fountain_g"
+	tool_interaction_flags = TOOL_INTERACTION_DECONSTRUCT
+	w_class                = ITEM_SIZE_STRUCTURE
+	material               = /decl/material/solid/stone/marble 
+	used                   = TRUE
 
-/obj/structure/fountain/mundane/attack_hand()
+/obj/structure/fountain/mundane/Initialize(ml, _mat, _reinf_mat)
+	. = ..()
+	atom_flags |= ATOM_FLAG_OPEN_CONTAINER | ATOM_FLAG_CLIMBABLE
+	setup_reagents(ml)
+
+/obj/structure/fountain/mundane/proc/setup_reagents(var/should_fill = TRUE)
+	create_reagents(500)
+	if(should_fill)
+		reagents.add_reagent(/decl/material/liquid/water, reagents.maximum_volume) //Don't give free water when building one
+
+/obj/structure/fountain/mundane/attack_hand(mob/user)
 	return

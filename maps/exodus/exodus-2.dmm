@@ -10710,7 +10710,7 @@
 /area/exodus/security/prison)
 "awt" = (
 /obj/structure/table,
-/obj/structure/bedsheetbin,
+/obj/structure/bedsheetbin/mapped,
 /turf/simulated/floor/tiled/steel_grid,
 /area/exodus/security/prison)
 "awu" = (
@@ -22318,18 +22318,18 @@
 /turf/simulated/floor/tiled/steel_grid,
 /area/exodus/hallway/secondary/exit)
 "aUZ" = (
-/obj/structure/flora/ausbushes/brflowers,
+/obj/structure/flora/bush/brflowers,
 /obj/machinery/newscaster{
 	pixel_y = 32
 	},
 /turf/simulated/floor/grass,
 /area/exodus/hydroponics/garden)
 "aVa" = (
-/obj/structure/flora/ausbushes/ppflowers,
+/obj/structure/flora/bush/ppflowers,
 /turf/simulated/floor/grass,
 /area/exodus/hydroponics/garden)
 "aVb" = (
-/obj/structure/flora/ausbushes/brflowers,
+/obj/structure/flora/bush/brflowers,
 /obj/structure/hygiene/sink/kitchen{
 	pixel_y = 28
 	},
@@ -22393,7 +22393,7 @@
 /turf/simulated/floor/tiled/steel_grid,
 /area/exodus/hallway/secondary/entry/port)
 "aVk" = (
-/obj/structure/flora/ausbushes/sunnybush,
+/obj/structure/flora/bush/sunnybush,
 /obj/item/radio/intercom{
 	dir = 8;
 	pixel_x = 22
@@ -22984,7 +22984,7 @@
 /turf/simulated/floor/grass,
 /area/exodus/hydroponics/garden)
 "aWE" = (
-/obj/structure/flora/ausbushes/sparsegrass,
+/obj/structure/flora/bush/sparsegrass,
 /obj/machinery/light{
 	dir = 4
 	},
@@ -23671,7 +23671,7 @@
 /turf/simulated/floor/plating,
 /area/exodus/storage/tech)
 "aYh" = (
-/obj/structure/flora/ausbushes/brflowers,
+/obj/structure/flora/bush/brflowers,
 /turf/simulated/floor/grass,
 /area/exodus/hydroponics/garden)
 "aYi" = (
@@ -24356,7 +24356,7 @@
 /turf/simulated/floor/tiled/steel_grid,
 /area/exodus/quartermaster/storage)
 "aZy" = (
-/obj/structure/flora/ausbushes/brflowers,
+/obj/structure/flora/bush/brflowers,
 /obj/machinery/light{
 	dir = 4
 	},
@@ -25306,7 +25306,7 @@
 /turf/simulated/floor/tiled/steel_grid,
 /area/exodus/hallway/secondary/entry/aft)
 "bbC" = (
-/obj/structure/flora/ausbushes/fernybush,
+/obj/structure/flora/bush/fernybush,
 /turf/simulated/floor/grass,
 /area/exodus/hydroponics/garden)
 "bbD" = (
@@ -25906,7 +25906,7 @@
 /turf/simulated/floor/wood/walnut,
 /area/exodus/crew_quarters/bar)
 "bcP" = (
-/obj/structure/flora/ausbushes/brflowers,
+/obj/structure/flora/bush/brflowers,
 /obj/machinery/alarm{
 	dir = 8;
 	pixel_x = 24
@@ -26022,7 +26022,7 @@
 /turf/simulated/floor/tiled/dark,
 /area/exodus/chapel/main)
 "bcY" = (
-/obj/structure/flora/ausbushes,
+/obj/structure/flora/bush,
 /obj/machinery/light{
 	dir = 4
 	},
@@ -54102,7 +54102,7 @@
 /turf/simulated/floor/tiled/white,
 /area/exodus/medical/biostorage)
 "chM" = (
-/obj/structure/bedsheetbin,
+/obj/structure/bedsheetbin/mapped,
 /obj/structure/table,
 /obj/machinery/power/apc{
 	dir = 8;
