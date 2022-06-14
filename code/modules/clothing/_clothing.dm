@@ -128,7 +128,7 @@
 	if(markings_color && markings_icon)
 		update_icon()
 
-/obj/item/clothing/mob_can_equip(mob/living/M, slot, disable_warning = 0)
+/obj/item/clothing/mob_can_equip(mob/living/M, slot, disable_warning = FALSE, force = FALSE)
 	. = ..()
 	if(. && !isnull(bodytype_equip_flags) && ishuman(M) && !(slot in list(slot_l_store_str, slot_r_store_str, slot_s_store_str)) && !(slot in M.held_item_slots))
 		var/mob/living/carbon/human/H = M
