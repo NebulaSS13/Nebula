@@ -66,7 +66,7 @@
 			add_clothing_protection(mask)
 
 		var/obj/item/rig/rig = get_equipped_item(slot_back_str)
-		if(rig)
+		if(istype(rig))
 			process_rig(rig)
 
 /mob/living/carbon/human/proc/process_glasses(var/obj/item/clothing/glasses/G)
