@@ -92,6 +92,7 @@
 //Basically appends the crystal flag to all the types specified
 #define MANTIDIFY_ORGAN(ORGAN_PATH) ##ORGAN_PATH/Initialize(){BP_SET_CRYSTAL(src) . = ..();}
 //External organs
+MANTIDIFY_ORGAN(/obj/item/organ/external/chest/insectoid/mantid)
 MANTIDIFY_ORGAN(/obj/item/organ/external/groin/insectoid/mantid)
 MANTIDIFY_ORGAN(/obj/item/organ/external/head/insectoid/mantid)
 MANTIDIFY_ORGAN(/obj/item/organ/external/arm/insectoid/mantid)
