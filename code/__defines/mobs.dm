@@ -209,8 +209,7 @@
 #define BP_IS_BRITTLE(org)    (!QDELETED(org) && (org.status           & ORGAN_BRITTLE))
 #define BP_IS_CRYSTAL(org)    (!QDELETED(org) && (org.organ_properties & ORGAN_PROP_CRYSTAL))
 
-//Prosthetics setter
-//Since assisted and prosthetic are mutually exclusive set them using this helper for convenience
+//Organ Properties Setters
 #define BP_SET_PROSTHETIC(org) org.organ_properties |= ORGAN_PROP_PROSTHETIC;
 #define BP_SET_CRYSTAL(org)    org.organ_properties |= ORGAN_PROP_CRYSTAL;
 
