@@ -8,7 +8,7 @@
 		"nearing end-of-life" = 16,
 		"entirely obsolete" =   20
 	)
-	
+
 /decl/species/utility_frame
 	name =                  SPECIES_FRAME
 	name_plural =           "Utility Frames"
@@ -62,7 +62,8 @@
 	)
 	has_organ = list(
 		BP_POSIBRAIN = /obj/item/organ/internal/posibrain,
-		BP_EYES = /obj/item/organ/internal/eyes/robot
+		BP_EYES      = /obj/item/organ/internal/eyes/robot,
+		BP_CELL      = /obj/item/organ/internal/cell,
 	)
 
 	exertion_effect_chance = 10
