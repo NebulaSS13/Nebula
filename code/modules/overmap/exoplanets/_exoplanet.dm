@@ -93,12 +93,9 @@
 	if(length(possible_strata))
 		crust_strata = pick(possible_strata)
 
-/obj/effect/overmap/visitable/sector/exoplanet/Initialize(mapload, z_level)
-	if(global.overmaps_by_name[overmap_id])
-		forceMove(locate(1, 1, z_level))
-	return ..()
-
 /obj/effect/overmap/visitable/sector/exoplanet/proc/build_level(max_x, max_y)
+
+	find_z_levels()
 
 	maxx = max_x || world.maxx
 	maxy = max_y || world.maxy

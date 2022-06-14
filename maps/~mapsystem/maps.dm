@@ -195,7 +195,7 @@ var/global/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 		allowed_spawns -= spawn_type
 		allowed_spawns += GET_DECL(spawn_type)
 
-	map_levels |= station_levels.Copy()
+	map_levels |= station_levels
 
 	if(!LAZYLEN(planet_size))
 		planet_size = list(world.maxx, world.maxy)
@@ -258,8 +258,7 @@ var/global/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 	for(var/i = 0, i < num_exoplanets, i++)
 		var/exoplanet_type = pick_exoplanet()
 		INCREMENT_WORLD_Z_SIZE
-		var/obj/effect/overmap/visitable/sector/exoplanet/new_planet = new exoplanet_type(null, world.maxz)
-		new_planet.map_z = GetConnectedZlevels(world.maxz)
+		var/obj/effect/overmap/visitable/sector/exoplanet/new_planet = new exoplanet_type(locate(1, 1, world.maxz))
 		new_planet.build_level(planet_size[1], planet_size[2])
 
 /datum/map/proc/pick_exoplanet()
