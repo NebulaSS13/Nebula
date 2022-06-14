@@ -63,7 +63,7 @@
 			if(pocket == master_item && !H.get_active_hand())
 				H.unEquip(master_item)
 				H.put_in_hands(master_item)
-			return FALSE
+				return FALSE
 
 	src.add_fingerprint(user)
 	if (master_item.loc == user)
