@@ -80,9 +80,7 @@ var/global/arrest_security_status =  "Arrest"
 				if(BP_IS_PROSTHETIC(E))
 					organ_data += "[E.model ? "[E.model] " : null][E.name] prosthetic"
 			for(var/obj/item/organ/internal/I in H.get_internal_organs())
-				if(BP_IS_ASSISTED(I))
-					organ_data += I.get_mechanical_assisted_descriptor()
-				else if (BP_IS_PROSTHETIC(I))
+				if (BP_IS_PROSTHETIC(I))
 					organ_data += "[I.name] prosthetic"
 			set_implants(jointext(organ_data, "\[*\]"))
 

@@ -47,9 +47,8 @@
 #define ORGAN_DISLOCATED BITFLAG(10) //The organ is dislocated and will cause pain until set back in place.
 
 // Organ Properties
-#define ORGAN_PROP_ASSISTED   BITFLAG(0) // The organ is partially prosthetic. No mechanical effect.
-#define ORGAN_PROP_PROSTHETIC BITFLAG(1) // The organ is prosthetic. Changes numerous behaviors, search BP_IS_PROSTHETIC for checks.
-#define ORGAN_PROP_CRYSTAL    BITFLAG(2) // The organ does not suffer laser damage, but shatters on droplimb.
+#define ORGAN_PROP_PROSTHETIC BITFLAG(0) // The organ is prosthetic. Changes numerous behaviors, search BP_IS_PROSTHETIC for checks.
+#define ORGAN_PROP_CRYSTAL    BITFLAG(1) // The organ does not suffer laser damage, but shatters on droplimb.
 
 // Organ flag defines.
 #define ORGAN_FLAG_CAN_AMPUTATE   BITFLAG(0) // The organ can be amputated.

@@ -206,7 +206,6 @@
 
 // Prosthetic helpers.
 #define BP_IS_PROSTHETIC(org) (!QDELETED(org) && (org.organ_properties & ORGAN_PROP_PROSTHETIC))
-#define BP_IS_ASSISTED(org)   (!QDELETED(org) && (org.organ_properties & ORGAN_PROP_ASSISTED))
 #define BP_IS_BRITTLE(org)    (!QDELETED(org) && (org.status           & ORGAN_BRITTLE))
 #define BP_IS_CRYSTAL(org)    (!QDELETED(org) && (org.organ_properties & ORGAN_PROP_CRYSTAL))
 
