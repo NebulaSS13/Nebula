@@ -72,7 +72,7 @@
 					return FALSE
 				if(H.species.species_flags & SPECIES_FLAG_NO_SCAN)
 					return FALSE
-				var/obj/item/organ/external/E = H.get_organ(BP_CHEST)
+				var/obj/item/organ/external/E = GET_EXTERNAL_ORGAN(H, BP_CHEST)
 				if(istype(E) && (BP_IS_PROSTHETIC(E) || BP_IS_CRYSTAL(E)))
 					return FALSE
 				return TRUE

@@ -74,7 +74,7 @@
 /obj/item/clothing/mask/monitor/mob_can_equip(var/mob/living/carbon/human/user, var/slot)
 	. = ..()
 	if(. && (slot == slot_head_str || slot == slot_wear_mask_str))
-		var/obj/item/organ/external/E = user.get_organ(BP_HEAD)
+		var/obj/item/organ/external/E = GET_EXTERNAL_ORGAN(user, BP_HEAD)
 		if(!istype(E) || !BP_IS_PROSTHETIC(E))
 			to_chat(user, SPAN_WARNING("You must have a robotic head to install this upgrade."))
 			return FALSE

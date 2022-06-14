@@ -210,7 +210,7 @@
 	return istype(get_equipped_item(slot_l_ear_str), /obj/item/radio/headset) || istype(get_equipped_item(slot_r_ear_str), /obj/item/radio/headset)
 
 /mob/living/carbon/human/welding_eyecheck()
-	var/obj/item/organ/internal/eyes/E = get_organ(species.vision_organ)
+	var/obj/item/organ/internal/eyes/E = get_organ(species.vision_organ, /obj/item/organ/internal/eyes)
 	if(!E)
 		return
 	var/safety = eyecheck()

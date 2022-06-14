@@ -36,7 +36,7 @@
 					owner.custom_pain("You feel a stinging pain in your abdomen!")
 					SET_STATUS_MAX(owner, STAT_WEAK, 10)
 
-				var/obj/item/organ/external/E = owner.get_organ(parent_organ)
+				var/obj/item/organ/external/E = GET_EXTERNAL_ORGAN(owner, parent_organ)
 				E.sever_artery()
 				E.germ_level = max(INFECTION_LEVEL_TWO, E.germ_level)
 				owner.adjustToxLoss(25)

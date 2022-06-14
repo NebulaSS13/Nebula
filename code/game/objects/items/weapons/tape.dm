@@ -16,7 +16,7 @@
 	if(istype(H))
 		if(user.zone_sel.selecting == BP_EYES)
 
-			if(!H.get_organ(BP_HEAD))
+			if(!GET_EXTERNAL_ORGAN(H, BP_HEAD))
 				to_chat(user, "<span class='warning'>\The [H] doesn't have a head.</span>")
 				return
 			if(!H.check_has_eyes())
@@ -34,7 +34,7 @@
 				return
 
 			// Repeat failure checks.
-			if(!H || !src || !H.get_organ(BP_HEAD) || !H.check_has_eyes() || H.glasses || (H.head && (H.head.body_parts_covered & SLOT_FACE)))
+			if(!H || !src || !GET_EXTERNAL_ORGAN(H, BP_HEAD) || !H.check_has_eyes() || H.glasses || (H.head && (H.head.body_parts_covered & SLOT_FACE)))
 				return
 
 			playsound(src, 'sound/effects/tape.ogg',25)
@@ -42,7 +42,7 @@
 			H.equip_to_slot_or_del(new /obj/item/clothing/glasses/blindfold/tape(H), slot_glasses_str)
 
 		else if(user.zone_sel.selecting == BP_MOUTH || user.zone_sel.selecting == BP_HEAD)
-			if(!H.get_organ(BP_HEAD))
+			if(!GET_EXTERNAL_ORGAN(H, BP_HEAD))
 				to_chat(user, "<span class='warning'>\The [H] doesn't have a head.</span>")
 				return
 			if(!H.check_has_mouth())
@@ -61,7 +61,7 @@
 				return
 
 			// Repeat failure checks.
-			if(!H || !src || !H.get_organ(BP_HEAD) || !H.check_has_mouth() || H.wear_mask || (H.head && (H.head.body_parts_covered & SLOT_FACE)))
+			if(!H || !src || !GET_EXTERNAL_ORGAN(H, BP_HEAD) || !H.check_has_mouth() || H.wear_mask || (H.head && (H.head.body_parts_covered & SLOT_FACE)))
 				return
 			playsound(src, 'sound/effects/tape.ogg',25)
 			user.visible_message("<span class='danger'>\The [user] has taped up \the [H]'s mouth!</span>")

@@ -91,9 +91,10 @@
 	//held items
 	for(var/bp in held_item_slots)
 		var/datum/inventory_slot/inv_slot = LAZYACCESS(held_item_slots, bp)
-		var/obj/item/organ/external/E = get_organ(bp)
 		if(inv_slot?.holding)
-			msg += "[G.He] [G.is] holding [inv_slot.holding.get_examine_line()] in [G.his] [E.name].\n"
+			var/obj/item/organ/external/E = GET_EXTERNAL_ORGAN(src, bp)
+			if(E)
+				msg += "[G.He] [G.is] holding [inv_slot.holding.get_examine_line()] in [G.his] [E.name].\n"
 
 	//gloves
 	if(gloves && !skipgloves)
@@ -118,7 +119,7 @@
 	else
 		var/datum/reagents/coating
 		for(var/bp in list(BP_L_FOOT, BP_R_FOOT))
-			var/obj/item/organ/external/E = get_organ(bp)
+			var/obj/item/organ/external/E = GET_EXTERNAL_ORGAN(src, bp)
 			if(E && E.coating)
 				coating = E.coating
 				break
@@ -167,7 +168,7 @@
 
 	//Disfigured face
 	if(!skipface) //Disfigurement only matters for the head currently.
-		var/obj/item/organ/external/head/E = get_organ(BP_HEAD)
+		var/obj/item/organ/external/E = GET_EXTERNAL_ORGAN(src, BP_HEAD)
 		if(E && (E.status & ORGAN_DISFIGURED)) //Check to see if we even have a head and if the head's disfigured.
 			if(E.species) //Check to make sure we have a species
 				msg += E.species.disfigure_msg(src)
@@ -176,7 +177,7 @@
 
 	//splints
 	for(var/organ in list(BP_L_LEG, BP_R_LEG, BP_L_ARM, BP_R_ARM))
-		var/obj/item/organ/external/o = get_organ(organ)
+		var/obj/item/organ/external/o = GET_EXTERNAL_ORGAN(src, organ)
 		if(o && o.splinted && o.splinted.loc == o)
 			msg += "<span class='warning'>[G.He] [G.has] \a [o.splinted] on [G.his] [o.name]!</span>\n"
 
@@ -214,7 +215,7 @@
 	if (admin_paralyzed)
 		msg += SPAN_OCCULT("OOC: [G.He] [G.has] been paralyzed by staff. Please avoid interacting with [G.him] unless cleared to do so by staff.") + "\n"
 
-	var/obj/item/organ/external/head/H = get_organ(BP_HEAD)
+	var/obj/item/organ/external/head/H = get_organ(BP_HEAD, /obj/item/organ/external/head)
 	if(istype(H) && H.forehead_graffiti && H.graffiti_style)
 		msg += "<span class='notice'>[G.He] [G.has] \"[H.forehead_graffiti]\" written on [G.his] [H.name] in [H.graffiti_style]!</span>\n"
 
@@ -232,7 +233,7 @@
 
 		var/list/organ_data = species.has_limbs[organ_tag]
 		var/organ_descriptor = organ_data["descriptor"]
-		var/obj/item/organ/external/E = get_organ(organ_tag)
+		var/obj/item/organ/external/E = GET_EXTERNAL_ORGAN(src, organ_tag)
 
 		if(!E)
 			wound_flavor_text[organ_descriptor] = "<b>[G.He] [G.is] missing [G.his] [organ_descriptor].</b>\n"

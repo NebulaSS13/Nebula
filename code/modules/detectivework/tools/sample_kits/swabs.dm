@@ -47,7 +47,7 @@
 		if(!H.has_organ(zone))
 			to_chat(user, SPAN_WARNING("They don't have that part!"))
 			return
-		var/obj/object_to_swab = H.get_organ(zone)
+		var/obj/object_to_swab = GET_EXTERNAL_ORGAN(H, zone)
 		var/cover = H.get_covering_equipped_item_by_zone(zone)
 		if(cover)
 			object_to_swab = cover

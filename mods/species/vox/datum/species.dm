@@ -167,7 +167,7 @@
 
 /decl/species/vox/handle_death(var/mob/living/carbon/human/H)
 	..()
-	var/obj/item/organ/internal/voxstack/stack = H.get_organ(BP_STACK)
+	var/obj/item/organ/internal/voxstack/stack = H.get_organ(BP_STACK, /obj/item/organ/internal/voxstack)
 	if (stack)
 		stack.do_backup()
 

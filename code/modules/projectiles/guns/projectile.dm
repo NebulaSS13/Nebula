@@ -89,7 +89,7 @@
 		var/zone = BP_CHEST
 		if(user && user.zone_sel)
 			zone = user.zone_sel.selecting
-		var/obj/item/organ/external/E = H.get_organ(zone)
+		var/obj/item/organ/external/E = GET_EXTERNAL_ORGAN(H, zone)
 		if(E)
 			chambered.put_residue_on(E)
 			H.apply_damage(3, BURN, used_weapon = "Gunpowder Burn", given_organ = E)

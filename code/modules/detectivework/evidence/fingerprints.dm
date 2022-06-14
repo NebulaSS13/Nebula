@@ -94,6 +94,6 @@
 	if(!..())
 		return FALSE
 
-	var/obj/item/organ/external/E = get_organ(get_active_held_item_slot())
+	var/obj/item/organ/external/E = GET_EXTERNAL_ORGAN(src, get_active_held_item_slot())
 	if(E)
 		return E.get_fingerprint()

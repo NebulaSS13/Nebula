@@ -14,7 +14,7 @@
 	surgery_step_category = /decl/surgery_step/limb
 
 /decl/surgery_step/limb/assess_bodypart(mob/living/user, mob/living/target, target_zone, obj/item/tool)
-	var/obj/item/organ/external/affected = target.get_organ(target_zone)
+	var/obj/item/organ/external/affected = GET_EXTERNAL_ORGAN(target, target_zone)
 	if(affected)
 		return affected
 	else if(ishuman(target))
@@ -37,8 +37,8 @@
 		return FALSE
 	. = FALSE
 	var/obj/item/organ/external/E = tool
-	var/obj/item/organ/external/P = target.get_organ(E.parent_organ)
-	var/obj/item/organ/external/T = target.get_organ(E.organ_tag)
+	var/obj/item/organ/external/P = GET_EXTERNAL_ORGAN(target, E.parent_organ)
+	var/obj/item/organ/external/T = GET_EXTERNAL_ORGAN(target, E.organ_tag)
 
 	if(!P)
 		to_chat(user, SPAN_WARNING("The [E.amputation_point] is missing!"))
@@ -77,7 +77,7 @@
 /decl/surgery_step/limb/attach/can_use(mob/living/user, mob/living/target, target_zone, obj/item/tool)
 	if(..())
 		var/obj/item/organ/external/E = tool
-		var/obj/item/organ/external/P = target.get_organ(E.parent_organ)
+		var/obj/item/organ/external/P = GET_EXTERNAL_ORGAN(target, E.parent_organ)
 		. = (P && !(BP_IS_PROSTHETIC(P) && !BP_IS_PROSTHETIC(E)))
 
 /decl/surgery_step/limb/attach/begin_step(mob/user, mob/living/target, target_zone, obj/item/tool)
@@ -88,7 +88,7 @@
 /decl/surgery_step/limb/attach/end_step(mob/living/user, mob/living/target, target_zone, obj/item/tool)
 	if(!user.unEquip(tool))
 		return
-	var/obj/item/organ/external/P = target.get_organ(target_zone)
+	var/obj/item/organ/external/P = GET_EXTERNAL_ORGAN(target, target_zone)
 	var/obj/item/organ/external/E = tool
 	user.visible_message("<span class='notice'>[user] has attached [target]'s [E.name] to the [E.amputation_point].</span>",	\
 	"<span class='notice'>You have attached [target]'s [E.name] to the [E.amputation_point].</span>")
@@ -120,7 +120,7 @@
 	max_duration = 120
 
 /decl/surgery_step/limb/connect/get_skill_reqs(mob/living/user, mob/living/target, obj/item/tool, target_zone)
-	var/obj/item/organ/external/E = target && target.get_organ(target_zone)
+	var/obj/item/organ/external/E = target && GET_EXTERNAL_ORGAN(target, target_zone)
 	if(istype(E) && BP_IS_PROSTHETIC(E))
 		if(target.isSynthetic())
 			return SURGERY_SKILLS_ROBOTIC
@@ -130,17 +130,17 @@
 
 /decl/surgery_step/limb/connect/can_use(mob/living/user, mob/living/target, target_zone, obj/item/tool)
 	if(..())
-		var/obj/item/organ/external/E = target.get_organ(target_zone)
+		var/obj/item/organ/external/E = GET_EXTERNAL_ORGAN(target, target_zone)
 		return E && (E.status & ORGAN_CUT_AWAY)
 
 /decl/surgery_step/limb/connect/begin_step(mob/user, mob/living/target, target_zone, obj/item/tool)
-	var/obj/item/organ/external/E = target.get_organ(target_zone)
+	var/obj/item/organ/external/E = GET_EXTERNAL_ORGAN(target, target_zone)
 	user.visible_message("[user] starts connecting tendons and muscles in [target]'s [E.amputation_point] with [tool].", \
 	"You start connecting tendons and muscle in [target]'s [E.amputation_point].")
 
 /decl/surgery_step/limb/connect/end_step(mob/living/user, mob/living/target, target_zone, obj/item/tool)
-	var/obj/item/organ/external/E = target.get_organ(target_zone)
-	var/obj/item/organ/external/P = target.get_organ(E.parent_organ)
+	var/obj/item/organ/external/E = GET_EXTERNAL_ORGAN(target, target_zone)
+	var/obj/item/organ/external/P = GET_EXTERNAL_ORGAN(target, E.parent_organ)
 	user.visible_message("<span class='notice'>[user] has connected tendons and muscles in [target]'s [E.amputation_point] with [tool].</span>",	\
 	"<span class='notice'>You have connected tendons and muscles in [target]'s [E.amputation_point] with [tool].</span>")
 
@@ -148,7 +148,7 @@
 	target.add_organ(E, P, FALSE, TRUE, FALSE)
 
 /decl/surgery_step/limb/connect/fail_step(mob/living/user, mob/living/target, target_zone, obj/item/tool)
-	var/obj/item/organ/external/E = target.get_organ(target_zone)
+	var/obj/item/organ/external/E = GET_EXTERNAL_ORGAN(target, target_zone)
 	user.visible_message("<span class='warning'> [user]'s hand slips, damaging [target]'s [E.amputation_point]!</span>", \
 	"<span class='warning'> Your hand slips, damaging [target]'s [E.amputation_point]!</span>")
 	target.apply_damage(10, BRUTE, null, damage_flags=DAM_SHARP)

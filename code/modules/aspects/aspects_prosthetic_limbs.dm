@@ -56,7 +56,7 @@
 
 	// Robotize the selected limb.
 	if(. && apply_to_limb)
-		var/obj/item/organ/external/E = holder.get_organ(apply_to_limb)
+		var/obj/item/organ/external/E = GET_EXTERNAL_ORGAN(holder, apply_to_limb)
 		if(!istype(E))
 			var/list/organ_data = holder.species.has_limbs[apply_to_limb]
 			if("path" in organ_data)

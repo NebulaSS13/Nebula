@@ -4,7 +4,7 @@
 		// Check if the language they're speaking is vocal and not supplied by a machine, and if they are currently suffocating.
 		whispering = (whispering || has_chemical_effect(CE_VOICELOSS, 1))
 		if((!speaking || !(speaking.flags & (NONVERBAL|SIGNLANG))) && (!voice || !voice.is_usable() || !voice.assists_languages[speaking]) && !isSynthetic() && need_breathe() && failed_last_breath)
-			var/obj/item/organ/internal/lungs/L = get_organ(species.breathing_organ)
+			var/obj/item/organ/internal/lungs/L = get_organ(species.breathing_organ, /obj/item/organ/internal/lungs)
 			if(!L || L.breath_fail_ratio > 0.9)
 				if(L && world.time < L.last_successful_breath + 2 MINUTES) //if we're in grace suffocation period, give it up for last words
 					to_chat(src, SPAN_WARNING("You use your remaining air to say something!"))

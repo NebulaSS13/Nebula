@@ -72,8 +72,8 @@ avoid code duplication. This includes items that may sometimes act as a standard
 		if(devour(I))
 			return TRUE
 	if(user.a_intent == I_HELP)
-		var/obj/item/organ/external/E = get_organ(user.zone_sel.selecting)
-		if(istype(E))
+		var/obj/item/organ/external/E = GET_EXTERNAL_ORGAN(src, user.zone_sel.selecting)
+		if(E)
 			for(var/datum/ailment/ailment in E.ailments)
 				if(ailment.treated_by_item(I))
 					ailment.was_treated_by_item(I, user, src)

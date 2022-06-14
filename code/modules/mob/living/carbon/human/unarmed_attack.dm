@@ -61,7 +61,7 @@ var/global/list/sparring_attack_cache = list()
 /decl/natural_attack/proc/is_usable(var/mob/living/carbon/human/user, var/mob/target, var/zone)
 	if(!user.restrained() && !user.incapacitated())
 		for(var/etype in usable_with_limbs)
-			var/obj/item/organ/external/E = user.get_organ(etype)
+			var/obj/item/organ/external/E = GET_EXTERNAL_ORGAN(user, etype)
 			if(E)
 				return TRUE
 	return FALSE
@@ -126,7 +126,7 @@ var/global/list/sparring_attack_cache = list()
 
 /decl/natural_attack/proc/show_attack(var/mob/living/carbon/human/user, var/mob/living/carbon/human/target, var/zone, var/attack_damage)
 	var/msg = "\The [user] [pick(attack_verb)] \the [target]"
-	var/obj/item/organ/external/affecting = istype(target) && zone && target.get_organ(zone)
+	var/obj/item/organ/external/affecting = istype(target) && zone && GET_EXTERNAL_ORGAN(target, zone)
 	if(affecting)
 		msg = "[msg] in the [affecting.name]"
 	if(islist(attack_noun) && length(attack_noun))
@@ -136,7 +136,7 @@ var/global/list/sparring_attack_cache = list()
 		playsound(user.loc, attack_sound, 25, 1, -1)
 
 /decl/natural_attack/proc/handle_eye_attack(var/mob/living/carbon/human/user, var/mob/living/carbon/human/target)
-	var/obj/item/organ/internal/eyes/eyes = target.get_organ(BP_EYES)
+	var/obj/item/organ/internal/eyes = GET_INTERNAL_ORGAN(target, BP_EYES)
 	var/decl/pronouns/G = user.get_pronouns()
 	if(eyes)
 		eyes.take_internal_damage(rand(3,4), 1)
@@ -191,7 +191,7 @@ var/global/list/sparring_attack_cache = list()
 
 /decl/natural_attack/punch/show_attack(var/mob/living/carbon/human/user, var/mob/living/carbon/human/target, var/zone, var/attack_damage)
 
-	var/obj/item/organ/external/affecting = istype(target) && zone && target.get_organ(zone)
+	var/obj/item/organ/external/affecting = istype(target) && zone && GET_EXTERNAL_ORGAN(target, zone)
 	if(!affecting)
 		return ..()
 
@@ -263,7 +263,7 @@ var/global/list/sparring_attack_cache = list()
 
 /decl/natural_attack/kick/show_attack(var/mob/living/carbon/human/user, var/mob/living/carbon/human/target, var/zone, var/attack_damage)
 
-	var/obj/item/organ/external/affecting = istype(target) && zone && target.get_organ(zone)
+	var/obj/item/organ/external/affecting = istype(target) && zone && GET_EXTERNAL_ORGAN(target, zone)
 	if(!affecting)
 		return ..()
 
@@ -288,7 +288,7 @@ var/global/list/sparring_attack_cache = list()
 		if((user in target.grabbed_by) && target.lying)
 			return FALSE
 		for(var/bp in list(BP_L_FOOT, BP_R_FOOT))
-			if(istype(user.get_organ(bp), /obj/item/organ/external))
+			if(GET_EXTERNAL_ORGAN(user, bp))
 				return TRUE
 	return FALSE
 
@@ -298,7 +298,7 @@ var/global/list/sparring_attack_cache = list()
 
 /decl/natural_attack/stomp/show_attack(var/mob/living/carbon/human/user, var/mob/living/carbon/human/target, var/zone, var/attack_damage)
 
-	var/obj/item/organ/external/affecting = istype(target) && zone && target.get_organ(zone)
+	var/obj/item/organ/external/affecting = istype(target) && zone && GET_EXTERNAL_ORGAN(target, zone)
 	if(!affecting)
 		return ..()
 

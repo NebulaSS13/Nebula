@@ -21,7 +21,7 @@
 			imp.forceMove(H)
 			imp.imp_in = H
 			imp.implanted = TRUE
-			var/obj/item/organ/external/affected = H.get_organ(BP_HEAD)
+			var/obj/item/organ/external/affected = GET_EXTERNAL_ORGAN(H, BP_HEAD)
 			if(affected)
 				LAZYADD(affected.implants, imp)
 				imp.part = affected

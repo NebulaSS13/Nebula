@@ -161,7 +161,7 @@
 
 	var/mob/living/carbon/human/H = target
 	if(istype(H) && H.headcheck(hit_zone))
-		var/obj/item/organ/affecting = H.get_organ(hit_zone) //headcheck should ensure that affecting is not null
+		var/obj/item/organ/affecting = GET_EXTERNAL_ORGAN(H, hit_zone) //headcheck should ensure that affecting is not null
 		user.visible_message(SPAN_DANGER("\The [user] smashes \the [src] into [H]'s [affecting.name]!"))
 		// You are going to knock someone out for longer if they are not wearing a helmet.
 		var/blocked = target.get_blocked_ratio(hit_zone, BRUTE, damage = 10) * 100

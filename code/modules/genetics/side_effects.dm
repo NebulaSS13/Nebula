@@ -41,7 +41,7 @@
 /datum/genetics/side_effect/genetic_burn/finish(mob/living/carbon/human/H)
 	if(!H.reagents.has_reagent(/decl/material/liquid/oxy_meds))
 		for(var/organ_name in global.all_limb_tags)
-			var/obj/item/organ/external/E = H.get_organ(organ_name)
+			var/obj/item/organ/external/E = GET_EXTERNAL_ORGAN(H, organ_name)
 			E.take_external_damage(0, 5, 0)
 
 /datum/genetics/side_effect/bone_snap

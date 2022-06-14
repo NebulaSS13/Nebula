@@ -34,7 +34,7 @@
 		var/mob/living/carbon/human/H = L
 		if(H.isSynthetic())
 			return TRUE
-		var/obj/item/organ/external/E = H.get_organ(bodypart)
+		var/obj/item/organ/external/E = GET_EXTERNAL_ORGAN(H, bodypart)
 		if(E && BP_IS_PROSTHETIC(E))
 			return TRUE
 		return FALSE

@@ -38,12 +38,12 @@
 		var/mob/living/carbon/human/host
 		for(var/mob/living/carbon/human/H in SSmobs.mob_list)
 			if(H.stat != DEAD && !H.has_brain_worms())
-				var/obj/item/organ/external/head = H.get_organ(BP_HEAD)
+				var/obj/item/organ/external/head = GET_EXTERNAL_ORGAN(H, BP_HEAD)
 				if(head && !BP_IS_PROSTHETIC(head))
 					host = H
 					break
 		if(istype(host))
-			var/obj/item/organ/external/head = host.get_organ(BP_HEAD)
+			var/obj/item/organ/external/head = GET_EXTERNAL_ORGAN(host, BP_HEAD)
 			if(head)
 				borer.host = host
 				LAZYDISTINCTADD(head.implants, borer)

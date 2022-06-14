@@ -21,7 +21,7 @@
 	var/mob/living/carbon/human/H = user
 	var/obj/item/cell/power_cell
 	if(ishuman(user))
-		var/obj/item/organ/internal/cell/cell = H.get_organ(BP_CELL)
+		var/obj/item/organ/internal/cell/cell = H.get_organ(BP_CELL, /obj/item/organ/internal/cell)
 		if(cell && cell.cell)
 			power_cell = cell.cell
 	else if(isrobot(user))
