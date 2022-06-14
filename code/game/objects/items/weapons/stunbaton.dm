@@ -137,7 +137,7 @@
 	var/obj/item/organ/external/affecting = null
 	if(ishuman(target))
 		var/mob/living/carbon/human/H = target
-		affecting = H.get_organ(hit_zone)
+		affecting = GET_EXTERNAL_ORGAN(H, hit_zone)
 	var/abuser =  user ? "" : "by [user]"
 	if(user && user.a_intent == I_HURT)
 		. = ..()

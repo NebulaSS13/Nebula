@@ -64,7 +64,7 @@
 	if(islist(chemical_types))
 		B.chemical_types = chemical_types.Copy()
 
-	var/obj/item/organ/external/affecting = H.get_organ(BP_HEAD)
+	var/obj/item/organ/external/affecting = GET_EXTERNAL_ORGAN(H, BP_HEAD)
 	LAZYREMOVE(affecting.implants, src)
 
 	var/s2h_id = src.computer_id

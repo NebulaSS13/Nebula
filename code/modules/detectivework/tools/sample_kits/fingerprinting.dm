@@ -60,8 +60,8 @@
 		return
 
 	for(var/tag in list(BP_R_HAND,BP_L_HAND)) //#FIXME: Alien prints??
-		var/obj/item/organ/external/O = H.get_organ(tag)
-		if(istype(O))
+		var/obj/item/organ/external/O = GET_EXTERNAL_ORGAN(H, tag)
+		if(O)
 			return TRUE
 	to_chat(user, SPAN_WARNING("They don't have any hands."))
 

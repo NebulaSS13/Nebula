@@ -74,7 +74,7 @@
 			var/mob/living/carbon/human/H = M
 			to_chat(user, SPAN_NOTICE("Analyzing Results for \the [H]:"))
 			to_chat(user, "Key: <font color='#ffa500'>Electronics</font>/<font color='red'>Brute</font>")
-			var/obj/item/organ/internal/cell/C = H.get_organ(BP_CELL)
+			var/obj/item/organ/internal/cell/C = H.get_organ(BP_CELL, /obj/item/organ/internal/cell)
 			if(C)
 				to_chat(user, SPAN_NOTICE("Cell charge: [C.percent()] %"))
 			else

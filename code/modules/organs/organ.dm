@@ -245,7 +245,7 @@
 		owner.bodytemperature += between(0, (fever_temperature - T20C)/BODYTEMP_COLD_DIVISOR + 1, fever_temperature - owner.bodytemperature)
 
 	if (germ_level >= INFECTION_LEVEL_TWO)
-		var/obj/item/organ/external/parent = owner.get_organ(parent_organ)
+		var/obj/item/organ/external/parent = GET_EXTERNAL_ORGAN(owner, parent_organ)
 		//spread germs
 		if (antibiotics < 5 && parent.germ_level < germ_level && ( parent.germ_level < INFECTION_LEVEL_ONE*2 || prob(owner.immunity_weakness() * 0.3) ))
 			parent.germ_level++

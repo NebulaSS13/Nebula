@@ -50,8 +50,6 @@
 				playsound(drop_loc, 'sound/effects/squelch1.ogg', 15, 1)
 			else
 				playsound(drop_loc, 'sound/items/Ratchet.ogg', 50, 1)
-		else if(!QDELETED(O))
-			qdel(O)
 
 //Should handle vital organ checks, icon updates, events
 /mob/living/proc/on_lost_organ(var/obj/item/organ/O)

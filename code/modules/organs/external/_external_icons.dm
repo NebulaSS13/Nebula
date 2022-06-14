@@ -1,10 +1,7 @@
 var/global/list/limb_icon_cache = list()
 
-/obj/item/organ/external/set_dir(var/direction, var/forced)
-	SHOULD_CALL_PARENT(FALSE)
-	if(forced)
-		return ..(direction)
-	return FALSE
+/obj/item/organ/external/set_dir()
+	return ..(SOUTH)
 
 /obj/item/organ/external/proc/compile_icon()
 	overlays.Cut()
@@ -47,7 +44,7 @@ var/global/list/limb_icon_cache = list()
 
 /obj/item/organ/external/head/sync_colour_to_human(var/mob/living/carbon/human/human)
 	..()
-	var/obj/item/organ/internal/eyes/eyes = human.get_organ(BP_EYES)
+	var/obj/item/organ/internal/eyes/eyes = human.get_organ(BP_EYES, /obj/item/organ/internal/eyes)
 	if(eyes) eyes.update_colour()
 
 /obj/item/organ/external/head/on_remove_effects(mob/living/last_owner)
@@ -99,8 +96,6 @@ var/global/list/limb_icon_cache = list()
 			overlays |= mark_s //So when it's not on your body, it has icons
 			mob_icon.Blend(mark_s, mark_style.layer_blend) //So when it's on your body, it has icons
 			icon_cache_key += "[M][markings[M]]"
-
-	set_dir(EAST, TRUE)
 
 	if(render_alpha < 255)
 		mob_icon += rgb(,,,render_alpha)

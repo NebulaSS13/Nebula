@@ -69,7 +69,7 @@
 				if(G == inv_slot?.holding)
 					var/target = H.get_covering_equipped_item_by_zone(bp)
 					if(!target)
-						target = H.get_organ(bp)
+						target = GET_EXTERNAL_ORGAN(H, bp)
 					put_residue_on(target)
 					break
 	if(prob(30))

@@ -38,7 +38,7 @@
 	qdel(src)
 	if(tmp_owner)
 		var/obj/item/organ/org = new replace_path(tmp_owner, null, dna)
-		tmp_owner.add_organ(org, tmp_owner.get_organ(org.parent_organ), TRUE, TRUE)
+		tmp_owner.add_organ(org, GET_EXTERNAL_ORGAN(tmp_owner, org.parent_organ), TRUE, TRUE)
 		tmp_owner = null
 
 /obj/item/organ/internal/brain/set_species(species_name)

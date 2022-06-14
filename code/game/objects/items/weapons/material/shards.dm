@@ -29,7 +29,7 @@
 	if(. && !has_handle)
 		var/mob/living/carbon/human/H = user
 		if(istype(H) && !H.get_equipped_item(slot_gloves_str) && !(H.species.species_flags & SPECIES_FLAG_NO_MINOR_CUT))
-			var/obj/item/organ/external/hand = H.get_organ(H.get_active_held_item_slot())
+			var/obj/item/organ/external/hand = GET_EXTERNAL_ORGAN(H, H.get_active_held_item_slot())
 			if(istype(hand) && !BP_IS_PROSTHETIC(hand))
 				to_chat(H, SPAN_DANGER("You slice your hand on \the [src]!"))
 				hand.take_external_damage(rand(5,10), used_weapon = src)
@@ -122,7 +122,7 @@
 			var/list/check = list(BP_L_FOOT, BP_R_FOOT)
 			while(check.len)
 				var/picked = pick(check)
-				var/obj/item/organ/external/affecting = H.get_organ(picked)
+				var/obj/item/organ/external/affecting = GET_EXTERNAL_ORGAN(H, picked)
 				if(affecting)
 					if(BP_IS_PROSTHETIC(affecting))
 						return

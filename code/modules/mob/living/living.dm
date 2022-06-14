@@ -475,13 +475,14 @@ default behaviour is:
 /mob/living/carbon/basic_revival(var/repair_brain = TRUE)
 	if(repair_brain && should_have_organ(BP_BRAIN))
 		repair_brain = FALSE
-		var/obj/item/organ/internal/brain/brain = get_organ(BP_BRAIN)
-		if(brain.damage > (brain.max_damage/2))
-			brain.damage = (brain.max_damage/2)
-		if(brain.status & ORGAN_DEAD)
-			brain.status &= ~ORGAN_DEAD
-			START_PROCESSING(SSobj, brain)
-		brain.update_icon()
+		var/obj/item/organ/internal/brain/brain = get_organ(BP_BRAIN, /obj/item/organ/internal/brain)
+		if(brain)
+			if(brain.damage > (brain.max_damage/2))
+				brain.damage = (brain.max_damage/2)
+			if(brain.status & ORGAN_DEAD)
+				brain.status &= ~ORGAN_DEAD
+				START_PROCESSING(SSobj, brain)
+			brain.update_icon()
 	..(repair_brain)
 
 /mob/living/proc/UpdateDamageIcon()

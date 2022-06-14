@@ -44,7 +44,7 @@
 	//Make sure we're removed from whatever parent organ we have, either in a mob or not
 	var/obj/item/organ/external/affected
 	if(owner)
-		affected = owner.get_organ(parent_organ)
+		affected = GET_EXTERNAL_ORGAN(owner, parent_organ)
 	else if(istype(loc, /obj/item/organ/external))
 		var/obj/item/organ/external/E = loc
 		if(E.organ_tag == parent_organ)
@@ -105,7 +105,7 @@
 
 		//only show this if the organ is not robotic
 		if(owner && can_feel_pain() && parent_organ && (amount > 5 || prob(10)))
-			var/obj/item/organ/external/parent = owner.get_organ(parent_organ)
+			var/obj/item/organ/external/parent = GET_EXTERNAL_ORGAN(owner, parent_organ)
 			if(parent && !silent)
 				var/degree = ""
 				if(is_bruised())

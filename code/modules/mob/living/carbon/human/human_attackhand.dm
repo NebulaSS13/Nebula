@@ -63,7 +63,7 @@
 	var/block = 0
 	var/accurate = 0
 	var/hit_zone = H.zone_sel.selecting
-	var/obj/item/organ/external/affecting = get_organ(hit_zone)
+	var/obj/item/organ/external/affecting = GET_EXTERNAL_ORGAN(src, hit_zone)
 
 	// See what attack they use
 	var/decl/natural_attack/attack = H.get_unarmed_attack(src, hit_zone)
@@ -218,11 +218,11 @@
 
 	if(is_asystole())
 		if(prob(5 + 5 * (SKILL_EXPERT - pumping_skill)))
-			var/obj/item/organ/external/chest = get_organ(BP_CHEST)
+			var/obj/item/organ/external/chest = GET_EXTERNAL_ORGAN(src, BP_CHEST)
 			if(chest)
 				chest.fracture()
 
-		var/obj/item/organ/internal/heart/heart = get_organ(BP_HEART)
+		var/obj/item/organ/internal/heart/heart = get_organ(BP_HEART, /obj/item/organ/internal/heart)
 		if(heart)
 			heart.external_pump = list(world.time, 0.4 + 0.1*pumping_skill + rand(-0.1,0.1))
 
@@ -255,15 +255,14 @@
 				to_chat(H, SPAN_WARNING("You need to remove \the [src]'s mouth covering for mouth-to-mouth resuscitation!"))
 				return TRUE
 
-		if(!H.get_organ(H.species.breathing_organ))
+		if(!GET_INTERNAL_ORGAN(H, H.species.breathing_organ))
 			to_chat(H, SPAN_WARNING("You need lungs for mouth-to-mouth resuscitation!"))
 			return TRUE
 
 		if(!need_breathe())
 			return TRUE
 
-		var/obj/item/organ/internal/lungs/L = get_organ(species.breathing_organ)
-
+		var/obj/item/organ/internal/lungs/L = get_organ(species.breathing_organ, /obj/item/organ/internal/lungs)
 		if(!L)
 			return
 
@@ -298,7 +297,7 @@
 	Changing targeted zones should also stop do_mob(), preventing you from applying pressure to more than one body part at once.
 */
 /mob/living/carbon/human/proc/apply_pressure(mob/living/user, var/target_zone)
-	var/obj/item/organ/external/organ = get_organ(target_zone)
+	var/obj/item/organ/external/organ = GET_EXTERNAL_ORGAN(src, target_zone)
 	if(!organ || !(organ.status & (ORGAN_BLEEDING|ORGAN_ARTERY_CUT)) || BP_IS_PROSTHETIC(organ))
 		return 0
 

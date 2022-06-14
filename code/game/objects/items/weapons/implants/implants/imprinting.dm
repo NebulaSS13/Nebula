@@ -105,12 +105,12 @@
 /obj/item/implant/imprinting/can_implant(mob/M, mob/user, target_zone)
 	var/mob/living/carbon/human/H = M	
 	if(istype(H))
-		var/obj/item/organ/internal/B = H.get_organ(BP_BRAIN)
+		var/obj/item/organ/internal/B = GET_INTERNAL_ORGAN(H, BP_BRAIN)
 		if(!B || H.isSynthetic())
 			to_chat(user, "<span class='warning'>\The [M] cannot be imprinted.</span>")
 			return FALSE
 		if(!(B.parent_organ == check_zone(target_zone, H)))
-			to_chat(user, "<span class='warning'>\The [src] must be implanted in [H.get_organ(B.parent_organ)].</span>")
+			to_chat(user, "<span class='warning'>\The [src] must be implanted in [GET_EXTERNAL_ORGAN(H, B.parent_organ)].</span>")
 			return FALSE
 	return TRUE
 

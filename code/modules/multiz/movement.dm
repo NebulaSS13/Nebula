@@ -247,7 +247,7 @@
 	if(prob(skill_fail_chance(SKILL_HAULING, 40, SKILL_EXPERT, 2)))
 		var/list/victims = list()
 		for(var/tag in list(BP_L_FOOT, BP_R_FOOT, BP_L_ARM, BP_R_ARM))
-			var/obj/item/organ/external/E = get_organ(tag)
+			var/obj/item/organ/external/E = GET_EXTERNAL_ORGAN(src, tag)
 			if(E && !E.is_dislocated() && (E.limb_flags & ORGAN_FLAG_CAN_DISLOCATE) && !BP_IS_PROSTHETIC(E))
 				victims += E
 		if(victims.len)

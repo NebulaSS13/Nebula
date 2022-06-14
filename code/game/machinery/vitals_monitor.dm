@@ -29,8 +29,8 @@
 		to_chat(user, SPAN_NOTICE("Pulse: [victim.get_pulse(GETPULSE_TOOL)]"))
 
 		var/brain_activity = "none"
-		var/obj/item/organ/internal/brain/brain = victim.get_organ(BP_BRAIN)
-		if(istype(brain) && victim.stat != DEAD && !(victim.status_flags & FAKEDEATH))
+		var/obj/item/organ/internal/brain/brain = victim.get_organ(BP_BRAIN, /obj/item/organ/internal/brain)
+		if(brain && victim.stat != DEAD && !(victim.status_flags & FAKEDEATH))
 			if(user.skill_check(SKILL_MEDICAL, SKILL_BASIC))
 				switch(brain.get_current_damage_threshold())
 					if(0 to 2)
@@ -44,7 +44,7 @@
 		to_chat(user, SPAN_NOTICE("Brain activity: [brain_activity]"))
 
 		var/breathing = "none"
-		var/obj/item/organ/internal/lungs/lungs = victim.get_organ(BP_LUNGS)
+		var/obj/item/organ/internal/lungs/lungs = victim.get_organ(BP_LUNGS, /obj/item/organ/internal/lungs)
 		if(istype(lungs) && !(victim.status_flags & FAKEDEATH))
 			if(lungs.breath_fail_ratio < 0.3)
 				breathing = "normal"
@@ -96,7 +96,7 @@
 			overlays += image(icon, icon_state = "pulse_thready")
 			overlays += image(icon, icon_state = "pulse_warning")
 
-	var/obj/item/organ/internal/brain/brain = victim.get_organ(BP_BRAIN)
+	var/obj/item/organ/internal/brain/brain = victim.get_organ(BP_BRAIN, /obj/item/organ/internal/brain)
 	if(istype(brain) && victim.stat != DEAD && !(victim.status_flags & FAKEDEATH))
 		switch(brain.get_current_damage_threshold())
 			if(0 to 2)
@@ -109,7 +109,7 @@
 	else
 		overlays += image(icon, icon_state = "brain_warning")
 
-	var/obj/item/organ/internal/lungs/lungs = victim.get_organ(BP_LUNGS)
+	var/obj/item/organ/internal/lungs/lungs = victim.get_organ(BP_LUNGS, /obj/item/organ/internal/lungs)
 	if(istype(lungs) && !(victim.status_flags & FAKEDEATH))
 		if(lungs.breath_fail_ratio < 0.3)
 			overlays += image(icon, icon_state = "breathing_normal")

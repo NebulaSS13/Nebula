@@ -5,7 +5,7 @@ var/global/hadevent    = 0
 /proc/appendicitis()
 	for(var/mob/living/carbon/human/H in shuffle(global.living_mob_list_))
 		if(H.client && H.stat != DEAD)
-			var/obj/item/organ/internal/appendix/A = H.get_organ(BP_APPENDIX)
+			var/obj/item/organ/internal/appendix/A = H.get_organ(BP_APPENDIX, /obj/item/organ/internal/appendix)
 			if(!istype(A) || (A && A.inflamed))
 				continue
 			A.inflamed = 1

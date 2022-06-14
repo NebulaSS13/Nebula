@@ -82,7 +82,7 @@
 	// Brain activity.
 	var/brain_result = "normal"
 	if(H.should_have_organ(BP_BRAIN))
-		var/obj/item/organ/internal/brain/brain = H.get_organ(BP_BRAIN)
+		var/obj/item/organ/internal/brain/brain = H.get_organ(BP_BRAIN, /obj/item/organ/internal/brain)
 		if(!brain || H.stat == DEAD || (H.status_flags & FAKEDEATH))
 			brain_result = "<span class='scan_danger'>none, patient is braindead</span>"
 		else if(H.stat != DEAD)

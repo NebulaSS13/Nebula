@@ -89,7 +89,7 @@
 					"You hear someone coughing!",
 				)
 			else
-				var/obj/item/organ/parent = owner.get_organ(parent_organ)
+				var/obj/item/organ/parent = GET_EXTERNAL_ORGAN(owner, parent_organ)
 				owner.visible_message(
 					"blood drips from <B>\the [owner]'s</B> [parent.name]!",
 				)
@@ -108,7 +108,7 @@
 			owner.losebreath = max(3, owner.losebreath)
 
 /obj/item/organ/internal/lungs/proc/rupture()
-	var/obj/item/organ/external/parent = owner.get_organ(parent_organ)
+	var/obj/item/organ/external/parent = GET_EXTERNAL_ORGAN(owner, parent_organ)
 	if(istype(parent))
 		owner.custom_pain("You feel a stabbing pain in your [parent.name]!", 50, affecting = parent)
 	bruise()

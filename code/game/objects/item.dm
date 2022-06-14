@@ -174,7 +174,7 @@
 	//is probabilistic so we can't do that and it would be unfair to just check one.
 	if(ishuman(M))
 		var/mob/living/carbon/human/H = M
-		var/obj/item/organ/external/hand = H.get_organ(M.get_empty_hand_slot())
+		var/obj/item/organ/external/hand = GET_EXTERNAL_ORGAN(H, M.get_empty_hand_slot())
 		if(istype(hand) && hand.is_usable())
 			return TRUE
 	return FALSE
@@ -657,7 +657,6 @@ var/global/list/slot_flags_enumeration = list(
 
 	if(istype(H))
 
-		var/obj/item/organ/internal/eyes/eyes = H.get_organ(BP_EYES)
 
 		if(H != user)
 
@@ -669,6 +668,7 @@ var/global/list/slot_flags_enumeration = list(
 				SPAN_DANGER("\The [user] has stabbed themself with \the [src]!"),
 				self_message = SPAN_DANGER("You stab yourself in the eyes with \the [src]!"))
 
+		var/obj/item/organ/internal/eyes = GET_INTERNAL_ORGAN(H, BP_EYES)
 		eyes.damage += rand(3,4)
 		if(eyes.damage >= eyes.min_bruised_damage)
 			if(M.stat != 2)
@@ -685,7 +685,7 @@ var/global/list/slot_flags_enumeration = list(
 				if(M.stat != 2)
 					to_chat(M, SPAN_WARNING("You go blind!"))
 
-		var/obj/item/organ/external/affecting = H.get_organ(eyes.parent_organ)
+		var/obj/item/organ/external/affecting = GET_EXTERNAL_ORGAN(H, eyes.parent_organ)
 		affecting.take_external_damage(7)
 	else
 		M.take_organ_damage(7)

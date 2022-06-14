@@ -74,7 +74,7 @@ var/global/list/symbiote_starting_points = list()
 		log_debug("Exception during symbiote join: [e]")
 
 	if(host)
-		var/obj/item/organ/external/head = host.get_organ(BP_HEAD)
+		var/obj/item/organ/external/head = GET_EXTERNAL_ORGAN(host, BP_HEAD)
 		symbiote.host = host
 		LAZYADD(head.implants, symbiote)
 		symbiote.forceMove(head)
@@ -107,7 +107,7 @@ var/global/list/symbiote_starting_points = list()
 	for(var/mob/living/carbon/human/H in global.player_list)
 		if(H.stat == DEAD || !H.client || !H.ckey || !H.has_brain())
 			continue
-		var/obj/item/organ/external/head = H.get_organ(BP_HEAD)
+		var/obj/item/organ/external/head = GET_EXTERNAL_ORGAN(H, BP_HEAD)
 		if(BP_IS_PROSTHETIC(head) || BP_IS_CRYSTAL(head) || head.has_growths())
 			continue
 		var/decl/cultural_info/culture/symbiotic/culture = H.get_cultural_value(TAG_CULTURE)

@@ -31,7 +31,7 @@ This saves us from having to call add_fingerprint() any time something is put in
 	return ..()
 
 /mob/living/carbon/human/proc/has_organ(name)
-	var/obj/item/organ/external/O = get_organ(name)
+	var/obj/item/organ/external/O = GET_EXTERNAL_ORGAN(src, name)
 	return !!O
 
 /mob/living/carbon/human/proc/has_organ_for_slot(slot)
@@ -370,6 +370,6 @@ This saves us from having to call add_fingerprint() any time something is put in
 
 //Same as get_covering_equipped_items, but using target zone instead of bodyparts flags
 /mob/living/carbon/human/proc/get_covering_equipped_item_by_zone(var/zone)
-	var/obj/item/organ/external/O = get_organ(zone)
+	var/obj/item/organ/external/O = GET_EXTERNAL_ORGAN(src, zone)
 	if(O)
 		return get_covering_equipped_item(O.body_part)

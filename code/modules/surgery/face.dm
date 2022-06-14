@@ -27,12 +27,12 @@
 /decl/surgery_step/fix_face/end_step(mob/living/user, mob/living/target, target_zone, obj/item/tool)
 	user.visible_message("<span class='notice'>[user] repairs \the [target]'s face with \the [tool].</span>",	\
 	"<span class='notice'>You repair \the [target]'s face with \the [tool].</span>")
-	var/obj/item/organ/external/head/h = target.get_organ(target_zone)
+	var/obj/item/organ/external/h = GET_EXTERNAL_ORGAN(target, target_zone)
 	if(h) 
 		h.status &= ~ORGAN_DISFIGURED
 
 /decl/surgery_step/fix_face/fail_step(mob/living/user, mob/living/target, target_zone, obj/item/tool)
-	var/obj/item/organ/external/affected = target.get_organ(target_zone)
+	var/obj/item/organ/external/affected = GET_EXTERNAL_ORGAN(target, target_zone)
 	user.visible_message("<span class='warning'>[user]'s hand slips, tearing skin on [target]'s face with \the [tool]!</span>", \
 	"<span class='warning'>Your hand slips, tearing skin on [target]'s face with \the [tool]!</span>")
 	affected.take_external_damage(10, 0, (DAM_SHARP|DAM_EDGE), used_weapon = tool)

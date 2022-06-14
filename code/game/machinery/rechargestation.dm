@@ -84,7 +84,7 @@
 
 	if(ishuman(occupant))
 		var/mob/living/carbon/human/H = occupant
-		var/obj/item/organ/internal/cell/potato = H.get_organ(BP_CELL)
+		var/obj/item/organ/internal/cell/potato = H.get_organ(BP_CELL, /obj/item/organ/internal/cell)
 		if(potato)
 			target = potato.cell
 		var/obj/item/rig/R = H.get_equipped_item(slot_back_str)
@@ -201,7 +201,7 @@
 		var/obj/item/rig/R = H.get_equipped_item(slot_back_str)
 		if(istype(R))
 			return R.cell
-		return H.get_organ(BP_CELL)
+		return GET_INTERNAL_ORGAN(H, BP_CELL)
 	return 0
 
 /obj/machinery/recharge_station/proc/go_out()
