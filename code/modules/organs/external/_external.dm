@@ -559,13 +559,12 @@ This function completely restores a damaged organ to perfect condition.
 	burn_ratio = 0
 	germ_level = 0
 	genetic_degradation = 0
+	pain = 0
 
 	for(var/datum/wound/wound in wounds)
 		qdel(wound)
 	number_wounds = 0
 
-	damage = 0
-	pain = 0
 
 	// handle internal organs
 	for(var/obj/item/organ/current_organ in internal_organs)
@@ -577,17 +576,12 @@ This function completely restores a damaged organ to perfect condition.
 			implanted_object.forceMove(get_turf(src))
 			LAZYREMOVE(implants, implanted_object)
 
-	// refresh status if needed
-	if(!QDELETED(src))
-		reset_status()
-
-	if(ishuman(owner) && !ignore_prosthetic_prefs && owner.client?.prefs?.real_name == owner.real_name)
-		for(var/decl/aspect/aspect as anything in owner.personal_aspects)
-			if(aspect.applies_to_organ(organ_tag))
-				aspect.apply(owner)
-		owner.updatehealth()
-
 	undislocate(TRUE)
+
+	. = ..() // Clear damage, reapply aspects.
+
+	if(owner)
+		owner.updatehealth()
 
 //#TODO: Rejuvination hacks should probably be removed
 /obj/item/organ/external/remove_rejuv()
@@ -1250,14 +1244,14 @@ Note that amputating the affected organ does in fact remove the infection from t
 	if(species)
 		return species.get_manual_dexterity(owner)
 
-//Completely override, so we can slap in the model
-/obj/item/organ/external/setup_as_prosthetic()
-	. = ..(model ? model : /decl/prosthetics_manufacturer)
-
-/obj/item/organ/external/robotize(var/company = /decl/prosthetics_manufacturer, var/skip_prosthetics = 0, var/keep_organs = 0, var/apply_material = /decl/material/solid/metal/steel, var/check_bodytype, var/check_species)
+/obj/item/organ/external/robotize(var/company, var/skip_prosthetics = 0, var/keep_organs = 0, var/apply_material = /decl/material/solid/metal/steel, var/check_bodytype, var/check_species)
 	. = ..()
 
 	slowdown = 0
+
+	// Don't override our existing model unless a specific model is being passed in.
+	if(!company)
+		company = model || /decl/prosthetics_manufacturer
 
 	var/decl/prosthetics_manufacturer/R
 	if(istype(company, /decl/prosthetics_manufacturer))
@@ -1272,7 +1266,10 @@ Note that amputating the affected organ does in fact remove the infection from t
 		R = GET_DECL(company)
 
 	//If can't install fallback to default
-	if(!R.check_can_install(organ_tag, (check_bodytype || owner?.get_bodytype_category() || global.using_map.default_bodytype), (check_species || owner?.get_species_name() || global.using_map.default_species)))
+	check_bodytype = (check_bodytype || owner?.get_bodytype_category() || global.using_map.default_bodytype)
+	check_species =  (check_species  || owner?.get_species_name()      || global.using_map.default_species)
+
+	if(!R.check_can_install(organ_tag, check_bodytype, check_species))
 		company = /decl/prosthetics_manufacturer
 		R = GET_DECL(/decl/prosthetics_manufacturer)
 

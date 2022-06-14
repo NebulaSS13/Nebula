@@ -6,7 +6,7 @@
 	can_eat = FALSE
 	can_feel_pain = FALSE
 	allowed_bodytypes = list(BODYTYPE_ADHERENT)
-	modifier_string = null
+	modifier_string = "crystalline"
 	is_robotic = FALSE
 
 /decl/prosthetics_manufacturer/adherent/get_base_icon(var/mob/living/carbon/human/owner)
