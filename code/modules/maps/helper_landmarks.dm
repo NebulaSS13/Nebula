@@ -15,7 +15,9 @@
 	. = LAZYLEN(map_template_names) && pick(map_template_names)
 
 /obj/abstract/landmark/map_load_mark/proc/load_subtemplate()
-	set waitfor = FALSE
+	// Commenting this out temporarily as DMMS breaks when asychronously
+	// loading overlapping map templates. TODO: more robust queuing behavior
+	//set waitfor = FALSE
 
 	var/datum/map_template/template = get_subtemplate()
 	var/turf/spawn_loc = get_turf(src)
