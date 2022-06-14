@@ -72,7 +72,8 @@
 		/decl/emote/exertion/synthetic/creak
 	)
 
-/decl/species/utility_frame/post_organ_rejuvenate(obj/item/organ/org, mob/living/carbon/human/H)
+/decl/species/utility_frame/apply_species_organ_modifications(obj/item/organ/org)
+	..()
 	var/obj/item/organ/external/E = org
 	if(istype(E) && !BP_IS_PROSTHETIC(E))
 		E.robotize(/decl/prosthetics_manufacturer/utility_frame)

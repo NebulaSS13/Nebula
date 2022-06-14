@@ -453,10 +453,9 @@ var/global/const/DEFAULT_SPECIES_HEALTH = 200
 
 //Checks if an existing limbs is the species default
 /decl/species/proc/is_default_limb(var/obj/item/organ/external/E)
-	// We don't have ^^ (logical XOR), so !x != !y will suffice.
-	if(!(species_flags & SPECIES_FLAG_CRYSTALLINE) != !BP_IS_CRYSTAL(E))
+	if((species_flags & SPECIES_FLAG_CRYSTALLINE) && !BP_IS_CRYSTAL(E))
 		return FALSE
-	if(!(species_flags & SPECIES_FLAG_SYNTHETIC) != !BP_IS_PROSTHETIC(E))
+	if((species_flags & SPECIES_FLAG_SYNTHETIC) && !BP_IS_PROSTHETIC(E))
 		return FALSE
 	for(var/tag in has_limbs)
 		if(E.organ_tag == tag)
@@ -511,7 +510,6 @@ var/global/const/DEFAULT_SPECIES_HEALTH = 200
 		var/limb_path = organ_data["path"]
 		var/obj/item/organ/external/E = new limb_path(H, null, H.dna) //explicitly specify the dna
 		H.add_organ(E, null, FALSE, FALSE)
-		post_organ_rejuvenate(E, H)
 
 	//Create missing internal organs
 	for(var/organ_tag in has_organ)
@@ -523,7 +521,6 @@ var/global/const/DEFAULT_SPECIES_HEALTH = 200
 			warning("[O.type] has a default organ tag \"[O.organ_tag]\" that differs from the species' organ tag \"[organ_tag]\". Updating organ_tag to match.")
 			O.organ_tag = organ_tag
 		H.add_organ(O, GET_EXTERNAL_ORGAN(H, O.parent_organ), FALSE, FALSE)
-		post_organ_rejuvenate(O, H)
 
 /decl/species/proc/add_base_auras(var/mob/living/carbon/human/H)
 	if(base_auras)
@@ -865,8 +862,10 @@ var/global/const/DEFAULT_SPECIES_HEALTH = 200
 		if(31 to 45)	. = 4
 		else			. = 8
 
-/decl/species/proc/post_organ_rejuvenate(var/obj/item/organ/org, var/mob/living/carbon/human/H)
-	if(org && (org.species ? (org.species.species_flags & SPECIES_FLAG_CRYSTALLINE) : (species_flags & SPECIES_FLAG_CRYSTALLINE)))
+// This should only ever be called via the species set on the organ; calling it across species will cause weirdness.
+/decl/species/proc/apply_species_organ_modifications(var/obj/item/organ/org, var/mob/living/carbon/human/H)
+	SHOULD_CALL_PARENT(TRUE)
+	if(species_flags & SPECIES_FLAG_CRYSTALLINE)
 		org.status |= (ORGAN_BRITTLE|ORGAN_CRYSTAL)
 
 /decl/species/proc/check_no_slip(var/mob/living/carbon/human/H)

@@ -146,6 +146,8 @@
 		absolute_max_damage = max(1, FLOOR(min_broken_damage * 2))
 	max_damage = absolute_max_damage // resets scarring, but ah well
 
+	reset_status()
+
 /obj/item/organ/proc/die()
 	damage = max_damage
 	status |= ORGAN_DEAD
@@ -287,13 +289,15 @@
 
 /obj/item/organ/proc/rejuvenate(var/ignore_prosthetic_prefs)
 	damage = 0
-	status = initial(status)
 	if(ignore_prosthetic_prefs && ishuman(owner) && owner.client && owner.client.prefs && owner.client.prefs.real_name == owner.real_name)
 		for(var/decl/aspect/aspect as anything in owner.personal_aspects)
 			if(aspect.applies_to_organ(organ_tag))
 				aspect.apply(owner)
-	if(species)
-		species.post_organ_rejuvenate(src, owner)
+	reset_status()
+
+/obj/item/organ/proc/reset_status()
+	status = initial(status)
+	species.apply_species_organ_modifications(src)
 
 //Germs
 /obj/item/organ/proc/handle_antibiotics()

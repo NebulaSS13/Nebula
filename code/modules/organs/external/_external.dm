@@ -553,7 +553,6 @@ This function completely restores a damaged organ to perfect condition.
 /obj/item/organ/external/rejuvenate(var/ignore_prosthetic_prefs)
 
 	damage_state = "00"
-	status = 0
 	brute_dam = 0
 	brute_ratio = 0
 	burn_dam = 0
@@ -578,6 +577,10 @@ This function completely restores a damaged organ to perfect condition.
 			implanted_object.forceMove(get_turf(src))
 			LAZYREMOVE(implants, implanted_object)
 
+	// refresh status if needed
+	if(!QDELETED(src))
+		reset_status()
+
 	if(ishuman(owner) && !ignore_prosthetic_prefs && owner.client?.prefs?.real_name == owner.real_name)
 		for(var/decl/aspect/aspect as anything in owner.personal_aspects)
 			if(aspect.applies_to_organ(organ_tag))
@@ -585,9 +588,6 @@ This function completely restores a damaged organ to perfect condition.
 		owner.updatehealth()
 
 	undislocate(TRUE)
-
-	if(!QDELETED(src) && species)
-		species.post_organ_rejuvenate(src, owner)
 
 //#TODO: Rejuvination hacks should probably be removed
 /obj/item/organ/external/remove_rejuv()
