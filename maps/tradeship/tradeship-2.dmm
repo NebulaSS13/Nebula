@@ -4262,6 +4262,9 @@
 /obj/structure/cable{
 	icon_state = "4-8"
 	},
+/obj/structure/window/borosilicate_reinforced{
+	dir = 8
+	},
 /turf/simulated/floor/plating,
 /area/ship/trade/maintenance/engine/aft)
 "kR" = (
@@ -4289,6 +4292,9 @@
 	dir = 8
 	},
 /obj/structure/cable,
+/obj/structure/window/borosilicate_reinforced{
+	dir = 4
+	},
 /turf/simulated/floor/plating,
 /area/ship/trade/maintenance/engine/aft)
 "lu" = (
@@ -4333,6 +4339,9 @@
 	dir = 5
 	},
 /obj/machinery/meter,
+/obj/structure/window/borosilicate_reinforced{
+	dir = 4
+	},
 /turf/simulated/floor/plating,
 /area/ship/trade/maintenance/engine/aft)
 "me" = (
@@ -6744,6 +6753,9 @@
 "TB" = (
 /obj/machinery/atmospherics/valve/open{
 	dir = 4
+	},
+/obj/structure/window/borosilicate_reinforced{
+	dir = 8
 	},
 /turf/simulated/floor/plating,
 /area/ship/trade/maintenance/engine/aft)
