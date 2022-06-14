@@ -330,9 +330,6 @@
 	matter = null
 	create_matter()
 
-/obj/item/organ/proc/mechassist() //Used to add things like pacemakers, etc
-	BP_SET_ASSISTED(src) //Can't be assisted and prosthetic at the same time
-
 /obj/item/organ/attack(var/mob/target, var/mob/user)
 	if(BP_IS_PROSTHETIC(src) || !istype(target) || !istype(user) || (user != target && user.a_intent == I_HELP))
 		return ..()
@@ -370,8 +367,6 @@
 	. = list()
 	if(BP_IS_CRYSTAL(src))
 		. += tag ? "<span class='average'>Crystalline</span>" : "Crystalline"
-	else if(BP_IS_ASSISTED(src))
-		. += tag ? "<span class='average'>Assisted</span>" : "Assisted"
 	else if(BP_IS_PROSTHETIC(src))
 		. += tag ? "<span class='average'>Mechanical</span>" : "Mechanical"
 	if(status & ORGAN_CUT_AWAY)

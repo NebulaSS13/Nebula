@@ -138,8 +138,6 @@
 			. = "necrotic [.]"
 	if(BP_IS_CRYSTAL(src))
 		. = "crystalline "
-	else if(BP_IS_ASSISTED(src))
-		. = "assisted "
 	else if(BP_IS_PROSTHETIC(src))
 		. = "mechanical "
 	. = "[.][name]"

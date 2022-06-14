@@ -266,7 +266,7 @@
 					hidden_bleeders[hidden] = list()
 				hidden_bleeders[hidden] += E.name
 		else
-			if(!is_synth && BP_IS_PROSTHETIC(E) && (E.parent && !BP_IS_PROSTHETIC(E.parent) && !BP_IS_ASSISTED(E.parent)))
+			if(!is_synth && BP_IS_PROSTHETIC(E) && (E.parent && !BP_IS_PROSTHETIC(E.parent)))
 				wound_flavor_text[E.name] = "[G.He] [G.has] a [E.name].\n"
 			var/wounddesc = E.get_wounds_desc()
 			if(wounddesc != "nothing")
