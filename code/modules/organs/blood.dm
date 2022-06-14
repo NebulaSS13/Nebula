@@ -35,6 +35,7 @@
 
 	if(!should_have_organ(BP_HEART))
 		vessel.clear_reagents()
+		vessel.maximum_volume = 0
 		return
 
 	if(vessel.total_volume < species.blood_volume)
