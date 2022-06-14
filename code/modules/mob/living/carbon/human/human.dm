@@ -722,9 +722,9 @@
 
 	//recheck species-restricted clothing
 	for(var/slot in global.all_inventory_slots)
-		var/obj/item/clothing/C = get_equipped_item(slot)
+		var/obj/item/C = get_equipped_item(slot)
 		if(istype(C) && !C.mob_can_equip(src, slot, TRUE, TRUE))
-			unEquip(C)
+			drop_from_inventory(C)
 
 //This handles actually updating our visual appearance
 // Triggers deep update of limbs and hud
