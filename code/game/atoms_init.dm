@@ -86,6 +86,9 @@
 /atom/proc/EarlyDestroy(force = FALSE)
 	return QDEL_HINT_QUEUE
 
+/atom/movable/EarlyDestroy(force)
+	loc = null // Do this without forceMove to avoid event triggering.
+	return ..()
 
 // Movable level stuff
 
