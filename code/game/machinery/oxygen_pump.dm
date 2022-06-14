@@ -97,7 +97,7 @@
 	if(!user)
 		user = target
 	// Check target validity
-	if(!target.get_organ(BP_HEAD))
+	if(!GET_EXTERNAL_ORGAN(target, BP_HEAD))
 		to_chat(user, "<span class='warning'>\The [target] doesn't have a head.</span>")
 		return
 	if(!target.check_has_mouth())

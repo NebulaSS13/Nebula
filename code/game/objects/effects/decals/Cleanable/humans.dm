@@ -94,8 +94,8 @@ var/global/list/image/splatter_cache=list()
 	if(amount < 1)
 		return
 
-	var/obj/item/organ/external/l_foot = perp.get_organ(BP_L_FOOT)
-	var/obj/item/organ/external/r_foot = perp.get_organ(BP_R_FOOT)
+	var/obj/item/organ/external/l_foot = GET_EXTERNAL_ORGAN(perp, BP_L_FOOT)
+	var/obj/item/organ/external/r_foot = GET_EXTERNAL_ORGAN(perp, BP_R_FOOT)
 	var/hasfeet = l_foot && r_foot
 
 	var/transferred_data = blood_data ? blood_data[pick(blood_data)] : null

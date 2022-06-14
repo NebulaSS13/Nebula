@@ -35,7 +35,7 @@
 
 	if (istype(M, /mob/living/carbon/human))
 		var/mob/living/carbon/human/H = M
-		var/obj/item/organ/external/affecting = H.get_organ(user.zone_sel.selecting)
+		var/obj/item/organ/external/affecting = GET_EXTERNAL_ORGAN(H, user.zone_sel.selecting)
 
 		if(!affecting)
 			to_chat(user, SPAN_WARNING("\The [M] is missing that body part!"))
@@ -83,7 +83,7 @@
 
 	if (istype(M, /mob/living/carbon/human))
 		var/mob/living/carbon/human/H = M
-		var/obj/item/organ/external/affecting = H.get_organ(user.zone_sel.selecting) //nullchecked by ..()
+		var/obj/item/organ/external/affecting = GET_EXTERNAL_ORGAN(H, user.zone_sel.selecting) //nullchecked by ..()
 
 		if(affecting.is_bandaged())
 			to_chat(user, SPAN_WARNING("The wounds on [M]'s [affecting.name] have already been bandaged."))
@@ -140,7 +140,7 @@
 
 	if (istype(M, /mob/living/carbon/human))
 		var/mob/living/carbon/human/H = M
-		var/obj/item/organ/external/affecting = H.get_organ(user.zone_sel.selecting) //nullchecked by ..()
+		var/obj/item/organ/external/affecting = GET_EXTERNAL_ORGAN(H, user.zone_sel.selecting) //nullchecked by ..()
 
 		if(affecting.is_salved())
 			to_chat(user, SPAN_WARNING("The wounds on [M]'s [affecting.name] have already been salved."))
@@ -175,7 +175,7 @@
 
 	if (istype(M, /mob/living/carbon/human))
 		var/mob/living/carbon/human/H = M
-		var/obj/item/organ/external/affecting = H.get_organ(user.zone_sel.selecting) //nullchecked by ..()
+		var/obj/item/organ/external/affecting = GET_EXTERNAL_ORGAN(H, user.zone_sel.selecting) //nullchecked by ..()
 		if(affecting.is_bandaged() && affecting.is_disinfected())
 			to_chat(user, SPAN_WARNING("The wounds on [M]'s [affecting.name] have already been treated."))
 			return 1
@@ -231,7 +231,7 @@
 
 	if (istype(M, /mob/living/carbon/human))
 		var/mob/living/carbon/human/H = M
-		var/obj/item/organ/external/affecting = H.get_organ(user.zone_sel.selecting) //nullchecked by ..()
+		var/obj/item/organ/external/affecting = GET_EXTERNAL_ORGAN(H, user.zone_sel.selecting) //nullchecked by ..()
 
 		if(affecting.is_salved())
 			to_chat(user, SPAN_WARNING("The wounds on [M]'s [affecting.name] have already been salved."))
@@ -272,7 +272,7 @@
 
 	if (istype(M, /mob/living/carbon/human))
 		var/mob/living/carbon/human/H = M
-		var/obj/item/organ/external/affecting = H.get_organ(user.zone_sel.selecting) //nullchecked by ..()
+		var/obj/item/organ/external/affecting = GET_EXTERNAL_ORGAN(H, user.zone_sel.selecting) //nullchecked by ..()
 		var/limb = affecting.name
 		if(!(affecting.organ_tag in splintable_organs))
 			to_chat(user, SPAN_WARNING("You can't use \the [src] to apply a splint there!"))
@@ -283,7 +283,7 @@
 		if (M != user)
 			user.visible_message(SPAN_NOTICE("\The [user] starts to apply \the [src] to [M]'s [limb]."), SPAN_DANGER("You start to apply \the [src] to [M]'s [limb]."), SPAN_DANGER("You hear something being wrapped."))
 		else
-			var/obj/item/organ/external/using = user.get_organ(user.get_active_held_item_slot())
+			var/obj/item/organ/external/using = GET_EXTERNAL_ORGAN(user, user.get_active_held_item_slot())
 			if(istype(using) && (affecting == using || (affecting in using.children) || affecting.organ_tag == using.parent_organ))
 				to_chat(user, SPAN_WARNING("You can't apply a splint to the arm you're using!"))
 				return
@@ -344,7 +344,7 @@
 	. = ..()
 	if(!. && ishuman(M))
 		var/mob/living/carbon/human/H = M
-		var/obj/item/organ/external/affecting = H.get_organ(user.zone_sel.selecting)
+		var/obj/item/organ/external/affecting = GET_EXTERNAL_ORGAN(H, user.zone_sel.selecting)
 		if((affecting.brute_dam + affecting.burn_dam) <= 0)
 			to_chat(user, SPAN_WARNING("\The [M]'s [affecting.name] is undamaged."))
 			return 1

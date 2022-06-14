@@ -108,7 +108,7 @@ var/global/last_chew = 0
 	if (H.get_equipped_item(slot_wear_mask_str)) return
 	if (istype(H.get_equipped_item(slot_wear_suit_str), /obj/item/clothing/suit/straight_jacket)) return
 
-	var/obj/item/organ/external/O = H.get_organ(H.get_active_held_item_slot())
+	var/obj/item/organ/external/O = GET_EXTERNAL_ORGAN(H, H.get_active_held_item_slot())
 	if (!O) return
 
 	var/decl/pronouns/G = H.get_pronouns()

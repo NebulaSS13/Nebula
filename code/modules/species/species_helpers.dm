@@ -53,7 +53,7 @@ var/global/list/stored_shock_by_ref = list()
 		for(var/mark_type in base_markings)
 			var/decl/sprite_accessory/marking/mark_decl = GET_DECL(mark_type)
 			for(var/bp in mark_decl.body_parts)
-				var/obj/item/organ/external/O = mannequin.get_organ(bp)
+				var/obj/item/organ/external/O = GET_EXTERNAL_ORGAN(mannequin, bp)
 				if(O && !LAZYACCESS(O.markings, mark_type))
 					LAZYSET(O.markings, mark_type, base_markings[mark_type])
 

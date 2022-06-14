@@ -7,9 +7,9 @@
 	return
 /mob/proc/apply_effect(var/effect = 0,var/effecttype = STUN, var/blocked = 0)
 	return
-// See /mob/living/carbon/human for this one.
-/mob/proc/get_organ(var/organ_tag)
-	return //Returns the organ matching the tag
+// See /mob/living/carbon for this one.
+/mob/proc/get_organ(var/organ_tag, var/expected_type)
+	return
 /mob/proc/get_organs()
 	return
 // End grab casting stubs.

@@ -7,7 +7,7 @@
 
 //Give verbs on install
 /obj/item/organ/internal/augment/active/onInstall()
-	limb = owner.get_organ(parent_organ)
+	limb = GET_EXTERNAL_ORGAN(owner, parent_organ)
 
 /obj/item/organ/internal/augment/active/onRemove()
 	limb = null

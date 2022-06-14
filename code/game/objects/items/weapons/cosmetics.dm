@@ -42,9 +42,9 @@
 
 	if(ishuman(A))
 		var/mob/living/carbon/human/H = A
-		var/obj/item/organ/external/head/head = H.get_organ(BP_HEAD)
+		var/obj/item/organ/external/head/head = H.get_organ(BP_HEAD, /obj/item/organ/external/head)
 
-		if(!istype(head))
+		if(!head)
 			return
 
 		if(user.a_intent == I_HELP && target_zone == BP_HEAD)

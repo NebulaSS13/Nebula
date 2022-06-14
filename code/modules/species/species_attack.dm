@@ -23,7 +23,7 @@
 	return (!user.get_equipped_item(slot_gloves_str) || !blocked_by_gloves)
 
 /decl/natural_attack/claws/show_attack(var/mob/living/carbon/human/user, var/mob/living/carbon/human/target, var/zone, var/attack_damage)
-	var/obj/item/organ/external/affecting = istype(target) && zone && target.get_organ(zone)
+	var/obj/item/organ/external/affecting = istype(target) && zone && GET_EXTERNAL_ORGAN(target, zone)
 	if(!affecting)
 		return ..()
 
@@ -100,7 +100,7 @@
 	return damage
 
 /decl/natural_attack/stomp/weak/show_attack(var/mob/living/carbon/human/user, var/mob/living/carbon/human/target, var/zone, var/attack_damage)
-	var/obj/item/organ/external/affecting = istype(target) && zone && target.get_organ(zone)
+	var/obj/item/organ/external/affecting = istype(target) && zone && GET_EXTERNAL_ORGAN(target, zone)
 	if(affecting)
 		user.visible_message(SPAN_WARNING("\The [user] jumped up and down on \the [target]'s [affecting.name]!"))
 	else
@@ -124,13 +124,13 @@
 	if(!(zone in can_hit_zones))
 		return FALSE
 	for(var/bp in list(BP_L_FOOT, BP_R_FOOT))
-		if(istype(user.get_organ(bp), /obj/item/organ/external))
+		if(GET_EXTERNAL_ORGAN(user, bp))
 			return TRUE
 	return FALSE
 
 /decl/natural_attack/tail/show_attack(var/mob/living/carbon/human/user, var/mob/living/carbon/human/target, var/zone, var/attack_damage)
 
-	var/obj/item/organ/external/affecting = istype(target) && zone && target.get_organ(zone)
+	var/obj/item/organ/external/affecting = istype(target) && zone && GET_EXTERNAL_ORGAN(target, zone)
 	if(!affecting)
 		return ..()
 

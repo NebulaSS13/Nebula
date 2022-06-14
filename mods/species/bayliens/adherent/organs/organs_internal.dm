@@ -53,7 +53,7 @@
 /obj/item/organ/internal/powered/Process()
 	. = ..()
 	if(owner)
-		var/obj/item/organ/internal/cell/cell = owner.get_organ(BP_CELL)
+		var/obj/item/organ/internal/cell/cell = owner.get_organ(BP_CELL, /obj/item/organ/internal/cell)
 		if(active && !(cell && cell.use(maintenance_cost)))
 			active = FALSE
 			to_chat(owner, SPAN_DANGER("Your [name] [gender == PLURAL ? "are" : "is"] out of power!"))

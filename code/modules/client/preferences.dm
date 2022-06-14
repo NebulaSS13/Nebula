@@ -401,7 +401,7 @@ var/global/list/time_prefs_fixed = list()
 		var/mark_color = "[body_markings[M]]"
 
 		for(var/BP in mark_datum.body_parts)
-			var/obj/item/organ/external/O = character.get_organ(BP)
+			var/obj/item/organ/external/O = GET_EXTERNAL_ORGAN(character, BP)
 			if(O)
 				LAZYSET(O.markings, M, mark_color)
 

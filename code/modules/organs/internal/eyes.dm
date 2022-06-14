@@ -148,7 +148,7 @@
 	if(owner.incapacitated())
 		return
 
-	var/obj/item/organ/external/head/head = owner.get_organ(BP_HEAD)
-	if(istype(head))
+	var/obj/item/organ/external/head/head = owner.get_organ(BP_HEAD, /obj/item/organ/external/head)
+	if(head)
 		head.glowing_eyes = !head.glowing_eyes
 		owner.refresh_visible_overlays()
