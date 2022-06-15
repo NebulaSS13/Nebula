@@ -140,17 +140,17 @@
 	tendon_name = "carpal ligament"
 	arterial_bleed_severity = 0.5
 	limb_flags = ORGAN_FLAG_CAN_AMPUTATE | ORGAN_FLAG_FINGERPRINT | ORGAN_FLAG_HAS_TENDON | ORGAN_FLAG_CAN_BREAK | ORGAN_FLAG_CAN_DISLOCATE
-	var/gripper_ui_label = "L"
-	var/gripper_ui_loc = ui_lhand
-	var/overlay_slot_id = BP_L_HAND
+	var/gripper_type = /datum/inventory_slot/gripper/left_hand
 
 /obj/item/organ/external/hand/do_install(mob/living/carbon/human/target, affected, in_place, update_icon, detached)
-	if(!(. = ..()))
+	. = ..()
+	if(. && owner && gripper_type)
+		owner.add_held_item_slot(new gripper_type)
 		return
-	owner?.add_held_item_slot(organ_tag, gripper_ui_loc, overlay_slot_id, gripper_ui_label)
 
 /obj/item/organ/external/hand/do_uninstall(in_place, detach, ignore_children, update_icon)
-	owner?.remove_held_item_slot(organ_tag)
+	if(gripper_type && owner)
+		owner.remove_held_item_slot(organ_tag)
 	. = ..()
 
 /obj/item/organ/external/hand/right
@@ -161,6 +161,4 @@
 	parent_organ = BP_R_ARM
 	joint = "right wrist"
 	amputation_point = "right wrist"
-	gripper_ui_loc = ui_rhand
-	overlay_slot_id = BP_R_HAND
-	gripper_ui_label = "R"
+	gripper_type = /datum/inventory_slot/gripper/right_hand

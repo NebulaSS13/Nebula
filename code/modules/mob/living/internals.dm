@@ -12,7 +12,10 @@
 	return
 
 // Set internals on or off. Implemented properly on /carbon
-/mob/living/proc/toggle_internals(var/mob/living/user)
+/mob/proc/toggle_internals(var/mob/living/user)
+	return
+
+/mob/living/toggle_internals(var/mob/living/user)
 	var/atom/movable/internal = get_internals()
 	if(internal)
 		visible_message(SPAN_NOTICE("\The [user] disables \the [src]'s internals!"))
@@ -53,7 +56,7 @@
 
 /mob/living/proc/get_possible_internals_sources()
 	. = get_equipped_internals_sources()
-	for(var/slot in held_item_slots)
+	for(var/slot in get_held_item_slot_strings())
 		var/obj/item/tank/checking = get_equipped_item(slot)
 		if(istype(checking))
 			.[parse_zone(slot)] = list(checking, "in")
@@ -102,7 +105,7 @@
 		else
 			set_internals(selected_obj, "\the [selected_obj]")
 
-/mob/living/proc/ui_toggle_internals()
+/mob/living/ui_toggle_internals()
 
 	if(incapacitated())
 		return

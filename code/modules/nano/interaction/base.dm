@@ -9,9 +9,12 @@
 	return state.can_use_topic(src_object, user)
 
 /mob/CanUseTopic(mob/user, datum/topic_state/state, href_list)
-	if(href_list && href_list["flavor_more"])
-		return STATUS_INTERACTIVE
-	return ..()
+	. = ..()
+	if(href_list)
+		if(href_list["flavor_more"])
+			return STATUS_INTERACTIVE
+		if(href_list["refresh"] || href_list["item"])
+			return min(., ..(user, global.physical_topic_state, href_list))
 
 /datum/proc/CanUseTopicPhysical(mob/user)
 	return CanUseTopic(user, global.physical_topic_state)

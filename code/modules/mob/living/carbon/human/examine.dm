@@ -217,7 +217,7 @@
 
 	to_chat(user, jointext(msg, null))
 
-//Helper procedure. Called by /mob/living/carbon/human/examine() and /mob/living/carbon/human/Topic() to determine HUD access to security and medical records.
+//Helper procedure. Called by /mob/living/carbon/human/examine() and /mob/living/carbon/human/OnTopic() to determine HUD access to security and medical records.
 /proc/hasHUD(mob/M, hudtype)
 	return !!M.getHUDsource(hudtype)
 

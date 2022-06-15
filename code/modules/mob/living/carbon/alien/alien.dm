@@ -26,15 +26,8 @@
 	gender = NEUTER
 	. = ..()
 
-/mob/living/carbon/alien/u_equip(obj/item/W)
-	SHOULD_CALL_PARENT(FALSE)
-	return FALSE
-
 /mob/living/carbon/alien/restrained()
 	return 0
-
-/mob/living/carbon/alien/show_inv(mob/user)
-	return //Consider adding cuffs and hats to this, for the sake of fun.
 
 /mob/living/carbon/alien/get_admin_job_string()
 	return "Alien"

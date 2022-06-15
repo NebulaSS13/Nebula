@@ -1,0 +1,5 @@
+/mob/living/carbon/alien/ascent_nymph/death(gibbed)
+	var/obj/item/holding_item = get_equipped_item(BP_MOUTH)
+	if(holding_item)
+		unEquip(holding_item)
+	return ..(gibbed,death_msg)

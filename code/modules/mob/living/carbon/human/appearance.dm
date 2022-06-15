@@ -25,7 +25,6 @@
 	species.handle_post_spawn(src)
 	reset_blood()
 	full_prosthetic = null
-	apply_species_inventory_restrictions()
 
 	var/decl/special_role/antag = mind && player_is_antag(mind)
 	if (antag && antag.required_language)

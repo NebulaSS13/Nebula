@@ -124,23 +124,6 @@
 	. = ..()
 	stat("Held Item", held_item)
 
-/*
- * Inventory
- */
-/mob/living/simple_animal/hostile/retaliate/parrot/show_inv(mob/user)
-	user.set_machine(src)
-	if(user.stat) return
-
-	var/dat = 	"<div align='center'><b>Inventory of [name]</b></div><p>"
-	if(ears)
-		dat +=	"<br><b>Headset:</b> [ears] (<a href='?src=\ref[src];remove_inv=ears'>Remove</a>)"
-	else
-		dat +=	"<br><b>Headset:</b> <a href='?src=\ref[src];add_inv=ears'>Nothing</a>"
-
-	show_browser(user, dat, text("window=mob[];size=325x500", name))
-	onclose(user, "mob[real_name]")
-	return
-
 /mob/living/simple_animal/hostile/retaliate/parrot/DefaultTopicState()
 	return global.physical_topic_state
 
@@ -490,9 +473,9 @@
 
 		if(iscarbon(AM))
 			var/mob/living/carbon/C = AM
-			for(var/hand_slot in C.held_item_slots)
-				var/datum/inventory_slot/inv_slot = C.held_item_slots[hand_slot]
-				if(inv_slot?.holding && can_pick_up(inv_slot.holding))
+			for(var/hand_slot in C.get_held_item_slot_strings())
+				var/datum/inventory_slot/inv_slot = C.get_inventory_slot_datum(hand_slot)
+				if(inv_slot?._holding && can_pick_up(inv_slot._holding))
 					return C
 	return null
 
@@ -519,9 +502,9 @@
 
 		if(iscarbon(AM))
 			var/mob/living/carbon/C = AM
-			for(var/hand_slot in C.held_item_slots)
-				var/datum/inventory_slot/inv_slot = C.held_item_slots[hand_slot]
-				if(inv_slot?.holding && can_pick_up(inv_slot.holding))
+			for(var/hand_slot in C.get_held_item_slot_strings())
+				var/datum/inventory_slot/inv_slot = C.get_inventory_slot_datum(hand_slot)
+				if(inv_slot?._holding && can_pick_up(inv_slot._holding))
 					return C
 	return null
 

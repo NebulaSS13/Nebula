@@ -2,6 +2,7 @@
 	var/obj/structure/diona_gestalt/gestalt = loc
 	if(istype(gestalt))
 		gestalt.shed_atom(src, TRUE, FALSE)
+	var/obj/item/holding_item = get_equipped_item(BP_MOUTH)
 	if(holding_item)
 		unEquip(holding_item)
 	return ..(gibbed,death_msg)

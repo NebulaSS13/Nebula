@@ -2,7 +2,7 @@
 /mob/proc/attack_ui(slot)
 	var/obj/item/W = get_active_hand()
 	var/obj/item/E = get_equipped_item(slot)
-	if (istype(E))
+	if(istype(E))
 		if(istype(W))
 			E.attackby(W,src)
 		else
@@ -10,12 +10,22 @@
 	else
 		equip_to_slot_if_possible(W, slot)
 
+/mob/proc/ui_toggle_internals()
+	return FALSE
+
+/mob/proc/add_inventory_slot(var/datum/inventory_slot/inv_slot)
+	return istype(inv_slot)
+
+/mob/proc/get_inventory_slot(var/slot)
+	return
+
 //This is a SAFE proc. Use this instead of equip_to_slot()!
 //set del_on_fail to have it delete W if it fails to equip
 //set disable_warning to disable the 'you are unable to equip that' warning.
 //unset redraw_mob to prevent the mob from being redrawn at the end.
 //set force to replace items in the slot and ignore blocking overwear
 /mob/proc/equip_to_slot_if_possible(obj/item/W, slot, del_on_fail = 0, disable_warning = 0, redraw_mob = 1, force = FALSE, delete_old_item = TRUE)
+
 	if(!istype(W) || !slot)
 		return FALSE
 
@@ -30,11 +40,50 @@
 		equip_to_slot(W, slot, redraw_mob, delete_old_item = delete_old_item) //This proc should not ever fail.
 		return TRUE
 
+	return FALSE
+
 //This is an UNSAFE proc. It merely handles the actual job of equipping. All the checks on whether you can or can't eqip need to be done before! Use mob_can_equip() for that task.
 //In most cases you will want to use equip_to_slot_if_possible()
 /mob/proc/equip_to_slot(obj/item/W, slot, delete_old_item = TRUE)
 	SHOULD_CALL_PARENT(TRUE)
-	return istype(W) && !isnull(slot)
+
+	if(!istype(W) || isnull(slot))
+		return FALSE
+
+	if(!(slot in global.all_inventory_slots) && !(slot in global.abstract_inventory_slots))
+		to_chat(src, SPAN_WARNING("You are trying to equip this item to an unsupported inventory slot. If possible, please write a ticket with steps to reproduce. Slot was: [slot]"))
+		return FALSE
+
+	if(!has_organ_for_slot(slot))
+		return FALSE
+
+	// Handle some special slots.
+	if(slot == slot_in_backpack_str)
+		remove_from_mob(W)
+		var/obj/item/back = get_equipped_item(slot_back_str)
+		if(back)
+			W.forceMove(back)
+		else
+			W.dropInto(loc)
+		return TRUE
+
+	if(slot == slot_tie_str)
+		var/obj/item/clothing/under/uniform = get_equipped_item(slot_w_uniform_str)
+		if(istype(uniform))
+			uniform.try_attach_accessory(W, src)
+		return TRUE
+
+	var/obj/item/old_item = get_equipped_item(slot)
+	var/datum/inventory_slot/inv_slot = get_inventory_slot(slot)
+	if(inv_slot?.can_equip_to_slot(src, W, slot))
+		u_equip(W)
+		inv_slot.equipped(src, W)
+		if(W.action_button_name)
+			update_action_buttons()
+		if(old_item)
+			qdel(old_item)
+		return TRUE
+	return FALSE
 
 //This is just a commonly used configuration for the equip_to_slot_if_possible() proc, used to equip people when the rounds tarts and when events happen and such.
 /mob/proc/equip_to_slot_or_del(obj/item/W, slot)
@@ -48,7 +97,19 @@
 
 //Checks if a given slot can be accessed at this time, either to equip or unequip I
 /mob/proc/slot_is_accessible(var/slot, var/obj/item/I, mob/user=null)
-	return 1
+	return FALSE
+
+/mob/living/slot_is_accessible(var/slot, var/obj/item/I, mob/user=null)
+	var/datum/inventory_slot/inv_slot = get_inventory_slot(slot)
+	if(!inv_slot)
+		return FALSE
+	var/obj/item/covering = inv_slot.get_covering_item(src)
+	if(covering)
+		var/check_flags = inv_slot.get_covering_flags(src)
+		if(covering.body_parts_covered & (I.body_parts_covered|check_flags))
+			to_chat(user, SPAN_WARNING("\The [covering] is in the way."))
+			return FALSE
+	return TRUE
 
 //puts the item "W" into an appropriate slot in a human's inventory
 //returns 0 if it cannot, 1 if successful
@@ -87,66 +148,6 @@
 	if(!stored && newitem)
 		put_in_hands(newitem)
 	return stored
-//These procs handle putting s tuff in your hand. It's probably best to use these rather than setting l_hand = ...etc
-//as they handle all relevant stuff like adding it to the player's screen and updating their overlays.
-
-//Returns the thing in our active hand
-/mob/proc/get_active_hand()
-	RETURN_TYPE(/obj/item)
-	return null
-
-/mob/proc/get_active_held_item_slot()
-	return
-
-//Returns the thing in our inactive hand
-/mob/proc/get_inactive_held_items()
-	RETURN_TYPE(/list)
-	return null
-
-/mob/proc/get_held_items()
-	for(var/obj/item/thing in get_inactive_held_items())
-		LAZYADD(., thing)
-	var/obj/item/thing = get_active_hand()
-	if(istype(thing))
-		LAZYADD(., thing)
-
-/mob/proc/get_empty_hand_slot()
-	return
-
-/mob/proc/get_empty_hand_slots()
-	return
-
-/mob/proc/put_in_active_hand(var/obj/item/W)
-	. = equip_to_slot_if_possible(W, get_active_held_item_slot(), disable_warning = TRUE)
-
-//Puts the item into (one of) our inactive hand(s) if possible. returns 1 on success.
-/mob/proc/put_in_inactive_hand(var/obj/item/W)
-	var/active_slot = get_active_held_item_slot()
-	for(var/slot in get_empty_hand_slots())
-		if(slot == active_slot)
-			continue
-		. = equip_to_slot_if_possible(W, slot, disable_warning = TRUE)
-		if(.)
-			break
-//Puts the item our active hand if possible. Failing that it tries our inactive hand. Returns 1 on success.
-//If both fail it drops it on the floor and returns 0.
-//This is probably the main one you need to know :)
-
-/mob/proc/put_in_hands_or_del(var/obj/item/W)
-	. = put_in_hands(W)
-	if(!. && !QDELETED(W))
-		qdel(W)
-
-/mob/proc/put_in_hands(var/obj/item/W)
-	if(!W)
-		return 0
-	drop_from_inventory(W)
-	return 0
-
-/mob/proc/put_in_hands_or_store_or_drop(var/obj/item/W)
-	. = put_in_hands(W)
-	if(!.)
-		. = equip_to_storage_or_drop(W)
 
 // Removes an item from inventory and places it in the target atom.
 // If canremove or other conditions need to be checked then use unEquip instead.
@@ -160,7 +161,9 @@
 
 // Drops a held item from a given slot.
 /mob/proc/drop_from_hand(var/slot, var/atom/Target)
-	return FALSE
+	var/obj/item/held = get_equipped_item(slot)
+	if(held)
+		return drop_from_inventory(held, Target)
 
 //Drops the item in our active hand. TODO: rename this to drop_active_hand or something
 /mob/proc/drop_item(var/atom/Target)
@@ -176,29 +179,16 @@
 	. = drop_from_inventory(get_active_hand(), Target)
 
 /*
-	Removes the object from any slots the mob might have, calling the appropriate icon update proc.
-	Does nothing else.
-
+	Removes the object from any slots the mob might have, calling the appropriate update procs.
 	>>>> *** DO NOT CALL THIS PROC DIRECTLY *** <<<<
-
 	It is meant to be called only by other inventory procs.
 	It's probably okay to use it if you are transferring the item between slots on the same mob,
 	but chances are you're safer calling remove_from_mob() or drop_from_inventory() anyways.
-
-	As far as I can tell the proc exists so that mobs with different inventory slots can override
-	the search through all the slots, without having to duplicate the rest of the item dropping.
 */
 /mob/proc/u_equip(obj/W)
-	SHOULD_CALL_PARENT(TRUE)
-	if(W == _back)
-		_back = null
-		update_inv_back(0)
-		return TRUE
-	if(W == _wear_mask)
-		_wear_mask = null
-		update_inv_wear_mask(0)
-		return TRUE
-	return FALSE
+	if(istype(W) && !QDELETED(W))
+		var/datum/inventory_slot/inv_slot = get_inventory_slot(get_equipped_slot_for_item(W))
+		return inv_slot?.unequipped(src, W)
 
 /mob/proc/isEquipped(obj/item/I)
 	if(!I)
@@ -218,11 +208,12 @@
 	if(!length(slots))
 		return
 	for(var/slot_str in slots)
-		if(get_equipped_item(slot_str) == I) // slots[slot]._holding == I
+		var/datum/inventory_slot/slot_datum = slots[slot_str]
+		if(slot_datum._holding == I)
 			return slot_str
 
 /mob/proc/get_held_slot_for_item(obj/item/I)
-	var/list/slots = get_held_item_slots()
+	var/list/slots = get_held_item_slot_strings()
 	if(!length(slots))
 		return
 	for(var/slot in slots)
@@ -230,7 +221,8 @@
 			return slot
 
 /mob/proc/get_inventory_slot_datum(var/slot)
-	return
+	var/list/inventory_slots = get_inventory_slots()
+	return LAZYACCESS(inventory_slots, slot)
 
 //This differs from remove_from_mob() in that it checks if the item can be unequipped first. Use drop_from_inventory if you don't want to check.
 /mob/proc/unEquip(obj/item/I, var/atom/target, var/play_dropsound = TRUE)
@@ -263,29 +255,25 @@
 
 //Returns the item equipped to the specified slot, if any.
 /mob/proc/get_equipped_item(var/slot)
-
-	// Check equipment slots.
-	SHOULD_CALL_PARENT(TRUE)
-	switch(slot)
-		if(slot_back_str)
-			return _back
-		if(slot_wear_mask_str)
-			return _wear_mask
-
+	var/datum/inventory_slot/inv_slot = get_inventory_slot(slot)
+	if(inv_slot)
+		return inv_slot?.get_equipped_item()
 	// Check held item slots.
-	var/held_slots = get_held_item_slots()
-	var/datum/inventory_slot/inv_slot = LAZYACCESS(held_slots, slot)
-	return inv_slot?.holding
+	var/held_slots = get_held_item_slot_strings()
+	inv_slot = LAZYACCESS(held_slots, slot)
+	return inv_slot?._holding
 
 /mob/proc/get_equipped_items(var/include_carried = 0)
 	SHOULD_CALL_PARENT(TRUE)
-	for(var/slot in list(slot_back_str, slot_wear_mask_str))
+	for(var/slot in global.equipped_slots)
 		var/obj/item/thing = get_equipped_item(slot)
 		if(istype(thing))
 			LAZYADD(., thing)
 	if(include_carried)
-		for(var/obj/item/thing in get_held_items())
-			LAZYADD(., thing)
+		for(var/slot in global.carried_slots)
+			var/obj/item/thing = get_equipped_item(slot)
+			if(istype(thing))
+				LAZYADD(., thing)
 
 /mob/proc/delete_inventory(var/include_carried = FALSE)
 	for(var/entry in get_equipped_items(include_carried))
@@ -298,6 +286,29 @@
 	for(var/entry in get_equipped_items())
 		var/obj/item/I = entry
 		. |= I.body_parts_covered
+
+/mob/proc/equip_in_one_of_slots(obj/item/W, list/slots, del_on_fail = 1)
+	for (var/slot in slots)
+		if (equip_to_slot_if_possible(W, slots[slot], del_on_fail = 0))
+			return slot
+	if(del_on_fail && !QDELETED(W))
+		qdel(W)
+
+/mob/proc/has_organ_for_slot(slot)
+	if(slot in global.abstract_inventory_slots)
+		return TRUE
+	var/datum/inventory_slot/inv_slot = get_inventory_slot(slot)
+	return !!(inv_slot?.check_has_required_organ(src))
+
+/mob/verb/quick_equip()
+	set name = "quick-equip"
+	set hidden = 1
+
+	var/obj/item/I = get_active_hand()
+	if(!I)
+		to_chat(src, SPAN_NOTICE("You are not holding anything to equip."))
+	else if(!equip_to_appropriate_slot(I))
+		to_chat(src, SPAN_WARNING("You are unable to equip that."))
 
 // Returns the first item which covers any given body part
 /mob/proc/get_covering_equipped_item(var/body_parts)
@@ -315,11 +326,104 @@
 		if(I.body_parts_covered & body_parts)
 			. += I
 
+//Same as get_covering_equipped_items, but using target zone instead of bodyparts flags
+/mob/proc/get_covering_equipped_item_by_zone(var/zone)
+	var/obj/item/organ/external/O = GET_EXTERNAL_ORGAN(src, zone)
+	if(O)
+		return get_covering_equipped_item(O.body_part)
+
+/mob/proc/select_held_item_slot(var/slot)
+	return
+
+/mob/proc/remove_inventory_slot(var/slot_id)
+	return
+
+/mob/proc/clear_inventory_slots(var/ignore_hands)
+	return
+
+/mob/proc/set_inventory_slots(var/list/new_slots, var/preserve_hands)
+	return
+
 /mob/proc/has_held_item_slot()
-	return TRUE
+	. = LAZYLEN(get_held_item_slot_strings()) >= 1
 
 /mob/proc/is_holding_offhand(var/thing)
+	. = !!(thing && (thing in get_inactive_held_items()))
+
+//These procs handle putting s tuff in your hand. It's probably best to use these rather than setting l_hand = ...etc
+//as they handle all relevant stuff like adding it to the player's screen and updating their overlays.
+
+//Returns the thing in our active hand
+/mob/proc/get_active_hand()
+	RETURN_TYPE(/obj/item)
+	return get_equipped_item(get_active_held_item_slot())
+
+/mob/proc/get_active_held_item_slot()
+	return
+
+/mob/proc/get_inactive_held_items()
+	var/held_slots = get_held_item_slot_strings()
+	if(LAZYLEN(held_slots))
+		for(var/bp in (held_slots - get_active_held_item_slot()))
+			var/obj/item/thing = get_equipped_item(bp)
+			if(istype(thing))
+				LAZYADD(., thing)
+
+/mob/proc/get_held_items()
+	for(var/obj/item/thing in get_inactive_held_items())
+		LAZYADD(., thing)
+	var/obj/item/thing = get_active_hand()
+	if(istype(thing))
+		LAZYADD(., thing)
+
+/mob/proc/get_empty_hand_slot()
+	var/slots = get_empty_hand_slots()
+	if(LAZYLEN(slots))
+		return slots[1]
+
+/mob/proc/get_empty_hand_slots()
+	for(var/bp in get_held_item_slot_strings())
+		if(!get_equipped_item(bp))
+			LAZYADD(., bp)
+
+/mob/proc/put_in_active_hand(var/obj/item/W)
+	return equip_to_slot_if_possible(W, get_active_held_item_slot(), disable_warning = TRUE)
+
+//Puts the item our active hand if possible. Failing that it tries our inactive hand. Returns 1 on success.
+//If both fail it drops it on the floor and returns 0.
+//This is probably the main one you need to know :)
+/mob/proc/put_in_hands_or_del(var/obj/item/W)
+	. = put_in_hands(W)
+	if(!. && !QDELETED(W))
+		qdel(W)
+
+/mob/proc/put_in_hands(var/obj/item/W)
+	if(!W)
+		return FALSE
+	if(put_in_active_hand(W) || put_in_inactive_hand(W))
+		return TRUE
+	if(!QDELETED(W))
+		drop_from_inventory(W)
 	return FALSE
+
+/mob/proc/put_in_hands_or_store_or_drop(var/obj/item/W)
+	. = put_in_hands(W)
+	if(!.)
+		. = equip_to_storage_or_drop(W)
+
+//Puts the item into (one of) our inactive hand(s) if possible. returns 1 on success.
+/mob/proc/put_in_inactive_hand(var/obj/item/W)
+	var/active_slot = get_active_held_item_slot()
+	for(var/slot in get_empty_hand_slots())
+		if(slot == active_slot)
+			continue
+		. = equip_to_slot_if_possible(W, slot, disable_warning = TRUE)
+		if(.)
+			break
+
+/mob/proc/swap_hand()
+	SHOULD_CALL_PARENT(TRUE)
+	select_held_item_slot(next_in_list(get_active_held_item_slot(), get_held_item_slot_strings()))
 
 /mob/proc/can_be_buckled(var/mob/user)
 	. = user.Adjacent(src) && !istype(user, /mob/living/silicon/pai)
@@ -328,14 +432,15 @@
 /mob/proc/item_should_have_screen_presence(obj/item/item, slot)
 	return hud_used && slot && (hud_used.inventory_shown || !(slot in global.hidden_inventory_slots))
 
-/mob/proc/get_held_item_slots()
+/mob/proc/get_held_item_slot_strings()
 	return
 
 /mob/proc/get_inventory_slots()
 	return
 
 /mob/proc/get_hands_organs()
-	for(var/hand_slot in get_held_item_slots())
+	for(var/hand_slot in get_held_item_slot_strings())
 		var/org = GET_EXTERNAL_ORGAN(src, hand_slot)
 		if(org)
 			LAZYDISTINCTADD(., org)
+

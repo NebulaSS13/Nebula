@@ -4,6 +4,9 @@
 	for(var/organ in get_internal_organs())
 		LAZYADD(., organ)
 
+/mob/living/has_organ(organ_tag)
+	return !!GET_EXTERNAL_ORGAN(src, organ_tag)
+
 /mob/living/proc/get_external_organs()
 	return
 

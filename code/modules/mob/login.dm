@@ -123,3 +123,10 @@
 			if(marker.mob_image && marker != status_markers)
 				client.images |= marker.mob_image
 	return TRUE
+
+/mob/living/carbon/hud_reset(full_reset = FALSE)
+	if(!(. = ..()))
+		return .
+	if(internals && internal)
+		internals.icon_state = "internal1"
+	queue_hand_rebuild()

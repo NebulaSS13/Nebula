@@ -135,62 +135,6 @@
 		if(G.restrains())
 			return TRUE
 
-/mob/living/carbon/human/show_inv(mob/user)
-	if(user.incapacitated()  || !user.Adjacent(src) || !user.check_dexterity(DEXTERITY_SIMPLE_MACHINES))
-		return
-
-	user.set_machine(src)
-	var/dat = "<B><HR><FONT size=3>[name]</FONT></B><BR><HR>"
-
-	for(var/entry in species.hud.gear)
-		var/list/slot_ref = species.hud.gear[entry]
-		if((slot_ref["slot"] in list(slot_l_store_str, slot_r_store_str)))
-			continue
-		var/obj/item/thing_in_slot = get_equipped_item(slot_ref["slot"])
-		dat += "<BR><B>[slot_ref["name"]]:</b> <a href='?src=\ref[src];item=[slot_ref["slot"]]'>[istype(thing_in_slot) ? thing_in_slot : "nothing"]</a>"
-		if(istype(thing_in_slot, /obj/item/clothing))
-			var/obj/item/clothing/C = thing_in_slot
-			if(C.accessories.len)
-				dat += "<BR><A href='?src=\ref[src];item=tie;holder=\ref[C]'>Remove accessory</A>"
-	dat += "<BR><HR>"
-
-	for(var/hand_slot in held_item_slots)
-		var/obj/item/organ/external/E = GET_EXTERNAL_ORGAN(src, hand_slot)
-		if(E)
-			var/datum/inventory_slot/inv_slot = held_item_slots[hand_slot]
-			dat += "<BR><b>[capitalize(E.name)]:</b> <A href='?src=\ref[src];item=[hand_slot]'>[inv_slot.holding?.name || "nothing"]</A>"
-
-	// Do they get an option to set internals?
-	if(istype(get_equipped_item(slot_wear_mask_str), /obj/item/clothing/mask) || istype(get_equipped_item(slot_head_str), /obj/item/clothing/head/helmet/space))
-		for(var/slot in list(slot_back_str, slot_belt_str, slot_s_store_str))
-			var/obj/item/tank/tank = get_equipped_item(slot)
-			if(istype(tank))
-				dat += "<BR><A href='?src=\ref[src];item=internals'>Toggle internals.</A>"
-				break
-
-	var/obj/item/clothing/under/suit = get_equipped_item(slot_w_uniform_str)
-	// Other incidentals.
-	if(istype(suit))
-		dat += "<BR><b>Pockets:</b> <A href='?src=\ref[src];item=pockets'>Empty or Place Item</A>"
-		if(suit.has_sensor == 1)
-			dat += "<BR><A href='?src=\ref[src];item=sensors'>Set sensors</A>"
-		if (suit.has_sensor && user.get_multitool())
-			dat += "<BR><A href='?src=\ref[src];item=lock_sensors'>[suit.has_sensor == SUIT_LOCKED_SENSORS ? "Unl" : "L"]ock sensors</A>"
-	if(get_equipped_item(slot_handcuffed_str))
-		dat += "<BR><A href='?src=\ref[src];item=[slot_handcuffed_str]'>Handcuffed</A>"
-
-	for(var/entry in worn_underwear)
-		var/obj/item/underwear/UW = entry
-		dat += "<BR><a href='?src=\ref[src];item=\ref[UW]'>Remove \the [UW]</a>"
-
-	dat += "<BR><A href='?src=\ref[src];refresh=1'>Refresh</A>"
-	dat += "<BR><A href='?src=\ref[user];mach_close=mob[name]'>Close</A>"
-
-	var/datum/browser/popup = new(user, "mob[name]", null, 340, 540)
-	popup.set_content(dat)
-	popup.open()
-	onclose(user, "mob[name]")
-
 // called when something steps onto a human
 // this handles mulebots and vehicles
 /mob/living/carbon/human/Crossed(var/atom/movable/AM)
@@ -274,20 +218,7 @@
 
 	return ..()
 
-/mob/living/carbon/human/CanUseTopic(mob/user, datum/topic_state/state, href_list)
-	. = ..()
-	if(href_list && (href_list["refresh"] || href_list["item"]))
-		return min(., ..(user, global.physical_topic_state, href_list))
-
 /mob/living/carbon/human/OnTopic(mob/user, href_list)
-	if (href_list["refresh"])
-		show_inv(user)
-		return TOPIC_HANDLED
-
-	if(href_list["item"])
-		if(!handle_strip(href_list["item"],user,locate(href_list["holder"])))
-			show_inv(user)
-		return TOPIC_HANDLED
 
 	if (href_list["criminal"])
 		if(hasHUD(user, HUD_SECURITY))
@@ -700,6 +631,8 @@
 		set_next_usable_move_intent()
 	update_emotes()
 
+	apply_species_inventory_restrictions()
+
 	// Update codex scannables.
 	if(species.secret_codex_info)
 		var/datum/extension/scannable/scannable = get_or_create_extension(src, /datum/extension/scannable)
@@ -707,7 +640,6 @@
 		scannable.scan_delay = 5 SECONDS
 	else if(has_extension(src, /datum/extension/scannable))
 		remove_extension(src, /datum/extension/scannable)
-
 	return TRUE
 
 //Syncs cultural tokens to the currently set species, and may trigger a language update
@@ -724,16 +656,28 @@
 	if(update_lang)
 		update_languages()
 
-//Drop anything that cannot be worn by the current species of the mob
+//Update valid inv slots then drop anything that cannot be worn by the current species of the mob
 /mob/living/carbon/human/proc/apply_species_inventory_restrictions()
-	if(species)
-		if(!(species.appearance_flags & HAS_UNDERWEAR))
-			QDEL_NULL_LIST(worn_underwear)
+
+	var/list/new_slots
+	var/list/held_slots = get_held_item_slot_strings()
+	for(var/slot_id in species.hud.inventory_slots)
+		if(slot_id in held_slots)
+			continue
+		var/datum/inventory_slot/new_slot = species.hud.inventory_slots[slot_id]
+		var/datum/inventory_slot/old_slot = get_inventory_slot(slot_id)
+		if(!old_slot || !old_slot.equivalent_to(new_slot))
+			LAZYSET(new_slots, slot_id, new_slot.clone())
+		else
+			LAZYSET(new_slots, slot_id, old_slot)
+	set_inventory_slots(new_slots, preserve_hands = TRUE)
+
+	if(!(species.appearance_flags & HAS_UNDERWEAR))
+		QDEL_NULL_LIST(worn_underwear)
 
 	//recheck species-restricted clothing
-	for(var/slot in global.all_inventory_slots)
-		var/obj/item/C = get_equipped_item(slot)
-		if(istype(C) && !C.mob_can_equip(src, slot, TRUE, TRUE))
+	for(var/obj/item/C in get_equipped_items(include_carried = TRUE))
+		if(!C.mob_can_equip(src, get_equipped_slot_for_item(C), TRUE, TRUE))
 			drop_from_inventory(C)
 
 //This handles actually updating our visual appearance
@@ -1409,3 +1353,8 @@
 		if(safety > FLASH_PROTECTION_NONE)
 			flash_strength = (flash_strength / 2)
 	. = ..()
+
+/mob/living/carbon/human/get_additional_stripping_options()
+	for(var/entry in worn_underwear)
+		var/obj/item/underwear/UW = entry
+		LAZYADD(., "<br><a href='?src=\ref[src];item=\ref[UW]'>Remove \the [UW]</a>")

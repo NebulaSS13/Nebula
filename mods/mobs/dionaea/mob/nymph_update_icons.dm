@@ -1,3 +1,6 @@
+/mob/living/carbon/alien/diona/update_inv_head()
+	update_icon()
+
 /mob/living/carbon/alien/diona/on_update_icon()
 	..()
 	icon_state = ICON_STATE_WORLD
@@ -16,7 +19,9 @@
 			flower.overlays += I
 			add_overlay(flower)
 
-		var/datum/extension/hattable/hattable = get_extension(src, /datum/extension/hattable)
-		var/image/I = hattable?.get_hat_overlay(src)
+	var/obj/item/hat = get_equipped_item(slot_head_str)
+	if(hat)
+		var/image/I = hat?.get_mob_overlay(src, slot_head_str)
 		if(I)
+			I.pixel_y = -8
 			add_overlay(I)

@@ -132,9 +132,6 @@
 	apply_damage(shock_damage, BURN, def_zone, used_weapon="Electrocution")
 	return(shock_damage)
 
-/mob/proc/swap_hand()
-	SHOULD_CALL_PARENT(TRUE)
-
 /mob/living/carbon/proc/help_shake_act(mob/living/carbon/M)
 	if(!is_asystole())
 		if (on_fire)
@@ -200,6 +197,9 @@
 /mob/proc/throw_item(atom/target)
 	return
 
+/mob/proc/get_throw_verb()
+	return "throws"
+
 /mob/living/carbon/throw_item(atom/target, obj/item/item)
 	src.throw_mode_off()
 	if(src.stat || !target)
@@ -240,7 +240,7 @@
 	if(!item || !isturf(item.loc))
 		return
 
-	var/message = "\The [src] has thrown \the [item]!"
+	var/message = "\The [src] [get_throw_verb()] \the [item]!"
 	var/skill_mod = 0.2
 	if(!skill_check(SKILL_HAULING, min(round(itemsize - ITEM_SIZE_HUGE) + 2, SKILL_MAX)))
 		if(prob(30))
@@ -283,15 +283,6 @@
 /mob/living/carbon/restrained()
 	return get_equipped_item(slot_handcuffed_str)
 
-/mob/living/carbon/u_equip(obj/item/W)
-	. = ..()
-	if(!. && W == get_equipped_item(slot_handcuffed_str))
-		_handcuffed = null
-		update_inv_handcuffed()
-		if(buckled && buckled.buckle_require_restraints)
-			buckled.unbuckle_mob()
-		return TRUE
-
 /mob/living/carbon/verb/mob_sleep()
 	set name = "Sleep"
 	set category = "IC"
@@ -310,31 +301,6 @@
 		playsound(loc, 'sound/misc/slip.ogg', 50, 1, -3)
 		SET_STATUS_MAX(src, STAT_WEAK, stun_duration)
 		. = TRUE
-
-/mob/living/carbon/show_inv(mob/user)
-	user.set_machine(src)
-	var/obj/item/mask = get_equipped_item(slot_wear_mask_str)
-	var/dat = {"
-	<B><HR><FONT size=3>[name]</FONT></B>
-	<BR><HR>
-	<BR><B>Head(Mask):</B> <A href='?src=\ref[src];item=mask'>[(mask ? mask : "Nothing")]</A>"}
-
-	for(var/hand_slot in held_item_slots)
-		var/obj/item/organ/external/E = GET_EXTERNAL_ORGAN(src, hand_slot)
-		if(E)
-			var/datum/inventory_slot/inv_slot = held_item_slots[hand_slot]
-			dat += "<BR><b>[capitalize(E.name)]:</b> <A href='?src=\ref[src];item=[hand_slot]'>[inv_slot.holding?.name || "nothing"]</A>"
-
-	var/obj/item/back = get_equipped_item(slot_back_str)
-	dat += {"<BR><B>Back:</B> <A href='?src=\ref[src];item=back'>[(back || "Nothing")]</A> [((istype(mask, /obj/item/clothing/mask) && istype(back, /obj/item/tank) && !( internal )) ? text(" <A href='?src=\ref[];item=internal'>Set Internal</A>", src) : "")]
-	<BR>[(internal ? text("<A href='?src=\ref[src];item=internal'>Remove Internal</A>") : "")]
-	<BR><A href='?src=\ref[src];item=pockets'>Empty Pockets</A>
-	<BR><A href='?src=\ref[user];refresh=1'>Refresh</A>
-	<BR><A href='?src=\ref[user];mach_close=mob[name]'>Close</A>
-	<BR>"}
-	show_browser(user, dat, text("window=mob[];size=325x500", name))
-	onclose(user, "mob[name]")
-	return
 
 /**
  *  Return FALSE if victim can't be devoured, DEVOUR_FAST if they can be devoured quickly, DEVOUR_SLOW for slow devour
@@ -392,7 +358,7 @@
 	set_hydration(hydration + amt)
 
 /mob/living/carbon/has_dexterity(var/dex_level)
-	. = ..() && (species.get_manual_dexterity() >= dex_level)
+	. = ..() && (species?.get_manual_dexterity() >= dex_level)
 
 /mob/living/carbon/fluid_act(var/datum/reagents/fluids)
 	var/saturation =  min(fluids.total_volume, round(mob_size * 1.5 * reagent_permeability()) - touching.total_volume)

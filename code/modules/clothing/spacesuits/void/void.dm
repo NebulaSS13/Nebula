@@ -198,7 +198,7 @@ else if(##equipment_var) {\
 	if(!istype(H)) return
 	if(H.incapacitated()) return
 	var/slot = H.get_equipped_slot_for_item(src)
-	if(slot != slot_wear_suit_str && !(slot in H.held_item_slots))
+	if(slot != slot_wear_suit_str && !(slot in H.get_held_item_slot_strings()))
 		return// let them eject those tanks when they're in hand or stuff for ease of use
 
 	to_chat(H, "<span class='info'>You press the emergency release, ejecting \the [tank] from your suit.</span>")
@@ -206,40 +206,43 @@ else if(##equipment_var) {\
 	H.drop_from_inventory(tank, src)
 	H.put_in_hands(tank)
 	src.tank = null
+
 	playsound(loc, 'sound/effects/spray3.ogg', 50)
 
-/obj/item/clothing/suit/space/void/attackby(obj/item/W, mob/user)
+/obj/item/clothing/suit/space/void/proc/try_remove_component(mob/user, obj/item/W)
+	set waitfor = FALSE
+	var/choice = input("What component would you like to remove?") as null|anything in list(helmet,boots,tank)
+	if(!choice || QDELETED(user) || QDELETED(W) || W.loc != user || user.incapacitated() || !user.Adjacent(src))
+		return
+	playsound(loc, 'sound/items/Screwdriver.ogg', 50)
+	if(choice)
+		if(choice == tank)	//No, a switch doesn't work here. Sorry. ~Techhead
+			to_chat(user, "You pop \the [tank] out of \the [src]'s storage compartment.")
+			tank = null
+		else if(choice == helmet)
+			to_chat(user, "You detatch \the [helmet] from \the [src]'s helmet mount.")
+			helmet = null
+		else if(choice == boots)
+			to_chat(user, "You detatch \the [boots] from \the [src]'s boot mounts.")
+			boots = null
+		user.put_in_hands(choice)
 
-	if(!istype(user,/mob/living)) return
+/obj/item/clothing/suit/space/void/attackby(obj/item/W, mob/user)
 
 	if(istype(W,/obj/item/clothing/accessory) || istype(W, /obj/item/hand_labeler))
 		return ..()
 
 	if(IS_SCREWDRIVER(W))
 		if(user.get_equipped_slot_for_item(src) == slot_wear_suit_str)//maybe I should make this into a proc?
-			to_chat(user, "<span class='warning'>You cannot modify \the [src] while it is being worn.</span>")
-			return
+			to_chat(user, SPAN_WARNING("You cannot modify \the [src] while it is being worn."))
+			return TRUE
 
 		if(helmet || boots || tank)
-			var/choice = input("What component would you like to remove?") as null|anything in list(helmet,boots,tank)
-			if(!choice) return
-
-			playsound(loc, 'sound/items/Screwdriver.ogg', 50)
-			if(choice == tank)	//No, a switch doesn't work here. Sorry. ~Techhead
-				to_chat(user, "You pop \the [tank] out of \the [src]'s storage compartment.")
-				user.put_in_hands(tank)
-				src.tank = null
-			else if(choice == helmet)
-				to_chat(user, "You detatch \the [helmet] from \the [src]'s helmet mount.")
-				user.put_in_hands(helmet)
-				src.helmet = null
-			else if(choice == boots)
-				to_chat(user, "You detatch \the [boots] from \the [src]'s boot mounts.")
-				user.put_in_hands(boots)
-				src.boots = null
+			try_remove_component(user, W)
 		else
-			to_chat(user, "\The [src] does not have anything installed.")
-		return
+			to_chat(user, SPAN_WARNING("\The [src] does not have anything installed."))
+		return TRUE
+
 	else if(istype(W,/obj/item/clothing/head/helmet/space))
 		if(user.get_equipped_slot_for_item(src) == slot_wear_suit_str)
 			to_chat(user, "<span class='warning'>You cannot modify \the [src] while it is being worn.</span>")

@@ -1,6 +1,6 @@
 /obj/screen/intent/ascent_nymph
-	icon_state = "intent_devour"
-	screen_loc = ANYMPH_SCREEN_LOC_INTENT
+	icon_state = "intent_hurt"
+	screen_loc = "RIGHT-2:28,BOTTOM:5"
 
 /obj/screen/intent/ascent_nymph/on_update_icon()
 	if(intent == I_HURT || intent == I_GRAB)
@@ -10,27 +10,18 @@
 		intent = I_DISARM
 		icon_state = "intent_help"
 
-/obj/screen/ascent_nymph_held
-	name = "held item"
-	screen_loc =  ANYMPH_SCREEN_LOC_HELD
-	icon_state = "held"
-
-/obj/screen/ascent_nymph_held/Click()
-	var/mob/living/carbon/alien/ascent_nymph/nymph = usr
-	if(istype(nymph) && nymph.holding_item) nymph.unEquip(nymph.holding_item)
-
 /obj/screen/ascent_nymph_molt
 	name = "molt"
 	icon = 'icons/obj/action_buttons/organs.dmi'
-	screen_loc =  ANYMPH_SCREEN_LOC_MOLT
+	screen_loc =  "RIGHT-1:28,BOTTOM:5"
 	icon_state = "molt-on"
 
 /obj/screen/ascent_nymph_molt/Click()
 	var/mob/living/carbon/alien/ascent_nymph/nymph = usr
-	if(istype(nymph)) nymph.molt()
+	if(istype(nymph))
+		nymph.molt()
 
 /datum/hud/ascent_nymph
-	var/obj/screen/ascent_nymph_held/held
 	var/obj/screen/ascent_nymph_molt/molt
 	var/obj/screen/food/food
 	var/obj/screen/drink/drink
@@ -46,18 +37,16 @@
 
 /datum/hud/ascent_nymph/FinalizeInstantiation()
 
+
 	var/ui_style = get_ui_style()
 	var/ui_color = get_ui_color()
 	var/ui_alpha = get_ui_alpha()
 
-	src.adding = list()
-	src.other = list()
+	adding = list()
+	hotkeybuttons = list()
 
-	held = new
-	held.icon =  ui_style
-	held.color = ui_color
-	held.alpha = ui_alpha
-	adding += held
+	action_intent = new /obj/screen/intent/ascent_nymph()
+	adding += action_intent
 
 	molt = new
 	molt.icon =  ui_style
@@ -80,18 +69,36 @@
 	drink.screen_loc = ui_nutrition_small
 	adding += drink
 
-	action_intent = new /obj/screen/intent/ascent_nymph()
-	action_intent.icon =  ui_style
-	action_intent.color = ui_color
-	action_intent.alpha = ui_alpha
-	adding += action_intent
 
 	mymob.healths = new /obj/screen()
-	mymob.healths.icon =  ui_style
-	mymob.healths.color = ui_color
-	mymob.healths.alpha = ui_alpha
+	mymob.healths.icon = ui_style
+	mymob.healths.icon_state = "health0"
 	mymob.healths.SetName("health")
-	mymob.healths.screen_loc = ANYMPH_SCREEN_LOC_HEALTH
+	mymob.healths.screen_loc = "RIGHT-1:28,CENTER-1:24"
+	adding += mymob.healths
 
-	mymob.client.screen = list(mymob.healths)
-	mymob.client.screen += src.adding + src.other
+	mymob.throw_icon = new /obj/screen()
+	mymob.throw_icon.icon_state = "act_throw_off"
+	mymob.throw_icon.SetName("throw")
+	mymob.throw_icon.screen_loc = "RIGHT-1:28,BOTTOM+1:5"
+	mymob.throw_icon.icon = ui_style
+	mymob.throw_icon.color = ui_color
+	mymob.throw_icon.alpha = ui_alpha
+
+	hotkeybuttons += mymob.throw_icon
+	adding += mymob.throw_icon
+
+	var/obj/screen/drop = new()
+	drop.SetName("drop")
+	drop.icon_state = "act_drop"
+	drop.screen_loc = "RIGHT-1:28,BOTTOM+1:5"
+	drop.icon = ui_style
+	drop.color = ui_color
+	drop.alpha = ui_alpha
+	hotkeybuttons += drop
+	adding += drop
+
+	BuildInventoryUI()
+	BuildHandsUI()
+
+	mymob.client.screen = adding | hotkeybuttons | hand_hud_objects | swaphand_hud_objects

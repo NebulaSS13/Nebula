@@ -723,6 +723,8 @@ default behaviour is:
 			add_overlay(A)
 
 /mob/living/Destroy()
+	clear_inventory_slots()
+	. = ..()
 	if(auras)
 		for(var/a in auras)
 			remove_aura(a)
@@ -1081,4 +1083,3 @@ default behaviour is:
 
 /mob/living/get_speech_bubble_state_modifier()
 	return isSynthetic() ? "synth" : ..()
-

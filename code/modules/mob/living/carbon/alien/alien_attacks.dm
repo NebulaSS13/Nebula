@@ -1,8 +1,3 @@
-//can't equip anything
-/mob/living/carbon/alien/attack_ui(slot_id)
-	return
-
-
 /mob/living/carbon/alien/default_help_interaction(mob/user)
 	. = ..()
 	if(!.)

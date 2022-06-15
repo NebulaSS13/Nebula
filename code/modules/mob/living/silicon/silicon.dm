@@ -92,11 +92,6 @@
 /mob/living/silicon/proc/show_laws()
 	return
 
-/mob/living/silicon/drop_item(var/Target)
-	for(var/obj/item/grab/grab in get_active_grabs())
-		qdel(grab)
-		. = TRUE
-
 /mob/living/silicon/emp_act(severity)
 	switch(severity)
 		if(1)

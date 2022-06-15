@@ -1,6 +1,10 @@
 /obj/screen/intent/diona_nymph
-	icon_state = "intent_devour"
-	screen_loc = DIONA_SCREEN_LOC_INTENT
+	icon_state = "intent_help"
+	screen_loc = "RIGHT-1:5,BOTTOM:5"
+
+/obj/screen/intent/diona_nymph/Initialize()
+	. = ..()
+	update_icon()
 
 /obj/screen/intent/diona_nymph/on_update_icon()
 	if(intent == I_HURT || intent == I_GRAB)
@@ -10,27 +14,7 @@
 		intent = I_DISARM
 		icon_state = "intent_help"
 
-/obj/screen/diona_hat
-	name = "equipped hat"
-	screen_loc = DIONA_SCREEN_LOC_HAT
-	icon_state = "hat"
 
-/obj/screen/diona_hat/Click()
-	var/datum/extension/hattable/hattable = get_extension(usr, /datum/extension/hattable)
-	hattable?.drop_hat(usr)
-
-/obj/screen/diona_held
-	name = "held item"
-	screen_loc =  DIONA_SCREEN_LOC_HELD
-	icon_state = "held"
-
-/obj/screen/diona_held/Click()
-	var/mob/living/carbon/alien/diona/chirp = usr
-	if(istype(chirp) && chirp.holding_item) chirp.unEquip(chirp.holding_item)
-
-/datum/hud/diona_nymph
-	var/obj/screen/diona_hat/hat
-	var/obj/screen/diona_held/held
 
 /datum/hud/diona_nymph/get_ui_style()
 	return 'mods/mobs/dionaea/icons/ui.dmi'
@@ -43,24 +27,13 @@
 
 /datum/hud/diona_nymph/FinalizeInstantiation()
 
+
 	var/ui_style = get_ui_style()
 	var/ui_color = get_ui_color()
 	var/ui_alpha = get_ui_alpha()
 
-	src.adding = list()
-	src.other = list()
-
-	hat = new
-	hat.icon =  ui_style
-	hat.color = ui_color
-	hat.alpha = ui_alpha
-	adding += hat
-
-	held = new
-	held.icon =  ui_style
-	held.color = ui_color
-	held.alpha = ui_alpha
-	adding += held
+	adding = list()
+	hotkeybuttons = list()
 
 	action_intent = new /obj/screen/intent/diona_nymph()
 	action_intent.icon =  ui_style
@@ -69,12 +42,34 @@
 	adding += action_intent
 
 	mymob.healths = new /obj/screen()
-	mymob.healths.icon =  ui_style
-	mymob.healths.color = ui_color
-	mymob.healths.alpha = ui_alpha
+	mymob.healths.icon = ui_style
 	mymob.healths.icon_state = "health0"
 	mymob.healths.SetName("health")
-	mymob.healths.screen_loc = DIONA_SCREEN_LOC_HEALTH
+	mymob.healths.screen_loc = "RIGHT-1:5,CENTER-1:13"
+	adding += mymob.healths
 
-	mymob.client.screen = list(mymob.healths)
-	mymob.client.screen += src.adding + src.other
+	mymob.throw_icon = new /obj/screen()
+	mymob.throw_icon.icon_state = "act_throw_off"
+	mymob.throw_icon.SetName("throw")
+	mymob.throw_icon.screen_loc = "RIGHT-1:5,BOTTOM+1:5"
+	mymob.throw_icon.icon = ui_style
+	mymob.throw_icon.color = ui_color
+	mymob.throw_icon.alpha = ui_alpha
+
+	hotkeybuttons += mymob.throw_icon
+	adding += mymob.throw_icon
+
+	var/obj/screen/drop = new()
+	drop.SetName("drop")
+	drop.icon_state = "act_drop"
+	drop.screen_loc = "RIGHT-1:5,BOTTOM+1:5"
+	drop.icon = ui_style
+	drop.color = ui_color
+	drop.alpha = ui_alpha
+	hotkeybuttons += drop
+	adding += drop
+
+	BuildInventoryUI()
+	BuildHandsUI()
+
+	mymob.client.screen = adding | hotkeybuttons | hand_hud_objects | swaphand_hud_objects

@@ -24,11 +24,6 @@
 #define ui_id "LEFT+3:12,BOTTOM:5"
 #define ui_belt "LEFT+4:14,BOTTOM:5"
 #define ui_back "CENTER-2:14,BOTTOM:5"
-#define ui_rhand "CENTER-1:16,BOTTOM:5"
-#define ui_lhand "CENTER:16,BOTTOM:5"
-#define ui_equip "CENTER-1:16,BOTTOM+1:5"
-#define ui_swaphand1 "CENTER-1:16,BOTTOM+1:5"
-#define ui_swaphand2 "CENTER:16,BOTTOM+1:5"
 #define ui_storage1 "CENTER+1:16,BOTTOM:5"
 #define ui_storage2 "CENTER+2:16,BOTTOM:5"
 
@@ -111,8 +106,6 @@
 #define ui_disarm_small "RIGHT-3:15,BOTTOM:18"
 #define ui_grab_small "RIGHT-3:32,BOTTOM:18"
 #define ui_harm_small "RIGHT-3:39,BOTTOM:1"
-
-//#define ui_swapbutton "6:-16,1:5" //Unused
 
 //#define ui_headset "BOTTOM,8"
 #define ui_hand "CENTER-1:14,BOTTOM:5"

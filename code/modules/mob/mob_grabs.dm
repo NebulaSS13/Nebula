@@ -12,6 +12,8 @@
 	return
 /mob/proc/get_organs()
 	return
+/mob/proc/has_organ(organ_tag)
+	return
 // End grab casting stubs.
 
 /mob/can_be_grabbed(var/mob/grabber, var/target_zone)
@@ -36,15 +38,16 @@
 	set waitfor = FALSE
 
 /mob/proc/add_grab(var/obj/item/grab/grab, var/defer_hand = FALSE)
-	return FALSE
+	if(defer_hand)
+		return put_in_hands(grab)
+	return put_in_active_hand(grab)
 
 /mob/proc/ProcessGrabs()
 	return
 
 /mob/proc/get_active_grabs()
-	. = list()
-	for(var/obj/item/grab/grab in contents)
-		. += grab
+	for(var/obj/item/grab/grab in get_held_items())
+		LAZYADD(., grab)
 
 /mob/get_object_size()
 	return mob_size

@@ -24,7 +24,6 @@
 #include "mob\nymph_life.dm"
 #include "mob\nymph_ui.dm"
 #include "mob\nymph_update_icons.dm"
-#include "mob\~diona.dm"
 #include "mob\gestalt\_gestalt.dm"
 #include "mob\gestalt\gestalt_attacks.dm"
 #include "mob\gestalt\gestalt_movement.dm"

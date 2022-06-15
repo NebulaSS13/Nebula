@@ -1,9 +1,3 @@
-/mob/living/carbon/human/add_grab(var/obj/item/grab/grab, var/defer_hand = FALSE)
-	if(defer_hand)
-		. = put_in_hands(grab)
-	else
-		. = put_in_active_hand(grab)
-
 /mob/living/carbon/human/can_be_grabbed(var/mob/grabber, var/target_zone, var/defer_hand = FALSE)
 	. = ..()
 	if(.)

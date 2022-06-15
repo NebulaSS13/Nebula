@@ -496,10 +496,6 @@
 /mob/living/simple_animal/get_speech_ending(verb, var/ending)
 	return verb
 
-/mob/living/simple_animal/put_in_hands(var/obj/item/W) // No hands.
-	W.forceMove(get_turf(src))
-	return 1
-
 // Harvest an animal's delicious byproducts
 /mob/living/simple_animal/proc/harvest(var/mob/user, var/skill_level)
 	var/actual_meat_amount = round(max(1,(meat_amount / 2) + skill_level / 2))
@@ -619,5 +615,10 @@
 		return TRUE
 	return FALSE
 
+// This might not be needed, the chain is unclear currently
+/mob/living/simple_animal/can_use_held_item(var/obj/item/held)
+	return get_natural_weapon() == held || ..()
+
 /mob/living/simple_animal/get_speech_bubble_state_modifier()
 	return ..() || "rough"
+

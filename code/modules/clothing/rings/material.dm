@@ -7,15 +7,19 @@
 		desc = "A ring made from [material.solid_name]."
 		color = material.color
 
+/obj/item/clothing/ring/material/proc/try_engrave(var/mob/user, var/obj/item/engraving)
+	set waitfor = FALSE
+	var/inscription = sanitize(input("Enter an inscription to engrave.", "Inscription") as null|text)
+	if(!inscription || user.incapacitated() || !user.Adjacent(src) || QDELETED(engraving) || QDELETED(user) || engraving.loc != user)
+		return
+	to_chat(user, SPAN_WARNING("You carve \"[inscription]\" into \the [src]."))
+	desc = "A ring made from [material.solid_name].<br>Written on \the [src] is the inscription \"[inscription]\""
+
 /obj/item/clothing/ring/material/attackby(var/obj/item/S, var/mob/user)
 	if(S.sharp)
-		var/inscription = sanitize(input("Enter an inscription to engrave.", "Inscription") as null|text)
-		if(!user.stat && !user.incapacitated() && user.Adjacent(src) && S.loc == user)
-			if(!inscription)
-				return
-			desc = "A ring made from [material.solid_name]."
-			to_chat(user, "<span class='warning'>You carve \"[inscription]\" into \the [src].</span>")
-			desc += "<br>Written on \the [src] is the inscription \"[inscription]\""
+		try_engrave(user, S)
+		return TRUE
+	return ..()
 
 /obj/item/clothing/ring/material/OnTopic(var/mob/user, var/list/href_list)
 	if(href_list["examine"])

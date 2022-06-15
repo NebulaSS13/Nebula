@@ -47,3 +47,9 @@
 	var/list/chem_doses
 	var/last_pain_message
 	var/next_pain_time = 0
+
+	// Inventory lists/tracking vars.
+	var/held_item_slot_selected
+	var/list/inventory_slots        // Associative list of slot to datum.
+	var/list/held_item_slot_strings // Linear list of held item slots. Does not store datums.
+	var/pending_hand_rebuild

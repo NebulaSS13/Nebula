@@ -179,13 +179,6 @@
 	if(severity == 1)
 		qdel(src)
 
-/mob/living/slime/u_equip(obj/item/W)
-	SHOULD_CALL_PARENT(FALSE)
-	return FALSE
-
-/mob/living/slime/attack_ui(slot)
-	return
-
 /decl/status_condition/confused/handle_changed_amount(mob/living/victim, new_amount, last_amount)
 	. = ..()
 	if(new_amount != last_amount && isslime(victim))

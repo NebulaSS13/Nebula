@@ -434,11 +434,11 @@
 			held.update_twohanding()
 
 	if(SSticker.mode && (equip_sound || pickup_sound))
-		if((slot_flags & global.slot_flags_enumeration[slot]) && equip_sound)
+		if((slot in user.get_inventory_slots()) && !(slot in user.get_held_item_slot_strings()) && equip_sound)
 			addtimer(CALLBACK(src, .proc/equipped_sound_callback), 0, (TIMER_OVERRIDE | TIMER_UNIQUE))
 		else if(isliving(user) && pickup_sound)
 			var/mob/living/L = user
-			if(slot in L.held_item_slots)
+			if(slot in L.get_held_item_slot_strings())
 				addtimer(CALLBACK(src, .proc/pickup_sound_callback), 0, (TIMER_OVERRIDE | TIMER_UNIQUE))
 
 	if(user && (z_flags & ZMM_MANGLE_PLANES))
@@ -451,116 +451,43 @@
 /obj/item/proc/equipped_robot(var/mob/user)
 	return
 
-//Defines which slots correspond to which slot flags
-var/global/list/slot_flags_enumeration = list(
-	"[slot_wear_mask_str]" = SLOT_FACE,
-	"[slot_back_str]" = SLOT_BACK,
-	"[slot_wear_suit_str]" = SLOT_OVER_BODY,
-	"[slot_gloves_str]" = SLOT_HANDS,
-	"[slot_shoes_str]" = SLOT_FEET,
-	"[slot_belt_str]" = SLOT_LOWER_BODY,
-	"[slot_glasses_str]" = SLOT_EYES,
-	"[slot_head_str]" = SLOT_HEAD,
-	"[slot_l_ear_str]" = SLOT_EARS,
-	"[slot_r_ear_str]" = SLOT_EARS,
-	"[slot_w_uniform_str]" = SLOT_UPPER_BODY,
-	"[slot_wear_id_str]" = SLOT_ID,
-	"[slot_tie_str]" = SLOT_TIE,
-	)
-
 //the mob M is attempting to equip this item into the slot passed through as 'slot'. Return 1 if it can do this and 0 if it can't.
-//If you are making custom procs but would like to retain partial or complete functionality of this one, include a 'return ..()' to where you want this to happen.
 //Set disable_warning to 1 if you wish it to not give you outputs.
-//Should probably move the bulk of this into mob code some time, as most of it is related to the definition of slots and not item-specific
 //set force to ignore blocking overwear and occupied slots
-/obj/item/proc/mob_can_equip(M, slot, disable_warning = FALSE, force = FALSE)
+/obj/item/proc/mob_can_equip(mob/M, slot, disable_warning = FALSE, force = FALSE)
 
-	if(!slot || !M || !ishuman(M))
+	// Shared/generic requirements checking here.
+	if(!slot || !istype(M) || QDELETED(src) || !M.slot_is_accessible(slot, src, (disable_warning ? null : src)))
 		return FALSE
 
-	var/can_hold = FALSE
-	if(isliving(M) && !isnum(slot))
-		var/mob/living/L = M
-		can_hold = !!LAZYACCESS(L.held_item_slots, slot)
+	// Some slots don't have an associated handler as they are shorthand for various setup functions.
+	if(slot in global.abstract_inventory_slots)
 
-	//First check if the item can be equipped to the desired slot.
-	var/list/mob_equip = list()
-	var/mob/living/carbon/human/H = M
-	if(!can_hold)
-		if(H.species.hud && H.species.hud.equip_slots)
-			mob_equip = H.species.hud.equip_slots
-		if(H.species && !(slot in mob_equip))
-			return FALSE
-		var/associated_slot = global.slot_flags_enumeration[slot]
-		if(!isnull(associated_slot) && !(associated_slot & slot_flags))
-			return 0
+		switch(slot)
 
-	if(!force)
-		//Next check that the slot is free
-		if(H.get_equipped_item(slot))
-			return FALSE
-		//Next check if the slot is accessible.
-		var/mob/_user = disable_warning? null : H
-		if(!H.slot_is_accessible(slot, src, _user))
-			return FALSE
+			// Putting stuff into backpacks.
+			if(slot_in_backpack_str)
+				var/obj/item/storage/backpack/backpack = M.get_equipped_item(slot_back_str)
+				return istype(backpack) && backpack.can_be_inserted(src, M, TRUE)
 
-	//Lastly, check special rules for the desired slot.
-	switch(slot)
-		if(slot_l_ear_str, slot_r_ear_str)
-			if((w_class > ITEM_SIZE_TINY) && !(slot_flags & SLOT_EARS))
-				return FALSE
-		if(slot_belt_str)
-			if(slot == slot_belt_str && (item_flags & ITEM_FLAG_IS_BELT))
-				return TRUE
-			else if(!H.get_equipped_item(slot_w_uniform_str) && (slot_w_uniform_str in H.species.hud?.equip_slots))
+			// Equipping accessories.
+			if(slot_tie_str)
+				// Find something to equip the accessory to.
+				for(var/check_slot in list(slot_w_uniform_str, slot_wear_suit_str))
+					var/obj/item/clothing/check_gear = M.get_equipped_item(check_slot)
+					if(istype(check_gear) && check_gear.can_attach_accessory(src))
+						return TRUE
 				if(!disable_warning)
-					to_chat(H, SPAN_WARNING("You need a jumpsuit before you can attach this [name]."))
+					to_chat(M, SPAN_WARNING("You need to be wearing something you can attach \the [src] to."))
 				return FALSE
-		if(slot_l_store_str, slot_r_store_str)
-			if(!H.get_equipped_item(slot_w_uniform_str) && (slot_w_uniform_str in H.species.hud?.equip_slots))
-				if(!disable_warning)
-					to_chat(H, SPAN_WARNING("You need a jumpsuit before you can attach this [name]."))
-				return FALSE
-			if( w_class > ITEM_SIZE_SMALL && !(slot_flags & SLOT_POCKET) )
-				return FALSE
-			if(get_storage_cost() >= ITEM_SIZE_NO_CONTAINER)
-				return FALSE
-		if(slot_s_store_str)
-			var/obj/item/suit = H.get_equipped_item(slot_wear_suit_str)
-			if(!suit && (slot_wear_suit_str in H.species.hud?.equip_slots))
-				if(!disable_warning)
-					to_chat(H, SPAN_WARNING("You need a suit before you can attach this [name]."))
-				return FALSE
-			if(suit && !suit.allowed)
-				if(!disable_warning)
-					to_chat(usr, SPAN_WARNING("You somehow have a suit with no defined allowed items for suit storage, stop that."))
-				return FALSE
-			if( !(istype(src, /obj/item/modular_computer/pda) || istype(src, /obj/item/pen) || is_type_in_list(src, suit.allowed)) )
-				return FALSE
-		if(slot_handcuffed_str)
-			if(!istype(src, /obj/item/handcuffs))
-				return FALSE
-		if(slot_in_backpack_str) //used entirely for equipping spawned mobs or at round start
-			var/obj/item/storage/backpack/B = H.get_equipped_item(slot_back_str)
-			if(!istype(B) || !B.can_be_inserted(src,M,1))
-				return FALSE
-		if(slot_tie_str)
-			var/obj/item/clothing/under/uniform = H.get_equipped_item(slot_w_uniform_str)
-			var/obj/item/clothing/suit = H.get_equipped_item(slot_wear_suit_str)
-			if((!uniform && (slot_w_uniform_str in H.species.hud?.equip_slots)) && (!suit && (slot_wear_suit_str in H.species.hud?.equip_slots)))
-				if(!disable_warning)
-					to_chat(H, SPAN_WARNING("You need something you can attach \the [src] to."))
-				return FALSE
-			if(istype(uniform) && (slot_w_uniform_str in H.species.hud?.equip_slots))
-				if(!uniform.can_attach_accessory(src))
-					if (!disable_warning)
-						to_chat(H, SPAN_WARNING("You cannot equip \the [src] to \the [uniform]."))
-					return FALSE
-				return TRUE
-			if(suit && (slot_wear_suit_str in H.species.hud?.equip_slots) && !suit.can_attach_accessory(src))
-				if (!disable_warning)
-					to_chat(H, SPAN_WARNING("You cannot equip \the [src] to \the [suit]."))
-				return FALSE
+
+		// Other abstract slots have no business being called here.
+		return FALSE
+
+	// Everything else is handled slot by slot.
+	var/datum/inventory_slot/inv_slot = M.get_inventory_slot(slot)
+	if(!inv_slot || !inv_slot.can_equip_to_slot(M, src, slot, disable_warning, force))
+		return FALSE
 	return TRUE
 
 /obj/item/proc/mob_can_unequip(mob/M, slot, disable_warning = 0)

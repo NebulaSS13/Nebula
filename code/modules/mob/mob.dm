@@ -312,7 +312,85 @@
 		client.perspective = EYE_PERSPECTIVE
 		client.eye = loc
 
-/mob/proc/show_inv(mob/user)
+/mob/proc/show_gear_stripping_window(mob/user)
+	user.set_machine(src)
+	var/list/dat = list()
+	dat += "<center><font size = 3>[name]</font></center><hr>"
+
+	// Equipped and held items.
+	var/list/held_slots = get_held_item_slot_strings()
+	var/list/inventory_strings = list()
+	var/list/held_strings = list()
+
+	dat += "<table width = 420px style = 'border: 0px; padding: 1px;' align = center>"
+
+	for(var/slot in get_inventory_slots())
+		var/datum/inventory_slot/inv_slot = get_inventory_slot(slot)
+		if(inv_slot.skip_on_strip_display)
+			continue
+		var/item_string = "<tr style = 'border: 0px; padding: 1px;'><td width = 120px style = 'border: 0px; padding: 1px;'><b>[capitalize(inv_slot.slot_name)]</b></td><td style = 'border: 0px; padding: 1px;'><a href='?src=\ref[src];item=[inv_slot.slot_id]'>[capitalize(inv_slot.get_equipped_name() || "nothing")]</a></td></tr>"
+		if(slot in held_slots)
+			held_strings += item_string
+		else
+			inventory_strings += item_string
+			var/obj/item/clothing/C = inv_slot.get_equipped_item()
+			if(istype(C) && length(C.accessories))
+				inventory_strings += "<tr style = 'border: 0px; padding: 1px;'><td colspan = 2 align = center style = 'border: 0px; padding: 1px;'><a href='?src=\ref[src];item=tie;holder=\ref[C]'>Remove accessory</a></td></tr>"
+
+	if(length(held_strings))
+		dat += "<tr style = 'border: 0px; padding: 1px;'><th colspan = 2 style = 'border: 0px; padding: 1px;'><b>Held items</b></th></tr>"
+		dat += held_strings
+
+	if(length(inventory_strings))
+		dat += "<tr style = 'border: 0px; padding: 1px;'><th colspan = 2 style = 'border: 0px; padding: 1px;'><b>Equipped items</b></th></tr>"
+		dat += inventory_strings
+
+	// Internals setting.
+	dat += "<tr style = 'border: 0px; padding: 1px;'><th colspan = 2 style = 'border: 0px; padding: 1px;'>Options</th></tr>"
+	for(var/airtight_slot in global.airtight_slots)
+		var/obj/item/clothing/hat = get_equipped_item(airtight_slot)
+		if(hat && (hat.item_flags & ITEM_FLAG_AIRTIGHT))
+			for(var/slot in list(slot_back_str, slot_belt_str, slot_s_store_str))
+				var/obj/item/tank/tank = get_equipped_item(slot)
+				if(istype(tank))
+					dat += "<tr style = 'border: 0px; padding: 1px;'><td colspan = 2 align = center style = 'border: 0px; padding: 1px;'><a href='?src=\ref[src];item=internals'>Toggle internals.</a></td></tr>"
+					break
+			break
+
+	// Sensor setting and pocket clearing.
+	var/obj/item/clothing/under/uniform = get_equipped_item(slot_w_uniform_str)
+	if(uniform)
+		var/l_pocket = get_equipped_item(slot_l_store_str)
+		var/r_pocket = get_equipped_item(slot_l_store_str)
+		if(l_pocket || r_pocket)
+			dat += "<tr style = 'border: 0px; padding: 1px;'><td colspan = 2 align = center style = 'border: 0px; padding: 1px;'><a href='?src=\ref[src];item=empty_pockets'>Empty Pockets</a></td></tr>"
+		if(!l_pocket || !r_pocket)
+			dat += "<tr style = 'border: 0px; padding: 1px;'><td colspan = 2 align = center style = 'border: 0px; padding: 1px;'><a href='?src=\ref[src];item=put_in_pocket'>Place Item In Pocket</a></td></tr>"
+		if(istype(uniform) && uniform.has_sensor)
+			if(uniform.has_sensor == 1)
+				dat += "<tr style = 'border: 0px; padding: 1px;'><td colspan = 2 align = center style = 'border: 0px; padding: 1px;'><a href='?src=\ref[src];item=sensors'>Set sensors</a></td></tr>"
+			if(user.get_multitool())
+				dat += "<tr style = 'border: 0px; padding: 1px;'><td colspan = 2 align = center style = 'border: 0px; padding: 1px;'><a href='?src=\ref[src];item=lock_sensors'>[uniform.has_sensor == SUIT_LOCKED_SENSORS ? "Unlock" : "Lock"] sensors</a></td></tr>"
+
+	// Cuffs.
+	if(get_equipped_item(slot_handcuffed_str))
+		dat += "<tr style = 'border: 0px; padding: 1px;'><td colspan = 2 align = center style = 'border: 0px; padding: 1px;'><a href='?src=\ref[src];item=[slot_handcuffed_str]'>Remove handcuffs</a></td></tr>"
+
+	var/list/additional_options = get_additional_stripping_options()
+	if(length(additional_options))
+		dat += additional_options
+
+	// Misc options.
+	dat += "<tr style = 'border: 0px; padding: 1px;'><td colspan = 2 align = center style = 'border: 0px; padding: 1px;'><a href='?src=\ref[src];refresh=1'>Refresh</a></td></tr>"
+	dat += "<tr style = 'border: 0px; padding: 1px;'><td colspan = 2 align = center style = 'border: 0px; padding: 1px;'><a href='?src=\ref[src];mach_close=mob_\ref[src]'>Close</a></td></tr>"
+	dat += "</table>"
+
+	var/datum/browser/popup = new(user, "mob_\ref[src]", null, 430, 680)
+	popup.set_content(JOINTEXT(dat))
+	popup.open()
+	onclose(user, "mob_\ref[src]")
+
+/mob/proc/get_additional_stripping_options()
 	return
 
 //mob verbs are faster than object verbs. See http://www.byond.com/forum/?post=1326139&page=2#comment8198716 for why this isn't atom/verb/examine()
@@ -479,6 +557,16 @@
 
 // If usr != src, or if usr == src but the Topic call was not resolved, this is called next.
 /mob/OnTopic(mob/user, href_list, datum/topic_state/state)
+
+	if(href_list["refresh"])
+		show_gear_stripping_window(user)
+		return TOPIC_HANDLED
+
+	if(href_list["item"])
+		if(!handle_strip(href_list["item"], user, locate(href_list["holder"])))
+			show_gear_stripping_window(user)
+		return TOPIC_HANDLED
+
 	if(href_list["flavor_more"])
 		var/text = "<HTML><HEAD><TITLE>[name]</TITLE></HEAD><BODY><TT>[replacetext(flavor_text, "\n", "<BR>")]</TT></BODY></HTML>"
 		show_browser(user, text, "window=[name];size=500x200")
@@ -510,7 +598,7 @@
 
 /mob/handle_mouse_drop(atom/over, mob/user)
 	if(over == user && user != src && !istype(user, /mob/living/silicon/ai))
-		show_inv(user)
+		show_gear_stripping_window(user)
 		return TRUE
 	if(!anchored && istype(over, /obj/vehicle/train))
 		var/obj/vehicle/train/beep = over

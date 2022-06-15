@@ -27,6 +27,10 @@
 
 /mob/living/proc/make_grab(var/atom/movable/target, var/grab_tag = /decl/grab/simple, var/defer_hand = FALSE)
 
+	// Get our species grab override if needed.
+	var/decl/species/species = get_species()
+	grab_tag = species?.grab_type || grab_tag
+
 	// Resolve to the 'topmost' atom in the buckle chain, as grabbing someone buckled to something tends to prevent further interaction.
 	var/atom/movable/original_target = target
 	var/mob/grabbing_mob = (ismob(target) && target)
@@ -49,13 +53,6 @@
 			to_chat(original_target, SPAN_WARNING("\The [src] tries to grab you, but fails!"))
 		to_chat(src, SPAN_WARNING("You try to grab \the [target], but fail!"))
 	return grab
-
-/mob/living/add_grab(var/obj/item/grab/grab, var/defer_hand = FALSE)
-	for(var/obj/item/grab/other_grab in contents)
-		if(other_grab != grab)
-			return FALSE
-	grab.forceMove(src)
-	return TRUE
 
 /mob/living/ProcessGrabs()
 	if(LAZYLEN(grabbed_by))
