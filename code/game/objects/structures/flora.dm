@@ -114,6 +114,9 @@
 	protects_against_weather = FALSE
 	stump_type               = /obj/structure/flora/stump/tree/dead
 
+/obj/structure/flora/tree/dead/init_appearance()
+	icon_state = "tree_[rand(1, 6)]"
+
 ////////////////////////////////////////
 // Stumps
 ////////////////////////////////////////
@@ -129,17 +132,6 @@
 /obj/structure/flora/stump/cut_down(obj/item/I, mob/user)
 	if(I.do_tool_interaction(TOOL_SHOVEL, user, src, 8 SECONDS))
 		. = ..()
-	icon_state = "tree_1"
-
-/obj/structure/flora/tree/dead/init_appearance()
-	icon_state = "tree_[rand(1, 6)]"
-
-////////////////////////////////////////
-// Stumps
-////////////////////////////////////////
-/obj/structure/flora/stump
-	name = "stump"
-
 
 //Base tree stump
 /obj/structure/flora/stump/tree
