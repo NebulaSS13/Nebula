@@ -15,6 +15,7 @@ var/global/list/terminal_commands
 	var/skill_needed = SKILL_ADEPT        // How much skill the user needs to use this. This is not for critical failure effects at unskilled; those are handled globally.
 	var/req_access = list()               // Stores access needed, if any
 	var/needs_network					  // If this command fails if computer running terminal isn't connected to a network
+	var/needs_network_feature			  // Network feature flags which are required by this command.
 
 	var/static/regex/nid_regex			  // Regex for getting network addres out of the line
 
@@ -45,6 +46,8 @@ var/global/list/terminal_commands
 		return "[name]: ACCESS DENIED"
 	if(needs_network && !terminal.computer.get_network_status())
 		return "NETWORK ERROR: Check connection and try again."
+	if(needs_network_feature && !terminal.computer.get_network_status(needs_network_feature))
+		return "NETWORK ERROR: Network rejected the use of this command on your current connection."
 
 	return proper_input_entered(text, user, terminal)
 
@@ -574,12 +577,10 @@ Subtypes
 	man_entry = list("Format: com \[alias\] \[value\]", "Calls a command on the current network target for modifying variables or calling methods.")
 	pattern = @"^com"
 	needs_network = TRUE
+	needs_network_feature = NET_FEATURE_SYSTEMCONTROL
 
 /datum/terminal_command/com/proper_input_entered(text, mob/user, datum/terminal/terminal)
 	// If the user is unskilled, call a random method
-	if(!terminal.computer.get_network_status(NET_FEATURE_SYSTEMCONTROL))
-		return "com: The network rejected use of the command on your current connection."
-
 	if(!user.skill_check(core_skill, SKILL_EXPERT))
 		var/target_tag = terminal.network_target
 		if(!target_tag)
@@ -628,11 +629,9 @@ Subtypes
 	pattern = @"^listcom"
 	needs_network = TRUE
 	skill_needed = SKILL_EXPERT
+	needs_network_feature = NET_FEATURE_SYSTEMCONTROL
 
 /datum/terminal_command/listcom/proper_input_entered(text, mob/user, datum/terminal/terminal)
-	if(!terminal.computer.get_network_status(NET_FEATURE_SYSTEMCONTROL))
-		return "listcom: The network rejected use of the command on your current connection."
-
 	var/target_tag = terminal.network_target
 	if(!target_tag)
 		return "listcom: No network target set. Use 'target' to set a network target."
@@ -685,11 +684,9 @@ Subtypes
 	pattern = @"^addcom"
 	needs_network = TRUE
 	skill_needed = SKILL_EXPERT
+	needs_network_feature = NET_FEATURE_SYSTEMCONTROL
 
 /datum/terminal_command/addcom/proper_input_entered(text, mob/user, datum/terminal/terminal)
-	if(!terminal.computer.get_network_status(NET_FEATURE_SYSTEMCONTROL))
-		return "addcom: The network rejected use of the command on your current connection."
-
 	var/list/addcom_args = get_arguments(text)
 	if(!length(addcom_args))
 		return "addcom: Improper syntax, use addcom \[type\] \[alias\]. Accepts types 'METHOD' or 'VARIABLE'"
@@ -722,11 +719,9 @@ Subtypes
 	pattern = @"^modcom"
 	needs_network = TRUE
 	skill_needed = SKILL_PROF // addcom only adds a randomly chosen command to the device - you need to be significantly more skilled to select a specific one remotely.
+	needs_network_feature = NET_FEATURE_SYSTEMCONTROL
 
 /datum/terminal_command/modcom/proper_input_entered(text, mob/user, datum/terminal/terminal)
-	if(!terminal.computer.get_network_status(NET_FEATURE_SYSTEMCONTROL))
-		return "modcom: The network rejected use of the command on your current connection."
-
 	var/list/modcom_args = get_arguments(text)
 	if(!length(modcom_args))
 		return "modcom: Improper syntax, use modcom \[alias\] \[index\].'"
@@ -786,11 +781,9 @@ Subtypes
 	pattern = @"^namecom"
 	needs_network = TRUE
 	skill_needed = SKILL_EXPERT
+	needs_network_feature = NET_FEATURE_SYSTEMCONTROL
 
 /datum/terminal_command/namecom/proper_input_entered(text, mob/user, datum/terminal/terminal)
-	if(!terminal.computer.get_network_status(NET_FEATURE_SYSTEMCONTROL))
-		return "namecom: The network rejected use of the command on your current connection."
-
 	var/list/namecom_args = get_arguments(text)
 	if(length(namecom_args) < 2)
 		return "namecom: Improper syntax, use namecom \[old alias\] \[new alias\]."
@@ -819,11 +812,9 @@ Subtypes
 	pattern = @"^rmcom"
 	needs_network = TRUE
 	skill_needed = SKILL_EXPERT
+	needs_network_feature = NET_FEATURE_SYSTEMCONTROL
 
 /datum/terminal_command/rmcom/proper_input_entered(text, mob/user, datum/terminal/terminal)
-	if(!terminal.computer.get_network_status(NET_FEATURE_SYSTEMCONTROL))
-		return "rmcom: The network rejected use of the command on your current connection."
-
 	var/list/rmcom_args = get_arguments(text)
 	if(!length(rmcom_args))
 		return "rmcom: Improper syntax, use rmcom \[alias\]."
