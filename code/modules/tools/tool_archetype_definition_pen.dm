@@ -21,7 +21,10 @@
 			. = "Anonymous"
 
 /decl/tool_archetype/pen/proc/decrement_uses(var/mob/user, var/obj/item/tool, var/decrement = 1)
-	. = tool.get_tool_property(TOOL_PEN, TOOL_PROP_USES) - decrement
+	. = tool.get_tool_property(TOOL_PEN, TOOL_PROP_USES)
+	if(. < 0)
+		return TRUE
+	. -= decrement
 	tool.set_tool_property(TOOL_PEN, TOOL_PROP_USES, max(0, .)) //Prevent negatives and turning the pen into an infinite uses pen
 	if(. <= 0 && (tool.get_tool_property(TOOL_PEN, TOOL_PROP_PEN_FLAG) & PEN_FLAG_DEL_EMPTY))
 		qdel(tool)
@@ -33,7 +36,8 @@
 		tool.toggle()
 
 /decl/tool_archetype/pen/can_use_tool(obj/item/tool, expend_fuel = 1)
-	return ..() && (tool.get_tool_property(TOOL_PEN, TOOL_PROP_USES) - expend_fuel) >= 0
+	var/uses = tool.get_tool_property(TOOL_PEN, TOOL_PROP_USES)
+	return ..() && ((uses < 0) || (uses - expend_fuel) >= 0)
 
 /decl/tool_archetype/pen/handle_pre_interaction(mob/user, obj/item/tool, expend_fuel = 1)
 	var/uses_left = tool.get_tool_property(TOOL_PEN, TOOL_PROP_USES)
