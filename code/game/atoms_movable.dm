@@ -202,19 +202,19 @@
 		if(isturf(loc))
 			buckled_mob.glide_size = glide_size // Setting loc apparently does animate with glide size.
 			buckled_mob.forceMove(loc)
-			refresh_buckled_mob()
+			refresh_buckled_mob(0)
 		else
 			unbuckle_mob()
 
 /atom/movable/set_dir(ndir)
 	. = ..()
 	if(.)
-		refresh_buckled_mob()
+		refresh_buckled_mob(0)
 
-/atom/movable/proc/refresh_buckled_mob()
+/atom/movable/proc/refresh_buckled_mob(var/delay_offset_anim = 4)
 	if(buckled_mob)
 		buckled_mob.set_dir(buckle_dir || dir)
-		buckled_mob.reset_offsets(4)
+		buckled_mob.reset_offsets(delay_offset_anim)
 		buckled_mob.reset_plane_and_layer()
 
 /atom/movable/Move(...)
@@ -229,7 +229,7 @@
 			if(isturf(loc))
 				buckled_mob.glide_size = glide_size // Setting loc apparently does animate with glide size.
 				buckled_mob.forceMove(loc)
-				refresh_buckled_mob()
+				refresh_buckled_mob(0)
 			else
 				unbuckle_mob()
 

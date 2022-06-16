@@ -41,9 +41,7 @@
 		addtimer(CALLBACK(src, .proc/announce_conflict, notadded), 5 SECONDS)
 
 /datum/preferences/proc/announce_conflict(list/notadded)
-	to_chat(client, SPAN_DANGER("KEYBINDING CONFLICT.\n\
-	There are new keybindings that have defaults bound to keys you already set, They will default to Unbound. You can bind them in Setup Character or Game Preferences\n\
-	<a href='?src=\ref[src];preference=tab;tab=3'>Or you can click here to go straight to the keybindings page.</a>"))
+	to_chat(client, SPAN_DANGER("There are new keybindings that have defaults that are already bound - the new keybindings will be unbound until updated. You can rebind them in Setup Character or Game Preferences."))
 	for(var/item in notadded)
 		var/datum/keybinding/conflicted = item
 		to_chat(client, SPAN_DANGER("[conflicted.category]: [conflicted.full_name] needs updating."))
