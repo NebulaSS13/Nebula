@@ -871,17 +871,20 @@ var/global/list/allCasters = list() //Global list that will contain reference to
 		if(!CanPhysicallyInteractWith(user, src))
 			return
 		if(src.scribble_page == src.curr_page)
-			to_chat(user, "<FONT COLOR='blue'>There's already a scribble in this page... You wouldn't want to make things too cluttered, would you?</FONT>")
+			to_chat(user, SPAN_WARNING("There's already a scribble in this page... You wouldn't want to make things too cluttered, would you?"))
+			return TRUE
 		else
-			var/s = sanitize(input(user, "Write something", "Newspaper", ""))
-			if (!s)
-				return
-			if(W.do_tool_interaction(TOOL_PEN, user, src, 0, fuel_expenditure = 1)) //Make it instant, since handle_writing_literacy does the waiting
-				s = user.handle_writing_literacy(user, sanitize(s))
+			var/s = input(user, "Write something", "Newspaper")
+			if(length(s) && W.do_tool_interaction(TOOL_PEN, user, src, 0, fuel_expenditure = 1) && !QDELETED(src)) //Make it instant, since handle_writing_literacy does the waiting
+				s = sanitize(s)
+				s = user.handle_writing_literacy(user, s)
 				src.scribble_page = src.curr_page
 				src.scribble = s
 				src.attack_self(user)
-		return
+			else 
+				to_chat(user, SPAN_NOTICE("You decide against it."))
+			return TRUE
+	return ..()
 
 ////////////////////////////////////helper procs
 
