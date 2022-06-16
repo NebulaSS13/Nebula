@@ -339,9 +339,6 @@
 	matter = null
 	create_matter()
 
-/obj/item/organ/proc/mechassist() //Used to add things like pacemakers, etc
-	BP_SET_ASSISTED(src) //Can't be assisted and prosthetic at the same time
-
 /obj/item/organ/attack(var/mob/target, var/mob/user)
 	if(BP_IS_PROSTHETIC(src) || !istype(target) || !istype(user) || (user != target && user.a_intent == I_HELP))
 		return ..()
