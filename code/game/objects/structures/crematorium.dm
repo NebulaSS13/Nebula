@@ -91,21 +91,12 @@
 		return attack_hand(user)
 
 /obj/structure/crematorium/attackby(obj/item/P, mob/user)
-	if(IS_PEN(P))
-		var/new_label = sanitize_safe(input(user, "What would you like the label to be?", capitalize(name), null) as text|null, MAX_NAME_LEN)
-
-		if((!Adjacent(user) || loc == user))
-			return
-		
-		if(has_extension(src, /datum/extension/labels))
-			var/datum/extension/labels/L = get_extension(src, /datum/extension/labels)
-			if(!L.CanAttachLabel(user, new_label))
-				return
-		
-		attach_label(user, P, new_label)
-		return
-	else 
-		return ..()
+	if(IS_PEN(P) && CanPhysicallyInteractWith(user, src))
+		var/new_label = sanitize_safe(input(user, "What would you like the label to be?", capitalize(name)), MAX_NAME_LEN)
+		if(length(new_label))
+			attach_label(user, P, new_label)
+		return TRUE
+	return ..()
 
 /obj/structure/crematorium/relaymove(mob/user)
 	if(user.incapacitated() || locked)
