@@ -8012,7 +8012,7 @@
 "vr" = (
 /obj/machinery/computer/arcade,
 /obj/structure/noticeboard{
-	pixel_y = 32
+	default_pixel_y = 32
 	},
 /turf/simulated/floor/tiled,
 /area/ministation/cafe)

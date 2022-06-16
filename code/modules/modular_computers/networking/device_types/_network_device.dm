@@ -132,7 +132,7 @@
 /datum/extension/network_device/proc/set_new_id(new_id, user)
 	var/list/networks = get_nearby_networks()
 	if(new_id in networks)
-		if(!SSnetworking[network_id]) // old network is down, so we should unqueue from its reconnect list
+		if(!SSnetworking.networks[network_id]) // old network is down, so we should unqueue from its reconnect list
 			SSnetworking.unqueue_reconnect(src, network_id)
 		disconnect()
 		network_id = new_id

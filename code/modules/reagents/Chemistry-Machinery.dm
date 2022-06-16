@@ -15,6 +15,9 @@
 	uncreated_component_parts = null
 	stat_immune = 0
 	base_type = /obj/machinery/chem_master
+	atom_flags = ATOM_FLAG_OPEN_CONTAINER
+	core_skill = SKILL_CHEMISTRY
+
 	var/obj/item/chems/beaker = null
 	var/obj/item/storage/pill_bottle/loaded_pill_bottle = null
 	var/mode = 0
@@ -23,8 +26,6 @@
 	var/pillsprite = "1"
 	var/client/has_sprites = list()
 	var/max_pill_count = 20
-	atom_flags = ATOM_FLAG_OPEN_CONTAINER
-	core_skill = SKILL_CHEMISTRY
 	var/sloppy = 1 //Whether reagents will not be fully purified (sloppy = 1) or there will be reagent loss (sloppy = 0) on reagent add.
 	var/reagent_limit = 120
 	var/bottle_label_color = COLOR_WHITE
@@ -41,27 +42,31 @@
 
 	if(istype(B, /obj/item/chems/glass))
 
-		if(src.beaker)
-			to_chat(user, "A beaker is already loaded into the machine.")
+		if(beaker)
+			to_chat(user, SPAN_WARNING("A beaker is already loaded into the machine."))
 			return
 		if(!user.unEquip(B, src))
 			return
-		src.beaker = B
-		to_chat(user, "You add the beaker to the machine!")
-		src.updateUsrDialog()
+		beaker = B
+		to_chat(user, SPAN_NOTICE("You add the beaker to the machine!"))
+		updateUsrDialog()
 		icon_state = "mixer1"
 		return TRUE
 
-	else if(istype(B, /obj/item/storage/pill_bottle))
+	if(istype(B, /obj/item/chems))
+		to_chat(user, SPAN_WARNING("\The [src] will only accept beakers."))
+		return TRUE
 
-		if(src.loaded_pill_bottle)
-			to_chat(user, "A pill bottle is already loaded into the machine.")
+	if(istype(B, /obj/item/storage/pill_bottle))
+
+		if(loaded_pill_bottle)
+			to_chat(user, SPAN_WARNING("A pill bottle is already loaded into the machine."))
 			return
 		if(!user.unEquip(B, src))
 			return
-		src.loaded_pill_bottle = B
-		to_chat(user, "You add the pill bottle into the dispenser slot!")
-		src.updateUsrDialog()
+		loaded_pill_bottle = B
+		to_chat(user, SPAN_NOTICE("You add the pill bottle into the dispenser slot!"))
+		updateUsrDialog()
 		return TRUE
 	
 	return ..()

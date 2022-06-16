@@ -1393,7 +1393,7 @@
 /obj/item/megaphone,
 /obj/item/megaphone,
 /obj/structure/noticeboard{
-	pixel_x = 32
+	default_pixel_x = 32
 	},
 /turf/unsimulated/floor{
 	dir = 1;

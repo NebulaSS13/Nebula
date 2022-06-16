@@ -22,7 +22,7 @@
 	var/success_up =   "You get a better grip on $rep_affecting$."
 	var/success_down = "You adjust your grip on $rep_affecting$."
 	var/fail_up =      "You can't get a better grip on $rep_affecting$!"
-	var/fail_down =    "You can't seem to shift your grip on $rep_affecting$!"
+	var/fail_down =    "You can't seem to relax your grip on $rep_affecting$!"
 	var/icon
 	var/icon_state
 	var/upgrade_cooldown = 40
@@ -52,26 +52,22 @@
 	return to_write
 
 /decl/grab/proc/upgrade(var/obj/item/grab/G)
-	if(!upgrab)
-		return
-
-	if(can_upgrade(G))
-		upgrade_effect(G)
-		admin_attack_log(G.assailant, G.affecting, "upgraded grab on their victim to [upgrab]", "was grabbed more tightly to [upgrab]", "upgraded grab to [upgrab] on")
+	if(can_upgrade(G) && upgrade_effect(G))
 		return upgrab
-	else
-		to_chat(G.assailant, SPAN_WARNING("[string_process(G, fail_up)]"))
-		return
+	to_chat(G.assailant, SPAN_WARNING("[string_process(G, fail_up)]"))
 
 /decl/grab/proc/downgrade(var/obj/item/grab/G)
-	// Starts the process of letting go if there's no downgrade grab
-	if(can_downgrade())
-		downgrade_effect(G)
+	// If we have no downgrab at all, assume we just drop the grab.
+	if(!downgrab)
+		let_go(G)
+		return
+	if(can_downgrade(G) && downgrade_effect(G))
 		return downgrab
-	else
-		to_chat(G.assailant, SPAN_WARNING("[string_process(G, fail_down)]"))
+	to_chat(G.assailant, SPAN_WARNING("[string_process(G, fail_down)]"))
 
 /decl/grab/proc/let_go(var/obj/item/grab/G)
+	if(G.assailant && G.affecting)
+		to_chat(G.assailant, SPAN_NOTICE("You release \the [G.affecting]."))
 	let_go_effect(G)
 	G.force_drop()
 
@@ -146,18 +142,21 @@
 
 // What happens when you upgrade from one grab state to the next.
 /decl/grab/proc/upgrade_effect(var/obj/item/grab/G)
+	admin_attack_log(G.assailant, G.affecting, "upgraded grab on their victim to [upgrab]", "was grabbed more tightly to [upgrab]", "upgraded grab to [upgrab] on")
+	return TRUE
 
 // Conditions to see if upgrading is possible
 // Only works on mobs.
 /decl/grab/proc/can_upgrade(var/obj/item/grab/G)
-	return !!G.get_affecting_mob()
+	return !!upgrab && !!G.get_affecting_mob()
 
 // What happens when you downgrade from one grab state to the next.
 /decl/grab/proc/downgrade_effect(var/obj/item/grab/G)
+	return TRUE
 
 // Conditions to see if downgrading is possible
 /decl/grab/proc/can_downgrade(var/obj/item/grab/G)
-	return 1
+	return !!downgrab
 
 // What happens when you let go of someone by either dropping the grab
 // or by downgrading from the lowest grab state.

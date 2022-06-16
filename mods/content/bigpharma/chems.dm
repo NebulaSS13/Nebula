@@ -3,9 +3,9 @@
 
 /obj/item/chems/Initialize()
 	. = ..()
-	if(obfuscated_meds_type)
+	// Check area so stuff spawned for reference (atom info repository) isn't obfuscated
+	if(. != INITIALIZE_HINT_QDEL && obfuscated_meds_type && get_area(src))
 		set_extension(src, obfuscated_meds_type)
-	if(. != INITIALIZE_HINT_QDEL)
 		. = INITIALIZE_HINT_LATELOAD
 
 /obj/item/chems/LateInitialize()

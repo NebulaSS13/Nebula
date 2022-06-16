@@ -841,7 +841,7 @@
 /area/constructionsite/hallway/fore)
 "cR" = (
 /obj/structure/noticeboard{
-	pixel_x = 32
+	default_pixel_x = 32
 	},
 /turf/simulated/floor/airless,
 /area/constructionsite/bridge)
