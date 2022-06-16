@@ -83,86 +83,93 @@
 	add_fingerprint(usr)
 	return
 
-/obj/item/clipboard/Topic(href, href_list)
-	..()
-	if((usr.stat || usr.restrained()))
+/obj/item/clipboard/OnTopic(mob/user, href_list, datum/topic_state/state)
+	. = ..()
+
+	if(src.loc != user)
 		return
 
-	if(src.loc == usr)
+	if(href_list["pen"])
+		if(IS_PEN(haspen) && (haspen.loc == src))
+			user.put_in_hands_or_store_or_drop(haspen)
+			haspen = null
 
-		if(href_list["pen"])
-			if(istype(haspen) && (haspen.loc == src))
-				usr.put_in_hands_or_store_or_drop(haspen)
-				haspen = null
+	else if(href_list["addpen"])
+		if(!haspen)
+			var/obj/item/W = user.get_active_hand()
+			
+			//Its pretty likely the current held thing is the clipdboard
+			if(W == src)
+				var/list/held = user.get_held_items()
+				LAZYREMOVE(held, src)
+				for(W in held)
+					if(IS_PEN(W))
+						break //In that case pick the first pen item we're holding
 
-		else if(href_list["addpen"])
-			if(!haspen)
-				var/obj/item/W = usr.get_active_hand()
-				if(IS_PEN(W) && (W.w_class <= ITEM_SIZE_TINY))
-					if(!usr.unEquip(W, src))
-						return
-					haspen = W
-					to_chat(usr, SPAN_NOTICE("You slot the pen into \the [src]."))
+			if(IS_PEN(W) && (W.w_class <= ITEM_SIZE_TINY))
+				if(!user.unEquip(W, src))
+					return
+				haspen = W
+				to_chat(user, SPAN_NOTICE("You slot the pen into \the [src]."))
 
-		else if(href_list["write"])
-			var/obj/item/P = locate(href_list["write"])
-			if(P && (P.loc == src) && istype(P, /obj/item/paper) && (P == toppaper) )
-				var/obj/item/I = usr.get_active_hand()
-				if(IS_PEN(I))
-					P.attackby(I, usr)
+	else if(href_list["write"])
+		var/obj/item/P = locate(href_list["write"])
+		if(P && (P.loc == src) && istype(P, /obj/item/paper) && (P == toppaper) )
+			var/obj/item/I = user.get_active_hand()
+			if(IS_PEN(I))
+				P.attackby(I, user)
 
-		else if(href_list["remove"])
-			var/obj/item/P = locate(href_list["remove"])
+	else if(href_list["remove"])
+		var/obj/item/P = locate(href_list["remove"])
 
-			if(P && (P.loc == src) && (istype(P, /obj/item/paper) || istype(P, /obj/item/photo)) )
-				usr.put_in_hands_or_store_or_drop(P)
-				if(P == toppaper)
-					toppaper = null
-					var/obj/item/paper/newtop = locate(/obj/item/paper) in src
-					if(newtop && (newtop != P))
-						toppaper = newtop
-					else
-						toppaper = null
-
-		else if(href_list["rename"])
-			var/obj/item/O = locate(href_list["rename"])
-
-			if(O && (O.loc == src))
-				if(istype(O, /obj/item/paper))
-					var/obj/item/paper/to_rename = O
-					to_rename.rename()
-
-				else if(istype(O, /obj/item/photo))
-					var/obj/item/photo/to_rename = O
-					to_rename.rename()
-
-		else if(href_list["read"])
-			var/obj/item/paper/P = locate(href_list["read"])
-
-			if(P && (P.loc == src) && istype(P, /obj/item/paper) )
-
-				if(!(istype(usr, /mob/living/carbon/human) || isghost(usr) || istype(usr, /mob/living/silicon)))
-					show_browser(usr, "<HTML><HEAD><TITLE>[P.name]</TITLE></HEAD><BODY>[stars(P.info)][P.stamps]</BODY></HTML>", "window=[P.name]")
-					onclose(usr, "[P.name]")
+		if(P && (P.loc == src) && (istype(P, /obj/item/paper) || istype(P, /obj/item/photo)) )
+			user.put_in_hands_or_store_or_drop(P)
+			if(P == toppaper)
+				toppaper = null
+				var/obj/item/paper/newtop = locate(/obj/item/paper) in src
+				if(newtop && (newtop != P))
+					toppaper = newtop
 				else
-					show_browser(usr, "<HTML><HEAD><TITLE>[P.name]</TITLE></HEAD><BODY>[P.info][P.stamps]</BODY></HTML>", "window=[P.name]")
-					onclose(usr, "[P.name]")
+					toppaper = null
 
-		else if(href_list["look"])
-			var/obj/item/photo/P = locate(href_list["look"])
-			if(P && (P.loc == src) && istype(P, /obj/item/photo) )
-				P.show(usr)
+	else if(href_list["rename"])
+		var/obj/item/O = locate(href_list["rename"])
 
-		else if(href_list["top"]) // currently unused
-			var/obj/item/P = locate(href_list["top"])
-			if(P && (P.loc == src) && istype(P, /obj/item/paper) )
-				toppaper = P
-				to_chat(usr, "<span class='notice'>You move [P.name] to the top.</span>")
+		if(O && (O.loc == src))
+			if(istype(O, /obj/item/paper))
+				var/obj/item/paper/to_rename = O
+				to_rename.rename()
 
-		//Update everything
-		attack_self(usr)
-		update_icon()
-	return
+			else if(istype(O, /obj/item/photo))
+				var/obj/item/photo/to_rename = O
+				to_rename.rename()
+
+	else if(href_list["read"])
+		var/obj/item/paper/P = locate(href_list["read"])
+
+		if(P && (P.loc == src) && istype(P, /obj/item/paper) )
+
+			if(!(istype(user, /mob/living/carbon/human) || isghost(user) || istype(user, /mob/living/silicon)))
+				show_browser(user, "<HTML><HEAD><TITLE>[P.name]</TITLE></HEAD><BODY>[stars(P.info)][P.stamps]</BODY></HTML>", "window=[P.name]")
+				onclose(user, "[P.name]")
+			else
+				show_browser(user, "<HTML><HEAD><TITLE>[P.name]</TITLE></HEAD><BODY>[P.info][P.stamps]</BODY></HTML>", "window=[P.name]")
+				onclose(user, "[P.name]")
+
+	else if(href_list["look"])
+		var/obj/item/photo/P = locate(href_list["look"])
+		if(P && (P.loc == src) && istype(P, /obj/item/photo) )
+			P.show(user)
+
+	else if(href_list["top"]) // currently unused
+		var/obj/item/P = locate(href_list["top"])
+		if(P && (P.loc == src) && istype(P, /obj/item/paper) )
+			toppaper = P
+			to_chat(user, "<span class='notice'>You move [P.name] to the top.</span>")
+
+	//Update everything
+	attack_self(user)
+	update_icon()
 
 /obj/item/clipboard/ebony
 	material = /decl/material/solid/wood/ebony
