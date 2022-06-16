@@ -14,19 +14,20 @@
 	var/stroke_colour_name = "black"                             //Human readable name of the stroke colour. Used in text strings, and to identify the nearest colour to the stroke colour.
 	var/medium_name        = "ink"                               //Whatever the pen uses to leave its mark. Used in text strings.
 	var/max_uses           = -1                                  //-1 for unlimited uses.
+	var/pen_quality        = TOOL_QUALITY_DEFAULT                //What will be set as tool quality for the pen
 
 /obj/item/pen/Initialize(ml, material_key)
 	. = ..()
 	set_extension(src, /datum/extension/tool,
 		list(
 				TOOL_DRILL = TOOL_QUALITY_WORST,
-				TOOL_PEN   = TOOL_QUALITY_DECENT,),
+				TOOL_PEN   = pen_quality),
 		list(
 				TOOL_PEN   = list(
 					TOOL_PROP_COLOR_NAME = stroke_colour_name, 
 					TOOL_PROP_COLOR      = stroke_colour, 
 					TOOL_PROP_PEN_FLAG   = pen_flag,
-					TOOL_PROP_USES       = max_uses,)))
+					TOOL_PROP_USES       = max_uses)))
 	make_pen_description()
 
 /obj/item/pen/attack(atom/A, mob/user, target_zone)
@@ -62,7 +63,7 @@
 	make_pen_description()
 
 /obj/item/pen/proc/make_pen_description()
-	desc = "Its \a [stroke_colour_name] [medium_name] [istype(material)?material.name:null] pen."
+	desc = "Its \a [stroke_colour_name] [medium_name] [istype(material)? material.name : ""] pen."
 
 /obj/item/pen/blue
 	name               = "blue pen"

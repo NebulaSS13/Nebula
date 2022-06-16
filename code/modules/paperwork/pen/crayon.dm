@@ -8,6 +8,7 @@
 	stroke_colour_name = "red"
 	medium_name        = "crayon"
 	pen_flag           = PEN_FLAG_ACTIVE | PEN_FLAG_CRAYON | PEN_FLAG_DEL_EMPTY
+	pen_quality        = TOOL_QUALITY_BAD //Writing with those things is awkward
 	max_uses           = 30
 	var/shade_colour   = "#220000" //RGB
 

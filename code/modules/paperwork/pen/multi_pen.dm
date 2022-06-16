@@ -1,6 +1,7 @@
 /obj/item/pen/multi
 	name                    = "multicoloured pen"
 	desc                    = "It's a pen with multiple colors of ink!"
+	pen_quality             = TOOL_QUALITY_MEDIOCRE
 	var/colour_idx          = 1
 	var/stroke_colours      = list("black", "blue", "red", "green")
 	var/stroke_colour_names = list("black", "blue", "red", "green")

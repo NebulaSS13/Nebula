@@ -2,6 +2,7 @@
 	atom_flags  = ATOM_FLAG_OPEN_CONTAINER
 	origin_tech = "{'materials':2,'esoteric':5}"
 	sharp       = 1
+	pen_quality = TOOL_QUALITY_MEDIOCRE
 
 /obj/item/pen/reagent/Initialize()
 	. = ..()
