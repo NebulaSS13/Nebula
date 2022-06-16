@@ -45,7 +45,7 @@
 
 /obj/item/organ/internal/powered
 	icon = 'mods/species/bayliens/adherent/icons/organs.dmi'
-	organ_properties = ORGAN_PROP_PROSTHETIC | ORGAN_PROP_CRYSTAL
+	organ_properties = ORGAN_PROP_CRYSTAL
 	var/maintenance_cost = 1
 	var/base_action_state
 	var/active = FALSE
@@ -117,7 +117,7 @@
 	icon = 'mods/species/bayliens/adherent/icons/organs.dmi'
 	eye_icon = 'mods/species/bayliens/adherent/icons/eyes.dmi'
 	icon_state = "eyes"
-	organ_properties = ORGAN_PROP_PROSTHETIC | ORGAN_PROP_CRYSTAL
+	organ_properties = ORGAN_PROP_CRYSTAL
 	contaminant_guard = TRUE
 	innate_flash_protection = FLASH_PROTECTION_MAJOR
 
