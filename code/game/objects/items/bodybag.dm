@@ -12,22 +12,13 @@
 	R.add_fingerprint(user)
 	qdel(src)
 
-
 /obj/item/storage/box/bodybags
-	name = "body bags"
-	desc = "This box contains body bags."
+	name       = "body bags"
+	desc       = "This box contains body bags."
 	icon_state = "bodybags"
-
-/obj/item/storage/box/bodybags/Initialize()
-	. = ..()
-	new /obj/item/bodybag(src)
-	new /obj/item/bodybag(src)
-	new /obj/item/bodybag(src)
-	new /obj/item/bodybag(src)
-	new /obj/item/bodybag(src)
-	new /obj/item/bodybag(src)
-	new /obj/item/bodybag(src)
-
+	startswith = list(
+		/obj/item/bodybag = 7,
+	)
 
 /obj/structure/closet/body_bag
 	name = "body bag"
