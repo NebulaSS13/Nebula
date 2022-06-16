@@ -5812,7 +5812,7 @@
 "EG" = (
 /obj/structure/table/steel,
 /obj/structure/noticeboard{
-	pixel_x = 32
+	default_pixel_x = 32
 	},
 /obj/item/paper_bin,
 /obj/item/pen,

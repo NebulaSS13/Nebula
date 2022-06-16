@@ -4,8 +4,7 @@
 /datum/unit_test/material_chemical_composition_shall_equal_one/start_test()
 	var/list/failed = list()
 	var/list/passed = list()
-	for(var/mat in SSmaterials.materials_by_name)
-		var/decl/material/mat_datum = GET_DECL(mat)
+	for(var/decl/material/mat_datum as anything in SSmaterials.materials)
 		var/list/checking = list(
 			"dissolves" = mat_datum.dissolves_into,
 			"heats" = mat_datum.heating_products,
@@ -37,8 +36,7 @@
 	var/list/passed_designs =    list()
 	var/failed_count = 0
 
-	for(var/owner_mat in SSmaterials.materials_by_name)
-		var/decl/material/mat_datum = GET_DECL(owner_mat)
+	for(var/decl/material/mat_datum as anything in SSmaterials.materials)
 
 		var/list/recipes = list()
 		for(var/thing in mat_datum.get_recipes())
@@ -71,7 +69,7 @@
 							failed = "extra material type ([mat])"
 			if(failed) // Try to prune out some duplicate error spam, we have too many materials now
 				if(!(recipe.type in seen_design_types))
-					failed_designs += "[owner_mat] - [recipe.type] - [failed]"
+					failed_designs += "[mat_datum.type] - [recipe.type] - [failed]"
 					seen_design_types += recipe.type
 				failed_count++
 			else

@@ -883,7 +883,7 @@
 /area/unishi/living)
 "cF" = (
 /obj/structure/noticeboard{
-	pixel_y = 25
+	default_pixel_y = 25
 	},
 /obj/structure/bed/chair/padded/black,
 /turf/simulated/floor/tiled,

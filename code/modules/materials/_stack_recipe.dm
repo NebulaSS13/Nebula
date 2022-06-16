@@ -14,6 +14,7 @@
 	var/use_reinf_material
 	var/difficulty = 1 // higher difficulty requires higher skill level to make.
 	var/apply_material_name = 1 //Whether the recipe will prepend a material name to the title - 'steel clipboard' vs 'clipboard'
+	var/set_dir_on_spawn = TRUE
 
 /datum/stack_recipe/New(decl/material/material, var/reinforce_material)
 	if(material)
@@ -53,7 +54,7 @@
 			O = new result_type(location, use_material, use_reinf_material)
 	else
 		O = new result_type(location)
-	if(user)
+	if(user && set_dir_on_spawn)
 		O.set_dir(user?.dir)
 
 	// Temp block pending material/matter rework
