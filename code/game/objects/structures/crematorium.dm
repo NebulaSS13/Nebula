@@ -18,6 +18,7 @@
 	. = ..()
 	connected_tray = new /obj/structure/crematorium_tray(src)
 	connected_tray.connected_crematorium = src
+	get_or_create_extension(src, /datum/extension/labels/single)
 
 /obj/structure/crematorium/Destroy()
 	if(!QDELETED(connected_tray))
