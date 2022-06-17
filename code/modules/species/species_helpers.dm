@@ -73,6 +73,10 @@ var/global/list/stored_shock_by_ref = list()
 	mannequin.update_icon()
 	mannequin.update_transform()
 
+	if(preview_outfit)
+		var/decl/hierarchy/outfit/outfit = GET_DECL(preview_outfit)
+		outfit.equip(mannequin)
+
 /decl/species/proc/get_resized_organ_w_class(var/organ_w_class)
 	. = Clamp(organ_w_class + mob_size_difference(mob_size, MOB_SIZE_MEDIUM), ITEM_SIZE_TINY, ITEM_SIZE_GARGANTUAN)
 

@@ -64,6 +64,8 @@
 
 	age_descriptor = /datum/appearance_descriptor/age/vox
 
+	preview_outfit = /decl/hierarchy/outfit/vox_raider
+
 	gluttonous = GLUT_TINY|GLUT_ITEM_NORMAL
 	stomach_capacity = 12
 
