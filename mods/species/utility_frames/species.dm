@@ -73,7 +73,8 @@
 		/decl/emote/exertion/synthetic/creak
 	)
 
-/decl/species/utility_frame/post_organ_rejuvenate(obj/item/organ/org, mob/living/carbon/human/H)
+/decl/species/utility_frame/apply_species_organ_modifications(obj/item/organ/org)
+	..()
 	var/obj/item/organ/external/E = org
 	if(istype(E) && !BP_IS_PROSTHETIC(E))
 		E.robotize(/decl/prosthetics_manufacturer/utility_frame)
@@ -83,7 +84,8 @@
 	var/obj/item/organ/internal/eyes/eyes = org
 	if(istype(eyes))
 		eyes.eye_icon = 'mods/species/utility_frames/icons/eyes.dmi'
-	H.refresh_visible_overlays()
+	if(E.owner)
+		E.owner.refresh_visible_overlays()
 
 /decl/species/utility_frame/disfigure_msg(var/mob/living/carbon/human/H)
 	. = SPAN_DANGER("The faceplate is dented and cracked!\n")

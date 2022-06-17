@@ -116,7 +116,6 @@
 	icon = 'mods/species/bayliens/adherent/icons/organs.dmi'
 	eye_icon = 'mods/species/bayliens/adherent/icons/eyes.dmi'
 	icon_state = "eyes"
-	status = ORGAN_PROSTHETIC
 	contaminant_guard = TRUE
 	innate_flash_protection = FLASH_PROTECTION_MAJOR
 

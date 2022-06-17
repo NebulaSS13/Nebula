@@ -89,7 +89,7 @@
 
 //Allows specialization of roboticize() calls on initialization meant to be used when loading prosthetics
 // NOTE: This wouldn't be necessary if prothetics were a subclass
-/obj/item/organ/proc/setup_as_prosthetic(var/forced_model = /decl/prosthetics_manufacturer)
+/obj/item/organ/proc/setup_as_prosthetic()
 	if(!species)
 		if(owner?.species)
 			set_species(owner.species)
@@ -97,9 +97,9 @@
 			set_species(global.using_map.default_species)
 
 	if(istype(material))
-		robotize(forced_model, apply_material = material.type)
+		robotize(apply_material = material.type)
 	else 
-		robotize(forced_model)
+		robotize()
 	return TRUE
 
 //Called on initialization to add the neccessary reagents
@@ -145,6 +145,8 @@
 		min_broken_damage = max(1, FLOOR(min_broken_damage * total_health_coefficient))
 		absolute_max_damage = max(1, FLOOR(min_broken_damage * 2))
 	max_damage = absolute_max_damage // resets scarring, but ah well
+
+	reset_status()
 
 /obj/item/organ/proc/die()
 	damage = max_damage
@@ -286,14 +288,21 @@
 	qdel(src)
 
 /obj/item/organ/proc/rejuvenate(var/ignore_prosthetic_prefs)
+	SHOULD_CALL_PARENT(TRUE)
 	damage = 0
-	status = initial(status)
-	if(ignore_prosthetic_prefs && ishuman(owner) && owner.client && owner.client.prefs && owner.client.prefs.real_name == owner.real_name)
+	reset_status()
+	if(!ignore_prosthetic_prefs && owner?.client?.prefs && owner.client.prefs.real_name == owner.real_name)
 		for(var/decl/aspect/aspect as anything in owner.personal_aspects)
 			if(aspect.applies_to_organ(organ_tag))
 				aspect.apply(owner)
-	if(species)
-		species.post_organ_rejuvenate(src, owner)
+
+/obj/item/organ/proc/reset_status()
+	var/was_prosthetic = BP_IS_PROSTHETIC(src)
+	status = initial(status)
+	if(species) // qdel clears species ref
+		species.apply_species_organ_modifications(src)
+	if(was_prosthetic)
+		status |= ORGAN_PROSTHETIC
 
 //Germs
 /obj/item/organ/proc/handle_antibiotics()

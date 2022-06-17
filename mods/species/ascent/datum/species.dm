@@ -73,7 +73,7 @@
 	available_pronouns = list(/decl/pronouns/male)
 
 	appearance_flags =        0
-	species_flags =           SPECIES_FLAG_NO_SCAN  | SPECIES_FLAG_NO_SLIP        | SPECIES_FLAG_NO_MINOR_CUT
+	species_flags =           SPECIES_FLAG_NO_SCAN | SPECIES_FLAG_NO_SLIP | SPECIES_FLAG_NO_MINOR_CUT | SPECIES_FLAG_CRYSTALLINE
 	spawn_flags =             SPECIES_IS_RESTRICTED
 
 	heat_discomfort_strings = list(
@@ -140,8 +140,9 @@
 /decl/species/mantid/handle_sleeping(var/mob/living/carbon/human/H)
 	return
 
-/decl/species/mantid/post_organ_rejuvenate(var/obj/item/organ/org, var/mob/living/carbon/human/H)
-	org.status |= ORGAN_CRYSTAL
+/decl/species/mantid/apply_species_organ_modifications(var/obj/item/organ/org)
+	..()
+	org.status &= ~ORGAN_BRITTLE
 
 /decl/species/mantid/equip_survival_gear(var/mob/living/carbon/human/H, var/extendedtank = 1)
 	return
