@@ -693,19 +693,29 @@ var/global/list/slot_flags_enumeration = list(
 		blood_overlay.color = COLOR_LUMINOL
 		update_icon()
 
-/obj/item/add_blood(mob/living/carbon/human/M, amount = 2, blood_data)
+/obj/item/add_blood(mob/living/carbon/human/M, amount = 2, list/blood_data)
 	if (!..())
-		return 0
+		return FALSE
 
 	if(istype(src, /obj/item/energy_blade))
 		return
 
-	if(!blood_data && istype(M))
-		blood_data = M.vessel.reagent_data[/decl/material/liquid/blood]		
-	var/datum/extension/forensic_evidence/forensics = get_or_create_extension(src, /datum/extension/forensic_evidence)
-	forensics.add_data(/datum/forensics/blood_dna, blood_data["blood_DNA"])
-	add_coating(/decl/material/liquid/blood, amount, blood_data)
-	return 1 //we applied blood to the item
+	if(!istype(M))
+		return TRUE
+
+	if(!blood_data)
+		blood_data = REAGENT_DATA(M.vessel, /decl/material/liquid/blood)
+	if(islist(blood_data))
+		blood_data = blood_data.Copy() // Don't mutate existing blood data if we grabbed it from a mob.
+
+	if(!LAZYACCESS(blood_DNA, M.dna.unique_enzymes))
+		LAZYSET(blood_DNA, M.dna.unique_enzymes, M.dna.b_type)
+		LAZYSET(blood_data, M.dna.unique_enzymes, REAGENT_DATA(M.vessel, M.species.blood_reagent))
+		var/datum/extension/forensic_evidence/forensics = get_or_create_extension(M, /datum/extension/forensic_evidence)
+		forensics.add_data(/datum/forensics/blood_dna, M.dna.unique_enzymes)
+		add_coating(/decl/material/liquid/blood, amount, blood_data)
+
+	return TRUE
 
 var/global/list/blood_overlay_cache = list()
 
