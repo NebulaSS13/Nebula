@@ -111,6 +111,7 @@
 		R.use(1)
 		add_fingerprint(user)
 		user.drop_from_inventory(src)
+		qdel(src)
 		var/obj/item/flamethrower/F = new(get_turf(src), src)
 		user.put_in_hands(F)
 		return
