@@ -178,22 +178,26 @@
 			dat+= "<tr><td colspan='2'><span class='average'>Patient is bradycardic.</span></td></tr>"
 
 
-	var/ratio = scan["blood_volume"]/scan["blood_volume_max"]
-	dat += "<tr><td><strong>Blood pressure:</strong></td><td>[scan["blood_pressure"]]"
-	if(scan["blood_o2"] <= 70)
-		dat += "(<span class='bad'>[scan["blood_o2"]]% blood oxygenation</span>)</td></tr>"
-	else if(scan["blood_o2"] <= 85)
-		dat += "(<span class='average'>[scan["blood_o2"]]% blood oxygenation</span>)</td></tr>"
-	else if(scan["blood_o2"] <= 90)
-		dat += "(<span class='oxyloss'>[scan["blood_o2"]]% blood oxygenation</span>)</td></tr>"
-	else
-		dat += "([scan["blood_o2"]]% blood oxygenation)</td></tr>"
+	if(scan["blood_volume_max"] > 0)
+		var/ratio = scan["blood_volume"]/scan["blood_volume_max"]
+		dat += "<tr><td><strong>Blood pressure:</strong></td><td>[scan["blood_pressure"]]"
+		if(scan["blood_o2"] <= 70)
+			dat += "(<span class='bad'>[scan["blood_o2"]]% blood oxygenation</span>)</td></tr>"
+		else if(scan["blood_o2"] <= 85)
+			dat += "(<span class='average'>[scan["blood_o2"]]% blood oxygenation</span>)</td></tr>"
+		else if(scan["blood_o2"] <= 90)
+			dat += "(<span class='oxyloss'>[scan["blood_o2"]]% blood oxygenation</span>)</td></tr>"
+		else
+			dat += "([scan["blood_o2"]]% blood oxygenation)</td></tr>"
 
-	dat += "<tr><td><strong>Blood volume:</strong></td><td>[scan["blood_volume"]]u/[scan["blood_volume_max"]]u</td></tr>"
+		dat += "<tr><td><strong>Blood volume:</strong></td><td>[scan["blood_volume"]]u/[scan["blood_volume_max"]]u</td></tr>"
 
-	if(skill_level >= SKILL_ADEPT)
-		if(ratio <= 0.70)
-			dat += "<tr><td colspan='2'><span class='bad'>Patient is in Hypovolemic Shock. Transfusion highly recommended.</span></td></tr>"
+		if(skill_level >= SKILL_ADEPT)
+			if(ratio <= 0.70)
+				dat += "<tr><td colspan='2'><span class='bad'>Patient is in Hypovolemic Shock. Transfusion highly recommended.</span></td></tr>"
+	else 
+		dat += "<tr><td><strong>Blood pressure:</strong></td><td><span class='average'>ERROR - Patient has lacks a circulatory system.</span></td></tr>"
+		dat += "<tr><td><strong>Blood volume:</strong></td><td><span class='average'>ERROR - Patient has lacks a circulatory system.</span></td></tr>"
 
 	// Body temperature.
 	/*

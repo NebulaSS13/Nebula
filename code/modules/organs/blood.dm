@@ -35,6 +35,7 @@
 
 	if(!should_have_organ(BP_HEART))
 		vessel.clear_reagents()
+		vessel.maximum_volume = 0
 		return
 
 	if(vessel.total_volume < species.blood_volume)
@@ -161,6 +162,8 @@
 
 //Transfers blood from container ot vessels
 /mob/living/carbon/proc/inject_blood(var/amount, var/datum/reagents/donor)
+	if(!species.blood_volume)
+		return //Don't divide by 0
 	var/injected_data = REAGENT_DATA(donor, species.blood_reagent)
 	var/chems = LAZYACCESS(injected_data, "trace_chem")
 	for(var/C in chems)
@@ -284,7 +287,7 @@
 
 //Percentage of maximum blood volume.
 /mob/living/carbon/human/proc/get_blood_volume()
-	return round((vessel.total_volume/species.blood_volume)*100)
+	return species.blood_volume? round((vessel.total_volume/species.blood_volume)*100) : 0
 
 //Percentage of maximum blood volume, affected by the condition of circulation organs
 /mob/living/carbon/human/proc/get_blood_circulation()

@@ -36,6 +36,7 @@
 	body_temperature =      null
 	passive_temp_gain =     5  // stabilize at ~80 C in a 20 C environment.
 	heat_discomfort_level = 373.15
+	blood_volume = 0
 
 	base_color = "#333355"
 	base_eye_color = "#00ccff"
