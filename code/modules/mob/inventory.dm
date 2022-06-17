@@ -210,10 +210,12 @@ var/global/list/slot_equipment_priority = list( \
 */
 /mob/proc/u_equip(obj/W)
 	SHOULD_CALL_PARENT(TRUE)
-	if(W == get_equipped_item(slot_back_str))
+	if(W == _back)
+		_back = null
 		update_inv_back(0)
 		return TRUE
-	if(W == get_equipped_item(slot_wear_mask_str))
+	if(W == _wear_mask)
+		_wear_mask = null
 		update_inv_wear_mask(0)
 		return TRUE
 	return FALSE
