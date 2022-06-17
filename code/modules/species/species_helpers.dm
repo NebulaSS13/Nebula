@@ -42,6 +42,7 @@ var/global/list/stored_shock_by_ref = list()
 		for(var/mark_type in base_markings)
 			if(!LAZYACCESS(pref.body_markings, mark_type))
 				LAZYSET(pref.body_markings, mark_type, base_markings[mark_type])
+
 	pref.skin_colour = base_color
 	pref.eye_colour = base_eye_color
 	pref.hair_colour = base_hair_color
@@ -76,6 +77,12 @@ var/global/list/stored_shock_by_ref = list()
 	if(preview_outfit)
 		var/decl/hierarchy/outfit/outfit = GET_DECL(preview_outfit)
 		outfit.equip(mannequin)
+
+		// Backpacks are ugly on preview icons, especially nonhumans.
+		var/obj/item/storage/backpack = mannequin.get_equipped_item(slot_back_str)
+		if(istype(backpack))
+			mannequin.drop_from_inventory(backpack)
+			qdel(backpack)
 
 /decl/species/proc/get_resized_organ_w_class(var/organ_w_class)
 	. = Clamp(organ_w_class + mob_size_difference(mob_size, MOB_SIZE_MEDIUM), ITEM_SIZE_TINY, ITEM_SIZE_GARGANTUAN)

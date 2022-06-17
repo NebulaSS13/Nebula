@@ -39,6 +39,8 @@
 
 /decl/bodytype/avian/Initialize()
 	equip_adjust = list(
+		slot_l_ear_str =     list("[NORTH]" = list("x" =  1, "y" = -5), "[EAST]" = list("x" =  -2, "y" = -5), "[SOUTH]" = list("x" = -1, "y" = -5),  "[WEST]" = list("x" =  0, "y" = -5)),
+		slot_r_ear_str =     list("[NORTH]" = list("x" =  1, "y" = -5), "[EAST]" = list("x" =  0, "y" = -5), "[SOUTH]" = list("x" = -1, "y" = -5),  "[WEST]" = list("x" =  2, "y" = -5)),
 		BP_L_HAND =          list("[NORTH]" = list("x" =  3, "y" = -3), "[EAST]" = list("x" =  1, "y" = -3), "[SOUTH]" = list("x" = -3, "y" = -3),  "[WEST]" = list("x" = -5, "y" = -3)),
 		BP_R_HAND =          list("[NORTH]" = list("x" = -3, "y" = -3), "[EAST]" = list("x" =  5, "y" = -3), "[SOUTH]" = list("x" =  3, "y" = -3),  "[WEST]" = list("x" = -1, "y" = -3)),
 		slot_head_str =      list("[NORTH]" = list("x" =  0, "y" = -5), "[EAST]" = list("x" =  1, "y" = -5), "[SOUTH]" = list("x" =  0, "y" = -5),  "[WEST]" = list("x" = -1, "y" = -5)),
@@ -54,36 +56,36 @@
 	. = ..()
 
 /obj/item/organ/external/tail/avian/get_tail()
-	if(istype(owner?.bodytype, /decl/bodytype/avian))		
+	if(istype(owner?.bodytype, /decl/bodytype/avian))
 		var/decl/bodytype/avian/bird_bod = owner.bodytype
 		return bird_bod.tail
 
 /obj/item/organ/external/tail/avian/get_tail_animation()
-	if(istype(owner?.bodytype, /decl/bodytype/avian))		
+	if(istype(owner?.bodytype, /decl/bodytype/avian))
 		var/decl/bodytype/avian/bird_bod = owner.bodytype
 		return bird_bod.tail_animation
 
 /obj/item/organ/external/tail/avian/get_tail_icon()
-	if(istype(owner?.bodytype, /decl/bodytype/avian))		
+	if(istype(owner?.bodytype, /decl/bodytype/avian))
 		var/decl/bodytype/avian/bird_bod = owner.bodytype
 		return bird_bod.tail_icon
 
 /obj/item/organ/external/tail/avian/get_tail_states()
-	if(istype(owner?.bodytype, /decl/bodytype/avian))		
+	if(istype(owner?.bodytype, /decl/bodytype/avian))
 		var/decl/bodytype/avian/bird_bod = owner.bodytype
 		return bird_bod.tail_states
 
 /obj/item/organ/external/tail/avian/get_tail_blend()
-	if(istype(owner?.bodytype, /decl/bodytype/avian))		
+	if(istype(owner?.bodytype, /decl/bodytype/avian))
 		var/decl/bodytype/avian/bird_bod = owner.bodytype
 		return bird_bod.tail_blend
 
 /obj/item/organ/external/tail/avian/get_tail_hair()
-	if(istype(owner?.bodytype, /decl/bodytype/avian))		
+	if(istype(owner?.bodytype, /decl/bodytype/avian))
 		var/decl/bodytype/avian/bird_bod = owner.bodytype
 		return bird_bod.tail_hair
 
 /obj/item/organ/external/tail/avian/get_tail_hair_blend()
-	if(istype(owner?.bodytype, /decl/bodytype/avian))		
+	if(istype(owner?.bodytype, /decl/bodytype/avian))
 		var/decl/bodytype/avian/bird_bod = owner.bodytype
 		return bird_bod.tail_hair_blend

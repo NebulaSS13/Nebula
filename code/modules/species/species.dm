@@ -953,10 +953,10 @@ var/global/const/DEFAULT_SPECIES_HEALTH = 200
 
 			preview_icon = icon(mannequin.bodytype.icon_template)
 			var/mob_width = preview_icon.Width()
-			preview_icon.Scale(mob_width * 2, preview_icon.Height())
+			preview_icon.Scale((mob_width * 2)+16, preview_icon.Height()+16)
 
-			preview_icon.Blend(getFlatIcon(mannequin, defdir = SOUTH, always_use_defdir = TRUE), ICON_OVERLAY, 0, 0)
-			preview_icon.Blend(getFlatIcon(mannequin, defdir = EAST,  always_use_defdir = TRUE), ICON_OVERLAY, mob_width, 0)
+			preview_icon.Blend(getFlatIcon(mannequin, defdir = SOUTH, always_use_defdir = TRUE), ICON_OVERLAY, 8, 8)
+			preview_icon.Blend(getFlatIcon(mannequin, defdir = EAST,  always_use_defdir = TRUE), ICON_OVERLAY, mob_width+8, 8)
 
 			preview_icon.Scale(preview_icon.Width() * 2, preview_icon.Height() * 2)
 			preview_icon_width = preview_icon.Width()

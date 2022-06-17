@@ -80,6 +80,7 @@
 	blood_types = list(/decl/blood_type/vox)
 	flesh_color = "#808d11"
 
+	default_h_style = /decl/sprite_accessory/hair/vox
 	reagent_tag = IS_VOX
 	maneuvers = list(/decl/maneuver/leap/grab)
 	standing_jump_range = 5
