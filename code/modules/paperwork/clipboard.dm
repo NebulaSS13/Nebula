@@ -176,16 +176,12 @@
 
 /obj/item/clipboard/steel
 	material = /decl/material/solid/metal/steel
-	material = /decl/material/solid/metal/steel
 
 /obj/item/clipboard/aluminium
-	material = /decl/material/solid/metal/aluminium
 	material = /decl/material/solid/metal/aluminium
 
 /obj/item/clipboard/glass
 	material = /decl/material/solid/glass
-	material = /decl/material/solid/glass
 
 /obj/item/clipboard/plastic
-	material = /decl/material/solid/plastic
 	material = /decl/material/solid/plastic
