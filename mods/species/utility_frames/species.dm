@@ -37,6 +37,8 @@
 	passive_temp_gain =     5  // stabilize at ~80 C in a 20 C environment.
 	heat_discomfort_level = 373.15
 
+	preview_outfit = null
+
 	base_color = "#333355"
 	base_eye_color = "#00ccff"
 	base_markings = list(

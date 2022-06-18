@@ -16,6 +16,10 @@
 	name_plural = "Serpentids"
 	spawn_flags = SPECIES_IS_RESTRICTED
 
+	base_color =      "#336600"
+	base_eye_color =  "#3F0505"
+	preview_outfit = null
+
 	blood_types = list(/decl/blood_type/hemolymph)
 
 	has_organ = list(
