@@ -108,12 +108,10 @@
 
 /turf/exterior/attackby(obj/item/C, mob/user)
 
-	if(diggable && istype(C,/obj/item/shovel))
-		visible_message(SPAN_NOTICE("\The [user] starts digging at \the [src]."))
-		if(do_after(user, 50))
-			to_chat(user, SPAN_NOTICE("You dig a deep pit."))
+	if(diggable && IS_SHOVEL(C))
+		if(C.do_tool_interaction(TOOL_SHOVEL, user, src, 5 SECONDS))
 			new /obj/structure/pit(src)
-			diggable = 0
+			diggable = FALSE
 		else
 			to_chat(user, SPAN_NOTICE("You stop shoveling."))
 		return TRUE

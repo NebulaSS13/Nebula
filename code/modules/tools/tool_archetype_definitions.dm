@@ -33,3 +33,8 @@
 	name = "wrench"
 	use_sound = 'sound/items/Ratchet.ogg'
 	codex_key = TOOL_CODEX_WRENCH
+
+/decl/tool_archetype/shovel
+	name = "shovel"
+	use_sound = 'sound/items/shovel_dirt.ogg'
+	use_message = "digging"
