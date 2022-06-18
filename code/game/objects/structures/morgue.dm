@@ -81,21 +81,13 @@
 		return attack_hand(user)
 
 /obj/structure/morgue/attackby(obj/item/P, mob/user)
-	if(IS_PEN(P))
-		var/new_label = sanitize_safe(input(user, "What would you like the label to be?", capitalize(name), null) as text|null, MAX_NAME_LEN)
-
-		if((!Adjacent(user) || loc == user))
+	if(IS_PEN(P) && CanPhysicallyInteractWith(user, src) && loc != user)
+		var/new_label = sanitize_safe(input(user, "What would you like the label to be?", capitalize(name)), MAX_NAME_LEN)
+		if(!attach_label(user, P, new_label))
+			to_chat(user, SPAN_WARNING("Couldn't attach the label!"))
 			return
-		
-		if(has_extension(src, /datum/extension/labels))
-			var/datum/extension/labels/L = get_extension(src, /datum/extension/labels)
-			if(!L.CanAttachLabel(user, new_label))
-				return
-		
-		attach_label(user, P, new_label)
-		return
-	else 
-		return ..()
+		return TRUE
+	return ..()
 
 /obj/structure/morgue/relaymove(mob/user)
 	if(user.incapacitated())
