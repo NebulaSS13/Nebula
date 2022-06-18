@@ -56,12 +56,12 @@ var/global/list/internet_uplinks = list()
 	var/inefficiency = clamp(0.3 + (0.1 * (overmap_range - BASE_INTERNET_RANGE)), 0.1, 0.6)
 	
 	var/datum/gas_mixture/env = return_air()
-	if(!istype(env) || env.return_pressure() < 10) // Vacuum heating is insufficient for this machine.
-		take_damage(20, BURN)
+	if(!istype(env) || env.return_pressure() < 10) // Vacuum cooling is insufficient for this machine.
+		take_damage(10, BURN)
 		return
 	env.add_thermal_energy(active_power_usage * inefficiency)
 	if(env.temperature > max_temperature)
-		take_damage(10, BURN)
+		take_damage(5, BURN)
 
 /obj/machinery/internet_uplink/set_broken(new_state, cause)
 	. = ..()

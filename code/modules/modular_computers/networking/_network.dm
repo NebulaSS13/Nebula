@@ -63,7 +63,7 @@
 		add_log("Mainframe ONLINE with roles: [english_list(M.roles)]", newtag)
 	else if(istype(D, /datum/extension/network_device/broadcaster/relay))
 		relays |= D
-		add_log("Relay ONLINE", D.network_tag)
+		add_log("Relay ONLINE", newtag)
 	else if(istype(D, /datum/extension/network_device/acl))
 		if(access_controller)
 			return FALSE
@@ -164,10 +164,13 @@
 		// For long ranged devices, checking to make sure there's at least a functional broadcaster somewhere.		
 		functional_broadcaster = TRUE
 
-		if(!ARE_Z_CONNECTED(get_z(B.holder), get_z(D.holder)))
+		var/d_z = get_z(D.holder)
+		var/b_z = get_z(B.holder)
+
+		if(!ARE_Z_CONNECTED(d_z, b_z))
 			continue
 		
-		if(get_z(B.holder) != get_z(D.holder))  // If the broadcaster is not in the same z-level as the device, the broadcast strength is halved.
+		if(d_z != b_z)  // If the broadcaster is not in the same z-level as the device, the broadcast strength is halved.
 			broadcast_strength = round(broadcast_strength/2)
 		var/distance = get_dist(get_turf(B.holder), get_turf(D.holder))
 		best_signal = max(best_signal, (broadcast_strength * receiver_strength) - distance)
