@@ -124,12 +124,12 @@
 
 /obj/structure/door_assembly/attackby(obj/item/W, mob/user)
 
-	if(IS_PEN(W))
+	if(IS_PEN(W) && CanPhysicallyInteractWith(user, src))
 		var/t = sanitize_safe(input(user, "Enter the name for the door.", src.name, src.created_name), MAX_NAME_LEN)
-		if((!t) || (!in_range(src, usr) && src.loc != usr))
+		if(!length(t))
 			return
 		created_name = t
-		return
+		return TRUE
 
 	if(IS_WELDER(W) && (glass == 1 || !anchored))
 		var/obj/item/weldingtool/WT = W
