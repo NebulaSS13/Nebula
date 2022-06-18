@@ -1,28 +1,30 @@
 /obj/item/clipboard
-	name = "clipboard"
-	desc = "It's a board with a clip used to organise papers."
-	icon = 'icons/obj/bureaucracy.dmi'
-	icon_state = "clipboard"
-	item_state = "clipboard"
-	throwforce = 0
-	w_class = ITEM_SIZE_SMALL
-	throw_speed = 3
-	throw_range = 10
-	slot_flags = SLOT_LOWER_BODY
+	name                  = "clipboard"
+	desc                  = "It's a board with a clip used to organise papers."
+	icon                  = 'icons/obj/bureaucracy.dmi'
+	icon_state            = "clipboard"
+	item_state            = "clipboard"
+	throwforce            = 0
+	w_class               = ITEM_SIZE_SMALL
+	throw_speed           = 3
+	throw_range           = 10
+	slot_flags            = SLOT_LOWER_BODY
 	applies_material_name = FALSE
-	material = /decl/material/solid/wood
-	drop_sound = 'sound/foley/tooldrop5.ogg'
-	pickup_sound = 'sound/foley/paperpickup2.ogg'
+	material              = /decl/material/solid/wood
+	drop_sound            = 'sound/foley/tooldrop5.ogg'
+	pickup_sound          = 'sound/foley/paperpickup2.ogg'
 
-	var/obj/item/pen/haspen		//The stored pen.
-	var/obj/item/toppaper	//The topmost piece of paper.
+	var/obj/item/stored_pen        //The stored pen.
+	var/list/papers
+	var/tmp/max_papers = 50
 
 /obj/item/clipboard/Initialize()
 	. = ..()
 	update_icon()
-	if(material)
-		desc = initial(desc)
-		desc += " It's made of [material.use_name]."
+
+/obj/item/clipboard/Destroy()
+	QDEL_NULL_LIST(papers)
+	return ..()
 
 /obj/item/clipboard/handle_mouse_drop(atom/over, mob/user)
 	if(ishuman(user) && istype(over, /obj/screen/inventory))
@@ -33,143 +35,170 @@
 			return TRUE
 	. = ..()
 
+/obj/item/clipboard/examine(mob/user, distance, infix, suffix)
+	. = ..()
+	if(stored_pen)
+		to_chat(user, "It's holding \a [stored_pen].")
+	if(!LAZYLEN(papers))
+		to_chat(user, "It contains [length(papers)] / [max_papers] paper(s).")
+	else 
+		to_chat(user, "It has room for [max_papers] paper(s).")
+
+/obj/item/clipboard/proc/top_paper()
+	return LAZYACCESS(papers, 1)
+
+/obj/item/clipboard/proc/push_paper(var/obj/item/P)
+	papers = papers? list(P) + papers : list(P) //Push at the top
+
+/obj/item/clipboard/proc/pop_paper()
+	. = top_paper()
+	LAZYREMOVE(papers, 1)
+
 /obj/item/clipboard/on_update_icon()
 	..()
-	if(toppaper)
-		overlays += overlay_image(toppaper.icon, toppaper.icon_state, flags=RESET_COLOR)
-		overlays += toppaper.overlays
-	if(haspen)
+	var/obj/item/top_paper = top_paper()
+	if(top_paper)
+		overlays += overlay_image(top_paper.icon, top_paper.icon_state, flags=RESET_COLOR)
+		overlays += top_paper.overlays
+	if(stored_pen)
 		overlays += overlay_image(icon, "clipboard_pen", flags=RESET_COLOR)
 	overlays += overlay_image(icon, "clipboard_over", flags=RESET_COLOR)
 	return
 
 /obj/item/clipboard/attackby(obj/item/W, mob/user)
-
+	var/obj/item/top_paper = top_paper()
 	if(istype(W, /obj/item/paper) || istype(W, /obj/item/photo))
 		if(!user.unEquip(W, src))
 			return
-		if(istype(W, /obj/item/paper))
-			toppaper = W
-		to_chat(user, "<span class='notice'>You clip the [W] onto \the [src].</span>")
+		push_paper(W)
+		to_chat(user, SPAN_NOTICE("You clip the [W] onto \the [src]."))
 		update_icon()
+		return TRUE
 
-	else if(istype(toppaper) && IS_PEN(W))
-		toppaper.attackby(W, usr)
+	else if(top_paper)
+		top_paper.attackby(W, user)
 		update_icon()
+		return TRUE
 
-	return
+	return ..()
 
 /obj/item/clipboard/attack_self(mob/user)
+	if(CanPhysicallyInteractWith(user, src))
+		interact(user)
+		return TRUE
+
+/obj/item/clipboard/interact(mob/user)
 	var/dat = "<title>Clipboard</title>"
-	if(haspen)
+	if(stored_pen)
 		dat += "<A href='?src=\ref[src];pen=1'>Remove Pen</A><BR><HR>"
 	else
 		dat += "<A href='?src=\ref[src];addpen=1'>Add Pen</A><BR><HR>"
 
-	//The topmost paper. I don't think there's any way to organise contents in byond, so this is what we're stuck with.	-Pete
-	if(toppaper)
-		var/obj/item/paper/P = toppaper
-		dat += "<A href='?src=\ref[src];write=\ref[P]'>Write</A> <A href='?src=\ref[src];remove=\ref[P]'>Remove</A> <A href='?src=\ref[src];rename=\ref[P]'>Rename</A> - <A href='?src=\ref[src];read=\ref[P]'>[P.name]</A><BR><HR>"
-
-	for(var/obj/item/paper/P in src)
-		if(P==toppaper)
-			continue
-		dat += "<A href='?src=\ref[src];remove=\ref[P]'>Remove</A> <A href='?src=\ref[src];rename=\ref[P]'>Rename</A> - <A href='?src=\ref[src];read=\ref[P]'>[P.name]</A><BR>"
-	for(var/obj/item/photo/Ph in src)
-		dat += "<A href='?src=\ref[src];remove=\ref[Ph]'>Remove</A> <A href='?src=\ref[src];rename=\ref[Ph]'>Rename</A> - <A href='?src=\ref[src];look=\ref[Ph]'>[Ph.name]</A><BR>"
+	for(var/i = 1 to length(papers))
+		var/obj/item/P = papers[i]
+		dat += "<A href='?src=\ref[src];examine=\ref[P]'>[P.name]</A> - <DIV style='float:right;white-space: nowrap;'>"
+		if(i == 1)
+			dat += "<A href='?src=\ref[src];write=\ref[P]'>Write</A> "
+		dat += "<A href='?src=\ref[src];remove=\ref[P]'>Remove</A> <A href='?src=\ref[src];rename=\ref[P]'>Rename</A></DIV><BR>"
 
 	show_browser(user, dat, "window=clipboard")
 	onclose(user, "clipboard")
 	add_fingerprint(usr)
 	return
 
+/**Tries to find a pen in the user's held items. */
+/obj/item/clipboard/proc/get_user_pen(var/mob/user)
+	var/obj/item/I = user.get_active_hand()
+	if(I != src && IS_PEN(I))
+		return I
+	for(I in user.get_held_items()) //Its pretty likely the current held thing is the clipdboard
+		if(IS_PEN(I))
+			return I //In that case pick the first pen item we're holding
+
+/obj/item/clipboard/proc/add_pen(var/obj/item/I, var/mob/user)
+	if(!stored_pen && I.w_class <= ITEM_SIZE_TINY && IS_PEN(I) && user.unEquip(I, src))
+		stored_pen = I
+		to_chat(user, SPAN_NOTICE("You slot \the [I] into \the [src]."))
+		return TRUE
+	else if(stored_pen)
+		to_chat(user, SPAN_WARNING("There is already \a [stored_pen] in \the [src]."))
+	else if(I.w_class > ITEM_SIZE_TINY)
+		to_chat(user, SPAN_WARNING("\The [I] is too big to fit in \the [src]."))
+
+/obj/item/clipboard/proc/remove_pen(var/mob/user)
+	if(stored_pen && user.put_in_hands(stored_pen))
+		to_chat(user, SPAN_NOTICE("You pull your trusty [stored_pen] from your [src]."))
+		. = stored_pen
+		stored_pen = null
+		return .
+	else if(!stored_pen)
+		to_chat(user, SPAN_WARNING("There is no pen in \the [src]."))
+	else
+		to_chat(user, SPAN_WARNING("Your hands are full.")) 
+
 /obj/item/clipboard/OnTopic(mob/user, href_list, datum/topic_state/state)
 	. = ..()
+	var/obj/item/tpaper = top_paper()
 
-	if(src.loc != user)
-		return
+	if(href_list["pen"] && remove_pen(user))
+		. = TOPIC_HANDLED | TOPIC_REFRESH
 
-	if(href_list["pen"])
-		if(IS_PEN(haspen) && (haspen.loc == src))
-			user.put_in_hands_or_store_or_drop(haspen)
-			haspen = null
-
-	else if(href_list["addpen"])
-		if(!haspen)
-			var/obj/item/W = user.get_active_hand()
-			
-			//Its pretty likely the current held thing is the clipdboard
-			if(W == src)
-				var/list/held = user.get_held_items()
-				LAZYREMOVE(held, src)
-				for(W in held)
-					if(IS_PEN(W))
-						break //In that case pick the first pen item we're holding
-
-			if(IS_PEN(W) && (W.w_class <= ITEM_SIZE_TINY))
-				if(!user.unEquip(W, src))
-					return
-				haspen = W
-				to_chat(user, SPAN_NOTICE("You slot the pen into \the [src]."))
+	else if(href_list["addpen"] && add_pen(get_user_pen(user), user))
+		. = TOPIC_HANDLED | TOPIC_REFRESH
 
 	else if(href_list["write"])
-		var/obj/item/P = locate(href_list["write"])
-		if(P && (P.loc == src) && istype(P, /obj/item/paper) && (P == toppaper) )
-			var/obj/item/I = user.get_active_hand()
-			if(IS_PEN(I))
-				P.attackby(I, user)
+		if(tpaper)
+			var/obj/item/I = get_user_pen(user)
+			//We can also use the stored pen if we have one and a free hand
+			if(!I && IS_PEN(stored_pen))
+				I = remove_pen(user)
+			else if(!I)
+				to_chat(user, SPAN_WARNING("You don't have a pen!"))
+
+			if(I)
+				tpaper.attackby(I, user)
+				. = TOPIC_HANDLED | TOPIC_REFRESH
+		else
+			. = TOPIC_NOACTION
 
 	else if(href_list["remove"])
 		var/obj/item/P = locate(href_list["remove"])
-
-		if(P && (P.loc == src) && (istype(P, /obj/item/paper) || istype(P, /obj/item/photo)) )
-			user.put_in_hands_or_store_or_drop(P)
-			if(P == toppaper)
-				toppaper = null
-				var/obj/item/paper/newtop = locate(/obj/item/paper) in src
-				if(newtop && (newtop != P))
-					toppaper = newtop
-				else
-					toppaper = null
+		if(P && user.put_in_hands(P))
+			papers.Remove(P)
+			. = TOPIC_HANDLED | TOPIC_REFRESH
 
 	else if(href_list["rename"])
 		var/obj/item/O = locate(href_list["rename"])
+		if(istype(O, /obj/item/paper))
+			var/obj/item/paper/to_rename = O
+			to_rename.rename()
+			. = TOPIC_HANDLED | TOPIC_REFRESH
 
-		if(O && (O.loc == src))
-			if(istype(O, /obj/item/paper))
-				var/obj/item/paper/to_rename = O
-				to_rename.rename()
+		else if(istype(O, /obj/item/photo))
+			var/obj/item/photo/to_rename = O
+			to_rename.rename()
+			. = TOPIC_HANDLED | TOPIC_REFRESH
 
-			else if(istype(O, /obj/item/photo))
-				var/obj/item/photo/to_rename = O
-				to_rename.rename()
+		else
+			. = TOPIC_NOACTION
 
-	else if(href_list["read"])
-		var/obj/item/paper/P = locate(href_list["read"])
+	else if(href_list["examine"])
+		var/obj/item/P = locate(href_list["examine"])
 
-		if(P && (P.loc == src) && istype(P, /obj/item/paper) )
+		if(istype(P, /obj/item/paper))
+			var/obj/item/paper/PP = P
+			PP.show_content(user)
+			. = TOPIC_HANDLED
 
-			if(!(istype(user, /mob/living/carbon/human) || isghost(user) || istype(user, /mob/living/silicon)))
-				show_browser(user, "<HTML><HEAD><TITLE>[P.name]</TITLE></HEAD><BODY>[stars(P.info)][P.stamps]</BODY></HTML>", "window=[P.name]")
-				onclose(user, "[P.name]")
-			else
-				show_browser(user, "<HTML><HEAD><TITLE>[P.name]</TITLE></HEAD><BODY>[P.info][P.stamps]</BODY></HTML>", "window=[P.name]")
-				onclose(user, "[P.name]")
-
-	else if(href_list["look"])
-		var/obj/item/photo/P = locate(href_list["look"])
-		if(P && (P.loc == src) && istype(P, /obj/item/photo) )
-			P.show(user)
-
-	else if(href_list["top"]) // currently unused
-		var/obj/item/P = locate(href_list["top"])
-		if(P && (P.loc == src) && istype(P, /obj/item/paper) )
-			toppaper = P
-			to_chat(user, "<span class='notice'>You move [P.name] to the top.</span>")
+		else if(istype(P, /obj/item/photo))
+			var/obj/item/photo/PP = P
+			PP.show(user)
+			. = TOPIC_HANDLED
 
 	//Update everything
-	attack_self(user)
-	update_icon()
+	if(. & TOPIC_REFRESH)
+		attack_self(user)
+		update_icon()
 
 /obj/item/clipboard/ebony
 	material = /decl/material/solid/wood/ebony
