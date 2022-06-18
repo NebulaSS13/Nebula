@@ -13,6 +13,10 @@
 	start_time = world.time
 	source_name = source.get_source_name()
 
+/datum/alarm_source/Destroy()
+	source = null
+	. = ..()
+
 /datum/alarm
 	var/atom/origin					//Used to identify the alarm area.
 	var/list/sources = new()		//List of sources triggering the alarm. Used to determine when the alarm should be cleared.
@@ -61,6 +65,7 @@
 	var/datum/alarm_source/AS = sources_assoc[source]
 	sources -= AS
 	sources_assoc -= source
+	qdel(source)
 
 /datum/alarm/proc/alarm_z()
 	if(origin)

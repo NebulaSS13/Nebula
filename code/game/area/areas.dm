@@ -82,12 +82,20 @@ var/global/list/areas = list()
 	icon_state = "white"
 	blend_mode = BLEND_MULTIPLY
 
-/area/Del()
-	global.areas -= src
-	. = ..()
+// qdel(area) should not be attempted on an area with turfs in contents. ChangeArea every turf in it first.
 
 /area/Destroy()
 	global.areas -= src
+	var/failure = FALSE
+	for(var/atom/A in contents)
+		if(isturf(A))
+			failure = TRUE
+			contents.Remove(A) // note: A.loc == null after this
+		else
+			qdel(A)
+	if(failure)
+		PRINT_STACK_TRACE("Area [log_info_line(src)] was qdeleted with turfs in contents.")
+	area_repository.clear_cache()
 	..()
 	return QDEL_HINT_HARDDEL
 
