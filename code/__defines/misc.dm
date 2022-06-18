@@ -238,7 +238,7 @@
 #define SOULSTONE_ESSENCE 1
 
 #define INCREMENT_WORLD_Z_SIZE world.maxz++; global.connected_z_cache.Cut(); if (SSzcopy.zlev_maximums.len) { SSzcopy.calculate_zstack_limits() }
-#define ARE_Z_CONNECTED(ZA, ZB) (ZA > 0 && ZB > 0 && ZA <= world.maxz && ZB <= world.maxz && ((ZA == ZB) || ((global.connected_z_cache.len >= ZA && global.connected_z_cache[ZA]) ? global.connected_z_cache[ZA][ZB] : AreConnectedZLevels(ZA, ZB))))
+#define ARE_Z_CONNECTED(ZA, ZB) (ZA > 0 && ZB > 0 && ZA <= world.maxz && ZB <= world.maxz && ((ZA == ZB) || ((length(global.connected_z_cache) >= ZA && global.connected_z_cache[ZA] && length(global.connected_z_cache[ZA]) >= ZB) ? global.connected_z_cache[ZA][ZB] : AreConnectedZLevels(ZA, ZB))))
 
 //Request Console Department Types
 #define RC_ASSIST 1		//Request Assistance
