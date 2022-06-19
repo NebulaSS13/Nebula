@@ -23,6 +23,7 @@
 	marker = new(loc = effect)
 	marker.appearance = effect
 	marker.alpha = 0 // Marker fades in on detection.	
+	marker.appearance_flags |= RESET_TRANSFORM
 
 	images += marker
 	
@@ -33,6 +34,7 @@
 /datum/overmap_contact/proc/update_marker_icon(var/range = 0)
 	marker.icon_state = effect.icon_state
 	marker.dir = effect.dir
+	marker.transform = effect.transform
 	marker.overlays.Cut()
 
 	if(check_effect_shield())

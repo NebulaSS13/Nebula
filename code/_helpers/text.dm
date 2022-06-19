@@ -642,3 +642,41 @@ var/global/list/fullstop_alternatives = list(".", "!", "?")
 /proc/make_rainbow(var/msg)
 	for(var/i = 1 to length(msg))
 		. += "<font color='[get_random_colour(1)]'>[copytext(msg, i, i+1)]</font>"
+
+// Returns direction-string, rounded to multiples of 22.5, from the first parameter to the second
+// N, NNE, NE, ENE, E, ESE, SE, SSE, S, SSW, SW, WSW, W, WNW, NW, NNW
+/proc/get_compass_direction_string(var/turf/A, var/turf/B)
+	var/degree = Get_Angle(A, B)
+	switch(round(degree, 22.5) % 360) // % appears to round down floats, hence below values all being integers
+		if(0)
+			return "North"
+		if(22)
+			return "North-Northeast"
+		if(45)
+			return "Northeast"
+		if(67)
+			return "East-Northeast"
+		if(90)
+			return "East"
+		if(112)
+			return "East-Southeast"
+		if(135)
+			return "Southeast"
+		if(157)
+			return "South-Southeast"
+		if(180)
+			return "South"
+		if(202)
+			return "South-Southwest"
+		if(225)
+			return "Southwest"
+		if(247)
+			return "West-Southwest"
+		if(270)
+			return "West"
+		if(292)
+			return "West-Northwest"
+		if(315)
+			return "Northwest"
+		if(337)
+			return "North-Northwest"

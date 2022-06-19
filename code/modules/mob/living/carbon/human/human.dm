@@ -67,6 +67,11 @@
 /mob/living/carbon/human/Stat()
 	. = ..()
 	if(statpanel("Status"))
+
+		var/obj/item/gps/G = get_active_hand()
+		if(istype(G))
+			stat("Coordinates:", "[G.get_coordinates()]")
+
 		stat("Intent:", "[a_intent]")
 		stat("Move Mode:", "[move_intent.name]")
 
