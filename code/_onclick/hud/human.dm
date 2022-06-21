@@ -282,6 +282,11 @@
 		client.screen -= hud_used.hotkeybuttons
 		hud_used.hotkey_ui_hidden = 1
 
+/mob/living/carbon/human/AltClick(var/mob/user)
+	if(user != src || !wearing_rig || wearing_rig.canremove)
+		return ..()
+	wearing_rig.open_rig_ui(user)
+
 // Yes, these use icon state. Yes, these are terrible. The alternative is duplicating
 // a bunch of fairly blobby logic for every click override on these objects.
 

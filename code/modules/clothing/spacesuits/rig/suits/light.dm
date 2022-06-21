@@ -105,7 +105,7 @@
 	gloves = /obj/item/clothing/gloves/rig/light/ninja
 	cell =   /obj/item/cell/hyper
 
-	req_access = list(access_syndicate)
+	req_access = list(access_armory)
 
 	initial_modules = list(
 		/obj/item/rig_module/teleporter,

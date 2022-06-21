@@ -11,6 +11,8 @@
 	icon = 'icons/clothing/rigs/rig.dmi'
 	icon_state = ICON_STATE_WORLD
 	desc = "A back-mounted hardsuit deployment and control mechanism."
+	action_button_name = "Deploy Hardsuit"
+	action_button_desc = "Deploys chest, helmet, gloves and boots."
 	slot_flags = SLOT_BACK
 	w_class = ITEM_SIZE_HUGE
 	center_of_mass = null
@@ -170,6 +172,57 @@
 
 	set_slowdown_and_vision(!offline)
 	update_icon(1)
+
+/obj/item/rig/attack_self(mob/user)
+	. = ..()
+	var/deployed = FALSE
+	if(!istype(wearer) || wearer.get_equipped_item(slot_back_str) != src)
+		to_chat(usr, "<span class='warning'>The hardsuit is not being worn.</span>")
+		return
+
+	if(!check_suit_access(usr))
+		return
+
+	if(!deployed)
+		toggle_seals(wearer)
+		deployed = TRUE
+
+	else
+		toggle_seals(wearer)
+		deployed = FALSE
+
+/obj/item/rig/proc/open_rig_ui(mob/user)
+	if(!isliving(user))
+		return
+
+	if(user.stat)
+		return
+
+	if(!LAZYLEN(installed_modules))
+		return
+
+	var/obj/item/rig_module/A = null
+
+	do
+		A = choose_module(user)
+		to_world(A)
+		if(!A)
+			return
+		if(!istype(A, /obj/item/rig_module/vision))
+			if(!A.select_charge(user))
+				return
+			if(!A.toogle_select())
+				A.toggle_module()
+		else
+			var/obj/item/rig_module/vision/V = A
+			V.select_vision(user)
+	while(A)
+
+/obj/item/rig/proc/choose_module(mob/user)
+	if(LAZYLEN(installed_modules) > 1)
+		. = show_radial_menu(user, user, make_item_radial_menu_choices(installed_modules), "defmenu_[any2ref(user)]_[any2ref(user)]_inner", radius = 42, tooltips = TRUE)
+	else
+		. = installed_modules[1]
 
 /obj/item/rig/Destroy()
 	for(var/obj/item/piece in list(gloves,boots,helmet,chest))

@@ -201,3 +201,29 @@
 		processed_vision += vision_datum
 
 	vision_modes = processed_vision
+
+/obj/item/rig_module/vision/proc/select_vision(mob/user)
+	if(!vision_modes)
+		return TRUE
+
+	var/list/choices
+	var/list/modeName2mode = list()
+	var/list/modes = list("Toggle")
+
+	var/datum/rig_vision/A = null
+
+	for (var/datum/rig_vision/vision as anything in vision_modes)
+		modeName2mode[vision.mode] = vision
+	//modes += modeName2mode
+
+	for(var/thing in modes)
+		var/ui = thing
+		var/image/radial_button = new
+		radial_button.name = capitalize(ui)
+		LAZYSET(choices, ui, radial_button)
+	A = show_radial_menu(user, user, choices, "defmenu_[any2ref(user)]_[any2ref(user)]_outer", radius = 42, tooltips = TRUE)
+
+	if(A == "Toggle")
+		src.toggle_module()
+	else
+		vision = modeName2mode[A]

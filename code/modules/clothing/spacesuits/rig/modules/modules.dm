@@ -223,6 +223,13 @@
 
 	return 1
 
+//Proc for toggling abilities
+/obj/item/rig_module/proc/toggle_module()
+	if(active)
+		deactivate()
+	else
+		activate()
+
 //Proc for selecting module
 /obj/item/rig_module/proc/select()
 
@@ -242,6 +249,42 @@
 		suit_overlay = null
 	holder.update_icon()
 	return 1
+
+/obj/item/rig_module/proc/toogle_select()
+	if(!selectable)
+		return FALSE
+
+	if(holder.selected_module == src)
+		return FALSE
+
+	select()
+	to_chat(usr, "<font color='blue'><b>Primary system is now: [src].</b></font>")
+
+	return TRUE
+
+/obj/item/rig_module/proc/select_charge(mob/user)
+	if(!LAZYLEN(charges))
+		return TRUE
+
+	var/list/choices
+	var/new_charge
+
+	for(var/thing in charges)
+		var/ui = thing
+		var/image/radial_button = new
+		radial_button.name = capitalize(ui)
+		LAZYSET(choices, ui, radial_button)
+	if(LAZYLEN(choices) > 1)
+		new_charge = show_radial_menu(user, user, choices, "defmenu_[any2ref(user)]_[any2ref(user)]_outer", radius = 42, use_labels = TRUE)
+	else
+		new_charge = choices[1]
+	charge_selected = new_charge
+
+	if(!charge_selected)
+		return FALSE
+	return TRUE
+
+
 
 // Called when the module is uninstalled from a suit.
 /obj/item/rig_module/proc/removed()

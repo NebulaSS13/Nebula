@@ -7099,6 +7099,7 @@
 /obj/machinery/atmospherics/pipe/manifold/hidden/supply{
 	dir = 4
 	},
+/obj/item/rig/light/ninja,
 /turf/simulated/floor/tiled/dark,
 /area/ship/trade/command/bridge)
 "YN" = (
