@@ -8,6 +8,8 @@
 	extended_desc = "This program allows remote access to the camera system. Some cameras may have additional access requirements."
 	size = 12
 	available_on_network = 1
+	requires_network = 1
+	requires_network_feature = NET_FEATURE_SECURITY
 	category = PROG_MONITOR
 
 /datum/nano_module/program/camera_monitor

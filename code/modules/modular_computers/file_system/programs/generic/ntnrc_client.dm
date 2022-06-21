@@ -6,7 +6,7 @@
 	program_menu_icon = "comment"
 	extended_desc = "This program allows communication over the local network"
 	size = 8
-	requires_network_feature = NETWORK_COMMUNICATION
+	requires_network_feature = NET_FEATURE_COMMUNICATION
 	network_destination = "chat server"
 	ui_header = "ntnrc_idle.gif"
 	available_on_network = 1

@@ -87,7 +87,7 @@ var/global/list/default_initial_tech_levels
 		tech_levels = get_default_initial_tech_levels()
 	..()
 	design_databases += src
-	set_extension(src, /datum/extension/network_device, initial_network_id, initial_network_key, NETWORK_CONNECTION_STRONG_WIRELESS)
+	set_extension(src, /datum/extension/network_device, initial_network_id, initial_network_key, RECEIVER_STRONG_WIRELESS)
 	update_icon()
 	. = INITIALIZE_HINT_LATELOAD
 

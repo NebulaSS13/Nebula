@@ -9,6 +9,7 @@
 	ui_header = "power_norm.gif"
 	read_access = list(access_engine)
 	requires_network = 1
+	requires_network_feature = NET_FEATURE_SYSTEMCONTROL
 	network_destination = "power monitoring system"
 	size = 9
 	category = PROG_ENG

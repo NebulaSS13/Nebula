@@ -1,6 +1,11 @@
 /datum/extension/local_network_member
 	base_type = /datum/extension/local_network_member
 	var/id_tag
+	var/unique = FALSE // If set to true, other objects of the same type cannot be added to the local network
+
+/datum/extension/local_network_member/New(datum/holder, is_unique = FALSE)
+	unique = is_unique
+	. = ..()
 
 /datum/extension/local_network_member/Destroy()
 	if(holder)
@@ -28,6 +33,9 @@
 		lan.add_device(holder)
 		to_chat(user, SPAN_NOTICE("You create a new [new_ident] local network and register \the [holder] with it."))
 	else if(lan.within_radius(holder))
+		if(unique && length(lan.network_entities[holder.type]))
+			to_chat(user, SPAN_WARNING("\A [holder] is already registered to the local network."))
+			return FALSE
 		lan.add_device(holder)
 		to_chat(user, SPAN_NOTICE("You register \the [holder] with the [new_ident] local network."))
 	else
@@ -75,6 +83,9 @@
 		lan.add_device(holder)
 		to_chat(user, SPAN_NOTICE("You create a new [new_ident] local network and register \the [holder] with it."))
 	else if(lan.within_radius(holder))
+		if(unique && length(lan.network_entities[holder.type]))
+			to_chat(user, SPAN_WARNING("\A [holder] is already registered to the local network."))
+			return FALSE
 		lan.add_device(holder)
 		to_chat(user, SPAN_NOTICE("You register \the [holder] with the [new_ident] local network."))
 	else

@@ -11,6 +11,7 @@
 	usage_flags = PROGRAM_CONSOLE | PROGRAM_LAPTOP
 	available_on_network = 1
 	requires_network = 1
+	requires_network_feature = NET_FEATURE_DECK
 	category = PROG_SUPPLY
 
 /datum/computer_file/program/docking/on_startup()

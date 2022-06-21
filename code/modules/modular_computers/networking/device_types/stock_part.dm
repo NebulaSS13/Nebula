@@ -1,6 +1,7 @@
 // Attached to a stock part for issuing commands to machinery via networks.
 /datum/extension/network_device/stock_part
 	has_commands = TRUE
+	internet_allowed = TRUE // GOOSE devices, network locks, etc. can all connect over PLEXUS 
 
 // Network receivers check the access of the parent machine, and do not check for network administrator access.
 /datum/extension/network_device/stock_part/has_access(mob/user)

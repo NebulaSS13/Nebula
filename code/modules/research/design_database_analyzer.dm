@@ -18,7 +18,7 @@
 
 /obj/machinery/destructive_analyzer/Initialize()
 	. = ..()
-	set_extension(src, /datum/extension/network_device, initial_network_id, initial_network_key, NETWORK_CONNECTION_STRONG_WIRELESS)
+	set_extension(src, /datum/extension/network_device, initial_network_id, initial_network_key, RECEIVER_STRONG_WIRELESS)
 
 /obj/machinery/destructive_analyzer/modify_mapped_vars(map_hash)
 	..()

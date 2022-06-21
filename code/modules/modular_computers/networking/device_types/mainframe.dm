@@ -7,7 +7,6 @@ var/global/list/all_mainframe_roles = list(
 )
 
 /datum/extension/network_device/mainframe
-	connection_type = NETWORK_CONNECTION_STRONG_WIRELESS
 	expected_type = /obj/machinery
 	var/max_log_count = 100
 	var/list/roles = list()

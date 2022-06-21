@@ -18,7 +18,7 @@
 	var/overheated = FALSE
 
 /obj/machinery/network/Initialize()
-	set_extension(src, network_device_type, initial_network_id, initial_network_key, NETWORK_CONNECTION_STRONG_WIRELESS)
+	set_extension(src, network_device_type, initial_network_id, initial_network_key, RECEIVER_STRONG_WIRELESS)
 	. = ..()
 
 /obj/machinery/network/populate_parts(full_populate)

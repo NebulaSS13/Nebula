@@ -1,5 +1,6 @@
-#define WIRELESS_CONNECTION 1
-#define WIRED_CONNECTION    2
+#define INTERNET_CONNECTION 1
+#define WIRELESS_CONNECTION 2
+#define WIRED_CONNECTION    3
 
 /datum/computer_network
 	var/network_id
@@ -16,9 +17,10 @@
 	var/list/cameras_by_channel = list()
 
 	var/datum/extension/network_device/broadcaster/router/router
+	var/datum/extension/network_device/modem/modem
 	var/datum/extension/network_device/acl/access_controller
 
-	var/network_features_enabled = NETWORK_ALL_FEATURES
+	var/network_features_enabled = NET_ALL_FEATURES
 	var/intrusion_detection_enabled
 	var/intrusion_detection_alarm
 	var/list/banned_nids = list()
@@ -47,25 +49,36 @@
 		return FALSE
 	if(D in devices)
 		return TRUE
+	
+	if(!check_connection(D))
+		return FALSE
+
+	var/newtag = get_unique_tag(D.network_tag)
+
 	if(istype(D, /datum/extension/network_device/mainframe))
 		var/datum/extension/network_device/mainframe/M = D
 		mainframes |= M
 		for(var/role in M.roles)
 			LAZYDISTINCTADD(mainframes_by_role[role], M)
-		add_log("Mainframe ONLINE with roles: [english_list(M.roles)]", D.network_tag)
+		add_log("Mainframe ONLINE with roles: [english_list(M.roles)]", newtag)
 	else if(istype(D, /datum/extension/network_device/broadcaster/relay))
 		relays |= D
-		add_log("Relay ONLINE", D.network_tag)
+		add_log("Relay ONLINE", newtag)
 	else if(istype(D, /datum/extension/network_device/acl))
 		if(access_controller)
 			return FALSE
 		access_controller = D
-		add_log("New main access controller set.", D.network_tag)
+		add_log("New main access controller set", newtag)
+	else if(istype(D, /datum/extension/network_device/modem))
+		if(modem)
+			return FALSE
+		modem = D
+		add_log("New modem connecting to PLEXUS set", newtag)
 	else if(istype(D, /datum/extension/network_device/camera))
 		var/datum/extension/network_device/camera/C = D
 		add_camera_to_channels(C, C.channels)
-
-	D.network_tag = get_unique_tag(D.network_tag)
+	
+	D.network_tag = newtag
 	devices |= D
 	devices_by_tag[D.network_tag] = D
 	return TRUE
@@ -116,45 +129,67 @@
 	add_device(D)
 	add_log("New main router set.", router.network_tag)
 
+/datum/computer_network/proc/set_access_controller(datum/extension/network_device/D)
+	access_controller = D
+	devices |= D
+	add_log("New main access controller set.", D.network_tag)
+
+// Returns list(signal type, signal strength) on success, null on failure.
 /datum/computer_network/proc/check_connection(datum/extension/network_device/D, specific_action)
 	if(!router)
-		return FALSE
+		return
 	var/obj/machinery/M = router.holder
 	if(istype(M) && !M.operable())
-		return FALSE
+		return
 	if(specific_action && !(network_features_enabled & specific_action))
-		return FALSE
+		return
 	var/list/broadcasters = relays + router
 	var/datum/graph/device_graph = D.get_wired_connection()
-	for(var/datum/extension/network_device/broadcaster/R in broadcasters)
-		if(device_graph)
-			var/wired_connection = R.get_wired_connection()
-			if(!isnull(wired_connection) && wired_connection == device_graph)
-				return WIRED_CONNECTION
-		else if(.) // If we're not checking for wired connections, return at the first found connection.
-			return
-		if(R.allow_wifi && (R.long_range || (get_z(R.holder) == get_z(D.holder))))
-			. = WIRELESS_CONNECTION
+	var/receiver_strength = D.receiver_type
 
-/datum/computer_network/proc/get_signal_strength(datum/extension/network_device/D)
-	var/connection_status = check_connection(D)
-	if(!connection_status || !devices_by_tag[D.network_tag])
-		return 0
-	// There is a direct wired connection between a broadcaster on the network and the device.
-	if(connection_status == WIRED_CONNECTION)
-		return NETWORK_WIRED_CONNECTION_STRENGTH
-	var/receiver_strength = D.connection_type
-	var/list/broadcasters = relays + router
 	var/best_signal = 0
+	var/functional_broadcaster = FALSE
 	for(var/datum/extension/network_device/broadcaster/B in broadcasters)
-		if(!B.allow_wifi || get_z(B.holder) != get_z(D.holder))	// Devices must be in the same z-level as the broadcaster to work.
+		if(device_graph)
+			var/wired_connection = B.get_wired_connection()
+			if(!isnull(wired_connection) && wired_connection == device_graph)
+				return list(WIRED_CONNECTION, NETWORK_WIRED_CONNECTION_STRENGTH)
+
+		if(!B.allow_wifi)
 			continue
 		var/broadcast_strength = B.get_broadcast_strength()
-		if(!ARE_Z_CONNECTED(get_z(router.holder), get_z(B.holder)))  // If the relay/secondary router is not in the same z-chunk as the main router, then the signal strength is halved.
+		if(!broadcast_strength)
+			continue
+
+		// For long ranged devices, checking to make sure there's at least a functional broadcaster somewhere.		
+		functional_broadcaster = TRUE
+
+		var/d_z = get_z(D.holder)
+		var/b_z = get_z(B.holder)
+
+		if(!ARE_Z_CONNECTED(d_z, b_z))
+			continue
+		
+		if(d_z != b_z)  // If the broadcaster is not in the same z-level as the device, the broadcast strength is halved.
 			broadcast_strength = round(broadcast_strength/2)
 		var/distance = get_dist(get_turf(B.holder), get_turf(D.holder))
 		best_signal = max(best_signal, (broadcast_strength * receiver_strength) - distance)
-	return best_signal
+
+	if(best_signal)
+		return list(WIRELESS_CONNECTION, best_signal)
+
+	// Long ranged devices can connect across z-chunk boundaries. If they're not in the same z-chunk as a broadcaster,
+	// they simply use internet speed.
+	if(D.long_range && functional_broadcaster)
+		return list(WIRELESS_CONNECTION, NETWORK_INTERNET_CONNECTION_STRENGTH)
+
+	if(!modem || !D.internet_allowed)
+		return
+	if(specific_action && !(modem.allowed_features & specific_action))
+		return
+	// If the overmap is disabled, a modem alone allows global PLEXUS connection.
+	if(modem.has_internet_connection(network_id) && D.has_internet_connection(network_id))
+		return list(INTERNET_CONNECTION, NETWORK_INTERNET_CONNECTION_STRENGTH)
 
 /datum/computer_network/proc/get_device_by_tag(nettag)
 	return devices_by_tag[nettag]
@@ -180,6 +215,26 @@
 
 /datum/computer_network/proc/disable_network_feature(feature)
 	network_features_enabled &= ~feature
+
+// Returns a computer network if an internet connection with the enabled feature is available.
+// If the computer network is the same, then only the local feature is checked.
+/datum/computer_network/proc/get_internet_connection(target_id, feature)
+	var/datum/computer_network/target_network = SSnetworking.networks[target_id]
+	if(!target_network)
+		return
+	
+	if(target_network == src)
+		if(network_features_enabled & feature)
+			return target_network
+		return
+
+	if(check_internet_feature(feature) && target_network.check_internet_feature(feature))
+		return target_network
+
+/datum/computer_network/proc/check_internet_feature(feature)
+	if(!modem || !modem.has_internet_connection(network_id))
+		return FALSE
+	return modem.allowed_features & feature
 
 /datum/computer_network/proc/update_mainframe_roles(datum/extension/network_device/mainframe/M)
 	if(!(M in mainframes))

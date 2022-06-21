@@ -9,7 +9,7 @@
 	read_access = list(access_atmospherics)
 	requires_network = 1
 	network_destination = "atmospheric control system"
-	requires_network_feature = NETWORK_SYSTEMCONTROL
+	requires_network_feature = NET_FEATURE_SYSTEMCONTROL
 	usage_flags = PROGRAM_LAPTOP | PROGRAM_CONSOLE
 	category = PROG_ENG
 	size = 17

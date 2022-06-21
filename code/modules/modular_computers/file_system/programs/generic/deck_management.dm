@@ -15,6 +15,7 @@
 	size = 18
 	available_on_network = 1
 	requires_network = 1
+	requires_network_feature = NET_FEATURE_DECK
 	category = PROG_SUPPLY
 
 /datum/nano_module/deck_management
