@@ -1,0 +1,11 @@
+author: ''
+delete-after: true
+changes:
+  - tweak: Network machinery now has lower tech requirements across the board.
+  - tweak: Network broadcasters now have their signal strength scale with the rating
+      of installed microlasers.
+  - rscadd: Computer networks are now able to communicate over PLEXUS.
+  - rscadd: Adds PLEXUS uplinks, machinery which allows devices to connect to PLEXUS
+      in conjunction with a PLEXUS repeater.
+  - tweak: Network signal simulation has been adjusted slightly. Connection strengths
+      should be comparable with old setups.
