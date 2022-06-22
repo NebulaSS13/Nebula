@@ -113,7 +113,7 @@ var/global/const/OVERMAP_SPEED_CONSTANT = (1 SECOND)
 	var/burns_per_grid = 1/ (burn_delay * get_speed())
 	return round(num_burns / burns_per_grid)
 
-/obj/effect/overmap/visitable/ship/Process(tick, wait)
+/obj/effect/overmap/visitable/ship/Process(wait, tick)
 	damping_strength = 0
 	for(var/datum/ship_inertial_damper/I in inertial_dampers)
 		var/obj/machinery/inertial_damper/ID = I.holder

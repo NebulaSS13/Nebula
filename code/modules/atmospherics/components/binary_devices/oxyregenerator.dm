@@ -47,7 +47,7 @@
 	. = ..()
 	to_chat(user,"Its outlet port is to the [dir2text(dir)].")
 
-/obj/machinery/atmospherics/binary/oxyregenerator/Process(var/delay)
+/obj/machinery/atmospherics/binary/oxyregenerator/Process(wait, tick)
 	..()
 	if((stat & (NOPOWER|BROKEN)) || !use_power)
 		return
@@ -70,7 +70,7 @@
 
 	if (phase == "processing")//processing CO2 in tank
 		if (inner_tank.gas[/decl/material/gas/carbon_dioxide])
-			var/co2_intake = between(0, inner_tank.gas[/decl/material/gas/carbon_dioxide], power_setting*delay/10)
+			var/co2_intake = between(0, inner_tank.gas[/decl/material/gas/carbon_dioxide], power_setting*wait/10)
 			last_flow_rate = co2_intake
 			inner_tank.adjust_gas(/decl/material/gas/carbon_dioxide, -co2_intake, 1)
 			var/datum/gas_mixture/new_oxygen = new

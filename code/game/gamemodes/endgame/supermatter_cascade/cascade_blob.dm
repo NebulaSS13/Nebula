@@ -22,13 +22,13 @@
 		try_supermatter_consume(null, A, src)
 
 /turf/unsimulated/wall/cascade/Destroy()
-	STOP_PROCESSING(SSturf, src)	
+	STOP_PROCESSING(SSturf, src)
 	. = ..()
 
-/turf/unsimulated/wall/cascade/Process(wait, times_fired)
+/turf/unsimulated/wall/cascade/Process(wait, tick)
 	// Only check infrequently.
 	var/how_often = max(round(5 SECONDS/wait), 1)
-	if(times_fired % how_often)
+	if(tick % how_often)
 		return
 
 	// No more available directions? Stop processing.

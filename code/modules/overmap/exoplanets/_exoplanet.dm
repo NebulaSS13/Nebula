@@ -155,7 +155,7 @@
 	engravings += "."
 	return engravings
 
-/obj/effect/overmap/visitable/sector/exoplanet/Process(tick, wait)
+/obj/effect/overmap/visitable/sector/exoplanet/Process(wait, tick)
 
 	if(animals.len < 0.5*max_animal_count && !repopulating)
 		repopulating = 1

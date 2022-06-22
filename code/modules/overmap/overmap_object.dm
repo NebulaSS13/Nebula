@@ -137,7 +137,7 @@ var/global/list/overmap_unknown_ids = list()
 /obj/effect/overmap/proc/update_moving()
 	if(is_still())
 		SSovermap.moving_entities -= src
-	else if(!SSovermap.moving_entities[src])
+	else
 		SSovermap.moving_entities[src] = TRUE
 	update_icon()
 
