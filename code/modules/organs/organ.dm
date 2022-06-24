@@ -519,7 +519,6 @@ var/global/list/ailment_reference_cache = list()
 /obj/item/organ/proc/do_uninstall(var/in_place = FALSE, var/detach = FALSE, var/ignore_children = FALSE, var/update_icon = TRUE)
 	action_button_name = null
 	screen_loc = null
-	owner = null
 	rejecting = null
 	for(var/datum/ailment/ailment in ailments)
 		if(ailment.timer_id)
@@ -529,6 +528,8 @@ var/global/list/ailment_reference_cache = list()
 	//When we detach, we set the ORGAN_CUT_AWAY flag on, depending on whether the organ supports it or not
 	if(detach)
 		set_detached(TRUE)
+	else 
+		owner = null
 	return src
 
 //Events handling for checks and effects that should happen when removing the organ through interactions. Called by the owner mob.
