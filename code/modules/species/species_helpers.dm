@@ -42,6 +42,7 @@ var/global/list/stored_shock_by_ref = list()
 		for(var/mark_type in base_markings)
 			if(!LAZYACCESS(pref.body_markings, mark_type))
 				LAZYSET(pref.body_markings, mark_type, base_markings[mark_type])
+
 	pref.skin_colour = base_color
 	pref.eye_colour = base_eye_color
 	pref.hair_colour = base_hair_color
@@ -64,6 +65,16 @@ var/global/list/stored_shock_by_ref = list()
 	mannequin.hair_colour = base_hair_color
 	mannequin.facial_hair_colour = base_hair_color
 	set_default_hair(mannequin)
+
+	if(preview_outfit)
+		var/decl/hierarchy/outfit/outfit = GET_DECL(preview_outfit)
+		outfit.equip(mannequin)
+
+		// Backpacks are ugly on preview icons, especially nonhumans.
+		var/obj/item/storage/backpack = mannequin.get_equipped_item(slot_back_str)
+		if(istype(backpack))
+			mannequin.drop_from_inventory(backpack)
+			qdel(backpack)
 
 	mannequin.force_update_limbs()
 	mannequin.update_mutations(0)

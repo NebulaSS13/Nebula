@@ -37,6 +37,8 @@
 	passive_temp_gain =     5  // stabilize at ~80 C in a 20 C environment.
 	heat_discomfort_level = 373.15
 
+	preview_outfit = null
+
 	base_color = "#333355"
 	base_eye_color = "#00ccff"
 	base_markings = list(
@@ -60,9 +62,10 @@
 	available_cultural_info = list(
 		TAG_CULTURE = list(/decl/cultural_info/culture/synthetic)
 	)
+	override_limb_types = list(BP_HEAD = /obj/item/organ/external/head/utility_frame)
 	has_organ = list(
 		BP_POSIBRAIN = /obj/item/organ/internal/posibrain,
-		BP_EYES      = /obj/item/organ/internal/eyes/robot,
+		BP_EYES      = /obj/item/organ/internal/eyes/robot/utility_frame,
 		BP_CELL      = /obj/item/organ/internal/cell,
 	)
 
@@ -73,19 +76,17 @@
 		/decl/emote/exertion/synthetic/creak
 	)
 
+/obj/item/organ/internal/eyes/robot/utility_frame
+	eye_icon = 'mods/species/utility_frames/icons/eyes.dmi'
+
+/obj/item/organ/external/head/utility_frame
+	glowing_eyes = TRUE
+
 /decl/species/utility_frame/apply_species_organ_modifications(obj/item/organ/org)
 	..()
-	var/obj/item/organ/external/E = org
-	if(istype(E) && !BP_IS_PROSTHETIC(E))
-		E.robotize(/decl/prosthetics_manufacturer/utility_frame)
-	var/obj/item/organ/external/head/head = org
-	if(istype(head))
-		head.glowing_eyes = TRUE
-	var/obj/item/organ/internal/eyes/eyes = org
-	if(istype(eyes))
-		eyes.eye_icon = 'mods/species/utility_frames/icons/eyes.dmi'
-	if(E.owner)
-		E.owner.refresh_visible_overlays()
+	if(istype(org, /obj/item/organ/external))
+		var/obj/item/organ/external/E = org
+		E.robotize(/decl/prosthetics_manufacturer/utility_frame, FALSE, TRUE, /decl/material/solid/metal/steel, BODYTYPE_HUMANOID, SPECIES_FRAME)
 
 /decl/species/utility_frame/disfigure_msg(var/mob/living/carbon/human/H)
 	. = SPAN_DANGER("The faceplate is dented and cracked!\n")

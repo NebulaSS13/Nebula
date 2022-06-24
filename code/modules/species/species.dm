@@ -278,6 +278,7 @@ var/global/const/DEFAULT_SPECIES_HEALTH = 200
 	var/preview_icon_width = 64
 	var/preview_icon_height = 64
 	var/preview_icon_path
+	var/preview_outfit = /decl/hierarchy/outfit/job/generic/assistant
 
 /decl/species/Initialize()
 
@@ -942,13 +943,21 @@ var/global/const/DEFAULT_SPECIES_HEALTH = 200
 /decl/species/proc/get_preview_icon()
 	if(!preview_icon)
 
+		// TODO: generate an icon based on all available bodytypes.
+
 		var/mob/living/carbon/human/dummy/mannequin/mannequin = get_mannequin("#species_[ckey(name)]")
 		if(mannequin)
 
 			mannequin.change_species(name)
 			customize_preview_mannequin(mannequin)
 
-			preview_icon = getFlatIcon(mannequin)
+			preview_icon = icon(mannequin.bodytype.icon_template)
+			var/mob_width = preview_icon.Width()
+			preview_icon.Scale((mob_width * 2)+16, preview_icon.Height()+16)
+
+			preview_icon.Blend(getFlatIcon(mannequin, defdir = SOUTH, always_use_defdir = TRUE), ICON_OVERLAY, 8, 8)
+			preview_icon.Blend(getFlatIcon(mannequin, defdir = WEST,  always_use_defdir = TRUE), ICON_OVERLAY, mob_width+8, 8)
+
 			preview_icon.Scale(preview_icon.Width() * 2, preview_icon.Height() * 2)
 			preview_icon_width = preview_icon.Width()
 			preview_icon_height = preview_icon.Height()

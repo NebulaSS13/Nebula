@@ -22,6 +22,8 @@
 
 	available_bodytypes = list(/decl/bodytype/feline)
 
+	preview_outfit = /decl/hierarchy/outfit/job/generic/engineer
+
 	spawn_flags = SPECIES_CAN_JOIN
 	appearance_flags = HAS_HAIR_COLOR | HAS_LIPS | HAS_UNDERWEAR | HAS_SKIN_COLOR | HAS_EYE_COLOR
 
@@ -36,12 +38,12 @@
 		/decl/blood_type/feline/ominus
 	)
 
-	flesh_color = "#afa59e"
-	base_markings = list(/decl/sprite_accessory/marking/tajaran = "#888888")
-	base_hair_color = "#515151"
-	base_color = "#787878"
+	flesh_color = "#ae7d32"
+	base_markings = list(/decl/sprite_accessory/marking/tajaran = "#ae7d32")
+	base_hair_color = "#46321c"
+	base_color = "#ae7d32"
 	base_eye_color = "#00aa00"
-	default_h_style = /decl/sprite_accessory/hair/taj
+	default_h_style = /decl/sprite_accessory/hair/taj/lynx
 
 	organs_icon = 'mods/species/bayliens/tajaran/icons/organs.dmi'
 

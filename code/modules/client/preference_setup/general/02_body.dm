@@ -322,7 +322,7 @@
 
 	else if(href_list["marking_color"])
 		var/decl/sprite_accessory/M = locate(href_list["marking_color"])
-		var/mark_color = input(user, "Choose the [M] color: ", CHARACTER_PREFERENCE_INPUT_TITLE, pref.body_markings[M]) as color|null
+		var/mark_color = input(user, "Choose the [M] color: ", CHARACTER_PREFERENCE_INPUT_TITLE, pref.body_markings[M.type]) as color|null
 		if(mark_color && CanUseTopic(user))
 			pref.body_markings[M.type] = "[mark_color]"
 			return TOPIC_REFRESH_UPDATE_PREVIEW

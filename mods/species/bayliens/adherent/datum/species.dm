@@ -48,6 +48,8 @@
 	mob_size =                MOB_SIZE_LARGE
 	strength =                STR_HIGH
 
+	base_eye_color = COLOR_LIME
+
 	speech_sounds = list('mods/species/bayliens/adherent/sound/chime.ogg')
 	speech_chance = 25
 
@@ -161,7 +163,7 @@
 
 /decl/species/adherent
 	var/static/list/apply_encased = list(
-		BP_CHEST, 
+		BP_CHEST,
 		BP_GROIN,
 		BP_HEAD
 	)
