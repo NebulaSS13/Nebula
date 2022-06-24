@@ -57,7 +57,7 @@
 
 	//Remove it from the implants if we are fully removing, or add it to the implants if we are detaching
 	if(affected)
-		if(status & ORGAN_CUT_AWAY)
+		if((status & ORGAN_CUT_AWAY) && detach)
 			LAZYDISTINCTADD(affected.implants, src)
 		else
 			LAZYREMOVE(affected.implants, src) 
