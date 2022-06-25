@@ -4196,7 +4196,7 @@
 /area/errant_pisces/science_wing)
 "lx" = (
 /obj/structure/table,
-/obj/item/ducttape,
+/obj/item/stack/tape_roll/duct_tape,
 /turf/simulated/floor/tiled,
 /area/errant_pisces/science_wing)
 "ly" = (

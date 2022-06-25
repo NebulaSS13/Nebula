@@ -131,7 +131,7 @@
 				/obj/item/storage/belt/utility = 2,
 				/obj/item/storage/belt/utility/atmostech = 1,
 				/obj/random/tool = 5,
-				/obj/item/ducttape = 2)
+				/obj/item/stack/tape_roll/duct_tape = 2)
 
 /obj/random/medical
 	name = "Random Medical equipment"

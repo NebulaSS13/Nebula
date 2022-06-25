@@ -1728,7 +1728,7 @@
 	locked = 1;
 	name = "External Construction Airlock"
 	},
-/obj/item/taperoll/engineering/applied,
+/obj/structure/tape_barricade/engineering,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/exodus/maintenance/security_starboard)
 "adP" = (
@@ -5450,7 +5450,7 @@
 	locked = 1;
 	name = "External Construction Airlock"
 	},
-/obj/item/taperoll/engineering/applied,
+/obj/structure/tape_barricade/engineering,
 /obj/machinery/shield_diffuser,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/exodus/maintenance/security_starboard)
@@ -5899,7 +5899,7 @@
 	},
 /obj/item/clipboard,
 /obj/item/hand_labeler,
-/obj/item/ducttape,
+/obj/item/stack/tape_roll/duct_tape,
 /turf/simulated/floor/tiled/dark,
 /area/exodus/lawoffice)
 "amt" = (
@@ -8644,7 +8644,7 @@
 /obj/structure/table/reinforced,
 /obj/item/clipboard,
 /obj/item/hand_labeler,
-/obj/item/ducttape,
+/obj/item/stack/tape_roll/duct_tape,
 /turf/simulated/floor/tiled/dark,
 /area/exodus/lawoffice)
 "arR" = (
@@ -14517,7 +14517,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
 	},
-/obj/item/ducttape,
+/obj/item/stack/tape_roll/duct_tape,
 /turf/simulated/floor/wood/walnut,
 /area/exodus/library)
 "aEG" = (
@@ -23878,7 +23878,7 @@
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
-/obj/item/ducttape,
+/obj/item/stack/tape_roll/duct_tape,
 /obj/structure/table,
 /turf/simulated/floor/tiled/steel_grid,
 /area/exodus/crew_quarters/locker)
@@ -31905,7 +31905,7 @@
 	pixel_x = -27;
 	pixel_y = 1
 	},
-/obj/item/ducttape,
+/obj/item/stack/tape_roll/duct_tape,
 /obj/structure/table{
 	name = "plastic table frame"
 	},
@@ -43635,7 +43635,7 @@
 	dir = 1;
 	pixel_y = -22
 	},
-/obj/item/taperoll/medical,
+/obj/item/stack/tape_roll/barricade_tape/medical,
 /turf/simulated/floor/tiled/white,
 /area/exodus/medical/sleeper)
 "bMy" = (
@@ -54949,7 +54949,7 @@
 	},
 /obj/item/paper_bin,
 /obj/item/pen,
-/obj/item/ducttape,
+/obj/item/stack/tape_roll/duct_tape,
 /turf/simulated/floor/tiled/white,
 /area/exodus/research/xenobiology/xenoflora)
 "cjD" = (
@@ -55628,7 +55628,7 @@
 "clf" = (
 /obj/structure/table/reinforced,
 /obj/item/clipboard,
-/obj/item/ducttape,
+/obj/item/stack/tape_roll/duct_tape,
 /turf/simulated/floor/tiled/steel_grid,
 /area/exodus/engineering/foyer)
 "clg" = (
@@ -59192,7 +59192,7 @@
 	},
 /obj/item/paper_bin,
 /obj/item/pen,
-/obj/item/ducttape,
+/obj/item/stack/tape_roll/duct_tape,
 /turf/simulated/floor/tiled/white,
 /area/exodus/research/xenobiology)
 "ctX" = (

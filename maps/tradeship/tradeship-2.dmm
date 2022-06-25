@@ -5013,7 +5013,7 @@
 /obj/item/storage/box/ammo/shotgunshells,
 /obj/item/handcuffs,
 /obj/item/boombox,
-/obj/item/taperoll/bureaucracy,
+/obj/item/stack/tape_roll/barricade_tape/bureaucracy,
 /obj/machinery/keycard_auth{
 	pixel_y = 21
 	},
@@ -5557,7 +5557,7 @@
 /obj/item/flash,
 /obj/item/clothing/glasses/sunglasses,
 /obj/item/storage/box/evidence,
-/obj/item/taperoll/police,
+/obj/item/stack/tape_roll/barricade_tape/police,
 /obj/item/holowarrant,
 /obj/item/storage/briefcase/crimekit,
 /obj/item/taperecorder,
@@ -6524,7 +6524,7 @@
 /obj/structure/closet/medical_wall/filled{
 	pixel_y = -32
 	},
-/obj/item/ducttape,
+/obj/item/stack/tape_roll/duct_tape,
 /obj/item/storage/firstaid/surgery,
 /turf/simulated/floor/tiled/white,
 /area/ship/trade/crew/medbay)

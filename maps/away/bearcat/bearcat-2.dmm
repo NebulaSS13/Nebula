@@ -2515,7 +2515,7 @@
 /obj/structure/closet/medical_wall/filled{
 	pixel_y = -32
 	},
-/obj/item/ducttape,
+/obj/item/stack/tape_roll/duct_tape,
 /obj/item/retractor,
 /obj/item/scalpel,
 /turf/simulated/floor/tiled/white,

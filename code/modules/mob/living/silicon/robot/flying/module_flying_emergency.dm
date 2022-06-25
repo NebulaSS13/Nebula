@@ -17,7 +17,7 @@
 		/obj/item/scanner/reagent/adv,
 		/obj/item/chems/borghypo/crisis,
 		/obj/item/extinguisher/mini,
-		/obj/item/taperoll/medical,
+		/obj/item/stack/tape_roll/barricade_tape/medical,
 		/obj/item/inflatable_dispenser/robot,
 		/obj/item/weldingtool/mini,
 		/obj/item/screwdriver,

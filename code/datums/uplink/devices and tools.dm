@@ -13,9 +13,9 @@
 
 /datum/uplink_item/item/tools/ductape
 	name = "Duct Tape"
-	desc = "A roll of duct tape. changes \"HELP\" into sexy \"mmm\"."
+	desc = "A roll of duct tape. Will silence anyone, just like a particularly bad duck pun."
 	item_cost = 2
-	path = /obj/item/ducttape
+	path = /obj/item/stack/tape_roll/duct_tape
 
 /datum/uplink_item/item/tools/money
 	name = "Operations Funding"
