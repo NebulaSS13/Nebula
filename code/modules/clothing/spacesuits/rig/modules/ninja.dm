@@ -165,7 +165,7 @@
 
 	if(holder && holder.wearer)
 		if(..(target) && target)
-			holder.wearer.Beam(target,"n_beam",,10)
+			holder.wearer.Beam(target, "n_beam", time = 1 SECOND)
 		return 1
 	return 0
 
