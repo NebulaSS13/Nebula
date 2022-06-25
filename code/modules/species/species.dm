@@ -867,7 +867,8 @@ var/global/const/DEFAULT_SPECIES_HEALTH = 200
 /decl/species/proc/apply_species_organ_modifications(var/obj/item/organ/org, var/mob/living/carbon/human/H)
 	SHOULD_CALL_PARENT(TRUE)
 	if(species_flags & SPECIES_FLAG_CRYSTALLINE)
-		org.status |= (ORGAN_BRITTLE|ORGAN_CRYSTAL)
+		org.status |= ORGAN_BRITTLE
+		org.organ_properties |= ORGAN_PROP_CRYSTAL
 
 /decl/species/proc/check_no_slip(var/mob/living/carbon/human/H)
 	if(can_overcome_gravity(H))

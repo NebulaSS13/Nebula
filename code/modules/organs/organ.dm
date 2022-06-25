@@ -298,12 +298,9 @@
 				aspect.apply(owner)
 
 /obj/item/organ/proc/reset_status()
-	var/was_prosthetic = BP_IS_PROSTHETIC(src)
 	status = initial(status)
 	if(species) // qdel clears species ref
 		species.apply_species_organ_modifications(src)
-	if(was_prosthetic)
-		status |= ORGAN_PROSTHETIC
 
 //Germs
 /obj/item/organ/proc/handle_antibiotics()
