@@ -105,12 +105,10 @@ var/global/list/image/hazard_overlays //Cached hazard floor overlays for the bar
 		to_chat(M, SPAN_WARNING("\The [src] can only be laid horizontally or vertically."))
 		stop_unrolling()
 		return
-
 	//Use a length of tape and place a barricade line
 	if(!place_line(M, new_loc, get_dir(old_loc, new_loc)))
 		stop_unrolling()
 		return
-
 	if(get_dist(start, new_loc) >= MAX_BARRICADE_TAPE_LENGTH)
 		to_chat(M, SPAN_WARNING("You've stretched this line of tape to the maximum!"))
 		stop_unrolling()
@@ -125,7 +123,6 @@ var/global/list/image/hazard_overlays //Cached hazard floor overlays for the bar
 	unroller         = null
 	start            = null
 	slowdown_general = initial(slowdown_general)
-
 	if(_uroller)
 		to_chat(_uroller, SPAN_NOTICE("You stop unrolling \the [src]."))
 	if(!QDELETED(src))
@@ -169,7 +166,6 @@ var/global/list/image/hazard_overlays //Cached hazard floor overlays for the bar
 	if(start)
 		stop_unrolling()
 		return
-
 	if(!can_use(1))
 		return //This shouldn't happen, but if it does, don't let them exploit it
 
