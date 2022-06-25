@@ -332,7 +332,7 @@
 		damage = between(0, damage - round(amount, 0.1), max_damage)
 
 /obj/item/organ/proc/robotize(var/company, var/skip_prosthetics = 0, var/keep_organs = 0, var/apply_material = /decl/material/solid/metal/steel, var/check_bodytype, var/check_species)
-	BP_SET_PROSTHETIC(src) //Can't be assisted and prosthetic at the same time
+	BP_SET_PROSTHETIC(src)
 	QDEL_NULL(dna)
 	reagents?.clear_reagents()
 	material = GET_DECL(apply_material)
