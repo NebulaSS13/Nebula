@@ -21,11 +21,11 @@
 		if(old_strength != wind_strength)
 			mob_shown_wind.Cut()
 
-/obj/abstract/weather_system/proc/show_wind(var/mob/M)
+/obj/abstract/weather_system/proc/show_wind(var/mob/M, var/force = FALSE)
 	var/mob_ref = weakref(M)
-	if(mob_shown_wind[mob_ref])
+	if(mob_shown_wind[mob_ref] && !force)
 		return FALSE
-	mob_shown_wind[weakref(M)] = TRUE
+	mob_shown_wind[mob_ref] = TRUE
 	. = TRUE
 	var/turf/T = get_turf(M)
 	if(istype(T))

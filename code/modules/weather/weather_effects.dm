@@ -13,7 +13,7 @@
 
 	// Never spit into the wind.
 	var/reversed_wind = global.reverse_dir[wind_direction]
-	if(wind_direction == reversed_wind)
+	if(reversed_wind == travel_dir)
 		return current_wind_strength
 	if(travel_dir & reversed_wind)
 		return round(current_wind_strength * 0.5)
