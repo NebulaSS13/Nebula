@@ -36,6 +36,20 @@
 
 	var/tmp/changing_turf
 	var/tmp/prev_type // Previous type of the turf, prior to turf translation.
+
+	// Some quick notes on the vars below: is_outside should be left set to OUTSIDE_AREA unless you 
+	// EXPLICITLY NEED a turf to have a different outside state to its area (ie. you have used a
+	// roofing tile). By default, it will ask the area for the state to use, and will update on 
+	// area change. When dealing with weather, it will check the entire z-column for interruptions 
+	// that will prevent it from using its own state, so a floor above a level will generally 
+	// override both area is_outside, and turf is_outside. The only time the base value will be used
+	// by itself is if you are dealing with a non-multiz level, or the top level of a multiz chunk.
+
+	// Weather relies on is_outside to determine if it should apply to a turf or not and will be
+	// automatically updated on ChangeTurf set_outside etc. Don't bother setting it manually, it will
+	// get overridden almost immediately.
+
+	// TL;DR: just leave these vars alone.
 	var/tmp/obj/abstract/weather_system/weather
 	var/tmp/is_outside = OUTSIDE_AREA
 
@@ -429,14 +443,14 @@ var/global/const/enterloopsanity = 100
 	// turfs must match effective is_outside value if the turf
 	// should get to use the is_outside value it wants to. If it
 	// doesn't line up, we invert the outside value (roof is not 
-	// open but turf wants to be outside, invert to outside_no).
+	// open but turf wants to be outside, invert to OUTSIDE_NO).
 
 	// Do we have a roof over our head? Should we care?
 	if(HasAbove(z))
 		var/turf/top_of_stack = src
 		while(HasAbove(top_of_stack.z))
 			top_of_stack = GetAbove(top_of_stack)
-			if(top_of_stack.is_open() != .)
+			if(top_of_stack.is_open() != . || (top_of_stack.is_outside != OUTSIDE_AREA && top_of_stack.is_outside != .))
 				return !.
 
 /turf/proc/set_outside(var/new_outside, var/skip_weather_update = FALSE)

@@ -1,3 +1,41 @@
+// Shared attackby behaviors that /turf/exterior/open also uses.
+/proc/shared_open_turf_attackhand(var/turf/target, var/mob/user)
+	for(var/atom/movable/M in target.below)
+		if(M.movable_flags & MOVABLE_FLAG_Z_INTERACT)
+			return M.attack_hand(user)
+
+/proc/shared_open_turf_attackby(var/turf/target, obj/item/thing, mob/user)
+
+	if(istype(thing, /obj/item/stack/material/rods))
+		var/ladder = (locate(/obj/structure/ladder) in target)
+		if(ladder)
+			to_chat(user, SPAN_WARNING("\The [ladder] is in the way."))
+			return TRUE
+		var/obj/structure/lattice/lattice = locate(/obj/structure/lattice, target)
+		if(lattice)
+			return lattice.attackby(thing, user)
+		var/obj/item/stack/material/rods/rods = thing
+		if (rods.use(1))
+			to_chat(user, SPAN_NOTICE("You lay down the support lattice."))
+			playsound(target, 'sound/weapons/Genhit.ogg', 50, 1)
+			new /obj/structure/lattice(locate(target.x, target.y, target.z), rods.material.type)
+		return TRUE
+
+	if (istype(thing, /obj/item/stack/tile))
+		var/obj/item/stack/tile/tile = thing
+		tile.try_build_turf(user, target)
+		return TRUE
+
+	//To lay cable.
+	if(isCoil(thing) && target.try_build_cable(thing, user))
+		return TRUE
+
+	for(var/atom/movable/M in target.below)
+		if(M.movable_flags & MOVABLE_FLAG_Z_INTERACT)
+			return M.attackby(thing, user)
+
+	return FALSE
+
 /// `direction` is the direction the atom is trying to leave by.
 /turf/proc/CanZPass(atom/A, direction, check_neighbor_canzpass = TRUE)
 
@@ -65,59 +103,10 @@
 	return TRUE
 
 /turf/simulated/open/attackby(obj/item/C, mob/user)
-
-	if(istype(C, /obj/item/grab))
-		return ..()
-
-	if (istype(C, /obj/item/stack/material/rods))
-
-		var/ladder = (locate(/obj/structure/ladder) in src)
-		if(ladder)
-			to_chat(user, SPAN_WARNING("\The [ladder] is in the way."))
-			return TRUE
-
-		var/obj/structure/lattice/L = locate(/obj/structure/lattice, src)
-		if(L)
-			return L.attackby(C, user)
-		var/obj/item/stack/material/rods/R = C
-		if (R.use(1))
-			to_chat(user, SPAN_NOTICE("You lay down the support lattice."))
-			playsound(src, 'sound/weapons/Genhit.ogg', 50, 1)
-			new /obj/structure/lattice(locate(src.x, src.y, src.z), R.material.type)
-			return TRUE
-		return
-
-	if (istype(C, /obj/item/stack/tile))
-
-		var/ladder = (locate(/obj/structure/ladder) in src)
-		if(ladder)
-			to_chat(user, SPAN_WARNING("\The [ladder] is in the way."))
-			return TRUE
-
-		var/obj/structure/lattice/L = locate(/obj/structure/lattice, src)
-		if(L)
-			var/obj/item/stack/tile/floor/S = C
-			if (!S.use(1))
-				return
-			playsound(src, 'sound/weapons/Genhit.ogg', 50, 1)
-			ChangeTurf(/turf/simulated/floor, keep_air = TRUE)
-			qdel(L)
-		else
-			to_chat(user, SPAN_WARNING("The plating is going to need some support."))
-		return TRUE
-
-	//To lay cable.
-	if(isCoil(C) && try_build_cable(C, user))
-		return TRUE
-
-	for(var/atom/movable/M in below)
-		if(M.movable_flags & MOVABLE_FLAG_Z_INTERACT)
-			return M.attackby(C, user)
+	return shared_open_turf_attackby(src, C, user)
 
 /turf/simulated/open/attack_hand(mob/user)
-	for(var/atom/movable/M in below)
-		if(M.movable_flags & MOVABLE_FLAG_Z_INTERACT)
-			return M.attack_hand(user)
+	return shared_open_turf_attackhand(src, user)
 
 //Most things use is_plating to test if there is a cover tile on top (like regular floors)
 /turf/simulated/open/is_plating()
@@ -162,52 +151,10 @@
 	return TRUE
 
 /turf/exterior/open/attackby(obj/item/C, mob/user)
-
-	if (istype(C, /obj/item/stack/material/rods))
-		var/ladder = (locate(/obj/structure/ladder) in src)
-		if(ladder)
-			to_chat(user, SPAN_WARNING("\The [ladder] is in the way."))
-			return TRUE
-		var/obj/structure/lattice/L = locate(/obj/structure/lattice, src)
-		if(L)
-			return L.attackby(C, user)
-		var/obj/item/stack/material/rods/R = C
-		if (R.use(1))
-			to_chat(user, SPAN_NOTICE("You lay down the support lattice."))
-			playsound(src, 'sound/weapons/Genhit.ogg', 50, 1)
-			new /obj/structure/lattice(locate(src.x, src.y, src.z), R.material.type)
-			return TRUE
-		return
-
-	if (istype(C, /obj/item/stack/tile))
-		var/ladder = (locate(/obj/structure/ladder) in src)
-		if(ladder)
-			to_chat(user, SPAN_WARNING("\The [ladder] is in the way."))
-			return TRUE
-		var/obj/structure/lattice/L = locate(/obj/structure/lattice, src)
-		if(L)
-			var/obj/item/stack/tile/floor/S = C
-			if (!S.use(1))
-				return
-			playsound(src, 'sound/weapons/Genhit.ogg', 50, 1)
-			ChangeTurf(/turf/simulated/floor, keep_air = TRUE)
-			qdel(L)
-		else
-			to_chat(user, SPAN_WARNING("The plating is going to need some support."))
-		return TRUE
-
-	//To lay cable.
-	if(isCoil(C) && try_build_cable(C, user))
-		return TRUE
-
-	for(var/atom/movable/M in below)
-		if(M.movable_flags & MOVABLE_FLAG_Z_INTERACT)
-			return M.attackby(C, user)
+	return shared_open_turf_attackby(src, C, user)
 
 /turf/exterior/open/attack_hand(mob/user)
-	for(var/atom/movable/M in below)
-		if(M.movable_flags & MOVABLE_FLAG_Z_INTERACT)
-			return M.attack_hand(user)
+	return shared_open_turf_attackhand(src, user)
 
 /turf/exterior/open/cannot_build_cable()
 	return 0

@@ -122,9 +122,7 @@
 
 	if(istype(C, /obj/item/stack/tile))
 		var/obj/item/stack/tile/T = C
-		if(T.use(1))
-			playsound(src, 'sound/items/Deconstruct.ogg', 80, 1)
-			ChangeTurf(/turf/simulated/floor, FALSE, FALSE, TRUE)
+		T.try_build_turf(user, src)
 		return TRUE
 
 	. = ..()

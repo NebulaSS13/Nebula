@@ -58,7 +58,7 @@
 
 /obj/structure/lattice/attackby(obj/item/C, mob/user)
 
-	if (istype(C, /obj/item/stack/tile/floor))
+	if (istype(C, /obj/item/stack/tile))
 		var/turf/T = get_turf(src)
 		T.attackby(C, user) //BubbleWrap - hand this off to the underlying turf instead
 		return

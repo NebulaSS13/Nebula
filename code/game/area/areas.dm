@@ -112,7 +112,7 @@ var/global/list/areas = list()
 	for(var/obj/machinery/M in T)
 		M.area_changed(old_area, A) // They usually get moved events, but this is the one way an area can change without triggering one.
 
-	if(T.is_outside() != old_outside)
+	if(T.is_outside == OUTSIDE_AREA && T.is_outside() != old_outside)
 		T.update_weather()
 
 /area/proc/alert_on_fall(var/mob/living/carbon/human/H)
