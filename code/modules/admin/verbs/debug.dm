@@ -468,7 +468,8 @@
 	set name = "Spawn Material Stack"
 	if(!check_rights(R_DEBUG)) return
 
-	var/decl/material/material = input("Select material to spawn") as null|anything in SSmaterials.materials
+	var/list/mat_types = sortTim(SSmaterials.materials_by_name, /proc/cmp_name_or_type_asc, TRUE)
+	var/material = input("Select material to spawn") as null|anything in mat_types
 	if(!material)
 		return
 	SSmaterials.create_object(material.type, get_turf(mob), 50)
