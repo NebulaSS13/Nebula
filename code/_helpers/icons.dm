@@ -611,7 +611,7 @@ world
 	return hsv(HSV[1], HSV[2], HSV[3], (HSV.len > 3 ? HSV[4] : null))
 
 // Convert an rgb color to grayscale
-/proc/GrayScale(rgb)
+/proc/GrayScale(rgb) //#FIXME: This isn't true grayscale. Its from an example on the Byond ref on how to manipulate colors...
 	var/list/RGB = ReadRGB(rgb)
 	var/gray = RGB[1]*0.3 + RGB[2]*0.59 + RGB[3]*0.11
 	return (RGB.len > 3) ? rgb(gray, gray, gray, RGB[4]) : rgb(gray, gray, gray)

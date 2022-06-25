@@ -108,13 +108,6 @@
 /obj/item/proc/get_origin_tech()
 	return origin_tech
 
-/obj/item/create_matter()
-	..()
-	LAZYINITLIST(matter)
-	if(istype(material))
-		matter[material.type] = max(matter[material.type], round(MATTER_AMOUNT_PRIMARY * get_matter_amount_modifier()))
-	UNSETEMPTY(matter)
-
 /obj/item/Initialize(var/ml, var/material_key)
 	if(!ispath(material_key, /decl/material))
 		material_key = material

@@ -52,7 +52,7 @@
 	else
 		to_chat(user, SPAN_DANGER("It looks heavily damaged."))
 
-/obj/structure/examine(mob/user, var/distance)
+/obj/structure/examine(mob/user, distance, infix, suffix)
 	. = ..()
 	if(distance <= 3)
 

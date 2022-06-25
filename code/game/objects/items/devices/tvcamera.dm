@@ -35,14 +35,14 @@
 	. = ..()
 	to_chat(user, "Video feed is currently: [video_enabled ? "Online" : "Offline"]")
 	to_chat(user, "Audio feed is currently: [radio.broadcasting ? "Online" : "Offline"]")
-	to_chat(user, "Photography setting is currently: [on ? "On" : "Off"]")
+	to_chat(user, "Photography setting is currently: [turned_on ? "On" : "Off"]")
 
 /obj/item/camera/tvcamera/attack_self(mob/user)
 	add_fingerprint(user)
 	user.set_machine(src)
 	var/dat = list()
-	dat += "Photography mode is currently: <a href='?src=\ref[src];photo=1'>[on ? "On" : "Off"]</a><br>"
-	dat += "Photography focus is currently: <a href='?src=\ref[src];focus=1'>[size]</a><br>"
+	dat += "Photography mode is currently: <a href='?src=\ref[src];photo=1'>[turned_on ? "On" : "Off"]</a><br>"
+	dat += "Photography focus is currently: <a href='?src=\ref[src];focus=1'>[field_of_view]</a><br>"
 	dat += "Channel name is: <a href='?src=\ref[src];channel=1'>[channel ? channel : "unidentified broadcast"]</a><br>"
 	dat += "Video streaming is: <a href='?src=\ref[src];video=1'>[video_enabled ? "Online" : "Offline"]</a><br>"
 	dat += "Microphone is: <a href='?src=\ref[src];sound=1'>[radio.broadcasting ? "Online" : "Offline"]</a><br>"
@@ -56,7 +56,7 @@
 	if(..())
 		return 1
 	if (href_list["photo"])
-		on = !on
+		turned_on = !turned_on
 	if (href_list["focus"])
 		change_size()
 	if(href_list["channel"])

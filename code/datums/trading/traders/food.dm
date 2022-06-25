@@ -83,10 +83,8 @@
 	. = ..()
 	if(.)
 		var/obj/item/chems/food/fortunecookie/cookie = new(location)
-		var/obj/item/paper/paper = new(cookie)
+		var/obj/item/paper/paper = new(cookie, null, pick(fortunes), "Fortune")
 		cookie.trash = paper
-		paper.SetName("Fortune")
-		paper.info = pick(fortunes)
 
 /datum/trader/grocery
 	name = "Grocer"

@@ -1494,34 +1494,16 @@ datum/admins/var/obj/item/paper/admin/faxreply // var to hold fax replies in
 	P.SetName("[P.origin] - [customname]")
 	P.desc = "This is a paper titled '" + P.name + "'."
 
-	var/shouldStamp = 1
+	var/shouldStamp = TRUE
 	if(!P.sender) // admin initiated
 		switch(alert("Would you like the fax stamped?",, "Yes", "No"))
 			if("No")
-				shouldStamp = 0
+				shouldStamp = FALSE
 
 	if(shouldStamp)
-		P.stamps += "<hr><i>This paper has been stamped by the [P.origin] Quantum Relay.</i>"
-
-		var/image/stampoverlay = image('icons/obj/bureaucracy.dmi')
-		var/x
-		var/y
-		x = rand(-2, 0)
-		y = rand(-1, 2)
-		P.offset_x += x
-		P.offset_y += y
-		stampoverlay.pixel_x = x
-		stampoverlay.pixel_y = y
-
-		if(!P.ico)
-			P.ico = new
-		P.ico += "paper_stamp-boss"
-		stampoverlay.icon_state = "paper_stamp-boss"
-
-		if(!P.stamped)
-			P.stamped = new
-		P.stamped += /obj/item/stamp/boss
-		P.overlays += stampoverlay
+		var/image/stampoverlay = image('icons/obj/bureaucracy.dmi', icon_state = "paper_stamp-boss", pixel_x = rand(-2, 0), pixel_y = rand(-2, 0))
+		stampoverlay.appearance_flags |= RESET_COLOR
+		P.apply_custom_stamp(stampoverlay, "by the [P.origin] Quantum Relay")
 
 	var/obj/item/rcvdcopy
 	rcvdcopy = destination.copy(P)

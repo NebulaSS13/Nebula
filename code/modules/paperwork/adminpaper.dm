@@ -23,7 +23,6 @@
 	. = ..()
 	generateInteractions()
 
-
 /obj/item/paper/admin/proc/generateInteractions()
 	//clear first
 	interactions = null
@@ -63,7 +62,6 @@
 
 	footer = text
 
-
 /obj/item/paper/admin/proc/adminbrowse()
 	updateinfolinks()
 	generateHeader()
@@ -71,9 +69,7 @@
 	updateDisplay()
 
 /obj/item/paper/admin/proc/updateDisplay()
-	show_browser(usr, "<HTML><HEAD><TITLE>[name]</TITLE></HEAD><BODY>[headerOn ? header : ""][info_links][stamps][footerOn ? footer : ""][interactions]</BODY></HTML>", "window=[name];can_close=0")
-
-
+	show_browser(usr, "<HTML><HEAD><TITLE>[name]</TITLE></HEAD><BODY>[headerOn ? header : ""][info_links][stamp_text][footerOn ? footer : ""][interactions]</BODY></HTML>", "window=[name];can_close=0")
 
 /obj/item/paper/admin/Topic(href, href_list)
 	if(href_list["write"])

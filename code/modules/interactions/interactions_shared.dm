@@ -8,3 +8,9 @@
 
 /decl/interaction_handler/remove_id
 	name = "Remove ID"
+
+/decl/interaction_handler/remove_pen
+	name = "Remove Pen"
+
+/decl/interaction_handler/rename
+	name = "Rename"

@@ -1,14 +1,17 @@
 /obj/item/stamp
-	name = "rubber stamp"
-	desc = "A rubber stamp for stamping important documents."
-	icon = 'icons/obj/bureaucracy.dmi'
-	icon_state = "stamp-deckchief"
-	item_state = "stamp"
-	throwforce = 0
-	w_class = ITEM_SIZE_TINY
+	name        = "rubber stamp"
+	desc        = "A rubber stamp for stamping important documents."
+	icon        = 'icons/obj/bureaucracy.dmi'
+	icon_state  = "stamp-deckchief"
+	item_state  = "stamp"
+	throwforce  = 0
+	w_class     = ITEM_SIZE_TINY
 	throw_speed = 7
 	throw_range = 15
-	material = /decl/material/solid/metal/steel
+	material    = /decl/material/solid/metal/steel
+	matter      = list(
+		/decl/material/solid/plastic = MATTER_AMOUNT_REINFORCEMENT,
+	)
 	attack_verb = list("stamped")
 
 /obj/item/stamp/captain

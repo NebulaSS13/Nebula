@@ -58,12 +58,11 @@
 	..()
 	var/obj/item/top_paper = top_paper()
 	if(top_paper)
-		overlays += overlay_image(top_paper.icon, top_paper.icon_state, flags=RESET_COLOR)
-		overlays += top_paper.overlays
+		add_overlay(overlay_image(top_paper.icon, top_paper.icon_state, flags=RESET_COLOR))
+		add_overlay(top_paper.overlays)
 	if(stored_pen)
-		overlays += overlay_image(icon, "clipboard_pen", flags=RESET_COLOR)
-	overlays += overlay_image(icon, "clipboard_over", flags=RESET_COLOR)
-	return
+		add_overlay(overlay_image(icon, "clipboard_pen", flags=RESET_COLOR))
+	add_overlay(overlay_image(icon, "clipboard_over", flags=RESET_COLOR))
 
 /obj/item/clipboard/attackby(obj/item/W, mob/user)
 	var/obj/item/top_paper = top_paper()
@@ -72,15 +71,25 @@
 			return
 		push_paper(W)
 		to_chat(user, SPAN_NOTICE("You clip the [W] onto \the [src]."))
+		if(user.machine)
+			attack_self(user)
 		update_icon()
 		return TRUE
 
-	else if(top_paper)
-		top_paper.attackby(W, user)
+	else if(top_paper?.attackby(W, user))
+		if(user.machine)
+			attack_self(user)
 		update_icon()
+		return TRUE
+
+	else if(IS_PEN(W) && add_pen(W, user)) //If we don't have any paper, and hit it with a pen, try slotting it in
 		return TRUE
 
 	return ..()
+
+/obj/item/clipboard/AltClick(mob/user)
+	if(stored_pen)
+		remove_pen(user)
 
 /obj/item/clipboard/attack_self(mob/user)
 	if(CanPhysicallyInteractWith(user, src))
@@ -94,31 +103,30 @@
 	else
 		dat += "<A href='?src=\ref[src];addpen=1'>Add Pen</A><BR><HR>"
 
-	for(var/i = 1 to length(papers))
+	dat += "<TABLE style='table-layout:fixed; white-space:nowrap;'>"
+	for(var/i = 1 to LAZYLEN(papers))
 		var/obj/item/P = papers[i]
-		dat += "<A href='?src=\ref[src];examine=\ref[P]'>[P.name]</A> - <DIV style='float:right;white-space: nowrap;'>"
+		dat += "<TR><TD style='width:45%; overflow:hidden; text-overflow:ellipsis;'><A href='?src=\ref[src];examine=\ref[P]'>[P.name]</A></TD>"
 		if(i == 1)
-			dat += "<A href='?src=\ref[src];write=\ref[P]'>Write</A> "
-		dat += "<A href='?src=\ref[src];remove=\ref[P]'>Remove</A> <A href='?src=\ref[src];rename=\ref[P]'>Rename</A></DIV><BR>"
+			dat += "<TD/><TD><A href='?src=\ref[src];write=\ref[P]'>Write</A></TD>"
+		else
+			dat += "<TD/><TD/>"
+		dat += "<TD><A href='?src=\ref[src];remove=\ref[P]'>Remove</A></TD><TD><A href='?src=\ref[src];rename=\ref[P]'>Rename</A></TD></TR>"
+	dat += "</TABLE>"
 
+	user.set_machine(src)
 	show_browser(user, dat, "window=clipboard")
 	onclose(user, "clipboard")
 	add_fingerprint(usr)
 	return
 
-/**Tries to find a pen in the user's held items. */
-/obj/item/clipboard/proc/get_user_pen(var/mob/user)
-	var/obj/item/I = user.get_active_hand()
-	if(I != src && IS_PEN(I))
-		return I
-	for(I in user.get_held_items()) //Its pretty likely the current held thing is the clipdboard
-		if(IS_PEN(I))
-			return I //In that case pick the first pen item we're holding
-
 /obj/item/clipboard/proc/add_pen(var/obj/item/I, var/mob/user)
 	if(!stored_pen && I.w_class <= ITEM_SIZE_TINY && IS_PEN(I) && user.unEquip(I, src))
 		stored_pen = I
 		to_chat(user, SPAN_NOTICE("You slot \the [I] into \the [src]."))
+		if(user.machine)
+			attack_self(user)
+		update_icon()
 		return TRUE
 	else if(stored_pen)
 		to_chat(user, SPAN_WARNING("There is already \a [stored_pen] in \the [src]."))
@@ -126,10 +134,14 @@
 		to_chat(user, SPAN_WARNING("\The [I] is too big to fit in \the [src]."))
 
 /obj/item/clipboard/proc/remove_pen(var/mob/user)
-	if(stored_pen && user.put_in_hands(stored_pen))
-		to_chat(user, SPAN_NOTICE("You pull your trusty [stored_pen] from your [src]."))
+	if(stored_pen && user.get_empty_hand_slot())
+		to_chat(user, SPAN_NOTICE("You pull \the [stored_pen] from your [src]."))
+		user.put_in_hands(stored_pen)
 		. = stored_pen
 		stored_pen = null
+		if(user.machine)
+			attack_self(user)
+		update_icon()
 		return .
 	else if(!stored_pen)
 		to_chat(user, SPAN_WARNING("There is no pen in \the [src]."))
@@ -141,59 +153,35 @@
 	var/obj/item/tpaper = top_paper()
 
 	if(href_list["pen"] && remove_pen(user))
-		. = TOPIC_HANDLED | TOPIC_REFRESH
+		. = TOPIC_REFRESH
 
-	else if(href_list["addpen"] && add_pen(get_user_pen(user), user))
-		. = TOPIC_HANDLED | TOPIC_REFRESH
+	else if(href_list["addpen"] && add_pen(get_accessible_pen(user), user))
+		. = TOPIC_REFRESH
 
 	else if(href_list["write"])
 		if(tpaper)
-			var/obj/item/I = get_user_pen(user)
+			var/obj/item/I = get_accessible_pen(user)
 			//We can also use the stored pen if we have one and a free hand
 			if(!I && IS_PEN(stored_pen))
 				I = remove_pen(user)
 			else if(!I)
 				to_chat(user, SPAN_WARNING("You don't have a pen!"))
+				return TOPIC_NOACTION
 
 			if(I)
 				tpaper.attackby(I, user)
-				. = TOPIC_HANDLED | TOPIC_REFRESH
+				. = TOPIC_REFRESH
 		else
 			. = TOPIC_NOACTION
 
 	else if(href_list["remove"])
 		var/obj/item/P = locate(href_list["remove"])
-		if(P && user.put_in_hands(P))
-			papers.Remove(P)
-			. = TOPIC_HANDLED | TOPIC_REFRESH
+		user.put_in_hands(P)
+		papers.Remove(P)
+		. = TOPIC_REFRESH
 
-	else if(href_list["rename"])
-		var/obj/item/O = locate(href_list["rename"])
-		if(istype(O, /obj/item/paper))
-			var/obj/item/paper/to_rename = O
-			to_rename.rename()
-			. = TOPIC_HANDLED | TOPIC_REFRESH
-
-		else if(istype(O, /obj/item/photo))
-			var/obj/item/photo/to_rename = O
-			to_rename.rename()
-			. = TOPIC_HANDLED | TOPIC_REFRESH
-
-		else
-			. = TOPIC_NOACTION
-
-	else if(href_list["examine"])
-		var/obj/item/P = locate(href_list["examine"])
-
-		if(istype(P, /obj/item/paper))
-			var/obj/item/paper/PP = P
-			PP.show_content(user)
-			. = TOPIC_HANDLED
-
-		else if(istype(P, /obj/item/photo))
-			var/obj/item/photo/PP = P
-			PP.show(user)
-			. = TOPIC_HANDLED
+	else
+		. = handle_paper_stack_shared_topics(user, href_list)
 
 	//Update everything
 	if(. & TOPIC_REFRESH)

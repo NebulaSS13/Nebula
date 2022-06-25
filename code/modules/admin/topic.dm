@@ -1045,10 +1045,10 @@
 		var/obj/item/fax = locate(href_list["AdminFaxView"])
 		if (istype(fax, /obj/item/paper))
 			var/obj/item/paper/P = fax
-			P.show_content(usr,1)
+			P.interact(usr, TRUE)
 		else if (istype(fax, /obj/item/photo))
 			var/obj/item/photo/H = fax
-			H.show(usr)
+			H.interact(usr)
 		else if (istype(fax, /obj/item/paper_bundle))
 			//having multiple people turning pages on a paper_bundle can cause issues
 			//open a browse window listing the contents instead
@@ -1070,10 +1070,10 @@
 
 		if (istype(bundle.pages[page], /obj/item/paper))
 			var/obj/item/paper/P = bundle.pages[page]
-			P.show_content(src.owner, 1)
+			P.interact(src.owner, TRUE)
 		else if (istype(bundle.pages[page], /obj/item/photo))
 			var/obj/item/photo/H = bundle.pages[page]
-			H.show(src.owner)
+			H.interact(src.owner)
 		return
 
 	else if(href_list["FaxReply"])

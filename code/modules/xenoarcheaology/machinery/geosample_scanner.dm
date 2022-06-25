@@ -274,7 +274,7 @@
 	if(scanned_item)
 		last_scan_data = get_scan_data()
 		//create report
-		new/obj/item/paper(loc, last_scan_data, "[src] report #[++report_num]: [scanned_item.name]")
+		new/obj/item/paper(loc, null, last_scan_data, "[src] report #[++report_num]: [scanned_item.name]")
 		scanned_item.dropInto(loc)
 		scanned_item = null
 
