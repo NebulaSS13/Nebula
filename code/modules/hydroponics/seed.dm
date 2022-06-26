@@ -812,3 +812,7 @@
 		res.overlays += I
 
 	return res
+
+/**Whether bees can pollinate this plant. */
+/datum/seed/proc/can_pollinate()
+	return get_trait(TRAIT_PHOTOSYNTHESIS) //Not ideal really, but the system currently has no ways of telling between flowering plants besides looking at the sprite.. At least this get rids of fungies
