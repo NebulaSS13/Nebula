@@ -49,11 +49,14 @@
 	if(open)
 		to_chat(user, "The lid is open.")
 
-/obj/structure/beehive/handle_default_screwdriver_attackby(mob/user, obj/item/screwdriver)
+/obj/structure/beehive/proc/toggle_open(var/mob/user)
 	user.visible_message(SPAN_NOTICE("\The [user] [open ? "closes" : "opens"] \the [src]."), SPAN_NOTICE("You [open ? "close" : "open"] \the [src]."))
 	open = !open
 	update_icon()
-	return TRUE
+	if(open)
+		playsound(src, 'sound/effects/closet_open.ogg', 40)
+	else
+		playsound(src, 'sound/effects/closet_close.ogg', 40)
 
 /obj/structure/beehive/attackby(var/obj/item/I, var/mob/user)
 
@@ -144,6 +147,10 @@
 	if(open)
 		return remove_frame(user)
 	return ..()
+
+/obj/structure/beehive/AltClick(mob/user)
+	. = ..()
+	return toggle_open(user)
 
 /obj/structure/beehive/Process()
 	if((REALTIMEOFDAY > time_end_smoked) && bee_count)
