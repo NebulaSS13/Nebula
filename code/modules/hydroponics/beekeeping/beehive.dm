@@ -112,8 +112,8 @@
 	if(!open)
 		to_chat(user, SPAN_WARNING("\The [src]'s lid must be opened to do this!"))
 		return
-	if(bee_count < 60 || (REALTIMEOFDAY <= time_end_smoked))
-		to_chat(user, SPAN_WARNING("\The [src] must contain at least 60 bees, and not have been recently smoked to do this!"))
+	if(bee_count < 10 || (REALTIMEOFDAY <= time_end_smoked))
+		to_chat(user, SPAN_WARNING("\The [src] must contain at least 10 bees, and not have been recently smoked to do this!"))
 		return
 
 	//Prep
@@ -123,19 +123,19 @@
 
 	//Do the initial message and align the mob over the hive
 	user.visible_message(SPAN_DANGER("\The [user] starts jamming \the [GM]'s face into \the [src]!"), SPAN_DANGER("You start jamming \the [GM]'s face into \the [src]!"))
-	GM.say("What-is-that? What-is-that? WHAT-IS-IT?!!")
 	GM.forceMove(get_turf(src))
 	GM.set_dir(NORTH)
 	GM.apply_effect(2, STUN) //knock them down, hopefully face first into the hive
 
+	var/bee_factor = (bee_count / max_bee_count)
 	var/turns = 0
 	while(do_after(user, 5 SECONDS, src) && (LAZYLEN(GM.grabbed_by)) && !(QDELETED(src) || QDELETED(user) || QDELETED(G) || QDELETED(GM)) && turns < 4)
 		++turns
-		GM.apply_effect(rand(1,20), PAIN)
-		GM.apply_damage(rand(2,8), BRUTE, BP_HEAD, 0, "bee stings", 0, TRUE)
+		var/damage = (bee_factor * 8) + rand(-2, 2)
+		GM.apply_effect(damage * 2, PAIN)
+		GM.apply_damage(damage, BRUTE, BP_HEAD, 0, "bee stings", 0, TRUE)
 		GM.emote("scream")
-		ADJ_STATUS(GM, STAT_JITTER, 10)
-		GM.say("[pick("Oh noo! Not the bees! NOT THE BEEEES!!", "AAAAAAAAAAAGH!", "AGH! THEY'RE IN MY EYES! MY EYES!")]")
+		ADJ_STATUS(GM, STAT_JITTER, 10 * bee_factor)
 
 	//If something gets deleted meanwhile just return early
 	if(QDELETED(GM) || QDELETED(G) || QDELETED(src) || QDELETED(user) || !LAZYLEN(GM.grabbed_by))
@@ -145,11 +145,11 @@
 	//Post attack
 	if(turns > 0)
 		GM.add_chemical_effect(CE_TOXIN, 1) //Bee venom
-	if(turns >= 4 && prob(10))
+	if(turns >= 4 && (bee_count >= (max_bee_count / 2)) && prob(10 * bee_factor))
 		var/obj/item/organ/external/h = GM.get_organ(BP_HEAD)
 		if(h)
 			h.disfigure(PAIN) //Set it to PAIN since otherwise it has pre-written flavor text that completely doesn't fit the situation
-			user.visible_message(SPAN_WARNING("\The [GM]'s [h] has swollen beyond recognition!"))
+			user.visible_message(SPAN_DANGER("\The [GM]'s [h] has swollen beyond recognition!"))
 
 	//Just drop it next to the hive so they don't get stuck
 	GM.forceMove(get_turf(user))
