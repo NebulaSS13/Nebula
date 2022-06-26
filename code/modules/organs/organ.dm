@@ -14,6 +14,7 @@
 
 	// Status tracking.
 	var/status = 0                         // Various status flags (such as robotic)
+	var/organ_properties = 0               // A flag for telling what capabilities this organ has. ORGAN_PROP_PROSTHETIC, ORGAN_PROP_CRYSTAL, etc..
 	var/vital                              // Lose a vital limb, die immediately.
 
 	// Reference data.
@@ -297,12 +298,9 @@
 				aspect.apply(owner)
 
 /obj/item/organ/proc/reset_status()
-	var/was_prosthetic = BP_IS_PROSTHETIC(src)
 	status = initial(status)
 	if(species) // qdel clears species ref
 		species.apply_species_organ_modifications(src)
-	if(was_prosthetic)
-		status |= ORGAN_PROSTHETIC
 
 //Germs
 /obj/item/organ/proc/handle_antibiotics()
@@ -331,18 +329,15 @@
 		damage = between(0, damage - round(amount, 0.1), max_damage)
 
 /obj/item/organ/proc/robotize(var/company, var/skip_prosthetics = 0, var/keep_organs = 0, var/apply_material = /decl/material/solid/metal/steel, var/check_bodytype, var/check_species)
-	status = ORGAN_PROSTHETIC
+	BP_SET_PROSTHETIC(src)
 	QDEL_NULL(dna)
 	reagents?.clear_reagents()
 	material = GET_DECL(apply_material)
 	matter = null
 	create_matter()
 
-/obj/item/organ/proc/mechassist() //Used to add things like pacemakers, etc
-	status = ORGAN_ASSISTED
-
 /obj/item/organ/attack(var/mob/target, var/mob/user)
-	if(status & ORGAN_PROSTHETIC || !istype(target) || !istype(user) || (user != target && user.a_intent == I_HELP))
+	if(BP_IS_PROSTHETIC(src) || !istype(target) || !istype(user) || (user != target && user.a_intent == I_HELP))
 		return ..()
 
 	if(alert("Do you really want to use this organ as food? It will be useless for anything else afterwards.",,"Ew, no.","Bon appetit!") == "Ew, no.")
@@ -378,8 +373,6 @@
 	. = list()
 	if(BP_IS_CRYSTAL(src))
 		. += tag ? "<span class='average'>Crystalline</span>" : "Crystalline"
-	else if(BP_IS_ASSISTED(src))
-		. += tag ? "<span class='average'>Assisted</span>" : "Assisted"
 	else if(BP_IS_PROSTHETIC(src))
 		. += tag ? "<span class='average'>Mechanical</span>" : "Mechanical"
 	if(status & ORGAN_CUT_AWAY)

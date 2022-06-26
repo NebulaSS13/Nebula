@@ -3,7 +3,7 @@
 	desc = "An embedded augment."
 	icon = 'icons/obj/augment.dmi'
 	//By default these fit on both flesh and robotic organs and are robotic
-	status = ORGAN_PROSTHETIC
+	organ_properties = ORGAN_PROP_PROSTHETIC
 	default_action_type = /datum/action/item_action/organ/augment
 	material = /decl/material/solid/metal/steel
 	origin_tech = "{'materials':1,'magnets':2,'engineering':2,'biotech':1}"

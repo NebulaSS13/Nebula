@@ -34,7 +34,7 @@
 	parent_organ = BP_CHEST
 	organ_tag = BP_SYSTEM_CONTROLLER
 	surface_accessible = TRUE
-	status = ORGAN_PROSTHETIC
+	organ_properties = ORGAN_PROP_PROSTHETIC
 	var/obj/item/card/id/id_card = /obj/item/card/id/ascent
 
 /obj/item/organ/internal/controller/do_install(mob/living/carbon/human/target, obj/item/organ/external/affected, in_place, update_icon, detached)

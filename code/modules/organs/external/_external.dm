@@ -155,9 +155,6 @@
 		if (3)
 			burn_damage = 7.5
 
-	var/mult = 1 + !!(BP_IS_ASSISTED(src)) // This macro returns (large) bitflags.
-	burn_damage *= mult/species.get_burn_mod(owner) //ignore burn mod for EMP damage
-
 	var/power = 4 - severity //stupid reverse severity
 	for(var/obj/item/I in implants)
 		if(I.obj_flags & OBJ_FLAG_CONDUCTIBLE)

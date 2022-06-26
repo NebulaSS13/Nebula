@@ -25,7 +25,7 @@
 
 /obj/item/organ/internal/eyes/robot
 	name = "optical sensor"
-	status = ORGAN_PROSTHETIC
+	organ_properties = ORGAN_PROP_PROSTHETIC
 	icon = 'icons/obj/robot_component.dmi'
 	flash_mod = 1
 	darksight_range = 2

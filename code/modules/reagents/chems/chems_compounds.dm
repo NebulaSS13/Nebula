@@ -411,7 +411,7 @@
 					E.dismember(0, DISMEMBER_METHOD_BLUNT)
 				else
 					E.take_external_damage(rand(20,30), 0)
-					E.status |= ORGAN_CRYSTAL
+					BP_SET_CRYSTAL(E)
 					E.status |= ORGAN_BRITTLE
 				break
 
