@@ -46,8 +46,7 @@
 
 /obj/structure/beehive/examine(mob/user)
 	. = ..()
-	if(open)
-		to_chat(user, "The lid is open.")
+	to_chat(user, "The lid is [open? "open": "closed"].")
 
 /obj/structure/beehive/proc/toggle_open(var/mob/user)
 	user.visible_message(SPAN_NOTICE("\The [user] [open ? "closes" : "opens"] \the [src]."), SPAN_NOTICE("You [open ? "close" : "open"] \the [src]."))
@@ -63,10 +62,10 @@
 	if(istype(I, /obj/item/bee_smoker))
 		return smoke_out_bees(I, user)
 
-	else if(istype(I, /obj/item/honey_frame))
+	if(istype(I, /obj/item/honey_frame))
 		return add_frame(I, user)
 
-	else if(istype(I, /obj/item/bee_pack))
+	if(istype(I, /obj/item/bee_pack))
 		return apply_starter_pack(I, user)
 
 	else if(istype(I, /obj/item/scanner/plant))
@@ -82,10 +81,22 @@
 			to_chat(user, "The hive is smoked.")
 		return TRUE
 
-	else if(istype(I, /obj/item/grab))
+	if(istype(I, /obj/item/grab))
 		return handle_grab_attack(I, user)
 
+	if(IS_CROWBAR(I))
+		to_chat(user, SPAN_WARNING("The behive is too delicate. Use a screwdriver instead!"))
+		return TRUE
+
 	return ..()
+
+//Screwdriver dismantle makes more sense than using a crowbar
+/obj/structure/beehive/handle_default_screwdriver_attackby(mob/user, obj/item/screwdriver)
+	if(!can_dismantle(user))
+		return 
+	if(!screwdriver.do_tool_interaction(TOOL_SCREWDRIVER, user, src, 4 SECONDS))
+		return
+	return dismantle()
 
 /obj/structure/beehive/proc/handle_grab_attack(var/obj/item/grab/G, var/mob/user)
 	var/mob/living/GM = G.get_affecting_mob()
