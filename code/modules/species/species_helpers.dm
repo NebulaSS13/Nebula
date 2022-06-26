@@ -67,7 +67,7 @@ var/global/list/stored_shock_by_ref = list()
 	set_default_hair(mannequin)
 
 	if(preview_outfit)
-		var/decl/hierarchy/outfit/outfit = GET_DECL(preview_outfit)
+		var/decl/hierarchy/outfit/outfit = outfit_by_type(preview_outfit)
 		outfit.equip(mannequin)
 
 		// Backpacks are ugly on preview icons, especially nonhumans.
