@@ -35,15 +35,14 @@
 	return ..()
 
 /obj/structure/beehive/on_update_icon()
-	overlays.Cut()
+	cut_overlay()
 	icon_state = "beehive-[open]"
 	if(LAZYLEN(frames))
-		overlays += "empty[LAZYLEN(frames)]"
+		add_overlay("empty[LAZYLEN(frames)]")
 	if(honeycombs >= 100)
-		overlays += "full[round(honeycombs / 100)]"
+		add_overlay("full[round(honeycombs / 100)]")
 	if(bee_count && REALTIMEOFDAY > time_end_smoked)
-		var/beeicon = between(1, round(bee_count / 20), 5) //1 to 5.
-		overlays += "bees[beeicon]"
+		add_overlay("bees[between(1, round(bee_count / 20), 5)]") //1 to 5.
 
 /obj/structure/beehive/examine(mob/user)
 	. = ..()
