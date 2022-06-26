@@ -122,6 +122,15 @@
 	fruit_descriptor = "rich"
 	uid = "chem_nutriment_honey"
 
+/decl/material/liquid/nutriment/royal_jelly
+	name = "royal jelly"
+	lore_text = "A sweet syrupy substance bees reserve only to their youngs and their queen."
+	taste_description = "regal sweetness"
+	nutriment_factor = 16
+	color = "#C2A44C"
+	fruit_descriptor = "regal"
+	uid = "chem_nutriment_royal_jelly"
+
 /decl/material/liquid/nutriment/flour
 	name = "flour"
 	lore_text = "This is what you rub all over yourself to pretend to be a ghost."
