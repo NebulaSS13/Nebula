@@ -68,13 +68,7 @@ var/global/list/stored_shock_by_ref = list()
 
 	if(preview_outfit)
 		var/decl/hierarchy/outfit/outfit = outfit_by_type(preview_outfit)
-		outfit.equip(mannequin)
-
-		// Backpacks are ugly on preview icons, especially nonhumans.
-		var/obj/item/storage/backpack = mannequin.get_equipped_item(slot_back_str)
-		if(istype(backpack))
-			mannequin.drop_from_inventory(backpack)
-			qdel(backpack)
+		outfit.equip(mannequin, equip_adjustments = (OUTFIT_ADJUSTMENT_SKIP_SURVIVAL_GEAR|OUTFIT_ADJUSTMENT_SKIP_BACKPACK))
 
 	mannequin.force_update_limbs()
 	mannequin.update_mutations(0)
