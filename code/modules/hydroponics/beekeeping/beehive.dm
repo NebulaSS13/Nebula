@@ -25,13 +25,20 @@
 	var/tmp/time_end_smoked  = 0 //The time when the smoked status ends or 0
 	var/list/frames              //A list of honey frames we contain
 
+	var/tmp/datum/proximity_trigger/prox_listener  //Proximity check for telling what enters our effective range
+	var/tmp/list/nearby_plants                      //List of cached nearby plant refs
+
 /obj/structure/beehive/Initialize()
 	. = ..()
 	START_PROCESSING(SSobj, src)
-	update_icon()
+	prox_listener = new /datum/proximity_trigger(src, null, null, BEE_RANGE, PROXIMITY_EXCLUDE_HOLDER_TURF)
+	prox_listener.set_range_entered_callback(.proc/atom_in_range)
+	prox_listener.set_range_exited_callback(.proc/atom_left_range)
+	prox_listener.register_turfs()
 
 /obj/structure/beehive/Destroy()
 	STOP_PROCESSING(SSobj, src)
+	QDEL_NULL(prox_listener)
 	return ..()
 
 /obj/structure/beehive/on_update_icon()
@@ -255,6 +262,18 @@
 
 	update_icon()
 	return TRUE
+
+/obj/structure/beehive/proc/atom_in_range(var/atom/A)
+	if(istype(A, /obj/machinery/portable_atmospherics/hydroponics))
+		var/obj/machinery/portable_atmospherics/hydroponics/H = A
+		events_repository.register(/decl/observ/destroyed, H, src, .proc/atom_left_range) //Make sure we know when they get destroyed or leave
+		LAZYSET(nearby_plants, H, weakref(H))
+
+/obj/structure/beehive/proc/atom_left_range(var/atom/A)
+	if(istype(A, /obj/machinery/portable_atmospherics/hydroponics))
+		var/obj/machinery/portable_atmospherics/hydroponics/H = A
+		events_repository.unregister(/decl/observ/destroyed, H, src, .proc/atom_left_range)
+		LAZYREMOVE(nearby_plants, H)
 
 ////////////////////////////////////////////////////////
 // Honey Extractor

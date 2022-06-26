@@ -21,7 +21,10 @@ var/global/const/PROXIMITY_EXCLUDE_HOLDER_TURF = 1 // When acquiring turfs to mo
 
 	var/proc_owner
 	var/on_turf_entered
+	var/on_turf_exited
 	var/on_turfs_changed
+	var/on_range_entered
+	var/on_range_exited
 
 	var/range_
 
@@ -59,9 +62,28 @@ var/global/const/PROXIMITY_EXCLUDE_HOLDER_TURF = 1 // When acquiring turfs to mo
 	unregister_turfs()
 
 	on_turfs_changed = null
-	on_turf_entered = null
-	holder = null
+	on_turf_entered  = null
+	on_turf_exited   = null
+	on_range_entered = null
+	on_range_exited  = null
+	holder           = null
 	. = ..()
+
+/**Set a callback to when any turf in range is entered by an atom */
+/datum/proximity_trigger/proc/set_turf_entered_callback(var/callback)
+	on_turf_exited = callback
+
+/**Set a callback to when any turf in range is exited by an atom */
+/datum/proximity_trigger/proc/set_turf_exited_callback(var/callback)
+	on_turf_exited = callback
+
+/**Set a callback to when an atom first enters a turf in range */
+/datum/proximity_trigger/proc/set_range_entered_callback(var/callback)
+	on_range_entered = callback
+
+/**Set a callback to when an atom exits the last turf in range */
+/datum/proximity_trigger/proc/set_range_exited_callback(var/callback)
+	on_range_exited = callback
 
 /datum/proximity_trigger/proc/is_active()
 	return turfs_in_range.len
@@ -110,12 +132,15 @@ var/global/const/PROXIMITY_EXCLUDE_HOLDER_TURF = 1 // When acquiring turfs to mo
 	if(listequal(seen_turfs_, new_seen_turfs_))
 		return
 
-	call(proc_owner, on_turfs_changed)(seen_turfs_.Copy(), new_seen_turfs_.Copy())
+	if(on_turfs_changed)
+		call(proc_owner, on_turfs_changed)(seen_turfs_.Copy(), new_seen_turfs_.Copy())
 
 	for(var/t in (seen_turfs_ - new_seen_turfs_))
 		events_repository.unregister(/decl/observ/entered, t, src, /datum/proximity_trigger/proc/on_turf_entered)
+		events_repository.unregister(/decl/observ/exited,  t, src, /datum/proximity_trigger/proc/on_turf_exited)
 	for(var/t in (new_seen_turfs_ - seen_turfs_))
 		events_repository.register(/decl/observ/entered, t, src, /datum/proximity_trigger/proc/on_turf_entered)
+		events_repository.register(/decl/observ/exited,  t, src, /datum/proximity_trigger/proc/on_turf_exited)
 
 	seen_turfs_ = new_seen_turfs_
 
@@ -127,12 +152,29 @@ var/global/const/PROXIMITY_EXCLUDE_HOLDER_TURF = 1 // When acquiring turfs to mo
 	call(proc_owner, on_turf_entered)(holder)
 	register_turfs()
 
-/datum/proximity_trigger/proc/on_turf_entered(var/turf/T, var/atom/enterer)
+/datum/proximity_trigger/proc/on_turf_entered(var/atom/enterer, var/turf/old_loc)
 	if(enterer == holder) // We have an explicit call for holder, in case it moved somewhere we're not listening to.
 		return
 	if(enterer.opacity)
 		on_turf_visibility_changed()
-	call(proc_owner, on_turf_entered)(enterer)
+	//Notify when entered a turf in range
+	if(on_turf_entered)
+		call(proc_owner, on_turf_entered)(enterer)
+	//Notify when we only just now entered the range
+	if(on_range_entered && !(old_loc in turfs_in_range))
+		call(proc_owner, on_range_entered)(enterer)
+
+/datum/proximity_trigger/proc/on_turf_exited(var/atom/exiter,  var/turf/old_loc)
+	if(exiter == holder)
+		return
+	if(exiter.opacity)
+		on_turf_visibility_changed()
+	//Notify when leaving a turf in range
+	if(on_turf_exited)
+		call(proc_owner, on_turf_exited)(exiter)
+	//Notify when leaving the entire range too
+	if(on_range_exited && !(get_turf(exiter) in turfs_in_range))
+		call(proc_owner, on_range_exited)(exiter)
 
 /datum/proximity_trigger/proc/get_seen_turfs()
 	. = list()
