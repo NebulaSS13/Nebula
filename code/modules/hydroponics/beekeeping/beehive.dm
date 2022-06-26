@@ -418,10 +418,13 @@
 	desc              = "A frame for the beehive that the bees will fill with honeycombs."
 	icon              = 'icons/obj/beekeeping.dmi'
 	icon_state        = "honeyframe"
-	w_class           = ITEM_SIZE_SMALL
+	w_class           = ITEM_SIZE_NORMAL
 	material          = /decl/material/solid/wood
-	var/honey         = 0
-	var/tmp/max_honey = 20
+
+/obj/item/honey_frame/Initialize(ml, material_key)
+	. = ..()
+	if(!reagents)
+		create_reagents(60) //IRL each individual shallow frames would contain about 1.8kg of honey, at 1.45 kg/l of density. Not counting beeswax and etc
 
 /obj/item/honey_frame/on_update_icon()
 	cut_overlays()
@@ -433,8 +436,13 @@
 
 //filled
 /obj/item/honey_frame/filled/Initialize()
+	matter = list(/decl/material/solid/wax/bees = SHEET_MATERIAL_AMOUNT * (1 + (rand(0,9) * 0.1)))
 	. = ..()
-	honey = max_honey
+	
+	reagents.add_reagent(/decl/material/liquid/nutriment/royal_jelly, rand(0, round(reagents.maximum_volume * 0.10)))
+	reagents.add_reagent(/decl/material/liquid/nutriment/pollen,      rand(0, round(reagents.maximum_volume * 0.20)))
+	reagents.add_reagent(/decl/material/liquid/nutriment/honey,       reagents.maximum_volume - reagents.total_volume)
+
 
 ////////////////////////////////////////////////////////
 // Beehive Assembly
