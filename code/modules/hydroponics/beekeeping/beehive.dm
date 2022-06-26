@@ -47,6 +47,23 @@
 /obj/structure/beehive/examine(mob/user)
 	. = ..()
 	to_chat(user, "The lid is [open? "open": "closed"].")
+	to_chat(user, "There are [LAZYLEN(frames)? "[LAZYLEN(frames)] frame(s)": "no frames"] installed.")
+	if(time_end_smoked >= REALTIMEOFDAY)
+		to_chat(user, "The bees are smoked out.")
+
+	//Do a skill check to get the data
+	to_chat(user, SPAN_NOTICE("You start examining closely the hive.."))
+	if(user.do_skilled(0.5 SECONDS, SKILL_BOTANY, src))
+		//First get an accurate count or innacurate one
+		var/count_msg = "\The [src]"
+		if(!user.skill_fail_prob(SKILL_BOTANY, 10, SKILL_ADEPT)))
+			count_msg = "[count_msg] is [bee_count ? "[round(bee_count)]% full" : "empty"]. [bee_count > 90 ? " Colony is ready to split." : ""]"
+		else
+			count_msg = "[count_msg] seems to [(bee_count > 0)? "have an amount of bees inside" : "be empty"]? Its hard to tell!"
+		to_chat(user, count_msg)
+		to_chat(user, SPAN_NOTICE("You finish examining the hive."))
+	else
+		to_chat(user, SPAN_WARNING("You decide against examining the hive."))
 
 /obj/structure/beehive/proc/toggle_open(var/mob/user)
 	user.visible_message(SPAN_NOTICE("\The [user] [open ? "closes" : "opens"] \the [src]."), SPAN_NOTICE("You [open ? "close" : "open"] \the [src]."))
@@ -67,19 +84,6 @@
 
 	if(istype(I, /obj/item/bee_pack))
 		return apply_starter_pack(I, user)
-
-	else if(istype(I, /obj/item/scanner/plant))
-		to_chat(user, SPAN_NOTICE("Scan result of \the [src]..."))
-		to_chat(user, "Beehive is [bee_count ? "[round(bee_count)]% full" : "empty"].[bee_count > 90 ? " Colony is ready to split." : ""]")
-		if(LAZYLEN(frames))
-			to_chat(user, "[LAZYLEN(frames)] frames installed, [round(honeycombs / 100)] filled.")
-			if(honeycombs < LAZYLEN(frames) * 100)
-				to_chat(user, "Next frame is [round(honeycombs % 100)]% full.")
-		else
-			to_chat(user, "No frames installed.")
-		if(time_end_smoked >= REALTIMEOFDAY)
-			to_chat(user, "The hive is smoked.")
-		return TRUE
 
 	if(istype(I, /obj/item/grab))
 		return handle_grab_attack(I, user)
