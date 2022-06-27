@@ -63,7 +63,7 @@
 	make_pen_description()
 
 /obj/item/pen/proc/make_pen_description()
-	desc = "Its \a [stroke_colour_name] [medium_name] [istype(material)? material.name : ""] pen."
+	desc = "Its [ADD_ARTICLE(stroke_colour_name)] [medium_name] [istype(material)? material.name : ""] pen."
 
 /obj/item/pen/blue
 	name               = "blue pen"

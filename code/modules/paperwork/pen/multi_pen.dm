@@ -17,7 +17,7 @@
 	change_colour(colour_idx)
 
 /obj/item/pen/multi/make_pen_description()
-	desc = "It's \a [istype(material)?"[material.name] ":""]pen with multiple colors of ink! It's currently set to [stroke_colour_name] [medium_name]."
+	desc = "It's [istype(material)?"[ADD_ARTICLE(material.name)]":"a"] pen with multiple colors of ink! It's currently set to [stroke_colour_name] [medium_name]."
 
 /obj/item/pen/multi/proc/change_colour(var/new_idx)
 	colour_idx = new_idx
