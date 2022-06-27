@@ -868,22 +868,24 @@ var/global/list/allCasters = list() //Global list that will contain reference to
 
 /obj/item/newspaper/attackby(obj/item/W, mob/user)
 	if(IS_PEN(W))
-		if(!CanPhysicallyInteractWith(user, src))
-			return
 		if(src.scribble_page == src.curr_page)
 			to_chat(user, SPAN_WARNING("There's already a scribble in this page... You wouldn't want to make things too cluttered, would you?"))
 			return TRUE
 		else
-			var/s = input(user, "Write something", "Newspaper")
-			if(length(s) && W.do_tool_interaction(TOOL_PEN, user, src, 0, fuel_expenditure = 1) && !QDELETED(src)) //Make it instant, since handle_writing_literacy does the waiting
+			var/s = input(user, "Write something", "Newspaper") as null | message
+			if(!length(s))
+				return
+			if(!CanPhysicallyInteractWith(user, src))
+				to_chat(user, SPAN_WARNING("You must stay close to \the [src]!"))
+				return
+			if(W.do_tool_interaction(TOOL_PEN, user, src, 0, fuel_expenditure = 1) && !QDELETED(src)) //Make it instant, since handle_writing_literacy does the waiting
 				s = sanitize(s)
 				s = user.handle_writing_literacy(user, s)
 				src.scribble_page = src.curr_page
 				src.scribble = s
 				src.attack_self(user)
-			else 
-				to_chat(user, SPAN_NOTICE("You decide against it."))
-			return TRUE
+				return TRUE
+			return 
 	return ..()
 
 ////////////////////////////////////helper procs

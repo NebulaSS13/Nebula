@@ -786,14 +786,19 @@ var/global/list/turret_icons
 				return
 
 	if(IS_PEN(I))	//you can rename turrets like bots!
+		var/t = sanitize_safe(input(user, "Enter new turret name", name, finish_name) as text, MAX_NAME_LEN)
 		if(!CanPhysicallyInteractWith(usr, src))
 			return
-		var/t = sanitize_safe(input(user, "Enter new turret name", name, finish_name) as text, MAX_NAME_LEN)
-		if(t && I.do_tool_interaction(TOOL_PEN, user, src, 1 SECOND, fuel_expenditure = 1))
+		if(!length(t))
+			finish_name = initial(finish_name)
+			to_chat(user, SPAN_NOTICE("You restore \the [src]'s default name."))
+			return TRUE
+		if(I.do_tool_interaction(TOOL_PEN, user, src, 2 SECOND, fuel_expenditure = 1) && !QDELETED(src))
 			finish_name = t
+			return TRUE
 		return
 
-	..()
+	return ..()
 
 
 /obj/machinery/porta_turret_construct/attack_hand(mob/user)

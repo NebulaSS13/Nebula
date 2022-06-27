@@ -124,9 +124,12 @@
 
 /obj/structure/door_assembly/attackby(obj/item/W, mob/user)
 
-	if(IS_PEN(W) && CanPhysicallyInteractWith(user, src))
+	if(IS_PEN(W))
 		var/t = sanitize_safe(input(user, "Enter the name for the door.", src.name, src.created_name), MAX_NAME_LEN)
 		if(!length(t))
+			return
+		if(!CanPhysicallyInteractWith(user, src))
+			to_chat(user, SPAN_WARNING("You must stay close to \the [src]!"))
 			return
 		created_name = t
 		return TRUE
