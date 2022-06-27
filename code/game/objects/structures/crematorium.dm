@@ -14,6 +14,9 @@
 
 	var/id_tag
 
+/obj/structure/crematorium/get_mechanics_info()
+	return "[..()]<BR>Can be labeled once with a hand labeler."
+
 /obj/structure/crematorium/Initialize(ml, _mat, _reinf_mat)
 	. = ..()
 	connected_tray = new /obj/structure/crematorium_tray(src)
@@ -90,14 +93,6 @@
 /obj/structure/crematorium/attack_robot(mob/user)
 	if(Adjacent(user))
 		return attack_hand(user)
-
-/obj/structure/crematorium/attackby(obj/item/P, mob/user)
-	if(IS_PEN(P) && CanPhysicallyInteractWith(user, src))
-		var/new_label = sanitize_safe(input(user, "What would you like the label to be?", capitalize(name)), MAX_NAME_LEN)
-		if(length(new_label))
-			attach_label(user, P, new_label)
-		return TRUE
-	return ..()
 
 /obj/structure/crematorium/relaymove(mob/user)
 	if(user.incapacitated() || locked)
