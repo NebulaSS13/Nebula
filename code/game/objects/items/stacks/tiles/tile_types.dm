@@ -16,13 +16,33 @@
 	max_amount = 100
 	icon = 'icons/obj/tiles.dmi'
 	matter_multiplier = 0.15
-
 	force = 1
 	throwforce = 1
 	throw_speed = 5
 	throw_range = 20
 	item_flags = 0
 	obj_flags = 0
+	var/replacement_turf_type = /turf/simulated/floor
+
+/obj/item/stack/tile/proc/try_build_turf(var/mob/user, var/turf/target)
+
+	var/ladder = (locate(/obj/structure/ladder) in target)
+	if(ladder)
+		to_chat(user, SPAN_WARNING("\The [ladder] is in the way."))
+		return FALSE
+
+	var/obj/structure/lattice/lattice = locate(/obj/structure/lattice, target)
+	if(!lattice && target.is_open())
+		to_chat(user, SPAN_WARNING("The tiles need some support, build a lattice first."))
+		return FALSE
+
+	if(!use(1))
+		return FALSE
+
+	playsound(target, 'sound/weapons/Genhit.ogg', 50, 1)
+	target.ChangeTurf(replacement_turf_type, keep_air = TRUE)
+	qdel(lattice)
+	return TRUE
 
 /*
  * Grass
@@ -204,6 +224,17 @@
 	stack_merge_type = /obj/item/stack/tile/floor
 	build_type = /obj/item/stack/tile/floor
 
+/obj/item/stack/tile/roof/cyborg
+	name = "roofing tile synthesizer"
+	desc = "A device that makes roofing tiles."
+	gender = NEUTER
+	matter = null
+	uses_charge = 1
+	charge_costs = list(500)
+	stack_merge_type = /obj/item/stack/tile/roof
+	build_type = /obj/item/stack/tile/roof
+
+
 /obj/item/stack/tile/linoleum
 	name = "linoleum"
 	singular_name = "linoleum"
@@ -309,3 +340,56 @@
 	singular_name = "pool tile"
 	icon_state = "tile_pool"
 	material = /decl/material/solid/metal/steel
+
+// Roofing tiles; not quite the same behavior here.
+/obj/item/stack/tile/roof
+	name = "roofing tile"
+	singular_name = "roofing tile"
+	desc = "A non-descript roofing tile."
+	matter_multiplier = 0.3
+	icon_state = "tile"
+	material = /decl/material/solid/metal/steel
+
+/obj/item/stack/tile/roof/try_build_turf(var/mob/user, var/turf/target)
+
+	// No point roofing a tile that is set explicitly to be roofed.
+	if(target.is_outside == OUTSIDE_NO)
+		to_chat(user, SPAN_WARNING("\The [target] is already roofed."))
+		return FALSE
+
+	// We need either a wall on our level, or a non-open turf one level up, to support the roof.
+	var/has_support = FALSE
+	for(var/checkdir in global.cardinal)
+		var/turf/T = get_step(target, checkdir)
+		if(!T)
+			continue
+		if(T.density || T.is_outside == OUTSIDE_NO) // Explicit check for roofed turfs
+			has_support = TRUE
+			break
+		if(HasAbove(T.z))
+			var/turf/above = GetAbove(T)
+			if(!above.is_open())
+				has_support = TRUE
+				break
+	if(!has_support)
+		to_chat(user, SPAN_WARNING("You need either an adjacent wall below, or an adjacent roof tile above, to build a new roof section."))
+		return FALSE
+
+	// Multiz needs a turf spawned above, while single-level does not.
+	var/turf/replace_turf
+	if(HasAbove(target.z))
+		replace_turf = GetAbove(target)
+		if(!replace_turf.is_open())
+			to_chat(user, SPAN_WARNING("\The [target] is already roofed."))
+			return FALSE
+
+	if(!use(1))
+		return FALSE
+
+	playsound(target, 'sound/weapons/Genhit.ogg', 50, 1)
+	if(replace_turf)
+		replace_turf.ChangeTurf(replacement_turf_type, keep_air = TRUE)
+	else
+		target.set_outside(OUTSIDE_NO)
+	to_chat(user, SPAN_NOTICE("You put up a roof over \the [target]."))
+	return TRUE

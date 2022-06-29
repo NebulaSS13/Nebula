@@ -1079,27 +1079,34 @@
 		LAZYADD(., check_head)
 		LAZYADD(., check_body)
 
-/mob/proc/get_weather_exposure(var/obj/abstract/weather_system/weather)
-	var/turf/T = loc
+/mob/proc/get_weather_exposure()
 
 	// We're inside something else.
-	if(!istype(T))
+	if(!isturf(loc))
 		return WEATHER_PROTECTED
 
-	// Either we're outside being rained on, or we're in turf-local weather being rained on.
-	if(T.is_outside() || T.weather == weather)
-		var/list/weather_protection = get_weather_protection()
-		if(LAZYLEN(weather_protection))
+	var/turf/T = loc
+	// We're under a roof or otherwise shouldn't be being rained on.
+	if(!T.is_outside())
+
+		// For non-multiz we'll give everyone some nice ambience.
+		if(!HasAbove(T.z))
 			return WEATHER_PROTECTED
-		return WEATHER_EXPOSED
 
-	// The z-level has weather, but we aren't standing in it, so it's probably above us.
-	T = GetAbove(T)
-	if(!T || !T.is_open())
+		// For multi-z, check the actual weather on the turf above.
+		// TODO: maybe make this a property of the z-level marker.
+		var/turf/above = GetAbove(T)
+		if(above.weather)
+			return WEATHER_PROTECTED
+
+		// Being more than one level down should exempt us from ambience.
+		return WEATHER_IGNORE
+
+	// Nothing's protecting us from the rain here
+	var/list/weather_protection = get_weather_protection()
+	if(LAZYLEN(weather_protection))
 		return WEATHER_PROTECTED
-
-	// We're inside, and more than one z-level below the roof, so ignore it.
-	return WEATHER_IGNORE
+	return WEATHER_EXPOSED
 
 /mob/proc/IsMultiZAdjacent(var/atom/neighbor)
 

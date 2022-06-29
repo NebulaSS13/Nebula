@@ -77,7 +77,8 @@ var/global/list/weather_by_z = list()
 	var/decl/state/weather/weather_state = weather_system.current_state
 	if(istype(weather_state))
 		to_chat(user, weather_state.descriptor)
-
+	show_wind(user, force = TRUE)
+	
 // Called by /decl/state/weather to assess validity of a state in the weather FSM.
 /obj/abstract/weather_system/proc/supports_weather_state(var/decl/state/weather/next_state)
 	// Exoplanet stuff for the future:

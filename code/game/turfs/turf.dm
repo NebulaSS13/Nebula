@@ -36,6 +36,20 @@
 
 	var/tmp/changing_turf
 	var/tmp/prev_type // Previous type of the turf, prior to turf translation.
+
+	// Some quick notes on the vars below: is_outside should be left set to OUTSIDE_AREA unless you 
+	// EXPLICITLY NEED a turf to have a different outside state to its area (ie. you have used a
+	// roofing tile). By default, it will ask the area for the state to use, and will update on 
+	// area change. When dealing with weather, it will check the entire z-column for interruptions 
+	// that will prevent it from using its own state, so a floor above a level will generally 
+	// override both area is_outside, and turf is_outside. The only time the base value will be used
+	// by itself is if you are dealing with a non-multiz level, or the top level of a multiz chunk.
+
+	// Weather relies on is_outside to determine if it should apply to a turf or not and will be
+	// automatically updated on ChangeTurf set_outside etc. Don't bother setting it manually, it will
+	// get overridden almost immediately.
+
+	// TL;DR: just leave these vars alone.
 	var/tmp/obj/abstract/weather_system/weather
 	var/tmp/is_outside = OUTSIDE_AREA
 
@@ -55,14 +69,15 @@
 	else
 		luminosity = 1
 
-	if (mapload && permit_ao)
-		queue_ao()
 
 	if (opacity)
 		has_opaque_atom = TRUE
 
 	if (!mapload)
 		SSair.mark_for_update(src)
+		update_weather(force_update_below = TRUE)
+	else if (permit_ao)
+		queue_ao()
 
 	updateVisibility(src, FALSE)
 
@@ -384,51 +399,65 @@ var/global/const/enterloopsanity = 100
 /turf/proc/get_footstep_sound(var/mob/caller)
 	return
 
-/turf/proc/update_weather(var/obj/abstract/weather_system/new_weather)
+/turf/proc/update_weather(var/obj/abstract/weather_system/new_weather, var/force_update_below = FALSE)
 
 	if(isnull(new_weather))
 		new_weather = global.weather_by_z["[z]"]
 
 	// We have a weather system and we are exposed to it; update our vis contents.
-	var/old_weather = weather
 	if(istype(new_weather) && is_outside())
 		if(weather != new_weather)
 			if(weather)
 				remove_vis_contents(src, weather.vis_contents_additions)
 			weather = new_weather
 			add_vis_contents(src, weather.vis_contents_additions)
+			. = TRUE
 
 	// We are indoors or there is no local weather system, clear our vis contents.
 	else if(weather)
 		remove_vis_contents(src, weather.vis_contents_additions)
 		weather = null
+		. = TRUE
 
 	// Propagate our weather downwards if we permit it.
-	if(is_open() && old_weather != weather)
+	if(force_update_below || (is_open() && .))
 		var/turf/below = GetBelow(src)
 		if(below)
 			below.update_weather(new_weather)
 
 /turf/proc/is_outside()
 
+	// Can't rain inside or through solid walls.
+	// TODO: dense structures like full windows should probably also block weather.
 	if(density)
 		return OUTSIDE_NO
 
-	var/turf/above = GetAbove(src)
-	if(above && above.is_open())
-		return above.is_outside()
+	// What would we like to return in an ideal world?
+	if(is_outside == OUTSIDE_AREA)
+		var/area/A = get_area(src)
+		. = A ? A.is_outside : OUTSIDE_NO
+	else
+		. = is_outside
 
-	if(is_outside != OUTSIDE_AREA)
-		return is_outside
-	var/area/A = get_area(src)
-	if(A)
-		return A.is_outside
-	return OUTSIDE_NO
+	// Notes for future self when confused: is_open() on higher
+	// turfs must match effective is_outside value if the turf
+	// should get to use the is_outside value it wants to. If it
+	// doesn't line up, we invert the outside value (roof is not 
+	// open but turf wants to be outside, invert to OUTSIDE_NO).
 
-/turf/proc/set_outside(var/new_outside)
+	// Do we have a roof over our head? Should we care?
+	if(HasAbove(z))
+		var/turf/top_of_stack = src
+		while(HasAbove(top_of_stack.z))
+			top_of_stack = GetAbove(top_of_stack)
+			if(top_of_stack.is_open() != . || (top_of_stack.is_outside != OUTSIDE_AREA && top_of_stack.is_outside != .))
+				return !.
+
+/turf/proc/set_outside(var/new_outside, var/skip_weather_update = FALSE)
 	if(is_outside != new_outside)
 		is_outside = new_outside
-		update_weather()
+		if(!skip_weather_update)
+			update_weather()
 		return TRUE
 	return FALSE
 

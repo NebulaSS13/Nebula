@@ -11,6 +11,11 @@
 	if(!C || !user)
 		return 0
 
+	if(istype(C, /obj/item/stack/tile/roof))
+		var/obj/item/stack/tile/roof/T = C
+		T.try_build_turf(user, src)
+		return TRUE
+
 	if(isCoil(C) || (flooring && istype(C, /obj/item/stack/material/rods)))
 		return ..(C, user)
 
