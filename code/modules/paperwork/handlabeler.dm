@@ -24,18 +24,10 @@
 		/decl/material/solid/metal/aluminium = MATTER_AMOUNT_REINFORCEMENT, //These things always got some metal parts
 	)
 	var/label                                  //What the labeler will label its target with
-	var/labels_left    = 30
-	var/tmp/max_labels = 30                    //Maximum amount of label charges
-	var/safety         = TRUE                  //Whether the safety is on or off. Set to FALSE to allow labeler to interact with things
-	var/mode           = HAND_LABELER_MODE_ADD //What operation the labeler is set to do
-
-/obj/item/hand_labeler/create_matter()
-	update_label_matter()
-	. = ..()
-
-/**Keep matter count up with the amount of paper units we contain. */
-/obj/item/hand_labeler/proc/update_label_matter()
-	LAZYSET(matter, /decl/material/solid/paper, labels_left * LABEL_MATERIAL_COST)
+	var/labels_left      = 30
+	var/tmp/max_labels   = 30                    //Maximum amount of label charges
+	var/safety           = TRUE                  //Whether the safety is on or off. Set to FALSE to allow labeler to interact with things
+	var/mode             = HAND_LABELER_MODE_ADD //What operation the labeler is set to do
 
 /obj/item/hand_labeler/on_update_icon()
 	. = ..()
@@ -57,7 +49,7 @@
 		to_chat(user, "It has [get_labels_left()]/[max_labels] label(s).")
 		if(length(label))
 			to_chat(user, "Its label text reads '[SPAN_ITALIC(label)]'.")
-	else 
+	else
 		to_chat(user, SPAN_NOTICE("You're too far away to tell much more.."))
 
 /obj/item/hand_labeler/attack(mob/living/M, mob/living/user, target_zone, animate)
@@ -92,7 +84,7 @@
 			else
 				L.RemoveLabel(user, L.labels[L.labels.len])
 				nb_removed = 1
-			
+
 			user.visible_message(
 				SPAN_NOTICE("[user] removes [nb_removed > 1? "some labels" : "a label"] from \the [A]."),
 				SPAN_NOTICE("You remove [nb_removed > 1? "[nb_removed] labels" : "the '[removed]' label"] from \the [A].")
@@ -168,7 +160,7 @@
 		if(!P.is_blank())
 			to_chat(user, SPAN_WARNING("\The [P] is not blank. You can't use that for refilling \the [src]."))
 			return
-	
+
 		var/incoming_amt = LAZYACCESS(P.matter, /decl/material/solid/paper)
 		var/current_amt = LAZYACCESS(matter, /decl/material/solid/paper)
 		var/label_added = incoming_amt / LABEL_MATERIAL_COST
@@ -197,7 +189,7 @@
 		var/max_accepted_units  = max_accepted_labels * LABEL_MATERIAL_COST
 		var/available_units     = ST.get_amount() * SHEET_MATERIAL_AMOUNT
 		var/added_labels        = 0
-		
+
 		if(available_units > max_accepted_units)
 			//Take only what's needed
 			var/needed_sheets  = CEILING(max_accepted_units / SHEET_MATERIAL_AMOUNT)
@@ -217,11 +209,11 @@
 			added_labels = round(available_units / LABEL_MATERIAL_COST)
 			add_paper_labels(added_labels)
 			to_chat(user, SPAN_NOTICE("You use [CEILING(available_units/SHEET_MATERIAL_AMOUNT)] [ST.plural_name] to refill \the [src] with [added_labels] label(s)."))
-		else 
+		else
 			//Abort because not enough materials for even a single label
 			to_chat(user, SPAN_WARNING("There's not enough [ST.plural_name] in \the [ST] to refil \the [src]!"))
-			return 
-		
+			return
+
 		update_icon()
 		return TRUE
 	return ..()
@@ -235,7 +227,6 @@
 	if(get_labels_left() >= max_labels || amount <= 0)
 		return FALSE
 	labels_left = between(0, (labels_left + amount), max_labels)
-	update_label_matter()
 	update_icon()
 	return TRUE
 
@@ -244,9 +235,20 @@
 	if(get_labels_left() <= 0 || amount <= 0)
 		return FALSE
 	labels_left = between(0, (labels_left - amount), max_labels)
-	update_label_matter()
 	update_icon()
 	return TRUE
+
+/obj/item/hand_labeler/dump_contents()
+	. = ..()
+	//Dump label paper left
+	if(labels_left > 0)
+		var/decl/material/M = GET_DECL(/decl/material/solid/paper)
+		var/turf/T          = get_turf(src)
+		var/total_sheets    = round((labels_left * LABEL_MATERIAL_COST) / SHEET_MATERIAL_AMOUNT)
+		var/leftovers       = round((labels_left * LABEL_MATERIAL_COST) % SHEET_MATERIAL_AMOUNT)
+		M.create_object(T, total_sheets)
+		if(leftovers > 0)
+			M.place_cuttings(T, leftovers)
 
 ////////////////////////////////////////////////////////////
 // Attach Label Overrides
@@ -272,7 +274,7 @@
 	var/datum/extension/labels/L = get_or_create_extension(src, /datum/extension/labels)
 	return L.AttachLabel(user, label_text)
 
-#undef HAND_LABELER_MODE_ADD 
+#undef HAND_LABELER_MODE_ADD
 #undef HAND_LABELER_MODE_REM
 #undef HAND_LABELER_MODE_REMALL
 #undef HAND_LABELER_SAFETY_TOGGLE
