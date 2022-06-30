@@ -89,18 +89,19 @@
 	var/work_coefficient = working_volume.get_total_moles()*R_IDEAL_GAS_EQUATION*log(1.5)
 	var/work_done = work_coefficient*abs(air1.temperature - air2.temperature)*cycle_frequency
 
-	var/reversed = air1.temperature < air2.temperature ? 1 : -1
+	// Direction of heat flow, 1 for air1 -> air 2, -1 for air2 -> air 1
+	var/heat_dir = air1.temperature > air2.temperature ? 1 : -1
 
-	var/air1_dq = reversed*work_coefficient*air1.temperature*cycle_frequency
-	var/air2_dq = -reversed*work_coefficient*air2.temperature*cycle_frequency
+	var/air1_dq = -heat_dir*work_coefficient*air1.temperature*cycle_frequency
+	var/air2_dq = heat_dir*work_coefficient*air2.temperature*cycle_frequency
 
 	var/power_generated = 0.75*work_done
-	// Excessive power is transferred as heat to the opposite side, reducing efficiency.
+	// Excessive power is transferred as heat to the cooler side, reducing efficiency.
 	if(power_generated > max_power)
-		if(reversed)
-			air1_dq += 0.75*(max_power - power_generated)
-		else
+		if(heat_dir == 1)
 			air2_dq += 0.75*(max_power - power_generated)
+		else
+			air1_dq += 0.75*(max_power - power_generated)
 		power_generated = max_power
 		if(prob(5))
 			spark_at(src, cardinal_only = TRUE)
@@ -155,17 +156,18 @@
 	. = ..()
 
 /obj/machinery/atmospherics/binary/stirling/attack_hand(mob/user)
-	if(!(stat & BROKEN) && !active)
-		if(!inserted_cylinder)
-			to_chat(user, SPAN_WARNING("You must insert a stirling piston cylinder into \the [src] before you can start it!"))
-			return
-		to_chat(user, "You start trying to manually rev up \the [src].")
-		if(do_after(user, 2 SECONDS, src) && !active && inserted_cylinder && !(stat & BROKEN))
-			visible_message("[user] pulls on the starting cord of \the [src], revving it up!", "You pull on the starting cord of \the [src], revving it up!")
-			playsound(src.loc, 'sound/machines/engine.ogg', 35, 1)
-			active = TRUE
+
+	if((stat & BROKEN) || active || panel_open)
+		return ..()
+	
+	if(!inserted_cylinder)
+		to_chat(user, SPAN_WARNING("You must insert a stirling piston cylinder into \the [src] before you can start it!"))
 		return
-	. = ..()
+	to_chat(user, "You start trying to manually rev up \the [src].")
+	if(do_after(user, 2 SECONDS, src) && !active && inserted_cylinder && !(stat & BROKEN))
+		visible_message("[user] pulls on the starting cord of \the [src], revving it up!", "You pull on the starting cord of \the [src], revving it up!")
+		playsound(src.loc, 'sound/machines/engine.ogg', 35, 1)
+		active = TRUE
 
 /obj/machinery/atmospherics/binary/stirling/on_update_icon()
 	cut_overlays()
