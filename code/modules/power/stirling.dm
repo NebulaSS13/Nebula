@@ -4,11 +4,11 @@
 
 /obj/machinery/atmospherics/binary/stirling
 	name = "stirling engine"
-	desc = "A mechanical stirling generator. It generates power dependent on the temperature differential between input gas and a radiative heatsink"
+	desc = "A mechanical stirling generator. It generates power dependent on the temperature differential between two gas lines."
 	icon = 'icons/obj/power.dmi'
 	icon_state = "stirling"
-	density = 1
-	anchored = 1
+	density = TRUE
+	anchored = TRUE
 	layer = STRUCTURE_LAYER
 	base_type = /obj/machinery/atmospherics/binary/stirling
 	construct_state = /decl/machine_construction/default/panel_closed
@@ -55,7 +55,7 @@
 
 	var/datum/gas_mixture/working_volume = inserted_cylinder.air_contents
 
-	if(stat & (BROKEN) || !air1.total_moles || !air2.total_moles || !working_volume.total_moles)
+	if((stat & BROKEN) || !air1.total_moles || !air2.total_moles || !working_volume?.total_moles)
 		stop_engine()
 		return
 	
@@ -137,14 +137,14 @@
 		update_icon()
 		return TRUE
 	
-	if(isCrowbar(W) && inserted_cylinder)
+	if(IS_CROWBAR(W) && inserted_cylinder)
 		inserted_cylinder.dropInto(get_turf(src))
 		to_chat(user, SPAN_NOTICE("You remove \the [inserted_cylinder] from \the [src]."))
 		inserted_cylinder = null
 		stop_engine()
 		return TRUE
 
-	if(panel_open && isWrench(W))
+	if(panel_open && IS_WRENCH(W))
 		var/target_frequency = input(user, "Enter the cycle frequency you would like \the [src] to operate at ([MAX_FREQUENCY/4] - [MAX_FREQUENCY] Hz)", "Stirling Frequency", cycle_frequency) as num | null
 		if(!CanPhysicallyInteract(user) || !target_frequency)
 			return
