@@ -459,6 +459,25 @@
 		LAZYADD(pages, P)
 	update_icon()
 
+/obj/item/paper_bundle/refill/attack_self(mob/user)
+	return break_bundle(user)
+
+/obj/item/paper_bundle/refill/interact(mob/user)
+	return //We don't show the menu
+
+/obj/item/paper_bundle/refill/insert_sheet_at(mob/user, obj/item/sheet, index)
+	return //Don't let us insert
+
+/obj/item/paper_bundle/refill/merge(obj/item/I, mob/user, at_hint)
+	return //Don't merge
+
+/obj/item/paper_bundle/refill/break_bundle(mob/user)
+	user?.unEquip(src)
+	var/turf/T = get_turf(src)
+	for(var/i = 1 to bundle_size)
+		new /obj/item/paper(T)
+	qdel(src)
+
 /obj/item/paper_bundle/refill/on_update_icon()
 	. = ..()
 	add_overlay(cached_overlays["refill"])

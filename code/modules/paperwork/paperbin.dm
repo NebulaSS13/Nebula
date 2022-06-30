@@ -1,3 +1,6 @@
+/////////////////////////////////////////////////////////////////
+// Paper Bin
+/////////////////////////////////////////////////////////////////
 /obj/item/paper_bin
 	name                = "paper bin"
 	icon                = 'icons/obj/bureaucracy.dmi'
@@ -98,9 +101,8 @@
 				was_there_a_photo = TRUE
 				bundleitem.dropInto(user.loc)
 				bundleitem.reset_plane_and_layer()
-		if(LAZYLEN(B.pages) < 0)
-			qdel(I)
 		to_chat(user, SPAN_NOTICE("You loosen \the [I] and add its papers into \the [src]."))
+		B.reevaluate_existence()
 		if(was_there_a_photo)
 			to_chat(user, SPAN_NOTICE("The photo cannot go into \the [src]."))
 		return TRUE
@@ -119,13 +121,22 @@
 
 /obj/item/paper_bin/on_update_icon()
 	. = ..()
-	icon_state = "paper_bin[amount >= 1]"
+	if(amount <= 0)
+		icon_state = "paper_bin0"
+	else if(amount <= (max_amount / 3))
+		icon_state = "paper_bin1"
+	else if(amount >= max_amount)
+		icon_state = "paper_bin3"
+	else
+		icon_state = "paper_bin2"
 
 /obj/item/paper_bin/dump_contents()
 	. = ..()
 	//Dump all stored papers too
 	for(var/i=1 to amount)
-		new /obj/item/paper(loc)
+		var/obj/item/paper/P = new /obj/item/paper(loc)
+		P.merge_with_existing(loc, usr)
+	LAZYCLEARLIST(papers)
 
 /obj/item/paper_bin/proc/add_paper(var/obj/item/paper/P)
 	if(amount >= max_amount)
@@ -139,3 +150,23 @@
 	amount++
 	update_icon()
 	return TRUE
+
+/obj/item/paper_bin/get_alt_interactions(mob/user)
+	. = ..()
+	LAZYADD(., /decl/interaction_handler/paper_bin_dump_contents)
+
+/////////////////////////////////////////////////////////////////
+// Empty Bin Interaction
+/////////////////////////////////////////////////////////////////
+/decl/interaction_handler/paper_bin_dump_contents
+	name                 = "Dump Contents"
+	expected_target_type = /obj/item/paper_bin
+
+/decl/interaction_handler/paper_bin_dump_contents/is_possible(var/obj/item/paper_bin/target, mob/user, obj/item/prop)
+	return ..() && target.amount > 0
+
+/decl/interaction_handler/paper_bin_dump_contents/invoked(var/obj/item/paper_bin/bin, mob/user)
+	to_chat(user, SPAN_NOTICE("You start emptying \the [bin]..."))
+	if(do_after(user, 2 SECONDS) && !QDELETED(bin))
+		bin.dump_contents()
+		to_chat(user, SPAN_NOTICE("You emptied \the [bin]."))
