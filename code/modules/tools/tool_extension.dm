@@ -35,7 +35,7 @@
 	return FALSE
 
 // Returns a failure message as a string if the interaction fails.
-/datum/extension/tool/proc/do_tool_interaction(var/archetype, var/mob/user, var/atom/target, var/delay, var/fuel_expenditure = 0, var/start_message)
+/datum/extension/tool/proc/do_tool_interaction(var/archetype, var/mob/user, var/atom/target, var/delay = (1 SECOND), var/start_message, var/success_message, var/failure_message, var/fuel_expenditure = 0, var/check_skill = SKILL_CONSTRUCTION, var/check_skill_threshold, var/check_skill_prob = 50)
 
 	if(!istype(user) || !istype(target))
 		return TOOL_USE_FAILURE_NOMESSAGE
@@ -62,8 +62,21 @@
 	if(use_sound)
 		playsound(user.loc, use_sound, 100)
 
-	if(!do_after(user, max(5, CEILING(delay * get_tool_speed(archetype))), target, check_holding = TRUE))
-		return TOOL_USE_FAILURE_NOMESSAGE
+	// If we have a delay, reduce it by the tool speed and then further reduce via skill if necessary.
+	if(delay)
+		delay = max(5, CEILING(delay * get_tool_speed(archetype)))
+		if(check_skill)
+			if(!user.do_skilled(delay, check_skill, target, check_holding = TRUE))
+				return TOOL_USE_FAILURE_NOMESSAGE
+		else
+			if(!do_after(user, delay, target, check_holding = TRUE))
+				return TOOL_USE_FAILURE_NOMESSAGE
+
+	// Basic skill check for the action - do it post-delay so they can't just spamclick.
+	if(check_skill && check_skill_threshold && check_skill_prob)
+		if(prob(user.skill_fail_chance(check_skill, check_skill_prob, check_skill_threshold)))
+			to_chat(user, SPAN_WARNING("You fumble hopelessly with \the [holder]."))
+			return TOOL_USE_FAILURE
 
 	check_result = tool_archetype.handle_post_interaction(user, holder, fuel_expenditure)
 	if(check_result != TOOL_USE_SUCCESS)
