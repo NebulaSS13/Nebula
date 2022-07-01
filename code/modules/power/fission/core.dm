@@ -221,7 +221,7 @@
 	. = ..()
 
 /obj/machinery/atmospherics/unary/fission_core/proc/jump_start()
-	if((stat & (BROKEN|NOPOWER)) || (can_use_power_oneoff(5 KILOWATTS) <= 0))
+	if((stat & (BROKEN|NOPOWER)) || (can_use_power_oneoff(5 KILOWATTS) > 0))
 		visible_message("\The [src] flashes an 'Insufficient Power' error.")
 		return
 	use_power_oneoff(5 KILOWATTS)
