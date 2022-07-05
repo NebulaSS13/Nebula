@@ -309,11 +309,12 @@
 			else
 				return
 
-		if(!(I.get_tool_property(TOOL_PEN, TOOL_PROP_PEN_FLAG) & PEN_FLAG_ACTIVE))
+		var/pen_flags = I.get_tool_property(TOOL_PEN, TOOL_PROP_PEN_FLAG)
+		if(!(pen_flags & PEN_FLAG_ACTIVE))
 			var/decl/tool_archetype/pen/parch = GET_DECL(TOOL_PEN)
 			parch.toggle_active(usr, I)
-		iscrayon = I.get_tool_property(TOOL_PEN, TOOL_PROP_PEN_FLAG) & PEN_FLAG_CRAYON
-		isfancy  = I.get_tool_property(TOOL_PEN, TOOL_PROP_PEN_FLAG) & PEN_FLAG_FANCY
+		iscrayon = pen_flags & PEN_FLAG_CRAYON
+		isfancy  = pen_flags & PEN_FLAG_FANCY
 
 		var/t =  sanitize(input("Enter what you want to write:", "Write", null, null) as message, free_space, extra = 0, trim = 0)
 

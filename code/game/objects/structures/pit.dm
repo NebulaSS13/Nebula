@@ -175,8 +175,11 @@
 		if(W.do_tool_interaction(TOOL_HATCHET, user, src, 3 SECONDS, "hacking away at", "hacking at"))
 			physically_destroyed(FALSE)
 		return TRUE
-	if(IS_PEN(W) && CanPhysicallyInteractWith(user, src))
+	if(IS_PEN(W))
 		var/msg = sanitize(input(user, "What should it say?", "Grave marker", message) as text|null)
+		if(!CanPhysicallyInteract(user))
+			to_chat(user, SPAN_WARNING("You must stay close to \the [src]!"))
+			return
 		if(msg && W.do_tool_interaction(TOOL_PEN, user, src, 1 SECOND, fuel_expenditure = 1))
 			message = msg
 		return TRUE

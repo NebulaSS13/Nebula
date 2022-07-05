@@ -20,14 +20,15 @@
 	. = ..()
 	set_extension(src, /datum/extension/tool,
 		list(
-				TOOL_DRILL = TOOL_QUALITY_WORST,
-				TOOL_PEN   = pen_quality),
+			TOOL_DRILL = TOOL_QUALITY_WORST,
+			TOOL_PEN   = pen_quality),
+
 		list(
-				TOOL_PEN   = list(
-					TOOL_PROP_COLOR_NAME = stroke_colour_name, 
-					TOOL_PROP_COLOR      = stroke_colour, 
-					TOOL_PROP_PEN_FLAG   = pen_flag,
-					TOOL_PROP_USES       = max_uses)))
+			TOOL_PEN   = list(
+				TOOL_PROP_COLOR_NAME = stroke_colour_name,
+				TOOL_PROP_COLOR      = stroke_colour,
+				TOOL_PROP_PEN_FLAG   = pen_flag,
+				TOOL_PROP_USES       = max_uses)))
 	make_pen_description()
 
 /obj/item/pen/attack(atom/A, mob/user, target_zone)
