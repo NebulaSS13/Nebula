@@ -139,7 +139,7 @@
 		if(comparison >= 0.9 && comparison <= 1.1)
 			material_info += "<li>It is as hard as steel.</li>"
 		else if (comparison < 0.9)
-			comparison = round(1/max(comparison,0.01),0.1)
+			comparison = comparison > 0? round(1/max(comparison,0.01),0.1) : steel.hardness
 			material_info += "<li>It is ~[comparison] times softer than steel.</li>"
 		else
 			material_info += "<li>It is ~[comparison] times harder than steel.</li>"
@@ -147,7 +147,7 @@
 		if(comparison >= 0.9 && comparison <= 1.1)
 			material_info += "<li>It is as durable as steel.</li>"
 		else if (comparison < 0.9)
-			comparison = round(1/comparison,0.1)
+			comparison = comparison > 0 ? round(1/comparison,0.1) : steel.integrity
 			material_info += "<li>It is ~[comparison] times structurally weaker than steel.</li>"
 		else
 			material_info += "<li>It is ~[comparison] times more durable than steel.</li>"
