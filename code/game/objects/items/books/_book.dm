@@ -10,7 +10,7 @@
 	matter = list(/decl/material/solid/wood = MATTER_AMOUNT_REINFORCEMENT)
 
 	var/dat			 // Actual page content
-	var/pencode_dat  // Cache pencode if input, so it can be edited later. 
+	var/pencode_dat  // Cache pencode if input, so it can be edited later.
 	var/author		 // Who wrote the thing, can be changed by pen or PC. It is not automatically assigned
 	var/unique = 0   // 0 - Normal book, 1 - Should not be treated as normal book, unable to be copied, unable to be modified
 	var/title		 // The real name of the book.
@@ -134,10 +134,13 @@
 	. = t
 	if(findtext(t, "\[sign\]"))
 		var/decl/tool_archetype/pen/parch = GET_DECL(TOOL_PEN)
-		var/signature = parch.get_signature(user, P) 
+		var/signature = parch.get_signature(user, P)
 		. = replacetext(t, "\[sign\]", "<font face=\"[signfont]\"><i>[signature]</i></font>")
+
+	var/pen_flag  = P.get_tool_property(TOOL_PEN, TOOL_PROP_PEN_FLAG)
+	var/pen_color = P.get_tool_property(TOOL_PEN, TOOL_PROP_COLOR)
 	if(P)
-		if(P.get_tool_property(TOOL_PEN, TOOL_PROP_PEN_FLAG) & PEN_FLAG_CRAYON)
+		if(pen_flag & PEN_FLAG_CRAYON)
 			. = replacetext(t, "\[*\]", "")
 			. = replacetext(t, "\[hr\]", "")
 			. = replacetext(t, "\[small\]", "")
@@ -149,11 +152,11 @@
 			. = replacetext(t, "\[row\]", "")
 			. = replacetext(t, "\[cell\]", "")
 			. = replacetext(t, "\[logo\]", "")
-			. = "<font face=\"[crayonfont]\" color=\"[P.get_tool_property(TOOL_PEN, TOOL_PROP_COLOR)]\"><b>[.]</b></font>"
-		else if(P.get_tool_property(TOOL_PEN, TOOL_PROP_PEN_FLAG) & PEN_FLAG_FANCY)
-			. = "<font face=\"[fancyfont]\" color=\"[P.get_tool_property(TOOL_PEN, TOOL_PROP_COLOR)]\"><i>[.]</i></font>"
+			. = "<font face=\"[crayonfont]\" color=\"[pen_color]\"><b>[.]</b></font>"
+		else if(pen_flag & PEN_FLAG_FANCY)
+			. = "<font face=\"[fancyfont]\" color=\"[pen_color]\"><i>[.]</i></font>"
 		else
-			. = "<font face=\"[deffont]\" color=\"[P.get_tool_property(TOOL_PEN, TOOL_PROP_COLOR)]\">[.]</font>"
+			. = "<font face=\"[deffont]\" color=\"[pen_color]\">[.]</font>"
 	else
 		. = "<font face=\"[deffont]\" color=\"black\"]>[.]</font>"
 	. = pencode2html(.)
