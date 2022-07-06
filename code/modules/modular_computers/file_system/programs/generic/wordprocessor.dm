@@ -133,6 +133,9 @@
 		var/oldtext = html_decode(loaded_data)
 		oldtext = replacetext(oldtext, "\[br\]", "\n")
 		var/datum/computer_file/data/F = get_file(open_file)
+		if(!F)
+			error = "I/O error: File not found."
+			return 1
 		if(!(F.get_file_perms(NM.get_access(usr), usr) & OS_WRITE_ACCESS))
 			error = "I/O error: You do not have permission to edit this file."
 			return 1
