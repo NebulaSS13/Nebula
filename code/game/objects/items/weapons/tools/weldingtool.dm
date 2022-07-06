@@ -109,11 +109,10 @@
 	if(!status && istype(W, /obj/item/stack/material/rods))
 		var/obj/item/stack/material/rods/R = W
 		R.use(1)
-		add_fingerprint(user)
 		user.drop_from_inventory(src)
-		var/obj/item/flamethrower/F = new(get_turf(src), src)
-		user.put_in_hands(F)
-		return
+		user.put_in_hands(new /obj/item/flamethrower(get_turf(src), src))
+		qdel(src)
+		return TRUE
 
 	if (istype(W, /obj/item/welder_tank))
 		if(tank)
