@@ -98,7 +98,8 @@
 		slip_dist = 4
 		slip_stun = 10
 
-	if(slip("the [floor_type] floor", slip_stun))
+	// Dir check to avoid slipping up and down via ladders.
+	if(slip("the [floor_type] floor", slip_stun) && (dir in global.cardinal))
 		for(var/i = 1 to slip_dist)
 			step(src, dir)
 			sleep(1)
