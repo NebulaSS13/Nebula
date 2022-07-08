@@ -46,6 +46,9 @@
 			check_tech -= tech
 	return !length(check_tech)
 
+/datum/fabricator_recipe/proc/is_available_to_fab(var/obj/machinery/fabricator/fab)
+	return TRUE
+
 /datum/fabricator_recipe/proc/get_resources()
 	resources = list()
 	var/list/building_cost = atom_info_repository.get_matter_for(path)

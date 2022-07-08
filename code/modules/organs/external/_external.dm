@@ -1270,8 +1270,20 @@ Note that amputating the affected organ does in fact remove the infection from t
 			company = /decl/prosthetics_manufacturer
 		R = GET_DECL(company)
 
-	//If can't install fallback to default
-	if(!R.check_can_install(organ_tag, (check_bodytype || owner?.get_bodytype_category() || global.using_map.default_bodytype), (check_species || owner?.get_species_name() || global.using_map.default_species)))
+	if(!check_species)
+		check_species = owner?.get_species_name() || global.using_map.default_species
+	if(!check_bodytype)
+		if(owner)
+			check_bodytype = owner.get_bodytype_category()
+		else
+			var/decl/species/species_data = get_species_by_key(check_species)
+			if(species_data)
+				check_bodytype = species_data.default_bodytype.bodytype_category
+			else
+				check_bodytype = global.using_map.default_bodytype
+
+	//If can't install fallback to defaults.
+	if(!R.check_can_install(organ_tag, check_bodytype, check_species))
 		company = /decl/prosthetics_manufacturer
 		R = GET_DECL(/decl/prosthetics_manufacturer)
 
