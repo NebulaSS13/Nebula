@@ -963,8 +963,9 @@
 		return 0
 	return 1
 
+// Let simple mobs press buttons and levers but nothing more complex.
 /mob/proc/has_dexterity(var/dex_level)
-	. = TRUE
+	. = dex_level <= DEXTERITY_SIMPLE_MACHINES
 
 /mob/proc/check_dexterity(var/dex_level, var/silent)
 	. = has_dexterity(dex_level)
