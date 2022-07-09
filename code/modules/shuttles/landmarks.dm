@@ -41,7 +41,7 @@ var/global/list/shuttle_landmarks = list()
 		var/turf/T = get_turf(src)
 		if(T)
 			base_turf = T.type
-	else
+	else if(ispath(base_area) || !base_area)
 		base_area = locate(base_area || world.area)
 
 	SetName(name + " ([x],[y])")
