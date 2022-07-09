@@ -5,6 +5,7 @@
 	frame_type = /obj/item/frame/wall_router
 	construct_state = /decl/machine_construction/wall_frame/panel_closed
 	density = 0
+	obj_flags = OBJ_FLAG_MOVES_UNSUPPORTED
 	base_type = /obj/machinery/network/router/wall_mounted
 
 /obj/machinery/network/router/wall_mounted/Initialize()

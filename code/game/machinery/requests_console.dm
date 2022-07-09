@@ -21,6 +21,7 @@ var/global/req_console_information = list()
 	desc = "A console intended to send requests to different departments."
 	anchored = TRUE
 	density = FALSE
+	obj_flags = OBJ_FLAG_MOVES_UNSUPPORTED
 	icon = 'icons/obj/terminals.dmi'
 	icon_state = "req_comp0"
 	var/department = "Unknown" //The list of all departments on the station (Determined from this variable on each unit) Set this to the same thing if you want several consoles in one department

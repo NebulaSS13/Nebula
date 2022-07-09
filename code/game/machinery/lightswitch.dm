@@ -6,6 +6,7 @@
 	desc = "It turns lights on and off. What are you, simple?"
 	icon = 'icons/obj/power.dmi'
 	icon_state = "light0"
+	obj_flags = OBJ_FLAG_MOVES_UNSUPPORTED
 	anchored = 1.0
 	idle_power_usage = 20
 	power_channel = LIGHT

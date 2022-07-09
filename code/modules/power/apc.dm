@@ -92,6 +92,7 @@ var/global/list/all_apcs = list()
 	icon_state = "apc0"
 	icon = 'icons/obj/apc.dmi'
 	anchored = 1
+	obj_flags = OBJ_FLAG_MOVES_UNSUPPORTED
 	use_power = POWER_USE_IDLE // Has custom handling here.
 	power_channel = LOCAL      // Do not manipulate this; you don't want to power the APC off itself.
 	interact_offline = TRUE    // Can use UI even if unpowered
@@ -99,6 +100,7 @@ var/global/list/all_apcs = list()
 	initial_access = list(access_engine_equip)
 	clicksound = "switch"
 	layer = ABOVE_WINDOW_LAYER
+
 	var/powered_down = FALSE
 	var/area/area
 	var/areastring = null

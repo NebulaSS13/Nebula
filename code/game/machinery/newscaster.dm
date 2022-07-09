@@ -150,6 +150,7 @@ var/global/list/allCasters = list() //Global list that will contain reference to
 	var/datum/feed_channel/viewing_channel = null
 	light_range = 0
 	anchored = 1
+	obj_flags = OBJ_FLAG_MOVES_UNSUPPORTED
 	layer = ABOVE_WINDOW_LAYER
 
 	construct_state = /decl/machine_construction/wall_frame/panel_closed

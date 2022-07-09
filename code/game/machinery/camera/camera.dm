@@ -9,6 +9,7 @@
 	layer = CAMERA_LAYER
 	anchored = 1
 	movable_flags = MOVABLE_FLAG_PROXMOVE
+	obj_flags = OBJ_FLAG_MOVES_UNSUPPORTED
 
 	base_type = /obj/machinery/camera
 	uncreated_component_parts = null
