@@ -9,6 +9,7 @@
 	thermal_conductivity = OPEN_HEAT_TRANSFER_COEFFICIENT
 	permit_ao = FALSE
 	z_eventually_space = TRUE
+	turf_flags = TURF_FLAG_BACKGROUND
 
 	/// If we're an edge.
 	var/edge = 0
@@ -104,9 +105,6 @@
 /turf/space/levelupdate()
 	for(var/obj/O in src)
 		O.hide(0)
-
-/turf/space/is_solid_structure()
-	return locate(/obj/structure/lattice, src) //counts as solid structure if it has a lattice
 
 /turf/space/attackby(obj/item/C, mob/user)
 

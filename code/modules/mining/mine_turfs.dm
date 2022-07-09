@@ -22,6 +22,7 @@ var/global/list/mining_floors = list()
 	initial_flooring = null
 	initial_gas = null
 	temperature = TCMB
+	turf_flags = TURF_FLAG_BACKGROUND
 
 	var/dug = 0       //0 = has not yet been dug, 1 = has already been dug
 	var/overlay_detail

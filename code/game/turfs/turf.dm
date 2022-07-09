@@ -120,7 +120,7 @@
 	return
 
 /turf/proc/is_solid_structure()
-	return 1
+	return !(turf_flags & TURF_FLAG_BACKGROUND) || locate(/obj/structure/lattice, src)
 
 /turf/proc/get_base_movement_delay()
 	return movement_delay

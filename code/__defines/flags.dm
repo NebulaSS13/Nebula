@@ -62,6 +62,7 @@ The latter will result in a linter warning and will not work correctly.
 #define OBJ_FLAG_CONDUCTIBLE              BITFLAG(1) // Conducts electricity. (metal etc.)
 #define OBJ_FLAG_ROTATABLE                BITFLAG(2) // Can be rotated with alt-click
 #define OBJ_FLAG_NOFALL                   BITFLAG(3) // Will prevent mobs from falling
+#define OBJ_FLAG_MOVES_UNSUPPORTED        BITFLAG(4) // Object moves with shuttle transition even if turf below is a background turf.
 
 // Item-level flags (/obj/item/item_flags)
 #define ITEM_FLAG_NO_BLUDGEON             BITFLAG(0) // When an item has this it produces no "X has been hit by Y with Z" message with the default handler.

@@ -5,6 +5,7 @@
 	icon_state = "0"
 	layer = PLATING_LAYER
 	open_turf_type = /turf/exterior/open
+	turf_flags = TURF_FLAG_BACKGROUND
 	var/diggable = 1
 	var/dirt_color = "#7c5e42"
 	var/possible_states = 0
