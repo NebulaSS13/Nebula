@@ -71,9 +71,20 @@
 	var/scribble	    //User written text on the backside of the photo
 	var/photo_size = 3  //Square size of the pictured scene in turfs
 
-/obj/item/photo/Initialize(ml, material_key)
+/obj/item/photo/Initialize(ml, material_key, var/icon/_img, var/_scribble)
 	. = ..()
 	id = sequential_id("obj/item/photo")
+	if(_img)
+		img = _img
+	if(length(_scribble))
+		scribble = _scribble
+	update_icon()
+
+/obj/item/photo/proc/Clone()
+	var/obj/item/photo/copy = new(null, null, img, scribble)
+	copy.photo_size = photo_size
+	copy.update_icon()
+	return copy
 
 /obj/item/photo/attack_self(mob/user)
 	user.examinate(src)

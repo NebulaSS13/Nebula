@@ -62,7 +62,7 @@ var/global/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 	// Current game year. Uses current system year + game_year num.
 	var/game_year = 288
 
-	var/map_admin_faxes = list()
+	var/map_admin_faxes //Associative list of network URIs to a lif with their display name and color EX: list("BIG_BOSS.COM" = list("Big boss", "#00ff00"))
 
 	var/shuttle_docked_message
 	var/shuttle_leaving_dock
@@ -204,6 +204,10 @@ var/global/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 		planet_size = list(world.maxx, world.maxy)
 
 	game_year = (text2num(time2text(world.realtime, "YYYY")) + game_year)
+
+	LAZYSET(map_admin_faxes, uppertext(replacetext("[boss_name].COM",          " ", "_")), list("[boss_name]",           "#006100"))
+	LAZYSET(map_admin_faxes, uppertext(replacetext("[boss_short]_SUPPLY.COM",  " ", "_")), list("[boss_short] Supply",   "#5f4519"))
+	LAZYSET(map_admin_faxes, uppertext(replacetext("[system_name]_POLICE.GOV", " ", "_")), list("[system_name] Police",  "#1f66a0"))
 
 	lobby_track = get_lobby_track()
 	update_titlescreen()

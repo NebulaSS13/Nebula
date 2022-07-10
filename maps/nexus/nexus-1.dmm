@@ -4355,9 +4355,7 @@
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/nexus/command/starboard)
 "Px" = (
-/obj/machinery/photocopier/faxmachine{
-	department = "ISC nexus"
-	},
+/obj/machinery/faxmachine,
 /obj/structure/table/reinforced,
 /obj/structure/closet/medical_wall/filled{
 	pixel_x = -32

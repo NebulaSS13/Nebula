@@ -3433,9 +3433,7 @@
 /turf/simulated/floor/tiled/dark,
 /area/exodus/security/warden)
 "ahv" = (
-/obj/machinery/photocopier/faxmachine{
-	department = "Warden's Office"
-	},
+/obj/machinery/faxmachine,
 /obj/structure/table/steel_reinforced,
 /turf/simulated/floor/tiled/dark,
 /area/exodus/security/warden)
@@ -3601,9 +3599,7 @@
 /obj/machinery/keycard_auth{
 	dir = 8
 	},
-/obj/machinery/photocopier/faxmachine{
-	department = "Head of Security"
-	},
+/obj/machinery/faxmachine,
 /turf/simulated/floor/tiled/dark,
 /area/exodus/crew_quarters/heads/hos)
 "ahP" = (
@@ -7062,9 +7058,8 @@
 /turf/simulated/floor/plating,
 /area/exodus/maintenance/auxsolarstarboard)
 "aoK" = (
-/obj/machinery/photocopier/faxmachine{
+/obj/machinery/faxmachine{
 	anchored = 0;
-	department = "Internal Affairs"
 	},
 /obj/structure/table/reinforced,
 /obj/machinery/newscaster{
@@ -25323,9 +25318,7 @@
 /area/exodus/library)
 "bbF" = (
 /obj/structure/table,
-/obj/machinery/photocopier/faxmachine{
-	department = "Vacant Office"
-	},
+/obj/machinery/faxmachine,
 /obj/machinery/light{
 	dir = 4
 	},
@@ -28490,9 +28483,7 @@
 /area/exodus/bridge/meeting_room)
 "biv" = (
 /obj/structure/table/woodentable,
-/obj/machinery/photocopier/faxmachine{
-	department = "Bridge"
-	},
+/obj/machinery/faxmachine,
 /turf/simulated/floor/wood/walnut,
 /area/exodus/bridge/meeting_room)
 "biw" = (
@@ -31560,9 +31551,7 @@
 /turf/simulated/floor/tiled/dark,
 /area/exodus/research/chargebay)
 "boF" = (
-/obj/machinery/photocopier/faxmachine{
-	department = "Captain's Office"
-	},
+/obj/machinery/faxmachine,
 /obj/structure/table/woodentable,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
@@ -38426,9 +38415,7 @@
 /area/ship/exodus_pod_research)
 "bCs" = (
 /obj/structure/table,
-/obj/machinery/photocopier/faxmachine{
-	department = "Research Director's Office"
-	},
+/obj/machinery/faxmachine,
 /obj/effect/floor_decal/corner/purple/diagonal{
 	dir = 4
 	},
@@ -39551,9 +39538,7 @@
 /turf/simulated/floor/tiled/white,
 /area/exodus/medical/medbay3)
 "bEA" = (
-/obj/machinery/photocopier/faxmachine{
-	department = "Head of Personnel's Office"
-	},
+/obj/machinery/faxmachine,
 /obj/structure/table/glass,
 /turf/simulated/floor/tiled/steel_grid,
 /area/exodus/crew_quarters/heads/hop)
@@ -43702,9 +43687,7 @@
 	dir = 8;
 	pixel_x = -24
 	},
-/obj/machinery/photocopier/faxmachine{
-	department = "CMO's Office"
-	},
+/obj/machinery/faxmachine,
 /obj/structure/table/glass,
 /turf/simulated/floor/tiled/white,
 /area/exodus/crew_quarters/heads/cmo)
@@ -44194,9 +44177,7 @@
 /area/exodus/hallway/primary/aft)
 "bNG" = (
 /obj/structure/table,
-/obj/machinery/photocopier/faxmachine{
-	department = "Quartermaster's Office"
-	},
+/obj/machinery/faxmachine,
 /turf/simulated/floor/tiled/steel_grid,
 /area/exodus/quartermaster/qm)
 "bNH" = (
@@ -51049,9 +51030,7 @@
 /area/exodus/crew_quarters/heads/chief)
 "cbC" = (
 /obj/structure/table/reinforced,
-/obj/machinery/photocopier/faxmachine{
-	department = "Chief Engineer's Office"
-	},
+/obj/machinery/faxmachine,
 /turf/simulated/floor/tiled/steel_grid,
 /area/exodus/crew_quarters/heads/chief)
 "cbD" = (

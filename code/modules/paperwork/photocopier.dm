@@ -1,205 +1,301 @@
-/obj/machinery/photocopier
-	name = "photocopier"
-	icon = 'icons/obj/bureaucracy.dmi'
-	icon_state = "photocopier"
-	var/insert_anim = "photocopier_animation"
-	anchored = 1
-	density = 1
-	idle_power_usage = 30
-	active_power_usage = 200
-	power_channel = EQUIP
-	atom_flags = ATOM_FLAG_NO_TEMP_CHANGE | ATOM_FLAG_CLIMBABLE
-	obj_flags = OBJ_FLAG_ANCHORABLE
-	var/obj/item/copyitem = null	//what's in the copier!
-	var/copies = 1	//how many copies to print!
-	var/toner = 30 //how much toner is left! woooooo~
-	var/maxcopies = 10	//how many copies can be copied at once- idea shamelessly stolen from bs12's copier!
+////////////////////////////////////////////////////////////////////////////////////////
+// Photocopier Board
+////////////////////////////////////////////////////////////////////////////////////////
+/obj/item/stock_parts/circuitboard/photocopier
+	name = "circuitboard (photocopier)"
+	build_path = /obj/machinery/photocopier
+	board_type = "machine"
+	origin_tech = "{'engineering':1, 'programming':1}"
+	req_components = list(
+			/obj/item/stock_parts/printer/buildable = 1,
+			/obj/item/stock_parts/manipulator       = 2,
+			/obj/item/stock_parts/scanning_module   = 1,
+		)
+	additional_spawn_components = list(
+		/obj/item/stock_parts/console_screen      = 1,
+		/obj/item/stock_parts/keyboard            = 1,
+		/obj/item/stock_parts/power/apc/buildable = 1
+	)
 
-/obj/machinery/photocopier/interface_interact(mob/user)
-	interact(user)
+////////////////////////////////////////////////////////////////////////////////////////
+// Photocopier
+////////////////////////////////////////////////////////////////////////////////////////
+/obj/machinery/photocopier
+	name                  = "photocopier"
+	icon                  = 'icons/obj/bureaucracy.dmi'
+	icon_state            = "photocopier"
+	anchored              = TRUE
+	density               = TRUE
+	idle_power_usage      = 30
+	active_power_usage    = 200
+	atom_flags            = ATOM_FLAG_NO_TEMP_CHANGE | ATOM_FLAG_CLIMBABLE
+	obj_flags             = OBJ_FLAG_ANCHORABLE
+	construct_state       = /decl/machine_construction/default/panel_closed
+	maximum_component_parts = list(
+		/obj/item/stock_parts/printer = 1,
+		/obj/item/stock_parts         = 10,
+	)
+	uncreated_component_parts = null
+	var/tmp/insert_anim   = "photocopier_animation"
+	var/obj/item/scanner_item                  //what's in the scanner
+	var/obj/item/stock_parts/printer/printer   //What handles the printing queue
+	var/tmp/max_copies    = 10                 //how many copies can be copied at once- idea shamelessly stolen from bs12's copier!
+	var/tmp/busy          = FALSE              //Whether we should allow people to mess with the settings and contents
+	var/accept_refill     = FALSE              //Whether we should handle attackby paper to be sent to the paper bin, or to the scanner slot
+	var/total_printing    = 0                  //The total number of pages we are printing in the current run
+
+/obj/machinery/photocopier/Initialize(ml)
+	. = ..()
+	if(.!= INITIALIZE_HINT_QDEL && ml && printer)
+		//Mapped photocopiers shall spawn with ink and paper
+		printer.make_full()
+
+/obj/machinery/photocopier/RefreshParts()
+	. = ..()
+	printer = get_component_of_type(/obj/item/stock_parts/printer) //Cache the printer component
+	if(printer)
+		printer.show_queue_ctrl = FALSE //Make sure we don't let users mess with the print queue
+		printer.register_on_printed_page(  CALLBACK(src, /obj/machinery/photocopier/proc/update_ui))
+		printer.register_on_finished_queue(CALLBACK(src, /obj/machinery/photocopier/proc/update_ui))
+		printer.register_on_print_error(   CALLBACK(src, /obj/machinery/photocopier/proc/update_ui))
+		printer.register_on_status_changed(CALLBACK(src, /obj/machinery/photocopier/proc/update_ui))
+
+/obj/machinery/photocopier/on_update_icon()
+	cut_overlays()
+	//Set the icon first
+	if(scanner_item)
+		icon_state = "photocopier_paper"
+	else
+		icon_state = initial(icon_state)
+
+	//If powered and working add the flashing lights
+	if(inoperable())
+		return
+	//Warning lights
+	if(scanner_item)
+		add_overlay(overlay_image('icons/obj/bureaucracy.dmi', "photocopier_ready"))
+	if(!printer?.has_enough_to_print())
+		add_overlay(overlay_image('icons/obj/bureaucracy.dmi', "photocopier_bad"))
+
+/obj/machinery/photocopier/proc/update_ui()
+	SSnano.update_uis(src)
+	update_icon()
+
+/obj/machinery/photocopier/proc/queue_copies(var/copy_amount, var/mob/user)
+	if(!scanner_item)
+		if(user)
+			to_chat(user, SPAN_WARNING("Insert something to copy first!"))
+		return FALSE
+
+	//First, check we have enough to print the copies
+	var/required_toner = 0
+	var/required_paper = 1
+
+	//Compile the total amount needed for printing the whole bundle if applicable
+	if(istype(scanner_item, /obj/item/paper_bundle))
+		var/obj/item/paper_bundle/B = scanner_item
+		for(var/obj/item/I in B.pages)
+			required_toner += istype(I, /obj/item/photo)? TONER_USAGE_PHOTO : TONER_USAGE_PAPER
+		required_paper = length(B.pages)
+	else if(istype(scanner_item, /obj/item/photo))
+		required_toner = TONER_USAGE_PHOTO
+	else
+		required_toner = TONER_USAGE_PAPER
+
+	if(!printer?.has_enough_to_print(required_toner, required_paper * copy_amount))
+		buzz("Warning: Not enough paper or toner!")
+		return FALSE
+
+	//If we have enough go ahead
+	var/list/obj/item/scanned_item = scan_item(scanner_item) //Generate the copies we'll queue for printing
+	for(var/i=1 to copy_amount)
+		for(var/obj/item/page in scanned_item)
+			printer.queue_job(page)
+
+	//Play the scanner animation
+	flick(insert_anim, src)
+
+	//Actually start printing out the copies we created when queueing
+	start_processing_queue()
 	return TRUE
 
-/obj/machinery/photocopier/interact(mob/user)
-	user.set_machine(src)
+/obj/machinery/photocopier/proc/start_processing_queue()
+	if(!printer)
+		return FALSE
+	audible_message(SPAN_NOTICE("\The [src] whirrs into action."))
+	total_printing = printer.get_amount_queued()
+	printer.start_printing_queue()
 
-	var/dat = "Photocopier<BR><BR>"
-	if(copyitem)
-		dat += "<a href='byond://?src=\ref[src];remove=1'>Remove Item</a><BR>"
-		if(toner)
-			dat += "<a href='byond://?src=\ref[src];copy=1'>Copy</a><BR>"
-			dat += "Printing: [copies] copies."
-			dat += "<a href='byond://?src=\ref[src];min=1'>-</a> "
-			dat += "<a href='byond://?src=\ref[src];add=1'>+</a><BR><BR>"
-	else if(toner)
-		dat += "Please insert something to copy.<BR><BR>"
-	if(istype(user,/mob/living/silicon))
-		dat += "<a href='byond://?src=\ref[src];aipic=1'>Print photo from database</a><BR><BR>"
-	dat += "Current toner level: [toner]"
-	if(!toner)
-		dat +="<BR>Please insert a new toner cartridge!"
-	show_browser(user, dat, "window=copier")
-	onclose(user, "copier")
-	return
+	use_power_oneoff(active_power_usage)
+	update_icon()
+	SSnano.update_uis(src)
+	return TRUE
+
+/obj/machinery/photocopier/proc/stop_processing_queue()
+	if(!printer)
+		return FALSE
+	total_printing = 0
+	printer.stop_printing_queue()
+	printer.clear_job_queue()
+
+	update_use_power(POWER_USE_IDLE)
+	update_icon()
+	SSnano.update_uis(src)
+	return TRUE
+
+/obj/machinery/photocopier/interface_interact(mob/user)
+	ui_interact(user)
+	return TRUE
+
+/obj/machinery/photocopier/proc/get_name_copy_item()
+	if(istype(scanner_item, /obj/item/paper))
+		return "Sheet of paper"
+	else if(istype(scanner_item, /obj/item/paper_bundle))
+		return "Paper bundle"
+	else if(istype(scanner_item, /obj/item/photo))
+		return "Photo"
+
+/obj/machinery/photocopier/ui_data(mob/user, ui_key)
+	. = ..()
+	//Printer header stuff
+	if(printer)
+		LAZYADD(., printer.ui_data(user))
+	
+	//Photocopier stuff
+	LAZYSET(., "src",                "\ref[src]")
+	LAZYSET(., "is_sillicon_mode",   issilicon(user))
+	LAZYSET(., "copies_max",         max_copies)
+	LAZYSET(., "is_operational",     operable())
+	LAZYSET(., "total_printing",     total_printing)
+	LAZYSET(., "loaded_item_name",   get_name_copy_item())
+
+/obj/machinery/photocopier/ui_interact(mob/user, ui_key, datum/nanoui/ui, force_open, datum/nanoui/master_ui, datum/topic_state/state)
+	var/list/data = ui_data(user, ui_key)
+	ui = SSnano.try_update_ui(user, src, ui_key, ui, data, force_open)
+	if (!ui)
+		ui = new(user, src, ui_key, "photocopier.tmpl", name, 640, 480)
+		ui.add_template("stock_parts_printer_shared", "stock_parts_printer.tmpl") //printer info header
+		ui.set_initial_data(data)
+		ui.open()
 
 /obj/machinery/photocopier/OnTopic(user, href_list, state)
-	if(href_list["copy"])
-		for(var/i = 0, i < copies, i++)
-			if(toner <= 0)
-				break
-			if (istype(copyitem, /obj/item/paper))
-				copy(copyitem, 1)
-				sleep(15)
-			else if (istype(copyitem, /obj/item/photo))
-				photocopy(copyitem)
-				sleep(15)
-			else if (istype(copyitem, /obj/item/paper_bundle))
-				var/obj/item/paper_bundle/B = bundlecopy(copyitem)
-				sleep(15*B.pages.len)
-			else
-				to_chat(user, "<span class='warning'>\The [copyitem] can't be copied by \the [src].</span>")
-				break
-
-			use_power_oneoff(active_power_usage)
+	//We don't plug in the printer's own OnTopic here since we don't want to allow the user control over it
+	
+	if(href_list["eject"])
+		eject_item(user)
 		return TOPIC_REFRESH
 
-	if(href_list["remove"])
-		OnRemove(user)
-		return TOPIC_REFRESH
-
-	if(href_list["min"])
-		if(copies > 1)
-			copies--
-		return TOPIC_REFRESH
-
-	else if(href_list["add"])
-		if(copies < maxcopies)
-			copies++
+	if(href_list["copy_amount"])
+		queue_copies(sanitize_integer(text2num(href_list["copy_amount"]), 1, max_copies, 1))
 		return TOPIC_REFRESH
 
 	if(href_list["aipic"])
-		if(!istype(user,/mob/living/silicon)) return
-
-		if(toner >= 5)
+		if(!istype(user,/mob/living/silicon))
+			return TOPIC_NOACTION
+		if(printer?.has_enough_to_print(TONER_USAGE_PHOTO))
 			var/mob/living/silicon/tempAI = user
 			var/obj/item/camera/siliconcam/camera = tempAI.silicon_camera
-
 			if(!camera)
-				return
+				return TOPIC_NOACTION
 			var/obj/item/photo/selection = camera.selectpicture()
 			if (!selection)
-				return
+				return TOPIC_NOACTION
 
-			var/obj/item/photo/p = photocopy(selection)
+			var/obj/item/photo/p = selection.Clone()
 			if (p.desc == "")
 				p.desc += "Copied by [tempAI.name]"
 			else
 				p.desc += " - Copied by [tempAI.name]"
-			toner -= 5
-			sleep(15)
+			printer.queue_job(p)
+			start_processing_queue()
+		else
+			to_chat(user, SPAN_WARNING("Not enough toner and/or paper to print!"))
+			return TOPIC_NOACTION
 		return TOPIC_REFRESH
 
-/obj/machinery/photocopier/proc/OnRemove(mob/user)
-	if(copyitem)
-		user.put_in_hands(copyitem)
-		to_chat(user, "<span class='notice'>You take \the [copyitem] out of \the [src].</span>")
-		copyitem = null
+/obj/machinery/photocopier/proc/insert_item(var/obj/item/I, var/mob/user)
+	if(!scanner_item)
+		if(!user.unEquip(I, src))
+			return
+		scanner_item = I
+		to_chat(user, SPAN_NOTICE("You insert \the [I] into \the [src]."))
+		SSnano.update_uis(src)
+		update_icon()
+		return TRUE
+	else
+		to_chat(user, SPAN_NOTICE("There is already something in \the [src]."))
+
+/obj/machinery/photocopier/proc/eject_item(var/mob/user)
+	if(!scanner_item)
+		return
+	user.put_in_hands(scanner_item)
+	to_chat(user, SPAN_NOTICE("You take \the [scanner_item] out of \the [src]."))
+	scanner_item = null
+	SSnano.update_uis(src)
+	update_icon()
+	return TRUE
 
 /obj/machinery/photocopier/attackby(obj/item/O, mob/user)
-	if(istype(O, /obj/item/paper) || istype(O, /obj/item/photo) || istype(O, /obj/item/paper_bundle))
-		if(!copyitem)
-			if(!user.unEquip(O, src))
-				return
-			copyitem = O
-			to_chat(user, "<span class='notice'>You insert \the [O] into \the [src].</span>")
-			flick(insert_anim, src)
-			updateUsrDialog()
-		else
-			to_chat(user, "<span class='notice'>There is already something in \the [src].</span>")
-	else if(istype(O, /obj/item/toner))
-		if(toner <= 10) //allow replacing when low toner is affecting the print darkness
-			if(!user.unEquip(O, src))
-				return
-			to_chat(user, "<span class='notice'>You insert the toner cartridge into \the [src].</span>")
-			var/obj/item/toner/T = O
-			toner += T.toner_amount
-			qdel(O)
-			updateUsrDialog()
-		else
-			to_chat(user, "<span class='notice'>This cartridge is not yet ready for replacement! Use up the rest of the toner.</span>")
-	else ..()
+	if(istype(construct_state, /decl/machine_construction/default/panel_closed) && (istype(O, /obj/item/paper) || istype(O, /obj/item/photo) || istype(O, /obj/item/paper_bundle)))
+		insert_item(O, user)
+		return TRUE
+	return..() //Components attackby will handle refilling with paper and toner
 
-/obj/machinery/photocopier/explosion_act(severity)
-	..()
-	if(!QDELETED(src) && (severity == 2 || prob(50)) && toner)
-		new /obj/effect/decal/cleanable/blood/oil(get_turf(src))
-		toner = 0
+/**Creates a clone of the specified item. Returns a list of cloned items. */
+/obj/machinery/photocopier/proc/scan_item(var/obj/item/I)
+	if(istype(I, /obj/item/paper))
+		var/obj/item/paper/P = I
+		LAZYADD(., P.Clone())
 
-/obj/machinery/photocopier/proc/copy(var/obj/item/paper/original, var/need_toner=1)
-	var/obj/item/paper/copy = original.Clone()
-	copy.set_color(COLOR_WHITE)
+	else if(istype(I, /obj/item/photo))
+		var/obj/item/photo/Ph = I
+		LAZYADD(., Ph.Clone())
 
-	//Apply a greyscale filter on all stamps overlays
-	for(var/image/I in copy.applied_stamps)
-		I.filters += filter(type = "color", color = list(1,0,0, 0,0,0, 0,0,1), space = FILTER_COLOR_HSV)
-	var/copied = original.info
-	copied = replacetext(copied, "<font face=\"[copy.deffont]\" color=", "<font face=\"[copy.deffont]\" nocolor=")	//state of the art techniques in action
-	copied = replacetext(copied, "<font face=\"[copy.crayonfont]\" color=", "<font face=\"[copy.crayonfont]\" nocolor=")	//This basically just breaks the existing color tag, which we need to do because the innermost tag takes priority.
+	else if(istype(I, /obj/item/paper_bundle))
+		var/obj/item/paper_bundle/B = I
+		for(var/obj/item/page in B.pages)
+			LAZYADD(., scan_item(page))
 
-	//Comments preserved for posterity:
-	//lots of toner, make it dark
-	//no toner? shitty copies for you!
-	if(toner > 10)
-		copy.set_content("<font color = [(toner > 10)? "#101010" : "#808080"]>[copied]</font>")
-	
-	if(need_toner)
-		toner--
-	if(toner == 0)
-		visible_message(SPAN_WARNING("A red light on \the [src] flashes, indicating that it is out of toner."))
-	return copy
+	else
+		CRASH("Got an unhandled item type '[I?.type]'")
 
-/obj/machinery/photocopier/proc/photocopy(var/obj/item/photo/photocopy, var/need_toner=1)
-	var/obj/item/photo/p = photocopy.copy()
-	p.dropInto(loc)
+/**Check if the amount of toner and paper are available */
+/obj/machinery/photocopier/proc/has_enough_to_print(var/req_toner = TONER_USAGE_PAPER, var/req_paper = 1)
+	return printer?.has_enough_to_print(req_toner, req_paper)
 
-	if(toner > 10)	//plenty of toner, go straight greyscale
-		p.img.MapColors(rgb(77,77,77), rgb(150,150,150), rgb(28,28,28), rgb(0,0,0))//I'm not sure how expensive this is, but given the many limitations of photocopying, it shouldn't be an issue.
-		p.update_icon()
-	else			//not much toner left, lighten the photo
-		p.img.MapColors(rgb(77,77,77), rgb(150,150,150), rgb(28,28,28), rgb(100,100,100))
-		p.update_icon()
-	if(need_toner)
-		toner -= 5	//photos use a lot of ink!
-	if(toner < 0)
-		toner = 0
-		visible_message("<span class='notice'>A red light on \the [src] flashes, indicating that it is out of toner.</span>")
+/obj/machinery/photocopier/get_alt_interactions(mob/user)
+	. = ..()
+	LAZYADD(., /decl/interaction_handler/empty/photocopier_paper_bin)
+	LAZYADD(., /decl/interaction_handler/remove/photocopier_scanner_item)
 
-	return p
+////////////////////////////////////////////////////////////////////////////////////////
+// Empty paper bin
+////////////////////////////////////////////////////////////////////////////////////////
+/decl/interaction_handler/empty/photocopier_paper_bin
+	name = "Empty Paper Bin"
+	expected_target_type = /obj/machinery/photocopier
 
-//If need_toner is 0, the copies will still be lightened when low on toner, however it will not be prevented from printing. TODO: Implement print queues for fax machines and get rid of need_toner
-/obj/machinery/photocopier/proc/bundlecopy(var/obj/item/paper_bundle/bundle, var/need_toner=1)
-	var/obj/item/paper_bundle/p = new /obj/item/paper_bundle (src)
-	for(var/obj/item/W in bundle.pages)
-		if(toner <= 0 && need_toner)
-			toner = 0
-			visible_message("<span class='notice'>A red light on \the [src] flashes, indicating that it is out of toner.</span>")
-			break
+/decl/interaction_handler/empty/photocopier_paper_bin/is_possible(obj/machinery/photocopier/target, mob/user, obj/item/prop)
+	return (target.printer?.get_amount_paper() > 0) && ..()
 
-		if(istype(W, /obj/item/paper))
-			W = copy(W)
-		else if(istype(W, /obj/item/photo))
-			W = photocopy(W)
-		W.forceMove(p)
-		p.pages += W
+/decl/interaction_handler/empty/photocopier_paper_bin/invoked(obj/machinery/photocopier/target, mob/user)
+	if(target.printer?.get_amount_paper() <= 0)
+		return
+	var/obj/item/paper_bundle/B = target.printer?.remove_paper(user)
+	if(B)
+		user.put_in_hands(B)
+	target.update_icon()
+	SSnano.update_uis(target)
 
-	p.dropInto(loc)
-	p.update_icon()
-	p.icon_state = "paper_words"
-	p.SetName(bundle.name)
-	return p
+////////////////////////////////////////////////////////////////////////////////////////
+// Remove item from scanner
+////////////////////////////////////////////////////////////////////////////////////////
+/decl/interaction_handler/remove/photocopier_scanner_item
+	name = "Remove Item From Scanner"
+	expected_target_type = /obj/machinery/photocopier
 
-/obj/item/toner
-	name = "toner cartridge"
-	icon = 'icons/obj/items/tonercartridge.dmi'
-	icon_state = "tonercartridge"
-	material = /decl/material/solid/plastic
-	var/toner_amount = 30
+/decl/interaction_handler/remove/photocopier_scanner_item/is_possible(obj/machinery/photocopier/target, mob/user, obj/item/prop)
+	return target.scanner_item && ..()
+
+/decl/interaction_handler/remove/photocopier_scanner_item/invoked(obj/machinery/photocopier/target, mob/user)
+	target.eject_item(user)

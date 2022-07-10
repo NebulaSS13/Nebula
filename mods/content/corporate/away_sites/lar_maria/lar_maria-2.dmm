@@ -1231,7 +1231,7 @@
 /area/lar_maria/library)
 "dM" = (
 /obj/structure/table,
-/obj/machinery/photocopier/faxmachine,
+/obj/machinery/faxmachine,
 /obj/machinery/atmospherics/unary/vent_pump/on,
 /obj/machinery/alarm{
 	dir = 8;

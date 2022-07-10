@@ -330,7 +330,14 @@ Class Procs:
 		text = "\The [src] pings."
 
 	state(text, "blue")
-	playsound(src.loc, 'sound/machines/ping.ogg', 50, 0)
+	playsound(src.loc, 'sound/machines/ping.ogg', 50, FALSE)
+
+/obj/machinery/proc/buzz(text=null)
+	if (!text)
+		text = "\The [src] buzzes."
+
+	state(SPAN_WARNING(text), "red")
+	playsound(src.loc, 'sound/machines/buzz-sigh.ogg', 50, FALSE)
 
 /obj/machinery/proc/shock(mob/user, prb)
 	if(inoperable())

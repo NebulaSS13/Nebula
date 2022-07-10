@@ -1078,18 +1078,15 @@
 
 	else if(href_list["FaxReply"])
 		var/mob/sender = locate(href_list["FaxReply"])
-		var/obj/machinery/photocopier/faxmachine/fax = locate(href_list["originfax"])
+		var/obj/machinery/faxmachine/fax = locate(href_list["originfax"])
 		var/replyorigin = href_list["replyorigin"]
 
-
-		var/obj/item/paper/admin/P = new /obj/item/paper/admin( null ) //hopefully the null loc won't cause trouble for us
+		var/obj/item/paper/admin/P = new /obj/item/paper/admin
 		faxreply = P
-
 		P.admindatum = src
 		P.origin = replyorigin
-		P.destination = fax
+		P.destination_ref = weakref(fax)
 		P.sender = sender
-
 		P.adminbrowse()
 
 	else if(href_list["jumpto"])
@@ -1565,6 +1562,18 @@
 
 		show_player_panel(M)
 
+	if(href_list["asf_pick_fax"])
+		var/obj/machinery/faxmachine/F = locate(href_list["destination"])
+		if(istype(F))
+			var/datum/extension/network_device/D = get_extension(F, /datum/extension/network_device)
+			var/datum/computer_network/CN = D?.get_network()
+			if(CN)
+				var/obj/item/paper/admin/P = new /obj/item/paper/admin
+				faxreply      = P //Store the message instance
+				P.admindatum  = src
+				P.origin      = href_list["sender"] || input(src.owner, "Please specify who the fax is coming from", "Origin")
+				P.destination_ref = weakref(F)
+				P.adminbrowse()
 
 /mob/living/proc/can_centcom_reply()
 	return 0

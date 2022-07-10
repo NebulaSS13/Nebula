@@ -361,7 +361,7 @@
 	else
 		return 0
 
-/obj/item/throw_impact(atom/hit_atom)
+/obj/item/throw_impact(atom/hit_atom, datum/thrownthing/TT)
 	..()
 	if(isliving(hit_atom)) //Living mobs handle hit sounds differently.
 		var/volume = get_volume_by_throwforce_and_or_w_class()
@@ -1004,3 +1004,11 @@ modules/mob/living/carbon/human/life.dm if you die, you will be zoomed out.
 	var/mob/M = src.loc
 	if(istype(M) && M.client && M.machine == src)
 		src.attack_self(M)
+
+//#TODO: Stub implementation. Probably should be unified into /obj along with health..
+/obj/item/proc/take_damage(var/amount, var/damtype, var/silent = FALSE)
+	if(health == -1) // This object does not take damage.
+		return
+	health = Clamp(health - amount, 0, max_health)
+	if(health <= 0)
+		physically_destroyed()

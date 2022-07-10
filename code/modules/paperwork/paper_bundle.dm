@@ -113,6 +113,26 @@
 		return
 	return remove_sheet_at(found, user, skip_qdel)
 
+/**Indiscriminatly remove sheets from the bundle */
+/obj/item/paper_bundle/proc/remove_sheets(var/amount, var/mob/user, var/delete_pages = TRUE)
+	if(LAZYLEN(pages) <= 0 || amount > LAZYLEN(pages))
+		return //Not a user error
+
+	for(var/i = 1 to amount)
+		var/obj/item/I = pages[pages.len]
+		pages -= I
+		if(delete_pages)
+			qdel(I)
+		else
+			I.dropInto(loc)
+	reevaluate_existence(user)
+
+	if(!QDELETED(src))
+		cur_page = 1 //Reset current page
+		updateUsrDialog()
+		update_icon()
+	return TRUE
+
 /obj/item/paper_bundle/proc/remove_sheet_at(var/index, var/mob/user, var/skip_qdel = FALSE)
 	var/obj/item/I = LAZYACCESS(pages, index)
 	if(!I)
@@ -123,7 +143,7 @@
 		user.put_in_hands(I)
 		to_chat(user, SPAN_NOTICE("You remove the [I.name] from the bundle."))
 	else
-		I.forceMove(loc)
+		I.dropInto(loc)
 
 	if(!skip_qdel)
 		reevaluate_existence(user)
@@ -422,10 +442,33 @@
 /obj/item/paper_bundle/proc/is_full()
 	return LAZYLEN(pages) >= max_pages
 
+/**Whether all the papers in the pile are blank /obj/item/paper */
+/obj/item/paper_bundle/proc/is_blank()
+	for(var/obj/item/I in pages)
+		if(!istype(I, /obj/item/paper))
+			return FALSE
+		var/obj/item/paper/P = I
+		if(!P.is_blank())
+			return FALSE
+	return TRUE
+
 /obj/item/paper_bundle/get_alt_interactions(mob/user)
 	. = ..()
 	LAZYADD(., /decl/interaction_handler/rename/paper_bundle)
 	LAZYADD(., /decl/interaction_handler/unbundle/paper_bundle)
+
+/obj/item/paper_bundle/proc/Clone()
+	var/obj/item/paper_bundle/copy = new
+	for(var/obj/item/I in pages)
+		if(istype(I, /obj/item/paper))
+			var/obj/item/paper/P = I
+			copy.merge(P.Clone())
+		else if(istype(I, /obj/item/photo))
+			var/obj/item/photo/Ph = I
+			copy.merge(Ph.Clone())
+		else
+			CRASH("Tried to clone a bundle with an invalid item type inside '[I.type]'")
+	return copy
 
 /obj/item/paper_bundle/verb/rename()
 	set name = "Rename Bundle"

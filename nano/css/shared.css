@@ -763,3 +763,56 @@ th.bot {
 	text-align		: center;
 	white-space		: pre-line;
 }
+
+/*Forms UI templates (For use with forms controls)*/
+.textBox{
+	border: 1px solid #666666;
+	margin: 0 1em 0 0;
+	background: #000000;
+	color:inherit;
+}
+.textBox:disabled{
+	border: 1px solid #666666;
+	margin: 0 1em 0 0;
+	background: #3d3d3d;
+	color:#1b3015;
+}
+
+.numBox{
+	border: 1px solid #666666;
+	margin: 0 1em 0 0;
+	background: #000000;
+	color:inherit;
+}
+.numBox:disabled{
+	border: 1px solid #666666;
+	margin: 0 1em 0 0;
+	background: #3d3d3d;
+	color:#1b3015;
+}
+
+.button{
+	border: 1px solid #666666;
+	margin: 0 1em 0 0;
+	background: #303030;
+	color:inherit;
+}
+.button:disabled{
+	border: 1px solid #666666;
+	margin: 0 1em 0 0;
+	background: #3d3d3d;
+	color:#1b3015;
+}
+
+.listBox{
+	border: 1px solid #666666;
+	margin: 0 1em 0 0;
+	background: #000000;
+	color:inherit;
+}
+.listBox:disabled{
+	border: 1px solid #666666;
+	margin: 0 1em 0 0;
+	background: #3d3d3d;
+	color:#1b3015;
+}

@@ -450,6 +450,10 @@
 		alias = replacetext(alias, " ", "_")
 		LAZYSET(command_and_write, alias, pub)
 
+/**Returns the outward facing URI for this network device.*/
+/datum/extension/network_device/proc/get_network_URI()
+	return "[network_tag].[network_id]"
+
 //Subtype for passive devices, doesn't init until asked for
 /datum/extension/network_device/lazy
 	base_type = /datum/extension/network_device

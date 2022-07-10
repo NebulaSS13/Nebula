@@ -8,7 +8,7 @@
 	var/isCrayon = 0
 	var/origin = null
 	var/mob/sender = null
-	var/obj/machinery/photocopier/faxmachine/destination
+	var/weakref/destination_ref
 
 	var/header = null
 	var/headerOn = TRUE
@@ -109,6 +109,10 @@
 		return
 
 	if(href_list["confirm"])
+		var/obj/machinery/faxmachine/F = destination_ref.resolve()
+		if(!istype(F))
+			to_chat(usr, "The destination machines doesn't exist anymore..")
+			return
 		switch(alert("Are you sure you want to send the fax as is?",, "Yes", "No"))
 			if("Yes")
 				if(headerOn)
@@ -117,7 +121,7 @@
 					info += footer
 				updateinfolinks()
 				close_browser(usr, "window=[name]")
-				admindatum.faxCallback(src, destination)
+				admindatum.faxCallback(src, F)
 		return
 
 	if(href_list["penmode"])
