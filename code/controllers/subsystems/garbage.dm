@@ -393,9 +393,14 @@ SUBSYSTEM_DEF(garbage)
 	set name = "Find References"
 	set src in world
 
-	find_references(FALSE)
+	user_find_references()
 
-/datum/proc/find_references(skip_alert)
+/datum/proc/user_find_references()
+	if(alert("Running this will lock everything up for about 5 minutes.  Would you like to begin the search?", "Find References", "Yes", "No")) == "No")
+		return
+	find_references()
+
+/datum/proc/find_references()
 	running_find_references = type
 	if(usr && usr.client)
 		if(usr.client.running_find_references)
@@ -406,11 +411,6 @@ SUBSYSTEM_DEF(garbage)
 			SSgarbage.can_fire = 1
 			SSgarbage.next_fire = world.time + world.tick_lag
 			return
-
-		if(!skip_alert)
-			if(UNLINT(alert("Running this will lock everything up for about 5 minutes.  Would you like to begin the search?", "Find References", "Yes", "No")) == "No")
-				running_find_references = null
-				return
 
 	//this keeps the garbage collector from failing to collect objects being searched for in here
 	SSgarbage.can_fire = 0
@@ -461,7 +461,7 @@ SUBSYSTEM_DEF(garbage)
 
 	qdel(src, TRUE)		//Force.
 	if(!running_find_references)
-		find_references(TRUE)
+		find_references()
 
 /datum/verb/qdel_then_if_fail_find_references()
 	set category = "Debug"
