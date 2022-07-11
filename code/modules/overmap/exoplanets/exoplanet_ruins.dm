@@ -3,13 +3,13 @@ var/global/list/banned_ruin_names = list()
 /obj/effect/overmap/visitable/sector/exoplanet/proc/seed_ruins(list/z_levels = null, budget = 0, whitelist = /area/space, list/potentialRuins, var/maxx = world.maxx, var/maxy = world.maxy)
 
 	if(!z_levels || !z_levels.len)
-		UNLINT(WARNING("No Z levels provided - Not generating ruins"))
+		WARNING("No Z levels provided - Not generating ruins")
 		return
 
 	for(var/zl in z_levels)
 		var/turf/T = locate(1, 1, zl)
 		if(!T)
-			UNLINT(WARNING("Z level [zl] does not exist - Not generating ruins"))
+			WARNING("Z level [zl] does not exist - Not generating ruins")
 			return
 
 	var/list/ruins = potentialRuins.Copy()
