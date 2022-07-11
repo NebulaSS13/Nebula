@@ -815,8 +815,8 @@
 		else
 			var/list/turf_exceptions
 			var/obj/abstract/map_data/MD = get_map_data(D.loc.z)
-			if(UNLINT(MD?.UT_turf_exceptions_by_door_type))
-				turf_exceptions = UNLINT(MD.UT_turf_exceptions_by_door_type[D.type])
+			if(MD?.UT_turf_exceptions_by_door_type)
+				turf_exceptions = MD.UT_turf_exceptions_by_door_type[D.type]
 
 			var/is_bad_door = FALSE
 			for(var/turf/T in D.locs)

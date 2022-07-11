@@ -343,7 +343,7 @@
 	hostA.Connect(hostB)
 	hostB.Connect(hostC)
 	hostC.Connect(hostD)
-	
+
 	return TRUE
 
 /datum/unit_test/graph_test/move/check_result()
@@ -364,10 +364,10 @@
 
 		var/edge_issues = 0
 
-		var/edgesA = UNLINT(G.edges[hostA.node])
-		var/edgesB = UNLINT(G.edges[hostB.node])
-		var/edgesC = UNLINT(G.edges[hostC.node])
-		var/edgesD = UNLINT(G.edges[hostD.node])
+		var/edgesA = G.edges[hostA.node]
+		var/edgesB = G.edges[hostB.node]
+		var/edgesC = G.edges[hostC.node]
+		var/edgesD = G.edges[hostD.node]
 		if(length(edgesA) != 1 || !(hostB.node in edgesA))
 			edge_issues++
 			log_bad("Invalid edges - Host A: [log_info_line(edgesA)]")
@@ -388,7 +388,7 @@
 		hostB.forceMove(get_step(hostB, EAST))
 		hostC.forceMove(get_step(hostC, EAST))
 		return FALSE
-	
+
 	var/total_issues = 0
 
 	var/list/hostANeighours = hostA.node.ConnectedNodes()
@@ -400,7 +400,7 @@
 	if(length(hostBNeighours) != 1 || !(hostC.node in hostBNeighours))
 		log_bad("Node B had unexpected neighours: [english_list(hostBNeighours)]")
 		total_issues++
-	
+
 	var/list/hostCNeighours = hostC.node.ConnectedNodes()
 	if(length(hostCNeighours) != 1 || !(hostB.node in hostCNeighours))
 		log_bad("NodeC had unexpected neighours: [english_list(hostCNeighours)]")
@@ -573,18 +573,18 @@
 
 /datum/graph_expectation/proc/CheckExpectations(var/datum/graph/graph)
 	. = list()
-	if(length(expected_nodes ^ (UNLINT(graph.nodes) || list())))
-		. += "Expected the following nodes [log_info_line(expected_nodes)], was [log_info_line(UNLINT(graph.nodes))]"
-	if(length(expected_edges ^ (UNLINT(graph.edges) || list())))
-		. += "Expected the following edges [log_info_line(expected_edges)], was [log_info_line(UNLINT(graph.edges))]"
+	if(length(expected_nodes ^ (graph.nodes || list())))
+		. += "Expected the following nodes [log_info_line(expected_nodes)], was [log_info_line(graph.nodes)]"
+	if(length(expected_edges ^ (graph.edges || list())))
+		. += "Expected the following edges [log_info_line(expected_edges)], was [log_info_line(graph.edges)]"
 
-	for(var/datum/node/N in UNLINT(graph.nodes))
+	for(var/datum/node/N in graph.nodes)
 		if(N.graph != graph)
 			. += "[log_info_line(N)]: Expected the following graph [log_info_line(graph)], was [N.graph]"
 
 	for(var/node in expected_edges)
 		var/expected_connections = expected_edges[node]
-		var/actual_connections = UNLINT(graph.edges[node])
+		var/actual_connections = graph.edges[node]
 		if(length(expected_connections ^ actual_connections))
 			. += "[log_info_line(node)]: Expected the following connections [log_info_line(expected_connections)], was [log_info_line(actual_connections)]"
 
