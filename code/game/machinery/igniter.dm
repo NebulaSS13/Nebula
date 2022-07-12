@@ -89,6 +89,7 @@
 	var/disable = 0
 	var/last_spark = 0
 	var/base_state = "migniter"
+	obj_flags = OBJ_FLAG_MOVES_UNSUPPORTED
 	anchored = 1
 	idle_power_usage = 20
 	active_power_usage = 1000

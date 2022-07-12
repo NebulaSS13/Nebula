@@ -1,4 +1,5 @@
 #define LANDING_VIEW 25
+#define MAX_OFFSET   10
 
 /mob/observer/eye/landing
 	name = "Landing Eye"
@@ -9,6 +10,10 @@
 	var/list/landing_images = list()
 	var/list/docking_images = list()
 	var/list/docking_turfs = list()	// Turfs where it is okay to land, even if its within a restricted area.
+
+	var/offsetting = FALSE // If the user is offsetting the landing images manually.
+	var/x_offset = 0
+	var/y_offset = 0
 
 /mob/observer/eye/landing/Initialize(var/mapload, var/shuttle_tag, var/obj/effect/overmap/visitable/sector)
 	shuttle = SSshuttle.shuttles[shuttle_tag]
@@ -49,6 +54,21 @@
 	docking_images.Cut()
 	docking_turfs.Cut()
 
+/mob/observer/eye/landing/EyeMove(direct)
+	if(offsetting)
+		if(direct & NORTH)
+			y_offset = min(y_offset + 1, MAX_OFFSET)
+		if(direct & SOUTH)
+			y_offset = max(y_offset - 1, -MAX_OFFSET)
+		if(direct & EAST)
+			x_offset = min(x_offset + 1, MAX_OFFSET)
+		if(direct & WEST)
+			x_offset = max(x_offset - 1, -MAX_OFFSET)
+		
+		check_landing()
+		return
+	. = ..()
+
 /mob/observer/eye/landing/setLoc(var/turf/T)
 	T = get_turf(T)
 	if(T.x < TRANSITIONEDGE || T.x > world.maxx - TRANSITIONEDGE || T.y < TRANSITIONEDGE ||  T.y > world.maxy - TRANSITIONEDGE)
@@ -60,11 +80,13 @@
 
 //This is a subset of the actual checks in place for moving the shuttle.
 /mob/observer/eye/landing/proc/check_landing()
+	var/turf/eye_turf = get_turf(src)
+	var/turf/origin = locate(eye_turf.x + x_offset, eye_turf.y + y_offset, eye_turf.z)
+
 	for(var/i = 1 to landing_images.len)
 		var/image/img = landing_images[i]
 		var/list/coords = landing_images[img]
 
-		var/turf/origin = get_turf(src)
 		var/turf/T = locate(origin.x + coords[1], origin.y + coords[2], origin.z)
 
 		var/ra = target_sector.restricted_area
@@ -90,8 +112,14 @@
 /mob/observer/eye/landing/proc/check_secure_landing()
 	return ((target_sector.sector_flags & (~OVERMAP_SECTOR_IN_SPACE)) || (get_turf(src) in docking_turfs)) 
 
+/mob/observer/eye/landing/proc/toggle_offsetting()
+	offsetting = !offsetting
+
 /mob/observer/eye/landing/possess(var/mob/user)
 	. = ..()
+	offsetting = FALSE
+	x_offset = 0
+	y_offset = 0
 	if(owner && owner.client)
 		owner.client.view = LANDING_VIEW
 		owner.client.images += landing_images
@@ -109,3 +137,4 @@
 	return SEE_TURFS|BLIND
 
 #undef LANDING_VIEW
+#undef MAX_OFFSET

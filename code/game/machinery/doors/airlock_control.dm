@@ -97,6 +97,7 @@
 	layer = ABOVE_WINDOW_LAYER
 
 	anchored = 1
+	obj_flags = OBJ_FLAG_MOVES_UNSUPPORTED
 	power_channel = ENVIRON
 	public_variables = list(
 		/decl/public_access/public_variable/airlock_pressure,

@@ -9,7 +9,7 @@
 	layer = LATTICE_LAYER
 	color = COLOR_STEEL
 	material = /decl/material/solid/metal/steel
-	obj_flags = OBJ_FLAG_NOFALL
+	obj_flags = OBJ_FLAG_NOFALL | OBJ_FLAG_MOVES_UNSUPPORTED
 	material_alteration = MAT_FLAG_ALTERATION_ALL
 
 /obj/structure/lattice/Initialize()

@@ -128,6 +128,7 @@
 	icon_state_charging = "wrecharger1"
 	icon_state_idle = "wrecharger0"
 	portable = 0
+	obj_flags = OBJ_FLAG_MOVES_UNSUPPORTED
 
 	construct_state = /decl/machine_construction/wall_frame/panel_closed
 	frame_type = /obj/item/frame/button/wall_charger

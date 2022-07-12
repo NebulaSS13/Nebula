@@ -264,11 +264,6 @@
 			if(length(area_turfs) > MAX_SHIP_TILES)
 				LAZYDISTINCTADD(errors, "The ship is too large.")
 				return FALSE // If the ship is too large, skip contiguity checks.
-			// Stops tearing up the ground with the shuttle, although the landmark should not allow a hole in a planet etc. regardless.
-			if(istype(T, /turf/space) || istype(T, /turf/exterior) || istype(T, /turf/simulated/floor/asteroid))
-				LAZYDISTINCTADD(errors, "The area [A] contains invalid turfs.")
-				. = FALSE
-				break
 
 	// Check to make sure all the ships areas are connected.
 	. = min(., check_contiguity(area_turfs))
@@ -304,12 +299,25 @@
 	if(!check_ship_validity(shuttle_areas))
 		return FALSE
 	
+
+	// Locate the base area by stepping towards the edge of the map in the direction the beacon is facing.
 	var/area/base_area
-	var/obj/effect/overmap/visitable/sector/exoplanet/planet = global.overmap_sectors["[z]"]
-	if(istype(planet))
-		base_area = ispath(planet.planetary_area) ? planet.planetary_area : planet.planetary_area.type
-	else
-		base_area = world.area
+	var/turf/area_turf = get_step(src, dir)
+
+	while(area_turf)
+		var/area/A = area_turf.loc
+		if(A && (A.area_flags & AREA_FLAG_IS_BACKGROUND))
+			base_area = A
+			break
+		area_turf = get_step(area_turf, dir)
+	
+	// Otherwise, use the planetary or world area.
+	if(!base_area)
+		var/obj/effect/overmap/visitable/sector/exoplanet/planet = global.overmap_sectors["[z]"]
+		if(istype(planet))
+			base_area = ispath(planet.planetary_area) ? planet.planetary_area : planet.planetary_area.type
+		else
+			base_area = world.area
 
 	var/turf/center_turf
 	switch(dir)

@@ -30,7 +30,9 @@ By design, d1 is the smallest direction and d2 is the highest
 	layer =    EXPOSED_WIRE_LAYER
 	color =    COLOR_MAROON
 	anchored = TRUE
+	obj_flags = OBJ_FLAG_MOVES_UNSUPPORTED
 	level = 1
+	
 	var/d1
 	var/d2
 	var/datum/powernet/powernet

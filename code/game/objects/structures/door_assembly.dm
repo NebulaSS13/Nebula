@@ -4,6 +4,7 @@
 	icon_state = "construction"
 	anchored = 0
 	density = 1
+	obj_flags = OBJ_FLAG_MOVES_UNSUPPORTED
 	var/state = 0
 	var/base_icon_state = ""
 	var/base_name = "Airlock"
