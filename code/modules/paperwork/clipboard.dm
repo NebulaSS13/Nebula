@@ -40,15 +40,15 @@
 	if(stored_pen)
 		to_chat(user, "It's holding \a [stored_pen].")
 	if(!LAZYLEN(papers))
-		to_chat(user, "It contains [length(papers)] / [max_papers] paper(s).")
+		to_chat(user, "It contains [length(papers)] / [max_papers] paper\s.")
 	else 
-		to_chat(user, "It has room for [max_papers] paper(s).")
+		to_chat(user, "It has room for [max_papers] paper\s.")
 
 /obj/item/clipboard/proc/top_paper()
 	return LAZYACCESS(papers, 1)
 
 /obj/item/clipboard/proc/push_paper(var/obj/item/P)
-	papers = papers? list(P) + papers : list(P) //Push at the top
+	LAZYINSERT(papers, P, 1)
 
 /obj/item/clipboard/proc/pop_paper()
 	. = top_paper()
