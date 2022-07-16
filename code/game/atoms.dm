@@ -18,7 +18,6 @@
 	var/icon_scale_y = 1 // Ditto, for vertical scaling.
 	var/icon_rotation = 0 // And one for rotation as well.
 	var/transform_animate_time = 0 // If greater than zero, transform-based adjustments (scaling, rotating) will visually occur over this time.
-
 	var/tmp/currently_exploding = FALSE
 	var/tmp/default_pixel_x
 	var/tmp/default_pixel_y

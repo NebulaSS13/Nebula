@@ -1,3 +1,4 @@
+#define MAX_QUEUED_ORDERS 100
 /obj/machinery/fabricator/proc/update_current_build(var/spend_time)
 
 	if(!istype(currently_building) || !is_functioning())
@@ -47,8 +48,6 @@
 	if(!is_functioning() || !istype(recipe) || !(recipe in design_cache))
 		return
 	multiplier = sanitize_integer(multiplier, 1, 100, 1)
-	if(!ispath(recipe.path, /obj/item/stack) && multiplier > 1)
-		multiplier = 1
 
 	// Check if sufficient resources exist.
 	for(var/material in recipe.resources)
@@ -59,15 +58,22 @@
 	if(!can_build(recipe, multiplier))
 		return
 
-	// Generate and track a new order.
-	var/datum/fabricator_build_order/order = make_order(recipe, multiplier)
-	queued_orders += order
+	var/amount_queued = 1
+	if(!ispath(recipe.path, /obj/item/stack) && multiplier > 1)
+		// For non-stacks, multipliers just queue more orders.
+		amount_queued = multiplier
+		multiplier = 1
+	// Generate and track the new order(s).
+	amount_queued = min(amount_queued, MAX_QUEUED_ORDERS - length(queued_orders))
+	for(var/i in 1 to amount_queued)
+		var/datum/fabricator_build_order/order = make_order(recipe, multiplier)
+		queued_orders += order
 
-	// Remove/earmark resources.
-	for(var/material in recipe.resources)
-		var/removed_mat = round(recipe.resources[material] * mat_efficiency) * multiplier
-		stored_material[material] = max(0, stored_material[material] - removed_mat)
-		order.earmarked_materials[material] = removed_mat
+		// Remove/earmark resources.
+		for(var/material in recipe.resources)
+			var/removed_mat = round(recipe.resources[material] * mat_efficiency) * multiplier
+			stored_material[material] = max(0, stored_material[material] - removed_mat)
+			order.earmarked_materials[material] = removed_mat
 
 	if(!currently_building)
 		get_next_build()
@@ -85,3 +91,5 @@
 //Override this to add more conditions to printing an object
 /obj/machinery/fabricator/proc/can_build(var/datum/fabricator_recipe/recipe, var/multiplier)
 	return TRUE
+
+#undef MAX_QUEUED_ORDERS

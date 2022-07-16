@@ -98,7 +98,7 @@
 		frame_type = assembly.type
 		if(assembly.electronics)
 			var/obj/item/stock_parts/circuitboard/electronics = assembly.electronics
-			install_component(electronics, FALSE) // will be refreshed in parent call; unsafe to refresh prior to calling ..() in Initialize
+			install_component(electronics, FALSE, FALSE) // will be refreshed in parent call; unsafe to refresh prior to calling ..() in Initialize
 			electronics.construct(src)
 		return TRUE
 

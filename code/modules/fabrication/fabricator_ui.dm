@@ -69,14 +69,14 @@
 //Fill out the data for a single build option
 /obj/machinery/fabricator/proc/ui_fabricator_build_option_entry_data(var/datum/fabricator_recipe/R)
 	var/list/build_option   = list()
-	var/max_sheets          = (!length(R.resources)) ? 100 : 0
-	var/list/material_costs = ui_fabricator_build_option_cost_list(R, max_sheets)
-
+	var/list/material_costs = ui_fabricator_build_option_cost_list(R)
+	var/max_sheets
 	build_option["name"]       = R.name
 	build_option["reference"]  = "\ref[R]"
 	build_option["illegal"]    = R.hidden
 
 	if(material_costs)
+		max_sheets = material_costs["max_sheets"]
 		build_option["unavailable"] = !(material_costs["available"])
 		var/list/mats = material_costs["materials"]
 		build_option["materials"]  = length(mats) > 0? mats : null
@@ -85,16 +85,18 @@
 	return build_option
 
 //Returns a list containing a boolean "available" to determine if we can build the recipe, and a list of resources costs ()
-/obj/machinery/fabricator/proc/ui_fabricator_build_option_cost_list(var/datum/fabricator_recipe/R, var/max_sheets)
+/obj/machinery/fabricator/proc/ui_fabricator_build_option_cost_list(var/datum/fabricator_recipe/R)
 	//Make sure it's buildable and list required resources.
 	var/list/material_components = list()
+	
+	var/max_sheets          = (!length(R.resources)) ? 100 : null
 	var/has_missing_resource = FALSE
 	for(var/material_path in R.resources)
 		var/required_amount = round(R.resources[material_path] * mat_efficiency)
 		var/sheets          = round(stored_material[material_path] / required_amount)
 		var/has_enough      = TRUE
 
-		if(max_sheets == 0 || max_sheets < sheets)
+		if(isnull(max_sheets) || max_sheets > sheets)
 			max_sheets = sheets
 		if(stored_material[material_path] < required_amount)
 			has_missing_resource = TRUE
@@ -106,7 +108,7 @@
 				"amount"     = required_amount,
 				"has_enough" = has_enough, 
 			))
-	return list("available" = !has_missing_resource && ui_fabricator_build_option_is_available(R, max_sheets), "materials" = material_components)
+	return list("available" = !has_missing_resource && ui_fabricator_build_option_is_available(R, max_sheets), "max_sheets" = max_sheets, "materials" = material_components)
 
 //Override to add more checks to make a build option unavailable. EX: if the machine requires a setting to be set first
 /obj/machinery/fabricator/proc/ui_fabricator_build_option_is_available(var/datum/fabricator_recipe/R, var/max_sheets)

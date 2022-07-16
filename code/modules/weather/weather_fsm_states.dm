@@ -60,7 +60,7 @@
 /decl/state/weather/proc/handle_exposure(var/mob/living/M, var/exposure, var/obj/abstract/weather_system/weather)
 
 	// Send strings if we're outside.
-	if(M.is_outside())
+	if(M.is_outside() && M.client)
 		if(!weather.show_weather(M))
 			weather.show_wind(M)
 
