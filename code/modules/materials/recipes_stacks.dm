@@ -32,6 +32,10 @@
 	title = "regular floor tile"
 	result_type = /obj/item/stack/tile/floor
 
+/datum/stack_recipe/tile/metal/floor
+	title = "roofing tile"
+	result_type = /obj/item/stack/tile/roof
+
 /datum/stack_recipe/tile/metal/mono
 	title = "mono floor tile"
 	result_type = /obj/item/stack/tile/mono

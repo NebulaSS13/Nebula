@@ -21,6 +21,7 @@
 
 	var/datum/browser/panel
 
+INITIALIZE_IMMEDIATE(/mob/new_player)
 /mob/new_player/Initialize()
 	. = ..()
 	forceMove(null)

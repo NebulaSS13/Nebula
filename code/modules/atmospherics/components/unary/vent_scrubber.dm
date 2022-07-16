@@ -77,8 +77,10 @@
 		icon_state = "weld"
 	else if((stat & NOPOWER) || !use_power)
 		icon_state = "off"
+	else if(scrubbing == SCRUBBER_EXCHANGE)
+		icon_state = "on"
 	else
-		icon_state = "[scrubbing ? "on" : "in"]"
+		icon_state = "in"
 
 	build_device_underlays()
 

@@ -95,6 +95,9 @@
 
 /turf/simulated/wall/attackby(var/obj/item/W, var/mob/user, click_params)
 
+	if(istype(W, /obj/item/stack/tile/roof))
+		return ..()
+
 	user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
 
 	if(!construction_stage && try_graffiti(user, W))
