@@ -9,10 +9,7 @@
 	nutriment_desc = list("cheese" = 10)
 	nutriment_amt = 10
 	bitesize = 2
-
-/obj/item/chems/food/sliceable/cheesewheel/Initialize()
-	. = ..()
-	reagents.add_reagent(/decl/material/liquid/nutriment/protein, 10)
+	starting_reagents = list(/decl/material/liquid/nutriment/protein = 10)
 
 /obj/item/chems/food/cheesewedge
 	name = "cheese wedge"

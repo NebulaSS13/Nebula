@@ -36,10 +36,7 @@
 
 /obj/item/chems/food/fish/poison
 	fish_type = "space carp"
-
-/obj/item/chems/food/fish/poison/Initialize()
-	. = ..()
-	reagents.add_reagent(/decl/material/liquid/carpotoxin, 6)
+	starting_reagents = list(/decl/material/liquid/carpotoxin = 6)
 
 /obj/item/chems/food/fish/shark
 	fish_type = "shark"

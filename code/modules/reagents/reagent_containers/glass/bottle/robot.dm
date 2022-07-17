@@ -1,5 +1,7 @@
 
 /obj/item/chems/glass/bottle/robot
+	icon = 'icons/obj/items/chem/bottle.dmi'
+	icon_state = "bottle-4"
 	amount_per_transfer_from_this = 10
 	possible_transfer_amounts = @"[5,10,15,25,30,50,100]"
 	atom_flags = ATOM_FLAG_OPEN_CONTAINER
@@ -11,11 +13,13 @@
 	if(reagent)
 		reagents.add_reagent(reagent, volume)
 
+/obj/item/chems/glass/bottle/robot/Initialize()
+	. = ..()
+	update_icon()
+
 /obj/item/chems/glass/bottle/robot/stabilizer
 	name = "internal stabilizer bottle"
 	desc = "A small bottle. Contains stabilizer - used to stabilize patients."
-	icon = 'icons/obj/items/chem/bottle.dmi'
-	icon_state = "bottle-4"
 	reagent = /decl/material/liquid/stabilizer
 
 /obj/item/chems/glass/bottle/robot/antitoxin

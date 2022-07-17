@@ -1005,3 +1005,11 @@ modules/mob/living/carbon/human/life.dm if you die, you will be zoomed out.
 
 /obj/item/proc/get_assembly_detail_color()
 	return
+
+/obj/item/proc/is_used_on(obj/O, mob/user)
+	return
+
+/obj/item/proc/updateSelfDialog()
+	var/mob/M = src.loc
+	if(istype(M) && M.client && M.machine == src)
+		src.attack_self(M)

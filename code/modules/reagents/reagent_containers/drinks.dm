@@ -138,10 +138,7 @@
 	icon_state = "milk"
 	item_state = "carton"
 	center_of_mass = @"{'x':16,'y':9}"
-
-/obj/item/chems/drinks/milk/Initialize()
-	. = ..()
-	reagents.add_reagent(/decl/material/liquid/drink/milk, 50)
+	starting_reagents = list(/decl/material/liquid/drink/milk = 50)
 
 /obj/item/chems/drinks/soymilk
 	name = "soymilk carton"
@@ -149,48 +146,32 @@
 	icon_state = "soymilk"
 	item_state = "carton"
 	center_of_mass = @"{'x':16,'y':9}"
-
-/obj/item/chems/drinks/soymilk/Initialize()
-	. = ..()
-	reagents.add_reagent(/decl/material/liquid/drink/milk/soymilk, 50)
+	starting_reagents = list(/decl/material/liquid/drink/milk/soymilk = 50)
 
 /obj/item/chems/drinks/milk/smallcarton
 	name = "small milk carton"
 	volume = 30
 	icon_state = "mini-milk"
-
-/obj/item/chems/drinks/milk/smallcarton/Initialize()
-	. = ..()
-	reagents.add_reagent(/decl/material/liquid/drink/milk, 30)
+	starting_reagents = list(/decl/material/liquid/drink/milk = 30)
 
 /obj/item/chems/drinks/milk/smallcarton/chocolate
 	name = "small chocolate milk carton"
 	desc = "It's milk! This one is in delicious chocolate flavour."
-
-/obj/item/chems/drinks/milk/smallcarton/chocolate/Initialize()
-	. = ..()
-	reagents.add_reagent(/decl/material/liquid/drink/milk/chocolate, 30)
-
+	starting_reagents = list(/decl/material/liquid/drink/milk/chocolate = 30)
 
 /obj/item/chems/drinks/coffee
 	name = "\improper Robust Coffee"
 	desc = "Careful, the beverage you're about to enjoy is extremely hot."
 	icon_state = "coffee"
 	center_of_mass = @"{'x':15,'y':10}"
-
-/obj/item/chems/drinks/coffee/Initialize()
-	. = ..()
-	reagents.add_reagent(/decl/material/liquid/drink/coffee, 30)
+	starting_reagents = list(/decl/material/liquid/drink/coffee = 30)
 
 /obj/item/chems/drinks/ice
 	name = "cup of ice"
 	desc = "Careful, cold ice, do not chew."
 	icon_state = "coffee"
 	center_of_mass = @"{'x':15,'y':10}"
-
-/obj/item/chems/drinks/ice/Initialize()
-	. = ..()
-	reagents.add_reagent(/decl/material/solid/ice, 30)
+	starting_reagents = list(/decl/material/solid/ice = 30)
 
 /obj/item/chems/drinks/h_chocolate
 	name = "cup of hot cocoa"
@@ -198,10 +179,7 @@
 	icon_state = "coffee"
 	item_state = "coffee"
 	center_of_mass = @"{'x':15,'y':13}"
-
-/obj/item/chems/drinks/h_chocolate/Initialize()
-	. = ..()
-	reagents.add_reagent(/decl/material/liquid/drink/hot_coco, 30)
+	starting_reagents = list(/decl/material/liquid/drink/hot_coco = 30)
 
 /obj/item/chems/drinks/dry_ramen
 	name = "cup ramen"
@@ -209,10 +187,7 @@
 	desc = "Just add 10ml water, self heats! A taste that reminds you of your school years."
 	icon_state = "ramen"
 	center_of_mass = @"{'x':16,'y':11}"
-
-/obj/item/chems/drinks/dry_ramen/Initialize()
-	. = ..()
-	reagents.add_reagent(/decl/material/liquid/drink/dry_ramen, 30)
+	starting_reagents = list(/decl/material/liquid/drink/dry_ramen = 30)
 
 
 /obj/item/chems/drinks/sillycup
@@ -309,23 +284,14 @@
 /obj/item/chems/drinks/tea/black
 	name = "cup of black tea"
 	desc = "A tall plastic cup of hot black tea."
-
-/obj/item/chems/drinks/tea/black/Initialize()
-	. = ..()
-	reagents.add_reagent(/decl/material/liquid/drink/tea/black, 30)
+	starting_reagents = list(/decl/material/liquid/drink/tea/black = 30)
 
 /obj/item/chems/drinks/tea/green
 	name = "cup of green tea"
 	desc = "A tall plastic cup of hot green tea."
-
-/obj/item/chems/drinks/tea/green/Initialize()
-	. = ..()
-	reagents.add_reagent(/decl/material/liquid/drink/tea/green, 30)
+	starting_reagents = list(/decl/material/liquid/drink/tea/green = 30)
 
 /obj/item/chems/drinks/tea/chai
 	name = "cup of chai tea"
 	desc = "A tall plastic cup of hot chai tea."
-
-/obj/item/chems/drinks/tea/chai/Initialize()
-	. = ..()
-	reagents.add_reagent(/decl/material/liquid/drink/tea/chai, 30)
+	starting_reagents = list(/decl/material/liquid/drink/tea/chai = 30)

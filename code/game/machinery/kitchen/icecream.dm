@@ -66,10 +66,13 @@
 
 /obj/machinery/icecream_vat/Initialize(mapload, d, populate_parts)
 	. = ..()
-	create_reagents(100)
 	while(product_types.len < 8)
 		product_types.Add(5)
-	if(populate_parts)
+
+/obj/machinery/icecream_vat/initialize_reagents(populate = TRUE)
+	. = ..()
+	create_reagents(100)
+	if(populate)
 		reagents.add_reagent(/decl/material/liquid/drink/milk, 5)
 		reagents.add_reagent(/decl/material/liquid/nutriment/flour, 5)
 		reagents.add_reagent(/decl/material/liquid/nutriment/sugar, 5)

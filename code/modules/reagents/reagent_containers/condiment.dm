@@ -15,7 +15,6 @@
 	center_of_mass = @"{'x':16,'y':6}"
 	randpixel = 6
 	volume = 50
-	var/list/starting_reagents
 	var/static/list/special_bottles = list(
 		/decl/material/liquid/nutriment/ketchup = /obj/item/chems/condiment/ketchup,
 		/decl/material/liquid/nutriment/barbecue = /obj/item/chems/condiment/barbecue,
@@ -37,14 +36,14 @@
 		if(tmp_label == label_text)
 			return
 		if(length(tmp_label) > 10)
-			to_chat(user, "<span class='notice'>The label can be at most 10 characters long.</span>")
+			to_chat(user, SPAN_NOTICE("The label can be at most 10 characters long."))
 		else
 			if(length(tmp_label))
-				to_chat(user, "<span class='notice'>You set the label to \"[tmp_label]\".</span>")
+				to_chat(user, SPAN_NOTICE("You set the label to \"[tmp_label]\"."))
 				label_text = tmp_label
 				name = addtext(name," ([label_text])")
 			else
-				to_chat(user, "<span class='notice'>You remove the label.</span>")
+				to_chat(user, SPAN_NOTICE("You remove the label."))
 				label_text = null
 				on_reagent_change()
 		return
@@ -69,15 +68,15 @@
 
 	if(istype(target, /obj/item/chems/food)) // These are not opencontainers but we can transfer to them
 		if(!reagents || !reagents.total_volume)
-			to_chat(user, "<span class='notice'>There is no condiment left in \the [src].</span>")
+			to_chat(user, SPAN_NOTICE("There is no condiment left in \the [src]."))
 			return
 
 		if(!REAGENTS_FREE_SPACE(target.reagents))
-			to_chat(user, "<span class='notice'>You can't add more condiment to \the [target].</span>")
+			to_chat(user, SPAN_NOTICE("You can't add more condiment to \the [target]."))
 			return
 
 		var/trans = reagents.trans_to_obj(target, amount_per_transfer_from_this)
-		to_chat(user, "<span class='notice'>You add [trans] units of the condiment to \the [target].</span>")
+		to_chat(user, SPAN_NOTICE("You add [trans] units of the condiment to \the [target]."))
 	else
 		..()
 
@@ -85,12 +84,7 @@
 	playsound(user.loc, 'sound/items/drink.ogg', rand(10, 50), 1)
 
 /obj/item/chems/condiment/self_feed_message(var/mob/user)
-	to_chat(user, "<span class='notice'>You swallow some of contents of \the [src].</span>")
-
-/obj/item/chems/condiment/Initialize()
-	. = ..()
-	for(var/R in starting_reagents)
-		reagents.add_reagent(R, starting_reagents[R])
+	to_chat(user, SPAN_NOTICE("You swallow some of contents of \the [src]."))
 
 /obj/item/chems/condiment/on_reagent_change()
 	var/reagent = reagents.primary_reagent

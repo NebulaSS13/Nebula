@@ -35,9 +35,6 @@
 /obj/proc/get_matter_amount_modifier()
 	. = CEILING(w_class * BASE_OBJECT_MATTER_MULTPLIER)
 
-/obj/item/proc/is_used_on(obj/O, mob/user)
-	return
-
 /obj/assume_air(datum/gas_mixture/giver)
 	if(loc)
 		return loc.assume_air(giver)
@@ -92,21 +89,6 @@
 
 /obj/proc/interact(mob/user)
 	return
-
-/mob/proc/unset_machine()
-	src.machine = null
-
-/mob/proc/set_machine(var/obj/O)
-	if(src.machine)
-		unset_machine()
-	src.machine = O
-	if(istype(O))
-		O.in_use = 1
-
-/obj/item/proc/updateSelfDialog()
-	var/mob/M = src.loc
-	if(istype(M) && M.client && M.machine == src)
-		src.attack_self(M)
 
 /obj/proc/hide(var/hide)
 	set_invisibility(hide ? INVISIBILITY_MAXIMUM : initial(invisibility))
@@ -248,6 +230,13 @@
 		default_pixel_w = curoff["w"] || 0
 		default_pixel_z = curoff["z"] || 0
 	reset_offsets(0)
+
+/**
+ * Init starting reagents and/or reagent var. Not called at the /obj level.
+ * populate: If set to true, we expect map load/admin spawned reagents to be set.
+ */
+/obj/proc/initialize_reagents(var/populate = TRUE)
+	return
 
 ////////////////////////////////////////////////////////////////
 // Interactions

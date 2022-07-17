@@ -85,10 +85,7 @@
 	trash = /obj/item/trash/beef
 	filling_color = "#663300"
 	nutriment_desc = list("beef" = 1)
-
-/obj/item/chems/food/can/beef/Initialize()
-	. = ..()
-	reagents.add_reagent(/decl/material/liquid/nutriment/protein, 12)
+	starting_reagents = list(/decl/material/liquid/nutriment/protein = 12)
 
 /obj/item/chems/food/can/beans
 	name = "baked beans"
@@ -107,11 +104,7 @@
 	filling_color = "#ae0000"
 	nutriment_desc = list("tomato" = 1)
 	eat_sound = 'sound/items/drink.ogg'
-
-/obj/item/chems/food/can/tomato/Initialize()
-	. = ..()
-	reagents.add_reagent(/decl/material/liquid/drink/juice/tomato, 12)
-
+	starting_reagents = list(/decl/material/liquid/drink/juice/tomato = 12)
 
 /obj/item/chems/food/can/tomato/feed_sound(var/mob/user)
 	playsound(user, 'sound/items/drink.ogg', rand(10, 50), 1)
@@ -124,13 +117,12 @@
 	filling_color = "#003300"
 	nutriment_desc = list("sogginess" = 1, "vegetable" = 1)
 	bitesize = 20
-
-/obj/item/chems/food/can/spinach/Initialize()
-	. = ..()
-	reagents.add_reagent(/decl/material/liquid/nutriment, 5)
-	reagents.add_reagent(/decl/material/liquid/adrenaline, 5)
-	reagents.add_reagent(/decl/material/liquid/amphetamines, 5)
-	reagents.add_reagent(/decl/material/solid/metal/iron, 5)
+	starting_reagents = list(
+		/decl/material/liquid/nutriment    = 5,
+		/decl/material/liquid/adrenaline   = 5,
+		/decl/material/liquid/amphetamines = 5,
+		/decl/material/solid/metal/iron    = 5,
+	)
 
 //Vending Machine Foods should go here.
 
@@ -151,11 +143,10 @@
 	filling_color = "#330066"
 	nutriment_desc = list("fish" = 1, "salt" = 1, "numbing sensation" = 1)
 	nutriment_amt = 6
-
-/obj/item/chems/food/caviar/true/Initialize()
-	. = ..()
-	reagents.add_reagent(/decl/material/liquid/nutriment/protein, 4)
-	reagents.add_reagent(/decl/material/liquid/carpotoxin, 1)
+	starting_reagents = list(
+		/decl/material/liquid/nutriment/protein = 4,
+		/decl/material/liquid/carpotoxin        = 1,
+	)
 
 /obj/item/knife/opener
 	name = "can-opener"

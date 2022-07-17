@@ -10,11 +10,10 @@
 	center_of_mass = @"{'x':15,'y':11}"
 	bitesize = 2
 	material = /decl/material/solid/meat
-
-/obj/item/chems/food/brainburger/Initialize()
-	. = ..()
-	reagents.add_reagent(/decl/material/liquid/nutriment/protein, 6)
-	reagents.add_reagent(/decl/material/liquid/neuroannealer, 6)
+	starting_reagents = list(
+		/decl/material/liquid/nutriment/protein = 6,
+		/decl/material/liquid/neuroannealer     = 6,
+	)
 
 /obj/item/chems/food/ghostburger
 	name = "ghost burger"
@@ -37,10 +36,7 @@
 	icon_state = "hburger"
 	center_of_mass = @"{'x':16,'y':11}"
 	bitesize = 2
-
-/obj/item/chems/food/human/burger/Initialize()
-	. = ..()
-	reagents.add_reagent(/decl/material/liquid/nutriment/protein, 6)
+	starting_reagents = list(/decl/material/liquid/nutriment/protein = 6)
 
 /obj/item/chems/food/cheeseburger
 	name = "cheeseburger"
@@ -49,10 +45,7 @@
 	center_of_mass = @"{'x':16,'y':11}"
 	nutriment_desc = list("cheese" = 2, "bun" = 2)
 	nutriment_amt = 2
-
-/obj/item/chems/food/cheeseburger/Initialize()
-	. = ..()
-	reagents.add_reagent(/decl/material/liquid/nutriment/protein, 2)
+	starting_reagents = list(/decl/material/liquid/nutriment/protein = 2)
 
 /obj/item/chems/food/burger
 	name = "burger"
@@ -64,10 +57,7 @@
 	nutriment_desc = list("bun" = 2)
 	nutriment_amt = 3
 	bitesize = 2
-
-/obj/item/chems/food/burger/Initialize()
-	. = ..()
-	reagents.add_reagent(/decl/material/liquid/nutriment/protein, 3)
+	starting_reagents = list(/decl/material/liquid/nutriment/protein = 3)
 
 /obj/item/chems/food/hamburger
 	name = "hamburger"
@@ -79,10 +69,7 @@
 	nutriment_desc = list("bun" = 2)
 	nutriment_amt = 3
 	bitesize = 2
-
-/obj/item/chems/food/hamburger/Initialize()
-	. = ..()
-	reagents.add_reagent(/decl/material/liquid/nutriment/protein, 5)
+	starting_reagents = list(/decl/material/liquid/nutriment/protein = 5)
 
 /obj/item/chems/food/fishburger
 	name = "fish sandwich"
@@ -91,10 +78,7 @@
 	filling_color = "#ffdefe"
 	center_of_mass = @"{'x':16,'y':10}"
 	bitesize = 3
-
-/obj/item/chems/food/fishburger/Initialize()
-	. = ..()
-	reagents.add_reagent(/decl/material/liquid/nutriment/protein, 6)
+	starting_reagents = list(/decl/material/liquid/nutriment/protein = 6)
 
 /obj/item/chems/food/tofuburger
 	name = "tofu burger"
@@ -116,9 +100,9 @@
 	nutriment_amt = 2
 	bitesize = 2
 
-/obj/item/chems/food/roburger/Initialize()
+/obj/item/chems/food/roburger/initialize_reagents(populate = TRUE)
 	. = ..()
-	if(prob(5))
+	if(populate && prob(5))
 		reagents.add_reagent(/decl/material/liquid/nanitefluid, 2)
 
 /obj/item/chems/food/roburgerbig
@@ -129,10 +113,7 @@
 	volume = 100
 	center_of_mass = @"{'x':16,'y':11}"
 	bitesize = 0.1
-
-/obj/item/chems/food/roburgerbig/Initialize()
-	. = ..()
-	reagents.add_reagent(/decl/material/liquid/nanitefluid, 100)
+	starting_reagents = list(/decl/material/liquid/nanitefluid = 100)
 
 /obj/item/chems/food/xenoburger
 	name = "xenoburger"
@@ -141,10 +122,7 @@
 	filling_color = "#43de18"
 	center_of_mass = @"{'x':16,'y':11}"
 	bitesize = 2
-
-/obj/item/chems/food/xenoburger/Initialize()
-	. = ..()
-	reagents.add_reagent(/decl/material/liquid/nutriment/protein, 8)
+	starting_reagents = list(/decl/material/liquid/nutriment/protein = 8)
 
 /obj/item/chems/food/clownburger
 	name = "clown burger"
@@ -184,10 +162,7 @@
 	nutriment_desc = list("buns" = 4)
 	nutriment_amt = 4
 	bitesize = 3
-
-/obj/item/chems/food/bigbiteburger/Initialize()
-	. = ..()
-	reagents.add_reagent(/decl/material/liquid/nutriment/protein, 10)
+	starting_reagents = list(/decl/material/liquid/nutriment/protein = 10)
 
 /obj/item/chems/food/jellyburger
 	name = "jelly burger"
@@ -199,9 +174,8 @@
 	nutriment_amt = 5
 	bitesize = 2
 
-/obj/item/chems/food/jellyburger/cherry/Initialize()
-	. = ..()
-	reagents.add_reagent(/decl/material/liquid/nutriment/cherryjelly, 5)
+/obj/item/chems/food/jellyburger/cherry
+	starting_reagents = list(/decl/material/liquid/nutriment/cherryjelly = 5)
 
 /obj/item/chems/food/superbiteburger
 	name = "super bite burger"
@@ -212,10 +186,7 @@
 	nutriment_desc = list("buns" = 25)
 	nutriment_amt = 25
 	bitesize = 10
-
-/obj/item/chems/food/superbiteburger/Initialize()
-	. = ..()
-	reagents.add_reagent(/decl/material/liquid/nutriment/protein, 25)
+	starting_reagents = list(/decl/material/liquid/nutriment/protein = 25)
 
 // I am not creating another file just for hot dogs.
 
@@ -227,10 +198,7 @@
 	center_of_mass = @"{'x':16,'y':17}"
 	nutriment_type = /decl/material/liquid/nutriment/bread
 	material = /decl/material/solid/meat
-
-/obj/item/chems/food/hotdog/Initialize()
-	. = ..()
-	reagents.add_reagent(/decl/material/liquid/nutriment/protein, 6)
+	starting_reagents = list(/decl/material/liquid/nutriment/protein = 6)
 
 /obj/item/chems/food/classichotdog
 	name = "classic hotdog"
@@ -239,7 +207,4 @@
 	bitesize = 6
 	center_of_mass = @"{'x':16,'y':17}"
 	material = /decl/material/solid/meat
-
-/obj/item/chems/food/classichotdog/Initialize()
-	. = ..()
-	reagents.add_reagent(/decl/material/liquid/nutriment/protein, 16)
+	starting_reagents = list(/decl/material/liquid/nutriment/protein = 16)

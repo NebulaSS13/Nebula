@@ -9,10 +9,7 @@
 	filling_color = "#ff1c1c"
 	center_of_mass = @"{'x':16,'y':14}"
 	material = /decl/material/solid/meat
-
-/obj/item/chems/food/meat/Initialize()
-	. = ..()
-	reagents.add_reagent(/decl/material/liquid/nutriment/protein, 9)
+	starting_reagents = list(/decl/material/liquid/nutriment/protein = 9)
 	bitesize = 3
 
 /obj/item/chems/food/meat/syntiflesh

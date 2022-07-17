@@ -10,10 +10,7 @@
 	nutriment_amt = 25
 	bitesize = 2
 	nutriment_type = /decl/material/liquid/nutriment/bread/cake
-
-/obj/item/chems/food/sliceable/carrotcake/Initialize()
-	. = ..()
-	reagents.add_reagent(/decl/material/liquid/eyedrops, 10)
+	starting_reagents = list(/decl/material/liquid/eyedrops = 10)
 
 /obj/item/chems/food/slice/carrotcake
 	name = "carrot cake slice"
@@ -40,11 +37,10 @@
 	nutriment_amt = 5
 	bitesize = 2
 	nutriment_type = /decl/material/liquid/nutriment/bread/cake
-
-/obj/item/chems/food/sliceable/braincake/Initialize()
-	. = ..()
-	reagents.add_reagent(/decl/material/liquid/nutriment/protein, 25)
-	reagents.add_reagent(/decl/material/liquid/neuroannealer, 10)
+	starting_reagents = list(
+		/decl/material/liquid/nutriment/protein = 25,
+		/decl/material/liquid/neuroannealer     = 10,
+	)
 
 /obj/item/chems/food/slice/braincake
 	name = "brain cake slice"
@@ -70,10 +66,7 @@
 	nutriment_desc = list("cake" = 10, "cream" = 10, "cheese" = 15)
 	nutriment_amt = 10
 	bitesize = 2
-
-/obj/item/chems/food/sliceable/cheesecake/Initialize()
-	. = ..()
-	reagents.add_reagent(/decl/material/liquid/nutriment/protein, 15)
+	starting_reagents = list(/decl/material/liquid/nutriment/protein = 15)
 
 /obj/item/chems/food/slice/cheesecake
 	name = "cheese cake slice"
@@ -225,10 +218,7 @@
 	nutriment_amt = 20
 	bitesize = 3
 	nutriment_type = /decl/material/liquid/nutriment/bread/cake
-
-/obj/item/chems/food/sliceable/birthdaycake/Initialize()
-	. = ..()
-	reagents.add_reagent(/decl/material/liquid/nutriment/sprinkles, 10)
+	starting_reagents = list(/decl/material/liquid/nutriment/sprinkles = 10)
 
 /obj/item/chems/food/slice/birthdaycake
 	name = "birthday cake slice"

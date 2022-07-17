@@ -1156,3 +1156,13 @@
 
 /mob/proc/do_flash_animation()
 	return
+
+/mob/proc/unset_machine()
+	src.machine = null
+
+/mob/proc/set_machine(var/obj/O)
+	if(src.machine)
+		unset_machine()
+	src.machine = O
+	if(istype(O))
+		O.in_use = 1

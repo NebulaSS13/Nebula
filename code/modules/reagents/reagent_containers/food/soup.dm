@@ -11,11 +11,10 @@
 	center_of_mass = @"{'x':16,'y':8}"
 	bitesize = 5
 	eat_sound = list('sound/items/eatfood.ogg', 'sound/items/drink.ogg')
-
-/obj/item/chems/food/meatballsoup/Initialize()
-	. = ..()
-	reagents.add_reagent(/decl/material/liquid/nutriment/protein, 8)
-	reagents.add_reagent(/decl/material/liquid/water, 5)
+	starting_reagents = list(
+		/decl/material/liquid/nutriment/protein = 8,
+		/decl/material/liquid/water             = 5,
+	)
 
 /obj/item/chems/food/bloodsoup
 	name = "tomato soup"
@@ -25,12 +24,11 @@
 	center_of_mass = @"{'x':16,'y':7}"
 	bitesize = 5
 	eat_sound = 'sound/items/drink.ogg'
-
-/obj/item/chems/food/bloodsoup/Initialize()
-	. = ..()
-	reagents.add_reagent(/decl/material/liquid/nutriment/protein, 2)
-	reagents.add_reagent(/decl/material/liquid/blood, 10)
-	reagents.add_reagent(/decl/material/liquid/water, 5)
+	starting_reagents = list(
+		/decl/material/liquid/nutriment/protein = 2,
+		/decl/material/liquid/blood             = 10,
+		/decl/material/liquid/water             = 5,
+	)
 
 /obj/item/chems/food/clownstears
 	name = "clown's tears"
@@ -42,11 +40,10 @@
 	nutriment_amt = 4
 	bitesize = 5
 	eat_sound = 'sound/items/drink.ogg'
-
-/obj/item/chems/food/clownstears/Initialize()
-	. = ..()
-	reagents.add_reagent(/decl/material/liquid/drink/juice/banana, 5)
-	reagents.add_reagent(/decl/material/liquid/water, 10)
+	starting_reagents = list(
+		/decl/material/liquid/drink/juice/banana = 5,
+		/decl/material/liquid/water              = 10,
+	)
 
 /obj/item/chems/food/vegetablesoup
 	name = "vegetable soup"
@@ -59,10 +56,7 @@
 	nutriment_amt = 8
 	bitesize = 5
 	eat_sound = list('sound/items/eatfood.ogg', 'sound/items/drink.ogg')
-
-/obj/item/chems/food/vegetablesoup/Initialize()
-	. = ..()
-	reagents.add_reagent(/decl/material/liquid/water, 5)
+	starting_reagents = list(/decl/material/liquid/water = 5)
 
 /obj/item/chems/food/nettlesoup
 	name = "nettle soup"
@@ -75,11 +69,10 @@
 	nutriment_amt = 8
 	bitesize = 5
 	eat_sound = list('sound/items/eatfood.ogg', 'sound/items/drink.ogg')
-
-/obj/item/chems/food/nettlesoup/Initialize()
-	. = ..()
-	reagents.add_reagent(/decl/material/liquid/water, 5)
-	reagents.add_reagent(/decl/material/liquid/regenerator, 5)
+	starting_reagents = list(
+		/decl/material/liquid/water       = 5,
+		/decl/material/liquid/regenerator = 5,
+	)
 
 /obj/item/chems/food/mysterysoup
 	name = "mystery soup"
@@ -137,11 +130,12 @@
 		)
 	)
 
-/obj/item/chems/food/mysterysoup/Initialize()
+/obj/item/chems/food/mysterysoup/initialize_reagents(populate = TRUE)
 	. = ..()
-	var/list/fillings = pick(get_random_fillings())
-	for(var/filling in fillings)
-		reagents.add_reagent(filling, fillings[filling])
+	if(populate)
+		var/list/fillings = pick(get_random_fillings())
+		for(var/filling in fillings)
+			reagents.add_reagent(filling, fillings[filling])
 
 /obj/item/chems/food/wishsoup
 	name = "\improper Wish Soup"
@@ -152,11 +146,11 @@
 	center_of_mass = @"{'x':16,'y':11}"
 	bitesize = 5
 	eat_sound = 'sound/items/drink.ogg'
+	starting_reagents = list(/decl/material/liquid/water = 10)
 
-/obj/item/chems/food/wishsoup/Initialize()
+/obj/item/chems/food/wishsoup/initialize_reagents(populate = TRUE)
 	. = ..()
-	reagents.add_reagent(/decl/material/liquid/water, 10)
-	if(prob(25))
+	if(populate && prob(25))
 		src.desc = "A wish come true!"
 		reagents.add_reagent(/decl/material/liquid/nutriment, 8, list("something good" = 8))
 
@@ -170,12 +164,11 @@
 	nutriment_desc = list("chilli peppers" = 2, "burning" = 1)
 	nutriment_amt = 3
 	bitesize = 5
-
-/obj/item/chems/food/hotchili/Initialize()
-	. = ..()
-	reagents.add_reagent(/decl/material/liquid/nutriment/protein, 3)
-	reagents.add_reagent(/decl/material/liquid/capsaicin, 3)
-	reagents.add_reagent(/decl/material/liquid/drink/juice/tomato, 2)
+	starting_reagents = list(
+		/decl/material/liquid/nutriment/protein  = 3,
+		/decl/material/liquid/capsaicin          = 3,
+		/decl/material/liquid/drink/juice/tomato = 2,
+	)
 
 /obj/item/chems/food/coldchili
 	name = "cold chili"
@@ -187,12 +180,11 @@
 	nutriment_amt = 3
 	trash = /obj/item/trash/snack_bowl
 	bitesize = 5
-
-/obj/item/chems/food/coldchili/Initialize()
-	. = ..()
-	reagents.add_reagent(/decl/material/liquid/nutriment/protein, 3)
-	reagents.add_reagent(/decl/material/liquid/frostoil, 3)
-	reagents.add_reagent(/decl/material/liquid/drink/juice/tomato, 2)
+	starting_reagents = list(
+		/decl/material/liquid/nutriment/protein  = 3,
+		/decl/material/liquid/frostoil           = 3,
+		/decl/material/liquid/drink/juice/tomato = 2,
+	)
 
 /obj/item/chems/food/tomatosoup
 	name = "tomato soup"
@@ -205,10 +197,7 @@
 	nutriment_amt = 5
 	bitesize = 3
 	eat_sound = 'sound/items/drink.ogg'
-
-/obj/item/chems/food/tomatosoup/Initialize()
-	. = ..()
-	reagents.add_reagent(/decl/material/liquid/drink/juice/tomato, 10)
+	starting_reagents = list(/decl/material/liquid/drink/juice/tomato = 10)
 
 /obj/item/chems/food/stew
 	name = "stew"
@@ -219,13 +208,12 @@
 	nutriment_desc = list("tomato" = 2, "potato" = 2, "carrot" = 2, "eggplant" = 2, "mushroom" = 2)
 	nutriment_amt = 6
 	bitesize = 10
-
-/obj/item/chems/food/stew/Initialize()
-	. = ..()
-	reagents.add_reagent(/decl/material/liquid/nutriment/protein, 4)
-	reagents.add_reagent(/decl/material/liquid/drink/juice/tomato, 5)
-	reagents.add_reagent(/decl/material/liquid/eyedrops, 5)
-	reagents.add_reagent(/decl/material/liquid/water, 5)
+	starting_reagents = list(
+		/decl/material/liquid/nutriment/protein  = 4,
+		/decl/material/liquid/drink/juice/tomato = 5,
+		/decl/material/liquid/eyedrops           = 5,
+		/decl/material/liquid/water              = 5,
+	)
 
 /obj/item/chems/food/milosoup
 	name = "milosoup"
@@ -237,10 +225,7 @@
 	nutriment_amt = 8
 	bitesize = 4
 	eat_sound = 'sound/items/drink.ogg'
-
-/obj/item/chems/food/milosoup/Initialize()
-	. = ..()
-	reagents.add_reagent(/decl/material/liquid/water, 5)
+	starting_reagents = list(/decl/material/liquid/water = 5)
 
 /obj/item/chems/food/mushroomsoup
 	name = "chantrelle soup"

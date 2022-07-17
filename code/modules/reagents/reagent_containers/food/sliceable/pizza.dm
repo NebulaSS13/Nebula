@@ -17,11 +17,10 @@
 	nutriment_amt = 35
 	bitesize = 2
 	nutriment_type = /decl/material/liquid/nutriment/bread
-
-/obj/item/chems/food/sliceable/pizza/margherita/Initialize()
-	. = ..()
-	reagents.add_reagent(/decl/material/liquid/nutriment/protein, 5)
-	reagents.add_reagent(/decl/material/liquid/drink/juice/tomato, 6)
+	starting_reagents = list(
+		/decl/material/liquid/nutriment/protein  = 5,
+		/decl/material/liquid/drink/juice/tomato = 6,
+	)
 
 /obj/item/chems/food/slice/margherita
 	name = "margherita slice"
@@ -46,11 +45,10 @@
 	nutriment_amt = 10
 	bitesize = 2
 	nutriment_type = /decl/material/liquid/nutriment/bread
-
-/obj/item/chems/food/sliceable/pizza/meatpizza/Initialize()
-	. = ..()
-	reagents.add_reagent(/decl/material/liquid/nutriment/protein, 34)
-	reagents.add_reagent(/decl/material/liquid/nutriment/barbecue, 6)
+	starting_reagents = list(
+		/decl/material/liquid/nutriment/protein  = 34,
+		/decl/material/liquid/nutriment/barbecue = 6,
+	)
 
 /obj/item/chems/food/slice/meatpizza
 	name = "meatpizza slice"
@@ -75,10 +73,7 @@
 	nutriment_amt = 35
 	bitesize = 2
 	nutriment_type = /decl/material/liquid/nutriment/bread
-
-/obj/item/chems/food/sliceable/pizza/mushroompizza/Initialize()
-	. = ..()
-	reagents.add_reagent(/decl/material/liquid/nutriment/protein, 5)
+	starting_reagents = list(/decl/material/liquid/nutriment/protein = 5)
 
 /obj/item/chems/food/slice/mushroompizza
 	name = "mushroompizza slice"
@@ -103,12 +98,11 @@
 	nutriment_amt = 25
 	bitesize = 2
 	nutriment_type = /decl/material/liquid/nutriment/bread
-
-/obj/item/chems/food/sliceable/pizza/vegetablepizza/Initialize()
-	. = ..()
-	reagents.add_reagent(/decl/material/liquid/nutriment/protein, 5)
-	reagents.add_reagent(/decl/material/liquid/nutriment/ketchup, 6)
-	reagents.add_reagent(/decl/material/liquid/eyedrops, 12)
+	starting_reagents = list(
+		/decl/material/liquid/nutriment/protein = 5,
+		/decl/material/liquid/nutriment/ketchup = 6,
+		/decl/material/liquid/eyedrops          = 12,
+	)
 
 /obj/item/chems/food/slice/vegetablepizza
 	name = "vegetable pizza slice"
@@ -133,6 +127,13 @@
 	var/obj/item/chems/food/sliceable/pizza/pizza // content pizza
 	var/list/boxes = list()// If the boxes are stacked, they come here
 	var/boxtag = ""
+
+/obj/item/pizzabox/Initialize(ml, material_key)
+	. = ..()
+	create_contents()
+
+/obj/item/pizzabox/proc/create_contents()
+	return
 
 /obj/item/pizzabox/on_update_icon()
 	. = ..()
@@ -277,22 +278,18 @@
 		return
 	..()
 
-/obj/item/pizzabox/margherita/Initialize()
-	. = ..()
+/obj/item/pizzabox/margherita/create_contents()
 	pizza = new /obj/item/chems/food/sliceable/pizza/margherita(src)
 	boxtag = "Margherita Deluxe"
 
-/obj/item/pizzabox/vegetable/Initialize()
-	. = ..()
+/obj/item/pizzabox/vegetable/create_contents()
 	pizza = new /obj/item/chems/food/sliceable/pizza/vegetablepizza(src)
 	boxtag = "Gourmet Vegatable"
 
-/obj/item/pizzabox/mushroom/Initialize()
-	. = ..()
+/obj/item/pizzabox/mushroom/create_contents()
 	pizza = new /obj/item/chems/food/sliceable/pizza/mushroompizza(src)
 	boxtag = "Mushroom Special"
 
-/obj/item/pizzabox/meat/Initialize()
-	. = ..()
+/obj/item/pizzabox/meat/create_contents()
 	pizza = new /obj/item/chems/food/sliceable/pizza/meatpizza(src)
 	boxtag = "Meatlover's Supreme"

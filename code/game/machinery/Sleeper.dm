@@ -167,7 +167,8 @@
 			empties++
 			continue
 		var/list/reagent = list()
-		reagent["name"] =   canister.label || "unlabeled"
+		var/datum/extension/labels/lab = get_extension(canister, /datum/extension/labels)
+		reagent["name"] =   (lab?.labels?[1]) || "unlabeled"
 		reagent["id"] =     "\ref[canister]"
 		reagent["amount"] = canister.reagents.total_volume
 		loaded_reagents += list(reagent)
