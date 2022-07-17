@@ -99,26 +99,17 @@
 	name = "space cleaner"
 	desc = "BLAM!-brand non-foaming space cleaner!"
 	step_delay = 6
-
-/obj/item/chems/spray/cleaner/Initialize()
-	. = ..()
-	reagents.add_reagent(/decl/material/liquid/cleaner, volume)
+	starting_reagents = list(/decl/material/liquid/cleaner)
 
 /obj/item/chems/spray/antiseptic
 	name = "antiseptic spray"
 	desc = "Great for hiding incriminating bloodstains and sterilizing scalpels."
-
-/obj/item/chems/spray/antiseptic/Initialize()
-	. = ..()
-	reagents.add_reagent(/decl/material/liquid/antiseptic, volume)
+	starting_reagents = list(/decl/material/liquid/antiseptic)
 
 /obj/item/chems/spray/hair_remover
 	name = "hair remover"
 	desc = "Very effective at removing hair, feathers, spines and horns."
-
-/obj/item/chems/spray/hair_remover/Initialize()
-	. = ..()
-	reagents.add_reagent(/decl/material/liquid/hair_remover, volume)
+	starting_reagents = list(/decl/material/liquid/hair_remover)
 
 /obj/item/chems/spray/pepper
 	name = "pepperspray"
@@ -129,10 +120,7 @@
 	volume = 60
 	var/safety = 1
 	step_delay = 1
-
-/obj/item/chems/spray/pepper/Initialize()
-	. = ..()
-	reagents.add_reagent(/decl/material/liquid/capsaicin/condensed, 60)
+	starting_reagents = list(/decl/material/liquid/capsaicin/condensed)
 
 /obj/item/chems/spray/pepper/examine(mob/user, distance)
 	. = ..()
@@ -158,10 +146,7 @@
 	amount_per_transfer_from_this = 1
 	possible_transfer_amounts = null
 	volume = 10
-
-/obj/item/chems/spray/waterflower/Initialize()
-	. = ..()
-	reagents.add_reagent(/decl/material/liquid/water, 10)
+	starting_reagents = list(/decl/material/liquid/water)
 
 /obj/item/chems/spray/chemsprayer
 	name = "chem sprayer"
@@ -205,10 +190,7 @@
 	icon_state = "plantbgone"
 	item_state = "plantbgone"
 	volume = 100
-
-/obj/item/chems/spray/plantbgone/Initialize()
-	. = ..()
-	reagents.add_reagent(/decl/material/liquid/weedkiller, 100)
+	starting_reagents = list(/decl/material/liquid/weedkiller)
 
 /obj/item/chems/spray/plantbgone/afterattack(atom/A, mob/user, proximity)
 	if(!proximity) return

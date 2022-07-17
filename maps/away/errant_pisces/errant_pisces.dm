@@ -65,14 +65,12 @@
 	icon_state = "fishfillet"
 	filling_color = "#cecece"
 	center_of_mass = @"{'x':17,'y':13}"
-
-/obj/item/chems/food/sharkmeat/Initialize()
-	. = ..()
-	reagents.add_reagent(/decl/material/liquid/nutriment/protein, 5)
-	reagents.add_reagent(/decl/material/liquid/psychoactives, 1)
-	reagents.add_reagent(/decl/material/gas/chlorine, 1)
-	src.bitesize = 8
-
+	starting_reagents = list(
+		/decl/material/liquid/nutriment/protein = 5,
+		/decl/material/liquid/psychoactives     = 1,
+		/decl/material/gas/chlorine             = 1,
+	)
+	bitesize = 8
 
 /obj/structure/net//if you want to have fun, make them to be draggable as a whole unless at least one piece is attached to a non-space turf or anchored object
 	name = "industrial net"

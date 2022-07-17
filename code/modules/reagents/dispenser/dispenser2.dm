@@ -58,12 +58,13 @@
 			to_chat(user, "<span class='warning'>\The [src] does not have any slots open for \the [C] to fit into!</span>")
 		return
 
-	if(!C.label)
+	var/datum/extension/labels/lab = get_extension(C, /datum/extension/labels)
+	if(!length(lab?.labels))
 		if(user)
 			to_chat(user, "<span class='warning'>\The [C] does not have a label!</span>")
 		return
 
-	if(cartridges[C.label])
+	if(cartridges[lab.labels[1]])
 		if(user)
 			to_chat(user, "<span class='warning'>\The [src] already contains a cartridge with that label!</span>")
 		return
@@ -75,7 +76,7 @@
 			return
 
 	C.forceMove(src)
-	cartridges[C.label] = C
+	cartridges[lab.labels[1]] = C
 	cartridges = sortTim(cartridges, /proc/cmp_text_asc)
 	SSnano.update_uis(src)
 	return TRUE

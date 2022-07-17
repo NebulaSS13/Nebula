@@ -1,7 +1,7 @@
 /obj/item/chems/chem_disp_cartridge/foaming_agent
-	spawn_reagent = /decl/material/liquid/foaming_agent
+	starting_reagents = /decl/material/liquid/foaming_agent
 /obj/item/chems/chem_disp_cartridge/polyacid
-	spawn_reagent = /decl/material/liquid/acid/polyacid
+	starting_reagents = /decl/material/liquid/acid/polyacid
 
 /obj/structure/sealant_injector
 	name = "sealant tank injector"

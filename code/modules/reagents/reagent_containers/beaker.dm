@@ -13,9 +13,9 @@
 	presentation_flags = PRESENTATION_FLAG_NAME
 	var/lid_color = COLOR_BEASTY_BROWN
 
-/obj/item/chems/glass/beaker/Initialize()
+/obj/item/chems/glass/beaker/examine(mob/user, distance)
 	. = ..()
-	desc += " It can hold up to [volume] units."
+	to_chat(user, " It can hold up to [volume] units.")
 
 /obj/item/chems/glass/beaker/pickup(mob/user)
 	..()
@@ -164,7 +164,5 @@
 	matter = list(/decl/material/solid/plastic = MATTER_AMOUNT_REINFORCEMENT)
 	volume = 120
 
-/obj/item/chems/glass/beaker/sulphuric/Initialize()
-	. = ..()
-	reagents.add_reagent(/decl/material/liquid/acid, 60)
-	update_icon()
+/obj/item/chems/glass/beaker/sulphuric
+	starting_reagents = list(/decl/material/liquid/acid)

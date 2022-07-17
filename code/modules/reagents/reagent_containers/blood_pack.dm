@@ -71,9 +71,10 @@
 	reagents.trans_to_mob(attached, amount_per_transfer_from_this, CHEM_INJECT)
 	update_icon()
 
-/obj/item/chems/ivbag/nanoblood/Initialize()
+/obj/item/chems/ivbag/nanoblood/initialize_reagents(populate = TRUE)
 	. = ..()
-	reagents.add_reagent(/decl/material/liquid/nanoblood, volume)
+	if(populate)
+		reagents.add_reagent(/decl/material/liquid/nanoblood, volume)
 
 /obj/item/chems/ivbag/blood
 	name = "blood pack"
@@ -83,6 +84,10 @@
 	. = ..()
 	if(blood_type)
 		name = "blood pack ([blood_type])"
+
+/obj/item/chems/ivbag/blood/initialize_reagents(populate = TRUE)
+	. = ..()
+	if(populate && blood_type)
 		reagents.add_reagent(/decl/material/liquid/blood, volume, list("donor" = null, "blood_DNA" = null, "blood_type" = blood_type, "trace_chem" = null))
 
 /obj/item/chems/ivbag/blood/APlus

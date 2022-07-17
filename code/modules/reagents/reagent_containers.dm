@@ -14,6 +14,14 @@
 	var/volume = 30
 	var/label_text
 	var/presentation_flags = 0
+	var/show_reagent_name = FALSE
+	var/tmp/list/starting_reagents //Reagents the thing spawns with
+
+/obj/item/chems/Initialize(ml, material_key)
+	. = ..()
+	initialize_reagents()
+	if(!possible_transfer_amounts)
+		src.verbs -= /obj/item/chems/verb/set_amount_per_transfer_from_this
 
 /obj/item/chems/proc/cannot_interact(mob/user)
 	if(!CanPhysicallyInteract(user))
@@ -68,25 +76,20 @@
 	if(N && !cannot_interact(usr))
 		amount_per_transfer_from_this = N
 
-/obj/item/chems/Initialize()
-	. = ..()
-	create_reagents(volume)
-	if(!possible_transfer_amounts)
-		src.verbs -= /obj/item/chems/verb/set_amount_per_transfer_from_this
 
 /obj/item/chems/attack_self(mob/user)
 	return
 
-/obj/item/chems/afterattack(atom/target, mob/user, flag)
+/obj/item/chems/afterattack(atom/target, mob/user, proximity_flag, click_parameters)
 	return
 
 /obj/item/chems/attackby(obj/item/W, mob/user)
 	if(IS_PEN(W))
 		var/tmp_label = sanitize_safe(input(user, "Enter a label for [name]", "Label", label_text), MAX_NAME_LEN)
 		if(length(tmp_label) > 10)
-			to_chat(user, "<span class='notice'>The label can be at most 10 characters long.</span>")
+			to_chat(user, SPAN_NOTICE("The label can be at most 10 characters long."))
 		else
-			to_chat(user, "<span class='notice'>You set the label to \"[tmp_label]\".</span>")
+			to_chat(user, SPAN_NOTICE("You set the label to \"[tmp_label]\"."))
 			label_text = tmp_label
 			update_container_name()
 	else
@@ -97,15 +100,15 @@
 		return 0
 
 	if(!target.reagents || !target.reagents.total_volume)
-		to_chat(user, "<span class='notice'>[target] is empty.</span>")
+		to_chat(user, SPAN_NOTICE("[target] is empty."))
 		return 1
 
 	if(reagents && !REAGENTS_FREE_SPACE(reagents))
-		to_chat(user, "<span class='notice'>[src] is full.</span>")
+		to_chat(user, SPAN_NOTICE("[src] is full."))
 		return 1
 
-	var/trans = target.reagents.trans_to_obj(src, target:amount_per_transfer_from_this)
-	to_chat(user, "<span class='notice'>You fill [src] with [trans] units of the contents of [target].</span>")
+	var/trans = target.reagents.trans_to_obj(src, target.amount_dispensed)
+	to_chat(user, SPAN_NOTICE("You fill [src] with [trans] units of the contents of [target]."))
 	return 1
 
 /obj/item/chems/proc/standard_splash_mob(var/mob/user, var/mob/target) // This goes into afterattack
@@ -113,15 +116,15 @@
 		return
 
 	if(user.a_intent == I_HELP)
-		to_chat(user, "<span class='notice'>You can't splash people on help intent.</span>")
+		to_chat(user, SPAN_NOTICE("You can't splash people on help intent."))
 		return 1
 
 	if(!reagents || !reagents.total_volume)
-		to_chat(user, "<span class='notice'>[src] is empty.</span>")
+		to_chat(user, SPAN_NOTICE("[src] is empty."))
 		return 1
 
 	if(target.reagents && !REAGENTS_FREE_SPACE(target.reagents))
-		to_chat(user, "<span class='notice'>[target] is full.</span>")
+		to_chat(user, SPAN_NOTICE("[target] is full."))
 		return 1
 
 	var/contained = REAGENT_LIST(src)
@@ -135,13 +138,13 @@
 	return 1
 
 /obj/item/chems/proc/self_feed_message(var/mob/user)
-	to_chat(user, "<span class='notice'>You eat \the [src]</span>")
+	to_chat(user, SPAN_NOTICE("You eat \the [src]"))
 
 /obj/item/chems/proc/other_feed_message_start(var/mob/user, var/mob/target)
-	user.visible_message("<span class='warning'>[user] is trying to feed [target] \the [src]!</span>")
+	user.visible_message(SPAN_NOTICE("[user] is trying to feed [target] \the [src]!"))
 
 /obj/item/chems/proc/other_feed_message_finish(var/mob/user, var/mob/target)
-	user.visible_message("<span class='warning'>[user] has fed [target] \the [src]!</span>")
+	user.visible_message(SPAN_NOTICE("[user] has fed [target] \the [src]!"))
 
 /obj/item/chems/proc/feed_sound(var/mob/user)
 	return
@@ -151,7 +154,7 @@
 		return 0
 
 	if(!reagents || !reagents.total_volume)
-		to_chat(user, "<span class='notice'>\The [src] is empty.</span>")
+		to_chat(user, SPAN_NOTICE("\The [src] is empty."))
 		return 1
 
 	// only carbons can eat
@@ -164,7 +167,7 @@
 					return
 				var/obj/item/blocked = H.check_mouth_coverage()
 				if(blocked)
-					to_chat(user, "<span class='warning'>\The [blocked] is in the way!</span>")
+					to_chat(user, SPAN_NOTICE("\The [blocked] is in the way!"))
 					return
 
 			user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN) //puts a limit on how fast people can eat/drink things
@@ -203,23 +206,23 @@
 
 	// Ensure we don't splash beakers and similar containers.
 	if(!ATOM_IS_OPEN_CONTAINER(target) && istype(target, /obj/item/chems))
-		to_chat(user, "<span class='notice'>\The [target] is closed.</span>")
+		to_chat(user, SPAN_NOTICE("\The [target] is closed."))
 		return 1
 	// Otherwise don't care about splashing.
 	else if(!ATOM_IS_OPEN_CONTAINER(target))
 		return 0
 
 	if(!reagents || !reagents.total_volume)
-		to_chat(user, "<span class='notice'>[src] is empty.</span>")
+		to_chat(user, SPAN_NOTICE("[src] is empty."))
 		return 1
 
 	if(!REAGENTS_FREE_SPACE(target.reagents))
-		to_chat(user, "<span class='notice'>[target] is full.</span>")
+		to_chat(user, SPAN_NOTICE("[target] is full."))
 		return 1
 
 	var/trans = reagents.trans_to(target, amount_per_transfer_from_this)
 	playsound(src, 'sound/effects/pour.ogg', 25, 1)
-	to_chat(user, "<span class='notice'>You transfer [trans] unit\s of the solution to \the [target].  \The [src] now contains [src.reagents.total_volume] units.</span>")
+	to_chat(user, SPAN_NOTICE("You transfer [trans] unit\s of the solution to \the [target].  \The [src] now contains [src.reagents.total_volume] units."))
 	return 1
 
 /obj/item/chems/do_surgery(mob/living/carbon/M, mob/living/user)
@@ -232,14 +235,48 @@
 		return
 	if(hasHUD(user, HUD_SCIENCE))
 		var/prec = user.skill_fail_chance(SKILL_CHEMISTRY, 10)
-		to_chat(user, "<span class='notice'>The [src] contains: [reagents.get_reagents(precision = prec)].</span>")
+		to_chat(user, SPAN_NOTICE("The [src] contains: [reagents.get_reagents(precision = prec)]."))
 	else if((loc == user) && user.skill_check(SKILL_CHEMISTRY, SKILL_EXPERT))
-		to_chat(user, "<span class='notice'>Using your chemistry knowledge, you identify the following reagents in \the [src]: [reagents.get_reagents(!user.skill_check(SKILL_CHEMISTRY, SKILL_PROF), 5)].</span>")
+		to_chat(user, SPAN_NOTICE("Using your chemistry knowledge, you identify the following reagents in \the [src]: [reagents.get_reagents(!user.skill_check(SKILL_CHEMISTRY, SKILL_PROF), 5)]."))
 
 /obj/item/chems/shatter(consumed)
 	reagents.splash(get_turf(src), reagents.total_volume)
 	. = ..()
 
+/obj/item/chems/initialize_reagents(populate = TRUE)
+	if(!reagents)
+		create_reagents(volume)
+	else
+		reagents.maximum_volume = max(reagents.maximum_volume, volume)
+	
+	if(!populate || (!ispath(starting_reagents) && !LAZYLEN(starting_reagents)))
+		return //If we don't want to populate, or we don't have anything to add, just quit early
+	
+	if(ispath(starting_reagents))
+		reagents.add_reagent(starting_reagents, reagents.maximum_volume)
+	else 
+		//Not specifying an amount for a reagent means we're just splitting the available volume with all the reagents
+		var/auto_assigned = round(reagents.maximum_volume / LAZYLEN(starting_reagents), 0.01)
+		var/manually_set  = FALSE //Changed to true when we hit an entry that set the amount of a reagent manually. Used to check if we partially set the values manually. It has to be either full automatic, or full manual
+		var/auto_assign_amount = FALSE
+		for(var/R in starting_reagents)
+			var/new_vol = starting_reagents[R]
+			if(isnull(new_vol))
+				auto_assign_amount = TRUE
+				if(manually_set)
+					PRINT_STACK_TRACE("'[src]' [type] not all reagents had a manually assigned amount!!")
+				if(auto_assigned == 0) //Has to check it only when we actually use the value
+					PRINT_STACK_TRACE("'[src]' [type] had its starter reagents volume auto-calculated to be 0!!")
+				new_vol = auto_assigned
+			else
+				if(auto_assign_amount)
+					PRINT_STACK_TRACE("'[src]' [type] not all reagents had a manually assigned amount!!")
+				manually_set = TRUE
+			reagents.add_reagent(R, new_vol)
+
+//
+// Interactions
+//
 /obj/item/chems/get_alt_interactions(var/mob/user)
 	. = ..()
 	LAZYADD(., /decl/interaction_handler/set_transfer/chems)

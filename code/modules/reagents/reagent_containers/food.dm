@@ -40,8 +40,6 @@
 
 /obj/item/chems/food/Initialize()
 	.=..()
-	if(nutriment_amt)
-		reagents.add_reagent(nutriment_type, nutriment_amt, nutriment_desc)
 	amount_per_transfer_from_this = bitesize
 
 	//Placeholder for effect that trigger on eating that aren't tied to reagents.
@@ -272,3 +270,8 @@
 /obj/item/chems/food/proc/apply_filling_overlay()
 	if(check_state_in_icon("[icon_state]_filling", icon))
 		add_overlay(overlay_image(icon, "[icon_state]_filling", filling_color))
+
+/obj/item/chems/food/initialize_reagents(populate = TRUE)
+	. = ..()
+	if(populate && nutriment_amt)
+		reagents.add_reagent(nutriment_type, nutriment_amt, nutriment_desc)

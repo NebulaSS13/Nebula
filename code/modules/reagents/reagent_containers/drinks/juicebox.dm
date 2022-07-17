@@ -66,29 +66,29 @@
 /obj/item/chems/drinks/juicebox/apple
 	name = "apple juicebox"
 	desc = "A small cardboard juicebox with a cartoon apple on it."
+	starting_reagents = list(/decl/material/liquid/drink/juice/apple)
 
 /obj/item/chems/drinks/juicebox/apple/Initialize()
 	. = ..()
 	set_colors("#ff0000", "#ffff00", "#ff0000", style="stripe")
-	reagents.add_reagent(/decl/material/liquid/drink/juice/apple, 25)
 
 /obj/item/chems/drinks/juicebox/orange
 	name = "orange juicebox"
 	desc = "A small cardboard juicebox with a cartoon orange on it."
+	starting_reagents = list(/decl/material/liquid/drink/juice/orange)
 
 /obj/item/chems/drinks/juicebox/orange/Initialize()
 	. = ..()
 	set_colors("#ffff00", "#ff0000", "#ffff00", style="stripe")
-	reagents.add_reagent(/decl/material/liquid/drink/juice/orange, 25)
 
 /obj/item/chems/drinks/juicebox/grape
 	name = "grape juicebox"
 	desc = "A small cardboard juicebox with some cartoon grapes on it."
+	starting_reagents = list(/decl/material/liquid/drink/juice/grape)
 
 /obj/item/chems/drinks/juicebox/grape/Initialize()
 	. = ..()
 	set_colors("#ff00ff", "#00ff00", style="stripe")
-	reagents.add_reagent(/decl/material/liquid/drink/juice/grape, 25)
 
 /obj/item/chems/drinks/juicebox/random/Initialize()
 	. = ..()
@@ -108,12 +108,13 @@
 	reagents.add_reagent(pick(drinktypes - J), 5)
 	return reagents.reagent_volumes
 
-/obj/item/chems/drinks/juicebox/sensible_random/Initialize()
+/obj/item/chems/drinks/juicebox/sensible_random/initialize_reagents(populate = TRUE)
 	. = ..()
-	var/list/chosen_reagents = juice_it()
-	var/decl/material/J = GET_DECL(chosen_reagents[1])
-	var/decl/material/K = GET_DECL(chosen_reagents[2])
-	var/splash = pick("teasing", "splash", "hint", "measure", "nip", "slug", "depth", "dash", "sensation", "surge", "squirt", "spritz", "efflux", "gush", "swell")
-	desc = "[J.liquid_name]; [J.lore_text] This one comes with \an [splash] of [K.liquid_name] in a neat box."
-	name = "\improper [J.liquid_name] and [K.liquid_name] juicebox"
-	set_colors(J.color, K.color, get_random_colour(simple=TRUE), style=pick(list("stripe", "corner")))
+	if(populate)
+		var/list/chosen_reagents = juice_it()
+		var/decl/material/J = GET_DECL(chosen_reagents[1])
+		var/decl/material/K = GET_DECL(chosen_reagents[2])
+		var/splash = pick("teasing", "splash", "hint", "measure", "nip", "slug", "depth", "dash", "sensation", "surge", "squirt", "spritz", "efflux", "gush", "swell")
+		desc = "[J.liquid_name]; [J.lore_text] This one comes with \an [splash] of [K.liquid_name] in a neat box."
+		name = "\improper [J.liquid_name] and [K.liquid_name] juicebox"
+		set_colors(J.color, K.color, get_random_colour(simple=TRUE), style=pick(list("stripe", "corner")))
