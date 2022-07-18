@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <base href="../../" />
+    <link rel="stylesheet" href="dmdoc.css" />
+    <title>&#x2F;obj&#x2F;item&#x2F;cataloguer - Space Station 13 - Nebula13</title>
+</head>
+<body>
+<header>
+    <a href="index.html">Space Station 13 - Nebula13</a> -
+    <a href="index.html#modules">Modules</a> -
+    <a href="index.html#types">Types</a>
+ &mdash; <a href="obj/item/cataloguer.html#var">Var Details</a></header>
+<main>
+<h1>cataloguer <aside>/<a href="obj/item.html">obj/item</a>/<a href="obj/item/cataloguer.html">cataloguer</a></aside>
+        
+    
+            <a href="https://github.com/NebulaSS13/Nebula/blob/9f148226c199c53a6c30580458d5b6ccb5d0ae7e/code/modules/codex/codex_cataloguer.dm#L83">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;codex&#x2F;codex_cataloguer.dm 83"/></a></h1>
+
+<table class="summary" cellspacing="0"><tr><td colspan="2"><h2>Vars</h2></td></tr>
+            <tr><th><a href="obj/item/cataloguer.html#var/credit_sharing_range">credit_sharing_range</a></th><td>If another person is within this radius, they will also be credited with a successful scan.</td></tr>
+            <tr><th><a href="obj/item/cataloguer.html#var/glow_colour">glow_colour</a></th><td>Color of the glow effect when scanning.</td></tr>
+            <tr><th><a href="obj/item/cataloguer.html#var/loaded_disk">loaded_disk</a></th><td>Currently loaded survey disk for storing Good Boy Points.</td></tr>
+            <tr><th><a href="obj/item/cataloguer.html#var/partial_scan_time">partial_scan_time</a></th><td>How much to make the next scan shorter.</td></tr>
+            <tr><th><a href="obj/item/cataloguer.html#var/partial_scanned">partial_scanned</a></th><td>Weakref of the thing that was last scanned if inturrupted. Used to allow for partial scans to be resumed.</td></tr>
+            <tr><th><a href="obj/item/cataloguer.html#var/scan_beam">scan_beam</a></th><td>Holder for the currently scanning beam effect.</td></tr>
+            <tr><th><a href="obj/item/cataloguer.html#var/scan_radius_overlay">scan_radius_overlay</a></th><td>Dummy object for holding the scanning effect.</td></tr>
+            <tr><th><a href="obj/item/cataloguer.html#var/scan_range">scan_range</a></th><td>How many tiles away it can scan. Changing this also changes the box size.</td></tr>
+            <tr><th><a href="obj/item/cataloguer.html#var/scan_speed_modifier">scan_speed_modifier</a></th><td>Multiplier for the base scan delay.</td></tr>
+            <tr><th><a href="obj/item/cataloguer.html#var/scanning">scanning</a></th><td>Set to a user mob when scanning, to stop multiple scans.</td></tr></table>
+    <h2 id="var">Var Details</h2><h3 id="var/credit_sharing_range"><aside class="declaration">var </aside>credit_sharing_range
+            <aside>&ndash; </aside>
+        
+    
+            <a href="https://github.com/NebulaSS13/Nebula/blob/9f148226c199c53a6c30580458d5b6ccb5d0ae7e/code/modules/codex/codex_cataloguer.dm#L108">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;codex&#x2F;codex_cataloguer.dm 108"/></a></h3>
+        <p>If another person is within this radius, they will also be credited with a successful scan.</p><h3 id="var/glow_colour"><aside class="declaration">var </aside>glow_colour
+            <aside>&ndash; </aside>
+        
+    
+            <a href="https://github.com/NebulaSS13/Nebula/blob/9f148226c199c53a6c30580458d5b6ccb5d0ae7e/code/modules/codex/codex_cataloguer.dm#L102">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;codex&#x2F;codex_cataloguer.dm 102"/></a></h3>
+        <p>Color of the glow effect when scanning.</p><h3 id="var/loaded_disk"><aside class="declaration">var </aside>loaded_disk
+            <aside>&ndash; /<a href="obj/item.html">obj/item</a>/disk/survey</aside>
+        
+    
+            <a href="https://github.com/NebulaSS13/Nebula/blob/9f148226c199c53a6c30580458d5b6ccb5d0ae7e/code/modules/codex/codex_cataloguer.dm#L122">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;codex&#x2F;codex_cataloguer.dm 122"/></a></h3>
+        <p>Currently loaded survey disk for storing Good Boy Points.</p><h3 id="var/partial_scan_time"><aside class="declaration">var </aside>partial_scan_time
+            <aside>&ndash; /tmp</aside>
+        
+    
+            <a href="https://github.com/NebulaSS13/Nebula/blob/9f148226c199c53a6c30580458d5b6ccb5d0ae7e/code/modules/codex/codex_cataloguer.dm#L110">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;codex&#x2F;codex_cataloguer.dm 110"/></a></h3>
+        <p>How much to make the next scan shorter.</p><h3 id="var/partial_scanned"><aside class="declaration">var </aside>partial_scanned
+            <aside>&ndash; /tmp/weakref</aside>
+        
+    
+            <a href="https://github.com/NebulaSS13/Nebula/blob/9f148226c199c53a6c30580458d5b6ccb5d0ae7e/code/modules/codex/codex_cataloguer.dm#L112">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;codex&#x2F;codex_cataloguer.dm 112"/></a></h3>
+        <p>Weakref of the thing that was last scanned if inturrupted. Used to allow for partial scans to be resumed.</p><h3 id="var/scan_beam"><aside class="declaration">var </aside>scan_beam
+            <aside>&ndash; /<a href="datum.html">datum</a>/beam</aside>
+        
+    
+            <a href="https://github.com/NebulaSS13/Nebula/blob/9f148226c199c53a6c30580458d5b6ccb5d0ae7e/code/modules/codex/codex_cataloguer.dm#L118">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;codex&#x2F;codex_cataloguer.dm 118"/></a></h3>
+        <p>Holder for the currently scanning beam effect.</p><h3 id="var/scan_radius_overlay"><aside class="declaration">var </aside>scan_radius_overlay
+            <aside>&ndash; /obj/screen/scan_radius</aside>
+        
+    
+            <a href="https://github.com/NebulaSS13/Nebula/blob/9f148226c199c53a6c30580458d5b6ccb5d0ae7e/code/modules/codex/codex_cataloguer.dm#L116">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;codex&#x2F;codex_cataloguer.dm 116"/></a></h3>
+        <p>Dummy object for holding the scanning effect.</p><h3 id="var/scan_range"><aside class="declaration">var </aside>scan_range
+            <aside>&ndash; </aside>
+        
+    
+            <a href="https://github.com/NebulaSS13/Nebula/blob/9f148226c199c53a6c30580458d5b6ccb5d0ae7e/code/modules/codex/codex_cataloguer.dm#L106">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;codex&#x2F;codex_cataloguer.dm 106"/></a></h3>
+        <p>How many tiles away it can scan. Changing this also changes the box size.</p><h3 id="var/scan_speed_modifier"><aside class="declaration">var </aside>scan_speed_modifier
+            <aside>&ndash; </aside>
+        
+    
+            <a href="https://github.com/NebulaSS13/Nebula/blob/9f148226c199c53a6c30580458d5b6ccb5d0ae7e/code/modules/codex/codex_cataloguer.dm#L104">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;codex&#x2F;codex_cataloguer.dm 104"/></a></h3>
+        <p>Multiplier for the base scan delay.</p><h3 id="var/scanning"><aside class="declaration">var </aside>scanning
+            <aside>&ndash; /weakref</aside>
+        
+    
+            <a href="https://github.com/NebulaSS13/Nebula/blob/9f148226c199c53a6c30580458d5b6ccb5d0ae7e/code/modules/codex/codex_cataloguer.dm#L114">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;codex&#x2F;codex_cataloguer.dm 114"/></a></h3>
+        <p>Set to a user mob when scanning, to stop multiple scans.</p></main>
+<footer>
+    nebula.dme
+    <a href="https://github.com/NebulaSS13/Nebula/tree/9f148226c199c53a6c30580458d5b6ccb5d0ae7e">9f14822</a>
+        (dev) &mdash; <a href="https://github.com/SpaceManiac/SpacemanDMM/blob/master/src/dmdoc/README.md">dmdoc 1.4.1</a></footer>
+</body>
+</html>
