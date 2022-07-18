@@ -90,7 +90,7 @@
 			//Masks are 48x48 and pilots 32x32 (in theory at least) so some math is required for centering
 			var/diff_x = 8 - draw_pilot.pixel_x
 			var/diff_y = 8 - draw_pilot.pixel_y
-			draw_pilot.filters = filter(type = "alpha", icon = icon(body.on_mech_icon, "[body.icon_state]_pilot_mask[hatch_closed ? "" : "_open"]", dir), x = diff_x, y = diff_y)
+			draw_pilot.add_filter("pilot_mask", 1, list(type = "alpha", icon = icon(body.on_mech_icon, "[body.icon_state]_pilot_mask[hatch_closed ? "" : "_open"]", dir), x = diff_x, y = diff_y))
 			
 			LAZYADD(pilot_overlays, draw_pilot)
 		if(update_overlays && LAZYLEN(pilot_overlays))

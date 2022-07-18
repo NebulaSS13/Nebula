@@ -699,6 +699,15 @@
 	if(!istype(move_intent))
 		set_next_usable_move_intent()
 	update_emotes()
+
+	// Update codex scannables.
+	if(species.secret_codex_info)
+		var/datum/extension/scannable/scannable = get_or_create_extension(src, /datum/extension/scannable)
+		scannable.associated_entry = "[lowertext(species.name)] (species)"
+		scannable.scan_delay = 5 SECONDS
+	else if(has_extension(src, /datum/extension/scannable))
+		remove_extension(src, /datum/extension/scannable)
+
 	return TRUE
 
 //Syncs cultural tokens to the currently set species, and may trigger a language update

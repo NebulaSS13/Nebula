@@ -91,6 +91,8 @@
 	var/glowing_eyes = FALSE
 	var/mob_icon_state_flags = 0
 
+	var/scannable_result // Codex page generated when this mob is scanned.
+
 /mob/living/simple_animal/Initialize()
 	. = ..()
 	check_mob_icon_states()
@@ -98,6 +100,8 @@
 		set_extension(src, armor_type, natural_armor)
 	if(islist(hat_offsets))
 		set_extension(src, /datum/extension/hattable/directional, hat_offsets)
+	if(scannable_result)
+		set_extension(src, /datum/extension/scannable, scannable_result)
 
 /mob/living/simple_animal/proc/check_mob_icon_states()
 	mob_icon_state_flags = 0
