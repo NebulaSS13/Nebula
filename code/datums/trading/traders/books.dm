@@ -11,7 +11,7 @@
 								/obj/item/book/skill/general/eva = TRADER_SUBTYPES_ONLY,
 								/obj/item/book/skill/general/mech = TRADER_SUBTYPES_ONLY,
 								/obj/item/book/skill/general/pilot = TRADER_SUBTYPES_ONLY,
-								/obj/item/book/skill/general/hauling = TRADER_SUBTYPES_ONLY,
+								/obj/item/book/skill/general/athletics = TRADER_SUBTYPES_ONLY,
 								/obj/item/book/skill/general/computer = TRADER_SUBTYPES_ONLY,
 								/obj/item/book/skill/service/botany = TRADER_SUBTYPES_ONLY,
 								/obj/item/book/skill/service/cooking = TRADER_SUBTYPES_ONLY,

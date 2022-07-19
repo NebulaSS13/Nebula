@@ -142,7 +142,7 @@
 		for(var/mob/living/M in check_turf.contents)
 			if(QDELETED(M))
 				continue
-			if(prob(5) || !M.skill_check(SKILL_BOTANY, SKILL_PROF))
+			if(prob(5) || !M.skill_check(SKILL_BOTANY, SKILL_MASTER))
 				targets |= M
 	if(targets.len)
 		return targets

@@ -11,7 +11,7 @@
 	tally += species.handle_movement_delay_special(src)
 
 	if(!has_gravity())
-		if(skill_check(SKILL_EVA, SKILL_PROF))
+		if(skill_check(SKILL_EVA, SKILL_MASTER))
 			tally -= 2
 		tally -= 1
 
@@ -82,7 +82,7 @@
 /mob/living/carbon/human/space_do_move(var/allow_move, var/direction)
 	if(allow_move == 1)
 		var/obj/item/tank/jetpack/thrust = get_jetpack()
-		if(thrust && thrust.on && prob(skill_fail_chance(SKILL_EVA, 10, SKILL_ADEPT)))
+		if(thrust && thrust.on && prob(skill_fail_chance(SKILL_EVA, 10, SKILL_TRAINED)))
 			to_chat(src, "<span class='warning'>You fumble with [thrust] controls!</span>")
 			if(prob(50))
 				thrust.toggle()

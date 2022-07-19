@@ -379,7 +379,7 @@
 			var/time_to_butcher = (mob_size)
 			to_chat(user, SPAN_WARNING("You begin harvesting \the [src]."))
 			if(do_after(user, time_to_butcher, src, same_direction = TRUE))
-				if(prob(user.skill_fail_chance(SKILL_COOKING, 60, SKILL_ADEPT)))
+				if(prob(user.skill_fail_chance(SKILL_COOKING, 60, SKILL_TRAINED)))
 					to_chat(user, SPAN_DANGER("You botch harvesting \the [src], and ruin some of the meat in the process."))
 					subtract_meat(user)
 					return

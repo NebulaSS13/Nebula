@@ -3,8 +3,8 @@
 	module_sprites = list("Roller" = 'icons/mob/robots/robot_service_bro.dmi') //sadly rollersprites seem to have been lost
 	upgrade_locked = TRUE
 	skills = list(
-		SKILL_LITERACY = SKILL_ADEPT,
-		SKILL_FINANCE  = SKILL_PROF
+		SKILL_LITERACY = SKILL_TRAINED,
+		SKILL_FINANCE  = SKILL_MASTER
 	) // For the money launcher, of course
 
 /obj/item/robot_module/uncertified/party

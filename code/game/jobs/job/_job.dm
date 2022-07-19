@@ -42,7 +42,7 @@
 
 	//Minimum skills allowed for the job. List should contain skill (as in /decl/hierarchy/skill path), with values which are numbers.
 	var/min_skill = list(
-		SKILL_LITERACY = SKILL_ADEPT
+		SKILL_LITERACY = SKILL_TRAINED
 	)
 	var/max_skill = list()				  //Maximum skills allowed for the job.
 	var/skill_points = 16				  //The number of unassigned skill points the job comes with (on top of the minimum skills).

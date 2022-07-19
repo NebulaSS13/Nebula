@@ -217,7 +217,7 @@
 	animate(src, pixel_y = starting_pixel_y, time = 2)
 
 	if(is_asystole())
-		if(prob(5 + 5 * (SKILL_EXPERT - pumping_skill)))
+		if(prob(5 + 5 * (SKILL_EXPERIENCED - pumping_skill)))
 			var/obj/item/organ/external/chest = GET_EXTERNAL_ORGAN(src, BP_CHEST)
 			if(chest)
 				chest.fracture()

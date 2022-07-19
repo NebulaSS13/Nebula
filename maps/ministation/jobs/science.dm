@@ -7,10 +7,10 @@
 	department_types = list(/decl/department/science)
 	outfit_type = /decl/hierarchy/outfit/job/ministation/scientist
 	min_skill = list(
-		SKILL_LITERACY = SKILL_ADEPT,
+		SKILL_LITERACY = SKILL_TRAINED,
 		SKILL_COMPUTER = SKILL_BASIC,
 		SKILL_DEVICES  = SKILL_BASIC,
-		SKILL_SCIENCE  = SKILL_ADEPT
+		SKILL_SCIENCE  = SKILL_TRAINED
 	)
 	max_skill = list(
 		SKILL_ANATOMY  = SKILL_MAX,

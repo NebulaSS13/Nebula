@@ -3,10 +3,10 @@
 	supervisors = "your profit margin, your conscience, and the Trademaster"
 	outfit_type = /decl/hierarchy/outfit/job/ministation/captain
 	min_skill = list(
-		SKILL_LITERACY = SKILL_ADEPT,
-		SKILL_WEAPONS  = SKILL_ADEPT,
-		SKILL_SCIENCE  = SKILL_ADEPT,
-		SKILL_PILOT    = SKILL_ADEPT
+		SKILL_LITERACY = SKILL_TRAINED,
+		SKILL_WEAPONS  = SKILL_TRAINED,
+		SKILL_SCIENCE  = SKILL_TRAINED,
+		SKILL_PILOT    = SKILL_TRAINED
 	)
 	max_skill = list(
 		SKILL_PILOT   = SKILL_MAX,
@@ -144,10 +144,10 @@
 		access_gateway
 	)
 	min_skill = list(
-		SKILL_LITERACY = SKILL_ADEPT,
+		SKILL_LITERACY = SKILL_TRAINED,
 		SKILL_WEAPONS  = SKILL_BASIC,
-		SKILL_FINANCE  = SKILL_EXPERT,
-		SKILL_PILOT    = SKILL_ADEPT
+		SKILL_FINANCE  = SKILL_EXPERIENCED,
+		SKILL_PILOT    = SKILL_TRAINED
 	)
 	max_skill = list(
 		SKILL_LITERACY = SKILL_MAX,

@@ -4,7 +4,7 @@
 	var/max_entries = 10  //will hold that many entries, removing oldest when overflown
 	var/list/data
 	var/remove_on_transfer //if it should be removed when picked up by forensic samplers
-	var/spot_skill = SKILL_EXPERT	// at what Forensics skill level someone can see it on examine. Set to null, can never see it 
+	var/spot_skill = SKILL_EXPERIENCED	// at what Forensics skill level someone can see it on examine. Set to null, can never see it 
 
 //subtypes can implement any merging if needed before calling parent
 /datum/forensics/proc/add_data(newdata)

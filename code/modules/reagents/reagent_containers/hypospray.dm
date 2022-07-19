@@ -19,11 +19,11 @@
 	// autoinjectors takes less time than a normal syringe (overriden for hypospray).
 	// This delay is only applied when injecting concious mobs, and is not applied for self-injection
 	// The 1.9 factor scales it so it takes the following number of seconds:
-	// NONE   1.47
+	// UNSKILLED   1.47
 	// BASIC  1.00
-	// ADEPT  0.68
-	// EXPERT 0.53
-	// PROF   0.39
+	// TRAINED  0.68
+	// EXPERIENCED 0.53
+	// MASTER   0.39
 	var/time = (1 SECONDS) / 1.9
 	var/single_use = TRUE // autoinjectors are not refillable (overriden for hypospray)
 

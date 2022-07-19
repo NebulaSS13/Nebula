@@ -145,7 +145,7 @@
 	if(!safety() && power_supply.checked_use(charge_cost)) //consumes a shot per use
 		if(M)
 			M.welding_eyecheck()//Welding tool eye check
-			if(check_accidents(M, "[M] loses grip on [src] from its sudden recoil!",SKILL_CONSTRUCTION, 60, SKILL_ADEPT))
+			if(check_accidents(M, "[M] loses grip on [src] from its sudden recoil!",SKILL_CONSTRUCTION, 60, SKILL_TRAINED))
 				return 0
 		spark_at(src, amount = 5, holder = src)
 		return 1

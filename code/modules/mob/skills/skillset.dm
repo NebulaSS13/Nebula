@@ -113,7 +113,7 @@ var/global/list/all_skill_verbs
 	switch(points)
 		if(SKILL_BASIC)
 			return max(0, 1 + 3*factor)
-		if(SKILL_NONE)
+		if(SKILL_UNSKILLED)
 			return max(0, 1 + 6*factor)
 		else
 			return max(0, 1 + (SKILL_DEFAULT - points) * factor)
@@ -121,7 +121,7 @@ var/global/list/all_skill_verbs
 /mob/proc/do_skilled(base_delay, skill_path , atom/target = null, factor = 0.3, check_holding = FALSE)
 	return do_after(src, base_delay * skill_delay_mult(skill_path, factor), target, check_holding)
 
-// A generic way of modifying success probabilities via skill values. Higher factor means skills have more effect. fail_chance is the chance at SKILL_NONE.
+// A generic way of modifying success probabilities via skill values. Higher factor means skills have more effect. fail_chance is the chance at SKILL_UNSKILLED.
 /mob/proc/skill_fail_chance(skill_path, fail_chance, no_more_fail = SKILL_MAX, factor = 1)
 	var/points = get_skill_value(skill_path)
 	if(points >= no_more_fail)

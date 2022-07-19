@@ -12,7 +12,7 @@ var/global/list/terminal_commands
 	var/regex_flags                       // Used in the regex
 	var/regex/regex                       // The actual regex, produced from above.
 	var/core_skill = SKILL_COMPUTER       // The skill which is checked
-	var/skill_needed = SKILL_ADEPT        // How much skill the user needs to use this. This is not for critical failure effects at unskilled; those are handled globally.
+	var/skill_needed = SKILL_TRAINED        // How much skill the user needs to use this. This is not for critical failure effects at unskilled; those are handled globally.
 	var/req_access = list()               // Stores access needed, if any
 	var/needs_network					  // If this command fails if computer running terminal isn't connected to a network
 	var/needs_network_feature			  // Network feature flags which are required by this command.
@@ -178,7 +178,7 @@ Subtypes
 	man_entry = list("Format: locate nid", "Attempts to locate the device with the given nid by triangulating via relays.")
 	pattern = @"locate"
 	req_access = list(access_network)
-	skill_needed = SKILL_PROF
+	skill_needed = SKILL_MASTER
 	needs_network = TRUE
 
 /datum/terminal_command/locate/proper_input_entered(text, mob/user, datum/terminal/terminal)
@@ -581,7 +581,7 @@ Subtypes
 
 /datum/terminal_command/com/proper_input_entered(text, mob/user, datum/terminal/terminal)
 	// If the user is unskilled, call a random method
-	if(!user.skill_check(core_skill, SKILL_EXPERT))
+	if(!user.skill_check(core_skill, SKILL_EXPERIENCED))
 		var/target_tag = terminal.network_target
 		if(!target_tag)
 			return "com: No network target set. Use 'target' to set a network target."
@@ -628,7 +628,7 @@ Subtypes
 	man_entry = list("Format: listcom \[pg number / command\]", "Lists commands available on the current network target.", "If a command is given as an argument, provides information about that command.")
 	pattern = @"^listcom"
 	needs_network = TRUE
-	skill_needed = SKILL_EXPERT
+	skill_needed = SKILL_EXPERIENCED
 	needs_network_feature = NET_FEATURE_SYSTEMCONTROL
 
 /datum/terminal_command/listcom/proper_input_entered(text, mob/user, datum/terminal/terminal)
@@ -683,7 +683,7 @@ Subtypes
 	man_entry = list("Format: addcom \[type\] \[alias\]", "Adds a command on the current network target. Accepts types 'METHOD' or 'VARIABLE'")
 	pattern = @"^addcom"
 	needs_network = TRUE
-	skill_needed = SKILL_EXPERT
+	skill_needed = SKILL_EXPERIENCED
 	needs_network_feature = NET_FEATURE_SYSTEMCONTROL
 
 /datum/terminal_command/addcom/proper_input_entered(text, mob/user, datum/terminal/terminal)
@@ -718,7 +718,7 @@ Subtypes
 	man_entry = list("Format: modcom \[alias\] \[index\]", "Modifies a command on the current network target. Leave index blank to return a list of possible references")
 	pattern = @"^modcom"
 	needs_network = TRUE
-	skill_needed = SKILL_PROF // addcom only adds a randomly chosen command to the device - you need to be significantly more skilled to select a specific one remotely.
+	skill_needed = SKILL_MASTER // addcom only adds a randomly chosen command to the device - you need to be significantly more skilled to select a specific one remotely.
 	needs_network_feature = NET_FEATURE_SYSTEMCONTROL
 
 /datum/terminal_command/modcom/proper_input_entered(text, mob/user, datum/terminal/terminal)
@@ -780,7 +780,7 @@ Subtypes
 	man_entry = list("Format: namecom \[old alias\] \[new alias\]", "Renames a command with the given alias on the current network target.")
 	pattern = @"^namecom"
 	needs_network = TRUE
-	skill_needed = SKILL_EXPERT
+	skill_needed = SKILL_EXPERIENCED
 	needs_network_feature = NET_FEATURE_SYSTEMCONTROL
 
 /datum/terminal_command/namecom/proper_input_entered(text, mob/user, datum/terminal/terminal)
@@ -811,7 +811,7 @@ Subtypes
 	man_entry = list("Format: rmcom \[alias\]", "Removes a command with the given alias on the current network target.")
 	pattern = @"^rmcom"
 	needs_network = TRUE
-	skill_needed = SKILL_EXPERT
+	skill_needed = SKILL_EXPERIENCED
 	needs_network_feature = NET_FEATURE_SYSTEMCONTROL
 
 /datum/terminal_command/rmcom/proper_input_entered(text, mob/user, datum/terminal/terminal)

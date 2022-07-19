@@ -3,11 +3,11 @@
 		"Service" = TRUE
 	)
 	skills = list(
-		SKILL_LITERACY            = SKILL_ADEPT,
-		SKILL_FINANCE             = SKILL_PROF,
-		SKILL_COMPUTER            = SKILL_EXPERT,
-		SKILL_SCIENCE             = SKILL_EXPERT,
-		SKILL_DEVICES             = SKILL_EXPERT
+		SKILL_LITERACY            = SKILL_TRAINED,
+		SKILL_FINANCE             = SKILL_MASTER,
+		SKILL_COMPUTER            = SKILL_EXPERIENCED,
+		SKILL_SCIENCE             = SKILL_EXPERIENCED,
+		SKILL_DEVICES             = SKILL_EXPERIENCED
 	)
 	software = list(
 		/datum/computer_file/program/wordprocessor,
@@ -44,12 +44,12 @@
 	)
 	emag = /obj/item/chems/drinks/bottle/small/beer
 	skills = list(
-		SKILL_LITERACY            = SKILL_ADEPT,
-		SKILL_COMPUTER            = SKILL_EXPERT,
-		SKILL_COOKING             = SKILL_PROF,
-		SKILL_BOTANY              = SKILL_PROF,
+		SKILL_LITERACY            = SKILL_TRAINED,
+		SKILL_COMPUTER            = SKILL_EXPERIENCED,
+		SKILL_COOKING             = SKILL_MASTER,
+		SKILL_BOTANY              = SKILL_MASTER,
 		SKILL_MEDICAL             = SKILL_BASIC,
-		SKILL_CHEMISTRY           = SKILL_ADEPT
+		SKILL_CHEMISTRY           = SKILL_TRAINED
 	)
 
 /obj/item/robot_module/clerical/butler/finalize_equipment()

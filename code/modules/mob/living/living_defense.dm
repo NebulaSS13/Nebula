@@ -128,7 +128,7 @@
 		playsound(loc, 'sound/weapons/pierce.ogg', 25, 1, -1)
 		if(skill_fail_prob(SKILL_COMBAT, 75))
 			SET_STATUS_MAX(src, STAT_WEAK, rand(3,5))
-		if(M.skill_fail_prob(SKILL_HAULING, 100))
+		if(M.skill_fail_prob(SKILL_ATHLETICS, 100))
 			SET_STATUS_MAX(M, STAT_WEAK, rand(4,8))
 		M.visible_message(SPAN_DANGER("\The [M] collides with \the [src]!"))
 

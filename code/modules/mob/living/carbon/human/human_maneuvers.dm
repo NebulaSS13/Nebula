@@ -1,6 +1,6 @@
 /mob/living/carbon/human/get_acrobatics_multiplier(var/decl/maneuver/attempting_maneuver)
-	. = 0.5 + ((get_skill_value(SKILL_HAULING) - SKILL_MIN)/(SKILL_MAX - SKILL_MIN))
-	if(skill_check(SKILL_HAULING, SKILL_BASIC))
+	. = 0.5 + ((get_skill_value(SKILL_ATHLETICS) - SKILL_MIN)/(SKILL_MAX - SKILL_MIN))
+	if(skill_check(SKILL_ATHLETICS, SKILL_BASIC))
 		. = max(..(), .)
 
 /mob/living/carbon/human/get_jump_distance()

@@ -96,7 +96,7 @@
 	//Add the organ but in a detached state
 	target.add_organ(E, P, FALSE, TRUE, TRUE)
 
-	if(BP_IS_PROSTHETIC(E) && prob(user.skill_fail_chance(SKILL_DEVICES, 50, SKILL_ADEPT)))
+	if(BP_IS_PROSTHETIC(E) && prob(user.skill_fail_chance(SKILL_DEVICES, 50, SKILL_TRAINED)))
 		E.add_random_ailment()
 
 /decl/surgery_step/limb/attach/fail_step(mob/living/user, mob/living/target, target_zone, obj/item/tool)

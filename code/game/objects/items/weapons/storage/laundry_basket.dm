@@ -1,7 +1,7 @@
 // -----------------------------
 //        Laundry Basket
 // -----------------------------
-// An item designed for hauling the belongings of a character.
+// An item designed for athletics the belongings of a character.
 // So this cannot be abused for other uses, we make it two-handed and inable to have its storage looked into.
 /obj/item/storage/laundry_basket
 	name = "laundry basket"

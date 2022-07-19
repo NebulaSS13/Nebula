@@ -376,7 +376,7 @@ var/global/list/mob/living/forced_ambiance_list = new
 
 	if(istype(mob,/mob/living/carbon/human/))
 		var/mob/living/carbon/human/H = mob
-		if(prob(H.skill_fail_chance(SKILL_EVA, 100, SKILL_ADEPT)))
+		if(prob(H.skill_fail_chance(SKILL_EVA, 100, SKILL_TRAINED)))
 			if(!MOVING_DELIBERATELY(H))
 				ADJ_STATUS(H, STAT_STUN, 6)
 				ADJ_STATUS(H, STAT_WEAK, 6)

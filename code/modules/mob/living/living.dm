@@ -866,7 +866,7 @@ default behaviour is:
 	return
 
 /mob/living/handle_reading_literacy(var/mob/user, var/text_content, var/skip_delays, var/digital = FALSE)
-	if(skill_check(SKILL_LITERACY, SKILL_ADEPT))
+	if(skill_check(SKILL_LITERACY, SKILL_TRAINED))
 		. = text_content
 	else
 		if(!skip_delays)
@@ -880,7 +880,7 @@ default behaviour is:
 			. = ..()
 
 /mob/living/handle_writing_literacy(var/mob/user, var/text_content, var/skip_delays)
-	if(skill_check(SKILL_LITERACY, SKILL_ADEPT))
+	if(skill_check(SKILL_LITERACY, SKILL_TRAINED))
 		. = text_content
 	else
 		if(!skip_delays)

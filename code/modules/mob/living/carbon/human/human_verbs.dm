@@ -301,9 +301,9 @@
 	if(!current_limb || !S || !U)
 		return
 
-	var/fail_prob = U.skill_fail_chance(SKILL_MEDICAL, 60, SKILL_ADEPT, 3)
+	var/fail_prob = U.skill_fail_chance(SKILL_MEDICAL, 60, SKILL_TRAINED, 3)
 	if(self)
-		fail_prob += U.skill_fail_chance(SKILL_MEDICAL, 20, SKILL_EXPERT, 1)
+		fail_prob += U.skill_fail_chance(SKILL_MEDICAL, 20, SKILL_EXPERIENCED, 1)
 	var/decl/pronouns/G = get_pronouns()
 	if(prob(fail_prob))
 		visible_message( \

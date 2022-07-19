@@ -6,10 +6,10 @@
 	alt_titles = list()	
 	outfit_type = /decl/hierarchy/outfit/job/tradeship/hand/researcher/junior
 	min_skill = list(
-		SKILL_LITERACY = SKILL_ADEPT,
+		SKILL_LITERACY = SKILL_TRAINED,
 		SKILL_COMPUTER = SKILL_BASIC,
 		SKILL_DEVICES  = SKILL_BASIC,
-		SKILL_SCIENCE  = SKILL_ADEPT
+		SKILL_SCIENCE  = SKILL_TRAINED
 	)
 	max_skill = list(
 		SKILL_ANATOMY  = SKILL_MAX,
@@ -47,13 +47,13 @@
 	alt_titles = list()
 	outfit_type = /decl/hierarchy/outfit/job/tradeship/hand/researcher
 	min_skill = list(
-		SKILL_LITERACY = SKILL_ADEPT,
+		SKILL_LITERACY = SKILL_TRAINED,
 		SKILL_COMPUTER = SKILL_BASIC,
-		SKILL_FINANCE  = SKILL_ADEPT,
+		SKILL_FINANCE  = SKILL_TRAINED,
 		SKILL_BOTANY   = SKILL_BASIC,
 		SKILL_ANATOMY  = SKILL_BASIC,
 		SKILL_DEVICES  = SKILL_BASIC,
-		SKILL_SCIENCE  = SKILL_ADEPT
+		SKILL_SCIENCE  = SKILL_TRAINED
 	)
 	max_skill = list(
 		SKILL_ANATOMY  = SKILL_MAX,

@@ -65,10 +65,10 @@
 	not_random_selectable = 1
 	outfit_type = /decl/hierarchy/outfit/job/security/hos
 	min_skill = list(
-		SKILL_LITERACY  = SKILL_ADEPT,
+		SKILL_LITERACY  = SKILL_TRAINED,
 		SKILL_EVA       = SKILL_BASIC,
 		SKILL_COMBAT    = SKILL_BASIC,
-		SKILL_WEAPONS   = SKILL_ADEPT,
+		SKILL_WEAPONS   = SKILL_TRAINED,
 		SKILL_FORENSICS = SKILL_BASIC
 	)
 	max_skill = list(
@@ -121,10 +121,10 @@
 	outfit_type = /decl/hierarchy/outfit/job/security/warden
 	guestbanned = 1
 	min_skill = list(
-		SKILL_LITERACY  = SKILL_ADEPT,
+		SKILL_LITERACY  = SKILL_TRAINED,
 		SKILL_EVA       = SKILL_BASIC,
 		SKILL_COMBAT    = SKILL_BASIC,
-		SKILL_WEAPONS   = SKILL_ADEPT,
+		SKILL_WEAPONS   = SKILL_TRAINED,
 		SKILL_FORENSICS = SKILL_BASIC
 	)
 	max_skill = list(
@@ -168,12 +168,12 @@
 	outfit_type = /decl/hierarchy/outfit/job/security/detective
 	guestbanned = 1
 	min_skill = list(
-		SKILL_LITERACY  = SKILL_ADEPT,
+		SKILL_LITERACY  = SKILL_TRAINED,
 		SKILL_COMPUTER  = SKILL_BASIC,
 		SKILL_EVA       = SKILL_BASIC,
 		SKILL_COMBAT    = SKILL_BASIC,
 		SKILL_WEAPONS   = SKILL_BASIC,
-		SKILL_FORENSICS = SKILL_ADEPT
+		SKILL_FORENSICS = SKILL_TRAINED
 	)
 	max_skill = list(
 		SKILL_COMBAT    = SKILL_MAX,
@@ -219,7 +219,7 @@
 		SKILL_LITERACY  = SKILL_BASIC,
 		SKILL_EVA       = SKILL_BASIC,
 		SKILL_COMBAT    = SKILL_BASIC,
-		SKILL_WEAPONS   = SKILL_ADEPT,
+		SKILL_WEAPONS   = SKILL_TRAINED,
 		SKILL_FORENSICS = SKILL_BASIC
 	)
 	max_skill = list(

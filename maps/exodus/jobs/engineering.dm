@@ -58,13 +58,13 @@
 	minimal_player_age = 14
 	outfit_type = /decl/hierarchy/outfit/job/engineering/chief_engineer
 	min_skill = list(
-		SKILL_LITERACY     = SKILL_ADEPT,
-		SKILL_COMPUTER     = SKILL_ADEPT,
-		SKILL_EVA          = SKILL_ADEPT,
-		SKILL_CONSTRUCTION = SKILL_ADEPT,
-		SKILL_ELECTRICAL   = SKILL_ADEPT,
-		SKILL_ATMOS        = SKILL_ADEPT,
-		SKILL_ENGINES      = SKILL_EXPERT
+		SKILL_LITERACY     = SKILL_TRAINED,
+		SKILL_COMPUTER     = SKILL_TRAINED,
+		SKILL_EVA          = SKILL_TRAINED,
+		SKILL_CONSTRUCTION = SKILL_TRAINED,
+		SKILL_ELECTRICAL   = SKILL_TRAINED,
+		SKILL_ATMOS        = SKILL_TRAINED,
+		SKILL_ENGINES      = SKILL_EXPERIENCED
 	)
 
 	max_skill = list(
@@ -128,10 +128,10 @@
 	)
 	outfit_type = /decl/hierarchy/outfit/job/engineering/engineer
 	min_skill = list(
-		SKILL_LITERACY     = SKILL_ADEPT,
+		SKILL_LITERACY     = SKILL_TRAINED,
 		SKILL_COMPUTER     = SKILL_BASIC,
 	    SKILL_EVA          = SKILL_BASIC,
-	    SKILL_CONSTRUCTION = SKILL_ADEPT,
+	    SKILL_CONSTRUCTION = SKILL_TRAINED,
 	    SKILL_ELECTRICAL   = SKILL_BASIC,
 	    SKILL_ATMOS        = SKILL_BASIC,
 	    SKILL_ENGINES      = SKILL_BASIC

@@ -69,7 +69,7 @@ var/global/list/random_chem_interaction_blacklist = list(
 	var/chem_skill = user.get_skill_value(SKILL_CHEMISTRY)
 	if(chem_skill < SKILL_BASIC)
 		dat += "You analyze the strange liquid. The readings are confusing; could it maybe be juice?"
-	else if(chem_skill < SKILL_ADEPT)
+	else if(chem_skill < SKILL_TRAINED)
 		dat += "You analyze the strange liquid. Based on the readings, you are skeptical that this is safe to drink."
 	else
 		dat += "The readings are very unsual and intriguing. You suspect it may be of alien origin."
@@ -84,7 +84,7 @@ var/global/list/random_chem_interaction_blacklist = list(
 				harmful = 1
 			if(effect.desc)
 				effect_descs += effect.desc
-		if(sci_skill <= SKILL_ADEPT)
+		if(sci_skill <= SKILL_TRAINED)
 			if(beneficial)
 				dat += "The scan suggests that the chemical has some potentially beneficial effects!"
 			if(harmful)

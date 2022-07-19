@@ -66,7 +66,7 @@
 		flick("[icon_state]_[weight]", src)
 		if(do_after(H, 20 + (weight * 10)))
 			playsound(src.loc, 'sound/effects/weightdrop.ogg', 25, 1)
-			var/skill = max_weight * H.get_skill_value(SKILL_HAULING)/SKILL_MAX
+			var/skill = max_weight * H.get_skill_value(SKILL_ATHLETICS)/SKILL_MAX
 			var/message
 			if(skill < weight)
 				if(weight - skill > max_weight/2)

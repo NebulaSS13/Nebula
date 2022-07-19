@@ -259,7 +259,7 @@
 	. = ..()
 	var/list/extra_data = list("<br>")
 	if(atmosphere)
-		if(user.skill_check(SKILL_SCIENCE, SKILL_EXPERT) || user.skill_check(SKILL_ATMOS, SKILL_EXPERT))
+		if(user.skill_check(SKILL_SCIENCE, SKILL_EXPERIENCED) || user.skill_check(SKILL_ATMOS, SKILL_EXPERIENCED))
 			var/list/gases = list()
 			for(var/g in atmosphere.gas)
 				if(atmosphere.gas[g] > atmosphere.total_moles * 0.05)
@@ -278,7 +278,7 @@
 	if(animals.len && user.skill_check(SKILL_SCIENCE, SKILL_BASIC))
 		extra_data += "Life traces detected"
 
-	if(LAZYLEN(spawned_features) && user.skill_check(SKILL_SCIENCE, SKILL_ADEPT))
+	if(LAZYLEN(spawned_features) && user.skill_check(SKILL_SCIENCE, SKILL_TRAINED))
 		var/ruin_num = 0
 		for(var/datum/map_template/R in spawned_features)
 			if(!(R.get_ruin_tags() & RUIN_NATURAL))

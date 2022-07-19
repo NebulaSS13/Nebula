@@ -54,7 +54,7 @@
 		is_jammed = 1
 		var/mob/user = loc
 		if(istype(user))
-			if(prob(user.skill_fail_chance(SKILL_WEAPONS, 100, SKILL_PROF)))
+			if(prob(user.skill_fail_chance(SKILL_WEAPONS, 100, SKILL_MASTER)))
 				return null
 			else
 				to_chat(user, "<span class='notice'>You reflexively clear the jam on \the [src].</span>")
@@ -246,7 +246,7 @@
 		to_chat(user, "<span class='warning'>It looks jammed.</span>")
 	if(ammo_magazine)
 		to_chat(user, "It has \a [ammo_magazine] loaded.")
-	if(user.skill_check(SKILL_WEAPONS, SKILL_ADEPT))
+	if(user.skill_check(SKILL_WEAPONS, SKILL_TRAINED))
 		to_chat(user, "Has [getAmmo()] round\s remaining.")
 
 /obj/item/gun/projectile/proc/getAmmo()

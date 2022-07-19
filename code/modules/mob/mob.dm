@@ -217,7 +217,7 @@
 	for(var/obj/item/grab/G as anything in get_active_grabs())
 		. = max(., G.grab_slowdown())
 	. *= (0.8 ** size_strength_mod())
-	. *= (0.5 + 1.5 * (SKILL_MAX - get_skill_value(SKILL_HAULING))/(SKILL_MAX - SKILL_MIN))
+	. *= (0.5 + 1.5 * (SKILL_MAX - get_skill_value(SKILL_ATHLETICS))/(SKILL_MAX - SKILL_MIN))
 
 //Determines mob size/strength effects for slowdown purposes. Standard is 0; can be pos/neg.
 /mob/proc/size_strength_mod()

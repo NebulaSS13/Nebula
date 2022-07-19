@@ -7,7 +7,7 @@ var/global/list/skills = list()
 	var/sort_priority = 0                 // Used for sort order in lists/presentation.
 	var/desc = "Placeholder skill"        // Generic description of this skill.
 	var/difficulty = SKILL_AVERAGE        //Used to compute how expensive the skill is
-	var/default_max = SKILL_ADEPT         //Makes the skill capped at this value in selection unless overriden at job level.
+	var/default_max = SKILL_TRAINED         //Makes the skill capped at this value in selection unless overriden at job level.
 	var/prerequisites                     // A list of skill prerequisites, if needed.
 
    	// Names for different skill values, in order from 1 up.
@@ -21,9 +21,9 @@ var/global/list/skills = list()
 
 /decl/hierarchy/skill/proc/get_cost(var/level)
 	switch(level)
-		if(SKILL_BASIC, SKILL_ADEPT)
+		if(SKILL_BASIC, SKILL_TRAINED)
 			return difficulty
-		if(SKILL_EXPERT, SKILL_PROF)
+		if(SKILL_EXPERIENCED, SKILL_MASTER)
 			return 2*difficulty
 		else
 			return 0
@@ -111,7 +111,7 @@ var/global/list/skills = list()
 
 /decl/hierarchy/skill/organizational/finance/update_special_effects(mob/mob, level)
 	mob.remove_language(/decl/language/legal)
-	if(level >= SKILL_EXPERT)
+	if(level >= SKILL_EXPERIENCED)
 		mob.add_language(/decl/language/legal)
 
 // Category: General
@@ -135,7 +135,7 @@ var/global/list/skills = list()
 		"Untrained"   = "You are unfamiliar with exosuit controls, and if you attempt to use them you are liable to make mistakes.",
 		"Trained"     = "You are proficient in exosuit operation and safety, and can use them without penalties."
 	)
-	prerequisites = list(SKILL_EVA = SKILL_ADEPT)
+	prerequisites = list(SKILL_EVA = SKILL_TRAINED)
 	default_max = SKILL_BASIC
 	difficulty = SKILL_AVERAGE
 
@@ -151,11 +151,11 @@ var/global/list/skills = list()
 		"Master"      = "Not only are you an exceptional pilot, but you have mastered peripheral functions such as stellar navigation and FTL jump plotting. You have experience performing complex maneuvers, managing squadrons of small craft, and operating in hostile environments.<br>- You can mostly avoid meteors on normal speed using any shuttlecrafts.<br>- Less meteors will hit the ship while passing through meteor fields. <br>- You can manually land shuttles on exoplanets."
 	)
 	difficulty = SKILL_AVERAGE
-	default_max = SKILL_ADEPT
+	default_max = SKILL_TRAINED
 
-/decl/hierarchy/skill/general/hauling
+/decl/hierarchy/skill/general/athletics
 	name = "Athletics"
-	uid =  "skill_hauling"
+	uid =  "SKILL_ATHLETICS"
 	desc = "Your ability to perform tasks requiring great strength, dexterity, or endurance."
 	levels = list(
 		"Unskilled"   = "You are not used to manual labor, tire easily, and are likely not in great shape. Extended heavy labor may be dangerous for you.<br>- You can pull objects but start to generate Lactate after tiring out. Your strength increases with level.<br>- You can throw objects. Their speed, thrown distance, and force increases with level.<br>- You can sprint, the stamina consumption rate is lowered with each level.<br>- You can leap by holding Ctrl and clicking on a distant target with grab intent, leap range is increased and chances of falling over are decreased with each level.",
@@ -221,9 +221,9 @@ var/global/list/skills = list()
 	switch(level)
 		if(SKILL_BASIC)
 			return difficulty
-		if(SKILL_ADEPT, SKILL_EXPERT)
+		if(SKILL_TRAINED, SKILL_EXPERIENCED)
 			return 2*difficulty
-		if(SKILL_PROF)
+		if(SKILL_MASTER)
 			return 4*difficulty
 		else
 			return 0
@@ -244,9 +244,9 @@ var/global/list/skills = list()
 	switch(level)
 		if(SKILL_BASIC)
 			return difficulty
-		if(SKILL_ADEPT)
+		if(SKILL_TRAINED)
 			return 2*difficulty
-		if(SKILL_EXPERT, SKILL_PROF)
+		if(SKILL_EXPERIENCED, SKILL_MASTER)
 			return 4*difficulty
 		else
 			return 0
@@ -265,9 +265,9 @@ var/global/list/skills = list()
 
 /decl/hierarchy/skill/security/forensics/get_cost(var/level)
 	switch(level)
-		if(SKILL_BASIC, SKILL_ADEPT, SKILL_EXPERT)
+		if(SKILL_BASIC, SKILL_TRAINED, SKILL_EXPERIENCED)
 			return difficulty * 2
-		if(SKILL_PROF)
+		if(SKILL_MASTER)
 			return 3 * difficulty
 		else
 			return 0

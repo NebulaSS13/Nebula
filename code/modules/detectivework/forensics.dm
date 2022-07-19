@@ -64,7 +64,7 @@
 		return 1 //I'll admit I am just imitating examine.dm
 
 
-	if(istype(A, /obj/item) && skill_check(SKILL_FORENSICS, SKILL_ADEPT) && get_dist(src, A) <= 1)
+	if(istype(A, /obj/item) && skill_check(SKILL_FORENSICS, SKILL_TRAINED) && get_dist(src, A) <= 1)
 		var/obj/item/I = A
 		to_chat(src, SPAN_INFO("As a murder weapon, it's [english_list(I.get_autopsy_descriptors())]."))
 

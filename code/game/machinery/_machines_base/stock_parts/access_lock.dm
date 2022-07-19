@@ -50,7 +50,7 @@
 	. = ..()
 	if(locked)
 		to_chat(user, "The lock is engaged.")
-	if(emagged && user.skill_check_multiple(list(SKILL_FORENSICS = SKILL_EXPERT, SKILL_COMPUTER = SKILL_EXPERT)))
+	if(emagged && user.skill_check_multiple(list(SKILL_FORENSICS = SKILL_EXPERIENCED, SKILL_COMPUTER = SKILL_EXPERIENCED)))
 		to_chat(user, SPAN_WARNING("On close inspection, there is something odd about the interface. You suspect it may have been tampered with."))
 
 /obj/item/stock_parts/access_lock/attackby(obj/item/W, mob/user)

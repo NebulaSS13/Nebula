@@ -86,7 +86,7 @@
 		return
 
 	// skillcheck for slipping
-	if(!prob(min(100, skill_fail_chance(SKILL_HAULING, 100, SKILL_MAX+1)/(3/T.wet))))
+	if(!prob(min(100, skill_fail_chance(SKILL_ATHLETICS, 100, SKILL_MAX+1)/(3/T.wet))))
 		return
 
 	var/slip_dist = 1

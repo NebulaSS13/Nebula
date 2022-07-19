@@ -2,7 +2,7 @@
 	holder_type = /obj/machinery/inertial_damper
 	wire_count = 5
 	descriptions = list(
-		new /datum/wire_description(DAMPER_WIRE_POWER, "This wire seems to be carrying a heavy current.", SKILL_EXPERT),
+		new /datum/wire_description(DAMPER_WIRE_POWER, "This wire seems to be carrying a heavy current.", SKILL_EXPERIENCED),
 		new /datum/wire_description(DAMPER_WIRE_HACK, "This wire seems designed to adjust the data output cache."),
 		new /datum/wire_description(DAMPER_WIRE_CONTROL, "This wire connects to the main control panel."),
 		new /datum/wire_description(DAMPER_WIRE_AICONTROL, "This wire connects to automated control systems.")

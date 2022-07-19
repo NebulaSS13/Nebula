@@ -54,9 +54,9 @@
 	not_random_selectable = 1
 	outfit_type = /decl/hierarchy/outfit/job/medical/cmo
 	min_skill = list(
-		SKILL_LITERACY  = SKILL_ADEPT,
-		SKILL_MEDICAL   = SKILL_EXPERT,
-		SKILL_ANATOMY   = SKILL_EXPERT,
+		SKILL_LITERACY  = SKILL_TRAINED,
+		SKILL_MEDICAL   = SKILL_EXPERIENCED,
+		SKILL_ANATOMY   = SKILL_EXPERIENCED,
 		SKILL_CHEMISTRY = SKILL_BASIC
 	)
 	max_skill = list(
@@ -110,7 +110,7 @@
 	)
 	outfit_type = /decl/hierarchy/outfit/job/medical/doctor
 	min_skill = list(
-		SKILL_LITERACY = SKILL_ADEPT,
+		SKILL_LITERACY = SKILL_TRAINED,
 		SKILL_EVA      = SKILL_BASIC,
 		SKILL_MEDICAL  = SKILL_BASIC,
 		SKILL_ANATOMY  = SKILL_BASIC
@@ -151,13 +151,13 @@
 	)
 	outfit_type = /decl/hierarchy/outfit/job/medical/chemist
 	min_skill = list(
-		SKILL_LITERACY  = SKILL_ADEPT,
-		SKILL_MEDICAL   = SKILL_ADEPT,
-		SKILL_CHEMISTRY = SKILL_ADEPT
+		SKILL_LITERACY  = SKILL_TRAINED,
+		SKILL_MEDICAL   = SKILL_TRAINED,
+		SKILL_CHEMISTRY = SKILL_TRAINED
 	)
 	max_skill = list(
-		SKILL_MEDICAL   = SKILL_ADEPT,
-		SKILL_ANATOMY	= SKILL_ADEPT,
+		SKILL_MEDICAL   = SKILL_TRAINED,
+		SKILL_ANATOMY	= SKILL_TRAINED,
 		SKILL_CHEMISTRY = SKILL_MAX
 	)
 	skill_points = 16
@@ -188,7 +188,7 @@
 	)
 	outfit_type = /decl/hierarchy/outfit/job/medical/psychiatrist
 	min_skill = list(
-		SKILL_LITERACY = SKILL_ADEPT,
+		SKILL_LITERACY = SKILL_TRAINED,
 		SKILL_MEDICAL  = SKILL_BASIC
 	)
 	max_skill = list(

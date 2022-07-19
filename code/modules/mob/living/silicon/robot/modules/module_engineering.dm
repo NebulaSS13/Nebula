@@ -64,12 +64,12 @@
 	)
 	emag = /obj/item/baton/robot/electrified_arm
 	skills = list(
-		SKILL_LITERACY     = SKILL_ADEPT,
-		SKILL_ATMOS        = SKILL_PROF,
-		SKILL_ENGINES      = SKILL_PROF,
-		SKILL_CONSTRUCTION = SKILL_PROF,
-		SKILL_ELECTRICAL   = SKILL_PROF,
-		SKILL_COMPUTER     = SKILL_EXPERT
+		SKILL_LITERACY     = SKILL_TRAINED,
+		SKILL_ATMOS        = SKILL_MASTER,
+		SKILL_ENGINES      = SKILL_MASTER,
+		SKILL_CONSTRUCTION = SKILL_MASTER,
+		SKILL_ELECTRICAL   = SKILL_MASTER,
+		SKILL_COMPUTER     = SKILL_EXPERIENCED
 	)
 
 /obj/item/robot_module/engineering/finalize_synths()

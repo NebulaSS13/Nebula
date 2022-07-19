@@ -69,7 +69,7 @@ Robots and antags can instruct.
 	if(!..())
 		return
 	for(var/decl/hierarchy/skill/S in global.skills)
-		if(skillset.owner.skill_check(S.type, SKILL_EXPERT))
+		if(skillset.owner.skill_check(S.type, SKILL_EXPERIENCED))
 			return 1
 
 /mob/proc/can_instruct(mob/living/carbon/human/target, var/get_options = FALSE)
@@ -95,7 +95,7 @@ Robots and antags can instruct.
 		. = TRUE
 	else
 		for(var/decl/hierarchy/skill/S in global.skills)
-			if(!target.skill_check(S.type, SKILL_BASIC) && skill_check(S.type, SKILL_EXPERT))
+			if(!target.skill_check(S.type, SKILL_BASIC) && skill_check(S.type, SKILL_EXPERIENCED))
 				LAZYSET(., S.name, S)
 
 /mob/proc/instruct(mob/living/carbon/human/target as mob in oview(2))
@@ -114,7 +114,7 @@ Robots and antags can instruct.
 		return
 
 	var/decl/hierarchy/skill/skill = options[choice]
-	if(!do_skilled(6 SECONDS, skill.type, target) || !can_instruct(target) || !skill_check(skill.type, SKILL_EXPERT))
+	if(!do_skilled(6 SECONDS, skill.type, target) || !can_instruct(target) || !skill_check(skill.type, SKILL_EXPERIENCED))
 		return
 
 	target.buff_skill(list(skill.type = 1), buff_type = /datum/skill_buff/instruct)
@@ -182,9 +182,9 @@ The Appraise verb. Used on objects to estimate their value.
 	switch(skill)
 		if(SKILL_MAX)
 			return 5
-		if(SKILL_EXPERT)
+		if(SKILL_EXPERIENCED)
 			return 10
-		if(SKILL_ADEPT)
+		if(SKILL_TRAINED)
 			return 20
 		else
 			return 50
@@ -202,7 +202,7 @@ The Appraise verb. Used on objects to estimate their value.
 /datum/skill_verb/noirvision/should_see_verb()
 	if(!..())
 		return
-	if(!skillset.owner.skill_check(SKILL_FORENSICS, SKILL_PROF))
+	if(!skillset.owner.skill_check(SKILL_FORENSICS, SKILL_MASTER))
 		return
 	return 1
 

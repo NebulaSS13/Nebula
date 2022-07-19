@@ -194,7 +194,7 @@
 	// Reset the machine.
 	addtimer(CALLBACK(src, .proc/end_grind, user), 6 SECONDS, TIMER_UNIQUE)
 
-	var/skill_factor = CLAMP01(1 + 0.3*(user.get_skill_value(skill_to_check) - SKILL_EXPERT)/(SKILL_EXPERT - SKILL_MIN))
+	var/skill_factor = CLAMP01(1 + 0.3*(user.get_skill_value(skill_to_check) - SKILL_EXPERIENCED)/(SKILL_EXPERIENCED - SKILL_MIN))
 	// Process.
 	for (var/obj/item/O in holdingitems)
 

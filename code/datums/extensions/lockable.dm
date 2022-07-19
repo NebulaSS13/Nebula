@@ -122,7 +122,7 @@
 			user.show_message(SPAN_NOTICE("Now attempting to reset internal memory, please hold."), 1)
 			l_hacking = 1
 			if (do_after(user, 100 * user.skill_delay_mult(SKILL_ELECTRICAL), holder))
-				if (prob(user.skill_fail_chance(SKILL_DEVICES, 40, SKILL_EXPERT)))
+				if (prob(user.skill_fail_chance(SKILL_DEVICES, 40, SKILL_EXPERIENCED)))
 					l_setshort = FALSE
 					user.show_message(SPAN_NOTICE("Internal memory reset. Please give it a few seconds to reinitialize."), 1)
 					addtimer(CALLBACK(src, /datum/extension/lockable/proc/reset_memory), 3 SECONDS)

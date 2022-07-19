@@ -279,7 +279,7 @@
 		else
 			playsound(target.loc, 'sound/items/Ratchet.ogg', 50, 1)
 
-		if(BP_IS_PROSTHETIC(O) && prob(user.skill_fail_chance(SKILL_DEVICES, 50, SKILL_ADEPT)))
+		if(BP_IS_PROSTHETIC(O) && prob(user.skill_fail_chance(SKILL_DEVICES, 50, SKILL_TRAINED)))
 			O.add_random_ailment()
 
 /decl/surgery_step/internal/replace_organ/fail_step(mob/living/user, mob/living/target, target_zone, obj/item/tool)

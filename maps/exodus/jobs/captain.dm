@@ -17,9 +17,9 @@
 	must_fill = 1
 	not_random_selectable = 1
 	min_skill = list(
-		SKILL_LITERACY    = SKILL_ADEPT,
-		SKILL_SCIENCE     = SKILL_ADEPT,
-		SKILL_PILOT       = SKILL_ADEPT
+		SKILL_LITERACY    = SKILL_TRAINED,
+		SKILL_SCIENCE     = SKILL_TRAINED,
+		SKILL_PILOT       = SKILL_TRAINED
 	)
 	max_skill = list(
 		SKILL_PILOT       = SKILL_MAX,
@@ -134,7 +134,7 @@
 	)
 	outfit_type = /decl/hierarchy/outfit/job/hop
 	min_skill = list(
-		SKILL_LITERACY    = SKILL_ADEPT,
+		SKILL_LITERACY    = SKILL_TRAINED,
 		SKILL_COMPUTER    = SKILL_BASIC,
 		SKILL_PILOT       = SKILL_BASIC
 	)

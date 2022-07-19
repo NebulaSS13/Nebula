@@ -2,7 +2,7 @@
 /datum/skill_buff/augment/muscle
 
 /obj/item/organ/internal/augment/boost/muscle
-	buffs = list(SKILL_HAULING = 1)
+	buffs = list(SKILL_ATHLETICS = 1)
 	buffpath = /datum/skill_buff/augment/muscle
 	name = "mechanical muscles"
 	allowed_organs = list(BP_AUGMENT_R_LEG, BP_AUGMENT_L_LEG)
@@ -24,7 +24,7 @@
 		other = GET_INTERNAL_ORGAN(owner, BP_AUGMENT_L_LEG)
 	if(other && istype(other))
 		var/succesful = TRUE
-		if(owner.get_skill_value(SKILL_HAULING) < SKILL_PROF)
+		if(owner.get_skill_value(SKILL_ATHLETICS) < SKILL_MASTER)
 			succesful = FALSE
 			var/datum/skill_buff/augment/muscle/A
 			A = owner.buff_skill(buffs, 0, buffpath)

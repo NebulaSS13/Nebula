@@ -36,7 +36,7 @@
 	outfit_type = /decl/hierarchy/outfit/job/chaplain
 	is_holy = TRUE
 	min_skill = list(
-		SKILL_LITERACY = SKILL_ADEPT,
+		SKILL_LITERACY = SKILL_TRAINED,
 		SKILL_FINANCE  = SKILL_BASIC
 	)
 	skill_points = 20
@@ -58,7 +58,7 @@
 	alt_titles = list("Barista")
 	outfit_type = /decl/hierarchy/outfit/job/service/bartender
 	min_skill = list(
-		SKILL_LITERACY  = SKILL_ADEPT,
+		SKILL_LITERACY  = SKILL_TRAINED,
 		SKILL_COOKING   = SKILL_BASIC,
 	    SKILL_BOTANY    = SKILL_BASIC,
 	    SKILL_CHEMISTRY = SKILL_BASIC
@@ -79,8 +79,8 @@
 	alt_titles = list("Cook")
 	outfit_type = /decl/hierarchy/outfit/job/service/chef
 	min_skill = list(
-		SKILL_LITERACY  = SKILL_ADEPT,
-		SKILL_COOKING   = SKILL_ADEPT,
+		SKILL_LITERACY  = SKILL_TRAINED,
+		SKILL_COOKING   = SKILL_TRAINED,
 	    SKILL_BOTANY    = SKILL_BASIC,
 	    SKILL_CHEMISTRY = SKILL_BASIC
 	)
@@ -100,7 +100,7 @@
 	alt_titles = list("Hydroponicist")
 	outfit_type = /decl/hierarchy/outfit/job/service/gardener
 	min_skill = list(
-		SKILL_LITERACY  = SKILL_ADEPT,
+		SKILL_LITERACY  = SKILL_TRAINED,
 		SKILL_BOTANY    = SKILL_BASIC,
 	    SKILL_CHEMISTRY = SKILL_BASIC
 	)
@@ -136,9 +136,9 @@
 	ideal_character_age = 40
 	outfit_type = /decl/hierarchy/outfit/job/cargo/qm
 	min_skill = list(
-		SKILL_LITERACY = SKILL_ADEPT,
+		SKILL_LITERACY = SKILL_TRAINED,
 	    SKILL_FINANCE  = SKILL_BASIC,
-	    SKILL_HAULING  = SKILL_BASIC,
+	    SKILL_ATHLETICS  = SKILL_BASIC,
 	    SKILL_EVA      = SKILL_BASIC,
 	    SKILL_PILOT    = SKILL_BASIC
 	)
@@ -175,9 +175,9 @@
 	)
 	outfit_type = /decl/hierarchy/outfit/job/cargo/cargo_tech
 	min_skill = list(
-		SKILL_LITERACY = SKILL_ADEPT,
+		SKILL_LITERACY = SKILL_TRAINED,
 		SKILL_FINANCE  = SKILL_BASIC,
-		SKILL_HAULING  = SKILL_BASIC
+		SKILL_ATHLETICS  = SKILL_BASIC
 	)
 	max_skill = list(
 		SKILL_PILOT    = SKILL_MAX
@@ -215,8 +215,8 @@
 	)
 	outfit_type = /decl/hierarchy/outfit/job/cargo/mining
 	min_skill = list(
-		SKILL_LITERACY = SKILL_ADEPT,
-		SKILL_HAULING  = SKILL_ADEPT,
+		SKILL_LITERACY = SKILL_TRAINED,
+		SKILL_ATHLETICS  = SKILL_TRAINED,
 	    SKILL_EVA      = SKILL_BASIC
 	)
 	max_skill = list(
@@ -251,8 +251,8 @@
 	)
 	outfit_type = /decl/hierarchy/outfit/job/service/janitor
 	min_skill = list(
-		SKILL_LITERACY = SKILL_ADEPT,
-		SKILL_HAULING  = SKILL_BASIC
+		SKILL_LITERACY = SKILL_TRAINED,
+		SKILL_ATHLETICS  = SKILL_BASIC
 	)
 	event_categories = list(ASSIGNMENT_JANITOR)
 
@@ -271,7 +271,7 @@
 	alt_titles = list("Journalist")
 	outfit_type = /decl/hierarchy/outfit/job/librarian
 	min_skill = list(
-		SKILL_LITERACY = SKILL_ADEPT,
+		SKILL_LITERACY = SKILL_TRAINED,
 		SKILL_FINANCE  = SKILL_BASIC
 	)
 	skill_points = 20
@@ -298,7 +298,7 @@
 	minimal_player_age = 10
 	outfit_type = /decl/hierarchy/outfit/job/internal_affairs_agent
 	min_skill = list(
-		SKILL_LITERACY = SKILL_ADEPT,
+		SKILL_LITERACY = SKILL_TRAINED,
 		SKILL_FINANCE  = SKILL_BASIC
 	)
 	skill_points = 20

@@ -51,7 +51,7 @@
 		to_chat(assailant, SPAN_WARNING("\The [affecting] is missing that body part!"))
 		return FALSE
 
-	if(!assailant.skill_check(SKILL_COMBAT, SKILL_ADEPT))
+	if(!assailant.skill_check(SKILL_COMBAT, SKILL_TRAINED))
 		to_chat(assailant, SPAN_WARNING("You clumsily attempt to jointlock \the [affecting]'s [O.name], but fail!"))
 		return FALSE
 
@@ -84,7 +84,7 @@
 		to_chat(assailant, SPAN_WARNING("\The [affecting] is missing that body part!"))
 		return  FALSE
 
-	if(!assailant.skill_check(SKILL_COMBAT, SKILL_ADEPT))
+	if(!assailant.skill_check(SKILL_COMBAT, SKILL_TRAINED))
 		to_chat(assailant, SPAN_WARNING("You clumsily attempt to dislocate \the [affecting]'s [O.name], but fail!"))
 		return FALSE
 
@@ -271,7 +271,7 @@
 	var/mob/living/affecting = G.get_affecting_mob()
 	if(!affecting)
 		return
-	if(!user.skill_check(SKILL_COMBAT, SKILL_ADEPT))
+	if(!user.skill_check(SKILL_COMBAT, SKILL_TRAINED))
 		return
 	if(user.a_intent != I_HURT)
 		return 0 // Not trying to hurt them.

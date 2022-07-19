@@ -21,7 +21,7 @@
 			return
 
 		var/toxin_amt = REAGENT_VOLUME(reagents, /decl/material/liquid/carpotoxin)
-		if(toxin_amt && !prob(user.skill_fail_chance(SKILL_COOKING, 100, SKILL_PROF)))
+		if(toxin_amt && !prob(user.skill_fail_chance(SKILL_COOKING, 100, SKILL_MASTER)))
 			reagents.remove_reagent(/decl/material/liquid/carpotoxin, toxin_amt)
 		user.visible_message("<span class='notice'>\The [user] slices \the [src] into thin strips.</span>")
 

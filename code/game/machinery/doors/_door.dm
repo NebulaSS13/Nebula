@@ -357,7 +357,7 @@
 		to_chat(user, "\The [src] has some minor scuffing.")
 
 	var/mob/living/carbon/human/H = user
-	if (emagged && istype(H) && (H.skill_check(SKILL_COMPUTER, SKILL_ADEPT) || H.skill_check(SKILL_ELECTRICAL, SKILL_ADEPT)))
+	if (emagged && istype(H) && (H.skill_check(SKILL_COMPUTER, SKILL_TRAINED) || H.skill_check(SKILL_ELECTRICAL, SKILL_TRAINED)))
 		to_chat(user, SPAN_WARNING("\The [src]'s control panel looks fried."))
 
 /obj/machinery/door/set_broken(new_state, cause)

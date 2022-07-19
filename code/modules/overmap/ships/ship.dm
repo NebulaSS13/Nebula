@@ -16,7 +16,7 @@ var/global/const/OVERMAP_SPEED_CONSTANT = (1 SECOND)
 	var/fore_dir = NORTH                // what dir ship flies towards for purpose of moving stars effect procs
 
 	var/list/engines = list()			// /datum/extension/ship_engine list of all engines.
-	var/skill_needed = SKILL_ADEPT  //piloting skill needed to steer it without going in random dir
+	var/skill_needed = SKILL_TRAINED  //piloting skill needed to steer it without going in random dir
 	var/operator_skill
 
 	var/needs_dampers = FALSE

@@ -147,7 +147,7 @@ var/global/const/NO_EMAG_ACT = -50
 
 /obj/item/card/emag/examine(mob/user)
 	. = ..()
-	if(user.skill_check(SKILL_DEVICES,SKILL_ADEPT))
+	if(user.skill_check(SKILL_DEVICES,SKILL_TRAINED))
 		to_chat(user, SPAN_WARNING("This ID card has some form of non-standard modifications."))
 
 /obj/item/card/id

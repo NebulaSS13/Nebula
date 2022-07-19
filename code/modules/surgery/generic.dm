@@ -62,7 +62,7 @@
 
 /decl/surgery_step/generic/cut_open/success_chance(mob/living/user, mob/living/target, obj/item/tool)
 	. = ..()
-	if(user.skill_check(SKILL_FORENSICS, SKILL_ADEPT))
+	if(user.skill_check(SKILL_FORENSICS, SKILL_TRAINED))
 		. += 40
 		if(target.stat == DEAD)
 			. += 40

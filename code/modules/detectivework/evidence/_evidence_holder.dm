@@ -33,7 +33,7 @@
 
 /datum/extension/forensic_evidence/proc/check_spotting(mob/detective)
 	. = FALSE
-	if(get_dist(detective, holder) > (detective.get_skill_value(SKILL_FORENSICS) - SKILL_ADEPT))
+	if(get_dist(detective, holder) > (detective.get_skill_value(SKILL_FORENSICS) - SKILL_TRAINED))
 		return FALSE
 	for(var/T in evidence)
 		var/datum/forensics/F = evidence[T]

@@ -44,7 +44,7 @@ Skill books that increase your skills while you activate and hold them
 	matter = list(/decl/material/solid/wood = MATTER_AMOUNT_REINFORCEMENT)
 
 	var/decl/hierarchy/skill/skill       // e.g. SKILL_LITERACY
-	var/skill_req = SKILL_NONE           // The level the user needs in the skill to benefit from the book, e.g. SKILL_PROF
+	var/skill_req = SKILL_UNSKILLED           // The level the user needs in the skill to benefit from the book, e.g. SKILL_MASTER
 	var/weakref/reading                  // To check if the book is actively being used
 	var/custom = FALSE                   // To bypass init stuff, for player made textbooks and weird books. If true must have details manually set
 	var/ez_read = FALSE                  // Set to TRUE if you can read it without basic literacy skills
@@ -62,16 +62,16 @@ Skill books that increase your skills while you activate and hold them
 		skill_name = initial(skill.name)
 		title = RANDOM_BOOK_TITLE(capitalize(skill_name))
 		switch(skill_req) // check what skill_req the book has
-			if(SKILL_NONE) // none > basic
+			if(SKILL_UNSKILLED) // none > basic
 				name = "beginner [skill_name] textbook"
 				desc = "A copy of [title] by [author]. The only reason this book is so big is because all the words are printed very large! Presumably so you, an idiot, can read it."
-			if(SKILL_BASIC) // basic > adept
+			if(SKILL_BASIC) // basic > trained
 				name = "intermediate [skill_name] textbook"
 				desc = "A copy of [title] by [author]. Dry and long, but not unmanageable. Basic knowledge is required to understand the concepts written."
-			if(SKILL_ADEPT) // adept > expert
+			if(SKILL_TRAINED) // trained > experienced
 				name = "advanced [skill_name] textbook"
 				desc = "A copy of [title] by [author]. Those not already trained in the subject will have a hard time reading this. Try not to drop it either, it will put a hole in the floor."
-			if(SKILL_EXPERT to SKILL_MAX) //expert > prof
+			if(SKILL_EXPERIENCED to SKILL_MAX) //experienced > master
 				name = "theoretical [skill_name] textbook"
 				desc = "A copy of [title] by [author]. Significant experience in the subject is required to read this incredibly information dense block of paper. Sadly, does not come in audio form."
 
@@ -239,16 +239,16 @@ ORGANIZATIONAL
 /obj/item/book/skill/organizational/finance/basic
 	name = "beginner finance textbook"
 
-/obj/item/book/skill/organizational/finance/adept
+/obj/item/book/skill/organizational/finance/trained
 	skill_req = SKILL_BASIC
 	name = "intermediate finance textbook"
 
-/obj/item/book/skill/organizational/finance/expert
-	skill_req = SKILL_ADEPT
+/obj/item/book/skill/organizational/finance/experienced
+	skill_req = SKILL_TRAINED
 	name = "advanced finance textbook"
 
-/obj/item/book/skill/organizational/finance/prof
-	skill_req = SKILL_EXPERT
+/obj/item/book/skill/organizational/finance/master
+	skill_req = SKILL_EXPERIENCED
 	name = "theoretical finance textbook"
 
 /*
@@ -265,16 +265,16 @@ GENERAL
 /obj/item/book/skill/general/eva/basic
 	name = "beginner extra-vehicular activity textbook"
 
-/obj/item/book/skill/general/eva/adept
+/obj/item/book/skill/general/eva/trained
 	skill_req = SKILL_BASIC
 	name = "intermediate extra-vehicular activity textbook"
 
-/obj/item/book/skill/general/eva/expert
-	skill_req = SKILL_ADEPT
+/obj/item/book/skill/general/eva/experienced
+	skill_req = SKILL_TRAINED
 	name = "advanced extra-vehicular activity textbook"
 
-/obj/item/book/skill/general/eva/prof
-	skill_req = SKILL_EXPERT
+/obj/item/book/skill/general/eva/master
+	skill_req = SKILL_EXPERIENCED
 	name = "theoretical extra-vehicular activity textbook"
 
 //mech
@@ -286,16 +286,16 @@ GENERAL
 /obj/item/book/skill/general/mech/basic
 	name = "beginner exosuit operation textbook"
 
-/obj/item/book/skill/general/mech/adept
+/obj/item/book/skill/general/mech/trained
 	skill_req = SKILL_BASIC
 	name = "intermediate exosuit operation textbook"
 
-/obj/item/book/skill/general/mech/expert
-	skill_req = SKILL_ADEPT
+/obj/item/book/skill/general/mech/experienced
+	skill_req = SKILL_TRAINED
 	name = "advanced exosuit operation textbook"
 
-/obj/item/book/skill/general/mech/prof
-	skill_req = SKILL_EXPERT
+/obj/item/book/skill/general/mech/master
+	skill_req = SKILL_EXPERIENCED
 	name = "theoretical exosuit operation textbook"
 
 //piloting
@@ -307,37 +307,37 @@ GENERAL
 /obj/item/book/skill/general/pilot/basic
 	name = "beginner piloting textbook"
 
-/obj/item/book/skill/general/pilot/adept
+/obj/item/book/skill/general/pilot/trained
 	skill_req = SKILL_BASIC
 	name = "intermediate piloting textbook"
 
-/obj/item/book/skill/general/pilot/expert
-	skill_req = SKILL_ADEPT
+/obj/item/book/skill/general/pilot/experienced
+	skill_req = SKILL_TRAINED
 	name = "advanced piloting textbook"
 
-/obj/item/book/skill/general/pilot/prof
-	skill_req = SKILL_EXPERT
+/obj/item/book/skill/general/pilot/master
+	skill_req = SKILL_EXPERIENCED
 	name = "theoretical piloting textbook"
 
-//hauling
-/obj/item/book/skill/general/hauling
-	skill = SKILL_HAULING
+//athletics
+/obj/item/book/skill/general/athletics
+	skill = SKILL_ATHLETICS
 	author = "Chiel Brunt"
-	icon_state = "tb_hauling"
+	icon_state = "tb_athletics"
 
-/obj/item/book/skill/general/hauling/basic
+/obj/item/book/skill/general/athletics/basic
 	name = "beginner athletics textbook"
 
-/obj/item/book/skill/general/hauling/adept
+/obj/item/book/skill/general/athletics/trained
 	skill_req = SKILL_BASIC
 	name = "intermediate athletics textbook"
 
-/obj/item/book/skill/general/hauling/expert
-	skill_req = SKILL_ADEPT
+/obj/item/book/skill/general/athletics/experienced
+	skill_req = SKILL_TRAINED
 	name = "advanced athletics textbook"
 
-/obj/item/book/skill/general/hauling/prof
-	skill_req = SKILL_EXPERT
+/obj/item/book/skill/general/athletics/master
+	skill_req = SKILL_EXPERIENCED
 	name = "theoretical athletics textbook"
 
 //computer
@@ -349,16 +349,16 @@ GENERAL
 /obj/item/book/skill/general/computer/basic
 	name = "beginner information technology textbook"
 
-/obj/item/book/skill/general/computer/adept
+/obj/item/book/skill/general/computer/trained
 	skill_req = SKILL_BASIC
 	name = "intermediate information technology textbook"
 
-/obj/item/book/skill/general/computer/expert
-	skill_req = SKILL_ADEPT
+/obj/item/book/skill/general/computer/experienced
+	skill_req = SKILL_TRAINED
 	name = "advanced information technology textbook"
 
-/obj/item/book/skill/general/computer/prof
-	skill_req = SKILL_EXPERT
+/obj/item/book/skill/general/computer/master
+	skill_req = SKILL_EXPERIENCED
 	name = "theoretical information technology textbook"
 
 /*
@@ -375,16 +375,16 @@ SERVICE
 /obj/item/book/skill/service/botany/basic
 	name = "beginner botany textbook"
 
-/obj/item/book/skill/service/botany/adept
+/obj/item/book/skill/service/botany/trained
 	skill_req = SKILL_BASIC
 	name = "intermediate botany textbook"
 
-/obj/item/book/skill/service/botany/expert
-	skill_req = SKILL_ADEPT
+/obj/item/book/skill/service/botany/experienced
+	skill_req = SKILL_TRAINED
 	name = "advanced botany textbook"
 
-/obj/item/book/skill/service/botany/prof
-	skill_req = SKILL_EXPERT
+/obj/item/book/skill/service/botany/master
+	skill_req = SKILL_EXPERIENCED
 	name = "theoretical botany textbook"
 
 //cooking
@@ -396,16 +396,16 @@ SERVICE
 /obj/item/book/skill/service/cooking/basic
 	name = "beginner cooking textbook"
 
-/obj/item/book/skill/service/cooking/adept
+/obj/item/book/skill/service/cooking/trained
 	skill_req = SKILL_BASIC
 	name = "intermediate cooking textbook"
 
-/obj/item/book/skill/service/cooking/expert
-	skill_req = SKILL_ADEPT
+/obj/item/book/skill/service/cooking/experienced
+	skill_req = SKILL_TRAINED
 	name = "advanced cooking textbook"
 
-/obj/item/book/skill/service/cooking/prof
-	skill_req = SKILL_EXPERT
+/obj/item/book/skill/service/cooking/master
+	skill_req = SKILL_EXPERIENCED
 	name = "theoretical cooking textbook"
 
 /*
@@ -423,16 +423,16 @@ SECURITY
 /obj/item/book/skill/security/combat/basic
 	name = "beginner close combat textbook"
 
-/obj/item/book/skill/security/combat/adept
+/obj/item/book/skill/security/combat/trained
 	skill_req = SKILL_BASIC
 	name = "intermediate close combat textbook"
 
-/obj/item/book/skill/security/combat/expert
-	skill_req = SKILL_ADEPT
+/obj/item/book/skill/security/combat/experienced
+	skill_req = SKILL_TRAINED
 	name = "advanced close combat textbook"
 
-/obj/item/book/skill/security/combat/prof
-	skill_req = SKILL_EXPERT
+/obj/item/book/skill/security/combat/master
+	skill_req = SKILL_EXPERIENCED
 	name = "theoretical close combat textbook"
 
 //weapons
@@ -444,16 +444,16 @@ SECURITY
 /obj/item/book/skill/security/weapons/basic
 	name = "beginner weapons expertise textbook"
 
-/obj/item/book/skill/security/weapons/adept
+/obj/item/book/skill/security/weapons/trained
 	skill_req = SKILL_BASIC
 	name = "intermediate weapons expertise textbook"
 
-/obj/item/book/skill/security/weapons/expert
-	skill_req = SKILL_ADEPT
+/obj/item/book/skill/security/weapons/experienced
+	skill_req = SKILL_TRAINED
 	name = "advanced weapons expertise textbook"
 
-/obj/item/book/skill/security/weapons/prof
-	skill_req = SKILL_EXPERT
+/obj/item/book/skill/security/weapons/master
+	skill_req = SKILL_EXPERIENCED
 	name = "theoretical weapons expertise textbook"
 
 //forensics
@@ -465,16 +465,16 @@ SECURITY
 /obj/item/book/skill/security/forensics/basic
 	name = "beginner forensics textbook"
 
-/obj/item/book/skill/security/forensics/adept
+/obj/item/book/skill/security/forensics/trained
 	skill_req = SKILL_BASIC
 	name = "intermediate forensics textbook"
 
-/obj/item/book/skill/security/forensics/expert
-	skill_req = SKILL_ADEPT
+/obj/item/book/skill/security/forensics/experienced
+	skill_req = SKILL_TRAINED
 	name = "advanced forensics textbook"
 
-/obj/item/book/skill/security/forensics/prof
-	skill_req = SKILL_EXPERT
+/obj/item/book/skill/security/forensics/master
+	skill_req = SKILL_EXPERIENCED
 	name = "theoretical forensics textbook"
 
 /*
@@ -491,16 +491,16 @@ ENGINEERING
 /obj/item/book/skill/engineering/construction/basic
 	name = "beginner construction textbook"
 
-/obj/item/book/skill/engineering/construction/adept
+/obj/item/book/skill/engineering/construction/trained
 	skill_req = SKILL_BASIC
 	name = "intermediate construction textbook"
 
-/obj/item/book/skill/engineering/construction/expert
-	skill_req = SKILL_ADEPT
+/obj/item/book/skill/engineering/construction/experienced
+	skill_req = SKILL_TRAINED
 	name = "advanced construction textbook"
 
-/obj/item/book/skill/engineering/construction/prof
-	skill_req = SKILL_EXPERT
+/obj/item/book/skill/engineering/construction/master
+	skill_req = SKILL_EXPERIENCED
 	name = "theoretical construction textbook"
 
 //electrical
@@ -511,16 +511,16 @@ ENGINEERING
 /obj/item/book/skill/engineering/electrical/basic
 	name = "beginner electrical engineering textbook"
 
-/obj/item/book/skill/engineering/electrical/adept
+/obj/item/book/skill/engineering/electrical/trained
 	skill_req = SKILL_BASIC
 	name = "intermediate electrical engineering textbook"
 
-/obj/item/book/skill/engineering/electrical/expert
-	skill_req = SKILL_ADEPT
+/obj/item/book/skill/engineering/electrical/experienced
+	skill_req = SKILL_TRAINED
 	name = "advanced electrical engineering textbook"
 
-/obj/item/book/skill/engineering/electrical/prof
-	skill_req = SKILL_EXPERT
+/obj/item/book/skill/engineering/electrical/master
+	skill_req = SKILL_EXPERIENCED
 	name = "theoretical electrical engineering textbook"
 
 //atmos
@@ -532,16 +532,16 @@ ENGINEERING
 /obj/item/book/skill/engineering/atmos/basic
 	name = "beginner atmospherics textbook"
 
-/obj/item/book/skill/engineering/atmos/adept
+/obj/item/book/skill/engineering/atmos/trained
 	skill_req = SKILL_BASIC
 	name = "intermediate atmospherics textbook"
 
-/obj/item/book/skill/engineering/atmos/expert
-	skill_req = SKILL_ADEPT
+/obj/item/book/skill/engineering/atmos/experienced
+	skill_req = SKILL_TRAINED
 	name = "advanced atmospherics textbook"
 
-/obj/item/book/skill/engineering/atmos/prof
-	skill_req = SKILL_EXPERT
+/obj/item/book/skill/engineering/atmos/master
+	skill_req = SKILL_EXPERIENCED
 	name = "theoretical atmospherics textbook"
 
 //engines
@@ -552,19 +552,19 @@ ENGINEERING
 /obj/item/book/skill/engineering/engines/basic
 	name = "beginner engines textbook"
 
-/obj/item/book/skill/engineering/engines/adept
+/obj/item/book/skill/engineering/engines/trained
 	skill_req = SKILL_BASIC
 	name = "intermediate engines textbook"
 
-/obj/item/book/skill/engineering/engines/expert
-	skill_req = SKILL_ADEPT
+/obj/item/book/skill/engineering/engines/experienced
+	skill_req = SKILL_TRAINED
 	name = "advanced engines textbook"
 
-/obj/item/book/skill/engineering/engines/prof
-	skill_req = SKILL_EXPERT
+/obj/item/book/skill/engineering/engines/master
+	skill_req = SKILL_EXPERIENCED
 	name = "theoretical engines textbook"
 
-/obj/item/book/skill/engineering/engines/prof/magazine
+/obj/item/book/skill/engineering/engines/master/magazine
 	name = "theoretical engines magazine"
 	title = "\improper WetSkrell magazine"
 	icon_state = "bookMagazine"
@@ -588,16 +588,16 @@ RESEARCH
 /obj/item/book/skill/research/devices/basic
 	name = "beginner complex devices textbook"
 
-/obj/item/book/skill/research/devices/adept
+/obj/item/book/skill/research/devices/trained
 	skill_req = SKILL_BASIC
 	name = "intermediate complex devices textbook"
 
-/obj/item/book/skill/research/devices/expert
-	skill_req = SKILL_ADEPT
+/obj/item/book/skill/research/devices/experienced
+	skill_req = SKILL_TRAINED
 	name = "advanced complex devices textbook"
 
-/obj/item/book/skill/research/devices/prof
-	skill_req = SKILL_EXPERT
+/obj/item/book/skill/research/devices/master
+	skill_req = SKILL_EXPERIENCED
 	name = "theoretical complex devices textbook"
 
 //science
@@ -608,16 +608,16 @@ RESEARCH
 /obj/item/book/skill/research/science/basic
 	name = "beginner science textbook"
 
-/obj/item/book/skill/research/science/adept
+/obj/item/book/skill/research/science/trained
 	skill_req = SKILL_BASIC
 	name = "intermediate science textbook"
 
-/obj/item/book/skill/research/science/expert
-	skill_req = SKILL_ADEPT
+/obj/item/book/skill/research/science/experienced
+	skill_req = SKILL_TRAINED
 	name = "advanced science textbook"
 
-/obj/item/book/skill/research/science/prof
-	skill_req = SKILL_EXPERT
+/obj/item/book/skill/research/science/master
+	skill_req = SKILL_EXPERIENCED
 	name = "theoretical science textbook"
 
 /*
@@ -635,16 +635,16 @@ MEDICAL
 /obj/item/book/skill/medical/chemistry/basic
 	name = "beginner chemistry textbook"
 
-/obj/item/book/skill/medical/chemistry/adept
+/obj/item/book/skill/medical/chemistry/trained
 	skill_req = SKILL_BASIC
 	name = "intermediate chemistry textbook"
 
-/obj/item/book/skill/medical/chemistry/expert
-	skill_req = SKILL_ADEPT
+/obj/item/book/skill/medical/chemistry/experienced
+	skill_req = SKILL_TRAINED
 	name = "advanced chemistry textbook"
 
-/obj/item/book/skill/medical/chemistry/prof
-	skill_req = SKILL_EXPERT
+/obj/item/book/skill/medical/chemistry/master
+	skill_req = SKILL_EXPERIENCED
 	name = "theoretical chemistry textbook"
 
 //medicine
@@ -659,16 +659,16 @@ MEDICAL
 	author = "Dr. Merrs"
 	custom = TRUE
 
-/obj/item/book/skill/medical/medicine/adept
+/obj/item/book/skill/medical/medicine/trained
 	skill_req = SKILL_BASIC
 	name = "intermediate medicine textbook"
 
-/obj/item/book/skill/medical/medicine/expert
-	skill_req = SKILL_ADEPT
+/obj/item/book/skill/medical/medicine/experienced
+	skill_req = SKILL_TRAINED
 	name = "advanced medicine textbook"
 
-/obj/item/book/skill/medical/medicine/prof
-	skill_req = SKILL_EXPERT
+/obj/item/book/skill/medical/medicine/master
+	skill_req = SKILL_EXPERIENCED
 	name = "theoretical medicine textbook"
 
 //anatomy
@@ -679,16 +679,16 @@ MEDICAL
 /obj/item/book/skill/medical/anatomy/basic
 	name = "beginner anatomy textbook"
 
-/obj/item/book/skill/medical/anatomy/adept
+/obj/item/book/skill/medical/anatomy/trained
 	skill_req = SKILL_BASIC
 	name = "intermediate anatomy textbook"
 
-/obj/item/book/skill/medical/anatomy/expert
-	skill_req = SKILL_ADEPT
+/obj/item/book/skill/medical/anatomy/experienced
+	skill_req = SKILL_TRAINED
 	name = "advanced anatomy textbook"
 
-/obj/item/book/skill/medical/anatomy/prof
-	skill_req = SKILL_EXPERT
+/obj/item/book/skill/medical/anatomy/master
+	skill_req = SKILL_EXPERIENCED
 	name = "theoretical anatomy textbook"
 
 
@@ -756,7 +756,7 @@ MEDICAL
 		if(!user.skill_check(SKILL_LITERACY, SKILL_BASIC))
 			to_chat(user, SPAN_WARNING("You can't even read, yet you want to write a whole educational textbook?"))
 			return
-		if(!user.skill_check(SKILL_LITERACY, SKILL_PROF))
+		if(!user.skill_check(SKILL_LITERACY, SKILL_MASTER))
 			to_chat(user, SPAN_WARNING("You have no clue as to how to write an entire textbook in a way that is actually useful. Maybe a regular book would be better?"))
 			return
 		var/state_check = skill_option_string // the state skill_option_string is in just before opening the input
@@ -902,7 +902,7 @@ MEDICAL
 							/obj/item/book/skill/general/eva,
 							/obj/item/book/skill/general/mech,
 							/obj/item/book/skill/general/pilot,
-							/obj/item/book/skill/general/hauling,
+							/obj/item/book/skill/general/athletics,
 							/obj/item/book/skill/general/computer,
 							/obj/item/book/skill/service/botany,
 							/obj/item/book/skill/service/cooking,

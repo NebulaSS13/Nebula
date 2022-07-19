@@ -893,7 +893,7 @@ var/global/const/DEFAULT_SPECIES_HEALTH = 200
 	if (!exertion_effect_chance)
 		return
 	var/chance = max((100 - H.stamina), exertion_effect_chance * H.encumbrance())
-	if (chance && prob(H.skill_fail_chance(SKILL_HAULING, chance)))
+	if (chance && prob(H.skill_fail_chance(SKILL_ATHLETICS, chance)))
 		var/synthetic = H.isSynthetic()
 		if (synthetic)
 			if (exertion_charge_scale)

@@ -167,7 +167,7 @@
 		dat += "<td><span class='average'>[scan["pulse"]]bpm</span></td></tr>"
 	else
 		dat += "<td>[scan["pulse"]]bpm</td></tr>"
-	if(skill_level >= SKILL_ADEPT)
+	if(skill_level >= SKILL_TRAINED)
 		if((scan["pulse"] >= 140) || (scan["pulse"] == -3))
 			dat+= "<tr><td colspan='2'><span class='bad'>Patient is tachycardic.</span></td></tr>"
 		else if(scan["pulse"] >= 120)
@@ -192,7 +192,7 @@
 
 		dat += "<tr><td><strong>Blood volume:</strong></td><td>[scan["blood_volume"]]u/[scan["blood_volume_max"]]u</td></tr>"
 
-		if(skill_level >= SKILL_ADEPT)
+		if(skill_level >= SKILL_TRAINED)
 			if(ratio <= 0.70)
 				dat += "<tr><td colspan='2'><span class='bad'>Patient is in Hypovolemic Shock. Transfusion highly recommended.</span></td></tr>"
 	else 
@@ -270,7 +270,7 @@
 		var/rowdata = list()
 		if(E["brute_dam"] + E["burn_dam"] == 0)
 			rowdata += "None"
-		else if(skill_level < SKILL_ADEPT)
+		else if(skill_level < SKILL_TRAINED)
 			if(E["brute_dam"])
 				rowdata += "<span class='bad'>Damaged</span>"
 			if(E["burn_dam"])
@@ -282,7 +282,7 @@
 				rowdata += "<span class='average'>[capitalize(get_wound_severity(E["burn_ratio"], (E["limb_flags"] & ORGAN_FLAG_HEALS_OVERKILL)))] burns</span>"
 		row += "</td><td>[jointext(rowdata, "<br>")]</td>"
 
-		if(skill_level >= SKILL_ADEPT)
+		if(skill_level >= SKILL_TRAINED)
 			var/list/status = list()
 			if(E["scan_results"])
 				status += "<span class='bad'>[english_list(E["scan_results"], nothing_text = "&nbsp;")]</span>"
@@ -315,7 +315,7 @@
 			else
 				row += "<td>None</td>"
 
-			if(skill_level >= SKILL_ADEPT)
+			if(skill_level >= SKILL_TRAINED)
 				var/list/status = list()
 				if(I["scan_results"])
 					status += "<span class='bad'>[english_list(I["scan_results"], nothing_text = "&nbsp;")]</span>"
@@ -328,7 +328,7 @@
 			row += "</tr>"
 			subdat += jointext(row, null)
 
-	if(skill_level <= SKILL_ADEPT)
+	if(skill_level <= SKILL_TRAINED)
 		dat += shuffle(subdat)
 	else
 		dat += subdat

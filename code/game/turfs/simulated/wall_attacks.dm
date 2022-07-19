@@ -358,7 +358,7 @@
 	if(!prob(dam_prob))
 		visible_message(SPAN_DANGER("\The [user] [pick(W.attack_verb)] \the [src] with \the [W], but it bounced off!"))
 		playsound(src, hitsound, 25, 1)
-		if(user.skill_fail_prob(SKILL_HAULING, 40, SKILL_ADEPT))
+		if(user.skill_fail_prob(SKILL_ATHLETICS, 40, SKILL_TRAINED))
 			SET_STATUS_MAX(user, STAT_WEAK, 2)
 			visible_message(SPAN_DANGER("\The [user] is knocked back by the force of the blow!"))
 		return

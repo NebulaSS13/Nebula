@@ -204,7 +204,7 @@
 		if(!seed)
 			to_chat(user, SPAN_WARNING("There is nothing to take a sample from."))
 			return
-		var/needed_skill = seed.mysterious ? SKILL_ADEPT : SKILL_BASIC
+		var/needed_skill = seed.mysterious ? SKILL_TRAINED : SKILL_BASIC
 		if(prob(user.skill_fail_chance(SKILL_BOTANY, 90, needed_skill)))
 			to_chat(user, SPAN_WARNING("You failed to get a usable sample."))
 		else
@@ -281,7 +281,7 @@
 	user.visible_message(SPAN_NOTICE("\The [user] starts chopping down \the [V]."))
 	playsound(get_turf(V), W.hitsound, 100, 1)
 	var/chop_time = (V.health/W.force) * 0.5 SECONDS
-	if(user.skill_check(SKILL_BOTANY, SKILL_ADEPT))
+	if(user.skill_check(SKILL_BOTANY, SKILL_TRAINED))
 		chop_time *= 0.5
 	if(do_after(user, chop_time, V, TRUE))
 		user.visible_message(SPAN_NOTICE("[user] chops down \the [V]."))

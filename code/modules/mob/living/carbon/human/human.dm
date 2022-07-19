@@ -1114,7 +1114,7 @@
 
 /mob/living/carbon/human/ranged_accuracy_mods()
 	. = ..()
-	if(get_shock() > 10 && !skill_check(SKILL_WEAPONS, SKILL_ADEPT))
+	if(get_shock() > 10 && !skill_check(SKILL_WEAPONS, SKILL_TRAINED))
 		. -= 1
 	if(get_shock() > 50)
 		. -= 1
@@ -1122,11 +1122,11 @@
 		. -= 1
 	if(shock_stage > 30)
 		. -= 1
-	if(skill_check(SKILL_WEAPONS, SKILL_ADEPT))
+	if(skill_check(SKILL_WEAPONS, SKILL_TRAINED))
 		. += 1
-	if(skill_check(SKILL_WEAPONS, SKILL_EXPERT))
+	if(skill_check(SKILL_WEAPONS, SKILL_EXPERIENCED))
 		. += 1
-	if(skill_check(SKILL_WEAPONS, SKILL_PROF))
+	if(skill_check(SKILL_WEAPONS, SKILL_MASTER))
 		. += 2
 
 /mob/living/carbon/human/can_drown()
