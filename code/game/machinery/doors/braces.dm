@@ -114,14 +114,11 @@
 				to_chat(user, "You repair some dents on \the [src].")
 
 
-/obj/item/airlock_brace/take_damage(amount, damtype, silent)
-	health = clamp(health - amount, 0, max_health)
-	if(!health)
-		if(airlock)
-			airlock.visible_message("<span class='danger'>\The [src] breaks off of \the [airlock]!</span>")
-		unlock_brace(null)
-		qdel(src)
-
+/obj/item/airlock_brace/physically_destroyed(skip_qdel)
+	if(airlock)
+		airlock.visible_message(SPAN_DANGER("\The [src] breaks off of \the [airlock]!"))
+	unlock_brace(null)
+	. = ..()
 
 /obj/item/airlock_brace/proc/unlock_brace(var/mob/user)
 	if(!airlock)

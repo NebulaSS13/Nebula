@@ -6,7 +6,7 @@
 	applies_material_colour = 0
 	desc = "A handy utility blade for the discerning augmentee. Warranty void if used for cutting."
 	base_parry_chance = 30
-	unbreakable = 1
+	health = -1
 	material_force_multiplier = 0.2
 	sharp = 1
 	edge = 1

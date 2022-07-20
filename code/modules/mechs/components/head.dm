@@ -83,11 +83,11 @@
 	else
 		to_chat(user, SPAN_WARNING(" Control Module Missing or Non-functional."))
 	if(radio)
-		to_chat(user, SPAN_NOTICE(" Radio Integrity: <b>[round((((radio.max_dam - radio.total_dam) / radio.max_dam)) * 100)]%</b>"))
+		to_chat(user, SPAN_NOTICE(" Radio Integrity: <b>[round((((radio.max_health - radio.health) / radio.max_health)) * 100)]%</b>"))
 	else
 		to_chat(user, SPAN_WARNING(" Radio Missing or Non-functional."))
 	if(camera)
-		to_chat(user, SPAN_NOTICE(" Camera Integrity: <b>[round((((camera.max_dam - camera.total_dam) / camera.max_dam)) * 100)]%</b>"))
+		to_chat(user, SPAN_NOTICE(" Camera Integrity: <b>[round((((camera.max_health - camera.health) / camera.max_health)) * 100)]%</b>"))
 	else
 		to_chat(user, SPAN_WARNING(" Camera Missing or Non-functional."))
 

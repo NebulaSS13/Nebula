@@ -24,6 +24,7 @@
 	var/interact_page = 0
 	var/components_per_page = 5
 	health = 30
+	max_health = 30
 	pass_flags = 0
 	anchored = FALSE
 	var/detail_color = COLOR_ASSEMBLY_BLACK
@@ -52,8 +53,8 @@
 		to_chat(user, "<span class='notice'>The anchoring bolts [anchored ? "are" : "can be"] <b>wrenched</b> in place and the maintenance panel [opened ? "can be" : "is"] <b>screwed</b> in place.</span>")
 	else
 		to_chat(user, "<span class='notice'>The maintenance panel [opened ? "can be" : "is"] <b>screwed</b> in place.</span>")
-	if(health != initial(health))
-		if(health <= initial(health)/2)
+	if(health != max_health)
+		if(health <= (max_health/2))
 			to_chat(user,"<span class='warning'>It looks pretty beat up.</span>")
 		else
 			to_chat(user, "<span class='warning'>Its got a few dents in it.</span>")
@@ -61,15 +62,12 @@
 	if((isobserver(user) && ckeys_allowed_to_scan[user.ckey]) || check_rights(R_ADMIN, 0, user))
 		to_chat(user, "You can <a href='?src=\ref[src];ghostscan=1'>scan</a> this circuit.");
 
-
-/obj/item/electronic_assembly/take_damage(amount, damtype, silent)
-	health = health - amount
+/obj/item/electronic_assembly/check_health(lastamount, lastdamtype, lastdamflags, consumed)
 	if(health <= 0)
-		visible_message("<span class='danger'>\The [src] falls to pieces!</span>")
-		qdel(src)
-	else if(health < initial(health)*0.15 && prob(5))
-		visible_message("<span class='danger'>\The [src] starts to break apart!</span>")
-
+		visible_message(SPAN_DANGER("\The [src] falls to pieces!"))
+		physically_destroyed()
+	else if(health < (max_health * 0.15) && prob(5))
+		visible_message(SPAN_DANGER("\The [src] starts to break apart!"))
 
 /obj/item/electronic_assembly/proc/check_interactivity(mob/user)
 	return (!user.incapacitated() && CanUseTopic(user))

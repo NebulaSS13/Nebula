@@ -20,16 +20,39 @@
 		check_shatter()
 
 /obj/item/proc/check_shatter()
-	if(material && !unbreakable && prob(material.hardness))
+	if(material && health != -1 && prob(material.hardness))
 		if(material.is_brittle())
 			health = 0
 		else
 			health--
 		check_health()
 
-/obj/item/proc/check_health(var/consumed)
-	if(health<=0)
-		shatter(consumed)
+/obj/item/proc/check_health(var/lastamount = null, var/lastdamtype = null, var/lastdamflags = 0, var/consumed = FALSE)
+	if(health > 0)
+		return
+	if(lastdamtype == BRUTE)
+		if(material?.is_brittle())
+			shatter(consumed)
+			return
+	else if(lastdamtype == BURN)
+		melt()
+		return
+	physically_destroyed()
+
+/obj/item/melt()
+	for(var/mat in matter)
+		var/decl/material/M = GET_DECL(mat)
+		if(!M)
+			log_warning("[src] ([type]) has a bad material path in its matter var.")
+			continue
+		var/turf/T = get_turf(src)
+		//TODO: Would be great to just call a proc to do that, like "Material.place_burn_product(loc, amount_matter)" so no need to care if its a gas or something else
+		var/datum/gas_mixture/environment = T?.return_air()
+		if(M.burn_product)
+			environment.adjust_gas(M.burn_product, M.fuel_value * (matter[mat] / SHEET_MATERIAL_AMOUNT))
+
+	new /obj/effect/decal/cleanable/ash(src)
+	qdel(src)
 
 /obj/item/proc/shatter(var/consumed)
 	var/turf/T = get_turf(src)
@@ -73,8 +96,9 @@
 	if(new_material)
 		material = GET_DECL(new_material)
 	if(istype(material))
-		health = round(material_health_multiplier * material.integrity)
-		max_health = health
+		max_health = round(material_health_multiplier * material.integrity)
+		if(health != -1)
+			health = max_health
 		if(material.products_need_process())
 			START_PROCESSING(SSobj, src)
 		if(material.conductive)

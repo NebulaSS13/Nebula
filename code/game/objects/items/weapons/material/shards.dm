@@ -16,7 +16,7 @@
 	material = /decl/material/solid/glass
 	applies_material_colour = TRUE
 	applies_material_name = TRUE
-	unbreakable = 1 //It's already broken.
+	health = -1 //It's already broken.
 	item_flags = ITEM_FLAG_CAN_HIDE_IN_SHOES
 	var/has_handle
 
