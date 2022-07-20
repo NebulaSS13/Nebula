@@ -31,7 +31,6 @@
 	. = ..()
 	to_chat(user, examine_health())
 
-
 // This is also called from airlock's examine, so it's a different proc to prevent code copypaste.
 /obj/item/airlock_brace/proc/examine_health()
 	switch(health_percentage())
@@ -46,7 +45,6 @@
 		if(99 to INFINITY)
 			return "\The [src] is in excellent condition."
 
-
 /obj/item/airlock_brace/on_update_icon()
 	. = ..()
 	if(airlock)
@@ -54,24 +52,21 @@
 	else
 		icon_state = "brace_open"
 
-
 /obj/item/airlock_brace/Initialize()
 	. = ..()
-	health = max_health
-	electronics = new (src)
+	if(!electronics)
+		electronics = new (src)
 
 /obj/item/airlock_brace/Destroy()
 	if(airlock)
 		airlock.brace = null
 		airlock = null
-	qdel(electronics)
-	electronics = null
+	QDEL_NULL(electronics)
 	return ..()
 
 // Interact with the electronics to set access requirements.
 /obj/item/airlock_brace/attack_self(mob/user)
 	electronics.attack_self(user)
-
 
 /obj/item/airlock_brace/attackby(obj/item/W, mob/user)
 	..()
@@ -133,8 +128,9 @@
 	airlock = null
 	update_icon()
 
-
 /obj/item/airlock_brace/proc/health_percentage()
 	if(!max_health)
 		return 0
+	if(health == -1)
+		return 100
 	return (health / max_health) * 100

@@ -28,7 +28,7 @@
 		check_health()
 
 /obj/item/proc/check_health(var/lastamount = null, var/lastdamtype = null, var/lastdamflags = 0, var/consumed = FALSE)
-	if(health > 0)
+	if(health > 0 || health == -1)
 		return
 	if(lastdamtype == BRUTE)
 		if(material?.is_brittle())

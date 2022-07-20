@@ -15,14 +15,25 @@
 	material = /decl/material/solid/metal/steel
 	var/elastic
 	var/dispenser = 0
-	var/breakouttime = 1200 //Deciseconds = 120s = 2 minutes
+	var/breakouttime = 2 MINUTES //Deciseconds = 120s = 2 minutes
 	var/cuff_sound = 'sound/weapons/handcuffs.ogg'
 	var/cuff_type = "handcuffs"
 
+/obj/item/handcuffs/Destroy()
+	var/obj/item/clothing/shoes/S = loc
+	if(S && !QDELETED(S))
+		S.remove_cuffs()
+	. = ..()
+
+/obj/item/handcuffs/physically_destroyed(skip_qdel)
+	if(istype(loc, /obj/item/clothing/shoes))
+		loc.visible_message(SPAN_WARNING("\The [src] attached to \the [loc] snap and fall away!"), range = 1)
+	. = ..()
+
 /obj/item/handcuffs/examine(mob/user)
 	. = ..()
-	if (health)
-		var display = health / initial(health) * 100
+	if (health > 0 && max_health > 0)
+		var display = health / max_health * 100
 		if (display > 66)
 			return
 		to_chat(user, SPAN_WARNING("They look [display < 33 ? "badly ": ""]damaged."))

@@ -11,7 +11,7 @@
 	var/seek_alternatives = 5     // How many ticks we wait before seeking other power sources, if we can provide the machine with power. Set to 0 to never do this.
 
 /obj/item/stock_parts/power/battery/Destroy()
-	qdel(cell)
+	QDEL_NULL(cell)
 	. = ..()
 
 /obj/item/stock_parts/power/battery/on_install(var/obj/machinery/machine)
@@ -27,15 +27,16 @@
 		remove_cell()
 	..()
 
-/obj/item/stock_parts/power/battery/take_damage(amount, damtype)
+/obj/item/stock_parts/power/battery/check_health(lastamount, lastdamtype, lastdamflags, consumed)
+	if(health != -1 && lastamount > 0)
+		switch(lastdamtype)
+			if(ELECTROCUTE)
+				if(prob(50) && cell && health < (max_health/2))
+					cell.emp_act(3)
+			if(BRUTE)
+				if(prob(20) && cell && health < (max_health/2))
+					cell.explosion_act(3)
 	. = ..()
-	switch(damtype)
-		if(ELECTROCUTE)
-			if(prob(50) && cell && health < initial(health)/2)
-				cell.emp_act(3)
-		if(BRUTE)
-			if(prob(20) && cell && health < initial(health)/2)
-				cell.explosion_act(3)
 
 // None of these helpers actually change the cell's loc. They only manage internal references and state.
 /obj/item/stock_parts/power/battery/proc/add_cell(var/obj/machinery/machine, var/obj/item/cell/new_cell)

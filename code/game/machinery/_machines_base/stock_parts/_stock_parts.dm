@@ -64,11 +64,13 @@
 /obj/item/stock_parts/proc/on_refresh(var/obj/machinery/machine)
 
 /obj/item/stock_parts/take_damage(damage, damage_type, damage_flags, inflicter, armor_pen)
-	if(!is_functional() || (damage_type in ignore_damage_types) || (istype(loc, /obj/machinery) && (part_flags & PART_FLAG_NODAMAGE)))
+	if(!is_functional() || (damage_type in ignore_damage_types) || (istype(loc, /obj/machinery) && (part_flags & PART_FLAG_NODAMAGE)) )
 		return
 	. = ..()
 
 /obj/item/stock_parts/check_health(lastamount, lastdamtype, lastdamflags, consumed)
+	if(health == -1)
+		return
 	if(!is_functional())
 		if(istype(loc, /obj/machinery))
 			on_fail(loc, lastdamtype)
@@ -87,16 +89,16 @@
 	SetName("broken [name]")
 
 /obj/item/stock_parts/proc/is_functional()
-	return health == -1 || health > 0
+	return (health == -1) || (health > 0)
 
 /obj/item/stock_parts/examine(mob/user)
 	. = ..()
 	if(health != -1)
 		if(!is_functional())
 			to_chat(user, SPAN_WARNING("It is completely broken."))
-		else if(health < 0.5 * max_health)
+		else if(health < (0.5 * max_health))
 			to_chat(user, SPAN_WARNING("It is heavily damaged."))
-		else if(health < 0.75 * max_health)
+		else if(health < (0.75 * max_health))
 			to_chat(user, SPAN_NOTICE("It is showing signs of damage."))
 		else if(health < max_health)
 			to_chat(user, SPAN_NOTICE("It is showing some wear and tear."))
