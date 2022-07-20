@@ -874,6 +874,7 @@
 #include "code\game\objects\empulse.dm"
 #include "code\game\objects\explosion.dm"
 #include "code\game\objects\item.dm"
+#include "code\game\objects\item_damage.dm"
 #include "code\game\objects\item_interactions.dm"
 #include "code\game\objects\item_materials.dm"
 #include "code\game\objects\item_mob_overlay.dm"

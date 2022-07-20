@@ -29,7 +29,7 @@
 
 /obj/item/proc/check_health(var/lastdamage = null, var/lastdamtype = null, var/lastdamflags = 0, var/consumed = FALSE)
 	if(health > 0 || health == -1)
-		return
+		return //If invincible, or if we're not dead yet, skip
 	if(lastdamtype == BRUTE)
 		if(material?.is_brittle())
 			shatter(consumed)
@@ -96,9 +96,13 @@
 	if(new_material)
 		material = GET_DECL(new_material)
 	if(istype(material))
-		max_health = round(material_health_multiplier * material.integrity)
-		if(health != -1)
-			health = max_health
+		//Only set the health if health is null. Some things define their own health value.
+		if(isnull(health))
+			max_health = round(material_health_multiplier * material.integrity)
+		else
+			max_health = health
+		health = max_health
+		
 		if(material.products_need_process())
 			START_PROCESSING(SSobj, src)
 		if(material.conductive)
