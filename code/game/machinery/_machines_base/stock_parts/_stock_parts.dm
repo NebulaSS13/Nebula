@@ -68,7 +68,7 @@
 		return
 	. = ..()
 
-/obj/item/stock_parts/check_health(lastamount, lastdamtype, lastdamflags, consumed)
+/obj/item/stock_parts/check_health(lastdamage, lastdamtype, lastdamflags, consumed)
 	if(health == -1)
 		return
 	if(!is_functional())

@@ -62,7 +62,7 @@
 	if((isobserver(user) && ckeys_allowed_to_scan[user.ckey]) || check_rights(R_ADMIN, 0, user))
 		to_chat(user, "You can <a href='?src=\ref[src];ghostscan=1'>scan</a> this circuit.");
 
-/obj/item/electronic_assembly/check_health(lastamount, lastdamtype, lastdamflags, consumed)
+/obj/item/electronic_assembly/check_health(lastdamage, lastdamtype, lastdamflags, consumed)
 	if(health <= 0)
 		visible_message(SPAN_DANGER("\The [src] falls to pieces!"))
 		physically_destroyed()

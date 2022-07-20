@@ -27,7 +27,7 @@
 			health--
 		check_health()
 
-/obj/item/proc/check_health(var/lastamount = null, var/lastdamtype = null, var/lastdamflags = 0, var/consumed = FALSE)
+/obj/item/proc/check_health(var/lastdamage = null, var/lastdamtype = null, var/lastdamflags = 0, var/consumed = FALSE)
 	if(health > 0 || health == -1)
 		return
 	if(lastdamtype == BRUTE)

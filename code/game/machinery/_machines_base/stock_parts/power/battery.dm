@@ -27,8 +27,8 @@
 		remove_cell()
 	..()
 
-/obj/item/stock_parts/power/battery/check_health(lastamount, lastdamtype, lastdamflags, consumed)
-	if(health != -1 && lastamount > 0)
+/obj/item/stock_parts/power/battery/check_health(lastdamage, lastdamtype, lastdamflags, consumed)
+	if(health != -1 && lastdamage > 0)
 		switch(lastdamtype)
 			if(ELECTROCUTE)
 				if(prob(50) && cell && health < (max_health/2))

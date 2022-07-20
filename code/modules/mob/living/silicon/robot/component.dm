@@ -217,12 +217,12 @@
 	var/brute_damage = 0
 	var/icon_state_broken = "broken"
 
-/obj/item/robot_parts/robot_component/check_health(lastamount, lastdamtype, lastdamflags, consumed)
-	if(lastamount > 0)
+/obj/item/robot_parts/robot_component/check_health(lastdamage, lastdamtype, lastdamflags, consumed)
+	if(lastdamage > 0)
 		if(lastdamtype == BRUTE)
-			brute_damage = clamp(lastamount, 0, max_health)
+			brute_damage = clamp(lastdamage, 0, max_health)
 		if(lastdamtype == BURN || lastdamtype == ELECTROCUTE)
-			burn_damage = clamp(lastamount, 0, max_health)
+			burn_damage = clamp(lastdamage, 0, max_health)
 
 	//Health works differently for this thing
 	health = clamp(max_health - (brute_damage + burn_damage), 0, max_health)
