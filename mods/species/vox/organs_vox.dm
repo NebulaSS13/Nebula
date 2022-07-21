@@ -132,7 +132,7 @@
 						mat_stack.add(taking_sheets)
 						sheets -= taking_sheets
 						updated_stacks = TRUE
-						
+
 				// Create new stacks if needed.
 				if(sheets)
 					M.create_object(src, sheets)
@@ -157,7 +157,6 @@
 	vital = 1
 	origin_tech = @"{'biotech':4,'materials':4,'magnets':2,'programming':3}"
 	relative_size = 10
-	var/invasive = 1
 
 	var/ownerckey
 	var/default_language

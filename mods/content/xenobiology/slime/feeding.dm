@@ -1,6 +1,3 @@
-/mob/living/slime/proc/set_nutrition(var/amt)
-	nutrition = Clamp(amt, 0, initial(nutrition))
-
 /mob/living/slime/proc/check_valid_feed_target(var/mob/living/M, var/check_already_feeding = TRUE, var/silent = FALSE)
 	if(QDELETED(M) || !istype(M) || !isturf(M.loc))
 		return FEED_RESULT_INVALID
