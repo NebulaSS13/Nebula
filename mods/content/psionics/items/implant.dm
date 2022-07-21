@@ -47,7 +47,7 @@
 
 /obj/item/implant/psi_control/meltdown()
 	if(!malfunction)
-		overload = 100
+		overload = max_overload
 		if(imp_in)
 			for(var/thing in SSpsi.psi_monitors)
 				var/obj/machinery/psi_monitor/monitor = thing
