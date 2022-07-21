@@ -1,9 +1,9 @@
 #define SKILL_UNSKILLED     1
-#define SKILL_BASIC    2
-#define SKILL_TRAINED    3
+#define SKILL_BASIC         2
+#define SKILL_TRAINED       3
 #define SKILL_EXPERIENCED   4
-#define SKILL_MASTER     5
-#define HAS_PERK       SKILL_UNSKILLED + 1
+#define SKILL_MASTER        5
+#define HAS_PERK            SKILL_UNSKILLED + 1
 
 #define SKILL_MIN      1 // Min skill value selectable
 #define SKILL_MAX      5 // Max skill value selectable
@@ -18,7 +18,7 @@
 #define SKILL_EVA           /decl/hierarchy/skill/general/eva
 #define SKILL_MECH          /decl/hierarchy/skill/general/eva/mech
 #define SKILL_PILOT         /decl/hierarchy/skill/general/pilot
-#define SKILL_ATHLETICS       /decl/hierarchy/skill/general/athletics
+#define SKILL_ATHLETICS     /decl/hierarchy/skill/general/athletics
 #define SKILL_COMPUTER      /decl/hierarchy/skill/general/computer
 #define SKILL_BOTANY        /decl/hierarchy/skill/service/botany
 #define SKILL_COOKING       /decl/hierarchy/skill/service/cooking
