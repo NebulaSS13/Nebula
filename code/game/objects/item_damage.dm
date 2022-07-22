@@ -2,6 +2,8 @@
 /obj/item/proc/take_damage(var/damage, var/damage_type = BRUTE, var/damage_flags = 0, var/inflicter = null, var/armor_pen = 0)
 	if(health == -1) // This object does not take damage.
 		return 0 //Must return a number
+	if(damage < 0)
+		CRASH("Item '[type]' take_damage proc was called with negative damage.") //Negative damage are an implementation issue.
 	
 	//Apply armor
 	var/datum/extension/armor/A = get_extension(src, /datum/extension/armor)
