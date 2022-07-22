@@ -14,8 +14,8 @@
 		if(damaged)
 			user.visible_message("[user] begins to repair [src].", "You begin repairing [src].")
 			if(do_after(usr, 100, src))
-				var/obj/item/weldingtool/w
-				if(w.burn_fuel(10))
+				var/obj/item/weldingtool/w = W
+				if(w.weld(10))
 					damaged = 0
 					user.visible_message("[user] repairs [src].", "You repair [src].")
 				else

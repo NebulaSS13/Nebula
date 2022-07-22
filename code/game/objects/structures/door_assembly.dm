@@ -136,7 +136,7 @@
 
 	if(IS_WELDER(W) && (glass == 1 || !anchored))
 		var/obj/item/weldingtool/WT = W
-		if (WT.remove_fuel(0, user))
+		if (WT.weld(0, user))
 			playsound(src.loc, 'sound/items/Welder2.ogg', 50, 1)
 			if(glass == 1)
 				var/decl/material/glass_material_datum = GET_DECL(glass_material)

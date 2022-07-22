@@ -105,7 +105,7 @@
 		if(health == max_health)
 			to_chat(user, "\The [src] does not require repairs.")
 			return
-		if(C.remove_fuel(0,user))
+		if(C.weld(0,user))
 			playsound(src, 'sound/items/Welder.ogg', 100, 1)
 			health = min(health + rand(20,30), max_health)
 			if(health == max_health)

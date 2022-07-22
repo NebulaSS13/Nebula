@@ -119,7 +119,7 @@
 		return FALSE
 	if(IS_WELDER(tool))
 		var/obj/item/weldingtool/welder = tool
-		if(!welder.isOn() || !welder.remove_fuel(1,user))
+		if(!welder.isOn() || !welder.weld(1,user))
 			return FALSE
 	var/obj/item/rig/rig = target.get_equipped_item(slot_back_str)
 	return (target_zone == BP_CHEST) && istype(rig) && !(rig.canremove)

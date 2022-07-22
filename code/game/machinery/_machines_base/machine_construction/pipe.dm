@@ -28,7 +28,7 @@
 		var/obj/item/weldingtool/WT = I
 		if(!WT.isOn())
 			return FALSE
-		if(!WT.remove_fuel(0,user))
+		if(!WT.weld(0,user))
 			return FALSE
 		var/fail = machine.cannot_transition_to(/decl/machine_construction/default/deconstructed, user)
 		if(istext(fail))

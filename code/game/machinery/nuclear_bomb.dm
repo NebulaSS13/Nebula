@@ -94,7 +94,7 @@ var/global/bomb_set
 					user.visible_message("[user] starts cutting loose the anchoring bolt covers on [src].", "You start cutting loose the anchoring bolt covers with [O]...")
 
 					if(do_after(user,40, src))
-						if(!src || !user || !WT.remove_fuel(5, user)) return
+						if(!src || !user || !WT.weld(5, user)) return
 						user.visible_message("\The [user] cuts through the bolt covers on \the [src].", "You cut through the bolt cover.")
 						removal_stage = 1
 				return
@@ -120,7 +120,7 @@ var/global/bomb_set
 					user.visible_message("[user] starts cutting apart the anchoring system sealant on [src].", "You start cutting apart the anchoring system's sealant with [O]...")
 
 					if(do_after(user, 40, src))
-						if(!src || !user || !WT.remove_fuel(5, user)) return
+						if(!src || !user || !WT.weld(5, user)) return
 						user.visible_message("\The [user] cuts apart the anchoring system sealant on \the [src].", "You cut apart the anchoring system's sealant.")
 						removal_stage = 3
 				return

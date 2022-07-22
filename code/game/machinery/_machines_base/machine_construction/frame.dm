@@ -20,7 +20,7 @@
 			machine.anchored = TRUE
 	if(IS_WELDER(I))
 		var/obj/item/weldingtool/WT = I
-		if(!WT.remove_fuel(0, user))
+		if(!WT.weld(0, user))
 			to_chat(user, "The welding tool must be on to complete this task.")
 			return TRUE
 		playsound(machine.loc, 'sound/items/Welder.ogg', 50, 1)

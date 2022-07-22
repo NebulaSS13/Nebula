@@ -40,14 +40,11 @@
 			. = module.holder.get_cell()
 
 /obj/item/weldingtool/electric/get_fuel()
-	return get_available_charge()
-
-/obj/item/weldingtool/electric/proc/get_available_charge()
 	var/obj/item/cell/cell = get_cell()
 	return cell ? cell.charge : 0
 
 /obj/item/weldingtool/electric/attackby(var/obj/item/W, var/mob/user)
-	if(istype(W,/obj/item/stack/material/rods) || istype(W, /obj/item/welder_tank))
+	if(istype(W,/obj/item/stack/material/rods) || istype(W, /obj/item/chems/welder_tank))
 		return
 	if(IS_SCREWDRIVER(W))
 		if(cell)
@@ -71,18 +68,13 @@
 		return
 	. = ..()
 
-/obj/item/weldingtool/electric/burn_fuel(var/amount)
-	spend_charge(amount * fuel_cost_multiplier)
-	var/turf/T = get_turf(src)
-	if(T) 
-		T.hotspot_expose(700, 5)
+/obj/item/weldingtool/electric/use_fuel(var/amount)
+	var/obj/item/cell/cell = get_cell()
+	if(cell)
+		return cell.use(amount * CELLRATE) > 0
+	return FALSE
 
 /obj/item/weldingtool/electric/on_update_icon()
 	. = ..()
 	if(cell)
 		add_overlay("[icon_state]-cell")
-
-/obj/item/weldingtool/electric/proc/spend_charge(var/amount)
-	var/obj/item/cell/cell = get_cell()
-	if(cell)
-		cell.use(amount * CELLRATE)

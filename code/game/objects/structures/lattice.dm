@@ -64,7 +64,7 @@
 		return
 	if(IS_WELDER(C))
 		var/obj/item/weldingtool/WT = C
-		if(WT.remove_fuel(0, user))
+		if(WT.weld(0, user))
 			deconstruct(user)
 		return
 	if(istype(C, /obj/item/gun/energy/plasmacutter))

@@ -213,7 +213,7 @@
 			to_chat(user, "<span class='notice'>The welding tool needs to be on to start this task.</span>")
 			return 1
 
-		if(!WT.remove_fuel(0,user))
+		if(!WT.weld(0,user))
 			to_chat(user, "<span class='warning'>You need more welding fuel to complete this task.</span>")
 			return 1
 
