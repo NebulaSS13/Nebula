@@ -19,6 +19,6 @@
 *******************/
 /atom/set_density(new_density)
 	var/old_density = density
-	UNLINT(. = ..())
+	. = ..()
 	if(density != old_density)
 		events_repository.raise_event(/decl/observ/density_set, src, old_density, density)
