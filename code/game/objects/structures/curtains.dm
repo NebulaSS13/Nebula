@@ -19,7 +19,7 @@
 
 	curtain_kind_path = kind.type
 	SetName("rolled [kind.name]")
-	material = GET_DECL(kind.material_key)
+	set_material(kind.material_key) //set health and etc
 	matter = atom_info_repository.get_matter_for(/obj/structure/curtain, kind.material_key)
 	update_icon()
 

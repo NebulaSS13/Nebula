@@ -1,4 +1,4 @@
-/obj/item/storage/csi_markers
+/obj/item/storage/box/csi_markers
 	name = "crime scene markers box"
 	desc = "A cardboard box for crime scene marker cards."
 	icon = 'icons/obj/forensics.dmi'
@@ -16,7 +16,7 @@
 		/obj/item/csi_marker/n7
 	)
 
-/obj/item/storage/csi_markers/Initialize(ml, material_key)
+/obj/item/storage/box/csi_markers/Initialize(ml, material_key)
 	. = ..()
 	if(length(contents))
 		make_exact_fit()
