@@ -131,6 +131,6 @@
 /obj/item/airlock_brace/proc/health_percentage()
 	if(!max_health)
 		return 0
-	if(health == -1)
+	if(health == ITEM_HEALTH_NO_DAMAGE)
 		return 100
 	return (health / max_health) * 100

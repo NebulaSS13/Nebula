@@ -20,7 +20,7 @@
 		check_shatter()
 
 /obj/item/proc/check_shatter()
-	if(material && health != -1 && prob(material.hardness))
+	if(material && health != ITEM_HEALTH_NO_DAMAGE && prob(material.hardness))
 		if(material.is_brittle())
 			health = 0
 		else
@@ -28,7 +28,7 @@
 		check_health()
 
 /obj/item/proc/check_health(var/lastdamage = null, var/lastdamtype = null, var/lastdamflags = 0, var/consumed = FALSE)
-	if(health > 0 || health == -1)
+	if(health > 0 || health == ITEM_HEALTH_NO_DAMAGE)
 		return //If invincible, or if we're not dead yet, skip
 	if(lastdamtype == BRUTE)
 		if(material?.is_brittle())

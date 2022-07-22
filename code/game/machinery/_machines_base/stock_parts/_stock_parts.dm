@@ -69,7 +69,7 @@
 	. = ..()
 
 /obj/item/stock_parts/check_health(lastdamage, lastdamtype, lastdamflags, consumed)
-	if(health == -1)
+	if(health == ITEM_HEALTH_NO_DAMAGE)
 		return
 	if(!is_functional())
 		if(istype(loc, /obj/machinery))
@@ -89,11 +89,11 @@
 	SetName("broken [name]")
 
 /obj/item/stock_parts/proc/is_functional()
-	return (health == -1) || (health > 0)
+	return (health == ITEM_HEALTH_NO_DAMAGE) || (health > 0)
 
 /obj/item/stock_parts/examine(mob/user)
 	. = ..()
-	if(health != -1)
+	if(health != ITEM_HEALTH_NO_DAMAGE)
 		if(!is_functional())
 			to_chat(user, SPAN_WARNING("It is completely broken."))
 		else if(health < (0.5 * max_health))

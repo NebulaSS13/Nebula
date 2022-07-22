@@ -94,7 +94,7 @@
 				N.update_connections()
 
 /obj/structure/net/show_examined_damage(mob/user, var/perc)
-	if(maxhealth == -1)
+	if(maxhealth == ITEM_HEALTH_NO_DAMAGE)
 		return
 	if(perc >= 1)
 		to_chat(user, SPAN_NOTICE("It looks fully intact."))

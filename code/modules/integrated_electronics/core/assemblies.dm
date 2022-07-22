@@ -63,7 +63,7 @@
 		to_chat(user, "You can <a href='?src=\ref[src];ghostscan=1'>scan</a> this circuit.");
 
 /obj/item/electronic_assembly/check_health(lastdamage, lastdamtype, lastdamflags, consumed)
-	if(health == -1)
+	if(health == ITEM_HEALTH_NO_DAMAGE)
 		return
 	if(health < 1)
 		visible_message(SPAN_DANGER("\The [src] falls to pieces!"))

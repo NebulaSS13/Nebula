@@ -68,7 +68,7 @@
 	set_extension(src, /datum/extension/tool, list(TOOL_HATCHET = TOOL_QUALITY_DEFAULT))
 
 /obj/item/hatchet/unbreakable
-	health = -1
+	health = ITEM_HEALTH_NO_DAMAGE
 
 /obj/item/hatchet/machete
 	name = "machete"
@@ -94,7 +94,7 @@
 	. = ..()
 
 /obj/item/hatchet/machete/unbreakable
-	health = -1
+	health = ITEM_HEALTH_NO_DAMAGE
 
 /obj/item/hatchet/machete/steel
 	name = "fabricated machete"
@@ -123,7 +123,7 @@
 	applies_material_name = TRUE
 
 /obj/item/minihoe/unbreakable
-	health = -1
+	health = ITEM_HEALTH_NO_DAMAGE
 
 /obj/item/scythe
 	name = "scythe"
