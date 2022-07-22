@@ -13,6 +13,13 @@
 /obj/item/uplink
 	name = "hidden uplink"
 	desc = "There is something wrong if you're examining this."
+	health = ITEM_HEALTH_NO_DAMAGE
+	material = /decl/material/solid/plastic
+	matter = list(
+		/decl/material/solid/metal/copper    = MATTER_AMOUNT_REINFORCEMENT, 
+		/decl/material/solid/silicon         = MATTER_AMOUNT_REINFORCEMENT, 
+		/decl/material/solid/metal/aluminium = MATTER_AMOUNT_REINFORCEMENT,
+	)
 	var/active = 0
 	var/datum/uplink_category/category 	= 0		// The current category we are in
 	var/exploit_id								// Id of the current exploit record we are viewing

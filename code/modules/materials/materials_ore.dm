@@ -4,6 +4,8 @@
 	icon = 'icons/obj/materials/ore.dmi'
 	randpixel = 8
 	w_class = ITEM_SIZE_SMALL
+	material = /decl/material/solid/stone/sandstone //By default is just a rock
+	material_health_multiplier = 0.5
 
 /obj/item/ore/set_material(var/new_material)
 	. = ..()

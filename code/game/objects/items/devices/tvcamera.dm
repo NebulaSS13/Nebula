@@ -6,6 +6,13 @@
 	item_state = null
 	w_class = ITEM_SIZE_LARGE
 	slot_flags = SLOT_LOWER_BODY
+	material = /decl/material/solid/plastic
+	matter = list(
+		/decl/material/solid/metal/copper    = MATTER_AMOUNT_REINFORCEMENT, 
+		/decl/material/solid/silicon         = MATTER_AMOUNT_REINFORCEMENT, 
+		/decl/material/solid/metal/aluminium = MATTER_AMOUNT_REINFORCEMENT,
+		/decl/material/solid/glass           = MATTER_AMOUNT_TRACE,
+	)
 	var/channel = "General News Feed"
 	var/video_enabled = FALSE
 	var/obj/item/radio/radio
@@ -110,6 +117,7 @@ Using robohead because of restricting to roboticist */
 	item_state = "head"
 	var/buildstep = 0
 	w_class = ITEM_SIZE_LARGE
+	material = /decl/material/solid/metal/steel
 
 /obj/item/TVAssembly/attackby(var/obj/item/W, var/mob/user)
 	switch(buildstep)

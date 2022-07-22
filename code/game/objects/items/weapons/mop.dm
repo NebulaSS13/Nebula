@@ -9,6 +9,10 @@
 	throw_range = 10
 	w_class = ITEM_SIZE_NORMAL
 	attack_verb = list("mopped", "bashed", "bludgeoned", "whacked")
+	material = /decl/material/solid/wood
+	matter = list(
+		/decl/material/solid/cloth = MATTER_AMOUNT_SECONDARY,
+	)
 	var/mopping = 0
 	var/mopcount = 0
 	var/mopspeed = 40

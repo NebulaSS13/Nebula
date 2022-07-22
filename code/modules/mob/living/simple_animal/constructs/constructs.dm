@@ -94,6 +94,7 @@
 	gender = PLURAL
 	icon = 'icons/obj/items/ectoplasm.dmi'
 	icon_state = ICON_STATE_WORLD
+	material = /decl/material/liquid/drink/compote
 
 /////////////////Juggernaut///////////////
 

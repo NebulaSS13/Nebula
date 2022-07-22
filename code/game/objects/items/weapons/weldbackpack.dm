@@ -5,6 +5,7 @@
 	icon = 'icons/obj/items/welderpack.dmi'
 	icon_state = ICON_STATE_WORLD
 	w_class = ITEM_SIZE_HUGE
+	material = /decl/material/solid/metal/steel
 	var/max_fuel = 350
 	var/obj/item/weldingtool/welder
 

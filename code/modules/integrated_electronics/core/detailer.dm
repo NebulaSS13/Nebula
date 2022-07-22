@@ -6,6 +6,12 @@
 	obj_flags = OBJ_FLAG_CONDUCTIBLE
 	item_flags = ITEM_FLAG_NO_BLUDGEON
 	w_class = ITEM_SIZE_SMALL
+	material = /decl/material/solid/metal/aluminium
+	matter = list(
+		/decl/material/solid/metal/steel = MATTER_AMOUNT_REINFORCEMENT,
+		/decl/material/solid/fiberglass = MATTER_AMOUNT_TRACE,
+		/decl/material/solid/plastic = MATTER_AMOUNT_TRACE
+	)
 	var/data_to_write = null
 	var/accepting_refs = FALSE
 	var/detail_color = COLOR_ASSEMBLY_WHITE

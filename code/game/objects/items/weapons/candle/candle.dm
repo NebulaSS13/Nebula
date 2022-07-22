@@ -87,5 +87,5 @@
 	max_w_class = ITEM_SIZE_TINY
 	max_storage_space = 7
 	slot_flags = SLOT_LOWER_BODY
-
+	material = /decl/material/solid/cardboard
 	startswith = list(/obj/item/flame/candle = 7)

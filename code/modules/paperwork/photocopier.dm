@@ -219,4 +219,5 @@
 	name = "toner cartridge"
 	icon = 'icons/obj/items/tonercartridge.dmi'
 	icon_state = "tonercartridge"
+	material = /decl/material/solid/plastic
 	var/toner_amount = 30

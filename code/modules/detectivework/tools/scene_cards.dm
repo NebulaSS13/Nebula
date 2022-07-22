@@ -26,6 +26,7 @@
 	w_class = ITEM_SIZE_TINY
 	randpixel = 1
 	layer = ABOVE_HUMAN_LAYER  //so you can mark bodies
+	material = /decl/material/solid/plastic
 	var/number = 1
 
 /obj/item/csi_marker/Initialize(mapload)

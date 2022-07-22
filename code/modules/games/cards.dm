@@ -21,6 +21,7 @@ var/global/list/card_decks = list()
 /obj/item/deck
 	w_class = ITEM_SIZE_SMALL
 	icon = 'icons/obj/items/playing_cards.dmi'
+	material = /decl/material/solid/cardboard
 	var/list/cards = list()
 
 /obj/item/deck/Initialize()
@@ -62,6 +63,7 @@ var/global/list/card_decks = list()
 	name = "card box"
 	desc = "A small leather case to show how classy you are compared to everyone else."
 	icon_state = "card_holder"
+	material = /decl/material/solid/leather
 
 /obj/item/deck/cards
 	name = "deck of cards"
@@ -274,10 +276,10 @@ var/global/list/card_decks = list()
 /obj/item/pack
 	name = "card pack"
 	desc = "For those with disposible income."
-
 	icon_state = "card_pack"
 	icon = 'icons/obj/items/playing_cards.dmi'
 	w_class = ITEM_SIZE_TINY
+	material = /decl/material/solid/cardboard
 	var/list/cards = list()
 
 
@@ -298,7 +300,7 @@ var/global/list/card_decks = list()
 	icon = 'icons/obj/items/playing_cards.dmi'
 	icon_state = "empty"
 	w_class = ITEM_SIZE_TINY
-
+	material = /decl/material/solid/cardboard
 	var/concealed = 0
 	var/list/datum/playingcard/cards = list()
 

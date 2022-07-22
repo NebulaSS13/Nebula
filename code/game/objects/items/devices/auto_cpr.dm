@@ -6,6 +6,14 @@
 	w_class = ITEM_SIZE_NORMAL
 	origin_tech = "{'magnets':2,'biotech':2}"
 	slot_flags = SLOT_OVER_BODY
+	material = /decl/material/solid/plastic
+	matter = list(
+		/decl/material/solid/metal/aluminium = MATTER_AMOUNT_SECONDARY,
+		/decl/material/solid/metal/copper    = MATTER_AMOUNT_REINFORCEMENT,
+		/decl/material/solid/silicon         = MATTER_AMOUNT_REINFORCEMENT,
+		/decl/material/solid/metal/uranium   = MATTER_AMOUNT_TRACE,
+		/decl/material/solid/metal/lead      = MATTER_AMOUNT_TRACE,
+	)
 	var/last_pump
 	var/skilled_setup
 

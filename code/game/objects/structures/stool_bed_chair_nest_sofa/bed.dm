@@ -260,6 +260,11 @@
 	slot_flags = SLOT_BACK
 	w_class = ITEM_SIZE_LARGE
 	pickup_sound = 'sound/foley/pickup2.ogg'
+	material = /decl/material/solid/metal/steel
+	matter = list(
+		/decl/material/solid/plastic = MATTER_AMOUNT_SECONDARY, 
+		/decl/material/solid/cloth = MATTER_AMOUNT_REINFORCEMENT,
+	)
 	var/structure_form_type = /obj/structure/bed/roller	//The deployed form path.
 
 /obj/item/roller/get_single_monetary_worth()

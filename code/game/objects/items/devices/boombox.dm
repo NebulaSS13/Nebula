@@ -7,6 +7,12 @@
 	force = 7
 	w_class = ITEM_SIZE_HUGE //forbid putting something that emits loud sounds forever into a backpack
 	origin_tech = "{'magnets':2,'combat':1}"
+	material = /decl/material/solid/plastic
+	matter = list(
+		/decl/material/solid/metal/copper    = MATTER_AMOUNT_REINFORCEMENT,
+		/decl/material/solid/metal/aluminium = MATTER_AMOUNT_REINFORCEMENT,
+		/decl/material/solid/silicon         = MATTER_AMOUNT_TRACE,
+	)
 	var/playing = 0
 	var/track_num = 1
 	var/volume = 20
@@ -193,4 +199,4 @@
 /obj/random_multi/single_item/boombox
 	name = "boombox spawnpoint"
 	id = "boomtastic"
-	item_path = /obj/item/boombox/
+	item_path = /obj/item/boombox

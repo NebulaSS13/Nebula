@@ -7,6 +7,13 @@
 	icon = 'icons/obj/items/device/jammer.dmi'
 	icon_state = "jammer"
 	w_class = ITEM_SIZE_SMALL
+	material = /decl/material/solid/plastic
+	matter = list(
+		/decl/material/solid/metal/copper    = MATTER_AMOUNT_REINFORCEMENT,
+		/decl/material/solid/silicon         = MATTER_AMOUNT_REINFORCEMENT, 
+		/decl/material/solid/metal/steel     = MATTER_AMOUNT_REINFORCEMENT,
+		/decl/material/solid/metal/plutonium = MATTER_AMOUNT_TRACE,
+	)
 	var/active = FALSE
 	var/range = 2 // This is a radius, thus a range of 7 covers the entire visible screen
 	var/obj/item/cell/bcell = /obj/item/cell/high

@@ -3,6 +3,7 @@
 	var/lit_heat = 1000
 	var/waterproof = FALSE
 	var/lit = 0
+	material = /decl/material/solid/wood
 
 /obj/item/flame/afterattack(var/obj/O, var/mob/user, proximity)
 	..()

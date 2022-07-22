@@ -17,6 +17,8 @@
 	max_w_class = ITEM_SIZE_SMALL
 	max_storage_space = DEFAULT_BOX_STORAGE
 	use_sound = 'sound/effects/storage/box.ogg'
+	item_flags = ITEM_FLAG_HOLLOW
+	material = /decl/material/solid/plastic
 
 /obj/item/storage/firstaid/empty
 	icon_state = "firstaid"

@@ -12,6 +12,7 @@
 	slot_flags = SLOT_LOWER_BODY
 	var/overlay_flags
 	attack_verb = list("whipped", "lashed", "disciplined")
+	material = /decl/material/solid/leather/synth
 
 /obj/item/storage/belt/verb/toggle_layer()
 	set name = "Switch Belt Layer"
@@ -445,6 +446,8 @@
 	max_w_class = ITEM_SIZE_SMALL
 	max_storage_space = ITEM_SIZE_SMALL * 4
 	slot_flags = SLOT_LOWER_BODY | SLOT_BACK
+	material = /decl/material/solid/cloth
+	matter = list(/decl/material/solid/plastic = MATTER_AMOUNT_REINFORCEMENT)
 
 /obj/item/storage/belt/waistpack/big
 	name = "large waist pack"
@@ -470,6 +473,7 @@
 		/obj/item/inflatable,
 		/obj/item/inflatable/door
 		)
+	material = /decl/material/solid/fiberglass //need something that doesn't burn
 
 
 /obj/item/storage/belt/fire_belt/full

@@ -10,6 +10,8 @@
 	slot_flags = SLOT_LOWER_BODY
 	attack_verb = list("burnt", "singed")
 	lit_heat = 1500
+	material = /decl/material/solid/plastic
+	matter = list(/decl/material/solid/metal/steel = MATTER_AMOUNT_TRACE)
 	var/max_fuel = 5
 	var/random_colour = FALSE
 	var/list/available_colors = list(
@@ -31,6 +33,7 @@
 
 /obj/item/flame/lighter/Initialize()
 	. = ..()
+	item_flags |= ITEM_FLAG_HOLLOW
 	create_reagents(max_fuel)
 	reagents.add_reagent(/decl/material/liquid/fuel, max_fuel)
 	set_extension(src, /datum/extension/base_icon_state, icon_state)
@@ -163,6 +166,7 @@
 		COLOR_BRONZE,
 		COLOR_BRASS
 	)
+	material = /decl/material/solid/metal/stainlesssteel
 
 /obj/item/flame/lighter/zippo/on_update_icon()
 	. = ..()
@@ -201,10 +205,12 @@
 /obj/item/flame/lighter/zippo/brass
 	color = COLOR_BRASS
 	name = "brass zippo"
+	material = /decl/material/solid/metal/brass
 
 /obj/item/flame/lighter/zippo/bronze
 	color = COLOR_BRONZE
 	name = "bronze zippo"
+	material = /decl/material/solid/metal/bronze
 
 /obj/item/flame/lighter/zippo/pink
 	color = COLOR_PINK
@@ -213,6 +219,12 @@
 //Spawn using the colour list in the master type
 /obj/item/flame/lighter/zippo/random
 	random_colour = TRUE
+/obj/item/flame/lighter/zippo/random/Initialize()
+	. = ..()
+	if(color == COLOR_BRASS)
+		set_material(/decl/material/solid/metal/brass)
+	else if(color == COLOR_BRONZE)
+		set_material(/decl/material/solid/metal/bronze)
 
 //Legacy icon states for custom items
 /obj/item/flame/lighter/zippo/custom/Initialize()

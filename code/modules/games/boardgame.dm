@@ -3,6 +3,7 @@
 	desc = "A standard 16\" checkerboard. Well used." //Goddamn imperial system.
 	icon = 'icons/obj/pieces.dmi'
 	icon_state = "board"
+	material = /decl/material/solid/wood
 
 	var/num = 0
 	var/board_icons = list()

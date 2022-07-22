@@ -138,6 +138,7 @@
 	desc = "The by-product of cat farming."
 	icon = 'icons/obj/items/sheet_hide.dmi'
 	icon_state = "sheet-cat"
+	material = /decl/material/solid/leather/fur
 
 //Basic friend AI
 /mob/living/simple_animal/cat/fluff

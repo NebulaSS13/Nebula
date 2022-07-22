@@ -43,6 +43,7 @@
 
 /obj/item/extinguisher/Initialize()
 	. = ..()
+	item_flags |= ITEM_FLAG_HOLLOW
 	create_reagents(max_water)
 	if(starting_water > 0)
 		reagents.add_reagent(/decl/material/liquid/water, starting_water)

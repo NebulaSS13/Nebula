@@ -52,6 +52,7 @@
 	var/glass_desc
 	w_class = ITEM_SIZE_TINY
 	icon = 'icons/obj/drink_glasses/extras.dmi'
+	material = /decl/material/solid/plastic
 
 /obj/item/glass_extra/stick
 	name = "stick"

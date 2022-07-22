@@ -6,6 +6,7 @@
 	w_class = ITEM_SIZE_SMALL
 	drop_sound = 'sound/foley/paperpickup1.ogg'
 	pickup_sound = 'sound/foley/paperpickup2.ogg'
+	material = /decl/material/solid/cardboard
 
 /obj/item/folder/blue
 	desc = "A blue folder."

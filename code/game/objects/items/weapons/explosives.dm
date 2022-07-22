@@ -8,6 +8,11 @@
 	item_flags = ITEM_FLAG_NO_BLUDGEON
 	w_class = ITEM_SIZE_SMALL
 	origin_tech = "{'esoteric':2}"
+	material = /decl/material/solid/plastic
+	matter = list(
+		/decl/material/solid/silicon = MATTER_AMOUNT_TRACE,
+		//No RDX or explosive stuff to put in there.. :c
+	)
 	var/datum/wires/explosive/c4/wires = null
 	var/timer = 10
 	var/atom/target = null

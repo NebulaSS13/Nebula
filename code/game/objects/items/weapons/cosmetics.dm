@@ -7,11 +7,13 @@
 	w_class = ITEM_SIZE_TINY
 	slot_flags = SLOT_EARS
 	color = "#e00606"
+	material = /decl/material/solid/plastic
 	var/color_desc = "ruby"
 	var/open = FALSE
 
 /obj/item/lipstick/Initialize()
 	. = ..()
+	item_flags |= ITEM_FLAG_HOLLOW
 	if(color_desc)
 		desc += " This one is in [color_desc]."
 	update_icon()

@@ -476,7 +476,16 @@
 	icon = 'icons/obj/toy.dmi'
 	icon_state = "ship"
 	w_class = ITEM_SIZE_SMALL
+	material = /decl/material/solid/plastic
+	matter = list(
+		/decl/material/solid/metal/steel   = MATTER_AMOUNT_SECONDARY,
+		/decl/material/solid/metal/copper  = MATTER_AMOUNT_REINFORCEMENT,
+		/decl/material/solid/metal/lead    = MATTER_AMOUNT_REINFORCEMENT,
+		/decl/material/solid/metal/uranium = MATTER_AMOUNT_TRACE,
+		/decl/material/solid/silicon       = MATTER_AMOUNT_TRACE,
+	)
 	var/active = 0 //if the ship is on
+
 /obj/item/orion_ship/examine(mob/user)
 	. = ..()
 	if(!(in_range(user, src)))

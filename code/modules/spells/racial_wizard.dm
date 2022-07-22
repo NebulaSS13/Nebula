@@ -9,6 +9,7 @@
 	throw_speed = 1
 	throw_range = 3
 	force = 15
+	material = /decl/material/solid/stone/cult
 	var/list/potentials = list(
 		SPECIES_HUMAN = /obj/item/storage/bag/cash/infinite
 	)

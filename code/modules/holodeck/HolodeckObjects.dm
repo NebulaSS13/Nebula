@@ -213,6 +213,7 @@
 /obj/item/holo
 	damtype = PAIN
 	no_attack_log = 1
+	health = ITEM_HEALTH_NO_DAMAGE
 
 /obj/item/holo/esword
 	name = "holosword"

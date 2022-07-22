@@ -11,6 +11,8 @@
 	max_w_class = ITEM_SIZE_NORMAL
 	max_storage_space = DEFAULT_LARGEBOX_STORAGE
 	use_sound = 'sound/effects/closet_open.ogg'
+	material = /decl/material/solid/glass
+	matter = list(/decl/material/solid/metal/aluminium = MATTER_AMOUNT_SECONDARY)
 	var/shattered = 0
 	var/list/ui_users
 
@@ -74,6 +76,11 @@
 	desc = "A SalonPro Nano-Mirror(TM) brand mirror! Now a portable version."
 	icon = 'icons/obj/items/mirror.dmi'
 	icon_state = "mirror"
+	material = /decl/material/solid/plastic
+	matter = list(
+		/decl/material/solid/glass = MATTER_AMOUNT_SECONDARY, 
+		/decl/material/solid/metal/aluminium = MATTER_AMOUNT_SECONDARY
+	)
 	var/list/ui_users
 
 /obj/item/mirror/attack_self(mob/user)

@@ -41,6 +41,7 @@
 	desc = "The by-product of corgi farming."
 	icon = 'icons/obj/items/sheet_hide.dmi'
 	icon_state = "sheet-corgi"
+	material = /decl/material/solid/skin/fur/orange
 
 //IAN! SQUEEEEEEEEE~
 /mob/living/simple_animal/corgi/Ian

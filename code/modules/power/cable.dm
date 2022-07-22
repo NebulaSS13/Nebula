@@ -513,6 +513,7 @@ By design, d1 is the smallest direction and d2 is the highest
 	matter = null
 	uses_charge = 1
 	charge_costs = list(1)
+	health = ITEM_HEALTH_NO_DAMAGE
 
 /obj/item/stack/cable_coil/Initialize(mapload, c_length = MAXCOIL, var/param_color = null)
 	. = ..(mapload, c_length)
