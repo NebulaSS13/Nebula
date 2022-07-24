@@ -46,7 +46,7 @@
 		to_chat(usr, "<span class='warning'>You can't reach it.</span>")
 		return
 
-	if(istype(stored_pen))
+	if(IS_PEN(stored_pen))
 		to_chat(usr, "<span class='notice'>You remove [stored_pen] from [src].</span>")
 		usr.put_in_hands(stored_pen) // Silicons will drop it anyway.
 		stored_pen = null
@@ -86,7 +86,7 @@
 		update_verbs()
 		return
 
-	if(istype(W, /obj/item/pen) && stores_pen)
+	if(IS_PEN(W) && (W.w_class <= ITEM_SIZE_TINY) && stores_pen)
 		if(istype(stored_pen))
 			to_chat(user, "<span class='notice'>There is already a pen in [src].</span>")
 			return

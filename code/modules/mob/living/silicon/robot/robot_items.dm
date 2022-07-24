@@ -174,14 +174,17 @@
 // Allows service droids to rename paper items.
 
 /obj/item/pen/robopen
-	desc = "A black ink printing attachment with a paper naming mode."
-	name = "Printing Pen"
+	name = "printing pen"
 	var/mode = 1
+
+/obj/item/pen/robopen/make_pen_description()
+	desc = "\A [stroke_colour_name] [medium_name] printing attachment with a paper naming mode."
 
 /obj/item/pen/robopen/attack_self(mob/user)
 
 	var/choice = input("Would you like to change colour or mode?") as null|anything in list("Colour","Mode")
-	if(!choice) return
+	if(!choice) 
+		return
 
 	playsound(src.loc, 'sound/effects/pop.ogg', 50, 0)
 
@@ -189,7 +192,8 @@
 
 		if("Colour")
 			var/newcolour = input("Which colour would you like to use?") as null|anything in list("black","blue","red","green","yellow")
-			if(newcolour) colour = newcolour
+			if(newcolour) 
+				set_medium_color(newcolour, newcolour)
 
 		if("Mode")
 			if (mode == 1)

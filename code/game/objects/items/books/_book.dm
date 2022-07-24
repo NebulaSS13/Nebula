@@ -10,7 +10,7 @@
 	matter = list(/decl/material/solid/wood = MATTER_AMOUNT_REINFORCEMENT)
 
 	var/dat			 // Actual page content
-	var/pencode_dat  // Cache pencode if input, so it can be edited later. 
+	var/pencode_dat  // Cache pencode if input, so it can be edited later.
 	var/author		 // Who wrote the thing, can be changed by pen or PC. It is not automatically assigned
 	var/unique = 0   // 0 - Normal book, 1 - Should not be treated as normal book, unable to be copied, unable to be modified
 	var/title		 // The real name of the book.
@@ -68,7 +68,7 @@
 		else
 			to_chat(user, "<span class='notice'>There's already something in [title]!</span>")
 			return
-	if(istype(W, /obj/item/pen))
+	if(IS_PEN(W))
 		if(unique)
 			to_chat(user, "These pages don't seem to take the ink well. Looks like you can't modify it.")
 			return
@@ -133,9 +133,14 @@
 /obj/item/book/proc/formatpencode(var/mob/user, var/t, var/obj/item/pen/P)
 	. = t
 	if(findtext(t, "\[sign\]"))
-		. = replacetext(t, "\[sign\]", "<font face=\"[signfont]\"><i>[P ? P.get_signature(user) : "Anonymous"]</i></font>")
+		var/decl/tool_archetype/pen/parch = GET_DECL(TOOL_PEN)
+		var/signature = parch.get_signature(user, P)
+		. = replacetext(t, "\[sign\]", "<font face=\"[signfont]\"><i>[signature]</i></font>")
+
+	var/pen_flag  = P.get_tool_property(TOOL_PEN, TOOL_PROP_PEN_FLAG)
+	var/pen_color = P.get_tool_property(TOOL_PEN, TOOL_PROP_COLOR)
 	if(P)
-		if(P.iscrayon)
+		if(pen_flag & PEN_FLAG_CRAYON)
 			. = replacetext(t, "\[*\]", "")
 			. = replacetext(t, "\[hr\]", "")
 			. = replacetext(t, "\[small\]", "")
@@ -147,11 +152,11 @@
 			. = replacetext(t, "\[row\]", "")
 			. = replacetext(t, "\[cell\]", "")
 			. = replacetext(t, "\[logo\]", "")
-			. = "<font face=\"[crayonfont]\" color=\"[P.colour]\"><b>[.]</b></font>"
-		else if(P.isfancy)
-			. = "<font face=\"[fancyfont]\" color=\"[P.colour]\"><i>[.]</i></font>"
+			. = "<font face=\"[crayonfont]\" color=\"[pen_color]\"><b>[.]</b></font>"
+		else if(pen_flag & PEN_FLAG_FANCY)
+			. = "<font face=\"[fancyfont]\" color=\"[pen_color]\"><i>[.]</i></font>"
 		else
-			. = "<font face=\"[deffont]\" color=\"[P.colour]\">[.]</font>"
+			. = "<font face=\"[deffont]\" color=\"[pen_color]\">[.]</font>"
 	else
 		. = "<font face=\"[deffont]\" color=\"black\"]>[.]</font>"
 	. = pencode2html(.)

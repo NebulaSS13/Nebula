@@ -32,18 +32,17 @@
 	qdel(src)
 
 /obj/item/chems/food/egg/attackby(obj/item/W, mob/user)
-	if(istype( W, /obj/item/pen/crayon ))
-		var/obj/item/pen/crayon/C = W
-		var/clr = C.colourName
+	if(IS_PEN(W))
+		var/clr = W.get_tool_property(TOOL_PEN, TOOL_PROP_COLOR_NAME)
 
 		if(!(clr in list("blue","green","mime","orange","purple","rainbow","red","yellow")))
-			to_chat(usr, "<span class='notice'>The egg refuses to take on this color!</span>")
+			to_chat(usr, SPAN_WARNING("The egg refuses to take on this color!"))
 			return
 
-		to_chat(usr, "<span class='notice'>You color \the [src] [clr]</span>")
+		to_chat(usr, SPAN_NOTICE("You color \the [src] [clr]"))
 		icon_state = "egg-[clr]"
-	else
-		..()
+		return TRUE
+	return ..()
 
 /obj/item/chems/food/egg/blue
 	icon_state = "egg-blue"

@@ -6,6 +6,16 @@
 	var/datum/extension/tool/tool = get_extension(src, /datum/extension/tool)
 	. = tool?.get_tool_speed(archetype)
 
+/**Returns the property's value for a givent archetype. */
+/obj/item/proc/get_tool_property(var/archetype, var/property)
+	var/datum/extension/tool/tool = get_extension(src, /datum/extension/tool)
+	. = tool?.get_tool_property(archetype, property)
+
+/**Set the property for the given tool archetype to the specified value. */
+/obj/item/proc/set_tool_property(var/archetype, var/property, var/value)
+	var/datum/extension/tool/tool = get_extension(src, /datum/extension/tool)
+	. = tool?.set_tool_property(archetype, property, value)
+
 /obj/item/proc/do_tool_interaction(var/archetype, var/mob/user, var/atom/target, var/delay = (1 SECOND), var/start_message, var/success_message, var/failure_message, var/fuel_expenditure = 0, var/check_skill = SKILL_CONSTRUCTION, var/check_skill_threshold, var/check_skill_prob = 50)
 
 	if(get_tool_quality(archetype) <= 0)
@@ -20,7 +30,7 @@
 	if(. == TOOL_USE_SUCCESS)
 		if(success_message)
 			user.visible_message(
-				SPAN_NOTICE("\The [user] finishes [success_message] \the [target] with \the [src]."), 
+				SPAN_NOTICE("\The [user] finishes [success_message] \the [target] with \the [src]."),
 				SPAN_NOTICE("You finish [success_message] \the [target] with \the [src].")
 			)
 		return TRUE

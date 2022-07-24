@@ -264,7 +264,7 @@
 			to_chat(user, "<span class='warning'>You try to push \the [I] through the lid but it doesn't work!</span>")
 		return
 
-	if( istype(I, /obj/item/pen/) )
+	if(IS_PEN(I))
 
 		if( src.open )
 			return

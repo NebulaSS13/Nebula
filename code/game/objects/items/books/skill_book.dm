@@ -751,7 +751,7 @@ MEDICAL
 	icon_state = "tb_white_question"
 
 /obj/item/book/skill/custom/attackby(obj/item/pen, mob/user)
-	if(istype(pen, /obj/item/pen))
+	if(IS_PEN(pen))
 
 		if(!user.skill_check(SKILL_LITERACY, SKILL_BASIC))
 			to_chat(user, SPAN_WARNING("You can't even read, yet you want to write a whole educational textbook?"))

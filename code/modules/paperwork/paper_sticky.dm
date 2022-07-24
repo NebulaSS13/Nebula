@@ -32,7 +32,7 @@
 		icon_state = "[icon_state]_writing"
 
 /obj/item/sticky_pad/attackby(var/obj/item/thing, var/mob/user)
-	if(istype(thing, /obj/item/pen))
+	if(IS_PEN(thing))
 
 		if(jobban_isbanned(user, "Graffiti"))
 			to_chat(user, SPAN_WARNING("You are banned from leaving persistent information across rounds."))

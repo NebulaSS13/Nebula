@@ -1,12 +1,16 @@
 /datum/extension/tool
 	expected_type = /obj/item
 	base_type = /datum/extension/tool
-	var/list/tool_values     // Delay multipliers/general tool quality indicators, lower is better but 0 or lower means it isn't valid as a tool.
-	var/list/tool_use_sounds // Associative list of tool to sound/list of sounds used to override the archetype config sounds.
+	var/list/tool_values        // Delay multipliers/general tool quality indicators, lower is better but 0 or lower means it isn't valid as a tool.
+	var/list/tool_use_sounds    // Associative list of tool to sound/list of sounds used to override the archetype config sounds.
+	var/list/tool_properties    // Associative list of tool archetype to a list of properties and their values for that archetype.
 
-/datum/extension/tool/New(datum/holder, list/_tool_values)
+/datum/extension/tool/New(datum/holder, list/_tool_values, list/_tool_properties)
 	..()
 	tool_values = _tool_values
+	for(var/atype in _tool_properties)
+		var/list/cur_props = LAZYACCESS(tool_properties, atype)? tool_properties[atype] + _tool_properties[atype] : _tool_properties[atype]
+		LAZYSET(tool_properties, atype, cur_props)
 
 /datum/extension/tool/proc/set_sound_overrides(list/_tool_use_sounds)
 
@@ -30,6 +34,23 @@
 
 /datum/extension/tool/proc/get_tool_quality(var/archetype)
 	return LAZYACCESS(tool_values, archetype)
+
+/**Return the value of the property specified for the given tool archetype. */
+/datum/extension/tool/proc/get_tool_property(var/archetype, var/property)
+	var/list/props = LAZYACCESS(tool_properties, archetype)
+	//If we don't override, check the datum's default values
+	if(!LAZYLEN(props))
+		var/decl/tool_archetype/T = GET_DECL(archetype)
+		props = T.properties
+	return LAZYACCESS(props, property)
+
+/**Set the given tool property for the given tool archetype */
+/datum/extension/tool/proc/set_tool_property(var/archetype, var/property, var/value)
+	var/list/props = LAZYACCESS(tool_properties, archetype)
+	if(!props)
+		LAZYSET(tool_properties, archetype, list()) //Init the properties override list
+		props = tool_properties[archetype]
+	LAZYSET(props, property, value)
 
 /datum/extension/tool/proc/handle_physical_manipulation(var/mob/user)
 	return FALSE

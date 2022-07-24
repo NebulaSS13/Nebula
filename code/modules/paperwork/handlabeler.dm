@@ -48,7 +48,7 @@
 	if(!simulated)
 		return
 	var/datum/extension/labels/L = get_or_create_extension(src, /datum/extension/labels)
-	L.AttachLabel(user, label_text)
+	return L.AttachLabel(user, label_text)
 
 /obj/item/hand_labeler/attack_self(mob/user)
 	mode = !mode

@@ -10,10 +10,14 @@
 
 	var/obj/structure/morgue_tray/connected_tray
 
+/obj/structure/morgue/get_mechanics_info()
+	return "[..()]<BR>Can be labeled once with a hand labeler."
+
 /obj/structure/morgue/Initialize(ml, _mat, _reinf_mat)
 	. = ..()
 	connected_tray = new /obj/structure/morgue_tray(src)
 	connected_tray.connected_morgue = src
+	get_or_create_extension(src, /datum/extension/labels/single)
 
 /obj/structure/morgue/Destroy()
 	if(!QDELETED(connected_tray))
@@ -79,23 +83,6 @@
 /obj/structure/morgue/attack_robot(mob/user)
 	if(Adjacent(user))
 		return attack_hand(user)
-
-/obj/structure/morgue/attackby(P, mob/user)
-	if(istype(P, /obj/item/pen))
-		var/new_label = sanitize_safe(input(user, "What would you like the label to be?", capitalize(name), null) as text|null, MAX_NAME_LEN)
-
-		if((!Adjacent(user) || loc == user))
-			return
-		
-		if(has_extension(src, /datum/extension/labels))
-			var/datum/extension/labels/L = get_extension(src, /datum/extension/labels)
-			if(!L.CanAttachLabel(user, new_label))
-				return
-		
-		attach_label(user, P, new_label)
-		return
-	else 
-		return ..()
 
 /obj/structure/morgue/relaymove(mob/user)
 	if(user.incapacitated())

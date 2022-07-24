@@ -48,7 +48,7 @@
 	else
 		if(istype(W, /obj/item/ducttape))
 			return 0
-		if(istype(W, /obj/item/pen))
+		if(IS_PEN(W))
 			show_browser(user, "", "window=[name]") //Closes the dialog
 		var/obj/P = pages[page]
 		P.attackby(W, user)

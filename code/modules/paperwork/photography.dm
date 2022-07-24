@@ -59,7 +59,7 @@ var/global/photo_count = 0
 	tiny.pixel_y = -32*(photo_size-1)/2 + 3
 
 /obj/item/photo/attackby(obj/item/P, mob/user)
-	if(istype(P, /obj/item/pen))
+	if(IS_PEN(P))
 		var/txt = sanitize(input(user, "What would you like to write on the back?", "Photo Writing", null)  as text, 128)
 		if(loc == user && user.stat == 0)
 			scribble = txt

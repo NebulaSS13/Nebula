@@ -234,7 +234,7 @@ var/global/list/card_decks = list()
 
 	H.throw_at(get_step(target, ismob(target) ? target.dir : target), 10, 1,user)
 
-/obj/item/hand/attackby(obj/O, mob/user)
+/obj/item/hand/attackby(obj/item/O, mob/user)
 
 	if(istype(O,/obj/item/hand))
 		var/obj/item/hand/H = O
@@ -246,7 +246,7 @@ var/global/list/card_decks = list()
 		H.name = "hand of [(H.cards.len)] card\s"
 		return TRUE
 
-	if(length(cards) == 1 && istype(O, /obj/item/pen))
+	if(length(cards) == 1 && IS_PEN(O))
 		var/datum/playingcard/P = cards[1]
 		if(lowertext(P.name) != "blank card")
 			to_chat(user, SPAN_WARNING("You cannot write on that card."))

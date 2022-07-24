@@ -19,7 +19,7 @@
 		else
 			to_chat(user, SPAN_NOTICE("You stop shoveling."))
 		return TRUE
-	
+
 	if (!open && istype(W, /obj/item/stack/material) && W.material?.type == /decl/material/solid/wood)
 		if(locate(/obj/structure/gravemarker) in src.loc)
 			to_chat(user, SPAN_WARNING("There's already a grave marker here."))
@@ -64,7 +64,7 @@
 	for(var/atom/movable/A in T)
 		if(!A.anchored && A != user && A.simulated)
 			A.forceMove(src)
-	
+
 	update_icon()
 
 /obj/structure/pit/return_air()
@@ -163,7 +163,7 @@
 	pixel_y     = 8
 	anchored    = TRUE
 	material    = /decl/material/solid/wood
-	w_class     = ITEM_SIZE_NORMAL 
+	w_class     = ITEM_SIZE_NORMAL
 	var/message = "Unknown."
 
 /obj/structure/gravemarker/examine(mob/user)
@@ -175,9 +175,12 @@
 		if(W.do_tool_interaction(TOOL_HATCHET, user, src, 3 SECONDS, "hacking away at", "hacking at"))
 			physically_destroyed(FALSE)
 		return TRUE
-	if(istype(W,/obj/item/pen))
+	if(IS_PEN(W))
 		var/msg = sanitize(input(user, "What should it say?", "Grave marker", message) as text|null)
-		if(msg)
+		if(!CanPhysicallyInteract(user))
+			to_chat(user, SPAN_WARNING("You must stay close to \the [src]!"))
+			return
+		if(msg && W.do_tool_interaction(TOOL_PEN, user, src, 1 SECOND, fuel_expenditure = 1))
 			message = msg
 		return TRUE
 	. = ..()

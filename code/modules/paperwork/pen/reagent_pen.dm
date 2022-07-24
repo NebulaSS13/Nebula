@@ -1,6 +1,8 @@
 /obj/item/pen/reagent
-	atom_flags = ATOM_FLAG_OPEN_CONTAINER
+	atom_flags  = ATOM_FLAG_OPEN_CONTAINER
 	origin_tech = "{'materials':2,'esoteric':5}"
+	sharp       = 1
+	pen_quality = TOOL_QUALITY_MEDIOCRE
 
 /obj/item/pen/reagent/Initialize()
 	. = ..()
@@ -32,8 +34,10 @@
  * Sleepy Pens
  */
 /obj/item/pen/reagent/sleepy
-	desc = "It's a black ink pen with a sharp point and a carefully engraved \"Waffle Co.\"."
 	origin_tech = "{'materials':2,'esoteric':5}"
+
+/obj/item/pen/reagent/sleepy/make_pen_description()
+	desc = "It's \a [stroke_colour_name] [medium_name] pen with a sharp point and a carefully engraved \"Waffle Co.\"."
 
 /obj/item/pen/reagent/sleepy/Initialize()
 	. = ..()
