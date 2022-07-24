@@ -30,7 +30,7 @@ General Public License version 3.
 
 <h3 id="modules">Modules
 <aside>(132 modules,
-    45/4054 macros, 1.1%)</aside></h3>
+    45/4067 macros, 1.1%)</aside></h3>
 <ul class="index-tree modules">
     <li><a href="(builtins).html" title="(builtins)">(builtins)</a></li>
     <li class="has-children"><span title="code">code</span><ul class="index-tree">
@@ -247,7 +247,7 @@ Thanks to forum_account for saving the day, the library can be found
 
 
 <h3 id="types">Types
-<aside>(86 detailed/263 documented/17501 total, 1.5%)</aside></h3>
+<aside>(89 detailed/266 documented/17503 total, 1.5%)</aside></h3>
 <ul class="index-tree">
     <li><a href="global.html" title="(global)">(global)</a></li>
     <li><a href="area.html" title="&#x2F;area">area</a></li>
@@ -314,7 +314,8 @@ Then do start() to start it and stop() to stop it, obviously
 and don't call start() in a loop that will be repeated otherwise it'll get spammed!<ul class="index-tree">
     <li><span class="no-substance" title="&#x2F;datum&#x2F;effect&#x2F;effect&#x2F;system&#x2F;trail&#x2F;steam">steam</span> - Attach a steam trail to an object (eg. a reacting beaker) that will follow it</li>
     </ul></li>
-    <li class="has-children"><span class="no-substance">extension&#x2F;</span><span title="&#x2F;datum&#x2F;extension&#x2F;scent">scent</span> - Scent extensions
+    <li class="has-children"><span title="&#x2F;datum&#x2F;extension">extension</span><ul class="index-tree">
+    <li class="has-children"><span title="&#x2F;datum&#x2F;extension&#x2F;scent">scent</span> - Scent extensions
 Usage:
 To add:
 set_extension(atom, /datum/extension/scent/PATH/TO/SPECIFIC/SCENT)
@@ -322,6 +323,8 @@ This will set up the extension and will make it begin to emit_scent.
 To remove:
 remove_extension(atom, /datum/extension/scent)<ul class="index-tree">
     <li><a href="datum/extension/scent/custom.html" title="&#x2F;datum&#x2F;extension&#x2F;scent&#x2F;custom">custom</a></li>
+    </ul></li>
+    <li><a href="datum/extension/tool.html" title="&#x2F;datum&#x2F;extension&#x2F;tool">tool</a></li>
     </ul></li>
     <li><span class="no-substance" title="&#x2F;datum&#x2F;follow_holder">follow_holder</span> - Follow Metadata</li>
     <li class="has-children"><a href="datum/game_mode.html" title="&#x2F;datum&#x2F;game_mode">game_mode</a><ul class="index-tree">
@@ -409,6 +412,7 @@ A list of strings that are used by the end of round credits roll.</li>
     <li><span class="no-substance" title="&#x2F;decl&#x2F;observ&#x2F;sight_set">sight_set</span> - Shuttle Moved/Pre Move Handling</li>
     </ul></li>
     <li><span class="no-substance" title="&#x2F;decl&#x2F;scent_intensity">scent_intensity</span> - Scent intensity</li>
+    <li><span class="no-substance">tool_archetype&#x2F;</span><a href="decl/tool_archetype/pen.html" title="&#x2F;decl&#x2F;tool_archetype&#x2F;pen">pen</a></li>
     <li><a href="decl/topic_command.html" title="&#x2F;decl&#x2F;topic_command">topic_command</a></li>
     </ul></li>
     <li><a href="dmm_suite.html" title="&#x2F;dmm_suite">dmm_suite</a></li>
@@ -548,6 +552,7 @@ Parameters: var/obj/item/card/id</li>
     </ul></li>
     <li><span class="no-substance">syringe&#x2F;</span><span class="no-substance" title="&#x2F;obj&#x2F;item&#x2F;chems&#x2F;syringe&#x2F;stabilizer">stabilizer</span> - Syringes. END</li>
     </ul></li>
+    <li><a href="obj/item/clipboard.html" title="&#x2F;obj&#x2F;item&#x2F;clipboard">clipboard</a></li>
     <li class="has-children"><a href="obj/item/clothing.html" title="&#x2F;obj&#x2F;item&#x2F;clothing">clothing</a><ul class="index-tree">
     <li><span class="no-substance">suit&#x2F;storage&#x2F;</span><span class="no-substance" title="&#x2F;obj&#x2F;item&#x2F;clothing&#x2F;suit&#x2F;storage&#x2F;hooded">hooded</span> - Hoods for winter coats and chaplain hoodie etc</li>
     </ul></li>
@@ -653,7 +658,7 @@ TO-DO -- Using it as a power measurement tool for cables etc. Nannek.</li>
 </main>
 <footer>
     nebula.dme
-    <a href="https://github.com/NebulaSS13/Nebula/tree/31b78083da8c48fd9eadea32a187da997bc4052d">31b7808</a>
+    <a href="https://github.com/NebulaSS13/Nebula/tree/85ac390fc4263078c679db25d8eaf0f426b892f3">85ac390</a>
         (dev) &mdash; <a href="https://github.com/SpaceManiac/SpacemanDMM/blob/master/src/dmdoc/README.md">dmdoc 1.4.1</a></footer>
 </body>
 </html>
