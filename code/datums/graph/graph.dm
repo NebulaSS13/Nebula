@@ -6,21 +6,6 @@
 	VAR_PRIVATE/list/pending_disconnections
 	VAR_PRIVATE/list/pending_movements
 
-#ifdef UNIT_TEST
-// For unit tests only. DO NOT use in production.
-/datum/graph/proc/get_nodes()
-	return nodes
-
-/datum/graph/proc/get_edges()
-	return edges
-#else
-/datum/graph/proc/get_nodes()
-	CRASH("graph.get_nodes() called in production code!")
-
-/datum/graph/proc/get_edges()
-	CRASH("graph.get_edges() called in production code!")
-#endif
-
 /datum/graph/New(var/list/nodes, var/list/edges, var/previous_owner = null)
 	if(!length(nodes))
 		CRASH("Invalid list of nodes: [log_info_line(nodes)]")
