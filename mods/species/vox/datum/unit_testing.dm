@@ -1,4 +1,3 @@
-#ifdef UNIT_TEST
 #ifndef IMMUNE
 #define IMMUNE 3
 #endif
@@ -32,5 +31,3 @@
 /datum/unit_test/mob_damage/vox/halloss
 	name = "MOB: Vox Halloss Damage Check"
 	damagetype = PAIN
-
-#endif
