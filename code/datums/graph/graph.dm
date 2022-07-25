@@ -1,10 +1,19 @@
 /datum/graph
-	VAR_PRIVATE_UT/list/nodes
-	VAR_PRIVATE_UT/list/edges
+	VAR_PRIVATE/list/nodes
+	VAR_PRIVATE/list/edges
 
 	VAR_PRIVATE/list/pending_connections
 	VAR_PRIVATE/list/pending_disconnections
 	VAR_PRIVATE/list/pending_movements
+
+#ifdef UNIT_TEST
+// For unit tests only. DO NOT use in production.
+/datum/graph/proc/get_nodes()
+	return nodes
+
+/datum/graph/proc/get_edges()
+	return edges
+#endif
 
 /datum/graph/New(var/list/nodes, var/list/edges, var/previous_owner = null)
 	if(!length(nodes))

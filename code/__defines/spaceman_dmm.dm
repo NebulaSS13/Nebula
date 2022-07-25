@@ -29,14 +29,3 @@
 	#define VAR_PRIVATE var
 	#define VAR_PROTECTED var
 #endif
-
-// Workarounds to allow unit tests to introspect on variables that shouldn't be accessed in production.
-#ifdef UNIT_TEST
-	#define VAR_FINAL_UT var
-	#define VAR_PRIVATE_UT var
-	#define VAR_PROTECTED_UT var
-#else
-	#define VAR_FINAL_UT VAR_FINAL
-	#define VAR_PRIVATE_UT VAR_PRIVATE
-	#define VAR_PROTECTED_UT VAR_PROTECTED
-#endif

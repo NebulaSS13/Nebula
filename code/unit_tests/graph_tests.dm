@@ -573,18 +573,20 @@
 
 /datum/graph_expectation/proc/CheckExpectations(var/datum/graph/graph)
 	. = list()
-	if(length(expected_nodes ^ (graph.nodes || list())))
-		. += "Expected the following nodes [log_info_line(expected_nodes)], was [log_info_line(graph.nodes)]"
-	if(length(expected_edges ^ (graph.edges || list())))
-		. += "Expected the following edges [log_info_line(expected_edges)], was [log_info_line(graph.edges)]"
+	var/graph_nodes = graph.get_nodes()
+	var/graph_edges = graph.get_edges()
+	if(length(expected_nodes ^ (graph_nodes || list())))
+		. += "Expected the following nodes [log_info_line(expected_nodes)], was [log_info_line(graph_nodes)]"
+	if(length(expected_edges ^ (graph_edges || list())))
+		. += "Expected the following edges [log_info_line(expected_edges)], was [log_info_line(graph_edges)]"
 
-	for(var/datum/node/N in graph.nodes)
+	for(var/datum/node/N in graph_nodes)
 		if(N.graph != graph)
 			. += "[log_info_line(N)]: Expected the following graph [log_info_line(graph)], was [N.graph]"
 
 	for(var/node in expected_edges)
 		var/expected_connections = expected_edges[node]
-		var/actual_connections = graph.edges[node]
+		var/actual_connections = graph_edges[node]
 		if(length(expected_connections ^ actual_connections))
 			. += "[log_info_line(node)]: Expected the following connections [log_info_line(expected_connections)], was [log_info_line(actual_connections)]"
 
