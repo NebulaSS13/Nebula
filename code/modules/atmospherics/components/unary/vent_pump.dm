@@ -39,7 +39,6 @@
 
 	var/welded = 0 // Added for aliens -- TLE
 
-	var/controlled = TRUE  //if we should register with an air alarm on spawn
 	build_icon_state = "uvent"
 	var/sound_id
 	var/datum/sound_token/sound_token
@@ -102,18 +101,29 @@
 	pressure_checks_default = 2
 
 /obj/machinery/atmospherics/unary/vent_pump/Initialize()
+	if (!id_tag)
+		id_tag = "[sequential_id("obj/machinery")]"
 	. = ..()
 	air_contents.volume = ATMOS_DEFAULT_VOLUME_PUMP
 	update_sound()
 
 /obj/machinery/atmospherics/unary/vent_pump/Destroy()
 	QDEL_NULL(sound_token)
-	var/area/A = get_area(src)
-	if(A)
-		events_repository.unregister(/decl/observ/name_set, A, src, .proc/change_area_name)
-		A.air_vent_info -= id_tag
-		A.air_vent_names -= id_tag
 	. = ..()
+
+/obj/machinery/atmospherics/unary/vent_pump/reset_area(area/old_area, area/new_area)
+	if(old_area == new_area)
+		return
+	if(old_area)
+		events_repository.unregister(/decl/observ/name_set, old_area, src, .proc/change_area_name)
+		old_area.air_vent_info -= id_tag
+		old_area.air_vent_names -= id_tag
+	if(new_area && new_area == get_area(src))
+		events_repository.register(/decl/observ/name_set, new_area, src, .proc/change_area_name)
+		if(!new_area.air_vent_names[id_tag])
+			var/new_name = "[new_area.proper_name] Vent Pump #[new_area.air_vent_names.len+1]"
+			new_area.air_vent_names[id_tag] = new_name
+			SetName(new_name)
 
 /obj/machinery/atmospherics/unary/vent_pump/high_volume
 	name = "large air vent"
@@ -218,18 +228,6 @@
 
 /obj/machinery/atmospherics/unary/vent_pump/area_uid()
 	return controlled ? ..() : "NONE"
-
-/obj/machinery/atmospherics/unary/vent_pump/Initialize()
-	if (!id_tag)
-		id_tag = "[sequential_id("obj/machinery")]"
-	if(controlled)
-		var/area/A = get_area(src)
-		if(A && !A.air_vent_names[id_tag])
-			var/new_name = "[A.proper_name] Vent Pump #[A.air_vent_names.len+1]"
-			A.air_vent_names[id_tag] = new_name
-			SetName(new_name)
-			events_repository.register(/decl/observ/name_set, A, src, .proc/change_area_name)
-	. = ..()
 
 /obj/machinery/atmospherics/unary/vent_pump/proc/change_area_name(var/area/A, var/old_area_name, var/new_area_name)
 	if(get_area(src) != A)

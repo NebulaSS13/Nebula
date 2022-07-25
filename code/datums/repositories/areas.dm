@@ -1,15 +1,9 @@
 var/global/repository/area/area_repository = new()
 
 /repository/area
-	var/list/by_name_coords_cache_data
-	var/list/by_name_cache_data
-	var/list/by_z_level_cache_data
-
-/repository/area/New()
-	by_name_coords_cache_data = list()
-	by_name_cache_data        = list()
-	by_z_level_cache_data     = list()
-	..()
+	var/list/by_name_coords_cache_data = list()
+	var/list/by_name_cache_data        = list()
+	var/list/by_z_level_cache_data     = list()
 
 /repository/area/proc/get_areas_by_name(var/list/area_predicates = /proc/is_not_space_area)
 	return priv_get_cached_areas(by_name_cache_data, /proc/group_areas_by_z_level, area_predicates, /proc/get_area_proper_name)
@@ -51,3 +45,9 @@ var/global/repository/area/area_repository = new()
 	var/datum/cache_entry/cache_entry = cache_data[key]
 	cache_entry.timestamp = world.time + 3 MINUTES
 	cache_entry.data = data
+
+/repository/area/proc/clear_cache()
+	for(var/list/L in list(by_name_coords_cache_data, by_name_cache_data, by_z_level_cache_data))
+		for(var/key in L)
+			qdel(L[key])
+		L.Cut()

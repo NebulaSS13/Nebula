@@ -61,16 +61,30 @@
 	icon_state = "map_scrubber_on"
 
 /obj/machinery/atmospherics/unary/vent_scrubber/Initialize()
+	if (!id_tag)
+		id_tag = "[sequential_id("obj/machinery")]"
+	if(!scrubbing_gas)
+		scrubbing_gas = list()
+		for(var/g in subtypesof(/decl/material/gas))
+			if(g != /decl/material/gas/oxygen && g != /decl/material/gas/nitrogen)
+				scrubbing_gas += g
 	. = ..()
 	air_contents.volume = ATMOS_DEFAULT_VOLUME_FILTER
 
-/obj/machinery/atmospherics/unary/vent_scrubber/Destroy()
-	var/area/A = get_area(src)
-	if(A)
-		events_repository.unregister(/decl/observ/name_set, A, src, .proc/change_area_name)
-		A.air_scrub_info -= id_tag
-		A.air_scrub_names -= id_tag
-	. = ..()
+/obj/machinery/atmospherics/unary/vent_scrubber/reset_area(area/old_area, area/new_area)
+	if(old_area == new_area)
+		return
+	if(old_area)
+		events_repository.unregister(/decl/observ/name_set, old_area, src, .proc/change_area_name)
+		old_area.air_scrub_info -= id_tag
+		old_area.air_scrub_names -= id_tag
+	if(new_area && new_area == get_area(src))
+		events_repository.register(/decl/observ/name_set, new_area, src, .proc/change_area_name)
+		if(!new_area.air_scrub_names[id_tag])
+			var/new_name = "[new_area.proper_name] Vent Scrubber #[new_area.air_scrub_names.len+1]"
+			new_area.air_scrub_names[id_tag] = new_name
+			SetName(new_name)
+
 
 /obj/machinery/atmospherics/unary/vent_scrubber/on_update_icon()
 	if(welded)
@@ -83,22 +97,6 @@
 		icon_state = "in"
 
 	build_device_underlays()
-
-/obj/machinery/atmospherics/unary/vent_scrubber/Initialize()
-	if (!id_tag)
-		id_tag = "[sequential_id("obj/machinery")]"
-	if(!scrubbing_gas)
-		scrubbing_gas = list()
-		for(var/g in subtypesof(/decl/material/gas))
-			if(g != /decl/material/gas/oxygen && g != /decl/material/gas/nitrogen)
-				scrubbing_gas += g
-	var/area/A = get_area(src)
-	if(A && !A.air_scrub_names[id_tag])
-		var/new_name = "[A.proper_name] Vent Scrubber #[A.air_scrub_names.len+1]"
-		A.air_scrub_names[id_tag] = new_name
-		SetName(new_name)
-		events_repository.register(/decl/observ/name_set, A, src, .proc/change_area_name)
-	. = ..()
 
 /obj/machinery/atmospherics/unary/vent_scrubber/proc/change_area_name(var/area/A, var/old_area_name, var/new_area_name)
 	if(get_area(src) != A)
