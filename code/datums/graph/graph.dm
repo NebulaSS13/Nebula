@@ -13,6 +13,12 @@
 
 /datum/graph/proc/get_edges()
 	return edges
+#else
+/datum/graph/proc/get_nodes()
+	CRASH("graph.get_nodes() called in production code!")
+
+/datum/graph/proc/get_edges()
+	CRASH("graph.get_edges() called in production code!")
 #endif
 
 /datum/graph/New(var/list/nodes, var/list/edges, var/previous_owner = null)

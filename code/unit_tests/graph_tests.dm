@@ -364,10 +364,12 @@
 
 		var/edge_issues = 0
 
-		var/edgesA = G.edges[hostA.node]
-		var/edgesB = G.edges[hostB.node]
-		var/edgesC = G.edges[hostC.node]
-		var/edgesD = G.edges[hostD.node]
+		var/G_edges = G.get_edges()
+
+		var/edgesA = G_edges[hostA.node]
+		var/edgesB = G_edges[hostB.node]
+		var/edgesC = G_edges[hostC.node]
+		var/edgesD = G_edges[hostD.node]
 		if(length(edgesA) != 1 || !(hostB.node in edgesA))
 			edge_issues++
 			log_bad("Invalid edges - Host A: [log_info_line(edgesA)]")

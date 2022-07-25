@@ -12,6 +12,9 @@
 // Do not use this in production; for unit tests ONLY.
 /obj/abstract/map_data/proc/get_UT_turf_exceptions_by_door_type()
 	return UT_turf_exceptions_by_door_type
+#else
+/obj/abstract/map_data/proc/get_UT_turf_exceptions_by_door_type()
+	CRASH("map_data.get_UT_turf_exceptions_by_door_type() called in production code!")
 #endif
 
 // If the height is more than 1, we mark all contained levels as connected.
