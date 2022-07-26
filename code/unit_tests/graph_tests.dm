@@ -346,6 +346,24 @@
 
 	return TRUE
 
+/datum/graph/proc/find_edge_issues(var/atom/movable/graph_test/hostA, var/atom/movable/graph_test/hostB, var/atom/movable/graph_test/hostC, var/atom/movable/graph_test/hostD)
+	var/list/edge_issues
+
+	var/edgesA = edges[hostA.node]
+	var/edgesB = edges[hostB.node]
+	var/edgesC = edges[hostC.node]
+	var/edgesD = edges[hostD.node]
+	if(length(edgesA) != 1 || !(hostB.node in edgesA))
+		LAZYADD(edge_issues, "Invalid edges - Host A: [log_info_line(edgesA)]")
+	if(length(edgesB) != 2 || !(hostA.node in edgesB) || !(hostC.node in edgesB))
+		LAZYADD(edge_issues, "Invalid edges - Host B: [log_info_line(edgesB)]")
+	if(length(edgesC) != 2 || !(hostB.node in edgesC) || !(hostD.node in edgesC))
+		LAZYADD(edge_issues, "Invalid edges - Host C: [log_info_line(edgesC)]")
+	if(length(edgesD) != 1 || !(hostC.node in edgesD))
+		LAZYADD(edge_issues, "Invalid edges - Host D: [log_info_line(edgesD)]")
+
+	return edge_issues
+
 /datum/unit_test/graph_test/move/check_result()
 	if(!ReadyToCheckExpectations())
 		return FALSE
@@ -362,26 +380,12 @@
 			log_bad(log_info_line(hostD.node.graph))
 			return TRUE
 
-		var/edge_issues = 0
+		var/list/edge_issues = G.find_edge_issues(hostA, hostB, hostC, hostD)
 
-		var/edgesA = G.edges[hostA.node]
-		var/edgesB = G.edges[hostB.node]
-		var/edgesC = G.edges[hostC.node]
-		var/edgesD = G.edges[hostD.node]
-		if(length(edgesA) != 1 || !(hostB.node in edgesA))
-			edge_issues++
-			log_bad("Invalid edges - Host A: [log_info_line(edgesA)]")
-		if(length(edgesB) != 2 || !(hostA.node in edgesB) || !(hostC.node in edgesB))
-			edge_issues++
-			log_bad("Invalid edges - Host B: [log_info_line(edgesB)]")
-		if(length(edgesC) != 2 || !(hostB.node in edgesC) || !(hostD.node in edgesC))
-			edge_issues++
-			log_bad("Invalid edges - Host C: [log_info_line(edgesC)]")
-		if(length(edgesD) != 1 || !(hostC.node in edgesD))
-			edge_issues++
-			log_bad("Invalid edges - Host D: [log_info_line(edgesD)]")
+		for(var/issue in edge_issues)
+			log_bad(issue)
 
-		if(edge_issues)
+		if(LAZYLEN(edge_issues))
 			fail("Invalid edges")
 			return TRUE
 
@@ -529,12 +533,11 @@
 	else if(length(split_expectations))
 		var/list/unexpected_subgraphs = list()
 		var/list/split_expectations_copy = split_expectations.Copy()
-		for(var/subgraph in subgraphs)
+		for(var/datum/graph/subgraph in subgraphs)
 			var/expectations_fulfilled = FALSE
-			for(var/split_expectation in split_expectations_copy)
-				var/datum/graph_expectation/GE = split_expectation
-				if(!length(GE.CheckExpectations(subgraph)))
-					split_expectations_copy -= GE
+			for(var/datum/graph_expectation/split_expectation in split_expectations_copy)
+				if(!length(subgraph.DoCheckExpectations(split_expectation)))
+					split_expectations_copy -= split_expectation
 					expectations_fulfilled = TRUE
 					break
 			if(!expectations_fulfilled)
@@ -552,7 +555,7 @@
 
 /datum/graph/testing/proc/CheckExpectations()
 	if(on_check_expectations)
-		issues += on_check_expectations.CheckExpectations(src)
+		issues += DoCheckExpectations(on_check_expectations)
 	if(length(split_expectations) && !on_split_was_called)
 		issues += "Had split expectations but OnSplit was not called"
 	if(!length(split_expectations) && on_split_was_called)
@@ -571,24 +574,31 @@
 	src.expected_nodes = expected_nodes || list()
 	src.expected_edges = expected_edges || list()
 
-/datum/graph_expectation/proc/CheckExpectations(var/datum/graph/graph)
+// Stub for subtype-specific functionality for DoCheckExpectations.
+// Should not access graph.nodes or graph.edges.
+/datum/graph_expectation/proc/OnCheckExpectations(var/datum/graph/graph)
+	return list()
+
+/datum/graph/proc/DoCheckExpectations(var/datum/graph_expectation/expectation)
 	. = list()
-	if(length(expected_nodes ^ (graph.nodes || list())))
-		. += "Expected the following nodes [log_info_line(expected_nodes)], was [log_info_line(graph.nodes)]"
-	if(length(expected_edges ^ (graph.edges || list())))
-		. += "Expected the following edges [log_info_line(expected_edges)], was [log_info_line(graph.edges)]"
+	if(length(expectation.expected_nodes ^ (nodes || list())))
+		. += "Expected the following nodes [log_info_line(expectation.expected_nodes)], was [log_info_line(nodes)]"
+	if(length(expectation.expected_edges ^ (edges || list())))
+		. += "Expected the following edges [log_info_line(expectation.expected_edges)], was [log_info_line(edges)]"
 
-	for(var/datum/node/N in graph.nodes)
-		if(N.graph != graph)
-			. += "[log_info_line(N)]: Expected the following graph [log_info_line(graph)], was [N.graph]"
+	for(var/datum/node/N in nodes)
+		if(N.graph != src)
+			. += "[log_info_line(N)]: Expected the following graph [log_info_line(src)], was [N.graph]"
 
-	for(var/node in expected_edges)
-		var/expected_connections = expected_edges[node]
-		var/actual_connections = graph.edges[node]
+	for(var/node in expectation.expected_edges)
+		var/expected_connections = expectation.expected_edges[node]
+		var/actual_connections = edges[node]
 		if(length(expected_connections ^ actual_connections))
 			. += "[log_info_line(node)]: Expected the following connections [log_info_line(expected_connections)], was [log_info_line(actual_connections)]"
 
-/datum/graph_expectation/deleted/CheckExpectations(var/datum/graph/graph)
+	. += expectation.OnCheckExpectations()
+
+/datum/graph_expectation/deleted/OnCheckExpectations(var/datum/graph/graph)
 	. = ..()
 	if(!QDELETED(graph))
 		. += "Expected graph to be deleted, was not"
