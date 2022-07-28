@@ -3,7 +3,7 @@
 	AC.flags = flags
 	AC.ui_interact(user, state = state)
 
-/mob/living/carbon/human/proc/change_species(var/new_species)
+/mob/living/carbon/human/proc/change_species(var/new_species, var/new_bodytype = null)
 	if(!new_species)
 		return
 
@@ -13,7 +13,7 @@
 	if(!(new_species in get_all_species()))
 		return
 
-	set_species(new_species)
+	set_species(new_species, new_bodytype)
 	dna.ready_dna(src)
 
 	//Handle spawning stuff
@@ -23,7 +23,7 @@
 	apply_species_cultural_info()
 	species.handle_post_spawn(src)
 	reset_blood()
-	full_prosthetic = null	
+	full_prosthetic = null
 	apply_species_inventory_restrictions()
 
 	var/decl/special_role/antag = mind && player_is_antag(mind)
