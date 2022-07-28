@@ -455,9 +455,11 @@ var/global/const/DEFAULT_SPECIES_HEALTH = 200
 
 //Checks if an existing limbs is the species default
 /decl/species/proc/is_default_limb(var/obj/item/organ/external/E)
-	if((species_flags & SPECIES_FLAG_CRYSTALLINE) && !BP_IS_CRYSTAL(E))
+	// Crystalline/synthetic species should only count crystalline/synthetic limbs as default.
+	// DO NOT change to (species_flags & SPECIES_FLAG_X) && !BP_IS_X(E)
+	if(!(species_flags & SPECIES_FLAG_CRYSTALLINE) != !BP_IS_CRYSTAL(E))
 		return FALSE
-	if((species_flags & SPECIES_FLAG_SYNTHETIC) && !BP_IS_PROSTHETIC(E))
+	if(!(species_flags & SPECIES_FLAG_SYNTHETIC) != !BP_IS_PROSTHETIC(E))
 		return FALSE
 	for(var/tag in has_limbs)
 		if(E.organ_tag == tag)
