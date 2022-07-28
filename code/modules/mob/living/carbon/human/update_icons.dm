@@ -648,6 +648,14 @@ var/global/list/damage_icon_parts = list()
 /mob/living/carbon/human/update_inv_wear_mask(var/update_icons=1)
 	var/obj/item/mask = get_equipped_item(slot_wear_mask_str)
 	var/obj/item/head = get_equipped_item(slot_head_str)
+	update_hair(0)	//rebuild hair
+	update_inv_ears(0)
+
+	if(!(head && (head.item_flags & ITEM_FLAG_AIRTIGHT)))
+		set_internals(null)
+	if(!(mask && (mask.item_flags & ITEM_FLAG_AIRTIGHT)))
+		set_internals(null)
+
 	if(mask && !(head && head.flags_inv & HIDEMASK))
 		overlays_standing[HO_FACEMASK_LAYER] = mask.get_mob_overlay(src,slot_wear_mask_str)
 	else

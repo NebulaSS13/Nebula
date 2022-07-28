@@ -76,14 +76,6 @@ This saves us from having to call add_fingerprint() any time something is put in
 		else
 			return has_organ(slot)
 
-/mob/living/carbon/human/update_inv_wear_mask(update_icons)
-	update_hair(0)	//rebuild hair
-	update_inv_ears(0)
-	var/obj/item/clothing/mask/head = src.get_equipped_item(slot_head_str)
-	if(!(head && (head.item_flags & ITEM_FLAG_AIRTIGHT)))
-		set_internals(null)
-	. = ..()
-
 /mob/living/carbon/human/u_equip(obj/W)
 	. = ..()
 	if(!.)
@@ -115,8 +107,6 @@ This saves us from having to call add_fingerprint() any time something is put in
 			if(istype(W, /obj/item))
 				var/obj/item/I = W
 				if(I.flags_inv & (HIDEMASK|BLOCKHAIR|BLOCKHEADHAIR))
-					update_hair(0)	//rebuild hair
-					update_inv_ears(0)
 					update_inv_wear_mask(0)
 			if(src)
 				var/obj/item/clothing/mask/mask = src.get_equipped_item(slot_wear_mask_str)
