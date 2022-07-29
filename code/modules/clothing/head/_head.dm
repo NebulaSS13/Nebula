@@ -1,12 +1,12 @@
 /obj/item/clothing/head
-	name = "head"
-	icon_state = ICON_STATE_WORLD
-	icon = 'icons/clothing/head/softcap.dmi'
-	body_parts_covered = SLOT_HEAD
-	slot_flags = SLOT_HEAD
-	w_class = ITEM_SIZE_SMALL
-	blood_overlay_type = "helmetblood"
+	name                = "head"
+	icon_state          = ICON_STATE_WORLD
+	icon                = 'icons/clothing/head/softcap.dmi'
+	blood_overlay_type  = "helmetblood"
+	w_class             = ITEM_SIZE_SMALL
 	flags_inv           = BLOCKHEADHAIR
+	slot_flags          = SLOT_HEAD
+	body_parts_covered  = SLOT_HEAD
 
 	var/protects_against_weather = FALSE
 	var/image/light_overlay_image
