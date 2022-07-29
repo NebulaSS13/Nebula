@@ -6,7 +6,7 @@
 	volume_multiplier = 0.5
 	body_parts_covered = SLOT_HEAD|SLOT_EARS
 	gender = PLURAL
-
+	flags_inv = 0
 	var/headphones_on = 0
 	var/sound_channel
 	var/current_track

@@ -7,7 +7,6 @@
 	desc = "A special helmet designed for work in a hazardous, low-pressure environment."
 	icon = 'icons/clothing/spacesuit/generic/helmet.dmi'
 	item_flags = ITEM_FLAG_THICKMATERIAL | ITEM_FLAG_AIRTIGHT
-	flags_inv = BLOCKHAIR
 	permeability_coefficient = 0
 	armor = list(
 		bio = ARMOR_BIO_SHIELDED,
@@ -75,7 +74,7 @@
 		flags_inv = HIDEMASK|HIDEEARS|HIDEEYES|HIDEFACE|BLOCKHAIR
 	else
 		flash_protection = FLASH_PROTECTION_NONE
-		flags_inv = HIDEEARS|BLOCKHAIR
+		flags_inv = HIDEEARS|BLOCKHEADHAIR
 	update_icon()
 	update_clothing_icon()
 

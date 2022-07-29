@@ -109,7 +109,7 @@
 	icon_state = ICON_STATE_WORLD
 	icon = 'icons/clothing/head/ushanka.dmi'
 	flags_inv = HIDEEARS|BLOCKHEADHAIR
-	cold_protection = SLOT_HEAD
+	cold_protection = SLOT_HEAD | SLOT_EARS
 	min_cold_protection_temperature = HELMET_MIN_COLD_PROTECTION_TEMPERATURE
 	var/up = FALSE
 
@@ -155,6 +155,8 @@
 	icon = 'icons/clothing/head/cat.dmi'
 	body_parts_covered = 0
 	siemens_coefficient = 1.5
+	flags_inv = 0
+	armor = null
 
 /obj/item/clothing/head/richard
 	name = "chicken mask"

@@ -1,7 +1,6 @@
 /obj/item/clothing/head/hardhat
 	name = "hard hat"
 	desc = "A piece of headgear used in dangerous working conditions to protect the head. Comes with a built-in flashlight."
-
 	icon = 'icons/clothing/head/hardhat/yellow.dmi'
 	action_button_name = "Toggle Headlamp"
 	brightness_on = 4 //luminosity when on
@@ -16,7 +15,6 @@
 		bio = ARMOR_BIO_MINOR,
 		rad = ARMOR_RAD_MINOR
 	)
-	flags_inv = 0
 	siemens_coefficient = 0.9
 	light_wedge = LIGHT_WIDE
 	heat_protection = SLOT_HEAD
@@ -71,7 +69,7 @@
 	name = "damage control helmet"
 	desc = "A helmet commonly used by engineers and first responders throughout the human space. Comes with a built-in flashlight."
 	icon = 'icons/clothing/head/hardhat/damage_control.dmi'
-	flags_inv = HIDEEARS|BLOCKHAIR
+	flags_inv = HIDEEARS|BLOCKHEADHAIR
 
 /obj/item/clothing/head/hardhat/ems/dc_light
 	name = "light damage control helmet"

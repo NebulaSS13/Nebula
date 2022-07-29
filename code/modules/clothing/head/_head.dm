@@ -6,6 +6,7 @@
 	slot_flags = SLOT_HEAD
 	w_class = ITEM_SIZE_SMALL
 	blood_overlay_type = "helmetblood"
+	flags_inv           = BLOCKHEADHAIR
 
 	var/protects_against_weather = FALSE
 	var/image/light_overlay_image

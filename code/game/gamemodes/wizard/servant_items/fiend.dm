@@ -10,7 +10,7 @@
 		rad = ARMOR_RAD_SHIELDED
 	)
 	bodytype_equip_flags = BODY_FLAG_HUMANOID
-	flags_inv = HIDEEARS | BLOCKHAIR
+	flags_inv = HIDEEARS | BLOCKHEADHAIR
 
 /obj/item/clothing/suit/fiendcowl
 	name = "fiend's cowl"

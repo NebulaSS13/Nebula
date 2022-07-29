@@ -1,10 +1,10 @@
 /obj/item/clothing/head/fated
 	name = "strange key"
 	desc = "A glowing key, uncomfortably hot to the touch."
-
 	icon = 'icons/clothing/head/fated_key.dmi'
 	body_parts_covered = 0
 	armor = list(melee = 55, bullet = 55, laser = 55, energy = 55, bomb = 55, bio = 100, rad = 100)
+	flags_inv = 0
 
 /obj/item/clothing/head/fated/equipped(mob/living/user, slot)
 	. = ..()

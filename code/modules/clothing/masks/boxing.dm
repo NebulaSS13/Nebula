@@ -14,7 +14,6 @@
 /obj/item/clothing/mask/balaclava/tactical
 	name = "green balaclava"
 	icon = 'icons/clothing/mask/swat_mask.dmi'
-	material = /decl/material/solid/cloth
 
 /obj/item/clothing/mask/luchador
 	name = "Luchador Mask"
