@@ -13,6 +13,7 @@
 	uncreated_component_parts = null
 	stat_immune = NOPOWER
 	base_type = /obj/machinery/docking_beacon
+	obj_flags = OBJ_FLAG_ROTATABLE
 	var/display_name					 // Display name of the docking beacon, editable on the docking control program.
 	var/list/permitted_shuttles = list() // Shuttles that are always permitted by the docking beacon.
 	
