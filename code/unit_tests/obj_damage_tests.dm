@@ -9,6 +9,10 @@
 
 /datum/unit_test/items_test/New()
 	. = ..()
+	if(!length(test_exempt_types))
+		init_test_exemptions()
+
+/datum/unit_test/items_test/proc/init_test_exemptions()
 	//Define types we shouldn't test
 	test_exempt_types += /obj/item/pen/crayon/random              //Delete itself
 	test_exempt_types += /obj/item/paper/monitorkey               //Crash on null turf
@@ -17,7 +21,6 @@
 	test_exempt_types += /obj/item/chems/food/fruit_slice         //Base type, delete itself
 	test_exempt_types += /obj/item/chems/pill/pouch_pill          //Base type, causes many runtimes
 	test_exempt_types += /obj/item/gun/energy/gun/secure/mounted  //Can't exist outside something
-	test_exempt_types += /obj/item/gun/energy/darkmatter          //Crash on init
 	test_exempt_types += /obj/item/energy_blade/ninja             //Delete itself on init
 	test_exempt_types += /obj/item/grenade/flashbang/instant      //Delete itself
 	test_exempt_types += /obj/item/crafting_holder                //Can't exist outside of something
@@ -46,7 +49,6 @@
 	test_exempt_types += typesof(/obj/item/grab)                  //Abstract
 	test_exempt_types += typesof(/obj/item/robot_module)          //Delete itself
 	test_exempt_types += typesof(/obj/item/archaeological_find)   //Delete itself
-	test_exempt_types += typesof(/obj/item/psychic_power)         //Abstract
 	test_exempt_types += typesof(/obj/item/projectile)            //Temporary object
 	test_exempt_types += typesof(/obj/item/natural_weapon)        //Abstract object
 	test_exempt_types += typesof(/obj/item/tankassemblyproxy)     //Abstract object

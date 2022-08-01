@@ -29,3 +29,7 @@
 	character = ..()
 	if(istype(character) && character.psi && !is_preview_copy)
 		character.psi.update()
+
+/datum/unit_test/items_test/init_test_exemptions()
+	. = ..()
+	test_exempt_types += typesof(/obj/item/psychic_power) //Abstract

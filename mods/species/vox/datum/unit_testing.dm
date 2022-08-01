@@ -31,3 +31,7 @@
 /datum/unit_test/mob_damage/vox/halloss
 	name = "MOB: Vox Halloss Damage Check"
 	damagetype = PAIN
+
+/datum/unit_test/items_test/init_test_exemptions()
+	. = ..()
+	test_exempt_types += /obj/item/gun/energy/darkmatter //Crash on init
