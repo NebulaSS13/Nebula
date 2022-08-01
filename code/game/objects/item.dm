@@ -178,7 +178,10 @@
 /obj/item/examine(mob/user, distance)
 	var/desc_comp = "" //For "description composite"
 	desc_comp += "It is a [w_class_description()] item."
-	desc_comp += get_damage_text()
+	
+	var/desc_damage = show_examined_damage()
+	if(length(desc_damage))
+		desc_comp += "<BR/>[desc_damage]"
 
 	if(user?.get_preference_value(/datum/client_preference/inquisitive_examine) == PREF_ON)
 

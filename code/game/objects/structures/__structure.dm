@@ -38,25 +38,18 @@
 	if(!CanFluidPass())
 		fluid_update(TRUE)
 
-/obj/structure/proc/show_examined_damage(mob/user, var/perc)
-	if(maxhealth == -1)
+/obj/structure/show_examined_damage(health_ratio)
+	if(max_health == -1)
 		return
-	if(perc >= 1)
-		to_chat(user, SPAN_NOTICE("It looks fully intact."))
-	else if(perc > 0.75)
-		to_chat(user, SPAN_NOTICE("It has a few cracks."))
-	else if(perc > 0.5)
-		to_chat(user, SPAN_WARNING("It looks slightly damaged."))
-	else if(perc > 0.25)
-		to_chat(user, SPAN_WARNING("It looks moderately damaged."))
-	else
-		to_chat(user, SPAN_DANGER("It looks heavily damaged."))
+	. = ..()
 
 /obj/structure/examine(mob/user, distance, infix, suffix)
 	. = ..()
 	if(distance <= 3)
 
-		show_examined_damage(user, (health/maxhealth))
+		var/damage_desc = show_examined_damage(health / maxhealth)
+		if(length(damage_desc))
+			to_chat(user, damage_desc)
 
 		if(tool_interaction_flags & TOOL_INTERACTION_ANCHOR)
 			if(anchored)

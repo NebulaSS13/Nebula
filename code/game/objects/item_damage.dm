@@ -116,17 +116,7 @@
 	SET_STATUS_MAX(M, STAT_BLURRY, rand(3,4))
 	return
 
-/**Returns a text string to describe the current damage level of the item, or null if non-applicable. */
-/obj/item/proc/get_damage_text()
-	if(health == ITEM_HEALTH_NO_DAMAGE)
+/obj/item/show_examined_damage(health_ratio)
+	if(max_health == ITEM_HEALTH_NO_DAMAGE)
 		return
-	var/health_quarter = CEILING(max_health / 4)
-	if(health <= health_quarter)
-		return SPAN_WARNING("It's falling apart.")
-	else if(health <= (health_quarter * 2))
-		return "<span class='average'>It's fairly worn out.</span>"
-	else if(health <= (health_quarter * 3))
-		return "It's in decent shape."
-	else if(health < max_health)
-		return "It's in good shape."
-	return "It's in pristine condition."
+	. = ..()
