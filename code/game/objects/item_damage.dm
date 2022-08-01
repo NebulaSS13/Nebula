@@ -23,12 +23,14 @@
 	return damage
 
 /obj/item/lava_act()
+	if(QDELETED(src))
+		return TRUE
 	. = (!throwing) ? ..() : FALSE
 
 /obj/item/explosion_act(severity)
-	..()
 	if(QDELETED(src))
 		return
+	. = ..()
 	take_damage(explosion_severity_damage(severity), BURN, DAM_EXPLODE | DAM_DISPERSED, "explosion")
 
 /obj/item/proc/explosion_severity_damage(var/severity)
@@ -36,7 +38,7 @@
 	return (mult * (4 - severity)) + (severity != 1? rand(-(mult / severity), (mult / severity)) : 0 )
 
 /obj/item/proc/explosion_severity_damage_multiplier()
-	return max_health / 3
+	return CEILING(max_health / 3)
 
 /obj/item/is_burnable()
 	return simulated
@@ -50,7 +52,7 @@
 		return 0
 
 /obj/item/throw_impact(atom/hit_atom, datum/thrownthing/TT)
-	..()
+	. = ..()
 	if(isliving(hit_atom)) //Living mobs handle hit sounds differently.
 		var/volume = get_volume_by_throwforce_and_or_w_class()
 		if (throwforce > 0)
@@ -61,9 +63,7 @@
 		else
 			playsound(hit_atom, 'sound/weapons/throwtap.ogg', 1, volume, -1)
 
-
 /obj/item/proc/eyestab(mob/living/carbon/M, mob/living/carbon/user)
-
 	var/mob/living/carbon/human/H = M
 	if(istype(H))
 		for(var/slot in global.standard_headgear_slots)
@@ -78,17 +78,12 @@
 		return
 
 	admin_attack_log(user, M, "Attacked using \a [src]", "Was attacked with \a [src]", "used \a [src] to attack")
-
 	user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
 	user.do_attack_animation(M)
-
 	src.add_fingerprint(user)
 
 	if(istype(H))
-
-
 		if(H != user)
-
 			M.visible_message(
 				SPAN_DANGER("\The [M] has been stabbed in the eye with \the [src] by \the [user]!"),
 				self_message = SPAN_DANGER("You stab \the [M] in the eye with \the [src]!"))
@@ -120,3 +115,18 @@
 		M.take_organ_damage(7)
 	SET_STATUS_MAX(M, STAT_BLURRY, rand(3,4))
 	return
+
+/**Returns a text string to describe the current damage level of the item, or null if non-applicable. */
+/obj/item/proc/get_damage_text()
+	if(health == ITEM_HEALTH_NO_DAMAGE)
+		return
+	var/health_quarter = CEILING(max_health / 4)
+	if(health <= health_quarter)
+		return SPAN_WARNING("It's falling apart.")
+	else if(health <= (health_quarter * 2))
+		return "<span class='average'>It's fairly worn out.</span>"
+	else if(health <= (health_quarter * 3))
+		return "It's in decent shape."
+	else if(health < max_health)
+		return "It's in good shape."
+	return "It's in pristine condition."
