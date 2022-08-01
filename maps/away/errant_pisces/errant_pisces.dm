@@ -97,13 +97,13 @@
 	if(maxhealth == -1)
 		return
 	if(health_ratio >= 1)
-		to_chat(user, SPAN_NOTICE("It looks fully intact."))
+		return SPAN_NOTICE("It looks fully intact.")
 	else if (health_ratio < 0.2)
-		to_chat(perc, SPAN_DANGER("\The [src] is barely hanging on by the last few threads."))
+		return SPAN_DANGER("\The [src] is barely hanging on by the last few threads.")
 	else if (health_ratio < 0.5)
-		to_chat(user, SPAN_WARNING("Large swathes of \the [src] have been cut."))
+		return SPAN_WARNING("Large swathes of \the [src] have been cut.")
 	else if (health_ratio < 0.9)
-		to_chat(user, SPAN_NOTICE("A few strands of \the [src] have been severed."))
+		return SPAN_NOTICE("A few strands of \the [src] have been severed.")
 
 /obj/structure/net/attackby(obj/item/W, mob/user)
 	if(W.sharp || W.edge)

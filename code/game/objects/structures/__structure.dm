@@ -39,7 +39,7 @@
 		fluid_update(TRUE)
 
 /obj/structure/show_examined_damage(health_ratio)
-	if(max_health == -1)
+	if(maxhealth == -1)
 		return
 	. = ..()
 
