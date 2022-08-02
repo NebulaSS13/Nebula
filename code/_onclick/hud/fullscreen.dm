@@ -101,8 +101,8 @@
 
 /obj/screen/fullscreen/blackout
 	icon = 'icons/mob/screen1.dmi'
-	screen_loc = ui_entire_screen
 	icon_state = "black"
+	screen_loc = ui_entire_screen
 	layer = BLIND_LAYER
 
 /obj/screen/fullscreen/impaired
@@ -133,13 +133,14 @@
 /obj/screen/fullscreen/noise
 	icon = 'icons/effects/static.dmi'
 	icon_state = "1 light"
+	screen_loc = ui_entire_screen
 	layer = FULLSCREEN_LAYER
 	alpha = 127
 
 /obj/screen/fullscreen/fadeout
 	icon = 'icons/mob/screen1.dmi'
-	screen_loc = ui_entire_screen
 	icon_state = "black"
+	screen_loc = ui_entire_screen
 	layer = FULLSCREEN_LAYER
 	alpha = 0
 	allstate = 1
@@ -151,6 +152,7 @@
 /obj/screen/fullscreen/scanline
 	icon = 'icons/effects/static.dmi'
 	icon_state = "scanlines"
+	screen_loc = ui_entire_screen
 	alpha = 50
 	layer = FULLSCREEN_LAYER
 
@@ -165,5 +167,6 @@
 /obj/screen/fullscreen/blueprints
 	icon = 'icons/effects/blueprints.dmi'
 	icon_state = "base"
+	screen_loc = ui_entire_screen
 	alpha = 100
 	layer = FULLSCREEN_LAYER
