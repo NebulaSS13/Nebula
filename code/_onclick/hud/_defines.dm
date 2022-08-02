@@ -14,6 +14,7 @@
 */
 
 #define ui_entire_screen "WEST,SOUTH to EAST,NORTH"
+#define ui_center_fullscreen "CENTER-7,CENTER-7"
 
 //Lower left, persistant menu
 #define ui_inventory "LEFT:6,BOTTOM:5"
