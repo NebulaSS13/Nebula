@@ -125,15 +125,18 @@
 	if(container == new_container)
 		return
 	if(container)
+		events_repository.unregister(/decl/observ/moved, container, src)
 		events_repository.unregister(/decl/observ/destroyed, container, src)
 	container = new_container
 	if(container)
+		events_repository.register(/decl/observ/moved, container, src, .proc/check_container_status)
 		events_repository.register(/decl/observ/destroyed, container, src, .proc/check_container_status)
 	update_icon()
 	SSnano.update_uis(src) // update all UIs attached to src
 
 /obj/machinery/chemical_dispenser/proc/check_container_status()
-	if(container && QDELETED(container))
+	if(container && (QDELETED(container) || container.loc != src))
+		events_repository.unregister(/decl/observ/moved, container, src)
 		events_repository.unregister(/decl/observ/destroyed, container, src)
 		container = null
 
