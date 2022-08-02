@@ -129,7 +129,7 @@ var/global/list/diversion_junctions = list()
 
 		// Todo rewrite all of this.
 		var/atom/movable/AM = dropping
-		if(AM.anchored)
+		if(!istype(AM) || AM.anchored)
 			return FALSE 
 
 		// Determine object type and run necessary checks
