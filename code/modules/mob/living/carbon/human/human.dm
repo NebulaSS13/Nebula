@@ -646,7 +646,7 @@
 //set_species should not handle the entirety of initing the mob, and should not trigger deep updates
 //It focuses on setting up species-related data, without force applying them uppon organs and the mob's appearance.
 // For transforming an existing mob, look at change_species()
-/mob/living/carbon/human/proc/set_species(var/new_species_name)
+/mob/living/carbon/human/proc/set_species(var/new_species_name, var/new_bodytype = null)
 	if(!new_species_name)
 		CRASH("set_species on mob '[src]' was passed a null species name '[new_species_name]'!")
 	var/new_species = get_species_by_key(new_species_name)
@@ -679,7 +679,9 @@
 		set_gender(new_pronouns.name)
 
 	//Handle bodytype
-	set_bodytype(species.get_bodytype_by_pronouns(new_pronouns), FALSE)
+	if(!new_bodytype)
+		new_bodytype = species.get_bodytype_by_pronouns(new_pronouns)
+	set_bodytype(new_bodytype, FALSE)
 
 	available_maneuvers = species.maneuvers.Copy()
 
