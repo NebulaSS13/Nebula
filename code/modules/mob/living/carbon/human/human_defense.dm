@@ -468,37 +468,38 @@ meteor_act
 
 /mob/living/carbon/human/explosion_act(severity)
 	..()
-	var/b_loss = null
-	var/f_loss = null
-	switch (severity)
-		if(1)
-			b_loss = 400
-			f_loss = 100
-			var/atom/target = get_edge_target_turf(src, get_dir(src, get_step_away(src, src)))
-			throw_at(target, 200, 4)
-		if(2)
-			b_loss = 60
-			f_loss = 60
-			if (get_sound_volume_multiplier() >= 0.2)
-				SET_STATUS_MAX(src, STAT_TINNITUS, 30)
-				SET_STATUS_MAX(src, STAT_DEAF, 120)
-			if(prob(70))
-				SET_STATUS_MAX(src, STAT_PARA, 10)
-		if(3)
-			b_loss = 30
-			if (get_sound_volume_multiplier() >= 0.2)
-				SET_STATUS_MAX(src, STAT_TINNITUS, 15)
-				SET_STATUS_MAX(src, STAT_DEAF, 60)
-			if (prob(50))
-				SET_STATUS_MAX(src, STAT_PARA, 10)
+	if(!QDELETED(src))
+		var/b_loss = null
+		var/f_loss = null
+		switch (severity)
+			if(1)
+				b_loss = 400
+				f_loss = 100
+				var/atom/target = get_edge_target_turf(src, get_dir(src, get_step_away(src, src)))
+				throw_at(target, 200, 4)
+			if(2)
+				b_loss = 60
+				f_loss = 60
+				if (get_sound_volume_multiplier() >= 0.2)
+					SET_STATUS_MAX(src, STAT_TINNITUS, 30)
+					SET_STATUS_MAX(src, STAT_DEAF, 120)
+				if(prob(70))
+					SET_STATUS_MAX(src, STAT_PARA, 10)
+			if(3)
+				b_loss = 30
+				if (get_sound_volume_multiplier() >= 0.2)
+					SET_STATUS_MAX(src, STAT_TINNITUS, 15)
+					SET_STATUS_MAX(src, STAT_DEAF, 60)
+				if (prob(50))
+					SET_STATUS_MAX(src, STAT_PARA, 10)
 
-	// focus most of the blast on one organ
-	apply_damage(0.7 * b_loss, BRUTE, null, DAM_EXPLODE, used_weapon = "Explosive blast")
-	apply_damage(0.7 * f_loss, BURN, null, DAM_EXPLODE, used_weapon = "Explosive blast")
+		// focus most of the blast on one organ
+		apply_damage(0.7 * b_loss, BRUTE, null, DAM_EXPLODE, used_weapon = "Explosive blast")
+		apply_damage(0.7 * f_loss, BURN, null, DAM_EXPLODE, used_weapon = "Explosive blast")
 
-	// distribute the remaining 30% on all limbs equally (including the one already dealt damage)
-	apply_damage(0.3 * b_loss, BRUTE, null, DAM_EXPLODE | DAM_DISPERSED, used_weapon = "Explosive blast")
-	apply_damage(0.3 * f_loss, BURN, null, DAM_EXPLODE | DAM_DISPERSED, used_weapon = "Explosive blast")
+		// distribute the remaining 30% on all limbs equally (including the one already dealt damage)
+		apply_damage(0.3 * b_loss, BRUTE, null, DAM_EXPLODE | DAM_DISPERSED, used_weapon = "Explosive blast")
+		apply_damage(0.3 * f_loss, BURN, null, DAM_EXPLODE | DAM_DISPERSED, used_weapon = "Explosive blast")
 
 //Used by various things that knock people out by applying blunt trauma to the head.
 //Checks that the species has a "head" (brain containing organ) and that hit_zone refers to it.
