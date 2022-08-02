@@ -1006,10 +1006,18 @@
 	SHOULD_CALL_PARENT(FALSE)
 	gib()
 
-/mob/explosion_act()
+/mob/get_contained_external_atoms()
 	. = ..()
-	if(!blinded)
-		flash_eyes()
+	if(.)
+		LAZYREMOVE(., get_organs())
+
+/mob/explosion_act(var/severity)
+	. = ..()
+	if(!QDELETED(src))
+		if(severity == 1)
+			physically_destroyed()
+		else if(!blinded)
+			flash_eyes()
 
 /mob/proc/get_telecomms_race_info()
 	return list("Unknown", FALSE)

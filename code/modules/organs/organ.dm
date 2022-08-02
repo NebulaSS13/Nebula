@@ -550,3 +550,7 @@ var/global/list/ailment_reference_cache = list()
 //Some checks to avoid doing type checks for nothing
 /obj/item/organ/proc/is_internal()
 	return FALSE
+
+// If an organ is inside a holder, the holder should be handling damage in their explosion_act() proc.
+/obj/item/organ/explosion_act(severity)
+	return !owner && ..()

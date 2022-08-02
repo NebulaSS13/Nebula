@@ -687,11 +687,6 @@ default behaviour is:
 		return
 	return 1
 
-/mob/living/carbon/get_contained_external_atoms()
-	. = ..()
-	if(.)
-		LAZYREMOVE(., get_organs())
-
 /mob/proc/can_be_possessed_by(var/mob/observer/ghost/possessor)
 	return istype(possessor) && possessor.client
 
