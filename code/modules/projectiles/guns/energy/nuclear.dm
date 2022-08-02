@@ -64,5 +64,6 @@
 	overlays += new_overlays
 
 /obj/item/gun/energy/gun/nuclear/add_onmob_charge_meter(image/I)
-	I.overlays += mutable_appearance(icon, "[I.icon_state]_charge", get_charge_color())
+	if(check_state_in_icon("[I.icon_state]_charge", I.icon))
+		I.overlays += mutable_appearance(I.icon, "[I.icon_state]_charge", get_charge_color())
 	return I
