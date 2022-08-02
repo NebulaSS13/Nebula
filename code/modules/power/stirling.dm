@@ -1,4 +1,4 @@
-#define HEAT_TRANSFER 5000
+#define HEAT_TRANSFER 300
 #define MAX_FREQUENCY 60
 #define MIN_DELTA_T 5
 
@@ -21,7 +21,7 @@
 	var/cycle_frequency = MAX_FREQUENCY/2
 	var/active = FALSE
 
-	var/max_power = 100000
+	var/max_power = 150000
 	var/genlev = 0
 	var/last_genlev
 
@@ -39,14 +39,19 @@
 /obj/machinery/atmospherics/binary/stirling/Process()
 	..()
 
-	// Some temperature equilibrium between the gas lines.
-	var/air1_eq = air1.get_thermal_energy_change(air2.temperature)
-	var/air2_eq = air2.get_thermal_energy_change(air1.temperature)
+	var/line1_heatcap = air1.heat_capacity()
+	var/line2_heatcap = air2.heat_capacity()
 
-	var/heat_transfer = clamp(HEAT_TRANSFER*(air1.temperature - air2.temperature), min(air1_eq, air2_eq), max(air1_eq, air2_eq))
-	if(heat_transfer)
-		air1.add_thermal_energy(-heat_transfer)
-		air2.add_thermal_energy(heat_transfer)
+	var/delta_t = air1.temperature - air2.temperature
+
+	// Absolute value of the heat transfer required to bring both lines in equilibrium.
+	var/line_equilibrium_heat = ((line1_heatcap*line2_heatcap)/(line1_heatcap + line2_heatcap))*abs(delta_t)
+
+	// Some passive equilibrium between the lines.
+	var/passive_heat_transfer = min(HEAT_TRANSFER*abs(delta_t), line_equilibrium_heat)
+	
+	air1.add_thermal_energy(-sign(delta_t)*passive_heat_transfer)
+	air2.add_thermal_energy(sign(delta_t)*passive_heat_transfer)
 
 	if(!istype(inserted_cylinder))
 		return
@@ -55,14 +60,12 @@
 
 	var/datum/gas_mixture/working_volume = inserted_cylinder.air_contents
 
-	if((stat & BROKEN) || !air1.total_moles || !air2.total_moles || !working_volume?.total_moles)
+	if((stat & BROKEN) || !air1.total_moles || !air2.total_moles || !working_volume?.total_moles || !working_volume?.return_pressure())
 		stop_engine()
 		return
 	
 	// A rough approximation of a Stirling cycle with perfect regeneration e.g. Carnot efficiency.
 	var/working_heatcap = working_volume.heat_capacity()
-	var/line1_heatcap = air1.heat_capacity()
-	var/line2_heatcap = air2.heat_capacity()
 
 	// Bring the internal tank in thermal equilibrium with the hottest line. The temperature/pressure
 	// is kept at the maximum constantly.
@@ -77,38 +80,44 @@
 
 	working_volume.add_thermal_energy(equil_transfer)
 
+	// Redefine in case there was a change from passive heat transfer.
+	delta_t = air1.temperature - air2.temperature
+	line_equilibrium_heat = ((line1_heatcap*line2_heatcap)/(line1_heatcap + line2_heatcap))*abs(delta_t)
+
 	// The cycle requires a minimum temperature to overcome friction.
-	if(abs(air1.temperature - air2.temperature) < MIN_DELTA_T)
+	if(abs(delta_t) < MIN_DELTA_T)
 		if(skipped_cycle) // Allow some leeway since networks can take some time to update.
 			stop_engine()
 		skipped_cycle = TRUE
 		return
 	skipped_cycle = FALSE
 
-	// Positive/negative Work from volume expansion/compression. Maximum volume is 1.5 tank volume.	The volume of the tank is not actually adjusted.
+	// Positive/negative work from volume expansion/compression. Maximum volume is 1.5 tank volume.	The volume of the tank is not actually adjusted.
 	var/work_coefficient = working_volume.get_total_moles()*R_IDEAL_GAS_EQUATION*log(1.5)
-	var/work_done = work_coefficient*abs(air1.temperature - air2.temperature)*cycle_frequency
 
 	// Direction of heat flow, 1 for air1 -> air 2, -1 for air2 -> air 1
-	var/heat_dir = air1.temperature > air2.temperature ? 1 : -1
+	var/heat_dir = sign(delta_t)
 
-	var/air1_dq = -heat_dir*work_coefficient*air1.temperature*cycle_frequency
-	var/air2_dq = heat_dir*work_coefficient*air2.temperature*cycle_frequency
+	// We multiply by the cycle frequency to get reasonable values for power generation.
+	// Energy is still conserved, but the efficiency of the engine is slightly overestimated.
+
+	// The hot line and cold line will not receive or give more than the heat required to reach equilibrium. 
+	var/air1_dq = -heat_dir*min(work_coefficient*air1.temperature*cycle_frequency, line_equilibrium_heat)
+	var/air2_dq = heat_dir*min(work_coefficient*air2.temperature*cycle_frequency, line_equilibrium_heat)
+	
+	var/work_done = -(air1_dq + air2_dq)
 
 	var/power_generated = 0.75*work_done
 	// Excessive power is transferred as heat to the cooler side, reducing efficiency.
 	if(power_generated > max_power)
 		if(heat_dir == 1)
-			air2_dq += 0.75*(max_power - power_generated)
+			air2_dq += 0.85*(max_power - power_generated)
 		else
-			air1_dq += 0.75*(max_power - power_generated)
+			air1_dq += 0.85*(max_power - power_generated)
 		power_generated = max_power
 		if(prob(5))
 			spark_at(src, cardinal_only = TRUE)
 
-	air1.add_thermal_energy(air1_dq)
-	air2.add_thermal_energy(air2_dq)
-	
 	generate_power(power_generated)
 	last_gen = power_generated
 	genlev = max(0, min(round(4*power_generated / max_power), 4))
@@ -122,8 +131,8 @@
 	. = ..()
 	if(distance > 1)
 		return
-
-	to_chat(user, "\The [src] is generating [round(last_gen/1000, 0.1)] kW")
+	if(active)
+		to_chat(user, "\The [src] is generating [round(last_gen/1000, 0.1)] kW")
 	if(!inserted_cylinder)
 		to_chat(user, "There is no piston cylinder inserted into \the [src].")
 
@@ -138,24 +147,25 @@
 		update_icon()
 		return TRUE
 	
-	if(IS_CROWBAR(W) && inserted_cylinder)
-		inserted_cylinder.dropInto(get_turf(src))
-		to_chat(user, SPAN_NOTICE("You remove \the [inserted_cylinder] from \the [src]."))
-		inserted_cylinder = null
-		stop_engine()
-		return TRUE
+	if(!panel_open)
+		if(IS_CROWBAR(W) && inserted_cylinder)
+			inserted_cylinder.dropInto(get_turf(src))
+			to_chat(user, SPAN_NOTICE("You remove \the [inserted_cylinder] from \the [src]."))
+			inserted_cylinder = null
+			stop_engine()
+			return TRUE
 
-	if(panel_open && IS_WRENCH(W))
-		var/target_frequency = input(user, "Enter the cycle frequency you would like \the [src] to operate at ([MAX_FREQUENCY/4] - [MAX_FREQUENCY] Hz)", "Stirling Frequency", cycle_frequency) as num | null
-		if(!CanPhysicallyInteract(user) || !target_frequency)
-			return
-		cycle_frequency = round(clamp(target_frequency, MAX_FREQUENCY/4, MAX_FREQUENCY))
-		to_chat(usr, SPAN_NOTICE("You adjust \the [src] to operate at a frequency of [cycle_frequency] Hz."))
-		return TRUE
+		if(IS_WRENCH(W))
+			var/target_frequency = input(user, "Enter the cycle frequency you would like \the [src] to operate at ([MAX_FREQUENCY/4] - [MAX_FREQUENCY] Hz)", "Stirling Frequency", cycle_frequency) as num | null
+			if(!CanPhysicallyInteract(user) || !target_frequency)
+				return
+			cycle_frequency = round(clamp(target_frequency, MAX_FREQUENCY/4, MAX_FREQUENCY))
+			to_chat(usr, SPAN_NOTICE("You adjust \the [src] to operate at a frequency of [cycle_frequency] Hz."))
+			return TRUE
 
 	. = ..()
 
-/obj/machinery/atmospherics/binary/stirling/attack_hand(mob/user)
+/obj/machinery/atmospherics/binary/stirling/physical_attack_hand(mob/user)
 
 	if((stat & BROKEN) || active || panel_open)
 		return ..()
@@ -214,7 +224,7 @@
 
 /obj/item/tank/stirling/Initialize()
 	. = ..()
-	desc += "It's rated for temperatures up to [failure_temp] C."
+	desc += " It's rated for temperatures up to [failure_temp] C."
 
 /obj/item/tank/stirling/empty
 	starting_pressure = list()
