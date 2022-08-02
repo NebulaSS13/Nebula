@@ -23,6 +23,7 @@ var/global/list/global/tank_gauge_cache = list()
 	name = "tank"
 	icon = 'icons/obj/items/tanks/tank_blue.dmi'
 	icon_state = ICON_STATE_WORLD
+	material = /decl/material/solid/metal/steel
 
 	var/gauge_icon = "indicator_tank"
 	var/gauge_cap = 6

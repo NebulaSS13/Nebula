@@ -119,3 +119,12 @@
 
 /datum/fabricator_recipe/engineering/wall_relay
 	path = /obj/item/frame/wall_relay
+
+/datum/fabricator_recipe/engineering/oxygen_tank
+	path = /obj/item/tank/oxygen/empty
+
+/datum/fabricator_recipe/engineering/hydrogen_tank
+	path = /obj/item/tank/hydrogen/empty
+
+/datum/fabricator_recipe/engineering/stirling_piston
+	path = /obj/item/tank/stirling/empty
