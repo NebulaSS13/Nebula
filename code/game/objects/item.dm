@@ -334,6 +334,7 @@
 		R.hud_used.update_robot_modules_display()
 
 /obj/item/attackby(obj/item/W, mob/user)
+
 	if(SSfabrication.try_craft_with(src, W, user))
 		return TRUE
 

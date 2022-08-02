@@ -150,9 +150,9 @@
 			beakerD[++beakerD.len] = list("name" = R.name, "volume" = REAGENT_VOLUME(container.reagents, rtype))
 	data["beakerContents"] = beakerD
 
-	if(container)
-		data["beakerCurrentVolume"] = container.reagents.total_volume
-		data["beakerMaxVolume"] = container.reagents.maximum_volume
+	if(container) // Container has had null reagents in the past; may be due to qdel without clearing reference.
+		data["beakerCurrentVolume"] = container.reagents?.total_volume || 0
+		data["beakerMaxVolume"] = container.reagents?.maximum_volume || 0
 	else
 		data["beakerCurrentVolume"] = null
 		data["beakerMaxVolume"] = null
