@@ -17,7 +17,7 @@
 		/obj/item/clustertool,
 		/obj/item/soap,
 		/obj/item/mop/advanced,
-		/obj/item/plunger,
+		/obj/item/plunger/unbreakable,
 		/obj/item/weldingtool/electric/mantid,
 		/obj/item/extinguisher,
 		/obj/item/t_scanner,
