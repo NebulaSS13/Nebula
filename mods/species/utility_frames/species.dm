@@ -63,7 +63,8 @@
 	)
 	has_organ = list(
 		BP_POSIBRAIN = /obj/item/organ/internal/posibrain,
-		BP_EYES = /obj/item/organ/internal/eyes/robot
+		BP_EYES = /obj/item/organ/internal/eyes/robot,
+		BP_CELL = /obj/item/organ/internal/cell
 	)
 
 	exertion_effect_chance = 10
@@ -76,7 +77,7 @@
 /decl/species/utility_frame/post_organ_rejuvenate(obj/item/organ/org, mob/living/carbon/human/H)
 	var/obj/item/organ/external/E = org
 	if(istype(E) && !BP_IS_PROSTHETIC(E))
-		E.robotize(/decl/prosthetics_manufacturer/utility_frame)
+		E.robotize(/decl/prosthetics_manufacturer/utility_frame, keep_organs = TRUE)
 	var/obj/item/organ/external/head/head = org
 	if(istype(head))
 		head.glowing_eyes = TRUE
