@@ -378,6 +378,11 @@ SUBSYSTEM_DEF(zcopy)
 
 /// Generate a new appearance from `appearance` with planes mangled to work with Z-Mimic. Do not pass a depth.
 /datum/controller/subsystem/zcopy/proc/fixup_appearance_planes(appearance, depth = 0)
+
+	// Adding this to guard against a reported runtime - supposed to be impossible, so cause is unclear.
+	if(!appearance)
+		return null
+
 	if (fixup_known_good[appearance])
 		fixup_hit += 1
 		return null
