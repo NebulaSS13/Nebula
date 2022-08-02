@@ -222,6 +222,10 @@
 	return T && !((mob_flags & MOB_FLAG_HOLY_BAD) && check_is_holy_turf(T))
 
 /mob/proc/AdjustMovementDirection(var/direction)
+
+	if(!direction || !isnum(direction))
+		return 0
+
 	. = direction
 	if(!HAS_STATUS(src, STAT_CONFUSE))
 		return
