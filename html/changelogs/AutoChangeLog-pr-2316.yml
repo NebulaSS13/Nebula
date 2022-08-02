@@ -1,0 +1,5 @@
+author: NataKilar
+delete-after: true
+changes:
+  - rscadd: Adds stirling engines to the game. These engines produce power from a
+      temperature differential of two gas sources.
