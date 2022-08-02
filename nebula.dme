@@ -244,6 +244,7 @@
 #include "code\controllers\subsystems\initialization\webhooks.dm"
 #include "code\controllers\subsystems\processing\ai.dm"
 #include "code\controllers\subsystems\processing\airflow.dm"
+#include "code\controllers\subsystems\processing\blob.dm"
 #include "code\controllers\subsystems\processing\chatter.dm"
 #include "code\controllers\subsystems\processing\circuit.dm"
 #include "code\controllers\subsystems\processing\fast_process.dm"
