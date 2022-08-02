@@ -52,7 +52,7 @@
 #define SS_PRIORITY_COMPUTER_NETS 25   // Handles computer network devices hookups
 #define SS_PRIORITY_GARBAGE       20   // Garbage collection.
 #define SS_PRIORITY_WEATHER       10   // Weather processing.
-
+#define SS_PRIORITY_BLOB          0    // Blob processing.
 
 // Subsystem fire priority, from lowest to highest priority
 // If the subsystem isn't listed here it's either DEFAULT or PROCESS (if it's a processing subsystem child)
