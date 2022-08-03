@@ -85,10 +85,8 @@
 	if(A && !(A in areas_added))
 		LAZYADD(A.all_doors, src)
 		LAZYADD(areas_added, A)
-		events_repository.register(/decl/observ/exited, A, src, .proc/update_area_registrations)
 
 /obj/machinery/door/firedoor/proc/unregister_area(area/A)
-		events_repository.unregister(/decl/observ/exited, A, src)
 		LAZYREMOVE(A.all_doors, src)
 		LAZYREMOVE(areas_added, A)
 
