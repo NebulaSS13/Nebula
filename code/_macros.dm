@@ -7,6 +7,8 @@
 
 #define get_turf(A) get_step(A,0)
 
+#define get_area(A) (get_step(A, 0)?.loc)
+
 #define get_x(A) (get_step(A, 0)?.x || 0)
 
 #define get_y(A) (get_step(A, 0)?.y || 0)

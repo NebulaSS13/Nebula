@@ -16,11 +16,6 @@
 					return TRUE
 	return FALSE
 
-/proc/get_area(O)
-	RETURN_TYPE(/area)
-	var/turf/loc = get_turf(O)
-	return loc?.loc
-
 /proc/get_area_name(O) //get area's proper name
 	var/area/A = get_area(O)
 	return A?.proper_name
