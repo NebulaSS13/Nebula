@@ -68,7 +68,7 @@
 	if(!net)
 		// We should already be queued for reconnect if it went down, so do nothing.
 		return FALSE
-	if(!net.devices_by_tag[network_tag] != src)
+	if(net.devices_by_tag[network_tag] != src)
 		// The connection has failed but the network is still up, so we try to reconnect.
 		if(!connect())
 			return FALSE
