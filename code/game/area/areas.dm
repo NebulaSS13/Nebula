@@ -120,8 +120,18 @@ var/global/list/areas = list()
 	for(var/obj/machinery/M in T)
 		M.area_changed(old_area, A) // They usually get moved events, but this is the one way an area can change without triggering one.
 
+	T.update_registrations_on_adjacent_area_change()
+	for(var/direction in global.cardinal)
+		var/turf/adjacent_turf = get_step(T, direction)
+		if(adjacent_turf)
+			T.update_registrations_on_adjacent_area_change()
+
 	if(T.is_outside == OUTSIDE_AREA && T.is_outside() != old_outside)
 		T.update_weather()
+
+/turf/proc/update_registrations_on_adjacent_area_change()
+	for(var/obj/machinery/door/firedoor/door in src)
+		door.update_area_registrations()
 
 /area/proc/alert_on_fall(var/mob/living/carbon/human/H)
 	return
