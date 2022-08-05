@@ -23,6 +23,9 @@ var/global/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 	var/full_name = "Unnamed Map"
 	var/path
 
+	// TODO: move all the lobby stuff onto this handler.
+	var/lobby_handler = /decl/lobby_handler
+
 	var/list/station_levels = list() // Z-levels the station exists on
 	var/list/admin_levels =   list() // Z-levels for admin functionality (Centcom, shuttle transit, etc)
 	var/list/contact_levels = list() // Z-levels that can be contacted from the station, for eg announcements

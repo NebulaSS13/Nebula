@@ -1552,6 +1552,7 @@
 #include "code\modules\client\client_defines.dm"
 #include "code\modules\client\client_helpers.dm"
 #include "code\modules\client\client_procs.dm"
+#include "code\modules\client\lobby_handler.dm"
 #include "code\modules\client\movement.dm"
 #include "code\modules\client\preferences.dm"
 #include "code\modules\client\preferences_persist.dm"
