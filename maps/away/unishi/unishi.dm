@@ -2,7 +2,7 @@
 #include "unishi_jobs.dm"
 #include "../../../mods/content/xenobiology/_xenobiology.dme"
 
-/obj/effect/submap_landmark/joinable_submap/unishi
+/obj/abstract/submap_landmark/joinable_submap/unishi
 	name = "SRV Verne"
 	archetype = /decl/submap_archetype/derelict/unishi
 

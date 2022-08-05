@@ -2,7 +2,7 @@
 #include "bearcat_jobs.dm"
 #include "bearcat_access.dm"
 
-/obj/effect/submap_landmark/joinable_submap/bearcat
+/obj/abstract/submap_landmark/joinable_submap/bearcat
 	name = "FTV Bearcat"
 	archetype = /decl/submap_archetype/derelict/bearcat
 

@@ -95,7 +95,7 @@
 /turf/simulated/floor/tiled/techfloor,
 /area/map_template/colony/command)
 "aq" = (
-/obj/effect/submap_landmark/joinable_submap/colony,
+/obj/abstract/submap_landmark/joinable_submap/colony,
 /turf/template_noop,
 /area/template_noop)
 "ar" = (
@@ -406,7 +406,7 @@
 /turf/simulated/floor/tiled/techfloor,
 /area/map_template/colony/command)
 "bg" = (
-/obj/effect/submap_landmark/spawnpoint/colonist_spawn,
+/obj/abstract/submap_landmark/spawnpoint/colonist_spawn,
 /obj/structure/bed/padded,
 /obj/item/bedsheet/hop,
 /obj/machinery/light/small{
@@ -1526,7 +1526,7 @@
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/map_template/colony/engineering)
 "dB" = (
-/obj/effect/submap_landmark/spawnpoint/colonist_spawn,
+/obj/abstract/submap_landmark/spawnpoint/colonist_spawn,
 /obj/structure/bed/padded,
 /obj/item/bedsheet/hos,
 /turf/simulated/floor/carpet,
@@ -2292,7 +2292,7 @@
 /turf/simulated/floor/tiled/techfloor,
 /area/map_template/colony/dorms)
 "eX" = (
-/obj/effect/submap_landmark/spawnpoint/colonist_spawn,
+/obj/abstract/submap_landmark/spawnpoint/colonist_spawn,
 /obj/structure/bed/padded,
 /obj/item/gun/energy/gun/small,
 /obj/item/flashlight/upgraded,

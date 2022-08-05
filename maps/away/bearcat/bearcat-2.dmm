@@ -293,7 +293,7 @@
 /obj/machinery/atmospherics/unary/vent_scrubber/on,
 /obj/item/gun/projectile/pistol/holdout,
 /obj/structure/bed/padded,
-/obj/effect/submap_landmark/spawnpoint/captain,
+/obj/abstract/submap_landmark/spawnpoint/captain,
 /turf/simulated/floor/wood,
 /area/ship/scrap/command/captain)
 "aM" = (
@@ -646,7 +646,7 @@
 /obj/structure/cable{
 	icon_state = "1-8"
 	},
-/obj/effect/submap_landmark/joinable_submap/bearcat,
+/obj/abstract/submap_landmark/joinable_submap/bearcat,
 /turf/simulated/floor/tiled/usedup,
 /area/ship/scrap/dock)
 "bs" = (
@@ -1366,7 +1366,7 @@
 /obj/machinery/atmospherics/unary/vent_pump/on{
 	level = 2
 	},
-/obj/effect/submap_landmark/spawnpoint/crewman,
+/obj/abstract/submap_landmark/spawnpoint/crewman,
 /turf/simulated/floor/tiled/white,
 /area/ship/scrap/crew/cryo)
 "cP" = (
@@ -1566,7 +1566,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 9
 	},
-/obj/effect/submap_landmark/spawnpoint/crewman,
+/obj/abstract/submap_landmark/spawnpoint/crewman,
 /turf/simulated/floor/tiled/white,
 /area/ship/scrap/crew/cryo)
 "dg" = (
@@ -1744,7 +1744,7 @@
 /obj/machinery/atmospherics/unary/vent_scrubber/on{
 	dir = 1
 	},
-/obj/effect/submap_landmark/spawnpoint/crewman,
+/obj/abstract/submap_landmark/spawnpoint/crewman,
 /turf/simulated/floor/tiled/white,
 /area/ship/scrap/crew/cryo)
 "dv" = (
