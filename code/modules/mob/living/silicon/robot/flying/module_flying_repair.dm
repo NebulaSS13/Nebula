@@ -42,7 +42,7 @@
 		/obj/item/stack/material/cyborg/fiberglass,
 		/obj/item/stack/cable_coil/cyborg,
 		/obj/item/stack/material/cyborg/plasteel,
-		/obj/item/plunger
+		/obj/item/plunger/unbreakable
 	)
 	synths = list(
 		/datum/matter_synth/metal = 	 30000,

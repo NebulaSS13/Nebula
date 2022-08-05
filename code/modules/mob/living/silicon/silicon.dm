@@ -10,6 +10,7 @@
 	bone_material = null
 	bone_amount = 0
 
+	var/dexterity = DEXTERITY_FULL
 	var/syndicate = 0
 	var/const/MAIN_CHANNEL = "Main Frequency"
 	var/lawchannel = MAIN_CHANNEL // Default channel on which to state laws
@@ -45,6 +46,9 @@
 
 	#define SEC_HUD 1 //Security HUD mode
 	#define MED_HUD 2 //Medical HUD mode
+
+/mob/living/silicon/has_dexterity(var/dex_level)
+	return dexterity >= dex_level
 
 /mob/living/silicon/Initialize()
 	global.silicon_mob_list += src

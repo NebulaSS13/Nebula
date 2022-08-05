@@ -23,14 +23,8 @@
 
 	screens[category] = screen
 	screen.transform = null
-	if(screen && client)
-		if(screen.screen_loc != ui_entire_screen)
-			if(max(client.last_view_x_dim, client.last_view_y_dim) > 7)
-				var/matrix/M = matrix()
-				M.Scale(CEILING(client.last_view_x_dim/7),CEILING(client.last_view_y_dim/7))
-				screen.transform = M
-		if(stat != DEAD || screen.allstate)
-			client.screen += screen
+	if(screen && client && (stat != DEAD || screen.allstate))
+		client.screen += screen
 	return screen
 
 /mob/proc/show_screen(var/screen, var/animated)
@@ -79,7 +73,7 @@
 /obj/screen/fullscreen
 	icon = 'icons/mob/screen_full.dmi'
 	icon_state = "default"
-	screen_loc = "CENTER-7,CENTER-7"
+	screen_loc = ui_center_fullscreen
 	plane = FULLSCREEN_PLANE
 	mouse_opacity = 0
 	var/severity = 0

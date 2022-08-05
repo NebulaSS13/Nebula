@@ -19,3 +19,5 @@
 			body_parts_covered = initial(body_parts_covered)
 	return ..()
 
+/obj/item/plunger/unbreakable
+	unbreakable = TRUE

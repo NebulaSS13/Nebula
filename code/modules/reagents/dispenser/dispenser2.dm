@@ -13,7 +13,7 @@
 	var/list/spawn_cartridges = null // Set to a list of types to spawn one of each on New()
 
 	var/list/cartridges = list() // Associative, label -> cartridge
-	var/obj/item/chems/container = null
+	var/obj/item/chems/container
 
 	var/ui_title = "Chemical Dispenser"
 
@@ -115,13 +115,30 @@
 			return TRUE
 		if(!user.unEquip(RC, src))
 			return TRUE
-		container =  RC
-		update_icon()
+		set_container(RC)
 		to_chat(user, "<span class='notice'>You set \the [RC] on \the [src].</span>")
-		SSnano.update_uis(src) // update all UIs attached to src
 		return TRUE
 
 	return ..()
+
+/obj/machinery/chemical_dispenser/proc/set_container(var/obj/item/chems/new_container)
+	if(container == new_container)
+		return
+	if(container)
+		events_repository.unregister(/decl/observ/moved, container, src)
+		events_repository.unregister(/decl/observ/destroyed, container, src)
+	container = new_container
+	if(container)
+		events_repository.register(/decl/observ/moved, container, src, .proc/check_container_status)
+		events_repository.register(/decl/observ/destroyed, container, src, .proc/check_container_status)
+	update_icon()
+	SSnano.update_uis(src) // update all UIs attached to src
+
+/obj/machinery/chemical_dispenser/proc/check_container_status()
+	if(container && (QDELETED(container) || container.loc != src))
+		events_repository.unregister(/decl/observ/moved, container, src)
+		events_repository.unregister(/decl/observ/destroyed, container, src)
+		container = null
 
 /obj/machinery/chemical_dispenser/ui_interact(mob/user, ui_key = "main",var/datum/nanoui/ui = null, var/force_open = 1)
 	// this is the data which will be sent to the ui
@@ -136,9 +153,9 @@
 			beakerD[++beakerD.len] = list("name" = R.name, "volume" = REAGENT_VOLUME(container.reagents, rtype))
 	data["beakerContents"] = beakerD
 
-	if(container)
-		data["beakerCurrentVolume"] = container.reagents.total_volume
-		data["beakerMaxVolume"] = container.reagents.maximum_volume
+	if(container) // Container has had null reagents in the past; may be due to qdel without clearing reference.
+		data["beakerCurrentVolume"] = container.reagents?.total_volume || 0
+		data["beakerMaxVolume"] = container.reagents?.maximum_volume || 0
 	else
 		data["beakerCurrentVolume"] = null
 		data["beakerMaxVolume"] = null
@@ -191,8 +208,7 @@
 		else
 			B.dropInto(loc)
 
-		container = null
-		update_icon()
+		set_container(null)
 		return TOPIC_REFRESH
 
 /obj/machinery/chemical_dispenser/interface_interact(mob/user)
@@ -200,10 +216,10 @@
 	return TRUE
 
 /obj/machinery/chemical_dispenser/on_update_icon()
-	overlays.Cut()
+	cut_overlays()
 	if(container)
 		var/mutable_appearance/beaker_overlay
 		beaker_overlay = image(src, src, "lil_beaker")
 		beaker_overlay.pixel_y = beaker_offset
 		beaker_overlay.pixel_x = pick(beaker_positions)
-		overlays += beaker_overlay
+		add_overlay(beaker_overlay)

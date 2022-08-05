@@ -79,7 +79,7 @@
 	take_damage(P.damage, P.damage_type)
 
 /obj/machinery/bash(obj/item/W, mob/user)
-	if(W.force <= 5)
+	if(!istype(W) || W.force <= 5 || (W.item_flags & ITEM_FLAG_NO_BLUDGEON))
 		return FALSE
 	. = ..()
 	if(.)

@@ -57,6 +57,8 @@
 /obj/machinery/fabricator/proc/ui_fabricator_build_options_data()
 	var/list/build_options
 	for(var/datum/fabricator_recipe/R in design_cache)
+		if(!R.is_available_to_fab(src))
+			continue
 		if(R.hidden && !(fab_status_flags & FAB_HACKED))
 			continue
 		if(show_category != "All" && show_category != R.category)

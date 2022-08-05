@@ -93,8 +93,8 @@
 	user.apply_stored_shock_to(target)
 
 /decl/natural_attack/stomp/weak
-	attack_verb = list("jumped on")
 	name = "weak stomp"
+	attack_verb = list("jumped on")
 
 /decl/natural_attack/stomp/weak/get_unarmed_damage()
 	return damage

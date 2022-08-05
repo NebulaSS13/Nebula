@@ -231,6 +231,10 @@
  * * mover: The initiator of movement
  */
 /mob/proc/AdjustMovementDirection(var/direction, var/mob/mover)
+
+	if(!direction || !isnum(direction))
+		return 0
+
 	. = direction
 
 	// If we are moved not on our own, we don't get move debuff
