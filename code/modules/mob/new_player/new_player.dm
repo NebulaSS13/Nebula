@@ -34,26 +34,22 @@ INITIALIZE_IMMEDIATE(/mob/new_player)
 /mob/new_player/proc/show_lobby_menu(force = FALSE)
 	if(!SScharacter_setup.initialized && !force)
 		return // Not ready yet.
-	var/output = list()
-	output += "<div align='center'>"
-	output += "<i>[global.using_map.get_map_info()]</i>"
-	output +="<hr>"
-	output += "<a href='byond://?src=\ref[src];lobby_setup=1'>Setup Character</A> "
 
-	if(GAME_STATE > RUNLEVEL_LOBBY)
-		output += "<a href='byond://?src=\ref[src];lobby_crew=1'>View the Crew Manifest</A> "
+	var/output = list("<div align='center'>")
 
-	output += "<a href='byond://?src=\ref[src];lobby_observe=1'>Observe</A> "
-
-	output += "<hr>Current character: <a href='byond://?src=\ref[client.prefs];load=1'><b>[client.prefs.real_name]</b></a>[client.prefs.job_high ? ", [client.prefs.job_high]" : null]<br>"
-	if(GAME_STATE <= RUNLEVEL_LOBBY)
-		if(ready)
-			output += "<a class='linkOn' href='byond://?src=\ref[src];lobby_ready=1'>Un-Ready</a>"
-		else
-			output += "<a href='byond://?src=\ref[src];lobby_ready=1'>Ready Up</a>"
-	else
-		output += "<a href='byond://?src=\ref[src];lobby_join=1'>Join Game!</A>"
-
+	var/decl/lobby_handler/lobby_handler = GET_DECL(global.using_map.lobby_handler)
+	var/lobby_header = lobby_handler.get_lobby_header(src)
+	if(lobby_header)
+		output += lobby_header
+	for(var/datum/lobby_option/option in lobby_handler.lobby_options)
+		if(!option.visible(src))
+			continue
+		var/option_string = option.get_lobby_menu_string(src)
+		if(option_string)
+			output += option_string
+	var/lobby_footer = lobby_handler.get_lobby_footer(src)
+	if(lobby_footer)
+		output += lobby_footer
 	output += "</div>"
 
 	panel = new(src, "Welcome","Welcome to [global.using_map.full_name]", 560, 280, src)

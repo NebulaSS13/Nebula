@@ -111,3 +111,6 @@
 
 /proc/cmp_job_desc(var/datum/job/A, var/datum/job/B)
 	return B.get_occupations_tab_sort_score() - A.get_occupations_tab_sort_score()
+
+/proc/cmp_lobby_option_asc(var/datum/lobby_option/A, var/datum/lobby_option/B)
+	return A.sort_priority - B.sort_priority
