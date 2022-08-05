@@ -45,8 +45,8 @@
 		else
 			qdel(eyegore)
 
-/obj/effect/submap_landmark/spawnpoint/captain
+/obj/abstract/submap_landmark/spawnpoint/captain
 	name = "Independant Captain"
 
-/obj/effect/submap_landmark/spawnpoint/crewman
+/obj/abstract/submap_landmark/spawnpoint/crewman
 	name = "Independant Crewman"

@@ -34,7 +34,7 @@
 	return ..()
 
 // Spawn points.
-/obj/effect/submap_landmark/spawnpoint/liberia
+/obj/abstract/submap_landmark/spawnpoint/liberia
 	name = "Merchant"
 	movable_flags = MOVABLE_FLAG_EFFECTMOVE
 

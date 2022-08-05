@@ -29,7 +29,7 @@
 		/datum/shuttle/autodock/overmap/mule = list("nav_mule_start")
 	)
 
-/obj/effect/submap_landmark/joinable_submap/liberia
+/obj/abstract/submap_landmark/joinable_submap/liberia
 	name = "Liberia"
 	archetype = /decl/submap_archetype/liberia
 

@@ -42,10 +42,10 @@
 	id_type = null
 	pda_type = null
 
-/obj/effect/submap_landmark/spawnpoint/colonist_spawn
+/obj/abstract/submap_landmark/spawnpoint/colonist_spawn
 	name = "Colonist"
 
-/obj/effect/submap_landmark/joinable_submap/colony
+/obj/abstract/submap_landmark/joinable_submap/colony
 	name = "Established Colony"
 	archetype = /decl/submap_archetype/playablecolony
 
