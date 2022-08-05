@@ -34,7 +34,7 @@
 /obj/machinery/fabricator/robotics/OnTopic(user, href_list, state)
 	. = ..()
 	if(href_list["pick_species"])
-		var/chosen_species = input(user, "Choose a specie to produce prosthetics for", "Target Species", null) in get_playable_species()
+		var/chosen_species = input(user, "Choose a species to produce prosthetics for", "Target Species", null) in get_playable_species()
 		if(chosen_species)
 			picked_prosthetic_species = chosen_species
 		. = TOPIC_REFRESH

@@ -42,7 +42,7 @@
 		/obj/item/paint_sprayer,
 		/obj/item/inflatable_dispenser/robot,
 		/obj/item/inducer/borg,
-		/obj/item/plunger,
+		/obj/item/plunger/unbreakable,
 		/obj/item/matter_decompiler,
 		/obj/item/stack/material/cyborg/steel,
 		/obj/item/stack/material/cyborg/aluminium,

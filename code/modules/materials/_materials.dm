@@ -221,7 +221,7 @@ INITIALIZE_IMMEDIATE(/obj/effect/gas_overlay)
 	var/solvent_power = MAT_SOLVENT_NONE
 	var/solvent_melt_dose = 0
 	var/solvent_max_damage  = 0
-	var/slipperiness
+	var/slipperiness = 0
 	var/euphoriant // If set, ingesting/injecting this material will cause the rainbow high overlay/behavior.
 
 	var/glass_icon = DRINK_ICON_DEFAULT

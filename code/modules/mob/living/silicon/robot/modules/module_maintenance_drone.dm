@@ -23,7 +23,7 @@
 		/obj/item/extinguisher/mini,
 		/obj/item/paint_sprayer,
 		/obj/item/inducer/borg,
-		/obj/item/plunger,
+		/obj/item/plunger/unbreakable,
 		/obj/item/inflatable_dispenser/robot,
 		/obj/item/chems/spray/cleaner/drone,
 		/obj/item/borg/sight/hud/jani,

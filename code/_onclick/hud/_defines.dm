@@ -14,6 +14,7 @@
 */
 
 #define ui_entire_screen "WEST,SOUTH to EAST,NORTH"
+#define ui_center_fullscreen "CENTER-7,CENTER-7"
 
 //Lower left, persistant menu
 #define ui_inventory "LEFT:6,BOTTOM:5"
@@ -54,7 +55,7 @@
 #define ui_pull_resist "RIGHT-2:26,BOTTOM+1:7"
 #define ui_acti "RIGHT-2:26,BOTTOM:5"
 #define ui_movi "RIGHT-3:24,BOTTOM:5"
-#define ui_attack_selector "RIGHT-3:24,BOTTOM+1:-2"
+#define ui_attack_selector "RIGHT-3:24,BOTTOM+1:6"
 #define ui_zonesel "RIGHT-1:28,BOTTOM:5"
 #define ui_acti_alt "RIGHT-1:28,BOTTOM:5" //alternative intent switcher for when the interface is hidden
 #define ui_stamina "RIGHT-3:24,BOTTOM+1:5"

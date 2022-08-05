@@ -474,6 +474,9 @@ meteor_act
 
 /mob/living/carbon/human/explosion_act(severity)
 	..()
+	if(QDELETED(src))
+		return
+
 	var/b_loss = null
 	var/f_loss = null
 	switch (severity)
