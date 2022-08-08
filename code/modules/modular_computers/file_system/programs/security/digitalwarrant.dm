@@ -19,28 +19,31 @@ var/global/list/all_warrants
 	name = "Warrant Assistant"
 	var/datum/computer_file/report/warrant/active
 
-/datum/nano_module/program/proc/get_warrants()
+/datum/nano_module/program/proc/get_warrants(list/accesses, mob/user)
 	var/datum/computer_network/network = program?.computer?.get_network()
 	if(network)
-		return network.get_all_files_of_type(/datum/computer_file/report/warrant)
+		return network.get_all_files_of_type(/datum/computer_file/report/warrant, accesses, user)
 
-/datum/nano_module/program/proc/remove_warrant(datum/computer_file/report/warrant/W)
+/datum/nano_module/program/proc/remove_warrant(datum/computer_file/report/warrant/W, list/accesses, mob/user)
 	var/datum/computer_network/network = program?.computer?.get_network()
 	if(network)
-		return network.remove_file(W)
+		return network.remove_file(W, accesses, user)
 
-/datum/nano_module/program/proc/save_warrant(datum/computer_file/report/warrant/W)
+/datum/nano_module/program/proc/save_warrant(datum/computer_file/report/warrant/W, list/accesses, mob/user)
 	var/datum/computer_network/network = program?.computer?.get_network()
 	if(network)
-		return network.store_file(W)
+		return network.store_file(W, OS_DOCUMENTS_DIR, TRUE, accesses = accesses, user = user)
 
 /datum/nano_module/program/digitalwarrant/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1, var/datum/topic_state/state = global.default_topic_state)
 	var/list/data = host.initial_data()
 
+	var/list/accesses = get_access(user)
+
 	if(active)
-		data["details"] = active.generate_nano_data(get_access(user), user)
+		data["details"] = active.generate_nano_data(accesses, user)
 	else
-		for(var/datum/computer_file/report/warrant/W in global.all_warrants)
+		var/list/avail_warrants = get_warrants(accesses, user)
+		for(var/datum/computer_file/report/warrant/W in avail_warrants)
 			LAZYADD(data[W.get_category()],  W.get_nano_summary())
 
 	ui = SSnano.try_update_ui(user, src, ui_key, ui, data, force_open)
@@ -53,24 +56,26 @@ var/global/list/all_warrants
 /datum/nano_module/program/digitalwarrant/Topic(href, href_list)
 	if(..())
 		return 1
+	var/list/accesses = get_access(usr)
+	var/list/avail_warrants = get_warrants(accesses, usr)
 
 	if(href_list["editwarrant"])
 		. = 1
-		for(var/datum/computer_file/report/warrant/W in global.all_warrants)
+		for(var/datum/computer_file/report/warrant/W in avail_warrants)
 			if(W.uid == text2num(href_list["editwarrant"]))
 				active = W
 				break
 
 	if(href_list["sendtoarchive"])
 		. = 1
-		for(var/datum/computer_file/report/warrant/W in global.all_warrants)
+		for(var/datum/computer_file/report/warrant/W in avail_warrants)
 			if(W.uid == text2num(href_list["sendtoarchive"]))
 				W.archived = TRUE
 				break
 
 	if(href_list["restore"])
 		. = 1
-		for(var/datum/computer_file/report/warrant/W in global.all_warrants)
+		for(var/datum/computer_file/report/warrant/W in avail_warrants)
 			if(W.uid == text2num(href_list["restore"]))
 				W.archived = FALSE
 				break
@@ -89,17 +94,23 @@ var/global/list/all_warrants
 		if(!active)
 			return
 		broadcast_security_hud_message("[active.get_broadcast_summary()] has been [(active in global.all_warrants) ? "edited" : "uploaded"].", nano_host())
-		LAZYDISTINCTADD(global.all_warrants, active)
+		
+		var/success = save_warrant(active, accesses, usr)
+		if(success != OS_FILE_SUCCESS)
+			to_chat(usr, SPAN_WARNING("Could not save warrant. You may lack access to the file servers."))
+			return
 		active = null
 
 	if(href_list["deletewarrant"])
 		. = 1
 		if(!active)
-			for(var/datum/computer_file/report/warrant/W in global.all_warrants)
+			for(var/datum/computer_file/report/warrant/W in avail_warrants)
 				if(W.uid == text2num(href_list["deletewarrant"]))
 					active = W
 					break
-		LAZYREMOVE(global.all_warrants, active)
+		var/success = remove_warrant(active, accesses, usr)
+		if(success != OS_FILE_SUCCESS)
+			to_chat(usr, SPAN_WARNING("Could not remove warrant. You may lack access to the file servers."))
 		active = null
 
 	if(href_list["back"])
@@ -112,7 +123,7 @@ var/global/list/all_warrants
 		var/datum/report_field/F = active.field_from_ID(text2num(href_list["edit_field"]))
 		if(!F)
 			return
-		if(!(F.get_perms(get_access(usr), usr) & OS_WRITE_ACCESS))
+		if(!(F.get_perms(accesses, usr) & OS_WRITE_ACCESS))
 			to_chat(usr, SPAN_WARNING("\The [nano_host()] flashes an \"Access Denied\" warning."))
 			return
 		F.ask_value(usr)

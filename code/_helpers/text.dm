@@ -198,6 +198,49 @@
 			if(32)			//space
 				dat += "_"
 	return jointext(dat, null)
+
+//Used to strip text of everything but letters and numbers, and select special symbols.
+//Requires that the filename has an alphanumeric character.
+/proc/sanitize_for_file(text)
+	if(!text) return ""
+	var/list/dat = list()
+	var/has_alphanumeric = FALSE
+	var/last_was_fullstop = FALSE
+	for(var/i=1, i<=length(text), i++)
+		var/ascii_char = text2ascii(text,i)
+		switch(ascii_char)
+			if(65 to 90)	//A-Z
+				dat += ascii2text(ascii_char)
+				has_alphanumeric = TRUE
+				last_was_fullstop = FALSE
+			if(97 to 122)	//a-z
+				dat += ascii2text(ascii_char)
+				has_alphanumeric = TRUE
+				last_was_fullstop = FALSE
+			if(48 to 57)	//0-9
+				dat += ascii2text(ascii_char)
+				has_alphanumeric = TRUE
+				last_was_fullstop = FALSE
+			if(32)			//space
+				dat += ascii2text(ascii_char)
+				last_was_fullstop = FALSE
+			if(33, 36, 40, 41, 42, 45, 95) //!, $, (, ), *, -, _
+				dat += ascii2text(ascii_char)
+				last_was_fullstop = FALSE
+			if(46)			//.
+				if(last_was_fullstop) // No repeats of . to avoid confusion with .. 
+					continue
+				dat += ascii2text(ascii_char)
+				last_was_fullstop = TRUE
+	
+	if(!has_alphanumeric)
+		return ""
+
+	if(dat[length(dat)] == ".")	//kill trailing .
+		dat.Cut(length(dat))
+	return jointext(dat, null)
+
+
 // UNICODE: Convert to regex?
 
 //Returns null if there is any bad text in the string

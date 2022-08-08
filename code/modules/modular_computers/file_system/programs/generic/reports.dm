@@ -160,7 +160,7 @@
 		selected_report.rename_file()
 		file.stored_data = selected_report.generate_pencode(get_access(user), user, no_html = 1) //TXT files can't have html; they use pencode only.
 		file.filename = selected_report.filename
-		if(program.computer.store_file(file))
+		if(program.computer.store_file(file, "reports", create_directories = TRUE))
 			to_chat(user, "The report has been exported as '[file.filename].[file.filetype]'.")
 		else
 			to_chat(user, "Error storing file. Please check your hard drive.")

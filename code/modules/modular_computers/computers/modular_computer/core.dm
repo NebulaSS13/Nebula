@@ -47,7 +47,7 @@
 		var/datum/computer_file/program/prog_file = prog_type
 		if(initial(prog_file.usage_flags) & assembly.hardware_flag)
 			prog_file = new prog_file
-			HDD.store_file(prog_file)
+			HDD.store_file(prog_file, OS_PROGRAMS_DIR, TRUE)
 
 /obj/item/modular_computer/Initialize()
 	START_PROCESSING(SSobj, src)

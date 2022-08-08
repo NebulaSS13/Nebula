@@ -114,3 +114,8 @@
 
 /proc/cmp_lobby_option_asc(var/datum/lobby_option/A, var/datum/lobby_option/B)
 	return A.sort_priority - B.sort_priority
+
+/proc/cmp_files_sort(datum/computer_file/a, datum/computer_file/b)
+	. = istype(b, /datum/computer_file/directory) - istype(a, /datum/computer_file/directory) // Prioritize directories over other files.
+	if(!.)
+		return sorttext(b.filename, a.filename)
