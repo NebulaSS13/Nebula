@@ -145,7 +145,7 @@
 		for(var/species_type in R.species_locked)
 			if(!(ispath(species_variation, species_type)))
 				design_cache.Remove(R)
-				return
+				continue
 
 	design_cache = sortTim(design_cache, /proc/cmp_name_asc)
 	ui_nb_categories = LAZYLEN(unique_categories)
@@ -155,9 +155,8 @@
 		for(var/mat in add_mat_to_storage_cap)
 			if(mat in base_storage_capacity)
 				continue
-			if(!(mat in base_storage_capacity))
-				base_storage_capacity[mat] = (SHEET_MATERIAL_AMOUNT * base_storage_capacity_mult)
-				need_storage_recalc = TRUE
+			need_storage_recalc = TRUE
+			base_storage_capacity[mat] = (SHEET_MATERIAL_AMOUNT * base_storage_capacity_mult)
 			if(!(mat in stored_material))
 				stored_material[mat] = 0
 
