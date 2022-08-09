@@ -5,7 +5,8 @@
 	icon_state = "sampler0"
 	item_state = "screwdriver_brown"
 	w_class = ITEM_SIZE_TINY
-
+	material = /decl/material/solid/metal/steel
+	matter = list(/decl/material/solid/plastic = MATTER_AMOUNT_REINFORCEMENT)
 	var/obj/item/sample
 
 /obj/item/core_sampler/examine(mob/user, distance)

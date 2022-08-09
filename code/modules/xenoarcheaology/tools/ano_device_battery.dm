@@ -3,6 +3,13 @@
 	desc = "Curious device that can replicate the effects of anomalies without needing to understand their inner workings."
 	icon = 'icons/obj/xenoarchaeology.dmi'
 	icon_state = "anobattery0"
+	material = /decl/material/solid/plastic
+	matter = list(
+		/decl/material/solid/metal/chromium   = MATTER_AMOUNT_SECONDARY,
+		/decl/material/solid/metal/zinc       = MATTER_AMOUNT_REINFORCEMENT,
+		/decl/material/solid/gemstone/diamond = MATTER_AMOUNT_REINFORCEMENT,
+		/decl/material/solid/lithium          = MATTER_AMOUNT_TRACE,
+	)
 	var/datum/artifact_effect/battery_effect
 	var/capacity = 300
 	var/stored_charge = 0
@@ -33,6 +40,13 @@
 	desc = "APU allows users to safely (relatively) harness powers beyond their understanding, as long as they've been stored in anomaly power cells."
 	icon = 'icons/obj/xenoarchaeology.dmi'
 	icon_state = "anodev_empty"
+	material = /decl/material/solid/plastic
+	matter = list(
+		/decl/material/solid/metal/chromium   = MATTER_AMOUNT_SECONDARY,
+		/decl/material/solid/metal/gold       = MATTER_AMOUNT_REINFORCEMENT,
+		/decl/material/solid/metal/copper     = MATTER_AMOUNT_REINFORCEMENT,
+		/decl/material/solid/silicon          = MATTER_AMOUNT_TRACE,
+	)
 	var/activated = 0
 	var/duration = 1
 	var/interval = 1
