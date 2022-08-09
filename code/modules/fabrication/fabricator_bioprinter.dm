@@ -8,9 +8,6 @@
 	base_icon_state = "bioprinter"
 	base_type = /obj/machinery/fabricator/bioprinter
 	fabricator_class = FABRICATOR_CLASS_MEAT
-	base_storage_capacity = list(
-		/decl/material/solid/meat = SHEET_MATERIAL_AMOUNT * 100
-	)
 	var/datum/dna/loaded_dna //DNA for biological organs
 
 /obj/machinery/fabricator/bioprinter/get_nano_template()
