@@ -20,12 +20,13 @@
 	for(var/material in storage_capacity)
 		var/decl/material/mat = GET_DECL(material)
 		var/list/material_data = list()
+		// TODO proper state checks
+		var/is_solid = !ispath(material, /decl/material/liquid) && !ispath(material, /decl/material/gas)
 		material_data["name"]        = capitalize(mat.use_name)
 		material_data["stored"]      = stored_material[material] ? stored_material[material] : 0
 		material_data["max"]         = storage_capacity[material]
-		material_data["unit"]        = SHEET_UNIT
+		material_data["unit"]        = is_solid ? SHEET_UNIT : "ml"
 		material_data["eject_key"]   = "\ref[GET_DECL(material)]"
-		material_data["eject_label"] = ispath(material, /decl/material/liquid) ? "Flush" : "Eject"
 		material_storage += list(material_data)
 	return material_storage
 
