@@ -8,10 +8,6 @@
 	active_power_usage = 1000
 	base_type = /obj/machinery/fabricator/book
 	fabricator_class = FABRICATOR_CLASS_BOOKS
-	base_storage_capacity = list(
-		/decl/material/solid/wood =      SHEET_MATERIAL_AMOUNT * 20,
-		/decl/material/solid/plastic =   SHEET_MATERIAL_AMOUNT * 20
-	)
 	color_selectable = TRUE
 
 /obj/machinery/fabricator/book/make_order(datum/fabricator_recipe/recipe, multiplier)

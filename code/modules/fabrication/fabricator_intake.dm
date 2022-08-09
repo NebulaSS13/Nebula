@@ -9,11 +9,14 @@
 	for(var/R in thing.reagents.reagent_volumes)
 		if(!base_storage_capacity[R])
 			continue
-		var/taking_reagent = min(REAGENT_VOLUME(thing.reagents, R), storage_capacity[R] - stored_material[R])
+		var/taking_reagent = min(REAGENT_VOLUME(thing.reagents, R), FLOOR((storage_capacity[R] - stored_material[R]) * REAGENT_UNITS_PER_MATERIAL_UNIT))
 		if(taking_reagent <= 0)
 			continue
+		var/reagent_matter = round(taking_reagent / REAGENT_UNITS_PER_MATERIAL_UNIT)
+		if(reagent_matter <= 0)
+			continue
 		thing.reagents.remove_reagent(R, taking_reagent)
-		stored_material[R] += taking_reagent
+		stored_material[R] += reagent_matter
 		// If we're destroying this, take everything.
 		if(destructive)
 			. = SUBSTANCE_TAKEN_ALL

@@ -31,14 +31,8 @@
 
 	var/list/stored_material
 	var/list/storage_capacity
-	var/list/base_storage_capacity = list(
-		/decl/material/solid/metal/steel =     SHEET_MATERIAL_AMOUNT * 20,
-		/decl/material/solid/metal/aluminium = SHEET_MATERIAL_AMOUNT * 20,
-		/decl/material/solid/metal/copper =    SHEET_MATERIAL_AMOUNT * 20,
-		/decl/material/solid/fiberglass =      SHEET_MATERIAL_AMOUNT * 10,
-		/decl/material/solid/glass =           SHEET_MATERIAL_AMOUNT * 10,
-		/decl/material/solid/plastic =         SHEET_MATERIAL_AMOUNT * 10
-	)
+	var/base_storage_capacity_mult = 20
+	var/list/base_storage_capacity
 
 	var/show_category = "All"
 	var/fab_status_flags = 0
@@ -109,8 +103,6 @@
 				var/decl/material/reg = mat
 				stored_substances_to_names[mat] = lowertext(initial(reg.name))
 
-	if(prefilled)
-		fill_to_capacity()
 
 	if(SSfabrication.post_recipe_init)
 		refresh_design_cache()
@@ -152,6 +144,7 @@
 		design_cache |= unlocked_tech
 
 	var/list/unique_categories
+	var/list/add_mat_to_storage_cap = list()
 	for(var/datum/fabricator_recipe/R in design_cache)
 		LAZYDISTINCTADD(unique_categories, R.category)
 		if(!length(R.species_locked))
@@ -165,9 +158,31 @@
 			if(!(ispath(species_variation, species_type)))
 				design_cache.Remove(R)
 				return
+		
+		for(var/mat in R.resources)
+			add_mat_to_storage_cap |= mat
 
 	design_cache = sortTim(design_cache, /proc/cmp_name_asc)
 	ui_nb_categories = LAZYLEN(unique_categories)
+
+	if(length(add_mat_to_storage_cap))
+		var/need_storage_recalc = FALSE
+		for(var/mat in add_mat_to_storage_cap)
+			if(mat in base_storage_capacity)
+				continue
+			if(!(mat in base_storage_capacity))
+				LAZYSET(base_storage_capacity, mat, (SHEET_MATERIAL_AMOUNT * base_storage_capacity_mult))
+				need_storage_recalc = TRUE
+			if(!(mat in stored_material))
+				stored_material[mat] = 0
+
+		if(need_storage_recalc)
+			RefreshParts()
+
+	// We handle this here, as we don't know what materials should be stocked prior to updating our recipes.
+	if(prefilled)
+		prefilled = FALSE
+		fill_to_capacity()
 
 /obj/machinery/fabricator/state_transition(var/decl/machine_construction/default/new_state)
 	. = ..()
