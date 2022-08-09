@@ -106,18 +106,15 @@
 	public_methods = list(/decl/public_access/public_method/toggle_input_toggle)
 	stock_part_presets = list(/decl/stock_part_preset/radio/basic_transmitter/airlock_sensor = 1)
 	uncreated_component_parts = list(
-		/obj/item/stock_parts/power/apc/buildable,
-		/obj/item/stock_parts/radio/transmitter/basic/buildable
+		/obj/item/stock_parts/power/apc,
+		/obj/item/stock_parts/radio/transmitter/basic
 	)
-	base_type = /obj/machinery/airlock_sensor/buildable
+	base_type = /obj/machinery/airlock_sensor
 	construct_state = /decl/machine_construction/wall_frame/panel_closed/simple
 	frame_type = /obj/item/frame/button/airlock_sensor
 
 	var/alert = 0
 	var/pressure
-
-/obj/machinery/airlock_sensor/buildable
-	uncreated_component_parts = null
 
 /obj/machinery/airlock_sensor/on_update_icon()
 	if(!(stat & (NOPOWER | BROKEN)))
@@ -185,8 +182,8 @@
 		/decl/stock_part_preset/radio/event_transmitter/access_button = 1
 	)
 	uncreated_component_parts = list(
-		/obj/item/stock_parts/power/apc/buildable,
-		/obj/item/stock_parts/radio/transmitter/on_event/buildable
+		/obj/item/stock_parts/power/apc,
+		/obj/item/stock_parts/radio/transmitter/on_event
 	)
 	var/command = "cycle"
 

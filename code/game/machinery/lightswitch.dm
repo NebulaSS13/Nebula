@@ -20,12 +20,9 @@
 	construct_state = /decl/machine_construction/wall_frame/panel_closed/simple
 	frame_type = /obj/item/frame/button/light_switch
 	uncreated_component_parts = list(
-		/obj/item/stock_parts/power/apc/buildable
+		/obj/item/stock_parts/power/apc
 	)
-	base_type = /obj/machinery/light_switch/buildable
-
-/obj/machinery/light_switch/buildable
-	uncreated_component_parts = null
+	base_type = /obj/machinery/light_switch
 
 /obj/machinery/light_switch/on
 	on = TRUE

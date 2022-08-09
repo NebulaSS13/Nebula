@@ -6,7 +6,7 @@
 	icon = 'icons/obj/power.dmi'
 	icon_state = "light-p"
 	obj_flags = OBJ_FLAG_CONDUCTIBLE
-	build_machine_type = /obj/machinery/light_switch/buildable
+	build_machine_type = /obj/machinery/light_switch
 
 /obj/item/frame/button/light_switch/kit
 	name = "light switch kit"

@@ -109,33 +109,33 @@
 	desc = "Used for building lights."
 	icon = 'icons/obj/lighting.dmi'
 	icon_state = "tube-construct-item"
-	build_machine_type = /obj/machinery/light/buildable
+	build_machine_type = /obj/machinery/light
 	reverse = 1
 
 /obj/item/frame/light/small
 	name = "small light fixture frame"
 	icon_state = "bulb-construct-item"
 	material = /decl/material/solid/metal/steel
-	build_machine_type = /obj/machinery/light/small/buildable
+	build_machine_type = /obj/machinery/light/small
 
 /obj/item/frame/light/spot
 	name = "spotlight fixture frame"
 	icon_state = "tube-construct-item"
 	material = /decl/material/solid/metal/steel
-	build_machine_type = /obj/machinery/light/spot/buildable
+	build_machine_type = /obj/machinery/light/spot
 
 /obj/item/frame/light/nav
 	name = "navigation light fixture frame"
 	icon_state = "tube-construct-item"
 	material = /decl/material/solid/metal/steel
-	build_machine_type = /obj/machinery/light/navigation/buildable
+	build_machine_type = /obj/machinery/light/navigation
 
 /obj/item/frame/button
 	name = "button frame"
 	icon = 'icons/obj/objects.dmi'
 	icon_state = "launcherbtt"
 	material = /decl/material/solid/metal/steel
-	build_machine_type = /obj/machinery/button/buildable
+	build_machine_type = /obj/machinery/button
 
 /obj/item/frame/camera
 	name = "security camera frame"
@@ -244,7 +244,7 @@
 	icon_state = "airlock_sensor_off"
 	name = "airlock sensor"
 	desc = "An airlock sensor frame."
-	build_machine_type = /obj/machinery/airlock_sensor/buildable
+	build_machine_type = /obj/machinery/airlock_sensor
 
 /obj/item/frame/button/airlock_controller
 	icon = 'icons/obj/airlock_machines.dmi'

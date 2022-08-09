@@ -58,8 +58,7 @@
 
 	base_type = /obj/machinery/alarm
 	frame_type = /obj/item/frame/air_alarm
-	stat_immune = 0
-	uncreated_component_parts = null
+	uncreated_component_parts = list(/obj/item/stock_parts/power/apc = 1)
 	construct_state = /decl/machine_construction/wall_frame/panel_closed
 	wires = /datum/wires/alarm
 
@@ -831,8 +830,7 @@ FIRE ALARM
 
 	base_type = /obj/machinery/firealarm
 	frame_type = /obj/item/frame/fire_alarm
-	stat_immune = 0
-	uncreated_component_parts = null
+	uncreated_component_parts = list(/obj/item/stock_parts/power/apc = 1)
 	construct_state = /decl/machine_construction/wall_frame/panel_closed
 
 	var/detecting =    TRUE

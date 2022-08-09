@@ -17,10 +17,10 @@
 	public_methods = list(/decl/public_access/public_method/toggle_input_toggle)
 	stock_part_presets = list(/decl/stock_part_preset/radio/basic_transmitter/button = 1)
 	uncreated_component_parts = list(
-		/obj/item/stock_parts/power/apc/buildable,
-		/obj/item/stock_parts/radio/transmitter/basic/buildable
+		/obj/item/stock_parts/power/apc = 1,
+		/obj/item/stock_parts/radio/transmitter/basic = 1
 	)
-	base_type = /obj/machinery/button/buildable
+	base_type = /obj/machinery/button
 	construct_state = /decl/machine_construction/wall_frame/panel_closed/simple
 	frame_type = /obj/item/frame/button
 	required_interaction_dexterity = DEXTERITY_SIMPLE_MACHINES
@@ -29,9 +29,6 @@
 	var/operating = FALSE
 	var/state = FALSE
 	var/cooldown = 1 SECOND
-
-/obj/machinery/button/buildable
-	uncreated_component_parts = null
 
 /obj/machinery/button/Initialize()
 	. = ..()
