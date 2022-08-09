@@ -51,7 +51,7 @@
 	name = "hastur's hood"
 	desc = "It's unspeakably stylish."
 	icon = 'icons/clothing/head/hastur.dmi'
-	flags_inv = BLOCKHEADHAIR
+	flags_inv = BLOCK_HEAD_HAIR
 	body_parts_covered = SLOT_HEAD|SLOT_FACE|SLOT_EYES
 
 /obj/item/clothing/head/nursehat
@@ -152,7 +152,7 @@
 	name = "chicken suit head"
 	desc = "Bkaw!"
 	icon = 'icons/clothing/head/chicken.dmi'
-	flags_inv = BLOCKHAIR
+	flags_inv = BLOCK_ALL_HAIR
 	siemens_coefficient = 0.7
 	body_parts_covered = SLOT_HEAD|SLOT_FACE|SLOT_EYES
 
@@ -167,7 +167,7 @@
 	desc = "A helmet made out of chitinous alien hide."
 	icon = 'icons/clothing/head/xeno.dmi'
 	w_class = ITEM_SIZE_NORMAL
-	flags_inv = HIDEMASK|HIDEEARS|HIDEEYES|HIDEFACE|BLOCKHAIR
+	flags_inv = HIDEMASK|HIDEEARS|HIDEEYES|HIDEFACE|BLOCK_ALL_HAIR
 	siemens_coefficient = 2.0
 	body_parts_covered = SLOT_HEAD|SLOT_FACE|SLOT_EYES|SLOT_EARS
 
@@ -212,7 +212,7 @@
 	name = "padded cap"
 	desc = "A padded skullcup for those prone to bumping their heads against hard surfaces."
 	icon = 'icons/clothing/head/tank.dmi'
-	flags_inv = BLOCKHEADHAIR
+	flags_inv = BLOCK_HEAD_HAIR
 	color = "#5f5f5f"
 	armor = list(
 		melee = ARMOR_MELEE_KNIVES,
@@ -235,6 +235,6 @@
 	desc = "A helmet made of plastic. It's completely opaque. This will stop the stare."
 	icon = 'icons/clothing/head/facecover.dmi'
 	tint = TINT_BLIND
-	flags_inv = HIDEMASK|HIDEEARS|HIDEEYES|HIDEFACE|BLOCKHAIR
+	flags_inv = HIDEMASK|HIDEEARS|HIDEEYES|HIDEFACE|BLOCK_ALL_HAIR
 	body_parts_covered = SLOT_HEAD|SLOT_FACE|SLOT_EYES
 	flash_protection = FLASH_PROTECTION_MAJOR

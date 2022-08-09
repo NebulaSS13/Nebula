@@ -451,7 +451,7 @@ var/global/list/damage_icon_parts = list()
 	//masks and helmets can obscure our hair.
 	for(var/slot in global.airtight_slots)
 		var/obj/item/gear = get_equipped_item(slot)
-		if(gear && (gear.flags_inv & BLOCKHAIR))
+		if(gear && (gear.flags_inv & BLOCK_ALL_HAIR))
 			if(update_icons)
 				queue_icon_update()
 			return
@@ -552,7 +552,7 @@ var/global/list/damage_icon_parts = list()
 	overlays_standing[HO_EARS_LAYER] = null
 	for(var/slot in global.airtight_slots)
 		var/obj/item/gear = get_equipped_item(slot)
-		if(gear && (gear.flags_inv & (BLOCKHAIR|BLOCKHEADHAIR)))
+		if(gear && (gear.flags_inv & (BLOCK_ALL_HAIR)))
 			if(update_icons)
 				queue_icon_update()
 			return

@@ -16,7 +16,7 @@
 	desc = "Hiss hiss hiss!"
 	icon = 'icons/clothing/head/xeno.dmi'
 	body_parts_covered = SLOT_HEAD|SLOT_FACE|SLOT_EYES|SLOT_EARS
-	flags_inv = HIDEMASK|HIDEEARS|HIDEEYES|HIDEFACE|BLOCKHAIR
+	flags_inv = HIDEMASK|HIDEEARS|HIDEEYES|HIDEFACE|BLOCK_ALL_HAIR
 
 /obj/item/clothing/head/collectable/chef
 	name = "collectable chef's hat"

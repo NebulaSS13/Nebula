@@ -10,7 +10,7 @@
 		rad = ARMOR_RAD_SHIELDED
 	)
 	bodytype_equip_flags = BODY_FLAG_HUMANOID
-	flags_inv = HIDEEARS | BLOCKHEADHAIR
+	flags_inv = HIDEEARS | BLOCK_HEAD_HAIR
 
 /obj/item/clothing/suit/caretakercloak
 	name = "holy cloak"

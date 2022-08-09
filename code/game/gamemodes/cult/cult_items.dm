@@ -59,7 +59,7 @@
 	name = "magus helm"
 	desc = "A helm worn by the followers of Nar-Sie."
 	icon = 'icons/clothing/head/wizard/magus.dmi'
-	flags_inv = HIDEFACE | BLOCKHAIR
+	flags_inv = HIDEFACE | BLOCK_ALL_HAIR
 	body_parts_covered = SLOT_HEAD|SLOT_FACE|SLOT_EYES
 	armor = list(
 		melee = ARMOR_MELEE_RESISTANT,

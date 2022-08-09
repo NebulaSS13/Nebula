@@ -4,7 +4,7 @@
 	icon                = 'icons/clothing/head/softcap.dmi'
 	blood_overlay_type  = "helmetblood"
 	w_class             = ITEM_SIZE_SMALL
-	flags_inv           = BLOCKHEADHAIR
+	flags_inv           = BLOCK_HEAD_HAIR
 	slot_flags          = SLOT_HEAD
 	body_parts_covered  = SLOT_HEAD
 
