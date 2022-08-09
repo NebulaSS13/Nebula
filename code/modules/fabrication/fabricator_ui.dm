@@ -18,14 +18,14 @@
 /obj/machinery/fabricator/proc/ui_fabricator_resource_data()
 	var/material_storage =  list()
 	for(var/material in storage_capacity)
+		var/decl/material/mat = GET_DECL(material)
 		var/list/material_data = list()
-		var/mat_name = capitalize(stored_substances_to_names[material])
-		material_data["name"]        = mat_name
+		material_data["name"]        = capitalize(mat.use_name)
 		material_data["stored"]      = stored_material[material] ? stored_material[material] : 0
 		material_data["max"]         = storage_capacity[material]
 		material_data["unit"]        = SHEET_UNIT
-		material_data["eject_key"]   = stored_substances_to_names[material]
-		material_data["eject_label"] = ispath(material, /decl/material) ? "Eject" : "Flush"
+		material_data["eject_key"]   = "\ref[GET_DECL(material)]"
+		material_data["eject_label"] = ispath(material, /decl/material/liquid) ? "Flush" : "Eject"
 		material_storage += list(material_data)
 	return material_storage
 
@@ -94,9 +94,12 @@
 	var/max_sheets          = (!length(R.resources)) ? 100 : null
 	var/has_missing_resource = FALSE
 	for(var/material_path in R.resources)
+
 		var/required_amount = round(R.resources[material_path] * mat_efficiency)
 		var/sheets          = round(stored_material[material_path] / required_amount)
 		var/has_enough      = TRUE
+
+		var/decl/material/mat = GET_DECL(material_path)
 
 		if(isnull(max_sheets) || max_sheets > sheets)
 			max_sheets = sheets
@@ -106,7 +109,7 @@
 
 		//Must make it a double list here or the fields are just overwriting eachothers
 		material_components += list(list(
-				"name"       = stored_substances_to_names[material_path],
+				"name"       = capitalize(mat.use_name),
 				"amount"     = required_amount,
 				"has_enough" = has_enough, 
 			))
