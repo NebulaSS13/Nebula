@@ -15,8 +15,10 @@
 		. = TOPIC_REFRESH
 	
 	if(href_list["eject_mat"])
-		try_dump_material(href_list["eject_mat"])
-		. = TOPIC_REFRESH
+		var/decl/material/mat = locate(href_list["eject_mat"])
+		if(istype(mat))
+			try_dump_material(mat.type)
+			. = TOPIC_REFRESH
 	
 	if(href_list["network_settings"])
 		var/datum/extension/network_device/D = get_extension(src, /datum/extension/network_device)
@@ -60,11 +62,14 @@
 			queued_orders -= order
 		qdel(order)
 
-/obj/machinery/fabricator/proc/try_dump_material(var/mat_name)
-	mat_name = lowertext(mat_name)
-	for(var/mat_path in stored_substances_to_names)
-		if(stored_substances_to_names[mat_path] == mat_name && stored_material[mat_path] > SHEET_MATERIAL_AMOUNT)
-			var/sheet_count = FLOOR(stored_material[mat_path]/SHEET_MATERIAL_AMOUNT)
+/obj/machinery/fabricator/proc/try_dump_material(var/mat_path)
+	if(!mat_path || !stored_material[mat_path])
+		return
+	// TODO: proper liquid reagent ejection checks (acid sheet ejection...).
+	if(ispath(mat_path, /decl/material/gas) || ispath(mat_path, /decl/material/liquid))
+		stored_material[mat_path] = 0
+	else
+		var/sheet_count = FLOOR(stored_material[mat_path]/SHEET_MATERIAL_AMOUNT)
+		if(sheet_count >= 1)
 			stored_material[mat_path] -= sheet_count * SHEET_MATERIAL_AMOUNT
 			SSmaterials.create_object(mat_path, get_turf(src), sheet_count)
-			break
