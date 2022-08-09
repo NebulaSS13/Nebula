@@ -111,7 +111,7 @@
 
 /obj/item/paper/sticky/update_contents_overlays()
 	if(length(info))
-		add_overlay(global.cached_paper_overlays["sticky_words"])
+		add_overlay(get_paper_overlay("sticky_words"))
 
 // Copied from duct tape.
 /obj/item/paper/sticky/attack_hand()

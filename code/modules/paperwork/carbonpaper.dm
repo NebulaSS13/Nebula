@@ -6,13 +6,9 @@
 	icon_state = "paper_stack"
 	item_state = "paper"
 
-/obj/item/paper/carbon/Initialize(mapload, text, title, list/md)
-	. = ..()
-	item_flags |= ITEM_FLAG_CAN_TAPE
-
 /obj/item/paper/carbon/update_contents_overlays()
 	if(length(info))
-		add_overlay(global.cached_paper_overlays["paper_stack_words"])
+		add_overlay(get_paper_overlay("paper_stack_words"))
 
 /obj/item/paper/carbon/proc/remove_copy(var/mob/user)
 	var/obj/item/paper/original = Clone()
@@ -26,7 +22,7 @@
 	copycontents = replacetext(copycontents, "<font face=\"[original.crayonfont]\" color=", "<font face=\"[original.crayonfont]\" nocolor=")
 	copy.set_content("<font color = #101010>[copycontents]</font>", "Copy - [original.name]")
 
-	user.unEquip(src)
+	user.unEquip(src) //#TODO: Set playdropsound to false whenever it gets merged
 	user.put_in_active_hand(original)
 	user.put_in_hands(copy)
 	qdel(src)

@@ -95,7 +95,7 @@
 		LAZYINSERT(pages, sheet, index)
 
 	//Make sure the cur_page stays valid, and pointing at the right index
-	cur_page = between(1, (index <= cur_page)? (cur_page + 1) : cur_page, length(pages))
+	cur_page = clamp((index <= cur_page)? (cur_page + 1) : cur_page, 1, length(pages))
 
 	if(user)
 		to_chat(user, SPAN_NOTICE("You add \the [sheet] as the [get_ordinal_string(index)] page in \the [name]."))
@@ -151,7 +151,7 @@
 			return TRUE
 
 	//Make sure the cur_page stays valid, and pointing at the right index
-	cur_page = between(1, (cur_page >= index)? (cur_page - 1) : cur_page, length(pages))
+	cur_page = clamp((cur_page >= index)? (cur_page - 1) : cur_page, 1, length(pages))
 
 	updateUsrDialog()
 	update_icon()
@@ -265,12 +265,12 @@
 
 	//Handle page turning
 	if(href_list["next_page"] && (cur_page < LAZYLEN(pages)))
-		cur_page = between(1, cur_page + 1, length(pages))
+		cur_page = clamp(cur_page + 1, 1, length(pages))
 		playsound(src.loc, "pageturn", 50, 1)
 		. = TOPIC_REFRESH
 
 	if(href_list["prev_page"] && (cur_page > 1))
-		cur_page = between(1, cur_page - 1, length(pages))
+		cur_page = clamp(cur_page - 1, 1, length(pages))
 		playsound(src.loc, "pageturn", 50, 1)
 		. = TOPIC_REFRESH
 

@@ -2424,11 +2424,7 @@
 "eT" = (
 /obj/item/clothing/head/welding,
 /obj/item/radio,
-<<<<<<< HEAD
 /obj/item/stack/tape_roll/duct_tape,
-=======
-/obj/item/duct_tape,
->>>>>>> ad707aae99 (Reworked tape rolls base types)
 /obj/structure/table,
 /obj/item/radio/intercom{
 	pixel_y = -32

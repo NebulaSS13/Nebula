@@ -95,7 +95,7 @@
 	uses_left = 30
 
 /obj/item/camera/detective
-	name = "detectives camera"
+	name = "detective's camera"
 	desc = "A single use disposable polaroid photo camera."
 
 /obj/item/camera/detective/Initialize()

@@ -226,7 +226,7 @@
 /obj/item/hand_labeler/proc/add_paper_labels(var/amount)
 	if(get_labels_left() >= max_labels || amount <= 0)
 		return FALSE
-	labels_left = between(0, (labels_left + amount), max_labels)
+	labels_left = clamp((labels_left + amount), 0, max_labels)
 	update_icon()
 	return TRUE
 
@@ -234,7 +234,7 @@
 /obj/item/hand_labeler/proc/rem_paper_labels(var/amount)
 	if(get_labels_left() <= 0 || amount <= 0)
 		return FALSE
-	labels_left = between(0, (labels_left - amount), max_labels)
+	labels_left = clamp((labels_left - amount), 0, max_labels)
 	update_icon()
 	return TRUE
 

@@ -1,7 +1,16 @@
 // large amount of fields creates a heavy load on the server, see updateinfolinks() and addtofield()
 #define MAX_FIELDS 50
 
-var/global/list/cached_paper_overlays //Precached overlays commonly used by papers
+///Precached overlays commonly used by papers
+var/global/list/cached_paper_overlays
+
+/**Returns the cached paper overlay/underlay with the specified name. Also handles caching the images if needed.*/
+/proc/get_paper_overlay(var/name)
+	if(!LAZYLEN(global.cached_paper_overlays))
+		cache_paper_overlays()
+	return global.cached_paper_overlays[name]
+
+/**Caches the paper overlays/underlays we use frequently.*/
 /proc/cache_paper_overlays()
 	if(LAZYLEN(cached_paper_overlays))
 		return
@@ -94,9 +103,6 @@ var/global/list/cached_paper_overlays //Precached overlays commonly used by pape
 
 /obj/item/paper/on_update_icon()
 	. = ..()
-	if(!LAZYLEN(global.cached_paper_overlays))
-		cache_paper_overlays()
-
 	if(is_crumpled)
 		icon_state = "scrap"
 		return //No overlays on crumpled paper
@@ -111,7 +117,7 @@ var/global/list/cached_paper_overlays //Precached overlays commonly used by pape
 /**Applies the overlay displayed when the paper contains some text. */
 /obj/item/paper/proc/update_contents_overlays()
 	if(length(info))
-		add_overlay(global.cached_paper_overlays["paper_words"])
+		add_overlay(get_paper_overlay("paper_words"))
 
 /obj/item/paper/proc/update_space(var/new_text)
 	if(new_text)

@@ -20,7 +20,7 @@
 	max_health = 64
 	part_flags = PART_FLAG_QDEL | PART_FLAG_NODAMAGE
 	var/list/print_queue               //Contains a single copy of each of the /obj/item/paper or /obj/item/photo that we'll print.
-	var/obj/item/toner_cartridge/toner //Contains our ink
+	var/obj/item/chems/toner_cartridge/toner //Contains our ink
 	var/paper_left      = 0            //Amount of blank paper sheets left in the printer
 	var/tmp/paper_max   = 100          //Maximum amount of blank paper sheets in the printer
 	var/is_printing     = FALSE        //Whether we're currently running our print queue
@@ -58,7 +58,7 @@
 	return ..()
 
 /obj/item/stock_parts/printer/attackby(obj/item/W, mob/user)
-	if(istype(W, /obj/item/toner_cartridge))
+	if(istype(W, /obj/item/chems/toner_cartridge))
 		if(toner)
 			to_chat(user, SPAN_WARNING("There is already \a [W] in \the [src]!"))
 		else
@@ -139,7 +139,7 @@
 	QDEL_NULL_LIST(print_queue)
 
 /**Allow inserting a toner cartridge into the printer */
-/obj/item/stock_parts/printer/proc/insert_toner(var/obj/item/toner_cartridge/T, var/mob/user)
+/obj/item/stock_parts/printer/proc/insert_toner(var/obj/item/chems/toner_cartridge/T, var/mob/user)
 	if(toner)
 		if(user)
 			to_chat(user, SPAN_WARNING("There's already a cartridge in \the [src]."))
@@ -248,7 +248,7 @@
 	return toner? toner.get_amount_toner() : 0
 
 /obj/item/stock_parts/printer/proc/get_amount_toner_max()
-	return toner? toner.toner_max_amount : 0
+	return toner? toner.get_amount_toner_max() : 0
 
 /obj/item/stock_parts/printer/proc/get_amount_queued()
 	return length(print_queue)
@@ -272,7 +272,6 @@
 		call_on_status_changed.InvokeAsync()
 
 /obj/item/stock_parts/printer/proc/print(var/obj/item/queued_element)
-	//Apply greyscale
 	if(istype(queued_element, /obj/item/photo))
 		if(!has_enough_to_print(TONER_USAGE_PHOTO))
 			var/obj/machinery/M = loc

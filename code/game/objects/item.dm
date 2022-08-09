@@ -1009,6 +1009,6 @@ modules/mob/living/carbon/human/life.dm if you die, you will be zoomed out.
 /obj/item/proc/take_damage(var/amount, var/damtype, var/silent = FALSE)
 	if(health == -1) // This object does not take damage.
 		return
-	health = Clamp(health - amount, 0, max_health)
+	health = clamp(health - amount, 0, max_health)
 	if(health <= 0)
 		physically_destroyed()

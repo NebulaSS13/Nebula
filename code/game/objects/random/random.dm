@@ -640,7 +640,7 @@
 	return list(/obj/item/flashlight/lantern,
 				/obj/item/flashlight/flare,
 				/obj/item/flashlight/pen,
-				/obj/item/toner_cartridge,
+				/obj/item/chems/toner_cartridge,
 				/obj/item/paicard,
 				/obj/item/destTagger,
 				/obj/item/beartrap,

@@ -32,7 +32,7 @@
 		delete_file(F.filename) 
 
 	LAZYSET(stored_files, F.filename, F)
-	free_blocks = between(0, round(free_blocks - F.block_size), block_capacity)
+	free_blocks = clamp(round(free_blocks - F.block_size), 0, block_capacity)
 	return TRUE
 
 /**Read and returns a file by filename. */
@@ -49,7 +49,7 @@
 	var/datum/computer_file/data/F = LAZYACCESS(stored_files, name)
 	if(!F || (F.read_only && !force))
 		return FALSE
-	free_blocks = between(0, round(free_blocks + F.block_size), block_capacity)
+	free_blocks = clamp(round(free_blocks + F.block_size), 0, block_capacity)
 	qdel(LAZYACCESS(stored_files, name))
 	LAZYREMOVE(stored_files, name)
 	return TRUE
