@@ -11,7 +11,7 @@ SUBSYSTEM_DEF(fabrication)
 	var/list/recipes_by_product_type =     list()
 	var/list/fields_by_id =                list()
 
-	// Fabricators who want their initial recipies
+	// Weakrefs to fabricators who want their initial recipies
 	var/list/fabricators_to_init =         list()
 	// These should be removed after rewriting crafting to respect init order.
 	var/list/crafting_recipes_to_init = list()
@@ -40,6 +40,11 @@ SUBSYSTEM_DEF(fabrication)
 		var/decl/crafting_stage/handler = all_crafting_handlers[hid]
 		if(ispath(handler.begins_with_object_type))
 			LAZYDISTINCTADD(crafting_procedures_by_type[handler.begins_with_object_type], handler)
+
+	for(var/weakref/weak_fab in fabricators_to_init)
+		var/obj/machinery/fabricator/fab = weak_fab.resolve()
+		fab?.refresh_design_cache()
+	fabricators_to_init.Cut()
 
 	for(var/datum/stack_recipe/recipe in crafting_recipes_to_init)
 		recipe.InitializeMaterials()
@@ -103,3 +108,6 @@ SUBSYSTEM_DEF(fabrication)
 				return H
 			else
 				qdel(H)
+
+/datum/controller/subsystem/fabrication/proc/queue_design_cache_refresh(var/obj/machinery/fabricator/fab)
+	fabricators_to_init |= weakref(fab)
