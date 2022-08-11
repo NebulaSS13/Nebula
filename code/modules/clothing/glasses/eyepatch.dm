@@ -49,7 +49,7 @@
 	update_icon()
 	
 /obj/item/clothing/glasses/eyepatch/hud/on_update_icon()
-	cut_overlays()
+	. = ..()
 	if(active && check_state_in_icon("[icon_state]-eye", icon))
 		var/image/eye
 		if(plane == HUD_PLANE)

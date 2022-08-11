@@ -122,7 +122,7 @@
 	scatter_contents(FALSE, get_turf(hit_atom))
 
 /obj/item/storage/tray/on_update_icon()
-	..()
+	. = ..()
 	clear_vis_contents(src)
 	for(var/obj/item/I in contents)
 		I.vis_flags |= VIS_INHERIT_PLANE | VIS_INHERIT_LAYER

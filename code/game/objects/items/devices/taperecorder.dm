@@ -368,6 +368,7 @@
 
 
 /obj/item/taperecorder/on_update_icon()
+	. = ..()
 	var/datum/extension/base_icon_state/bis = get_extension(src, /datum/extension/base_icon_state)
 
 	if(!mytape)
@@ -400,11 +401,12 @@
 	var/ruined = 0
 	var/doctored = 0
 
-
-/obj/item/magnetic_tape/on_update_icon()
-	overlays.Cut()
-	if(ruined && max_capacity)
-		overlays += "ribbonoverlay"
+//draw_ribbon: Whether we draw the ruined ribbon overlay. Only used by quantum tape. 
+//#FIXME: Probably should be handled better.
+/obj/item/magnetic_tape/on_update_icon(var/draw_ribbon = TRUE)
+	. = ..()
+	if(draw_ribbon && ruined && max_capacity)
+		add_overlay(overlay_image(icon, "ribbonoverlay", flags = RESET_COLOR))
 
 
 /obj/item/magnetic_tape/fire_act(datum/gas_mixture/air, exposed_temperature, exposed_volume)
@@ -539,7 +541,7 @@
 	return
 
 /obj/item/magnetic_tape/loose/on_update_icon()
-	return
+	. = ..(FALSE)
 
 /obj/item/magnetic_tape/loose/get_loose_tape()
 	return

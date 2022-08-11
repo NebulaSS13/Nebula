@@ -162,6 +162,7 @@
 	return TRUE
 
 /obj/item/boombox/on_update_icon()
+	. = ..()
 	icon_state = playing ? "on" : "off"
 
 /obj/item/boombox/proc/stop()

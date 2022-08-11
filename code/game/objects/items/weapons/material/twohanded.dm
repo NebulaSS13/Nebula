@@ -128,12 +128,12 @@
 	..()
 
 /obj/item/twohanded/spear/on_update_icon()
-	overlays.Cut()
-	if(applies_material_colour && material)
-		color = material.color
-		alpha = 100 + material.opacity * 255
-	overlays += get_shaft_overlay("shaft")
-	overlays += mutable_appearance(icon, "cable", cable_color)
+	. = ..()
+	add_overlay(list(
+			get_shaft_overlay("shaft"), 
+			mutable_appearance(icon, "cable", cable_color)
+		))
+
 
 /obj/item/twohanded/spear/adjust_mob_overlay(var/mob/living/user_mob, var/bodytype,  var/image/overlay, var/slot, var/bodypart)
 	if(overlay)

@@ -18,16 +18,16 @@
 
 //'lipstick' and 'key' are both coloured by var color
 /obj/item/lipstick/on_update_icon()
+	. = ..()
 	if(open)
 		icon_state = "the_stick"
 	else
 		icon_state = ""
-	var/new_overlays
-	LAZYADD(new_overlays, overlay_image(icon, "lipstick_[open]", flags=RESET_COLOR))
-	LAZYADD(new_overlays, overlay_image(icon, "key"))
-	if(blood_overlay)
-		LAZYADD(new_overlays, blood_overlay)
-	overlays = new_overlays
+		
+	add_overlay(list(
+		overlay_image(icon, "lipstick_[open]", flags=RESET_COLOR), 
+		overlay_image(icon, "key")
+	))
 
 /obj/item/lipstick/attack_self(mob/user)
 	open = !open

@@ -64,7 +64,7 @@
 		usr.update_action_buttons()
 
 /obj/item/clothing/head/welding/on_update_icon()
-	..()
+	. = ..()
 	icon_state = get_world_inventory_state()
 	if(up && check_state_in_icon("[icon_state]_up", icon))
 		icon_state = "[icon_state]_up"
@@ -120,7 +120,7 @@
 	update_icon()
 
 /obj/item/clothing/head/ushanka/on_update_icon()
-	..()
+	. = ..()
 	icon_state = get_world_inventory_state()
 	if(up && check_state_in_icon("[icon_state]_up", icon))
 		icon_state = "[icon_state]_up"

@@ -23,10 +23,10 @@
 	set_extension(src, /datum/extension/tool, list(TOOL_SCREWDRIVER = TOOL_QUALITY_DEFAULT))
 
 /obj/item/screwdriver/on_update_icon()
-	..()
+	. = ..()
 	if(!handle_color)
 		handle_color = pick(valid_colours)
-	overlays += mutable_appearance(icon, "[get_world_inventory_state()]_handle", handle_color)
+	add_overlay(mutable_appearance(icon, "[get_world_inventory_state()]_handle", handle_color))
 
 /obj/item/screwdriver/adjust_mob_overlay(var/mob/living/user_mob, var/bodytype,  var/image/overlay, var/slot, var/bodypart)
 	if(overlay)

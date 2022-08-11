@@ -109,9 +109,8 @@
 		update_icon()
 
 /obj/item/clothing/mask/monitor/on_update_icon()
+	. = ..()
 	if(!(monitor_state_index in monitor_states))
 		monitor_state_index = initial(monitor_state_index)
 	icon_state = "[initial(icon_state)]-[monitor_states[monitor_state_index]]"
-	var/mob/living/carbon/human/H = loc
-	if(istype(H))
-		H.update_inv_wear_mask()
+	update_clothing_icon()

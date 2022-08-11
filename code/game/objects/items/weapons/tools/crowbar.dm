@@ -35,13 +35,13 @@
 	. += "narrow"
 
 /obj/item/crowbar/on_update_icon()
-	..()
+	. = ..()
 	if(!shape_type)
 		shape_type = rand(1,shape_variations)
 	icon_state = "[get_world_inventory_state()][shape_type]"
 	if(!handle_color)
 		handle_color = pick(valid_colours)
-	overlays += mutable_appearance(icon, "[get_world_inventory_state()]_handle[shape_type]", handle_color)
+	add_overlay(mutable_appearance(icon, "[get_world_inventory_state()]_handle[shape_type]", handle_color))
 
 /obj/item/crowbar/afterattack(atom/target, mob/user)
 	. = ..()

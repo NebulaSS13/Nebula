@@ -98,6 +98,7 @@
 	M.examinate(src)
 
 /obj/item/holowarrant/on_update_icon()
+	. = ..()
 	if(active)
 		icon_state = "holowarrant_filled"
 	else

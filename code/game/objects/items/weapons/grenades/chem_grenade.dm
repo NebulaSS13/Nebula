@@ -47,7 +47,7 @@
 			C.throw_mode_on()
 
 /obj/item/grenade/chem_grenade/on_update_icon()
-	..()
+	. = ..()
 	if(detonator)
 		add_overlay("[icon_state]-assembled")
 	if(path == 1)

@@ -141,7 +141,7 @@
 	. = active ? ITEM_SIZE_NO_CONTAINER : ..()
 
 /obj/item/energy_blade/on_update_icon()
-	cut_overlays()
+	. = ..()
 	icon_state = get_world_inventory_state()
 	if(active && check_state_in_icon("[icon_state]-extended", icon))
 		if(plane == HUD_PLANE)

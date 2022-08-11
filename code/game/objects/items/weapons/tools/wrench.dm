@@ -23,4 +23,4 @@
 	. = ..()
 	if(!handle_color)
 		handle_color = pick(valid_colours)
-	overlays += mutable_appearance(icon, "[get_world_inventory_state()]_handle", handle_color)
+	add_overlay(mutable_appearance(icon, "[get_world_inventory_state()]_handle", handle_color))

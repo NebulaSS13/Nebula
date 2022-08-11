@@ -54,7 +54,7 @@
 	return null
 
 /obj/item/baton/on_update_icon()
-	cut_overlays()
+	. = ..()
 	if(status)
 		add_overlay("[icon_state]-active")
 		set_light(1.5, 2, "#ff6a00")
@@ -226,6 +226,7 @@
 	icon_state = "electrified_arm"
 
 /obj/item/baton/robot/electrified_arm/on_update_icon()
+	. = ..()
 	if(status)
 		icon_state = "electrified_arm_active"
 		set_light(1.5, 2, "#006aff")

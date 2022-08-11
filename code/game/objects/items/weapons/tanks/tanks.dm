@@ -376,13 +376,13 @@ var/global/list/global/tank_gauge_cache = list()
 	check_status()
 
 /obj/item/tank/on_update_icon(var/override)
-
+	. = ..()
 	var/list/overlays_to_add
 	if(override && (proxyassembly.assembly || wired))
-		LAZYADD(overlays_to_add, image('icons/obj/items/tanks/tank_components.dmi',"bomb_assembly"))
+		LAZYADD(overlays_to_add, overlay_image('icons/obj/items/tanks/tank_components.dmi', "bomb_assembly"))
 		if(proxyassembly.assembly)
-			var/image/bombthing = image(proxyassembly.assembly.icon, proxyassembly.assembly.icon_state)
-			bombthing.overlays |= proxyassembly.assembly.overlays
+			var/mutable_appearance/bombthing = new(proxyassembly.assembly)
+			bombthing.appearance_flags = RESET_COLOR
 			bombthing.pixel_y = -1
 			bombthing.pixel_x = -3
 			LAZYADD(overlays_to_add, bombthing)
@@ -401,8 +401,7 @@ var/global/list/global/tank_gauge_cache = list()
 				tank_gauge_cache[indicator] = image('icons/obj/items/tanks/tank_indicators.dmi', indicator)
 			LAZYADD(overlays_to_add, tank_gauge_cache[indicator])
 		previous_gauge_pressure = gauge_pressure
-
-	overlays = overlays_to_add
+	add_overlay(overlays_to_add)
 
 //Handle exploding, leaking, and rupturing of the tank
 /obj/item/tank/proc/check_status()
@@ -585,6 +584,7 @@ var/global/list/global/tank_gauge_cache = list()
 	air_contents.add_thermal_energy(15000)
 
 /obj/item/tankassemblyproxy/on_update_icon()
+	. = ..()
 	tank.update_icon()
 
 /obj/item/tankassemblyproxy/HasProximity(atom/movable/AM)

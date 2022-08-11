@@ -27,6 +27,7 @@
 		return TRUE
 
 /obj/item/umbrella/on_update_icon()
+	. = ..()
 	icon_state = get_world_inventory_state()
 	if(is_open)
 		icon_state = "[icon_state]-open" 

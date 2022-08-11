@@ -84,13 +84,12 @@
 		extinguish(user)
 
 /obj/item/flame/lighter/on_update_icon()
+	. = ..()
 	var/datum/extension/base_icon_state/bis = get_extension(src, /datum/extension/base_icon_state)
-
-	overlays.Cut()
 	if(lit)
-		overlays += overlay_image(icon, "[bis.base_icon_state]_flame", flags=RESET_COLOR)
+		add_overlay(overlay_image(icon, "[bis.base_icon_state]_flame", flags=RESET_COLOR))
 	else
-		overlays += overlay_image(icon, "[bis.base_icon_state]_striker", flags=RESET_COLOR)
+		add_overlay(overlay_image(icon, "[bis.base_icon_state]_striker", flags=RESET_COLOR))
 
 /obj/item/flame/lighter/attack(var/mob/living/M, var/mob/living/carbon/user)
 	if(!istype(M, /mob))
@@ -166,13 +165,12 @@
 	)
 
 /obj/item/flame/lighter/zippo/on_update_icon()
+	. = ..()
 	var/datum/extension/base_icon_state/bis = get_extension(src, /datum/extension/base_icon_state)
-
-	overlays.Cut()
 	if(lit)
 		icon_state = "[bis.base_icon_state]_open"
 		item_state = "[bis.base_icon_state]_open"
-		overlays += overlay_image(icon, "[bis.base_icon_state]_flame", flags=RESET_COLOR)
+		add_overlay(overlay_image(icon, "[bis.base_icon_state]_flame", flags=RESET_COLOR))
 	else
 		icon_state = "[bis.base_icon_state]"
 		item_state = "[bis.base_icon_state]"
@@ -222,6 +220,7 @@
 	color = null
 
 /obj/item/flame/lighter/zippo/custom/on_update_icon()
+	. = ..()
 	var/datum/extension/base_icon_state/bis = get_extension(src, /datum/extension/base_icon_state)
 
 	if(lit)

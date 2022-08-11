@@ -143,6 +143,7 @@
 	charge_rate *= 1 + 0.5 * machine.total_component_rating_of_type(/obj/item/stock_parts/capacitor)
 
 /obj/item/stock_parts/power/battery/on_update_icon()
+	. = ..()
 	icon_state = "battery[!!cell]"
 
 // Cell interaction

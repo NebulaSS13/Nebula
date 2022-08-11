@@ -64,26 +64,29 @@
 			to_chat(user, "<span class='warning'>You're unable to insert the battery.</span>")
 
 /obj/item/suit_sensor_jammer/on_update_icon()
-	overlays.Cut()
+	. = ..()
 	if(bcell)
+		var/list/cur_overlays 
 		var/percent = bcell.percent()
 		switch(percent)
 			if(0 to 25)
-				overlays += "forth_quarter"
+				LAZYADD(cur_overlays, overlay_image(icon, "forth_quarter"))
 			if(25 to 50)
-				overlays += "one_quarter"
-				overlays += "third_quarter"
+				LAZYADD(cur_overlays, overlay_image(icon, "one_quarter"))
+				LAZYADD(cur_overlays, overlay_image(icon, "third_quarter"))
 			if(50 to 75)
-				overlays += "two_quarters"
-				overlays += "second_quarter"
+				LAZYADD(cur_overlays, overlay_image(icon, "two_quarters"))
+				LAZYADD(cur_overlays, overlay_image(icon, "second_quarter"))
 			if(75 to 99)
-				overlays += "three_quarters"
-				overlays += "first_quarter"
+				LAZYADD(cur_overlays, overlay_image(icon, "three_quarters"))
+				LAZYADD(cur_overlays, overlay_image(icon, "first_quarter"))
 			else
-				overlays += "four_quarters"
+				LAZYADD(cur_overlays, overlay_image(icon, "four_quarters"))
 
 		if(active)
-			overlays += "active"
+			LAZYADD(cur_overlays, overlay_image(icon, "active"))
+		if(LAZYLEN(cur_overlays))
+			add_overlay(cur_overlays)
 
 /obj/item/suit_sensor_jammer/emp_act(var/severity)
 	..()

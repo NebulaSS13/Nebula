@@ -36,7 +36,7 @@
 	bcell = /obj/item/cell/apc
 
 /obj/item/defibrillator/on_update_icon()
-	cut_overlays()
+	. = ..()
 	if(paddles) //in case paddles got destroyed somehow.
 		if(paddles.loc == src)
 			add_overlay("[icon_state]-paddles")
@@ -231,7 +231,7 @@
 	..()
 
 /obj/item/shockpaddles/on_update_icon()
-	cut_overlay()
+	. = ..()
 	if(cooldown)
 		add_overlay("[icon_state]-cooldown")
 

@@ -22,6 +22,7 @@
 	. = ..()
 
 /obj/item/flame/candle/on_update_icon()
+	//#FIXME: Candles handle their lit overlays weirdly
 	switch(wax)
 		if(1500 to INFINITY)
 			icon_state = "[icon_set]1"
@@ -32,9 +33,9 @@
 
 	if(lit != last_lit)
 		last_lit = lit
-		overlays.Cut()
+		cut_overlays()
 		if(lit)
-			overlays += overlay_image(icon, "[icon_state]_lit", flags = RESET_COLOR)
+			add_overlay(overlay_image(icon, "[icon_state]_lit", flags = RESET_COLOR))
 
 /obj/item/flame/candle/attackby(obj/item/W, mob/user)
 	..()

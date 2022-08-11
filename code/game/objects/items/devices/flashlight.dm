@@ -33,6 +33,7 @@
 	update_icon()
 
 /obj/item/flashlight/on_update_icon()
+	. = ..()
 	if (flashlight_flags & FLASHLIGHT_ALWAYS_ON)
 		return // Prevent update_icon shennanigans with objects that won't have on/off variant sprites
 
@@ -221,7 +222,7 @@
 	light_color = LIGHT_COLOR_FIRE
 
 /obj/item/flashlight/lantern/on_update_icon()
-	..()
+	. = ..()
 	if(on)
 		item_state = "lantern-on"
 	else
@@ -343,7 +344,7 @@
 		damtype = initial(damtype)
 
 /obj/item/flashlight/flare/on_update_icon()
-	..()
+	. = ..()
 	if(!on && fuel <= 0)
 		icon_state = "[initial(icon_state)]-empty"
 
@@ -368,21 +369,18 @@
 	light_color = color
 
 /obj/item/flashlight/flare/glowstick/on_update_icon()
-	item_state = "glowstick"
-	overlays.Cut()
-	if(fuel <= 0)
-		icon_state = "glowstick-empty"
+	var/nofuel = fuel <= 0
+	if(nofuel)
 		on = FALSE
-	else if (on)
-		var/image/I = overlay_image(icon,"glowstick-on",color)
+	. = ..()
+	icon_state = nofuel? "glowstick-empty" : icon_state 
+	item_state = initial(item_state)
+	if(on)
+		var/image/I = overlay_image(icon, "glowstick-on", color)
 		I.blend_mode = BLEND_ADD
-		overlays += I
+		add_overlay(I)
 		item_state = "glowstick-on"
-	else
-		icon_state = "glowstick"
-	var/mob/M = loc
-	if(istype(M))
-		M.update_inv_hands()
+	update_held_icon()
 
 /obj/item/flashlight/flare/glowstick/activate(var/mob/user)
 	if(istype(user))
@@ -459,10 +457,8 @@
 	matter = list(/decl/material/solid/glass = MATTER_AMOUNT_REINFORCEMENT)
 
 /obj/item/flashlight/lamp/lava/on_update_icon()
-	overlays.Cut()
-	var/image/I = image(icon = icon, icon_state = "lavalamp-[on ? "on" : "off"]")
-	I.color = light_color
-	overlays += I
+	. = ..()
+	add_overlay(overlay_image(icon, "lavalamp-[on ? "on" : "off"]", light_color))
 
 /obj/item/flashlight/lamp/lava/red
 	desc = "A kitchy red decorative light."

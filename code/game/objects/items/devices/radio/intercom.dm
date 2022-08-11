@@ -144,6 +144,7 @@
 			update_icon()
 
 /obj/item/radio/intercom/on_update_icon()
+	. = ..()
 	if(!on)
 		icon_state = "intercom-p"
 	else

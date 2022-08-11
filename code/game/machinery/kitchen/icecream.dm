@@ -202,7 +202,7 @@
 	update_icon()
 
 /obj/item/chems/food/icecream/on_update_icon()
-	cut_overlays()
+	. = ..()
 	if(ice_creamed)
 		add_overlay("icecream_[ice_creamed]")
 

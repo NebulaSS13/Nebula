@@ -130,7 +130,7 @@
 	to_chat(usr, "It has [uses] lights remaining.")
 
 /obj/item/lightreplacer/on_update_icon()
-	cut_overlays()
+	. = ..()
 	if(emagged)
 		add_overlay("[icon_state]-emagged")
 

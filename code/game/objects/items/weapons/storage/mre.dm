@@ -32,9 +32,9 @@ MRE Stuff
 	to_chat(user, meal_desc)
 
 /obj/item/storage/mre/on_update_icon()
+	. = ..()
 	if(opened)
 		icon_state = "[initial(icon_state)][opened]"
-	. = ..()
 
 /obj/item/storage/mre/attack_self(mob/user)
 	open(user)
@@ -129,13 +129,10 @@ MRE Stuff
 	open_sound = 'sound/effects/bubbles.ogg'
 	startswith = list(/obj/item/chems/food/slice/meatpizza/filled)
 
-/obj/item/storage/mrebag/Initialize()
-	. = ..()
-
 /obj/item/storage/mrebag/on_update_icon()
+	. = ..()
 	if(opened)
 		icon_state = "[initial(icon_state)][opened]"
-	. = ..()
 
 /obj/item/storage/mrebag/attack_self(mob/user)
 	open(user)

@@ -20,6 +20,7 @@
 	. = ..()
 
 /obj/item/storage/slide_projector/on_update_icon()
+	. = ..()
 	icon_state = "projector[!!projection]"
 
 /obj/item/storage/slide_projector/get_mechanics_info()

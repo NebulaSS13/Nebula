@@ -108,7 +108,7 @@
 /obj/item/knife/folding/swiss/on_update_icon()
 	..()
 	if(active_tool != null)
-		overlays += overlay_image(icon, active_tool)
+		add_overlay(overlay_image(icon, active_tool, flags = RESET_COLOR))
 
 /obj/item/knife/folding/swiss/get_mob_overlay(mob/user_mob, slot, bodypart)
 	. = (active_tool == SWISSKNF_LBLADE || active_tool == SWISSKNF_SBLADE) ? ..() : new /image

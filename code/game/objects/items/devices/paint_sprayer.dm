@@ -79,7 +79,7 @@
 	change_color(preset_colors[random_preset])
 
 /obj/item/paint_sprayer/on_update_icon()
-	cut_overlays()
+	. = ..()
 	add_overlay(overlay_image(icon, "[icon_state]_color", paint_color))
 	add_overlay(color_picker ? "[icon_state]_red" : "[icon_state]_blue")
 	if(ismob(loc))

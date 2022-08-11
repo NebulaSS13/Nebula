@@ -128,7 +128,7 @@
 			toggle = 1
 
 /obj/item/transfer_valve/on_update_icon()
-	overlays.Cut()
+	. = ..()
 	underlays.Cut()
 
 	if(!tank_one && !tank_two && !attached_device)
@@ -136,14 +136,16 @@
 		return
 	icon_state = "valve"
 
+	var/list/cur_overlays
 	if(tank_one)
-		overlays += "[tank_one.icon_state]"
+		LAZYADD(cur_overlays, new /mutable_appearance(tank_one))
 	if(tank_two)
 		var/icon/J = new(icon, icon_state = "[tank_two.icon_state]")
 		J.Shift(WEST, 13)
 		underlays += J
 	if(attached_device)
-		overlays += "device"
+		LAZYADD(cur_overlays, overlay_image(icon, "device"))
+	add_overlay(cur_overlays)
 
 /obj/item/transfer_valve/proc/remove_tank(obj/item/tank/T)
 	if(tank_one == T)

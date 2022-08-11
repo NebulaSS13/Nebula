@@ -70,19 +70,14 @@
 		location.hotspot_expose(700, 2)
 
 /obj/item/flamethrower/on_update_icon()
-	cut_overlays()
+	. = ..()
 	add_overlay("_[initial(welding_tool.icon_state)]")
 
 	if(igniter)
 		add_overlay("igniter_[secured]")
 
 	if(tank)
-		if(istype(tank, /obj/item/tank/hydrogen))
-			add_overlay("tank_hydrogen")
-		else
-			var/mutable_appearance/M = mutable_appearance(icon, "tank")
-			M.color = tank.color
-			add_overlay(M)
+		add_overlay(mutable_appearance(icon, istype(tank, /obj/item/tank/hydrogen)? "tank_hydrogen" : "tank", tank.color))			
 
 	if(lit)
 		add_overlay("lit")

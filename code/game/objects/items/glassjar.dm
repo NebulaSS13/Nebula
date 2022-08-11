@@ -83,8 +83,8 @@
 		update_icon()
 
 /obj/item/glass_jar/on_update_icon() // Also updates name and desc
+	. = ..()
 	underlays.Cut()
-	overlays.Cut()
 	switch(contains)
 		if(0)
 			SetName(initial(name))

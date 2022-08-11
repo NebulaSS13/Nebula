@@ -62,10 +62,8 @@
 	update_icon()
 
 /obj/item/card/data/on_update_icon()
-	overlays.Cut()
-	var/image/detail_overlay = image('icons/obj/card.dmi', src,"[icon_state]-color")
-	detail_overlay.color = detail_color
-	overlays += detail_overlay
+	. = ..()
+	add_overlay(overlay_image(icon, "[icon_state]-color", detail_color))
 
 /obj/item/card/data/attackby(obj/item/I, mob/user)
 	if(istype(I, /obj/item/integrated_electronics/detailer))
@@ -194,7 +192,7 @@ var/global/const/NO_EMAG_ACT = -50
 	. = ..()
 
 /obj/item/card/id/on_update_icon()
-	cut_overlays()
+	. = ..()
 	if(detail_color)
 		add_overlay(overlay_image(icon, "[icon_state]-colors", detail_color, RESET_COLOR))
 	for(var/detail in extra_details)

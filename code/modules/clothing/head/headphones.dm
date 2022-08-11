@@ -17,6 +17,7 @@
 	sound_channel = global.sound_channels.RequestChannel(type)
 
 /obj/item/clothing/head/headphones/on_update_icon()
+	. = ..()
 	icon_state = get_world_inventory_state()
 	if(headphones_on)
 		icon_state = "[icon_state]-on"

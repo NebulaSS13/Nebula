@@ -30,8 +30,8 @@
 	var/obj/structure/cable/attached		// the attached cable
 
 /obj/item/powersink/on_update_icon()
+	. = ..()
 	z_flags &= ~ZMM_MANGLE_PLANES
-	cut_overlays()
 	if(mode == OPERATING)
 		if(plane == HUD_PLANE)
 			add_overlay("[icon_state]-on")

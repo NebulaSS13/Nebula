@@ -163,12 +163,9 @@
 	initial_payload_amount = 10
 
 /obj/item/clothing/mask/chewable/candy/lolli/on_update_icon()
+	. = ..()
 	icon_state = get_world_inventory_state()
-	cut_overlays()
-	var/image/I = image(icon, "[icon_state]-stick")
-	I.appearance_flags |= RESET_COLOR
-	I.color = color
-	add_overlay(I)
+	add_overlay(overlay_image(icon, "[icon_state]-stick", color, RESET_COLOR))
 
 /obj/item/clothing/mask/chewable/candy/lolli/get_possible_initial_reagents()
 	return list(

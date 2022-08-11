@@ -170,7 +170,7 @@
 		var/mutable_appearance/S = mutable_appearance(icon, "[icon_state]_shine")
 		S.alpha = 127 * shine / 100
 		S.blend_mode = BLEND_ADD
-		overlays += S
+		add_overlay(S)
 
 /obj/item/clothing/shoes/adjust_mob_overlay(var/mob/living/user_mob, var/bodytype,  var/image/overlay, var/slot, var/bodypart)
 	if(overlay && shine > 0 && slot == slot_shoes_str)

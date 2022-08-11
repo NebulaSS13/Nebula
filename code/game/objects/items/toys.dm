@@ -81,6 +81,7 @@
 			qdel(src)
 
 /obj/item/toy/water_balloon/on_update_icon()
+	. = ..()
 	if(src.reagents.total_volume >= 1)
 		icon_state = "waterballoon"
 		item_state = "balloon"
@@ -694,6 +695,7 @@
 	var/activation_sound = 'sound/effects/flashlight.ogg'
 
 /obj/item/toy/desk/on_update_icon()
+	. = ..()
 	if(on)
 		icon_state = "[initial(icon_state)]-on"
 	else

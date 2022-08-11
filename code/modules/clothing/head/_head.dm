@@ -64,12 +64,10 @@
 	return FALSE
 
 /obj/item/clothing/head/on_update_icon(var/mob/user)
-	..()
+	. = ..()
 	if(on)
 		add_light_overlay()
-	if(istype(user,/mob/living/carbon/human))
-		var/mob/living/carbon/human/H = user
-		H.update_inv_head()
+	update_clothing_icon()
 
 /obj/item/clothing/head/proc/add_light_overlay()
 	if(use_single_icon)

@@ -40,18 +40,15 @@
 	padding_material = /decl/material/solid/carpet
 
 /obj/item/stool/on_update_icon()
+	. = ..()
 	// Prep icon.
 	icon_state = ""
 	// Base icon.
-	var/image/I = image(icon, "[base_icon]_base")
-	I.color = material.color
-	var/list/noverlays = list(I)
+	var/list/noverlays = list(overlay_image(icon, "[base_icon]_base", material.color))
 	// Padding overlay.
 	if(padding_material)
-		I =  image(icon, "[base_icon]_padding")
-		I.color = padding_material.color
-		noverlays += I
-	set_overlays(noverlays)
+		noverlays += overlay_image(icon, "[base_icon]_padding", padding_material.color)
+	add_overlay(noverlays)
 	// Strings.
 	if(padding_material)
 		SetName("[padding_material.solid_name] [initial(name)]") //this is not perfect but it will do for now.

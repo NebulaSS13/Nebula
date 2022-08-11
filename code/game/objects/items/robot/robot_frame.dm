@@ -20,10 +20,13 @@
 	update_icon()
 
 /obj/item/robot_parts/robot_suit/on_update_icon()
-	overlays.Cut()
+	. = ..()
+	var/list/cur_overlays
 	for(var/part in required_parts)
 		if(parts[part])
-			overlays += "[part]+o"
+			LAZYADD(overlay_image(icon, "[part]+o"))
+	if(LAZYLEN(cur_overlays))
+		add_overlay(cur_overlays)
 
 /obj/item/robot_parts/robot_suit/proc/check_completion()
 	for(var/part in required_parts)

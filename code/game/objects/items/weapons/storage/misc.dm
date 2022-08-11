@@ -36,11 +36,15 @@
 	startswith = list(/obj/item/chems/food/donut = 6)
 
 /obj/item/storage/box/donut/on_update_icon()
-	overlays.Cut()
+	. = ..()
+	var/list/cur_overlays
 	var/i = 0
 	for(var/obj/item/chems/food/donut/D in contents)
-		overlays += image('icons/obj/food.dmi', "[i][D.overlay_state]")
+		LAZYADD(cur_overlays, overlay_image('icons/obj/food.dmi', "[i][D.overlay_state]", flags = RESET_COLOR))
 		i++
+		
+	if(LAZYLEN(cur_overlays))
+		add_overlay(cur_overlays)
 
 /obj/item/storage/box/donut/empty
 	startswith = null

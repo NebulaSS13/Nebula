@@ -78,7 +78,7 @@
 		T.hotspot_expose(700, 5)
 
 /obj/item/weldingtool/electric/on_update_icon()
-	..()
+	. = ..()
 	if(cell)
 		add_overlay("[icon_state]-cell")
 

@@ -246,7 +246,7 @@
 	return ..()
 
 /obj/item/weldingtool/on_update_icon()
-	cut_overlays()
+	. = ..()
 	if(tank)
 		add_overlay("[icon_state]-[tank.icon_state]")
 	if(welding && check_state_in_icon("[icon_state]-lit", icon))
@@ -257,9 +257,7 @@
 		set_light(2.5, 0.6, lit_colour)
 	else
 		set_light(0)
-	var/mob/M = loc
-	if(istype(M))
-		M.update_inv_hands()
+	update_held_icon()
 
 //Sets the welding state of the welding tool. If you see W.welding = 1 anywhere, please change it to W.setWelding(1)
 //so that the welding tool updates accordingly

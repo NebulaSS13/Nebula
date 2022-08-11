@@ -24,7 +24,7 @@
 	bodytype_equip_flags = null
 
 /obj/item/clothing/head/helmet/space/rig/on_update_icon(mob/user)
-	..()
+	. = ..()
 	icon_state = get_world_inventory_state()
 	if(user?.check_rig_status() && check_state_in_icon("[icon_state]-sealed", icon))
 		icon_state = "[icon_state]-sealed"
@@ -44,7 +44,7 @@
 	gender = PLURAL
 
 /obj/item/clothing/gloves/rig/on_update_icon(mob/user)
-	..()
+	. = ..()
 	icon_state = get_world_inventory_state()
 	if(user?.check_rig_status() && check_state_in_icon("[icon_state]-sealed", icon))
 		icon_state = "[icon_state]-sealed"
@@ -64,7 +64,7 @@
 	gender = PLURAL
 
 /obj/item/clothing/shoes/magboots/rig/on_update_icon(mob/user)
-	..()
+	. = ..()
 	icon_state = get_world_inventory_state()
 	if(user?.check_rig_status() && check_state_in_icon("[icon_state]-sealed", icon))
 		icon_state = "[icon_state]-sealed"
@@ -90,7 +90,7 @@
 	var/list/supporting_limbs = list() //If not-null, automatically splints breaks. Checked when removing the suit.
 
 /obj/item/clothing/suit/space/rig/on_update_icon(mob/user)
-	..()
+	. = ..()
 	icon_state = get_world_inventory_state()
 	if(user?.check_rig_status() && check_state_in_icon("[icon_state]-sealed", icon))
 		icon_state = "[icon_state]-sealed"
