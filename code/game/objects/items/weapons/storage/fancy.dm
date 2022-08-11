@@ -100,7 +100,7 @@
 	//#FIXME: This can't handle all crayons types and colors.
 	var/list/cur_overlays
 	for(var/obj/item/pen/crayon/crayon in contents)
-		LAZYADD(cur_overlays, overlay_image(icon, crayon.stroke_colour_name), flags = RESET_COLOR)
+		LAZYADD(cur_overlays, overlay_image(icon, crayon.stroke_colour_name, flags = RESET_COLOR))
 	if(LAZYLEN(cur_overlays))
 		add_overlay(cur_overlays)
 

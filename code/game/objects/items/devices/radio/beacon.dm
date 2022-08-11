@@ -45,6 +45,7 @@ var/global/list/radio_beacons = list()
 			T.target_lost()
 
 /obj/item/radio/beacon/on_update_icon()
+	. = ..()
 	if(!functioning)
 		icon_state = "[initial(icon_state)]_dead"
 	else

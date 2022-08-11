@@ -24,7 +24,7 @@
 	var/list/cur_overlays
 	for(var/part in required_parts)
 		if(parts[part])
-			LAZYADD(overlay_image(icon, "[part]+o"))
+			LAZYADD(cur_overlays, overlay_image(icon, "[part]+o"))
 	if(LAZYLEN(cur_overlays))
 		add_overlay(cur_overlays)
 
