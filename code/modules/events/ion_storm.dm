@@ -145,9 +145,9 @@
 
 /datum/event/ionstorm/proc/get_random_species_name(var/default_if_none = "Humans")
 	var/list/species = list()
-	for(var/S in typesof(/decl/species))
-		var/decl/species/specimen = S
-		if(initial(specimen.spawn_flags) & SPECIES_CAN_JOIN)
+	for(var/S in subtypesof(/decl/species))
+		var/decl/species/specimen = GET_DECL(S)
+		if(!specimen.is_abstract() && (specimen.spawn_flags & SPECIES_CAN_JOIN))
 			species += initial(specimen.name_plural)
 
 	if(species.len)

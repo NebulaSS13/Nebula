@@ -4,6 +4,7 @@
 var/global/list/wrapped_species_by_ref = list()
 
 /decl/species/shapeshifter
+	abstract_type = /decl/species/shapeshifter
 	available_bodytypes = list(/decl/bodytype/shapeshifter)
 	inherent_verbs = list(
 		/mob/living/carbon/human/proc/shapeshifter_select_shape,

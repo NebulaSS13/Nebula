@@ -88,7 +88,7 @@ var/global/list/playable_species = list() // A list of ALL playable species, whi
 	var/list/species_decls = decls_repository.get_decls_of_subtype(/decl/species)
 	for(var/species_type in species_decls)
 		var/decl/species/species = species_decls[species_type]
-		if(species.name)
+		if(species.name && !species.is_abstract())
 			global.all_species[species.name] = species
 			if(!(species.spawn_flags & SPECIES_IS_RESTRICTED))
 				global.playable_species += species.name

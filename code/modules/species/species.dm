@@ -5,6 +5,8 @@ var/global/const/DEFAULT_SPECIES_HEALTH = 200
 
 /decl/species
 
+	abstract_type = /decl/species
+
 	// Descriptors and strings.
 	var/name
 	var/name_plural                           // Pluralized name (since "[name]s" is not always valid)
@@ -242,6 +244,9 @@ var/global/const/DEFAULT_SPECIES_HEALTH = 200
 /decl/species/Initialize()
 
 	. = ..()
+
+	if(is_abstract())
+		return
 
 	if(!codex_description)
 		codex_description = description
