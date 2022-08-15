@@ -102,3 +102,10 @@ var/global/list/stored_shock_by_ref = list()
 	if(!istype(my_blood))
 		return FALSE
 	return !my_blood.can_take_donation_from(get_blood_type_by_name(their_blood_type))
+
+/decl/species/proc/map_limb_to_held_slot(var/limb_tag)
+	if(limb_tag == BP_L_ARM || limb_tag == BP_AUGMENT_L_HAND)
+		return BP_L_HAND
+	if(limb_tag == BP_R_ARM || limb_tag == BP_AUGMENT_L_ARM)
+		return BP_R_HAND
+	return limb_tag

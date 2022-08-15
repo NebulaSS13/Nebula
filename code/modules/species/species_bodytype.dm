@@ -6,7 +6,7 @@ var/global/list/bodytypes_by_category = list()
 	var/icon_deformed
 	var/lip_icon
 	var/bandages_icon
-	var/bodytype_flag = BODY_FLAG_HUMANOID
+	var/bodytype_flags = BODY_FLAG_HUMANOID
 	var/bodytype_category = BODYTYPE_OTHER
 	var/limb_icon_intensity = 1.5
 	var/blood_overlays
@@ -76,3 +76,6 @@ var/global/list/bodytypes_by_category = list()
 
 /decl/bodytype/proc/get_hug_zone_messages(var/zone)
 	return LAZYACCESS(hug_messages, zone)
+
+/decl/bodytype/proc/check_lying_dir(var/ndir)
+	return ndir

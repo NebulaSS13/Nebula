@@ -29,15 +29,8 @@
 /obj/item/organ/internal/augment/active/polytool/activate()
 	if(!can_activate())
 		return
-	var/slot = null
-
-	if(limb.organ_tag in list(BP_L_ARM, BP_L_HAND))
-		slot = BP_L_HAND
-	else if(limb.organ_tag in list(BP_R_ARM, BP_R_HAND))
-		slot = BP_R_HAND
-
+	var/slot = limb.species.map_limb_to_held_slot(limb.organ_tag)
 	var/obj/I = owner.get_equipped_item(slot)
-
 	if(I)
 		if(is_type_in_list(I,paths) && !(I.type in items)) //We don't want several of same but you can replace parts whenever
 			if(!owner.drop_from_inventory(I, src))

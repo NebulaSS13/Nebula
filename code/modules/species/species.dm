@@ -60,6 +60,7 @@ var/global/const/DEFAULT_SPECIES_HEALTH = 200
 	var/thirst_factor = DEFAULT_THIRST_FACTOR // Multiplier for thirst.
 	var/taste_sensitivity = TASTE_NORMAL      // How sensitive the species is to minute tastes.
 	var/silent_steps
+	var/stance_damage_factor = 1
 
 	var/age_descriptor = /datum/appearance_descriptor/age
 

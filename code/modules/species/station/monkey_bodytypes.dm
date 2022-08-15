@@ -4,7 +4,7 @@
 	icon_base =         'icons/mob/human_races/species/monkey/monkey_body.dmi'
 	blood_overlays =    'icons/mob/human_races/species/monkey/blood_overlays.dmi'
 	health_hud_intensity = 1.75
-	bodytype_flag = BODY_FLAG_MONKEY
+	bodytype_flags = BODY_FLAG_MONKEY
 
 /decl/bodytype/monkey/Initialize()
 	equip_adjust = list(

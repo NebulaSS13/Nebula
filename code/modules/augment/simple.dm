@@ -30,12 +30,7 @@
 		holding = null     //We no longer hold this, you will have to get a replacement module or fix it somehow
 
 /obj/item/organ/internal/augment/active/simple/proc/deploy()
-
-	var/slot = null
-	if(limb.organ_tag in list(BP_L_ARM, BP_L_HAND))
-		slot = BP_L_HAND
-	else if(limb.organ_tag in list(BP_R_ARM, BP_R_HAND))
-		slot = BP_R_HAND
+	var/slot = limb.species.map_limb_to_held_slot(limb.organ_tag)
 	if(owner.equip_to_slot_if_possible(holding, slot))
 		events_repository.register(/decl/observ/item_unequipped, holding, src, /obj/item/organ/internal/augment/active/simple/proc/holding_dropped)
 		var/decl/pronouns/G = owner.get_pronouns()
