@@ -93,52 +93,46 @@
 		return
 
 	var/limb_pain
-	for(var/limb_tag in list(BP_L_LEG, BP_R_LEG, BP_L_FOOT, BP_R_FOOT))
+	for(var/limb_tag in species.get_stance_tags())
 		var/obj/item/organ/external/E = GET_EXTERNAL_ORGAN(src, limb_tag)
 		if(!E || !E.is_usable())
-			stance_damage += 2 // let it fail even if just foot&leg
+			stance_damage += (2 * species.stance_damage_factor) // let it fail even if just foot&leg
 		else if (E.is_malfunctioning())
 			//malfunctioning only happens intermittently so treat it as a missing limb when it procs
-			stance_damage += 2
+			stance_damage += (2 * species.stance_damage_factor)
 			if(prob(10))
 				visible_message("\The [src]'s [E.name] [pick("twitches", "shudders")] and sparks!")
 				spark_at(src, amount = 5, holder = src)
 		else if (E.is_broken())
-			stance_damage += 1
+			stance_damage += species.stance_damage_factor
 		else if (E.is_dislocated())
-			stance_damage += 0.5
-
-		if(E) limb_pain = E.can_feel_pain()
+			stance_damage += (0.5 * species.stance_damage_factor)
+		if(E)
+			limb_pain = E.can_feel_pain()
 
 	// Canes and crutches help you stand (if the latter is ever added)
 	// One cane mitigates a broken leg+foot, or a missing foot.
 	// Two canes are needed for a lost leg. If you are missing both legs, canes aren't gonna help you.
 	for(var/obj/item/cane/C in get_held_items())
-		stance_damage -= 2
+		stance_damage -= (2 * species.stance_damage_factor)
 
 	if(MOVING_DELIBERATELY(src)) //you don't suffer as much if you aren't trying to run
-		var/working_pair = 2
-		var/obj/item/organ/external/LF = GET_EXTERNAL_ORGAN(src, BP_L_FOOT)
-		var/obj/item/organ/external/LL = GET_EXTERNAL_ORGAN(src, BP_L_LEG)
-		var/obj/item/organ/external/RF = GET_EXTERNAL_ORGAN(src, BP_R_FOOT)
-		var/obj/item/organ/external/RL = GET_EXTERNAL_ORGAN(src, BP_R_LEG)
-		if(!LL || !LF) //are we down a limb?
-			working_pair -= 1
-		else if((!LL.is_usable()) || (!LF.is_usable())) //if not, is it usable?
-			working_pair -= 1
-		if(!RL || !RF)
-			working_pair -= 1
-		else if((!RL.is_usable()) || (!RF.is_usable()))
-			working_pair -= 1
-		if(working_pair >= 1)
+		var/working_pairs = length(species.foot_tags)
+		for(var/foot in species.foot_tags)
+			var/obj/item/organ/external/check_foot = GET_EXTERNAL_ORGAN(src, foot)
+			var/expects_leg = check_foot?.parent_organ
+			var/obj/item/organ/external/check_leg = expects_leg && GET_EXTERNAL_ORGAN(src, expects_leg)
+			if(!check_foot?.is_usable() || (expects_leg && !check_leg.is_usable()))
+				working_pairs--
+		if(working_pairs >= CEILING(length(species.foot_tags)*0.5)) // We need at least half our legs working for a crutch to be worthwhile
 			stance_damage -= 1
 			if(Check_Proppable_Object()) //it helps to lean on something if you've got another leg to stand on
 				stance_damage -= 1
 
-	var/list/objects_to_sit_on = list(
-			/obj/item/stool,
-			/obj/structure/bed,
-		)
+	var/static/list/objects_to_sit_on = list(
+		/obj/item/stool,
+		/obj/structure/bed,
+	)
 
 	for(var/type in objects_to_sit_on) //things that can't be climbed but can be propped-up-on
 		if(locate(type) in src.loc)
@@ -162,22 +156,8 @@
 				grasp_damage_disarm(inv_slot)
 
 /mob/living/carbon/human/proc/stance_damage_prone(var/obj/item/organ/external/affected)
-
 	if(affected && (!BP_IS_PROSTHETIC(affected) || affected.is_robotic()))
-		switch(affected.body_part)
-			if(SLOT_FOOT_LEFT, SLOT_FOOT_RIGHT)
-				if(!BP_IS_PROSTHETIC(affected))
-					to_chat(src, SPAN_WARNING("You lose your footing as your [affected.name] spasms!"))
-				else
-					to_chat(src, SPAN_WARNING("You lose your footing as your [affected.name] [pick("twitches", "shudders")]!"))
-			if(SLOT_LEG_LEFT, SLOT_LEG_RIGHT)
-				if(!BP_IS_PROSTHETIC(affected))
-					to_chat(src, SPAN_WARNING("Your [affected.name] buckles from the shock!"))
-				else
-					to_chat(src, SPAN_WARNING("You lose your balance as [affected.name] [pick("malfunctions", "freezes","shudders")]!"))
-			else
-				return
-	SET_STATUS_MAX(src, STAT_WEAK, 4)
+		return species.handle_stance_damage_prone(src, affected)
 
 /mob/living/carbon/human/proc/grasp_damage_disarm(var/obj/item/organ/external/affected)
 

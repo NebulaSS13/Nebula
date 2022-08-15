@@ -86,7 +86,8 @@
 	standing_jump_range = 5
 
 	override_limb_types = list(
-		BP_GROIN = /obj/item/organ/external/groin/vox
+		BP_GROIN = /obj/item/organ/external/groin/vox,
+		BP_TAIL = /obj/item/organ/external/tail/vox
 	)
 
 	has_organ = list(
@@ -101,7 +102,7 @@
 		BP_HINDTONGUE = /obj/item/organ/internal/hindtongue
 		)
 
-	override_limb_types = list(BP_TAIL = /obj/item/organ/external/tail/vox)
+
 
 	available_pronouns = list(/decl/pronouns/neuter)
 	available_bodytypes = list(/decl/bodytype/vox)

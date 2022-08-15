@@ -4,7 +4,7 @@
 	icon_base =         'mods/species/neoavians/icons/body.dmi'
 	blood_overlays =    'mods/species/neoavians/icons/blood_avian.dmi'
 	limb_blend =        ICON_MULTIPLY
-	bodytype_flag =     BODY_FLAG_AVIAN
+	bodytype_flags =     BODY_FLAG_AVIAN
 
 	var/tail =              "tail_avian"
 	var/tail_icon =         'mods/species/neoavians/icons/tail.dmi'

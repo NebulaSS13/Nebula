@@ -728,8 +728,10 @@ var/global/list/damage_icon_parts = list()
 
 	return tail_icon
 
-/mob/living/carbon/human/set_dir()
-	. = ..()
+/mob/living/carbon/human/set_dir(ndir)
+	if(lying)
+		ndir = bodytype.check_lying_dir(ndir)
+	. = ..(ndir)
 	if(.)
 		var/obj/item/organ/external/tail/tail_organ = get_organ(BP_TAIL, /obj/item/organ/external/tail)
 		if(tail_organ && tail_organ.get_tail())

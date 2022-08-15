@@ -1180,7 +1180,7 @@
 
 /mob/living/carbon/human/needs_wheelchair()
 	var/stance_damage = 0
-	for(var/limb_tag in list(BP_L_LEG, BP_R_LEG, BP_L_FOOT, BP_R_FOOT))
+	for(var/limb_tag in species.get_stance_tags())
 		var/obj/item/organ/external/E = GET_EXTERNAL_ORGAN(src, limb_tag)
 		if(!E || !E.is_usable())
 			stance_damage += 2

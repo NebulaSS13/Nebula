@@ -6,7 +6,7 @@
 	limb_blend =        ICON_MULTIPLY
 	bodytype_category = BODYTYPE_SNAKE
 	antaghud_offset_y = 8
-	bodytype_flag =     BODY_FLAG_SNAKE
+	bodytype_flags =     BODY_FLAG_SNAKE
 
 /decl/bodytype/serpentid/Initialize()
 	equip_adjust = list(

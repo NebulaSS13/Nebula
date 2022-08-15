@@ -81,25 +81,14 @@ var/global/list/sparring_attack_cache = list()
 		switch(zone) // strong punches can have effects depending on where they hit
 			if(BP_HEAD, BP_EYES, BP_MOUTH)
 				// Induce blurriness
-				target.visible_message("<span class='danger'>[target] looks momentarily disoriented.</span>", "<span class='danger'>You see stars.</span>")
+				target.visible_message(SPAN_DANGER("\The [target] looks momentarily disoriented."), SPAN_DANGER("You see stars."))
 				target.apply_effect(attack_damage*2, EYE_BLUR, armour)
-			if(BP_L_ARM, BP_L_HAND, BP_R_ARM, BP_R_HAND)
-				var/check_zone = zone
-				if(check_zone == BP_L_ARM)
-					check_zone = BP_L_HAND
-				else if(check_zone == BP_R_ARM)
-					check_zone = BP_R_HAND
-				var/datum/inventory_slot/inv_slot = LAZYACCESS(target.held_item_slots, check_zone)
-				if(inv_slot?.holding)
-					// Disarm left hand
-					target.visible_message(SPAN_DANGER("\The [inv_slot.holding] was knocked right out of [target]'s grasp!"))
-					target.drop_from_inventory(inv_slot.holding)
 			if(BP_CHEST)
 				if(!target.lying)
 					var/turf/T = get_step(get_turf(target), get_dir(get_turf(user), get_turf(target)))
 					if(!T.density)
 						step(target, get_dir(get_turf(user), get_turf(target)))
-						target.visible_message("<span class='danger'>[pick("[target] was sent flying backward!", "[target] staggers back from the impact!")]</span>")
+						target.visible_message(SPAN_DANGER("\The [pick("[target] was sent flying backward!", "[target] staggers back from the impact!")]"))
 					if(prob(50))
 						target.set_dir(global.reverse_dir[target.dir])
 					target.apply_effect(attack_damage * 0.4, WEAKEN, armour)
@@ -109,15 +98,25 @@ var/global/list/sparring_attack_cache = list()
 					SPAN_WARNING("\The [target] looks like [G.he] [G.is] in pain!"), \
 					SPAN_WARNING(G.get_message_for_being_kicked_in_the_dick()))
 				target.apply_effects(stutter = attack_damage * 2, agony = attack_damage* 3, blocked = armour)
-			if(BP_L_LEG, BP_L_FOOT, BP_R_LEG, BP_R_FOOT)
-				if(!target.lying)
-					target.visible_message("<span class='warning'>[target] gives way slightly.</span>")
-					target.apply_effect(attack_damage*3, PAIN, armour)
+			else
+				if(zone in target.species.get_stance_tags())
+					if(!target.lying)
+						target.visible_message(SPAN_DANGER("\The [target] gives way slightly."))
+						target.apply_effect(attack_damage*3, PAIN, armour)
+				else
+					var/check_zone = target.species.map_limb_to_held_slot(zone)
+					if(zone in target.held_item_slots)
+						var/datum/inventory_slot/inv_slot = LAZYACCESS(target.held_item_slots, check_zone)
+						if(inv_slot?.holding)
+							// Disarm left hand
+							target.visible_message(SPAN_DANGER("\The [inv_slot.holding] was knocked right out of [target]'s grasp!"))
+							target.drop_from_inventory(inv_slot.holding)
+
 	else if(attack_damage >= 5 && !(target == user) && (stun_chance + attack_damage * 5 >= 100) && armour < 1) // Chance to get the usual throwdown as well (25% standard chance)
 		if(!target.lying)
-			target.visible_message("<span class='danger'>[target] [pick("slumps", "falls", "drops")] down to the ground!</span>")
+			target.visible_message(SPAN_DANGER("\The [target] [pick("slumps", "falls", "drops")] down to the ground!"))
 		else
-			target.visible_message("<span class='danger'>[target] has been weakened!</span>")
+			target.visible_message(SPAN_DANGER("\The [target] has been weakened!"))
 		target.apply_effect(3, WEAKEN, armour * 100)
 
 	var/obj/item/clothing/C = target.get_covering_equipped_item_by_zone(zone)

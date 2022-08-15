@@ -163,9 +163,11 @@
 /mob/living/carbon/human/UpdateLyingBuckledAndVerbStatus()
 	var/old_lying = lying
 	. = ..()
-	if(lying && !old_lying && !resting && !buckled) // fell down
-		if(ismob(buckled))
-			var/mob/M = buckled
-			M.unbuckle_mob()
-		var/decl/bodytype/B = get_bodytype()
-		playsound(loc, isSynthetic() ? pick(B.synthetic_bodyfall_sounds) : pick(B.bodyfall_sounds), 50, TRUE, -1)
+	if(lying != old_lying)
+		set_dir(dir) // Some bodytypes force a different dir when prone vs standing.
+		if(lying && !old_lying && !resting && !buckled) // fell down
+			if(ismob(buckled))
+				var/mob/M = buckled
+				M.unbuckle_mob()
+			var/decl/bodytype/B = get_bodytype()
+			playsound(loc, isSynthetic() ? pick(B.synthetic_bodyfall_sounds) : pick(B.bodyfall_sounds), 50, TRUE, -1)

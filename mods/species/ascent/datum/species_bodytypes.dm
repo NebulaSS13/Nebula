@@ -4,7 +4,7 @@
 	icon_base =         'mods/species/ascent/icons/species/body/alate/body.dmi'
 	blood_overlays =    'mods/species/ascent/icons/species/body/alate/blood_overlays.dmi'
 	associated_gender = MALE
-	bodytype_flag =     BODY_FLAG_ALATE
+	bodytype_flags =     BODY_FLAG_ALATE
 
 /decl/bodytype/gyne
 	name =              "gyne"
@@ -17,7 +17,7 @@
 	antaghud_offset_y = 18
 	antaghud_offset_x = 4
 	associated_gender = FEMALE
-	bodytype_flag =     BODY_FLAG_GYNE
+	bodytype_flags =     BODY_FLAG_GYNE
 
 /decl/bodytype/gyne/Initialize()
 	equip_adjust = list(
