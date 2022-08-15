@@ -20,6 +20,8 @@ var/global/list/bodytypes_by_category = list()
 	var/associated_gender
 	var/icon_cache_uid
 
+	var/manual_dexterity = DEXTERITY_FULL
+
 	var/uniform_state_modifier
 	var/health_hud_intensity = 1
 
@@ -81,3 +83,6 @@ var/global/list/bodytypes_by_category = list()
 
 /decl/bodytype/proc/get_hug_zone_messages(var/zone)
 	return LAZYACCESS(hug_messages, zone)
+
+/decl/bodytype/proc/get_manual_dexterity(var/mob/living/carbon/human/H)
+	. = manual_dexterity

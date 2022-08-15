@@ -218,8 +218,6 @@ var/global/const/DEFAULT_SPECIES_HEALTH = 200
 		list(/decl/emote/audible/grunt, /decl/emote/audible/groan) = 10,
 	)
 
-	var/manual_dexterity = DEXTERITY_FULL
-
 	var/datum/ai/ai						// Type abused. Define with path and will automagically create. Determines behaviour for clientless mobs. This will override mob AIs.
 
 	var/exertion_emote_chance =    5
@@ -380,9 +378,6 @@ var/global/const/DEFAULT_SPECIES_HEALTH = 200
 		H.equip_to_slot_or_del(new box_type(backpack), slot_in_backpack_str)
 	else
 		H.put_in_hands_or_del(new box_type(H))
-
-/decl/species/proc/get_manual_dexterity(var/mob/living/carbon/human/H)
-	. = manual_dexterity
 
 /decl/species/proc/add_base_auras(var/mob/living/carbon/human/H)
 	if(base_auras)

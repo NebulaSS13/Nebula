@@ -1238,8 +1238,8 @@ Note that amputating the affected organ does in fact remove the infection from t
 		var/decl/prosthetics_manufacturer/R = GET_DECL(model)
 		if(R)
 			return R.manual_dexterity
-	if(species)
-		return species.get_manual_dexterity(owner)
+	if(bodytype)
+		return bodytype.get_manual_dexterity(owner)
 
 /obj/item/organ/external/robotize(var/company, var/skip_prosthetics = 0, var/keep_organs = 0, var/apply_material = /decl/material/solid/metal/steel, var/check_bodytype, var/check_species)
 	. = ..()

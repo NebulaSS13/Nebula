@@ -77,7 +77,7 @@
 
 //Checks if an existing organ is the species default
 /decl/bodytype/proc/is_default_organ(var/obj/item/organ/O, var/decl/species/species)
-	for(var/tag in has_organ)
+	for(var/tag in has_organs)
 		if(O.organ_tag == tag)
 			if(ispath(O.type, has_organs[tag]))
 				return TRUE
@@ -127,7 +127,7 @@
 		H.add_organ(E, null, FALSE, FALSE)
 
 	//Create missing internal organs
-	for(var/organ_tag in has_organ)
+	for(var/organ_tag in has_organs)
 		if(GET_INTERNAL_ORGAN(H, organ_tag)) //Skip existing
 			continue
 		var/organ_type = has_organs[organ_tag]
