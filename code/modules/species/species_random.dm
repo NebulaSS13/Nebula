@@ -1,7 +1,7 @@
 #define SETUP_RANDOM_COLOR_GETTER(X, Y, Z, W)  \
-/decl/species/var/list/random_##Y = W;\
-/decl/species/proc/get_random_##X(){\
-	if(!(appearance_flags & Z) || !random_##Y.len){\
+/decl/bodytype/var/list/random_##Y = W;\
+/decl/bodytype/proc/get_random_##X(){\
+	if(!(body_appearance_flags & Z) || !random_##Y.len){\
 		return;\
 	}\
 	var/decl/color_generator/CG = GET_DECL(pickweight(random_##Y));\
@@ -10,10 +10,10 @@
 
 #define SETUP_RANDOM_COLOR_SETTER(X, Y)\
 /mob/living/carbon/human/proc/randomize_##X(){\
-	if(!species){\
+	if(!bodytype){\
 		return;\
 	}\
-	var/colour = species.get_random_##X();\
+	var/colour = bodytype.get_random_##X();\
 	if(colour){\
 		Y(colour);\
 	}\
@@ -52,7 +52,7 @@ SETUP_RANDOM_COLOR_GETTER(eye_color, eye_colors, HAS_EYE_COLOR, list(
 	/decl/color_generator/albino_eye))
 SETUP_RANDOM_COLOR_SETTER(eye_color, change_eye_color)
 
-/decl/species/proc/get_random_facial_hair_color()
+/decl/bodytype/proc/get_random_facial_hair_color()
 	return get_random_hair_color()
 
 SETUP_RANDOM_COLOR_SETTER(facial_hair_color, change_facial_hair_color)

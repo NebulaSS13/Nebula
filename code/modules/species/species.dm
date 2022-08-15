@@ -158,7 +158,6 @@ var/global/const/DEFAULT_SPECIES_HEALTH = 200
 	var/siemens_coefficient = 1   // The lower, the thicker the skin and better the insulation.
 	var/darksight_range = 2       // Native darksight distance.
 	var/species_flags = 0         // Various specific features.
-	var/appearance_flags = 0      // Appearance/display related features.
 	var/spawn_flags = 0           // Flags that specify who can spawn as this species
 	var/slowdown = 0              // Passive movement speed malus (or boost, if negative)
 	// Move intents. Earlier in list == default for that type of movement.
@@ -291,11 +290,11 @@ var/global/const/DEFAULT_SPECIES_HEALTH = 200
 		codex_traits += "<li>Has excellent traction.</li>"
 	if(species_flags & SPECIES_FLAG_NO_POISON)
 		codex_traits += "<li>Immune to most poisons.</li>"
-	if(appearance_flags & HAS_A_SKIN_TONE)
+	if(default_bodytype.body_appearance_flags & HAS_A_SKIN_TONE)
 		codex_traits += "<li>Has a variety of skin tones.</li>"
-	if(appearance_flags & HAS_SKIN_COLOR)
+	if(default_bodytype.body_appearance_flags & HAS_SKIN_COLOR)
 		codex_traits += "<li>Has a variety of skin colours.</li>"
-	if(appearance_flags & HAS_EYE_COLOR)
+	if(default_bodytype.body_appearance_flags & HAS_EYE_COLOR)
 		codex_traits += "<li>Has a variety of eye colours.</li>"
 	if(species_flags & SPECIES_FLAG_IS_PLANT)
 		codex_traits += "<li>Has a plantlike physiology.</li>"

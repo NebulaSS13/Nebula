@@ -5,6 +5,7 @@
 	blood_overlays =    'mods/species/ascent/icons/species/body/alate/blood_overlays.dmi'
 	associated_gender = MALE
 	bodytype_flag =     BODY_FLAG_ALATE
+	body_appearance_flags = 0
 
 	has_limbs = list(
 		BP_CHEST =  list("path" = /obj/item/organ/external/chest/insectoid),
@@ -53,6 +54,7 @@
 	override_organ_types = list(
 		BP_EGG = /obj/item/organ/internal/egg_sac/insectoid,
 	)
+	body_appearance_flags = 0
 
 /decl/bodytype/gyne/Initialize()
 	equip_adjust = list(

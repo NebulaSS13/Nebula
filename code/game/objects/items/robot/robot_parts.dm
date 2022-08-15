@@ -26,9 +26,10 @@
 		var/decl/bodytype/prosthetic/R = GET_DECL(model)
 		if(R)
 			SetName("[R.name] [initial(name)]")
-			desc = "[R.desc]"
-			if(icon_state in icon_states(R.icon))
-				icon = R.icon
+			desc = "[R.prosthetic_limb_desc]"
+			var/prosthetic_icon = R.get_base_icon()
+			if(prosthetic_icon && (icon_state in icon_states(prosthetic_icon)))
+				icon = prosthetic_icon
 	else
 		SetDefaultName()
 

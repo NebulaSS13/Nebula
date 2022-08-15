@@ -72,7 +72,6 @@
 	reagent_tag =             IS_MANTID
 	available_pronouns = list(/decl/pronouns/male)
 
-	appearance_flags =        0
 	species_flags =           SPECIES_FLAG_NO_SCAN | SPECIES_FLAG_NO_SLIP | SPECIES_FLAG_NO_MINOR_CUT | SPECIES_FLAG_CRYSTALLINE
 	spawn_flags =             SPECIES_IS_RESTRICTED
 

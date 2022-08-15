@@ -27,14 +27,14 @@
 
 	available_pronouns = list(/decl/pronouns)
 	available_bodytypes = list(
-		/decl/bodytype/adherent,
-		/decl/bodytype/adherent/emerald,
-		/decl/bodytype/adherent/amethyst,
-		/decl/bodytype/adherent/sapphire,
-		/decl/bodytype/adherent/ruby,
-		/decl/bodytype/adherent/topaz,
-		/decl/bodytype/adherent/quartz,
-		/decl/bodytype/adherent/jet
+		/decl/bodytype/prosthetic/adherent,
+		/decl/bodytype/prosthetic/adherent/emerald,
+		/decl/bodytype/prosthetic/adherent/amethyst,
+		/decl/bodytype/prosthetic/adherent/sapphire,
+		/decl/bodytype/prosthetic/adherent/ruby,
+		/decl/bodytype/prosthetic/adherent/topaz,
+		/decl/bodytype/prosthetic/adherent/quartz,
+		/decl/bodytype/prosthetic/adherent/jet
 	)
 	cyborg_noun =             null
 
@@ -63,7 +63,6 @@
 	species_flags = SPECIES_FLAG_NO_SCAN | SPECIES_FLAG_NO_PAIN | SPECIES_FLAG_NO_POISON | SPECIES_FLAG_NO_MINOR_CUT | SPECIES_FLAG_CRYSTALLINE
 	spawn_flags =   SPECIES_CAN_JOIN
 
-	appearance_flags = HAS_EYE_COLOR
 	flesh_color = "#90edeb"
 	slowdown = -1
 	hud_type = /datum/hud_data/adherent
@@ -147,7 +146,7 @@
 
 /decl/species/adherent/apply_species_organ_modifications(var/obj/item/organ/org)
 	..()
-	org.robotize(/decl/bodytype/prosthetic/adherent, FALSE, TRUE, /decl/material/solid/gemstone/crystal, BODYTYPE_ADHERENT, SPECIES_ADHERENT)
+	org.robotize(org.bodytype.type, FALSE, TRUE, /decl/material/solid/gemstone/crystal, BODYTYPE_ADHERENT, SPECIES_ADHERENT)
 	if(istype(org, /obj/item/organ/external))
 		var/obj/item/organ/external/E = org
 		E.arterial_bleed_severity = 0

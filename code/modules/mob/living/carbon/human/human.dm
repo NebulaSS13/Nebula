@@ -729,7 +729,7 @@
 //Drop anything that cannot be worn by the current species of the mob
 /mob/living/carbon/human/proc/apply_species_inventory_restrictions()
 	if(species)
-		if(!(species.appearance_flags & HAS_UNDERWEAR))
+		if(!(bodytype.body_appearance_flags & HAS_UNDERWEAR))
 			QDEL_NULL_LIST(worn_underwear)
 
 	//recheck species-restricted clothing

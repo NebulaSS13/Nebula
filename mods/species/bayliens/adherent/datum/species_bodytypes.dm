@@ -1,4 +1,4 @@
-/decl/bodytype/adherent
+/decl/bodytype/prosthetic/adherent
 	name = "turquoise"
 	bodytype_category = BODYTYPE_ADHERENT
 	icon_template =     'mods/species/bayliens/adherent/icons/template.dmi'
@@ -6,7 +6,15 @@
 	damage_overlays =   'mods/species/bayliens/adherent/icons/damage_overlay.dmi'
 	blood_overlays =    'mods/species/bayliens/adherent/icons/blood_overlays.dmi'
 	antaghud_offset_y = 14
-	mob_size =                MOB_SIZE_LARGE
+	mob_size = MOB_SIZE_LARGE
+	body_appearance_flags = HAS_EYE_COLOR
+	prosthetic_limb_desc = "A gleaming crystalline mass."
+	unavailable_at_chargen = TRUE
+	can_eat = FALSE
+	can_feel_pain = FALSE
+	allowed_bodytypes = list(BODYTYPE_ADHERENT)
+	modifier_string = "crystalline"
+	is_robotic = FALSE
 
 	has_limbs = list(
 		BP_CHEST =  list("path" = /obj/item/organ/external/chest/crystal),
@@ -31,7 +39,7 @@
 		BP_COOLING_FINS = /obj/item/organ/internal/powered/cooling_fins
 	)
 
-/decl/bodytype/adherent/Initialize()
+/decl/bodytype/prosthetic/adherent/Initialize()
 	equip_adjust = list(
 		"[BP_L_HAND]" = list(
 			"[NORTH]" = list("x" = 0, "y" = 14),
@@ -84,30 +92,30 @@
 	)
 	. = ..()
 
-/decl/bodytype/adherent/emerald
+/decl/bodytype/prosthetic/adherent/emerald
 	name = "emerald"
 	icon_base = 'mods/species/bayliens/adherent/icons/body_emerald.dmi'
 
-/decl/bodytype/adherent/amethyst
+/decl/bodytype/prosthetic/adherent/amethyst
 	name = "amethyst"
 	icon_base = 'mods/species/bayliens/adherent/icons/body_amethyst.dmi'
 
-/decl/bodytype/adherent/sapphire
+/decl/bodytype/prosthetic/adherent/sapphire
 	name = "sapphire"
 	icon_base = 'mods/species/bayliens/adherent/icons/body_sapphire.dmi'
 
-/decl/bodytype/adherent/ruby
+/decl/bodytype/prosthetic/adherent/ruby
 	name = "ruby"
 	icon_base = 'mods/species/bayliens/adherent/icons/body_ruby.dmi'
 
-/decl/bodytype/adherent/topaz
+/decl/bodytype/prosthetic/adherent/topaz
 	name = "topaz"
 	icon_base = 'mods/species/bayliens/adherent/icons/body_topaz.dmi'
 
-/decl/bodytype/adherent/quartz
+/decl/bodytype/prosthetic/adherent/quartz
 	name = "quartz"
 	icon_base = 'mods/species/bayliens/adherent/icons/body_quartz.dmi'
 
-/decl/bodytype/adherent/jet
+/decl/bodytype/prosthetic/adherent/jet
 	name = "jet"
 	icon_base = 'mods/species/bayliens/adherent/icons/body_jet.dmi'

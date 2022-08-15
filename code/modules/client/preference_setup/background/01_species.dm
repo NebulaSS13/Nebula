@@ -25,11 +25,11 @@
 
 	pref.skills_allocated = pref.sanitize_skills(pref.skills_allocated)
 
-	if(pref.all_underwear && !has_flag(get_species_by_key(pref.species), HAS_UNDERWEAR))
+	if(pref.all_underwear && !has_flag(mob_species.get_bodytype_by_name(pref.bodytype), HAS_UNDERWEAR))
 		pref.all_underwear.Cut()
 
-/datum/category_item/player_setup_item/background/species/proc/has_flag(var/decl/species/mob_species, var/flag)
-	return mob_species && (mob_species.appearance_flags & flag)
+/datum/category_item/player_setup_item/background/species/proc/has_flag(var/decl/bodytype/mob_body, var/flag)
+	return (mob_body?.body_appearance_flags & flag)
 
 /datum/category_item/player_setup_item/background/species/content(var/mob/user)
 	var/decl/species/current_species = get_species_by_key(pref.species)

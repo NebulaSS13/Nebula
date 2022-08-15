@@ -21,6 +21,7 @@ var/global/list/bodytypes_by_category = list()
 	var/associated_gender
 	var/icon_cache_uid
 	var/max_skin_tone = 220
+	var/body_appearance_flags = 0      // Appearance/display related features.
 
 	var/manual_dexterity = DEXTERITY_FULL
 

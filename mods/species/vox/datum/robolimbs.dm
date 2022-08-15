@@ -6,7 +6,7 @@
 
 /decl/bodytype/prosthetic/vox
 	name = "Arkmade"
-	icon = 'mods/species/vox/icons/body/primalis_cyberlimbs.dmi'
+	icon_base = 'mods/species/vox/icons/body/primalis_cyberlimbs.dmi'
 
 /decl/bodytype/prosthetic/vox/Initialize()
 	. = ..()
@@ -15,4 +15,4 @@
 
 /decl/bodytype/prosthetic/vox/crap
 	name = "Improvised"
-	icon = 'mods/species/vox/icons/body/improvised_cyberlimbs.dmi'
+	icon_base = 'mods/species/vox/icons/body/improvised_cyberlimbs.dmi'

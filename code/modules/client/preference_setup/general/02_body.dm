@@ -137,7 +137,7 @@
 	. += "Blood Type: <a href='?src=\ref[src];blood_type=1'>[pref.b_type]</a><br>"
 
 	var/decl/bodytype/mob_body = mob_species?.get_bodytype_by_name(pref.bodytype)
-	if(has_flag(mob_species, HAS_A_SKIN_TONE))
+	if(has_flag(mob_body, HAS_A_SKIN_TONE))
 		. += "Skin Tone: <a href='?src=\ref[src];skin_tone=1'>[-pref.skin_tone + 35]/[mob_body.max_skin_tone]</a><br>"
 	. += "</td></tr></table><hr/>"
 
@@ -167,7 +167,7 @@
 	. += "<td><b>Hair</b></td>"
 	. += "<td><a href='?src=\ref[src];hair_style=1'>[GET_DECL(pref.h_style)]</a></td>"
 	. += "<td>"
-	if(has_flag(mob_species, HAS_HAIR_COLOR))
+	if(has_flag(mob_body, HAS_HAIR_COLOR))
 		. += "[COLORED_SQUARE(pref.hair_colour)] <a href='?src=\ref[src];hair_color=1'>Change</a>"
 	. += "</td>"
 	. += "<tr>"
@@ -175,16 +175,16 @@
 	. += "<td><b>Facial</b></td>"
 	. += "<td><a href='?src=\ref[src];facial_style=1'>[GET_DECL(pref.f_style)]</a></td>"
 	. += "<td>"
-	if(has_flag(mob_species, HAS_HAIR_COLOR))
+	if(has_flag(mob_body, HAS_HAIR_COLOR))
 		. += "[COLORED_SQUARE(pref.facial_hair_colour)] <a href='?src=\ref[src];facial_color=1'>Change</a>"
 	. += "</td>"
 	. += "</tr>"
-	if(has_flag(mob_species, HAS_EYE_COLOR))
+	if(has_flag(mob_body, HAS_EYE_COLOR))
 		. += "<tr>"
 		. += "<td><b>Eyes</b></td>"
 		. += "<td>[COLORED_SQUARE(pref.eye_colour)] <a href='?src=\ref[src];eye_color=1'>Change</a></td>"
 		. += "</tr>"
-	if(has_flag(mob_species, HAS_SKIN_COLOR))
+	if(has_flag(mob_body, HAS_SKIN_COLOR))
 		. += "<tr>"
 		. += "<td><b>Body</b></td>"
 		. += "<td>[COLORED_SQUARE(pref.skin_colour)] <a href='?src=\ref[src];skin_color=1'>Change</a></td>"
@@ -204,11 +204,13 @@
 
 	. = jointext(.,null)
 
-/datum/category_item/player_setup_item/physical/body/proc/has_flag(var/decl/species/mob_species, var/flag)
-	return mob_species && (mob_species.appearance_flags & flag)
+/datum/category_item/player_setup_item/physical/body/proc/has_flag(var/decl/bodytype/mob_body, var/flag)
+	return (mob_body?.body_appearance_flags & flag)
 
 /datum/category_item/player_setup_item/physical/body/OnTopic(var/href,var/list/href_list, var/mob/user)
 	var/decl/species/mob_species = get_species_by_key(pref.species)
+	var/decl/bodytype/mob_body = mob_species?.get_bodytype_by_name(pref.bodytype)
+
 	if(href_list["set_descriptor"])
 
 		var/datum/appearance_descriptor/descriptor = locate(href_list["set_descriptor"])
@@ -237,10 +239,10 @@
 				return TOPIC_REFRESH
 
 	else if(href_list["hair_color"])
-		if(!has_flag(mob_species, HAS_HAIR_COLOR))
+		if(!has_flag(mob_body, HAS_HAIR_COLOR))
 			return TOPIC_NOACTION
 		var/new_hair = input(user, "Choose your character's hair colour:", CHARACTER_PREFERENCE_INPUT_TITLE, pref.hair_colour) as color|null
-		if(new_hair && has_flag(get_species_by_key(pref.species), HAS_HAIR_COLOR) && CanUseTopic(user))
+		if(new_hair && has_flag(mob_body, HAS_HAIR_COLOR) && CanUseTopic(user))
 			pref.hair_colour = new_hair
 			return TOPIC_REFRESH_UPDATE_PREVIEW
 
@@ -255,35 +257,34 @@
 			return TOPIC_REFRESH_UPDATE_PREVIEW
 
 	else if(href_list["facial_color"])
-		if(!has_flag(mob_species, HAS_HAIR_COLOR))
+		if(!has_flag(mob_body, HAS_HAIR_COLOR))
 			return TOPIC_NOACTION
 		var/new_facial = input(user, "Choose your character's facial-hair colour:", CHARACTER_PREFERENCE_INPUT_TITLE, pref.facial_hair_colour) as color|null
-		if(new_facial && has_flag(get_species_by_key(pref.species), HAS_HAIR_COLOR) && CanUseTopic(user))
+		if(new_facial && has_flag(mob_body, HAS_HAIR_COLOR) && CanUseTopic(user))
 			pref.facial_hair_colour = new_facial
 			return TOPIC_REFRESH_UPDATE_PREVIEW
 
 	else if(href_list["eye_color"])
-		if(!has_flag(mob_species, HAS_EYE_COLOR))
+		if(!has_flag(mob_body, HAS_EYE_COLOR))
 			return TOPIC_NOACTION
 		var/new_eyes = input(user, "Choose your character's eye colour:", CHARACTER_PREFERENCE_INPUT_TITLE, pref.eye_colour) as color|null
-		if(new_eyes && has_flag(get_species_by_key(pref.species), HAS_EYE_COLOR) && CanUseTopic(user))
+		if(new_eyes && has_flag(mob_body, HAS_EYE_COLOR) && CanUseTopic(user))
 			pref.eye_colour = new_eyes
 			return TOPIC_REFRESH_UPDATE_PREVIEW
 
 	else if(href_list["skin_tone"])
-		if(!has_flag(mob_species, HAS_A_SKIN_TONE))
+		if(!has_flag(mob_body, HAS_A_SKIN_TONE))
 			return TOPIC_NOACTION
-		var/new_s_tone = input(user, "Choose your character's skin-tone. Lower numbers are lighter, higher are darker. Range: 1 to [B.max_skin_tone]", CHARACTER_PREFERENCE_INPUT_TITLE, (-pref.skin_tone) + 35) as num|null
-		mob_species = get_species_by_key(pref.species)
-		if(new_s_tone && has_flag(mob_species, HAS_A_SKIN_TONE) && CanUseTopic(user))
-			pref.skin_tone = 35 - max(min(round(new_s_tone), B.max_skin_tone), 1)
+		var/new_s_tone = input(user, "Choose your character's skin-tone. Lower numbers are lighter, higher are darker. Range: 1 to [mob_body.max_skin_tone]", CHARACTER_PREFERENCE_INPUT_TITLE, (-pref.skin_tone) + 35) as num|null
+		if(new_s_tone && has_flag(mob_body, HAS_A_SKIN_TONE) && CanUseTopic(user))
+			pref.skin_tone = 35 - max(min(round(new_s_tone), mob_body.max_skin_tone), 1)
 		return TOPIC_REFRESH_UPDATE_PREVIEW
 
 	else if(href_list["skin_color"])
-		if(!has_flag(mob_species, HAS_SKIN_COLOR))
+		if(!has_flag(mob_body, HAS_SKIN_COLOR))
 			return TOPIC_NOACTION
 		var/new_skin = input(user, "Choose your character's skin colour: ", CHARACTER_PREFERENCE_INPUT_TITLE, pref.skin_colour) as color|null
-		if(new_skin && has_flag(get_species_by_key(pref.species), HAS_SKIN_COLOR) && CanUseTopic(user))
+		if(new_skin && has_flag(mob_body, HAS_SKIN_COLOR) && CanUseTopic(user))
 			pref.skin_colour = new_skin
 			return TOPIC_REFRESH_UPDATE_PREVIEW
 

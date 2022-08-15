@@ -20,6 +20,7 @@
 		BP_EYES =     /obj/item/organ/internal/eyes/taj
 	)
 	override_limb_types = list(BP_TAIL = /obj/item/organ/external/tail/cat)
+	body_appearance_flags = HAS_HAIR_COLOR | HAS_LIPS | HAS_UNDERWEAR | HAS_SKIN_COLOR | HAS_EYE_COLOR
 
 /decl/bodytype/feline/Initialize()
 	equip_adjust = list(

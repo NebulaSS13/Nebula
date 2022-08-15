@@ -19,14 +19,14 @@ var/global/list/limb_icon_cache = list()
 	bodytype = human.bodytype
 	if(BP_IS_PROSTHETIC(src) && model)
 		var/decl/bodytype/prosthetic/franchise = GET_DECL(model)
-		if(!(franchise && franchise.skintone))
+		if(!franchise || !(franchise.body_appearance_flags & HAS_A_SKIN_TONE))
 			return
 		skin_blend = franchise.limb_blend
 	if(species && human.species && species.name != human.species.name)
 		return
-	if(!isnull(human.skin_tone) && (human.species.appearance_flags & HAS_A_SKIN_TONE))
+	if(!isnull(human.skin_tone) && (human.bodytype.body_appearance_flags & HAS_A_SKIN_TONE))
 		skin_tone = human.skin_tone
-	if(human.species.appearance_flags & HAS_SKIN_COLOR)
+	if(human.bodytype.body_appearance_flags & HAS_SKIN_COLOR)
 		skin_colour = human.skin_colour
 
 /obj/item/organ/external/proc/sync_colour_to_dna()
@@ -35,11 +35,11 @@ var/global/list/limb_icon_cache = list()
 	hair_colour = rgb(dna.GetUIValue(DNA_UI_HAIR_R),dna.GetUIValue(DNA_UI_HAIR_G),dna.GetUIValue(DNA_UI_HAIR_B))
 	if(BP_IS_PROSTHETIC(src) && model)
 		var/decl/bodytype/prosthetic/franchise = GET_DECL(model)
-		if(!(franchise && franchise.skintone))
+		if(!franchise || !(franchise.body_appearance_flags & HAS_A_SKIN_TONE))
 			return
-	if(!isnull(dna.GetUIValue(DNA_UI_SKIN_TONE)) && (species.appearance_flags & HAS_A_SKIN_TONE))
+	if(!isnull(dna.GetUIValue(DNA_UI_SKIN_TONE)) && (bodytype.body_appearance_flags & HAS_A_SKIN_TONE))
 		skin_tone = dna.GetUIValue(DNA_UI_SKIN_TONE)
-	if(species.appearance_flags & HAS_SKIN_COLOR)
+	if(bodytype.body_appearance_flags & HAS_SKIN_COLOR)
 		skin_colour = rgb(dna.GetUIValue(DNA_UI_SKIN_R), dna.GetUIValue(DNA_UI_SKIN_G), dna.GetUIValue(DNA_UI_SKIN_B))
 
 /obj/item/organ/external/head/sync_colour_to_human(var/mob/living/carbon/human/human)
@@ -159,7 +159,7 @@ var/global/list/robot_hud_colours = list("#ffffff","#cccccc","#aaaaaa","#888888"
 		else
 			applying.Blend(rgb(-skin_tone,  -skin_tone,  -skin_tone), ICON_SUBTRACT)
 		icon_cache_key += "_tone_[skin_tone]"
-	if(species.appearance_flags & HAS_SKIN_COLOR)
+	if(bodytype.body_appearance_flags & HAS_SKIN_COLOR)
 		if(skin_colour)
 			applying.Blend(skin_colour, skin_blend)
 			icon_cache_key += "_color_[skin_colour]_[skin_blend]"

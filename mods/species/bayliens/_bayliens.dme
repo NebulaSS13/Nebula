@@ -11,7 +11,6 @@
 #include "adherent\datum\species_bodytypes.dm"
 #include "adherent\organs\organs_external.dm"
 #include "adherent\organs\organs_internal.dm"
-#include "adherent\organs\prosthetics_manufacturer.dm"
 #include "skrell\_skrell.dm"
 #include "skrell\datum\accessory.dm"
 #include "skrell\datum\blood.dm"

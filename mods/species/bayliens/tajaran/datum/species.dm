@@ -25,7 +25,6 @@
 	preview_outfit = /decl/hierarchy/outfit/job/generic/engineer
 
 	spawn_flags = SPECIES_CAN_JOIN
-	appearance_flags = HAS_HAIR_COLOR | HAS_LIPS | HAS_UNDERWEAR | HAS_SKIN_COLOR | HAS_EYE_COLOR
 
 	blood_types = list(
 		/decl/blood_type/feline/mplus,

@@ -21,6 +21,7 @@
 		BP_HINDTONGUE = /obj/item/organ/internal/hindtongue
 		)
 	override_limb_types = list(BP_TAIL = /obj/item/organ/external/tail/vox)
+	body_appearance_flags = HAS_EYE_COLOR | HAS_HAIR_COLOR
 
 /decl/bodytype/vox/Initialize()
 	equip_adjust = list(

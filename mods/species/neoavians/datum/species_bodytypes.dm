@@ -6,6 +6,7 @@
 	limb_blend =        ICON_MULTIPLY
 	bodytype_flag =     BODY_FLAG_AVIAN
 	mob_size = MOB_SIZE_SMALL
+	body_appearance_flags = HAS_HAIR_COLOR | HAS_SKIN_COLOR | HAS_EYE_COLOR
 
 	has_organs = list(
 		BP_STOMACH =  /obj/item/organ/internal/stomach,

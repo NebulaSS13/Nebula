@@ -56,7 +56,6 @@
 	heat_level_3 = 1100 //Default 1000
 
 	spawn_flags = SPECIES_CAN_JOIN | SPECIES_NO_ROBOTIC_INTERNAL_ORGANS
-	appearance_flags = HAS_HAIR_COLOR | HAS_LIPS | HAS_UNDERWEAR | HAS_SKIN_COLOR | HAS_EYE_COLOR
 
 	reagent_tag = IS_LIZARD
 

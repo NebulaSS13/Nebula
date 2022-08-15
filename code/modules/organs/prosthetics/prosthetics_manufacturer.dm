@@ -1,19 +1,17 @@
-/decl/bodytype/prosthetic 
+/decl/bodytype/prosthetic
 	name = "Unbranded"                                            // Shown when selecting the limb.
 	icon_base = 'icons/mob/human_races/cyberlimbs/robotic.dmi'    // Icon base to draw from.
 
 	var/unavailable_at_chargen                                    // If set, not available at chargen.
 	var/can_eat                                                   // Determines if heads with this model can ingest food/drink.
 	var/can_feel_pain                                             // Modifies the return from human can_feel_pain().
-	var/skintone                                                  // Determines if human skintone should be applied to this limb.
-	var/limb_blend                                                // Defines a blending mode to use for human icons with this limb.
+
 	var/list/bodytypes_cannot_use                                 // Blacklists bodytypes from using this limb.
 	var/list/species_restricted                                   // Determines which species can use this limb.
 	var/list/applies_to_part                                      // Determines which bodyparts can use this limb.
 	var/list/allowed_bodytypes = list(BODYTYPE_HUMANOID)          // Determines which bodytypes can apply the limb.
 	var/modifier_string = "robotic"                               // Used to alter the name of the limb.
 	var/hardiness = 1                                             // Modifies min and max broken damage for the limb.
-	var/manual_dexterity = DEXTERITY_FULL                         // For hands, determines the dexterity value passed to get_dexterity().
 	var/movement_slowdown = 0                                     // Applies a slowdown value to this limb.
 	var/is_robotic = TRUE                                         // Determines if EMP damage is applied to this prosthetic.
 	var/modular_prosthetic_tier = MODULAR_BODYPART_INVALID        // Determines how the limb behaves as a prosthetic with regards to manual attachment/detachment.
@@ -31,6 +29,3 @@
 				return FALSE
 		if(target_species && islist(species_restricted) && !(target_species in species_restricted))
 			return FALSE
-
-/decl/bodytype/prosthetic/proc/get_base_icon(var/mob/living/carbon/human/owner)
-	return icon

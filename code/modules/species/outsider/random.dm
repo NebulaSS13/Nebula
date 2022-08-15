@@ -4,6 +4,7 @@
 	icon_base =         'icons/mob/human_races/species/humanoid/body.dmi'
 	bandages_icon =     'icons/mob/bandage.dmi'
 	limb_blend =        ICON_MULTIPLY
+	body_appearance_flags = HAS_SKIN_COLOR
 
 /decl/species/alium
 	name = SPECIES_ALIEN
@@ -15,8 +16,6 @@
 	spawn_flags = SPECIES_IS_RESTRICTED
 
 	available_bodytypes = list(/decl/bodytype/alium)
-
-	appearance_flags = HAS_SKIN_COLOR
 
 	force_cultural_info = list(
 		TAG_CULTURE = /decl/cultural_info/culture/hidden/alium

@@ -11,6 +11,7 @@
 	health_hud_intensity =   2
 	associated_gender =      FEMALE
 	uniform_state_modifier = "_f"
+	body_appearance_flags = HAS_HAIR_COLOR | HAS_LIPS | HAS_UNDERWEAR | HAS_SKIN_COLOR | HAS_EYE_COLOR
 
 	override_organ_types = list(
 		BP_EYES = /obj/item/organ/internal/eyes/lizard,
