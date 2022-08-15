@@ -1,5 +1,5 @@
 /mob/living/carbon/human/proc/update_eyes()
-	var/obj/item/organ/internal/eyes/eyes = get_organ((species?.vision_organ || BP_EYES), /obj/item/organ/internal/eyes)
+	var/obj/item/organ/internal/eyes/eyes = get_organ((bodytype?.vision_organ || BP_EYES), /obj/item/organ/internal/eyes)
 	if(eyes)
 		eyes.update_colour()
 		refresh_visible_overlays()

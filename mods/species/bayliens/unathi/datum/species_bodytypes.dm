@@ -12,6 +12,13 @@
 	associated_gender =      FEMALE
 	uniform_state_modifier = "_f"
 
+	override_organ_types = list(
+		BP_EYES = /obj/item/organ/internal/eyes/lizard,
+		BP_BRAIN = /obj/item/organ/internal/brain/lizard
+	)
+
+	override_limb_types = list(BP_TAIL = /obj/item/organ/external/tail/lizard)
+
 /decl/bodytype/lizard/masculine
 	name =                   "masculine"
 	icon_base =              'mods/species/bayliens/unathi/icons/body_male.dmi'

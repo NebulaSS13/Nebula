@@ -45,7 +45,6 @@
 
 	warning_low_pressure =    50
 	hazard_low_pressure =     -1
-	mob_size =                MOB_SIZE_LARGE
 	strength =                STR_HIGH
 
 	base_eye_color = COLOR_LIME
@@ -84,29 +83,6 @@
 		),
 		TAG_RELIGION =  list(/decl/cultural_info/religion/other)
 	)
-
-	has_limbs = list(
-		BP_CHEST =  list("path" = /obj/item/organ/external/chest/crystal),
-		BP_GROIN =  list("path" = /obj/item/organ/external/groin/crystal),
-		BP_HEAD =   list("path" = /obj/item/organ/external/head/crystal),
-		BP_L_ARM =  list("path" = /obj/item/organ/external/arm/crystal),
-		BP_R_ARM =  list("path" = /obj/item/organ/external/arm/right/crystal),
-		BP_L_HAND = list("path" = /obj/item/organ/external/hand/crystal),
-		BP_R_HAND = list("path" = /obj/item/organ/external/hand/right/crystal),
-		BP_L_LEG =  list("path" = /obj/item/organ/external/tendril),
-		BP_R_LEG =  list("path" = /obj/item/organ/external/tendril/two),
-		BP_L_FOOT = list("path" = /obj/item/organ/external/tendril/three),
-		BP_R_FOOT = list("path" = /obj/item/organ/external/tendril/four)
-	)
-
-	has_organ = list(
-		BP_BRAIN =        /obj/item/organ/internal/brain/adherent,
-		BP_EYES =         /obj/item/organ/internal/eyes/adherent,
-		BP_JETS =         /obj/item/organ/internal/powered/jets,
-		BP_FLOAT =        /obj/item/organ/internal/powered/float,
-		BP_CELL =         /obj/item/organ/internal/cell/adherent,
-		BP_COOLING_FINS = /obj/item/organ/internal/powered/cooling_fins
-		)
 
 	move_trail = /obj/effect/decal/cleanable/blood/tracks/snake
 	max_players = 3

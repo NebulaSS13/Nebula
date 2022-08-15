@@ -63,10 +63,15 @@ var/global/list/bodytypes_by_category = list()
 
 /decl/bodytype/Initialize()
 	. = ..()
+
+	if(is_abstract())
+		return
+
 	if(!icon_deformed)
 		icon_deformed = icon_base
-	if(!is_abstract())
-		LAZYDISTINCTADD(global.bodytypes_by_category[bodytype_category], src)
+
+	LAZYDISTINCTADD(global.bodytypes_by_category[bodytype_category], src)
+	setup_organs()
 
 /decl/bodytype/proc/apply_limb_colouration(var/obj/item/organ/external/E, var/icon/applying)
 	return applying

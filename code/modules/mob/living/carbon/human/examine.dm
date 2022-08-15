@@ -11,7 +11,7 @@
 	var/skipface = 0
 
 	if(user.zone_sel)
-		if(BP_TAIL in species.has_limbs)
+		if(BP_TAIL in bodytype.has_limbs)
 			user.zone_sel.icon_state = "zone_sel_tail"
 		else
 			user.zone_sel.icon_state = "zone_sel"
@@ -238,9 +238,9 @@
 	var/list/shown_objects = list()
 	var/list/hidden_bleeders = list()
 
-	for(var/organ_tag in species.has_limbs)
+	for(var/organ_tag in bodytype.has_limbs)
 
-		var/list/organ_data = species.has_limbs[organ_tag]
+		var/list/organ_data = bodytype.has_limbs[organ_tag]
 		var/organ_descriptor = organ_data["descriptor"]
 		var/obj/item/organ/external/E = GET_EXTERNAL_ORGAN(src, organ_tag)
 

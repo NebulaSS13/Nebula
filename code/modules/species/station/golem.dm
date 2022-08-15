@@ -3,6 +3,9 @@
 	bodytype_category = BODYTYPE_HUMANOID
 	icon_base =         'icons/mob/human_races/species/golem/body.dmi'
 	husk_icon =         'icons/mob/human_races/species/golem/husk.dmi'
+	has_organs = list(
+		BP_BRAIN = /obj/item/organ/internal/brain/golem
+	)
 
 /decl/species/golem
 	name = SPECIES_GOLEM
@@ -33,10 +36,6 @@
 	heat_level_1 = SYNTH_HEAT_LEVEL_1
 	heat_level_2 = SYNTH_HEAT_LEVEL_2
 	heat_level_3 = SYNTH_HEAT_LEVEL_3
-
-	has_organ = list(
-		BP_BRAIN = /obj/item/organ/internal/brain/golem
-	)
 
 	death_message = "becomes completely motionless..."
 	available_pronouns = list(/decl/pronouns/neuter)

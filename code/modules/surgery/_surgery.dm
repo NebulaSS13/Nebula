@@ -199,8 +199,8 @@ var/global/list/surgery_tool_exception_cache = list()
 	var/zone = user.zone_sel.selecting
 	if(ishuman(M))
 		var/mob/living/carbon/human/H = M
-		if(length(LAZYACCESS(H.species.limb_mapping, zone)) > 1)
-			zone = input("Which bodypart do you wish to operate on?", "Non-standard surgery") as null|anything in H.species.limb_mapping[zone]
+		if(length(LAZYACCESS(H.bodytype.limb_mapping, zone)) > 1)
+			zone = input("Which bodypart do you wish to operate on?", "Non-standard surgery") as null|anything in H.bodytype.limb_mapping[zone]
 			if(!zone)
 				return FALSE
 

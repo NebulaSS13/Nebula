@@ -106,13 +106,13 @@
 					return
 
 			var/obj/item/organ/vision
-			if(!H.species.vision_organ || !H.should_have_organ(H.species.vision_organ))
+			if(!H.bodytype.vision_organ || !H.should_have_organ(H.bodytype.vision_organ))
 				to_chat(user, "<span class='warning'>You can't find anything on [H] to direct [src] into!</span>")
 				return
 
-			vision = GET_INTERNAL_ORGAN(H, H.species.vision_organ)
+			vision = GET_INTERNAL_ORGAN(H, H.bodytype.vision_organ)
 			if(!vision)
-				vision = H.species.has_organ[H.species.vision_organ]
+				vision = H.bodytype.has_organs[H.bodytype.vision_organ]
 				var/decl/pronouns/G = H.get_pronouns()
 				to_chat(user, "<span class='warning'>\The [H] is missing [G.his] [initial(vision.name)]!</span>")
 				return

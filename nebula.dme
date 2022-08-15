@@ -3117,6 +3117,7 @@
 #include "code\modules\species\species_bodytype.dm"
 #include "code\modules\species\species_bodytype_helpers.dm"
 #include "code\modules\species\species_bodytype_offsets.dm"
+#include "code\modules\species\species_bodytype_organs.dm"
 #include "code\modules\species\species_getters.dm"
 #include "code\modules\species\species_helpers.dm"
 #include "code\modules\species\species_hud.dm"

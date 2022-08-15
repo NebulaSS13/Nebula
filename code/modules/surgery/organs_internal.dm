@@ -244,8 +244,8 @@
 			CRASH("Target ([target]) of surgery [type] has no species!")
 		else
 			var/decl/pronouns/G = O.get_pronouns()
-			var/decl/species/species = target.get_species()
-			if(O.organ_tag == BP_POSIBRAIN && !species.has_organ[BP_POSIBRAIN])
+			var/decl/bodytype/bodytype = target.get_bodytype()
+			if(O.organ_tag == BP_POSIBRAIN && !bodytype?.has_organs[BP_POSIBRAIN])
 				to_chat(user, SPAN_WARNING("There's no place in [target] to fit \the [O.organ_tag]."))
 			else if(O.damage > (O.max_damage * 0.75))
 				to_chat(user, SPAN_WARNING("\The [O.name] [G.is] in no state to be transplanted."))

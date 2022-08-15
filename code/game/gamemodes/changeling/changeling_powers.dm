@@ -279,7 +279,7 @@ var/global/list/possible_changeling_IDs = list("Alpha","Beta","Gamma","Delta","E
 	var/S_name = chosen_dna.speciesName
 	var/decl/species/S_dat = get_species_by_key(S_name)
 	var/changeTime = 2 SECONDS
-	if(mob_size != S_dat.mob_size)
+	if(mob_size != S_dat.default_bodytype.mob_size)
 		src.visible_message(SPAN_WARNING("\The [src]'s body begins to twist, their mass changing rapidly!"))
 		changeTime = 8 SECONDS
 	else

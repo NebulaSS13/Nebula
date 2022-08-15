@@ -121,7 +121,7 @@
 	return 1
 
 /mob/living/carbon/human/breathe()
-	var/species_organ = species.breathing_organ
+	var/species_organ = bodytype.breathing_organ
 
 	if(species_organ)
 		var/active_breaths = 0
@@ -180,10 +180,10 @@
 	..()
 	//Vision
 	var/obj/item/organ/vision
-	if(species.vision_organ)
-		vision = GET_INTERNAL_ORGAN(src, species.vision_organ)
+	if(bodytype.vision_organ)
+		vision = GET_INTERNAL_ORGAN(src, bodytype.vision_organ)
 
-	if(!species.vision_organ) // Presumably if a species has no vision organs, they see via some other means.
+	if(!bodytype.vision_organ) // Presumably if a species has no vision organs, they see via some other means.
 		set_status(STAT_BLIND, 0)
 		blinded =    0
 		set_status(STAT_BLURRY, 0)
@@ -306,7 +306,7 @@
 /mob/living/carbon/human/handle_breath(datum/gas_mixture/breath)
 	if(status_flags & GODMODE)
 		return
-	var/species_organ = species.breathing_organ
+	var/species_organ = bodytype.breathing_organ
 	if(!species_organ)
 		return
 

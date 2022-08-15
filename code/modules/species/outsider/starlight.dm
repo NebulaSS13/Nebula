@@ -1,10 +1,18 @@
 /decl/species/starlight
 	name = "Starlight Base"
-
 	meat_type = null
 	bone_material = null
 	skin_material = null
+	spawn_flags = SPECIES_IS_RESTRICTED
+	available_pronouns = list(/decl/pronouns/neuter)
+	force_cultural_info = list(
+		TAG_CULTURE = /decl/cultural_info/culture/other
+	)
 
+/decl/bodytype/human/starlight
+	icobase = 'icons/mob/human_races/species/starborn/body.dmi'
+	deform = 'icons/mob/human_races/species/starborn/body.dmi'
+	husk_icon = 'icons/mob/human_races/species/starborn/husk.dmi'
 	has_limbs = list(
 		BP_CHEST =  list("path" = /obj/item/organ/external/chest/unbreakable),
 		BP_GROIN =  list("path" = /obj/item/organ/external/groin/unbreakable),
@@ -18,14 +26,10 @@
 		BP_L_FOOT = list("path" = /obj/item/organ/external/foot/unbreakable),
 		BP_R_FOOT = list("path" = /obj/item/organ/external/foot/right/unbreakable)
 		)
-	has_organ = list(
+	has_organs = list(
 		BP_BRAIN = /obj/item/organ/internal/brain/starlight
-		)
-	spawn_flags = SPECIES_IS_RESTRICTED
-	available_pronouns = list(/decl/pronouns/neuter)
-	force_cultural_info = list(
-		TAG_CULTURE = /decl/cultural_info/culture/other
 	)
+	override_organ_types = list(BP_EYES = /obj/item/organ/internal/eyes/blueforged)
 
 /decl/species/starlight/handle_death_check(var/mob/living/carbon/human/H)
 	if(H.health == 0)
@@ -38,9 +42,6 @@
 /decl/species/starlight/starborn
 	name = "Starborn"
 	name_plural = "Starborn"
-	icobase = 'icons/mob/human_races/species/starborn/body.dmi'
-	deform = 'icons/mob/human_races/species/starborn/body.dmi'
-	husk_icon = 'icons/mob/human_races/species/starborn/husk.dmi'
 	description = "Beings of fire and light, split off from a sun deity of unbelievable power."
 
 	blood_color = "#ffff00"
@@ -49,10 +50,11 @@
 	unarmed_attacks = list(/decl/natural_attack/punch/starborn)
 
 	cold_discomfort_level = 300
-	cold_discomfort_strings = list("You feel your fire dying out...",
-								"Your fire begins to shrink away from the cold.",
-								"You feel slow and sluggish from the cold."
-								)
+	cold_discomfort_strings = list(
+		"You feel your fire dying out...",
+		"Your fire begins to shrink away from the cold.",
+		"You feel slow and sluggish from the cold."
+	)
 	cold_level_1 = 260
 	cold_level_2 = 250
 	cold_level_3 = 235
@@ -70,7 +72,6 @@
 	hunger_factor = 0
 	death_message = "dissolves into pure flames!"
 	breath_type = null
-
 
 	total_health = 250
 	body_temperature = T0C + 500 //We are being of fire and light.
@@ -109,8 +110,6 @@
 	toxins_mod = 0
 	radiation_mod = 0
 	species_flags = SPECIES_FLAG_NO_MINOR_CUT | SPECIES_FLAG_NO_SCAN | SPECIES_FLAG_NO_SLIP | SPECIES_FLAG_NO_POISON | SPECIES_FLAG_NO_EMBED | SPECIES_FLAG_NO_TANGLE
-
-	override_organ_types = list(BP_EYES = /obj/item/organ/internal/eyes/blueforged)
 
 /decl/species/starlight/blueforged/handle_death(var/mob/living/carbon/human/H)
 	..()

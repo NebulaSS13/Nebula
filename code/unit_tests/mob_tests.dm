@@ -27,7 +27,7 @@
 		var/mob/living/carbon/human/H = new(T, S.name)
 		if(H.need_breathe())
 			H.apply_effect(20, STUN, 0)
-			var/obj/item/organ/internal/lungs/L = H.get_organ(H.species.breathing_organ, /obj/item/organ/internal/lungs)
+			var/obj/item/organ/internal/lungs/L = H.get_organ(H.bodytype.breathing_organ, /obj/item/organ/internal/lungs)
 			if(L)
 				L.last_successful_breath = -INFINITY
 			test_subjects[S.name] = list(H, damage_check(H, OXY))
@@ -103,7 +103,7 @@ var/global/default_mobloc = null
 			loss = M.getOxyLoss()
 			if(istype(M,/mob/living/carbon/human))
 				var/mob/living/carbon/human/H = M
-				var/obj/item/organ/internal/lungs/L = H.get_organ(H.species.breathing_organ, /obj/item/organ/internal/lungs)
+				var/obj/item/organ/internal/lungs/L = H.get_organ(H.bodytype.breathing_organ, /obj/item/organ/internal/lungs)
 				if(L)
 					loss = L.oxygen_deprivation
 		if(CLONE)
@@ -173,7 +173,7 @@ var/global/default_mobloc = null
 	var/initial_health = H.health
 
 	if(damagetype == OXY && H.need_breathe())
-		var/obj/item/organ/internal/lungs/L = H.get_organ(H.species.breathing_organ, /obj/item/organ/internal/lungs)
+		var/obj/item/organ/internal/lungs/L = H.get_organ(H.bodytype.breathing_organ, /obj/item/organ/internal/lungs)
 		if(L)
 			L.last_successful_breath = -INFINITY
 

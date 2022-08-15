@@ -9,6 +9,17 @@
 	lip_icon =             'mods/species/bayliens/tajaran/icons/lips.dmi'
 	health_hud_intensity = 1.75
 	bodytype_flag =        BODY_FLAG_FELINE
+	has_organs = list(
+		BP_HEART =    /obj/item/organ/internal/heart,
+		BP_STOMACH =  /obj/item/organ/internal/stomach,
+		BP_LUNGS =    /obj/item/organ/internal/lungs,
+		BP_LIVER =    /obj/item/organ/internal/liver,
+		BP_KIDNEYS =  /obj/item/organ/internal/kidneys,
+		BP_BRAIN =    /obj/item/organ/internal/brain,
+		BP_APPENDIX = /obj/item/organ/internal/appendix,
+		BP_EYES =     /obj/item/organ/internal/eyes/taj
+	)
+	override_limb_types = list(BP_TAIL = /obj/item/organ/external/tail/cat)
 
 /decl/bodytype/feline/Initialize()
 	equip_adjust = list(

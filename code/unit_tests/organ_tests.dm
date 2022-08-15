@@ -24,7 +24,7 @@
 
 /datum/unit_test/species_organ_creation/proc/check_internal_organs(var/mob/living/carbon/human/H, var/decl/species/species)
 	. = 1
-	for(var/organ_tag in species.has_organ)
+	for(var/organ_tag in species.default_bodytype.has_organs)
 		var/obj/item/organ/I = GET_INTERNAL_ORGAN(H, organ_tag)
 		if(!istype(I))
 			fail("[species.name] failed to register internal organ for tag \"[organ_tag]\" to organ list.")
@@ -34,7 +34,7 @@
 			fail("[species.name] failed to register internal organ for tag \"[organ_tag]\" to internal_organs.")
 			. = 0
 			continue
-		var/req_type = species.has_organ[organ_tag]
+		var/req_type = species.default_bodytype.has_organs[organ_tag]
 		if(!istype(I, req_type))
 			fail("[species.name] incorrect type of internal organ created for tag \"[organ_tag]\". Expected [req_type], found [I.type].")
 			. = 0
@@ -48,7 +48,7 @@
 
 /datum/unit_test/species_organ_creation/proc/check_external_organs(var/mob/living/carbon/human/H, var/decl/species/species)
 	. = 1
-	for(var/organ_tag in species.has_limbs)
+	for(var/organ_tag in species.default_bodytype.has_limbs)
 		var/obj/item/organ/external/E = GET_EXTERNAL_ORGAN(H, organ_tag)
 		if(!istype(E))
 			fail("[species.name] failed to register external organ for tag \"[organ_tag]\" to organs_by_name.")
@@ -58,7 +58,7 @@
 			fail("[species.name] failed to register external organ for tag \"[organ_tag]\" to organs.")
 			. = 0
 			continue
-		var/list/organ_data = species.has_limbs[organ_tag]
+		var/list/organ_data = species.default_bodytype.has_limbs[organ_tag]
 		var/req_type = organ_data["path"]
 		if(!istype(E, req_type))
 			fail("[species.name] incorrect type of external organ created for tag \"[organ_tag]\". Expected [req_type], found [E.type].")

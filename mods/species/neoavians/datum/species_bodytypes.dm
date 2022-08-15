@@ -5,6 +5,19 @@
 	blood_overlays =    'mods/species/neoavians/icons/blood_avian.dmi'
 	limb_blend =        ICON_MULTIPLY
 	bodytype_flag =     BODY_FLAG_AVIAN
+	mob_size = MOB_SIZE_SMALL
+
+	has_organs = list(
+		BP_STOMACH =  /obj/item/organ/internal/stomach,
+		BP_HEART =    /obj/item/organ/internal/heart,
+		BP_LUNGS =    /obj/item/organ/internal/lungs,
+		BP_LIVER =    /obj/item/organ/internal/liver,
+		BP_KIDNEYS =  /obj/item/organ/internal/kidneys,
+		BP_BRAIN =    /obj/item/organ/internal/brain,
+		BP_EYES =     /obj/item/organ/internal/eyes/avian
+	)
+
+	override_limb_types = list(BP_TAIL = /obj/item/organ/external/tail/avian)
 
 	var/tail =              "tail_avian"
 	var/tail_icon =         'mods/species/neoavians/icons/tail.dmi'

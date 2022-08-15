@@ -129,7 +129,7 @@
 		PRINT_STACK_TRACE("Invalid species. Expected a valid species name as string, was: [log_info_line(specie_name)]")
 
 	bodytype = owner?.bodytype || species.default_bodytype
-	species.resize_organ(src)
+	bodytype.resize_organ(src)
 
 	// Adjust limb health proportinate to total species health.
 	var/total_health_coefficient = scale_max_damage_to_species_health ? (species.total_health / DEFAULT_SPECIES_HEALTH) : 1
@@ -155,8 +155,6 @@
 	STOP_PROCESSING(SSobj, src)
 	QDEL_NULL_LIST(ailments)
 	death_time = REALTIMEOFDAY
-	if(owner?.species?.is_vital_organ(owner, src))
-		owner.death()
 	update_icon()
 
 /obj/item/organ/Process()

@@ -96,13 +96,6 @@
 
 	breathing_sound = 'mods/species/bayliens/unathi/sound/lizard_breathing.ogg'
 
-	override_organ_types = list(
-		BP_EYES = /obj/item/organ/internal/eyes/lizard,
-		BP_BRAIN = /obj/item/organ/internal/brain/lizard
-	)
-
-	override_limb_types = list(BP_TAIL = /obj/item/organ/external/tail/lizard)
-
 	appearance_descriptors = list(
 		/datum/appearance_descriptor/height = 1.25,
 		/datum/appearance_descriptor/build =  1.25

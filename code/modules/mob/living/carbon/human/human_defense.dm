@@ -531,8 +531,8 @@ meteor_act
 ///Returns a number between -1 to 2
 /mob/living/carbon/human/eyecheck()
 	var/total_protection = flash_protection
-	if(species.has_organ[species.vision_organ])
-		var/obj/item/organ/internal/eyes/I = get_organ(species.vision_organ, /obj/item/organ/internal/eyes)
+	if(bodytype.has_organs[bodytype.vision_organ])
+		var/obj/item/organ/internal/eyes/I = get_organ(bodytype.vision_organ, /obj/item/organ/internal/eyes)
 		if(!I?.is_usable())
 			return FLASH_PROTECTION_MAJOR
 		total_protection = I.get_total_protection(flash_protection)
@@ -541,15 +541,15 @@ meteor_act
 	return total_protection
 
 /mob/living/carbon/human/flash_eyes(var/intensity = FLASH_PROTECTION_MODERATE, override_blindness_check = FALSE, affect_silicon = FALSE, visual = FALSE, type = /obj/screen/fullscreen/flash)
-	if(species.has_organ[species.vision_organ])
-		var/obj/item/organ/internal/eyes/I = get_organ(species.vision_organ, /obj/item/organ/internal/eyes)
+	if(bodytype.has_organs[bodytype.vision_organ])
+		var/obj/item/organ/internal/eyes/I = get_organ(bodytype.vision_organ, /obj/item/organ/internal/eyes)
 		if(I)
 			I.additional_flash_effects(intensity)
 	return ..()
 
 /mob/living/carbon/human/proc/getFlashMod()
-	if(species.vision_organ)
-		var/obj/item/organ/internal/eyes/I = get_organ(species.vision_organ, /obj/item/organ/internal/eyes)
+	if(bodytype.vision_organ)
+		var/obj/item/organ/internal/eyes/I = get_organ(bodytype.vision_organ, /obj/item/organ/internal/eyes)
 		if(istype(I))
 			return I.flash_mod
 	return species.flash_mod

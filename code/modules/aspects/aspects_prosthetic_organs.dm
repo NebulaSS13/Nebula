@@ -9,9 +9,11 @@
 
 /decl/aspect/prosthetic_organ/is_available_to(datum/preferences/pref)
 	. = ..()
-	if(. && pref.species)
+	if(. && pref.bodytype && pref.species)
 		var/decl/species/species = global.all_species[pref.species]
-		return istype(species) && (apply_to_organ in species.has_organ) && !(species.species_flags & SPECIES_NO_ROBOTIC_INTERNAL_ORGANS)
+		if(istype(species))
+			var/decl/bodytype/bodytype = species.get_bodytype_by_name(pref.bodytype)
+			return bodytype && (apply_to_organ in bodytype.has_organs) && !(species.species_flags & SPECIES_NO_ROBOTIC_INTERNAL_ORGANS)
 
 /decl/aspect/prosthetic_organ/applies_to_organ(var/organ)
 	return apply_to_organ && organ == apply_to_organ

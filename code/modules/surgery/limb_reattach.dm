@@ -19,7 +19,7 @@
 		return affected
 	else if(ishuman(target))
 		var/mob/living/carbon/human/H = target
-		var/list/organ_data = H.species.has_limbs["[target_zone]"]
+		var/list/organ_data = H.bodytype.has_limbs["[target_zone]"]
 		return !isnull(organ_data)
 
 //////////////////////////////////////////////////////////////////

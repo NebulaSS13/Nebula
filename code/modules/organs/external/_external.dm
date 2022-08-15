@@ -1593,3 +1593,6 @@ Note that amputating the affected organ does in fact remove the infection from t
 			owner.gib()
 	else
 		return ..()
+
+/obj/item/organ/external/proc/is_vital()
+	return FALSE

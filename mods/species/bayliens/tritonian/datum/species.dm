@@ -21,9 +21,4 @@
 		/decl/natural_attack/punch, 
 		/decl/natural_attack/bite/sharp
 	)
-
-	override_organ_types = list(
-		BP_LUNGS = /obj/item/organ/internal/lungs/gills
-	)
-
 	appearance_flags = HAS_HAIR_COLOR | HAS_SKIN_TONE_TRITON | HAS_LIPS | HAS_UNDERWEAR | HAS_EYE_COLOR

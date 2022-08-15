@@ -85,8 +85,8 @@
 
 	scan["missing_organs"] = list()
 
-	for(var/organ_name in H.species.has_organ)
-		if(!locate(H.species.has_organ[organ_name]) in internal_organs)
+	for(var/organ_name in H.bodytype.has_organs)
+		if(!locate(H.bodytype.has_organs[organ_name]) in internal_organs)
 			scan["missing_organs"] += organ_name
 	if(H.sdisabilities & BLINDED)
 		scan["blind"] = TRUE

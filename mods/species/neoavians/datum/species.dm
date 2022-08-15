@@ -40,7 +40,6 @@
 	)
 
 	total_health = 120
-	mob_size = MOB_SIZE_SMALL
 	holder_type = /obj/item/holder
 	gluttonous = GLUT_TINY
 	blood_volume = 320
@@ -56,18 +55,6 @@
 		"Your feathers prickle in the heat.",
 		"You feel uncomfortably warm.",
 		)
-
-	has_organ = list(
-		BP_STOMACH =  /obj/item/organ/internal/stomach,
-		BP_HEART =    /obj/item/organ/internal/heart,
-		BP_LUNGS =    /obj/item/organ/internal/lungs,
-		BP_LIVER =    /obj/item/organ/internal/liver,
-		BP_KIDNEYS =  /obj/item/organ/internal/kidneys,
-		BP_BRAIN =    /obj/item/organ/internal/brain,
-		BP_EYES =     /obj/item/organ/internal/eyes/avian
-	)
-
-	override_limb_types = list(BP_TAIL = /obj/item/organ/external/tail/avian)
 
 	unarmed_attacks = list(
 		/decl/natural_attack/bite/sharp,

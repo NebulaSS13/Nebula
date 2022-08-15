@@ -22,37 +22,6 @@
 
 	blood_types = list(/decl/blood_type/hemolymph)
 
-	has_organ = list(
-		BP_BRAIN =             /obj/item/organ/internal/brain/insectoid/serpentid,
-		BP_EYES =              /obj/item/organ/internal/eyes/insectoid/serpentid,
-		BP_TRACH =             /obj/item/organ/internal/lungs/insectoid/serpentid,
-		BP_HEART =             /obj/item/organ/internal/heart/open,
-		BP_LIVER =             /obj/item/organ/internal/liver/insectoid/serpentid,
-		BP_STOMACH =           /obj/item/organ/internal/stomach/insectoid,
-		BP_SYSTEM_CONTROLLER = /obj/item/organ/internal/controller
-	)
-
-	has_limbs = list(
-		BP_CHEST =        list("path" = /obj/item/organ/external/chest/insectoid/serpentid),
-		BP_GROIN =        list("path" = /obj/item/organ/external/groin/insectoid/serpentid),
-		BP_HEAD =         list("path" = /obj/item/organ/external/head/insectoid/serpentid),
-		BP_L_ARM =        list("path" = /obj/item/organ/external/arm/insectoid),
-		BP_L_HAND =       list("path" = /obj/item/organ/external/hand/insectoid),
-		BP_L_HAND_UPPER = list("path" = /obj/item/organ/external/hand/insectoid/upper),
-		BP_R_ARM =        list("path" = /obj/item/organ/external/arm/right/insectoid),
-		BP_R_HAND =       list("path" = /obj/item/organ/external/hand/right/insectoid),
-		BP_R_HAND_UPPER = list("path" = /obj/item/organ/external/hand/right/insectoid/upper),
-		BP_R_LEG =        list("path" = /obj/item/organ/external/leg/right/insectoid),
-		BP_L_LEG =        list("path" = /obj/item/organ/external/leg/insectoid),
-		BP_L_FOOT =       list("path" = /obj/item/organ/external/foot/insectoid),
-		BP_R_FOOT =       list("path" = /obj/item/organ/external/foot/right/insectoid)
-		)
-
-	limb_mapping = list(
-		BP_L_HAND = list(BP_L_HAND, BP_L_HAND_UPPER),
-		BP_R_HAND = list(BP_R_HAND, BP_R_HAND_UPPER)
-	)
-
 	hidden_from_codex = TRUE
 	silent_steps = TRUE
 	age_descriptor = /datum/appearance_descriptor/age/serpentid
@@ -88,7 +57,6 @@
 		rad = 0.5*ARMOR_RAD_MINOR
 		)
 	gluttonous = GLUT_SMALLER
-	mob_size = MOB_SIZE_LARGE
 	strength = STR_HIGH
 	breath_pressure = 25
 	blood_volume = 840
@@ -102,7 +70,6 @@
 	bump_flag = HEAVY
 	push_flags = ALLMOBS
 	swap_flags = ALLMOBS
-	breathing_organ = BP_TRACH
 	move_trail = /obj/effect/decal/cleanable/blood/tracks/snake
 
 	unarmed_attacks = list(/decl/natural_attack/serpentid)
@@ -194,7 +161,7 @@
 
 			var/image_key = "[H.bodytype.get_icon_cache_uid(H)]"
 
-			for(var/organ_tag in H.species.has_limbs)
+			for(var/organ_tag in H.bodytype.has_limbs)
 				var/obj/item/organ/external/part = H.get_organ(organ_tag)
 				if(!part)
 					image_key += "0"

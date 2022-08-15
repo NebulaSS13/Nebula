@@ -3,6 +3,12 @@
 	icon_base =         'mods/species/utility_frames/icons/body.dmi'
 	bodytype_category = BODYTYPE_HUMANOID
 	limb_blend =        ICON_MULTIPLY
+	override_limb_types = list(BP_HEAD = /obj/item/organ/external/head/utility_frame)
+	has_organs = list(
+		BP_POSIBRAIN = /obj/item/organ/internal/posibrain,
+		BP_EYES      = /obj/item/organ/internal/eyes/robot/utility_frame,
+		BP_CELL = /obj/item/organ/internal/cell
+	)
 
 /decl/bodytype/utility_frame/Initialize()
 	equip_adjust = list(

@@ -22,11 +22,11 @@
 	. = ..()
 	if(. && pref.species)
 		var/decl/species/species = global.all_species[pref.species]
-		if(!istype(species))
-			return FALSE
-		for(var/limb in apply_to_limbs)
-			if(!(limb in species.has_limbs))
-				return FALSE
+		var/decl/bodytype/bodytype = species?.get_bodytype_by_name(pref.bodytype)
+		if(istype(bodytype))
+			for(var/limb in apply_to_limbs)
+				if(!(limb in bodytype.has_limbs))
+					return FALSE
 
 /decl/aspect/amputation/apply(var/mob/living/carbon/human/holder)
 	. = ..()

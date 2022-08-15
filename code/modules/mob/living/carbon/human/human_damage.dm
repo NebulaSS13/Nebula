@@ -129,7 +129,7 @@
 	if(!need_breathe())
 		return 0
 	else
-		var/obj/item/organ/internal/lungs/breathe_organ = get_organ(species.breathing_organ, /obj/item/organ/internal/lungs)
+		var/obj/item/organ/internal/lungs/breathe_organ = get_organ(bodytype.breathing_organ, /obj/item/organ/internal/lungs)
 		if(!breathe_organ)
 			return maxHealth/2
 		return breathe_organ.get_oxygen_deprivation()
@@ -144,7 +144,7 @@
 	if(!need_breathe())
 		return
 	var/heal = amount < 0
-	var/obj/item/organ/internal/lungs/breathe_organ = get_organ(species.breathing_organ, /obj/item/organ/internal/lungs)
+	var/obj/item/organ/internal/lungs/breathe_organ = get_organ(bodytype.breathing_organ, /obj/item/organ/internal/lungs)
 	if(breathe_organ)
 		if(heal)
 			breathe_organ.remove_oxygen_deprivation(abs(amount))
@@ -319,7 +319,7 @@ In most cases it makes more sense to use apply_damage() instead! And make sure t
 This function restores all organs.
 */
 /mob/living/carbon/human/restore_all_organs(var/ignore_prosthetic_prefs)
-	species?.create_missing_organs(src)
+	bodytype?.create_missing_organs(src)
 	for(var/bodypart in global.all_limb_tags_by_depth)
 		var/obj/item/organ/external/current_organ = GET_EXTERNAL_ORGAN(src, bodypart)
 		if(current_organ)

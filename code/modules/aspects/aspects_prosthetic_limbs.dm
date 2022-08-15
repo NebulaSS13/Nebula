@@ -58,7 +58,7 @@
 	if(. && apply_to_limb)
 		var/obj/item/organ/external/E = GET_EXTERNAL_ORGAN(holder, apply_to_limb)
 		if(!istype(E))
-			var/list/organ_data = holder.species.has_limbs[apply_to_limb]
+			var/list/organ_data = holder.bodytype.has_limbs[apply_to_limb]
 			if("path" in organ_data)
 				var/limb_path = organ_data["path"]
 				E = new limb_path(holder)

@@ -63,12 +63,6 @@
 	available_cultural_info = list(
 		TAG_CULTURE = list(/decl/cultural_info/culture/synthetic)
 	)
-	override_limb_types = list(BP_HEAD = /obj/item/organ/external/head/utility_frame)
-	has_organ = list(
-		BP_POSIBRAIN = /obj/item/organ/internal/posibrain,
-		BP_EYES      = /obj/item/organ/internal/eyes/robot/utility_frame,
-		BP_CELL = /obj/item/organ/internal/cell
-	)
 
 	exertion_effect_chance = 10
 	exertion_charge_scale = 1

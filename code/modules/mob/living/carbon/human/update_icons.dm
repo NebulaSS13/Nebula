@@ -339,7 +339,7 @@ var/global/list/damage_icon_parts = list()
 		icon_key += "[lip_style]"
 	else
 		icon_key += "nolips"
-	var/obj/item/organ/internal/eyes/eyes = get_organ((species.vision_organ || BP_EYES), /obj/item/organ/internal/eyes)
+	var/obj/item/organ/internal/eyes/eyes = get_organ((bodytype.vision_organ || BP_EYES), /obj/item/organ/internal/eyes)
 	icon_key += istype(eyes) ? eyes.eye_colour : COLOR_BLACK
 
 	for(var/organ_tag in global.all_limb_tags)

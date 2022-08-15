@@ -6,6 +6,30 @@
 	damage_overlays =   'mods/species/bayliens/adherent/icons/damage_overlay.dmi'
 	blood_overlays =    'mods/species/bayliens/adherent/icons/blood_overlays.dmi'
 	antaghud_offset_y = 14
+	mob_size =                MOB_SIZE_LARGE
+
+	has_limbs = list(
+		BP_CHEST =  list("path" = /obj/item/organ/external/chest/crystal),
+		BP_GROIN =  list("path" = /obj/item/organ/external/groin/crystal),
+		BP_HEAD =   list("path" = /obj/item/organ/external/head/crystal),
+		BP_L_ARM =  list("path" = /obj/item/organ/external/arm/crystal),
+		BP_R_ARM =  list("path" = /obj/item/organ/external/arm/right/crystal),
+		BP_L_HAND = list("path" = /obj/item/organ/external/hand/crystal),
+		BP_R_HAND = list("path" = /obj/item/organ/external/hand/right/crystal),
+		BP_L_LEG =  list("path" = /obj/item/organ/external/tendril),
+		BP_R_LEG =  list("path" = /obj/item/organ/external/tendril/two),
+		BP_L_FOOT = list("path" = /obj/item/organ/external/tendril/three),
+		BP_R_FOOT = list("path" = /obj/item/organ/external/tendril/four)
+	)
+
+	has_organs = list(
+		BP_BRAIN =        /obj/item/organ/internal/brain/adherent,
+		BP_EYES =         /obj/item/organ/internal/eyes/adherent,
+		BP_JETS =         /obj/item/organ/internal/powered/jets,
+		BP_FLOAT =        /obj/item/organ/internal/powered/float,
+		BP_CELL =         /obj/item/organ/internal/cell/adherent,
+		BP_COOLING_FINS = /obj/item/organ/internal/powered/cooling_fins
+	)
 
 /decl/bodytype/adherent/Initialize()
 	equip_adjust = list(

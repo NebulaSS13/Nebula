@@ -140,16 +140,10 @@
 		if(limbs)
 			limbs = limbs.Copy()
 		for(var/obj/item/organ/external/limb in shuffle(limbs))
-			if(!istype(limb) || !(limb.limb_flags & ORGAN_FLAG_CAN_AMPUTATE))
+			if(!istype(limb) || !(limb.limb_flags & ORGAN_FLAG_CAN_AMPUTATE) || limb.is_vital())
 				continue
-			var/is_vital = FALSE
-			for(var/obj/item/organ/internal/I in limb.internal_organs)
-				if(H.species?.is_vital_organ(H, I))
-					is_vital = TRUE
-					break
-			if(!is_vital)
-				E = limb
-				break
+			E = limb
+			break
 		if(E && !armour_prob)
 			visible_message(SPAN_DANGER("The crystalline strands slice straight through \the [H]'s [E.amputation_point || E.name]!"))
 			E.dismember()

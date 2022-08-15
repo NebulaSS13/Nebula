@@ -434,8 +434,8 @@
 	set_flavor()
 
 /mob/living/carbon/human/proc/get_darksight_range()
-	if(species.vision_organ)
-		var/obj/item/organ/internal/eyes/I = get_organ(species.vision_organ, /obj/item/organ/internal/eyes)
+	if(bodytype.vision_organ)
+		var/obj/item/organ/internal/eyes/I = get_organ(bodytype.vision_organ, /obj/item/organ/internal/eyes)
 		if(istype(I))
 			return I.darksight_range
 	return species.darksight_range
@@ -540,7 +540,7 @@
 
 /mob/living/carbon/human/revive()
 
-	species.create_missing_organs(src) // Reset our organs/limbs.
+	bodytype.create_missing_organs(src) // Reset our organs/limbs.
 	restore_all_organs()       // Reapply robotics/amputated status from preferences.
 	reset_blood()
 
@@ -668,7 +668,6 @@
 	if(species.holder_type)
 		holder_type = species.holder_type
 	maxHealth = species.total_health
-	mob_size = species.mob_size
 	remove_extension(src, /datum/extension/armor)
 	if(species.natural_armour_values)
 		set_extension(src, /datum/extension/armor, species.natural_armour_values)
@@ -682,6 +681,7 @@
 	if(!new_bodytype)
 		new_bodytype = species.get_bodytype_by_pronouns(new_pronouns)
 	set_bodytype(new_bodytype, FALSE)
+	mob_size = bodytype.mob_size
 
 	available_maneuvers = species.maneuvers.Copy()
 
@@ -983,7 +983,7 @@
 
 	if(affecting && BP_IS_PROSTHETIC(affecting))
 		return 0
-	return (species && species.has_organ[organ_check])
+	return (species && bodytype.has_organs[organ_check])
 
 /mob/living/carbon/human/can_feel_pain(var/obj/item/organ/check_organ)
 	if(isSynthetic())
@@ -1001,7 +1001,7 @@
 		. *= (!BP_IS_PROSTHETIC(H)) ? pulse()/PULSE_NORM : 1.5
 
 /mob/living/carbon/human/need_breathe()
-	if(!(mNobreath in mutations) && species.breathing_organ && should_have_organ(species.breathing_organ))
+	if(!(mNobreath in mutations) && bodytype.breathing_organ && should_have_organ(bodytype.breathing_organ))
 		return 1
 	else
 		return 0
@@ -1070,7 +1070,7 @@
 		return
 	var/obj/item/organ/internal/heart/heart = get_organ(BP_HEART, /obj/item/organ/internal/heart)
 	if(heart && !(heart.status & ORGAN_DEAD))
-		var/species_organ = species.breathing_organ
+		var/species_organ = bodytype.breathing_organ
 		var/active_breaths = 0
 		if(species_organ)
 			var/obj/item/organ/internal/lungs/L = get_organ(species_organ, /obj/item/organ/internal/lungs)
@@ -1363,7 +1363,7 @@
 
 	species.handle_pre_spawn(src)
 	if(!LAZYLEN(get_external_organs()))
-		species.create_missing_organs(src) //Syncs DNA when adding organs
+		bodytype.create_missing_organs(src) //Syncs DNA when adding organs
 	apply_species_cultural_info()
 	apply_species_appearance()
 	species.handle_post_spawn(src)
