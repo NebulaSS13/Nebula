@@ -8,7 +8,7 @@
 	bandages_icon =        'icons/mob/bandage.dmi'
 	lip_icon =             'mods/species/bayliens/tajaran/icons/lips.dmi'
 	health_hud_intensity = 1.75
-	bodytype_flag =        BODY_FLAG_FELINE
+	bodytype_flag =        BODYTYPE_EQUIP_FLAG_FELINE
 	has_organs = list(
 		BP_HEART =    /obj/item/organ/internal/heart,
 		BP_STOMACH =  /obj/item/organ/internal/stomach,

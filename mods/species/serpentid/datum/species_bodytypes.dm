@@ -6,7 +6,7 @@
 	limb_blend =        ICON_MULTIPLY
 	bodytype_category = BODYTYPE_SNAKE
 	antaghud_offset_y = 8
-	bodytype_flag =     BODY_FLAG_SNAKE
+	bodytype_flag =     BODYTYPE_EQUIP_FLAG_SNAKE
 	breathing_organ = BP_TRACH
 	has_organs = list(
 		BP_BRAIN =             /obj/item/organ/internal/brain/insectoid/serpentid,

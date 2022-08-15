@@ -3,7 +3,7 @@
 	name = "void helmet"
 	desc = "A high-tech dark red space suit helmet. Used for AI satellite maintenance."
 	icon = 'icons/clothing/spacesuit/void/nasa/helmet.dmi'
-	bodytype_equip_flags = BODY_FLAG_HUMANOID
+	bodytype_equip_flags = BODYTYPE_EQUIP_FLAG_HUMANOID
 	heat_protection = SLOT_HEAD
 	armor = list(
 		melee = ARMOR_MELEE_RESISTANT,
@@ -22,7 +22,7 @@
 /obj/item/clothing/suit/space/void
 	name = "voidsuit"
 	icon = 'icons/clothing/spacesuit/void/nasa/suit.dmi'
-	bodytype_equip_flags = BODY_FLAG_HUMANOID
+	bodytype_equip_flags = BODYTYPE_EQUIP_FLAG_HUMANOID
 	w_class = ITEM_SIZE_HUGE//bulky item
 	desc = "A high-tech dark red space suit. Used for AI satellite maintenance."
 	armor = list(

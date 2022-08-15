@@ -4,7 +4,7 @@
 	icon_base =         'mods/species/ascent/icons/species/body/alate/body.dmi'
 	blood_overlays =    'mods/species/ascent/icons/species/body/alate/blood_overlays.dmi'
 	associated_gender = MALE
-	bodytype_flag =     BODY_FLAG_ALATE
+	bodytype_flag =     BODYTYPE_EQUIP_FLAG_ALATE
 	body_appearance_flags = 0
 
 	has_limbs = list(
@@ -51,7 +51,7 @@
 	antaghud_offset_y = 18
 	antaghud_offset_x = 4
 	associated_gender = FEMALE
-	bodytype_flag =     BODY_FLAG_GYNE
+	bodytype_flag =     BODYTYPE_EQUIP_FLAG_GYNE
 	override_limb_types = list(
 		BP_HEAD = /obj/item/organ/external/head/insectoid/mantid,
 		BP_GROIN = /obj/item/organ/external/groin/insectoid/mantid/gyne,

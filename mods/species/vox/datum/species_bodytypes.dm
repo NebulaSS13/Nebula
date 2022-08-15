@@ -5,7 +5,7 @@
 	icon_deformed =     'mods/species/vox/icons/body/deformed_body.dmi'
 	husk_icon =         'mods/species/vox/icons/body/husk.dmi'
 	blood_overlays =        'mods/species/vox/icons/body/blood_overlays.dmi'
-	bodytype_flag =     BODY_FLAG_VOX
+	bodytype_flag =     BODYTYPE_EQUIP_FLAG_VOX
 	override_limb_types = list(
 		BP_GROIN = /obj/item/organ/external/groin/vox
 	)

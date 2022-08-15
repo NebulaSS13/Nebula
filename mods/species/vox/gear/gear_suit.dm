@@ -1,7 +1,7 @@
 /obj/item/clothing/suit/space/void/Initialize()
 	. = ..()
-	if(bodytype_equip_flags & BODY_FLAG_EXCLUDE)
-		bodytype_equip_flags |= BODY_FLAG_VOX
+	if(bodytype_equip_flags & BODYTYPE_EQUIP_FLAG_EXCLUDE)
+		bodytype_equip_flags |= BODYTYPE_EQUIP_FLAG_VOX
 
 /obj/item/clothing/suit/space/vox
 	name = "alien pressure suit"
@@ -29,7 +29,7 @@
 	siemens_coefficient = 0.6
 	heat_protection = SLOT_UPPER_BODY|SLOT_LOWER_BODY|SLOT_LEGS|SLOT_FEET|SLOT_ARMS|SLOT_HANDS
 	max_heat_protection_temperature = SPACE_SUIT_MAX_HEAT_PROTECTION_TEMPERATURE
-	bodytype_equip_flags = BODY_FLAG_VOX
+	bodytype_equip_flags = BODYTYPE_EQUIP_FLAG_VOX
 	flags_inv = (HIDEJUMPSUIT|HIDETAIL)
 
 /obj/item/clothing/suit/space/vox/Initialize()
@@ -80,5 +80,5 @@
 		laser = ARMOR_LASER_MINOR,
 		bomb = ARMOR_BOMB_PADDED) //Higher melee armor versus lower everything else.
 	body_parts_covered = SLOT_UPPER_BODY|SLOT_ARMS|SLOT_LOWER_BODY|SLOT_LEGS
-	bodytype_equip_flags = BODY_FLAG_VOX
+	bodytype_equip_flags = BODYTYPE_EQUIP_FLAG_VOX
 	siemens_coefficient = 1 //Its literally metal

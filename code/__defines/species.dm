@@ -1,3 +1,9 @@
+#define SPECIES_HUMAN  "Human"
+// Species names/keys
+#define SPECIES_MONKEY "Monkey"
+#define SPECIES_ALIEN  "Humanoid"
+#define SPECIES_GOLEM  "Golem"
+
 // Species flags.
 #define SPECIES_FLAG_NO_MINOR_CUT       BITFLAG(0)  // Can step on broken glass with no ill-effects. Either thick skin, cut resistant (slimes) or incorporeal (shadows)
 #define SPECIES_FLAG_IS_PLANT           BITFLAG(1)  // Is a treeperson.
@@ -13,8 +19,17 @@
 #define SPECIES_FLAG_SYNTHETIC          BITFLAG(11) // This species is synthetic/robotic and spawns with prosthetic limbs.
 
 // Body flags
+#define BODYTYPE_EQUIP_FLAG_EXCLUDE  BITFLAG(0)
+#define BODYTYPE_EQUIP_FLAG_HUMANOID BITFLAG(1)
+#define BODYTYPE_EQUIP_FLAG_MONKEY   BITFLAG(2)
+
+#define BODYTYPE_HUMANOID "humanoid body"
+#define BODYTYPE_OTHER    "alien body"
+#define BODYTYPE_MONKEY   "small humanoid body"
+
 #define BODY_FLAG_NO_PAIN             BITFLAG(1) // Cannot suffer halloss/recieves deceptive health indicator.
 #define BODY_FLAG_CAN_INGEST_REAGENTS BITFLAG(2) // Can eat food/drink drinks
+
 // Species spawn flags
 #define SPECIES_IS_WHITELISTED             BITFLAG(0) // Must be whitelisted to play.
 #define SPECIES_IS_RESTRICTED              BITFLAG(1) // Is not a core/normally playable species. (castes, mutantraces)

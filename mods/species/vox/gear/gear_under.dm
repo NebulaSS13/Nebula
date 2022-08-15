@@ -1,6 +1,6 @@
 /obj/item/clothing/under/vox
 	has_sensor = 0
-	bodytype_equip_flags = BODY_FLAG_VOX
+	bodytype_equip_flags = BODYTYPE_EQUIP_FLAG_VOX
 
 /obj/item/clothing/under/vox/vox_casual
 	name = "alien clothing"
