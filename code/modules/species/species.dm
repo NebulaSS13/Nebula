@@ -288,7 +288,7 @@ var/global/const/DEFAULT_SPECIES_HEALTH = 200
 		codex_traits += "<li>Has excellent traction.</li>"
 	if(species_flags & SPECIES_FLAG_NO_POISON)
 		codex_traits += "<li>Immune to most poisons.</li>"
-	if(default_bodytype.body_appearance_flags & HAS_A_SKIN_TONE)
+	if(default_bodytype.body_appearance_flags & HAS_SKIN_TONE)
 		codex_traits += "<li>Has a variety of skin tones.</li>"
 	if(default_bodytype.body_appearance_flags & HAS_SKIN_COLOR)
 		codex_traits += "<li>Has a variety of skin colours.</li>"

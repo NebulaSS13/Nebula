@@ -137,7 +137,7 @@
 	. += "Blood Type: <a href='?src=\ref[src];blood_type=1'>[pref.b_type]</a><br>"
 
 	var/decl/bodytype/mob_body = mob_species?.get_bodytype_by_name(pref.bodytype)
-	if(has_flag(mob_body, HAS_A_SKIN_TONE))
+	if(has_flag(mob_body, HAS_SKIN_TONE))
 		. += "Skin Tone: <a href='?src=\ref[src];skin_tone=1'>[-pref.skin_tone + 35]/[mob_body.max_skin_tone]</a><br>"
 	. += "</td></tr></table><hr/>"
 
@@ -273,10 +273,10 @@
 			return TOPIC_REFRESH_UPDATE_PREVIEW
 
 	else if(href_list["skin_tone"])
-		if(!has_flag(mob_body, HAS_A_SKIN_TONE))
+		if(!has_flag(mob_body, HAS_SKIN_TONE))
 			return TOPIC_NOACTION
 		var/new_s_tone = input(user, "Choose your character's skin-tone. Lower numbers are lighter, higher are darker. Range: 1 to [mob_body.max_skin_tone]", CHARACTER_PREFERENCE_INPUT_TITLE, (-pref.skin_tone) + 35) as num|null
-		if(new_s_tone && has_flag(mob_body, HAS_A_SKIN_TONE) && CanUseTopic(user))
+		if(new_s_tone && has_flag(mob_body, HAS_SKIN_TONE) && CanUseTopic(user))
 			pref.skin_tone = 35 - max(min(round(new_s_tone), mob_body.max_skin_tone), 1)
 		return TOPIC_REFRESH_UPDATE_PREVIEW
 

@@ -5,14 +5,14 @@
 
 	available_bodytypes = list(
 		/decl/bodytype/human/tritonian,
-		/decl/bodytype/human/masculine/tritonian
+		/decl/bodytype/human/tritonian/masculine
 	)
 
 	slowdown   = 0.5
 	oxy_mod    = 0.5
 	toxins_mod = 1.5
 
-	body_temperature =    302
+	body_temperature = 302
 	water_soothe_amount = 5
 
 	unarmed_attacks = list(

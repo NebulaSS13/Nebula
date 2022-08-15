@@ -111,7 +111,7 @@
 	return TRUE
 
 /mob/living/carbon/human/proc/change_skin_tone(var/tone)
-	if(skin_tone == tone || !(bodytype.body_appearance_flags & HAS_A_SKIN_TONE))
+	if(skin_tone == tone || !(bodytype.body_appearance_flags & HAS_SKIN_TONE))
 		return
 	skin_tone = tone
 	force_update_limbs()

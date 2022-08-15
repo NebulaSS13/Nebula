@@ -37,17 +37,13 @@
 #define SPECIES_NO_ROBOTIC_INTERNAL_ORGANS BITFLAG(3) // Species cannot start with robotic organs or have them attached.
 
 // Species appearance flags
-#define HAS_SKIN_TONE_NORMAL  BITFLAG(0)  // Skin tone selectable in chargen for baseline humans (0-220)
-#define HAS_SKIN_COLOR        BITFLAG(1)  // Skin colour selectable in chargen. (RGB)
-#define HAS_LIPS              BITFLAG(2)  // Lips are drawn onto the mob icon. (lipstick)
-#define HAS_UNDERWEAR         BITFLAG(3)  // Underwear is drawn onto the mob icon.
-#define HAS_EYE_COLOR         BITFLAG(4)  // Eye colour selectable in chargen. (RGB)
-#define HAS_HAIR_COLOR        BITFLAG(5)  // Hair colour selectable in chargen. (RGB)
-#define RADIATION_GLOWS       BITFLAG(6)  // Radiation causes this character to glow.
-#define HAS_SKIN_TONE_GRAV    BITFLAG(7)  // Skin tone selectable in chargen for grav-adapted humans (0-100)
-#define HAS_SKIN_TONE_SPCR    BITFLAG(8)  // Skin tone selectable in chargen for spacer humans (0-165)
-#define HAS_SKIN_TONE_TRITON  BITFLAG(9) 
-#define HAS_A_SKIN_TONE (HAS_SKIN_TONE_NORMAL | HAS_SKIN_TONE_GRAV | HAS_SKIN_TONE_SPCR | HAS_SKIN_TONE_TRITON) // Species has a numeric skintone
+#define HAS_SKIN_TONE         BITFLAG(0) // Species has a numeric skintone
+#define HAS_SKIN_COLOR        BITFLAG(1) // Skin colour selectable in chargen. (RGB)
+#define HAS_LIPS              BITFLAG(2) // Lips are drawn onto the mob icon. (lipstick)
+#define HAS_UNDERWEAR         BITFLAG(3) // Underwear is drawn onto the mob icon.
+#define HAS_EYE_COLOR         BITFLAG(4) // Eye colour selectable in chargen. (RGB)
+#define HAS_HAIR_COLOR        BITFLAG(5) // Hair colour selectable in chargen. (RGB)
+#define RADIATION_GLOWS       BITFLAG(6) // Radiation causes this character to glow.
 
 // Skin Defines
 #define SKIN_NORMAL 0

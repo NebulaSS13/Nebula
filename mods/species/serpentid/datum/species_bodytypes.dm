@@ -17,7 +17,7 @@
 		BP_STOMACH =           /obj/item/organ/internal/stomach/insectoid,
 		BP_SYSTEM_CONTROLLER = /obj/item/organ/internal/controller
 	)
-	body_appearance_flags = HAS_SKIN_COLOR | HAS_EYE_COLOR | HAS_SKIN_TONE_NORMAL
+	body_appearance_flags = HAS_SKIN_COLOR | HAS_EYE_COLOR | HAS_SKIN_TONE
 	has_limbs = list(
 		BP_CHEST =        list("path" = /obj/item/organ/external/chest/insectoid/serpentid),
 		BP_GROIN =        list("path" = /obj/item/organ/external/groin/insectoid/serpentid),

@@ -9,7 +9,7 @@
 	limb_icon_intensity = 0.7
 	associated_gender =   FEMALE
 	uniform_state_modifier = "f"
-	body_appearance_flags = HAS_HAIR_COLOR | HAS_SKIN_TONE_NORMAL | HAS_LIPS | HAS_UNDERWEAR | HAS_EYE_COLOR
+	body_appearance_flags = HAS_HAIR_COLOR | HAS_SKIN_TONE | HAS_LIPS | HAS_UNDERWEAR | HAS_EYE_COLOR
 
 /decl/bodytype/human/masculine
 	name =                "masculine"

@@ -19,12 +19,12 @@ var/global/list/limb_icon_cache = list()
 	bodytype = human.bodytype
 	if(BP_IS_PROSTHETIC(src) && model)
 		var/decl/bodytype/prosthetic/franchise = GET_DECL(model)
-		if(!franchise || !(franchise.body_appearance_flags & HAS_A_SKIN_TONE))
+		if(!franchise || !(franchise.body_appearance_flags & HAS_SKIN_TONE))
 			return
 		skin_blend = franchise.limb_blend
 	if(species && human.species && species.name != human.species.name)
 		return
-	if(!isnull(human.skin_tone) && (human.bodytype.body_appearance_flags & HAS_A_SKIN_TONE))
+	if(!isnull(human.skin_tone) && (human.bodytype.body_appearance_flags & HAS_SKIN_TONE))
 		skin_tone = human.skin_tone
 	if(human.bodytype.body_appearance_flags & HAS_SKIN_COLOR)
 		skin_colour = human.skin_colour
@@ -35,9 +35,9 @@ var/global/list/limb_icon_cache = list()
 	hair_colour = rgb(dna.GetUIValue(DNA_UI_HAIR_R),dna.GetUIValue(DNA_UI_HAIR_G),dna.GetUIValue(DNA_UI_HAIR_B))
 	if(BP_IS_PROSTHETIC(src) && model)
 		var/decl/bodytype/prosthetic/franchise = GET_DECL(model)
-		if(!franchise || !(franchise.body_appearance_flags & HAS_A_SKIN_TONE))
+		if(!franchise || !(franchise.body_appearance_flags & HAS_SKIN_TONE))
 			return
-	if(!isnull(dna.GetUIValue(DNA_UI_SKIN_TONE)) && (bodytype.body_appearance_flags & HAS_A_SKIN_TONE))
+	if(!isnull(dna.GetUIValue(DNA_UI_SKIN_TONE)) && (bodytype.body_appearance_flags & HAS_SKIN_TONE))
 		skin_tone = dna.GetUIValue(DNA_UI_SKIN_TONE)
 	if(bodytype.body_appearance_flags & HAS_SKIN_COLOR)
 		skin_colour = rgb(dna.GetUIValue(DNA_UI_SKIN_R), dna.GetUIValue(DNA_UI_SKIN_G), dna.GetUIValue(DNA_UI_SKIN_B))
