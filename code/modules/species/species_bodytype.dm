@@ -22,6 +22,7 @@ var/global/list/bodytypes_by_category = list()
 	var/icon_cache_uid
 	var/max_skin_tone = 220
 	var/body_appearance_flags = 0      // Appearance/display related features.
+	var/body_flags = BODY_FLAG_CAN_INGEST_REAGENTS
 
 	var/manual_dexterity = DEXTERITY_FULL
 
@@ -34,6 +35,8 @@ var/global/list/bodytypes_by_category = list()
 
 	var/antaghud_offset_x = 0                 // As above, but specifically for the antagHUD indicator.
 	var/antaghud_offset_y = 0                 // As above, but specifically for the antagHUD indicator.
+
+	var/limb_tech = "{'biotech':1}" // What tech levels should limbs of this type use/need?
 
 	var/list/prone_overlay_offset = list(0, 0) // amount to shift overlays when lying
 
@@ -66,6 +69,14 @@ var/global/list/bodytypes_by_category = list()
 		'sound/foley/metal1.ogg'
 	)
 
+	// Order matters, higher pain level should be higher up
+	var/list/pain_emotes_with_pain_level = list(
+		list(/decl/emote/audible/scream, /decl/emote/audible/whimper, /decl/emote/audible/moan, /decl/emote/audible/cry) = 70,
+		list(/decl/emote/audible/grunt, /decl/emote/audible/groan, /decl/emote/audible/moan) = 40,
+		list(/decl/emote/audible/grunt, /decl/emote/audible/groan) = 10,
+	)
+	var/is_robotic = FALSE
+
 /decl/bodytype/Initialize()
 	. = ..()
 
@@ -89,3 +100,13 @@ var/global/list/bodytypes_by_category = list()
 
 /decl/bodytype/proc/get_manual_dexterity(var/mob/living/carbon/human/H)
 	. = manual_dexterity
+
+/decl/bodytype/proc/get_pain_emote(var/mob/living/carbon/human/H, var/pain_power)
+	if(!(body_flags & BODY_FLAG_NO_PAIN))
+		return
+	for(var/pain_emotes in pain_emotes_with_pain_level)
+		var/pain_level = pain_emotes_with_pain_level[pain_emotes]
+		if(pain_level >= pain_power)
+			// This assumes that if a pain-level has been defined it also has a list of emotes to go with it
+			var/decl/emote/E = GET_DECL(pick(pain_emotes))
+			return E.key

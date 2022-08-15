@@ -17,10 +17,10 @@
 
 	blood_types = list(/decl/blood_type/coolant)
 
-	available_bodytypes = list(/decl/bodytype/utility_frame)
+	available_bodytypes = list(/decl/bodytype/prosthetic/utility_frame)
 	age_descriptor =        /datum/appearance_descriptor/age/utility_frame
 	hidden_from_codex =     FALSE
-	species_flags =         SPECIES_FLAG_NO_PAIN | SPECIES_FLAG_NO_SCAN | SPECIES_FLAG_NO_POISON | SPECIES_FLAG_SYNTHETIC
+	species_flags =         SPECIES_FLAG_NO_SCAN | SPECIES_FLAG_NO_POISON | SPECIES_FLAG_SYNTHETIC
 	spawn_flags =           SPECIES_CAN_JOIN
 	strength =              STR_HIGH
 	warning_low_pressure =  50

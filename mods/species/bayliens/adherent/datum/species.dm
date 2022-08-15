@@ -9,7 +9,6 @@
 		"unfathomably old" =         12000,
 		"ancient beyond measure" =  100000
 	)
-
 /decl/species/adherent
 	name = SPECIES_ADHERENT
 	name_plural = "Adherents"
@@ -60,7 +59,7 @@
 	heat_level_2 = SYNTH_HEAT_LEVEL_2
 	heat_level_3 = SYNTH_HEAT_LEVEL_3
 
-	species_flags = SPECIES_FLAG_NO_SCAN | SPECIES_FLAG_NO_PAIN | SPECIES_FLAG_NO_POISON | SPECIES_FLAG_NO_MINOR_CUT | SPECIES_FLAG_CRYSTALLINE
+	species_flags = SPECIES_FLAG_NO_SCAN | SPECIES_FLAG_NO_POISON | SPECIES_FLAG_NO_MINOR_CUT | SPECIES_FLAG_CRYSTALLINE
 	spawn_flags =   SPECIES_CAN_JOIN
 
 	flesh_color = "#90edeb"

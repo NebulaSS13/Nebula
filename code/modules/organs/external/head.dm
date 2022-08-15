@@ -19,7 +19,6 @@
 
 	var/draw_eyes = TRUE
 	var/glowing_eyes = FALSE
-	var/can_intake_reagents = 1
 	var/has_lips = 1
 	var/forehead_graffiti
 	var/graffiti_style
@@ -81,7 +80,6 @@
 	has_lips = null
 	if(model)
 		var/decl/bodytype/prosthetic/R = GET_DECL(model)
-		can_intake_reagents = R.can_eat
 		draw_eyes = R.vision_organ
 
 /obj/item/organ/external/head/take_external_damage(brute, burn, damage_flags, used_weapon, override_droplimb)

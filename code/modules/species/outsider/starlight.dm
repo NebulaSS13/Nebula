@@ -1,3 +1,4 @@
+// This file is uncommented and unmaintained, todo: tick and update.
 /decl/species/starlight
 	name = "Starlight Base"
 	meat_type = null
@@ -8,6 +9,7 @@
 	force_cultural_info = list(
 		TAG_CULTURE = /decl/cultural_info/culture/other
 	)
+	available_bodytypes = list(/decl/bodytype/human/starlight)
 
 /decl/bodytype/human/starlight
 	icobase = 'icons/mob/human_races/species/starborn/body.dmi'
@@ -30,6 +32,7 @@
 		BP_BRAIN = /obj/item/organ/internal/brain/starlight
 	)
 	override_organ_types = list(BP_EYES = /obj/item/organ/internal/eyes/blueforged)
+	body_flags = BODY_FLAG_NO_PAIN | BODY_FLAG_CAN_INGEST_REAGENTS
 
 /decl/species/starlight/handle_death_check(var/mob/living/carbon/human/H)
 	if(H.health == 0)
@@ -75,8 +78,7 @@
 
 	total_health = 250
 	body_temperature = T0C + 500 //We are being of fire and light.
-	species_flags = SPECIES_FLAG_NO_MINOR_CUT | SPECIES_FLAG_NO_SCAN | SPECIES_FLAG_NO_SLIP | SPECIES_FLAG_NO_POISON | SPECIES_FLAG_NO_EMBED | SPECIES_FLAG_NO_TANGLE | SPECIES_FLAG_NO_PAIN
-
+	species_flags = SPECIES_FLAG_NO_MINOR_CUT | SPECIES_FLAG_NO_SCAN | SPECIES_FLAG_NO_SLIP | SPECIES_FLAG_NO_POISON | SPECIES_FLAG_NO_EMBED | SPECIES_FLAG_NO_TANGLE
 	base_auras = list(
 		/obj/aura/starborn
 		)

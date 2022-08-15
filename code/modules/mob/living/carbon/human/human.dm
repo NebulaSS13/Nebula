@@ -459,9 +459,7 @@
 
 /mob/living/carbon/human/check_has_mouth()
 	var/obj/item/organ/external/head/H = get_organ(BP_HEAD, /obj/item/organ/external/head)
-	if(!H || !istype(H) || !H.can_intake_reagents)
-		return FALSE
-	return TRUE
+	return (H?.bodytype.body_flags & BODY_FLAG_CAN_INGEST_REAGENTS)
 
 /mob/living/carbon/human/empty_stomach()
 	SET_STATUS_MAX(src, STAT_STUN, 3)
@@ -992,7 +990,7 @@
 		if(!istype(check_organ))
 			return 0
 		return check_organ.can_feel_pain()
-	return !(species.species_flags & SPECIES_FLAG_NO_PAIN)
+	return !(bodytype.body_flags & BODY_FLAG_NO_PAIN)
 
 /mob/living/carbon/human/get_breath_volume()
 	. = ..()

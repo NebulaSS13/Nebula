@@ -6,6 +6,7 @@
 	has_organs = list(
 		BP_BRAIN = /obj/item/organ/internal/brain/golem
 	)
+	body_flags = BODY_FLAG_NO_PAIN | BODY_FLAG_CAN_INGEST_REAGENTS
 
 /decl/species/golem
 	name = SPECIES_GOLEM
@@ -14,7 +15,7 @@
 	available_bodytypes = list(/decl/bodytype/golem)
 
 	unarmed_attacks = list(/decl/natural_attack/stomp, /decl/natural_attack/kick, /decl/natural_attack/punch)
-	species_flags = SPECIES_FLAG_NO_PAIN | SPECIES_FLAG_NO_SCAN | SPECIES_FLAG_NO_POISON | SPECIES_FLAG_CRYSTALLINE
+	species_flags = SPECIES_FLAG_NO_SCAN | SPECIES_FLAG_NO_POISON | SPECIES_FLAG_CRYSTALLINE
 	spawn_flags = SPECIES_IS_RESTRICTED
 	siemens_coefficient = 0
 

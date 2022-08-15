@@ -1284,8 +1284,8 @@ Note that amputating the affected organ does in fact remove the infection from t
 	desc = "[R.prosthetic_limb_desc] It looks like it was produced by [R.name]."
 	origin_tech = R.limb_tech
 	slowdown = R.movement_slowdown
-	max_damage *= R.hardiness
-	min_broken_damage *= R.hardiness
+	max_damage *= R.damage_threshold_modifier
+	min_broken_damage *= R.damage_threshold_modifier
 	status &= (~ORGAN_DISLOCATED)
 	limb_flags &= (~ORGAN_FLAG_CAN_DISLOCATE)
 	remove_splint()
@@ -1558,7 +1558,8 @@ Note that amputating the affected organ does in fact remove the infection from t
 	. = FALSE
 	if(BP_IS_PROSTHETIC(src) && model)
 		var/decl/bodytype/prosthetic/R = GET_DECL(model)
-		. = R && R.is_robotic
+		return R.is_robotic
+	return bodytype.is_robotic
 
 /obj/item/organ/external/proc/has_growths()
 	return FALSE
@@ -1596,3 +1597,8 @@ Note that amputating the affected organ does in fact remove the infection from t
 
 /obj/item/organ/external/proc/is_vital()
 	return FALSE
+
+/obj/item/organ/external/set_species(var/specie_name)
+	. = ..()
+	if(!model && bodytype)
+		origin_tech = bodytype.limb_tech

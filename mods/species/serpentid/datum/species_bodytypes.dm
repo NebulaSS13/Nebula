@@ -39,6 +39,9 @@
 		BP_R_HAND = list(BP_R_HAND, BP_R_HAND_UPPER)
 	)
 	mob_size = MOB_SIZE_LARGE
+	pain_emotes_with_pain_level = list(
+			list(/decl/emote/audible/bug_hiss) = 40
+	)
 
 /decl/bodytype/serpentid/Initialize()
 	equip_adjust = list(

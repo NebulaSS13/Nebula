@@ -44,10 +44,6 @@ var/global/list/wrapped_species_by_ref = list()
 	if(istype(E) && E.owner)
 		E.sync_colour_to_human(E.owner)
 
-/decl/species/shapeshifter/get_pain_emote(var/mob/living/carbon/human/H, var/pain_power)
-	var/decl/species/S = get_species_by_key(wrapped_species_by_ref["\ref[H]"])
-	return S.get_pain_emote(H, pain_power)
-
 // Verbs follow.
 /mob/living/carbon/human/proc/shapeshifter_select_hair()
 

@@ -76,9 +76,7 @@
 		/datum/appearance_descriptor/height =      1.75,
 		/datum/appearance_descriptor/body_length = 1
 		)
-	pain_emotes_with_pain_level = list(
-			list(/decl/emote/audible/bug_hiss) = 40
-	)
+
 	var/list/skin_overlays = list()
 
 /decl/species/serpentid/can_overcome_gravity(var/mob/living/carbon/human/H)

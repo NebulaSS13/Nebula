@@ -1,4 +1,4 @@
-/decl/bodytype/alate
+/decl/bodytype/mantid
 	name =              "alate"
 	bodytype_category = BODYTYPE_MANTID_SMALL
 	icon_base =         'mods/species/ascent/icons/species/body/alate/body.dmi'
@@ -34,8 +34,13 @@
 	)
 
 	limb_mapping = list(BP_CHEST = list(BP_CHEST, BP_M_HAND))
+	pain_emotes_with_pain_level = list(
+			list(/decl/emote/visible/ascent_shine, /decl/emote/visible/ascent_dazzle) = 80,
+			list(/decl/emote/visible/ascent_glimmer, /decl/emote/visible/ascent_pulse) = 50,
+			list(/decl/emote/visible/ascent_flicker, /decl/emote/visible/ascent_glint) = 20,
+		)
 
-/decl/bodytype/gyne
+/decl/bodytype/mantid/gyne
 	name =              "gyne"
 	bodytype_category = BODYTYPE_MANTID_LARGE
 	icon_base =         'mods/species/ascent/icons/species/body/gyne/body.dmi'
@@ -55,8 +60,13 @@
 		BP_EGG = /obj/item/organ/internal/egg_sac/insectoid,
 	)
 	body_appearance_flags = 0
+	pain_emotes_with_pain_level = list(
+			list(/decl/emote/visible/ascent_shine, /decl/emote/visible/ascent_dazzle) = 80,
+			list(/decl/emote/visible/ascent_glimmer, /decl/emote/visible/ascent_pulse) = 50,
+			list(/decl/emote/visible/ascent_flicker, /decl/emote/visible/ascent_glint) = 20,
+		)
 
-/decl/bodytype/gyne/Initialize()
+/decl/bodytype/mantid/gyne/Initialize()
 	equip_adjust = list(
 		BP_L_HAND = list(
 			"[NORTH]" = list("x" = -4, "y" = 12),

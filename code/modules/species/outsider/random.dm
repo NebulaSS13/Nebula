@@ -6,6 +6,11 @@
 	limb_blend =        ICON_MULTIPLY
 	body_appearance_flags = HAS_SKIN_COLOR
 
+/decl/bodytype/alium/Initialize()
+	. = ..()
+	if(prob(5))
+		body_flags |= BODY_FLAG_NO_PAIN
+
 /decl/species/alium
 	name = SPECIES_ALIEN
 	name_plural = "Humanoids"
@@ -95,8 +100,6 @@
 		species_flags |= SPECIES_FLAG_NO_SLIP
 	if(prob(10))
 		species_flags |= SPECIES_FLAG_NO_TANGLE
-	if(prob(5))
-		species_flags |= SPECIES_FLAG_NO_PAIN
 
 	. = ..()
 

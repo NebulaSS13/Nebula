@@ -10,11 +10,10 @@
 	body_appearance_flags = HAS_EYE_COLOR
 	prosthetic_limb_desc = "A gleaming crystalline mass."
 	unavailable_at_chargen = TRUE
-	can_eat = FALSE
-	can_feel_pain = FALSE
 	allowed_bodytypes = list(BODYTYPE_ADHERENT)
 	modifier_string = "crystalline"
 	is_robotic = FALSE
+	body_flags = BODY_FLAG_NO_PAIN
 
 	has_limbs = list(
 		BP_CHEST =  list("path" = /obj/item/organ/external/chest/crystal),

@@ -29,7 +29,7 @@
 	name_plural =            "Kharmaan Alates"
 	show_ssd =               "quiescent"
 
-	available_bodytypes = list(/decl/bodytype/alate)
+	available_bodytypes = list(/decl/bodytype/mantid)
 
 	description = "When human surveyors finally arrived at the outer reaches of explored space, they hoped to find \
 	new frontiers and new planets to exploit. They were largely not expecting to have entire expeditions lost \
@@ -102,12 +102,6 @@
 		/datum/appearance_descriptor/body_length = 0.5
 	)
 
-	pain_emotes_with_pain_level = list(
-			list(/decl/emote/visible/ascent_shine, /decl/emote/visible/ascent_dazzle) = 80,
-			list(/decl/emote/visible/ascent_glimmer, /decl/emote/visible/ascent_pulse) = 50,
-			list(/decl/emote/visible/ascent_flicker, /decl/emote/visible/ascent_glint) = 20,
-		)
-
 /decl/species/mantid/handle_sleeping(var/mob/living/carbon/human/H)
 	return
 
@@ -123,7 +117,7 @@
 	name =        SPECIES_MANTID_GYNE
 	name_plural = "Kharmaan Gynes"
 
-	available_bodytypes = list(/decl/bodytype/gyne)
+	available_bodytypes = list(/decl/bodytype/mantid/gyne)
 	available_pronouns = list(/decl/pronouns/female)
 
 	gluttonous =              3

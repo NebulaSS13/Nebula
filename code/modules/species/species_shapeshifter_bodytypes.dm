@@ -2,6 +2,10 @@
 	name = "protean form"
 	bodytype_category = BODYTYPE_HUMANOID
 
+/decl/bodytype/shapeshifter/get_pain_emote(var/mob/living/carbon/human/H, var/pain_power)
+	var/decl/species/S = get_species_by_key(wrapped_species_by_ref["\ref[H]"])
+	return S.default_bodytype.get_pain_emote(H, pain_power)
+
 /decl/bodytype/shapeshifter/apply_limb_colouration(var/obj/item/organ/external/E, var/icon/applying)
 	applying.MapColors("#4d4d4d","#969696","#1c1c1c", "#000000")
 	applying.SetIntensity(limb_icon_intensity)
