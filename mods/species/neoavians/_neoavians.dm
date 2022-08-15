@@ -6,6 +6,6 @@
 /decl/modpack/neoavians
 	name = "Neo-Avian Content"
 
-/decl/prosthetics_manufacturer/Initialize()
+/decl/bodytype/prosthetic/Initialize()
 	. = ..()
 	LAZYDISTINCTADD(bodytypes_cannot_use, BODYTYPE_AVIAN)

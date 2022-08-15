@@ -1,4 +1,4 @@
-/decl/prosthetics_manufacturer/wooden
+/decl/bodytype/prosthetic/wooden
 	name = "crude wooden"
 	desc = "A crude wooden prosthetic."
 	icon = 'icons/mob/human_races/cyberlimbs/morgan/morgan_main.dmi'
@@ -9,4 +9,4 @@
 	is_robotic = FALSE
 	modular_prosthetic_tier = MODULAR_BODYPART_PROSTHETIC
 
-DEFINE_ROBOLIMB_MODEL_ASPECTS(/decl/prosthetics_manufacturer/wooden, pirate, 0)
+DEFINE_ROBOLIMB_MODEL_ASPECTS(/decl/bodytype/prosthetic/wooden, pirate, 0)

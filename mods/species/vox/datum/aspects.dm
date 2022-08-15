@@ -10,7 +10,7 @@
 
 // Modified organs/bodyparts.
 /decl/aspect/prosthetic_limb/vox
-	model = /decl/prosthetics_manufacturer/vox/crap
+	model = /decl/bodytype/prosthetic/vox/crap
 	category = "Voxform"
 
 /decl/aspect/prosthetic_limb/vox/Initialize()
@@ -66,7 +66,7 @@
 
 
 /decl/aspect/prosthetic_limb/vox
-	model = /decl/prosthetics_manufacturer/vox/crap
+	model = /decl/bodytype/prosthetic/vox/crap
 	category = "Voxform"
 
 /decl/aspect/prosthetic_limb/vox/Initialize()
@@ -77,11 +77,11 @@
 /decl/aspect/prosthetic_limb/vox/left_hand/arkmade
 	parent = /decl/aspect/prosthetic_limb/vox/left_hand
 	base_type = /decl/aspect/prosthetic_limb/vox/left_hand
-	model = /decl/prosthetics_manufacturer/vox
+	model = /decl/bodytype/prosthetic/vox
 	aspect_cost = 1
 
 /decl/aspect/prosthetic_limb/vox/left_arm/arkmade
-	model = /decl/prosthetics_manufacturer/vox
+	model = /decl/bodytype/prosthetic/vox
 	parent = /decl/aspect/prosthetic_limb/vox/left_arm
 	base_type = /decl/aspect/prosthetic_limb/vox/left_arm
 	aspect_cost = 1
@@ -89,37 +89,37 @@
 /decl/aspect/prosthetic_limb/vox/right_hand/arkmade
 	parent = /decl/aspect/prosthetic_limb/vox/right_hand
 	base_type = /decl/aspect/prosthetic_limb/vox/right_hand
-	model = /decl/prosthetics_manufacturer/vox
+	model = /decl/bodytype/prosthetic/vox
 	aspect_cost = 1
 
 /decl/aspect/prosthetic_limb/vox/right_arm/arkmade
 	parent = /decl/aspect/prosthetic_limb/vox/right_arm
 	base_type = /decl/aspect/prosthetic_limb/vox/right_arm
-	model = /decl/prosthetics_manufacturer/vox
+	model = /decl/bodytype/prosthetic/vox
 	aspect_cost = 1
 
 /decl/aspect/prosthetic_limb/vox/left_foot/arkmade
 	parent = /decl/aspect/prosthetic_limb/vox/left_foot
 	base_type = /decl/aspect/prosthetic_limb/vox/left_foot
-	model = /decl/prosthetics_manufacturer/vox
+	model = /decl/bodytype/prosthetic/vox
 	aspect_cost = 1
 
 /decl/aspect/prosthetic_limb/vox/left_leg/arkmade
 	parent = /decl/aspect/prosthetic_limb/vox/left_leg
 	base_type = /decl/aspect/prosthetic_limb/vox/left_leg
-	model = /decl/prosthetics_manufacturer/vox
+	model = /decl/bodytype/prosthetic/vox
 	aspect_cost = 1
 
 /decl/aspect/prosthetic_limb/vox/right_foot/arkmade
 	parent = /decl/aspect/prosthetic_limb/vox/right_foot
 	base_type = /decl/aspect/prosthetic_limb/vox/right_foot
-	model = /decl/prosthetics_manufacturer/vox
+	model = /decl/bodytype/prosthetic/vox
 	aspect_cost = 1
 
 /decl/aspect/prosthetic_limb/vox/right_leg/arkmade
 	parent = /decl/aspect/prosthetic_limb/vox/right_leg
 	base_type = /decl/aspect/prosthetic_limb/vox/right_leg
-	model = /decl/prosthetics_manufacturer/vox
+	model = /decl/bodytype/prosthetic/vox
 	aspect_cost = 1
 
 // Bonuses or maluses to skills/checks/actions.

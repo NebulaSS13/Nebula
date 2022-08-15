@@ -2,6 +2,7 @@ var/global/list/bodytypes_by_category = list()
 
 /decl/bodytype
 	var/name = "default"
+	var/prosthetic_limb_desc = "It's some kind of generic limb."
 	var/icon_base
 	var/icon_deformed
 	var/lip_icon
@@ -19,6 +20,7 @@ var/global/list/bodytypes_by_category = list()
 	var/ignited_icon =    'icons/mob/OnFire.dmi'
 	var/associated_gender
 	var/icon_cache_uid
+	var/max_skin_tone = 220
 
 	var/manual_dexterity = DEXTERITY_FULL
 

@@ -95,10 +95,11 @@
 		pref.species = global.using_map.default_species
 
 	var/decl/species/mob_species = get_species_by_key(pref.species)
+	var/decl/bodytype/mob_body = mob_species?.get_bodytype_by_name(pref.bodytype)
 	if(!pref.b_type || !(pref.b_type in mob_species.blood_types))
 		pref.b_type = pickweight(mob_species.blood_types)
 
-	var/low_skin_tone = mob_species ? (35 - mob_species.max_skin_tone()) : -185
+	var/low_skin_tone = mob_species ? (35 - mob_body?.max_skin_tone) : -185
 	sanitize_integer(pref.skin_tone, low_skin_tone, 34, initial(pref.skin_tone))
 
 	if(!ispath(pref.h_style, /decl/sprite_accessory/hair))
@@ -135,8 +136,9 @@
 	var/decl/species/mob_species = get_species_by_key(pref.species)
 	. += "Blood Type: <a href='?src=\ref[src];blood_type=1'>[pref.b_type]</a><br>"
 
+	var/decl/bodytype/mob_body = mob_species?.get_bodytype_by_name(pref.bodytype)
 	if(has_flag(mob_species, HAS_A_SKIN_TONE))
-		. += "Skin Tone: <a href='?src=\ref[src];skin_tone=1'>[-pref.skin_tone + 35]/[mob_species.max_skin_tone()]</a><br>"
+		. += "Skin Tone: <a href='?src=\ref[src];skin_tone=1'>[-pref.skin_tone + 35]/[mob_body.max_skin_tone]</a><br>"
 	. += "</td></tr></table><hr/>"
 
 	if(LAZYLEN(pref.appearance_descriptors))
@@ -271,10 +273,10 @@
 	else if(href_list["skin_tone"])
 		if(!has_flag(mob_species, HAS_A_SKIN_TONE))
 			return TOPIC_NOACTION
-		var/new_s_tone = input(user, "Choose your character's skin-tone. Lower numbers are lighter, higher are darker. Range: 1 to [mob_species.max_skin_tone()]", CHARACTER_PREFERENCE_INPUT_TITLE, (-pref.skin_tone) + 35) as num|null
+		var/new_s_tone = input(user, "Choose your character's skin-tone. Lower numbers are lighter, higher are darker. Range: 1 to [B.max_skin_tone]", CHARACTER_PREFERENCE_INPUT_TITLE, (-pref.skin_tone) + 35) as num|null
 		mob_species = get_species_by_key(pref.species)
 		if(new_s_tone && has_flag(mob_species, HAS_A_SKIN_TONE) && CanUseTopic(user))
-			pref.skin_tone = 35 - max(min(round(new_s_tone), mob_species.max_skin_tone()), 1)
+			pref.skin_tone = 35 - max(min(round(new_s_tone), B.max_skin_tone), 1)
 		return TOPIC_REFRESH_UPDATE_PREVIEW
 
 	else if(href_list["skin_color"])

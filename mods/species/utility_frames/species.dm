@@ -81,7 +81,7 @@
 	..()
 	if(istype(org, /obj/item/organ/external))
 		var/obj/item/organ/external/E = org
-		E.robotize(/decl/prosthetics_manufacturer/utility_frame, FALSE, TRUE, /decl/material/solid/metal/steel, BODYTYPE_HUMANOID, SPECIES_FRAME)
+		E.robotize(/decl/bodytype/prosthetic/utility_frame, FALSE, TRUE, /decl/material/solid/metal/steel, BODYTYPE_HUMANOID, SPECIES_FRAME)
 
 /decl/species/utility_frame/disfigure_msg(var/mob/living/carbon/human/H)
 	. = SPAN_DANGER("The faceplate is dented and cracked!\n")

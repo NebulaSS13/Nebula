@@ -1235,7 +1235,7 @@ Note that amputating the affected organ does in fact remove the infection from t
 
 /obj/item/organ/external/proc/get_dexterity()
 	if(model)
-		var/decl/prosthetics_manufacturer/R = GET_DECL(model)
+		var/decl/bodytype/prosthetic/R = GET_DECL(model)
 		if(R)
 			return R.manual_dexterity
 	if(bodytype)
@@ -1248,10 +1248,10 @@ Note that amputating the affected organ does in fact remove the infection from t
 
 	// Don't override our existing model unless a specific model is being passed in.
 	if(!company)
-		company = model || /decl/prosthetics_manufacturer
+		company = model || /decl/bodytype/prosthetic
 
-	var/decl/prosthetics_manufacturer/R
-	if(istype(company, /decl/prosthetics_manufacturer))
+	var/decl/bodytype/prosthetic/R
+	if(istype(company, /decl/bodytype/prosthetic))
 		//Handling for decl
 		R = company
 		company = R.type
@@ -1259,7 +1259,7 @@ Note that amputating the affected organ does in fact remove the infection from t
 		//Handling for paths
 		if(!ispath(company))
 			PRINT_STACK_TRACE("Limb [type] robotize() was supplied a null or non-decl manufacturer: '[company]'")
-			company = /decl/prosthetics_manufacturer
+			company = /decl/bodytype/prosthetic
 		R = GET_DECL(company)
 
 	if(!check_species)
@@ -1276,8 +1276,8 @@ Note that amputating the affected organ does in fact remove the infection from t
 
 	//If can't install fallback to defaults.
 	if(!R.check_can_install(organ_tag, check_bodytype, check_species))
-		company = /decl/prosthetics_manufacturer
-		R = GET_DECL(/decl/prosthetics_manufacturer)
+		company = /decl/bodytype/prosthetic
+		R = GET_DECL(/decl/bodytype/prosthetic)
 
 	model = company
 	name = "[R ? R.modifier_string : "robotic"] [initial(name)]"
@@ -1557,7 +1557,7 @@ Note that amputating the affected organ does in fact remove the infection from t
 /obj/item/organ/external/proc/is_robotic()
 	. = FALSE
 	if(BP_IS_PROSTHETIC(src) && model)
-		var/decl/prosthetics_manufacturer/R = GET_DECL(model)
+		var/decl/bodytype/prosthetic/R = GET_DECL(model)
 		. = R && R.is_robotic
 
 /obj/item/organ/external/proc/has_growths()

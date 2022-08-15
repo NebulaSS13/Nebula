@@ -41,8 +41,8 @@
 	var/model
 
 /datum/fabricator_recipe/robotics/prosthetic/New()
-	if(model && model != /decl/prosthetics_manufacturer)
-		var/decl/prosthetics_manufacturer/model_manufacturer = GET_DECL(model)
+	if(model && model != /decl/bodytype/prosthetic)
+		var/decl/bodytype/prosthetic/model_manufacturer = GET_DECL(model)
 		category = "[model_manufacturer.name] Prosthetics"
 	else
 		category = "Unbranded Prosthetics"
@@ -54,7 +54,7 @@
 		var/obj/machinery/fabricator/robotics/robofab = fab
 		if(!istype(robofab))
 			return FALSE
-		var/decl/prosthetics_manufacturer/company = GET_DECL(model)
+		var/decl/bodytype/prosthetic/company = GET_DECL(model)
 		if(!istype(company))
 			return FALSE
 		var/decl/species/species = get_species_by_key(robofab.picked_prosthetic_species)
@@ -81,7 +81,7 @@
 /datum/fabricator_recipe/robotics/prosthetic/get_product_name()
 	. = "prosthetic limb ([..()])"
 	if(ispath(model))
-		var/decl/prosthetics_manufacturer/brand = GET_DECL(model)
+		var/decl/bodytype/prosthetic/brand = GET_DECL(model)
 		return "[.] ([brand.name])"
 
 /datum/fabricator_recipe/robotics/prosthetic/build(var/turf/location, var/datum/fabricator_build_order/order)
@@ -94,4 +94,4 @@
 			E.robotize(model, check_species = species_name)
 			E.status |= ORGAN_CUT_AWAY
 
-DEFINE_ROBOLIMB_DESIGNS(/decl/prosthetics_manufacturer, generic)
+DEFINE_ROBOLIMB_DESIGNS(/decl/bodytype/prosthetic, generic)

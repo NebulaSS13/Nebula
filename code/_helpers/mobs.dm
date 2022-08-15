@@ -26,17 +26,17 @@
 				return current_culture.get_random_name(null, gender)
 	return capitalize(pick(gender == FEMALE ? global.first_names_female : global.first_names_male)) + " " + capitalize(pick(global.last_names))
 
-/proc/random_skin_tone(var/decl/species/current_species)
-	var/species_tone = current_species ? 35 - current_species.max_skin_tone() : -185
+/proc/random_skin_tone(var/decl/bodytype/body)
+	var/body_tone = body ? 35 - body.max_skin_tone : -185
 	switch(pick(60;"caucasian", 15;"afroamerican", 10;"african", 10;"latino", 5;"albino"))
 		if("caucasian")		. = -10
 		if("afroamerican")	. = -115
 		if("african")		. = -165
 		if("latino")		. = -55
 		if("albino")		. = 34
-		else				. = rand(species_tone,34)
+		else				. = rand(body_tone,34)
 
-	return min(max(. + rand(-25, 25), species_tone), 34)
+	return min(max(. + rand(-25, 25), body_tone), 34)
 
 /proc/skintone2racedescription(tone)
 	switch (tone)

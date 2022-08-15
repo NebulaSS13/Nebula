@@ -645,15 +645,6 @@ var/global/const/DEFAULT_SPECIES_HEALTH = 200
 	var/decl/pronouns/G = H.get_pronouns()
 	return SPAN_DANGER("[G.His] face is horribly mangled!\n")
 
-/decl/species/proc/max_skin_tone()
-	if(appearance_flags & HAS_SKIN_TONE_GRAV)
-		return 100
-	if(appearance_flags & HAS_SKIN_TONE_SPCR)
-		return 165
-	if(appearance_flags & HAS_SKIN_TONE_TRITON)
-		return 80
-	return 220
-
 /decl/species/proc/get_hair_style_types(var/gender = NEUTER, var/check_gender = TRUE)
 	if(!check_gender)
 		gender = NEUTER

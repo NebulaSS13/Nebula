@@ -20,10 +20,10 @@
 /obj/item/robot_parts/Initialize(mapload, var/model)
 	. = ..(mapload)
 	if(model_info)
-		if(!ispath(model, /decl/prosthetics_manufacturer))
-			model = /decl/prosthetics_manufacturer
+		if(!ispath(model, /decl/bodytype/prosthetic))
+			model = /decl/bodytype/prosthetic
 		model_info = model
-		var/decl/prosthetics_manufacturer/R = GET_DECL(model)
+		var/decl/bodytype/prosthetic/R = GET_DECL(model)
 		if(R)
 			SetName("[R.name] [initial(name)]")
 			desc = "[R.desc]"

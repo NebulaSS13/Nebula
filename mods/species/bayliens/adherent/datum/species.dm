@@ -147,7 +147,7 @@
 
 /decl/species/adherent/apply_species_organ_modifications(var/obj/item/organ/org)
 	..()
-	org.robotize(/decl/prosthetics_manufacturer/adherent, FALSE, TRUE, /decl/material/solid/gemstone/crystal, BODYTYPE_ADHERENT, SPECIES_ADHERENT)
+	org.robotize(/decl/bodytype/prosthetic/adherent, FALSE, TRUE, /decl/material/solid/gemstone/crystal, BODYTYPE_ADHERENT, SPECIES_ADHERENT)
 	if(istype(org, /obj/item/organ/external))
 		var/obj/item/organ/external/E = org
 		E.arterial_bleed_severity = 0

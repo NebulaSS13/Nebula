@@ -57,13 +57,13 @@ SETUP_RANDOM_COLOR_SETTER(eye_color, change_eye_color)
 
 SETUP_RANDOM_COLOR_SETTER(facial_hair_color, change_facial_hair_color)
 
-/decl/species/proc/get_random_skin_tone()
+/decl/bodytype/proc/get_random_skin_tone()
 	return random_skin_tone(src)
 
 /mob/living/carbon/human/proc/randomize_skin_tone()
 	if(!species)
 		return
-	var/new_tone = species.get_random_skin_tone()
+	var/new_tone = bodytype.get_random_skin_tone()
 	if(!isnull(new_tone))
 		change_skin_tone(new_tone)
 

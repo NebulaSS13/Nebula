@@ -7,13 +7,13 @@
 	var/base_type
 	var/bodypart_name
 	var/apply_to_limb = BP_L_HAND
-	var/model = /decl/prosthetics_manufacturer
+	var/model = /decl/bodytype/prosthetic
 
 /decl/aspect/prosthetic_limb/Initialize()
 	. = ..()
 	if(bodypart_name)
-		if(model && model != /decl/prosthetics_manufacturer)
-			var/decl/prosthetics_manufacturer/model_manufacturer = GET_DECL(model)
+		if(model && model != /decl/bodytype/prosthetic)
+			var/decl/bodytype/prosthetic/model_manufacturer = GET_DECL(model)
 			name = "[model_manufacturer.name] [bodypart_name]"
 			desc = "You have been fitted with [ADD_ARTICLE(model_manufacturer.name)] [lowertext(bodypart_name)] prosthesis."
 		else
@@ -33,7 +33,7 @@
 /decl/aspect/prosthetic_limb/is_available_to(datum/preferences/pref)
 	. = ..()
 	if(. && model)
-		var/decl/prosthetics_manufacturer/R = GET_DECL(model)
+		var/decl/bodytype/prosthetic/R = GET_DECL(model)
 		if(!istype(R))
 			return FALSE
 		var/decl/species/S = get_species_by_key(pref.species) || get_species_by_key(global.using_map.default_species)
@@ -45,7 +45,7 @@
 	. = ..()
 
 	// Don't apply if there's a specific model selected.
-	if(model == /decl/prosthetics_manufacturer && !base_type && holder)
+	if(model == /decl/bodytype/prosthetic && !base_type && holder)
 		var/has_specific_model = FALSE
 		for(var/decl/aspect/A as anything in holder.personal_aspects)
 			if(A != src && istype(A, type))

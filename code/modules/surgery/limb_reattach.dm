@@ -51,7 +51,7 @@
 		if(!BP_IS_PROSTHETIC(E))
 			to_chat(user, SPAN_WARNING("You cannot attach a flesh part to a robotic body."))
 		if(P.model)
-			var/decl/prosthetics_manufacturer/robo_model = GET_DECL(P.model)
+			var/decl/bodytype/prosthetic/robo_model = GET_DECL(P.model)
 			if(!istype(robo_model) || !robo_model.check_can_install(E.organ_tag, target.get_bodytype_category(), target.get_species_name()))
 				to_chat(user, SPAN_WARNING("That model of prosthetic is incompatible with \the [target]."))
 				return FALSE

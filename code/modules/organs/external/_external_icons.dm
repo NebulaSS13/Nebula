@@ -18,7 +18,7 @@ var/global/list/limb_icon_cache = list()
 	hair_colour = human.hair_colour
 	bodytype = human.bodytype
 	if(BP_IS_PROSTHETIC(src) && model)
-		var/decl/prosthetics_manufacturer/franchise = GET_DECL(model)
+		var/decl/bodytype/prosthetic/franchise = GET_DECL(model)
 		if(!(franchise && franchise.skintone))
 			return
 		skin_blend = franchise.limb_blend
@@ -34,7 +34,7 @@ var/global/list/limb_icon_cache = list()
 	skin_colour = null
 	hair_colour = rgb(dna.GetUIValue(DNA_UI_HAIR_R),dna.GetUIValue(DNA_UI_HAIR_G),dna.GetUIValue(DNA_UI_HAIR_B))
 	if(BP_IS_PROSTHETIC(src) && model)
-		var/decl/prosthetics_manufacturer/franchise = GET_DECL(model)
+		var/decl/bodytype/prosthetic/franchise = GET_DECL(model)
 		if(!(franchise && franchise.skintone))
 			return
 	if(!isnull(dna.GetUIValue(DNA_UI_SKIN_TONE)) && (species.appearance_flags & HAS_A_SKIN_TONE))
@@ -68,7 +68,7 @@ var/global/list/limb_icon_cache = list()
 		if(!model)
 			icon = 'icons/mob/human_races/cyberlimbs/robotic.dmi'
 		else
-			var/decl/prosthetics_manufacturer/R = GET_DECL(model)
+			var/decl/bodytype/prosthetic/R = GET_DECL(model)
 			icon = R.get_base_icon(owner)
 	else if(status & ORGAN_MUTATED)
 		icon = bodytype.get_base_icon(owner, get_deform = TRUE)

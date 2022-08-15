@@ -80,9 +80,9 @@
 	. = ..()
 	has_lips = null
 	if(model)
-		var/decl/prosthetics_manufacturer/R = GET_DECL(model)
+		var/decl/bodytype/prosthetic/R = GET_DECL(model)
 		can_intake_reagents = R.can_eat
-		draw_eyes = R.has_eyes
+		draw_eyes = R.vision_organ
 
 /obj/item/organ/external/head/take_external_damage(brute, burn, damage_flags, used_weapon, override_droplimb)
 	. = ..()

@@ -1,4 +1,4 @@
-/decl/prosthetics_manufacturer/utility_frame
+/decl/bodytype/prosthetic/utility_frame
 	name = "Utility Frame"
 	desc = "This limb is extremely cheap and simplistic, with a raw steel frame and plastic casing."
 	icon = 'mods/species/utility_frames/icons/body.dmi'
@@ -7,4 +7,4 @@
 	limb_blend = ICON_MULTIPLY
 	modular_prosthetic_tier = MODULAR_BODYPART_CYBERNETIC
 
-DEFINE_ROBOLIMB_DESIGNS(/decl/prosthetics_manufacturer/utility_frame, utility_frame)
+DEFINE_ROBOLIMB_DESIGNS(/decl/bodytype/prosthetic/utility_frame, utility_frame)
