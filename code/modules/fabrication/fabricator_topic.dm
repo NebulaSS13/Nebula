@@ -66,7 +66,8 @@
 	if(!mat_path || !stored_material[mat_path])
 		return
 	// TODO: proper liquid reagent ejection checks (acid sheet ejection...).
-	if(ispath(mat_path, /decl/material/gas) || ispath(mat_path, /decl/material/liquid))
+	var/decl/material/mat = GET_DECL(mat_path)
+	if(mat?.phase_at_stp() != MAT_PHASE_SOLID)
 		stored_material[mat_path] = 0
 	else
 		var/sheet_count = FLOOR(stored_material[mat_path]/SHEET_MATERIAL_AMOUNT)

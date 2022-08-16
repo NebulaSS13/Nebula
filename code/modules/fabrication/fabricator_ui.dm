@@ -20,8 +20,7 @@
 	for(var/material in storage_capacity)
 		var/decl/material/mat = GET_DECL(material)
 		var/list/material_data = list()
-		// TODO proper state checks
-		var/is_solid = !ispath(material, /decl/material/liquid) && !ispath(material, /decl/material/gas)
+		var/is_solid = (mat.phase_at_stp() == MAT_PHASE_SOLID)
 		material_data["name"]        = capitalize(mat.use_name)
 		material_data["stored"]      = stored_material[material] ? stored_material[material] : 0
 		material_data["max"]         = storage_capacity[material]
