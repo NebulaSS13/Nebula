@@ -16,24 +16,22 @@
 /mob/living/carbon/human/adjustBrainLoss(var/amount)
 	if(status_flags & GODMODE)	return 0	//godmode
 	if(should_have_organ(BP_BRAIN))
-		var/obj/item/organ/internal/sponge = GET_INTERNAL_ORGAN(src, BP_BRAIN)
+		var/obj/item/organ/internal/brain/sponge = get_organ(BP_BRAIN, /obj/item/organ/internal/brain)
 		if(sponge)
 			sponge.take_internal_damage(amount)
 
 /mob/living/carbon/human/setBrainLoss(var/amount)
 	if(status_flags & GODMODE)	return 0	//godmode
 	if(should_have_organ(BP_BRAIN))
-		var/obj/item/organ/internal/sponge = GET_INTERNAL_ORGAN(src, BP_BRAIN)
+		var/obj/item/organ/internal/brain/sponge = get_organ(BP_BRAIN, /obj/item/organ/internal/brain)
 		if(sponge)
 			sponge.damage = min(max(amount, 0),sponge.species.total_health)
 			updatehealth()
 
 /mob/living/carbon/human/getBrainLoss()
-	if(status_flags & GODMODE)
-		return 0	//godmode
-
+	if(status_flags & GODMODE)	return 0	//godmode
 	if(should_have_organ(BP_BRAIN))
-		var/obj/item/organ/internal/sponge = GET_INTERNAL_ORGAN(src, BP_BRAIN)
+		var/obj/item/organ/internal/brain/sponge = get_organ(BP_BRAIN, /obj/item/organ/internal/brain)
 		if(sponge)
 			if(sponge.status & ORGAN_DEAD)
 				return sponge.species.total_health
@@ -41,7 +39,6 @@
 				return sponge.damage
 		else
 			return species.total_health
-
 	return 0
 
 //Straight pain values, not affected by painkillers etc
