@@ -14,6 +14,12 @@
 	var/list/affecting_heat_sources
 	var/obj/effect/overmap/visitable/sector/exoplanet/owner
 
+// Bit faster than return_air() for exoplanet exterior turfs
+/turf/exterior/get_air_graphic()
+	if(owner)
+		return owner.atmosphere?.graphic
+	return global.using_map.exterior_atmosphere?.graphic
+
 /turf/exterior/Initialize(mapload, no_update_icon = FALSE)
 
 	color = null
@@ -30,6 +36,10 @@
 			ChangeArea(src, owner.planetary_area)
 
 	. = ..(mapload)	// second param is our own, don't pass to children
+
+	var/air_graphic = get_air_graphic()
+	if(length(air_graphic))
+		add_vis_contents(src, air_graphic)
 
 	if (no_update_icon)
 		return
