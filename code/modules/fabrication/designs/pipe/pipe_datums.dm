@@ -191,7 +191,7 @@
 	rotate_class = PIPE_ROTATE_STANDARD
 
 /datum/fabricator_recipe/pipe/fuel/manifold4w
-	name = "four-way supply pipe manifold fitting"
+	name = "four-way fuel pipe manifold fitting"
 	desc = "a four-way fuel pipe manifold segment"
 	build_icon_state = "manifold4w"
 	constructed_path = /obj/machinery/atmospherics/pipe/manifold4w/hidden/fuel
