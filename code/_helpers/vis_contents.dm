@@ -11,6 +11,3 @@
 		set_vis_contents(src, new_vis_contents)
 	else if(length(vis_contents))
 		clear_vis_contents(src)
-
-/turf/proc/get_vis_contents_to_add()
-	return
