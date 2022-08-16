@@ -108,3 +108,34 @@ var/global/list/gzn_check = list(NORTH, SOUTH, EAST, WEST)
 	}
 
 #endif
+
+// We don't have read-only list linting currently, so this nasty hack
+// is in place to let CI/unit testing builds also lint against direct
+// gas list access/mutation. This is necessary so the immutable gas
+// mixtures actually function as expected.
+
+#ifdef UNIT_TEST
+
+/datum/gas_mixture
+	//Associative list of gas moles.
+	//Gases with 0 moles are not tracked and are pruned by update_values()
+	VAR_PRIVATE/list/gas
+
+/datum/gas_mixture/proc/get_gas_list()
+	return gas
+/datum/gas_mixture/proc/get_gas_moles(gas_id)
+	return gas[gas_id]
+#define GET_GAS_LIST(AIRMIX) (AIRMIX?.get_gas_list())
+#define GET_GAS(AIRMIX, GAS) (AIRMIX?.get_gas_moles(GAS))
+
+#else
+
+/datum/gas_mixture
+	//Associative list of gas moles.
+	//Gases with 0 moles are not tracked and are pruned by update_values()
+	var/list/gas
+
+#define GET_GAS_LIST(AIRMIX) (AIRMIX?.gas)
+#define GET_GAS(AIRMIX, GAS) (AIRMIX?.gas[GAS])
+
+#endif

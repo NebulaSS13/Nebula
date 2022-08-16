@@ -22,7 +22,7 @@
 	lightlevel = rand(1,7)/10
 	..()
 
-/obj/effect/overmap/visitable/sector/exoplanet/meat/get_target_temperature()
+/obj/effect/overmap/visitable/sector/exoplanet/meat/get_base_temperature()
 	return T20C + rand(10, 20)
 
 /obj/effect/overmap/visitable/sector/exoplanet/meat/select_strata()

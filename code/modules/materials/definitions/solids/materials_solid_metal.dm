@@ -34,7 +34,7 @@
 	reflectiveness = MAT_VALUE_MATTE
 	value = 1.5
 	default_solid_form = /obj/item/stack/material/puck
-	exoplanet_rarity = MAT_RARITY_UNCOMMON
+	exoplanet_rarity = EXOPLANET_RARITY_UNCOMMON
 
 	neutron_cross_section = 10
 	neutron_interactions = list(
@@ -113,7 +113,7 @@
 	wall_flags = PAINT_PAINTABLE|PAINT_STRIPABLE|WALL_HAS_EDGES
 	use_reinf_state = null
 	value = 1.4
-	exoplanet_rarity = MAT_RARITY_UNCOMMON
+	exoplanet_rarity = EXOPLANET_RARITY_UNCOMMON
 
 /decl/material/solid/metal/redgold
 	name = "red gold"
@@ -122,7 +122,7 @@
 	color = "#ff7a59"
 	reflectiveness = MAT_VALUE_SHINY
 	value = 1.4
-	exoplanet_rarity = MAT_RARITY_UNCOMMON
+	exoplanet_rarity = EXOPLANET_RARITY_UNCOMMON
 
 /decl/material/solid/metal/brass
 	name = "brass"
@@ -132,7 +132,7 @@
 	reflectiveness = MAT_VALUE_VERY_SHINY
 	value = 1.2
 	default_solid_form = /obj/item/stack/material/sheet
-	exoplanet_rarity = MAT_RARITY_UNCOMMON
+	exoplanet_rarity = EXOPLANET_RARITY_UNCOMMON
 
 /decl/material/solid/metal/copper
 	name = "copper"
@@ -215,7 +215,7 @@
 	conductive = 0
 	hidden_from_codex = TRUE
 	value = 0
-	exoplanet_rarity = MAT_RARITY_NOWHERE
+	exoplanet_rarity = EXOPLANET_RARITY_NOWHERE
 
 /decl/material/solid/metal/steel/holographic/get_recipes(reinf_mat)
 	return list()
@@ -236,7 +236,7 @@
 	construction_difficulty = MAT_VALUE_VERY_HARD_DIY
 	reflectiveness = MAT_VALUE_MIRRORED
 	value = 1.3
-	exoplanet_rarity = MAT_RARITY_UNCOMMON
+	exoplanet_rarity = EXOPLANET_RARITY_UNCOMMON
 
 /decl/material/solid/metal/aluminium
 	name = "aluminium"
@@ -265,7 +265,7 @@
 	shard_type = SHARD_NONE
 	conductive = 0
 	hidden_from_codex = TRUE
-	exoplanet_rarity = MAT_RARITY_NOWHERE
+	exoplanet_rarity = EXOPLANET_RARITY_NOWHERE
 
 /decl/material/solid/metal/aluminium/holographic/get_recipes(reinf_mat)
 	return list()
@@ -291,7 +291,7 @@
 	value = 1.4
 	reflectiveness = MAT_VALUE_MATTE
 	default_solid_form = /obj/item/stack/material/reinforced
-	exoplanet_rarity = MAT_RARITY_UNCOMMON
+	exoplanet_rarity = EXOPLANET_RARITY_UNCOMMON
 
 /decl/material/solid/metal/plasteel/generate_recipes(var/reinforce_material)
 	. = ..()
@@ -348,7 +348,7 @@
 	stack_origin_tech = "{'materials':3}"
 	construction_difficulty = MAT_VALUE_VERY_HARD_DIY
 	value = 1.8
-	exoplanet_rarity = MAT_RARITY_UNCOMMON
+	exoplanet_rarity = EXOPLANET_RARITY_UNCOMMON
 
 /decl/material/solid/metal/osmium
 	name = "osmium"
@@ -455,7 +455,7 @@
 	hidden_from_codex = TRUE
 	value = 3
 	default_solid_form = /obj/item/stack/material/cubes
-	exoplanet_rarity = MAT_RARITY_NOWHERE
+	exoplanet_rarity = EXOPLANET_RARITY_NOWHERE
 
 // Likewise.
 /decl/material/solid/metal/alienalloy/elevatorium
@@ -464,7 +464,7 @@
 	color = "#666666"
 	hidden_from_codex = TRUE
 	default_solid_form = /obj/item/stack/material/sheet
-	exoplanet_rarity = MAT_RARITY_NOWHERE
+	exoplanet_rarity = EXOPLANET_RARITY_NOWHERE
 
 /decl/material/solid/metal/tungsten
 	name = "tungsten"

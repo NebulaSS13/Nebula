@@ -70,15 +70,16 @@
 /datum/extension/ship_engine/gas/proc/get_ratio_specific_heat(var/datum/gas_mixture/propellant)
 	var/ratio_specific_heat = 0
 	propellant = propellant || get_propellant()
-	if(!propellant || !length(propellant.gas) || !propellant.total_moles)
+	var/prop_gas = GET_GAS_LIST(propellant)
+	if(!propellant || !length(prop_gas) || !propellant.total_moles)
 		return 0.01 // Divide by zero protection.
 
-	for(var/mat in propellant.gas)
+	for(var/mat in prop_gas)
 		var/decl/material/gas/G = GET_DECL(mat)
 		// 0.08 chosen to get the RATIO of the specific heat, we don't have cV/cP here, so this is a rough approximate.
 		var/ratio = (G.gas_specific_heat / 25) + 0.8// These numbers are meaningless, just magic numbers to calibrate range.
-		ratio_specific_heat += ratio * (propellant.gas[mat] / propellant.total_moles)
-	ratio_specific_heat = ratio_specific_heat / length(propellant.gas)
+		ratio_specific_heat += ratio * (GET_GAS(propellant, mat) / propellant.total_moles)
+	ratio_specific_heat = ratio_specific_heat / length(prop_gas)
 	if(ratio_specific_heat == 0 || ratio_specific_heat == 1)
 		// rare case of avoiding a divide by zero error.
 		ratio_specific_heat += 0.01

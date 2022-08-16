@@ -226,10 +226,10 @@
 				src.fire.icon_state = "fire1"
 	if(oxygen && environment)
 		var/decl/species/species = all_species[global.using_map.default_species]
-		if(!species.breath_type || environment.gas[species.breath_type] >= species.breath_pressure)
+		if(!species.breath_type || GET_GAS(environment, species.breath_type) >= species.breath_pressure)
 			src.oxygen.icon_state = "oxy0"
 			for(var/gas in species.poison_types)
-				if(environment.gas[gas])
+				if(GET_GAS(environment, gas))
 					src.oxygen.icon_state = "oxy1"
 					break
 		else

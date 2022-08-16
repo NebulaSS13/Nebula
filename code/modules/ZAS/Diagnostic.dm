@@ -7,8 +7,8 @@
 			to_chat(mob, "No zone here.")
 			var/datum/gas_mixture/mix = T.return_air()
 			to_chat(mob, "[mix.return_pressure()] kPa [mix.temperature]C")
-			for(var/g in mix.gas)
-				to_chat(mob, "[g]: [mix.gas[g]]\n")
+			for(var/g in GET_GAS_LIST(mix))
+				to_chat(mob, "[g]: [GET_GAS(mix, g)]\n")
 	else
 		if(zone_debug_images)
 			for(var/zone in  zone_debug_images)

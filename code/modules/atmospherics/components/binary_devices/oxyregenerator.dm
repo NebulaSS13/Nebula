@@ -69,8 +69,8 @@
 			phase = "processing"
 
 	if (phase == "processing")//processing CO2 in tank
-		if (inner_tank.gas[/decl/material/gas/carbon_dioxide])
-			var/co2_intake = between(0, inner_tank.gas[/decl/material/gas/carbon_dioxide], power_setting*delay/10)
+		if (GET_GAS(inner_tank, /decl/material/gas/carbon_dioxide))
+			var/co2_intake = between(0, GET_GAS(inner_tank, /decl/material/gas/carbon_dioxide), power_setting*delay/10)
 			last_flow_rate = co2_intake
 			inner_tank.adjust_gas(/decl/material/gas/carbon_dioxide, -co2_intake, 1)
 			var/datum/gas_mixture/new_oxygen = new
@@ -125,8 +125,8 @@
 	data["targetPressure"] = round(target_pressure)
 	data["phase"] = phase
 	if (inner_tank.total_moles > 0)
-		data["co2"] = round(100 * inner_tank.gas[/decl/material/gas/carbon_dioxide]/inner_tank.total_moles)
-		data["o2"] = round(100 * inner_tank.gas[/decl/material/gas/oxygen]/inner_tank.total_moles)
+		data["co2"] = round(100 * GET_GAS(inner_tank, /decl/material/gas/carbon_dioxide)/inner_tank.total_moles)
+		data["o2"] = round(100 * GET_GAS(inner_tank, /decl/material/gas/oxygen)/inner_tank.total_moles)
 	else
 		data["co2"] = 0
 		data["o2"] = 0

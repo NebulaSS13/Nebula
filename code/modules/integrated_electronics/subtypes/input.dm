@@ -1101,13 +1101,12 @@
 		activate_pin(3)
 		return
 
-	var/list/gases = air_contents.gas
 	var/list/gas_names = list()
 	var/list/gas_amounts = list()
-	for(var/id in gases)
+	for(var/id in GET_GAS_LIST(air_contents))
 		var/decl/material/mat = GET_DECL(id)
 		gas_names.Add(mat.gas_name)
-		gas_amounts.Add(round(gases[id], 0.001))
+		gas_amounts.Add(round(GET_GAS(air_contents, id), 0.001))
 
 	set_pin_data(IC_OUTPUT, 1, gas_names)
 	set_pin_data(IC_OUTPUT, 2, gas_amounts)

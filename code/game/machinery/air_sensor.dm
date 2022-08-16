@@ -46,9 +46,9 @@
 	if(total_moles <= 0)
 		return
 	. = list()
-	for(var/gas in air_sample.gas)
+	for(var/gas in GET_GAS_LIST(air_sample))
 		var/decl/material/mat = GET_DECL(gas)			
-		var/gaspercent = round(air_sample.gas[gas]*100/total_moles,0.01)
+		var/gaspercent = round(GET_GAS(air_sample, gas)*100/total_moles,0.01)
 		var/gas_list = list("symbol" = mat.gas_symbol_html, "percent" = gaspercent)
 		. += list(gas_list)
 

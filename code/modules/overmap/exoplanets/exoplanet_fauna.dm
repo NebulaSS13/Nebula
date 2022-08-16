@@ -29,7 +29,7 @@
 		A.SetName("alien creature")
 		A.real_name = "alien creature"
 		A.verbs |= /mob/living/simple_animal/proc/name_species
-	if(atmosphere)
+	if(exterior_atmosphere)
 		//Set up gases for living things
 		var/list/all_gasses = subtypesof(/decl/material/gas)
 		if(!LAZYLEN(breathgas))
@@ -41,11 +41,11 @@
 				goodgases -= gas
 		if(!badgas)
 			var/list/badgases = all_gasses.Copy()
-			badgases -= atmosphere.gas
+			badgases -= GET_GAS_LIST(exterior_atmosphere)
 			badgas = pick(badgases)
 
-		A.minbodytemp = atmosphere.temperature - 20
-		A.maxbodytemp = atmosphere.temperature + 30
+		A.minbodytemp = exterior_atmosphere.temperature - 20
+		A.maxbodytemp = exterior_atmosphere.temperature + 30
 		A.bodytemperature = (A.maxbodytemp+A.minbodytemp)/2
 		if(A.min_gas)
 			A.min_gas = breathgas.Copy()

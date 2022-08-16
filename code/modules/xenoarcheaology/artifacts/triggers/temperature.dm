@@ -23,8 +23,8 @@
 	C.min_temp = min_temp
 	C.max_temp = max_temp
 
-/datum/artifact_trigger/temperature/on_gas_exposure(datum/gas_mixture/gas)
-	return gas.temperature >= min_temp && gas.temperature <= max_temp
+/datum/artifact_trigger/temperature/on_gas_exposure(datum/gas_mixture/exposed_gas)
+	return exposed_gas.temperature >= min_temp && exposed_gas.temperature <= max_temp
 
 /datum/artifact_trigger/temperature/on_hit(obj/O, mob/user)
 	. = O.get_heat() >= min_temp && O.get_heat() <= max_temp

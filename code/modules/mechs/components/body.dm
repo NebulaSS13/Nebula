@@ -84,9 +84,8 @@
 			var/datum/gas_mixture/air = loc.return_air()
 			if(air)
 				//Essentially at this point its like we created a vacuum, but realistically making a bottle doesnt actually increase volume of a room and neither should a mech
-				for(var/g in air.gas)
-					cockpit.gas[g] = (air.gas[g] / air.volume) * cockpit.volume
-
+				for(var/g in GET_GAS_LIST(air))
+					cockpit.adjust_gas(g, (GET_GAS(air, g) / air.volume) * cockpit.volume, FALSE)
 				cockpit.temperature = air.temperature
 				cockpit.update_values()
 

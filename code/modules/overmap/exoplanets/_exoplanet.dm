@@ -37,7 +37,7 @@
 	var/list/actors = list() 	//things that appear in engravings on xenoarch finds.
 	var/list/species = list() 	//list of names to use for simple animals instead of 'alien creature'
 
-	var/datum/gas_mixture/atmosphere
+	var/datum/gas_mixture/immutable/exterior_atmosphere
 	var/list/breathgas = list()			//list of gases animals/plants require to survive
 	var/badgas							//id of gas that is toxic to life here
 
@@ -127,10 +127,9 @@
 
 	generate_habitability()
 	generate_atmosphere()
-	for(var/datum/exoplanet_theme/T in themes)
-		T.adjust_atmosphere(src)
+
 	select_strata()
-	generate_flora(atmosphere?.temperature || T20C)
+	generate_flora(exterior_atmosphere?.temperature || T20C)
 	generate_map()
 	generate_landing(2)
 	generate_features()
@@ -258,16 +257,16 @@
 /obj/effect/overmap/visitable/sector/exoplanet/get_scan_data(mob/user)
 	. = ..()
 	var/list/extra_data = list("<br>")
-	if(atmosphere)
+	if(exterior_atmosphere)
 		if(user.skill_check(SKILL_SCIENCE, SKILL_EXPERT) || user.skill_check(SKILL_ATMOS, SKILL_EXPERT))
 			var/list/gases = list()
-			for(var/g in atmosphere.gas)
-				if(atmosphere.gas[g] > atmosphere.total_moles * 0.05)
+			for(var/g in GET_GAS_LIST(exterior_atmosphere))
+				if(GET_GAS(exterior_atmosphere, g) > exterior_atmosphere.total_moles * 0.05)
 					var/decl/material/mat = GET_DECL(g)
 					gases += mat.gas_name
 			extra_data += "Atmosphere composition: [english_list(gases)]"
 			var/inaccuracy = rand(8,12)/10
-			extra_data += "Atmosphere pressure [atmosphere.return_pressure()*inaccuracy] kPa, temperature [atmosphere.temperature*inaccuracy] K"
+			extra_data += "Atmosphere pressure [exterior_atmosphere.return_pressure()*inaccuracy] kPa, temperature [exterior_atmosphere.temperature*inaccuracy] K"
 		else if(user.skill_check(SKILL_SCIENCE, SKILL_BASIC) || user.skill_check(SKILL_ATMOS, SKILL_BASIC))
 			extra_data += "Atmosphere present"
 		extra_data += "<br>"

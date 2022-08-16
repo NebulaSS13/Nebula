@@ -3,7 +3,7 @@
 	lore_text = "Ammonia Nitrate Fuel Oil mix, an explosive compound known for centuries. Safe to handle, can be set off with a small explosion."
 	taste_description = "fertilizer and fuel"
 	color = "#dbc3c3"
-	exoplanet_rarity = MAT_RARITY_UNCOMMON
+	exoplanet_rarity = EXOPLANET_RARITY_UNCOMMON
 	uid = "chem_anfo"
 	var/boompower = 1
 
@@ -36,5 +36,5 @@
 	lore_text = "Ammonia Nitrate Fuel Oil, with aluminium powder, an explosive compound known for centuries. Safe to handle, can be set off with a small explosion."
 	color = "#ffe8e8"
 	boompower = 2
-	exoplanet_rarity = MAT_RARITY_EXOTIC
+	exoplanet_rarity = EXOPLANET_RARITY_EXOTIC
 	uid = "chem_anfoplus"

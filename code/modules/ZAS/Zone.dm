@@ -179,14 +179,15 @@ Class Procs:
 /zone/proc/handle_condensation()
 	set waitfor = FALSE
 	condensing = TRUE
-	for(var/g in air.gas)
+	var/air_gas = GET_GAS_LIST(air) 
+	for(var/g in air_gas)
 		var/decl/material/mat = GET_DECL(g)
 		if(!isnull(mat.gas_condensation_point) && (air.temperature <= mat.gas_condensation_point))
-			var/condensation_area = air.group_multiplier / length(air.gas)
+			var/condensation_area = air.group_multiplier / length(air_gas)
 			while(condensation_area > 0 && length(contents))
 				condensation_area--
 				var/turf/flooding = pick(contents)
-				var/condense_amt = min(air.gas[g], rand(1,3))
+				var/condense_amt = min(GET_GAS(air, g), rand(1,3))
 				if(condense_amt < 1)
 					break
 				air.adjust_gas(g, -condense_amt)
@@ -198,11 +199,11 @@ Class Procs:
 
 /zone/proc/dbg_data(mob/M)
 	to_chat(M, name)
-	for(var/g in air.gas)
+	for(var/g in GET_GAS_LIST(air))
 		var/decl/material/mat = GET_DECL(g)
-		to_chat(M, "[capitalize(mat.gas_name)]: [air.gas[g]]")
+		to_chat(M, "[capitalize(mat.gas_name)]: [GET_GAS(air, g)]")
 	to_chat(M, "P: [air.return_pressure()] kPa V: [air.volume]L T: [air.temperature]°K ([air.temperature - T0C]°C)")
-	to_chat(M, "O2 per N2: [(air.gas[/decl/material/gas/nitrogen] ? air.gas[/decl/material/gas/oxygen]/air.gas[/decl/material/gas/nitrogen] : "N/A")] Moles: [air.total_moles]")
+	to_chat(M, "O2 per N2: [(GET_GAS(air, /decl/material/gas/nitrogen) ? GET_GAS(air, /decl/material/gas/oxygen) / GET_GAS(air, /decl/material/gas/nitrogen) : "N/A")] Moles: [air.total_moles]")
 	to_chat(M, "Simulated: [contents.len] ([air.group_multiplier])")
 //	to_chat(M, "Unsimulated: [unsimulated_contents.len]")
 //	to_chat(M, "Edges: [edges.len]")

@@ -492,22 +492,22 @@
 		if(length(checking_data) < 2)
 			continue
 		var/obj/item/tank/checking = checking_data[1]
-		if(!istype(checking) || !checking.air_contents?.gas)
+		if(!istype(checking) || !GET_GAS_LIST(checking.air_contents))
 			continue
 
 		var/valid_tank = (checking.manipulated_by && checking.manipulated_by != real_name && findtext(checking.desc, breathing_gas.name))
 		if(!valid_tank)
-			if(!checking.air_contents.gas[breathes_gas])
+			if(!GET_GAS(checking.air_contents, breathes_gas))
 				continue
 			var/is_poison = FALSE
 			for(var/poison in poison_gas)
-				if(checking.air_contents.gas[poison])
+				if(GET_GAS(checking.air_contents, poison))
 					is_poison = TRUE
 					break
 			if(!is_poison)
 				valid_tank = TRUE
 
-		if(valid_tank && (!selected_obj || selected_obj.air_contents.gas[breathes_gas] <  checking.air_contents.gas[breathes_gas]))
+		if(valid_tank && (!selected_obj || GET_GAS(selected_obj.air_contents, breathes_gas) <  GET_GAS(checking.air_contents, breathes_gas)))
 			selected_obj =  checking
 			selected_slot = slot_name
 			selected_from = checking_data[2]

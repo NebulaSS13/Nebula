@@ -3380,6 +3380,7 @@
 #include "code\modules\xenoarcheaology\tools\picks.dm"
 #include "code\modules\xenoarcheaology\tools\tools.dm"
 #include "code\modules\xgm\xgm_gas_mixture.dm"
+#include "code\modules\xgm\xgm_gas_mixture_immutable.dm"
 #include "code\modules\ZAS\_docs.dm"
 #include "code\modules\ZAS\Airflow.dm"
 #include "code\modules\ZAS\Atom.dm"

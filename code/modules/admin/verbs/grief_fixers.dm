@@ -22,8 +22,7 @@
 	for(var/net in SSmachines.pipenets)
 		var/datum/pipe_network/PN = net
 		for(var/datum/gas_mixture/G in PN.gases)
-			G.gas = list()
-			G.update_values()
+			G.clear_gas_list()
 
 	to_chat(usr, "\[2/5\] - All pipenets purged of gas.")
 

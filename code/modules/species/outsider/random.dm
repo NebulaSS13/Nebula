@@ -129,12 +129,13 @@
 	hazard_low_pressure = 0.2 * normal_pressure
 	warning_low_pressure = 2.5 * hazard_low_pressure
 
-	breath_type = pick(atmosphere.gas)
-	breath_pressure = 0.8*(atmosphere.gas[breath_type]/atmosphere.total_moles)*normal_pressure
+	var/list/atmos_gas = GET_GAS_LIST(atmosphere)
+	breath_type = pick(atmos_gas)
+	breath_pressure = 0.8*(GET_GAS(atmosphere, breath_type)/atmosphere.total_moles)*normal_pressure
 
 	var/list/newgases = subtypesof(/decl/material/gas)
 	newgases = newgases.Copy()
-	newgases ^= atmosphere.gas
+	newgases ^= atmos_gas
 	for(var/gas in newgases)
 		var/decl/material/mat = GET_DECL(gas)
 		if(mat.gas_flags & (XGM_GAS_OXIDIZER|XGM_GAS_FUEL))

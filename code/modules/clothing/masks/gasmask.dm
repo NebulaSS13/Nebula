@@ -46,15 +46,14 @@
 
 /obj/item/clothing/mask/gas/filter_air(datum/gas_mixture/air)
 	var/datum/gas_mixture/filtered = new
-
 	for(var/g in filtered_gases)
-		if(air.gas[g])
-			filtered.gas[g] = air.gas[g] * gas_filter_strength
-			air.gas[g] -= filtered.gas[g]
-
+		var/source_amt = GET_GAS(air, g)
+		if(source_amt > 0)
+			var/filtered_amt = source_amt * gas_filter_strength
+			filtered.adjust_gas(g, filtered_amt, FALSE)
+			air.adjust_gas(g, -(filtered_amt), FALSE)
 	air.update_values()
 	filtered.update_values()
-
 	return filtered
 
 /obj/item/clothing/mask/gas/half

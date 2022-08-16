@@ -112,7 +112,7 @@ INITIALIZE_IMMEDIATE(/obj/effect/gas_overlay)
 
 	// Attributes
 	/// How rare is this material generally?
-	var/exoplanet_rarity = MAT_RARITY_MUNDANE
+	var/exoplanet_rarity = EXOPLANET_RARITY_MUNDANE 
 	/// Delay in ticks when cutting through this wall.
 	var/cut_delay = 0
 	/// Radiation var. Used in wall and object processing to irradiate surroundings.
@@ -383,7 +383,7 @@ INITIALIZE_IMMEDIATE(/obj/effect/gas_overlay)
 	name = "placeholder"
 	uid = "mat_placeholder"
 	hidden_from_codex = TRUE
-	exoplanet_rarity = MAT_RARITY_NOWHERE
+	exoplanet_rarity = EXOPLANET_RARITY_NOWHERE
 
 // Generic material product (sheets, bricks, etc). Used ALL THE TIME.
 // May return an instance list, a single instance, or nothing if there is no instance produced.

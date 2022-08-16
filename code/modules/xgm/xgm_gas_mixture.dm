@@ -1,7 +1,5 @@
+// Refer to ZAS.dm in _defines for the gas list.
 /datum/gas_mixture
-	//Associative list of gas moles.
-	//Gases with 0 moles are not tracked and are pruned by update_values()
-	var/list/gas = list()
 	//Temperature in Kelvin of this gas mix.
 	var/temperature = 0
 
@@ -17,10 +15,19 @@
 	//Cache of gas overlay objects
 	var/list/tile_overlay_cache
 
-/datum/gas_mixture/New(_volume = CELL_VOLUME, _temperature = 0, _group_multiplier = 1)
+/datum/gas_mixture/New(_volume = CELL_VOLUME, _temperature = 0, _group_multiplier = 1, _initial_gas)
 	volume = _volume
 	temperature = _temperature
 	group_multiplier = _group_multiplier
+	if(islist(_initial_gas))
+		gas = _initial_gas
+	else
+		gas = list()
+
+/datum/gas_mixture/proc/clear_gas_list(var/update_values = TRUE)
+	gas = list()
+	if(update_values)
+		update_values()
 
 /datum/gas_mixture/proc/get_gas(gasid)
 	if(!gas.len)
@@ -234,8 +241,8 @@
 	var/datum/gas_mixture/removed = new
 
 	for(var/g in gas)
-		removed.gas[g] = QUANTIZE((gas[g] / total_moles) * amount)
-		gas[g] -= removed.gas[g] / group_multiplier
+		removed.adjust_gas(g, QUANTIZE((gas[g] / total_moles) * amount), FALSE)
+		gas[g] -= GET_GAS(removed, g) / group_multiplier
 
 	removed.temperature = temperature
 	update_values()
@@ -256,9 +263,8 @@
 	removed.group_multiplier = out_group_multiplier
 
 	for(var/g in gas)
-		removed.gas[g] = (gas[g] * ratio * group_multiplier / out_group_multiplier)
+		removed.adjust_gas(g, gas[g] * ratio * group_multiplier / out_group_multiplier, FALSE)
 		gas[g] = gas[g] * (1 - ratio)
-
 	removed.temperature = temperature
 	removed.volume = volume * group_multiplier / out_group_multiplier
 	update_values()
@@ -290,8 +296,8 @@
 		var/decl/material/mat = GET_DECL(g)
 		var/list/check = mat_flag ? mat.flags : mat.gas_flags
 		if(check & flag)
-			removed.gas[g] = QUANTIZE((gas[g] / sum) * amount)
-			gas[g] -= removed.gas[g] / group_multiplier
+			removed.adjust_gas(g, QUANTIZE((gas[g] / sum) * amount), FALSE)
+			gas[g] -= GET_GAS(removed, g) / group_multiplier
 
 	removed.temperature = temperature
 	update_values()
@@ -483,12 +489,11 @@
 		var/temp_heatcap = gasmix.heat_capacity()
 		total_thermal_energy += gasmix.temperature * temp_heatcap
 		total_heat_capacity += temp_heatcap
-		for(var/g in gasmix.gas)
-			total_gas[g] += gasmix.gas[g]
+		for(var/g in GET_GAS_LIST(gasmix))
+			total_gas[g] += GET_GAS(gasmix, g)
 
 	if(total_volume > 0)
-		var/datum/gas_mixture/combined = new(total_volume)
-		combined.gas = total_gas
+		var/datum/gas_mixture/combined = new(total_volume, _initial_gas = total_gas)
 
 		//Calculate temperature
 		if(total_heat_capacity > 0)
@@ -499,13 +504,17 @@
 		combined.react()
 
 		//Average out the gases
-		for(var/g in combined.gas)
-			combined.gas[g] /= total_volume
+		for(var/g in GET_GAS_LIST(combined))
+			combined.adjust_gas(g, GET_GAS(combined, g) / total_volume, FALSE)
+		combined.update_values()
 
 		//Update individual gas_mixtures
 		for(var/datum/gas_mixture/gasmix in gases)
-			gasmix.gas = combined.gas.Copy()
+			gasmix.clear_gas_list(FALSE)
+			for(var/gas in GET_GAS_LIST(combined))
+				gasmix.adjust_gas(gas, GET_GAS(combined, gas), FALSE)
 			gasmix.temperature = combined.temperature
+			gasmix.update_values()
 			gasmix.multiply(gasmix.volume)
 
 	return 1

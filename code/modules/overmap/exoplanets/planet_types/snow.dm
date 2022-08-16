@@ -17,7 +17,7 @@
 	water_material = null // Will prevent the weather system causing rainfall.
 	weather_system = /decl/state/weather/snow
 
-/obj/effect/overmap/visitable/sector/exoplanet/snow/get_target_temperature()
+/obj/effect/overmap/visitable/sector/exoplanet/snow/get_base_temperature()
 	return T0C - rand(10, 100)
 
 /datum/random_map/automata/cave_system/mountains/snow

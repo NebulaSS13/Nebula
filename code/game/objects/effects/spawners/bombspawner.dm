@@ -75,16 +75,16 @@
 	OT.master = V
 
 	PT.valve_welded = TRUE
-	PT.air_contents.gas = list()
-	PT.air_contents.gas[accelerant_type] = accelerant_amount
-	PT.air_contents.gas[filler_type] = filler_amount
+	PT.air_contents.clear_gas_list(FALSE)
+	PT.air_contents.adjust_gas(accelerant_type, accelerant_amount, FALSE)
+	PT.air_contents.adjust_gas(filler_type, filler_amount, FALSE)
 	PT.air_contents.total_moles = accelerant_amount + filler_amount
 	PT.air_contents.temperature = FLAMMABLE_GAS_MINIMUM_BURN_TEMPERATURE+1
 	PT.air_contents.update_values()
 
 	OT.valve_welded = TRUE
-	OT.air_contents.gas = list()
-	OT.air_contents.gas[oxidizer_type] = oxidizer_amount
+	OT.air_contents.clear_gas_list(FALSE)
+	OT.air_contents.adjust_gas(oxidizer_type, oxidizer_amount, FALSE)
 	OT.air_contents.total_moles = oxidizer_amount
 	OT.air_contents.temperature = FLAMMABLE_GAS_MINIMUM_BURN_TEMPERATURE+1
 	OT.air_contents.update_values()

@@ -60,14 +60,14 @@
 				. += "<span class='warning'>Pressure: [round(pressure,0.01)] kPa</span>"
 
 			var/perGas_add_string = ""
-			for(var/mix in mixture.gas)
-				var/percentage = round(mixture.gas[mix]/total_moles * 100, 0.01)
+			for(var/mix in GET_GAS_LIST(mixture))
+				var/percentage = round(GET_GAS(mixture, mix)/total_moles * 100, 0.01)
 				if(!percentage)
 					continue
 				var/decl/material/mat = GET_DECL(mix)
 				switch(mode)
 					if(MV_MODE)
-						perGas_add_string = ", Moles: [round(mixture.gas[mix], 0.01)]"
+						perGas_add_string = ", Moles: [round(GET_GAS(mixture, mix), 0.01)]"
 					if(MAT_TRAIT_MODE)
 						var/list/traits = list()
 						if(mat.gas_flags & XGM_GAS_FUEL)

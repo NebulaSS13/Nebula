@@ -10,7 +10,7 @@
 	hidden_from_codex = TRUE
 	value = 2.5
 	default_solid_form = /obj/item/stack/material/cubes
-	exoplanet_rarity = MAT_RARITY_EXOTIC
+	exoplanet_rarity = EXOPLANET_RARITY_EXOTIC
 
 /decl/material/solid/metal/aliumium/Initialize()
 	icon_base = 'icons/turf/walls/metal.dmi'

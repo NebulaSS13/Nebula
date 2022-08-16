@@ -19,7 +19,7 @@
 	)
 	spawn_weight = 50
 
-/obj/effect/overmap/visitable/sector/exoplanet/shrouded/get_target_temperature()
+/obj/effect/overmap/visitable/sector/exoplanet/shrouded/get_base_temperature()
 	return T20C - rand(10, 20)
 
 /obj/effect/overmap/visitable/sector/exoplanet/shrouded/get_atmosphere_color()

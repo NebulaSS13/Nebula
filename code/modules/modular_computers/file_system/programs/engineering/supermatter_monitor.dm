@@ -145,12 +145,12 @@
 		data["SM_EPR"] = process_data_output(engine_skill, epr)
 		data["SM_EPR_label"] = get_threshhold_color(SUPERMATTER_DATA_EPR, epr)
 		if(air.total_moles)
-			data["SM_gas_O2"] = round(100*air.gas[/decl/material/gas/oxygen]/air.total_moles,0.01)
-			data["SM_gas_CO2"] = round(100*air.gas[/decl/material/gas/carbon_dioxide]/air.total_moles,0.01)
-			data["SM_gas_N2"] = round(100*air.gas[/decl/material/gas/nitrogen]/air.total_moles,0.01)
-			data["SM_gas_EX"] = round(100*air.gas[/decl/material/solid/exotic_matter]/air.total_moles,0.01)
-			data["SM_gas_N2O"] = round(100*air.gas[/decl/material/gas/nitrous_oxide]/air.total_moles,0.01)
-			data["SM_gas_H2"] = round(100*air.gas[/decl/material/gas/hydrogen]/air.total_moles,0.01)
+			data["SM_gas_O2"] =  round(100 * GET_GAS(air, /decl/material/gas/oxygen) / air.total_moles,0.01)
+			data["SM_gas_CO2"] = round(100 * GET_GAS(air, /decl/material/gas/carbon_dioxide) / air.total_moles,0.01)
+			data["SM_gas_N2"] =  round(100 * GET_GAS(air, /decl/material/gas/nitrogen) / air.total_moles,0.01)
+			data["SM_gas_EX"] =  round(100 * GET_GAS(air, /decl/material/solid/exotic_matter) / air.total_moles,0.01)
+			data["SM_gas_N2O"] = round(100 * GET_GAS(air, /decl/material/gas/nitrous_oxide) / air.total_moles,0.01)
+			data["SM_gas_H2"] =  round(100 * GET_GAS(air, /decl/material/gas/hydrogen) / air.total_moles,0.01)
 		else
 			data["SM_gas_O2"] = 0
 			data["SM_gas_CO2"] = 0

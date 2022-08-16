@@ -29,7 +29,7 @@
 		lightlevel = 0.1
 	..()
 
-/obj/effect/overmap/visitable/sector/exoplanet/chlorine/get_target_temperature()
+/obj/effect/overmap/visitable/sector/exoplanet/chlorine/get_base_temperature()
 	return T0C - rand(0, 100)
 
 /obj/effect/overmap/visitable/sector/exoplanet/chlorine/get_mandatory_gasses()

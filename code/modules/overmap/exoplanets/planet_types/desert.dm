@@ -21,7 +21,7 @@
 		lightlevel = rand(5,10)/10	//deserts are usually :lit:
 	..()
 
-/obj/effect/overmap/visitable/sector/exoplanet/desert/get_target_temperature()
+/obj/effect/overmap/visitable/sector/exoplanet/desert/get_base_temperature()
 	return T20C + rand(20, 100)
 
 /obj/effect/overmap/visitable/sector/exoplanet/desert/adapt_seed(var/datum/seed/S)

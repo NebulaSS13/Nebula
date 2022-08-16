@@ -1,23 +1,17 @@
-/obj/effect/overmap/visitable/sector/exoplanet/proc/generate_atmosphere()
-	atmosphere = new
-	var/target_temp = get_target_temperature()
+/obj/effect/overmap/visitable/sector/exoplanet/proc/generate_atmosphere_gas_list(var/target_temp)
+	. = list()
+	//Skip fun gas gen for perfect terran worlds
+	if(habitability_class == HABITABILITY_IDEAL)
+		.[/decl/material/gas/oxygen] = MOLES_O2STANDARD
+		.[/decl/material/gas/nitrogen] = MOLES_N2STANDARD
+		return
 
 	//Make sure temperature can't damage people on casual planets
 	if(habitability_class <= HABITABILITY_OKAY)
 		var/decl/species/S = get_species_by_key(global.using_map.default_species)
 		target_temp = Clamp(target_temp, S.cold_level_1 + rand(1,5), S.heat_level_1 - rand(1,5))
 
-	atmosphere.temperature = target_temp
-
-	//Skip fun gas gen for perfect terran worlds
-	if(habitability_class == HABITABILITY_IDEAL)
-		atmosphere.adjust_gas(/decl/material/gas/oxygen, MOLES_O2STANDARD, FALSE)
-		atmosphere.adjust_gas(/decl/material/gas/nitrogen, MOLES_N2STANDARD)
-		atmosphere.check_tile_graphic()
-		return
-	
 	var/total_moles = MOLES_CELLSTANDARD
-	
 	//Add the non-negotiable gasses
 	var/badflag = 0
 	var/gas_list = get_mandatory_gasses()
@@ -39,7 +33,7 @@
 		var/decl/material/mat = all_materials[mat_type]
 		if(mat.is_abstract())
 			continue
-		if(mat.exoplanet_rarity == MAT_RARITY_NOWHERE)
+		if(mat.exoplanet_rarity == EXOPLANET_RARITY_NOWHERE)
 			continue
 		if(isnull(mat.boiling_point) || mat.boiling_point > target_temp)
 			continue
@@ -84,12 +78,17 @@
 
 	// Add all gasses, adjusted for target temperature and pressure
 	var/target_pressure = get_target_pressure()
-	var/target_moles = target_pressure * CELL_VOLUME / (atmosphere.temperature * R_IDEAL_GAS_EQUATION)
+	var/target_moles = target_pressure * CELL_VOLUME / (target_temp * R_IDEAL_GAS_EQUATION)
+	var/mole_std = target_moles / MOLES_CELLSTANDARD
 	for(var/g in gas_list)
-		var/adjusted_moles = gas_list[g] * target_moles / MOLES_CELLSTANDARD
-		atmosphere.adjust_gas(g, adjusted_moles, FALSE)
-	atmosphere.update_values()
-	atmosphere.check_tile_graphic()
+		.[g] = gas_list[g] * mole_std
+
+/obj/effect/overmap/visitable/sector/exoplanet/proc/generate_atmosphere()
+	var/target_temp = get_target_temperature()
+	exterior_atmosphere = new(_initial_gas = generate_atmosphere_gas_list(target_temp))
+	exterior_atmosphere.temperature = target_temp
+	exterior_atmosphere.update_values()
+	exterior_atmosphere.check_tile_graphic()
 
 //List of gases that will be always present. Amounts are given assuming total of MOLES_CELLSTANDARD in atmosphere
 /obj/effect/overmap/visitable/sector/exoplanet/proc/get_mandatory_gasses()
@@ -98,7 +97,12 @@
 	return list()
 
 /obj/effect/overmap/visitable/sector/exoplanet/proc/get_target_temperature()
-	return T20C + rand(-5,5)
+	. = get_base_temperature()
+	for(var/datum/exoplanet_theme/T in themes)
+		. = T.modify_temperature(.)
+
+/obj/effect/overmap/visitable/sector/exoplanet/proc/get_base_temperature()
+	. = T20C + rand(-5,5)
 
 /obj/effect/overmap/visitable/sector/exoplanet/proc/get_target_pressure()
 	return ONE_ATMOSPHERE * rand(8, 12)/10

@@ -10,7 +10,7 @@
 /datum/artifact_trigger/proc/on_touch(mob/M)
 	return FALSE
 
-/datum/artifact_trigger/proc/on_gas_exposure(datum/gas_mixture/gas)
+/datum/artifact_trigger/proc/on_gas_exposure(datum/gas_mixture/exposed_gas)
 	return FALSE
 
 /datum/artifact_trigger/proc/on_explosion(severity)

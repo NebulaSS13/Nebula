@@ -162,8 +162,8 @@ var/global/image/contamination_overlay = image('icons/effects/contamination.dmi'
 		var/datum/gas_mixture/env = return_air(1)
 		if(!env)
 			return
-		for(var/g in env.gas)
+		for(var/g in GET_GAS_LIST(env))
 			var/decl/material/mat = GET_DECL(g)
-			if((mat.gas_flags & XGM_GAS_CONTAMINANT) && env.gas[g] > mat.gas_overlay_limit + 1)
+			if((mat.gas_flags & XGM_GAS_CONTAMINANT) && GET_GAS(env, g) > mat.gas_overlay_limit + 1)
 				I.contaminate()
 				break

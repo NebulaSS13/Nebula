@@ -12,9 +12,9 @@
 
 /obj/machinery/atmospherics/unary/get_single_monetary_worth()
 	. = ..()
-	for(var/gas in air_contents?.gas)
+	for(var/gas in GET_GAS_LIST(air_contents))
 		var/decl/material/gas_data = GET_DECL(gas)
-		. += gas_data.get_value() * air_contents.gas[gas] * GAS_WORTH_MULTIPLIER
+		. += gas_data.get_value() * GET_GAS(air_contents, gas) * GAS_WORTH_MULTIPLIER
 	. = max(1, round(.))
 
 /obj/machinery/atmospherics/unary/Initialize()

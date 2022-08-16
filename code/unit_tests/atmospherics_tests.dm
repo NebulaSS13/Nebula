@@ -31,7 +31,7 @@
 		var/datum/gas_mixture/before = before_gas_mixes[mix_name]
 		var/datum/gas_mixture/after = after_gas_mixes[mix_name]
 
-		var/list/all_gases = before.gas | after.gas
+		var/list/all_gases = GET_GAS_LIST(before) | GET_GAS_LIST(after)
 		for(var/gasid in all_gases)
 			change[gasid] = after.get_gas(gasid) - before.get_gas(gasid)
 

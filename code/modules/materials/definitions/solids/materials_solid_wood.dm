@@ -105,7 +105,7 @@
 	shard_type = SHARD_NONE
 	value = 0
 	hidden_from_codex = TRUE
-	exoplanet_rarity = MAT_RARITY_NOWHERE
+	exoplanet_rarity = EXOPLANET_RARITY_NOWHERE
 
 /decl/material/solid/wood/holographic/get_recipes(reinf_mat)
 	return list()

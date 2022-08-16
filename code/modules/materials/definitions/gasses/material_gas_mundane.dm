@@ -330,7 +330,7 @@
 	value = 0.45
 	gas_symbol_html = "T"
 	gas_symbol = "T"
-	exoplanet_rarity = MAT_RARITY_UNCOMMON
+	exoplanet_rarity = EXOPLANET_RARITY_UNCOMMON
 
 /decl/material/gas/hydrogen/deuterium
 	name = "deuterium"
@@ -344,7 +344,7 @@
 	gas_symbol_html = "D"
 	gas_symbol = "D"
 	value = 0.5
-	exoplanet_rarity = MAT_RARITY_UNCOMMON
+	exoplanet_rarity = EXOPLANET_RARITY_UNCOMMON
 
 	neutron_interactions = list(
 		INTERACTION_ABSORPTION = 1250

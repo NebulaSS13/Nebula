@@ -87,7 +87,7 @@
 	taste_description = "100% abuse"
 	color = "#c8a5dc"
 	flags = AFFECTS_DEAD //This can even heal dead people.
-	exoplanet_rarity = MAT_RARITY_NOWHERE
+	exoplanet_rarity = EXOPLANET_RARITY_NOWHERE
 	uid = "chem_adminorazine"
 
 	glass_name = "liquid gold"

@@ -261,7 +261,7 @@
 	filtering_outputs.Cut()
 	for(var/datum/omni_port/P in ports)
 		filtering_outputs[P.filtering] = P.air
-		for(var/mat_type in P.air?.gas)
+		for(var/mat_type in GET_GAS_LIST(P.air))
 			var/decl/material/mat = GET_DECL(mat_type)
 			gas_decls_by_symbol_cache[mat.gas_symbol] = mat.type
 

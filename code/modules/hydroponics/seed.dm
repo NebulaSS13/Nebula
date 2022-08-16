@@ -194,13 +194,14 @@
 	// It's active only for those plants which doesn't consume nor exude gasses.
 	if(!get_trait(TRAIT_PHOTOSYNTHESIS))
 		return
-	if(!(environment) || !(environment.gas))
+	var/list/environment_gas = GET_GAS_LIST(environment)
+	if(!length(environment_gas))
 		return
 	if(LAZYLEN(exude_gasses) || LAZYLEN(consume_gasses ))
 		return
 	if(!(light_supplied) || !(get_trait(TRAIT_REQUIRES_WATER)))
 		return
-	if(environment.get_gas(/decl/material/gas/carbon_dioxide) >= req_CO2_moles)
+	if(GET_GAS(environment, /decl/material/gas/carbon_dioxide) >= req_CO2_moles)
 		environment.adjust_gas(/decl/material/gas/carbon_dioxide, -req_CO2_moles, 1)
 		environment.adjust_gas(/decl/material/gas/oxygen, req_CO2_moles, 1)
 
@@ -272,8 +273,7 @@
 	if(consume_gasses && consume_gasses.len)
 		var/missing_gas = 0
 		for(var/gas in consume_gasses)
-			if(environment && environment.gas && environment.gas[gas] && \
-			 environment.gas[gas] >= consume_gasses[gas])
+			if(GET_GAS(environment, gas) >= consume_gasses[gas])
 				if(!check_only)
 					environment.adjust_gas(gas,-consume_gasses[gas],1)
 			else
@@ -423,7 +423,7 @@
 	var/list/all_materials = decls_repository.get_decls_of_subtype(/decl/material)
 	for(var/mat_type in all_materials)
 		var/decl/material/mat = all_materials[mat_type]
-		if(mat.exoplanet_rarity == MAT_RARITY_NOWHERE)
+		if(mat.exoplanet_rarity == EXOPLANET_RARITY_NOWHERE)
 			continue
 		if(skip_toxins && mat.toxicity)
 			continue

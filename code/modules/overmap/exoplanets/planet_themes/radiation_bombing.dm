@@ -1,10 +1,8 @@
 /datum/exoplanet_theme/radiation_bombing
 	name = "Radiation Bombardment"
 
-/datum/exoplanet_theme/radiation_bombing/adjust_atmosphere(obj/effect/overmap/visitable/sector/exoplanet/E)
-	if(E.atmosphere)
-		E.atmosphere.temperature += rand(20, 100)
-		E.atmosphere.update_values()
+/datum/exoplanet_theme/radiation_bombing/modify_temperature(var/temperature)
+	return ..() + rand(20, 100)
 
 /datum/exoplanet_theme/radiation_bombing/get_sensor_data()
 	return "Hotspots of radiation detected."

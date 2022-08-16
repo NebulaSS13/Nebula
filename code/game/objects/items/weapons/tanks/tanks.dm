@@ -84,9 +84,9 @@ var/global/list/global/tank_gauge_cache = list()
 
 /obj/item/tank/get_single_monetary_worth()
 	. = ..()
-	for(var/gas in air_contents?.gas)
+	for(var/gas in GET_GAS_LIST(air_contents))
 		var/decl/material/gas_data = GET_DECL(gas)
-		. += gas_data.get_value() * air_contents.gas[gas] * GAS_WORTH_MULTIPLIER
+		. += gas_data.get_value() * GET_GAS(air_contents, gas) * GAS_WORTH_MULTIPLIER
 	. = max(1, round(.))
 
 /obj/item/tank/examine(mob/user)
@@ -523,8 +523,8 @@ var/global/list/global/tank_gauge_cache = list()
 	volume = initial(tank_copy.volume)
 
 	// Set up explosive mix.
-	air_contents.gas[DEFAULT_GAS_ACCELERANT] = 4 + rand(4)
-	air_contents.gas[DEFAULT_GAS_OXIDIZER] = 6 + rand(8)
+	air_contents.adjust_gas(DEFAULT_GAS_ACCELERANT, 4 + rand(4), FALSE)
+	air_contents.adjust_gas(DEFAULT_GAS_OXIDIZER, 6 + rand(8), FALSE)
 	air_contents.update_values()
 	air_contents.temperature = FLAMMABLE_GAS_MINIMUM_BURN_TEMPERATURE-1
 	valve_welded = TRUE

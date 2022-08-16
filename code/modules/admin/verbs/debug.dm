@@ -32,8 +32,8 @@
 	var/t = "<span class='notice'>Coordinates: [T.x],[T.y],[T.z]</span>\n"
 	t += "<span class='warning'>Temperature: [env.temperature]</span>\n"
 	t += "<span class='warning'>Pressure: [env.return_pressure()]kPa</span>\n"
-	for(var/g in env.gas)
-		t += "<span class='notice'>[g]: [env.gas[g]] / [env.gas[g] * R_IDEAL_GAS_EQUATION * env.temperature / env.volume]kPa</span>\n"
+	for(var/g in GET_GAS_LIST(env))
+		t += "<span class='notice'>[g]: [GET_GAS(env, g)] / [GET_GAS(env, g) * R_IDEAL_GAS_EQUATION * env.temperature / env.volume]kPa</span>\n"
 
 	usr.show_message(t, 1)
 	SSstatistics.add_field_details("admin_verb","ASL") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
@@ -341,7 +341,7 @@
 		if(Rad.anchored)
 			if(!Rad.loaded_tank)
 				Rad.loaded_tank = new /obj/item/tank/hydrogen(Rad)
-				Rad.loaded_tank.air_contents.gas[/decl/material/gas/hydrogen] = 70
+				Rad.loaded_tank.air_contents.adjust_gas(/decl/material/gas/hydrogen, 70)
 				Rad.drainratio = 0
 			if(!Rad.active)
 				Rad.toggle_power()

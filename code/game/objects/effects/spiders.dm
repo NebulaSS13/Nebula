@@ -242,7 +242,7 @@
 
 	if(loc)
 		var/datum/gas_mixture/environment = loc.return_air()
-		if(environment && environment.gas[/decl/material/gas/methyl_bromide] > 0)
+		if(GET_GAS(environment, /decl/material/gas/methyl_bromide) > 0)
 			die()
 			return
 

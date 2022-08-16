@@ -4,7 +4,7 @@
 	lore_text = "A compound that interacts with blood on the molecular level."
 	taste_description = "metal"
 	color = "#f2f3f4"
-	exoplanet_rarity = MAT_RARITY_NOWHERE
+	exoplanet_rarity = EXOPLANET_RARITY_NOWHERE
 
 /decl/material/liquid/luminol/touch_obj(var/obj/O, var/amount, var/datum/reagents/holder)
 	O.reveal_blood()
@@ -245,7 +245,7 @@
 	scannable = 1
 	overdose = REAGENTS_OVERDOSE
 	metabolism = REM*2
-	exoplanet_rarity = MAT_RARITY_NOWHERE
+	exoplanet_rarity = EXOPLANET_RARITY_NOWHERE
 	uid = "chem_lactate"
 
 /decl/material/liquid/lactate/affect_blood(var/mob/living/M, var/alien, var/removed, var/datum/reagents/holder)
@@ -266,7 +266,7 @@
 	scannable = 1
 	overdose = 5
 	metabolism = 1
-	exoplanet_rarity = MAT_RARITY_NOWHERE
+	exoplanet_rarity = EXOPLANET_RARITY_NOWHERE
 	uid = "chem_nanoblood"
 
 /decl/material/liquid/nanoblood/affect_blood(var/mob/living/M, var/alien, var/removed, var/datum/reagents/holder)
@@ -325,7 +325,7 @@
 	scent_intensity = null
 	scent_descriptor = null
 	scent_range = null
-	exoplanet_rarity = MAT_RARITY_NOWHERE
+	exoplanet_rarity = EXOPLANET_RARITY_NOWHERE
 	uid = "chem_nicotinesolution"
 
 /decl/material/liquid/menthol

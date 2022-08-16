@@ -18,7 +18,7 @@
 // Bit faster than return_air() for exoplanet exterior turfs
 /turf/exterior/get_air_graphic()
 	if(owner)
-		return owner.atmosphere?.graphic
+		return owner.exterior_atmosphere?.graphic
 	return global.using_map.exterior_atmosphere?.graphic
 
 /turf/exterior/Initialize(mapload, no_update_icon = FALSE)
@@ -98,19 +98,26 @@
 /turf/exterior/return_air()
 	var/datum/gas_mixture/gas
 	if(owner)
-		gas = new
-		gas.copy_from(owner.atmosphere)
+		gas = owner.exterior_atmosphere
 	else
-		gas = global.using_map.get_exterior_atmosphere()
+		gas = global.using_map.exterior_atmosphere
 
-	var/initial_temperature = gas.temperature
+	var/environment_temperature = gas.temperature
 	if(weather)
-		initial_temperature = weather.adjust_temperature(initial_temperature)
-	for(var/thing in affecting_heat_sources)
-		if((gas.temperature - initial_temperature) >= 100)
-			break
-		var/obj/structure/fire_source/heat_source = thing
-		gas.temperature = gas.temperature + heat_source.exterior_temperature / max(1, get_dist(src, get_turf(heat_source)))
+		environment_temperature = weather.adjust_temperature(environment_temperature)
+	if(length(affecting_heat_sources))
+		for(var/thing in affecting_heat_sources)
+			if((gas.temperature - environment_temperature) >= 100)
+				break
+			var/obj/structure/fire_source/heat_source = thing
+			environment_temperature += (heat_source.exterior_temperature / max(1, get_dist(src, get_turf(heat_source))))
+
+	// The root gas datums are immutable, so if we want to do positional temperature we need to return a copy.
+	if(environment_temperature != gas.temperature)
+		var/datum/gas_mixture/gas_copy = new
+		gas_copy.copy_from(gas)
+		return gas_copy
+
 	return gas
 
 /turf/exterior/levelupdate()

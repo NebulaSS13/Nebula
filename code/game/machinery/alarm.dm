@@ -261,11 +261,11 @@
 
 	var/other_moles = 0
 	for(var/g in trace_gas)
-		other_moles += environment.gas[g] //this is only going to be used in a partial pressure calc, so we don't need to worry about group_multiplier here.
+		other_moles += GET_GAS(environment, g) //this is only going to be used in a partial pressure calc, so we don't need to worry about group_multiplier here.
 
 	pressure_dangerlevel = get_danger_level(environment_pressure, TLV["pressure"])
-	oxygen_dangerlevel = get_danger_level(environment.gas[/decl/material/gas/oxygen]*partial_pressure, TLV[/decl/material/gas/oxygen])
-	co2_dangerlevel = get_danger_level(environment.gas[/decl/material/gas/carbon_dioxide]*partial_pressure, TLV[/decl/material/gas/carbon_dioxide])
+	oxygen_dangerlevel = get_danger_level(GET_GAS(environment, /decl/material/gas/oxygen)*partial_pressure, TLV[/decl/material/gas/oxygen])
+	co2_dangerlevel = get_danger_level(GET_GAS(environment, /decl/material/gas/carbon_dioxide)*partial_pressure, TLV[/decl/material/gas/carbon_dioxide])
 	temperature_dangerlevel = get_danger_level(environment.temperature, TLV["temperature"])
 	other_dangerlevel = get_danger_level(other_moles*partial_pressure, TLV["other"])
 
@@ -512,13 +512,13 @@
 			var/decl/material/mat = GET_DECL(gas_id)
 			environment_data[++environment_data.len] = list(
 				"name" =  capitalize(mat.gas_name),
-				"value" = environment.gas[gas_id] / total * 100,
+				"value" = GET_GAS(environment, gas_id) / total * 100,
 				"unit" = "%",
 				"danger_level" = env_info.dangerous_gasses[gas_id] ? co2_dangerlevel : oxygen_dangerlevel
 			)
 		var/other_moles = 0
 		for(var/g in trace_gas)
-			other_moles += environment.gas[g]
+			other_moles += GET_GAS(environment, g)
 		environment_data[++environment_data.len] = list("name" = "Other Gases", "value" = other_moles / total * 100, "unit" = "%", "danger_level" = other_dangerlevel)
 
 		environment_data[++environment_data.len] = list("name" = "Temperature", "value" = environment.temperature, "unit" = "K ([round(environment.temperature - T0C, 0.1)]C)", "danger_level" = temperature_dangerlevel)
