@@ -230,6 +230,7 @@
 		update_icon()
 
 /obj/item/grab/on_update_icon()
+	. = ..()
 	if(current_grab.icon)
 		icon = current_grab.icon
 	if(current_grab.icon_state)

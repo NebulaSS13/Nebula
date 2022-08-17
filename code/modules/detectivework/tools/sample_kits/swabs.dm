@@ -80,5 +80,5 @@
 	)
 
 /obj/item/forensics/sample/swab/on_update_icon()
-	if(length(evidence))
-		icon_state = "swab_used"
+	. = ..()
+	icon_state = "swab[length(evidence)? "_used" : ""]"

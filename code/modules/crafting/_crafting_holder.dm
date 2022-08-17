@@ -75,6 +75,7 @@
 		update_strings()
 
 /obj/item/crafting_holder/on_update_icon()
+	. = ..()
 	icon = current_crafting_stage.item_icon
 	icon_state = current_crafting_stage.item_icon_state
 

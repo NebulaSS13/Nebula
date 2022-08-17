@@ -265,8 +265,10 @@
 	update_icon()
 
 /obj/item/chems/food/on_update_icon()
-	cut_overlays()
+	. = ..()
+	//Since other things that don't have filling override this, slap it into its own proc to avoid the overhead of scanning through the icon file
+	apply_filling_overlay() //#TODO: Maybe generalise food item icons.
+
+/obj/item/chems/food/proc/apply_filling_overlay()
 	if(check_state_in_icon("[icon_state]_filling", icon))
-		var/image/I = image(icon, "[icon_state]_filling")
-		I.color = filling_color
-		add_overlay(I)
+		add_overlay(overlay_image(icon, "[icon_state]_filling", filling_color))

@@ -52,7 +52,7 @@
 	. = ..()
 
 /obj/item/clothing/suit/space/vox/carapace/on_update_icon()
-	cut_overlays()
+	. = ..()
 	if(lights_color && check_state_in_icon("[icon_state]-lights", icon))
 		var/image/I = emissive_overlay(icon, "[icon_state]-lights")
 		I.color = lights_color

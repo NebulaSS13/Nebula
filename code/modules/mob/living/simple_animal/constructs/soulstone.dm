@@ -18,7 +18,7 @@
 	. = ..(mapload)
 
 /obj/item/soulstone/on_update_icon()
-	cut_overlays()
+	. = ..()
 	if(full == SOULSTONE_ESSENCE)
 		add_overlay("[icon_state]-glow")
 	else if(full == SOULSTONE_CRACKED)

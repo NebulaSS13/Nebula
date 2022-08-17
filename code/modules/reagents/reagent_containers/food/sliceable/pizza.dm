@@ -135,8 +135,7 @@
 	var/boxtag = ""
 
 /obj/item/pizzabox/on_update_icon()
-
-	overlays.Cut()
+	. = ..()
 
 	// Set appropriate description
 	if( open && pizza )
@@ -162,10 +161,9 @@
 			icon_state = "pizzabox_open"
 
 		if( pizza )
-			var/image/pizzaimg = image("food.dmi", icon_state = pizza.icon_state)
+			var/mutable_appearance/pizzaimg = new(pizza)
 			pizzaimg.pixel_y = -3
-			overlays += pizzaimg
-
+			add_overlay(pizzaimg)
 		return
 	else
 		// Stupid code because byondcode sucks
@@ -179,9 +177,7 @@
 				doimgtag = 1
 
 		if( doimgtag )
-			var/image/tagimg = image("food.dmi", icon_state = "pizzabox_tag")
-			tagimg.pixel_y = boxes.len * 3
-			overlays += tagimg
+			add_overlay(image("food.dmi", "pizzabox_tag", pixel_y = (boxes.len * 3)))
 
 	icon_state = "pizzabox[boxes.len+1]"
 

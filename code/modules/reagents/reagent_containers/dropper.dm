@@ -83,6 +83,7 @@
 	update_icon()
 
 /obj/item/chems/dropper/on_update_icon()
+	. = ..()
 	if(reagents.total_volume)
 		icon_state = "dropper1"
 	else

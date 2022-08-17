@@ -175,6 +175,7 @@
 	on_update_icon(arglist(args))
 
 /atom/proc/on_update_icon()
+	SHOULD_CALL_PARENT(FALSE) //Don't call the stub plz
 	return
 
 /atom/proc/get_contained_external_atoms()

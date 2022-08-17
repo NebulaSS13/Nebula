@@ -63,15 +63,15 @@
 	update_icon()
 
 /obj/item/evidencebag/on_update_icon()
-	overlays.Cut()
+	. = ..()
 	if(stored_item)
 		icon_state = "evidence"
 		//copy the item's appearance and make its layer relative to its parent.
 		var/image/img = image("icon"=stored_item, "layer"=FLOAT_LAYER) // (necessary to stop the underlays appearing under our inventory-HUD slots ~Carn
 		img.pixel_x = 0
 		img.pixel_y = 0
-		overlays += img
-		overlays += "evidence"	//should look nicer for transparent stuff. not really that important, but hey.
+		add_overlay(img)
+		add_overlay("evidence")	//should look nicer for transparent stuff. not really that important, but hey.
 
 		desc = "An evidence bag containing [stored_item]."
 	else

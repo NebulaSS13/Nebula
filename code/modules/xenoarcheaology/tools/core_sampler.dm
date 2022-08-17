@@ -26,6 +26,7 @@
 		to_chat(user, SPAN_WARNING("You are unable to take a geological sample of [item_to_sample]."))
 
 /obj/item/core_sampler/on_update_icon()
+	. = ..()
 	icon_state = "sampler[!!sample]"
 
 /obj/item/core_sampler/attack_self(var/mob/user)

@@ -586,6 +586,7 @@
 
 // update the icon state and description of the light
 /obj/item/light/on_update_icon()
+	. = ..()
 	color = b_color
 	var/broken
 	switch(status)
@@ -601,7 +602,7 @@
 			broken = TRUE
 	var/image/I = image(icon, src, "[base_state]_attachment[broken ? "_broken" : ""]")
 	I.color = null
-	overlays += I
+	add_overlay(I)
 
 /obj/item/light/Initialize(mapload, obj/machinery/light/fixture = null)
 	. = ..()

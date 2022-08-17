@@ -26,6 +26,7 @@
 /obj/item/chems/pill/proc/initialize_reagents()
 
 /obj/item/chems/pill/on_update_icon()
+	. = ..()
 	if(icon_state in colorizable_icon_states)
 		color = reagents.get_color()
 		alpha = 255 // above probably reset our alpha

@@ -23,6 +23,7 @@
 	desc = "It's a retractable [stroke_colour_name] [medium_name] pen."
 
 /obj/item/pen/retractable/on_update_icon()
+	. = ..()
 	icon_state = get_world_inventory_state()
 	if(pen_flag & PEN_FLAG_ACTIVE)
 		icon_state = "[icon_state]-on"

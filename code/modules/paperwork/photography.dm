@@ -44,14 +44,14 @@ var/global/photo_count = 0
 	user.examinate(src)
 
 /obj/item/photo/on_update_icon()
-	overlays.Cut()
+	. = ..()
 	var/scale = 8/(photo_size*32)
 	var/image/small_img = image(img)
 	small_img.transform *= scale
 	small_img.pixel_x = -32*(photo_size-1)/2 - 3
 	small_img.pixel_y = -32*(photo_size-1)/2
-	overlays |= small_img
-
+	add_overlay(small_img)
+	
 	tiny = image(img)
 	tiny.transform *= 0.5*scale
 	tiny.underlays += image('icons/obj/bureaucracy.dmi',"photo")
@@ -150,6 +150,7 @@ var/global/photo_count = 0
 	var/size = 3
 
 /obj/item/camera/on_update_icon()
+	. = ..()
 	var/datum/extension/base_icon_state/bis = get_extension(src, /datum/extension/base_icon_state)
 	if(on)
 		icon_state = "[bis.base_icon_state]"

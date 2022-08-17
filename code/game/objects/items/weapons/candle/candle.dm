@@ -22,6 +22,7 @@
 	. = ..()
 
 /obj/item/flame/candle/on_update_icon()
+	SHOULD_CALL_PARENT(FALSE)
 	//#FIXME: Candles handle their lit overlays weirdly
 	switch(wax)
 		if(1500 to INFINITY)

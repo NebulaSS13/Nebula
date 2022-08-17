@@ -197,6 +197,7 @@ var/global/list/shuttle_landmarks = list()
 	update_icon()
 
 /obj/item/spaceflare/on_update_icon()
+	. = ..()
 	if(active)
 		icon_state = "bluflare_on"
 		set_light(6, 2, "#85d1ff")

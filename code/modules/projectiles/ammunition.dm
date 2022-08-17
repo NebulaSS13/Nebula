@@ -99,8 +99,8 @@
 	else ..()
 
 /obj/item/ammo_casing/on_update_icon()
+	. = ..()
 	if(use_single_icon)
-		cut_overlays()
 		if(BB)
 			var/image/I = overlay_image(icon, "[icon_state]-bullet", bullet_color, flags=RESET_COLOR)
 			I.dir = dir
@@ -210,6 +210,7 @@
 		return
 
 /obj/item/ammo_magazine/on_update_icon()
+	. = ..()
 	if(multiple_sprites)
 		//find the lowest key greater than or equal to stored_ammo.len
 		var/new_state = null

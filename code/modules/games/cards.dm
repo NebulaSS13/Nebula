@@ -344,6 +344,7 @@ var/global/list/card_decks = list()
 			to_chat(user, "\The [APPEND_FULLSTOP_IF_NEEDED(P.name)]")
 
 /obj/item/hand/on_update_icon(var/direction = 0)
+	. = ..()
 	if(!cards.len)
 		qdel(src)
 		return

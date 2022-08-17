@@ -126,6 +126,7 @@
 	..()
 
 /obj/item/gun/launcher/pneumatic/on_update_icon()
+	. = ..()
 	if(tank)
 		icon_state = "[get_world_inventory_state()]-tank"
 	else

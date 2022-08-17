@@ -59,9 +59,9 @@
 		L.absorb_cash(src, user)
 
 /obj/item/cash/on_update_icon()
+	. = ..()
 	icon_state = ""
 	var/draw_worth = get_worth()
-	cut_overlays()
 	var/decl/currency/cur = GET_DECL(currency)
 	var/i = 0
 	for(var/datum/denomination/denomination in cur.denominations)

@@ -15,7 +15,7 @@
 	)
 
 /obj/item/ammo_magazine/speedloader/on_update_icon()
-	cut_overlays()
+	. = ..()
 	if(!length(stored_ammo))
 		return
 	switch(icon_state)
