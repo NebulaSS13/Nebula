@@ -23,9 +23,9 @@
 /obj/item/ashtray/on_update_icon()
 	. = ..()
 	if (contents.len == max_butts)
-		add_overlay(overlay_image(icon, "ashtray_full"))
+		add_overlay("ashtray_full")
 	else if (contents.len >= max_butts/2)
-		add_overlay(overlay_image(icon, "ashtray_half"))
+		add_overlay("ashtray_half")
 
 /obj/item/ashtray/attackby(obj/item/W, mob/user)
 	if (health <= 0)

@@ -21,12 +21,9 @@
 
 /obj/item/robot_parts/robot_suit/on_update_icon()
 	. = ..()
-	var/list/cur_overlays
 	for(var/part in required_parts)
 		if(parts[part])
-			LAZYADD(cur_overlays, overlay_image(icon, "[part]+o"))
-	if(LAZYLEN(cur_overlays))
-		add_overlay(cur_overlays)
+			add_overlay("[part]+o")
 
 /obj/item/robot_parts/robot_suit/proc/check_completion()
 	for(var/part in required_parts)

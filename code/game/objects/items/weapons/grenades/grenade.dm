@@ -29,11 +29,11 @@
 	if(active)
 		if(check_state_in_icon("[icon_state]-active", icon))
 			if(plane == HUD_PLANE)
-				add_overlay(overlay_image(icon, "[icon_state]-active"))
+				add_overlay("[icon_state]-active")
 			else
 				add_overlay(emissive_overlay(icon, "[icon_state]-active"))
 	else if(check_state_in_icon("[icon_state]-pin", icon))
-		add_overlay(overlay_image(icon, "[icon_state]-pin"))
+		add_overlay("[icon_state]-pin")
 
 /obj/item/grenade/proc/clown_check(var/mob/living/user)
 	if((MUTATION_CLUMSY in user.mutations) && prob(50))

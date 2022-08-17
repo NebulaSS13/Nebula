@@ -61,9 +61,9 @@
 	if(!istype(lock))
 		return
 	if(lock.emagged)
-		add_overlay(overlay_image(icon, icon_locking))
+		add_overlay(icon_locking)
 	else if(lock.open)
-		add_overlay(overlay_image(icon, icon_opened))
+		add_overlay(icon_opened)
 
 /obj/item/storage/secure/open(mob/user)
 	var/datum/extension/lockable/lock = get_extension(src, /datum/extension/lockable)

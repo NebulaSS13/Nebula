@@ -326,11 +326,11 @@
 	var/total_contents = count_by_type(contents, /obj/item/chems/glass/beaker/vial)
 	icon_state = "vialbox[FLOOR(total_contents/2)]"
 	if (!broken)
-		add_overlay(overlay_image(icon, "led[locked]"))
+		add_overlay("led[locked]")
 		if(locked)
-			add_overlay(overlay_image(icon, "cover"))
+			add_overlay("cover")
 	else
-		add_overlay(overlay_image(icon, "ledb"))
+		add_overlay("ledb")
 
 /obj/item/storage/lockbox/vials/attackby(obj/item/W, mob/user)
 	. = ..()

@@ -103,6 +103,6 @@
 /obj/item/soap/on_update_icon()
 	. = ..()
 	if(key_data)
-		add_overlay(overlay_image(icon, "soap_key_overlay"))
+		add_overlay("soap_key_overlay")
 	else if(decal_name)
-		add_overlay(overlay_image(icon, "decal-[decal_name]"))
+		add_overlay("decal-[decal_name]")

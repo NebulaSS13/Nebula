@@ -20,7 +20,7 @@
 /obj/item/grenade/supermatter/on_update_icon()
 	. = ..()
 	if(implode_at)
-		add_overlay(overlay_image('icons/obj/machines/power/fusion.dmi', "emfield_s1"))
+		add_overlay(image('icons/obj/machines/power/fusion.dmi', "emfield_s1"))
 
 /obj/item/grenade/supermatter/Process()
 	if(!isturf(loc))

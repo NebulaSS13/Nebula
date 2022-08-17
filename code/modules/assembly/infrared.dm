@@ -56,7 +56,7 @@
 /obj/item/assembly/infra/on_update_icon()
 	. = ..()
 	if(on)
-		add_overlay(overlay_image(icon, "infrared_on"))
+		add_overlay("infrared_on")
 	if(holder)
 		holder.update_icon()
 	update_beams()

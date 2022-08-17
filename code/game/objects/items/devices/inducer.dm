@@ -160,7 +160,7 @@
 /obj/item/inducer/on_update_icon()
 	. = ..()
 	if(opened)
-		add_overlay(overlay_image(icon, "inducer-[get_cell()? "bat" : "nobat"]"))
+		add_overlay("inducer-[get_cell()? "bat" : "nobat"]")
 
 /obj/item/inducer/Destroy()
 	. = ..()
