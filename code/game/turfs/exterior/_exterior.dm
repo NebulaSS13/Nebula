@@ -137,6 +137,7 @@
 	cut_overlays()
 	if(LAZYLEN(decals))
 		add_overlay(decals)
+	refresh_vis_contents()
 
 	if(icon_edge_layer < 0)
 		return
