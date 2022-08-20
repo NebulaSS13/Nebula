@@ -6,9 +6,6 @@
 	husk_icon =         'mods/species/vox/icons/body/husk.dmi'
 	blood_overlays =        'mods/species/vox/icons/body/blood_overlays.dmi'
 	bodytype_flag =     BODYTYPE_EQUIP_FLAG_VOX
-	override_limb_types = list(
-		BP_GROIN = /obj/item/organ/external/groin/vox
-	)
 	has_organs = list(
 		BP_STOMACH =    /obj/item/organ/internal/stomach/vox,
 		BP_HEART =      /obj/item/organ/internal/heart/vox,
@@ -20,7 +17,10 @@
 		BP_STACK =      /obj/item/organ/internal/voxstack,
 		BP_HINDTONGUE = /obj/item/organ/internal/hindtongue
 		)
-	override_limb_types = list(BP_TAIL = /obj/item/organ/external/tail/vox)
+	override_limb_types = list(
+		BP_GROIN = /obj/item/organ/external/groin/vox,
+		BP_TAIL = /obj/item/organ/external/tail/vox
+	)
 	body_appearance_flags = HAS_EYE_COLOR | HAS_HAIR_COLOR
 
 /decl/bodytype/vox/Initialize()
