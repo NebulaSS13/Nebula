@@ -570,6 +570,9 @@
 	mind.assigned_special_role = "Cultist"
 
 /datum/mind/proc/get_special_role_name()
-	if(assigned_special_role)
-		var/decl/special_role/special_role = ispath(assigned_special_role, /decl/special_role) && GET_DECL(assigned_special_role)
-		return special_role?.name || assigned_special_role
+	if(istext(assigned_special_role))
+		return assigned_special_role
+	if(ispath(assigned_special_role, /decl/special_role))
+		var/decl/special_role/special_role = GET_DECL(assigned_special_role)
+		if(istype(special_role))
+			return special_role.name
