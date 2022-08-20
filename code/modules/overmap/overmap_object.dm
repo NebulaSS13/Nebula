@@ -57,6 +57,9 @@ var/global/list/overmap_unknown_ids = list()
 
 	update_moving()
 
+	add_filter("glow", 1, list("drop_shadow", color = color + "F0", size = 2, offset = 1,x = 0, y = 0))
+	update_icon()
+
 /obj/effect/overmap/Crossed(var/obj/effect/overmap/visitable/other)
 	if(istype(other))
 		for(var/obj/effect/overmap/visitable/O in loc)
@@ -69,7 +72,7 @@ var/global/list/overmap_unknown_ids = list()
 			SSskybox.rebuild_skyboxes(O.map_z)
 
 /obj/effect/overmap/on_update_icon()
-	add_filter("glow", 1, list("drop_shadow", color = color + "F0", size = 2, offset = 1,x = 0, y = 0))
+	. = ..()
 	underlays.Cut()
 	if(adjacency_radius)
 		var/image/radius = image(icon = 'icons/obj/overmap.dmi', icon_state = "radius")
@@ -77,7 +80,7 @@ var/global/list/overmap_unknown_ids = list()
 			var/matrix/M = matrix()
 			M.Scale(adjacency_radius)
 			radius.transform = M
-		radius.appearance_flags = RESET_ALPHA
+		radius.appearance_flags = (RESET_ALPHA | KEEP_APART)
 		radius.alpha = 50
 		radius.filters = filter(type="blur", size = 1)
 		underlays += radius
@@ -188,7 +191,6 @@ var/global/list/overmap_unknown_ids = list()
 		if(newloc && loc != newloc)
 			Move(newloc)
 			handle_wraparound()
-		update_icon()
 		handle_overmap_pixel_movement()
 
 /obj/effect/overmap/proc/accelerate(var/direction, var/accel_limit)
