@@ -57,7 +57,7 @@
 	var/unconnected_dirs = check_dirs
 
 	//src is only connected to the zone by a single direction, this is a safe removal.
-	if (!(. & (. - 1))) //Equivalent to: if(IsInteger(log(2, .)))
+	if (!(check_dirs & (check_dirs - 1))) //Equivalent to: if(IsInteger(log(2, .)))
 		return TRUE
 
 	#ifdef MULTIZAS
