@@ -83,8 +83,9 @@ var/global/list/laser_wavelengths
 /obj/item/gun/energy/capacitor/Initialize()
 	if(!laser_wavelengths)
 		laser_wavelengths = list()
-		for(var/laser in subtypesof(/decl/laser_wavelength))
-			laser_wavelengths += GET_DECL(laser)
+		var/list/all_wavelengths = decls_repository.get_decls_of_subtype(/decl/laser_wavelength)
+		for(var/laser in all_wavelengths)
+			laser_wavelengths += all_wavelengths[laser]
 	selected_wavelength = pick(laser_wavelengths)
 	if(ispath(capacitors))
 		var/capacitor_type = capacitors

@@ -5,7 +5,7 @@
 /decl/codex_category/substances/Populate()
 	for(var/thing in SSmaterials.materials)
 		var/decl/material/mat = thing
-		if(!mat.hidden_from_codex && !mat.is_abstract())
+		if(!mat.hidden_from_codex)
 			var/new_lore_text = initial(mat.lore_text) 
 			if(mat.taste_description)
 				new_lore_text = "[new_lore_text]<br>It apparently tastes of [mat.taste_description]."

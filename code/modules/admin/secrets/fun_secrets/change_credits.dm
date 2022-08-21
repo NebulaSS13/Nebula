@@ -7,7 +7,7 @@ var/global/end_credits_title
 	name = "Change End Credits Title"
 
 /datum/admin_secret_item/fun_secret/change_credits_song/do_execute()
-	var/list/sounds = subtypesof(/decl/music_track)	
+	var/list/sounds = decls_repository.get_decls_of_subtype(/decl/music_track)	
 
 	var/decl/music_track/selected = input("Select a music track for the credits.", "Server music list") as null|anything in sounds
 

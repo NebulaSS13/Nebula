@@ -6,7 +6,7 @@
 	var/list/reactions = decls_repository.get_decls_of_subtype(/decl/fusion_reaction)
 	for(var/rtype in reactions)
 		var/decl/fusion_reaction/reaction = reactions[rtype]
-		if(reaction.hidden_from_codex || reaction.is_abstract())
+		if(reaction.hidden_from_codex)
 			continue
 
 		var/decl/material/p_mat = GET_DECL(reaction.p_react)

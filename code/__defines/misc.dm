@@ -278,3 +278,6 @@
 
 // arbitrary low pressure bound for wind weather effects
 #define MIN_WIND_PRESSURE 10
+
+#define DECL_TYPE_IS_ABSTRACT(DECL) (initial(DECL.abstract_type) == DECL)
+#define DECL_INSTANCE_IS_ABSTRACT(DECL) (DECL.abstract_type == DECL.type)

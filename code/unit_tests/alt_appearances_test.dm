@@ -2,7 +2,7 @@
 	name = "ALT APPEARANCE: Cardborg shall have base backpack variant"
 
 /datum/unit_test/alt_appearance_cardborg_shall_have_base_backpack_variant/start_test()
-	for(var/ca_type in subtypesof(/decl/cardborg_appearance))
+	for(var/ca_type in decls_repository.get_decl_paths_of_subtype(/decl/cardborg_appearance))
 		var/decl/cardborg_appearance/ca = ca_type
 		var/obj/item/storage/backpack/backpack_type = initial(ca.backpack_type)
 		if(backpack_type == /obj/item/storage/backpack)
@@ -18,7 +18,7 @@
 /datum/unit_test/alt_appearance_cardborg_all_icon_states_shall_exist/start_test()
 	var/failed = FALSE
 
-	for(var/ca_type in subtypesof(/decl/cardborg_appearance))
+	for(var/ca_type in decls_repository.get_decl_paths_of_subtype(/decl/cardborg_appearance))
 		var/decl/cardborg_appearance/ca = ca_type
 		var/list/existing_icon_states = icon_states(initial(ca.icon))
 		var/icon_state = initial(ca.icon_state)
@@ -36,7 +36,7 @@
 
 /datum/unit_test/alt_appearance_cardborg_shall_have_unique_backpack_types/start_test()
 	var/list/backpack_types = list()
-	for(var/ca_type in subtypesof(/decl/cardborg_appearance))
+	for(var/ca_type in decls_repository.get_decl_paths_of_subtype(/decl/cardborg_appearance))
 		var/decl/cardborg_appearance/ca = ca_type
 		group_by(backpack_types, initial(ca.backpack_type), ca)
 

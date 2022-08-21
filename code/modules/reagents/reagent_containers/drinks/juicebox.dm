@@ -102,7 +102,7 @@
 	desc = "Juice in a box; who knows what flavor!"
 
 /obj/item/chems/drinks/juicebox/sensible_random/proc/juice_it()
-	var/drinktypes = subtypesof(/decl/material/liquid/drink/juice)
+	var/list/drinktypes = decls_repository.get_decls_of_subtype(/decl/material/liquid/drink/juice)
 	var/decl/material/J = pick(drinktypes)
 	reagents.add_reagent(J, 20)
 	reagents.add_reagent(pick(drinktypes - J), 5)

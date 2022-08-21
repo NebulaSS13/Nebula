@@ -76,11 +76,11 @@ SUBSYSTEM_DEF(materials)
 		return
 	materials =         list()
 	materials_by_name = list()
-	for(var/mtype in subtypesof(/decl/material))
-		var/decl/material/new_mineral = mtype
-		if(!initial(new_mineral.name))
+	var/list/material_decls = decls_repository.get_decls_of_subtype(/decl/material)
+	for(var/mtype in material_decls)
+		var/decl/material/new_mineral = material_decls[mtype]
+		if(!new_mineral.name)
 			continue
-		new_mineral = GET_DECL(mtype)
 		materials += new_mineral
 		materials_by_name[lowertext(new_mineral.name)] = new_mineral
 		if(new_mineral.sparse_material_weight)
@@ -143,7 +143,9 @@ SUBSYSTEM_DEF(materials)
 		return planet.get_strata(location)
 	var/s_key = "[location.z]"
 	if(!global.default_strata_type_by_z[s_key])
-		global.default_strata_type_by_z[s_key] = pick(subtypesof(/decl/strata))
+		var/list/all_strata = decls_repository.get_decls_of_subtype(/decl/strata)
+		if(length(all_strata))
+			global.default_strata_type_by_z[s_key] = pick(all_strata)
 	return global.default_strata_type_by_z[s_key]
 
 /datum/controller/subsystem/materials/proc/get_material_by_name(var/mat_name)

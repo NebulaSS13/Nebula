@@ -19,11 +19,11 @@
 		<li>Mix flour and protein (ground meat) to make meatballs.</li>
 		</ul>"}
 
-	for(var/reactiontype in subtypesof(/decl/chemical_reaction/recipe))
-		var/decl/chemical_reaction/recipe/food = GET_DECL(reactiontype)
-		if(!food || !food.name || food.hidden_from_codex || food.is_abstract())
+	var/list/all_recipe_reactions = decls_repository.get_decls_of_subtype(/decl/chemical_reaction/recipe)
+	for(var/reactiontype in all_recipe_reactions)
+		var/decl/chemical_reaction/recipe/food = all_recipe_reactions[reactiontype]
+		if(!food || !food.name || food.hidden_from_codex)
 			continue
-
 		var/mechanics_text
 		var/lore_text
 		var/category_name
@@ -72,7 +72,7 @@
 	var/list/all_recipes = decls_repository.get_decls_of_subtype(/decl/recipe)
 	for(var/rtype in all_recipes)
 		var/decl/recipe/recipe = all_recipes[rtype]
-		if(!istype(recipe) || recipe.hidden_from_codex || !recipe.result || recipe.is_abstract())
+		if(!istype(recipe) || recipe.hidden_from_codex || !recipe.result)
 			continue
 
 		var/mechanics_text = ""

@@ -57,9 +57,8 @@ var/global/list/outfits_decls_by_type_
 /decl/hierarchy/outfit/Initialize()
 	. = ..()
 	backpack_overrides = backpack_overrides || list()
-	if(!is_abstract())
-		outfits_decls_by_type_[type] = src
-		dd_insertObjectList(outfits_decls_, src)
+	outfits_decls_by_type_[type] = src
+	dd_insertObjectList(outfits_decls_, src)
 
 /decl/hierarchy/outfit/proc/pre_equip(mob/living/carbon/human/H)
 	if(flags & OUTFIT_RESET_EQUIPMENT)

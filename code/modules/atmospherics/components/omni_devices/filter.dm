@@ -33,7 +33,7 @@
 		var/list/all_materials = decls_repository.get_decls_of_subtype(/decl/material)
 		for(var/mat_type in all_materials)
 			var/decl/material/mat = all_materials[mat_type]
-			if(!mat.hidden_from_codex && !mat.is_abstract() && !isnull(mat.boiling_point) && mat.boiling_point < T20C)
+			if(!mat.hidden_from_codex && !isnull(mat.boiling_point) && mat.boiling_point < T20C)
 				gas_decls_by_symbol_cache[mat.gas_symbol] = mat.type
 
 	rebuild_filtering_list()

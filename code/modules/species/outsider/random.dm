@@ -132,8 +132,9 @@
 	breath_type = pick(atmosphere.gas)
 	breath_pressure = 0.8*(atmosphere.gas[breath_type]/atmosphere.total_moles)*normal_pressure
 
-	var/list/newgases = subtypesof(/decl/material/gas)
-	newgases = newgases.Copy()
+	var/list/newgases = list()
+	for(var/gastype in decls_repository.get_decl_paths_of_subtype(/decl/material/gas))
+		newgases += gastype
 	newgases ^= atmosphere.gas
 	for(var/gas in newgases)
 		var/decl/material/mat = GET_DECL(gas)

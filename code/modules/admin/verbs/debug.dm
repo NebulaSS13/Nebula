@@ -477,7 +477,7 @@
 	set category = "Debug"
 	set name = "Force Ghost Trap Trigger"
 	if(!check_rights(R_DEBUG)) return
-	var/decl/ghosttrap/trap = input("Select a ghost trap.", "Force Ghost Trap Trigger") as null|anything in typesof(/decl/ghosttrap)
+	var/decl/ghosttrap/trap = input("Select a ghost trap.", "Force Ghost Trap Trigger") as null|anything in decls_repository.get_decl_paths_of_type(/decl/ghosttrap)
 	if(!trap)
 		return
 	trap = GET_DECL(trap)
