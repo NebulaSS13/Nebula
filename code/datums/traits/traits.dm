@@ -3,11 +3,8 @@ var/global/list/_trait_types
 /proc/trait_types()
 	if(!_trait_types)
 		_trait_types = list()
-		for(var/trait_type in subtypesof(/decl/trait))
-			var/decl/trait/T = trait_type
-			if(initial(T.abstract_type) != trait_type)
-				_trait_types += trait_type
-
+		for(var/trait_type in decls_repository.get_decl_paths_of_subtype(/decl/trait))
+			_trait_types += trait_type
 	return _trait_types
 
 /mob/living
@@ -70,7 +67,6 @@ var/global/list/_trait_types
 
 /decl/trait
 	abstract_type = /decl/trait
-	crash_on_abstract_init = TRUE
 	var/name
 	var/description
 	var/list/levels = list(TRAIT_LEVEL_EXISTS) // Should either only contain TRAIT_LEVEL_EXISTS or a set of the other TRAIT_LEVEL_* levels

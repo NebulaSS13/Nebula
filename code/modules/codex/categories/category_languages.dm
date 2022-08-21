@@ -7,7 +7,7 @@
 	var/language_types = decls_repository.get_decls_of_subtype(/decl/language)
 	for(var/langname in language_types)
 		var/decl/language/L = language_types[langname]
-		if(L.hidden_from_codex || L.is_abstract())
+		if(L.hidden_from_codex)
 			continue
 		var/list/lang_info = list()
 		var/decl/prefix/P = /decl/prefix/language

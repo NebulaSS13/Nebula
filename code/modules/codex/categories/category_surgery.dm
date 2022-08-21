@@ -70,7 +70,7 @@
 	var/list/procedures = decls_repository.get_decls_of_subtype(/decl/surgery_step)
 	for(var/stype in procedures)
 		var/decl/surgery_step/procedure = procedures[stype]
-		if(procedure.hidden_from_codex || !procedure.name || procedure.is_abstract())
+		if(procedure.hidden_from_codex || !procedure.name)
 			continue
 
 		var/list/surgery_info = list()

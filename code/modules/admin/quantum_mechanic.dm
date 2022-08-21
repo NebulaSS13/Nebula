@@ -33,7 +33,7 @@
 
 	Q.reload_fullscreen()
 
-	for(var/language in subtypesof(/decl/language))
+	for(var/language in decls_repository.get_decl_paths_of_subtype(/decl/language))
 		Q.add_language(language)
 
 	spark_at(Q)

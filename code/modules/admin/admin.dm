@@ -1025,7 +1025,7 @@ var/global/floorIsLava = 0
 		log_admin("[key_name(usr)] mass-spawned closets (icon debug), if this is a live server you should yell at them.")
 		var/x = 0
 		var/y = 0
-		for(var/check_appearance in typesof(/decl/closet_appearance))
+		for(var/check_appearance in decls_repository.get_decl_paths_of_type(/decl/closet_appearance))
 			x++
 			if(x > 10)
 				x = 0

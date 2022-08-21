@@ -6,7 +6,7 @@
 	var/list/all_cultural_info = decls_repository.get_decls_of_subtype(/decl/cultural_info)
 	for(var/thing in all_cultural_info)
 		var/decl/cultural_info/culture = all_cultural_info[thing]
-		if(culture.name && !culture.hidden_from_codex && !culture.is_abstract())
+		if(culture.name && !culture.hidden_from_codex)
 			var/datum/codex_entry/entry = new(
 				_display_name = "[culture.name] ([lowertext(culture.desc_type)])",
 				_lore_text = culture.description

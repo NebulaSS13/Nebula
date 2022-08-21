@@ -4,8 +4,6 @@
 		/decl/material
 	)
 
-// Handled manually to avoid initializing decls unnecessarily.
-#define DECL_TYPE_IS_ABSTRACT(DECL, DTYPE) (initial(DECL.abstract_type) == DTYPE)
 /datum/unit_test/decl_validation/start_test()
 
 	var/list/failures = list()
@@ -14,7 +12,7 @@
 	for(var/mandatory_type in mandatory_uid_types)
 		for(var/decl_type in typesof(mandatory_type))
 			var/decl/decl = decl_type
-			if(DECL_TYPE_IS_ABSTRACT(decl, decl_type))
+			if(DECL_TYPE_IS_ABSTRACT(decl))
 				continue
 			decl = GET_DECL(decl_type)
 			if(!istext(decl.uid))
@@ -24,7 +22,7 @@
 	var/list/seen_uids = list()
 	for(var/decl_type in typesof(/decl))
 		var/decl/decl = decl_type
-		if(DECL_TYPE_IS_ABSTRACT(decl, decl_type))
+		if(DECL_TYPE_IS_ABSTRACT(decl))
 			continue
 		decl = GET_DECL(decl_type)
 		if(isnull(decl.uid))
@@ -42,4 +40,3 @@
 	else
 		pass("All /decl UIDs were validated successfully.")
 	return 1
-#undef DECL_TYPE_IS_ABSTRACT

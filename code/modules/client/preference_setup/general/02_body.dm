@@ -304,8 +304,11 @@
 			disallowed_markings |= mark_style.disallows
 
 		var/list/usable_markings = list()
-		for(var/M in (subtypesof(/decl/sprite_accessory/marking) - pref.body_markings))
-			var/decl/sprite_accessory/S = GET_DECL(M)
+		var/list/all_markings = decls_repository.get_decls_of_subtype(/decl/sprite_accessory/marking)
+		for(var/M in all_markings)
+			if(M in pref.body_markings)
+				continue
+			var/decl/sprite_accessory/S = all_markings[M]
 			if(is_type_in_list(S, disallowed_markings) || (S.species_allowed && !(mob_species.get_root_species_name() in S.species_allowed)) || (S.subspecies_allowed && !(mob_species.name in S.subspecies_allowed)))
 				continue
 			usable_markings += S

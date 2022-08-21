@@ -31,7 +31,7 @@
 		A.verbs |= /mob/living/simple_animal/proc/name_species
 	if(atmosphere)
 		//Set up gases for living things
-		var/list/all_gasses = subtypesof(/decl/material/gas)
+		var/list/all_gasses = decls_repository.get_decl_paths_of_subtype(/decl/material/gas)
 		if(!LAZYLEN(breathgas))
 			var/list/goodgases = all_gasses.Copy() 
 			var/gasnum = min(rand(1,3), goodgases.len)

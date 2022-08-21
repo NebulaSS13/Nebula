@@ -25,18 +25,30 @@ var/global/list/random_chem_interaction_blacklist = list(
 
 /decl/material/liquid/random/proc/randomize_data(temperature)
 	data = list()
-	var/list/effects_to_get = subtypesof(/decl/random_chem_effect/random_properties)
+
+	var/list/general_effects = list()
+	for(var/effect_type in decls_repository.get_decl_paths_of_subtype(/decl/random_chem_effect/general_properties))
+		general_effects += effect_type
+
+	var/list/material_whitelist = list()
+	for(var/material_type in decls_repository.get_decl_paths_of_subtype(/decl/material))
+		material_whitelist += material_type
+
+	var/list/effects_to_get = list()
+	for(var/effect_type in decls_repository.get_decl_paths_of_subtype(/decl/random_chem_effect/random_properties))
+		effects_to_get += effect_type
+
 	if(length(effects_to_get) > max_effect_number)
 		shuffle(effects_to_get)
 		effects_to_get.Cut(max_effect_number + 1)
-	effects_to_get += subtypesof(/decl/random_chem_effect/general_properties)
+	effects_to_get += general_effects
 
 	var/list/decls = decls_repository.get_decls_unassociated(effects_to_get)
 	for(var/item in decls)
 		var/decl/random_chem_effect/effect = item
 		effect.prototype_process(src, temperature)
 
-	var/whitelist = subtypesof(/decl/material)
+	var/whitelist = material_whitelist
 	for(var/bad_type in global.random_chem_interaction_blacklist)
 		whitelist -= typesof(bad_type)
 
