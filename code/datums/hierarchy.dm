@@ -15,7 +15,7 @@
 	. = ..()
 
 /decl/hierarchy/proc/is_category()
-	return length(children.len)
+	return length(children)
 
 /decl/hierarchy/proc/get_descendents()
 	if(!children)
