@@ -69,6 +69,8 @@
 		//Updates the number of stored chemicals for powers
 		handle_changeling()
 
+		last_pain = null // Clear the last cached pain value so further getHalloss() calls won't use an old value.
+
 		//Organs and blood
 		handle_organs()
 		stabilize_body_temperature() //Body temperature adjusts itself (self-regulation)
