@@ -15,6 +15,10 @@
 	open_sound = 'sound/effects/storage/unzip.ogg'
 	material = /decl/material/solid/leather/synth
 
+//Cannot be washed :(
+/obj/item/storage/backpack/can_contaminate()
+	return FALSE
+
 /obj/item/storage/backpack/equipped()
 	if(!has_extension(src, /datum/extension/appearance))
 		set_extension(src, /datum/extension/appearance/cardborg)

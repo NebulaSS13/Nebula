@@ -5,6 +5,8 @@
 		alpha = 100 + material.opacity * 255
 	if(blood_overlay)
 		overlays += blood_overlay
+	if(global.contamination_overlay && contaminated)
+		overlays += global.contamination_overlay
 
 /obj/item/apply_hit_effect(mob/living/target, mob/living/user, var/hit_zone)
 	. = ..()
