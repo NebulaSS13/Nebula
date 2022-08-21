@@ -66,6 +66,7 @@ INITIALIZE_IMMEDIATE(/obj/effect/gas_overlay)
 /decl/material
 
 	abstract_type = /decl/material
+	decl_flags = DECL_FLAG_MANDATORY_UID
 
 	var/name               // Prettier name for display.
 	var/codex_name         // Override for the codex article name.

@@ -97,3 +97,7 @@ The latter will result in a linter warning and will not work correctly.
 // Flags for reagent presentation (/obj/item/chems/var/presentation_flags)
 #define PRESENTATION_FLAG_NAME            BITFLAG(0) // This chems subtype presents the name of its main reagent/cocktail.
 #define PRESENTATION_FLAG_DESC            BITFLAG(1) // This chems subtype presents the description of its main reagent/cocktail.
+
+// Decl-level flags (/decl/var/decl_flags)
+#define DECL_FLAG_ALLOW_ABSTRACT_INIT     BITFLAG(0) // Abstract subtypes without this set will CRASH() if fetched with GET_DECL().
+#define DECL_FLAG_MANDATORY_UID           BITFLAG(1) // Requires uid to be non-null.

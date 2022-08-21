@@ -1,6 +1,6 @@
 /decl/hierarchy
-	allow_abstract_init = TRUE
 	abstract_type = /decl/hierarchy
+	decl_flags = DECL_FLAG_ALLOW_ABSTRACT_INIT // for the children list
 	var/name = "Hierarchy"
 	var/decl/hierarchy/parent
 	var/list/decl/hierarchy/children

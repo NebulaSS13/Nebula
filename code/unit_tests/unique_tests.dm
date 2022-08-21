@@ -150,6 +150,45 @@
 		pass("All space suit modifiers have unique names.")
 	return 1
 
+/datum/unit_test/trait/all_traits_shall_have_unique_name
+	name = "UNIQUENESS: Traits Shall Have Unique Names"
+
+/datum/unit_test/trait/all_traits_shall_have_unique_name/start_test()
+	var/list/trait_names = list()
+
+	var/traits = decls_repository.get_decls_of_subtype(/decl/trait)
+	for(var/trait_type as anything in traits)
+		var/decl/trait/trait = traits[trait_type]
+		group_by(trait_names, trait.name, trait.type)
+
+	var/number_of_issues = number_of_issues(trait_names, "Names")
+	if(number_of_issues)
+		fail("[number_of_issues] duplicate trait name\s found")
+	else
+		pass("All traits have unique names")
+	return TRUE
+
+/datum/unit_test/decls_shall_have_no_or_unique_uids
+	name = "UNIQUENESS: Decls Shall Have No or Unique UIDs"
+
+/datum/unit_test/decls_shall_have_no_or_unique_uids/start_test()
+	var/list/decls_by_uid = list()
+
+	var/list/decls_by_type = decls_repository.get_decls_of_subtype(/decl)
+	for(var/decl_type in decls_by_type)
+		var/decl/decl_instance = decls_by_type[decl_type]
+		var/uid = decl_instance.uid
+		if(!uid) // mandatory UIDs are handled in /validate instead
+			continue
+		group_by(decls_by_uid, decl_instance.uid, decl_type)
+
+	var/number_of_issues = number_of_issues(decls_by_uid, "Language UIDs")
+	if(number_of_issues)
+		fail("[number_of_issues] issue\s with decl UIDs found.")
+	else
+		pass("All decl UIDs are unique.")
+	return TRUE
+
 /datum/unit_test/proc/number_of_issues(var/list/entries, var/type, var/feedback = /decl/noi_feedback)
 	var/issues = 0
 	for(var/key in entries)
