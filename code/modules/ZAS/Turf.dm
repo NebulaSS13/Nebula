@@ -56,6 +56,10 @@
 	var/check_dirs = get_zone_neighbours(src)
 	var/unconnected_dirs = check_dirs
 
+	//src is only connected to the zone by a single direction, this is a safe removal.
+	if (!(check_dirs & (check_dirs - 1))) //Equivalent to: if(IsInteger(log(2, .)))
+		return TRUE
+
 	#ifdef MULTIZAS
 	var/to_check = global.cornerdirsz
 	#else
