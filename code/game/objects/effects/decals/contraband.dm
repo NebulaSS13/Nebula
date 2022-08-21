@@ -79,19 +79,11 @@
 //############################## THE ACTUAL DECALS ###########################
 
 /obj/structure/sign/poster
-	name = "poster"
-	desc = "A large piece of space-resistant printed paper."
 	icon = 'icons/obj/contraband.dmi'
 	anchored = TRUE
 	directional_offset = "{'NORTH':{'y':32}, 'SOUTH':{'y':-32}, 'EAST':{'x':32}, 'WEST':{'x':-32}}"
 	var/poster_type
 	var/ruined = 0
-
-/obj/structure/sign/poster/bay_9
-	poster_type = /decl/poster/bay_9
-
-/obj/structure/sign/poster/bay_50
-	poster_type = /decl/poster/bay_50
 
 /obj/structure/sign/poster/Initialize(var/ml, var/_mat, var/_reinf_mat, var/placement_dir = null, var/give_poster_type = null)
 	. = ..(ml, _mat, _reinf_mat)
@@ -101,11 +93,12 @@
 		else
 			poster_type = pick(decls_repository.get_decl_paths_of_subtype(/decl/poster))
 	set_poster(poster_type)
+	set_dir(placement_dir)
 
 /obj/structure/sign/poster/proc/set_poster(var/poster_type)
 	var/decl/poster/design = GET_DECL(poster_type)
-	SetName("[initial(name)] - [design.name]")
-	desc = "[initial(desc)] [design.desc]"
+	SetName("poster - [design.name]")
+	desc = "A large piece of space-resistant printed paper. [design.desc]"
 	icon_state = design.icon_state
 
 /obj/structure/sign/poster/attackby(obj/item/W, mob/user)
