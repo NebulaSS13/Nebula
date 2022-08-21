@@ -998,31 +998,31 @@
 			var/list/status = list()
 
 			var/feels = 1 + round(org.pain/100, 0.1)
-			var/brutedamage = org.brute_dam * feels
-			var/burndamage = org.burn_dam * feels
-
-			switch(brutedamage)
-				if(1 to 20)
+			switch((org.brute_dam * feels) / org.max_damage)
+				if(0 to 0.35)
 					status += "slightly sore"
-				if(20 to 40)
+				if(0.35 to 0.65)
 					status += "very sore"
-				if(40 to INFINITY)
+				if(0.65 to INFINITY)
 					status += "throbbing with agony"
 
-			switch(burndamage)
-				if(1 to 10)
+			switch((org.burn_dam * feels) / org.max_damage)
+				if(0 to 0.35)
 					status += "tingling"
-				if(10 to 40)
+				if(0.35 to 0.65)
 					status += "stinging"
-				if(40 to INFINITY)
+				if(0.65 to INFINITY)
 					status += "burning fiercely"
 
 			if(org.status & ORGAN_MUTATED)
 				status += "misshapen"
+			if(org.status & ORGAN_BLEEDING)
+				status += "<b>bleeding</b>"
 			if(org.is_dislocated())
 				status += "dislocated"
 			if(org.status & ORGAN_BROKEN)
 				status += "hurts when touched"
+
 			if(org.status & ORGAN_DEAD)
 				if(BP_IS_PROSTHETIC(org) || BP_IS_CRYSTAL(org))
 					status += "is irrecoverably damaged"

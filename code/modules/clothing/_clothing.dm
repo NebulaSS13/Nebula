@@ -28,6 +28,9 @@
 	if(markings_icon && markings_color)
 		update_icon()
 
+/obj/item/clothing/can_contaminate()
+	return TRUE
+
 // Sort of a placeholder for proper tailoring.
 #define RAG_COUNT(X) CEILING((LAZYACCESS(X.matter, /decl/material/solid/cloth) * 0.65) / SHEET_MATERIAL_AMOUNT)
 
