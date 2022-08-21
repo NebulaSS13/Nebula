@@ -173,7 +173,7 @@ Class Procs:
 			for(var/check_atom in T.contents)
 				var/atom/checking = check_atom
 				if(checking.simulated)
-					QUEUE_TEMPERATURE_ATOMS(checking)
+					queue_temperature_atoms(checking)
 			CHECK_TICK
 
 /zone/proc/handle_condensation()

@@ -19,15 +19,15 @@
 	squish()
 
 /obj/item/slugegg/HasProximity(var/atom/movable/AM)
-	if(isliving(AM))
-		if(istype(AM,/mob/living/carbon/human))
+	. = ..()
+	if(. && isliving(AM))
+		if(ishuman(AM))
 			var/mob/living/carbon/human/H = AM
-			if(H.get_bodytype_category() == SPECIES_VOX)
-				return
-		else
-			var/mob/living/L = AM
-			if(L.faction == SPECIES_VOX)
-				return
+			if(H.get_bodytype_category() == BODYTYPE_VOX)
+				return FALSE
+		var/mob/living/L = AM
+		if(L.faction == SPECIES_VOX)
+			return FALSE
 		squish()
 
 /obj/item/slugegg/proc/squish()

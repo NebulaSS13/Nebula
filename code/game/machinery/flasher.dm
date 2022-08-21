@@ -110,14 +110,13 @@
 	density = 1
 
 /obj/machinery/flasher/portable/HasProximity(atom/movable/AM)
-	if(!anchored || disable || last_flash && world.time < last_flash + 150)
+	. = ..()
+	if(!. || !anchored || disable || last_flash && world.time < last_flash + 150)
 		return
-
 	if(istype(AM, /mob/living/carbon))
 		var/mob/living/carbon/M = AM
 		if(!MOVING_DELIBERATELY(M))
 			flash()
-
 	if(isanimal(AM))
 		flash()
 

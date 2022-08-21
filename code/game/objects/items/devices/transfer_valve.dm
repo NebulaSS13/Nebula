@@ -68,10 +68,9 @@
 
 
 /obj/item/transfer_valve/HasProximity(atom/movable/AM)
-	if(!attached_device)	return
-	attached_device.HasProximity(AM)
-	return
-
+	. = ..()
+	if(. && attached_device)
+		attached_device.HasProximity(AM)
 
 /obj/item/transfer_valve/attack_self(mob/user)
 	ui_interact(user)

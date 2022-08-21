@@ -583,7 +583,8 @@ var/global/list/global/tank_gauge_cache = list()
 	tank.update_icon()
 
 /obj/item/tankassemblyproxy/HasProximity(atom/movable/AM)
-	if(assembly)
+	. = ..()
+	if(. && assembly)
 		assembly.HasProximity(AM)
 
 //Fragmentation projectiles
