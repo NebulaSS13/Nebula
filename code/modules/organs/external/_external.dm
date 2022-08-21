@@ -685,19 +685,28 @@ This function completely restores a damaged organ to perfect condition.
 
 //Determines if we even need to process this organ.
 /obj/item/organ/external/proc/need_process()
-	if(get_pain())
-		return 1
+
 	if(length(ailments))
-		return 1
-	if(status & (ORGAN_CUT_AWAY|ORGAN_BLEEDING|ORGAN_BROKEN|ORGAN_DEAD|ORGAN_MUTATED))
-		return 1
+		return TRUE
+
+	if(status & (ORGAN_CUT_AWAY|ORGAN_BLEEDING|ORGAN_BROKEN|ORGAN_DEAD|ORGAN_MUTATED|ORGAN_DISLOCATED))
+		return TRUE
+
 	if((brute_dam || burn_dam) && !BP_IS_PROSTHETIC(src)) //Robot limbs don't autoheal and thus don't need to process when damaged
-		return 1
+		return TRUE
+
+	if(get_genetic_damage())
+		return TRUE
+
+	for(var/obj/item/organ/internal/I in internal_organs)
+		if(I.getToxLoss())
+			return TRUE
+
 	if(last_dam != brute_dam + burn_dam) // Process when we are fully healed up.
 		last_dam = brute_dam + burn_dam
-		return 1
-	else
-		last_dam = brute_dam + burn_dam
+		return TRUE
+
+	last_dam = brute_dam + burn_dam
 	if(germ_level)
 		return 1
 	return 0
@@ -1328,11 +1337,17 @@ Note that amputating the affected organ does in fact remove the infection from t
 
 /obj/item/organ/external/is_usable()
 	. = ..()
-	. = . && !is_malfunctioning()
-	. = . && (!is_broken() || splinted)
-	. = . && !(status & ORGAN_TENDON_CUT)
-	. = . && (!can_feel_pain() || get_pain() < pain_disability_threshold)
-	. = . && brute_ratio < 1 && burn_ratio < 1
+	if(.)
+		if(is_malfunctioning())
+			return FALSE
+		if(is_broken() && !splinted)
+			return FALSE
+		if(status & ORGAN_TENDON_CUT)
+			return FALSE
+		if(brute_ratio >= 1 || burn_ratio >= 1)
+			return FALSE
+		if(get_pain() >= pain_disability_threshold)
+			return FALSE
 
 /obj/item/organ/external/proc/is_malfunctioning()
 	return (is_robotic() && (brute_dam + burn_dam) >= 10 && prob(brute_dam + burn_dam))

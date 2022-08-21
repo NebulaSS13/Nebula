@@ -92,6 +92,9 @@
 
 	var/list/smell_cooldown
 
+	/// var for caching last getHalloss() run to avoid looping through organs over and over and over again
+	var/last_pain
+
 	ai = /datum/ai/human
 
 /mob/living/carbon/human/proc/get_age()

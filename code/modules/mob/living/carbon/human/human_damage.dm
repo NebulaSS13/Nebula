@@ -46,10 +46,11 @@
 
 //Straight pain values, not affected by painkillers etc
 /mob/living/carbon/human/getHalLoss()
-	var/amount = 0
-	for(var/obj/item/organ/external/E in get_external_organs())
-		amount += E.get_pain()
-	return amount
+	if(isnull(last_pain))
+		last_pain = 0
+		for(var/obj/item/organ/external/E in get_external_organs())
+			last_pain += E.get_pain()
+	return last_pain
 
 /mob/living/carbon/human/setHalLoss(var/amount)
 	adjustHalLoss(getHalLoss()-amount)
