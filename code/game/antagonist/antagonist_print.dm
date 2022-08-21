@@ -39,7 +39,7 @@
 	if(ply.assigned_role)
 		role = ply.assigned_role
 	else 
-		role = ply.get_special_role_name() || "unknown role"
+		role = ply.get_special_role_name("unknown role")
 	role = "\improper [role]"
 
 	var/text = "<br><b>[ply.name]</b> (<b>[ply.key]</b>) as \a <b>[role]</b> ("
