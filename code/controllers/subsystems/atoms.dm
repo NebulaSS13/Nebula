@@ -38,9 +38,14 @@ SUBSYSTEM_DEF(atoms)
 	var/count = created_atoms.len
 	while(created_atoms.len)
 		var/atom/A = created_atoms[created_atoms.len]
+		var/list/atom_args = created_atoms[A]
 		created_atoms.len--
 		if(!QDELETED(A) && !(A.atom_flags & ATOM_FLAG_INITIALIZED))
-			InitAtom(A, mapload_arg)
+			if(atom_args)
+				atom_args.Insert(1, TRUE)
+				InitAtom(A, atom_args)
+			else
+				InitAtom(A, mapload_arg)
 			CHECK_TICK
 
 	// If wondering why not just store all atoms in created_atoms and use the block above: that turns out unbearably expensive.
