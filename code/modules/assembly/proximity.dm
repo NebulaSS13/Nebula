@@ -41,15 +41,10 @@
 	update_icon()
 	return secured
 
-
 /obj/item/assembly/prox_sensor/HasProximity(atom/movable/AM)
-	if(!istype(AM))
-		log_debug("DEBUG: HasProximity called with [AM] on [src] ([usr]).")
-		return
-	if (istype(AM, /obj/effect/beam))	return
-	if (AM.move_speed < 12)	sense()
-	return
-
+	. = ..()
+	if(. && !istype(AM, /obj/effect/beam) && AM.move_speed < 12)
+		sense()
 
 /obj/item/assembly/prox_sensor/sense()
 	var/turf/mainloc = get_turf(src)

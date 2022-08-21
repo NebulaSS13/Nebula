@@ -1294,6 +1294,7 @@
 #include "code\game\turfs\turf.dm"
 #include "code\game\turfs\turf_ao.dm"
 #include "code\game\turfs\turf_changing.dm"
+#include "code\game\turfs\turf_enter.dm"
 #include "code\game\turfs\turf_flick_animations.dm"
 #include "code\game\turfs\turf_fluids.dm"
 #include "code\game\turfs\unsimulated.dm"

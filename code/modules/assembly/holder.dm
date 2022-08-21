@@ -88,16 +88,18 @@
 */
 	return
 
-/obj/item/assembly_holder/HasProximity(atom/movable/AM as mob|obj)
-	if(a_left)
-		a_left.HasProximity(AM)
-	if(a_right)
-		a_right.HasProximity(AM)
-	if(special_assembly)
-		special_assembly.HasProximity(AM)
+/obj/item/assembly_holder/HasProximity(atom/movable/AM)
+	. = ..()
+	if(.)
+		if(a_left)
+			a_left.HasProximity(AM)
+		if(a_right)
+			a_right.HasProximity(AM)
+		if(special_assembly)
+			special_assembly.HasProximity(AM)
 
 
-/obj/item/assembly_holder/Crossed(atom/movable/AM as mob|obj)
+/obj/item/assembly_holder/Crossed(atom/movable/AM)
 	if(a_left)
 		a_left.Crossed(AM)
 	if(a_right)

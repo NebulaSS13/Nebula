@@ -77,7 +77,7 @@ var/global/list/material_extractor_items_whitelist = list(/obj/item/ore)
 	if(!input_buffer)
 		input_buffer = new(src)
 		input_buffer.create_reagents(GAS_EXTRACTOR_REAGENTS_INPUT_TANK) //Did this here because reimplementing that in the new() proc failed a test for some reasons
-	QUEUE_TEMPERATURE_ATOMS(src)
+	queue_temperature_atoms(src)
 
 /obj/machinery/atmospherics/unary/material/extractor/Destroy()
 	output_container = null
@@ -153,7 +153,8 @@ var/global/list/material_extractor_items_whitelist = list(/obj/item/ore)
 
 /obj/machinery/atmospherics/unary/material/extractor/power_change()
 	. = ..()
-	QUEUE_TEMPERATURE_ATOMS(src)
+	if(.)
+		queue_temperature_atoms(src)
 
 /obj/machinery/atmospherics/unary/material/extractor/on_update_icon()
 	cut_overlays()
