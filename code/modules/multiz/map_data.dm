@@ -1,7 +1,6 @@
 /obj/abstract/map_data
 	name = "Map Data"
 	desc = "An unknown location."
-	invisibility = 101
 
 	var/height = 1     ///< The number of Z-Levels in the map.
 	var/turf/edge_type ///< What the map edge should be formed with. (null = world.turf)
@@ -32,6 +31,10 @@
 
 	if (length(SSzcopy.zlev_maximums))
 		SSzcopy.calculate_zstack_limits()
+
+/obj/abstract/map_data/Initialize()
+	. = ..()
+	invisibility = 101 //Do this here to make it invisible to players, allow us to make it visible to mappers
 
 /obj/abstract/map_data/Destroy(forced)
 	if(forced)

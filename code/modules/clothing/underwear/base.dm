@@ -1,4 +1,5 @@
 /obj/item/underwear
+	icon = 'icons/mob/human.dmi'
 	w_class = ITEM_SIZE_TINY
 	material = /decl/material/solid/cloth
 	var/required_free_body_parts
@@ -110,17 +111,26 @@
 	RemoveUnderwear(usr, usr)
 
 /obj/item/underwear/socks
+	name = "socks"
+	icon_state = "socks_norm"
+	gender = PLURAL
 	required_free_body_parts = SLOT_FEET
 	slot_offset_str = slot_socks_str
 
 /obj/item/underwear/top
+	name = "bra"
+	icon_state = "bra"
 	required_free_body_parts = SLOT_UPPER_BODY
 	slot_offset_str = slot_undershirt_str
 
 /obj/item/underwear/bottom
+	name = "briefs"
+	icon_state = "briefs"
 	required_free_body_parts = SLOT_FEET|SLOT_LEGS|SLOT_LOWER_BODY
 	slot_offset_str = slot_underpants_str
 
 /obj/item/underwear/undershirt
+	name = "undershirt"
+	icon_state = "undershirt"
 	required_free_body_parts = SLOT_UPPER_BODY
 	slot_offset_str = slot_undershirt_str

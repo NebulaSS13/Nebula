@@ -142,7 +142,8 @@
 	setup = 0
 	obj_flags = OBJ_FLAG_MOVES_UNSUPPORTED
 	directional_offset = "{'NORTH':{'y':-32}, 'SOUTH':{'y':32}, 'EAST':{'x':-32}, 'WEST':{'x':32}}"
-	
+	icon = 'icons/obj/closets/bases/wall.dmi'
+
 /obj/structure/closet/hydrant/Initialize(ml, _mat, _reinf_mat)
 	. = ..()
 	tool_interaction_flags &= ~TOOL_INTERACTION_ANCHOR
@@ -170,6 +171,7 @@
 	setup = 0
 	obj_flags = OBJ_FLAG_MOVES_UNSUPPORTED
 	directional_offset = "{'NORTH':{'y':-32}, 'SOUTH':{'y':32}, 'EAST':{'x':-32}, 'WEST':{'x':32}}"
+	icon = 'icons/obj/closets/bases/wall.dmi'
 
 /obj/structure/closet/medical_wall/Initialize()
 	. = ..()
@@ -191,6 +193,7 @@
 	setup = 0
 	obj_flags = OBJ_FLAG_MOVES_UNSUPPORTED
 	directional_offset = "{'NORTH':{'y':-32}, 'SOUTH':{'y':32}, 'EAST':{'x':-32}, 'WEST':{'x':32}}"
+	icon = 'icons/obj/closets/bases/wall.dmi'
 
 /obj/structure/closet/shipping_wall/Initialize()
 	. = ..()

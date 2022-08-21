@@ -5,6 +5,8 @@
 /obj/item/bone/skull
 	name = "skull"
 	desc = "Looks like someone lost their head."
+	icon = 'icons/effects/blood.dmi'
+	icon_state = "remains" //#TODO: Get an actual icon
 
 /obj/item/bone/skull/deer
 	name = "deer skull"
