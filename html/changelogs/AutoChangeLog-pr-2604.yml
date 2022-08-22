@@ -1,0 +1,5 @@
+author: MistakeNot4892
+delete-after: true
+changes:
+  - tweak: Fabricator recipes now use matter units universally, including for reagent
+      requirements.
