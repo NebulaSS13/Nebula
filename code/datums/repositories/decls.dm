@@ -114,6 +114,7 @@ var/global/repository/decls/decls_repository = new
 	return INITIALIZE_HINT_NORMAL
 
 /decl/proc/validate()
+	SHOULD_CALL_PARENT(TRUE)
 	var/list/failures = list()
 	if((decl_flags & DECL_FLAG_MANDATORY_UID) && !istext(uid))
 		failures += "non-text UID '[uid || "(NULL)"]' on mandatory type"
