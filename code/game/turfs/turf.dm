@@ -459,10 +459,14 @@ var/global/const/enterloopsanity = 100
 		return TRUE
 	return FALSE
 
-/turf/get_vis_contents_to_add()
-	var/datum/gas_mixture/air = return_air()
-	if(air && length(air.graphic))
-		LAZYADD(., air.graphic)
+/turf/proc/get_air_graphic()
+	var/datum/gas_mixture/environment = return_air()
+	return environment?.graphic
+
+/turf/proc/get_vis_contents_to_add()
+	var/air_graphic = get_air_graphic()
+	if(length(air_graphic))
+		LAZYADD(., air_graphic)
 	if(weather)
 		LAZYADD(., weather)
 	if(flooded)
