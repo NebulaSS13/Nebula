@@ -16,7 +16,7 @@
 <h1>vending <aside>/<a href="obj/machinery/vending.html">obj/machinery/vending</a></aside>
         
     
-            <a href="https://github.com/NebulaSS13/Nebula/blob/823f9c7d6314dc7407d001f11a3f65e06ed6f348/code/game/machinery/vending/_vending.dm#L4">
+            <a href="https://github.com/NebulaSS13/Nebula/blob/90bff616b3037e6a41963fa4ed72e53e8c4e00bf/code/game/machinery/vending/_vending.dm#L4">
         <img src="git.png" width="16" height="16" title="code&#x2F;game&#x2F;machinery&#x2F;vending&#x2F;_vending.dm 4"/></a></h1>
 
 <p>A vending machine</p><table class="summary" cellspacing="0"><tr><td colspan="2"><h2>Procs</h2></td></tr>
@@ -28,14 +28,14 @@
             <tr><th><a href="obj/machinery/vending.html#proc/ui_interact">ui_interact</a></th><td>Display the NanoUI window for the vending machine.</td></tr></table><h2 id="proc">Proc Details</h2><h3 id="proc/credit_purchase"><aside class="declaration">proc </aside>credit_purchase<aside>(target) 
         
     
-            <a href="https://github.com/NebulaSS13/Nebula/blob/823f9c7d6314dc7407d001f11a3f65e06ed6f348/code/game/machinery/vending/_vending.dm#L248">
+            <a href="https://github.com/NebulaSS13/Nebula/blob/90bff616b3037e6a41963fa4ed72e53e8c4e00bf/code/game/machinery/vending/_vending.dm#L248">
         <img src="git.png" width="16" height="16" title="code&#x2F;game&#x2F;machinery&#x2F;vending&#x2F;_vending.dm 248"/></a></aside>
         </h3>
         <p>Add money for current purchase to the vendor account.</p>
 <p>Called after the money has already been taken from the customer.</p><h3 id="proc/get_product_name"><aside class="declaration">proc </aside>get_product_name<aside>(entry) 
         
     
-            <a href="https://github.com/NebulaSS13/Nebula/blob/823f9c7d6314dc7407d001f11a3f65e06ed6f348/code/game/machinery/vending/_vending.dm#L99">
+            <a href="https://github.com/NebulaSS13/Nebula/blob/90bff616b3037e6a41963fa4ed72e53e8c4e00bf/code/game/machinery/vending/_vending.dm#L99">
         <img src="git.png" width="16" height="16" title="code&#x2F;game&#x2F;machinery&#x2F;vending&#x2F;_vending.dm 99"/></a></aside>
         </h3>
         <p>Build produdct_records from the products lists</p>
@@ -44,13 +44,13 @@ the vending machine is to carry without manually populating
 product_records.</p><h3 id="proc/pay_with_cash"><aside class="declaration">proc </aside>pay_with_cash<aside>(/<a href="obj/item.html">obj/item</a>/cash/cashmoney) 
         
     
-            <a href="https://github.com/NebulaSS13/Nebula/blob/823f9c7d6314dc7407d001f11a3f65e06ed6f348/code/game/machinery/vending/_vending.dm#L208">
+            <a href="https://github.com/NebulaSS13/Nebula/blob/90bff616b3037e6a41963fa4ed72e53e8c4e00bf/code/game/machinery/vending/_vending.dm#L208">
         <img src="git.png" width="16" height="16" title="code&#x2F;game&#x2F;machinery&#x2F;vending&#x2F;_vending.dm 208"/></a></aside>
         </h3>
         <p>Receive payment with cashmoney.</p><h3 id="proc/pay_with_charge_card"><aside class="declaration">proc </aside>pay_with_charge_card<aside>(/<a href="obj/item.html">obj/item</a>/charge_stick/wallet) 
         
     
-            <a href="https://github.com/NebulaSS13/Nebula/blob/823f9c7d6314dc7407d001f11a3f65e06ed6f348/code/game/machinery/vending/_vending.dm#L226">
+            <a href="https://github.com/NebulaSS13/Nebula/blob/90bff616b3037e6a41963fa4ed72e53e8c4e00bf/code/game/machinery/vending/_vending.dm#L226">
         <img src="git.png" width="16" height="16" title="code&#x2F;game&#x2F;machinery&#x2F;vending&#x2F;_vending.dm 226"/></a></aside>
         </h3>
         <p>Scan a chargecard and deduct payment from it.</p>
@@ -58,7 +58,7 @@ product_records.</p><h3 id="proc/pay_with_cash"><aside class="declaration">proc 
 successful, 0 if failed.</p><h3 id="proc/stock"><aside class="declaration">proc </aside>stock<aside>(/<a href="obj/item.html">obj/item</a>/W, /<a href="datum.html">datum</a>/stored_items/vending_products/R, /<a href="mob.html">mob</a>/user) 
         
     
-            <a href="https://github.com/NebulaSS13/Nebula/blob/823f9c7d6314dc7407d001f11a3f65e06ed6f348/code/game/machinery/vending/_vending.dm#L397">
+            <a href="https://github.com/NebulaSS13/Nebula/blob/90bff616b3037e6a41963fa4ed72e53e8c4e00bf/code/game/machinery/vending/_vending.dm#L397">
         <img src="git.png" width="16" height="16" title="code&#x2F;game&#x2F;machinery&#x2F;vending&#x2F;_vending.dm 397"/></a></aside>
         </h3>
         <p>Add item to the machine</p>
@@ -66,14 +66,14 @@ successful, 0 if failed.</p><h3 id="proc/stock"><aside class="declaration">proc 
 calling. W is the item being inserted, R is the associated vending_product entry.</p><h3 id="proc/ui_interact"><aside class="parent"><a title="/datum" href="datum.html#proc/ui_interact">&uarr;</a></aside>ui_interact<aside>(/<a href="mob.html">mob</a>/user, ui_key, /<a href="datum.html">datum</a>/<a href="datum/nanoui.html">nanoui</a>/ui, force_open) 
         
     
-            <a href="https://github.com/NebulaSS13/Nebula/blob/823f9c7d6314dc7407d001f11a3f65e06ed6f348/code/game/machinery/vending/_vending.dm#L265">
+            <a href="https://github.com/NebulaSS13/Nebula/blob/90bff616b3037e6a41963fa4ed72e53e8c4e00bf/code/game/machinery/vending/_vending.dm#L265">
         <img src="git.png" width="16" height="16" title="code&#x2F;game&#x2F;machinery&#x2F;vending&#x2F;_vending.dm 265"/></a></aside>
         </h3>
         <p>Display the NanoUI window for the vending machine.</p>
 <p>See NanoUI documentation for details.</p></main>
 <footer>
     nebula.dme
-    <a href="https://github.com/NebulaSS13/Nebula/tree/823f9c7d6314dc7407d001f11a3f65e06ed6f348">823f9c7</a>
+    <a href="https://github.com/NebulaSS13/Nebula/tree/90bff616b3037e6a41963fa4ed72e53e8c4e00bf">90bff61</a>
         (dev) &mdash; <a href="https://github.com/SpaceManiac/SpacemanDMM/blob/master/src/dmdoc/README.md">dmdoc 1.4.1</a></footer>
 </body>
 </html>
