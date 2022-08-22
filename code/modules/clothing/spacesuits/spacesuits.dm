@@ -7,13 +7,12 @@
 	desc = "A special helmet designed for work in a hazardous, low-pressure environment."
 	icon = 'icons/clothing/spacesuit/generic/helmet.dmi'
 	item_flags = ITEM_FLAG_THICKMATERIAL | ITEM_FLAG_AIRTIGHT
-	flags_inv = BLOCKHAIR
 	permeability_coefficient = 0
 	armor = list(
 		bio = ARMOR_BIO_SHIELDED,
 		rad = ARMOR_RAD_SMALL
 		)
-	flags_inv = HIDEMASK|HIDEEARS|HIDEEYES|HIDEFACE|BLOCKHAIR
+	flags_inv = HIDEMASK|HIDEEARS|HIDEEYES|HIDEFACE|BLOCK_ALL_HAIR
 	body_parts_covered = SLOT_HEAD|SLOT_FACE|SLOT_EYES
 	cold_protection = SLOT_HEAD
 	min_cold_protection_temperature = SPACE_HELMET_MIN_COLD_PROTECTION_TEMPERATURE
@@ -72,10 +71,10 @@
 /obj/item/clothing/head/helmet/space/proc/update_tint()
 	if(tinted)
 		flash_protection = FLASH_PROTECTION_MAJOR
-		flags_inv = HIDEMASK|HIDEEARS|HIDEEYES|HIDEFACE|BLOCKHAIR
+		flags_inv = HIDEMASK|HIDEEARS|HIDEEYES|HIDEFACE|BLOCK_ALL_HAIR
 	else
 		flash_protection = FLASH_PROTECTION_NONE
-		flags_inv = HIDEEARS|BLOCKHAIR
+		flags_inv = HIDEEARS|BLOCK_HEAD_HAIR
 	update_icon()
 	update_clothing_icon()
 

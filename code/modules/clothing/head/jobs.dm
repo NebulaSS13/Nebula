@@ -32,23 +32,23 @@
 	name = "chaplain's hood"
 	desc = "It's hood that covers the head. It keeps you warm during the space winters."
 	icon = 'icons/clothing/head/chaplain.dmi'
-	flags_inv = BLOCKHAIR
-	body_parts_covered = SLOT_HEAD
+	flags_inv = HIDEEARS|BLOCK_HEAD_HAIR
+	body_parts_covered = SLOT_HEAD|SLOT_EARS
 
 //Chaplain
 /obj/item/clothing/head/nun_hood
 	name = "nun hood"
 	desc = "Maximum piety in this star system."
 	icon = 'icons/clothing/head/nun.dmi'
-	flags_inv = BLOCKHAIR
-	body_parts_covered = SLOT_HEAD
+	flags_inv = HIDEEARS|BLOCK_HEAD_HAIR
+	body_parts_covered = SLOT_HEAD|SLOT_EARS
 
 //Medical
 /obj/item/clothing/head/surgery
 	name = "surgical cap"
 	desc = "A cap surgeons wear during operations. Keeps their hair from tickling your internal organs."
 	icon = 'icons/clothing/head/surgery_cap.dmi'
-	flags_inv = BLOCKHEADHAIR
+	flags_inv = BLOCK_HEAD_HAIR
 
 /obj/item/clothing/head/surgery/purple
 	name = "purple surgical cap"
@@ -88,7 +88,6 @@
 	desc = "A beret, an artists favorite headwear."
 	icon = 'icons/clothing/head/beret.dmi'
 	color = COLOR_NT_RED
-	body_parts_covered = 0
 
 /obj/item/clothing/head/beret/purple
 	name = "purple beret"

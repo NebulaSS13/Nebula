@@ -107,15 +107,15 @@
 		energy = ARMOR_ENERGY_MINOR
 		)
 	siemens_coefficient = 0.9
-	flags_inv = BLOCKHEADHAIR
+	flags_inv = BLOCK_HEAD_HAIR
 	markings_icon = "band"
 	markings_color = "#b2977c"
 	material = /decl/material/solid/leather
 	matter = list(/decl/material/solid/metal/steel = MATTER_AMOUNT_REINFORCEMENT)
 
 /obj/item/clothing/head/det/attack_self(mob/user)
-	flags_inv ^= BLOCKHEADHAIR
-	to_chat(user, "<span class='notice'>[src] will now [flags_inv & BLOCKHEADHAIR ? "hide" : "show"] hair.</span>")
+	flags_inv ^= BLOCK_HEAD_HAIR
+	to_chat(user, "<span class='notice'>[src] will now [flags_inv & BLOCK_HEAD_HAIR ? "hide" : "show"] hair.</span>")
 	..()
 
 /obj/item/clothing/head/det/grey

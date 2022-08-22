@@ -15,7 +15,7 @@
 /obj/item/clothing/head/helmet/space/rig
 	name = "helmet"
 	item_flags = ITEM_FLAG_THICKMATERIAL
-	flags_inv = 		 HIDEEARS|HIDEEYES|HIDEFACE|BLOCKHAIR
+	flags_inv = 		 HIDEEARS|HIDEEYES|HIDEFACE|BLOCK_ALL_HAIR
 	body_parts_covered = SLOT_HEAD|SLOT_FACE|SLOT_EYES
 	heat_protection =    SLOT_HEAD|SLOT_FACE|SLOT_EYES
 	cold_protection =    SLOT_HEAD|SLOT_FACE|SLOT_EYES

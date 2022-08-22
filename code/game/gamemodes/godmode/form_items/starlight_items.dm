@@ -59,7 +59,7 @@
 	name = "knight's helm"
 	desc = "It's a shiny metal helmet. It looks ripped straight out of the Dark Ages, actually."
 	icon = 'icons/clothing/head/star_champion.dmi'
-	flags_inv = HIDEEARS | BLOCKHAIR
+	flags_inv = HIDEEARS | BLOCK_ALL_HAIR
 
 /obj/item/clothing/suit/armor/sunrobe
 	name = "oracle's robe"
@@ -89,7 +89,7 @@
 	name = "traitor's hood"
 	desc = "No light can pierce this hood. It's unsettling."
 	icon = 'icons/clothing/head/star_traitor.dmi'
-	flags_inv = HIDEEARS | BLOCKHAIR
+	flags_inv = HIDEEARS | BLOCK_ALL_HAIR
 
 /obj/item/knife/ritual/shadow
 	name = "black death"

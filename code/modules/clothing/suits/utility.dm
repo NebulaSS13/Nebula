@@ -51,8 +51,8 @@
 		energy = ARMOR_ENERGY_RESISTANT, 
 		bomb = ARMOR_BOMB_SHIELDED
 		)
-	flags_inv = HIDEMASK|HIDEEARS|HIDEEYES|BLOCKHAIR
-	body_parts_covered = SLOT_HEAD|SLOT_FACE|SLOT_EYES
+	flags_inv = HIDEMASK|HIDEEARS|BLOCK_HEAD_HAIR
+	body_parts_covered = SLOT_HEAD|SLOT_FACE|SLOT_EYES|SLOT_EARS
 	siemens_coefficient = 0
 
 /obj/item/clothing/suit/bomb_suit
@@ -94,8 +94,8 @@
 	name = "radiation hood"
 	desc = "A hood with radiation protective properties. Label: Made with lead, do not eat insulation."
 	icon = 'icons/clothing/head/radsuit.dmi'
-	flags_inv = BLOCKHAIR
-	body_parts_covered = SLOT_HEAD|SLOT_FACE|SLOT_EYES
+	flags_inv = HIDEMASK|HIDEEARS|HIDEEYES|HIDEFACE|BLOCK_ALL_HAIR
+	body_parts_covered = SLOT_HEAD|SLOT_FACE|SLOT_EYES|SLOT_EARS
 	armor = list(
 		bio = ARMOR_BIO_RESISTANT, 
 		rad = ARMOR_RAD_SHIELDED
@@ -144,9 +144,9 @@
 		bio = ARMOR_BIO_RESISTANT, 
 		rad = ARMOR_RAD_MINOR
 		)
-	flags_inv = HIDEEARS|HIDEEYES|BLOCKHAIR
+	flags_inv = HIDEEARS|BLOCK_HEAD_HAIR
 	item_flags = ITEM_FLAG_THICKMATERIAL
-	body_parts_covered = SLOT_HEAD
+	body_parts_covered = SLOT_HEAD|SLOT_EARS
 	siemens_coefficient = 0.9
 	matter = list(
 		/decl/material/solid/plastic = MATTER_AMOUNT_REINFORCEMENT,

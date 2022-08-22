@@ -8,9 +8,9 @@
 		bio = ARMOR_BIO_SHIELDED, 
 		rad = ARMOR_RAD_MINOR
 		)
-	flags_inv = HIDEMASK|HIDEEARS|HIDEEYES|BLOCKHAIR
+	flags_inv = HIDEMASK|HIDEEARS|HIDEEYES|HIDEFACE|BLOCK_ALL_HAIR
 	item_flags = ITEM_FLAG_THICKMATERIAL
-	body_parts_covered = SLOT_HEAD|SLOT_FACE|SLOT_EYES
+	body_parts_covered = SLOT_HEAD|SLOT_FACE|SLOT_EYES|SLOT_EARS
 	siemens_coefficient = 0.9
 	origin_tech = "{'materials':3, 'engineering':3}"
 	matter = list(

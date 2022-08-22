@@ -10,7 +10,7 @@
 		rad = ARMOR_RAD_SHIELDED
 	)
 	bodytype_equip_flags = BODY_FLAG_HUMANOID
-	flags_inv = HIDEEARS | BLOCKHAIR
+	flags_inv = HIDEEARS | BLOCK_HEAD_HAIR
 
 /obj/item/clothing/suit/fiendcowl
 	name = "fiend's cowl"
@@ -41,7 +41,7 @@
 	name = "fiend's visage"
 	desc = "To gaze upon this is to gaze into an inferno. Look away, before it looks back of its own accord."
 	icon = 'icons/clothing/head/fiend_visage.dmi'
-	flags_inv = HIDEEARS | BLOCKHAIR
+	flags_inv = HIDEEARS | BLOCK_ALL_HAIR
 
 /obj/item/clothing/suit/fiendcowl/fem
 	name = "fiend's robe"
