@@ -1,0 +1,6 @@
+author: PsyCommando
+delete-after: true
+changes:
+  - bugfix: Fixed top hat not showing up on the mob sprite.
+  - bugfix: Fixed balaclava and other masks turning people bald.
+  - bugfix: Fixed a lot of hats not hiding hair under them.
