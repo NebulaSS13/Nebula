@@ -1,0 +1,5 @@
+author: Penelope Haze
+delete-after: true
+changes:
+  - tweak: Broadly retools cocktail ratios, changing some cocktail ingredient amounts
+      and improving their display in the codex.
