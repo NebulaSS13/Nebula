@@ -150,10 +150,10 @@
 		pass("All space suit modifiers have unique names.")
 	return 1
 
-/datum/unit_test/trait/all_traits_shall_have_unique_name
+/datum/unit_test/all_traits_shall_have_unique_name
 	name = "UNIQUENESS: Traits Shall Have Unique Names"
 
-/datum/unit_test/trait/all_traits_shall_have_unique_name/start_test()
+/datum/unit_test/all_traits_shall_have_unique_name/start_test()
 	var/list/trait_names = list()
 
 	var/traits = decls_repository.get_decls_of_subtype(/decl/trait)
