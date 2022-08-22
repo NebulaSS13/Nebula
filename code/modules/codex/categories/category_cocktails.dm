@@ -14,16 +14,21 @@
 			continue
 
 		var/mechanics_text = "Cocktails will change the name of bartending glasses when mixed properly.<br><br>"
-		mechanics_text += "This cocktail is mixed with the following ingredients:<br>"        
+		mechanics_text += "This cocktail is mixed with the following ingredients:<br>"
 		var/list/ingredients = list()
-		for(var/rtype in cocktail.ratios)
-			// If anyone can think of a good way to find the lowest common
-			// divisor of these part values and make it a bit neater, please
-			// feel free to change this block to use it.
-			var/decl/material/mixer = GET_DECL(rtype) 
-			var/ingredient = "[cocktail.ratios[rtype] >= 0.1 ? "[CEILING(cocktail.ratios[rtype] * 10)] part\s" : "a dash of"] [mixer.name]"
+		for(var/rtype in cocktail.display_ratios)
+			// Rather than normalising fractional values using the lowest
+			// common divisor, we instead let cocktails use user-readable values
+			// which we normalize internally for calculations.
+			var/decl/material/mixer = GET_DECL(rtype)
+			var/minimum_amount = cocktail.display_ratios[rtype]
+			var/ingredient = "[mixer.name]"
+			if(minimum_amount)
+				ingredient = "[minimum_amount] part\s [ingredient]"
+			else
+				ingredient += " to taste"
 			ingredients += ingredient
-		
+
 		guide_html += "<h3>[capitalize(cocktail.name)]</h3>Mix [english_list(ingredients)] in a glass."
 		mechanics_text += "<ul><li>[jointext(ingredients, "</li><li>")]</li></ul>"
 
