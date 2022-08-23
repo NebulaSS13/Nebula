@@ -57,16 +57,17 @@
 		..()
 	else
 		var/datum/gas_mixture/pipe_air = return_air()
-		if(istype(loc, /turf/simulated/))
+		if(istype(loc, /turf/simulated) || istype(loc, /turf/exterior))
+			var/turf/pipe_turf = loc
 			var/environment_temperature = 0
-			if(loc:blocks_air)
-				environment_temperature = loc:temperature
+			if(pipe_turf.blocks_air)
+				environment_temperature = pipe_turf.temperature
 			else
-				var/datum/gas_mixture/environment = loc.return_air()
+				var/datum/gas_mixture/environment = pipe_turf.return_air()
 				environment_temperature = environment.temperature
 			if(abs(environment_temperature-pipe_air.temperature) > minimum_temperature_difference)
-				parent.temperature_interact(loc, volume, thermal_conductivity)
-		else if(istype(loc, /turf/space/))
+				parent.temperature_interact(pipe_turf, volume, thermal_conductivity)
+		else if(istype(loc, /turf/space))
 			parent.radiate_heat_to_space(surface, 1)
 
 		if(buckled_mob)
