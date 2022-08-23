@@ -19,11 +19,10 @@
 		. = INITIALIZE_HINT_QDEL
 		CRASH("Invalid poster type: [log_info_line(given_poster_type)]")
 
+	var/list/posters = decls_repository.get_decl_paths_of_subtype(/decl/poster)
 	poster_type = given_poster_type || poster_type
 	if(!poster_type)
-		poster_type = pick(decls_repository.get_decl_paths_of_subtype(/decl/poster))
-
-	var/list/posters = decls_repository.get_decl_paths_of_subtype(/decl/poster)
+		poster_type = pick(posters)
 	var/serial_number = posters.Find(poster_type)
 	name += " - No. [serial_number]"
 

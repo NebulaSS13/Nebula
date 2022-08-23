@@ -213,16 +213,12 @@
 	name = "ATMOS MACHINERY: filter_gas() Conserves Moles"
 
 /datum/unit_test/atmos_machinery/conserve_moles/filter_gas/start_test()
-	var/list/filtering = list()
-	for(var/filter_type in decls_repository.get_decl_paths_of_subtype(/decl/material/gas))
-		filtering += filter_type
+	var/list/filtering = decls_repository.get_decl_paths_of_subtype(/decl/material/gas)
 	for(var/case_name in test_cases)
 		var/gas_mix_data = test_cases[case_name]
 		var/list/before_gas_mixes = create_gas_mixes(gas_mix_data)
 		var/list/after_gas_mixes = create_gas_mixes(gas_mix_data)
-
 		filter_gas(null, filtering, after_gas_mixes["source"], after_gas_mixes["sink"], after_gas_mixes["source"], null, INFINITY)
-
 		check_moles_conserved(case_name, before_gas_mixes, after_gas_mixes)
 
 	return 1
