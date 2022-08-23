@@ -30,15 +30,11 @@
 		w_class = ITEM_SIZE_TINY
 
 /obj/item/chems/ivbag/on_update_icon()
-	overlays.Cut()
+	. = ..()
 	var/percent = round(reagents.total_volume / volume * 100)
 	if(reagents.total_volume)
-		var/image/filling = image('icons/obj/bloodpack.dmi', "[round(percent,25)]")
-		filling.color = reagents.get_color()
-		overlays += filling
-	overlays += image('icons/obj/bloodpack.dmi', "top")
-	if(attached)
-		overlays += image('icons/obj/bloodpack.dmi', "dongle")
+		add_overlay(overlay_image(icon, "[round(percent,25)]", reagents.get_color()))
+	add_overlay(attached? "dongle" : "top")
 
 /obj/item/chems/ivbag/handle_mouse_drop(atom/over, mob/user)
 	if(ismob(loc))

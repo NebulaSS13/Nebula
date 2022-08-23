@@ -27,6 +27,7 @@
 	update_icon()
 
 /obj/item/chems/drinks/juicebox/on_update_icon()
+	SHOULD_CALL_PARENT(FALSE)
 	var/mutable_appearance/new_appearance = new(src)
 	new_appearance.appearance_flags = RESET_COLOR
 	new_appearance.color = primary_color

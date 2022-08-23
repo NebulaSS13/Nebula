@@ -7,7 +7,7 @@
 	var/obj/item/implant/imp
 
 /obj/item/implantpad/on_update_icon()
-	cut_overlays()
+	. = ..()
 	if(imp)
 		add_overlay("[icon_state]-imp")
 

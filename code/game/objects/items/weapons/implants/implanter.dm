@@ -21,10 +21,8 @@
 	. = ..()
 
 /obj/item/implanter/on_update_icon()
-	if (imp)
-		icon_state = "implanter1"
-	else
-		icon_state = "implanter0"
+	. = ..()
+	icon_state = "implanter[imp == TRUE]"
 
 /obj/item/implanter/verb/remove_implant()
 	set category = "Object"

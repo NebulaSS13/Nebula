@@ -118,7 +118,7 @@
 			ec_cartridge.reagents.trans_to_mob(C, REM, CHEM_INGEST, 0.4) // Most of it is not inhaled... balance reasons.
 
 /obj/item/clothing/mask/smokable/ecig/on_update_icon()
-	..()
+	. = ..()
 	if(lit)
 		set_light(brightness_on)
 	else

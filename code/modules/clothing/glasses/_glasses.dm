@@ -72,6 +72,7 @@
 		update_vision()
 
 /obj/item/clothing/glasses/on_update_icon()
+	. = ..()
 	icon_state = ICON_STATE_WORLD
 	if(active && check_state_in_icon("[icon_state]-active", icon))
 		icon_state = "[icon_state]-active"

@@ -40,6 +40,7 @@
 	imp = /obj/item/implant/compressed
 
 /obj/item/implanter/compressed/on_update_icon()
+	. = ..()
 	if (imp)
 		var/obj/item/implant/compressed/c = imp
 		if(!c.scanned)
@@ -48,7 +49,6 @@
 			icon_state = "cimplanter2"
 	else
 		icon_state = "cimplanter0"
-	return
 
 /obj/item/implanter/compressed/attack(mob/M, mob/user)
 	var/obj/item/implant/compressed/c = imp

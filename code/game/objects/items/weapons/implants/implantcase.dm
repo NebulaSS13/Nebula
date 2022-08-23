@@ -33,11 +33,11 @@
 		origin_tech = null
 
 /obj/item/implantcase/on_update_icon()
+	. = ..()
 	if (imp)
 		icon_state = "implantcase-[imp.implant_color]"
 	else
 		icon_state = "implantcase-0"
-	return
 
 /obj/item/implantcase/attackby(obj/item/I, mob/user)
 	if (IS_PEN(I))

@@ -110,6 +110,7 @@
 	update_icon()
 
 /obj/item/clothing/accessory/storage/knifeharness/on_update_icon()
+	. = ..()
 	icon_state = get_world_inventory_state()
 	var/contents_count = min(length(contents), 2)
 	if(contents_count > 0 && check_state_in_icon("[icon_state]-[contents_count]", icon))

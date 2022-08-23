@@ -14,6 +14,7 @@
 	var/obj/item/chems/syringe/syringe
 
 /obj/item/syringe_cartridge/on_update_icon()
+	. = ..()
 	underlays.Cut()
 	if(syringe)
 		underlays += image(syringe.icon, src, syringe.icon_state)
@@ -148,7 +149,7 @@
 	release_force = 10
 
 /obj/item/gun/launcher/syringe/disguised/on_update_icon()
-	cut_overlays()
+	. = ..()
 	add_overlay("[icon_state]-loaded")
 
 /obj/item/gun/launcher/syringe/disguised/examine(mob/user, distance)

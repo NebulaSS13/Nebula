@@ -28,11 +28,9 @@ var/global/list/cached_icons = list()
 		reagents.add_reagent(/decl/material/liquid/paint, reagents.maximum_volume)
 
 /obj/item/chems/glass/paint/on_update_icon()
-	overlays.Cut()
+	. = ..()
 	if(reagents.total_volume)
-		var/image/filling = image('icons/obj/reagentfillings.dmi', src, "paintbucket")
-		filling.color = reagents.get_color()
-		overlays += filling
+		add_overlay(overlay_image('icons/obj/reagentfillings.dmi', "paintbucket", reagents.get_color()))
 
 /obj/item/chems/glass/paint/red
 	name = "red paint bucket"

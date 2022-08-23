@@ -71,6 +71,7 @@
 	updateinfolinks()
 
 /obj/item/paper/on_update_icon()
+	. = ..()
 	if(icon_state == "paper_talisman")
 		return
 	else if(info)
@@ -479,6 +480,7 @@
 	icon_state = "scrap"
 
 /obj/item/paper/crumpled/on_update_icon()
+	SHOULD_CALL_PARENT(FALSE)
 	return
 
 /obj/item/paper/crumpled/bloody

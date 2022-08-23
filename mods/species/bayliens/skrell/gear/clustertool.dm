@@ -15,6 +15,7 @@
 	))
 
 /obj/item/clustertool/on_update_icon()
+	. = ..()
 	icon_state = initial(icon_state)
 	if(IS_WRENCH(src))
 		icon_state = "[icon_state]-wrench"

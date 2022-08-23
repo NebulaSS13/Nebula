@@ -298,7 +298,7 @@ var/global/list/pai_cards = list()
 		current_emotion = emotion
 
 /obj/item/paicard/on_update_icon()
-	cut_overlays()
+	. = ..()
 	if(pai)
 		switch(current_emotion)
 			if(1)  add_overlay("pai-happy")

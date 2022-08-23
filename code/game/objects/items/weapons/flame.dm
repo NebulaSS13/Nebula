@@ -71,7 +71,7 @@
 	update_icon()
 
 /obj/item/flame/match/on_update_icon()
-	..()
+	. = ..()
 	if(burnt)
 		icon_state = "[get_world_inventory_state()]_burnt"
 	else if(lit)

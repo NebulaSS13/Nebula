@@ -229,6 +229,7 @@
 	..()
 
 /obj/item/mech_equipment/light/on_update_icon()
+	. = ..()
 	if(on)
 		icon_state = "[initial(icon_state)]-on"
 		set_light(l_range, l_power)

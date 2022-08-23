@@ -70,9 +70,6 @@
 	update_icon()
 
 /obj/item/storage/pill_bottle/on_update_icon()
-	cut_overlays()
+	. = ..()
 	if(wrapper_color)
-		var/image/I = image(icon, "pillbottle_wrap")
-		I.color = wrapper_color
-		I.appearance_flags |= RESET_COLOR
-		add_overlay(I)
+		add_overlay(overlay_image(icon, "pillbottle_wrap", wrapper_color, RESET_COLOR))

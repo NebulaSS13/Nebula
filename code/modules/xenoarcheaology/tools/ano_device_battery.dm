@@ -8,6 +8,7 @@
 	var/stored_charge = 0
 
 /obj/item/anobattery/on_update_icon()
+	. = ..()
 	icon_state = "anobattery[round(percent(),25)]"
 
 /obj/item/anobattery/proc/percent()
@@ -166,6 +167,7 @@
 		. = TOPIC_REFRESH
 
 /obj/item/anodevice/on_update_icon()
+	. = ..()
 	if(inserted_battery)
 		icon_state = "anodev[round(inserted_battery.percent(),25)]"
 	else

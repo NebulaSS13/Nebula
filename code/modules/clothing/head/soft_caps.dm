@@ -9,7 +9,7 @@
 	body_parts_covered = 0
 
 /obj/item/clothing/head/soft/on_update_icon()
-	..()
+	. = ..()
 	if(flipped)
 		icon_state = "[get_world_inventory_state()]_flipped"
 

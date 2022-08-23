@@ -20,8 +20,11 @@
 	possible_evidence_types = list(/datum/forensics/fingerprints)
 
 /obj/item/forensics/sample/print/on_update_icon()
+	. = ..()
 	if(length(evidence))
 		icon_state = "fingerprint1"
+	else
+		icon_state = "fingerprint0"
 
 /obj/item/forensics/sample/print/merge_evidence_list(var/list/new_evidence)
 	for(var/datum/fingerprint/newprint in new_evidence)

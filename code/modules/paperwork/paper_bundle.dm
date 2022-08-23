@@ -206,9 +206,11 @@
 
 
 /obj/item/paper_bundle/on_update_icon()
+	. = ..()
 	var/obj/item/paper/P = pages[1]
 	icon_state = P.icon_state
-	overlays = P.overlays
+	if(length(P.overlays))
+		set_overlays(P.overlays.Copy())
 	underlays.Cut()
 	var/i = 0
 	var/photo
@@ -227,12 +229,12 @@
 			var/obj/item/photo/Ph = O
 			img = Ph.tiny
 			photo = 1
-			overlays += img
+			add_overlay(img)
 	if(i>1)
 		desc =  "[i] papers clipped to each other."
 	else
 		desc = "A single sheet of paper."
 	if(photo)
 		desc += "\nThere is a photo attached to it."
-	overlays += image('icons/obj/bureaucracy.dmi', "clip")
+	add_overlay(image('icons/obj/bureaucracy.dmi', "clip"))
 	return

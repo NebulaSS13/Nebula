@@ -57,6 +57,7 @@
 	to_chat(user, "<span class='notice'>[html_icon(src)] You switch [scanning ? "on" : "off"] [src].</span>")
 
 /obj/item/geiger/on_update_icon()
+	. = ..()
 	if(!scanning)
 		icon_state = "geiger_off"
 		update_sound(0)

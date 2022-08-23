@@ -95,6 +95,7 @@
 
 
 /obj/item/paper_bin/on_update_icon()
+	. = ..()
 	if(amount < 1)
 		icon_state = "paper_bin0"
 	else

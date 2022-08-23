@@ -71,7 +71,7 @@
 	return 1
 
 /obj/item/aicard/on_update_icon()
-	cut_overlays()
+	. = ..()
 	if(carded_ai)
 		if (!carded_ai.control_disabled)
 			add_overlay("[icon_state]-on")

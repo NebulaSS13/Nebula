@@ -15,11 +15,12 @@
 	var/obj/item/key_type //path of the key item that this "fancy" container is meant to store
 
 /obj/item/storage/fancy/on_update_icon()
+	. = ..()
 	if(!opened)
-		src.icon_state = initial(icon_state)
+		icon_state = initial(icon_state)
 	else
 		var/key_count = count_by_type(contents, key_type)
-		src.icon_state = "[initial(icon_state)][key_count]"
+		icon_state = "[initial(icon_state)][key_count]"
 
 /obj/item/storage/fancy/examine(mob/user, distance)
 	. = ..()
@@ -95,10 +96,13 @@
 		)
 
 /obj/item/storage/fancy/crayons/on_update_icon()
-	overlays = list() //resets list
-	overlays += image(icon,"crayonbox")
+	. = ..()
+	//#FIXME: This can't handle all crayons types and colors.
+	var/list/cur_overlays
 	for(var/obj/item/pen/crayon/crayon in contents)
-		overlays += image(icon,crayon.stroke_colour_name)
+		LAZYADD(cur_overlays, overlay_image(icon, crayon.stroke_colour_name, flags = RESET_COLOR))
+	if(LAZYLEN(cur_overlays))
+		add_overlay(cur_overlays)
 
 ////////////
 //CIG PACK//
@@ -294,8 +298,9 @@
 	startswith = list(/obj/item/chems/glass/beaker/vial = 12)
 
 /obj/item/storage/fancy/vials/on_update_icon()
+	. = ..()
 	var/key_count = count_by_type(contents, key_type)
-	src.icon_state = "[initial(icon_state)][FLOOR(key_count/2)]"
+	icon_state = "[initial(icon_state)][FLOOR(key_count/2)]"
 
 /*
  * Not actually a "fancy" storage...
@@ -317,16 +322,15 @@
 	update_icon()
 
 /obj/item/storage/lockbox/vials/on_update_icon()
+	. = ..()
 	var/total_contents = count_by_type(contents, /obj/item/chems/glass/beaker/vial)
-	src.icon_state = "vialbox[FLOOR(total_contents/2)]"
-	src.overlays.Cut()
+	icon_state = "vialbox[FLOOR(total_contents/2)]"
 	if (!broken)
-		overlays += image(icon, src, "led[locked]")
+		add_overlay("led[locked]")
 		if(locked)
-			overlays += image(icon, src, "cover")
+			add_overlay("cover")
 	else
-		overlays += image(icon, src, "ledb")
-	return
+		add_overlay("ledb")
 
 /obj/item/storage/lockbox/vials/attackby(obj/item/W, mob/user)
 	. = ..()

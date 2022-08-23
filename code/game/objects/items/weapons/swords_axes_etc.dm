@@ -61,14 +61,13 @@
 	update_held_icon()
 
 /obj/item/telebaton/on_update_icon()
+	if(length(blood_DNA))
+		generate_blood_overlay(TRUE) // Force recheck.
+	. = ..()
 	if(on)
 		icon = 'icons/obj/items/weapon/telebaton_extended.dmi'
 	else
 		icon = 'icons/obj/items/weapon/telebaton.dmi'
-	if(length(blood_DNA))
-		generate_blood_overlay(TRUE) // Force recheck.
-		overlays.Cut()
-		overlays += blood_overlay
 
 /obj/item/telebaton/attack(mob/target, mob/living/user)
 	if(on)

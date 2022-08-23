@@ -134,7 +134,7 @@
 	return ..()
 
 /obj/item/suit_cooling_unit/on_update_icon()
-	cut_overlays()
+	. = ..()
 	if(cover_open)
 		add_overlay("[icon_state]-open")
 		if(cell)

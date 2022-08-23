@@ -68,9 +68,13 @@
 			to_chat(user, SPAN_WARNING("You need a can-opener to open this!"))
 
 /obj/item/chems/food/can/on_update_icon()
+	. = ..()
 	icon_state = initial(icon_state)
 	if(ATOM_IS_OPEN_CONTAINER(src))
 		icon_state = "[initial(icon_state)]-open"
+
+/obj/item/chems/food/can/apply_filling_overlay()
+	return //Bypass searching through the whole icon file for a filling icon
 
 //Just a short line of Canned Consumables, great for treasure in faraway abandoned outposts
 

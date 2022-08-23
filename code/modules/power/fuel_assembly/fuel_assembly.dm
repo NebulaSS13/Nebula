@@ -48,6 +48,7 @@
 	update_icon()
 
 /obj/item/fuel_assembly/on_update_icon()
+	. = ..()
 	icon_state = "fuel_assembly"
 	if(material)
 		color = material.color
@@ -59,7 +60,7 @@
 		color = MixColors(colors)
 	var/image/I = image(icon, "fuel_assembly_bracket")
 	I.appearance_flags |= RESET_COLOR
-	set_overlays(I)
+	add_overlay(I)
 
 /obj/item/fuel_assembly/Process()
 	if(!radioactivity)

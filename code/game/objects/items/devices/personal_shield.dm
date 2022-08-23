@@ -28,6 +28,7 @@
 		return
 
 /obj/item/personal_shield/on_update_icon()
+	. = ..()
 	if(uses)
 		icon_state = "batterer"
 	else

@@ -14,6 +14,7 @@
 		. = ..()
 
 /obj/item/card/id/ascent/on_update_icon()
+	SHOULD_CALL_PARENT(FALSE)
 	return
 
 /obj/item/card/id/ascent/prevent_tracking()

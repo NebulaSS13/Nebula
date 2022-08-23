@@ -1,10 +1,12 @@
 /obj/item/on_update_icon()
-	overlays.Cut()
+	. = ..()
+	SHOULD_CALL_PARENT(TRUE)
+	cut_overlays()
 	if(applies_material_colour && material)
 		color = material.color
 		alpha = 100 + material.opacity * 255
 	if(blood_overlay)
-		overlays += blood_overlay
+		add_overlay(blood_overlay)
 
 /obj/item/apply_hit_effect(mob/living/target, mob/living/user, var/hit_zone)
 	. = ..()

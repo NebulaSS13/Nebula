@@ -41,8 +41,8 @@ var/global/list/tape_roll_applications = list()
 	var/detail_color
 
 /obj/item/tape/on_update_icon()
+	. = ..()
 	//Possible directional bitflags: 0 (AIRLOCK), 1 (NORTH), 2 (SOUTH), 4 (EAST), 8 (WEST), 3 (VERTICAL), 12 (HORIZONTAL)
-	overlays.Cut()
 	var/new_state
 	switch (tape_dir)
 		if(0)  // AIRLOCK
@@ -56,9 +56,7 @@ var/global/list/tape_roll_applications = list()
 			set_dir(tape_dir)
 	icon_state = "[new_state]_[crumpled]"
 	if(detail_overlay)
-		var/image/I = overlay_image(icon, "[new_state]_[detail_overlay]", flags=RESET_COLOR)
-		I.color = detail_color
-		overlays |= I
+		add_overlay(overlay_image(icon, "[new_state]_[detail_overlay]", detail_color, RESET_COLOR))
 
 /obj/item/tape/Initialize()
 	. = ..()
@@ -152,6 +150,7 @@ var/global/list/tape_roll_applications = list()
 	detail_color = COLOR_RED
 
 /obj/item/taperoll/on_update_icon()
+	SHOULD_CALL_PARENT(FALSE) //Paperwork PR will handle this one
 	overlays.Cut()
 	var/image/overlay = image(icon = src.icon)
 	overlay.appearance_flags = RESET_COLOR

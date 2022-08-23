@@ -70,9 +70,9 @@
 		..()
 
 /obj/item/weldpack/on_update_icon()
-	cut_overlays()
+	. = ..()
 	if(welder)
-		var/image/welder_image = image(welder.icon, icon_state = welder.icon_state)
+		var/mutable_appearance/welder_image = new(welder)
 		welder_image.pixel_x = 16
 		add_overlay(welder_image)
 

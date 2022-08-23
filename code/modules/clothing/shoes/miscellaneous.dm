@@ -72,7 +72,7 @@
 /obj/item/clothing/shoes/dress/on_update_icon()
 	. = ..()
 	if(check_state_in_icon("[icon_state]_inset", icon))
-		overlays += overlay_image(icon, "[icon_state]_inset", inset_color, RESET_COLOR)
+		add_overlay(overlay_image(icon, "[icon_state]_inset", inset_color, RESET_COLOR))
 
 /obj/item/clothing/shoes/dress/white
 	name = "white dress shoes"

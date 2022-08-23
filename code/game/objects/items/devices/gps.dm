@@ -200,8 +200,7 @@ var/global/list/all_gps_units = list()
 		to_chat(loc, SPAN_NOTICE("\The [src] appears to be functional again."))
 
 /obj/item/gps/on_update_icon()
-
-	cut_overlays()
+	. = ..()
 
 	var/image/I
 	for(var/decal in decals)

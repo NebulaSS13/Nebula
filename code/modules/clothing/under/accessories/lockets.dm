@@ -22,6 +22,7 @@
 	return TRUE
 
 /obj/item/clothing/accessory/locket/on_update_icon()
+	. = ..()
 	icon_state = get_world_inventory_state()
 	if(open && check_state_in_icon("[icon_state]-open", icon))
 		icon_state = "[icon_state]-open"

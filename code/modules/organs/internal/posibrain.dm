@@ -138,14 +138,14 @@
 	update_icon()
 
 /obj/item/organ/internal/posibrain/on_update_icon()
+	. = ..()
 	if(src.brainmob && src.brainmob.key)
 		icon_state = "posibrain-occupied"
 	else
 		icon_state = "posibrain"
 
-	overlays.Cut()
 	if(shackle)
-		overlays |= image('icons/obj/assemblies.dmi', "posibrain-shackles")
+		add_overlay("posibrain-shackles")
 
 /obj/item/organ/internal/posibrain/proc/transfer_identity(var/mob/living/carbon/H)
 	if(H && H.mind)

@@ -49,6 +49,7 @@
 		slime_data.handle_reaction(reagents)
 
 /obj/item/slime_extract/on_update_icon()
+	. = ..()
 	icon_state = get_world_inventory_state()
 	var/decl/slime_colour/slime_data = GET_DECL(slime_type)
 	icon = slime_data.extract_icon

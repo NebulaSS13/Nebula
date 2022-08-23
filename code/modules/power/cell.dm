@@ -39,7 +39,7 @@
 	return use(cell_amt) / CELLRATE
 
 /obj/item/cell/on_update_icon()
-
+	. = ..()
 	var/new_overlay_state = null
 	switch(percent())
 		if(95 to 100)
@@ -51,9 +51,8 @@
 
 	if(new_overlay_state != overlay_state)
 		overlay_state = new_overlay_state
-		overlays.Cut()
 		if(overlay_state)
-			overlays += image('icons/obj/power.dmi', overlay_state)
+			add_overlay(overlay_state)
 
 /obj/item/cell/proc/percent()		// return % charge of cell
 	return maxcharge && (100.0*charge/maxcharge)
@@ -308,7 +307,6 @@
 #endif
 
 /obj/item/cell/gun/on_update_icon()
-	cut_overlays()
-	var/image/A = image('icons/obj/power.dmi', icon_state = "gunbattery_charge")
-	A.color = gradient("#fa6a0a", "#9cdb43", clamp(percent(), 0, 100) ) //Color the battery charging overlay against the percentage of the battery capacity. However the index of gradient() is set to 1, instead of 100, so we divide it by 100. Colors were chosen by the sprite artist.
-	add_overlay(A)
+	. = ..()
+	 //Color the battery charging overlay against the percentage of the battery capacity. However the index of gradient() is set to 1, instead of 100, so we divide it by 100. Colors were chosen by the sprite artist.
+	add_overlay(overlay_image(icon, "gunbattery_charge", gradient("#fa6a0a", "#9cdb43", clamp(percent(), 0, 100) )))

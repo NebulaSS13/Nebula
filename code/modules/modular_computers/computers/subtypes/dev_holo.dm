@@ -57,7 +57,7 @@
 
 // Visual.
 /obj/item/modular_computer/holotablet/on_update_icon()
-	cut_overlays()
+	. = ..()
 	var/datum/extension/interactive/os/os = get_extension(src, /datum/extension/interactive/os)
 	var/datum/extension/assembly/modular_computer/assembly = get_extension(src, /datum/extension/assembly)
 	if(assembly && assembly.enabled)

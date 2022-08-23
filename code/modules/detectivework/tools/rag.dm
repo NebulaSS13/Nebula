@@ -57,11 +57,8 @@
 		SetName("dry [initial(name)]")
 
 /obj/item/chems/glass/rag/on_update_icon()
-	if(on_fire)
-		icon_state = "raglit"
-	else
-		icon_state = "rag"
-
+	. = ..()
+	icon_state = "rag[on_fire? "lit" : ""]"
 	var/obj/item/chems/drinks/bottle/B = loc
 	if(istype(B))
 		B.update_icon()

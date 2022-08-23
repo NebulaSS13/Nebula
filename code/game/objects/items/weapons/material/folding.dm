@@ -44,13 +44,11 @@
 		..()
 
 /obj/item/knife/folding/on_update_icon()
+	. = ..()
 	icon_state = get_world_inventory_state()
 	if(open)
 		icon_state = "[get_world_inventory_state()]_open"
-	if(ismob(loc))
-		var/mob/M = loc
-		M.update_inv_hands()
-	..()
+	update_held_icon()
 
 /obj/item/knife/folding/get_mob_overlay(mob/user_mob, slot, bodypart)
 	. = open ? ..() : new /image

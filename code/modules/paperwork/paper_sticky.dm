@@ -22,6 +22,7 @@
 	update_matter()
 
 /obj/item/sticky_pad/on_update_icon()
+	. = ..()
 	if(papers <= 15)
 		icon_state = "pad_empty"
 	else if(papers <= 50)
@@ -106,6 +107,7 @@
 	. = ..()
 
 /obj/item/paper/sticky/on_update_icon()
+	. = ..()
 	if(icon_state != "scrap")
 		icon_state = info ? "paper_words" : "paper"
 

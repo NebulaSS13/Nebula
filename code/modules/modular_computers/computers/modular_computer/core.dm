@@ -89,7 +89,7 @@
 		return 1
 
 /obj/item/modular_computer/on_update_icon()
-	cut_overlays()
+	. = ..()
 	for(var/decal_state in decals)
 		var/image/I = image(icon, "[icon_state]-[decal_state]")
 		I.color = decals[decal_state]

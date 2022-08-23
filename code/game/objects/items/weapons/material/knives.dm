@@ -33,14 +33,11 @@
 		))
 
 /obj/item/knife/on_update_icon()
-	..()
+	. = ..()
 	if(draw_handle)
-		cut_overlays()
 		if(!handle_color && length(valid_handle_colors))
 			handle_color = pick(valid_handle_colors)
 		add_overlay(overlay_image(icon, "[get_world_inventory_state()]_handle", handle_color, flags=RESET_COLOR|RESET_ALPHA))
-	if(blood_overlay)
-		add_overlay(blood_overlay)
 
 /obj/item/knife/attack(mob/living/carbon/M, mob/living/carbon/user, target_zone)
 	if(!istype(M))

@@ -24,10 +24,9 @@
 	icon_state = "folder_cyan"
 
 /obj/item/folder/on_update_icon()
-	overlays.Cut()
+	. = ..()
 	if(contents.len)
-		overlays += "folder_paper"
-	return
+		add_overlay("folder_paper")
 
 /obj/item/folder/attackby(obj/item/W, mob/user)
 	if(istype(W, /obj/item/paper) || istype(W, /obj/item/photo) || istype(W, /obj/item/paper_bundle))
@@ -112,6 +111,7 @@
 	var/sealed = 1
 
 /obj/item/folder/envelope/on_update_icon()
+	. = ..()
 	if(sealed)
 		icon_state = "envelope_sealed"
 	else

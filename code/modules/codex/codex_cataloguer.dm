@@ -154,8 +154,8 @@
 	return TRUE
 
 /obj/item/cataloguer/on_update_icon()
+	. = ..()
 	icon_state = get_world_inventory_state()
-	cut_overlays()
 	if(scanning && check_state_in_icon("[icon_state]_glow", icon))
 		var/image/I
 		if(plane == HUD_PLANE)

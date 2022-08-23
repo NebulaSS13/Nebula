@@ -193,6 +193,7 @@
 	cell.use(500)
 
 /obj/item/gun/launcher/crossbow/on_update_icon()
+	. = ..()
 	if(tension > 1)
 		icon_state = "[get_world_inventory_state()]-drawn"
 	else if(bolt)
@@ -263,10 +264,10 @@
 		update_icon()
 
 /obj/item/gun/launcher/crossbow/rapidcrossbowdevice/on_update_icon()
-	overlays.Cut()
+	. = ..()
 
 	if(bolt)
-		overlays += "[get_world_inventory_state()]-bolt"
+		add_overlay("[get_world_inventory_state()]-bolt")
 
 	var/ratio = 0
 	if(stored_matter < boltcost)
@@ -274,7 +275,7 @@
 	else
 		ratio = stored_matter / max_stored_matter
 		ratio = max(round(ratio, 0.25) * 100, 25)
-	overlays += "[get_world_inventory_state()][ratio]"
+	add_overlay("[get_world_inventory_state()][ratio]")
 
 	if(tension > 1)
 		icon_state = "[get_world_inventory_state()]-drawn"

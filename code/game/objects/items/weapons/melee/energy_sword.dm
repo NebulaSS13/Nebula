@@ -46,9 +46,7 @@
 /obj/item/energy_blade/sword/adjust_mob_overlay(mob/living/user_mob, bodytype, image/overlay, slot, bodypart)
 	. = ..()
 	if(overlay && active && check_state_in_icon("[overlay.icon_state]-extended-glow", overlay.icon))
-		var/image/I = emissive_overlay(overlay.icon, "[overlay.icon_state]-extended-glow")
-		I.color = blade_color
-		overlay.overlays += I
+		overlay.overlays += emissive_overlay(overlay.icon, "[overlay.icon_state]-extended-glow", color = blade_color)
 
 // Subtypes
 /obj/item/energy_blade/sword/green

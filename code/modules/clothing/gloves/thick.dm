@@ -41,9 +41,7 @@
 
 /obj/item/clothing/gloves/thick/botany/on_update_icon()
 	. = ..()
-	var/image/I = image(icon, "[icon_state]-botany_fingertips")
-	I.appearance_flags |= RESET_COLOR
-	overlays = list(I)
+	add_overlay(overlay_image(icon, "[icon_state]-botany_fingertips", flags = RESET_COLOR))
 
 /obj/item/clothing/gloves/thick/botany/adjust_mob_overlay(var/mob/living/user_mob, var/bodytype,  var/image/overlay, var/slot, var/bodypart)
 	. = ..()

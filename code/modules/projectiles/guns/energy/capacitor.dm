@@ -185,7 +185,7 @@ var/global/list/laser_wavelengths
 	. = round(power_supply?.charge / (total_charge_cost / capacitor_charge_constant))
 
 /obj/item/gun/energy/capacitor/on_update_icon()
-	cut_overlays()
+	. = ..()
 	var/image/I = image(icon, "[icon_state]-wiring")
 	I.color = wiring_color
 	I.appearance_flags |= RESET_COLOR

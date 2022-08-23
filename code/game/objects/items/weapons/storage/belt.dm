@@ -21,17 +21,23 @@
 	update_icon()
 
 /obj/item/storage/belt/on_update_icon()
-	if (ismob(src.loc))
-		var/mob/M = src.loc
-		M.update_inv_belt()
-
-	overlays.Cut()
+	. = ..()
 	if(overlay_flags & BELT_OVERLAY_ITEMS)
+		var/list/cur_overlays
 		for(var/obj/item/I in contents)
 			if(I.use_single_icon)
-				overlays += I.get_on_belt_overlay()
+				LAZYADD(cur_overlays, I.get_on_belt_overlay())
 			else
-				overlays += image('icons/obj/clothing/obj_belt_overlays.dmi', "[I.icon_state]")
+				LAZYADD(cur_overlays, overlay_image('icons/obj/clothing/obj_belt_overlays.dmi', I.icon_state))
+				
+		if(LAZYLEN(cur_overlays))
+			add_overlay(cur_overlays)
+	update_clothing_icon()
+
+/obj/item/storage/belt/update_clothing_icon()
+	if(ismob(src.loc))
+		var/mob/M = src.loc
+		M.update_inv_belt()
 
 /obj/item/storage/belt/get_mob_overlay(mob/user_mob, slot, bodypart)
 	var/image/ret = ..()
@@ -80,19 +86,21 @@
 	H.examine_holster(user)
 
 /obj/item/storage/belt/holster/on_update_icon()
-	if (ismob(src.loc))
-		var/mob/M = src.loc
-		M.update_inv_belt()
-
-	overlays.Cut()
+	. = ..()
 	var/datum/extension/holster/H = get_extension(src, /datum/extension/holster)
 	if(overlay_flags)
+		var/list/cur_overlays
 		for(var/obj/item/I in contents)
 			if(I == H.holstered)
 				if(overlay_flags & BELT_OVERLAY_HOLSTER)
-					overlays += image('icons/obj/clothing/obj_belt_overlays.dmi', "[I.icon_state]")
+					LAZYADD(cur_overlays, overlay_image('icons/obj/clothing/obj_belt_overlays.dmi', I.icon_state))
 			else if(overlay_flags & BELT_OVERLAY_ITEMS)
-				overlays += image('icons/obj/clothing/obj_belt_overlays.dmi', "[I.icon_state]")
+				LAZYADD(cur_overlays, overlay_image('icons/obj/clothing/obj_belt_overlays.dmi', I.icon_state))
+
+		if(LAZYLEN(cur_overlays))
+			add_overlay(cur_overlays)
+
+	update_clothing_icon()
 
 /obj/item/storage/belt/utility
 	name = "tool belt"

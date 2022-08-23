@@ -92,8 +92,7 @@
 		location.hotspot_expose(700, 5)
 
 /obj/item/clothing/mask/smokable/on_update_icon()
-	..()
-	cut_overlays()
+	. = ..()
 	if(lit && check_state_in_icon("[icon_state]-on", icon))
 		var/image/I
 		if(plane == HUD_PLANE)
@@ -102,6 +101,7 @@
 			I = emissive_overlay(icon, "[icon_state]-on")
 		I.appearance_flags |= RESET_COLOR
 		add_overlay(I)
+		
 	if(ismob(loc))
 		var/mob/living/M = loc
 		M.update_inv_wear_mask(0)

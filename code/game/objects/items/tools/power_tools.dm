@@ -13,8 +13,8 @@
 	drop_sound = 'sound/foley/bardrop1.ogg'
 
 /obj/item/hydraulic_cutter/on_update_icon()
+	. = ..()
 	icon_state = get_world_inventory_state()
-	cut_overlays()
 	if(IS_CROWBAR(src))
 		add_overlay("[icon_state]-pry")
 	else if(IS_WIRECUTTER(src))
@@ -51,8 +51,8 @@
 	tool.set_sound_overrides('sound/items/airwrench.ogg', 'sound/items/change_drill.ogg')
 
 /obj/item/power_drill/on_update_icon()
+	. = ..()
 	icon_state = get_world_inventory_state()
-	cut_overlays()
 	if(IS_SCREWDRIVER(src))
 		add_overlay("[icon_state]-screw")
 	else if(IS_WRENCH(src))

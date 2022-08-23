@@ -548,7 +548,7 @@ By design, d1 is the smallest direction and d2 is the highest
 	return ..()
 
 /obj/item/stack/cable_coil/on_update_icon()
-	cut_overlays()
+	. = ..()
 	if (!color)
 		var/list/possible_cable_colours = get_global_cable_colors()
 		color = possible_cable_colours[pick(possible_cable_colours)]

@@ -35,11 +35,10 @@ Single Use Emergency Pouches
 		A.update_icon()
 
 /obj/item/storage/med_pouch/on_update_icon()
-	overlays.Cut()
+	. = ..()
 	if(!cross_overlay)
-		cross_overlay = image(icon, "cross")
-		cross_overlay.appearance_flags = RESET_COLOR
-	overlays += cross_overlay
+		cross_overlay = overlay_image(icon, "cross", flags = RESET_COLOR)
+	add_overlay(cross_overlay)
 	icon_state = "pack[opened]"
 
 /obj/item/storage/med_pouch/examine(mob/user)

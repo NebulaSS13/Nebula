@@ -367,7 +367,7 @@
 	var/marking_colour
 
 /obj/item/storage/backpack/ert/on_update_icon()
-	cut_overlays()
+	. = ..()
 	if(marking_state)
 		var/image/I = image(icon, marking_state)
 		I.color = marking_colour

@@ -47,12 +47,11 @@
 	return
 
 /obj/item/storage/laundry_basket/on_update_icon()
+	. = ..()
 	if(contents.len)
 		icon_state = "laundry-full"
 	else
 		icon_state = "laundry-empty"
-	return
-
 
 /obj/item/storage/laundry_basket/handle_mouse_drop(var/atom/over, var/mob/user)
 	if(over == user)

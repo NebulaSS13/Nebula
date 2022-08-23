@@ -84,12 +84,10 @@
 	. = ..()
 
 /obj/item/camera/tvcamera/on_update_icon()
-	cut_overlays()
+	. = ..()
 	if(video_enabled)
 		add_overlay("[icon_state]-on")
-	var/mob/living/carbon/human/H = loc
-	if(istype(H))
-		H.update_inv_hands()
+	update_held_icon()
 
 /* Assembly by a roboticist */
 /obj/item/robot_parts/head/attackby(var/obj/item/assembly/S, mob/user)

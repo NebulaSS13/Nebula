@@ -204,6 +204,7 @@
 	return
 
 /obj/item/shield/energy/on_update_icon()
+	. = ..()
 	icon_state = "[initial(icon_state)][active]"
 	if(active)
 		set_light(1.5, 1.5, shield_light_color)

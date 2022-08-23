@@ -9,9 +9,7 @@
 	
 /obj/item/disk/on_update_icon()
 	. = ..()
-	cut_overlays()
-	var/list/details = list()
-	details += mutable_appearance(icon, "slider", flags = RESET_COLOR)
+	var/list/details = list(mutable_appearance(icon, "slider", flags = RESET_COLOR))
 	if(label)
 		details += mutable_appearance(icon, label, flags = RESET_COLOR)
 	add_overlay(details)

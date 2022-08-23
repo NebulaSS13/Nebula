@@ -73,7 +73,7 @@
 		beeping--
 
 /obj/item/pinpointer/on_update_icon()
-	cut_overlays()
+	. = ..()
 	if(!active)
 		return
 	if(!target || !target.resolve())

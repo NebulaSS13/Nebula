@@ -54,6 +54,7 @@
 		qdel(src)
 
 /obj/item/shard/on_update_icon()
+	. = ..()
 	if(material)
 		color = material.color
 		// 1-(1-x)^2, so that glass shards with 0.3 opacity end up somewhat visible at 0.51 opacity
@@ -89,13 +90,9 @@
 	return ..()
 
 /obj/item/shard/on_update_icon()
-	overlays.Cut()
 	. = ..()
 	if(has_handle)
-		var/image/I = image(icon, "handle")
-		I.appearance_flags |= RESET_COLOR
-		I.color = has_handle
-		overlays += I
+		add_overlay(overlay_image(icon, "handle", has_handle, RESET_COLOR))
 
 /obj/item/shard/Crossed(atom/movable/AM)
 	..()

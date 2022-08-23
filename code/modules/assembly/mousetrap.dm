@@ -17,6 +17,7 @@
 		to_chat(user, "It looks like it's armed.")
 
 /obj/item/assembly/mousetrap/on_update_icon()
+	. = ..()
 	if(armed)
 		icon_state = "mousetraparmed"
 	else

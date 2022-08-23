@@ -157,15 +157,15 @@
 
 /obj/item/gun/on_update_icon()
 	var/mob/living/M = loc
-	overlays.Cut()
+	. = ..()
 	update_base_icon()
 	if(istype(M))
 		if(has_safety && M.skill_check(SKILL_WEAPONS,SKILL_BASIC))
-			overlays += image('icons/obj/guns/gui.dmi',"safety[safety()]")
+			add_overlay(image('icons/obj/guns/gui.dmi',"safety[safety()]"))
 		if(src in M.get_held_items())
 			M.update_inv_hands()
 	if(safety_icon)
-		overlays +=	get_safety_indicator()
+		add_overlay(get_safety_indicator())
 
 /obj/item/gun/proc/update_base_icon()
 

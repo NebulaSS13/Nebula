@@ -103,9 +103,5 @@
 	..()
 
 /obj/item/beartrap/on_update_icon()
-	..()
-
-	if(!deployed)
-		icon_state = "beartrap0"
-	else
-		icon_state = "beartrap1"
+	. = ..()
+	icon_state = "beartrap[deployed == TRUE]"

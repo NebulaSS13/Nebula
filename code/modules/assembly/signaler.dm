@@ -35,9 +35,9 @@
 	return 1
 
 /obj/item/assembly/signaler/on_update_icon()
+	. = ..()
 	if(holder)
 		holder.update_icon()
-	return
 
 /obj/item/assembly/signaler/interact(mob/user, flag1)
 	var/t1 = "-------"
