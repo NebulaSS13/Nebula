@@ -165,7 +165,7 @@ var/global/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 	else if(LAZYLEN(lobby_tracks))
 		lobby_track_type = pickweight(lobby_tracks - exclude)
 	else
-		lobby_track_type = pick(decls_repository.get_decls_of_subtype(/decl/music_track) - exclude)
+		lobby_track_type = pick(decls_repository.get_decl_paths_of_subtype(/decl/music_track) - exclude)
 	return GET_DECL(lobby_track_type)
 
 /datum/map/proc/setup_map()

@@ -79,8 +79,6 @@ SUBSYSTEM_DEF(materials)
 	var/list/material_decls = decls_repository.get_decls_of_subtype(/decl/material)
 	for(var/mtype in material_decls)
 		var/decl/material/new_mineral = material_decls[mtype]
-		if(!new_mineral.name)
-			continue
 		materials += new_mineral
 		materials_by_name[lowertext(new_mineral.name)] = new_mineral
 		if(new_mineral.sparse_material_weight)

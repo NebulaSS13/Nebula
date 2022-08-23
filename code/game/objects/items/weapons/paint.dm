@@ -64,5 +64,5 @@ var/global/list/cached_icons = list()
 	name = "odd paint bucket"
 
 /obj/item/chems/glass/paint/random/Initialize()
-	pigment = pick(decls_repository.get_decls_of_subtype(/decl/material/liquid/pigment))
+	pigment = pick(decls_repository.get_decl_paths_of_subtype(/decl/material/liquid/pigment))
 	. = ..()
