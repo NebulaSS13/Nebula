@@ -20,7 +20,7 @@
 	color = "#0033cc"
 
 /obj/item/organ/internal/eyes/vox
-	eye_icon = 'mods/species/vox/icons/body/eyes.dmi'
+	eye_icon = 'mods/species/vox/icons/body/soldier/eyes.dmi'
 	color = "#0033cc"
 
 /obj/item/organ/internal/stomach/vox
