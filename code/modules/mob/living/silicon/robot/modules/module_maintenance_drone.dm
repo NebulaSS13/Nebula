@@ -18,7 +18,7 @@
 		/obj/item/t_scanner,
 		/obj/item/lightreplacer,
 		/obj/item/gripper,
-		/obj/item/soap,
+		/obj/item/mop/advanced,
 		/obj/item/gripper/no_use/loader,
 		/obj/item/extinguisher/mini,
 		/obj/item/paint_sprayer,

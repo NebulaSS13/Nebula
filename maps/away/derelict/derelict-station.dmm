@@ -1901,7 +1901,7 @@
 /turf/simulated/floor/bluegrid/airless,
 /area/constructionsite/ai)
 "gw" = (
-/obj/machinery/drone_fabricator/derelict,
+/obj/machinery/drone_fabricator/construction,
 /turf/simulated/floor/tiled/dark/airless,
 /area/constructionsite/ai)
 "gx" = (
