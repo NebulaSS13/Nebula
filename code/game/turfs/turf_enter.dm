@@ -14,20 +14,19 @@
 				neighbor.HasProximity(mover)
 
 #undef ENTER_PROXIMITY_LOOP_SANITY
-/turf/Entered(var/atom/atom, var/atom/old_loc)
+/turf/Entered(var/atom/movable/A, var/atom/old_loc)
 
 	..()
 
-	if(!istype(atom, /atom/movable))
+	if(!istype(A))
 		return
 
-	if(ishuman(atom))
-		var/mob/living/carbon/human/H = atom
+	if(ishuman(A))
+		var/mob/living/carbon/human/H = A
 		H.handle_footsteps()
 
-	queue_temperature_atoms(atom)
+	queue_temperature_atoms(A)
 
-	var/atom/movable/A = atom
 // If an opaque movable atom moves around we need to potentially update visibility.
 	if(A?.opacity && !has_opaque_atom)
 		has_opaque_atom = TRUE // Make sure to do this before reconsider_lights(), incase we're on instant updates. Guaranteed to be on in this case.
