@@ -197,7 +197,7 @@
 	name = "ATMOS MACHINERY: scrub_gas() Conserves Moles"
 
 /datum/unit_test/atmos_machinery/conserve_moles/scrub_gas/start_test()
-	var/list/filtering = decls_repository.get_decls_of_subtype(/decl/material/gas)
+	var/list/filtering = decls_repository.get_decl_paths_of_subtype(/decl/material/gas)
 	for(var/case_name in test_cases)
 		var/gas_mix_data = test_cases[case_name]
 		var/list/before_gas_mixes = create_gas_mixes(gas_mix_data)
@@ -256,7 +256,7 @@
 		var/list/after_gas_mixes = create_gas_mixes(gas_mix_data)
 
 		var/list/mix_sources = list()
-		var/list/all_gasses = decls_repository.get_decls_of_subtype(/decl/material/gas)
+		var/list/all_gasses = decls_repository.get_decl_paths_of_subtype(/decl/material/gas)
 		var/gas_count = length(all_gasses)
 		for(var/gasid in all_gasses)
 			var/datum/gas_mixture/mix_source = after_gas_mixes["sink"]
