@@ -7,10 +7,11 @@
 	for(var/atom/movable/neighbor in range(1))
 		if(objects > ENTER_PROXIMITY_LOOP_SANITY) 
 			break // Don't let ore piles kill the server as well as the client.
-		objects++
-		mover.HasProximity(neighbor)
-		if(!QDELETED(neighbor) && !QDELETED(mover) && (neighbor.movable_flags & MOVABLE_FLAG_PROXMOVE))
-			neighbor.HasProximity(mover)
+		if(neighbor.movable_flags & MOVABLE_FLAG_PROXMOVE)
+			objects++
+			mover.HasProximity(neighbor)
+			if(!QDELETED(neighbor) && !QDELETED(mover))
+				neighbor.HasProximity(mover)
 
 #undef ENTER_PROXIMITY_LOOP_SANITY
 /turf/Entered(var/atom/atom, var/atom/old_loc)
