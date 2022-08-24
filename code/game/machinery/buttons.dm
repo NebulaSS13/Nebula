@@ -18,9 +18,9 @@
 	stock_part_presets = list(/decl/stock_part_preset/radio/basic_transmitter/button = 1)
 	uncreated_component_parts = list(
 		/obj/item/stock_parts/power/apc = 1,
-		/obj/item/stock_parts/radio/transmitter/basic = 1
+		/obj/item/stock_parts/radio/transmitter/basic/buildable = 1
 	)
-	base_type = /obj/machinery/button
+	base_type = /obj/machinery/button/buildable
 	construct_state = /decl/machine_construction/wall_frame/panel_closed/simple
 	frame_type = /obj/item/frame/button
 	required_interaction_dexterity = DEXTERITY_SIMPLE_MACHINES
@@ -29,6 +29,11 @@
 	var/operating = FALSE
 	var/state = FALSE
 	var/cooldown = 1 SECOND
+
+/obj/machinery/button/buildable
+	uncreated_component_parts = list(
+		/obj/item/stock_parts/radio/transmitter/basic = 1,
+	)
 
 /obj/machinery/button/Initialize()
 	. = ..()

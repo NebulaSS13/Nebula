@@ -265,8 +265,8 @@
 	)
 	uncreated_component_parts = list(
 		/obj/item/stock_parts/power/apc,
-		/obj/item/stock_parts/radio/transmitter/on_event,
-		/obj/item/stock_parts/radio/receiver
+		/obj/item/stock_parts/radio/transmitter/on_event/buildable,
+		/obj/item/stock_parts/radio/receiver/buildable
 	)
 
 /obj/machinery/button/blast_door/Initialize(mapload)

@@ -135,7 +135,7 @@
 	icon = 'icons/obj/objects.dmi'
 	icon_state = "launcherbtt"
 	material = /decl/material/solid/metal/steel
-	build_machine_type = /obj/machinery/button
+	build_machine_type = /obj/machinery/button/buildable
 
 /obj/item/frame/camera
 	name = "security camera frame"

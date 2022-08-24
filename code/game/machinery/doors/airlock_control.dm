@@ -107,7 +107,7 @@
 	stock_part_presets = list(/decl/stock_part_preset/radio/basic_transmitter/airlock_sensor = 1)
 	uncreated_component_parts = list(
 		/obj/item/stock_parts/power/apc,
-		/obj/item/stock_parts/radio/transmitter/basic
+		/obj/item/stock_parts/radio/transmitter/basic/buildable
 	)
 	base_type = /obj/machinery/airlock_sensor
 	construct_state = /decl/machine_construction/wall_frame/panel_closed/simple
@@ -183,7 +183,7 @@
 	)
 	uncreated_component_parts = list(
 		/obj/item/stock_parts/power/apc,
-		/obj/item/stock_parts/radio/transmitter/on_event
+		/obj/item/stock_parts/radio/transmitter/on_event/buildable
 	)
 	var/command = "cycle"
 
