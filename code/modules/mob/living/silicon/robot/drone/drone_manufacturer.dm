@@ -6,7 +6,7 @@
 	return drones
 
 /obj/machinery/drone_fabricator
-	name = "Drone Fabricator"
+	name = "drone fabricator"
 	desc = "A large automated factory for producing maintenance drones."
 	appearance_flags = 0
 
@@ -31,17 +31,17 @@
 		fabricator_tag = "[global.using_map.station_short][fab_tag_modifier]"
 
 /obj/machinery/drone_fabricator/maintenance
-	name = "Maintenance Drone Fabricator"
+	name = "maintenance drone fabricator"
 	fab_tag_modifier = " (Maintenance)"
 
 /obj/machinery/drone_fabricator/construction
-	name = "Construction Drone Fabricator"
+	name = "construction drone fabricator"
 	desc = "A large automated factory for producing construction drones."
 	fab_tag_modifier = " (Construction)"
 	drone_type = /mob/living/silicon/robot/drone/construction
 
 /obj/machinery/drone_fabricator/derelict
-	name = "Construction Drone Fabricator"
+	name = "construction drone fabricator"
 	fabricator_tag = "Derelict"
 	drone_type = /mob/living/silicon/robot/drone/construction
 
