@@ -268,6 +268,13 @@
 		/obj/item/stock_parts/radio/transmitter/on_event/buildable,
 		/obj/item/stock_parts/radio/receiver/buildable
 	)
+	base_type = /obj/machinery/button/blast_door/buildable
+	frame_type = /obj/item/frame/button/blastdoor
+
+/obj/machinery/button/blast_door/buildable
+	uncreated_component_parts = list(
+		/obj/item/stock_parts/power/apc
+	)
 
 /obj/machinery/button/blast_door/Initialize(mapload)
 	. = ..()
