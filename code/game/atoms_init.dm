@@ -99,6 +99,14 @@
 
 /atom/movable/Destroy()
 
+	// Clear this up early so it doesn't complain about events being disposed while it's listening.
+	if(isatom(virtual_mob))
+		QDEL_NULL(virtual_mob)
+
+	// If you want to keep any of these atoms, handle them before ..()
+	for(var/thing in contents) // proooobably safe to assume they're never going to have non-movables in contents?
+		qdel(thing)
+
 	unregister_all_movement(loc, src) // unregister events before destroy to avoid expensive checking
 
 	. = ..()
@@ -120,9 +128,6 @@
 
 	if (bound_overlay)
 		QDEL_NULL(bound_overlay)
-
-	if(ismob(virtual_mob))
-		QDEL_NULL(virtual_mob)
 
 	vis_locs = null //clears this atom out of all vis_contents
 	clear_vis_contents(src)
