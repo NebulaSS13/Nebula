@@ -266,7 +266,7 @@
 /datum/ai_laws/proc/set_state_law(var/datum/ai_law/law, var/state)
 	law.set_state_law(src, state)
 
-/datum/ai_law/proc/set_state_law(var/datum/ai_law/law, var/state)
+/datum/ai_law/proc/set_state_law(var/datum/ai_laws/laws, var/state)
 
 /datum/ai_law/zero/set_state_law(var/datum/ai_laws/laws, var/state)
 	if(src == laws.zeroth_law)
