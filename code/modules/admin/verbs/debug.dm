@@ -468,12 +468,11 @@
 	set name = "Spawn Material Stack"
 	if(!check_rights(R_DEBUG)) return
 
-	var/list/mat_types = sortTim(SSmaterials.materials_by_name, /proc/cmp_name_or_type_asc, TRUE)
-	var/material = input("Select material to spawn") as null|anything in mat_types
+	var/material = input("Select material to spawn") as null|anything in SSmaterials.materials_by_name
 	if(!material)
 		return
 	var/decl/material/M = SSmaterials.materials_by_name[material]
-	SSmaterials.create_object(M.type, get_turf(mob), 50)
+	M.create_object(get_turf(mob), 50)
 
 /client/proc/force_ghost_trap_trigger()
 	set category = "Debug"
