@@ -29,23 +29,34 @@
 
 /obj/machinery/fabricator/proc/take_materials(var/obj/item/thing, var/mob/user)
 	. = SUBSTANCE_TAKEN_NONE
-	var/stacks_used = 1
+
+	var/obj/item/stack/stack_ref = istype(thing, /obj/item/stack) && thing
+	var/stack_matter_div = stack_ref ? max(1, CEILING(SHEET_MATERIAL_AMOUNT * stack_ref.matter_multiplier)) : 1
+	var/stacks_used = 0
+
 	var/mat_colour = thing.color
 	for(var/mat in thing.matter)
+
 		var/decl/material/material_def = GET_DECL(mat)
 		if(!material_def || !base_storage_capacity[material_def.type])
 			continue
+
 		var/taking_material = min(thing.matter[mat], storage_capacity[material_def.type] - stored_material[material_def.type])
 		if(taking_material <= 0)
 			continue
+
 		if(!mat_colour)
 			mat_colour = material_def.color
+
 		stored_material[material_def.type] += taking_material
-		stacks_used = max(stacks_used, CEILING(taking_material/SHEET_MATERIAL_AMOUNT))
+		if(stack_ref)
+			stacks_used = max(stacks_used, CEILING(taking_material/stack_matter_div))
+
 		if(storage_capacity[material_def.type] == stored_material[material_def.type])
 			. = SUBSTANCE_TAKEN_FULL
 		else if(. != SUBSTANCE_TAKEN_FULL)
 			. = SUBSTANCE_TAKEN_ALL
+
 	if(. != SUBSTANCE_TAKEN_NONE)
 		if(mat_colour)
 			var/image/adding_mat_overlay = image(icon, "[base_icon_state]_mat")
@@ -53,10 +64,10 @@
 			material_overlays += adding_mat_overlay
 			update_icon()
 			addtimer(CALLBACK(src, /obj/machinery/fabricator/proc/remove_mat_overlay, adding_mat_overlay), 1 SECOND)
-		if(istype(thing, /obj/item/stack))
-			var/obj/item/stack/S = thing
-			S.use(stacks_used)
-			if(S.amount <= 0 || QDELETED(S))
+
+		if(stack_ref && stacks_used)
+			stack_ref.use(stacks_used)
+			if(stack_ref.amount <= 0 || QDELETED(stack_ref))
 				. = SUBSTANCE_TAKEN_ALL
 			else if(. != SUBSTANCE_TAKEN_FULL)
 				. = SUBSTANCE_TAKEN_SOME
