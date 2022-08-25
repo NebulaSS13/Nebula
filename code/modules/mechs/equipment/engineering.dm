@@ -28,7 +28,6 @@
 
 /obj/item/extinguisher/mech
 	max_water = 4000 //Good is gooder
-	starting_water = 4000
 	icon_state = "mech_exting"
 
 /obj/item/extinguisher/mech/get_hardpoint_maptext()

@@ -22,7 +22,10 @@
 	nutriment_desc = list("pie" = 3, "cream" = 2)
 	nutriment_amt = 4
 	bitesize = 3
-	starting_reagents = list(/decl/material/liquid/nutriment/banana_cream = 5)
+
+/obj/item/chems/food/bananapie/populate_reagents()
+	. = ..()
+	reagents.add_reagent(/decl/material/liquid/nutriment/banana_cream, 5)
 
 /obj/item/chems/food/pie/throw_impact(atom/hit_atom)
 	..()
@@ -39,7 +42,10 @@
 	nutriment_desc = list("sweetness" = 2, "pie" = 3)
 	nutriment_amt = 4
 	bitesize = 3
-	starting_reagents = list(/decl/material/liquid/drink/juice/berry = 5)
+
+/obj/item/chems/food/berryclafoutis/populate_reagents()
+	. = ..()
+	reagents.add_reagent(/decl/material/liquid/drink/juice/berry, 5)
 
 /obj/item/chems/food/waffles
 	name = "waffles"
@@ -62,7 +68,10 @@
 	nutriment_desc = list("waffle" = 7, "sweetness" = 1)
 	nutriment_amt = 8
 	bitesize = 4
-	starting_reagents = list(/decl/material/liquid/psychotropics = 8)
+
+/obj/item/chems/food/rofflewaffles/populate_reagents()
+	. = ..()
+	reagents.add_reagent(/decl/material/liquid/psychotropics, 8)
 
 /obj/item/chems/food/pancakes
 	name = "pancakes"
@@ -103,7 +112,10 @@
 	filling_color = "#b8e6b5"
 	center_of_mass = @"{'x':15,'y':11}"
 	bitesize = 2
-	starting_reagents = list(/decl/material/liquid/nutriment/protein = 10)
+
+/obj/item/chems/food/soylentgreen/populate_reagents()
+	. = ..()
+	reagents.add_reagent(/decl/material/liquid/nutriment/protein, 10)
 
 /obj/item/chems/food/soylenviridians
 	name = "\improper Soylen Virdians"
@@ -124,7 +136,10 @@
 	filling_color = "#948051"
 	center_of_mass = @"{'x':16,'y':13}"
 	bitesize = 2
-	starting_reagents = list(/decl/material/liquid/nutriment/protein = 10)
+
+/obj/item/chems/food/meatpie/populate_reagents()
+	. = ..()
+	reagents.add_reagent(/decl/material/liquid/nutriment/protein, 10)
 
 /obj/item/chems/food/tofupie
 	name = "tofu-pie"
@@ -146,10 +161,11 @@
 	nutriment_desc = list("sweetness" = 3, "mushroom" = 3, "pie" = 2)
 	nutriment_amt = 5
 	bitesize = 3
-	starting_reagents = list(
-		/decl/material/liquid/amatoxin = 3,
-		/decl/material/liquid/psychotropics = 1,
-	)
+
+/obj/item/chems/food/amanita_pie/populate_reagents()
+	. = ..()
+	reagents.add_reagent(/decl/material/liquid/amatoxin,      3)
+	reagents.add_reagent(/decl/material/liquid/psychotropics, 1)
 
 /obj/item/chems/food/plump_pie
 	name = "plump pie"
@@ -161,13 +177,12 @@
 	nutriment_amt = 8
 	bitesize = 2
 
-//FIXME: That's kind of a weird way to handle that..
-/obj/item/chems/food/plump_pie/Initialize()
-	if(prob(10))
+/obj/item/chems/food/plump_pie/populate_reagents()
+	. = ..()
+	if(prob(10)) //#TODO: have this depend on cook's skill within the recipe handling instead maybe?
 		name = "exceptional plump pie"
 		desc = "Microwave is taken by a fey mood! It has cooked an exceptional plump pie!"
-		starting_reagents = list(/decl/material/liquid/regenerator = 5)
-	. = ..()
+		reagents.add_reagent(/decl/material/liquid/regenerator, 5)
 
 /obj/item/chems/food/xemeatpie
 	name = "xeno-pie"
@@ -177,7 +192,10 @@
 	filling_color = "#43de18"
 	center_of_mass = @"{'x':16,'y':13}"
 	bitesize = 2
-	starting_reagents = list(/decl/material/liquid/nutriment/protein = 10)
+
+/obj/item/chems/food/xemeatpie/populate_reagents()
+	. = ..()
+	reagents.add_reagent(/decl/material/liquid/nutriment/protein, 10)
 
 /obj/item/chems/food/poppypretzel
 	name = "poppy pretzel"

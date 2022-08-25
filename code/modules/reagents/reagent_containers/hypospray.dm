@@ -180,6 +180,9 @@
 	starting_reagents = list(/decl/material/liquid/adrenaline)
 	var/band_color = COLOR_CYAN
 
+/obj/item/chems/hypospray/autoinjector/populate_reagents()
+	reagents.add_reagent(/decl/material/liquid/adrenaline, reagents.maximum_volume)
+
 /obj/item/chems/hypospray/autoinjector/Initialize()
 	. = ..()
 	update_icon()
@@ -200,29 +203,54 @@
 	else
 		to_chat(user, SPAN_NOTICE("It is spent."))
 
+////////////////////////////////////////////////////////////////////////////////
+// Autoinjector - Detox
+////////////////////////////////////////////////////////////////////////////////
 /obj/item/chems/hypospray/autoinjector/detox
 	name = "autoinjector (antitox)"
 	band_color = COLOR_GREEN
-	starting_reagents = list(/decl/material/liquid/antitoxins)
 
+/obj/item/chems/hypospray/autoinjector/detox/populate_reagents()
+	reagents.add_reagent(/decl/material/liquid/antitoxins, reagents.maximum_volume)
+
+////////////////////////////////////////////////////////////////////////////////
+// Autoinjector - Pain
+////////////////////////////////////////////////////////////////////////////////
 /obj/item/chems/hypospray/autoinjector/pain
 	name = "autoinjector (painkiller)"
 	band_color = COLOR_PURPLE
-	starting_reagents = list(/decl/material/liquid/painkillers)
 
+/obj/item/chems/hypospray/autoinjector/pain/populate_reagents()
+	reagents.add_reagent(/decl/material/liquid/painkillers, reagents.maximum_volume)
+
+////////////////////////////////////////////////////////////////////////////////
+// Autoinjector - Antirad
+////////////////////////////////////////////////////////////////////////////////
 /obj/item/chems/hypospray/autoinjector/antirad
 	name = "autoinjector (anti-rad)"
 	band_color = COLOR_AMBER
-	starting_reagents = list(/decl/material/liquid/antirads)
 
+/obj/item/chems/hypospray/autoinjector/antirad/populate_reagents()
+	reagents.add_reagent(/decl/material/liquid/antirads, reagents.maximum_volume)
+
+////////////////////////////////////////////////////////////////////////////////
+// Autoinjector - Hallucinogenics
+////////////////////////////////////////////////////////////////////////////////
 /obj/item/chems/hypospray/autoinjector/hallucinogenics
 	name = "autoinjector"
 	band_color = COLOR_DARK_GRAY
-	starting_reagents = list(/decl/material/liquid/hallucinogenics)
 
+/obj/item/chems/hypospray/autoinjector/hallucinogenics/populate_reagents()
+	reagents.add_reagent(/decl/material/liquid/hallucinogenics, reagents.maximum_volume)
+
+////////////////////////////////////////////////////////////////////////////////
+// Autoinjector - Empty
+////////////////////////////////////////////////////////////////////////////////
 /obj/item/chems/hypospray/autoinjector/empty
 	name = "autoinjector"
 	band_color = COLOR_WHITE
-	starting_reagents = null
 	material = /decl/material/solid/plastic
 	matter = list(/decl/material/solid/fiberglass = MATTER_AMOUNT_REINFORCEMENT)
+
+/obj/item/chems/hypospray/autoinjector/empty/populate_reagents()
+	return

@@ -10,24 +10,30 @@
 
 /obj/item/grown/Initialize(mapload,planttype)
 	. = ..(mapload)
-
-	create_reagents(50)
-
-	//Handle some post-spawn var stuff.
 	if(planttype)
 		plantname = planttype
-		var/datum/seed/S = SSplants.seeds[plantname]
-		if(!S || !S.chems)
-			return
+	initialize_reagents()
 
-		potency = S.get_trait(TRAIT_POTENCY)
+/obj/item/grown/initialize_reagents(populate)
+	create_reagents(50)
+	if(!plantname)
+		return
+	. = ..()
 
-		for(var/rid in S.chems)
-			var/list/reagent_data = S.chems[rid]
-			var/rtotal = reagent_data[1]
-			if(reagent_data.len > 1 && potency > 0)
-				rtotal += round(potency/reagent_data[2])
-			reagents.add_reagent(rid,max(1,rtotal))
+/obj/item/grown/populate_reagents()
+	//Handle some post-spawn var stuff.
+	var/datum/seed/S = SSplants.seeds[plantname]
+	if(!S || !S.chems)
+		return
+
+	potency = S.get_trait(TRAIT_POTENCY)
+
+	for(var/rid in S.chems)
+		var/list/reagent_data = S.chems[rid]
+		var/rtotal = reagent_data[1]
+		if(reagent_data.len > 1 && potency > 0)
+			rtotal += round(potency/reagent_data[2])
+		reagents.add_reagent(rid,max(1,rtotal))
 
 /obj/item/corncob
 	name = "corn cob"

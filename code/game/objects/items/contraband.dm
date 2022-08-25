@@ -34,7 +34,9 @@
 
 /obj/item/chems/glass/beaker/vial/random/Initialize()
 	. = ..()
+	update_icon()
 
+/obj/item/chems/glass/beaker/vial/random/populate_reagents()
 	var/list/picked_reagents = pickweight(random_reagent_list)
 	for(var/reagent in picked_reagents)
 		reagents.add_reagent(reagent, picked_reagents[reagent])
@@ -43,6 +45,4 @@
 	for(var/reagent_type in reagents.reagent_volumes)
 		var/decl/material/R = GET_DECL(reagent_type)
 		names += R.liquid_name
-
 	desc = "Contains [english_list(names)]."
-	update_icon()

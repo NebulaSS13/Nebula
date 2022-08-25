@@ -85,7 +85,7 @@
 			given_dna.check_integrity() //Defaults everything
 
 	set_dna(given_dna)
-	setup_reagents()
+	initialize_reagents()
 	return TRUE
 
 //Allows specialization of roboticize() calls on initialization meant to be used when loading prosthetics
@@ -104,10 +104,14 @@
 	return TRUE
 
 //Called on initialization to add the neccessary reagents
-/obj/item/organ/proc/setup_reagents()
+
+/obj/item/organ/initialize_reagents(populate = TRUE)
 	if(reagents)
 		return
 	create_reagents(5 * (w_class-1)**2)
+	. = ..()
+
+/obj/item/organ/populate_reagents()
 	reagents.add_reagent(/decl/material/liquid/nutriment/protein, reagents.maximum_volume)
 
 /obj/item/organ/proc/set_dna(var/datum/dna/new_dna)

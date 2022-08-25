@@ -92,12 +92,14 @@
 /obj/structure/fountain/mundane/Initialize(ml, _mat, _reinf_mat)
 	. = ..()
 	atom_flags |= ATOM_FLAG_OPEN_CONTAINER | ATOM_FLAG_CLIMBABLE
-	setup_reagents(ml)
+	initialize_reagents(ml)
 
-/obj/structure/fountain/mundane/proc/setup_reagents(var/should_fill = TRUE)
+/obj/structure/fountain/mundane/initialize_reagents(populate = TRUE)
 	create_reagents(500)
-	if(should_fill)
-		reagents.add_reagent(/decl/material/liquid/water, reagents.maximum_volume) //Don't give free water when building one
+	. = ..()
+	
+/obj/structure/fountain/mundane/populate_reagents()
+	reagents.add_reagent(/decl/material/liquid/water, reagents.maximum_volume) //Don't give free water when building one
 
 /obj/structure/fountain/mundane/attack_hand(mob/user)
 	return

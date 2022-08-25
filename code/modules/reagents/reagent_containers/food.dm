@@ -271,7 +271,9 @@
 	if(check_state_in_icon("[icon_state]_filling", icon))
 		add_overlay(overlay_image(icon, "[icon_state]_filling", filling_color))
 
-/obj/item/chems/food/initialize_reagents(populate = TRUE)
+//Since we automatically create some reagents types for the nutriments, make sure we call this proc when overriding it
+/obj/item/chems/food/populate_reagents()
 	. = ..()
-	if(populate && nutriment_amt)
+	SHOULD_CALL_PARENT(TRUE)
+	if(nutriment_amt)
 		reagents.add_reagent(nutriment_type, nutriment_amt, nutriment_desc)

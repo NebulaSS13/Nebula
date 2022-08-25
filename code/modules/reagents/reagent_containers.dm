@@ -15,7 +15,6 @@
 	var/label_text
 	var/presentation_flags = 0
 	var/show_reagent_name = FALSE
-	var/tmp/list/starting_reagents //Reagents the thing spawns with
 
 /obj/item/chems/Initialize(ml, material_key)
 	. = ..()
@@ -248,31 +247,7 @@
 		create_reagents(volume)
 	else
 		reagents.maximum_volume = max(reagents.maximum_volume, volume)
-	
-	if(!populate || (!ispath(starting_reagents) && !LAZYLEN(starting_reagents)))
-		return //If we don't want to populate, or we don't have anything to add, just quit early
-	
-	if(ispath(starting_reagents))
-		reagents.add_reagent(starting_reagents, reagents.maximum_volume)
-	else 
-		//Not specifying an amount for a reagent means we're just splitting the available volume with all the reagents
-		var/auto_assigned = round(reagents.maximum_volume / LAZYLEN(starting_reagents), 0.01)
-		var/manually_set  = FALSE //Changed to true when we hit an entry that set the amount of a reagent manually. Used to check if we partially set the values manually. It has to be either full automatic, or full manual
-		var/auto_assign_amount = FALSE
-		for(var/R in starting_reagents)
-			var/new_vol = starting_reagents[R]
-			if(isnull(new_vol))
-				auto_assign_amount = TRUE
-				if(manually_set)
-					PRINT_STACK_TRACE("'[src]' [type] not all reagents had a manually assigned amount!!")
-				if(auto_assigned == 0) //Has to check it only when we actually use the value
-					PRINT_STACK_TRACE("'[src]' [type] had its starter reagents volume auto-calculated to be 0!!")
-				new_vol = auto_assigned
-			else
-				if(auto_assign_amount)
-					PRINT_STACK_TRACE("'[src]' [type] not all reagents had a manually assigned amount!!")
-				manually_set = TRUE
-			reagents.add_reagent(R, new_vol)
+	. = ..()
 
 //
 // Interactions

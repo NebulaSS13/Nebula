@@ -22,13 +22,17 @@
 	var/list/starting_chems = null
 
 /obj/item/gun/projectile/dartgun/Initialize()
-	if(starting_chems)
-		for(var/chem in starting_chems)
-			var/obj/B = new container_type(src)
-			B.reagents.add_reagent(chem, 60)
-			beakers += B
+	initialize_reagents()
 	. = ..()
 	update_icon()
+
+/obj/item/gun/projectile/dartgun/populate_reagents()
+	if(!starting_chems)
+		return
+	for(var/chem in starting_chems)
+		var/obj/B = new container_type(src)
+		B.reagents.add_reagent(chem, 60)
+		beakers += B
 
 /obj/item/gun/projectile/dartgun/on_update_icon()
 	..()

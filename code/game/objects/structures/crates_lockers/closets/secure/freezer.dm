@@ -4,7 +4,7 @@
 
 /obj/structure/closet/secure_closet/freezer/kitchen/WillContain()
 	return list(
-		/obj/item/chems/condiment/salt = 1,
+		/obj/item/chems/condiment/large/salt = 1,
 		/obj/item/chems/condiment/flour = 7,
 		/obj/item/chems/condiment/sugar = 2
 	)

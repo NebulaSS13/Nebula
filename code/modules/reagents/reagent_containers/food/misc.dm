@@ -5,10 +5,11 @@
 	filling_color = "#211f02"
 	center_of_mass = @"{'x':16,'y':12}"
 	bitesize = 2
-	starting_reagents = list(
-		/decl/material/liquid/bromide = 1,
-		/decl/material/solid/carbon   = 3,
-	)
+
+/obj/item/chems/food/badrecipe/populate_reagents()
+	. = ..()
+	reagents.add_reagent(/decl/material/liquid/nutriment/protein, 1)
+	reagents.add_reagent(/decl/material/solid/carbon,             3)
 
 /obj/item/chems/food/stuffing
 	name = "stuffing"
@@ -40,7 +41,10 @@
 	nutriment_desc = list("baked potato" = 3)
 	nutriment_amt = 3
 	bitesize = 2
-	starting_reagents = list(/decl/material/liquid/nutriment/protein = 3)
+
+/obj/item/chems/food/loadedbakedpotato/populate_reagents()
+	. = ..()
+	reagents.add_reagent(/decl/material/liquid/nutriment/protein, 3)
 
 /obj/item/chems/food/spacylibertyduff
 	name = "party jelly"
@@ -52,7 +56,10 @@
 	nutriment_desc = list("mushroom" = 5, "rainbow" = 1)
 	nutriment_amt = 6
 	bitesize = 3
-	starting_reagents = list(/decl/material/liquid/psychotropics = 6)
+
+/obj/item/chems/food/spacylibertyduff/populate_reagents()
+	. = ..()
+	reagents.add_reagent(/decl/material/liquid/psychotropics, 6)
 
 /obj/item/chems/food/amanitajelly
 	name = "amanita jelly"
@@ -64,10 +71,11 @@
 	nutriment_desc = list("jelly" = 3, "mushroom" = 3)
 	nutriment_amt = 6
 	bitesize = 3
-	starting_reagents = list(
-		/decl/material/liquid/amatoxin      = 6,
-		/decl/material/liquid/psychotropics = 3,
-	)
+
+/obj/item/chems/food/amanitajelly/populate_reagents()
+	. = ..()
+	reagents.add_reagent(/decl/material/liquid/amatoxin,      6)
+	reagents.add_reagent(/decl/material/liquid/psychotropics, 3)
 
 /obj/item/chems/food/enchiladas
 	name = "enchiladas"
@@ -79,10 +87,11 @@
 	nutriment_desc = list("tortilla" = 3, "corn" = 3)
 	nutriment_amt = 2
 	bitesize = 4
-	starting_reagents = list(
-		/decl/material/liquid/nutriment/protein = 6,
-		/decl/material/liquid/capsaicin         = 6,
-	)
+
+/obj/item/chems/food/enchiladas/populate_reagents()
+	. = ..()
+	reagents.add_reagent(/decl/material/liquid/nutriment/protein, 6)
+	reagents.add_reagent(/decl/material/liquid/capsaicin, 6)
 
 /obj/item/chems/food/monkeysdelight
 	name = "monkey's delight"
@@ -92,12 +101,13 @@
 	filling_color = "#5c3c11"
 	center_of_mass = @"{'x':16,'y':13}"
 	bitesize = 6
-	starting_reagents = list(
-		/decl/material/liquid/nutriment/protein  = 10,
-		/decl/material/liquid/drink/juice/banana = 5,
-		/decl/material/solid/blackpepper         = 1,
-		/decl/material/solid/sodiumchloride      = 1,
-	)
+
+/obj/item/chems/food/monkeysdelight/populate_reagents()
+	. = ..()
+	reagents.add_reagent(/decl/material/liquid/nutriment/protein, 10)
+	reagents.add_reagent(/decl/material/liquid/drink/juice/banana, 5)
+	reagents.add_reagent(/decl/material/solid/blackpepper,         1)
+	reagents.add_reagent(/decl/material/solid/sodiumchloride,      1)
 
 /obj/item/chems/food/candiedapple
 	name = "candied apple"
@@ -116,7 +126,10 @@
 	filling_color = "#f2f2f2"
 	center_of_mass = @"{'x':16,'y':14}"
 	bitesize = 1
-	starting_reagents = list(/decl/material/liquid/drink/syrup/mint = 1)
+
+/obj/item/chems/food/mint/populate_reagents()
+	. = ..()
+	reagents.add_reagent(/decl/material/liquid/drink/syrup/mint, 1)
 
 /obj/item/chems/food/plumphelmetbiscuit
 	name = "plump helmet biscuit"
@@ -128,9 +141,9 @@
 	nutriment_amt = 5
 	bitesize = 2
 
-/obj/item/chems/food/plumphelmetbiscuit/initialize_reagents(populate = TRUE)
+/obj/item/chems/food/plumphelmetbiscuit/populate_reagents()
 	. = ..()
-	if(populate && prob(10))
+	if(prob(10))
 		name = "exceptional plump helmet biscuit"
 		desc = "Microwave is taken by a fey mood! It has cooked an exceptional plump helmet biscuit!"
 		reagents.add_reagent(/decl/material/liquid/nutriment, 3)
@@ -146,7 +159,10 @@
 	nutriment_desc = list("apple" = 8)
 	nutriment_amt = 8
 	bitesize = 3
-	starting_reagents = list(/decl/material/solid/metal/gold = 5)
+
+/obj/item/chems/food/appletart/populate_reagents()
+	. = ..()
+	reagents.add_reagent(/decl/material/solid/metal/gold, 5)
 
 /obj/item/chems/food/cracker
 	name = "cracker"
@@ -172,7 +188,10 @@
 	nutriment_desc = list("cheese" = 2,"taco shell" = 2)
 	nutriment_amt = 4
 	nutriment_type = /decl/material/liquid/nutriment/bread
-	starting_reagents = list(/decl/material/liquid/nutriment/protein = 3)
+
+/obj/item/chems/food/taco/populate_reagents()
+	. = ..()
+	reagents.add_reagent(/decl/material/liquid/nutriment/protein, 3)
 
 /obj/item/chems/food/pelmen
 	name = "meat pelmen"
@@ -181,7 +200,10 @@
 	filling_color = "#ffffff"
 	center_of_mass = @"{'x':16,'y':16}"
 	bitesize = 2
-	starting_reagents = list(/decl/material/liquid/nutriment/protein = 1)
+
+/obj/item/chems/food/pelmen/populate_reagents()
+	. = ..()
+	reagents.add_reagent(/decl/material/liquid/nutriment/protein, 1)
 
 /obj/item/chems/food/pelmeni_boiled
 	name = "boiled pelmeni"
@@ -190,4 +212,7 @@
 	filling_color = "#ffffff"
 	center_of_mass = @"{'x':16,'y':16}"
 	bitesize = 2
-	starting_reagents = list(/decl/material/liquid/nutriment/protein = 30)
+
+/obj/item/chems/food/pelmeni_boiled/populate_reagents()
+	. = ..()
+	reagents.add_reagent(/decl/material/liquid/nutriment/protein, 30)

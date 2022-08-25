@@ -7,7 +7,10 @@
 	nutriment_amt = 3
 	nutriment_desc = list("tofu" = 3, "softness" = 3)
 	bitesize = 3
-	starting_reagents = list(/decl/material/liquid/nutriment/plant_protein = 6)
+
+/obj/item/chems/food/tofu/populate_reagents()
+	. = ..()
+	reagents.add_reagent(/decl/material/liquid/nutriment/plant_protein, 6)
 
 /obj/item/chems/food/soydope
 	name = "soy dope"

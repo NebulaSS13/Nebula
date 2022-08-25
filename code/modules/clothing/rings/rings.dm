@@ -6,7 +6,7 @@
 	icon = 'icons/clothing/rings/ring_diamond.dmi'
 
 /obj/item/clothing/ring/engagement/attack_self(mob/user)
-	user.visible_message("<span class='warning'>\The [user] gets down on one knee, presenting \the [src].</span>","<span class='warning'>You get down on one knee, presenting \the [src].</span>")
+	user.visible_message(SPAN_WARNING("\The [user] gets down on one knee, presenting \the [src]."), SPAN_WARNING("You get down on one knee, presenting \the [src]."))
 
 /obj/item/clothing/ring/cti
 	name = "CTI ring"
@@ -44,8 +44,7 @@
 /obj/item/clothing/ring/reagent
 	atom_flags = ATOM_FLAG_OPEN_CONTAINER
 	origin_tech = "{'materials':2,'esoteric':4}"
-	var/volume = 15
-	var/list/starting_reagents
+	var/tmp/volume = 15
 
 /obj/item/clothing/ring/reagent/Initialize(ml, material_key)
 	. = ..()
@@ -56,16 +55,7 @@
 		create_reagents(volume)
 	else 
 		reagents.maximum_volume = max(volume, reagents.maximum_volume)
-	
-	if(!populate)
-		return
-	
-	if(ispath(starting_reagents))
-		reagents.add_reagent(starting_reagents, reagents.total_volume)
-	else
-		for(var/thing in starting_reagents)
-			var/amt = starting_reagents[thing]
-			reagents.add_reagent(thing, amt)
+	. = ..()
 
 /obj/item/clothing/ring/reagent/equipped(var/mob/living/carbon/human/H)
 	..()
@@ -84,10 +74,14 @@
 	name = "silver ring"
 	desc = "A ring made from what appears to be silver."
 	origin_tech = "{'materials':2,'esoteric':5}"
-	starting_reagents = list(
-		/decl/material/liquid/paralytics = 10,
-		/decl/material/liquid/sedatives  = 5,
-	)
+
+/obj/item/clothing/ring/reagent/Initialize(ml, material_key)
+	. = ..()
+	initialize_reagents()
+
+/obj/item/clothing/ring/reagent/sleepy/populate_reagents()
+	reagents.add_reagent(/decl/material/liquid/paralytics, 10)
+	reagents.add_reagent(/decl/material/liquid/sedatives,   5)
 
 /////////////////////////////////////////
 //Seals and Signet Rings
@@ -109,10 +103,10 @@
 
 /obj/item/clothing/ring/seal/signet/attack_self(mob/user)
 	if(nameset)
-		to_chat(user, "<span class='notice'>The [src] has already been claimed!</span>")
+		to_chat(user, SPAN_NOTICE("The [src] has already been claimed!"))
 		return
 
 	nameset = 1
-	to_chat(user, "<span class='notice'>You claim the [src] as your own!</span>")
+	to_chat(user, SPAN_NOTICE("You claim the [src] as your own!"))
 	name = "[user]'s signet ring"
 	desc = "A signet ring belonging to [user], for when you're too sophisticated to sign letters."

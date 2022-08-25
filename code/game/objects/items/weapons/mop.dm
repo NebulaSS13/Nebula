@@ -1,3 +1,5 @@
+#define MOP_MAX_VOLUME 30
+
 /obj/item/mop
 	desc = "The world of janitalia wouldn't be complete without a mop."
 	name = "mop"
@@ -22,7 +24,11 @@
 
 /obj/item/mop/Initialize()
 	. = ..()
-	create_reagents(30)
+	initialize_reagents()
+
+/obj/item/mop/initialize_reagents(populate = TRUE)
+	create_reagents(MOP_MAX_VOLUME)
+	. = ..()
 
 /obj/item/mop/afterattack(atom/A, mob/user, proximity)
 	if(!proximity)
@@ -105,7 +111,7 @@
 	playsound(user, 'sound/machines/click.ogg', 30, 1)
 
 /obj/item/mop/advanced/Process()
-	if(reagents.total_volume < 30)
+	if(reagents.total_volume < MOP_MAX_VOLUME)
 		reagents.add_reagent(refill_reagent, refill_rate)
 
 /obj/item/mop/advanced/examine(mob/user)
@@ -116,3 +122,5 @@
 	if(refill_enabled)
 		STOP_PROCESSING(SSobj, src)
 	return ..()
+
+#undef MOP_MAX_VOLUME

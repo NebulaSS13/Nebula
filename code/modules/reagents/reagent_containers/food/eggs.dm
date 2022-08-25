@@ -68,12 +68,10 @@
 /obj/item/chems/food/egg/yellow
 	icon_state = "egg-yellow"
 
-/obj/item/chems/food/egg/lizard
-	starting_reagents = list(/decl/material/liquid/nutriment/protein/egg = 5)
-
-/obj/item/chems/food/egg/lizard/initialize_reagents(populate = TRUE)
+/obj/item/chems/food/egg/lizard/populate_reagents()
 	. = ..()
-	if(populate && prob(30))	//extra nutriment
+	reagents.add_reagent(/decl/material/liquid/nutriment/protein/egg, 5)
+	if(prob(30))	//extra nutriment
 		reagents.add_reagent(/decl/material/liquid/nutriment/protein, 5)
 
 /obj/item/chems/food/friedegg
@@ -83,18 +81,22 @@
 	filling_color = "#ffdf78"
 	center_of_mass = @"{'x':16,'y':14}"
 	bitesize = 1
-	starting_reagents = list(
-		/decl/material/liquid/nutriment/protein = 3,
-		/decl/material/solid/sodiumchloride     = 1,
-		/decl/material/solid/blackpepper        = 1,
-	)
+
+/obj/item/chems/food/friedegg/populate_reagents()
+	. = ..()
+	reagents.add_reagent(/decl/material/liquid/nutriment/protein, 3)
+	reagents.add_reagent(/decl/material/solid/sodiumchloride,     1)
+	reagents.add_reagent(/decl/material/solid/blackpepper,        1)
 
 /obj/item/chems/food/boiledegg
 	name = "boiled egg"
 	desc = "A hard boiled egg."
 	icon_state = "egg"
 	filling_color = "#ffffff"
-	starting_reagents = list(/decl/material/liquid/nutriment/protein = 2)
+
+/obj/item/chems/food/boiledegg/populate_reagents()
+	. = ..()
+	reagents.add_reagent(/decl/material/liquid/nutriment/protein, 2)
 
 /obj/item/chems/food/omelette
 	name = "cheese omelette"
@@ -104,7 +106,10 @@
 	filling_color = "#fff9a8"
 	center_of_mass = @"{'x':16,'y':13}"
 	bitesize = 1
-	starting_reagents = list(/decl/material/liquid/nutriment/protein = 8)
+
+/obj/item/chems/food/omelette/populate_reagents()
+	. = ..()
+	reagents.add_reagent(/decl/material/liquid/nutriment/protein, 8)
 
 /obj/item/chems/food/chawanmushi
 	name = "chawanmushi"
@@ -114,4 +119,7 @@
 	filling_color = "#f0f2e4"
 	center_of_mass = @"{'x':17,'y':10}"
 	bitesize = 1
-	starting_reagents = list(/decl/material/liquid/nutriment/protein = 5)
+	
+/obj/item/chems/food/chawanmushi/populate_reagents()
+	. = ..()
+	reagents.add_reagent(/decl/material/liquid/nutriment/protein, 5)

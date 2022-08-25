@@ -6,7 +6,11 @@
 
 /obj/item/pen/reagent/Initialize()
 	. = ..()
+	initialize_reagents()
+
+/obj/item/pen/reagent/initialize_reagents(populate = TRUE)
 	create_reagents(30)
+	. = ..()
 
 /obj/item/pen/reagent/attack(mob/living/M, mob/living/user, var/target_zone)
 
@@ -39,6 +43,5 @@
 /obj/item/pen/reagent/sleepy/make_pen_description()
 	desc = "It's \a [stroke_colour_name] [medium_name] pen with a sharp point and a carefully engraved \"Waffle Co.\"."
 
-/obj/item/pen/reagent/sleepy/Initialize()
-	. = ..()
-	reagents.add_reagent(/decl/material/liquid/paralytics, 15)
+/obj/item/pen/reagent/sleepy/populate_reagents()
+	reagents.add_reagent(/decl/material/liquid/paralytics, round(reagents.maximum_volume/2))

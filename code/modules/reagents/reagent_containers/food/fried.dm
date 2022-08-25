@@ -46,4 +46,7 @@
 	nutriment_desc = list("fresh fries" = 3, "cheese" = 3)
 	nutriment_amt = 4
 	bitesize = 2
-	starting_reagents = list(/decl/material/liquid/nutriment/protein = 2)
+
+/obj/item/chems/food/cheesyfries/populate_reagents()
+	. = ..()
+	reagents.add_reagent(/decl/material/liquid/nutriment/protein, 2)

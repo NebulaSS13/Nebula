@@ -48,7 +48,10 @@ MANTIDIFY(/obj/item/tank/jetpack/carbondioxide, "maneuvering pack",          "pr
 	icon = 'mods/species/ascent/icons/ascent_doodads.dmi'
 	icon_state = "h2o_ration"
 	bitesize = 10
-	starting_reagents = list(/decl/material/liquid/water = 10)
+
+/obj/item/chems/food/hydration/populate_reagents()
+	reagents.add_reagent(/decl/material/liquid/water, 10)
+	. = ..()
 
 /obj/item/storage/box/water/ascent
 	name = "box of hydration cylinders"
