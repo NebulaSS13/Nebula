@@ -38,7 +38,7 @@
 /obj/item/chems/glass/bottle/on_update_icon()
 	..()
 	cut_overlays()
-	
+
 	if(reagents?.total_volume)
 		var/percent = round(reagents.total_volume / volume * 100, 25)
 		add_overlay(mutable_appearance(icon, "[icon_state]_filling_[percent]", reagents.get_color()))
@@ -57,7 +57,7 @@
 
 	if (!ATOM_IS_OPEN_CONTAINER(src))
 		add_overlay(mutable_appearance(icon, "[icon_state]_lid", lid_color))
-	
+
 	compile_overlays()
 
 /obj/item/chems/glass/bottle/Initialize()
@@ -101,6 +101,7 @@
 
 /obj/item/chems/glass/bottle/eznutrient
 	label_text = "EZ NUtrient"
+	autolabel = FALSE
 	label_color = COLOR_PALE_BTL_GREEN
 	lid_color = COLOR_PALE_BTL_GREEN
 	material = /decl/material/solid/plastic
@@ -108,6 +109,7 @@
 
 /obj/item/chems/glass/bottle/left4zed
 	label_text = "Left-4-Zed"
+	autolabel = FALSE
 	label_color = COMMS_COLOR_SCIENCE
 	lid_color = COMMS_COLOR_SCIENCE
 	material = /decl/material/solid/plastic
@@ -118,6 +120,7 @@
 
 /obj/item/chems/glass/bottle/robustharvest
 	label_text = "Robust Harvest"
+	autolabel = FALSE
 	label_color = COLOR_ASSEMBLY_GREEN
 	lid_color = COLOR_ASSEMBLY_GREEN
 	material = /decl/material/solid/plastic

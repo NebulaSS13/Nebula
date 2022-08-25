@@ -174,13 +174,14 @@
 	name = "Space cleaner"
 	result = /decl/material/liquid/cleaner
 	required_reagents = list(/decl/material/gas/ammonia = 1, /decl/material/liquid/water = 1)
+	mix_message = "The solution becomes slick and soapy."
 	result_amount = 2
 
 /decl/chemical_reaction/plantbgone
 	name = "Plant-B-Gone"
 	result = /decl/material/liquid/weedkiller
 	required_reagents = list(
-		/decl/material/liquid/bromide = 1, 
+		/decl/material/liquid/bromide = 1,
 		/decl/material/liquid/water = 4
 	)
 	result_amount = 5
@@ -220,8 +221,8 @@
 /decl/chemical_reaction/methyl_bromide
 	name = "Methyl Bromide"
 	required_reagents = list(
-		/decl/material/liquid/bromide = 1, 
-		/decl/material/liquid/ethanol = 1, 
+		/decl/material/liquid/bromide = 1,
+		/decl/material/liquid/ethanol = 1,
 		/decl/material/liquid/fuel/hydrazine = 1
 	)
 	result_amount = 3
