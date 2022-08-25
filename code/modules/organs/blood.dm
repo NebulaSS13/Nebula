@@ -342,7 +342,7 @@
 	else
 		blood_volume = 100
 
-	var/blood_volume_mod = max(0, 1 - getOxyLoss()/(species.total_health/2))
+	var/blood_volume_mod = max(0, 1 - getOxyLossPercent()/(species.total_health/2))
 	var/oxygenated_mult = 0
 	switch(GET_CHEMICAL_EFFECT(src, CE_OXYGENATED))
 		if(1)

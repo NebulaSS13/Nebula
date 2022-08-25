@@ -273,13 +273,13 @@ var/global/list/decl/topic_command/topic_commands = list()
 		if(isliving(M))
 			var/mob/living/L = M
 			info["damage"] = list2params(list(
-						oxy = L.getOxyLoss(),
-						tox = L.getToxLoss(),
-						fire = L.getFireLoss(),
-						brute = L.getBruteLoss(),
-						clone = L.getCloneLoss(),
-						brain = L.getBrainLoss()
-					))
+				oxy = L.getOxyLoss(),
+				tox = L.getToxLoss(),
+				fire = L.getFireLoss(),
+				brute = L.getBruteLoss(),
+				clone = L.getCloneLoss(),
+				brain = L.getBrainLoss()
+			))
 			if(ishuman(M))
 				var/mob/living/carbon/human/H = M
 				info["species"] = H.species.name

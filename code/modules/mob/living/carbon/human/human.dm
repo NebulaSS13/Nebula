@@ -973,10 +973,11 @@
 		. *= (!BP_IS_PROSTHETIC(H)) ? pulse()/PULSE_NORM : 1.5
 
 /mob/living/carbon/human/need_breathe()
-	if(!(mNobreath in mutations) && species.breathing_organ && should_have_organ(species.breathing_organ))
-		return 1
-	else
-		return 0
+	if(mNobreath in mutations)
+		return FALSE
+	if(!species.breathing_organ || !should_have_organ(species.breathing_organ))
+		return FALSE
+	return TRUE
 
 /mob/living/carbon/human/get_adjusted_metabolism(metabolism)
 	return ..() * (species ? species.metabolism_mod : 1)
@@ -1058,8 +1059,9 @@
 			visible_message(SPAN_NOTICE("\The [src] twitches a bit as [G.his] [heart.name] restarts!"))
 
 		shock_stage = min(shock_stage, 100) // 120 is the point at which the heart stops.
-		if(getOxyLoss() >= 75)
-			setOxyLoss(75)
+		var/oxyloss_threshold = round(species.total_health * 0.35)
+		if(getOxyLoss() >= oxyloss_threshold)
+			setOxyLoss(oxyloss_threshold)
 		heart.pulse = PULSE_NORM
 		heart.handle_pulse()
 		return TRUE

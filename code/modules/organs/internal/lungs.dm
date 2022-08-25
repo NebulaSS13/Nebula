@@ -34,21 +34,8 @@
 /obj/item/organ/internal/lungs/proc/can_drown()
 	return (is_broken() || !has_gills)
 
-/obj/item/organ/internal/lungs/proc/remove_oxygen_deprivation(var/amount)
-	var/last_suffocation = oxygen_deprivation
-	oxygen_deprivation = min(species.total_health,max(0,oxygen_deprivation - amount))
-	return -(oxygen_deprivation - last_suffocation)
-
-/obj/item/organ/internal/lungs/proc/add_oxygen_deprivation(var/amount)
-	var/last_suffocation = oxygen_deprivation
-	oxygen_deprivation = min(species.total_health,max(0,oxygen_deprivation + amount))
-	return (oxygen_deprivation - last_suffocation)
-
-// Returns a percentage value for use by GetOxyloss().
-/obj/item/organ/internal/lungs/proc/get_oxygen_deprivation()
-	if(status & ORGAN_DEAD)
-		return 100
-	return round((oxygen_deprivation/species.total_health)*100)
+/obj/item/organ/internal/lungs/proc/adjust_oxygen_deprivation(var/amount)
+	oxygen_deprivation = Clamp(oxygen_deprivation + amount, 0, species.total_health)
 
 /obj/item/organ/internal/lungs/set_species(species_name)
 	. = ..()
@@ -155,7 +142,7 @@
 	var/breatheffect = GET_CHEMICAL_EFFECT(owner, CE_BREATHLOSS)
 	if(!forced && breatheffect && !GET_CHEMICAL_EFFECT(owner, CE_STABLE)) //opiates are bad mmkay
 		safe_pressure_min *= 1 + breatheffect
-	
+
 	if(owner.lying)
 		safe_pressure_min *= 0.8
 
@@ -321,7 +308,7 @@
 		. += "[pick("wheezing", "gurgling")] sounds"
 
 	var/list/breathtype = list()
-	if(get_oxygen_deprivation() > 50)
+	if(owner.getOxyLossPercent() > 50)
 		breathtype += pick("straining","labored")
 	if(owner.shock_stage > 50)
 		breathtype += pick("shallow and rapid")

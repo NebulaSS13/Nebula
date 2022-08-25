@@ -267,7 +267,7 @@
 			var/list/limbs = get_external_organs()
 			if(!isSynthetic() && LAZYLEN(limbs))
 				var/obj/item/organ/external/O = pick(limbs)
-				if(istype(O)) 
+				if(istype(O))
 					O.add_autopsy_data("Radiation Poisoning", damage)
 
 	/** breathing **/
@@ -417,7 +417,7 @@
 				continue
 			if(O.damage + (LOW_PRESSURE_DAMAGE) < O.min_broken_damage) //vacuum does not break bones
 				O.take_external_damage(brute = LOW_PRESSURE_DAMAGE, used_weapon = "Low Pressure")
-		if(getOxyLoss() < 55) // 11 OxyLoss per 4 ticks when wearing internals;    unconsciousness in 16 ticks, roughly half a minute
+		if(getOxyLossPercent() < 55) // 11 OxyLoss per 4 ticks when wearing internals;    unconsciousness in 16 ticks, roughly half a minute
 			adjustOxyLoss(4)  // 16 OxyLoss per 4 ticks when no internals present; unconsciousness in 13 ticks, roughly twenty seconds
 		pressure_alert = -2
 
@@ -661,7 +661,7 @@
 			//Oxygen damage overlay
 			if(getOxyLoss())
 				var/severity = 0
-				switch(getOxyLoss())
+				switch(getOxyLossPercent())
 					if(10 to 20)		severity = 1
 					if(20 to 25)		severity = 2
 					if(25 to 30)		severity = 3

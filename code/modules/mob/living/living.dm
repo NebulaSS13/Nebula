@@ -384,16 +384,17 @@ default behaviour is:
 /mob/living/proc/restore_all_organs()
 	return
 
+
+/mob/living/carbon/revive()
+	if(handcuffed && !initial(handcuffed))
+		drop_from_inventory(handcuffed)
+	handcuffed = initial(handcuffed)
+	. = ..()
+
 /mob/living/proc/revive()
 	rejuvenate()
 	if(buckled)
 		buckled.unbuckle_mob()
-	if(iscarbon(src))
-		var/mob/living/carbon/C = src
-
-		if (C.handcuffed && !initial(C.handcuffed))
-			C.drop_from_inventory(C.handcuffed)
-		C.handcuffed = initial(C.handcuffed)
 	BITSET(hud_updateflag, HEALTH_HUD)
 	BITSET(hud_updateflag, STATUS_HUD)
 	BITSET(hud_updateflag, LIFE_HUD)
