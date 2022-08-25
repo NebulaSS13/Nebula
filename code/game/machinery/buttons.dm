@@ -32,7 +32,7 @@
 
 /obj/machinery/button/buildable
 	uncreated_component_parts = list(
-		/obj/item/stock_parts/radio/transmitter/basic = 1,
+		/obj/item/stock_parts/power/apc = 1,
 	)
 
 /obj/machinery/button/Initialize()
