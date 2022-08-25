@@ -547,10 +547,12 @@ INITIALIZE_IMMEDIATE(/obj/effect/gas_overlay)
 			removed = ingest_met
 		if(CHEM_TOUCH)
 			removed = touch_met
+		if(CHEM_INHALE)
+			removed = inhale_met
 	if(!removed)
 		removed = metabolism
-	if(inhale_met && (location == CHEM_INHALE))
-		removed = inhale_met
+	if(!removed)
+		removed = metabolism
 	removed = M.get_adjusted_metabolism(removed)
 
 	//adjust effective amounts - removed, dose, and max_dose - for mob size
@@ -569,7 +571,7 @@ INITIALIZE_IMMEDIATE(/obj/effect/gas_overlay)
 			if(CHEM_TOUCH)
 				affect_touch(M, effective, holder)
 			if(CHEM_INHALE)
-				affect_inhale(M, alien, effective, holder)
+				affect_inhale(M, effective, holder)
 	holder.remove_reagent(type, removed)
 
 /decl/material/proc/affect_blood(var/mob/living/M, var/removed, var/datum/reagents/holder)

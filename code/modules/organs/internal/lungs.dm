@@ -351,7 +351,6 @@
 	name = "lungs and gills"
 	has_gills = TRUE
 
-/mob/living/carbon/var/lastcough
 /mob/living/carbon/proc/cough(var/deliberate = FALSE)
 	var/obj/item/organ/internal/lungs/lung = get_organ(BP_LUNGS)
 	if(!lung || !lung.active_breathing || isSynthetic() || stat == DEAD || (deliberate && lastcough + 3 SECONDS > world.time))

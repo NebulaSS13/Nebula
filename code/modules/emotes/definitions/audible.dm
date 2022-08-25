@@ -106,7 +106,7 @@
 
 /decl/emote/audible/cough/do_emote(var/mob/living/carbon/user, var/extra_params)
 	if(!istype(user))
-		to_chat(user, SPAN_WARNING("You are unable to vomit."))
+		to_chat(user, SPAN_WARNING("You are unable to cough."))
 		return
 	user.cough(deliberate = TRUE)
 

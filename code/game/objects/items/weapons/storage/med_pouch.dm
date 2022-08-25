@@ -31,12 +31,8 @@ Single Use Emergency Pouches
 	. = ..()
 	name = "emergency [injury_type] pouch"
 	make_exact_fit()
-	for(var/obj/item/chems/hypospray/autoinjector/A in contents)
-		A.band_color = color
-		A.update_icon()
-	for(var/obj/item/chems/inhaler/I in contents)
-		I.band_color = color
-		I.update_icon()
+	for(var/obj/item/chems/C in contents)
+		C.set_detail_color(color)
 
 /obj/item/storage/med_pouch/on_update_icon()
 	. = ..()
@@ -271,7 +267,7 @@ Single Use Emergency Pouches
 
 /obj/item/chems/inhaler/pouch_auto/oxy_meds
 	name = "emergency oxygel autoinhaler"
-	band_color = COLOR_CYAN
+	detail_color = COLOR_CYAN
 
 /obj/item/chems/inhaler/pouch_auto/oxy_meds/populate_reagents()
 	reagents.add_reagent((/decl/material/liquid/oxy_meds, 5)

@@ -148,8 +148,16 @@
 		if(H.getBrainLoss() > 15)
 			to_chat(user, "<span class='notice'>There's visible lag between left and right pupils' reactions.</span>")
 
-		var/list/pinpoint = list(/decl/material/liquid/painkillers=5,/decl/material/liquid/amphetamines=1)
-		var/list/dilating = list(/decl/material/liquid/psychoactives=5,/decl/material/liquid/hallucinogenics=1,/decl/material/liquid/adrenaline=1)
+		var/static/list/pinpoint = list(
+			/decl/material/liquid/painkillers = 5,
+			/decl/material/liquid/amphetamines = 1
+		)
+		var/static/list/dilating = list(
+			/decl/material/liquid/psychoactives = 5,
+			/decl/material/liquid/hallucinogenics = 1,
+			/decl/material/liquid/adrenaline = 1
+		)
+
 		var/datum/reagents/ingested = H.get_ingested_reagents()
 		if(H.reagents.has_any_reagent(pinpoint) || ingested?.has_any_reagent(pinpoint))
 			to_chat(user, "<span class='notice'>\The [H]'s pupils are already pinpoint and cannot narrow any more.</span>")
@@ -373,7 +381,7 @@
 	if(nofuel)
 		on = FALSE
 	. = ..()
-	icon_state = nofuel? "glowstick-empty" : icon_state 
+	icon_state = nofuel? "glowstick-empty" : icon_state
 	item_state = initial(item_state)
 	if(on)
 		var/image/I = overlay_image(icon, "glowstick-on", color)

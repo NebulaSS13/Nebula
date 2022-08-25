@@ -124,8 +124,8 @@
 						ingested.trans_to_obj(beaker, pump_speed * trans_amt)
 		else
 			toggle_pump()
-	if(lavage > 0)
-		if (beaker)
+	if(lavage)
+		if(beaker?.reagents)
 			if (beaker.reagents.total_volume < beaker.reagents.maximum_volume)
 				var/datum/reagents/inhaled = occupant.get_inhaled_reagents()
 				var/trans_volume = LAZYLEN(inhaled?.reagent_volumes)
@@ -322,18 +322,21 @@
 	if(!occupant || !beaker)
 		pump = 0
 		return
-	to_chat(occupant, SPAN_WARNING("You feel a tube jammed down your throat."))
 	pump = !pump
+	if(pump)
+		to_chat(occupant, SPAN_WARNING("You feel a tube jammed down your throat."))
+	else
+		to_chat(occupant, SPAN_WARNING("You feel a tube retract from your throat."))
 
 /obj/machinery/sleeper/proc/toggle_lavage()
 	if(!occupant || !beaker)
-		lavage = 0
+		lavage = FALSE
 		return
 	lavage = !lavage
 	if (lavage)
-		to_chat(occupant, SPAN_WARNING("You feel a tube jammed down your throat."))
+		to_chat(occupant, SPAN_WARNING("You feel a tube jammed down your windpipe."))
 	else
-		to_chat(occupant, SPAN_NOTICE("You feel a tube retract from your throat."))
+		to_chat(occupant, SPAN_NOTICE("You feel a tube retract from your windpipe."))
 
 /obj/machinery/sleeper/proc/go_in(var/mob/M, var/mob/user)
 	if(!M || M.anchored)

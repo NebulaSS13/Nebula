@@ -377,7 +377,7 @@
 /decl/material/liquid/detoxifier/affect_blood(var/mob/living/M, var/alien, var/removed, var/datum/reagents/holder)
 	var/charges = removed * DETOXIFIER_EFFECTIVENESS
 	var/dosecharges = LAZYACCESS(M.chem_doses, type) * DETOXIFIER_DOSE_EFFECTIVENESS
-	for(var/datum/reagents/container in list(M.get_ingested_reagents(), M.get_inhaled_reagents(), M.get_injected_reagents()))
+	for(var/datum/reagents/container as anything in M.get_metabolizing_reagent_holders())
 		for(var/reagent_type in container.reagent_volumes)
 			var/decl/material/liquid/painkillers/painkiller = GET_DECL(reagent_type)
 			if(!istype(painkiller) || !painkiller.narcotic)

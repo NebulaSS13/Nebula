@@ -11,7 +11,7 @@
 	var/mode = 1
 
 /obj/item/scanner/breath/is_valid_scan_target(atom/O)
-	return istype(O, /mob/living/carbon)
+	return iscarbon(O)
 
 /obj/item/scanner/breath/scan(atom/A, mob/user)
 	scan_data = breath_scan_action(A, user, src, mode)
@@ -103,7 +103,7 @@
 			var/decl/material/R = GET_DECL(rtype)
 			if(R.scannable)
 				print_reagent_default_message = FALSE
-				. += "<span class='scan_notice'>[R.name] found in subject's breath.</span>"
+				. += "<span class='scan_notice'>[capitalize(R.gas_name)] found in subject's breath.</span>"
 			else
 				++unknown
 		if(unknown)

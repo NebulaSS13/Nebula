@@ -46,7 +46,7 @@
 
 // Get valid, unique reagent holders for metabolizing. Avoids metabolizing the same holder twice in a tick.
 /mob/living/proc/get_unique_metabolizing_reagent_holders()
-	for(var/datum/reagents/metabolism/holder in list(get_contact_reagents(), get_ingested_reagents(), get_injected_reagents()))
+	for(var/datum/reagents/metabolism/holder in list(get_contact_reagents(), get_ingested_reagents(), get_injected_reagents(), get_inhaled_reagents()))
 		LAZYDISTINCTADD(., holder)
 
 /mob/living/proc/handle_chemicals_in_body()
@@ -68,7 +68,6 @@
 		for(var/decl/material/R as anything in tick_dosage_tracker)
 			if(tick_dosage_tracker[R] > (R.overdose * ((R.flags & IGNORE_MOB_SIZE) ? 1 : size_modifier)))
 				R.affect_overdose(src)
-	var/datum/reagents/metabolism/inhaled_reagents  = metabolize_inhaled_reagents()
 
 	// Update chem dosage.
 	// TODO: refactor chem dosage above isSynthetic() and GODMODE checks.

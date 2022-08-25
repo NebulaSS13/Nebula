@@ -15,13 +15,16 @@
 	atom_flags = ATOM_FLAG_OPEN_CONTAINER
 	slot_flags = SLOT_LOWER_BODY
 	origin_tech = "{'materials':2,'biotech':2}"
-	var/used = FALSE
+	material = /decl/material/solid/plastic
 	matter = list(
 		/decl/material/solid/fiberglass = MATTER_AMOUNT_REINFORCEMENT,
 		/decl/material/solid/metal/aluminium = MATTER_AMOUNT_TRACE
 	)
+	detail_color = COLOR_GREEN
+	detail_state = "_band"
+
+	var/used = FALSE
 	var/list/starts_with = null /// A lazylist of starting reagents. Example: list(/decl/material/liquid/adrenaline = 5)
-	var/band_color = COLOR_GREEN
 
 /obj/item/chems/inhaler/Initialize()
 	. = ..()
@@ -32,19 +35,23 @@
 	update_icon()
 
 /obj/item/chems/inhaler/on_update_icon()
-	cut_overlays()
+	. = ..()
 	if(ATOM_IS_OPEN_CONTAINER(src))
 		add_overlay("[icon_state]_loaded")
 	if(reagents.total_volume > 0)
 		add_overlay("[icon_state]_reagents")
-	add_overlay(overlay_image(icon,"[icon_state]_band",band_color,RESET_COLOR))
 
 /obj/item/chems/inhaler/attack(var/mob/living/carbon/human/target, var/mob/user, var/proximity)
+
 	if (!istype(target))
 		return ..()
 
 	if(!proximity)
 		return TRUE
+
+	if(ATOM_IS_OPEN_CONTAINER(src))
+		to_chat(user, SPAN_NOTICE("You must secure the reagents inside \the [src] before using it!"))
+		return FALSE
 
 	if(!reagents.total_volume)
 		to_chat(user, SPAN_WARNING("\The [src] is empty."))
@@ -83,13 +90,7 @@
 
 	return TRUE
 
-/obj/item/chems/inhaler/attack(mob/M as mob, mob/user as mob)
-	if(ATOM_IS_OPEN_CONTAINER(src))
-		to_chat(user, SPAN_NOTICE("You must secure the reagents inside \the [src] before using it!"))
-		return FALSE
-	. = ..()
-
-/obj/item/chems/inhaler/attack_self(mob/user as mob)
+/obj/item/chems/inhaler/attack_self(mob/user)
 	if(ATOM_IS_OPEN_CONTAINER(src))
 		if(reagents.total_volume > 0)
 			to_chat(user, SPAN_NOTICE("With a quick twist of \the [src]'s lid, you secure the reagents inside."))
@@ -109,9 +110,10 @@
 		return TRUE
 	. = ..()
 
-/obj/item/chems/inhaler/examine(mob/user)
+/obj/item/chems/inhaler/examine(mob/user, distance)
 	. = ..(user)
-	if(reagents.total_volume > 0)
-		to_chat(user, SPAN_NOTICE("It is currently loaded."))
-	else
-		to_chat(user, SPAN_NOTICE("It is spent."))
+	if(distance <= 1)
+		if(reagents.total_volume > 0)
+			to_chat(user, SPAN_NOTICE("It is currently loaded."))
+		else
+			to_chat(user, SPAN_WARNING("It is spent."))
