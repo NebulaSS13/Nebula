@@ -70,7 +70,6 @@
 	additional_spawn_components = list(
 		/obj/item/stock_parts/console_screen = 1,
 		/obj/item/stock_parts/keyboard = 1,
-		/obj/item/stock_parts/power/apc/buildable = 1,
 	)
 	buildtype_select = TRUE
 

@@ -244,6 +244,11 @@
 	icon_state = "airlock_sensor_off"
 	name = "airlock sensor"
 	desc = "An airlock sensor frame."
+
+/obj/item/frame/button/airlock_sensor/kit
+	fully_construct = TRUE
+	name = "airlock sensor kit"
+	desc = "An all-in-one airlock sensor kit, comes preassembled with a radio transmitter."
 	build_machine_type = /obj/machinery/airlock_sensor
 
 /obj/item/frame/button/airlock_controller
