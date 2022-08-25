@@ -30,8 +30,6 @@
 
 	preview_outfit = /decl/hierarchy/outfit/job/generic/assistant/avian
 
-	reagent_tag = IS_AVIAN
-
 	available_bodytypes = list(
 		/decl/bodytype/avian,
 		/decl/bodytype/avian/additive,

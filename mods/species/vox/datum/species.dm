@@ -11,8 +11,6 @@
 		"withered" =        65
 	)
 
-#define IS_VOX "vox"
-
 /decl/blood_type/vox
 	name = "vox ichor"
 	antigen_category = "vox"
@@ -81,7 +79,6 @@
 	flesh_color = "#808d11"
 
 	default_h_style = /decl/sprite_accessory/hair/vox
-	reagent_tag = IS_VOX
 	maneuvers = list(/decl/maneuver/leap/grab)
 	standing_jump_range = 5
 

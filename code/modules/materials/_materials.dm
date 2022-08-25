@@ -507,44 +507,44 @@ INITIALIZE_IMMEDIATE(/obj/effect/gas_overlay)
 			T.assume_gas(vapor, (volume * vapor_products[vapor]), temperature)
 		holder.remove_reagent(type, volume)
 
-/decl/material/proc/on_mob_life(var/mob/living/M, var/alien, var/location, var/datum/reagents/holder) // Currently, on_mob_life is called on carbons. Any interaction with non-carbon mobs (lube) will need to be done in touch_mob.
+/decl/material/proc/on_mob_life(var/mob/living/M, var/metabolism_class, var/datum/reagents/holder) // Currently, on_mob_life is called on carbons. Any interaction with non-carbon mobs (lube) will need to be done in touch_mob.
 	if(QDELETED(src))
 		return // Something else removed us.
 	if(!istype(M))
 		return
 	if(!(flags & AFFECTS_DEAD) && M.stat == DEAD && (world.time - M.timeofdeath > 150))
 		return
-	if(overdose && (location != CHEM_TOUCH))
+	if(overdose && (metabolism_class != CHEM_TOUCH))
 		var/overdose_threshold = overdose * (flags & IGNORE_MOB_SIZE? 1 : MOB_SIZE_MEDIUM/M.mob_size)
 		if(REAGENT_VOLUME(holder, type) > overdose_threshold)
-			affect_overdose(M, alien, holder)
+			affect_overdose(M, holder)
 
 	//determine the metabolism rate
 	var/removed = metabolism
-	if(ingest_met && (location == CHEM_INGEST))
+	if(ingest_met && (metabolism_class == CHEM_INGEST))
 		removed = ingest_met
-	if(touch_met && (location == CHEM_TOUCH))
+	if(touch_met && (metabolism_class == CHEM_TOUCH))
 		removed = touch_met
 	removed = M.get_adjusted_metabolism(removed)
 
 	//adjust effective amounts - removed, dose, and max_dose - for mob size
 	var/effective = removed
-	if(!(flags & IGNORE_MOB_SIZE) && location != CHEM_TOUCH)
+	if(!(flags & IGNORE_MOB_SIZE) && metabolism_class != CHEM_TOUCH)
 		effective *= (MOB_SIZE_MEDIUM/M.mob_size)
 
 	var/dose = LAZYACCESS(M.chem_doses, type) + effective
 	LAZYSET(M.chem_doses, type, dose)
 	if(effective >= (metabolism * 0.1) || effective >= 0.1) // If there's too little chemical, don't affect the mob, just remove it
-		switch(location)
+		switch(metabolism_class)
 			if(CHEM_INJECT)
-				affect_blood(M, alien, effective, holder)
+				affect_blood(M, effective, holder)
 			if(CHEM_INGEST)
-				affect_ingest(M, alien, effective, holder)
+				affect_ingest(M, effective, holder)
 			if(CHEM_TOUCH)
-				affect_touch(M, alien, effective, holder)
+				affect_touch(M, effective, holder)
 	holder.remove_reagent(type, removed)
 
-/decl/material/proc/affect_blood(var/mob/living/M, var/alien, var/removed, var/datum/reagents/holder)
+/decl/material/proc/affect_blood(var/mob/living/M, var/removed, var/datum/reagents/holder)
 	if(radioactivity)
 		M.apply_damage(radioactivity * removed, IRRADIATE, armor_pen = 100)
 
@@ -578,11 +578,11 @@ INITIALIZE_IMMEDIATE(/obj/effect/gas_overlay)
 	if(euphoriant)
 		SET_STATUS_MAX(M, STAT_DRUGGY, euphoriant)
 
-/decl/material/proc/affect_ingest(var/mob/living/M, var/alien, var/removed, var/datum/reagents/holder)
+/decl/material/proc/affect_ingest(var/mob/living/M, var/removed, var/datum/reagents/holder)
 	if(affect_blood_on_ingest)
-		affect_blood(M, alien, removed * 0.5, holder)
+		affect_blood(M, removed * 0.5, holder)
 
-/decl/material/proc/affect_touch(var/mob/living/M, var/alien, var/removed, var/datum/reagents/holder)
+/decl/material/proc/affect_touch(var/mob/living/M, var/removed, var/datum/reagents/holder)
 
 	if(!istype(M))
 		return
@@ -653,7 +653,7 @@ INITIALIZE_IMMEDIATE(/obj/effect/gas_overlay)
 		if(!M.unacidable)
 			M.take_organ_damage(0, min(removed * solvent_power * ((removed < solvent_melt_dose) ? 0.1 : 0.2), solvent_max_damage), override_droplimb = DISMEMBER_METHOD_ACID)
 
-/decl/material/proc/affect_overdose(var/mob/living/M, var/alien, var/datum/reagents/holder) // Overdose effect. Doesn't happen instantly.
+/decl/material/proc/affect_overdose(var/mob/living/M, var/datum/reagents/holder) // Overdose effect. Doesn't happen instantly.
 	M.add_chemical_effect(CE_TOXIN, 1)
 	M.adjustToxLoss(REM)
 

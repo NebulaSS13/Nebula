@@ -25,7 +25,7 @@
 
 /decl/random_chem_effect/proc/on_property_recompute(var/decl/material/liquid/random/reagent, var/value)
 
-/decl/random_chem_effect/proc/affect_blood(var/mob/living/M, var/alien, var/removed, var/value)
+/decl/random_chem_effect/proc/affect_blood(var/mob/living/M, var/removed, var/value)
 
 // This is referring to monetary value.
 /decl/random_chem_effect/proc/get_value(var/value)
@@ -96,7 +96,7 @@
 /decl/random_chem_effect/random_properties
 	var/chem_effect_define                //If it corresponds to a CE_WHATEVER define, place here and it will do generic affect blood based on it
 
-/decl/random_chem_effect/random_properties/affect_blood(var/mob/living/M, var/alien, var/removed, var/value)
+/decl/random_chem_effect/random_properties/affect_blood(var/mob/living/M, var/removed, var/value)
 	if(chem_effect_define)
 		M.add_chemical_effect(chem_effect_define, value)
 
@@ -227,7 +227,7 @@
 	mode = RANDOM_CHEM_EFFECT_INT
 	desc = "acute toxicity"
 
-/decl/random_chem_effect/random_properties/heal_brute/affect_blood(var/mob/living/M, var/alien, var/removed, var/value)
+/decl/random_chem_effect/random_properties/heal_brute/affect_blood(var/mob/living/M, var/removed, var/value)
 	M.adjustToxLoss(value * removed)
 
 /decl/random_chem_effect/random_properties/heal_brute
@@ -235,7 +235,7 @@
 	maximum = 10
 	desc = "tissue repair"
 
-/decl/random_chem_effect/random_properties/heal_brute/affect_blood(var/mob/living/M, var/alien, var/removed, var/value)
+/decl/random_chem_effect/random_properties/heal_brute/affect_blood(var/mob/living/M, var/removed, var/value)
 	M.heal_organ_damage(removed * value, 0)
 
 /decl/random_chem_effect/random_properties/heal_burns
@@ -243,7 +243,7 @@
 	maximum = 10
 	desc = "burn repair"
 
-/decl/random_chem_effect/random_properties/heal_brute/affect_blood(var/mob/living/M, var/alien, var/removed, var/value)
+/decl/random_chem_effect/random_properties/heal_brute/affect_blood(var/mob/living/M, var/removed, var/value)
 	M.heal_organ_damage(0, removed * value)
 
 #undef RANDOM_CHEM_EFFECT_TRUE

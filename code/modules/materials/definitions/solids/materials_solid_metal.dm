@@ -389,7 +389,7 @@
 	reflectiveness = MAT_VALUE_MATTE
 	taste_description = "metal"
 
-/decl/material/solid/metal/iron/affect_ingest(var/mob/living/M, var/alien, var/removed, var/datum/reagents/holder)
+/decl/material/solid/metal/iron/affect_ingest(var/mob/living/M, var/removed, var/datum/reagents/holder)
 	if(M.HasTrait(/decl/trait/metabolically_inert))
 		return
 

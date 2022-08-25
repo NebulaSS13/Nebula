@@ -111,8 +111,8 @@ var/global/const/DEFAULT_SPECIES_HEALTH = 200
 	var/sniff_message_1p = "You sniff the air."
 
 	var/spawns_with_stack = 0
+
 	// Environment tolerance/life processes vars.
-	var/reagent_tag                                             // Used for metabolizing reagents.
 	var/breath_pressure = 16                                    // Minimum partial pressure safe for breathing, kPa
 	var/breath_type = /decl/material/gas/oxygen                                  // Non-oxygen gas breathed, if any.
 	var/poison_types = list(/decl/material/gas/chlorine = TRUE) // Noticeably poisonous air - ie. updates the toxins indicator on the HUD.

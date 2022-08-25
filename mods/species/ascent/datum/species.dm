@@ -69,7 +69,6 @@
 	exhale_type =             /decl/material/gas/methane
 	poison_types =            list(/decl/material/gas/chlorine)
 
-	reagent_tag =             IS_MANTID
 	available_pronouns = list(/decl/pronouns/male)
 
 	appearance_flags =        0
