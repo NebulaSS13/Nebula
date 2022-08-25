@@ -163,10 +163,10 @@ var/global/obj/temp_reagents_holder = new
 
 /datum/reagents/proc/add_reagent(var/reagent_type, var/amount, var/data = null, var/safety = 0, var/defer_update = FALSE)
 
+	amount = round(min(amount, REAGENTS_FREE_SPACE(src)), MINIMUM_CHEMICAL_VOLUME)
 	if(amount <= 0)
 		return FALSE
 
-	amount = min(amount, REAGENTS_FREE_SPACE(src))
 	var/decl/material/newreagent = GET_DECL(reagent_type)
 	LAZYINITLIST(reagent_volumes)
 	if(!reagent_volumes[reagent_type])
@@ -190,13 +190,12 @@ var/global/obj/temp_reagents_holder = new
 	return TRUE
 
 /datum/reagents/proc/remove_reagent(var/reagent_type, var/amount, var/safety = 0, var/defer_update = FALSE)
-	if(!isnum(amount) || REAGENT_VOLUME(src, reagent_type) <= 0)
+	amount = round(amount, MINIMUM_CHEMICAL_VOLUME)
+	if(!isnum(amount) || amount <= 0 || REAGENT_VOLUME(src, reagent_type) <= 0)
 		return FALSE
-
 	reagent_volumes[reagent_type] -= amount
 	if(reagent_volumes.len > 1 || reagent_volumes[reagent_type] <= 0)
 		cached_color = null
-
 	if(defer_update)
 		total_volume -= amount // approximation, call update_total() if deferring
 	else
