@@ -34,7 +34,7 @@
 	value = 0.5
 	dirtiness = 30
 
-/decl/material/solid/carbon/affect_ingest(var/mob/living/M, var/alien, var/removed, var/datum/reagents/holder)
+/decl/material/solid/carbon/affect_ingest(var/mob/living/M, var/removed, var/datum/reagents/holder)
 	var/datum/reagents/ingested = M.get_ingested_reagents()
 	if(ingested && LAZYLEN(ingested.reagent_volumes) > 1)
 		var/effect = 1 / (LAZYLEN(ingested.reagent_volumes) - 1)
@@ -81,7 +81,7 @@
 	color = "#a0a0a0"
 	value = 0.5
 
-/decl/material/solid/potassium/affect_blood(var/mob/living/M, var/alien, var/removed, var/datum/reagents/holder)
+/decl/material/solid/potassium/affect_blood(var/mob/living/M, var/removed, var/datum/reagents/holder)
 	var/volume = REAGENT_VOLUME(holder, type)
 	if(volume > 3)
 		M.add_chemical_effect(CE_PULSE, 1)

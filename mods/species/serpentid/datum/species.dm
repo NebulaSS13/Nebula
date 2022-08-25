@@ -65,7 +65,6 @@
 	body_temperature = null
 	flesh_color = "#525252"
 	blood_oxy = 0
-	reagent_tag = IS_SERPENTID
 
 	available_bodytypes = list(
 		/decl/bodytype/serpentid,

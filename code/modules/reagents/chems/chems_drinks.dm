@@ -13,10 +13,10 @@
 	var/adj_sleepy = 0
 	var/adj_temp = 0
 
-/decl/material/liquid/drink/affect_blood(var/mob/living/M, var/alien, var/removed, var/datum/reagents/holder)
+/decl/material/liquid/drink/affect_blood(var/mob/living/M, var/removed, var/datum/reagents/holder)
 	M.adjustToxLoss(removed) // Probably not a good idea; not very deadly though
 
-/decl/material/liquid/drink/affect_ingest(var/mob/living/M, var/alien, var/removed, var/datum/reagents/holder)
+/decl/material/liquid/drink/affect_ingest(var/mob/living/M, var/removed, var/datum/reagents/holder)
 	if(M.HasTrait(/decl/trait/metabolically_inert))
 		return
 
@@ -38,7 +38,7 @@
 	uid = "chem_drink_juice"
 	fruit_descriptor = "sweet"
 
-/decl/material/liquid/drink/juice/affect_ingest(var/mob/living/M, var/alien, var/removed, var/datum/reagents/holder)
+/decl/material/liquid/drink/juice/affect_ingest(var/mob/living/M, var/removed, var/datum/reagents/holder)
 	..()
 	if(M.HasTrait(/decl/trait/metabolically_inert))
 		return
@@ -76,7 +76,7 @@
 	glass_name = "carrot juice"
 	glass_desc = "It is just like a carrot but without crunching."
 
-/decl/material/liquid/drink/juice/carrot/affect_ingest(var/mob/living/M, var/alien, var/removed, var/datum/reagents/holder)
+/decl/material/liquid/drink/juice/carrot/affect_ingest(var/mob/living/M, var/removed, var/datum/reagents/holder)
 	..()
 	M.reagents.add_reagent(/decl/material/liquid/eyedrops, removed * 0.2)
 
@@ -114,7 +114,7 @@
 	glass_name = "lime juice"
 	glass_desc = "A glass of sweet-sour lime juice"
 
-/decl/material/liquid/drink/juice/lime/affect_ingest(var/mob/living/M, var/alien, var/removed, var/datum/reagents/holder)
+/decl/material/liquid/drink/juice/lime/affect_ingest(var/mob/living/M, var/removed, var/datum/reagents/holder)
 	..()
 
 	if(M.HasTrait(/decl/trait/metabolically_inert))
@@ -133,7 +133,7 @@
 	glass_name = "orange juice"
 	glass_desc = "Vitamins! Yay!"
 
-/decl/material/liquid/drink/juice/orange/affect_ingest(var/mob/living/M, var/alien, var/removed, var/datum/reagents/holder)
+/decl/material/liquid/drink/juice/orange/affect_ingest(var/mob/living/M, var/removed, var/datum/reagents/holder)
 	..()
 
 	if(M.HasTrait(/decl/trait/metabolically_inert))
@@ -195,7 +195,7 @@
 	glass_name = "tomato juice"
 	glass_desc = "Are you sure this is tomato juice?"
 
-/decl/material/liquid/drink/juice/tomato/affect_ingest(var/mob/living/M, var/alien, var/removed, var/datum/reagents/holder)
+/decl/material/liquid/drink/juice/tomato/affect_ingest(var/mob/living/M, var/removed, var/datum/reagents/holder)
 	..()
 
 	if(M.HasTrait(/decl/trait/metabolically_inert))
@@ -266,7 +266,7 @@
 	glass_name = "chocolate milk"
 	glass_desc = "Deliciously fattening!"
 
-/decl/material/liquid/drink/milk/affect_ingest(var/mob/living/M, var/alien, var/removed, var/datum/reagents/holder)
+/decl/material/liquid/drink/milk/affect_ingest(var/mob/living/M, var/removed, var/datum/reagents/holder)
 	..()
 
 	holder.remove_reagent(/decl/material/liquid/capsaicin, 10 * removed)
@@ -328,7 +328,7 @@
 		if(!inserted)
 			flavour_modifiers += syrup
 
-/decl/material/liquid/drink/coffee/affect_ingest(var/mob/living/M, var/alien, var/removed, var/datum/reagents/holder)
+/decl/material/liquid/drink/coffee/affect_ingest(var/mob/living/M, var/removed, var/datum/reagents/holder)
 	..()
 	if(adj_temp > 0)
 		holder.remove_reagent(/decl/material/liquid/frostoil, 10 * removed)
@@ -342,11 +342,11 @@
 	if(volume > 45)
 		M.add_chemical_effect(CE_PULSE, 1)
 
-/decl/material/liquid/drink/coffee/affect_blood(var/mob/living/M, var/alien, var/removed, var/datum/reagents/holder)
+/decl/material/liquid/drink/coffee/affect_blood(var/mob/living/M, var/removed, var/datum/reagents/holder)
 	..()
 	M.add_chemical_effect(CE_PULSE, 2)
 
-/decl/material/liquid/drink/coffee/affect_overdose(var/mob/living/M, var/alien, var/datum/reagents/holder)
+/decl/material/liquid/drink/coffee/affect_overdose(var/mob/living/M, var/datum/reagents/holder)
 	ADJ_STATUS(M, STAT_JITTER, 5)
 	M.add_chemical_effect(CE_PULSE, 1)
 
@@ -494,7 +494,7 @@
 	glass_desc = "The unstable energy of a radioactive isotope in beverage form."
 	glass_special = list(DRINK_FIZZ)
 
-/decl/material/liquid/drink/mutagencola/affect_ingest(var/mob/living/M, var/alien, var/removed, var/datum/reagents/holder)
+/decl/material/liquid/drink/mutagencola/affect_ingest(var/mob/living/M, var/removed, var/datum/reagents/holder)
 	..()
 
 	if(M.HasTrait(/decl/trait/metabolically_inert))
@@ -614,7 +614,7 @@
 	exoplanet_rarity = MAT_RARITY_NOWHERE
 	uid = "chem_drink_hellramen"
 
-/decl/material/liquid/drink/hell_ramen/affect_ingest(var/mob/living/M, var/alien, var/removed, var/datum/reagents/holder)
+/decl/material/liquid/drink/hell_ramen/affect_ingest(var/mob/living/M, var/removed, var/datum/reagents/holder)
 	..()
 
 	if(M.HasTrait(/decl/trait/metabolically_inert))
@@ -633,9 +633,9 @@
 		. = "mint [.]"
 	. = ..(prop, .)
 
-/decl/material/liquid/drink/tea/affect_ingest(var/mob/living/M, var/alien, var/removed, var/datum/reagents/holder)
+/decl/material/liquid/drink/tea/affect_ingest(var/mob/living/M, var/removed, var/datum/reagents/holder)
 	..()
-	
+
 	if(M.HasTrait(/decl/trait/metabolically_inert))
 		return
 
@@ -797,9 +797,9 @@
 	exoplanet_rarity = MAT_RARITY_NOWHERE
 	uid = "chem_drink_energydrink"
 
-/decl/material/liquid/drink/beastenergy/affect_ingest(var/mob/living/M, var/alien, var/removed, var/datum/reagents/holder)
+/decl/material/liquid/drink/beastenergy/affect_ingest(var/mob/living/M, var/removed, var/datum/reagents/holder)
 	..()
-	
+
 	if(M.HasTrait(/decl/trait/metabolically_inert))
 		return
 
