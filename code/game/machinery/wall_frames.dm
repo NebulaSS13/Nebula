@@ -256,6 +256,7 @@
 	icon_state = "airlock_sensor_off"
 	name = "airlock sensor"
 	desc = "An airlock sensor frame."
+	build_machine_type = /obj/machinery/airlock_sensor/buildable
 
 /obj/item/frame/button/airlock_sensor/kit
 	fully_construct = TRUE

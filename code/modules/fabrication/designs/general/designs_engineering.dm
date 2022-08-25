@@ -64,6 +64,9 @@
 /datum/fabricator_recipe/engineering/airlock_sensor
 	path = /obj/item/frame/button/airlock_sensor
 
+/datum/fabricator_recipe/engineering/airlock_sensor_kit
+	path = /obj/item/frame/button/airlock_sensor/kit
+
 /datum/fabricator_recipe/engineering/airlock_controller
 	path = /obj/item/stock_parts/circuitboard/airlock_controller
 
