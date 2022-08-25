@@ -48,7 +48,7 @@
 	. = ..()
 	if(.)
 		player.implant_loyalty(player)
-		create_radio(DTH_FREQ, player)
+		create_radio(/obj/item/radio/headset/syndicate, player)
 
 /decl/special_role/deathsquad/create_id(mob/living/carbon/human/player, equip)
 	var/obj/item/card/id/id = ..()

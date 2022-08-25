@@ -12,6 +12,10 @@
 	var/list/mainframes = list()
 	var/list/mainframes_by_role = list()
 
+	// Telecomms device caches
+	var/list/connected_radios
+	var/list/connected_hubs
+
 	var/list/relays = list()
 
 	var/list/cameras_by_channel = list()

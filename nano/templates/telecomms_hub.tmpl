@@ -1,0 +1,40 @@
+<div class = "item">
+	<div class="itemLabel">Network:</div>
+	<div class="itemContent">{{:helper.link(data.network_id, null, { 'settings': 1 }, null)}}
+</div>
+
+<div class = "item">
+<table width = '90%' ija>
+	<tr>
+		<td width = '30%'><b>Channel name</b></td>
+		<td><b>Encryption</b></td>
+		<td><b>Key</b></td>
+		<td colspan = 2><b>Color</b></td>
+		<td><b>Freq</b></td>
+	</tr>
+{{for data.channels}}
+	<tr>
+	<div class="itemLabel">
+		<td width = '30%'>{{:helper.link(value.channel_name, null, { 'channel' : value.channel_ref, 'change_name' : 1 }, null)}}</td>
+	</div>
+	<div class="itemContent">
+		<td>{{:helper.link(value.channel_access, null, { 'channel' : value.channel_ref, 'change_access' : 1 },  null)}}</td>
+		<td>{{:helper.link(value.channel_key,    null, { 'channel' : value.channel_ref, 'change_key' : 1 },     null)}}</td>
+		<td>&nbsp;<div class='rect' style='background: {{:value.channel_colour}} !important'>&nbsp;&nbsp;&nbsp;&nbsp;</div>&nbsp;</td>
+		<td>{{:helper.link("Change",             null, { 'channel' : value.channel_ref, 'change_colour' : 1 },  null)}}</td>
+		<td>{{:helper.link(value.channel_freq,   null, { 'channel' : value.channel_ref, 'change_freq' : 1 },    null)}}</td>
+		<td>{{:helper.link("Remove",             null, { 'channel' : value.channel_ref, 'delete_channel' : 1 }, null)}}</td>
+	</div>
+	</tr>
+{{/for}}
+	<div class="itemLabel">
+		<tr><td colspan = 7><b>Configuration options</b></td></tr>
+	</div>
+	<div class="itemContent">
+		<tr><td colspan = 7>{{:helper.link("New channel", null, { 'new_channel' : 1 }, null)}}</td></tr>
+	</div>
+	<div class="itemContent">
+		<tr><td colspan = 7>{{:helper.link("Factory reset", null, { 'factory_reset' : 1 }, null)}}</td></tr>
+	</div>
+</table>
+</div>

@@ -187,7 +187,6 @@
 		return hear
 
 	var/list/range = hear(R, T)
-
 	for(var/I in range)
 		if(ismob(I))
 			hear |= recursive_content_check(I, hear, 3, 1, 0, include_mobs, include_objects)
@@ -199,47 +198,7 @@
 			hear |= recursive_content_check(I, hear, 3, 1, 0, include_mobs, include_objects)
 			if(include_objects)
 				hear += I
-
 	return hear
-
-
-/proc/get_mobs_in_radio_ranges(var/list/obj/item/radio/radios)
-
-	set background = 1
-
-	. = list()
-	// Returns a list of mobs who can hear any of the radios given in @radios
-	var/list/speaker_coverage = list()
-	for(var/obj/item/radio/R in radios)
-		if(R)
-			if(R.virtual)
-				continue // We end up in this list because we need to receive signals, but should never actually display a message.
-			//Cyborg checks. Receiving message uses a bit of cyborg's charge.
-			var/obj/item/radio/borg/BR = R
-			if(istype(BR) && BR.myborg)
-				var/mob/living/silicon/robot/borg = BR.myborg
-				var/datum/robot_component/CO = borg.get_component("radio")
-				if(!CO)
-					continue //No radio component (Shouldn't happen)
-				if(!borg.is_component_functioning("radio") || !borg.cell_use_power(CO.active_usage))
-					continue //No power.
-
-			var/turf/speaker = get_turf(R)
-			if(speaker)
-				for(var/turf/T in hear(R.canhear_range,speaker))
-					speaker_coverage[T] = T
-
-
-	// Try to find all the players who can hear the message
-	for(var/i = 1; i <= global.player_list.len; i++)
-		var/mob/M = global.player_list[i]
-		if(M)
-			var/turf/ear = get_turf(M)
-			if(ear)
-				// Ghostship is magic: Ghosts can hear radio chatter from anywhere
-				if(speaker_coverage[ear] || (isghost(M) && M.get_preference_value(/datum/client_preference/ghost_radio) == PREF_ALL_CHATTER))
-					. |= M		// Since we're already looping through mobs, why bother using |= ? This only slows things down.
-	return .
 
 /proc/get_mobs_and_objs_in_view_fast(var/turf/T, var/range, var/list/mobs, var/list/objs, var/checkghosts = null)
 	var/list/hear = list()

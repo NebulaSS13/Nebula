@@ -63,7 +63,7 @@
 		return FALSE
 
 	owner_channels.Cut()
-
+/*
 	for(var/slot in global.ear_slots)
 		var/obj/item/radio/R = owner.get_equipped_item(slot)
 		if(istype(R))
@@ -75,7 +75,7 @@
 				new_channels[channel] = key
 			owner_channels = new_channels
 			return TRUE
-
+*/
 	return FALSE
 
 /mob/living/silicon/sil_brainmob/statelaw(var/law, var/mob/living/L = src)

@@ -87,9 +87,6 @@ var/global/req_console_information = list()
 		announcement.title = "[_department] announcement"
 		SetName("[_department] Requests Console")
 
-/obj/machinery/network/requests_console/Destroy()
-	. = ..()
-
 /obj/machinery/network/requests_console/interface_interact(mob/user)
 	ui_interact(user)
 	return TRUE

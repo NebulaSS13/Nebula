@@ -21,26 +21,29 @@ SUBSYSTEM_DEF(networking)
 		tmp_queue = connection_queue.Copy()
 		connection_queue = list()
 	while(tmp_queue.len)
-		var/datum/extension/network_device/device = tmp_queue[tmp_queue.len]
+		try_connect(tmp_queue[tmp_queue.len])
 		tmp_queue.len--
-
-		if(!QDELETED(device))
-			var/connected
-			if(device.network_id)
-				connected = device.connect()
-			else
-				connected = device.connect_to_any()
-			if(connected)
-				device.holder?.handle_post_network_connection()
-				device.connection_attempts = 0
-			else
-				if(device.connection_attempts < MAX_CONNECTION_ATTEMPTS)
-					device.connection_attempts++
-					connection_queue += device
-				else // Maximum connection attempts reached. Do not readd to the queue.
-					device.connection_attempts = 0
 		if(MC_TICK_CHECK)
 			return
+
+/datum/controller/subsystem/networking/proc/try_connect(var/datum/extension/network_device/device)
+
+	if(QDELETED(device))
+		return
+
+	if(device.network_id)
+		. = device.connect()
+	else
+		. = device.connect_to_any()
+	if(.)
+		device.holder?.handle_post_network_connection()
+		device.connection_attempts = 0
+	else
+		if(device.connection_attempts < MAX_CONNECTION_ATTEMPTS)
+			device.connection_attempts++
+			connection_queue += device
+		else // Maximum connection attempts reached. Do not readd to the queue.
+			device.connection_attempts = 0
 
 /datum/controller/subsystem/networking/stat_entry()
 	..("[length(networks)] network\s, [length(connection_queue)] connection\s queued")

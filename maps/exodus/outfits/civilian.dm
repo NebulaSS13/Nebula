@@ -1,5 +1,5 @@
 /decl/hierarchy/outfit/job/service
-	l_ear = /obj/item/radio/headset/headset_service
+	l_ear = /obj/item/radio/headset/corp_service
 	abstract_type = /decl/hierarchy/outfit/job/service
 
 /decl/hierarchy/outfit/job/service/bartender
@@ -45,7 +45,7 @@
 
 /decl/hierarchy/outfit/job/internal_affairs_agent
 	name = "Job - Internal affairs agent"
-	l_ear = /obj/item/radio/headset/ia
+	l_ear = /obj/item/radio/headset/corp_ia
 	uniform = /obj/item/clothing/under/internalaffairs
 	suit = /obj/item/clothing/suit/storage/toggle/suit/black
 	shoes = /obj/item/clothing/shoes/color/brown

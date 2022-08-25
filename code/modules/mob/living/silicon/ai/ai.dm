@@ -31,7 +31,6 @@ var/global/list/ai_verbs_default = list(
 	/mob/living/silicon/proc/access_computer,
 	/mob/living/silicon/ai/proc/ai_power_override,
 	/mob/living/silicon/ai/proc/ai_shutdown,
-	/mob/living/silicon/ai/proc/ai_reset_radio_keys,
 	/mob/living/silicon/ai/proc/run_program,
 	/mob/living/silicon/ai/proc/pick_color
 )
@@ -194,16 +193,6 @@ var/global/list/ai_verbs_default = list(
 	to_chat(src, "To use something, simply click on it.")
 	to_chat(src, "Use say [get_language_prefix()]b to speak to your cyborgs through binary. Use say :h to speak from an active holopad.")
 	to_chat(src, "For department channels, use the following say commands:")
-
-	var/radio_text = ""
-	for(var/i = 1 to silicon_radio.channels.len)
-		var/channel = silicon_radio.channels[i]
-		var/key = get_radio_key_from_channel(channel)
-		radio_text += "[key] - [channel]"
-		if(i != silicon_radio.channels.len)
-			radio_text += ", "
-
-	to_chat(src, radio_text)
 	show_laws()
 	to_chat(src, "<b>These laws may be changed by other players or by other random events.</b>")
 
@@ -675,13 +664,6 @@ var/global/list/custom_ai_icons_by_ckey_and_name = list()
 
 	multitool_mode = !multitool_mode
 	to_chat(src, "<span class='notice'>Multitool mode: [multitool_mode ? "E" : "Dise"]ngaged</span>")
-
-/mob/living/silicon/ai/proc/ai_reset_radio_keys()
-	set name = "Reset Radio Encryption Keys"
-	set category = "Silicon Commands"
-
-	silicon_radio.recalculateChannels()
-	to_chat(src, SPAN_NOTICE("Integrated radio encryption keys have been reset."))
 
 /mob/living/silicon/ai/on_update_icon()
 	..()

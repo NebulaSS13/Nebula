@@ -674,6 +674,14 @@
 /obj/structure/closet/secure_closet/freezer/kitchen,
 /turf/simulated/floor/tiled/techfloor,
 /area/ship/trade/cargo)
+"bo" = (
+/obj/effect/floor_decal/corner/blue/diagonal,
+/obj/effect/floor_decal/corner/blue/diagonal{
+	dir = 4
+	},
+/obj/machinery/computer/ship/comms,
+/turf/simulated/floor/tiled/dark,
+/area/ship/trade/command/bridge)
 "bp" = (
 /obj/machinery/atmospherics/pipe/manifold/hidden/supply,
 /obj/machinery/light,
@@ -6501,17 +6509,6 @@
 /obj/machinery/portable_atmospherics/canister/hydrogen,
 /turf/simulated/floor/tiled/techmaint,
 /area/ship/trade/shieldbay)
-"Qz" = (
-/obj/machinery/computer/modular/preset/cardslot/command,
-/obj/effect/floor_decal/corner/blue/diagonal,
-/obj/effect/floor_decal/corner/blue/diagonal{
-	dir = 4
-	},
-/obj/machinery/keycard_auth{
-	pixel_y = 21
-	},
-/turf/simulated/floor/tiled/dark,
-/area/ship/trade/command/bridge)
 "QH" = (
 /obj/structure/table,
 /obj/structure/cable,
@@ -10560,7 +10557,7 @@ bb
 DO
 DO
 DO
-Qz
+bo
 rH
 rI
 DO

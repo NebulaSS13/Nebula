@@ -3,7 +3,7 @@
 	head = /obj/item/clothing/head/caphat
 	glasses = /obj/item/clothing/glasses/sunglasses
 	uniform = /obj/item/clothing/under/captain
-	l_ear = /obj/item/radio/headset/heads/captain
+	l_ear = /obj/item/radio/headset/corp_captain
 	shoes = /obj/item/clothing/shoes/color/brown
 	id_type = /obj/item/card/id/gold
 	pda_type = /obj/item/modular_computer/pda/heads/captain
@@ -31,7 +31,7 @@
 /decl/hierarchy/outfit/job/hop
 	name = "Job - Head of Personnel"
 	uniform = /obj/item/clothing/under/head_of_personnel
-	l_ear = /obj/item/radio/headset/heads/hop
+	l_ear = /obj/item/radio/headset/corp_hop
 	shoes = /obj/item/clothing/shoes/color/brown
 	id_type = /obj/item/card/id/silver
 	pda_type = /obj/item/modular_computer/pda/heads/hop

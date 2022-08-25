@@ -39,4 +39,12 @@
 	to_chat(player.current, "The Emergency Response Team works for Asset Protection; your job is to protect [global.using_map.company_name]'s ass-ets. There is a code red alert on [station_name()], you are tasked to go and fix the problem.")
 	to_chat(player.current, "You should first gear up and discuss a plan with your team. More members may be joining, don't move out before you're ready.")
 
-//Equip proc has been moved to the map specific folders.
+/decl/special_role/ert/equip(mob/living/carbon/human/player)
+	if(!..())
+		return 0
+	var/decl/hierarchy/outfit/ert = outfit_by_type(	/decl/hierarchy/outfit/ert)
+	ert.equip(player)
+	var/obj/item/card/id/id = player.get_equipped_item(slot_wear_id_str)
+	if(istype(id))
+		LAZYDISTINCTADD(id.access, access_cent_specops)
+	return 1

@@ -41,7 +41,9 @@
 /turf/simulated/floor/tiled,
 /area/unishi/bridge)
 "ak" = (
-/obj/machinery/computer/telecomms/server,
+/obj/machinery/network/telecomms_hub{
+	initial_network_id = "eduroam"
+	},
 /turf/simulated/floor/tiled,
 /area/unishi/bridge)
 "al" = (

@@ -11,7 +11,6 @@
 	var/specops_return_delay = 6000		//After moving, the amount of time that must pass before the shuttle may move again
 	var/specops_countdown_time = 600	//Length of the countdown when moving the shuttle
 
-	var/obj/item/radio/intercom/announcer = null
 	var/reset_time = 0	//the world.time at which the shuttle will be ready to move again.
 	var/launch_prep = 0
 	var/cancel_countdown = 0
@@ -19,13 +18,6 @@
 
 /datum/shuttle/autodock/ferry/specops/New()
 	..()
-	announcer = new /obj/item/radio/intercom(null)//We need a fake AI to announce some stuff below. Otherwise it will be wonky.
-	announcer.config(list("Response Team" = 0))
-
-/datum/shuttle/autodock/ferry/specops/proc/radio_announce(var/message)
-	if(announcer)
-		announcer.autosay(message, "A.L.I.C.E.", "Response Team")
-
 
 /datum/shuttle/autodock/ferry/specops/launch(var/user)
 	if (!can_launch())
@@ -44,19 +36,12 @@
 
 		C.visible_message("<span class='notice'>The Special Operations shuttle will depart in [(specops_countdown_time/10)] seconds.</span>")
 
-	if (location)	//returning
-		radio_announce("THE SPECIAL OPERATIONS SHUTTLE IS PREPARING TO RETURN")
-	else
-		radio_announce("THE SPECIAL OPERATIONS SHUTTLE IS PREPARING FOR LAUNCH")
-
 	sleep_until_launch()
 
 	if (location)
 		var/obj/machinery/light/small/readylight/light = locate() in shuttle_area
 		if(light) light.set_state(0)
 
-	//launch
-	radio_announce("ALERT: INITIATING LAUNCH SEQUENCE")
 	..(user)
 
 /datum/shuttle/autodock/ferry/specops/shuttle_moved()
@@ -81,7 +66,6 @@
 		return
 
 	cancel_countdown = 1
-	radio_announce("ALERT: LAUNCH SEQUENCE ABORTED")
 	if (istype(in_use, /obj/machinery/computer))
 		var/obj/machinery/computer/C = in_use
 		C.visible_message("<span class='warning'>Launch sequence aborted.</span>")
@@ -121,7 +105,6 @@
 		//All this does is announce the time before launch.
 		var/rounded_time_left = round(time_until_launch)//Round time so that it will report only once, not in fractions.
 		if(rounded_time_left in message_tracker)//If that time is in the list for message announce.
-			radio_announce("ALERT: [rounded_time_left] SECOND[(rounded_time_left!=1)?"S":""] REMAIN")
 			message_tracker -= rounded_time_left//Remove the number from the list so it won't be called again next cycle.
 			//Should call all the numbers but lag could mean some issues. Oh well. Not much I can do about that.
 

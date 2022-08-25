@@ -9,7 +9,6 @@
 		/obj/item/storage/plants,
 		/obj/item/clothing/under/hydroponics,
 		/obj/item/scanner/plant,
-		/obj/item/radio/headset/headset_service,
 		/obj/item/clothing/mask/bandana/botany,
 		/obj/item/clothing/head/bandana/green,
 		/obj/item/minihoe,

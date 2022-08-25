@@ -38,10 +38,10 @@ code/modules/mob/living/silicon/pai/software_modules.dm
 	<div class="itemContent">
 		{{if value.listening}}
 			{{:helper.link("On", '', {"stopic":"radio", "channel":value.name, "listen":1, "nowindow":1}, 'selected')}}
-			{{:helper.link("Off", '', {"stopic":"radio", "channel":value.name, "listen":1, "nowindow":1})}}
+			{{:helper.link("Off", '', {"stopic":"radio", "channel":value.name, "listen":0, "nowindow":1})}}
 		{{else}}
 			{{:helper.link("On", '', {"stopic":"radio", "channel":value.name, "listen":1, "nowindow":1})}}
-			{{:helper.link("Off", '', {"stopic":"radio", "channel":value.name, "listen":1, "nowindow":1}, 'selected')}}
+			{{:helper.link("Off", '', {"stopic":"radio", "channel":value.name, "listen":0, "nowindow":1}, 'selected')}}
 		{{/if}}
 	</div>
 </div>

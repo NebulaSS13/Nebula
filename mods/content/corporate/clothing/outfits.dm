@@ -5,7 +5,6 @@
 	gloves = /obj/item/clothing/gloves/color/white
 	l_ear = /obj/item/radio/headset/heads/hop
 	glasses = /obj/item/clothing/glasses/sunglasses
-
 	id_slot = slot_wear_id_str
 	id_type = /obj/item/card/id/centcom/station
 	pda_slot = slot_r_store_str
@@ -59,3 +58,4 @@
 	var/decl/special_role/commandos = GET_DECL(/decl/special_role/deathsquad/mercenary)
 	commandos.equip(H)
 	return 1
+
