@@ -164,7 +164,7 @@
 		for(var/species_type in R.species_locked)
 			if(!(ispath(species_variation, species_type)))
 				design_cache.Remove(R)
-				return
+				continue
 
 	design_cache = sortTim(design_cache, /proc/cmp_name_asc)
 	ui_nb_categories = LAZYLEN(unique_categories)
