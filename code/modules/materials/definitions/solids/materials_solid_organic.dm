@@ -85,6 +85,7 @@
 	. += new/datum/stack_recipe_list("folders", create_recipe_list(/datum/stack_recipe/folder))
 
 /decl/material/solid/paper
+	uid = "solid_paper"
 	//STUB: Waiting on papwerork PR
 
 /decl/material/solid/cloth //todo
