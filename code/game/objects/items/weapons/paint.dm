@@ -18,14 +18,12 @@ var/global/list/cached_icons = list()
 	atom_flags = ATOM_FLAG_OPEN_CONTAINER
 	var/pigment
 
-/obj/item/chems/glass/paint/Initialize()
-	. = ..()
+/obj/item/chems/glass/paint/populate_reagents()
+	var/amt = reagents.maximum_volume
 	if(pigment)
-		var/amt = round(reagents.maximum_volume/2)
+		amt = round(amt/2)
 		reagents.add_reagent(pigment, amt)
-		reagents.add_reagent(/decl/material/liquid/paint, amt)
-	else
-		reagents.add_reagent(/decl/material/liquid/paint, reagents.maximum_volume)
+	reagents.add_reagent(/decl/material/liquid/paint, amt)
 
 /obj/item/chems/glass/paint/on_update_icon()
 	. = ..()

@@ -17,10 +17,11 @@
 	nutriment_amt = 35
 	bitesize = 2
 	nutriment_type = /decl/material/liquid/nutriment/bread
-	starting_reagents = list(
-		/decl/material/liquid/nutriment/protein  = 5,
-		/decl/material/liquid/drink/juice/tomato = 6,
-	)
+
+/obj/item/chems/food/sliceable/pizza/margherita/populate_reagents()
+	. = ..()
+	reagents.add_reagent(/decl/material/liquid/nutriment/protein,  5)
+	reagents.add_reagent(/decl/material/liquid/drink/juice/tomato, 6)
 
 /obj/item/chems/food/slice/margherita
 	name = "margherita slice"
@@ -45,10 +46,11 @@
 	nutriment_amt = 10
 	bitesize = 2
 	nutriment_type = /decl/material/liquid/nutriment/bread
-	starting_reagents = list(
-		/decl/material/liquid/nutriment/protein  = 34,
-		/decl/material/liquid/nutriment/barbecue = 6,
-	)
+
+/obj/item/chems/food/sliceable/pizza/meatpizza/populate_reagents()
+	. = ..()
+	reagents.add_reagent(/decl/material/liquid/nutriment/protein,  34)
+	reagents.add_reagent(/decl/material/liquid/nutriment/barbecue, 6)
 
 /obj/item/chems/food/slice/meatpizza
 	name = "meatpizza slice"
@@ -73,7 +75,10 @@
 	nutriment_amt = 35
 	bitesize = 2
 	nutriment_type = /decl/material/liquid/nutriment/bread
-	starting_reagents = list(/decl/material/liquid/nutriment/protein = 5)
+
+/obj/item/chems/food/sliceable/pizza/mushroompizza/populate_reagents()
+	. = ..()
+	reagents.add_reagent(/decl/material/liquid/nutriment/protein,  5)
 
 /obj/item/chems/food/slice/mushroompizza
 	name = "mushroompizza slice"
@@ -98,11 +103,12 @@
 	nutriment_amt = 25
 	bitesize = 2
 	nutriment_type = /decl/material/liquid/nutriment/bread
-	starting_reagents = list(
-		/decl/material/liquid/nutriment/protein = 5,
-		/decl/material/liquid/nutriment/ketchup = 6,
-		/decl/material/liquid/eyedrops          = 12,
-	)
+
+/obj/item/chems/food/sliceable/pizza/vegetablepizza/populate_reagents()
+	. = ..()
+	reagents.add_reagent(/decl/material/liquid/nutriment/protein,  5)
+	reagents.add_reagent(/decl/material/liquid/nutriment/ketchup,  6)
+	reagents.add_reagent(/decl/material/liquid/eyedrops,           12)
 
 /obj/item/chems/food/slice/vegetablepizza
 	name = "vegetable pizza slice"

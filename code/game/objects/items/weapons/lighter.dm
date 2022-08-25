@@ -17,11 +17,18 @@
 
 /obj/item/flame/lighter/Initialize()
 	. = ..()
-	create_reagents(max_fuel)
-	reagents.add_reagent(/decl/material/liquid/fuel, max_fuel)
+	initialize_reagents()
 	set_extension(src, /datum/extension/base_icon_state, icon_state)
 	update_icon()
 	set_extension(src, /datum/extension/tool, list(TOOL_CAUTERY = TOOL_QUALITY_BAD))
+
+/obj/item/flame/lighter/initialize_reagents(populate = TRUE)
+	if(!reagents)
+		create_reagents(max_fuel)
+	. = ..()
+	
+/obj/item/flame/lighter/populate_reagents()
+	reagents.add_reagent(/decl/material/liquid/fuel, max_fuel)
 
 /obj/item/flame/lighter/proc/light(mob/user)
 	if(submerged())

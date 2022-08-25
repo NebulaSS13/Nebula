@@ -21,12 +21,12 @@
 	if(species && !stomach_capacity)
 		stomach_capacity = species.stomach_capacity
 
-/obj/item/organ/internal/stomach/setup_reagents()
-	. = ..()
+/obj/item/organ/internal/stomach/initialize_reagents(populate)
 	if(!ingested)
 		ingested = new/datum/reagents/metabolism(240, (owner || src), CHEM_INGEST)
 	if(!ingested.my_atom)
 		ingested.my_atom = src
+	. = ..()
 
 /obj/item/organ/internal/stomach/do_uninstall(in_place, detach, ignore_children)
 	. = ..()

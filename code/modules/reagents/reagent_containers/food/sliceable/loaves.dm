@@ -10,7 +10,10 @@
 	nutriment_amt = 10
 	bitesize = 2
 	nutriment_type = /decl/material/liquid/nutriment/bread
-	starting_reagents = list(/decl/material/liquid/nutriment/protein = 20)
+
+/obj/item/chems/food/sliceable/meatbread/populate_reagents()
+	. = ..()
+	reagents.add_reagent(/decl/material/liquid/nutriment/protein, 20)
 
 /obj/item/chems/food/slice/meatbread
 	name = "meatbread slice"
@@ -37,7 +40,10 @@
 	nutriment_amt = 10
 	bitesize = 2
 	nutriment_type = /decl/material/liquid/nutriment/bread
-	starting_reagents = list(/decl/material/liquid/nutriment/protein = 20)
+
+/obj/item/chems/food/sliceable/xenomeatbread/populate_reagents()
+	. = ..()
+	reagents.add_reagent(/decl/material/liquid/nutriment/protein, 20)
 
 /obj/item/chems/food/slice/xenomeatbread
 	name = "xenomeatbread slice"
@@ -64,7 +70,10 @@
 	nutriment_amt = 10
 	bitesize = 2
 	nutriment_type = /decl/material/liquid/nutriment/bread
-	starting_reagents = list(/decl/material/liquid/nutriment/banana_cream = 20)
+
+/obj/item/chems/food/sliceable/bananabread/populate_reagents()
+	. = ..()
+	reagents.add_reagent(/decl/material/liquid/nutriment/banana_cream, 20)
 
 /obj/item/chems/food/slice/bananabread
 	name = "banana-nut bread slice"
@@ -143,7 +152,10 @@
 	nutriment_amt = 5
 	bitesize = 2
 	nutriment_type = /decl/material/liquid/nutriment/bread
-	starting_reagents = list(/decl/material/liquid/nutriment/protein = 15)
+
+/obj/item/chems/food/sliceable/creamcheesebread/populate_reagents()
+	. = ..()
+	reagents.add_reagent(/decl/material/liquid/nutriment/protein, 15)
 
 /obj/item/chems/food/slice/creamcheesebread
 	name = "cream cheese bread slice"

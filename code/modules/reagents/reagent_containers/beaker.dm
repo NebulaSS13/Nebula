@@ -164,5 +164,5 @@
 	matter = list(/decl/material/solid/plastic = MATTER_AMOUNT_REINFORCEMENT)
 	volume = 120
 
-/obj/item/chems/glass/beaker/sulphuric
-	starting_reagents = list(/decl/material/liquid/acid)
+/obj/item/chems/glass/beaker/sulphuric/populate_reagents()
+	reagents.add_reagent(/decl/material/liquid/acid, reagents.maximum_volume)

@@ -14,7 +14,6 @@
 	var/tmp/volume                    = 1000
 	var/amount_dispensed              = 10
 	var/tmp/possible_transfer_amounts = @"[10,25,50,100,500]"
-	var/tmp/initial_reagents  // A list of reagents and their ratio relative the initial capacity. list(/decl/material/liquid/water = 0.5) would fill the dispenser halfway to capacity.
 
 /obj/structure/reagent_dispensers/Initialize(ml, _mat, _reinf_mat)
 	. = ..()
@@ -27,13 +26,7 @@
 		create_reagents(volume)
 	else
 		reagents.maximum_volume = max(reagents.maximum_volume, volume)
-
-	if(!populate || !LAZYLEN(initial_reagents))
-		return
-
-	for(var/reagent_type in initial_reagents)
-		var/reagent_ratio = initial_reagents[reagent_type]
-		reagents.add_reagent(reagent_type, reagent_ratio * volume)
+	. = ..()
 
 /obj/structure/reagent_dispensers/is_pressurized_fluid_source()
 	return TRUE
@@ -132,9 +125,11 @@
 	amount_dispensed          = 10
 	possible_transfer_amounts = @"[10,25,50,100]"
 	volume                    = 7500
-	initial_reagents          = list(/decl/material/liquid/water = 1)
 	atom_flags                = ATOM_FLAG_NO_TEMP_CHANGE | ATOM_FLAG_CLIMBABLE
 	movable_flags             = MOVABLE_FLAG_WHEELED
+
+/obj/structure/reagent_dispensers/watertank/populate_reagents()
+	reagents.add_reagent(/decl/material/liquid/water, reagents.maximum_volume)
 
 /obj/structure/reagent_dispensers/watertank/firefighter
 	name   = "firefighting water reserve"
@@ -154,10 +149,12 @@
 	desc             = "A tank containing welding fuel."
 	icon_state       = "weldtank"
 	amount_dispensed = 10
-	initial_reagents = list(/decl/material/liquid/fuel = 1)
 	atom_flags       = ATOM_FLAG_CLIMBABLE
 	movable_flags    = MOVABLE_FLAG_WHEELED
 	var/obj/item/assembly_holder/rig
+
+/obj/structure/reagent_dispensers/fueltank/populate_reagents()
+	reagents.add_reagent(/decl/material/liquid/fuel, reagents.maximum_volume)
 
 /obj/structure/reagent_dispensers/fueltank/examine(mob/user, distance)
 	. = ..()
@@ -232,7 +229,9 @@
 	anchored         = TRUE
 	density          = FALSE
 	amount_dispensed = 45
-	initial_reagents = list(/decl/material/liquid/capsaicin/condensed = 1)
+
+/obj/structure/reagent_dispensers/peppertank/populate_reagents()
+	reagents.add_reagent(/decl/material/liquid/capsaicin/condensed, reagents.maximum_volume)
 
 /obj/structure/reagent_dispensers/water_cooler
 	name                      = "water cooler"
@@ -243,11 +242,13 @@
 	amount_dispensed          = 5
 	anchored                  = TRUE
 	volume                    = 500
-	initial_reagents          = list(/decl/material/liquid/water = 1)
 	tool_interaction_flags    = (TOOL_INTERACTION_ANCHOR | TOOL_INTERACTION_DECONSTRUCT)
 	var/cups                  = 12
 	var/tmp/max_cups          = 12
 	var/tmp/cup_type          = /obj/item/chems/drinks/sillycup
+
+/obj/structure/reagent_dispensers/water_cooler/populate_reagents()
+	reagents.add_reagent(/decl/material/liquid/water, reagents.maximum_volume)
 
 /obj/structure/reagent_dispensers/water_cooler/attack_hand(var/mob/user)
 	return dispense_cup(user)
@@ -286,10 +287,12 @@
 	desc             = "A beer keg."
 	icon_state       = "beertankTEMP"
 	amount_dispensed = 10
-	initial_reagents = list(/decl/material/liquid/ethanol/beer = 1)
 	atom_flags       = ATOM_FLAG_CLIMBABLE
 	material         = /decl/material/solid/metal/aluminium
 	matter           = list(/decl/material/solid/metal/stainlesssteel = MATTER_AMOUNT_TRACE)
+
+/obj/structure/reagent_dispensers/beerkeg/populate_reagents()
+	reagents.add_reagent(/decl/material/liquid/ethanol/beer, reagents.maximum_volume)
 
 /obj/structure/reagent_dispensers/acid
 	name             = "sulphuric acid dispenser"
@@ -297,7 +300,9 @@
 	icon_state       = "acidtank"
 	amount_dispensed = 10
 	anchored         = TRUE
-	initial_reagents = list(/decl/material/liquid/acid = 1)
+	
+/obj/structure/reagent_dispensers/acid/populate_reagents()
+	reagents.add_reagent(/decl/material/liquid/acid, reagents.maximum_volume)
 
 //Interactions
 /obj/structure/reagent_dispensers/get_alt_interactions(var/mob/user)

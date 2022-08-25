@@ -13,7 +13,10 @@
 	nutriment_amt = 3
 	nutriment_type = /decl/material/liquid/nutriment/bread
 	bitesize = 2
-	starting_reagents = list(/decl/material/liquid/nutriment/protein = 3)
+
+/obj/item/chems/food/sandwich/populate_reagents()
+	. = ..()
+	reagents.add_reagent(/decl/material/liquid/nutriment/protein, 3)
 
 /obj/item/chems/food/toastedsandwich
 	name = "toasted sandwich"
@@ -26,10 +29,11 @@
 	nutriment_amt = 3
 	nutriment_type = /decl/material/liquid/nutriment/bread
 	bitesize = 2
-	starting_reagents = list(
-		/decl/material/liquid/nutriment/protein = 3,
-		/decl/material/solid/carbon = 2,
-	)
+
+/obj/item/chems/food/toastedsandwich/populate_reagents()
+	. = ..()
+	reagents.add_reagent(/decl/material/liquid/nutriment/protein, 3)
+	reagents.add_reagent(/decl/material/solid/carbon,             2)
 
 /obj/item/chems/food/grilledcheese
 	name = "grilled cheese sandwich"
@@ -41,7 +45,10 @@
 	nutriment_amt = 3
 	bitesize = 2
 	nutriment_type = /decl/material/liquid/nutriment/bread
-	starting_reagents = list(/decl/material/liquid/nutriment/protein = 4)
+
+/obj/item/chems/food/grilledcheese/populate_reagents()
+	. = ..()
+	reagents.add_reagent(/decl/material/liquid/nutriment/protein, 4)
 
 /obj/item/chems/food/baguette
 	name = "baguette"
@@ -53,10 +60,11 @@
 	nutriment_amt = 6
 	bitesize = 3
 	nutriment_type = /decl/material/liquid/nutriment/bread
-	starting_reagents = list(
-		/decl/material/solid/blackpepper    = 1,
-		/decl/material/solid/sodiumchloride = 1,
-	)
+
+/obj/item/chems/food/baguette/populate_reagents()
+	. = ..()
+	reagents.add_reagent(/decl/material/solid/blackpepper,    1)
+	reagents.add_reagent(/decl/material/solid/sodiumchloride, 1)
 
 /obj/item/chems/food/jelliedtoast
 	name = "jellied toast"
@@ -70,8 +78,9 @@
 	bitesize = 3
 	nutriment_type = /decl/material/liquid/nutriment/bread
 
-/obj/item/chems/food/jelliedtoast/cherry
-	starting_reagents = list(/decl/material/liquid/nutriment/cherryjelly = 5)
+/obj/item/chems/food/jelliedtoast/cherry/populate_reagents()
+	. = ..()
+	reagents.add_reagent(/decl/material/liquid/nutriment/cherryjelly, 5)
 
 /obj/item/chems/food/jellysandwich
 	name = "jelly sandwich"
@@ -85,8 +94,9 @@
 	bitesize = 3
 	nutriment_type = /decl/material/liquid/nutriment/bread
 
-/obj/item/chems/food/jellysandwich/cherry
-	starting_reagents = list(/decl/material/liquid/nutriment/cherryjelly = 5)
+/obj/item/chems/food/jellysandwich/cherry/populate_reagents()
+	. = ..()
+	reagents.add_reagent(/decl/material/liquid/nutriment/cherryjelly, 5)
 
 /obj/item/chems/food/twobread
 	name = "\improper Two Bread"

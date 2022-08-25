@@ -138,7 +138,9 @@
 	icon_state = "milk"
 	item_state = "carton"
 	center_of_mass = @"{'x':16,'y':9}"
-	starting_reagents = list(/decl/material/liquid/drink/milk = 50)
+
+/obj/item/chems/drinks/milk/populate_reagents()
+	reagents.add_reagent(/decl/material/liquid/drink/milk, reagents.maximum_volume)
 
 /obj/item/chems/drinks/soymilk
 	name = "soymilk carton"
@@ -146,32 +148,42 @@
 	icon_state = "soymilk"
 	item_state = "carton"
 	center_of_mass = @"{'x':16,'y':9}"
-	starting_reagents = list(/decl/material/liquid/drink/milk/soymilk = 50)
+
+/obj/item/chems/drinks/soymilk/populate_reagents()
+	reagents.add_reagent(/decl/material/liquid/drink/milk/soymilk, reagents.maximum_volume)
 
 /obj/item/chems/drinks/milk/smallcarton
 	name = "small milk carton"
 	volume = 30
 	icon_state = "mini-milk"
-	starting_reagents = list(/decl/material/liquid/drink/milk = 30)
+
+/obj/item/chems/drinks/milk/smallcarton/populate_reagents()
+	reagents.add_reagent(/decl/material/liquid/drink/milk, reagents.maximum_volume)
 
 /obj/item/chems/drinks/milk/smallcarton/chocolate
 	name = "small chocolate milk carton"
 	desc = "It's milk! This one is in delicious chocolate flavour."
-	starting_reagents = list(/decl/material/liquid/drink/milk/chocolate = 30)
+
+/obj/item/chems/drinks/milk/smallcarton/chocolate/populate_reagents()
+	reagents.add_reagent(/decl/material/liquid/drink/milk/chocolate, reagents.maximum_volume)
 
 /obj/item/chems/drinks/coffee
 	name = "\improper Robust Coffee"
 	desc = "Careful, the beverage you're about to enjoy is extremely hot."
 	icon_state = "coffee"
 	center_of_mass = @"{'x':15,'y':10}"
-	starting_reagents = list(/decl/material/liquid/drink/coffee = 30)
+
+/obj/item/chems/drinks/coffee/populate_reagents()
+	reagents.add_reagent(/decl/material/liquid/drink/coffee, reagents.maximum_volume)
 
 /obj/item/chems/drinks/ice
 	name = "cup of ice"
 	desc = "Careful, cold ice, do not chew."
 	icon_state = "coffee"
 	center_of_mass = @"{'x':15,'y':10}"
-	starting_reagents = list(/decl/material/solid/ice = 30)
+
+/obj/item/chems/drinks/ice/populate_reagents()
+	reagents.add_reagent(/decl/material/solid/ice, reagents.maximum_volume)
 
 /obj/item/chems/drinks/h_chocolate
 	name = "cup of hot cocoa"
@@ -179,7 +191,9 @@
 	icon_state = "coffee"
 	item_state = "coffee"
 	center_of_mass = @"{'x':15,'y':13}"
-	starting_reagents = list(/decl/material/liquid/drink/hot_coco = 30)
+
+/obj/item/chems/drinks/h_chocolate/populate_reagents()
+	reagents.add_reagent(/decl/material/liquid/drink/hot_coco, reagents.maximum_volume)
 
 /obj/item/chems/drinks/dry_ramen
 	name = "cup ramen"
@@ -187,8 +201,9 @@
 	desc = "Just add 10ml water, self heats! A taste that reminds you of your school years."
 	icon_state = "ramen"
 	center_of_mass = @"{'x':16,'y':11}"
-	starting_reagents = list(/decl/material/liquid/drink/dry_ramen = 30)
 
+/obj/item/chems/drinks/dry_ramen/populate_reagents()
+	reagents.add_reagent(/decl/material/liquid/drink/dry_ramen, reagents.maximum_volume)
 
 /obj/item/chems/drinks/sillycup
 	name = "paper cup"
@@ -280,18 +295,26 @@
 	filling_states = @"[100]"
 	base_name = "cup"
 	base_icon = "cup"
+	volume = 30
 
 /obj/item/chems/drinks/tea/black
 	name = "cup of black tea"
 	desc = "A tall plastic cup of hot black tea."
-	starting_reagents = list(/decl/material/liquid/drink/tea/black = 30)
+
+/obj/item/chems/drinks/tea/black/populate_reagents()
+	reagents.add_reagent(/decl/material/liquid/drink/tea/black, reagents.maximum_volume)
 
 /obj/item/chems/drinks/tea/green
 	name = "cup of green tea"
 	desc = "A tall plastic cup of hot green tea."
-	starting_reagents = list(/decl/material/liquid/drink/tea/green = 30)
+
+/obj/item/chems/drinks/tea/green/populate_reagents()
+	reagents.add_reagent(/decl/material/liquid/drink/tea/green, reagents.maximum_volume)
 
 /obj/item/chems/drinks/tea/chai
 	name = "cup of chai tea"
 	desc = "A tall plastic cup of hot chai tea."
-	starting_reagents = list(/decl/material/liquid/drink/tea/chai = 30)
+
+/obj/item/chems/drinks/tea/chai/populate_reagents()
+	reagents.add_reagent(/decl/material/liquid/drink/tea/chai, reagents.maximum_volume)
+

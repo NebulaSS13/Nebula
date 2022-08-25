@@ -8,4 +8,7 @@
 	nutriment_desc = list("a chorus of flavor" = 6)
 	nutriment_amt = 6
 	bitesize = 2
-	starting_reagents = list(/decl/material/solid/metal/radium = 2)
+
+/obj/item/chems/food/dionaroast/populate_reagents()
+	reagents.add_reagent(/decl/material/solid/metal/radium, 2)
+	. = ..()

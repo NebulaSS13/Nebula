@@ -12,7 +12,7 @@
 
 /obj/item/chems/chem_disp_cartridge/initialize_reagents(populate = TRUE)
 	. = ..()
-	if(populate && reagents?.primary_reagent)
+	if(populate && reagents.primary_reagent)
 		setLabel(reagents.get_primary_reagent_name())
 
 /obj/item/chems/chem_disp_cartridge/examine(mob/user)

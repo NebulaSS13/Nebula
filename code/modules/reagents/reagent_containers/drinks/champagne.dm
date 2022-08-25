@@ -27,7 +27,9 @@
 	atom_flags = 0 //starts closed
 
 	var/opening
-	starting_reagents = list(/decl/material/liquid/ethanol/champagne)
+
+/obj/item/chems/drinks/bottle/champagne/populate_reagents()
+	reagents.add_reagent(/decl/material/liquid/ethanol/champagne, reagents.maximum_volume)
 
 /obj/item/chems/drinks/bottle/champagne/open(mob/user)
 	if(ATOM_IS_OPEN_CONTAINER(src))

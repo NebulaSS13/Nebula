@@ -1,7 +1,8 @@
-/obj/item/chems/chem_disp_cartridge/foaming_agent
-	starting_reagents = /decl/material/liquid/foaming_agent
-/obj/item/chems/chem_disp_cartridge/polyacid
-	starting_reagents = /decl/material/liquid/acid/polyacid
+/obj/item/chems/chem_disp_cartridge/foaming_agent/populate_reagents()
+	reagents.add_reagent(/decl/material/liquid/foaming_agent, reagents.maximum_volume)
+
+/obj/item/chems/chem_disp_cartridge/polyacid/populate_reagents()
+	reagents.add_reagent(/decl/material/liquid/acid/polyacid, reagents.maximum_volume)
 
 /obj/structure/sealant_injector
 	name = "sealant tank injector"

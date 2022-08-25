@@ -5,7 +5,10 @@
 	filling_color = "#ffdefe"
 	center_of_mass = @"{'x':16,'y':13}"
 	bitesize = 3
-	starting_reagents = list(/decl/material/liquid/nutriment/protein = 4)
+
+/obj/item/chems/food/fishfingers/populate_reagents()
+	. = ..()
+	reagents.add_reagent(/decl/material/liquid/nutriment/protein, 4)
 
 /obj/item/chems/food/cubancarp
 	name = "\improper Cuban Carp"
@@ -17,10 +20,11 @@
 	nutriment_desc = list("toasted bread" = 3)
 	nutriment_amt = 3
 	bitesize = 3
-	starting_reagents = list(
-		/decl/material/liquid/nutriment/protein = 3,
-		/decl/material/liquid/capsaicin         = 3,
-	)
+
+/obj/item/chems/food/cubancarp/populate_reagents()
+	. = ..()
+	reagents.add_reagent(/decl/material/liquid/nutriment/protein, 3)
+	reagents.add_reagent(/decl/material/liquid/capsaicin,         3)
 
 /obj/item/chems/food/fishandchips
 	name = "fish and chips"
@@ -31,4 +35,7 @@
 	nutriment_desc = list("salt" = 1, "chips" = 2, "fish" = 2)
 	nutriment_amt = 3
 	bitesize = 3
-	starting_reagents = list(/decl/material/liquid/nutriment/protein = 3)
+
+/obj/item/chems/food/fishandchips/populate_reagents()
+	. = ..()
+	reagents.add_reagent(/decl/material/liquid/nutriment/protein, 3)

@@ -168,7 +168,10 @@
 			continue
 		var/list/reagent = list()
 		var/datum/extension/labels/lab = get_extension(canister, /datum/extension/labels)
-		reagent["name"] =   (lab?.labels?[1]) || "unlabeled"
+		if(lab && (length(lab.labels) > 0))
+			reagent	["name"] = (lab.labels[1])
+		else
+			reagent	["name"] = "unlabeled"
 		reagent["id"] =     "\ref[canister]"
 		reagent["amount"] = canister.reagents.total_volume
 		loaded_reagents += list(reagent)

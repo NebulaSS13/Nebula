@@ -236,6 +236,18 @@
  * populate: If set to true, we expect map load/admin spawned reagents to be set.
  */
 /obj/proc/initialize_reagents(var/populate = TRUE)
+	SHOULD_CALL_PARENT(TRUE)
+	if(reagents.total_volume > 0)
+		log_warning("\The [src] possibly is initializing its reagents more than once!")
+	if(populate)
+		populate_reagents()
+
+/**
+ * Actually populates the reagents.
+ * Can be easily nulled out or fully overriden without having to rewrite the complete reagent init logic.
+ * An alternative to using a list for defining our starting reagents since apparently overriding the value of a list creates an (init) proc each time.
+ */
+/obj/proc/populate_reagents()
 	return
 
 ////////////////////////////////////////////////////////////////

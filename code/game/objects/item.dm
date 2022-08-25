@@ -951,7 +951,7 @@ modules/mob/living/carbon/human/life.dm if you die, you will be zoomed out.
 		if(istype(source, /obj/structure/reagent_dispensers/watertank))
 			source.reagents.trans_to_obj(src, free_space)
 		else
-			reagents.add_reagent(/decl/material/liquid/water, free_space)
+			reagents.add_reagent(/decl/material/liquid/water, free_space) //#FIXME: Maybe it would be better not to create water from a type check like that in the base item code? Idk.
 		if(reagents && reagents.total_volume >= reagents.maximum_volume)
 			to_chat(user, SPAN_NOTICE("You fill \the [src] with [free_space] unit\s from \the [source]."))
 			reagents.touch(src)

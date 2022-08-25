@@ -9,16 +9,15 @@
 	bitesize = 3
 	filling_color = "#336b42"
 
-/obj/item/chems/food/old/initialize_reagents(populate = TRUE)
+/obj/item/chems/food/old/populate_reagents()
 	. = ..()
-	if(populate)
-		reagents.add_reagent(pick(list(
-					/decl/material/liquid/fuel,
-					/decl/material/liquid/amatoxin,
-					/decl/material/liquid/carpotoxin,
-					/decl/material/liquid/zombiepowder,
-					/decl/material/liquid/presyncopics,
-					/decl/material/liquid/psychotropics)), 5)
+	reagents.add_reagent(pick(
+				/decl/material/liquid/fuel,
+				/decl/material/liquid/amatoxin,
+				/decl/material/liquid/carpotoxin,
+				/decl/material/liquid/zombiepowder,
+				/decl/material/liquid/presyncopics,
+				/decl/material/liquid/psychotropics), 5)
 
 /obj/item/chems/food/old/pizza
 	name = "pizza"
