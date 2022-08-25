@@ -42,15 +42,13 @@
 /obj/item/stack/material/get_material()
 	return material
 
-/obj/item/stack/material/update_matter()
-	create_matter()
-
 /obj/item/stack/material/create_matter()
 	matter = list()
 	if(istype(material))
-		matter[material.type] = MATTER_AMOUNT_PRIMARY * get_matter_amount_modifier()
+		matter[material.type] = MATTER_AMOUNT_PRIMARY * matter_multiplier
 	if(istype(reinf_material))
-		matter[reinf_material.type] = MATTER_AMOUNT_REINFORCEMENT * get_matter_amount_modifier()
+		matter[reinf_material.type] = MATTER_AMOUNT_REINFORCEMENT * matter_multiplier
+	..()
 
 /obj/item/stack/material/proc/update_strings()
 	if(amount>1)
@@ -219,7 +217,7 @@
 	stack_merge_type = /obj/item/stack/material/pane
 
 /obj/item/stack/material/pane/update_state_from_amount()
-	if(reinf_material) 
+	if(reinf_material)
 		icon_state = "sheet-glass-reinf"
 		base_state = icon_state
 		plural_icon_state = "sheet-glass-reinf-mult"
