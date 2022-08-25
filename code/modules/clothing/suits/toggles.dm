@@ -1,21 +1,18 @@
 ///Hoods for winter coats and chaplain hoodie etc
 
 /obj/item/clothing/suit/storage/hooded
-	var/obj/item/clothing/head/winterhood/hood
-	var/hoodtype = null //so the chaplain hoodie or other hoodies can override this
+	var/obj/item/clothing/head/hood
 	var/suittoggled = 0
 
 /obj/item/clothing/suit/storage/hooded/Initialize()
 	. = ..()
-	MakeHood()
+	if(ispath(hood))
+		hood = new hood(src)
 
 /obj/item/clothing/suit/storage/hooded/Destroy()
-	QDEL_NULL(hood)
+	if(istype(hood))
+		QDEL_NULL(hood)
 	return ..()
-
-/obj/item/clothing/suit/storage/hooded/proc/MakeHood()
-	if(!hood)
-		hood = new hoodtype(src)
 
 /obj/item/clothing/suit/storage/hooded/ui_action_click()
 	ToggleHood()
@@ -80,7 +77,7 @@
 		bio = ARMOR_BIO_MINOR
 		)
 	action_button_name = "Toggle Winter Hood"
-	hoodtype = /obj/item/clothing/head/winterhood
+	hood = /obj/item/clothing/head/winterhood
 	allowed = list (/obj/item/pen, /obj/item/paper, /obj/item/flashlight,/obj/item/storage/fancy/cigarettes, /obj/item/storage/box/matches, /obj/item/chems/drinks/flask)
 	siemens_coefficient = 0.6
 	protects_against_weather = TRUE
@@ -91,7 +88,7 @@
 	icon = 'icons/clothing/head/hood_winter.dmi'
 	body_parts_covered = SLOT_HEAD
 	cold_protection = SLOT_HEAD
-	flags_inv = HIDEEARS | BLOCKHAIR
+	flags_inv = HIDEEARS | BLOCKHEADHAIR
 	min_cold_protection_temperature = ARMOR_MIN_COLD_PROTECTION_TEMPERATURE
 	protects_against_weather = TRUE
 
@@ -164,7 +161,7 @@
 	min_cold_protection_temperature = T0C - 20
 	cold_protection = SLOT_UPPER_BODY|SLOT_LOWER_BODY|SLOT_ARMS
 	action_button_name = "Toggle Hood"
-	hoodtype = /obj/item/clothing/head/hoodiehood
+	hood = /obj/item/clothing/head/hoodiehood
 
 /obj/item/clothing/head/hoodiehood
 	name = "hoodie hood"
@@ -173,4 +170,4 @@
 	body_parts_covered = SLOT_HEAD
 	min_cold_protection_temperature = T0C - 20
 	cold_protection = SLOT_HEAD
-	flags_inv = HIDEEARS | BLOCKHAIR
+	flags_inv = HIDEEARS | BLOCKHEADHAIR
