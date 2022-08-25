@@ -30,9 +30,9 @@ MANTIDIFY(/obj/machinery/alarm, "mantid thermostat", "atmospherics")
 	build_machine_type = /obj/machinery/alarm/ascent
 
 /obj/item/frame/air_alarm/ascent/kit
-	fully_construct = TRUE
-	name = "air alarm kit"
+	name = "mantid air alarm kit"
 	desc = "An all-in-one air alarm kit, comes preassembled."
+	fully_construct = TRUE
 
 /datum/fabricator_recipe/engineering/airalarm_kit/ascent
 	path = /obj/item/frame/air_alarm/ascent/kit
