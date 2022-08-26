@@ -80,5 +80,5 @@
 	. = ..()
 	if(!.)
 		to_chat(user, SPAN_NOTICE("You flick \the [src] with \the [I]."))
-		interface_interact(user)
+		interface_interact(user) 
 		return TRUE
