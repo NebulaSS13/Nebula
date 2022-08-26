@@ -443,6 +443,9 @@
 /datum/fabricator_recipe/imprinter/circuit/jukebox
 	path = /obj/item/stock_parts/circuitboard/jukebox
 
+/datum/fabricator_recipe/imprinter/circuit/paper_shredder
+	path = /obj/item/stock_parts/circuitboard/paper_shredder
+
 /datum/fabricator_recipe/imprinter/circuit/forensic
 	path = /obj/item/stock_parts/circuitboard/forensic
 

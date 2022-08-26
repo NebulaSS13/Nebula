@@ -429,6 +429,10 @@ INITIALIZE_IMMEDIATE(/obj/effect/gas_overlay)
 	if(shard_type)
 		return create_object(target, 1, /obj/item/shard)
 
+/**Places downa as many shards as needed for the given amount of matter units. Returns a list of all the cuttings. */
+/decl/material/proc/place_cuttings(var/turf/target, var/matter_units)
+	//STUB: Waiting on papwerork PR
+
 // Used by walls and weapons to determine if they break or not.
 /decl/material/proc/is_brittle()
 	return !!(flags & MAT_FLAG_BRITTLE)
