@@ -67,7 +67,7 @@
 	can_write = FALSE
 	has_updates = FALSE
 
-/decl/public_access/public_variable/holosign_on/access_var(obj/machinery/igniter/igniter)
+/decl/public_access/public_variable/igniter_on/access_var(obj/machinery/igniter/igniter)
 	return igniter.on
 
 /decl/public_access/public_method/igniter_toggle
