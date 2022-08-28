@@ -1,0 +1,10 @@
+author: PsyCommando
+delete-after: true
+changes:
+  - tweak: Alarms have a built-in unbreakable tesla-link and don't need a console
+      screen and keyboard part anymore to be usable.
+  - tweak: Pipe meters have unbreakable built-in components now.
+  - tweak: Buttons have unbreakable tesla-link and transmitters/receiver in them now.
+  - tweak: Light switches have unbreakable tesla-links.
+  - tweak: Lights have unbreakable tesla-links in them now.
+  - tweak: Airlock sensors, and airlock access buttons have unbreakable parts now.
