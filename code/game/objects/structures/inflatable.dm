@@ -118,12 +118,18 @@
 	add_fingerprint(user)
 
 /obj/structure/inflatable/can_repair_with(obj/item/tool)
-	. = istype(tool, /obj/item/ducttape) && (health < maxhealth)
+	. = istype(tool, /obj/item/stack/tape_roll/duct_tape) && (health < maxhealth)
 
 /obj/structure/inflatable/handle_repair(mob/user, obj/item/tool)
+	var/obj/item/stack/tape_roll/duct_tape/T = tool
 	if(taped)
 		to_chat(user, SPAN_WARNING("You cannot tape up \the [src] any further."))
 		return
+	if(T.can_use(2))
+		to_chat(user, SPAN_WARNING("You need 2 [T.plural_name] to repair \the [src]."))
+		return 
+	T.use(2)
+	playsound(src, 'sound/effects/tape.ogg', 50, TRUE)
 	last_damage_message = null
 	to_chat(user, SPAN_NOTICE("You tape up some of the damage to \the [src]."))
 	health = Clamp(health + 3, 0, maxhealth)

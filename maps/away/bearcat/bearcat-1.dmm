@@ -1091,7 +1091,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 4
 	},
-/obj/item/taperoll/engineering/applied,
+/obj/structure/tape_barricade/engineering,
 /obj/structure/cable{
 	icon_state = "4-8"
 	},
@@ -1543,7 +1543,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 4
 	},
-/obj/item/taperoll/engineering/applied,
+/obj/structure/tape_barricade/engineering,
 /obj/structure/cable{
 	icon_state = "4-8"
 	},
@@ -1938,7 +1938,7 @@
 	pixel_y = 32;
 	req_access = newlist()
 	},
-/obj/item/ducttape,
+/obj/item/stack/tape_roll/duct_tape,
 /obj/machinery/light_switch{
 	pixel_x = -24
 	},
@@ -2391,7 +2391,7 @@
 /obj/effect/floor_decal/corner/yellow{
 	dir = 9
 	},
-/obj/item/taperoll/engineering,
+/obj/item/stack/tape_roll/barricade_tape/engineering,
 /turf/simulated/floor/tiled/usedup,
 /area/ship/scrap/maintenance/storage)
 "eR" = (
@@ -2406,7 +2406,7 @@
 /turf/simulated/floor/tiled/usedup,
 /area/ship/scrap/maintenance/storage)
 "eS" = (
-/obj/item/ducttape,
+/obj/item/stack/tape_roll/duct_tape,
 /obj/item/stack/material/reinforced/mapped/plasteel/fifty,
 /obj/item/stack/material/ingot/mapped/copper/fifty,
 /obj/item/stack/material/rods/fifty,
@@ -2423,7 +2423,7 @@
 "eT" = (
 /obj/item/clothing/head/welding,
 /obj/item/radio,
-/obj/item/ducttape,
+/obj/item/stack/tape_roll/duct_tape,
 /obj/structure/table,
 /obj/item/radio/intercom{
 	pixel_y = -32

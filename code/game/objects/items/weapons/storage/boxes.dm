@@ -511,18 +511,18 @@
 /obj/item/storage/box/taperolls
 	name = "box of spare taperolls"
 	desc = "A box full of mixed barricade tapes."
-	startswith = list(/obj/item/taperoll/police,
-						/obj/item/taperoll/engineering,
-						/obj/item/taperoll/atmos,
-						/obj/item/taperoll/research,
-						/obj/item/taperoll/medical,
-						/obj/item/taperoll/bureaucracy
+	startswith = list(  /obj/item/stack/tape_roll/barricade_tape/police,
+						/obj/item/stack/tape_roll/barricade_tape/engineering,
+						/obj/item/stack/tape_roll/barricade_tape/atmos,
+						/obj/item/stack/tape_roll/barricade_tape/research,
+						/obj/item/stack/tape_roll/barricade_tape/medical,
+						/obj/item/stack/tape_roll/barricade_tape/bureaucracy
 					)
 
 /obj/item/storage/box/bogrolls
 	name = "box of spare bogrolls"
 	desc = "A box full of toilet paper."
-	startswith = list(/obj/item/taperoll/bog = 6)
+	startswith = list(/obj/item/stack/tape_roll/barricade_tape/toilet = 6)
 
 /obj/item/storage/box/cola
 	name = "box of sodas"

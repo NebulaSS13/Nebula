@@ -31,7 +31,7 @@
 	new /obj/item/clipboard(src)
 	new /obj/item/storage/belt/archaeology(src)
 	new /obj/item/storage/excavation(src)
-	new /obj/item/taperoll/research(src)
+	new /obj/item/stack/tape_roll/barricade_tape/research(src)
 
 /obj/structure/closet/excavation
 	name = "excavation tools"
@@ -53,7 +53,7 @@
 	new /obj/item/pickaxe/xeno/hand(src)
 	new /obj/item/storage/bag/fossils(src)
 	new /obj/item/hand_labeler(src)
-	new /obj/item/taperoll/research(src)
+	new /obj/item/stack/tape_roll/barricade_tape/research(src)
 
 /obj/machinery/alarm/isolation
 	req_access = list(list(access_research, access_atmospherics, access_engine_equip))

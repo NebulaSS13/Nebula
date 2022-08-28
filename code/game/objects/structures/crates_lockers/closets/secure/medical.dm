@@ -48,7 +48,7 @@
 		/obj/item/clothing/suit/storage/toggle/fr_jacket,
 		/obj/item/clothing/shoes/color/white,
 		/obj/item/radio/headset/headset_med,
-		/obj/item/taperoll/medical,
+		/obj/item/stack/tape_roll/barricade_tape/medical,
 		/obj/item/storage/belt/medical/emt,
 		RANDOM_SCRUBS,
 		RANDOM_SCRUBS

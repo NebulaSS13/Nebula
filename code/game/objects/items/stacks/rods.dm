@@ -70,14 +70,21 @@
 			use(2)
 		return
 
-	if (istype(W, /obj/item/ducttape))
+	if (istype(W, /obj/item/stack/tape_roll/duct_tape))
+		var/obj/item/stack/tape_roll/duct_tape/T = W
+		if(!T.can_use(4))
+			to_chat(user, SPAN_WARNING("You need 4 [T.plural_name] to make a splint!"))
+			return
+		T.use(4)
+
 		var/obj/item/stack/medical/splint/ghetto/new_splint = new(user.loc)
 		new_splint.dropInto(loc)
 		new_splint.add_fingerprint(user)
-
-		user.visible_message("<span class='notice'>\The [user] constructs \a [new_splint] out of a [singular_name].</span>", \
-				"<span class='notice'>You use make \a [new_splint] out of a [singular_name].</span>")
+		playsound(user, 'sound/effects/tape.ogg', 50, TRUE)
+		user.visible_message(SPAN_NOTICE("\The [user] constructs \a [new_splint] out of a [singular_name]."), \
+				SPAN_NOTICE("You use make \a [new_splint] out of a [singular_name]."))
 		src.use(1)
+
 		return
 
 	..()

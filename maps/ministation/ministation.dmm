@@ -16554,7 +16554,7 @@
 	},
 /obj/structure/table/steel,
 /obj/item/wrench,
-/obj/item/taperoll/atmos,
+/obj/item/stack/tape_roll/barricade_tape/atmos,
 /turf/simulated/floor,
 /area/ministation/atmospherics)
 "XY" = (

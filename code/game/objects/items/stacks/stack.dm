@@ -258,9 +258,7 @@
 
 //creates a new stack with the specified amount
 /obj/item/stack/proc/split(var/tamount, var/force=FALSE)
-	if (!amount)
-		return null
-	if(uses_charge && !force)
+	if (!can_split() || !amount || (uses_charge && !force))
 		return null
 
 	var/transfer = max(min(tamount, src.amount, initial(max_amount)), 0)
@@ -304,6 +302,8 @@
 	return max_amount
 
 /obj/item/stack/proc/add_to_stacks(mob/user, check_hands)
+	if(!can_merge())
+		return
 	var/list/stacks = list()
 	if(check_hands && user)
 		for(var/obj/item/stack/item in user.get_held_items())
@@ -325,7 +325,7 @@
 		. = CEILING(. * amount / max_amount)
 
 /obj/item/stack/attack_hand(mob/user)
-	if(user.is_holding_offhand(src))
+	if(user.is_holding_offhand(src) && can_split())
 		var/N = input("How many stacks of [src] would you like to split off?", "Split stacks", 1) as num|null
 		if(N)
 			var/obj/item/stack/F = src.split(N)
@@ -336,19 +336,29 @@
 				spawn(0)
 					if (src && usr.machine==src)
 						src.interact(usr)
-	else
-		..()
-	return
+				return TRUE
+		return FALSE
+	return ..()
+
 
 /obj/item/stack/attackby(obj/item/W, mob/user)
-	if (istype(W, /obj/item/stack))
+	if (istype(W, /obj/item/stack) && can_merge())
 		var/obj/item/stack/S = W
-		src.transfer_to(S)
+		. = src.transfer_to(S)
 
 		spawn(0) //give the stacks a chance to delete themselves if necessary
 			if (S && usr.machine==S)
 				S.interact(usr)
 			if (src && usr.machine==src)
 				src.interact(usr)
-	else
-		return ..()
+		return
+
+	return ..()
+
+/**Whether a stack has the capability to be split. */
+/obj/item/stack/proc/can_split()
+	return !(uses_charge && !force) //#TODO: The !force was a hacky way to tell if its a borg or rigsuit module. Probably would be good to find a better way..
+
+/**Whether a stack type has the capability to be merged. */
+/obj/item/stack/proc/can_merge()
+	return !(uses_charge && !force)
