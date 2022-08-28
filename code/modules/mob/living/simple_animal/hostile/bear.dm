@@ -17,6 +17,7 @@
 	natural_weapon = /obj/item/natural_weapon/claws/strong
 	can_escape = TRUE
 	faction = "russian"
+	base_animal_type = /mob/living/simple_animal/hostile/bear
 
 	//Space bears aren't affected by atmos.
 	min_gas = null

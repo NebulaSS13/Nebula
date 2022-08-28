@@ -31,6 +31,14 @@
 	var/list/speech_sounds              // List of sounds to randomly play.
 	var/allow_repeated_syllables = TRUE // Control for handling some of the random lang/name gen.
 
+/decl/language/proc/can_be_understood_by(var/mob/living/speaker, var/mob/living/listener)
+	if(flags & INNATE)
+		return TRUE
+	for(var/decl/language/L in listener.languages)
+		if(name == L.name)
+			return TRUE
+	return FALSE
+
 /decl/language/proc/get_spoken_sound()
 	if(speech_sounds)
 		var/list/result[2]
@@ -61,7 +69,7 @@
 		LAZYADD(., capitalize(lowertext(new_name)))
 	. = "[trim(jointext(., " "))]"
 
-/decl/language/proc/scramble(var/input, var/list/known_languages)
+/decl/language/proc/scramble(mob/living/speaker, input, list/known_languages)
 
 	var/understand_chance = 0
 	for(var/decl/language/L in known_languages)
@@ -125,7 +133,7 @@
 	scramble_cache[input] = scrambled_text
 	if(scramble_cache.len > SCRAMBLE_CACHE_LEN)
 		scramble_cache.Cut(1, scramble_cache.len-SCRAMBLE_CACHE_LEN-1)
-	
+
 	return scrambled_text
 
 /decl/language/proc/format_message(message, verb)
@@ -145,7 +153,7 @@
 	log_say("[key_name(speaker)] : ([name]) [message]")
 
 	if(!speaker_mask) speaker_mask = speaker.name
-	message = format_message(message, get_spoken_verb(message))
+	message = format_message(message, get_spoken_verb(speaker, message))
 	for(var/mob/player in global.player_list)
 		player.hear_broadcast(src, speaker, speaker_mask, message)
 
@@ -166,7 +174,7 @@
 /decl/language/proc/check_special_condition(var/mob/other)
 	return 1
 
-/decl/language/proc/get_spoken_verb(var/msg_end)
+/decl/language/proc/get_spoken_verb(mob/living/speaker, msg_end)
 	switch(msg_end)
 		if("!")
 			return exclaim_verb

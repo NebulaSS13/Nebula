@@ -311,21 +311,6 @@
 		SET_STATUS_MAX(src, STAT_WEAK, stun_duration)
 		. = TRUE
 
-/mob/living/carbon/get_default_language()
-	. = ..()
-	if(. && !can_speak(.))
-		. = null
-
-/mob/living/carbon/get_any_good_language(set_default=FALSE)
-	. = ..()
-	if(!.)
-		for (var/decl/language/L in languages)
-			if(can_speak(L))
-				. = L
-				if (set_default)
-					set_default_language(.)
-				break
-
 /mob/living/carbon/show_inv(mob/user)
 	user.set_machine(src)
 	var/obj/item/mask = get_equipped_item(slot_wear_mask_str)
@@ -523,7 +508,7 @@
 	var/safety = eyecheck()
 	if(safety >= FLASH_PROTECTION_MODERATE || flash_strength <= 0) // May be modified by human proc.
 		return FALSE
-	
+
 	flash_eyes(FLASH_PROTECTION_MODERATE - safety)
 	SET_STATUS_MAX(src, STAT_STUN, (flash_strength / 2))
 	SET_STATUS_MAX(src, STAT_BLURRY, flash_strength)

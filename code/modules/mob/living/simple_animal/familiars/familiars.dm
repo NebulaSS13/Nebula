@@ -9,6 +9,7 @@
 	max_gas = null
 	unsuitable_atmos_damage = 1
 	gene_damage = -1
+	base_animal_type = /mob/living/simple_animal/familiar
 
 	var/list/wizardy_spells = list()
 

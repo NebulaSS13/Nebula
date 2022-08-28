@@ -216,7 +216,7 @@ For the other part of the code, check silicon say.dm. Particularly robot talk.*/
 			var/ai_text = text
 			if(!master.say_understands(M, speaking))//The AI will be able to understand most mobs talking through the holopad.
 				if(speaking)
-					ai_text = speaking.scramble(text)
+					ai_text = speaking.scramble(M, text)
 				else
 					ai_text = stars(text)
 			if(isanimal(M) && !M.universal_speak)

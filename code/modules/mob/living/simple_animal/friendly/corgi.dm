@@ -16,6 +16,7 @@
 	possession_candidate = 1
 	holder_type = /obj/item/holder/corgi
 	pass_flags = PASS_FLAG_TABLE
+	base_animal_type = /mob/living/simple_animal/corgi
 
 	meat_type = /obj/item/chems/food/meat/corgi
 	meat_amount = 3
