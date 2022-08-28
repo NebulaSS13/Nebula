@@ -38,6 +38,7 @@
 
 // SS_BACKGROUND
 #define SS_PRIORITY_OBJECTS       100  // processing_objects processing.
+#define SS_PRIORITY_OVERMAP       95   // Moving objects on the overmap.
 #define SS_PRIORITY_PROCESSING    95   // Generic datum processor. Replaces objects processor.
 #define SS_PRIORITY_PLANTS        90   // Plant processing, slow ticks.
 #define SS_PRIORITY_VINES         50   // Spreading vine effects.

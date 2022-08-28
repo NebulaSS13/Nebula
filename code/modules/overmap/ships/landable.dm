@@ -26,7 +26,7 @@
 	return ..()
 
 /obj/effect/overmap/visitable/ship/landable/burn()
-	if(status != SHIP_STATUS_OVERMAP && status !=  SHIP_STATUS_ENCOUNTER) 
+	if(status != SHIP_STATUS_OVERMAP && status !=  SHIP_STATUS_ENCOUNTER)
 		return 0
 	return ..()
 
@@ -46,8 +46,8 @@
 		return FALSE // Cannot encounter a shuttle while it is landed elsewhere.
 	. = ..()
 
-/obj/effect/overmap/visitable/ship/landable/Process()
-	. = ..()
+/obj/effect/overmap/visitable/ship/landable/Process(wait, tick)
+	..()
 	var/datum/shuttle/autodock/overmap/child_shuttle = SSshuttle.shuttles[shuttle]
 	if(!child_shuttle || !istype(child_shuttle))
 		return

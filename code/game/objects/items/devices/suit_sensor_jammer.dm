@@ -164,7 +164,7 @@
 			set_method(method)
 			return TOPIC_REFRESH
 
-/obj/item/suit_sensor_jammer/Process(var/wait)
+/obj/item/suit_sensor_jammer/Process(wait, tick)
 	if(bcell)
 		// With a range of 2 and jammer cost of 3 the default (high capacity) cell will last for almost 14 minutes, give or take
 		// 10000 / (2^2 * 3 / 10) ~= 8333 ticks ~= 13.8 minutes

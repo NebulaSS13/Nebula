@@ -51,9 +51,9 @@
 	else
 		icon_state = "blob_damaged"
 
-/obj/effect/blob/Process(wait, times_fired)
+/obj/effect/blob/Process(wait, tick)
 	regen()
-	if(times_fired % attack_freq)
+	if(tick % attack_freq)
 		return
 	attempt_attack(global.alldirs)
 
