@@ -542,15 +542,9 @@
 	desc = "A remote control switch for electrochromic windows."
 	var/range = 7
 	stock_part_presets = null // This isn't a radio-enabled button; it communicates with nearby structures in view.
-	uncreated_component_parts = list(
-		/obj/item/stock_parts/power/apc/buildable
-	)
 	frame_type = /obj/item/frame/button/light_switch/windowtint
 	construct_state = /decl/machine_construction/wall_frame/panel_closed/simple
-	base_type = /obj/machinery/button/windowtint/buildable
-
-/obj/machinery/button/windowtint/buildable
-	uncreated_component_parts = null
+	base_type = /obj/machinery/button/windowtint
 
 /obj/machinery/button/windowtint/attackby(obj/item/W, mob/user)
 	if(IS_MULTITOOL(W))

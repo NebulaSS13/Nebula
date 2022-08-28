@@ -264,7 +264,7 @@
 		/decl/stock_part_preset/radio/receiver/blast_door_button = 1
 	)
 	uncreated_component_parts = list(
-		/obj/item/stock_parts/power/apc/buildable,
+		/obj/item/stock_parts/power/apc,
 		/obj/item/stock_parts/radio/transmitter/on_event/buildable,
 		/obj/item/stock_parts/radio/receiver/buildable
 	)

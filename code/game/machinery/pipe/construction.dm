@@ -154,9 +154,6 @@ Buildable meters
 	w_class = ITEM_SIZE_LARGE
 	build_type = /obj/machinery/meter
 
-/obj/item/machine_chassis/pipe_meter/base
-	build_type = /obj/machinery/meter/buildable
-
 /obj/item/machine_chassis/igniter
 	name = "igniter"
 	desc = "A device which will ignite surrounding gasses."
