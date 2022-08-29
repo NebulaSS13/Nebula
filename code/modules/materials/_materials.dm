@@ -303,6 +303,8 @@ INITIALIZE_IMMEDIATE(/obj/effect/gas_overlay)
 // Make sure we have a use name and shard icon even if they aren't explicitly set.
 /decl/material/Initialize()
 	. = ..()
+	if(!name)
+		CRASH("Unnamed material /decl tried to initialize.")
 	if(!use_name)
 		use_name = name
 	if(!liquid_name)
