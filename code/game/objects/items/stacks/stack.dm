@@ -13,6 +13,8 @@
 	gender = PLURAL
 	origin_tech = "{'materials':1}"
 
+	/// A copy of initial matter list when this atom initialized. Stack matter should always assume a single tile.
+	var/list/matter_per_piece
 	var/singular_name
 	var/plural_name
 	var/base_state
@@ -189,12 +191,16 @@
 	return 1
 
 /obj/item/stack/create_matter()
-	..()
-	initial_matter = matter?.Copy()
+	matter_per_piece = matter?.Copy() // this is used for refreshing matter amount in update_matter()
+	if(istype(material))
+		LAZYINITLIST(matter_per_piece)
+		matter_per_piece[material.type] = max(matter_per_piece[material.type], round(MATTER_AMOUNT_PRIMARY * matter_multiplier))
+	. = ..()
 
 /obj/item/stack/proc/update_matter()
-	matter = initial_matter?.Copy()
-	create_matter()
+	matter = list()
+	for(var/mat in matter_per_piece)
+		matter[mat] = (matter_per_piece[mat] * amount)
 
 /obj/item/stack/proc/use(var/used)
 	if (!can_use(used))

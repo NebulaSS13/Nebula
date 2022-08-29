@@ -589,7 +589,7 @@
 
 			// begin processing temperature
 			if(active)
-				QUEUE_TEMPERATURE_ATOMS(src)
+				queue_temperature_atoms(src)
 		if(3)
 			set_pin_data(IC_OUTPUT, 4, weakref(src))
 			push_data()

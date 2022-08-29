@@ -23,6 +23,9 @@
 	var/attack_cooldown = DEFAULT_WEAPON_COOLDOWN
 	var/melee_accuracy_bonus = 0
 
+	/// Flag for ZAS based contamination (chlorine etc)
+	var/contaminated = FALSE
+
 	var/heat_protection = 0 //flags which determine which body parts are protected from heat. Use the SLOT_HEAD, SLOT_UPPER_BODY, SLOT_LOWER_BODY, etc. flags. See setup.dm
 	var/cold_protection = 0 //flags which determine which body parts are protected from cold. Use the SLOT_HEAD, SLOT_UPPER_BODY, SLOT_LOWER_BODY, etc. flags. See setup.dm
 	var/max_heat_protection_temperature //Set this variable to determine up to which temperature (IN KELVIN) the item protects against heat damage. Keep at null to disable protection. Only protects areas set by heat_protection flags
@@ -87,6 +90,9 @@
 	var/tmp/has_inventory_icon	// do not set manually
 	var/tmp/use_single_icon
 	var/center_of_mass = @"{'x':16,'y':16}" //can be null for no exact placement behaviour
+
+/obj/item/proc/can_contaminate()
+	return !(obj_flags & ITEM_FLAG_NO_CONTAMINATION)
 
 // Foley sound callbacks
 /obj/item/proc/equipped_sound_callback()

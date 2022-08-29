@@ -80,7 +80,7 @@
 	taste_mult = 1.5
 	color = "#b31008"
 	fruit_descriptor = "spicy"
-	uid = "chem_caspaicin"
+	uid = "chem_capsaicin"
 
 	heating_point = T100C
 	heating_message = "darkens and thickens as it seperates from its water content"
@@ -131,6 +131,9 @@
 	slime_temp_adj = 15
 	value = 2
 	uid = "chem_capsaicin_condensed"
+	heating_message = null
+	heating_products = null
+	heating_point = null
 
 /decl/material/liquid/capsaicin/condensed/affect_touch(var/mob/living/M, var/removed, var/datum/reagents/holder)
 	var/eyes_covered = 0

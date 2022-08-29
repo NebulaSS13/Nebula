@@ -46,8 +46,9 @@ GLOBAL_PROTECTED_UNTYPED(game_id, null)
 		if(M.mind)
 			if(M.mind.assigned_role)
 				strings += M.mind.assigned_role
-			if(M.mind.assigned_special_role)
-				strings += M.mind.get_special_role_name()
+			var/special_role_name = M.mind.get_special_role_name()
+			if(special_role_name)
+				strings += special_role_name
 		if(ishuman(M))
 			var/mob/living/carbon/human/H = M
 			if(H.species)

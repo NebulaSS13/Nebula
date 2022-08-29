@@ -10,7 +10,7 @@
 	adult_icon =   'mods/content/xenobiology/icons/slimes/slime_adult_orange.dmi'
 	extract_icon = 'mods/content/xenobiology/icons/slimes/slime_extract_orange.dmi'
 	reaction_strings = list(
-		/decl/material/liquid/blood =        "Synthesises a small amount of caspaicin.",
+		/decl/material/liquid/blood =        "Synthesises a small amount of capsaicin.",
 		/decl/material/solid/metal/uranium = "Causes a violent conflagration after a few seconds. Run!"
 	)
 

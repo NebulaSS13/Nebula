@@ -1,5 +1,6 @@
 /obj/effect/vine/HasProximity(var/atom/movable/AM)
-	if(!is_mature() || seed.get_trait(TRAIT_SPREAD) != 2)
+	. = ..()
+	if(!. || !is_mature() || seed.get_trait(TRAIT_SPREAD) != 2)
 		return
 
 	var/mob/living/M = AM

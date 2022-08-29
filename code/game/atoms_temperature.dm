@@ -7,7 +7,7 @@
 
 /atom/movable/Entered(var/atom/movable/atom, var/atom/old_loc)
 	. = ..()
-	QUEUE_TEMPERATURE_ATOMS(atom)
+	queue_temperature_atoms(atom)
 
 /obj
 	temperature_coefficient = null
