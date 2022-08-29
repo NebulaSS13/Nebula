@@ -16,10 +16,11 @@
 <h1>item <aside>/<a href="obj/item.html">obj/item</a></aside>
         
     
-            <a href="https://github.com/NebulaSS13/Nebula/blob/9efa558438a5df77a7e3d708920fc19cc6f72afc/code/game/objects/item.dm#L1">
+            <a href="https://github.com/NebulaSS13/Nebula/blob/fa4dd200dd52111e80934b91a7b1e889e0b5c99d/code/game/objects/item.dm#L1">
         <img src="git.png" width="16" height="16" title="code&#x2F;game&#x2F;objects&#x2F;item.dm 1"/></a></h1>
 
 <table class="summary" cellspacing="0"><tr><td colspan="2"><h2>Vars</h2></td></tr>
+            <tr><th><a href="obj/item.html#var/contaminated">contaminated</a></th><td>Flag for ZAS based contamination (chlorine etc)</td></tr>
             <tr><th><a href="obj/item.html#var/drop_sound">drop_sound</a></th><td>Sound uses when dropping the item, or when its thrown.</td></tr>
             <tr><th><a href="obj/item.html#var/equip_sound">equip_sound</a></th><td>Sound used when equipping the item into a valid slot</td></tr>
             <tr><th><a href="obj/item.html#var/pickup_sound">pickup_sound</a></th><td>Sound uses when picking the item up (into your hands)</td></tr><tr><td colspan="2"><h2>Procs</h2></td></tr>
@@ -27,52 +28,58 @@
             <tr><th><a href="obj/item.html#proc/equipped">equipped</a></th><td>Equipped Handling</td></tr>
             <tr><th><a href="obj/item.html#proc/get_tool_property">get_tool_property</a></th><td>Returns the property's value for a givent archetype.</td></tr>
             <tr><th><a href="obj/item.html#proc/set_tool_property">set_tool_property</a></th><td>Set the property for the given tool archetype to the specified value.</td></tr></table>
-    <h2 id="var">Var Details</h2><h3 id="var/drop_sound"><aside class="declaration">var </aside>drop_sound
+    <h2 id="var">Var Details</h2><h3 id="var/contaminated"><aside class="declaration">var </aside>contaminated
             <aside>&ndash; </aside>
         
     
-            <a href="https://github.com/NebulaSS13/Nebula/blob/9efa558438a5df77a7e3d708920fc19cc6f72afc/code/game/objects/item.dm#L83">
-        <img src="git.png" width="16" height="16" title="code&#x2F;game&#x2F;objects&#x2F;item.dm 83"/></a></h3>
+            <a href="https://github.com/NebulaSS13/Nebula/blob/fa4dd200dd52111e80934b91a7b1e889e0b5c99d/code/game/objects/item.dm#L27">
+        <img src="git.png" width="16" height="16" title="code&#x2F;game&#x2F;objects&#x2F;item.dm 27"/></a></h3>
+        <p>Flag for ZAS based contamination (chlorine etc)</p><h3 id="var/drop_sound"><aside class="declaration">var </aside>drop_sound
+            <aside>&ndash; </aside>
+        
+    
+            <a href="https://github.com/NebulaSS13/Nebula/blob/fa4dd200dd52111e80934b91a7b1e889e0b5c99d/code/game/objects/item.dm#L86">
+        <img src="git.png" width="16" height="16" title="code&#x2F;game&#x2F;objects&#x2F;item.dm 86"/></a></h3>
         <p>Sound uses when dropping the item, or when its thrown.</p><h3 id="var/equip_sound"><aside class="declaration">var </aside>equip_sound
             <aside>&ndash; </aside>
         
     
-            <a href="https://github.com/NebulaSS13/Nebula/blob/9efa558438a5df77a7e3d708920fc19cc6f72afc/code/game/objects/item.dm#L79">
-        <img src="git.png" width="16" height="16" title="code&#x2F;game&#x2F;objects&#x2F;item.dm 79"/></a></h3>
+            <a href="https://github.com/NebulaSS13/Nebula/blob/fa4dd200dd52111e80934b91a7b1e889e0b5c99d/code/game/objects/item.dm#L82">
+        <img src="git.png" width="16" height="16" title="code&#x2F;game&#x2F;objects&#x2F;item.dm 82"/></a></h3>
         <p>Sound used when equipping the item into a valid slot</p><h3 id="var/pickup_sound"><aside class="declaration">var </aside>pickup_sound
             <aside>&ndash; </aside>
         
     
-            <a href="https://github.com/NebulaSS13/Nebula/blob/9efa558438a5df77a7e3d708920fc19cc6f72afc/code/game/objects/item.dm#L81">
-        <img src="git.png" width="16" height="16" title="code&#x2F;game&#x2F;objects&#x2F;item.dm 81"/></a></h3>
+            <a href="https://github.com/NebulaSS13/Nebula/blob/fa4dd200dd52111e80934b91a7b1e889e0b5c99d/code/game/objects/item.dm#L84">
+        <img src="git.png" width="16" height="16" title="code&#x2F;game&#x2F;objects&#x2F;item.dm 84"/></a></h3>
         <p>Sound uses when picking the item up (into your hands)</p><h2 id="proc">Proc Details</h2><h3 id="proc/dropped"><aside class="declaration">proc </aside>dropped<aside>(/<a href="mob.html">mob</a>/user) 
         
     
-            <a href="https://github.com/NebulaSS13/Nebula/blob/9efa558438a5df77a7e3d708920fc19cc6f72afc/code/datums/observation/unequipped.dm#L31">
+            <a href="https://github.com/NebulaSS13/Nebula/blob/fa4dd200dd52111e80934b91a7b1e889e0b5c99d/code/datums/observation/unequipped.dm#L31">
         <img src="git.png" width="16" height="16" title="code&#x2F;datums&#x2F;observation&#x2F;unequipped.dm 31"/></a></aside>
         </h3>
         <p>Unequipped Handling</p><h3 id="proc/equipped"><aside class="declaration">proc </aside>equipped<aside>(/<a href="mob.html">mob</a>/user, slot) 
         
     
-            <a href="https://github.com/NebulaSS13/Nebula/blob/9efa558438a5df77a7e3d708920fc19cc6f72afc/code/datums/observation/equipped.dm#L33">
+            <a href="https://github.com/NebulaSS13/Nebula/blob/fa4dd200dd52111e80934b91a7b1e889e0b5c99d/code/datums/observation/equipped.dm#L33">
         <img src="git.png" width="16" height="16" title="code&#x2F;datums&#x2F;observation&#x2F;equipped.dm 33"/></a></aside>
         </h3>
         <p>Equipped Handling</p><h3 id="proc/get_tool_property"><aside class="declaration">proc </aside>get_tool_property<aside>(archetype, property) 
         
     
-            <a href="https://github.com/NebulaSS13/Nebula/blob/9efa558438a5df77a7e3d708920fc19cc6f72afc/code/modules/tools/tool_item.dm#L10">
+            <a href="https://github.com/NebulaSS13/Nebula/blob/fa4dd200dd52111e80934b91a7b1e889e0b5c99d/code/modules/tools/tool_item.dm#L10">
         <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;tools&#x2F;tool_item.dm 10"/></a></aside>
         </h3>
         <p>Returns the property's value for a givent archetype.</p><h3 id="proc/set_tool_property"><aside class="declaration">proc </aside>set_tool_property<aside>(archetype, property, value) 
         
     
-            <a href="https://github.com/NebulaSS13/Nebula/blob/9efa558438a5df77a7e3d708920fc19cc6f72afc/code/modules/tools/tool_item.dm#L15">
+            <a href="https://github.com/NebulaSS13/Nebula/blob/fa4dd200dd52111e80934b91a7b1e889e0b5c99d/code/modules/tools/tool_item.dm#L15">
         <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;tools&#x2F;tool_item.dm 15"/></a></aside>
         </h3>
         <p>Set the property for the given tool archetype to the specified value.</p></main>
 <footer>
     nebula.dme
-    <a href="https://github.com/NebulaSS13/Nebula/tree/9efa558438a5df77a7e3d708920fc19cc6f72afc">9efa558</a>
+    <a href="https://github.com/NebulaSS13/Nebula/tree/fa4dd200dd52111e80934b91a7b1e889e0b5c99d">fa4dd20</a>
         (dev) &mdash; <a href="https://github.com/SpaceManiac/SpacemanDMM/blob/master/src/dmdoc/README.md">dmdoc 1.4.1</a></footer>
 </body>
 </html>
