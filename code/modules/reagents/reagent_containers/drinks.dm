@@ -102,19 +102,11 @@
 /obj/item/chems/drinks/get_base_name()
 	. = base_name
 
-/obj/item/chems/drinks/on_reagent_change()
-	. = ..()
-	var/decl/material/R = reagents.get_primary_reagent_decl()
-	desc = R?.glass_desc || initial(desc)
-
 /obj/item/chems/drinks/on_update_icon()
 	. = ..()
 	if(LAZYLEN(reagents.reagent_volumes))
 		if(filling_states)
 			add_overlay(overlay_image(icon, "[base_icon][get_filling_state()]", reagents.get_color()))
-	else
-		SetName(initial(name))
-		desc = initial(desc)
 
 
 ////////////////////////////////////////////////////////////////////////////////

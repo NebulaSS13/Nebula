@@ -687,6 +687,19 @@ INITIALIZE_IMMEDIATE(/obj/effect/gas_overlay)
 	if(prop.reagents.has_reagent(/decl/material/solid/ice))
 		. = "iced [.]"
 
+/decl/material/proc/get_presentation_desc(var/obj/item/prop)
+	. = glass_desc
+	if(prop?.reagents?.total_volume)
+		. = build_presentation_desc_from_reagents(prop, .)
+
+/decl/material/proc/build_presentation_desc_from_reagents(var/obj/item/prop, var/supplied)
+	. = supplied
+
+	if(cocktail_ingredient)
+		for(var/decl/cocktail/cocktail in SSmaterials.get_cocktails_by_primary_ingredient(type))
+			if(cocktail.matches(prop))
+				return cocktail.get_presentation_desc(prop)
+
 /decl/material/proc/neutron_interact(var/neutron_energy, var/total_interacted_units, var/total_units)
 	. = list() // Returns associative list of interaction -> interacted units
 	if(!length(neutron_interactions))

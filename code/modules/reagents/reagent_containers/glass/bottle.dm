@@ -38,7 +38,7 @@
 /obj/item/chems/glass/bottle/on_update_icon()
 	..()
 	cut_overlays()
-	
+
 	if(reagents?.total_volume)
 		var/percent = round(reagents.total_volume / volume * 100, 25)
 		add_overlay(mutable_appearance(icon, "[icon_state]_filling_[percent]", reagents.get_color()))
@@ -57,7 +57,7 @@
 
 	if (!ATOM_IS_OPEN_CONTAINER(src))
 		add_overlay(mutable_appearance(icon, "[icon_state]_lid", lid_color))
-	
+
 	compile_overlays()
 
 /obj/item/chems/glass/bottle/Initialize()
@@ -68,8 +68,7 @@
 		if(autolabel && !label_text) // don't override preset labels
 			var/decl/material/R = GET_DECL(initial_reagents[1])
 			label_text = R.name
-	if(label_text)
-		update_name_label()
+	update_container_name()
 	update_icon()
 
 /obj/item/chems/glass/bottle/stabilizer

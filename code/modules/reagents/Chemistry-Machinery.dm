@@ -68,7 +68,7 @@
 		to_chat(user, SPAN_NOTICE("You add the pill bottle into the dispenser slot!"))
 		updateUsrDialog()
 		return TRUE
-	
+
 	return ..()
 
 /obj/machinery/chem_master/Topic(href, href_list, state)
@@ -236,7 +236,7 @@
 	if(!name)
 		name = reagents.get_primary_reagent_name()
 	P.label_text = name
-	P.update_name_label()
+	P.update_container_name()
 	P.lid_color = bottle_lid_color
 	P.label_color = bottle_label_color
 	reagents.trans_to_obj(P,60)

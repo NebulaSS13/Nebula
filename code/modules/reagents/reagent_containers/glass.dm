@@ -117,7 +117,7 @@
 	possible_transfer_amounts = @"[10,20,30,60,120,150,180]"
 	volume = 180
 	atom_flags = ATOM_FLAG_OPEN_CONTAINER
-	show_reagent_name = TRUE
+	presentation_flags = PRESENTATION_FLAG_NAME
 	unacidable = 0
 	material = /decl/material/solid/plastic
 	material_force_multiplier = 0.2

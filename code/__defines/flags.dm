@@ -92,3 +92,7 @@ The latter will result in a linter warning and will not work correctly.
 #define OVERMAP_SECTOR_KNOWN              BITFLAG(1) // Makes the sector show up on nav computers
 #define OVERMAP_SECTOR_IN_SPACE           BITFLAG(2) // If the sector can be accessed by drifting off the map edge
 #define OVERMAP_SECTOR_UNTARGETABLE       BITFLAG(3) // If the sector is untargetable by missiles.
+
+// Flags for reagent presentation (/obj/item/chems/var/presentation_flags)
+#define PRESENTATION_FLAG_NAME            BITFLAG(0) // This chems subtype presents the name of its main reagent/cocktail.
+#define PRESENTATION_FLAG_DESC            BITFLAG(1) // This chems subtype presents the description of its main reagent/cocktail.

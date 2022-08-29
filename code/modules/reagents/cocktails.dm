@@ -18,6 +18,12 @@
 	var/order_specific = FALSE
 	/// If TRUE, doesn't generate a codex entry.
 	var/hidden_from_codex
+	/// The icon to use for the cocktail. May be null, in which case no custom icon is used.
+	var/icon/glass_icon
+	/// The icon_state to use for the cocktail. May be null, in which case the first state in the icon is used.
+	var/glass_icon_state
+	/// A list of types (incl. subtypes) to display this cocktail's glass sprite on.
+	var/display_types = list(/obj/item/chems/drinks/glass2)
 
 	// Impurity tolerance gives a buffer for imprecise mixing, avoiding finnicky measurements
 	// and allowing for things like spiked drinks. The default is 0.3, meaning aside from ice,
@@ -44,6 +50,10 @@
 	if(prop?.reagents?.has_reagent(/decl/material/solid/ice) && !(/decl/material/solid/ice in ratios))
 		. = "[name], on the rocks"
 
+/decl/cocktail/proc/get_presentation_desc(var/obj/item/prop)
+	. = description
+	// placeholder for future functionality (vapor/fizz/etc. descriptions)
+
 /decl/cocktail/proc/mix_priority()
 	. = length(ratios)
 
@@ -65,6 +75,14 @@
 		if((REAGENT_VOLUME(prop.reagents, rtype) / effective_volume) < check_ratios[rtype])
 			return FALSE
 	return TRUE
+
+/decl/cocktail/proc/has_sprite(obj/item/prop)
+	// assumes we match, checks if we have (compatible) sprites
+	return !(isnull(glass_icon) || isnull(glass_icon_state))
+
+/decl/cocktail/proc/can_use_sprite(obj/item/prop)
+	// assume we already match; just check types
+	return is_type_in_list(prop, display_types)
 
 /decl/cocktail/grog
 	name = "grog"
