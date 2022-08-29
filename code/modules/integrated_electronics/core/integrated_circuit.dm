@@ -77,7 +77,7 @@ a creative player the means to solve many problems.  Circuits are held inside an
 	setup_io(outputs, /datum/integrated_io, outputs_default, IC_OUTPUT)
 	outputs_default = null
 	setup_io(activators, /datum/integrated_io/activate, null, IC_ACTIVATOR)
-	var/decl/material/mat = GET_DECL(/decl/material/solid/metal/steel)
+	var/decl/material/mat = GET_MATERIAL(/decl/material/solid/metal/steel)
 	if(!matter[mat])
 		matter[mat] = w_class * SScircuit.cost_multiplier // Default cost.
 	. = ..()

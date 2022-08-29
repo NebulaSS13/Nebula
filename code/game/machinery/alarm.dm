@@ -144,9 +144,9 @@
 		return // spawned in nullspace, presumably as a prototype for construction purposes.
 
 	// breathable air according to human/Life()
-	var/decl/material/gas_mat = GET_DECL(/decl/material/gas/oxygen)
+	var/decl/material/gas_mat = GET_MATERIAL(/decl/material/gas/oxygen)
 	TLV[gas_mat.gas_name] =	list(16, 19, 135, 140) // Partial pressure, kpa
-	gas_mat = GET_DECL(/decl/material/gas/carbon_dioxide)
+	gas_mat = GET_MATERIAL(/decl/material/gas/carbon_dioxide)
 	TLV[gas_mat.gas_name] = list(-1, -1, 5, 10) // Partial pressure, kpa
 	TLV["other"] =			list(-1, -1, 0.2, 0.5) // Partial pressure, kpa
 	TLV["pressure"] =		list(ONE_ATMOSPHERE*0.80,ONE_ATMOSPHERE*0.90,ONE_ATMOSPHERE*1.10,ONE_ATMOSPHERE*1.20) /* kpa */
@@ -265,9 +265,9 @@
 		other_moles += environment.gas[g] //this is only going to be used in a partial pressure calc, so we don't need to worry about group_multiplier here.
 
 	pressure_dangerlevel = get_danger_level(environment_pressure, TLV["pressure"])
-	var/decl/material/gas_mat = GET_DECL(/decl/material/gas/oxygen)
+	var/decl/material/gas_mat = GET_MATERIAL(/decl/material/gas/oxygen)
 	oxygen_dangerlevel = get_danger_level(environment.gas[/decl/material/gas/oxygen]*partial_pressure, TLV[gas_mat.gas_name])
-	gas_mat = GET_DECL(/decl/material/gas/carbon_dioxide)
+	gas_mat = GET_MATERIAL(/decl/material/gas/carbon_dioxide)
 	co2_dangerlevel = get_danger_level(environment.gas[/decl/material/gas/carbon_dioxide]*partial_pressure, TLV[gas_mat.gas_name])
 	temperature_dangerlevel = get_danger_level(environment.temperature, TLV["temperature"])
 	other_dangerlevel = get_danger_level(other_moles*partial_pressure, TLV["other"])

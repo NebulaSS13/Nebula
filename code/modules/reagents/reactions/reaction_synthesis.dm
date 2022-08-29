@@ -23,8 +23,7 @@
 	if(location)
 		created_volume = CEILING(created_volume)
 		if(created_volume > 0)
-			var/decl/material/mat = GET_DECL(/decl/material/solid/fiberglass)
-			mat.create_object(location, created_volume)
+			SSmaterials.create_object(/decl/material/solid/fiberglass, location, created_volume)
 
 /decl/chemical_reaction/synthesis/crystalization/can_happen(datum/reagents/holder)
 	. = ..() && length(holder.reagent_volumes) > 1

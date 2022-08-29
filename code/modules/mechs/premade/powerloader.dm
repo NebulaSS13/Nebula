@@ -3,16 +3,16 @@
 	desc = "An ancient, but well-liked cargo handling exosuit."
 
 /mob/living/exosuit/premade/powerloader/Initialize()
-	if(!arms) 
+	if(!arms)
 		arms = new /obj/item/mech_component/manipulators/powerloader(src)
 		arms.color = "#ffbc37"
-	if(!legs) 
+	if(!legs)
 		legs = new /obj/item/mech_component/propulsion/powerloader(src)
 		legs.color = "#ffbc37"
-	if(!head) 
+	if(!head)
 		head = new /obj/item/mech_component/sensors/powerloader(src)
 		head.color = "#ffbc37"
-	if(!body) 
+	if(!body)
 		body = new /obj/item/mech_component/chassis/powerloader(src)
 		body.color = "#ffdc37"
 
@@ -86,7 +86,7 @@
 
 /mob/living/exosuit/premade/powerloader/mechete/Initialize()
 	. = ..()
-	
+
 	if (arms)
 		arms.color = "#6c8aaf"
 	if (legs)
@@ -117,20 +117,20 @@
 
 /mob/living/exosuit/premade/firefighter/Initialize()
 	. = ..()
-	if(!arms) 
+	if(!arms)
 		arms = new /obj/item/mech_component/manipulators/powerloader(src)
 		arms.color = "#385b3c"
-	if(!legs) 
+	if(!legs)
 		legs = new /obj/item/mech_component/propulsion/powerloader(src)
 		legs.color = "#385b3c"
-	if(!head) 
+	if(!head)
 		head = new /obj/item/mech_component/sensors/powerloader(src)
 		head.color = "#385b3c"
-	if(!body) 
+	if(!body)
 		body = new /obj/item/mech_component/chassis/heavy(src)
 		body.color = "#385b3c"
 
-	material = GET_DECL(/decl/material/solid/metal/plasteel/ocp)
+	material = GET_MATERIAL(/decl/material/solid/metal/plasteel/ocp)
 
 /mob/living/exosuit/premade/firefighter/spawn_mech_equipment()
 	..()

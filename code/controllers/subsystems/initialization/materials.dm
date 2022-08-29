@@ -169,7 +169,7 @@ SUBSYSTEM_DEF(materials)
 			global.default_material_by_strata_and_z[skey] = pick(strata.base_materials)
 	return global.default_material_by_strata_and_z[skey]
 
-/datum/controller/subsystem/materials/proc/create_object(var/mat_type, var/atom/target, var/amount = 1, var/object_type, var/reinf_type)
-	var/decl/material/mat = GET_MATERIAL(mat_type)
+/datum/controller/subsystem/materials/proc/create_object(var/decl/material/mat, var/atom/target, var/amount = 1, var/object_type, var/reinf_type)
+	mat = GET_MATERIAL(mat)
 	return mat?.create_object(target, amount, object_type, reinf_type)
 

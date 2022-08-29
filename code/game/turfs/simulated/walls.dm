@@ -78,7 +78,7 @@ var/global/list/wall_fullblend_objects = list(
 
 /turf/simulated/wall/Destroy()
 	STOP_PROCESSING(SSturf, src)
-	material = GET_DECL(/decl/material/placeholder)
+	material = GET_MATERIAL(/decl/material/placeholder)
 	reinf_material = null
 	var/old_x = x
 	var/old_y = y

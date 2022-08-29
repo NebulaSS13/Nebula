@@ -37,7 +37,7 @@
 
 /turf/simulated/floor/fixed/alium/Initialize()
 	. = ..()
-	var/decl/material/A = GET_DECL(/decl/material/solid/metal/aliumium)
+	var/decl/material/A = GET_MATERIAL(/decl/material/solid/metal/aliumium)
 	if(!A)
 		return
 	color = A.color
@@ -50,7 +50,7 @@
 
 /turf/simulated/floor/fixed/alium/explosion_act(severity)
 	SHOULD_CALL_PARENT(FALSE)
-	var/decl/material/A = GET_DECL(/decl/material/solid/metal/aliumium)
+	var/decl/material/A = GET_MATERIAL(/decl/material/solid/metal/aliumium)
 	if(prob(A.explosion_resistance))
 		return
 	if(severity == 1)

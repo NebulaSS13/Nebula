@@ -106,7 +106,7 @@
 		register_area(area)
 
 /obj/machinery/door/firedoor/get_material()
-	return GET_DECL(/decl/material/solid/metal/steel)
+	return GET_MATERIAL(/decl/material/solid/metal/steel)
 
 /obj/machinery/door/firedoor/examine(mob/user, distance)
 	. = ..()
