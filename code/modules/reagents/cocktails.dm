@@ -47,7 +47,7 @@
 
 /decl/cocktail/proc/get_presentation_name(var/obj/item/prop)
 	. = name
-	if(prop?.reagents?.has_reagent(/decl/material/solid/ice) && !(/decl/material/solid/ice in ratios))
+	if(prop?.reagents?.has_reagent_of_id(/decl/material/solid/ice) && !(/decl/material/solid/ice in ratios))
 		. = "[name], on the rocks"
 
 /decl/cocktail/proc/get_presentation_desc(var/obj/item/prop)

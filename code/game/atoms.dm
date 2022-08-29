@@ -207,8 +207,7 @@
 
 /atom/proc/try_detonate_reagents(var/severity = 3)
 	if(reagents)
-		for(var/rtype in reagents.reagent_volumes)
-			var/decl/material/R = GET_DECL(rtype)
+		for(var/decl/material/R as anything in reagents.reagent_volumes)
 			R.explosion_act(src, severity)
 
 /atom/proc/explosion_act(var/severity)
@@ -263,7 +262,7 @@
 	return 1
 
 /mob/living/proc/handle_additional_vomit_reagents(var/obj/effect/decal/cleanable/vomit/vomit)
-	vomit.reagents.add_reagent(/decl/material/liquid/acid/stomach, 5)
+	vomit.reagents.add_reagent_by_id(/decl/material/liquid/acid/stomach, 5)
 
 /atom/proc/clean_blood()
 	SHOULD_CALL_PARENT(TRUE)

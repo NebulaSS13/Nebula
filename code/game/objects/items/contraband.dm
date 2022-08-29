@@ -40,8 +40,7 @@
 		reagents.add_reagent(reagent, picked_reagents[reagent])
 
 	var/list/names = new
-	for(var/reagent_type in reagents.reagent_volumes)
-		var/decl/material/R = GET_DECL(reagent_type)
+	for(var/decl/material/R as anything in reagents.reagent_volumes)
 		names += R.liquid_name
 
 	desc = "Contains [english_list(names)]."

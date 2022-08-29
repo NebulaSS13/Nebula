@@ -86,7 +86,7 @@
 	icon_state             = "fountain_g"
 	tool_interaction_flags = TOOL_INTERACTION_DECONSTRUCT
 	w_class                = ITEM_SIZE_STRUCTURE
-	material               = /decl/material/solid/stone/marble 
+	material               = /decl/material/solid/stone/marble
 	used                   = TRUE
 
 /obj/structure/fountain/mundane/Initialize(ml, _mat, _reinf_mat)
@@ -97,7 +97,7 @@
 /obj/structure/fountain/mundane/proc/setup_reagents(var/should_fill = TRUE)
 	create_reagents(500)
 	if(should_fill)
-		reagents.add_reagent(/decl/material/liquid/water, reagents.maximum_volume) //Don't give free water when building one
+		reagents.add_reagent_by_id(/decl/material/liquid/water, reagents.maximum_volume) //Don't give free water when building one
 
 /obj/structure/fountain/mundane/attack_hand(mob/user)
 	return

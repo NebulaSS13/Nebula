@@ -94,10 +94,10 @@
 		tally += (283.222 - bodytemperature) / 10 * 1.75
 
 	if(reagents)
-		if(reagents.has_reagent(/decl/material/liquid/amphetamines)) // Stimulants slows slimes down
+		if(reagents.has_reagent_of_id(/decl/material/liquid/amphetamines)) // Stimulants slows slimes down
 			tally *= 2
 
-		if(reagents.has_reagent(/decl/material/liquid/frostoil)) // Frostoil also makes them move VEEERRYYYYY slow
+		if(reagents.has_reagent_of_id(/decl/material/liquid/frostoil)) // Frostoil also makes them move VEEERRYYYYY slow
 			tally *= 5
 
 	if(health <= 0) // if damaged, the slime moves twice as slow

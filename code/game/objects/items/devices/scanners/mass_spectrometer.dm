@@ -55,13 +55,13 @@
 	var/list/blood_doses = list()
 
 	if(length(reagents.reagent_volumes) == 1)
-		var/decl/material/liquid/random/random = GET_DECL(reagents.reagent_volumes[1])
+		var/decl/material/liquid/random/random = reagents.reagent_volumes[1]
 		if(istype(random))
 			return random.get_scan_data(user)
 
 	for(var/R in reagents.reagent_volumes)
-		if(!ispath(R, /decl/material/liquid/blood))
-			return "<span class='warning'>The sample was contaminated! Please insert another sample</span>"
+		if(!istype(R, /decl/material/liquid/blood))
+			return SPAN_WARNING("The sample was contaminated! Please insert another sample.")
 		var/data = REAGENT_DATA(reagents, R)
 		if(islist(data))
 			blood_traces = data["trace_chem"]
@@ -69,17 +69,15 @@
 		break
 
 	var/list/dat = list("Trace Chemicals Found: ")
-	for(var/T in blood_traces)
-		var/decl/material/R = T
+	for(var/decl/material/R as anything in blood_traces)
 		if(details)
-			dat += "[initial(R.name)] ([blood_traces[T]] units) "
+			dat += "[R.name] ([blood_traces[R]] unit\s) "
 		else
-			dat += "[initial(R.name)] "
+			dat += "[R.name] "
 	if(details)
 		dat += "Metabolism Products of Chemicals Found:"
-		for(var/T in blood_doses)
-			var/decl/material/R = T
-			dat += "[initial(R.name)] ([blood_doses[T]] units) "
+		for(var/decl/material/R in blood_doses)
+			dat += "[R.name] ([blood_doses[R]] unit\s) "
 
 	return jointext(dat, "<br>")
 

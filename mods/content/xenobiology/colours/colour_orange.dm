@@ -15,7 +15,7 @@
 	)
 
 /decl/slime_colour/orange/handle_blood_reaction(var/datum/reagents/holder)
-	holder.add_reagent(/decl/material/liquid/capsaicin, 10)
+	holder.add_reagent_by_id(/decl/material/liquid/capsaicin, 10)
 	return TRUE
 
 /decl/slime_colour/orange/handle_uranium_reaction(var/datum/reagents/holder)

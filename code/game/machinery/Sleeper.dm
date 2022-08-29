@@ -35,7 +35,7 @@
 
 /obj/machinery/sleeper/standard/Initialize(mapload, d, populate_parts)
 	. = ..()
-	add_reagent_canister(null, new /obj/item/chems/chem_disp_cartridge/stabilizer()) 
+	add_reagent_canister(null, new /obj/item/chems/chem_disp_cartridge/stabilizer())
 	add_reagent_canister(null, new /obj/item/chems/chem_disp_cartridge/sedatives())
 	add_reagent_canister(null, new /obj/item/chems/chem_disp_cartridge/painkillers())
 	add_reagent_canister(null, new /obj/item/chems/chem_disp_cartridge/antitoxins())
@@ -55,10 +55,9 @@
 		to_chat(user, SPAN_WARNING("\The [src] cannot accept any more chemical canisters."))
 		return FALSE
 	if(!emagged)
-		for(var/rid in canister.reagents?.reagent_volumes)
-			var/decl/material/reagent = GET_DECL(rid)
+		for(var/R in canister.reagents?.reagent_volumes)
 			for(var/banned_type in banned_chem_types)
-				if(istype(reagent, banned_type))
+				if(istype(R, banned_type))
 					to_chat(user, SPAN_WARNING("Automatic safety checking indicates the present of a prohibited substance in this canister."))
 					return FALSE
 	var/mob/M = canister.loc
@@ -136,7 +135,7 @@
 		var/list/icon_scale_values = occupant.get_icon_scale_mult()
 		var/desired_scale_x = icon_scale_values[1]
 		var/desired_scale_y = icon_scale_values[2]
-		
+
 		var/matrix/M = matrix()
 		M.Scale(desired_scale_x, desired_scale_y)
 		M.Translate(0, (1.5 * world.icon_size) * (desired_scale_y - 1))

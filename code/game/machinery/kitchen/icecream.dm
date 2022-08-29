@@ -70,10 +70,10 @@
 	while(product_types.len < 8)
 		product_types.Add(5)
 	if(populate_parts)
-		reagents.add_reagent(/decl/material/liquid/drink/milk, 5)
-		reagents.add_reagent(/decl/material/liquid/nutriment/flour, 5)
-		reagents.add_reagent(/decl/material/liquid/nutriment/sugar, 5)
-		reagents.add_reagent(/decl/material/solid/ice, 5)
+		reagents.add_reagent_by_id(/decl/material/liquid/drink/milk, 5)
+		reagents.add_reagent_by_id(/decl/material/liquid/nutriment/flour, 5)
+		reagents.add_reagent_by_id(/decl/material/liquid/nutriment/sugar, 5)
+		reagents.add_reagent_by_id(/decl/material/solid/ice, 5)
 
 /obj/machinery/icecream_vat/interface_interact(mob/user)
 	interact(user)
@@ -95,9 +95,8 @@
 	dat += "<b>Chocolate cones:</b> <a href='?src=\ref[src];cone=[CONE_CHOC]'><b>Dispense</b></a> <a href='?src=\ref[src];make=[CONE_CHOC];amount=1'><b>Make</b></a> <a href='?src=\ref[src];make=[CONE_CHOC];amount=5'><b>x5</b></a> [product_types[CONE_CHOC]] cones left. (Ingredients: flour, sugar, coco powder)<br></div>"
 	dat += "<br>"
 	dat += "<b>VAT CONTENT</b><br>"
-	for(var/reagent_type in reagents?.reagent_volumes)
-		var/decl/material/R = GET_DECL(reagent_type)
-		dat += "[R.name]: [REAGENT_VOLUME(reagents, reagent_type)]"
+	for(var/decl/material/R as anything in reagents?.reagent_volumes)
+		dat += "[R.name]: [REAGENT_VOLUME(reagents, R)]"
 		dat += "<A href='?src=\ref[src];disposeI=\ref[R]'>Purge</A><BR>"
 	dat += "<a href='?src=\ref[src];refresh=1'>Refresh</a> <a href='?src=\ref[src];close=1'>Close</a>"
 
@@ -116,7 +115,7 @@
 			//	if(beaker)
 			//		beaker.reagents.trans_to(I, 10)
 				if(I.reagents.total_volume < 10)
-					I.reagents.add_reagent(/decl/material/liquid/nutriment/sugar, 10 - I.reagents.total_volume)
+					I.reagents.add_reagent_by_id(/decl/material/liquid/nutriment/sugar, 10 - I.reagents.total_volume)
 			else
 				to_chat(user, "<span class='warning'>There is not enough icecream left!</span>")
 		else
@@ -198,7 +197,7 @@
 
 /obj/item/chems/food/icecream/Initialize()
 	. = ..()
-	reagents.add_reagent(/decl/material/liquid/nutriment, 5)
+	reagents.add_reagent_by_id(/decl/material/liquid/nutriment, 5)
 	update_icon()
 
 /obj/item/chems/food/icecream/on_update_icon()

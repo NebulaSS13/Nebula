@@ -24,9 +24,8 @@
 		return list("No active chemical agents found in [O].")
 	. = list("Chemicals found in [O]:")
 	var/one_percent = O.reagents.total_volume / 100
-	for (var/rtype in O.reagents.reagent_volumes)
-		var/decl/material/R = GET_DECL(rtype)
-		. += "[R.name][details ? ": [REAGENT_VOLUME(O.reagents, rtype) / one_percent]%" : ""]"
+	for(var/decl/material/R as anything in O.reagents.reagent_volumes)
+		. += "[R.name][details ? ": [REAGENT_VOLUME(O.reagents, R) / one_percent]%" : ""]"
 
 /obj/item/scanner/reagent/adv
 	name = "advanced reagent scanner"

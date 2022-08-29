@@ -71,8 +71,8 @@
 	if(!given_dna)
 		if(dna)
 			given_dna = dna //Use existing if possible
-		else if(owner) 
-			if(owner.dna) 
+		else if(owner)
+			if(owner.dna)
 				given_dna = owner.dna //Grab our owner's dna if we don't have any, and they have
 			else
 				//The owner having no DNA can be a valid reason to keep our dna null in some cases
@@ -83,7 +83,7 @@
 			//If we have NO OWNER and given_dna, just make one up for consistency
 			given_dna = new/datum/dna()
 			given_dna.check_integrity() //Defaults everything
-	
+
 	set_dna(given_dna)
 	setup_reagents()
 	return TRUE
@@ -99,7 +99,7 @@
 
 	if(istype(material))
 		robotize(apply_material = material.type)
-	else 
+	else
 		robotize()
 	return TRUE
 
@@ -108,7 +108,7 @@
 	if(reagents)
 		return
 	create_reagents(5 * (w_class-1)**2)
-	reagents.add_reagent(/decl/material/liquid/nutriment/protein, reagents.maximum_volume)
+	reagents.add_reagent_by_id(/decl/material/liquid/nutriment/protein, reagents.maximum_volume)
 
 /obj/item/organ/proc/set_dna(var/datum/dna/new_dna)
 	QDEL_NULL(dna)
@@ -123,7 +123,7 @@
 	if(istext(specie_name))
 		species = get_species_by_key(specie_name)
 	else
-		species = specie_name 
+		species = specie_name
 	if(!species)
 		species = get_species_by_key(global.using_map.default_species)
 		PRINT_STACK_TRACE("Invalid species. Expected a valid species name as string, was: [log_info_line(specie_name)]")
@@ -177,7 +177,7 @@
 
 	if(!owner && reagents)
 		if(prob(40) && reagents.total_volume >= 0.1)
-			if(reagents.has_reagent(/decl/material/liquid/blood))
+			if(reagents.has_reagent_of_id(/decl/material/liquid/blood))
 				blood_splatter(get_turf(src), src, 1)
 			reagents.remove_any(0.1)
 		if(config.organs_decay)
@@ -205,9 +205,9 @@
 /obj/item/organ/proc/handle_ailment(var/datum/ailment/ailment)
 	if(ailment.treated_by_reagent_type)
 		for(var/datum/reagents/source in list(owner.get_injected_reagents(), owner.reagents, owner.get_ingested_reagents()))
-			for(var/reagent_type in source.reagent_volumes)
-				if(ailment.treated_by_medication(source.reagent_volumes[reagent_type]))
-					ailment.was_treated_by_medication(source, reagent_type)
+			for(var/R in source.reagent_volumes)
+				if(ailment.treated_by_medication(source.reagent_volumes[R]))
+					ailment.was_treated_by_medication(source, R)
 					return
 	if(ailment.treated_by_chem_effect && owner.has_chemical_effect(ailment.treated_by_chem_effect, ailment.treated_by_chem_effect_strength))
 		ailment.was_treated_by_chem_effect()
@@ -283,7 +283,7 @@
 						if(istype(blood_decl))
 							owner.reagents.add_reagent(blood_decl.transfusion_fail_reagent, round(rand(2,4) * blood_decl.transfusion_fail_percentage))
 						else
-							owner.reagents.add_reagent(/decl/material/liquid/coagulated_blood, rand(1,2))
+							owner.reagents.add_reagent_by_id(/decl/material/liquid/coagulated_blood, rand(1,2))
 
 /obj/item/organ/proc/remove_rejuv()
 	qdel(src)
@@ -499,7 +499,7 @@ var/global/list/ailment_reference_cache = list()
 /obj/item/organ/proc/do_install(var/mob/living/carbon/human/target, var/obj/item/organ/external/affected, var/in_place = FALSE, var/update_icon = TRUE, var/detached = FALSE)
 	//Make sure to force the flag accordingly
 	set_detached(detached)
-	
+
 	owner = target
 	action_button_name = initial(action_button_name)
 	if(owner)
@@ -513,10 +513,10 @@ var/global/list/ailment_reference_cache = list()
 
 //Handles uninstalling the organ from its owner and parent limb, without triggering effects or deep updates
 //CASES:
-// 1. Before deletion to clear our references. 
+// 1. Before deletion to clear our references.
 // 2. Called through removal on surgery or dismemberement
 // 3. Called when we're changing a mob's species.
-//detach: If detach is true, we're going to set the organ to detached, and add it to the detached organs list, and remove it from processing lists. 
+//detach: If detach is true, we're going to set the organ to detached, and add it to the detached organs list, and remove it from processing lists.
 //        If its false, we just remove the organ from all lists
 /obj/item/organ/proc/do_uninstall(var/in_place = FALSE, var/detach = FALSE, var/ignore_children = FALSE, var/update_icon = TRUE)
 	action_button_name = null
@@ -526,11 +526,11 @@ var/global/list/ailment_reference_cache = list()
 		if(ailment.timer_id)
 			deltimer(ailment.timer_id)
 			ailment.timer_id = null
-	
+
 	//When we detach, we set the ORGAN_CUT_AWAY flag on, depending on whether the organ supports it or not
 	if(detach)
 		set_detached(TRUE)
-	else 
+	else
 		owner = null
 	return src
 

@@ -70,7 +70,7 @@
 /obj/item/chems/drinks/juicebox/apple/Initialize()
 	. = ..()
 	set_colors("#ff0000", "#ffff00", "#ff0000", style="stripe")
-	reagents.add_reagent(/decl/material/liquid/drink/juice/apple, 25)
+	reagents.add_reagent_by_id(/decl/material/liquid/drink/juice/apple, 25)
 
 /obj/item/chems/drinks/juicebox/orange
 	name = "orange juicebox"
@@ -79,7 +79,7 @@
 /obj/item/chems/drinks/juicebox/orange/Initialize()
 	. = ..()
 	set_colors("#ffff00", "#ff0000", "#ffff00", style="stripe")
-	reagents.add_reagent(/decl/material/liquid/drink/juice/orange, 25)
+	reagents.add_reagent_by_id(/decl/material/liquid/drink/juice/orange, 25)
 
 /obj/item/chems/drinks/juicebox/grape
 	name = "grape juicebox"
@@ -88,7 +88,7 @@
 /obj/item/chems/drinks/juicebox/grape/Initialize()
 	. = ..()
 	set_colors("#ff00ff", "#00ff00", style="stripe")
-	reagents.add_reagent(/decl/material/liquid/drink/juice/grape, 25)
+	reagents.add_reagent_by_id(/decl/material/liquid/drink/juice/grape, 25)
 
 /obj/item/chems/drinks/juicebox/random/Initialize()
 	. = ..()

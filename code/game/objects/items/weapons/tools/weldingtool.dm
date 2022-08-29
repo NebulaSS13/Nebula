@@ -97,7 +97,7 @@
 			return
 
 		status = !status
-		
+
 		if(status)
 			to_chat(user, SPAN_NOTICE("You secure the welder."))
 		else
@@ -122,7 +122,7 @@
 		if(!(src in user.get_held_items()))
 			to_chat(user, SPAN_WARNING("You must hold the welder in your hands to attach a tank."))
 			return
-		
+
 		if(!user.unEquip(W, src))
 			return
 
@@ -231,7 +231,7 @@
 		in_mob.IgniteMob()
 
 	else
-		tank.reagents.remove_reagent(/decl/material/liquid/fuel, amount)
+		tank.reagents.remove_reagent_by_id(/decl/material/liquid/fuel, amount)
 		var/turf/location = get_turf(src.loc)
 		if(location)
 			location.hotspot_expose(700, 5)
@@ -368,7 +368,7 @@
 
 /obj/item/welder_tank/Initialize()
 	create_reagents(max_fuel)
-	reagents.add_reagent(/decl/material/liquid/fuel, max_fuel)
+	reagents.add_reagent_by_id(/decl/material/liquid/fuel, max_fuel)
 	. = ..()
 
 /obj/item/welder_tank/afterattack(obj/O, mob/user, proximity)
@@ -439,5 +439,5 @@
 	var/cur_fuel = REAGENT_VOLUME(reagents, /decl/material/liquid/fuel)
 	if(cur_fuel < max_fuel)
 		var/gen_amount = ((world.time-last_gen)/25)
-		reagents.add_reagent(/decl/material/liquid/fuel, gen_amount)
+		reagents.add_reagent_by_id(/decl/material/liquid/fuel, gen_amount)
 		last_gen = world.time

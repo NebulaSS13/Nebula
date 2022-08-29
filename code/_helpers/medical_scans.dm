@@ -49,11 +49,10 @@
 	scan["reagents"] = list()
 
 	if(H.reagents?.total_volume)
-		for(var/reagent_type in H.reagents.reagent_volumes)
-			var/decl/material/R = GET_DECL(reagent_type)
+		for(var/decl/material/R as anything in H.reagents.reagent_volumes)
 			var/list/reagent  = list()
 			reagent["name"]= R.name
-			reagent["quantity"] = round(REAGENT_VOLUME(H.reagents, R.type),1)
+			reagent["quantity"] = round(REAGENT_VOLUME(H.reagents, R),1)
 			reagent["scannable"] = R.scannable
 			scan["reagents"] += list(reagent)
 
@@ -195,7 +194,7 @@
 		if(skill_level >= SKILL_ADEPT)
 			if(ratio <= 0.70)
 				dat += "<tr><td colspan='2'><span class='bad'>Patient is in Hypovolemic Shock. Transfusion highly recommended.</span></td></tr>"
-	else 
+	else
 		dat += "<tr><td><strong>Blood pressure:</strong></td><td><span class='average'>ERROR - Patient has lacks a circulatory system.</span></td></tr>"
 		dat += "<tr><td><strong>Blood volume:</strong></td><td><span class='average'>ERROR - Patient has lacks a circulatory system.</span></td></tr>"
 

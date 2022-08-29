@@ -326,7 +326,7 @@
 
 /obj/item/chems/syringe/ld50_syringe/Initialize()
 	. = ..()
-	reagents.add_reagent(/decl/material/liquid/heartstopper, 60)
+	reagents.add_reagent_by_id(/decl/material/liquid/heartstopper, 60)
 	mode = SYRINGE_INJECT
 	update_icon()
 
@@ -340,7 +340,7 @@
 
 /obj/item/chems/syringe/stabilizer/Initialize()
 	. = ..()
-	reagents.add_reagent(/decl/material/liquid/stabilizer, 15)
+	reagents.add_reagent_by_id(/decl/material/liquid/stabilizer, 15)
 	mode = SYRINGE_INJECT
 	update_icon()
 
@@ -350,7 +350,7 @@
 
 /obj/item/chems/syringe/antitoxin/Initialize()
 	. = ..()
-	reagents.add_reagent(/decl/material/liquid/antitoxins, 15)
+	reagents.add_reagent_by_id(/decl/material/liquid/antitoxins, 15)
 	mode = SYRINGE_INJECT
 	update_icon()
 
@@ -360,7 +360,7 @@
 
 /obj/item/chems/syringe/antibiotic/Initialize()
 	. = ..()
-	reagents.add_reagent(/decl/material/liquid/antibiotics, 15)
+	reagents.add_reagent_by_id(/decl/material/liquid/antibiotics, 15)
 	mode = SYRINGE_INJECT
 	update_icon()
 
@@ -370,9 +370,9 @@
 
 /obj/item/chems/syringe/drugs/Initialize()
 	. = ..()
-	reagents.add_reagent(/decl/material/liquid/psychoactives, 5)
-	reagents.add_reagent(/decl/material/liquid/hallucinogenics, 5)
-	reagents.add_reagent(/decl/material/liquid/presyncopics, 5)
+	reagents.add_reagent_by_id(/decl/material/liquid/psychoactives, 5)
+	reagents.add_reagent_by_id(/decl/material/liquid/hallucinogenics, 5)
+	reagents.add_reagent_by_id(/decl/material/liquid/presyncopics, 5)
 	mode = SYRINGE_INJECT
 	update_icon()
 
@@ -382,8 +382,8 @@
 
 /obj/item/chems/syringe/steroid/Initialize()
 	. = ..()
-	reagents.add_reagent(/decl/material/liquid/adrenaline, 5)
-	reagents.add_reagent(/decl/material/liquid/amphetamines, 10)
+	reagents.add_reagent_by_id(/decl/material/liquid/adrenaline, 5)
+	reagents.add_reagent_by_id(/decl/material/liquid/amphetamines, 10)
 
 
 // TG ports

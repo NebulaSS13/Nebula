@@ -21,11 +21,7 @@
 	var/metal_max = 25 * SHEET_MATERIAL_AMOUNT
 
 /obj/item/integrated_circuit_printer/Initialize(ml, material_key)
-	for(var/mat in loaded_materials)
-		var/decl/material/material = GET_MATERIAL(mat)
-		if(material)
-			loaded_materials[material] = loaded_materials[mat]
-		material -= mat
+	POPULATE_MATERIAL_LIST_ASSOC(loaded_materials)
 	. = ..()
 
 /obj/item/integrated_circuit_printer/proc/check_interactivity(mob/user)
@@ -156,7 +152,7 @@
 	else
 		HTML += "Materials: "
 		var/list/dat = list()
-		for(var/var/decl/material/material as anything in loaded_materials)
+		for(var/decl/material/material as anything in loaded_materials)
 			dat += "[loaded_materials[material]]/[metal_max] [material.use_name]"
 		HTML += jointext(dat, "; ")
 		HTML += ".<br><br>"

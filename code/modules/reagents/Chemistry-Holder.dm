@@ -28,15 +28,15 @@ var/global/obj/temp_reagents_holder = new
 	return my_atom
 
 /datum/reagents/proc/get_primary_reagent_name(var/codex = FALSE) // Returns the name of the reagent with the biggest volume.
-	var/decl/material/reagent = get_primary_reagent_decl()
+	var/decl/material/reagent = get_primary_reagent()
 	if(reagent)
 		if(codex && reagent.codex_name)
 			. = reagent.codex_name
 		else
 			. = reagent.name
 
-/datum/reagents/proc/get_primary_reagent_decl()
-	. = primary_reagent && GET_DECL(primary_reagent)
+/datum/reagents/proc/get_primary_reagent()
+	return primary_reagent
 
 /datum/reagents/proc/update_total() // Updates volume.
 	total_volume = 0
@@ -64,8 +64,7 @@ var/global/obj/temp_reagents_holder = new
 	var/list/eligible_reactions = list()
 
 	var/temperature = location?.temperature || T20C
-	for(var/thing in reagent_volumes)
-		var/decl/material/R = GET_DECL(thing)
+	for(var/decl/material/R as anything in reagent_volumes)
 
 		// Check if the reagent is decaying or not.
 		var/list/replace_self_with
@@ -85,10 +84,9 @@ var/global/obj/temp_reagents_holder = new
 				replace_sound = R.heating_sound
 
 		if(isnull(replace_self_with) && !isnull(R.dissolves_in) && !(check_flags & ATOM_FLAG_NO_DISSOLVE) && LAZYLEN(R.dissolves_into))
-			for(var/other in reagent_volumes)
-				if(other == thing)
+			for(var/decl/material/solvent as anything in reagent_volumes)
+				if(solvent == R)
 					continue
-				var/decl/material/solvent = GET_DECL(other)
 				if(solvent.solvent_power >= R.dissolves_in)
 					replace_self_with = R.dissolves_into
 					if(R.dissolve_message)
@@ -98,20 +96,22 @@ var/global/obj/temp_reagents_holder = new
 
 		// If it is, handle replacing it with the decay product.
 		if(replace_self_with)
-			var/replace_amount = REAGENT_VOLUME(src, R.type)
-			clear_reagent(R.type)
+			var/replace_amount = REAGENT_VOLUME(src, R)
+			clear_reagent(R)
 			for(var/product in replace_self_with)
 				add_reagent(product, replace_self_with[product] * replace_amount)
 			reaction_occured = TRUE
 
 			if(location)
 				if(replace_message)
-					location.visible_message("<span class='notice'>[html_icon(location)] [replace_message]</span>")
+					location.visible_message(SPAN_NOTICE("[html_icon(location)] [replace_message]"))
 				if(replace_sound)
 					playsound(location, replace_sound, 80, 1)
 
 		else // Otherwise, collect all possible reactions.
-			eligible_reactions |= SSmaterials.chemical_reactions_by_id[R.type]
+			var/eligible = SSmaterials.chemical_reactions_by_id[R]
+			if(length(eligible))
+				eligible_reactions |= eligible
 
 	var/list/active_reactions = list()
 
@@ -161,23 +161,30 @@ var/global/obj/temp_reagents_holder = new
 	if(my_atom)
 		my_atom.on_reagent_change()
 
-/datum/reagents/proc/add_reagent(var/reagent_type, var/amount, var/data = null, var/safety = 0, var/defer_update = FALSE)
+/datum/reagents/proc/add_reagent_by_id(var/reagent_type, var/amount, var/data = null, var/safety = 0, var/defer_update = FALSE)
+	reagent_type = GET_MATERIAL(reagent_type)
+	if(reagent_type)
+		return add_reagent(reagent_type, amount, data, safety, defer_update)
 
+/datum/reagents/proc/add_reagent(var/decl/material/reagent, var/amount, var/data = null, var/safety = 0, var/defer_update = FALSE)
+#ifdef UNIT_TEST
+	if(!istype(reagent))
+		CRASH("Attempt to add non-instanced reagent ([reagent || "NULL"]) with instance procs.")
+#endif
 	amount = round(min(amount, REAGENTS_FREE_SPACE(src)), MINIMUM_CHEMICAL_VOLUME)
 	if(amount <= 0)
 		return FALSE
 
-	var/decl/material/newreagent = GET_DECL(reagent_type)
 	LAZYINITLIST(reagent_volumes)
-	if(!reagent_volumes[reagent_type])
-		reagent_volumes[reagent_type] = amount
-		var/tmp_data = newreagent.initialize_data(data)
+	if(!reagent_volumes[reagent])
+		reagent_volumes[reagent] = amount
+		var/tmp_data = reagent.initialize_data(data)
 		if(tmp_data)
-			LAZYSET(reagent_data, reagent_type, tmp_data)
+			LAZYSET(reagent_data, reagent, tmp_data)
 	else
-		reagent_volumes[reagent_type] += amount
+		reagent_volumes[reagent] += amount
 		if(!isnull(data))
-			LAZYSET(reagent_data, reagent_type, newreagent.mix_data(src, data, amount))
+			LAZYSET(reagent_data, reagent, reagent.mix_data(src, data, amount))
 	if(reagent_volumes.len > 1)
 		cached_color = null
 	UNSETEMPTY(reagent_volumes)
@@ -189,12 +196,21 @@ var/global/obj/temp_reagents_holder = new
 		handle_update(safety)
 	return TRUE
 
-/datum/reagents/proc/remove_reagent(var/reagent_type, var/amount, var/safety = 0, var/defer_update = FALSE)
+/datum/reagents/proc/remove_reagent_by_id(var/reagent_type, var/amount, var/safety = 0, var/defer_update = FALSE)
+	reagent_type = GET_MATERIAL(reagent_type)
+	if(reagent_type)
+		return remove_reagent(reagent_type, amount, safety, defer_update)
+
+/datum/reagents/proc/remove_reagent(var/decl/material/reagent, var/amount, var/safety = 0, var/defer_update = FALSE)
+#ifdef UNIT_TEST
+	if(!istype(reagent))
+		CRASH("Attempt to remove non-instanced reagent ([reagent || "NULL"]) with instance procs.")
+#endif
 	amount = round(amount, MINIMUM_CHEMICAL_VOLUME)
-	if(!isnum(amount) || amount <= 0 || REAGENT_VOLUME(src, reagent_type) <= 0)
+	if(!isnum(amount) || amount <= 0 || REAGENT_VOLUME(src, reagent) <= 0)
 		return FALSE
-	reagent_volumes[reagent_type] -= amount
-	if(reagent_volumes.len > 1 || reagent_volumes[reagent_type] <= 0)
+	reagent_volumes[reagent] -= amount
+	if(reagent_volumes.len > 1 || reagent_volumes[reagent] <= 0)
 		cached_color = null
 	if(defer_update)
 		total_volume -= amount // approximation, call update_total() if deferring
@@ -202,13 +218,22 @@ var/global/obj/temp_reagents_holder = new
 		handle_update(safety)
 	return TRUE
 
-/datum/reagents/proc/clear_reagent(var/reagent_type, var/defer_update = FALSE, var/force = FALSE)
-	. = force || !!(REAGENT_VOLUME(src, reagent_type) || REAGENT_DATA(src, reagent_type))
+/datum/reagents/proc/clear_reagent_of_id(var/reagent_type, var/defer_update = FALSE, var/force = FALSE)
+	reagent_type = GET_MATERIAL(reagent_type)
+	if(reagent_type)
+		return clear_reagent(reagent_type, defer_update, force)
+
+/datum/reagents/proc/clear_reagent(var/decl/material/reagent, var/defer_update = FALSE, var/force = FALSE)
+#ifdef UNIT_TEST
+	if(!istype(reagent))
+		CRASH("Attempt to clear non-instanced reagent ([reagent || "NULL"]) with instance procs.")
+#endif
+	. = force || !!(REAGENT_VOLUME(src, reagent) || REAGENT_DATA(src, reagent))
 	if(.)
-		var/amount = LAZYACCESS(reagent_volumes, reagent_type)
-		LAZYREMOVE(reagent_volumes, reagent_type)
-		LAZYREMOVE(reagent_data, reagent_type)
-		if(primary_reagent == reagent_type)
+		var/amount = LAZYACCESS(reagent_volumes, reagent)
+		LAZYREMOVE(reagent_volumes, reagent)
+		LAZYREMOVE(reagent_data, reagent)
+		if(primary_reagent == reagent)
 			primary_reagent = null
 		cached_color = null
 
@@ -217,8 +242,17 @@ var/global/obj/temp_reagents_holder = new
 		else
 			handle_update()
 
-/datum/reagents/proc/has_reagent(var/reagent_type, var/amount)
-	. = REAGENT_VOLUME(src, reagent_type)
+/datum/reagents/proc/has_reagent_of_id(var/reagent_type, var/amount)
+	reagent_type = GET_MATERIAL(reagent_type)
+	if(reagent_type)
+		return has_reagent(reagent_type, amount)
+
+/datum/reagents/proc/has_reagent(var/decl/material/reagent, var/amount)
+#ifdef UNIT_TEST
+	if(!istype(reagent))
+		CRASH("Attempt to check non-instanced reagent ([reagent || "NULL"]) with instance procs.")
+#endif
+	. = REAGENT_VOLUME(src, reagent)
 	if(. && amount)
 		. = (. >= amount)
 
@@ -238,8 +272,8 @@ var/global/obj/temp_reagents_holder = new
 	return TRUE
 
 /datum/reagents/proc/clear_reagents()
-	for(var/reagent in reagent_volumes)
-		clear_reagent(reagent, TRUE)
+	for(var/R in reagent_volumes)
+		clear_reagent(R, TRUE)
 	LAZYCLEARLIST(reagent_volumes)
 	LAZYCLEARLIST(reagent_data)
 	total_volume = 0
@@ -251,21 +285,19 @@ var/global/obj/temp_reagents_holder = new
 
 /datum/reagents/proc/get_reagents(scannable_only = 0, precision)
 	. = list()
-	for(var/rtype in reagent_volumes)
-		var/decl/material/current= GET_DECL(rtype)
-		if(scannable_only && !current.scannable)
+	for(var/decl/material/R as anything in reagent_volumes)
+		if(scannable_only && !R.scannable)
 			continue
-		var/volume = REAGENT_VOLUME(src, rtype)
+		var/volume = REAGENT_VOLUME(src, R)
 		if(precision)
 			volume = round(volume, precision)
 		if(volume)
-			. += "[current.name] ([volume])"
+			. += "[R.name] ([volume])"
 	return english_list(., "EMPTY", "", ", ", ", ")
 
 /datum/reagents/proc/get_dirtiness()
-	for(var/rtype in reagent_volumes)
-		var/decl/material/current = GET_DECL(rtype)
-		. += current.dirtiness
+	for(var/decl/material/R as anything in reagent_volumes)
+		. += R.dirtiness
 	return . / length(reagent_volumes)
 
 /* Holder-to-holder and similar procs */
@@ -273,8 +305,8 @@ var/global/obj/temp_reagents_holder = new
 	. = min(amount, total_volume)
 	if(.)
 		var/part = . / total_volume
-		for(var/current in reagent_volumes)
-			remove_reagent(current, REAGENT_VOLUME(src, current) * part, TRUE, TRUE)
+		for(var/R in reagent_volumes)
+			remove_reagent(R, REAGENT_VOLUME(src, R) * part, TRUE, TRUE)
 		if(!defer_update)
 			handle_update()
 
@@ -291,11 +323,11 @@ var/global/obj/temp_reagents_holder = new
 		return
 
 	var/part = amount / total_volume
-	for(var/rtype in reagent_volumes)
-		var/amount_to_transfer = REAGENT_VOLUME(src, rtype) * part
-		target.add_reagent(rtype, amount_to_transfer * multiplier, REAGENT_DATA(src, rtype), TRUE, TRUE) // We don't react until everything is in place
+	for(var/R in reagent_volumes)
+		var/amount_to_transfer = REAGENT_VOLUME(src, R) * part
+		target.add_reagent(R, amount_to_transfer * multiplier, REAGENT_DATA(src, R), TRUE, TRUE) // We don't react until everything is in place
 		if(!copy)
-			remove_reagent(rtype, amount_to_transfer, TRUE, TRUE)
+			remove_reagent(R, amount_to_transfer, TRUE, TRUE)
 
 	if(!defer_update)
 		target.handle_update(safety)
@@ -443,17 +475,15 @@ var/global/obj/temp_reagents_holder = new
 /datum/reagents/proc/touch_mob(var/mob/target)
 	if(!target || !istype(target) || !target.simulated)
 		return
-	for(var/rtype in reagent_volumes)
-		var/decl/material/current = GET_DECL(rtype)
-		current.touch_mob(target, REAGENT_VOLUME(src, rtype), src)
+	for(var/decl/material/R as anything in reagent_volumes)
+		R.touch_mob(target, REAGENT_VOLUME(src, R), src)
 	update_total()
 
 /datum/reagents/proc/touch_turf(var/turf/target)
 	if(!istype(target) || !target.simulated)
 		return
-	for(var/rtype in reagent_volumes)
-		var/decl/material/current = GET_DECL(rtype)
-		current.touch_turf(target, REAGENT_VOLUME(src, rtype), src)
+	for(var/decl/material/R as anything in reagent_volumes)
+		R.touch_turf(target, REAGENT_VOLUME(src, R), src)
 	var/dirtiness = get_dirtiness()
 	if(dirtiness <= DIRTINESS_CLEAN)
 		target.clean_blood()
@@ -483,9 +513,8 @@ var/global/obj/temp_reagents_holder = new
 /datum/reagents/proc/touch_obj(var/obj/target)
 	if(!target || !istype(target) || !target.simulated)
 		return
-	for(var/rtype in reagent_volumes)
-		var/decl/material/current = GET_DECL(rtype)
-		current.touch_obj(target, REAGENT_VOLUME(src, rtype), src)
+	for(var/decl/material/R as anything in reagent_volumes)
+		R.touch_obj(target, REAGENT_VOLUME(src, R), src)
 	update_total()
 
 // Attempts to place a reagent on the mob's skin.

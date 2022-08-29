@@ -65,9 +65,8 @@
 	if(distance <= 2)
 		to_chat(user, SPAN_NOTICE("It contains:"))
 		if(LAZYLEN(reagents?.reagent_volumes))
-			for(var/rtype in reagents.reagent_volumes)
-				var/decl/material/R = GET_DECL(rtype)
-				to_chat(user, SPAN_NOTICE("[REAGENT_VOLUME(reagents, rtype)] units of [R.name]"))
+			for(var/decl/material/R as anything in reagents.reagent_volumes)
+				to_chat(user, SPAN_NOTICE("[REAGENT_VOLUME(reagents, R)] units of [R.name]"))
 		else
 			to_chat(user, SPAN_NOTICE("Nothing."))
 

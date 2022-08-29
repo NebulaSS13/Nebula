@@ -26,56 +26,69 @@
 /obj/item/organ/internal/stomach/vox
 	name = "gizzard"
 	color = "#0033cc"
-	var/static/list/gains_nutriment_from_inedible_reagents = list(
-		/decl/material/solid/wood =           3,
-		/decl/material/liquid/cleaner =       1,
-		/decl/material/liquid/foaming_agent = 1,
-		/decl/material/liquid/surfactant =    1,
-		/decl/material/liquid/paint =         1
-	)
-	var/static/list/can_digest_matter = list(
-		/decl/material/solid/wood =                   TRUE,
-		/decl/material/solid/wood/mahogany =          TRUE,
-		/decl/material/solid/wood/maple =             TRUE,
-		/decl/material/solid/wood/ebony =             TRUE,
-		/decl/material/solid/wood/walnut =            TRUE,
-		/decl/material/solid/leather =                TRUE,
-		/decl/material/solid/plastic =                TRUE,
-		/decl/material/solid/cardboard =              TRUE,
-		/decl/material/solid/cloth =                  TRUE,
-		/decl/material/solid/slag =                   TRUE,
-		/decl/material/solid/sodiumchloride = TRUE
-	)
-	var/static/list/can_process_matter = list(
-		/decl/material/solid/glass =               TRUE,
-		/decl/material/solid/gemstone/diamond =    TRUE,
-		/decl/material/solid/stone/sandstone =     TRUE,
-		/decl/material/solid/stone/marble =        TRUE,
-		/decl/material/solid/metal/steel =         TRUE,
-		/decl/material/solid/metal/gold =          TRUE,
-		/decl/material/solid/metal/silver =        TRUE,
-		/decl/material/solid/metal/uranium =       TRUE,
-		/decl/material/solid/metal/iron =          TRUE,
-		/decl/material/solid/metal/platinum =      TRUE,
-		/decl/material/solid/metal/bronze =        TRUE,
-		/decl/material/solid/metal/titanium =      TRUE,
-		/decl/material/solid/metal/osmium =        TRUE,
-		/decl/material/solid/metal/copper =        TRUE,
-		/decl/material/solid/metal/aluminium =     TRUE,
-		/decl/material/solid/sand =        TRUE,
-		/decl/material/solid/graphite =    TRUE,
-		/decl/material/solid/pitchblende = TRUE,
-		/decl/material/solid/hematite =    TRUE,
-		/decl/material/solid/quartz =      TRUE,
-		/decl/material/solid/pyrite =      TRUE,
-		/decl/material/solid/spodumene =   TRUE,
-		/decl/material/solid/cinnabar =    TRUE,
-		/decl/material/solid/phosphorite = TRUE,
-		/decl/material/solid/potash =      TRUE,
-		/decl/material/solid/bauxite =     TRUE,
-		/decl/material/solid/rutile = 	   TRUE
-	)
+	var/static/list/gains_nutriment_from_inedible_reagents
+	var/static/list/can_digest_matter
+	var/static/list/can_process_matter
 	var/list/stored_matter = list()
+
+// This is terrible and needs to be refactored.
+/obj/item/organ/internal/stomach/vox/Initialize(mapload, material_key, datum/dna/given_dna)
+	. = ..()
+	if(!gains_nutriment_from_inedible_reagents)
+		gains_nutriment_from_inedible_reagents = list(
+			/decl/material/solid/wood =             3,
+			/decl/material/liquid/cleaner =         1,
+			/decl/material/liquid/foaming_agent =   1,
+			/decl/material/liquid/surfactant =      1,
+			/decl/material/liquid/paint =           1
+		)
+		POPULATE_MATERIAL_LIST_ASSOC(gains_nutriment_from_inedible_reagents)
+	if(!can_digest_matter)
+		can_digest_matter = list(
+			/decl/material/solid/wood =             TRUE,
+			/decl/material/solid/wood/mahogany =    TRUE,
+			/decl/material/solid/wood/maple =       TRUE,
+			/decl/material/solid/wood/ebony =       TRUE,
+			/decl/material/solid/wood/walnut =      TRUE,
+			/decl/material/solid/leather =          TRUE,
+			/decl/material/solid/plastic =          TRUE,
+			/decl/material/solid/cardboard =        TRUE,
+			/decl/material/solid/cloth =            TRUE,
+			/decl/material/solid/slag =             TRUE,
+			/decl/material/solid/sodiumchloride =   TRUE
+		)
+		POPULATE_MATERIAL_LIST_ASSOC(can_digest_matter)
+	if(!can_process_matter)
+		can_process_matter = list(
+			/decl/material/solid/glass =            TRUE,
+			/decl/material/solid/gemstone/diamond = TRUE,
+			/decl/material/solid/stone/sandstone =  TRUE,
+			/decl/material/solid/stone/marble =     TRUE,
+			/decl/material/solid/metal/steel =      TRUE,
+			/decl/material/solid/metal/gold =       TRUE,
+			/decl/material/solid/metal/silver =     TRUE,
+			/decl/material/solid/metal/uranium =    TRUE,
+			/decl/material/solid/metal/iron =       TRUE,
+			/decl/material/solid/metal/platinum =   TRUE,
+			/decl/material/solid/metal/bronze =     TRUE,
+			/decl/material/solid/metal/titanium =   TRUE,
+			/decl/material/solid/metal/osmium =     TRUE,
+			/decl/material/solid/metal/copper =     TRUE,
+			/decl/material/solid/metal/aluminium =  TRUE,
+			/decl/material/solid/sand =             TRUE,
+			/decl/material/solid/graphite =         TRUE,
+			/decl/material/solid/pitchblende =      TRUE,
+			/decl/material/solid/hematite =         TRUE,
+			/decl/material/solid/quartz =           TRUE,
+			/decl/material/solid/pyrite =           TRUE,
+			/decl/material/solid/spodumene =        TRUE,
+			/decl/material/solid/cinnabar =         TRUE,
+			/decl/material/solid/phosphorite =      TRUE,
+			/decl/material/solid/potash =           TRUE,
+			/decl/material/solid/bauxite =          TRUE,
+			/decl/material/solid/rutile = 	        TRUE
+		)
+		POPULATE_MATERIAL_LIST_ASSOC(can_process_matter)
 
 /obj/item/organ/internal/stomach/vox/Process()
 	. = ..()
@@ -83,8 +96,7 @@
 
 		// Handle some post-metabolism reagent processing for generally inedible foods.
 		if(ingested.total_volume > 0)
-			for(var/rtype in ingested.reagent_volumes)
-				var/decl/material/R = GET_DECL(rtype)
+			for(var/R in ingested.reagent_volumes)
 				var/inedible_nutriment_amount = gains_nutriment_from_inedible_reagents[R]
 				if(inedible_nutriment_amount > 0)
 					owner.adjust_nutrition(inedible_nutriment_amount)

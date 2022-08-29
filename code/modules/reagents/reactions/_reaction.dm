@@ -15,6 +15,15 @@
 	var/lore_text
 	var/mechanics_text
 
+/decl/chemical_reaction/Initialize()
+	if(required_reagents)
+		POPULATE_MATERIAL_LIST_ASSOC(required_reagents)
+	if(catalysts)
+		POPULATE_MATERIAL_LIST_ASSOC(catalysts)
+	if(inhibitors)
+		POPULATE_MATERIAL_LIST_ASSOC(inhibitors)
+	. = ..()
+
 /decl/chemical_reaction/proc/can_happen(var/datum/reagents/holder)
 	//check that all the required reagents are present
 	if(!holder.has_all_reagents(required_reagents))
@@ -43,8 +52,8 @@
 // This proc returns a list of all reagents it wants to use; if the holder has several reactions that use the same reagent, it will split the reagent evenly between them
 /decl/chemical_reaction/proc/get_used_reagents()
 	. = list()
-	for(var/reagent in required_reagents)
-		. += reagent
+	for(var/R in required_reagents)
+		. += R
 
 /decl/chemical_reaction/proc/get_reaction_flags(var/datum/reagents/holder)
 	return 0
@@ -53,15 +62,15 @@
 	var/data = send_data(holder)
 
 	var/reaction_volume = holder.maximum_volume
-	for(var/reactant in required_reagents)
-		var/A = REAGENT_VOLUME(holder, reactant) / required_reagents[reactant] / limit // How much of this reagent we are allowed to use
+	for(var/R in required_reagents)
+		var/A = REAGENT_VOLUME(holder, R) / required_reagents[R] / limit // How much of this reagent we are allowed to use
 		if(reaction_volume > A)
 			reaction_volume = A
 
 	var/reaction_flags = get_reaction_flags(holder)
 
-	for(var/reactant in required_reagents)
-		holder.remove_reagent(reactant, reaction_volume * required_reagents[reactant], safety = 1)
+	for(var/R in required_reagents)
+		holder.remove_reagent(R, reaction_volume * required_reagents[R], safety = 1)
 
 	//add the product
 	var/amt_produced = result_amount * reaction_volume

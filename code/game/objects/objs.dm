@@ -24,8 +24,8 @@
 /obj/proc/create_matter()
 	if(length(matter))
 		// matter is probably still types at this point
+		POPULATE_MATERIAL_LIST_ASSOC(matter)
 		for(var/mat in matter)
-			mat = GET_MATERIAL(mat)
 			matter[mat] = round(matter[mat] * get_matter_amount_modifier())
 	UNSETEMPTY(matter)
 

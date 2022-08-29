@@ -210,10 +210,9 @@
 
 /obj/machinery/chem_master/proc/fetch_contaminants(mob/user, datum/reagents/reagents, decl/material/main_reagent)
 	. = list()
-	for(var/rtype in reagents.reagent_volumes)
-		var/decl/material/reagent = GET_DECL(rtype)
-		if(reagent != main_reagent && prob(user.skill_fail_chance(core_skill, 100)))
-			. += reagent
+	for(var/decl/material/R as anything in reagents.reagent_volumes)
+		if(R != main_reagent && prob(user.skill_fail_chance(core_skill, 100)))
+			. += R
 
 /obj/machinery/chem_master/proc/get_chem_info(decl/material/reagent, heading = "Chemical infos", detailed_blood = 1)
 	if(!beaker || !reagent)
@@ -267,38 +266,35 @@
 			dat += "No pill bottle inserted.<BR><BR>"
 		dat += "<A href='?src=\ref[src];close=1'>Close</A>"
 	else
-		var/datum/reagents/R = beaker.reagents
 		dat += "<A href='?src=\ref[src];eject=1'>Eject beaker and Clear Buffer</A><BR>"
 		dat += "Toggle purification mode: <A href='?src=\ref[src];toggle_sloppy=1'>[sloppy ? "Quick" : "Thorough"]</A><BR>"
 		if(loaded_pill_bottle)
 			dat += "<A href='?src=\ref[src];ejectp=1'>Eject Pill Bottle \[[loaded_pill_bottle.contents.len]/[loaded_pill_bottle.max_storage_space]\]</A><BR><BR>"
 		else
 			dat += "No pill bottle inserted.<BR><BR>"
-		if(!R.total_volume)
+		if(!beaker.reagents.total_volume)
 			dat += "Beaker is empty."
 		else
 			dat += "Add to buffer:<BR>"
-			for(var/rtype in R.reagent_volumes)
-				var/decl/material/G = GET_DECL(rtype)
-				dat += "[G.name], [REAGENT_VOLUME(R, rtype)] Units - "
-				dat += "<A href='?src=\ref[src];analyze=\ref[G]'>(Analyze)</A> "
-				dat += "<A href='?src=\ref[src];add=\ref[G];amount=1'>(1)</A> "
-				dat += "<A href='?src=\ref[src];add=\ref[G];amount=5'>(5)</A> "
-				dat += "<A href='?src=\ref[src];add=\ref[G];amount=10'>(10)</A> "
-				dat += "<A href='?src=\ref[src];add=\ref[G];amount=[REAGENT_VOLUME(R, rtype)]'>(All)</A> "
-				dat += "<A href='?src=\ref[src];addcustom=\ref[G]'>(Custom)</A><BR>"
+			for(var/decl/material/R as anything in beaker.reagents.reagent_volumes)
+				dat += "[R.name], [REAGENT_VOLUME(beaker.reagents, R)] Units - "
+				dat += "<A href='?src=\ref[src];analyze=\ref[R]'>(Analyze)</A> "
+				dat += "<A href='?src=\ref[src];add=\ref[R];amount=1'>(1)</A> "
+				dat += "<A href='?src=\ref[src];add=\ref[R];amount=5'>(5)</A> "
+				dat += "<A href='?src=\ref[src];add=\ref[R];amount=10'>(10)</A> "
+				dat += "<A href='?src=\ref[src];add=\ref[R];amount=[REAGENT_VOLUME(beaker.reagents, R)]'>(All)</A> "
+				dat += "<A href='?src=\ref[src];addcustom=\ref[R]'>(Custom)</A><BR>"
 
 		dat += "<HR>Transfer to <A href='?src=\ref[src];toggle=1'>[(!mode ? "disposal" : "beaker")]:</A><BR>"
 		if(reagents.total_volume)
-			for(var/rtype in reagents.reagent_volumes)
-				var/decl/material/N = GET_DECL(rtype)
-				dat += "[N.name], [REAGENT_VOLUME(reagents, rtype)] Units - "
-				dat += "<A href='?src=\ref[src];analyze=\ref[N]'>(Analyze)</A> "
-				dat += "<A href='?src=\ref[src];remove=\ref[N];amount=1'>(1)</A> "
-				dat += "<A href='?src=\ref[src];remove=\ref[N];amount=5'>(5)</A> "
-				dat += "<A href='?src=\ref[src];remove=\ref[N];amount=10'>(10)</A> "
-				dat += "<A href='?src=\ref[src];remove=\ref[N];amount=[REAGENT_VOLUME(reagents, rtype)]'>(All)</A> "
-				dat += "<A href='?src=\ref[src];removecustom=\ref[N]'>(Custom)</A><BR>"
+			for(var/decl/material/R as anything in reagents.reagent_volumes)
+				dat += "[R.name], [REAGENT_VOLUME(reagents, R)] Units - "
+				dat += "<A href='?src=\ref[src];analyze=\ref[R]'>(Analyze)</A> "
+				dat += "<A href='?src=\ref[src];remove=\ref[R];amount=1'>(1)</A> "
+				dat += "<A href='?src=\ref[src];remove=\ref[R];amount=5'>(5)</A> "
+				dat += "<A href='?src=\ref[src];remove=\ref[R];amount=10'>(10)</A> "
+				dat += "<A href='?src=\ref[src];remove=\ref[R];amount=[REAGENT_VOLUME(reagents, R)]'>(All)</A> "
+				dat += "<A href='?src=\ref[src];removecustom=\ref[R]'>(Custom)</A><BR>"
 		else
 			dat += "Empty<BR>"
 		dat += extra_options()

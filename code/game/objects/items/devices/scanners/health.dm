@@ -246,11 +246,10 @@
 	if(H.reagents.total_volume)
 		var/unknown = 0
 		var/reagentdata[0]
-		for(var/A in H.reagents.reagent_volumes)
-			var/decl/material/R = GET_DECL(A)
+		for(var/decl/material/R as anything in H.reagents.reagent_volumes)
 			if(R.scannable)
 				print_reagent_default_message = FALSE
-				reagentdata[A] = "<span class='scan_notice'>[round(REAGENT_VOLUME(H.reagents, A), 1)]u [R.name]</span>"
+				reagentdata[R] = "<span class='scan_notice'>[round(REAGENT_VOLUME(H.reagents, R), 1)]u [R.name]</span>"
 			else
 				unknown++
 		if(reagentdata.len)
@@ -266,11 +265,10 @@
 	if(touching_reagents && touching_reagents.total_volume)
 		var/unknown = 0
 		var/reagentdata[0]
-		for(var/A in touching_reagents.reagent_volumes)
-			var/decl/material/R = GET_DECL(A)
+		for(var/decl/material/R as anything in touching_reagents.reagent_volumes)
 			if(R.scannable)
 				print_reagent_default_message = FALSE
-				reagentdata[R.type] = "<span class='scan_notice'>[round(REAGENT_VOLUME(H.reagents, R.type), 1)]u [R.name]</span>"
+				reagentdata[R.type] = "<span class='scan_notice'>[round(REAGENT_VOLUME(H.reagents, R), 1)]u [R.name]</span>"
 			else
 				unknown++
 		if(reagentdata.len)
@@ -285,8 +283,7 @@
 	var/datum/reagents/ingested = H.get_ingested_reagents()
 	if(ingested && ingested.total_volume)
 		var/unknown = 0
-		for(var/rtype in ingested.reagent_volumes)
-			var/decl/material/R = GET_DECL(rtype)
+		for(var/decl/material/R as anything in ingested.reagent_volumes)
 			if(R.scannable)
 				print_reagent_default_message = FALSE
 				. += "<span class='scan_notice'>[R.name] found in subject's stomach.</span>"

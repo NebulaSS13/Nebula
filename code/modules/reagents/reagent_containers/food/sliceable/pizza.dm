@@ -20,8 +20,8 @@
 
 /obj/item/chems/food/sliceable/pizza/margherita/Initialize()
 	. = ..()
-	reagents.add_reagent(/decl/material/liquid/nutriment/protein, 5)
-	reagents.add_reagent(/decl/material/liquid/drink/juice/tomato, 6)
+	reagents.add_reagent_by_id(/decl/material/liquid/nutriment/protein, 5)
+	reagents.add_reagent_by_id(/decl/material/liquid/drink/juice/tomato, 6)
 
 /obj/item/chems/food/slice/margherita
 	name = "margherita slice"
@@ -49,8 +49,8 @@
 
 /obj/item/chems/food/sliceable/pizza/meatpizza/Initialize()
 	. = ..()
-	reagents.add_reagent(/decl/material/liquid/nutriment/protein, 34)
-	reagents.add_reagent(/decl/material/liquid/nutriment/barbecue, 6)
+	reagents.add_reagent_by_id(/decl/material/liquid/nutriment/protein, 34)
+	reagents.add_reagent_by_id(/decl/material/liquid/nutriment/barbecue, 6)
 
 /obj/item/chems/food/slice/meatpizza
 	name = "meatpizza slice"
@@ -78,7 +78,7 @@
 
 /obj/item/chems/food/sliceable/pizza/mushroompizza/Initialize()
 	. = ..()
-	reagents.add_reagent(/decl/material/liquid/nutriment/protein, 5)
+	reagents.add_reagent_by_id(/decl/material/liquid/nutriment/protein, 5)
 
 /obj/item/chems/food/slice/mushroompizza
 	name = "mushroompizza slice"
@@ -106,9 +106,9 @@
 
 /obj/item/chems/food/sliceable/pizza/vegetablepizza/Initialize()
 	. = ..()
-	reagents.add_reagent(/decl/material/liquid/nutriment/protein, 5)
-	reagents.add_reagent(/decl/material/liquid/nutriment/ketchup, 6)
-	reagents.add_reagent(/decl/material/liquid/eyedrops, 12)
+	reagents.add_reagent_by_id(/decl/material/liquid/nutriment/protein, 5)
+	reagents.add_reagent_by_id(/decl/material/liquid/nutriment/ketchup, 6)
+	reagents.add_reagent_by_id(/decl/material/liquid/eyedrops, 12)
 
 /obj/item/chems/food/slice/vegetablepizza
 	name = "vegetable pizza slice"

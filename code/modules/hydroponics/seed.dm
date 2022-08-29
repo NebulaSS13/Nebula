@@ -19,7 +19,7 @@
 	var/growth_stages = 0          // Number of stages the plant passes through before it is mature.
 	var/list/traits = list()       // Initialized in New()
 	var/list/mutants               // Possible predefined mutant varieties, if any.
-	var/list/chems                 // Chemicals that plant produces in products/injects into victim.
+	var/list/chems           // Chemicals that plant produces in products/injects into victim.
 	var/list/consume_gasses        // The plant will absorb these gasses during its life.
 	var/list/exude_gasses          // The plant will exude these gasses during its life.
 	var/kitchen_tag                // Used by the reagent grinder.
@@ -33,6 +33,8 @@
 	var/scannable_result
 
 /datum/seed/New()
+
+	POPULATE_MATERIAL_LIST_ASSOC(chems)
 
 	set_trait(TRAIT_IMMUTABLE,            0)            // If set, plant will never mutate. If -1, plant is highly mutable.
 	set_trait(TRAIT_HARVEST_REPEAT,       0)            // If 1, this plant will fruit repeatedly.
@@ -170,7 +172,7 @@
 		return
 
 	var/list/external_organs = target.get_external_organs()
-	if(chems && chems.len && target.reagents && LAZYLEN(external_organs))
+	if(length(chems) && target.reagents && LAZYLEN(external_organs))
 
 		var/obj/item/organ/external/affecting = pick(external_organs)
 		for(var/slot in global.standard_clothing_slots)
@@ -314,7 +316,7 @@
 			health_change += rand(1,3) * HYDRO_SPEED_MULTIPLIER
 
 	for(var/obj/effect/effect/smoke/chem/smoke in range(1, current_turf))
-		if(smoke.reagents.has_reagent(/decl/material/liquid/weedkiller))
+		if(smoke.reagents.has_reagent_of_id(/decl/material/liquid/weedkiller))
 			return 100
 
 	// Pressure and temperature are needed as much as water and light.
@@ -445,12 +447,12 @@
 
 	chems = list()
 	if(prob(80))
-		chems[/decl/material/liquid/nutriment] = list(rand(1,10),rand(10,20))
+		chems[GET_MATERIAL(/decl/material/liquid/nutriment)] = list(rand(1,10),rand(10,20))
 	if(length(liquids))
 		for(var/x = 1 to rand(0, 5))
 			var/new_chem = pickweight(liquids)
+			chems[GET_MATERIAL(new_chem)] = list(rand(1,10), rand(10,20))
 			liquids -= new_chem
-			chems[new_chem] = list(rand(1,10), rand(10,20))
 
 	if(prob(90))
 		set_trait(TRAIT_REQUIRES_NUTRIENTS,1)
@@ -592,7 +594,8 @@
 			for(var/trait in list(TRAIT_YIELD, TRAIT_ENDURANCE))
 				if(get_trait(trait) > 0) set_trait(trait,get_trait(trait),null,1,0.85)
 
-			if(!chems) chems = list()
+			if(!chems)
+				chems = list()
 
 			var/list/gene_value = gene.values["[TRAIT_CHEMS]"]
 			for(var/rid in gene_value)
@@ -647,7 +650,7 @@
 
 	switch(genetype)
 		if(GENE_BIOCHEMISTRY)
-			P.values["[TRAIT_CHEMS]"] =        chems
+			P.values["[TRAIT_CHEMS]"] = chems
 			P.values["[TRAIT_EXUDE_GASSES]"] = exude_gasses
 			traits_to_copy = list(TRAIT_POTENCY)
 		if(GENE_OUTPUT)
@@ -760,7 +763,7 @@
 	new_seed.product_type =     product_type
 	//Copy over everything else.
 	if(mutants)        new_seed.mutants = mutants.Copy()
-	if(chems)          new_seed.chems = chems.Copy()
+	if(chems)    new_seed.chems = chems.Copy()
 	if(consume_gasses) new_seed.consume_gasses = consume_gasses.Copy()
 	if(exude_gasses)   new_seed.exude_gasses = exude_gasses.Copy()
 

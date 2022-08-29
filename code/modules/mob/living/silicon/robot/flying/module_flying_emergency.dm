@@ -42,7 +42,7 @@
 
 /obj/item/robot_module/flying/emergency/finalize_emag()
 	. = ..()
-	emag.reagents.add_reagent(/decl/material/liquid/acid/polyacid, 250)
+	emag.reagents.add_reagent_by_id(/decl/material/liquid/acid/polyacid, 250)
 	emag.SetName("Polyacid spray")
 
 /obj/item/robot_module/flying/emergency/finalize_equipment()
@@ -72,5 +72,5 @@
 	if(PS && PS.reagents.total_volume < PS.volume)
 		var/adding = min(PS.volume-PS.reagents.total_volume, 2*amount)
 		if(adding > 0)
-			PS.reagents.add_reagent(/decl/material/liquid/acid/polyacid, adding)
+			PS.reagents.add_reagent_by_id(/decl/material/liquid/acid/polyacid, adding)
 	..()

@@ -10,7 +10,7 @@
 
 /obj/item/chems/food/sosjerky/Initialize()
 	. = ..()
-	reagents.add_reagent(/decl/material/liquid/nutriment/protein, 4)
+	reagents.add_reagent_by_id(/decl/material/liquid/nutriment/protein, 4)
 
 /obj/item/chems/food/no_raisin
 	name = "raisins"
@@ -32,7 +32,7 @@
 
 /obj/item/chems/food/spacetwinkie/Initialize()
 	. = ..()
-	reagents.add_reagent(/decl/material/liquid/nutriment/sugar, 4)
+	reagents.add_reagent_by_id(/decl/material/liquid/nutriment/sugar, 4)
 
 /obj/item/chems/food/cheesiehonkers
 	name = "cheese puffs"
@@ -58,7 +58,7 @@
 
 /obj/item/chems/food/syndicake/Initialize()
 	. = ..()
-	reagents.add_reagent(/decl/material/liquid/regenerator, 5)
+	reagents.add_reagent_by_id(/decl/material/liquid/regenerator, 5)
 
 //terran delights
 
@@ -97,7 +97,7 @@
 
 /obj/item/chems/food/squid/Initialize()
 	. = ..()
-	reagents.add_reagent(/decl/material/liquid/nutriment/protein, 4)
+	reagents.add_reagent_by_id(/decl/material/liquid/nutriment/protein, 4)
 
 /obj/item/chems/food/croutons
 	name = "croutons"
@@ -124,7 +124,7 @@
 
 /obj/item/chems/food/salo/Initialize()
 	. = ..()
-	reagents.add_reagent(/decl/material/liquid/nutriment/protein, 8)
+	reagents.add_reagent_by_id(/decl/material/liquid/nutriment/protein, 8)
 
 /obj/item/chems/food/driedfish
 	name = "vobla"
@@ -139,7 +139,7 @@
 
 /obj/item/chems/food/driedfish/Initialize()
 	. = ..()
-	reagents.add_reagent(/decl/material/liquid/nutriment/protein, 4)
+	reagents.add_reagent_by_id(/decl/material/liquid/nutriment/protein, 4)
 
 /obj/item/chems/food/liquidfood
 	name = "\improper LiquidFood MRE"
@@ -154,7 +154,7 @@
 
 /obj/item/chems/food/liquidfood/Initialize()
 	. = ..()
-	reagents.add_reagent(/decl/material/solid/metal/iron, 3)
+	reagents.add_reagent_by_id(/decl/material/solid/metal/iron, 3)
 
 /obj/item/chems/food/meatcube
 	name = "cubed meat"
@@ -167,7 +167,7 @@
 
 /obj/item/chems/food/meatcube/Initialize()
 	. = ..()
-	reagents.add_reagent(/decl/material/liquid/nutriment/protein, 15)
+	reagents.add_reagent_by_id(/decl/material/liquid/nutriment/protein, 15)
 
 /obj/item/chems/food/tastybread
 	name = "bread tube"
@@ -194,7 +194,7 @@
 
 /obj/item/chems/food/candy/Initialize()
 	. = ..()
-	reagents.add_reagent(/decl/material/liquid/nutriment/sugar, 3)
+	reagents.add_reagent_by_id(/decl/material/liquid/nutriment/sugar, 3)
 
 /obj/item/chems/food/candy/proteinbar
 	name = "protein bar"
@@ -205,9 +205,9 @@
 
 /obj/item/chems/food/candy/proteinbar/Initialize()
 	. = ..()
-	reagents.add_reagent(/decl/material/liquid/nutriment, 9)
-	reagents.add_reagent(/decl/material/liquid/nutriment/protein, 4)
-	reagents.add_reagent(/decl/material/liquid/nutriment/sugar, 4)
+	reagents.add_reagent_by_id(/decl/material/liquid/nutriment, 9)
+	reagents.add_reagent_by_id(/decl/material/liquid/nutriment/protein, 4)
+	reagents.add_reagent_by_id(/decl/material/liquid/nutriment/sugar, 4)
 
 /obj/item/chems/food/candy/donor
 	name = "donor candy"
@@ -218,8 +218,8 @@
 
 /obj/item/chems/food/candy/donor/Initialize()
 	. = ..()
-	reagents.add_reagent(/decl/material/liquid/nutriment, 10)
-	reagents.add_reagent(/decl/material/liquid/nutriment/sugar, 3)
+	reagents.add_reagent_by_id(/decl/material/liquid/nutriment, 10)
+	reagents.add_reagent_by_id(/decl/material/liquid/nutriment/sugar, 3)
 
 /obj/item/chems/food/candy_corn
 	name = "candy corn"
@@ -233,8 +233,8 @@
 
 /obj/item/chems/food/candy_corn/Initialize()
 	. = ..()
-	reagents.add_reagent(/decl/material/liquid/nutriment, 4)
-	reagents.add_reagent(/decl/material/liquid/nutriment/sugar, 2)
+	reagents.add_reagent_by_id(/decl/material/liquid/nutriment, 4)
+	reagents.add_reagent_by_id(/decl/material/liquid/nutriment/sugar, 2)
 
 /obj/item/chems/food/chips
 	name = "chips"
@@ -272,8 +272,8 @@
 
 /obj/item/chems/food/chocolatebar/Initialize()
 	. = ..()
-	reagents.add_reagent(/decl/material/liquid/nutriment/sugar, 2)
-	reagents.add_reagent(/decl/material/liquid/nutriment/coco, 2)
+	reagents.add_reagent_by_id(/decl/material/liquid/nutriment/sugar, 2)
+	reagents.add_reagent_by_id(/decl/material/liquid/nutriment/coco, 2)
 
 /obj/item/chems/food/chocolateegg
 	name = "chocolate egg"
@@ -287,8 +287,8 @@
 
 /obj/item/chems/food/chocolateegg/Initialize()
 	. = ..()
-	reagents.add_reagent(/decl/material/liquid/nutriment/sugar, 2)
-	reagents.add_reagent(/decl/material/liquid/nutriment/coco, 2)
+	reagents.add_reagent_by_id(/decl/material/liquid/nutriment/sugar, 2)
+	reagents.add_reagent_by_id(/decl/material/liquid/nutriment/coco, 2)
 
 /obj/item/chems/food/donut
 	name = "donut"
@@ -309,7 +309,7 @@
 		icon_state = "[donut_state]2"
 		overlay_state = "box-donut2"
 		SetName("frosted [name]]")
-		reagents.add_reagent(/decl/material/liquid/nutriment/sprinkles, 2)
+		reagents.add_reagent_by_id(/decl/material/liquid/nutriment/sprinkles, 2)
 
 /obj/item/chems/food/donut/chaos
 	name = "chaos donut"
@@ -349,7 +349,7 @@
 
 /obj/item/chems/food/donut/jelly/Initialize()
 	. = ..()
-	reagents.add_reagent(/decl/material/liquid/nutriment/cherryjelly, 5)
+	reagents.add_reagent_by_id(/decl/material/liquid/nutriment/cherryjelly, 5)
 
 //Sol Vendor
 /obj/item/chems/food/lunacake
@@ -449,7 +449,7 @@
 
 /obj/item/chems/food/venus/Initialize()
 	. = ..()
-	reagents.add_reagent(/decl/material/liquid/capsaicin = 5)
+	reagents.add_reagent_by_id(/decl/material/liquid/capsaicin = 5)
 
 /obj/item/chems/food/oort
 	name = "\improper Cloud Rocks"
@@ -464,7 +464,7 @@
 
 /obj/item/chems/food/oort/Initialize()
 	. = ..()
-	reagents.add_reagent(/decl/material/liquid/frostoil = 5)
+	reagents.add_reagent_by_id(/decl/material/liquid/frostoil = 5)
 
 //weebo vend! So japanese it hurts
 
@@ -495,7 +495,7 @@
 
 /obj/item/chems/food/weebonuts/Initialize()
 	. = ..()
-	reagents.add_reagent(/decl/material/liquid/capsaicin = 1)
+	reagents.add_reagent_by_id(/decl/material/liquid/capsaicin = 1)
 
 /obj/item/chems/food/chocobanana
 	name = "choco banana"
@@ -508,7 +508,7 @@
 
 /obj/item/chems/food/chocobanana/Initialize()
 	. = ..()
-	reagents.add_reagent(/decl/material/liquid/nutriment/sprinkles, 10)
+	reagents.add_reagent_by_id(/decl/material/liquid/nutriment/sprinkles, 10)
 
 /obj/item/chems/food/dango
 	name = "dango"
@@ -558,7 +558,7 @@
 
 /obj/item/chems/food/donkpocket/Initialize()
 	. = ..()
-	reagents.add_reagent(/decl/material/liquid/nutriment/protein, 2)
+	reagents.add_reagent_by_id(/decl/material/liquid/nutriment/protein, 2)
 
 /obj/item/chems/food/donkpocket/proc/heat()
 	if(warm)

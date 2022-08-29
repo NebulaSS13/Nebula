@@ -8,7 +8,7 @@
 
 /obj/item/chems/food/fishfingers/Initialize()
 	. = ..()
-	reagents.add_reagent(/decl/material/liquid/nutriment/protein, 4)
+	reagents.add_reagent_by_id(/decl/material/liquid/nutriment/protein, 4)
 
 /obj/item/chems/food/cubancarp
 	name = "\improper Cuban Carp"
@@ -23,8 +23,8 @@
 
 /obj/item/chems/food/cubancarp/Initialize()
 	. = ..()
-	reagents.add_reagent(/decl/material/liquid/nutriment/protein, 3)
-	reagents.add_reagent(/decl/material/liquid/capsaicin, 3)
+	reagents.add_reagent_by_id(/decl/material/liquid/nutriment/protein, 3)
+	reagents.add_reagent_by_id(/decl/material/liquid/capsaicin, 3)
 
 /obj/item/chems/food/fishandchips
 	name = "fish and chips"
@@ -38,4 +38,4 @@
 
 /obj/item/chems/food/fishandchips/Initialize()
 	. = ..()
-	reagents.add_reagent(/decl/material/liquid/nutriment/protein, 3)
+	reagents.add_reagent_by_id(/decl/material/liquid/nutriment/protein, 3)

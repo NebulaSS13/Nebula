@@ -55,9 +55,8 @@
 		to_chat(user, "<span class='notice'>\The [src] contains:</span>")
 		for(var/obj/item/chems/glass/beaker/B in beakers)
 			if(B.reagents && LAZYLEN(B.reagents?.reagent_volumes))
-				for(var/rtype in B.reagents.reagent_volumes)
-					var/decl/material/R = GET_DECL(rtype)
-					to_chat(user, "<span class='notice'>[REAGENT_VOLUME(B.reagents, rtype)] units of [R.name]</span>")
+				for(var/decl/material/R as anything in B.reagents.reagent_volumes)
+					to_chat(user, "<span class='notice'>[REAGENT_VOLUME(B.reagents, R)] units of [R.name]</span>")
 
 /obj/item/gun/projectile/dartgun/attackby(obj/item/I, mob/user)
 	if(istype(I, /obj/item/chems/glass))
@@ -106,9 +105,8 @@
 
 			dat += "Beaker [i] contains: "
 			if(B.reagents && LAZYLEN(B.reagents.reagent_volumes))
-				for(var/rtype in B.reagents.reagent_volumes)
-					var/decl/material/R = GET_DECL(rtype)
-					dat += "<br>    [REAGENT_VOLUME(B.reagents, rtype)] units of [R.name], "
+				for(var/decl/material/R as anything in B.reagents.reagent_volumes)
+					dat += "<br>    [REAGENT_VOLUME(B.reagents, R)] units of [R.name], "
 				if(B in mixing)
 					dat += "<A href='?src=\ref[src];stop_mix=[i]'><font color='green'>Mixing</font></A> "
 				else

@@ -442,7 +442,7 @@ I said no!
 
 /decl/recipe/amanitajelly/make_food(var/obj/container)
 	var/obj/item/chems/food/amanitajelly/being_cooked = ..(container)
-	being_cooked.reagents.clear_reagent(/decl/material/liquid/amatoxin)
+	being_cooked.reagents.clear_reagent_of_id(/decl/material/liquid/amatoxin)
 	return being_cooked
 
 /decl/recipe/meatballsoup

@@ -24,7 +24,7 @@
 /obj/item/book/tome/afterattack(var/atom/A, var/mob/user, var/proximity)
 	if(!proximity || !iscultist(user))
 		return
-	if(A.reagents && A.reagents.has_reagent(/decl/material/liquid/water))
+	if(A.reagents && A.reagents.has_reagent_of_id(/decl/material/liquid/water))
 		to_chat(user, SPAN_NOTICE("You desecrate \the [A]."))
 		LAZYSET(A.reagents.reagent_data, /decl/material/liquid/water, list("holy" = FALSE))
 

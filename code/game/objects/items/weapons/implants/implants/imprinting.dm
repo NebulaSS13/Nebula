@@ -43,7 +43,7 @@
 	var/mob/living/carbon/human/H = M
 	if(!istype(H))
 		return FALSE
-	if(H.reagents.has_reagent(/decl/material/liquid/hallucinogenics))
+	if(H.reagents.has_reagent_of_id(/decl/material/liquid/hallucinogenics))
 		brainwashing = 1
 	var/msg = get_instructions()
 	to_chat(M, msg)
@@ -103,7 +103,7 @@
 	. = ..()
 
 /obj/item/implant/imprinting/can_implant(mob/M, mob/user, target_zone)
-	var/mob/living/carbon/human/H = M	
+	var/mob/living/carbon/human/H = M
 	if(istype(H))
 		var/obj/item/organ/internal/B = GET_INTERNAL_ORGAN(H, BP_BRAIN)
 		if(!B || H.isSynthetic())

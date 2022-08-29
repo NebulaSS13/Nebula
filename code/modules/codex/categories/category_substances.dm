@@ -16,15 +16,13 @@
 				if(!reaction.name || reaction.hidden_from_codex)
 					continue
 				var/list/reactant_values = list()
-				for(var/reactant_id in reaction.required_reagents)
-					var/decl/material/reactant = reactant_id
-					reactant_values += "[reaction.required_reagents[reactant_id]]u [lowertext(initial(reactant.name))]"
+				for(var/decl/material/R in reaction.required_reagents)
+					reactant_values += "[reaction.required_reagents[R]]u [lowertext(R.name)]"
 				if(!reactant_values.len)
 					continue
 				var/list/catalysts = list()
-				for(var/catalyst_id in reaction.catalysts)
-					var/decl/material/catalyst = catalyst_id
-					catalysts += "[reaction.catalysts[catalyst_id]]u [lowertext(initial(catalyst.name))]"
+				for(var/decl/material/catalyst in reaction.catalysts)
+					catalysts += "[reaction.catalysts[catalyst]]u [lowertext(catalyst.name)]"
 				var/decl/material/result = reaction.result
 				if(catalysts.len)
 					production_strings += "Mixing [english_list(reactant_values)], catalyzed by [english_list(catalysts)], producing [reaction.result_amount]u [lowertext(initial(result.name))]."
@@ -49,9 +47,8 @@
 					material_info += "<li>It is a strong solvent and will burn exposed skin on contact.</li>"
 			if(LAZYLEN(mat.dissolves_into))
 				var/chems = list()
-				for(var/chemical in mat.dissolves_into)
-					var/decl/material/R = chemical
-					chems += "[initial(R.name)] ([mat.dissolves_into[chemical]*100]%)"
+				for(var/decl/material/R as anything in mat.dissolves_into)
+					chems += "[R.name] ([mat.dissolves_into[R]*100]%)"
 				var/solvent_needed
 				if(mat.dissolves_in <= MAT_SOLVENT_NONE)
 					solvent_needed = "any liquid"
@@ -71,15 +68,13 @@
 				material_info += "<li>It can be compressed into [M.solid_name].</li>"
 			if(length(mat.heating_products))
 				var/list/heat_prod = list()
-				for(var/mtype in mat.heating_products)
-					var/decl/material/M = GET_DECL(mtype)
-					heat_prod += "[mat.heating_products[mtype] * 100]% [M.solid_name]"
+				for(var/decl/material/M in mat.heating_products)
+					heat_prod += "[mat.heating_products[M] * 100]% [M.solid_name]"
 				material_info += "<li>It can be smelted into [english_list(heat_prod)] at a temperature of [mat.heating_point] Kelvin.</li>"
 			if(length(mat.chilling_products))
 				var/list/chill_prod = list()
-				for(var/mtype in mat.chilling_products)
-					var/decl/material/M = GET_DECL(mtype)
-					chill_prod += "[mat.chilling_products[mtype] * 100]% [M.solid_name]"
+				for(var/decl/material/M in mat.chilling_products)
+					chill_prod += "[mat.chilling_products[M] * 100]% [M.solid_name]"
 				material_info += "<li>It can be cooled into [english_list(chill_prod)] at a temperature of [mat.chilling_point] Kelvin.</li>"
 
 			material_info += "</ul>"

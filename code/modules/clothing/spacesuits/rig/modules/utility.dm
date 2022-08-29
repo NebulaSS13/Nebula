@@ -137,7 +137,7 @@
 		/decl/material/solid/metal/gold = MATTER_AMOUNT_TRACE,
 		/decl/material/solid/metal/silver = MATTER_AMOUNT_TRACE
 	)
-	
+
 /obj/item/rig_module/device/Initialize()
 	. = ..()
 	if(ispath(device))
@@ -397,7 +397,7 @@
 		user.put_in_hands(jets)
 		jets = null
 		return TRUE
-	
+
 	if(istype(W, /obj/item/tank/jetpack/rig))
 		if(jets)
 			to_chat(user, SPAN_WARNING("There's already a propellant tank inside of \the [src]!"))

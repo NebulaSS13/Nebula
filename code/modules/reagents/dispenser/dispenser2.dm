@@ -148,9 +148,8 @@
 	data["glass"] = accept_drinking
 	var beakerD[0]
 	if(LAZYLEN(container?.reagents?.reagent_volumes))
-		for(var/rtype in container.reagents.reagent_volumes)
-			var/decl/material/R = GET_DECL(rtype)
-			beakerD[++beakerD.len] = list("name" = R.name, "volume" = REAGENT_VOLUME(container.reagents, rtype))
+		for(var/decl/material/R as anything in container.reagents.reagent_volumes)
+			beakerD[++beakerD.len] = list("name" = R.name, "volume" = REAGENT_VOLUME(container.reagents, R))
 	data["beakerContents"] = beakerD
 
 	if(container) // Container has had null reagents in the past; may be due to qdel without clearing reference.

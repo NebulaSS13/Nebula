@@ -94,7 +94,7 @@
 	generation = gen
 	set_borer_name()
 
-	if(!roundstart) 
+	if(!roundstart)
 		request_player()
 
 /mob/living/simple_animal/borer/Destroy()
@@ -135,7 +135,7 @@
 
 		if(!stat && !host.stat)
 
-			if(host.reagents.has_reagent(/decl/material/liquid/nutriment/sugar))
+			if(host.reagents.has_reagent_of_id(/decl/material/liquid/nutriment/sugar))
 				if(!docile)
 					if(controlling)
 						to_chat(host, SPAN_NOTICE("You feel the soporific flow of sugar in your host's blood, lulling you into docility."))

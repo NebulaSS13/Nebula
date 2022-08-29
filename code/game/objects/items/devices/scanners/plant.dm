@@ -75,9 +75,8 @@
 	if(LAZYLEN(grown_reagents?.reagent_volumes))
 		dat += "<h2>Reagent Data</h2>"
 		dat += "<br>This sample contains: "
-		for(var/rtype in grown_reagents.reagent_volumes)
-			var/decl/material/R = GET_DECL(rtype)
-			dat += "<br>- [R.name], [REAGENT_VOLUME(grown_reagents, rtype)] unit(s)"
+		for(var/decl/material/R as anything in grown_reagents.reagent_volumes)
+			dat += "<br>- [R.name], [REAGENT_VOLUME(grown_reagents, R)] unit(s)"
 
 	dat += "<h2>Other Data</h2>"
 

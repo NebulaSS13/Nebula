@@ -80,3 +80,5 @@
 #define MAT_RARITY_MUNDANE  20
 
 #define GET_MATERIAL(D) (ispath(D, /decl) ? GET_DECL(D) : (istype(D, /decl/material) ? D : SSmaterials.materials_by_id[D]))
+#define POPULATE_MATERIAL_LIST(L)       for(var/mat_key in L) { var/mat_instance = GET_MATERIAL(mat_key); if(mat_instance) { L += mat_instance; }; L -= mat_key; }
+#define POPULATE_MATERIAL_LIST_ASSOC(L) for(var/mat_key in L) { var/mat_instance = GET_MATERIAL(mat_key); if(mat_instance) { L[mat_instance] = L[mat_key]; }; L -= mat_key; }

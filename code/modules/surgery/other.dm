@@ -234,12 +234,11 @@
 	if(!valid_container)
 		return FALSE
 
-	if(container.reagents.has_reagent(/decl/material/liquid/antiseptic))
+	if(container.reagents.has_reagent_of_id(/decl/material/liquid/antiseptic))
 		return TRUE
 
-	for(var/rtype in container?.reagents?.reagent_volumes)
-		var/decl/material/liquid/ethanol/booze = GET_DECL(rtype)
-		if(istype(booze) && booze.strength <= 40)
+	for(var/decl/material/liquid/ethanol/booze in container?.reagents?.reagent_volumes)
+		if(booze.strength <= 40)
 			return TRUE
 
 	return FALSE

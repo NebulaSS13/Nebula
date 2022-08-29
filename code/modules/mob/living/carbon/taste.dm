@@ -25,13 +25,12 @@ calculate text size per text.
 	var/list/out = list()
 	var/list/tastes = list() //descriptor = strength
 	if(minimum_percent <= 100)
-		for(var/reagent_type in reagent_volumes)
-			var/decl/material/R = GET_DECL(reagent_type)
+		for(var/decl/material/R as anything in reagent_volumes)
 			if(!R.taste_mult)
 				continue
 			var/decl/material/liquid/nutriment/N = R
-			if(istype(N) && LAZYACCESS(reagent_data, reagent_type))
-				var/list/taste_data = LAZYACCESS(reagent_data, reagent_type)
+			if(istype(N) && LAZYACCESS(reagent_data, R))
+				var/list/taste_data = LAZYACCESS(reagent_data, R)
 				for(var/taste in taste_data)
 					if(!istext(taste))
 						continue

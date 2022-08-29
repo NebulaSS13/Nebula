@@ -21,9 +21,9 @@
 	set_tool_property(TOOL_PEN, TOOL_PROP_PEN_SHADE_COLOR, shade_colour)
 
 /obj/item/pen/crayon/afterattack(turf/target, mob/user, proximity)
-	if(!proximity) 
+	if(!proximity)
 		return
-		
+
 	if(istype(target) && target.is_floor())
 		var/drawtype = input("Choose what you'd like to draw.", "Crayon scribbles") in list("graffiti","rune","letter","arrow")
 		var/draw_message = "drawing"
@@ -38,7 +38,7 @@
 			if("arrow")
 				drawtype = input("Choose the arrow.", "Crayon scribbles") in list("left", "right", "up", "down")
 				draw_message = "drawing an arrow"
-		
+
 		if(do_tool_interaction(TOOL_PEN, user, target, 5 SECONDS, draw_message, "drawing on", fuel_expenditure = 1))
 			new /obj/effect/decal/cleanable/crayon(target, stroke_colour, shade_colour, drawtype)
 			target.add_fingerprint(user) // Adds their fingerprints to the floor the crayon is drawn on.
@@ -51,8 +51,8 @@
 		to_chat(M, SPAN_NOTICE("You take a bite of the crayon and swallow it."))
 		M.adjust_nutrition(1)
 		var/uses = get_tool_property(TOOL_PEN, TOOL_PROP_USES)
-		M.reagents.add_reagent(/decl/material/liquid/pigment, min(5,uses)/3)
-		if(parch.decrement_uses(user, src, 5) <= 0) 
+		M.reagents.add_reagent_by_id(/decl/material/liquid/pigment, min(5,uses)/3)
+		if(parch.decrement_uses(user, src, 5) <= 0)
 			to_chat(M, SPAN_WARNING("You ate your crayon!"))
 		return
 	. = ..()

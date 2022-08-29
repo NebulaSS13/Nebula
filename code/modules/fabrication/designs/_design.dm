@@ -60,7 +60,7 @@
 	if(length(matter))
 		for(var/M in matter)
 			.[M] = matter[M]
-	if(reagents && length(reagents.reagent_volumes))
+	if(length(reagents?.reagent_volumes))
 		for(var/R in reagents.reagent_volumes)
 			.[R] = FLOOR(REAGENT_VOLUME(reagents, R) / REAGENT_UNITS_PER_MATERIAL_UNIT)
 

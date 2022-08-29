@@ -30,7 +30,7 @@
 /obj/item/chems/proc/update_container_name()
 	var/newname = get_base_name()
 	if(presentation_flags & PRESENTATION_FLAG_NAME)
-		var/decl/material/R = reagents?.get_primary_reagent_decl()
+		var/decl/material/R = reagents?.get_primary_reagent()
 		if(R)
 			newname += " of [R.get_presentation_name(src)]"
 	if(length(label_text))

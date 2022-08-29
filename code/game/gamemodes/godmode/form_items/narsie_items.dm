@@ -75,4 +75,4 @@
 
 /obj/item/chems/drinks/zombiedrink/Initialize()
 	. = ..()
-	reagents.add_reagent(/decl/material/liquid/zombie, 10)
+	reagents.add_reagent_by_id(/decl/material/liquid/zombie, 10)

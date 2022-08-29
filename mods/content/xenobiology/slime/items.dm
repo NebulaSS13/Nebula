@@ -39,7 +39,7 @@
 		PRINT_STACK_TRACE("Slime extract initialized with non-decl slime colour: [slime_type || "NULL"].")
 	SSstatistics.extracted_slime_cores_amount++
 	create_reagents(100)
-	reagents.add_reagent(/decl/material/liquid/slimejelly, 30)
+	reagents.add_reagent_by_id(/decl/material/liquid/slimejelly, 30)
 	update_icon()
 
 /obj/item/slime_extract/on_reagent_change()

@@ -42,11 +42,11 @@ SUBSYSTEM_DEF(materials)
 		if(!chemical_reactions_by_result[D.result])
 			chemical_reactions_by_result[D.result] = list()
 		chemical_reactions_by_result[D.result] += D
-		if(D.required_reagents && D.required_reagents.len)
-			var/reagent_id = D.required_reagents[1]
-			if(!chemical_reactions_by_id[reagent_id])
-				chemical_reactions_by_id[reagent_id] = list()
-			chemical_reactions_by_id[reagent_id] += D
+		if(length(D.required_reagents))
+			var/decl/material/R = D.required_reagents[1]
+			if(!chemical_reactions_by_id[R])
+				chemical_reactions_by_id[R] = list()
+			chemical_reactions_by_id[R] += D
 
 	var/list/cocktails = decls_repository.get_decls_of_subtype(/decl/cocktail)
 	for(var/ctype in cocktails)

@@ -16,8 +16,8 @@
 		for(var/obj/item/O in input_turf)
 			if(!O.simulated || O.anchored)
 				continue
-			for(var/mat in O.reagents?.reagent_volumes)
-				stored[mat] = stored[mat] + FLOOR((O.reagents.reagent_volumes[mat] / REAGENT_UNITS_PER_MATERIAL_UNIT) * 0.75) // liquid reagents, lossy
+			for(var/R in O.reagents?.reagent_volumes)
+				stored[R] = stored[R] + FLOOR((O.reagents.reagent_volumes[R] / REAGENT_UNITS_PER_MATERIAL_UNIT) * 0.75) // liquid reagents, lossy
 			for(var/mat in O.matter)
 				stored[mat] = stored[mat] + O.matter[mat]
 			qdel(O)

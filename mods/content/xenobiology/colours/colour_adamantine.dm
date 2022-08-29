@@ -9,7 +9,7 @@
 	)
 
 /decl/slime_colour/adamantine/handle_blood_reaction(var/datum/reagents/holder)
-	holder.add_reagent(/decl/material/liquid/crystal_agent, 10)
+	holder.add_reagent_by_id(/decl/material/liquid/crystal_agent, 10)
 	return TRUE
 
 /decl/slime_colour/adamantine/handle_uranium_reaction(var/datum/reagents/holder)

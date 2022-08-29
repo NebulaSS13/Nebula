@@ -38,9 +38,10 @@
 	var/datum/reagents/ingested = M.get_ingested_reagents()
 	if(ingested && LAZYLEN(ingested.reagent_volumes) > 1)
 		var/effect = 1 / (LAZYLEN(ingested.reagent_volumes) - 1)
-		for(var/R in ingested.reagent_volumes)
-			if(R != type)
-				ingested.remove_reagent(R, removed * effect)
+		for(var/decl/material/R as anything in ingested.reagent_volumes)
+			if(R.type == type)
+				continue
+			ingested.remove_reagent(R, removed * effect)
 
 /decl/material/solid/phosphorus
 	name = "phosphorus"

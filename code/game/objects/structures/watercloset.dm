@@ -79,7 +79,7 @@ var/global/list/hygiene_props = list()
 			var/adding = min(flood_amt-F?.reagents.total_volume, rand(30,50)*clogged)
 			if(adding > 0)
 				if(!F) F = new(T)
-				F.reagents.add_reagent(/decl/material/liquid/water, adding)
+				F.reagents.add_reagent_by_id(/decl/material/liquid/water, adding)
 
 /obj/structure/hygiene/proc/drain()
 	if(!can_drain) return
@@ -310,13 +310,13 @@ var/global/list/hygiene_props = list()
 		for(var/thing in loc.get_contained_external_atoms())
 			wash_mob(thing)
 			process_heat(thing)
-		reagents.add_reagent(/decl/material/liquid/water, REAGENTS_FREE_SPACE(reagents))
+		reagents.add_reagent_by_id(/decl/material/liquid/water, REAGENTS_FREE_SPACE(reagents))
 		if(world.time >= next_wash)
 			next_wash = world.time + (10 SECONDS)
 			reagents.splash(get_turf(src), reagents.total_volume, max_spill = 0)
 
 /obj/structure/hygiene/shower/proc/process_heat(mob/living/M)
-	if(!on || !istype(M)) 
+	if(!on || !istype(M))
 		return
 	var/water_temperature = temperature_settings[watertemp]
 	var/temp_adj = between(BODYTEMP_COOLING_MAX, water_temperature - M.bodytemperature, BODYTEMP_HEATING_MAX)
@@ -392,7 +392,7 @@ var/global/list/hygiene_props = list()
 
 	var/obj/item/chems/RG = O
 	if (istype(RG) && ATOM_IS_OPEN_CONTAINER(RG) && RG.reagents)
-		RG.reagents.add_reagent(/decl/material/liquid/water, min(RG.volume - RG.reagents.total_volume, RG.amount_per_transfer_from_this))
+		RG.reagents.add_reagent_by_id(/decl/material/liquid/water, min(RG.volume - RG.reagents.total_volume, RG.amount_per_transfer_from_this))
 		user.visible_message(
 			SPAN_NOTICE("\The [user] fills \the [RG] using \the [src]."),
 			SPAN_NOTICE("You fill \the [RG] using \the [src]."))
@@ -419,7 +419,7 @@ var/global/list/hygiene_props = list()
 				return 1
 	else if(istype(O, /obj/item/mop))
 		if(REAGENTS_FREE_SPACE(O.reagents) >= 5)
-			O.reagents.add_reagent(/decl/material/liquid/water, 5)
+			O.reagents.add_reagent_by_id(/decl/material/liquid/water, 5)
 			to_chat(user, SPAN_NOTICE("You wet \the [O] in \the [src]."))
 			playsound(loc, 'sound/effects/slosh.ogg', 25, 1)
 		else
@@ -579,7 +579,7 @@ var/global/list/hygiene_props = list()
 
 /obj/structure/hygiene/faucet/Process()
 	..()
-	if(open) 
+	if(open)
 		water_flow()
 
 /obj/structure/hygiene/faucet/examine(mob/user)

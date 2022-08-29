@@ -566,15 +566,13 @@
 /obj/machinery/ftl_shunt/fuel_port/Initialize()
 
 	if(!fuels)
-		var/list/set_fuels = list(
+		fuels = list(
 			/decl/material/gas/hydrogen/tritium = 25000,
 			/decl/material/gas/hydrogen/deuterium = 25000,
 			/decl/material/gas/hydrogen = 25000,
 			/decl/material/solid/exotic_matter = 50000
 		)
-		fuels = list()
-		for(var/fuel in set_fuels)
-			fuels[GET_MATERIAL(fuel)] = set_fuels[fuel]
+		POPULATE_MATERIAL_LIST_ASSOC(fuels)
 
 	set_extension(src, /datum/extension/local_network_member)
 	if(initial_id_tag)

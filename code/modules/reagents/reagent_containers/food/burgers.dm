@@ -13,8 +13,8 @@
 
 /obj/item/chems/food/brainburger/Initialize()
 	. = ..()
-	reagents.add_reagent(/decl/material/liquid/nutriment/protein, 6)
-	reagents.add_reagent(/decl/material/liquid/neuroannealer, 6)
+	reagents.add_reagent_by_id(/decl/material/liquid/nutriment/protein, 6)
+	reagents.add_reagent_by_id(/decl/material/liquid/neuroannealer, 6)
 
 /obj/item/chems/food/ghostburger
 	name = "ghost burger"
@@ -41,7 +41,7 @@
 
 /obj/item/chems/food/human/burger/Initialize()
 	. = ..()
-	reagents.add_reagent(/decl/material/liquid/nutriment/protein, 6)
+	reagents.add_reagent_by_id(/decl/material/liquid/nutriment/protein, 6)
 
 /obj/item/chems/food/cheeseburger
 	name = "cheeseburger"
@@ -53,7 +53,7 @@
 
 /obj/item/chems/food/cheeseburger/Initialize()
 	. = ..()
-	reagents.add_reagent(/decl/material/liquid/nutriment/protein, 2)
+	reagents.add_reagent_by_id(/decl/material/liquid/nutriment/protein, 2)
 
 /obj/item/chems/food/burger
 	name = "burger"
@@ -68,7 +68,7 @@
 
 /obj/item/chems/food/burger/Initialize()
 	. = ..()
-	reagents.add_reagent(/decl/material/liquid/nutriment/protein, 3)
+	reagents.add_reagent_by_id(/decl/material/liquid/nutriment/protein, 3)
 
 /obj/item/chems/food/hamburger
 	name = "hamburger"
@@ -83,7 +83,7 @@
 
 /obj/item/chems/food/hamburger/Initialize()
 	. = ..()
-	reagents.add_reagent(/decl/material/liquid/nutriment/protein, 5)
+	reagents.add_reagent_by_id(/decl/material/liquid/nutriment/protein, 5)
 
 /obj/item/chems/food/fishburger
 	name = "fish sandwich"
@@ -95,7 +95,7 @@
 
 /obj/item/chems/food/fishburger/Initialize()
 	. = ..()
-	reagents.add_reagent(/decl/material/liquid/nutriment/protein, 6)
+	reagents.add_reagent_by_id(/decl/material/liquid/nutriment/protein, 6)
 
 /obj/item/chems/food/tofuburger
 	name = "tofu burger"
@@ -120,7 +120,7 @@
 /obj/item/chems/food/roburger/Initialize()
 	. = ..()
 	if(prob(5))
-		reagents.add_reagent(/decl/material/liquid/nanitefluid, 2)
+		reagents.add_reagent_by_id(/decl/material/liquid/nanitefluid, 2)
 
 /obj/item/chems/food/roburgerbig
 	name = "roburger"
@@ -133,7 +133,7 @@
 
 /obj/item/chems/food/roburgerbig/Initialize()
 	. = ..()
-	reagents.add_reagent(/decl/material/liquid/nanitefluid, 100)
+	reagents.add_reagent_by_id(/decl/material/liquid/nanitefluid, 100)
 
 /obj/item/chems/food/xenoburger
 	name = "xenoburger"
@@ -145,7 +145,7 @@
 
 /obj/item/chems/food/xenoburger/Initialize()
 	. = ..()
-	reagents.add_reagent(/decl/material/liquid/nutriment/protein, 8)
+	reagents.add_reagent_by_id(/decl/material/liquid/nutriment/protein, 8)
 
 /obj/item/chems/food/clownburger
 	name = "clown burger"
@@ -188,7 +188,7 @@
 
 /obj/item/chems/food/bigbiteburger/Initialize()
 	. = ..()
-	reagents.add_reagent(/decl/material/liquid/nutriment/protein, 10)
+	reagents.add_reagent_by_id(/decl/material/liquid/nutriment/protein, 10)
 
 /obj/item/chems/food/jellyburger
 	name = "jelly burger"
@@ -202,7 +202,7 @@
 
 /obj/item/chems/food/jellyburger/cherry/Initialize()
 	. = ..()
-	reagents.add_reagent(/decl/material/liquid/nutriment/cherryjelly, 5)
+	reagents.add_reagent_by_id(/decl/material/liquid/nutriment/cherryjelly, 5)
 
 /obj/item/chems/food/superbiteburger
 	name = "super bite burger"
@@ -216,7 +216,7 @@
 
 /obj/item/chems/food/superbiteburger/Initialize()
 	. = ..()
-	reagents.add_reagent(/decl/material/liquid/nutriment/protein, 25)
+	reagents.add_reagent_by_id(/decl/material/liquid/nutriment/protein, 25)
 
 // I am not creating another file just for hot dogs.
 
@@ -231,7 +231,7 @@
 
 /obj/item/chems/food/hotdog/Initialize()
 	. = ..()
-	reagents.add_reagent(/decl/material/liquid/nutriment/protein, 6)
+	reagents.add_reagent_by_id(/decl/material/liquid/nutriment/protein, 6)
 
 /obj/item/chems/food/classichotdog
 	name = "classic hotdog"
@@ -243,4 +243,4 @@
 
 /obj/item/chems/food/classichotdog/Initialize()
 	. = ..()
-	reagents.add_reagent(/decl/material/liquid/nutriment/protein, 16)
+	reagents.add_reagent_by_id(/decl/material/liquid/nutriment/protein, 16)

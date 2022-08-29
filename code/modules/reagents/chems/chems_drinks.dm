@@ -78,7 +78,7 @@
 
 /decl/material/liquid/drink/juice/carrot/affect_ingest(var/mob/living/M, var/removed, var/datum/reagents/holder)
 	..()
-	M.reagents.add_reagent(/decl/material/liquid/eyedrops, removed * 0.2)
+	M.reagents.add_reagent_by_id(/decl/material/liquid/eyedrops, removed * 0.2)
 
 /decl/material/liquid/drink/juice/grape
 	name = "grape juice"
@@ -269,7 +269,7 @@
 /decl/material/liquid/drink/milk/affect_ingest(var/mob/living/M, var/removed, var/datum/reagents/holder)
 	..()
 
-	holder.remove_reagent(/decl/material/liquid/capsaicin, 10 * removed)
+	holder.remove_reagent_by_id(/decl/material/liquid/capsaicin, 10 * removed)
 
 	if(M.HasTrait(/decl/trait/metabolically_inert))
 		return
@@ -331,7 +331,7 @@
 /decl/material/liquid/drink/coffee/affect_ingest(var/mob/living/M, var/removed, var/datum/reagents/holder)
 	..()
 	if(adj_temp > 0)
-		holder.remove_reagent(/decl/material/liquid/frostoil, 10 * removed)
+		holder.remove_reagent_by_id(/decl/material/liquid/frostoil, 10 * removed)
 
 	if(M.HasTrait(/decl/trait/metabolically_inert))
 		return
@@ -627,9 +627,9 @@
 
 /decl/material/liquid/drink/tea/build_presentation_name_from_reagents(var/obj/item/prop, var/supplied)
 	. = supplied || glass_name
-	if(prop.reagents.has_reagent(/decl/material/liquid/nutriment/sugar) || prop.reagents.has_reagent(/decl/material/liquid/nutriment/honey))
+	if(prop.reagents.has_reagent_of_id(/decl/material/liquid/nutriment/sugar) || prop.reagents.has_reagent_of_id(/decl/material/liquid/nutriment/honey))
 		. = "sweet [.]"
-	if(prop.reagents.has_reagent(/decl/material/liquid/drink/syrup/mint))
+	if(prop.reagents.has_reagent_of_id(/decl/material/liquid/drink/syrup/mint))
 		. = "mint [.]"
 	. = ..(prop, .)
 
@@ -656,10 +656,10 @@
 	uid = "chem_drink_blacktea"
 
 /decl/material/liquid/drink/tea/black/build_presentation_name_from_reagents(var/obj/item/prop, var/supplied)
-	if(prop.reagents.has_reagent(/decl/material/liquid/drink/juice/orange))
-		if(prop.reagents.has_reagent(/decl/material/liquid/drink/milk))
+	if(prop.reagents.has_reagent_of_id(/decl/material/liquid/drink/juice/orange))
+		if(prop.reagents.has_reagent_of_id(/decl/material/liquid/drink/milk))
 			. = "London Fog"
-		else if(prop.reagents.has_reagent(/decl/material/liquid/drink/milk/soymilk))
+		else if(prop.reagents.has_reagent_of_id(/decl/material/liquid/drink/milk/soymilk))
 			. = "soy London Fog"
 		else
 			. = "Baron Grey"
@@ -689,9 +689,9 @@
 	glass_desc = "A spiced, dark tea. Goes great with milk."
 
 /decl/material/liquid/drink/tea/chai/build_presentation_name_from_reagents(var/obj/item/prop, var/supplied)
-	if(prop.reagents.has_reagent(/decl/material/liquid/drink/milk))
+	if(prop.reagents.has_reagent_of_id(/decl/material/liquid/drink/milk))
 		. = "chai latte"
-	else if(prop.reagents.has_reagent(/decl/material/liquid/drink/milk))
+	else if(prop.reagents.has_reagent_of_id(/decl/material/liquid/drink/milk))
 		. = "soy chai latte"
 	. = ..(prop, .)
 

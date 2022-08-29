@@ -29,8 +29,8 @@
 
 /obj/item/chems/food/sliceable/flatdough/Initialize()
 	. = ..()
-	reagents.add_reagent(/decl/material/liquid/nutriment/protein, 1)
-	reagents.add_reagent(/decl/material/liquid/nutriment, 3)
+	reagents.add_reagent_by_id(/decl/material/liquid/nutriment/protein, 1)
+	reagents.add_reagent_by_id(/decl/material/liquid/nutriment, 3)
 
 /obj/item/chems/food/doughslice
 	name = "dough slice"

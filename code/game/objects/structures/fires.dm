@@ -271,11 +271,10 @@
 
 /obj/structure/fire_source/proc/take_reagents(datum/reagents/RG)
 	var/do_steam = FALSE
-	for(var/rtype in RG.reagent_volumes)
-		var/decl/material/R = GET_DECL(rtype)
+	for(var/decl/material/R as anything in RG.reagent_volumes)
 		if(R.fuel_value <= 0)
 			do_steam = TRUE
-		fuel += REAGENT_VOLUME(RG, rtype) * R.fuel_value
+		fuel += REAGENT_VOLUME(RG, R) * R.fuel_value
 	RG.clear_reagents()
 	fuel = max(0, fuel)
 	if(lit == FIRE_LIT)

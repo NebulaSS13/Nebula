@@ -6,4 +6,4 @@
 	organ.owner.custom_pain("A burning sensation spreads through your [organ.name].", 5, affecting = organ.owner)
 	var/datum/reagents/metabolism/bloodstr_reagents = organ.owner.get_injected_reagents()
 	if(bloodstr_reagents)
-		bloodstr_reagents.add_reagent(/decl/material/liquid/acid, rand(1, 3))
+		bloodstr_reagents.add_reagent_by_id(/decl/material/liquid/acid, rand(1, 3))

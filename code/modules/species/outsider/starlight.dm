@@ -85,7 +85,7 @@
 	var/turf/T = get_turf(H)
 	var/obj/effect/fluid/F = locate() in T
 	if(!F) F = new(T)
-	F.reagents.add_reagent(/decl/material/liquid/fuel, 20)
+	F.reagents.add_reagent_by_id(/decl/material/liquid/fuel, 20)
 	T.hotspot_expose(FLAMMABLE_GAS_MINIMUM_BURN_TEMPERATURE)
 
 /decl/species/starlight/blueforged

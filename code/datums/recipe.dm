@@ -31,6 +31,7 @@
 
 /decl/recipe/Initialize()
 	. = ..()
+	POPULATE_MATERIAL_LIST_ASSOC(reagents)
 	complexity = length(reagents) + length(fruit)
 	var/value
 	for(var/i in items) // add the number of items total
@@ -42,8 +43,8 @@
 	SHOULD_BE_PURE(TRUE)
 	if(length(avail_reagents?.reagent_volumes) < length(reagents))
 		return FALSE
-	for(var/rtype in reagents)
-		if(REAGENT_VOLUME(avail_reagents, rtype) < reagents[rtype])
+	for(var/R in reagents)
+		if(REAGENT_VOLUME(avail_reagents, R) < reagents[R])
 			return FALSE
 	return TRUE
 
@@ -188,27 +189,27 @@
 		if (REAGENT_MAX)
 			//We want the highest of each.
 			//Iterate through everything in buffer. If the target has less than the buffer, then top it up
-			for (var/_R in buffer.reagent_volumes)
-				var/rvol = REAGENT_VOLUME(holder, _R)
-				var/bvol = REAGENT_VOLUME(buffer, _R)
+			for(var/R in buffer.reagent_volumes)
+				var/rvol = REAGENT_VOLUME(holder, R)
+				var/bvol = REAGENT_VOLUME(buffer, R)
 				if (rvol < bvol)
 					//Transfer the difference
-					buffer.trans_type_to_holder(holder, _R, bvol-rvol)
+					buffer.trans_type_to_holder(holder, R, bvol-rvol)
 
 		if (REAGENT_MIN)
 			//Min is slightly more complex. We want the result to have the lowest from each side
 			//But zero will not count. Where a side has zero its ignored and the side with a nonzero value is used
-			for (var/_R in buffer.reagent_volumes)
-				var/rvol = REAGENT_VOLUME(holder, _R)
-				var/bvol = REAGENT_VOLUME(buffer, _R)
+			for (var/R in buffer.reagent_volumes)
+				var/rvol = REAGENT_VOLUME(holder, R)
+				var/bvol = REAGENT_VOLUME(buffer, R)
 				if (rvol == 0) //If the target has zero of this reagent
-					buffer.trans_type_to_holder(holder, _R, bvol)
+					buffer.trans_type_to_holder(holder, R, bvol)
 					//Then transfer all of ours
 
 				else if (rvol > bvol)
 					//if the target has more than ours
 					//Remove the difference
-					holder.remove_reagent(_R, rvol-bvol)
+					holder.remove_reagent(R, rvol-bvol)
 
 	if (length(results) > 1)
 		//If we're here, then holder is a buffer containing the total reagents for all the results.

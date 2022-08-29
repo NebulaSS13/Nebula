@@ -41,22 +41,22 @@
 	. = ..() && length(holder.reagent_volumes) > 1
 	if(.)
 		. = FALSE
-		for(var/rtype in holder.reagent_volumes)
-			if(rtype != /decl/material/liquid/crystal_agent && REAGENT_VOLUME(holder, rtype) >= REAGENT_UNITS_PER_MATERIAL_SHEET)
+		for(var/decl/material/R as anything in holder.reagent_volumes)
+			if(R.type != /decl/material/liquid/crystal_agent && REAGENT_VOLUME(holder, R) >= REAGENT_UNITS_PER_MATERIAL_SHEET)
 				return TRUE
 
 /decl/chemical_reaction/synthesis/crystalization/on_reaction(datum/reagents/holder, created_volume, reaction_flags)
 	var/location = get_turf(holder.get_reaction_loc())
 	if(location)
 		var/list/removing_reagents = list()
-		for(var/rtype in holder.reagent_volumes)
-			if(rtype != /decl/material/liquid/crystal_agent)
-				var/solidifying = FLOOR(REAGENT_VOLUME(holder, rtype) / REAGENT_UNITS_PER_MATERIAL_SHEET)
+		for(var/decl/material/R as anything in holder.reagent_volumes)
+			if(R.type != /decl/material/liquid/crystal_agent)
+				var/solidifying = FLOOR(REAGENT_VOLUME(holder, R) / REAGENT_UNITS_PER_MATERIAL_SHEET)
 				if(solidifying)
-					SSmaterials.create_object(rtype, location, solidifying, /obj/item/stack/material/cubes)
-					removing_reagents[rtype] = solidifying * REAGENT_UNITS_PER_MATERIAL_SHEET
-		for(var/rtype in removing_reagents)
-			holder.remove_reagent(rtype, removing_reagents[rtype])
+					SSmaterials.create_object(R, location, solidifying, /obj/item/stack/material/cubes)
+					removing_reagents[R] = solidifying * REAGENT_UNITS_PER_MATERIAL_SHEET
+		for(var/R in removing_reagents)
+			holder.remove_reagent(R, removing_reagents[R])
 
 // Turns gas into a "solid" form for use in PACMAN etc.
 /decl/chemical_reaction/synthesis/aerogel
@@ -71,27 +71,22 @@
 	. = ..() && length(holder.reagent_volumes) > 1
 	if(.)
 		. = FALSE
-		for(var/rtype in holder.reagent_volumes)
-			if(REAGENT_VOLUME(holder, rtype) < REAGENT_UNITS_PER_MATERIAL_SHEET)
-				continue
-			var/decl/material/mat = GET_DECL(rtype)
-			if(!mat || mat.default_solid_form != /obj/item/stack/material/aerogel)
-				continue
-			return TRUE
+		for(var/decl/material/R as anything in holder.reagent_volumes)
+			if(REAGENT_VOLUME(holder, R) >= REAGENT_UNITS_PER_MATERIAL_SHEET && R.default_solid_form == /obj/item/stack/material/aerogel)
+				return TRUE
 
 /decl/chemical_reaction/synthesis/aerogel/on_reaction(datum/reagents/holder, created_volume, reaction_flags)
 	var/location = get_turf(holder.get_reaction_loc())
 	if(location)
 		var/list/removing_reagents = list()
-		for(var/rtype in holder.reagent_volumes)
-			var/decl/material/mat = GET_DECL(rtype)
-			if(mat.default_solid_form == /obj/item/stack/material/aerogel)
-				var/solidifying = FLOOR(REAGENT_VOLUME(holder, rtype) / REAGENT_UNITS_PER_MATERIAL_SHEET)
+		for(var/decl/material/R as anything in holder.reagent_volumes)
+			if(R.default_solid_form == /obj/item/stack/material/aerogel)
+				var/solidifying = FLOOR(REAGENT_VOLUME(holder, R) / REAGENT_UNITS_PER_MATERIAL_SHEET)
 				if(solidifying)
-					SSmaterials.create_object(rtype, location, solidifying)
-					removing_reagents[rtype] = solidifying * REAGENT_UNITS_PER_MATERIAL_SHEET
-		for(var/rtype in removing_reagents)
-			holder.remove_reagent(rtype, removing_reagents[rtype])
+					R.create_object(location, solidifying)
+					removing_reagents[R] = solidifying * REAGENT_UNITS_PER_MATERIAL_SHEET
+		for(var/R in removing_reagents)
+			holder.remove_reagent(R, removing_reagents[R])
 
 /decl/chemical_reaction/synthesis/plastication
 	name = "Plastic"

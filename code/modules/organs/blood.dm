@@ -167,8 +167,8 @@
 		return //Don't divide by 0
 	var/injected_data = REAGENT_DATA(donor, species.blood_reagent)
 	var/chems = LAZYACCESS(injected_data, "trace_chem")
-	for(var/C in chems)
-		src.reagents.add_reagent(C, (text2num(chems[C]) / species.blood_volume) * amount)//adds trace chemicals to owner's blood
+	for(var/R in chems)
+		reagents.add_reagent(R, (text2num(chems[R]) / species.blood_volume) * amount)//adds trace chemicals to owner's blood
 
 //Transfers blood from reagents to vessel, respecting blood types compatability.
 /mob/living/carbon/human/inject_blood(var/amount, var/datum/reagents/donor)
@@ -182,7 +182,7 @@
 		if(istype(blood_decl))
 			reagents.add_reagent(blood_decl.transfusion_fail_reagent, amount * blood_decl.transfusion_fail_percentage)
 		else
-			reagents.add_reagent(/decl/material/liquid/coagulated_blood, amount * 0.5)
+			reagents.add_reagent_by_id(/decl/material/liquid/coagulated_blood, amount * 0.5)
 	else
 		adjust_blood(amount, injected_data)
 	..()

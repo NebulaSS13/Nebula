@@ -31,25 +31,22 @@
 		if(reaction.mechanics_text)
 			mechanics_text = "[reaction.mechanics_text]<br>[mechanics_text]"
 		var/list/reactant_values = list()
-		for(var/reactant_id in reaction.required_reagents)
-			var/decl/material/reactant = GET_DECL(reactant_id)
+		for(var/decl/material/reactant as anything in reaction.required_reagents)
 			var/reactant_name = "<span codexlink='[reactant.codex_name || reactant.name] (substance)'>[reactant.name]</span>"
-			reactant_values += "[reaction.required_reagents[reactant_id]]u [reactant_name]"
+			reactant_values += "[reaction.required_reagents[reactant]]u [reactant_name]"
 		mechanics_text += " [jointext(reactant_values, " + ")]"
 		var/list/inhibitors = list()
 
-		for(var/inhibitor_id in reaction.inhibitors)
-			var/decl/material/inhibitor = GET_DECL(inhibitor_id)
+		for(var/decl/material/inhibitor as anything in reaction.inhibitors)
 			var/inhibitor_name = "<span codexlink='[inhibitor.codex_name || inhibitor.name] (substance)'>[inhibitor.name]</span>"
 			inhibitors += inhibitor_name
 		if(length(inhibitors))
 			mechanics_text += " (inhibitors: [jointext(inhibitors, ", ")])"
 
 		var/list/catalysts = list()
-		for(var/catalyst_id in reaction.catalysts)
-			var/decl/material/catalyst = GET_DECL(catalyst_id)
+		for(var/decl/material/catalyst as anything in reaction.catalysts)
 			var/catalyst_name = "<span codexlink='[catalyst.codex_name || catalyst.name] (substance)'>[catalyst.name]</span>"
-			catalysts += "[reaction.catalysts[catalyst_id]]u [catalyst_name]"
+			catalysts += "[reaction.catalysts[catalyst]]u [catalyst_name]"
 		if(length(catalysts))
 			mechanics_text += " (catalysts: [jointext(catalysts, ", ")])"
 

@@ -39,7 +39,7 @@
 	H.visible_message("<B>\The [H]</B> starts turning very red...")
 
 /datum/genetics/side_effect/genetic_burn/finish(mob/living/carbon/human/H)
-	if(!H.reagents.has_reagent(/decl/material/liquid/oxy_meds))
+	if(!H.reagents.has_reagent_of_id(/decl/material/liquid/oxy_meds))
 		for(var/organ_name in global.all_limb_tags)
 			var/obj/item/organ/external/E = GET_EXTERNAL_ORGAN(H, organ_name)
 			E.take_external_damage(0, 5, 0)
@@ -54,7 +54,7 @@
 /datum/genetics/side_effect/bone_snap/start(mob/living/carbon/human/H)
 	H.visible_message("<B>\The [H]</B>'s limbs start shivering uncontrollably.")
 /datum/genetics/side_effect/bone_snap/finish(mob/living/carbon/human/H)
-	if(!H.reagents.has_reagent(/decl/material/liquid/brute_meds))
+	if(!H.reagents.has_reagent_of_id(/decl/material/liquid/brute_meds))
 		var/obj/item/organ/external/E = pick(H.get_external_organs())
 		if(E)
 			E.take_external_damage(20, 0, 0)
@@ -71,6 +71,6 @@
 		H.visible_message("<B>\The [H]</B> drools.")
 
 	finish(mob/living/carbon/human/H)
-		if(!H.reagents.has_reagent(/decl/material/liquid/antitoxins))
+		if(!H.reagents.has_reagent_of_id(/decl/material/liquid/antitoxins))
 			ADJ_STATUS(H, STAT_CONFUSE, 100)
 

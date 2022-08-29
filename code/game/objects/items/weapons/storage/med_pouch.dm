@@ -190,7 +190,7 @@ Single Use Emergency Pouches
 	chem_type = /decl/material/liquid/burn_meds
 
 /obj/item/chems/pill/pouch_pill/initialize_reagents()
-	reagents.add_reagent(chem_type, chem_amount)
+	reagents.add_reagent_by_id(chem_type, chem_amount)
 	var/decl/material/reagent = GET_DECL(chem_type)
 	SetName("emergency [reagent.liquid_name] pill ([reagents.total_volume]u)")
 

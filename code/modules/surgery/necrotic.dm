@@ -119,7 +119,7 @@
 
 /decl/surgery_step/necrotic/regeneration/pre_surgery_step(mob/living/user, mob/living/target, target_zone, obj/item/tool)
 	var/obj/item/chems/C = tool
-	if(!(ATOM_IS_OPEN_CONTAINER(C) && C.reagents.has_reagent(/decl/material/liquid/regenerator, 5)))
+	if(!(ATOM_IS_OPEN_CONTAINER(C) && C.reagents.has_reagent_of_id(/decl/material/liquid/regenerator, 5)))
 		to_chat(user, SPAN_WARNING("\The [tool] doesn't have enough chemicals to regenerate anything."))
 		return FALSE
 
@@ -166,8 +166,8 @@
 	var/amount = C.amount_per_transfer_from_this
 	var/datum/reagents/temp_reagents = new /datum/reagents(amount, temp_holder)
 	C.reagents.trans_to_holder(temp_reagents, amount)
-	var/usable_amount = temp_reagents.has_reagent(/decl/material/liquid/regenerator)
-	temp_reagents.clear_reagent(/decl/material/liquid/regenerator) //We'll manually calculate how much it should heal
+	var/usable_amount = temp_reagents.has_reagent_of_id(/decl/material/liquid/regenerator)
+	temp_reagents.clear_reagent_of_id(/decl/material/liquid/regenerator) //We'll manually calculate how much it should heal
 	temp_reagents.trans_to_mob(target, temp_reagents.total_volume, CHEM_INJECT) //And if there was something else, toss it in
 
 	if (usable_amount > 1)

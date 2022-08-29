@@ -159,7 +159,7 @@
 /obj/item/chems/hypospray/autoinjector/Initialize()
 	. = ..()
 	for(var/T in starts_with)
-		reagents.add_reagent(T, starts_with[T])
+		reagents.add_reagent_by_id(T, starts_with[T])
 	update_icon()
 
 /obj/item/chems/hypospray/autoinjector/attack(mob/M as mob, mob/user as mob)

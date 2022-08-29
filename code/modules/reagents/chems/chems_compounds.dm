@@ -71,7 +71,7 @@
 	M.bodytemperature = max(M.bodytemperature - 10 * TEMPERATURE_DAMAGE_COEFFICIENT, 0)
 	if(prob(1))
 		M.emote("shiver")
-	holder.remove_reagent(/decl/material/liquid/capsaicin, 5)
+	holder.remove_reagent_by_id(/decl/material/liquid/capsaicin, 5)
 
 /decl/material/liquid/capsaicin
 	name = "capsaicin oil"
@@ -98,7 +98,7 @@
 	M.adjustToxLoss(0.5 * removed)
 
 /decl/material/liquid/capsaicin/affect_ingest(var/mob/living/M, var/removed, var/datum/reagents/holder)
-	holder.remove_reagent(/decl/material/liquid/frostoil, 5)
+	holder.remove_reagent_by_id(/decl/material/liquid/frostoil, 5)
 
 	if(M.HasTrait(/decl/trait/metabolically_inert))
 		return
@@ -186,7 +186,7 @@
 			SET_STATUS_MAX(M, STAT_STUN, 3)
 
 /decl/material/liquid/capsaicin/condensed/affect_ingest(var/mob/living/M, var/removed, var/datum/reagents/holder)
-	holder.remove_reagent(/decl/material/liquid/frostoil, 5)
+	holder.remove_reagent_by_id(/decl/material/liquid/frostoil, 5)
 
 	if(M.HasTrait(/decl/trait/metabolically_inert))
 		return
@@ -299,7 +299,7 @@
 
 /decl/material/solid/tobacco/affect_blood(var/mob/living/M, var/removed, var/datum/reagents/holder)
 	..()
-	M.reagents.add_reagent(/decl/material/liquid/nicotine, nicotine)
+	M.reagents.add_reagent_by_id(/decl/material/liquid/nicotine, nicotine)
 
 /decl/material/solid/tobacco/fine
 	name = "fine tobacco"

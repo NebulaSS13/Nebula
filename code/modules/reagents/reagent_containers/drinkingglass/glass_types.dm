@@ -163,7 +163,7 @@
 
 /obj/item/chems/drinks/glass2/coffeecup/punitelli/Initialize()
 	. = ..()
-	reagents.add_reagent(/decl/material/liquid/drink/juice/banana, 30)
+	reagents.add_reagent_by_id(/decl/material/liquid/drink/juice/banana, 30)
 	update_icon()
 
 /obj/item/chems/drinks/glass2/coffeecup/rainbow

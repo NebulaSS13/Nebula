@@ -19,7 +19,6 @@
 /datum/reagents/metabolism/proc/metabolize()
 	if(parent && world.time > last_metabolize_time)
 		last_metabolize_time = world.time // prevents mobs that reuse a holder between functions (ingested/injected) from metabolizing twice in a tick
-		for(var/rtype in reagent_volumes)
-			var/decl/material/current = GET_DECL(rtype)
-			current.on_mob_life(parent, metabolism_class, src)
+		for(var/decl/material/R as anything in reagent_volumes)
+			R.on_mob_life(parent, metabolism_class, src)
 		update_total()

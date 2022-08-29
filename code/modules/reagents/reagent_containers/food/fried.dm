@@ -49,4 +49,4 @@
 
 /obj/item/chems/food/cheesyfries/Initialize()
 	. = ..()
-	reagents.add_reagent(/decl/material/liquid/nutriment/protein, 2)
+	reagents.add_reagent_by_id(/decl/material/liquid/nutriment/protein, 2)

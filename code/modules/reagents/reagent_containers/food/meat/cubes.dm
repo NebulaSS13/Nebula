@@ -15,7 +15,7 @@
 
 /obj/item/chems/food/monkeycube/Initialize()
 	. = ..()
-	reagents.add_reagent(/decl/material/liquid/nutriment/protein, 10)
+	reagents.add_reagent_by_id(/decl/material/liquid/nutriment/protein, 10)
 
 /obj/item/chems/food/monkeycube/get_single_monetary_worth()
 	. = (monkey_type ? round(atom_info_repository.get_combined_worth_for(monkey_type) * 1.25) : 5)
@@ -51,7 +51,7 @@
 	Expand()
 
 /obj/item/chems/food/monkeycube/on_reagent_change()
-	if(reagents.has_reagent(/decl/material/liquid/water))
+	if(reagents.has_reagent_of_id(/decl/material/liquid/water))
 		Expand()
 
 /obj/item/chems/food/monkeycube/wrapped

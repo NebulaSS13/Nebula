@@ -168,9 +168,8 @@
 	var/total_volume = 0
 	if(reagents)
 		total_volume += reagents.total_volume
-		for(var/rtype in reagents.reagent_volumes)
-			var/decl/material/R = GET_DECL(rtype)
-			total_fuel = REAGENT_VOLUME(reagents, rtype) * R.fuel_value
+		for(var/decl/material/R as anything in reagents.reagent_volumes)
+			total_fuel = REAGENT_VOLUME(reagents, R) * R.fuel_value
 	. = (total_fuel >= 2 && total_fuel >= total_volume*0.5)
 
 /obj/item/chems/glass/rag/proc/ignite()
@@ -218,6 +217,6 @@
 		return
 
 	if(reagents?.total_volume)
-		reagents.remove_reagent(/decl/material/liquid/fuel, reagents.maximum_volume/25)
+		reagents.remove_reagent_by_id(/decl/material/liquid/fuel, reagents.maximum_volume/25)
 	update_name()
 	burn_time--

@@ -276,24 +276,23 @@ var/global/list/material_extractor_items_whitelist = list(/obj/item/ore)
 
 //Filters all the reagents in the input tank, and send them to the proper output
 /obj/machinery/atmospherics/unary/material/extractor/proc/process_input_tank()
-	for(var/mat in input_buffer.reagents?.reagent_volumes)
-		var/decl/material/M = GET_DECL(mat)
-		var/available_volume = round(REAGENT_VOLUME(input_buffer.reagents, M.type), GAS_EXTRACTOR_MIN_REAGENT_AMOUNT)
+	for(var/decl/material/R as anything in input_buffer.reagents?.reagent_volumes)
+		var/available_volume = round(REAGENT_VOLUME(input_buffer.reagents, R), GAS_EXTRACTOR_MIN_REAGENT_AMOUNT)
 
 		//Don't bother if we got a really small quatity, and just get rid of it
 		if(available_volume < GAS_EXTRACTOR_MIN_REAGENT_AMOUNT)
-			input_buffer.reagents.clear_reagent(M.type)
+			input_buffer.reagents.clear_reagent(R)
 			continue
 
-		switch(M.phase_at_temperature(temperature))
+		switch(R.phase_at_temperature(temperature))
 			if(MAT_PHASE_SOLID)
-				dump_solid(M, available_volume) //If for silly reasons anything turns solid while reacting in the input, dump that here
+				dump_solid(R, available_volume) //If for silly reasons anything turns solid while reacting in the input, dump that here
 			if(MAT_PHASE_LIQUID)
-				dump_liquid(M, available_volume)
+				dump_liquid(R, available_volume)
 			if(MAT_PHASE_GAS)
-				dump_gas(M, available_volume)
+				dump_gas(R, available_volume)
 			if(MAT_PHASE_PLASMA)
-				dump_gas(M, available_volume)
+				dump_gas(R, available_volume)
 
 //Called each ticks, tries to fill the output with the content of the liquid tank
 /obj/machinery/atmospherics/unary/material/extractor/proc/move_liquids_to_output()

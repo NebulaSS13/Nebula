@@ -53,9 +53,8 @@
 			reactant_values += "[food.required_reagents[reactant_id]]u <l>[lowertext(initial(reactant.name))]</l>"
 		mechanics_text += " [jointext(reactant_values, " + ")]"
 		var/list/catalysts = list()
-		for(var/catalyst_id in food.catalysts)
-			var/decl/material/catalyst = catalyst_id
-			catalysts += "[food.catalysts[catalyst_id]]u <l>[lowertext(initial(catalyst.name))]</l>"
+		for(var/decl/material/catalyst in food.catalysts)
+			catalysts += "[food.catalysts[catalyst]]u <l>[lowertext(catalyst.name)]</l>"
 		if(catalysts.len)
 			mechanics_text += " (catalysts: [jointext(catalysts, ", ")])]"
 		if(food.maximum_temperature != INFINITY)

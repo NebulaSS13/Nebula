@@ -41,17 +41,20 @@
 	var/radiation = 0				//0-100 mSv
 	var/t_left_radspike = 0
 	var/rad_shield = 0
-	var/static/list/coolant_reagents_purity = list(
-		/decl/material/liquid/water = 1,
-		/decl/material/solid/ice = 0.6,
-		/decl/material/liquid/burn_meds = 0.7,
-		/decl/material/liquid/antiseptic = 0.7,
-		/decl/material/liquid/amphetamines = 0.8,
-		/decl/material/liquid/adminordrazine = 2
-	)
+	var/static/list/coolant_reagents_purity
 
 /obj/machinery/radiocarbon_spectrometer/Initialize()
 	. = ..()
+	if(!coolant_reagents_purity)
+		coolant_reagents_purity = list(
+			/decl/material/liquid/water = 1,
+			/decl/material/solid/ice = 0.6,
+			/decl/material/liquid/burn_meds = 0.7,
+			/decl/material/liquid/antiseptic = 0.7,
+			/decl/material/liquid/amphetamines = 0.8,
+			/decl/material/liquid/adminordrazine = 2
+		)
+		POPULATE_MATERIAL_LIST_ASSOC(coolant_reagents_purity)
 	create_reagents(500)
 
 /obj/machinery/radiocarbon_spectrometer/interface_interact(var/mob/user)
@@ -99,14 +102,14 @@
 	fresh_coolant = 0
 	coolant_purity = 0
 	var/num_reagent_types = 0
-	for(var/rtype in reagents.reagent_volumes)
-		var/cur_purity = coolant_reagents_purity[rtype]
+	for(var/R in reagents.reagent_volumes)
+		var/cur_purity = coolant_reagents_purity[R]
 		if(!cur_purity)
 			cur_purity = 0.1
 		else if(cur_purity > 1)
 			cur_purity = 1
-		total_purity += cur_purity * REAGENT_VOLUME(reagents, rtype)
-		fresh_coolant += REAGENT_VOLUME(reagents, rtype)
+		total_purity += cur_purity * REAGENT_VOLUME(reagents, R)
+		fresh_coolant += REAGENT_VOLUME(reagents, R)
 		num_reagent_types += 1
 	if(total_purity && fresh_coolant)
 		coolant_purity = total_purity / fresh_coolant
@@ -287,7 +290,7 @@
 
 	if(!anom_found)
 		data += " - No anomalous data<br>"
-	
+
 	return data
 
 /obj/machinery/radiocarbon_spectrometer/OnTopic(user, href_list)

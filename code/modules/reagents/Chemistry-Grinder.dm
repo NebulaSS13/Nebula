@@ -133,9 +133,8 @@
 
 	data["beakercontents"] = list()
 	if(beaker?.reagents)
-		for(var/rtype in beaker.reagents.reagent_volumes)
-			var/decl/material/R = GET_DECL(rtype)
-			data["beakercontents"] += "<b>[capitalize(R.name)]</b> ([REAGENT_VOLUME(beaker.reagents, rtype)]u)"
+		for(var/decl/material/R as anything in beaker.reagents.reagent_volumes)
+			data["beakercontents"] += "<b>[capitalize(R.name)]</b> ([REAGENT_VOLUME(beaker.reagents, R)]u)"
 
 	ui = SSnano.try_update_ui(user, src, ui_key, ui, data, force_open)
 	if(!ui)
@@ -238,7 +237,7 @@
 	user.visible_message(SPAN_DANGER("\The [user]'s hand gets caught in \the [src]!"), SPAN_DANGER("Your hand gets caught in \the [src]!"))
 	user.apply_damage(dam, BRUTE, hand, damage_flags = DAM_SHARP, used_weapon = "grinder")
 	if(BP_IS_PROSTHETIC(hand_organ))
-		beaker.reagents.add_reagent(/decl/material/solid/metal/iron, dam)
+		beaker.reagents.add_reagent_by_id(/decl/material/solid/metal/iron, dam)
 	else
 		user.take_blood(beaker, dam)
 	SET_STATUS_MAX(user, STAT_STUN, 2)

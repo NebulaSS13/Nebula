@@ -420,9 +420,8 @@
 	switch(ord)
 		if(1)
 			var/cont[0]
-			for(var/rtype in reagents.reagent_volumes)
-				var/decl/material/RE = GET_DECL(rtype)
-				cont += RE.name
+			for(var/decl/material/R as anything in reagents.reagent_volumes)
+				cont += R.name
 			set_pin_data(IC_OUTPUT, 3, cont)
 			push_data()
 		if(2)
@@ -487,14 +486,13 @@
 	if(target.reagents.maximum_volume - target.reagents.total_volume <= 0)
 		return
 
-	for(var/rtype in source.reagents.reagent_volumes)
-		var/decl/material/G = GET_DECL(rtype)
+	for(var/decl/material/R as anything in source.reagents.reagent_volumes)
 		if(!direction_mode)
-			if(G.name in demand)
-				source.reagents.trans_type_to(target, G.type, transfer_amount)
+			if(R.name in demand)
+				source.reagents.trans_type_to(target, R, transfer_amount)
 		else
-			if(!(G.name in demand))
-				source.reagents.trans_type_to(target, G.type, transfer_amount)
+			if(!(R.name in demand))
+				source.reagents.trans_type_to(target, R, transfer_amount)
 	activate_pin(2)
 	push_data()
 

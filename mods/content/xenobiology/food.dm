@@ -37,15 +37,15 @@
 
 /obj/item/chems/food/jellysandwich/slime/Initialize()
 	.=..()
-	reagents.add_reagent(/decl/material/liquid/slimejelly, 5)
+	reagents.add_reagent_by_id(/decl/material/liquid/slimejelly, 5)
 
 /obj/item/chems/food/jelliedtoast/slime/Initialize()
 	.=..()
-	reagents.add_reagent(/decl/material/liquid/slimejelly, 5)
+	reagents.add_reagent_by_id(/decl/material/liquid/slimejelly, 5)
 
 /obj/item/chems/food/jellyburger/slime/Initialize()
 	.=..()
-	reagents.add_reagent(/decl/material/liquid/slimejelly, 5)
+	reagents.add_reagent_by_id(/decl/material/liquid/slimejelly, 5)
 
 /obj/item/chems/food/slimesoup
 	name = "slime soup"
@@ -57,8 +57,8 @@
 
 /obj/item/chems/food/slimesoup/Initialize()
 	.=..()
-	reagents.add_reagent(/decl/material/liquid/slimejelly, 5)
-	reagents.add_reagent(/decl/material/liquid/water, 10)
+	reagents.add_reagent_by_id(/decl/material/liquid/slimejelly, 5)
+	reagents.add_reagent_by_id(/decl/material/liquid/water, 10)
 
 /obj/item/chems/food/donut/slimejelly
 	name = "jelly donut"
@@ -72,7 +72,7 @@
 
 /obj/item/chems/food/donut/slimejelly/Initialize()
 	.=..()
-	reagents.add_reagent(/decl/material/liquid/slimejelly, 5)
+	reagents.add_reagent_by_id(/decl/material/liquid/slimejelly, 5)
 
 /obj/item/chems/food/mysterysoup/get_random_fillings()
 	. = ..() + list(list(

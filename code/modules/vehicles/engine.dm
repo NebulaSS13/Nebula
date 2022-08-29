@@ -104,12 +104,12 @@
 	if(!reagents || reagents.total_volume <= 0 || stat)
 		return 0
 
+	// TODO: put these vars on the material decl.
 	reagents.trans_to(temp_reagents_holder,min(reagents.total_volume,15))
 	var/multiplier = 1
 	var/actually_flameable = 0
-	for(var/rtype in temp_reagents_holder.reagents.reagent_volumes)
+	for(var/decl/material/R as anything in temp_reagents_holder.reagents.reagent_volumes)
 		var/new_multiplier = 1
-		var/decl/material/R = GET_DECL(rtype)
 		if(istype(R,/decl/material/liquid/ethanol))
 			var/decl/material/liquid/ethanol/E = R
 			new_multiplier = (10/E.strength)
@@ -123,7 +123,7 @@
 			new_multiplier = 0.1
 		else if(istype(R,/decl/material/liquid/water))
 			new_multiplier = 0.4
-		else if(istype(R,/decl/material/liquid/nutriment/sugar) && REAGENT_VOLUME(reagents, rtype) > 1)
+		else if(istype(R,/decl/material/liquid/nutriment/sugar) && REAGENT_VOLUME(reagents, R) > 1)
 			stat = DEAD
 			explosion(get_turf(src),-1,0,2,3,0)
 			return 0

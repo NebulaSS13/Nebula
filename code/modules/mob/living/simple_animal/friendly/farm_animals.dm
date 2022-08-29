@@ -44,7 +44,7 @@
 
 		if(stat == CONSCIOUS)
 			if(udder && prob(5))
-				udder.add_reagent(/decl/material/liquid/drink/milk, rand(5, 10))
+				udder.add_reagent_by_id(/decl/material/liquid/drink/milk, rand(5, 10))
 
 		if(locate(/obj/effect/vine) in loc)
 			var/obj/effect/vine/SV = locate() in loc
@@ -139,7 +139,7 @@
 	if(!.)
 		return FALSE
 	if(udder && prob(5))
-		udder.add_reagent(/decl/material/liquid/drink/milk, rand(5, 10))
+		udder.add_reagent_by_id(/decl/material/liquid/drink/milk, rand(5, 10))
 
 /mob/living/simple_animal/cow/default_disarm_interaction(mob/user)
 	if(stat != DEAD && !HAS_STATUS(src, STAT_WEAK))

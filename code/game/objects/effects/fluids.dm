@@ -67,7 +67,7 @@
 	if(!reagents?.total_volume)
 		return
 
-	var/decl/material/main_reagent = reagents.get_primary_reagent_decl()
+	var/decl/material/main_reagent = reagents.get_primary_reagent()
 	if(main_reagent) // TODO: weighted alpha from all reagents, not just primary
 		alpha = Clamp(CEILING(255*(reagents.total_volume/FLUID_DEEP)) * main_reagent.opacity, main_reagent.min_fluid_opacity, main_reagent.max_fluid_opacity)
 
@@ -86,9 +86,8 @@
 	if(update_lighting)
 		update_lighting = FALSE
 		var/glowing
-		for(var/rtype in reagents.reagent_volumes)
-			var/decl/material/reagent = GET_DECL(rtype)
-			if(REAGENT_VOLUME(reagents, rtype) >= 3 && reagent.radioactivity)
+		for(var/decl/material/R as anything in reagents.reagent_volumes)
+			if(REAGENT_VOLUME(reagents, R) >= 3 && R.radioactivity)
 				glowing = TRUE
 				break
 		if(glowing)
@@ -136,12 +135,11 @@ var/global/obj/abstract/flood/flood_object = new
 	if(!length(reagents?.reagent_volumes) || !istype(air))
 		return
 	var/update_air = FALSE
-	for(var/rtype in reagents.reagent_volumes)
-		var/decl/material/mat = GET_DECL(rtype)
-		if(mat.gas_flags & XGM_GAS_FUEL)
-			var/moles = round(reagents.reagent_volumes[rtype] / REAGENT_UNITS_PER_GAS_MOLE)
+	for(var/decl/material/R as anything in reagents.reagent_volumes)
+		if(R.gas_flags & XGM_GAS_FUEL)
+			var/moles = round(reagents.reagent_volumes[R] / REAGENT_UNITS_PER_GAS_MOLE)
 			if(moles > 0)
-				air.adjust_gas(rtype, moles, FALSE)
+				air.adjust_gas(R.type, moles, FALSE) // TODO gas conversion
 				reagents.remove_reagent(round(moles * REAGENT_UNITS_PER_GAS_MOLE))
 				update_air = TRUE
 	if(update_air)

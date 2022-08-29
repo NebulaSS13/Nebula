@@ -793,7 +793,8 @@ var/global/list/datum/absorbed_dna/hivemind_bank = list()
 	if(!T)	return 0
 	to_chat(T, SPAN_DANGER("You feel a small prick and your chest becomes tight."))
 	ADJ_STATUS(T, STAT_JITTER, 400)
-	if(T.reagents)	T.reagents.add_reagent(/decl/material/gas/carbon_monoxide, 40)
+	if(T.reagents)
+		T.reagents.add_reagent_by_id(/decl/material/gas/carbon_monoxide, 40)
 	SSstatistics.add_field_details("changeling_powers","DTHS")
 	return 1
 

@@ -467,7 +467,7 @@
 	to_chat(user, "Auxilary tank shows [reagents.total_volume]u of liquid in it.")
 
 /obj/machinery/port_gen/pacman/super/potato/UseFuel()
-	if(reagents.has_reagent(/decl/material/liquid/ethanol/vodka))
+	if(reagents.has_reagent_of_id(/decl/material/liquid/ethanol/vodka))
 		rad_power = 4
 		temperature_gain = 60
 		reagents.remove_any(1)
@@ -488,7 +488,7 @@
 	if(istype(O, /obj/item/chems/))
 		var/obj/item/chems/R = O
 		if(R.standard_pour_into(src,user))
-			if(reagents.has_reagent(/decl/material/liquid/ethanol/vodka))
+			if(reagents.has_reagent_of_id(/decl/material/liquid/ethanol/vodka))
 				audible_message("<span class='notice'>[src] blips happily</span>")
 				playsound(get_turf(src),'sound/machines/synth_yes.ogg', 50, 0)
 			else

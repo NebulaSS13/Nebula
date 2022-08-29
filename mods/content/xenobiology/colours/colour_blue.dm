@@ -12,5 +12,5 @@
 	reaction_strings = list(/decl/material/solid/metal/uranium = "Synthesises a small amount of frost oil.")
 
 /decl/slime_colour/blue/handle_uranium_reaction(var/datum/reagents/holder)
-	holder.add_reagent(/decl/material/liquid/frostoil, 10)
+	holder.add_reagent_by_id(/decl/material/liquid/frostoil, 10)
 	return TRUE

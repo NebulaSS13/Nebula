@@ -17,7 +17,7 @@
 
 /obj/item/chems/drinks/cans/cola/Initialize()
 	. = ..()
-	reagents.add_reagent(/decl/material/liquid/drink/cola, 30)
+	reagents.add_reagent_by_id(/decl/material/liquid/drink/cola, 30)
 
 /obj/item/chems/drinks/cans/waterbottle
 	name = "bottled water"
@@ -28,7 +28,7 @@
 
 /obj/item/chems/drinks/cans/waterbottle/Initialize()
 	. = ..()
-	reagents.add_reagent(/decl/material/liquid/water, 30)
+	reagents.add_reagent_by_id(/decl/material/liquid/water, 30)
 
 /obj/item/chems/drinks/cans/waterbottle/open(mob/user)
 	playsound(loc,'sound/effects/bonebreak1.ogg', rand(10,50), 1)
@@ -43,7 +43,7 @@
 
 /obj/item/chems/drinks/cans/space_mountain_wind/Initialize()
 	. = ..()
-	reagents.add_reagent(/decl/material/liquid/drink/citrussoda, 30)
+	reagents.add_reagent_by_id(/decl/material/liquid/drink/citrussoda, 30)
 
 /obj/item/chems/drinks/cans/thirteenloko
 	name = "\improper Thirteen Loko"
@@ -53,7 +53,7 @@
 
 /obj/item/chems/drinks/cans/thirteenloko/Initialize()
 	. = ..()
-	reagents.add_reagent(/decl/material/liquid/ethanol/thirteenloko, 30)
+	reagents.add_reagent_by_id(/decl/material/liquid/ethanol/thirteenloko, 30)
 
 /obj/item/chems/drinks/cans/dr_gibb
 	name = "\improper Dr. Gibb"
@@ -63,7 +63,7 @@
 
 /obj/item/chems/drinks/cans/dr_gibb/Initialize()
 	. = ..()
-	reagents.add_reagent(/decl/material/liquid/drink/cherrycola, 30)
+	reagents.add_reagent_by_id(/decl/material/liquid/drink/cherrycola, 30)
 
 /obj/item/chems/drinks/cans/starkist
 	name = "\improper Star-Kist"
@@ -73,7 +73,7 @@
 
 /obj/item/chems/drinks/cans/starkist/Initialize()
 	. = ..()
-	reagents.add_reagent(/decl/material/liquid/drink/orangecola, 30)
+	reagents.add_reagent_by_id(/decl/material/liquid/drink/orangecola, 30)
 
 /obj/item/chems/drinks/cans/space_up
 	name = "\improper Space-Up"
@@ -83,7 +83,7 @@
 
 /obj/item/chems/drinks/cans/space_up/Initialize()
 	. = ..()
-	reagents.add_reagent(/decl/material/liquid/drink/lemonade, 30)
+	reagents.add_reagent_by_id(/decl/material/liquid/drink/lemonade, 30)
 
 /obj/item/chems/drinks/cans/lemon_lime
 	name = "\improper Lemon-Lime"
@@ -93,7 +93,7 @@
 
 /obj/item/chems/drinks/cans/lemon_lime/Initialize()
 	. = ..()
-	reagents.add_reagent(/decl/material/liquid/drink/lemon_lime, 30)
+	reagents.add_reagent_by_id(/decl/material/liquid/drink/lemon_lime, 30)
 
 /obj/item/chems/drinks/cans/iced_tea
 	name = "\improper Vrisk Serket Iced Tea"
@@ -103,8 +103,8 @@
 
 /obj/item/chems/drinks/cans/iced_tea/Initialize()
 	. = ..()
-	reagents.add_reagent(/decl/material/liquid/drink/tea/black, 25)
-	reagents.add_reagent(/decl/material/solid/ice, 5)
+	reagents.add_reagent_by_id(/decl/material/liquid/drink/tea/black, 25)
+	reagents.add_reagent_by_id(/decl/material/solid/ice, 5)
 
 /obj/item/chems/drinks/cans/grape_juice
 	name = "\improper Grapel Juice"
@@ -114,7 +114,7 @@
 
 /obj/item/chems/drinks/cans/grape_juice/Initialize()
 	. = ..()
-	reagents.add_reagent(/decl/material/liquid/drink/juice/grape, 30)
+	reagents.add_reagent_by_id(/decl/material/liquid/drink/juice/grape, 30)
 
 /obj/item/chems/drinks/cans/tonic
 	name = "\improper T-Borg's Tonic Water"
@@ -124,7 +124,7 @@
 
 /obj/item/chems/drinks/cans/tonic/Initialize()
 	. = ..()
-	reagents.add_reagent(/decl/material/liquid/drink/tonic, 30)
+	reagents.add_reagent_by_id(/decl/material/liquid/drink/tonic, 30)
 
 /obj/item/chems/drinks/cans/sodawater
 	name = "soda water"
@@ -134,7 +134,7 @@
 
 /obj/item/chems/drinks/cans/sodawater/Initialize()
 	. = ..()
-	reagents.add_reagent(/decl/material/liquid/drink/sodawater, 30)
+	reagents.add_reagent_by_id(/decl/material/liquid/drink/sodawater, 30)
 
 /obj/item/chems/drinks/cans/beastenergy
 	name = "Beast Energy"
@@ -144,7 +144,7 @@
 
 /obj/item/chems/drinks/cans/beastenergy/Initialize()
 	. = ..()
-	reagents.add_reagent(/decl/material/liquid/drink/beastenergy, 30)
+	reagents.add_reagent_by_id(/decl/material/liquid/drink/beastenergy, 30)
 
 //Items exclusive to the BODA machine on deck 4 and wherever else it pops up. First two are a bit jokey. Second two are genuine article.
 
@@ -156,7 +156,7 @@
 
 /obj/item/chems/drinks/cans/syndicolax/Initialize()
 	. = ..()
-	reagents.add_reagent(/decl/material/liquid/drink/juice/potato, 30)
+	reagents.add_reagent_by_id(/decl/material/liquid/drink/juice/potato, 30)
 
 /obj/item/chems/drinks/cans/artbru
 	name = "\improper Arstotzka Bru"
@@ -166,7 +166,7 @@
 
 /obj/item/chems/drinks/cans/artbru/Initialize()
 	. = ..()
-	reagents.add_reagent(/decl/material/liquid/drink/juice/turnip, 30)
+	reagents.add_reagent_by_id(/decl/material/liquid/drink/juice/turnip, 30)
 
 /obj/item/chems/drinks/cans/syndicola
 	name = "\improper TerraCola"
@@ -176,8 +176,8 @@
 
 /obj/item/chems/drinks/cans/syndicola/Initialize()
 	. = ..()
-	reagents.add_reagent(/decl/material/liquid/water, 25)
-	reagents.add_reagent(/decl/material/solid/metal/iron, 5)
+	reagents.add_reagent_by_id(/decl/material/liquid/water, 25)
+	reagents.add_reagent_by_id(/decl/material/solid/metal/iron, 5)
 
 /obj/item/chems/drinks/glass2/square/boda
 	name = "boda"
@@ -186,7 +186,7 @@
 
 /obj/item/chems/drinks/glass2/square/boda/Initialize()
 	. = ..()
-	reagents.add_reagent(/decl/material/liquid/drink/sodawater, 30)
+	reagents.add_reagent_by_id(/decl/material/liquid/drink/sodawater, 30)
 
 /obj/item/chems/drinks/glass2/square/bodaplus
 	name = "tri kopeiki sirop boda"
@@ -195,7 +195,7 @@
 
 /obj/item/chems/drinks/glass2/square/bodaplus/Initialize()
 	. = ..()
-	reagents.add_reagent(/decl/material/liquid/drink/sodawater, 15)
+	reagents.add_reagent_by_id(/decl/material/liquid/drink/sodawater, 15)
 	reagents.add_reagent(pick(list(
 				/decl/material/liquid/drink/citrusseltzer,
 				/decl/material/liquid/drink/juice/grape,
@@ -218,7 +218,7 @@
 
 /obj/item/chems/drinks/cans/speer/Initialize()
 	. = ..()
-	reagents.add_reagent(/decl/material/liquid/ethanol/beer/good, 30)
+	reagents.add_reagent_by_id(/decl/material/liquid/ethanol/beer/good, 30)
 
 /obj/item/chems/drinks/cans/ale
 	name = "\improper Magm-Ale"
@@ -228,4 +228,4 @@
 
 /obj/item/chems/drinks/cans/ale/Initialize()
 	. = ..()
-	reagents.add_reagent(/decl/material/liquid/ethanol/ale, 30)
+	reagents.add_reagent_by_id(/decl/material/liquid/ethanol/ale, 30)

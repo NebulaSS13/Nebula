@@ -947,7 +947,7 @@ modules/mob/living/carbon/human/life.dm if you die, you will be zoomed out.
 		if(istype(source, /obj/structure/reagent_dispensers/watertank))
 			source.reagents.trans_to_obj(src, free_space)
 		else
-			reagents.add_reagent(/decl/material/liquid/water, free_space)
+			reagents.add_reagent_by_id(/decl/material/liquid/water, free_space)
 		if(reagents && reagents.total_volume >= reagents.maximum_volume)
 			to_chat(user, SPAN_NOTICE("You fill \the [src] with [free_space] unit\s from \the [source]."))
 			reagents.touch(src)

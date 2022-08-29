@@ -69,7 +69,7 @@
 
 /obj/item/robot_module/medical/surgeon/finalize_emag()
 	. = ..()
-	emag.reagents.add_reagent(/decl/material/liquid/acid/polyacid, 250)
+	emag.reagents.add_reagent_by_id(/decl/material/liquid/acid/polyacid, 250)
 	emag.SetName("Polyacid spray")
 
 /obj/item/robot_module/medical/surgeon/finalize_synths()
@@ -85,7 +85,7 @@
 /obj/item/robot_module/medical/surgeon/respawn_consumable(var/mob/living/silicon/robot/R, var/amount)
 	if(emag)
 		var/obj/item/chems/spray/PS = emag
-		PS.reagents.add_reagent(/decl/material/liquid/acid/polyacid, 2 * amount)
+		PS.reagents.add_reagent_by_id(/decl/material/liquid/acid/polyacid, 2 * amount)
 	..()
 
 /obj/item/robot_module/medical/crisis
@@ -141,7 +141,7 @@
 
 /obj/item/robot_module/medical/crisis/finalize_emag()
 	. = ..()
-	emag.reagents.add_reagent(/decl/material/liquid/acid/polyacid, 250)
+	emag.reagents.add_reagent_by_id(/decl/material/liquid/acid/polyacid, 250)
 	emag.SetName("Polyacid spray")
 
 /obj/item/robot_module/medical/crisis/finalize_synths()
@@ -164,5 +164,5 @@
 		S.update_icon()
 	if(emag)
 		var/obj/item/chems/spray/PS = emag
-		PS.reagents.add_reagent(/decl/material/liquid/acid/polyacid, 2 * amount)
+		PS.reagents.add_reagent_by_id(/decl/material/liquid/acid/polyacid, 2 * amount)
 	..()

@@ -99,7 +99,7 @@
 
 /obj/item/clothing/mask/chewable/tobacco/nico/Initialize()
 	. = ..()
-	reagents.add_reagent(/decl/material/liquid/nicotine, 2)
+	reagents.add_reagent_by_id(/decl/material/liquid/nicotine, 2)
 	color = reagents.get_color()
 
 /obj/item/clothing/mask/chewable/candy

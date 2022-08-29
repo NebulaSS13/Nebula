@@ -16,7 +16,7 @@
 
 /obj/item/chems/food/sandwich/Initialize()
 	. = ..()
-	reagents.add_reagent(/decl/material/liquid/nutriment/protein, 3)
+	reagents.add_reagent_by_id(/decl/material/liquid/nutriment/protein, 3)
 
 /obj/item/chems/food/toastedsandwich
 	name = "toasted sandwich"
@@ -32,8 +32,8 @@
 
 /obj/item/chems/food/toastedsandwich/Initialize()
 	. = ..()
-	reagents.add_reagent(/decl/material/liquid/nutriment/protein, 3)
-	reagents.add_reagent(/decl/material/solid/carbon, 2)
+	reagents.add_reagent_by_id(/decl/material/liquid/nutriment/protein, 3)
+	reagents.add_reagent_by_id(/decl/material/solid/carbon, 2)
 
 /obj/item/chems/food/grilledcheese
 	name = "grilled cheese sandwich"
@@ -48,7 +48,7 @@
 
 /obj/item/chems/food/grilledcheese/Initialize()
 	. = ..()
-	reagents.add_reagent(/decl/material/liquid/nutriment/protein, 4)
+	reagents.add_reagent_by_id(/decl/material/liquid/nutriment/protein, 4)
 
 /obj/item/chems/food/baguette
 	name = "baguette"
@@ -63,8 +63,8 @@
 
 /obj/item/chems/food/baguette/Initialize()
 	. = ..()
-	reagents.add_reagent(/decl/material/solid/blackpepper, 1)
-	reagents.add_reagent(/decl/material/solid/sodiumchloride, 1)
+	reagents.add_reagent_by_id(/decl/material/solid/blackpepper, 1)
+	reagents.add_reagent_by_id(/decl/material/solid/sodiumchloride, 1)
 
 /obj/item/chems/food/jelliedtoast
 	name = "jellied toast"
@@ -80,7 +80,7 @@
 
 /obj/item/chems/food/jelliedtoast/cherry/Initialize()
 	. = ..()
-	reagents.add_reagent(/decl/material/liquid/nutriment/cherryjelly, 5)
+	reagents.add_reagent_by_id(/decl/material/liquid/nutriment/cherryjelly, 5)
 
 /obj/item/chems/food/jellysandwich
 	name = "jelly sandwich"
@@ -96,7 +96,7 @@
 
 /obj/item/chems/food/jellysandwich/cherry/Initialize()
 	. = ..()
-	reagents.add_reagent(/decl/material/liquid/nutriment/cherryjelly, 5)
+	reagents.add_reagent_by_id(/decl/material/liquid/nutriment/cherryjelly, 5)
 
 /obj/item/chems/food/twobread
 	name = "\improper Two Bread"

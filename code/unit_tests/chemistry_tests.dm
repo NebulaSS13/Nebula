@@ -1,7 +1,7 @@
 /datum/unit_test/chemistry
 	name = "CHEMISTRY: Reagent Template"
 	template = /datum/unit_test/chemistry
-	
+
 	var/container_volume = 45
 	var/donor_type = /obj/item
 	var/recipient_type = /obj/item
@@ -12,7 +12,7 @@
 
 	var/atom/from = new donor_type(test_loc)
 	from.create_reagents(container_volume)
-	from.reagents.add_reagent(/decl/material/liquid/water, container_volume)
+	from.reagents.add_reagent_by_id(/decl/material/liquid/water, container_volume)
 
 	var/atom/target
 	if(ispath(recipient_type, /turf) && istype(test_loc, recipient_type))
@@ -152,7 +152,7 @@
 	for(var/path in all_reactions)
 		var/decl/chemical_reaction/reaction = all_reactions[path]
 		for(var/reagent in reaction.required_reagents)
-			for(var/decl/chemical_reaction/other_reaction in SSmaterials.chemical_reactions_by_id[reagent])
+			for(var/decl/chemical_reaction/other_reaction as anything in SSmaterials.chemical_reactions_by_id[reagent])
 				// We check if their requirements to react are a subset of our reaction's requirements, i.e. (we can react) implies (they can react)
 				if(other_reaction == reaction)
 					continue

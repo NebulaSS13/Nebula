@@ -55,41 +55,41 @@ var/global/const/DRINK_ICON_NOISY = "noise"
 
 /obj/item/chems/drinks/glass2/proc/has_ice()
 	if(LAZYLEN(reagents.reagent_volumes))
-		var/decl/material/R = reagents.get_primary_reagent_decl()
-		if(!((R.type == /decl/material/solid/ice) || ("ice" in R.glass_special))) // if it's not a cup of ice, and it's not already supposed to have ice in, see if the bartender's put ice in it
-			if(reagents.has_reagent(/decl/material/solid/ice, reagents.total_volume / 10)) // 10% ice by volume
-				return 1
-
-	return 0
+		// if it's not a cup of ice, and it's not already supposed to have ice in, see if the bartender's put ice in it
+		var/decl/material/R = reagents.get_primary_reagent()
+		if(!R || R.type == /decl/material/solid/ice || ("ice" in R.glass_special))
+			return FALSE
+		if(reagents.has_reagent_of_id(/decl/material/solid/ice, reagents.total_volume / 10)) // 10% ice by volume
+			return TRUE
+	return FALSE
 
 /obj/item/chems/drinks/glass2/proc/has_fizz()
-	if(LAZYLEN(reagents.reagent_volumes))
-		var/decl/material/R = reagents.get_primary_reagent_decl()
-		if(("fizz" in R.glass_special))
-			return 1
-		var/totalfizzy = 0
-		for(var/rtype in reagents.reagent_volumes)
-			var/decl/material/re = GET_DECL(rtype)
-			if("fizz" in re.glass_special)
-				totalfizzy += REAGENT_VOLUME(reagents, rtype)
-		if(totalfizzy >= reagents.total_volume / 5) // 20% fizzy by volume
-			return 1
-	return 0
+	if(!LAZYLEN(reagents.reagent_volumes))
+		return FALSE
+	var/decl/material/primary = reagents.get_primary_reagent()
+	if(!primary)
+		return
+	if("fizz" in primary.glass_special)
+		return TRUE
+	var/totalfizzy = 0
+	for(var/decl/material/R as anything in reagents.reagent_volumes)
+		if("fizz" in R.glass_special)
+			totalfizzy += REAGENT_VOLUME(reagents, R)
+	return (totalfizzy >= reagents.total_volume / 5) // 20% fizzy by volume
 
 /obj/item/chems/drinks/glass2/proc/has_vapor()
-	if(LAZYLEN(reagents.reagent_volumes) > 0)
-		if(temperature > T0C + 40)
-			return 1
-		var/decl/material/R = reagents.get_primary_reagent_decl()
-		if(!("vapor" in R.glass_special))
-			var/totalvape = 0
-			for(var/rtype in reagents.reagent_volumes)
-				var/decl/material/re = GET_DECL(rtype)
-				if("vapor" in re.glass_special)
-					totalvape += REAGENT_VOLUME(reagents, type)
-			if(totalvape >= volume * 0.6) // 60% vapor by container volume
-				return 1
-	return 0
+	if(!LAZYLEN(reagents.reagent_volumes))
+		return FALSE
+	if(temperature > T0C + 40)
+		return TRUE
+	var/decl/material/primary = reagents.get_primary_reagent()
+	if("vapor" in primary?.glass_special)
+		return TRUE
+	var/totalvape = 0
+	for(var/decl/material/R as anything in reagents.reagent_volumes)
+		if("vapor" in R.glass_special)
+			totalvape += REAGENT_VOLUME(reagents, R)
+	return (totalvape >= volume * 0.6) // 60% vapor by container volume
 
 /obj/item/chems/drinks/glass2/Initialize()
 	. = ..()
@@ -131,7 +131,7 @@ var/global/const/DRINK_ICON_NOISY = "noise"
 	icon_state = base_icon
 
 	if (LAZYLEN(reagents?.reagent_volumes) > 0)
-		var/decl/material/R = reagents.get_primary_reagent_decl()
+		var/decl/material/R = reagents.get_primary_reagent()
 		if(R.cocktail_ingredient)
 			for(var/decl/cocktail/cocktail in SSmaterials.get_cocktails_by_primary_ingredient(R.type))
 				if(cocktail.matches(src) && cocktail.has_sprite(src) && cocktail.can_use_sprite(src))

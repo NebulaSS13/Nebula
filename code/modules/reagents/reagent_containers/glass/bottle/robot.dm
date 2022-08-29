@@ -15,7 +15,7 @@
 
 /obj/item/chems/glass/bottle/robot/stabilizer/Initialize()
 	. = ..()
-	reagents.add_reagent(/decl/material/liquid/stabilizer, 60)
+	reagents.add_reagent_by_id(/decl/material/liquid/stabilizer, 60)
 	update_icon()
 
 /obj/item/chems/glass/bottle/robot/antitoxin
@@ -27,5 +27,5 @@
 
 /obj/item/chems/glass/bottle/robot/antitoxin/Initialize()
 	. = ..()
-	reagents.add_reagent(/decl/material/liquid/antitoxins, 60)
+	reagents.add_reagent_by_id(/decl/material/liquid/antitoxins, 60)
 	update_icon()

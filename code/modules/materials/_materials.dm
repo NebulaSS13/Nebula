@@ -334,6 +334,12 @@ INITIALIZE_IMMEDIATE(/obj/effect/gas_overlay)
 			break
 
 /decl/material/proc/link_references()
+	if(length(dissolves_into))
+		POPULATE_MATERIAL_LIST_ASSOC(dissolves_into)
+	if(length(chilling_products))
+		POPULATE_MATERIAL_LIST_ASSOC(chilling_products)
+	if(length(heating_products))
+		POPULATE_MATERIAL_LIST_ASSOC(heating_products)
 	if(burn_product)
 		burn_product = GET_MATERIAL(burn_product)
 
@@ -688,7 +694,7 @@ INITIALIZE_IMMEDIATE(/obj/effect/gas_overlay)
 			if(cocktail.matches(prop))
 				return cocktail.get_presentation_name(prop)
 
-	if(prop.reagents.has_reagent(/decl/material/solid/ice))
+	if(prop.reagents.has_reagent_of_id(/decl/material/solid/ice))
 		. = "iced [.]"
 
 /decl/material/proc/get_presentation_desc(var/obj/item/prop)

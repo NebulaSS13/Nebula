@@ -23,9 +23,9 @@ var/global/list/cached_icons = list()
 	if(pigment)
 		var/amt = round(reagents.maximum_volume/2)
 		reagents.add_reagent(pigment, amt)
-		reagents.add_reagent(/decl/material/liquid/paint, amt)
+		reagents.add_reagent_by_id(/decl/material/liquid/paint, amt)
 	else
-		reagents.add_reagent(/decl/material/liquid/paint, reagents.maximum_volume)
+		reagents.add_reagent_by_id(/decl/material/liquid/paint, reagents.maximum_volume)
 
 /obj/item/chems/glass/paint/on_update_icon()
 	. = ..()

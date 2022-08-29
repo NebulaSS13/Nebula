@@ -110,9 +110,11 @@
 	fruit_descriptor = "astringent"
 	uid = "chem_antitoxins"
 	var/remove_generic = 1
-	var/list/remove_toxins = list(
-		/decl/material/liquid/zombiepowder
-	)
+	var/static/list/remove_toxins
+
+/decl/material/liquid/antitoxins/Initialize()
+	. = ..()
+	remove_toxins = list(GET_MATERIAL(/decl/material/liquid/zombiepowder))
 
 /decl/material/liquid/antitoxins/affect_blood(var/mob/living/M, var/removed, var/datum/reagents/holder)
 	if(remove_generic)
@@ -122,15 +124,13 @@
 
 	var/removing = (4 * removed)
 	var/datum/reagents/ingested = M.get_ingested_reagents()
-	for(var/R in ingested.reagent_volumes)
-		var/decl/material/chem = GET_DECL(R)
-		if((remove_generic && chem.toxicity) || (R in remove_toxins))
+	for(var/decl/material/R as anything in ingested.reagent_volumes)
+		if((remove_generic && R.toxicity) || (R in remove_toxins))
 			M.reagents.remove_reagent(R, removing)
 			return
 
-	for(var/R in M.reagents?.reagent_volumes)
-		var/decl/material/chem = GET_DECL(R)
-		if((remove_generic && chem.toxicity) || (R in remove_toxins))
+	for(var/decl/material/R as anything in M.reagents?.reagent_volumes)
+		if((remove_generic && R.toxicity) || (R in remove_toxins))
 			M.reagents.remove_reagent(R, removing)
 			return
 
@@ -358,4 +358,4 @@
 
 /decl/material/liquid/oxy_meds/affect_blood(var/mob/living/M, var/removed, var/datum/reagents/holder)
 	M.add_chemical_effect(CE_OXYGENATED, 1)
-	holder.remove_reagent(/decl/material/gas/carbon_monoxide, 2 * removed)
+	holder.remove_reagent_by_id(/decl/material/gas/carbon_monoxide, 2 * removed)
