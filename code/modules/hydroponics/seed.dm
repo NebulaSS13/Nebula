@@ -234,7 +234,7 @@
 				var/list/data = null
 				if(reagent_amounts?[2] && potency > 0)
 					rtotal += round(potency/reagent_amounts[2])
-				if(rid == /decl/material/liquid/nutriment)
+				if(istype(rid, /decl/material/liquid/nutriment))
 					LAZYSET(data, seed_name, max(1,rtotal))
 				splat_reagents.add_reagent(rid,max(1,rtotal),data)
 	if(splat_reagents)

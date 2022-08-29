@@ -196,7 +196,7 @@
 /obj/item/chems/drinks/glass2/square/bodaplus/Initialize()
 	. = ..()
 	reagents.add_reagent_by_id(/decl/material/liquid/drink/sodawater, 15)
-	reagents.add_reagent(pick(list(
+	reagents.add_reagent_by_id(pick(list(
 				/decl/material/liquid/drink/citrusseltzer,
 				/decl/material/liquid/drink/juice/grape,
 				/decl/material/liquid/drink/juice/orange,

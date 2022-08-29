@@ -51,7 +51,7 @@
 			var/list/data = null
 			if(LAZYACCESS(reagent_amounts,2) && potency > 0)
 				rtotal += round(potency/reagent_amounts[2])
-			if(rid == /decl/material/liquid/nutriment)
+			if(istype(rid, /decl/material/liquid/nutriment))
 				LAZYSET(data, seed.seed_name, max(1,rtotal))
 			reagents.add_reagent(rid,max(1,rtotal),data)
 	update_desc()

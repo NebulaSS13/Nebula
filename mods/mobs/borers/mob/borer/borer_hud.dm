@@ -81,7 +81,7 @@
 	worm.host.verbs += /mob/living/carbon/proc/spawn_larvae
 
 	return TRUE
-	
+
 /obj/screen/borer/inject_chemicals
 	name = "Inject Chemicals"
 	icon_state = "inject_chemicals"
@@ -105,7 +105,7 @@
 		return
 
 	to_chat(worm, SPAN_NOTICE("You squirt a measure of [chem] from your reservoirs into \the [worm.host]'s bloodstream."))
-	worm.host.reagents.add_reagent(worm.chemical_types[chem], 10)
+	worm.host.reagents.add_reagent_by_id(worm.chemical_types[chem], 10)
 	worm.chemicals -= 50
 	return TRUE
 

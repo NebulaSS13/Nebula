@@ -85,12 +85,12 @@
 	playsound(user.loc, 'sound/items/drink.ogg', rand(10, 50), 1)
 
 /obj/item/chems/condiment/self_feed_message(var/mob/user)
-	to_chat(user, "<span class='notice'>You swallow some of contents of \the [src].</span>")
+	to_chat(user, SPAN_NOTICE("You swallow some of contents of \the [src]."))
 
 /obj/item/chems/condiment/Initialize()
 	. = ..()
 	for(var/R in starting_reagents)
-		reagents.add_reagent(R, starting_reagents[R])
+		reagents.add_reagent_by_id(R, starting_reagents[R])
 
 /obj/item/chems/condiment/on_reagent_change()
 	var/reagent = reagents.primary_reagent

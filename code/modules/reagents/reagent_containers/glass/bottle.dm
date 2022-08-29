@@ -64,9 +64,9 @@
 	. = ..()
 	if(LAZYLEN(initial_reagents))
 		for(var/R in initial_reagents)
-			reagents.add_reagent(R, initial_reagents[R])
+			reagents.add_reagent_by_id(R, initial_reagents[R])
 		if(autolabel && !label_text) // don't override preset labels
-			var/decl/material/R = GET_DECL(initial_reagents[1])
+			var/decl/material/R = GET_MATERIAL(initial_reagents[1])
 			label_text = R.name
 	update_container_name()
 	update_icon()

@@ -10,7 +10,7 @@
 /decl/material/liquid/anfo/explosion_act(obj/item/chems/holder, severity)
 	. = ..()
 	if(.)
-		var/volume = REAGENT_VOLUME(holder?.reagents, type)
+		var/volume = REAGENT_VOLUME(holder?.reagents, src)
 		var/activated_volume = volume
 		switch(severity)
 			if(2)
@@ -28,7 +28,7 @@
 			var/gas_moles = 3 * volume
 			products.adjust_multi(/decl/material/gas/carbon_dioxide, 0.5 * gas_moles, /decl/material/gas/nitrogen, 0.3 * gas_moles, /decl/material/liquid/water, 0.2 * gas_moles)
 			T.assume_air(products)
-			holder?.reagents?.remove_reagent(type, activated_volume)
+			holder?.reagents?.remove_reagent(src, activated_volume)
 			explosion(T, adj_power, adj_power + 1, adj_power*2 + 2)
 
 /decl/material/liquid/anfo/plus

@@ -354,7 +354,7 @@
 
 	var/is_flavoured
 	for(var/decl/material/liquid/drink/syrup/syrup in flavour_modifiers)
-		if(prop.reagents.has_reagent(syrup.type))
+		if(prop.reagents.has_reagent(syrup))
 			is_flavoured = TRUE
 			. = "[.][syrup.coffee_modifier] "
 

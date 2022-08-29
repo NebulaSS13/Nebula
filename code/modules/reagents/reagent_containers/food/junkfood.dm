@@ -334,7 +334,7 @@
 
 /obj/item/chems/food/donut/chaos/Initialize()
 	. = ..()
-	reagents.add_reagent(pick(get_random_fillings()), 3)
+	reagents.add_reagent_by_id(pick(get_random_fillings()), 3)
 
 /obj/item/chems/food/donut/jelly
 	name = "jelly donut"

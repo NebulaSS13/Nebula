@@ -20,7 +20,7 @@
 /decl/material/liquid/fuel/explosion_act(obj/item/chems/holder, severity)
 	. = ..()
 	if(.)
-		var/volume = REAGENT_VOLUME(holder?.reagents, type)
+		var/volume = REAGENT_VOLUME(holder?.reagents, src)
 		if(volume <= 50)
 			return
 		var/turf/T = get_turf(holder)
@@ -34,7 +34,7 @@
 			explosion(T,0,1,3)
 		else if(volume > 50)
 			explosion(T,-1,1,2)
-		holder?.reagents?.remove_reagent(type, volume)
+		holder?.reagents?.remove_reagent(src, volume)
 
 /decl/material/liquid/fuel/hydrazine
 	name = "hydrazine"

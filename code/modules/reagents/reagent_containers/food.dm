@@ -41,13 +41,13 @@
 /obj/item/chems/food/Initialize()
 	.=..()
 	if(nutriment_amt)
-		reagents.add_reagent(nutriment_type, nutriment_amt, nutriment_desc)
+		reagents.add_reagent_by_id(nutriment_type, nutriment_amt, nutriment_desc)
 	amount_per_transfer_from_this = bitesize
 
 	//Placeholder for effect that trigger on eating that aren't tied to reagents.
 /obj/item/chems/food/proc/On_Consume(var/mob/M)
 	if(!reagents.total_volume)
-		M.visible_message("<span class='notice'>[M] finishes eating \the [src].</span>","<span class='notice'>You finish eating \the [src].</span>")
+		M.visible_message(SPAN_NOTICE("\The [M] finishes eating \the [src]."), SPAN_NOTICE("You finish eating \the [src]."))
 		M.drop_item()
 		M.update_personal_goal(/datum/goal/achievement/specific_object/food, type)
 		if(trash)

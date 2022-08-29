@@ -21,15 +21,18 @@
 
 /obj/item/chems/glass/beaker/vial/random
 	atom_flags = 0
-	var/list/random_reagent_list = list(list(/decl/material/liquid/water = 15) = 1, list(/decl/material/liquid/cleaner = 15) = 1)
+	var/list/random_reagent_list = list(
+		list(/decl/material/liquid/water = 15)   = 1,
+		list(/decl/material/liquid/cleaner = 15) = 1
+	)
 
 /obj/item/chems/glass/beaker/vial/random/toxin
 	random_reagent_list = list(
-		list(/decl/material/liquid/hallucinogenics = 10)    = 2,
-		list(/decl/material/liquid/psychoactives = 20)      = 2,
-		list(/decl/material/liquid/carpotoxin = 15)   = 2,
-		list(/decl/material/liquid/narcotics = 15)          = 2,
-		list(/decl/material/liquid/zombiepowder = 10) = 1
+		list(/decl/material/liquid/hallucinogenics = 10) = 2,
+		list(/decl/material/liquid/psychoactives = 20)   = 2,
+		list(/decl/material/liquid/carpotoxin = 15)      = 2,
+		list(/decl/material/liquid/narcotics = 15)       = 2,
+		list(/decl/material/liquid/zombiepowder = 10)    = 1
 	)
 
 /obj/item/chems/glass/beaker/vial/random/Initialize()
@@ -37,7 +40,7 @@
 
 	var/list/picked_reagents = pickweight(random_reagent_list)
 	for(var/reagent in picked_reagents)
-		reagents.add_reagent(reagent, picked_reagents[reagent])
+		reagents.add_reagent_by_id(reagent, picked_reagents[reagent])
 
 	var/list/names = new
 	for(var/decl/material/R as anything in reagents.reagent_volumes)

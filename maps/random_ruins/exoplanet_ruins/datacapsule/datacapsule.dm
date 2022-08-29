@@ -34,12 +34,16 @@
 
 /obj/item/chems/glass/beaker/vial/random_podchem
 	name = "unmarked vial"
+	var/static/list/reagent_types = list(
+		/decl/material/liquid/random,
+		/decl/material/liquid/zombie/science,
+		/decl/material/liquid/retrovirals
+	)
 
 /obj/item/chems/glass/beaker/vial/random_podchem/Initialize()
 	. = ..()
-	desc += "Label is smudged, and there's crusted blood fingerprints on it."
-	var/reagent_type = pick(/decl/material/liquid/random, /decl/material/liquid/zombie/science, /decl/material/liquid/retrovirals)
-	reagents.add_reagent(pick(reagent_type), 5)
+	desc += "The label is smudged and half-covered by crusted blood fingerprints."
+	reagents.add_reagent_by_id(pick(reagent_types), 5)
 
 /obj/structure/backup_server
 	name = "backup server"

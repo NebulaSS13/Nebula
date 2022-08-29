@@ -323,25 +323,32 @@ INITIALIZE_IMMEDIATE(/obj/effect/gas_overlay)
 		gas_symbol = "[name]_[sequential_id(abstract_type)]"
 	if(!gas_symbol_html)
 		gas_symbol_html = gas_symbol
-	global.materials_by_gas_symbol[gas_symbol] = type
+	global.materials_by_gas_symbol[gas_symbol] = src
 	generate_armor_values()
 
-	var/list/cocktails = decls_repository.get_decls_of_subtype(/decl/cocktail)
-	for(var/ctype in cocktails)
-		var/decl/cocktail/cocktail = cocktails[ctype]
-		if(type in cocktail.ratios)
-			cocktail_ingredient = TRUE
-			break
-
 /decl/material/proc/link_references()
+
 	if(length(dissolves_into))
 		POPULATE_MATERIAL_LIST_ASSOC(dissolves_into)
 	if(length(chilling_products))
 		POPULATE_MATERIAL_LIST_ASSOC(chilling_products)
 	if(length(heating_products))
 		POPULATE_MATERIAL_LIST_ASSOC(heating_products)
+
 	if(burn_product)
 		burn_product = GET_MATERIAL(burn_product)
+
+	if(bypass_heating_products_for_root_type)
+		bypass_heating_products_for_root_type = GET_MATERIAL(bypass_heating_products_for_root_type)
+	if(bypass_cooling_products_for_root_type)
+		bypass_cooling_products_for_root_type = GET_MATERIAL(bypass_cooling_products_for_root_type)
+
+	var/list/cocktails = decls_repository.get_decls_of_subtype(/decl/cocktail)
+	for(var/ctype in cocktails)
+		var/decl/cocktail/cocktail = cocktails[ctype]
+		if(src in cocktail.ratios)
+			cocktail_ingredient = TRUE
+			break
 
 // Weapons handle applying a divisor for this value locally.
 /decl/material/proc/get_blunt_damage()
@@ -405,13 +412,13 @@ INITIALIZE_IMMEDIATE(/obj/effect/gas_overlay)
 		var/obj/item/stack/stack_type = object_type
 		var/divisor = initial(stack_type.max_amount)
 		while(amount >= divisor)
-			LAZYADD(., new object_type(target, divisor, type, reinf_type))
+			LAZYADD(., new object_type(target, divisor, src, reinf_type))
 			amount -= divisor
 		if(amount >= 1)
-			LAZYADD(., new object_type(target, amount, type, reinf_type))
+			LAZYADD(., new object_type(target, amount, src, reinf_type))
 	else
 		for(var/i = 1 to amount)
-			var/atom/movable/placed = new object_type(target, type, reinf_type)
+			var/atom/movable/placed = new object_type(target, src, reinf_type)
 			if(istype(placed))
 				LAZYADD(., placed)
 
@@ -474,7 +481,7 @@ INITIALIZE_IMMEDIATE(/obj/effect/gas_overlay)
 		I.visible_message(SPAN_DANGER("\The [O] dissolves!"))
 		I.desc = "It looks like it was \a [O] some time ago."
 		qdel(O)
-		holder?.remove_reagent(type, solvent_melt_dose)
+		holder?.remove_reagent(src, solvent_melt_dose)
 
 	if(dirtiness <= DIRTINESS_STERILE)
 		O.germ_level -= min(REAGENT_VOLUME(holder, type)*20, O.germ_level)
@@ -495,7 +502,7 @@ INITIALIZE_IMMEDIATE(/obj/effect/gas_overlay)
 
 /decl/material/proc/touch_turf(var/turf/T, var/amount, var/datum/reagents/holder) // Cleaner cleaning, lube lubbing, etc, all go here
 
-	if(REAGENT_VOLUME(holder, type) < turf_touch_threshold)
+	if(REAGENT_VOLUME(holder, src) < turf_touch_threshold)
 		return
 
 	if(istype(T, /turf/simulated))
@@ -511,11 +518,11 @@ INITIALIZE_IMMEDIATE(/obj/effect/gas_overlay)
 				W.wet_floor(slipperiness)
 
 	if(length(vapor_products))
-		var/volume = REAGENT_VOLUME(holder, type)
+		var/volume = REAGENT_VOLUME(holder, src)
 		var/temperature = holder?.my_atom?.temperature || T20C
 		for(var/vapor in vapor_products)
 			T.assume_gas(vapor, (volume * vapor_products[vapor]), temperature)
-		holder.remove_reagent(type, volume)
+		holder.remove_reagent(src, volume)
 
 /decl/material/proc/on_mob_life(var/mob/living/M, var/metabolism_class, var/datum/reagents/holder) // Currently, on_mob_life is called on carbons. Any interaction with non-carbon mobs (lube) will need to be done in touch_mob.
 	if(QDELETED(src))
@@ -526,7 +533,7 @@ INITIALIZE_IMMEDIATE(/obj/effect/gas_overlay)
 		return
 	if(overdose && (metabolism_class != CHEM_TOUCH))
 		var/overdose_threshold = overdose * (flags & IGNORE_MOB_SIZE? 1 : MOB_SIZE_MEDIUM/M.mob_size)
-		if(REAGENT_VOLUME(holder, type) > overdose_threshold)
+		if(REAGENT_VOLUME(holder, src) > overdose_threshold)
 			affect_overdose(M, holder)
 
 	//determine the metabolism rate
@@ -542,8 +549,8 @@ INITIALIZE_IMMEDIATE(/obj/effect/gas_overlay)
 	if(!(flags & IGNORE_MOB_SIZE) && metabolism_class != CHEM_TOUCH)
 		effective *= (MOB_SIZE_MEDIUM/M.mob_size)
 
-	var/dose = LAZYACCESS(M.chem_doses, type) + effective
-	LAZYSET(M.chem_doses, type, dose)
+	var/dose = LAZYACCESS(M.chem_doses, src) + effective
+	LAZYSET(M.chem_doses, src, dose)
 	if(effective >= (metabolism * 0.1) || effective >= 0.1) // If there's too little chemical, don't affect the mob, just remove it
 		switch(metabolism_class)
 			if(CHEM_INJECT)
@@ -552,7 +559,7 @@ INITIALIZE_IMMEDIATE(/obj/effect/gas_overlay)
 				affect_ingest(M, effective, holder)
 			if(CHEM_TOUCH)
 				affect_touch(M, effective, holder)
-	holder.remove_reagent(type, removed)
+	holder.remove_reagent(src, removed)
 
 /decl/material/proc/affect_blood(var/mob/living/M, var/removed, var/datum/reagents/holder)
 	if(radioactivity)
@@ -644,7 +651,7 @@ INITIALIZE_IMMEDIATE(/obj/effect/gas_overlay)
 					continue
 				if(thing.unacidable || !H.unEquip(thing))
 					to_chat(H, SPAN_NOTICE("Your [thing] protects you from the acid."))
-					holder.remove_reagent(type, REAGENT_VOLUME(holder, type))
+					holder.remove_reagent(src, REAGENT_VOLUME(holder, src))
 					return
 				to_chat(H, SPAN_DANGER("Your [thing] dissolves!"))
 				qdel(thing)
@@ -672,7 +679,7 @@ INITIALIZE_IMMEDIATE(/obj/effect/gas_overlay)
 		. = newdata
 
 /decl/material/proc/mix_data(var/datum/reagents/reagents, var/list/newdata, var/amount)
-	. = REAGENT_DATA(reagents, type)
+	. = REAGENT_DATA(reagents, src)
 
 /decl/material/proc/explosion_act(obj/item/chems/holder, severity)
 	SHOULD_CALL_PARENT(TRUE)
@@ -690,7 +697,7 @@ INITIALIZE_IMMEDIATE(/obj/effect/gas_overlay)
 	. = supplied
 
 	if(cocktail_ingredient)
-		for(var/decl/cocktail/cocktail in SSmaterials.get_cocktails_by_primary_ingredient(type))
+		for(var/decl/cocktail/cocktail in SSmaterials.get_cocktails_by_primary_ingredient(src))
 			if(cocktail.matches(prop))
 				return cocktail.get_presentation_name(prop)
 

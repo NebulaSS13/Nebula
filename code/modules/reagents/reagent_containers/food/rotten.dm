@@ -8,17 +8,18 @@
 	nutriment_amt = 10
 	bitesize = 3
 	filling_color = "#336b42"
+	var/static/list/reagent_types = list(
+		/decl/material/liquid/fuel,
+		/decl/material/liquid/amatoxin,
+		/decl/material/liquid/carpotoxin,
+		/decl/material/liquid/zombiepowder,
+		/decl/material/liquid/presyncopics,
+		/decl/material/liquid/psychotropics
+	)
 
 /obj/item/chems/food/old/Initialize()
 	. = ..()
-	reagents.add_reagent(pick(list(
-				/decl/material/liquid/fuel,
-				/decl/material/liquid/amatoxin,
-				/decl/material/liquid/carpotoxin,
-				/decl/material/liquid/zombiepowder,
-				/decl/material/liquid/presyncopics,
-				/decl/material/liquid/psychotropics)), 5)
-
+	reagents.add_reagent_by_id(pick(reagent_types), 5)
 
 /obj/item/chems/food/old/pizza
 	name = "pizza"

@@ -73,7 +73,7 @@
 	if(!F)
 		F = new(src)
 	if(!QDELETED(F))
-		F.reagents.add_reagent(fluid_type, min(fluid_amount, FLUID_MAX_DEPTH - F.reagents.total_volume), defer_update = defer_update)
+		F.reagents.add_reagent(GET_MATERIAL(fluid_type), min(fluid_amount, FLUID_MAX_DEPTH - F.reagents.total_volume), defer_update = defer_update)
 
 /turf/proc/get_physical_height()
 	return 0

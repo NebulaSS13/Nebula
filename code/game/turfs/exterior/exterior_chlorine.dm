@@ -4,7 +4,7 @@
 	icon = 'icons/turf/exterior/water_still.dmi'
 	color = "#d2e0b7"
 	dirt_color = "#d2e0b7"
-	reagent_type = /decl/material/gas/chlorine
+	water_reagent_type = /decl/material/gas/chlorine
 
 /turf/exterior/chlorine_sand
 	name = "chlorinated sand"

@@ -101,7 +101,7 @@
 			I = emissive_overlay(icon, "[icon_state]-on")
 		I.appearance_flags |= RESET_COLOR
 		add_overlay(I)
-		
+
 	if(ismob(loc))
 		var/mob/living/M = loc
 		M.update_inv_wear_mask(0)
@@ -200,7 +200,7 @@
 /obj/item/clothing/mask/smokable/cigarette/Initialize()
 	. = ..()
 	for(var/R in filling)
-		reagents.add_reagent(R, filling[R])
+		reagents.add_reagent_by_id(R, filling[R])
 	set_extension(src, /datum/extension/tool, list(TOOL_CAUTERY = TOOL_QUALITY_MEDIOCRE))
 
 /obj/item/clothing/mask/smokable/cigarette/light(var/flavor_text = "[usr] lights the [name].")

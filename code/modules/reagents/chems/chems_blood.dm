@@ -33,7 +33,7 @@
 		.["species"] = .["species"] || global.using_map.default_species
 
 /decl/material/liquid/blood/mix_data(var/datum/reagents/reagents, var/list/newdata, var/amount)
-	var/list/data = REAGENT_DATA(reagents, type)
+	var/list/data = REAGENT_DATA(reagents, src)
 	if(LAZYACCESS(newdata, "trace_chem"))
 		var/list/other_chems = LAZYACCESS(newdata, "trace_chem")
 		if(!data)
@@ -47,8 +47,8 @@
 	. = data
 
 /decl/material/liquid/blood/touch_turf(var/turf/T, var/amount, var/datum/reagents/holder)
-	var/data = REAGENT_DATA(holder, type)
-	if(!istype(T) || REAGENT_VOLUME(holder, type) < 3)
+	var/data = REAGENT_DATA(holder, src)
+	if(!istype(T) || REAGENT_VOLUME(holder, src) < 3)
 		return
 	var/weakref/W = LAZYACCESS(data, "donor")
 	if (!W)
@@ -65,9 +65,9 @@
 /decl/material/liquid/blood/affect_ingest(var/mob/living/M, var/removed, var/datum/reagents/holder)
 	if(M.HasTrait(/decl/trait/metabolically_inert))
 		return
-	if(LAZYACCESS(M.chem_doses, type) > 5)
+	if(LAZYACCESS(M.chem_doses, src) > 5)
 		M.adjustToxLoss(removed)
-	if(LAZYACCESS(M.chem_doses, type) > 15)
+	if(LAZYACCESS(M.chem_doses, src) > 15)
 		M.adjustToxLoss(removed)
 
 /decl/material/liquid/blood/affect_touch(var/mob/living/M, var/removed, var/datum/reagents/holder)
@@ -78,10 +78,10 @@
 
 /decl/material/liquid/blood/affect_blood(var/mob/living/M, var/removed, var/datum/reagents/holder)
 	if(ishuman(M))
-		var/volume = REAGENT_VOLUME(holder, type)
+		var/volume = REAGENT_VOLUME(holder, src)
 		var/mob/living/carbon/H = M
 		H.inject_blood(volume, holder)
-		holder.remove_reagent(type, volume)
+		holder.remove_reagent(src, volume)
 
 /decl/material/liquid/coagulated_blood
 	name = "coagulated blood"

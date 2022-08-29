@@ -194,7 +194,7 @@
 	matter_per_piece = matter?.Copy() // this is used for refreshing matter amount in update_matter()
 	if(istype(material))
 		LAZYINITLIST(matter_per_piece)
-		matter_per_piece[material.type] = max(matter_per_piece[material.type], round(MATTER_AMOUNT_PRIMARY * matter_multiplier))
+		matter_per_piece[material] = max(matter_per_piece[material], round(MATTER_AMOUNT_PRIMARY * matter_multiplier))
 	. = ..()
 
 /obj/item/stack/proc/update_matter()

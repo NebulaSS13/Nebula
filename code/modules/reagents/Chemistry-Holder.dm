@@ -72,12 +72,12 @@ var/global/obj/temp_reagents_holder = new
 		var/replace_sound
 
 		if(!(check_flags & ATOM_FLAG_NO_PHASE_CHANGE))
-			if(!isnull(R.chilling_point) && R.type != R.bypass_cooling_products_for_root_type && LAZYLEN(R.chilling_products) && temperature <= R.chilling_point)
+			if(!isnull(R.chilling_point) && R != R.bypass_cooling_products_for_root_type && LAZYLEN(R.chilling_products) && temperature <= R.chilling_point)
 				replace_self_with = R.chilling_products
 				if(R.chilling_message)
 					replace_message = "\The [lowertext(R.name)] [R.chilling_message]"
 				replace_sound = R.chilling_sound
-			else if(!isnull(R.heating_point) && R.type != R.bypass_heating_products_for_root_type && LAZYLEN(R.heating_products) && temperature >= R.heating_point)
+			else if(!isnull(R.heating_point) && R != R.bypass_heating_products_for_root_type && LAZYLEN(R.heating_products) && temperature >= R.heating_point)
 				replace_self_with = R.heating_products
 				if(R.heating_message)
 					replace_message = "\The [lowertext(R.name)] [R.heating_message]"
@@ -256,6 +256,14 @@ var/global/obj/temp_reagents_holder = new
 	if(. && amount)
 		. = (. >= amount)
 
+/datum/reagents/proc/has_any_reagent_of_id(var/list/check_reagents)
+	for(var/check in check_reagents)
+		check = GET_MATERIAL(check)
+		var/vol = REAGENT_VOLUME(src, check)
+		if(vol > 0 && vol >= check_reagents[check])
+			return TRUE
+	return FALSE
+
 /datum/reagents/proc/has_any_reagent(var/list/check_reagents)
 	for(var/check in check_reagents)
 		var/vol = REAGENT_VOLUME(src, check)
@@ -430,33 +438,33 @@ var/global/obj/temp_reagents_holder = new
 	if (total_volume <= 0)
 		qdel(src)
 
-/datum/reagents/proc/trans_type_to(var/atom/target, var/type, var/amount = 1, var/multiplier = 1, var/defer_update = FALSE)
+/datum/reagents/proc/trans_type_to(var/atom/target, var/R, var/amount = 1, var/multiplier = 1, var/defer_update = FALSE)
 	if (!target || !target.reagents || !target.simulated)
 		return
 
-	amount = min(amount, REAGENT_VOLUME(src, type))
+	amount = min(amount, REAGENT_VOLUME(src, R))
 
 	if(!amount)
 		return
 
 	var/datum/reagents/F = new(amount, global.temp_reagents_holder)
-	F.add_reagent(type, amount, REAGENT_DATA(src, type))
-	remove_reagent(type, amount, defer_update = defer_update)
+	F.add_reagent(R, amount, REAGENT_DATA(src, R))
+	remove_reagent(R, amount, defer_update = defer_update)
 	. = F.trans_to(target, amount, multiplier, defer_update = defer_update) // Let this proc check the atom's type
 	qdel(F)
 
-/datum/reagents/proc/trans_type_to_holder(var/datum/reagents/target, var/type, var/amount = 1, var/multiplier = 1, var/defer_update = FALSE)
+/datum/reagents/proc/trans_type_to_holder(var/datum/reagents/target, var/R, var/amount = 1, var/multiplier = 1, var/defer_update = FALSE)
 	if (!target)
 		return
 
-	amount = min(amount, REAGENT_VOLUME(src, type))
+	amount = min(amount, REAGENT_VOLUME(src, R))
 
 	if(!amount)
 		return
 
 	var/datum/reagents/F = new(amount, global.temp_reagents_holder)
-	F.add_reagent(type, amount, REAGENT_DATA(src, type))
-	remove_reagent(type, amount, defer_update = defer_update)
+	F.add_reagent(R, amount, REAGENT_DATA(src, R))
+	remove_reagent(R, amount, defer_update = defer_update)
 	. = F.trans_to_holder(target, amount, multiplier, defer_update = defer_update) // Let this proc check the atom's type
 	qdel(F)
 
@@ -527,20 +535,20 @@ var/global/obj/temp_reagents_holder = new
 		perm = L.reagent_permeability()
 	return trans_to_mob(target, amount * perm, CHEM_TOUCH, 1, copy, defer_update = defer_update)
 
-/datum/reagents/proc/trans_to_mob(var/mob/target, var/amount = 1, var/type = CHEM_INJECT, var/multiplier = 1, var/copy = 0, var/defer_update = FALSE) // Transfer after checking into which holder...
+/datum/reagents/proc/trans_to_mob(var/mob/target, var/amount = 1, var/chem_type = CHEM_INJECT, var/multiplier = 1, var/copy = 0, var/defer_update = FALSE) // Transfer after checking into which holder...
 	if(!target || !istype(target) || !target.simulated)
 		return
 	if(isliving(target))
 		var/mob/living/L = target
-		if(type == CHEM_INJECT)
+		if(chem_type == CHEM_INJECT)
 			var/datum/reagents/R = L.get_injected_reagents()
 			if(R)
 				return trans_to_holder(R, amount, multiplier, copy, defer_update = defer_update)
-		if(type == CHEM_INGEST)
+		if(chem_type == CHEM_INGEST)
 			var/datum/reagents/R = L.get_ingested_reagents()
 			if(R)
 				return L.ingest(src, R, amount, multiplier, copy) //perhaps this is a bit of a hack, but currently there's no common proc for eating reagents
-		if(type == CHEM_TOUCH)
+		if(chem_type == CHEM_TOUCH)
 			var/datum/reagents/R = L.get_contact_reagents()
 			if(R)
 				return trans_to_holder(R, amount, multiplier, copy, defer_update = defer_update)

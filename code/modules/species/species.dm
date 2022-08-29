@@ -117,7 +117,8 @@ var/global/const/DEFAULT_SPECIES_HEALTH = 200
 	var/breath_type = /decl/material/gas/oxygen                                  // Non-oxygen gas breathed, if any.
 	var/poison_types = list(/decl/material/gas/chlorine = TRUE) // Noticeably poisonous air - ie. updates the toxins indicator on the HUD.
 	var/exhale_type = /decl/material/gas/carbon_dioxide                          // Exhaled gas type.
-	var/blood_reagent = /decl/material/liquid/blood
+
+	var/decl/material/blood_reagent = /decl/material/liquid/blood
 
 	var/max_pressure_diff = 60                                  // Maximum pressure difference that is safe for lungs
 	var/cold_level_1 = 243                                      // Cold damage level 1 below this point. -30 Celsium degrees
@@ -293,6 +294,9 @@ var/global/const/DEFAULT_SPECIES_HEALTH = 200
 		var/decl/blood_type/blood_decl = GET_DECL(blood_type)
 		blood_types -= blood_type
 		blood_types[blood_decl.name] = blood_decl.random_weighting
+
+	if(blood_reagent)
+		blood_reagent = GET_MATERIAL(blood_reagent)
 
 	// Generate OOC info.
 	var/list/codex_traits = list()

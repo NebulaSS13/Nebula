@@ -56,16 +56,22 @@
 				failed = "non-obj product returned ([product.type])"
 			else
 				LAZYINITLIST(product.matter) // For the purposes of the following tests not runtiming.
-				if(!recipe.use_material && !recipe.use_reinf_material)
+				var/decl/material/use_material_instance = GET_MATERIAL(recipe.use_material)
+				var/decl/material/use_reinf_material_instance = GET_MATERIAL(recipe.use_reinf_material)
+				if(recipe.use_material && !use_material_instance)
+					failed = "invalid material id"
+				else if(recipe.use_reinf_material && !use_reinf_material_instance)
+					failed = "invalid reinforcing material id"
+				else if(!use_material_instance && !use_reinf_material_instance)
 					if(length(product.matter))
 						failed = "unsupplied material types"
-				else if(recipe.use_material && (product.matter[recipe.use_material]/SHEET_MATERIAL_AMOUNT) > recipe.req_amount)
-					failed = "excessive base material ([recipe.req_amount]/[CEILING(product.matter[recipe.use_material]/SHEET_MATERIAL_AMOUNT)])"
-				else if(recipe.use_reinf_material && (product.matter[recipe.use_reinf_material]/SHEET_MATERIAL_AMOUNT) > recipe.req_amount)
-					failed = "excessive reinf material ([recipe.req_amount]/[CEILING(product.matter[recipe.use_reinf_material]/SHEET_MATERIAL_AMOUNT)])"
+				else if(use_material_instance && (product.matter[use_material_instance]/SHEET_MATERIAL_AMOUNT) > recipe.req_amount)
+					failed = "excessive base material ([recipe.req_amount]/[CEILING(product.matter[use_material_instance]/SHEET_MATERIAL_AMOUNT)])"
+				else if(use_reinf_material_instance && (product.matter[use_reinf_material_instance]/SHEET_MATERIAL_AMOUNT) > recipe.req_amount)
+					failed = "excessive reinf material ([recipe.req_amount]/[CEILING(product.matter[use_reinf_material_instance]/SHEET_MATERIAL_AMOUNT)])"
 				else
 					for(var/mat in product.matter)
-						if(mat != recipe.use_material && mat != recipe.use_reinf_material)
+						if(mat != use_material_instance && mat != use_reinf_material_instance)
 							failed = "extra material type ([mat])"
 			if(failed) // Try to prune out some duplicate error spam, we have too many materials now
 				if(!(recipe.type in seen_design_types))

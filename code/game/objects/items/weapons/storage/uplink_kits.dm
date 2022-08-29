@@ -64,7 +64,7 @@
 		/decl/material/solid/metal/silver = MATTER_AMOUNT_REINFORCEMENT,
 		/decl/material/solid/fiberglass = MATTER_AMOUNT_TRACE,
 		/decl/material/solid/metal/uranium = MATTER_AMOUNT_TRACE
-	) 
+	)
 
 /obj/item/storage/box/syndie_kit/chameleon
 	startswith = list(
@@ -153,7 +153,7 @@
 
 /proc/fill_cigarre_package(var/obj/item/storage/fancy/cigarettes/C, var/list/reagents)
 	for(var/reagent in reagents)
-		C.reagents.add_reagent(reagent, reagents[reagent] * C.max_storage_space)
+		C.reagents.add_reagent_by_id(reagent, reagents[reagent] * C.max_storage_space)
 
 //Rig Electrowarfare and Voice Synthesiser kit
 /obj/item/storage/backpack/satchel/syndie_kit/ewar_voice

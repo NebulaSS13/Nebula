@@ -18,9 +18,10 @@
 /obj/item/chems/chem_disp_cartridge/Initialize()
 	. = ..()
 	if(spawn_reagent)
-		reagents.add_reagent(spawn_reagent, volume)
-		var/decl/material/R = spawn_reagent
-		setLabel(initial(R.name))
+		var/decl/material/R = GET_MATERIAL(spawn_reagent)
+		if(R)
+			reagents.add_reagent(R, volume)
+			setLabel(initial(R.name))
 
 /obj/item/chems/chem_disp_cartridge/examine(mob/user)
 	. = ..()

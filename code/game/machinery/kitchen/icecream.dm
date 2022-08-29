@@ -178,7 +178,7 @@
 	else if(href_list["disposeI"])
 		var/decl/material/R = locate(href_list["disposeI"])
 		if(R)
-			reagents.clear_reagent(R.type)
+			reagents.clear_reagent(R)
 		. = TOPIC_REFRESH
 
 	if(href_list["refresh"])

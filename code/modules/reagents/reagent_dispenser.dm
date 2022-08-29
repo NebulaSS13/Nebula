@@ -20,7 +20,7 @@
 		verbs -= /obj/structure/reagent_dispensers/verb/set_amount_per_transfer_from_this
 	for(var/reagent_type in initial_reagent_types)
 		var/reagent_ratio = initial_reagent_types[reagent_type]
-		reagents.add_reagent(reagent_type, reagent_ratio * initial_capacity)
+		reagents.add_reagent_by_id(reagent_type, reagent_ratio * initial_capacity)
 
 /obj/structure/reagent_dispensers/is_pressurized_fluid_source()
 	return TRUE

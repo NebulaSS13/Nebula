@@ -36,6 +36,7 @@
 /decl/cocktail/Initialize()
 	. = ..()
 	// Normalize the ratios to ensure a specific degree of tolerance.
+	POPULATE_MATERIAL_LIST_ASSOC(ratios)
 	if(ratios)
 		display_ratios = ratios.Copy() // Copy the initial ratio to use for the codex.
 	var/ratio_wiggle_room = (1-impurity_tolerance)

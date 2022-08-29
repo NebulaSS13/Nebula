@@ -94,7 +94,7 @@
 
 /obj/item/electronic_assembly/create_matter()
 	..()
-	LAZYSET(matter, /decl/material/solid/metal/steel, round((max_complexity + max_components) / 4) * SScircuit.cost_multiplier)
+	LAZYSET(matter, GET_MATERIAL(/decl/material/solid/metal/steel), round((max_complexity + max_components) / 4) * SScircuit.cost_multiplier)
 
 /obj/item/electronic_assembly/Initialize()
 	. = ..()

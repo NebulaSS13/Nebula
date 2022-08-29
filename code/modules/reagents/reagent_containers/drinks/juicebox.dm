@@ -104,15 +104,15 @@
 /obj/item/chems/drinks/juicebox/sensible_random/proc/juice_it()
 	var/list/drinktypes = decls_repository.get_decl_paths_of_subtype(/decl/material/liquid/drink/juice)
 	var/decl/material/J = pick(drinktypes)
-	reagents.add_reagent(J, 20)
-	reagents.add_reagent(pick(drinktypes - J), 5)
+	reagents.add_reagent_by_id(J, 20)
+	reagents.add_reagent_by_id(pick(drinktypes - J), 5)
 	return reagents.reagent_volumes
 
 /obj/item/chems/drinks/juicebox/sensible_random/Initialize()
 	. = ..()
 	var/list/chosen_reagents = juice_it()
-	var/decl/material/J = GET_DECL(chosen_reagents[1])
-	var/decl/material/K = GET_DECL(chosen_reagents[2])
+	var/decl/material/J = chosen_reagents[1]
+	var/decl/material/K = chosen_reagents[2]
 	var/splash = pick("teasing", "splash", "hint", "measure", "nip", "slug", "depth", "dash", "sensation", "surge", "squirt", "spritz", "efflux", "gush", "swell")
 	desc = "[J.liquid_name]; [J.lore_text] This one comes with \an [splash] of [K.liquid_name] in a neat box."
 	name = "\improper [J.liquid_name] and [K.liquid_name] juicebox"

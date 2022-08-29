@@ -114,7 +114,7 @@
 	..()
 	LAZYINITLIST(matter)
 	if(istype(material))
-		matter[material.type] = max(matter[material.type], round(MATTER_AMOUNT_PRIMARY * get_matter_amount_modifier()))
+		matter[material] = max(matter[material], round(MATTER_AMOUNT_PRIMARY * get_matter_amount_modifier()))
 	UNSETEMPTY(matter)
 
 /obj/item/Initialize(var/ml, var/material_key)

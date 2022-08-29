@@ -16,12 +16,11 @@
 		var/mechanics_text = "Cocktails will change the name of bartending glasses when mixed properly.<br><br>"
 		mechanics_text += "This cocktail is mixed with the following ingredients:<br>"
 		var/list/ingredients = list()
-		for(var/rtype in cocktail.display_ratios)
+		for(var/decl/material/mixer as anything in cocktail.display_ratios)
 			// Rather than normalising fractional values using the lowest
 			// common divisor, we instead let cocktails use user-readable values
 			// which we normalize internally for calculations.
-			var/decl/material/mixer = GET_DECL(rtype)
-			var/minimum_amount = cocktail.display_ratios[rtype]
+			var/minimum_amount = cocktail.display_ratios[mixer]
 			var/ingredient = "[mixer.name]"
 			if(minimum_amount)
 				ingredient = "[minimum_amount] part\s [ingredient]"

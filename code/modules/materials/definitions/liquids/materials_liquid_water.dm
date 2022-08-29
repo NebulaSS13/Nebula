@@ -98,7 +98,7 @@
 		if(amount > needed)
 			M.fire_stacks = 0
 			M.ExtinguishMob()
-			holder.remove_reagent(type, needed)
+			holder.remove_reagent(src, needed)
 		else
 			M.adjust_fire_stacks(-(amount / 10))
-			holder.remove_reagent(type, amount)
+			holder.remove_reagent(src, amount)

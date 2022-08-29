@@ -281,8 +281,8 @@
 	uid = "chem_adrenaline"
 
 /decl/material/liquid/adrenaline/affect_blood(var/mob/living/M, var/removed, var/datum/reagents/holder)
-	var/volume = REAGENT_VOLUME(holder, type)
-	var/dose = LAZYACCESS(M.chem_doses, type)
+	var/volume = REAGENT_VOLUME(holder, src)
+	var/dose = LAZYACCESS(M.chem_doses, src)
 	if(dose < 0.2)	//not that effective after initial rush
 		M.add_chemical_effect(CE_PAINKILLER, min(30*volume, 80))
 		M.add_chemical_effect(CE_PULSE, 1)
@@ -292,7 +292,7 @@
 	if(dose > 10)
 		ADJ_STATUS(M, STAT_JITTER, 5)
 	if(volume >= 5 && M.is_asystole())
-		holder.remove_reagent(type, 5)
+		holder.remove_reagent(src, 5)
 		if(ishuman(M))
 			var/mob/living/carbon/human/H = M
 			if(H.resuscitate())

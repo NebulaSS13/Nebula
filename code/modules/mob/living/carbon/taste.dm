@@ -40,7 +40,7 @@ calculate text size per text.
 						tastes[taste] = taste_data[taste]
 			else
 				var/taste_desc = R.taste_description
-				var/taste_amount = REAGENT_VOLUME(src, R.type) * R.taste_mult
+				var/taste_amount = REAGENT_VOLUME(src, R) * R.taste_mult
 				if(R.taste_description in tastes)
 					tastes[taste_desc] += taste_amount
 				else
@@ -50,19 +50,20 @@ calculate text size per text.
 		var/total_taste = 0
 		for(var/taste_desc in tastes)
 			total_taste += tastes[taste_desc]
-		for(var/taste_desc in tastes)
-			var/percent = tastes[taste_desc]/total_taste * 100
-			if(percent < minimum_percent)
-				continue
-			var/intensity_desc = "a hint of"
-			if(percent > minimum_percent * 2 || percent == 100)
-				intensity_desc = ""
-			else if(percent > minimum_percent * 3)
-				intensity_desc = "the strong flavor of"
-			if(intensity_desc == "")
-				out += "[taste_desc]"
-			else
-				out += "[intensity_desc] [taste_desc]"
+		if(total_taste > 0)
+			for(var/taste_desc in tastes)
+				var/percent = tastes[taste_desc]/total_taste * 100
+				if(percent < minimum_percent)
+					continue
+				var/intensity_desc = "a hint of"
+				if(percent > minimum_percent * 2 || percent == 100)
+					intensity_desc = ""
+				else if(percent > minimum_percent * 3)
+					intensity_desc = "the strong flavor of"
+				if(intensity_desc == "")
+					out += "[taste_desc]"
+				else
+					out += "[intensity_desc] [taste_desc]"
 
 	return english_list(out, "something indescribable")
 
