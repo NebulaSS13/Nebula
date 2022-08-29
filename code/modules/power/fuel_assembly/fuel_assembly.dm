@@ -13,10 +13,10 @@
 /obj/item/fuel_assembly/Initialize(mapload, var/_material, var/list/makeup, var/_colour)
 	. = ..(mapload, _material)
 	LAZYINITLIST(matter)
-	
+
 	if(LAZYLEN(makeup))
 		if(length(makeup) == 1) // Rod is only made from one material.
-			var/decl/material/mat = GET_DECL(makeup[1])
+			var/decl/material/mat = makeup[1]
 			SetName("[mat.use_name] fuel rod assembly")
 			desc = "A fuel rod for nuclear power production. This one is made from [mat.use_name]."
 			material_name = mat.use_name
@@ -24,15 +24,14 @@
 			desc = "A fuel rod for nuclear power production, made up from various materials."
 			material_name = "Mixed material"
 
-		for(var/mat_p in makeup)
-			var/decl/material/mat = GET_DECL(mat_p)
-			matter[mat_p] = makeup[mat_p]
-			initial_amount += makeup[mat_p]
+		for(var/decl/material/mat as anything in makeup)
+			matter[mat] = makeup[mat]
+			initial_amount += makeup[mat]
 			radioactivity = max(radioactivity, mat.radioactivity)
 			luminescence = max(luminescence, mat.luminescence)
 	else
 		initial_amount = SHEET_MATERIAL_AMOUNT * 5
-		matter[material.type] = initial_amount
+		matter[material] = initial_amount
 		SetName("[material.use_name] fuel rod assembly")
 		desc = "A fuel rod for nuclear power production. This one is made from [material.use_name]."
 		material_name = material.use_name
@@ -79,7 +78,7 @@
 
 /obj/item/fuel_assembly/tritium
 	material = /decl/material/gas/hydrogen/tritium
-	
+
 /obj/item/fuel_assembly/supermatter
 	material = /decl/material/solid/exotic_matter
 

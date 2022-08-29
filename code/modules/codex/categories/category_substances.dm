@@ -6,7 +6,7 @@
 	for(var/thing in SSmaterials.materials)
 		var/decl/material/mat = thing
 		if(!mat.hidden_from_codex)
-			var/new_lore_text = initial(mat.lore_text) 
+			var/new_lore_text = initial(mat.lore_text)
 			if(mat.taste_description)
 				new_lore_text = "[new_lore_text]<br>It apparently tastes of [mat.taste_description]."
 			var/list/material_info = list(mat.mechanics_text)
@@ -91,8 +91,7 @@
 			if(mat.gas_flags & XGM_GAS_FUEL)
 				gas_info+= "<li>It is flammable.</li>"
 				if(mat.burn_product)
-					var/decl/material/firemat = GET_DECL(mat.burn_product)
-					gas_info+= "<li>It produces [firemat.gas_name] when burned.</li>"
+					gas_info+= "<li>It produces [mat.burn_product.gas_name] when burned.</li>"
 			if(mat.gas_flags & XGM_GAS_OXIDIZER)
 				gas_info+= "<li>It is an oxidizer, required to sustain fire.</li>"
 			if(mat.gas_flags & XGM_GAS_CONTAMINANT)

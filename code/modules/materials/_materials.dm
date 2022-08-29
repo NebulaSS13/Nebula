@@ -247,7 +247,7 @@ INITIALIZE_IMMEDIATE(/obj/effect/gas_overlay)
 	var/list/heating_products
 	var/bypass_heating_products_for_root_type
 	var/fuel_value = 0
-	var/burn_product
+	var/decl/material/burn_product
 	var/list/vapor_products // If splashed, releases these gasses in these proportions. // TODO add to unit test after solvent PR is merged
 
 	var/scent //refer to _scent.dm
@@ -333,11 +333,9 @@ INITIALIZE_IMMEDIATE(/obj/effect/gas_overlay)
 			cocktail_ingredient = TRUE
 			break
 
-// Return the matter comprising this material.
-/decl/material/proc/get_matter()
-	var/list/temp_matter = list()
-	temp_matter[type] = SHEET_MATERIAL_AMOUNT
-	return temp_matter
+/decl/material/proc/link_references()
+	if(burn_product)
+		burn_product = GET_MATERIAL(burn_product)
 
 // Weapons handle applying a divisor for this value locally.
 /decl/material/proc/get_blunt_damage()

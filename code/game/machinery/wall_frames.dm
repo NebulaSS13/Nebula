@@ -18,8 +18,8 @@
 
 /obj/item/frame/attackby(obj/item/W, mob/user)
 	if(IS_WRENCH(W))
-		for(var/key in matter)
-			SSmaterials.create_object(key, get_turf(src), round(matter[key]/SHEET_MATERIAL_AMOUNT))
+		for(var/decl/material/mat as anything in matter)
+			mat.create_object(get_turf(src), round(matter[mat]/SHEET_MATERIAL_AMOUNT))
 		qdel(src)
 		return TRUE
 	. = ..()

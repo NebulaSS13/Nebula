@@ -58,10 +58,8 @@
 /obj/building_cost()
 	. = ..()
 	if(length(matter))
-		for(var/material in matter)
-			var/decl/material/M = GET_DECL(material)
-			if(istype(M))
-				.[M.type] = matter[material]
+		for(var/M in matter)
+			.[M] = matter[M]
 	if(reagents && length(reagents.reagent_volumes))
 		for(var/R in reagents.reagent_volumes)
 			.[R] = FLOOR(REAGENT_VOLUME(reagents, R) / REAGENT_UNITS_PER_MATERIAL_UNIT)

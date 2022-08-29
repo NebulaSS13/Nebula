@@ -27,15 +27,16 @@
 	)
 
 /mob/living/carbon/alien/ascent_nymph/proc/contains_crystals(var/obj/item/W)
-	for(var/mat in W.matter)
-		if(mat == /decl/material/solid/sand)
-			. += W.matter[mat]
-		else if(mat == /decl/material/solid/gemstone/crystal)
-			. += W.matter[mat]
-		else if(mat == /decl/material/solid/quartz)
-			. += W.matter[mat]
-		else if(mat == /decl/material/solid/glass)
-			. += W.matter[mat]
+	for(var/decl/material/mat as anything in W.matter)
+		switch(mat.type)
+			if(/decl/material/solid/sand)
+				. += W.matter[mat]
+			if(/decl/material/solid/gemstone/crystal)
+				. += W.matter[mat]
+			if(/decl/material/solid/quartz)
+				. += W.matter[mat]
+			if(/decl/material/solid/glass)
+				. += W.matter[mat]
 
 /mob/living/carbon/alien/ascent_nymph/proc/collect(var/obj/item/collecting)
 	collecting.forceMove(src)

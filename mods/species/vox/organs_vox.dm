@@ -115,28 +115,28 @@
 					stored_matter[mat] += digested
 
 		// Convert stored matter into sheets.
-		for(var/mat in check_materials)
-			var/decl/material/M = GET_DECL(mat)
-			if(M && stored_matter[mat] >= SHEET_MATERIAL_AMOUNT)
+		for(var/decl/material/M as anything in check_materials)
+			if(stored_matter[M] < SHEET_MATERIAL_AMOUNT)
+				continue
 
-				// Remove as many sheets as possible from the gizzard.
-				var/sheets = FLOOR(stored_matter[mat]/SHEET_MATERIAL_AMOUNT)
-				stored_matter[mat] -= SHEET_MATERIAL_AMOUNT * sheets
-				if(stored_matter[mat] <= 0)
-					stored_matter -= mat
+			// Remove as many sheets as possible from the gizzard.
+			var/sheets = FLOOR(stored_matter[M]/SHEET_MATERIAL_AMOUNT)
+			stored_matter[M] -= SHEET_MATERIAL_AMOUNT * sheets
+			if(stored_matter[M] <= 0)
+				stored_matter -= M
 
-				// Merge them into other stacks.
-				for(var/obj/item/stack/material/mat_stack in contents)
-					if(mat_stack.material == M && mat_stack.amount < mat_stack.max_amount)
-						var/taking_sheets = min(sheets, mat_stack.get_max_amount() - mat_stack.amount)
-						mat_stack.add(taking_sheets)
-						sheets -= taking_sheets
-						updated_stacks = TRUE
-						
-				// Create new stacks if needed.
-				if(sheets)
-					M.create_object(src, sheets)
+			// Merge them into other stacks.
+			for(var/obj/item/stack/material/mat_stack in contents)
+				if(mat_stack.material == M && mat_stack.amount < mat_stack.max_amount)
+					var/taking_sheets = min(sheets, mat_stack.get_max_amount() - mat_stack.amount)
+					mat_stack.add(taking_sheets)
+					sheets -= taking_sheets
 					updated_stacks = TRUE
+
+			// Create new stacks if needed.
+			if(sheets)
+				M.create_object(src, sheets)
+				updated_stacks = TRUE
 
 		if(updated_stacks && prob(5))
 			to_chat(owner, SPAN_NOTICE("Your [name] churns as it digests some material into a usable form."))

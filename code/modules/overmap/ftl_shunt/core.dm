@@ -227,9 +227,9 @@
 				continue
 			if(H.skill_check(SKILL_ENGINES, SKILL_EXPERT))
 				to_chat(H, SPAN_DANGER("The deck vibrates with a harmonic that sets your teeth on edge and fills you with dread."))
-	
+
 	var/announcetxt = replacetext(shunt_start_text, "%%TIME%%", "[round(jump_delay/600)] minutes.")
-	
+
 	ftl_announcement.Announce(announcetxt, "FTL Shunt Management System", new_sound = sound('sound/misc/notice2.ogg'))
 	update_icon()
 
@@ -525,7 +525,7 @@
 	var/drawn_charge = use_power_oneoff(input)
 	last_power_drawn = drawn_charge
 	accumulated_charge += drawn_charge * CELLRATE
-	
+
 	return TRUE
 
 /obj/machinery/ftl_shunt/core/proc/get_total_fuel_conversion_rate()
@@ -552,12 +552,7 @@
 	desc = "A fuel port for an FTL shunt."
 	icon_state = "empty"
 
-	var/static/list/fuels = list(
-		/decl/material/gas/hydrogen/tritium = 25000,
-		/decl/material/gas/hydrogen/deuterium = 25000,
-		/decl/material/gas/hydrogen = 25000,
-		/decl/material/solid/exotic_matter = 50000
-		)
+	var/static/list/fuels
 	var/obj/item/fuel_assembly/fuel
 	var/obj/machinery/ftl_shunt/core/master
 	var/max_fuel = 0
@@ -569,6 +564,18 @@
 		icon_state = "empty"
 
 /obj/machinery/ftl_shunt/fuel_port/Initialize()
+
+	if(!fuels)
+		var/list/set_fuels = list(
+			/decl/material/gas/hydrogen/tritium = 25000,
+			/decl/material/gas/hydrogen/deuterium = 25000,
+			/decl/material/gas/hydrogen = 25000,
+			/decl/material/solid/exotic_matter = 50000
+		)
+		fuels = list()
+		for(var/fuel in set_fuels)
+			fuels[GET_MATERIAL(fuel)] = set_fuels[fuel]
+
 	set_extension(src, /datum/extension/local_network_member)
 	if(initial_id_tag)
 		var/datum/extension/local_network_member/local_network = get_extension(src, /datum/extension/local_network_member)
@@ -640,9 +647,9 @@
 
 	return TRUE
 
-// 
+//
 // Construction MacGuffins down here.
-// 
+//
 
 /obj/item/stock_parts/circuitboard/ftl_shunt
 	name = "circuit board (superluminal shunt)"

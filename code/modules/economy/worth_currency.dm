@@ -45,7 +45,7 @@
 	var/name_prefix
 	var/name_suffix
 	var/icon = 'icons/obj/items/money.dmi'
-	var/material = /decl/material/solid/plastic
+	var/decl/material/material = /decl/material/solid/plastic
 	var/absolute_value = 1 // Divisor for cash pile worth. Should never be <1 or non-integer (think of it like cents).
 	var/list/denominations = list()
 	var/list/denominations_by_value = list()
@@ -56,6 +56,8 @@
 		name_singular = name
 	if(!name_prefix && !name_suffix)
 		name_suffix = uppertext(copytext(name, 1, 1))
+	if(material)
+		material = GET_MATERIAL(material)
 	build_denominations()
 
 /decl/currency/proc/format_value(var/amt)

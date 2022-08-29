@@ -78,3 +78,5 @@
 #define MAT_RARITY_EXOTIC   5
 #define MAT_RARITY_UNCOMMON 10
 #define MAT_RARITY_MUNDANE  20
+
+#define GET_MATERIAL(D) (ispath(D, /decl) ? GET_DECL(D) : (istype(D, /decl/material) ? D : SSmaterials.materials_by_id[D]))

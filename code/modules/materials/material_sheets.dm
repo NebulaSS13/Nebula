@@ -49,10 +49,12 @@
 
 /obj/item/stack/material/create_matter()
 	matter = list()
-	if(istype(material))
-		matter[material.type] = MATTER_AMOUNT_PRIMARY * matter_multiplier
-	if(istype(reinf_material))
-		matter[reinf_material.type] = MATTER_AMOUNT_REINFORCEMENT * matter_multiplier
+	if(material)
+		material = GET_MATERIAL(material)
+		matter[material] = MATTER_AMOUNT_PRIMARY * matter_multiplier
+	if(reinf_material)
+		reinf_material = GET_MATERIAL(reinf_material) 
+		matter[reinf_material] = MATTER_AMOUNT_REINFORCEMENT * matter_multiplier
 	..()
 
 /obj/item/stack/material/proc/update_strings()

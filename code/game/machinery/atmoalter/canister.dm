@@ -25,7 +25,8 @@
 	var/update_flag = 0
 
 /obj/machinery/portable_atmospherics/canister/Initialize(mapload, material)
-	if(ispath(material))
+	if(material)
+		material = GET_MATERIAL(material)
 		matter = list()
 		matter[material] = 10 * SHEET_MATERIAL_AMOUNT
 	. = ..(mapload)
@@ -203,8 +204,8 @@ update_flag
 	var/turf/T = get_turf(src)
 	if(T)
 		T.assume_air(air_contents)
-	for(var/path in matter)
-		SSmaterials.create_object(path, get_turf(src), round(matter[path]/SHEET_MATERIAL_AMOUNT))
+	for(var/decl/material/mat as anything in matter)
+		mat.create_object(get_turf(src), round(matter[mat]/SHEET_MATERIAL_AMOUNT))
 	qdel(src)
 
 /obj/machinery/portable_atmospherics/canister/Process()

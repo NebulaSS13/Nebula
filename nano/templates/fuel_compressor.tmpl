@@ -12,8 +12,8 @@
 				<tr>
 					<td>{{:value.name}}</td>
 					<td>{{:value.amount}}</td>
-					<td>{{:helper.link('Adjust', null, {'change_makeup' : value.name})}}</td>
-					<td>{{:helper.link('Eject', null, {'eject_material': value.name})}}</td>
+					<td>{{:helper.link('Adjust', null, {'change_makeup' : value.ref})}}</td>
+					<td>{{:helper.link('Eject', null, {'eject_material': value.ref})}}</td>
 				</tr>
 			{{/for}}
 		</table>

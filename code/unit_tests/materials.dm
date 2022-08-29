@@ -133,7 +133,7 @@
 		fail("[length(failed)] material\s had invalid wall icon states: [jointext(failed, "\n")].")
 	else
 		pass("All materials had valid wall icon states.")
-	return 1 
+	return 1
 
 /datum/unit_test/fusion_reactions_shall_have_valid_reactants
 	name = "MATERIALS: Fusion Reactions Shall Have Valid Reactants"
@@ -164,7 +164,7 @@
 		fail("[length(failed_types)] reactions\s had invalid reactants or products: [jointext(failed, "\n")].")
 	else
 		pass("All reactions had valid reactants and products.")
-	return 1 
+	return 1
 
 /datum/unit_test/material_gas_symbols_shall_be_unique
 	name = "MATERIALS: Gas Symbols Shall Be Unique"

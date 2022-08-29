@@ -33,7 +33,7 @@
 	var/last_message            // Time of the last damage warning message.
 	var/damage = 0
 	var/melted_down = FALSE
-	
+
 	// Diagnostics
 	var/last_neutron_flux_increase = 0
 	var/last_neutron_flux_decrease = 0
@@ -95,12 +95,11 @@
 	for(var/obj/item/fuel_assembly/fr in fuel_rods)
 		if(!fuel_rods[fr]) // The fuel rod is not exposed.
 			continue
-		for(var/mat_type in fr.matter)
-			var/decl/material/mat = GET_DECL(mat_type)
+		for(var/decl/material/mat as anything in fr.matter)
 			if(!(mat.flags & MAT_FLAG_FISSIBLE))
 				continue
-			var/total_interacted_units = interaction_ratio * fr.matter[mat_type]
-			var/list/interactions = mat.neutron_interact(old_neutron_energy, total_interacted_units, fr.matter[mat_type])
+			var/total_interacted_units = interaction_ratio * fr.matter[mat]
+			var/list/interactions = mat.neutron_interact(old_neutron_energy, total_interacted_units, fr.matter[mat])
 			for(var/interaction in interactions)
 				var/interaction_units = interactions[interaction] // How many units of the material underwent this specific interaction.
 				var/removed = 0
@@ -109,12 +108,12 @@
 				switch(interaction)
 					if(INTERACTION_FISSION)
 						if(length(mat.fission_products))
-							if(fr.matter[mat_type] - interaction_units < 0)
-								removed = fr.matter[mat_type]
-								fr.matter -= mat_type
+							if(fr.matter[mat] - interaction_units < 0)
+								removed = fr.matter[mat]
+								fr.matter -= mat
 							else
 								removed = interaction_units
-								fr.matter[mat_type] -= removed
+								fr.matter[mat] -= removed
 							// Add the fission byproducts to the fuel assembly.
 							for(var/byproduct_type in mat.fission_products)
 								fr.matter[byproduct_type] += removed * mat.fission_products[byproduct_type]
@@ -135,16 +134,16 @@
 					// A simplification of neutron capture and/or subsequent beta decay.
 					if(INTERACTION_ABSORPTION)
 						if(length(mat.absorption_products))
-							if(fr.matter[mat_type] - interaction_units < 0)
-								removed = fr.matter[mat_type]
-								fr.matter -= mat_type
+							if(fr.matter[mat] - interaction_units < 0)
+								removed = fr.matter[mat]
+								fr.matter -= mat
 							else
 								removed = interaction_units
-								fr.matter[mat_type] -= removed
+								fr.matter[mat] -= removed
 
 							for(var/byproduct_type in mat.absorption_products)
 								fr.matter[byproduct_type] += removed * mat.absorption_products[byproduct_type]
-						
+
 						var/d_neutron_flux = mat.neutron_absorption*removed
 						neutron_flux -= d_neutron_flux
 						last_neutron_flux_decrease += d_neutron_flux
@@ -182,9 +181,8 @@
 	for(var/obj/item/fuel_assembly/rod in fuel_rods)
 		if(total_radioactivity >= MAX_RADS)
 			break
-		for(var/mat_type in rod.matter)
-			var/decl/material/mat = GET_DECL(mat_type)
-			total_radioactivity += mat.radioactivity*SHEET_MATERIAL_AMOUNT / rod.matter[mat_type]
+		for(var/decl/material/mat as anything in rod.matter)
+			total_radioactivity += mat.radioactivity * SHEET_MATERIAL_AMOUNT / rod.matter[mat]
 
 	visible_message(SPAN_DANGER("\The [src] explodes, blowing out its stored material!"))
 	// The core contained radioactive material, so irradiate the surroundings.
@@ -208,7 +206,7 @@
 	if(check_active())
 		to_chat(user, SPAN_WARNING("You cannot do that while \the [src] is active!"))
 		return
-	
+
 	if(istype(W, /obj/item/fuel_assembly))
 		if(length(fuel_rods) >= MAX_RODS)
 			to_chat(user, SPAN_WARNING("\The [src] is full!"))
@@ -225,7 +223,7 @@
 		visible_message("\The [src] flashes an 'Insufficient Power' error.")
 		return
 	use_power_oneoff(5 KILOWATTS)
-	
+
 	neutron_flux = JUMPED_FLUX
 	neutron_energy = JUMPED_ENERGY
 
@@ -243,7 +241,7 @@
 	var/obj/item/fuel_assembly/fr = fuel_rods[rod]
 	if(fuel_rods[fr] && check_active())
 		return FALSE
-	
+
 	fuel_rods[fr] = !fuel_rods[fr]
 	return TRUE
 

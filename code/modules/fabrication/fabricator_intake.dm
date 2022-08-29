@@ -38,24 +38,20 @@
 	var/stacks_used = 0
 
 	var/mat_colour = thing.color
-	for(var/mat in thing.matter)
-
-		var/decl/material/material_def = GET_DECL(mat)
-		if(!material_def || !base_storage_capacity[material_def.type])
+	for(var/decl/material/mat as anything in thing.matter)
+		if(!base_storage_capacity[mat])
 			continue
-
-		var/taking_material = min(thing.matter[mat], storage_capacity[material_def.type] - stored_material[material_def.type])
+		var/taking_material = min(thing.matter[mat], storage_capacity[mat] - stored_material[mat])
 		if(taking_material <= 0)
 			continue
 
 		if(!mat_colour)
-			mat_colour = material_def.color
-
-		stored_material[material_def.type] += taking_material
+			mat_colour = mat.color
+		stored_material[mat] += taking_material
 		if(stack_ref)
 			stacks_used = max(stacks_used, CEILING(taking_material/stack_matter_div))
 
-		if(storage_capacity[material_def.type] == stored_material[material_def.type])
+		if(storage_capacity[mat] == stored_material[mat])
 			. = SUBSTANCE_TAKEN_FULL
 		else if(. != SUBSTANCE_TAKEN_FULL)
 			. = SUBSTANCE_TAKEN_ALL

@@ -1048,7 +1048,8 @@
 	var/turf/T = get_turf(src)
 	if(O in view(T)) // This is a camera. It can't examine thngs,that it can't see.
 		for(var/I in 1 to mtypes.len)
-			var/amount = O.matter[mtypes[I]]
+			var/decl/material/mat = GET_MATERIAL(I)
+			var/amount = O.matter[mat]
 			if(amount)
 				set_pin_data(IC_OUTPUT, I, amount)
 			else

@@ -7,6 +7,7 @@ SUBSYSTEM_DEF(materials)
 
 	// Material vars.
 	var/list/materials
+	var/list/materials_by_id = list()
 	var/list/strata
 	var/list/fusion_reactions
 	var/list/materials_by_name =              list()
@@ -82,11 +83,16 @@ SUBSYSTEM_DEF(materials)
 	for(var/mtype in material_decls)
 		var/decl/material/new_mineral = material_decls[mtype]
 		materials += new_mineral
+		materials_by_id[new_mineral.uid] = new_mineral
 		materials_by_name[lowertext(new_mineral.name)] = new_mineral
 		if(new_mineral.sparse_material_weight)
 			weighted_minerals_sparse[new_mineral.type] = new_mineral.sparse_material_weight
 		if(new_mineral.rich_material_weight)
 			weighted_minerals_rich[new_mineral.type] = new_mineral.rich_material_weight
+
+	// Now that the lists are populated we can connect up references for things like burn products.
+	for(var/decl/material/mat in materials)
+		mat.link_references()
 
 /datum/controller/subsystem/materials/proc/build_fusion_reaction_list()
 	fusion_reactions = list()
@@ -164,6 +170,6 @@ SUBSYSTEM_DEF(materials)
 	return global.default_material_by_strata_and_z[skey]
 
 /datum/controller/subsystem/materials/proc/create_object(var/mat_type, var/atom/target, var/amount = 1, var/object_type, var/reinf_type)
-	var/decl/material/mat = GET_DECL(mat_type)
+	var/decl/material/mat = GET_MATERIAL(mat_type)
 	return mat?.create_object(target, amount, object_type, reinf_type)
 

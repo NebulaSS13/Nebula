@@ -243,16 +243,15 @@
 				continue
 
 		var/modified_fuel = FALSE
-		for(var/mat in thing.matter)
-			var/decl/material/material = GET_DECL(mat)
-			if(material.fuel_value > 0)
+		for(var/decl/material/mat as anything in thing.matter)
+			if(mat.fuel_value > 0)
 				modified_fuel = TRUE
 				var/add_fuel = round(thing.matter[mat] / SHEET_MATERIAL_AMOUNT) * material.fuel_value
-				if(material.burn_product)
-					if(waste[material.burn_product])
-						waste[material.burn_product] += add_fuel
+				if(mat.burn_product)
+					if(waste[mat.burn_product])
+						waste[mat.burn_product] += add_fuel
 					else
-						waste[material.burn_product] = add_fuel
+						waste[mat.burn_product] = add_fuel
 				fuel += add_fuel
 
 		if(modified_fuel)

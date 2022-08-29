@@ -60,9 +60,11 @@
 	// Temp block pending material/matter rework
 	if(use_material && use_material != DEFAULT_FURNITURE_MATERIAL && istype(O, /obj))
 		var/obj/struct = O
-		if(LAZYACCESS(struct.matter, DEFAULT_FURNITURE_MATERIAL) > 0)
-			struct.matter[use_material] = max(struct.matter[use_material], struct.matter[DEFAULT_FURNITURE_MATERIAL])
-			struct.matter -= DEFAULT_FURNITURE_MATERIAL
+		var/decl/material/default_mat = GET_MATERIAL(DEFAULT_FURNITURE_MATERIAL)
+		var/decl/material/using_mat = GET_MATERIAL(use_material)
+		if(LAZYACCESS(struct.matter, default_mat) > 0)
+			struct.matter[using_mat] = max(struct.matter[using_mat], struct.matter[default_mat])
+			struct.matter -= default_mat
 	// End temp block
 
 	return O
@@ -88,4 +90,4 @@
 
 /datum/stack_recipe_list/New(title, recipes)
 	src.title = title
-	src.recipes = recipes 
+	src.recipes = recipes

@@ -60,13 +60,12 @@
 		for(var/i = 1 to max(parts_amount, 1))
 			new parts_type(T, (material && material.type), (reinf_material && reinf_material.type))
 	else
-		for(var/mat in matter)
-			var/decl/material/M = GET_DECL(mat)
+		for(var/decl/material/M as anything in matter)
 			var/placing
 			if(isnull(parts_amount))
-				placing = (matter[mat] / SHEET_MATERIAL_AMOUNT) * 0.75
+				placing = (matter[M ] / SHEET_MATERIAL_AMOUNT) * 0.75
 				if(parts_type)
-					placing *= atom_info_repository.get_matter_multiplier_for(parts_type, mat, placing)
+					placing *= atom_info_repository.get_matter_multiplier_for(parts_type, M, placing)
 				placing = FLOOR(placing)
 			else
 				placing = parts_amount

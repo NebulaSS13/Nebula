@@ -68,8 +68,7 @@
 		queue_temperature_atoms(src)
 
 /obj/machinery/material_processing/smeltery/proc/can_eat(var/obj/item/eating)
-	for(var/mtype in eating.matter)
-		var/decl/material/mat = GET_DECL(mtype)
+	for(var/decl/material/mat as anything in eating.matter)
 		if(mat.melting_point > temperature)
 			return FALSE
 	return TRUE
@@ -91,8 +90,8 @@
 			eaten++
 			if(eating.reagents?.total_volume)
 				eating.reagents.trans_to_obj(src, FLOOR(eating.reagents.total_volume * 0.75)) // liquid reagents, lossy
-			for(var/mtype in eating.matter)
-				reagents.add_reagent(mtype, FLOOR(eating.matter[mtype] * REAGENT_UNITS_PER_MATERIAL_UNIT))
+			for(var/mat in eating.matter)
+				reagents.add_reagent(mat, FLOOR(eating.matter[mat] * REAGENT_UNITS_PER_MATERIAL_UNIT))
 			qdel(eating)
 			if(eaten >= MAX_INTAKE_ORE_PER_TICK)
 				break
@@ -102,8 +101,8 @@
 					if(!eating.simulated || eating.anchored || !can_eat(eating) || !prob(5))
 						continue
 					visible_message(SPAN_DANGER("\The [src] rips \the [H]'s [eating.name] clean off!"))
-					for(var/mtype in eating.matter)
-						reagents.add_reagent(mtype, FLOOR(eating.matter[mtype] * REAGENT_UNITS_PER_MATERIAL_UNIT))
+					for(var/mat in eating.matter)
+						reagents.add_reagent(mat, FLOOR(eating.matter[mat] * REAGENT_UNITS_PER_MATERIAL_UNIT))
 					eating.dismember(silent = TRUE)
 					qdel(eating)
 					break
@@ -115,7 +114,7 @@
 			if(samt > 0)
 				SSmaterials.create_object(mtype, output_turf, samt)
 				reagents.remove_reagent(mtype, ramt)
-	
+
 /obj/machinery/material_processing/smeltery/Topic(var/user, var/list/href_list)
 	. = ..()
 

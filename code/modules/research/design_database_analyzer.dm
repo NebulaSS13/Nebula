@@ -65,8 +65,8 @@
 			LAZYSET(dump_matter, mat, amt)
 	if(length(dump_matter))
 		visible_message("\The [user] unloads \the [src]'s material hopper.")
-		for(var/mat in dump_matter)
-			SSmaterials.create_object(mat, loc, dump_matter[mat])
+		for(var/decl/material/mat as anything in dump_matter)
+			mat.create_object(loc, dump_matter[mat])
 			cached_materials[mat] -= dump_matter[mat] * SHEET_MATERIAL_AMOUNT
 			if(cached_materials[mat] <= 0)
 				cached_materials -= mat

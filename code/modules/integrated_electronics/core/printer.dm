@@ -17,8 +17,16 @@
 	var/cloning = FALSE			// If the printer is currently creating a circuit
 	var/recycling = FALSE		// If an assembly is being emptied into this printer
 	var/list/program			// Currently loaded save, in form of list
-	var/materials = list(/decl/material/solid/metal/steel = 0)
+	var/loaded_materials = list(/decl/material/solid/metal/steel = 0)
 	var/metal_max = 25 * SHEET_MATERIAL_AMOUNT
+
+/obj/item/integrated_circuit_printer/Initialize(ml, material_key)
+	for(var/mat in loaded_materials)
+		var/decl/material/material = GET_MATERIAL(mat)
+		if(material)
+			loaded_materials[material] = loaded_materials[mat]
+		material -= mat
+	. = ..()
 
 /obj/item/integrated_circuit_printer/proc/check_interactivity(mob/user)
 	return CanUseTopic(user)
@@ -49,14 +57,12 @@
 /obj/item/integrated_circuit_printer/proc/recycle(obj/item/O, mob/user, obj/item/electronic_assembly/assembly)
 	if(!O.canremove) //in case we have an augment circuit
 		return
-	for(var/material in O.matter)
-		if(materials[material] + O.matter[material] > metal_max)
-			var/decl/material/material_datum = GET_DECL(material)
-			if(material_datum)
-				to_chat(user, "<span class='notice'>[src] can't hold any more [material_datum.name]!</span>")
+	for(var/decl/material/mat as anything in O.matter)
+		if(loaded_materials[mat] + O.matter[mat] > metal_max)
+			to_chat(user, SPAN_NOTICE("\The [src] can't hold any more [mat.use_name]!"))
 			return
-	for(var/material in O.matter)
-		materials[material] += O.matter[material]
+	for(var/mat in O.matter)
+		loaded_materials[mat] += O.matter[mat]
 	if(assembly)
 		assembly.remove_component(O)
 	if(user)
@@ -68,10 +74,10 @@
 	if(istype(O, /obj/item/stack/material))
 		var/obj/item/stack/material/M = O
 		var/amt = M.amount
-		if(amt * SHEET_MATERIAL_AMOUNT + materials[M.material.type] > metal_max)
-			amt = -round(-(metal_max - materials[M.material.type]) / SHEET_MATERIAL_AMOUNT) //round up
+		if(amt * SHEET_MATERIAL_AMOUNT + loaded_materials[M.material] > metal_max)
+			amt = -round(-(metal_max - loaded_materials[M.material]) / SHEET_MATERIAL_AMOUNT) //round up
 		if(M.use(amt))
-			materials[M.material.type] = min(metal_max, materials[M.material.type] + amt * SHEET_MATERIAL_AMOUNT)
+			loaded_materials[M.material] = min(metal_max, loaded_materials[M.material] + amt * SHEET_MATERIAL_AMOUNT)
 			to_chat(user, "<span class='warning'>You insert [M.material.solid_name] into \the [src].</span>")
 			if(user)
 				attack_self(user) // We're really bad at refreshing the UI, so this is the best we've got.
@@ -150,9 +156,8 @@
 	else
 		HTML += "Materials: "
 		var/list/dat = list()
-		for(var/material in materials)
-			var/decl/material/material_datum = GET_DECL(material)
-			dat += "[materials[material]]/[metal_max] [material_datum.name]"
+		for(var/var/decl/material/material as anything in loaded_materials)
+			dat += "[loaded_materials[material]]/[metal_max] [material.use_name]"
 		HTML += jointext(dat, "; ")
 		HTML += ".<br><br>"
 
@@ -318,18 +323,17 @@
 				cloning = FALSE
 				var/cost = program["cost"]
 				for(var/material in cost)
-					materials[material] = min(metal_max, materials[material] + cost[material])
+					loaded_materials[material] = min(metal_max, loaded_materials[material] + cost[material])
 
 	interact(usr)
 
 /obj/item/integrated_circuit_printer/proc/subtract_material_costs(var/list/cost, var/mob/user)
-	for(var/material in cost)
-		if(materials[material] < cost[material])
-			var/decl/material/material_datum = GET_DECL(material)
-			to_chat(user, "<span class='warning'>You need [cost[material]] [material_datum.name] to build that!</span>")
+	for(var/decl/material/material in cost)
+		if(loaded_materials[material] < cost[material])
+			to_chat(user, SPAN_WARNING("You need [cost[material]] [material.use_name] to build that!"))
 			return FALSE
 	for(var/material in cost) //Iterate twice to make sure it's going to work before deducting
-		materials[material] -= cost[material]
+		loaded_materials[material] -= cost[material]
 	return TRUE
 
 // FUKKEN UPGRADE DISKS

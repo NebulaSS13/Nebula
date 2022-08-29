@@ -18,20 +18,20 @@
 		LAZYINITLIST(matter)
 		var/matter_mult = get_matter_amount_modifier()
 		if(material)
-			matter[material.type] = max(matter[material.type], round(MATTER_AMOUNT_PRIMARY * matter_mult))
+			matter[material] = max(matter[material], round(MATTER_AMOUNT_PRIMARY * matter_mult))
 		if(reinf_material)
-			matter[reinf_material.type] = max(matter[reinf_material.type], round(MATTER_AMOUNT_REINFORCEMENT * matter_mult))
+			matter[reinf_material] = max(matter[reinf_material], round(MATTER_AMOUNT_REINFORCEMENT * matter_mult))
 		UNSETEMPTY(matter)
 
 /obj/structure/Initialize(var/ml, var/_mat, var/_reinf_mat)
 	if(ispath(_mat, /decl/material))
 		material = _mat
 	if(ispath(material, /decl/material))
-		material = GET_DECL(material)
+		material = GET_MATERIAL(material)
 	if(ispath(_reinf_mat, /decl/material))
 		reinf_material = _reinf_mat
 	if(ispath(reinf_material, /decl/material))
-		reinf_material = GET_DECL(reinf_material)
+		reinf_material = GET_MATERIAL(reinf_material)
 	. = ..()
 	update_materials()
 	if(!CanFluidPass())
@@ -113,7 +113,7 @@
 
 	playsound(loc, hitsound, 75, 1)
 	health = Clamp(health - damage, 0, maxhealth)
-	
+
 	show_damage_message(health/maxhealth)
 
 	if(health == 0)
@@ -175,7 +175,7 @@
 		if(T)
 			T.fluid_update()
 			for(var/atom/movable/AM in T)
-				AM.reset_offsets()	
+				AM.reset_offsets()
 				AM.reset_plane_and_layer()
 
 /obj/structure/grab_attack(var/obj/item/grab/G)

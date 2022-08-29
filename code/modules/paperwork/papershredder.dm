@@ -69,12 +69,12 @@
 
 	if(.)
 		//Move over the matter
-		for(var/key in I.matter)
-			if(I.matter[key] < 1)
+		for(var/mat in I.matter)
+			if(I.matter[mat] < 1)
 				continue
-			var/new_matter = LAZYACCESS(shredder_bin, key) + I.matter[key]
+			var/new_matter = LAZYACCESS(shredder_bin, mat) + I.matter[mat]
 			cached_total_matter += new_matter
-			LAZYSET(shredder_bin, key, new_matter)
+			LAZYSET(shredder_bin, mat, new_matter)
 
 		I.physically_destroyed()
 		playsound(get_turf(src), 'sound/items/pshred.ogg', 50, TRUE)
@@ -126,11 +126,10 @@
 
 /**Creates shredded products, and empty the matter bin */
 /obj/machinery/papershredder/proc/create_shredded()
-	for(var/key in shredder_bin)
-		var/decl/material/M = GET_DECL(key)
-		var/amt_per_shard = atom_info_repository.get_matter_for(M.shard_type, key, 1)
-		if(shredder_bin[key] > amt_per_shard)
-			LAZYADD(., M.place_cuttings(src, shredder_bin[key]))
+	for(var/decl/material/M as anything in shredder_bin)
+		var/amt_per_shard = atom_info_repository.get_matter_for(M.shard_type, M, 1)
+		if(shredder_bin[M] > amt_per_shard)
+			LAZYADD(., M.place_cuttings(src, shredder_bin[M]))
 
 	//Anything leftover we just assume the machine ate or something
 	cached_total_matter = 0

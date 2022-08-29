@@ -379,7 +379,6 @@ default behaviour is:
 /mob/living/proc/restore_all_organs()
 	return
 
-
 /mob/living/carbon/revive()
 	var/obj/item/cuffs = get_equipped_item(slot_handcuffed_str)
 	if (cuffs)

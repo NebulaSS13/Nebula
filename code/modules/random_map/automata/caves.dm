@@ -11,10 +11,10 @@
 	var/list/minerals_rich
 
 /datum/random_map/automata/cave_system/New(var/tx, var/ty, var/tz, var/tlx, var/tly, var/do_not_apply, var/do_not_announce, var/used_area)
-	if(!minerals_sparse) 
+	if(!minerals_sparse)
 		minerals_sparse = SSmaterials.weighted_minerals_sparse
-	if(!minerals_rich)   
-		minerals_rich =   SSmaterials.weighted_minerals_rich
+	if(!minerals_rich)
+		minerals_rich = SSmaterials.weighted_minerals_rich
 	..()
 
 /datum/random_map/automata/cave_system/get_appropriate_path(var/value)

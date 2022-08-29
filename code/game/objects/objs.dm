@@ -23,7 +23,9 @@
 
 /obj/proc/create_matter()
 	if(length(matter))
+		// matter is probably still types at this point
 		for(var/mat in matter)
+			mat = GET_MATERIAL(mat)
 			matter[mat] = round(matter[mat] * get_matter_amount_modifier())
 	UNSETEMPTY(matter)
 
@@ -187,7 +189,7 @@
 		return
 
 	set_dir(turn(dir, 90))
-	update_icon() 
+	update_icon()
 
 //For things to apply special effects after damaging an organ, called by organ's take_damage
 /obj/proc/after_wounding(obj/item/organ/external/organ, datum/wound)

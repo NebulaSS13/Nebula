@@ -18,14 +18,12 @@
 
 /obj/machinery/fuel_compressor/ui_interact(var/mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1)
 	var/list/data = list()
-	for(var/mat_type in stored_material)
-		var/decl/material/mat = GET_DECL(mat_type)
-		data["stored_material"] += list(list("name" = mat.name, "amount" = stored_material[mat_type]))
-	
-	for(var/mat_type in rod_makeup)
-		var/decl/material/mat = GET_DECL(mat_type)
-		data["rod_makeup"] += list(list("name" = mat.name, "amount" = rod_makeup[mat_type]))
-	
+	for(var/decl/material/mat as anything in stored_material)
+		data["stored_material"] += list(list("name" = mat.name, "ref" = "\ref[mat]", "amount" = stored_material[mat]))
+
+	for(var/decl/material/mat as anything in rod_makeup)
+		data["rod_makeup"] += list(list("name" = mat.name, "amount" = rod_makeup[mat]))
+
 	ui = SSnano.try_update_ui(user, src, ui_key, ui, data, force_open)
 	if(!ui)
 		ui = new(user, src, ui_key, "fuel_compressor.tmpl", name, 500, 600)
@@ -44,71 +42,58 @@
 		rod_makeup.Cut()
 		return TOPIC_REFRESH
 
-/obj/machinery/fuel_compressor/proc/eject_material(var/mat_name)
-	var/mat_type
-	for(var/mat_p in stored_material)
-		var/decl/material/mat = GET_DECL(mat_p)
-		if(mat.name == mat_name)
-			mat_type = mat.type
-			break
-
-	if(!mat_type)
-		return TOPIC_HANDLED
-
-	var/decl/material/mat = GET_DECL(mat_type)
-	if(mat && stored_material[mat_type] >= SHEET_MATERIAL_AMOUNT)
-		var/sheet_count = FLOOR(stored_material[mat_type]/SHEET_MATERIAL_AMOUNT)
-		stored_material[mat_type] -= sheet_count * SHEET_MATERIAL_AMOUNT
-		SSmaterials.create_object(mat_type, get_turf(src), sheet_count)
-		if(isnull(stored_material[mat_type]))
-			stored_material -= mat_type
-	else if(!isnull(stored_material[mat_type]))
-		stored_material -= mat_type
-	
+/obj/machinery/fuel_compressor/proc/eject_material(var/mat_ref)
+	var/decl/material/mat = locate(mat_ref) in SSmaterials.materials
+	if(!istype(mat))
+		return TOPIC_NOACTION
+	if(mat && stored_material[mat] >= SHEET_MATERIAL_AMOUNT)
+		var/sheet_count = FLOOR(stored_material[mat]/SHEET_MATERIAL_AMOUNT)
+		stored_material[mat] -= sheet_count * SHEET_MATERIAL_AMOUNT
+		SSmaterials.create_object(mat, get_turf(src), sheet_count)
+		if(isnull(stored_material[mat]))
+			stored_material -= mat
+	else if(!isnull(stored_material[mat]))
+		stored_material -= mat
 	return TOPIC_REFRESH
 
 /obj/machinery/fuel_compressor/proc/make_rod()
 	var/total_matter = 0
-	for(var/mat_p in rod_makeup)
-		total_matter += rod_makeup[mat_p]
+	for(var/mat in rod_makeup)
+		total_matter += rod_makeup[mat]
 		if(total_matter > MAX_ROD_MATERIAL)
 			visible_message(SPAN_WARNING("\The [src] flashes an 'Over max material' error!"))
 			return TOPIC_HANDLED
-		if(rod_makeup[mat_p] > stored_material[mat_p])
+		if(rod_makeup[mat] > stored_material[mat])
 			visible_message(SPAN_WARNING("\The [src] flashes an 'Insufficient Materials' error!"))
 			return TOPIC_HANDLED
-	
+
 	if(!LAZYLEN(rod_makeup) || !total_matter)
 		visible_message(SPAN_WARNING("\The [src] flashes a 'No Recipe' error!"))
 		return TOPIC_HANDLED
 
-	for(var/mat_p in rod_makeup)
-		stored_material[mat_p] -= rod_makeup[mat_p]
-		if(stored_material[mat_p] == 0)
-			stored_material -= mat_p
-	
+	for(var/mat in rod_makeup)
+		stored_material[mat] -= rod_makeup[mat]
+		if(stored_material[mat] == 0)
+			stored_material -= mat
+
 	visible_message(SPAN_NOTICE("\The [src] compresses the material into a new fuel assembly."))
 	new /obj/item/fuel_assembly(get_turf(src), null, rod_makeup)
 	return TOPIC_REFRESH
 
-/obj/machinery/fuel_compressor/proc/change_makeup(var/mat_name, var/mob/user)
-	var/mat_type
-	for(var/mat_p in stored_material)
-		var/decl/material/mat = GET_DECL(mat_p)
-		if(mat.name == mat_name)
-			mat_type = mat.type
-			break
+/obj/machinery/fuel_compressor/proc/change_makeup(var/mat_ref, var/mob/user)
 
-	if(!mat_type)
-		return TOPIC_HANDLED
-	var/amt = input(user, "Enter the amount of this material per rod (Max [MAX_ROD_MATERIAL]):", "Fuel Rod Makeup", rod_makeup[mat_type]) as null|num
+	var/decl/material/mat = locate(mat_ref) in SSmaterials.materials
+	if(!istype(mat))
+		return TOPIC_NOACTION
+
+	var/amt = input(user, "Enter the amount of this material per rod (Max [MAX_ROD_MATERIAL]):", "Fuel Rod Makeup", rod_makeup[mat]) as null|num
 	if(!CanInteract(user, DefaultTopicState()))
 		return TOPIC_HANDLED
 	amt = round(Clamp(amt, 0, MAX_ROD_MATERIAL))
 	if(!amt)
-		rod_makeup -= mat_type
-		return TOPIC_REFRESH			
-	rod_makeup[mat_type] = amt
+		rod_makeup -= mat
+		return TOPIC_REFRESH
+	rod_makeup[mat] = amt
 	return TOPIC_REFRESH
 
 /obj/machinery/fuel_compressor/receive_mouse_drop(var/atom/movable/dropping, var/mob/user)
@@ -125,7 +110,7 @@
 			var/taking_reagent = REAGENT_VOLUME(thing.reagents, R)
 			thing.reagents.remove_reagent(R, taking_reagent)
 			stored_material[R] += taking_reagent
-	
+
 		to_chat(user, SPAN_NOTICE("You add the contents of \the [thing] to \the [src]'s material buffer."))
 		return TRUE
 
@@ -138,7 +123,7 @@
 	if(istype(thing, /obj/item/stack/material))
 		var/obj/item/stack/material/M = thing
 		var/decl/material/mat = M.get_material()
-		
+
 		var/taken = min(M.amount, 5)
 		M.use(taken)
 		stored_material[mat.type] += taken * SHEET_MATERIAL_AMOUNT
