@@ -77,7 +77,7 @@
 			temperature = max(target_temperature, temperature - heating_power)
 		if(temperature != last_temperature)
 			if(container)
-				QUEUE_TEMPERATURE_ATOMS(container)
+				queue_temperature_atoms(container)
 			queue_icon_update()
 		return TRUE // Don't kill this processing loop unless we're not powered.
 	. = ..()
@@ -176,7 +176,7 @@
 		return TOPIC_HANDLED
 
 	update_use_power(use_power <= POWER_USE_IDLE ? POWER_USE_ACTIVE : POWER_USE_IDLE)
-	QUEUE_TEMPERATURE_ATOMS(src)
+	queue_temperature_atoms(src)
 	update_icon()
 
 	return TOPIC_REFRESH

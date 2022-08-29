@@ -16,6 +16,7 @@
 	active_power_usage = 5000
 
 	var/fabricator_tag
+	var/fab_tag_modifier
 	var/drone_progress = 0
 	var/produce_drones = 1
 	var/time_last_drone = 500
@@ -27,7 +28,17 @@
 /obj/machinery/drone_fabricator/Initialize()
 	. = ..()
 	if(isnull(fabricator_tag))
-		fabricator_tag = global.using_map.station_short
+		fabricator_tag = "[global.using_map.station_short][fab_tag_modifier]"
+
+/obj/machinery/drone_fabricator/maintenance
+	name = "maintenance drone fabricator"
+	fab_tag_modifier = " (Maintenance)"
+
+/obj/machinery/drone_fabricator/construction
+	name = "construction drone fabricator"
+	desc = "A large automated factory for producing construction drones."
+	fab_tag_modifier = " (Construction)"
+	drone_type = /mob/living/silicon/robot/drone/construction
 
 /obj/machinery/drone_fabricator/derelict
 	name = "construction drone fabricator"

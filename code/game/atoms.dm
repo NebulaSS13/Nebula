@@ -77,7 +77,12 @@
 // If you want to use this, the atom must have the PROXMOVE flag, and the moving
 // atom must also have the PROXMOVE flag currently to help with lag. ~ ComicIronic
 /atom/proc/HasProximity(atom/movable/AM)
-	return
+	SHOULD_CALL_PARENT(TRUE)
+	set waitfor = FALSE
+	if(!istype(AM))
+		PRINT_STACK_TRACE("DEBUG: HasProximity called with [AM] on [src] ([usr]).")
+		return FALSE
+	return TRUE
 
 /atom/proc/emp_act(var/severity)
 	return

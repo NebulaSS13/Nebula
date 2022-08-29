@@ -34,7 +34,14 @@
 	return "<br><b>Objective [num]:</b> [O.explanation_text] "
 
 /decl/special_role/proc/print_player(var/datum/mind/ply)
-	var/role = ply.assigned_role ? "\improper[ply.assigned_role]" : (ply.assigned_special_role ? "\improper[ply.get_special_role_name()]" : "unknown role")
+
+	var/role
+	if(ply.assigned_role)
+		role = ply.assigned_role
+	else 
+		role = ply.get_special_role_name("unknown role")
+	role = "\improper [role]"
+
 	var/text = "<br><b>[ply.name]</b> (<b>[ply.key]</b>) as \a <b>[role]</b> ("
 	if(ply.current)
 		if(ply.current.stat == DEAD)

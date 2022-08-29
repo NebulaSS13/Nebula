@@ -69,6 +69,8 @@
 		//Updates the number of stored chemicals for powers
 		handle_changeling()
 
+		last_pain = null // Clear the last cached pain value so further getHalloss() calls won't use an old value.
+
 		//Organs and blood
 		handle_organs()
 		stabilize_body_temperature() //Body temperature adjusts itself (self-regulation)
@@ -423,7 +425,7 @@
 				continue
 			if(O.damage + (LOW_PRESSURE_DAMAGE) < O.min_broken_damage) //vacuum does not break bones
 				O.take_external_damage(brute = LOW_PRESSURE_DAMAGE, used_weapon = "Low Pressure")
-		if(getOxyLoss() < 55) // 11 OxyLoss per 4 ticks when wearing internals;    unconsciousness in 16 ticks, roughly half a minute
+		if(getOxyLossPercent() < 55) // 11 OxyLoss per 4 ticks when wearing internals;    unconsciousness in 16 ticks, roughly half a minute
 			adjustOxyLoss(4)  // 16 OxyLoss per 4 ticks when no internals present; unconsciousness in 13 ticks, roughly twenty seconds
 		pressure_alert = -2
 
@@ -670,7 +672,7 @@
 			//Oxygen damage overlay
 			if(getOxyLoss())
 				var/severity = 0
-				switch(getOxyLoss())
+				switch(getOxyLossPercent())
 					if(10 to 20)		severity = 1
 					if(20 to 25)		severity = 2
 					if(25 to 30)		severity = 3
@@ -1016,9 +1018,9 @@
 	if (BITTEST(hud_updateflag, SPECIALROLE_HUD))
 		var/image/holder = hud_list[SPECIALROLE_HUD]
 		holder.icon_state = "hudblank"
-		if(mind && mind.assigned_special_role)
-			var/special_role = mind.get_special_role_name()
-			if(special_role && global.hud_icon_reference[special_role])
+		var/special_role = mind?.get_special_role_name()
+		if(special_role)
+			if(global.hud_icon_reference[special_role])
 				holder.icon_state = global.hud_icon_reference[special_role]
 			else
 				holder.icon_state = "hudsyndicate"

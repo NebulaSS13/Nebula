@@ -160,7 +160,8 @@
 	return TRUE
 
 /obj/machinery/camera/HasProximity(atom/movable/AM)
-	if(isliving(AM))
+	. = ..()
+	if(. && isliving(AM))
 		newTarget(AM)
 
 /obj/machinery/camera/emp_act(severity)

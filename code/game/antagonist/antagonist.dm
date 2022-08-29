@@ -133,7 +133,7 @@
 		else if(config.use_age_restriction_for_antags && player.current.client.player_age < minimum_player_age)
 			log_debug("[key_name(player)] is not eligible to become a [name]: Is only [player.current.client.player_age] day\s old, has to be [minimum_player_age] day\s!")
 		else if(player.assigned_special_role)
-			log_debug("[key_name(player)] is not eligible to become a [name]: They already have a special role ([player.get_special_role_name()])!")
+			log_debug("[key_name(player)] is not eligible to become a [name]: They already have a special role ([player.get_special_role_name("unknown role")])!")
 		else if (player in pending_antagonists)
 			log_debug("[key_name(player)] is not eligible to become a [name]: They have already been selected for this role!")
 		else if(!can_become_antag(player))

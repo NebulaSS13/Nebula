@@ -20,22 +20,14 @@
 	var/tmp/z_depth
 	var/tmp/z_generation = 0
 
-/turf/Entered(atom/movable/thing, turf/oldLoc)
-	. = ..()
-	if (thing.bound_overlay || (thing.z_flags & ZMM_IGNORE) || !TURF_IS_MIMICKING(above))
-		return
-	above.update_mimic()
-
 /turf/update_above()
 	if (TURF_IS_MIMICKING(above))
 		above.update_mimic()
 
 /turf/proc/update_mimic()
-	if (!(z_flags & ZM_MIMIC_BELOW))
-		return
-
-	z_queued += 1
-	SSzcopy.queued_turfs += src
+	if(z_flags & ZM_MIMIC_BELOW)
+		z_queued += 1
+		SSzcopy.queued_turfs |= src
 
 /// Enables Z-mimic for a turf that didn't already have it enabled.
 /turf/proc/enable_zmimic(additional_flags = 0)

@@ -345,6 +345,9 @@
 		/decl/material/solid/metal/copper = 0.6,
 		/decl/material/solid/slag = 0.4
 	)
+	heating_point = GENERIC_SMELTING_HEAT_POINT
+	heating_sound = null
+	heating_message = null
 	ore_result_amount = 5
 	ore_spread_chance = 20
 	ore_scan_icon = "mineral_common"
@@ -369,6 +372,9 @@
 		/decl/material/solid/gemstone/diamond = 0.02,
 		/decl/material/solid/carbon = 0.98
 	)
+	heating_point = GENERIC_SMELTING_HEAT_POINT
+	heating_sound = null
+	heating_message = null
 	ore_name = "dense graphite"
 	ore_result_amount = 5
 	ore_spread_chance = 10
@@ -397,6 +403,9 @@
 		/decl/material/solid/metal/tungsten = 0.2,
 		/decl/material/solid/slag = 0.1
 	)
+	heating_point = GENERIC_SMELTING_HEAT_POINT
+	heating_sound = null
+	heating_message = null
 	ore_name = "cassiterite"
 	ore_result_amount = 10
 	ore_spread_chance = 10
@@ -423,6 +432,9 @@
 		/decl/material/solid/metal/iron = 0.2,
 		/decl/material/solid/slag = 0.5
 	)
+	heating_point = GENERIC_SMELTING_HEAT_POINT
+	heating_sound = null
+	heating_message = null
 	ore_name = "wolframite"
 	ore_result_amount = 5
 	ore_spread_chance = 15
@@ -450,6 +462,9 @@
 		/decl/material/solid/glass = 0.1,
 		/decl/material/solid/slag = 0.3
 	)
+	heating_point = GENERIC_SMELTING_HEAT_POINT
+	heating_sound = null
+	heating_message = null
 	ore_name = "sperrylite"
 	ore_result_amount = 5
 	ore_spread_chance = 15
@@ -477,6 +492,9 @@
 		/decl/material/solid/metal/iron = 0.1,
 		/decl/material/solid/slag = 0.2
 	)
+	heating_point = GENERIC_SMELTING_HEAT_POINT
+	heating_sound = null
+	heating_message = null
 	ore_name = "sphalerite"
 	ore_result_amount = 10
 	ore_spread_chance = 15
@@ -503,6 +521,9 @@
 		/decl/material/solid/metal/iron = 0.2,
 		/decl/material/solid/slag = 0.2
 	)
+	heating_point = GENERIC_SMELTING_HEAT_POINT
+	heating_sound = null
+	heating_message = null
 	ore_name = "galena"
 	ore_result_amount = 5
 	ore_spread_chance = 10
@@ -529,6 +550,9 @@
 		/decl/material/solid/metal/silver = 0.3,
 		/decl/material/solid/slag = 0.1
 	)
+	heating_point = GENERIC_SMELTING_HEAT_POINT
+	heating_sound = null
+	heating_message = null
 	ore_name = "calaverite"
 	ore_result_amount = 5
 	ore_spread_chance = 5
@@ -554,6 +578,9 @@
 		/decl/material/solid/metal/lead = 0.4,
 		/decl/material/solid/slag = 0.3
 	)
+	heating_point = GENERIC_SMELTING_HEAT_POINT
+	heating_sound = null
+	heating_message = null
 	ore_name = "crocoite"
 	ore_result_amount = 10
 	ore_spread_chance = 5
@@ -578,6 +605,9 @@
 		/decl/material/solid/boron = 0.8,
 		/decl/material/solid/slag = 0.2
 	)
+	heating_point = GENERIC_SMELTING_HEAT_POINT
+	heating_sound = null
+	heating_message = null
 	ore_name = "borax"
 	ore_result_amount = 10
 	ore_spread_chance = 5
@@ -588,6 +618,3 @@
 	value = 0.5
 	sparse_material_weight = 4
 	rich_material_weight = 2
-	heating_point = GENERIC_SMELTING_HEAT_POINT
-	heating_sound = null
-	heating_message = null

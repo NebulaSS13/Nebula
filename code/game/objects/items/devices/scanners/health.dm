@@ -173,7 +173,7 @@
 
 	// Other general warnings.
 	if(skill_level >= SKILL_BASIC)
-		if(H.getOxyLoss() > 50)
+		if(H.getOxyLossPercent() > 50)
 			dat += "<span class='scan_blue'>[b]Severe oxygen deprivation detected.[endb]</span>"
 		if(H.getToxLoss() > 50)
 			dat += "<span class='scan_green'>[b]Major systemic organ failure detected.[endb]</span>"

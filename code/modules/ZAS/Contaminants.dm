@@ -37,25 +37,15 @@ var/global/image/contamination_overlay = image('icons/effects/contamination.dmi'
 	var/N2O_HALLUCINATION_NAME = "N2O Hallucination"
 	var/N2O_HALLUCINATION_DESC = "Does being in sleeping gas cause you to hallucinate?"
 
-
-/obj/var/contaminated = 0
-
-
-/obj/item/proc/can_contaminate()
-	//Clothing and backpacks can be contaminated.
-	if(obj_flags & ITEM_FLAG_NO_CONTAMINATION) return 0
-	else if(istype(src,/obj/item/storage/backpack)) return 0 //Cannot be washed :(
-	else if(istype(src,/obj/item/clothing)) return 1
-
 /obj/item/proc/contaminate()
 	//Do a contamination overlay? Temporary measure to keep contamination less deadly than it was.
 	if(!contaminated)
-		contaminated = 1
-		overlays += contamination_overlay
+		contaminated = TRUE
+		queue_icon_update()
 
 /obj/item/proc/decontaminate()
-	contaminated = 0
-	overlays -= contamination_overlay
+	contaminated = FALSE
+	queue_icon_update()
 
 /mob/proc/contaminate()
 
@@ -155,15 +145,3 @@ var/global/image/contamination_overlay = image('icons/effects/contamination.dmi'
 		if(istype(gear))
 			gear.contaminate()
 
-/turf/Entered(obj/item/I)
-	. = ..()
-	//Items that are in contaminants, but not on a mob, can still be contaminated.
-	if(istype(I) && vsc && vsc.contaminant_control.CLOTH_CONTAMINATION && I.can_contaminate())
-		var/datum/gas_mixture/env = return_air(1)
-		if(!env)
-			return
-		for(var/g in env.gas)
-			var/decl/material/mat = GET_DECL(g)
-			if((mat.gas_flags & XGM_GAS_CONTAMINANT) && env.gas[g] > mat.gas_overlay_limit + 1)
-				I.contaminate()
-				break
