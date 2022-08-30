@@ -150,7 +150,7 @@
 		var/mob/living/carbon/human/H = M
 		H.immunity = min(H.immunity_norm * 0.5, removed + H.immunity) // Rapidly brings someone up to half immunity.
 
-/decl/material/liquid/immunobooster/affect_overdose(var/mob/living/M, var/datum/reagents/holder)
+/decl/material/liquid/immunobooster/affect_overdose(var/mob/living/M)
 	..()
 	M.add_chemical_effect(CE_TOXIN, 1)
 	var/mob/living/carbon/human/H = M
@@ -226,7 +226,7 @@
 	if(LAZYACCESS(H.chem_doses, type) > 15)
 		H.immunity = max(H.immunity - 0.25, 0)
 
-/decl/material/liquid/antibiotics/affect_overdose(var/mob/living/M, var/datum/reagents/holder)
+/decl/material/liquid/antibiotics/affect_overdose(var/mob/living/M)
 	..()
 	var/mob/living/carbon/human/H = M
 	if(!istype(H))

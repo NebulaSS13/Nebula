@@ -34,7 +34,7 @@
 		addtimer(CALLBACK(H, /mob/living/carbon/human/proc/update_eyes), 5 SECONDS)
 	. = ..()
 
-/decl/material/liquid/glowsap/affect_overdose(var/mob/living/M, var/datum/reagents/holder)
+/decl/material/liquid/glowsap/affect_overdose(var/mob/living/M)
 	. = ..()
 	M.add_chemical_effect(CE_TOXIN, 1)
 	M.set_hallucination(60, 20)

@@ -513,24 +513,28 @@ INITIALIZE_IMMEDIATE(/obj/effect/gas_overlay)
 			T.assume_gas(vapor, (volume * vapor_products[vapor]), temperature)
 		holder.remove_reagent(type, volume)
 
-/decl/material/proc/on_mob_life(var/mob/living/M, var/metabolism_class, var/datum/reagents/holder) // Currently, on_mob_life is called on carbons. Any interaction with non-carbon mobs (lube) will need to be done in touch_mob.
+/decl/material/proc/on_mob_life(var/mob/living/M, var/metabolism_class, var/datum/reagents/holder, var/list/life_dose_tracker)
+
 	if(QDELETED(src))
 		return // Something else removed us.
 	if(!istype(M))
 		return
 	if(!(flags & AFFECTS_DEAD) && M.stat == DEAD && (world.time - M.timeofdeath > 150))
 		return
-	if(overdose && (metabolism_class != CHEM_TOUCH))
-		var/overdose_threshold = overdose * (flags & IGNORE_MOB_SIZE? 1 : MOB_SIZE_MEDIUM/M.mob_size)
-		if(REAGENT_VOLUME(holder, type) > overdose_threshold)
-			affect_overdose(M, holder)
+
+	// Keep track of dosage of chems across holders for overdosing purposes
+	if(overdose && metabolism_class != CHEM_TOUCH && islist(life_dose_tracker))
+		life_dose_tracker[src] += REAGENT_VOLUME(holder, type)
 
 	//determine the metabolism rate
-	var/removed = metabolism
-	if(ingest_met && (metabolism_class == CHEM_INGEST))
-		removed = ingest_met
-	if(touch_met && (metabolism_class == CHEM_TOUCH))
-		removed = touch_met
+	var/removed
+	switch(metabolism_class)
+		if(CHEM_INGEST)
+			removed = ingest_met
+		if(CHEM_TOUCH)
+			removed = touch_met
+	if(!removed)
+		removed = metabolism
 	removed = M.get_adjusted_metabolism(removed)
 
 	//adjust effective amounts - removed, dose, and max_dose - for mob size
@@ -659,7 +663,7 @@ INITIALIZE_IMMEDIATE(/obj/effect/gas_overlay)
 		if(!M.unacidable)
 			M.take_organ_damage(0, min(removed * solvent_power * ((removed < solvent_melt_dose) ? 0.1 : 0.2), solvent_max_damage), override_droplimb = DISMEMBER_METHOD_ACID)
 
-/decl/material/proc/affect_overdose(var/mob/living/M, var/datum/reagents/holder) // Overdose effect. Doesn't happen instantly.
+/decl/material/proc/affect_overdose(var/mob/living/M) // Overdose effect. Doesn't happen instantly.
 	M.add_chemical_effect(CE_TOXIN, 1)
 	M.adjustToxLoss(REM)
 
