@@ -86,14 +86,8 @@
 /obj/item/organ/internal/stomach/return_air()
 	return null
 
-// This call needs to be split out to make sure that all the ingested things are metabolised
-// before the process call is made on any of the other organs
-/obj/item/organ/internal/stomach/proc/metabolize()
-	if(is_usable())
-		ingested.metabolize()
-	
 #define STOMACH_VOLUME 65
-	
+
 /obj/item/organ/internal/stomach/Process()
 	..()
 
@@ -121,14 +115,14 @@
 			owner.custom_pain("Your stomach cramps agonizingly!",1)
 
 		var/alcohol_volume = REAGENT_VOLUME(ingested, /decl/material/liquid/ethanol)
-		
+
 		var/alcohol_threshold_met = alcohol_volume > STOMACH_VOLUME / 2
 		if(alcohol_threshold_met && (owner.disabilities & EPILEPSY) && prob(20))
 			owner.seizure()
-		
+
 		// Alcohol counts as double volume for the purposes of vomit probability
 		var/effective_volume = ingested.total_volume + alcohol_volume
-		
+
 		// Just over the limit, the probability will be low. It rises a lot such that at double ingested it's 64% chance.
 		var/vomit_probability = (effective_volume / STOMACH_VOLUME) ** 6
 		if(prob(vomit_probability))

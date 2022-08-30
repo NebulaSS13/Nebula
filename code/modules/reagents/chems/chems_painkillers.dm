@@ -93,7 +93,7 @@
 		M.add_chemical_effect(CE_ALCOHOL_TOXIC, 1)
 		M.add_chemical_effect(CE_BREATHLOSS, 1 * boozed) //drinking and opiating suppresses breathing.
 
-/decl/material/liquid/painkillers/affect_overdose(var/mob/living/M, var/datum/reagents/holder)
+/decl/material/liquid/painkillers/affect_overdose(var/mob/living/M)
 	..()
 	if(!narcotic)
 		return
