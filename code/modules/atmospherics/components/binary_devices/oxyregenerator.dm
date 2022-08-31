@@ -72,9 +72,9 @@
 		if (inner_tank.gas[/decl/material/gas/carbon_dioxide])
 			var/co2_intake = between(0, inner_tank.gas[/decl/material/gas/carbon_dioxide], power_setting*wait/10)
 			last_flow_rate = co2_intake
-			inner_tank.adjust_gas(/decl/material/gas/carbon_dioxide, -co2_intake, 1)
+			inner_tank.adjust_gas_by_id(/decl/material/gas/carbon_dioxide, -co2_intake, 1)
 			var/datum/gas_mixture/new_oxygen = new
-			new_oxygen.adjust_gas(/decl/material/gas/oxygen,  co2_intake)
+			new_oxygen.adjust_gas_by_id(/decl/material/gas/oxygen,  co2_intake)
 			new_oxygen.temperature = T20C+30 //it's sort of hot after molecular bond breaking
 			inner_tank.merge(new_oxygen)
 			carbon_stored += co2_intake * carbon_efficiency

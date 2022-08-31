@@ -20,7 +20,7 @@ INITIALIZE_IMMEDIATE(/obj/effect/gas_overlay)
 
 /obj/effect/gas_overlay/Initialize(mapload, gas)
 	. = ..()
-	material = GET_DECL(gas)
+	material = GET_MATERIAL(gas)
 	if(!istype(material))
 		return INITIALIZE_HINT_QDEL
 	if(material.gas_tile_overlay)

@@ -16,7 +16,7 @@
 		if(initial_gas.len)
 			var/list/gas_args = list()
 			for(var/gasid in initial_gas)
-				gas_args += gasid
+				gas_args += GET_MATERIAL(gasid)
 				gas_args += initial_gas[gasid]
 			gas_mix.adjust_multi(arglist(gas_args))
 

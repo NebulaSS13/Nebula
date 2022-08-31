@@ -37,7 +37,7 @@
 		air_contents.volume = 200 //liters
 		air_contents.temperature = T20C
 		var/list/air_mix = list(/decl/material/gas/oxygen = 1 * (target_pressure * air_contents.volume) / (R_IDEAL_GAS_EQUATION * air_contents.temperature))
-		air_contents.adjust_multi(/decl/material/gas/oxygen, air_mix[/decl/material/gas/oxygen])
+		air_contents.adjust_multi_by_id(/decl/material/gas/oxygen, air_mix[/decl/material/gas/oxygen])
 		START_PROCESSING(SSprocessing, src)
 
 // Process of Oxygen candles releasing air. Makes 200 volume of oxygen
@@ -66,7 +66,7 @@
 	environment.merge(removed)
 	volume -= 200
 	var/list/air_mix = list(/decl/material/gas/oxygen = 1 * (target_pressure * air_contents.volume) / (R_IDEAL_GAS_EQUATION * air_contents.temperature))
-	air_contents.adjust_multi(/decl/material/gas/oxygen, air_mix[/decl/material/gas/oxygen])
+	air_contents.adjust_multi_by_id(/decl/material/gas/oxygen, air_mix[/decl/material/gas/oxygen])
 
 /obj/item/oxycandle/on_update_icon()
 	. = ..()

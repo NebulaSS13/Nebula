@@ -243,7 +243,8 @@
 	var/datum/gas_mixture/GM = new
 
 	if(initial_gas)
-		GM.gas = initial_gas.Copy()
+		for(var/gastype in initial_gas)
+			GM.adjust_gas_by_id(gastype, initial_gas[gastype], update = FALSE)
 	GM.temperature = temperature
 	GM.update_values()
 
@@ -283,10 +284,11 @@
 		return air
 
 /turf/proc/make_air()
-	air = new/datum/gas_mixture
+	air = new /datum/gas_mixture
 	air.temperature = temperature
 	if(initial_gas)
-		air.gas = initial_gas.Copy()
+		for(var/gastype in initial_gas)
+			air.adjust_gas_by_id(gastype, initial_gas[gastype], update = FALSE)
 	air.update_values()
 
 /turf/simulated/proc/c_copy_air()

@@ -14,9 +14,8 @@
 
 /obj/machinery/portable_atmospherics/get_single_monetary_worth()
 	. = ..()
-	for(var/gas in air_contents?.gas)
-		var/decl/material/gas_data = GET_DECL(gas)
-		. += gas_data.get_value() * air_contents.gas[gas] * GAS_WORTH_MULTIPLIER
+	for(var/decl/material/gas_data as anything in air_contents?.gas)
+		. += gas_data.get_value() * air_contents.gas[gas_data] * GAS_WORTH_MULTIPLIER
 	. = max(1, round(.))
 
 /obj/machinery/portable_atmospherics/Initialize()
@@ -158,8 +157,7 @@
 /obj/machinery/portable_atmospherics/proc/log_open()
 	if(length(air_contents?.gas))
 		var/list/gases
-		for(var/gas in air_contents.gas)
-			var/decl/material/gasdata = GET_DECL(gas)
+		for(var/decl/material/gasdata as anything in air_contents.gas)
 			LAZYADD(gases, gasdata.gas_name)
 		if(length(gases))
 			log_and_message_admins("opened \the [src], containing [english_list(gases)].")

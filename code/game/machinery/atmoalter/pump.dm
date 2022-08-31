@@ -27,7 +27,7 @@
 	. = ..()
 
 	var/list/air_mix = StandardAirMix()
-	src.air_contents.adjust_multi(/decl/material/gas/oxygen, air_mix[/decl/material/gas/oxygen], /decl/material/gas/nitrogen, air_mix[/decl/material/gas/nitrogen])
+	src.air_contents.adjust_multi_by_id(/decl/material/gas/oxygen, air_mix[/decl/material/gas/oxygen], /decl/material/gas/nitrogen, air_mix[/decl/material/gas/nitrogen])
 
 /obj/machinery/portable_atmospherics/powered/pump/on_update_icon()
 	overlays.Cut()

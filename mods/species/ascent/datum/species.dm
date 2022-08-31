@@ -67,7 +67,7 @@
 
 	breath_type =             /decl/material/gas/methyl_bromide
 	exhale_type =             /decl/material/gas/methane
-	poison_types =            list(/decl/material/gas/chlorine)
+	poison_types =            list(/decl/material/gas/chlorine = TRUE)
 
 	available_pronouns = list(/decl/pronouns/male)
 

@@ -30,61 +30,85 @@
 /datum/gas_mixture/proc/get_total_moles()
 	return total_moles * group_multiplier
 
+/datum/gas_mixture/proc/adjust_gas_by_id(gasid, moles, update = 1)
+	var/decl/material/gasdatum = GET_MATERIAL(gasid)
+	if(gasdatum)
+		return adjust_gas(gasdatum, moles, update)
+
 //Takes a gas string and the amount of moles to adjust by.  Calls update_values() if update isn't 0.
-/datum/gas_mixture/proc/adjust_gas(gasid, moles, update = 1)
+/datum/gas_mixture/proc/adjust_gas(decl/material/gasdatum, moles, update = 1)
+#ifdef UNIT_TEST
+	if(!istype(gasdatum))
+		CRASH("Attempt to add non-instanced gas ([gasdatum || "NULL"]) with instance procs.")
+#endif
+
 	if(moles == 0)
 		return
 
 	if (group_multiplier != 1)
-		gas[gasid] += moles/group_multiplier
+		gas[gasdatum] += moles/group_multiplier
 	else
-		gas[gasid] += moles
+		gas[gasdatum] += moles
 
 	if(update)
 		update_values()
 
 
 //Same as adjust_gas(), but takes a temperature which is mixed in with the gas.
-/datum/gas_mixture/proc/adjust_gas_temp(gasid, moles, temp, update = 1)
+/datum/gas_mixture/proc/adjust_gas_temp_by_id(gasid, moles, temp, update = 1)
+	var/decl/material/gasdatum = GET_MATERIAL(gasid)
+	if(gasdatum)
+		return adjust_gas_temp(gasdatum, moles, temp, update)
+
+/datum/gas_mixture/proc/adjust_gas_temp(decl/material/gasdatum, moles, temp, update = 1)
+#ifdef UNIT_TEST
+	if(!istype(gasdatum))
+		CRASH("Attempt to add non-instanced gas ([gasdatum || "NULL"]) with instance procs.")
+#endif
+
 	if(moles == 0)
 		return
 
 	if(moles > 0 && abs(temperature - temp) > MINIMUM_TEMPERATURE_DELTA_TO_CONSIDER)
 		var/self_heat_capacity = heat_capacity()
-		var/decl/material/mat = GET_DECL(gasid)
-		var/giver_heat_capacity = mat.gas_specific_heat * moles
+		var/giver_heat_capacity = gasdatum.gas_specific_heat * moles
 		var/combined_heat_capacity = giver_heat_capacity + self_heat_capacity
 		if(combined_heat_capacity != 0)
 			temperature = (temp * giver_heat_capacity + temperature * self_heat_capacity) / combined_heat_capacity
 
 	if (group_multiplier != 1)
-		gas[gasid] += moles/group_multiplier
+		gas[gasdatum] += moles/group_multiplier
 	else
-		gas[gasid] += moles
+		gas[gasdatum] += moles
 
 	if(update)
 		update_values()
 
-
 //Variadic version of adjust_gas().  Takes any number of gas and mole pairs and applies them.
+/datum/gas_mixture/proc/adjust_multi_by_id()
+	ASSERT(!(args.len % 2))
+	for(var/i = 1; i < args.len; i += 2)
+		adjust_gas_by_id(args[i], args[i+1], update = 0)
+	update_values()
+
 /datum/gas_mixture/proc/adjust_multi()
 	ASSERT(!(args.len % 2))
-
 	for(var/i = 1; i < args.len; i += 2)
 		adjust_gas(args[i], args[i+1], update = 0)
-
 	update_values()
-
 
 //Variadic version of adjust_gas_temp().  Takes any number of gas, mole and temperature associations and applies them.
-/datum/gas_mixture/proc/adjust_multi_temp()
+/datum/gas_mixture/proc/adjust_multi_temp_by_id()
 	ASSERT(!(args.len % 3))
-
 	for(var/i = 1; i < args.len; i += 3)
 		adjust_gas_temp(args[i], args[i + 1], args[i + 2], update = 0)
-
 	update_values()
 
+/datum/gas_mixture/proc/adjust_multi_temp()
+	ASSERT(!(args.len % 3))
+	for(var/i = 1; i < args.len; i += 3)
+		adjust_gas_temp_by_id(args[i], args[i + 1], args[i + 2], update = 0)
+	update_values()
 
 //Merges all the gas from another mixture into this one.  Respects group_multipliers and adjusts temperature correctly.
 //Does not modify giver in any way.
@@ -118,7 +142,7 @@
 		gas.Cut()
 		sharer.gas.Cut()
 
-	for(var/g in gas|sharer.gas)
+	for(var/g in (gas|sharer.gas))
 		var/comb = gas[g] + sharer.gas[g]
 		comb /= volume + sharer.volume
 		gas[g] = comb * volume
@@ -137,9 +161,8 @@
 //Returns the heat capacity of the gas mix based on the specific heat of the gases.
 /datum/gas_mixture/proc/heat_capacity()
 	. = 0
-	for(var/g in gas)
-		var/decl/material/mat = GET_DECL(g)
-		. += mat.gas_specific_heat * gas[g]
+	for(var/decl/material/g as anything in gas)
+		. += g.gas_specific_heat * gas[g]
 	. *= max(1, group_multiplier)
 
 
@@ -192,19 +215,18 @@
 	So returning a constant/(partial pressure) would probably do what most players expect. Although the version I have implemented below is a bit more nuanced than simply 1/P in that it scales in a way
 	which is bit more realistic (natural log), and returns a fairly accurate entropy around room temperatures and pressures.
 */
-/datum/gas_mixture/proc/specific_entropy_gas(var/gasid)
-	if (!(gasid in gas) || gas[gasid] == 0)
+/datum/gas_mixture/proc/specific_entropy_gas(var/decl/material/gasdatum)
+	if (!(gasdatum in gas) || gas[gasdatum] == 0)
 		return SPECIFIC_ENTROPY_VACUUM	//that gas isn't here
 
-	//group_multiplier gets divided out in volume/gas[gasid] - also, V/(m*T) = R/(partial pressure)
-	var/decl/material/mat = GET_DECL(gasid)
-	var/molar_mass = mat.molar_mass
-	var/specific_heat = mat.gas_specific_heat
+	//group_multiplier gets divided out in volume/gas[gasdatum] - also, V/(m*T) = R/(partial pressure)
+	var/molar_mass = gasdatum.molar_mass
+	var/specific_heat = gasdatum.gas_specific_heat
 	var/safe_temp = max(temperature, TCMB) // We're about to divide by this.
-	return R_IDEAL_GAS_EQUATION * ( log( (IDEAL_GAS_ENTROPY_CONSTANT*volume/(gas[gasid] * safe_temp)) * (molar_mass*specific_heat*safe_temp)**(2/3) + 1 ) +  15 )
+	return R_IDEAL_GAS_EQUATION * ( log( (IDEAL_GAS_ENTROPY_CONSTANT*volume/(gas[gasdatum] * safe_temp)) * (molar_mass*specific_heat*safe_temp)**(2/3) + 1 ) +  15 )
 
 	//alternative, simpler equation
-	//var/partial_pressure = gas[gasid] * R_IDEAL_GAS_EQUATION * temperature / volume
+	//var/partial_pressure = gas[gasdatum] * R_IDEAL_GAS_EQUATION * temperature / volume
 	//return R_IDEAL_GAS_EQUATION * ( log (1 + IDEAL_GAS_ENTROPY_CONSTANT/partial_pressure) + 20 )
 
 
@@ -280,18 +302,16 @@
 		return removed
 
 	var/sum = 0
-	for(var/g in gas)
-		var/decl/material/mat = GET_DECL(g)
+	for(var/decl/material/mat as anything in gas)
 		var/list/check = mat_flag ? mat.flags : mat.gas_flags
 		if(check & flag)
-			sum += gas[g]
+			sum += gas[mat]
 
-	for(var/g in gas)
-		var/decl/material/mat = GET_DECL(g)
+	for(var/decl/material/mat as anything in gas)
 		var/list/check = mat_flag ? mat.flags : mat.gas_flags
 		if(check & flag)
-			removed.gas[g] = QUANTIZE((gas[g] / sum) * amount)
-			gas[g] -= removed.gas[g] / group_multiplier
+			removed.gas[mat] = QUANTIZE((gas[mat] / sum) * amount)
+			gas[mat] -= removed.gas[mat] / group_multiplier
 
 	removed.temperature = temperature
 	update_values()
@@ -302,10 +322,9 @@
 //Returns the amount of gas that has the given flag, in moles
 /datum/gas_mixture/proc/get_by_flag(flag)
 	. = 0
-	for(var/g in gas)
-		var/decl/material/mat = GET_DECL(g)
+	for(var/decl/material/mat as anything in gas)
 		if(mat.gas_flags & flag)
-			. += gas[g]
+			. += gas[mat]
 
 //Copies gas and temperature from another gas_mixture.
 /datum/gas_mixture/proc/copy_from(const/datum/gas_mixture/sample)
@@ -356,15 +375,14 @@
 //Two lists can be passed by reference if you need know specifically which graphics were added and removed.
 /datum/gas_mixture/proc/check_tile_graphic(list/graphic_add = null, list/graphic_remove = null)
 	for(var/obj/effect/gas_overlay/O in graphic)
-		if(gas[O.material.type] <= O.material.gas_overlay_limit)
+		if(gas[O.material] <= O.material.gas_overlay_limit)
 			LAZYADD(graphic_remove, O)
-	for(var/g in gas)
+	for(var/decl/material/mat as anything in gas)
 		//Overlay isn't applied for this gas, check if it's valid and needs to be added.
-		var/decl/material/mat = GET_DECL(g)
-		if(!isnull(mat.gas_overlay_limit) && gas[g] > mat.gas_overlay_limit)
-			if(!LAZYACCESS(tile_overlay_cache, g))
-				LAZYSET(tile_overlay_cache, g, new /obj/effect/gas_overlay(null, g))
-			var/tile_overlay = tile_overlay_cache[g]
+		if(!isnull(mat.gas_overlay_limit) && gas[mat] > mat.gas_overlay_limit)
+			if(!LAZYACCESS(tile_overlay_cache, mat))
+				LAZYSET(tile_overlay_cache, mat, new /obj/effect/gas_overlay(null, mat))
+			var/tile_overlay = tile_overlay_cache[mat]
 			if(!(tile_overlay in graphic))
 				LAZYADD(graphic_add, tile_overlay)
 	. = 0
@@ -378,7 +396,7 @@
 	if(graphic.len)
 		var/pressure_mod = Clamp(return_pressure() / ONE_ATMOSPHERE, 0, 2)
 		for(var/obj/effect/gas_overlay/O in graphic)
-			var/concentration_mod = Clamp(gas[O.material.type] / total_moles, 0.1, 1)
+			var/concentration_mod = Clamp(gas[O.material] / total_moles, 0.1, 1)
 			var/new_alpha = min(230, round(pressure_mod * concentration_mod * 180, 5))
 			if(new_alpha != O.alpha)
 				O.update_alpha_animation(new_alpha)
@@ -511,9 +529,8 @@
 	return 1
 
 /datum/gas_mixture/proc/get_mass()
-	for(var/g in gas)
-		var/decl/material/mat = GET_DECL(g)
-		. += gas[g] * mat.molar_mass * group_multiplier
+	for(var/decl/material/mat as anything in gas)
+		. += gas[mat] * mat.molar_mass * group_multiplier
 
 /datum/gas_mixture/proc/specific_mass()
 	var/M = get_total_moles()

@@ -139,7 +139,7 @@ var/global/obj/abstract/flood/flood_object = new
 		if(R.gas_flags & XGM_GAS_FUEL)
 			var/moles = round(reagents.reagent_volumes[R] / REAGENT_UNITS_PER_GAS_MOLE)
 			if(moles > 0)
-				air.adjust_gas(R.type, moles, FALSE) // TODO gas conversion
+				air.adjust_gas(, moles, FALSE)
 				reagents.remove_reagent(round(moles * REAGENT_UNITS_PER_GAS_MOLE))
 				update_air = TRUE
 	if(update_air)

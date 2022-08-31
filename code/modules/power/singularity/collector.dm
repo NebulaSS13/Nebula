@@ -68,7 +68,7 @@ var/global/list/rad_collectors = list()
 			investigate_log("<font color='red'>out of fuel</font>.","singulo")
 			eject()
 		else
-			loaded_tank.air_adjust_gas(/decl/material/gas/hydrogen, -0.01*drainratio*min(last_rads,max_rads)/max_rads) //fuel cost increases linearly with incoming radiation
+			loaded_tank.air_adjust_gas_by_id(/decl/material/gas/hydrogen, -0.01*drainratio*min(last_rads,max_rads)/max_rads) //fuel cost increases linearly with incoming radiation
 
 /obj/machinery/rad_collector/CanUseTopic(mob/user)
 	if(!anchored)

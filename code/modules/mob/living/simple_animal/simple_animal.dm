@@ -253,11 +253,13 @@
 		if(atmos_suitable)
 			if(LAZYLEN(min_gas))
 				for(var/gas in min_gas)
+					gas = GET_MATERIAL(gas)
 					if(environment.gas[gas] < min_gas[gas])
 						atmos_suitable = FALSE
 						break
 			if(atmos_suitable && LAZYLEN(max_gas))
 				for(var/gas in max_gas)
+					gas = GET_MATERIAL(gas)
 					if(environment.gas[gas] > max_gas[gas])
 						atmos_suitable = FALSE
 						break

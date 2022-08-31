@@ -119,8 +119,7 @@
 
 /obj/structure/fire_source/proc/check_atmos()
 	var/datum/gas_mixture/GM = loc?.return_air()
-	for(var/g in GM?.gas)
-		var/decl/material/oxidizer = GET_DECL(g)
+	for(var/decl/material/oxidizer as anything in GM?.gas)
 		if(oxidizer.gas_flags & XGM_GAS_OXIDIZER)
 			return TRUE
 

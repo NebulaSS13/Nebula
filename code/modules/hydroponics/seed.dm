@@ -203,8 +203,8 @@
 	if(!(light_supplied) || !(get_trait(TRAIT_REQUIRES_WATER)))
 		return
 	if(environment.get_gas(/decl/material/gas/carbon_dioxide) >= req_CO2_moles)
-		environment.adjust_gas(/decl/material/gas/carbon_dioxide, -req_CO2_moles, 1)
-		environment.adjust_gas(/decl/material/gas/oxygen, req_CO2_moles, 1)
+		environment.adjust_gas_by_id(/decl/material/gas/carbon_dioxide, -req_CO2_moles, 1)
+		environment.adjust_gas_by_id(/decl/material/gas/oxygen, req_CO2_moles, 1)
 
 /datum/seed/proc/make_splat(var/turf/T, var/obj/item/thrown)
 	if(!splat_type || (locate(splat_type) in T))

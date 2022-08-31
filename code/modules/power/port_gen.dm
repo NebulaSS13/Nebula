@@ -182,7 +182,7 @@
 	if(mat?.burn_product)
 		var/datum/gas_mixture/environment = loc.return_air()
 		if(environment)
-			environment.adjust_gas(mat.burn_product.type, 0.05*power_output) // TODO gas conversion
+			environment.adjust_gas(mat.burn_product, 0.05*power_output)
 
 /obj/machinery/port_gen/pacman/HasFuel()
 	var/needed_sheets = power_output / time_per_sheet

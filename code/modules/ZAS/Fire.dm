@@ -212,12 +212,11 @@ If it gains pressure too slowly, it may leak or just rupture instead of explodin
 		var/total_oxidizers = 0
 
 		//*** Get the fuel and oxidizer amounts
-		for(var/g in gas)
-			var/decl/material/mat = GET_DECL(g)
+		for(var/decl/material/mat as anything in gas)
 			if(mat.gas_flags & XGM_GAS_FUEL)
-				total_fuel += gas[g]
+				total_fuel += gas[mat]
 			if(mat.gas_flags & XGM_GAS_OXIDIZER)
-				total_oxidizers += gas[g]
+				total_oxidizers += gas[mat]
 		total_fuel *= group_multiplier
 		total_oxidizers *= group_multiplier
 
@@ -258,10 +257,9 @@ If it gains pressure too slowly, it may leak or just rupture instead of explodin
 		//remove_by_flag() and adjust_gas() handle the group_multiplier for us.
 		remove_by_flag(XGM_GAS_OXIDIZER, used_oxidizers)
 		var/datum/gas_mixture/burned_fuel = remove_by_flag(XGM_GAS_FUEL, used_fuel)
-		for(var/g in burned_fuel.gas)
-			var/decl/material/mat = GET_DECL(g)
+		for(var/decl/material/mat as anything in burned_fuel.gas)
 			if(mat.burn_product)
-				adjust_gas(mat.burn_product.type, burned_fuel.gas[g]) // TODO gas conversion
+				adjust_gas(mat.burn_product, burned_fuel.gas[mat])
 
 		//calculate the energy produced by the reaction and then set the new temperature of the mix
 		temperature = (starting_energy + vsc.fire_fuel_energy_release * used_fuel) / heat_capacity()
@@ -276,43 +274,23 @@ If it gains pressure too slowly, it may leak or just rupture instead of explodin
 
 /datum/gas_mixture/proc/check_recombustibility()
 	. = 0
-	for(var/g in gas)
-		if(gas[g] >= 0.1)
-			var/decl/material/gas = GET_DECL(g)
-			if(gas.gas_flags & XGM_GAS_OXIDIZER)
-				. = 1
-				break
-
-	if(!.)
-		return 0
-
-	. = 0
-	for(var/g in gas)
-		if(gas[g] >= 0.1)
-			var/decl/material/gas = GET_DECL(g)
-			if(gas.gas_flags & XGM_GAS_OXIDIZER)
-				. = 1
-				break
+	for(var/decl/material/mat as anything in gas)
+		if(gas[mat] < 0.1 || !mat.gas_flags || mat.gas_flags == .)
+			continue
+		. |= mat.gas_flags
+		if((. & (XGM_GAS_OXIDIZER|XGM_GAS_FUEL)) == (XGM_GAS_OXIDIZER|XGM_GAS_FUEL))
+			return TRUE
+	return FALSE
 
 /datum/gas_mixture/proc/check_combustibility()
 	. = 0
-	for(var/g in gas)
-		if(QUANTIZE(gas[g] * vsc.fire_consuption_rate) >= 0.1)
-			var/decl/material/gas = GET_DECL(g)
-			if(gas.gas_flags & XGM_GAS_OXIDIZER)
-				. = 1
-				break
-
-	if(!.)
-		return 0
-
-	. = 0
-	for(var/g in gas)
-		if(QUANTIZE(gas[g] * vsc.fire_consuption_rate) >= 0.1)
-			var/decl/material/gas = GET_DECL(g)
-			if(gas.gas_flags & XGM_GAS_FUEL)
-				. = 1
-				break
+	for(var/decl/material/mat as anything in gas)
+		if(QUANTIZE(gas[mat] * vsc.fire_consuption_rate) < 0.1 || !mat.gas_flags ||  mat.gas_flags == .)
+			continue
+		. |= mat.gas_flags
+		if((. & (XGM_GAS_OXIDIZER|XGM_GAS_FUEL)) == (XGM_GAS_OXIDIZER|XGM_GAS_FUEL))
+			return TRUE
+	return FALSE
 
 //returns a value between 0 and vsc.fire_firelevel_multiplier
 /datum/gas_mixture/proc/calculate_firelevel(total_fuel, total_oxidizers, reaction_limit, gas_volume)

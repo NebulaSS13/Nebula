@@ -11,7 +11,7 @@
 	public_variables = list(
 		/decl/public_access/public_variable/gas,
 		/decl/public_access/public_variable/pressure,
-		/decl/public_access/public_variable/temperature		
+		/decl/public_access/public_variable/temperature
 	)
 	stock_part_presets = list(/decl/stock_part_preset/radio/basic_transmitter/air_sensor = 1)
 	use_power = POWER_USE_IDLE
@@ -46,9 +46,8 @@
 	if(total_moles <= 0)
 		return
 	. = list()
-	for(var/gas in air_sample.gas)
-		var/decl/material/mat = GET_DECL(gas)			
-		var/gaspercent = round(air_sample.gas[gas]*100/total_moles,0.01)
+	for(var/decl/material/mat as anything in air_sample.gas)
+		var/gaspercent = round(air_sample.gas[mat]*100/total_moles,0.01)
 		var/gas_list = list("symbol" = mat.gas_symbol_html, "percent" = gaspercent)
 		. += list(gas_list)
 

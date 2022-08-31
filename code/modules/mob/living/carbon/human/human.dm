@@ -1158,7 +1158,7 @@
 				breath = new
 				breath.volume = volume_needed
 				breath.temperature = T.temperature
-			breath.adjust_gas(/decl/material/gas/oxygen, ONE_ATMOSPHERE*volume_needed/(R_IDEAL_GAS_EQUATION*T20C))
+			breath.adjust_gas_by_id(/decl/material/gas/oxygen, ONE_ATMOSPHERE*volume_needed/(R_IDEAL_GAS_EQUATION*T20C))
 			T.show_bubbles()
 	return breath
 
@@ -1303,7 +1303,7 @@
 		if(head && (head.item_flags & ITEM_FLAG_AIRTIGHT))
 			return TRUE
 
-/mob/living/carbon/human/set_internals_to_best_available_tank(var/breathes_gas = /decl/material/gas/oxygen, var/list/poison_gas = list(/decl/material/gas/chlorine))
+/mob/living/carbon/human/set_internals_to_best_available_tank(var/breathes_gas, var/list/poison_gas)
 	. = ..(species.breath_type, species.poison_types)
 
 /mob/living/carbon/human/get_possible_internals_sources()

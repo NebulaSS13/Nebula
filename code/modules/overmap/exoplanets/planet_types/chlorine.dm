@@ -33,7 +33,7 @@
 	return T0C - rand(0, 100)
 
 /obj/effect/overmap/visitable/sector/exoplanet/chlorine/get_mandatory_gasses()
-	return list(/decl/material/gas/chlorine = MOLES_O2STANDARD)
+	return list(GET_MATERIAL(/decl/material/gas/chlorine) = MOLES_O2STANDARD)
 
 /datum/random_map/noise/exoplanet/chlorine
 	descriptor = "chlorine exoplanet"

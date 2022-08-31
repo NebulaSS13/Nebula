@@ -472,9 +472,9 @@
 		to_chat(src, SPAN_WARNING("You don't have a tank that is usable as internals."))
 
 
-/mob/living/carbon/proc/set_internals_to_best_available_tank(var/breathes_gas = /decl/material/gas/oxygen, var/list/poison_gas = list(/decl/material/gas/chlorine))
+/mob/living/carbon/proc/set_internals_to_best_available_tank(var/decl/material/breathes_gas, var/list/poison_gas)
 
-	if(!ispath(breathes_gas))
+	if(!breathes_gas)
 		return
 
 	var/list/possible_sources = get_possible_internals_sources()
@@ -486,7 +486,6 @@
 	var/selected_slot
 	var/selected_from
 	var/obj/item/tank/selected_obj
-	var/decl/material/breathing_gas = GET_DECL(breathes_gas)
 	for(var/slot_name in possible_sources)
 		var/list/checking_data = possible_sources[slot_name]
 		if(length(checking_data) < 2)
@@ -495,7 +494,7 @@
 		if(!istype(checking) || !checking.air_contents?.gas)
 			continue
 
-		var/valid_tank = (checking.manipulated_by && checking.manipulated_by != real_name && findtext(checking.desc, breathing_gas.name))
+		var/valid_tank = (checking.manipulated_by && checking.manipulated_by != real_name && findtext(checking.desc, breathes_gas.name))
 		if(!valid_tank)
 			if(!checking.air_contents.gas[breathes_gas])
 				continue
@@ -523,7 +522,7 @@
 	var/safety = eyecheck()
 	if(safety >= FLASH_PROTECTION_MODERATE || flash_strength <= 0) // May be modified by human proc.
 		return FALSE
-	
+
 	flash_eyes(FLASH_PROTECTION_MODERATE - safety)
 	SET_STATUS_MAX(src, STAT_STUN, (flash_strength / 2))
 	SET_STATUS_MAX(src, STAT_BLURRY, flash_strength)

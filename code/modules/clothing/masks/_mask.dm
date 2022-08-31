@@ -20,14 +20,16 @@
 	var/hanging = 0
 	var/list/filtered_gases
 
-/obj/item/clothing/mask/proc/filters_water()
-	return FALSE
-
 /obj/item/clothing/mask/Initialize()
 	. = ..()
+	if(filtered_gases)
+		POPULATE_MATERIAL_LIST(filtered_gases)
 	if(pull_mask)
 		action_button_name = "Adjust Mask"
 		verbs += .verb/adjust_mask
+
+/obj/item/clothing/mask/proc/filters_water()
+	return FALSE
 
 /obj/item/clothing/mask/update_clothing_icon()
 	if (ismob(src.loc))
@@ -38,7 +40,7 @@
 	if(overlay && hanging && slot == slot_wear_mask_str && check_state_in_icon("[overlay.icon_state]-down", overlay.icon))
 		overlay.icon_state = "[overlay.icon_state]-down"
 	. = ..()
- 
+
 /obj/item/clothing/mask/proc/filter_air(datum/gas_mixture/air)
 	return
 

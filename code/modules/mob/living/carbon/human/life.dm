@@ -334,9 +334,8 @@
 	var/adjusted_pressure = calculate_affecting_pressure(pressure)
 
 	//Check for contaminants before anything else because we don't want to skip it.
-	for(var/g in environment.gas)
-		var/decl/material/mat = GET_DECL(g)
-		if((mat.gas_flags & XGM_GAS_CONTAMINANT) && environment.gas[g] > mat.gas_overlay_limit + 1)
+	for(var/decl/material/mat as anything in environment.gas)
+		if((mat.gas_flags & XGM_GAS_CONTAMINANT) && environment.gas[mat] > mat.gas_overlay_limit + 1)
 			handle_contaminants()
 			break
 
@@ -956,7 +955,7 @@
 	if (BITTEST(hud_updateflag, ID_HUD) && hud_list[ID_HUD])
 		var/image/holder = hud_list[ID_HUD]
 		holder.icon_state = "hudunknown"
-		
+
 		var/obj/item/id = get_equipped_item(slot_wear_id_str)
 		if(id)
 			var/obj/item/card/id/I = id.GetIdCard()

@@ -26,7 +26,7 @@
 			var/adj_power = round(boompower * activated_volume/60)
 			var/datum/gas_mixture/products = new(_temperature = 5 * FLAMMABLE_GAS_FLASHPOINT)
 			var/gas_moles = 3 * volume
-			products.adjust_multi(/decl/material/gas/carbon_dioxide, 0.5 * gas_moles, /decl/material/gas/nitrogen, 0.3 * gas_moles, /decl/material/liquid/water, 0.2 * gas_moles)
+			products.adjust_multi_by_id(/decl/material/gas/carbon_dioxide, 0.5 * gas_moles, /decl/material/gas/nitrogen, 0.3 * gas_moles, /decl/material/liquid/water, 0.2 * gas_moles)
 			T.assume_air(products)
 			holder?.reagents?.remove_reagent(src, activated_volume)
 			explosion(T, adj_power, adj_power + 1, adj_power*2 + 2)

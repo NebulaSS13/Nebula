@@ -45,12 +45,13 @@
 	. += "Data for \the [src]:"
 	. += "Species:\t[species]"
 	if(species.breath_type)
-		var/decl/material/mat = GET_DECL(species.breath_type)
-		. += "Breathes:\t[mat.gas_name]"
+		. += "Breathes:\t[species.breath_type.gas_name]"
 	if(species.exhale_type)
-		var/decl/material/mat = GET_DECL(species.exhale_type)
-		. += "Exhales:\t[mat.gas_name]"
-	. += "Known toxins:\t[english_list(species.poison_types)]"
+		. += "Exhales:\t[species.exhale_type.gas_name]"
+	var/list/poison_names = list()
+	for(var/decl/material/g in species.poison_types)
+		poison_names += g.use_name
+	. += "Known toxins:\t[english_list(poison_names)]"
 	. += "Temperature comfort zone:\t[species.cold_discomfort_level] K to [species.heat_discomfort_level] K"
 	. += "Pressure comfort zone:\t[species.warning_low_pressure] kPa to [species.warning_high_pressure] kPa"
 	. = jointext(., "<br>")

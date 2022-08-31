@@ -12,9 +12,8 @@
 
 /obj/machinery/atmospherics/unary/get_single_monetary_worth()
 	. = ..()
-	for(var/gas in air_contents?.gas)
-		var/decl/material/gas_data = GET_DECL(gas)
-		. += gas_data.get_value() * air_contents.gas[gas] * GAS_WORTH_MULTIPLIER
+	for(var/decl/material/gas_data as anything in air_contents?.gas)
+		. += gas_data.get_value() * air_contents.gas[gas_data] * GAS_WORTH_MULTIPLIER
 	. = max(1, round(.))
 
 /obj/machinery/atmospherics/unary/Initialize()
@@ -34,7 +33,7 @@
 /obj/machinery/atmospherics/unary/physically_destroyed()
 	if(loc && air_contents)
 		loc.assume_air(air_contents)
-	. = ..()	
+	. = ..()
 
 /obj/machinery/atmospherics/unary/dismantle()
 	if(loc && air_contents)

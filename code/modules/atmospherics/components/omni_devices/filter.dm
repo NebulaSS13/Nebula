@@ -34,7 +34,7 @@
 		for(var/mat_type in all_materials)
 			var/decl/material/mat = all_materials[mat_type]
 			if(!mat.hidden_from_codex && !isnull(mat.boiling_point) && mat.boiling_point < T20C)
-				gas_decls_by_symbol_cache[mat.gas_symbol] = mat.type
+				gas_decls_by_symbol_cache[mat.gas_symbol] = mat
 
 	rebuild_filtering_list()
 	for(var/datum/omni_port/P in ports)
@@ -261,9 +261,8 @@
 	filtering_outputs.Cut()
 	for(var/datum/omni_port/P in ports)
 		filtering_outputs[P.filtering] = P.air
-		for(var/mat_type in P.air?.gas)
-			var/decl/material/mat = GET_DECL(mat_type)
-			gas_decls_by_symbol_cache[mat.gas_symbol] = mat.type
+		for(var/decl/material/mat as anything in P.air?.gas)
+			gas_decls_by_symbol_cache[mat.gas_symbol] = mat
 
 /obj/machinery/atmospherics/omni/filter/proc/handle_port_change(var/datum/omni_port/P)
 	switch(P.mode)

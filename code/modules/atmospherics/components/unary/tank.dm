@@ -33,7 +33,7 @@
 		for(var/gas in filling)
 			gases += gas
 			gases += start_pressure * filling[gas] * (air_contents.volume)/(R_IDEAL_GAS_EQUATION*air_contents.temperature)
-		air_contents.adjust_multi(arglist(gases))
+		air_contents.adjust_multi_by_id(arglist(gases))
 		update_icon()
 
 /obj/machinery/atmospherics/unary/tank/set_initial_level()
@@ -89,7 +89,7 @@
 	name =  "Pressure Tank"
 	desc = "A large vessel containing pressurized gas."
 	color =  PIPE_COLOR_WHITE
-	connect_types = CONNECT_TYPE_REGULAR|CONNECT_TYPE_REGULAR|CONNECT_TYPE_SCRUBBER|CONNECT_TYPE_FUEL	
+	connect_types = CONNECT_TYPE_REGULAR|CONNECT_TYPE_REGULAR|CONNECT_TYPE_SCRUBBER|CONNECT_TYPE_FUEL
 	w_class = ITEM_SIZE_STRUCTURE
 	density = 1
 	level = 1

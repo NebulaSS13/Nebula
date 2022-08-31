@@ -46,7 +46,7 @@
 /obj/item/chems/proc/update_container_desc()
 	var/list/new_desc_list = list(get_base_desc())
 	if(presentation_flags & PRESENTATION_FLAG_DESC)
-		var/decl/material/R = reagents?.get_primary_reagent_decl()
+		var/decl/material/R = reagents?.get_primary_reagent()
 		if(R)
 			new_desc_list += R.get_presentation_desc(src)
 	desc = new_desc_list.Join("\n")

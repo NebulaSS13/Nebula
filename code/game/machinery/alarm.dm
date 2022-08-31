@@ -266,9 +266,9 @@
 
 	pressure_dangerlevel = get_danger_level(environment_pressure, TLV["pressure"])
 	var/decl/material/gas_mat = GET_MATERIAL(/decl/material/gas/oxygen)
-	oxygen_dangerlevel = get_danger_level(environment.gas[/decl/material/gas/oxygen]*partial_pressure, TLV[gas_mat.gas_name])
+	oxygen_dangerlevel = get_danger_level(environment.gas[gas_mat]*partial_pressure, TLV[gas_mat.gas_name])
 	gas_mat = GET_MATERIAL(/decl/material/gas/carbon_dioxide)
-	co2_dangerlevel = get_danger_level(environment.gas[/decl/material/gas/carbon_dioxide]*partial_pressure, TLV[gas_mat.gas_name])
+	co2_dangerlevel = get_danger_level(environment.gas[gas_mat]*partial_pressure, TLV[gas_mat.gas_name])
 	temperature_dangerlevel = get_danger_level(environment.temperature, TLV["temperature"])
 	other_dangerlevel = get_danger_level(other_moles*partial_pressure, TLV["other"])
 

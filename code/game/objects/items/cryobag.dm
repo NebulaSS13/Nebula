@@ -40,8 +40,8 @@
 	. = ..()
 	airtank = new()
 	airtank.temperature = T0C
-	airtank.adjust_gas(/decl/material/gas/oxygen, MOLES_O2STANDARD, 0)
-	airtank.adjust_gas(/decl/material/gas/nitrogen, MOLES_N2STANDARD)
+	airtank.adjust_gas_by_id(/decl/material/gas/oxygen, MOLES_O2STANDARD, 0)
+	airtank.adjust_gas_by_id(/decl/material/gas/nitrogen, MOLES_N2STANDARD)
 	update_icon()
 
 /obj/structure/closet/body_bag/cryobag/Destroy()

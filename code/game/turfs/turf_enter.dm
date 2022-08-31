@@ -5,7 +5,7 @@
 	if(!istype(mover) || !(mover.movable_flags & MOVABLE_FLAG_PROXMOVE))
 		return
 	for(var/atom/movable/neighbor in range(1))
-		if(objects > ENTER_PROXIMITY_LOOP_SANITY) 
+		if(objects > ENTER_PROXIMITY_LOOP_SANITY)
 			break // Don't let ore piles kill the server as well as the client.
 		if(neighbor.movable_flags & MOVABLE_FLAG_PROXMOVE)
 			objects++
@@ -43,9 +43,8 @@
 			var/datum/gas_mixture/env = return_air(1)
 			if(!env)
 				return
-			for(var/g in env.gas)
-				var/decl/material/mat = GET_DECL(g)
-				if((mat.gas_flags & XGM_GAS_CONTAMINANT) && env.gas[g] > mat.gas_overlay_limit + 1)
+			for(var/decl/material/mat as anything in env.gas)
+				if((mat.gas_flags & XGM_GAS_CONTAMINANT) && env.gas[mat] > mat.gas_overlay_limit + 1)
 					I.contaminate()
 					break
 

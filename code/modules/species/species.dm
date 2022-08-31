@@ -113,11 +113,15 @@ var/global/const/DEFAULT_SPECIES_HEALTH = 200
 	var/spawns_with_stack = 0
 
 	// Environment tolerance/life processes vars.
-	var/breath_pressure = 16                                    // Minimum partial pressure safe for breathing, kPa
-	var/breath_type = /decl/material/gas/oxygen                                  // Non-oxygen gas breathed, if any.
-	var/poison_types = list(/decl/material/gas/chlorine = TRUE) // Noticeably poisonous air - ie. updates the toxins indicator on the HUD.
-	var/exhale_type = /decl/material/gas/carbon_dioxide                          // Exhaled gas type.
-
+	/// Minimum partial pressure safe for breathing, kPa
+	var/breath_pressure = 16
+	/// Noticeably poisonous air - ie. updates the toxins indicator on the HUD.
+	var/poison_types = list(/decl/material/gas/chlorine = TRUE)
+	/// Non-oxygen gas breathed, if any.
+	var/decl/material/breath_type = /decl/material/gas/oxygen
+	/// Exhaled gas type.
+	var/decl/material/exhale_type = /decl/material/gas/carbon_dioxide
+	/// Reagent used for blood vessel filling
 	var/decl/material/blood_reagent = /decl/material/liquid/blood
 
 	var/max_pressure_diff = 60                                  // Maximum pressure difference that is safe for lungs
@@ -298,6 +302,13 @@ var/global/const/DEFAULT_SPECIES_HEALTH = 200
 	if(blood_reagent)
 		blood_reagent = GET_MATERIAL(blood_reagent)
 
+	if(breath_type)
+		breath_type = GET_MATERIAL(breath_type)
+	if(exhale_type)
+		exhale_type = GET_MATERIAL(exhale_type)
+	if(poison_types)
+		POPULATE_MATERIAL_LIST_ASSOC(poison_types)
+
 	// Generate OOC info.
 	var/list/codex_traits = list()
 	if(spawn_flags & SPECIES_CAN_JOIN)
@@ -340,16 +351,13 @@ var/global/const/DEFAULT_SPECIES_HEALTH = 200
 		else if(codex_damage_types[kind] < 1)
 			codex_traits += "<li>Resistant to [kind].</li>"
 	if(breath_type)
-		var/decl/material/mat = GET_DECL(breath_type)
-		codex_traits += "<li>They breathe [mat.gas_name].</li>"
+		codex_traits += "<li>They breathe [breath_type.gas_name].</li>"
 	if(exhale_type)
-		var/decl/material/mat = GET_DECL(exhale_type)
-		codex_traits += "<li>They exhale [mat.gas_name].</li>"
+		codex_traits += "<li>They exhale [exhale_type.gas_name].</li>"
 	if(LAZYLEN(poison_types))
 		var/list/poison_names = list()
-		for(var/g in poison_types)
-			var/decl/material/mat = GET_DECL(exhale_type)
-			poison_names |= mat.gas_name
+		for(var/decl/material/g as anything in poison_types)
+			poison_names |= g.use_name
 		codex_traits += "<li>[capitalize(english_list(poison_names))] [LAZYLEN(poison_names) == 1 ? "is" : "are"] poisonous to them.</li>"
 
 	if(length(codex_traits))

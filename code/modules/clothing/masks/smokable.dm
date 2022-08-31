@@ -79,8 +79,8 @@
 			extinguish()
 		else
 			environment.remove_by_flag(XGM_GAS_OXIDIZER, gas_consumption)
-			environment.adjust_gas(/decl/material/gas/carbon_dioxide, 0.5*gas_consumption,0)
-			environment.adjust_gas(/decl/material/gas/carbon_monoxide, 0.5*gas_consumption)
+			environment.adjust_gas_by_id(/decl/material/gas/carbon_dioxide, 0.5*gas_consumption,0)
+			environment.adjust_gas_by_id(/decl/material/gas/carbon_monoxide, 0.5*gas_consumption)
 
 /obj/item/clothing/mask/smokable/Process()
 	var/turf/location = get_turf(src)

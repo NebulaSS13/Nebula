@@ -60,26 +60,25 @@
 				. += "<span class='warning'>Pressure: [round(pressure,0.01)] kPa</span>"
 
 			var/perGas_add_string = ""
-			for(var/mix in mixture.gas)
+			for(var/decl/material/mix as anything in mixture.gas)
 				var/percentage = round(mixture.gas[mix]/total_moles * 100, 0.01)
 				if(!percentage)
 					continue
-				var/decl/material/mat = GET_DECL(mix)
 				switch(mode)
 					if(MV_MODE)
 						perGas_add_string = ", Moles: [round(mixture.gas[mix], 0.01)]"
 					if(MAT_TRAIT_MODE)
 						var/list/traits = list()
-						if(mat.gas_flags & XGM_GAS_FUEL)
+						if(mix.gas_flags & XGM_GAS_FUEL)
 							traits += "can be used as combustion fuel"
-						if(mat.gas_flags & XGM_GAS_OXIDIZER)
+						if(mix.gas_flags & XGM_GAS_OXIDIZER)
 							traits += "can be used as oxidizer"
-						if(mat.gas_flags & XGM_GAS_CONTAMINANT)
+						if(mix.gas_flags & XGM_GAS_CONTAMINANT)
 							traits += "contaminates clothing with toxic residue"
-						if(mat.flags & MAT_FLAG_FUSION_FUEL)
+						if(mix.flags & MAT_FLAG_FUSION_FUEL)
 							traits += "can be used to fuel fusion reaction"
-						perGas_add_string = "\n\tSpecific heat: [mat.gas_specific_heat] J/(mol*K), Molar mass: [mat.molar_mass] kg/mol.[traits.len ? "\n\tThis gas [english_list(traits)]" : ""]"
-				. += "[capitalize(mat.gas_name)]: [percentage]%[perGas_add_string]"
+						perGas_add_string = "\n\tSpecific heat: [mix.gas_specific_heat] J/(mol*K), Molar mass: [mix.molar_mass] kg/mol.[traits.len ? "\n\tThis gas [english_list(traits)]" : ""]"
+				. += "[capitalize(mix.gas_name)]: [percentage]%[perGas_add_string]"
 			var/totalGas_add_string = ""
 			if(mode == MV_MODE)
 				totalGas_add_string = ", Total moles: [round(mixture.total_moles, 0.01)], Volume: [mixture.volume]L"

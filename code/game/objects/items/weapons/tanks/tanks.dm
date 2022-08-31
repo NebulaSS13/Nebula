@@ -62,7 +62,7 @@ var/global/list/global/tank_gauge_cache = list()
 
 	air_contents = new /datum/gas_mixture(volume, T20C)
 	for(var/gas in starting_pressure)
-		air_contents.adjust_gas(gas, starting_pressure[gas]*volume/(R_IDEAL_GAS_EQUATION*T20C), 0)
+		air_contents.adjust_gas_by_id(gas, starting_pressure[gas]*volume/(R_IDEAL_GAS_EQUATION*T20C), FALSE)
 	air_contents.update_values()
 
 	START_PROCESSING(SSobj, src)
@@ -84,9 +84,8 @@ var/global/list/global/tank_gauge_cache = list()
 
 /obj/item/tank/get_single_monetary_worth()
 	. = ..()
-	for(var/gas in air_contents?.gas)
-		var/decl/material/gas_data = GET_DECL(gas)
-		. += gas_data.get_value() * air_contents.gas[gas] * GAS_WORTH_MULTIPLIER
+	for(var/decl/material/gas_data as anything in air_contents?.gas)
+		. += gas_data.get_value() * air_contents.gas[gas_data] * GAS_WORTH_MULTIPLIER
 	. = max(1, round(.))
 
 /obj/item/tank/examine(mob/user)
@@ -344,8 +343,8 @@ var/global/list/global/tank_gauge_cache = list()
 	. = air_contents.remove_by_flag(flag, amount)
 	queue_icon_update()
 
-/obj/item/tank/proc/air_adjust_gas(gasid, moles, update = 1)
-	. = air_contents.adjust_gas(gasid, moles, update)
+/obj/item/tank/proc/air_adjust_gas_by_id(gasid, moles, update = 1)
+	. = air_contents.adjust_gas_by_id(gasid, moles, update)
 	if(.)
 		queue_icon_update()
 

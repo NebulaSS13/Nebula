@@ -32,7 +32,7 @@
 		/decl/emote/exertion/biological/pant
 	)
 	var/blood_color
-	
+
 /decl/species/alium/Initialize()
 
 	//Coloring
@@ -140,9 +140,11 @@
 		if(mat.gas_flags & (XGM_GAS_OXIDIZER|XGM_GAS_FUEL))
 			newgases -= gas
 	if(newgases.len)
-		poison_types = list(pick_n_take(newgases))
+		var/gastype = pick_n_take(newgases)
+		poison_types = list(GET_MATERIAL(gastype) = TRUE)
 	if(newgases.len)
-		exhale_type = pick_n_take(newgases)
+		var/gastype = pick_n_take(newgases)
+		exhale_type = GET_MATERIAL(gastype)
 
 /obj/structure/aliumizer
 	name = "alien monolith"

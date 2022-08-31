@@ -264,9 +264,8 @@
 	if(atmosphere)
 		if(user.skill_check(SKILL_SCIENCE, SKILL_EXPERT) || user.skill_check(SKILL_ATMOS, SKILL_EXPERT))
 			var/list/gases = list()
-			for(var/g in atmosphere.gas)
-				if(atmosphere.gas[g] > atmosphere.total_moles * 0.05)
-					var/decl/material/mat = GET_DECL(g)
+			for(var/decl/material/mat as anything in atmosphere.gas)
+				if(atmosphere.gas[mat] > atmosphere.total_moles * 0.05)
 					gases += mat.gas_name
 			extra_data += "Atmosphere composition: [english_list(gases)]"
 			var/inaccuracy = rand(8,12)/10
