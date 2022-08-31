@@ -68,8 +68,7 @@
 		if(autolabel && !label_text) // don't override preset labels
 			var/decl/material/R = GET_DECL(initial_reagents[1])
 			label_text = R.name
-	if(label_text)
-		update_name_label()
+	update_container_name()
 	update_icon()
 
 /obj/item/chems/glass/bottle/stabilizer
