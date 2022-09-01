@@ -25,6 +25,10 @@
 	T.lighting_overlay = src
 	T.luminosity       = 0
 
+	if (T.corners && T.corners.len)
+		for (var/datum/lighting_corner/C in T.corners)
+			C.active = TRUE
+
 	if (update_now)
 		update_overlay()
 		needs_update = FALSE
