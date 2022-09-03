@@ -35,15 +35,15 @@
 	// If there is no seed data (and hence nothing planted),
 	// or the plant is dead, process nothing further.
 	if(!seed || dead)
-		if(mechanical) 
+		if(mechanical)
 			update_icon() //Harvesting would fail to set alert icons properly.
 		return
 
 	// Advance plant age.
-	var/cur_stage = get_overlay_stage()
-	if(prob(30)) 
+	var/cur_stage = seed.get_overlay_stage(age)
+	if(prob(30))
 		age += 1 * HYDRO_SPEED_MULTIPLIER
-		if(get_overlay_stage() != cur_stage)
+		if(seed.get_overlay_stage(age) != cur_stage)
 			needs_icon_update |= 1
 
 	//Highly mutable plants have a chance of mutating every tick.
