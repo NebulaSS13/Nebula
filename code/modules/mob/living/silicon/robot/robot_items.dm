@@ -12,7 +12,7 @@
 		to_chat(user, SPAN_WARNING("There is nothing loaded inside \the [src]."))
 		return TRUE
 	var/choice = input("Do you wish to eject or analyze \the [loaded_item]?", "Portable Analyzer") as null|anything in list("Eject", "Analyze")
-	if(!choice || !QDELETED(loaded_item) || user.incapacitated() || loc != user)
+	if(!choice || QDELETED(loaded_item) || user.incapacitated() || loc != user)
 		return TRUE
 	if(choice == "Eject")
 		loaded_item.dropInto(user.loc)
