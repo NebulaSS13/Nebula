@@ -93,6 +93,7 @@
 		reagents.add_reagent(R, starting_reagents[R])
 
 /obj/item/chems/condiment/on_reagent_change()
+	..()
 	var/reagent = reagents.primary_reagent
 	if(reagent in special_bottles)
 		var/obj/item/chems/condiment/special_bottle = special_bottles[reagent]
@@ -170,7 +171,9 @@
 	volume = 20
 
 /obj/item/chems/condiment/small/on_reagent_change()
-	return
+	SHOULD_CALL_PARENT(FALSE)
+	if(reagents)
+		reagents.updating_holder_reagent_state = FALSE
 
 /obj/item/chems/condiment/small/saltshaker
 	name = "salt shaker"
@@ -330,7 +333,9 @@
 	starting_reagents = list(/decl/material/liquid/nutriment/flour = 50)
 
 /obj/item/chems/condiment/flour/on_reagent_change()
-	return
+	SHOULD_CALL_PARENT(FALSE)
+	if(reagents)
+		reagents.updating_holder_reagent_state = FALSE
 
 /obj/item/chems/condiment/salt
 	name = "big bag of salt"
@@ -344,7 +349,9 @@
 	starting_reagents = list(/decl/material/solid/sodiumchloride = 500)
 
 /obj/item/chems/condiment/salt/on_reagent_change()
-	return
+	SHOULD_CALL_PARENT(FALSE)
+	if(reagents)
+		reagents.updating_holder_reagent_state = FALSE
 
 /obj/item/chems/condiment/mint
 	name = "mint essential oil"
@@ -354,7 +361,9 @@
 	starting_reagents = list(/decl/material/liquid/drink/syrup/mint = 15)
 
 /obj/item/chems/condiment/mint/on_reagent_change()
-	return
+	SHOULD_CALL_PARENT(FALSE)
+	if(reagents)
+		reagents.updating_holder_reagent_state = FALSE
 
 /obj/item/chems/condiment/soysauce
 	name = "soy sauce"

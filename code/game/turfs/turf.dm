@@ -37,11 +37,11 @@
 	var/tmp/changing_turf
 	var/tmp/prev_type // Previous type of the turf, prior to turf translation.
 
-	// Some quick notes on the vars below: is_outside should be left set to OUTSIDE_AREA unless you 
+	// Some quick notes on the vars below: is_outside should be left set to OUTSIDE_AREA unless you
 	// EXPLICITLY NEED a turf to have a different outside state to its area (ie. you have used a
-	// roofing tile). By default, it will ask the area for the state to use, and will update on 
-	// area change. When dealing with weather, it will check the entire z-column for interruptions 
-	// that will prevent it from using its own state, so a floor above a level will generally 
+	// roofing tile). By default, it will ask the area for the state to use, and will update on
+	// area change. When dealing with weather, it will check the entire z-column for interruptions
+	// that will prevent it from using its own state, so a floor above a level will generally
 	// override both area is_outside, and turf is_outside. The only time the base value will be used
 	// by itself is if you are dealing with a non-multiz level, or the top level of a multiz chunk.
 
@@ -99,11 +99,15 @@
 	if (!changing_turf)
 		PRINT_STACK_TRACE("Improper turf qdel. Do not qdel turfs directly.")
 
+
 	changing_turf = FALSE
 
 	if (contents.len > !!lighting_overlay)
 		remove_cleanables()
 
+
+	REMOVE_ACTIVE_FLUID(src)
+	SSfluids.pending_flows -= src
 	REMOVE_ACTIVE_FLUID_SOURCE(src)
 
 	if (ao_queued)
@@ -166,12 +170,11 @@
 /turf/attackby(obj/item/W, mob/user)
 
 	if(ATOM_IS_OPEN_CONTAINER(W) && W.reagents)
-		var/obj/effect/fluid/F = locate() in src
-		if(F && F.reagents?.total_volume >= FLUID_PUDDLE)
-			var/taking = min(F.reagents?.total_volume, REAGENTS_FREE_SPACE(W.reagents))
+		if(reagents?.total_volume >= FLUID_PUDDLE)
+			var/taking = min(reagents?.total_volume, REAGENTS_FREE_SPACE(W.reagents))
 			if(taking > 0)
-				to_chat(user, SPAN_NOTICE("You fill \the [W] with [F.reagents.get_primary_reagent_name()] from \the [src]."))
-				F.reagents.trans_to(W, taking)
+				to_chat(user, SPAN_NOTICE("You fill \the [W] with [reagents.get_primary_reagent_name()] from \the [src]."))
+				reagents.trans_to(W, taking)
 				return TRUE
 
 	if(istype(W, /obj/item/storage))
@@ -412,7 +415,7 @@
 	// Notes for future self when confused: is_open() on higher
 	// turfs must match effective is_outside value if the turf
 	// should get to use the is_outside value it wants to. If it
-	// doesn't line up, we invert the outside value (roof is not 
+	// doesn't line up, we invert the outside value (roof is not
 	// open but turf wants to be outside, invert to OUTSIDE_NO).
 
 	// Do we have a roof over our head? Should we care?
@@ -461,3 +464,26 @@
 		why_cannot_build_cable(user, cable_error)
 		return FALSE
 	return C.turf_place(src, user)
+
+
+/turf/fire_act(datum/gas_mixture/air, exposed_temperature, exposed_volume)
+	. = ..()
+	if(exposed_temperature >= FLAMMABLE_GAS_MINIMUM_BURN_TEMPERATURE)
+		vaporize_fuel(air)
+
+/turf/proc/vaporize_fuel(datum/gas_mixture/air)
+	if(!length(reagents?.reagent_volumes) || !istype(air))
+		return
+	var/update_air = FALSE
+	for(var/rtype in reagents.reagent_volumes)
+		var/decl/material/mat = GET_DECL(rtype)
+		if(mat.gas_flags & XGM_GAS_FUEL)
+			var/moles = round(reagents.reagent_volumes[rtype] / REAGENT_UNITS_PER_GAS_MOLE)
+			if(moles > 0)
+				air.adjust_gas(rtype, moles, FALSE)
+				reagents.remove_reagent(round(moles * REAGENT_UNITS_PER_GAS_MOLE))
+				update_air = TRUE
+	if(update_air)
+		air.update_values()
+		return TRUE
+	return FALSE

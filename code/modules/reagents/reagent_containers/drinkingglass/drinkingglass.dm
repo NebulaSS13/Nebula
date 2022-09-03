@@ -103,7 +103,7 @@ var/global/const/DRINK_ICON_NOISY = "noise"
 	. = custom_desc || ..()
 
 /obj/item/chems/drinks/glass2/on_reagent_change()
-	temperature_coefficient = 4 / max(1, reagents.total_volume)
+	temperature_coefficient = 4 / max(1, reagents?.total_volume)
 	..()
 
 /obj/item/chems/drinks/glass2/proc/can_add_extra(obj/item/glass_extra/GE)

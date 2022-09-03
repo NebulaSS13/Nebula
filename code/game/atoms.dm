@@ -58,7 +58,11 @@
 	return 0
 
 /atom/proc/on_reagent_change()
-	return
+	set waitfor = FALSE
+	SHOULD_CALL_PARENT(TRUE)
+	sleep(0)
+	if(reagents)
+		reagents.updating_holder_reagent_state = FALSE
 
 /atom/proc/Bumped(var/atom/movable/AM)
 	return

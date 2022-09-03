@@ -190,9 +190,8 @@ Class Procs:
 				if(condense_amt < 1)
 					break
 				air.adjust_gas(g, -condense_amt)
-				var/obj/effect/fluid/F = locate() in flooding
-				if(!F) F = new(flooding)
-				F.reagents.add_reagent(g, condense_amt * REAGENT_UNITS_PER_GAS_MOLE)
+				var/datum/reagents/local_fluids = flooding.return_fluids(create_if_missing = TRUE)
+				local_fluids.add_reagent(g, condense_amt * REAGENT_UNITS_PER_GAS_MOLE)
 		CHECK_TICK
 	condensing = FALSE
 

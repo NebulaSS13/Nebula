@@ -34,7 +34,7 @@
 #define AIRLOCK_CRUSH_INCREMENT 10 // Damage caused by airlock crushing a mob is split into multiple smaller hits. Makes door crushing behave more like a "slow" crushing effect rather than high-speed impacts.
 #define CYBORG_AIRLOCKCRUSH_RESISTANCE 2 // Damage caused to silicon mobs (usually cyborgs) from being crushed by airlocks is divided by this number. Unlike organics cyborgs don't have passive regeneration.
 
-/atom/movable/proc/airlock_crush(var/crush_damage)
+/atom/proc/airlock_crush(var/crush_damage)
 	return
 
 /obj/structure/window/airlock_crush(var/crush_damage)

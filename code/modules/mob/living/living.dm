@@ -791,11 +791,9 @@ default behaviour is:
 		return FALSE
 	if(!lying && T.above && T.above.is_open() && !T.above.is_flooded() && can_overcome_gravity())
 		return FALSE
-	if(prob(5))
-		var/obj/effect/fluid/F = locate() in loc
-		to_chat(src, SPAN_DANGER("You choke and splutter as you inhale [(F?.reagents && F.reagents.get_primary_reagent_name()) || "liquid"]!"))
-		F?.reagents?.trans_to_holder(get_ingested_reagents(), min(F.reagents.total_volume, rand(2,5)))
-
+	if(prob(5) && loc.reagents)
+		to_chat(src, SPAN_DANGER("You choke and splutter as you inhale [loc.reagents.get_primary_reagent_name() || "liquid"]!"))
+		loc.reagents.trans_to_holder(get_ingested_reagents(), min(loc.reagents.total_volume, rand(2,5)))
 	T.show_bubbles()
 	return TRUE // Presumably chemical smoke can't be breathed while you're underwater.
 

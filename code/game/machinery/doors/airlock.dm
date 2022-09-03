@@ -939,6 +939,7 @@ About the new airlock wires panel:
 					return
 
 	for(var/turf/turf in locs)
+		turf.airlock_crush(door_crush_damage)
 		for(var/atom/movable/AM in turf)
 			if(AM.airlock_crush(door_crush_damage))
 				take_damage(door_crush_damage)

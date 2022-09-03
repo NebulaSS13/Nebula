@@ -85,11 +85,8 @@ var/global/list/fishtank_cache = list()
 
 /obj/structure/glass_tank/dump_contents()
 	. = ..()
-	if(reagents && reagents.total_volume)
-		var/turf/T = get_turf(src)
-		var/obj/effect/fluid/F = locate() in T
-		if(!F) F = new(T)
-		reagents.trans_to_holder(F.reagents, reagents.total_volume)
+	if(reagents?.total_volume)
+		reagents.trans_to_turf(get_turf(src), reagents.total_volume)
 
 var/global/list/global/aquarium_states_and_layers = list(
 	"b" = FLY_LAYER - 0.02,

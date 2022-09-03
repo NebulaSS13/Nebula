@@ -15,12 +15,12 @@
 
 /mob/living/slime/fluid_act(datum/reagents/fluids)
 	. = ..()
-	if(stat == DEAD)
-		var/obj/effect/fluid/F = locate() in loc
-		if(F && F.reagents?.total_volume >= FLUID_SHALLOW)
-			F.reagents.add_reagent(/decl/material/liquid/slimejelly, (is_adult ? rand(30, 40) : rand(10, 30)))
-			visible_message(SPAN_DANGER("\The [src] melts away...")) // Slimes are water soluble.
-			qdel(src)
+	if(stat == DEAD && isturf(loc))
+		var/turf/T = loc
+		var/datum/reagents/local_fluids = T.return_fluids(create_if_missing = TRUE)
+		local_fluids.add_reagent(/decl/material/liquid/slimejelly, (is_adult ? rand(30, 40) : rand(10, 30)))
+		visible_message(SPAN_DANGER("\The [src] melts away...")) // Slimes are water soluble.
+		qdel(src)
 
 /mob/living/slime/proc/handle_local_conditions()
 	var/datum/gas_mixture/environment = loc?.return_air()

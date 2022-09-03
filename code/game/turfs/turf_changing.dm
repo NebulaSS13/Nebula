@@ -51,6 +51,7 @@
 	var/old_flooded =          flooded
 	var/old_outside =          is_outside
 	var/old_is_open =          is_open()
+	var/old_reagents =         reagents
 
 	var/old_ambience =         ambient_light
 	var/old_ambience_mult =    ambient_light_multiplier
@@ -122,9 +123,14 @@
 	// end of lighting stuff
 
 	// we check the var rather than the proc, because area outside values usually shouldn't be set on turfs
-	if(W.is_outside != old_outside) 
+	if(W.is_outside != old_outside)
 		W.set_outside(old_outside, skip_weather_update = TRUE)
 	W.update_weather(force_update_below = W.is_open() != old_is_open)
+
+	// Set our reagents to the old datum and update registration
+	if(old_reagents)
+		reagents = old_reagents
+		reagents.my_atom = src
 
 /turf/proc/transport_properties_from(turf/other)
 	if(!istype(other, src.type))

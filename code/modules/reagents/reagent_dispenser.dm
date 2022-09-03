@@ -89,9 +89,7 @@
 	if(reagents?.total_volume)
 		var/turf/T = get_turf(src)
 		if(T)
-			var/obj/effect/fluid/F = locate() in T
-			if(!F) F = new(T)
-			reagents.trans_to_holder(F.reagents, reagents.total_volume)
+			reagents.trans_to_holder(T.reagents, reagents.total_volume)
 	. = ..()
 
 /obj/structure/reagent_dispensers/explosion_act(severity)

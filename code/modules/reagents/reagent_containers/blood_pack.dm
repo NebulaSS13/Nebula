@@ -23,6 +23,7 @@
 	. = ..()
 
 /obj/item/chems/ivbag/on_reagent_change()
+	..()
 	update_icon()
 	if(reagents.total_volume > volume/2)
 		w_class = ITEM_SIZE_SMALL

@@ -44,12 +44,12 @@
 	// Produce materials.
 	var/turf/T = get_turf(src)
 	if(istype(T))
-		var/obj/effect/fluid/F = T.return_fluid()
-		if(istype(F))
+		var/datum/reagents/local_fluids = T.return_fluids()
+		if(local_fluids?.total_volume)
 
 			// Drink more water!
-			var/consuming = min(F.reagents.total_volume, fluid_consumption_per_tick)
-			F.reagents.remove_any(consuming)
+			var/consuming = min(local_fluids.total_volume, fluid_consumption_per_tick)
+			local_fluids.remove_any(consuming)
 			T.show_bubbles()
 
 			// Gas production.

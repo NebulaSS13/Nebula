@@ -13,6 +13,7 @@
 	pickup_sound = 'sound/foley/bottlepickup1.ogg'
 
 /obj/item/chems/drinks/jar/on_reagent_change()
+	..()
 	if(LAZYLEN(reagents.reagent_volumes))
 		icon_state ="jar_what"
 		SetName("jar of something")

@@ -29,17 +29,17 @@
 	var/moppable
 	if(isturf(A))
 		var/turf/T = A
-		var/obj/effect/fluid/F = locate() in T
-		if(F && F.reagents.total_volume > 0)
-			if(F.reagents.total_volume > FLUID_SHALLOW)
-				to_chat(user, SPAN_WARNING("There is too much water here to be mopped up."))
+		var/datum/reagents/local_fluids = T.return_fluids()
+		if(local_fluids?.total_volume > 0)
+			if(local_fluids.total_volume > FLUID_SHALLOW)
+				to_chat(user, SPAN_WARNING("There is too much fluid here to be mopped up."))
 			else
 				user.visible_message(SPAN_NOTICE("\The [user] begins to mop up \the [T]."))
-				if(do_after(user, 40, T) && F && !QDELETED(F))
-					if(F.reagents.total_volume > FLUID_SHALLOW)
-						to_chat(user, SPAN_WARNING("There is too much water here to be mopped up."))
+				if(do_after(user, 40, T) && !QDELETED(local_fluids))
+					if(local_fluids.total_volume > FLUID_SHALLOW)
+						to_chat(user, SPAN_WARNING("There is too much fluid here to be mopped up."))
 					else
-						qdel(F)
+						local_fluids.clear_reagents()
 						to_chat(user, SPAN_NOTICE("You have finished mopping!"))
 			return
 		moppable = TRUE

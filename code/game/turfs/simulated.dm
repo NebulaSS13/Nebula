@@ -14,7 +14,7 @@
 	var/timer_id
 
 // This is not great.
-/turf/simulated/proc/wet_floor(var/wet_val = 1, var/overwrite = FALSE)
+/turf/simulated/wet_floor(var/wet_val = 1, var/overwrite = FALSE)
 
 	if(is_flooded(absolute = TRUE))
 		return
@@ -30,12 +30,12 @@
 		wet_overlay = image('icons/effects/water.dmi',src,"wet_floor")
 		overlays += wet_overlay
 
-	timer_id = addtimer(CALLBACK(src,/turf/simulated/proc/unwet_floor), 8 SECONDS, (TIMER_STOPPABLE|TIMER_UNIQUE|TIMER_NO_HASH_WAIT|TIMER_OVERRIDE))
+	timer_id = addtimer(CALLBACK(src, .proc/unwet_floor), 8 SECONDS, (TIMER_STOPPABLE|TIMER_UNIQUE|TIMER_NO_HASH_WAIT|TIMER_OVERRIDE))
 
-/turf/simulated/proc/unwet_floor(var/check_very_wet = TRUE)
+/turf/simulated/unwet_floor(var/check_very_wet = TRUE)
 	if(check_very_wet && wet >= 2)
 		wet--
-		timer_id = addtimer(CALLBACK(src,/turf/simulated/proc/unwet_floor), 8 SECONDS, (TIMER_STOPPABLE|TIMER_UNIQUE|TIMER_NO_HASH_WAIT|TIMER_OVERRIDE))
+		timer_id = addtimer(CALLBACK(src, .proc/unwet_floor), 8 SECONDS, (TIMER_STOPPABLE|TIMER_UNIQUE|TIMER_NO_HASH_WAIT|TIMER_OVERRIDE))
 		return
 	wet = 0
 	if(wet_overlay)

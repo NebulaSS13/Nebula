@@ -75,11 +75,10 @@ var/global/list/hygiene_props = list()
 				visible_message("\The [src] gurgles and overflows!")
 				next_gurgle = world.time + 80
 				playsound(T, pick(SSfluids.gurgles), 50, 1)
-			var/obj/effect/fluid/F = locate() in T
-			var/adding = min(flood_amt-F?.reagents.total_volume, rand(30,50)*clogged)
+			var/adding = min(flood_amt - T.reagents?.total_volume, rand(30,50)*clogged)
 			if(adding > 0)
-				if(!F) F = new(T)
-				F.reagents.add_reagent(/decl/material/liquid/water, adding)
+				var/datum/reagents/local_fluids = T.return_fluids(create_if_missing = TRUE)
+				local_fluids.add_reagent(/decl/material/liquid/water, adding)
 
 /obj/structure/hygiene/proc/drain()
 	if(!can_drain) return
@@ -89,7 +88,7 @@ var/global/list/hygiene_props = list()
 	if(fluid_here <= 0)
 		return
 
-	T.remove_fluid(CEILING(fluid_here*drainage))
+	T.reagents?.remove_any(CEILING(fluid_here*drainage))
 	T.show_bubbles()
 	if(world.time > last_gurgle + 80)
 		last_gurgle = world.time
@@ -318,7 +317,7 @@ var/global/list/hygiene_props = list()
 			reagents.splash(get_turf(src), reagents.total_volume, max_spill = 0)
 
 /obj/structure/hygiene/shower/proc/process_heat(mob/living/M)
-	if(!on || !istype(M)) 
+	if(!on || !istype(M))
 		return
 	var/water_temperature = temperature_settings[watertemp]
 	var/temp_adj = between(BODYTEMP_COOLING_MAX, water_temperature - M.bodytemperature, BODYTEMP_HEATING_MAX)
@@ -577,11 +576,12 @@ var/global/list/hygiene_props = list()
 		next_gurgle = world.time + 80
 		playsound(T, pick(SSfluids.gurgles), 50, 1)
 
-	T.add_fluid(/decl/material/liquid/water, min(75, fill_level - T.get_fluid_depth()))
+	var/datum/reagents/local_fluids = T.return_fluids(create_if_missing = TRUE)
+	local_fluids.add_reagent(/decl/material/liquid/water, min(75, fill_level - T.get_fluid_depth()))
 
 /obj/structure/hygiene/faucet/Process()
 	..()
-	if(open) 
+	if(open)
 		water_flow()
 
 /obj/structure/hygiene/faucet/examine(mob/user)

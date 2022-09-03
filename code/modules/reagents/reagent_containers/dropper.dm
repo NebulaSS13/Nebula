@@ -80,6 +80,7 @@
 
 
 /obj/item/chems/dropper/on_reagent_change()
+	..()
 	update_icon()
 
 /obj/item/chems/dropper/on_update_icon()

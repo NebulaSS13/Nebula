@@ -8,6 +8,7 @@ var/global/obj/temp_reagents_holder = new
 	var/maximum_volume = 120
 	var/atom/my_atom
 	var/cached_color
+	var/updating_holder_reagent_state = FALSE
 
 /datum/reagents/New(var/maximum_volume = 120, var/atom/my_atom)
 	src.maximum_volume = maximum_volume
@@ -158,8 +159,9 @@ var/global/obj/temp_reagents_holder = new
 	update_total()
 	if(!safety)
 		HANDLE_REACTIONS(src)
-	if(my_atom)
-		my_atom.on_reagent_change()
+		if(my_atom && !updating_holder_reagent_state)
+			updating_holder_reagent_state = TRUE
+			my_atom.on_reagent_change()
 
 /datum/reagents/proc/add_reagent(var/reagent_type, var/amount, var/data = null, var/safety = 0, var/defer_update = FALSE)
 
@@ -237,11 +239,16 @@ var/global/obj/temp_reagents_holder = new
 	return TRUE
 
 /datum/reagents/proc/clear_reagents()
+	if(!total_volume)
+		return
 	for(var/reagent in reagent_volumes)
 		clear_reagent(reagent, TRUE)
 	LAZYCLEARLIST(reagent_volumes)
 	LAZYCLEARLIST(reagent_data)
 	total_volume = 0
+	if(my_atom && !updating_holder_reagent_state)
+		updating_holder_reagent_state = TRUE
+		my_atom.on_reagent_change()
 
 /datum/reagents/proc/get_overdose(var/decl/material/current)
 	if(current)
@@ -528,9 +535,7 @@ var/global/obj/temp_reagents_holder = new
 	R.touch_turf(target)
 	if(R?.total_volume <= FLUID_QDEL_POINT || QDELETED(target))
 		return
-	var/obj/effect/fluid/F = locate() in target
-	if(!F) F = new(target)
-	trans_to_holder(F.reagents, amount, multiplier, copy, defer_update = defer_update)
+	trans_to_holder(target.reagents, amount, multiplier, copy, defer_update = defer_update)
 
 /datum/reagents/proc/trans_to_obj(var/obj/target, var/amount = 1, var/multiplier = 1, var/copy = 0, var/defer_update = FALSE) // Objects may or may not; if they do, it's probably a beaker or something and we need to transfer properly; otherwise, just touch.
 	if(!target || !target.simulated)

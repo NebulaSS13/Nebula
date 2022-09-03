@@ -76,7 +76,7 @@
 			use_power_oneoff(drainage * 1000)
 			return
 
-		T.remove_fluid(CEILING(fluid_here * drainage))
+		T.reagents?.remove_any(CEILING(fluid_here * drainage))
 		T.show_bubbles()
 		use_power_oneoff(drainage * 5000)
 

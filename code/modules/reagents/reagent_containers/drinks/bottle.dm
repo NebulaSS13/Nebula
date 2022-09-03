@@ -31,7 +31,9 @@
 	return ..()
 
 /obj/item/chems/drinks/bottle/on_reagent_change()
-	return
+	SHOULD_CALL_PARENT(FALSE)
+	if(reagents)
+		reagents.updating_holder_reagent_state = FALSE
 
 //when thrown on impact, bottles smash and spill their contents
 /obj/item/chems/drinks/bottle/throw_impact(atom/hit_atom, var/datum/thrownthing/TT)

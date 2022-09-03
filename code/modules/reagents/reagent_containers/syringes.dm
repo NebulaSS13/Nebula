@@ -31,6 +31,7 @@
 	update_icon()
 
 /obj/item/chems/syringe/on_reagent_change()
+	..()
 	update_icon()
 
 /obj/item/chems/syringe/pickup(mob/user)

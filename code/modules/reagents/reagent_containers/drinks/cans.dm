@@ -5,7 +5,9 @@
 	material = /decl/material/solid/metal/aluminium
 
 /obj/item/chems/drinks/cans/on_reagent_change()
-	return
+	SHOULD_CALL_PARENT(FALSE)
+	if(reagents)
+		reagents.updating_holder_reagent_state = FALSE
 
 //DRINKS
 
