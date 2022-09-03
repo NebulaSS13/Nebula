@@ -247,7 +247,7 @@
 			"[EAST]" =  list( 5, -14),
 			"[WEST]" =  list(-5, -14)
 		)
-	..()
+	. = ..()
 	gender = pick(MALE, FEMALE)
 
 /mob/living/simple_animal/cat/fluff/ran
