@@ -999,21 +999,25 @@
 			var/list/status = list()
 
 			var/feels = 1 + round(org.pain/100, 0.1)
-			switch((org.brute_dam * feels) / org.max_damage)
-				if(0 to 0.35)
-					status += "slightly sore"
-				if(0.35 to 0.65)
-					status += "very sore"
-				if(0.65 to INFINITY)
-					status += "throbbing with agony"
+			var/feels_brute = (org.brute_dam * feels)
+			if(feels_brute > 0)
+				switch(feels_brute / org.max_damage)
+					if(0 to 0.35)
+						status += "slightly sore"
+					if(0.35 to 0.65)
+						status += "very sore"
+					if(0.65 to INFINITY)
+						status += "throbbing with agony"
 
-			switch((org.burn_dam * feels) / org.max_damage)
-				if(0 to 0.35)
-					status += "tingling"
-				if(0.35 to 0.65)
-					status += "stinging"
-				if(0.65 to INFINITY)
-					status += "burning fiercely"
+			var/feels_burn = (org.burn_dam * feels)
+			if(feels_burn > 0)
+				switch(feels_burn / org.max_damage)
+					if(0 to 0.35)
+						status += "tingling"
+					if(0.35 to 0.65)
+						status += "stinging"
+					if(0.65 to INFINITY)
+						status += "burning fiercely"
 
 			if(org.status & ORGAN_MUTATED)
 				status += "misshapen"
