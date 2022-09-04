@@ -38,7 +38,7 @@
 		for(var/obj/structure/ladder/ladder in loc)
 			if(ladder != src)
 				qdel(ladder)
-		if(HasBelow(z) && (locate(/obj/structure/ladder) in GetBelow(src)))
+		if(!(locate(/obj/structure/lattice) in loc) && HasBelow(z) && (locate(/obj/structure/ladder) in GetBelow(src)))
 			var/turf/T = get_turf(src)
 			T.ReplaceWithLattice()
 	find_connections()
