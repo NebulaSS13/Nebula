@@ -72,8 +72,8 @@ var/global/list/zasdbgovl_dirzoneblock = list(
 
 /turf/var/tmp/obj/effect/zasdbg/dbg_img
 /turf/proc/dbg(obj/effect/zasdbg/img)
-	vis_contents -= dbg_img
-	vis_contents += img
+	remove_vis_contents(src, dbg_img)
+	add_vis_contents(src, img)
 	dbg_img = img
 
 /proc/soft_assert(thing,fail)
