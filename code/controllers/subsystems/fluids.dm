@@ -3,14 +3,6 @@ SUBSYSTEM_DEF(fluids)
 	wait = 1 SECOND
 	flags = SS_NO_INIT
 
-	var/tmp/list/water_sources =       list()
-	var/tmp/fluid_sources_copied_yet = FALSE
-	var/tmp/list/processing_sources
-
-	var/tmp/list/pending_flows =       list()
-	var/tmp/flows_copied_yet =         FALSE
-	var/tmp/list/processing_flows
-
 	var/tmp/list/holders_to_update =   list()
 	var/tmp/holders_copied_yet =       FALSE
 	var/tmp/list/processing_holders
@@ -29,66 +21,32 @@ SUBSYSTEM_DEF(fluids)
 	)
 
 /datum/controller/subsystem/fluids/stat_entry()
-	..("A:[active_fluids.len] S:[water_sources.len]")
+	..("A:[active_fluids.len]")
 
 /datum/controller/subsystem/fluids/fire(resumed = 0)
 
 	// Predeclaring a bunch of vars for performance purposes.
-	var/datum/reagents/reagent_holder =  null
-	var/list/candidates =                null
-	var/turf/below =                     null
-	var/turf/current_turf =              null
-	var/turf/neighbor =                  null
-	var/turf/lowest_neighbor =           null
+	var/datum/reagents/reagent_holder
+	var/list/candidates
+	var/turf/below
+	var/turf/current_turf
+	var/turf/neighbor
+	var/turf/lowest_neighbor
 
-	var/removing =                       0
-	var/spread_dir =                     0
-	var/coming_from =                    0
-	var/flow_amount =                    0
-	var/current_depth =                  0
-	var/current_turf_depth =             0
-	var/neighbor_depth =                 0
-	var/lowest_neighbor_flow =           0
-	var/flooded_a_neighbor =             FALSE
-	var/lowest_neighbor_depth =          INFINITY
+	var/removing = 0
+	var/spread_dir = 0
+	var/coming_from = 0
+	var/flow_amount = 0
+	var/current_depth = 0
+	var/current_turf_depth = 0
+	var/neighbor_depth = 0
+	var/lowest_neighbor_flow = 0
+	var/lowest_neighbor_depth = INFINITY
 
 	if(!resumed)
 		active_fluids_copied_yet = FALSE
 		holders_copied_yet =       FALSE
-		flows_copied_yet =         FALSE
-		fluid_sources_copied_yet = FALSE
 		checked_targets.Cut()
-
-	if(!fluid_sources_copied_yet)
-		fluid_sources_copied_yet = TRUE
-		processing_sources = water_sources.Copy()
-
-	while(processing_sources.len)
-
-		current_turf = processing_sources[processing_sources.len]
-		processing_sources.len--
-
-		flooded_a_neighbor = FALSE
-		UPDATE_FLUID_BLOCKED_DIRS(current_turf)
-		for(spread_dir in global.cardinal)
-			if(current_turf.fluid_blocked_dirs & spread_dir)
-				continue
-			neighbor = get_step(current_turf, spread_dir)
-			if(!istype(neighbor) || neighbor.flooded)
-				continue
-			UPDATE_FLUID_BLOCKED_DIRS(neighbor)
-			if((neighbor.fluid_blocked_dirs & global.reverse_dir[spread_dir]) || !neighbor.CanFluidPass(spread_dir) || checked_targets[neighbor])
-				continue
-			checked_targets[neighbor] = TRUE
-			flooded_a_neighbor = TRUE
-			var/datum/reagents/local_fluids = neighbor.return_fluids(create_if_missing = TRUE)
-			local_fluids.add_reagent(/decl/material/liquid/water, FLUID_MAX_DEPTH)
-
-		if(!flooded_a_neighbor)
-			REMOVE_ACTIVE_FLUID_SOURCE(current_turf)
-
-		if (MC_TICK_CHECK)
-			return
 
 	if(!active_fluids_copied_yet)
 		active_fluids_copied_yet = TRUE
@@ -176,7 +134,7 @@ SUBSYSTEM_DEF(fluids)
 		if(length(candidates))
 			lowest_neighbor = pick(candidates)
 			current_turf.transfer_fluids_to(lowest_neighbor, lowest_neighbor_flow, defer_update = TRUE)
-			pending_flows[current_turf] = TRUE
+			SSflows.pending_flows[current_turf] = TRUE
 
 		if(lowest_neighbor_flow >= FLUID_PUSH_THRESHOLD)
 			current_turf.last_flow_strength = lowest_neighbor_flow
@@ -197,27 +155,6 @@ SUBSYSTEM_DEF(fluids)
 		processing_holders.len--
 		if(!QDELETED(reagent_holder))
 			reagent_holder.handle_update()
-		if(MC_TICK_CHECK)
-			return
-
-	if(!flows_copied_yet)
-		flows_copied_yet = TRUE
-		processing_flows = pending_flows.Copy()
-
-	while(processing_flows.len)
-		current_turf = processing_flows[processing_flows.len]
-		processing_flows.len--
-		if(!istype(current_turf))
-			continue
-		reagent_holder = current_turf.return_fluids(create_if_missing = TRUE)
-		var/pushed_something = FALSE
-		if(reagent_holder.total_volume > FLUID_SHALLOW && current_turf.last_flow_strength >= 10)
-			for(var/atom/movable/AM as anything in current_turf.get_contained_external_atoms())
-				if(AM.is_fluid_pushable(current_turf.last_flow_strength))
-					AM.pushed(current_turf.last_flow_dir)
-					pushed_something = TRUE
-		if(pushed_something && prob(1))
-			playsound(current_turf, 'sound/effects/slosh.ogg', 25, 1)
 		if(MC_TICK_CHECK)
 			return
 

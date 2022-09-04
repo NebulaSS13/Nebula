@@ -99,7 +99,6 @@
 	if (!changing_turf)
 		PRINT_STACK_TRACE("Improper turf qdel. Do not qdel turfs directly.")
 
-
 	changing_turf = FALSE
 
 	if (contents.len > !!lighting_overlay)
@@ -107,7 +106,7 @@
 
 
 	REMOVE_ACTIVE_FLUID(src)
-	SSfluids.pending_flows -= src
+	SSflows.pending_flows -= src
 	REMOVE_ACTIVE_FLUID_SOURCE(src)
 
 	if (ao_queued)

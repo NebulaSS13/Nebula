@@ -202,6 +202,8 @@
 #include "code\controllers\subsystems\disposals.dm"
 #include "code\controllers\subsystems\evac.dm"
 #include "code\controllers\subsystems\event.dm"
+#include "code\controllers\subsystems\floods.dm"
+#include "code\controllers\subsystems\flows.dm"
 #include "code\controllers\subsystems\fluids.dm"
 #include "code\controllers\subsystems\garbage.dm"
 #include "code\controllers\subsystems\ghost_images.dm"
