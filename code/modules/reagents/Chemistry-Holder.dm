@@ -44,6 +44,11 @@ var/global/obj/temp_reagents_holder = new
 	primary_reagent = null
 	for(var/R in reagent_volumes)
 		var/vol = reagent_volumes[R]
+#ifdef DEBUG
+		if(!isnull(vol) && isNaN(vol))
+			PRINT_STACK_TRACE("NaN reagent in update_total(): [vol], [R]")
+			vol = 0
+#endif
 		if(vol < MINIMUM_CHEMICAL_VOLUME)
 			clear_reagent(R, defer_update = TRUE, force = TRUE) // defer_update is important to avoid infinite recursion
 		else
@@ -51,7 +56,7 @@ var/global/obj/temp_reagents_holder = new
 			if(!primary_reagent || reagent_volumes[primary_reagent] < vol)
 				primary_reagent = R
 	if(total_volume > maximum_volume)
-		remove_any(total_volume-maximum_volume)
+		remove_any(total_volume - maximum_volume)
 
 /datum/reagents/proc/process_reactions()
 
@@ -238,15 +243,13 @@ var/global/obj/temp_reagents_holder = new
 			return FALSE
 	return TRUE
 
-/datum/reagents/proc/clear_reagents()
+/datum/reagents/proc/clear_reagents(var/defer_update = FALSE)
 	if(!total_volume)
 		return
 	for(var/reagent in reagent_volumes)
 		clear_reagent(reagent, TRUE)
-	LAZYCLEARLIST(reagent_volumes)
-	LAZYCLEARLIST(reagent_data)
 	total_volume = 0
-	if(my_atom && !updating_holder_reagent_state)
+	if(!defer_update && my_atom && !updating_holder_reagent_state)
 		updating_holder_reagent_state = TRUE
 		my_atom.on_reagent_change()
 

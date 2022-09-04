@@ -1,7 +1,7 @@
 /turf
 	var/last_flow_strength = 0
 	var/last_flow_dir = 0
-	var/atom/movable/fluid_overlay/fluid_overlay
+	var/atom/movable/flood/fluid/fluid_overlay
 
 /turf/Destroy()
 	clear_fluid_overlay()
@@ -86,24 +86,6 @@
 	fluids.touch(src)
 	for(var/atom/movable/AM as anything in get_contained_external_atoms())
 		AM.fluid_act(fluids)
-
-/turf/proc/remove_fluids(var/amount, var/defer_update)
-	if(!reagents?.total_volume)
-		return
-	reagents.remove_any(amount, defer_update = defer_update)
-	if(defer_update && !QDELETED(reagents))
-		SSfluids.holders_to_update[reagents] = TRUE
-
-/turf/proc/transfer_fluids_to(var/turf/target, var/amount, var/defer_update)
-	if(!reagents?.total_volume)
-		return
-	var/datum/reagents/target_reagents = target.return_fluids(create_if_missing = TRUE)
-	reagents.trans_to_holder(target_reagents, min(reagents.total_volume, min(FLUID_MAX_DEPTH - target_reagents.total_volume, amount)), defer_update = defer_update)
-	if(defer_update)
-		if(!QDELETED(reagents))
-			SSfluids.holders_to_update[reagents] = TRUE
-		if(!QDELETED(target_reagents))
-			SSfluids.holders_to_update[target_reagents] = TRUE
 
 /turf/airlock_crush()
 	if(reagents)

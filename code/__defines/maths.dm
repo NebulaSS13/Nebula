@@ -13,3 +13,6 @@
 // Will filter out extra rotations and negative rotations
 // E.g: 540 becomes 180. -180 becomes 180.
 #define SIMPLIFY_DEGREES(degrees) (MODULUS_FLOAT((degrees), 360))
+
+/proc/isNaN(x)
+	return (!isnum(x) || x == -1.#IND || x == 1.#IND)

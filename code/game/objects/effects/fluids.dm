@@ -1,19 +1,27 @@
 var/global/list/fluid_overlay_pool = list()
 
-/atom/movable/fluid_overlay
+// Permaflood overlay.
+var/atom/movable/flood/flood_object = new
+/atom/movable/flood
 	name = ""
-	icon = 'icons/effects/liquids.dmi'
-	icon_state = ""
-	anchored = 1
-	simulated = 0
-	opacity = 0
 	mouse_opacity = 0
+	simulated = FALSE
+	density = FALSE
+	opacity = FALSE
+	anchored = TRUE
+	icon = 'icons/effects/liquids.dmi'
+	icon_state = "ocean"
+	alpha = FLUID_MAX_ALPHA
+	layer = DEEP_FLUID_LAYER
+	color = COLOR_LIQUID_WATER
+
+/atom/movable/flood/fluid
+	icon_state = ""
 	layer = FLY_LAYER
 	alpha = 0
-	color = COLOR_LIQUID_WATER
 	var/update_lighting = FALSE
 
-/atom/movable/fluid_overlay/on_update_icon()
+/atom/movable/flood/fluid/on_update_icon()
 
 	cut_overlays()
 	var/datum/reagents/local_fluids = loc?.reagents
@@ -52,16 +60,16 @@ var/global/list/fluid_overlay_pool = list()
 		set_light(0)
 
 // Map helper.
-/obj/effect/fluid_mapped
+/obj/abstract/fluid_mapped
 	name = "mapped flooded area"
 	alpha = 125
+	icon = 'icons/effects/liquids.dmi'
 	icon_state = "shallow_still"
 	color = COLOR_LIQUID_WATER
-
 	var/fluid_type = /decl/material/liquid/water
 	var/fluid_initial = FLUID_MAX_DEPTH
 
-/obj/effect/fluid_mapped/Initialize()
+/obj/abstract/fluid_mapped/Initialize()
 	..()
 	var/turf/T = get_turf(src)
 	if(istype(T))
@@ -69,16 +77,7 @@ var/global/list/fluid_overlay_pool = list()
 		local_fluids.add_reagent(fluid_type, fluid_initial)
 	return INITIALIZE_HINT_QDEL
 
-/obj/effect/fluid_mapped/fuel
+/obj/abstract/fluid_mapped/fuel
 	name = "spilled fuel"
 	fluid_type = /decl/material/liquid/fuel
 	fluid_initial = 10
-
-// Permaflood overlay.
-var/global/obj/abstract/flood/flood_object = new
-/obj/abstract/flood
-	layer = DEEP_FLUID_LAYER
-	color = COLOR_LIQUID_WATER
-	icon = 'icons/effects/liquids.dmi'
-	icon_state = "ocean"
-	alpha = FLUID_MAX_ALPHA

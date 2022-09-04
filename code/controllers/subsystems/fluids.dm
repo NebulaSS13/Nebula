@@ -1,7 +1,31 @@
+#define CLEAR_REAGENTS_FAST_UNSAFE(R)     \
+if(R.total_volume) {                      \
+	SSfluids.holders_to_update[R] = TRUE; \
+	LAZYCLEARLIST(R.reagent_volumes);     \
+	LAZYCLEARLIST(R.reagent_data);        \
+	R.total_volume = 0                    \
+}
+#define TRANSFER_REAGENTS_FAST_UNSASFE(R, T, A)                                             \
+var/_PART = min(R.total_volume, min(FLUID_MAX_DEPTH - T.total_volume, A)) / R.total_volume; \
+for(var/_RTYPE in R.reagent_volumes) {                                                      \
+	var/_AMT = REAGENT_VOLUME(R, _RTYPE) * _PART;                                           \
+	T.add_reagent(_RTYPE, _AMT, REAGENT_DATA(R, _AMT), defer_update = TRUE);                \
+	R.remove_reagent(_RTYPE, _AMT, defer_update = TRUE)                                     \
+}                                                                                           \
+if(!QDELETED(R)) { SSfluids.holders_to_update[R] = TRUE }                                   \
+if(!QDELETED(T)) { SSfluids.holders_to_update[T] = TRUE }
+
 SUBSYSTEM_DEF(fluids)
 	name = "Fluids"
 	wait = 1 SECOND
 	flags = SS_NO_INIT
+
+	var/static/list/gurgles = list(
+		'sound/effects/gurgle1.ogg',
+		'sound/effects/gurgle2.ogg',
+		'sound/effects/gurgle3.ogg',
+		'sound/effects/gurgle4.ogg'
+	)
 
 	var/tmp/list/holders_to_update =   list()
 	var/tmp/holders_copied_yet =       FALSE
@@ -13,12 +37,6 @@ SUBSYSTEM_DEF(fluids)
 
 	var/tmp/list/fluid_images =        list()
 	var/tmp/list/checked_targets =     list()
-	var/tmp/list/gurgles =             list(
-		'sound/effects/gurgle1.ogg',
-		'sound/effects/gurgle2.ogg',
-		'sound/effects/gurgle3.ogg',
-		'sound/effects/gurgle4.ogg'
-	)
 
 /datum/controller/subsystem/fluids/stat_entry()
 	..("A:[active_fluids.len]")
@@ -26,6 +44,7 @@ SUBSYSTEM_DEF(fluids)
 /datum/controller/subsystem/fluids/fire(resumed = 0)
 
 	// Predeclaring a bunch of vars for performance purposes.
+	var/datum/reagents/target_reagents
 	var/datum/reagents/reagent_holder
 	var/list/candidates
 	var/turf/below
@@ -37,7 +56,6 @@ SUBSYSTEM_DEF(fluids)
 	var/spread_dir = 0
 	var/coming_from = 0
 	var/flow_amount = 0
-	var/current_depth = 0
 	var/current_turf_depth = 0
 	var/neighbor_depth = 0
 	var/lowest_neighbor_flow = 0
@@ -59,37 +77,43 @@ SUBSYSTEM_DEF(fluids)
 
 		REMOVE_ACTIVE_FLUID(current_turf) // This will be refreshed if our level changes at all in this iteration of the subsystem.
 
-		reagent_holder = current_turf.return_fluids(create_if_missing = TRUE)
-		if(!reagent_holder)
+		reagent_holder = current_turf.reagents
+		if(!reagent_holder?.total_volume)
 			continue
 
 		if(!current_turf.CanFluidPass())
-			reagent_holder.clear_reagents()
+			CLEAR_REAGENTS_FAST_UNSAFE(reagent_holder)
 			continue
 
 		UPDATE_FLUID_BLOCKED_DIRS(current_turf)
 
 		// How is this happening
-		current_depth = reagent_holder.total_volume || 0
-		if(current_depth == -1.#IND || current_depth == 1.#IND)
-			reagent_holder.clear_reagents()
+		if(isNaN(reagent_holder.total_volume))
+			CLEAR_REAGENTS_FAST_UNSAFE(reagent_holder)
 			continue
 
 		// Evaporation: todo, move liquid into current_turf.zone air contents if applicable.
-		if(current_depth <= FLUID_MINIMUM_TRANSFER && prob(15))
-			current_turf.remove_fluids(min(current_depth, 1), defer_update = TRUE)
-		if(current_depth <= FLUID_QDEL_POINT)
-			reagent_holder.clear_reagents()
+		if(reagent_holder.total_volume <= FLUID_MINIMUM_TRANSFER && prob(15))
+			reagent_holder.remove_any(min(reagent_holder.total_volume, 1), defer_update = FALSE)
+			if(!QDELETED(reagent_holder))
+				holders_to_update[reagent_holder] = TRUE
+
+		if(reagent_holder.total_volume <= FLUID_QDEL_POINT)
+			CLEAR_REAGENTS_FAST_UNSAFE(reagent_holder)
 			continue
 
 		if(isspaceturf(current_turf) || istype(current_turf, /turf/exterior))
-			removing = round(current_depth * 0.5)
-			if(removing > 0)
-				current_turf.remove_fluids(removing, defer_update = TRUE)
-			else
-				reagent_holder.clear_reagents()
-			if(current_depth <= FLUID_QDEL_POINT)
-				reagent_holder.clear_reagents()
+			removing = round(reagent_holder.total_volume * 0.5)
+			if(removing <= 0)
+				CLEAR_REAGENTS_FAST_UNSAFE(reagent_holder)
+				continue
+
+			reagent_holder.remove_any(removing, defer_update = TRUE)
+			if(!QDELETED(reagent_holder))
+				SSfluids.holders_to_update[reagent_holder] = TRUE
+
+			if(reagent_holder.total_volume <= FLUID_QDEL_POINT)
+				CLEAR_REAGENTS_FAST_UNSAFE(reagent_holder)
 				continue
 
 		if(!(current_turf.fluid_blocked_dirs & DOWN) && current_turf.CanFluidPass(DOWN) && current_turf.is_open() && current_turf.has_gravity())
@@ -97,18 +121,18 @@ SUBSYSTEM_DEF(fluids)
 			if(below)
 				UPDATE_FLUID_BLOCKED_DIRS(below)
 				if(!(below.fluid_blocked_dirs & UP) && below.CanFluidPass(UP))
-					var/datum/reagents/below_reagents = below.return_fluids(create_if_missing = TRUE)
-					if(below_reagents.total_volume < FLUID_MAX_DEPTH)
-						current_turf.transfer_fluids_to(below, min(FLOOR(current_depth*0.5), FLUID_MAX_DEPTH - below_reagents.total_volume), defer_update = TRUE)
+					target_reagents = below.reagents || below.create_reagents(FLUID_MAX_DEPTH)
+					if(target_reagents.total_volume < FLUID_MAX_DEPTH)
+						TRANSFER_REAGENTS_FAST_UNSASFE(reagent_holder, target_reagents, FLOOR(reagent_holder.total_volume*0.5))
 
-		if(current_depth <= FLUID_PUDDLE)
+		if(reagent_holder.total_volume <= FLUID_PUDDLE)
 			continue
 
 		// Flow into the lowest level neighbor.
 		lowest_neighbor_depth = INFINITY
 		lowest_neighbor_flow =  0
 		candidates = list()
-		current_turf_depth = current_depth + current_turf.get_physical_height()
+		current_turf_depth = reagent_holder.total_volume + current_turf.get_physical_height()
 		for(spread_dir in global.cardinal)
 			if(current_turf.fluid_blocked_dirs & spread_dir)
 				continue
@@ -133,7 +157,8 @@ SUBSYSTEM_DEF(fluids)
 
 		if(length(candidates))
 			lowest_neighbor = pick(candidates)
-			current_turf.transfer_fluids_to(lowest_neighbor, lowest_neighbor_flow, defer_update = TRUE)
+			target_reagents = lowest_neighbor.reagents || lowest_neighbor.create_reagents(FLUID_MAX_DEPTH)
+			TRANSFER_REAGENTS_FAST_UNSASFE(reagent_holder, target_reagents, lowest_neighbor_flow)
 			SSflows.pending_flows[current_turf] = TRUE
 
 		if(lowest_neighbor_flow >= FLUID_PUSH_THRESHOLD)
@@ -154,7 +179,13 @@ SUBSYSTEM_DEF(fluids)
 		reagent_holder = processing_holders[processing_holders.len]
 		processing_holders.len--
 		if(!QDELETED(reagent_holder))
-			reagent_holder.handle_update()
+			// Inlining to avoid some proc overhead.
+			reagent_holder.update_total()
+			HANDLE_REACTIONS(reagent_holder)
+			if(reagent_holder.my_atom && !reagent_holder.updating_holder_reagent_state)
+				reagent_holder.updating_holder_reagent_state = TRUE
+				reagent_holder.my_atom.on_reagent_change()
+
 		if(MC_TICK_CHECK)
 			return
 
@@ -163,3 +194,6 @@ SUBSYSTEM_DEF(fluids)
 
 /datum/controller/subsystem/fluids/StopLoadingMap()
 	wake()
+
+#undef CLEAR_REAGENTS_FAST_UNSAFE
+#undef TRANSFER_REAGENTS_FAST_UNSASFE

@@ -2,6 +2,7 @@ SUBSYSTEM_DEF(flooding)
 	name = "Flooding"
 	wait = 5 SECONDS
 	flags = SS_NO_INIT
+	priority = SS_PRIORITY_TURF
 
 	var/tmp/list/water_sources = list()
 	var/tmp/fluid_sources_copied_yet = FALSE

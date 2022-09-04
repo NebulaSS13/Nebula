@@ -1,7 +1,8 @@
 SUBSYSTEM_DEF(flows)
 	name = "Flows"
-	wait = 1 SECOND
+	wait = 2 SECONDS
 	flags = SS_NO_INIT
+	priority = SS_PRIORITY_AIRFLOW
 
 	var/tmp/list/pending_flows = list()
 	var/tmp/flows_copied_yet = FALSE
