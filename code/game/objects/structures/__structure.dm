@@ -98,9 +98,6 @@
 	set waitfor = FALSE
 	return FALSE
 
-/obj/structure/proc/is_pressurized_fluid_source()
-	return FALSE
-
 /obj/structure/proc/take_damage(var/damage)
 	if(health == -1) // This object does not take damage.
 		return
