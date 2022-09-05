@@ -525,7 +525,7 @@
 		/obj/item/sword/katana/toy,
 		/obj/item/toy/snappop,
 		/obj/item/energy_blade/sword/toy,
-		/obj/item/toy/water_balloon,
+		/obj/item/chems/water_balloon,
 		/obj/item/gun/launcher/foam/crossbow,
 		/obj/item/toy/blink,
 		/obj/item/toy/prize/powerloader,

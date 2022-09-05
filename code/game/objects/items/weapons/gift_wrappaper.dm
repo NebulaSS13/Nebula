@@ -69,7 +69,7 @@
 		/obj/item/bikehorn,
 		/obj/item/beach_ball,
 		/obj/item/beach_ball/holoball,
-		/obj/item/toy/water_balloon,
+		/obj/item/chems/water_balloon,
 		/obj/item/toy/blink,
 		/obj/item/gun/launcher/foam/crossbow,
 		/obj/item/gun/projectile/revolver/capgun,

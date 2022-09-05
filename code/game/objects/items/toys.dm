@@ -34,61 +34,73 @@
 /*
  * Balloons
  */
-/obj/item/toy/water_balloon
-	name = "water balloon"
-	desc = "A translucent balloon. There's nothing in it."
-	icon = 'icons/obj/toy.dmi'
-	icon_state = "waterballoon-e"
-	item_state = "balloon-empty"
-	force = 0
+/obj/item/chems/water_balloon
+	name                          = "water balloon"
+	desc                          = "A translucent balloon."
+	icon                          = 'icons/obj/toy.dmi'
+	icon_state                    = "waterballoon-e"
+	item_state                    = "balloon-empty"
+	w_class                       = ITEM_SIZE_TINY
+	item_flags                    = ITEM_FLAG_NO_BLUDGEON | ITEM_FLAG_HOLLOW
+	atom_flags                    = ATOM_FLAG_OPEN_CONTAINER
+	hitsound                      = 'sound/weapons/throwtap.ogg'
+	throw_speed                   = 4
+	throw_range                   = 20
+	throwforce                    = 0
+	force                         = 0
+	possible_transfer_amounts     = null
+	amount_per_transfer_from_this = 10
+	volume                        = 10
+	material                      = /decl/material/solid/plastic
 
-/obj/item/toy/water_balloon/Initialize()
+/obj/item/chems/water_balloon/examine(mob/user, distance, infix, suffix)
 	. = ..()
-	create_reagents(10)
-	item_flags |= ITEM_FLAG_NO_BLUDGEON
+	if(distance == 1)
+		to_chat(user, "It's [reagents.total_volume > 0? "filled with liquid slushing around" : "empty"].")
 
-/obj/item/toy/water_balloon/resolve_attackby(obj/structure/O, mob/user, click_params)
-	. = (istype(O) && fill_from_pressurized_fluid_source(O, user)) || ..()
-
-/obj/item/toy/water_balloon/fill_from_pressurized_fluid_source(obj/source, mob/user)
+/obj/item/chems/water_balloon/on_reagent_change()
 	. = ..()
-	desc = . ? "A translucent balloon with some form of liquid sloshing around in it." : initial(desc)
-	update_icon()
+	w_class = (reagents.total_volume > 0)? ITEM_SIZE_SMALL : ITEM_SIZE_TINY
+	//#TODO: Maybe acids should handle eating their own containers themselves?
+	for(var/reagent in reagents.reagent_volumes)
+		var/decl/material/M = GET_DECL(reagent)
+		if(M.solvent_power >= MAT_SOLVENT_STRONG)
+			visible_message(SPAN_DANGER("\The [M] chews through \the [src]!"))
+			physically_destroyed()
 
-/obj/item/toy/water_balloon/attackby(obj/O, mob/user)
-	if(istype(O, /obj/item/chems/glass))
-		if(O.reagents)
-			if(O.reagents.total_volume < 1)
-				to_chat(user, "The [O] is empty.")
-			else if(O.reagents.total_volume >= 1)
-				if(O.reagents.has_reagent(/decl/material/liquid/acid/polyacid, 1))
-					to_chat(user, "The acid chews through the balloon!")
-					O.reagents.splash(user, reagents.total_volume)
-					qdel(src)
-				else
-					src.desc = "A translucent balloon with some form of liquid sloshing around in it."
-					to_chat(user, "<span class='notice'>You fill the balloon with the contents of [O].</span>")
-					O.reagents.trans_to_obj(src, 10)
-	src.update_icon()
-	return
-
-/obj/item/toy/water_balloon/throw_impact(atom/hit_atom)
+/obj/item/chems/water_balloon/throw_impact(atom/hit_atom, datum/thrownthing/TT)
 	..()
-	if(reagents && reagents.total_volume >= 1)
-		visible_message(SPAN_WARNING("\The [src] bursts!"),"You hear a pop and a splash.")
-		reagents.trans_to_turf(get_turf(hit_atom), reagents.total_volume)
-		if(!QDELETED(src))
-			icon_state = "burst"
-			qdel(src)
+	if(reagents && reagents.total_volume > 0)
+		visible_message(SPAN_WARNING("\The [src] bursts!"))
+		physically_destroyed()
 
-/obj/item/toy/water_balloon/on_update_icon()
+/obj/item/chems/water_balloon/physically_destroyed(skip_qdel)
+	if(reagents?.total_volume > 0)
+		new/obj/effect/temporary(src, 5, icon, "burst")
+		reagents.splash_turf(get_turf(src), reagents.total_volume)
 	. = ..()
-	if(src.reagents.total_volume >= 1)
+
+/obj/item/chems/water_balloon/on_update_icon()
+	. = ..()
+	if(reagents.total_volume > 0)
 		icon_state = "waterballoon"
 		item_state = "balloon"
 	else
 		icon_state = "waterballoon-e"
 		item_state = "balloon-empty"
+
+/obj/item/chems/water_balloon/afterattack(obj/target, mob/user, proximity)
+	if(!ATOM_IS_OPEN_CONTAINER(src) || !proximity)
+		return
+	if(standard_dispenser_refill(user, target))
+		return TRUE
+	if(standard_pour_into(user, target))
+		return TRUE
+	. = ..()
+
+/obj/item/chems/water_balloon/get_alt_interactions(mob/user)
+	. = ..()
+	LAZYREMOVE(., /decl/interaction_handler/set_transfer/chems)
 
 /obj/item/toy/balloon
 	name = "\improper 'criminal' balloon"
