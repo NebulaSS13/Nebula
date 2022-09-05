@@ -235,7 +235,7 @@
 		var/obj/item/I = item
 		itemsize = I.w_class
 
-	if(!unEquip(item))
+	if(!unEquip(item, play_dropsound = FALSE))
 		return
 	if(!item || !isturf(item.loc))
 		return

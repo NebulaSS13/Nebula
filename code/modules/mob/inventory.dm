@@ -170,9 +170,9 @@ var/global/list/slot_equipment_priority = list( \
 
 // Removes an item from inventory and places it in the target atom.
 // If canremove or other conditions need to be checked then use unEquip instead.
-/mob/proc/drop_from_inventory(var/obj/item/W, var/atom/target = null)
+/mob/proc/drop_from_inventory(var/obj/item/W, var/atom/target = null, var/play_dropsound = TRUE)
 	if(W)
-		remove_from_mob(W, target)
+		remove_from_mob(W, target, play_dropsound)
 		if(!(W && W.loc)) return 1 // self destroying objects (tk, grabs)
 		update_icon()
 		return 1
@@ -239,14 +239,14 @@ var/global/list/slot_equipment_priority = list( \
 			return s
 
 //This differs from remove_from_mob() in that it checks if the item can be unequipped first. Use drop_from_inventory if you don't want to check.
-/mob/proc/unEquip(obj/item/I, var/atom/target)
+/mob/proc/unEquip(obj/item/I, var/atom/target, var/play_dropsound = TRUE)
 	if(!canUnEquip(I))
 		return FALSE
-	drop_from_inventory(I, target)
+	drop_from_inventory(I, target, play_dropsound)
 	return TRUE
 
 //Attemps to remove an object on a mob.
-/mob/proc/remove_from_mob(var/obj/O, var/atom/target)
+/mob/proc/remove_from_mob(var/obj/O, var/atom/target, var/play_dropsound = TRUE)
 	if(!O) // Nothing to remove, so we succeed.
 		return 1
 	src.u_equip(O)
@@ -260,7 +260,7 @@ var/global/list/slot_equipment_priority = list( \
 			I.forceMove(target)
 		else
 			I.dropInto(loc)
-		I.dropped(src)
+		I.dropped(src, play_dropsound)
 	return 1
 
 /mob/proc/drop_held_items()

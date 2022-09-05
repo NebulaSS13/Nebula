@@ -368,7 +368,7 @@
 	else
 		return 0
 
-/obj/item/throw_impact(atom/hit_atom)
+/obj/item/throw_impact(atom/hit_atom, datum/thrownthing/TT)
 	..()
 	if(isliving(hit_atom)) //Living mobs handle hit sounds differently.
 		var/volume = get_volume_by_throwforce_and_or_w_class()
@@ -381,7 +381,7 @@
 			playsound(hit_atom, 'sound/weapons/throwtap.ogg', 1, volume, -1)
 
 // apparently called whenever an item is removed from a slot, container, or anything else.
-/obj/item/proc/dropped(mob/user)
+/obj/item/proc/dropped(var/mob/user, var/play_dropsound = TRUE)
 
 	SHOULD_CALL_PARENT(TRUE)
 	if(randpixel)
@@ -389,7 +389,7 @@
 	update_twohanding()
 	for(var/obj/item/thing in user?.get_held_items())
 		thing.update_twohanding()
-	if(drop_sound && SSticker.mode)
+	if(play_dropsound && drop_sound && SSticker.mode)
 		addtimer(CALLBACK(src, .proc/dropped_sound_callback), 0, (TIMER_OVERRIDE | TIMER_UNIQUE))
 
 	if(user && (z_flags & ZMM_MANGLE_PLANES))
