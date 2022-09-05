@@ -78,6 +78,7 @@
 	if(reagents?.total_volume > 0)
 		new/obj/effect/temporary(src, 5, icon, "burst")
 		reagents.splash_turf(get_turf(src), reagents.total_volume)
+		playsound(src, 'sound/effects/balloon-pop.ogg', 75, TRUE, 3)
 	. = ..()
 
 /obj/item/chems/water_balloon/on_update_icon()
