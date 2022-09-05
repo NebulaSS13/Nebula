@@ -20,7 +20,7 @@
 	Skrell value cooperation and have very communal lifestyles, and despite their diplomatic fluency and innate curiosity are very leery of outside \
 	interference in their customs and values."
 
-	meat_type = /obj/item/chems/food/fish/octopus
+	meat_type = /obj/item/chems/food/fish/octopus/skrell
 	bone_material = /decl/material/solid/bone/cartilage
 	available_pronouns = list(
 		/decl/pronouns/skrell
