@@ -18,8 +18,8 @@
 
 	body_parts_covered = SLOT_UPPER_BODY | SLOT_LOWER_BODY| SLOT_ARMS
 	armor = list(laser = ARMOR_LASER_MINOR, energy = ARMOR_ENERGY_MINOR, bomb = ARMOR_BOMB_MINOR)
-	allowed = list(/obj/item/flashlight,/obj/item/tank/emergency,/obj/item/extinguisher,/obj/item/clothing/head/hardhat)
-
+	allowed = list(/obj/item/flashlight,/obj/item/tank/emergency,/obj/item/chems/spray/extinguisher,/obj/item/clothing/head/hardhat)
+	
 	gas_transfer_coefficient = 0.90
 	permeability_coefficient = 0.50
 

@@ -322,7 +322,7 @@
 /obj/item/clothing/suit/fire,
 /obj/item/tank/oxygen,
 /obj/item/clothing/mask/gas,
-/obj/item/extinguisher,
+/obj/item/chems/spray/extinguisher,
 /obj/item/clothing/head/hardhat/red,
 /obj/item/clothing/glasses/meson,
 /turf/simulated/floor/plating,

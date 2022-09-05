@@ -56,7 +56,7 @@
 		/obj/item/clothing/mask/gas,
 		/obj/item/flashlight,
 		/obj/item/tank/emergency/oxygen/double/red,
-		/obj/item/extinguisher,
+		/obj/item/chems/spray/extinguisher,
 		/obj/item/clothing/head/hardhat/firefighter)
 
 /*

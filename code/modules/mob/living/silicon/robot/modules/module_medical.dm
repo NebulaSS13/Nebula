@@ -111,7 +111,7 @@
 		/obj/item/chems/dropper/industrial,
 		/obj/item/chems/syringe,
 		/obj/item/gripper/chemistry,
-		/obj/item/extinguisher/mini,
+		/obj/item/chems/spray/extinguisher/mini,
 		/obj/item/stack/tape_roll/barricade_tape/medical,
 		/obj/item/inflatable_dispenser/robot,
 		/obj/item/stack/medical/ointment,

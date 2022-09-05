@@ -26,19 +26,19 @@
 			return C.charge/C.maxcharge
 	return null
 
-/obj/item/extinguisher/mech
-	max_water = 4000 //Good is gooder
+/obj/item/chems/spray/extinguisher/mech
+	volume = 4000 //Good is gooder
 	icon_state = "mech_exting"
 
-/obj/item/extinguisher/mech/get_hardpoint_maptext()
-	return "[reagents.total_volume]/[max_water]"
+/obj/item/chems/spray/extinguisher/mech/get_hardpoint_maptext()
+	return "[reagents.total_volume]/[reagents.maximum_volume]"
 
-/obj/item/extinguisher/mech/get_hardpoint_status_value()
-	return reagents.total_volume/max_water
+/obj/item/chems/spray/extinguisher/mech/get_hardpoint_status_value()
+	return reagents.total_volume/reagents.maximum_volume
 
 /obj/item/mech_equipment/mounted_system/extinguisher
 	icon_state = "mech_exting"
-	holding_type = /obj/item/extinguisher/mech
+	holding_type = /obj/item/chems/spray/extinguisher/mech
 	restricted_hardpoints = list(HARDPOINT_LEFT_HAND, HARDPOINT_RIGHT_HAND)
 	restricted_software = list(MECH_SOFTWARE_ENGINEERING)
 

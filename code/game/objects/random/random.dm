@@ -140,7 +140,7 @@
 				/obj/item/stack/package_wrap/twenty_five = 1,
 				/obj/item/hand_labeler = 1,
 				/obj/random/bomb_supply = 2,
-				/obj/item/extinguisher = 1,
+				/obj/item/chems/spray/extinguisher = 1,
 				/obj/item/clothing/gloves/insulated/cheap = 1,
 				/obj/item/stack/cable_coil/random = 2,
 				/obj/random/toolbox = 2,

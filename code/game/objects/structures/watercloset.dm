@@ -443,7 +443,7 @@ var/global/list/hygiene_props = list()
 		return TRUE
 	busy = 0
 
-	if(istype(O, /obj/item/extinguisher/)) return TRUE // We're washing, not filling.
+	if(istype(O, /obj/item/chems/spray/extinguisher)) return TRUE // We're washing, not filling.
 
 	O.clean_blood()
 	user.visible_message( \

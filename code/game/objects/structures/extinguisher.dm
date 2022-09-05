@@ -12,12 +12,12 @@
 
 /obj/structure/extinguisher_cabinet/Initialize()
 	. = ..()
-	has_extinguisher = new/obj/item/extinguisher(src)
+	has_extinguisher = new/obj/item/chems/spray/extinguisher(src)
 
 /obj/structure/extinguisher_cabinet/attackby(obj/item/O, mob/user)
 	if(isrobot(user))
 		return
-	if(istype(O, /obj/item/extinguisher))
+	if(istype(O, /obj/item/chems/spray/extinguisher))
 		if(!has_extinguisher && opened && user.unEquip(O, src))
 			has_extinguisher = O
 			to_chat(user, "<span class='notice'>You place [O] in [src].</span>")
@@ -54,7 +54,7 @@
 		icon_state = "extinguisher_closed"
 		return
 	if(has_extinguisher)
-		if(istype(has_extinguisher, /obj/item/extinguisher/mini))
+		if(istype(has_extinguisher, /obj/item/chems/spray/extinguisher/mini))
 			icon_state = "extinguisher_mini"
 		else
 			icon_state = "extinguisher_full"
