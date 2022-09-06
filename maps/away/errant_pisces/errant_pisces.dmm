@@ -4505,7 +4505,7 @@
 /area/errant_pisces/science_wing)
 "mp" = (
 /obj/structure/closet,
-/obj/item/clothing/suit/storage/hooded/wintercoat,
+/obj/item/clothing/suit/storage/toggle/wintercoat,
 /turf/simulated/floor/tiled,
 /area/errant_pisces/cryo)
 "mq" = (
