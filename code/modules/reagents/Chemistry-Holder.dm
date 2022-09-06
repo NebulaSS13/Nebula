@@ -9,6 +9,7 @@ var/global/obj/temp_reagents_holder = new
 	var/atom/my_atom
 	var/cached_color
 	var/updating_holder_reagent_state = FALSE
+	var/pending_update = FALSE
 
 /datum/reagents/New(var/maximum_volume = 120, var/atom/my_atom)
 	src.maximum_volume = maximum_volume
@@ -44,11 +45,9 @@ var/global/obj/temp_reagents_holder = new
 	primary_reagent = null
 	for(var/R in reagent_volumes)
 		var/vol = reagent_volumes[R]
-#ifdef DEBUG
 		if(!isnull(vol) && isNaN(vol))
 			PRINT_STACK_TRACE("NaN reagent in update_total(): [vol], [R]")
 			vol = 0
-#endif
 		if(vol < MINIMUM_CHEMICAL_VOLUME)
 			clear_reagent(R, defer_update = TRUE, force = TRUE) // defer_update is important to avoid infinite recursion
 		else
@@ -161,6 +160,7 @@ var/global/obj/temp_reagents_holder = new
 
 /* Holder-to-chemical */
 /datum/reagents/proc/handle_update(var/safety)
+	pending_update = FALSE
 	update_total()
 	if(!safety)
 		HANDLE_REACTIONS(src)
@@ -244,6 +244,7 @@ var/global/obj/temp_reagents_holder = new
 	return TRUE
 
 /datum/reagents/proc/clear_reagents(var/defer_update = FALSE)
+	pending_update = FALSE
 	if(!total_volume)
 		return
 	for(var/reagent in reagent_volumes)
@@ -284,7 +285,9 @@ var/global/obj/temp_reagents_holder = new
 		var/part = . / total_volume
 		for(var/current in reagent_volumes)
 			remove_reagent(current, REAGENT_VOLUME(src, current) * part, TRUE, TRUE)
-		if(!defer_update)
+		if(defer_update && !pending_update)
+			total_volume -= .
+		else
 			handle_update()
 
 // Transfers [amount] reagents from [src] to [target], multiplying them by [multiplier].
