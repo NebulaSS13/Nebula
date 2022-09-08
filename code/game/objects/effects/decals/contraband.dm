@@ -80,7 +80,8 @@
 	name = "poster"
 	desc = "A large piece of space-resistant printed paper."
 	icon = 'icons/obj/contraband.dmi'
-	anchored = 1
+	anchored = TRUE
+	directional_offset = "{'NORTH':{'y':32}, 'SOUTH':{'y':-32}, 'EAST':{'x':32}, 'WEST':{'x':-32}}"
 	var/poster_type
 	var/ruined = 0
 
@@ -98,19 +99,6 @@
 		else
 			poster_type = pick(decls_repository.get_decl_paths_of_subtype(/decl/poster))
 	set_poster(poster_type)
-
-	pixel_x = 0
-	pixel_y = 0
-	switch (placement_dir)
-		if (NORTH)
-			default_pixel_y = 32
-		if (SOUTH)
-			default_pixel_y = -32
-		if (EAST)
-			default_pixel_x = 32
-		if (WEST)
-			default_pixel_x = -32
-	reset_offsets(0)
 
 /obj/structure/sign/poster/proc/set_poster(var/poster_type)
 	var/decl/poster/design = GET_DECL(poster_type)

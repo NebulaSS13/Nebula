@@ -15,6 +15,7 @@
 	var/armor_penetration = 0
 	var/anchor_fall = FALSE
 	var/holographic = 0 //if the obj is a holographic object spawned by the holodeck
+	var/tmp/directional_offset ///JSON list of directions to x,y offsets to be applied to the object depending on its direction EX: {'NORTH':{'x':12,'y':5}, 'EAST':{'x':10,'y':50}}
 
 /obj/hitby(atom/movable/AM, var/datum/thrownthing/TT)
 	..()
@@ -205,6 +206,52 @@
 /obj/get_mob()
 	return buckled_mob
 
+/obj/set_dir(ndir)
+	. = ..()
+	if(directional_offset)
+		update_directional_offset()
+
+/obj/Move()
+	. = ..()
+	if(directional_offset)
+		update_directional_offset()
+
+/obj/forceMove(atom/dest)
+	. = ..()
+	if(directional_offset)
+		update_directional_offset()
+
+/** Applies the offset stored in the directional_offset json list depending on the current direction.  */
+/obj/proc/update_directional_offset()
+	if(!length(directional_offset))
+		return
+
+	//If this flag is on, and we have an offset, we're most likely wall mounted
+	if(obj_flags & OBJ_FLAG_MOVES_UNSUPPORTED)
+		var/turf/forward = get_step(get_turf(src), dir)
+		var/turf/reverse = get_step(get_turf(src), global.reverse_dir[dir])
+		//If we're wall mounted and don't have a wall either facing us, or in the opposite direction, don't apply the offset. 
+		// This is mainly for things that can be both wall mounted and floor mounted. 
+		// Its sort of a hack for now. But objects don't handle being on a wall or not. (They don't change their flags, layer, etc when on a wall or anything)
+		if(!forward && !reverse)
+			return
+
+	default_pixel_x = 0
+	default_pixel_y = 0
+	default_pixel_w = 0
+	default_pixel_z = 0
+	var/list/diroff = cached_json_decode(directional_offset)
+	var/list/curoff = diroff["[uppertext(dir2text(dir))]"]
+	if(length(curoff))
+		default_pixel_x = curoff["x"] || 0
+		default_pixel_y = curoff["y"] || 0
+		default_pixel_w = curoff["w"] || 0
+		default_pixel_z = curoff["z"] || 0
+	reset_offsets(0)
+
+////////////////////////////////////////////////////////////////
+// Interactions
+////////////////////////////////////////////////////////////////
 /obj/get_alt_interactions(var/mob/user)
 	. = ..()
 	LAZYADD(., /decl/interaction_handler/rotate)

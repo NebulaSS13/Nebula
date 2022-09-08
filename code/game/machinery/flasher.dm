@@ -5,6 +5,8 @@
 	desc = "A wall-mounted flashbulb device."
 	icon = 'icons/obj/machines/flash_mounted.dmi'
 	icon_state = "mflash1"
+	directional_offset = "{'NORTH':{'y':-32}, 'SOUTH':{'y':32}, 'EAST':{'x':32}, 'WEST':{'x':-32}}"
+	obj_flags = OBJ_FLAG_MOVES_UNSUPPORTED
 	var/range = 2 //this is roughly the size of brig cell
 	var/disable = 0
 	var/last_flash = 0 //Don't want it getting spammed like regular flashes

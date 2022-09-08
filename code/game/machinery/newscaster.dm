@@ -157,6 +157,7 @@ var/global/list/allCasters = list() //Global list that will contain reference to
 	uncreated_component_parts = null
 	stat_immune = 0
 	frame_type = /obj/item/frame/stock_offset/newscaster
+	directional_offset = "{'NORTH':{'y':-32}, 'SOUTH':{'y':32}, 'EAST':{'x':32}, 'WEST':{'x':-32}}"
 
 /obj/machinery/newscaster/Initialize()
 	. = ..()

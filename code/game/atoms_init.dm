@@ -49,6 +49,10 @@
 		default_pixel_z = pixel_z
 	else
 		pixel_z = default_pixel_z
+	if(isnull(default_pixel_w))
+		default_pixel_w = pixel_w
+	else
+		pixel_w = default_pixel_w
 
 	if(light_power && light_range)
 		update_light()

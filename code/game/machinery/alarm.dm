@@ -61,7 +61,7 @@
 	uncreated_component_parts = list(/obj/item/stock_parts/power/apc = 1)
 	construct_state = /decl/machine_construction/wall_frame/panel_closed
 	wires = /datum/wires/alarm
-
+	directional_offset = "{'NORTH':{'y':-21}, 'SOUTH':{'y':21}, 'EAST':{'x':-21}, 'WEST':{'x':21}}"
 
 	var/alarm_id = null
 	var/breach_detection = 1 // Whether to use automatic breach detection or not
@@ -309,21 +309,6 @@
 	return 0
 
 /obj/machinery/alarm/on_update_icon()
-	// Set pixel offsets
-	default_pixel_x = 0
-	default_pixel_y = 0
-	var/turf/T = get_step(get_turf(src), turn(dir, 180))
-	if(istype(T) && T.density)
-		if(dir == NORTH)
-			default_pixel_y = -21
-		else if(dir == SOUTH)
-			default_pixel_y = 21
-		else if(dir == WEST)
-			default_pixel_x = 21
-		else if(dir == EAST)
-			default_pixel_x = -21
-	reset_offsets(0)
-
 	// Broken or deconstructed states
 	if(!istype(construct_state, /decl/machine_construction/wall_frame/panel_closed))
 		icon_state = "alarmx"
@@ -838,6 +823,7 @@ FIRE ALARM
 	frame_type = /obj/item/frame/fire_alarm
 	uncreated_component_parts = list(/obj/item/stock_parts/power/apc = 1)
 	construct_state = /decl/machine_construction/wall_frame/panel_closed
+	directional_offset = "{'NORTH':{'y':-21}, 'SOUTH':{'y':21}, 'EAST':{'x':21}, 'WEST':{'x':-21}}"
 
 	var/detecting =    TRUE
 	var/working =      TRUE
@@ -874,22 +860,6 @@ FIRE ALARM
 
 /obj/machinery/firealarm/on_update_icon()
 	overlays.Cut()
-
-	default_pixel_x = 0
-	default_pixel_y = 0
-	var/walldir = (dir & (NORTH|SOUTH)) ? global.reverse_dir[dir] : dir
-	var/turf/T = get_step(get_turf(src), walldir)
-	if(istype(T) && T.density)
-		if(dir == SOUTH)
-			default_pixel_y = 21
-		else if(dir == NORTH)
-			default_pixel_y = -21
-		else if(dir == EAST)
-			default_pixel_x = 21
-		else if(dir == WEST)
-			default_pixel_x = -21
-	reset_offsets(0)
-
 	icon_state = "casing"
 	if(construct_state && !istype(construct_state, /decl/machine_construction/wall_frame/panel_closed))
 		overlays += get_cached_overlay(construct_state.type)
@@ -1066,6 +1036,8 @@ FIRE ALARM
 	anchored = TRUE
 	idle_power_usage = 2
 	active_power_usage = 6
+	obj_flags = OBJ_FLAG_MOVES_UNSUPPORTED
+	directional_offset = "{'NORTH':{'y':-21}, 'SOUTH':{'y':21}, 'EAST':{'x':21}, 'WEST':{'x':-21}}"
 	var/time =         1 SECOND
 	var/timing =       FALSE
 	var/lockdownbyai = FALSE

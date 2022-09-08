@@ -100,6 +100,7 @@ var/global/list/all_apcs = list()
 	initial_access = list(access_engine_equip)
 	clicksound = "switch"
 	layer = ABOVE_WINDOW_LAYER
+	directional_offset = "{'NORTH':{'y':22}, 'SOUTH':{'y':-22}, 'EAST':{'x':22}, 'WEST':{'x':-22}}"
 
 	var/powered_down = FALSE
 	var/area/area
@@ -292,21 +293,6 @@ var/global/list/all_apcs = list()
 			channel_leds[POWERCHAN_ON + 1] = overlay_image(icon,"apco[channel]",COLOR_LIME)
 			channel_leds[POWERCHAN_ON_AUTO + 1] = overlay_image(icon,"apco[channel]",COLOR_BLUE)
 			channel++
-
-	if(update_state < 0)
-		default_pixel_x = 0
-		default_pixel_y = 0
-		var/turf/T = get_step(get_turf(src), dir)
-		if(istype(T) && T.density)
-			if(dir == SOUTH)
-				default_pixel_y = -22
-			else if(dir == NORTH)
-				default_pixel_y = 22
-			else if(dir == EAST)
-				default_pixel_x = 22
-			else if(dir == WEST)
-				default_pixel_x = -22
-		reset_offsets()
 
 	var/update = check_updates() 		//returns 0 if no need to update icons.
 						// 1 if we need to update the icon_state

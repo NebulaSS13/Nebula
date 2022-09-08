@@ -149,27 +149,6 @@
 	name = "security camera kit"
 	desc = "An all-in-one wall-mounted security camera kit, comes preassembled."
 
-/obj/item/frame/button/modify_positioning(var/obj/machinery/button/product, _dir, click_params)
-	var/list/params = params2list(click_params)
-	var/_pixel_x = text2num(params["icon-x"]) - WORLD_ICON_SIZE/2 //Make it relative to center instead of bottom left
-	var/_pixel_y = text2num(params["icon-y"]) - WORLD_ICON_SIZE/2
-	switch(_dir)
-		if(NORTH)
-			_pixel_y = max(_pixel_y, WORLD_ICON_SIZE/4)
-			_pixel_y -= WORLD_ICON_SIZE
-		if(SOUTH)
-			_pixel_y = min(_pixel_y, WORLD_ICON_SIZE/4)
-			_pixel_y += WORLD_ICON_SIZE
-		if(EAST)
-			_pixel_x = max(_pixel_x, 0)
-			_pixel_x -= WORLD_ICON_SIZE
-		if(WEST)
-			_pixel_x = min(_pixel_x, 0)
-			_pixel_x += WORLD_ICON_SIZE
-	product.default_pixel_x = _pixel_x
-	product.default_pixel_y = _pixel_y
-	product.reset_offsets(0)
-
 /obj/item/frame/button/wall_charger
 	name = "wall charger frame"
 	icon = 'icons/obj/machines/recharger_wall.dmi'
@@ -194,16 +173,7 @@
 	reverse = TRUE
 
 /obj/item/frame/stock_offset/modify_positioning(var/obj/machinery/product, _dir, click_params)
-	switch(_dir)
-		if(NORTH)
-			product.default_pixel_y = WORLD_ICON_SIZE
-		if(SOUTH)
-			product.default_pixel_y = - WORLD_ICON_SIZE
-		if(EAST)
-			product.default_pixel_x = WORLD_ICON_SIZE
-		if(WEST)
-			product.default_pixel_x = - WORLD_ICON_SIZE
-	reset_offsets(0)
+	product.update_directional_offset()
 
 /obj/item/frame/stock_offset/request_console
 	name = "request console frame"

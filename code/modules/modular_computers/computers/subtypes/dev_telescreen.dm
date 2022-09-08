@@ -8,6 +8,8 @@
 	light_strength = 4
 	w_class = ITEM_SIZE_HUGE
 	computer_type = /datum/extension/assembly/modular_computer/telescreen
+	obj_flags = OBJ_FLAG_MOVES_UNSUPPORTED
+	directional_offset = "{'NORTH':{'y':-32}, 'SOUTH':{'y':32}, 'EAST':{'x':-32}, 'WEST':{'x':32}}"
 
 /obj/item/modular_computer/telescreen/Initialize()
 	. = ..()
