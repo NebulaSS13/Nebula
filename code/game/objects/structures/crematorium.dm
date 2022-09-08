@@ -196,6 +196,7 @@
 	anchored = TRUE
 	throwpass = TRUE
 	layer = BELOW_OBJ_LAYER
+	obj_flags = OBJ_FLAG_MOVES_UNSUPPORTED | OBJ_FLAG_NOFALL
 
 	var/obj/structure/crematorium/connected_crematorium
 

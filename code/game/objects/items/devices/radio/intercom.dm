@@ -8,12 +8,13 @@
 	w_class = ITEM_SIZE_STRUCTURE
 	canhear_range = 2
 	atom_flags = ATOM_FLAG_NO_TEMP_CHANGE | ATOM_FLAG_NO_BLOOD
-	obj_flags = OBJ_FLAG_CONDUCTIBLE
+	obj_flags = OBJ_FLAG_CONDUCTIBLE | OBJ_FLAG_MOVES_UNSUPPORTED
 	layer = ABOVE_WINDOW_LAYER
 	cell = null
 	power_usage = 0
 	intercom = TRUE
 	intercom_handling = TRUE
+	directional_offset = "{'NORTH':{'y':-30}, 'SOUTH':{'y':20}, 'EAST':{'x':-22}, 'WEST':{'x':22}}"
 	var/number = 0
 	var/last_tick //used to delay the powercheck
 	

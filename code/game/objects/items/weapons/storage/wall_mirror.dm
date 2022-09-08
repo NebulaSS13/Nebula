@@ -1,4 +1,6 @@
 //wip wip wup
+
+//#TODO: Should definitely be a structure!
 /obj/item/storage/mirror
 	name = "mirror"
 	desc = "A SalonPro Nano-Mirror(TM) mirror! The leading brand in hair salon products, utilizing nano-machinery to style your hair just right. The black box inside warns against attempting to release the nanomachines."
@@ -21,6 +23,8 @@
 		/obj/random/soap,
 		/obj/item/chems/spray/cleaner/deodorant,
 		/obj/item/towel/random)
+	directional_offset = "{'NORTH':{'y':-29}, 'SOUTH':{'y':29}, 'EAST':{'x':29}, 'WEST':{'x':-29}}"
+	obj_flags = OBJ_FLAG_MOVES_UNSUPPORTED
 
 /obj/item/storage/mirror/handle_mouse_drop(atom/over, mob/user)
 	. = ..()
