@@ -46,7 +46,7 @@
 			to_chat(user, SPAN_WARNING("\The [H] doesn't have any eyes."))
 			return
 		if(H.get_equipped_item(slot_glasses_str))
-			to_chat(user, SPAN_WARNING("\The [H] is already wearing somethign on their eyes."))
+			to_chat(user, SPAN_WARNING("\The [H] is already wearing something on their eyes."))
 			return
 
 		var/obj/item/head = H.get_equipped_item(slot_head_str)

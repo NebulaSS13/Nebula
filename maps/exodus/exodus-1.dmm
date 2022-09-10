@@ -5967,8 +5967,8 @@
 	pixel_x = 24
 	},
 /obj/structure/rack,
-/obj/item/clothing/suit/storage/hooded/wintercoat/engineering,
-/obj/item/clothing/suit/storage/hooded/wintercoat/dais{
+/obj/item/clothing/suit/storage/toggle/wintercoat/engineering,
+/obj/item/clothing/suit/storage/toggle/wintercoat/dais{
 	pixel_y = 12
 	},
 /turf/simulated/floor/tiled/dark/monotile,

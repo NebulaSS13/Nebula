@@ -13,7 +13,7 @@
 	desc = "A green jacket bearing the logo of Major Bill's Shipping."
 	icon = 'mods/content/corporate/icons/clothing/suit/mbill.dmi'
 
-/obj/item/clothing/suit/storage/hooded/wintercoat/dais
+/obj/item/clothing/suit/storage/toggle/wintercoat/dais
 	name = "\improper DAIS winter coat"
 	icon = 'mods/content/corporate/icons/clothing/suit/dais_coat.dmi'
 	hood = /obj/item/clothing/head/winterhood/dais
