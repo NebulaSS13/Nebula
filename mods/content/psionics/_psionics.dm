@@ -2,6 +2,10 @@
 	name = "Psionics Content"
 	dreams = list("the Foundation", "nullglass")
 
+/decl/modpack/psionics/post_initialize()
+	. = ..()
+	global.item_damage_test_examptions |= typesof(/obj/item/psychic_power)
+
 /decl/modpack/psionics/get_player_panel_options(var/mob/M)
 	. = list("<b>Psionics:</b><br/>")
 	if(isliving(M))
@@ -29,7 +33,3 @@
 	character = ..()
 	if(istype(character) && character.psi && !is_preview_copy)
 		character.psi.update()
-
-/datum/unit_test/items_test/init_test_exemptions()
-	. = ..()
-	test_exempt_types += typesof(/obj/item/psychic_power) //Abstract
