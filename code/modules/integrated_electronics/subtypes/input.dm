@@ -837,7 +837,7 @@
 	var/translated = TRUE
 	if(M && text)
 		if(speaking && !speaking.machine_understands)
-			text = speaking.scramble(text)
+			text = speaking.scramble(M, text)
 			translated = FALSE
 		set_pin_data(IC_OUTPUT, 1, M.GetVoice())
 		set_pin_data(IC_OUTPUT, 2, text)

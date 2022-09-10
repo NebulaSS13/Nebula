@@ -592,9 +592,6 @@ var/global/const/DEFAULT_SPECIES_HEALTH = 200
 /decl/species/proc/build_hud(var/mob/living/carbon/human/H)
 	return
 
-/decl/species/proc/can_understand(var/mob/other)
-	return
-
 /decl/species/proc/can_overcome_gravity(var/mob/living/carbon/human/H)
 	return FALSE
 

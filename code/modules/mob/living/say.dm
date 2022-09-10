@@ -97,7 +97,20 @@ var/global/list/channel_to_radio_key = new
 	return FALSE
 
 /mob/living/proc/get_default_language()
-	. = ispath(default_language, /decl/language) && GET_DECL(default_language)
+	var/lang = ispath(default_language, /decl/language) && GET_DECL(default_language)
+	if(can_speak(lang))
+		return lang
+
+/mob/living/proc/get_any_good_language(set_default=FALSE)
+	. = get_default_language()
+	if(!.)
+		for(var/decl/language/L in languages)
+			if(can_speak(L))
+				. = L
+				if(set_default)
+					set_default_language(.)
+				return
+
 
 /mob/living/is_silenced()
 	. = ..() || HAS_STATUS(src, STAT_SILENCE)
@@ -345,5 +358,5 @@ var/global/list/channel_to_radio_key = new
 /obj/effect/speech_bubble
 	var/mob/parent
 
-/mob/living/proc/GetVoice()
+/mob/proc/GetVoice()
 	return name

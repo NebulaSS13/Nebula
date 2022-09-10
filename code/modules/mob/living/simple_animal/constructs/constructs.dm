@@ -5,6 +5,7 @@
 	speak = list("Hsssssssszsht.", "Hsssssssss...", "Tcshsssssssszht!")
 	speak_emote = list("hisses")
 	emote_hear = list("wails","screeches")
+	base_animal_type = /mob/living/simple_animal/construct
 
 	response_help_1p = "You think better of touching $TARGET$."
 	response_help_3p = "$USER$ thinks better of touching $TARGET$."

@@ -781,3 +781,6 @@ var/global/list/custom_ai_icons_by_ckey_and_name = list()
 	if(holo)
 		holo.set_dir_hologram(client.client_dir(SOUTH), src)
 	return ..()
+
+/mob/living/silicon/ai/say_understands(mob/speaker, decl/language/speaking)
+	return (!speaking && ispAI(speaker)) || ..()
