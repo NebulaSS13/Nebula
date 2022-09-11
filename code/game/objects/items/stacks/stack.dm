@@ -60,6 +60,28 @@
 		else
 			to_chat(user, "There is enough charge for [get_amount()].")
 
+/obj/item/stack/on_update_icon()
+	. = ..()
+	if(!isturf(loc))
+		var/image/I = image(null)
+		I.appearance_flags |= (RESET_COLOR|RESET_TRANSFORM)
+		I.maptext_x = 2
+		I.maptext_y = 2
+		I.maptext = STYLE_SMALLFONTS_OUTLINE(get_amount(), 6, (color || COLOR_WHITE), COLOR_BLACK)
+		add_overlay(I)
+
+/obj/item/stack/on_enter_storage(obj/item/storage/S)
+	. = ..()
+	queue_icon_update() // queue here as it may not have updated loc yet
+
+/obj/item/stack/equipped(mob/user, slot)
+	. = ..()
+	update_icon()
+
+/obj/item/stack/dropped(mob/user)
+	. = ..()
+	update_icon()
+
 /obj/item/stack/attack_self(mob/user)
 	list_recipes(user)
 
@@ -219,6 +241,7 @@
 		for(var/i = 1 to charge_costs.len)
 			var/datum/matter_synth/S = synths[i]
 			S.use_charge(charge_costs[i] * used) // Doesn't need to be deleted
+		update_icon()
 		return 1
 
 /obj/item/stack/proc/add(var/extra)
