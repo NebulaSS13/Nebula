@@ -430,7 +430,7 @@
 		if (!ore_box)
 			continue
 		var/list/atoms_in_range = range(1, at_turf)
-		for(var/obj/item/ore/ore in atoms_in_range)
+		for(var/obj/item/stack/material/ore/ore in atoms_in_range)
 			if (!(get_dir(owner, ore) & owner.dir))
 				continue
 			ore.Move(ore_box)

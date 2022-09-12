@@ -845,7 +845,7 @@
 /obj/item/fossil/animal,
 /obj/item/fossil/animal,
 /obj/item/fossil,
-/obj/item/ore/strangerock,
+/obj/item/strangerock,
 /turf/simulated/floor/tiled/usedup,
 /area/ship/scrap/cargo/lower)
 "bQ" = (

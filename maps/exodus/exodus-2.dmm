@@ -37056,11 +37056,11 @@
 /obj/structure/window/reinforced{
 	dir = 1
 	},
-/obj/item/ore/coal{
+/obj/item/stack/material/ore/coal{
 	pixel_x = 3;
 	pixel_y = 3
 	},
-/obj/item/ore/iron,
+/obj/item/stack/material/ore/iron,
 /turf/simulated/floor/tiled/steel_grid,
 /area/exodus/quartermaster/miningdock)
 "bzM" = (
@@ -64944,9 +64944,9 @@
 /turf/simulated/floor,
 /area/ship/exodus_pod_mining)
 "wiC" = (
-/obj/item/ore/silver,
-/obj/item/ore/silver,
-/obj/item/ore/iron,
+/obj/item/stack/material/ore/silver,
+/obj/item/stack/material/ore/silver,
+/obj/item/stack/material/ore/iron,
 /obj/structure/closet/crate,
 /obj/machinery/atmospherics/unary/vent_pump/high_volume/external_air{
 	dir = 4;

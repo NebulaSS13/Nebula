@@ -178,7 +178,7 @@
 			user.put_in_hands(O)
 
 /obj/item/stack/Topic(href, href_list)
-	..()
+	. = ..()
 	if ((usr.restrained() || usr.stat || usr.get_active_hand() != src))
 		return
 
@@ -206,12 +206,12 @@
 			return
 	return
 
-//Return 1 if an immediate subsequent call to use() would succeed.
-//Ensures that code dealing with stacks uses the same logic
+/**
+ * Return 1 if an immediate subsequent call to use() would succeed.
+ * Ensures that code dealing with stacks uses the same logic.
+*/
 /obj/item/stack/proc/can_use(var/used)
-	if (get_amount() < used)
-		return 0
-	return 1
+	return get_amount() >= used
 
 /obj/item/stack/create_matter()
 	matter_per_piece = matter?.Copy() // this is used for refreshing matter amount in update_matter()
@@ -227,7 +227,7 @@
 
 /obj/item/stack/proc/use(var/used)
 	if (!can_use(used))
-		return 0
+		return FALSE
 	if(!uses_charge)
 		amount -= used
 		if (amount <= 0)
@@ -235,31 +235,31 @@
 		else
 			update_icon()
 			update_matter()
-		return 1
+		return TRUE
 	else
 		if(get_amount() < used)
-			return 0
+			return FALSE
 		for(var/i = 1 to charge_costs.len)
 			var/datum/matter_synth/S = synths[i]
 			S.use_charge(charge_costs[i] * used) // Doesn't need to be deleted
 		update_icon()
-		return 1
+		return TRUE
 
 /obj/item/stack/proc/add(var/extra)
 	if(!uses_charge)
 		if(amount + extra > get_max_amount())
-			return 0
+			return FALSE
 		else
 			amount += extra
 			update_icon()
 			update_matter()
-			return 1
 	else if(!synths || synths.len < uses_charge)
-		return 0
+		return FALSE
 	else
 		for(var/i = 1 to uses_charge)
 			var/datum/matter_synth/S = synths[i]
 			S.add_charge(charge_costs[i] * extra)
+	return TRUE
 
 /*
 	The transfer and split procs work differently than use() and add().

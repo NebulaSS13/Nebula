@@ -11,7 +11,7 @@
 /turf/space,
 /area/space)
 "ad" = (
-/obj/item/ore,
+/obj/item/stack/material/ore,
 /turf/space,
 /area/space)
 "ae" = (
@@ -282,7 +282,7 @@
 /obj/structure/cable/yellow{
 	icon_state = "2-4"
 	},
-/obj/item/ore,
+/obj/item/stack/material/ore,
 /turf/simulated/floor/airless,
 /area/magshield/smes_storage)
 "aQ" = (
@@ -431,7 +431,7 @@
 /turf/simulated/floor/airless,
 /area/magshield/smes_storage)
 "bo" = (
-/obj/item/ore,
+/obj/item/stack/material/ore,
 /turf/simulated/floor/airless,
 /area/magshield/smes_storage)
 "bp" = (
@@ -527,7 +527,7 @@
 /turf/simulated/floor/airless,
 /area/magshield/engine)
 "bE" = (
-/obj/item/ore,
+/obj/item/stack/material/ore,
 /turf/space,
 /area/magshield/smes_storage)
 "bF" = (
@@ -583,7 +583,7 @@
 /area/space)
 "bO" = (
 /obj/machinery/atmospherics/pipe/simple/heat_exchanging,
-/obj/item/ore,
+/obj/item/stack/material/ore,
 /turf/space,
 /area/space)
 "bP" = (
@@ -896,7 +896,7 @@
 /obj/machinery/atmospherics/pipe/simple/heat_exchanging{
 	dir = 4
 	},
-/obj/item/ore,
+/obj/item/stack/material/ore,
 /turf/space,
 /area/space)
 "cF" = (
@@ -909,7 +909,7 @@
 /obj/structure/cable{
 	icon_state = "1-2"
 	},
-/obj/item/ore,
+/obj/item/stack/material/ore,
 /turf/simulated/floor/airless,
 /area/magshield/smes_storage)
 "cG" = (
@@ -1163,7 +1163,7 @@
 /turf/simulated/floor/airless,
 /area/magshield/north)
 "di" = (
-/obj/item/ore,
+/obj/item/stack/material/ore,
 /turf/simulated/floor/airless,
 /area/magshield/north)
 "dj" = (
@@ -2526,7 +2526,7 @@
 /turf/space,
 /area/magshield/east)
 "hv" = (
-/obj/item/ore/slag,
+/obj/item/stack/material/ore/slag,
 /turf/simulated/floor/airless,
 /area/space)
 "hw" = (
@@ -2585,7 +2585,7 @@
 /turf/space,
 /area/magshield/west)
 "hF" = (
-/obj/item/ore,
+/obj/item/stack/material/ore,
 /turf/simulated/floor/tiled,
 /area/magshield/west)
 "hG" = (
@@ -2626,7 +2626,7 @@
 /turf/simulated/floor/carpet/blue,
 /area/magshield/west)
 "hL" = (
-/obj/item/ore,
+/obj/item/stack/material/ore,
 /turf/simulated/floor/tiled/dark,
 /area/magshield/west)
 "hM" = (
@@ -2858,7 +2858,7 @@
 /turf/simulated/floor/tiled,
 /area/magshield/south)
 "is" = (
-/obj/item/ore/slag,
+/obj/item/stack/material/ore/slag,
 /turf/space,
 /area/space)
 "it" = (
@@ -3037,7 +3037,7 @@
 /turf/simulated/floor/tiled/white,
 /area/magshield/south)
 "iX" = (
-/obj/item/ore/slag,
+/obj/item/stack/material/ore/slag,
 /turf/simulated/floor/tiled/white,
 /area/magshield/south)
 "iY" = (
@@ -3495,7 +3495,7 @@
 /turf/simulated/floor/tiled,
 /area/magshield/south)
 "ku" = (
-/obj/item/ore,
+/obj/item/stack/material/ore,
 /turf/space,
 /area/magshield/south)
 "kv" = (

@@ -9,7 +9,7 @@
 #define GAS_EXTRACTOR_MIN_REAGENT_AMOUNT 0.1 //Minimum amount of reagents units we tolerate in the machine to keep things clean
 
 //Whitelist of items that can be processed by the machine
-var/global/list/material_extractor_items_whitelist = list(/obj/item/ore)
+var/global/list/material_extractor_items_whitelist = list(/obj/item/stack/material/ore)
 
 ////////////////////////////////////////////////////
 // Holder for the reagents_holder. 

@@ -32,6 +32,21 @@
 	uid = "solid_sandstone"
 	lore_text = "A clastic sedimentary rock. The cost of boosting it to orbit is almost universally much higher than the actual value of the material."
 	value = 1.5
+/decl/material/solid/stone/granite
+	name                 = "granite"
+	uid                  = "solid_granite"
+	lore_text            = "A coarse-grained igneous rock formed by magma containing sillicon and alkali metal oxides."
+	color                = "#615F5F"
+	exoplanet_rarity     = MAT_RARITY_MUNDANE
+	hardness             = MAT_VALUE_HARD + 5
+	melting_point        = T0C + 1260
+	brute_armor          = 15
+	explosion_resistance = 15
+	integrity            = 500 //granite is very strong
+	dissolves_into          = list(
+		/decl/material/solid/silicon = 0.75,
+		/decl/material/solid/bauxite = 0.15,
+	)
 
 /decl/material/solid/stone/ceramic
 	name = "ceramic"

@@ -19,6 +19,7 @@
 /obj/item/stack/material/Initialize(mapload, var/amount, var/_material, var/_reinf_material)
 	. = ..(mapload, amount, _material)
 	if(!istype(material))
+		log_warning("[src] ([x],[y],[z]) was deleted because it didn't have a valid material set('[material]')!")
 		return INITIALIZE_HINT_QDEL
 	if(!_reinf_material)
 		_reinf_material = reinf_material
