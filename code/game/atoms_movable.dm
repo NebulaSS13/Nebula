@@ -207,9 +207,31 @@
 			unbuckle_mob()
 
 /atom/movable/set_dir(ndir)
+	var/old_dir = dir
 	. = ..()
 	if(.)
 		refresh_buckled_mob(0)
+		if(isturf(loc))
+			var/turf/T = loc
+			T.fluid_can_pass = null
+			if(atom_flags & ATOM_FLAG_CHECKS_BORDER)
+				T.fluid_blocked_dirs &= ~old_dir
+				T.fluid_blocked_dirs |= ndir
+			T.fluid_update()
+
+/atom/movable/set_density(new_density)
+	var/old_density = density
+	. = ..()
+	if(old_density != new_density)
+		if(isturf(loc))
+			var/turf/T = loc
+			T.fluid_can_pass = null
+			if(atom_flags & ATOM_FLAG_CHECKS_BORDER)
+				if(density)
+					T.fluid_blocked_dirs |= ~dir
+				else
+					T.fluid_blocked_dirs &= ~dir
+			T.fluid_update()
 
 /atom/movable/proc/refresh_buckled_mob(var/delay_offset_anim = 4)
 	if(buckled_mob)

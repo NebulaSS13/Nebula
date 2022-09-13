@@ -112,15 +112,9 @@ SUBSYSTEM_DEF(materials)
 	while(processing_holders.len)
 		var/datum/reagents/holder = processing_holders[processing_holders.len]
 		processing_holders.len--
-		if (QDELETED(holder))
+		if(QDELETED(holder) || !holder.process_reactions())
 			active_holders -= holder
-			log_debug("SSmaterials: QDELETED holder found in processing list!")
-			if(MC_TICK_CHECK)
-				return
-			continue
-		if (!holder.process_reactions())
-			active_holders -= holder
-		if (MC_TICK_CHECK)
+		if(MC_TICK_CHECK)
 			return
 
 /datum/controller/subsystem/materials/proc/get_random_chem(var/only_if_unique = FALSE, temperature = T20C)

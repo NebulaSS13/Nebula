@@ -34,8 +34,6 @@
 		reinf_material = GET_DECL(reinf_material)
 	. = ..()
 	update_materials()
-	if(!CanFluidPass())
-		fluid_update(TRUE)
 
 /obj/structure/proc/show_examined_damage(mob/user, var/perc)
 	if(maxhealth == -1)
@@ -113,7 +111,7 @@
 
 	playsound(loc, hitsound, 75, 1)
 	health = Clamp(health - damage, 0, maxhealth)
-	
+
 	show_damage_message(health/maxhealth)
 
 	if(health == 0)
@@ -148,7 +146,6 @@
 	var/turf/T = get_turf(src)
 	. = ..()
 	if(T)
-		T.fluid_update()
 		for(var/atom/movable/AM in T)
 			AM.reset_offsets()
 			AM.reset_plane_and_layer()
@@ -171,11 +168,9 @@
 	var/turf/T = get_turf(src)
 	. = ..()
 	if(. && !CanFluidPass())
-		fluid_update()
 		if(T)
-			T.fluid_update()
 			for(var/atom/movable/AM in T)
-				AM.reset_offsets()	
+				AM.reset_offsets()
 				AM.reset_plane_and_layer()
 
 /obj/structure/grab_attack(var/obj/item/grab/G)

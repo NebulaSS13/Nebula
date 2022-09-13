@@ -416,7 +416,7 @@ Class Procs:
 		to_chat(user, "It is missing a screen, making it hard to interact with.")
 	else if(stat & NOINPUT)
 		to_chat(user, "It is missing any input device.")
-	
+
 	if((stat & NOPOWER))
 		if(interact_offline)
 			to_chat(user, "It is not receiving <a href ='?src=\ref[src];power_text=1'>power</a>.")
@@ -438,14 +438,6 @@ Class Procs:
 	..()
 	if(!(stat & (NOPOWER|BROKEN)) && !waterproof && (fluids.total_volume > FLUID_DEEP))
 		explosion_act(3)
-
-/obj/machinery/Move()
-	var/atom/lastloc = loc
-	. = ..()
-	if(. && !CanFluidPass())
-		if(lastloc)
-			lastloc.fluid_update()
-		fluid_update()
 
 /obj/machinery/get_cell(var/functional_only = TRUE)
 	var/obj/item/stock_parts/power/battery/battery = get_component_of_type(/obj/item/stock_parts/power/battery)

@@ -103,7 +103,14 @@
 
 	// Fire Entered events for freshly created movables.
 	// Changing this behavior will almost certainly break power; update accordingly.
-	if (!ml && loc)
+	if(ml) // fluid updates are handled in Entered() for non-maploaded atoms
+		if(isturf(loc) && !CanFluidPass())
+			var/turf/T = loc
+			T.fluid_can_pass = null
+			if(atom_flags & ATOM_FLAG_CHECKS_BORDER)
+				T.fluid_blocked_dirs |= dir
+			T.fluid_update()
+	else if(loc)
 		loc.Entered(src, null)
 
 /atom/movable/Destroy()
@@ -117,7 +124,14 @@
 
 	unregister_all_movement(loc, src) // unregister events before destroy to avoid expensive checking
 
+	var/turf/old_loc = loc
+
 	. = ..()
+
+	if(!CanFluidPass() && istype(old_loc))
+		old_loc.fluid_can_pass = null
+		old_loc.fluid_blocked_dirs = null
+		old_loc.fluid_update()
 
 	for(var/A in src)
 		qdel(A)

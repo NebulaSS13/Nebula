@@ -1,11 +1,15 @@
 /turf
-	var/last_flow_strength = 0
-	var/last_flow_dir = 0
-	var/atom/movable/flood/fluid/fluid_overlay
+	var/flooded // Whether or not this turf is absolutely flooded ie. a water source.
+	var/tmp/updating_fluids
+	var/tmp/last_flow_strength = 0
+	var/tmp/last_flow_dir = 0
+	var/tmp/fluid_can_pass
+	var/tmp/fluid_blocked_dirs = 0
+	var/tmp/atom/movable/flood/fluid/fluid_overlay
 
 /turf/Destroy()
 	clear_fluid_overlay()
-	. = ..()
+	return ..()
 
 /turf/proc/clear_fluid_overlay()
 	if(fluid_overlay)
@@ -18,7 +22,7 @@
 		return FALSE
 	if(isnull(fluid_can_pass))
 		fluid_can_pass = TRUE
-		for(var/atom/movable/AM in src)
+		for(var/atom/movable/AM as anything in src)
 			if(AM.simulated && !AM.CanFluidPass(coming_from))
 				fluid_can_pass = FALSE
 				break
@@ -65,9 +69,27 @@
 	if(!flooded && istype(fluid_overlay))
 		flick("bubbles", fluid_overlay)
 
+/turf/Exited(atom/movable/Obj, atom/newloc)
+	. = ..()
+	if(istype(Obj) && !Obj.CanFluidPass())
+		fluid_can_pass = null
+		fluid_blocked_dirs = null
+		fluid_update(ignore_neighbors = TRUE)
+
+/turf/Entered(var/atom/movable/A, var/atom/old_loc)
+	. = ..()
+	if(istype(A) && !A.CanFluidPass())
+		fluid_can_pass = FALSE
+		if(A.atom_flags & ATOM_FLAG_CHECKS_BORDER)
+			fluid_blocked_dirs |= A.dir
+		fluid_update(ignore_neighbors = TRUE)
+
 /turf/fluid_update(var/ignore_neighbors)
-	fluid_blocked_dirs = null
-	fluid_can_pass = null
+	set waitfor = FALSE
+	if(updating_fluids)
+		return
+	updating_fluids = TRUE
+	sleep(0)
 	if(!ignore_neighbors)
 		for(var/checkdir in global.cardinal)
 			var/turf/T = get_step(src, checkdir)
@@ -75,6 +97,7 @@
 				T.fluid_update(TRUE)
 	if(flooded)
 		ADD_ACTIVE_FLUID_SOURCE(src)
+	updating_fluids = FALSE
 
 /turf/proc/get_physical_height()
 	return 0

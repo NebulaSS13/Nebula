@@ -60,11 +60,11 @@
 	anchored = prob(50)
 
 /obj/structure/girder/bullet_act(var/obj/item/projectile/Proj)
-	
+
 	var/effective_cover = cover
 	if(reinf_material)
 		effective_cover *= 2
-	if(!anchored) 
+	if(!anchored)
 		effective_cover *= 0.5
 	effective_cover = Clamp(FLOOR(effective_cover), 0, 100)
 	if(Proj.original != src && !prob(effective_cover))

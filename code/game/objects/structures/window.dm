@@ -76,7 +76,7 @@
 			S.update_icon()
 
 /obj/structure/window/CanFluidPass(var/coming_from)
-	return (!is_fulltile() && coming_from != dir)
+	return !is_fulltile() || (coming_from && coming_from != dir)
 
 /obj/structure/window/physically_destroyed(var/skip_qdel)
 	SHOULD_CALL_PARENT(FALSE)

@@ -171,7 +171,7 @@
 	..()
 
 /obj/machinery/door/window/CanFluidPass(var/coming_from)
-	return !density || ((dir in global.cardinal) && coming_from != dir)
+	return !density || (coming_from && (dir in global.cardinal) && coming_from != dir)
 
 /obj/machinery/door/window/attackby(obj/item/I, mob/user)
 	//If it's in the process of opening/closing, ignore the click

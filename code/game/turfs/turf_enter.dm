@@ -5,7 +5,7 @@
 	if(!istype(mover) || !(mover.movable_flags & MOVABLE_FLAG_PROXMOVE))
 		return
 	for(var/atom/movable/neighbor in range(1))
-		if(objects > ENTER_PROXIMITY_LOOP_SANITY) 
+		if(objects > ENTER_PROXIMITY_LOOP_SANITY)
 			break // Don't let ore piles kill the server as well as the client.
 		if(neighbor.movable_flags & MOVABLE_FLAG_PROXMOVE)
 			objects++
@@ -14,6 +14,7 @@
 				neighbor.HasProximity(mover)
 
 #undef ENTER_PROXIMITY_LOOP_SANITY
+
 /turf/Entered(var/atom/movable/A, var/atom/old_loc)
 
 	..()

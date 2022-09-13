@@ -40,15 +40,15 @@ var/atom/movable/flood/flood_object = new
 		alpha = Clamp(CEILING(255*(local_fluids.total_volume/FLUID_DEEP)) * main_reagent.opacity, main_reagent.min_fluid_opacity, main_reagent.max_fluid_opacity)
 
 	if(local_fluids.total_volume <= FLUID_PUDDLE)
-		APPLY_FLUID_OVERLAY("puddle")
+		add_overlay("puddle")
 	else if(local_fluids.total_volume <= FLUID_SHALLOW)
-		APPLY_FLUID_OVERLAY("shallow_still")
+		add_overlay("shallow_still")
 	else if(local_fluids.total_volume < FLUID_DEEP)
-		APPLY_FLUID_OVERLAY("mid_still")
+		add_overlay("mid_still")
 	else if(local_fluids.total_volume < (FLUID_DEEP*2))
-		APPLY_FLUID_OVERLAY("deep_still")
+		add_overlay("deep_still")
 	else
-		APPLY_FLUID_OVERLAY("ocean")
+		add_overlay("ocean")
 
 	if(update_lighting)
 		update_lighting = FALSE

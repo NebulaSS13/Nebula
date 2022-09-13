@@ -10,27 +10,17 @@
 // Expects /turf for T.
 #define ADD_ACTIVE_FLUID_SOURCE(T)    SSflooding.water_sources[T] = TRUE;
 #define REMOVE_ACTIVE_FLUID_SOURCE(T) SSflooding.water_sources -= T;
-
-// Expects turf for T.
 #define ADD_ACTIVE_FLUID(T)           SSfluids.active_fluids[T] = TRUE;
 #define REMOVE_ACTIVE_FLUID(T)        SSfluids.active_fluids -= T;
-
-// Expects turf for T,
-#define UPDATE_FLUID_BLOCKED_DIRS(T) \
-	if(isnull(T.fluid_blocked_dirs)) {\
-		T.fluid_blocked_dirs = 0; \
-		for(var/obj/structure/window/W in T) { \
-			if(W.density) T.fluid_blocked_dirs |= W.dir; \
-		} \
-		for(var/obj/machinery/door/window/D in T) {\
-			if(D.density) T.fluid_blocked_dirs |= D.dir; \
-		} \
+#define UPDATE_FLUID_BLOCKED_DIRS(T)                                      \
+	if(isnull(T.fluid_blocked_dirs)) {                                    \
+		T.fluid_blocked_dirs = 0;                                         \
+		for(var/atom/movable/AM as anything in T) {                       \
+			if(AM.density && (AM.atom_flags & ATOM_FLAG_CHECKS_BORDER)) { \
+				T.fluid_blocked_dirs |= AM.dir;                           \
+			}                                                             \
+		}                                                                 \
 	}
-
-// We share overlays for all fluid turfs to sync icon animation.
-#define APPLY_FLUID_OVERLAY(img_state) \
-	if(!SSfluids.fluid_images[img_state]) SSfluids.fluid_images[img_state] = image('icons/effects/liquids.dmi',img_state); \
-	add_overlay(SSfluids.fluid_images[img_state]);
 
 #define FLUID_MAX_ALPHA 200
 #define FLUID_MIN_ALPHA 45

@@ -8,7 +8,7 @@ if(R.total_volume) {                      \
 #define TRANSFER_REAGENTS_FAST_UNSASFE(R, T, A)                                             \
 var/_PART = min(R.total_volume, min(FLUID_MAX_DEPTH - T.total_volume, A)) / R.total_volume; \
 for(var/_RTYPE in R.reagent_volumes) {                                                      \
-	var/_AMT = REAGENT_VOLUME(R, _RTYPE) * _PART;                                           \
+	var/_AMT = round(REAGENT_VOLUME(R, _RTYPE) * _PART, MINIMUM_CHEMICAL_VOLUME);           \
 	T.add_reagent(_RTYPE, _AMT, REAGENT_DATA(R, _AMT), defer_update = TRUE);                \
 	R.remove_reagent(_RTYPE, _AMT, defer_update = TRUE)                                     \
 }                                                                                           \
@@ -86,11 +86,6 @@ SUBSYSTEM_DEF(fluids)
 			continue
 
 		UPDATE_FLUID_BLOCKED_DIRS(current_turf)
-
-		// How is this happening
-		if(isNaN(reagent_holder.total_volume))
-			CLEAR_REAGENTS_FAST_UNSAFE(reagent_holder)
-			continue
 
 		// Evaporation: todo, move liquid into current_turf.zone air contents if applicable.
 		if(reagent_holder.total_volume <= FLUID_MINIMUM_TRANSFER && prob(15))

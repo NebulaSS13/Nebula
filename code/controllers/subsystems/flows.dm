@@ -29,10 +29,10 @@ SUBSYSTEM_DEF(flows)
 		processing_flows.len--
 		if(!istype(current_turf))
 			continue
-		reagent_holder = current_turf.reagents || current_turf.create_reagents(FLUID_MAX_DEPTH)
+		reagent_holder = current_turf.return_fluids(create_if_missing = TRUE)
 		var/pushed_something = FALSE
 		if(reagent_holder.total_volume > FLUID_SHALLOW && current_turf.last_flow_strength >= 10)
-			for(var/atom/movable/AM AS_ANYTHING in current_turf.get_contained_external_atoms())
+			for(var/atom/movable/AM as anything in current_turf.get_contained_external_atoms())
 				if(AM.is_fluid_pushable(current_turf.last_flow_strength))
 					AM.pushed(current_turf.last_flow_dir)
 					pushed_something = TRUE
