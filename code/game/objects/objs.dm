@@ -192,22 +192,22 @@
 
 /obj/set_dir(ndir)
 	. = ..()
-	if(directional_offset)
+	if(directional_offset && anchored)
 		update_directional_offset()
 
 /obj/Move()
 	. = ..()
-	if(directional_offset)
+	if(directional_offset && anchored)
 		update_directional_offset()
 
 /obj/forceMove(atom/dest)
 	. = ..()
-	if(directional_offset)
+	if(directional_offset && anchored)
 		update_directional_offset()
 
 /** Applies the offset stored in the directional_offset json list depending on the current direction.  */
 /obj/proc/update_directional_offset()
-	if(!length(directional_offset))
+	if(!length(directional_offset) || !anchored)
 		return
 
 	//If this flag is on, and we have an offset, we're most likely wall mounted
