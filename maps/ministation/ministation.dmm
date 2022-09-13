@@ -648,7 +648,7 @@
 	pixel_x = -23
 	},
 /obj/machinery/keycard_auth{
-	pixel_y = -24
+	dir = 1
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 5
@@ -694,7 +694,7 @@
 /area/ministation/bridge)
 "bQ" = (
 /obj/machinery/keycard_auth{
-	pixel_y = -24
+	dir = 1
 	},
 /obj/machinery/light{
 	dir = 4;
