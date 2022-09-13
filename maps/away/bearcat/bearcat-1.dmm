@@ -37,6 +37,17 @@
 /obj/machinery/shield_diffuser,
 /turf/simulated/floor/usedup,
 /area/ship/scrap/cargo/lower)
+"af" = (
+/obj/machinery/cryopod/robot{
+	dir = 4
+	},
+/obj/effect/floor_decal/industrial/outline/yellow,
+/obj/machinery/computer/cryopod/robot{
+	dir = 8;
+	pixel_x = 0
+	},
+/turf/simulated/floor/tiled/usedup,
+/area/ship/scrap/broken1)
 "ag" = (
 /obj/effect/floor_decal/industrial/warning{
 	dir = 1
@@ -1717,16 +1728,6 @@
 /area/ship/scrap/broken1)
 "dI" = (
 /obj/item/stool/padded,
-/turf/simulated/floor/tiled/usedup,
-/area/ship/scrap/broken1)
-"dJ" = (
-/obj/machinery/cryopod/robot{
-	dir = 4
-	},
-/obj/effect/floor_decal/industrial/outline/yellow,
-/obj/machinery/computer/cryopod/robot{
-	pixel_x = 32
-	},
 /turf/simulated/floor/tiled/usedup,
 /area/ship/scrap/broken1)
 "dK" = (
@@ -8827,7 +8828,7 @@ cN
 cX
 dm
 dz
-dJ
+af
 cN
 ec
 eo

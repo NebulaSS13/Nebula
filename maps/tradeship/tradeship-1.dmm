@@ -209,7 +209,7 @@
 	dir = 1
 	},
 /obj/machinery/computer/cryopod{
-	pixel_y = -32
+	dir = 1
 	},
 /obj/abstract/landmark/latejoin/cryo,
 /obj/structure/cable{
@@ -287,7 +287,7 @@
 	dir = 1
 	},
 /obj/machinery/computer/cryopod{
-	pixel_y = -32
+	dir = 1
 	},
 /obj/structure/cable{
 	icon_state = "4-8"
@@ -1828,7 +1828,7 @@
 /area/ship/trade/maintenance/techstorage)
 "eW" = (
 /obj/machinery/computer/cryopod{
-	pixel_x = 32
+	dir = 8
 	},
 /obj/machinery/light{
 	dir = 4

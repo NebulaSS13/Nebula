@@ -6972,7 +6972,7 @@
 /obj/machinery/cryopod/lifepod,
 /obj/machinery/door/window/southright,
 /obj/machinery/computer/cryopod{
-	pixel_x = 32
+	dir = 8
 	},
 /turf/simulated/floor/wood,
 /area/ship/trade/command/captain)

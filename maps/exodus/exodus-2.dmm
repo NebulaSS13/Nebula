@@ -9551,7 +9551,7 @@
 /area/exodus/hallway/secondary/entry/pods)
 "atR" = (
 /obj/machinery/computer/cryopod{
-	pixel_y = 32
+	dir = 2
 	},
 /obj/machinery/camera/network/civilian_east{
 	c_tag = "Dormitory Cryo Storage"
@@ -9995,7 +9995,7 @@
 "auU" = (
 /obj/machinery/atmospherics/unary/vent_scrubber/on,
 /obj/machinery/computer/cryopod{
-	pixel_y = 32
+	dir = 2
 	},
 /obj/machinery/light_switch{
 	pixel_x = -25;
@@ -15514,7 +15514,7 @@
 	dir = 5
 	},
 /obj/machinery/computer/cryopod{
-	pixel_y = 32
+	dir = 2
 	},
 /turf/simulated/floor/tiled/dark/monotile,
 /area/shuttle/arrival/station)
@@ -33397,7 +33397,7 @@
 	},
 /obj/abstract/landmark/latejoin/cyborg,
 /obj/machinery/computer/cryopod/robot{
-	pixel_x = -30
+	dir = 1
 	},
 /turf/simulated/floor/tiled/dark,
 /area/exodus/research/chargebay)
@@ -61252,7 +61252,7 @@
 /area/exodus/engineering/drone_fabrication)
 "cDi" = (
 /obj/machinery/computer/cryopod/robot{
-	pixel_y = 30
+	dir = 2
 	},
 /obj/effect/floor_decal/industrial/warning{
 	dir = 1
