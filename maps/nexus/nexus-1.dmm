@@ -5514,7 +5514,7 @@
 	icon_state = "4-8"
 	},
 /obj/item/modular_computer/telescreen/preset/engineering/mapped{
-	dir = 8
+	dir = 2
 	},
 /turf/simulated/floor/tiled,
 /area/nexus/engineering)
