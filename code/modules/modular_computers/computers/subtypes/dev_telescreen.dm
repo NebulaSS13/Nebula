@@ -19,7 +19,11 @@
 
 /obj/item/modular_computer/telescreen/mapped
 	anchored  = TRUE
-	obj_flags = OBJ_FLAG_MOVES_UNSUPPORTED
+
+/obj/item/modular_computer/telescreen/Initialize()
+	. = ..()
+	//Update anchored state
+	set_anchored(anchored)
 
 /obj/item/modular_computer/telescreen/enable_computer(mob/user)
 	if(!anchored)
