@@ -3599,7 +3599,7 @@
 "ahO" = (
 /obj/structure/table/woodentable,
 /obj/machinery/keycard_auth{
-	pixel_x = 30
+	dir = 8
 	},
 /obj/machinery/photocopier/faxmachine{
 	department = "Head of Security"
@@ -32547,7 +32547,7 @@
 /area/exodus/crew_quarters/captain)
 "bqA" = (
 /obj/machinery/keycard_auth{
-	pixel_y = -24
+	dir = 1
 	},
 /turf/simulated/floor/wood/walnut,
 /area/exodus/crew_quarters/captain)
@@ -38684,7 +38684,7 @@
 /area/exodus/crew_quarters/heads/hop)
 "bCS" = (
 /obj/machinery/keycard_auth{
-	pixel_x = -24
+	dir = 4
 	},
 /obj/machinery/computer/account_database{
 	dir = 4
@@ -43329,7 +43329,7 @@
 	dir = 4
 	},
 /obj/machinery/keycard_auth{
-	pixel_y = 22
+	dir = 2
 	},
 /obj/machinery/computer/modular/preset/civilian,
 /turf/simulated/floor/tiled/white,
@@ -51008,7 +51008,7 @@
 /area/exodus/crew_quarters/heads/chief)
 "cbz" = (
 /obj/machinery/keycard_auth{
-	pixel_x = -24
+	dir = 4
 	},
 /obj/machinery/button/blast_door{
 	desc = "A remote control-switch for engine core.";

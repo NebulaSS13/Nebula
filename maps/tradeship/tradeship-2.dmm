@@ -4813,7 +4813,7 @@
 	dir = 5
 	},
 /obj/machinery/keycard_auth{
-	pixel_y = 21
+	dir = 2
 	},
 /turf/simulated/floor/tiled/dark,
 /area/ship/trade/command/bridge)
@@ -5015,7 +5015,7 @@
 /obj/item/boombox,
 /obj/item/stack/tape_roll/barricade_tape/bureaucracy,
 /obj/machinery/keycard_auth{
-	pixel_y = 21
+	dir = 2
 	},
 /turf/simulated/floor/wood,
 /area/ship/trade/command/captain)
@@ -5986,7 +5986,7 @@
 /area/ship/trade/dock)
 "JA" = (
 /obj/machinery/keycard_auth{
-	pixel_y = 21
+	dir = 2
 	},
 /turf/simulated/floor/carpet,
 /area/ship/trade/command/fmate)
@@ -6508,7 +6508,7 @@
 	dir = 4
 	},
 /obj/machinery/keycard_auth{
-	pixel_y = 21
+	dir = 2
 	},
 /turf/simulated/floor/tiled/dark,
 /area/ship/trade/command/bridge)
