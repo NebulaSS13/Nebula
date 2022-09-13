@@ -2194,6 +2194,7 @@
 	pixel_x = 28
 	},
 /obj/machinery/computer/cryopod/robot{
+	dir = 4;
 	pixel_x = 32;
 	pixel_y = -32
 	},
