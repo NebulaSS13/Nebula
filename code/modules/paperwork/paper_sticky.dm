@@ -6,7 +6,7 @@
 	icon_state = "pad_full"
 	item_state = "paper"
 	w_class = ITEM_SIZE_SMALL
-	material = /decl/material/solid/wood
+	material = /decl/material/solid/paper
 
 	var/papers = 50
 	var/written_text

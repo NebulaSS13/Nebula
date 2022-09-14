@@ -21,10 +21,9 @@
 	slot_flags = SLOT_HEAD
 	body_parts_covered = SLOT_HEAD
 	attack_verb = list("bapped")
-	material = /decl/material/solid/wood
-
 	drop_sound = 'sound/foley/paperpickup1.ogg'
 	pickup_sound = 'sound/foley/paperpickup2.ogg'
+	material = /decl/material/solid/paper
 
 	var/info		// What's actually written on the paper.
 	var/info_links	// A different version of the paper which includes html links at fields and EOF
