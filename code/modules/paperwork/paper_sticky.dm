@@ -15,7 +15,7 @@
 
 /obj/item/sticky_pad/proc/update_matter()
 	matter = list(
-		/decl/material/solid/wood = round((papers * SHEET_MATERIAL_AMOUNT) * 0.2)
+		/decl/material/solid/paper = round((papers * SHEET_MATERIAL_AMOUNT) * 0.2)
 	)
 
 /obj/item/sticky_pad/create_matter()
