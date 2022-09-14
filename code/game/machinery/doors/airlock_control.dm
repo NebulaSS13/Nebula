@@ -93,26 +93,29 @@
 /obj/machinery/airlock_sensor
 	name = "airlock sensor"
 	icon = 'icons/obj/airlock_machines.dmi'
-	icon_state = "airlock_sensor_off"
+	icon_state = "sensor"
 	layer = ABOVE_WINDOW_LAYER
 	anchored = TRUE
 	obj_flags = OBJ_FLAG_MOVES_UNSUPPORTED
 	power_channel = ENVIRON
 	public_variables = list(
 		/decl/public_access/public_variable/airlock_pressure,
-		/decl/public_access/public_variable/input_toggle
+		/decl/public_access/public_variable/input_toggle,
+		/decl/public_access/public_variable/set_airlock_cycling/airlock_sensor
 	)
 	public_methods = list(/decl/public_access/public_method/toggle_input_toggle)
-	stock_part_presets = list(/decl/stock_part_preset/radio/basic_transmitter/airlock_sensor = 1)
+	stock_part_presets = list(/decl/stock_part_preset/radio/basic_transmitter/airlock_sensor = 1, /decl/stock_part_preset/radio/receiver/airlock_sensor = 1)
 	uncreated_component_parts = list(
-		/obj/item/stock_parts/power/apc = 1,
-		/obj/item/stock_parts/radio/transmitter/basic/buildable = 1
+		/obj/item/stock_parts/power/apc,
+		/obj/item/stock_parts/radio/transmitter/basic/buildable,
+		/obj/item/stock_parts/radio/receiver/buildable,
 	)
 	base_type = /obj/machinery/airlock_sensor/buildable
 	construct_state = /decl/machine_construction/wall_frame/panel_closed/simple
 	frame_type = /obj/item/frame/button/airlock_sensor
 	directional_offset = "{'NORTH':{'y':-32}, 'SOUTH':{'y':32}, 'EAST':{'x':32}, 'WEST':{'x':-32}}"
-	var/alert = 0
+	var/alert = FALSE
+	var/master_cycling = FALSE
 	var/pressure
 
 /obj/machinery/airlock_sensor/buildable
@@ -120,14 +123,25 @@
 		/obj/item/stock_parts/power/apc = 1
 	)
 
+/obj/machinery/airlock_sensor/Initialize(mapload, d, populate_parts)
+	. = ..()
+	update_icon()
+
 /obj/machinery/airlock_sensor/on_update_icon()
-	if(!(stat & (NOPOWER | BROKEN)))
-		if(alert)
-			icon_state = "airlock_sensor_alert"
-		else
-			icon_state = "airlock_sensor_standby"
+	cut_overlays()
+	if(inoperable() || !use_power)
+		set_light(0)
+		return
+	if(alert)
+		add_overlay("sensor_light_alert")
+		set_light(l_range = 1, l_power = 0.2, l_color = "#ff0000")
+	else if(master_cycling)
+		add_overlay("sensor_light_cycle")
+		set_light(l_range = 1, l_power = 0.2, l_color = "#ff0000")
 	else
-		icon_state = "airlock_sensor_off"
+		add_overlay("sensor_light_standby")
+		set_light(l_range = 1, l_power = 0.2, l_color = "#99ff33")
+
 
 /obj/machinery/airlock_sensor/Process()
 	if(!(stat & (NOPOWER | BROKEN)))
@@ -142,6 +156,11 @@
 			if(new_alert != alert)
 				alert = new_alert
 				update_icon()
+
+/**Meant to update the icon when the master airlock controller is cycling */
+/obj/machinery/airlock_sensor/proc/set_master_cycling(var/state)
+	master_cycling = state
+	update_icon()
 
 /decl/public_access/public_variable/airlock_pressure
 	expected_type = /obj/machinery/airlock_sensor
@@ -165,6 +184,26 @@
 		"pressure" = /decl/public_access/public_variable/airlock_pressure
 	)
 
+/decl/public_access/public_variable/set_airlock_cycling/airlock_sensor
+	expected_type = /obj/machinery/airlock_sensor
+	can_write     = TRUE
+	var_type      = IC_FORMAT_BOOLEAN
+
+/decl/public_access/public_variable/set_airlock_cycling/airlock_sensor/access_var(obj/machinery/airlock_sensor/owner)
+	return owner.master_cycling
+
+/decl/public_access/public_variable/set_airlock_cycling/airlock_sensor/write_var(obj/machinery/airlock_sensor/owner, new_value)
+	if(!..())
+		return
+	owner.master_cycling = new_value
+	owner.update_icon()
+
+/decl/stock_part_preset/radio/receiver/airlock_sensor
+	frequency = EXTERNAL_AIR_FREQ
+	receive_and_write = list(
+		"set_airlock_cycling" = /decl/public_access/public_variable/set_airlock_cycling/airlock_sensor,
+	)
+
 /decl/stock_part_preset/radio/basic_transmitter/airlock_sensor/shuttle
 	frequency = SHUTTLE_AIR_FREQ
 
@@ -173,26 +212,30 @@
 
 /obj/machinery/button/access
 	icon = 'icons/obj/airlock_machines.dmi'
-	icon_state = "access_button_standby"
+	icon_state = "button"
 	name = "access button"
 	interact_offline = TRUE
 	public_variables = list(
 		/decl/public_access/public_variable/button_active,
 		/decl/public_access/public_variable/button_state,
 		/decl/public_access/public_variable/input_toggle,
-		/decl/public_access/public_variable/button_command
+		/decl/public_access/public_variable/button_command,
+		/decl/public_access/public_variable/set_airlock_cycling/access_button
 	)
 	stock_part_presets = list(
-		/decl/stock_part_preset/radio/event_transmitter/access_button = 1
+		/decl/stock_part_preset/radio/event_transmitter/access_button = 1,
+		/decl/stock_part_preset/radio/receiver/access_button = 1,
 	)
 	uncreated_component_parts = list(
 		/obj/item/stock_parts/power/apc,
-		/obj/item/stock_parts/radio/transmitter/on_event/buildable
+		/obj/item/stock_parts/radio/transmitter/on_event/buildable,
+		/obj/item/stock_parts/radio/receiver/buildable,
 	)
 	directional_offset = "{'NORTH':{'y':-32}, 'SOUTH':{'y':32}, 'EAST':{'x':32}, 'WEST':{'x':-32}}"
 	frame_type = /obj/item/frame/button/access
 	base_type = /obj/machinery/button/access/buildable
 	var/command = "cycle"
+	var/tmp/master_cycling = FALSE ///Whether the master airlock controller is actually cycling so we can update our icon
 
 /obj/machinery/button/access/buildable
 	uncreated_component_parts = list(
@@ -200,12 +243,39 @@
 	)
 
 /obj/machinery/button/access/on_update_icon()
-	if(stat & (NOPOWER | BROKEN))
-		icon_state = "access_button_off"
-	else if(operating)
-		icon_state = "access_button_cycle"
+	cut_overlays()
+	if(inoperable() || !use_power)
+		set_light(0)
+		return
+	if(operating)
+		add_overlay("button_light_pressed")
+		set_light(l_range = 2, l_power = 0.4, l_color = "#f65555")
+	else if(master_cycling)
+		add_overlay("button_light_cycle")
+		set_light(l_range = 2, l_power = 0.4, l_color = "#f65555")
 	else
-		icon_state = "access_button_standby"
+		add_overlay("button_light_standby")
+		set_light(l_range = 2, l_power = 0.4, l_color = "#99ff33")
+
+/decl/public_access/public_variable/set_airlock_cycling/access_button
+	expected_type = /obj/machinery/button/access
+	can_write     = TRUE
+	var_type      = IC_FORMAT_BOOLEAN
+
+/decl/public_access/public_variable/set_airlock_cycling/access_button/access_var(obj/machinery/button/access/owner)
+	return owner.master_cycling
+
+/decl/public_access/public_variable/set_airlock_cycling/access_button/write_var(obj/machinery/button/access/owner, new_value)
+	if(!..())
+		return
+	owner.master_cycling = new_value
+	owner.update_icon()
+
+/decl/stock_part_preset/radio/receiver/access_button
+	frequency = EXTERNAL_AIR_FREQ
+	receive_and_write = list(
+		"set_airlock_cycling" = /decl/public_access/public_variable/set_airlock_cycling/access_button,
+	)
 
 /obj/machinery/button/access/interior
 	command = "cycle_interior"

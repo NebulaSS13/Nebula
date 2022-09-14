@@ -1,4 +1,10 @@
 <div class="item" style="padding-top: 10px">
+	<div>
+		<div class="item">
+			{{:helper.link('Purge', 'refresh', {'command' : 'purge'}, data.processing ? 'disabled' : null, data.purge ? 'linkOn' : null)}} {{:helper.link('Secure', data.secure ? 'locked' : 'unlocked', {'command' : 'secure'}, data.processing ? 'disabled' : null, data.secure ? 'linkOn' : null)}}
+		</div>
+	</div>
+	<h3>Sensors</h3>
 	<div class="item">
 		<div class="itemLabel">
 			External Pressure:
@@ -33,28 +39,17 @@
 		</div>
 	</div>
 </div>
-<div class="item" style="padding-top: 10px">
-	<div class="item" style="width: auto; float: left">
-		<div class="itemContent">
+<div class="item" style="padding-top: 5px">
+	<div class="item">
+		{{if data.processing}}
+			{{:helper.link('Abort', 'cancel', {'command' : 'abort'}, data.processing ? null : 'disabled', data.processing ? 'redButton' : null)}}
+		{{else}}
 			{{:helper.link('Cycle to Exterior', 'arrowthickstop-1-w', {'command' : 'cycle_ext'}, data.processing ? 'disabled' : null)}}
 			{{:helper.link('Cycle to Interior', 'arrowthickstop-1-e', {'command' : 'cycle_int'}, data.processing ? 'disabled' : null)}}
-		</div>
-		<div class="itemContent" style="padding-top: 2px">
-			{{:helper.link('Force exterior door', 'alert', {'command' : 'force_ext'}, null, data.processing ? 'yellowButton' : null)}}
-			{{:helper.link('Force interior door', 'alert', {'command' : 'force_int'}, null, data.processing ? 'yellowButton' : null)}}
-		</div>
+		{{/if}}
 	</div>
-	<div style="padding-left: 10px; width: 80px; float: left">
-		<div class="item">
-			<div class="itemContent" style="padding-bottom: 2px; width: auto">
-				{{:helper.link('Purge', 'refresh', {'command' : 'purge'}, data.processing ? 'disabled' : null, data.purge ? 'linkOn' : null)}}
-			</div>
-			<div class="itemContent" style="width: auto">
-				{{:helper.link('Secure', data.secure ? 'locked' : 'unlocked', {'command' : 'secure'}, data.processing ? 'disabled' : null, data.secure ? 'linkOn' : null)}}
-			</div>
-		</div>
-	</div>
-	<div class="item" style="padding-top: 10px">
-			{{:helper.link('Abort', 'cancel', {'command' : 'abort'}, data.processing ? null : 'disabled', data.processing ? 'redButton' : null)}}
+	<div class="item">
+		{{:helper.link('Force exterior door', 'alert', {'command' : 'force_ext'}, null, data.processing ? 'yellowButton' : 'redButton')}}
+		{{:helper.link('Force interior door', 'alert', {'command' : 'force_int'}, null, data.processing ? 'yellowButton' : 'redButton')}}
 	</div>
 </div>

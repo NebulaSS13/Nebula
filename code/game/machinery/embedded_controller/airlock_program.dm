@@ -294,12 +294,14 @@
 	memory["purge"] = cycle_to_external_air
 	playsound(master, 'sound/machines/warning-buzzer.ogg', 50)
 	shutAlarm()
+	signalCycling(TRUE)
 
 /datum/computer/file/embedded_program/airlock/proc/begin_dock_cycle()
 	state = STATE_IDLE
 	target_state = TARGET_INOPEN
 	playsound(master, 'sound/machines/warning-buzzer.ogg', 50)
 	shutAlarm()
+	signalCycling(TRUE)
 
 /datum/computer/file/embedded_program/airlock/proc/begin_cycle_out()
 	state = STATE_IDLE
@@ -307,6 +309,7 @@
 	memory["purge"] = cycle_to_external_air
 	playsound(master, 'sound/machines/warning-buzzer.ogg', 50)
 	shutAlarm()
+	signalCycling(TRUE)
 
 /datum/computer/file/embedded_program/airlock/proc/close_doors()
 	toggleDoor(memory["interior_status"], tag_interior_door, 1, "close")
@@ -315,6 +318,7 @@
 /datum/computer/file/embedded_program/airlock/proc/stop_cycling()
 	state = STATE_IDLE
 	target_state = TARGET_NONE
+	signalCycling(FALSE)
 
 /datum/computer/file/embedded_program/airlock/proc/done_cycling()
 	return (state == STATE_IDLE && target_state == TARGET_NONE)
@@ -367,6 +371,12 @@
 		if(TARGET_INOPEN)
 			toggleDoor(memory["exterior_status"], tag_exterior_door, memory["secure"], "close")
 			toggleDoor(memory["interior_status"], tag_interior_door, memory["secure"], "open")
+
+/datum/computer/file/embedded_program/proc/signalCycling(var/cycling = TRUE)
+	var/datum/signal/signal = new
+	signal.data["tag"] = tag
+	signal.data["set_airlock_cycling"] = cycling
+	post_signal(signal, tag)
 
 /*----------------------------------------------------------
 toggleDoor()
