@@ -69,7 +69,7 @@
 	return 1
 
 /datum/unit_test/air_alarm_connectivity/subsystems_to_await()
-	return list(SStimer)
+	return list(SStimer, SSalarm, SSmachines)
 
 /datum/unit_test/air_alarm_connectivity/check_result()
 	var/failed = FALSE
