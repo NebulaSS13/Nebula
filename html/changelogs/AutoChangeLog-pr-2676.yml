@@ -1,0 +1,4 @@
+author: PsyCommando
+delete-after: true
+changes:
+  - tweak: Keycard authentication device should be offset properly.
