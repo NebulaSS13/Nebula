@@ -5,7 +5,7 @@ var/global/list/all_conveyor_switches = list()
 //note that corner pieces transfer stuff clockwise when running forward, and anti-clockwise backwards.
 
 /obj/machinery/conveyor
-	icon = 'icons/obj/recycling.dmi'
+	icon = 'icons/obj/machines/conveyor_mapped.dmi'
 	icon_state = "conveyor0"
 	name = "conveyor belt"
 	desc = "A conveyor belt."
@@ -24,6 +24,7 @@ var/global/list/all_conveyor_switches = list()
 	// create a conveyor
 /obj/machinery/conveyor/Initialize(mapload, newdir, on = 0)
 	. = ..(mapload)
+	icon = 'icons/obj/recycling.dmi'
 	global.all_conveyors += src
 	if(newdir)
 		set_dir(newdir)
