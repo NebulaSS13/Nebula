@@ -1,0 +1,4 @@
+author: PsyCommando
+delete-after: true
+changes:
+  - tweak: Laptops, tablets, and telescreen are now only buildable at the protolathe.
