@@ -72,7 +72,7 @@
 	air_contents.volume = ATMOS_DEFAULT_VOLUME_FILTER
 
 /obj/machinery/atmospherics/unary/vent_scrubber/reset_area(area/old_area, area/new_area)
-	if(controlled)
+	if(!controlled)
 		return
 	if(old_area == new_area)
 		return
@@ -101,7 +101,7 @@
 	build_device_underlays()
 
 /obj/machinery/atmospherics/unary/vent_scrubber/proc/change_area_name(var/area/A, var/old_area_name, var/new_area_name)
-	if(controlled)
+	if(!controlled)
 		return
 	if(get_area(src) != A)
 		return
