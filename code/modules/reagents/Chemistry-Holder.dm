@@ -154,16 +154,7 @@ var/global/obj/temp_reagents_holder = new
 
 	return reaction_occured
 
-/* Holder-to-chemical */
-/datum/reagents/proc/handle_update(var/safety)
-	update_total()
-	if(!safety)
-		HANDLE_REACTIONS(src)
-		if(my_atom && !updating_holder_reagent_state)
-			updating_holder_reagent_state = TRUE
-			my_atom.on_reagent_change()
-
-/datum/reagents/proc/add_reagent(var/reagent_type, var/amount, var/data = null, var/safety = 0, var/defer_update = FALSE)
+/datum/reagents/proc/add_reagent(var/reagent_type, var/amount, var/data = null, var/defer_update = FALSE)
 
 	amount = round(min(amount, REAGENTS_FREE_SPACE(src)), MINIMUM_CHEMICAL_VOLUME)
 	if(amount <= 0)
@@ -187,10 +178,17 @@ var/global/obj/temp_reagents_holder = new
 	if(defer_update)
 		total_volume = Clamp(total_volume + amount, 0, maximum_volume) // approximation, call update_total() if deferring
 	else
-		handle_update(safety)
+		update_total()
+		HANDLE_REACTIONS(src)
 	return TRUE
 
-/datum/reagents/proc/remove_reagent(var/reagent_type, var/amount, var/safety = 0, var/defer_update = FALSE)
+/datum/reagents/proc/handle_reagent_update()
+	update_total()
+	HANDLE_REACTIONS(src)
+	if(my_atom)
+		my_atom.handle_reagent_change()
+
+/datum/reagents/proc/remove_reagent(var/reagent_type, var/amount, var/defer_update = FALSE)
 	amount = round(amount, MINIMUM_CHEMICAL_VOLUME)
 	if(!isnum(amount) || amount <= 0 || REAGENT_VOLUME(src, reagent_type) <= 0)
 		return FALSE
@@ -200,7 +198,7 @@ var/global/obj/temp_reagents_holder = new
 	if(defer_update)
 		total_volume = Clamp(total_volume - amount, 0, maximum_volume) // approximation, call update_total() if deferring
 	else
-		handle_update(safety)
+		handle_reagent_update()
 	return TRUE
 
 /datum/reagents/proc/clear_reagent(var/reagent_type, var/defer_update = FALSE, var/force = FALSE)
@@ -216,7 +214,7 @@ var/global/obj/temp_reagents_holder = new
 		if(defer_update)
 			total_volume = Clamp(total_volume - amount, 0, maximum_volume) // approximation, call update_total() if deferring
 		else
-			handle_update()
+			handle_reagent_update()
 
 /datum/reagents/proc/has_reagent(var/reagent_type, var/amount)
 	. = REAGENT_VOLUME(src, reagent_type)
@@ -244,9 +242,8 @@ var/global/obj/temp_reagents_holder = new
 	for(var/reagent in reagent_volumes)
 		clear_reagent(reagent, TRUE)
 	total_volume = 0
-	if(!defer_update && my_atom && !updating_holder_reagent_state)
-		updating_holder_reagent_state = TRUE
-		my_atom.on_reagent_change()
+	if(!defer_update)
+		handle_reagent_update()
 
 /datum/reagents/proc/get_overdose(var/decl/material/current)
 	if(current)
@@ -282,17 +279,17 @@ var/global/obj/temp_reagents_holder = new
 	for(var/current in reagent_volumes)
 		var/remove_amt = round(REAGENT_VOLUME(src, current) * part, MINIMUM_CHEMICAL_VOLUME)
 		if(remove_amt > 0)
-			remove_reagent(current, remove_amt, TRUE, TRUE)
+			remove_reagent(current, remove_amt, defer_update = TRUE)
 			. += remove_amt
 	if(defer_update)
 		total_volume -= .
 	else
-		handle_update()
+		handle_reagent_update()
 
 // Transfers [amount] reagents from [src] to [target], multiplying them by [multiplier].
 // Returns actual amount removed from [src] (not amount transferred to [target]).
-// Use safety = 1 for temporary targets to avoid queuing them up for processing.
-/datum/reagents/proc/trans_to_holder(var/datum/reagents/target, var/amount = 1, var/multiplier = 1, var/copy = 0, var/safety = 0, var/defer_update = FALSE)
+// Use defer_update = TRUE for temporary targets to avoid queuing them up for processing.
+/datum/reagents/proc/trans_to_holder(var/datum/reagents/target, var/amount = 1, var/multiplier = 1, var/copy = 0, var/defer_update = FALSE)
 
 	if(!target || !istype(target))
 		return
@@ -305,16 +302,14 @@ var/global/obj/temp_reagents_holder = new
 	. = 0
 	for(var/rtype in reagent_volumes)
 		var/amount_to_transfer = round(REAGENT_VOLUME(src, rtype) * part, MINIMUM_CHEMICAL_VOLUME)
-		target.add_reagent(rtype, amount_to_transfer * multiplier, REAGENT_DATA(src, rtype), TRUE, TRUE) // We don't react until everything is in place
+		target.add_reagent(rtype, amount_to_transfer * multiplier, REAGENT_DATA(src, rtype), defer_update = TRUE) // We don't react until everything is in place
 		. += amount_to_transfer
 		if(!copy)
-			remove_reagent(rtype, amount_to_transfer, TRUE, TRUE)
+			remove_reagent(rtype, amount_to_transfer, TRUE)
 
 	if(!defer_update)
-		target.handle_update(safety)
-		handle_update(safety)
-		if(!copy)
-			HANDLE_REACTIONS(src)
+		target.handle_reagent_update()
+		handle_reagent_update()
 
 /* Holder-to-atom and similar procs */
 

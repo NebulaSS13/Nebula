@@ -61,12 +61,12 @@
 	var/reaction_flags = get_reaction_flags(holder)
 
 	for(var/reactant in required_reagents)
-		holder.remove_reagent(reactant, reaction_volume * required_reagents[reactant], safety = 1)
-
+		holder.remove_reagent(reactant, reaction_volume * required_reagents[reactant], defer_update = TRUE)
 	//add the product
 	var/amt_produced = result_amount * reaction_volume
 	if(result)
-		holder.add_reagent(result, amt_produced, data, safety = 1)
+		holder.add_reagent(result, amt_produced, data, defer_update = TRUE)
+	holder.update_total()
 
 	on_reaction(holder, amt_produced, reaction_flags)
 

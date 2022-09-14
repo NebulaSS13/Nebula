@@ -57,12 +57,21 @@
 /atom/proc/additional_see_invisible()
 	return 0
 
-/atom/proc/on_reagent_change()
+/atom/proc/handle_reagent_change()
 	set waitfor = FALSE
 	SHOULD_CALL_PARENT(TRUE)
+	if(!reagents || reagents.updating_holder_reagent_state)
+		return
+	reagents.updating_holder_reagent_state = TRUE
 	sleep(0)
 	if(reagents)
+		reagents.update_total()
+		HANDLE_REACTIONS(reagents)
 		reagents.updating_holder_reagent_state = FALSE
+	on_reagent_change()
+
+/atom/proc/on_reagent_change()
+	return
 
 /atom/proc/Bumped(var/atom/movable/AM)
 	return

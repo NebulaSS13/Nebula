@@ -46,10 +46,7 @@
 			else
 				to_chat(user, "<span class='notice'>You remove the label.</span>")
 				label_text = null
-				on_reagent_change()
-		return
-
-
+				update_condiment_appearance()
 
 /obj/item/chems/condiment/attack_self(var/mob/user)
 	return
@@ -92,9 +89,8 @@
 	for(var/R in starting_reagents)
 		reagents.add_reagent(R, starting_reagents[R])
 
-/obj/item/chems/condiment/on_reagent_change()
-	..()
-	var/reagent = reagents.primary_reagent
+/obj/item/chems/condiment/proc/update_condiment_appearance()
+	var/reagent = reagents?.primary_reagent
 	if(reagent in special_bottles)
 		var/obj/item/chems/condiment/special_bottle = special_bottles[reagent]
 		name = initial(special_bottle.name)
@@ -170,10 +166,8 @@
 	amount_per_transfer_from_this = 1
 	volume = 20
 
-/obj/item/chems/condiment/small/on_reagent_change()
-	SHOULD_CALL_PARENT(FALSE)
-	if(reagents)
-		reagents.updating_holder_reagent_state = FALSE
+/obj/item/chems/condiment/small/update_condiment_appearance()
+	return
 
 /obj/item/chems/condiment/small/saltshaker
 	name = "salt shaker"
@@ -332,10 +326,8 @@
 	randpixel = 10
 	starting_reagents = list(/decl/material/liquid/nutriment/flour = 50)
 
-/obj/item/chems/condiment/flour/on_reagent_change()
-	SHOULD_CALL_PARENT(FALSE)
-	if(reagents)
-		reagents.updating_holder_reagent_state = FALSE
+/obj/item/chems/condiment/flour/update_condiment_appearance()
+	return
 
 /obj/item/chems/condiment/salt
 	name = "big bag of salt"
@@ -348,10 +340,8 @@
 	w_class = ITEM_SIZE_LARGE
 	starting_reagents = list(/decl/material/solid/sodiumchloride = 500)
 
-/obj/item/chems/condiment/salt/on_reagent_change()
-	SHOULD_CALL_PARENT(FALSE)
-	if(reagents)
-		reagents.updating_holder_reagent_state = FALSE
+/obj/item/chems/condiment/salt/update_condiment_appearance()
+	return
 
 /obj/item/chems/condiment/mint
 	name = "mint essential oil"
@@ -360,10 +350,8 @@
 	icon_state = "coldsauce"
 	starting_reagents = list(/decl/material/liquid/drink/syrup/mint = 15)
 
-/obj/item/chems/condiment/mint/on_reagent_change()
-	SHOULD_CALL_PARENT(FALSE)
-	if(reagents)
-		reagents.updating_holder_reagent_state = FALSE
+/obj/item/chems/condiment/mint/update_condiment_appearance()
+	return
 
 /obj/item/chems/condiment/soysauce
 	name = "soy sauce"

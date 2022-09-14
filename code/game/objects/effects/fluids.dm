@@ -1,7 +1,7 @@
 var/global/list/fluid_overlay_pool = list()
 
 // Permaflood overlay.
-var/atom/movable/flood/flood_object = new
+var/global/atom/movable/flood/flood_object = new
 /atom/movable/flood
 	name = ""
 	mouse_opacity = 0

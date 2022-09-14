@@ -174,13 +174,7 @@ SUBSYSTEM_DEF(fluids)
 		reagent_holder = processing_holders[processing_holders.len]
 		processing_holders.len--
 		if(!QDELETED(reagent_holder))
-			// Inlining to avoid some proc overhead.
-			reagent_holder.update_total()
-			HANDLE_REACTIONS(reagent_holder)
-			if(reagent_holder.my_atom && !reagent_holder.updating_holder_reagent_state)
-				reagent_holder.updating_holder_reagent_state = TRUE
-				reagent_holder.my_atom.on_reagent_change()
-
+			reagent_holder.handle_reagent_update()
 		if(MC_TICK_CHECK)
 			return
 
