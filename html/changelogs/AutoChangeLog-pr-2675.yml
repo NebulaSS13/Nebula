@@ -1,4 +1,0 @@
-author: PsyCommando
-delete-after: true
-changes:
-  - bugfix: Cryogenic console should now properly align to walls on most maps.
