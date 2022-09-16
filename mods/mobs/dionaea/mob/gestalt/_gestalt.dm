@@ -28,7 +28,7 @@
 	add_overlay(eyes_overlay)
 	if(nymphs && nymphs.len)
 		var/matrix/M = matrix()
-		M.Scale(Clamp(nymphs.len * 0.1, 1, 2))
+		M.Scale(clamp(nymphs.len * 0.1, 1, 2))
 		transform = M
 	else
 		transform = null

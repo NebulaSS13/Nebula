@@ -35,7 +35,7 @@
 	return (is_broken() || !has_gills)
 
 /obj/item/organ/internal/lungs/proc/adjust_oxygen_deprivation(var/amount)
-	oxygen_deprivation = Clamp(oxygen_deprivation + amount, 0, species.total_health)
+	oxygen_deprivation = clamp(oxygen_deprivation + amount, 0, species.total_health)
 
 /obj/item/organ/internal/lungs/set_species(species_name)
 	. = ..()
@@ -159,12 +159,12 @@
 				owner.emote("gasp")
 			else if(prob(20))
 				to_chat(owner, SPAN_WARNING("It's hard to breathe..."))
-		breath_fail_ratio = Clamp(0,(1 - inhale_efficiency + breath_fail_ratio)/2,1)
+		breath_fail_ratio = clamp(0,(1 - inhale_efficiency + breath_fail_ratio)/2,1)
 		failed_inhale = 1
 	else
 		if(breath_fail_ratio && prob(20))
 			to_chat(owner, SPAN_NOTICE("It gets easier to breathe."))
-		breath_fail_ratio = Clamp(0,breath_fail_ratio-0.05,1)
+		breath_fail_ratio = clamp(0,breath_fail_ratio-0.05,1)
 
 	owner.oxygen_alert = failed_inhale * 2
 

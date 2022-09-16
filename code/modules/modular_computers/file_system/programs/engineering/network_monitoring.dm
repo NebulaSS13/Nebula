@@ -104,7 +104,7 @@
 			return TOPIC_HANDLED
 		var/logcount = input(user,"Enter amount of logs to keep on the disk ([MIN_NETWORK_LOGS]-[MAX_NETWORK_LOGS]):", M.max_log_count) as null|num
 		if(logcount && CanUseTopic(user, state))
-			logcount = Clamp(logcount, MIN_NETWORK_LOGS, MAX_NETWORK_LOGS)
+			logcount = clamp(logcount, MIN_NETWORK_LOGS, MAX_NETWORK_LOGS)
 			M.max_log_count = logcount
 			return TOPIC_REFRESH
 		return TOPIC_HANDLED

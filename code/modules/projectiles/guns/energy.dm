@@ -20,7 +20,7 @@ var/global/list/registered_cyborg_weapons = list()
 	var/use_external_power = 0     // If set, the weapon will look for an external power source to draw from, otherwise it recharges magically
 	var/recharge_time = 4          // How many ticks between recharges.
 	var/charge_tick = 0            // Current charge tick tracker.
-	var/accepts_cell_type          // Specifies a cell type that can be loaded into this weapon. 
+	var/accepts_cell_type          // Specifies a cell type that can be loaded into this weapon.
 
 	// Which projectile type to create when firing.
 	var/projectile_type = /obj/item/projectile/beam/practice
@@ -110,7 +110,7 @@ var/global/list/registered_cyborg_weapons = list()
 		if(power_supply.charge < charge_cost)
 			ratio = 0
 		else
-			ratio = Clamp(round(ratio, 25), 25, 100)
+			ratio = clamp(round(ratio, 25), 25, 100)
 		return ratio
 
 /obj/item/gun/energy/on_update_icon()
@@ -171,7 +171,7 @@ var/global/list/registered_cyborg_weapons = list()
 
 		if(!do_after(user, 5, A, can_move = TRUE))
 			return TRUE
-			
+
 		if(user.unEquip(A, src))
 			power_supply = A
 			user.visible_message(SPAN_WARNING("\The [user] loads \the [A] into \the [src]!"))

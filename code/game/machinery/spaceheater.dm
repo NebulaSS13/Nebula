@@ -103,7 +103,7 @@
 			var/value = text2num(href_list["val"])
 
 			// limit to 0-90 degC
-			set_temperature = dd_range(T0C, T0C + 90, set_temperature + value)
+			set_temperature = clamp(T0C, T0C + 90, set_temperature + value)
 
 	updateDialog()
 

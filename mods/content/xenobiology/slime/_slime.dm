@@ -51,7 +51,7 @@
 	return /decl/material/liquid/slimejelly
 
 /mob/living/slime/adjustToxLoss(var/amount)
-	toxloss = Clamp(toxloss + amount, 0, maxHealth)
+	toxloss = clamp(toxloss + amount, 0, maxHealth)
 
 /mob/living/slime/setToxLoss(var/amount)
 	adjustToxLoss(amount-getToxLoss())
@@ -304,7 +304,7 @@
 			adjustToxLoss(-10)
 
 /mob/living/slime/adjust_nutrition(var/amt)
-	nutrition = Clamp(nutrition + amt, 0, get_max_nutrition())
+	nutrition = clamp(nutrition + amt, 0, get_max_nutrition())
 
 /mob/living/slime/proc/get_hunger_state()
 	. = 0

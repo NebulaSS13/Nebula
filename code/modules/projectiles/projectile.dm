@@ -10,7 +10,7 @@
 	anchored = 1 //There's a reason this is here, Mport. God fucking damn it -Agouri. Find&Fix by Pete. The reason this is here is to stop the curving of emitter shots.
 	pass_flags = PASS_FLAG_TABLE
 	mouse_opacity = 0
-	randpixel = 0	
+	randpixel = 0
 	var/bumped = 0		//Prevents it from hitting more than one guy at once
 	var/def_zone = ""	//Aiming at
 	var/mob/firer = null//Who shot it
@@ -178,8 +178,8 @@
 	//randomize clickpoint a bit based on dispersion
 	if(dispersion)
 		var/radius = round((dispersion*0.443)*world.icon_size*0.8) //0.443 = sqrt(pi)/4 = 2a, where a is the side length of a square that shares the same area as a circle with diameter = dispersion
-		p_x = between(0, p_x + gaussian(0, radius) * 0.25, world.icon_size)
-		p_y = between(0, p_y + gaussian(0, radius) * 0.25, world.icon_size)
+		p_x = clamp(0, p_x + gaussian(0, radius) * 0.25, world.icon_size)
+		p_y = clamp(0, p_y + gaussian(0, radius) * 0.25, world.icon_size)
 
 //Used to change the direction of the projectile in flight.
 /obj/item/projectile/proc/redirect(var/new_x, var/new_y, var/atom/starting_loc, var/mob/new_firer=null, var/is_ricochet = FALSE)
@@ -384,7 +384,7 @@
 			PRINT_STACK_TRACE("WARNING: Projectile [type] deleted due to being unable to resolve a target after Angle was null!")
 			qdel(src)
 			return
-		var/turf/target = locate(Clamp(starting + xo, 1, world.maxx), Clamp(starting + yo, 1, world.maxy), starting.z)
+		var/turf/target = locate(clamp(starting + xo, 1, world.maxx), clamp(starting + yo, 1, world.maxy), starting.z)
 		setAngle(get_projectile_angle(src, target))
 	if(dispersion)
 		var/DeviationAngle = (dispersion * 15)
@@ -574,7 +574,7 @@
 
 /obj/item/projectile/proc/vol_by_damage()
 	if(src.damage)
-		return Clamp((src.damage) * 0.67, 30, 100)// Multiply projectile damage by 0.67, then CLAMP the value between 30 and 100
+		return clamp((src.damage) * 0.67, 30, 100)// Multiply projectile damage by 0.67, then CLAMP the value between 30 and 100
 	else
 		return 50 //if the projectile doesn't do damage, play its hitsound at 50% volume.
 

@@ -699,7 +699,7 @@
 				if("set_threshold")
 					var/static/list/thresholds = list("lower bound", "low warning", "high warning", "upper bound")
 					var/env = href_list["env"]
-					var/threshold = Clamp(text2num(href_list["var"]), 1, 4)
+					var/threshold = clamp(text2num(href_list["var"]), 1, 4)
 					var/list/selected = TLV[env]
 					if(!threshold || !selected || !selected[threshold])
 						return TOPIC_NOACTION

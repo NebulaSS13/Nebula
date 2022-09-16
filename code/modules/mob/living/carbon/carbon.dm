@@ -380,13 +380,13 @@
 	stasis_sources.Cut()
 
 /mob/living/carbon/proc/set_nutrition(var/amt)
-	nutrition = Clamp(amt, 0, initial(nutrition))
+	nutrition = clamp(amt, 0, initial(nutrition))
 
 /mob/living/carbon/adjust_nutrition(var/amt)
 	set_nutrition(nutrition + amt)
 
 /mob/living/carbon/proc/set_hydration(var/amt)
-	hydration = Clamp(amt, 0, initial(hydration))
+	hydration = clamp(amt, 0, initial(hydration))
 
 /mob/living/carbon/adjust_hydration(var/amt)
 	set_hydration(hydration + amt)

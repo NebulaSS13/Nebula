@@ -7,10 +7,6 @@
 //Checks if all high bits in req_mask are set in bitfield
 #define BIT_TEST_ALL(bitfield, req_mask) ((~(bitfield) & (req_mask)) == 0)
 
-//Returns the middle-most value
-/proc/dd_range(var/low, var/high, var/num)
-	return max(low,min(high,num))
-
 /proc/get_projectile_angle(atom/source, atom/target)
 	var/sx = source.x * world.icon_size
 	var/sy = source.y * world.icon_size
@@ -207,7 +203,7 @@ Turf and target are seperate in case you want to teleport some distance from a t
 			line+=locate(px,py,M.z)
 	return line
 
-#define LOCATE_COORDS(X, Y, Z) locate(between(1, X, world.maxx), between(1, Y, world.maxy), Z)
+#define LOCATE_COORDS(X, Y, Z) locate(clamp(1, X, world.maxx), clamp(1, Y, world.maxy), Z)
 /proc/getcircle(turf/center, var/radius) //Uses a fast Bresenham rasterization algorithm to return the turfs in a thin circle.
 	if(!radius) return list(center)
 
@@ -234,7 +230,7 @@ Turf and target are seperate in case you want to teleport some distance from a t
 
 #undef LOCATE_COORDS
 
-#define LOCATE_COORDS_SAFE(X, Y, Z) locate(between(TRANSITIONEDGE + 1, X, world.maxx - TRANSITIONEDGE), between(TRANSITIONEDGE + 1, Y, world.maxy - TRANSITIONEDGE), Z)
+#define LOCATE_COORDS_SAFE(X, Y, Z) locate(clamp(TRANSITIONEDGE + 1, X, world.maxx - TRANSITIONEDGE), clamp(TRANSITIONEDGE + 1, Y, world.maxy - TRANSITIONEDGE), Z)
 /proc/getcirclesafe(turf/center, var/radius) //Uses a fast Bresenham rasterization algorithm to return the turfs in a thin circle.
 	if(!radius) return list(center)
 
@@ -448,10 +444,6 @@ Turf and target are seperate in case you want to teleport some distance from a t
 	var/x = min(world.maxx, max(1, A.x + dx))
 	var/y = min(world.maxy, max(1, A.y + dy))
 	return locate(x,y,A.z)
-
-//Makes sure MIDDLE is between LOW and HIGH. If not, it adjusts it. Returns the adjusted value. Lower bound takes priority.
-/proc/between(var/low, var/middle, var/high)
-	return max(min(middle, high), low)
 
 //Will return the contents of an atom recursivly to a depth of 'searchDepth'
 /atom/proc/GetAllContents(searchDepth = 5)

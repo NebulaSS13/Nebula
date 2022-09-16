@@ -132,7 +132,7 @@
 	if(location)
 		if(istype(location, /obj/item/sealant_tank))
 			var/obj/item/sealant_tank/foam = location
-			foam.foam_charges = Clamp(foam.foam_charges + created_volume, 0, foam.max_foam_charges)
+			foam.foam_charges = clamp(foam.foam_charges + created_volume, 0, foam.max_foam_charges)
 			return
 		location = get_turf(location)
 		if(location)

@@ -349,7 +349,7 @@
 			jobs += "<tr align='center' bgcolor='[dept.display_color]'><th colspan='[length(print_jobs)]'><a href='?src=\ref[src];jobban_category=[dept.name];jobban_mob_target=\ref[M]'>[capitalize(dept.name)] Positions</a></th></tr><tr align='center'>"
 			for(var/jobPos in print_jobs)
 				var/datum/job/job = SSjobs.get_by_title(jobPos)
-				if(!job) 
+				if(!job)
 					continue
 				if(jobban_isbanned(M, job.title))
 					jobs += "<td width='20%'><a href='?src=\ref[src];jobban_category=[job.title];jobban_mob_target=\ref[M]'><font color=red>[replacetext(job.title, " ", "&nbsp")]</font></a></td>"
@@ -1214,7 +1214,7 @@
 			alert("Removed:\n" + jointext(removed_paths, "\n"))
 
 		var/list/offset = splittext(href_list["offset"],",")
-		var/number = dd_range(1, 100, text2num(href_list["object_count"]))
+		var/number = clamp(1, 100, text2num(href_list["object_count"]))
 		var/X = offset.len > 0 ? text2num(offset[1]) : 0
 		var/Y = offset.len > 1 ? text2num(offset[2]) : 0
 		var/Z = offset.len > 2 ? text2num(offset[3]) : 0

@@ -49,7 +49,7 @@
 /obj/structure/proc/update_material_colour(var/override_colour)
 	if(istype(material))
 		color = override_colour || material.color
-		alpha = Clamp((50 + material.opacity * 255), 0, 255)
+		alpha = clamp((50 + material.opacity * 255), 0, 255)
 	else
 		color = override_colour || initial(color)
 		alpha = initial(alpha)

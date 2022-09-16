@@ -254,7 +254,7 @@
 		physically_destroyed()
 
 /obj/effect/vine/proc/adjust_health(value)
-	health = Clamp(health + value, 0, max_health)
+	health = clamp(health + value, 0, max_health)
 	if(health <= 0)
 		die_off()
 

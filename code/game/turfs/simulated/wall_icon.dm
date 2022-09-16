@@ -176,7 +176,7 @@
 		var/integrity = material.integrity
 		if(reinf_material)
 			integrity += reinf_material.integrity
-		add_overlay(SSmaterials.wall_damage_overlays[Clamp(round(damage / integrity * DAMAGE_OVERLAY_COUNT) + 1, 1, DAMAGE_OVERLAY_COUNT)])
+		add_overlay(SSmaterials.wall_damage_overlays[clamp(round(damage / integrity * DAMAGE_OVERLAY_COUNT) + 1, 1, DAMAGE_OVERLAY_COUNT)])
 
 /turf/simulated/wall/proc/can_join_with(var/turf/simulated/wall/W)
 	if(material && istype(W.material))

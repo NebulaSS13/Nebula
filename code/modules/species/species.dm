@@ -686,7 +686,7 @@ var/global/const/DEFAULT_SPECIES_HEALTH = 200
 				light = round(light * turf_brightness)
 				if(H.equipment_light_protection)
 					light -= H.equipment_light_protection
-	return Clamp(max(prescriptions, light), 0, 7)
+	return clamp(max(prescriptions, light), 0, 7)
 
 /decl/species/proc/set_default_hair(var/mob/living/carbon/human/H)
 	if(H.h_style != H.species.default_h_style)

@@ -169,12 +169,12 @@
 		if(href_list["set_shunt_x"])
 			input_x = input(user, "Enter Destination X Coordinates", "FTL Computer", to_plot_x) as num|null
 			input_x += fumble
-			input_x = Clamp(input_x, 1, overmap.map_size_x - 1)
+			input_x = clamp(input_x, 1, overmap.map_size_x - 1)
 
 		if(href_list["set_shunt_y"])
 			input_y = input(user, "Enter Destination Y Coordinates", "FTL Computer", to_plot_y) as num|null
 			input_y += fumble
-			input_y = Clamp(input_y, 1, overmap.map_size_y - 1)
+			input_y = clamp(input_y, 1, overmap.map_size_y - 1)
 
 		if(!CanInteract(user, state))
 			return TOPIC_NOACTION
@@ -193,7 +193,7 @@
 			if(linked_core.get_status() != FTL_STATUS_GOOD)
 				to_chat(user, SPAN_WARNING("Superluminal shunt inoperable. Please try again later."))
 				return TOPIC_REFRESH
-			
+
 			var/datum/overmap/overmap = global.overmaps_by_name[overmap_id]
 			var/dist = get_dist(locate(linked_core.shunt_x, linked_core.shunt_y, overmap.assigned_z), get_turf(linked))
 			if(is_jump_unsafe()) //We are above the safe jump distance, give them a warning.

@@ -178,7 +178,7 @@
 	return hearers(src, dist)-src
 
 /mob/living/simple_animal/hostile/proc/get_accuracy()
-	return Clamp(sa_accuracy - melee_accuracy_mods(), 0, 100)
+	return clamp(sa_accuracy - melee_accuracy_mods(), 0, 100)
 
 /mob/living/simple_animal/hostile/death(gibbed, deathmessage, show_dead_message)
 	..(gibbed, deathmessage, show_dead_message)
