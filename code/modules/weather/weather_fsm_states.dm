@@ -65,14 +65,14 @@
 			weather.show_wind(M)
 
 	if(exposure != WEATHER_IGNORE && weather.set_cooldown(M))
-		if(exposure == WEATHER_PROTECTED)
+		if(exposure == WEATHER_EXPOSED)
+			handle_exposure_effects(M, weather)
+		else if(exposure == WEATHER_ROOFED)
+			handle_roofed_effects(M, weather)
+		else if(exposure == WEATHER_PROTECTED)
 			var/list/protected_by = M.get_weather_protection()
 			if(LAZYLEN(protected_by))
 				handle_protected_effects(M, weather, pick(protected_by))
-			else
-				handle_roofed_effects(M, weather)
-		else
-			handle_exposure_effects(M, weather)
 
 /decl/state/weather/proc/show_to(var/mob/living/M, var/obj/abstract/weather_system/weather)
 	to_chat(M, descriptor)

@@ -272,9 +272,10 @@
 #define OUTSIDE_YES  TRUE
 
 // Weather exposure values for being rained on or hailed on.
-#define WEATHER_IGNORE    -1
-#define WEATHER_PROTECTED  0
-#define WEATHER_EXPOSED    1
+#define WEATHER_IGNORE   -1
+#define WEATHER_EXPOSED   0
+#define WEATHER_ROOFED    1
+#define WEATHER_PROTECTED 2
 
 // Literacy check constants.
 #define WRITTEN_SKIP     0

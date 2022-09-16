@@ -1092,7 +1092,7 @@
 
 	// We're inside something else.
 	if(!isturf(loc))
-		return WEATHER_PROTECTED
+		return WEATHER_IGNORE
 
 	var/turf/T = loc
 	// We're under a roof or otherwise shouldn't be being rained on.
@@ -1100,13 +1100,13 @@
 
 		// For non-multiz we'll give everyone some nice ambience.
 		if(!HasAbove(T.z))
-			return WEATHER_PROTECTED
+			return WEATHER_ROOFED
 
 		// For multi-z, check the actual weather on the turf above.
 		// TODO: maybe make this a property of the z-level marker.
 		var/turf/above = GetAbove(T)
 		if(above.weather)
-			return WEATHER_PROTECTED
+			return WEATHER_ROOFED
 
 		// Being more than one level down should exempt us from ambience.
 		return WEATHER_IGNORE
@@ -1115,6 +1115,7 @@
 	var/list/weather_protection = get_weather_protection()
 	if(LAZYLEN(weather_protection))
 		return WEATHER_PROTECTED
+
 	return WEATHER_EXPOSED
 
 /mob/proc/IsMultiZAdjacent(var/atom/neighbor)
