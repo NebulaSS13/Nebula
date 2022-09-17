@@ -43,6 +43,7 @@ SUBSYSTEM_DEF(zcopy)
 	var/num_upd = 0
 	var/num_del = 0
 	var/num_amupd = 0
+
 	for (var/atom/A in world)
 		if (isturf(A))
 			T = A
@@ -71,6 +72,15 @@ SUBSYSTEM_DEF(zcopy)
 	log_debug("SSzcopy: hard_reset() invoked.")
 	var/num_deleted = 0
 	var/num_turfs = 0
+
+	for (var/turf/T in world)
+		if (T.z_queued)
+			T.z_queued = 0
+
+		CHECK_TICK
+
+	queued_turfs.Cut()
+	queued_overlays.Cut()
 
 	var/turf/T
 	for (var/atom/A in world)
@@ -476,6 +486,15 @@ SUBSYSTEM_DEF(zcopy)
 	if (!check_rights(R_DEBUG))
 		return
 
+	var/real_update_count = 0
+	var/claimed_update_count = T.z_queued
+	var/list/tq = SSzcopy.queued_turfs.Copy()
+	for (var/turf/Tu in tq)
+		if (Tu == T)
+			real_update_count += 1
+
+		CHECK_TICK
+
 	var/is_above_space = T.is_above_space()
 	var/list/out = list(
 		"<head><meta charset='utf-8'/></head><body>",
@@ -490,6 +509,7 @@ SUBSYSTEM_DEF(zcopy)
 		"<b>Below:</b> [!T.below ? "(nothing)" : "[T.below] at [T.below.x],[T.below.y],[T.below.z]"]",
 		"<b>Depth:</b> [FMT_DEPTH(T.z_depth)] [T.z_depth == OPENTURF_MAX_DEPTH ? "(max)" : ""]",
 		"<b>Generation:</b> [T.z_generation]",
+		"<b>Update count:</b> Claimed [claimed_update_count], Actual [real_update_count] - [claimed_update_count == real_update_count ? "<font color='green'>OK</font>" : "<font color='red'>MISMATCH</font>"]",
 		"<ul>"
 	)
 
