@@ -70,7 +70,10 @@
 	// Don't remove ourselves from the queue, the subsystem will explode. We'll naturally fall out of the queue.
 	z_queued = 0
 
-	QDEL_NULL(shadower)
+	// can't use QDEL_NULL as we need to supply force to qdel
+	if(shadower)
+		qdel(shadower, TRUE)
+		shadower = null
 	QDEL_NULL(mimic_above_copy)
 	QDEL_NULL(mimic_underlay)
 
