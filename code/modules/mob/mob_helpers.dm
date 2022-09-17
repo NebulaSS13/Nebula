@@ -4,6 +4,11 @@
 		return L.mob_size <= MOB_SIZE_SMALL
 	return 0
 
+//#TODO: This is more or less a place holder for a future proper standardized atom size implementation.
+///Convert a mob's size to an item size
+/proc/mobsize2itemsize(var/mob_size)
+	return mob_size
+
 //returns the number of size categories between two mob_sizes, rounded. Positive means A is larger than B
 /proc/mob_size_difference(var/mob_size_A, var/mob_size_B)
 	return round(log(2, mob_size_A/mob_size_B), 1)

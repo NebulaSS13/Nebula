@@ -11,8 +11,8 @@
 	name = "gift"
 	desc = "PRESENTS!!!! eek!"
 	icon = 'icons/obj/items/gift_wrapped.dmi'
-	icon_state = "gift1"
-	item_state = "gift1"
+	icon_state = "gift"
+	item_state = "gift"
 	randpixel = 10
 	material = /decl/material/solid/cardboard
 
@@ -104,115 +104,3 @@
 	I.add_fingerprint(M)
 	qdel(src)
 
-/*
- * Wrapping Paper and Gifts
- */
-
-/obj/item/gift
-	name = "gift"
-	desc = "A wrapped item."
-	icon = 'icons/obj/items/gift_wrapped.dmi'
-	icon_state = "gift3"
-	var/obj/item/gift = null
-	item_state = "gift"
-	w_class = ITEM_SIZE_HUGE
-	material = /decl/material/solid/cardboard
-
-/obj/item/gift/Initialize(mapload, obj/item/wrapped = null)
-	. = ..(mapload)
-
-	if(istype(wrapped))
-		gift = wrapped
-		w_class = gift.w_class
-		gift.forceMove(src)
-
-		switch(gift.w_class)
-			if(ITEM_SIZE_TINY, ITEM_SIZE_SMALL)
-				icon_state = "gift1"
-			if(ITEM_SIZE_NORMAL, ITEM_SIZE_LARGE)
-				icon_state = "gift2"
-			else
-				icon_state = "gift3"
-
-/obj/item/gift/attack_self(mob/user)
-	user.drop_item()
-	if(src.gift)
-		user.put_in_active_hand(gift)
-		src.gift.add_fingerprint(user)
-	else
-		to_chat(user, "<span class='warning'>The gift was empty!</span>")
-	qdel(src)
-	return
-
-/obj/item/wrapping_paper
-	name = "wrapping paper"
-	desc = "You can use this to wrap items in."
-	icon = 'icons/obj/items/gift_wrapper.dmi'
-	icon_state = "wrap_paper"
-	material = /decl/material/solid/paper
-	var/amount = 2.5*BASE_STORAGE_COST(ITEM_SIZE_HUGE)
-
-/obj/item/wrapping_paper/attackby(obj/item/W, mob/user)
-	. = ..()
-	if (!(locate(/obj/structure/table) in src.loc))
-		to_chat(user, SPAN_WARNING("You must put the paper on a table."))
-		return TRUE
-
-	if (W.w_class >= ITEM_SIZE_HUGE)
-		to_chat(user, SPAN_WARNING("The object is FAR too large!"))
-		return TRUE
-
-	var/found_scissors = FALSE
-	for(var/obj/item/thing in user.get_held_items())
-		if(IS_WIRECUTTER(thing))
-			found_scissors = TRUE
-			break
-
-	if(!found_scissors)
-		to_chat(user, SPAN_WARNING("You need cutters!"))
-		return TRUE
-
-	var/a_used = W.get_storage_cost()
-	if (a_used >= ITEM_SIZE_NO_CONTAINER)
-		to_chat(user, SPAN_WARNING("You can't wrap that!"))
-		return TRUE
-
-	if (src.amount < a_used)
-		to_chat(user, SPAN_WARNING("You need more paper!"))
-		return TRUE
-
-	if(!istype(W, /obj/item/smallDelivery) && !istype(W, /obj/item/gift) && user.unEquip(W))
-		var/obj/item/gift/G = new /obj/item/gift( src.loc, W )
-		G.add_fingerprint(user)
-		W.add_fingerprint(user)
-		src.amount -= a_used
-		if(src.amount <= 0)
-			new /obj/item/c_tube( src.loc )
-			qdel(src)
-		return TRUE
-
-/obj/item/wrapping_paper/examine(mob/user, distance)
-	. = ..()
-	if(distance <= 1)
-		to_chat(user, text("There is about [] square units of paper left!", src.amount))
-
-/obj/item/wrapping_paper/attack(mob/target, mob/user)
-	if (!istype(target, /mob/living/carbon/human)) return
-	var/mob/living/carbon/human/H = target
-
-	if (istype(H.get_equipped_item(slot_wear_suit_str), /obj/item/clothing/suit/straight_jacket) || H.stat)
-		if (src.amount > 2)
-			var/obj/effect/spresent/present = new /obj/effect/spresent (H.loc)
-			src.amount -= 2
-
-			if (H.client)
-				H.client.perspective = EYE_PERSPECTIVE
-				H.client.eye = present
-
-			H.forceMove(present)
-			admin_attack_log(user, H, "Used \a [src] to wrap their victim", "Was wrapepd with \a [src]", "used \the [src] to wrap")
-
-		else
-			to_chat(user, "<span class='warning'>You need more paper.</span>")
-	else
-		to_chat(user, "They are moving around too much. A straightjacket would help.")

@@ -410,9 +410,10 @@ var/global/list/closets = list()
 		make_broken()
 
 	//Do this to prevent contents from being opened into nullspace
-	if(istype(loc, /obj/structure/bigDelivery))
-		var/obj/structure/bigDelivery/BD = loc
-		BD.unwrap()
+	//#TODO: There's probably a better way to do this?
+	if(istype(loc, /obj/item/parcel))
+		var/obj/item/parcel/P = loc
+		P.unwrap()
 	open()
 
 /obj/structure/closet/onDropInto(var/atom/movable/AM)

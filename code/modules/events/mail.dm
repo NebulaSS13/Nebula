@@ -77,7 +77,7 @@
 		var/obj/item/gift = new gift_path()
 
 		// Wrap it all up in a parcel
-		var/obj/item/smallDelivery/parcel = new /obj/item/smallDelivery()
+		var/obj/item/parcel/parcel = new /obj/item/parcel()
 		parcel.SetName("normal-sized parcel (to [name])")
 		letter.forceMove(parcel)
 		gift.forceMove(parcel)

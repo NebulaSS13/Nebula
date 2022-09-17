@@ -44,7 +44,7 @@
 	
 	if(user)
 		user.visible_message(SPAN_NOTICE("\The [user] removes a label from \the [atom_holder]."), \
-							SPAN_NOTICE("You remove a label, '[label]', from \the [atom_holder]."))
+							 SPAN_NOTICE("You remove a label, '[label]', from \the [atom_holder]."))
 
 	var/old_name = atom_holder.name
 	// We find and replace the first instance, since that's the one we removed from the list

@@ -33,8 +33,6 @@
 
 	silicon_camera = /obj/item/camera/siliconcam/drone_camera
 
-	//Used for self-mailing.
-	var/mail_destination = ""
 	var/module_type = /obj/item/robot_module/drone
 	var/hat_x = 0
 	var/hat_y = -13

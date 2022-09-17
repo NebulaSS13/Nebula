@@ -29,16 +29,9 @@
 	// note AM since can contain mobs or objs
 	for(var/atom/movable/AM in stuff)
 		AM.forceMove(src)
-		if(istype(AM, /obj/structure/bigDelivery) && !hasmob)
-			var/obj/structure/bigDelivery/T = AM
-			src.destinationTag = T.sortTag
-		if(istype(AM, /obj/item/smallDelivery) && !hasmob)
-			var/obj/item/smallDelivery/T = AM
-			src.destinationTag = T.sortTag
-		//Drones can mail themselves through maint.
-		if(is_drone(AM))
-			var/mob/living/silicon/robot/drone/drone = AM
-			src.destinationTag = drone.mail_destination
+		var/datum/extension/sorting_tag/ST = get_extension(AM, /datum/extension/sorting_tag)
+		if(ST)
+			destinationTag = ST.destination
 
 /obj/structure/disposalholder/proc/check_mob(list/stuff, max_depth = 1)
 	. = list()

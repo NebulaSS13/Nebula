@@ -69,7 +69,6 @@
 		next_account_number += rand(1,25)
 
 		//create a sealed package containing the account details
-		var/obj/item/smallDelivery/P = new /obj/item/smallDelivery(source_db.loc)
 		var/txt
 		txt += "<b>Account details (confidential)</b><br><hr><br>"
 		txt += "<i>Account holder:</i> [M.owner_name]<br>"
@@ -81,9 +80,9 @@
 		txt += "<i>Authorised officer overseeing creation:</i> [source_db.held_card.registered_name]<br>"
 
 		var/obj/item/paper/R = new /obj/item/paper(P, null, txt, "Account information: [M.account_name]")
-		P.wrapped = R
 		//stamp the paper
 		R.apply_custom_stamp(overlay_image('icons/obj/bureaucracy.dmi', icon_state = "paper_stamp-boss", flags = RESET_COLOR), "by the Accounts Database")
+		new /obj/item/parcel(source_db.loc, null, R)
 
 	//add the account
 	T.perform()
