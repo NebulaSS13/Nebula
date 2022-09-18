@@ -168,7 +168,7 @@
 			continue
 		var/list/reagent = list()
 		var/datum/extension/labels/lab = get_extension(canister, /datum/extension/labels)
-		if(lab && (length(lab.labels) > 0))
+		if(length(lab?.labels))
 			reagent	["name"] = (lab.labels[1])
 		else
 			reagent	["name"] = "unlabeled"

@@ -237,7 +237,7 @@
  */
 /obj/proc/initialize_reagents(var/populate = TRUE)
 	SHOULD_CALL_PARENT(TRUE)
-	if(reagents.total_volume > 0)
+	if(reagents?.total_volume > 0)
 		log_warning("\The [src] possibly is initializing its reagents more than once!")
 	if(populate)
 		populate_reagents()
