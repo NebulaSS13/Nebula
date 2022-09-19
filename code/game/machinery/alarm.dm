@@ -42,8 +42,9 @@
 #define MAX_TEMPERATURE 90
 #define MIN_TEMPERATURE -40
 
+#define BASE_ALARM_NAME "environment alarm"
 /obj/machinery/alarm
-	name = "alarm"
+	name = BASE_ALARM_NAME
 	icon = 'icons/obj/monitors.dmi'
 	icon_state = "alarm0"
 	anchored = 1
@@ -139,8 +140,7 @@
 	if(!alarm_area)
 		return // spawned in nullspace, presumably as a prototype for construction purposes.
 	area_uid = alarm_area.uid
-	if (name == "alarm")
-		SetName("[alarm_area.proper_name] Air Alarm")
+	update_name(FALSE)
 
 	// breathable air according to human/Life()
 	var/decl/material/gas_mat = GET_DECL(/decl/material/gas/oxygen)
@@ -161,6 +161,16 @@
 	for(var/device_tag in alarm_area.air_scrub_names + alarm_area.air_vent_names)
 		send_signal(device_tag, list()) // ask for updates; they initialized before us and we didn't get the data
 	queue_icon_update()
+
+/obj/machinery/alarm/area_changed(area/old_area, area/new_area)
+	. = ..()
+	alarm_area = get_area(src)
+	update_name(TRUE)
+
+/obj/machinery/alarm/proc/update_name(var/reset = TRUE)
+	name = initial(name)
+	if(name == BASE_ALARM_NAME && alarm_area && alarm_area != global.space_area)
+		SetName("[alarm_area.proper_name] [BASE_ALARM_NAME]")
 
 /obj/machinery/alarm/modify_mapped_vars(map_hash)
 	..()

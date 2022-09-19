@@ -77,6 +77,44 @@
 	construct_state = /decl/machine_construction/default/panel_closed/item_chassis
 	base_type = /obj/machinery/atmospherics/unary/vent_pump/buildable
 
+/obj/machinery/atmospherics/unary/vent_pump/Initialize()
+	if (!id_tag)
+		id_tag = "[sequential_id("obj/machinery")]"
+	if(controlled)
+		var/area/A = get_area(src)
+		if(A && !A.air_vent_names[id_tag])
+			update_name()
+			events_repository.register(/decl/observ/name_set, A, src, .proc/change_area_name)
+	. = ..()
+	air_contents.volume = ATMOS_DEFAULT_VOLUME_PUMP
+	update_sound()
+
+/obj/machinery/atmospherics/unary/vent_pump/proc/change_area_name(var/area/A, var/old_area_name, var/new_area_name)
+	if(get_area(src) != A)
+		return
+	update_name()
+
+/obj/machinery/atmospherics/unary/vent_pump/area_changed(area/old_area, area/new_area)
+	if(old_area)
+		old_area.air_vent_names -= id_tag
+	. = ..()
+	update_name()
+
+/obj/machinery/atmospherics/unary/vent_pump/proc/update_name()
+	var/area/A = get_area(src)
+	if(!A || A == global.space_area || !controlled)
+		SetName("vent pump")
+		return
+	var/index
+	if(A.air_vent_names[id_tag])
+		index = A.air_vent_names.Find(id_tag)
+	else
+		A.air_vent_names[id_tag] = TRUE
+		index = length(A.air_vent_names)
+	var/new_name = "[A.proper_name] vent pump #[index]"
+	A.air_vent_names[id_tag] = new_name
+	SetName(new_name)
+
 /obj/machinery/atmospherics/unary/vent_pump/buildable
 	uncreated_component_parts = null
 
@@ -100,11 +138,6 @@
 	internal_pressure_bound_default = MAX_PUMP_PRESSURE
 	pressure_checks = 2
 	pressure_checks_default = 2
-
-/obj/machinery/atmospherics/unary/vent_pump/Initialize()
-	. = ..()
-	air_contents.volume = ATMOS_DEFAULT_VOLUME_PUMP
-	update_sound()
 
 /obj/machinery/atmospherics/unary/vent_pump/Destroy()
 	QDEL_NULL(sound_token)
@@ -218,25 +251,6 @@
 
 /obj/machinery/atmospherics/unary/vent_pump/area_uid()
 	return controlled ? ..() : "NONE"
-
-/obj/machinery/atmospherics/unary/vent_pump/Initialize()
-	if (!id_tag)
-		id_tag = "[sequential_id("obj/machinery")]"
-	if(controlled)
-		var/area/A = get_area(src)
-		if(A && !A.air_vent_names[id_tag])
-			var/new_name = "[A.proper_name] Vent Pump #[A.air_vent_names.len+1]"
-			A.air_vent_names[id_tag] = new_name
-			SetName(new_name)
-			events_repository.register(/decl/observ/name_set, A, src, .proc/change_area_name)
-	. = ..()
-
-/obj/machinery/atmospherics/unary/vent_pump/proc/change_area_name(var/area/A, var/old_area_name, var/new_area_name)
-	if(get_area(src) != A)
-		return
-	var/new_name = replacetext(A.air_vent_names[id_tag], old_area_name, new_area_name)
-	SetName(new_name)
-	A.air_vent_names[id_tag] = new_name
 
 /obj/machinery/atmospherics/unary/vent_pump/proc/purge()
 	pressure_checks &= ~PRESSURE_CHECK_EXTERNAL
