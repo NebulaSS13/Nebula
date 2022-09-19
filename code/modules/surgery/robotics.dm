@@ -338,9 +338,9 @@
 
 /decl/surgery_step/robotics/fix_organ_robotic/get_skill_reqs(mob/living/user, mob/living/target, obj/item/tool)
 	if(target.isSynthetic())
-		return SURGERY_SKILLS_ROBOTIC 
+		return SURGERY_SKILLS_ROBOTIC
 	else
-		return SURGERY_SKILLS_ROBOTIC_ON_MEAT 
+		return SURGERY_SKILLS_ROBOTIC_ON_MEAT
 
 /decl/surgery_step/robotics/fix_organ_robotic/assess_bodypart(mob/living/user, mob/living/target, target_zone, obj/item/tool)
 	var/obj/item/organ/external/affected = ..()
@@ -420,8 +420,8 @@
 		target.remove_organ(I, detach = TRUE)
 
 /decl/surgery_step/robotics/detatch_organ_robotic/fail_step(mob/living/user, mob/living/target, target_zone, obj/item/tool)
-	user.visible_message("<span class='warning'>[user]'s hand slips, disconnecting \the [tool].</span>", \
-	"<span class='warning'>Your hand slips, disconnecting \the [tool].</span>")
+	user.visible_message("<span class='warning'>[user]'s hand slips, unseating \the [tool].</span>", \
+	"<span class='warning'>Your hand slips, unseating \the [tool].</span>")
 
 //////////////////////////////////////////////////////////////////
 //	robotic organ transplant finalization surgery step
@@ -448,10 +448,9 @@
 	if(!organ_to_replace)
 		return FALSE
 	var/obj/item/organ/internal/augment/A = organ_to_replace
-	if(istype(A))
-		if(!(A.augment_flags & AUGMENTATION_MECHANIC))
-			to_chat(user, SPAN_WARNING("\the [A] cannot function within a robotic limb"))
-			return FALSE
+	if(istype(A) && !(A.augment_flags & AUGMENTATION_MECHANIC))
+		to_chat(user, SPAN_WARNING("\the [A] cannot function within a robotic limb"))
+		return FALSE
 	return organ_to_replace
 
 /decl/surgery_step/robotics/attach_organ_robotic/begin_step(mob/user, mob/living/target, target_zone, obj/item/tool)
@@ -463,16 +462,16 @@
 	user.visible_message("<span class='notice'>[user] has reattached [target]'s [LAZYACCESS(global.surgeries_in_progress["\ref[target]"], target_zone)] with \the [tool].</span>" , \
 	"<span class='notice'>You have reattached [target]'s [LAZYACCESS(global.surgeries_in_progress["\ref[target]"], target_zone)] with \the [tool].</span>")
 
-	var/current_organ = LAZYACCESS(global.surgeries_in_progress["\ref[target]"], target_zone)
 	var/obj/item/organ/external/affected = GET_EXTERNAL_ORGAN(target, target_zone)
+	var/current_organ = LAZYACCESS(global.surgeries_in_progress["\ref[target]"], target_zone)
 	for (var/obj/item/organ/I in affected.implants)
 		if (I.organ_tag == current_organ)
-			target.add_organ(I, affected, detached = TRUE)
+			target.add_organ(I, affected, detached = FALSE)
 			break
 
 /decl/surgery_step/robotics/attach_organ_robotic/fail_step(mob/living/user, mob/living/target, target_zone, obj/item/tool)
-	user.visible_message("<span class='warning'>[user]'s hand slips, disconnecting \the [tool].</span>", \
-	"<span class='warning'>Your hand slips, disconnecting \the [tool].</span>")
+	user.visible_message("<span class='warning'>[user]'s hand slips, unseating \the [tool].</span>", \
+	"<span class='warning'>Your hand slips, unseating \the [tool].</span>")
 
 //////////////////////////////////////////////////////////////////
 //	mmi installation surgery step
