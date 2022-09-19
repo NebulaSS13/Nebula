@@ -13,7 +13,7 @@
 	icon_state = "rolled_poster"
 	var/poster_type
 
-/obj/item/contraband/poster/Initialize(var/ml, var/_mat, var/_reinf_mat, var/given_poster_type)
+/obj/item/contraband/poster/Initialize(var/ml, var/material_key, var/given_poster_type)
 	if(given_poster_type && !ispath(given_poster_type, /decl/poster))
 		. = INITIALIZE_HINT_QDEL
 		CRASH("Invalid poster type: [log_info_line(given_poster_type)]")
@@ -23,7 +23,7 @@
 	var/list/posters = subtypesof(/decl/poster)
 	var/serial_number = posters.Find(poster_type)
 	name += " - No. [serial_number]"
-	return ..(ml, _mat, _reinf_mat)
+	return ..(ml, material_key)
 
 //Places the poster on a wall
 /obj/item/contraband/poster/afterattack(var/atom/A, var/mob/user, var/adjacent, var/clickparams)
@@ -150,7 +150,7 @@
 		add_fingerprint(user)
 
 /obj/structure/sign/poster/proc/roll_and_drop(turf/newloc)
-	new /obj/item/contraband/poster(newloc, null, null, poster_type)
+	new /obj/item/contraband/poster(newloc, null, poster_type)
 	qdel(src)
 
 /decl/poster
