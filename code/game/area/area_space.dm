@@ -15,8 +15,8 @@ var/global/area/space_area
 	show_starlight = TRUE
 	is_outside = OUTSIDE_YES
 
-/area/space/New()
-	..()
+/area/space/Initialize()
+	. = ..()
 	if(global.space_area)
 		PRINT_STACK_TRACE("Space area created twice!")
 	global.space_area = src
