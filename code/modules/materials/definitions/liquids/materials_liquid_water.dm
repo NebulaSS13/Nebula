@@ -1,5 +1,6 @@
 /decl/material/liquid/water
 	name = "water"
+	codex_name = "liquid water" // need a better name than this so it passes the overlapping ID unit tests :(
 	uid = "liquid_water"
 	solid_name = "ice"
 	gas_name = "water vapour"

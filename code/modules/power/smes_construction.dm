@@ -146,7 +146,7 @@
 	// Possible effects:
 	// Sparks - Lets out few sparks, mostly fire hazard if flammable gas present. Otherwise purely aesthetic.
 	// Shock - Depending on intensity harms the user. Insultated Gloves protect against weaker shocks, but strong shock bypasses them.
-	// EMP Pulse - Lets out EMP pulse discharge which screws up nearby electronics.
+	// EMP - Lets out EMP discharge which screws up nearby electronics.
 	// Light Overload - X% chance to overload each lighting circuit in connected powernet. APC based.
 	// APC Failure - X% chance to destroy APC causing very weak explosion too. Won't cause hull breach or serious harm.
 	// SMES Explosion - X% chance to destroy the SMES, in moderate explosion. May cause small hull breach.

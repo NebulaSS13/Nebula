@@ -4,7 +4,6 @@
 	lore_text = "All the vitamins, minerals, and carbohydrates the body needs in pure form."
 	taste_mult = 4
 	metabolism = REM * 4
-	hidden_from_codex = TRUE // They don't need to generate a codex entry, their recipes will do that.
 	color = "#664330"
 	value = 1.2
 	fruit_descriptor = "nutritious"
@@ -136,6 +135,7 @@
 
 /decl/material/liquid/nutriment/batter
 	name = "batter"
+	codex_name = "plain batter"
 	lore_text = "A gooey mixture of eggs and flour, a base for turning wheat into food."
 	taste_description = "blandness"
 	nutriment_factor = 3
@@ -150,13 +150,14 @@
 
 /decl/material/liquid/nutriment/batter/cakebatter
 	name = "cake batter"
+	codex_name = null
 	lore_text = "A gooey mixture of eggs, flour and sugar, a important precursor to cake!"
 	taste_description = "sweetness"
 	color = "#ffe992"
 	uid = "chem_nutriment_cakebatter"
 
 /decl/material/liquid/nutriment/coffee
-	name = "coffee powder"
+	name = "ground coffee"
 	lore_text = "A bitter powder made by grinding coffee beans."
 	taste_description = "bitterness"
 	taste_mult = 1.3
@@ -176,7 +177,7 @@
 	uid = "chem_nutriment_instantcoffee"
 
 /decl/material/liquid/nutriment/tea
-	name = "tea powder"
+	name = "tea leaves"
 	lore_text = "A dark, tart powder made from black tea leaves."
 	taste_description = "tartness"
 	taste_mult = 1.3

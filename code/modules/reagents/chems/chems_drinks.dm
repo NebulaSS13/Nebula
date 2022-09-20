@@ -2,7 +2,6 @@
 	name = "drink"
 	lore_text = "Uh, some kind of drink."
 	color = "#e78108"
-	hidden_from_codex = TRUE // They don't need to generate a codex entry, their recipes will do that.
 	value = 0.4
 	abstract_type = /decl/material/liquid/drink
 
@@ -58,6 +57,7 @@
 
 /decl/material/liquid/drink/juice/berry
 	name = "berry juice"
+	codex_name = "blended berry juice"
 	lore_text = "A delicious blend of several different kinds of berries."
 	taste_description = "berries"
 	color = "#990066"
@@ -141,7 +141,7 @@
 
 	M.adjustOxyLoss(-2 * removed)
 
-/decl/material/liquid/poisonberryjuice // It has more in common with toxins than drinks... but it's a juice
+/decl/material/liquid/poisonberryjuice
 	name = "poison berry juice"
 	lore_text = "A tasty juice blended from various kinds of very deadly and toxic berries."
 	taste_description = "berries"
@@ -247,7 +247,8 @@
 
 /decl/material/liquid/drink/milk
 	name = "milk"
-	lore_text = "An opaque white liquid produced by tiplods."
+	codex_name = "whole milk"
+	lore_text = "An opaque white liquid produced by mammals."
 	taste_description = "milk"
 	color = "#dfdfdf"
 	uid = "chem_drink_milk"
@@ -257,6 +258,7 @@
 
 /decl/material/liquid/drink/milk/chocolate
 	name = "chocolate milk"
+	codex_name = null
 	lore_text = "A mixture of perfectly healthy milk and delicious chocolate."
 	taste_description = "chocolate milk"
 	color = "#74533b"
@@ -278,7 +280,8 @@
 
 /decl/material/liquid/drink/milk/cream
 	name = "cream"
-	lore_text = "The fatty, still liquid part of milk."
+	codex_name = "milk cream"
+	lore_text = "The fatty, still-liquid part of milk."
 	taste_description = "creamy milk"
 	color = "#dfd7af"
 	uid = "chem_drink_cream"
@@ -288,6 +291,7 @@
 
 /decl/material/liquid/drink/milk/soymilk
 	name = "soy milk"
+	codex_name = null
 	lore_text = "An opaque white liquid made from soybeans."
 	taste_description = "soy milk"
 	color = "#dfdfc7"
@@ -298,6 +302,7 @@
 
 /decl/material/liquid/drink/coffee
 	name = "coffee"
+	codex_name = "brewed coffee"
 	lore_text = "Coffee is a brewed drink prepared from roasted seeds, commonly called coffee beans, of the coffee plant."
 	taste_description = "bitterness"
 	taste_mult = 1.3
@@ -520,6 +525,7 @@
 
 /decl/material/liquid/drink/cola
 	name = "cola"
+	codex_name = "classic cola" // urgh need a less bad name for codex overlap checks
 	lore_text = "A refreshing beverage."
 	taste_description = "cola"
 	color = "#100800"

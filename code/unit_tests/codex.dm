@@ -31,8 +31,32 @@
 					failures |= "[check_string], [other_string]"
 				else if(findtext(clean_other_string, clean_check_string))
 					failures |= "[other_string], [check_string]"
+			CHECK_TICK // Otherwise we set off infinite loop checks.
+
 	if(length(failures))
 		fail("Found [length(failures)] overlapping string ID\s:\n[jointext(failures, "\n")].")
 	else
 		pass("No overlapping string IDs.")
 	return TRUE
+
+/datum/unit_test/codex_links
+	name = "CODEX - All Codex Links Will Function"
+
+/datum/unit_test/codex_links/start_test()
+	var/list/failures = list()
+	for(var/datum/codex_entry/entry in SScodex.all_entries)
+		var/entry_body = jointext(entry.get_codex_body(), null)
+		while(SScodex.linkRegex.Find(entry_body))
+			var/regex_key = SScodex.linkRegex.group[4]
+			if(SScodex.linkRegex.group[2])
+				regex_key = SScodex.linkRegex.group[3]
+			regex_key = codex_sanitize(regex_key)
+			var/replacement = SScodex.linkRegex.group[4]
+			var/datum/codex_entry/linked_entry = SScodex.get_entry_by_string(regex_key)
+			if(!linked_entry)
+				failures |= "[entry.name] - [replacement]"
+	if(length(failures))
+		fail("Codex had [length(failures)] broken link\s:\n[jointext(failures, "\n")]")
+	else
+		pass("All codex links were functional.")
+	return 1

@@ -546,7 +546,7 @@
 			to_chat(user, "You think \the [src] is ready to eat about now.")
 
 /obj/item/chems/food/donkpocket
-	name = "\improper Donk-pocket"
+	name = "cold donk-pocket"
 	desc = "The food of choice for the seasoned traitor."
 	icon_state = "donkpocket"
 	filling_color = "#dedeab"
@@ -567,7 +567,7 @@
 	for(var/reagent in heated_reagents)
 		reagents.add_reagent(reagent, heated_reagents[reagent])
 	bitesize = 6
-	SetName("warm " + name)
+	SetName("warm donk-pocket")
 	addtimer(CALLBACK(src, .proc/cool), 7 MINUTES)
 
 /obj/item/chems/food/donkpocket/proc/cool()

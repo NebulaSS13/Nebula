@@ -120,4 +120,12 @@ h1.alert, h2.alert		{color: #000000;}
 
 BIG IMG.icon 			{width: 32px; height: 32px;}
 
+/* Codex */
+.codexLore      {color: #abdb9b;}
+.codexMechanics {color: #9ebcd8;}
+.codexAntag     {color: #e5a2a2;}
+.dmCodexBody      {margin-left: 15px;}
+.dmCodexHeader    {text-align: center;}
+.dmCodexFooter    {text-align: center;}
+
 </style>"}

@@ -23,15 +23,20 @@ SUBSYSTEM_DEF(codex)
 			centry = new centry()
 
 	// Create categorized entries.
+	var/list/deferred_population = list()
 	var/list/categories = decls_repository.get_decls_of_subtype(/decl/codex_category)
 	for(var/ctype in categories)
 		var/decl/codex_category/cat = categories[ctype]
-		if(cat?.name)
-			cat.Populate()
+		if(cat.defer_population)
+			deferred_population += cat
+			continue
+		cat.Populate()
+
+	for(var/decl/codex_category/cat as anything in deferred_population)
+		cat.Populate()
 
 	// Create the index file for later use.
-	for(var/thing in all_entries)
-		var/datum/codex_entry/entry = thing
+	for(var/datum/codex_entry/entry as anything in all_entries)
 		index_file[entry.name] = entry
 	index_file = sortTim(index_file, /proc/cmp_text_asc)
 	. = ..()
@@ -41,7 +46,7 @@ SUBSYSTEM_DEF(codex)
 		var/key = linkRegex.group[4]
 		if(linkRegex.group[2])
 			key = linkRegex.group[3]
-		key = lowertext(trim(key))
+		key = codex_sanitize(key)
 		var/datum/codex_entry/linked_entry = get_entry_by_string(key)
 		var/replacement = linkRegex.group[4]
 		if(linked_entry)
@@ -55,18 +60,18 @@ SUBSYSTEM_DEF(codex)
 		if(entity.get_specific_codex_entry())
 			return entity.get_specific_codex_entry()
 		return get_entry_by_string(entity.name) || entries_by_path[entity.type]
-	else if(entries_by_path[entry])
+	if(ispath(entry))
 		return entries_by_path[entry]
-	else if(entries_by_string[lowertext(entry)])
-		return entries_by_string[lowertext(entry)]
+	if(istext(entry))
+		return entries_by_string[codex_sanitize(entry)]
 
 /datum/controller/subsystem/codex/proc/get_entry_by_string(var/string)
-	return entries_by_string[lowertext(trim(string))]
+	return entries_by_string[codex_sanitize(string)]
 
 /datum/controller/subsystem/codex/proc/present_codex_entry(var/mob/presenting_to, var/datum/codex_entry/entry)
 	if(entry && istype(presenting_to) && presenting_to.client)
 		var/datum/browser/popup = new(presenting_to, "codex\ref[entry]", "Codex", nheight=425)
-		popup.set_content(parse_links(entry.get_text(presenting_to), presenting_to))
+		popup.set_content(parse_links(jointext(entry.get_codex_body(presenting_to), null), presenting_to))
 		popup.open()
 
 /datum/controller/subsystem/codex/proc/get_guide(var/category)
@@ -78,7 +83,7 @@ SUBSYSTEM_DEF(codex)
 	if(!initialized)
 		return list()
 
-	searching = sanitize(lowertext(trim(searching)))
+	searching = codex_sanitize(searching)
 	if(!searching)
 		return list()
 	if(!search_cache[searching])
@@ -89,12 +94,9 @@ SUBSYSTEM_DEF(codex)
 			results = list()
 			for(var/entry_title in entries_by_string)
 				var/datum/codex_entry/entry = entries_by_string[entry_title]
-				if(findtext(entry.name, searching) || \
-				 findtext(entry.lore_text, searching) || \
-				 findtext(entry.mechanics_text, searching) || \
-				 findtext(entry.antag_text, searching))
+				if(findtext(entry.name, searching) || findtext(entry.lore_text, searching) || findtext(entry.mechanics_text, searching) || findtext(entry.antag_text, searching))
 					results |= entry
-		search_cache[searching] = dd_sortedObjectList(results)
+		search_cache[searching] = sortTim(results, /proc/cmp_name_asc)
 	return search_cache[searching]
 
 /datum/controller/subsystem/codex/Topic(href, href_list)
@@ -103,7 +105,6 @@ SUBSYSTEM_DEF(codex)
 		var/mob/showing_mob =   locate(href_list["show_to"])
 		if(!istype(showing_mob) || !showing_mob.can_use_codex())
 			return
-
 		var/atom/showing_atom = locate(href_list["show_examined_info"])
 		var/entry
 		if(istype(showing_atom, /datum/codex_entry))
