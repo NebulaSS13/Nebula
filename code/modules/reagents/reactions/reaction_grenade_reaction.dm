@@ -1,5 +1,6 @@
 /decl/chemical_reaction/grenade_reaction
 	result = null
+	abstract_type = /decl/chemical_reaction/grenade_reaction
 
 /decl/chemical_reaction/grenade_reaction/explosion_potassium
 	name = "Explosion"
@@ -44,7 +45,7 @@
 						SET_STATUS_MAX(M, STAT_STUN, 5)
 
 /decl/chemical_reaction/grenade_reaction/emp_pulse
-	name = "EMP Pulse"
+	name = "Electromagnetic Pulse"
 	lore_text = "This reaction causes an electromagnetic pulse that knocks out machinery in a sizable radius."
 	required_reagents = list(
 		/decl/material/solid/metal/uranium = 1,

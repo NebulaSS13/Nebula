@@ -1,3 +1,6 @@
+/decl/chemical_reaction/recipe
+	abstract_type = /decl/chemical_reaction/recipe
+
 /decl/chemical_reaction/recipe/moonshine
 	name = "Moonshine"
 	result = /decl/material/liquid/ethanol/moonshine
@@ -107,7 +110,7 @@
 	result_amount = 2
 
 /decl/chemical_reaction/recipe/rum
-	name = "Rum"
+	name = "Dark Rum"
 	result = /decl/material/liquid/ethanol/rum
 	required_reagents = list(/decl/material/liquid/nutriment/sugar = 1, /decl/material/liquid/water = 1)
 	catalysts = list(/decl/material/liquid/enzyme = 5)
@@ -134,3 +137,13 @@
 	required_reagents = list(/decl/material/liquid/nutriment/sugar = 1, /decl/material/liquid/ethanol/beer = 1)
 	catalysts = list(/decl/material/liquid/enzyme = 5)
 	result_amount = 3
+
+/client/verb/test_reaction_names()
+	set name = "Test Reaction Names"
+	set category = "Debug"
+	set src = usr
+	var/list/reactions = decls_repository.get_decls_of_subtype(/decl/chemical_reaction)
+	for(var/reaction in reactions)
+		var/decl/chemical_reaction/reaction_decl = reactions[reaction]
+		if(!reaction_decl.name)
+			to_chat(usr, "No name on [reaction]")

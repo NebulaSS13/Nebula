@@ -50,7 +50,7 @@
 		All internal organ surgery requires access to the internal organs via an incision, as above.
 		<ul>
 		<li>A scalpel (or a multitool for a <span codexlink='decouple prosthetic organ (surgery)'>prosthetic</span>) can be used to <span codexlink='detach organ (surgery)'>detach an organ</span>, followed by a hemostat to <span codexlink='remove internal organ (surgery)'>remove the organ</span> entirely for transplant.</li>
-		<li>A removed organ can be <span codexlink='replace internal organ (surgery)'>replaced</span> by using it on an empty section of the body, and <span codexlink = 'attach internal organ (surgery)'>reattached with sutures</span> (or a <span codexlink='reattach prosthetic organ (surgery)'>multitool for a prosthetic</span>).</li>
+		<li>A removed organ can be <span codexlink='replace internal organ (surgery)'>replaced</span> by using it on an empty section of the body, and <span codexlink='attach internal organ (surgery)'>reattached with sutures</span> (or a <span codexlink='reattach prosthetic organ (surgery)'>multitool for a prosthetic</span>).</li>
 		<li>A damaged organ can be <span codexlink='repair internal organ (surgery)'>repaired</span> with a trauma pack (or nanopaste for a prosthetic).
 		</ul>
 
@@ -62,7 +62,7 @@
 		<ol>
 		<li>Remove the original limb or limb stump via <span codexlink='amputate limb (surgery)'>amputation</span>.</li>
 		<li>Target the appropriate limb slot and <span codexlink='replace limb (surgery)'>install the new limb</span> on the patient.</li>
-		<li>Use a <span codexlink='connect limb (surgery)'>hemostat to connect the nerves</span> to the new limb.</li> 
+		<li>Use a <span codexlink='connect limb (surgery)'>hemostat to connect the nerves</span> to the new limb.</li>
 		</ol>
 	"}
 
@@ -110,8 +110,8 @@
 			surgery_info += procedure.additional_codex_lines
 
 		var/datum/codex_entry/entry = new(
-			_display_name = lowertext(trim("[lowertext(procedure.name)] (surgery)")), 
-			_lore_text = procedure.description, 
+			_display_name = "[lowertext(procedure.name)] (surgery)",
+			_lore_text = procedure.description,
 			_mechanics_text = jointext(surgery_info, "<br>")
 		)
 		items |= entry.name

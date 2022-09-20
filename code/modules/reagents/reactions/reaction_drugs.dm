@@ -257,6 +257,7 @@
 	)
 
 /decl/chemical_reaction/immunobooster
+	name = "Immunobooster"
 	result = /decl/material/liquid/immunobooster
 	required_reagents = list(/decl/material/liquid/presyncopics = 1, /decl/material/liquid/antitoxins = 1)
 	minimum_temperature = 40 CELSIUS
