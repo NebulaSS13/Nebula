@@ -104,7 +104,7 @@
 		parcel_size = round(O.w_class)
 	else if(ismob(AM))
 		var/mob/M = AM
-		parcel_size = mobsize2itemsize(M.mob_size)
+		parcel_size = round(M.mob_size)
 	else
 		CRASH("Make parcel got passed an invalid atom type '[AM?.type]'.")
 
