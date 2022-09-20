@@ -192,17 +192,17 @@
 
 /obj/set_dir(ndir)
 	. = ..()
-	if(directional_offset && anchored)
+	if(directional_offset)
 		update_directional_offset()
 
 /obj/Move()
 	. = ..()
-	if(directional_offset && anchored)
+	if(directional_offset)
 		update_directional_offset()
 
 /obj/forceMove(atom/dest)
 	. = ..()
-	if(directional_offset && anchored)
+	if(directional_offset)
 		update_directional_offset()
 
 /** Applies the offset stored in the directional_offset json list depending on the current direction.  */
