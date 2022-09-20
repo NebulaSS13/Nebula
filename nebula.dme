@@ -234,6 +234,7 @@
 #include "code\controllers\subsystems\initialization\aspects.dm"
 #include "code\controllers\subsystems\initialization\character_setup.dm"
 #include "code\controllers\subsystems\initialization\codex.dm"
+#include "code\controllers\subsystems\initialization\codex_dump.dm"
 #include "code\controllers\subsystems\initialization\computer_networks.dm"
 #include "code\controllers\subsystems\initialization\customitems.dm"
 #include "code\controllers\subsystems\initialization\fabrication.dm"
