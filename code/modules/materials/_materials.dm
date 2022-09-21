@@ -435,7 +435,7 @@ INITIALIZE_IMMEDIATE(/obj/effect/gas_overlay)
 	if(!shard_type && matter_units <= 0)
 		return
 	var/list/shard_mat = atom_info_repository.get_matter_for(shard_type, type, 1)
-	var/amount_per_shard = shard_mat?[type]
+	var/amount_per_shard = LAZYACCESS(shard_mat, type)
 	if(amount_per_shard < 1)
 		return
 

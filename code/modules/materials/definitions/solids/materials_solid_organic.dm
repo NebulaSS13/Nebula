@@ -87,7 +87,7 @@
 /decl/material/solid/paper
 	name                    = "paper"
 	uid                     = "solid_paper"
-	lore_text               = "Low tech writing medium. Also used in wrappings and packaging."
+	lore_text               = "Low tech writing medium made from cellulose fibers. Also used in wrappings and packaging."
 	color                   = "#cfcece"
 	stack_origin_tech       = "{'materials':1}"
 	door_icon_base          = "wood"
