@@ -6,6 +6,7 @@
 	item_state = "fire_extinguisher"
 	hitsound = 'sound/weapons/smash.ogg'
 	obj_flags = OBJ_FLAG_CONDUCTIBLE
+	item_flags = ITEM_FLAG_HOLLOW
 	throwforce = 10
 	w_class = ITEM_SIZE_NORMAL
 	throw_speed = 2
@@ -43,7 +44,6 @@
 
 /obj/item/extinguisher/Initialize()
 	. = ..()
-	item_flags |= ITEM_FLAG_HOLLOW
 	create_reagents(max_water)
 	if(starting_water > 0)
 		reagents.add_reagent(/decl/material/liquid/water, starting_water)

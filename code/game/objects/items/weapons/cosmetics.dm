@@ -4,6 +4,7 @@
 	desc = "An unbranded tube of lipstick."
 	icon = 'icons/obj/items/lipstick.dmi'
 	icon_state = "lipstick_0"
+	item_flags = ITEM_FLAG_HOLLOW
 	w_class = ITEM_SIZE_TINY
 	slot_flags = SLOT_EARS
 	color = "#e00606"
@@ -13,7 +14,6 @@
 
 /obj/item/lipstick/Initialize()
 	. = ..()
-	item_flags |= ITEM_FLAG_HOLLOW
 	if(color_desc)
 		desc += " This one is in [color_desc]."
 	update_icon()

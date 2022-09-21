@@ -7,6 +7,7 @@
 	w_class = ITEM_SIZE_TINY
 	throwforce = 4
 	obj_flags = OBJ_FLAG_CONDUCTIBLE
+	item_flags = ITEM_FLAG_HOLLOW
 	slot_flags = SLOT_LOWER_BODY
 	attack_verb = list("burnt", "singed")
 	lit_heat = 1500
@@ -33,7 +34,6 @@
 
 /obj/item/flame/lighter/Initialize()
 	. = ..()
-	item_flags |= ITEM_FLAG_HOLLOW
 	create_reagents(max_fuel)
 	reagents.add_reagent(/decl/material/liquid/fuel, max_fuel)
 	set_extension(src, /datum/extension/base_icon_state, icon_state)
