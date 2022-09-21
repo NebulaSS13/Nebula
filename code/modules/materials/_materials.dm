@@ -426,9 +426,9 @@ INITIALIZE_IMMEDIATE(/obj/effect/gas_overlay)
 		return create_object(target, amount, object_type = drop_type)
 
 // As above.
-/decl/material/proc/place_shard(var/turf/target)
+/decl/material/proc/place_shards(var/turf/target, var/amount = 1)
 	if(shard_type)
-		return create_object(target, 1, /obj/item/shard) //#FIXME: Creates one shard, returns a list...
+		return create_object(target, amount, /obj/item/shard)
 
 /**Places downa as many shards as needed for the given amount of matter units. Returns a list of all the cuttings. */
 /decl/material/proc/place_cuttings(var/turf/target, var/matter_units)
