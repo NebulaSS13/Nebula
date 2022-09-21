@@ -26,4 +26,4 @@
 	icon_state = "cane"
 	item_state = "stick"
 	material = /decl/material/solid/wood/ebony
-	matter = list(/decl/material/solid/plastic = MATTER_AMOUNT_TRACE) //No ivory material :c
+	matter = list(/decl/material/solid/bone = MATTER_AMOUNT_TRACE) //No ivory material :c
