@@ -1,6 +1,3 @@
-#define MIN_TEMPERATURE_COEFFICIENT 1
-#define MAX_TEMPERATURE_COEFFICIENT 10
-
 /atom
 	var/temperature = T20C
 	var/temperature_coefficient = MAX_TEMPERATURE_COEFFICIENT
@@ -17,19 +14,6 @@
 
 /turf
 	temperature_coefficient = MIN_TEMPERATURE_COEFFICIENT
-
-/obj/Initialize()
-	. = ..()
-	temperature_coefficient = isnull(temperature_coefficient) ? Clamp(MAX_TEMPERATURE_COEFFICIENT - w_class, MIN_TEMPERATURE_COEFFICIENT, MAX_TEMPERATURE_COEFFICIENT) : temperature_coefficient
-	create_matter()
-
-/obj/proc/HandleObjectHeating(var/obj/item/heated_by, var/mob/user, var/adjust_temp)
-	if(ATOM_SHOULD_TEMPERATURE_ENQUEUE(src))
-		visible_message(SPAN_NOTICE("\The [user] carefully heats \the [src] with \the [heated_by]."))
-		var/diff_temp = (adjust_temp - temperature)
-		if(diff_temp >= 0)
-			var/altered_temp = max(temperature + (ATOM_TEMPERATURE_EQUILIBRIUM_CONSTANT * temperature_coefficient * diff_temp), 0)
-			ADJUST_ATOM_TEMPERATURE(src, min(adjust_temp, altered_temp))
 
 /mob/Initialize()
 	. = ..()
@@ -60,6 +44,3 @@
 	else
 		temperature = adjust_temp
 		return PROCESS_KILL
-
-#undef MIN_TEMPERATURE_COEFFICIENT
-#undef MAX_TEMPERATURE_COEFFICIENT

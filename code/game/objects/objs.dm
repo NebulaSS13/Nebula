@@ -18,6 +18,11 @@
 	/// Reference to material decl. If set to a string corresponding to a material ID on /obj/item or /obj/structure, will init the item with that material.
 	var/decl/material/material
 
+/obj/Initialize()
+	. = ..()
+	temperature_coefficient = isnull(temperature_coefficient) ? Clamp(MAX_TEMPERATURE_COEFFICIENT - w_class, MIN_TEMPERATURE_COEFFICIENT, MAX_TEMPERATURE_COEFFICIENT) : temperature_coefficient
+	create_matter()
+
 /obj/Destroy()
 	STOP_PROCESSING(SSobj, src)
 	return ..()
@@ -39,7 +44,7 @@
 
 	var/decl/material/old_material = material
 	if(new_material)
-		if(ispath(new_material, /decl))
+		if(ispath(new_material, /decl/material))
 			new_material = GET_DECL(new_material)
 		if(istype(new_material, /decl/material))
 			material = new_material
@@ -235,3 +240,11 @@
 
 /obj/get_mob()
 	return buckled_mob
+
+/obj/proc/HandleObjectHeating(var/obj/item/heated_by, var/mob/user, var/adjust_temp)
+	if(ATOM_SHOULD_TEMPERATURE_ENQUEUE(src))
+		visible_message(SPAN_NOTICE("\The [user] carefully heats \the [src] with \the [heated_by]."))
+		var/diff_temp = (adjust_temp - temperature)
+		if(diff_temp >= 0)
+			var/altered_temp = max(temperature + (ATOM_TEMPERATURE_EQUILIBRIUM_CONSTANT * temperature_coefficient * diff_temp), 0)
+			ADJUST_ATOM_TEMPERATURE(src, min(adjust_temp, altered_temp))

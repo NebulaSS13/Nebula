@@ -58,7 +58,7 @@
 
 //Third rgument may be a dna datum; if null will be set to holder's dna.
 /obj/item/organ/Initialize(ml, material_key, var/datum/dna/given_dna)
-	. = ..(mapload, material_key)
+	. = ..(ml, material_key)
 	if(. != INITIALIZE_HINT_QDEL)
 		if(!BP_IS_PROSTHETIC(src))
 			setup_as_organic(given_dna)

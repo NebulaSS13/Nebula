@@ -74,7 +74,7 @@
 		return
 
 	if(!istype(material))
-		update_icon()
+		queue_icon_update()
 		return TRUE
 
 	health = round(material_health_multiplier * material.integrity)
@@ -95,7 +95,7 @@
 			set_extension(src, armor_type, armor, armor_degradation_speed)
 		else
 			remove_extension(src, armor_type)
-	update_icon()
+	queue_icon_update()
 	return TRUE
 
 /obj/item/get_matter_amount_modifier()

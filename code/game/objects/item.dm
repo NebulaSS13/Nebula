@@ -119,7 +119,11 @@
 		matter[material.type] = max(matter[material.type], round(MATTER_AMOUNT_PRIMARY * get_matter_amount_modifier()))
 	UNSETEMPTY(matter)
 
-/obj/item/Initialize()
+/obj/item/Initialize(var/ml, var/material_key)
+	if(!ispath(material_key, /decl/material))
+		material_key = material
+	if(material_key)
+		set_material(material_key)
 	. = ..()
 	if(islist(armor))
 		for(var/type in armor)

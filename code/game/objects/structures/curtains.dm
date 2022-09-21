@@ -80,7 +80,7 @@
 	opacity = FALSE
 
 /obj/structure/curtain/Initialize()
-	. = ..(ml)
+	. = ..()
 	set_extension(src, /datum/extension/turf_hand)
 	if(curtain_kind_path)
 		set_curtain_kind(GET_DECL(curtain_kind_path))
