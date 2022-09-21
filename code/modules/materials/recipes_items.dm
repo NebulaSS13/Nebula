@@ -293,9 +293,3 @@
 	result_type    = /obj/item/paper
 	res_amount     = 4
 	max_res_amount = 30
-
-/datum/stack_recipe/wrapping_paper
-	title          = "wrapping paper"
-	result_type    = /obj/item/wrapping_paper
-	res_amount     = 4
-	max_res_amount = 30

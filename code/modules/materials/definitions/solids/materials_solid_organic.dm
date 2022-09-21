@@ -119,7 +119,6 @@
 	if(reinforce_material)	//recipes below don't support composite materials
 		return
 	. += new/datum/stack_recipe/paper_sheets(src)
-	. += new/datum/stack_recipe/wrapping_paper(src)
 
 /decl/material/solid/cloth //todo
 	name = "cotton"
