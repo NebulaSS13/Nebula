@@ -25,10 +25,10 @@
 
 /obj/machinery/atmospherics/unary/tank/Initialize()
 	. = ..()
+	air_contents.volume = volume
+	air_contents.temperature = T20C
+	
 	if(filling)
-		air_contents.volume = volume
-		air_contents.temperature = T20C
-
 		var/list/gases = list()
 		for(var/gas in filling)
 			gases += gas
