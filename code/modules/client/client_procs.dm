@@ -530,18 +530,15 @@ var/global/const/MAX_VIEW = 41
 	if(mob)
 		mob.reload_fullscreen()
 
-/client/proc/toggle_fullscreen(value)
-	set waitfor = FALSE
-
-	winset(src, null, {"
-	mainwindow.is-maximized = false;
-	mainwindow.can-resize = [(value == PREF_BASIC) || (value == PREF_FULL) ? "false" : "true"];
-	mainwindow.titlebar = [(value == PREF_BASIC) || (value == PREF_FULL) ? "false" : "true"];
-	mainwindow.menu = [value == PREF_FULL ? "null" : "menu"];
-	mainwindow.statusbar = [value == PREF_FULL ? "false" : "true"];
-	mainwindow.split.pos = [(value == PREF_BASIC) || (value == PREF_FULL) ? "0x0" : "3x0"];
-	"})
-	winset(src, null, "mainwindow.is-maximized = true;")
+/client/proc/toggle_fullscreen(new_value)
+	switch(new_value)
+		if(PREF_BASIC)
+			winset(src, "mainwindow", "is-maximized=false;can-resize=false;titlebar=false")
+		if(PREF_FULL)
+			winset(src, "mainwindow", "is-maximized=false;can-resize=false;titlebar=false;menu=null")
+		else
+			winset(src, "mainwindow", "is-maximized=false;can-resize=true;titlebar=true;menu=menu")
+	winset(src, "mainwindow", "is-maximized=true")
 
 /client/verb/fit_viewport()
 	set name = "Fit Viewport"
