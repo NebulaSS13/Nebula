@@ -81,11 +81,11 @@
 	return master_item.Adjacent(neighbor)
 
 // Used by webbings, coat pockets, etc
-/obj/item/storage/internal/pockets/Initialize(mapload, var/slots, var/slot_size)
+/obj/item/storage/internal/pockets/Initialize(mapload, var/slots, var/slot_size) // TODO fix Initialize params
 	storage_slots = slots
 	max_w_class = slot_size
 	. = ..()
 
-/obj/item/storage/internal/pouch/Initialize(mapload, var/storage_space)
+/obj/item/storage/internal/pouch/Initialize(mapload, var/storage_space) // TODO fix Initialize params
 	max_storage_space = storage_space
 	. = ..()

@@ -12,7 +12,7 @@
 	var/datum/artifact_find/artifact_find
 	var/last_act = 0
 
-/obj/structure/boulder/Initialize(var/ml, var/_mat, var/coloration)
+/obj/structure/boulder/Initialize(var/ml, var/_mat, var/coloration) // TODO fix Initialize params
 	. = ..()
 	icon_state = "boulder[rand(1,6)]"
 	if(coloration)

@@ -12,7 +12,7 @@
 	var/datum/seed/seed
 	var/potency = -1
 
-/obj/item/chems/food/grown/Initialize(mapload, planttype)
+/obj/item/chems/food/grown/Initialize(mapload, planttype) // TODO fix Initialize params
 	. = ..(mapload)
 	if(planttype)
 		plantname = planttype
@@ -325,7 +325,7 @@ var/global/list/_wood_materials = list(
 
 var/global/list/fruit_icon_cache = list()
 
-/obj/item/chems/food/fruit_slice/Initialize(mapload, var/datum/seed/S)
+/obj/item/chems/food/fruit_slice/Initialize(mapload, var/datum/seed/S) // TODO fix Initialize params
 	. = ..(mapload)
 	// Need to go through and make a general image caching controller. Todo.
 	if(!istype(S))

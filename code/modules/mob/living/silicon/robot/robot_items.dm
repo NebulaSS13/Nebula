@@ -383,7 +383,7 @@
 	. = ..()
 	to_chat(user, "It can hold up to [capacity] item\s.")
 
-/obj/item/robot_rack/Initialize(mapload, starting_objects = 0)
+/obj/item/robot_rack/Initialize(mapload, starting_objects = 0) // TODO fix Initialize params
 	. = ..()
 	for(var/i = 1, i <= min(starting_objects, capacity), i++)
 		held += new object_type(src)

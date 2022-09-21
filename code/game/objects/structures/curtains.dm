@@ -7,7 +7,7 @@
 	w_class = ITEM_SIZE_HUGE //curtains, yeap
 	var/curtain_kind_path = /decl/curtain_kind //path to decl containing the curtain's details
 
-/obj/item/curtain/Initialize(ml, material_key)
+/obj/item/curtain/Initialize()
 	. = ..()
 	if(curtain_kind_path)
 		set_curtain_kind(GET_DECL(curtain_kind_path))
@@ -79,7 +79,7 @@
 	layer = ABOVE_HUMAN_LAYER
 	opacity = FALSE
 
-/obj/structure/curtain/Initialize(ml, _mat, _reinf_mat)
+/obj/structure/curtain/Initialize()
 	. = ..(ml)
 	set_extension(src, /datum/extension/turf_hand)
 	if(curtain_kind_path)

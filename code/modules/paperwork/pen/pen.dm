@@ -16,7 +16,7 @@
 	var/iscrayon = FALSE
 	var/isfancy = FALSE
 
-/obj/item/pen/Initialize(ml, material_key)
+/obj/item/pen/Initialize()
 	. = ..()
 	set_extension(src, /datum/extension/tool, list(TOOL_DRILL = TOOL_QUALITY_WORST))
 

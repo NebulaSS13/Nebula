@@ -1,5 +1,6 @@
 /obj/item/ore
-	name = "ore"
+	name = "chunk"
+	desc = "A lump of some unknown material."
 	icon_state = "lump"
 	icon = 'icons/obj/materials/ore.dmi'
 	randpixel = 8
@@ -10,11 +11,15 @@
 
 /obj/item/ore/set_material(var/new_material)
 	. = ..()
-	if(. && istype(material))
-		name = material.ore_name ? material.ore_name : "[material.name] chunk"
-		desc = material.ore_desc ? material.ore_desc : "A lump of ore."
-		color = material.color
-		icon_state = material.ore_icon_overlay ? material.ore_icon_overlay : "lump"
+	if(.)
+		if(material)
+			name = material.ore_name || "[material.solid_name] chunk"
+			desc = material.ore_desc || "A lump of [material.solid_name]."
+		else
+			name = initial(name)
+			desc = initial(desc)
+		color = material?.color
+		icon_state = material?.ore_icon_overlay || "lump"
 		if(icon_state == "dust")
 			slot_flags = SLOT_HOLSTER
 

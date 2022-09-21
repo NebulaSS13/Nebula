@@ -137,7 +137,7 @@
 	material = /decl/material/solid/metal/steel
 	matter = list(/decl/material/solid/fiberglass = MATTER_AMOUNT_REINFORCEMENT)
 
-/obj/item/cell/device/variable/Initialize(mapload, charge_amount)
+/obj/item/cell/device/variable/Initialize(mapload, charge_amount) // TODO fix Initialize params
 	maxcharge = charge_amount
 	return ..(mapload)
 

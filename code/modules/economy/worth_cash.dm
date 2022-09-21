@@ -16,7 +16,7 @@
 	var/can_flip = TRUE // Cooldown tracker for single-coin flips.
 	var/static/overlay_cap = 50 // Max overlays to show in this pile.
 
-/obj/item/cash/Initialize(ml, material_key)
+/obj/item/cash/Initialize()
 	. = ..()
 	if(!ispath(currency, /decl/currency))
 		currency = global.using_map.default_currency
@@ -24,7 +24,7 @@
 		update_from_worth()
 
 /obj/item/cash/get_base_value()
-	. = holographic ? 0 : absolute_worth 
+	. = holographic ? 0 : absolute_worth
 
 /obj/item/cash/proc/set_currency(var/new_currency)
 	currency = new_currency
@@ -182,7 +182,7 @@
 	var/lock_type = /datum/extension/lockable/charge_stick
 	var/grade = "peasant"
 
-/obj/item/charge_stick/Initialize(ml, material_key)
+/obj/item/charge_stick/Initialize()
 	. = ..()
 	id = "[grade]-card-[sequential_id("charge_stick")]"
 	if(!ispath(currency, /decl/currency))
@@ -247,7 +247,7 @@
 		var/decl/currency/cur = GET_DECL(currency)
 		to_chat(user, SPAN_NOTICE("[html_icon(src)] [src] chirps, \"Completed transfer of [amount] [cur.name].\""))
 		return TRUE
-	
+
 	if(lock.attackby(W, user))
 		return TRUE
 	return ..()
@@ -260,7 +260,7 @@
 
 /obj/item/charge_stick/attack_self(var/mob/user)
 	var/datum/extension/lockable/lock = get_extension(src, /datum/extension/lockable)
-	lock.ui_interact(user)		
+	lock.ui_interact(user)
 
 /obj/item/charge_stick/proc/is_locked()
 	var/datum/extension/lockable/lock = get_extension(src, /datum/extension/lockable)
@@ -275,7 +275,7 @@
 		overlays += I
 
 	if(get_world_inventory_state() == ICON_STATE_WORLD)
-		return 
+		return
 
 	var/datum/extension/lockable/lock = get_extension(src, /datum/extension/lockable)
 	if(lock.locked)
@@ -316,6 +316,6 @@
 
 /atom/movable/proc/GetChargeStick()
 	return null
-	
+
 /obj/item/charge_stick/GetChargeStick()
 	return src

@@ -5,14 +5,14 @@
 	icon_state = "clustertool"
 	w_class = ITEM_SIZE_SMALL
 
-/obj/item/clustertool/Initialize(ml, material_key)
+/obj/item/clustertool/Initialize()
 	. = ..()
 	set_extension(src, /datum/extension/tool/variable, list(
 		TOOL_WRENCH =      TOOL_QUALITY_GOOD,
 		TOOL_WIRECUTTERS = TOOL_QUALITY_GOOD,
 		TOOL_CROWBAR =     TOOL_QUALITY_GOOD,
 		TOOL_SCREWDRIVER = TOOL_QUALITY_GOOD
-	))	
+	))
 
 /obj/item/clustertool/on_update_icon()
 	icon_state = initial(icon_state)

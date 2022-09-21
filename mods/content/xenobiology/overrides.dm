@@ -14,7 +14,7 @@
 	if(!isslime(M))
 		. |= "slime"
 
-/obj/item/scanner/xenobio/Initialize(ml, material_key)
+/obj/item/scanner/xenobio/Initialize()
 	. = ..()
 	valid_targets |= /mob/living/slime
 
@@ -31,10 +31,10 @@
 /obj/machinery/smartfridge/secure/extract/accept_check(var/obj/item/O)
 	return istype(O,/obj/item/slime_extract)
 
-/obj/item/gripper/research/Initialize(ml, material_key)
+/obj/item/gripper/research/Initialize()
 	. = ..()
 	can_hold |= /obj/item/slime_extract
 
-/obj/item/gripper/cultivator/Initialize(ml, material_key)
+/obj/item/gripper/cultivator/Initialize()
 	. = ..()
 	can_hold |= /obj/item/slime_extract

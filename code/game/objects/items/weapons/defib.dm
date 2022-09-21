@@ -539,7 +539,7 @@
 /obj/item/shockpaddles/linked
 	var/obj/item/defibrillator/base_unit
 
-/obj/item/shockpaddles/linked/Initialize(mapload, obj/item/defibrillator/defib)
+/obj/item/shockpaddles/linked/Initialize(mapload, obj/item/defibrillator/defib) // TODO fix Initialize params
 	. = ..(mapload)
 	base_unit = defib
 

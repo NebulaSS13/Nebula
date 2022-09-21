@@ -28,7 +28,7 @@
 	else if(length(harvestable))
 		to_chat(user, SPAN_NOTICE("You can see [length(harvestable)] harvestable fruit\s."))
 
-/obj/structure/flora/plant/Initialize(ml, _mat, _reinf_mat, datum/seed/_plant)
+/obj/structure/flora/plant/Initialize(ml, _mat, _reinf_mat, datum/seed/_plant) // TODO fix Initialize params
 	if(!plant && _plant)
 		plant = _plant
 	if(!plant)

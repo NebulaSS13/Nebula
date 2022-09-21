@@ -21,8 +21,8 @@
 	var/symbol_color = "none"
 	var/width = 1 // For multi-tile doors
 
-/obj/structure/door_assembly/Initialize(mapload, _mat, _reinf_mat, _dir)
-	. = ..(mapload, _mat, _reinf_mat)
+/obj/structure/door_assembly/Initialize(ml, _mat, _reinf_mat, _dir) // TODO fix Initialize params
+	. = ..(ml, _mat, _reinf_mat)
 	set_dir(_dir)
 	update_icon()
 

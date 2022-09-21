@@ -18,10 +18,10 @@
 	shed_atom(escapee)
 	return TRUE
 
-/obj/structure/diona_gestalt/Initialize(var/mapload)
+/obj/structure/diona_gestalt/Initialize()
 	eyes_overlay = emissive_overlay(icon = icon, icon_state = "eyes_gestalt")
 	update_icon()
-	. = ..(mapload)
+	. = ..()
 
 /obj/structure/diona_gestalt/on_update_icon()
 	..()

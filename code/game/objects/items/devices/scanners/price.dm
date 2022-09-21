@@ -12,7 +12,7 @@
 	)
 	var/scanner_currency
 
-/obj/item/scanner/price/Initialize(ml, material_key)
+/obj/item/scanner/price/Initialize()
 	. = ..()
 	if(!ispath(scanner_currency, /decl/currency))
 		scanner_currency = global.using_map.default_currency

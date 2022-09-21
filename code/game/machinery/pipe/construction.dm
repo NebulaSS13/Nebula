@@ -21,7 +21,7 @@ Buildable meters
 	var/pipe_class = PIPE_CLASS_BINARY
 	var/rotate_class = PIPE_ROTATE_STANDARD
 
-/obj/item/pipe/Initialize(var/mapload, var/obj/machinery/atmospherics/P)
+/obj/item/pipe/Initialize(var/mapload, var/obj/machinery/atmospherics/P) // TODO fix Initialize() params
 	. = ..(mapload, null)
 	set_extension(src, /datum/extension/parts_stash)
 	if(!istype(P))

@@ -28,14 +28,14 @@
 	layer = ABOVE_HUMAN_LAYER  //so you can mark bodies
 	var/number = 1
 
-/obj/item/csi_marker/Initialize(mapload)
+/obj/item/csi_marker/Initialize()
 	. = ..()
 	desc += " This one is marked with [number]"
 	update_icon()
 
 /obj/item/csi_marker/on_update_icon()
 	icon_state = "card[Clamp(number,1,7)]"
-	
+
 /obj/item/csi_marker/n1
 	number = 1
 /obj/item/csi_marker/n2

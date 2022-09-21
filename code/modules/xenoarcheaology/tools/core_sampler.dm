@@ -41,7 +41,7 @@
 	. = ..()
 	if(proximity_flag)
 		sample_item(target, user)
-	
+
 /obj/item/rocksliver
 	name = "rock sliver"
 	desc = "It looks extremely delicate."
@@ -50,8 +50,8 @@
 	randpixel = 8
 	w_class = ITEM_SIZE_TINY
 	sharp = 1
-	
+
 /obj/item/rocksliver/Initialize(ml, material_key, geodata)
-	. = ..()
+	. = ..(ml, material_key)
 	icon_state = "sliver[rand(1, 3)]"
 	set_extension(src, /datum/extension/geological_data, geodata)

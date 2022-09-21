@@ -17,7 +17,7 @@
 	var/constructed_path = /obj/structure/disposalpipe
 	var/built_icon_state
 
-/obj/structure/disposalconstruct/Initialize(mapload, var/P = null)
+/obj/structure/disposalconstruct/Initialize(mapload, var/P = null) // TODO fix Initialize params
 	. = ..(mapload)
 	if(P)
 		if(istype(P, /obj/structure/disposalpipe))//Unfortunately a necessary evil since some things are machines and other things are structures
@@ -212,7 +212,7 @@
 /obj/structure/disposalconstruct/machine
 	obj_flags = 0 // No rotating
 
-/obj/structure/disposalconstruct/machine/Initialize(mapload, P)
+/obj/structure/disposalconstruct/machine/Initialize(mapload, P) // TODO fix Initialize params
 	. = ..()
 	set_extension(src, /datum/extension/parts_stash)
 

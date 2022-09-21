@@ -13,7 +13,7 @@
 	req_access = list(list(access_heads, access_security))
 	var/datum/computer_file/report/warrant/active
 
-/obj/item/holowarrant/Initialize(ml, material_key)
+/obj/item/holowarrant/Initialize()
 	. = ..()
 	set_extension(src, /datum/extension/network_device/lazy)
 
@@ -49,7 +49,7 @@
 		active = null
 		update_icon()
 		return TOPIC_REFRESH
-	
+
 	if(href_list["select"])
 		var/list/active_warrants = list()
 		for(var/datum/computer_file/report/warrant/W in global.all_warrants)
@@ -83,7 +83,7 @@
 			var/datum/report_field/signature/auth = active.field_from_name("Authorized by")
 			if(choice == "Yes")
 				auth.ask_value(user)
-			user.visible_message(SPAN_NOTICE("You swipe \the [I] through the [src]."), 
+			user.visible_message(SPAN_NOTICE("You swipe \the [I] through the [src]."),
 								 SPAN_NOTICE("[user] swipes \the [I] through the [src]."))
 			broadcast_security_hud_message("[active.get_broadcast_summary()] has been authorized by [auth.get_value()].", src)
 		else

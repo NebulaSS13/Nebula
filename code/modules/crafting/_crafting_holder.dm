@@ -26,7 +26,7 @@
 		if(length(next_steps))
 			to_chat(user, SPAN_NOTICE("You could continue to work on this with <b>[english_list(next_steps, and_text = " or ")]</b>."))
 
-/obj/item/crafting_holder/Initialize(var/ml, var/decl/crafting_stage/initial_stage, var/obj/item/target, var/obj/item/tool, var/mob/user)
+/obj/item/crafting_holder/Initialize(var/ml, var/decl/crafting_stage/initial_stage, var/obj/item/target, var/obj/item/tool, var/mob/user) // TODO fix Initialize params
 	. = ..(ml)
 	name = "[target.name] assembly"
 	var/mob/M = target.loc

@@ -6,7 +6,7 @@
 	bitesize = 1
 	var/fish_type = "fish"
 
-/obj/item/chems/food/sushi/Initialize(mapload, var/obj/item/chems/food/rice, var/obj/item/chems/food/topping)
+/obj/item/chems/food/sushi/Initialize(mapload, var/obj/item/chems/food/rice, var/obj/item/chems/food/topping) // TODO fix Initialize params
 	. = ..(mapload)
 
 	if(istype(topping))
@@ -58,7 +58,7 @@
 	var/fish_type = "fish"
 	var/slices = 1
 
-/obj/item/chems/food/sashimi/Initialize(mapload, var/_fish_type)
+/obj/item/chems/food/sashimi/Initialize(mapload, var/_fish_type) // TODO fix Initialize params
 	. = ..(mapload)
 	if(_fish_type) fish_type = _fish_type
 	name = "[fish_type] sashimi"

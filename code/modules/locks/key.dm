@@ -6,7 +6,7 @@
 	w_class = ITEM_SIZE_TINY
 	var/key_data = ""
 
-/obj/item/key/Initialize(mapload,var/data)
+/obj/item/key/Initialize(mapload, var/data) // TODO fix Initialize params
 	. = ..(mapload)
 	if(data)
 		key_data = data

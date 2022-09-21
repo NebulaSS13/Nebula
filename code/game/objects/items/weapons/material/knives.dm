@@ -15,20 +15,20 @@
 	item_flags = ITEM_FLAG_CAN_HIDE_IN_SHOES
 	applies_material_name = TRUE
 	applies_material_colour = TRUE
-	pickup_sound = 'sound/foley/knife1.ogg' 
+	pickup_sound = 'sound/foley/knife1.ogg'
 	drop_sound = 'sound/foley/knifedrop3.ogg'
 
 	var/draw_handle
 	var/handle_color
 	var/valid_handle_colors
 
-/obj/item/knife/Initialize(ml, material_key)
+/obj/item/knife/Initialize()
 	. = ..()
 	if(!has_extension(src, /datum/extension/tool))
-		set_extension(src, /datum/extension/tool/variable, list( 
+		set_extension(src, /datum/extension/tool/variable, list(
 			TOOL_SCALPEL =     TOOL_QUALITY_MEDIOCRE,
 			TOOL_SAW =         TOOL_QUALITY_BAD,
-			TOOL_RETRACTOR =   TOOL_QUALITY_BAD, 
+			TOOL_RETRACTOR =   TOOL_QUALITY_BAD,
 			TOOL_SCREWDRIVER = TOOL_QUALITY_BAD
 		))
 

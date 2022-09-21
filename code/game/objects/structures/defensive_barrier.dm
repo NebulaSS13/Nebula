@@ -183,7 +183,7 @@
 	var/stored_health = 200
 	var/stored_max_health = 200
 
-/obj/item/defensive_barrier/Initialize(ml, material_key)
+/obj/item/defensive_barrier/Initialize()
 	. = ..()
 	if(material)
 		name = "[material.solid_name] [initial(name)]"

@@ -50,7 +50,7 @@
 
 	var/persist_on_init = TRUE
 
-/obj/item/paper/Initialize(mapload, text, title, list/md = null)
+/obj/item/paper/Initialize(mapload, text, title, list/md = null) // TODO fix Initialize params
 	. = ..(mapload)
 	set_content(text ? text : info, title)
 	metadata = md

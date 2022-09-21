@@ -77,7 +77,7 @@
 	material = /decl/material/solid/metal/steel
 	matter = list(/decl/material/solid/fiberglass = MATTER_AMOUNT_REINFORCEMENT)
 
-/obj/item/pickaxe/drill/Initialize(ml, material_key)
+/obj/item/pickaxe/drill/Initialize()
 	. = ..()
 	set_extension(src, /datum/extension/tool, list(TOOL_DRILL = TOOL_QUALITY_MEDIOCRE))
 

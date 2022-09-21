@@ -12,9 +12,8 @@
 	var/base_icon_state = "nboard0"
 	var/const/max_notices = 5
 
-/obj/structure/noticeboard/Initialize(var/ml)
+/obj/structure/noticeboard/Initialize(var/ml) // TODO fix Initialize params
 	. = ..()
-
 	// Grab any mapped notices.
 	if(ml)
 		for(var/obj/item/paper/note in get_turf(src))

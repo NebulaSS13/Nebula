@@ -15,7 +15,7 @@
 	if(loc == user)
 		to_chat(user, SPAN_NOTICE("\The [src] has about [foam_charges] liter\s of sealant left."))
 
-/obj/item/sealant_tank/Initialize(ml, material_key)
+/obj/item/sealant_tank/Initialize()
 	. = ..()
 	create_reagents(max_foam_charges)
 

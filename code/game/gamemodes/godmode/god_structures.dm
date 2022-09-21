@@ -27,7 +27,7 @@
 	var/build_cost = 0 //How much it costs to build this item.
 	var/deity_flags = DEITY_STRUCTURE_NEAR_IMPORTANT
 
-/obj/structure/deity/Initialize(mapload, var/god)
+/obj/structure/deity/Initialize(mapload, var/god) // TODO fix Initialize params
 	. = ..(mapload)
 	if(god)
 		linked_god = god

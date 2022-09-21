@@ -6,7 +6,7 @@
 	material = /decl/material/solid/plastic
 	matter = list(/decl/material/solid/metal/steel = MATTER_AMOUNT_TRACE)
 	var/label = "label_blank"
-	
+
 /obj/item/disk/on_update_icon()
 	. = ..()
 	cut_overlays()
@@ -16,7 +16,7 @@
 		details += mutable_appearance(icon, label, flags = RESET_COLOR)
 	add_overlay(details)
 
-/obj/item/disk/random/Initialize(ml, material_key)
+/obj/item/disk/random/Initialize()
 	color = get_random_colour()
 	. = ..()
 /obj/item/disk/tech_disk

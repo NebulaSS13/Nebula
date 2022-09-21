@@ -8,7 +8,7 @@
 	invisibility = INVISIBILITY_MAXIMUM
 	var/decl/radio_chatter/owner
 
-/obj/item/radio/virtual/Initialize(var/ml, var/decl/radio_chatter/_owner)
+/obj/item/radio/virtual/Initialize(var/ml, var/decl/radio_chatter/_owner) // TODO fix Initialize params
 	. = ..()
 	owner = _owner
 	name = null

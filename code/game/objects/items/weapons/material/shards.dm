@@ -20,7 +20,7 @@
 	item_flags = ITEM_FLAG_CAN_HIDE_IN_SHOES
 	var/has_handle
 
-/obj/item/shard/Initialize(ml, material_key)
+/obj/item/shard/Initialize()
 	. = ..()
 	set_extension(src, /datum/extension/tool, list(TOOL_SCALPEL = TOOL_QUALITY_BAD))
 

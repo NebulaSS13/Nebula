@@ -132,7 +132,7 @@
 						mat_stack.add(taking_sheets)
 						sheets -= taking_sheets
 						updated_stacks = TRUE
-						
+
 				// Create new stacks if needed.
 				if(sheets)
 					M.create_object(src, sheets)
@@ -165,7 +165,7 @@
 	var/datum/mind/backup
 	var/prompting = FALSE // Are we waiting for a user prompt?
 
-/obj/item/organ/internal/voxstack/Initialize(mapload, datum/dna/given_dna)
+/obj/item/organ/internal/voxstack/Initialize(mapload, datum/dna/given_dna) // TODO fix Initialize params
 	. = ..()
 	do_backup()
 	robotize()

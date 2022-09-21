@@ -10,7 +10,7 @@
 
 	var/obj/structure/morgue_tray/connected_tray
 
-/obj/structure/morgue/Initialize(ml, _mat, _reinf_mat)
+/obj/structure/morgue/Initialize()
 	. = ..()
 	connected_tray = new /obj/structure/morgue_tray(src)
 	connected_tray.connected_morgue = src
@@ -54,7 +54,7 @@
 /obj/structure/morgue/proc/close()
 	if(!open)
 		return
-	
+
 	if(!connected_tray)
 		return
 
@@ -68,7 +68,7 @@
 	open = FALSE
 	update_icon()
 
-/obj/structure/morgue/attack_hand(mob/user)	
+/obj/structure/morgue/attack_hand(mob/user)
 	if(open)
 		close()
 	else
@@ -86,15 +86,15 @@
 
 		if((!Adjacent(user) || loc == user))
 			return
-		
+
 		if(has_extension(src, /datum/extension/labels))
 			var/datum/extension/labels/L = get_extension(src, /datum/extension/labels)
 			if(!L.CanAttachLabel(user, new_label))
 				return
-		
+
 		attach_label(user, P, new_label)
 		return
-	else 
+	else
 		return ..()
 
 /obj/structure/morgue/relaymove(mob/user)

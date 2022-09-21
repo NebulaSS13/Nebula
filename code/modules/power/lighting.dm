@@ -600,7 +600,7 @@
 	I.color = null
 	overlays += I
 
-/obj/item/light/Initialize(mapload, obj/machinery/light/fixture = null)
+/obj/item/light/Initialize(mapload, obj/machinery/light/fixture = null) // TODO fix Initialize params
 	. = ..()
 	update_icon()
 

@@ -5,7 +5,7 @@
 		/decl/material/solid/metal/osmium = MATTER_AMOUNT_TRACE
 	)
 
-/obj/item/frame_holder/Initialize(mapload, var/newloc)
+/obj/item/frame_holder/Initialize(mapload, var/newloc) // TODO fix Initialize params
 	..()
 	new /obj/structure/heavy_vehicle_frame(newloc)
 	return  INITIALIZE_HINT_QDEL

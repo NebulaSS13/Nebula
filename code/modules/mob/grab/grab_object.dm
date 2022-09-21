@@ -20,7 +20,7 @@
 /*
 	This section is for overrides of existing procs.
 */
-/obj/item/grab/Initialize(mapload, atom/movable/target, var/use_grab_state, var/defer_hand)
+/obj/item/grab/Initialize(mapload, atom/movable/target, var/use_grab_state, var/defer_hand) // TODO fix Initialize params
 	. = ..(mapload)
 	if(. == INITIALIZE_HINT_QDEL)
 		return

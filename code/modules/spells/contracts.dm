@@ -95,7 +95,7 @@
 	desc = "this contract grants you a boon for signing it."
 	var/path
 
-/obj/item/contract/boon/Initialize(mapload, var/new_path)
+/obj/item/contract/boon/Initialize(mapload, var/new_path) // TODO fix Initialize params
 	. = ..(mapload)
 	if(new_path)
 		path = new_path

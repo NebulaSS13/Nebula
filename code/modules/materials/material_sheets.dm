@@ -16,7 +16,7 @@
 	plural_name = "sheets"
 	var/decl/material/reinf_material
 
-/obj/item/stack/material/Initialize(mapload, var/amount, var/_material, var/_reinf_material)
+/obj/item/stack/material/Initialize(mapload, var/amount, var/_material, var/_reinf_material) // TODO fix Initialize params
 	. = ..(mapload, amount, _material)
 	if(!istype(material))
 		return INITIALIZE_HINT_QDEL

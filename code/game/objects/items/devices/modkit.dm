@@ -15,12 +15,12 @@
 		/obj/item/clothing/suit/space/void
 		)
 
-/obj/item/modkit/Initialize(ml, material_key)
+/obj/item/modkit/Initialize()
 	if(!target_bodytype)
 		var/decl/species/species = GET_DECL(global.using_map.default_species)
 		target_bodytype = species.default_bodytype.bodytype_flag
 	. = ..()
-	
+
 /obj/item/modkit/afterattack(obj/O, mob/user, proximity)
 	if(!proximity)
 		return

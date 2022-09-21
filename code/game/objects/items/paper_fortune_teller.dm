@@ -25,7 +25,7 @@
 		"Please wake up."
 	)
 
-/obj/item/paper_fortune_teller/Initialize(ml, material_key)
+/obj/item/paper_fortune_teller/Initialize()
 	var/list/fortune_options = possible_fortunes.Copy()
 	for(var/i = 1 to 8)
 		fortunes[i] = pick_n_take(fortune_options)

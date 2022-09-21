@@ -84,10 +84,10 @@
 	layer = CATWALK_LAYER//probably? Should cover cables, pipes and the rest of objects that are secured on the floor
 	maxhealth = 100
 
-/obj/structure/net/Initialize(var/mapload)
+/obj/structure/net/Initialize(var/ml)
 	. = ..()
 	update_connections()
-	if (!mapload)//if it's not mapped object but rather created during round, we should update visuals of adjacent net objects
+	if(!ml)//if it's not mapped object but rather created during round, we should update visuals of adjacent net objects
 		var/turf/T = get_turf(src)
 		for (var/turf/AT in T.CardinalTurfs(FALSE))
 			for (var/obj/structure/net/N in AT)
@@ -150,9 +150,9 @@
 	density = 1
 	layer = ABOVE_HUMAN_LAYER
 
-/obj/structure/net/net_wall/Initialize(var/mapload)
+/obj/structure/net/net_wall/Initialize(var/ml)
 	. = ..()
-	if (mapload)//if it's pre-mapped, it should put floor-net below itself
+	if (ml)//if it's pre-mapped, it should put floor-net below itself
 		var/turf/T = get_turf(src)
 		for (var/obj/structure/net/N in T)
 			if (N.type != /obj/structure/net/net_wall)//if there's net that is not a net-wall, we don't need to spawn it

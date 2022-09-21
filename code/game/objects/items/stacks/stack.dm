@@ -30,7 +30,7 @@
 	var/list/charge_costs
 	var/list/datum/matter_synth/synths
 
-/obj/item/stack/Initialize(mapload, amount, material)
+/obj/item/stack/Initialize(mapload, amount, material) // TODO fix initialize params
 
 	if(ispath(amount, /decl/material))
 		PRINT_STACK_TRACE("Stack initialized with material ([amount]) instead of amount.")

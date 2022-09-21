@@ -7,7 +7,7 @@
 	origin_tech = "{'materials':5}"
 	var/obj/item/inside
 
-/obj/item/ore/strangerock/Initialize(mapload, var/find_type = 0)
+/obj/item/ore/strangerock/Initialize(mapload, var/find_type = 0) // TODO fix Initialize params
 	. = ..(mapload)
 	if(find_type)
 		var/decl/archaeological_find/find = GET_DECL(find_type)
@@ -16,7 +16,7 @@
 /obj/item/ore/strangerock/Destroy()
 	QDEL_NULL(inside)
 	. = ..()
-	
+
 /obj/item/ore/strangerock/attackby(var/obj/item/I, var/mob/user)
 	if(istype(I, /obj/item/pickaxe/xeno/brush))
 		if(inside)

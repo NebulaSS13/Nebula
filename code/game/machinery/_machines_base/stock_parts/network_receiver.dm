@@ -6,7 +6,7 @@
 	icon_state = "net_lock"
 	part_flags = PART_FLAG_QDEL
 
-/obj/item/stock_parts/network_receiver/Initialize(ml, material_key)
+/obj/item/stock_parts/network_receiver/Initialize()
 	. = ..()
 	set_extension(src, /datum/extension/network_device/stock_part)
 

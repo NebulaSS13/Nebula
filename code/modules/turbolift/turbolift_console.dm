@@ -31,7 +31,7 @@
 		playsound(src, 'sound/machines/button3.ogg', 100, 1)
 
 
-/obj/structure/lift/Initialize(mapload, var/datum/turbolift/_lift)
+/obj/structure/lift/Initialize(mapload, var/datum/turbolift/_lift) // TODO fix Initialize params
 	. = ..(mapload)
 	lift = _lift
 

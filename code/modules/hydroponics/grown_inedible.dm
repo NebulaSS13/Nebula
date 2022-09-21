@@ -7,7 +7,7 @@
 	var/plantname
 	var/potency = 1
 
-/obj/item/grown/Initialize(mapload,planttype)
+/obj/item/grown/Initialize(mapload,planttype) // TODO fix Initialize params
 	. = ..(mapload)
 
 	create_reagents(50)

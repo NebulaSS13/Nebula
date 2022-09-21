@@ -23,10 +23,10 @@
 	..()
 	if(loaded_tank)
 		add_overlay("tank")
-	if(length(cartridges))	
+	if(length(cartridges))
 		add_overlay("carts[length(cartridges)]")
 
-/obj/structure/sealant_injector/Initialize(ml, _mat, _reinf_mat)
+/obj/structure/sealant_injector/Initialize()
 	. = ..()
 	cartridges = list(
 		new /obj/item/chems/chem_disp_cartridge/aluminium(src) = 3,
@@ -35,7 +35,7 @@
 	)
 
 /obj/structure/sealant_injector/attackby(obj/item/O, mob/user)
-	
+
 	if(istype(O, /obj/item/sealant_tank))
 		if(loaded_tank)
 			to_chat(user, SPAN_WARNING("\The [src] already has a sealant tank inserted."))
@@ -80,7 +80,7 @@
 		cart.reagents.trans_to_holder(loaded_tank.reagents, min(cart.reagents.total_volume, cartridges[cart] * fill_space))
 	if(injected)
 		playsound(loc, 'sound/effects/refill.ogg', 50, 1)
-	
+
 /obj/structure/sealant_injector/attack_hand(mob/user)
 
 	if(loaded_tank)

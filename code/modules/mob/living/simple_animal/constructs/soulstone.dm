@@ -13,9 +13,9 @@
 	var/smashing = 0
 	var/soulstatus = null
 
-/obj/item/soulstone/Initialize(var/mapload)
+/obj/item/soulstone/Initialize()
 	shade = new /mob/living/simple_animal/shade(src)
-	. = ..(mapload)
+	. = ..()
 
 /obj/item/soulstone/on_update_icon()
 	cut_overlays()

@@ -29,12 +29,12 @@
 	if(anchored != last_anchored)
 		find_connections()
 
-/obj/structure/ladder/Initialize(maploading, material)
+/obj/structure/ladder/Initialize()
 	..()
 	return INITIALIZE_HINT_LATELOAD
 
-/obj/structure/ladder/LateInitialize(maploading, material)
-	if(maploading)
+/obj/structure/ladder/LateInitialize(ml)
+	if(ml)
 		for(var/obj/structure/ladder/ladder in loc)
 			if(ladder != src)
 				qdel(ladder)

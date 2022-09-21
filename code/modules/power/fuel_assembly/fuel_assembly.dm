@@ -10,10 +10,10 @@
 	var/luminescence = 0
 	var/initial_amount
 
-/obj/item/fuel_assembly/Initialize(mapload, var/_material, var/list/makeup, var/_colour)
-	. = ..(mapload, _material)
+/obj/item/fuel_assembly/Initialize(ml, material_key, var/list/makeup, var/_colour)
+	. = ..(ml, material_key)
 	LAZYINITLIST(matter)
-	
+
 	if(LAZYLEN(makeup))
 		if(length(makeup) == 1) // Rod is only made from one material.
 			var/decl/material/mat = GET_DECL(makeup[1])
@@ -78,7 +78,7 @@
 
 /obj/item/fuel_assembly/tritium
 	material = /decl/material/gas/hydrogen/tritium
-	
+
 /obj/item/fuel_assembly/supermatter
 	material = /decl/material/solid/exotic_matter
 

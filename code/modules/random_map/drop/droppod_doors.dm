@@ -10,7 +10,7 @@
 	var/deploying
 	var/deployed
 
-/obj/structure/droppod_door/Initialize(mapload, var/autoopen)
+/obj/structure/droppod_door/Initialize(mapload, var/autoopen) // TODO fix Initialize params
 	. = ..(mapload)
 	if(autoopen)
 		spawn(10 SECONDS)

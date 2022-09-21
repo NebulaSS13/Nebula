@@ -7,7 +7,7 @@ var/global/list/tracking_implants = list()
 	known = 1
 	var/id = 1
 
-/obj/item/implant/tracking/Initialize(ml, material_key)
+/obj/item/implant/tracking/Initialize()
 	. = ..()
 	global.tracking_implants += src
 

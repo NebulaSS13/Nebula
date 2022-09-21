@@ -15,7 +15,7 @@
 /obj/structure/ship_munition/disperser_charge/get_single_monetary_worth()
 	. = round(..() * 3) // Artificially inflate the value a bit.
 
-/obj/structure/ship_munition/disperser_charge/Initialize(ml, _mat, _reinf_mat)
+/obj/structure/ship_munition/disperser_charge/Initialize()
 	. = ..()
 	if(chargedesc)
 		name = "\improper [chargedesc] charge"

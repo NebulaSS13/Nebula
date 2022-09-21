@@ -67,9 +67,9 @@ By design, d1 is the smallest direction and d2 is the highest
 /obj/structure/cable/white
 	color = COLOR_SILVER
 
-/obj/structure/cable/Initialize(var/ml)
+/obj/structure/cable/Initialize()
 	// ensure d1 & d2 reflect the icon_state for entering and exiting cable
-	. = ..(ml)
+	. = ..()
 	var/turf/T = src.loc			// hide if turf is not intact
 	if(level==1 && T)
 		hide(!T.is_plating())
@@ -512,7 +512,7 @@ By design, d1 is the smallest direction and d2 is the highest
 	uses_charge = 1
 	charge_costs = list(1)
 
-/obj/item/stack/cable_coil/Initialize(mapload, c_length = MAXCOIL, var/param_color = null)
+/obj/item/stack/cable_coil/Initialize(mapload, c_length = MAXCOIL, var/param_color = null) // TODO fix Initialize params
 	. = ..(mapload, c_length)
 	src.amount = c_length
 	if (param_color) // It should be red by default, so only recolor it if parameter was specified.

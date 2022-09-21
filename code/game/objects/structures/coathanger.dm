@@ -15,7 +15,7 @@
 		thing.dropInto(loc)
 	. = ..()
 
-/obj/structure/coatrack/Initialize(ml, _mat, _reinf_mat)
+/obj/structure/coatrack/Initialize()
 	slots_allowed = list(
 		"[slot_wear_suit_str]" = SLOT_OVER_BODY,
 		"[slot_head_str]" = SLOT_HEAD

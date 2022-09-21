@@ -98,7 +98,7 @@
 	var/movedir = UP
 	var/obj/effect/hoist_hook/source_hook
 
-/obj/structure/hoist/Initialize(mapload, ndir)
+/obj/structure/hoist/Initialize(mapload, ndir) // TODO fix Initialize params
 	. = ..()
 	set_dir(ndir)
 	var/turf/newloc = get_step(src, dir)

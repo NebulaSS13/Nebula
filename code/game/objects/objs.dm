@@ -33,16 +33,22 @@
 			matter[mat] = round(matter[mat] * get_matter_amount_modifier())
 	UNSETEMPTY(matter)
 
-/obj/proc/set_material(var/decl/material/new_material)
+/obj/proc/set_material(var/new_material)
+
 	SHOULD_CALL_PARENT(TRUE)
+
 	var/decl/material/old_material = material
 	if(new_material)
-		if(ispath(new_material))
+		if(ispath(new_material, /decl))
 			new_material = GET_DECL(new_material)
-		if(istype(new_material))
+		if(istype(new_material, /decl/material))
 			material = new_material
+		else
+			CRASH("Non-material decl supplied to set_material().")
+
 	if(old_material == material)
-		return FALSE
+		return FALSE // noop
+
 	// Refresh our matter.
 	LAZYINITLIST(matter)
 	var/old_mat_amt = 0

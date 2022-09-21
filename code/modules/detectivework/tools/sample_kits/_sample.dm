@@ -6,7 +6,7 @@
 	var/list/possible_evidence_types = list(/datum/forensics/fibers)
 	var/list/evidence
 
-/obj/item/forensics/sample/Initialize(mapload, var/atom/supplied)
+/obj/item/forensics/sample/Initialize(mapload, var/atom/supplied) // TODO fix Initialize params
 	. = ..(mapload)
 	if(supplied)
 		copy_evidence(supplied)

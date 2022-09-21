@@ -91,7 +91,7 @@
 /obj/structure/sign/poster/bay_50
 	poster_type = /decl/poster/bay_50
 
-/obj/structure/sign/poster/Initialize(mapload, var/placement_dir = null, var/give_poster_type = null)
+/obj/structure/sign/poster/Initialize(mapload, var/placement_dir = null, var/give_poster_type = null) // TODO fix Initialize params
 	. = ..(mapload)
 	if(!poster_type)
 		if(give_poster_type)

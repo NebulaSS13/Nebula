@@ -35,7 +35,7 @@
 /obj/item/uplink/nano_host()
 	return loc
 
-/obj/item/uplink/Initialize(mapload, var/datum/mind/owner, var/telecrystals = DEFAULT_TELECRYSTAL_AMOUNT)
+/obj/item/uplink/Initialize(mapload, var/datum/mind/owner, var/telecrystals = DEFAULT_TELECRYSTAL_AMOUNT) // TODO fix Initialize params
 	. = ..(mapload)
 	if(!istype(loc, /atom))
 		. = INITIALIZE_HINT_QDEL
@@ -235,6 +235,6 @@
 	if(!hidden_uplink && user.mind)
 		hidden_uplink = new(src, user.mind, DEFAULT_TELECRYSTAL_AMOUNT)
 	. = ..()
-	
+
 /obj/item/uplink/contained/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1, var/uistate = global.contained_topic_state)
 	return ..()

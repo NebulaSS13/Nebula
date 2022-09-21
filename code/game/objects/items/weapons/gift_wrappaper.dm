@@ -117,7 +117,7 @@
 	item_state = "gift"
 	w_class = ITEM_SIZE_HUGE
 
-/obj/item/gift/Initialize(mapload, obj/item/wrapped = null)
+/obj/item/gift/Initialize(mapload, obj/item/wrapped = null) // TODO fix Initialize params
 	. = ..(mapload)
 
 	if(istype(wrapped))

@@ -5,7 +5,7 @@
 	hidden = 1
 	var/activation_emote
 
-/obj/item/implant/uplink/Initialize(mapload, var/amount)
+/obj/item/implant/uplink/Initialize(mapload, var/amount) // TODO fix Initialize params
 	amount = amount || IMPLANT_TELECRYSTAL_AMOUNT(DEFAULT_TELECRYSTAL_AMOUNT)
 	hidden_uplink = new(src, null, amount)
 	. = ..()

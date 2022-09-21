@@ -14,7 +14,7 @@
 
 	var/id_tag
 
-/obj/structure/crematorium/Initialize(ml, _mat, _reinf_mat)
+/obj/structure/crematorium/Initialize()
 	. = ..()
 	connected_tray = new /obj/structure/crematorium_tray(src)
 	connected_tray.connected_crematorium = src
@@ -60,7 +60,7 @@
 /obj/structure/crematorium/proc/close()
 	if(!open)
 		return
-	
+
 	if(!connected_tray)
 		return
 
@@ -78,7 +78,7 @@
 	if(locked)
 		to_chat(usr, SPAN_WARNING("It's currently locked."))
 		return
-	
+
 	if(open)
 		close()
 	else
@@ -96,15 +96,15 @@
 
 		if((!Adjacent(user) || loc == user))
 			return
-		
+
 		if(has_extension(src, /datum/extension/labels))
 			var/datum/extension/labels/L = get_extension(src, /datum/extension/labels)
 			if(!L.CanAttachLabel(user, new_label))
 				return
-		
+
 		attach_label(user, P, new_label)
 		return
-	else 
+	else
 		return ..()
 
 /obj/structure/crematorium/relaymove(mob/user)

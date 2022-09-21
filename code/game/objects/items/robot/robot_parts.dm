@@ -17,7 +17,7 @@
 	SHOULD_CALL_PARENT(FALSE)
 	return FALSE
 
-/obj/item/robot_parts/Initialize(mapload, var/model)
+/obj/item/robot_parts/Initialize(mapload, var/model) // TODO fix Initialize params
 	. = ..(mapload)
 	if(model_info)
 		if(!ispath(model, /decl/prosthetics_manufacturer))

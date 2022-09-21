@@ -32,8 +32,8 @@
 		return TRUE
 	. = ..()
 
-/obj/item/slime_extract/Initialize(var/ml, var/material, var/_stype = /decl/slime_colour/grey)
-	. = ..(ml, material)
+/obj/item/slime_extract/Initialize(var/ml, var/material_key, var/_stype = /decl/slime_colour/grey)
+	. = ..(ml, material_key)
 	slime_type = _stype
 	if(!ispath(slime_type, /decl/slime_colour))
 		PRINT_STACK_TRACE("Slime extract initialized with non-decl slime colour: [slime_type || "NULL"].")

@@ -12,7 +12,7 @@
 	var/footstep_type
 	var/mob_offset
 
-/obj/structure/Initialize(var/ml, var/_mat, var/_reinf_mat)
+/obj/structure/Initialize(var/ml, var/_mat, var/_reinf_mat) // TODO fix Initialize params
 	if(ispath(_mat, /decl/material))
 		material = _mat
 	if(ispath(material, /decl/material))
