@@ -18,7 +18,7 @@
 	applies_material_colour = TRUE
 	applies_material_name = TRUE
 
-	pickup_sound = 'sound/foley/knife1.ogg' 
+	pickup_sound = 'sound/foley/knife1.ogg'
 	drop_sound = 'sound/foley/knifedrop3.ogg'
 
 	var/draw_handle
@@ -33,7 +33,7 @@
 		attack_verb = list("attacked", "smashed", "jabbed", "smacked", "prodded", "bonked")
 		hitsound = "chop"
 	. = ..()
-	
+
 /obj/item/sword/on_update_icon()
 	. = ..()
 	if(applies_material_colour)
@@ -63,7 +63,7 @@
 
 /obj/item/sword/katana/set_material(new_material)
 	. = ..()
-	if(applies_material_name && istype(material, /decl/material/solid/wood))
+	if(. && applies_material_name && istype(material, /decl/material/solid/wood))
 		SetName("[material.solid_name] bokutou")
 		desc = "Finest wooden fibers folded exactly one thousand times by master robots."
 

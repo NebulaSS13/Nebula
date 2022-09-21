@@ -35,8 +35,8 @@
 				hand.take_external_damage(rand(5,10), used_weapon = src)
 
 /obj/item/shard/set_material(var/new_material)
-	..(new_material)
-	if(!istype(material))
+	. = ..(new_material)
+	if(!. || !istype(material))
 		return
 
 	icon_state = "[material.shard_icon][pick("large", "medium", "small")]"

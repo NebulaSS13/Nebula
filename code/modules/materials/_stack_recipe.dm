@@ -57,13 +57,9 @@
 	if(user && set_dir_on_spawn)
 		O.set_dir(user?.dir)
 
-	// Temp block pending material/matter rework
-	if(use_material && use_material != DEFAULT_FURNITURE_MATERIAL && istype(O, /obj))
-		var/obj/struct = O
-		if(LAZYACCESS(struct.matter, DEFAULT_FURNITURE_MATERIAL) > 0)
-			struct.matter[use_material] = max(struct.matter[use_material], struct.matter[DEFAULT_FURNITURE_MATERIAL])
-			struct.matter -= DEFAULT_FURNITURE_MATERIAL
-	// End temp block
+	if(use_material && istype(O, /obj))
+		var/obj/obj = O
+		obj.set_material(use_material)
 
 	return O
 
@@ -88,4 +84,4 @@
 
 /datum/stack_recipe_list/New(title, recipes)
 	src.title = title
-	src.recipes = recipes 
+	src.recipes = recipes

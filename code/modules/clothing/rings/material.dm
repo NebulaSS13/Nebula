@@ -2,7 +2,7 @@
 //Material Rings
 /obj/item/clothing/ring/material/set_material(var/new_material)
 	. = ..()
-	if(istype(material))
+	if(. && istype(material))
 		name = "[material.solid_name] ring"
 		desc = "A ring made from [material.solid_name]."
 		color = material.color

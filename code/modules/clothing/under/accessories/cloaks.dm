@@ -23,7 +23,7 @@
 	color = get_random_colour(TRUE)
 	. = ..()
 
-// Cloaks should layer over and under everything, so set the layer directly rather 
+// Cloaks should layer over and under everything, so set the layer directly rather
 // than relying on overlay order. This also overlays over inhands but it looks ok.
 /obj/item/clothing/accessory/cloak/adjust_mob_overlay(var/mob/living/user_mob, var/bodytype, var/image/overlay, var/slot, var/bodypart)
 
@@ -135,6 +135,6 @@
 	material_armor_multiplier = 0.5
 
 /obj/item/clothing/accessory/cloak/hide/set_material(var/new_material)
-	..()
-	if(istype(material))
+	. = ..()
+	if(. && istype(material))
 		desc = "A ragged cloak made of [material.solid_name]."

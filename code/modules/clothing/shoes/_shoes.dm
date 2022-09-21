@@ -160,8 +160,8 @@
 		M.update_inv_shoes()
 
 /obj/item/clothing/shoes/set_material(var/new_material)
-	..()
-	if(shine != -1 && material.reflectiveness >= MAT_VALUE_DULL)
+	. = ..()
+	if(. && shine != -1 && material.reflectiveness >= MAT_VALUE_DULL)
 		shine = material.reflectiveness
 
 /obj/item/clothing/shoes/on_update_icon()

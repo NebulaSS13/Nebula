@@ -67,29 +67,36 @@
 		throwforce = round(throwforce)
 		attack_cooldown += material.get_attack_cooldown()
 
-/obj/item/proc/set_material(var/new_material)
-	if(new_material)
-		material = GET_DECL(new_material)
-	if(istype(material))
-		health = round(material_health_multiplier * material.integrity)
-		max_health = health
-		if(material.products_need_process())
-			START_PROCESSING(SSobj, src)
-		if(material.conductive)
-			obj_flags |= OBJ_FLAG_CONDUCTIBLE
+/obj/item/set_material(var/new_material)
+
+	. = ..()
+	if(!.)
+		return
+
+	if(!istype(material))
+		update_icon()
+		return TRUE
+
+	health = round(material_health_multiplier * material.integrity)
+	max_health = health
+	if(material.products_need_process())
+		START_PROCESSING(SSobj, src)
+	if(material.conductive)
+		obj_flags |= OBJ_FLAG_CONDUCTIBLE
+	else
+		obj_flags &= (~OBJ_FLAG_CONDUCTIBLE)
+	update_force()
+	if(applies_material_name)
+		SetName("[material.solid_name] [initial(name)]")
+	if(material_armor_multiplier)
+		armor = material.get_armor(material_armor_multiplier)
+		armor_degradation_speed = material.armor_degradation_speed
+		if(length(armor))
+			set_extension(src, armor_type, armor, armor_degradation_speed)
 		else
-			obj_flags &= (~OBJ_FLAG_CONDUCTIBLE)
-		update_force()
-		if(applies_material_name)
-			SetName("[material.solid_name] [initial(name)]")
-		if(material_armor_multiplier)
-			armor = material.get_armor(material_armor_multiplier)
-			armor_degradation_speed = material.armor_degradation_speed
-			if(length(armor))
-				set_extension(src, armor_type, armor, armor_degradation_speed)
-			else
-				remove_extension(src, armor_type)
-	queue_icon_update()
+			remove_extension(src, armor_type)
+	update_icon()
+	return TRUE
 
 /obj/item/get_matter_amount_modifier()
 	. = ..()

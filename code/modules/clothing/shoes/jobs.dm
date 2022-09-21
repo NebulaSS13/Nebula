@@ -18,10 +18,10 @@
 	applies_material_colour = TRUE
 	force = 3
 	armor = list(
-		melee = ARMOR_MELEE_RESISTANT, 
-		bullet = ARMOR_BALLISTIC_MINOR, 
-		laser = ARMOR_LASER_MINOR, 
-		energy = ARMOR_ENERGY_MINOR, 
+		melee = ARMOR_MELEE_RESISTANT,
+		bullet = ARMOR_BALLISTIC_MINOR,
+		laser = ARMOR_LASER_MINOR,
+		energy = ARMOR_ENERGY_MINOR,
 		bomb = ARMOR_BOMB_PADDED
 		)
 	siemens_coefficient = 0.7
@@ -38,8 +38,9 @@
 	origin_tech = "{'materials':2,'engineering':2}"
 
 /obj/item/clothing/shoes/jackboots/set_material(var/new_material)
-	..()
-	shine = max(shine, artificail_shine)
+	. = ..()
+	if(.)
+		shine = max(shine, artificail_shine)
 
 /obj/item/clothing/shoes/workboots
 	name = "workboots"
@@ -48,9 +49,9 @@
 	material = /decl/material/solid/leather/synth
 	color = "#d88d4b"
 	armor = list(
-		melee = ARMOR_MELEE_RESISTANT, 
-		laser = ARMOR_LASER_MINOR, 
-		energy = ARMOR_ENERGY_SMALL, 
+		melee = ARMOR_MELEE_RESISTANT,
+		laser = ARMOR_LASER_MINOR,
+		energy = ARMOR_ENERGY_SMALL,
 		bomb = ARMOR_BOMB_PADDED
 		)
 	siemens_coefficient = 0.7

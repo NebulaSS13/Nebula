@@ -8,7 +8,6 @@ var/global/list/materials_by_gas_symbol = list()
 	layer = FIRE_LAYER
 	appearance_flags = RESET_COLOR
 	mouse_opacity = 0
-	var/decl/material/material
 
 INITIALIZE_IMMEDIATE(/obj/effect/gas_overlay)
 

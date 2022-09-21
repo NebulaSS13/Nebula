@@ -15,6 +15,12 @@
 	var/armor_penetration = 0
 	var/anchor_fall = FALSE
 	var/holographic = 0 //if the obj is a holographic object spawned by the holodeck
+	/// Reference to material decl. If set to a string corresponding to a material ID on /obj/item or /obj/structure, will init the item with that material.
+	var/decl/material/material
+
+/obj/Destroy()
+	STOP_PROCESSING(SSobj, src)
+	return ..()
 
 /obj/hitby(atom/movable/AM, var/datum/thrownthing/TT)
 	..()
@@ -27,15 +33,29 @@
 			matter[mat] = round(matter[mat] * get_matter_amount_modifier())
 	UNSETEMPTY(matter)
 
-/obj/Destroy()
-	STOP_PROCESSING(SSobj, src)
-	return ..()
+/obj/proc/set_material(var/decl/material/new_material)
+	SHOULD_CALL_PARENT(TRUE)
+	var/decl/material/old_material = material
+	if(new_material)
+		if(ispath(new_material))
+			new_material = GET_DECL(new_material)
+		if(istype(new_material))
+			material = new_material
+	if(old_material == material)
+		return FALSE
+	// Refresh our matter.
+	LAZYINITLIST(matter)
+	var/old_mat_amt = 0
+	if(istype(old_material))
+		old_mat_amt = matter[old_material.type]
+		matter -= old_material.type
+	if(istype(material))
+		matter[material.type] = old_mat_amt || round(MATTER_AMOUNT_PRIMARY * get_matter_amount_modifier())
+	UNSETEMPTY(matter)
+	return TRUE
 
 /obj/proc/get_matter_amount_modifier()
 	. = CEILING(w_class * BASE_OBJECT_MATTER_MULTPLIER)
-
-/obj/item/proc/is_used_on(obj/O, mob/user)
-	return
 
 /obj/assume_air(datum/gas_mixture/giver)
 	if(loc)
@@ -192,7 +212,7 @@
 		return
 
 	set_dir(turn(dir, 90))
-	update_icon() 
+	update_icon()
 
 //For things to apply special effects after damaging an organ, called by organ's take_damage
 /obj/proc/after_wounding(obj/item/organ/external/organ, datum/wound)

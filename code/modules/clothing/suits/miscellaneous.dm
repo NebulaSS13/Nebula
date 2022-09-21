@@ -147,12 +147,12 @@
 	applies_material_name = TRUE
 	material_armor_multiplier = 0.8
 	material = /decl/material/solid/leather
-	var/shine 
+	var/shine
 	var/artificial_shine
 
 /obj/item/clothing/suit/leathercoat/set_material(var/new_material)
-	..()
-	if(material)
+	. = ..()
+	if(. && material)
 		if(material.reflectiveness >= MAT_VALUE_DULL)
 			shine = material.reflectiveness
 		desc = "A long, thick [material.use_name] coat."

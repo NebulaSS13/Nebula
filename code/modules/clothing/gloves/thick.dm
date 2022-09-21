@@ -13,11 +13,11 @@
 	icon_state = ICON_STATE_WORLD
 	force = 5
 	armor = list(
-		melee = ARMOR_MELEE_RESISTANT, 
-		bullet = ARMOR_BALLISTIC_PISTOL, 
+		melee = ARMOR_MELEE_RESISTANT,
+		bullet = ARMOR_BALLISTIC_PISTOL,
 		laser = ARMOR_LASER_HANDGUNS,
-		energy = ARMOR_ENERGY_SMALL, 
-		bomb = ARMOR_BOMB_RESISTANT, 
+		energy = ARMOR_ENERGY_SMALL,
+		bomb = ARMOR_BOMB_RESISTANT,
 		bio = ARMOR_BIO_MINOR)
 	material = /decl/material/solid/leather
 
@@ -67,8 +67,11 @@
 	applies_material_name = TRUE
 
 /obj/item/clothing/gloves/thick/craftable/set_material(var/new_material)
-	..()
-	if(material.conductive)
-		siemens_coefficient = 1
-	if(material.is_brittle())
-		item_flags &= ~ITEM_FLAG_THICKMATERIAL
+	. = ..()
+	if(.)
+		if(material.conductive)
+			siemens_coefficient = 1
+		if(material.is_brittle())
+			item_flags &= ~ITEM_FLAG_THICKMATERIAL
+		else
+			item_flags |= ITEM_FLAG_THICKMATERIAL

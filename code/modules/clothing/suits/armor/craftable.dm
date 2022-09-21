@@ -14,7 +14,8 @@
 
 /obj/item/clothing/suit/armor/crafted/set_material(new_material)
 	. = ..()
-	update_strings()
+	if(.)
+		update_strings()
 
 /obj/item/clothing/suit/armor/crafted/proc/update_strings()
 	if(material)

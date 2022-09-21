@@ -5,14 +5,15 @@
 	randpixel = 8
 	w_class = ITEM_SIZE_SMALL
 
+/obj/item/ore/get_matter_amount_modifier()
+	return 1 // 1 sheet per ore unit
+
 /obj/item/ore/set_material(var/new_material)
 	. = ..()
-	if(istype(material))
-		matter = list()
-		matter[material.type] = SHEET_MATERIAL_AMOUNT
-		name =       material.ore_name ? material.ore_name : "[material.name] chunk"
-		desc =       material.ore_desc ? material.ore_desc : "A lump of ore."
-		color =      material.color
+	if(. && istype(material))
+		name = material.ore_name ? material.ore_name : "[material.name] chunk"
+		desc = material.ore_desc ? material.ore_desc : "A lump of ore."
+		color = material.color
 		icon_state = material.ore_icon_overlay ? material.ore_icon_overlay : "lump"
 		if(icon_state == "dust")
 			slot_flags = SLOT_HOLSTER
@@ -84,7 +85,7 @@
 	set category = "Debug"
 	set src = usr
 
-	if(!check_rights(R_SPAWN)) 
+	if(!check_rights(R_SPAWN))
 		return
 
 	var/turf/T = get_turf(usr)
