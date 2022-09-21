@@ -11,7 +11,7 @@
 	material = /decl/material/solid/plastic
 	matter = list(
 		/decl/material/solid/silicon = MATTER_AMOUNT_TRACE,
-		//No RDX or explosive stuff to put in there.. :c
+		/decl/material/liquid/anfo = MATTER_AMOUNT_REINFORCEMENT, //#TODO: Slap RDX in here
 	)
 	var/datum/wires/explosive/c4/wires = null
 	var/timer = 10
