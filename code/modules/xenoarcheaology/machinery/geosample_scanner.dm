@@ -67,7 +67,7 @@
 			to_chat(user, SPAN_WARNING("You can't do that while [src] is scanning!"))
 			return
 		var/choice = alert("What do you want to do with the nanopaste?","Radiometric Scanner","Scan nanopaste","Fix seal integrity")
-		if(choice == "Fix seal integrity")
+		if(CanPhysicallyInteract(user) && !QDELETED(I) && I.loc == user && choice == "Fix seal integrity")
 			var/obj/item/stack/nanopaste/N = I
 			var/amount_used = min(N.get_amount(), 10 - scanner_seal_integrity / 10)
 			N.use(amount_used)
@@ -78,20 +78,22 @@
 			to_chat(user, SPAN_WARNING("You can't do that while [src] is scanning!"))
 			return
 		var/choice = alert("What do you want to do with the container?","Radiometric Scanner","Add coolant","Empty coolant","Scan container")
-		if(choice == "Add coolant")
-			var/obj/item/chems/glass/G = I
-			var/amount_transferred = min(src.reagents.maximum_volume - src.reagents.total_volume, G.reagents.total_volume)
-			G.reagents.trans_to(src, amount_transferred)
-			to_chat(user, SPAN_INFO("You empty [amount_transferred]u of coolant into [src]."))
-			update_coolant()
-			return TRUE
-		else if(choice == "Empty coolant")
-			var/obj/item/chems/glass/G = I
-			var/amount_transferred = min(G.reagents.maximum_volume - G.reagents.total_volume, src.reagents.total_volume)
-			src.reagents.trans_to(G, amount_transferred)
-			to_chat(user, SPAN_INFO("You remove [amount_transferred]u of coolant from [src]."))
-			update_coolant()
-			return TRUE
+		if(CanPhysicallyInteract(user) && !QDELETED(I) && I.loc == user)
+			//#TODO: The add coolant stuff could probably be handled by the default reagent handling code. And the emptying could be done with an alt interaction.
+			if(choice == "Add coolant")
+				var/obj/item/chems/glass/G = I
+				var/amount_transferred = min(src.reagents.maximum_volume - src.reagents.total_volume, G.reagents.total_volume)
+				G.reagents.trans_to(src, amount_transferred)
+				to_chat(user, SPAN_INFO("You empty [amount_transferred]u of coolant into [src]."))
+				update_coolant()
+				return TRUE
+			else if(choice == "Empty coolant")
+				var/obj/item/chems/glass/G = I
+				var/amount_transferred = min(G.reagents.maximum_volume - G.reagents.total_volume, src.reagents.total_volume)
+				src.reagents.trans_to(G, amount_transferred)
+				to_chat(user, SPAN_INFO("You remove [amount_transferred]u of coolant from [src]."))
+				update_coolant()
+				return TRUE
 	
 	//Let base class handle standard interactions
 	if(..())
@@ -99,9 +101,6 @@
 	
 	//Now let people insert whatever into the scanner
 	if(istype(I))
-		if(scanning)
-			to_chat(user, SPAN_WARNING("You can't do that while [src] is scanning!"))
-			return
 		if(scanned_item)
 			to_chat(user, SPAN_WARNING("\The [src] already has \a [scanned_item] inside!"))
 			return
