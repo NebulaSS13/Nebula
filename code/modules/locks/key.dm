@@ -4,7 +4,7 @@
 	icon = 'icons/obj/items/key.dmi'
 	icon_state = "keys"
 	w_class = ITEM_SIZE_TINY
-	material = /decl/material/solid/metal/steel
+	material = DEFAULT_FURNITURE_MATERIAL
 	var/key_data = ""
 
 /obj/item/key/Initialize(mapload,var/data)
