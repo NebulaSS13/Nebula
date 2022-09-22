@@ -3,7 +3,7 @@
  */
 /datum/extension/sorting_tag
 	base_type     = /datum/extension/sorting_tag
-	expected_type = /obj
+	expected_type = /atom/movable //Both mob and objects can have it
 	var/destination
 	var/tag_icon_state
 	var/tag_x = 0
@@ -22,5 +22,5 @@
 
 ///Applies the destination tag overlay on the holder.
 /datum/extension/sorting_tag/proc/apply_tag_overlay()
-	var/obj/H = holder
+	var/atom/movable/H = holder
 	H.add_overlay(image('icons/obj/items/storage/deliverypackage.dmi', tag_icon_state, pixel_x = tag_x, pixel_y = tag_y))
