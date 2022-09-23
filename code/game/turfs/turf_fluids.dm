@@ -38,6 +38,12 @@
 /turf/check_fluid_depth(var/min)
 	. = (get_fluid_depth() >= min)
 
+/turf/proc/get_fluid_name()
+	var/obj/effect/fluid/F = return_fluid()
+	if(istype(F) && F.reagents?.primary_reagent)
+		return F.reagents.get_primary_reagent_name()
+	return "liquid"
+
 /turf/get_fluid_depth()
 	if(is_flooded(absolute=1))
 		return FLUID_MAX_DEPTH

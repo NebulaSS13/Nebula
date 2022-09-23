@@ -13,3 +13,6 @@
 // Will filter out extra rotations and negative rotations
 // E.g: 540 becomes 180. -180 becomes 180.
 #define SIMPLIFY_DEGREES(degrees) (MODULUS_FLOAT((degrees), 360))
+
+// Float-aware floor since round() will round upwards when given a second arg
+#define FLOAT_FLOOR(X, N) (round(X/N)*N)
