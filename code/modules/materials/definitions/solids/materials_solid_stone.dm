@@ -46,6 +46,7 @@
 	dissolves_into          = list(
 		/decl/material/solid/silicon = 0.75,
 		/decl/material/solid/bauxite = 0.15,
+		/decl/material/solid/slag    = 0.10,
 	)
 
 /decl/material/solid/stone/ceramic
