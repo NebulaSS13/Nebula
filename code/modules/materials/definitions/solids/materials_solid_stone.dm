@@ -32,6 +32,7 @@
 	uid = "solid_sandstone"
 	lore_text = "A clastic sedimentary rock. The cost of boosting it to orbit is almost universally much higher than the actual value of the material."
 	value = 1.5
+
 /decl/material/solid/stone/granite
 	name                 = "granite"
 	uid                  = "solid_granite"

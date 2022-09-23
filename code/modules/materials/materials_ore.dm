@@ -28,7 +28,6 @@
 	if(!nb_icon_states)
 		CRASH("Ore pile is missing an icon state!")
 	stack_icon_index = between(1, stack_icon_index, 10)
-	log_debug("Setting cached icon state '[state_name]', length: [nb_icon_states], index: [stack_icon_index].") //#REMOVEME
 	return cached_ore_icon_states[state_name][stack_icon_index]
 
 ///Caches the icon state of the ore piles for each possible icon states. The images are greyscale so their color can be changed by the individual materials.
@@ -50,12 +49,12 @@
 			states += oreimage
 		
 		cached_ore_icon_states[IS] = states
-	log_debug("Generated ore pile cached icons!") //#REMOVEME
 
+/obj/item/stack/material/ore/update_state_from_amount()
+	if(amount > 1)
+		add_overlay(get_cached_ore_pile_overlay(icon_state, amount))
 //#TODO: Ideally, since ore piles contain a lot of ores for performances reasons,
 // it might be a good idea to scale the item size dynamically. But currently containers and inventories do not support that.
-// /obj/item/stack/material/ore/update_state_from_amount()
-// 	. = ..()
 // 	if(amount >= (max_amount * 0.75))
 // 		w_class = ITEM_SIZE_HUGE
 // 	else if(amount >= (max_amount * 0.5))
@@ -64,10 +63,6 @@
 // 		w_class = ITEM_SIZE_NORMAL
 // 	else
 // 		w_class = ITEM_SIZE_SMALL
-
-/obj/item/stack/material/ore/update_state_from_amount()
-	if(amount > 1)
-		add_overlay(get_cached_ore_pile_overlay(icon_state, amount))
 
 /obj/item/stack/material/ore/set_material(var/new_material)
 	. = ..()
