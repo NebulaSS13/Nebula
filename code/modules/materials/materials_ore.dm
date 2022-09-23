@@ -14,24 +14,36 @@
 	material_health_multiplier = 0.5
 	stack_merge_type           = /obj/item/stack/material/ore
 	randpixel                  = 8
+	applies_material_name      = FALSE //Handled in override
 	///Associative list of cache key to the generate icons for the ore piles. We pre-generate a pile of all possible ore icon states, and make them available
 	var/static/list/cached_ore_icon_states
 	///A list of all the existing ore icon states in the ore file
 	var/static/list/ore_icon_states = list("shiny", "gems", "dust", "nugget", "lump")
 
+///Returns a cached ore pile icon state
+/obj/item/stack/material/ore/proc/get_cached_ore_pile_overlay(var/state_name, var/stack_icon_index)
+	if(!cached_ore_icon_states)
+		cache_ore_pile_icons()
+	var/nb_icon_states = length(cached_ore_icon_states[state_name])
+	if(!nb_icon_states)
+		CRASH("Ore pile is missing an icon state!")
+	stack_icon_index = between(1, stack_icon_index, 10)
+	log_debug("Setting cached icon state '[state_name]', length: [nb_icon_states], index: [stack_icon_index].") //#REMOVEME
+	return cached_ore_icon_states[state_name][stack_icon_index]
+
 ///Caches the icon state of the ore piles for each possible icon states. The images are greyscale so their color can be changed by the individual materials.
 /obj/item/stack/material/ore/proc/cache_ore_pile_icons()
 	cached_ore_icon_states = list()
 	for(var/IS in ore_icon_states)
-		var/list/states = list()
+		var/list/states = list(null) //First index is null since we're creating overlays
 		//Generate an icon state of the first 10 ores in the pile, any extra ore won't show on the pile
-		for(var/i = 1 to 9)
+		for(var/i = 2 to 10)
 			var/image/oreimage = image('icons/obj/materials/ore.dmi', IS)
-			for(var/j = 1 to i)
+			for(var/j = 1 to (i - 1))
 				//Randomize the orientation and position of each ores in the image
 				var/matrix/M = matrix()
 				M.Translate(rand(-7, 7), rand(-8, 8))
-				M.Turn(pick(-58, -45, -27.-5, 0, 0, 0, 0, 0, 27.5, 45, 58))
+				M.Turn(pick(-72, -58, -45, -27.-5, 0, 0, 0, 0, 0, 27.5, 45, 58, 72))
 				var/image/oreoverlay = image('icons/obj/materials/ore.dmi', IS)
 				oreoverlay.transform = M
 				oreimage.overlays += oreoverlay
@@ -39,30 +51,6 @@
 		
 		cached_ore_icon_states[IS] = states
 	log_debug("Generated ore pile cached icons!") //#REMOVEME
-
-/obj/item/stack/material/ore/update_state_from_amount()
-	if(!cached_ore_icon_states)
-		cache_ore_pile_icons()
-	var/nb_icon_states = length(cached_ore_icon_states[icon_state])
-	if(!nb_icon_states)
-		CRASH("Ore pile is missing an icon state!")
-	var/icon_state_index = between(1, amount, 10)
-	log_debug("Setting cached icon state '[icon_state]', length: [nb_icon_states], index: [icon_state_index].") //#REMOVEME
-	icon = cached_ore_icon_states[icon_state][icon_state_index]
-
-/obj/item/stack/material/ore/set_material(var/new_material)
-	. = ..()
-	if(istype(material))
-		LAZYSET(matter, material.type, SHEET_MATERIAL_AMOUNT)
-		name       = "[(amount > 1? "a pile of" : "a")] [(material.ore_name ? material.ore_name : "[material.name] chunk")]"
-		desc       = material.ore_desc ? material.ore_desc : "A lump of ore."
-		color      = material.color
-		icon_state = material.ore_icon_overlay ? material.ore_icon_overlay : initial(icon_state)
-		if(icon_state == "dust")
-			slot_flags = SLOT_HOLSTER
-
-/obj/item/stack/material/ore/get_recipes()
-	return //Can't use recipes with ore
 
 //#TODO: Ideally, since ore piles contain a lot of ores for performances reasons,
 // it might be a good idea to scale the item size dynamically. But currently containers and inventories do not support that.
@@ -76,6 +64,28 @@
 // 		w_class = ITEM_SIZE_NORMAL
 // 	else
 // 		w_class = ITEM_SIZE_SMALL
+
+/obj/item/stack/material/ore/update_state_from_amount()
+	if(amount > 1)
+		add_overlay(get_cached_ore_pile_overlay(icon_state, amount))
+
+/obj/item/stack/material/ore/set_material(var/new_material)
+	. = ..()
+	if(istype(material))
+		LAZYSET(matter, material.type, SHEET_MATERIAL_AMOUNT)
+		set_color(material.color)
+		icon_state = material.ore_icon_overlay ? material.ore_icon_overlay : initial(icon_state)
+		if(icon_state == "dust")
+			slot_flags = SLOT_HOLSTER
+		queue_icon_update()
+
+/obj/item/stack/material/ore/update_strings()
+	. = ..()
+	SetName("[(amount > 1? "piled" : "")] [(material.ore_name ? material.ore_name : "[material.name] chunk")]")
+	desc = material.ore_desc ? material.ore_desc : "A lump of ore."
+
+/obj/item/stack/material/ore/get_recipes()
+	return //Can't use recipes with ore
 
 /obj/item/stack/material/ore/attackby(var/obj/item/W, var/mob/user)
 	if(istype(W, /obj/item/stack/material) && !is_same(W))

@@ -69,6 +69,13 @@
 		SetName("reinforced [name]")
 		desc = "[desc]\nIt is reinforced with the [reinf_material.use_name] lattice."
 
+	if(material.stack_origin_tech)
+		origin_tech = material.stack_origin_tech
+	else if(reinf_material && reinf_material.stack_origin_tech)
+		origin_tech = reinf_material.stack_origin_tech
+	else
+		origin_tech = initial(origin_tech)
+
 /obj/item/stack/material/use(var/used)
 	. = ..()
 	update_strings()
@@ -83,15 +90,6 @@
 	if((reinf_material && reinf_material.type) != (M.reinf_material && M.reinf_material.type))
 		return FALSE
 	return TRUE
-
-/obj/item/stack/material/update_strings()
-	. = ..()
-	if(material.stack_origin_tech)
-		origin_tech = material.stack_origin_tech
-	else if(reinf_material && reinf_material.stack_origin_tech)
-		origin_tech = reinf_material.stack_origin_tech
-	else
-		origin_tech = initial(origin_tech)
 
 /obj/item/stack/material/transfer_to(obj/item/stack/material/M, var/tamount=null)
 	if(!is_same(M))
