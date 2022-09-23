@@ -1,4 +1,5 @@
 #define ORE_MAX_AMOUNT 200
+#define ORE_MAX_OVERLAYS 10
 
 /obj/item/stack/material/ore
 	name                       = "ore pile"
@@ -15,6 +16,7 @@
 	stack_merge_type           = /obj/item/stack/material/ore
 	randpixel                  = 8
 	applies_material_name      = FALSE //Handled in override
+	randpixel                  = 6
 	///Associative list of cache key to the generate icons for the ore piles. We pre-generate a pile of all possible ore icon states, and make them available
 	var/static/list/cached_ore_icon_states
 	///A list of all the existing ore icon states in the ore file
@@ -27,7 +29,7 @@
 	var/nb_icon_states = length(cached_ore_icon_states[state_name])
 	if(!nb_icon_states)
 		CRASH("Ore pile is missing an icon state!")
-	stack_icon_index = between(1, stack_icon_index, 10)
+	stack_icon_index = between(1, stack_icon_index, nb_icon_states)
 	return cached_ore_icon_states[state_name][stack_icon_index]
 
 ///Caches the icon state of the ore piles for each possible icon states. The images are greyscale so their color can be changed by the individual materials.
@@ -35,19 +37,25 @@
 	cached_ore_icon_states = list()
 	for(var/IS in ore_icon_states)
 		var/list/states = list(null) //First index is null since we're creating overlays
-		//Generate an icon state of the first 10 ores in the pile, any extra ore won't show on the pile
-		for(var/i = 2 to 10)
-			var/image/oreimage = image('icons/obj/materials/ore.dmi', IS)
-			for(var/j = 1 to (i - 1))
-				//Randomize the orientation and position of each ores in the image
-				var/matrix/M = matrix()
-				M.Translate(rand(-7, 7), rand(-8, 8))
-				M.Turn(pick(-72, -58, -45, -27.-5, 0, 0, 0, 0, 0, 27.5, 45, 58, 72))
-				var/image/oreoverlay = image('icons/obj/materials/ore.dmi', IS)
-				oreoverlay.transform = M
-				oreimage.overlays += oreoverlay
-			states += oreimage
-		
+		var/image/scrapboard = image(null)
+		//Generate base image
+		for(var/i = 2 to ORE_MAX_OVERLAYS)
+			//Randomize the orientation and position of each ores in the image
+			var/matrix/M = matrix()
+			M.Translate(rand(-7, 7), rand(-8, 8))
+			M.Turn(pick(-72, -58, -45, -27.-5, 0, 0, 0, 0, 0, 27.5, 45, 58, 72))
+			var/image/oreoverlay = image('icons/obj/materials/ore.dmi', IS)
+			oreoverlay.transform = M
+			scrapboard.overlays += oreoverlay
+
+		//Generate all indices from generated overlays
+		for(var/i = length(scrapboard.overlays), i > 1, i--)
+			var/image/copy = new(scrapboard)
+			copy.overlays.Cut(1, i)
+			states += copy
+
+		//inseert full state last
+		states += scrapboard
 		cached_ore_icon_states[IS] = states
 
 /obj/item/stack/material/ore/update_state_from_amount()
@@ -166,3 +174,4 @@
 			new /obj/item/stack/material/ore(T, mat.ore_result_amount, mtype)
 
 #undef ORE_MAX_AMOUNT
+#undef ORE_MAX_OVERLAYS
