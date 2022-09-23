@@ -112,6 +112,8 @@
 	. = ..()
 
 /obj/machinery/atmospherics/unary/vent_pump/reset_area(area/old_area, area/new_area)
+	if(!controlled)
+		return
 	if(old_area == new_area)
 		return
 	if(old_area)
@@ -230,6 +232,8 @@
 	return controlled ? ..() : "NONE"
 
 /obj/machinery/atmospherics/unary/vent_pump/proc/change_area_name(var/area/A, var/old_area_name, var/new_area_name)
+	if(!controlled)
+		return
 	if(get_area(src) != A)
 		return
 	var/new_name = replacetext(A.air_vent_names[id_tag], old_area_name, new_area_name)
