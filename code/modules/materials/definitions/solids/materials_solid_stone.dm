@@ -36,7 +36,7 @@
 	name                 = "granite"
 	uid                  = "solid_granite"
 	lore_text            = "A coarse-grained igneous rock formed by magma containing sillicon and alkali metal oxides."
-	color                = "#615F5F"
+	color                = "#615f5f"
 	exoplanet_rarity     = MAT_RARITY_MUNDANE
 	hardness             = MAT_VALUE_HARD + 5
 	melting_point        = T0C + 1260
