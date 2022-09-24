@@ -28,7 +28,7 @@
 	..()
 
 /obj/item/stock_parts/power/battery/check_health(lastdamage, lastdamtype, lastdamflags, consumed)
-	if(health != ITEM_HEALTH_NO_DAMAGE && lastdamage > 0)
+	if(can_take_damage() && lastdamage > 0)
 		switch(lastdamtype)
 			if(ELECTROCUTE)
 				if(prob(50) && cell && health < (max_health/2))
