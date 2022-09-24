@@ -23,7 +23,6 @@
 	var/creator // circuit creator if any
 	var/interact_page = 0
 	var/components_per_page = 5
-	health = 30
 	max_health = 30
 	pass_flags = 0
 	anchored = FALSE
@@ -63,7 +62,7 @@
 		to_chat(user, "You can <a href='?src=\ref[src];ghostscan=1'>scan</a> this circuit.");
 
 /obj/item/electronic_assembly/check_health(lastdamage, lastdamtype, lastdamflags, consumed)
-	if(health == ITEM_HEALTH_NO_DAMAGE)
+	if(!can_take_damage())
 		return
 	if(health < 1)
 		visible_message(SPAN_DANGER("\The [src] falls to pieces!"))
@@ -473,9 +472,9 @@
 		update_icon()
 	else if(IS_COIL(I))
 		var/obj/item/stack/cable_coil/C = I
-		if(health != initial(health) && do_after(user, 10, src) && C.use(1))
+		if(can_take_damage() && (health < max_health) && do_after(user, 10, src) && C.use(1))
 			user.visible_message("\The [user] patches up \the [src].")
-			health = min(initial(health), health + 5)
+			health = min(max_health, health + 5)
 	else
 		if(user.a_intent == I_HURT) // Kill it
 			to_chat(user, "<span class='danger'>\The [user] hits \the [src] with \the [I]</span>")
@@ -563,7 +562,6 @@
 	w_class = ITEM_SIZE_NORMAL
 	max_components = IC_MAX_SIZE_BASE * 2
 	max_complexity = IC_COMPLEXITY_BASE * 2
-	health = 20
 	max_health = 20
 
 /obj/item/electronic_assembly/medium/default
@@ -603,7 +601,6 @@
 	w_class = ITEM_SIZE_LARGE
 	max_components = IC_MAX_SIZE_BASE * 4
 	max_complexity = IC_COMPLEXITY_BASE * 4
-	health = 30
 	max_health = 30
 
 /obj/item/electronic_assembly/large/default
@@ -643,7 +640,6 @@
 	max_complexity = IC_COMPLEXITY_BASE * 3
 	allowed_circuit_action_flags = IC_ACTION_MOVEMENT | IC_ACTION_COMBAT | IC_ACTION_LONG_RANGE
 	circuit_flags = 0
-	health = 50
 	max_health = 50
 
 /obj/item/electronic_assembly/drone/can_move()
@@ -684,7 +680,6 @@
 	w_class = ITEM_SIZE_NORMAL
 	max_components = IC_MAX_SIZE_BASE * 2
 	max_complexity = IC_COMPLEXITY_BASE * 2
-	health = 10
 	max_health = 10
 
 /obj/item/electronic_assembly/wallmount/afterattack(var/atom/a, var/mob/user, var/proximity)

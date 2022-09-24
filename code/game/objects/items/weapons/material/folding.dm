@@ -6,7 +6,7 @@
 	icon = 'icons/obj/items/weapon/knives/folding/basic.dmi'
 	material_force_multiplier = 0.2
 	applies_material_name = FALSE
-	health = ITEM_HEALTH_NO_DAMAGE
+	max_health = ITEM_HEALTH_NO_DAMAGE
 	w_class = ITEM_SIZE_SMALL
 	attack_verb = list("prodded", "tapped")
 	edge = FALSE

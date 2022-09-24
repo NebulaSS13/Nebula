@@ -4,7 +4,6 @@
 	gender = PLURAL
 	icon = 'icons/obj/items/handcuffs.dmi'
 	icon_state = ICON_STATE_WORLD
-	health = ITEM_HEALTH_NO_DAMAGE
 	obj_flags = OBJ_FLAG_CONDUCTIBLE
 	slot_flags = SLOT_LOWER_BODY
 	throwforce = 5
@@ -13,6 +12,7 @@
 	throw_range = 5
 	origin_tech = "{'materials':1}"
 	material = /decl/material/solid/metal/steel
+	max_health = ITEM_HEALTH_NO_DAMAGE //#TODO: Once we can work out something different for handling cuff breakout, change this. Since it relies on cuffs health to tell if you can actually breakout.
 	var/elastic
 	var/dispenser = 0
 	var/breakouttime = 2 MINUTES //Deciseconds = 120s = 2 minutes
@@ -140,7 +140,6 @@ var/global/last_chew = 0
 	cuff_sound = 'sound/weapons/cablecuff.ogg'
 	cuff_type = "cable restraints"
 	elastic = 1
-	health = 75
 	max_health = 75
 	material = /decl/material/solid/plastic
 
@@ -179,6 +178,5 @@ var/global/last_chew = 0
 	icon = 'icons/obj/bureaucracy.dmi'
 	breakouttime = 200
 	cuff_type = "duct tape"
-	health = 50
 	max_health = 50
 	material = /decl/material/solid/plastic

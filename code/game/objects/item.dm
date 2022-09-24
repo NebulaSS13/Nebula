@@ -108,6 +108,8 @@
 	return origin_tech
 
 /obj/item/Initialize(var/ml, var/material_key)
+	if(!health)
+		health = max_health //Make sure to propagate max_health to health var before material setup, for consistency
 	if(!ispath(material_key, /decl/material))
 		material_key = material
 	if(material_key)

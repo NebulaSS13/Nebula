@@ -97,11 +97,10 @@
 		material = GET_DECL(new_material)
 	if(istype(material))
 		//Only set the health if health is null. Some things define their own health value.
-		if(isnull(health))
+		if(isnull(max_health))
 			max_health = round(material_health_multiplier * material.integrity)
-		else
-			max_health = health
-		health = max_health
+		if(isnull(health)) //only set health if we didn't specify one already, so damaged objects on spawn and etc can be a thing
+			health = max_health
 		
 		if(material.products_need_process())
 			START_PROCESSING(SSobj, src)

@@ -12,8 +12,7 @@
 /obj/item/stack
 	gender = PLURAL
 	origin_tech = "{'materials':1}"
-	health = 32      //Stacks should take damage even if no materials
-	max_health = 32
+	max_health = 32 //Stacks should take damage even if no materials
 	/// A copy of initial matter list when this atom initialized. Stack matter should always assume a single tile.
 	var/list/matter_per_piece
 	var/singular_name

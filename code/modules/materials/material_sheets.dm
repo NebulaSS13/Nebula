@@ -346,7 +346,7 @@
 	uses_charge = 1
 	charge_costs = list(500)
 	material = /decl/material/solid/metal/steel
-	health = ITEM_HEALTH_NO_DAMAGE
+	max_health = ITEM_HEALTH_NO_DAMAGE
 
 /obj/item/stack/material/strut/get_recipes()
 	return material.get_strut_recipes(reinf_material && reinf_material.type)
