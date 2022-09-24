@@ -24,6 +24,7 @@
 /decl/species/vox
 	name = SPECIES_VOX
 	name_plural = SPECIES_VOX
+	base_prosthetics_model = /decl/prosthetics_manufacturer/vox/crap
 
 	default_emotes = list(
 		/decl/emote/audible/vox_shriek
@@ -61,7 +62,7 @@
 	cold_level_1 = 80
 	cold_level_2 = 50
 	cold_level_3 = -1
-	
+
 	age_descriptor = /datum/appearance_descriptor/age/vox
 
 	gluttonous = GLUT_TINY|GLUT_ITEM_NORMAL
@@ -97,7 +98,7 @@
 		BP_STACK =      /obj/item/organ/internal/voxstack,
 		BP_HINDTONGUE = /obj/item/organ/internal/hindtongue
 		)
-	
+
 	override_limb_types = list(BP_TAIL = /obj/item/organ/external/tail/vox)
 
 	available_pronouns = list(/decl/pronouns/neuter)
@@ -161,7 +162,7 @@
 /decl/species/vox/disfigure_msg(var/mob/living/carbon/human/H)
 	var/decl/pronouns/G = H.get_pronouns()
 	return SPAN_DANGER("[G.His] beak-segments are cracked and chipped! [G.He] [G.is] not even recognizable.\n")
-	
+
 /decl/species/vox/skills_from_age(age)
 	. = 8
 

@@ -98,7 +98,7 @@
 	verbs -= /obj/item/organ/internal/eyes/proc/change_eye_color
 	verbs -= /obj/item/organ/internal/eyes/proc/toggle_eye_glow
 
-/obj/item/organ/internal/eyes/robotize(var/company = /decl/prosthetics_manufacturer, var/skip_prosthetics = 0, var/keep_organs = 0, var/apply_material = /decl/material/solid/metal/steel, var/check_bodytype, var/check_species)
+/obj/item/organ/internal/eyes/robotize(var/company = /decl/prosthetics_manufacturer/basic_human, var/skip_prosthetics = 0, var/keep_organs = 0, var/apply_material = /decl/material/solid/metal/steel, var/check_bodytype, var/check_species)
 	. = ..()
 	name = "optical sensor"
 	icon = 'icons/obj/robot_component.dmi'
@@ -122,7 +122,7 @@
 
 	if(!owner || !BP_IS_PROSTHETIC(src))
 		verbs -= /obj/item/organ/internal/eyes/proc/change_eye_color
-		return	
+		return
 
 	if(owner.incapacitated())
 		return
@@ -143,7 +143,7 @@
 
 	if(!owner || !BP_IS_PROSTHETIC(src))
 		verbs -= /obj/item/organ/internal/eyes/proc/toggle_eye_glow
-		return	
+		return
 
 	if(owner.incapacitated())
 		return

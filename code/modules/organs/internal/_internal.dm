@@ -28,7 +28,7 @@
 	if(!affected)
 		log_warning("'[src]' called obj/item/organ/internal/do_install(), but its expected parent organ is null!")
 
-	//The organ may only update and etc if its being attached, or isn't cut away. 
+	//The organ may only update and etc if its being attached, or isn't cut away.
 	//Calls up the chain should have set the CUT_AWAY flag already
 	if(status & ORGAN_CUT_AWAY)
 		LAZYDISTINCTADD(affected.implants, src) //Add us to the detached organs list
@@ -60,7 +60,7 @@
 		if((status & ORGAN_CUT_AWAY) && detach)
 			LAZYDISTINCTADD(affected.implants, src)
 		else
-			LAZYREMOVE(affected.implants, src) 
+			LAZYREMOVE(affected.implants, src)
 
 //#TODO: Remove rejuv hacks
 /obj/item/organ/internal/remove_rejuv()
@@ -70,7 +70,7 @@
 /obj/item/organ/internal/is_usable()
 	return ..() && !is_broken()
 
-/obj/item/organ/internal/robotize(var/company = /decl/prosthetics_manufacturer, var/skip_prosthetics = 0, var/keep_organs = 0, var/apply_material = /decl/material/solid/metal/steel, var/check_bodytype, var/check_species)
+/obj/item/organ/internal/robotize(var/company = /decl/prosthetics_manufacturer/basic_human, var/skip_prosthetics = 0, var/keep_organs = 0, var/apply_material = /decl/material/solid/metal/steel, var/check_bodytype, var/check_species)
 	. = ..()
 	min_bruised_damage += 5
 	min_broken_damage += 10
@@ -179,7 +179,7 @@
 /obj/item/organ/internal/on_update_icon()
 	. = ..()
 	if(BP_IS_PROSTHETIC(src) && prosthetic_icon)
-		icon_state = ((status & ORGAN_DEAD) && prosthetic_dead_icon)? 	prosthetic_dead_icon : prosthetic_icon 
+		icon_state = ((status & ORGAN_DEAD) && prosthetic_dead_icon)? 	prosthetic_dead_icon : prosthetic_icon
 	else
 		icon_state = ((status & ORGAN_DEAD) && dead_icon)? 				dead_icon : alive_icon
 

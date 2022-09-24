@@ -70,8 +70,8 @@
 	if(!given_dna)
 		if(dna)
 			given_dna = dna //Use existing if possible
-		else if(owner) 
-			if(owner.dna) 
+		else if(owner)
+			if(owner.dna)
 				given_dna = owner.dna //Grab our owner's dna if we don't have any, and they have
 			else
 				//The owner having no DNA can be a valid reason to keep our dna null in some cases
@@ -82,14 +82,14 @@
 			//If we have NO OWNER and given_dna, just make one up for consistency
 			given_dna = new/datum/dna()
 			given_dna.check_integrity() //Defaults everything
-	
+
 	set_dna(given_dna)
 	setup_reagents()
 	return TRUE
 
 //Allows specialization of roboticize() calls on initialization meant to be used when loading prosthetics
 // NOTE: This wouldn't be necessary if prothetics were a subclass
-/obj/item/organ/proc/setup_as_prosthetic(var/forced_model = /decl/prosthetics_manufacturer)
+/obj/item/organ/proc/setup_as_prosthetic(var/forced_model = /decl/prosthetics_manufacturer/basic_human)
 	if(!species)
 		if(owner?.species)
 			set_species(owner.species)
@@ -98,7 +98,7 @@
 
 	if(istype(material))
 		robotize(forced_model, apply_material = material.type)
-	else 
+	else
 		robotize(forced_model)
 	return TRUE
 
@@ -122,7 +122,7 @@
 	if(istext(specie_name))
 		species = get_species_by_key(specie_name)
 	else
-		species = specie_name 
+		species = specie_name
 	if(!species)
 		species = get_species_by_key(global.using_map.default_species)
 		PRINT_STACK_TRACE("Invalid species. Expected a valid species name as string, was: [log_info_line(specie_name)]")
@@ -321,7 +321,7 @@
 	if (can_recover())
 		damage = between(0, damage - round(amount, 0.1), max_damage)
 
-/obj/item/organ/proc/robotize(var/company = /decl/prosthetics_manufacturer, var/skip_prosthetics = 0, var/keep_organs = 0, var/apply_material = /decl/material/solid/metal/steel, var/check_bodytype, var/check_species)
+/obj/item/organ/proc/robotize(var/company = /decl/prosthetics_manufacturer/basic_human, var/skip_prosthetics = 0, var/keep_organs = 0, var/apply_material = /decl/material/solid/metal/steel, var/check_bodytype, var/check_species)
 	status = ORGAN_PROSTHETIC
 	QDEL_NULL(dna)
 	reagents?.clear_reagents()
@@ -497,7 +497,7 @@ var/global/list/ailment_reference_cache = list()
 /obj/item/organ/proc/do_install(var/mob/living/carbon/human/target, var/obj/item/organ/external/affected, var/in_place = FALSE, var/update_icon = TRUE, var/detached = FALSE)
 	//Make sure to force the flag accordingly
 	set_detached(detached)
-	
+
 	owner = target
 	action_button_name = initial(action_button_name)
 	if(owner)
@@ -511,10 +511,10 @@ var/global/list/ailment_reference_cache = list()
 
 //Handles uninstalling the organ from its owner and parent limb, without triggering effects or deep updates
 //CASES:
-// 1. Before deletion to clear our references. 
+// 1. Before deletion to clear our references.
 // 2. Called through removal on surgery or dismemberement
 // 3. Called when we're changing a mob's species.
-//detach: If detach is true, we're going to set the organ to detached, and add it to the detached organs list, and remove it from processing lists. 
+//detach: If detach is true, we're going to set the organ to detached, and add it to the detached organs list, and remove it from processing lists.
 //        If its false, we just remove the organ from all lists
 /obj/item/organ/proc/do_uninstall(var/in_place = FALSE, var/detach = FALSE, var/ignore_children = FALSE, var/update_icon = TRUE)
 	action_button_name = null
@@ -524,11 +524,11 @@ var/global/list/ailment_reference_cache = list()
 		if(ailment.timer_id)
 			deltimer(ailment.timer_id)
 			ailment.timer_id = null
-	
+
 	//When we detach, we set the ORGAN_CUT_AWAY flag on, depending on whether the organ supports it or not
 	if(detach)
 		set_detached(TRUE)
-	else 
+	else
 		owner = null
 	return src
 

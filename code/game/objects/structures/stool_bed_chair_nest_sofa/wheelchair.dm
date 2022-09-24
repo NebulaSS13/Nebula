@@ -5,8 +5,8 @@
 	anchored = FALSE
 	buckle_movable = TRUE
 	movement_handlers = list(
-		/datum/movement_handler/deny_multiz, 
-		/datum/movement_handler/delay = list(5), 
+		/datum/movement_handler/deny_multiz,
+		/datum/movement_handler/delay = list(5),
 		/datum/movement_handler/move_relay_self
 	)
 
@@ -32,7 +32,8 @@
 
 /obj/structure/bed/chair/wheelchair/Bump(atom/A)
 	..()
-	if(!buckled_mob)	return
+	if(!buckled_mob)
+		return
 
 	if(!propelled)
 		return

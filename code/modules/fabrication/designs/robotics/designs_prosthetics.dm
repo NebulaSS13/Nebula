@@ -41,7 +41,7 @@
 	var/model
 
 /datum/fabricator_recipe/robotics/prosthetic/New()
-	if(model && model != /decl/prosthetics_manufacturer)
+	if(model)
 		var/decl/prosthetics_manufacturer/model_manufacturer = GET_DECL(model)
 		category = "[model_manufacturer.name] Prosthetics"
 	else
@@ -94,4 +94,4 @@
 			E.robotize(model, check_species = species_name)
 			E.status |= ORGAN_CUT_AWAY
 
-DEFINE_ROBOLIMB_DESIGNS(/decl/prosthetics_manufacturer, generic)
+DEFINE_ROBOLIMB_DESIGNS(/decl/prosthetics_manufacturer/basic_human, generic)
