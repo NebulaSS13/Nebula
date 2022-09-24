@@ -177,7 +177,6 @@
 	w_class = ITEM_SIZE_TINY
 	material = /decl/material/solid/plastic
 	matter = list(/decl/material/solid/fiberglass = MATTER_AMOUNT_REINFORCEMENT)
-	starting_reagents = list(/decl/material/liquid/adrenaline)
 	var/band_color = COLOR_CYAN
 
 /obj/item/chems/hypospray/autoinjector/populate_reagents()
