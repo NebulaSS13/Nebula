@@ -66,14 +66,15 @@
 	flags = SLANDMARK_FLAG_AUTOSET
 
 /obj/structure/broken_cryo/icarus
-	remains_type = /obj/item/icarus/dead_personnel
+	remains_type = /obj/item/dead_personnel
 
-/obj/item/icarus/dead_personnel
+/obj/item/dead_personnel
 	name = "partial skeleton remains"
 	desc = "Human bones wrapped in the shredded remnants of a familiar black uniform."
 	icon = 'mods/content/government/away_sites/icarus/icarus_sprites.dmi'
 	icon_state = "dead_personnel"
 	w_class = ITEM_SIZE_LARGE//pile of bones
+	material = /decl/material/solid/bone
 
 /obj/item/disk/icarus
 	name = "black box backup disk"
