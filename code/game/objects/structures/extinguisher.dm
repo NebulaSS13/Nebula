@@ -7,7 +7,7 @@
 	density = 0
 	obj_flags = OBJ_FLAG_MOVES_UNSUPPORTED
 	directional_offset = "{'NORTH':{'y':-29}, 'SOUTH':{'y':29}, 'EAST':{'x':-29}, 'WEST':{'x':29}}"
-	var/obj/item/extinguisher/has_extinguisher
+	var/obj/item/chems/spray/extinguisher/has_extinguisher
 	var/opened = 0
 
 /obj/structure/extinguisher_cabinet/Initialize()
