@@ -4,9 +4,11 @@
 	desc = "An unbranded tube of lipstick."
 	icon = 'icons/obj/items/lipstick.dmi'
 	icon_state = "lipstick_0"
+	item_flags = ITEM_FLAG_HOLLOW
 	w_class = ITEM_SIZE_TINY
 	slot_flags = SLOT_EARS
 	color = "#e00606"
+	material = /decl/material/solid/plastic
 	var/color_desc = "ruby"
 	var/open = FALSE
 

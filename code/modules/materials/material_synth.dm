@@ -5,6 +5,7 @@
 	charge_costs = list(1000)
 	gender = NEUTER
 	matter = null // Don't shove it in the autholathe.
+	health = ITEM_HEALTH_NO_DAMAGE
 
 /obj/item/stack/material/cyborg/Initialize()
 	. = ..()

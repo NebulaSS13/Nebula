@@ -745,6 +745,7 @@ var/global/list/allCasters = list() //Global list that will contain reference to
 	w_class = ITEM_SIZE_SMALL	//Let's make it fit in trashbags!
 	attack_verb = list("bapped","thwapped","smacked")
 	force = 0
+	material = /decl/material/solid/cardboard //#TODO: replace with paper material
 
 	var/screen = 0
 	var/pages = 0

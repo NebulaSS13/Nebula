@@ -566,6 +566,7 @@
 	max_components = IC_MAX_SIZE_BASE * 2
 	max_complexity = IC_COMPLEXITY_BASE * 2
 	health = 20
+	max_health = 20
 
 /obj/item/electronic_assembly/medium/default
 	name = "type-a electronic mechanism"
@@ -605,6 +606,7 @@
 	max_components = IC_MAX_SIZE_BASE * 4
 	max_complexity = IC_COMPLEXITY_BASE * 4
 	health = 30
+	max_health = 30
 
 /obj/item/electronic_assembly/large/default
 	name = "type-a electronic machine"
@@ -644,6 +646,7 @@
 	allowed_circuit_action_flags = IC_ACTION_MOVEMENT | IC_ACTION_COMBAT | IC_ACTION_LONG_RANGE
 	circuit_flags = 0
 	health = 50
+	max_health = 50
 
 /obj/item/electronic_assembly/drone/can_move()
 	return TRUE
@@ -684,6 +687,7 @@
 	max_components = IC_MAX_SIZE_BASE * 2
 	max_complexity = IC_COMPLEXITY_BASE * 2
 	health = 10
+	max_health = 10
 
 /obj/item/electronic_assembly/wallmount/afterattack(var/atom/a, var/mob/user, var/proximity)
 	if(proximity && istype(a ,/turf) && a.density)

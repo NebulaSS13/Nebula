@@ -3,6 +3,7 @@
 	desc = "A wad of crystalline monofilament."
 	icon = 'mods/species/ascent/icons/razorweb.dmi'
 	icon_state = "wad"
+	material = /decl/material/solid/quartz
 	var/web_type = /obj/effect/razorweb
 
 /obj/item/razorweb/throw_impact(var/atom/hit_atom)

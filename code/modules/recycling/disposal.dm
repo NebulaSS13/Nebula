@@ -500,6 +500,7 @@ var/global/list/diversion_junctions = list()
 	icon = 'icons/obj/recycling.dmi'
 	icon_state = "switch-off"
 	w_class = ITEM_SIZE_LARGE
+	material = /decl/material/solid/metal/steel
 	var/id_tag
 
 /obj/item/disposal_switch_construct/Initialize(var/id)

@@ -17,6 +17,7 @@
 	name = "statuette"
 	icon_state = "statuette"
 	icon = 'icons/obj/xenoarchaeology.dmi'
+	material = /decl/material/solid/stone/cult
 	var/charges = 0
 	var/list/nearby_mobs = list()
 	var/last_bloodcall = 0

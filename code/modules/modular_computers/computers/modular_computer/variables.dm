@@ -6,6 +6,7 @@
 	icon_state = ICON_STATE_WORLD
 	center_of_mass = null
 	randpixel = 0
+	material = /decl/material/solid/plastic
 
 	var/screen_icon
 	var/list/decals

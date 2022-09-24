@@ -34,6 +34,7 @@
 	desc = ""
 	icon = 'icons/obj/decals.dmi'
 	w_class = ITEM_SIZE_NORMAL		//big
+	material = /decl/material/solid/plastic
 	var/sign_state = ""
 
 /obj/item/sign/attackby(obj/item/W, mob/user)	//construction
@@ -420,6 +421,11 @@
 	icon = 'icons/obj/decals.dmi'
 	icon_state = "goldenplaque"
 	sign_state = "goldenplaque"
+	material = /decl/material/solid/wood
+	matter = list(
+		/decl/material/solid/glass     = MATTER_AMOUNT_SECONDARY,
+		/decl/material/solid/cardboard = MATTER_AMOUNT_REINFORCEMENT, //#TODO: Change to paper
+	)
 	var/claimant
 
 /obj/item/sign/medipolma/attack_self(mob/user)

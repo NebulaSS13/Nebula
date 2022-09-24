@@ -360,6 +360,7 @@
 	w_class = ITEM_SIZE_SMALL
 	force = 5
 	throwforce = 5
+	material = /decl/material/solid/metal/steel
 	var/max_fuel = 20
 	var/can_refuel = 1
 	var/size_in_use = ITEM_SIZE_NORMAL

@@ -6,6 +6,8 @@
 	icon = 'icons/obj/closets/rescuebag.dmi'
 	icon_state = "folded"
 	origin_tech = "{'biotech':2}"
+	material = /decl/material/solid/plastic
+	matter = list(/decl/material/solid/silicon = MATTER_AMOUNT_SECONDARY)
 	var/obj/item/tank/airtank
 
 /obj/item/bodybag/rescue/loaded

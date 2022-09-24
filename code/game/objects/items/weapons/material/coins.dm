@@ -12,7 +12,7 @@
 	thrown_material_force_multiplier = 0.1
 	w_class = ITEM_SIZE_TINY
 	slot_flags = SLOT_EARS
-
+	material = /decl/material/solid/metal/steel
 	var/can_flip = TRUE
 	var/datum/denomination/denomination
 

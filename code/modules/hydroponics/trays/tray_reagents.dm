@@ -8,6 +8,7 @@
 	w_class = ITEM_SIZE_SMALL
 	throw_speed = 2
 	throw_range = 10
+	material = /decl/material/solid/plastic
 	var/toxicity = 4
 	var/pest_kill_str = 0
 	var/weed_kill_str = 0
@@ -52,10 +53,12 @@
 // Weedkiller defines for hydroponics
 // *************************************
 
+//TODO: Remove those, they're completely unused
 /obj/item/weedkiller
 	name = "bottle of weedkiller"
 	icon = 'icons/obj/items/chem/bottle.dmi'
 	icon_state = "bottle16"
+	material = /decl/material/solid/plastic
 	var/toxicity = 0
 	var/weed_kill_str = 0
 

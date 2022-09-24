@@ -4,6 +4,7 @@
 	icon = 'icons/mob/bot/farmbot.dmi'
 	icon_state = "water_arm"
 	w_class = ITEM_SIZE_NORMAL
+	material = /decl/material/solid/metal/steel
 	var/obj/tank
 
 /obj/item/farmbot_arm_assembly/Initialize(var/ml, var/theTank)

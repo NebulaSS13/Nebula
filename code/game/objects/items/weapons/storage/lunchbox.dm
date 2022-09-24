@@ -9,6 +9,7 @@
 	max_w_class = ITEM_SIZE_SMALL
 	var/filled = FALSE
 	attack_verb = list("lunched")
+	material = /decl/material/solid/plastic
 
 /obj/item/storage/lunchbox/Initialize()
 	. = ..()

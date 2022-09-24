@@ -9,6 +9,9 @@
 	throwforce = 0
 	throw_speed = 4
 	throw_range = 20
+	material = /decl/material/liquid/cleaner
+	health = 5
+	max_health = 5
 	var/key_data
 
 	var/list/valid_colors = list(COLOR_GREEN_GRAY, COLOR_RED_GRAY, COLOR_BLUE_GRAY, COLOR_BROWN, COLOR_PALE_PINK, COLOR_PALE_BTL_GREEN, COLOR_OFF_WHITE, COLOR_GRAY40, COLOR_GOLD)

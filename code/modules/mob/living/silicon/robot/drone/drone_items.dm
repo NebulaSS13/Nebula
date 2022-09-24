@@ -5,7 +5,7 @@
 	desc = "A simple grasping tool specialized in construction and engineering work."
 	icon = 'icons/obj/items/borg_module/borg_gripper.dmi'
 	icon_state = "gripper"
-
+	health = ITEM_HEALTH_NO_DAMAGE
 	item_flags = ITEM_FLAG_NO_BLUDGEON
 
 	//Has a list of items that it can hold.
@@ -271,11 +271,11 @@
 
 //TODO: Matter decompiler.
 /obj/item/matter_decompiler
-
 	name = "matter decompiler"
 	desc = "Eating trash, bits of glass, or other debris will replenish your stores."
 	icon = 'icons/obj/items/borg_module/decompiler.dmi'
 	icon_state = "decompiler"
+	health = ITEM_HEALTH_NO_DAMAGE
 
 	//Metal, glass, wood, plastic.
 	var/datum/matter_synth/metal = null

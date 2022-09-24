@@ -17,6 +17,7 @@
 	origin_tech = "{'combat':1}"
 	attack_verb = list("robusted")
 	use_sound = 'sound/effects/storage/toolbox.ogg'
+	material = /decl/material/solid/metal/aluminium
 
 /obj/item/storage/toolbox/emergency
 	name = "emergency toolbox"

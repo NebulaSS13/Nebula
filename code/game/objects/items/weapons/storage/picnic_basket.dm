@@ -8,7 +8,7 @@
 	max_w_class = ITEM_SIZE_NORMAL
 	max_storage_space = DEFAULT_BOX_STORAGE
 	attack_verb = list("picnics")
-
+	material = /decl/material/solid/plastic
 	var/filled = FALSE
 
 /obj/item/storage/picnic_basket/Initialize()

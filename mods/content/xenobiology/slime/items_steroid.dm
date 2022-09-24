@@ -3,6 +3,8 @@
 	desc = "A potent chemical mix that will cause a slime to generate more extract."
 	icon = 'icons/obj/items/chem/bottle.dmi'
 	icon_state = "bottle16"
+	material = /decl/material/solid/glass
+	item_flags = ITEM_FLAG_HOLLOW
 	var/grant_cores = 3
 
 /obj/item/slime_steroid/attack(mob/living/slime/M, mob/user)

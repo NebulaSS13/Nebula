@@ -11,6 +11,7 @@
 	throw_speed = 1
 	throw_range = 2
 	w_class = ITEM_SIZE_TINY
+	material = /decl/material/solid/cardboard //#TODO: Replace with paper
 	var/currency
 	var/absolute_worth = 0
 	var/can_flip = TRUE // Cooldown tracker for single-coin flips.
@@ -173,7 +174,8 @@
 	icon_state = ICON_STATE_WORLD
 	desc = "A digital stick that holds an amount of money."
 	w_class = ITEM_SIZE_TINY
-
+	material = /decl/material/solid/plastic
+	matter = list(/decl/material/solid/metal/copper = MATTER_AMOUNT_TRACE, /decl/material/solid/silicon = MATTER_AMOUNT_TRACE)
 	var/max_worth = 5000
 	var/loaded_worth = 0
 	var/creator			// Who originally created this card. Mostly for book-keeping purposes. In game these cards are 'anonymous'.

@@ -17,6 +17,15 @@
 	edge =              0
 	armor_penetration = 0
 
+	material = /decl/material/solid/metal/steel
+	matter = list(
+		/decl/material/solid/plastic          = MATTER_AMOUNT_SECONDARY,
+		/decl/material/solid/glass            = MATTER_AMOUNT_REINFORCEMENT,
+		/decl/material/solid/metal/copper     = MATTER_AMOUNT_REINFORCEMENT,
+		/decl/material/solid/metal/plutonium  = MATTER_AMOUNT_REINFORCEMENT,
+		/decl/material/solid/gemstone/diamond = MATTER_AMOUNT_REINFORCEMENT,
+	)
+
 	var/lighting_color = COLOR_SABER_GREEN
 
 	var/active = FALSE

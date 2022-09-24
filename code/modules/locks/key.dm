@@ -4,6 +4,7 @@
 	icon = 'icons/obj/items/key.dmi'
 	icon_state = "keys"
 	w_class = ITEM_SIZE_TINY
+	material = DEFAULT_FURNITURE_MATERIAL
 	var/key_data = ""
 
 /obj/item/key/Initialize(mapload,var/data)
@@ -17,6 +18,7 @@
 /obj/item/key/soap
 	name = "soap key"
 	desc = "a fragile key made using a bar of soap."
+	material = /decl/material/liquid/cleaner
 	var/uses = 0
 
 /obj/item/key/soap/get_data(var/mob/user)

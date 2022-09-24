@@ -52,6 +52,8 @@
 	randpixel = 8
 	w_class = ITEM_SIZE_TINY
 	sharp = 1
+	material = /decl/material/solid/stone/sandstone
+	material_health_multiplier = 0.25
 	
 /obj/item/rocksliver/Initialize(ml, material_key, geodata)
 	. = ..()

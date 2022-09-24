@@ -152,6 +152,13 @@
 	w_class = ITEM_SIZE_SMALL
 	origin_tech = "{'materials':4,'magnets':3,'esoteric':4}"
 	attack_verb = list("shoved", "bashed")
+	material = /decl/material/solid/metal/titanium
+	matter = list(
+		/decl/material/solid/fiberglass       = MATTER_AMOUNT_SECONDARY,
+		/decl/material/solid/metal/gold       = MATTER_AMOUNT_REINFORCEMENT,
+		/decl/material/solid/silicon          = MATTER_AMOUNT_REINFORCEMENT,
+		/decl/material/solid/gemstone/diamond = MATTER_AMOUNT_TRACE,
+	)
 	var/active = 0
 	var/shield_light_color = "#006aff"
 

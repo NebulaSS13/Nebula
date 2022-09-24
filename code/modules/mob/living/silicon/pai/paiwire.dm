@@ -3,7 +3,8 @@
 	name = "data cable"
 	icon = 'icons/obj/power.dmi'
 	icon_state = "wire1"
-
+	material = /decl/material/solid/metal/copper
+	matter = list(/decl/material/solid/plastic = MATTER_AMOUNT_REINFORCEMENT)
 	var/obj/machinery/machine
 
 /obj/item/pai_cable/proc/plugin(obj/machinery/M, mob/user)

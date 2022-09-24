@@ -3,6 +3,7 @@
 	desc = "It's a small bag with dice inside."
 	icon = 'icons/obj/dice.dmi'
 	icon_state = "dicebag"
+	material = /decl/material/solid/cloth
 
 /obj/item/storage/pill_bottle/dice/Initialize()
 	. = ..()
@@ -62,6 +63,7 @@
 	throwforce = 2
 	slot_flags = SLOT_LOWER_BODY
 	startswith = list(/obj/item/paper/cig = 10)
+	material = /decl/material/solid/plastic
 
 /obj/item/storage/cigpaper/fancy
 	name = "\improper Trident cigarette paper"
@@ -86,6 +88,7 @@
 	throwforce = 2
 	slot_flags = SLOT_LOWER_BODY
 	startswith = list(/obj/item/clothing/mask/chewable/tobacco = 6)
+	material = /decl/material/solid/metal/tin
 
 //loose leaf
 /obj/item/storage/chewables/rollable
@@ -132,6 +135,9 @@
 	startswith = list(/obj/item/clothing/mask/chewable/tobacco/nico = 6)
 
 //non-tobacco
+/obj/item/storage/chewables/candy
+	material = /decl/material/solid/plastic
+
 /obj/item/storage/chewables/candy/cookies
 	name = "pack of Getmore Cookies"
 	desc = "A pack of delicious cookies, and possibly the only product in Getmores Chocolate Corp lineup that has any trace of chocolate in it."
@@ -162,6 +168,7 @@
 	startswith = list(/obj/item/clothing/mask/chewable/candy/lolli/weak_meds = 15)
 	drop_sound = 'sound/foley/bottledrop1.ogg'
 	pickup_sound = 'sound/foley/bottlepickup1.ogg'
+	material = /decl/material/solid/glass
 
 /obj/item/storage/medical_lolli_jar/on_update_icon()
 	. = ..()

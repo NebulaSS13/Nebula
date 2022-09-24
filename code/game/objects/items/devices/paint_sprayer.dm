@@ -7,7 +7,7 @@
 	icon = 'icons/obj/items/device/paint_sprayer.dmi'
 	icon_state = ICON_STATE_WORLD
 	desc = "A slender and none-too-sophisticated device capable of applying paint on floors, walls, exosuits and certain airlocks."
-
+	material = /decl/material/solid/metal/stainlesssteel
 	var/decal =        "Quarter-turf"
 	var/paint_dir =    "Precise"
 	var/paint_color = COLOR_GRAY15

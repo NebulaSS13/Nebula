@@ -11,3 +11,4 @@
 	throw_speed = 2
 	throw_range = 4
 	origin_tech = "{'materials':3,'engineering':4}"
+	health = ITEM_HEALTH_NO_DAMAGE

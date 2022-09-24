@@ -4,6 +4,12 @@
 	icon = 'icons/obj/items/borg_module/borg_rnd_analyser.dmi'
 	icon_state = "portable_analyzer"
 	desc = "Similar to the stationary version, this rather unwieldy device allows you to break down objects in the name of science."
+	material = /decl/material/solid/plastic
+	matter = list(
+		/decl/material/solid/metal/copper = MATTER_AMOUNT_REINFORCEMENT,
+		/decl/material/solid/metal/steel  = MATTER_AMOUNT_REINFORCEMENT,
+		/decl/material/solid/silicon      = MATTER_AMOUNT_REINFORCEMENT,
+	)
 	var/obj/item/loaded_item
 	var/list/saved_tech_levels = list()
 
@@ -77,6 +83,13 @@
 	icon = 'icons/obj/lighting.dmi'
 	icon_state = "partylight-off"
 	item_state = "partylight-off"
+	material = /decl/material/solid/plastic
+	matter = list(
+		/decl/material/solid/metal/steel  = MATTER_AMOUNT_SECONDARY,
+		/decl/material/solid/glass        = MATTER_AMOUNT_REINFORCEMENT,
+		/decl/material/solid/metal/copper = MATTER_AMOUNT_TRACE,
+		/decl/material/solid/silicon      = MATTER_AMOUNT_TRACE, 
+	)
 	var/activated = 0
 	var/strobe_effect = null
 
@@ -148,6 +161,7 @@
 	desc = "A hand-held harvest tool that resembles a sickle.  It uses energy to cut plant matter very efficently."
 	icon = 'icons/obj/items/borg_module/autoharvester.dmi'
 	icon_state = "autoharvester"
+	health = ITEM_HEALTH_NO_DAMAGE
 
 /obj/item/robot_harvester/afterattack(var/atom/target, var/mob/living/user, proximity)
 	if(!target)
@@ -229,6 +243,7 @@
 	icon = 'icons/obj/bureaucracy.dmi'
 	icon_state = "paper_bin1"
 	item_state = "sheet-metal"
+	health = ITEM_HEALTH_NO_DAMAGE
 
 /obj/item/form_printer/attack(mob/living/carbon/M, mob/living/carbon/user)
 	return
@@ -278,6 +293,7 @@
 	icon = 'icons/obj/items/inflatable_dispenser.dmi'
 	icon_state = "inf_deployer"
 	w_class = ITEM_SIZE_LARGE
+	health = ITEM_HEALTH_NO_DAMAGE
 
 	var/stored_walls = 5
 	var/stored_doors = 2
@@ -379,6 +395,7 @@
 /obj/item/robot_rack
 	name = "a generic robot rack"
 	desc = "A rack for carrying large items as a robot."
+	health = ITEM_HEALTH_NO_DAMAGE
 	var/object_type                    //The types of object the rack holds (subtypes are allowed).
 	var/interact_type                  //Things of this type will trigger attack_hand when attacked by this.
 	var/capacity = 1                   //How many objects can be held.
@@ -423,6 +440,7 @@
 	desc = "An integrated power generator that runs on most kinds of biomass."
 	icon = 'icons/obj/power.dmi'
 	icon_state = "portgen0"
+	health = ITEM_HEALTH_NO_DAMAGE
 
 	var/base_power_generation = 75 KILOWATTS
 	var/max_fuel_items = 5

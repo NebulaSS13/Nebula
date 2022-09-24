@@ -17,6 +17,7 @@ Buildable meters
 	level = 2
 	obj_flags = OBJ_FLAG_ROTATABLE
 	dir = SOUTH
+	material = /decl/material/solid/metal/steel
 	var/constructed_path = /obj/machinery/atmospherics/pipe/simple/hidden
 	var/pipe_class = PIPE_CLASS_BINARY
 	var/rotate_class = PIPE_ROTATE_STANDARD
@@ -110,6 +111,7 @@ Buildable meters
 	qdel(src)	// remove the pipe item
 
 /obj/item/machine_chassis
+	material = /decl/material/solid/metal/steel
 	var/build_type
 
 /obj/item/machine_chassis/Initialize()

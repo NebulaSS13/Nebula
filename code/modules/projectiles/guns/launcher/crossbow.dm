@@ -11,6 +11,7 @@
 	sharp = 1
 	edge = 0
 	lock_picking_level = 3
+	material = /decl/material/solid/wood
 
 /obj/item/arrow/proc/removed() //Helper for metal rods falling apart.
 	return
@@ -25,11 +26,13 @@
 	icon = 'icons/obj/items/weapon/crossbow_bolt.dmi'
 	icon_state = "metal-rod"
 	item_state = "bolt"
+	material = /decl/material/solid/metal/alienalloy
 
 /obj/item/arrow/rod
 	name = "metal rod"
 	desc = "Don't cry for me, Orithena."
 	icon_state = "metal-rod"
+	material = /decl/material/solid/metal/steel
 
 /obj/item/arrow/rod/removed(mob/user)
 	if(throwforce == 15) // The rod has been superheated - we don't want it to be useable when removed from the bow.
@@ -209,6 +212,7 @@
 	name = "flashforged bolt"
 	desc = "The ultimate ghetto deconstruction implement."
 	throwforce = 4
+	material = /decl/material/solid/slag
 
 /obj/item/gun/launcher/crossbow/rapidcrossbowdevice
 	name = "rapid crossbow device"

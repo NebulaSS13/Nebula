@@ -34,6 +34,14 @@
 	siemens_coefficient = 0.2
 	permeability_coefficient = 0.1
 	unacidable = 1
+	material = /decl/material/solid/metal/titanium
+	matter = list(
+		/decl/material/solid/fiberglass           = MATTER_AMOUNT_SECONDARY,
+		/decl/material/solid/plastic              = MATTER_AMOUNT_REINFORCEMENT,
+		/decl/material/solid/metal/copper         = MATTER_AMOUNT_REINFORCEMENT,
+		/decl/material/solid/silicon              = MATTER_AMOUNT_REINFORCEMENT,
+		/decl/material/solid/metal/stainlesssteel = MATTER_AMOUNT_TRACE,
+	)
 
 	var/equipment_overlay_icon = 'icons/mob/onmob/onmob_rig_modules.dmi'
 	var/hides_uniform = 1 	//used to determinate if uniform should be visible whenever the suit is sealed or not

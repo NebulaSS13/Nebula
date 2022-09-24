@@ -15,6 +15,7 @@
 	possible_transfer_amounts = null
 	atom_flags = ATOM_FLAG_OPEN_CONTAINER
 	slot_flags = SLOT_LOWER_BODY
+	material = /decl/material/solid/metal/steel
 
 	// autoinjectors takes less time than a normal syringe (overriden for hypospray).
 	// This delay is only applied when injecting concious mobs, and is not applied for self-injection
@@ -153,6 +154,8 @@
 	origin_tech = "{'materials':2,'biotech':2}"
 	slot_flags = SLOT_LOWER_BODY | SLOT_EARS
 	w_class = ITEM_SIZE_TINY
+	material = /decl/material/solid/plastic
+	matter = list(/decl/material/solid/fiberglass = MATTER_AMOUNT_REINFORCEMENT)
 	var/list/starts_with = list(/decl/material/liquid/adrenaline = 5)
 	var/band_color = COLOR_CYAN
 
@@ -202,5 +205,3 @@
 	name = "autoinjector"
 	band_color = COLOR_WHITE
 	starts_with = list()
-	material = /decl/material/solid/plastic
-	matter = list(/decl/material/solid/fiberglass = MATTER_AMOUNT_REINFORCEMENT)

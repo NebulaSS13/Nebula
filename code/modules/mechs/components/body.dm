@@ -4,6 +4,7 @@
 	storage_slots = 4
 	use_sound = 'sound/effects/storage/toolbox.ogg'
 	anchored = 1
+	health = ITEM_HEALTH_NO_DAMAGE
 
 /obj/item/mech_component/chassis/Adjacent(var/atom/neighbor, var/recurse = 1) //For interaction purposes we consider body to be adjacent to whatever holder mob is adjacent
 	var/mob/living/exosuit/E = loc

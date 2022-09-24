@@ -230,6 +230,8 @@
 	attack_verb = list("stabbed", "slashed", "attacked")
 	sharp = 1
 	edge = 0
+	item_flags = ITEM_FLAG_HOLLOW
+	material = /decl/material/solid/glass
 	var/icon/broken_outline = icon('icons/obj/drinks.dmi', "broken")
 
 /obj/item/broken_bottle/Initialize(ml, material_key)

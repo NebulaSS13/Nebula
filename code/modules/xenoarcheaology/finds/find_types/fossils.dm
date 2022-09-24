@@ -29,6 +29,7 @@
 	desc = "A fossilised, pre-Stygian alien crustacean."
 	icon = 'icons/obj/xenoarchaeology.dmi'
 	icon_state = "shell"
+	material = /decl/material/solid/stone/sandstone //Should probably be limestone, but whatever
 
 /obj/item/fossil/plant
 	name = "fossilised plant"

@@ -253,6 +253,7 @@
 /obj/item/synthesized_instrument
 	var/datum/real_instrument/real_instrument
 	icon = 'icons/obj/musician.dmi'
+	material = /decl/material/solid/plastic
 	var/list/instruments = list()
 	var/path = /datum/instrument
 	var/sound_player = /datum/sound_player
