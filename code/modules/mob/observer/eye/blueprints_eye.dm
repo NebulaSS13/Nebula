@@ -82,7 +82,8 @@
 		return
 	to_chat(owner, SPAN_NOTICE("You scrub [A.proper_name] off the blueprints."))
 	log_and_message_admins("deleted area [A.proper_name] via station blueprints.")
-	qdel(A)
+	for(var/turf/T in A.contents)
+		ChangeArea(T, global.space_area)
 
 /mob/observer/eye/blueprints/proc/edit_area()
 	var/area/A = get_area(src)

@@ -32,7 +32,7 @@
 	title = "regular floor tile"
 	result_type = /obj/item/stack/tile/floor
 
-/datum/stack_recipe/tile/metal/floor
+/datum/stack_recipe/tile/metal/roof
 	title = "roofing tile"
 	result_type = /obj/item/stack/tile/roof
 
