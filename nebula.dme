@@ -1295,6 +1295,7 @@
 #include "code\game\objects\structures\flora\grass.dm"
 #include "code\game\objects\structures\flora\plant.dm"
 #include "code\game\objects\structures\flora\potted.dm"
+#include "code\game\objects\structures\flora\stump.dm"
 #include "code\game\objects\structures\flora\tree.dm"
 #include "code\game\objects\structures\stool_bed_chair_nest_sofa\bed.dm"
 #include "code\game\objects\structures\stool_bed_chair_nest_sofa\chairs.dm"

@@ -21,8 +21,7 @@
 	var/list/posters = decls_repository.get_decl_paths_of_subtype(/decl/poster)
 	poster_type = given_poster_type || poster_type
 	if(!poster_type)
-		poster_type = pick(subtypesof(/decl/poster))
-	var/list/posters = subtypesof(/decl/poster)
+		poster_type = pick(posters)
 	var/serial_number = posters.Find(poster_type)
 	name += " - No. [serial_number]"
 	return ..(ml, material_key)
