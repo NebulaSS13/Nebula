@@ -1088,9 +1088,9 @@
 			return 1
 
 /mob/living/silicon/robot/incapacitated(var/incapacitation_flags = INCAPACITATION_DEFAULT)
-	if ((incapacitation_flags & INCAPACITATION_FORCELYING) && (lockcharge || !is_component_functioning("actuator")))
+	if ((incapacitation_flags & INCAPACITATION_FORCELYING) && (lockcharge || !is_component_functioning("actuator") || !is_component_functioning("power cell")))
 		return 1
-	if ((incapacitation_flags & INCAPACITATION_KNOCKOUT) && !is_component_functioning("actuator"))
+	if ((incapacitation_flags & INCAPACITATION_KNOCKOUT) && !is_component_functioning("power cell"))
 		return 1
 	return ..()
 
