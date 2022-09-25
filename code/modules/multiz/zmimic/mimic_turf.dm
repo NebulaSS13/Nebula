@@ -27,7 +27,8 @@
 /turf/proc/update_mimic()
 	if(z_flags & ZM_MIMIC_BELOW)
 		z_queued += 1
-		SSzcopy.queued_turfs |= src
+		// This adds duplicates for a reason. Do not change this unless you understand how ZM queues work.
+		SSzcopy.queued_turfs += src
 
 /// Enables Z-mimic for a turf that didn't already have it enabled.
 /turf/proc/enable_zmimic(additional_flags = 0)
@@ -69,7 +70,10 @@
 	// Don't remove ourselves from the queue, the subsystem will explode. We'll naturally fall out of the queue.
 	z_queued = 0
 
-	QDEL_NULL(shadower)
+	// can't use QDEL_NULL as we need to supply force to qdel
+	if(shadower)
+		qdel(shadower, TRUE)
+		shadower = null
 	QDEL_NULL(mimic_above_copy)
 	QDEL_NULL(mimic_underlay)
 

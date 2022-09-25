@@ -121,7 +121,7 @@
 
 	var/ikey = "\ref[seed]-plant-[growth]"
 	if(!SSplants.plant_icon_cache[ikey])
-		SSplants.plant_icon_cache[ikey] = seed.get_icon(growth)
+		SSplants.plant_icon_cache[ikey] = seed.get_growth_stage_overlay(growth)
 	overlays += SSplants.plant_icon_cache[ikey]
 
 	if(growth > 2 && growth == max_growth)

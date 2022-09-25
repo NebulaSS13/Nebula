@@ -50,7 +50,10 @@
 /decl/state/weather/proc/handle_protected_effects(var/mob/living/M, var/obj/abstract/weather_system/weather, var/obj/item/protected_by)
 	if(prob(cosmetic_message_chance))
 		if(protected_by && length(protected_messages))
-			to_chat(M, "<span class='[cosmetic_span_class]'>[replacetext(pick(protected_messages), "$ITEM$", "your [protected_by.name]")]</span>")
+			if(protected_by.loc == M)
+				to_chat(M, "<span class='[cosmetic_span_class]'>[replacetext(pick(protected_messages), "$ITEM$", "your [protected_by.name]")]</span>")
+			else
+				to_chat(M, "<span class='[cosmetic_span_class]'>[replacetext(pick(protected_messages), "$ITEM$", "\the [protected_by]")]</span>")
 		else if(length(cosmetic_messages))
 			to_chat(M, "<span class='[cosmetic_span_class]'>[pick(cosmetic_messages)]</span>")
 
@@ -65,14 +68,14 @@
 			weather.show_wind(M)
 
 	if(exposure != WEATHER_IGNORE && weather.set_cooldown(M))
-		if(exposure == WEATHER_PROTECTED)
+		if(exposure == WEATHER_EXPOSED)
+			handle_exposure_effects(M, weather)
+		else if(exposure == WEATHER_ROOFED)
+			handle_roofed_effects(M, weather)
+		else if(exposure == WEATHER_PROTECTED)
 			var/list/protected_by = M.get_weather_protection()
 			if(LAZYLEN(protected_by))
 				handle_protected_effects(M, weather, pick(protected_by))
-			else
-				handle_roofed_effects(M, weather)
-		else
-			handle_exposure_effects(M, weather)
 
 /decl/state/weather/proc/show_to(var/mob/living/M, var/obj/abstract/weather_system/weather)
 	to_chat(M, descriptor)
@@ -153,7 +156,7 @@
 		/decl/state_transition/weather/hail
 	)
 	cosmetic_messages =  list("Torrential rain thunders down around you.")
-	protected_messages = list("Torrential rain thunders down as you shelter beneath $ITEM$.")
+	protected_messages = list("Torrential rain thunders against $ITEM$.")
 	roof_messages =      list("Torrential rain thunders against the roof.")
 	ambient_sounds =     list('sound/effects/weather/rain_heavy.ogg')
 

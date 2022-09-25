@@ -476,7 +476,7 @@
 	return M
 
 /atom/movable/proc/show_unbuckle_message(var/mob/buckled, var/mob/buckling)
-	if(buckled == buckling)
+	if(buckled != buckling)
 		visible_message(\
 			SPAN_NOTICE("\The [buckled] was unbuckled by \the [buckling]!"),\
 			SPAN_NOTICE("You were unbuckled from \the [src] by \the [buckling]."),\
