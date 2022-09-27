@@ -67,13 +67,12 @@
 	var/jump_dist = get_dist(linked, locate(x, y, overmap.assigned_z))
 	var/plot_delay_mult
 	var/delay
-	switch(jump_dist)
-		if(1 to linked_core.safe_jump_distance)
-			plot_delay_mult = 1
-		if(linked_core.safe_jump_distance to linked_core.moderate_jump_distance)
-			plot_delay_mult = 1.5
-		if(linked_core.moderate_jump_distance to INFINITY)
-			plot_delay_mult = 2
+	if(jump_dist < linked_core.safe_jump_distance)
+		plot_delay_mult = 1
+	else if(jump_dist < linked_core.moderate_jump_distance)
+		plot_delay_mult = 1.5
+	else
+		plot_delay_mult = 2
 
 	delay = clamp(((jump_dist * BASE_PLOT_TIME_PER_TILE) * plot_delay_mult),1, INFINITY)
 	jump_plot_timer = addtimer(CALLBACK(src, .proc/finish_plot, x, y), delay, TIMER_STOPPABLE)
