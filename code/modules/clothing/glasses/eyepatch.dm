@@ -20,7 +20,7 @@
 	else
 		icon = flipped_icon
 		flipped = "right"
-	to_chat (usr, "You change \the [src] to cover the [flipped] eye.")
+	to_chat(usr, "You change \the [src] to cover the [flipped] eye.")
 	update_icon()
 	update_clothing_icon()
 
@@ -47,7 +47,7 @@
 /obj/item/clothing/glasses/eyepatch/hud/dropped(mob/user)
 	. = ..()
 	update_icon()
-	
+
 /obj/item/clothing/glasses/eyepatch/hud/on_update_icon()
 	. = ..()
 	if(active && check_state_in_icon("[icon_state]-eye", icon))
