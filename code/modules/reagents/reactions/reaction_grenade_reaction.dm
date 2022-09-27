@@ -1,5 +1,6 @@
 /decl/chemical_reaction/grenade_reaction
 	result = null
+	result_amount = 1
 
 /decl/chemical_reaction/grenade_reaction/explosion_potassium
 	name = "Explosion"
