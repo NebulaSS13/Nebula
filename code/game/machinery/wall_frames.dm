@@ -137,6 +137,48 @@
 	material = /decl/material/solid/metal/steel
 	build_machine_type = /obj/machinery/button/buildable
 
+/obj/item/frame/button/kit
+	fully_construct = TRUE
+	name = "radio button kit"
+	desc = "An all-in-one wall-mounted button kit, comes preassembled and equipped with a radio transmitter."
+	build_machine_type = /obj/machinery/button
+
+/obj/item/frame/button/alternate
+	name = "button frame (door)"
+	icon = 'icons/obj/machines/button_door.dmi'
+	icon_state = "doorctrl"
+	build_machine_type = /obj/machinery/button/alternate/buildable
+
+/obj/item/frame/button/alternate/kit
+	fully_construct = TRUE
+	name = "button kit (door)"
+	desc = "An all-in-one wall-mounted button kit, comes preassembled and equipped with a radio transmitter."
+	build_machine_type = /obj/machinery/button/alternate
+
+/obj/item/frame/button/access
+	name = "button frame (airlock)"
+	icon = 'icons/obj/airlock_machines.dmi'
+	icon_state = "access_button_standby"
+	build_machine_type = /obj/machinery/button/access/buildable
+
+/obj/item/frame/button/access/kit
+	fully_construct = TRUE
+	name = "button kit (airlock)"
+	desc = "An all-in-one wall-mounted button kit, comes preassembled and equipped with a radio transmitter."
+	build_machine_type = /obj/machinery/button/access
+
+/obj/item/frame/button/blastdoor
+	name = "button frame (blast doors)"
+	icon = 'icons/obj/machines/button_blastdoor.dmi'
+	icon_state = "blastctrl"
+	build_machine_type = /obj/machinery/button/blast_door/buildable
+
+/obj/item/frame/button/blastdoor/kit
+	fully_construct = TRUE
+	name = "button kit (blast doors)"
+	desc = "An all-in-one wall-mounted button kit, comes preassembled and equipped with a radio transmitter."
+	build_machine_type = /obj/machinery/button/blast_door
+
 /obj/item/frame/camera
 	name = "security camera frame"
 	icon = 'icons/obj/monitors.dmi'
@@ -214,6 +256,7 @@
 	icon_state = "airlock_sensor_off"
 	name = "airlock sensor"
 	desc = "An airlock sensor frame."
+	build_machine_type = /obj/machinery/airlock_sensor/buildable
 
 /obj/item/frame/button/airlock_sensor/kit
 	fully_construct = TRUE
