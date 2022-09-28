@@ -20,7 +20,7 @@
 	///Associative list of cache key to the generate icons for the ore piles. We pre-generate a pile of all possible ore icon states, and make them available
 	var/static/list/cached_ore_icon_states
 	///A list of all the existing ore icon states in the ore file
-	var/static/list/ore_icon_states = list("shiny", "gems", "dust", "nugget", "lump")
+	var/static/list/ore_icon_states =  icon_states('icons/obj/materials/ore.dmi') //list("shiny", "gems", "dust", "nugget", "lump")
 
 ///Returns a cached ore pile icon state
 /obj/item/stack/material/ore/proc/get_cached_ore_pile_overlay(var/state_name, var/stack_icon_index)
@@ -34,6 +34,7 @@
 
 ///Caches the icon state of the ore piles for each possible icon states. The images are greyscale so their color can be changed by the individual materials.
 /obj/item/stack/material/ore/proc/cache_ore_pile_icons()
+	//#TODO: Replace with pre-made icons. This is more or less a placeholder.
 	cached_ore_icon_states = list()
 	for(var/IS in ore_icon_states)
 		var/list/states = list(null) //First index is null since we're creating overlays
@@ -42,7 +43,7 @@
 		for(var/i = 2 to ORE_MAX_OVERLAYS)
 			//Randomize the orientation and position of each ores in the image
 			var/matrix/M = matrix()
-			M.Translate(rand(-7, 7), rand(-8, 8))
+			M.Translate(rand(-6, 6), rand(-6, 6))
 			M.Turn(pick(-72, -58, -45, -27.-5, 0, 0, 0, 0, 0, 27.5, 45, 58, 72))
 			var/image/oreoverlay = image('icons/obj/materials/ore.dmi', IS)
 			oreoverlay.transform = M
@@ -84,7 +85,7 @@
 
 /obj/item/stack/material/ore/update_strings()
 	. = ..()
-	SetName("[(amount > 1? "piled" : "")] [(material.ore_name ? material.ore_name : "[material.name] chunk")]")
+	SetName("[(material.ore_name ? material.ore_name : "[material.name] chunk")] [(amount > 1? "pile" : "")]")
 	desc = material.ore_desc ? material.ore_desc : "A lump of ore."
 
 /obj/item/stack/material/ore/get_recipes()
@@ -136,6 +137,7 @@
 	material = /decl/material/solid/bauxite
 /obj/item/stack/material/ore/rutile
 	material = /decl/material/solid/rutile
+	
 /obj/item/stack/material/ore/hydrogen_hydrate
 	material = /decl/material/solid/ice/hydrogen // todo: set back to hydrate when clathrate is added to hydrogen hydrate dname
 /obj/item/stack/material/ore/methane

@@ -83,7 +83,7 @@ var/global/list/mining_floors = list()
 		to_chat(user, "<span class='notice'>You dug a hole.</span>")
 		gets_dug()
 
-	else if(istype(W,/obj/item/storage/ore))
+	else if(istype(W,/obj/item/storage/ore)) //#FIXME: Its kinda silly to put this in a specific turf's subtype's attackby.
 		var/obj/item/storage/ore/S = W
 		if(S.collection_mode)
 			for(var/obj/item/stack/material/ore/O in contents)

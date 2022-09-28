@@ -12,16 +12,16 @@
 	tool_interaction_flags = (TOOL_INTERACTION_ANCHOR | TOOL_INTERACTION_DECONSTRUCT)
 	///Maximum amount of ores of all types that can be stored in the box.
 	var/tmp/maximum_ores  = 1200
-	///The current total amount of ores of all types that were placed inside
+	///The current total amount of ores of all types that were placed inside.
 	var/total_ores = 0
-	///A list with all the ores of every types that are currently inside
+	///A list with all the ores of every types that are currently inside. Associative list (ore name = ore amount).
 	var/list/stored_ore
 
 /obj/structure/ore_box/attack_hand(mob/user)
 	if(total_ores > 0)
-		to_chat(user, SPAN_NOTICE("You grab a random ore pile from \the [src]."))
 		var/obj/item/stack/material/ore/O = pick(get_contained_external_atoms())
 		if(remove_ore(O, user))
+			to_chat(user, SPAN_NOTICE("You grab a random ore pile from \the [src]."))
 			return TRUE
 	. = ..()
 	

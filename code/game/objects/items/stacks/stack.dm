@@ -65,7 +65,8 @@
 	. = ..()
 	if(!isturf(loc))
 		var/image/I = image(null)
-		I.layer = POINTER_LAYER
+		I.plane = HUD_PLANE
+		I.layer = HUD_ABOVE_ITEM_LAYER
 		I.appearance_flags |= (RESET_COLOR|RESET_TRANSFORM)
 		I.maptext_x = 2
 		I.maptext_y = 2
