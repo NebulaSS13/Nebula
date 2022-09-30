@@ -32,6 +32,10 @@
 	/// What fraction of the total volume of the drink (ignoring ice) can be unrelated chems?
 	var/impurity_tolerance = 0.3
 
+	/// What tastes (and associated strengths) this cocktail adds. Scaled in taste code by total_volume.
+	/// Example: list("something funny" = 0.5)
+	/// Consider using a total strength proportional to the number of ingredients, i.e. 0.25 for 4 ingredients, 0.5 for 2, etc.
+	var/list/tastes = null
 
 /decl/cocktail/Initialize()
 	. = ..()
@@ -44,6 +48,11 @@
 		ratio_sum += ratios[r]
 	for(var/r in ratios)
 		ratios[r] *= ratio_wiggle_room / ratio_sum
+	// Normalize the tastes to be relative to the number of ingredients.
+	// This lets you roughly reason about the strength of the taste
+	// of the cocktail relative to its ingredients' tastes.
+	for(var/t in tastes)
+		tastes[t] /= length(ratios)
 
 /decl/cocktail/proc/get_presentation_name(var/obj/item/prop)
 	. = name

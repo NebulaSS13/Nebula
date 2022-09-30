@@ -5,7 +5,7 @@
 	if(last_taste_time + 50 < world.time)
 		var/datum/reagents/temp = new(amount, global.temp_reagents_holder) //temporary holder used to analyse what gets transfered.
 		from.trans_to_holder(temp, amount, multiplier, 1)
-		var/text_output = temp.generate_taste_message(src)
+		var/text_output = temp.generate_taste_message(src, from)
 		if(text_output != last_taste_text || last_taste_time + 1 MINUTE < world.time) //We dont want to spam the same message over and over again at the person. Give it a bit of a buffer.
 			to_chat(src, SPAN_NOTICE("You can taste [text_output].")) //no taste means there are too many tastes and not enough flavor.
 			last_taste_time = world.time
@@ -16,7 +16,7 @@
 catalogue the 'taste strength' of each one
 calculate text size per text.
 */
-/datum/reagents/proc/generate_taste_message(mob/living/carbon/taster = null)
+/datum/reagents/proc/generate_taste_message(mob/living/carbon/taster = null, datum/reagents/source_holder = null)
 	var/minimum_percent = 15
 	if(ishuman(taster))
 		var/mob/living/carbon/human/H = taster
@@ -46,6 +46,19 @@ calculate text size per text.
 					tastes[taste_desc] += taste_amount
 				else
 					tastes[taste_desc] = taste_amount
+
+		var/decl/material/primary_ingredient = get_primary_reagent_decl()
+		if(primary_ingredient?.cocktail_ingredient && source_holder?.my_atom)
+			for(var/decl/cocktail/cocktail in SSmaterials.get_cocktails_by_primary_ingredient(primary_ingredient.type))
+				if(!LAZYLEN(cocktail.tastes))
+					continue
+				if(!cocktail.matches(source_holder.my_atom))
+					continue
+				var/cocktail_volume = 0
+				for(var/chem in cocktail.ratios)
+					cocktail_volume += REAGENT_VOLUME(src, chem)
+				for(var/taste_desc in cocktail.tastes)
+					tastes[taste_desc] += cocktail.tastes[taste_desc] * cocktail_volume
 
 		//deal with percentages
 		var/total_taste = 0
