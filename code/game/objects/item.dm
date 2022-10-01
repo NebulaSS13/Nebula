@@ -397,6 +397,9 @@
 	if(user && (z_flags & ZMM_MANGLE_PLANES))
 		addtimer(CALLBACK(user, /mob/proc/check_emissive_equipment), 0, TIMER_UNIQUE)
 
+	events_repository.raise_event(/decl/observ/mob_unequipped, user, src)
+	events_repository.raise_event(/decl/observ/item_unequipped, src, user)
+
 // called just as an item is picked up (loc is not yet changed)
 /obj/item/proc/pickup(mob/user)
 	return
@@ -442,6 +445,9 @@
 
 	if(user && (z_flags & ZMM_MANGLE_PLANES))
 		addtimer(CALLBACK(user, /mob/proc/check_emissive_equipment), 0, TIMER_UNIQUE)
+
+	events_repository.raise_event(/decl/observ/mob_equipped, user, src, slot)
+	events_repository.raise_event(/decl/observ/item_equipped, src, user, slot)
 
 // As above but for items being equipped to an active module on a robot.
 /obj/item/proc/equipped_robot(var/mob/user)

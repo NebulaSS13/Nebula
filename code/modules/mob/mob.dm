@@ -322,7 +322,7 @@
 
 	if((is_blind(src) || usr.stat) && !isobserver(src))
 		to_chat(src, "<span class='notice'>Something is there but you can't see it.</span>")
-		return 1
+		return TRUE
 
 	face_atom(A)
 
