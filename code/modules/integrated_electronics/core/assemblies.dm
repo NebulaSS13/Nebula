@@ -160,6 +160,8 @@
 	if(listed_components)
 		show_browser(user, jointext(HTML,null), "window=closed-assembly-\ref[src];size=600x350;border=1;can_resize=1;can_close=1;can_minimize=1")
 
+/obj/item/electronic_assembly/get_assembly_detail_color()
+	return detail_color
 
 /obj/item/electronic_assembly/proc/open_interact(mob/user)
 	var/total_part_size = return_total_size()

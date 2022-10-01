@@ -66,12 +66,9 @@
 	to_chat(user, "<span class='notice'>You set \the [src]'s detailing color to match [target.name] \[Ref\]. The color matcher is \
 	now off.</span>")
 	scanning_color = FALSE
-	if(istype(target, /obj/item/electronic_assembly))
-		var/obj/item/electronic_assembly/target_assembly = target
-		detail_color = target_assembly.detail_color
-	if(istype(target, /obj/item/card/data))
-		var/obj/item/card/data/target_card = target
-		detail_color = target_card.detail_color
-	if(istype(target, /obj/item/integrated_electronics/detailer)) // why you'd want to copy off of another detailer, i wouldn't know
-		var/obj/item/integrated_electronics/detailer/target_detailer = target
-		detail_color = target_detailer.detail_color
+	if(isitem(target))
+		var/obj/item/I = target
+		detail_color = I.get_assembly_detail_color()
+
+/obj/item/integrated_electronics/detailer/get_assembly_detail_color()
+	return detail_color

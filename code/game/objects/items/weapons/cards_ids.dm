@@ -78,6 +78,9 @@
 	desc = "A plastic magstripe card for simple and speedy data storage and transfer. This one inexplicibly looks like a floppy disk."
 	icon_state = "data_3"
 
+/obj/item/card/data/get_assembly_detail_color()
+	return detail_color
+
 /*
  * ID CARDS
  */
