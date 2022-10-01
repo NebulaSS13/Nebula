@@ -164,7 +164,7 @@ var/global/obj/temp_reagents_holder = new
 
 /datum/reagents/proc/add_reagent(var/reagent_type, var/amount, var/data = null, var/safety = 0, var/defer_update = FALSE)
 
-	amount = FLOAT_FLOOR(min(amount, REAGENTS_FREE_SPACE(src)), MINIMUM_CHEMICAL_VOLUME)
+	amount = NONUNIT_FLOOR(min(amount, REAGENTS_FREE_SPACE(src)), MINIMUM_CHEMICAL_VOLUME)
 	if(amount <= 0)
 		return FALSE
 
@@ -190,7 +190,7 @@ var/global/obj/temp_reagents_holder = new
 	return TRUE
 
 /datum/reagents/proc/remove_reagent(var/reagent_type, var/amount, var/safety = 0, var/defer_update = FALSE)
-	amount = FLOAT_FLOOR(amount, MINIMUM_CHEMICAL_VOLUME)
+	amount = NONUNIT_FLOOR(amount, MINIMUM_CHEMICAL_VOLUME)
 	if(!isnum(amount) || amount <= 0 || REAGENT_VOLUME(src, reagent_type) <= 0)
 		return FALSE
 	reagent_volumes[reagent_type] -= amount
@@ -276,7 +276,7 @@ var/global/obj/temp_reagents_holder = new
 		clear_reagents()
 		return
 
-	var/removing = Clamp(FLOAT_FLOOR(amount, MINIMUM_CHEMICAL_VOLUME), 0, max(0, total_volume)) // not ideal but something is making total_volume become NaN
+	var/removing = Clamp(NONUNIT_FLOOR(amount, MINIMUM_CHEMICAL_VOLUME), 0, total_volume) // not ideal but something is making total_volume become NaN
 	if(!removing || total_volume <= 0)
 		. = 0
 		clear_reagents()
@@ -289,7 +289,7 @@ var/global/obj/temp_reagents_holder = new
 	while(removing >= MINIMUM_CHEMICAL_VOLUME && total_volume >= MINIMUM_CHEMICAL_VOLUME && !failed_remove)
 		failed_remove = TRUE
 		for(var/current in reagent_volumes)
-			var/removing_amt = min(FLOAT_FLOOR(REAGENT_VOLUME(src, current) * part, MINIMUM_CHEMICAL_VOLUME), removing)
+			var/removing_amt = min(NONUNIT_FLOOR(REAGENT_VOLUME(src, current) * part, MINIMUM_CHEMICAL_VOLUME), removing)
 			if(removing_amt <= 0)
 				continue
 			failed_remove = FALSE
@@ -315,7 +315,7 @@ var/global/obj/temp_reagents_holder = new
 	var/part = amount / total_volume
 	. = 0
 	for(var/rtype in reagent_volumes)
-		var/amount_to_transfer = FLOAT_FLOOR(REAGENT_VOLUME(src, rtype) * part, MINIMUM_CHEMICAL_VOLUME)
+		var/amount_to_transfer = NONUNIT_FLOOR(REAGENT_VOLUME(src, rtype) * part, MINIMUM_CHEMICAL_VOLUME)
 		target.add_reagent(rtype, amount_to_transfer * multiplier, REAGENT_DATA(src, rtype), TRUE, TRUE) // We don't react until everything is in place
 		. += amount_to_transfer
 		if(!copy)
