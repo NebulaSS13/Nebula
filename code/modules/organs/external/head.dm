@@ -76,7 +76,7 @@
 /obj/item/organ/external/head/get_agony_multiplier()
 	return (owner && owner.headcheck(organ_tag)) ? 1.50 : 1
 
-/obj/item/organ/external/head/robotize(var/company = /decl/prosthetics_manufacturer, var/skip_prosthetics = 0, var/keep_organs = 1, var/apply_material = /decl/material/solid/metal/steel, var/check_bodytype, var/check_species)
+/obj/item/organ/external/head/robotize(var/company = /decl/prosthetics_manufacturer/basic_human, var/skip_prosthetics = 0, var/keep_organs = 1, var/apply_material = /decl/material/solid/metal/steel, var/check_bodytype, var/check_species)
 	. = ..()
 	has_lips = null
 	if(model)
@@ -107,11 +107,11 @@
 
 			// Floating eyes or other effects.
 			var/image/eye_glow = get_eye_overlay()
-			if(eye_glow) 
+			if(eye_glow)
 				overlays |= eye_glow
 
 		if(owner.lip_style && !BP_IS_PROSTHETIC(src) && (species && (species.appearance_flags & HAS_LIPS)))
-			var/icon/lip_icon = new/icon(bodytype.get_lip_icon(owner) || 'icons/mob/human_races/species/lips.dmi', "lipstick_s")	
+			var/icon/lip_icon = new/icon(bodytype.get_lip_icon(owner) || 'icons/mob/human_races/species/lips.dmi', "lipstick_s")
 			lip_icon.Blend(owner.lip_style, ICON_MULTIPLY)
 			overlays |= lip_icon
 			mob_icon.Blend(lip_icon, ICON_OVERLAY)

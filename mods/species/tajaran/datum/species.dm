@@ -14,6 +14,7 @@
 /decl/species/tajaran
 	name = SPECIES_TAJARA
 	name_plural = "Tajaran"
+	base_prosthetics_model = null
 
 	description = "A small mammalian carnivore. If you are reading this, you are probably a Tajaran."
 	hidden_from_codex = FALSE
@@ -53,9 +54,9 @@
 	gluttonous = GLUT_TINY
 
 	unarmed_attacks = list(
-		/decl/natural_attack/stomp, 
-		/decl/natural_attack/kick, 
-		/decl/natural_attack/punch, 
+		/decl/natural_attack/stomp,
+		/decl/natural_attack/kick,
+		/decl/natural_attack/punch,
 		/decl/natural_attack/bite/sharp
 	)
 
