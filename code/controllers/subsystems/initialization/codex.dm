@@ -2,7 +2,10 @@ SUBSYSTEM_DEF(codex)
 	name = "Codex"
 	flags = SS_NO_FIRE
 	init_order = SS_INIT_MISC_CODEX
+
 	var/regex/linkRegex
+	var/regex/trailingLinebreakRegexStart
+	var/regex/trailingLinebreakRegexEnd
 
 	var/list/all_entries =       list()
 	var/list/entries_by_path =   list()
@@ -15,6 +18,11 @@ SUBSYSTEM_DEF(codex)
 	// <l>keyword</l> when keyword is mentioned verbatim,
 	// <span codexlink='keyword'>whatever</span> when shit gets tricky
 	linkRegex = regex(@"<(span|l)(\s+codexlink='([^>]*)'|)>([^<]+)</(span|l)>","g")
+
+	// used to remove trailing linebreaks when retrieving codex body.
+	// TODO: clean up codex page generation so this isn't necessary.
+	trailingLinebreakRegexStart = regex(@"^<\s*\/*\s*br\s*\/*\s*>", "igm")
+	trailingLinebreakRegexEnd = regex(@"<\s*\/*\s*br\s*\/*\s*>$", "igm")
 
 	// Create general hardcoded entries.
 	for(var/ctype in subtypesof(/datum/codex_entry))

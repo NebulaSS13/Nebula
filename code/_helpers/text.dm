@@ -319,25 +319,6 @@
 /proc/trim(text)
 	return trim_left(trim_right(text))
 
-// Remove starting and ending <br> and variants
-/proc/trim_trailing_linebreaks(var/text)
-	var/lower_text = lowertext(text)
-	. = text
-	// Trim starting
-	if(copytext(lower_text, 1, 5) == "<br>")
-		. = copytext(., 5)
-	else
-		var/br = copytext(lower_text, 1, 6)
-		if(br == "</br>" || br == "<br/>")
-			. = copytext(., 6)
-	// Trim ending
-	if(copytext(lower_text, -4) == "<br>")
-		. = copytext(., 1, length(.)-3)
-	else
-		var/br = copytext(lower_text, -5)
-		if(br == "</br>" || br == "<br/>")
-			. = copytext(., 1, length(.)-4)
-
 //Returns a string with the first element of the string capitalized.
 /proc/capitalize(text)
 	if(text)
@@ -482,7 +463,7 @@
  * Strip out the special beyond characters for \proper and \improper
  * from text that will be sent to the browser.
  */
-#define strip_improper(input_text) replacetext(replacetext(replacetext(input_text, "\proper", ""), "\improper", ""), "ÿ", "")
+#define strip_improper(input_text) replacetext(replacetext(input_text, "\proper", ""), "\improper", "")
 
 /proc/pencode2html(t)
 	t = replacetext(t, "\n", "<BR>")
