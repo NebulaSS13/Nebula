@@ -137,13 +137,3 @@
 	required_reagents = list(/decl/material/liquid/nutriment/sugar = 1, /decl/material/liquid/ethanol/beer = 1)
 	catalysts = list(/decl/material/liquid/enzyme = 5)
 	result_amount = 3
-
-/client/verb/test_reaction_names()
-	set name = "Test Reaction Names"
-	set category = "Debug"
-	set src = usr
-	var/list/reactions = decls_repository.get_decls_of_subtype(/decl/chemical_reaction)
-	for(var/reaction in reactions)
-		var/decl/chemical_reaction/reaction_decl = reactions[reaction]
-		if(!reaction_decl.name)
-			to_chat(usr, "No name on [reaction]")

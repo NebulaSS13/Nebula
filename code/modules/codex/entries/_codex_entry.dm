@@ -75,6 +75,8 @@
 		for(var/decl/codex_category/category in categories)
 			. += category.get_category_link(src)
 
+// TODO: clean up codex bodies until trimming linebreaks is unnecessary.
+#define TRIM_LINEBREAKS(TEXT) replacetext(replacetext(TEXT, SScodex.trailingLinebreakRegexStart, null), SScodex.trailingLinebreakRegexEnd, null)
 /datum/codex_entry/proc/get_codex_body(var/mob/presenting_to, var/include_header = TRUE, var/include_footer = TRUE)
 
 	. = list()
@@ -87,11 +89,11 @@
 
 	. += "<span class='dmCodexBody'>"
 	if(lore_text)
-		. += "<p><span class='codexLore'>[trim_trailing_linebreaks(lore_text)]</span></p>"
+		. += "<p><span class='codexLore'>[TRIM_LINEBREAKS(lore_text)]</span></p>"
 	if(mechanics_text)
-		. += "<h3>OOC Information</h3>\n<p><span class='codexMechanics'>[trim_trailing_linebreaks(mechanics_text)]</span></p>"
+		. += "<h3>OOC Information</h3>\n<p><span class='codexMechanics'>[TRIM_LINEBREAKS(mechanics_text)]</span></p>"
 	if(antag_text && (!presenting_to || (presenting_to.mind && player_is_antag(presenting_to.mind))))
-		. += "<h3>Antagonist Information</h3>\n<p><span class='codexAntag'>[trim_trailing_linebreaks(antag_text)]</span></p>"
+		. += "<h3>Antagonist Information</h3>\n<p><span class='codexAntag'>[TRIM_LINEBREAKS(antag_text)]</span></p>"
 	. += "</span>"
 
 	if(include_footer)
@@ -100,3 +102,4 @@
 			. += "<span class='dmCodexFooter'>"
 			. += footer
 			. += "</span>"
+#undef TRIM_LINEBREAKS
