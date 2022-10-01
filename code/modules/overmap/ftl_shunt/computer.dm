@@ -5,7 +5,6 @@
 	light_color = "#77fff8"
 
 	var/obj/machinery/ftl_shunt/core/linked_core
-	var/cost = 0
 	var/plotting_jump = FALSE
 	var/jump_plot_timer
 	var/jump_plotted = FALSE
@@ -115,7 +114,6 @@
 		if(!linked_core)
 			to_chat(user, SPAN_WARNING("Unable to establish connection to superluminal shunt."))
 			return
-	recalc_cost()
 
 	data["ftlstatus"] = linked_core.get_status()
 	data["shunt_x"] = linked_core.shunt_x

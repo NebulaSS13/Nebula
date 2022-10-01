@@ -57,6 +57,7 @@
 
 	//launch
 	radio_announce("ALERT: INITIATING LAUNCH SEQUENCE")
+	reset_time = world.time + specops_return_delay
 	..(user)
 
 /datum/shuttle/autodock/ferry/specops/shuttle_moved()
@@ -133,7 +134,7 @@
 	var/specops_area = global.using_map.get_specops_area()
 	if(!specops_area)
 		return
-	
+
 	var/area/special_ops = locate(specops_area)//Where is the specops area located?
 	//Begin Marauder launchpad.
 	spawn(0)//So it parallel processes it.

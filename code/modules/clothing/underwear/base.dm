@@ -1,7 +1,6 @@
 /obj/item/underwear
 	w_class = ITEM_SIZE_TINY
 	material = /decl/material/solid/cloth
-	var/required_slot_flags
 	var/required_free_body_parts
 	var/slot_offset_str
 

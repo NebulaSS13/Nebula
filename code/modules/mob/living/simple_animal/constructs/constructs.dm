@@ -41,7 +41,6 @@
 	z_flags = ZMM_MANGLE_PLANES
 	glowing_eyes = TRUE
 
-	var/nullblock = 0
 	var/list/construct_spells = list()
 
 /mob/living/simple_animal/construct/cultify()
@@ -224,8 +223,6 @@
 	speed = 5
 	environment_smash = 2
 	resistance = 10
-	var/energy = 0
-	var/max_energy = 1000
 	construct_spells = list(/spell/aoe_turf/conjure/forcewall/lesser)
 	can_escape = TRUE
 

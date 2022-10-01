@@ -267,10 +267,6 @@
 	unacidable = 1
 	light_range = 3
 	var/needs_power = 0
-	var/active = 1
-	var/delay = 5
-	var/last_active
-	var/mob/U
 	var/obj/machinery/shieldwallgen/gen_primary
 	var/obj/machinery/shieldwallgen/gen_secondary
 	var/power_usage = 800	//how much power it takes to sustain the shield

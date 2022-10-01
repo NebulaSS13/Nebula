@@ -355,8 +355,5 @@ var/global/list/channel_to_radio_key = new
 		O.hear_signlang(message, verb, language, src)
 	return 1
 
-/obj/effect/speech_bubble
-	var/mob/parent
-
 /mob/proc/GetVoice()
 	return name

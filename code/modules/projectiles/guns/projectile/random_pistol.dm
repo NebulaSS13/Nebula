@@ -4,8 +4,7 @@
 	icon = 'icons/obj/guns/random_pistol/base.dmi'
 	var/decl/gun_look/gun_look
 	var/handle_icon
-	var/ammo_offset
-	var/safety_offset
+	// ammo and safety offsets were moved to gun_look
 	var/static/list/descriptor = list(
 		"Shining", "Power", "Instant", "Reliable", "Neo", "Super", "Boom", "Big", "Nitro", "Automatic"
 	)

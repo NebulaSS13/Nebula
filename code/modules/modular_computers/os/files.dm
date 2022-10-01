@@ -233,7 +233,7 @@
 	var/disk_type = PART_HDD
 
 /datum/file_storage/disk/proc/get_disk()
-	return os.get_component(PART_HDD)
+	return os.get_component(disk_type)
 
 /datum/file_storage/disk/check_errors()
 	. = ..()

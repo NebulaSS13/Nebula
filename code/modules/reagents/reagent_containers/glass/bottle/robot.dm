@@ -4,7 +4,12 @@
 	possible_transfer_amounts = @"[5,10,15,25,30,50,100]"
 	atom_flags = ATOM_FLAG_OPEN_CONTAINER
 	volume = 60
-	var/reagent = ""
+	var/reagent
+
+/obj/item/chems/glass/bottle/robot/stabilizer/Initialize()
+	. = ..()
+	if(reagent)
+		reagents.add_reagent(reagent, volume)
 
 /obj/item/chems/glass/bottle/robot/stabilizer
 	name = "internal stabilizer bottle"
@@ -13,19 +18,9 @@
 	icon_state = "bottle-4"
 	reagent = /decl/material/liquid/stabilizer
 
-/obj/item/chems/glass/bottle/robot/stabilizer/Initialize()
-	. = ..()
-	reagents.add_reagent(/decl/material/liquid/stabilizer, 60)
-	update_icon()
-
 /obj/item/chems/glass/bottle/robot/antitoxin
 	name = "internal anti-toxin bottle"
-	desc = "A small bottle of Anti-toxins. Counters poisons, and repairs damage, a wonder drug."
+	desc = "A small bottle of broad-spectrum antitoxins, used to neutralize poisons before they can do significant harm."
 	icon = 'icons/obj/items/chem/bottle.dmi'
 	icon_state = "bottle-4"
 	reagent = /decl/material/liquid/antitoxins
-
-/obj/item/chems/glass/bottle/robot/antitoxin/Initialize()
-	. = ..()
-	reagents.add_reagent(/decl/material/liquid/antitoxins, 60)
-	update_icon()

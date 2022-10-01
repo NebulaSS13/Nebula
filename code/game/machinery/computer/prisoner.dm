@@ -7,15 +7,11 @@
 	icon_screen = "explosive"
 	light_color = "#a91515"
 	initial_access = list(access_armory)
-	var/temp = null
-	var/status = 0
-	var/timeleft = 60
-	var/stop = 0.0
 	var/screen = 0 // 0 - No Access Denied, 1 - Access allowed
 
 /obj/machinery/computer/prisoner/interface_interact(user)
 	interact(user)
-	return TRUE	
+	return TRUE
 
 /obj/machinery/computer/prisoner/interact(var/mob/user)
 	var/dat

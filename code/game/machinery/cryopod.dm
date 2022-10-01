@@ -17,7 +17,6 @@
 	interact_offline = 1
 	obj_flags = OBJ_FLAG_MOVES_UNSUPPORTED
 	directional_offset = "{'NORTH':{'y':-24}, 'SOUTH':{'y':32}, 'EAST':{'x':-24}, 'WEST':{'x':-24}}"
-	var/mode = null
 
 	//Used for logging people entering cryosleep and important items they are carrying.
 	var/list/frozen_crew = list()
@@ -160,7 +159,6 @@
 	var/time_entered = 0          // Used to keep track of the safe period.
 
 	var/obj/machinery/computer/cryopod/control_computer
-	var/last_no_computer_message = 0
 	var/applies_stasis = 1
 
 	// These items are preserved when the process() despawn proc occurs.

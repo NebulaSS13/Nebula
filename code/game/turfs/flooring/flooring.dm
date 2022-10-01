@@ -20,8 +20,6 @@
 	var/has_damage_range
 	var/has_burn_range
 	var/damage_temperature
-	var/apply_thermal_conductivity
-	var/apply_heat_capacity
 
 	var/build_type      // Unbuildable if not set. Must be /obj/item/stack.
 	var/build_material  // Unbuildable if object material var is not set to this.
@@ -296,8 +294,6 @@
 	build_material = /decl/material/solid/metal/steel
 	build_cost = 1
 	build_time = 30
-	apply_thermal_conductivity = 0.025
-	apply_heat_capacity = 325000
 	can_paint = 1
 	footstep_type = /decl/footsteps/plating
 

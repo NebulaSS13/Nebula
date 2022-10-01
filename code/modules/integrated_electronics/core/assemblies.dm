@@ -16,15 +16,11 @@
 	var/opened = TRUE
 	var/obj/item/cell/battery // Internal cell which most circuits need to work.
 	var/cell_type = /obj/item/cell
-	var/can_charge = TRUE //Can it be charged in a recharger?
 	var/circuit_flags = IC_FLAG_ANCHORABLE
-	var/charge_sections = 4
-	var/charge_delay = 4
 	var/ext_next_use = 0
 	var/weakref/collw
 	var/allowed_circuit_action_flags = IC_ACTION_COMBAT | IC_ACTION_LONG_RANGE //which circuit flags are allowed
 	var/creator // circuit creator if any
-	var/static/next_assembly_id = 0
 	var/interact_page = 0
 	var/components_per_page = 5
 	health = 30
@@ -164,6 +160,8 @@
 	if(listed_components)
 		show_browser(user, jointext(HTML,null), "window=closed-assembly-\ref[src];size=600x350;border=1;can_resize=1;can_close=1;can_minimize=1")
 
+/obj/item/electronic_assembly/get_assembly_detail_color()
+	return detail_color
 
 /obj/item/electronic_assembly/proc/open_interact(mob/user)
 	var/total_part_size = return_total_size()

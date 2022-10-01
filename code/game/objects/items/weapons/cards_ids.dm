@@ -54,11 +54,9 @@
 	var/detail_color = COLOR_ASSEMBLY_ORANGE
 	var/function = "storage"
 	var/data = "null"
-	var/special = null
-	var/list/files = list(  )
 
 /obj/item/card/data/Initialize()
-	.=..()
+	. = ..()
 	update_icon()
 
 /obj/item/card/data/on_update_icon()
@@ -79,6 +77,9 @@
 /obj/item/card/data/disk
 	desc = "A plastic magstripe card for simple and speedy data storage and transfer. This one inexplicibly looks like a floppy disk."
 	icon_state = "data_3"
+
+/obj/item/card/data/get_assembly_detail_color()
+	return detail_color
 
 /*
  * ID CARDS
@@ -171,7 +172,6 @@ var/global/const/NO_EMAG_ACT = -50
 	//alt titles are handled a bit weirdly in order to unobtrusively integrate into existing ID system
 	var/assignment = null	//can be alt title or the actual job
 	var/rank = null			//actual job
-	var/dorm = 0			// determines if this ID has claimed a dorm already
 
 	var/datum/mil_branch/military_branch = null //Vars for tracking branches and ranks on multi-crewtype maps
 	var/datum/mil_rank/military_rank = null

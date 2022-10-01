@@ -33,7 +33,6 @@
 	var/next_alarm_notice
 	var/list/datum/alarm/queued_alarms = new()
 
-	var/list/access_rights
 	var/obj/item/card/id/idcard = /obj/item/card/id/synthetic
 	// Various machinery stock parts used by stuff like OS (should be merged with above at some point)
 	var/list/stock_parts = list()

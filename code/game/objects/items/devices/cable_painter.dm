@@ -5,7 +5,6 @@
 	icon_state = "labeler0"
 	item_state = "flight"
 	var/color_selection
-	var/list/modes
 	w_class = ITEM_SIZE_SMALL
 	material = /decl/material/solid/plastic
 

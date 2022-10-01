@@ -67,7 +67,7 @@
 		var/list/show_tech_levels = list()
 		for(var/tech in viewing_database.tech_levels)
 			var/decl/research_field/field = SSfabrication.get_research_field_by_id(tech)
-			show_tech_levels += list(list("field" = field.name, "level" = "[viewing_database.tech_levels[tech]].0 GQ"))
+			show_tech_levels += list(list("field" = field.name, "desc" = field.desc, "level" = "[viewing_database.tech_levels[tech]].0 GQ"))
 		data["tech_levels"] = show_tech_levels
 
 	else if(showing_designs)
@@ -85,7 +85,7 @@
 		var/list/show_tech_levels = list()
 		for(var/tech in local_cache)
 			var/decl/research_field/field = SSfabrication.get_research_field_by_id(tech)
-			show_tech_levels += list(list("field" = field.name, "level" = "[local_cache[tech]].0 GQ"))
+			show_tech_levels += list(list("field" = field.name, "level" = "[local_cache[tech]].0 GQ", "desc" = field.desc))
 		data["tech_levels"] = show_tech_levels
 
 		var/list/found_databases = list()

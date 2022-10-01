@@ -26,13 +26,13 @@ var/global/list/aspect_categories = list() // Containers for ease of printing da
 	var/list/incompatible_with                           // Typelist of aspects that prevent this one from being taken
 	var/available_at_chargen = TRUE                      // Whether or not aspect is shown in chargen prefs
 	var/aspect_flags = 0
-	var/transfer_with_mind = TRUE
+	var/transfer_with_mind = TRUE // TODO: IMPLEMENT
 	var/sort_value = 0
 	var/list/blocked_species
 
 /decl/aspect/Initialize()
 	. = ..()
-	
+
 	// This is here until there are positive traits to balance out the negative ones;
 	// currently the cost calc serves no purpose and looks really silly sitting at -14/5.
 	aspect_cost = 0
@@ -143,7 +143,7 @@ var/global/list/aspect_categories = list() // Containers for ease of printing da
 /datum/admins/proc/show_aspects()
 	set category = "Admin"
 	set name = "Show Aspects"
-	if(!check_rights(R_INVESTIGATE)) 
+	if(!check_rights(R_INVESTIGATE))
 		return
 	var/mob/M = input("Select mob.", "Select mob.") as null|anything in global.living_mob_list_
 	if(M)

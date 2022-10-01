@@ -14,7 +14,6 @@
 	atom_flags = ATOM_FLAG_NO_TEMP_CHANGE | ATOM_FLAG_CHECKS_BORDER
 	opacity = 0
 	explosion_resistance = 5
-	air_properties_vary_with_direction = 1
 	pry_mod = 0.5
 	base_type = /obj/machinery/door/window
 	frame_type = /obj/structure/windoor_assembly

@@ -12,10 +12,8 @@
 	available_on_network = 0
 	nanomodule_path = /datum/nano_module/program/computer_appdownloader/
 	ui_header = "downloader_finished.gif"
-	var/hacked_download = 0
 	var/downloaderror
 	var/list/downloads_queue[0]
-	var/server
 	usage_flags = PROGRAM_ALL
 	category = PROG_UTIL
 
@@ -33,7 +31,7 @@
 	var/datum/computer_network/net = computer.get_network()
 	if(!net)
 		return 0
-	
+
 	if(!check_file_download(filename))
 		return 0
 	var/datum/computer_file/program/PRG = net.find_file_by_name(filename, MF_ROLE_SOFTWARE)
@@ -71,7 +69,7 @@
 /datum/computer_file/program/appdownloader/process_tick()
 	if(!current_transfer)
 		return
-	
+
 	var/result = current_transfer.update_progress()
 	if(!result) //something went wrong
 		if(QDELETED(current_transfer)) //either completely

@@ -113,7 +113,7 @@ var/global/list/diversion_junctions = list()
 	update_icon()
 
 /obj/machinery/disposal/receive_mouse_drop(atom/dropping, mob/user)
-	
+
 	. = (user?.a_intent != I_HURT && ..())
 
 	if(!. && !(stat & BROKEN))
@@ -536,7 +536,6 @@ var/global/list/diversion_junctions = list()
 	icon_state = "outlet"
 	density = 1
 	anchored = 1
-	var/active = 0
 	var/turf/target	// this will be where the output objects are 'thrown' to.
 	var/mode = 0
 	atom_flags = ATOM_FLAG_NO_TEMP_CHANGE | ATOM_FLAG_CLIMBABLE

@@ -10,7 +10,6 @@
 
 	var/active = 0
 	var/power_gen = 5000
-	var/recent_fault = 0
 	var/power_output = 1
 	atom_flags = ATOM_FLAG_CLIMBABLE
 	var/datum/sound_token/sound_token

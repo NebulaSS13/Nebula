@@ -18,7 +18,6 @@
 	var/list/beakers = list() //All containers inside the gun.
 	var/list/mixing = list() //Containers being used for mixing.
 	var/max_beakers = 3
-	var/dart_reagent_amount = 15
 	var/container_type = /obj/item/chems/glass/beaker
 	var/list/starting_chems = null
 

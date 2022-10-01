@@ -10,8 +10,6 @@
 	var/full = SOULSTONE_EMPTY
 	var/is_evil = 1
 	var/mob/living/simple_animal/shade = null
-	var/smashing = 0
-	var/soulstatus = null
 
 /obj/item/soulstone/Initialize(var/mapload)
 	shade = new /mob/living/simple_animal/shade(src)

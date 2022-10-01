@@ -37,7 +37,6 @@
 	//1 - hostile, attack everything that comes near
 	var/hostile_range = 10
 
-	var/turf/patrol_target
 	var/explode_chance = 1
 	var/disabled = 0
 	var/exploding = 0
