@@ -36,7 +36,7 @@
 	create_reagents(reagent_limit)
 
 /obj/machinery/chem_master/proc/get_remaining_volume()
-	return Clamp(reagent_limit - reagents.total_volume, 0, reagent_limit)
+	return clamp(reagent_limit - reagents.total_volume, 0, reagent_limit)
 
 /obj/machinery/chem_master/attackby(var/obj/item/B, var/mob/user)
 
@@ -99,7 +99,7 @@
 				var/decl/material/their_reagent = locate(href_list["add"])
 				if(their_reagent)
 					var/mult = 1
-					var/amount = Clamp((text2num(href_list["amount"])), 0, get_remaining_volume())
+					var/amount = clamp((text2num(href_list["amount"])), 0, get_remaining_volume())
 					if(sloppy)
 						var/contaminants = fetch_contaminants(user, R, their_reagent)
 						for(var/decl/material/reagent in contaminants)
@@ -115,14 +115,14 @@
 			if(their_reagent)
 				useramount = input("Select the amount to transfer.", 30, useramount) as null|num
 				if(useramount)
-					useramount = Clamp(useramount, 0, 200)
+					useramount = clamp(useramount, 0, 200)
 					src.Topic(href, list("amount" = "[useramount]", "add" = href_list["addcustom"]), state)
 
 		else if (href_list["remove"])
 			if(href_list["amount"])
 				var/decl/material/my_reagents = locate(href_list["remove"])
 				if(my_reagents)
-					var/amount = Clamp((text2num(href_list["amount"])), 0, 200)
+					var/amount = clamp((text2num(href_list["amount"])), 0, 200)
 					var/contaminants = fetch_contaminants(user, reagents, my_reagents)
 					if(mode)
 						reagents.trans_type_to(beaker, my_reagents.type, amount)
@@ -138,7 +138,7 @@
 			if(my_reagents)
 				useramount = input("Select the amount to transfer.", 30, useramount) as null|num
 				if(useramount)
-					useramount = Clamp(useramount, 0, 200)
+					useramount = clamp(useramount, 0, 200)
 					src.Topic(href, list("amount" = "[useramount]", "remove" = href_list["removecustom"]), state)
 
 		else if (href_list["toggle"])
@@ -164,7 +164,7 @@
 				count = input("Select the number of pills to make.", "Max [max_pill_count]", pillamount) as num
 				if(!CanInteract(user, state))
 					return
-				count = Clamp(count, 1, max_pill_count)
+				count = clamp(count, 1, max_pill_count)
 
 			if(reagents.total_volume/count < 1) //Sanity checking.
 				return

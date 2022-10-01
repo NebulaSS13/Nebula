@@ -127,12 +127,12 @@
 		return
 	if(T.can_use(2))
 		to_chat(user, SPAN_WARNING("You need 2 [T.plural_name] to repair \the [src]."))
-		return 
+		return
 	T.use(2)
 	playsound(src, 'sound/effects/tape.ogg', 50, TRUE)
 	last_damage_message = null
 	to_chat(user, SPAN_NOTICE("You tape up some of the damage to \the [src]."))
-	health = Clamp(health + 3, 0, maxhealth)
+	health = clamp(health + 3, 0, maxhealth)
 	taped = TRUE
 
 /obj/structure/inflatable/attackby(obj/item/W, mob/user)

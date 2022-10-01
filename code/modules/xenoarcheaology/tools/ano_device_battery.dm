@@ -22,11 +22,11 @@
 	return round(min(100, (stored_charge/capacity)*100))
 
 /obj/item/anobattery/proc/add_charge(var/amount)
-	stored_charge = Clamp(stored_charge + amount, 0, capacity)
+	stored_charge = clamp(stored_charge + amount, 0, capacity)
 	update_icon()
 
 /obj/item/anobattery/proc/use_power(var/amount)
-	stored_charge = Clamp(stored_charge - amount, 0, capacity)
+	stored_charge = clamp(stored_charge - amount, 0, capacity)
 	if(stored_charge <= 0 && !QDELETED(battery_effect))
 		qdel(battery_effect)
 	update_icon()
@@ -157,11 +157,11 @@
 		return TOPIC_HANDLED
 	if(href_list["duration"])
 		var/timedif = text2num(href_list["duration"])
-		duration = Clamp(duration + timedif, 1, 30)
+		duration = clamp(duration + timedif, 1, 30)
 		. = TOPIC_REFRESH
 	else if(href_list["interval"])
 		var/timedif = text2num(href_list["interval"])
-		interval = Clamp(interval + timedif, 1, 10)
+		interval = clamp(interval + timedif, 1, 10)
 		. = TOPIC_REFRESH
 	else if(href_list["startup"])
 		if(inserted_battery && inserted_battery.battery_effect && (inserted_battery.stored_charge > 0) )

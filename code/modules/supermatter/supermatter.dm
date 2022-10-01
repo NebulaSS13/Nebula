@@ -487,11 +487,11 @@ var/global/list/supermatter_delam_accent_sounds = list(
 	else
 		damage_archived = damage
 
-		damage = max(0, damage + between(-damage_rate_limit, (removed.temperature - critical_temperature) / 150, damage_inc_limit))
+		damage = max(0, damage + clamp(-damage_rate_limit, (removed.temperature - critical_temperature) / 150, damage_inc_limit))
 
 		//Ok, 100% oxygen atmosphere = best reaction
 		//Maxes out at 100% oxygen pressure
-		oxygen = Clamp((removed.get_by_flag(XGM_GAS_OXIDIZER) - (removed.gas[/decl/material/gas/nitrogen] * nitrogen_retardation_factor)) / removed.total_moles, 0, 1)
+		oxygen = clamp((removed.get_by_flag(XGM_GAS_OXIDIZER) - (removed.gas[/decl/material/gas/nitrogen] * nitrogen_retardation_factor)) / removed.total_moles, 0, 1)
 
 		//calculate power gain for oxygen reaction
 		var/temp_factor
@@ -520,7 +520,7 @@ var/global/list/supermatter_delam_accent_sounds = list(
 			visible_message("[src]: Releasing additional [round((heat_capacity_new - heat_capacity)*removed.temperature)] W with exhaust gasses.")
 
 		removed.add_thermal_energy(thermal_power)
-		removed.temperature = between(0, removed.temperature, 10000)
+		removed.temperature = clamp(0, removed.temperature, 10000)
 
 		env.merge(removed)
 
@@ -541,7 +541,7 @@ var/global/list/supermatter_delam_accent_sounds = list(
 	if(!power)
 		animate_filter("outline", list(size = 0))
 
-	color = color_contrast(Interpolate(0, 50, Clamp( (damage - emergency_point) / (explosion_point - emergency_point),0,1)))
+	color = color_contrast(Interpolate(0, 50, clamp( (damage - emergency_point) / (explosion_point - emergency_point),0,1)))
 
 	if (damage >= emergency_point)
 		if(!get_filter("rays"))

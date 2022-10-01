@@ -30,7 +30,7 @@
 			tool_use_sounds[tool] = tool_archetype.use_sound
 
 /datum/extension/tool/proc/get_tool_speed(var/archetype)
-	. = Clamp((TOOL_QUALITY_BEST - get_tool_quality(archetype)), TOOL_SPEED_BEST, TOOL_SPEED_WORST)
+	. = clamp((TOOL_QUALITY_BEST - get_tool_quality(archetype)), TOOL_SPEED_BEST, TOOL_SPEED_WORST)
 
 /datum/extension/tool/proc/get_tool_quality(var/archetype)
 	return LAZYACCESS(tool_values, archetype)
@@ -73,12 +73,12 @@
 	user.visible_message(SPAN_NOTICE("\The [user] begins [start_message || tool_archetype.use_message] \the [target] with \the [holder]."), SPAN_NOTICE("You begin [start_message || tool_archetype.use_message] \the [target] with \the [holder]."))
 	var/use_sound = LAZYACCESS(tool_use_sounds, archetype)
 	 //If no sound overrides, grab the archetype's sound/sound list
-	if(!use_sound) 
+	if(!use_sound)
 		use_sound = tool_archetype.use_sound
 	if(islist(use_sound))
 		if(length(use_sound))
 			use_sound = pick(use_sound)
-		else 
+		else
 			use_sound = null
 	if(use_sound)
 		playsound(user.loc, use_sound, 100)
@@ -102,8 +102,8 @@
 	check_result = tool_archetype.handle_post_interaction(user, holder, fuel_expenditure)
 	if(check_result != TOOL_USE_SUCCESS)
 		return check_result
-	
+
 	if(check_result == TOOL_USE_SUCCESS && use_sound)
 		playsound(user.loc, use_sound, 100) //A lot of interactions played a sound when starting and ending the interaction. This was missed.
-	
+
 	return TOOL_USE_SUCCESS

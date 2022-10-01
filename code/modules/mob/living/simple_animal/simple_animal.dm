@@ -597,7 +597,7 @@
 
 /mob/living/simple_animal/setCloneLoss(amount)
 	if(gene_damage >= 0)
-		gene_damage = Clamp(amount, 0, maxHealth)
+		gene_damage = clamp(amount, 0, maxHealth)
 		if(gene_damage >= maxHealth)
 			death()
 

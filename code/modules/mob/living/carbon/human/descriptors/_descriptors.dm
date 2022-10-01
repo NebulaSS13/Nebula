@@ -4,7 +4,7 @@
 	Also allows for per-species physical information ('his neck markings are more important than yours').
 	ETA till a downstream ports this and adds boob and penis size: 2 days. UPDATE: still no penis sizes
 
-	Descriptors are stored in species/human lists (appearance_descriptors) as a string key (name) indexed 
+	Descriptors are stored in species/human lists (appearance_descriptors) as a string key (name) indexed
 	to a value (either a personalized value or the shared datum on the species). The general pattern for
 	looking up descriptor data is to iterate the species.appearance_descriptors list for the datum instances
 	and then check human.appearance_descriptors for the specific value the mob is using.
@@ -132,12 +132,12 @@
 
 /datum/appearance_descriptor/proc/get_comparative_value_string_smaller(var/value, var/decl/pronouns/my_gender, var/decl/pronouns/other_gender)
 	var/maxval = LAZYLEN(comparative_value_descriptors_smaller)
-	value = Clamp(CEILING(value * maxval), 1, maxval)
+	value = clamp(CEILING(value * maxval), 1, maxval)
 	return comparative_value_descriptors_smaller[value]
 
 /datum/appearance_descriptor/proc/get_comparative_value_string_larger(var/value, var/decl/pronouns/my_gender, var/decl/pronouns/other_gender)
 	var/maxval = LAZYLEN(comparative_value_descriptors_larger)
-	value = Clamp(CEILING(value * maxval), 1, maxval)
+	value = clamp(CEILING(value * maxval), 1, maxval)
 	return comparative_value_descriptors_larger[value]
 
 /datum/appearance_descriptor/proc/has_custom_value()
@@ -150,19 +150,19 @@
 
 /datum/appearance_descriptor/proc/get_value_from_index(var/value, var/chargen_bound = TRUE)
 	if(chargen_bound)
-		return Clamp(round(value), chargen_min_index, chargen_max_index)
-	return Clamp(round(value), 1, LAZYLEN(standalone_value_descriptors))
-	
+		return clamp(round(value), chargen_min_index, chargen_max_index)
+	return clamp(round(value), 1, LAZYLEN(standalone_value_descriptors))
+
 /datum/appearance_descriptor/proc/sanitize_value(var/value, var/chargen_bound = TRUE)
 	if(chargen_bound)
-		return Clamp(round(value), get_min_chargen_value(), get_max_chargen_value())
-	return Clamp(round(value), 1, LAZYLEN(standalone_value_descriptors))
+		return clamp(round(value), get_min_chargen_value(), get_max_chargen_value())
+	return clamp(round(value), 1, LAZYLEN(standalone_value_descriptors))
 
 /datum/appearance_descriptor/proc/get_value_text(var/value)
 	. = "[value || "0"]"
 
 /datum/appearance_descriptor/proc/get_min_chargen_value()
 	return chargen_min_index
-	
+
 /datum/appearance_descriptor/proc/get_max_chargen_value()
 	return chargen_max_index

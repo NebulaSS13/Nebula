@@ -25,7 +25,7 @@
 		update_from_worth()
 
 /obj/item/cash/get_base_value()
-	. = holographic ? 0 : absolute_worth 
+	. = holographic ? 0 : absolute_worth
 
 /obj/item/cash/proc/set_currency(var/new_currency)
 	currency = new_currency
@@ -123,7 +123,7 @@
 		return TRUE
 
 	var/amount = input(usr, "How many [cur.name] do you want to take? (0 to [get_worth() - 1])", "Take Money", 20) as num
-	amount = round(Clamp(amount, 0, FLOOR(get_worth() - 1)))
+	amount = round(clamp(amount, 0, FLOOR(get_worth() - 1)))
 
 	if(!amount || QDELETED(src) || get_worth() <= 1 || user.incapacitated() || loc != user)
 		return TRUE
@@ -249,7 +249,7 @@
 		var/decl/currency/cur = GET_DECL(currency)
 		to_chat(user, SPAN_NOTICE("[html_icon(src)] [src] chirps, \"Completed transfer of [amount] [cur.name].\""))
 		return TRUE
-	
+
 	if(lock.attackby(W, user))
 		return TRUE
 	return ..()
@@ -262,7 +262,7 @@
 
 /obj/item/charge_stick/attack_self(var/mob/user)
 	var/datum/extension/lockable/lock = get_extension(src, /datum/extension/lockable)
-	lock.ui_interact(user)		
+	lock.ui_interact(user)
 
 /obj/item/charge_stick/proc/is_locked()
 	var/datum/extension/lockable/lock = get_extension(src, /datum/extension/lockable)
@@ -277,7 +277,7 @@
 		overlays += I
 
 	if(get_world_inventory_state() == ICON_STATE_WORLD)
-		return 
+		return
 
 	var/datum/extension/lockable/lock = get_extension(src, /datum/extension/lockable)
 	if(lock.locked)
@@ -318,6 +318,6 @@
 
 /atom/movable/proc/GetChargeStick()
 	return null
-	
+
 /obj/item/charge_stick/GetChargeStick()
 	return src

@@ -706,7 +706,7 @@ The _flatIcons list is a cache for generated icon files.
 	var/flatX2= flat.Width()
 	var/flatY1= 1
 	var/flatY2= flat.Height()
-	
+
 	// Dimensions of overlay being added
 	var/addX1
 	var/addX2
@@ -785,7 +785,7 @@ The _flatIcons list is a cache for generated icon files.
 			flat.MapColors(arglist(A.color))
 
 		// Probably a valid color, could check length_char(A.color) == 7 if color normalization becomes etc etc etc.
-		else if(istext(A.color)) 
+		else if(istext(A.color))
 			flat.Blend(A.color, ICON_MULTIPLY)
 
 	// Colour matrices track/apply alpha changes in MapColors() above, so only apply if color isn't a matrix.
@@ -849,9 +849,9 @@ The _flatIcons list is a cache for generated icon files.
 	if (!value) return color
 
 	var/list/RGB = ReadRGB(color)
-	RGB[1] = Clamp(RGB[1]+value,0,255)
-	RGB[2] = Clamp(RGB[2]+value,0,255)
-	RGB[3] = Clamp(RGB[3]+value,0,255)
+	RGB[1] = clamp(RGB[1]+value,0,255)
+	RGB[2] = clamp(RGB[2]+value,0,255)
+	RGB[3] = clamp(RGB[3]+value,0,255)
 	return rgb(RGB[1],RGB[2],RGB[3])
 
 /proc/sort_atoms_by_layer(var/list/atoms)
@@ -908,7 +908,7 @@ The _flatIcons list is a cache for generated icon files.
 			if(istype(A, /atom/movable/lighting_overlay) && show_lighting)
 				render_atoms.Add(A)
 				continue
-			
+
 			if(!A.alpha || A.invisibility)
 				continue
 
@@ -922,7 +922,7 @@ The _flatIcons list is a cache for generated icon files.
 	capture.Blend(COLOR_BLACK, ICON_OVERLAY)
 	for(var/atom/A as anything in render_atoms)
 		var/icon/atom_icon = getFlatIcon(A)
-	
+
 		if(ismob(A))
 			var/mob/M = A
 			if(M.lying)

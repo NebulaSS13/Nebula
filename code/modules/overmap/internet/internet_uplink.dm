@@ -22,7 +22,7 @@ var/global/list/internet_uplinks = list()
 
 	var/restrict_networks = FALSE		 // Whether or not a network needs to be permitted to use this uplink.
 	var/list/permitted_networks = list() // Network IDs which are permitted to connect through this uplink.
-	var/initial_id_tag = "plexus" 
+	var/initial_id_tag = "plexus"
 
 /obj/machinery/internet_uplink/Initialize()
 	. = ..()
@@ -51,10 +51,10 @@ var/global/list/internet_uplinks = list()
 
 	if(use_power != POWER_USE_ACTIVE)
 		return
-	
+
 	// Larger ranges not only require more power, but greater cooling.
 	var/inefficiency = clamp(0.3 + (0.1 * (overmap_range - BASE_INTERNET_RANGE)), 0.1, 0.6)
-	
+
 	var/datum/gas_mixture/env = return_air()
 	if(!istype(env) || env.return_pressure() < 10) // Vacuum cooling is insufficient for this machine.
 		take_damage(10, BURN)
@@ -73,7 +73,7 @@ var/global/list/internet_uplinks = list()
 	if((use_power == POWER_USE_ACTIVE) && !(stat & NOPOWER))
 		if(icon_state == "unpowered") // Switching states, flash an animation.
 			flick("startup", src)
-		
+
 		icon_state = "powered"
 	else
 		icon_state = "unpowered"
@@ -82,12 +82,12 @@ var/global/list/internet_uplinks = list()
 	. = ..()
 	if(.)
 		return
-	
+
 	if(href_list["toggle_power"])
 		var/new_power = (use_power == POWER_USE_ACTIVE ? POWER_USE_IDLE : POWER_USE_ACTIVE)
 		update_use_power(new_power)
 		return TOPIC_REFRESH
-	
+
 	if(href_list["modify_range"])
 		var/new_range = input(user,"Enter the desired range in standard sectors (1 - [max_overmap_range]). Higher ranges increase power usage and heat production.", "Enter new range") as num|null
 		if(!CanInteract(user, state))
@@ -117,7 +117,7 @@ var/global/list/internet_uplinks = list()
 				return TOPIC_HANDLED
 
 /obj/machinery/internet_uplink/proc/update_range(new_range)
-	overmap_range = Clamp(1, new_range, max_overmap_range)
+	overmap_range = clamp(1, new_range, max_overmap_range)
 	change_power_consumption(power_per_range * overmap_range, POWER_USE_ACTIVE)
 
 /obj/machinery/internet_uplink/power_change()
@@ -148,7 +148,7 @@ var/global/list/internet_uplinks = list()
 		ui.open()
 
 /obj/machinery/internet_uplink/RefreshParts()
-	max_overmap_range = BASE_INTERNET_RANGE + Clamp(total_component_rating_of_type(/obj/item/stock_parts/smes_coil), 0, 10)
+	max_overmap_range = BASE_INTERNET_RANGE + clamp(total_component_rating_of_type(/obj/item/stock_parts/smes_coil), 0, 10)
 	update_range(overmap_range) // Check to ensure the set overmap range is still below the new maximum.
 	. = ..()
 
@@ -162,7 +162,7 @@ var/global/list/internet_uplinks = list()
 	idle_power_usage = 250
 	active_power_usage = 500
 	var/initial_id_tag = "plexus"
-	
+
 	var/current_uplink = 1
 
 /obj/machinery/computer/internet_uplink/Initialize()
@@ -186,7 +186,7 @@ var/global/list/internet_uplinks = list()
 
 	// Internet uplinks are restricted to one per network, so this should return the only uplink linked.
 	var/obj/machinery/internet_uplink/linked = lan.get_devices(/obj/machinery/internet_uplink)?[1]
-	
+
 	if(!istype(linked))
 		to_chat(user, SPAN_WARNING("\The [src] flashes an error: No PLEXUS uplink connected!"))
 		return FALSE

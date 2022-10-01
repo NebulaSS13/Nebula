@@ -14,7 +14,7 @@ var/global/tank_bomb_severity = 1
 	if(check_rights(R_DEBUG))
 		var/next_input = input("Enter a new bomb severity between 1 and [MAX_TANK_BOMB_SEVERITY].", "Tank Bomb Severity", global.tank_bomb_severity) as num|null
 		if(isnum(next_input))
-			global.tank_bomb_severity = Clamp(next_input, 0, MAX_TANK_BOMB_SEVERITY)
+			global.tank_bomb_severity = clamp(next_input, 0, MAX_TANK_BOMB_SEVERITY)
 			log_and_message_admins("[key_name_admin(mob)] has set the tank bomb severity value to [global.tank_bomb_severity].", mob)
 
 var/global/list/global/tank_gauge_cache = list()
@@ -489,7 +489,7 @@ var/global/list/global/tank_gauge_cache = list()
 			var/datum/gas_mixture/environment = loc.return_air()
 			var/env_pressure = environment.return_pressure()
 
-			var/release_ratio = Clamp(0.002, sqrt(max(pressure-env_pressure,0)/pressure),1)
+			var/release_ratio = clamp(0.002, sqrt(max(pressure-env_pressure,0)/pressure),1)
 			var/datum/gas_mixture/leaked_gas = air_contents.remove_ratio(release_ratio)
 			//dynamic air release based on ambient pressure
 

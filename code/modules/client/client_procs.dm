@@ -499,8 +499,8 @@ var/global/const/MAX_VIEW = 41
 	var/res_y =    config.lock_client_view_y || CEILING(text2num(view_components[2]) / divisor)
 	var/max_view = config.max_client_view_x  || MAX_VIEW
 
-	last_view_x_dim = Clamp(res_x, MIN_VIEW, max_view)
-	last_view_y_dim = Clamp(res_y, MIN_VIEW, max_view)
+	last_view_x_dim = clamp(res_x, MIN_VIEW, max_view)
+	last_view_y_dim = clamp(res_y, MIN_VIEW, max_view)
 
 	// Ensure we can actually center our view on our eye.
 	if(last_view_x_dim % 2 == 0)
@@ -513,7 +513,7 @@ var/global/const/MAX_VIEW = 41
 	winset(src, "menu.icon[divisor]", "is-checked=true")
 
 	view = "[last_view_x_dim]x[last_view_y_dim]"
-	
+
 	// Reset eye/perspective
 	reset_click_catchers()
 	var/last_perspective = perspective

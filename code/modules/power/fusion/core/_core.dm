@@ -87,7 +87,7 @@
 		. = owned_field.bullet_act(Proj)
 
 /obj/machinery/fusion_core/proc/set_strength(var/value)
-	value = Clamp(value, MIN_FIELD_STR, MAX_FIELD_STR)
+	value = clamp(value, MIN_FIELD_STR, MAX_FIELD_STR)
 	field_strength = value
 	change_power_consumption(5 * value, POWER_USE_ACTIVE)
 	if(owned_field)

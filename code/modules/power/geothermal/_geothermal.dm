@@ -40,10 +40,10 @@ var/global/const/MAX_GEOTHERMAL_PRESSURE =            2000
 
 /obj/machinery/geothermal/RefreshParts()
 	..()
-	efficiency = Clamp(total_component_rating_of_type(/obj/item/stock_parts/capacitor) * GEOTHERMAL_EFFICIENCY_MOD, GEOTHERMAL_EFFICIENCY_MOD, 1)
+	efficiency = clamp(total_component_rating_of_type(/obj/item/stock_parts/capacitor) * GEOTHERMAL_EFFICIENCY_MOD, GEOTHERMAL_EFFICIENCY_MOD, 1)
 
 /obj/machinery/geothermal/proc/add_pressure(var/pressure)
-	current_pressure = Clamp(current_pressure + pressure, 0, MAX_GEOTHERMAL_PRESSURE)
+	current_pressure = clamp(current_pressure + pressure, 0, MAX_GEOTHERMAL_PRESSURE)
 	if(!is_processing)
 		START_PROCESSING_MACHINE(src, MACHINERY_PROCESS_SELF)
 
@@ -54,7 +54,7 @@ var/global/const/MAX_GEOTHERMAL_PRESSURE =            2000
 		var/remaining_pressure = consumed_pressure
 		consumed_pressure = round(consumed_pressure * efficiency)
 		remaining_pressure -= consumed_pressure
-		
+
 		var/generated_power = round(consumed_pressure * GEOTHERMAL_PRESSURE_TO_POWER)
 		if(generated_power)
 			generate_power(generated_power)
@@ -115,8 +115,8 @@ var/global/const/MAX_GEOTHERMAL_PRESSURE =            2000
 
 	if(current_pressure > 0)
 		set_light(2, 0.5, COLOR_RED)
-		add_overlay(image(icon, "geothermal-turbine-[Clamp(round(current_pressure / 200), 0, 3)]"))
-		var/glow_alpha = Clamp(round((current_pressure / 500) * 255), 20, 255)
+		add_overlay(image(icon, "geothermal-turbine-[clamp(round(current_pressure / 200), 0, 3)]"))
+		var/glow_alpha = clamp(round((current_pressure / 500) * 255), 20, 255)
 		var/image/I = emissive_overlay(icon, "geothermal-glow")
 		I.alpha = glow_alpha
 		add_overlay(I)

@@ -94,7 +94,7 @@ var/global/list/overmap_unknown_ids = list()
 	var/datum/overmap/overmap = global.overmaps_by_z["[T.z]"]
 	var/nx = x
 	var/ny = y
-	
+
 	var/heading_dir = get_heading_dir()
 
 	if((heading_dir & WEST) && x == 1)
@@ -173,7 +173,7 @@ var/global/list/overmap_unknown_ids = list()
 		if(!MOVING(speed[i], min_speed))
 			continue
 		// Add speed to this dimension of our position.
-		position[i] += Clamp((speed[i] * OVERMAP_SPEED_CONSTANT) * (wait / (1 SECOND)), -1, 1)
+		position[i] += clamp((speed[i] * OVERMAP_SPEED_CONSTANT) * (wait / (1 SECOND)), -1, 1)
 		if(position[i] < 0)
 			deltas[i] = CEILING(position[i])
 		else if(position[i] > 0)
@@ -200,7 +200,7 @@ var/global/list/overmap_unknown_ids = list()
 		var/delta_v = get_delta_v() / KM_OVERMAP_RATE
 		if(delta_v == 0)
 			return
-		var/partial_power = Clamp(actual_accel_limit / delta_v, 0, 1)
+		var/partial_power = clamp(actual_accel_limit / delta_v, 0, 1)
 		var/acceleration = min(get_delta_v(TRUE, partial_power) / KM_OVERMAP_RATE, actual_accel_limit)
 		if(direction & EAST)
 			adjust_speed(acceleration, 0)
@@ -222,7 +222,7 @@ var/global/list/overmap_unknown_ids = list()
 		var/spd = speed[i]
 		var/abs_spd = abs(spd)
 		if(abs_spd)
-			var/partial_power = Clamp(abs_spd / (get_delta_v() / KM_OVERMAP_RATE), 0, 1)
+			var/partial_power = clamp(abs_spd / (get_delta_v() / KM_OVERMAP_RATE), 0, 1)
 			var/delta_v = min(get_delta_v(TRUE, partial_power) / KM_OVERMAP_RATE, abs_spd)
 			.[i] = -SIGN(spd) * delta_v
 			burn = TRUE

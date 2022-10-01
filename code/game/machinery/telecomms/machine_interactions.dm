@@ -29,7 +29,7 @@
 		var/obj/item/stack/nanopaste/T = P
 		if (integrity < 100)               								//Damaged, let's repair!
 			if (T.use(1))
-				integrity = between(0, integrity + rand(10,20), 100)
+				integrity = clamp(0, integrity + rand(10,20), 100)
 				to_chat(usr, "You apply the Nanopaste to [src], repairing some of the damage.")
 		else
 			to_chat(usr, "This machine is already in perfect condition.")
@@ -53,7 +53,7 @@
 /obj/machinery/telecomms/dismantle()
 	for(var/obj/x in (contents - component_parts))
 		x.dropInto(loc)
-	. = ..()	
+	. = ..()
 
 // This should all be a multitool extension, but outside the scope of current rework.
 /obj/machinery/telecomms/CanUseTopic(mob/user)
@@ -135,7 +135,7 @@
 
 	dat += "</font>"
 	temp = ""
-	
+
 	var/datum/browser/written_digital/popup = new(user, "tcommmachine", "Telecommunications Machine Configuration Panel", 520, 600)
 	popup.set_content(JOINTEXT(dat))
 	popup.open()

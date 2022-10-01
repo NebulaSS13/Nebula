@@ -39,7 +39,7 @@ var/global/list/tracking_implants = list()
 /obj/item/implant/tracking/Topic(href, href_list)
 	..()
 	if (href_list["tracking_id"])
-		id = Clamp(id+text2num(href_list["tracking_id"]), 1, 100)
+		id = clamp(id+text2num(href_list["tracking_id"]), 1, 100)
 		interact(usr)
 
 /obj/item/implant/tracking/islegal()

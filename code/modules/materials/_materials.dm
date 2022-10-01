@@ -716,7 +716,7 @@ INITIALIZE_IMMEDIATE(/obj/effect/gas_overlay)
 		return
 	for(var/interaction in neutron_interactions)
 		var/ideal_energy = neutron_interactions[interaction]
-		var/interacted_units_ratio = (Clamp(-((((neutron_energy-ideal_energy)**2)/(neutron_cross_section*1000)) - 100), 0, 100))/100
+		var/interacted_units_ratio = (clamp(-((((neutron_energy-ideal_energy)**2)/(neutron_cross_section*1000)) - 100), 0, 100))/100
 		var/interacted_units = round(interacted_units_ratio*total_interacted_units, 0.001)
 
 		if(interacted_units > 0)

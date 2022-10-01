@@ -48,7 +48,7 @@
 	. = ..()
 
 /obj/compass_holder/overmap/get_heading_strength()
-	. = Clamp(round(max(abs(owner.linked.speed[1]), abs(owner.linked.speed[2]))/(1/(20 SECONDS))), 0, 1)
+	. = clamp(round(max(abs(owner.linked.speed[1]), abs(owner.linked.speed[2]))/(1/(20 SECONDS))), 0, 1)
 
 /obj/compass_holder/overmap/get_heading_angle()
 	return owner.linked.get_heading_angle()

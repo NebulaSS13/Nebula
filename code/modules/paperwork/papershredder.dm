@@ -176,7 +176,7 @@
 /obj/machinery/papershredder/on_update_icon()
 	cut_overlays()
 	var/ratio = ((cached_total_matter * 5) / max_total_matter)
-	icon_state = "papershredder[between(0, CEILING(ratio), 5)]"
+	icon_state = "papershredder[clamp(0, CEILING(ratio), 5)]"
 	if(!is_unpowered())
 		add_overlay(overlay_image('icons/obj/bureaucracy.dmi', "papershredder_power"))
 		if(is_broken() || is_bin_full())

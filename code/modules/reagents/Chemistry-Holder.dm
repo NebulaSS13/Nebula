@@ -183,7 +183,7 @@ var/global/obj/temp_reagents_holder = new
 	UNSETEMPTY(reagent_volumes)
 
 	if(defer_update)
-		total_volume = Clamp(total_volume + amount, 0, maximum_volume) // approximation, call update_total() if deferring
+		total_volume = clamp(total_volume + amount, 0, maximum_volume) // approximation, call update_total() if deferring
 	else
 		handle_update(safety)
 	return TRUE
@@ -196,7 +196,7 @@ var/global/obj/temp_reagents_holder = new
 	if(reagent_volumes.len > 1 || reagent_volumes[reagent_type] <= 0)
 		cached_color = null
 	if(defer_update)
-		total_volume = Clamp(total_volume - amount, 0, maximum_volume) // approximation, call update_total() if deferring
+		total_volume = clamp(total_volume - amount, 0, maximum_volume) // approximation, call update_total() if deferring
 	else
 		handle_update(safety)
 	return TRUE
@@ -212,7 +212,7 @@ var/global/obj/temp_reagents_holder = new
 		cached_color = null
 
 		if(defer_update)
-			total_volume = Clamp(total_volume - amount, 0, maximum_volume) // approximation, call update_total() if deferring
+			total_volume = clamp(total_volume - amount, 0, maximum_volume) // approximation, call update_total() if deferring
 		else
 			handle_update()
 
@@ -269,7 +269,7 @@ var/global/obj/temp_reagents_holder = new
 
 /* Holder-to-holder and similar procs */
 /datum/reagents/proc/remove_any(var/amount = 1, var/defer_update = FALSE) // Removes up to [amount] of reagents from [src]. Returns actual amount removed.
-	. = Clamp(amount, 0, max(0, total_volume)) // not ideal but something is making total_volume become NaN
+	. = clamp(amount, 0, max(0, total_volume)) // not ideal but something is making total_volume become NaN
 	if(.)
 		var/part = . / total_volume
 		for(var/current in reagent_volumes)

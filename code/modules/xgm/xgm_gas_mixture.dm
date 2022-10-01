@@ -248,7 +248,7 @@
 /datum/gas_mixture/proc/remove_ratio(ratio, out_group_multiplier = 1)
 	if(ratio <= 0)
 		return null
-	out_group_multiplier = between(1, out_group_multiplier, group_multiplier)
+	out_group_multiplier = clamp(1, out_group_multiplier, group_multiplier)
 
 	ratio = min(ratio, 1)
 
@@ -376,9 +376,9 @@
 		graphic -= graphic_remove
 		. = 1
 	if(graphic.len)
-		var/pressure_mod = Clamp(return_pressure() / ONE_ATMOSPHERE, 0, 2)
+		var/pressure_mod = clamp(return_pressure() / ONE_ATMOSPHERE, 0, 2)
 		for(var/obj/effect/gas_overlay/O in graphic)
-			var/concentration_mod = Clamp(gas[O.material.type] / total_moles, 0.1, 1)
+			var/concentration_mod = clamp(gas[O.material.type] / total_moles, 0.1, 1)
 			var/new_alpha = min(230, round(pressure_mod * concentration_mod * 180, 5))
 			if(new_alpha != O.alpha)
 				O.update_alpha_animation(new_alpha)

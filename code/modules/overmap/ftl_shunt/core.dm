@@ -227,9 +227,9 @@
 				continue
 			if(H.skill_check(SKILL_ENGINES, SKILL_EXPERT))
 				to_chat(H, SPAN_DANGER("The deck vibrates with a harmonic that sets your teeth on edge and fills you with dread."))
-	
+
 	var/announcetxt = replacetext(shunt_start_text, "%%TIME%%", "[round(jump_delay/600)] minutes.")
-	
+
 	ftl_announcement.Announce(announcetxt, "FTL Shunt Management System", new_sound = sound('sound/misc/notice2.ogg'))
 	update_icon()
 
@@ -304,13 +304,12 @@
 //Handles all the effects of the jump.
 /obj/machinery/ftl_shunt/core/proc/do_effects(var/distance) //If we're jumping too far, have some !!FUN!! with people and ship systems.
 	var/shunt_sev
-	switch(distance)
-		if(1 to safe_jump_distance)
-			shunt_sev = SHUNT_SEVERITY_MINOR
-		if(safe_jump_distance to moderate_jump_distance)
-			shunt_sev = SHUNT_SEVERITY_MAJOR
-		if(moderate_jump_distance to INFINITY)
-			shunt_sev = SHUNT_SEVERITY_CRITICAL
+	if(distance < safe_jump_distance)
+		shunt_sev = SHUNT_SEVERITY_MINOR
+	else if(distance < moderate_jump_distance)
+		shunt_sev = SHUNT_SEVERITY_MAJOR
+	else
+		shunt_sev = SHUNT_SEVERITY_CRITICAL
 
 	for(var/mob/living/carbon/human/H in global.living_mob_list_) //Affect mobs, skip synthetics.
 		sound_to(H, 'sound/machines/hyperspace_end.ogg')
@@ -525,7 +524,7 @@
 	var/drawn_charge = use_power_oneoff(input)
 	last_power_drawn = drawn_charge
 	accumulated_charge += drawn_charge * CELLRATE
-	
+
 	return TRUE
 
 /obj/machinery/ftl_shunt/core/proc/get_total_fuel_conversion_rate()
@@ -640,9 +639,9 @@
 
 	return TRUE
 
-// 
+//
 // Construction MacGuffins down here.
-// 
+//
 
 /obj/item/stock_parts/circuitboard/ftl_shunt
 	name = "circuit board (superluminal shunt)"

@@ -201,7 +201,7 @@
 	return TRUE
 
 /obj/item/suit_sensor_jammer/proc/set_range(var/new_range)
-	range = Clamp(new_range, 0, JAMMER_MAX_RANGE) // 0 range still covers the current turf
+	range = clamp(new_range, 0, JAMMER_MAX_RANGE) // 0 range still covers the current turf
 	return range != new_range
 
 /obj/item/suit_sensor_jammer/proc/set_method(var/suit_sensor_jammer_method/sjm)

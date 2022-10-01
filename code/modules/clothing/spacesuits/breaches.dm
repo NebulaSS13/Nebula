@@ -36,7 +36,7 @@
 /datum/breach/proc/update_descriptor()
 
 	//Sanity...
-	class = between(1, round(class), 5)
+	class = clamp(1, round(class), 5)
 	//Apply the correct descriptor.
 	if(damtype == BURN)
 		descriptor = breach_burn_descriptors[class]
@@ -240,7 +240,7 @@
 			to_chat(user, "There are no open breaches to seal with \the [W].")
 		else
 			var/mob/living/carbon/human/H = user
-			if(!istype(H)) 
+			if(!istype(H))
 				return
 
 			var/obj/item/stack/tape_roll/duct_tape/D = W
