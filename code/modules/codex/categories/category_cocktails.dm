@@ -22,7 +22,7 @@
 			// which we normalize internally for calculations.
 			var/decl/material/mixer = GET_DECL(rtype)
 			var/minimum_amount = cocktail.display_ratios[rtype]
-			var/ingredient = "<span codexlink='[mixer.codex_name || mixer.name] (substance)'>[mixer.name]</span>"
+			var/ingredient = "<span codexlink='[mixer.codex_name || mixer.name] (substance)'>[mixer.use_name]</span>"
 			if(minimum_amount)
 				ingredient = "[minimum_amount] part\s [ingredient]"
 			else
