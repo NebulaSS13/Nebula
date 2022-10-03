@@ -116,7 +116,7 @@
 	SET_STATUS_MAX(M, STAT_BLURRY, rand(3,4))
 	return
 
-/obj/item/show_examined_damage(health_ratio)
+/obj/item/get_examined_damage_string(health_ratio)
 	if(!can_take_damage())
 		return
 	. = ..()

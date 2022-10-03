@@ -51,7 +51,7 @@
 		if(M.burn_product)
 			environment.adjust_gas(M.burn_product, M.fuel_value * (matter[mat] / SHEET_MATERIAL_AMOUNT))
 
-	new /obj/effect/decal/cleanable/ash(src)
+	new /obj/effect/decal/cleanable/molten_item(src)
 	qdel(src)
 
 /obj/item/proc/shatter(var/consumed)

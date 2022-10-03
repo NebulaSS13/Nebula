@@ -48,7 +48,7 @@
 	if(paint_color)
 		to_chat(user, SPAN_NOTICE("It has a smooth coat of paint applied."))
 
-/obj/structure/wall_frame/show_examined_damage(health_ratio)
+/obj/structure/wall_frame/get_examined_damage_string(health_ratio)
 	if(maxhealth == -1)
 		return
 	if(health_ratio > 0.7)

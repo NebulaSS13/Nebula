@@ -64,9 +64,12 @@
 /obj/item/stock_parts/proc/on_refresh(var/obj/machinery/machine)
 
 /obj/item/stock_parts/take_damage(damage, damage_type, damage_flags, inflicter, armor_pen)
-	if(!is_functional() || (damage_type in ignore_damage_types) || (istype(loc, /obj/machinery) && (part_flags & PART_FLAG_NODAMAGE)) )
+	if(damage_type in ignore_damage_types)
 		return
 	. = ..()
+
+/obj/item/stock_parts/can_take_damage()
+	return ..() && (is_functional() && !istype(loc, /obj/machinery) && !(part_flags & PART_FLAG_NODAMAGE))
 
 /obj/item/stock_parts/check_health(lastdamage, lastdamtype, lastdamflags, consumed)
 	if(!can_take_damage())

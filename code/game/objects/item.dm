@@ -108,7 +108,7 @@
 	return origin_tech
 
 /obj/item/Initialize(var/ml, var/material_key)
-	if(!health)
+	if(isnull(health))
 		health = max_health //Make sure to propagate max_health to health var before material setup, for consistency
 	if(!ispath(material_key, /decl/material))
 		material_key = material
@@ -181,7 +181,7 @@
 	var/desc_comp = "" //For "description composite"
 	desc_comp += "It is a [w_class_description()] item."
 	
-	var/desc_damage = show_examined_damage()
+	var/desc_damage = get_examined_damage_string()
 	if(length(desc_damage))
 		desc_comp += "<BR/>[desc_damage]"
 

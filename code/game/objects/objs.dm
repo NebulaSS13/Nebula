@@ -275,7 +275,7 @@
 // Interactions
 ////////////////////////////////////////////////////////////////
 /**Returns a text string to describe the current damage level of the item, or null if non-applicable. */
-/obj/proc/show_examined_damage(var/health_ratio)
+/obj/proc/get_examined_damage_string(var/health_ratio)
 	if(health_ratio >= 1)
 		return SPAN_NOTICE("It looks fully intact.")
 	else if(health_ratio > 0.75)

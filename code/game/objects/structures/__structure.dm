@@ -38,7 +38,7 @@
 	if(!CanFluidPass())
 		fluid_update(TRUE)
 
-/obj/structure/show_examined_damage(health_ratio)
+/obj/structure/get_examined_damage_string(health_ratio)
 	if(maxhealth == -1)
 		return
 	. = ..()
@@ -47,7 +47,7 @@
 	. = ..()
 	if(distance <= 3)
 
-		var/damage_desc = show_examined_damage(health / maxhealth)
+		var/damage_desc = get_examined_damage_string(health / maxhealth)
 		if(length(damage_desc))
 			to_chat(user, damage_desc)
 

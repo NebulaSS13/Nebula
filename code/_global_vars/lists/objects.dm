@@ -27,4 +27,4 @@ var/global/list/numbers = list("0","1","2","3","4","5","6","7","8","9")
 var/global/list/meteor_list = list()
 
 /// List of types that shouldn't be tested in the item damage test.
-var/global/list/item_damage_test_examptions = list()
+var/global/list/item_damage_test_exemptions = list()

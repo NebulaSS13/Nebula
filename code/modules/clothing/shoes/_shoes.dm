@@ -57,16 +57,6 @@
 	if(!.)
 		. = ..()
 
-/obj/item/clothing/shoes/proc/update_cuffed()
-	if(attached_cuffs)
-		verbs |= /obj/item/clothing/shoes/proc/remove_cuffs
-		LAZYINITLIST(slowdown_per_slot[slot_shoes_str])
-		slowdown_per_slot[slot_shoes_str] += attached_cuffs.elastic ? 10 : 15
-	else 
-		verbs -= /obj/item/clothing/shoes/proc/remove_cuffs
-		LAZYINITLIST(slowdown_per_slot[slot_shoes_str])
-		slowdown_per_slot[slot_shoes_str] -= attached_cuffs.elastic ? 10 : 15
-
 /obj/item/clothing/shoes/proc/add_cuffs(var/obj/item/handcuffs/cuffs, var/mob/user)
 	if(!can_add_cuffs)
 		if(user)
@@ -86,7 +76,10 @@
 		cuffs.forceMove(src)
 
 	attached_cuffs = cuffs
-	update_cuffed()
+	if(cuffs)
+		LAZYINITLIST(slowdown_per_slot[slot_shoes_str])
+		verbs |= /obj/item/clothing/shoes/proc/remove_cuffs
+		slowdown_per_slot[slot_shoes_str] += attached_cuffs.elastic ? 10 : 15
 	return TRUE
 
 /obj/item/clothing/shoes/proc/remove_cuffs(var/mob/user)
@@ -101,8 +94,10 @@
 	else
 		attached_cuffs.dropInto(loc)
 
+	verbs -= /obj/item/clothing/shoes/proc/remove_cuffs
+	if(slowdown_per_slot[slot_shoes_str])
+		slowdown_per_slot[slot_shoes_str] -= attached_cuffs.elastic ? 10 : 15
 	attached_cuffs = null
-	update_cuffed()
 
 /obj/item/clothing/shoes/proc/add_hidden(var/obj/item/I, var/mob/user)
 	if (!(I.item_flags & ITEM_FLAG_CAN_HIDE_IN_SHOES)) // fail silently

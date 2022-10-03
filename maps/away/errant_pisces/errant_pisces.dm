@@ -93,7 +93,7 @@
 					continue
 				N.update_connections()
 
-/obj/structure/net/show_examined_damage(health_ratio)
+/obj/structure/net/get_examined_damage_string(health_ratio)
 	if(maxhealth == -1)
 		return
 	if(health_ratio >= 1)

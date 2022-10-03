@@ -4,7 +4,7 @@
 
 /decl/modpack/psionics/post_initialize()
 	. = ..()
-	global.item_damage_test_examptions |= typesof(/obj/item/psychic_power)
+	global.item_damage_test_exemptions |= typesof(/obj/item/psychic_power)
 
 /decl/modpack/psionics/get_player_panel_options(var/mob/M)
 	. = list("<b>Psionics:</b><br/>")

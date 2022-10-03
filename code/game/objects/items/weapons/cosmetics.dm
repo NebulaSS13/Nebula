@@ -14,7 +14,6 @@
 
 /obj/item/lipstick/Initialize()
 	. = ..()
-	item_flags |= ITEM_FLAG_HOLLOW
 	if(color_desc)
 		desc += " This one is in [color_desc]."
 	update_icon()

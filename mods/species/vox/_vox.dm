@@ -11,7 +11,7 @@
 
 /decl/modpack/vox/post_initialize()
 	. = ..()
-	global.item_damage_test_examptions |= /obj/item/gun/energy/darkmatter
+	global.item_damage_test_exemptions |= /obj/item/gun/energy/darkmatter
 
 /mob/living/carbon/human/vox/Initialize(mapload, new_species)
 	h_style = /decl/sprite_accessory/hair/vox/short
