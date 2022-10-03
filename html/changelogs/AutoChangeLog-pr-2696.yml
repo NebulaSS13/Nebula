@@ -1,0 +1,6 @@
+author: PsyCommando
+delete-after: true
+changes:
+  - tweak: Ores now stack.
+  - tweak: Can now pick a random ore stack from the ore box.
+  - tweak: Ore box has alt interactions.
