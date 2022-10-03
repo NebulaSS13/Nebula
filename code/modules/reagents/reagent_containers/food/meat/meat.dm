@@ -102,7 +102,7 @@
 /obj/item/chems/food/loadedsteak/populate_reagents()
 	. = ..()
 	reagents.add_reagent(/decl/material/liquid/nutriment/protein,     2)
-	reagents.add_reagent(/decl/material/liquid/nutriment/garlicsauce, 1)
+	reagents.add_reagent(/decl/material/liquid/nutriment/garlicsauce, 2)
 
 /obj/item/chems/food/tomatomeat
 	name = "tomato slice"
