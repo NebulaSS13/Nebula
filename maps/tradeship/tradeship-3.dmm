@@ -620,7 +620,7 @@
 /turf/simulated/open,
 /area/ship/trade/maintenance/solars)
 "yp" = (
-/obj/item/ore/iron,
+/obj/item/stack/material/ore/iron,
 /turf/simulated/floor/reinforced/airless,
 /area/space)
 "yt" = (

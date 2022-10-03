@@ -375,7 +375,7 @@ INITIALIZE_IMMEDIATE(/obj/effect/gas_overlay)
 		return MAT_PHASE_LIQUID
 	return MAT_PHASE_SOLID
 
-// Returns the phase of matter this material is a standard temperature and pressure (20c at one atmosphere)
+/// Returns the phase of matter this material is at standard temperature and pressure (20c at one atmosphere)
 /decl/material/proc/phase_at_stp()
 	return phase_at_temperature(T20C, ONE_ATMOSPHERE)
 

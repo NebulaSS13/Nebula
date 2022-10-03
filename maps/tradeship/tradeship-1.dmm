@@ -2339,8 +2339,8 @@
 /area/ship/trade/maintenance/techstorage)
 "rB" = (
 /obj/effect/decal/cleanable/dirt,
-/obj/item/ore/iron,
-/obj/item/ore/coal{
+/obj/item/stack/material/ore/iron,
+/obj/item/stack/material/ore/coal{
 	pixel_x = 3;
 	pixel_y = 3
 	},
@@ -2428,7 +2428,7 @@
 /area/ship/trade/maintenance/eva)
 "ui" = (
 /obj/structure/closet/crate,
-/obj/item/ore/strangerock,
+/obj/item/strangerock,
 /obj/item/fossil,
 /obj/item/fossil/animal,
 /obj/item/fossil/animal,

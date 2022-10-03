@@ -97,7 +97,7 @@
 			harvested++
 			if(harvested >= harvest_speed)
 				break
-			generated_ore += new /obj/item/ore(src, metal)
+			generated_ore += new /obj/item/stack/material/ore(src, metal)
 		if(harvested >= harvest_speed)
 			break
 
@@ -219,8 +219,7 @@
 
 	var/obj/structure/ore_box/B = locate() in orange(1)
 	if(B)
-		for(var/obj/item/ore/O in generated_ore)
-			O.forceMove(B)
+		B.insert_ores(generated_ore, usr)
 		generated_ore.Cut()
 		to_chat(usr, "<span class='notice'>You unload the drill's storage cache into the ore box.</span>")
 	else
