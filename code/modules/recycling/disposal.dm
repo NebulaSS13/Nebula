@@ -113,7 +113,7 @@ var/global/list/diversion_junctions = list()
 	update_icon()
 
 /obj/machinery/disposal/receive_mouse_drop(atom/dropping, mob/user)
-	
+
 	. = (user?.a_intent != I_HURT && ..())
 
 	if(!. && !(stat & BROKEN))
@@ -130,7 +130,7 @@ var/global/list/diversion_junctions = list()
 		// Todo rewrite all of this.
 		var/atom/movable/AM = dropping
 		if(!istype(AM) || AM.anchored)
-			return FALSE 
+			return FALSE
 
 		// Determine object type and run necessary checks
 		var/mob/M = AM
