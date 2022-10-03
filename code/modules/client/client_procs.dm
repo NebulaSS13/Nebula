@@ -487,8 +487,6 @@ var/global/list/localhost_addresses = list(
 	to_chat(usr, "xDim: [round(text2num(winsize_string) / divisor)]")
 	to_chat(usr, "yDim: [round(text2num(copytext(winsize_string,findtext(winsize_string,"x")+1,0)) / divisor)]")
 
-var/global/const/MIN_VIEW = 15
-var/global/const/MAX_VIEW = 41
 /client/verb/OnResize()
 	set hidden = 1
 

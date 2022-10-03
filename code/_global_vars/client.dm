@@ -30,3 +30,6 @@ var/global/list/_kbMap_reverse = list(
 	"Southwest" = "End",
 	"Southeast" = "PageDown",
 )
+
+var/global/const/MIN_VIEW = 15
+var/global/const/MAX_VIEW = 41
