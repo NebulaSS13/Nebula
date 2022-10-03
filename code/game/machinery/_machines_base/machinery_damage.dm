@@ -43,14 +43,14 @@
 			if(damage_type && (damage_type in component.ignore_damage_types))
 				continue
 			// Don't damage what can't be repaired
-			if(component.part_flags & PART_FLAG_NODAMAGE)
+			if(!component.can_take_damage())
 				continue
 			if(component.is_functional())
 				return component
 	for(var/path in uncreated_component_parts)
 		if(uncreated_component_parts[path])
 			var/obj/item/stock_parts/component = path
-			if(!(initial(component.part_flags) & PART_FLAG_NODAMAGE))
+			if(initial(component.max_health) != ITEM_HEALTH_NO_DAMAGE)
 				return force_init_component(path)
 
 /obj/machinery/proc/on_component_failure(var/obj/item/stock_parts/component)

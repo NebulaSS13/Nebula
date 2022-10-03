@@ -196,6 +196,7 @@
 	return "The machine can receive power from an installed power cell."
 
 /obj/item/stock_parts/power/battery/buildable
+	max_health = null //Buildable variant may take damage
 	part_flags = PART_FLAG_HAND_REMOVE
 	material = /decl/material/solid/metal/steel
 

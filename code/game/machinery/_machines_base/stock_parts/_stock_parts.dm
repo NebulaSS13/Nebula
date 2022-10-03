@@ -68,9 +68,6 @@
 		return
 	. = ..()
 
-/obj/item/stock_parts/can_take_damage()
-	return ..() && !(part_flags & PART_FLAG_NODAMAGE)
-
 /obj/item/stock_parts/check_health(lastdamage, lastdamtype, lastdamflags, consumed)
 	if(!can_take_damage())
 		return
