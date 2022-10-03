@@ -211,7 +211,7 @@
 			else
 				log_and_message_admins("shot a fuel tank outside the world.")
 		
-		if(Proj.damage_flags & DAM_EXPLODE || Proj.damage_type == BURN || Proj.damage_type == ELECTROCUTE || Proj.damage_type == BRUTE)
+		if((Proj.damage_flags & DAM_EXPLODE) || (Proj.damage_type == BURN) || (Proj.damage_type == ELECTROCUTE) || (Proj.damage_type == BRUTE))
 			try_detonate_reagents()
 
 	return ..()

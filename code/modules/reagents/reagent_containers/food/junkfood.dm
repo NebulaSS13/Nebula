@@ -496,7 +496,7 @@
 
 /obj/item/chems/food/weebonuts/populate_reagents()
 	. = ..()
-	reagents.add_reagent(/decl/material/liquid/capsaicin, 5)
+	reagents.add_reagent(/decl/material/liquid/capsaicin, 1)
 
 /obj/item/chems/food/chocobanana
 	name = "choco banana"

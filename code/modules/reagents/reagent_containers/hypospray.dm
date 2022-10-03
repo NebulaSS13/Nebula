@@ -248,8 +248,6 @@
 /obj/item/chems/hypospray/autoinjector/empty
 	name = "autoinjector"
 	band_color = COLOR_WHITE
-	material = /decl/material/solid/plastic
-	matter = list(/decl/material/solid/fiberglass = MATTER_AMOUNT_REINFORCEMENT)
 
 /obj/item/chems/hypospray/autoinjector/empty/populate_reagents()
 	return

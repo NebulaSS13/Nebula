@@ -134,13 +134,6 @@
 	var/list/boxes = list()// If the boxes are stacked, they come here
 	var/boxtag = ""
 
-/obj/item/pizzabox/Initialize(ml, material_key)
-	. = ..()
-	create_contents()
-
-/obj/item/pizzabox/proc/create_contents()
-	return
-
 /obj/item/pizzabox/on_update_icon()
 	. = ..()
 
@@ -284,18 +277,22 @@
 		return
 	..()
 
-/obj/item/pizzabox/margherita/create_contents()
+/obj/item/pizzabox/margherita/Initialize()
+	. = ..()
 	pizza = new /obj/item/chems/food/sliceable/pizza/margherita(src)
 	boxtag = "Margherita Deluxe"
 
-/obj/item/pizzabox/vegetable/create_contents()
+/obj/item/pizzabox/vegetable/Initialize()
+	. = ..()
 	pizza = new /obj/item/chems/food/sliceable/pizza/vegetablepizza(src)
 	boxtag = "Gourmet Vegatable"
 
-/obj/item/pizzabox/mushroom/create_contents()
+/obj/item/pizzabox/mushroom/Initialize()
+	. = ..()
 	pizza = new /obj/item/chems/food/sliceable/pizza/mushroompizza(src)
 	boxtag = "Mushroom Special"
 
-/obj/item/pizzabox/meat/create_contents()
+/obj/item/pizzabox/meat/Initialize()
+	. = ..()
 	pizza = new /obj/item/chems/food/sliceable/pizza/meatpizza(src)
 	boxtag = "Meatlover's Supreme"
