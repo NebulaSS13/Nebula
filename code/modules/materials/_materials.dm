@@ -1,5 +1,11 @@
 var/global/list/materials_by_gas_symbol = list()
 
+var/global/const/DRINK_FIZZ = "fizz"
+var/global/const/DRINK_ICE = "ice"
+var/global/const/DRINK_VAPOR = "vapor"
+var/global/const/DRINK_ICON_DEFAULT = ""
+var/global/const/DRINK_ICON_NOISY = "noise"
+
 /obj/effect/gas_overlay
 	name = "gas"
 	desc = "You shouldn't be clicking this."

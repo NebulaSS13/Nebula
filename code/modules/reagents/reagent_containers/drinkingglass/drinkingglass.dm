@@ -1,9 +1,3 @@
-var/global/const/DRINK_FIZZ = "fizz"
-var/global/const/DRINK_ICE = "ice"
-var/global/const/DRINK_VAPOR = "vapor"
-var/global/const/DRINK_ICON_DEFAULT = ""
-var/global/const/DRINK_ICON_NOISY = "noise"
-
 /obj/item/chems/drinks/glass2
 	name = "glass" // Name when empty
 	base_name = "glass"
