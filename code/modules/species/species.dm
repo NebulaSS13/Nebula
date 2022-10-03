@@ -280,18 +280,10 @@ var/global/const/DEFAULT_SPECIES_HEALTH = 200
 	var/preview_icon_height = 64
 	var/preview_icon_path
 
-/decl/species/Initialize()
-
-	. = ..()
+/decl/species/proc/build_codex_strings()
 
 	if(!codex_description)
 		codex_description = description
-
-	// Populate blood type table.
-	for(var/blood_type in blood_types)
-		var/decl/blood_type/blood_decl = GET_DECL(blood_type)
-		blood_types -= blood_type
-		blood_types[blood_decl.name] = blood_decl.random_weighting
 
 	// Generate OOC info.
 	var/list/codex_traits = list()
@@ -301,7 +293,7 @@ var/global/const/DEFAULT_SPECIES_HEALTH = 200
 		codex_traits += "<li>Whitelist restricted.</li>"
 	if(!has_organ[BP_HEART])
 		codex_traits += "<li>Does not have blood.</li>"
-	if(!has_organ[breathing_organ])
+	if(!breathing_organ)
 		codex_traits += "<li>Does not breathe.</li>"
 	if(species_flags & SPECIES_FLAG_NO_SCAN)
 		codex_traits += "<li>Does not have DNA.</li>"
@@ -353,6 +345,16 @@ var/global/const/DEFAULT_SPECIES_HEALTH = 200
 			ooc_codex_information += "<br><br>[trait_string]"
 		else
 			ooc_codex_information = trait_string
+
+/decl/species/Initialize()
+
+	. = ..()
+
+	// Populate blood type table.
+	for(var/blood_type in blood_types)
+		var/decl/blood_type/blood_decl = GET_DECL(blood_type)
+		blood_types -= blood_type
+		blood_types[blood_decl.name] = blood_decl.random_weighting
 
 	for(var/bodytype in available_bodytypes)
 		available_bodytypes -= bodytype
@@ -433,6 +435,8 @@ var/global/const/DEFAULT_SPECIES_HEALTH = 200
 		var/list/organ_data = has_limbs[limb_type]
 		var/obj/item/organ/limb_path = organ_data["path"]
 		organ_data["descriptor"] = initial(limb_path.name)
+
+	build_codex_strings()
 
 /decl/species/proc/equip_survival_gear(var/mob/living/carbon/human/H, var/box_type = /obj/item/storage/box/survival)
 	if(istype(H.get_equipped_item(slot_back_str), /obj/item/storage/backpack))
