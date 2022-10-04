@@ -11,9 +11,10 @@
 			base = new base()
 		else if(base.loaded > 0)
 			report_progress("Map template '[base]' is already loaded, skipping additional load for [name].")
-			return TRUE
-		report_progress("Loading map template '[base]' for [name].")
-		. = base.load_new_z()
+			. = TRUE
+		else
+			report_progress("Loading map template '[base]' for [name].")
+			. = base.load_new_z(FALSE) // Don't skip ChangeTurf.
 		if(.)
 			get_starting_locations()
 
