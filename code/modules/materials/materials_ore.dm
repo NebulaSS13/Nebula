@@ -27,9 +27,9 @@
 	if(!cached_ore_icon_states)
 		cache_ore_pile_icons()
 	var/nb_icon_states = length(cached_ore_icon_states[state_name])
-	if(!nb_icon_states)
+	if(nb_icon_states <= 0)
 		CRASH("Ore pile is missing an icon state!")
-	stack_icon_index = between(1, stack_icon_index, nb_icon_states)
+	stack_icon_index = clamp(stack_icon_index, 1, nb_icon_states)
 	return cached_ore_icon_states[state_name][stack_icon_index]
 
 ///Caches the icon state of the ore piles for each possible icon states. The images are greyscale so their color can be changed by the individual materials.
@@ -137,7 +137,7 @@
 	material = /decl/material/solid/bauxite
 /obj/item/stack/material/ore/rutile
 	material = /decl/material/solid/rutile
-	
+
 /obj/item/stack/material/ore/hydrogen_hydrate
 	material = /decl/material/solid/ice/hydrogen // todo: set back to hydrate when clathrate is added to hydrogen hydrate dname
 /obj/item/stack/material/ore/methane
