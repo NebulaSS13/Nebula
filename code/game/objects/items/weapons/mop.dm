@@ -1,5 +1,3 @@
-#define MOP_MAX_VOLUME 30
-
 /obj/item/mop
 	desc = "The world of janitalia wouldn't be complete without a mop."
 	name = "mop"
@@ -27,7 +25,7 @@
 	initialize_reagents()
 
 /obj/item/mop/initialize_reagents(populate = TRUE)
-	create_reagents(MOP_MAX_VOLUME)
+	create_reagents(30)
 	. = ..()
 
 /obj/item/mop/afterattack(atom/A, mob/user, proximity)
@@ -99,7 +97,8 @@
 
 /obj/item/mop/advanced/Initialize()
 	. = ..()
-	START_PROCESSING(SSobj, src)
+	if(refill_enabled)
+		START_PROCESSING(SSobj, src)
 
 /obj/item/mop/advanced/attack_self(mob/user)
 	refill_enabled = !refill_enabled
@@ -107,20 +106,17 @@
 		START_PROCESSING(SSobj, src)
 	else
 		STOP_PROCESSING(SSobj,src)
-	to_chat(user, "<span class='notice'>You set the condenser switch to the '[refill_enabled ? "ON" : "OFF"]' position.</span>")
+	to_chat(user, SPAN_NOTICE("You set the condenser switch to the '[refill_enabled ? "ON" : "OFF"]' position."))
 	playsound(user, 'sound/machines/click.ogg', 30, 1)
 
 /obj/item/mop/advanced/Process()
-	if(reagents.total_volume < MOP_MAX_VOLUME)
+	if(reagents.total_volume < reagents.maximum_volume)
 		reagents.add_reagent(refill_reagent, refill_rate)
 
 /obj/item/mop/advanced/examine(mob/user)
 	. = ..()
-	to_chat(user, "<span class='notice'>The condenser switch is set to <b>[refill_enabled ? "ON" : "OFF"]</b>.</span>")
+	to_chat(user, SPAN_NOTICE("The condenser switch is set to <b>[refill_enabled ? "ON" : "OFF"]</b>."))
 
 /obj/item/mop/advanced/Destroy()
-	if(refill_enabled)
-		STOP_PROCESSING(SSobj, src)
+	STOP_PROCESSING(SSobj, src)
 	return ..()
-
-#undef MOP_MAX_VOLUME
