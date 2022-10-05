@@ -69,7 +69,7 @@ var/global/dmm_suite/preloader/_preloader = new
 	if(!z_offset)
 		z_offset = world.maxz + 1
 
-	var/list/bounds = list(1.#INF, 1.#INF, 1.#INF, -1.#INF, -1.#INF, -1.#INF)
+	var/list/bounds = list(INFINITY, INFINITY, INFINITY, -INFINITY, -INFINITY, -INFINITY)
 	var/list/grid_models = list()
 	var/key_len = 0
 
@@ -192,7 +192,7 @@ var/global/dmm_suite/preloader/_preloader = new
 
 		CHECK_TICK
 
-	if(bounds[1] == 1.#INF) // Shouldn't need to check every item
+	if(bounds[1] == INFINITY) // Shouldn't need to check every item
 		return null
 
 	if(!measureOnly)
@@ -483,7 +483,7 @@ var/global/dmm_suite/preloader/_preloader = new
 		if(equal_position)
 			if(!left && trim_left != "null")
 				left = trim_left // This is dm behavior: unindentifiable keys in associative lists are parsed as literal strings.
-			if(left == 1.#INF || left == -1.#INF)
+			if(left == INFINITY || left == -INFINITY)
 				left = trim_left // This is not valid as a list index; we could let it runtime, but if associative it should be parsed as "inf" or "-inf" instead.
 		to_return += left
 
