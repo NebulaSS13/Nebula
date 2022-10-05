@@ -29,7 +29,7 @@
 #define ATMOS_PRECISION 0.0001
 #define QUANTIZE(variable) (round(variable, ATMOS_PRECISION))
 
-#define INFINITY	1.#INF
+#define INFINITY	1e31 // 1.#INF cannot be stored in JSON, which creates issues, so we use 1e31 instead.
 
 #define TICKS_IN_DAY 		24*60*60*10
 #define TICKS_IN_SECOND 	10
