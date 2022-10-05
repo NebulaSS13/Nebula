@@ -99,6 +99,8 @@
 		//Only set the health if health is null. Some things define their own health value.
 		if(isnull(max_health))
 			max_health = round(material_health_multiplier * material.integrity)
+			if(max_health < 1)
+				CRASH("The 'max_health' of '[src]' made out of '[material]' was calculated as [material_health_multiplier] * [material.integrity] == [max_health], which is smaller than 1.")
 		if(isnull(health)) //only set health if we didn't specify one already, so damaged objects on spawn and etc can be a thing
 			health = max_health
 		
