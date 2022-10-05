@@ -6,7 +6,7 @@
 	icon_state = "pad_full"
 	item_state = "paper"
 	w_class = ITEM_SIZE_SMALL
-	material = /decl/material/solid/wood
+	material = /decl/material/solid/paper
 
 	var/papers = 50
 	var/written_text
@@ -15,7 +15,7 @@
 
 /obj/item/sticky_pad/proc/update_matter()
 	matter = list(
-		/decl/material/solid/wood = round((papers * SHEET_MATERIAL_AMOUNT) * 0.2)
+		/decl/material/solid/paper = round((papers * SHEET_MATERIAL_AMOUNT) * 0.2)
 	)
 
 /obj/item/sticky_pad/create_matter()

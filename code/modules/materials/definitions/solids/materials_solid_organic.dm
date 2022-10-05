@@ -85,9 +85,40 @@
 	. += new/datum/stack_recipe_list("folders", create_recipe_list(/datum/stack_recipe/folder))
 
 /decl/material/solid/paper
-	name = "paper"
-	uid = "solid_paper"
-	//STUB: Waiting on papwerork PR
+	name                    = "paper"
+	uid                     = "solid_paper"
+	lore_text               = "Low tech writing medium made from cellulose fibers. Also used in wrappings and packaging."
+	color                   = "#cfcece"
+	stack_origin_tech       = "{'materials':1}"
+	door_icon_base          = "wood"
+	destruction_desc        = "tears"
+	icon_base               = 'icons/turf/walls/solid.dmi'
+	icon_reinf              = 'icons/turf/walls/reinforced.dmi'
+	integrity               = 3
+	use_reinf_state         = null
+	flags                   = MAT_FLAG_BRITTLE
+	reflectiveness          = MAT_VALUE_DULL
+	hardness                = MAT_VALUE_SOFT - 5
+	wall_support_value      = MAT_VALUE_EXTREMELY_LIGHT - 9
+	weight                  = MAT_VALUE_EXTREMELY_LIGHT - 9
+	construction_difficulty = MAT_VALUE_EASY_DIY
+	wall_flags              = PAINT_PAINTABLE | PAINT_STRIPABLE | WALL_HAS_EDGES
+	brute_armor             = 0.5
+	ignition_point          = T0C + 232 //"the temperature at which book-paper catches fire, and burns." close enough
+	melting_point           = T0C + 232
+	conductive              = FALSE
+	value                   = 0.25
+	default_solid_form      = /obj/item/stack/material/bolt
+	shard_type              = /obj/item/shreddedp
+	exoplanet_rarity        = MAT_RARITY_NOWHERE
+	sound_manipulate        = 'sound/foley/paperpickup2.ogg'
+	sound_dropped           = 'sound/foley/paperpickup1.ogg'
+
+/decl/material/solid/paper/generate_recipes(var/reinforce_material)
+	. = ..()
+	if(reinforce_material)	//recipes below don't support composite materials
+		return
+	. += new/datum/stack_recipe/paper_sheets(src)
 
 /decl/material/solid/cloth //todo
 	name = "cotton"

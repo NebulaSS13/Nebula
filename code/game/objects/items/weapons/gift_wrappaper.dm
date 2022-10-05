@@ -149,7 +149,7 @@
 	desc = "You can use this to wrap items in."
 	icon = 'icons/obj/items/gift_wrapper.dmi'
 	icon_state = "wrap_paper"
-	material = /decl/material/solid/cardboard //#TODO: Replace with paper
+	material = /decl/material/solid/paper
 	var/amount = 2.5*BASE_STORAGE_COST(ITEM_SIZE_HUGE)
 
 /obj/item/wrapping_paper/attackby(obj/item/W, mob/user)

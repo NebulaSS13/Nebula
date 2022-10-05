@@ -92,10 +92,9 @@
 		visible_message(SPAN_DANGER("\The [src] shatters!"))
 
 	var/debris_count = is_fulltile() ? 4 : 1
-	for(var/i = 0 to debris_count)
-		material.place_shard(loc)
-		if(reinf_material)
-			reinf_material.create_object(loc, 1, /obj/item/stack/material/rods)
+	material.place_shards(loc, debris_count)
+	if(reinf_material)
+		reinf_material.create_object(loc, debris_count, /obj/item/stack/material/rods)
 	qdel(src)
 
 /obj/structure/window/bullet_act(var/obj/item/projectile/Proj)

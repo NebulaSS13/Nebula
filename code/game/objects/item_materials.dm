@@ -36,7 +36,7 @@
 	T.visible_message(SPAN_DANGER("\The [src] [material ? material.destruction_desc : "shatters"]!"))
 	playsound(src, "shatter", 70, 1)
 	if(!consumed && material && w_class > ITEM_SIZE_SMALL)
-		material.place_shard(T)
+		material.place_shards(T)
 	qdel(src)
 
 /obj/item/get_material()

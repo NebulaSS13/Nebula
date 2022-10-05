@@ -65,13 +65,13 @@
 
 	// Destroy some stuff before passing off to dismantle(), which will return it in sheet form instead.
 	if(reinf_material && !prob(20))
-		reinf_material.place_shard(loc)
+		reinf_material.place_shards(loc)
 		reinf_material = null
 	if(material && !prob(20))
-		material.place_shard(loc)
+		material.place_shards(loc)
 		material = null
 	if(additional_reinf_material && !prob(20))
-		additional_reinf_material.place_shard(loc)
+		additional_reinf_material.place_shards(loc)
 		additional_reinf_material = null
 	if(felted && prob(50))
 		felted = FALSE

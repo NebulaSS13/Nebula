@@ -426,13 +426,29 @@ INITIALIZE_IMMEDIATE(/obj/effect/gas_overlay)
 		return create_object(target, amount, object_type = drop_type)
 
 // As above.
-/decl/material/proc/place_shard(var/turf/target)
+/decl/material/proc/place_shards(var/turf/target, var/amount = 1)
 	if(shard_type)
-		return create_object(target, 1, /obj/item/shard)
+		return create_object(target, amount, /obj/item/shard)
 
 /**Places downa as many shards as needed for the given amount of matter units. Returns a list of all the cuttings. */
 /decl/material/proc/place_cuttings(var/turf/target, var/matter_units)
-	//STUB: Waiting on papwerork PR
+	if(!shard_type && matter_units <= 0)
+		return
+	var/list/shard_mat = atom_info_repository.get_matter_for(shard_type, type, 1)
+	var/amount_per_shard = LAZYACCESS(shard_mat, type)
+	if(amount_per_shard < 1)
+		return
+
+	//Make all the shards we can
+	var/shard_amount = round(matter_units / amount_per_shard)
+	var/matter_left  = round(matter_units % amount_per_shard)
+	LAZYADD(., create_object(target, shard_amount, shard_type))
+
+	//If we got more than expected, just make a shard with that amount
+	if(matter_left > 0)
+		var/obj/S = create_object(target, 1, shard_type)
+		LAZYSET(S.matter, type, matter_left)
+		LAZYADD(., S)
 
 // Used by walls and weapons to determine if they break or not.
 /decl/material/proc/is_brittle()
