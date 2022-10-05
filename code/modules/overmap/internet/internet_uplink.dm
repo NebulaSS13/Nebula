@@ -115,7 +115,7 @@ var/global/list/internet_uplinks = list()
 				permitted_networks += network_id
 				return TOPIC_REFRESH
 			else
-				to_chat(user, SPAN_WARNING("\The network '[network_id]' could not be found!"))
+				to_chat(user, SPAN_WARNING("The network '[network_id]' could not be found!"))
 				return TOPIC_HANDLED
 
 /obj/machinery/internet_uplink/proc/update_range(new_range)
