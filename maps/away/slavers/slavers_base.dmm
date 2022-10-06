@@ -3868,7 +3868,7 @@
 /obj/structure/hygiene/sink{
 	pixel_y = -20
 	},
-/obj/item/storage/mirror{
+/obj/structure/mirror{
 	pixel_y = -35
 	},
 /obj/abstract/landmark/corpse/slavers_base/slaver2,
@@ -3879,7 +3879,7 @@
 /obj/structure/hygiene/sink{
 	pixel_y = -20
 	},
-/obj/item/storage/mirror{
+/obj/structure/mirror{
 	pixel_y = -35
 	},
 /turf/simulated/floor/tiled/white,

@@ -22,7 +22,7 @@
 /turf/exterior/wall/random/ministation,
 /area/space)
 "ag" = (
-/obj/item/storage/mirror{
+/obj/structure/mirror{
 	pixel_y = 30
 	},
 /turf/simulated/floor/tiled/freezer,

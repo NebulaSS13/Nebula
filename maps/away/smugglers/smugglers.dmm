@@ -955,7 +955,7 @@
 /obj/structure/hygiene/sink{
 	pixel_y = 15
 	},
-/obj/item/storage/mirror{
+/obj/structure/mirror{
 	pixel_y = 30
 	},
 /obj/random/soap,
