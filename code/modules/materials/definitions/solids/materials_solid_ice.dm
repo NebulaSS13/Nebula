@@ -4,6 +4,7 @@
 		/decl/material/liquid/water = 1
 	)
 	name = "water"
+	use_name = "ice"
 	codex_name = "water ice"
 	taste_description = "ice"
 	ore_spread_chance = 25
@@ -24,12 +25,15 @@
 		gas_name = name
 	if(!solid_name)
 		solid_name = "[name] ice"
+	if(!use_name)
+		use_name = solid_name
 	if(!ore_name)
 		ore_name = solid_name
 	. = ..()
-	
+
 /decl/material/solid/ice/aspium
 	name = "aspium"
+	use_name = null
 	codex_name = null
 	heating_products = list(
 		/decl/material/liquid/fuel/hydrazine = 0.3,
@@ -42,6 +46,7 @@
 
 /decl/material/solid/ice/lukrite
 	name = "lukrite"
+	use_name = null
 	codex_name = null
 	heating_products = list(
 		/decl/material/solid/sulfur = 0.4,
@@ -55,6 +60,7 @@
 
 /decl/material/solid/ice/rubenium
 	name = "rubenium"
+	use_name = null
 	codex_name = null
 	heating_products = list(
 		/decl/material/solid/metal/radium  = 0.4,
@@ -68,6 +74,7 @@
 
 /decl/material/solid/ice/trigarite
 	name = "trigarite"
+	use_name = null
 	codex_name = null
 	heating_products = list(
 		/decl/material/liquid/acid/hydrochloric = 0.2,
@@ -81,6 +88,7 @@
 
 /decl/material/solid/ice/ediroite
 	name = "ediroite"
+	use_name = null
 	codex_name = null
 	heating_products = list(
 		/decl/material/gas/ammonia  = 0.4,
@@ -94,6 +102,7 @@
 
 /decl/material/solid/ice/hydrogen
 	name = "hydrogen ice"
+	use_name = null
 	codex_name = null
 	uid = "solid_ice_hydrogen"
 	heating_products = list(
@@ -113,6 +122,7 @@
 //Hydrates gas are basically bubbles of gas trapped in water ice lattices
 /decl/material/solid/ice/hydrate
 	codex_name = null
+	use_name = null
 	uid = "solid_hydrate"
 	heating_point = T0C //the melting point is always water's
 	abstract_type = /decl/material/solid/ice/hydrate
@@ -126,7 +136,7 @@
 	heating_products = list(PATH = 0.2, /decl/material/liquid/water = 0.8); \
 	. = ..();                                                               \
 }                                                                           \
-/decl/material/solid/ice/hydrate/##NAME 
+/decl/material/solid/ice/hydrate/##NAME
 
 #define DECLARE_HYDRATE_DNAME(NAME, DISPLAY_NAME) DECLARE_HYDRATE_DNAME_PATH(/decl/material/gas/##NAME, NAME, DISPLAY_NAME)
 #define DECLARE_HYDRATE(NAME) DECLARE_HYDRATE_DNAME(NAME, #NAME)

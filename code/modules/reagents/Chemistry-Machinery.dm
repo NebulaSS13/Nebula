@@ -220,7 +220,7 @@
 		return
 	. = list()
 	. += "<TITLE>[name]</TITLE>"
-	. += "[heading]:<BR><BR>Name:<BR>[reagent.name]"
+	. += "[heading]:<BR><BR>Name:<BR>[reagent.use_name]"
 	. += "<BR><BR>Description:<BR>"
 	if(detailed_blood && istype(reagent, /decl/material/liquid/blood))
 		var/blood_data = REAGENT_DATA(beaker?.reagents, /decl/material/liquid/blood)
@@ -280,7 +280,7 @@
 			dat += "Add to buffer:<BR>"
 			for(var/rtype in R.reagent_volumes)
 				var/decl/material/G = GET_DECL(rtype)
-				dat += "[G.name], [REAGENT_VOLUME(R, rtype)] Units - "
+				dat += "[G.use_name], [REAGENT_VOLUME(R, rtype)] Units - "
 				dat += "<A href='?src=\ref[src];analyze=\ref[G]'>(Analyze)</A> "
 				dat += "<A href='?src=\ref[src];add=\ref[G];amount=1'>(1)</A> "
 				dat += "<A href='?src=\ref[src];add=\ref[G];amount=5'>(5)</A> "
@@ -292,7 +292,7 @@
 		if(reagents.total_volume)
 			for(var/rtype in reagents.reagent_volumes)
 				var/decl/material/N = GET_DECL(rtype)
-				dat += "[N.name], [REAGENT_VOLUME(reagents, rtype)] Units - "
+				dat += "[N.use_name], [REAGENT_VOLUME(reagents, rtype)] Units - "
 				dat += "<A href='?src=\ref[src];analyze=\ref[N]'>(Analyze)</A> "
 				dat += "<A href='?src=\ref[src];remove=\ref[N];amount=1'>(1)</A> "
 				dat += "<A href='?src=\ref[src];remove=\ref[N];amount=5'>(5)</A> "
