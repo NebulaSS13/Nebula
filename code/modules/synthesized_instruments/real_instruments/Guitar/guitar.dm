@@ -2,7 +2,7 @@
 	name = "guitar"
 	desc = "A wooden musical instrument with six strings. This one looks like it may actually work."
 	icon = 'icons/obj/items/guitar.dmi'
-	icon_state = "guitar"
+	icon_state = ICON_STATE_WORLD
 	sound_player = /datum/sound_player/synthesizer
 	path = /datum/instrument/guitar/clean_crisis
 	material = /decl/material/solid/wood
