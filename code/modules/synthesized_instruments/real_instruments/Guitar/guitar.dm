@@ -7,6 +7,7 @@
 	path = /datum/instrument/guitar/clean_crisis
 	material = /decl/material/solid/wood
 	matter = list(/decl/material/solid/metal/steel = MATTER_AMOUNT_TRACE)
+	slot_flags = SLOT_BACK
 
 /obj/item/synthesized_instrument/guitar/multi
 	name = "Polyguitar"
@@ -17,7 +18,8 @@
 	path = /datum/instrument/guitar
 	material = /decl/material/solid/wood
 	matter = list(
-		/decl/material/solid/metal/steel  = MATTER_AMOUNT_TRACE, 
+		/decl/material/solid/metal/steel  = MATTER_AMOUNT_TRACE,
 		/decl/material/solid/metal/copper = MATTER_AMOUNT_TRACE,
 		/decl/material/solid/silicon      = MATTER_AMOUNT_TRACE,
 		)
+	slot_flags = 0

@@ -10,6 +10,7 @@
 	icon = 'icons/obj/items/guitar.dmi'
 	icon_state = "guitar"
 	material = /decl/material/solid/wood
+	slot_flags = SLOT_BACK
 
 /obj/item/instrument/guitar/attack_self(mob/user)
 	user.visible_message("<span class='notice'><b>\The [user]</b> strums [src]!</span>","<span class='notice'>You strum [src]!</span>")
