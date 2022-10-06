@@ -1,0 +1,6 @@
+author: PsyCommando
+delete-after: true
+changes:
+  - tweak: Reagent dispensers can now be refilled via alt interactions.
+  - tweak: Made the welder pack printable, and made it now have an integrated welding
+      tool. Its now much more useful.
