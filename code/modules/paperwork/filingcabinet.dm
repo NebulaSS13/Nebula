@@ -11,7 +11,7 @@
 /obj/structure/filingcabinet
 	name                   = "filing cabinet"
 	desc                   = "A large cabinet with drawers."
-	icon                   = 'icons/obj/bureaucracy.dmi'
+	icon                   = 'icons/obj/structures/filling_cabinets.dmi'
 	icon_state             = "filingcabinet"
 	material               = /decl/material/solid/metal/steel
 	density                = TRUE
