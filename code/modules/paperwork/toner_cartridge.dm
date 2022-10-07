@@ -5,7 +5,7 @@
 	name                          = "toner cartridge"
 	desc                          = "A large cartridge containing pigmented polymer powder for photocopiers to print with."
 	icon                          = 'icons/obj/items/tonercartridge.dmi'
-	icon_state                    = "tonercartridge"
+	icon_state                    = ICON_STATE_WORLD
 	throw_range                   = 5
 	throw_speed                   = 4
 	throwforce                    = 3
