@@ -14,9 +14,8 @@
 //////////////////////////////////////////////////////
 /obj/item/hand_labeler
 	name            = "hand labeler"
-	icon            = 'icons/obj/bureaucracy.dmi'
-	icon_state      = "labeler0"
-	item_state      = "flight"
+	icon            = 'icons/obj/items/hand_labeler.dmi'
+	icon_state      = ICON_STATE_WORLD
 	material        = /decl/material/solid/plastic
 	w_class         = ITEM_SIZE_SMALL
 	item_flags      = ITEM_FLAG_NO_BLUDGEON
@@ -28,10 +27,6 @@
 	var/tmp/max_labels   = 30                    //Maximum amount of label charges
 	var/safety           = TRUE                  //Whether the safety is on or off. Set to FALSE to allow labeler to interact with things
 	var/mode             = HAND_LABELER_MODE_ADD //What operation the labeler is set to do
-
-/obj/item/hand_labeler/on_update_icon()
-	. = ..()
-	icon_state = "labeler[mode > 1]"
 
 /obj/item/hand_labeler/examine(mob/user, distance, infix, suffix)
 	. = ..()
