@@ -4,7 +4,7 @@
 /obj/machinery/papershredder
 	name               = "paper shredder"
 	desc               = "For those documents you don't want seen."
-	icon               = 'icons/obj/bureaucracy.dmi'
+	icon               = 'icons/obj/machines/paper_shredder.dmi'
 	icon_state         = "papershredder0"
 	density            = TRUE
 	anchored           = TRUE
@@ -178,9 +178,9 @@
 	var/ratio = ((cached_total_matter * 5) / max_total_matter)
 	icon_state = "papershredder[clamp(0, CEILING(ratio), 5)]"
 	if(!is_unpowered())
-		add_overlay(overlay_image('icons/obj/bureaucracy.dmi', "papershredder_power"))
+		add_overlay("papershredder_power")
 		if(is_broken() || is_bin_full())
-			add_overlay(overlay_image('icons/obj/bureaucracy.dmi', "papershredder_bad"))
+			add_overlay("papershredder_bad")
 
 /obj/machinery/papershredder/get_alt_interactions(mob/user)
 	. = ..()
