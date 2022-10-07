@@ -22,7 +22,7 @@
 ////////////////////////////////////////////////////////////////////////////////////////
 /obj/machinery/photocopier
 	name                  = "photocopier"
-	icon                  = 'icons/obj/bureaucracy.dmi'
+	icon                  = 'icons/obj/machines/photocopier.dmi'
 	icon_state            = "photocopier"
 	anchored              = TRUE
 	density               = TRUE
@@ -73,9 +73,9 @@
 		return
 	//Warning lights
 	if(scanner_item)
-		add_overlay(overlay_image('icons/obj/bureaucracy.dmi', "photocopier_ready"))
+		add_overlay("photocopier_ready")
 	if(!printer?.has_enough_to_print())
-		add_overlay(overlay_image('icons/obj/bureaucracy.dmi', "photocopier_bad"))
+		add_overlay("photocopier_bad")
 
 /obj/machinery/photocopier/proc/update_ui()
 	SSnano.update_uis(src)
