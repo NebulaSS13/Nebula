@@ -488,3 +488,7 @@ INITIALIZE_IMMEDIATE(/mob/new_player)
 /hook/roundstart/proc/update_lobby_browsers()
 	global.using_map.refresh_lobby_browsers()
 	return TRUE
+
+/mob/new_player/change_mob_type(var/new_type, var/turf/location, var/new_name, var/delete_old_mob = FALSE, var/subspecies)
+	to_chat(usr, SPAN_WARNING("You cannot convert players who have not entered the game yet!"))
+	return FALSE

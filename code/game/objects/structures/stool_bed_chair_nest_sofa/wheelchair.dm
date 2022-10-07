@@ -116,6 +116,12 @@
 	direction = mob.AdjustMovementDirection(direction)
 	DoMove(direction, mob)
 
+/obj/structure/bed/chair/wheelchair/relaymove(mob/user, direction)
+	if(user)
+		user.glide_size = glide_size
+	step(src, direction)
+	set_dir(direction)
+
 /obj/item/wheelchair_kit
 	name = "compressed wheelchair kit"
 	desc = "Collapsed parts, prepared to immediately spring into the shape of a wheelchair."
