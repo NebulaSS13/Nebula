@@ -4,7 +4,7 @@
 /obj/item/folder
 	name         = "folder"
 	desc         = "A folder."
-	icon         = 'icons/obj/bureaucracy.dmi'
+	icon         = 'icons/obj/items/folders.dmi'
 	icon_state   = "folder"
 	w_class      = ITEM_SIZE_SMALL
 	throwforce   = 0
@@ -29,9 +29,9 @@
 	desc       = "A cyan folder."
 	icon_state = "folder_cyan"
 
-/obj/item/folder/on_update_icon()
+/obj/item/folder/on_update_icon(var/paper_overlay = TRUE)
 	. = ..()
-	if(length(contents))
+	if(paper_overlay && length(contents))
 		add_overlay("folder_paper")
 
 /obj/item/folder/attackby(obj/item/W, mob/user)
@@ -89,7 +89,7 @@
 	var/sealed = 1
 
 /obj/item/folder/envelope/on_update_icon()
-	. = ..()
+	. = ..(paper_overlay = FALSE)
 	if(sealed)
 		icon_state = "envelope_sealed"
 	else
