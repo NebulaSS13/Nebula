@@ -1,7 +1,7 @@
 /obj/item/stamp
 	name        = "rubber stamp"
 	desc        = "A rubber stamp for stamping important documents."
-	icon        = 'icons/obj/bureaucracy.dmi'
+	icon        = 'icons/obj/items/rubber_stamps.dmi'
 	icon_state  = "stamp-deckchief"
 	item_state  = "stamp"
 	throwforce  = 0
@@ -33,6 +33,7 @@
 /obj/item/stamp/denied
 	name = "\improper DENIED rubber stamp"
 	icon_state = "stamp-deny"
+	attack_verb = list("stamped", "denied")
 
 /obj/item/stamp/clown
 	name = "clown's rubber stamp"
