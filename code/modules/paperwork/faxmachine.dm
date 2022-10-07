@@ -54,7 +54,7 @@ var/global/list/adminfaxes     = list()	//cache for faxes that have been sent to
 ////////////////////////////////////////////////////////////////////////////////////////
 /obj/machinery/faxmachine
 	name                    = "fax machine"
-	icon                    = 'icons/obj/bureaucracy.dmi'
+	icon                    = 'icons/obj/machines/fax_machine.dmi'
 	icon_state              = "fax"
 	anchored                = TRUE
 	density                 = TRUE
