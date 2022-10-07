@@ -3,7 +3,7 @@
 /////////////////////////////////////////////////////////////////
 /obj/item/paper_bin
 	name                = "paper bin"
-	icon                = 'icons/obj/bureaucracy.dmi'
+	icon                = 'icons/obj/items/paper_bin.dmi'
 	icon_state          = "paper_bin1"
 	item_state          = "sheet-metal"
 	randpixel           = 0
