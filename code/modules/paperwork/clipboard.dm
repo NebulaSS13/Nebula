@@ -1,18 +1,19 @@
 /obj/item/clipboard
-	name                  = "clipboard"
-	desc                  = "It's a board with a clip used to organise papers."
-	icon                  = 'icons/obj/bureaucracy.dmi'
-	icon_state            = "clipboard"
-	item_state            = "clipboard"
-	throwforce            = 0
-	w_class               = ITEM_SIZE_SMALL
-	throw_speed           = 3
-	throw_range           = 10
-	slot_flags            = SLOT_LOWER_BODY
-	applies_material_name = FALSE
-	material              = /decl/material/solid/wood
-	drop_sound            = 'sound/foley/tooldrop5.ogg'
-	pickup_sound          = 'sound/foley/paperpickup2.ogg'
+	name                    = "clipboard"
+	desc                    = "It's a board with a clip used to organise papers."
+	icon                    = 'icons/obj/items/clipboard.dmi'
+	icon_state              = "clipboard"
+	item_state              = "clipboard"
+	throwforce              = 0
+	w_class                 = ITEM_SIZE_SMALL
+	throw_speed             = 3
+	throw_range             = 10
+	slot_flags              = SLOT_LOWER_BODY
+	applies_material_name   = FALSE
+	applies_material_colour = TRUE
+	material                = /decl/material/solid/wood
+	drop_sound              = 'sound/foley/tooldrop5.ogg'
+	pickup_sound            = 'sound/foley/paperpickup2.ogg'
 
 	var/obj/item/stored_pen        //The stored pen.
 	var/list/papers

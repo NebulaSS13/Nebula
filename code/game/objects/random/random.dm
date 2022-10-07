@@ -1205,7 +1205,7 @@ var/global/list/random_useful_
 /obj/random/clipboard
 	name = "random clipboard"
 	desc = "This is a random material clipboard."
-	icon = 'icons/obj/bureaucracy.dmi'
+	icon = 'icons/obj/items/clipboard.dmi'
 	icon_state = "clipboard_preview"
 
 /obj/random/clipboard/spawn_choices()
