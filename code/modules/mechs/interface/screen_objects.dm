@@ -15,7 +15,7 @@
 
 /obj/screen/exosuit/radio/Initialize()
 	. = ..()
-	maptext = MECH_UI_STYLE("RADIO")	
+	maptext = MECH_UI_STYLE("RADIO")
 
 /obj/screen/exosuit/radio/Click()
 	if(..())
@@ -189,8 +189,9 @@
 /obj/screen/exosuit/power
 	name = "power"
 	icon_state = null
-
+	maptext_x = -16
 	maptext_width = 64
+	maptext_y = -8
 
 /obj/screen/exosuit/toggle
 	name = "toggle"
@@ -315,7 +316,7 @@
 			playsound(owner.loc,'sound/effects/scanbeep.ogg',30,0)
 			for(var/obj/item/mech_component/MC in list(owner.arms, owner.legs, owner.body, owner.head))
 				if(MC)
-					MC.return_diagnostics(usr)	
+					MC.return_diagnostics(usr)
 
 //Controls if cameras set the vision flags
 /obj/screen/exosuit/toggle/camera

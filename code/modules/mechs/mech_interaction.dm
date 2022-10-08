@@ -56,6 +56,8 @@
 		return STATUS_INTERACTIVE
 	return ..()
 
+/mob/living/exosuit/has_dexterity(dex_level)
+	return TRUE
 
 /mob/living/exosuit/ClickOn(var/atom/A, var/params, var/mob/user)
 
@@ -133,7 +135,7 @@
 				ME = selected_system
 				temp_system = ME.get_effective_obj()
 				if(temp_system in ME)
-					system_moved = 1
+					system_moved = TRUE
 					temp_system.forceMove(src)
 			else
 				temp_system = selected_system
@@ -161,7 +163,8 @@
 			var/resolved
 			current_user = user
 
-			if(adj) resolved = temp_system.resolve_attackby(A, src, params)
+			if(adj)
+				resolved = temp_system.resolve_attackby(A, src, params)
 			if(!resolved && A && temp_system)
 				var/mob/ruser = src
 				if(!system_moved) //It's more useful to pass along clicker pilot when logic is fully mechside
