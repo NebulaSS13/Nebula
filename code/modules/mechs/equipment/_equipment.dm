@@ -122,7 +122,6 @@
 		QDEL_NULL(holding)
 	. = ..()
 
-
 /obj/item/mech_equipment/mounted_system/get_effective_obj()
 	return (holding ? holding : src)
 
