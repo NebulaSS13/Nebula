@@ -618,3 +618,6 @@
 			flash_eyes(2)
 		return TRUE
 	return FALSE
+
+/mob/living/simple_animal/get_speech_bubble_state_modifier()
+	return ..() || "rough"

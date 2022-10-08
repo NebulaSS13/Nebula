@@ -9,7 +9,7 @@
 /mob/verb/say_verb(message as text)
 	set name = "Say"
 	set category = "IC"
-	remove_typing_indicator()
+	SStyping.set_indicator_state(client, FALSE)
 	if(!filter_block_message(usr, message))
 		usr.say(message)
 
@@ -17,7 +17,7 @@
 	set name = "Me"
 	set category = "IC"
 
-	remove_typing_indicator()
+	SStyping.set_indicator_state(client, FALSE)
 	if(!filter_block_message(usr, message))
 		message = sanitize(message)
 		if(use_me)
@@ -56,13 +56,13 @@
 
 	return get_turf(src)
 
-/mob/proc/say_test(var/text)
+/mob/proc/check_speech_punctuation_state(var/text)
 	var/ending = copytext(text, length(text))
 	if (ending == "?")
-		return "1"
+		return "question"
 	else if (ending == "!")
-		return "2"
-	return "0"
+		return "exclamation"
+	return "statement"
 
 //parses the message mode code (e.g. :h, :w) from text, such as that supplied to say.
 //returns the message mode string or null for no message mode.

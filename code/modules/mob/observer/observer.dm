@@ -20,7 +20,7 @@ var/global/const/GHOST_IMAGE_ALL = ~GHOST_IMAGE_NONE
 
 /mob/observer/Initialize()
 	. = ..()
-	glide_size = 0
+	glide_size = 0 // Set in Initialize() because the compiler doesn't like it set in the definition.
 	ghost_image = image(src.icon,src)
 	ghost_image.plane = plane
 	ghost_image.layer = layer
@@ -95,3 +95,6 @@ var/global/const/GHOST_IMAGE_ALL = ~GHOST_IMAGE_NONE
 
 /mob/observer/set_glide_size(var/delay)
 	glide_size = 0
+
+/mob/observer/get_speech_bubble_state_modifier()
+	return "ghost"

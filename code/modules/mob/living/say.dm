@@ -302,11 +302,16 @@ var/global/list/channel_to_radio_key = new
 
 		get_mobs_and_objs_in_view_fast(T, message_range, listening, listening_obj, /datum/client_preference/ghost_ears)
 
+	var/speech_bubble_state = check_speech_punctuation_state(message)
+	var/speech_state_modifier = get_speech_bubble_state_modifier()
+	if(speech_bubble_state && speech_state_modifier)
+		speech_bubble_state = "[speech_state_modifier]_[speech_bubble_state]"
 
-	var/speech_bubble_test = say_test(message)
-	var/image/speech_bubble = image('icons/mob/talk.dmi',src,"h[speech_bubble_test]")
-	speech_bubble.layer = layer
-	speech_bubble.plane = plane
+	var/image/speech_bubble
+	if(speech_bubble_state)
+		speech_bubble = image('icons/mob/talk.dmi', src, speech_bubble_state)
+		speech_bubble.layer = layer
+		speech_bubble.plane = plane
 
 	var/list/speech_bubble_recipients = list()
 	for(var/mob/M in listening)

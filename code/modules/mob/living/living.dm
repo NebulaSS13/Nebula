@@ -1084,3 +1084,6 @@ default behaviour is:
 		return FALSE
 	M.death()
 	log_and_message_admins("\The [user] admin-killed [key_name].")
+
+/mob/living/get_speech_bubble_state_modifier()
+	return isSynthetic() ? "synth" : ..()
