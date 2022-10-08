@@ -19,6 +19,9 @@
 /obj/screen/receive_mouse_drop(atom/dropping, mob/user)
 	return TRUE
 
+/obj/screen/check_mousedrop_interactivity(var/mob/user)
+	return user.client && (src in user.client.screen)
+
 /obj/screen/Destroy()
 	master = null
 	return ..()
