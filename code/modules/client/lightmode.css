@@ -1,9 +1,10 @@
-/client/script = {"<style>
 body					{font-family: Verdana, sans-serif;}
 
 h1, h2, h3, h4, h5, h6	{color: #0000ff;font-family: Georgia, Verdana, sans-serif;}
 
 em						{font-style: normal;font-weight: bold;}
+
+.system {color:#ff0000;}
 
 .motd					{color: #638500;font-family: Verdana, sans-serif;}
 .motd h1, .motd h2, .motd h3, .motd h4, .motd h5, .motd h6
@@ -28,10 +29,10 @@ em						{font-style: normal;font-weight: bold;}
 
 .staffwarn				{color: #ff0000; font-weight:bold; font-size: 150%;}
 /* Admin: Private Messages */
-.pm  .howto				{color: #ff0000;	font-weight: bold;		font-size: 200%;}
-.pm  .in				{color: #ff0000;}
-.pm  .out				{color: #ff0000;}
-.pm  .other				{color: #0000ff;}
+.pm .howto				{color: #ff0000;	font-weight: bold;		font-size: 200%;}
+.pm .in					{color: #ff0000;}
+.pm .out				{color: #ff0000;}
+.pm .other				{color: #0000ff;}
 
 /* Admin: Channels */
 .mod_channel			{color: #735638;	font-weight: bold;}
@@ -61,7 +62,6 @@ em						{font-style: normal;font-weight: bold;}
 
 /* Miscellaneous */
 .name					{font-weight: bold;}
-.say					{}
 .alert					{color: #ff0000;}
 h1.alert, h2.alert		{color: #000000;}
 
@@ -74,10 +74,10 @@ h1.alert, h2.alert		{color: #000000;}
 .disarm					{color: #990000;}
 .passive				{color: #660000;}
 
-.italic				{font-style: italic;}
+.italic					{font-style: italic;}
 .bold					{font-weight: bold;}
 .danger					{color: #ff0000; font-weight: bold;}
-.bigdanger					{color: #ff0000; font-weight: bold; font-size: 115%;}
+.bigdanger				{color: #ff0000; font-weight: bold; font-size: 115%;}
 .warning				{color: #ff0000; font-style: italic;}
 .bigwarning				{color: #ff0000; font-style: italic; font-size: 115%;}
 .boldannounce			{color: #ff0000; font-weight: bold;}
@@ -111,21 +111,11 @@ h1.alert, h2.alert		{color: #000000;}
 .russian				{color: #9c250b;}
 .arabic					{color: #128b11;}
 .spacer					{color: #9c660b;}
-.selenian       {color: #22228b;}
+.selenian				{color: #22228b;}
 
 .interface				{color: #330033;}
 
-.good                   {color: #00ff00; font-weight: bold;}
-.bad                    {color: #ee0000; font-weight: bold;}
+.good					{color: #00ff00; font-weight: bold;}
+.bad					{color: #ee0000; font-weight: bold;}
 
 BIG IMG.icon 			{width: 32px; height: 32px;}
-
-/* Codex */
-.codexLore      {color: #abdb9b;}
-.codexMechanics {color: #9ebcd8;}
-.codexAntag     {color: #e5a2a2;}
-.dmCodexBody      {margin-left: 15px;}
-.dmCodexHeader    {text-align: center;}
-.dmCodexFooter    {text-align: center;}
-
-</style>"}

@@ -204,4 +204,8 @@
 #define COLOR_INPUT_DISABLED "#f0f0f0"
 #define COLOR_INPUT_ENABLED "#d3b5b5"
 
+#define COLOR_DARKMODE_BACKGROUND "#202020"
+#define COLOR_DARKMODE_DARKBACKGROUND "#171717"
+#define COLOR_DARKMODE_TEXT "#a4bad6"
+
 #define COLORED_SQUARE(COLOR) "<span style='font-face: fixedsys; font-size: 14px; background-color: [COLOR]; color: [COLOR]'>___</span>"
