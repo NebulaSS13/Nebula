@@ -123,7 +123,7 @@
 /obj/structure/hygiene/toilet{
 	dir = 8
 	},
-/obj/item/storage/mirror{
+/obj/structure/mirror{
 	pixel_x = 27
 	},
 /obj/item/stock_parts/circuitboard/solar_control,

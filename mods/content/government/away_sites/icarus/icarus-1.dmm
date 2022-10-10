@@ -2633,13 +2633,13 @@
 	dir = 1;
 	pixel_y = 16
 	},
-/obj/item/storage/mirror{
+/obj/structure/mirror{
 	pixel_y = 30
 	},
 /turf/simulated/floor/tiled/white,
 /area/icarus/vessel)
 "nb" = (
-/obj/item/storage/mirror{
+/obj/structure/mirror{
 	pixel_x = 30
 	},
 /obj/structure/hygiene/sink{
@@ -2649,7 +2649,7 @@
 /turf/simulated/floor/tiled/white,
 /area/icarus/vessel)
 "ob" = (
-/obj/item/storage/mirror{
+/obj/structure/mirror{
 	pixel_x = -30
 	},
 /obj/structure/hygiene/sink{

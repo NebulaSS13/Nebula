@@ -313,7 +313,7 @@
 	},
 /area/map_template/rescue_base/base)
 "aR" = (
-/obj/item/storage/mirror,
+/obj/structure/mirror,
 /turf/unsimulated/wall,
 /area/map_template/rescue_base/base)
 "aS" = (

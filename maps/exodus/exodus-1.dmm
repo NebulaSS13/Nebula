@@ -2547,7 +2547,7 @@
 /turf/simulated/floor/plating,
 /area/exodus/maintenance/sub/starboard)
 "hi" = (
-/obj/item/storage/mirror{
+/obj/structure/mirror{
 	dir = 4;
 	pixel_x = -28
 	},
