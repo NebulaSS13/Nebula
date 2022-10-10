@@ -56,7 +56,7 @@
 	return FALSE
 
 /decl/surgery_step/necrotic/tissue/begin_step(mob/user, mob/living/target, target_zone, obj/item/tool)
-	var/obj/item/organ/affected = target.get_organ(target_zone)
+	var/obj/item/organ/external/affected = GET_EXTERNAL_ORGAN(target, target_zone)
 	if(affected)
 		var/target_organ = LAZYACCESS(global.surgeries_in_progress["\ref[target]"], target_zone)
 		user.visible_message(
@@ -80,7 +80,7 @@
 			E.disinfect()
 
 /decl/surgery_step/necrotic/tissue/fail_step(mob/living/user, mob/living/target, target_zone, obj/item/tool)
-	var/obj/item/organ/affected = target.get_organ(target_zone)
+	var/obj/item/organ/external/affected = GET_EXTERNAL_ORGAN(target, target_zone)
 	if(affected)
 		user.visible_message(
 			SPAN_DANGER("\The [user]'s hand slips, slicing into a healthy portion of \the [target]'s [affected.name] with \the [tool]!"),
@@ -151,7 +151,7 @@
 	return FALSE
 
 /decl/surgery_step/necrotic/regeneration/begin_step(mob/user, mob/living/target, target_zone, obj/item/tool)
-	var/obj/item/organ/affected = target.get_organ(target_zone)
+	var/obj/item/organ/external/affected = GET_EXTERNAL_ORGAN(target, target_zone)
 	if(affected)
 		user.visible_message(
 			"[user] starts pouring [tool]'s contents on \the [target]'s [LAZYACCESS(global.surgeries_in_progress["\ref[target]"], target_zone)].",
