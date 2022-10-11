@@ -1,7 +1,3 @@
-<div class='item'>
-	<div class='itemLabel'>Storage Medium</div>
-	{{:helper.link(data.current_source, null, { "PRG_change_filesource" : 1 }, null)}}
-</div>
 {{if data.transfer_file}}
 	<div class='item'>
 		<div class='itemLabel'>Current Transfer</div>
@@ -15,12 +11,6 @@
 		<span class='white'>{{:data.transfer_file}}</span> from <span class='white'>{{:data.transfer_from}}</span> to <span class='white'>{{:data.transfer_to}}</span>
 	</div>
 {{/if}}
-{{if data.fileserver}}
-	<div class='item'>
-		<div class='itemLabel'>File Server</div>
-		{{:helper.link(data.fileserver, null, { "PRG_changefileserver" : 1 }, null)}}
-	</div>
-	{{/if}}
 {{if data.error}}
 	<h2>An error has occured:</h2>
 	Additional information: {{:data.error}}<br>
@@ -36,44 +26,63 @@
 		</div><hr>
 		{{:data.filedata}}
 	{{else}}
-		<h2>Available files ({{:data.current_source}}):</h2>
-		<table>
-			<tr><th>File name
-			<th>File type
-			<th>File size (GQ)
-			<th>Operations
-			{{for data.files}}
-				<tr><td>{{:value.name}}
-				<td>.{{:value.type}}
-				<td>{{:value.size}}GQ
-				<td>
-					{{:helper.link('VIEW', null, { "PRG_openfile" : value.name })}}
-					{{:helper.link('DELETE', null, { "PRG_deletefile" : value.name }, value.undeletable ? 'disabled' : null)}}
-					{{:helper.link('RENAME', null, { "PRG_rename" : value.name }, value.undeletable ? 'disabled' : null)}}
-					{{:helper.link('CLONE', null, { "PRG_clone" : value.name }, value.undeletable ? 'disabled' : null)}}
-					{{:helper.link('TRANSFER TO', null, { "PRG_transferto" : value.name }, value.unsendable ? 'disabled' : null)}}
-			{{/for}}
+		<table><tr>
+		{{for data.disks}}
+			{{:helper.link(value.name, null, { "PRG_change_disk" : value.index }, value.selected ? 'selected' : null)}}
+		{{/for}}
+		{{:helper.link('+', null, { "PRG_change_disk" : '0' }, null)}}
 		</table>
-		{{if data.usbconnected}}
-		<h2>Available files (portable device):</h2>
-		<table>
-			<tr><th>File name
-			<th>File type
-			<th>File size (GQ)
-			<th>Operations
-			{{for data.usbfiles}}
-				<tr><td>{{:value.name}}
-				<td>.{{:value.type}}
-				<td>{{:value.size}}GQ
-				<td>
-					{{:helper.link('DELETE', null, { "PRG_usbdeletefile" : value.name }, value.undeletable ? 'disabled' : null)}}
-					{{if data.usbconnected}}
-						{{:helper.link('IMPORT', null, { "PRG_copyfromusb" : value.name }, value.undeletable ? 'disabled' : null)}}
+		<hr>
+		{{if data.current_disk}}
+			<h2>Available files ({{:data.current_disk}}):</h2>
+			<table>
+				<tr><th>File name
+				<th>File type
+				<th>File size (GQ)
+				<th>Operations
+				<th>
+					{{:helper.link('', 'arrowthickstop-1-n', { "PRG_up_directory" : 1}, data.up_directory ? null : 'disabled')}}
+					{{:helper.link('X', null, { "PRG_exit_disk" : 1})}}
+				</th>
+				{{for data.files}}
+					{{if value.dir}}
+						<tr><td>{{:helper.link(value.name, 'folder-collapsed', { "PRG_openfile" : value.name})}}
+						<td>
+						<td>
+						<td>{{:helper.link('RENAME', null, { "PRG_rename" : value.name}, value.unrenamable ? 'disabled' : null)}}
+							{{:helper.link('DELETE', null, { "PRG_deletefile" : value.name}, value.undeletable ? 'disabled' : null)}}
+							{{:helper.link('CLONE', null, { "PRG_clone" : value.name}, value.undeletable ? 'disabled' : null)}}
+							{{:helper.link('TRANSFER TO', null, { "PRG_transferto" : value.name}, value.unsendable ? 'disabled' : null)}}
+					{{else}}
+						<tr><td>{{:value.name}}
+						<td>.{{:value.type}}
+						<td>{{:value.size}}GQ
+						<td>
+							{{:helper.link('VIEW', null, { "PRG_openfile" : value.name})}}
+							{{:helper.link('DELETE', null, { "PRG_deletefile" : value.name}, value.undeletable ? 'disabled' : null)}}
+							{{:helper.link('RENAME', null, { "PRG_rename" : value.name}, value.undeletable ? 'disabled' : null)}}
+							{{:helper.link('CLONE', null, { "PRG_clone" : value.name}, value.undeletable ? 'disabled' : null)}}
+							{{:helper.link('TRANSFER TO', null, { "PRG_transferto" : value.name}, value.unsendable ? 'disabled' : null)}}
 					{{/if}}
-			{{/for}}
-		</table>
+				{{/for}}
+			</table>
+			{{:helper.link('NEW DATA FILE', null, { "PRG_newtextfile" : 1 })}}
+			{{:helper.link('NEW DIRECTORY', null, { "PRG_newdir" : 1 })}}
+		{{else}}
+			<h2>Select a disk.</h2>
+			<table>
+			<tr><th>Disk
+			<th>Description
+			<th>Action</th>
+			{{for data.avail_disks}}
+				<tr><td>{{:helper.link(value.name, null, { "PRG_select_disk" : value.name})}}
+				<td>{{:value.desc}}
+				{{if value.is_network}}
+					<td>{{:helper.link('UNMOUNT', null, { "PRG_unmount_network" : value.name})}}
+				{{/if}}
+				{{/for}}
+			</table>
+			{{:helper.link('MOUNT NETWORK DRIVE', null, { "PRG_mount_network" : 1 })}}
 		{{/if}}
-		{{:helper.link('NEW DATA FILE', null, { "PRG_newtextfile" : 1 })}}
 	{{/if}}
-	
 {{/if}}

@@ -1,6 +1,6 @@
-/datum/computer_network/proc/find_file_by_name(filename, mainframe_role = MF_ROLE_FILESERVER, list/accesses)
+/datum/computer_network/proc/find_file_by_name(filename, directory, mainframe_role = MF_ROLE_FILESERVER, list/accesses)
 	for(var/datum/extension/network_device/mainframe/M in get_mainframes_by_role(mainframe_role, accesses))
-		var/datum/computer_file/F = M.get_file(filename)
+		var/datum/computer_file/F = M.get_file(filename, directory)
 		if(F)
 			return F
 
@@ -15,20 +15,20 @@
 				. |= F
 				found_filenames |= F.filename
 
-/datum/computer_network/proc/store_file(datum/computer_file/F, mainframe_role = MF_ROLE_FILESERVER, list/accesses)
+/datum/computer_network/proc/store_file(datum/computer_file/file, directory, create_directories, list/accesses, mob/user, overwrite = TRUE, mainframe_role = MF_ROLE_FILESERVER)
 	for(var/datum/extension/network_device/mainframe/M in get_mainframes_by_role(mainframe_role, accesses))
-		if(M.store_file(F))
+		if(M.store_file(file, directory, create_directories, accesses, user, overwrite))
 			return TRUE
 
-/datum/computer_network/proc/remove_file(datum/computer_file/F, mainframe_role = MF_ROLE_FILESERVER, list/accesses)
+// We don't pass the directory since this is generally used in conjunction with get_all_files_of_type
+/datum/computer_network/proc/remove_file(datum/computer_file/F, list/accesses, mob/user, mainframe_role = MF_ROLE_FILESERVER)
 	for(var/datum/extension/network_device/mainframe/M in get_mainframes_by_role(mainframe_role, accesses))
-		if(M.delete_file(F))
+		if(M.delete_file(F, accesses, user))
 			return TRUE
 
-/datum/computer_network/proc/find_file_location(filename, mainframe_role = MF_ROLE_FILESERVER, list/accesses)
+/datum/computer_network/proc/find_file_location(datum/computer_file/F, list/accesses, mainframe_role = MF_ROLE_FILESERVER)
 	for(var/datum/extension/network_device/mainframe/M in get_mainframes_by_role(mainframe_role, accesses))
-		var/datum/computer_file/F = M.get_file(filename)
-		if(F)
+		if(F in M.get_all_files())
 			return M.network_tag
 
 // Reports
@@ -60,13 +60,13 @@
 	var/entry = "[stationtime2text()] - [source ? source : "*SYSTEM*" ] - "
 	entry += data
 	for(var/datum/extension/network_device/mainframe/M in mainframes_by_role[MF_ROLE_LOG_SERVER])
-		if(M.append_to_file("network_log", entry))
+		if(M.append_to_file("network_log", OS_LOGS_DIR, entry))
 			return TRUE
 
 /datum/computer_network/proc/get_log_files()
 	. = list()
 	for(var/datum/extension/network_device/mainframe/M in mainframes_by_role[MF_ROLE_LOG_SERVER])
-		var/logfile = M.get_file("network_log")
+		var/logfile = M.get_file("network_log", OS_LOGS_DIR)
 		if(logfile)
 			. += logfile
 

@@ -61,7 +61,7 @@
 			var/list/logs[0]
 			for(var/datum/extension/network_device/mainframe/M in network.get_mainframes_by_role(MF_ROLE_LOG_SERVER, user))
 				var/list/logdata[0]
-				var/datum/computer_file/data/logfile/F = M.get_file("network_log")
+				var/datum/computer_file/data/logfile/F = M.get_file("network_log", OS_LOGS_DIR, TRUE)
 				if(F)
 					logdata["server"] = M.network_tag
 					logdata["log"] = F.generate_file_data()
@@ -96,7 +96,11 @@
 		var/datum/extension/network_device/mainframe/M = locate(href_list["purgelogs"])
 		if(!istype(M))
 			return TOPIC_HANDLED
-		M.delete_file("network_log")
+		var/datum/computer_file/log_file = M.get_file("network_log", OS_LOGS_DIR)
+		if(!log_file)
+			return TOPIC_HANDLED
+		M.delete_file(log_file)
+		return TOPIC_REFRESH
 
 	if(href_list["updatemaxlogs"])
 		var/datum/extension/network_device/mainframe/M = locate(href_list["updatemaxlogs"])

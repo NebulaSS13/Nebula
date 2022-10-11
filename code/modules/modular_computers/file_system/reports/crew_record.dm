@@ -9,6 +9,8 @@ var/global/arrest_security_status =  "Arrest"
 /datum/computer_file/report/crew_record
 	filetype = "CDB"
 	size = 2
+	write_access = list(list(access_bridge))
+ 
 	var/icon/photo_front = null
 	var/icon/photo_side = null
 
@@ -165,7 +167,7 @@ var/global/arrest_security_status =  "Arrest"
 	CR.load_from_mob(H)
 	var/datum/computer_network/network = get_local_network_at(get_turf(H))
 	if(network)
-		network.store_file(CR, MF_ROLE_CREW_RECORDS)
+		network.store_file(CR, OS_RECORDS_DIR, TRUE, mainframe_role = MF_ROLE_CREW_RECORDS)
 	return CR
 
 // Gets crew records filtered by set of positions

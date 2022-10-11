@@ -123,7 +123,7 @@
 			logfile.stored_data += "[logstring]\[BR\]"
 		logfile.stored_data += "\[b\]Logfile dump completed.\[/b\]"
 		logfile.calculate_size()
-		if(!computer.store_file(logfile))
+		if(!computer.store_file(logfile, OS_LOGS_DIR, create_directories = TRUE))
 			computer.show_error(user, "I/O Error - Check hard drive and free space. Required space: [logfile.size]GQ.")
 	if(href_list["PRG_renamechannel"])
 		. = 1

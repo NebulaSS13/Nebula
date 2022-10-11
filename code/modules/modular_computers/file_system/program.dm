@@ -46,11 +46,11 @@
 	return temp
 
 // Used by programs that manipulate files.
-/datum/computer_file/program/proc/get_file(var/filename)
-	return computer.get_file(filename)
+/datum/computer_file/program/proc/get_file(var/filename, var/directory, var/list/accesses, var/mob/user)
+	return computer.get_file(filename, directory, accesses, user)
 
-/datum/computer_file/program/proc/create_file(var/newname, var/data = "", var/file_type = /datum/computer_file/data, var/list/metadata = null)
-	return computer.create_file(newname, data, file_type, metadata)
+/datum/computer_file/program/proc/create_file(var/newname, var/directory, var/data = "", var/file_type = /datum/computer_file/data, var/list/metadata = null, var/list/accesses, var/mob/user)
+	return computer.create_file(newname, directory, data, file_type, metadata, accesses, user)
 
 // Relays icon update to the computer.
 /datum/computer_file/program/proc/update_computer_icon()
@@ -99,9 +99,9 @@
 
 // This attempts to retrieve header data for NanoUIs. If implementing completely new device of different type than existing ones
 // always include the device here in this proc. This proc basically relays the request to whatever is running the program.
-/datum/computer_file/program/proc/get_header_data()
+/datum/computer_file/program/proc/get_header_data(file_browser = FALSE)
 	if(computer)
-		return computer.get_header_data()
+		return computer.get_header_data(file_browser)
 	return list()
 
 // This is performed on program startup. May be overriden to add extra logic. Remember to include ..() call.
@@ -112,7 +112,7 @@
 	if(nanomodule_path)
 		NM = new nanomodule_path(src, new /datum/topic_manager/program(src), src)
 		if(user)
-			NM.using_access = computer.get_access() // Programs nab access from users in their get_access() proc so don't bother adding it
+			NM.using_access = computer.get_access() // Nano modules nab access from users in their get_access() proc so don't bother adding it
 													// to the using list as well.
 	if(requires_network && network_destination)
 		generate_network_log("Connection opened to [network_destination].")
@@ -133,15 +133,20 @@
 		NM = null
 	return 1
 
+// Called on active or minimized programs when a mounted file storage is removed from the OS.
+/datum/computer_file/program/proc/on_file_storage_removal(var/datum/file_storage/removed)
+
 // This is called every tick when the program is enabled. Ensure you do parent call if you override it. If parent returns 1 continue with UI initialisation.
 // It returns 0 if it can't run or if NanoModule was used instead. I suggest using NanoModules where applicable.
 /datum/computer_file/program/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1)
 	SHOULD_CALL_PARENT(TRUE)
 	..()
-	if(program_state != PROGRAM_STATE_ACTIVE) // Our program was closed. Close the ui if it exists.
+	if(program_state < PROGRAM_STATE_ACTIVE) // Our program was closed. Close the ui if it exists.
 		if(ui)
 			ui.close()
 		return computer.ui_interact(user)
+	if(program_state == PROGRAM_STATE_BROWSER)
+		return 0
 	if(istype(NM))
 		NM.ui_interact(user, ui_key, null, force_open)
 		return 0
@@ -155,7 +160,8 @@
 // CONVENTIONS, READ THIS WHEN CREATING NEW PROGRAM AND OVERRIDING THIS PROC:
 // Topic calls are automagically forwarded from NanoModule this program contains.
 // Calls beginning with "PRG_" are reserved for programs handling.
-// Calls beginning with "PC_" are reserved for computer handling (by whatever runs the program)
+// Calls beginning with "PC_" are reserved for computer handling (by whatever runs the program).
+// Calls beginning with "BRS_" are reserved for program file browser handling (not to be confused with the file manager program).
 // ALWAYS INCLUDE PARENT CALL ..() OR DIE IN FIRE.
 /datum/computer_file/program/Topic(href, href_list)
 	if(..())
