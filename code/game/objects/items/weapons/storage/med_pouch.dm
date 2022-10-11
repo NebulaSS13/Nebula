@@ -171,6 +171,16 @@ Single Use Emergency Pouches
 	icon_state = "pill2"
 	volume     = 15
 
+/obj/item/chems/pill/pouch_pill/Initialize()
+	. = ..()
+	if(!reagents?.total_volume)
+		return INITIALIZE_HINT_QDEL
+
+/obj/item/chems/pill/pouch_pill/initialize_reagents(populate = TRUE)
+	. = ..()
+	if(populate && reagents?.get_primary_reagent_name())
+		SetName("emergency [reagents.get_primary_reagent_name()] pill ([reagents.total_volume]u)")
+
 /obj/item/chems/pill/pouch_pill/stabilizer/populate_reagents()
 	reagents.add_reagent(/decl/material/liquid/stabilizer, reagents.maximum_volume)
 
@@ -188,11 +198,6 @@ Single Use Emergency Pouches
 
 /obj/item/chems/pill/pouch_pill/burn_meds/populate_reagents()
 	reagents.add_reagent(/decl/material/liquid/burn_meds, reagents.maximum_volume)
-
-/obj/item/chems/pill/pouch_pill/initialize_reagents(populate = TRUE)
-	. = ..()
-	if(populate)
-		SetName("emergency [reagents.get_primary_reagent_name()] pill ([reagents.total_volume]u)")
 
 /obj/item/chems/hypospray/autoinjector/pouch_auto
 	name = "emergency autoinjector"
