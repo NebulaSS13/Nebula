@@ -9,6 +9,11 @@
 /obj/item/ai_verbs
 	name = "AI verb holder"
 
+/obj/item/ai_verbs/Initialize(ml, material_key)
+	if(!istype(loc, /obj/item/rig_module/ai_container))
+		return INITIALIZE_HINT_QDEL
+	. = ..()
+
 /obj/item/ai_verbs/verb/hardsuit_interface()
 	set category = "Hardsuit"
 	set name = "Open Hardsuit Interface"
