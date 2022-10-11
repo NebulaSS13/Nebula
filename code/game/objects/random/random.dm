@@ -1139,7 +1139,7 @@ var/global/list/random_useful_
 /proc/get_random_useful_type()
 	if(!random_useful_)
 		random_useful_ = list()
-		random_useful_ += /obj/item/pen/crayon/random
+		random_useful_ += /obj/random/crayon
 		random_useful_ += /obj/item/pen
 		random_useful_ += /obj/item/pen/blue
 		random_useful_ += /obj/item/pen/red
@@ -1400,10 +1400,18 @@ var/global/list/random_useful_
 	name = "random potted plant"
 	desc = "This is a random potted plant."
 	icon = 'icons/obj/structures/potted_plants.dmi'
-	icon_state = "plant-26"	
+	icon_state = "plant-26"
 	spawn_nothing_percentage = 0
 	var/static/list/blacklisted_plants = list(/obj/structure/flora/pottedplant/unusual)
 
 /obj/random/pottedplant/spawn_choices()
 	return subtypesof(/obj/structure/flora/pottedplant) - blacklisted_plants
 
+/obj/random/crayon
+	name = "random crayon"
+	desc = "This is a random crayon."
+	icon = 'icons/obj/items/crayons.dmi'
+	icon_state = "crayonred"
+
+/obj/random/crayon/spawn_choices()
+	return subtypesof(/obj/item/pen/crayon)
