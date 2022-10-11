@@ -6,14 +6,16 @@
 /datum/unit_test/items_test/start_test()
 	// Instantiate all spawnable items
 	for(var/path in subtypesof(/obj/item))
-		var/obj/item/I = path
-		if(!TYPE_IS_SPAWNABLE(I))
-			continue
-		I = new path
-		if(QDELETED(I))
-			log_warning("Item type '[path]' got destroyed during test init.")
-			continue
-		obj_test_instances[path] = I
+		try
+			var/obj/item/I = path
+			if(!TYPE_IS_SPAWNABLE(I))
+				continue
+			I = new path
+			if(QDELETED(I))
+				continue
+			obj_test_instances[path] = I
+		catch(var/exception/e)
+			failures += "Runtime during creation of [path]: [e]"
 
 	//Create tests
 	var/list/constant_tests = list()

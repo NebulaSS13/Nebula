@@ -23,9 +23,7 @@
 
 var/global/atom/movable/unit_test_last_obj_random_creation
 /obj/random/proc/unit_test_spawn_item()
-	var/build_path = unit_test_select_heaviest(spawn_choices())
-	global.unit_test_last_obj_random_creation = new build_path()
-
+	global.unit_test_last_obj_random_creation = create_instance(unit_test_select_heaviest(spawn_choices()))
 
 /proc/unit_test_select_heaviest(var/list/choices)
 	if(ispath(choices) || istype(choices, /datum))

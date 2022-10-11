@@ -9,6 +9,7 @@
 	w_class = ITEM_SIZE_SMALL
 	throw_speed = 3
 	throw_range = 10
+	is_spawnable_type = FALSE
 
 	var/secured = 0
 	var/obj/item/assembly/a_left = null
@@ -24,16 +25,16 @@
 	if(!QDELETED(a_left))
 		a_left.holder = null
 		QDEL_NULL(a_left)
-	else 
+	else
 		a_left = null
 	if(!QDELETED(a_right))
 		a_right.holder = null
 		QDEL_NULL(a_right)
-	else 
+	else
 		a_right = null
 	if(!QDELETED(special_assembly))
 		QDEL_NULL(special_assembly)
-	else 
+	else
 		special_assembly = null
 	return ..()
 

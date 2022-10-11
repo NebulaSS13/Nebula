@@ -362,7 +362,7 @@
 	return ..()
 
 /obj/item/rig_module/mounted/energy_blade/activate()
-	var/mob/living/M = holder.wearer
+	var/mob/living/M = holder?.wearer
 
 	if(!M.get_empty_hand_slot())
 		to_chat(M, SPAN_WARNING("Your hands are full."))
@@ -380,7 +380,7 @@
 
 	..()
 
-	var/mob/living/M = holder.wearer
+	var/mob/living/M = holder?.wearer
 
 	if(!M)
 		return

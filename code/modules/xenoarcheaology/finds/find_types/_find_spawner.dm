@@ -5,13 +5,9 @@
 	icon_state = "unknown2"
 	is_spawnable_type = FALSE // Does not cooperate with the random object unit test currently.
 
-/obj/random/archaeological_find/spawn_item()
-	var/decl/archaeological_find/F = GET_DECL(pickweight(spawn_choices()))
-	var/atom/A = F.create_find(loc)
-	if(pixel_x || pixel_y)
-		A.pixel_x = pixel_x
-		A.pixel_y = pixel_y
-	return A
+/obj/random/archaeological_find/create_instance(var/build_path, var/spawn_loc)
+	var/decl/archaeological_find/F = GET_DECL(build_path)
+	return F.create_find(spawn_loc)
 
 /obj/random/archaeological_find/spawn_choices()
 	return list(/decl/archaeological_find)

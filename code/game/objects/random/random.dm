@@ -21,14 +21,14 @@
 	if(isnull(loc))
 		return
 
-	var/build_path = pickweight(spawn_choices())
-
-	var/atom/A = new build_path(src.loc)
-	if(pixel_x || pixel_y)
+	var/atom/A = create_instance(pickweight(spawn_choices()), loc)
+	if(A && (pixel_x || pixel_y))
 		A.pixel_x = pixel_x
 		A.pixel_y = pixel_y
-
 	return A
+
+/obj/random/proc/create_instance(var/build_path, var/spawn_loc)
+	return new build_path(spawn_loc)
 
 // Returns an associative list in format path:weight
 /obj/random/proc/spawn_choices()

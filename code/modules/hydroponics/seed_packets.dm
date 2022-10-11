@@ -75,6 +75,7 @@ var/global/list/plant_seed_sprites = list()
 /obj/item/seeds/cutting
 	name = "cuttings"
 	desc = "Some plant cuttings."
+	is_spawnable_type = FALSE
 
 /obj/item/seeds/cutting/update_appearance()
 	..()
