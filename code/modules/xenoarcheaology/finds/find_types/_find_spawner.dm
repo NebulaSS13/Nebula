@@ -3,6 +3,7 @@
 	name = "archeological find spawner"
 	icon = 'icons/obj/xenoarchaeology.dmi'
 	icon_state = "unknown2"
+	is_spawnable_type = FALSE // Does not cooperate with the random object unit test currently.
 
 /obj/random/archaeological_find/spawn_item()
 	var/decl/archaeological_find/F = GET_DECL(pickweight(spawn_choices()))

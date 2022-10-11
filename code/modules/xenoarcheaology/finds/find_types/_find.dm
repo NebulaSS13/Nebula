@@ -27,7 +27,7 @@ var/global/list/responsive_carriers = list(
 
 	if(prob(engraving_chance))
 		descriptors += generate_engravings(I)
-	
+
 	var/extra_desc = get_additional_description()
 	if(extra_desc)
 		descriptors += extra_desc
@@ -50,7 +50,7 @@ var/global/list/responsive_carriers = list(
 	I.SetName(new_name)
 	if(prob(5))
 		I.talking_atom = new(I)
-	
+
 	return I
 
 /decl/archaeological_find/proc/spawn_item(atom/loc)
