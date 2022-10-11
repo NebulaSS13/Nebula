@@ -7,6 +7,7 @@
 	material = /decl/material/solid/meat
 	origin_tech = "{'materials':1,'biotech':1}"
 	throwforce = 2
+	abstract_type = /obj/item/organ
 
 	// Strings.
 	var/organ_tag = "organ"                // Unique identifier.

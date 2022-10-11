@@ -2,6 +2,8 @@
 	density = 1
 	plane = DEFAULT_PLANE
 	layer = MOB_LAYER
+	abstract_type = /mob
+	spawnable_type = TRUE
 
 	appearance_flags = PIXEL_SCALE | LONG_GLIDE
 	animate_movement = 2

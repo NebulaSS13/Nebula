@@ -86,6 +86,7 @@
 
 /obj/item/grenade/flashbang/instant
 	invisibility = INVISIBILITY_MAXIMUM
+	spawnable_type = FALSE // Do not manually spawn this, it will runtime/break.
 
 /obj/item/grenade/flashbang/instant/Initialize()
 	. = ..()

@@ -1,5 +1,3 @@
-// TODO: consider converting to /atom/movable or some other form that will
-// hel with removing abstract objects from contents checks and maptick.
 /obj/abstract
 	name =          ""
 	icon =          'icons/effects/landmarks.dmi'
@@ -12,6 +10,7 @@
 	anchored =      TRUE
 	unacidable =    TRUE
 	invisibility =  INVISIBILITY_MAXIMUM+1
+	abstract_type = /obj/abstract
 
 /obj/abstract/Initialize()
 	. = ..()

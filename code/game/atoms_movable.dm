@@ -2,6 +2,7 @@
 	layer = OBJ_LAYER
 	appearance_flags = TILE_BOUND | PIXEL_SCALE | LONG_GLIDE
 	glide_size = 8
+	abstract_type = /atom/movable
 
 	var/can_buckle = 0
 	var/buckle_movable = 0
