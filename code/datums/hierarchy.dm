@@ -15,7 +15,7 @@
 	. = ..()
 
 /decl/hierarchy/proc/is_category()
-	return DECL_INSTANCE_IS_ABSTRACT(src) && length(children)
+	return INSTANCE_IS_ABSTRACT(src) && length(children)
 
 /decl/hierarchy/proc/get_descendents()
 	if(!children)

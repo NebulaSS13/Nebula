@@ -31,6 +31,7 @@
 
 /obj/item/shield
 	name = "abstract shield"
+	abstract_type = /obj/item/shield
 	var/base_block_chance = 60
 
 /obj/item/shield/handle_shield(mob/user, var/damage, atom/damage_source = null, mob/attacker = null, var/def_zone = null, var/attack_text = "the attack")

@@ -34,7 +34,7 @@ var/global/list/skills = list()
 /decl/hierarchy/skill/Initialize()
 	. = ..()
 	GET_DECL(/decl/hierarchy/skill) // Make sure the full skill decl list is populated.
-	if(DECL_INSTANCE_IS_ABSTRACT(src))
+	if(INSTANCE_IS_ABSTRACT(src))
 		for(var/decl/hierarchy/skill/C in children)
 			global.skills |= C.get_descendents()
 

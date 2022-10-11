@@ -20,9 +20,9 @@
 	w_class = ITEM_SIZE_HUGE
 	slot_flags = SLOT_BACK
 	icon_state = ICON_STATE_WORLD
-
 	pickup_sound = 'sound/foley/scrape1.ogg'
 	drop_sound = 'sound/foley/tooldrop1.ogg'
+	abstract_type = /obj/item/twohanded
 
 	var/wielded = 0
 	var/force_wielded = 0
@@ -134,7 +134,7 @@
 /obj/item/twohanded/spear/on_update_icon()
 	. = ..()
 	add_overlay(list(
-			get_shaft_overlay("shaft"), 
+			get_shaft_overlay("shaft"),
 			mutable_appearance(icon, "cable", cable_color)
 		))
 

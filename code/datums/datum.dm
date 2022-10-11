@@ -1,7 +1,12 @@
 /datum
-	var/tmp/gc_destroyed //Time when this object was destroyed.
+	/// Used to indicate that this type is abstract and should not itself be instantiated.
+	var/abstract_type = /datum
+	/// Time when this object was destroyed.
+	var/tmp/gc_destroyed
+	/// Indicates if a processing subsystem is currenting queuing this datum
 	var/tmp/is_processing = FALSE
-	var/list/active_timers  //for SStimer
+	/// Used by the SStimer subsystem
+	var/list/active_timers
 
 #ifdef TESTING
 	var/tmp/running_find_references
