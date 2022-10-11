@@ -281,6 +281,7 @@
 #define MIN_WIND_PRESSURE 10
 
 #define TYPE_IS_ABSTRACT(D) (initial(D.abstract_type) == D)
+#define TYPE_IS_SPAWNABLE(D) (!TYPE_IS_ABSTRACT(D) && initial(D.is_spawnable_type))
 #define INSTANCE_IS_ABSTRACT(D) (D.abstract_type == D.type)
 
 //Damage stuff

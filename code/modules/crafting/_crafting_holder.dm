@@ -1,5 +1,5 @@
 /obj/item/crafting_holder
-	spawnable_type = FALSE // Do not manually spawn this, it will runtime/break.
+	is_spawnable_type = FALSE // Do not manually spawn this, it will runtime/break.
 	var/decl/crafting_stage/current_crafting_stage
 	var/label_name
 

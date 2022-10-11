@@ -1128,12 +1128,8 @@ var/global/floorIsLava = 0
 
 	var/list/matches = new()
 	for(var/path in subtypesof(/atom))
-		if(TYPE_IS_ABSTRACT(path))
-			continue
 		var/atom/path_cast = path
-		if(!intial(path_cast.spawnable_type))
-			continue
-		if(findtext(lowertext("[path]"), object))
+		if(TYPE_IS_SPAWNABLE(path_cast) && findtext(lowertext("[path]"), object))
 			matches += path
 
 	if(matches.len==0)

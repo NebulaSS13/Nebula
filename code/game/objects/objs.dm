@@ -1,7 +1,7 @@
 /obj
 	layer = OBJ_LAYER
 	animate_movement = 2
-	spawnable_type = TRUE
+	is_spawnable_type = TRUE
 	abstract_type = /obj
 
 	var/obj_flags

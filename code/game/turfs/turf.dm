@@ -2,7 +2,7 @@
 	icon = 'icons/turf/floors.dmi'
 	level = 1
 	abstract_type = /turf
-	spawnable_type = TRUE
+	is_spawnable_type = TRUE
 	layer = TURF_LAYER
 
 	var/turf_flags
