@@ -28,6 +28,8 @@
 
 /obj/item/crafting_holder/Initialize(var/ml, var/decl/crafting_stage/initial_stage, var/obj/item/target, var/obj/item/tool, var/mob/user)
 	. = ..(ml)
+	if(!initial_stage)
+		return INITIALIZE_HINT_QDEL
 	name = "[target.name] assembly"
 	var/mob/M = target.loc
 	if(istype(M))
