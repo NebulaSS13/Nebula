@@ -22,6 +22,7 @@
 /decl/species/vox
 	name = SPECIES_VOX
 	name_plural = SPECIES_VOX
+	base_prosthetics_model = /decl/prosthetics_manufacturer/vox/crap
 
 	default_emotes = list(
 		/decl/emote/audible/vox_shriek

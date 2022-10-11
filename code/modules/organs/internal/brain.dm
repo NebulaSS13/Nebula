@@ -64,7 +64,7 @@
 		to_chat(user, "This one seems particularly lifeless. Perhaps it will regain some of its luster later..")
 
 /obj/item/organ/internal/brain/do_install(mob/living/carbon/target, affected, in_place, update_icon, detached)
-	if(!(. = ..())) 
+	if(!(. = ..()))
 		return
 	if(istype(owner))
 		SetName(initial(name)) //Reset the organ's name to stay coherent if we're putting it back into someone's skull

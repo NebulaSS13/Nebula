@@ -28,7 +28,7 @@
 	var/decl/trait/T = GET_DECL(trait_type)
 	if(!T.Validate(trait_level))
 		return FALSE
-	
+
 	LAZYSET(traits, trait_type, trait_level)
 	return TRUE
 
@@ -36,7 +36,7 @@
 	var/decl/trait/T = GET_DECL(trait_type)
 	if(!T.Validate(trait_level))
 		return FALSE
-	
+
 	if(!traits) // If traits haven't been setup before, check if we need to do so now
 		var/species_level = species.traits[trait_type]
 		if(species_level == trait_level) // Matched the default species trait level, ignore

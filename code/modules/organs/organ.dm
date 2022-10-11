@@ -90,7 +90,7 @@
 
 //Allows specialization of roboticize() calls on initialization meant to be used when loading prosthetics
 // NOTE: This wouldn't be necessary if prothetics were a subclass
-/obj/item/organ/proc/setup_as_prosthetic()
+/obj/item/organ/proc/setup_as_prosthetic(var/forced_model = /decl/prosthetics_manufacturer/basic_human)
 	if(!species)
 		if(owner?.species)
 			set_species(owner.species)
@@ -98,9 +98,9 @@
 			set_species(global.using_map.default_species)
 
 	if(istype(material))
-		robotize(apply_material = material.type)
+		robotize(forced_model, apply_material = material.type)
 	else
-		robotize()
+		robotize(forced_model)
 	return TRUE
 
 //Called on initialization to add the neccessary reagents
@@ -332,7 +332,7 @@
 	if (can_recover())
 		damage = clamp(0, damage - round(amount, 0.1), max_damage)
 
-/obj/item/organ/proc/robotize(var/company, var/skip_prosthetics = 0, var/keep_organs = 0, var/apply_material = /decl/material/solid/metal/steel, var/check_bodytype, var/check_species)
+/obj/item/organ/proc/robotize(var/company = /decl/prosthetics_manufacturer/basic_human, var/skip_prosthetics = 0, var/keep_organs = 0, var/apply_material = /decl/material/solid/metal/steel, var/check_bodytype, var/check_species)
 	BP_SET_PROSTHETIC(src)
 	QDEL_NULL(dna)
 	reagents?.clear_reagents()

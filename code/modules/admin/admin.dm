@@ -175,27 +175,25 @@ var/global/floorIsLava = 0
 					body+="</td>"
 				body += "</tr></table>"
 
-			body += {"<br><br>
-				<b>Rudimentary transformation:</b><font size=2><br>These transformations only create a new mob type and copy stuff over. They do not take into account MMIs and similar mob-specific things. The buttons in 'Transformations' are preferred, when possible.</font><br>
-				<A href='?src=\ref[src];simplemake=observer;mob=\ref[M]'>Observer</A> |
-				\[ Xenos: <A href='?src=\ref[src];simplemake=larva;mob=\ref[M]'>Larva</A>
-				\[ Crew: <A href='?src=\ref[src];simplemake=human;mob=\ref[M]'>Human</A>
-				\[ slime: <A href='?src=\ref[src];simplemake=slime;mob=\ref[M]'>Baby</A>,
-				<A href='?src=\ref[src];simplemake=adultslime;mob=\ref[M]'>Adult</A> \]
-				<A href='?src=\ref[src];simplemake=monkey;mob=\ref[M]'>Monkey</A> |
-				<A href='?src=\ref[src];simplemake=robot;mob=\ref[M]'>Cyborg</A> |
-				<A href='?src=\ref[src];simplemake=cat;mob=\ref[M]'>Cat</A> |
-				<A href='?src=\ref[src];simplemake=runtime;mob=\ref[M]'>Runtime</A> |
-				<A href='?src=\ref[src];simplemake=corgi;mob=\ref[M]'>Corgi</A> |
-				<A href='?src=\ref[src];simplemake=ian;mob=\ref[M]'>Ian</A> |
-				<A href='?src=\ref[src];simplemake=crab;mob=\ref[M]'>Crab</A> |
-				<A href='?src=\ref[src];simplemake=coffee;mob=\ref[M]'>Coffee</A> |
-				\[ Construct: <A href='?src=\ref[src];simplemake=constructarmoured;mob=\ref[M]'>Armoured</A> ,
-				<A href='?src=\ref[src];simplemake=constructbuilder;mob=\ref[M]'>Builder</A> ,
-				<A href='?src=\ref[src];simplemake=constructwraith;mob=\ref[M]'>Wraith</A> \]
-				<A href='?src=\ref[src];simplemake=shade;mob=\ref[M]'>Shade</A>
-				<br>
-			"}
+			body += "<br><br><b>Rudimentary transformation:</b><font size=2><br>These transformations only create a new mob type and copy stuff over. They do not take into account MMIs and similar mob-specific things. The buttons in 'Transformations' are preferred, when possible.</font><br>"
+
+			var/list/href_transform_strings = list()
+			for(var/href_string in global.href_to_mob_type)
+				var/transform_data = global.href_to_mob_type[href_string]
+
+				// It's a category - iterate the contents.
+				if(islist(transform_data))
+					var/list/href_subcat_strings = list()
+					for(var/transform_string in transform_data)
+						href_subcat_strings += "<a href='?src=\ref[src];simplemake=[replacetext(transform_string, " ", "_")];mob=\ref[M]'>[transform_string]</a>"
+					href_transform_strings += "\[ <b>[href_string]:</b> [jointext(href_subcat_strings, " | ")] \]"
+
+				 // It's a single mob type - link it directly.
+				else if(ispath(transform_data))
+					href_transform_strings += "<a href='?src=\ref[src];simplemake=[replacetext(href_string, " ", "_")];mob=\ref[M]'>[href_string]</a>"
+
+			body += jointext(href_transform_strings, " | ")
+
 	body += {"<br><br>
 			<b>Other actions:</b>
 			<br>

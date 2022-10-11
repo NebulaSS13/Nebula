@@ -32,7 +32,8 @@
 
 /obj/structure/bed/chair/wheelchair/Bump(atom/A)
 	..()
-	if(!buckled_mob)	return
+	if(!buckled_mob)
+		return
 
 	if(!propelled)
 		return
@@ -114,6 +115,12 @@
 	//drunk wheelchair driving
 	direction = mob.AdjustMovementDirection(direction, mover)
 	DoMove(direction, mob)
+
+/obj/structure/bed/chair/wheelchair/relaymove(mob/user, direction)
+	if(user)
+		user.glide_size = glide_size
+	step(src, direction)
+	set_dir(direction)
 
 /obj/item/wheelchair_kit
 	name = "compressed wheelchair kit"
