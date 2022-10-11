@@ -24,6 +24,7 @@ var/global/item_test_exemptions_initialized = FALSE
 	global.item_damage_test_exemptions |= /obj/item/instrument                     //Base class not meant to be spawned
 	global.item_damage_test_exemptions |= /obj/item/shield                         //Base class not meant to be spawned
 	global.item_damage_test_exemptions |= /obj/item/integrated_electronics         //Base class not meant to be spawned
+	global.item_damage_test_exemptions |= /obj/item/crafting_holder                //Requires explicit contruction parameters
 
 
 	global.item_damage_test_exemptions |= typesof(/obj/item/radio/announcer)       //Special object
