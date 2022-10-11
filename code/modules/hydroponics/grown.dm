@@ -341,8 +341,10 @@ var/global/list/fruit_icon_cache = list()
 
 /obj/item/chems/food/fruit_slice/on_update_icon()
 	. = ..()
-	var/rind_colour = S.get_trait(TRAIT_PRODUCT_COLOUR)
-	var/flesh_colour = S.get_trait(TRAIT_FLESH_COLOUR) || rind_colour
+	if(!istype(seed))
+		return
+	var/rind_colour = seed.get_trait(TRAIT_PRODUCT_COLOUR)
+	var/flesh_colour = seed.get_trait(TRAIT_FLESH_COLOUR) || rind_colour
 	if(!fruit_icon_cache["rind-[rind_colour]"])
 		var/image/I = image(icon,"fruit_rind")
 		I.color = rind_colour
