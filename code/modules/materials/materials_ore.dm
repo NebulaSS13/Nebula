@@ -17,6 +17,7 @@
 	randpixel                  = 8
 	applies_material_name      = FALSE //Handled in override
 	randpixel                  = 6
+
 	///Associative list of cache key to the generate icons for the ore piles. We pre-generate a pile of all possible ore icon states, and make them available
 	var/static/list/cached_ore_icon_states
 	///A list of all the existing ore icon states in the ore file
@@ -113,49 +114,70 @@
 // Map definitions.
 /obj/item/stack/material/ore/uranium
 	material = /decl/material/solid/pitchblende
+	is_spawnable_type = TRUE
 /obj/item/stack/material/ore/iron
 	material = /decl/material/solid/hematite
+	is_spawnable_type = TRUE
 /obj/item/stack/material/ore/coal
 	material = /decl/material/solid/graphite
+	is_spawnable_type = TRUE
 /obj/item/stack/material/ore/glass
 	material = /decl/material/solid/sand
+	is_spawnable_type = TRUE
 /obj/item/stack/material/ore/silver
 	material = /decl/material/solid/metal/silver
+	is_spawnable_type = TRUE
 /obj/item/stack/material/ore/gold
 	material = /decl/material/solid/metal/gold
+	is_spawnable_type = TRUE
 /obj/item/stack/material/ore/diamond
 	material = /decl/material/solid/gemstone/diamond
+	is_spawnable_type = TRUE
 /obj/item/stack/material/ore/osmium
 	material = /decl/material/solid/metal/platinum
+	is_spawnable_type = TRUE
 /obj/item/stack/material/ore/hydrogen
 	material = /decl/material/solid/metallic_hydrogen
+	is_spawnable_type = TRUE
 /obj/item/stack/material/ore/slag
 	material = /decl/material/solid/slag
+	is_spawnable_type = TRUE
 /obj/item/stack/material/ore/phosphorite
 	material = /decl/material/solid/phosphorite
+	is_spawnable_type = TRUE
 /obj/item/stack/material/ore/aluminium
 	material = /decl/material/solid/bauxite
+	is_spawnable_type = TRUE
 /obj/item/stack/material/ore/rutile
 	material = /decl/material/solid/rutile
-
+	is_spawnable_type = TRUE
 /obj/item/stack/material/ore/hydrogen_hydrate
 	material = /decl/material/solid/ice/hydrogen // todo: set back to hydrate when clathrate is added to hydrogen hydrate dname
+	is_spawnable_type = TRUE
 /obj/item/stack/material/ore/methane
 	material = /decl/material/solid/ice/hydrate/methane
+	is_spawnable_type = TRUE
 /obj/item/stack/material/ore/oxygen
 	material = /decl/material/solid/ice/hydrate/oxygen
+	is_spawnable_type = TRUE
 /obj/item/stack/material/ore/nitrogen
 	material = /decl/material/solid/ice/hydrate/nitrogen
+	is_spawnable_type = TRUE
 /obj/item/stack/material/ore/carbon_dioxide
 	material = /decl/material/solid/ice/hydrate/carbon_dioxide
+	is_spawnable_type = TRUE
 /obj/item/stack/material/ore/argon
 	material = /decl/material/solid/ice/hydrate/argon
+	is_spawnable_type = TRUE
 /obj/item/stack/material/ore/neon
 	material = /decl/material/solid/ice/hydrate/neon
+	is_spawnable_type = TRUE
 /obj/item/stack/material/ore/krypton
 	material = /decl/material/solid/ice/hydrate/krypton
+	is_spawnable_type = TRUE
 /obj/item/stack/material/ore/xenon
 	material = /decl/material/solid/ice/hydrate/xenon
+	is_spawnable_type = TRUE
 
 /client/proc/spawn_ore_pile()
 	set name = "Spawn Ore Pile"

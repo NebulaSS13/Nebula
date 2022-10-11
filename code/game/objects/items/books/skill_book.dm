@@ -218,6 +218,7 @@ Skill books that increase your skills while you activate and hold them
 ORGANIZATIONAL
 */
 /obj/item/book/skill/organizational
+	abstract_type = /obj/item/book/skill/organizational
 
 //literacy
 /obj/item/book/skill/organizational/literacy
@@ -256,6 +257,7 @@ ORGANIZATIONAL
 GENERAL
 */
 /obj/item/book/skill/general
+	abstract_type = /obj/item/book/skill/general
 
 //eva
 /obj/item/book/skill/general/eva
@@ -366,6 +368,7 @@ GENERAL
 SERVICE
 */
 /obj/item/book/skill/service
+	abstract_type = /obj/item/book/skill/service
 
 //botany
 /obj/item/book/skill/service/botany
@@ -413,6 +416,7 @@ SERVICE
 SECURITY
 */
 /obj/item/book/skill/security
+	abstract_type = /obj/item/book/skill/security
 	icon_state = "bookSpaceLaw"
 
 //combat
@@ -482,6 +486,7 @@ SECURITY
 ENGINEERING
 */
 /obj/item/book/skill/engineering
+	abstract_type = /obj/item/book/skill/engineering
 	icon_state = "bookEngineering"
 
 //construction
@@ -579,6 +584,7 @@ ENGINEERING
 RESEARCH
 */
 /obj/item/book/skill/research
+	abstract_type = /obj/item/book/skill/research
 	icon_state = "analysis"
 
 //devices
@@ -625,6 +631,7 @@ RESEARCH
 MEDICAL
 */
 /obj/item/book/skill/medical
+	abstract_type = /obj/item/book/skill/medical
 	icon_state = "bookMedical"
 
 //chemistry

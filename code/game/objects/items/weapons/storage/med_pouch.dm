@@ -170,6 +170,7 @@ Single Use Emergency Pouches
 	desc       = "An emergency pill from an emergency medical pouch"
 	icon_state = "pill2"
 	volume     = 15
+	abstract_type = /obj/item/chems/pill/pouch_pill
 
 /obj/item/chems/pill/pouch_pill/Initialize()
 	. = ..()

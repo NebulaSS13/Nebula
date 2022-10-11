@@ -16,6 +16,7 @@
 	lock_picking_level = 3
 	matter_multiplier = 0.3
 	material = /decl/material/solid/metal/steel
+	is_spawnable_type = TRUE
 
 	pickup_sound = 'sound/foley/tooldrop3.ogg'
 	drop_sound = 'sound/foley/tooldrop2.ogg'
