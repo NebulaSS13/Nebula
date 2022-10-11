@@ -2030,6 +2030,7 @@
 #include "code\modules\hydroponics\trays\tray_update_icons.dm"
 #include "code\modules\inertial_damper\inertial_damper.dm"
 #include "code\modules\integrated_electronics\_defines.dm"
+#include "code\modules\integrated_electronics\core\_electronics.dm"
 #include "code\modules\integrated_electronics\core\analyzer.dm"
 #include "code\modules\integrated_electronics\core\assemblies.dm"
 #include "code\modules\integrated_electronics\core\debugger.dm"

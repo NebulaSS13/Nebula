@@ -10,16 +10,13 @@
 	used for power or data transmission."
 	icon = 'icons/obj/assemblies/electronic_tools.dmi'
 	icon_state = "wirer-wire"
-	obj_flags = OBJ_FLAG_CONDUCTIBLE
-	w_class = ITEM_SIZE_SMALL
-	var/datum/integrated_io/selected_io = null
-	var/mode = WIRE
-	material = /decl/material/solid/metal/aluminium
 	matter = list(
 		/decl/material/solid/metal/steel = MATTER_AMOUNT_REINFORCEMENT,
 		/decl/material/solid/fiberglass = MATTER_AMOUNT_TRACE,
 		/decl/material/solid/plastic = MATTER_AMOUNT_TRACE
 	)
+	var/datum/integrated_io/selected_io = null
+	var/mode = WIRE
 
 /obj/item/integrated_electronics/wirer/on_update_icon()
 	. = ..()
