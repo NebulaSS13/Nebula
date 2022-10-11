@@ -541,6 +541,7 @@ var/global/list/global/tank_gauge_cache = list()
 /obj/item/tankassemblyproxy
 	name = "Tank assembly proxy"
 	desc = "Used as a stand in to trigger single tank assemblies... but you shouldn't see this."
+	is_spawnable_type = FALSE
 	var/obj/item/tank/tank = null
 	var/obj/item/assembly_holder/assembly = null
 

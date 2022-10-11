@@ -10,6 +10,7 @@
 	origin_tech = "{'biotech':1}"
 	use_single_icon = TRUE
 	item_state = null
+	is_spawnable_type = FALSE
 	var/last_holder
 
 /obj/item/holder/Initialize()

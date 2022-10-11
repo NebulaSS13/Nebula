@@ -89,20 +89,20 @@
 
 /obj/structure/rubble/house
 	loot = list(
-		/obj/item/archaeological_find/house,
-		/obj/item/archaeological_find/construction = 2
+		/obj/random/archaeological_find/house,
+		/obj/random/archaeological_find/construction = 2
 	)
 
 /obj/structure/rubble/lab
 	emptyprob = 30
 	loot = list(
-		/obj/item/archaeological_find/lab,
-		/obj/item/archaeological_find/construction = 6
+		/obj/random/archaeological_find/lab,
+		/obj/random/archaeological_find/construction = 6
 	)
 
 /obj/structure/rubble/war
 	emptyprob = 95 //can't have piles upon piles of guns
 	loot = list(
-		/obj/item/archaeological_find/blade,
-		/obj/item/archaeological_find/gun
+		/obj/random/archaeological_find/blade,
+		/obj/random/archaeological_find/gun
 	)

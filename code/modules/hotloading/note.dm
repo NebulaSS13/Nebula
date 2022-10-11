@@ -15,7 +15,12 @@
 		icon = SSsecrets.get_file("[loaded_data["_source_dir"]]/[icon]")
 
 /obj/item/paper/secret_note
+	is_spawnable_type = FALSE // Don't spawn this manually.
 	var/secret_key
+
+/obj/item/paper/secret_note/Initialize()
+	..()
+	return validate_secret()
 
 /obj/item/paper/secret_note/proc/validate_secret()
 	var/my_coords = "[x || loc?.x || "NULL"], [y || loc?.y || "NULL"], [z || loc?.z || "NULL"]"
@@ -44,10 +49,6 @@
 		PRINT_STACK_TRACE("Icon file for secret_key [secret_key] does not contain post-content icon_state [icon_state].")
 		return INITIALIZE_HINT_QDEL
 	return INITIALIZE_HINT_NORMAL
-
-/obj/item/paper/secret_note/Initialize()
-	..()
-	return validate_secret()
 
 /obj/item/paper/secret_note/random
 	var/secrets_should_not_repeat = TRUE

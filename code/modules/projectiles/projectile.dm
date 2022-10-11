@@ -11,6 +11,8 @@
 	pass_flags = PASS_FLAG_TABLE
 	mouse_opacity = 0
 	randpixel = 0
+	is_spawnable_type = FALSE
+
 	var/bumped = 0		//Prevents it from hitting more than one guy at once
 	var/def_zone = ""	//Aiming at
 	var/mob/firer = null//Who shot it
