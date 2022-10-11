@@ -154,7 +154,7 @@ var/global/item_test_exemptions_initialized = FALSE
 			IT.failures += "Item type '[I.type]' had its health defined as null, and its material '[I.material.type]' left it as null!"
 			return FALSE
 	else if(I.health != initial(I.health))
-		IT.failures += "Item type '[I.type]' defined a health value ([I.health]), but it was replaced during init!"
+		IT.failures += "Item type '[I.type]' defined a health value ([I.health? I.health : "null"]), but it was replaced during init!"
 		return FALSE
 
 /////////////////////////////////////////////////////////
@@ -168,16 +168,16 @@ var/global/item_test_exemptions_initialized = FALSE
 	//Check if invincibility actually works
 	if(!isnull(old_health))
 		if(old_health && old_health == I.health && old_health != ITEM_HEALTH_NO_DAMAGE && I.max_health != ITEM_HEALTH_NO_DAMAGE)
-			failure_text += "Item took no damage and isn't defined as invincible. (old: [old_health], new: [I.health], returned: [damage_taken_returned]) "
+			failure_text += "Item took no damage and isn't defined as invincible. (old: [old_health? old_health : "null"], new: [I.health? I.health : "null"], returned: [damage_taken_returned? damage_taken_returned : "null"]) "
 		if(old_health != I.health && (old_health == ITEM_HEALTH_NO_DAMAGE || I.max_health == ITEM_HEALTH_NO_DAMAGE))
-			failure_text += "Item took some damage while defined as invincible. (old: [old_health], new: [I.health], returned: [damage_taken_returned]) "
+			failure_text += "Item took some damage while defined as invincible. (old: [old_health? old_health : "null"], new: [I.health? I.health : "null"], returned: [damage_taken_returned? damage_taken_returned : "null"]) "
 	else
 		failure_text += "Item health is null after init. "
 
 	//Check the take damage returned damage value
 	var/damage_taken_actual = (old_health == ITEM_HEALTH_NO_DAMAGE || I.max_health == ITEM_HEALTH_NO_DAMAGE || isnull(old_health))? 0 : old_health - I.health
 	if(damage_taken_returned != damage_taken_actual)
-		failure_text += "take_damage() returned the wrong amount of damage (health before: [old_health], after: [I.health], returned damage:[damage_taken_returned])."
+		failure_text += "take_damage() returned the wrong amount of damage (health before: [old_health? old_health : "null"], after: [I.health? I.health : "null"], returned damage:[damage_taken_returned? damage_taken_returned : "null"])."
 
 	if(length(failure_text))
 		IT.failures += "Item type [I.type]: [failure_text]"
