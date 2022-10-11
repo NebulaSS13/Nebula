@@ -73,17 +73,14 @@
 	if(notsuspended)
 		SSmachines.wake()
 
-	for (var/i in machines)
-		var/obj/machinery/machine = i
+	for (var/obj/machinery/machine as anything in machines)
 		machine.power_change()
 
-	for (var/i in turfs)
-		var/turf/T = i
-		T.post_change()
+	for (var/turf/T as anything in turfs)
 		if(template_flags & TEMPLATE_FLAG_NO_RUINS)
 			T.turf_flags |= TURF_FLAG_NORUINS
 		if(template_flags & TEMPLATE_FLAG_NO_RADS)
-			qdel(SSradiation.sources_assoc[i])
+			qdel(SSradiation.sources_assoc[T])
 		if(istype(T,/turf/simulated))
 			var/turf/simulated/sim = T
 			sim.update_air_properties()
