@@ -17,6 +17,7 @@ var/global/list/aspect_categories = list() // Containers for ease of printing da
 	var/need_aspect_sort
 
 /decl/aspect
+	abstract_type = /decl/aspect
 	var/name                                             // Name/unique index.
 	var/desc = "An aspect is a trait of your character." // Flavour text.
 	var/aspect_cost = 1                                  // Number of points spent or gained by taking this aspect
@@ -26,13 +27,14 @@ var/global/list/aspect_categories = list() // Containers for ease of printing da
 	var/list/incompatible_with                           // Typelist of aspects that prevent this one from being taken
 	var/available_at_chargen = TRUE                      // Whether or not aspect is shown in chargen prefs
 	var/aspect_flags = 0
-	var/transfer_with_mind = TRUE
+	var/transfer_with_mind = TRUE // TODO: IMPLEMENT
 	var/sort_value = 0
+	var/list/permitted_species
 	var/list/blocked_species
 
-/decl/aspect/Initialize()
-	. = ..()
-	
+/decl/aspect/proc/build_references()
+	SHOULD_CALL_PARENT(TRUE)
+
 	// This is here until there are positive traits to balance out the negative ones;
 	// currently the cost calc serves no purpose and looks really silly sitting at -14/5.
 	aspect_cost = 0
@@ -62,6 +64,8 @@ var/global/list/aspect_categories = list() // Containers for ease of printing da
 		if(blacklisted_type in pref.aspects)
 			return FALSE
 	if(blocked_species && (pref.species in blocked_species))
+		return FALSE
+	if(permitted_species && !(pref.species in permitted_species))
 		return FALSE
 	return TRUE
 
@@ -143,7 +147,7 @@ var/global/list/aspect_categories = list() // Containers for ease of printing da
 /datum/admins/proc/show_aspects()
 	set category = "Admin"
 	set name = "Show Aspects"
-	if(!check_rights(R_INVESTIGATE)) 
+	if(!check_rights(R_INVESTIGATE))
 		return
 	var/mob/M = input("Select mob.", "Select mob.") as null|anything in global.living_mob_list_
 	if(M)

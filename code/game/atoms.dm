@@ -22,6 +22,7 @@
 	var/tmp/default_pixel_x
 	var/tmp/default_pixel_y
 	var/tmp/default_pixel_z
+	var/tmp/default_pixel_w
 
 // This is called by the maploader prior to Initialize to perform static modifications to vars set on the map. Intended use case: adjust tag vars on duplicate templates.
 /atom/proc/modify_mapped_vars(map_hash)
@@ -77,7 +78,12 @@
 // If you want to use this, the atom must have the PROXMOVE flag, and the moving
 // atom must also have the PROXMOVE flag currently to help with lag. ~ ComicIronic
 /atom/proc/HasProximity(atom/movable/AM)
-	return
+	SHOULD_CALL_PARENT(TRUE)
+	set waitfor = FALSE
+	if(!istype(AM))
+		PRINT_STACK_TRACE("DEBUG: HasProximity called with [AM] on [src] ([usr]).")
+		return FALSE
+	return TRUE
 
 /atom/proc/emp_act(var/severity)
 	return
@@ -85,6 +91,7 @@
 /atom/proc/set_density(var/new_density)
 	if(density != new_density)
 		density = !!new_density
+		events_repository.raise_event(/decl/observ/density_set, src, !density, density)
 
 /atom/proc/bullet_act(obj/item/projectile/P, def_zone)
 	P.on_hit(src, 0, def_zone)
@@ -149,17 +156,30 @@
 //called to set the atom's dir and used to add behaviour to dir-changes
 /atom/proc/set_dir(new_dir)
 	SHOULD_CALL_PARENT(TRUE)
+
+	// This attempts to mimic BYOND's handling of diagonal directions and cardinal icon states.
+	var/old_dir = dir
+	if((atom_flags & ATOM_FLAG_BLOCK_DIAGONAL_FACING) && !IsPowerOfTwo(new_dir))
+		if(old_dir & new_dir)
+			new_dir = old_dir
+		else
+			new_dir &= global.adjacentdirs[old_dir]
+
 	. = new_dir != dir
+	if(!.)
+		return
+
 	dir = new_dir
-	if(.)
-		if(light_source_solo)
-			light_source_solo.source_atom.update_light()
-		else if(light_source_multi)
-			var/datum/light_source/L
-			for(var/thing in light_source_multi)
-				L = thing
-				if(L.light_angle)
-					L.source_atom.update_light()
+	if(light_source_solo)
+		light_source_solo.source_atom.update_light()
+	else if(light_source_multi)
+		var/datum/light_source/L
+		for(var/thing in light_source_multi)
+			L = thing
+			if(L.light_angle)
+				L.source_atom.update_light()
+
+	events_repository.raise_event(/decl/observ/dir_set, src, old_dir, new_dir)
 
 /atom/proc/set_icon_state(var/new_icon_state)
 	SHOULD_CALL_PARENT(TRUE)

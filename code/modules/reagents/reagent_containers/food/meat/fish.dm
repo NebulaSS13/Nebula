@@ -6,7 +6,7 @@
 	center_of_mass = @"{'x':16,'y':13}"
 	bitesize = 3
 
-/obj/item/chems/food/fishfingers/Initialize()
+/obj/item/chems/food/fishfingers/populate_reagents()
 	. = ..()
 	reagents.add_reagent(/decl/material/liquid/nutriment/protein, 4)
 
@@ -21,10 +21,10 @@
 	nutriment_amt = 3
 	bitesize = 3
 
-/obj/item/chems/food/cubancarp/Initialize()
+/obj/item/chems/food/cubancarp/populate_reagents()
 	. = ..()
 	reagents.add_reagent(/decl/material/liquid/nutriment/protein, 3)
-	reagents.add_reagent(/decl/material/liquid/capsaicin, 3)
+	reagents.add_reagent(/decl/material/liquid/capsaicin,         3)
 
 /obj/item/chems/food/fishandchips
 	name = "fish and chips"
@@ -36,6 +36,6 @@
 	nutriment_amt = 3
 	bitesize = 3
 
-/obj/item/chems/food/fishandchips/Initialize()
+/obj/item/chems/food/fishandchips/populate_reagents()
 	. = ..()
 	reagents.add_reagent(/decl/material/liquid/nutriment/protein, 3)

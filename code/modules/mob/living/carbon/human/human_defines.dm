@@ -44,7 +44,6 @@
 	// END TODO
 
 	var/icon/stand_icon = null
-	var/icon/lying_icon = null
 
 	var/voice = ""	//Instead of new say code calling GetVoice() over and over and over, we're just going to ask this variable, which gets updated in Life()
 
@@ -91,6 +90,9 @@
 	var/list/appearance_descriptors
 
 	var/list/smell_cooldown
+
+	/// var for caching last getHalloss() run to avoid looping through organs over and over and over again
+	var/last_pain
 
 	ai = /datum/ai/human
 

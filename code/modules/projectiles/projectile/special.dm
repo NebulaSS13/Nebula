@@ -170,6 +170,14 @@
 	icon_state = ICON_STATE_WORLD
 	var/primed = null
 	throwforce = 15
+	material = /decl/material/solid/fiberglass
+	matter = list(
+		/decl/material/solid/metal/aluminium = MATTER_AMOUNT_REINFORCEMENT,
+		/decl/material/solid/metal/copper    = MATTER_AMOUNT_TRACE,
+		/decl/material/solid/silicon         = MATTER_AMOUNT_TRACE,
+		/decl/material/liquid/anfo           = MATTER_AMOUNT_REINFORCEMENT,
+		/decl/material/liquid/fuel           = MATTER_AMOUNT_REINFORCEMENT,
+	)
 
 /obj/item/missile/throw_impact(atom/hit_atom)
 	..()

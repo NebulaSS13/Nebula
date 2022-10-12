@@ -313,7 +313,7 @@
 	},
 /area/map_template/rescue_base/base)
 "aR" = (
-/obj/item/storage/mirror,
+/obj/structure/mirror,
 /turf/unsimulated/wall,
 /area/map_template/rescue_base/base)
 "aS" = (
@@ -905,8 +905,8 @@
 	pixel_x = 4;
 	pixel_y = 32
 	},
-/obj/item/taperoll/police,
-/obj/item/taperoll/police,
+/obj/item/stack/tape_roll/barricade_tape/police,
+/obj/item/stack/tape_roll/barricade_tape/police,
 /turf/unsimulated/floor{
 	dir = 1;
 	icon_state = "vault"
@@ -1423,8 +1423,8 @@
 /obj/item/chems/spray/antiseptic,
 /obj/item/chems/spray/antiseptic,
 /obj/item/storage/box/bloodpacks,
-/obj/item/tape/medical,
-/obj/item/tape/medical,
+/obj/item/stack/tape_roll/barricade_tape/medical,
+/obj/item/stack/tape_roll/barricade_tape/medical,
 /obj/item/flashlight/pen,
 /obj/item/flashlight/pen,
 /turf/unsimulated/floor{
@@ -2221,16 +2221,16 @@
 /area/map_template/rescue_base/base)
 "eB" = (
 /obj/structure/table/reinforced,
-/obj/item/taperoll/engineering,
-/obj/item/taperoll/engineering,
-/obj/item/taperoll/atmos,
-/obj/item/taperoll/atmos,
+/obj/item/stack/tape_roll/barricade_tape/engineering,
+/obj/item/stack/tape_roll/barricade_tape/engineering,
+/obj/item/stack/tape_roll/barricade_tape/atmos,
+/obj/item/stack/tape_roll/barricade_tape/atmos,
 /obj/item/multitool,
 /obj/item/multitool,
-/obj/item/ducttape,
-/obj/item/ducttape,
-/obj/item/ducttape,
-/obj/item/ducttape,
+/obj/item/stack/tape_roll/duct_tape,
+/obj/item/stack/tape_roll/duct_tape,
+/obj/item/stack/tape_roll/duct_tape,
+/obj/item/stack/tape_roll/duct_tape,
 /obj/item/cell/high,
 /obj/item/cell/high,
 /obj/item/cell/high,

@@ -8,15 +8,13 @@
 	var/network_target // Network tag of whatever device is being targeted on the network by commands.
 
 	// Terminal can act as a file transfer utility.
-	var/list/disks = list(
-		/datum/file_storage/disk,
-		/datum/file_storage/disk/removable,
-		/datum/file_storage/network
-	)
 	var/datum/file_storage/current_disk
+	var/datum/computer_file/directory/current_directory
+
 	var/datum/file_transfer/current_move
 
 	var/datum/extension/interactive/os/computer
+	var/list/disks = list()
 
 /datum/terminal/New(mob/user, datum/extension/interactive/os/computer)
 	..()
@@ -55,7 +53,7 @@
 /datum/terminal/Process()
 	if(current_move)
 		var/result = current_move.update_progress()
-		if(!result)
+		if(result != OS_FILE_SUCCESS)
 			if(QDELETED(current_move))
 				append_to_history("File Move Cancelled: Unknown error.")
 			else
@@ -66,7 +64,7 @@
 			var/completion = round(1 - (current_move.left_to_transfer / current_move.transferring.size), 0.01) * 100
 			append_to_history("File Move: [completion]% complete.")
 		else
-			append_to_history("File Move: Successfully copied file '[current_move.transferring.filename]' to [current_move.transfer_to].")
+			append_to_history("File Move: Successfully [current_move.copying ? "copied" : "moved"] file '[current_move.transferring.filename]' to '[current_move.transfer_to.get_dir_path(current_move.directory_to, TRUE)]'.")
 			QDEL_NULL(current_move)
 
 	if(!can_use(get_user()))
@@ -100,7 +98,7 @@
 			account_name = "LOCAL"
 	else
 		account_name = "GUEST"
-	content += "<form action='byond://'><input type='hidden' name='src' value='\ref[src]'>> [account_name] <input type='text' size='40' name='input' autofocus><input type='submit' value='Enter'></form>"
+	content += "<form action='byond://'><input type='hidden' name='src' value='\ref[src]'>>[account_name]:/[current_disk?.get_dir_path(current_directory, TRUE)]<input type='text' size='40' name='input' autofocus><input type='submit' value='Enter'></form>"
 	content += "<i>type `man` for a list of available commands.</i>"
 	panel.set_content("<tt>[jointext(content, "<br>")]</tt>")
 
@@ -120,9 +118,10 @@
 		return 1
 
 /datum/terminal/proc/append_to_history(var/text)
-	history += text
-	if(length(history) > history_max_length)
-		history.Cut(1, length(history) - history_max_length + 1)
+	if(length(text))
+		history += text
+		if(length(history) > history_max_length)
+			history.Cut(1, length(history) - history_max_length + 1)
 	update_content()
 	panel.update()
 
@@ -155,3 +154,116 @@
 /datum/terminal/proc/get_access(mob/user)
 	var/datum/extension/interactive/os/account_computer = get_account_computer()
 	return(account_computer.get_access(user))
+
+// Returns list(/datum/file_storage, directory) on success. Returns error code on failure.
+/datum/terminal/proc/parse_directory(directory_path, create_directories = FALSE)
+	var/datum/file_storage/target_disk = current_disk
+	var/datum/computer_file/directory/root_dir = current_directory
+	
+	if(!length(directory_path))
+		return list(target_disk, root_dir)
+
+	if(directory_path[1] == "/") // This is an absolute path, so we can pass it directly to the OS proc to be processed.
+		return computer.parse_directory(directory_path, create_directories)
+
+	// Otherwise, we append the working directory path to the passed path.
+	var/list/directories = splittext(directory_path, "/")
+	
+	// When splitting the text, there could be blank strings at either end, so remove them. If there's any in the body of the path, there was a 
+	// missed input, so leave them.
+	if(!length(directories[1]))
+		directories.Cut(1, 2)
+	if(!length(directories[directories.len]))
+		directories.Cut(directories.len)
+
+	for(var/dir in directories)
+		if(dir == "..") // Up a directory.
+			if(root_dir)
+				root_dir = root_dir.get_directory()
+				directories.Cut(1, 2)
+				continue
+			if(target_disk)
+				target_disk = null
+				directories.Cut(1, 2)
+				continue
+			// We're trying to move up past the mounting points, return failure.
+			return OS_DIR_NOT_FOUND
+
+		if(!target_disk)
+			target_disk = computer.mounted_storage[dir]
+			if(!target_disk) // Invalid disk entered.
+				return OS_DIR_NOT_FOUND
+			directories.Cut(1, 2)
+			
+		break // Any further use of ../ is handled by the hard drive.
+
+	// If we were only pathing to the parent of a directory or to a disk, we can return early.
+	if(!length(directories))
+		return list(target_disk, root_dir)
+
+	// Assemble the final path from whatever root directory we're in, and the remaining entered paths.
+	// The hard drive handles the rest.
+	var/final_path = root_dir ? root_dir.get_file_path()  + "/" : ""
+	final_path += jointext(directories, "/")
+	var/datum/computer_file/directory/target_directory = target_disk.parse_directory(final_path, create_directories)
+	if(!istype(target_directory))
+		return OS_DIR_NOT_FOUND
+	
+	return list(target_disk, target_directory)
+
+// Returns list(/datum/file_storage, /datum/computer_file/directory, /datum/computer_file) on success. Returns error code on failure.
+/datum/terminal/proc/parse_file(file_path)
+	if(!length(file_path))
+		return OS_FILE_NOT_FOUND
+	if(file_path[1] == "/") // As above, this is an absolute path, which the OS can handle directly.
+		return computer.parse_file(file_path)
+
+	var/list/dirs_and_file = splittext(file_path, "/")
+	if(!length(dirs_and_file))
+		return OS_DIR_NOT_FOUND
+	
+	// Join together everything but the filename into a path.
+	var/list/file_loc = parse_directory(jointext(dirs_and_file, "/", 1, dirs_and_file.len))
+	if(!islist(file_loc)) // Errored!
+		return file_loc
+
+	var/datum/file_storage/target_disk = file_loc[1]
+	var/datum/computer_file/directory/target_dir = file_loc[2]
+	if(!istype(target_disk))
+		return OS_DIR_NOT_FOUND
+	
+	var/filename = dirs_and_file[dirs_and_file.len]
+	var/datum/computer_file/target_file = target_disk.get_file(filename, target_dir)
+	if(!istype(target_file))
+		return OS_FILE_NOT_FOUND
+
+	return list(target_disk, target_dir, target_file)
+
+/proc/get_terminal_error(path, error_code)
+	var/list/dirs_and_file = splittext(path, "/")
+	var/dir_path = jointext(dirs_and_file, "/", 1, dirs_and_file.len)
+	if(!length(dirs_and_file))
+		return "Unable to parse passed path."
+	var/filename = dirs_and_file[dirs_and_file.len]
+
+	switch(error_code)
+		if(OS_FILE_NOT_FOUND)
+			return "Unable to locate the file[length(filename) ? "'[filename]'" : ""]"
+		if(OS_DIR_NOT_FOUND)
+			return "Unable to locate the directory[length(dir_path) ? "'[dir_path]'" : ""]"
+		if(OS_FILE_EXISTS)
+			return "A file with name '[filename]' already exists"
+		if(OS_BAD_NAME)
+			return "The file name '[filename]' is invalid"
+		if(OS_FILE_NO_READ)
+			return "You do not have permission to read the file[length(filename) ? "'[filename]'" : ""]"
+		if(OS_FILE_NO_WRITE)
+			return "You do not have permission to modify the file[length(filename) ? "'[filename]'" : ""]"
+		if(OS_HARDDRIVE_SPACE)
+			return "Insufficient harddrive space"
+		if(OS_HARDDRIVE_ERROR)
+			return "I/O error, Harddrive may be non-functional"
+		if(OS_NETWORK_ERROR)
+			return "Unable to connect to the network"
+	
+	return "An unspecified error occured."

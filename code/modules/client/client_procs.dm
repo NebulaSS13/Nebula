@@ -133,11 +133,14 @@ var/global/list/localhost_addresses = list(
 	switch (connection)
 		if ("seeker", "web") // check for invalid connection type. do nothing if valid
 		else return null
+
+	deactivate_darkmode(clear_chat = FALSE) // Overwritten if the pref is set later.
+
 	#if DM_VERSION >= 512
 	var/bad_version = config.minimum_byond_version && byond_version < config.minimum_byond_version
 	var/bad_build = config.minimum_byond_build && byond_build < config.minimum_byond_build
 	if (bad_build || bad_version)
-		to_chat(src, "You are attempting to connect with a out of date version of BYOND. Please update to the latest version at http://www.byond.com/ before trying again.")
+		to_chat(src, "You are attempting to connect with an out-of-date version of BYOND. Please update to the latest version at http://www.byond.com/ before trying again.")
 		qdel(src)
 		return
 
@@ -167,11 +170,6 @@ var/global/list/localhost_addresses = list(
 		src.preload_rsc = pick(config.resource_urls)
 	else src.preload_rsc = 1 // If config.resource_urls is not set, preload like normal.
 
-	if(byond_version < DM_VERSION)
-		to_chat(src, "<span class='warning'>You are running an older version of BYOND than the server and may experience issues.</span>")
-		to_chat(src, "<span class='warning'>It is recommended that you update to at least [DM_VERSION] at http://www.byond.com/download/.</span>")
-	to_chat(src, "<span class='warning'>If the title screen is black, resources are still downloading. Please be patient until the title screen appears.</span>")
-
 	global.clients += src
 	global.ckey_directory[ckey] = src
 
@@ -193,6 +191,15 @@ var/global/list/localhost_addresses = list(
 	prefs = SScharacter_setup.preferences_datums[ckey]
 	if(!prefs)
 		prefs = new /datum/preferences(src)
+
+	if(get_preference_value(/datum/client_preference/chat_color_mode) == PREF_DARKMODE)
+		activate_darkmode(clear_chat = FALSE)
+
+	// These are after pref loading so that they have the proper CSS.
+	if(byond_version < DM_VERSION)
+		to_chat(src, "<span class='warning'>You are running an older version of BYOND than the server and may experience issues.</span>")
+		to_chat(src, "<span class='warning'>It is recommended that you update to at least [DM_VERSION] at http://www.byond.com/download/.</span>")
+	to_chat(src, "<span class='warning'>If the title screen is black, resources are still downloading. Please be patient until the title screen appears.</span>")
 
 	// these are gonna be used for banning
 	prefs.last_ip = address
@@ -499,8 +506,8 @@ var/global/const/MAX_VIEW = 41
 	var/res_y =    config.lock_client_view_y || CEILING(text2num(view_components[2]) / divisor)
 	var/max_view = config.max_client_view_x  || MAX_VIEW
 
-	last_view_x_dim = Clamp(res_x, MIN_VIEW, max_view)
-	last_view_y_dim = Clamp(res_y, MIN_VIEW, max_view)
+	last_view_x_dim = clamp(res_x, MIN_VIEW, max_view)
+	last_view_y_dim = clamp(res_y, MIN_VIEW, max_view)
 
 	// Ensure we can actually center our view on our eye.
 	if(last_view_x_dim % 2 == 0)
@@ -513,7 +520,7 @@ var/global/const/MAX_VIEW = 41
 	winset(src, "menu.icon[divisor]", "is-checked=true")
 
 	view = "[last_view_x_dim]x[last_view_y_dim]"
-	
+
 	// Reset eye/perspective
 	reset_click_catchers()
 	var/last_perspective = perspective
@@ -530,18 +537,15 @@ var/global/const/MAX_VIEW = 41
 	if(mob)
 		mob.reload_fullscreen()
 
-/client/proc/toggle_fullscreen(value)
-	set waitfor = FALSE
-
-	winset(src, null, {"
-	mainwindow.is-maximized = false;
-	mainwindow.can-resize = [(value == PREF_BASIC) || (value == PREF_FULL) ? "false" : "true"];
-	mainwindow.titlebar = [(value == PREF_BASIC) || (value == PREF_FULL) ? "false" : "true"];
-	mainwindow.menu = [value == PREF_FULL ? "null" : "menu"];
-	mainwindow.statusbar = [value == PREF_FULL ? "false" : "true"];
-	mainwindow.split.pos = [(value == PREF_BASIC) || (value == PREF_FULL) ? "0x0" : "3x0"];
-	"})
-	winset(src, null, "mainwindow.is-maximized = true;")
+/client/proc/toggle_fullscreen(new_value)
+	switch(new_value)
+		if(PREF_BASIC)
+			winset(src, "mainwindow", "is-maximized=false;can-resize=false;titlebar=false")
+		if(PREF_FULL)
+			winset(src, "mainwindow", "is-maximized=false;can-resize=false;titlebar=false;menu=null")
+		else
+			winset(src, "mainwindow", "is-maximized=false;can-resize=true;titlebar=true;menu=menu")
+	winset(src, "mainwindow", "is-maximized=true")
 
 /client/verb/fit_viewport()
 	set name = "Fit Viewport"

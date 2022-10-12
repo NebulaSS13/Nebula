@@ -20,7 +20,7 @@ var/global/list/angle_step_to_dir = list(
 	var/bearing_colour =         COLOR_WHITE
 	var/bearing_outline_colour = "#3b2d53"
 
-	/// Number of steps/pips between bolded markers on the compass ring. 
+	/// Number of steps/pips between bolded markers on the compass ring.
 	var/compass_interval = 3
 	// Total angle covered by a single span of the compass ring; divided by compass_interval to get individual spans.
 	var/compass_period =  45
@@ -37,7 +37,7 @@ var/global/list/angle_step_to_dir = list(
 	return (world.icon_size * round(MIN_VIEW/2))
 
 /obj/compass_holder/proc/rebuild_compass_overlays()
-	
+
 	var/effective_compass_period = compass_period/compass_interval
 	LAZYCLEARLIST(compass_static_labels)
 	for(var/i in 0 to (360/effective_compass_period)-1)
@@ -47,7 +47,7 @@ var/global/list/angle_step_to_dir = list(
 
 		if(i % compass_interval == 0)
 			I.maptext = STYLE_SMALLFONTS_OUTLINE("<center>[get_string_from_angle(i * effective_compass_period)]</center>", 7, bearing_colour, bearing_outline_colour)
-		else 
+		else
 			I.maptext = STYLE_SMALLFONTS("<center>〡</center>", 7, interval_colour)
 
 		var/matrix/M = matrix()
@@ -62,7 +62,7 @@ var/global/list/angle_step_to_dir = list(
 	rebuild_overlay_lists(TRUE)
 
 /obj/compass_holder/proc/get_string_from_angle(var/angle)
-	return global.angle_step_to_dir[Clamp(round(angle/45)+1, 1, length(global.angle_step_to_dir))]
+	return global.angle_step_to_dir[clamp(round(angle/45)+1, 1, length(global.angle_step_to_dir))]
 
 /obj/compass_holder/Destroy()
 	QDEL_NULL_LIST(compass_waypoints)

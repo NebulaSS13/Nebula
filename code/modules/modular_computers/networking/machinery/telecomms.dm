@@ -262,7 +262,7 @@ var/global/list/telecomms_hubs = list()
 					else
 						lower_freq = PUBLIC_LOW_FREQ
 						upper_freq = PUBLIC_HIGH_FREQ
-					new_freq = Clamp(new_freq, lower_freq, upper_freq)
+					new_freq = clamp(new_freq, lower_freq, upper_freq)
 
 					if(new_freq != channel_datum.frequency && new_freq && CanPhysicallyInteract(user))
 						channel_datum.frequency = new_freq

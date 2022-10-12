@@ -5,7 +5,7 @@
 	//Make sure temperature can't damage people on casual planets
 	if(habitability_class <= HABITABILITY_OKAY)
 		var/decl/species/S = get_species_by_key(global.using_map.default_species)
-		target_temp = Clamp(target_temp, S.cold_level_1 + rand(1,5), S.heat_level_1 - rand(1,5))
+		target_temp = clamp(target_temp, S.cold_level_1 + rand(1,5), S.heat_level_1 - rand(1,5))
 
 	atmosphere.temperature = target_temp
 
@@ -15,9 +15,9 @@
 		atmosphere.adjust_gas(/decl/material/gas/nitrogen, MOLES_N2STANDARD)
 		atmosphere.check_tile_graphic()
 		return
-	
+
 	var/total_moles = MOLES_CELLSTANDARD
-	
+
 	//Add the non-negotiable gasses
 	var/badflag = 0
 	var/gas_list = get_mandatory_gasses()
@@ -37,8 +37,6 @@
 	var/list/all_materials = decls_repository.get_decls_of_subtype(/decl/material)
 	for(var/mat_type in all_materials)
 		var/decl/material/mat = all_materials[mat_type]
-		if(mat.is_abstract())
-			continue
 		if(mat.exoplanet_rarity == MAT_RARITY_NOWHERE)
 			continue
 		if(isnull(mat.boiling_point) || mat.boiling_point > target_temp)

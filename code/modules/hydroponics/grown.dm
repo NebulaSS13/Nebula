@@ -13,11 +13,11 @@
 	var/potency = -1
 
 /obj/item/chems/food/grown/Initialize(mapload, planttype)
-	. = ..(mapload)
 	if(planttype)
 		plantname = planttype
 	seed = SSplants.seeds[plantname]
 	if(!seed)
+		log_warning("\The [src] couldn't get a seed from SSplants for plant type '[plantname]'. Deleting!")
 		return INITIALIZE_HINT_QDEL
 
 	if(seed.scannable_result)
@@ -27,24 +27,27 @@
 	trash = seed.get_trash_type()
 	if(!dried_type)
 		dried_type = type
-
-	fill_reagents()
+	
+	. = ..(mapload) //Init reagents
 	update_icon()
 
-
-/obj/item/chems/food/grown/proc/fill_reagents()
-	if(!seed)
+/obj/item/chems/food/grown/initialize_reagents(populate)
+	if(reagents)
+		reagents.clear_reagents()
+	if(!seed?.chems)
 		return
-
-	if(!seed.chems)
-		return
-
 	potency = seed.get_trait(TRAIT_POTENCY)
-	if(!reagents)
-		create_reagents(volume)
-	reagents.clear_reagents()
+
+	. = ..() //create_reagent and populate_reagents
+
+	update_desc()
+	if(reagents.total_volume > 0)
+		bitesize = 1 + round(reagents.total_volume / 2, 1)
+
+/obj/item/chems/food/grown/populate_reagents()
+	. = ..()
 	// Fill the object up with the appropriate reagents.
-	for(var/rid in seed.chems)
+	for(var/rid in seed?.chems)
 		var/list/reagent_amounts = seed.chems[rid]
 		if(LAZYLEN(reagent_amounts))
 			var/rtotal = reagent_amounts[1]
@@ -54,9 +57,6 @@
 			if(rid == /decl/material/liquid/nutriment)
 				LAZYSET(data, seed.seed_name, max(1,rtotal))
 			reagents.add_reagent(rid,max(1,rtotal),data)
-	update_desc()
-	if(reagents.total_volume > 0)
-		bitesize = 1+round(reagents.total_volume / 2, 1)
 
 /obj/item/chems/food/grown/proc/update_desc()
 	set waitfor = FALSE

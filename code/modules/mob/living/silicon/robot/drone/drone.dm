@@ -152,6 +152,7 @@
 			ret.color = COLOR_RED
 		else
 			ret.color = COLOR_CYAN
+	return ret
 
 /mob/living/silicon/robot/drone/choose_icon()
 	return

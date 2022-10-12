@@ -16,7 +16,7 @@
 	icon_state = "film"
 	item_state = "electropack"
 	w_class = ITEM_SIZE_TINY
-
+	material = /decl/material/solid/plastic
 
 /********
 * photo *
@@ -30,6 +30,7 @@ var/global/photo_count = 0
 	item_state = "paper"
 	randpixel = 10
 	w_class = ITEM_SIZE_TINY
+	material = /decl/material/solid/plastic
 	var/id
 	var/icon/img	//Big photo image
 	var/scribble	//Scribble on the back.
@@ -112,6 +113,7 @@ var/global/photo_count = 0
 	w_class = ITEM_SIZE_NORMAL //same as book
 	storage_slots = DEFAULT_BOX_STORAGE //yes, that's storage_slots. Photos are w_class 1 so this has as many slots equal to the number of photos you could put in a box
 	can_hold = list(/obj/item/photo)
+	material = /decl/material/solid/cardboard
 
 /obj/item/storage/photo_album/handle_mouse_drop(atom/over, mob/user)
 	if(istype(over, /obj/screen/inventory))
@@ -145,8 +147,6 @@ var/global/photo_count = 0
 	var/pictures_max = 10
 	var/pictures_left = 10
 	var/on = 1
-	var/icon_on = "camera"
-	var/icon_off = "camera_off"
 	var/size = 3
 
 /obj/item/camera/on_update_icon()

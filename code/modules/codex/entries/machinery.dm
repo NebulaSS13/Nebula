@@ -6,7 +6,7 @@
 
 /datum/codex_entry/computer
 	associated_paths = list(/obj/machinery/computer, /obj/machinery/constructable_frame/computerframe)
-	mechanics_text = "(This entry refers to the older single-purpose computers, not <span codexlink='modular computer'>modular computers</span>.)<BR><BR> \
+	mechanics_text = "(This entry refers to the older single-purpose computers, not <span codexlink='modular console (machine)'>modular computers</span>.)<BR><BR> \
 	Computers are used primarily for controlling other machines and systems, or for providing information about said systems. They require power to function and run off the Equipment power channel on an APC. and sometimes requries ID access. \
 	<BR><BR><b>Constructing a computer:</b><BR> \
 	1.) Use 5 steel sheets to construct a computer frame at your location. You may then move it by dragging, or rotate it with alt+click, if desired. <BR> \
@@ -28,7 +28,7 @@
 /datum/codex_entry/computer/modular
 	associated_paths = list(/obj/machinery/computer/modular)
 	lore_text = "Modular computers allow for customized hardware and downloadable software, enabling users to create their own workplace experience."
-	mechanics_text = "(This entry is for Modular Computers. Modular Computers are not the same as regular <span codexlink='computer'>computers</span>.)<BR><BR> \
+	mechanics_text = "(This entry is for modular computers. Modular computers are not the same as regular computers.)<BR><BR> \
 	Modular computers can have a variety of functions depending on the installed hardware and software. They also come available as tablets, laptops, wallscreens and PDA.<BR>\
 	* The computer can be shutdown via the interface to save power, and can also be forced to shutdown by right clicking the computer itself(or using the verb Force-Shutdown).<BR> \
 	* Hardware can be disabled/enabled from the Computer Configuration Tool, software can be downloaded using the Software Download Tool(if a network card is installed), and programs/files can be removed from the computer using the File Manager.<BR> \

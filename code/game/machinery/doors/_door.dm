@@ -26,7 +26,6 @@
 	var/glass = 0
 	var/normalspeed = 1
 	var/heat_proof = 0 // For glass airlocks/opacity firedoors
-	var/air_properties_vary_with_direction = 0
 	var/maxhealth = 300
 	var/health
 	var/destroy_hits = 10 //How many strong hits it takes to destroy the door
@@ -47,9 +46,6 @@
 
 	//Used for intercepting clicks on our turf. Set 0 to disable click interception
 	var/turf_hand_priority = 3
-
-	// turf animation
-	var/atom/movable/overlay/c_animation = null
 
 	atmos_canpass = CANPASS_PROC
 
@@ -288,7 +284,7 @@
 			playsound(src, 'sound/items/Welder.ogg', 100, 1)
 			if(do_after(user, 5 * repairing.amount, src) && welder && welder.isOn())
 				to_chat(user, "<span class='notice'>You finish repairing the damage to \the [src].</span>")
-				health = between(health, health + repairing.amount*DOOR_REPAIR_AMOUNT, maxhealth)
+				health = clamp(health, health + repairing.amount*DOOR_REPAIR_AMOUNT, maxhealth)
 				update_icon()
 				qdel(repairing)
 				repairing = null

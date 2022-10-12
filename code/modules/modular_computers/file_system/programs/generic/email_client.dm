@@ -236,14 +236,16 @@
 			download_progress = 0
 			return 1
 
-		if(drive.store_file(downloading))
+		var/success = drive.store_file()
+		if(success == OS_FILE_SUCCESS)
 			error = "File successfully downloaded to local device."
+		else if(success == OS_HARDDRIVE_SPACE)
+			error = "Error saving file: The hard drive is full"
 		else
-			error = "Error saving file: I/O Error: The hard drive may be full or nonfunctional."
+			error = "Error saving file: I/O Error: The hard drive may be nonfunctional."
 		downloading = null
 		download_progress = 0
 	return 1
-
 
 /datum/nano_module/program/email_client/Topic(href, href_list)
 	if(..())

@@ -49,8 +49,9 @@ var/global/obj/temp_reagents_holder = new
 			total_volume += vol
 			if(!primary_reagent || reagent_volumes[primary_reagent] < vol)
 				primary_reagent = R
+
 	if(total_volume > maximum_volume)
-		remove_any(maximum_volume - total_volume)
+		remove_any(total_volume-maximum_volume)
 
 /datum/reagents/proc/process_reactions()
 
@@ -163,10 +164,10 @@ var/global/obj/temp_reagents_holder = new
 
 /datum/reagents/proc/add_reagent(var/reagent_type, var/amount, var/data = null, var/safety = 0, var/defer_update = FALSE)
 
+	amount = NONUNIT_FLOOR(min(amount, REAGENTS_FREE_SPACE(src)), MINIMUM_CHEMICAL_VOLUME)
 	if(amount <= 0)
 		return FALSE
 
-	amount = min(amount, REAGENTS_FREE_SPACE(src))
 	var/decl/material/newreagent = GET_DECL(reagent_type)
 	LAZYINITLIST(reagent_volumes)
 	if(!reagent_volumes[reagent_type])
@@ -182,23 +183,21 @@ var/global/obj/temp_reagents_holder = new
 		cached_color = null
 	UNSETEMPTY(reagent_volumes)
 
-
 	if(defer_update)
-		total_volume += amount // approximation, call update_total() if deferring
+		total_volume = clamp(total_volume + amount, 0, maximum_volume) // approximation, call update_total() if deferring
 	else
 		handle_update(safety)
 	return TRUE
 
 /datum/reagents/proc/remove_reagent(var/reagent_type, var/amount, var/safety = 0, var/defer_update = FALSE)
-	if(!isnum(amount) || REAGENT_VOLUME(src, reagent_type) <= 0)
+	amount = NONUNIT_FLOOR(amount, MINIMUM_CHEMICAL_VOLUME)
+	if(!isnum(amount) || amount <= 0 || REAGENT_VOLUME(src, reagent_type) <= 0)
 		return FALSE
-
 	reagent_volumes[reagent_type] -= amount
 	if(reagent_volumes.len > 1 || reagent_volumes[reagent_type] <= 0)
 		cached_color = null
-
 	if(defer_update)
-		total_volume -= amount // approximation, call update_total() if deferring
+		total_volume = clamp(total_volume - amount, 0, maximum_volume) // approximation, call update_total() if deferring
 	else
 		handle_update(safety)
 	return TRUE
@@ -214,7 +213,7 @@ var/global/obj/temp_reagents_holder = new
 		cached_color = null
 
 		if(defer_update)
-			total_volume -= amount // approximation, call update_total() if deferring
+			total_volume = clamp(total_volume - amount, 0, maximum_volume) // approximation, call update_total() if deferring
 		else
 			handle_update()
 
@@ -271,13 +270,35 @@ var/global/obj/temp_reagents_holder = new
 
 /* Holder-to-holder and similar procs */
 /datum/reagents/proc/remove_any(var/amount = 1, var/defer_update = FALSE) // Removes up to [amount] of reagents from [src]. Returns actual amount removed.
-	. = min(amount, total_volume)
-	if(.)
-		var/part = . / total_volume
+
+	if(amount >= total_volume)
+		. = total_volume
+		clear_reagents()
+		return
+
+	var/removing = clamp(NONUNIT_FLOOR(amount, MINIMUM_CHEMICAL_VOLUME), 0, total_volume) // not ideal but something is making total_volume become NaN
+	if(!removing || total_volume <= 0)
+		. = 0
+		clear_reagents()
+		return
+
+	// Some reagents may be too low to remove from, so do multiple passes.
+	. = 0
+	var/part = removing / total_volume
+	var/failed_remove = FALSE
+	while(removing >= MINIMUM_CHEMICAL_VOLUME && total_volume >= MINIMUM_CHEMICAL_VOLUME && !failed_remove)
+		failed_remove = TRUE
 		for(var/current in reagent_volumes)
-			remove_reagent(current, REAGENT_VOLUME(src, current) * part, TRUE, TRUE)
-		if(!defer_update)
-			handle_update()
+			var/removing_amt = min(NONUNIT_FLOOR(REAGENT_VOLUME(src, current) * part, MINIMUM_CHEMICAL_VOLUME), removing)
+			if(removing_amt <= 0)
+				continue
+			failed_remove = FALSE
+			removing -= removing_amt
+			. += removing_amt
+			remove_reagent(current, removing_amt, TRUE, TRUE)
+
+	if(!defer_update)
+		handle_update()
 
 // Transfers [amount] reagents from [src] to [target], multiplying them by [multiplier].
 // Returns actual amount removed from [src] (not amount transferred to [target]).
@@ -292,9 +313,11 @@ var/global/obj/temp_reagents_holder = new
 		return
 
 	var/part = amount / total_volume
+	. = 0
 	for(var/rtype in reagent_volumes)
-		var/amount_to_transfer = REAGENT_VOLUME(src, rtype) * part
+		var/amount_to_transfer = NONUNIT_FLOOR(REAGENT_VOLUME(src, rtype) * part, MINIMUM_CHEMICAL_VOLUME)
 		target.add_reagent(rtype, amount_to_transfer * multiplier, REAGENT_DATA(src, rtype), TRUE, TRUE) // We don't react until everything is in place
+		. += amount_to_transfer
 		if(!copy)
 			remove_reagent(rtype, amount_to_transfer, TRUE, TRUE)
 
@@ -303,7 +326,6 @@ var/global/obj/temp_reagents_holder = new
 		handle_update(safety)
 		if(!copy)
 			HANDLE_REACTIONS(src)
-	return amount
 
 /* Holder-to-atom and similar procs */
 

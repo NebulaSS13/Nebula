@@ -123,21 +123,6 @@
 	result_type = /obj/item/frame/fire_alarm
 	difficulty = 2
 
-/datum/stack_recipe/computer/telescreen
-	title = "modular telescreen frame"
-	result_type = /obj/item/modular_computer/telescreen
-	difficulty = 2
-
-/datum/stack_recipe/computer/laptop
-	title = "modular laptop frame"
-	result_type = /obj/item/modular_computer/laptop
-	difficulty = 2
-
-/datum/stack_recipe/computer/tablet
-	title = "modular tablet frame"
-	result_type = /obj/item/modular_computer/tablet
-	difficulty = 2
-
 /datum/stack_recipe/hazard_cone
 	title = "hazard cone"
 	result_type = /obj/item/caution/cone
@@ -302,3 +287,9 @@
 /datum/stack_recipe/gauntlets
 	title = "gauntlets"
 	result_type = /obj/item/clothing/gloves/thick/craftable
+
+/datum/stack_recipe/paper_sheets
+	title          = "sheet of paper"
+	result_type    = /obj/item/paper
+	res_amount     = 4
+	max_res_amount = 30

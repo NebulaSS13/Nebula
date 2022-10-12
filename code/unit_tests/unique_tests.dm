@@ -82,7 +82,7 @@
 /datum/unit_test/languages_shall_have_unique_names/start_test()
 	var/list/languages_by_name = list()
 
-	for(var/lt in subtypesof(/decl/language))
+	for(var/lt in decls_repository.get_decl_paths_of_subtype(/decl/language))
 		var/decl/language/l = lt
 		group_by(languages_by_name, initial(l.name), lt)
 
@@ -99,7 +99,7 @@
 /datum/unit_test/languages_shall_have_no_or_unique_keys/start_test()
 	var/list/languages_by_key = list()
 
-	for(var/lt in subtypesof(/decl/language))
+	for(var/lt in decls_repository.get_decl_paths_of_subtype(/decl/language))
 		var/decl/language/l = lt
 		var/language_key = initial(l.key)
 		if(!language_key)

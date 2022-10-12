@@ -1,6 +1,7 @@
 /obj/item/kit
 	icon_state = "modkit"
 	icon = 'icons/obj/items/modkit.dmi'
+	material = /decl/material/solid/plastic
 	var/new_name = "exosuit"     // What is the variant called?
 	var/new_desc = "An exosuit." // How is the new exosuit described?
 	var/new_icon                 // What base icon will the new exosuit use?
@@ -86,7 +87,6 @@
 /obj/item/kit/paint
 	name = "exosuit decal kit"
 	desc = "A kit containing all the needed tools and parts to repaint a exosuit."
-	var/removable = null
 
 /obj/item/kit/paint/examine(mob/user)
 	. = ..()

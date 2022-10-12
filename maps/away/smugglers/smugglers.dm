@@ -81,7 +81,7 @@
 	icon = 'icons/obj/materials/ore.dmi'
 
 /obj/random/ore_smug/spawn_choices()
-	return subtypesof(/obj/item/ore)
+	return subtypesof(/obj/item/stack/material/ore)
 
 /obj/random/ammo_magazine_smug
 	name = "Random Ammo Magazine"

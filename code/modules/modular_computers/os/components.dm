@@ -31,7 +31,7 @@
 	if(network_card)
 		var/signal_power_level = NETWORK_SPEED_BASE * network_card.get_signal(specific_action)
 		if(signal_power_level > 0)
-			signal_power_level = round(Clamp(signal_power_level, 1, 3))
+			signal_power_level = round(clamp(signal_power_level, 1, 3))
 		return signal_power_level
 	else
 		return 0

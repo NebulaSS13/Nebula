@@ -491,7 +491,7 @@
 	pixel_x = -12;
 	pixel_y = 2
 	},
-/obj/item/storage/mirror{
+/obj/structure/mirror{
 	dir = 4;
 	pixel_x = -28
 	},

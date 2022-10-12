@@ -7,6 +7,8 @@
 		alpha = 100 + material.opacity * 255
 	if(blood_overlay)
 		add_overlay(blood_overlay)
+	if(global.contamination_overlay && contaminated)
+		overlays += global.contamination_overlay
 
 /obj/item/apply_hit_effect(mob/living/target, mob/living/user, var/hit_zone)
 	. = ..()
@@ -34,7 +36,7 @@
 	T.visible_message(SPAN_DANGER("\The [src] [material ? material.destruction_desc : "shatters"]!"))
 	playsound(src, "shatter", 70, 1)
 	if(!consumed && material && w_class > ITEM_SIZE_SMALL)
-		material.place_shard(T)
+		material.place_shards(T)
 	qdel(src)
 
 /obj/item/get_material()

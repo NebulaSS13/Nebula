@@ -88,8 +88,6 @@
 	var/list/language_types = decls_repository.get_decls_of_subtype(/decl/language)
 	for(var/thing in language_types)
 		var/decl/language/lang = language_types[thing]
-		if(lang.is_abstract()) // these aren't supposed to be available to anyone, they're abstract types
-			continue
 		if(user.has_admin_rights() || (!(lang.flags & RESTRICTED) && is_alien_whitelisted(user, lang)))
 			allowed_languages[thing] = TRUE
 

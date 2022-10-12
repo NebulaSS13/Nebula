@@ -5,6 +5,8 @@
 	icon_state = "fireaxe"
 	anchored = 1
 	density = 0
+	obj_flags = OBJ_FLAG_MOVES_UNSUPPORTED
+	directional_offset = "{'NORTH':{'y':-32}, 'SOUTH':{'y':32}, 'EAST':{'x':-32}, 'WEST':{'x':32}}"
 
 	var/damage_threshold = 15
 	var/open

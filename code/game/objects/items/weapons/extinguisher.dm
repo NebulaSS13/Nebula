@@ -6,6 +6,7 @@
 	item_state = "fire_extinguisher"
 	hitsound = 'sound/weapons/smash.ogg'
 	obj_flags = OBJ_FLAG_CONDUCTIBLE
+	item_flags = ITEM_FLAG_HOLLOW
 	throwforce = 10
 	w_class = ITEM_SIZE_NORMAL
 	throw_speed = 2
@@ -16,7 +17,6 @@
 
 	var/spray_particles = 3
 	var/spray_amount = 120	//units of liquid per spray - 120 -> same as splashing them with a bucket per spray
-	var/starting_water = 2000
 	var/max_water = 2000
 	var/last_use = 1.0
 	var/safety = 1
@@ -32,7 +32,6 @@
 	w_class = ITEM_SIZE_SMALL
 	force = 3.0
 	spray_amount = 80
-	starting_water = 1000
 	max_water = 1000
 	sprite_name = "miniFE"
 	material = /decl/material/solid/plastic
@@ -43,15 +42,20 @@
 
 /obj/item/extinguisher/Initialize()
 	. = ..()
+	initialize_reagents()
+
+/obj/item/extinguisher/initialize_reagents(populate = TRUE)
 	create_reagents(max_water)
-	if(starting_water > 0)
-		reagents.add_reagent(/decl/material/liquid/water, starting_water)
+	. = ..()
 
-/obj/item/extinguisher/empty
-	starting_water = 0
+/obj/item/extinguisher/populate_reagents()
+	reagents.add_reagent(/decl/material/liquid/water, reagents.maximum_volume)
 
-/obj/item/extinguisher/mini/empty
-	starting_water = 0
+/obj/item/extinguisher/empty/populate_reagents()
+	return
+
+/obj/item/extinguisher/mini/empty/populate_reagents()
+	return
 
 /obj/item/extinguisher/examine(mob/user, distance)
 	. = ..()

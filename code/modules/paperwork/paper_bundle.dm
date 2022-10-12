@@ -11,6 +11,8 @@
 	throw_speed = 1
 	layer = ABOVE_OBJ_LAYER
 	attack_verb = list("bapped")
+	health = 10
+	max_health = 10
 	var/page = 1    // current page
 	var/list/pages = list()  // Ordered list of pages as they are to be displayed. Can be different order than src.contents.
 
@@ -46,7 +48,7 @@
 		to_chat(user, "<span class='notice'>You add \the [W.name] to [(src.name == "paper bundle") ? "the paper bundle" : src.name].</span>")
 		qdel(W)
 	else
-		if(istype(W, /obj/item/ducttape))
+		if(istype(W, /obj/item/stack/tape_roll/duct_tape))
 			return 0
 		if(IS_PEN(W))
 			show_browser(user, "", "window=[name]") //Closes the dialog

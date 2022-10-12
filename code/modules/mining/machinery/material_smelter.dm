@@ -22,7 +22,7 @@
 	show_materials = always_show_materials.Copy()
 	. = ..()
 	create_reagents(INFINITY)
-	QUEUE_TEMPERATURE_ATOMS(src)
+	queue_temperature_atoms(src)
 
 // Outgas anything that is in gas form. Check what you put into the smeltery, nerds.
 /obj/machinery/material_processing/smeltery/on_reagent_change()
@@ -64,7 +64,8 @@
 
 /obj/machinery/material_processing/smeltery/power_change()
 	. = ..()
-	QUEUE_TEMPERATURE_ATOMS(src)
+	if(.)
+		queue_temperature_atoms(src)
 
 /obj/machinery/material_processing/smeltery/proc/can_eat(var/obj/item/eating)
 	for(var/mtype in eating.matter)

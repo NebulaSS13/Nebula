@@ -13,12 +13,11 @@
 	atom_flags = 0 // no painting
 	appearance_flags = KEEP_TOGETHER
 
-	minimum_temperature_difference = 20
-	thermal_conductivity = OPEN_HEAT_TRANSFER_COEFFICIENT
+	var/thermal_conductivity = OPEN_HEAT_TRANSFER_COEFFICIENT
+	var/minimum_temperature_difference = 20
 
 	maximum_pressure = 360*ONE_ATMOSPHERE
 	fatigue_pressure = 300*ONE_ATMOSPHERE
-	alert_pressure = 360*ONE_ATMOSPHERE
 
 	can_buckle = 1
 	buckle_lying = 1
@@ -108,7 +107,7 @@
 				set_light(min(3, scale*2.5), min(3, scale*2.5), scale_color)
 		else
 			set_light(0, 0)
-			
+
 /obj/machinery/atmospherics/pipe/simple/heat_exchanging/junction
 	icon = 'icons/atmos/junction.dmi'
 	icon_state = "11"

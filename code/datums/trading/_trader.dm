@@ -4,8 +4,8 @@
 	var/list/possible_origins                                   //Possible names of the trader origin
 	var/disposition = 0                                         //The current disposition of them to us.
 	var/trade_flags = TRADER_MONEY                              //Flags
-	var/name_language                                                //If this is set to a language name this will generate a name from the language
-	var/icon/portrait                                           //The icon that shows up in the menu @TODO
+	var/name_language                                           //If this is set to a language name this will generate a name from the language
+	var/icon/portrait                                           //The icon that shows up in the menu TODO: IMPLEMENT OR REMOVE
 	var/trader_currency
 	var/datum/trade_hub/hub
 
@@ -142,7 +142,7 @@
 	. = replacetext(.,"CURRENCY", cur.name)
 
 /datum/trader/proc/print_trading_items(var/num)
-	num = Clamp(num,1,trading_items.len)
+	num = clamp(num,1,trading_items.len)
 	if(trading_items[num])
 		return "<b>[atom_info_repository.get_name_for(trading_items[num])]</b>"
 
@@ -188,7 +188,7 @@
 /datum/trader/proc/offer_items_for_trade(var/list/offers, var/num, var/turf/location, skill = SKILL_MAX)
 	if(!offers || !offers.len)
 		return TRADER_NOT_ENOUGH
-	num = Clamp(num, 1, trading_items.len)
+	num = clamp(num, 1, trading_items.len)
 	var/offer_worth = 0
 	for(var/item in offers)
 		var/atom/movable/offer = item

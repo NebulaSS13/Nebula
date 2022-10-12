@@ -26,6 +26,7 @@
 	w_class = ITEM_SIZE_TINY
 	randpixel = 1
 	layer = ABOVE_HUMAN_LAYER  //so you can mark bodies
+	material = /decl/material/solid/plastic
 	var/number = 1
 
 /obj/item/csi_marker/Initialize(mapload)
@@ -35,8 +36,8 @@
 
 /obj/item/csi_marker/on_update_icon()
 	. = ..()
-	icon_state = "card[Clamp(number,1,7)]"
-	
+	icon_state = "card[clamp(number,1,7)]"
+
 /obj/item/csi_marker/n1
 	number = 1
 /obj/item/csi_marker/n2

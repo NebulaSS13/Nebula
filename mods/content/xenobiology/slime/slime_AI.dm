@@ -61,7 +61,7 @@
 	. = ..()
 
 	if(attacked > 0)
-		attacked = Clamp(attacked--, 0, 50)
+		attacked = clamp(attacked--, 0, 50)
 
 	if(!slime || !body || HAS_STATUS(slime, STAT_CONFUSE))
 		return
@@ -223,6 +223,6 @@
 		LAZYSET(friendship_cooldown, user, world.time + (1 MINUTE))
 	LAZYINITLIST(observed_friends)
 	observed_friends[user] = observed_friends[user] + amount
-	if(observed_friends[user] <= 0) 
+	if(observed_friends[user] <= 0)
 		LAZYREMOVE(observed_friends, user)
 	return TRUE

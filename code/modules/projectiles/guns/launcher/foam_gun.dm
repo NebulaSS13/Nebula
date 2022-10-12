@@ -89,6 +89,7 @@
 	throwforce = 0
 	throw_range = 3
 	does_spin = FALSE
+	material = /decl/material/solid/plastic
 
 /obj/item/foam_dart/Initialize()
 	mix_up()

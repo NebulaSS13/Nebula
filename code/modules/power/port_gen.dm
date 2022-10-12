@@ -10,7 +10,6 @@
 
 	var/active = 0
 	var/power_gen = 5000
-	var/recent_fault = 0
 	var/power_output = 1
 	atom_flags = ATOM_FLAG_CLIMBABLE
 	var/datum/sound_token/sound_token
@@ -40,7 +39,7 @@
 	if(active && HasFuel() && !IsBroken())
 		var/volume = 10 + 15*power_output
 		if(!sound_token)
-			
+
 			sound_token = play_looping_sound(src, sound_id, working_sound, volume = volume)
 		sound_token.SetVolume(volume)
 	else if(sound_token)
@@ -148,7 +147,7 @@
 		to_chat(user, "\The [src] is turned off.")
 	if(IsBroken())
 		to_chat(user, SPAN_WARNING("\The [src] seems to have broken down."))
-	if(overheating) 
+	if(overheating)
 		to_chat(user, SPAN_DANGER("\The [src] is overheating!"))
 	if(sheet_path && sheet_material)
 		var/decl/material/mat = GET_DECL(sheet_material)
@@ -172,9 +171,9 @@
 	var/temp_rating = total_component_rating_of_type(/obj/item/stock_parts/micro_laser)
 	temp_rating += total_component_rating_of_type(/obj/item/stock_parts/capacitor)
 
-	max_sheets = 50 * Clamp(total_component_rating_of_type(/obj/item/stock_parts/matter_bin), 0, 5) ** 2
+	max_sheets = 50 * clamp(total_component_rating_of_type(/obj/item/stock_parts/matter_bin), 0, 5) ** 2
 
-	power_gen = round(initial(power_gen) * Clamp(temp_rating, 0, 20) / 2)
+	power_gen = round(initial(power_gen) * clamp(temp_rating, 0, 20) / 2)
 	..()
 
 /obj/machinery/port_gen/pacman/proc/process_exhaust()
@@ -243,7 +242,7 @@
 	var/average = (upper_limit + lower_limit)/2
 
 	//calculate the temperature increase
-	var/bias = Clamp(round((average - operating_temperature)/TEMPERATURE_DIVISOR, 1),  -TEMPERATURE_CHANGE_MAX, TEMPERATURE_CHANGE_MAX)
+	var/bias = clamp(round((average - operating_temperature)/TEMPERATURE_DIVISOR, 1),  -TEMPERATURE_CHANGE_MAX, TEMPERATURE_CHANGE_MAX)
 	operating_temperature += bias + rand(-7, 7)
 
 	if (operating_temperature > max_temperature)
@@ -262,7 +261,7 @@
 
 	if (operating_temperature > cooling_temperature)
 		var/temp_loss = (operating_temperature - cooling_temperature)/TEMPERATURE_DIVISOR
-		temp_loss = between(2, round(temp_loss, 1), TEMPERATURE_CHANGE_MAX)
+		temp_loss = clamp(2, round(temp_loss, 1), TEMPERATURE_CHANGE_MAX)
 		operating_temperature = max(operating_temperature - temp_loss, cooling_temperature)
 		src.updateDialog()
 
@@ -359,7 +358,7 @@
 	data["fuel_stored"] = round((sheets * 1000) + (sheet_left * 1000))
 	data["fuel_capacity"] = round(max_sheets * 1000, 0.1)
 	data["fuel_usage"] = active ? round((power_output / time_per_sheet) * 1000) : 0
-	
+
 	var/obj/item/stack/sheet_prototype = sheet_path
 	var/sheet_name = initial(sheet_prototype.plural_name) || "sheets"
 	if(sheet_material)

@@ -92,16 +92,23 @@
 	var/mob_icon_state_flags = 0
 
 	var/scannable_result // Codex page generated when this mob is scanned.
+	var/base_animal_type // set automatically in Initialize(), used for language checking.
 
 /mob/living/simple_animal/Initialize()
 	. = ..()
 	check_mob_icon_states()
+	if(isnull(base_animal_type))
+		base_animal_type = type
 	if(LAZYLEN(natural_armor))
 		set_extension(src, armor_type, natural_armor)
 	if(islist(hat_offsets))
 		set_extension(src, /datum/extension/hattable/directional, hat_offsets)
 	if(scannable_result)
 		set_extension(src, /datum/extension/scannable, scannable_result)
+	setup_languages()
+
+/mob/living/simple_animal/proc/setup_languages()
+	add_language(/decl/language/animal)
 
 /mob/living/simple_animal/proc/check_mob_icon_states()
 	mob_icon_state_flags = 0
@@ -590,7 +597,7 @@
 
 /mob/living/simple_animal/setCloneLoss(amount)
 	if(gene_damage >= 0)
-		gene_damage = Clamp(amount, 0, maxHealth)
+		gene_damage = clamp(amount, 0, maxHealth)
 		if(gene_damage >= maxHealth)
 			death()
 

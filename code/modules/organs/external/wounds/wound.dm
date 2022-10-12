@@ -41,7 +41,7 @@
 
 	// Surgical wounds need to be at minimum big enough to be considered open, which is max_bleeding_stage.
 	if(surgical)
-		damage = max(damage, damage_list[Clamp(max_bleeding_stage, 1, length(damage_list))]+1)
+		damage = max(damage, damage_list[clamp(max_bleeding_stage, 1, length(damage_list))]+1)
 
 	src.damage = damage
 

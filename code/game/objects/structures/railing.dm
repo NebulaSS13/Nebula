@@ -92,7 +92,7 @@
 	if(health <= 0)
 		visible_message("<span class='danger'>\The [src] [material.destruction_desc]!</span>")
 		playsound(loc, 'sound/effects/grillehit.ogg', 50, 1)
-		material.place_shard(get_turf(usr))
+		material.place_shards(get_turf(usr))
 		qdel(src)
 
 /obj/structure/railing/proc/NeighborsCheck(var/UpdateNeighbors = 1)

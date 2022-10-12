@@ -137,7 +137,7 @@
 /turf/simulated/floor/wood/walnut,
 /area/yacht/bridge)
 "av" = (
-/obj/item/storage/mirror,
+/obj/structure/mirror,
 /turf/simulated/wall/walnut,
 /area/yacht/living)
 "aw" = (

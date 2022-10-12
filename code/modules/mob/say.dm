@@ -5,11 +5,11 @@ var/global/list/special_channel_keys = list(
 	  "h" = "department",
 	  "+" = "special",
 	  "w" = "whisper",
-	  "Ãª" = "right ear",
-	  "Ã¤" = "left ear",
-	  "Ã¸" = "intercom",
-	  "Ã°" = "department",
-	  "Ã¶" = "whisper"
+	  "ê" = "right ear",
+	  "ä" = "left ear",
+	  "ø" = "intercom",
+	  "ð" = "department",
+	  "ö" = "whisper"
 )
 
 /mob/proc/say()
@@ -42,41 +42,17 @@ var/global/list/special_channel_keys = list(
 /mob/proc/say_dead(var/message)
 	communicate(/decl/communication_channel/dsay, client, message)
 
-/mob/proc/say_understands(var/mob/other,var/decl/language/speaking = null)
-
-	if (src.stat == 2)		//Dead
-		return 1
-
-	//Universal speak makes everything understandable, for obvious reasons.
-	else if(src.universal_speak || src.universal_understand)
-		return 1
-
-	//Languages are handled after.
-	if (!speaking)
-		if(!istype(other))
-			return 1
-		if(other.universal_speak)
-			return 1
-		if(isAI(src) && ispAI(other))
-			return 1
-		if (istype(other, src.type) || istype(src, other.type))
-			return 1
-		return 0
-
-	if(speaking.flags & INNATE)
-		return 1
-
-	//Language check.
-	for(var/decl/language/L in src.languages)
-		if(speaking.name == L.name)
-			return 1
-
-	return 0
+/mob/proc/say_understands(mob/speaker, decl/language/speaking)
+	if(stat == DEAD || universal_speak || universal_understand)
+		return TRUE
+	if(speaking)
+		return speaking.can_be_understood_by(speaker, src)
+	return (!speaker || speaker.universal_speak || istype(speaker, type) || istype(src, speaker.type))
 
 /mob/proc/say_quote(var/message, var/decl/language/speaking = null)
 	var/ending = copytext(message, length(message))
 	if(speaking)
-		return speaking.get_spoken_verb(ending)
+		return speaking.get_spoken_verb(src, ending)
 
 	var/verb = pick(speak_emote)
 	if(verb == "says") //a little bit of a hack, but we can't let speak_emote default to an empty list without breaking other things

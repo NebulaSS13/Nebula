@@ -7,8 +7,8 @@
 	size = 6
 	available_on_network = 1
 	usage_flags = PROGRAM_ALL
-	nanomodule_path = /datum/nano_module/program/scanner
 	category = PROG_UTIL
+	nanomodule_path = /datum/nano_module/program/scanner
 
 	var/using_scanner = 0	//Whether or not the program is synched with the scanner module.
 	var/data_buffer = ""	//Buffers scan output for saving/viewing.
@@ -36,13 +36,6 @@
 	metadata_buffer.Cut()
 	return 1
 
-/datum/computer_file/program/scanner/proc/save_scan(name)
-	if(!data_buffer)
-		return 0
-	if(!create_file(name, data_buffer, scan_file_type, metadata_buffer.Copy()))
-		return 0
-	return 1
-
 /datum/computer_file/program/scanner/proc/check_scanning()
 	if(!computer)
 		return 0
@@ -61,7 +54,7 @@
 
 /datum/computer_file/program/scanner/Topic(href, href_list)
 	if(..())
-		return 1
+		return TOPIC_HANDLED
 
 	if(href_list["connect_scanner"])
 		if(text2num(href_list["connect_scanner"]))
@@ -69,22 +62,26 @@
 				to_chat(usr, "Scanner installation failed.")
 		else
 			disconnect_scanner()
-		return 1
+		return TOPIC_REFRESH
 
 	if(href_list["scan"])
 		if(check_scanning())
 			metadata_buffer.Cut()
 			var/obj/item/stock_parts/computer/scanner/scanner = computer.get_component(PART_SCANNER)
 			scanner.run_scan(usr, src)
-		return 1
+		return TOPIC_REFRESH
 
 	if(href_list["save"])
-		var/name = sanitize(input(usr, "Enter file name:", "Save As") as text|null)
-		if(!save_scan(name))
-			to_chat(usr, "Scan save failed.")
+		if(!data_buffer)
+			to_chat(usr, SPAN_WARNING("No data to export!"))
+			return TOPIC_HANDLED
 
-	if(.)
-		SSnano.update_uis(NM)
+		var/datum/computer_file/data/scan_file = new scan_file_type()
+		scan_file.stored_data = data_buffer
+
+		// This saves the file, so no additional handling on the program's end is required.
+		view_file_browser(usr, "saving_file", scan_file_type, OS_WRITE_ACCESS, "Save scan file", scan_file)
+		return TOPIC_HANDLED
 
 /datum/nano_module/program/scanner
 	name = "Scanner"

@@ -6,7 +6,7 @@
 	slot_flags = SLOT_FACE | SLOT_TIE
 	badge_string = null
 	hide_on_uniform_rolldown = FALSE
-
+	material = /decl/material/solid/metal/stainlesssteel
 	var/owner_rank
 	var/owner_name
 	var/owner_branch

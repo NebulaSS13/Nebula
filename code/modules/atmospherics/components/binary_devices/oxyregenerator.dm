@@ -15,7 +15,6 @@
 	layer = STRUCTURE_LAYER
 
 	var/target_pressure = 10*ONE_ATMOSPHERE
-	var/id = null
 	var/power_setting = 1 //power consumption setting, 1 through five
 	var/carbon_stored = 0
 	var/carbon_efficiency = 0.5
@@ -23,23 +22,22 @@
 	var/const/carbon_moles_per_piece = 50 //One 12g per mole * 50 = 600 g chunk of coal
 	var/phase = "filling"//"filling", "processing", "releasing"
 	var/datum/gas_mixture/inner_tank = new
-	var/tank_volume = 400//Litres
 
 /obj/machinery/atmospherics/binary/oxyregenerator/RefreshParts()
 	carbon_efficiency = initial(carbon_efficiency)
 	carbon_efficiency += 0.25 * total_component_rating_of_type(/obj/item/stock_parts/matter_bin)
 	carbon_efficiency -= 0.25 * number_of_components(/obj/item/stock_parts/matter_bin)
-	carbon_efficiency = Clamp(carbon_efficiency, initial(carbon_efficiency), 5)
+	carbon_efficiency = clamp(carbon_efficiency, initial(carbon_efficiency), 5)
 
 	intake_power_efficiency = initial(intake_power_efficiency)
 	intake_power_efficiency -= 0.1 * total_component_rating_of_type(/obj/item/stock_parts/manipulator)
 	intake_power_efficiency += 0.1 * number_of_components(/obj/item/stock_parts/manipulator)
-	intake_power_efficiency = Clamp(intake_power_efficiency, 0.1, initial(intake_power_efficiency))
+	intake_power_efficiency = clamp(intake_power_efficiency, 0.1, initial(intake_power_efficiency))
 
 	power_rating = 1
 	power_rating -= 0.05 * total_component_rating_of_type(/obj/item/stock_parts/micro_laser)
 	power_rating += 0.05 * number_of_components(/obj/item/stock_parts/micro_laser)
-	power_rating = Clamp(power_rating, 0.1, 1)
+	power_rating = clamp(power_rating, 0.1, 1)
 	power_rating *= initial(power_rating)
 	..()
 
@@ -47,7 +45,7 @@
 	. = ..()
 	to_chat(user,"Its outlet port is to the [dir2text(dir)].")
 
-/obj/machinery/atmospherics/binary/oxyregenerator/Process(var/delay)
+/obj/machinery/atmospherics/binary/oxyregenerator/Process(wait, tick)
 	..()
 	if((stat & (NOPOWER|BROKEN)) || !use_power)
 		return
@@ -70,7 +68,7 @@
 
 	if (phase == "processing")//processing CO2 in tank
 		if (inner_tank.gas[/decl/material/gas/carbon_dioxide])
-			var/co2_intake = between(0, inner_tank.gas[/decl/material/gas/carbon_dioxide], power_setting*delay/10)
+			var/co2_intake = clamp(0, inner_tank.gas[/decl/material/gas/carbon_dioxide], power_setting*wait/10)
 			last_flow_rate = co2_intake
 			inner_tank.adjust_gas(/decl/material/gas/carbon_dioxide, -co2_intake, 1)
 			var/datum/gas_mixture/new_oxygen = new
@@ -146,5 +144,5 @@
 		update_icon()
 		return 1
 	if(href_list["setPower"]) //setting power to 0 is redundant anyways
-		power_setting = between(1, text2num(href_list["setPower"]), 5)
+		power_setting = clamp(1, text2num(href_list["setPower"]), 5)
 		return 1

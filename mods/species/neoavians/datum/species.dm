@@ -17,6 +17,7 @@
 	description = "Avian species, largely crows, magpies and other corvids, were among the first sophonts uplifted to aid in colonizing Mars. \
 	These days they are more commonly found pursuing their own careers and goals on the fringes of human space or around their adopted homeworld \
 	of Hyperion. Neo-avian naming conventions tend to be a chosen name followed by the species of the person, followed by the location they were hatched."
+	base_prosthetics_model = null
 
 	age_descriptor = /datum/appearance_descriptor/age/neoavian
 	holder_icon = 'mods/species/neoavians/icons/holder.dmi'
@@ -29,8 +30,6 @@
 	default_h_style = /decl/sprite_accessory/hair/avian
 
 	preview_outfit = /decl/hierarchy/outfit/job/generic/assistant/avian
-
-	reagent_tag = IS_AVIAN
 
 	available_bodytypes = list(
 		/decl/bodytype/avian,

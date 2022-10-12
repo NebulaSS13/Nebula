@@ -23,8 +23,6 @@
 	var/is_flipped = FALSE
 	var/decl/material/additional_reinf_material
 
-	// For racks.
-	var/can_reinforce = TRUE
 	var/top_surface_noun = "tabletop"
 
 	// Gambling tables. I'd prefer reinforced with carpet/felt/cloth/whatever, but AFAIK it's either harder or impossible to get /obj/item/stack/material of those.
@@ -67,13 +65,13 @@
 
 	// Destroy some stuff before passing off to dismantle(), which will return it in sheet form instead.
 	if(reinf_material && !prob(20))
-		reinf_material.place_shard(loc)
+		reinf_material.place_shards(loc)
 		reinf_material = null
 	if(material && !prob(20))
-		material.place_shard(loc)
+		material.place_shards(loc)
 		material = null
 	if(additional_reinf_material && !prob(20))
-		additional_reinf_material.place_shard(loc)
+		additional_reinf_material.place_shards(loc)
 		additional_reinf_material = null
 	if(felted && prob(50))
 		felted = FALSE
@@ -108,7 +106,7 @@
 		else if(reinf_material)
 			needs_removed = top_surface_noun
 		else if(additional_reinf_material)
-			needs_removed = "reinforcements" 
+			needs_removed = "reinforcements"
 		if(needs_removed)
 			to_chat(user, SPAN_WARNING("Remove \the [needs_removed] with a screwdriver first."))
 			return FALSE
@@ -315,8 +313,8 @@
 
 		var/obj/structure/table/left_neighbor  = locate(/obj/structure/table) in get_step(loc, turn(dir, -90))
 		var/obj/structure/table/right_neighbor = locate(/obj/structure/table) in get_step(loc, turn(dir, 90))
-		var/left_neighbor_blend = istype(left_neighbor)   && blend_with(left_neighbor)  && left_neighbor.is_flipped == is_flipped  && left_neighbor.dir == dir 
-		var/right_neighbor_blend = istype(right_neighbor) && blend_with(right_neighbor) && right_neighbor.is_flipped == is_flipped && right_neighbor.dir == dir 
+		var/left_neighbor_blend = istype(left_neighbor)   && blend_with(left_neighbor)  && left_neighbor.is_flipped == is_flipped  && left_neighbor.dir == dir
+		var/right_neighbor_blend = istype(right_neighbor) && blend_with(right_neighbor) && right_neighbor.is_flipped == is_flipped && right_neighbor.dir == dir
 
 		var/flip_type = 0
 		var/flip_mod = ""
@@ -476,7 +474,7 @@
 
 	if(!can_flip())
 		return FALSE
-	
+
 	// Is the table directly in the direction of flipping part of us?
 	var/obj/structure/table/T = locate() in get_step(src.loc, direction)
 	if(istype(T) && blend_with(T) && is_flipped == T.is_flipped)
@@ -683,7 +681,7 @@
 /obj/structure/table/holo_woodentable
 	icon_state = "holo_preview"
 
-/obj/structure/table/holo_woodentable/Initialize()	
+/obj/structure/table/holo_woodentable/Initialize()
 	material = /decl/material/solid/wood/holographic
 	reinf_material = /decl/material/solid/wood/holographic
 	. = ..()

@@ -10,6 +10,7 @@
 	max_w_class = ITEM_SIZE_NORMAL
 	max_storage_space = 32 //The sum of the w_classes of all the items in this storage item.
 	req_access = list(access_armory)
+	material = /decl/material/solid/metal/stainlesssteel
 	var/locked = 1
 	var/broken = 0
 	var/icon_locked = "lockbox+l"

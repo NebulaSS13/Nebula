@@ -33,7 +33,7 @@
 		var/list/all_materials = decls_repository.get_decls_of_subtype(/decl/material)
 		for(var/mat_type in all_materials)
 			var/decl/material/mat = all_materials[mat_type]
-			if(!mat.hidden_from_codex && !mat.is_abstract() && !isnull(mat.boiling_point) && mat.boiling_point < T20C)
+			if(!mat.hidden_from_codex && !isnull(mat.boiling_point) && mat.boiling_point < T20C)
 				gas_decls_by_symbol_cache[mat.gas_symbol] = mat.type
 
 	rebuild_filtering_list()
@@ -80,14 +80,14 @@
 	var/datum/gas_mixture/output_air = output.air	//BYOND doesn't like referencing "output.air.return_pressure()" so we need to make a direct reference
 	var/datum/gas_mixture/input_air = input.air		// it's completely happy with them if they're in a loop though i.e. "P.air.return_pressure()"... *shrug*
 
-	var/delta = between(0, (output_air ? (max_output_pressure - output_air.return_pressure()) : 0), max_output_pressure)
+	var/delta = clamp(0, (output_air ? (max_output_pressure - output_air.return_pressure()) : 0), max_output_pressure)
 	var/transfer_moles_max = calculate_transfer_moles(input_air, output_air, delta, (output && output.network && output.network.volume) ? output.network.volume : 0)
 	for(var/datum/omni_port/filter_output in gas_filters)
-		delta = between(0, (filter_output.air ? (max_output_pressure - filter_output.air.return_pressure()) : 0), max_output_pressure)
+		delta = clamp(0, (filter_output.air ? (max_output_pressure - filter_output.air.return_pressure()) : 0), max_output_pressure)
 		transfer_moles_max = min(transfer_moles_max, (calculate_transfer_moles(input_air, filter_output.air, delta, (filter_output && filter_output.network && filter_output.network.volume) ? filter_output.network.volume : 0)))
 
 	//Figure out the amount of moles to transfer
-	var/transfer_moles = between(0, ((set_flow_rate/input_air.volume)*input_air.total_moles), transfer_moles_max)
+	var/transfer_moles = clamp(0, ((set_flow_rate/input_air.volume)*input_air.total_moles), transfer_moles_max)
 
 	var/power_draw = -1
 	if (transfer_moles > MINIMUM_MOLES_TO_FILTER)
@@ -185,7 +185,7 @@
 		switch(href_list["command"])
 			if("set_flow_rate")
 				var/new_flow_rate = input(usr,"Enter new flow rate limit (0-[max_flow_rate]L/s)","Flow Rate Control",set_flow_rate) as num
-				set_flow_rate = between(0, new_flow_rate, max_flow_rate)
+				set_flow_rate = clamp(0, new_flow_rate, max_flow_rate)
 			if("switch_mode")
 				switch_mode(dir_flag(href_list["dir"]), mode_return_switch(href_list["mode"]))
 			if("switch_filter")

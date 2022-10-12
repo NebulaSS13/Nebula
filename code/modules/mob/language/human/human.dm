@@ -10,7 +10,7 @@
 	space_chance = 40
 	abstract_type = /decl/language/human
 
-/decl/language/human/get_spoken_verb(var/msg_end)
+/decl/language/human/get_spoken_verb(mob/living/speaker, msg_end)
 	switch(msg_end)
 		if("!")
 			return pick("exclaims","shouts","yells")

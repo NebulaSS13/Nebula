@@ -83,8 +83,9 @@ var/global/list/laser_wavelengths
 /obj/item/gun/energy/capacitor/Initialize()
 	if(!laser_wavelengths)
 		laser_wavelengths = list()
-		for(var/laser in subtypesof(/decl/laser_wavelength))
-			laser_wavelengths += GET_DECL(laser)
+		var/list/all_wavelengths = decls_repository.get_decls_of_subtype(/decl/laser_wavelength)
+		for(var/laser in all_wavelengths)
+			laser_wavelengths += all_wavelengths[laser]
 	selected_wavelength = pick(laser_wavelengths)
 	if(ispath(capacitors))
 		var/capacitor_type = capacitors
@@ -175,7 +176,7 @@ var/global/list/laser_wavelengths
 			if(charged)
 				. = TRUE
 				break
-			sleep(5)
+			sleep(charge_iteration_delay)
 		charging = FALSE
 
 /obj/item/gun/energy/capacitor/get_shots_remaining()
@@ -203,7 +204,7 @@ var/global/list/laser_wavelengths
 				I = emissive_overlay(icon, "[icon_state]-charging-[i]")
 			else
 				I = image(icon, "[icon_state]-charging-[i]")
-			I.alpha = Clamp(255 * (capacitor.charge/capacitor.max_charge), 0, 255)
+			I.alpha = clamp(255 * (capacitor.charge/capacitor.max_charge), 0, 255)
 			I.color = selected_wavelength.color
 			I.appearance_flags |= RESET_COLOR
 			add_overlay(I)
@@ -236,7 +237,7 @@ var/global/list/laser_wavelengths
 				var/obj/item/stock_parts/capacitor/capacitor = capacitors[i]
 				if(capacitor.charge > 0)
 					I = emissive_overlay(overlay.icon, "[overlay.icon_state]-charging-[i]")
-					I.alpha = Clamp(255 * (capacitor.charge/capacitor.max_charge), 0, 255)
+					I.alpha = clamp(255 * (capacitor.charge/capacitor.max_charge), 0, 255)
 					I.color = selected_wavelength.color
 					I.appearance_flags |= RESET_COLOR
 					overlay.overlays += I

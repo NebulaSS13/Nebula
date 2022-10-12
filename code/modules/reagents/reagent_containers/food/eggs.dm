@@ -68,7 +68,7 @@
 /obj/item/chems/food/egg/yellow
 	icon_state = "egg-yellow"
 
-/obj/item/chems/food/egg/lizard/Initialize()
+/obj/item/chems/food/egg/lizard/populate_reagents()
 	. = ..()
 	reagents.add_reagent(/decl/material/liquid/nutriment/protein/egg, 5)
 	if(prob(30))	//extra nutriment
@@ -82,11 +82,11 @@
 	center_of_mass = @"{'x':16,'y':14}"
 	bitesize = 1
 
-/obj/item/chems/food/friedegg/Initialize()
+/obj/item/chems/food/friedegg/populate_reagents()
 	. = ..()
 	reagents.add_reagent(/decl/material/liquid/nutriment/protein, 3)
-	reagents.add_reagent(/decl/material/solid/sodiumchloride, 1)
-	reagents.add_reagent(/decl/material/solid/blackpepper, 1)
+	reagents.add_reagent(/decl/material/solid/sodiumchloride,     1)
+	reagents.add_reagent(/decl/material/solid/blackpepper,        1)
 
 /obj/item/chems/food/boiledegg
 	name = "boiled egg"
@@ -94,7 +94,7 @@
 	icon_state = "egg"
 	filling_color = "#ffffff"
 
-/obj/item/chems/food/boiledegg/Initialize()
+/obj/item/chems/food/boiledegg/populate_reagents()
 	. = ..()
 	reagents.add_reagent(/decl/material/liquid/nutriment/protein, 2)
 
@@ -107,7 +107,7 @@
 	center_of_mass = @"{'x':16,'y':13}"
 	bitesize = 1
 
-/obj/item/chems/food/omelette/Initialize()
+/obj/item/chems/food/omelette/populate_reagents()
 	. = ..()
 	reagents.add_reagent(/decl/material/liquid/nutriment/protein, 8)
 
@@ -119,7 +119,7 @@
 	filling_color = "#f0f2e4"
 	center_of_mass = @"{'x':17,'y':10}"
 	bitesize = 1
-
-/obj/item/chems/food/chawanmushi/Initialize()
+	
+/obj/item/chems/food/chawanmushi/populate_reagents()
 	. = ..()
 	reagents.add_reagent(/decl/material/liquid/nutriment/protein, 5)

@@ -42,8 +42,6 @@
 	z_flags = ZMM_MANGLE_PLANES
 
 	var/obj/item/holding_item
-	var/mob/living/carbon/alien/diona/next_nymph
-	var/mob/living/carbon/alien/diona/previous_nymph
 	var/tmp/flower_color
 	var/tmp/last_glow
 

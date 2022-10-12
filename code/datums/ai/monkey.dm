@@ -3,7 +3,7 @@
 	expected_type = /mob/living/carbon/human
 	var/list/no_touchie = list(
 		/obj/item/mirror,
-		/obj/item/storage/mirror
+		/obj/structure/mirror
 	)
 
 /datum/ai/monkey/do_process(var/time_elapsed)

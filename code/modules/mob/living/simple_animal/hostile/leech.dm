@@ -36,7 +36,7 @@
 		H.remove_blood_simple(suck_potency)
 		if(health < maxHealth)
 			health += suck_potency / 1.5
-		belly += Clamp(suck_potency, 0, 100)
+		belly += clamp(suck_potency, 0, 100)
 
 /obj/structure/leech_spawner
 	name = "reeds"

@@ -12,6 +12,8 @@
 /obj/item/storage/fancy
 	item_state = "syringe_kit" //placeholder, many of these don't have inhands
 	opened = 0 //if an item has been removed from this container
+	item_flags = ITEM_FLAG_HOLLOW
+	material = /decl/material/solid/cardboard
 	var/obj/item/key_type //path of the key item that this "fancy" container is meant to store
 
 /obj/item/storage/fancy/on_update_icon()
@@ -45,14 +47,13 @@
 	storage_slots = 12
 	max_w_class = ITEM_SIZE_SMALL
 	w_class = ITEM_SIZE_NORMAL
-
 	key_type = /obj/item/chems/food/egg
 	can_hold = list(
 		/obj/item/chems/food/egg,
 		/obj/item/chems/food/boiledegg
 		)
-
 	startswith = list(/obj/item/chems/food/egg = 12)
+	material = /decl/material/solid/cardboard
 
 /obj/item/storage/fancy/egg_box/empty
 	startswith = null
@@ -71,6 +72,7 @@
 	key_type = /obj/item/chems/food/cracker
 	can_hold = list(/obj/item/chems/food/cracker)
 	startswith = list(/obj/item/chems/food/cracker = 6)
+	material = /decl/material/solid/cardboard
 
 /*
  * Crayon Box
@@ -84,7 +86,6 @@
 	w_class = ITEM_SIZE_SMALL
 	max_w_class = ITEM_SIZE_TINY
 	max_storage_space = 6
-
 	key_type = /obj/item/pen/crayon
 	startswith = list(
 		/obj/item/pen/crayon/red,
@@ -94,6 +95,7 @@
 		/obj/item/pen/crayon/blue,
 		/obj/item/pen/crayon/purple,
 		)
+	material = /decl/material/solid/cardboard
 
 /obj/item/storage/fancy/crayons/on_update_icon()
 	. = ..()
@@ -118,7 +120,7 @@
 	max_storage_space = 6
 	throwforce = 2
 	slot_flags = SLOT_LOWER_BODY
-
+	material = /decl/material/solid/cardboard
 	key_type = /obj/item/clothing/mask/smokable/cigarette
 	startswith = list(/obj/item/clothing/mask/smokable/cigarette = 6)
 
@@ -267,7 +269,7 @@
 	throwforce = 2
 	slot_flags = SLOT_LOWER_BODY
 	storage_slots = 7
-
+	material = /decl/material/solid/wood/mahogany
 	key_type = /obj/item/clothing/mask/smokable/cigarette/cigar
 	startswith = list(/obj/item/clothing/mask/smokable/cigarette/cigar = 6)
 
@@ -293,7 +295,7 @@
 	w_class = ITEM_SIZE_NORMAL
 	max_w_class = ITEM_SIZE_TINY
 	storage_slots = 12
-
+	material = /decl/material/solid/plastic
 	key_type = /obj/item/chems/glass/beaker/vial
 	startswith = list(/obj/item/chems/glass/beaker/vial = 12)
 
@@ -316,6 +318,7 @@
 	max_storage_space = null
 	storage_slots = 12
 	req_access = list(access_virology)
+	material = /decl/material/solid/metal/stainlesssteel
 
 /obj/item/storage/lockbox/vials/Initialize()
 	. = ..()

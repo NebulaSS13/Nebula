@@ -67,7 +67,7 @@
 	can_write = FALSE
 	has_updates = FALSE
 
-/decl/public_access/public_variable/holosign_on/access_var(obj/machinery/igniter/igniter)
+/decl/public_access/public_variable/igniter_on/access_var(obj/machinery/igniter/igniter)
 	return igniter.on
 
 /decl/public_access/public_method/igniter_toggle
@@ -106,17 +106,18 @@
 	construct_state = /decl/machine_construction/wall_frame/panel_closed/simple
 	frame_type = /obj/item/frame/button/sparker
 	base_type = /obj/machinery/sparker/buildable
+	directional_offset = "{'NORTH':{'y':-32}, 'SOUTH':{'y':32}, 'EAST':{'x':32}, 'WEST':{'x':-32}}"
 
 /obj/machinery/sparker/buildable
 	uncreated_component_parts = null
 
 /obj/machinery/sparker/on_update_icon()
 	if(disable)
-		icon_state = "migniter-d"
+		icon_state = "[base_state]-d"
 	else if(!(stat & NOPOWER))
-		icon_state = "migniter"
+		icon_state = base_state
 	else
-		icon_state = "migniter-p"
+		icon_state = "[base_state]-p"
 
 /obj/machinery/sparker/attackby(obj/item/W, mob/user)
 	if(IS_SCREWDRIVER(W))
@@ -144,7 +145,7 @@
 		return
 
 
-	flick("migniter-spark", src)
+	flick("[base_state]-spark", src)
 	spark_at(src, amount=2, cardinal_only = TRUE)
 	src.last_spark = world.time
 	use_power_oneoff(2000)

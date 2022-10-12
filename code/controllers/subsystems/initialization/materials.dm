@@ -15,11 +15,9 @@ SUBSYSTEM_DEF(materials)
 
 	// Chemistry vars.
 	var/list/active_holders =                  list()
-	var/list/chemical_reactions_by_type =      list()
 	var/list/chemical_reactions_by_id =        list()
 	var/list/chemical_reactions_by_result =    list()
 	var/list/processing_holders =              list()
-	var/list/pending_reagent_change =          list()
 	var/list/cocktails_by_primary_ingredient = list()
 
 	// Overlay caches
@@ -59,6 +57,8 @@ SUBSYSTEM_DEF(materials)
 	// Various other material functions.
 	build_material_lists()       // Build core material lists.
 	build_fusion_reaction_list() // Build fusion reaction tree.
+	materials = sortTim(SSmaterials.materials, /proc/cmp_name_asc)
+	materials_by_name = sortTim(SSmaterials.materials_by_name, /proc/cmp_name_or_type_asc, TRUE)
 
 	var/alpha_inc = 256 / DAMAGE_OVERLAY_COUNT
 	for(var/i = 1; i <= DAMAGE_OVERLAY_COUNT; i++)
@@ -76,11 +76,9 @@ SUBSYSTEM_DEF(materials)
 		return
 	materials =         list()
 	materials_by_name = list()
-	for(var/mtype in subtypesof(/decl/material))
-		var/decl/material/new_mineral = mtype
-		if(!initial(new_mineral.name))
-			continue
-		new_mineral = GET_DECL(mtype)
+	var/list/material_decls = decls_repository.get_decls_of_subtype(/decl/material)
+	for(var/mtype in material_decls)
+		var/decl/material/new_mineral = material_decls[mtype]
 		materials += new_mineral
 		materials_by_name[lowertext(new_mineral.name)] = new_mineral
 		if(new_mineral.sparse_material_weight)
@@ -143,7 +141,7 @@ SUBSYSTEM_DEF(materials)
 		return planet.get_strata(location)
 	var/s_key = "[location.z]"
 	if(!global.default_strata_type_by_z[s_key])
-		global.default_strata_type_by_z[s_key] = pick(subtypesof(/decl/strata))
+		global.default_strata_type_by_z[s_key] = pick(decls_repository.get_decl_paths_of_subtype(/decl/strata))
 	return global.default_strata_type_by_z[s_key]
 
 /datum/controller/subsystem/materials/proc/get_material_by_name(var/mat_name)

@@ -63,7 +63,7 @@
 	2.) Place solar panel assemblies upon the knots, and then wrench the assemblies into place.<BR> \
 	3.) Insert the tracker electronics into one of the solar panel assemblies. <BR> \
 	4.) Add glass to every solar panel assembly, including the one with the tracker electronics.<BR> \
-	5.) Make a <span codexlink='computer'>computer</span> using a circuit board (solar control console).<BR> \
+	5.) Make a computer frame out of steel and install a circuit board (solar control console).<BR> \
 	If at any point you need to move a solar panel, use a crowbar to remove the glass, a wrench to unsecure the assembly, and a wirecutter to remove the cables."
 
 /datum/codex_entry/cable

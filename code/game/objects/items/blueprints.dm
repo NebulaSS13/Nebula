@@ -4,7 +4,7 @@
 	icon = 'icons/obj/items/blueprints.dmi'
 	icon_state = "blueprints"
 	attack_verb = list("attacked", "bapped", "hit")
-
+	material = /decl/material/solid/cardboard
 	var/valid_z_levels = list()
 	var/area_prefix
 

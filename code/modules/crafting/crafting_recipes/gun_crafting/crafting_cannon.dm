@@ -4,6 +4,7 @@
 	icon = 'icons/obj/crafting_icons.dmi'
 	icon_state = "pneumatic0"
 	item_state = "pneumatic"
+	material = /decl/material/solid/metal/steel
 
 /decl/crafting_stage/pipe/cannon
 	descriptor = "pneumatic cannon"

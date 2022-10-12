@@ -65,7 +65,7 @@
 	var/datum/alarm_source/AS = sources_assoc[source]
 	sources -= AS
 	sources_assoc -= source
-	qdel(source)
+	qdel(AS)
 
 /datum/alarm/proc/alarm_z()
 	if(origin)

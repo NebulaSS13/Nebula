@@ -285,16 +285,17 @@ SUBSYSTEM_DEF(jobs)
 				var/age = V.client.prefs.get_character_age()
 				if(age < job.minimum_character_age) // Nope.
 					continue
-				switch(age)
-					if(job.minimum_character_age to (job.minimum_character_age+10))
-						weightedCandidates[V] = 3 // Still a bit young.
-					if((job.minimum_character_age+10) to (job.ideal_character_age-10))
-						weightedCandidates[V] = 6 // Better.
-					if((job.ideal_character_age-10) to (job.ideal_character_age+10))
+				switch(age - job.ideal_character_age)
+					if(0 to -10)
+						if(age < (job.minimum_character_age+10))
+							weightedCandidates[V] = 3 // Still a bit young.
+						else
+							weightedCandidates[V] = 6 // Better.
+					if(-10 to 10)
 						weightedCandidates[V] = 10 // Great.
-					if((job.ideal_character_age+10) to (job.ideal_character_age+20))
+					if(10 to 20)
 						weightedCandidates[V] = 6 // Still good.
-					if((job.ideal_character_age+20) to INFINITY)
+					if(20 to INFINITY)
 						weightedCandidates[V] = 3 // Geezer.
 					else
 						// If there's ABSOLUTELY NOBODY ELSE

@@ -196,7 +196,7 @@ var/global/list/sparring_attack_cache = list()
 	if(!affecting)
 		return ..()
 
-	attack_damage = Clamp(attack_damage, 1, 5) // We expect damage input of 1 to 5 for this proc. But we leave this check juuust in case.
+	attack_damage = clamp(attack_damage, 1, 5) // We expect damage input of 1 to 5 for this proc. But we leave this check juuust in case.
 
 	if(target == user)
 		user.visible_message("<span class='danger'>[user] [pick(attack_verb)] \himself in \the [affecting]!</span>")
@@ -268,7 +268,7 @@ var/global/list/sparring_attack_cache = list()
 	if(!affecting)
 		return ..()
 
-	attack_damage = Clamp(attack_damage, 1, 5)
+	attack_damage = clamp(attack_damage, 1, 5)
 	switch(attack_damage)
 		if(1 to 2)	user.visible_message("<span class='danger'>[user] threw [target] a glancing [pick(attack_noun)] to \the [affecting]!</span>") //it's not that they're kicking lightly, it's that the kick didn't quite connect
 		if(3 to 4)	user.visible_message("<span class='danger'>[user] [pick(attack_verb)] [target] in \the [affecting]!</span>")
@@ -304,7 +304,7 @@ var/global/list/sparring_attack_cache = list()
 		return ..()
 
 	var/obj/item/clothing/shoes = user.get_equipped_item(slot_shoes_str)
-	attack_damage = Clamp(attack_damage, 1, 5)
+	attack_damage = clamp(attack_damage, 1, 5)
 
 	var/shoe_text = shoes ? copytext(shoes.name, 1, -1) : "foot"
 	var/decl/pronouns/G = user.get_pronouns()

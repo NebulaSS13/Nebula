@@ -10,7 +10,6 @@
 	uncreated_component_parts = null
 	stat_immune = 0
 	frame_type = /obj/machinery/constructable_frame/computerframe/deconstruct
-	var/processing = 0
 
 	var/icon_keyboard = "generic_key"
 	var/icon_screen = "generic"

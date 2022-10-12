@@ -10,6 +10,9 @@
 	icon_state = "atm"
 	anchored = 1
 	idle_power_usage = 10
+	obj_flags = OBJ_FLAG_MOVES_UNSUPPORTED
+	directional_offset = "{'NORTH':{'y':-32}, 'SOUTH':{'y':32}, 'EAST':{'x':-32}, 'WEST':{'x':32}}"
+
 	var/datum/money_account/authenticated_account
 	var/number_incorrect_tries = 0
 	var/previous_account_number = 0
@@ -18,7 +21,6 @@
 	var/ticks_left_timeout = 0
 	var/machine_id = ""
 	var/obj/item/card/id/held_card
-	var/editing_security_level = 0
 	var/view_screen = NO_SCREEN
 	var/account_security_level = 0
 	var/charge_stick_type = /obj/item/charge_stick

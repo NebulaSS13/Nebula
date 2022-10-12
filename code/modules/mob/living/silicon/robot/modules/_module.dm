@@ -232,4 +232,4 @@
 	if(os && os.has_component(PART_HDD))
 		var/obj/item/stock_parts/computer/hard_drive/disk = os.get_component(PART_HDD)
 		for(var/T in software)
-			disk.store_file(new T(disk))
+			disk.store_file(new T(disk), OS_PROGRAMS_DIR, TRUE)

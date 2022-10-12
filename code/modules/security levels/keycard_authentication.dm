@@ -8,6 +8,8 @@
 	idle_power_usage = 2
 	active_power_usage = 6
 	power_channel = ENVIRON
+	obj_flags = OBJ_FLAG_MOVES_UNSUPPORTED
+	directional_offset = "{'NORTH':{'y':-20}, 'SOUTH':{'y':28}, 'EAST':{'x':-24}, 'WEST':{'x':24}}"
 
 	var/active = 0 //This gets set to 1 on all devices except the one where the initial request was made.
 	var/event = ""

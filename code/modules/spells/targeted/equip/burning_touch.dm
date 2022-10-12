@@ -21,9 +21,9 @@
 	force = 10
 	damtype = BURN
 	simulated = 0
+	health = ITEM_HEALTH_NO_DAMAGE
 	var/burn_power = 0
 	var/burn_timer
-	var/obj/item/organ/external/hand/connected
 
 /obj/item/flame/hands/pickup(var/mob/user)
 	burn_power = 0

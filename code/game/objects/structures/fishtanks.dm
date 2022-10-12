@@ -39,7 +39,7 @@ var/global/list/fishtank_cache = list()
 
 /obj/structure/glass_tank/Initialize()
 	tank_overlay = new(loc, src)
-	initial_fill()
+	initialize_reagents()
 	. = ..()
 	update_icon(TRUE)
 
@@ -51,10 +51,16 @@ var/global/list/fishtank_cache = list()
 	for(var/obj/structure/glass_tank/A in orange(1, oldloc))
 		A.update_icon()
 
-/obj/structure/glass_tank/proc/initial_fill()
-	if(fill_type && fill_amt)
-		create_reagents(fill_amt)
-		reagents.add_reagent(fill_type, fill_amt)
+/obj/structure/glass_tank/initialize_reagents(populate = TRUE)
+	if(!fill_amt)
+		return
+	create_reagents(fill_amt)
+	if(!fill_type)
+		return
+	. = ..()
+
+/obj/structure/glass_tank/populate_reagents()
+	reagents.add_reagent(fill_type, reagents.maximum_volume)
 
 /obj/structure/glass_tank/attack_hand(var/mob/user)
 	visible_message(SPAN_NOTICE("\The [user] taps on \the [src]."))

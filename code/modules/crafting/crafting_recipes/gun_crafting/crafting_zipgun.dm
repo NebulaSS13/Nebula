@@ -4,6 +4,7 @@
 	icon = 'icons/obj/crafting_icons.dmi'
 	icon_state = "zipgun0"
 	item_state = "zipgun-solid"
+	material = /decl/material/solid/metal/steel
 
 /decl/crafting_stage/pipe/zipgun
 	descriptor = "zipgun"

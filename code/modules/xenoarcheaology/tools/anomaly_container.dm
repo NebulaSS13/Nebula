@@ -1,10 +1,10 @@
 /obj/structure/anomaly_container
-	name = "anomaly container"
-	desc = "Used to safely contain and move anomalies."
-	icon = 'icons/obj/xenoarchaeology.dmi'
+	name       = "anomaly container"
+	desc       = "Used to safely contain and move anomalies."
+	icon       = 'icons/obj/xenoarchaeology.dmi'
 	icon_state = "anomaly_container"
-	density = 1
-
+	density    = TRUE
+	material   = /decl/material/solid/metal/chromium
 	var/obj/structure/artifact/contained
 
 /obj/structure/anomaly_container/Initialize()

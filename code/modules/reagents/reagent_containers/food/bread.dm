@@ -14,7 +14,7 @@
 	nutriment_type = /decl/material/liquid/nutriment/bread
 	bitesize = 2
 
-/obj/item/chems/food/sandwich/Initialize()
+/obj/item/chems/food/sandwich/populate_reagents()
 	. = ..()
 	reagents.add_reagent(/decl/material/liquid/nutriment/protein, 3)
 
@@ -30,10 +30,10 @@
 	nutriment_type = /decl/material/liquid/nutriment/bread
 	bitesize = 2
 
-/obj/item/chems/food/toastedsandwich/Initialize()
+/obj/item/chems/food/toastedsandwich/populate_reagents()
 	. = ..()
 	reagents.add_reagent(/decl/material/liquid/nutriment/protein, 3)
-	reagents.add_reagent(/decl/material/solid/carbon, 2)
+	reagents.add_reagent(/decl/material/solid/carbon,             2)
 
 /obj/item/chems/food/grilledcheese
 	name = "grilled cheese sandwich"
@@ -46,7 +46,7 @@
 	bitesize = 2
 	nutriment_type = /decl/material/liquid/nutriment/bread
 
-/obj/item/chems/food/grilledcheese/Initialize()
+/obj/item/chems/food/grilledcheese/populate_reagents()
 	. = ..()
 	reagents.add_reagent(/decl/material/liquid/nutriment/protein, 4)
 
@@ -61,9 +61,9 @@
 	bitesize = 3
 	nutriment_type = /decl/material/liquid/nutriment/bread
 
-/obj/item/chems/food/baguette/Initialize()
+/obj/item/chems/food/baguette/populate_reagents()
 	. = ..()
-	reagents.add_reagent(/decl/material/solid/blackpepper, 1)
+	reagents.add_reagent(/decl/material/solid/blackpepper,    1)
 	reagents.add_reagent(/decl/material/solid/sodiumchloride, 1)
 
 /obj/item/chems/food/jelliedtoast
@@ -78,7 +78,7 @@
 	bitesize = 3
 	nutriment_type = /decl/material/liquid/nutriment/bread
 
-/obj/item/chems/food/jelliedtoast/cherry/Initialize()
+/obj/item/chems/food/jelliedtoast/cherry/populate_reagents()
 	. = ..()
 	reagents.add_reagent(/decl/material/liquid/nutriment/cherryjelly, 5)
 
@@ -94,7 +94,7 @@
 	bitesize = 3
 	nutriment_type = /decl/material/liquid/nutriment/bread
 
-/obj/item/chems/food/jellysandwich/cherry/Initialize()
+/obj/item/chems/food/jellysandwich/cherry/populate_reagents()
 	. = ..()
 	reagents.add_reagent(/decl/material/liquid/nutriment/cherryjelly, 5)
 

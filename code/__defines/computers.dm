@@ -33,6 +33,7 @@
 #define PROGRAM_STATE_KILLED 0
 #define PROGRAM_STATE_BACKGROUND 1
 #define PROGRAM_STATE_ACTIVE 2
+#define PROGRAM_STATE_BROWSER 3
 
 #define PROG_MISC  		"Miscellaneous"
 #define PROG_ENG  		"Engineering"
@@ -55,3 +56,22 @@
 // Caps for network logging. Less than 10 would make logging useless anyway, more than 500 may make the log browser too laggy. Defaults to 100 unless user changes it.
 #define MAX_NETWORK_LOGS 100
 #define MIN_NETWORK_LOGS 10
+
+// Default directories referenced by the OS or programs.
+#define OS_PROGRAMS_DIR  "programs"
+#define OS_RECORDS_DIR   "records"
+#define OS_ACCOUNTS_DIR  "accounts"
+#define OS_DOCUMENTS_DIR "documents"
+#define OS_LOGS_DIR      "logs"
+
+// Return codes for file storage.
+#define OS_FILE_SUCCESS     1
+#define OS_HARDDRIVE_ERROR  0
+#define OS_FILE_NOT_FOUND  -1
+#define OS_DIR_NOT_FOUND   -2
+#define OS_FILE_EXISTS     -3
+#define OS_FILE_NO_READ    -4
+#define OS_FILE_NO_WRITE   -5
+#define OS_HARDDRIVE_SPACE -6
+#define OS_NETWORK_ERROR   -7
+#define OS_BAD_NAME        -8 

@@ -1153,7 +1153,7 @@
 	dir = 8;
 	pixel_x = -15
 	},
-/obj/item/storage/mirror{
+/obj/structure/mirror{
 	pixel_x = -28
 	},
 /obj/machinery/atmospherics/unary/vent_scrubber/on{

@@ -7,10 +7,6 @@
 //Checks if all high bits in req_mask are set in bitfield
 #define BIT_TEST_ALL(bitfield, req_mask) ((~(bitfield) & (req_mask)) == 0)
 
-//Returns the middle-most value
-/proc/dd_range(var/low, var/high, var/num)
-	return max(low,min(high,num))
-
 /proc/get_projectile_angle(atom/source, atom/target)
 	var/sx = source.x * world.icon_size
 	var/sy = source.y * world.icon_size
@@ -207,7 +203,7 @@ Turf and target are seperate in case you want to teleport some distance from a t
 			line+=locate(px,py,M.z)
 	return line
 
-#define LOCATE_COORDS(X, Y, Z) locate(between(1, X, world.maxx), between(1, Y, world.maxy), Z)
+#define LOCATE_COORDS(X, Y, Z) locate(clamp(1, X, world.maxx), clamp(1, Y, world.maxy), Z)
 /proc/getcircle(turf/center, var/radius) //Uses a fast Bresenham rasterization algorithm to return the turfs in a thin circle.
 	if(!radius) return list(center)
 
@@ -234,7 +230,7 @@ Turf and target are seperate in case you want to teleport some distance from a t
 
 #undef LOCATE_COORDS
 
-#define LOCATE_COORDS_SAFE(X, Y, Z) locate(between(TRANSITIONEDGE + 1, X, world.maxx - TRANSITIONEDGE), between(TRANSITIONEDGE + 1, Y, world.maxy - TRANSITIONEDGE), Z)
+#define LOCATE_COORDS_SAFE(X, Y, Z) locate(clamp(TRANSITIONEDGE + 1, X, world.maxx - TRANSITIONEDGE), clamp(TRANSITIONEDGE + 1, Y, world.maxy - TRANSITIONEDGE), Z)
 /proc/getcirclesafe(turf/center, var/radius) //Uses a fast Bresenham rasterization algorithm to return the turfs in a thin circle.
 	if(!radius) return list(center)
 
@@ -449,10 +445,6 @@ Turf and target are seperate in case you want to teleport some distance from a t
 	var/y = min(world.maxy, max(1, A.y + dy))
 	return locate(x,y,A.z)
 
-//Makes sure MIDDLE is between LOW and HIGH. If not, it adjusts it. Returns the adjusted value. Lower bound takes priority.
-/proc/between(var/low, var/middle, var/high)
-	return max(min(middle, high), low)
-
 //Will return the contents of an atom recursivly to a depth of 'searchDepth'
 /atom/proc/GetAllContents(searchDepth = 5)
 	var/list/toReturn = list()
@@ -544,7 +536,6 @@ Turf and target are seperate in case you want to teleport some distance from a t
 /datum/coords //Simple datum for storing coordinates.
 	var/x_pos = null
 	var/y_pos = null
-	var/z_pos = null
 
 /area/proc/copy_contents_to(var/area/A , var/platingRequired = 0 )
 	//Takes: Area. Optional: If it should copy to areas that don't have plating
@@ -744,7 +735,7 @@ var/global/list/WALLITEMS = list(
 	/obj/machinery/status_display, /obj/machinery/network/requests_console, /obj/machinery/light_switch, /obj/structure/sign,
 	/obj/machinery/newscaster, /obj/machinery/firealarm, /obj/structure/noticeboard,
 	/obj/item/storage/secure/safe, /obj/machinery/door_timer, /obj/machinery/flasher, /obj/machinery/keycard_auth,
-	/obj/item/storage/mirror, /obj/structure/fireaxecabinet, /obj/structure/filingcabinet/wallcabinet
+	/obj/structure/mirror, /obj/structure/fireaxecabinet, /obj/structure/filingcabinet/wallcabinet
 	)
 /proc/gotwallitem(loc, dir)
 	for(var/obj/O in loc)

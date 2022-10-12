@@ -92,10 +92,9 @@
 		visible_message(SPAN_DANGER("\The [src] shatters!"))
 
 	var/debris_count = is_fulltile() ? 4 : 1
-	for(var/i = 0 to debris_count)
-		material.place_shard(loc)
-		if(reinf_material)
-			reinf_material.create_object(loc, 1, /obj/item/stack/material/rods)
+	material.place_shards(loc, debris_count)
+	if(reinf_material)
+		reinf_material.create_object(loc, debris_count, /obj/item/stack/material/rods)
 	qdel(src)
 
 /obj/structure/window/bullet_act(var/obj/item/projectile/Proj)
@@ -542,15 +541,9 @@
 	desc = "A remote control switch for electrochromic windows."
 	var/range = 7
 	stock_part_presets = null // This isn't a radio-enabled button; it communicates with nearby structures in view.
-	uncreated_component_parts = list(
-		/obj/item/stock_parts/power/apc/buildable
-	)
 	frame_type = /obj/item/frame/button/light_switch/windowtint
 	construct_state = /decl/machine_construction/wall_frame/panel_closed/simple
-	base_type = /obj/machinery/button/windowtint/buildable
-
-/obj/machinery/button/windowtint/buildable
-	uncreated_component_parts = null
+	base_type = /obj/machinery/button/windowtint
 
 /obj/machinery/button/windowtint/attackby(obj/item/W, mob/user)
 	if(IS_MULTITOOL(W))

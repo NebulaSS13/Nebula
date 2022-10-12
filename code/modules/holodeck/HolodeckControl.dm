@@ -201,9 +201,7 @@
 			loadProgram(global.using_map.holodeck_programs["turnoff"], 0)
 			active = 0
 			update_use_power(POWER_USE_IDLE)
-			for(var/mob/M in range(10,src))
-				M.show_message("The holodeck overloads!")
-
+			visible_message("The holodeck overloads!", null, "You hear electricity arcing!", range = 10)
 
 			for(var/turf/T in linkedholodeck)
 				if(prob(30))
@@ -254,10 +252,9 @@
 		if(world.time < (last_change + 25))
 			if(world.time < (last_change + 15))//To prevent super-spam clicking, reduced process size and annoyance -Sieve
 				return
-			for(var/mob/M in range(3,src))
-				M.show_message("<span class='warning'>ERROR. Recalibrating projection apparatus.</span>")
-				last_change = world.time
-				return
+			visible_message(SPAN_WARNING("ERROR. Recalibrating projection apparatus."), range = 3)
+			last_change = world.time
+			return
 
 	last_change = world.time
 	active = 1
@@ -312,10 +309,9 @@
 	if(world.time < (last_gravity_change + 25))
 		if(world.time < (last_gravity_change + 15))//To prevent super-spam clicking
 			return
-		for(var/mob/M in range(3,src))
-			M.show_message("<span class='warning'>ERROR. Recalibrating gravity field.</span>")
-			last_change = world.time
-			return
+		visible_message(SPAN_WARNING("ERROR. Recalibrating gravity field."), range = 3)
+		last_change = world.time
+		return
 
 	last_gravity_change = world.time
 	active = 1

@@ -25,7 +25,6 @@
 	var/datum/thrownthing/throwing
 	var/throw_speed = 2
 	var/throw_range = 7
-	var/moved_recently = 0
 	var/item_state = null // Used to specify the item state for the on-mob overlays.
 	var/does_spin = TRUE // Does the atom spin when thrown (of course it does :P)
 	var/list/grabbed_by
@@ -476,7 +475,7 @@
 	return M
 
 /atom/movable/proc/show_unbuckle_message(var/mob/buckled, var/mob/buckling)
-	if(buckled == buckling)
+	if(buckled != buckling)
 		visible_message(\
 			SPAN_NOTICE("\The [buckled] was unbuckled by \the [buckling]!"),\
 			SPAN_NOTICE("You were unbuckled from \the [src] by \the [buckling]."),\

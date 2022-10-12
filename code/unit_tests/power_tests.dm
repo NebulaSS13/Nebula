@@ -30,7 +30,7 @@
 			var/obj/structure/cable/next = to_search[to_search.len]
 			to_search.len--
 			searched += next
-			for(var/obj/structure/cable/other in get_connected_neighbours(next))
+			for(var/obj/structure/cable/other in find_connected_neighbours(next))
 				if(other in searched)
 					continue
 				if(next.powernet != other.powernet)

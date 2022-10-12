@@ -184,7 +184,7 @@
 /obj/machinery/fabricator/proc/is_functioning()
 	. = use_power != POWER_USE_OFF && !(stat & NOPOWER) && !(stat & BROKEN) && !(fab_status_flags & FAB_DISABLED)
 
-/obj/machinery/fabricator/Process(var/wait)
+/obj/machinery/fabricator/Process(wait, tick)
 	..()
 	if(use_power == POWER_USE_ACTIVE && (fab_status_flags & FAB_BUSY))
 		update_current_build(wait)
@@ -210,8 +210,8 @@
 //Updates overall lathe storage size.
 /obj/machinery/fabricator/RefreshParts()
 	..()
-	var/mb_rating = Clamp(total_component_rating_of_type(/obj/item/stock_parts/matter_bin), 0, 10)
-	var/man_rating = Clamp(total_component_rating_of_type(/obj/item/stock_parts/manipulator), 0.5, 3.5)
+	var/mb_rating = clamp(total_component_rating_of_type(/obj/item/stock_parts/matter_bin), 0, 10)
+	var/man_rating = clamp(total_component_rating_of_type(/obj/item/stock_parts/manipulator), 0.5, 3.5)
 	for(var/mat in base_storage_capacity)
 		storage_capacity[mat] = mb_rating * base_storage_capacity[mat]
 		if(!(mat in stored_material))

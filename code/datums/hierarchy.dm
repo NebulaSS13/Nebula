@@ -1,4 +1,5 @@
 /decl/hierarchy
+	allow_abstract_init = TRUE
 	abstract_type = /decl/hierarchy
 	var/name = "Hierarchy"
 	var/decl/hierarchy/parent
@@ -14,7 +15,7 @@
 	. = ..()
 
 /decl/hierarchy/proc/is_category()
-	return is_abstract() || children.len
+	return DECL_INSTANCE_IS_ABSTRACT(src) && length(children)
 
 /decl/hierarchy/proc/get_descendents()
 	if(!children)

@@ -169,7 +169,7 @@
 
 /datum/extension/interactive/os/proc/system_boot()
 	on = TRUE
-	var/datum/computer_file/data/autorun = get_file("autorun")
+	var/datum/computer_file/data/autorun = get_file("autorun", "local")
 	if(istype(autorun))
 		run_program(autorun.stored_data)
 	var/obj/item/stock_parts/computer/network_card/network_card = get_component(PART_NETWORK)
@@ -190,11 +190,11 @@
 	update_host_icon()
 
 /datum/extension/interactive/os/proc/run_program(filename)
-	var/datum/computer_file/program/P = get_file(filename)
+	var/datum/computer_file/program/P = get_file(filename, programs_dir)
 
 	var/mob/user = usr
 	if(!P || !istype(P)) // Program not found or it's not executable program.
-		show_error(user, "I/O ERROR - Unable to run [filename]")
+		show_error(user, " - Unable to run [filename]")
 		return
 
 	if(!P.is_supported_by_hardware(get_hardware_flag(), user, TRUE))
@@ -227,17 +227,19 @@
 		return
 	active_program.program_state = PROGRAM_STATE_BACKGROUND // Should close any existing UIs
 	SSnano.close_uis(active_program.NM ? active_program.NM : active_program)
+	if(active_program.browser_module)
+		SSnano.close_uis(active_program.browser_module)
 	active_program = null
 	update_host_icon()
 	if(istype(user))
 		ui_interact(user) // Re-open the UI on this computer. It should show the main screen now.
 
 /datum/extension/interactive/os/proc/set_autorun(program)
-	var/datum/computer_file/data/autorun = get_file("autorun")
+	var/datum/computer_file/data/autorun = get_file("autorun", "local")
 	if(istype(autorun))
 		autorun.stored_data = "[program]"
 	else
-		create_file("autorun", "[program]")
+		create_file("autorun", "local", "[program]") // Autorun file is created in the root directory.
 
 /datum/extension/interactive/os/proc/add_log(var/text)
 	var/datum/extension/network_device/D = get_extension(get_component(PART_NETWORK), /datum/extension/network_device)

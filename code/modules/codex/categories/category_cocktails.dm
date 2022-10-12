@@ -7,10 +7,10 @@
 
 	var/list/entries_to_register = list()
 	var/list/cocktails = decls_repository.get_decls_of_subtype(/decl/cocktail)
-	guide_html = "<h1>Mixology 101</h1>Here's a guide for mixing decent cocktails."
+	guide_html = "<h1>Mixology 101</h1><p>Here's a guide for mixing decent cocktails.</p>"
 	for(var/ctype in cocktails)
 		var/decl/cocktail/cocktail = cocktails[ctype]
-		if(cocktail.hidden_from_codex || cocktail.is_abstract())
+		if(cocktail.hidden_from_codex)
 			continue
 
 		var/mechanics_text = "Cocktails will change the name of bartending glasses when mixed properly.<br><br>"
@@ -22,7 +22,7 @@
 			// which we normalize internally for calculations.
 			var/decl/material/mixer = GET_DECL(rtype)
 			var/minimum_amount = cocktail.display_ratios[rtype]
-			var/ingredient = "[mixer.name]"
+			var/ingredient = "<span codexlink='[mixer.codex_name || mixer.name] (substance)'>[mixer.use_name]</span>"
 			if(minimum_amount)
 				ingredient = "[minimum_amount] part\s [ingredient]"
 			else

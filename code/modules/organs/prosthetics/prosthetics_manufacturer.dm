@@ -1,8 +1,8 @@
 /decl/prosthetics_manufacturer
-	var/name = "Unbranded"                                        // Shown when selecting the limb.
+	abstract_type = /decl/prosthetics_manufacturer
+	var/name                                                      // Shown when selecting the limb.
 	var/desc = "A generic unbranded robotic prosthesis."          // Seen when examining a limb.
 	var/icon = 'icons/mob/human_races/cyberlimbs/robotic.dmi'     // Icon base to draw from.
-	var/unavailable_at_chargen                                    // If set, not available at chargen.
 	var/can_eat                                                   // Determines if heads with this model can ingest food/drink.
 	var/has_eyes = TRUE                                           // Determines if eyes should render on heads using this model.
 	var/can_feel_pain                                             // Modifies the return from human can_feel_pain().
@@ -11,7 +11,7 @@
 	var/list/bodytypes_cannot_use                                 // Blacklists bodytypes from using this limb.
 	var/list/species_restricted                                   // Determines which species can use this limb.
 	var/list/applies_to_part                                      // Determines which bodyparts can use this limb.
-	var/list/allowed_bodytypes = list(BODYTYPE_HUMANOID)          // Determines which bodytypes can apply the limb.
+	var/list/allowed_bodytypes                                    // Determines which bodytypes can apply the limb.
 	var/modifier_string = "robotic"                               // Used to alter the name of the limb.
 	var/hardiness = 1                                             // Modifies min and max broken damage for the limb.
 	var/manual_dexterity = DEXTERITY_FULL                         // For hands, determines the dexterity value passed to get_dexterity().

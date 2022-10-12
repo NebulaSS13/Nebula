@@ -38,7 +38,7 @@ var/global/list/default_initial_tech_levels
 		var/list/tech_data = list()
 		for(var/tech in disk.stored_tech)
 			var/decl/research_field/field = SSfabrication.get_research_field_by_id(tech)
-			tech_data += list(list("field" = field.name, "level" = "[disk.stored_tech[tech]].0 GQ"))
+			tech_data += list(list("field" = field.name, "desc" = field.desc, "level" = "[disk.stored_tech[tech]].0 GQ"))
 		data["disk_tech"] = tech_data
 	else
 		data["disk_name"] = "no disk loaded"
@@ -46,7 +46,7 @@ var/global/list/default_initial_tech_levels
 	var/list/show_tech_levels = list()
 	for(var/tech in tech_levels)
 		var/decl/research_field/field = SSfabrication.get_research_field_by_id(tech)
-		show_tech_levels += list(list("field" = field.name, "level" = "[tech_levels[tech]].0 GQ"))
+		show_tech_levels += list(list("field" = field.name, "desc" = field.desc, "level" = "[tech_levels[tech]].0 GQ"))
 	data["tech_levels"] = show_tech_levels
 
 	data["network_push"] = (sync_policy & SYNC_PUSH_NETWORK) ? "on" : "off"

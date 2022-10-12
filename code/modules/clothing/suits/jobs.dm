@@ -133,7 +133,7 @@
 		/obj/item/wrench,
 		/obj/item/tank/emergency,
 		/obj/item/clothing/mask/gas,
-		/obj/item/taperoll/engineering
+		/obj/item/stack/tape_roll/barricade_tape/engineering
 	)
 	body_parts_covered = SLOT_UPPER_BODY
 

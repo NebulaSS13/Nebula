@@ -175,8 +175,6 @@
 	var/list/all_materials = decls_repository.get_decls_of_type(/decl/material)
 	for(var/decl_type in all_materials)
 		var/decl/material/mat = all_materials[decl_type]
-		if(mat.is_abstract())
-			continue
 		if(!mat.gas_symbol)
 			failures += "[mat.type] - false or null gas_symbol"
 		else if(mat.gas_symbol in seen)

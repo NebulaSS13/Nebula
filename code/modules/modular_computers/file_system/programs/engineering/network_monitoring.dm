@@ -61,7 +61,7 @@
 			var/list/logs[0]
 			for(var/datum/extension/network_device/mainframe/M in network.get_mainframes_by_role(MF_ROLE_LOG_SERVER, user))
 				var/list/logdata[0]
-				var/datum/computer_file/data/logfile/F = M.get_file("network_log")
+				var/datum/computer_file/data/logfile/F = M.get_file("network_log", OS_LOGS_DIR, TRUE)
 				if(F)
 					logdata["server"] = M.network_tag
 					logdata["log"] = F.generate_file_data()
@@ -96,7 +96,11 @@
 		var/datum/extension/network_device/mainframe/M = locate(href_list["purgelogs"])
 		if(!istype(M))
 			return TOPIC_HANDLED
-		M.delete_file("network_log")
+		var/datum/computer_file/log_file = M.get_file("network_log", OS_LOGS_DIR)
+		if(!log_file)
+			return TOPIC_HANDLED
+		M.delete_file(log_file)
+		return TOPIC_REFRESH
 
 	if(href_list["updatemaxlogs"])
 		var/datum/extension/network_device/mainframe/M = locate(href_list["updatemaxlogs"])
@@ -104,7 +108,7 @@
 			return TOPIC_HANDLED
 		var/logcount = input(user,"Enter amount of logs to keep on the disk ([MIN_NETWORK_LOGS]-[MAX_NETWORK_LOGS]):", M.max_log_count) as null|num
 		if(logcount && CanUseTopic(user, state))
-			logcount = Clamp(logcount, MIN_NETWORK_LOGS, MAX_NETWORK_LOGS)
+			logcount = clamp(logcount, MIN_NETWORK_LOGS, MAX_NETWORK_LOGS)
 			M.max_log_count = logcount
 			return TOPIC_REFRESH
 		return TOPIC_HANDLED

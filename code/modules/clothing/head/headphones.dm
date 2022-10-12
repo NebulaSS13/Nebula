@@ -106,7 +106,7 @@
 		return TOPIC_REFRESH
 	if(href_list["vol"])
 		var/adj = text2num(href_list["vol"])
-		music_volume = Clamp(music_volume + adj, 0, 100)
+		music_volume = clamp(music_volume + adj, 0, 100)
 		if(headphones_on)
 			play_music(user)
 		interact(user)

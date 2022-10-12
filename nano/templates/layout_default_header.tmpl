@@ -28,14 +28,16 @@
 			</table>
 		</div>
 	</div>
-	<div style="float: right">
-		<table><tr>
-			<td>{{:helper.link('Shutdown', null, {'PC_shutdown' : 1})}}
-			{{if data.PC_showexitprogram}}
-				<td>{{:helper.link('Exit Program', null, {'PC_exit' : 1})}}
-				<td>{{:helper.link('Minimize Program', null, {'PC_minimize' : 1})}}
-			{{/if}}
-		</table>
-	</div>
+	{{if data.PC_showshutdown}}
+		<div style="float: right">
+			<table><tr>
+				<td>{{:helper.link('Shutdown', null, {'PC_shutdown' : 1})}}
+				{{if data.PC_showexitprogram}}
+					<td>{{:helper.link('Exit Program', null, {'PC_exit' : 1})}}
+					<td>{{:helper.link('Minimize Program', null, {'PC_minimize' : 1})}}
+				{{/if}}
+			</table>
+		</div>
+	{{/if}}
 	<div style="clear: both">
 {{/if}}

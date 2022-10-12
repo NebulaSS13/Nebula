@@ -32,11 +32,12 @@
 	power_channel = LIGHT //Lights are calc'd via area so they dont need to be in the machine list
 
 	uncreated_component_parts = list(
-		/obj/item/stock_parts/power/apc/buildable
+		/obj/item/stock_parts/power/apc
 	)
 	construct_state = /decl/machine_construction/wall_frame/panel_closed/simple
-	base_type = /obj/machinery/light/buildable
+	base_type = /obj/machinery/light
 	frame_type = /obj/item/frame/light
+	directional_offset = "{'NORTH':{'y':21}, 'EAST':{'x':10}, 'WEST':{'x':-10}}"
 
 	var/on = 0					// 1 if on, 0 if off
 	var/flickering = 0
@@ -56,9 +57,6 @@
 	lightbulb.set_color(color)
 	queue_icon_update()
 
-/obj/machinery/light/buildable
-	uncreated_component_parts = null
-
 // the smaller bulb light fixture
 /obj/machinery/light/small
 	icon_state = "bulb_map"
@@ -66,11 +64,8 @@
 	desc = "A small lighting fixture."
 	light_type = /obj/item/light/bulb
 	accepts_light_type = /obj/item/light/bulb
-	base_type = /obj/machinery/light/small/buildable
+	base_type = /obj/machinery/light/small
 	frame_type = /obj/item/frame/light/small
-
-/obj/machinery/light/small/buildable
-	uncreated_component_parts = null
 
 /obj/machinery/light/small/emergency
 	light_type = /obj/item/light/bulb/red
@@ -83,11 +78,8 @@
 	desc = "A more robust socket for light tubes that demand more power."
 	light_type = /obj/item/light/tube/large
 	accepts_light_type = /obj/item/light/tube/large
-	base_type = /obj/machinery/light/spot/buildable
+	base_type = /obj/machinery/light/spot
 	frame_type = /obj/item/frame/light/spot
-
-/obj/machinery/light/spot/buildable
-	uncreated_component_parts = null
 
 // create a new lighting fixture
 /obj/machinery/light/Initialize(mapload, d=0, populate_parts = TRUE)
@@ -117,18 +109,6 @@
 
 /obj/machinery/light/on_update_icon(var/trigger = 1)
 	atom_flags = atom_flags & ~ATOM_FLAG_CAN_BE_PAINTED
-	// Handle pixel offsets
-	default_pixel_y = 0
-	default_pixel_x = 0
-	var/turf/T = get_step(get_turf(src), src.dir)
-	if(istype(T) && T.density)
-		if(src.dir == NORTH)
-			default_pixel_y = 21
-		else if(src.dir == EAST)
-			default_pixel_x = 10
-		else if(src.dir == WEST)
-			default_pixel_x = -10
-	reset_offsets(0)
 
 	// Update icon state
 	cut_overlays()
@@ -453,8 +433,9 @@
 	accepts_light_type = /obj/item/light/tube/large
 	on = TRUE
 	var/delay = 1
-	base_type = /obj/machinery/light/navigation/buildable
+	base_type = /obj/machinery/light/navigation
 	frame_type = /obj/item/frame/light/nav
+	stat_immune = NOPOWER | NOINPUT | NOSCREEN
 
 /obj/machinery/light/navigation/on_update_icon()
 	. = ..() // this will handle pixel offsets
@@ -468,9 +449,6 @@
 		to_chat(user, SPAN_NOTICE("You adjust the delay on \the [src]."))
 		return TRUE
 
-/obj/machinery/light/navigation/buildable
-	uncreated_component_parts = null
-
 /obj/machinery/light/navigation/delay2
 	delay = 2
 
@@ -482,10 +460,6 @@
 
 /obj/machinery/light/navigation/delay5
 	delay = 5
-
-/obj/machinery/light/navigation
-	stat_immune = NOPOWER | NOINPUT | NOSCREEN
-
 
 // the light item
 // can be tube or bulb subtypes

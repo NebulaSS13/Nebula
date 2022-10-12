@@ -100,25 +100,22 @@
 	desc = "BLAM!-brand non-foaming space cleaner!"
 	step_delay = 6
 
-/obj/item/chems/spray/cleaner/Initialize()
-	. = ..()
-	reagents.add_reagent(/decl/material/liquid/cleaner, volume)
+/obj/item/chems/spray/cleaner/populate_reagents()
+	reagents.add_reagent(/decl/material/liquid/cleaner, reagents.maximum_volume)
 
 /obj/item/chems/spray/antiseptic
 	name = "antiseptic spray"
 	desc = "Great for hiding incriminating bloodstains and sterilizing scalpels."
 
-/obj/item/chems/spray/antiseptic/Initialize()
-	. = ..()
-	reagents.add_reagent(/decl/material/liquid/antiseptic, volume)
+/obj/item/chems/spray/antiseptic/populate_reagents()
+	reagents.add_reagent(/decl/material/liquid/antiseptic, reagents.maximum_volume)
 
 /obj/item/chems/spray/hair_remover
 	name = "hair remover"
 	desc = "Very effective at removing hair, feathers, spines and horns."
 
-/obj/item/chems/spray/hair_remover/Initialize()
-	. = ..()
-	reagents.add_reagent(/decl/material/liquid/hair_remover, volume)
+/obj/item/chems/spray/hair_remover/populate_reagents()
+	reagents.add_reagent(/decl/material/liquid/hair_remover, reagents.maximum_volume)
 
 /obj/item/chems/spray/pepper
 	name = "pepperspray"
@@ -130,9 +127,8 @@
 	var/safety = 1
 	step_delay = 1
 
-/obj/item/chems/spray/pepper/Initialize()
-	. = ..()
-	reagents.add_reagent(/decl/material/liquid/capsaicin/condensed, 60)
+/obj/item/chems/spray/pepper/populate_reagents()
+	reagents.add_reagent(/decl/material/liquid/capsaicin/condensed, reagents.maximum_volume)
 
 /obj/item/chems/spray/pepper/examine(mob/user, distance)
 	. = ..()
@@ -159,9 +155,8 @@
 	possible_transfer_amounts = null
 	volume = 10
 
-/obj/item/chems/spray/waterflower/Initialize()
-	. = ..()
-	reagents.add_reagent(/decl/material/liquid/water, 10)
+/obj/item/chems/spray/waterflower/populate_reagents()
+	reagents.add_reagent(/decl/material/liquid/water, reagents.maximum_volume)
 
 /obj/item/chems/spray/chemsprayer
 	name = "chem sprayer"
@@ -206,9 +201,8 @@
 	item_state = "plantbgone"
 	volume = 100
 
-/obj/item/chems/spray/plantbgone/Initialize()
-	. = ..()
-	reagents.add_reagent(/decl/material/liquid/weedkiller, 100)
+/obj/item/chems/spray/plantbgone/populate_reagents()
+	reagents.add_reagent(/decl/material/liquid/weedkiller, reagents.maximum_volume)
 
 /obj/item/chems/spray/plantbgone/afterattack(atom/A, mob/user, proximity)
 	if(!proximity) return

@@ -4,6 +4,7 @@
 	icon_state = "globe"
 	sector_flags = OVERMAP_SECTOR_KNOWN
 	free_landing = TRUE
+
 	var/area/planetary_area
 
 	var/lightlevel = 0 		//This default makes turfs not generate light. Adjust to have exoplanents be lit.
@@ -21,7 +22,6 @@
 	var/x_size
 	var/y_size
 
-	var/landmark_type = /obj/effect/shuttle_landmark/automatic
 	var/shuttle_size = 20  		 //'diameter' of expected shuttle in turfs
 	var/landing_points_to_place  // number of landing points to place, calculated dynamically based on planet size
 
@@ -155,6 +155,7 @@
 	return engravings
 
 /obj/effect/overmap/visitable/sector/exoplanet/Process(wait, tick)
+
 	if(animals.len < 0.5*max_animal_count && !repopulating)
 		repopulating = 1
 		max_animal_count = round(max_animal_count * 0.5)
@@ -163,10 +164,11 @@
 		handle_repopulation()
 
 	if(daycycle)
+		wait = max(1, wait)
 		if(tick % round(daycycle / wait) == 0)
 			night = !night
 			daycolumn = 1
-		if(daycolumn && tick % round(daycycle_column_delay / wait) == 0)
+		if(daycolumn && (tick % round(daycycle_column_delay / wait)) == 0)
 			update_daynight()
 
 /obj/effect/overmap/visitable/sector/exoplanet/proc/update_daynight()
@@ -223,6 +225,16 @@
 		//When you set daycycle ensure that the minimum is larger than [maxx * daycycle_column_delay].
 		//Otherwise the right side of the exoplanet can get stuck in a forever day.
 		daycycle = rand(10 MINUTES, 40 MINUTES)
+
+	// This was formerly done in Initialize, but that caused problems with ChangeTurf. The initialize logic is now
+	// mapload-only, and so the exoplanet step (which uses ChangeTurf) has to be done here.
+	for(var/target_z in map_z)
+		for(var/turf/exterior/exterior_turf in block(
+			locate(TRANSITIONEDGE, TRANSITIONEDGE, target_z),
+			locate(world.maxx - TRANSITIONEDGE, world.maxy - TRANSITIONEDGE, target_z)
+		))
+			exterior_turf.setup_environmental_lighting()
+			CHECK_TICK
 
 //Tries to generate num landmarks, but avoids repeats.
 /obj/effect/overmap/visitable/sector/exoplanet/proc/generate_landing()

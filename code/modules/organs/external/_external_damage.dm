@@ -206,7 +206,11 @@
 
 // Geneloss/cloneloss.
 /obj/item/organ/external/proc/get_genetic_damage()
-	return ((species && (species.species_flags & SPECIES_FLAG_NO_SCAN)) || BP_IS_PROSTHETIC(src)) ? 0 : genetic_degradation
+	if(species?.species_flags & SPECIES_FLAG_NO_SCAN)
+		return 0
+	if(BP_IS_PROSTHETIC(src))
+		return 0
+	return genetic_degradation
 
 /obj/item/organ/external/proc/remove_genetic_damage(var/amount)
 	if((species.species_flags & SPECIES_FLAG_NO_SCAN) || BP_IS_PROSTHETIC(src))
@@ -247,7 +251,7 @@
 
 // Pain/halloss
 /obj/item/organ/external/proc/get_pain()
-	if(!can_feel_pain() || BP_IS_PROSTHETIC(src))
+	if(!can_feel_pain())
 		return 0
 	var/lasting_pain = 0
 	if(is_broken())

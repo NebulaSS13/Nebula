@@ -9,11 +9,7 @@
 	board_type = "wall"
 	origin_tech = "{'programming':1,'engineering':1}"
 	req_components = list()
-	additional_spawn_components = list(
-		/obj/item/stock_parts/console_screen = 1,
-		/obj/item/stock_parts/keyboard = 1,
-		/obj/item/stock_parts/power/apc/buildable = 1
-	)
+	additional_spawn_components = null
 
 /obj/item/stock_parts/circuitboard/air_alarm
 	name = "circuitboard (air alarm)"
@@ -23,11 +19,7 @@
 	board_type = "wall"
 	origin_tech = "{'programming':1,'engineering':1}"
 	req_components = list()
-	additional_spawn_components = list(
-		/obj/item/stock_parts/console_screen = 1,
-		/obj/item/stock_parts/keyboard = 1,
-		/obj/item/stock_parts/power/apc/buildable = 1
-	)
+	additional_spawn_components = null
 
 /obj/item/stock_parts/circuitboard/apc
 	name = "circuitboard (area power controller)"
@@ -78,7 +70,6 @@
 	additional_spawn_components = list(
 		/obj/item/stock_parts/console_screen = 1,
 		/obj/item/stock_parts/keyboard = 1,
-		/obj/item/stock_parts/power/apc/buildable = 1,
 	)
 	buildtype_select = TRUE
 

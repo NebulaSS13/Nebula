@@ -24,7 +24,7 @@
 	. = ..()
 	if(!scrubbing_gas)
 		scrubbing_gas = list()
-		for(var/g in subtypesof(/decl/material/gas))
+		for(var/g in decls_repository.get_decl_paths_of_subtype(/decl/material/gas))
 			if(g != /decl/material/gas/oxygen && g != /decl/material/gas/nitrogen)
 				scrubbing_gas += g
 
@@ -128,7 +128,7 @@
 		. = TOPIC_REFRESH
 	if (href_list["volume_adj"])
 		var/diff = text2num(href_list["volume_adj"])
-		volume_rate = Clamp(volume_rate+diff, minrate, maxrate)
+		volume_rate = clamp(volume_rate+diff, minrate, maxrate)
 		. = TOPIC_REFRESH
 
 	if(.)

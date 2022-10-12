@@ -181,7 +181,7 @@ var/global/list/ship_inertial_dampers = list()
 			return TOPIC_NOACTION
 
 		warned = FALSE
-		target_strength = Clamp(new_strength, 0, max_strength)
+		target_strength = clamp(new_strength, 0, max_strength)
 		return TOPIC_REFRESH
 
 	return TOPIC_NOACTION

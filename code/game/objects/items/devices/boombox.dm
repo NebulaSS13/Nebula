@@ -7,6 +7,12 @@
 	force = 7
 	w_class = ITEM_SIZE_HUGE //forbid putting something that emits loud sounds forever into a backpack
 	origin_tech = "{'magnets':2,'combat':1}"
+	material = /decl/material/solid/plastic
+	matter = list(
+		/decl/material/solid/metal/copper    = MATTER_AMOUNT_REINFORCEMENT,
+		/decl/material/solid/metal/aluminium = MATTER_AMOUNT_REINFORCEMENT,
+		/decl/material/solid/silicon         = MATTER_AMOUNT_TRACE,
+	)
 	var/playing = 0
 	var/track_num = 1
 	var/volume = 20
@@ -141,7 +147,7 @@
 		frequency += 0.1
 	else if(operation == tighten)
 		frequency -= 0.1
-	frequency = Clamp(frequency, MIN_FREQUENCY, MAX_FREQUENCY)
+	frequency = clamp(frequency, MIN_FREQUENCY, MAX_FREQUENCY)
 
 	user.visible_message(SPAN_NOTICE("\The [user] adjusts \the [src]'s player head."), SPAN_NOTICE("You adjust \the [src]'s player head."))
 	playsound(src.loc, 'sound/items/Screwdriver.ogg', 50, 1)
@@ -186,11 +192,11 @@
 	stop()
 
 /obj/item/boombox/proc/change_volume(var/new_volume)
-	volume = Clamp(new_volume, 0, max_volume)
+	volume = clamp(new_volume, 0, max_volume)
 	if(sound_token)
 		sound_token.SetVolume(volume)
 
 /obj/random_multi/single_item/boombox
 	name = "boombox spawnpoint"
 	id = "boomtastic"
-	item_path = /obj/item/boombox/
+	item_path = /obj/item/boombox

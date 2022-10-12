@@ -1,17 +1,11 @@
-
-/decl/prosthetics_manufacturer/Initialize()
-	. = ..()
-	LAZYDISTINCTADD(bodytypes_cannot_use, BODYTYPE_VOX)
-
 /decl/prosthetics_manufacturer/vox
 	name = "Arkmade"
 	icon = 'mods/species/vox/icons/body/primalis_cyberlimbs.dmi'
-
-/decl/prosthetics_manufacturer/vox/Initialize()
-	. = ..()
-	bodytypes_cannot_use = null
 	allowed_bodytypes = list(BODYTYPE_VOX)
+	species_restricted = list(SPECIES_VOX)
 
 /decl/prosthetics_manufacturer/vox/crap
 	name = "Improvised"
 	icon = 'mods/species/vox/icons/body/improvised_cyberlimbs.dmi'
+
+DEFINE_ROBOLIMB_MODEL_ASPECTS_WITH_SPECIES_BODYTYPE(/decl/prosthetics_manufacturer/vox, arkmade, 2, SPECIES_VOX, BODYTYPE_VOX)

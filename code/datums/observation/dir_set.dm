@@ -24,18 +24,6 @@
 * Direction Handling *
 *********************/
 
-/atom/set_dir(ndir)
-	var/old_dir = dir
-	// This attempts to mimic BYOND's handling of diagonal directions and cardinal icon states.
-	if((atom_flags & ATOM_FLAG_BLOCK_DIAGONAL_FACING) && !IsPowerOfTwo(ndir))
-		if(old_dir & ndir)
-			ndir = old_dir
-		else
-			ndir &= global.adjacentdirs[old_dir]
-	. = ..(ndir)
-	if(old_dir != dir)
-		events_repository.raise_event(/decl/observ/dir_set, src, old_dir, dir)
-
 /atom/movable/Entered(var/atom/movable/am, atom/old_loc)
 	. = ..()
 	var/decl/observ/dir_set/dir_set_event = GET_DECL(/decl/observ/dir_set)

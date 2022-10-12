@@ -25,7 +25,7 @@
 	bar.layer = HUD_ABOVE_ITEM_LAYER
 
 	// This is used to center the do_after() bar on nonstandard icons.
-	var/icon/icon_icon = icon(target.icon) // /atom/icon isn't an /icon. Noting for posterity that we're going off the idea 
+	var/icon/icon_icon = icon(target.icon) // /atom/icon isn't an /icon. Noting for posterity that we're going off the idea
 	var/icon_width = icon_icon.Width()     // that icon() doesn't add to the RSC so doens't involve network overhead.
 	if(icon_width != world.icon_size)
 		anchor_offset_x = round((icon_width/2)-(world.icon_size/2))
@@ -57,7 +57,7 @@
 		shown = FALSE
 	client = user.client
 
-	progress = Clamp(progress, 0, goal)
+	progress = clamp(progress, 0, goal)
 	bar.icon_state = "prog_bar_[round(((progress / goal) * 100), 5)]"
 	if (!shown && user.get_preference_value(/datum/client_preference/show_progress_bar) == PREF_SHOW)
 		user.client.images.Add(bar)

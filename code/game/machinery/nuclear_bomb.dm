@@ -25,7 +25,6 @@ var/global/bomb_set
 	var/obj/item/disk/nuclear/auth = null
 	var/removal_stage = 0 // 0 is no removal, 1 is covers removed, 2 is covers open, 3 is sealant open, 4 is unwrenched, 5 is removed from bolts.
 	var/lastentered
-	var/previous_level = ""
 	wires = /datum/wires/nuclearbomb
 	var/decl/security_level/original_level
 
@@ -38,7 +37,7 @@ var/global/bomb_set
 	auth = null
 	return ..()
 
-/obj/machinery/nuclearbomb/Process(var/wait)
+/obj/machinery/nuclearbomb/Process(wait, tick)
 	if(timing)
 		timeleft = max(timeleft - (wait / 10), 0)
 		playsound(loc, 'sound/items/timer.ogg', 50)
@@ -265,7 +264,7 @@ var/global/bomb_set
 
 				var/time = text2num(href_list["time"])
 				timeleft += time
-				timeleft = Clamp(timeleft, minTime, maxTime)
+				timeleft = clamp(timeleft, minTime, maxTime)
 			if(href_list["timer"])
 				if(timing == -1)
 					return 1
@@ -327,7 +326,7 @@ var/global/bomb_set
 	bomb_set--
 	safety = TRUE
 	timing = 0
-	timeleft = Clamp(timeleft, 120, 600)
+	timeleft = clamp(timeleft, 120, 600)
 	update_icon()
 
 /obj/machinery/nuclearbomb/explosion_act(severity)

@@ -10,7 +10,7 @@
 	nutriment_amt = 10
 	bitesize = 2
 
-/obj/item/chems/food/sliceable/cheesewheel/Initialize()
+/obj/item/chems/food/sliceable/cheesewheel/populate_reagents()
 	. = ..()
 	reagents.add_reagent(/decl/material/liquid/nutriment/protein, 10)
 

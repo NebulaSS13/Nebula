@@ -93,7 +93,7 @@
 
 /decl/loadout_option/suit/wintercoat_dais
 	name = "winter coat, DAIS"
-	path = /obj/item/clothing/suit/storage/hooded/wintercoat/dais
+	path = /obj/item/clothing/suit/storage/toggle/wintercoat/dais
 
 /decl/loadout_option/suit/leather/get_gear_tweak_options()
 	. = ..()

@@ -11,8 +11,9 @@
 
 /datum/unit_test/trait/all_traits_shall_have_valid_names/start_test()
 	var/list/invalid_traits = list()
-	for(var/trait in decls_repository.get_decls_unassociated(trait_types()))
-		var/decl/trait/T = trait
+	var/list/all_traits = decls_repository.get_decls_of_type(/decl/trait)
+	for(var/trait in all_traits)
+		var/decl/trait/T = all_traits[trait]
 		if(!T.name || !istext(T.name)) // Empty strings are valid texts
 			invalid_traits += T.type
 
@@ -29,9 +30,9 @@
 
 /datum/unit_test/trait/all_traits_shall_have_unique_name/start_test()
 	var/list/trait_names = list()
-
-	for(var/trait in decls_repository.get_decls_unassociated(trait_types()))
-		var/decl/trait/T = trait
+	var/list/all_traits = decls_repository.get_decls_of_type(/decl/trait)
+	for(var/trait in all_traits)
+		var/decl/trait/T = all_traits[trait]
 		group_by(trait_names, T.name, T.type)
 
 	var/number_of_issues = number_of_issues(trait_names, "Names")
@@ -47,8 +48,9 @@
 
 /datum/unit_test/trait/all_traits_shall_have_valid_levels/start_test()
 	var/list/invalid_traits = list()
-	for(var/trait in decls_repository.get_decls_unassociated(trait_types()))
-		var/decl/trait/T = trait
+	var/list/all_traits = decls_repository.get_decls_of_type(/decl/trait)
+	for(var/trait in all_traits)
+		var/decl/trait/T = all_traits[trait]
 		if(!length(T.levels) || (T.levels.len > 1 && (TRAIT_LEVEL_EXISTS in T.levels)))
 			invalid_traits += T.type
 

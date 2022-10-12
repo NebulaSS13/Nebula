@@ -212,6 +212,6 @@
 			set_backpack_metadata(bo, bt, new_metadata)
 			return TOPIC_REFRESH_UPDATE_PREVIEW
 	else if(href_list["change_cash_choice"])
-		pref.starting_cash_choice = next_in_list(pref.starting_cash_choice, typesof(/decl/starting_cash_choice))
+		pref.starting_cash_choice = next_in_list(pref.starting_cash_choice, decls_repository.get_decl_paths_of_subtype(/decl/starting_cash_choice))
 		return TOPIC_REFRESH_UPDATE_PREVIEW
 	return ..()
