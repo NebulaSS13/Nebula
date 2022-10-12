@@ -98,5 +98,3 @@ DEFINE_CARTRIDGE_FOR_CHEM(amphetamines,   /decl/material/liquid/amphetamines)
 DEFINE_CARTRIDGE_FOR_CHEM(antibiotics,    /decl/material/liquid/antibiotics)
 DEFINE_CARTRIDGE_FOR_CHEM(sedatives,      /decl/material/liquid/sedatives)
 DEFINE_CARTRIDGE_FOR_CHEM(stabilizer,     /decl/material/liquid/stabilizer)
-
-#undef DEFINE_CARTRIDGE_FOR_CHEM
