@@ -392,15 +392,14 @@
 		if(SHUNT_SABOTAGE_MINOR)
 			announcetxt = shunt_sabotage_text_minor
 			for(var/mob/living/carbon/human/H in view(7))
-				to_chat(H, SPAN_DANGER("[src] emits a flash of incredibly bright, searing light!"))
+				H.show_message(SPAN_DANGER("\The [src] emits a flash of incredibly bright, searing light!"), VISIBLE_MESSAGE)
 				H.flash_eyes(FLASH_PROTECTION_NONE)
 			empulse(src, 8, 10)
 
 		if(SHUNT_SABOTAGE_MAJOR)
 			announcetxt = shunt_sabotage_text_major
 
-			for(var/mob/living/carbon/human/H in view(7)) //Effect One: scary text.
-				to_chat(H, SPAN_DANGER("[src] hisses and sparks, before coolant lines burst and spew superheated coolant!"))
+			visible_message(SPAN_DANGER("\The [src] hisses and sparks, before the coolant lines burst and spew superheated coolant!")) //Effect One: scary text.
 
 			explosion(get_turf(src),-1,-1,8,10) //Effect Two: blow the windows out.
 
@@ -418,7 +417,7 @@
 				A.energy_fail(rand(100,120))
 
 			for(var/mob/living/carbon/human/H in view(7)) //scary text if you're in view, because you're fucked now boy.
-				to_chat(H, SPAN_DANGER("The light around [src] warps before it emits a flash of incredibly bright, searing light!"))
+				H.show_message(SPAN_DANGER("The light around \the [src] warps before it emits a flash of incredibly bright, searing light!"), VISIBLE_MESSAGE)
 				H.flash_eyes(FLASH_PROTECTION_NONE)
 
 			new /obj/singularity/(get_turf(src))

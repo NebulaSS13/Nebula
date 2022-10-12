@@ -138,11 +138,10 @@
 
 	U.last_special = world.time+100
 
-	if (src.loc)
-		for (var/mob/M in hearers(src.loc.loc))
-			to_chat(M, "<FONT size=[max(0, 5 - get_dist(src, M))]>CLONG, clong!</FONT>")
-
-	playsound(src.loc, 'sound/effects/clang.ogg', 50, 0, 0)
+	var/turf/our_turf = get_turf(src)
+	if (our_turf)
+		our_turf.audible_message("You hear a clanging noise.")
+		playsound(our_turf, 'sound/effects/clang.ogg', 50, 0, 0)
 
 // called to vent all gas in holder to a location
 /obj/structure/disposalholder/proc/vent_gas(var/atom/location)
