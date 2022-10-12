@@ -32,8 +32,7 @@
 		if(!O.anchored)
 			O_limit++
 			if(O_limit >= 20)
-				for(var/mob/M in hearers(src, null))
-					to_chat(M, "<span class='notice'>The mass driver lets out a screech, it mustn't be able to handle any more items.</span>")
+				visible_message(SPAN_NOTICE("\The [src] lets out a mechanical groan and refuses to budge!"))
 				break
 			use_power_oneoff(500)
 			spawn( 0 )

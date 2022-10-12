@@ -114,11 +114,10 @@
 
 	var/obj/machinery/hologram/holopad/T = src.holo
 	if(T && T.masters[src])
+		var/turf/our_turf = get_turf(T)
 		var/rendered = "<span class='game say'><span class='name'>[name]</span> <span class='message'>[message]</span></span>"
 		to_chat(src, "<i><span class='game say'>Holopad action relayed, <span class='name'>[real_name]</span> <span class='message'>[message]</span></span></i>")
-
-		for(var/mob/M in viewers(T.loc))
-			M.show_message(rendered, 2)
+		our_turf.audible_message(rendered)
 	else //This shouldn't occur, but better safe then sorry.
 		to_chat(src, "No holopad connected.")
 		return 0
