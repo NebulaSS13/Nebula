@@ -27,7 +27,7 @@
 
 	var/mob/living/silicon/sil_brainmob/brainmob = null
 	var/searching = 0
-	var/askDelay = 10 * 60 * 1
+	var/askDelay = 60 SECONDS
 	var/list/shackled_verbs = list(
 		/obj/item/organ/internal/posibrain/proc/show_laws_brain,
 		/obj/item/organ/internal/posibrain/proc/brain_checklaws
@@ -66,9 +66,9 @@
 		src.searching = 1
 		var/decl/ghosttrap/G = GET_DECL(/decl/ghosttrap/positronic_brain)
 		G.request_player(brainmob, "Someone is requesting a personality for a positronic brain.", 60 SECONDS)
-		spawn(600) reset_search()
+		addtimer(CALLBACK(src, .proc/reset_search), askDelay)
 
-/obj/item/organ/internal/posibrain/proc/reset_search() //We give the players sixty seconds to decide, then reset the timer.
+/obj/item/organ/internal/posibrain/proc/reset_search() //We give the players time to decide, then reset the timer.
 	if(!brainmob?.key)
 		searching = FALSE
 		icon_state = "posibrain"

@@ -56,7 +56,7 @@
 	shorthand = "KNV"
 
 #define MANTID_SCRAMBLE_CACHE_LEN 20
-/decl/language/mantid/nonvocal/scramble(var/input)
+/decl/language/mantid/nonvocal/scramble(mob/living/speaker, input, list/known_languages)
 	if(input in scramble_cache)
 		var/n = scramble_cache[input]
 		scramble_cache -= input

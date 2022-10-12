@@ -10,6 +10,8 @@
 	throw_range = 4
 	throwforce = 7
 	w_class = ITEM_SIZE_NORMAL
+	material = /decl/material/solid/glass
+	health = ITEM_HEALTH_NO_DAMAGE
 
 /obj/item/nullrod/attack(mob/M, mob/living/user) //Paste from old-code to decult with a null rod.
 	admin_attack_log(user, M, "Attacked using \a [src]", "Was attacked with \a [src]", "used \a [src] to attack")
@@ -68,6 +70,8 @@
 	icon_state = "energynet"
 	throwforce = 0
 	force = 0
+	health = 100
+	max_health = 100
 	var/net_type = /obj/effect/energy_net
 
 /obj/item/energy_net/safari

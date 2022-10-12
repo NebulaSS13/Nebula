@@ -2,7 +2,6 @@
 	var/name                     // Name used in preference setup.
 	var/msg                      // Message to display on the arrivals computer.
 	var/list/turfs               // List of turfs to spawn on.
-	var/always_visible = FALSE   // Whether this spawn point is always visible in selection, ignoring map-specific settings.
 
 	var/list/restrict_job
 	var/list/restrict_job_event_categories
@@ -60,8 +59,9 @@
 	turfs = global.latejoin_cryo_locations
 
 /decl/spawnpoint/cryo/after_join(mob/living/carbon/human/victim)
-	if(!istype(victim))
+	if(!istype(victim) || victim.buckled) // They may have spawned with a wheelchair; don't move them into a pod in that case.
 		return
+
 	var/area/A = get_area(victim)
 	for(var/obj/machinery/cryopod/C in A)
 		if(!C.occupant)

@@ -7,7 +7,7 @@
 	var/language_types = decls_repository.get_decls_of_subtype(/decl/language)
 	for(var/langname in language_types)
 		var/decl/language/L = language_types[langname]
-		if(L.hidden_from_codex || L.is_abstract())
+		if(L.hidden_from_codex)
 			continue
 		var/list/lang_info = list()
 		var/decl/prefix/P = /decl/prefix/language
@@ -24,11 +24,11 @@
 		var/list/lang_lore = list(L.desc)
 		lang_lore += "Shorthand: '[L.shorthand]'"
 		if(!(L.flags & (SIGNLANG|NONVERBAL|HIVEMIND)))
-			var/lang_example = L.format_message(L.scramble(example_line), L.speech_verb)
+			var/lang_example = L.format_message(L.scramble(null, example_line), L.speech_verb)
 			lang_lore += "It sounds like this:"
 			lang_lore += ""
 			lang_lore += "<b>CodexBot</b> [lang_example]"
-			
+
 		var/datum/codex_entry/entry = new(
 			_display_name = "[L.name] (language)",
 			_lore_text = jointext(lang_lore, "<br>"),

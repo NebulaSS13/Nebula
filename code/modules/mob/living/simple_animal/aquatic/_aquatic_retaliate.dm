@@ -6,6 +6,7 @@
 	speed = 4
 	mob_size = MOB_SIZE_MEDIUM
 	emote_see = list("gnashes")
+	base_animal_type = /mob/living/simple_animal/aquatic // used for language, ignore actual type
 
 	// They only really care if there's water around them or not.
 	max_gas = list()

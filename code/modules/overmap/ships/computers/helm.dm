@@ -197,8 +197,8 @@ var/global/list/overmap_helm_computers
 				var/newy = input("Input new entry y coordinate", "Coordinate input", linked.y) as num
 				if(!CanInteract(user,state))
 					return TOPIC_NOACTION
-				R.fields["x"] = Clamp(newx, 1, world.maxx)
-				R.fields["y"] = Clamp(newy, 1, world.maxy)
+				R.fields["x"] = clamp(newx, 1, world.maxx)
+				R.fields["y"] = clamp(newy, 1, world.maxy)
 		known_sectors[sec_name] = R
 		compass.set_waypoint("\ref[R]", R.fields["name"], R.fields["x"], R.fields["y"], 1, R.fields["color"] || COLOR_CYAN)
 		compass.hide_waypoint("\ref[R]")
@@ -236,14 +236,14 @@ var/global/list/overmap_helm_computers
 		if(!CanInteract(user,state))
 			return TOPIC_NOACTION
 		if (newx)
-			dx = Clamp(newx, 1, world.maxx)
+			dx = clamp(newx, 1, world.maxx)
 
 	if (href_list["sety"])
 		var/newy = input("Input new destiniation y coordinate", "Coordinate input", dy) as num|null
 		if(!CanInteract(user,state))
 			return TOPIC_NOACTION
 		if (newy)
-			dy = Clamp(newy, 1, world.maxy)
+			dy = clamp(newy, 1, world.maxy)
 
 	if (href_list["x"] && href_list["y"])
 		dx = text2num(href_list["x"])
@@ -256,7 +256,7 @@ var/global/list/overmap_helm_computers
 	if (href_list["speedlimit"])
 		var/newlimit = input("Input new speed limit for autopilot (0 to brake)", "Autopilot speed limit", speedlimit) as num|null
 		if(newlimit)
-			speedlimit = Clamp(newlimit, 0, 100)
+			speedlimit = clamp(newlimit, 0, 100)
 	if (href_list["accellimit"])
 		var/newlimit = input("Input new acceleration limit", "Acceleration limit", accellimit) as num|null
 		if(newlimit)

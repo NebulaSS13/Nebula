@@ -24,6 +24,11 @@
 	parts_amount = 2
 	parts_type = /obj/item/stack/material/strut
 
+/obj/structure/bed/user_can_mousedrop_onto(var/mob/user, var/atom/being_dropped, var/incapacitation_flags)
+	if(user == being_dropped)
+		return user.Adjacent(src) && !user.incapacitated(INCAPACITATION_STUNNED|INCAPACITATION_KNOCKOUT)
+	return ..()
+
 /obj/structure/bed/get_base_value()
 	. = round(..() * 2.5) // Utility structures should be worth more than their matter (wheelchairs, rollers, etc).
 
@@ -260,6 +265,11 @@
 	slot_flags = SLOT_BACK
 	w_class = ITEM_SIZE_LARGE
 	pickup_sound = 'sound/foley/pickup2.ogg'
+	material = /decl/material/solid/metal/steel
+	matter = list(
+		/decl/material/solid/plastic = MATTER_AMOUNT_SECONDARY, 
+		/decl/material/solid/cloth = MATTER_AMOUNT_REINFORCEMENT,
+	)
 	var/structure_form_type = /obj/structure/bed/roller	//The deployed form path.
 
 /obj/item/roller/get_single_monetary_worth()

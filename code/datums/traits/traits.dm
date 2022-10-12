@@ -1,15 +1,3 @@
-var/global/list/_trait_types
-
-/proc/trait_types()
-	if(!_trait_types)
-		_trait_types = list()
-		for(var/trait_type in subtypesof(/decl/trait))
-			var/decl/trait/T = trait_type
-			if(initial(T.abstract_type) != trait_type)
-				_trait_types += trait_type
-
-	return _trait_types
-
 /mob/living
 	var/list/traits
 
@@ -40,7 +28,7 @@ var/global/list/_trait_types
 	var/decl/trait/T = GET_DECL(trait_type)
 	if(!T.Validate(trait_level))
 		return FALSE
-	
+
 	LAZYSET(traits, trait_type, trait_level)
 	return TRUE
 
@@ -48,7 +36,7 @@ var/global/list/_trait_types
 	var/decl/trait/T = GET_DECL(trait_type)
 	if(!T.Validate(trait_level))
 		return FALSE
-	
+
 	if(!traits) // If traits haven't been setup before, check if we need to do so now
 		var/species_level = species.traits[trait_type]
 		if(species_level == trait_level) // Matched the default species trait level, ignore
@@ -70,7 +58,6 @@ var/global/list/_trait_types
 
 /decl/trait
 	abstract_type = /decl/trait
-	crash_on_abstract_init = TRUE
 	var/name
 	var/description
 	var/list/levels = list(TRAIT_LEVEL_EXISTS) // Should either only contain TRAIT_LEVEL_EXISTS or a set of the other TRAIT_LEVEL_* levels

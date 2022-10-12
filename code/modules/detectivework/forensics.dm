@@ -58,17 +58,14 @@
 		var/datum/extension/forensic_evidence/forensics = get_or_create_extension(src, /datum/extension/forensic_evidence)
 		forensics.add_from_atom(/datum/forensics/trace_dna, M)
 
-//on examination get hints of evidence
-/mob/examinate(atom/A as mob|obj|turf in view())
-	if(..())
-		return 1 //I'll admit I am just imitating examine.dm
+// On examination get hints of evidence
+/obj/item/examine(mob/user, distance)
+	. = ..()
 
+	if(distance <= 1 && user.skill_check(SKILL_FORENSICS, SKILL_ADEPT))
+		to_chat(user, SPAN_INFO("As a murder weapon, it's [english_list(get_autopsy_descriptors())]."))
 
-	if(istype(A, /obj/item) && skill_check(SKILL_FORENSICS, SKILL_ADEPT) && get_dist(src, A) <= 1)
-		var/obj/item/I = A
-		to_chat(src, SPAN_INFO("As a murder weapon, it's [english_list(I.get_autopsy_descriptors())]."))
-
-	//Detective is on the case
-	var/datum/extension/forensic_evidence/forensics = get_extension(A, /datum/extension/forensic_evidence)
-	if(forensics?.check_spotting(src) && has_client_color(/datum/client_color/noir))
-		playsound_local(null, pick('sound/effects/clue1.ogg','sound/effects/clue2.ogg'), 60, is_global = TRUE)
+	// Detective is on the case
+	var/datum/extension/forensic_evidence/forensics = get_extension(src, /datum/extension/forensic_evidence)
+	if(forensics?.check_spotting(user) && user.has_client_color(/datum/client_color/noir))
+		user.playsound_local(null, pick('sound/effects/clue1.ogg','sound/effects/clue2.ogg'), 60, is_global = TRUE)

@@ -54,17 +54,8 @@
 					say(temp)
 				winset(client, "input", "text=[null]")
 
-/mob/living/carbon/human/say_understands(var/mob/other,var/decl/language/speaking = null)
-	if(species.can_understand(other))
-		return TRUE
-	if(!speaking)
-		if(istype(other, /mob/living/silicon))
-			return TRUE
-		if(istype(other, /mob/announcer))
-			return TRUE
-		if(istype(other, /mob/living/carbon/brain))
-			return TRUE
-	return ..()
+/mob/living/carbon/human/say_understands(mob/speaker, decl/language/speaking)
+	return (!speaking && (issilicon(speaker) || istype(speaker, /mob/announcer) || isbrain(speaker))) || ..()
 
 /mob/living/carbon/human/GetVoice()
 
@@ -99,7 +90,7 @@
 	var/ending = copytext(message, length(message))
 
 	if(speaking)
-		verb = speaking.get_spoken_verb(ending)
+		verb = speaking.get_spoken_verb(src, ending)
 	else
 		if(ending == "!")
 			verb=pick("exclaims","shouts","yells")

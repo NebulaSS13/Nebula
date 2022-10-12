@@ -19,6 +19,7 @@
 /obj/item/stack/material/Initialize(mapload, var/amount, var/_material, var/_reinf_material)
 	. = ..(mapload, amount, _material)
 	if(!istype(material))
+		log_warning("[src] ([x],[y],[z]) was deleted because it didn't have a valid material set('[material]')!")
 		return INITIALIZE_HINT_QDEL
 	if(!_reinf_material)
 		_reinf_material = reinf_material
@@ -47,15 +48,13 @@
 /obj/item/stack/material/get_material()
 	return material
 
-/obj/item/stack/material/update_matter()
-	create_matter()
-
 /obj/item/stack/material/create_matter()
 	matter = list()
 	if(istype(material))
-		matter[material.type] = MATTER_AMOUNT_PRIMARY * get_matter_amount_modifier()
+		matter[material.type] = MATTER_AMOUNT_PRIMARY * matter_multiplier
 	if(istype(reinf_material))
-		matter[reinf_material.type] = MATTER_AMOUNT_REINFORCEMENT * get_matter_amount_modifier()
+		matter[reinf_material.type] = MATTER_AMOUNT_REINFORCEMENT * matter_multiplier
+	..()
 
 /obj/item/stack/material/proc/update_strings()
 	if(amount>1)
@@ -69,6 +68,13 @@
 	if(reinf_material)
 		SetName("reinforced [name]")
 		desc = "[desc]\nIt is reinforced with the [reinf_material.use_name] lattice."
+
+	if(material.stack_origin_tech)
+		origin_tech = material.stack_origin_tech
+	else if(reinf_material && reinf_material.stack_origin_tech)
+		origin_tech = reinf_material.stack_origin_tech
+	else
+		origin_tech = initial(origin_tech)
 
 /obj/item/stack/material/use(var/used)
 	. = ..()
@@ -84,15 +90,6 @@
 	if((reinf_material && reinf_material.type) != (M.reinf_material && M.reinf_material.type))
 		return FALSE
 	return TRUE
-
-/obj/item/stack/material/update_strings()
-	. = ..()
-	if(material.stack_origin_tech)
-		origin_tech = material.stack_origin_tech
-	else if(reinf_material && reinf_material.stack_origin_tech)
-		origin_tech = reinf_material.stack_origin_tech
-	else
-		origin_tech = initial(origin_tech)
 
 /obj/item/stack/material/transfer_to(obj/item/stack/material/M, var/tamount=null)
 	if(!is_same(M))
@@ -225,7 +222,7 @@
 	stack_merge_type = /obj/item/stack/material/pane
 
 /obj/item/stack/material/pane/update_state_from_amount()
-	if(reinf_material) 
+	if(reinf_material)
 		icon_state = "sheet-glass-reinf"
 		base_state = icon_state
 		plural_icon_state = "sheet-glass-reinf-mult"
@@ -347,6 +344,7 @@
 	uses_charge = 1
 	charge_costs = list(500)
 	material = /decl/material/solid/metal/steel
+	health = ITEM_HEALTH_NO_DAMAGE
 
 /obj/item/stack/material/strut/get_recipes()
 	return material.get_strut_recipes(reinf_material && reinf_material.type)

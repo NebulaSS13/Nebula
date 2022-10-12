@@ -1,3 +1,5 @@
+#define SCAN_COLOR "SCAN"
+
 /obj/item/integrated_electronics/detailer
 	name = "assembly detailer"
 	desc = "A combination autopainter and flash anodizer designed to give electronic assemblies a colorful, wear-resistant finish."
@@ -6,8 +8,13 @@
 	obj_flags = OBJ_FLAG_CONDUCTIBLE
 	item_flags = ITEM_FLAG_NO_BLUDGEON
 	w_class = ITEM_SIZE_SMALL
-	var/data_to_write = null
-	var/accepting_refs = FALSE
+	material = /decl/material/solid/metal/aluminium
+	matter = list(
+		/decl/material/solid/metal/steel = MATTER_AMOUNT_REINFORCEMENT,
+		/decl/material/solid/fiberglass = MATTER_AMOUNT_TRACE,
+		/decl/material/solid/plastic = MATTER_AMOUNT_TRACE
+	)
+	var/scanning_color = FALSE
 	var/detail_color = COLOR_ASSEMBLY_WHITE
 	var/list/color_list = list(
 		"black" = COLOR_ASSEMBLY_BLACK,
@@ -25,7 +32,8 @@
 		"green" = COLOR_ASSEMBLY_GREEN,
 		"light blue" = COLOR_ASSEMBLY_LBLUE,
 		"blue" = COLOR_ASSEMBLY_BLUE,
-		"purple" = COLOR_ASSEMBLY_PURPLE
+		"purple" = COLOR_ASSEMBLY_PURPLE,
+		"\[SCAN FROM ASSEMBLY\]" = SCAN_COLOR
 		)
 
 /obj/item/integrated_electronics/detailer/Initialize()
@@ -42,5 +50,25 @@
 		return
 	if(!in_range(src, user))
 		return
+	if(color_choice == SCAN_COLOR)
+		scanning_color = TRUE
+		detail_color = initial(detail_color)
+		return
+	scanning_color = FALSE
 	detail_color = color_list[color_choice]
 	update_icon()
+
+/obj/item/integrated_electronics/detailer/afterattack(atom/target, mob/living/user, proximity)
+	. = ..()
+	if(!scanning_color || !proximity)
+		return .
+	visible_message("<span class='notice'>[user] slides \a [src]'s over \the [target].</span>")
+	to_chat(user, "<span class='notice'>You set \the [src]'s detailing color to match [target.name] \[Ref\]. The color matcher is \
+	now off.</span>")
+	scanning_color = FALSE
+	if(isitem(target))
+		var/obj/item/I = target
+		detail_color = I.get_assembly_detail_color()
+
+/obj/item/integrated_electronics/detailer/get_assembly_detail_color()
+	return detail_color

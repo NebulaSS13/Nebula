@@ -66,14 +66,19 @@
 
 /obj/machinery/icecream_vat/Initialize(mapload, d, populate_parts)
 	. = ..()
-	create_reagents(100)
+	initialize_reagents()
 	while(product_types.len < 8)
 		product_types.Add(5)
-	if(populate_parts)
-		reagents.add_reagent(/decl/material/liquid/drink/milk, 5)
-		reagents.add_reagent(/decl/material/liquid/nutriment/flour, 5)
-		reagents.add_reagent(/decl/material/liquid/nutriment/sugar, 5)
-		reagents.add_reagent(/decl/material/solid/ice, 5)
+
+/obj/machinery/icecream_vat/initialize_reagents(populate = TRUE)
+	create_reagents(100)
+	. = ..()
+
+/obj/machinery/icecream_vat/populate_reagents()
+	reagents.add_reagent(/decl/material/liquid/drink/milk, 5)
+	reagents.add_reagent(/decl/material/liquid/nutriment/flour, 5)
+	reagents.add_reagent(/decl/material/liquid/nutriment/sugar, 5)
+	reagents.add_reagent(/decl/material/solid/ice, 5)
 
 /obj/machinery/icecream_vat/interface_interact(mob/user)
 	interact(user)

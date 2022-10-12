@@ -8,6 +8,9 @@
 	possible_evidence_types = list(
 		/datum/forensics/fingerprints
 	)
+	item_flags = ITEM_FLAG_HOLLOW
+	material = /decl/material/solid/glass
+	matter = list(/decl/material/solid/metal/aluminium = MATTER_AMOUNT_SECONDARY)
 
 // Fingerprint card
 
@@ -18,6 +21,7 @@
 	icon_state = "fingerprint0"
 	item_state = "paper"
 	possible_evidence_types = list(/datum/forensics/fingerprints)
+	material = /decl/material/solid/cardboard
 
 /obj/item/forensics/sample/print/on_update_icon()
 	. = ..()

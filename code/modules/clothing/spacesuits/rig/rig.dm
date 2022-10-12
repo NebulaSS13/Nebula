@@ -34,6 +34,14 @@
 	siemens_coefficient = 0.2
 	permeability_coefficient = 0.1
 	unacidable = 1
+	material = /decl/material/solid/metal/titanium
+	matter = list(
+		/decl/material/solid/fiberglass           = MATTER_AMOUNT_SECONDARY,
+		/decl/material/solid/plastic              = MATTER_AMOUNT_REINFORCEMENT,
+		/decl/material/solid/metal/copper         = MATTER_AMOUNT_REINFORCEMENT,
+		/decl/material/solid/silicon              = MATTER_AMOUNT_REINFORCEMENT,
+		/decl/material/solid/metal/stainlesssteel = MATTER_AMOUNT_TRACE,
+	)
 
 	var/equipment_overlay_icon = 'icons/mob/onmob/onmob_rig_modules.dmi'
 	var/hides_uniform = 1 	//used to determinate if uniform should be visible whenever the suit is sealed or not
@@ -60,7 +68,6 @@
 	var/obj/item/rig_module/vision/visor    // Kinda shitty to have a var for a module, but saves time.
 	var/obj/item/rig_module/voice/speech    // As above.
 	var/mob/living/carbon/human/wearer      // The person currently wearing the rig.
-	var/image/mob_icon                      // Holder for on-mob icon.
 	var/list/installed_modules = list()     // Power consumption/use bookkeeping.
 
 	// Rig status vars.

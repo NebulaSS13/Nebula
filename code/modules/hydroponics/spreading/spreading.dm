@@ -54,7 +54,6 @@
 	var/possible_children = 20
 	var/spread_chance = 30
 	var/spread_distance = 4
-	var/evolve_chance = 2
 	var/mature_time		//minimum maturation time
 	var/obj/machinery/portable_atmospherics/hydroponics/soil/invisible/plant
 
@@ -121,7 +120,7 @@
 
 	var/ikey = "\ref[seed]-plant-[growth]"
 	if(!SSplants.plant_icon_cache[ikey])
-		SSplants.plant_icon_cache[ikey] = seed.get_icon(growth)
+		SSplants.plant_icon_cache[ikey] = seed.get_growth_stage_overlay(growth)
 	overlays += SSplants.plant_icon_cache[ikey]
 
 	if(growth > 2 && growth == max_growth)
@@ -254,7 +253,7 @@
 		physically_destroyed()
 
 /obj/effect/vine/proc/adjust_health(value)
-	health = Clamp(health + value, 0, max_health)
+	health = clamp(health + value, 0, max_health)
 	if(health <= 0)
 		die_off()
 

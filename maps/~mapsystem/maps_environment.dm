@@ -1,10 +1,10 @@
 /datum/map
-	var/datum/gas_mixture/exterior_atmosphere
+	/// A per-turf gasmix (associative, ex. list(/decl/material/gas/oxygen = O2STANDARD)) returned to exterior return_air.
+	var/list/exterior_atmos_composition
+	/// Temperature of standard exterior atmosphere.
 	var/exterior_atmos_temp = T20C
-	var/list/exterior_atmos_composition = list(
-		/decl/material/gas/oxygen = O2STANDARD,
-		/decl/material/gas/nitrogen = N2STANDARD
-	)
+	/// Gaxmis datum generated from exterior_atmos_composition.
+	var/datum/gas_mixture/exterior_atmosphere
 
 /datum/map/proc/build_exterior_atmosphere()
 	exterior_atmosphere = new

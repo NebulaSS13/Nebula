@@ -74,7 +74,7 @@
 	metabolism = REM * 0.25
 	exoplanet_rarity = MAT_RARITY_UNCOMMON
 
-/decl/material/liquid/venom/affect_blood(var/mob/living/M, var/alien, var/removed, var/datum/reagents/holder)
+/decl/material/liquid/venom/affect_blood(var/mob/living/M, var/removed, var/datum/reagents/holder)
 	if(prob(REAGENT_VOLUME(holder, type)*2))
 		SET_STATUS_MAX(M, STAT_CONFUSE, 3)
 	..()
@@ -90,7 +90,7 @@
 	toxicity_targets_organ = BP_HEART
 	exoplanet_rarity = MAT_RARITY_UNCOMMON
 
-/decl/material/liquid/cyanide/affect_blood(var/mob/living/M, var/alien, var/removed, var/datum/reagents/holder)
+/decl/material/liquid/cyanide/affect_blood(var/mob/living/M, var/removed, var/datum/reagents/holder)
 	..()
 	ADJ_STATUS(M, STAT_ASLEEP, 1)
 
@@ -107,11 +107,11 @@
 	taste_mult = 1.2
 	exoplanet_rarity = MAT_RARITY_UNCOMMON
 
-/decl/material/liquid/heartstopper/affect_blood(var/mob/living/M, var/alien, var/removed, var/datum/reagents/holder)
+/decl/material/liquid/heartstopper/affect_blood(var/mob/living/M, var/removed, var/datum/reagents/holder)
 	..()
 	ADJ_STATUS(M, STAT_CONFUSE, 1.5)
 
-/decl/material/liquid/heartstopper/affect_overdose(var/mob/living/M, var/alien, var/datum/reagents/holder)
+/decl/material/liquid/heartstopper/affect_overdose(var/mob/living/M)
 	..()
 	if(ishuman(M))
 		var/mob/living/carbon/human/H = M
@@ -133,14 +133,14 @@
 	toxicity_targets_organ = BP_BRAIN
 	heating_message = "melts into a liquid slurry."
 	heating_products = list(
-		/decl/material/liquid/carpotoxin = 0.2, 
-		/decl/material/liquid/sedatives = 0.4, 
+		/decl/material/liquid/carpotoxin = 0.2,
+		/decl/material/liquid/sedatives = 0.4,
 		/decl/material/solid/metal/copper = 0.4
 	)
 	taste_mult = 1.2
 	exoplanet_rarity = MAT_RARITY_EXOTIC
 
-/decl/material/liquid/zombiepowder/affect_blood(var/mob/living/M, var/alien, var/removed, var/datum/reagents/holder)
+/decl/material/liquid/zombiepowder/affect_blood(var/mob/living/M, var/removed, var/datum/reagents/holder)
 	..()
 	M.status_flags |= FAKEDEATH
 	M.adjustOxyLoss(3 * removed)
@@ -176,7 +176,7 @@
 	color = "#49002e"
 	toxicity = 4
 	heating_products = list(
-		/decl/material/liquid/bromide = 0.4, 
+		/decl/material/liquid/bromide = 0.4,
 		/decl/material/liquid/water = 0.6
 	)
 	metabolism = REM * 0.25
@@ -192,7 +192,7 @@
 	toxicity = 4
 	heating_products = list(
 		/decl/material/liquid/acetone = 0.4,
-		/decl/material/solid/carbon = 0.4, 
+		/decl/material/solid/carbon = 0.4,
 		/decl/material/liquid/ethanol = 0.2
 	)
 	heating_point = 145 CELSIUS
@@ -213,7 +213,7 @@
 	taste_mult = 1.2
 	metabolism = REM * 0.25
 
-/decl/material/liquid/hair_remover/affect_touch(var/mob/M, var/alien, var/removed, var/datum/reagents/holder)
+/decl/material/liquid/hair_remover/affect_touch(var/mob/M, var/removed, var/datum/reagents/holder)
 	M.lose_hair()
 	holder.remove_reagent(type, REAGENT_VOLUME(holder, type))
 
@@ -231,10 +231,10 @@
 	exoplanet_rarity = MAT_RARITY_EXOTIC
 	var/amount_to_zombify = 5
 
-/decl/material/liquid/zombie/affect_touch(var/mob/living/M, var/alien, var/removed, var/datum/reagents/holder)
-	affect_blood(M, alien, removed * 0.5, holder)
+/decl/material/liquid/zombie/affect_touch(var/mob/living/M, var/removed, var/datum/reagents/holder)
+	affect_blood(M, removed * 0.5, holder)
 
-/decl/material/liquid/zombie/affect_blood(var/mob/living/M, var/alien, var/removed, var/datum/reagents/holder)
+/decl/material/liquid/zombie/affect_blood(var/mob/living/M, var/removed, var/datum/reagents/holder)
 	..()
 	if (istype(M, /mob/living/carbon/human))
 		var/mob/living/carbon/human/H = M

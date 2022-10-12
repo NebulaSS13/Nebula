@@ -10,7 +10,7 @@
 	anchored = 1
 	movable_flags = MOVABLE_FLAG_PROXMOVE
 	obj_flags = OBJ_FLAG_MOVES_UNSUPPORTED
-
+	directional_offset = "{'SOUTH':{'y':21}, 'EAST':{'x':-10}, 'WEST':{'x':10}}"
 	base_type = /obj/machinery/camera
 	uncreated_component_parts = null
 	construct_state = /decl/machine_construction/wall_frame/panel_closed
@@ -26,7 +26,6 @@
 
 	var/number = 1
 	var/c_tag = null
-	var/c_tag_order = 999
 	var/status = 1
 	var/cut_power = FALSE
 
@@ -160,7 +159,8 @@
 	return TRUE
 
 /obj/machinery/camera/HasProximity(atom/movable/AM)
-	if(isliving(AM))
+	. = ..()
+	if(. && isliving(AM))
 		newTarget(AM)
 
 /obj/machinery/camera/emp_act(severity)
@@ -260,19 +260,6 @@
 		update_coverage()
 
 /obj/machinery/camera/on_update_icon()
-	default_pixel_x = 0
-	default_pixel_y = 0
-
-	var/turf/T = get_step(get_turf(src), turn(src.dir, 180))
-	if(istype(T, /turf/simulated/wall))
-		if(dir == SOUTH)
-			default_pixel_y = 21
-		else if(dir == WEST)
-			default_pixel_x = 10
-		else if(dir == EAST)
-			default_pixel_x = -10
-	reset_offsets(0)
-
 	if (!status || (stat & BROKEN))
 		icon_state = "[initial(icon_state)]1"
 	else if (stat & EMPED)

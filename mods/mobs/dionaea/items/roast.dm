@@ -9,6 +9,6 @@
 	nutriment_amt = 6
 	bitesize = 2
 
-/obj/item/chems/food/dionaroast/Initialize()
-	.=..()
+/obj/item/chems/food/dionaroast/populate_reagents()
 	reagents.add_reagent(/decl/material/solid/metal/radium, 2)
+	. = ..()

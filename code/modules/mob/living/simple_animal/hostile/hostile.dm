@@ -12,7 +12,6 @@
 	var/attack_same = 0
 	var/ranged = 0
 	var/rapid = 0
-	var/melee_damage_flags //sharp, edge, etc
 	var/sa_accuracy = 85 //base chance to hit out of 100
 	var/projectiletype
 	var/projectilesound
@@ -25,8 +24,6 @@
 	var/break_stuff_probability = 10
 	var/destroy_surroundings = 1
 
-	var/shuttletarget = null
-	var/enroute = 0
 	var/stop_automation = FALSE //stops AI procs from running
 
 	var/can_pry = TRUE
@@ -178,7 +175,7 @@
 	return hearers(src, dist)-src
 
 /mob/living/simple_animal/hostile/proc/get_accuracy()
-	return Clamp(sa_accuracy - melee_accuracy_mods(), 0, 100)
+	return clamp(sa_accuracy - melee_accuracy_mods(), 0, 100)
 
 /mob/living/simple_animal/hostile/death(gibbed, deathmessage, show_dead_message)
 	..(gibbed, deathmessage, show_dead_message)

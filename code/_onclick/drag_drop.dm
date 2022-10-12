@@ -12,12 +12,19 @@
 /atom/proc/handle_mouse_drop(var/atom/over, var/mob/user)
 	. = over.receive_mouse_drop(src, user)
 
+// Can the user drop something onto this atom?
+/atom/proc/user_can_mousedrop_onto(var/mob/user, var/atom/being_dropped, var/incapacitation_flags)
+	return !user.incapacitated(incapacitation_flags) && check_mousedrop_interactivity(user) && user.check_dexterity(DEXTERITY_GRIP)
+
+/atom/proc/check_mousedrop_interactivity(var/mob/user)
+	return CanPhysicallyInteract(user)
+
 // This proc checks if an atom can be mousedropped onto the target by the user.
 /atom/proc/can_mouse_drop(var/atom/over, var/mob/user = usr, var/incapacitation_flags = INCAPACITATION_DEFAULT)
 	SHOULD_CALL_PARENT(TRUE)
 	if(!istype(user) || !istype(over) ||QDELETED(user) || QDELETED(over) || QDELETED(src))
 		return FALSE
-	if(user.incapacitated(incapacitation_flags) || !CanPhysicallyInteract(user) || !user.check_dexterity(DEXTERITY_GRIP))
+	if(!over.user_can_mousedrop_onto(user, src, incapacitation_flags))
 		return FALSE
 	if(!check_mousedrop_adjacency(over, user))
 		return FALSE

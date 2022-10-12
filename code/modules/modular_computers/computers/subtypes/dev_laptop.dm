@@ -9,6 +9,11 @@
 	interact_sounds = list("keyboard", "keystroke")
 	interact_sound_volume = 20
 	computer_type = /datum/extension/assembly/modular_computer/laptop
+	matter = list(
+		/decl/material/solid/metal/aluminium = MATTER_AMOUNT_SECONDARY,
+		/decl/material/solid/metal/copper    = MATTER_AMOUNT_REINFORCEMENT,
+		/decl/material/solid/silicon         = MATTER_AMOUNT_REINFORCEMENT,
+	)
 	var/icon_state_closed = "laptop-closed"
 	
 /obj/item/modular_computer/laptop/on_update_icon()

@@ -201,6 +201,8 @@ var/global/list/hygiene_props = list()
 	icon_state = "urinal"
 	density = 0
 	anchored = 1
+	directional_offset = "{'NORTH':{'y':-32}, 'SOUTH':{'y':32}, 'EAST':{'x':-32}, 'WEST':{'x':32}}"
+	obj_flags = OBJ_FLAG_MOVES_UNSUPPORTED
 
 /obj/structure/hygiene/urinal/attackby(var/obj/item/I, var/mob/user)
 	if(istype(I, /obj/item/grab))
@@ -316,10 +318,10 @@ var/global/list/hygiene_props = list()
 			reagents.splash(get_turf(src), reagents.total_volume, max_spill = 0)
 
 /obj/structure/hygiene/shower/proc/process_heat(mob/living/M)
-	if(!on || !istype(M)) 
+	if(!on || !istype(M))
 		return
 	var/water_temperature = temperature_settings[watertemp]
-	var/temp_adj = between(BODYTEMP_COOLING_MAX, water_temperature - M.bodytemperature, BODYTEMP_HEATING_MAX)
+	var/temp_adj = clamp(BODYTEMP_COOLING_MAX, water_temperature - M.bodytemperature, BODYTEMP_HEATING_MAX)
 	M.bodytemperature += temp_adj
 	if(ishuman(M))
 		var/mob/living/carbon/human/H = M
@@ -474,9 +476,8 @@ var/global/list/hygiene_props = list()
 //toilet paper interaction for clogging toilets and other facilities
 
 /obj/structure/hygiene/attackby(obj/item/I, mob/user)
-	if (!istype(I, /obj/item/taperoll/bog))
-		..()
-		return
+	if (!istype(I, /obj/item/stack/tape_roll/barricade_tape/toilet))
+		return ..()
 	if (clogged == -1)
 		to_chat(user, SPAN_WARNING("Try as you might, you can not clog \the [src] with \the [I]."))
 		return
@@ -492,43 +493,47 @@ var/global/list/hygiene_props = list()
 	clog(1)
 	qdel(I)
 
-/obj/item/taperoll/bog
-	name = "toilet paper roll"
-	icon = 'icons/obj/toiletpaper.dmi'
-	icon_state = ICON_STATE_WORLD
-	desc = "A unbranded roll of standard issue two ply toilet paper. Refined from carefully rendered down sea shells due to the government's 'Abuse Of The Trees Act'."
-	tape_type = /obj/item/tape/bog
-	slot_flags = SLOT_HEAD | SLOT_OVER_BODY
-	var/sheets = 30
+////////////////////////////////////////////////////
+// Toilet Paper Roll
+////////////////////////////////////////////////////
+/decl/barricade_tape_template/toilet
+	tape_kind         = "toilet paper"
+	tape_desc         = "A length of toilet paper. Seems like custodia is marking their territory again."
+	roll_desc         = "A unbranded roll of standard issue two ply toilet paper. Refined from carefully rendered down sea shells due to the government's 'Abuse Of The Trees Act'."
+	base_icon_state   = "stripetape"
+	tape_color        = COLOR_WHITE
+	detail_overlay    = "stripes"
+	detail_color      = COLOR_WHITE
 
-/obj/item/tape/bog
-	name = "toilet paper"
-	desc = "A length of toilet paper. Seems like custodia is marking their territory again."
-	icon_base = "stripetape"
-	color = COLOR_WHITE
-	detail_overlay = "stripes"
-	detail_color = COLOR_WHITE
+/obj/item/stack/tape_roll/barricade_tape/toilet
+	icon          = 'icons/obj/toiletpaper.dmi'
+	icon_state    = ICON_STATE_WORLD
+	slot_flags    = SLOT_HEAD | SLOT_OVER_BODY
+	amount        = 30
+	max_amount    = 30
+	tape_template = /decl/barricade_tape_template/toilet
 
-/obj/item/taperoll/bog/verb/tear_sheet()
+/obj/item/stack/tape_roll/barricade_tape/toilet/verb/tear_sheet()
 	set category = "Object"
-	set name = "Tear Sheet"
-	set desc = "Tear a sheet of toilet paper."
+	set name     = "Tear Sheet"
+	set desc     = "Tear a sheet of toilet paper."
 	set src in usr
+
 	if (usr.incapacitated())
 		return
-	if(sheets > 0)
+
+	if(can_use(1))
 		visible_message(SPAN_NOTICE("\The [usr] tears a sheet from \the [src]."), SPAN_NOTICE("You tear a sheet from \the [src]."))
 		var/obj/item/paper/crumpled/bog/C =  new(loc)
 		usr.put_in_hands(C)
-		sheets--
-	if (sheets < 1)
-		to_chat(usr, SPAN_WARNING("\The [src] is depleted."))
-		qdel(src)
 
+////////////////////////////////////////////////////
+// Toilet Paper Sheet
+////////////////////////////////////////////////////
 /obj/item/paper/crumpled/bog
-	name = "sheet of toilet paper"
-	desc = "A single sheet of toilet paper. Two ply."
-	icon = 'icons/obj/toiletpaper.dmi'
+	name       = "sheet of toilet paper"
+	desc       = "A single sheet of toilet paper. Two ply."
+	icon       = 'icons/obj/toiletpaper.dmi'
 	icon_state = "bogroll_sheet"
 
 /obj/structure/hygiene/faucet
@@ -576,7 +581,7 @@ var/global/list/hygiene_props = list()
 
 /obj/structure/hygiene/faucet/Process()
 	..()
-	if(open) 
+	if(open)
 		water_flow()
 
 /obj/structure/hygiene/faucet/examine(mob/user)

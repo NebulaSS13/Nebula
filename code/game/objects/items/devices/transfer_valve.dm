@@ -3,6 +3,7 @@
 	desc = "A small, versatile valve with dual-headed heat-resistant pipes. This mechanism is the standard size for coupling with portable gas tanks."
 	icon = 'icons/obj/assemblies.dmi'
 	icon_state = "valve_1"
+	material = /decl/material/solid/metal/stainlesssteel
 	var/obj/item/tank/tank_one
 	var/obj/item/tank/tank_two
 	var/obj/item/attached_device
@@ -68,10 +69,9 @@
 
 
 /obj/item/transfer_valve/HasProximity(atom/movable/AM)
-	if(!attached_device)	return
-	attached_device.HasProximity(AM)
-	return
-
+	. = ..()
+	if(. && attached_device)
+		attached_device.HasProximity(AM)
 
 /obj/item/transfer_valve/attack_self(mob/user)
 	ui_interact(user)

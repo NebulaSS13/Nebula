@@ -239,6 +239,7 @@
 	throw_speed = 5
 	throw_range = 10
 	w_class = ITEM_SIZE_TINY
+	material = /decl/material/solid/stone/cult
 
 /obj/item/summoning_stone/attack_self(var/mob/user)
 	if(isAdminLevel(user.z))

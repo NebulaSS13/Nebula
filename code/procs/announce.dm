@@ -3,7 +3,6 @@ var/global/datum/announcement/priority/command/command_announcement = new(do_log
 var/global/datum/announcement/minor/minor_announcement = new(new_sound = 'sound/AI/commandreport.ogg',)
 
 /datum/news_announcement
-	var/round_time // time of the round at which this should be announced, in seconds
 	var/message    // body of the message
 	var/author = "Editor"
 	var/channel_name = "News Daily"

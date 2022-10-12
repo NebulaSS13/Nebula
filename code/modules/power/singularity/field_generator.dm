@@ -48,7 +48,7 @@ field_generator power level display
 	// Scale % power to % num_power_levels and truncate value
 	var/level = round(num_power_levels * power / field_generator_max_power)
 	// Clamp between 0 and num_power_levels for out of range power values
-	level = between(0, level, num_power_levels)
+	level = clamp(0, level, num_power_levels)
 	if(level)
 		overlays += "+p[level]"
 
@@ -208,8 +208,7 @@ field_generator power level display
 	if(draw_power(round(power_draw)) >= power_draw)
 		return 1
 	else
-		for(var/mob/M in viewers(src))
-			M.show_message("<span class='warning'>\The [src] shuts down!</span>")
+		visible_message(SPAN_WARNING("\The [src] shuts down!"))
 		turn_off()
 		investigate_log("ran out of power and <font color='red'>deactivated</font>","singulo")
 		src.power = 0

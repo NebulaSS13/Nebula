@@ -1,7 +1,11 @@
 // Macro functions.
 #define RAND_F(LOW, HIGH) (rand() * (HIGH - LOW) + LOW)
 #define CEILING(x) (-round(-(x)))
+
+// Float-aware floor and ceiling since round() will round upwards when given a second arg.
+#define NONUNIT_FLOOR(x, y)    (round( (x) / (y)) * (y))
 #define NONUNIT_CEILING(x, y) (-round(-(x) / (y)) * (y))
+
 #define MULT_BY_RANDOM_COEF(VAR,LO,HI) VAR =  round((VAR * rand(LO * 100, HI * 100))/100, 0.1)
 
 #define ROUND(x) (((x) >= 0) ? round((x)) : -round(-(x)))

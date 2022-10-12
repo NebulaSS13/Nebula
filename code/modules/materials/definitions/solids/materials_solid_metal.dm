@@ -188,7 +188,6 @@
 	. = ..()
 	if(reinforce_material)	//recipes below don't support composite materials
 		return
-	. += new/datum/stack_recipe/key(src)
 	. += new/datum/stack_recipe/furniture/closet(src)
 	. += new/datum/stack_recipe/furniture/canister(src)
 	. += new/datum/stack_recipe/furniture/tank(src)
@@ -206,7 +205,6 @@
 	. += new/datum/stack_recipe/apc(src)
 	. += new/datum/stack_recipe/air_alarm(src)
 	. += new/datum/stack_recipe/fire_alarm(src)
-	. += new/datum/stack_recipe_list("modular computer frames", create_recipe_list(/datum/stack_recipe/computer))
 
 /decl/material/solid/metal/steel/holographic
 	name = "holographic steel"
@@ -389,7 +387,7 @@
 	reflectiveness = MAT_VALUE_MATTE
 	taste_description = "metal"
 
-/decl/material/solid/metal/iron/affect_ingest(var/mob/living/M, var/alien, var/removed, var/datum/reagents/holder)
+/decl/material/solid/metal/iron/affect_ingest(var/mob/living/M, var/removed, var/datum/reagents/holder)
 	if(M.HasTrait(/decl/trait/metabolically_inert))
 		return
 

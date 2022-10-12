@@ -2497,7 +2497,7 @@
 /turf/simulated/floor/carpet/blue,
 /area/outpost/abandoned)
 "yb" = (
-/obj/item/storage/mirror{
+/obj/structure/mirror{
 	icon_state = "mirror_broke";
 	pixel_x = 30
 	},

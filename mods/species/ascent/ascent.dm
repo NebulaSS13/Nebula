@@ -8,8 +8,6 @@
 #define BODY_FLAG_ALATE BITFLAG(4)
 #define BODY_FLAG_GYNE  BITFLAG(5)
 
-#define IS_MANTID    "mantid"
-
 #define BP_L_HAND_UPPER "l_u_hand"
 #define BP_R_HAND_UPPER "r_u_hand"
 #define BP_M_HAND       "midlimb"

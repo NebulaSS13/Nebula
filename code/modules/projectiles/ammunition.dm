@@ -8,6 +8,8 @@
 	slot_flags = SLOT_LOWER_BODY | SLOT_EARS
 	throwforce = 1
 	w_class = ITEM_SIZE_TINY
+	item_flags = ITEM_FLAG_HOLLOW
+	material = /decl/material/solid/metal/brass
 
 	var/leaves_residue = 1
 	var/caliber = ""					//Which kind of guns it can be loaded into

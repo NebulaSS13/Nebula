@@ -1,6 +1,5 @@
 /decl/grab/normal/struggle
 	name = "struggle grab"
-	fancy_desc = "holding"
 	upgrab =   /decl/grab/normal/aggressive
 	downgrab = /decl/grab/normal/passive
 	shift = 8

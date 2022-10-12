@@ -224,7 +224,7 @@ default behaviour is:
 /mob/living/proc/adjustBruteLoss(var/amount)
 	if (status_flags & GODMODE)
 		return
-	health = Clamp(health - amount, 0, maxHealth)
+	health = clamp(health - amount, 0, maxHealth)
 
 /mob/living/proc/getOxyLoss()
 	return 0
@@ -379,15 +379,17 @@ default behaviour is:
 /mob/living/proc/restore_all_organs()
 	return
 
+
+/mob/living/carbon/revive()
+	var/obj/item/cuffs = get_equipped_item(slot_handcuffed_str)
+	if (cuffs)
+		unEquip(cuffs, get_turf(src))
+	. = ..()
+
 /mob/living/proc/revive()
 	rejuvenate()
 	if(buckled)
 		buckled.unbuckle_mob()
-	if(iscarbon(src))
-		var/mob/living/carbon/C = src
-		var/obj/item/cuffs = get_equipped_item(slot_handcuffed_str)
-		if (cuffs)
-			C.unEquip(cuffs)
 	BITSET(hud_updateflag, HEALTH_HUD)
 	BITSET(hud_updateflag, STATUS_HUD)
 	BITSET(hud_updateflag, LIFE_HUD)
@@ -1066,7 +1068,7 @@ default behaviour is:
 /decl/interaction_handler/admin_kill/is_possible(atom/target, mob/user, obj/item/prop)
 	. = ..()
 	if(.)
-		if(!check_rights(R_INVESTIGATE, 0, user)) 
+		if(!check_rights(R_INVESTIGATE, 0, user))
 			return FALSE
 		var/mob/living/M = target
 		if(M.stat == DEAD)

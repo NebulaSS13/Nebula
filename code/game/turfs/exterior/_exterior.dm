@@ -36,7 +36,8 @@
 			ChangeArea(src, owner.planetary_area)
 
 	. = ..(mapload)	// second param is our own, don't pass to children
-	setup_environmental_lighting()
+	if (mapload)
+		setup_environmental_lighting()
 
 	var/air_graphic = get_air_graphic()
 	if(length(air_graphic))

@@ -26,10 +26,8 @@
 		var/image/holder2 = hud_list[STATUS_HUD_OOC]
 		holder2.icon_state = "hudbrainworm"
 
-/mob/living/carbon/human/say_understands(var/mob/other,var/decl/language/speaking = null)
-	if(has_brain_worms())
-		return TRUE
-	return ..()
+/mob/living/carbon/human/say_understands(mob/speaker, decl/language/speaking)
+	return has_brain_worms() || ..()
 
 /obj/item/organ/internal/brain/do_uninstall(in_place, detach, ignore_children)
 	if(istype(owner))

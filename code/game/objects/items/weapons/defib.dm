@@ -13,6 +13,12 @@
 	w_class = ITEM_SIZE_LARGE
 	origin_tech = "{'biotech':4,'powerstorage':2}"
 	action_button_name = "Remove/Replace Paddles"
+	material = /decl/material/solid/plastic
+	matter = list(
+		/decl/material/solid/metal/copper = MATTER_AMOUNT_REINFORCEMENT,
+		/decl/material/solid/metal/steel  = MATTER_AMOUNT_REINFORCEMENT,
+		/decl/material/solid/silicon      = MATTER_AMOUNT_TRACE,
+	)
 
 	var/obj/item/shockpaddles/linked/paddles
 	var/obj/item/cell/bcell = null
@@ -196,6 +202,9 @@
 	force = 2
 	throwforce = 6
 	w_class = ITEM_SIZE_LARGE
+	material = /decl/material/solid/plastic
+	matter = list(/decl/material/solid/metal/copper = MATTER_AMOUNT_SECONDARY, /decl/material/solid/metal/steel = MATTER_AMOUNT_SECONDARY)
+	health = ITEM_HEALTH_NO_DAMAGE
 
 	var/safety = 1 //if you can zap people with the paddles on harm mode
 	var/combat = 0 //If it can be used to revive people wearing thick clothing (e.g. spacesuits)
@@ -454,7 +463,7 @@
 	var/obj/item/organ/internal/brain = GET_INTERNAL_ORGAN(H, BP_BRAIN)
 	if(!brain) return //no brain
 
-	var/brain_damage = Clamp((deadtime - DEFIB_TIME_LOSS)/(DEFIB_TIME_LIMIT - DEFIB_TIME_LOSS)*brain.max_damage, H.getBrainLoss(), brain.max_damage)
+	var/brain_damage = clamp((deadtime - DEFIB_TIME_LOSS)/(DEFIB_TIME_LIMIT - DEFIB_TIME_LOSS)*brain.max_damage, H.getBrainLoss(), brain.max_damage)
 	H.setBrainLoss(brain_damage)
 
 /obj/item/shockpaddles/proc/make_announcement(var/message, var/msg_class)

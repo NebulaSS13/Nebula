@@ -605,11 +605,13 @@ var/global/list/admin_verbs_mod = list(
 	set category = "Special Verbs"
 	set name = "oSay"
 	set desc = "Display a message to everyone who can hear the target"
+
+	msg = sanitize(msg)
+
 	if(mob.control_object)
 		if(!msg)
 			return
-		for (var/mob/V in hearers(mob.control_object))
-			V.show_message("<b>[mob.control_object.name]</b> says: \"" + msg + "\"", 2)
+		mob.control_object.audible_message("<b>[mob.control_object]</b> says, \"[msg]\"")
 	SSstatistics.add_field_details("admin_verb","OT") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
 /client/proc/readmin_self()
@@ -782,14 +784,14 @@ var/global/list/admin_verbs_mod = list(
 		M.skin_tone =  -M.skin_tone + 35
 
 	// hair
-	var/decl/sprite_accessory/new_hstyle = input(usr, "Select a hair style", "Grooming") as null|anything in decls_repository.get_decls_of_subtype(/decl/sprite_accessory/hair)
+	var/new_hstyle = input(usr, "Select a hair style", "Grooming") as null|anything in decls_repository.get_decl_paths_of_subtype(/decl/sprite_accessory/hair)
 	if(new_hstyle)
-		M.h_style = new_hstyle.type
+		M.h_style = new_hstyle
 
 	// facial hair
-	var/decl/sprite_accessory/new_fstyle = input(usr, "Select a facial hair style", "Grooming")  as null|anything in decls_repository.get_decls_of_subtype(/decl/sprite_accessory/facial_hair)
+	var/new_fstyle = input(usr, "Select a facial hair style", "Grooming")  as null|anything in decls_repository.get_decl_paths_of_subtype(/decl/sprite_accessory/facial_hair)
 	if(new_fstyle)
-		M.f_style = new_fstyle.type
+		M.f_style = new_fstyle
 
 	var/new_gender = alert(usr, "Please select gender.", "Character Generation", "Male", "Female", "Neuter")
 	if (new_gender)
@@ -926,7 +928,7 @@ var/global/list/admin_verbs_mod = list(
 		if("Upload custom")
 			var/file = input(usr) as icon|null
 
-			if(!file) 
+			if(!file)
 				return
 
 			global.using_map.update_titlescreen(file)

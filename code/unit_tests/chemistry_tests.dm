@@ -131,7 +131,7 @@
 /datum/unit_test/reagent_colors_test/start_test()
 	var/list/bad_reagents = list()
 
-	for(var/T in typesof(/decl/material))
+	for(var/T in decls_repository.get_decl_paths_of_subtype(/decl/material))
 		var/decl/material/R = T
 		if(length(initial(R.color)) != 7)
 			bad_reagents += "[T] ([initial(R.color)])"

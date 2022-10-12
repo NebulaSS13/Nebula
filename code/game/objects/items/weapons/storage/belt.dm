@@ -12,6 +12,7 @@
 	slot_flags = SLOT_LOWER_BODY
 	var/overlay_flags
 	attack_verb = list("whipped", "lashed", "disciplined")
+	material = /decl/material/solid/leather/synth
 
 /obj/item/storage/belt/verb/toggle_layer()
 	set name = "Switch Belt Layer"
@@ -119,13 +120,12 @@
 		/obj/item/stack/cable_coil,
 		/obj/item/t_scanner,
 		/obj/item/scanner/gas,
-		/obj/item/taperoll/engineering,
 		/obj/item/inducer/,
 		/obj/item/robotanalyzer,
 		/obj/item/minihoe,
 		/obj/item/hatchet,
 		/obj/item/scanner/plant,
-		/obj/item/taperoll,
+		/obj/item/stack/tape_roll,
 		/obj/item/extinguisher/mini,
 		/obj/item/marshalling_wand,
 		/obj/item/geiger,
@@ -177,7 +177,7 @@
 		/obj/item/clothing/glasses/hud/health,
 		/obj/item/crowbar,
 		/obj/item/flashlight,
-		/obj/item/taperoll,
+		/obj/item/stack/tape_roll,
 		/obj/item/extinguisher/mini,
 		/obj/item/storage/med_pouch,
 		/obj/item/bodybag,
@@ -215,7 +215,7 @@
 		/obj/item/megaphone,
 		/obj/item/energy_blade,
 		/obj/item/baton,
-		/obj/item/taperoll,
+		/obj/item/stack/tape_roll,
 		/obj/item/holowarrant,
 		/obj/item/magnetic_ammo,
 		/obj/item/binoculars,
@@ -247,7 +247,7 @@
 		/obj/item/megaphone,
 		/obj/item/energy_blade,
 		/obj/item/baton,
-		/obj/item/taperoll,
+		/obj/item/stack/tape_roll,
 		/obj/item/holowarrant,
 		/obj/item/magnetic_ammo,
 		/obj/item/binoculars,
@@ -272,7 +272,7 @@
 		/obj/item/modular_computer/pda,
 		/obj/item/radio/headset,
 		/obj/item/megaphone,
-		/obj/item/taperoll,
+		/obj/item/stack/tape_roll,
 		/obj/item/magnetic_tape,
 		/obj/item/holowarrant,
 		/obj/item/radio,
@@ -319,7 +319,7 @@
 		/obj/item/telebaton,
 		/obj/item/taperecorder,
 		/obj/item/magnetic_tape,
-		/obj/item/taperoll,
+		/obj/item/stack/tape_roll,
 		/obj/item/folder,
 		/obj/item/paper,
 		/obj/item/clipboard,
@@ -446,6 +446,8 @@
 	max_w_class = ITEM_SIZE_SMALL
 	max_storage_space = ITEM_SIZE_SMALL * 4
 	slot_flags = SLOT_LOWER_BODY | SLOT_BACK
+	material = /decl/material/solid/cloth
+	matter = list(/decl/material/solid/plastic = MATTER_AMOUNT_REINFORCEMENT)
 
 /obj/item/storage/belt/waistpack/big
 	name = "large waist pack"
@@ -471,6 +473,7 @@
 		/obj/item/inflatable,
 		/obj/item/inflatable/door
 		)
+	material = /decl/material/solid/fiberglass //need something that doesn't burn
 
 
 /obj/item/storage/belt/fire_belt/full

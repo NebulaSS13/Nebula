@@ -13,15 +13,19 @@
 	desc = "A green jacket bearing the logo of Major Bill's Shipping."
 	icon = 'mods/content/corporate/icons/clothing/suit/mbill.dmi'
 
-/obj/item/clothing/suit/storage/hooded/wintercoat/dais
+/obj/item/clothing/suit/storage/toggle/wintercoat/dais
 	name = "\improper DAIS winter coat"
 	icon = 'mods/content/corporate/icons/clothing/suit/dais_coat.dmi'
+	hood = /obj/item/clothing/head/winterhood/dais
 	siemens_coefficient = 0.5
 	armor = list(
-		melee = ARMOR_MELEE_SMALL, 
+		melee = ARMOR_MELEE_SMALL,
 		energy = ARMOR_ENERGY_MINOR
 		)
 	desc = "A hooded winter coat colored blue and white and bearing the logo of Deimos Advanced Information Systems."
+
+/obj/item/clothing/head/winterhood/dais
+	icon = 'mods/content/corporate/icons/clothing/head/hood_winter_dais.dmi'
 
 //Security
 /obj/item/clothing/suit/navyofficer

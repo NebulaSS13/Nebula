@@ -35,7 +35,7 @@
 
 /obj/machinery/sleeper/standard/Initialize(mapload, d, populate_parts)
 	. = ..()
-	add_reagent_canister(null, new /obj/item/chems/chem_disp_cartridge/stabilizer()) 
+	add_reagent_canister(null, new /obj/item/chems/chem_disp_cartridge/stabilizer())
 	add_reagent_canister(null, new /obj/item/chems/chem_disp_cartridge/sedatives())
 	add_reagent_canister(null, new /obj/item/chems/chem_disp_cartridge/painkillers())
 	add_reagent_canister(null, new /obj/item/chems/chem_disp_cartridge/antitoxins())
@@ -136,7 +136,7 @@
 		var/list/icon_scale_values = occupant.get_icon_scale_mult()
 		var/desired_scale_x = icon_scale_values[1]
 		var/desired_scale_y = icon_scale_values[2]
-		
+
 		var/matrix/M = matrix()
 		M.Scale(desired_scale_x, desired_scale_y)
 		M.Translate(0, (1.5 * world.icon_size) * (desired_scale_y - 1))
@@ -167,7 +167,11 @@
 			empties++
 			continue
 		var/list/reagent = list()
-		reagent["name"] =   canister.label || "unlabeled"
+		var/datum/extension/labels/lab = get_extension(canister, /datum/extension/labels)
+		if(length(lab?.labels))
+			reagent	["name"] = (lab.labels[1])
+		else
+			reagent	["name"] = "unlabeled"
 		reagent["id"] =     "\ref[canister]"
 		reagent["amount"] = canister.reagents.total_volume
 		loaded_reagents += list(reagent)
@@ -385,7 +389,7 @@
 
 /obj/machinery/sleeper/RefreshParts()
 	..()
-	pump_speed = 2 + max(Clamp(total_component_rating_of_type(/obj/item/stock_parts/scanning_module), 1, 10), 1)
+	pump_speed = 2 + max(clamp(total_component_rating_of_type(/obj/item/stock_parts/scanning_module), 1, 10), 1)
 	max_canister_capacity = 5 + round(total_component_rating_of_type(/obj/item/stock_parts/manipulator)/2)
 
 /obj/machinery/sleeper/emag_act(var/remaining_charges, var/mob/user)

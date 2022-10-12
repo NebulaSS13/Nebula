@@ -18,29 +18,32 @@
 	var/list/beakers = list() //All containers inside the gun.
 	var/list/mixing = list() //Containers being used for mixing.
 	var/max_beakers = 3
-	var/dart_reagent_amount = 15
 	var/container_type = /obj/item/chems/glass/beaker
 	var/list/starting_chems = null
 
 /obj/item/gun/projectile/dartgun/Initialize()
-	if(starting_chems)
-		for(var/chem in starting_chems)
-			var/obj/B = new container_type(src)
-			B.reagents.add_reagent(chem, 60)
-			beakers += B
+	initialize_reagents()
 	. = ..()
 	update_icon()
+
+/obj/item/gun/projectile/dartgun/populate_reagents()
+	if(!starting_chems)
+		return
+	for(var/chem in starting_chems)
+		var/obj/B = new container_type(src)
+		B.reagents.add_reagent(chem, 60)
+		beakers += B
 
 /obj/item/gun/projectile/dartgun/on_update_icon()
 	..()
 	if(ammo_magazine)
-		icon_state = "[get_world_inventory_state()]-[Clamp(length(ammo_magazine.stored_ammo.len), 0, 5)]"
+		icon_state = "[get_world_inventory_state()]-[clamp(length(ammo_magazine.stored_ammo.len), 0, 5)]"
 	else
 		icon_state = get_world_inventory_state()
 
 /obj/item/gun/projectile/dartgun/adjust_mob_overlay(var/mob/living/user_mob, var/bodytype,  var/image/overlay, var/slot, var/bodypart)
 	if(overlay && (slot in user_mob?.held_item_slots) && ammo_magazine)
-		overlay.icon_state += "-[Clamp(length(ammo_magazine.stored_ammo.len), 0, 5)]"
+		overlay.icon_state += "-[clamp(length(ammo_magazine.stored_ammo.len), 0, 5)]"
 	. = ..()
 
 /obj/item/gun/projectile/dartgun/consume_next_projectile()

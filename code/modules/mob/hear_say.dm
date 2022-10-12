@@ -34,25 +34,15 @@
 		if (!speaker || (src.sdisabilities & BLINDED || src.blinded) || !(speaker in view(src)))
 			message = stars(message)
 
+	var/understands_language = say_understands(speaker, language)
 	if(!(language && (language.flags & INNATE))) // skip understanding checks for INNATE languages
-		if(!say_understands(speaker,language))
-			if(istype(speaker,/mob/living/simple_animal))
-				var/mob/living/simple_animal/S = speaker
-				message = pick(S.speak)
+		if(!understands_language)
+			if(language)
+				message = language.scramble(speaker, message, languages)
 			else
-				if(language)
-					message = language.scramble(message, languages)
-				else
-					message = stars(message)
+				message = stars(message)
 
-	var/speaker_name = "Unknown"
-	if(speaker)
-		speaker_name = speaker.name
-
-	if(istype(speaker, /mob/living/carbon/human))
-		var/mob/living/carbon/human/H = speaker
-		speaker_name = H.GetVoice()
-
+	var/speaker_name = speaker?.GetVoice() || "Unknown"
 	if(italics)
 		message = "<i>[message]</i>"
 
@@ -74,7 +64,7 @@
 	else
 		if (language)
 			var/nverb = verb
-			if (say_understands(speaker, language))
+			if (understands_language)
 				var/skip = FALSE
 				if (isliving(src))
 					var/mob/living/L = src
@@ -127,7 +117,7 @@
 					return
 			else
 				if(language)
-					message = language.scramble(message, languages)
+					message = language.scramble(speaker, message, languages)
 				else
 					message = stars(message)
 

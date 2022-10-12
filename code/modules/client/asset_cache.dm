@@ -26,17 +26,9 @@ You can set verify to TRUE if you want send() to sleep until the client has the 
 //This proc sends the asset to the client, but only if it needs it.
 //This proc blocks(sleeps) unless verify is set to false
 /proc/send_asset(var/client/client, var/asset_name, var/verify = TRUE, var/check_cache = TRUE)
-	if(!istype(client))
-		if(ismob(client))
-			var/mob/M = client
-			if(M.client)
-				client = M.client
-
-			else
-				return 0
-
-		else
-			return 0
+	client = client?.get_client()
+	if(!client)
+		return FALSE
 
 	if(check_cache && (client.cache.Find(asset_name) || client.sending.Find(asset_name)))
 		return 0
@@ -70,17 +62,9 @@ You can set verify to TRUE if you want send() to sleep until the client has the 
 
 //This proc blocks(sleeps) unless verify is set to false
 /proc/send_asset_list(var/client/client, var/list/asset_list, var/verify = TRUE)
-	if(!istype(client))
-		if(ismob(client))
-			var/mob/M = client
-			if(M.client)
-				client = M.client
-
-			else
-				return 0
-
-		else
-			return 0
+	client = client?.get_client()
+	if(!client)
+		return FALSE
 
 	var/list/unreceived = asset_list - (client.cache + client.sending)
 	if(!unreceived || !unreceived.len)
@@ -261,7 +245,7 @@ var/global/template_file_name = "all_templates.json"
 	var/list/cache = list()
 
 /decl/asset_cache/proc/load()
-	for(var/type in typesof(/datum/asset) - list(/datum/asset, /datum/asset/simple))
+	for(var/type in subtypesof(/datum/asset) - /datum/asset/simple)
 		var/datum/asset/A = new type()
 		A.register()
 

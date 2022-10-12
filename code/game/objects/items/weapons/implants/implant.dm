@@ -7,6 +7,7 @@
 	icon = 'icons/obj/items/implant/implant.dmi'
 	icon_state = "implant"
 	w_class = ITEM_SIZE_TINY
+	material = /decl/material/solid/metal/titanium
 	var/implanted = null
 	var/mob/imp_in = null
 	var/obj/item/organ/external/part = null

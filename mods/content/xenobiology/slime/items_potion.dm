@@ -3,6 +3,8 @@
 	desc = "A potent chemical mix that will nullify a slime's powers, causing it to become docile and tame."
 	icon = 'icons/obj/items/chem/bottle.dmi'
 	icon_state = "bottle19"
+	material = /decl/material/solid/glass
+	item_flags = ITEM_FLAG_HOLLOW
 	var/slime_type = /mob/living/simple_animal/slime
 	var/can_tame_adults = FALSE
 

@@ -6,12 +6,9 @@
 
 	var/image/blood_overlay = null //this saves our blood splatter overlay, which will be processed not to go over the edges of the sprite
 	var/randpixel = 6
-	var/r_speed = 1.0
 	var/health = null
 	var/max_health
 	var/material_health_multiplier = 0.2
-	var/burn_point = null
-	var/burning = null
 	var/hitsound
 	var/slot_flags = 0		//This is used to determine on which slots an item can fit.
 	var/no_attack_log = 0			//If it's an item we don't want to log attack_logs with, set this to 1
@@ -22,6 +19,9 @@
 	var/force = 0
 	var/attack_cooldown = DEFAULT_WEAPON_COOLDOWN
 	var/melee_accuracy_bonus = 0
+
+	/// Flag for ZAS based contamination (chlorine etc)
+	var/contaminated = FALSE
 
 	var/heat_protection = 0 //flags which determine which body parts are protected from heat. Use the SLOT_HEAD, SLOT_UPPER_BODY, SLOT_LOWER_BODY, etc. flags. See setup.dm
 	var/cold_protection = 0 //flags which determine which body parts are protected from cold. Use the SLOT_HEAD, SLOT_UPPER_BODY, SLOT_LOWER_BODY, etc. flags. See setup.dm
@@ -87,6 +87,9 @@
 	var/tmp/has_inventory_icon	// do not set manually
 	var/tmp/use_single_icon
 	var/center_of_mass = @"{'x':16,'y':16}" //can be null for no exact placement behaviour
+
+/obj/item/proc/can_contaminate()
+	return !(obj_flags & ITEM_FLAG_NO_CONTAMINATION)
 
 // Foley sound callbacks
 /obj/item/proc/equipped_sound_callback()
@@ -358,9 +361,9 @@
 
 /obj/item/proc/get_volume_by_throwforce_and_or_w_class()
 	if(throwforce && w_class)
-		return Clamp((throwforce + w_class) * 5, 30, 100)// Add the item's throwforce to its weight class and multiply by 5, then clamp the value between 30 and 100
+		return clamp((throwforce + w_class) * 5, 30, 100)// Add the item's throwforce to its weight class and multiply by 5, then clamp the value between 30 and 100
 	else if(w_class)
-		return Clamp(w_class * 8, 20, 100) // Multiply the item's weight class by 8, then clamp the value between 20 and 100
+		return clamp(w_class * 8, 20, 100) // Multiply the item's weight class by 8, then clamp the value between 20 and 100
 	else
 		return 0
 
@@ -390,6 +393,9 @@
 
 	if(user && (z_flags & ZMM_MANGLE_PLANES))
 		addtimer(CALLBACK(user, /mob/proc/check_emissive_equipment), 0, TIMER_UNIQUE)
+
+	events_repository.raise_event(/decl/observ/mob_unequipped, user, src)
+	events_repository.raise_event(/decl/observ/item_unequipped, src, user)
 
 // called just as an item is picked up (loc is not yet changed)
 /obj/item/proc/pickup(mob/user)
@@ -436,6 +442,9 @@
 
 	if(user && (z_flags & ZMM_MANGLE_PLANES))
 		addtimer(CALLBACK(user, /mob/proc/check_emissive_equipment), 0, TIMER_UNIQUE)
+
+	events_repository.raise_event(/decl/observ/mob_equipped, user, src, slot)
+	events_repository.raise_event(/decl/observ/item_equipped, src, user, slot)
 
 // As above but for items being equipped to an active module on a robot.
 /obj/item/proc/equipped_robot(var/mob/user)
@@ -942,7 +951,7 @@ modules/mob/living/carbon/human/life.dm if you die, you will be zoomed out.
 		if(istype(source, /obj/structure/reagent_dispensers/watertank))
 			source.reagents.trans_to_obj(src, free_space)
 		else
-			reagents.add_reagent(/decl/material/liquid/water, free_space)
+			reagents.add_reagent(/decl/material/liquid/water, free_space) //#FIXME: Maybe it would be better not to create water from a type check like that in the base item code? Idk.
 		if(reagents && reagents.total_volume >= reagents.maximum_volume)
 			to_chat(user, SPAN_NOTICE("You fill \the [src] with [free_space] unit\s from \the [source]."))
 			reagents.touch(src)
@@ -993,3 +1002,11 @@ modules/mob/living/carbon/human/life.dm if you die, you will be zoomed out.
 
 /obj/item/proc/gives_weather_protection()
 	return FALSE
+
+/obj/item/proc/get_assembly_detail_color()
+	return
+
+/obj/item/proc/updateSelfDialog()
+	var/mob/M = src.loc
+	if(istype(M) && M.client && M.machine == src)
+		src.attack_self(M)

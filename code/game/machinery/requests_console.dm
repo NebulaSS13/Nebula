@@ -35,7 +35,6 @@ var/global/req_console_information = list()
 	var/announcementConsole = 0
 		// 0 = This console cannot be used to send department announcements
 		// 1 = This console can send department announcementsf
-	var/open = 0 // 1 if open
 	var/announceAuth = 0 //Will be set to 1 when you authenticate yourself for announcements
 	var/msgVerified = "" //Will contain the name of the person who varified it
 	var/msgStamped = "" //If a message is stamped, this will contain the stamp name
@@ -48,6 +47,7 @@ var/global/req_console_information = list()
 	uncreated_component_parts = null
 	construct_state = /decl/machine_construction/wall_frame/panel_closed
 	frame_type = /obj/item/frame/stock_offset/request_console
+	directional_offset = "{'NORTH':{'y':-32}, 'SOUTH':{'y':32}, 'EAST':{'x':32}, 'WEST':{'x':-32}}"
 
 /obj/machinery/network/requests_console/on_update_icon()
 	if(stat & NOPOWER)

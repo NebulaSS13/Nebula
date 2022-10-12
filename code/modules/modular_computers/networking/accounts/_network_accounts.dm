@@ -30,7 +30,7 @@
 
 /datum/computer_network/proc/add_account(datum/computer_file/data/account/acc, accesses)
 	for(var/datum/extension/network_device/mainframe/M in get_mainframes_by_role(MF_ROLE_ACCOUNT_SERVER, accesses))
-		if(M.store_file(acc))
+		if(M.store_file(acc, OS_ACCOUNTS_DIR, TRUE))
 			return TRUE
 
 /datum/computer_network/proc/find_account_by_login(login, accesses)

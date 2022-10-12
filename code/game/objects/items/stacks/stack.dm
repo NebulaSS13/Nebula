@@ -12,7 +12,10 @@
 /obj/item/stack
 	gender = PLURAL
 	origin_tech = "{'materials':1}"
-
+	health = 32      //Stacks should take damage even if no materials
+	max_health = 32
+	/// A copy of initial matter list when this atom initialized. Stack matter should always assume a single tile.
+	var/list/matter_per_piece
 	var/singular_name
 	var/plural_name
 	var/base_state
@@ -57,6 +60,30 @@
 			to_chat(user, "There [src.amount == 1 ? "is" : "are"] [src.amount] [src.singular_name]\s in the stack.")
 		else
 			to_chat(user, "There is enough charge for [get_amount()].")
+
+/obj/item/stack/on_update_icon()
+	. = ..()
+	if(!isturf(loc))
+		var/image/I = image(null)
+		I.plane = HUD_PLANE
+		I.layer = HUD_ABOVE_ITEM_LAYER
+		I.appearance_flags |= (RESET_COLOR|RESET_TRANSFORM)
+		I.maptext_x = 2
+		I.maptext_y = 2
+		I.maptext = STYLE_SMALLFONTS_OUTLINE(get_amount(), 6, (color || COLOR_WHITE), COLOR_BLACK)
+		add_overlay(I)
+
+/obj/item/stack/on_enter_storage(obj/item/storage/S)
+	. = ..()
+	queue_icon_update() // queue here as it may not have updated loc yet
+
+/obj/item/stack/equipped(mob/user, slot)
+	. = ..()
+	update_icon()
+
+/obj/item/stack/dropped(mob/user)
+	. = ..()
+	update_icon()
 
 /obj/item/stack/attack_self(mob/user)
 	list_recipes(user)
@@ -153,7 +180,7 @@
 			user.put_in_hands(O)
 
 /obj/item/stack/Topic(href, href_list)
-	..()
+	. = ..()
 	if ((usr.restrained() || usr.stat || usr.get_active_hand() != src))
 		return
 
@@ -181,24 +208,28 @@
 			return
 	return
 
-//Return 1 if an immediate subsequent call to use() would succeed.
-//Ensures that code dealing with stacks uses the same logic
+/**
+ * Return 1 if an immediate subsequent call to use() would succeed.
+ * Ensures that code dealing with stacks uses the same logic.
+*/
 /obj/item/stack/proc/can_use(var/used)
-	if (get_amount() < used)
-		return 0
-	return 1
+	return get_amount() >= used
 
 /obj/item/stack/create_matter()
-	..()
-	initial_matter = matter?.Copy()
+	matter_per_piece = matter?.Copy() // this is used for refreshing matter amount in update_matter()
+	if(istype(material))
+		LAZYINITLIST(matter_per_piece)
+		matter_per_piece[material.type] = max(matter_per_piece[material.type], round(MATTER_AMOUNT_PRIMARY * matter_multiplier))
+	. = ..()
 
 /obj/item/stack/proc/update_matter()
-	matter = initial_matter?.Copy()
-	create_matter()
+	matter = list()
+	for(var/mat in matter_per_piece)
+		matter[mat] = (matter_per_piece[mat] * amount)
 
 /obj/item/stack/proc/use(var/used)
 	if (!can_use(used))
-		return 0
+		return FALSE
 	if(!uses_charge)
 		amount -= used
 		if (amount <= 0)
@@ -206,30 +237,31 @@
 		else
 			update_icon()
 			update_matter()
-		return 1
+		return TRUE
 	else
 		if(get_amount() < used)
-			return 0
+			return FALSE
 		for(var/i = 1 to charge_costs.len)
 			var/datum/matter_synth/S = synths[i]
 			S.use_charge(charge_costs[i] * used) // Doesn't need to be deleted
-		return 1
+		update_icon()
+		return TRUE
 
 /obj/item/stack/proc/add(var/extra)
 	if(!uses_charge)
 		if(amount + extra > get_max_amount())
-			return 0
+			return FALSE
 		else
 			amount += extra
 			update_icon()
 			update_matter()
-			return 1
 	else if(!synths || synths.len < uses_charge)
-		return 0
+		return FALSE
 	else
 		for(var/i = 1 to uses_charge)
 			var/datum/matter_synth/S = synths[i]
 			S.add_charge(charge_costs[i] * extra)
+	return TRUE
 
 /*
 	The transfer and split procs work differently than use() and add().
@@ -258,9 +290,7 @@
 
 //creates a new stack with the specified amount
 /obj/item/stack/proc/split(var/tamount, var/force=FALSE)
-	if (!amount)
-		return null
-	if(uses_charge && !force)
+	if (!can_split() || !amount || (uses_charge && !force))
 		return null
 
 	var/transfer = max(min(tamount, src.amount, initial(max_amount)), 0)
@@ -304,6 +334,8 @@
 	return max_amount
 
 /obj/item/stack/proc/add_to_stacks(mob/user, check_hands)
+	if(!can_merge())
+		return
 	var/list/stacks = list()
 	if(check_hands && user)
 		for(var/obj/item/stack/item in user.get_held_items())
@@ -325,7 +357,7 @@
 		. = CEILING(. * amount / max_amount)
 
 /obj/item/stack/attack_hand(mob/user)
-	if(user.is_holding_offhand(src))
+	if(user.is_holding_offhand(src) && can_split())
 		var/N = input("How many stacks of [src] would you like to split off?", "Split stacks", 1) as num|null
 		if(N)
 			var/obj/item/stack/F = src.split(N)
@@ -336,19 +368,29 @@
 				spawn(0)
 					if (src && usr.machine==src)
 						src.interact(usr)
-	else
-		..()
-	return
+				return TRUE
+		return FALSE
+	return ..()
+
 
 /obj/item/stack/attackby(obj/item/W, mob/user)
-	if (istype(W, /obj/item/stack))
+	if (istype(W, /obj/item/stack) && can_merge())
 		var/obj/item/stack/S = W
-		src.transfer_to(S)
+		. = src.transfer_to(S)
 
 		spawn(0) //give the stacks a chance to delete themselves if necessary
 			if (S && usr.machine==S)
 				S.interact(usr)
 			if (src && usr.machine==src)
 				src.interact(usr)
-	else
-		return ..()
+		return
+
+	return ..()
+
+/**Whether a stack has the capability to be split. */
+/obj/item/stack/proc/can_split()
+	return !(uses_charge && !force) //#TODO: The !force was a hacky way to tell if its a borg or rigsuit module. Probably would be good to find a better way..
+
+/**Whether a stack type has the capability to be merged. */
+/obj/item/stack/proc/can_merge()
+	return !(uses_charge && !force)

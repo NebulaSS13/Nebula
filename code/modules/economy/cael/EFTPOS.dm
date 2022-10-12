@@ -3,6 +3,8 @@
 	desc = "Swipe your ID card to make purchases electronically."
 	icon = 'icons/obj/items/device/eftpos.dmi'
 	icon_state = "eftpos"
+	material = /decl/material/solid/plastic
+	matter = list(/decl/material/solid/silicon = MATTER_AMOUNT_REINFORCEMENT, /decl/material/solid/metal/copper = MATTER_AMOUNT_REINFORCEMENT)
 	var/machine_id = ""
 	var/eftpos_name = "Default EFTPOS scanner"
 	var/transaction_locked = 0

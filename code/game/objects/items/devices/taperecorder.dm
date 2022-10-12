@@ -106,7 +106,7 @@
 
 		if(speaking)
 			if(!speaking.machine_understands)
-				msg = speaking.scramble(msg)
+				msg = speaking.scramble(M, msg)
 			mytape.record_speech("[M.name] [speaking.format_message_plain(msg, verb)]")
 		else
 			mytape.record_speech("[M.name] [verb], \"[msg]\"")
@@ -401,7 +401,7 @@
 	var/ruined = 0
 	var/doctored = 0
 
-//draw_ribbon: Whether we draw the ruined ribbon overlay. Only used by quantum tape. 
+//draw_ribbon: Whether we draw the ruined ribbon overlay. Only used by quantum tape.
 //#FIXME: Probably should be handled better.
 /obj/item/magnetic_tape/on_update_icon(var/draw_ribbon = TRUE)
 	. = ..()
@@ -504,7 +504,7 @@
 		var/index = text2num(href_list["cut_after"])
 		if(index >= timestamp.len)
 			return
-		
+
 		to_chat(user, "<span class='notice'>You remove part of the tape off.</span>")
 		get_loose_tape(user, index)
 		cut(user)

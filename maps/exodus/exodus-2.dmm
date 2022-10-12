@@ -1728,7 +1728,7 @@
 	locked = 1;
 	name = "External Construction Airlock"
 	},
-/obj/item/taperoll/engineering/applied,
+/obj/structure/tape_barricade/engineering,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/exodus/maintenance/security_starboard)
 "adP" = (
@@ -3599,7 +3599,7 @@
 "ahO" = (
 /obj/structure/table/woodentable,
 /obj/machinery/keycard_auth{
-	pixel_x = 30
+	dir = 8
 	},
 /obj/machinery/photocopier/faxmachine{
 	department = "Head of Security"
@@ -5450,7 +5450,7 @@
 	locked = 1;
 	name = "External Construction Airlock"
 	},
-/obj/item/taperoll/engineering/applied,
+/obj/structure/tape_barricade/engineering,
 /obj/machinery/shield_diffuser,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/exodus/maintenance/security_starboard)
@@ -5899,7 +5899,7 @@
 	},
 /obj/item/clipboard,
 /obj/item/hand_labeler,
-/obj/item/ducttape,
+/obj/item/stack/tape_roll/duct_tape,
 /turf/simulated/floor/tiled/dark,
 /area/exodus/lawoffice)
 "amt" = (
@@ -8644,7 +8644,7 @@
 /obj/structure/table/reinforced,
 /obj/item/clipboard,
 /obj/item/hand_labeler,
-/obj/item/ducttape,
+/obj/item/stack/tape_roll/duct_tape,
 /turf/simulated/floor/tiled/dark,
 /area/exodus/lawoffice)
 "arR" = (
@@ -9551,7 +9551,7 @@
 /area/exodus/hallway/secondary/entry/pods)
 "atR" = (
 /obj/machinery/computer/cryopod{
-	pixel_y = 32
+	dir = 2
 	},
 /obj/machinery/camera/network/civilian_east{
 	c_tag = "Dormitory Cryo Storage"
@@ -9995,7 +9995,7 @@
 "auU" = (
 /obj/machinery/atmospherics/unary/vent_scrubber/on,
 /obj/machinery/computer/cryopod{
-	pixel_y = 32
+	dir = 2
 	},
 /obj/machinery/light_switch{
 	pixel_x = -25;
@@ -13755,7 +13755,7 @@
 	pixel_x = -12;
 	pixel_y = 2
 	},
-/obj/item/storage/mirror{
+/obj/structure/mirror{
 	pixel_x = -28
 	},
 /obj/machinery/light{
@@ -14517,7 +14517,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
 	},
-/obj/item/ducttape,
+/obj/item/stack/tape_roll/duct_tape,
 /turf/simulated/floor/wood/walnut,
 /area/exodus/library)
 "aEG" = (
@@ -15514,7 +15514,7 @@
 	dir = 5
 	},
 /obj/machinery/computer/cryopod{
-	pixel_y = 32
+	dir = 2
 	},
 /turf/simulated/floor/tiled/dark/monotile,
 /area/shuttle/arrival/station)
@@ -16755,7 +16755,7 @@
 	pixel_x = -12;
 	pixel_y = 2
 	},
-/obj/item/storage/mirror{
+/obj/structure/mirror{
 	pixel_x = -28
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
@@ -20282,7 +20282,7 @@
 	dir = 4;
 	pixel_x = 11
 	},
-/obj/item/storage/mirror{
+/obj/structure/mirror{
 	pixel_x = 30
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
@@ -23878,7 +23878,7 @@
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
-/obj/item/ducttape,
+/obj/item/stack/tape_roll/duct_tape,
 /obj/structure/table,
 /turf/simulated/floor/tiled/steel_grid,
 /area/exodus/crew_quarters/locker)
@@ -27268,7 +27268,7 @@
 	dir = 4;
 	pixel_x = 11
 	},
-/obj/item/storage/mirror{
+/obj/structure/mirror{
 	pixel_x = 28
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
@@ -31895,7 +31895,7 @@
 	pixel_x = -27;
 	pixel_y = 1
 	},
-/obj/item/ducttape,
+/obj/item/stack/tape_roll/duct_tape,
 /obj/structure/table{
 	name = "plastic table frame"
 	},
@@ -32537,7 +32537,7 @@
 /area/exodus/crew_quarters/captain)
 "bqA" = (
 /obj/machinery/keycard_auth{
-	pixel_y = -24
+	dir = 1
 	},
 /turf/simulated/floor/wood/walnut,
 /area/exodus/crew_quarters/captain)
@@ -33387,7 +33387,7 @@
 	},
 /obj/abstract/landmark/latejoin/cyborg,
 /obj/machinery/computer/cryopod/robot{
-	pixel_x = -30
+	dir = 1
 	},
 /turf/simulated/floor/tiled/dark,
 /area/exodus/research/chargebay)
@@ -33868,7 +33868,7 @@
 	dir = 4;
 	pixel_x = 11
 	},
-/obj/item/storage/mirror{
+/obj/structure/mirror{
 	pixel_x = 28
 	},
 /obj/machinery/light{
@@ -36582,7 +36582,7 @@
 	dir = 4;
 	pixel_x = 11
 	},
-/obj/item/storage/mirror{
+/obj/structure/mirror{
 	pixel_x = 30
 	},
 /obj/random/soap,
@@ -37039,11 +37039,11 @@
 /obj/structure/window/reinforced{
 	dir = 1
 	},
-/obj/item/ore/coal{
+/obj/item/stack/material/ore/coal{
 	pixel_x = 3;
 	pixel_y = 3
 	},
-/obj/item/ore/iron,
+/obj/item/stack/material/ore/iron,
 /turf/simulated/floor/tiled/steel_grid,
 /area/exodus/quartermaster/miningdock)
 "bzM" = (
@@ -38667,7 +38667,7 @@
 /area/exodus/crew_quarters/heads/hop)
 "bCS" = (
 /obj/machinery/keycard_auth{
-	pixel_x = -24
+	dir = 4
 	},
 /obj/machinery/computer/account_database{
 	dir = 4
@@ -43316,7 +43316,7 @@
 	dir = 4
 	},
 /obj/machinery/keycard_auth{
-	pixel_y = 22
+	dir = 2
 	},
 /obj/machinery/computer/modular/preset/civilian,
 /turf/simulated/floor/tiled/white,
@@ -43622,7 +43622,7 @@
 	dir = 1;
 	pixel_y = -22
 	},
-/obj/item/taperoll/medical,
+/obj/item/stack/tape_roll/barricade_tape/medical,
 /turf/simulated/floor/tiled/white,
 /area/exodus/medical/sleeper)
 "bMy" = (
@@ -43925,7 +43925,7 @@
 /turf/simulated/floor/tiled/white,
 /area/exodus/research)
 "bNa" = (
-/obj/item/storage/mirror{
+/obj/structure/mirror{
 	pixel_y = 32
 	},
 /obj/structure/hygiene/sink{
@@ -44049,7 +44049,7 @@
 /turf/simulated/floor/tiled/dark,
 /area/exodus/research/server)
 "bNp" = (
-/obj/item/storage/mirror{
+/obj/structure/mirror{
 	pixel_y = 32
 	},
 /obj/structure/hygiene/sink{
@@ -50816,7 +50816,7 @@
 	dir = 4;
 	pixel_x = 11
 	},
-/obj/item/storage/mirror{
+/obj/structure/mirror{
 	pixel_x = 32
 	},
 /turf/simulated/floor/tiled/freezer,
@@ -50995,7 +50995,7 @@
 /area/exodus/crew_quarters/heads/chief)
 "cbz" = (
 /obj/machinery/keycard_auth{
-	pixel_x = -24
+	dir = 4
 	},
 /obj/machinery/button/blast_door{
 	desc = "A remote control-switch for engine core.";
@@ -54936,7 +54936,7 @@
 	},
 /obj/item/paper_bin,
 /obj/item/pen,
-/obj/item/ducttape,
+/obj/item/stack/tape_roll/duct_tape,
 /turf/simulated/floor/tiled/white,
 /area/exodus/research/xenobiology/xenoflora)
 "cjD" = (
@@ -55612,7 +55612,7 @@
 "clf" = (
 /obj/structure/table/reinforced,
 /obj/item/clipboard,
-/obj/item/ducttape,
+/obj/item/stack/tape_roll/duct_tape,
 /turf/simulated/floor/tiled/steel_grid,
 /area/exodus/engineering/foyer)
 "clg" = (
@@ -59176,7 +59176,7 @@
 	},
 /obj/item/paper_bin,
 /obj/item/pen,
-/obj/item/ducttape,
+/obj/item/stack/tape_roll/duct_tape,
 /turf/simulated/floor/tiled/white,
 /area/exodus/research/xenobiology)
 "ctX" = (
@@ -61231,7 +61231,7 @@
 /area/exodus/engineering/drone_fabrication)
 "cDi" = (
 /obj/machinery/computer/cryopod/robot{
-	pixel_y = 30
+	dir = 2
 	},
 /obj/effect/floor_decal/industrial/warning{
 	dir = 1
@@ -64956,9 +64956,9 @@
 /turf/simulated/floor,
 /area/ship/exodus_pod_mining)
 "wiC" = (
-/obj/item/ore/silver,
-/obj/item/ore/silver,
-/obj/item/ore/iron,
+/obj/item/stack/material/ore/silver,
+/obj/item/stack/material/ore/silver,
+/obj/item/stack/material/ore/iron,
 /obj/structure/closet/crate,
 /obj/machinery/atmospherics/unary/vent_pump/high_volume/external_air{
 	dir = 4;

@@ -147,9 +147,7 @@
 /obj/structure/cable/yellow{
 	icon_state = "0-4"
 	},
-/obj/machinery/power/tracker{
-	id = "ZHSolarsWest"
-	},
+/obj/machinery/power/tracker,
 /turf/simulated/floor/reinforced,
 /area/space)
 "aC" = (
@@ -367,9 +365,7 @@
 /obj/structure/cable/yellow{
 	icon_state = "0-8"
 	},
-/obj/machinery/power/tracker{
-	id = "ZHSolarsEast"
-	},
+/obj/machinery/power/tracker,
 /turf/simulated/floor/reinforced,
 /area/space)
 "aU" = (
@@ -3156,7 +3152,7 @@
 	dir = 4;
 	pixel_x = 11
 	},
-/obj/item/storage/mirror{
+/obj/structure/mirror{
 	pixel_x = 30
 	},
 /obj/machinery/alarm{
@@ -3170,7 +3166,7 @@
 	dir = 4;
 	pixel_x = 11
 	},
-/obj/item/storage/mirror{
+/obj/structure/mirror{
 	pixel_x = 30
 	},
 /obj/random/trash,
@@ -3182,7 +3178,7 @@
 	pixel_x = -12;
 	pixel_y = 2
 	},
-/obj/item/storage/mirror{
+/obj/structure/mirror{
 	pixel_x = -30
 	},
 /turf/simulated/floor/tiled/white,

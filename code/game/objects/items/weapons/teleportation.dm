@@ -14,8 +14,6 @@
 	icon_state = ICON_STATE_WORLD
 	var/temp = null
 	var/frequency = 1451
-	var/broadcasting = null
-	var/listening = 1.0
 	obj_flags = OBJ_FLAG_CONDUCTIBLE
 	w_class = ITEM_SIZE_SMALL
 	throw_speed = 4

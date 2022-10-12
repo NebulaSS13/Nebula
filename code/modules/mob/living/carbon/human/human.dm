@@ -49,13 +49,6 @@
 			return stomach.ingested
 	return get_contact_reagents() // Kind of a shitty hack, but makes more sense to me than digesting them.
 
-/mob/living/carbon/human/metabolize_ingested_reagents()
-	if(should_have_organ(BP_STOMACH))
-		var/obj/item/organ/internal/stomach/stomach = get_organ(BP_STOMACH, /obj/item/organ/internal/stomach)
-		if(stomach)
-			stomach.metabolize()
-		return stomach?.ingested
-
 /mob/living/carbon/human/get_fullness()
 	if(!should_have_organ(BP_STOMACH))
 		return ..()
@@ -517,8 +510,8 @@
 			return
 		timevomit = max(timevomit, 5)
 
-	timevomit = Clamp(timevomit, 1, 10)
-	level = Clamp(level, 1, 3)
+	timevomit = clamp(timevomit, 1, 10)
+	level = clamp(level, 1, 3)
 
 	lastpuke = TRUE
 	to_chat(src, SPAN_WARNING("You feel nauseous..."))
@@ -1001,10 +994,11 @@
 		. *= (!BP_IS_PROSTHETIC(H)) ? pulse()/PULSE_NORM : 1.5
 
 /mob/living/carbon/human/need_breathe()
-	if(!(mNobreath in mutations) && species.breathing_organ && should_have_organ(species.breathing_organ))
-		return 1
-	else
-		return 0
+	if(mNobreath in mutations)
+		return FALSE
+	if(!species.breathing_organ || !should_have_organ(species.breathing_organ))
+		return FALSE
+	return TRUE
 
 /mob/living/carbon/human/get_adjusted_metabolism(metabolism)
 	return ..() * (species ? species.metabolism_mod : 1)
@@ -1026,31 +1020,35 @@
 			var/list/status = list()
 
 			var/feels = 1 + round(org.pain/100, 0.1)
-			var/brutedamage = org.brute_dam * feels
-			var/burndamage = org.burn_dam * feels
+			var/feels_brute = (org.brute_dam * feels)
+			if(feels_brute > 0)
+				switch(feels_brute / org.max_damage)
+					if(0 to 0.35)
+						status += "slightly sore"
+					if(0.35 to 0.65)
+						status += "very sore"
+					if(0.65 to INFINITY)
+						status += "throbbing with agony"
 
-			switch(brutedamage)
-				if(1 to 20)
-					status += "slightly sore"
-				if(20 to 40)
-					status += "very sore"
-				if(40 to INFINITY)
-					status += "throbbing with agony"
-
-			switch(burndamage)
-				if(1 to 10)
-					status += "tingling"
-				if(10 to 40)
-					status += "stinging"
-				if(40 to INFINITY)
-					status += "burning fiercely"
+			var/feels_burn = (org.burn_dam * feels)
+			if(feels_burn > 0)
+				switch(feels_burn / org.max_damage)
+					if(0 to 0.35)
+						status += "tingling"
+					if(0.35 to 0.65)
+						status += "stinging"
+					if(0.65 to INFINITY)
+						status += "burning fiercely"
 
 			if(org.status & ORGAN_MUTATED)
 				status += "misshapen"
+			if(org.status & ORGAN_BLEEDING)
+				status += "<b>bleeding</b>"
 			if(org.is_dislocated())
 				status += "dislocated"
 			if(org.status & ORGAN_BROKEN)
 				status += "hurts when touched"
+
 			if(org.status & ORGAN_DEAD)
 				if(BP_IS_PROSTHETIC(org) || BP_IS_CRYSTAL(org))
 					status += "is irrecoverably damaged"
@@ -1083,8 +1081,9 @@
 			visible_message(SPAN_NOTICE("\The [src] twitches a bit as [G.his] [heart.name] restarts!"))
 
 		shock_stage = min(shock_stage, 100) // 120 is the point at which the heart stops.
-		if(getOxyLoss() >= 75)
-			setOxyLoss(75)
+		var/oxyloss_threshold = round(species.total_health * 0.35)
+		if(getOxyLoss() >= oxyloss_threshold)
+			setOxyLoss(oxyloss_threshold)
 		heart.pulse = PULSE_NORM
 		heart.handle_pulse()
 		return TRUE

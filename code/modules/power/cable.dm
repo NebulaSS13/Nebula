@@ -513,6 +513,7 @@ By design, d1 is the smallest direction and d2 is the highest
 	matter = null
 	uses_charge = 1
 	charge_costs = list(1)
+	health = ITEM_HEALTH_NO_DAMAGE
 
 /obj/item/stack/cable_coil/Initialize(mapload, c_length = MAXCOIL, var/param_color = null)
 	. = ..(mapload, c_length)
@@ -622,7 +623,7 @@ By design, d1 is the smallest direction and d2 is the highest
 // Items usable on a cable coil :
 //   - Wirecutters : cut them duh !
 //   - Cable coil : merge cables
-/obj/item/stack/cable_coil/proc/can_merge(var/obj/item/stack/cable_coil/C)
+/obj/item/stack/cable_coil/can_merge(var/obj/item/stack/cable_coil/C)
 	return color == C.color
 
 /obj/item/stack/cable_coil/cyborg/can_merge()

@@ -50,7 +50,7 @@
 	. = ..()
 
 /obj/machinery/reagent_temperature/RefreshParts()
-	heating_power = initial(heating_power) * Clamp(total_component_rating_of_type(/obj/item/stock_parts/capacitor), 0, 10)
+	heating_power = initial(heating_power) * clamp(total_component_rating_of_type(/obj/item/stock_parts/capacitor), 0, 10)
 
 	var/comp = 0.25 KILOWATTS * total_component_rating_of_type(/obj/item/stock_parts/micro_laser)
 	if(comp)
@@ -77,7 +77,7 @@
 			temperature = max(target_temperature, temperature - heating_power)
 		if(temperature != last_temperature)
 			if(container)
-				QUEUE_TEMPERATURE_ATOMS(container)
+				queue_temperature_atoms(container)
 			queue_icon_update()
 		return TRUE // Don't kill this processing loop unless we're not powered.
 	. = ..()
@@ -105,7 +105,7 @@
 				return TRUE
 		to_chat(user, SPAN_WARNING("\The [src] cannot accept \the [thing]."))
 		return FALSE
-	
+
 	. = ..()
 
 /obj/machinery/reagent_temperature/on_update_icon()
@@ -119,7 +119,7 @@
 		if(temperature > MINIMUM_GLOW_TEMPERATURE) // 50C
 			if(!glow_icon)
 				glow_icon = image(icon, "[icon_state]-glow")
-			glow_icon.alpha = Clamp(temperature - MINIMUM_GLOW_TEMPERATURE, MINIMUM_GLOW_VALUE, MAXIMUM_GLOW_VALUE)
+			glow_icon.alpha = clamp(temperature - MINIMUM_GLOW_TEMPERATURE, MINIMUM_GLOW_VALUE, MAXIMUM_GLOW_VALUE)
 			LAZYADD(adding_overlays, glow_icon)
 			set_light(1, l_color = COLOR_RED)
 		else
@@ -176,7 +176,7 @@
 		return TOPIC_HANDLED
 
 	update_use_power(use_power <= POWER_USE_IDLE ? POWER_USE_ACTIVE : POWER_USE_IDLE)
-	QUEUE_TEMPERATURE_ATOMS(src)
+	queue_temperature_atoms(src)
 	update_icon()
 
 	return TOPIC_REFRESH
@@ -184,7 +184,7 @@
 /obj/machinery/reagent_temperature/OnTopic(var/mob/user, var/href_list)
 
 	if(href_list["adjust_temperature"])
-		target_temperature = Clamp(target_temperature + text2num(href_list["adjust_temperature"]), min_temperature, max_temperature)
+		target_temperature = clamp(target_temperature + text2num(href_list["adjust_temperature"]), min_temperature, max_temperature)
 		. = TOPIC_REFRESH
 
 	if(href_list["toggle_power"])

@@ -164,8 +164,8 @@
 /obj/item/clothing/pants/baggy,
 /obj/item/clothing/pants/casual/youngfolksjeans,
 /obj/item/clothing/suit/storage/toggle/bomber,
-/obj/item/clothing/suit/storage/hooded/wintercoat/miner,
-/obj/item/clothing/suit/storage/hooded/wintercoat,
+/obj/item/clothing/suit/storage/toggle/wintercoat/miner,
+/obj/item/clothing/suit/storage/toggle/wintercoat,
 /obj/item/clothing/suit/storage/toggle/brown_jacket,
 /obj/item/clothing/suit/storage/toggle/hoodie/nt,
 /obj/item/clothing/suit/storage/toggle/hoodie,
@@ -1377,8 +1377,8 @@
 /obj/item/clothing/pants/casual/camo,
 /obj/item/clothing/pants/casual/track,
 /obj/item/clothing/pants/casual/youngfolksjeans,
-/obj/item/clothing/suit/storage/hooded/wintercoat/miner,
-/obj/item/clothing/suit/storage/hooded/wintercoat,
+/obj/item/clothing/suit/storage/toggle/wintercoat/miner,
+/obj/item/clothing/suit/storage/toggle/wintercoat,
 /obj/item/clothing/suit/storage/toggle/bomber,
 /obj/item/clothing/suit/storage/toggle/brown_jacket,
 /obj/item/clothing/suit/storage/toggle/hoodie/nt,
@@ -2311,8 +2311,8 @@
 /obj/item/clothing/pants/casual/camo,
 /obj/item/clothing/pants/casual/track,
 /obj/item/clothing/pants/casual/youngfolksjeans,
-/obj/item/clothing/suit/storage/hooded/wintercoat/miner,
-/obj/item/clothing/suit/storage/hooded/wintercoat,
+/obj/item/clothing/suit/storage/toggle/wintercoat/miner,
+/obj/item/clothing/suit/storage/toggle/wintercoat,
 /obj/item/clothing/suit/storage/toggle/bomber,
 /obj/item/clothing/suit/storage/toggle/brown_jacket,
 /obj/item/clothing/suit/storage/toggle/hoodie/nt,
@@ -2362,8 +2362,8 @@
 "fd" = (
 /obj/structure/table/steel_reinforced,
 /obj/item/storage/toolbox/syndicate,
-/obj/item/ducttape,
-/obj/item/ducttape,
+/obj/item/stack/tape_roll/duct_tape,
+/obj/item/stack/tape_roll/duct_tape,
 /obj/item/crowbar/brace_jack,
 /obj/item/clothing/head/hardhat/white,
 /obj/item/grenade/chem_grenade/metalfoam,
@@ -2758,8 +2758,8 @@
 /obj/item/clothing/pants/casual/camo,
 /obj/item/clothing/pants/casual/track,
 /obj/item/clothing/pants/casual/youngfolksjeans,
-/obj/item/clothing/suit/storage/hooded/wintercoat/miner,
-/obj/item/clothing/suit/storage/hooded/wintercoat,
+/obj/item/clothing/suit/storage/toggle/wintercoat/miner,
+/obj/item/clothing/suit/storage/toggle/wintercoat,
 /obj/item/clothing/suit/storage/toggle/bomber,
 /obj/item/clothing/suit/storage/toggle/brown_jacket,
 /obj/item/clothing/suit/storage/toggle/hoodie/nt,
@@ -3018,7 +3018,7 @@
 /obj/item/chems/drinks/shaker,
 /obj/item/chems/drinks/pitcher,
 /obj/item/chems/glass/beaker/bowl,
-/obj/item/chems/condiment/salt,
+/obj/item/chems/condiment/large/salt,
 /obj/item/chems/condiment/enzyme,
 /turf/simulated/floor/tiled/freezer,
 /area/map_template/colony/messhall)
@@ -4944,7 +4944,7 @@
 	dir = 1;
 	pixel_y = 16
 	},
-/obj/item/storage/mirror{
+/obj/structure/mirror{
 	pixel_y = 32
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{

@@ -17,6 +17,7 @@
 		)
 	bleed_colour = SYNTH_BLOOD_COLOR
 	gene_damage = -1
+	base_animal_type = /mob/living/simple_animal/hostile/hivebot
 
 	meat_type =     null
 	meat_amount =   0

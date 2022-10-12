@@ -40,6 +40,16 @@
 	},
 /turf/simulated/floor/usedup,
 /area/ship/scrap/command/bridge)
+"ae" = (
+/obj/machinery/cryopod,
+/obj/machinery/alarm{
+	dir = 8;
+	pixel_x = 24;
+	req_access = newlist()
+	},
+/obj/machinery/computer/cryopod,
+/turf/simulated/floor/tiled/white,
+/area/ship/scrap/crew/cryo)
 "ag" = (
 /obj/machinery/computer/modular/preset/cardslot/command,
 /turf/simulated/floor/bluegrid/airless,
@@ -224,7 +234,7 @@
 /obj/machinery/cryopod/lifepod,
 /obj/machinery/door/window/southright,
 /obj/machinery/computer/cryopod{
-	pixel_x = 32
+	dir = 8
 	},
 /turf/simulated/floor/wood,
 /area/ship/scrap/command/captain)
@@ -1240,10 +1250,6 @@
 /obj/machinery/door/firedoor,
 /turf/simulated/floor/tiled/usedup,
 /area/ship/scrap/crew/cryo)
-"cD" = (
-/obj/machinery/computer/cryopod,
-/turf/simulated/wall,
-/area/ship/scrap/crew/cryo)
 "cE" = (
 /obj/structure/window/reinforced/tinted{
 	dir = 4;
@@ -1367,15 +1373,6 @@
 	level = 2
 	},
 /obj/abstract/submap_landmark/spawnpoint/crewman,
-/turf/simulated/floor/tiled/white,
-/area/ship/scrap/crew/cryo)
-"cP" = (
-/obj/machinery/cryopod,
-/obj/machinery/alarm{
-	dir = 8;
-	pixel_x = 24;
-	req_access = newlist()
-	},
 /turf/simulated/floor/tiled/white,
 /area/ship/scrap/crew/cryo)
 "cQ" = (
@@ -2515,7 +2512,7 @@
 /obj/structure/closet/medical_wall/filled{
 	pixel_y = -32
 	},
-/obj/item/ducttape,
+/obj/item/stack/tape_roll/duct_tape,
 /obj/item/retractor,
 /obj/item/scalpel,
 /turf/simulated/floor/tiled/white,
@@ -5103,7 +5100,7 @@
 	dir = 8;
 	icon_state = "bulb1"
 	},
-/obj/item/storage/mirror{
+/obj/structure/mirror{
 	pixel_y = 29
 	},
 /obj/structure/hygiene/sink{
@@ -13543,8 +13540,8 @@ bY
 bY
 aa
 xU
-cD
-cP
+cB
+ae
 dg
 oa
 dB

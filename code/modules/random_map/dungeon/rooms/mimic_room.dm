@@ -1,6 +1,5 @@
 /datum/random_room/mimic
 	var/mimic_type = /obj/structure/closet/crate
-	var/list/mimic_vars = list()
 	var/chance_of_mimic = 5
 
 /datum/random_room/mimic/apply_to_map(var/xorigin,var/yorigin,var/zorigin)

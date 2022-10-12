@@ -23,10 +23,7 @@
 	var/max_pressure_diff = 60
 
 	var/oxygen_deprivation = 0
-	var/safe_exhaled_max = 6
 	var/safe_toxins_max = 0.2
-	var/SA_para_min = 1
-	var/SA_sleep_min = 5
 	var/breathing = 0
 	var/last_successful_breath
 	var/breath_fail_ratio // How badly they failed a breath. Higher is worse.
@@ -34,21 +31,8 @@
 /obj/item/organ/internal/lungs/proc/can_drown()
 	return (is_broken() || !has_gills)
 
-/obj/item/organ/internal/lungs/proc/remove_oxygen_deprivation(var/amount)
-	var/last_suffocation = oxygen_deprivation
-	oxygen_deprivation = min(species.total_health,max(0,oxygen_deprivation - amount))
-	return -(oxygen_deprivation - last_suffocation)
-
-/obj/item/organ/internal/lungs/proc/add_oxygen_deprivation(var/amount)
-	var/last_suffocation = oxygen_deprivation
-	oxygen_deprivation = min(species.total_health,max(0,oxygen_deprivation + amount))
-	return (oxygen_deprivation - last_suffocation)
-
-// Returns a percentage value for use by GetOxyloss().
-/obj/item/organ/internal/lungs/proc/get_oxygen_deprivation()
-	if(status & ORGAN_DEAD)
-		return 100
-	return round((oxygen_deprivation/species.total_health)*100)
+/obj/item/organ/internal/lungs/proc/adjust_oxygen_deprivation(var/amount)
+	oxygen_deprivation = clamp(oxygen_deprivation + amount, 0, species.total_health)
 
 /obj/item/organ/internal/lungs/set_species(species_name)
 	. = ..()
@@ -172,12 +156,12 @@
 				owner.emote("gasp")
 			else if(prob(20))
 				to_chat(owner, SPAN_WARNING("It's hard to breathe..."))
-		breath_fail_ratio = Clamp(0,(1 - inhale_efficiency + breath_fail_ratio)/2,1)
+		breath_fail_ratio = clamp(0,(1 - inhale_efficiency + breath_fail_ratio)/2,1)
 		failed_inhale = 1
 	else
 		if(breath_fail_ratio && prob(20))
 			to_chat(owner, SPAN_NOTICE("It gets easier to breathe."))
-		breath_fail_ratio = Clamp(0,breath_fail_ratio-0.05,1)
+		breath_fail_ratio = clamp(0,breath_fail_ratio-0.05,1)
 
 	owner.oxygen_alert = failed_inhale * 2
 
@@ -256,13 +240,12 @@
 		if(breath.temperature <= species.cold_level_1)
 			if(prob(20))
 				to_chat(owner, "<span class='danger'>You feel your face freezing and icicles forming in your lungs!</span>")
-			switch(breath.temperature)
-				if(species.cold_level_3 to species.cold_level_2)
-					damage = COLD_GAS_DAMAGE_LEVEL_3
-				if(species.cold_level_2 to species.cold_level_1)
-					damage = COLD_GAS_DAMAGE_LEVEL_2
-				else
-					damage = COLD_GAS_DAMAGE_LEVEL_1
+			if(breath.temperature < species.cold_level_3)
+				damage = COLD_GAS_DAMAGE_LEVEL_3
+			else if(breath.temperature < species.cold_level_2)
+				damage = COLD_GAS_DAMAGE_LEVEL_2
+			else
+				damage = COLD_GAS_DAMAGE_LEVEL_1
 
 			if(prob(20))
 				owner.apply_damage(damage, BURN, BP_HEAD, used_weapon = "Excessive Cold")
@@ -273,13 +256,12 @@
 			if(prob(20))
 				to_chat(owner, "<span class='danger'>You feel your face burning and a searing heat in your lungs!</span>")
 
-			switch(breath.temperature)
-				if(species.heat_level_1 to species.heat_level_2)
-					damage = HEAT_GAS_DAMAGE_LEVEL_1
-				if(species.heat_level_2 to species.heat_level_3)
-					damage = HEAT_GAS_DAMAGE_LEVEL_2
-				else
-					damage = HEAT_GAS_DAMAGE_LEVEL_3
+			if(breath.temperature < species.heat_level_2)
+				damage = HEAT_GAS_DAMAGE_LEVEL_1
+			else if(breath.temperature < species.heat_level_3)
+				damage = HEAT_GAS_DAMAGE_LEVEL_2
+			else
+				damage = HEAT_GAS_DAMAGE_LEVEL_3
 
 			if(prob(20))
 				owner.apply_damage(damage, BURN, BP_HEAD, used_weapon = "Excessive Heat")
@@ -322,7 +304,7 @@
 		. += "[pick("wheezing", "gurgling")] sounds"
 
 	var/list/breathtype = list()
-	if(get_oxygen_deprivation() > 50)
+	if(owner.getOxyLossPercent() > 50)
 		breathtype += pick("straining","labored")
 	if(owner.shock_stage > 50)
 		breathtype += pick("shallow and rapid")

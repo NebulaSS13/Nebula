@@ -19,6 +19,9 @@
 /obj/screen/receive_mouse_drop(atom/dropping, mob/user)
 	return TRUE
 
+/obj/screen/check_mousedrop_interactivity(var/mob/user)
+	return user.client && (src in user.client.screen)
+
 /obj/screen/Destroy()
 	master = null
 	return ..()
@@ -345,8 +348,9 @@
 			usr.swap_hand()
 		if("hand")
 			usr.swap_hand()
-		else if(usr.attack_ui(slot_id))
-			usr.update_inv_hands(0)
+		else
+			if(usr.attack_ui(slot_id))
+				usr.update_inv_hands(0)
 	return 1
 
 // Character setup stuff

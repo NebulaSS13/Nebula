@@ -49,7 +49,6 @@
 
 	var/has_been_rev = 0//Tracks if this mind has been a rev or not
 
-	var/faction 			//associated faction
 	var/datum/changeling/changeling		//changeling holder
 
 	var/rev_cooldown = 0
@@ -319,7 +318,7 @@
 					new_objective = new objective_path
 					new_objective.owner = src
 					new_objective:target = M.mind
-					new_objective.explanation_text = "[objective_type] [M.real_name], the [M.mind.get_special_role_name() || M.mind.assigned_role]."
+					new_objective.explanation_text = "[objective_type] [M.real_name], the [M.mind.get_special_role_name(M.mind.assigned_role)]."
 
 			if ("hijack")
 				new_objective = new /datum/objective/hijack
@@ -569,7 +568,11 @@
 	mind.assigned_role = "Juggernaut"
 	mind.assigned_special_role = "Cultist"
 
-/datum/mind/proc/get_special_role_name()
-	if(assigned_special_role)
-		var/decl/special_role/special_role = ispath(assigned_special_role, /decl/special_role) && GET_DECL(assigned_special_role)
-		return special_role?.name || assigned_special_role
+/datum/mind/proc/get_special_role_name(var/default_role_name)
+	if(istext(assigned_special_role))
+		return assigned_special_role
+	if(ispath(assigned_special_role, /decl/special_role))
+		var/decl/special_role/special_role = GET_DECL(assigned_special_role)
+		if(istype(special_role))
+			return special_role.name
+	return default_role_name

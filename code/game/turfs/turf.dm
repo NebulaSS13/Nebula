@@ -19,9 +19,7 @@
 	var/blocks_air = 0          // Does this turf contain air/let air through?
 
 	// General properties.
-	var/icon_old = null
 	var/pathweight = 1          // How much does it cost to pathfind over this turf?
-	var/blessed = 0             // Has the turf been blessed?
 
 	var/list/decals
 
@@ -62,11 +60,7 @@
 	atom_flags |= ATOM_FLAG_INITIALIZED
 
 	if (light_range && light_power)
-		if (ambient_light)
-			update_ambient_light(TRUE)
 		update_light()
-	else if (ambient_light)
-		update_ambient_light(FALSE)
 
 	if(dynamic_lighting)
 		luminosity = 0
@@ -234,30 +228,6 @@
 				mover.Bump(obstacle, 1)
 				return 0
 	return 1 //Nothing found to block so return success!
-
-var/global/const/enterloopsanity = 100
-/turf/Entered(var/atom/atom, var/atom/old_loc)
-
-	..()
-
-	QUEUE_TEMPERATURE_ATOMS(atom)
-
-	if(!istype(atom, /atom/movable))
-		return
-
-	var/atom/movable/A = atom
-
-	var/objects = 0
-	if(A && (A.movable_flags & MOVABLE_FLAG_PROXMOVE))
-		for(var/atom/movable/thing in range(1))
-			if(objects > enterloopsanity) break
-			objects++
-			spawn(0)
-				if(A)
-					A.HasProximity(thing, 1)
-					if ((thing && A) && (thing.movable_flags & MOVABLE_FLAG_PROXMOVE))
-						thing.HasProximity(A, 1)
-	return
 
 /turf/proc/adjacent_fire_act(turf/simulated/floor/source, exposed_temperature, exposed_volume)
 	return

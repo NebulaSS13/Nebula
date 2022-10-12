@@ -13,7 +13,6 @@
 	var/icon_set = "candle"
 	var/candle_range = CANDLE_LUM
 	var/candle_power
-	var/candle_falloff = 2
 
 /obj/item/flame/candle/Initialize()
 	wax = rand(27 MINUTES, 33 MINUTES) / SSobj.wait // Enough for 27-33 minutes. 30 minutes on average, adjusted for subsystem tickrate.
@@ -87,5 +86,5 @@
 	max_w_class = ITEM_SIZE_TINY
 	max_storage_space = 7
 	slot_flags = SLOT_LOWER_BODY
-
+	material = /decl/material/solid/cardboard
 	startswith = list(/obj/item/flame/candle = 7)

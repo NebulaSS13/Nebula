@@ -155,8 +155,6 @@ var/global/list/supermatter_delam_accent_sounds = list(
 	var/pull_time = 300
 	var/explosion_power = 9
 
-	var/emergency_issued = 0
-
 	// Time in 1/10th of seconds since the last sent warning
 	var/lastwarning = 0
 
@@ -190,7 +188,7 @@ var/global/list/supermatter_delam_accent_sounds = list(
 
 	var/datum/composite_sound/supermatter/soundloop
 
-	var/damage_animation = FALSE //we we doing our damage animation?
+	var/damage_animation = FALSE //are we doing our damage animation?
 
 	var/list/threshholds = list( // List of lists defining the amber/red labeling threshholds in readouts. Numbers are minminum red and amber and maximum amber and red, in that order
 		list("name" = SUPERMATTER_DATA_EER,         "min_h" = -1, "min_l" = -1,  "max_l" = 150,  "max_h" = 300),
@@ -487,11 +485,11 @@ var/global/list/supermatter_delam_accent_sounds = list(
 	else
 		damage_archived = damage
 
-		damage = max(0, damage + between(-damage_rate_limit, (removed.temperature - critical_temperature) / 150, damage_inc_limit))
+		damage = max(0, damage + clamp(-damage_rate_limit, (removed.temperature - critical_temperature) / 150, damage_inc_limit))
 
 		//Ok, 100% oxygen atmosphere = best reaction
 		//Maxes out at 100% oxygen pressure
-		oxygen = Clamp((removed.get_by_flag(XGM_GAS_OXIDIZER) - (removed.gas[/decl/material/gas/nitrogen] * nitrogen_retardation_factor)) / removed.total_moles, 0, 1)
+		oxygen = clamp((removed.get_by_flag(XGM_GAS_OXIDIZER) - (removed.gas[/decl/material/gas/nitrogen] * nitrogen_retardation_factor)) / removed.total_moles, 0, 1)
 
 		//calculate power gain for oxygen reaction
 		var/temp_factor
@@ -520,7 +518,7 @@ var/global/list/supermatter_delam_accent_sounds = list(
 			visible_message("[src]: Releasing additional [round((heat_capacity_new - heat_capacity)*removed.temperature)] W with exhaust gasses.")
 
 		removed.add_thermal_energy(thermal_power)
-		removed.temperature = between(0, removed.temperature, 10000)
+		removed.temperature = clamp(0, removed.temperature, 10000)
 
 		env.merge(removed)
 
@@ -541,16 +539,10 @@ var/global/list/supermatter_delam_accent_sounds = list(
 	if(!power)
 		animate_filter("outline", list(size = 0))
 
-	color = color_contrast(Interpolate(0, 50, Clamp( (damage - emergency_point) / (explosion_point - emergency_point),0,1)))
+	color = color_contrast(Interpolate(0, 50, clamp( (damage - emergency_point) / (explosion_point - emergency_point),0,1)))
 
-	if (damage >= emergency_point)
-		if(!get_filter("rays"))
-			add_filter("rays",1,list(type="rays", size = 64, color = emergency_color, factor = 0.6, density = 12))
-		animate_filter("rays", list(time = 10 SECONDS, offset = 10, loop=-1))
-		animate(time = 10 SECONDS, loop=-1)
-
-		animate_filter("rays",list(time = 2 SECONDS, size = 80, loop=-1, flags = ANIMATION_PARALLEL))
-		animate(time = 2 SECONDS, size = 10, loop=-1, flags = ANIMATION_PARALLEL)
+	if (damage >= emergency_point && !damage_animation)
+		start_damage_animation()
 	else if (damage < emergency_point)
 		remove_filter("rays")
 
@@ -559,6 +551,21 @@ var/global/list/supermatter_delam_accent_sounds = list(
 	handle_admin_warnings()
 
 	return 1
+
+/obj/machinery/power/supermatter/proc/start_damage_animation()
+	if(damage_animation)
+		return
+	if(!get_filter("rays"))
+		add_filter("rays",1,list(type="rays", size = 64, color = emergency_color, factor = 0.6, density = 12))
+	animate_filter("rays", list(time = 10 SECONDS, offset = 10, loop=-1))
+	animate(time = 10 SECONDS, loop=-1)
+
+	animate_filter("rays",list(time = 2 SECONDS, size = 80, loop=-1, flags = ANIMATION_PARALLEL))
+	animate(time = 2 SECONDS, size = 10, loop=-1, flags = ANIMATION_PARALLEL)
+	addtimer(CALLBACK(src, .proc/finish_damage_animation), 12 SECONDS)
+
+/obj/machinery/power/supermatter/proc/finish_damage_animation()
+	damage_animation = FALSE
 
 /obj/machinery/power/supermatter/bullet_act(var/obj/item/projectile/Proj)
 	var/turf/L = loc
@@ -621,15 +628,24 @@ var/global/list/supermatter_delam_accent_sounds = list(
 
 /obj/machinery/power/supermatter/attackby(obj/item/W, mob/user)
 
-	if(istype(W, /obj/item/ducttape))
-		to_chat(user, "You repair some of the damage to \the [src] with \the [W].")
+	if(istype(W, /obj/item/stack/tape_roll/duct_tape))
+		var/obj/item/stack/tape_roll/duct_tape/T = W
+		if(!T.can_use(20))
+			to_chat(user, SPAN_WARNING("You need at least 20 [T.plural_name] to repair \the [src]."))
+			return
+		T.use(20)
+		playsound(src, 'sound/effects/tape.ogg', 100, TRUE)
+		to_chat(user, SPAN_NOTICE("You begin to repair some of the damage to \the [src] with \the [W]."))
 		damage = max(damage -10, 0)
 
-	user.visible_message("<span class=\"warning\">\The [user] touches \a [W] to \the [src] as a silence fills the room...</span>",\
-		"<span class=\"danger\">You touch \the [W] to \the [src] when everything suddenly goes silent.\"</span>\n<span class=\"notice\">\The [W] flashes into dust as you flinch away from \the [src].</span>",\
-		"<span class=\"warning\">Everything suddenly goes silent.</span>")
-	user.drop_from_inventory(W)
-	Consume(user, W, TRUE)
+	if(!QDELETED(W))
+		user.visible_message(SPAN_WARNING("\The [user] touches \the [src] with \a [W] as silence fills the room..."),\
+			SPAN_DANGER("You touch \the [W] to \the [src] when everything suddenly goes quiet."),\
+			SPAN_WARNING("Everything suddenly goes silent."))
+
+		to_chat(user, SPAN_NOTICE("\The [W] flashes into dust as you flinch away from \the [src]."))
+		user.drop_from_inventory(W)
+		Consume(user, W, TRUE)
 	user.apply_damage(150, IRRADIATE, damage_flags = DAM_DISPERSED)
 
 /obj/machinery/power/supermatter/Bumped(atom/AM)

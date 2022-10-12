@@ -126,6 +126,7 @@
 	name = "small parcel"
 	icon = 'icons/obj/items/storage/deliverypackage.dmi'
 	icon_state = "deliverycrate3"
+	material = /decl/material/solid/cardboard
 	var/obj/item/wrapped = null
 	var/sortTag = null
 	var/examtext = null
@@ -253,6 +254,7 @@
 	w_class = ITEM_SIZE_SMALL
 	throw_speed = 4
 	throw_range = 5
+	material = /decl/material/solid/cardboard
 
 /obj/item/stack/package_wrap/afterattack(var/obj/target, mob/user, proximity)
 	if(!proximity) return
@@ -512,3 +514,4 @@
 	uses_charge = 1
 	charge_costs = list(1)
 	stack_merge_type = /obj/item/stack/package_wrap
+	health = ITEM_HEALTH_NO_DAMAGE

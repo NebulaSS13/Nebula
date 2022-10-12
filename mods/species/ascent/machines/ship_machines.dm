@@ -52,10 +52,11 @@ MANTIDIFY(/obj/machinery/door/airlock/external/bolted, "mantid airlock", "door")
 	base_type = /obj/machinery/recharge_station
 
 MANTIDIFY(/obj/item/chems/chem_disp_cartridge, "canister", "chemical storage")
-/obj/item/chems/chem_disp_cartridge/ascent/crystal
-	spawn_reagent = /decl/material/liquid/crystal_agent
-/obj/item/chems/chem_disp_cartridge/ascent/bromide
-	spawn_reagent = /decl/material/liquid/bromide
+/obj/item/chems/chem_disp_cartridge/ascent/crystal/populate_reagents()
+	reagents.add_reagent(/decl/material/liquid/crystal_agent, reagents.maximum_volume)
+
+/obj/item/chems/chem_disp_cartridge/ascent/bromide/populate_reagents()
+	reagents.add_reagent(/decl/material/liquid/bromide, reagents.maximum_volume)
 
 /obj/machinery/sleeper/ascent
 	name = "mantid sleeper"

@@ -133,7 +133,7 @@
 			if(!CanInteract(user,state))
 				return TOPIC_NOACTION
 			if (nrange)
-				sensors.set_range(Clamp(nrange, 1, world.view))
+				sensors.set_range(clamp(nrange, 1, world.view))
 			return TOPIC_REFRESH
 		if (href_list["toggle"])
 			sensors.toggle()
@@ -228,7 +228,7 @@
 
 /obj/machinery/shipsensors/RefreshParts()
 	..()
-	sensor_strength = Clamp(total_component_rating_of_type(/obj/item/stock_parts/manipulator), 0, 5)
+	sensor_strength = clamp(total_component_rating_of_type(/obj/item/stock_parts/manipulator), 0, 5)
 
 /obj/machinery/shipsensors/weak
 	heat_reduction = 0.2

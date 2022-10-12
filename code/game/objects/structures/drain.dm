@@ -50,7 +50,7 @@
 	desc = "You probably can't get sucked down the plughole."
 	icon = 'icons/obj/drain.dmi'
 	icon_state = "drain"
-
+	material = /decl/material/solid/metal/brass
 	var/constructed_type = /obj/structure/hygiene/drain
 
 /obj/item/drain/attackby(var/obj/item/thing, var/mob/user)

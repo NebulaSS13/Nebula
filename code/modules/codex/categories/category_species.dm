@@ -6,7 +6,7 @@
 
 	for(var/thing in get_all_species())
 		var/decl/species/species = get_species_by_key(thing)
-		if(!species.hidden_from_codex && !species.is_abstract())
+		if(!species.hidden_from_codex)
 
 			var/entry_type = (species.secret_codex_info) ? /datum/codex_entry/scannable : /datum/codex_entry
 			var/datum/codex_entry/entry = new entry_type(

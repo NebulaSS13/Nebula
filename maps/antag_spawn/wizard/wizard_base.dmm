@@ -416,7 +416,7 @@
 	dir = 4;
 	pixel_x = 11
 	},
-/obj/item/storage/mirror{
+/obj/structure/mirror{
 	pixel_x = 32
 	},
 /turf/unsimulated/floor{

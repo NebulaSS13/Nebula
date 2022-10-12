@@ -28,7 +28,7 @@
 		return ..()
 
 	var/decl/pronouns/user_gender = user.get_pronouns()
-	attack_damage = Clamp(attack_damage, 1, 5)
+	attack_damage = clamp(attack_damage, 1, 5)
 	if(target == user)
 		user.visible_message(SPAN_DANGER("\The [user] [pick(attack_verb)] [user_gender.self] in the [affecting.name]!"))
 		return 0
@@ -39,7 +39,7 @@
 		if(BP_HEAD, BP_MOUTH, BP_EYES)
 			// ----- HEAD ----- //
 			switch(attack_damage)
-				if(1 to 2) 
+				if(1 to 2)
 					attack_string = "scratches \the [target] across [target_gender.his] cheek"
 				if(3 to 4)
 					attack_string = pick(
@@ -54,7 +54,7 @@
 		else
 			// ----- BODY ----- //
 			switch(attack_damage)
-				if(1 to 2)	
+				if(1 to 2)
 					attack_string = "[pick("scratched", "grazed")] [target]'s [affecting.name]"
 				if(3 to 4)
 					attack_string = pick(
@@ -113,10 +113,10 @@
 	name = "tail swipe"
 	usable_with_limbs = list(BP_GROIN)
 	var/static/list/can_hit_zones = list(
-		BP_L_LEG, 
-		BP_R_LEG, 
-		BP_L_FOOT, 
-		BP_R_FOOT, 
+		BP_L_LEG,
+		BP_R_LEG,
+		BP_L_FOOT,
+		BP_R_FOOT,
 		BP_GROIN
 	)
 
@@ -134,7 +134,7 @@
 	if(!affecting)
 		return ..()
 
-	attack_damage = Clamp(attack_damage, 1, 6)
+	attack_damage = clamp(attack_damage, 1, 6)
 	attack_damage = 3 + attack_damage - rand(1, 5)
 	switch(attack_damage)
 

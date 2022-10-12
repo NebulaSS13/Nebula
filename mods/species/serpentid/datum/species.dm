@@ -65,7 +65,6 @@
 	body_temperature = null
 	flesh_color = "#525252"
 	blood_oxy = 0
-	reagent_tag = IS_SERPENTID
 
 	available_bodytypes = list(
 		/decl/bodytype/serpentid,
@@ -92,7 +91,6 @@
 	strength = STR_HIGH
 	breath_pressure = 25
 	blood_volume = 840
-	spawns_with_stack = 0
 	heat_level_1 = 410 //Default 360 - Higher is better
 	heat_level_2 = 440 //Default 400
 	heat_level_3 = 800 //Default 1000

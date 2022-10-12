@@ -5,6 +5,8 @@
 	density = FALSE
 	layer = ABOVE_WINDOW_LAYER
 	w_class = ITEM_SIZE_NORMAL
+	obj_flags = OBJ_FLAG_MOVES_UNSUPPORTED
+	directional_offset = "{'NORTH':{'y':-32}, 'SOUTH':{'y':32}, 'WEST':{'x':-32}, 'EAST':{'x':32}}"
 
 /obj/structure/sign/explosion_act(severity)
 	..()
@@ -32,6 +34,7 @@
 	desc = ""
 	icon = 'icons/obj/decals.dmi'
 	w_class = ITEM_SIZE_NORMAL		//big
+	material = /decl/material/solid/plastic
 	var/sign_state = ""
 
 /obj/item/sign/attackby(obj/item/W, mob/user)	//construction
@@ -39,24 +42,24 @@
 		var/direction = input("In which direction?", "Select direction.") in list("North", "East", "South", "West", "Cancel")
 		if(direction == "Cancel")
 			return
-		if(!QDELETED(src) && do_after(user, 30, src))
+		if(!QDELETED(src) && do_after(user, 3 SECONDS, src))
 			var/obj/structure/sign/S = new(user.loc)
-			switch(direction)
-				if("North")
-					S.default_pixel_y = 32
-				if("East")
-					S.default_pixel_x = 32
-				if("South")
-					S.default_pixel_y = -32
-				if("West")
-					S.default_pixel_x = -32
-				else
-					return
-			S.reset_offsets(0)
 			S.SetName(name)
 			S.desc = desc
-			S.icon_state = sign_state
+			S.icon_state = sign_state			
+			switch(direction)
+				if("North")
+					S.set_dir(NORTH)
+				if("East")
+					S.set_dir(EAST)
+				if("South")
+					S.set_dir(SOUTH)
+				if("West")
+					S.set_dir(WEST)
+				else
+					return
 			to_chat(user, "You fasten \the [S] with your [W].")
+			user.unEquip(src)
 			qdel(src)
 		return
 	else ..()
@@ -418,6 +421,11 @@
 	icon = 'icons/obj/decals.dmi'
 	icon_state = "goldenplaque"
 	sign_state = "goldenplaque"
+	material = /decl/material/solid/wood
+	matter = list(
+		/decl/material/solid/glass     = MATTER_AMOUNT_SECONDARY,
+		/decl/material/solid/cardboard = MATTER_AMOUNT_REINFORCEMENT, //#TODO: Change to paper
+	)
 	var/claimant
 
 /obj/item/sign/medipolma/attack_self(mob/user)

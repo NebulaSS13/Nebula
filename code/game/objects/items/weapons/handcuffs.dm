@@ -4,7 +4,7 @@
 	gender = PLURAL
 	icon = 'icons/obj/items/handcuffs.dmi'
 	icon_state = ICON_STATE_WORLD
-	health = 0
+	health = ITEM_HEALTH_NO_DAMAGE
 	obj_flags = OBJ_FLAG_CONDUCTIBLE
 	slot_flags = SLOT_LOWER_BODY
 	throwforce = 5
@@ -130,6 +130,8 @@ var/global/last_chew = 0
 	cuff_type = "cable restraints"
 	elastic = 1
 	health = 75
+	max_health = 75
+	material = /decl/material/solid/plastic
 
 /obj/item/handcuffs/cable/red
 	color = COLOR_MAROON
@@ -167,3 +169,5 @@ var/global/last_chew = 0
 	breakouttime = 200
 	cuff_type = "duct tape"
 	health = 50
+	max_health = 50
+	material = /decl/material/solid/plastic

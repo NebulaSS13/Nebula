@@ -157,7 +157,7 @@ Thus, the two variables affect pump operation are set in New():
 			. = 1
 		if ("set")
 			var/new_pressure = input(usr,"Enter new output pressure (0-[max_pressure_setting]kPa)","Pressure control",src.target_pressure) as num
-			src.target_pressure = between(0, new_pressure, max_pressure_setting)
+			src.target_pressure = clamp(0, new_pressure, max_pressure_setting)
 			. = 1
 
 	if(.)
@@ -181,7 +181,7 @@ Thus, the two variables affect pump operation are set in New():
 	return machine.target_pressure
 
 /decl/public_access/public_variable/pump_target_output/write_var(obj/machinery/atmospherics/binary/pump/machine, new_value)
-	new_value = Clamp(new_value, 0, machine.max_pressure_setting)
+	new_value = clamp(new_value, 0, machine.max_pressure_setting)
 	. = ..()
 	if(.)
 		machine.target_pressure = new_value

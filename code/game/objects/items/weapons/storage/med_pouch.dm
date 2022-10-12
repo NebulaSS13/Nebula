@@ -12,6 +12,7 @@ Single Use Emergency Pouches
 	icon_state = "pack0"
 	opened = FALSE
 	open_sound = 'sound/effects/rip1.ogg'
+	material = /decl/material/solid/plastic
 	var/injury_type = "generic"
 	var/static/image/cross_overlay
 
@@ -165,34 +166,33 @@ Single Use Emergency Pouches
 		"}
 
 /obj/item/chems/pill/pouch_pill
-	name = "emergency pill"
-	desc = "An emergency pill from an emergency medical pouch"
+	name       = "emergency pill"
+	desc       = "An emergency pill from an emergency medical pouch"
 	icon_state = "pill2"
-	var/decl/material/chem_type
-	var/chem_amount = 15
+	volume     = 15
 
-/obj/item/chems/pill/pouch_pill/stabilizer
-	chem_type = /decl/material/liquid/stabilizer
+/obj/item/chems/pill/pouch_pill/stabilizer/populate_reagents()
+	reagents.add_reagent(/decl/material/liquid/stabilizer, reagents.maximum_volume)
 
-/obj/item/chems/pill/pouch_pill/antitoxins
-	chem_type = /decl/material/liquid/antitoxins
+/obj/item/chems/pill/pouch_pill/antitoxins/populate_reagents()
+	reagents.add_reagent(/decl/material/liquid/antitoxins, reagents.maximum_volume)
 
-/obj/item/chems/pill/pouch_pill/oxy_meds
-	chem_type = /decl/material/liquid/oxy_meds
+/obj/item/chems/pill/pouch_pill/oxy_meds/populate_reagents()
+	reagents.add_reagent(/decl/material/liquid/oxy_meds, reagents.maximum_volume)
 
-/obj/item/chems/pill/pouch_pill/painkillers
-	chem_type = /decl/material/liquid/painkillers
+/obj/item/chems/pill/pouch_pill/painkillers/populate_reagents()
+	reagents.add_reagent(/decl/material/liquid/painkillers, reagents.maximum_volume)
 
-/obj/item/chems/pill/pouch_pill/brute_meds
-	chem_type = /decl/material/liquid/brute_meds
+/obj/item/chems/pill/pouch_pill/brute_meds/populate_reagents()
+	reagents.add_reagent(/decl/material/liquid/brute_meds, reagents.maximum_volume)
 
-/obj/item/chems/pill/pouch_pill/burn_meds
-	chem_type = /decl/material/liquid/burn_meds
+/obj/item/chems/pill/pouch_pill/burn_meds/populate_reagents()
+	reagents.add_reagent(/decl/material/liquid/burn_meds, reagents.maximum_volume)
 
-/obj/item/chems/pill/pouch_pill/initialize_reagents()
-	reagents.add_reagent(chem_type, chem_amount)
-	var/decl/material/reagent = GET_DECL(chem_type)
-	SetName("emergency [reagent.liquid_name] pill ([reagents.total_volume]u)")
+/obj/item/chems/pill/pouch_pill/initialize_reagents(populate = TRUE)
+	. = ..()
+	if(populate)
+		SetName("emergency [reagents.get_primary_reagent_name()] pill ([reagents.total_volume]u)")
 
 /obj/item/chems/hypospray/autoinjector/pouch_auto
 	name = "emergency autoinjector"
@@ -200,25 +200,31 @@ Single Use Emergency Pouches
 
 /obj/item/chems/hypospray/autoinjector/pouch_auto/stabilizer
 	name = "emergency stabilizer autoinjector"
-	starts_with = list(/decl/material/liquid/stabilizer = 5)
+/obj/item/chems/hypospray/autoinjector/pouch_auto/stabilizer/populate_reagents()
+	reagents.add_reagent(/decl/material/liquid/stabilizer, 5)
 
 /obj/item/chems/hypospray/autoinjector/pouch_auto/painkillers
 	name = "emergency painkiller autoinjector"
-	starts_with = list(/decl/material/liquid/painkillers = 5)
+/obj/item/chems/hypospray/autoinjector/pouch_auto/painkillers/populate_reagents()
+	reagents.add_reagent(/decl/material/liquid/painkillers, 5)
 
 /obj/item/chems/hypospray/autoinjector/pouch_auto/antitoxins
 	name = "emergency antitoxins autoinjector"
-	starts_with = list(/decl/material/liquid/antitoxins = 5)
+/obj/item/chems/hypospray/autoinjector/pouch_auto/antitoxins/populate_reagents()
+	reagents.add_reagent(/decl/material/liquid/antitoxins, 5)
 
 /obj/item/chems/hypospray/autoinjector/pouch_auto/oxy_meds
 	name = "emergency oxygel autoinjector"
-	starts_with = list(/decl/material/liquid/oxy_meds = 5)
+/obj/item/chems/hypospray/autoinjector/pouch_auto/oxy_meds/populate_reagents()
+	reagents.add_reagent(/decl/material/liquid/oxy_meds, 5)
 
 /obj/item/chems/hypospray/autoinjector/pouch_auto/adrenaline
 	name = "emergency adrenaline autoinjector"
 	amount_per_transfer_from_this = 8
-	starts_with = list(/decl/material/liquid/adrenaline = 8)
+/obj/item/chems/hypospray/autoinjector/pouch_auto/adrenaline/populate_reagents()
+	reagents.add_reagent(/decl/material/liquid/adrenaline, 8)
 
 /obj/item/chems/hypospray/autoinjector/pouch_auto/nanoblood
 	name = "emergency nanoblood autoinjector"
-	starts_with = list(/decl/material/liquid/nanoblood = 5)
+/obj/item/chems/hypospray/autoinjector/pouch_auto/nanoblood/populate_reagents()
+	reagents.add_reagent(/decl/material/liquid/nanoblood, 5)

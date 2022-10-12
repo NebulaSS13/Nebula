@@ -25,7 +25,6 @@
 	var/check_arrest = 1 // If true, arrests people who are set to arrest.
 	var/declare_arrests = 0 // If true, announces arrests over sechuds.
 
-	var/is_ranged = 0
 	var/awaiting_surrender = 0
 
 	var/obj/item/baton/stun_baton

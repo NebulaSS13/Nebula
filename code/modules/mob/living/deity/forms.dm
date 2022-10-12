@@ -13,7 +13,6 @@ Each plays slightly different and has different challenges/benefits
 	var/starting_power_min = 10
 	var/starting_regeneration = 1
 	var/list/buildables = list() //Both a list of var changes and a list of buildables.
-	var/list/icon_states = list()
 	var/list/items
 
 /datum/god_form/New(var/mob/living/deity/D)

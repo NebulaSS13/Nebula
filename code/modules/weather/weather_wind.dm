@@ -5,7 +5,7 @@
 
 // Randomizes wind speed and direction sometimes.
 /obj/abstract/weather_system/proc/handle_wind()
-	// TODO: turbulence for chance of wind changes, 
+	// TODO: turbulence for chance of wind changes,
 	// ferocity for strength of wind changes
 	if(prob(66))
 		return
@@ -17,7 +17,7 @@
 		mob_shown_wind.Cut()
 	if(prob(10))
 		var/old_strength = wind_strength
-		wind_strength = Clamp(wind_strength + rand(-1, 1), 5, -5)
+		wind_strength = clamp(wind_strength + rand(-1, 1), 5, -5)
 		if(old_strength != wind_strength)
 			mob_shown_wind.Cut()
 

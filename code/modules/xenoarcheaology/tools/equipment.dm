@@ -68,5 +68,6 @@
 		/obj/item/storage/excavation,
 		/obj/item/anobattery,
 		/obj/item/ano_scanner,
-		/obj/item/taperoll,
+		/obj/item/stack/tape_roll/barricade_tape/research,
 		/obj/item/pickaxe/xeno/hand)
+	material = /decl/material/solid/leather/synth

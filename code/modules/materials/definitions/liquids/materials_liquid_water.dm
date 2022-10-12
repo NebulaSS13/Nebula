@@ -1,5 +1,6 @@
 /decl/material/liquid/water
 	name = "water"
+	codex_name = "liquid water" // need a better name than this so it passes the overlapping ID unit tests :(
 	uid = "liquid_water"
 	solid_name = "ice"
 	gas_name = "water vapour"
@@ -28,7 +29,7 @@
 		/decl/material/solid/ice = 1
 	)
 
-/decl/material/liquid/water/affect_blood(var/mob/living/M, var/alien, var/removed, var/datum/reagents/holder)
+/decl/material/liquid/water/affect_blood(var/mob/living/M, var/removed, var/datum/reagents/holder)
 	..()
 	if(ishuman(M))
 		var/list/data = REAGENT_DATA(holder, type)
@@ -49,10 +50,10 @@
 						if(prob(10)) //Only annoy them a /bit/
 							to_chat(M,"<span class='danger'>You feel your insides curdle and burn!</span> \[<a href='?src=\ref[holder];deconvert=\ref[M]'>Give Into Purity</a>\]")
 
-/decl/material/liquid/water/affect_ingest(var/mob/living/M, var/alien, var/removed, var/datum/reagents/holder)
+/decl/material/liquid/water/affect_ingest(var/mob/living/M, var/removed, var/datum/reagents/holder)
 	..()
 	M.adjust_hydration(removed * 10)
-	affect_blood(M, alien, removed, holder)
+	affect_blood(M, removed, holder)
 
 #define WATER_LATENT_HEAT 9500 // How much heat is removed when applied to a hot turf, in J/unit (9500 makes 120 u of water roughly equivalent to 2L
 /decl/material/liquid/water/touch_turf(var/turf/T, var/amount, var/datum/reagents/holder)
@@ -75,7 +76,7 @@
 
 	var/volume = REAGENT_VOLUME(holder, type)
 	if (environment && environment.temperature > min_temperature) // Abstracted as steam or something
-		var/removed_heat = between(0, volume * WATER_LATENT_HEAT, -environment.get_thermal_energy_change(min_temperature))
+		var/removed_heat = clamp(0, volume * WATER_LATENT_HEAT, -environment.get_thermal_energy_change(min_temperature))
 		environment.add_thermal_energy(-removed_heat)
 		if (prob(5) && environment && environment.temperature > T100C)
 			T.visible_message("<span class='warning'>The water sizzles as it lands on \the [T]!</span>")

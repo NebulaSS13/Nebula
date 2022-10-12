@@ -113,7 +113,7 @@ var/global/list/diversion_junctions = list()
 	update_icon()
 
 /obj/machinery/disposal/receive_mouse_drop(atom/dropping, mob/user)
-	
+
 	. = (user?.a_intent != I_HURT && ..())
 
 	if(!. && !(stat & BROKEN))
@@ -130,7 +130,7 @@ var/global/list/diversion_junctions = list()
 		// Todo rewrite all of this.
 		var/atom/movable/AM = dropping
 		if(!istype(AM) || AM.anchored)
-			return FALSE 
+			return FALSE
 
 		// Determine object type and run necessary checks
 		var/mob/M = AM
@@ -500,6 +500,7 @@ var/global/list/diversion_junctions = list()
 	icon = 'icons/obj/recycling.dmi'
 	icon_state = "switch-off"
 	w_class = ITEM_SIZE_LARGE
+	material = /decl/material/solid/metal/steel
 	var/id_tag
 
 /obj/item/disposal_switch_construct/Initialize(var/id)
@@ -535,7 +536,6 @@ var/global/list/diversion_junctions = list()
 	icon_state = "outlet"
 	density = 1
 	anchored = 1
-	var/active = 0
 	var/turf/target	// this will be where the output objects are 'thrown' to.
 	var/mode = 0
 	atom_flags = ATOM_FLAG_NO_TEMP_CHANGE | ATOM_FLAG_CLIMBABLE

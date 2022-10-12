@@ -226,7 +226,6 @@ AI MODULES
 
 /obj/item/aiModule/reset
 	name = "\improper 'Reset' AI module"
-	var/targetName = "name"
 	desc = "A 'reset' AI module: 'Clears all, except the inherent, laws.'."
 	origin_tech = "{'programming':3,'materials':4}"
 

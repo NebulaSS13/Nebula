@@ -5,6 +5,7 @@
 	icon = 'icons/obj/items/welderpack.dmi'
 	icon_state = ICON_STATE_WORLD
 	w_class = ITEM_SIZE_HUGE
+	material = /decl/material/solid/metal/steel
 	var/max_fuel = 350
 	var/obj/item/weldingtool/welder
 
@@ -34,13 +35,13 @@
 				to_chat(user, "<span class='danger'>That was close!</span>")
 			if(!T.tank)
 				to_chat(user, "\The [T] has no tank attached!")
-			src.reagents.trans_to_obj(T.tank, T.tank.max_fuel)
+			src.reagents.trans_to_obj(T.tank, T.tank.reagents.maximum_volume)
 			to_chat(user, "<span class='notice'>You refuel \the [W].</span>")
 			playsound(src.loc, 'sound/effects/refill.ogg', 50, 1, -6)
 			return
 	else if(istype(W, /obj/item/welder_tank))
 		var/obj/item/welder_tank/tank = W
-		src.reagents.trans_to_obj(tank, tank.max_fuel)
+		src.reagents.trans_to_obj(tank, tank.reagents.maximum_volume)
 		to_chat(user, "<span class='notice'>You refuel \the [W].</span>")
 		playsound(src.loc, 'sound/effects/refill.ogg', 50, 1, -6)
 		return

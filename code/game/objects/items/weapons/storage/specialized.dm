@@ -18,7 +18,7 @@
 	max_storage_space = 200
 	max_w_class = ITEM_SIZE_NORMAL
 	w_class = ITEM_SIZE_LARGE
-	can_hold = list(/obj/item/ore)
+	can_hold = list(/obj/item/stack/material/ore)
 	allow_quick_gather = TRUE
 	allow_quick_empty = TRUE
 	use_to_pickup = TRUE
@@ -47,6 +47,8 @@
 	allow_quick_gather = TRUE
 	allow_quick_empty = TRUE
 	use_to_pickup = TRUE
+	material = /decl/material/solid/metal/stainlesssteel
+	matter = list(/decl/material/solid/plastic = MATTER_AMOUNT_REINFORCEMENT)
 
 // -----------------------------
 //          Plant bag
@@ -84,7 +86,7 @@
 	icon = 'icons/obj/mining.dmi'
 	icon_state = "sheetsnatcher"
 	desc = "A patented storage system designed for any kind of mineral sheet."
-
+	material = /decl/material/solid/plastic
 	storage_ui = /datum/storage_ui/default/sheetsnatcher
 
 	var/capacity = 300; //the number of sheets it can carry.

@@ -7,6 +7,13 @@
 	icon = 'icons/obj/items/device/jammer.dmi'
 	icon_state = "jammer"
 	w_class = ITEM_SIZE_SMALL
+	material = /decl/material/solid/plastic
+	matter = list(
+		/decl/material/solid/metal/copper    = MATTER_AMOUNT_REINFORCEMENT,
+		/decl/material/solid/silicon         = MATTER_AMOUNT_REINFORCEMENT, 
+		/decl/material/solid/metal/steel     = MATTER_AMOUNT_REINFORCEMENT,
+		/decl/material/solid/metal/plutonium = MATTER_AMOUNT_TRACE,
+	)
 	var/active = FALSE
 	var/range = 2 // This is a radius, thus a range of 7 covers the entire visible screen
 	var/obj/item/cell/bcell = /obj/item/cell/high
@@ -164,7 +171,7 @@
 			set_method(method)
 			return TOPIC_REFRESH
 
-/obj/item/suit_sensor_jammer/Process(var/wait)
+/obj/item/suit_sensor_jammer/Process(wait, tick)
 	if(bcell)
 		// With a range of 2 and jammer cost of 3 the default (high capacity) cell will last for almost 14 minutes, give or take
 		// 10000 / (2^2 * 3 / 10) ~= 8333 ticks ~= 13.8 minutes
@@ -194,7 +201,7 @@
 	return TRUE
 
 /obj/item/suit_sensor_jammer/proc/set_range(var/new_range)
-	range = Clamp(new_range, 0, JAMMER_MAX_RANGE) // 0 range still covers the current turf
+	range = clamp(new_range, 0, JAMMER_MAX_RANGE) // 0 range still covers the current turf
 	return range != new_range
 
 /obj/item/suit_sensor_jammer/proc/set_method(var/suit_sensor_jammer_method/sjm)

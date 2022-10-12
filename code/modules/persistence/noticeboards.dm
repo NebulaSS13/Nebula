@@ -7,12 +7,14 @@
 	anchored = 1
 	layer = ABOVE_WINDOW_LAYER
 	tool_interaction_flags = TOOL_INTERACTION_DECONSTRUCT
+	obj_flags = OBJ_FLAG_MOVES_UNSUPPORTED
+	directional_offset = "{'SOUTH':{'y':32}, 'EAST':{'x':-32}, 'WEST':{'x':32}}"
 
 	var/list/notices
 	var/base_icon_state = "nboard0"
 	var/const/max_notices = 5
 
-/obj/structure/noticeboard/Initialize(var/ml)
+/obj/structure/noticeboard/Initialize(ml)
 	. = ..()
 
 	// Grab any mapped notices.
@@ -32,20 +34,6 @@
 				break
 
 	update_icon()
-
-/obj/structure/noticeboard/set_dir(var/ndir)
-	. = ..()
-	if(dir & SOUTH)
-		default_pixel_y = 32
-	else // NORTH is also 0-offset due to the icon.
-		default_pixel_y = 0
-	if(dir & WEST)
-		default_pixel_x = 32
-	else if(dir & EAST)
-		default_pixel_x = -32
-	else
-		default_pixel_x = 0
-	reset_offsets(0)
 
 /obj/structure/noticeboard/proc/add_paper(var/atom/movable/paper, var/skip_icon_update)
 	if(istype(paper))

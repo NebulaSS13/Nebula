@@ -35,7 +35,6 @@
 	var/pdiff_alert = 0
 	var/pdiff = 0
 	var/nextstate = null
-	var/net_id
 	var/list/areas_added
 	var/list/users_to_open = new
 	var/next_process_time = 0
@@ -387,11 +386,7 @@
 
 
 /obj/machinery/door/firedoor/on_update_icon()
-	var/icon/lights_overlay
-	var/icon/panel_overlay
-	var/icon/weld_overlay
-
-	overlays.Cut()
+	cut_overlays()
 	set_light(0)
 	var/do_set_light = FALSE
 
@@ -404,35 +399,30 @@
 	if(density)
 		icon_state = "closed"
 		if(panel_open)
-			overlays = panel_overlay
+			add_overlay(panel_file)
 		if(pdiff_alert)
-			lights_overlay += "palert"
+			add_overlay("palert")
 			do_set_light = TRUE
 		if(dir_alerts)
 			for(var/d=1;d<=4;d++)
 				var/cdir = global.cardinal[d]
 				for(var/i=1;i<=ALERT_STATES.len;i++)
 					if(dir_alerts[d] & BITFLAG(i-1))
-						overlays += new/icon(icon,"alert_[ALERT_STATES[i]]", dir=cdir)
+						add_overlay(new/icon(icon,"alert_[ALERT_STATES[i]]", dir=cdir))
 						do_set_light = TRUE
 	else
 		icon_state = "open"
 
 	if(blocked)
-		weld_overlay = welded_file
+		add_overlay(welded_file)
 
 	if(do_set_light)
 		set_light(2, 0.25, COLOR_SUN)
-
-	overlays += panel_overlay
-	overlays += weld_overlay
-	overlays += lights_overlay
 
 //Single direction firedoors.
 /obj/machinery/door/firedoor/border
 	icon = 'icons/obj/doors/hazard/door_border.dmi'
 	allow_multiple_instances_on_same_tile = TRUE
-	air_properties_vary_with_direction = TRUE
 	set_dir_on_update = FALSE
 	heat_proof = TRUE
 

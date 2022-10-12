@@ -7,7 +7,20 @@
 	return FALSE
 
 /mob/living/proc/get_default_language()
-	. = ispath(default_language, /decl/language) && GET_DECL(default_language)
+	var/lang = ispath(default_language, /decl/language) && GET_DECL(default_language)
+	if(can_speak(lang))
+		return lang
+
+/mob/living/proc/get_any_good_language(set_default=FALSE)
+	. = get_default_language()
+	if(!.)
+		for(var/decl/language/L in languages)
+			if(can_speak(L))
+				. = L
+				if(set_default)
+					set_default_language(.)
+				return
+
 
 /mob/living/is_silenced()
 	. = ..() || HAS_STATUS(src, STAT_SILENCE)
@@ -252,8 +265,5 @@
 		O.hear_signlang(message, verb, language, src)
 	return 1
 
-/obj/effect/speech_bubble
-	var/mob/parent
-
-/mob/living/proc/GetVoice()
+/mob/proc/GetVoice()
 	return name

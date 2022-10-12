@@ -18,13 +18,10 @@ var/global/list/areas = list()
 	var/eject
 
 	var/lightswitch =         TRUE
-	var/debug =               FALSE
 	var/requires_power =      TRUE
 	var/always_unpowered =    FALSE //this gets overriden to 1 for space in area/New()
 
-	var/atmos =               1
 	var/atmosalm =            0
-	var/poweralm =            1
 	var/power_equip =         1 // Status
 	var/power_light =         1
 	var/power_environ =       1
@@ -39,7 +36,6 @@ var/global/list/areas = list()
 	var/show_starlight =      FALSE
 
 	var/obj/machinery/power/apc/apc
-	var/no_air
 	var/list/all_doors		//Added by Strumpetplaya - Alarm Change - Contains a list of doors adjacent to this area
 	var/list/ambience = list('sound/ambience/ambigen1.ogg','sound/ambience/ambigen3.ogg','sound/ambience/ambigen4.ogg','sound/ambience/ambigen5.ogg','sound/ambience/ambigen6.ogg','sound/ambience/ambigen7.ogg','sound/ambience/ambigen8.ogg','sound/ambience/ambigen9.ogg','sound/ambience/ambigen10.ogg','sound/ambience/ambigen11.ogg','sound/ambience/ambigen12.ogg','sound/ambience/ambigen14.ogg')
 	var/list/forced_ambience

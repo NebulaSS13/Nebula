@@ -148,3 +148,4 @@
 	icon = 'icons/obj/items/stock_parts/stock_parts.dmi'
 	icon_state = "smes_coil"
 	origin_tech = "{'materials':19,'engineering':19,'exoticmatter':19,'powerstorage':19,'wormholes':19,'biotech':19,'combat':19,'magnets':19,'programming':19,'esoteric':19}"
+	health = ITEM_HEALTH_NO_DAMAGE

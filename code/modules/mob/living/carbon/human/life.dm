@@ -36,8 +36,6 @@
 	var/co2_alert = 0
 	var/fire_alert = 0
 	var/pressure_alert = 0
-	var/temperature_alert = 0
-	var/heartbeat = 0
 	var/stamina = 100
 
 /mob/living/carbon/human/Life()
@@ -69,6 +67,8 @@
 		//Updates the number of stored chemicals for powers
 		handle_changeling()
 
+		last_pain = null // Clear the last cached pain value so further getHalloss() calls won't use an old value.
+
 		//Organs and blood
 		handle_organs()
 		stabilize_body_temperature() //Body temperature adjusts itself (self-regulation)
@@ -93,7 +93,7 @@
 	if(stat == DEAD)
 		stamina = 0
 	else
-		stamina = Clamp(stamina + amt, 0, 100)
+		stamina = clamp(stamina + amt, 0, 100)
 		if(stamina <= 0)
 			to_chat(src, SPAN_WARNING("You are exhausted!"))
 			if(MOVING_QUICKLY(src))
@@ -145,7 +145,7 @@
 		if(zone_exposure >= 1)
 			return 1
 		pressure_adjustment_coefficient = max(pressure_adjustment_coefficient, zone_exposure)
-	pressure_adjustment_coefficient = Clamp(pressure_adjustment_coefficient, 0, 1) // So it isn't less than 0 or larger than 1.
+	pressure_adjustment_coefficient = clamp(pressure_adjustment_coefficient, 0, 1) // So it isn't less than 0 or larger than 1.
 
 	return pressure_adjustment_coefficient
 
@@ -217,7 +217,7 @@
 		if(gene.is_active(src))
 			gene.OnMobLife(src)
 
-	radiation = Clamp(radiation,0,500)
+	radiation = clamp(radiation,0,500)
 
 	if(!radiation)
 		if(species.appearance_flags & RADIATION_GLOWS)
@@ -368,7 +368,7 @@
 				temp_adj = (1-thermal_protection) * ((loc_temp - bodytemperature) / BODYTEMP_HEAT_DIVISOR)
 
 		//Use heat transfer as proportional to the gas density. However, we only care about the relative density vs standard 101 kPa/20 C air. Therefore we can use mole ratios
-		bodytemperature += between(BODYTEMP_COOLING_MAX, temp_adj*relative_density, BODYTEMP_HEATING_MAX)
+		bodytemperature += clamp(BODYTEMP_COOLING_MAX, temp_adj*relative_density, BODYTEMP_HEATING_MAX)
 
 	// +/- 50 degrees from 310.15K is the 'safe' zone, where no damage is dealt.
 	if(bodytemperature >= getSpeciesOrSynthTemp(HEAT_LEVEL_1))
@@ -423,7 +423,7 @@
 				continue
 			if(O.damage + (LOW_PRESSURE_DAMAGE) < O.min_broken_damage) //vacuum does not break bones
 				O.take_external_damage(brute = LOW_PRESSURE_DAMAGE, used_weapon = "Low Pressure")
-		if(getOxyLoss() < 55) // 11 OxyLoss per 4 ticks when wearing internals;    unconsciousness in 16 ticks, roughly half a minute
+		if(getOxyLossPercent() < 55) // 11 OxyLoss per 4 ticks when wearing internals;    unconsciousness in 16 ticks, roughly half a minute
 			adjustOxyLoss(4)  // 16 OxyLoss per 4 ticks when no internals present; unconsciousness in 13 ticks, roughly twenty seconds
 		pressure_alert = -2
 
@@ -670,7 +670,7 @@
 			//Oxygen damage overlay
 			if(getOxyLoss())
 				var/severity = 0
-				switch(getOxyLoss())
+				switch(getOxyLossPercent())
 					if(10 to 20)		severity = 1
 					if(20 to 25)		severity = 2
 					if(25 to 30)		severity = 3
@@ -756,7 +756,7 @@
 		if(isSynthetic())
 			var/obj/item/organ/internal/cell/C = get_organ(BP_CELL, /obj/item/organ/internal/cell)
 			if(C)
-				var/chargeNum = Clamp(CEILING(C.percent()/25), 0, 4)	//0-100 maps to 0-4, but give it a paranoid clamp just in case.
+				var/chargeNum = clamp(CEILING(C.percent()/25), 0, 4)	//0-100 maps to 0-4, but give it a paranoid clamp just in case.
 				cells.icon_state = "charge[chargeNum]"
 			else
 				cells.icon_state = "charge-empty"
@@ -954,7 +954,7 @@
 	if (BITTEST(hud_updateflag, ID_HUD) && hud_list[ID_HUD])
 		var/image/holder = hud_list[ID_HUD]
 		holder.icon_state = "hudunknown"
-		
+
 		var/obj/item/id = get_equipped_item(slot_wear_id_str)
 		if(id)
 			var/obj/item/card/id/I = id.GetIdCard()
@@ -1016,9 +1016,9 @@
 	if (BITTEST(hud_updateflag, SPECIALROLE_HUD))
 		var/image/holder = hud_list[SPECIALROLE_HUD]
 		holder.icon_state = "hudblank"
-		if(mind && mind.assigned_special_role)
-			var/special_role = mind.get_special_role_name()
-			if(special_role && global.hud_icon_reference[special_role])
+		var/special_role = mind?.get_special_role_name()
+		if(special_role)
+			if(global.hud_icon_reference[special_role])
 				holder.icon_state = global.hud_icon_reference[special_role]
 			else
 				holder.icon_state = "hudsyndicate"

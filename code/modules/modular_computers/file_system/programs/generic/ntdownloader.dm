@@ -12,14 +12,20 @@
 	available_on_network = 0
 	nanomodule_path = /datum/nano_module/program/computer_appdownloader/
 	ui_header = "downloader_finished.gif"
-	var/hacked_download = 0
 	var/downloaderror
 	var/list/downloads_queue[0]
-	var/server
 	usage_flags = PROGRAM_ALL
 	category = PROG_UTIL
 
 	var/datum/file_transfer/current_transfer
+
+/datum/computer_file/program/appdownloader/on_startup(mob/living/user, datum/extension/interactive/os/new_host)
+	. = ..()
+	// Initialize the internal "appdownload" disk if necessary.
+	var/datum/file_storage/network/app_download = new_host.mounted_storage["appdownload"]
+	if(!istype(app_download)) // If you had another network disk named appdownload it will be appropriated.
+		qdel(app_download)
+		new_host.mounted_storage["appdownload"] = new /datum/file_storage/network(new_host, "appdownload", TRUE)
 
 /datum/computer_file/program/appdownloader/on_shutdown()
 	..()
@@ -33,16 +39,23 @@
 	var/datum/computer_network/net = computer.get_network()
 	if(!net)
 		return 0
-	
+
 	if(!check_file_download(filename))
 		return 0
-	var/datum/computer_file/program/PRG = net.find_file_by_name(filename, MF_ROLE_SOFTWARE)
-	var/datum/file_storage/disk/destination = new(computer)
-	var/datum/file_storage/network/source = new(computer)
-	source.server = net.find_file_location(filename, MF_ROLE_SOFTWARE)
+	var/datum/computer_file/program/PRG = net.find_file_by_name(filename, OS_PROGRAMS_DIR, MF_ROLE_SOFTWARE)
+	var/datum/file_storage/disk/destination = computer.mounted_storage["local"]
+	if(!destination)
+		return 0
+	var/datum/file_storage/network/source = computer.mounted_storage["appdownload"]
+	if(!source)
+		return 0
+	var/datum/computer_file/directory/programs_directory = destination.parse_directory(OS_PROGRAMS_DIR, TRUE)
+	if(!programs_directory)
+		return 0
+	source.set_server(net.find_file_location(PRG, mainframe_role = MF_ROLE_SOFTWARE))
 	if(source.check_errors() || destination.check_errors())
 		return 0
-	current_transfer = new(source, destination, PRG, TRUE)
+	current_transfer = new(source, destination, programs_directory, PRG, TRUE)
 
 	ui_header = "downloader_running.gif"
 	generate_network_log("Downloading file [filename] from [source.server].")
@@ -52,12 +65,12 @@
 	var/datum/computer_network/net = computer.get_network()
 	if(!net)
 		return 0
-	var/datum/computer_file/program/PRG = net.find_file_by_name(filename, MF_ROLE_SOFTWARE)
+	var/datum/computer_file/program/PRG = net.find_file_by_name(filename, OS_PROGRAMS_DIR, MF_ROLE_SOFTWARE)
 
-	if(!PRG || !istype(PRG))
+	if(!istype(PRG))
 		return 0
 
-	if(!computer || !computer.try_store_file(PRG))
+	if(!computer || (computer.try_store_file(PRG, computer.programs_dir) != OS_FILE_SUCCESS))
 		return 0
 
 	return 1
@@ -71,9 +84,9 @@
 /datum/computer_file/program/appdownloader/process_tick()
 	if(!current_transfer)
 		return
-	
+
 	var/result = current_transfer.update_progress()
-	if(!result) //something went wrong
+	if(result != OS_FILE_SUCCESS) //something went wrong
 		if(QDELETED(current_transfer)) //either completely
 			downloaderror = "I/O ERROR: Unknown error during the file transfer."
 		else  //or during the saving at the destination

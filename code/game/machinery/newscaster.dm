@@ -157,6 +157,7 @@ var/global/list/allCasters = list() //Global list that will contain reference to
 	uncreated_component_parts = null
 	stat_immune = 0
 	frame_type = /obj/item/frame/stock_offset/newscaster
+	directional_offset = "{'NORTH':{'y':-32}, 'SOUTH':{'y':32}, 'EAST':{'x':32}, 'WEST':{'x':-32}}"
 
 /obj/machinery/newscaster/Initialize()
 	. = ..()
@@ -744,6 +745,7 @@ var/global/list/allCasters = list() //Global list that will contain reference to
 	w_class = ITEM_SIZE_SMALL	//Let's make it fit in trashbags!
 	attack_verb = list("bapped","thwapped","smacked")
 	force = 0
+	material = /decl/material/solid/cardboard //#TODO: replace with paper material
 
 	var/screen = 0
 	var/pages = 0
@@ -916,14 +918,16 @@ var/global/list/allCasters = list() //Global list that will contain reference to
 	src.paper_remaining--
 	return
 
+/obj/machinery/newscaster/proc/reset_alert()
+	alert = 0
+	update_icon()
+
 /obj/machinery/newscaster/proc/newsAlert(var/news_call)
 	if(news_call)
 		audible_message("<span class='newscaster'><EM>[src.name]</EM> beeps, \"[news_call]\"</span>")
 		src.alert = 1
 		src.update_icon()
-		spawn(300)
-			src.alert = 0
-			src.update_icon()
+		addtimer(CALLBACK(src, .proc/reset_alert), alert_delay, TIMER_UNIQUE | TIMER_OVERRIDE) //stay alert for the full time if we get a new one
 		playsound(src.loc, 'sound/machines/twobeep.ogg', 75, 1)
 	else
 		audible_message("<span class='newscaster'><EM>[src.name]</EM> beeps, \"Attention! Wanted issue distributed!\"</span>")

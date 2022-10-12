@@ -9,7 +9,6 @@
 	available_bodytypes = list(/decl/bodytype/monkey)
 	holder_icon = 'icons/mob/human_races/species/monkey/holder.dmi'
 
-	greater_form = SPECIES_HUMAN
 	mob_size = MOB_SIZE_SMALL
 	show_ssd = null
 

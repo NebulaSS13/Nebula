@@ -182,7 +182,7 @@ var/global/list/natural_walls = list()
 	var/shine
 	if(material?.reflectiveness > 0)
 		max_shine = 0.6 * ReadHSV(RGBtoHSV(material.color))[3] // patened formula based on color's Value (in HSV)
-		shine = Clamp((material.reflectiveness * 0.01) * 255, 10, max_shine)
+		shine = clamp((material.reflectiveness * 0.01) * 255, 10, max_shine)
 
 	var/image/I
 	for(var/i = 1 to 4)
@@ -205,10 +205,9 @@ var/global/list/natural_walls = list()
 
 /turf/exterior/wall/proc/dismantle_wall()
 	if(reinf_material?.ore_result_amount)
-		for(var/i = 1 to reinf_material.ore_result_amount)
-			pass_geodata_to(new /obj/item/ore(src, reinf_material.type))
+		pass_geodata_to(new /obj/item/stack/material/ore(src, reinf_material.ore_result_amount, reinf_material.type))
 	if(prob(MAT_DROP_CHANCE))
-		pass_geodata_to(new /obj/item/ore(src, material.type))
+		pass_geodata_to(new /obj/item/stack/material/ore(src, 1, material.type))
 	destroy_artifacts(null, INFINITY)
 	playsound(src, 'sound/items/Welder.ogg', 100, 1)
 	. = ChangeTurf(floor_type || get_base_turf_by_area(src))

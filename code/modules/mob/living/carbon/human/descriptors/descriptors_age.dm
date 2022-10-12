@@ -53,13 +53,13 @@
 
 /datum/appearance_descriptor/age/sanitize_value(var/value, var/chargen_bound = TRUE)
 	if(!chargen_bound)
-		return Clamp(round(value), standalone_value_descriptors[standalone_value_descriptors[1]], standalone_value_descriptors[standalone_value_descriptors[length(standalone_value_descriptors)]])
+		return clamp(round(value), standalone_value_descriptors[standalone_value_descriptors[1]], standalone_value_descriptors[standalone_value_descriptors[length(standalone_value_descriptors)]])
 	return ..()
 
 /datum/appearance_descriptor/age/get_min_chargen_value()
 	var/age_key = standalone_value_descriptors[chargen_min_index]
 	return standalone_value_descriptors[age_key]
-	
+
 /datum/appearance_descriptor/age/get_max_chargen_value()
 	var/age_key = standalone_value_descriptors[min(length(standalone_value_descriptors), chargen_max_index+1)]
 	. = standalone_value_descriptors[age_key]-1

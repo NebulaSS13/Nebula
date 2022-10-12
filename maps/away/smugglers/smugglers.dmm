@@ -479,8 +479,8 @@
 /turf/simulated/floor/asteroid,
 /area/mine/explored)
 "bo" = (
-/obj/item/ore/silver,
-/obj/item/ore/silver{
+/obj/item/stack/material/ore/silver,
+/obj/item/stack/material/ore/silver{
 	pixel_x = 10;
 	pixel_y = -5
 	},
@@ -561,12 +561,12 @@
 /turf/simulated/wall/r_wall,
 /area/smugglers/office)
 "bx" = (
-/obj/item/ore/slag,
-/obj/item/ore/slag{
+/obj/item/stack/material/ore/slag,
+/obj/item/stack/material/ore/slag{
 	pixel_x = 5;
 	pixel_y = -2
 	},
-/obj/item/ore/slag,
+/obj/item/stack/material/ore/slag,
 /turf/simulated/floor,
 /area/smugglers/base)
 "by" = (
@@ -955,7 +955,7 @@
 /obj/structure/hygiene/sink{
 	pixel_y = 15
 	},
-/obj/item/storage/mirror{
+/obj/structure/mirror{
 	pixel_y = 30
 	},
 /obj/random/soap,

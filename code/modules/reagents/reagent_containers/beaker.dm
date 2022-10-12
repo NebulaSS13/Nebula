@@ -10,12 +10,12 @@
 	applies_material_colour = TRUE
 	material_force_multiplier = 0.25
 	atom_flags = ATOM_FLAG_OPEN_CONTAINER
-	show_reagent_name = TRUE
+	presentation_flags = PRESENTATION_FLAG_NAME
 	var/lid_color = COLOR_BEASTY_BROWN
 
-/obj/item/chems/glass/beaker/Initialize()
+/obj/item/chems/glass/beaker/examine(mob/user, distance)
 	. = ..()
-	desc += " It can hold up to [volume] units."
+	to_chat(user, " It can hold up to [volume] units.")
 
 /obj/item/chems/glass/beaker/pickup(mob/user)
 	..()
@@ -99,7 +99,7 @@
 	volume = 60
 	amount_per_transfer_from_this = 10
 	atom_flags = ATOM_FLAG_NO_TEMP_CHANGE | ATOM_FLAG_OPEN_CONTAINER | ATOM_FLAG_NO_REACT
-	show_reagent_name = TRUE
+	presentation_flags = PRESENTATION_FLAG_NAME
 	material = /decl/material/solid/metal/steel
 	applies_material_name = FALSE
 	applies_material_colour = FALSE
@@ -149,7 +149,7 @@
 	matter = list(/decl/material/solid/plastic = MATTER_AMOUNT_REINFORCEMENT)
 	possible_transfer_amounts = @"[5,10,15,30]"
 	atom_flags = ATOM_FLAG_NO_TEMP_CHANGE | ATOM_FLAG_OPEN_CONTAINER
-	show_reagent_name = TRUE
+	presentation_flags = PRESENTATION_FLAG_NAME
 	applies_material_colour = FALSE
 	temperature_coefficient = 1
 	material = /decl/material/solid/metal/steel
@@ -164,7 +164,5 @@
 	matter = list(/decl/material/solid/plastic = MATTER_AMOUNT_REINFORCEMENT)
 	volume = 120
 
-/obj/item/chems/glass/beaker/sulphuric/Initialize()
-	. = ..()
-	reagents.add_reagent(/decl/material/liquid/acid, 60)
-	update_icon()
+/obj/item/chems/glass/beaker/sulphuric/populate_reagents()
+	reagents.add_reagent(/decl/material/liquid/acid, reagents.maximum_volume)

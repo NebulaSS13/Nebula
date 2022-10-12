@@ -5,6 +5,7 @@
 	speak = list("Hsssssssszsht.", "Hsssssssss...", "Tcshsssssssszht!")
 	speak_emote = list("hisses")
 	emote_hear = list("wails","screeches")
+	base_animal_type = /mob/living/simple_animal/construct
 
 	response_help_1p = "You think better of touching $TARGET$."
 	response_help_3p = "$USER$ thinks better of touching $TARGET$."
@@ -40,7 +41,6 @@
 	z_flags = ZMM_MANGLE_PLANES
 	glowing_eyes = TRUE
 
-	var/nullblock = 0
 	var/list/construct_spells = list()
 
 /mob/living/simple_animal/construct/cultify()
@@ -93,6 +93,7 @@
 	gender = PLURAL
 	icon = 'icons/obj/items/ectoplasm.dmi'
 	icon_state = ICON_STATE_WORLD
+	material = /decl/material/liquid/drink/compote
 
 /////////////////Juggernaut///////////////
 
@@ -222,8 +223,6 @@
 	speed = 5
 	environment_smash = 2
 	resistance = 10
-	var/energy = 0
-	var/max_energy = 1000
 	construct_spells = list(/spell/aoe_turf/conjure/forcewall/lesser)
 	can_escape = TRUE
 

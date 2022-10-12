@@ -25,6 +25,7 @@
 	can_escape = TRUE
 	can_pull_size = ITEM_SIZE_TINY
 	can_pull_mobs = MOB_PULL_NONE
+	base_animal_type = /mob/living/simple_animal/mouse
 
 	meat_amount =   1
 	bone_amount =   1

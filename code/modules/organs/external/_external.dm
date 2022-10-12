@@ -676,19 +676,28 @@ This function completely restores a damaged organ to perfect condition.
 
 //Determines if we even need to process this organ.
 /obj/item/organ/external/proc/need_process()
-	if(get_pain())
-		return 1
+
 	if(length(ailments))
-		return 1
-	if(status & (ORGAN_CUT_AWAY|ORGAN_BLEEDING|ORGAN_BROKEN|ORGAN_DEAD|ORGAN_MUTATED))
-		return 1
+		return TRUE
+
+	if(status & (ORGAN_CUT_AWAY|ORGAN_BLEEDING|ORGAN_BROKEN|ORGAN_DEAD|ORGAN_MUTATED|ORGAN_DISLOCATED))
+		return TRUE
+
 	if((brute_dam || burn_dam) && !BP_IS_PROSTHETIC(src)) //Robot limbs don't autoheal and thus don't need to process when damaged
-		return 1
+		return TRUE
+
+	if(get_genetic_damage())
+		return TRUE
+
+	for(var/obj/item/organ/internal/I in internal_organs)
+		if(I.getToxLoss())
+			return TRUE
+
 	if(last_dam != brute_dam + burn_dam) // Process when we are fully healed up.
 		last_dam = brute_dam + burn_dam
-		return 1
-	else
-		last_dam = brute_dam + burn_dam
+		return TRUE
+
+	last_dam = brute_dam + burn_dam
 	if(germ_level)
 		return 1
 	return 0
@@ -1241,7 +1250,11 @@ Note that amputating the affected organ does in fact remove the infection from t
 	if(species)
 		return species.get_manual_dexterity(owner)
 
-/obj/item/organ/external/robotize(var/company, var/skip_prosthetics = 0, var/keep_organs = 0, var/apply_material = /decl/material/solid/metal/steel, var/check_bodytype, var/check_species)
+//Completely override, so we can slap in the model
+/obj/item/organ/external/setup_as_prosthetic()
+	. = ..(model ? model : /decl/prosthetics_manufacturer/basic_human)
+
+/obj/item/organ/external/robotize(var/company = /decl/prosthetics_manufacturer/basic_human, var/skip_prosthetics = 0, var/keep_organs = 0, var/apply_material = /decl/material/solid/metal/steel, var/check_bodytype, var/check_species)
 	. = ..()
 
 	slowdown = 0
@@ -1259,7 +1272,7 @@ Note that amputating the affected organ does in fact remove the infection from t
 		//Handling for paths
 		if(!ispath(company))
 			PRINT_STACK_TRACE("Limb [type] robotize() was supplied a null or non-decl manufacturer: '[company]'")
-			company = /decl/prosthetics_manufacturer
+			company = /decl/prosthetics_manufacturer/basic_human
 		R = GET_DECL(company)
 
 	if(!check_species)
@@ -1276,8 +1289,8 @@ Note that amputating the affected organ does in fact remove the infection from t
 
 	//If can't install fallback to defaults.
 	if(!R.check_can_install(organ_tag, check_bodytype, check_species))
-		company = /decl/prosthetics_manufacturer
-		R = GET_DECL(/decl/prosthetics_manufacturer)
+		company = /decl/prosthetics_manufacturer/basic_human
+		R = GET_DECL(company)
 
 	model = company
 	name = "[R ? R.modifier_string : "robotic"] [initial(name)]"
@@ -1320,11 +1333,17 @@ Note that amputating the affected organ does in fact remove the infection from t
 
 /obj/item/organ/external/is_usable()
 	. = ..()
-	. = . && !is_malfunctioning()
-	. = . && (!is_broken() || splinted)
-	. = . && !(status & ORGAN_TENDON_CUT)
-	. = . && (!can_feel_pain() || get_pain() < pain_disability_threshold)
-	. = . && brute_ratio < 1 && burn_ratio < 1
+	if(.)
+		if(is_malfunctioning())
+			return FALSE
+		if(is_broken() && !splinted)
+			return FALSE
+		if(status & ORGAN_TENDON_CUT)
+			return FALSE
+		if(brute_ratio >= 1 || burn_ratio >= 1)
+			return FALSE
+		if(get_pain() >= pain_disability_threshold)
+			return FALSE
 
 /obj/item/organ/external/proc/is_malfunctioning()
 	return (is_robotic() && (brute_dam + burn_dam) >= 10 && prob(brute_dam + burn_dam))
@@ -1521,7 +1540,7 @@ Note that amputating the affected organ does in fact remove the infection from t
 		to_chat(owner, "<span class='danger'>You feel extreme pain!</span>")
 
 		var/max_halloss = round(owner.species.total_health * 0.8 * ((100 - armor) / 100)) //up to 80% of passing out, further reduced by armour
-		add_pain(Clamp(0, max_halloss - owner.getHalLoss(), 30))
+		add_pain(clamp(0, max_halloss - owner.getHalLoss(), 30))
 
 //Adds autopsy data for used_weapon.
 /obj/item/organ/external/proc/add_autopsy_data(var/used_weapon, var/damage)

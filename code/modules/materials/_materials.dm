@@ -176,7 +176,6 @@ INITIALIZE_IMMEDIATE(/obj/effect/gas_overlay)
 	// Mining behavior.
 	var/ore_name
 	var/ore_desc
-	var/ore_smelts_to
 	var/ore_compresses_to
 	var/ore_result_amount
 	var/ore_spread_chance
@@ -303,6 +302,8 @@ INITIALIZE_IMMEDIATE(/obj/effect/gas_overlay)
 // Make sure we have a use name and shard icon even if they aren't explicitly set.
 /decl/material/Initialize()
 	. = ..()
+	if(!name)
+		CRASH("Unnamed material /decl tried to initialize.")
 	if(!use_name)
 		use_name = name
 	if(!liquid_name)
@@ -374,7 +375,7 @@ INITIALIZE_IMMEDIATE(/obj/effect/gas_overlay)
 		return MAT_PHASE_LIQUID
 	return MAT_PHASE_SOLID
 
-// Returns the phase of matter this material is a standard temperature and pressure (20c at one atmosphere)
+/// Returns the phase of matter this material is at standard temperature and pressure (20c at one atmosphere)
 /decl/material/proc/phase_at_stp()
 	return phase_at_temperature(T20C, ONE_ATMOSPHERE)
 
@@ -425,9 +426,29 @@ INITIALIZE_IMMEDIATE(/obj/effect/gas_overlay)
 		return create_object(target, amount, object_type = drop_type)
 
 // As above.
-/decl/material/proc/place_shard(var/turf/target)
+/decl/material/proc/place_shards(var/turf/target, var/amount = 1)
 	if(shard_type)
-		return create_object(target, 1, /obj/item/shard)
+		return create_object(target, amount, /obj/item/shard)
+
+/**Places downa as many shards as needed for the given amount of matter units. Returns a list of all the cuttings. */
+/decl/material/proc/place_cuttings(var/turf/target, var/matter_units)
+	if(!shard_type && matter_units <= 0)
+		return
+	var/list/shard_mat = atom_info_repository.get_matter_for(shard_type, type, 1)
+	var/amount_per_shard = LAZYACCESS(shard_mat, type)
+	if(amount_per_shard < 1)
+		return
+
+	//Make all the shards we can
+	var/shard_amount = round(matter_units / amount_per_shard)
+	var/matter_left  = round(matter_units % amount_per_shard)
+	LAZYADD(., create_object(target, shard_amount, shard_type))
+
+	//If we got more than expected, just make a shard with that amount
+	if(matter_left > 0)
+		var/obj/S = create_object(target, 1, shard_type)
+		LAZYSET(S.matter, type, matter_left)
+		LAZYADD(., S)
 
 // Used by walls and weapons to determine if they break or not.
 /decl/material/proc/is_brittle()
@@ -507,44 +528,48 @@ INITIALIZE_IMMEDIATE(/obj/effect/gas_overlay)
 			T.assume_gas(vapor, (volume * vapor_products[vapor]), temperature)
 		holder.remove_reagent(type, volume)
 
-/decl/material/proc/on_mob_life(var/mob/living/M, var/alien, var/location, var/datum/reagents/holder) // Currently, on_mob_life is called on carbons. Any interaction with non-carbon mobs (lube) will need to be done in touch_mob.
+/decl/material/proc/on_mob_life(var/mob/living/M, var/metabolism_class, var/datum/reagents/holder, var/list/life_dose_tracker)
+
 	if(QDELETED(src))
 		return // Something else removed us.
 	if(!istype(M))
 		return
 	if(!(flags & AFFECTS_DEAD) && M.stat == DEAD && (world.time - M.timeofdeath > 150))
 		return
-	if(overdose && (location != CHEM_TOUCH))
-		var/overdose_threshold = overdose * (flags & IGNORE_MOB_SIZE? 1 : MOB_SIZE_MEDIUM/M.mob_size)
-		if(REAGENT_VOLUME(holder, type) > overdose_threshold)
-			affect_overdose(M, alien, holder)
+
+	// Keep track of dosage of chems across holders for overdosing purposes
+	if(overdose && metabolism_class != CHEM_TOUCH && islist(life_dose_tracker))
+		life_dose_tracker[src] += REAGENT_VOLUME(holder, type)
 
 	//determine the metabolism rate
-	var/removed = metabolism
-	if(ingest_met && (location == CHEM_INGEST))
-		removed = ingest_met
-	if(touch_met && (location == CHEM_TOUCH))
-		removed = touch_met
+	var/removed
+	switch(metabolism_class)
+		if(CHEM_INGEST)
+			removed = ingest_met
+		if(CHEM_TOUCH)
+			removed = touch_met
+	if(!removed)
+		removed = metabolism
 	removed = M.get_adjusted_metabolism(removed)
 
 	//adjust effective amounts - removed, dose, and max_dose - for mob size
 	var/effective = removed
-	if(!(flags & IGNORE_MOB_SIZE) && location != CHEM_TOUCH)
+	if(!(flags & IGNORE_MOB_SIZE) && metabolism_class != CHEM_TOUCH)
 		effective *= (MOB_SIZE_MEDIUM/M.mob_size)
 
 	var/dose = LAZYACCESS(M.chem_doses, type) + effective
 	LAZYSET(M.chem_doses, type, dose)
 	if(effective >= (metabolism * 0.1) || effective >= 0.1) // If there's too little chemical, don't affect the mob, just remove it
-		switch(location)
+		switch(metabolism_class)
 			if(CHEM_INJECT)
-				affect_blood(M, alien, effective, holder)
+				affect_blood(M, effective, holder)
 			if(CHEM_INGEST)
-				affect_ingest(M, alien, effective, holder)
+				affect_ingest(M, effective, holder)
 			if(CHEM_TOUCH)
-				affect_touch(M, alien, effective, holder)
+				affect_touch(M, effective, holder)
 	holder.remove_reagent(type, removed)
 
-/decl/material/proc/affect_blood(var/mob/living/M, var/alien, var/removed, var/datum/reagents/holder)
+/decl/material/proc/affect_blood(var/mob/living/M, var/removed, var/datum/reagents/holder)
 	if(radioactivity)
 		M.apply_damage(radioactivity * removed, IRRADIATE, armor_pen = 100)
 
@@ -578,11 +603,11 @@ INITIALIZE_IMMEDIATE(/obj/effect/gas_overlay)
 	if(euphoriant)
 		SET_STATUS_MAX(M, STAT_DRUGGY, euphoriant)
 
-/decl/material/proc/affect_ingest(var/mob/living/M, var/alien, var/removed, var/datum/reagents/holder)
+/decl/material/proc/affect_ingest(var/mob/living/M, var/removed, var/datum/reagents/holder)
 	if(affect_blood_on_ingest)
-		affect_blood(M, alien, removed * 0.5, holder)
+		affect_blood(M, removed * 0.5, holder)
 
-/decl/material/proc/affect_touch(var/mob/living/M, var/alien, var/removed, var/datum/reagents/holder)
+/decl/material/proc/affect_touch(var/mob/living/M, var/removed, var/datum/reagents/holder)
 
 	if(!istype(M))
 		return
@@ -653,7 +678,7 @@ INITIALIZE_IMMEDIATE(/obj/effect/gas_overlay)
 		if(!M.unacidable)
 			M.take_organ_damage(0, min(removed * solvent_power * ((removed < solvent_melt_dose) ? 0.1 : 0.2), solvent_max_damage), override_droplimb = DISMEMBER_METHOD_ACID)
 
-/decl/material/proc/affect_overdose(var/mob/living/M, var/alien, var/datum/reagents/holder) // Overdose effect. Doesn't happen instantly.
+/decl/material/proc/affect_overdose(var/mob/living/M) // Overdose effect. Doesn't happen instantly.
 	M.add_chemical_effect(CE_TOXIN, 1)
 	M.adjustToxLoss(REM)
 
@@ -687,13 +712,26 @@ INITIALIZE_IMMEDIATE(/obj/effect/gas_overlay)
 	if(prop.reagents.has_reagent(/decl/material/solid/ice))
 		. = "iced [.]"
 
+/decl/material/proc/get_presentation_desc(var/obj/item/prop)
+	. = glass_desc
+	if(prop?.reagents?.total_volume)
+		. = build_presentation_desc_from_reagents(prop, .)
+
+/decl/material/proc/build_presentation_desc_from_reagents(var/obj/item/prop, var/supplied)
+	. = supplied
+
+	if(cocktail_ingredient)
+		for(var/decl/cocktail/cocktail in SSmaterials.get_cocktails_by_primary_ingredient(type))
+			if(cocktail.matches(prop))
+				return cocktail.get_presentation_desc(prop)
+
 /decl/material/proc/neutron_interact(var/neutron_energy, var/total_interacted_units, var/total_units)
 	. = list() // Returns associative list of interaction -> interacted units
 	if(!length(neutron_interactions))
 		return
 	for(var/interaction in neutron_interactions)
 		var/ideal_energy = neutron_interactions[interaction]
-		var/interacted_units_ratio = (Clamp(-((((neutron_energy-ideal_energy)**2)/(neutron_cross_section*1000)) - 100), 0, 100))/100
+		var/interacted_units_ratio = (clamp(-((((neutron_energy-ideal_energy)**2)/(neutron_cross_section*1000)) - 100), 0, 100))/100
 		var/interacted_units = round(interacted_units_ratio*total_interacted_units, 0.001)
 
 		if(interacted_units > 0)

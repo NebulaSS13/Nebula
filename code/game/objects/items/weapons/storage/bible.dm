@@ -8,8 +8,7 @@
 	w_class = ITEM_SIZE_NORMAL
 	max_w_class = ITEM_SIZE_SMALL
 	max_storage_space = 4
-	var/mob/affecting = null
-	var/deity_name = "Christ"
+	material = /decl/material/solid/cardboard
 	var/renamed = 0
 	var/icon_changed = 0
 

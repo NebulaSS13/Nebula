@@ -170,13 +170,13 @@
 			E.set_dna(H.dna)
 
 		//Hair
-		var/list/hair_subtypes = subtypesof(/decl/sprite_accessory/hair)
+		var/list/hair_subtypes = decls_repository.get_decl_paths_of_subtype(/decl/sprite_accessory/hair)
 		var/hair = dna.GetUIValueRange(DNA_UI_HAIR_STYLE, length(hair_subtypes))
 		if(hair > 0 && hair <= length(hair_subtypes))
 			H.h_style = hair_subtypes[hair]
 
 		//Facial Hair
-		var/list/beard_subtypes = subtypesof(/decl/sprite_accessory/facial_hair)
+		var/list/beard_subtypes = decls_repository.get_decl_paths_of_subtype(/decl/sprite_accessory/facial_hair)
 		var/beard = dna.GetUIValueRange(DNA_UI_BEARD_STYLE, length(beard_subtypes))
 		if((0 < beard) && (beard <= length(beard_subtypes)))
 			H.f_style = beard_subtypes[beard]

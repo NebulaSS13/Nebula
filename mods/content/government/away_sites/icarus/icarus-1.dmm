@@ -22,14 +22,14 @@
 /turf/simulated/floor/plating,
 /area/icarus/vessel)
 "ai" = (
-/obj/item/ore/slag,
+/obj/item/stack/material/ore/slag,
 /turf/simulated/floor/plating,
 /area/icarus/vessel)
 "aj" = (
 /turf/simulated/floor/wood,
 /area/icarus/vessel)
 "ak" = (
-/obj/item/ore/slag,
+/obj/item/stack/material/ore/slag,
 /turf/simulated/floor/wood,
 /area/icarus/vessel)
 "al" = (
@@ -82,7 +82,7 @@
 /turf/simulated/floor/wood,
 /area/icarus/vessel)
 "ax" = (
-/obj/item/ore/slag,
+/obj/item/stack/material/ore/slag,
 /turf/exterior/wildgrass,
 /area/icarus/open)
 "ay" = (
@@ -1456,7 +1456,7 @@
 /obj/effect/decal/cleanable/dirt,
 /obj/effect/decal/cleanable/dirt,
 /obj/effect/decal/cleanable/dirt,
-/obj/item/ore/slag,
+/obj/item/stack/material/ore/slag,
 /turf/unsimulated/beach/sand,
 /area/icarus/open)
 "eS" = (
@@ -1488,7 +1488,7 @@
 /obj/effect/decal/cleanable/dirt,
 /obj/effect/decal/cleanable/dirt,
 /obj/effect/decal/cleanable/dirt,
-/obj/item/ore/slag,
+/obj/item/stack/material/ore/slag,
 /turf/unsimulated/beach/sand,
 /area/icarus/open)
 "eV" = (
@@ -1694,7 +1694,7 @@
 /area/icarus/open)
 "fs" = (
 /obj/effect/decal/cleanable/dirt,
-/obj/item/ore/slag,
+/obj/item/stack/material/ore/slag,
 /turf/unsimulated/beach/sand,
 /area/icarus/open)
 "ft" = (
@@ -2531,7 +2531,7 @@
 "ie" = (
 /obj/effect/decal/cleanable/dirt,
 /obj/effect/decal/cleanable/dirt,
-/obj/item/ore/slag,
+/obj/item/stack/material/ore/slag,
 /turf/unsimulated/beach/sand,
 /area/icarus/open)
 "if" = (
@@ -2540,7 +2540,7 @@
 /obj/effect/decal/cleanable/dirt,
 /obj/effect/decal/cleanable/dirt,
 /obj/effect/decal/cleanable/dirt,
-/obj/item/ore/slag,
+/obj/item/stack/material/ore/slag,
 /turf/unsimulated/beach/sand,
 /area/icarus/open)
 "ig" = (
@@ -2565,7 +2565,7 @@
 /obj/effect/decal/cleanable/dirt,
 /obj/effect/decal/cleanable/dirt,
 /obj/effect/decal/cleanable/dirt,
-/obj/item/ore/slag,
+/obj/item/stack/material/ore/slag,
 /turf/unsimulated/beach/sand,
 /area/icarus/open)
 "ij" = (
@@ -2604,7 +2604,7 @@
 /obj/effect/decal/cleanable/dirt,
 /obj/effect/decal/cleanable/dirt,
 /obj/effect/decal/cleanable/dirt,
-/obj/item/ore/slag,
+/obj/item/stack/material/ore/slag,
 /turf/unsimulated/beach/sand,
 /area/icarus/open)
 "io" = (
@@ -2633,13 +2633,13 @@
 	dir = 1;
 	pixel_y = 16
 	},
-/obj/item/storage/mirror{
+/obj/structure/mirror{
 	pixel_y = 30
 	},
 /turf/simulated/floor/tiled/white,
 /area/icarus/vessel)
 "nb" = (
-/obj/item/storage/mirror{
+/obj/structure/mirror{
 	pixel_x = 30
 	},
 /obj/structure/hygiene/sink{
@@ -2649,7 +2649,7 @@
 /turf/simulated/floor/tiled/white,
 /area/icarus/vessel)
 "ob" = (
-/obj/item/storage/mirror{
+/obj/structure/mirror{
 	pixel_x = -30
 	},
 /obj/structure/hygiene/sink{

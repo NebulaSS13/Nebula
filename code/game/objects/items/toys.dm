@@ -29,6 +29,7 @@
 	throw_speed = 4
 	throw_range = 20
 	force = 0
+	material = /decl/material/solid/plastic
 
 /*
  * Balloons
@@ -617,14 +618,15 @@
 	edge = 0
 	sharp = 0
 
-/obj/item/inflatable_duck
+/obj/item/inflatable_duck //#TODO: Move under obj/item/toy ?
 	name = "inflatable duck"
 	desc = "No bother to sink or swim when you can just float!"
 	icon = 'icons/clothing/belt/inflatable.dmi'
 	icon_state = ICON_STATE_WORLD
 	slot_flags = SLOT_LOWER_BODY
+	material = /decl/material/solid/plastic
 
-/obj/item/marshalling_wand
+/obj/item/marshalling_wand //#TODO: Move under obj/item/toy ?
 	name = "marshalling wand"
 	desc = "An illuminated, hand-held baton used by hangar personnel to visually signal shuttle pilots. The signal changes depending on your intent."
 	icon_state = "marshallingwand"
@@ -634,6 +636,7 @@
 	w_class = ITEM_SIZE_SMALL
 	force = 1
 	attack_verb = list("attacked", "whacked", "jabbed", "poked", "marshalled")
+	material = /decl/material/solid/plastic
 
 /obj/item/marshalling_wand/Initialize()
 	set_light(1.5, 1.5, "#ff0000")

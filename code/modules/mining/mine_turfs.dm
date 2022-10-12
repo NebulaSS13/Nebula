@@ -83,10 +83,10 @@ var/global/list/mining_floors = list()
 		to_chat(user, "<span class='notice'>You dug a hole.</span>")
 		gets_dug()
 
-	else if(istype(W,/obj/item/storage/ore))
+	else if(istype(W,/obj/item/storage/ore)) //#FIXME: Its kinda silly to put this in a specific turf's subtype's attackby.
 		var/obj/item/storage/ore/S = W
 		if(S.collection_mode)
-			for(var/obj/item/ore/O in contents)
+			for(var/obj/item/stack/material/ore/O in contents)
 				return O.attackby(W,user)
 	else if(istype(W,/obj/item/storage/bag/fossils))
 		var/obj/item/storage/bag/fossils/S = W
@@ -100,8 +100,7 @@ var/global/list/mining_floors = list()
 /turf/simulated/floor/asteroid/proc/gets_dug()
 	if(dug)
 		return
-	for(var/i=0;i<(rand(3)+2);i++)
-		LAZYADD(., new/obj/item/ore/glass(src))
+	LAZYADD(., new /obj/item/stack/material/ore/glass(src, (rand(3) + 2)))
 	dug = TRUE
 	icon_state = "asteroid_dug"
 

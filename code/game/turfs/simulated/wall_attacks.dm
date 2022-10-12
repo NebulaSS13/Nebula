@@ -70,7 +70,7 @@
 		if(reinf_material)
 			to_chat(user, "<span class='danger'>\The [reinf_material.solid_name] feels porous and crumbly.</span>")
 		else
-			to_chat(user, "<span class='danger'>\The [material.solid_name] crumbles under your touch!</span>")
+			to_chat(user, "<span class='danger'>\The [material.solid_name] [material.rotting_touch_message]!</span>")
 			dismantle_wall()
 			return
 

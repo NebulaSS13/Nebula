@@ -20,12 +20,10 @@
 	construct_state = /decl/machine_construction/wall_frame/panel_closed/simple
 	frame_type = /obj/item/frame/button/light_switch
 	uncreated_component_parts = list(
-		/obj/item/stock_parts/power/apc/buildable
+		/obj/item/stock_parts/power/apc
 	)
-	base_type = /obj/machinery/light_switch/buildable
-
-/obj/machinery/light_switch/buildable
-	uncreated_component_parts = null
+	base_type = /obj/machinery/light_switch
+	directional_offset = "{'NORTH':{'y':-20}, 'SOUTH':{'y':25}, 'EAST':{'x':-24}, 'WEST':{'x':24}}"
 
 /obj/machinery/light_switch/on
 	on = TRUE
@@ -83,5 +81,5 @@
 	. = ..()
 	if(!.)
 		to_chat(user, SPAN_NOTICE("You flick \the [src] with \the [I]."))
-		interface_interact(user)
+		interface_interact(user) 
 		return TRUE

@@ -110,7 +110,7 @@
 		/obj/item/chems/syringe,
 		/obj/item/gripper/chemistry,
 		/obj/item/extinguisher/mini,
-		/obj/item/taperoll/medical,
+		/obj/item/stack/tape_roll/barricade_tape/medical,
 		/obj/item/inflatable_dispenser/robot,
 		/obj/item/stack/medical/ointment,
 		/obj/item/stack/medical/bruise_pack,

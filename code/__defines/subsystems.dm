@@ -20,22 +20,24 @@
 // Subsystems shutdown in the reverse of the order they initialize in
 // The numbers just define the ordering, they are meaningless otherwise.
 
-#define SS_INIT_INPUT            20
-#define SS_INIT_WEBHOOKS         19
-#define SS_INIT_MODPACKS         18
-#define SS_INIT_SECRETS          17
-#define SS_INIT_GARBAGE          16
-#define SS_INIT_MATERIALS        15
-#define SS_INIT_PLANTS           14
-#define SS_INIT_LORE             13
-#define SS_INIT_MISC             12
-#define SS_INIT_SKYBOX           11
-#define SS_INIT_MAPPING          10
-#define SS_INIT_JOBS             9
-#define SS_INIT_CIRCUIT          8
-#define SS_INIT_GRAPH            7
-#define SS_INIT_OPEN_SPACE       6
-#define SS_INIT_ATOMS            5
+#define SS_INIT_INPUT            22
+#define SS_INIT_EARLY            21
+#define SS_INIT_WEBHOOKS         20
+#define SS_INIT_MODPACKS         19
+#define SS_INIT_SECRETS          18
+#define SS_INIT_GARBAGE          17
+#define SS_INIT_MATERIALS        16
+#define SS_INIT_PLANTS           15
+#define SS_INIT_LORE             14
+#define SS_INIT_MISC             13
+#define SS_INIT_SKYBOX           12
+#define SS_INIT_MAPPING          11
+#define SS_INIT_JOBS             10
+#define SS_INIT_CIRCUIT          9
+#define SS_INIT_GRAPH            8
+#define SS_INIT_OPEN_SPACE       7
+#define SS_INIT_ATOMS            6
+#define SS_INIT_PRE_CHAR_SETUP   5
 #define SS_INIT_CHAR_SETUP       4
 #define SS_INIT_MACHINES         3
 #define SS_INIT_ICON_UPDATE      2
