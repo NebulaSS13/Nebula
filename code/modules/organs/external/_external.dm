@@ -1250,13 +1250,11 @@ Note that amputating the affected organ does in fact remove the infection from t
 	if(species)
 		return species.get_manual_dexterity(owner)
 
-/obj/item/organ/external/can_feel_pain()
-	var/decl/prosthetics_manufacturer/R = GET_DECL(model)
-	if(R)
-		return R.can_feel_pain
-	return ..()
+//Completely override, so we can slap in the model
+/obj/item/organ/external/setup_as_prosthetic()
+	. = ..(model ? model : /decl/prosthetics_manufacturer/basic_human)
 
-/obj/item/organ/external/robotize(var/company, var/skip_prosthetics = 0, var/keep_organs = 0, var/apply_material = /decl/material/solid/metal/steel, var/check_bodytype, var/check_species)
+/obj/item/organ/external/robotize(var/company = /decl/prosthetics_manufacturer/basic_human, var/skip_prosthetics = 0, var/keep_organs = 0, var/apply_material = /decl/material/solid/metal/steel, var/check_bodytype, var/check_species)
 	. = ..()
 
 	slowdown = 0
@@ -1274,7 +1272,7 @@ Note that amputating the affected organ does in fact remove the infection from t
 		//Handling for paths
 		if(!ispath(company))
 			PRINT_STACK_TRACE("Limb [type] robotize() was supplied a null or non-decl manufacturer: '[company]'")
-			company = /decl/prosthetics_manufacturer
+			company = /decl/prosthetics_manufacturer/basic_human
 		R = GET_DECL(company)
 
 	if(!check_species)
@@ -1291,8 +1289,8 @@ Note that amputating the affected organ does in fact remove the infection from t
 
 	//If can't install fallback to defaults.
 	if(!R.check_can_install(organ_tag, check_bodytype, check_species))
-		company = /decl/prosthetics_manufacturer
-		R = GET_DECL(/decl/prosthetics_manufacturer)
+		company = /decl/prosthetics_manufacturer/basic_human
+		R = GET_DECL(company)
 
 	model = company
 	name = "[R ? R.modifier_string : "robotic"] [initial(name)]"

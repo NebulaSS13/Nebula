@@ -62,7 +62,7 @@
 
 	var/modified_list = FALSE
 	while(get_aspect_total() > config.max_character_aspects)
-	
+
 		// Find a costly aspect with no children to drop until our cost is below the threshold.
 		var/can_drop_aspect = FALSE
 		for(var/aspect_type in pref.aspects)
@@ -93,6 +93,8 @@
 	var/list/available_categories = list()
 	for(var/aspect_category in global.aspect_categories)
 		var/datum/aspect_category/AC = global.aspect_categories[aspect_category]
+		if(AC.hide_from_chargen)
+			continue
 		for(var/decl/aspect/aspect as anything in AC.aspects)
 			if(aspect.is_available_to(pref))
 				available_categories[AC.name] = AC

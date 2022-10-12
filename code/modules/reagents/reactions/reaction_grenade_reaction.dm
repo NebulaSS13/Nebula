@@ -1,6 +1,7 @@
 /decl/chemical_reaction/grenade_reaction
 	result = null
 	abstract_type = /decl/chemical_reaction/grenade_reaction
+	result_amount = 1
 
 /decl/chemical_reaction/grenade_reaction/explosion_potassium
 	name = "Explosion"

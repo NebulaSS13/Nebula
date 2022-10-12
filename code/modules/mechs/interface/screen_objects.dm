@@ -189,8 +189,9 @@
 /obj/screen/exosuit/power
 	name = "power"
 	icon_state = null
-
+	maptext_x = -16
 	maptext_width = 64
+	maptext_y = -8
 
 /obj/screen/exosuit/toggle
 	name = "toggle"
