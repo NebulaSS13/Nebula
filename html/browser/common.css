@@ -78,6 +78,19 @@ a.icon img, .linkOn.icon img
 	height: 18px;
 }
 
+table, th, td 
+{
+	border: 1px solid;
+	border-color: #48656c;
+	border-collapse: collapse;
+	padding: 3px;
+}
+
+th 
+{
+	background-color: #48656c;
+}
+
 ul
 {
 	padding: 4px 0 0 10px;
