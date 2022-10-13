@@ -8,7 +8,7 @@
 	item_state = ""
 	w_class = ITEM_SIZE_SMALL
 	material = /decl/material/solid/plastic
-	item_flags = ITEM_FLAG_HOLLOW
+	obj_flags = OBJ_FLAG_HOLLOW
 	var/obj/item/stored_item = null
 
 /obj/item/evidencebag/handle_mouse_drop(atom/over, mob/user)

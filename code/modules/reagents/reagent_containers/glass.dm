@@ -12,7 +12,7 @@
 	volume = 60
 	w_class = ITEM_SIZE_SMALL
 	atom_flags = ATOM_FLAG_OPEN_CONTAINER
-	item_flags = ITEM_FLAG_HOLLOW
+	obj_flags = OBJ_FLAG_HOLLOW
 	unacidable = 1 //glass doesn't dissolve in acid
 
 	drop_sound = 'sound/foley/bottledrop1.ogg'

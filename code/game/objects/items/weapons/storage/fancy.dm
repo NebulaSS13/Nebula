@@ -12,7 +12,7 @@
 /obj/item/storage/fancy
 	item_state = "syringe_kit" //placeholder, many of these don't have inhands
 	opened = 0 //if an item has been removed from this container
-	item_flags = ITEM_FLAG_HOLLOW
+	obj_flags = OBJ_FLAG_HOLLOW
 	material = /decl/material/solid/cardboard
 	var/obj/item/key_type //path of the key item that this "fancy" container is meant to store
 

@@ -29,7 +29,7 @@
 	matter = list( 
 		/decl/material/solid/plastic = MATTER_AMOUNT_SECONDARY
 	)
-	item_flags = ITEM_FLAG_HOLLOW
+	obj_flags = OBJ_FLAG_HOLLOW
 	var/spam_flag = 0
 	var/audio_files = list("sound/items/bikehorn.ogg")
 
@@ -49,4 +49,4 @@
 	item_state = "air_horn"
 	audio_files = list("sound/items/air_horn_1.ogg", "sound/items/air_horn_2.ogg")
 	material = /decl/material/solid/metal/aluminium
-	item_flags = ITEM_FLAG_HOLLOW
+	obj_flags = OBJ_FLAG_HOLLOW

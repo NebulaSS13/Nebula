@@ -5,7 +5,7 @@
 	icon_state = null
 	w_class = ITEM_SIZE_SMALL
 	material = /decl/material/solid/plastic
-	item_flags = ITEM_FLAG_HOLLOW
+	obj_flags = OBJ_FLAG_HOLLOW
 
 	var/base_name
 	var/base_desc

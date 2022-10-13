@@ -31,7 +31,7 @@ var/global/const/DRINK_ICON_NOISY = "noise"
 	atom_flags = ATOM_FLAG_OPEN_CONTAINER
 	presentation_flags = PRESENTATION_FLAG_NAME | PRESENTATION_FLAG_DESC
 	temperature_coefficient = 4
-	item_flags = ITEM_FLAG_HOLLOW
+	obj_flags = OBJ_FLAG_HOLLOW
 
 	var/custom_name
 	var/custom_desc
