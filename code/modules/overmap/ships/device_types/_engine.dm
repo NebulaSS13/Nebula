@@ -45,7 +45,7 @@ var/global/list/ship_engines = list()
 /datum/extension/ship_engine/proc/burn(var/power = 1)
 
 // Can the engine burn/ignite?
-/datum/extension/ship_engine/proc/can_burn()
+/datum/extension/ship_engine/proc/can_do_burn()
 	return is_on() && has_fuel()
 
 // Gets a friendly string for the engine's status to display to a pilot.

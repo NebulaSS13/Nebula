@@ -17,7 +17,7 @@
 	var/obj/machinery/atmospherics/unary/engine/fusion/thruster = holder
 	return thruster.harvest_from && thruster.harvest_from.owned_field
 
-/datum/extension/ship_engine/gas/fusion/can_burn()
+/datum/extension/ship_engine/gas/fusion/can_do_burn()
 	. = ..()
 	if(!.)
 		return

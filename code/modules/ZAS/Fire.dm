@@ -14,10 +14,11 @@ If it gains pressure too slowly, it may leak or just rupture instead of explodin
 /atom/proc/temperature_expose(datum/gas_mixture/air, exposed_temperature, exposed_volume)
 	return null
 
-/atom/movable/proc/is_burnable()
+///Whether this atom is vulnerable to fire effects. NOTE: Currently only decides whether the atom is burnt by lava or not.
+/atom/movable/proc/can_burn()
 	return FALSE
 
-/mob/is_burnable()
+/mob/can_burn()
 	return simulated
 
 /turf/proc/hotspot_expose(exposed_temperature, exposed_volume, soh = 0)

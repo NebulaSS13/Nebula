@@ -136,13 +136,13 @@ var/global/const/OVERMAP_SPEED_CONSTANT = (1 SECOND)
 	for(var/datum/extension/ship_engine/E in engines)
 		. += E.burn()
 
-/obj/effect/overmap/visitable/ship/can_burn()
+/obj/effect/overmap/visitable/ship/can_do_burn()
 	if(halted)
 		return FALSE
 	if (world.time < last_burn + burn_delay)
 		return FALSE
 	for(var/datum/extension/ship_engine/E in engines)
-		. |= E.can_burn()
+		. |= E.can_do_burn()
 
 //deciseconds to next step
 /obj/effect/overmap/visitable/ship/proc/ETA()

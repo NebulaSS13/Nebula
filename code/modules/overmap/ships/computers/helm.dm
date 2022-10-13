@@ -131,7 +131,7 @@ var/global/list/overmap_helm_computers
 		data["heading"] = linked.get_heading_angle()
 		data["autopilot"] = autopilot
 		data["manual_control"] = viewing_overmap(user)
-		data["canburn"] = linked.can_burn()
+		data["canburn"] = linked.can_do_burn()
 		data["accellimit"] = accellimit
 
 		var/speed = round(linked.get_speed() * KM_OVERMAP_RATE, 0.01) // type abused

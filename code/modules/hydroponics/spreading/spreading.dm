@@ -260,7 +260,7 @@
 /obj/effect/vine/proc/is_mature()
 	return (health >= (max_health/3) && world.time > mature_time)
 
-/obj/effect/vine/is_burnable()
+/obj/effect/vine/can_burn()
 	return seed.get_trait(TRAIT_HEAT_TOLERANCE) < 1000
 
 /obj/effect/vine/get_alt_interactions(var/mob/user)

@@ -20,7 +20,7 @@
 	events_repository.unregister(/decl/observ/shuttle_moved, SSshuttle.shuttles[shuttle], src)
 	return ..()
 
-/obj/effect/overmap/visitable/ship/landable/can_burn()
+/obj/effect/overmap/visitable/ship/landable/can_do_burn()
 	if(status != SHIP_STATUS_OVERMAP && status != SHIP_STATUS_ENCOUNTER)
 		return 0
 	return ..()

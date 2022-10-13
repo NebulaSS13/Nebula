@@ -151,7 +151,7 @@ var/global/list/overmap_unknown_ids = list()
 	position = list(0, 0)
 	. = ..()
 
-/obj/effect/overmap/proc/can_burn()
+/obj/effect/overmap/proc/can_do_burn()
 	if(halted)
 		return FALSE
 	if (world.time < last_burn + burn_delay)
@@ -195,7 +195,7 @@ var/global/list/overmap_unknown_ids = list()
 
 /obj/effect/overmap/proc/accelerate(var/direction, var/accel_limit)
 	var/actual_accel_limit = accel_limit / KM_OVERMAP_RATE
-	if(can_burn())
+	if(can_do_burn())
 		last_burn = world.time
 		var/delta_v = get_delta_v() / KM_OVERMAP_RATE
 		if(delta_v == 0)
@@ -213,7 +213,7 @@ var/global/list/overmap_unknown_ids = list()
 
 
 /obj/effect/overmap/proc/decelerate()
-	if(!can_burn())
+	if(!can_do_burn())
 		return
 
 	var/burn = FALSE

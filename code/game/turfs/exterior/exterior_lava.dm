@@ -21,7 +21,7 @@
 	var/mob/living/L = AM
 	if (istype(L) && L.can_overcome_gravity())
 		return
-	if(AM.is_burnable())
+	if(AM.can_burn())
 		LAZYADD(victims, weakref(AM))
 		START_PROCESSING(SSobj, src)
 
@@ -35,7 +35,7 @@
 		return PROCESS_KILL
 	for(var/weakref/W in victims)
 		var/atom/movable/AM = W.resolve()
-		if (AM == null || get_turf(AM) != src || AM.is_burnable() == FALSE)
+		if (AM == null || get_turf(AM) != src || AM.can_burn() == FALSE)
 			victims -= W
 			continue
 		var/datum/gas_mixture/environment = return_air()

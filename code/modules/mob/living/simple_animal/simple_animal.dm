@@ -542,7 +542,7 @@
 /mob/living/simple_animal/ExtinguishMob()
 	return
 
-/mob/living/simple_animal/is_burnable()
+/mob/living/simple_animal/can_burn()
 	return heat_damage_per_tick
 
 /mob/living/simple_animal/proc/adjustBleedTicks(var/amount)
