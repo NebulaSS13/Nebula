@@ -7,11 +7,11 @@
 	restricted_accessory_slots = list(ACCESSORY_SLOT_INSIGNIA, ACCESSORY_SLOT_ARMOR_A, ACCESSORY_SLOT_ARMOR_L)
 	body_parts_covered = SLOT_UPPER_BODY|SLOT_LOWER_BODY
 	armor = list(
-		melee = ARMOR_MELEE_VERY_HIGH,
-		bullet = ARMOR_BALLISTIC_SMALL,
-		laser = ARMOR_LASER_SMALL,
-		energy = ARMOR_ENERGY_MINOR,
-		bomb = ARMOR_BOMB_PADDED
+		DEF_MELEE = ARMOR_MELEE_VERY_HIGH,
+		DEF_BULLET = ARMOR_BALLISTIC_SMALL,
+		DEF_LASER = ARMOR_LASER_SMALL,
+		DEF_ENERGY = ARMOR_ENERGY_MINOR,
+		DEF_BOMB = ARMOR_BOMB_PADDED
 		)
 	siemens_coefficient = 0.5
 	material = /decl/material/solid/metal/steel
@@ -31,11 +31,11 @@
 	icon = 'icons/clothing/accessories/armor/legguards_riot.dmi'
 	color = null
 	armor = list(
-		melee = ARMOR_MELEE_VERY_HIGH,
-		bullet = ARMOR_BALLISTIC_SMALL,
-		laser = ARMOR_LASER_SMALL,
-		energy = ARMOR_ENERGY_MINOR,
-		bomb = ARMOR_BOMB_PADDED
+		DEF_MELEE = ARMOR_MELEE_VERY_HIGH,
+		DEF_BULLET = ARMOR_BALLISTIC_SMALL,
+		DEF_LASER = ARMOR_LASER_SMALL,
+		DEF_ENERGY = ARMOR_ENERGY_MINOR,
+		DEF_BOMB = ARMOR_BOMB_PADDED
 		)
 	siemens_coefficient = 0.5
 	slowdown = 1
@@ -48,11 +48,11 @@
 	desc = "A pair of armored arm pads with heavy padding to protect against melee attacks."
 	icon = 'icons/clothing/accessories/armor/armguards_riot.dmi'
 	armor = list(
-		melee = ARMOR_MELEE_VERY_HIGH,
-		bullet = ARMOR_BALLISTIC_SMALL,
-		laser = ARMOR_LASER_SMALL,
-		energy = ARMOR_ENERGY_MINOR,
-		bomb = ARMOR_BOMB_PADDED
+		DEF_MELEE = ARMOR_MELEE_VERY_HIGH,
+		DEF_BULLET = ARMOR_BALLISTIC_SMALL,
+		DEF_LASER = ARMOR_LASER_SMALL,
+		DEF_ENERGY = ARMOR_ENERGY_MINOR,
+		DEF_BOMB = ARMOR_BOMB_PADDED
 		)
 	color = null
 	siemens_coefficient = 0.5

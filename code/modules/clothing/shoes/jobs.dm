@@ -18,11 +18,11 @@
 	applies_material_colour = TRUE
 	force = 3
 	armor = list(
-		melee = ARMOR_MELEE_RESISTANT, 
-		bullet = ARMOR_BALLISTIC_MINOR, 
-		laser = ARMOR_LASER_MINOR, 
-		energy = ARMOR_ENERGY_MINOR, 
-		bomb = ARMOR_BOMB_PADDED
+		DEF_MELEE = ARMOR_MELEE_RESISTANT, 
+		DEF_BULLET = ARMOR_BALLISTIC_MINOR, 
+		DEF_LASER = ARMOR_LASER_MINOR, 
+		DEF_ENERGY = ARMOR_ENERGY_MINOR, 
+		DEF_BOMB = ARMOR_BOMB_PADDED
 		)
 	siemens_coefficient = 0.7
 	gas_transfer_coefficient = 0.90
@@ -48,10 +48,10 @@
 	material = /decl/material/solid/leather/synth
 	color = "#d88d4b"
 	armor = list(
-		melee = ARMOR_MELEE_RESISTANT, 
-		laser = ARMOR_LASER_MINOR, 
-		energy = ARMOR_ENERGY_SMALL, 
-		bomb = ARMOR_BOMB_PADDED
+		DEF_MELEE = ARMOR_MELEE_RESISTANT, 
+		DEF_LASER = ARMOR_LASER_MINOR, 
+		DEF_ENERGY = ARMOR_ENERGY_SMALL, 
+		DEF_BOMB = ARMOR_BOMB_PADDED
 		)
 	siemens_coefficient = 0.7
 	gas_transfer_coefficient = 0.90

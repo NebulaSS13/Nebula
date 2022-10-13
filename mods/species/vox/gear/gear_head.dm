@@ -9,13 +9,13 @@
 	desc = "A huge, armoured, pressurized helmet. Looks like an ancient human diving suit."
 	light_overlay = "invis_light"
 	armor = list(
-		melee = ARMOR_MELEE_MAJOR, 
-		bullet = ARMOR_BALLISTIC_PISTOL, 
-		laser = ARMOR_LASER_HANDGUNS,
-		energy = ARMOR_ENERGY_MINOR, 
-		bomb = ARMOR_BOMB_PADDED, 
-		bio = ARMOR_BIO_SMALL, 
-		rad = ARMOR_RAD_MINOR
+		DEF_MELEE = ARMOR_MELEE_MAJOR, 
+		DEF_BULLET = ARMOR_BALLISTIC_PISTOL, 
+		DEF_LASER = ARMOR_LASER_HANDGUNS,
+		DEF_ENERGY = ARMOR_ENERGY_MINOR, 
+		DEF_BOMB = ARMOR_BOMB_PADDED, 
+		DEF_BIO = ARMOR_BIO_SMALL, 
+		DEF_RAD = ARMOR_RAD_MINOR
 	)
 	siemens_coefficient = 0.6
 	item_flags = 0

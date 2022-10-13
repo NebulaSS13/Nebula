@@ -4,13 +4,13 @@
 	suit_type = "alien rig"
 	icon = 'mods/species/vox/icons/rig/rig.dmi'
 	armor = list(
-		melee = ARMOR_MELEE_MAJOR, 
-		bullet = ARMOR_BALLISTIC_RESISTANT, 
-		laser = ARMOR_LASER_HANDGUNS, 
-		energy = ARMOR_ENERGY_RESISTANT, 
-		bomb = ARMOR_BOMB_PADDED, 
-		bio = ARMOR_BIO_SHIELDED, 
-		rad = ARMOR_RAD_SHIELDED
+		DEF_MELEE = ARMOR_MELEE_MAJOR, 
+		DEF_BULLET = ARMOR_BALLISTIC_RESISTANT, 
+		DEF_LASER = ARMOR_LASER_HANDGUNS, 
+		DEF_ENERGY = ARMOR_ENERGY_RESISTANT, 
+		DEF_BOMB = ARMOR_BOMB_PADDED, 
+		DEF_BIO = ARMOR_BIO_SHIELDED, 
+		DEF_RAD = ARMOR_RAD_SHIELDED
 		)
 	max_heat_protection_temperature = FIRESUIT_MAX_HEAT_PROTECTION_TEMPERATURE
 	max_pressure_protection = FIRESUIT_MAX_PRESSURE

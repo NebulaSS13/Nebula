@@ -2,7 +2,7 @@
 	id = PSI_ENERGISTICS
 	name = "Energistics"
 	associated_intent = I_HURT
-	armour_types = list("bomb", "laser", "energy")
+	armour_types = list(DEF_BOMB, DEF_LASER, DEF_ENERGY)
 
 /decl/psionic_power/energistics
 	faculty = PSI_ENERGISTICS

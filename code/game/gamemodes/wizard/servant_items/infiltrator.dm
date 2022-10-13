@@ -6,10 +6,10 @@
 	markings_icon = "band"
 	markings_color = COLOR_DARK_GRAY
 	armor = list(
-		melee = ARMOR_MELEE_MINOR, 
-		bullet = ARMOR_BALLISTIC_MINOR, 
-		laser = ARMOR_LASER_MINOR,
-		energy = ARMOR_ENERGY_MINOR
+		DEF_MELEE = ARMOR_MELEE_MINOR, 
+		DEF_BULLET = ARMOR_BALLISTIC_MINOR, 
+		DEF_LASER = ARMOR_LASER_MINOR,
+		DEF_ENERGY = ARMOR_ENERGY_MINOR
 		)
 	bodytype_equip_flags = BODY_FLAG_HUMANOID
 
@@ -18,10 +18,10 @@
 	desc = "The clothes of an impeccable diplomat. Or perhaps a businessman. Let's not consider the horrors that might arise if it belongs to a lawyer."
 	icon = 'icons/clothing/suit/wizard/servant/inf_suit.dmi'
 	armor = list(
-		melee = ARMOR_MELEE_MINOR, 
-		bullet = ARMOR_BALLISTIC_PISTOL, 
-		laser = ARMOR_LASER_MINOR,
-		energy = ARMOR_ENERGY_MINOR
+		DEF_MELEE = ARMOR_MELEE_MINOR, 
+		DEF_BULLET = ARMOR_BALLISTIC_PISTOL, 
+		DEF_LASER = ARMOR_LASER_MINOR,
+		DEF_ENERGY = ARMOR_ENERGY_MINOR
 		)
 
 /obj/item/clothing/under/lawyer/infil

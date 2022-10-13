@@ -4,13 +4,13 @@
 /obj/item/robot_parts/robot_component/armour/exosuit
 	name = "exosuit armour plating"
 	armor = list(
-		melee = ARMOR_MELEE_MAJOR, 
-		bullet = ARMOR_BALLISTIC_PISTOL, 
-		laser = ARMOR_LASER_HANDGUNS, 
-		energy = ARMOR_ENERGY_MINOR, 
-		bomb = ARMOR_BOMB_PADDED,
-		bio = ARMOR_BIO_SHIELDED,
-		rad = ARMOR_RAD_MINOR
+		DEF_MELEE = ARMOR_MELEE_MAJOR, 
+		DEF_BULLET = ARMOR_BALLISTIC_PISTOL, 
+		DEF_LASER = ARMOR_LASER_HANDGUNS, 
+		DEF_ENERGY = ARMOR_ENERGY_MINOR, 
+		DEF_BOMB = ARMOR_BOMB_PADDED,
+		DEF_BIO = ARMOR_BIO_SHIELDED,
+		DEF_RAD = ARMOR_RAD_MINOR
 		)
 	origin_tech = "{'materials':1}"
 	material = /decl/material/solid/metal/steel
@@ -19,13 +19,13 @@
 	name = "radiation-proof armour plating"
 	desc = "A fully enclosed radiation hardened shell designed to protect the pilot from radiation"
 	armor = list(
-		melee = ARMOR_MELEE_RESISTANT, 
-		bullet = ARMOR_BALLISTIC_PISTOL, 
-		laser = ARMOR_LASER_HANDGUNS, 
-		energy = ARMOR_ENERGY_MINOR, 
-		bomb = ARMOR_BOMB_PADDED,
-		bio = ARMOR_BIO_SHIELDED, 
-		rad = ARMOR_RAD_SHIELDED
+		DEF_MELEE = ARMOR_MELEE_RESISTANT, 
+		DEF_BULLET = ARMOR_BALLISTIC_PISTOL, 
+		DEF_LASER = ARMOR_LASER_HANDGUNS, 
+		DEF_ENERGY = ARMOR_ENERGY_MINOR, 
+		DEF_BOMB = ARMOR_BOMB_PADDED,
+		DEF_BIO = ARMOR_BIO_SHIELDED, 
+		DEF_RAD = ARMOR_RAD_SHIELDED
 		)
 	origin_tech = "{'materials':3}"
 	material = /decl/material/solid/metal/steel
@@ -34,13 +34,13 @@
 	name = "EM-shielded armour plating"
 	desc = "A shielded plating that sorrounds the eletronics and protects them from electromagnetic radiation"
 	armor = list(
-		melee = ARMOR_MELEE_RESISTANT , 
-		bullet = ARMOR_BALLISTIC_SMALL, 
-		laser = ARMOR_LASER_SMALL, 
-		energy = ARMOR_ENERGY_SHIELDED, 
-		bomb = ARMOR_BOMB_MINOR, 
-		bio = ARMOR_BIO_SHIELDED, 
-		rad = ARMOR_RAD_SMALL
+		DEF_MELEE = ARMOR_MELEE_RESISTANT , 
+		DEF_BULLET = ARMOR_BALLISTIC_SMALL, 
+		DEF_LASER = ARMOR_LASER_SMALL, 
+		DEF_ENERGY = ARMOR_ENERGY_SHIELDED, 
+		DEF_BOMB = ARMOR_BOMB_MINOR, 
+		DEF_BIO = ARMOR_BIO_SHIELDED, 
+		DEF_RAD = ARMOR_RAD_SMALL
 		)
 	origin_tech = "{'materials':3}"
 	material = /decl/material/solid/metal/steel
@@ -50,12 +50,12 @@
 	name = "heavy combat plating"
 	desc = "Plating designed to deflect incoming attacks and explosions"
 	armor = list(
-		melee = ARMOR_MELEE_MAJOR, 
-		bullet = ARMOR_BALLISTIC_RESISTANT, 
-		laser = ARMOR_LASER_HANDGUNS, 
-		energy = ARMOR_ENERGY_MINOR, 
-		bomb = ARMOR_BOMB_RESISTANT, 
-		bio = ARMOR_BIO_SHIELDED
+		DEF_MELEE = ARMOR_MELEE_MAJOR, 
+		DEF_BULLET = ARMOR_BALLISTIC_RESISTANT, 
+		DEF_LASER = ARMOR_LASER_HANDGUNS, 
+		DEF_ENERGY = ARMOR_ENERGY_MINOR, 
+		DEF_BOMB = ARMOR_BOMB_RESISTANT, 
+		DEF_BIO = ARMOR_BIO_SHIELDED
 		)
 	origin_tech = "{'materials':5}"
 	material = /decl/material/solid/metal/steel

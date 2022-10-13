@@ -7,13 +7,13 @@
 	light_overlay = "hardhat_light"
 	w_class = ITEM_SIZE_NORMAL
 	armor = list(
-		melee = ARMOR_MELEE_RESISTANT,
-		bullet = ARMOR_BALLISTIC_MINOR,
-		laser = ARMOR_LASER_SMALL,
-		energy = ARMOR_ENERGY_MINOR,
-		bomb = ARMOR_BOMB_PADDED,
-		bio = ARMOR_BIO_MINOR,
-		rad = ARMOR_RAD_MINOR
+		DEF_MELEE = ARMOR_MELEE_RESISTANT,
+		DEF_BULLET = ARMOR_BALLISTIC_MINOR,
+		DEF_LASER = ARMOR_LASER_SMALL,
+		DEF_ENERGY = ARMOR_ENERGY_MINOR,
+		DEF_BOMB = ARMOR_BOMB_PADDED,
+		DEF_BIO = ARMOR_BIO_MINOR,
+		DEF_RAD = ARMOR_RAD_MINOR
 	)
 	siemens_coefficient = 0.9
 	light_wedge = LIGHT_WIDE
@@ -43,11 +43,11 @@
 	light_overlay = "EMS_light"
 	w_class = ITEM_SIZE_NORMAL
 	armor = list(
-		melee = ARMOR_MELEE_RESISTANT,
-		bullet = ARMOR_BALLISTIC_MINOR,
-		energy = ARMOR_ENERGY_MINOR,
-		bomb = ARMOR_BOMB_PADDED,
-		bio = ARMOR_BIO_MINOR
+		DEF_MELEE = ARMOR_MELEE_RESISTANT,
+		DEF_BULLET = ARMOR_BALLISTIC_MINOR,
+		DEF_ENERGY = ARMOR_ENERGY_MINOR,
+		DEF_BOMB = ARMOR_BOMB_PADDED,
+		DEF_BIO = ARMOR_BIO_MINOR
 	)
 
 /obj/item/clothing/head/hardhat/firefighter

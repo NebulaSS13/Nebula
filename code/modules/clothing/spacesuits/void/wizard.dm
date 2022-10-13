@@ -3,15 +3,15 @@
 	name = "gem-encrusted voidsuit helmet"
 	desc = "A bizarre gem-encrusted helmet that radiates magical energies."
 	icon = 'icons/clothing/spacesuit/void/wizard/helmet.dmi'
-	unacidable = 1 //No longer shall our kind be foiled by lone chemists with spray bottles!
+	//unacidable = 1 //No longer shall our kind be foiled by lone chemists with spray bottles! //I love these kinds of comments
 	armor = list(
-		melee = ARMOR_MELEE_RESISTANT,
-		bullet = ARMOR_BALLISTIC_PISTOL,
-		laser = ARMOR_LASER_SMALL,
-		energy = ARMOR_ENERGY_SMALL,
-		bomb = ARMOR_BOMB_PADDED,
-		bio = ARMOR_BIO_SHIELDED,
-		rad = ARMOR_RAD_SMALL
+		DEF_MELEE = ARMOR_MELEE_RESISTANT,
+		DEF_BULLET = ARMOR_BALLISTIC_PISTOL,
+		DEF_LASER = ARMOR_LASER_SMALL,
+		DEF_ENERGY = ARMOR_ENERGY_SMALL,
+		DEF_BOMB = ARMOR_BOMB_PADDED,
+		DEF_BIO = ARMOR_BIO_SHIELDED,
+		DEF_RAD = ARMOR_RAD_SMALL
 		)
 	siemens_coefficient = 0.7
 	wizard_garb = 1
@@ -23,13 +23,13 @@
 	w_class = ITEM_SIZE_LARGE //normally voidsuits are bulky but this one is magic I suppose
 	unacidable = 1
 	armor = list(
-		melee = ARMOR_MELEE_RESISTANT,
-		bullet = ARMOR_BALLISTIC_PISTOL,
-		laser = ARMOR_LASER_SMALL,
-		energy = ARMOR_ENERGY_SMALL,
-		bomb = ARMOR_BOMB_PADDED,
-		bio = ARMOR_BIO_SHIELDED,
-		rad = ARMOR_RAD_SMALL
+		DEF_MELEE = ARMOR_MELEE_RESISTANT,
+		DEF_BULLET = ARMOR_BALLISTIC_PISTOL,
+		DEF_LASER = ARMOR_LASER_SMALL,
+		DEF_ENERGY = ARMOR_ENERGY_SMALL,
+		DEF_BOMB = ARMOR_BOMB_PADDED,
+		DEF_BIO = ARMOR_BIO_SHIELDED,
+		DEF_RAD = ARMOR_RAD_SMALL
 		)
 	siemens_coefficient = 0.7
 	wizard_garb = 1
@@ -55,12 +55,12 @@
 	permeability_coefficient = 0.02
 	unacidable = 1
 	armor = list(
-		melee = ARMOR_MELEE_RESISTANT,
-		bullet = ARMOR_BALLISTIC_PISTOL,
-		laser = ARMOR_LASER_SMALL,
-		energy = ARMOR_ENERGY_SMALL,
-		bomb = ARMOR_BOMB_PADDED,
-		bio = ARMOR_BIO_SHIELDED,
-		rad = ARMOR_RAD_SMALL
+		DEF_MELEE = ARMOR_MELEE_RESISTANT,
+		DEF_BULLET = ARMOR_BALLISTIC_PISTOL,
+		DEF_LASER = ARMOR_LASER_SMALL,
+		DEF_ENERGY = ARMOR_ENERGY_SMALL,
+		DEF_BOMB = ARMOR_BOMB_PADDED,
+		DEF_BIO = ARMOR_BIO_SHIELDED,
+		DEF_RAD = ARMOR_RAD_SMALL
 		)
 	siemens_coefficient = 0.7

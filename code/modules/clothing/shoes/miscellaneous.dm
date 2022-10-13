@@ -15,12 +15,12 @@
 	name = "\improper SWAT boots"
 	desc = "When you want to turn up the heat."
 	armor = list(
-		melee = ARMOR_MELEE_VERY_HIGH,
-		bullet = ARMOR_BALLISTIC_RIFLE,
-		laser = ARMOR_LASER_HANDGUNS,
-		energy = ARMOR_ENERGY_SMALL,
-		bomb = ARMOR_BOMB_RESISTANT,
-		bio = ARMOR_BIO_MINOR
+		DEF_MELEE = ARMOR_MELEE_VERY_HIGH,
+		DEF_BULLET = ARMOR_BALLISTIC_RIFLE,
+		DEF_LASER = ARMOR_LASER_HANDGUNS,
+		DEF_ENERGY = ARMOR_ENERGY_SMALL,
+		DEF_BOMB = ARMOR_BOMB_RESISTANT,
+		DEF_BIO = ARMOR_BIO_MINOR
 		)
 	item_flags = ITEM_FLAG_NOSLIP
 	siemens_coefficient = 0.6

@@ -2,7 +2,7 @@
 	id = PSI_PSYCHOKINESIS
 	name = "Psychokinesis"
 	associated_intent = I_GRAB
-	armour_types = list("melee", "bullet")
+	armour_types = list(DEF_MELEE, DEF_BULLET)
 
 /decl/psionic_power/psychokinesis
 	faculty = PSI_PSYCHOKINESIS

@@ -117,18 +117,18 @@
 			var/datum/extension/armor/A = get_extension(under, /datum/extension/armor)
 			if(A)
 				A.armor_values = list(
-					melee = ARMOR_MELEE_VERY_HIGH,
+					DEF_MELEE = ARMOR_MELEE_VERY_HIGH,
 					bullet = ARMOR_BALLISTIC_PISTOL,
-					laser = ARMOR_LASER_SMALL,
-					energy = ARMOR_ENERGY_SMALL
+					DEF_LASER = ARMOR_LASER_SMALL,
+					DEF_ENERGY = ARMOR_ENERGY_SMALL
 					) //More armor
 			A = get_extension(head, /datum/extension/armor)
 			if(A)
 				A.armor_values = list(
-					melee = ARMOR_MELEE_RESISTANT,
+					DEF_MELEE = ARMOR_MELEE_RESISTANT,
 					bullet = ARMOR_BALLISTIC_MINOR,
-					laser = ARMOR_LASER_MINOR,
-					energy = ARMOR_ENERGY_MINOR
+					DEF_LASER = ARMOR_LASER_MINOR,
+					DEF_ENERGY = ARMOR_ENERGY_MINOR
 					)
 			familiar_type = /mob/living/simple_animal/hostile/bear
 	var/spell/targeted/shapeshift/familiar/F = new()

@@ -4,11 +4,11 @@
 	icon = 'mods/content/corporate/icons/clothing/head/ert/cmd.dmi'
 	valid_accessory_slots = null
 	armor = list(
-		melee = ARMOR_MELEE_MAJOR,
-		bullet = ARMOR_BALLISTIC_RIFLE,
-		laser = ARMOR_LASER_HANDGUNS,
-		energy = ARMOR_ENERGY_RESISTANT,
-		bomb = ARMOR_BIO_MINOR
+		DEF_MELEE = ARMOR_MELEE_MAJOR,
+		DEF_BULLET = ARMOR_BALLISTIC_RIFLE,
+		DEF_LASER = ARMOR_LASER_HANDGUNS,
+		DEF_ENERGY = ARMOR_ENERGY_RESISTANT,
+		DEF_BOMB = ARMOR_BIO_MINOR
 		)
 
 //Security

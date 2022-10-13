@@ -12,13 +12,13 @@
 	req_access = list(access_cent_specops)
 
 	armor = list(
-		melee = ARMOR_MELEE_MAJOR, 
-		bullet = ARMOR_BALLISTIC_RESISTANT, 
-		laser = ARMOR_LASER_MAJOR,
-		energy = ARMOR_ENERGY_MINOR, 
-		bomb = ARMOR_BOMB_PADDED, 
-		bio = ARMOR_BIO_SHIELDED, 
-		rad = ARMOR_RAD_SHIELDED
+		DEF_MELEE = ARMOR_MELEE_MAJOR, 
+		DEF_BULLET = ARMOR_BALLISTIC_RESISTANT, 
+		DEF_LASER = ARMOR_LASER_MAJOR,
+		DEF_ENERGY = ARMOR_ENERGY_MINOR, 
+		DEF_BOMB = ARMOR_BOMB_PADDED, 
+		DEF_BIO = ARMOR_BIO_SHIELDED, 
+		DEF_RAD = ARMOR_RAD_SHIELDED
 	)
 	allowed = list(
 		/obj/item/flashlight,
@@ -182,13 +182,13 @@
 	suit_type = "heavy emergency response"
 	icon = 'mods/content/corporate/icons/rigs/asset_protection/rig.dmi'
 	armor = list(
-		melee = ARMOR_MELEE_VERY_HIGH, 
-		bullet = ARMOR_BALLISTIC_RESISTANT, 
-		laser = ARMOR_LASER_MAJOR,
-		energy = ARMOR_ENERGY_MINOR, 
-		bomb = ARMOR_BOMB_PADDED, 
-		bio = ARMOR_BIO_SHIELDED, 
-		rad = ARMOR_RAD_SHIELDED
+		DEF_MELEE = ARMOR_MELEE_VERY_HIGH, 
+		DEF_BULLET = ARMOR_BALLISTIC_RESISTANT, 
+		DEF_LASER = ARMOR_LASER_MAJOR,
+		DEF_ENERGY = ARMOR_ENERGY_MINOR, 
+		DEF_BOMB = ARMOR_BOMB_PADDED, 
+		DEF_BIO = ARMOR_BIO_SHIELDED, 
+		DEF_RAD = ARMOR_RAD_SHIELDED
 		)
 
 	chest =  /obj/item/clothing/suit/space/rig/ert/assetprotection

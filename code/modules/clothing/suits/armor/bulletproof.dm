@@ -6,11 +6,11 @@
 	restricted_accessory_slots = list(ACCESSORY_SLOT_INSIGNIA, ACCESSORY_SLOT_ARMOR_A, ACCESSORY_SLOT_ARMOR_L)
 	body_parts_covered = SLOT_UPPER_BODY|SLOT_LOWER_BODY
 	armor = list(
-		melee = ARMOR_MELEE_RESISTANT,
-		bullet = ARMOR_BALLISTIC_AP,
-		laser = ARMOR_LASER_SMALL,
-		energy = ARMOR_ENERGY_MINOR,
-		bomb = ARMOR_BOMB_PADDED
+		DEF_MELEE = ARMOR_MELEE_RESISTANT,
+		DEF_BULLET = ARMOR_BALLISTIC_AP,
+		DEF_LASER = ARMOR_LASER_SMALL,
+		DEF_ENERGY = ARMOR_ENERGY_MINOR,
+		DEF_BOMB = ARMOR_BOMB_PADDED
 		)
 	starting_accessories = null
 	siemens_coefficient = 0.7
@@ -30,11 +30,11 @@
 	desc = "A pair of armored arm pads with heavy plates to protect against ballistic projectiles."
 	icon = 'icons/clothing/accessories/armor/armguards_ballistic.dmi'
 	armor = list(
-		melee = ARMOR_MELEE_KNIVES,
-		bullet = ARMOR_BALLISTIC_RIFLE,
-		laser = ARMOR_LASER_SMALL,
-		energy = ARMOR_ENERGY_MINOR,
-		bomb = ARMOR_BOMB_PADDED
+		DEF_MELEE = ARMOR_MELEE_KNIVES,
+		DEF_BULLET = ARMOR_BALLISTIC_RIFLE,
+		DEF_LASER = ARMOR_LASER_SMALL,
+		DEF_ENERGY = ARMOR_ENERGY_MINOR,
+		DEF_BOMB = ARMOR_BOMB_PADDED
 		)
 	color = null
 	siemens_coefficient = 0.7
@@ -51,11 +51,11 @@
 	icon = 'icons/clothing/accessories/armor/legguards_ballistic.dmi'
 	color = null
 	armor = list(
-		melee = ARMOR_MELEE_KNIVES,
-		bullet = ARMOR_BALLISTIC_RIFLE,
-		laser = ARMOR_LASER_SMALL,
-		energy = ARMOR_ENERGY_MINOR,
-		bomb = ARMOR_BOMB_PADDED
+		DEF_MELEE = ARMOR_MELEE_KNIVES,
+		DEF_BULLET = ARMOR_BALLISTIC_RIFLE,
+		DEF_LASER = ARMOR_LASER_SMALL,
+		DEF_ENERGY = ARMOR_ENERGY_MINOR,
+		DEF_BOMB = ARMOR_BOMB_PADDED
 		)
 	siemens_coefficient = 0.7
 	slowdown = 1

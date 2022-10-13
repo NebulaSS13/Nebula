@@ -426,8 +426,8 @@
 	icon = 'icons/clothing/under/jumpsuits/jumpsuit_hazard.dmi'
 	siemens_coefficient = 0.8
 	armor = list(
-		energy = ARMOR_ENERGY_SMALL, 
-		rad = ARMOR_RAD_MINOR
+		DEF_ENERGY = ARMOR_ENERGY_SMALL, 
+		DEF_RAD = ARMOR_RAD_MINOR
 		)
 	max_heat_protection_temperature = FIRESUIT_MAX_HEAT_PROTECTION_TEMPERATURE
 
@@ -437,7 +437,7 @@
 	icon = 'icons/clothing/under/jumpsuits/jumpsuit_sterile.dmi'
 	permeability_coefficient = 0.50
 	armor = list(
-		bio = ARMOR_BIO_SMALL
+		DEF_BIO = ARMOR_BIO_SMALL
 		)
 
 /obj/item/clothing/under/kimono

@@ -3,13 +3,13 @@
 	desc = "An articulated spacesuit helmet of mantid manufacture."
 	icon = 'mods/species/ascent/icons/alate_spacesuit/helmet.dmi'
 	armor = list(
-		melee = ARMOR_MELEE_RESISTANT,
-		bullet = ARMOR_BALLISTIC_RESISTANT,
-		laser = ARMOR_LASER_MINOR,
-		energy = ARMOR_ENERGY_MINOR,
-		bomb = ARMOR_BOMB_RESISTANT,
-		bio = ARMOR_BIO_SHIELDED,
-		rad = ARMOR_RAD_SHIELDED
+		DEF_MELEE = ARMOR_MELEE_RESISTANT,
+		DEF_BULLET = ARMOR_BALLISTIC_RESISTANT,
+		DEF_LASER = ARMOR_LASER_MINOR,
+		DEF_ENERGY = ARMOR_ENERGY_MINOR,
+		DEF_BOMB = ARMOR_BOMB_RESISTANT,
+		DEF_BIO = ARMOR_BIO_SHIELDED,
+		DEF_RAD = ARMOR_RAD_SHIELDED
 	)
 	max_pressure_protection = ENG_VOIDSUIT_MAX_PRESSURE
 	bodytype_equip_flags = BODY_FLAG_ALATE
@@ -20,13 +20,13 @@
 	icon = 'mods/species/ascent/icons/alate_spacesuit/suit.dmi'
 	max_pressure_protection = ENG_VOIDSUIT_MAX_PRESSURE
 	armor = list(
-		melee = ARMOR_MELEE_RESISTANT,
-		bullet = ARMOR_BALLISTIC_RESISTANT,
-		laser = ARMOR_LASER_MINOR,
-		energy = ARMOR_ENERGY_MINOR,
-		bomb = ARMOR_BOMB_RESISTANT,
-		bio = ARMOR_BIO_SHIELDED,
-		rad = ARMOR_RAD_SHIELDED
+		DEF_MELEE = ARMOR_MELEE_RESISTANT,
+		DEF_BULLET = ARMOR_BALLISTIC_RESISTANT,
+		DEF_LASER = ARMOR_LASER_MINOR,
+		DEF_ENERGY = ARMOR_ENERGY_MINOR,
+		DEF_BOMB = ARMOR_BOMB_RESISTANT,
+		DEF_BIO = ARMOR_BIO_SHIELDED,
+		DEF_RAD = ARMOR_RAD_SHIELDED
 	)
 	bodytype_equip_flags = BODY_FLAG_ALATE
 	allowed = list(

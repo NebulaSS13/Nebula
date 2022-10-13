@@ -7,7 +7,7 @@
 	slot_flags = SLOT_OVER_BODY
 	allowed = list(/obj/item/tank/emergency/oxygen)
 	high_visibility = TRUE
-	armor = list(melee = 0, bullet = 0, laser = 0,energy = 0, bomb = 0, bio = 0, rad = 0)
+	armor = list(DEF_MELEE = 0, DEF_BULLET = 0, DEF_LASER = 0,DEF_ENERGY = 0, DEF_BOMB = 0, DEF_BIO = 0, DEF_RAD = 0)
 	body_parts_covered = SLOT_UPPER_BODY|SLOT_LOWER_BODY|SLOT_ARMS|SLOT_LEGS
 	siemens_coefficient = 0.9
 

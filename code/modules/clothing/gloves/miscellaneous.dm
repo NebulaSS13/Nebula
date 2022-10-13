@@ -43,9 +43,9 @@
 	siemens_coefficient = 0.50
 	permeability_coefficient = 0.05
 	armor = list(
-		melee = ARMOR_MELEE_KNIVES, 
-		bullet = ARMOR_BALLISTIC_MINOR, 
-		laser = ARMOR_LASER_MINOR
+		DEF_MELEE = ARMOR_MELEE_KNIVES, 
+		DEF_BULLET = ARMOR_BALLISTIC_MINOR, 
+		DEF_LASER = ARMOR_LASER_MINOR
 		)
 	material = /decl/material/solid/cloth
 	matter = list(/decl/material/solid/plastic = MATTER_AMOUNT_REINFORCEMENT)
@@ -61,11 +61,11 @@
 	material = /decl/material/solid/cloth
 	matter = list(/decl/material/solid/plastic = MATTER_AMOUNT_REINFORCEMENT)
 	armor = list(
-		melee = ARMOR_MELEE_RESISTANT, 
-		bullet = ARMOR_BALLISTIC_MINOR, 
-		laser = ARMOR_LASER_SMALL, 
-		energy = ARMOR_ENERGY_SMALL, 
-		bomb = ARMOR_BOMB_PADDED
+		DEF_MELEE = ARMOR_MELEE_RESISTANT, 
+		DEF_BULLET = ARMOR_BALLISTIC_MINOR, 
+		DEF_LASER = ARMOR_LASER_SMALL, 
+		DEF_ENERGY = ARMOR_ENERGY_SMALL, 
+		DEF_BOMB = ARMOR_BOMB_PADDED
 		)
 
 /obj/item/clothing/gloves/fire

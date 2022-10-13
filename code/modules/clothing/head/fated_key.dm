@@ -3,7 +3,7 @@
 	desc = "A glowing key, uncomfortably hot to the touch."
 	icon = 'icons/clothing/head/fated_key.dmi'
 	body_parts_covered = 0
-	armor = list(melee = 55, bullet = 55, laser = 55, energy = 55, bomb = 55, bio = 100, rad = 100)
+	armor = list(DEF_MELEE = 55, DEF_BULLET = 55, DEF_LASER = 55, DEF_ENERGY = 55, DEF_BOMB = 55, DEF_BIO = 100, DEF_RAD = 100)
 	flags_inv = 0
 
 /obj/item/clothing/head/fated/equipped(mob/living/user, slot)

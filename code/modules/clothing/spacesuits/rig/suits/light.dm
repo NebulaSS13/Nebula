@@ -6,11 +6,11 @@
 	icon = 'icons/clothing/rigs/rig_light.dmi'
 	allowed = list(/obj/item/gun,/obj/item/ammo_magazine,/obj/item/ammo_casing,/obj/item/baton,/obj/item/handcuffs,/obj/item/tank,/obj/item/suit_cooling_unit,/obj/item/cell)
 	armor = list(
-		melee = ARMOR_MELEE_KNIVES,
-		bullet = ARMOR_BALLISTIC_PISTOL,
-		laser = ARMOR_LASER_HANDGUNS,
-		energy = ARMOR_ENERGY_MINOR,
-		bomb = ARMOR_BOMB_PADDED
+		DEF_MELEE = ARMOR_MELEE_KNIVES,
+		DEF_BULLET = ARMOR_BALLISTIC_PISTOL,
+		DEF_LASER = ARMOR_LASER_HANDGUNS,
+		DEF_ENERGY = ARMOR_ENERGY_MINOR,
+		DEF_BOMB = ARMOR_BOMB_PADDED
 		)
 	siemens_coefficient = 0.4
 	emp_protection = 10
@@ -87,12 +87,12 @@
 	suit_type = "ominous"
 	icon = 'icons/clothing/rigs/rig_ninja.dmi'
 	armor = list(
-		melee = ARMOR_MELEE_KNIVES,
-		bullet = ARMOR_BALLISTIC_PISTOL,
-		laser = ARMOR_LASER_HANDGUNS,
-		energy = ARMOR_ENERGY_MINOR,
-		bomb = ARMOR_BOMB_PADDED,
-		bio = ARMOR_BIO_SHIELDED
+		DEF_MELEE = ARMOR_MELEE_KNIVES,
+		DEF_BULLET = ARMOR_BALLISTIC_PISTOL,
+		DEF_LASER = ARMOR_LASER_HANDGUNS,
+		DEF_ENERGY = ARMOR_ENERGY_MINOR,
+		DEF_BOMB = ARMOR_BOMB_PADDED,
+		DEF_BIO = ARMOR_BIO_SHIELDED
 		)
 	siemens_coefficient = 0.2 //heavy hardsuit level shock protection
 	emp_protection = 40 //change this to 30 if too high.

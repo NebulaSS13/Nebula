@@ -13,12 +13,12 @@
 	icon_state = ICON_STATE_WORLD
 	force = 5
 	armor = list(
-		melee = ARMOR_MELEE_RESISTANT,
-		bullet = ARMOR_BALLISTIC_PISTOL,
-		laser = ARMOR_LASER_HANDGUNS,
-		energy = ARMOR_ENERGY_SMALL,
-		bomb = ARMOR_BOMB_RESISTANT,
-		bio = ARMOR_BIO_MINOR)
+		DEF_MELEE = ARMOR_MELEE_RESISTANT,
+		DEF_BULLET = ARMOR_BALLISTIC_PISTOL,
+		DEF_LASER = ARMOR_LASER_HANDGUNS,
+		DEF_ENERGY = ARMOR_ENERGY_SMALL,
+		DEF_BOMB = ARMOR_BOMB_RESISTANT,
+		DEF_BIO = ARMOR_BIO_MINOR)
 	material = /decl/material/solid/leather
 
 /obj/item/clothing/gloves/thick/swat

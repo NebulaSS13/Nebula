@@ -3,8 +3,8 @@
 	desc = "A pair of beige coveralls made of a strong, canvas-like fabric."
 	icon = 'mods/content/corporate/icons/clothing/under/work.dmi'
 	armor = list(
-		melee = ARMOR_MELEE_MINOR, 
-		bio = ARMOR_BIO_MINOR
+		DEF_MELEE = ARMOR_MELEE_MINOR, 
+		DEF_BIO = ARMOR_BIO_MINOR
 		)
 
 /obj/item/clothing/under/polo
@@ -13,7 +13,7 @@
 	icon = 'mods/content/corporate/icons/clothing/under/smock.dmi'
 	permeability_coefficient = 0.50
 	armor = list(
-		bio = ARMOR_BIO_MINOR
+		DEF_BIO = ARMOR_BIO_MINOR
 		)
 	starting_accessories = list(/obj/item/clothing/accessory/tunic)
 

@@ -4,13 +4,13 @@
 	icon = 'icons/clothing/rigs/rig_merc.dmi'
 	suit_type = "crimson hardsuit"
 	armor = list(
-		melee = ARMOR_MELEE_VERY_HIGH,
-		bullet = ARMOR_BALLISTIC_RIFLE,
-		laser = ARMOR_LASER_MAJOR,
-		energy = ARMOR_ENERGY_MINOR,
-		bomb = ARMOR_BOMB_RESISTANT,
-		bio = ARMOR_BIO_SHIELDED,
-		rad = ARMOR_RAD_SMALL
+		DEF_MELEE = ARMOR_MELEE_VERY_HIGH,
+		DEF_BULLET = ARMOR_BALLISTIC_RIFLE,
+		DEF_LASER = ARMOR_LASER_MAJOR,
+		DEF_ENERGY = ARMOR_ENERGY_MINOR,
+		DEF_BOMB = ARMOR_BOMB_RESISTANT,
+		DEF_BIO = ARMOR_BIO_SHIELDED,
+		DEF_RAD = ARMOR_RAD_SMALL
 		)
 	online_slowdown = 1
 	offline_slowdown = 3
@@ -57,13 +57,13 @@
 	desc = "A blood-red hardsuit with heavy armoured plates. Judging by the abnormally thick plates, this one is for working with explosives."
 	icon = 'icons/clothing/rigs/rig_merc_heavy.dmi'
 	armor = list(
-		melee = ARMOR_MELEE_VERY_HIGH,
-		bullet = ARMOR_BALLISTIC_AP,
-		laser = ARMOR_LASER_MAJOR,
-		energy = ARMOR_ENERGY_MINOR,
-		bomb = ARMOR_BOMB_SHIELDED,
-		bio = ARMOR_BIO_SHIELDED,
-		rad = ARMOR_RAD_SMALL
+		DEF_MELEE = ARMOR_MELEE_VERY_HIGH,
+		DEF_BULLET = ARMOR_BALLISTIC_AP,
+		DEF_LASER = ARMOR_LASER_MAJOR,
+		DEF_ENERGY = ARMOR_ENERGY_MINOR,
+		DEF_BOMB = ARMOR_BOMB_SHIELDED,
+		DEF_BIO = ARMOR_BIO_SHIELDED,
+		DEF_RAD = ARMOR_RAD_SMALL
 		)
 	online_slowdown = 3
 	offline_slowdown = 4
