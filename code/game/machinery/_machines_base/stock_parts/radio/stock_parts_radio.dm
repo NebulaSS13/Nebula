@@ -1,6 +1,6 @@
 /obj/item/stock_parts/radio
 	part_flags = PART_FLAG_QDEL
-	max_health = ITEM_HEALTH_NO_DAMAGE
+	max_health = OBJ_HEALTH_NO_DAMAGE
 	var/datum/radio_frequency/radio
 	var/frequency
 	var/id_tag

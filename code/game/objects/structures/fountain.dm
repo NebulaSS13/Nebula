@@ -7,8 +7,9 @@
 	icon_state = "fountain"
 	density    = TRUE
 	anchored   = TRUE
-	unacidable = TRUE
 	pixel_x    = -16
+	material   = /decl/material/solid/stone/marble
+	max_health = OBJ_HEALTH_NO_DAMAGE 
 	var/used   = FALSE
 	var/increase_age_prob = (100 / 6)
 

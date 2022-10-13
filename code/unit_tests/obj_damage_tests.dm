@@ -2,9 +2,9 @@
 // items_shall_stay_invincible
 /////////////////////////////////////////////////////////
 /datum/item_unit_test/constant/items_shall_stay_invincible/run_test(var/obj/item/I)
-	if(initial(I.health) != ITEM_HEALTH_NO_DAMAGE && initial(I.max_health) != ITEM_HEALTH_NO_DAMAGE)
+	if(initial(I.health) != OBJ_HEALTH_NO_DAMAGE && initial(I.max_health) != OBJ_HEALTH_NO_DAMAGE)
 		return TRUE //Ignore things that aren't invincible
-	if(I.health != ITEM_HEALTH_NO_DAMAGE || I.max_health != ITEM_HEALTH_NO_DAMAGE)
+	if(I.health != OBJ_HEALTH_NO_DAMAGE || I.max_health != OBJ_HEALTH_NO_DAMAGE)
 		IT.report_failure(src, I.type, "Is defined as not taking health damage, but it can take damage after init.")
 		return FALSE
 	return TRUE
@@ -13,7 +13,7 @@
 // items_shall_define_their_max_health
 /////////////////////////////////////////////////////////
 /datum/item_unit_test/constant/items_shall_define_their_max_health/run_test(var/obj/item/I)
-	if(I.health == ITEM_HEALTH_NO_DAMAGE || I.max_health == ITEM_HEALTH_NO_DAMAGE)
+	if(I.health == OBJ_HEALTH_NO_DAMAGE || I.max_health == OBJ_HEALTH_NO_DAMAGE)
 		return TRUE //We don't care about invincible things
 	if(I.health > 0 && I.max_health != I.health)
 		IT.report_failure(src, I.type, "Defines health = [I.health], but its max_health is [I.max_health? I.max_health : "null"].")
@@ -25,7 +25,7 @@
 /////////////////////////////////////////////////////////
 /**Items should only change their defined health variable during init if it was set to null. Otherwise issues will arise. */
 /datum/item_unit_test/constant/items_shall_set_health_var_only_if_null/run_test(var/obj/item/I)
-	if(initial(I.health) == ITEM_HEALTH_NO_DAMAGE || initial(I.max_health) == ITEM_HEALTH_NO_DAMAGE)
+	if(initial(I.health) == OBJ_HEALTH_NO_DAMAGE || initial(I.max_health) == OBJ_HEALTH_NO_DAMAGE)
 		return TRUE
 
 	if(isnull(initial(I.health)))
@@ -69,15 +69,15 @@
 
 	//Check if invincibility actually works
 	if(!isnull(old_health))
-		if(old_health && old_health == I.health && old_health != ITEM_HEALTH_NO_DAMAGE && I.max_health != ITEM_HEALTH_NO_DAMAGE)
+		if(old_health && old_health == I.health && old_health != OBJ_HEALTH_NO_DAMAGE && I.max_health != OBJ_HEALTH_NO_DAMAGE)
 			failure_text += "Item took no damage and isn't defined as invincible. (old: [old_health? old_health : "null"], new: [I.health? I.health : "null"], returned: [damage_taken_returned? damage_taken_returned : "null"]) "
-		if(old_health != I.health && (old_health == ITEM_HEALTH_NO_DAMAGE || I.max_health == ITEM_HEALTH_NO_DAMAGE))
+		if(old_health != I.health && (old_health == OBJ_HEALTH_NO_DAMAGE || I.max_health == OBJ_HEALTH_NO_DAMAGE))
 			failure_text += "Item took some damage while defined as invincible. (old: [old_health? old_health : "null"], new: [I.health? I.health : "null"], returned: [damage_taken_returned? damage_taken_returned : "null"]) "
 	else
 		failure_text += "Item health is null after init. "
 
 	//Check the take damage returned damage value
-	var/damage_taken_actual = (old_health == ITEM_HEALTH_NO_DAMAGE || I.max_health == ITEM_HEALTH_NO_DAMAGE || isnull(old_health))? 0 : old_health - I.health
+	var/damage_taken_actual = (old_health == OBJ_HEALTH_NO_DAMAGE || I.max_health == OBJ_HEALTH_NO_DAMAGE || isnull(old_health))? 0 : old_health - I.health
 	if(damage_taken_returned != damage_taken_actual)
 		failure_text += "take_damage() returned the wrong amount of damage (health before: [old_health? old_health : "null"], after: [I.health? I.health : "null"], returned damage:[damage_taken_returned? damage_taken_returned : "null"])."
 

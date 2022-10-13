@@ -5,10 +5,11 @@
 	icon = 'icons/obj/objects.dmi'
 	desc = "FUCK FUCK FUCK AAAHHH!"
 	icon_state = "bhole3"
-	opacity = 1
 	unacidable = 1
-	density = 0
-	anchored = 1
+	opacity = TRUE
+	density = FALSE
+	anchored = TRUE
+	max_health = OBJ_HEALTH_NO_DAMAGE
 
 /obj/effect/bhole/Initialize()
 	. = ..()

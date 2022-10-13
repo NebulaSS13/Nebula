@@ -26,7 +26,7 @@
 	augment_flags = AUGMENTATION_MECHANIC
 	material = /decl/material/solid/metal/steel
 	matter = list(/decl/material/solid/fiberglass = MATTER_AMOUNT_REINFORCEMENT)
-	
+
 /obj/item/armblade/claws
 	icon_state = "wolverine"
 	name = "combat claws"

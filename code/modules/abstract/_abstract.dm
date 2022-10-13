@@ -5,8 +5,8 @@
 	simulated =     FALSE
 	density =       FALSE
 	anchored =      TRUE
-	unacidable =    TRUE
 	abstract_type = /obj/abstract
+	max_health =    OBJ_HEALTH_NO_DAMAGE
 
 /obj/abstract/Initialize()
 	. = ..()

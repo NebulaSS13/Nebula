@@ -5,7 +5,7 @@
 	charge_costs = list(1000)
 	gender = NEUTER
 	matter = null // Don't shove it in the autholathe.
-	max_health = ITEM_HEALTH_NO_DAMAGE
+	max_health = OBJ_HEALTH_NO_DAMAGE
 	is_spawnable_type = FALSE
 
 /obj/item/stack/material/cyborg/Initialize()

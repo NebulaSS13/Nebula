@@ -1,6 +1,6 @@
 /obj/effect/overlay
 	name = "overlay"
-	unacidable = 1
+	max_health = OBJ_HEALTH_NO_DAMAGE
 
 /obj/effect/overlay/beam//Not actually a projectile, just an effect.
 	name="beam"

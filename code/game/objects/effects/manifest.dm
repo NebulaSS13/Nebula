@@ -2,7 +2,7 @@
 	name = "manifest"
 	icon = 'icons/mob/screen1.dmi'
 	icon_state = "x"
-	unacidable = 1//Just to be sure.
+	max_health = OBJ_HEALTH_NO_DAMAGE
 
 /obj/effect/manifest/Initialize()
 	. = ..()

@@ -57,6 +57,7 @@
 #define REAGENT_VOLUME(REAGENT_HOLDER, REAGENT_TYPE) (REAGENT_HOLDER?.reagent_volumes && REAGENT_HOLDER.reagent_volumes[REAGENT_TYPE])
 #define REAGENT_DATA(REAGENT_HOLDER, REAGENT_TYPE)   (REAGENT_HOLDER?.reagent_data    && REAGENT_HOLDER.reagent_data[REAGENT_TYPE])
 
+//#QUESTION: Why is this named "solvent" when it refers to corrosive substances like acid, bases, and oxidizers? Solvents aren't always acids, and acids may be solvent themselves.
 #define MAT_SOLVENT_NONE     0
 #define MAT_SOLVENT_MILD     1
 #define MAT_SOLVENT_MODERATE 2

@@ -285,4 +285,4 @@
 #define INSTANCE_IS_ABSTRACT(D) (D.abstract_type == D.type)
 
 //Damage stuff
-#define ITEM_HEALTH_NO_DAMAGE -1
+#define OBJ_HEALTH_NO_DAMAGE -1

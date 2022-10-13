@@ -8,8 +8,8 @@ var/global/bomb_set
 	density = 1
 	use_power = POWER_USE_OFF
 	uncreated_component_parts = null
-	unacidable = 1
 	interact_offline = TRUE
+	max_health = OBJ_HEALTH_NO_DAMAGE
 
 	var/deployable = 0
 	var/extended = 0

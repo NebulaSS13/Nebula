@@ -91,9 +91,10 @@
 	desc = "You're pretty sure that abyss is staring back."
 	icon = 'icons/obj/cult.dmi'
 	icon_state = "hole"
-	density = 1
 	unacidable = 1
-	anchored = 1.0
+	density = TRUE
+	anchored = TRUE
+	max_health = OBJ_HEALTH_NO_DAMAGE
 	var/spawnable = null
 
 /obj/effect/gateway/active

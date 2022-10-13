@@ -13,7 +13,7 @@
 /obj/item/uplink
 	name = "hidden uplink"
 	desc = "There is something wrong if you're examining this."
-	max_health = ITEM_HEALTH_NO_DAMAGE
+	max_health = OBJ_HEALTH_NO_DAMAGE
 	material = /decl/material/solid/plastic
 	matter = list(
 		/decl/material/solid/metal/copper    = MATTER_AMOUNT_REINFORCEMENT,

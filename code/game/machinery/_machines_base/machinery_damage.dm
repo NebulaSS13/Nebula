@@ -51,7 +51,7 @@
 		if(uncreated_component_parts[path])
 			var/obj/item/stock_parts/component = path
 			//Must be checked this way, since we don't have an instance to call component.can_take_damage() on.
-			if(initial(component.max_health) != ITEM_HEALTH_NO_DAMAGE)
+			if(initial(component.max_health) != OBJ_HEALTH_NO_DAMAGE)
 				return force_init_component(path)
 
 /obj/machinery/proc/on_component_failure(var/obj/item/stock_parts/component)

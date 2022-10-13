@@ -22,8 +22,8 @@
 	else
 		set_opacity(initial(opacity))
 	hitsound = material?.hitsound || initial(hitsound)
-	if(maxhealth != -1)
-		maxhealth = initial(maxhealth) + material?.integrity * get_material_health_modifier()
+	
+	if(max_health != OBJ_HEALTH_NO_DAMAGE)
 		if(reinf_material)
 			var/bonus_health = reinf_material.integrity * get_material_health_modifier()
 			maxhealth += bonus_health

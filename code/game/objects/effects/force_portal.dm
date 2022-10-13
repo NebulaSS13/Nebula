@@ -4,9 +4,9 @@
 	icon = 'icons/effects/portal.dmi'
 	icon_state = "portal"
 	blend_mode = BLEND_SUBTRACT
-	density = 1
-	unacidable = 1
-	anchored = 1
+	density = TRUE
+	max_health = OBJ_HEALTH_NO_DAMAGE
+	anchored = TRUE
 	var/boom_time = 1
 
 /obj/effect/force_portal/Initialize()
@@ -22,6 +22,7 @@
 	if(boom_time && boom_time < world.time)
 		boom()
 		boom_time = 0
+		return PROCESS_KILL
 
 /obj/effect/force_portal/proc/boom()
 	set waitfor = 0

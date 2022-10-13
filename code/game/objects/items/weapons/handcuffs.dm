@@ -12,7 +12,7 @@
 	throw_range = 5
 	origin_tech = "{'materials':1}"
 	material = /decl/material/solid/metal/steel
-	max_health = ITEM_HEALTH_NO_DAMAGE //#TODO: Once we can work out something different for handling cuff breakout, change this. Since it relies on cuffs health to tell if you can actually breakout.
+	max_health = OBJ_HEALTH_NO_DAMAGE //#TODO: Once we can work out something different for handling cuff breakout, change this. Since it relies on cuffs health to tell if you can actually breakout.
 	var/elastic
 	var/dispenser = 0
 	var/breakouttime = 2 MINUTES //Deciseconds = 120s = 2 minutes
