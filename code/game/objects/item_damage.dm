@@ -1,60 +1,7 @@
-/**Basic damage handling for items. Returns the amount of damage taken after armor if the item was damaged.*/
-/obj/item/proc/take_damage(var/damage, var/damage_type = BRUTE, var/damage_flags = 0, var/inflicter = null, var/armor_pen = 0)
-	if(!can_take_damage()) // This object does not take damage.
-		return 0 //Must return a number
-	if(damage < 0)
-		CRASH("Item '[type]' take_damage proc was called with negative damage.") //Negative damage are an implementation issue.
-
-	//Apply armor
-	var/datum/extension/armor/A = get_extension(src, /datum/extension/armor)
-	if(A)
-		var/list/dam_after_armor = A.apply_damage_modifications(damage, damage_type, damage_flags, null, armor_pen, TRUE)
-		damage       = dam_after_armor[1]
-		damage_type  = dam_after_armor[2]
-		damage_flags = dam_after_armor[3]
-		armor_pen    = dam_after_armor[5]
-
-	if(damage <= 0)
-		return 0 //must return a number
-
-	//Apply damage
-	health = clamp(health - damage, 0, max_health)
-	check_health(damage, damage_type, damage_flags)
-	return damage
-
-/obj/item/lava_act()
-	if(QDELETED(src))
-		return TRUE
-	. = (!throwing) ? ..() : FALSE
-
-/obj/item/explosion_act(severity)
-	if(QDELETED(src))
-		return
-	. = ..()
-	take_damage(explosion_severity_damage(severity), BURN, DAM_EXPLODE | DAM_DISPERSED, "explosion")
-
-/obj/item/proc/explosion_severity_damage(var/severity)
-	var/mult = explosion_severity_damage_multiplier()
-	return (mult * (4 - severity)) + (severity != 1? rand(-(mult / severity), (mult / severity)) : 0 )
-
-/obj/item/proc/explosion_severity_damage_multiplier()
-	return CEILING(max_health / 3)
-
-/obj/item/is_burnable()
-	return simulated
-
-/obj/item/proc/get_volume_by_throwforce_and_or_w_class()
-	if(throwforce && w_class)
-		return clamp((throwforce + w_class) * 5, 30, 100)// Add the item's throwforce to its weight class and multiply by 5, then clamp the value between 30 and 100
-	else if(w_class)
-		return clamp(w_class * 8, 20, 100) // Multiply the item's weight class by 8, then clamp the value between 20 and 100
-	else
-		return 0
-
 /obj/item/throw_impact(atom/hit_atom, datum/thrownthing/TT)
 	. = ..()
 	if(isliving(hit_atom)) //Living mobs handle hit sounds differently.
-		var/volume = get_volume_by_throwforce_and_or_w_class()
+		var/volume = get_impact_sound_volume()
 		if (throwforce > 0)
 			if(hitsound)
 				playsound(hit_atom, hitsound, volume, TRUE, -1)
@@ -115,15 +62,6 @@
 		M.take_organ_damage(7)
 	SET_STATUS_MAX(M, STAT_BLURRY, rand(3,4))
 	return
-
-/obj/item/get_examined_damage_string(health_ratio)
-	if(!can_take_damage())
-		return
-	. = ..()
-
-///Returns whether the item can take damages or if its invulnerable
-/obj/item/proc/can_take_damage()
-	return (health != ITEM_HEALTH_NO_DAMAGE) && (max_health != ITEM_HEALTH_NO_DAMAGE)
 
 ///Returns whether the object is currently damaged.
 /obj/item/proc/is_damaged()

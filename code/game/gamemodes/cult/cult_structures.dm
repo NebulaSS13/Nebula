@@ -91,11 +91,13 @@
 	desc = "You're pretty sure that abyss is staring back."
 	icon = 'icons/obj/cult.dmi'
 	icon_state = "hole"
-	unacidable = 1
 	density = TRUE
 	anchored = TRUE
 	max_health = OBJ_HEALTH_NO_DAMAGE
 	var/spawnable = null
+
+/obj/effect/gateway/acid_act(decl/material/acid, exposed_volume)
+	return
 
 /obj/effect/gateway/active
 	light_range=5

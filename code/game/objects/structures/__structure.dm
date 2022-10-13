@@ -2,55 +2,38 @@
 	icon = 'icons/obj/structures/barricade.dmi'
 	w_class = ITEM_SIZE_STRUCTURE
 	layer = STRUCTURE_LAYER
+	max_health = 50
 	abstract_type = /obj/structure
 
 	var/last_damage_message
-	var/health = 0
-	var/maxhealth = 50
-	var/hitsound = 'sound/weapons/smash.ogg'
 	var/parts_type
 	var/parts_amount
 	var/footstep_type
 	var/mob_offset
 
-/obj/structure/create_matter()
-	..()
-	if(material || reinf_material)
-		LAZYINITLIST(matter)
-		var/matter_mult = get_matter_amount_modifier()
-		if(material)
-			matter[material.type] = max(matter[material.type], round(MATTER_AMOUNT_PRIMARY * matter_mult))
-		if(reinf_material)
-			matter[reinf_material.type] = max(matter[reinf_material.type], round(MATTER_AMOUNT_REINFORCEMENT * matter_mult))
-		UNSETEMPTY(matter)
-
 /obj/structure/Initialize(var/ml, var/_mat, var/_reinf_mat)
 	if(ispath(_mat, /decl/material))
 		material = _mat
-	if(ispath(material, /decl/material))
-		material = GET_DECL(material)
 	if(ispath(_reinf_mat, /decl/material))
 		reinf_material = _reinf_mat
-	if(ispath(reinf_material, /decl/material))
-		reinf_material = GET_DECL(reinf_material)
 	. = ..()
-	update_materials()
+	if(reinf_material)
+		set_reinforced_material(reinf_material)
 	if(!CanFluidPass())
 		fluid_update(TRUE)
 
-/obj/structure/get_examined_damage_string(health_ratio)
-	if(maxhealth == -1)
-		return
+/obj/structure/Destroy()
+	var/turf/T = get_turf(src)
 	. = ..()
+	if(T)
+		T.fluid_update()
+		for(var/atom/movable/AM in T)
+			AM.reset_offsets()
+			AM.reset_plane_and_layer()
 
 /obj/structure/examine(mob/user, distance, infix, suffix)
 	. = ..()
 	if(distance <= 3)
-
-		var/damage_desc = get_examined_damage_string(health / maxhealth)
-		if(length(damage_desc))
-			to_chat(user, damage_desc)
-
 		if(tool_interaction_flags & TOOL_INTERACTION_ANCHOR)
 			if(anchored)
 				to_chat(user, SPAN_SUBTLE("Can be unanchored with a wrench, and moved around."))
@@ -90,59 +73,6 @@
 /obj/structure/proc/mob_breakout(var/mob/living/escapee)
 	set waitfor = FALSE
 	return FALSE
-
-/obj/structure/proc/take_damage(var/damage)
-	if(health == -1) // This object does not take damage.
-		return
-
-	if(material && material.is_brittle())
-		if(reinf_material)
-			if(reinf_material.is_brittle())
-				damage *= STRUCTURE_BRITTLE_MATERIAL_DAMAGE_MULTIPLIER
-		else
-			damage *= STRUCTURE_BRITTLE_MATERIAL_DAMAGE_MULTIPLIER
-
-	playsound(loc, hitsound, 75, 1)
-	health = clamp(health - damage, 0, maxhealth)
-
-	show_damage_message(health/maxhealth)
-
-	if(health == 0)
-		physically_destroyed()
-
-/obj/structure/proc/show_damage_message(var/perc)
-	if(perc > 0.75)
-		return
-	if(perc <= 0.25 && last_damage_message < 0.25)
-		visible_message(SPAN_DANGER("\The [src] looks like it's about to break!"))
-		last_damage_message = 0.25
-	else if(perc <= 0.5 && last_damage_message < 0.5)
-		visible_message(SPAN_WARNING("\The [src] looks seriously damaged!"))
-		last_damage_message = 0.5
-	else if(perc <= 0.75 && last_damage_message < 0.75)
-		visible_message(SPAN_WARNING("\The [src] is showing some damage!"))
-		last_damage_message = 0.75
-
-/obj/structure/physically_destroyed(var/skip_qdel)
-	if(..(TRUE))
-		return dismantle()
-
-/obj/structure/fire_act(datum/gas_mixture/air, exposed_temperature, exposed_volume)
-	. = ..()
-	var/dmg = 100
-	if(istype(material))
-		dmg = round(dmg * material.combustion_effect(get_turf(src),temperature, 0.3))
-	if(dmg)
-		take_damage(dmg)
-
-/obj/structure/Destroy()
-	var/turf/T = get_turf(src)
-	. = ..()
-	if(T)
-		T.fluid_update()
-		for(var/atom/movable/AM in T)
-			AM.reset_offsets()
-			AM.reset_plane_and_layer()
 
 /obj/structure/Crossed(O)
 	. = ..()
@@ -208,26 +138,6 @@
 		visible_message(SPAN_DANGER("[G.assailant] puts [G.affecting] on \the [src]."))
 		qdel(G)
 		return TRUE
-
-/obj/structure/explosion_act(severity)
-	..()
-	if(!QDELETED(src))
-		if(severity == 1)
-			physically_destroyed()
-		else if(severity == 2)
-			take_damage(rand(20, 30))
-		else
-			take_damage(rand(5, 15))
-
-/obj/structure/proc/can_repair(var/mob/user)
-	if(health >= maxhealth)
-		to_chat(user, SPAN_NOTICE("\The [src] does not need repairs."))
-		return FALSE
-	return TRUE
-
-/obj/structure/bullet_act(var/obj/item/projectile/Proj)
-	if(take_damage(Proj.get_structure_damage()))
-		return PROJECTILE_CONTINUE
 
 /*
 Automatic alignment of items to an invisible grid, defined by CELLS and CELLSIZE, defined in code/__defines/misc.dm.

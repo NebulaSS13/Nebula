@@ -18,7 +18,13 @@
 /turf
 	temperature_coefficient = MIN_TEMPERATURE_COEFFICIENT
 
-/obj/Initialize(mapload)
+/obj/Initialize(ml)
+	if(isnull(health))
+		health = max_health //Make sure to propagate max_health to health var before material setup, for consistency
+	if(ispath(material))
+		set_material(material)
+	if(islist(armor_resistances))
+		update_armor() //Since we don't always use the material's armor, we must call this here as well
 	. = ..()
 	temperature_coefficient = isnull(temperature_coefficient) ? clamp(MAX_TEMPERATURE_COEFFICIENT - w_class, MIN_TEMPERATURE_COEFFICIENT, MAX_TEMPERATURE_COEFFICIENT) : temperature_coefficient
 	create_matter()

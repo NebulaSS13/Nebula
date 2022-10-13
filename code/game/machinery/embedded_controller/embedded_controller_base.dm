@@ -81,6 +81,12 @@
 	set_extension(src, /datum/extension/interactive/multitool/embedded_controller)
 	update_icon()
 
+/obj/machinery/embedded_controller/radio/acid_act(decl/material/acid, exposed_volume)
+	return
+
+/obj/machinery/embedded_controller/radio/acid_act(decl/material/acid, exposed_volume)
+	return
+
 /obj/machinery/embedded_controller/radio/Destroy()
 	if(radio_controller)
 		radio_controller.remove_object(src,frequency)

@@ -1,16 +1,14 @@
 /obj/structure
-	var/decl/material/material
 	var/decl/material/reinf_material
-	var/material_alteration
 	var/dismantled
 
-/obj/structure/get_material()
-	. = material
+///Set the reinforced material for this structure. If keep_health is true, it will not reset the health value, and will instead just add the difference to it.
+/obj/structure/proc/set_reinforced_material(var/mat, var/keep_health = FALSE)
+	if(ispath(mat))
+		reinf_material = GET_DECL(mat)
+	else
+		reinf_material = mat
 
-/obj/structure/proc/get_material_health_modifier()
-	. = 1
-
-/obj/structure/proc/update_materials(var/keep_health)
 	if(material_alteration & MAT_FLAG_ALTERATION_NAME)
 		update_material_name()
 	if(material_alteration & MAT_FLAG_ALTERATION_DESC)
@@ -21,38 +19,15 @@
 		set_opacity(FALSE)
 	else
 		set_opacity(initial(opacity))
-	hitsound = material?.hitsound || initial(hitsound)
 	
 	if(max_health != OBJ_HEALTH_NO_DAMAGE)
 		if(reinf_material)
 			var/bonus_health = reinf_material.integrity * get_material_health_modifier()
-			maxhealth += bonus_health
+			max_health += bonus_health
 			if(!keep_health)
 				health += bonus_health
-		health = keep_health ? min(health, maxhealth) : maxhealth
+		health = keep_health ? min(health, max_health) : max_health
 	update_icon()
-
-/obj/structure/proc/update_material_name(var/override_name)
-	var/base_name = override_name || initial(name)
-	if(istype(material))
-		SetName("[material.solid_name] [base_name]")
-	else
-		SetName(base_name)
-
-/obj/structure/proc/update_material_desc(var/override_desc)
-	var/base_desc = override_desc || initial(desc)
-	if(istype(material))
-		desc = "[base_desc] This one is made of [material.solid_name]."
-	else
-		desc = base_desc
-
-/obj/structure/proc/update_material_colour(var/override_colour)
-	if(istype(material))
-		color = override_colour || material.color
-		alpha = clamp((50 + material.opacity * 255), 0, 255)
-	else
-		color = override_colour || initial(color)
-		alpha = initial(alpha)
 
 /obj/structure/proc/create_dismantled_products(var/turf/T)
 	SHOULD_CALL_PARENT(TRUE)
@@ -85,3 +60,10 @@
 		if(!QDELETED(src))
 			qdel(src)
 	. = TRUE
+
+/obj/structure/create_matter()
+	..()
+	LAZYINITLIST(matter)
+	if(reinf_material)
+		matter[reinf_material.type] = max(matter[reinf_material.type], round(MATTER_AMOUNT_REINFORCEMENT * get_matter_amount_modifier()))
+	UNSETEMPTY(matter)

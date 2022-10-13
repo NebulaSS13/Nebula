@@ -248,9 +248,13 @@
 /atom/proc/melt()
 	return
 
+///Called when an object is exposed to acid damage over time
+/atom/proc/acid_act(var/decl/material/acid, var/exposed_volume)
+	return
+
 /atom/proc/lava_act()
-	visible_message("<span class='danger'>\The [src] sizzles and melts away, consumed by the lava!</span>")
-	playsound(src, 'sound/effects/flare.ogg', 100, 3)
+	visible_message(SPAN_DANGER("\The [src] sizzles and melts away, consumed by the lava!"))
+	playsound(src, 'sound/effects/flare.ogg', 100, TRUE, 3)
 	qdel(src)
 	. = TRUE
 
@@ -258,7 +262,7 @@
 	SHOULD_CALL_PARENT(TRUE)
 	if(isliving(AM))
 		var/mob/living/M = AM
-		M.apply_damage(TT.speed*5, BRUTE)
+		M.apply_damage(TT.speed*5, BRUTE) //#TODO: What the fuck?
 
 //returns 1 if made bloody, returns 0 otherwise
 /atom/proc/add_blood(mob/living/carbon/human/M)

@@ -7,7 +7,6 @@
 	pixel_y = -16
 	density = TRUE
 	anchored = TRUE
-	unacidable = TRUE
 	material = /decl/material/solid/stone/marble
 	material_alteration = MAT_FLAG_ALTERATION_DESC | MAT_FLAG_ALTERATION_NAME
 
@@ -24,3 +23,6 @@
 	. = ..()
 	if (distance <= 2 && fallen.len)
 		to_chat(user, "<b>The fallen:</b> [jointext(fallen, "<br>")]")
+
+/obj/structure/memorial/acid_act()
+	return

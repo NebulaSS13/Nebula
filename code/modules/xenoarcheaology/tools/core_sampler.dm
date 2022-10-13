@@ -53,8 +53,10 @@
 	w_class = ITEM_SIZE_TINY
 	sharp = 1
 	material = /decl/material/solid/stone/sandstone
-	material_health_multiplier = 0.25
-	
+
+/obj/item/rocksliver/get_material_health_modifier()
+	return 0.25
+
 /obj/item/rocksliver/Initialize(ml, material_key, geodata)
 	. = ..()
 	icon_state = "sliver[rand(1, 3)]"

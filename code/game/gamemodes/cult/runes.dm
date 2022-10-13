@@ -4,7 +4,6 @@
 	anchored = 1
 	icon = 'icons/effects/uristrunes.dmi'
 	icon_state = "blank"
-	unacidable = 1
 	layer = RUNE_LAYER
 
 	var/blood
@@ -18,6 +17,9 @@
 	blood = nblood
 	update_icon()
 	set_extension(src, /datum/extension/turf_hand, 10)
+
+/obj/effect/rune/acid_act(decl/material/acid, exposed_volume)
+	return
 
 /obj/effect/rune/on_update_icon()
 	overlays.Cut()
@@ -265,16 +267,13 @@
 	icon = 'icons/effects/effects.dmi'//TODO: better icon
 	icon_state = "smoke"
 	color = "#ff0000"
-	anchored = 1
-	density = 1
-	unacidable = 1
+	anchored = TRUE
+	density = TRUE
+	max_health = 200
 	var/obj/effect/rune/wall/rune
-	var/health
-	var/max_health = 200
 
 /obj/effect/cultwall/Initialize(mapload, var/bcolor)
 	. = ..()
-	health = max_health
 	if(bcolor)
 		color = bcolor
 
@@ -283,6 +282,9 @@
 		rune.wall = null
 		rune = null
 	return ..()
+
+/obj/effect/cultwall/acid_act(decl/material/acid, exposed_volume)
+	return
 
 /obj/effect/cultwall/examine(mob/user)
 	. = ..()
@@ -303,13 +305,10 @@
 
 /obj/effect/cultwall/attackby(var/obj/item/I, var/mob/user)
 	if(istype(I, /obj/item/nullrod))
-		user.visible_message("<span class='notice'>\The [user] touches \the [src] with \the [I], and it disappears.</span>", "<span class='notice'>You disrupt the vile magic with the deadening field of \the [I].</span>")
+		user.visible_message(SPAN_NOTICE("\The [user] touches \the [src] with \the [I], and it disappears."), SPAN_NOTICE("You disrupt the vile magic with the deadening field of \the [I]."))
 		qdel(src)
-	else if(I.force)
-		user.visible_message("<span class='notice'>\The [user] hits \the [src] with \the [I].</span>", "<span class='notice'>You hit \the [src] with \the [I].</span>")
-		take_damage(I.force)
-		user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
-		user.do_attack_animation(src)
+		return TRUE
+	return ..()
 
 /obj/effect/cultwall/bullet_act(var/obj/item/projectile/Proj)
 	if(!(Proj.damage_type == BRUTE || Proj.damage_type == BURN))

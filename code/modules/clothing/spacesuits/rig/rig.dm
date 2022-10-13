@@ -33,7 +33,6 @@
 
 	siemens_coefficient = 0.2
 	permeability_coefficient = 0.1
-	unacidable = 1
 	material = /decl/material/solid/metal/titanium
 	matter = list(
 		/decl/material/solid/fiberglass           = MATTER_AMOUNT_SECONDARY,
@@ -172,11 +171,11 @@
 		if(piece.siemens_coefficient > siemens_coefficient) //So that insulated gloves keep their insulation.
 			piece.siemens_coefficient = siemens_coefficient
 		piece.permeability_coefficient = permeability_coefficient
-		piece.unacidable = unacidable
-		if(islist(armor))
-			piece.armor = armor.Copy() // codex reads the armor list, not extensions. this list does not have any effect on in game mechanics
+		piece.set_material(material)
+		if(islist(armor_resistances))
+			piece.armor_resistances = armor_resistances.Copy() // codex reads the armor list, not extensions. this list does not have any effect on in game mechanics
 			remove_extension(piece, /datum/extension/armor)
-			set_extension(piece, armor_type, armor, armor_degradation_speed)
+			set_extension(piece, armor_type, armor_resistances, armor_degradation_speed)
 
 	set_slowdown_and_vision(!offline)
 	update_icon(1)

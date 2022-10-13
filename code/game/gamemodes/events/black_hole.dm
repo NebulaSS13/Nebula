@@ -5,7 +5,6 @@
 	icon = 'icons/obj/objects.dmi'
 	desc = "FUCK FUCK FUCK AAAHHH!"
 	icon_state = "bhole3"
-	unacidable = 1
 	opacity = TRUE
 	density = FALSE
 	anchored = TRUE

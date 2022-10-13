@@ -33,15 +33,17 @@ avoid code duplication. This includes items that may sometimes act as a standard
 /atom/proc/attackby(obj/item/W, mob/user, var/click_params)
 	return
 
-/atom/movable/attackby(obj/item/W, mob/user)
+/atom/movable/attackby(obj/item/W, mob/user, click_params)
 	return bash(W,user)
 
 /atom/movable/proc/bash(obj/item/W, mob/user)
 	if(isliving(user) && user.a_intent == I_HELP)
 		return FALSE
+	if(!istype(W))
+		return FALSE
 	if(W.item_flags & ITEM_FLAG_NO_BLUDGEON)
 		return FALSE
-	visible_message("<span class='danger'>[src] has been hit by [user] with [W].</span>")
+	visible_message(SPAN_DANGER("\The [src] has been [pick(W.attack_verb)] by \the [user] with \the [W]."))
 	return TRUE
 
 /mob/living/attackby(obj/item/I, mob/user)

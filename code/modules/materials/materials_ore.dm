@@ -12,7 +12,6 @@
 	w_class                    = ITEM_SIZE_SMALL
 	max_amount                 = ORE_MAX_AMOUNT
 	material                   = /decl/material/solid/stone/granite //By default is just a rock
-	material_health_multiplier = 0.5
 	stack_merge_type           = /obj/item/stack/material/ore
 	randpixel                  = 8
 	material_alteration        = MAT_FLAG_ALTERATION_COLOR //Name is handled in override
@@ -23,6 +22,9 @@
 	var/static/list/cached_ore_icon_states
 	///A list of all the existing ore icon states in the ore file
 	var/static/list/ore_icon_states =  icon_states('icons/obj/materials/ore.dmi') //list("shiny", "gems", "dust", "nugget", "lump")
+
+/obj/item/stack/material/ore/get_material_health_modifier()
+	return 0.5
 
 ///Returns a cached ore pile icon state
 /obj/item/stack/material/ore/proc/get_cached_ore_pile_overlay(var/state_name, var/stack_icon_index)

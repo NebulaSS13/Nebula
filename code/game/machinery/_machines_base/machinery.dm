@@ -82,9 +82,7 @@ Class Procs:
 	layer = STRUCTURE_LAYER // Layer under items
 	throw_speed = 1
 	throw_range = 5
-	matter = list(
-		/decl/material/solid/metal/steel = MATTER_AMOUNT_PRIMARY
-	)
+	material = /decl/material/solid/metal/steel
 	abstract_type = /obj/machinery
 
 	var/stat = 0
@@ -440,12 +438,6 @@ Class Procs:
 			var/obj/item/fake_thing = type
 			parts += "[num2text(missing[type])] [initial(fake_thing.name)]"
 		to_chat(user, "\The [src] is missing [english_list(parts)], rendering it inoperable.")
-
-// This is really pretty crap and should be overridden for specific machines.
-/obj/machinery/fluid_act(var/datum/reagents/fluids)
-	..()
-	if(!(stat & (NOPOWER|BROKEN)) && !waterproof && (fluids.total_volume > FLUID_DEEP))
-		explosion_act(3)
 
 /obj/machinery/Move()
 	var/atom/lastloc = loc

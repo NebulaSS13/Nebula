@@ -4,30 +4,58 @@
 	is_spawnable_type = TRUE
 	abstract_type = /obj
 
-	var/obj_flags
+	///Properties of this object.
+	var/obj_flags = 0
+	///Required access to interact with this object.
 	var/list/req_access
-	var/list/matter //Used to store information about the contents of the object.
-	var/w_class // Size of the object.
-	var/unacidable = 0 //universal "unacidabliness" var, here so you can use it in any obj.
+	///Used to store information about the contents of the object.
+	var/list/matter
+	/// Size of the object.
+	var/w_class
+	///Damage dealt when this object is thrown and hits something
 	var/throwforce = 1
-	var/sharp = 0		// whether this object cuts
-	var/edge = 0		// whether this object is more likely to dismember
-	var/in_use = 0 // If we have a user using us, this will be set on. We will check if the user has stopped using us, and thus stop updating and LAGGING EVERYTHING!
+	///Whether this object cuts
+	var/sharp = FALSE
+	///Whether this object is more likely to dismember
+	var/edge = FALSE
+	///If we have a user using us, this will be set on. We will check if the user has stopped using us, and thus stop updating and LAGGING EVERYTHING!
+	var/in_use = FALSE
+	///Damage type getting hit by this object will cause.
 	var/damtype = BRUTE
+	///Amount of armor resistance this obj will bypass if it inflicts damage to something with armor.
 	var/armor_penetration = 0
+	///Prevents the object from falling to the lower z-level if it ends up in open space
 	var/anchor_fall = FALSE
-	var/holographic = 0 //if the obj is a holographic object spawned by the holodeck
-	var/tmp/directional_offset ///JSON list of directions to x,y offsets to be applied to the object depending on its direction EX: {'NORTH':{'x':12,'y':5}, 'EAST':{'x':10,'y':50}}
+	///if the obj is a holographic object spawned by the holodeck
+	var/holographic = FALSE
+	///JSON list of directions to x,y offsets to be applied to the object depending on its direction EX: {'NORTH':{'x':12,'y':5}, 'EAST':{'x':10,'y':50}}
+	var/tmp/directional_offset
 
-/obj/hitby(atom/movable/AM, var/datum/thrownthing/TT)
-	..()
-	if(!anchored)
-		step(src, AM.last_move)
+	///Only positive values.
+	var/health
+	///Only positive values. Use OBJ_HEALTH_NO_DAMAGE to make the object invulnerable.
+	var/max_health
+	/// Reference to material decl. If set to a string corresponding to a material ID, will init the item with that material.
+	var/decl/material/material
+	///Will apply the flagged modifications to the object
+	var/material_alteration = MAT_FLAG_ALTERATION_NONE
+	/// if set, obj will use material's armor values multiplied by this.
+	var/material_armor_multiplier
+	///Type of armor to use for this object
+	var/armor_type = /datum/extension/armor
+	///list of all the defensive damage types to the amount of resistance it provides.
+	var/list/armor_resistances
+	///How fast armor will degrade, multiplier to blocked damage to get armor damage value.
+	var/armor_degradation_speed
+	///Sound to make when hit
+	var/hitsound = 'sound/weapons/smash.ogg'
 
 /obj/proc/create_matter()
 	if(length(matter))
 		for(var/mat in matter)
 			matter[mat] = round(matter[mat] * get_matter_amount_modifier())
+	if(istype(material))
+		matter[material.type] = max(matter[material.type], round(MATTER_AMOUNT_PRIMARY * get_matter_amount_modifier()))
 	UNSETEMPTY(matter)
 
 /obj/Destroy()
@@ -115,15 +143,6 @@
 /obj/proc/show_message(msg, type, alt, alt_type)//Message, type of message (1 or 2), alternative message, alt message type (1 or 2)
 	return
 
-/obj/proc/damage_flags()
-	. = 0
-	if(has_edge(src))
-		. |= DAM_EDGE
-	if(is_sharp(src))
-		. |= DAM_SHARP
-		if(damtype == BURN)
-			. |= DAM_LASER
-
 /obj/attackby(obj/item/O, mob/user)
 	if(obj_flags & OBJ_FLAG_ANCHORABLE)
 		if(IS_WRENCH(O))
@@ -157,6 +176,10 @@
 
 /obj/examine(mob/user, distance, infix, suffix)
 	. = ..()
+	if(distance < 3)
+		var/damage_desc = get_examined_damage_string(health / max_health)
+		if(length(damage_desc))
+			to_chat(user, damage_desc)
 	if((obj_flags & OBJ_FLAG_ROTATABLE))
 		to_chat(user, SPAN_SUBTLE("\The [src] can be rotated with alt-click."))
 	if((obj_flags & OBJ_FLAG_ANCHORABLE))
@@ -205,7 +228,7 @@
 	if(directional_offset)
 		update_directional_offset()
 
-/** 
+/**
  * Applies the offset stored in the directional_offset json list depending on the current direction.
  * force will force the default offset to be 0 if there are no directional_offset string.
  */
@@ -227,8 +250,8 @@
 		default_pixel_z = curoff["z"] || 0
 	reset_offsets(0)
 
-/** 
- * Returns whether the object should be considered as hanging off a wall. 
+/**
+ * Returns whether the object should be considered as hanging off a wall.
  * This is userful because wall-mounted things are actually on the adjacent floor tile offset towards the wall.
  * Which means we have to deal with directional offsets differently. Such as with buttons mounted on a table, or on a wall.
  */
@@ -237,7 +260,7 @@
 	if(obj_flags & OBJ_FLAG_MOVES_UNSUPPORTED || anchor_fall)
 		var/turf/forward = get_step(get_turf(src), dir)
 		var/turf/reverse = get_step(get_turf(src), global.reverse_dir[dir])
-		//If we're wall mounted and don't have a wall either facing us, or in the opposite direction, don't apply the offset. 
+		//If we're wall mounted and don't have a wall either facing us, or in the opposite direction, don't apply the offset.
 		// This is mainly for things that can be both wall mounted and floor mounted. Like buttons, which mappers seem to really like putting on tables.
 		// Its sort of a hack for now. But objects don't handle being on a wall or not. (They don't change their flags, layer, etc when on a wall or anything)
 		if(!forward?.is_wall() && !reverse?.is_wall())
@@ -259,13 +282,14 @@
  * Actually populates the reagents.
  * Can be easily nulled out or fully overriden without having to rewrite the complete reagent init logic.
  * An alternative to using a list for defining our starting reagents since apparently overriding the value of a list creates an (init) proc each time.
+ * Also cuts down on A LOT of duplicate list instances for each item instances in the world.
  */
 /obj/proc/populate_reagents()
 	return
 
 /**
  * Returns a list with the contents that may be spawned in this object.
- * This shouldn't include things that are necessary for the object to operate, like machine components. 
+ * This shouldn't include things that are necessary for the object to operate, like machine components.
  * Its mainly for populating storage and the like.
  */
 /obj/proc/WillContain()
@@ -274,22 +298,6 @@
 ////////////////////////////////////////////////////////////////
 // Interactions
 ////////////////////////////////////////////////////////////////
-/**Returns a text string to describe the current damage level of the item, or null if non-applicable. */
-/obj/proc/get_examined_damage_string(var/health_ratio)
-	if(health_ratio >= 1)
-		return SPAN_NOTICE("It looks fully intact.")
-	else if(health_ratio > 0.75)
-		return SPAN_NOTICE("It has a few cracks.")
-	else if(health_ratio > 0.5)
-		return SPAN_WARNING("It looks slightly damaged.")
-	else if(health_ratio > 0.25)
-		return SPAN_WARNING("It looks moderately damaged.")
-	else
-		return SPAN_DANGER("It looks heavily damaged.")
-
-//
-// Alt Interactions
-//
 /obj/get_alt_interactions(var/mob/user)
 	. = ..()
 	LAZYADD(., /decl/interaction_handler/rotate)

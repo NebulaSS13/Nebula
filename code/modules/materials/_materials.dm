@@ -52,11 +52,6 @@ INITIALIZE_IMMEDIATE(/obj/effect/gas_overlay)
 			wood
 */
 
-//Returns the material the object is made of, if applicable.
-//Will we ever need to return more than one value here? Or should we just return the "dominant" material.
-/obj/proc/get_material()
-	return
-
 //mostly for convenience
 /obj/proc/get_material_type()
 	var/decl/material/mat = get_material()

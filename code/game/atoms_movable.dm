@@ -254,11 +254,24 @@
 				L = thing
 				L.source_atom.update_light()
 
-//called when src is thrown into hit_atom
+///Called when src is thrown into hit_atom
 /atom/movable/proc/throw_impact(atom/hit_atom, var/datum/thrownthing/TT)
 	SHOULD_CALL_PARENT(TRUE)
 	if(istype(hit_atom) && !QDELETED(hit_atom))
 		hit_atom.hitby(src, TT)
+		return TRUE
+	return FALSE
+
+/**
+ * Causes the target atom to take damages if it can be damaged. Cannot be used to heal the target. The damage value has to be positive.
+ * 
+ * inflicter is a string or an atom which caused the damage.
+ * armor_pen is the armor penetration value.
+ * target_zone is an identifier/string of the zone that's being targeted, only really applicable to mob damage for now.
+ * quiet is a boolean for determining whether we should emit sounds, text messages, and other player facing things when the damage is applied or not.
+*/
+/atom/movable/proc/take_damage(var/damage, var/damage_type = BRUTE, var/damage_flags = 0, var/inflicter = null, var/armor_pen = 0, var/target_zone = null, var/quiet = FALSE)
+	return 0 //Stub, never take damage
 
 /atom/movable/proc/throw_at(atom/target, range, speed, mob/thrower, spin = TRUE, datum/callback/callback) //If this returns FALSE then callback will not be called.
 	. = TRUE
