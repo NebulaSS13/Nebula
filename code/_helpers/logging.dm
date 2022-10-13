@@ -180,7 +180,7 @@ var/global/log_end= world.system_type == UNIX ? ascii2text(13) : ""
 
 
 		if(include_link && is_special_character(M) && highlight_special_characters)
-			. += "/(<font color='#ffa500'>[name]</font>)" //Orange
+			. += "/([SPAN_ORANGE(name)])"
 		else
 			. += "/([name])"
 

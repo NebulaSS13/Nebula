@@ -73,7 +73,7 @@
 					message = SPAN_NOTICE("\The [M] presses [G.his] thumb against \the [P]."), \
 					blind_message = SPAN_NOTICE("\The [P] makes a sharp clicking sound as it extracts DNA material from \the [M]."))
 				var/datum/dna/dna = M.dna
-				to_chat(P, "<font color = red><h3>[M]'s UE string : [dna.unique_enzymes]</h3></font>")
+				to_chat(P, SPAN_NOTICE("<h3>[M]'s UE string : [dna.unique_enzymes]</h3>"))
 				if(dna.unique_enzymes == P.master_dna)
 					to_chat(P, "<b>DNA is a match to stored Master DNA.</b>")
 				else
@@ -186,9 +186,9 @@
 	var/turf/T = get_turf(src)
 	for(var/mob/living/silicon/ai/AI in global.player_list)
 		if(T.loc)
-			to_chat(AI, "<font color = red><b>Network Alert: Brute-force encryption crack in progress in [T.loc].</b></font>")
+			to_chat(AI, SPAN_DANGER("Network Alert: Brute-force encryption crack in progress in [T.loc]."))
 		else
-			to_chat(AI, "<font color = red><b>Network Alert: Brute-force encryption crack in progress. Unable to pinpoint location.</b></font>")
+			to_chat(AI, SPAN_DANGER("Network Alert: Brute-force encryption crack in progress. Unable to pinpoint location."))
 	var/obj/machinery/door/D = cable.machine
 	if(!istype(D))
 		hack_aborted = 1
