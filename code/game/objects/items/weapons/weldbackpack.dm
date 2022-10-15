@@ -1,9 +1,11 @@
 ////////////////////////////////////////////////////////////
 //Welder gun
 ////////////////////////////////////////////////////////////
+
+///Welder specifically for the welder pack.
 /obj/item/weldingtool/weldpack
 	name         = "welding gun"
-	desc         = "A welding gun connected to a welder pack."
+	desc         = "A welding gun with hoses connecting into a welder fuel tank pack."
 	slot_flags   = SLOT_HANDS
 	throw_speed  = 0
 	throw_range  = 0
@@ -15,10 +17,8 @@
 
 /obj/item/weldingtool/weldpack/Initialize(ml, material_key, var/obj/item/chems/weldpack/pack)
 	. = ..()
-	if(pack)
+	if(istype(pack))
 		linked_pack = pack
-	if(linked_pack)
-		linked_pack.register_welder_callbacks(src, /obj/item/weldingtool/weldpack/proc/on_pack_dropped, /obj/item/weldingtool/weldpack/proc/on_pack_deleted)
 
 /obj/item/weldingtool/weldpack/insert_tank(obj/item/chems/welder_tank/T, mob/user, no_updates, quiet)
 	return FALSE
@@ -67,42 +67,33 @@
 ////////////////////////////////////////////////////////////
 /obj/item/chems/weldpack
 	name              = "welding kit"
-	desc              = "An unwieldy, heavy backpack with two massive fuel tanks. Includes a connector for most models of portable welding tools."
+	desc              = "An unwieldy, heavy backpack with two massive fuel tanks. Comes with an attached welder gun."
 	icon              = 'icons/obj/items/welderpack.dmi'
 	icon_state        = ICON_STATE_WORLD
 	slot_flags        = SLOT_BACK
 	w_class           = ITEM_SIZE_HUGE
 	volume            = 350
-	var/obj/item/weldingtool/weldpack/welder
-	var/datum/callback/call_on_pack_dropped
-	var/datum/callback/call_on_pack_deleting
+	var/obj/item/weldingtool/weldpack/welder = /obj/item/weldingtool/weldpack
 
 /obj/item/chems/weldpack/populate_reagents()
 	reagents.add_reagent(/decl/material/liquid/fuel, reagents.maximum_volume)
 
-/obj/item/chems/weldpack/Initialize()
+/obj/item/chems/weldpack/Initialize(ml, material_key)
 	. = ..()
-	if(!welder)
-		welder = new(src, null, src)
+	if(ispath(welder))
+		welder = new welder(src, null, src)
 
 /obj/item/chems/weldpack/Destroy()
-	if(call_on_pack_deleting)
-		call_on_pack_deleting.Invoke()
-	QDEL_NULL(call_on_pack_deleting)
-	QDEL_NULL(call_on_pack_dropped)
+	if(welder)
+		welder.on_pack_deleted() //Force re-attach the gun, so it also gets deleted and doesn't stay in someone's hands
 	QDEL_NULL(welder)
-
 	. = ..()
-
-/obj/item/chems/weldpack/proc/register_welder_callbacks(var/obj/item/weldingtool/weldpack/W, var/ondropped, var/ondelete)
-	call_on_pack_dropped  = CALLBACK(W, ondropped)
-	call_on_pack_deleting = CALLBACK(W, ondelete)
 
 /obj/item/chems/weldpack/attackby(obj/item/W, mob/user)
 	if(W.isflamesource() && get_fuel() && W.get_heat() >= 700 && prob(50))
+		playsound(src, 'sound/items/Welder2.ogg', 90, TRUE)
 		try_detonate_reagents()
 		log_and_message_admins("triggered a fueltank explosion.", user)
-		to_chat(user, SPAN_DANGER("That was stupid of you."))
 		return TRUE
 
 	if(IS_WELDER(W))
@@ -114,16 +105,16 @@
 			return reattach_gun(user)
 		if(!T.tank)
 			to_chat(user, "\The [T] has no tank attached!")
-		src.reagents.trans_to_obj(T.tank, T.tank.reagents.maximum_volume)
+		reagents.trans_to_obj(T.tank, T.tank.reagents.maximum_volume)
 		to_chat(user, SPAN_NOTICE("You refuel \the [W]."))
-		playsound(src.loc, 'sound/effects/refill.ogg', 50, TRUE, -6)
+		playsound(src, 'sound/effects/refill.ogg', 50, TRUE, -6)
 		return TRUE
 
 	else if(istype(W, /obj/item/chems/welder_tank))
 		var/obj/item/chems/welder_tank/tank = W
-		src.reagents.trans_to_obj(tank, tank.reagents.maximum_volume)
+		reagents.trans_to_obj(tank, tank.reagents.maximum_volume)
 		to_chat(user, SPAN_NOTICE("You refuel \the [W]."))
-		playsound(src.loc, 'sound/effects/refill.ogg', 50, TRUE, -6)
+		playsound(src, 'sound/effects/refill.ogg', 50, TRUE, -6)
 		return TRUE
 
 	return ..()
@@ -142,7 +133,6 @@
 		var/curslot = user.get_inventory_slot(src)
 		if(curslot == slot_back_str || curslot == slot_s_store_str || user.is_holding_offhand(src))
 			detach_gun(user)
-			update_icon()
 			return TRUE
 	return ..()
 
@@ -162,7 +152,11 @@
 	. = ..()
 	if(is_welder_attached())
 		var/mutable_appearance/welder_image = new(welder)
-		welder_image.pixel_x = 16
+		welder_image.pixel_y = 0
+		welder_image.pixel_x = 15
+		welder_image.pixel_z = 0  //For some reasons, the mutalbe_appearence starts with pixel_z == 6? Might be a really obscure bug in the inventory system?
+		welder_image.plane = HUD_PLANE
+		welder_image.layer = HUD_ABOVE_HUD_LAYER
 		add_overlay(welder_image)
 
 /obj/item/chems/weldpack/examine(mob/user)
@@ -171,8 +165,8 @@
 
 /obj/item/chems/weldpack/dropped(mob/user)
 	. = ..()
-	if(call_on_pack_dropped)
-		call_on_pack_dropped.Invoke(user)
+	if(welder)
+		welder.on_pack_dropped(user)
 
 /obj/item/chems/weldpack/proc/get_fuel()
 	return REAGENT_VOLUME(reagents, /decl/material/liquid/fuel)
@@ -193,6 +187,7 @@
 		user.unEquip(welder, src)
 	else
 		welder.forceMove(src)
+	update_icon()
 	return TRUE
 
 /obj/item/chems/weldpack/proc/detach_gun(var/mob/user)
@@ -202,6 +197,7 @@
 		return
 	to_chat(user, SPAN_NOTICE("You detach \the [welder] from \the [src]."))
 	user.put_in_active_hand(welder)
+	update_icon()
 	return TRUE
 
 //Empty variant
