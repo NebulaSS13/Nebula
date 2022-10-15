@@ -229,7 +229,7 @@ var/global/req_console_information = list()
 		if(inoperable(MAINT)) return
 		if(screen == RCS_MESSAUTH)
 			var/obj/item/stamp/T = O
-			msgStamped = text("<font color='blue'><b>Stamped with the [T.name]</b></font>")
+			msgStamped = "<font color='blue'><b>Stamped with the [T.name]</b></font>"
 			SSnano.update_uis(src)
 	return ..()
 

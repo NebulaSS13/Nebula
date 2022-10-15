@@ -141,6 +141,7 @@
 	var/light_range
 	var/light_power
 	var/light_color_alarm
+	var/light_color_class
 	var/light_color_status_display
 
 	var/overlay_alarm
@@ -207,6 +208,7 @@
 	light_power = 1
 
 	light_color_alarm = COLOR_GREEN
+	light_color_class = "font_green"
 
 
 	alarm_appearance = /datum/alarm_appearance/green
@@ -219,7 +221,7 @@
 	light_range = 2
 	light_power = 1
 	light_color_alarm = COLOR_BLUE
-
+	light_color_class = "font_blue"
 
 	alarm_appearance = /datum/alarm_appearance/blue
 
@@ -232,7 +234,7 @@
 	light_range = 4
 	light_power = 2
 	light_color_alarm = COLOR_RED
-
+	light_color_class = "font_red"
 
 	alarm_appearance = /datum/alarm_appearance/red
 
@@ -245,6 +247,7 @@
 	light_range = 4
 	light_power = 2
 	light_color_alarm = COLOR_RED
+	light_color_class = "font_red"
 
 	alarm_appearance = /datum/alarm_appearance/delta
 

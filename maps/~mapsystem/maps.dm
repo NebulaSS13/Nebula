@@ -399,22 +399,22 @@ var/global/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 		var/turf/playerTurf = get_turf(player)
 		if(SSevac.evacuation_controller && SSevac.evacuation_controller.round_over() && SSevac.evacuation_controller.emergency_evacuation)
 			if(isNotAdminLevel(playerTurf.z))
-				to_chat(player, "<font color='blue'><b>You managed to survive, but were marooned on [station_name()] as [player.real_name]...</b></font>")
+				to_chat(player, SPAN_NEUTRAL("<b>You managed to survive, but were marooned on [station_name()] as [player.real_name]...</b>"))
 			else
-				to_chat(player, "<font color='green'><b>You managed to survive the events on [station_name()] as [player.real_name].</b></font>")
+				to_chat(player, SPAN_GOOD("<b>You managed to survive the events on [station_name()] as [player.real_name].</b>"))
 		else if(isAdminLevel(playerTurf.z))
-			to_chat(player, "<font color='green'><b>You successfully underwent crew transfer after events on [station_name()] as [player.real_name].</b></font>")
+			to_chat(player, SPAN_GOOD("<b>You successfully underwent crew transfer after events on [station_name()] as [player.real_name].</b>"))
 		else if(issilicon(player))
-			to_chat(player, "<font color='green'><b>You remain operational after the events on [station_name()] as [player.real_name].</b></font>")
+			to_chat(player, SPAN_GOOD("<b>You remain operational after the events on [station_name()] as [player.real_name].</b>"))
 		else
-			to_chat(player, "<font color='blue'><b>You got through just another workday on [station_name()] as [player.real_name].</b></font>")
+			to_chat(player, SPAN_NEUTRAL("<b>You got through just another workday on [station_name()] as [player.real_name].</b>"))
 	else
 		if(isghost(player))
 			var/mob/observer/ghost/O = player
 			if(!O.started_as_observer)
-				to_chat(player, "<font color='red'><b>You did not survive the events on [station_name()]...</b></font>")
+				to_chat(player, SPAN_BAD("<b>You did not survive the events on [station_name()]...</b>"))
 		else
-			to_chat(player, "<font color='red'><b>You did not survive the events on [station_name()]...</b></font>")
+			to_chat(player, SPAN_BAD("<b>You did not survive the events on [station_name()]...</b>"))
 
 /datum/map/proc/create_passport(var/mob/living/carbon/human/H)
 	if(!passport_type)

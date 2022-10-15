@@ -20,7 +20,7 @@
 	if(query.NextRow())
 		playerid = query.item[1]
 	if(playerid == -1)
-		to_chat(usr,"<font color='red'>You've attempted to set staffwarn on [ckey], but they haven't been seen yet. Staffwarn can only be set on existing players.</font>")
+		to_chat(usr, SPAN_WARNING("You've attempted to set staffwarn on [ckey], but they haven't been seen yet. Staffwarn can only be set on existing players."))
 		return
 	query = dbcon.NewQuery("UPDATE `erro_player` SET `staffwarn` = '[dbreason]' WHERE `id` = [playerid]")
 	query.Execute()

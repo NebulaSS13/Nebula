@@ -90,8 +90,20 @@ h1.alert, h2.alert		{color: #000000;}
 .cultannounce			{color: #800080; font-style: italic; font-size: 175%;}
 .mfauna					{color: #884422; font-weight: bold; font-size: 125%;}
 .antagdesc				{color: #ff0033; font-size: 125%}
-
 .reflex_shoot			{color: #000099; font-style: italic;}
+
+/* General purpose colour classes */
+.font_red               {color: #ff0000;}
+.font_orange            {color: #ff7f00;}
+.font_yellow            {color: #ffff00;}
+.font_green             {color: #00ff00;}
+.font_blue              {color: #0000ff;}
+.font_violet            {color: #4B0082;}
+.font_purple            {color: #8f00ff;}
+.font_grey              {color: #454545;}
+.font_maroon            {color: #800000;}
+.font_pink              {color: #ff8787;}
+.font_palepink          {color: #ffc4c4;}
 
 /* Languages */
 

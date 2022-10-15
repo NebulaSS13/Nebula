@@ -45,7 +45,7 @@
 	if(!target)
 		return
 
-	to_chat(target, "<font color='blue'>You feel great!</font>")
+	to_chat(target, SPAN_BLUE("You feel great!"))
 	target.ExtinguishMob()
 
 /spell/contract/punish

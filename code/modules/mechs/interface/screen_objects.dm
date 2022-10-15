@@ -205,7 +205,7 @@
 /obj/screen/exosuit/toggle/on_update_icon()
 	. = ..()
 	icon_state = "[initial(icon_state)][toggled ? "_enabled" : ""]"
-	maptext = FONT_COLORED(toggled ? COLOR_WHITE : COLOR_GRAY, MECH_UI_STYLE(uitext))
+	maptext = "<font color='[toggled ? COLOR_WHITE : COLOR_GRAY]'>[MECH_UI_STYLE(uitext)]</font>"
 
 /obj/screen/exosuit/toggle/Click()
 	if(..()) toggled()

@@ -72,7 +72,7 @@
 
 			var/mob/living/carbon/human/H = M
 			to_chat(user, SPAN_NOTICE("Analyzing Results for \the [H]:"))
-			to_chat(user, "Key: <font color='#ffa500'>Electronics</font>/<font color='red'>Brute</font>")
+			to_chat(user, "Key: [SPAN_ORANGE("Electronics")]/[SPAN_RED("Brute")]")
 			var/obj/item/organ/internal/cell/C = H.get_organ(BP_CELL, /obj/item/organ/internal/cell)
 			if(C)
 				to_chat(user, SPAN_NOTICE("Cell charge: [C.percent()] %"))
@@ -84,7 +84,7 @@
 				if(!BP_IS_PROSTHETIC(E))
 					continue
 				organ_found = 1
-				to_chat(user, "[E.name]: <font color='red'>[E.brute_dam]</font> <font color='#ffa500'>[E.burn_dam]</font>")
+				to_chat(user, "[E.name]: [SPAN_RED(E.brute_dam)] [SPAN_ORANGE(E.burn_dam)]")
 			if(!organ_found)
 				to_chat(user, "No prosthetics located.")
 			to_chat(user, "<hr>")
@@ -94,7 +94,7 @@
 				if(!BP_IS_PROSTHETIC(O))
 					continue
 				organ_found = 1
-				to_chat(user, "[O.name]: <font color='red'>[O.damage]</font>")
+				to_chat(user, "[O.name]: [SPAN_RED(O.damage)]")
 			if(!organ_found)
 				to_chat(user, "No prosthetics located.")
 

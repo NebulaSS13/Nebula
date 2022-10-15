@@ -228,11 +228,11 @@
 				dat += ascii2text(ascii_char)
 				last_was_fullstop = FALSE
 			if(46)			//.
-				if(last_was_fullstop) // No repeats of . to avoid confusion with .. 
+				if(last_was_fullstop) // No repeats of . to avoid confusion with ..
 					continue
 				dat += ascii2text(ascii_char)
 				last_was_fullstop = TRUE
-	
+
 	if(!has_alphanumeric)
 		return ""
 
@@ -683,8 +683,17 @@ var/global/list/fullstop_alternatives = list(".", "!", "?")
 #define APPEND_FULLSTOP_IF_NEEDED(TXT) ((copytext_char(TXT, -1, 0) in global.fullstop_alternatives) ? TXT : "[TXT].")
 
 /proc/make_rainbow(var/msg)
+	var/static/list/rainbow_classes = list(
+		"font_red",
+		"font_orange",
+		"font_yellow",
+		"font_green",
+		"font_blue",
+		"font_violet",
+		"font_purple"
+	)
 	for(var/i = 1 to length(msg))
-		. += "<font color='[get_random_colour(1)]'>[copytext(msg, i, i+1)]</font>"
+		. += "<span class='[pick(rainbow_classes)]'>[copytext(msg, i, i+1)]</span>"
 
 // Returns direction-string, rounded to multiples of 22.5, from the first parameter to the second
 // N, NNE, NE, ENE, E, ESE, SE, SSE, S, SSW, SW, WSW, W, WNW, NW, NNW
