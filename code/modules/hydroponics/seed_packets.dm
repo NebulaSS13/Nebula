@@ -7,6 +7,7 @@ var/global/list/plant_seed_sprites = list()
 	icon_state = "seedy"
 	w_class = ITEM_SIZE_SMALL
 	abstract_type = /obj/item/seeds
+	material = /decl/material/solid/paper
 
 	var/seed_type
 	var/datum/seed/seed
