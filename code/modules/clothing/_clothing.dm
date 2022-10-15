@@ -155,8 +155,7 @@
 	var/species_icon = LAZYACCESS(sprite_sheets, target_bodytype)
 	if(species_icon && (check_state_in_icon(ICON_STATE_INV, species_icon) || check_state_in_icon(ICON_STATE_WORLD, species_icon)))
 		icon = species_icon
-	else
-		icon = initial(icon)
+
 	if(last_icon != icon)
 		reconsider_single_icon()
 		update_clothing_icon()
