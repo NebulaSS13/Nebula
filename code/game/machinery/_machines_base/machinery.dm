@@ -414,7 +414,7 @@ Class Procs:
 		var/obj/item/thing = path
 		to_chat(user, "<span class='notice'>	[initial(thing.name)] ([uncreated_component_parts[path] || 1])</span>")
 
-/obj/machinery/examine(mob/user)
+/obj/machinery/examine(mob/user, distance)
 	. = ..()
 	if(component_parts && (hasHUD(user, HUD_SCIENCE) || (construct_state && construct_state.visible_components)))
 		display_parts(user)

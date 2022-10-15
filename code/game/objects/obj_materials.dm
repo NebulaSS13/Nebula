@@ -41,7 +41,8 @@
 			set_opacity(initial(opacity))
 		
 		//Sound
-		hitsound = material?.hitsound || initial(hitsound)
+		if(!hitsound)
+			hitsound = material?.hitsound
 
 		//Armor
 		if(material_armor_multiplier)

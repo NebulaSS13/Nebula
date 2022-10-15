@@ -100,7 +100,7 @@
 	return TRUE
 
 /obj/structure/attackby(obj/item/O, mob/user)
-    if(IS_WRENCH(O))
+	if(IS_WRENCH(O))
 		. = handle_default_wrench_attackby(user, O)
 	else if(IS_SCREWDRIVER(O))
 		. = handle_default_screwdriver_attackby(user, O)

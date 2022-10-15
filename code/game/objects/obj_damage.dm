@@ -40,6 +40,10 @@
 	. = health - .
 	check_health()
 
+///Returns whether the object is damaged or not. Also checks whether the object takes damage to begin with.
+/obj/proc/is_damaged()
+	return can_take_damage() && (health < max_health)
+
 ///Returns a text string to describe the current damage level of the item, or null if non-applicable.
 /obj/proc/get_examined_damage_string(var/health_ratio)
 	if(!can_take_damage())
@@ -118,9 +122,11 @@
 
 /obj/fire_act(datum/gas_mixture/air, exposed_temperature, exposed_volume)
 	. = ..()
-	var/dmg = 0
-	if(istype(material) && material.ignition_point && (exposed_temperature >= material.ignition_point))
-		dmg = round(dmg * material.combustion_effect(get_turf(src), temperature))
+	var/dmg = max(exposed_temperature - T100C, 0) //Arbitrary damage for things that don't define a material
+	if(istype(material))
+		dmg = 0 //Don't take damage until ignition point
+		if(material.ignition_point && (exposed_temperature >= material.ignition_point))
+			dmg = round(dmg * material.combustion_effect(get_turf(src), temperature))
 	if(dmg)
 		take_damage(dmg, BURN, DAM_DISPERSED, "fire", 0, null, TRUE)
 
@@ -183,7 +189,7 @@
 		var/hit_volume = 75
 		if(isobj(AM))
 			var/obj/O = AM
-			hit_volume = O.get_throw_impact_sound_volume()
+			hit_volume = O.get_impact_sound_volume()
 		playsound(loc, hitsound, hit_volume, TRUE)
 
 /obj/throw_impact(atom/movable/hit_atom, datum/thrownthing/TT)
@@ -191,14 +197,6 @@
 	if(.)
 		//Apply damge in hitby to avoid having to typecast
 		hit_atom.take_damage(throwforce, damtype, damage_flags(), TT.thrower, armor_penetration)
-
-/obj/bash(obj/item/W, mob/user)
-	. = ..()
-	if(!.)
-		return
-	if(hitsound)
-		playsound(loc, hitsound, 75, TRUE)
-	take_damage(W.force, W.damtype, W.damage_flags(), user, W.armor_penetration)
 
 ///Returns the volume at which the hitsound should play assuming the src object is being thrown
 /obj/proc/get_impact_sound_volume()
@@ -208,3 +206,55 @@
 		return clamp(w_class * 8, 20, 100) // Multiply the item's weight class by 8, then clamp the value between 20 and 100
 	else
 		return 0
+
+/obj/bash(obj/item/W, mob/user)
+	. = ..()
+	if(!.)
+		return
+	. = take_damage(W.force, W.damtype, W.damage_flags(), user, W.armor_penetration, user.zone_sel)
+	if(. > 0)
+		if(hitsound)
+			playsound(loc, hitsound, 75, TRUE)
+	else
+		visible_message(SPAN_NOTICE("It wasn't very effective..."))
+		if(hitsound) //Check if we want a sound on hit first
+			playsound(loc, hitsound, 35, TRUE)
+
+//#TODO: This proc will need some serious work to make use of natural_attacks and attack stances. Some human mobs actually end up calling this when unarmed attacking things in some cases
+/obj/attack_generic(var/mob/user, var/damage, var/attack_verb, var/environment_smash)
+	if(environment_smash)
+		damage = max(damage, 10)
+
+	user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN) //#TODO: This probably should be on the attacker and not on the attacked
+	user.do_attack_animation(src) //#TODO: This probably should be on the attacker and not on the attacked
+	if(!damage)
+		return FALSE
+	if(damage >= 10)
+		visible_message(SPAN_DANGER("\The [user] [attack_verb] into [src]!"))
+		take_damage(damage, BRUTE, 0, user)
+	else
+		visible_message(SPAN_NOTICE("\The [user] bonks \the [src] harmlessly.")) //#TODO: This probably should be somehow triggered by the armor absorbing all the damage
+	return TRUE
+
+///Whether the obj can be repaired. Also tells the user the reason it cannot be.
+/obj/proc/can_repair(var/mob/user)
+	if(!is_damaged())
+		if(user)
+			to_chat(user, SPAN_NOTICE("\The [src] does not need repairs."))
+		return FALSE
+	return TRUE
+
+///Returns whether the tool can be used to repair the object. 
+/obj/proc/can_repair_with(var/obj/item/tool, var/mob/user)
+	. = istype(tool, /obj/item/stack/material) && tool.get_material_type() == get_material_type()
+
+///Handles repairing the object with the given tool
+/obj/proc/handle_repair(mob/user, obj/item/tool)
+	var/obj/item/stack/stack = tool
+	var/amount_needed = CEILING((max_health - health)/DOOR_REPAIR_AMOUNT)
+	var/used = min(amount_needed, stack.amount)
+	if(used)
+		to_chat(user, SPAN_NOTICE("You fit [used] [stack.singular_name]\s to damaged areas of \the [src]."))
+		stack.use(used)
+		heal(used * DOOR_REPAIR_AMOUNT)
+

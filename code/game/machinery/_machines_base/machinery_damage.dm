@@ -83,13 +83,13 @@
 	RefreshParts()
 	if(istype(component, /obj/item/stock_parts/power))
 		power_change()
-		spark_at(loc, 2, FALSE, src) //Gives some much needed feedback
+		spark_at(loc, rand(1, 4), FALSE, src) //Gives some much needed feedback
 	update_icon()
 
 /obj/machinery/emp_act(severity)
 	if(use_power && operable())
 		new /obj/effect/temp_visual/emp_burst(loc)
-		spark_at(loc, 4, FALSE, src)
+		spark_at(loc, rand(1, 5), FALSE, src)
 		use_power_oneoff(7500/severity) //#TODO: Maybe use the active power usage value instead of a random power literal
 		take_damage(100/severity, ELECTROCUTE, 0, "power spike")
 	. = ..()
@@ -105,3 +105,23 @@
 	..()
 	if(!waterproof && operable() && (fluids.total_volume > FLUID_DEEP))
 		explosion_act(3)
+
+/obj/machinery/attack_generic(var/mob/user, var/damage, var/attack_verb, var/environment_smash)
+	if(environment_smash >= 1)
+		damage = max(damage, 10)
+
+	if(damage >= 10)
+		visible_message(SPAN_DANGER("\The [user] [attack_verb] into \the [src]!"))
+		take_damage(damage)
+	else
+		visible_message(SPAN_NOTICE("\The [user] bonks \the [src] harmlessly."))
+	attack_animation(user)
+
+/obj/machinery/attackby(obj/item/I, mob/user)
+	//Added an extra is_damaged check, because can_repair_with could be expensive.
+	//Generic machine frame repair code
+	if(can_repair_with(I) && can_repair(user) && handle_repair(user, I))
+		user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
+		add_fingerprint(user)
+		return TRUE
+	return ..()

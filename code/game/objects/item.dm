@@ -774,7 +774,7 @@ modules/mob/living/carbon/human/life.dm if you die, you will be zoomed out.
 		set_icon_state(citem.item_state)
 
 /obj/item/proc/is_special_cutting_tool(var/high_power)
-	return FALSE
+	return FALSE //#TODO: Why not use a tool archetype for this?
 
 /obj/item/proc/w_class_description()
 	switch(w_class)

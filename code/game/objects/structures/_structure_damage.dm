@@ -11,21 +11,6 @@
 		show_damage_message(health / max_health)
 
 //#TODO: Might need to eventually handle evironment smash as an attack instead of as a boolean check
-/obj/structure/attack_generic(var/mob/user, var/damage, var/attack_verb, var/environment_smash)
-	if(environment_smash >= 1)
-		damage = max(damage, 10)
-
-	if(istype(user))
-		user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
-		user.do_attack_animation(src)
-	if(!damage)
-		return FALSE
-	if(damage >= 10)
-		visible_message(SPAN_DANGER("\The [user] [attack_verb] into [src]!"))
-		take_damage(damage, BRUTE, 0, user)
-	else
-		visible_message(SPAN_NOTICE("\The [user] bonks \the [src] harmlessly."))
-	return TRUE
 
 /obj/structure/proc/show_damage_message(var/perc)
 	if(perc > 0.75)
@@ -44,23 +29,3 @@
 	if(..(TRUE))
 		return dismantle()
 
-///Whether the structure can be repaired. Also tells the user the reason it cannot be.
-/obj/structure/proc/can_repair(var/mob/user)
-	if(health >= max_health)
-		if(user)
-			to_chat(user, SPAN_NOTICE("\The [src] does not need repairs."))
-		return FALSE
-	return TRUE
-
-/obj/structure/proc/can_repair_with(var/obj/item/tool)
-	. = istype(tool, /obj/item/stack/material) && tool.get_material_type() == get_material_type()
-
-/obj/structure/proc/handle_repair(mob/user, obj/item/tool)
-	var/obj/item/stack/stack = tool
-	var/amount_needed = CEILING((max_health - health)/DOOR_REPAIR_AMOUNT)
-	var/used = min(amount_needed, stack.amount)
-	if(used)
-		to_chat(user, SPAN_NOTICE("You fit [used] [stack.singular_name]\s to damaged areas of \the [src]."))
-		stack.use(used)
-		last_damage_message = null
-		heal(used * DOOR_REPAIR_AMOUNT)

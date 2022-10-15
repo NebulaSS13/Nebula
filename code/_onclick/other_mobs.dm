@@ -1,5 +1,5 @@
 // Generic damage proc (slimes and monkeys).
-/atom/proc/attack_generic(mob/user)
+/atom/proc/attack_generic(var/mob/user, var/damage, var/attack_verb, var/environment_smash)
 	return 0
 
 /*

@@ -7,7 +7,7 @@
 /obj/machinery
 	var/decl/machine_construction/construct_state
 
-/obj/machinery/Initialize()
+/obj/machinery/Initialize(mapload, d=0, populate_parts = TRUE)
 	if(construct_state)
 		construct_state = GET_DECL(construct_state)
 	. = ..()
