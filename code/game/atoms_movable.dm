@@ -270,7 +270,7 @@
  * target_zone is an identifier/string of the zone that's being targeted, only really applicable to mob damage for now.
  * quiet is a boolean for determining whether we should emit sounds, text messages, and other player facing things when the damage is applied or not.
 */
-/atom/movable/proc/take_damage(var/damage, var/damage_type = BRUTE, var/damage_flags = 0, var/inflicter = null, var/armor_pen = 0, var/target_zone = null, var/quiet = FALSE)
+/atom/movable/proc/take_damage(var/amount, var/damage_type = BRUTE, var/damage_flags = 0, var/inflicter = null, var/armor_pen = 0, var/target_zone = null, var/quiet = FALSE)
 	return 0 //Stub, never take damage
 
 /atom/movable/proc/throw_at(atom/target, range, speed, mob/thrower, spin = TRUE, datum/callback/callback) //If this returns FALSE then callback will not be called.

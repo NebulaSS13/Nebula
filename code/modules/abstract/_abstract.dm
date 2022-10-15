@@ -36,8 +36,8 @@
 /obj/abstract/can_be_corroded_by(decl/material/M, amount)
 	return FALSE
 
-/obj/abstract/take_damage(damage, damage_type, damage_flags, inflicter, armor_pen, target_zone, quiet)
-	return 0
+/obj/abstract/take_damage(amount, damage_type, damage_flags, inflicter, armor_pen, target_zone, quiet)
+	return 0 //Must return a number
 
 /obj/abstract/heal(amount)
-	return 0
+	return 0 //Must return a number

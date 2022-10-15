@@ -7,28 +7,28 @@
 	return 1
 
 ///Basic damage handling for items. Returns the amount of damage taken after armor if the item was damaged.
-/obj/take_damage(damage, damage_type = BRUTE, damage_flags = 0, inflicter = null, armor_pen = 0, target_zone = null, quiet = FALSE)
+/obj/take_damage(amount, damage_type = BRUTE, damage_flags = 0, inflicter = null, armor_pen = 0, target_zone = null, quiet = FALSE)
 	if(!can_take_damage()) // This object does not take damage.
 		return 0 //Must return a number
-	if(damage < 0)
+	if(amount < 0)
 		CRASH("Item '[type]' take_damage proc was called with negative damage.") //Negative damage are an implementation issue.
 	
 	//Apply armor
 	var/datum/extension/armor/A = get_extension(src, /datum/extension/armor)
 	if(A)
-		var/list/dam_after_armor = A.apply_damage_modifications(damage, damage_type, damage_flags, null, armor_pen, TRUE)
-		damage       = dam_after_armor[1]
+		var/list/dam_after_armor = A.apply_damage_modifications(amount, damage_type, damage_flags, null, armor_pen, TRUE)
+		amount       = dam_after_armor[1]
 		damage_type  = dam_after_armor[2]
 		damage_flags = dam_after_armor[3]
 		armor_pen    = dam_after_armor[5]
 
-	if(damage <= 0)
+	if(amount <= 0)
 		return 0 //must return a number
 
 	//Apply damage
-	health = clamp(health - damage, 0, max_health)
-	check_health(damage, damage_type, damage_flags)
-	return damage
+	health = clamp(health - amount, 0, max_health)
+	check_health(amount, damage_type, damage_flags)
+	return amount
 
 ///Give back some health to the object
 /obj/proc/heal(var/amount)

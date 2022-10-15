@@ -1,13 +1,14 @@
-/obj/structure/take_damage(damage, damage_type = BRUTE, damage_flags = 0, inflicter = null, armor_pen = 0, target_zone = null, quiet = FALSE)
+/obj/structure/take_damage(amount, damage_type = BRUTE, damage_flags = 0, inflicter = null, armor_pen = 0, target_zone = null, quiet = FALSE)
 	if(material && material.is_brittle())
-		if(reinf_material)
-			if(reinf_material.is_brittle())
-				damage *= STRUCTURE_BRITTLE_MATERIAL_DAMAGE_MULTIPLIER
-		else
-			damage *= STRUCTURE_BRITTLE_MATERIAL_DAMAGE_MULTIPLIER
-	. = ..(damage, arglist(args.Copy(2,length(args)))
+		if(!reinf_material)
+			amount *= STRUCTURE_BRITTLE_MATERIAL_DAMAGE_MULTIPLIER
+		else if(reinf_material.is_brittle())
+			amount *= STRUCTURE_BRITTLE_MATERIAL_DAMAGE_MULTIPLIER
+
+	. = ..(amount, damage_type, damage_flags, inflicter, armor_pen, target_zone, quiet)
+
 	if(. > 0 && !quiet)
-		show_damage_message(health/maxhealth)
+		show_damage_message(health / max_health)
 
 //#TODO: Might need to eventually handle evironment smash as an attack instead of as a boolean check
 /obj/structure/attack_generic(var/mob/user, var/damage, var/attack_verb, var/environment_smash)

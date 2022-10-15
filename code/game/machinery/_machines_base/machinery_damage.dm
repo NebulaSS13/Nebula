@@ -3,9 +3,9 @@
 /obj/machinery/proc/physical_damage_to_components_multiplier()
 	return 0.25
 
-/obj/machinery/take_damage(damage, damage_type = BRUTE, damage_flags = 0, inflicter = null, armor_pen = 0, target_zone = null, quiet = FALSE)
+/obj/machinery/take_damage(amount, damage_type = BRUTE, damage_flags = 0, inflicter = null, armor_pen = 0, target_zone = null, quiet = FALSE)
 	//Let's not bother initializing all the components for nothing
-	if(damage <= 0)
+	if(amount <= 0)
 		return 0
 	if(damage_type != BRUTE && damage_type != BURN && damage_type != ELECTROCUTE)
 		return 0
@@ -20,18 +20,18 @@
 		playsound(src, snd, 20, TRUE)
 
 	//Keep track of the damage passed in the args
-	var/initial_damage = damage
+	var/initial_damage = amount
 
 	// Shielding components (armor/fuses) take first hit
 	var/list/shielding = get_all_components_of_type(/obj/item/stock_parts/shielding)
 	for(var/obj/item/stock_parts/shielding/soak in shielding)
 		if(damtype in soak.protection_types)
-			damage -= soak.take_damage(damage, damtype)
-	if(damage <= 0)
+			amount -= soak.take_damage(amount, damtype)
+	if(amount <= 0)
 		return initial_damage
 
 	//Only let some of the damage through to the components from BRUTE, but let BURN and ELECTROCUTE damage go to town on them
-	var/component_damage = (damage_type == BRUTE)? damage * physical_damage_to_components_multiplier() : damage
+	var/component_damage = (damage_type == BRUTE)? amount * physical_damage_to_components_multiplier() : amount
 	var/init_component_damage = component_damage
 	if(component_damage > 0)
 		// If some damage got past, next it's generic (non-circuitboard) components
@@ -47,16 +47,16 @@
 				component_damage -= victim.take_damage(component_damage, damage_type)
 
 	//Remove only what the components absorbed
-	damage -= init_component_damage - component_damage
-	if(damage <= 0)
+	amount -= init_component_damage - component_damage
+	if(amount <= 0)
 		return initial_damage
 
 	//Electric damage doesn't damage the frame
 	if(damage_type == ELECTROCUTE)
-		return (initial_damage - damage)
+		return (initial_damage - amount)
 
 	//Burn and brute may damage the frame
-	return ..(initial_damage - damage, damage_type, damage_flags, inflicter, armor_pen, target_zone, quiet)
+	return ..(initial_damage - amount, damage_type, damage_flags, inflicter, armor_pen, target_zone, quiet)
 
 /obj/machinery/proc/get_damageable_component(var/damage_type)
 	var/list/victims = shuffle(component_parts)
