@@ -9,10 +9,6 @@
 	credits_crew_names = list("THE VOX")
 	credits_topics = list("VOX RITUAL DUELS", "NECK MARKINGS", "ANCIENT SUPERCOMPUTERS")
 
-/decl/modpack/vox/post_initialize()
-	. = ..()
-	global.item_damage_test_exemptions |= /obj/item/gun/energy/darkmatter
-
 /mob/living/carbon/human/vox/Initialize(mapload, new_species)
 	h_style = /decl/sprite_accessory/hair/vox/short
 	hair_colour = COLOR_BEASTY_BROWN

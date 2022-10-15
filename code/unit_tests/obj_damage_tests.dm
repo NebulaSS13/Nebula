@@ -1,53 +1,6 @@
 /////////////////////////////////////////////////////////
 // Items Test
 /////////////////////////////////////////////////////////
-var/global/item_test_exemptions_initialized = FALSE
-
-/// Initializes the test exemptions that can't be defined at compile time.
-/proc/initialize_item_damage_test_exemptions()
-	if(global.item_test_exemptions_initialized)
-		return
-
-	global.item_damage_test_exemptions |= /obj/item/pen/crayon/random              //Delete itself
-	global.item_damage_test_exemptions |= /obj/item/paper/monitorkey               //Crash on null turf
-	global.item_damage_test_exemptions |= /obj/item/chems/food/grown               //Base type, delete itself
-	global.item_damage_test_exemptions |= /obj/item/chems/food/grown/mushroom      //Base type, delete itself
-	global.item_damage_test_exemptions |= /obj/item/chems/food/fruit_slice         //Base type, delete itself
-	global.item_damage_test_exemptions |= /obj/item/chems/pill/pouch_pill          //Base type, causes many runtimes
-	global.item_damage_test_exemptions |= /obj/item/gun/energy/gun/secure/mounted  //Can't exist outside something
-	global.item_damage_test_exemptions |= /obj/item/energy_blade/ninja             //Delete itself
-	global.item_damage_test_exemptions |= /obj/item/grenade/flashbang/instant      //Delete itself
-	global.item_damage_test_exemptions |= /obj/item/frame_holder                   //Delete itself
-	global.item_damage_test_exemptions |= /obj/item/ai_verbs                       //Abstract object
-	global.item_damage_test_exemptions |= /obj/item/storage                        //Base class not meant to be spawned
-	global.item_damage_test_exemptions |= /obj/item/twohanded                      //Base class not meant to be spawned
-	global.item_damage_test_exemptions |= /obj/item/instrument                     //Base class not meant to be spawned
-	global.item_damage_test_exemptions |= /obj/item/shield                         //Base class not meant to be spawned
-	global.item_damage_test_exemptions |= /obj/item/integrated_electronics         //Base class not meant to be spawned
-	global.item_damage_test_exemptions |= /obj/item/crafting_holder                //Requires explicit contruction parameters
-
-
-	global.item_damage_test_exemptions |= typesof(/obj/item/radio/announcer)       //Special object
-	global.item_damage_test_exemptions |= typesof(/obj/item/magic_hand)            //Abstract
-	global.item_damage_test_exemptions |= typesof(/obj/item/storage/internal)      //Can't exist outside something
-	global.item_damage_test_exemptions |= typesof(/obj/item/stack/material)        //Base type, delete themselves
-	global.item_damage_test_exemptions |= typesof(/obj/item/proxy_debug)           //Abstract / Broken
-	global.item_damage_test_exemptions |= typesof(/obj/item/book/skill)            //Delete itself
-	global.item_damage_test_exemptions |= typesof(/obj/item/paper/secret_note)     //Delete itself
-	global.item_damage_test_exemptions |= typesof(/obj/item/radio/borg)            //Can't exist outside something
-	global.item_damage_test_exemptions |= typesof(/obj/item/uplink)                //Delete itself
-	global.item_damage_test_exemptions |= typesof(/obj/item/assembly_holder)       //Abstract
-	global.item_damage_test_exemptions |= typesof(/obj/item/deck/cag)              //Delete itself
-	global.item_damage_test_exemptions |= typesof(/obj/item/seeds)                 //Delete itself
-	global.item_damage_test_exemptions |= typesof(/obj/item/grab)                  //Abstract
-	global.item_damage_test_exemptions |= typesof(/obj/item/robot_module)          //Delete itself
-	global.item_damage_test_exemptions |= typesof(/obj/item/archaeological_find)   //Delete itself
-	global.item_damage_test_exemptions |= typesof(/obj/item/projectile)            //Temporary object
-	global.item_damage_test_exemptions |= typesof(/obj/item/natural_weapon)        //Abstract object
-	global.item_damage_test_exemptions |= typesof(/obj/item/tankassemblyproxy)     //Abstract object
-	global.item_damage_test_exemptions |= typesof(/obj/item/integrated_circuit)    //### Integrated circuits do a lot of weirdness with the material system, and I can't be assed to rewrite that whole thing rn
-	global.item_damage_test_exemptions |= typesof(/obj/item/holder)                //Abstract object
-	global.item_test_exemptions_initialized = TRUE
 
 //
 // Item tests
@@ -57,13 +10,11 @@ var/global/item_test_exemptions_initialized = FALSE
 	var/list/obj_test_instances = list()
 	var/list/failures = list()
 
-/datum/unit_test/items_test/New()
-	. = ..()
-	initialize_item_damage_test_exemptions()
-
 /datum/unit_test/items_test/start_test()
 	//Instantiate all items
-	for(var/path in (subtypesof(/obj/item) - global.item_damage_test_exemptions))
+	for(var/path in subtypesof(/obj/item))
+		if(!TYPE_IS_SPAWNABLE(path))
+			continue
 		var/obj/item/I = new path
 		if(QDELETED(I))
 			log_warning("Item type '[path]' got destroyed during test init.")

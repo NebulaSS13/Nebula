@@ -2,10 +2,6 @@
 	name = "Psionics Content"
 	dreams = list("the Foundation", "nullglass")
 
-/decl/modpack/psionics/post_initialize()
-	. = ..()
-	global.item_damage_test_exemptions |= typesof(/obj/item/psychic_power)
-
 /decl/modpack/psionics/get_player_panel_options(var/mob/M)
 	. = list("<b>Psionics:</b><br/>")
 	if(isliving(M))
