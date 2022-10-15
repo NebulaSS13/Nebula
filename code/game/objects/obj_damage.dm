@@ -71,11 +71,11 @@
 
 ///Setup and populate the armor extensions from the armor list in the obj definition.
 /obj/proc/update_armor()
-	if(!length(armor_resistances))
+	if(!length(armor))
 		return
-	for(var/type in armor_resistances)
-		if(armor_resistances[type]) // Don't set it if it gives no armor anyway, which is many items.
-			set_extension(src, armor_type, armor_resistances, armor_degradation_speed)
+	for(var/type in armor)
+		if(armor[type]) // Don't set it if it gives no armor anyway, which is many items.
+			set_extension(src, armor_type, armor, armor_degradation_speed)
 			break
 
 /obj/corrosive_act(var/decl/material/corrosive, var/exposed_volume, var/datum/reagents/holder)

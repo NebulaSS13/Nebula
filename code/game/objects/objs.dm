@@ -44,7 +44,7 @@
 	///Type of armor to use for this object
 	var/armor_type = /datum/extension/armor
 	///list of all the defensive damage types to the amount of resistance it provides.
-	var/list/armor_resistances
+	var/list/armor
 	///How fast armor will degrade, multiplier to blocked damage to get armor damage value.
 	var/armor_degradation_speed
 	///Sound to make when hit

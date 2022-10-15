@@ -46,14 +46,11 @@
 		//Armor
 		if(material_armor_multiplier)
 			//Allow the material's armor resistances to be partially overriden by the user
-			var/list/parsed_armor
-			if(length(armor_resistances))
+			if(length(armor))
 				//Merge the resistances from the material with the ones we specified, exluding those already defined by the definition
-				parsed_armor      = json_decode(armor_resistances)
-				parsed_armor     |= material.get_armor(material_armor_multiplier)
-				armor_resistances = json_encode(parsed_armor)
+				armor |= material.get_armor(material_armor_multiplier)
 			else
-				armor_resistances = json_encode(material.get_armor(material_armor_multiplier))
+				armor = material.get_armor(material_armor_multiplier)
 
 			armor_degradation_speed = material.armor_degradation_speed
 			update_armor()

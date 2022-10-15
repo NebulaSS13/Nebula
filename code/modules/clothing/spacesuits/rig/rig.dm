@@ -172,10 +172,10 @@
 			piece.siemens_coefficient = siemens_coefficient
 		piece.permeability_coefficient = permeability_coefficient
 		piece.set_material(material)
-		if(islist(armor_resistances))
-			piece.armor_resistances = armor_resistances.Copy() // codex reads the armor list, not extensions. this list does not have any effect on in game mechanics
+		if(islist(armor))
+			piece.armor = armor.Copy() // codex reads the armor list, not extensions. this list does not have any effect on in game mechanics
 			remove_extension(piece, /datum/extension/armor)
-			set_extension(piece, armor_type, armor_resistances, armor_degradation_speed)
+			set_extension(piece, armor_type, armor, armor_degradation_speed)
 
 	set_slowdown_and_vision(!offline)
 	update_icon(1)
