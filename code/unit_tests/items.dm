@@ -12,6 +12,7 @@
 				continue
 			I = new path
 			if(QDELETED(I))
+				log_warning("Item type '[path]' got destroyed during test init.")
 				continue
 			obj_test_instances[path] = I
 		catch(var/exception/e)
