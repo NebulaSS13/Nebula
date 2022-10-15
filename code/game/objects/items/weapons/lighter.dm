@@ -203,12 +203,12 @@
 /obj/item/flame/lighter/zippo/brass
 	name = "brass zippo"
 	material = /decl/material/solid/metal/brass
-	applies_material_colour = TRUE
+	material_alteration = MAT_FLAG_ALTERATION_COLOR
 
 /obj/item/flame/lighter/zippo/bronze
 	name = "bronze zippo"
 	material = /decl/material/solid/metal/bronze
-	applies_material_colour = TRUE
+	material_alteration = MAT_FLAG_ALTERATION_COLOR
 
 /obj/item/flame/lighter/zippo/pink
 	color = COLOR_PINK
@@ -222,8 +222,7 @@
 		/decl/material/solid/metal/blackbronze,
 		/decl/material/solid/metal/stainlesssteel = list(null, COLOR_WHITE, COLOR_DARK_GRAY, COLOR_GUNMETAL), //null color is the natural material color
 	)
-	applies_material_colour = TRUE
-	applies_material_name = TRUE
+	material_alteration = MAT_FLAG_ALTERATION_COLOR | MAT_FLAG_ALTERATION_NAME
 
 /obj/item/flame/lighter/zippo/random/Initialize(ml, material_key)
 	var/picked_mat = pick(available_materials)
@@ -233,7 +232,7 @@
 		picked_color = pick(available)
 		log_debug("Picked color : '[picked_color]' out of [length(available)]")
 		if(picked_color)
-			applies_material_colour = FALSE
+			material_alteration &= ~MAT_FLAG_ALTERATION_COLOR
 
 	. = ..(ml, picked_mat)
 

@@ -241,7 +241,7 @@
 		var/list/cuttings = material.place_cuttings(get_turf(src), matter[material.type])
 		//Make the bits of paper the right color
 		for(var/obj/item/C in cuttings)
-			C.applies_material_colour = FALSE //Prevents the update_icon code from recoloring this white
+			C.material_alteration &= ~(MAT_FLAG_ALTERATION_COLOR) //Prevents the update_icon code from recoloring this white
 			C.set_color(trash_color)
 	. = ..()
 

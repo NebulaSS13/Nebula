@@ -7,8 +7,7 @@
 	thrown_material_force_multiplier = 0.1
 	randpixel = 5
 	material = /decl/material/solid/metal/bronze
-	applies_material_colour = TRUE
-	applies_material_name = TRUE
+	material_alteration = MAT_FLAG_ALTERATION_COLOR | MAT_FLAG_ALTERATION_NAME
 	var/max_butts = 10
 
 /obj/item/ashtray/examine(mob/user)

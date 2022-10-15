@@ -11,7 +11,7 @@
 	attack_verb = list("pinched", "nipped")
 	sharp = 1
 	edge = 1
-	applies_material_colour = TRUE
+	material_alteration = MAT_FLAG_ALTERATION_COLOR
 	drop_sound = 'sound/foley/singletooldrop1.ogg'
 
 	var/handle_color

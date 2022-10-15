@@ -127,8 +127,7 @@
 	name = "blazing blade"
 	icon = 'icons/obj/items/weapon/swords/flaming.dmi'
 	damtype = BURN
-	applies_material_colour = FALSE
-	applies_material_name = FALSE
+	material_alteration = MAT_FLAG_ALTERATION_NONE
 	var/last_near_structure = 0
 	var/mob/living/deity/linked
 

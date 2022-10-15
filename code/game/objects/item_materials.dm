@@ -2,7 +2,7 @@
 	. = ..()
 	SHOULD_CALL_PARENT(TRUE)
 	cut_overlays()
-	if(applies_material_colour && material)
+	if((material_alteration & MAT_FLAG_ALTERATION_COLOR) && material)
 		color = material.color
 		alpha = 100 + material.opacity * 255
 	if(blood_overlay)
@@ -119,7 +119,7 @@
 		else
 			obj_flags &= (~OBJ_FLAG_CONDUCTIBLE)
 		update_force()
-		if(applies_material_name)
+		if(material_alteration & MAT_FLAG_ALTERATION_NAME)
 			SetName("[material.solid_name] [initial(name)]")
 		if(material_armor_multiplier)
 			armor = material.get_armor(material_armor_multiplier)

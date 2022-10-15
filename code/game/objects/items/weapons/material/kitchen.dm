@@ -1,8 +1,7 @@
 /obj/item/kitchen
 	icon = 'icons/obj/kitchen.dmi'
 	material = /decl/material/solid/metal/aluminium
-	applies_material_name = TRUE
-	applies_material_colour = TRUE
+	material_alteration = MAT_FLAG_ALTERATION_COLOR | MAT_FLAG_ALTERATION_NAME
 
 /*
  * Utensils

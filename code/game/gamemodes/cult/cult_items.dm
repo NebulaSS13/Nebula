@@ -2,8 +2,7 @@
 	name = "cult blade"
 	desc = "An arcane weapon wielded by the followers of Nar-Sie."
 	icon = 'icons/obj/items/weapon/swords/cult.dmi'
-	applies_material_colour = FALSE
-	applies_material_name = FALSE
+	material_alteration = MAT_FLAG_ALTERATION_COLOR | MAT_FLAG_ALTERATION_NAME
 
 /obj/item/sword/cultblade/attack(mob/living/M, mob/living/user, var/target_zone)
 

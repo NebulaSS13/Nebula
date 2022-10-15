@@ -12,8 +12,7 @@
 	attack_verb = list("jabbed","stabbed","ripped")
 	does_spin = FALSE
 	material = /decl/material/solid/metal/steel
-	applies_material_colour = TRUE
-	applies_material_name = TRUE
+	material_alteration = MAT_FLAG_ALTERATION_COLOR | MAT_FLAG_ALTERATION_NAME
 	var/spent
 
 /obj/item/harpoon/bomb
@@ -59,8 +58,7 @@
 	origin_tech = "{'materials':2,'combat':1}"
 	attack_verb = list("chopped", "torn", "cut")
 	material = /decl/material/solid/metal/steel
-	applies_material_colour = FALSE
-	applies_material_name = TRUE
+	material_alteration = MAT_FLAG_ALTERATION_NAME
 	hitsound = "chop"
 
 /obj/item/hatchet/Initialize()
@@ -119,8 +117,7 @@
 	w_class = ITEM_SIZE_SMALL
 	attack_verb = list("slashed", "sliced", "cut", "clawed")
 	material = /decl/material/solid/metal/steel
-	applies_material_colour = TRUE
-	applies_material_name = TRUE
+	material_alteration = MAT_FLAG_ALTERATION_COLOR | MAT_FLAG_ALTERATION_NAME
 
 /obj/item/minihoe/unbreakable
 	max_health = ITEM_HEALTH_NO_DAMAGE
@@ -141,8 +138,7 @@
 	origin_tech = "{'materials':2,'combat':2}"
 	attack_verb = list("chopped", "sliced", "cut", "reaped")
 	material = /decl/material/solid/metal/steel
-	applies_material_colour = TRUE
-	applies_material_name = TRUE
+	material_alteration = MAT_FLAG_ALTERATION_COLOR | MAT_FLAG_ALTERATION_NAME
 
 /obj/item/cross
 	name = "cross"
@@ -153,8 +149,7 @@
 	thrown_material_force_multiplier = 0.1
 	w_class = ITEM_SIZE_SMALL
 	attack_verb = list("attacked", "bashed")
-	applies_material_colour = TRUE
-	applies_material_name = TRUE
+	material_alteration = MAT_FLAG_ALTERATION_COLOR | MAT_FLAG_ALTERATION_NAME
 	material = /decl/material/solid/wood
 
 /obj/item/cross/silver
