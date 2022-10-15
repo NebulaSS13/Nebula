@@ -8,7 +8,6 @@ var/global/list/singularities = list()
 	density = 1
 	layer = SINGULARITY_LAYER
 	light_range = 6
-	unacidable = 1 //Don't comment this out.
 
 	var/current_size = 1
 	var/allowed_size = 1
@@ -46,6 +45,9 @@ var/global/list/singularities = list()
 	global.singularities -= src
 	STOP_PROCESSING(SSobj, src)
 	. = ..()
+
+/obj/singularity/can_be_corroded_by(decl/material/M, amount)
+	return FALSE
 
 /obj/singularity/attack_hand(mob/user)
 	consume(user)

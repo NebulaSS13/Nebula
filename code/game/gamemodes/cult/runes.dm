@@ -18,8 +18,8 @@
 	update_icon()
 	set_extension(src, /datum/extension/turf_hand, 10)
 
-/obj/effect/rune/acid_act(decl/material/acid, exposed_volume)
-	return
+/obj/effect/rune/can_be_corroded_by(decl/material/M, amount)
+	return FALSE
 
 /obj/effect/rune/on_update_icon()
 	overlays.Cut()
@@ -283,8 +283,6 @@
 		rune = null
 	return ..()
 
-/obj/effect/cultwall/acid_act(decl/material/acid, exposed_volume)
-	return
 
 /obj/effect/cultwall/examine(mob/user)
 	. = ..()
@@ -295,6 +293,8 @@
 			to_chat(user, "<span class='warning'>It is damaged.</span>")
 		else
 			to_chat(user, "<span class='danger'>It is about to dissipate.</span>")
+/obj/effect/cultwall/can_be_corroded_by(decl/material/M, amount)
+	return FALSE
 
 /obj/effect/cultwall/attack_hand(var/mob/user)
 	if(iscultist(user))

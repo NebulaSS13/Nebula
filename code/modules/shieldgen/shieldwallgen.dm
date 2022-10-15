@@ -262,9 +262,8 @@
 	desc = "An energy shield."
 	icon = 'icons/effects/effects.dmi'
 	icon_state = "shieldwall"
-	anchored = 1
-	density = 1
-	unacidable = 1
+	anchored = TRUE
+	density = TRUE
 	light_range = 3
 	var/needs_power = 0
 	var/obj/machinery/shieldwallgen/gen_primary
@@ -289,6 +288,9 @@
 /obj/machinery/shieldwall/Destroy()
 	update_nearby_tiles()
 	. = ..()
+
+/obj/machinery/shieldwall/can_be_corroded_by(decl/material/M, amount)
+	return FALSE
 
 /obj/machinery/shieldwall/attackby(var/obj/item/I, var/mob/user)
 	var/obj/machinery/shieldwallgen/G = prob(50) ? gen_primary : gen_secondary

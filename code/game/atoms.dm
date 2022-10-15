@@ -245,11 +245,16 @@
 /atom/proc/fire_act(datum/gas_mixture/air, exposed_temperature, exposed_volume)
 	return
 
-/atom/proc/melt()
+///Helper for material interactions to see if the main material the atom is made of can be eaten by corrosive chemicals. Specifying an amount will also check for the melt dose, and otherwise will assume we always have enough.
+/atom/proc/can_be_corroded_by(var/decl/material/M, var/amount = null)
+	return FALSE
+
+///Handle exposure to substances that are corrosive and destroy the material the atom is made of.
+/atom/proc/corrosive_act(var/decl/material/corrosive, var/exposed_volume, var/datum/reagents/holder)
 	return
 
-///Called when an object is exposed to acid damage over time
-/atom/proc/acid_act(var/decl/material/acid, var/exposed_volume)
+///Called to destroy the atom when its been melted or burnt by high temperatures or the like.
+/atom/proc/melt()
 	return
 
 /atom/proc/lava_act()

@@ -67,16 +67,16 @@
 			qdel(R)
 
 /obj/effect/rift
-	name = "rift"
-	desc = "a tear in space and time."
-	icon = 'icons/obj/wizard.dmi'
+	name       = "rift"
+	desc       = "a tear in space and time."
+	icon       = 'icons/obj/wizard.dmi'
 	icon_state = "rift"
-	unacidable = 1
-	anchored = 1
-	density = 0
+	anchored   = TRUE
+	density    = FALSE
+
+/obj/effect/rift/can_be_corroded_by(decl/material/M, amount)
+	return FALSE
 
 /obj/effect/rift/Destroy()
-	for(var/o in contents)
-		var/atom/movable/M = o
-		M.dropInto(loc)
+	dump_contents()
 	. = ..()

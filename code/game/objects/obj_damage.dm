@@ -78,12 +78,17 @@
 			set_extension(src, armor_type, armor_resistances, armor_degradation_speed)
 			break
 
-/obj/acid_act()
+/obj/corrosive_act(var/decl/material/corrosive, var/exposed_volume, var/datum/reagents/holder)
 	if(QDELETED(src))
 		return TRUE
-	if(throwing || !can_take_damage())
+	if(!can_take_damage() || !istype(corrosive))
 		return
-	. = ..()
+	var/obj/effect/decal/cleanable/molten_item/I = new(loc)
+	I.visible_message(SPAN_DANGER("\The [src] dissolves!"))
+	I.desc = "It looks like it was \a [src] some time ago."
+	holder?.remove_reagent(corrosive.type, corrosive.solvent_melt_dose)
+	qdel(src)
+	return TRUE
 
 /obj/lava_act()
 	if(QDELETED(src))
@@ -165,6 +170,12 @@
 
 /obj/proc/can_embed()
 	return is_sharp(src)
+
+///Helper for material interactions to see if the main material the obj is made of can be eaten by corrosive chemicals.
+/obj/can_be_corroded_by(var/decl/material/M, var/amount)
+	if(!istype(M) || !istype(material) || !can_take_damage())
+		return FALSE
+	return M.is_corrosive_to(material, amount)
 
 /obj/hitby(atom/movable/AM, var/datum/thrownthing/TT)
 	. = ..()

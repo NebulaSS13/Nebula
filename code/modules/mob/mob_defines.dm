@@ -88,7 +88,6 @@
 
 	var/radio_interrupt_cooldown = 0    // TODO move this to /human
 
-	var/unacidable = 0
 	var/list/pinned                     // Lazylist of things pinning this creature to walls (see living_defense.dm)
 	var/list/embedded                   // Embedded items, since simple mobs don't have organs.
 	var/list/languages = list()         // TODO: lazylist this var. For speaking/listening.

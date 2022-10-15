@@ -449,15 +449,16 @@
 
 	if (ismob(target))
 		var/mob/tmob = target
-		if (tmob.unacidable)
-			to_chat(user, SPAN_WARNING("\The [target] can't be drilled away."))
-			return
-		else
-			to_chat(tmob, FONT_HUGE(SPAN_DANGER("You're about to get drilled - dodge!")))
+		//#TODO: Leaving this commented to better understand what's up with this. But, for some reasons the unacidable var was used to tell if mobs or things could be drilled...
+		// if (tmob.unacidable)
+		// 	to_chat(user, SPAN_WARNING("\The [target] can't be drilled away."))
+		// 	return
+		// else
+		to_chat(tmob, FONT_HUGE(SPAN_DANGER("You're about to get drilled - dodge!")))
 
 	else if (isobj(target))
 		var/obj/tobj = target
-		if (tobj.unacidable)
+		if (!tobj.can_take_damage())
 			to_chat(user, SPAN_WARNING("\The [target] can't be drilled away."))
 			return
 

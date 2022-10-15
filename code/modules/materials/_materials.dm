@@ -521,9 +521,17 @@ INITIALIZE_IMMEDIATE(/obj/effect/gas_overlay)
 /decl/material/proc/on_leaving_metabolism(var/atom/parent, var/metabolism_class)
 	return
 
+///Placeholder proc. Returns whether the material may corrode the given other material. Ideally, you'd want to pass some sort of compound/alloy/solution to this, and you'd probably move that onto whatever handles alloys/solution/compounds.
+/decl/material/proc/is_corrosive_to(var/decl/material/other, var/amount = null)
+	if(ispath(other, /decl/material))
+		other = GET_DECL(other)
+	if(!istype(other))
+		return FALSE
+	return (solvent_power >= other.dissolves_in) && (amount? (amount >= solvent_melt_dose) : TRUE) //If we got an amount specified, take it into account, otherwise assume we have the melt dose
+
 #define ACID_MELT_DOSE 10
 /decl/material/proc/touch_obj(var/obj/O, var/amount, var/datum/reagents/holder) // Acid melting, cleaner cleaning, etc
-
+ 
 	if(solvent_power >= MAT_SOLVENT_MILD)
 		if(istype(O, /obj/item/paper))
 			var/obj/item/paper/paperaffected = O
@@ -537,12 +545,8 @@ INITIALIZE_IMMEDIATE(/obj/effect/gas_overlay)
 				affectedbook.dat = null
 				to_chat(usr, SPAN_NOTICE("The solution dissolves the ink on the book."))
 
-	if(solvent_power >= MAT_SOLVENT_STRONG && !O.unacidable && (istype(O, /obj/item) || istype(O, /obj/effect/vine)) && (REAGENT_VOLUME(holder, type) > solvent_melt_dose))
-		var/obj/effect/decal/cleanable/molten_item/I = new(O.loc)
-		I.visible_message(SPAN_DANGER("\The [O] dissolves!"))
-		I.desc = "It looks like it was \a [O] some time ago."
-		qdel(O)
-		holder?.remove_reagent(type, solvent_melt_dose)
+	if(solvent_power >= MAT_SOLVENT_STRONG && is_corrosive_to(O.get_material(), amount) && (istype(O, /obj/item) || istype(O, /obj/effect/vine)) && (REAGENT_VOLUME(holder, type) > solvent_melt_dose))
+		O.corrosive_act(src, O.w_class, holder)
 
 	if(dirtiness <= DIRTINESS_STERILE)
 		O.germ_level -= min(REAGENT_VOLUME(holder, type)*20, O.germ_level)
@@ -552,6 +556,7 @@ INITIALIZE_IMMEDIATE(/obj/effect/gas_overlay)
 		O.clean_blood()
 
 	if(defoliant && istype(O, /obj/effect/vine))
+		//#FIXME: Probably should be handled by the vines instead of having a type cast? Plus straight up deleting is a bit rough?
 		qdel(O)
 
 #define FLAMMABLE_LIQUID_DIVISOR 7
@@ -724,7 +729,7 @@ INITIALIZE_IMMEDIATE(/obj/effect/gas_overlay)
 				var/obj/item/thing = H.get_equipped_item(slot)
 				if(!istype(thing))
 					continue
-				if(thing.unacidable || !H.unEquip(thing))
+				if(!thing.can_be_corroded_by(src, removed) || !H.unEquip(thing))
 					to_chat(H, SPAN_NOTICE("Your [thing] protects you from the acid."))
 					holder.remove_reagent(type, REAGENT_VOLUME(holder, type))
 					return
@@ -734,15 +739,17 @@ INITIALIZE_IMMEDIATE(/obj/effect/gas_overlay)
 				if(removed <= 0)
 					return
 
-			if(!H.unacidable)
+			if(H.can_be_corroded_by(src, removed))
 				var/screamed
 				for(var/obj/item/organ/external/affecting in H.get_external_organs())
+					if(!affecting.can_be_corroded_by(src, removed))
+						continue
 					if(!screamed && affecting.can_feel_pain())
 						screamed = TRUE
 						H.emote("scream")
 					affecting.status |= ORGAN_DISFIGURED
 
-		if(!M.unacidable)
+		if(M.can_be_corroded_by(src, removed))
 			M.take_organ_damage(0, min(removed * solvent_power * ((removed < solvent_melt_dose) ? 0.1 : 0.2), solvent_max_damage), override_droplimb = DISMEMBER_METHOD_ACID)
 
 /decl/material/proc/affect_overdose(var/mob/living/M) // Overdose effect. Doesn't happen instantly.

@@ -208,9 +208,8 @@
 	desc = "Some kind of post, pillar, plinth, column, or totem."
 	icon = 'icons/obj/structures/totem.dmi'
 	icon_state = "totem"
-	density = 1
-	anchored = 1
-	unacidable = 1
+	density = TRUE
+	anchored = TRUE
 	var/number
 
 /obj/structure/totem/Initialize()
@@ -221,6 +220,8 @@
 	. = ..()
 	to_chat(user, "It's been engraved with the symbols '<font face='Shage'>RWH QaG [number]</font>'.") //i am not a linguist
 
+/obj/structure/totem/can_be_corroded_by(decl/material/M, amount)
+	return FALSE
 
 /obj/item/stool/stone/Initialize(mapload)
 	. = ..(mapload, /decl/material/solid/stone/sandstone)

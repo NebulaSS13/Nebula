@@ -10,7 +10,6 @@
 	icon_state = "hypo"
 	origin_tech = "{'materials':4,'biotech':5}"
 	amount_per_transfer_from_this = 5
-	unacidable = 1
 	volume = 30
 	possible_transfer_amounts = null
 	atom_flags = ATOM_FLAG_OPEN_CONTAINER
@@ -75,6 +74,10 @@
 		to_chat(user, SPAN_NOTICE("[trans] unit\s injected. [reagents.total_volume] unit\s remaining in \the [src]."))
 
 	return
+
+///#TODO: Remove this to allow checking for the container's material once we got material corrosion properly sorted out
+/obj/item/chems/hypospray/can_be_corroded_by(decl/material/M, amount)
+	return FALSE
 
 ////////////////////////////////////////////////////////////////////////////////
 /// VIAL HYPOSPRAY

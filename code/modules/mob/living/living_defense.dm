@@ -298,3 +298,7 @@
 	fire_act(air, temperature)
 	FireBurn(0.4*vsc.fire_firelevel_multiplier, temperature, pressure)
 	. =  (health <= 0) ? ..() : FALSE
+
+///For mobs this checks if the mob in general can be corroded, or is always corrosion resistant. Organs have to be checked separately.
+/mob/living/can_be_corroded_by(var/decl/material/M, var/amount = null)
+	return !(status_flags & GODMODE) //In general all mobs are vulnerable to it

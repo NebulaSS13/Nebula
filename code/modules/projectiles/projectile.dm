@@ -5,9 +5,8 @@
 	name = "projectile"
 	icon = 'icons/obj/projectiles.dmi'
 	icon_state = "bullet"
-	density = 1
-	unacidable = 1
-	anchored = 1 //There's a reason this is here, Mport. God fucking damn it -Agouri. Find&Fix by Pete. The reason this is here is to stop the curving of emitter shots.
+	density = TRUE
+	anchored = TRUE //There's a reason this is here, Mport. God fucking damn it -Agouri. Find&Fix by Pete. The reason this is here is to stop the curving of emitter shots.
 	pass_flags = PASS_FLAG_TABLE
 	mouse_opacity = 0
 	randpixel = 0
@@ -669,3 +668,6 @@
 
 /obj/item/projectile/proc/update_effect(var/obj/effect/projectile/effect)
 	return
+
+/obj/item/projectile/can_be_corroded_by(decl/material/M, amount)
+	return FALSE

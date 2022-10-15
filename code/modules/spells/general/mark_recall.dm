@@ -52,9 +52,7 @@
 	desc = "A strange rune said to be made by wizards. Or its just some shmuck playing with crayons again."
 	icon = 'icons/obj/rune.dmi'
 	icon_state = "wizard_mark"
-
-	anchored = 1
-	unacidable = 1
+	anchored = TRUE
 	layer = TURF_LAYER
 	is_spawnable_type = FALSE // invalid without spell passed
 
@@ -80,5 +78,8 @@
 		user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
 		src.visible_message("\The [src] fades away!")
 		qdel(src)
-		return
-	..()
+		return TRUE
+	return ..()
+
+/obj/effect/cleanable/wizard_mark/can_be_corroded_by(decl/material/M, amount)
+	return FALSE

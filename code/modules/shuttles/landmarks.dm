@@ -5,9 +5,8 @@ var/global/list/shuttle_landmarks = list()
 	name = "Nav Point"
 	icon = 'icons/effects/effects.dmi'
 	icon_state = "energynet"
-	anchored = 1
-	unacidable = 1
-	simulated = 0
+	anchored = TRUE
+	simulated = FALSE
 	invisibility = 101
 
 	var/landmark_tag

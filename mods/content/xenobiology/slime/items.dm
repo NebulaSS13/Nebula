@@ -67,7 +67,6 @@
 	name = "rune"
 	icon = 'icons/obj/rune.dmi'
 	icon_state = "golem"
-	unacidable = 1
 	layer = RUNE_LAYER
 
 /obj/effect/golemrune/Initialize()
@@ -124,3 +123,5 @@
 			if(A)
 				to_chat(G, "Golem rune created in [A.proper_name].")
 
+/obj/effect/golemrune/can_be_corroded_by(decl/material/M, amount)
+	return FALSE

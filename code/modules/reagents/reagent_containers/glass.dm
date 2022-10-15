@@ -13,7 +13,7 @@
 	w_class = ITEM_SIZE_SMALL
 	atom_flags = ATOM_FLAG_OPEN_CONTAINER
 	obj_flags = OBJ_FLAG_HOLLOW
-	unacidable = 1 //glass doesn't dissolve in acid
+	material = /decl/material/solid/glass
 
 	drop_sound = 'sound/foley/bottledrop1.ogg'
 	pickup_sound = 'sound/foley/bottlepickup1.ogg'
@@ -118,7 +118,6 @@
 	volume = 180
 	atom_flags = ATOM_FLAG_OPEN_CONTAINER
 	presentation_flags = PRESENTATION_FLAG_NAME
-	unacidable = 0
 	material = /decl/material/solid/plastic
 	material_force_multiplier = 0.2
 	slot_flags = SLOT_HEAD

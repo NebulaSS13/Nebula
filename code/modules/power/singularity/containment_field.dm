@@ -5,9 +5,8 @@
 	desc = "An energy field."
 	icon = 'icons/obj/singularity.dmi'
 	icon_state = "Contain_F"
-	anchored = 1
-	density = 0
-	unacidable = 1
+	anchored = TRUE
+	density = FALSE
 	use_power = POWER_USE_OFF
 	uncreated_component_parts = null
 	light_range = 4
@@ -66,3 +65,6 @@
 	FG1 = master1
 	FG2 = master2
 	return 1
+
+/obj/machinery/containment_field/can_be_corroded_by(decl/material/M, amount)
+	return FALSE

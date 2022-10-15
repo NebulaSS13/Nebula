@@ -3,14 +3,16 @@
 	desc = "An energy shield used to contain hull breaches."
 	icon = 'icons/effects/effects.dmi'
 	icon_state = "shield-old"
-	density = 1
-	opacity = 0
-	anchored = 1
-	unacidable = 1
+	density = TRUE
+	opacity = FALSE
+	anchored = TRUE
 	var/const/max_health = 200
 	var/health = max_health //The shield can only take so much beating (prevents perma-prisons)
 	var/shield_generate_power = 7500	//how much power we use when regenerating
 	var/shield_idle_power = 1500		//how much power we use when just being sustained.
+
+/obj/machinery/shield/can_be_corroded_by(decl/material/M, amount)
+	return FALSE
 
 /obj/machinery/shield/malfai
 	name = "emergency forcefield"

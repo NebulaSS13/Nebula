@@ -23,6 +23,3 @@
 	. = ..()
 	if (distance <= 2 && fallen.len)
 		to_chat(user, "<b>The fallen:</b> [jointext(fallen, "<br>")]")
-
-/obj/structure/memorial/acid_act()
-	return

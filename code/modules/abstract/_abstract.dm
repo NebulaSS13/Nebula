@@ -33,8 +33,8 @@
 /obj/abstract/fire_act(datum/gas_mixture/air, exposed_temperature, exposed_volume)
 	return
 
-/obj/abstract/acid_act()
-	return
+/obj/abstract/can_be_corroded_by(decl/material/M, amount)
+	return FALSE
 
 /obj/abstract/take_damage(damage, damage_type, damage_flags, inflicter, armor_pen, target_zone, quiet)
 	return 0

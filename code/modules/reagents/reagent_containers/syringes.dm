@@ -19,7 +19,6 @@
 	w_class = ITEM_SIZE_TINY
 	slot_flags = SLOT_EARS
 	sharp = 1
-	unacidable = 1 //glass
 	item_flags = ITEM_FLAG_NO_BLUDGEON
 	var/mode = SYRINGE_DRAW
 	var/image/filling //holds a reference to the current filling overlay

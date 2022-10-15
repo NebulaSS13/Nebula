@@ -8,7 +8,6 @@
 	amount_per_transfer_from_this = 50
 	// Large, but inaccurate. Use a chem dispenser or beaker for accuracy.
 	possible_transfer_amounts = @"[50,100]"
-	unacidable = 1
 
 /obj/item/chems/chem_disp_cartridge/initialize_reagents(populate = TRUE)
 	. = ..()
@@ -73,3 +72,7 @@
 				reagents.splash(target, reagents.total_volume) //FIXME: probably shouldn't throw the whole 500 units at the mob, since the bottle neck is a bottle neck.
 				return TRUE
 	return ..()
+
+///#TODO: Remove this to allow checking for the container's material once we got material corrosion properly sorted out
+/obj/item/chems/chem_disp_cartridge/can_be_corroded_by(decl/material/M, amount)
+	return FALSE

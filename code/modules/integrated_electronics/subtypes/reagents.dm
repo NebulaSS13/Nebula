@@ -6,7 +6,6 @@
 
 /obj/item/integrated_circuit/reagent
 	category_text = "Reagent"
-	unacidable = 1
 	cooldown_per_use = 10
 	var/volume = 0
 
@@ -19,6 +18,9 @@
 /obj/item/integrated_circuit/reagent/proc/push_vol()
 	set_pin_data(IC_OUTPUT, 1, reagents.total_volume)
 	push_data()
+
+/obj/item/integrated_circuit/reagent/can_be_corroded_by(decl/material/M, amount)
+	return FALSE
 
 /obj/item/integrated_circuit/reagent/smoke
 	name = "smoke generator"
@@ -512,7 +514,6 @@
 		"on transfer" = IC_PINTYPE_PULSE_OUT
 	)
 
-	unacidable = 1
 	spawn_flags = IC_SPAWN_DEFAULT|IC_SPAWN_RESEARCH
 	complexity = 4
 	power_draw_per_use = 5
@@ -532,6 +533,9 @@
 		activate_pin(1)
 		return TRUE
 
+	return FALSE
+
+/obj/item/integrated_circuit/input/funnel/can_be_corroded_by(decl/material/M, amount)
 	return FALSE
 
 // Most of this is just chemical heater code refitted for ICs

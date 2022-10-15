@@ -5,7 +5,6 @@
 	w_class = ITEM_SIZE_SMALL
 	force = 2.0
 	det_time = null
-	unacidable = 1
 	var/stage = 0
 	var/path = 0
 	var/obj/item/assembly_holder/detonator = null
@@ -188,6 +187,10 @@
 	. = ..()
 	if(detonator)
 		to_chat(user, "With attached [detonator.name]")
+
+//Since the reagents get mixed into the grenade on detonation, its probably wise to do this.
+/obj/item/grenade/chem_grenade/can_be_corroded_by(decl/material/M, amount)
+	return FALSE
 
 /obj/item/grenade/chem_grenade/large
 	name = "large chem grenade"

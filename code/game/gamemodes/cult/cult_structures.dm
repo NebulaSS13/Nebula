@@ -96,9 +96,6 @@
 	max_health = OBJ_HEALTH_NO_DAMAGE
 	var/spawnable = null
 
-/obj/effect/gateway/acid_act(decl/material/acid, exposed_volume)
-	return
-
 /obj/effect/gateway/active
 	light_range=5
 	light_color="#ff0000"
