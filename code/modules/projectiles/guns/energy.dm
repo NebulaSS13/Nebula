@@ -20,7 +20,7 @@ var/global/list/registered_cyborg_weapons = list()
 	var/use_external_power = 0     // If set, the weapon will look for an external power source to draw from, otherwise it recharges magically
 	var/recharge_time = 4          // How many ticks between recharges.
 	var/charge_tick = 0            // Current charge tick tracker.
-	var/accepts_cell_type          // Specifies a cell type that can be loaded into this weapon. 
+	var/accepts_cell_type          // Specifies a cell type that can be loaded into this weapon.
 
 	// Which projectile type to create when firing.
 	var/projectile_type = /obj/item/projectile/beam/practice
@@ -120,12 +120,16 @@ var/global/list/registered_cyborg_weapons = list()
 
 /obj/item/gun/energy/adjust_mob_overlay(var/mob/living/user_mob, var/bodytype,  var/image/overlay, var/slot, var/bodypart)
 	if(overlay && charge_meter)
-		overlay = add_onmob_charge_meter(overlay)
+		var/charge_state = get_charge_state(overlay.icon_state)
+		if(charge_state && check_state_in_icon(charge_state, overlay.icon))
+			overlay.overlays += mutable_appearance(overlay.icon, charge_state, get_charge_color())
 	. = ..()
 
-/obj/item/gun/energy/proc/add_onmob_charge_meter(image/I)
-	I.overlays += mutable_appearance(icon, "[I.icon_state][get_charge_ratio()]", indicator_color)
-	return I
+/obj/item/gun/energy/proc/get_charge_state(var/initial_state)
+	return "[initial_state][get_charge_ratio()]"
+
+/obj/item/gun/energy/proc/get_charge_color()
+	return indicator_color
 
 /obj/item/gun/energy/proc/update_charge_meter()
 	if(use_single_icon)
@@ -171,7 +175,7 @@ var/global/list/registered_cyborg_weapons = list()
 
 		if(!do_after(user, 5, A, can_move = TRUE))
 			return TRUE
-			
+
 		if(user.unEquip(A, src))
 			power_supply = A
 			user.visible_message(SPAN_WARNING("\The [user] loads \the [A] into \the [src]!"))
