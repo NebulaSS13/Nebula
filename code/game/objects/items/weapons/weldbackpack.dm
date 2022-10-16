@@ -79,9 +79,9 @@
 	reagents.add_reagent(/decl/material/liquid/fuel, reagents.maximum_volume)
 
 /obj/item/chems/weldpack/Initialize(ml, material_key)
-	. = ..()
 	if(ispath(welder))
 		welder = new welder(src, null, src)
+	. = ..()
 
 /obj/item/chems/weldpack/Destroy()
 	if(welder)
