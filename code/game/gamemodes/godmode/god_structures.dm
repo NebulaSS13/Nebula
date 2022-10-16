@@ -17,11 +17,12 @@
 
 /obj/structure/deity
 	icon = 'icons/obj/cult.dmi'
-	max_health = 10
-	density = 1
-	anchored = 1
 	icon_state = "tomealtar"
 	is_spawnable_type = FALSE // will usually runtime without a linked god
+	density = TRUE
+	anchored = TRUE
+	hitsound = 'sound/effects/Glasshit.ogg'
+	max_health = 10
 
 	var/mob/living/deity/linked_god
 	var/power_adjustment = 1 //How much power we get/lose

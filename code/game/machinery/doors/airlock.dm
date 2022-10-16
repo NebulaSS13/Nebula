@@ -400,7 +400,7 @@ About the new airlock wires panel:
 
 		if(stat & BROKEN)
 			damage_overlay = sparks_broken_file
-		else if(health < max_health * 3/4)
+		else if(health < (max_health * 0.75))
 			damage_overlay = sparks_damaged_file
 
 	if(welded)

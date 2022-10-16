@@ -49,7 +49,7 @@
 		to_chat(user, SPAN_NOTICE("It has a smooth coat of paint applied."))
 
 /obj/structure/wall_frame/get_examined_damage_string(health_ratio)
-	if(max_health == OBJ_HEALTH_NO_DAMAGE)
+	if(!can_take_damage())
 		return
 	if(health_ratio > 0.7)
 		return SPAN_NOTICE("It's got a few dents and scratches.")

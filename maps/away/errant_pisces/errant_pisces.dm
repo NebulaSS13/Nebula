@@ -94,7 +94,7 @@
 				N.update_connections()
 
 /obj/structure/net/get_examined_damage_string(health_ratio)
-	if(max_health == OBJ_HEALTH_NO_DAMAGE)
+	if(!can_take_damage())
 		return
 	if(health_ratio >= 1)
 		return SPAN_NOTICE("It looks fully intact.")

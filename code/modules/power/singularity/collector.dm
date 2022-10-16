@@ -7,12 +7,12 @@ var/global/list/rad_collectors = list()
 	desc = "A device which uses radiation and hydrogen to produce power."
 	icon = 'icons/obj/machines/rad_collector.dmi'
 	icon_state = "ca"
-	anchored = 0
-	density = 1
+	anchored = FALSE
+	density = TRUE
 	initial_access = list(access_engine_equip)
+	max_health = 100
 	var/obj/item/tank/hydrogen/loaded_tank = null
 
-	var/health = 100
 	var/max_safe_temp = 1000 + T0C
 	var/melted
 

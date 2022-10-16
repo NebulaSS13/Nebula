@@ -12,7 +12,6 @@
 	obj_flags = OBJ_FLAG_ROTATABLE | OBJ_FLAG_MOVES_UNSUPPORTED
 	material = DEFAULT_FURNITURE_MATERIAL
 	material_alteration = MAT_FLAG_ALTERATION_ALL
-	max_health = 100
 	parts_amount = 2
 	parts_type = /obj/item/stack/material/strut
 

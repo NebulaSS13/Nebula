@@ -110,7 +110,7 @@
 	add_fingerprint(user)
 
 /obj/structure/inflatable/can_repair_with(obj/item/tool)
-	. = istype(tool, /obj/item/stack/tape_roll/duct_tape) && (health < max_health)
+	. = istype(tool, /obj/item/stack/tape_roll/duct_tape) && is_damaged()
 
 /obj/structure/inflatable/handle_repair(mob/user, obj/item/tool)
 	var/obj/item/stack/tape_roll/duct_tape/T = tool

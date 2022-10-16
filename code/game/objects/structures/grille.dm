@@ -3,8 +3,8 @@
 	desc = "A flimsy lattice of rods, with screws to secure it to the floor."
 	icon = 'icons/obj/structures/grille.dmi'
 	icon_state = "grille"
-	density = 1
-	anchored = 1
+	density = TRUE
+	anchored = TRUE
 	obj_flags = OBJ_FLAG_CONDUCTIBLE | OBJ_FLAG_MOVES_UNSUPPORTED
 	layer = BELOW_OBJ_LAYER
 	explosion_resistance = 1
@@ -16,9 +16,9 @@
 
 	handle_generic_blending = TRUE
 	material_alteration = MAT_FLAG_ALTERATION_COLOR | MAT_FLAG_ALTERATION_NAME
-	max_health = 20
+	hitsound = 'sound/effects/grillehit.ogg'
 
-	var/destroyed = 0
+	var/destroyed = FALSE
 	var/list/connections
 	var/list/other_connections
 

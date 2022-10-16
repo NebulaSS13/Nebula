@@ -6,7 +6,6 @@
 	min_force = 4
 	hitsound = 'sound/effects/Glasshit.ogg'
 	max_health = 150 //If you change this, consiter changing ../door/window/brigdoor/ health at the bottom of this .dm file
-	health = 150
 	visible = 0.0
 	use_power = POWER_USE_OFF
 	stat_immune = NOSCREEN | NOINPUT | NOPOWER
@@ -212,8 +211,7 @@
 	icon = 'icons/obj/doors/windoor.dmi'
 	icon_state = "leftsecure"
 	base_state = "leftsecure"
-	max_health = 300
-	health = 300.0 //Stronger doors for prison (regular window door health is 150)
+	max_health = 300 //Stronger doors for prison (regular window door health is 150)
 	pry_mod = 0.65
 
 

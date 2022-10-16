@@ -243,7 +243,7 @@
 		if(reason_broken & MACHINE_BROKEN_GENERIC)
 			to_chat(user, "<span class='notice'>It looks like \the [src] is pretty busted. It's going to need more than just patching up now.</span>")
 			return TRUE
-		if(health >= max_health)
+		if(!is_damaged())
 			to_chat(user, "<span class='notice'>Nothing to fix!</span>")
 			return TRUE
 		if(!density)
@@ -475,7 +475,9 @@
 		dismantle(TRUE)
 
 /obj/machinery/door/proc/CheckPenetration(var/base_chance, var/damage)
-	. = damage/max_health*180
+	if(!can_take_damage())
+		return FALSE
+	. = (damage / max_health) * 180
 	if(glass)
 		. *= 2
 	. = round(.)

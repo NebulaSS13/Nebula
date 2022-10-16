@@ -12,7 +12,7 @@ var/global/list/solars_list = list()
 	density = 1
 	idle_power_usage = 0
 	active_power_usage = 0
-	var/health = 10
+	max_health = 10
 	var/obscured = 0
 	var/sunfrac = 0
 	var/efficiency = 1
@@ -81,7 +81,7 @@ var/global/list/solars_list = list()
 	..()
 
 /obj/machinery/power/solar/proc/healthcheck()
-	if (src.health <= 0)
+	if (src.health <= 0) //#FIXME: More problems...
 		if(!(stat & BROKEN))
 			set_broken(TRUE)
 
