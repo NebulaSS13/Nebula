@@ -165,7 +165,7 @@
 				to_chat(user, "<span class='notice'>[src]'s motors resist your effort.</span>")
 			return
 	if(istype(C, /obj/item/stack/material) && C.get_material_type() == /decl/material/solid/metal/plasteel)
-		var/amt = CEILING((maxhealth - health)/150)
+		var/amt = CEILING((max_health - health)/150)
 		if(!amt)
 			to_chat(user, "<span class='notice'>\The [src] is already fully functional.</span>")
 			return
@@ -216,7 +216,7 @@
 // Parameters: None
 // Description: Fully repairs the blast door.
 /obj/machinery/door/blast/proc/repair()
-	health = maxhealth
+	health = max_health
 	set_broken(FALSE)
 	queue_icon_update()
 
@@ -319,7 +319,7 @@
 	icon_state_closed_broken = "blast_closed_broken"
 
 	min_force = 30
-	maxhealth = 1000
+	max_health = 1000
 	block_air_zones = 1
 
 /obj/machinery/door/blast/regular/escape_pod
@@ -351,7 +351,7 @@
 	open_sound = 'sound/machines/shutters_open.ogg'
 	close_sound = 'sound/machines/shutters_close.ogg'
 	min_force = 15
-	maxhealth = 500
+	max_health = 500
 	explosion_resistance = 10
 	pry_mod = 0.55
 	frame_type = /obj/structure/door_assembly/blast/shutter

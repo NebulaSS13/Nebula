@@ -115,8 +115,8 @@
 	mouse_opacity = 1
 	anchored = 1
 	can_buckle = 0 //no manual buckling or unbuckling
-
-	var/health = 25
+	max_health = 25
+	
 	var/countdown = 15
 	var/temporary = 1
 	var/mob/living/carbon/captured = null

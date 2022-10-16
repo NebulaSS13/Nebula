@@ -8,7 +8,7 @@
 	anchored                          = FALSE
 	material                          = /decl/material/solid/plastic
 	matter                            = list(/decl/material/solid/metal/steel = MATTER_AMOUNT_SECONDARY)
-	maxhealth                         = 100
+	max_health                         = 100
 	tool_interaction_flags            = TOOL_INTERACTION_DECONSTRUCT
 	var/unwrenched                    = FALSE
 	var/tmp/volume                    = 1000

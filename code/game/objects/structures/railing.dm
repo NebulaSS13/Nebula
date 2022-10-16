@@ -12,7 +12,7 @@
 	obj_flags = OBJ_FLAG_ROTATABLE | OBJ_FLAG_MOVES_UNSUPPORTED
 	material = DEFAULT_FURNITURE_MATERIAL
 	material_alteration = MAT_FLAG_ALTERATION_ALL
-	maxhealth = 100
+	max_health = 100
 	parts_amount = 2
 	parts_type = /obj/item/stack/material/strut
 
@@ -78,8 +78,8 @@
 
 /obj/structure/railing/examine(mob/user)
 	. = ..()
-	if(health < maxhealth)
-		switch(health / maxhealth)
+	if(health < max_health)
+		switch(health / max_health)
 			if(0.0 to 0.5)
 				to_chat(user, "<span class='warning'>It looks severely damaged!</span>")
 			if(0.25 to 0.5)
@@ -252,15 +252,15 @@
 	if(IS_WELDER(W))
 		var/obj/item/weldingtool/F = W
 		if(F.isOn())
-			if(health >= maxhealth)
+			if(health >= max_health)
 				to_chat(user, "<span class='warning'>\The [src] does not need repairs.</span>")
 				return
 			playsound(src.loc, 'sound/items/Welder.ogg', 50, 1)
 			if(do_after(user, 20, src))
-				if(health >= maxhealth)
+				if(health >= max_health)
 					return
 				user.visible_message("<span class='notice'>\The [user] repairs some damage to \the [src].</span>", "<span class='notice'>You repair some damage to \the [src].</span>")
-				health = min(health+(maxhealth/5), maxhealth)
+				health = min(health+(max_health/5), max_health)
 			return
 
 	// Install
@@ -300,7 +300,7 @@
 	. = ..()
 	if(.)
 		if(!anchored || material.is_brittle())
-			take_damage(maxhealth) // Fatboy
+			take_damage(max_health) // Fatboy
 
 	user.jump_layer_shift()
 	addtimer(CALLBACK(user, /mob/living/proc/jump_layer_shift_end), 2)

@@ -10,7 +10,7 @@
 	can_buckle = TRUE
 	material =   /decl/material/solid/metal/steel
 	material_alteration = MAT_FLAG_ALTERATION_DESC | MAT_FLAG_ALTERATION_NAME
-	maxhealth = 200
+	max_health = 200
 	var/secured
 
 /obj/structure/defensive_barrier/Initialize()
@@ -91,7 +91,7 @@
 	var/obj/item/defensive_barrier/B = new(get_turf(user), material?.type)
 	playsound(src, 'sound/items/Deconstruct.ogg', 100, 1)
 	B.stored_health = health
-	B.stored_max_health = maxhealth
+	B.stored_max_health = max_health
 	B.add_fingerprint(user)
 	qdel(src)
 	return TRUE

@@ -6,7 +6,7 @@
 	density = 1
 	anchored = 1
 	setup = 0
-	health = 0 //destroying the statue kills the mob within
+	max_health = 0 //destroying the statue kills the mob within
 	var/intialTox = 0 	//these are here to keep the mob from taking damage from things that logically wouldn't affect a rock
 	var/intialFire = 0	//it's a little sloppy I know but it was this or the GODMODE flag. Lesser of two evils.
 	var/intialBrute = 0

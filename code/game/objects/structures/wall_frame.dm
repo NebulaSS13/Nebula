@@ -16,7 +16,7 @@
 	material = DEFAULT_WALL_MATERIAL
 	handle_generic_blending = TRUE
 	tool_interaction_flags = (TOOL_INTERACTION_ANCHOR | TOOL_INTERACTION_DECONSTRUCT)
-	maxhealth = 40
+	max_health = 40
 	parts_amount = 2
 	parts_type = /obj/item/stack/material/strut
 
@@ -49,7 +49,7 @@
 		to_chat(user, SPAN_NOTICE("It has a smooth coat of paint applied."))
 
 /obj/structure/wall_frame/get_examined_damage_string(health_ratio)
-	if(maxhealth == -1)
+	if(max_health == OBJ_HEALTH_NO_DAMAGE)
 		return
 	if(health_ratio > 0.7)
 		return SPAN_NOTICE("It's got a few dents and scratches.")

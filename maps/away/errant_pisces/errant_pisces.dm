@@ -80,7 +80,7 @@
 	icon_state = "net_f"
 	anchored = 1
 	layer = CATWALK_LAYER//probably? Should cover cables, pipes and the rest of objects that are secured on the floor
-	maxhealth = 100
+	max_health = 100
 
 /obj/structure/net/Initialize(var/mapload)
 	. = ..()
@@ -94,7 +94,7 @@
 				N.update_connections()
 
 /obj/structure/net/get_examined_damage_string(health_ratio)
-	if(maxhealth == -1)
+	if(max_health == OBJ_HEALTH_NO_DAMAGE)
 		return
 	if(health_ratio >= 1)
 		return SPAN_NOTICE("It looks fully intact.")

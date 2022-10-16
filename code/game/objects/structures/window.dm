@@ -15,7 +15,7 @@
 	atmos_canpass = CANPASS_PROC
 	handle_generic_blending = TRUE
 	hitsound = 'sound/effects/Glasshit.ogg'
-	maxhealth = 100
+	max_health = 100
 
 	var/damage_per_fire_tick = 2 		// Amount of damage per fire tick. Regular windows are not fireproof so they might as well break quickly.
 	var/construction_state = 2

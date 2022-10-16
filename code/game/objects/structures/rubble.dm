@@ -6,7 +6,7 @@
 	opacity = 1
 	density = 1
 	anchored = 1
-	maxhealth = 50
+	max_health = 50
 
 	var/list/loot = list(
 		/obj/item/cell,

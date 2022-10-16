@@ -17,7 +17,7 @@
 
 /obj/structure/deity
 	icon = 'icons/obj/cult.dmi'
-	maxhealth = 10
+	max_health = 10
 	density = 1
 	anchored = 1
 	icon_state = "tomealtar"
