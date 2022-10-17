@@ -388,7 +388,7 @@
 				return
 
 	else
-		if(!O.force)
+		if(!O.force || (O.item_flags & ITEM_FLAG_NO_BLUDGEON))
 			visible_message(SPAN_NOTICE("\The [user] gently taps [src] with \the [O]."))
 		else
 			O.attack(src, user, user.zone_sel?.selecting || ran_zone())
