@@ -12,23 +12,23 @@
 		var/list/lang_info = list()
 		var/decl/prefix/P = /decl/prefix/language
 		lang_info += "Key to use it: '[initial(P.default_key)][L.key]'"
-		if(L.flags & NONVERBAL)
+		if(L.flags & LANG_FLAG_NONVERBAL)
 			lang_info += "It has a significant non-verbal component. Speech is garbled without line-of-sight."
-		if(L.flags & SIGNLANG)
+		if(L.flags & LANG_FLAG_SIGNLANG)
 			lang_info += "It is completely non-verbal, using gestures or signs to communicate."
-		if(L.flags & HIVEMIND)
+		if(L.flags & LANG_FLAG_HIVEMIND)
 			lang_info += "It's a 'hivemind' language, broadcast to all creatures who understand it."
-		if(L.flags & NO_STUTTER)
+		if(L.flags & LANG_FLAG_NO_STUTTER)
 			lang_info += "It will not be affected by speech impediments."
 
 		var/list/lang_lore = list(L.desc)
 		lang_lore += "Shorthand: '[L.shorthand]'"
-		if(!(L.flags & (SIGNLANG|NONVERBAL|HIVEMIND)))
+		if(!(L.flags & (LANG_FLAG_SIGNLANG|LANG_FLAG_NONVERBAL|LANG_FLAG_HIVEMIND)))
 			var/lang_example = L.format_message(L.scramble(example_line), L.speech_verb)
 			lang_lore += "It sounds like this:"
 			lang_lore += ""
 			lang_lore += "<b>CodexBot</b> [lang_example]"
-			
+
 		var/datum/codex_entry/entry = new(
 			_display_name = "[L.name] (language)",
 			_lore_text = jointext(lang_lore, "<br>"),

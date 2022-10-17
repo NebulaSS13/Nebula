@@ -229,7 +229,7 @@
 		dat += "Current default language: [lang.name] - <a href='byond://?src=\ref[src];default_lang=reset'>reset</a><br/><br/>"
 
 	for(var/decl/language/L in languages)
-		if(!(L.flags & NONGLOBAL))
+		if(!(L.flags & LANG_FLAG_NONGLOBAL))
 			var/default_str
 			if(L == default_language)
 				default_str = " - default - <a href='byond://?src=\ref[src];default_lang=reset'>reset</a>"

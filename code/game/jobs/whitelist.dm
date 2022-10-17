@@ -57,16 +57,24 @@ var/global/list/alien_whitelist = list()
 
 //todo: admin aliens
 /proc/is_alien_whitelisted(mob/M, var/species)
+
 	if(!M || !species)
 		return FALSE
+
+	// Forbidden languages do not care about admin rights.
+	if(istype(species,/decl/language))
+		var/decl/language/L = species
+		if(L.flags & LANG_FLAG_FORBIDDEN)
+			return FALSE
+
 	if(check_rights(R_ADMIN, FALSE, M))
 		return TRUE
 
 	if(istype(species,/decl/language))
 		var/decl/language/L = species
-		if(L.flags & RESTRICTED)
+		if(L.flags & LANG_FLAG_RESTRICTED)
 			return FALSE
-		if(!config.usealienwhitelist || !(L.flags & WHITELISTED))
+		if(!config.usealienwhitelist || !(L.flags & LANG_FLAG_WHITELISTED))
 			return TRUE
 		return whitelist_lookup(L.name, M.ckey)
 

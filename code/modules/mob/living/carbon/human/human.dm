@@ -769,10 +769,18 @@
 				permitted_languages |= lang
 
 	for(var/decl/language/lang in languages)
-		if(lang.type in permitted_languages)
-			continue
-		if(!(lang.flags & RESTRICTED) && (lang.flags & WHITELISTED) && is_alien_whitelisted(src, lang))
-			continue
+		// Forbidden languages are always removed.
+		if(!(lang.flags & LANG_FLAG_FORBIDDEN))
+			// Admin can have whatever available language they want.
+			if(has_admin_rights())
+				continue
+			// Whitelisted languages are fine.
+			if((lang.flags & LANG_FLAG_WHITELISTED) && is_alien_whitelisted(src, lang))
+				continue
+			// Culture-granted languages are fine.
+			if(lang.type in permitted_languages)
+				continue
+		// This language is Not Fine, remove it.
 		if(lang.type == default_language)
 			default_language = null
 		remove_language(lang.type)
@@ -782,7 +790,6 @@
 
 	if(length(default_languages) && isnull(default_language))
 		default_language = default_languages[1]
-
 
 /mob/living/carbon/human/can_inject(var/mob/user, var/target_zone)
 	var/obj/item/organ/external/affecting = GET_EXTERNAL_ORGAN(src, target_zone)

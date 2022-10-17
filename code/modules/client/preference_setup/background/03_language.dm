@@ -88,14 +88,19 @@
 	var/list/language_types = decls_repository.get_decls_of_subtype(/decl/language)
 	for(var/thing in language_types)
 		var/decl/language/lang = language_types[thing]
-		if(lang.is_abstract()) // these aren't supposed to be available to anyone, they're abstract types
+		// Abstract, forbidden and restricted languages aren't supposed to be available to anyone in chargen.
+		if(lang.is_abstract() || (lang.flags & (LANG_FLAG_FORBIDDEN|LANG_FLAG_RESTRICTED)))
 			continue
-		if(user.has_admin_rights() || (!(lang.flags & RESTRICTED) && is_alien_whitelisted(user, lang)))
+		// Admin don't need to worry about whitelisted checks or culture datums, give them everything.
+		// Non-whitelisted languages should be handled by culture datums.
+		if(user.has_admin_rights() || ((lang.flags & LANG_FLAG_WHITELISTED) && is_alien_whitelisted(user, lang)))
 			allowed_languages[thing] = TRUE
 
 /datum/category_item/player_setup_item/background/languages/proc/is_allowed_language(var/mob/user, var/decl/language/lang)
 	if(ispath(lang, /decl/language))
 		lang = GET_DECL(lang)
+	if(!istype(lang) || (lang.flags & LANG_FLAG_FORBIDDEN))
+		return FALSE
 	if(isnull(allowed_languages) || isnull(free_languages))
 		rebuild_language_cache(user)
 	if(!user || is_alien_whitelisted(user, lang))
