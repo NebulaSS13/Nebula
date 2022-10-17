@@ -421,8 +421,12 @@ var/global/list/all_apcs = list()
 		update()
 
 /obj/machinery/power/apc/cannot_transition_to(state_path, mob/user)
+	if(ispath(state_path, /decl/machine_construction/wall_frame/panel_open))
+		for(var/obj/item/stock_parts/access_lock/lock in get_all_components_of_type(/obj/item/stock_parts/access_lock))
+			if(lock.locked)
+				return SPAN_WARNING("You cannot open the cover: it is locked!")
 	if(ispath(state_path, /decl/machine_construction/wall_frame/panel_closed) && cover_removed)
-		return SPAN_NOTICE("You cannot close the cover: it was completely removed!")
+		return SPAN_WARNING("You cannot close the cover: it was completely removed!")
 	. = ..()
 
 /obj/machinery/power/apc/proc/force_open_panel(mob/user)

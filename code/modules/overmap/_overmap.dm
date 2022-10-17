@@ -140,7 +140,4 @@
 			res.forceMove(locate(x, y, assigned_z))
 			return res
 
-	return new /obj/effect/overmap/visitable/sector/temporary(null, x, y, create_empty_z_level())
-
-/datum/overmap/proc/create_empty_z_level()
-	. = get_empty_zlevel(map_turf_type)
+	return new /obj/effect/overmap/visitable/sector/temporary(null, x, y, get_empty_zlevel(map_turf_type))

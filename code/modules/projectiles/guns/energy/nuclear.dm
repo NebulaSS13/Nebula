@@ -40,7 +40,7 @@
 			if(ismob(loc))
 				to_chat(loc, "<span class='warning'>\The [src] feels pleasantly warm.</span>")
 
-/obj/item/gun/energy/gun/nuclear/proc/get_charge_color()
+/obj/item/gun/energy/gun/nuclear/get_charge_color()
 	switch(get_charge_ratio())
 		if(25)
 			return COLOR_RED
@@ -55,15 +55,11 @@
 	indicator_color = get_charge_color()
 	. = ..()
 	var/list/new_overlays = list()
-
 	var/reactor_icon = fail_counter ? "danger" : "clean"
 	new_overlays += mutable_appearance(icon, "[get_world_inventory_state()]_[reactor_icon]")
 	var/datum/firemode/current_mode = firemodes[sel_mode]
 	new_overlays += mutable_appearance(icon, "[get_world_inventory_state()]_[current_mode.name]")
-
 	overlays += new_overlays
 
-/obj/item/gun/energy/gun/nuclear/add_onmob_charge_meter(image/I)
-	if(check_state_in_icon("[I.icon_state]_charge", I.icon))
-		I.overlays += mutable_appearance(I.icon, "[I.icon_state]_charge", get_charge_color())
-	return I
+/obj/item/gun/energy/gun/nuclear/get_charge_state(var/initial_state)
+	return "[initial_state]_charge"
