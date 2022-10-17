@@ -9,7 +9,7 @@
 			//Or someone snoring.  So we make it where they won't hear it.
 		return
 
-	if(language && (language.flags & (NONVERBAL|SIGNLANG)))
+	if(language && (language.flags & (LANG_FLAG_NONVERBAL|LANG_FLAG_SIGNLANG)))
 		sound_vol = 0
 		speech_sound = null
 
@@ -30,11 +30,11 @@
 		return
 
 	//non-verbal languages are garbled if you can't see the speaker. Yes, this includes if they are inside a closet.
-	if (language && (language.flags & NONVERBAL))
+	if (language && (language.flags & LANG_FLAG_NONVERBAL))
 		if (!speaker || (src.sdisabilities & BLINDED || src.blinded) || !(speaker in view(src)))
 			message = stars(message)
 
-	if(!(language && (language.flags & INNATE))) // skip understanding checks for INNATE languages
+	if(!(language && (language.flags & LANG_FLAG_INNATE))) // skip understanding checks for LANG_FLAG_INNATE languages
 		if(!say_understands(speaker,language))
 			if(istype(speaker,/mob/living/simple_animal))
 				var/mob/living/simple_animal/S = speaker
@@ -65,7 +65,7 @@
 			message = "<b>[message]</b>"
 
 	if(is_deaf() || get_sound_volume_multiplier() < 0.2)
-		if(!language || !(language.flags & INNATE)) // INNATE is the flag for audible-emote-language, so we don't want to show an "x talks but you cannot hear them" message if it's set
+		if(!language || !(language.flags & LANG_FLAG_INNATE)) // LANG_FLAG_INNATE is the flag for audible-emote-language, so we don't want to show an "x talks but you cannot hear them" message if it's set
 			if(speaker == src)
 				to_chat(src, SPAN_WARNING("You cannot hear yourself speak!"))
 			else if(!is_blind())
@@ -113,11 +113,11 @@
 	var/track = null
 
 	//non-verbal languages are garbled if you can't see the speaker. Yes, this includes if they are inside a closet.
-	if (language && (language.flags & NONVERBAL))
+	if (language && (language.flags & LANG_FLAG_NONVERBAL))
 		if (!speaker || (src.sdisabilities & BLINDED || src.blinded) || !(speaker in view(src)))
 			message = stars(message)
 
-	if(!(language && (language.flags & INNATE))) // skip understanding checks for INNATE languages
+	if(!(language && (language.flags & LANG_FLAG_INNATE))) // skip understanding checks for LANG_FLAG_INNATE languages
 		if(!say_understands(speaker,language))
 			if(istype(speaker,/mob/living/simple_animal))
 				var/mob/living/simple_animal/S = speaker

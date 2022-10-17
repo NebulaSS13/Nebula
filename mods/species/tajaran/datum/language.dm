@@ -6,7 +6,7 @@
 	exclaim_verb = "howls"
 	whisper_verb = "purrs softly"
 	key = "2"
-	flags = WHITELISTED
+	flags = LANG_FLAG_WHITELISTED
 	shorthand = "T"
 	syllables = list("mrr","rr","tajr","kir","raj","kii","mir","kra","ahk","nal","vah","khaz","jri","ran","darr",
 	"mi","jri","dynh","manq","rhe","zar","rrhaz","kal","chur","eech","thaa","dra","jurl","mah","sanu","dra","ii'r",

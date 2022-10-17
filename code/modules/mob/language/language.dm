@@ -9,7 +9,7 @@
 
 	// Short description for 'Check Languages'.
 	var/desc = "You should not have this language."
-	// list of emotes that might be displayed if this language has NONVERBAL or SIGNLANG flags
+	// list of emotes that might be displayed if this language has LANG_FLAG_NONVERBAL or LANG_FLAG_SIGNLANG flags
 	var/signlang_verb = list("signs", "gestures")
 
 	var/name                            // Fluff name of language if any.
@@ -125,7 +125,7 @@
 	scramble_cache[input] = scrambled_text
 	if(scramble_cache.len > SCRAMBLE_CACHE_LEN)
 		scramble_cache.Cut(1, scramble_cache.len-SCRAMBLE_CACHE_LEN-1)
-	
+
 	return scrambled_text
 
 /decl/language/proc/format_message(message, verb)
@@ -204,7 +204,7 @@
 	if (only_species_language && speaking != GET_DECL(species_language))
 		return 0
 
-	return (speaking.can_speak_special(src) && (universal_speak || (speaking && speaking.flags & INNATE) || (speaking in src.languages)))
+	return (speaking.can_speak_special(src) && (universal_speak || (speaking && speaking.flags & LANG_FLAG_INNATE) || (speaking in src.languages)))
 
 /mob/proc/get_language_prefix()
 	return get_prefix_key(/decl/prefix/language)
@@ -221,7 +221,7 @@
 	var/dat = "<b><font size = 5>Known Languages</font></b><br/><br/>"
 
 	for(var/decl/language/L in languages)
-		if(!(L.flags & NONGLOBAL))
+		if(!(L.flags & LANG_FLAG_NONGLOBAL))
 			dat += "<b>[L.name]([L.shorthand]) ([get_language_prefix()][L.key])</b><br/>[L.desc]<br/><br/>"
 
 	show_browser(src, dat, "window=checklanguage")
@@ -235,7 +235,7 @@
 		dat += "Current default language: [lang.name] - <a href='byond://?src=\ref[src];default_lang=reset'>reset</a><br/><br/>"
 
 	for(var/decl/language/L in languages)
-		if(!(L.flags & NONGLOBAL))
+		if(!(L.flags & LANG_FLAG_NONGLOBAL))
 			if(L == default_language)
 				dat += "<b>[L.name]([L.shorthand]) ([get_language_prefix()][L.key])</b> - default - <a href='byond://?src=\ref[src];default_lang=reset'>reset</a><br/>[L.desc]<br/><br/>"
 			else if (can_speak(L))

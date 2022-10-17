@@ -8,7 +8,7 @@
 	syllables = list("-","=","+","_","|","/")
 	space_chance = 0
 	key = "|"
-	flags = RESTRICTED
+	flags = LANG_FLAG_RESTRICTED
 	shorthand = "KV"
 	machine_understands = FALSE
 	var/list/correct_mouthbits = list(
@@ -53,7 +53,7 @@
 	speech_verb = "flashes"
 	ask_verb = "gleams"
 	exclaim_verb = "flares"
-	flags = RESTRICTED | NO_STUTTER | NONVERBAL
+	flags = LANG_FLAG_RESTRICTED | LANG_FLAG_NO_STUTTER | LANG_FLAG_NONVERBAL
 	shorthand = "KNV"
 
 #define MANTID_SCRAMBLE_CACHE_LEN 20
@@ -86,7 +86,7 @@
 	speech_verb = "flashes"
 	ask_verb = "gleams"
 	exclaim_verb = "flares"
-	flags = RESTRICTED | NO_STUTTER | NONVERBAL | HIVEMIND
+	flags = LANG_FLAG_RESTRICTED | LANG_FLAG_NO_STUTTER | LANG_FLAG_NONVERBAL | LANG_FLAG_HIVEMIND
 	shorthand = "KB"
 
 /decl/language/mantid/worldnet/check_special_condition(var/mob/living/carbon/other)

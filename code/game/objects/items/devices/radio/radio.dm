@@ -271,7 +271,7 @@
 	//  Fix for permacell radios, but kinda eh about actually fixing them.
 	if(!M || !message) return 0
 
-	if(speaking && (speaking.flags & (NONVERBAL|SIGNLANG))) return 0
+	if(speaking && (speaking.flags & (LANG_FLAG_NONVERBAL|LANG_FLAG_SIGNLANG))) return 0
 
 	if (!broadcasting)
 		// Sedation chemical effect should prevent radio use.

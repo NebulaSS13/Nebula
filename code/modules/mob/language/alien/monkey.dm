@@ -5,7 +5,7 @@
 	ask_verb = "chimpers"
 	exclaim_verb = "screeches"
 	key = ""
-	flags = RESTRICTED
+	flags = LANG_FLAG_RESTRICTED
 	syllables = list("ook", "eek", "hiss", "gronk")
 	shorthand = "Ook"
 	hidden_from_codex = 1

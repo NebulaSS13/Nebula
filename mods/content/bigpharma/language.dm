@@ -9,6 +9,7 @@
 	space_chance = 0
 	key = "💊"
 	allow_repeated_syllables = FALSE
+	flags = LANG_FLAG_RESTRICTED | LANG_FLAG_FORBIDDEN
 	syllables = list(
 		"o", "a","flu","o","me","phyto","doce","tha","facto","bena","zeco","ni",
 		"me","pro","dize","da","le","ta","to","ba","re","mbi","no","ffi",

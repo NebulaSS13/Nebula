@@ -217,11 +217,11 @@ var/global/list/channel_to_radio_key = new
 
 	// This is broadcast to all mobs with the language,
 	// irrespective of distance or anything else.
-	if(speaking && (speaking.flags & HIVEMIND))
+	if(speaking && (speaking.flags & LANG_FLAG_HIVEMIND))
 		speaking.broadcast(src,trim(message))
 		return 1
 
-	if((is_muzzled()) && !(speaking && (speaking.flags & SIGNLANG)))
+	if((is_muzzled()) && !(speaking && (speaking.flags & LANG_FLAG_SIGNLANG)))
 		to_chat(src, "<span class='danger'>You're muzzled and cannot speak!</span>")
 		return
 
@@ -239,7 +239,7 @@ var/global/list/channel_to_radio_key = new
 	if(speaking && !speaking.can_be_spoken_properly_by(src))
 		message = speaking.muddle(message)
 
-	if(!(speaking && (speaking.flags & NO_STUTTER)))
+	if(!(speaking && (speaking.flags & LANG_FLAG_NO_STUTTER)))
 		var/list/message_data = list(message, verb, 0)
 		if(handle_speech_problems(message_data))
 			message = message_data[1]
@@ -270,7 +270,7 @@ var/global/list/channel_to_radio_key = new
 		if(speaking)
 			message_range = speaking.get_talkinto_msg_range(message)
 		var/msg
-		if(!speaking || !(speaking.flags & NO_TALK_MSG))
+		if(!speaking || !(speaking.flags & LANG_FLAG_NO_TALK_MSG))
 			msg = "<span class='notice'>\The [src] talks into \the [used_radios[1]].</span>"
 		for(var/mob/living/M in hearers(5, src))
 			if((M != src) && msg)
@@ -284,11 +284,11 @@ var/global/list/channel_to_radio_key = new
 
 	//handle nonverbal and sign languages here
 	if (speaking)
-		if (speaking.flags & NONVERBAL)
+		if (speaking.flags & LANG_FLAG_NONVERBAL)
 			if (prob(30))
 				src.custom_emote(1, "[pick(speaking.signlang_verb)].")
 
-		if (speaking.flags & SIGNLANG)
+		if (speaking.flags & LANG_FLAG_SIGNLANG)
 			log_say("[name]/[key] : SIGN: [message]")
 			return say_signlang(message, pick(speaking.signlang_verb), speaking)
 
