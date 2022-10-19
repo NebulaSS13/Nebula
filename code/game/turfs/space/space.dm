@@ -21,7 +21,7 @@
 	SHOULD_CALL_PARENT(FALSE)
 	atom_flags |= ATOM_FLAG_INITIALIZED
 
-	update_ambient_light_from_z()
+	SSambience.queued += src
 
 	//We might be an edge
 	if(y == world.maxy || forced_dirs & NORTH)

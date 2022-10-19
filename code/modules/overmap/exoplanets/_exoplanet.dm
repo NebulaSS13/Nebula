@@ -226,19 +226,6 @@
 		//Otherwise the right side of the exoplanet can get stuck in a forever day.
 		daycycle = rand(10 MINUTES, 40 MINUTES)
 
-	// This was formerly done in Initialize, but that caused problems with ChangeTurf. The initialize logic is now
-	// mapload-only, and so the exoplanet step (which uses ChangeTurf) has to be done here.
-	for(var/target_z in map_z)
-		for(var/turf/exterior_turf in block(
-			locate(TRANSITIONEDGE, TRANSITIONEDGE, target_z),
-			locate(world.maxx - TRANSITIONEDGE, world.maxy - TRANSITIONEDGE, target_z)
-		))
-			if(lightlevel)
-				exterior_turf.update_ambient_light_from_z()
-			else
-				exterior_turf.clear_ambient_light()
-			CHECK_TICK
-
 //Tries to generate num landmarks, but avoids repeats.
 /obj/effect/overmap/visitable/sector/exoplanet/proc/generate_landing()
 	var/places = list()
