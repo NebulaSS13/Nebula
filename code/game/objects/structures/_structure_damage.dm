@@ -27,5 +27,4 @@
 
 /obj/structure/physically_destroyed(var/skip_qdel)
 	if(..(TRUE))
-		return dismantle()
-
+		return dismantle() //#FIXME: This might not be generic enough?

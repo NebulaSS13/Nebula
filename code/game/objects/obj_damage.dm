@@ -2,6 +2,10 @@
 /obj/proc/can_take_damage()
 	return simulated && health != OBJ_HEALTH_NO_DAMAGE && max_health != OBJ_HEALTH_NO_DAMAGE
 
+///Returns the percentage of health that is left for this object
+/obj/proc/get_health_percent()
+	return (!can_take_damage())? 100 : ((health / max_health) * 100)
+
 ///Return a multiplier to apply to the material integrity when setting the health of the obj from the material
 /obj/proc/get_material_health_modifier()
 	return 1
@@ -146,14 +150,17 @@
 	qdel(src)
 
 ///Handles shattering the object after it took enough brute damage
-/obj/proc/shatter(var/consumed = FALSE)
+/obj/proc/shatter(var/consumed = FALSE, var/quiet = FALSE, var/skip_qdel = FALSE)
 	var/turf/T = get_turf(src)
-	T?.visible_message(SPAN_DANGER("\The [src] [material ? material.destruction_desc : "shatters"]!"))
-	playsound(src, "shatter", 70, 1)
-	if(!consumed && material && w_class > ITEM_SIZE_SMALL && T)
-		material.place_shards(T)
+	if(!quiet)
+		T?.visible_message(SPAN_DANGER("\The [src] [material ? material.destruction_desc : "shatters"]!"))
+	playsound(src, "shatter", 70, TRUE)
+	if(!consumed && material && (w_class > ITEM_SIZE_TINY) && T)
+		var/amount_shards = LAZYACCESS(matter, material) / SHEET_MATERIAL_AMOUNT
+		material.place_shards(T, amount_shards)
 	dump_contents()
-	qdel(src)
+	if(!skip_qdel)
+		qdel(src)
 
 /obj/proc/explosion_severity_damage(var/severity)
 	var/mult = explosion_severity_damage_multiplier()
@@ -185,18 +192,43 @@
 
 /obj/hitby(atom/movable/AM, var/datum/thrownthing/TT)
 	. = ..()
+
 	if(hitsound)
 		var/hit_volume = 75
 		if(isobj(AM))
 			var/obj/O = AM
 			hit_volume = O.get_impact_sound_volume()
+		if(isliving(AM))
+			var/mob/living/L = AM
+			hit_volume = clamp(L.mob_size * 8, 20, 100)
 		playsound(loc, hitsound, hit_volume, TRUE)
 
+	//#TODO: Move the throwing damage stuff into the throw_impact proc, so we don't have to write type specific stuff in here
+	var/tforce = 0
+	var/dtype  = BRUTE
+	var/dflags = 0
+	var/apen = 0
+	if(isobj(AM))
+		var/obj/O = AM
+		tforce = O.throwforce * (TT.speed/THROWFORCE_SPEED_DIVISOR)
+		dtype = O.damtype
+		dflags = O.damage_flags()
+		apen = armor_penetration
+
+	else if(isliving(AM))
+		var/mob/living/L = AM
+		tforce = L.mob_size * (TT.speed/THROWFORCE_SPEED_DIVISOR)
+
+	take_damage(tforce, dtype, dflags, AM, apen, TT.target_zone)
+
+//#TODO: throw_impact would probably make more sense to inflict damage, but more work is needed first, so we don't end up with people throwing eachothers to break into places.
+#if 0
 /obj/throw_impact(atom/movable/hit_atom, datum/thrownthing/TT)
 	. = ..() //throw_impact() calls hitby() on the target
 	if(.)
 		//Apply damge in hitby to avoid having to typecast
 		hit_atom.take_damage(throwforce, damtype, damage_flags(), TT.thrower, armor_penetration)
+#endif
 
 ///Returns the volume at which the hitsound should play assuming the src object is being thrown
 /obj/proc/get_impact_sound_volume()
@@ -251,10 +283,13 @@
 ///Handles repairing the object with the given tool
 /obj/proc/handle_repair(mob/user, obj/item/tool)
 	var/obj/item/stack/stack = tool
-	var/amount_needed = CEILING((max_health - health)/DOOR_REPAIR_AMOUNT)
+	var/amount_needed = get_repair_mat_amount()
 	var/used = min(amount_needed, stack.amount)
 	if(used)
 		to_chat(user, SPAN_NOTICE("You fit [used] [stack.singular_name]\s to damaged areas of \the [src]."))
 		stack.use(used)
 		heal(used * DOOR_REPAIR_AMOUNT)
 
+///Returns the amount of needed material sheets in order to fully repair this object
+/obj/proc/get_repair_mat_amount()
+	return CEILING((max_health - health) / DOOR_REPAIR_AMOUNT)
