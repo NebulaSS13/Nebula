@@ -273,7 +273,7 @@
 			if(2)
 				if(TR.seed) //Could be that they're just using it as a de-weeder
 					TR.age = 0
-					TR.health = 0
+					TR.plant_health = 0
 					if(TR.harvest)
 						TR.harvest = FALSE //To make sure they can't just put in another seed and insta-harvest it
 					qdel(TR.seed)
@@ -292,7 +292,7 @@
 						TR.dead = 0
 						TR.seed = O
 						TR.age = 1
-						TR.health = TR.seed.get_trait(TRAIT_ENDURANCE)
+						TR.plant_health = TR.seed.get_trait(TRAIT_ENDURANCE)
 						TR.lastcycle = world.time
 						O.forceMove(TR)
 						TR.update_icon()
