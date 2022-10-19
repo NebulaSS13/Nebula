@@ -38,7 +38,7 @@
 	seed = newseed
 	dead = 0
 	age = start_mature ? seed.get_trait(TRAIT_MATURATION) : 1
-	health = seed.get_trait(TRAIT_ENDURANCE)
+	plant_health = seed.get_trait(TRAIT_ENDURANCE)
 	lastcycle = world.time
 	if(isnull(default_pixel_y))
 		default_pixel_y = rand(-12,12)
@@ -47,7 +47,7 @@
 	reset_offsets(0)
 	if(seed)
 		name = seed.display_name
-	check_health()
+	check_plant_health()
 	connected_zlevels = GetConnectedZlevels(z)
 
 /obj/machinery/portable_atmospherics/hydroponics/soil/invisible/Process()

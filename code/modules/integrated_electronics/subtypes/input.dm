@@ -271,7 +271,7 @@
 		set_pin_data(IC_OUTPUT, 13, H.nutrilevel)
 		set_pin_data(IC_OUTPUT, 14, H.harvest)
 		set_pin_data(IC_OUTPUT, 15, H.dead)
-		set_pin_data(IC_OUTPUT, 16, H.health)
+		set_pin_data(IC_OUTPUT, 16, H.plant_health)
 	push_data()
 	activate_pin(2)
 
