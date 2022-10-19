@@ -4,6 +4,15 @@
 /obj/item/withstand_psi_stress(var/stress, var/atom/source)
 	. = ..(stress, source)
 	if(health >= 0 && . > 0 && disrupts_psionics())
-		health -= .
-		. = max(0, -(health))
-		check_health(consumed = TRUE)
+		. = max(0, -(health - .))
+		take_damage(., PSIONIC, 0, source, 0)
+
+/obj/item/check_health(lastdamage, lastdamtype, lastdamflags)
+	if(health > 0 || !can_take_damage())
+		return //If invincible, or if we're not dead yet, skip
+
+	if(lastdamtype == PSIONIC)
+		shatter(TRUE)
+	else 
+		. = ..()
+	
