@@ -229,11 +229,14 @@
 	// This was formerly done in Initialize, but that caused problems with ChangeTurf. The initialize logic is now
 	// mapload-only, and so the exoplanet step (which uses ChangeTurf) has to be done here.
 	for(var/target_z in map_z)
-		for(var/turf/exterior/exterior_turf in block(
+		for(var/turf/exterior_turf in block(
 			locate(TRANSITIONEDGE, TRANSITIONEDGE, target_z),
 			locate(world.maxx - TRANSITIONEDGE, world.maxy - TRANSITIONEDGE, target_z)
 		))
-			exterior_turf.setup_environmental_lighting()
+			if(lightlevel)
+				exterior_turf.update_ambient_light_from_z()
+			else
+				exterior_turf.clear_ambient_light()
 			CHECK_TICK
 
 //Tries to generate num landmarks, but avoids repeats.
@@ -308,5 +311,4 @@
 	ambience = list('sound/effects/wind/wind_2_1.ogg','sound/effects/wind/wind_2_2.ogg','sound/effects/wind/wind_3_1.ogg','sound/effects/wind/wind_4_1.ogg','sound/effects/wind/wind_4_2.ogg','sound/effects/wind/wind_5_1.ogg')
 	always_unpowered = 1
 	area_flags = AREA_FLAG_IS_BACKGROUND | AREA_FLAG_EXTERNAL
-	show_starlight = TRUE
 	is_outside = OUTSIDE_YES

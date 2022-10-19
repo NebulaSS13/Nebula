@@ -122,7 +122,7 @@
 	// end of lighting stuff
 
 	// we check the var rather than the proc, because area outside values usually shouldn't be set on turfs
-	if(W.is_outside != old_outside) 
+	if(W.is_outside != old_outside)
 		W.set_outside(old_outside, skip_weather_update = TRUE)
 	W.update_weather(force_update_below = W.is_open() != old_is_open)
 
