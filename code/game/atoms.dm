@@ -254,7 +254,7 @@
 	return
 
 ///Called to destroy the atom when its been melted or burnt by high temperatures or the like.
-/atom/proc/melt()
+/atom/proc/melt(var/last_damage_type)
 	return
 
 /atom/proc/lava_act()

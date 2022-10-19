@@ -68,8 +68,8 @@
 	//Call a different proc depending on what was the last type of damage inflicted
 	if(lastdamtype == BRUTE && material?.is_brittle())
 		shatter()
-	else if(lastdamtype == BURN)
-		melt()
+	else if(lastdamtype == BURN || lastdamtype == ELECTROCUTE)
+		melt(lastdamtype)
 	else 
 		physically_destroyed()
 
@@ -130,7 +130,7 @@
 	if(dmg)
 		take_damage(dmg, BURN, DAM_DISPERSED, "fire", 0, null, TRUE)
 
-/obj/melt()
+/obj/melt(last_damage_type)
 	for(var/mat in matter)
 		var/decl/material/M = GET_DECL(mat)
 		if(!M)
