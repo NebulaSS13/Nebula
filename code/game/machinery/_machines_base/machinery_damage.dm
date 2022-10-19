@@ -37,11 +37,13 @@
 		// If some damage got past, next it's generic (non-circuitboard) components
 		var/obj/item/stock_parts/victim = get_damageable_component(damage_type)
 		while(component_damage > 0 && victim)
-			component_damage -= victim.take_damage(component_damage, damage_type)
+			//When dealing brute damage, have a chance for a component not to take damage
+			if(damage_type != BRUTE || (damage_type == BRUTE && prob(min(100, component_damage))))
+				component_damage -= victim.take_damage(component_damage, damage_type, damage_flags, inflicter, 0, target_zone, quiet)
 			victim = get_damageable_component(damage_type)
 
-		// And lastly hit the circuitboard
-		if(component_damage > 0)
+		// And lastly hit the circuitboard, with a chance to not damage it when dealing brute damage
+		if(component_damage > 0 && (damage_type != BRUTE || (damage_type == BRUTE && prob(min(100, component_damage)))))
 			victim = get_component_of_type(/obj/item/stock_parts/circuitboard)
 			if(victim)
 				component_damage -= victim.take_damage(component_damage, damage_type)
