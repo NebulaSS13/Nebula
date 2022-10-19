@@ -27,14 +27,14 @@
 	if(!istype(material))
 		return INITIALIZE_HINT_QDEL
 
-/obj/structure/barricade/update_materials(var/keep_health)
+/obj/structure/barricade/update_material_properties()
 	. = ..()
 	spike_damage = reinf_material?.hardness * 0.85
 
-/obj/structure/barricade/update_material_name()
+/obj/structure/barricade/update_material_name(override_name)
 	..(reinf_material ? "cheval-de-frise" : "barricade")
 
-/obj/structure/barricade/update_material_desc()
+/obj/structure/barricade/update_material_desc(override_desc)
 	if(reinf_material)
 		desc = "A rather simple [material.solid_name] barrier. It menaces with spikes of [reinf_material.solid_name]."
 	else
@@ -57,8 +57,8 @@
 			visible_message(SPAN_NOTICE("\The [user] begins to work on \the [src]."))
 			if(do_after(user, 4 SECONDS, src) && !reinf_material && R.use(5))
 				visible_message(SPAN_NOTICE("\The [user] fastens \the [R] to \the [src]."))
-				reinf_material = R.material
-				update_materials(TRUE)
+				set_reinforcing_material(R.material, TRUE)
+		return TRUE
 	. = ..()
 
 /obj/structure/barricade/dismantle()

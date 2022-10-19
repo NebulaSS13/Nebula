@@ -39,6 +39,8 @@
 /obj/structure/table/Initialize()
 	if(ispath(additional_reinf_material, /decl/material))
 		additional_reinf_material = GET_DECL(additional_reinf_material)
+	//Only change health if we didn't set a starting health in the definition, don't update material, since base class does it
+	set_additional_reinf_material(additional_reinf_material, (initial(health) > 0), FALSE) 
 	. = ..()
 	if(. != INITIALIZE_HINT_QDEL)
 		if(!material)
@@ -140,17 +142,16 @@
 			if(remove_mat != reinf_material)
 				return TRUE
 			reinf_material.create_object(src.loc)
-			reinf_material = null
+			set_reinforcing_material(null, TRUE)
 			tool_interaction_flags |= TOOL_INTERACTION_DECONSTRUCT
 		else
 			if(remove_mat != additional_reinf_material)
 				return TRUE
 			additional_reinf_material.create_object(src.loc)
-			additional_reinf_material = null
+			set_additional_reinf_material(null, TRUE)
 
 		user.visible_message(SPAN_NOTICE("\The [user] removes the [remove_mat.solid_name] [remove_noun] from \the [src]."),
 			SPAN_NOTICE("You remove the [remove_mat.solid_name] [remove_noun] from \the [src]."))
-		update_materials()
 	return TRUE
 
 /obj/structure/table/attackby(obj/item/W, mob/user, click_params)
@@ -222,8 +223,7 @@
 	to_chat(user, SPAN_NOTICE("You begin reinforcing \the [src] with [mat.solid_name]."))
 	if(do_after(user, 2 SECONDS, src) && S.use(1) && !additional_reinf_material)
 		user.visible_message(SPAN_NOTICE("\The [user] finishes adding [mat.solid_name] reinforcements to \the [src]."))
-		additional_reinf_material = mat
-		update_materials()
+		set_additional_reinf_material(mat, TRUE)
 	return TRUE
 
 /obj/structure/table/proc/finish_table(obj/item/stack/material/S, mob/user)
@@ -244,8 +244,7 @@
 	to_chat(user, SPAN_NOTICE("You begin furnishing \the [src] with \a [mat.solid_name] [top_surface_noun]."))
 	if(do_after(user, 2 SECONDS, src) && S.use(1) && !reinf_material)
 		user.visible_message(SPAN_NOTICE("\The [user] finishes adding \a [mat.solid_name] [top_surface_noun] to \the [src]."))
-		reinf_material = mat
-		update_materials()
+		set_reinforcing_material(mat, TRUE)
 		tool_interaction_flags &= ~TOOL_INTERACTION_DECONSTRUCT
 
 	return TRUE
@@ -622,6 +621,16 @@
 
 /obj/structure/table/handle_default_crowbar_attackby(var/mob/user, var/obj/item/crowbar)
 	return !reinf_material && ..()
+
+///Sets the table's 
+/obj/structure/table/proc/set_additional_reinf_material(var/mat, var/keep_health = FALSE, var/update_material = TRUE)
+	if(ispath(mat, /decl/material))
+		additional_reinf_material = GET_DECL(mat)
+	else 
+		additional_reinf_material = mat
+
+	if(update_material)
+		update_material(keep_health)
 
 // Table presets.
 /obj/structure/table/frame

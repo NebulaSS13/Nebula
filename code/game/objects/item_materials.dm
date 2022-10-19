@@ -2,14 +2,16 @@
 	. = ..()
 	SHOULD_CALL_PARENT(TRUE)
 	cut_overlays()
-	if((material_alteration & MAT_FLAG_ALTERATION_COLOR) && material)
-		color = material.color
-		alpha = 100 + material.opacity * 255
 	if(blood_overlay)
 		add_overlay(blood_overlay)
 	if(global.contamination_overlay && contaminated)
 		overlays += global.contamination_overlay
 
+/obj/item/update_material_colour(override_colour, override_alpha)
+	if(material && (material_alteration & MAT_FLAG_ALTERATION_COLOR))
+		return ..(override_colour, override_alpha? override_alpha : (100 + (material.opacity * 255)))
+	return ..()
+	
 /obj/item/apply_hit_effect(mob/living/target, mob/living/user, var/hit_zone)
 	. = ..()
 	if(material && (material.is_brittle() || target.get_blocked_ratio(hit_zone, BRUTE, damage_flags(), armor_penetration, force) * 100 >= material.hardness/5))
@@ -60,10 +62,9 @@
 		throwforce = round(throwforce)
 		attack_cooldown += material.get_attack_cooldown()
 
-/obj/item/set_material(var/new_material)
+/obj/item/update_material(keep_health = FALSE, should_update_icon = TRUE)
 	. = ..()
-	if(istype(material))
-		update_force()
+	update_force()
 
 /obj/item/get_matter_amount_modifier()
 	. = ..()

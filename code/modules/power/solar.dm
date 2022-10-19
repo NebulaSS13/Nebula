@@ -75,6 +75,7 @@ var/global/list/solars_list = list()
 			qdel(src)
 		return
 	else if (W)
+		//#FIXME: This will have to be fixed in a solar panel PR, because its a very deep rabbit hole..
 		src.add_fingerprint(user)
 		src.health -= W.force
 		src.healthcheck()
@@ -136,9 +137,10 @@ var/global/list/solars_list = list()
 		new /obj/item/shard(src.loc)
 		new /obj/item/shard(src.loc)
 		var/obj/item/solar_assembly/S = locate() in src
-		S.glass_type = null
+		S.glass_type = null //#FIXME: Will have to be worked out later
 		unset_control()
 
+//#FIXME: Will have to be worked out later
 /obj/machinery/power/solar/explosion_act(severity)
 	. = ..()
 	if(. && !QDELETED(src))

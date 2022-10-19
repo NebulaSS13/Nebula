@@ -21,13 +21,21 @@
 /obj/Initialize(ml)
 	if(isnull(health))
 		health = max_health //Make sure to propagate max_health to health var before material setup, for consistency
-	if(ispath(material))
-		set_material(material)
-	if(islist(armor))
-		update_armor() //Since we don't always use the material's armor, we must call this here as well
+	
+	//Setup material stuff
+	var/should_set_health = (initial(health) > 0) //We set an initial health value we want to use that value as starting health instead of max_health
+	var/mat  = get_material()
+	var/rmat = get_reinf_material()
+	if(mat)
+		set_material(mat, should_set_health, FALSE) //Keep health value if defined and don't do material updates
+	if(rmat)
+		set_reinforcing_material(rmat, should_set_health, FALSE) //Keep initially set health, and don't do material updates
+	//Setup armor, properties, health, matter etc
+	update_material()
+
 	. = ..()
+
 	temperature_coefficient = isnull(temperature_coefficient) ? clamp(MAX_TEMPERATURE_COEFFICIENT - w_class, MIN_TEMPERATURE_COEFFICIENT, MAX_TEMPERATURE_COEFFICIENT) : temperature_coefficient
-	create_matter()
 	//Only apply directional offsets if the mappers haven't set any offsets already
 	if(!pixel_x && !pixel_y && !pixel_w && !pixel_z)
 		update_directional_offset()

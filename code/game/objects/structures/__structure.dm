@@ -17,8 +17,6 @@
 	if(ispath(_reinf_mat, /decl/material))
 		reinf_material = _reinf_mat
 	. = ..()
-	if(reinf_material)
-		set_reinforced_material(reinf_material)
 	if(!CanFluidPass())
 		fluid_update(TRUE)
 

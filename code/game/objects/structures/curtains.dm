@@ -93,7 +93,7 @@
 	SetName(kind.name)
 	curtain_kind_path = kind.type
 	material = GET_DECL(kind.material_key)
-	create_matter()
+	update_matter()
 	update_icon()
 
 /obj/structure/curtain/bullet_act(obj/item/projectile/P, def_zone)

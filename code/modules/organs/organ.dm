@@ -340,9 +340,9 @@
 	BP_SET_PROSTHETIC(src)
 	QDEL_NULL(dna)
 	reagents?.clear_reagents()
-	material = GET_DECL(apply_material)
+	set_material(GET_DECL(apply_material))
 	matter = null
-	create_matter()
+	update_matter()
 
 /obj/item/organ/attack(var/mob/target, var/mob/user)
 	if(BP_IS_PROSTHETIC(src) || !istype(target) || !istype(user) || (user != target && user.a_intent == I_HELP))

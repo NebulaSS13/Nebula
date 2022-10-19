@@ -50,14 +50,6 @@
 	///Sound to make when hit
 	var/hitsound = 'sound/weapons/smash.ogg'
 
-/obj/proc/create_matter()
-	if(length(matter))
-		for(var/mat in matter)
-			matter[mat] = round(matter[mat] * get_matter_amount_modifier())
-	if(istype(material))
-		matter[material.type] = max(matter[material.type], round(MATTER_AMOUNT_PRIMARY * get_matter_amount_modifier()))
-	UNSETEMPTY(matter)
-
 /obj/Destroy()
 	STOP_PROCESSING(SSobj, src)
 	return ..()

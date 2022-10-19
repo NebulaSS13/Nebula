@@ -36,14 +36,8 @@
 /obj/structure/railing/Initialize()
 	. = ..()
 	if(!material)
+		log_warning("\The [src] ([x], [y], [z]) has invalid material. Deleting.")
 		return INITIALIZE_HINT_QDEL
-	if(material.products_need_process())
-		START_PROCESSING(SSobj, src)
-	if(material.conductive)
-		obj_flags |= OBJ_FLAG_CONDUCTIBLE
-	else
-		obj_flags &= (~OBJ_FLAG_CONDUCTIBLE)
-
 	update_icon(FALSE)
 
 /obj/structure/railing/get_material_health_modifier()

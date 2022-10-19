@@ -224,17 +224,22 @@
 /obj/item/stack/proc/can_use(var/used)
 	return get_amount() >= used
 
-/obj/item/stack/create_matter()
-	matter_per_piece = matter?.Copy() // this is used for refreshing matter amount in update_matter()
-	if(istype(material))
-		LAZYINITLIST(matter_per_piece)
-		matter_per_piece[material.type] = max(matter_per_piece[material.type], round(MATTER_AMOUNT_PRIMARY * matter_multiplier))
-	. = ..()
-
-/obj/item/stack/proc/update_matter()
+/obj/item/stack/update_matter()
+	//Setup matter_per_piece if it hasn't been already
+	if(!matter_per_piece)
+		matter = initial(matter)
+		matter_per_piece = matter?.Copy()
+		if(istype(material))
+			LAZYSET(matter_per_piece, material.type, max(LAZYACCESS(matter_per_piece, material.type), round(MATTER_AMOUNT_PRIMARY * matter_multiplier)))
+		var/decl/material/reinf = get_reinf_material()
+		if(reinf)
+			LAZYSET(matter_per_piece, reinf.type, max(LAZYACCESS(matter_per_piece, reinf.type), round(MATTER_AMOUNT_REINFORCEMENT * matter_multiplier)))
+	
+	//Then update matter list
 	matter = list()
 	for(var/mat in matter_per_piece)
 		matter[mat] = (matter_per_piece[mat] * amount)
+	UNSETEMPTY(matter)
 
 /obj/item/stack/proc/use(var/used)
 	if (!can_use(used))

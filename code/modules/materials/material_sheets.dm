@@ -47,16 +47,8 @@
 /obj/item/stack/material/get_codex_value()
 	return (material && !material.hidden_from_codex) ? "[lowertext(material.solid_name)] (material)" : ..()
 
-/obj/item/stack/material/get_material()
-	return material
-
-/obj/item/stack/material/create_matter()
-	matter = list()
-	if(istype(material))
-		matter[material.type] = MATTER_AMOUNT_PRIMARY * matter_multiplier
-	if(istype(reinf_material))
-		matter[reinf_material.type] = MATTER_AMOUNT_REINFORCEMENT * matter_multiplier
-	..()
+/obj/item/stack/material/get_reinf_material()
+	return reinf_material
 
 /obj/item/stack/material/proc/update_strings()
 	if(amount>1)
@@ -103,12 +95,15 @@
 		M.update_strings()
 
 /obj/item/stack/material/copy_from(var/obj/item/stack/material/other)
-	..()
+	. = ..()
 	if(istype(other))
-		material = other.material
-		reinf_material = other.reinf_material
-		update_strings()
-		update_icon()
+		set_material(other.material, FALSE, FALSE)
+		set_reinforcing_material(other.reinf_material, FALSE, FALSE)
+		update_material()
+
+/obj/item/stack/material/update_material(keep_health, should_update_icon)
+	. = ..()
+	update_strings()
 
 /obj/item/stack/material/attackby(var/obj/item/W, var/mob/user)
 
@@ -131,9 +126,12 @@
 
 /obj/item/stack/material/on_update_icon()
 	. = ..()
-	color = material.color
-	alpha = 100 + max(1, amount/25)*(material.opacity * 255)
 	update_state_from_amount()
+
+/obj/item/stack/material/update_material_colour(override_colour, override_alpha)
+	if(material)
+		return ..(override_colour, override_alpha? override_alpha : (100 + max(1, amount/25)*(material.opacity * 255)))
+	return ..()
 
 /obj/item/stack/material/proc/update_state_from_amount()
 	if(max_icon_state && amount == max_amount)

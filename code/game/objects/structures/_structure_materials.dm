@@ -2,32 +2,22 @@
 	var/decl/material/reinf_material
 	var/dismantled
 
-///Set the reinforced material for this structure. If keep_health is true, it will not reset the health value, and will instead just add the difference to it.
-/obj/structure/proc/set_reinforced_material(var/mat, var/keep_health = FALSE)
+/obj/structure/get_reinf_material()
+	return reinf_material
+
+//Set the reinforced material for this structure. If keep_health is true, it will not reset the health value, and will instead just add the difference to it.
+/obj/structure/set_reinforcing_material(mat, keep_health = FALSE, update_material = TRUE)
 	if(ispath(mat))
 		reinf_material = GET_DECL(mat)
 	else
 		reinf_material = mat
 
-	if(material_alteration & MAT_FLAG_ALTERATION_NAME)
-		update_material_name()
-	if(material_alteration & MAT_FLAG_ALTERATION_DESC)
-		update_material_desc()
-	if(material_alteration & MAT_FLAG_ALTERATION_COLOR)
-		update_material_colour()
-	if((alpha / 255) < 0.5)
-		set_opacity(FALSE)
-	else
-		set_opacity(initial(opacity))
-	
-	if(max_health != OBJ_HEALTH_NO_DAMAGE)
-		if(reinf_material)
-			var/bonus_health = reinf_material.integrity * get_material_health_modifier()
-			max_health += bonus_health
-			if(!keep_health)
-				health += bonus_health
-		health = keep_health ? min(health, max_health) : max_health
-	update_icon()
+	if(update_material)
+		update_material(keep_health)
+	return TRUE
+
+/obj/structure/update_material_name(override_name)
+	. = ..(override_name ? override_name : "[reinf_material ? "reinforced " : ""][material? "[material.solid_name] " : ""][name]")
 
 /obj/structure/proc/create_dismantled_products(var/turf/T)
 	SHOULD_CALL_PARENT(TRUE)
@@ -60,10 +50,3 @@
 		if(!QDELETED(src))
 			qdel(src)
 	. = TRUE
-
-/obj/structure/create_matter()
-	..()
-	LAZYINITLIST(matter)
-	if(reinf_material)
-		matter[reinf_material.type] = max(matter[reinf_material.type], round(MATTER_AMOUNT_REINFORCEMENT * get_matter_amount_modifier()))
-	UNSETEMPTY(matter)
