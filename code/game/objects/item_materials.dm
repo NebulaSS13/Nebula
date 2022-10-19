@@ -11,7 +11,7 @@
 	if(material && (material_alteration & MAT_FLAG_ALTERATION_COLOR))
 		return ..(override_colour, override_alpha? override_alpha : (100 + (material.opacity * 255)))
 	return ..()
-	
+
 /obj/item/apply_hit_effect(mob/living/target, mob/living/user, var/hit_zone)
 	. = ..()
 	if(material && (material.is_brittle() || target.get_blocked_ratio(hit_zone, BRUTE, damage_flags(), armor_penetration, force) * 100 >= material.hardness/5))
@@ -30,10 +30,19 @@
 /obj/item/proc/apply_wear()
 	if(material && can_take_damage() && can_take_wear_damage() && prob(material.hardness))
 		if(material.is_brittle())
-			health = 0
-		else
-			health--
-		check_health()
+			. = 1
+
+		//Take damage from hitting armor and stuff
+		var/mob/living/L = wear_cause
+		if(isliving(L))
+			var/amount_blocked = L.get_blocked_ratio(hit_zone, BRUTE, damage_flags(), armor_penetration, force) * 100
+			if(amount_blocked >= (material.hardness/5))
+				. = 1
+
+	//If we should take any damage apply it here
+	if(. > 0)
+		return take_damage(., BRUTE, 0,  wear_cause, ARMOR_MELEE_SHIELDED, null, TRUE)
+	return 0
 
 /obj/item/proc/update_force()
 	var/new_force
