@@ -75,19 +75,30 @@
 		num2text(ENT_FREQ) = list()
 	)
 
-/obj/item/radio/intercom/syndicate
-	name = "illicit intercom"
-	desc = "Talk through this. Evilly."
+/obj/item/radio/intercom/wizard
+	name = "enchanted intercom"
+	desc = "Talk into this while you ponder your orb."
 	frequency = SYND_FREQ
 	subspace_transmission = 1
 	syndie = 1
 
-/obj/item/radio/intercom/syndicate/Initialize()
+/obj/item/radio/intercom/wizard/Initialize()
 	. = ..()
-	internal_channels[num2text(SYND_FREQ)] = list(access_syndicate)
+	internal_channels[num2text(SYND_FREQ)] = list(access_wizard)
+
+/obj/item/radio/intercom/ninja
+	name = "stealth intercom"
+	desc = "It's hiding in plain sight."
+	frequency = SYND_FREQ
+	subspace_transmission = 1
+	syndie = 1
+
+/obj/item/radio/intercom/ninja/Initialize()
+	. = ..()
+	internal_channels[num2text(SYND_FREQ)] = list(access_ninja)
 
 /obj/item/radio/intercom/raider
-	name = "illicit intercom"
+	name = "piratical intercom"
 	desc = "Pirate radio, but not in the usual sense of the word."
 	frequency = RAID_FREQ
 	subspace_transmission = 1
@@ -95,7 +106,7 @@
 
 /obj/item/radio/intercom/raider/Initialize()
 	. = ..()
-	internal_channels[num2text(RAID_FREQ)] = list(access_syndicate)
+	internal_channels[num2text(RAID_FREQ)] = list(access_raider)
 
 /obj/item/radio/intercom/Destroy()
 	STOP_PROCESSING(SSobj, src)

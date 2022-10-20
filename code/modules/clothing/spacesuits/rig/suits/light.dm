@@ -45,7 +45,7 @@
 	suit_type = "cyber"
 	desc = "An advanced powered armour suit with many cyberwarfare enhancements. Comes with built-in insulated gloves for safely tampering with electronics."
 	icon = 'icons/clothing/rigs/rig_hacker.dmi'
-	req_access = list(access_syndicate)
+	req_access = list(access_hacked)
 	airtight = 0
 	seal_delay = 5 //not being vaccum-proof has an upside I guess
 
@@ -105,7 +105,7 @@
 	gloves = /obj/item/clothing/gloves/rig/light/ninja
 	cell =   /obj/item/cell/hyper
 
-	req_access = list(access_syndicate)
+	req_access = list(access_ninja)
 
 	initial_modules = list(
 		/obj/item/rig_module/teleporter,
@@ -170,7 +170,7 @@
 	name = "stealth suit control module"
 	suit_type = "stealth"
 	desc = "A highly advanced and expensive suit designed for covert operations."
-	req_access = list(access_syndicate)
+	req_access = list(access_hacked)
 	initial_modules = list(
 		/obj/item/rig_module/stealth_field,
 		/obj/item/rig_module/vision

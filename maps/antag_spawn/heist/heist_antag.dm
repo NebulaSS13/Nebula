@@ -14,6 +14,7 @@
 	min_player_age = 14
 
 	id_type = /obj/item/card/id/syndicate
+	default_access = list(access_hacked, access_raider)
 
 	faction = "pirate"
 	base_to_load = "Heist Base"

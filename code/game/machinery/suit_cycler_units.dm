@@ -45,7 +45,7 @@
 	model_text = "Security"
 	initial_access = list(access_security)
 	available_modifications = list(
-		/decl/item_modifier/space_suit/security, 
+		/decl/item_modifier/space_suit/security,
 		/decl/item_modifier/space_suit/security/alt
 	)
 
@@ -81,15 +81,20 @@
 	)
 	buildable = FALSE
 
-/obj/machinery/suit_cycler/syndicate
+/obj/machinery/suit_cycler/nonstandard
 	name = "nonstandard suit cycler"
 	model_text = "Nonstandard"
-	initial_access = list(access_syndicate)
 	available_modifications = list(
 		/decl/item_modifier/space_suit/mercenary
 	)
 	can_repair = TRUE
 	buildable = FALSE
+
+/obj/machinery/suit_cycler/nonstandard/raider
+	initial_access = list(access_raider)
+
+/obj/machinery/suit_cycler/nonstandard/mercenary
+	initial_access = list(access_mercenary)
 
 /obj/machinery/suit_cycler/pilot
 	name = "pilot suit cycler"

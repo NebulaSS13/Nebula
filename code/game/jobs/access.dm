@@ -141,12 +141,12 @@ var/global/list/priv_centcom_access
 
 	return priv_centcom_access.Copy()
 
-var/global/list/priv_syndicate_access
-/proc/get_all_syndicate_access()
-	if(!priv_syndicate_access)
-		priv_syndicate_access = get_access_ids(ACCESS_TYPE_SYNDICATE)
+var/global/list/priv_antagonist_access
+/proc/get_all_antagonist_access()
+	if(!priv_antagonist_access)
+		priv_antagonist_access = get_access_ids(ACCESS_TYPE_ANTAG)
 
-	return priv_syndicate_access.Copy()
+	return priv_antagonist_access.Copy()
 
 var/global/list/priv_region_access
 /proc/get_region_accesses(var/code)

@@ -277,7 +277,7 @@
 
 /obj/item/card/id/quantum/Initialize()
 	. = ..()
-	access = get_all_accesses() | get_all_centcom_access() | get_all_syndicate_access()
+	access = get_all_accesses() | get_all_centcom_access() | get_all_antagonist_access()
 
 /obj/item/card/id/quantum/attack_hand(mob/user)
 	if(!user)

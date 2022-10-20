@@ -379,7 +379,7 @@ var/global/const/NO_EMAG_ACT = -50
 	desc = "An ID straight from the Syndicate."
 	registered_name = "Syndicate"
 	assignment = "Syndicate Overlord"
-	access = list(access_syndicate, access_external_airlocks)
+	access = list(access_hacked, access_external_airlocks)
 	color = COLOR_RED_GRAY
 	detail_color = COLOR_GRAY40
 

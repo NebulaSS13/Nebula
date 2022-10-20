@@ -19,7 +19,7 @@
 	icon_state = "1-2"
 	},
 /obj/machinery/porta_turret{
-	req_access = list("ACCESS_SYNDICATE")
+	req_access = list("ACCESS_MERCENARY")
 	},
 /turf/simulated/floor/plating,
 /area/map_template/merc_shuttle)
@@ -99,7 +99,7 @@
 /area/map_template/merc_shuttle)
 "ak" = (
 /obj/machinery/computer/shuttle_control/explore/merc_shuttle{
-	req_access = list("ACCESS_SYNDICATE");
+	req_access = list("ACCESS_MERCENARY");
 	uncreated_component_parts = list(/obj/item/stock_parts/power/battery/buildable/responsive = 1, /obj/item/cell/high = 1)
 	},
 /obj/structure/cable{
@@ -155,7 +155,7 @@
 /obj/machinery/button/blast_door{
 	id_tag = "merc_external";
 	name = "Protective Shutters Control";
-	req_access = list("ACCESS_SYNDICATE")
+	req_access = list("ACCESS_MERCENARY")
 	},
 /turf/simulated/floor/shuttle/darkred,
 /area/map_template/merc_shuttle)
@@ -187,7 +187,7 @@
 	check_arrest = 0;
 	check_records = 0;
 	pixel_y = 32;
-	req_access = list("ACCESS_SYNDICATE")
+	req_access = list("ACCESS_MERCENARY")
 	},
 /turf/simulated/floor/shuttle/darkred,
 /area/map_template/merc_shuttle)
@@ -299,14 +299,14 @@
 	name = "OFD Viewing Shutters";
 	pixel_x = -5;
 	pixel_y = -3;
-	req_access = list("ACCESS_SYNDICATE")
+	req_access = list("ACCESS_MERCENARY")
 	},
 /obj/machinery/button/blast_door{
 	id_tag = "merc_bsa";
 	name = "OFD Firing Blast Doors";
 	pixel_x = -5;
 	pixel_y = 6;
-	req_access = list("ACCESS_SYNDICATE")
+	req_access = list("ACCESS_MERCENARY")
 	},
 /obj/machinery/recharger{
 	pixel_x = 6
@@ -354,7 +354,7 @@
 "aI" = (
 /obj/machinery/pointdefense_control{
 	initial_id_tag = "merc_pd";
-	req_access = list("ACCESS_SYNDICATE")
+	req_access = list("ACCESS_MERCENARY")
 	},
 /turf/simulated/floor/shuttle/darkred,
 /area/map_template/merc_shuttle)
@@ -370,7 +370,7 @@
 "aK" = (
 /obj/structure/catwalk,
 /obj/machinery/porta_turret{
-	req_access = list("ACCESS_SYNDICATE")
+	req_access = list("ACCESS_MERCENARY")
 	},
 /obj/machinery/light/spot{
 	dir = 4
@@ -401,7 +401,7 @@
 /obj/machinery/power/apc/hyper{
 	dir = 8;
 	pixel_x = -21;
-	req_access = list("ACCESS_SYNDICATE")
+	req_access = list("ACCESS_MERCENARY")
 	},
 /turf/simulated/floor/shuttle/darkred,
 /area/map_template/merc_shuttle)
@@ -764,7 +764,7 @@
 /obj/machinery/alarm{
 	dir = 1;
 	pixel_y = -24;
-	req_access = list("ACCESS_SYNDICATE")
+	req_access = list("ACCESS_MERCENARY")
 	},
 /obj/effect/shuttle_landmark/merc/start,
 /obj/effect/overmap/visitable/ship/landable/merc,
@@ -784,7 +784,7 @@
 /obj/item/crowbar,
 /obj/machinery/button/blast_door{
 	id_tag = "merc_airlock";
-	req_access = list("ACCESS_SYNDICATE")
+	req_access = list("ACCESS_MERCENARY")
 	},
 /obj/item/binoculars,
 /obj/item/binoculars,
@@ -900,7 +900,7 @@
 	dir = 1;
 	id_tag = "merc_shuttle";
 	pixel_y = -25;
-	req_access = list("ACCESS_SYNDICATE")
+	req_access = list("ACCESS_MERCENARY")
 	},
 /obj/machinery/atmospherics/unary/vent_pump/high_volume/external_air{
 	dir = 4;
@@ -1048,14 +1048,14 @@
 	name = "EMERGENCY VENT";
 	pixel_x = 8;
 	pixel_y = 32;
-	req_access = list("ACCESS_SYNDICATE")
+	req_access = list("ACCESS_MERCENARY")
 	},
 /obj/machinery/button/blast_door{
 	id_tag = "merc_fuel";
 	name = "Fuel Storage Shutters";
 	pixel_x = -6;
 	pixel_y = 36;
-	req_access = list("ACCESS_SYNDICATE")
+	req_access = list("ACCESS_MERCENARY")
 	},
 /obj/machinery/button/ignition{
 	id_tag = "merc_igniter";
@@ -1162,11 +1162,11 @@
 /obj/machinery/power/apc/hyper{
 	dir = 8;
 	pixel_x = -21;
-	req_access = list("ACCESS_SYNDICATE")
+	req_access = list("ACCESS_MERCENARY")
 	},
 /obj/machinery/alarm{
 	pixel_y = 24;
-	req_access = list("ACCESS_SYNDICATE")
+	req_access = list("ACCESS_MERCENARY")
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 10
@@ -1680,7 +1680,7 @@
 /area/map_template/merc_spawn)
 "ex" = (
 /obj/effect/floor_decal/industrial/outline,
-/obj/machinery/suit_cycler/syndicate{
+/obj/machinery/suit_cycler/nonstandard/mercenary{
 	locked = 0
 	},
 /turf/simulated/floor/tiled/techfloor/grid,
@@ -1761,7 +1761,7 @@
 	id_tag = "merc_shuttle";
 	pixel_x = 37;
 	pixel_y = -32;
-	req_access = list("ACCESS_SYNDICATE")
+	req_access = list("ACCESS_MERCENARY")
 	},
 /turf/simulated/floor/plating,
 /area/map_template/merc_shuttle)
@@ -2004,7 +2004,7 @@
 "mi" = (
 /obj/structure/catwalk,
 /obj/machinery/porta_turret{
-	req_access = list("ACCESS_SYNDICATE")
+	req_access = list("ACCESS_MERCENARY")
 	},
 /obj/machinery/light/spot{
 	dir = 8
@@ -2699,7 +2699,7 @@
 "UA" = (
 /obj/structure/catwalk,
 /obj/machinery/porta_turret{
-	req_access = list("ACCESS_SYNDICATE")
+	req_access = list("ACCESS_MERCENARY")
 	},
 /obj/machinery/light/spot{
 	dir = 8
@@ -2792,7 +2792,7 @@
 "Zx" = (
 /obj/structure/catwalk,
 /obj/machinery/porta_turret{
-	req_access = list("ACCESS_SYNDICATE")
+	req_access = list("ACCESS_MERCENARY")
 	},
 /obj/machinery/light/spot{
 	dir = 4

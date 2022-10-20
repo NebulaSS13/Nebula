@@ -19,7 +19,6 @@ var/global/datum/visualnet/camera/cameranet = new()
 
 // Runes
 var/global/list/rune_list = new()
-var/global/list/syndicate_access = list(access_maint_tunnels, access_syndicate, access_external_airlocks)
 
 // Strings which corraspond to bodypart covering flags, useful for outputting what something covers.
 var/global/list/string_part_flags = list(

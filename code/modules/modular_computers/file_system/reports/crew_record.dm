@@ -10,7 +10,7 @@ var/global/arrest_security_status =  "Arrest"
 	filetype = "CDB"
 	size = 2
 	write_access = list(list(access_bridge))
- 
+
 	var/icon/photo_front = null
 	var/icon/photo_side = null
 
@@ -262,7 +262,7 @@ FIELD_SHORT("Faction", faction, access_bridge, access_bridge, FALSE, TRUE)
 FIELD_LONG("Qualifications", skillset, access_bridge, access_bridge, TRUE)
 
 // ANTAG RECORDS
-FIELD_LONG("Exploitable Information", antag_record, access_syndicate, access_syndicate, FALSE)
+FIELD_LONG("Exploitable Information", antag_record, access_hacked, access_hacked, FALSE)
 
 //Options builderes
 /datum/report_field/options/crew_record/rank/proc/record_ranks()
