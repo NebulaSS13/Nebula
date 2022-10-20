@@ -5,6 +5,7 @@
 	blocks_air = 1
 	density = 1
 	opacity = 1
+	turf_flags = TURF_IS_HOLOMAP_OBSTACLE
 
 var/global/list/mining_floors = list()
 /**********************Asteroid**************************/
@@ -22,7 +23,7 @@ var/global/list/mining_floors = list()
 	initial_flooring = null
 	initial_gas = null
 	temperature = TCMB
-	turf_flags = TURF_FLAG_BACKGROUND
+	turf_flags = TURF_FLAG_BACKGROUND | TURF_IS_HOLOMAP_PATH
 
 	var/dug = 0       //0 = has not yet been dug, 1 = has already been dug
 	var/overlay_detail

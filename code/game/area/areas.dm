@@ -12,6 +12,7 @@ var/global/list/areas = list()
 	mouse_opacity = 0
 
 	var/proper_name /// Automatically set by SetName and Initialize; cached result of strip_improper(name).
+	var/holomap_color	// Color of this area on the holomap. Must be a hex color (as string) or null.
 
 	var/fire
 	var/party

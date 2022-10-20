@@ -52,6 +52,7 @@
 #define SS_INIT_LIGHTING        -6
 #define SS_INIT_WEATHER         -7
 #define SS_INIT_ZCOPY           -8
+#define SS_INIT_HOLOMAP         -9
 #define SS_INIT_XENOARCH        -10
 #define SS_INIT_TICKER          -20
 #define SS_INIT_UNIT_TESTS      -100

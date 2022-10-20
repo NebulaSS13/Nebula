@@ -28,6 +28,7 @@ var/global/list/wall_fullblend_objects = list(
 	explosion_resistance = 10
 	color = COLOR_GRAY40
 	atom_flags = ATOM_FLAG_CAN_BE_PAINTED
+	turf_flags = TURF_IS_HOLOMAP_OBSTACLE
 
 	var/damage = 0
 	var/can_open = 0
