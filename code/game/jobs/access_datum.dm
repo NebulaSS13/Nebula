@@ -436,11 +436,35 @@ var/global/const/access_cent_captain = "ACCESS_CENT_CAPTAIN" //109
 /***************
 * Antag access *
 ***************/
-var/global/const/access_syndicate = "ACCESS_SYNDICATE" //150
-/datum/access/syndicate
-	id = access_syndicate
-	desc = "Syndicate"
-	access_type = ACCESS_TYPE_SYNDICATE
+var/global/const/access_hacked = "ACCESS_HACKED" //150
+/datum/access/hacked
+	id = access_hacked
+	desc = "Hacked"
+	access_type = ACCESS_TYPE_ANTAG
+
+var/global/const/access_raider = "ACCESS_RAIDER"
+/datum/access/raider
+	id = access_raider
+	desc = "Raider"
+	access_type = ACCESS_TYPE_ANTAG
+
+var/global/const/access_mercenary = "ACCESS_MERCENARY"
+/datum/access/mercenary
+	id = access_mercenary
+	desc = "Mercenary"
+	access_type = ACCESS_TYPE_ANTAG
+
+var/global/const/access_wizard = "ACCESS_WIZARD"
+/datum/access/wizard
+	id = access_wizard
+	desc = "Wizard"
+	access_type = ACCESS_TYPE_ANTAG
+
+var/global/const/access_ninja = "ACCESS_NINJA"
+/datum/access/ninja
+	id = access_ninja
+	desc = "Ninja"
+	access_type = ACCESS_TYPE_ANTAG
 
 /*******
 * Misc *

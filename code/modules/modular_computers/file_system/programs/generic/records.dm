@@ -57,7 +57,7 @@
 	var/datum/extension/interactive/os/os = get_extension(PC, /datum/extension/interactive/os)
 	if(os && os.emagged())
 		user_access = user_access ? user_access.Copy() : list()
-		user_access |= access_syndicate
+		user_access |= access_hacked
 
 	return user_access
 

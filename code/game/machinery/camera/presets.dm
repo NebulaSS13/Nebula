@@ -14,7 +14,7 @@
 /obj/machinery/camera/network/mercenary
 	preset_channels = list(CAMERA_CHANNEL_MERCENARY)
 	cameranet_enabled = FALSE
-	initial_access = list(access_syndicate)
+	initial_access = list(access_mercenary)
 
 /obj/machinery/camera/network/mining
 	preset_channels = list(CAMERA_CHANNEL_MINE)

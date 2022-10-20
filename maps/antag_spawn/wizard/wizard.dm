@@ -10,4 +10,4 @@
 	icon_state = "yellow"
 	requires_power = 0
 	dynamic_lighting = FALSE
-	req_access = list(access_syndicate)
+	req_access = list(access_wizard)
