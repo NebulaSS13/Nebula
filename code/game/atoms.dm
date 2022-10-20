@@ -146,6 +146,7 @@
 
 	to_chat(user, "[html_icon(src)] That's [f_name] [suffix]")
 	to_chat(user, desc)
+	events_repository.raise_event(/decl/observ/atom_examined, src, user, distance)
 	return TRUE
 
 // called by mobs when e.g. having the atom as their machine, loc (AKA mob being inside the atom) or buckled var set.

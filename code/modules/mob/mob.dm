@@ -351,6 +351,8 @@
 		if(source_turf && source_turf.z == target_turf?.z)
 			distance = get_dist(source_turf, target_turf)
 
+	events_repository.raise_event(/decl/observ/mob_examining, src, A)
+
 	if(!A.examine(src, distance))
 		PRINT_STACK_TRACE("Improper /examine() override: [log_info_line(A)]")
 
