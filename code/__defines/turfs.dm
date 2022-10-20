@@ -19,6 +19,7 @@
 #define SMOOTH_BLACKLIST 3 //Smooth with all but a blacklist of subtypes
 
 #define RANGE_TURFS(CENTER, RADIUS) block(locate(max(CENTER.x-(RADIUS), 1), max(CENTER.y-(RADIUS),1), CENTER.z), locate(min(CENTER.x+(RADIUS), world.maxx), min(CENTER.y+(RADIUS), world.maxy), CENTER.z))
+#define BLOCK_TURFS(X1, Y1, X2, Y2, Z) block(locate(X1, Y1, Z), locate(X2, Y2, Z))
 
 #define EXT_LAYER_CONSTANT     0.001
 #define EXT_EDGE_OCEAN         (10 * EXT_LAYER_CONSTANT)

@@ -11,6 +11,9 @@
 	name = "\improper Tradeship"
 	ambience = list('sound/ambience/ambigen3.ogg','sound/ambience/ambigen4.ogg','sound/ambience/ambigen5.ogg','sound/ambience/ambigen6.ogg','sound/ambience/ambigen7.ogg','sound/ambience/ambigen8.ogg','sound/ambience/ambigen9.ogg','sound/ambience/ambigen10.ogg','sound/ambience/ambigen11.ogg','sound/ambience/ambigen12.ogg')
 
+/area/ship/trade
+	holomap_color = HOLOMAP_AREACOLOR_CREW
+
 /area/ship/trade/crew
 	name = "\improper Crew Compartements"
 	icon_state = "crew_quarters"
@@ -52,11 +55,13 @@
 	name = "\improper Medical Bay"
 	icon_state = "medbay"
 	area_flags = AREA_FLAG_RAD_SHIELDED
+	holomap_color = HOLOMAP_AREACOLOR_MEDICAL
 
 /area/ship/trade/cargo
 	name = "\improper Cargo Hold"
 	icon_state = "quartstorage"
 	area_flags = AREA_FLAG_RAD_SHIELDED
+	holomap_color = HOLOMAP_AREACOLOR_CARGO
 
 /area/ship/trade/cargo/lower
 	name = "Loading Bay"
@@ -65,43 +70,51 @@
 /area/ship/trade/dock
 	name = "\improper Docking Bay"
 	icon_state = "entry_1"
-
+	holomap_color = HOLOMAP_AREACOLOR_AIRLOCK
 /area/ship/trade/aft_port_underside_maint
 	name = "\improper Underside - Aft Port Maintenance"
 	icon_state = "medbay"
 	area_flags = AREA_FLAG_RAD_SHIELDED | AREA_FLAG_MAINTENANCE
+	holomap_color = HOLOMAP_AREACOLOR_MAINTENANCE
 
 /area/ship/trade/aft_starboard_underside_maint
 	name = "\improper Underside - Aft Starboard Maintenance"
 	icon_state = "toilet"
 	area_flags = AREA_FLAG_RAD_SHIELDED | AREA_FLAG_MAINTENANCE
+	holomap_color = HOLOMAP_AREACOLOR_MAINTENANCE
 
 /area/ship/trade/loading_bay
 	name = "\improper Underside - Loading Bay"
 	icon_state = "entry_1"
+	holomap_color = HOLOMAP_AREACOLOR_AIRLOCK
 
 /area/ship/trade/fore_port_underside_maint
 	name = "\improper Underside - Fore Port Maintenance"
 	icon_state = "green"
 	area_flags = AREA_FLAG_RAD_SHIELDED | AREA_FLAG_MAINTENANCE
+	holomap_color = HOLOMAP_AREACOLOR_MAINTENANCE
 
 /area/ship/trade/livestock
 	name = "\improper Underside - Livestock Handling"
 	icon_state = "red"
 	req_access = list(access_xenobiology)
+	holomap_color = HOLOMAP_AREACOLOR_SCIENCE
 
 /area/ship/trade/fore_starboard_underside_maint
 	name = "\improper Underside - Fore Starboard Maintenance"
 	icon_state = "locker"
 	area_flags = AREA_FLAG_RAD_SHIELDED | AREA_FLAG_MAINTENANCE
+	holomap_color = HOLOMAP_AREACOLOR_MAINTENANCE
 
 /area/ship/trade/disused
 	name = "\improper Underside - Disused"
 	icon_state = "yellow"
+	holomap_color = HOLOMAP_AREACOLOR_MAINTENANCE
 
 /area/ship/trade/undercomms
 	name = "\improper Underside - Communications Relay"
 	icon_state = "blue"
+	holomap_color = HOLOMAP_AREACOLOR_ENGINEERING
 
 /area/ship/trade/garden
 	name = "\improper Garden"
@@ -112,38 +125,46 @@
 	icon_state = "yellow"
 	turf_initializer = /decl/turf_initializer/maintenance
 	ambience = list('sound/ambience/ambigen3.ogg','sound/ambience/ambigen4.ogg','sound/ambience/ambigen5.ogg','sound/ambience/ambigen6.ogg','sound/ambience/ambimo1.ogg','sound/ambience/ambimo2.ogg')
+	holomap_color = HOLOMAP_AREACOLOR_MAINTENANCE
 
 /area/ship/trade/hidden
 	name = "\improper Unknown" //shielded compartment
 	icon_state = "auxstorage"
+	holomap_color = HOLOMAP_AREACOLOR_MAINTENANCE
 
 /area/ship/trade/escape_port
 	name = "\improper Port Escape Pods"
 	icon_state = "green"
+	holomap_color = HOLOMAP_AREACOLOR_AIRLOCK
 
 /area/ship/trade/escape_star
 	name = "\improper Starboard Escape Pods"
 	icon_state = "yellow"
+	holomap_color = HOLOMAP_AREACOLOR_AIRLOCK
 
 /area/ship/trade/science
 	name = "\improper Research Bay"
 	icon_state = "green"
 	req_access = list(access_research)
+	holomap_color = HOLOMAP_AREACOLOR_SCIENCE
 
 /area/ship/trade/science/fabricaton
 	name = "\improper Fabrication Bay"
 	icon_state = "yellow"
 	req_access = list(access_research)
+	holomap_color = HOLOMAP_AREACOLOR_ENGINEERING
 
 /area/ship/trade/crew/medbay/chemistry
 	name = "\improper Chemistry Bay"
 	icon_state = "cave"
 	req_access = list(access_medical)
+	holomap_color = HOLOMAP_AREACOLOR_MEDICAL
 
 /area/ship/trade/maintenance
 	name = "\improper Maintenance Compartments"
 	icon_state = "amaint"
 	area_flags = AREA_FLAG_RAD_SHIELDED | AREA_FLAG_MAINTENANCE
+	holomap_color = HOLOMAP_AREACOLOR_MAINTENANCE
 
 /area/ship/trade/maintenance/hallway
 	name = "\improper Maintenance Corridors"
@@ -177,17 +198,20 @@
 	icon_state = "atmos"
 	ambience = list('sound/ambience/ambigen3.ogg','sound/ambience/ambigen4.ogg','sound/ambience/ambigen5.ogg','sound/ambience/ambigen6.ogg','sound/ambience/ambigen7.ogg','sound/ambience/ambigen8.ogg','sound/ambience/ambigen9.ogg','sound/ambience/ambigen10.ogg','sound/ambience/ambigen11.ogg','sound/ambience/ambiatm1.ogg')
 	req_access = list(access_engine)
+	holomap_color = HOLOMAP_AREACOLOR_ENGINEERING
 
 /area/ship/trade/maintenance/power
 	name = "\improper Power Compartment"
 	icon_state = "engine_smes"
 	ambience = list('sound/ambience/ambigen3.ogg','sound/ambience/ambigen4.ogg','sound/ambience/ambigen5.ogg','sound/ambience/ambigen6.ogg','sound/ambience/ambigen7.ogg','sound/ambience/ambigen8.ogg','sound/ambience/ambigen9.ogg','sound/ambience/ambigen10.ogg','sound/ambience/ambigen11.ogg','sound/ambience/ambieng1.ogg')
 	req_access = list(access_engine)
+	holomap_color = HOLOMAP_AREACOLOR_ENGINEERING
 
 /area/ship/trade/maintenance/engine
 	icon_state = "engine"
 	ambience = list('sound/ambience/ambigen3.ogg','sound/ambience/ambigen4.ogg','sound/ambience/ambigen5.ogg','sound/ambience/ambigen6.ogg','sound/ambience/ambigen7.ogg','sound/ambience/ambigen8.ogg','sound/ambience/ambigen9.ogg','sound/ambience/ambigen10.ogg','sound/ambience/ambigen11.ogg','sound/ambience/ambieng1.ogg')
 	req_access = list(access_engine)
+	holomap_color = HOLOMAP_AREACOLOR_ENGINEERING
 
 /area/ship/trade/maintenance/engine/aft
 	name = "\improper Main Engine Bay"
@@ -232,6 +256,7 @@
 	name = "\improper Communications Relay"
 	icon_state = "tcomsatcham"
 	ambience = list('sound/ambience/ambigen3.ogg','sound/ambience/ambigen4.ogg','sound/ambience/signal.ogg','sound/ambience/sonar.ogg')
+	holomap_color = HOLOMAP_AREACOLOR_ENGINEERING
 
 /area/ship/trade/bridge_unused
 	name = "\improper Bridge Starboard Storage"
@@ -252,17 +277,20 @@
 	name = "\improper Solar Array Access"
 	icon_state = "SolarcontrolA"
 	req_access = list(access_engine)
+	holomap_color = HOLOMAP_AREACOLOR_AIRLOCK
 
 /area/ship/trade/artifact_storage
 	name = "\improper Artifact Storage"
 	icon_state = "ai_cyborg"
 	req_access = list(access_xenoarch)
+	holomap_color = HOLOMAP_AREACOLOR_SCIENCE
 
 /area/ship/trade/drunk_tank
 	name = "Drunk Tank"
 	icon_state = "brig"
 	req_access = list(access_brig)
 	area_flags = AREA_FLAG_RAD_SHIELDED | AREA_FLAG_SECURITY
+	holomap_color = HOLOMAP_AREACOLOR_SECURITY
 
 /area/turbolift
 	name = "\improper Cargo Elevator"

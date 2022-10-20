@@ -3,6 +3,9 @@
 #define TURF_FLAG_NOJAUNT             BITFLAG(0) // This is used in literally one place, turf.dm, to block ethereal jaunt.
 #define TURF_FLAG_NORUINS             BITFLAG(1) // Used by the ruin generator to skip placing loaded ruins on this turf.
 #define TURF_FLAG_BACKGROUND          BITFLAG(2) // Used by shuttle movement to determine if it should be ignored by turf translation.
+#define TURF_IS_HOLOMAP_OBSTACLE      BITFLAG(3)
+#define TURF_IS_HOLOMAP_PATH          BITFLAG(4)
+#define TURF_IS_HOLOMAP_ROCK          BITFLAG(5)
 
 #define TRANSITIONEDGE 7 // Distance from edge to move to another z-level.
 #define RUIN_MAP_EDGE_PAD 15
@@ -86,6 +89,7 @@
 #define AREA_FLAG_PRISON               BITFLAG(9)  // Area is a prison for the purposes of brigging objectives.
 #define AREA_FLAG_HOLY                 BITFLAG(10) // Area is holy for the purposes of marking turfs as cult-resistant.
 #define AREA_FLAG_SECURITY             BITFLAG(11) // Area is security for the purposes of newscaster init.
+#define AREA_FLAG_HIDE_FROM_HOLOMAP    BITFLAG(12) // if we shouldn't be drawn on station holomaps
 
 //Map template flags
 #define TEMPLATE_FLAG_ALLOW_DUPLICATES BITFLAG(0)  // Lets multiple copies of the template to be spawned

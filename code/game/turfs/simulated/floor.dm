@@ -6,6 +6,7 @@
 	thermal_conductivity = 0.040
 	heat_capacity = 10000
 	explosion_resistance = 1
+	turf_flags = TURF_IS_HOLOMAP_PATH
 
 	// Damage to flooring.
 	var/broken

@@ -490,3 +490,6 @@
 
 /datum/fabricator_recipe/imprinter/circuit/photocopier
 	path = /obj/item/stock_parts/circuitboard/photocopier
+
+/datum/fabricator_recipe/imprinter/circuit/holomap
+	path = /obj/item/stock_parts/circuitboard/holomap
