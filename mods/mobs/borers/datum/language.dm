@@ -6,7 +6,7 @@
 	exclaim_verb = "sings"
 	colour = "alien"
 	key = "z"
-	flags = RESTRICTED | HIVEMIND
+	flags = LANG_FLAG_RESTRICTED | LANG_FLAG_HIVEMIND
 	shorthand = "N/A"
 	hidden_from_codex = TRUE
 

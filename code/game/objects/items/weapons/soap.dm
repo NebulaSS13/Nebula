@@ -74,17 +74,10 @@
 			reagents.splash(T, FLUID_QDEL_POINT)
 			to_chat(user, SPAN_NOTICE("You scrub \the [target] clean."))
 			cleaned = TRUE
-
 	else if(istype(target,/obj/structure/hygiene/sink))
 		to_chat(user, SPAN_NOTICE("You wet \the [src] in the sink."))
 		wet()
-	else if(ishuman(target))
-		to_chat(user, SPAN_NOTICE("You clean \the [target.name]."))
-		if(reagents)
-			reagents.trans_to(target, reagents.total_volume / 8)
-		target.clean_blood() //Clean bloodied atoms. Blood decals themselves need to be handled above.
-		cleaned = TRUE
-	else 
+	else
 		to_chat(user, SPAN_NOTICE("You clean \the [target.name]."))
 		target.clean_blood() //Clean bloodied atoms. Blood decals themselves need to be handled above.
 		cleaned = TRUE
@@ -94,13 +87,20 @@
 
 //attack_as_weapon
 /obj/item/soap/attack(mob/living/target, mob/living/user, var/target_zone)
-	if(target && user && ishuman(target) && ishuman(user) && !target.stat && !user.stat && user.zone_sel &&user.zone_sel.selecting == BP_MOUTH)
-		user.visible_message(SPAN_DANGER("\The [user] washes \the [target]'s mouth out with soap!"))
-		if(reagents)
-			reagents.trans_to_mob(target, reagents.total_volume / 2, CHEM_INGEST)
+	if(ishuman(target) && user?.a_intent != I_HURT)
+		var/mob/living/carbon/human/victim = target
+		if(user.zone_sel?.selecting == BP_MOUTH && victim.check_has_mouth())
+			user.visible_message(SPAN_DANGER("\The [user] washes \the [target]'s mouth out with soap!"))
+			if(reagents)
+				reagents.trans_to_mob(target, reagents.total_volume / 2, CHEM_INGEST)
+		else
+			user.visible_message(SPAN_NOTICE("\The [user] cleans \the [target]."))
+			if(reagents)
+				reagents.trans_to(target, reagents.total_volume / 8)
+			target.clean_blood()
 		user.setClickCooldown(DEFAULT_QUICK_COOLDOWN) //prevent spam
-		return
-	..()
+		return TRUE
+	return ..()
 
 /obj/item/soap/attackby(var/obj/item/I, var/mob/user)
 	if(istype(I, /obj/item/key))

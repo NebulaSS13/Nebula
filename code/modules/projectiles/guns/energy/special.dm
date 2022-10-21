@@ -53,9 +53,8 @@
 		)
 	var/decl/plantgene/gene = null
 
-/obj/item/gun/energy/floragun/add_onmob_charge_meter(image/I)
-	I.overlays += mutable_appearance(icon, "[I.icon_state]100", indicator_color)
-	return I
+/obj/item/gun/energy/floragun/get_charge_state(var/initial_state)
+	return "[initial_state]100"
 
 /obj/item/gun/energy/floragun/resolve_attackby(atom/A)
 	if(istype(A,/obj/machinery/portable_atmospherics/hydroponics))

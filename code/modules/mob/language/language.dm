@@ -9,7 +9,7 @@
 
 	// Short description for 'Check Languages'.
 	var/desc = "You should not have this language."
-	// list of emotes that might be displayed if this language has NONVERBAL or SIGNLANG flags
+	// list of emotes that might be displayed if this language has LANG_FLAG_NONVERBAL or LANG_FLAG_SIGNLANG flags
 	var/signlang_verb = list("signs", "gestures")
 
 	var/name                            // Fluff name of language if any.
@@ -31,7 +31,7 @@
 	var/allow_repeated_syllables = TRUE // Control for handling some of the random lang/name gen.
 
 /decl/language/proc/can_be_understood_by(var/mob/living/speaker, var/mob/living/listener)
-	if(flags & INNATE)
+	if(flags & LANG_FLAG_INNATE)
 		return TRUE
 	for(var/decl/language/L in listener.languages)
 		if(name == L.name)
@@ -211,7 +211,7 @@
 	if (only_species_language && speaking != GET_DECL(species_language))
 		return 0
 
-	return (speaking.can_speak_special(src) && (universal_speak || (speaking && speaking.flags & INNATE) || (speaking in src.languages)))
+	return (speaking.can_speak_special(src) && (universal_speak || (speaking && speaking.flags & LANG_FLAG_INNATE) || (speaking in src.languages)))
 
 /mob/proc/get_language_prefix()
 	return get_prefix_key(/decl/prefix/language)
@@ -228,7 +228,7 @@
 	var/dat = "<b><font size = 5>Known Languages</font></b><br/><br/>"
 
 	for(var/decl/language/L in languages)
-		if(!(L.flags & NONGLOBAL))
+		if(!(L.flags & LANG_FLAG_NONGLOBAL))
 			dat += "<b>[L.name]([L.shorthand]) ([get_language_prefix()][L.key])</b><br/>[L.desc]<br/><br/>"
 
 	show_browser(src, dat, "window=checklanguage")
@@ -242,7 +242,7 @@
 		dat += "Current default language: [lang.name] - <a href='byond://?src=\ref[src];default_lang=reset'>reset</a><br/><br/>"
 
 	for(var/decl/language/L in languages)
-		if(!(L.flags & NONGLOBAL))
+		if(!(L.flags & LANG_FLAG_NONGLOBAL))
 			if(L == default_language)
 				dat += "<b>[L.name]([L.shorthand]) ([get_language_prefix()][L.key])</b> - default - <a href='byond://?src=\ref[src];default_lang=reset'>reset</a><br/>[L.desc]<br/><br/>"
 			else if (can_speak(L))
