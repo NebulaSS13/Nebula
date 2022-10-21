@@ -205,7 +205,7 @@ var/global/floorIsLava = 0
 	var/list/language_types = decls_repository.get_decls_of_subtype(/decl/language)
 	for(var/k in language_types)
 		var/decl/language/L = language_types[k]
-		if(!(L.flags & INNATE))
+		if(!(L.flags & LANG_FLAG_INNATE))
 			if(!f)
 				body += " | "
 			else

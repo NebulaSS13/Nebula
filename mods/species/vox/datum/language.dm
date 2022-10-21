@@ -6,7 +6,7 @@
 	exclaim_verb = "SHRIEKS"
 	colour = "vox"
 	key = "x"
-	flags = WHITELISTED
+	flags = LANG_FLAG_WHITELISTED
 	syllables = list("ti","ti","ti","hi","hi","ki","ki","ki","ki","ya","ta","ha","ka","ya","chi","cha","kah", \
 	"SKRE","AHK","EHK","RAWK","KRA","AAA","EEE","KI","II","KRI","KA")
 	machine_understands = 0

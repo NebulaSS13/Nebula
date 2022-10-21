@@ -7,7 +7,7 @@
 	exclaim_verb = "whistles loudly"
 	colour = "changeling"
 	key = "6"
-	flags = NO_STUTTER
+	flags = LANG_FLAG_NO_STUTTER
 	syllables = list("beep","beep","beep","beep","beep","boop","boop","boop","bop","bop","dee","dee","doo","doo","hiss","hss","buzz","buzz","bzz","ksssh","keey","wurr","wahh","tzzz")
 	space_chance = 10
 	speech_sounds = list(
@@ -20,7 +20,7 @@
 		'sound/voice/eal/eal7.ogg',
 		'sound/voice/eal/eal8.ogg'
 	)
-		
+
 /decl/language/binary
 	name = "Robot Talk"
 	desc = "Most human facilities support free-use communications protocols and routing hubs for synthetic use."
@@ -29,7 +29,7 @@
 	ask_verb = "queries"
 	exclaim_verb = "declares"
 	key = "b"
-	flags = RESTRICTED | HIVEMIND
+	flags = LANG_FLAG_RESTRICTED | LANG_FLAG_HIVEMIND
 	shorthand = "N/A"
 	var/drone_only
 
@@ -83,6 +83,6 @@
 	exclaim_verb = "transmits"
 	colour = "say_quote"
 	key = "d"
-	flags = RESTRICTED | HIVEMIND
+	flags = LANG_FLAG_RESTRICTED | LANG_FLAG_HIVEMIND
 	drone_only = 1
 	shorthand = "N/A"

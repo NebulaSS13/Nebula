@@ -24,12 +24,12 @@ var/global/const/PREF_CTRL_SHIFT_CLICK = "Ctrl+shift click"
 var/global/const/PREF_HEAR = "Hear"
 var/global/const/PREF_SILENT = "Silent"
 var/global/const/PREF_SHORTHAND = "Shorthand"
-var/global/const/PREF_NEVER = "Never"
 var/global/const/PREF_NON_ANTAG = "Non-Antag Only"
+var/global/const/PREF_NEVER = "Never"
 var/global/const/PREF_ALWAYS = "Always"
+var/global/const/PREF_MYSELF = "Only Against Self"
 var/global/const/PREF_DARKMODE = "Darkmode"
 var/global/const/PREF_LIGHTMODE = "Lightmode"
-
 var/global/list/_client_preferences
 var/global/list/_client_preferences_by_key
 var/global/list/_client_preferences_by_type
@@ -369,3 +369,13 @@ var/global/list/_client_preferences_by_type
 		preference_mob.client.activate_darkmode()
 	else
 		preference_mob.client.deactivate_darkmode()
+
+/******************************
+* Help intent attack blocking *
+******************************/
+
+/datum/client_preference/help_intent_attack_blocking
+	description = "Prevent attacks on help intent"
+	key = "ATTACK_ON_HELP"
+	default_value = PREF_MYSELF
+	options = list(PREF_NEVER, PREF_MYSELF, PREF_ALWAYS)

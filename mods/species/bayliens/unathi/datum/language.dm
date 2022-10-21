@@ -6,7 +6,7 @@
 	exclaim_verb = "roars"
 	colour = "soghun"
 	key = "o"
-	flags = WHITELISTED
+	flags = LANG_FLAG_WHITELISTED
 	space_chance = 40
 	syllables = list(
 		"za", "az", "ze", "ez", "zi", "iz", "zo", "oz", "zu", "uz", "zs", "sz",

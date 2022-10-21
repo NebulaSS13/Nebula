@@ -178,7 +178,9 @@
 	//We are now going to move
 	mob.moving = 1
 
-	direction = mob.AdjustMovementDirection(direction, mover)
+	if(mover == mob)
+		direction = mob.AdjustMovementDirection(direction, mover)
+
 	var/turf/old_turf = get_turf(mob)
 	step(mob, direction)
 
