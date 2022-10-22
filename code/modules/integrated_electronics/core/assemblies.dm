@@ -11,6 +11,8 @@
 	matter = list()		// To be filled later
 	pass_flags = 0
 	anchored = FALSE
+	obj_flags = OBJ_FLAG_ANCHORABLE
+	max_health = 30
 	var/list/assembly_components = list()
 	var/list/ckeys_allowed_to_scan = list() // Players who built the circuit can scan it as a ghost.
 	var/max_components = IC_MAX_SIZE_BASE
@@ -18,16 +20,13 @@
 	var/opened = TRUE
 	var/obj/item/cell/battery // Internal cell which most circuits need to work.
 	var/cell_type = /obj/item/cell
-	var/circuit_flags = IC_FLAG_ANCHORABLE
+	var/circuit_flags = 0
 	var/ext_next_use = 0
 	var/weakref/collw
 	var/allowed_circuit_action_flags = IC_ACTION_COMBAT | IC_ACTION_LONG_RANGE //which circuit flags are allowed
 	var/creator // circuit creator if any
 	var/interact_page = 0
 	var/components_per_page = 5
-	max_health = 30
-	pass_flags = 0
-	anchored = FALSE
 	var/detail_color = COLOR_ASSEMBLY_BLACK
 	var/list/color_whitelist = list( //This is just for checking that hacked colors aren't in the save data.
 		COLOR_ASSEMBLY_BLACK,
@@ -50,7 +49,7 @@
 
 /obj/item/electronic_assembly/examine(mob/user)
 	. = ..()
-	if(IC_FLAG_ANCHORABLE & circuit_flags)
+	if(obj_flags & OBJ_FLAG_ANCHORABLE)
 		to_chat(user, "<span class='notice'>The anchoring bolts [anchored ? "are" : "can be"] <b>wrenched</b> in place and the maintenance panel [opened ? "can be" : "is"] <b>screwed</b> in place.</span>")
 	else
 		to_chat(user, "<span class='notice'>The maintenance panel [opened ? "can be" : "is"] <b>screwed</b> in place.</span>")
@@ -408,13 +407,7 @@
 
 
 /obj/item/electronic_assembly/attackby(obj/item/I, mob/user)
-	if(IS_WRENCH(I))
-		if(isturf(loc) && (IC_FLAG_ANCHORABLE & circuit_flags))
-			user.visible_message("\The [user] wrenches \the [src]'s anchoring bolts [anchored ? "back" : "into position"].")
-			playsound(get_turf(user), 'sound/items/Ratchet.ogg',50)
-			if(user.do_skilled(5 SECONDS, SKILL_CONSTRUCTION, src))
-				anchored = !anchored
-	else if(istype(I, /obj/item/integrated_circuit))
+	if(istype(I, /obj/item/integrated_circuit))
 		if(!user.canUnEquip(I))
 			return FALSE
 		if(try_add_component(I, user))
@@ -472,18 +465,21 @@
 		opened = !opened
 		to_chat(user, "<span class='notice'>You [opened ? "open" : "close"] the maintenance hatch of [src].</span>")
 		update_icon()
+		return TRUE
+
 	else if(IS_COIL(I))
 		var/obj/item/stack/cable_coil/C = I
 		if(is_damaged() && do_after(user, 10, src) && C.use(1))
 			user.visible_message("\The [user] patches up \the [src].")
 			health = min(max_health, health + 5)
-	else
-		if(user.a_intent == I_HURT) // Kill it
-			to_chat(user, "<span class='danger'>\The [user] hits \the [src] with \the [I]</span>")
-			take_damage(I.force)
-		else
-			for(var/obj/item/integrated_circuit/input/S in assembly_components)
-				S.attackby_react(I,user,user.a_intent)
+		return TRUE
+
+	else if(user.a_intent != I_HURT)
+		for(var/obj/item/integrated_circuit/input/S in assembly_components)
+			S.attackby_react(I,user,user.a_intent)
+		return TRUE
+
+	return ..() //Handle weapon attacks and etc
 
 /obj/item/electronic_assembly/attack_self(mob/user)
 	interact(user)
@@ -589,7 +585,8 @@
 	icon_state = "setup_medium_gun"
 	item_state = "circuitgun"
 	desc = "It's a case, for building medium-sized electronics with. This one resembles a gun, or some type of tool, if you're feeling optimistic. It can fire guns and throw items while the user is holding it."
-	circuit_flags = IC_FLAG_CAN_FIRE | IC_FLAG_ANCHORABLE
+	circuit_flags = IC_FLAG_CAN_FIRE
+	obj_flags = OBJ_FLAG_ANCHORABLE
 
 /obj/item/electronic_assembly/medium/radio
 	name = "type-f electronic mechanism"
@@ -642,6 +639,7 @@
 	max_complexity = IC_COMPLEXITY_BASE * 3
 	allowed_circuit_action_flags = IC_ACTION_MOVEMENT | IC_ACTION_COMBAT | IC_ACTION_LONG_RANGE
 	circuit_flags = 0
+	obj_flags = 0 //Not anchorable
 	max_health = 50
 
 /obj/item/electronic_assembly/drone/can_move()

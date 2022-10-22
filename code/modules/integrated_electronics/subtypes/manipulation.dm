@@ -688,7 +688,7 @@
 		return
 
 	// Doesn't work with anchorable assemblies
-	if(assembly.circuit_flags & IC_FLAG_ANCHORABLE)
+	if(obj_flags & OBJ_FLAG_ANCHORABLE)
 		visible_message("<span class='warning'>\The [get_object()]'s anchoring bolt circuitry blinks red. The preinstalled assembly anchoring bolts are in the way of the pop-out bolts!</span>")
 		return
 
