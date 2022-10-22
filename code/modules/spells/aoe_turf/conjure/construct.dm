@@ -93,8 +93,8 @@
 	..()
 	var/turf/spawn_place = pick(targets)
 	for(var/obj/structure/cult/pylon/P in spawn_place.contents)
-		if(P.isbroken)
-			P.repair(usr)
+		if(P.can_repair_with(src))
+			P.handle_repair(usr, src)
 		continue
 	return
 

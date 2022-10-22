@@ -32,12 +32,6 @@
 /obj/structure/cult/pylon/proc/is_broken()
 	return health < (max_health * 0.25) 
 
-/obj/structure/cult/pylon/proc/repair(mob/user)
-	if(isbroken)
-		to_chat(user, "You repair the pylon.")
-		isbroken = 0
-		set_density(1)
-		icon_state = "pylon"
 /obj/structure/cult/pylon/check_health(lastdamage, lastdamtype, lastdamflags)
 	var/was_broken = is_broken()
 	. = ..()
@@ -56,6 +50,18 @@
 		set_density(TRUE)
 		set_light(13, 0.5)
 		update_icon()
+
+/obj/structure/cult/pylon/can_repair_with(spell/aoe_turf/conjure/pylon/tool)
+	return istype(tool)
+
+//The spell for fixing pylons calls this, and the requirement for passing a spell means it won't be triggered anywhere in the base repair handling.
+/obj/structure/cult/pylon/handle_repair(mob/user, spell/aoe_turf/conjure/pylon/tool)
+	if(!istype(tool))
+		to_chat(user, SPAN_WARNING("You probably need some sort of magic to fix this.."))
+		return
+	to_chat(user, SPAN_NOTICE("You repair the pylon."))
+	heal(max_health)
+	return TRUE
 
 /obj/structure/cult/pylon/get_artifact_scan_data()
 	return "Tribal pylon - subject resembles statues/emblems built by cargo cult civilisations to honour energy systems from post-warp civilisations."

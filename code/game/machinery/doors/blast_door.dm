@@ -154,34 +154,19 @@
 	add_fingerprint(user, 0, C)
 	if(!panel_open) //Do this here so the door won't change state while prying out the circuit
 		if(IS_CROWBAR(C) || (istype(C, /obj/item/twohanded/fireaxe) && C:wielded == 1))
-			if(((stat & NOPOWER) || (stat & BROKEN)) && !( operating ))
-				to_chat(user, "<span class='notice'>You begin prying at \the [src]...</span>")
-				if(do_after(user, 2 SECONDS, src))
+			if(inoperable() && !operating)
+				to_chat(user, SPAN_NOTICE("You begin prying at \the [src]..."))
+				if(user.do_skilled(2 SECONDS, SKILL_HAULING, src))
 					force_toggle()
 				else
-					to_chat(user, "<span class='warning'>You must remain still while working on \the [src].</span>")
+					to_chat(user, SPAN_WARNING("You must remain still while working on \the [src]."))
 			else
-				to_chat(user, "<span class='notice'>[src]'s motors resist your effort.</span>")
-			return
-	if(istype(C, /obj/item/stack/material) && C.get_material_type() == /decl/material/solid/metal/plasteel)
-		var/amt = CEILING((max_health - health)/150)
-		if(!amt)
-			to_chat(user, "<span class='notice'>\The [src] is already fully functional.</span>")
-			return
-		var/obj/item/stack/P = C
-		if(!P.can_use(amt))
-			to_chat(user, "<span class='warning'>You don't have enough sheets to repair this! You need at least [amt] sheets.</span>")
-			return
-		to_chat(user, "<span class='notice'>You begin repairing \the [src]...</span>")
-		if(do_after(user, 5 SECONDS, src))
-			if(P.use(amt))
-				to_chat(user, "<span class='notice'>You have repaired \the [src].</span>")
-				repair()
-			else
-				to_chat(user, "<span class='warning'>You don't have enough sheets to repair this! You need at least [amt] sheets.</span>")
-		else
-			to_chat(user, "<span class='warning'>You must remain still while working on \the [src].</span>")
+				to_chat(user, SPAN_NOTICE("[src]'s motors resist your effort."))
+			return TRUE
 	return ..()
+
+/obj/machinery/door/blast/get_repair_mat_amount()
+	return CEILING((max_health - health) / 150)
 
 // Proc: open()
 // Parameters: None
@@ -210,14 +195,6 @@
 	if (operating || (stat & BROKEN || stat & NOPOWER))
 		return
 	force_toggle(to_open)
-
-// Proc: repair()
-// Parameters: None
-// Description: Fully repairs the blast door.
-/obj/machinery/door/blast/proc/repair()
-	health = max_health
-	set_broken(FALSE)
-	queue_icon_update()
 
 /obj/machinery/door/blast/CanPass(atom/movable/mover, turf/target, height=0, air_group=0)
 	if(air_group) return 1

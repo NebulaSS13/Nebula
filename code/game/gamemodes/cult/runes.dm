@@ -246,20 +246,20 @@
 	return ..()
 
 /obj/effect/rune/wall/cast(var/mob/living/user)
-	var/t
+	var/health_provided
 	if(wall)
-		if(wall.health >= wall.max_health)
-			to_chat(user, "<span class='notice'>The wall doesn't need mending.</span>")
+		if(!wall.is_damaged())
+			to_chat(user, SPAN_NOTICE("The wall doesn't need mending."))
 			return
-		t = wall.max_health - wall.health
-		wall.health += t
+		health_provided = wall.max_health - wall.health
+		wall.heal(health_provided)
 	else
 		wall = new /obj/effect/cultwall(get_turf(src), bcolor)
 		wall.rune = src
-		t = wall.health
-	user.remove_blood_simple(t / 50)
+		health_provided = wall.max_health
+	user.remove_blood_simple(health_provided / 50)
 	speak_incantation(user, "Khari[pick("'","`")]d! Eske'te tannin!")
-	to_chat(user, "<span class='warning'>Your blood flows into the rune, and you feel that the very space over the rune thickens.</span>")
+	to_chat(user, SPAN_WARNING("Your blood flows into the rune, and you feel that the very space over the rune thickens."))
 
 /obj/effect/cultwall
 	name = "red mist"

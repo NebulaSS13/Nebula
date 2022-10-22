@@ -215,7 +215,28 @@
 	update_icon()
 	return TRUE
 
-/obj/machinery/door/proc/handle_repair(obj/item/I, mob/user)
+/obj/machinery/door/can_repair(mob/user)
+	. = ..()
+	if(!.)
+		return
+	if(!density)
+		to_chat(user, SPAN_WARNING("\The [src] must be closed before you can repair it."))
+		return FALSE
+	if(reason_broken & MACHINE_BROKEN_GENERIC)
+		to_chat(user, SPAN_NOTICE("It looks like \the [src] is going to need some parts swapped out.."))
+		return FALSE
+	return TRUE
+
+//This gates the handle_repair proc.
+/obj/machinery/door/can_repair_with(var/obj/item/tool, var/mob/user)
+	var/has_less_than_max_stack  = repairing?.amount < repairing?.max_amount
+	var/has_less_than_max_needed = repairing?.amount < CEILING((max_health - health) / DOOR_REPAIR_AMOUNT)
+	if(!repairing || (repairing && has_less_than_max_stack &&  has_less_than_max_needed))
+		. = ..() //Always allow sheets until the stack is full, or we have too many already
+	if(repairing && !.)
+		return IS_WELDER(tool) || IS_CROWBAR(tool)
+
+/obj/machinery/door/handle_repair(mob/user, obj/item/I)
 	if(istype(I, /obj/item/stack/material) && I.get_material_type() == src.get_material_type())
 		if(reason_broken & MACHINE_BROKEN_GENERIC)
 			to_chat(user, "<span class='notice'>It looks like \the [src] is pretty busted. It's going to need more than just patching up now.</span>")
@@ -228,9 +249,7 @@
 			return TRUE
 
 		//figure out how much metal we need
-		var/amount_needed = (max_health - health) / DOOR_REPAIR_AMOUNT
-		amount_needed = CEILING(amount_needed)
-
+		var/amount_needed = get_repair_mat_amount()
 		var/obj/item/stack/stack = I
 		var/transfer
 		if (repairing)
