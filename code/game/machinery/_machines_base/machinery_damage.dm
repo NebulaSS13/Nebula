@@ -58,7 +58,7 @@
 		return (initial_damage - amount)
 
 	//Burn and brute may damage the frame
-	return ..(initial_damage - amount, damage_type, damage_flags, inflicter, armor_pen, target_zone, quiet)
+	return ..(amount, damage_type, damage_flags, inflicter, armor_pen, target_zone, quiet)
 
 /obj/machinery/proc/get_damageable_component(var/damage_type)
 	var/list/victims = shuffle(component_parts)
@@ -112,6 +112,7 @@
 	if(environment_smash >= 1)
 		damage = max(damage, 10)
 
+	//#TODO: Probably should get the natural_weapon properties from the mob
 	if(damage >= 10)
 		visible_message(SPAN_DANGER("\The [user] [attack_verb] into \the [src]!"))
 		take_damage(damage)
@@ -127,3 +128,7 @@
 		add_fingerprint(user)
 		return TRUE
 	return ..()
+
+/obj/machinery/physically_destroyed(skip_qdel, quiet)
+	. = ..(TRUE, quiet)
+	dismantle()
