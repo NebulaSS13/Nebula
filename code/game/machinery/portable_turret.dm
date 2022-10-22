@@ -332,34 +332,40 @@ var/global/list/turret_icons
 		enabled = 1 //turns it back on. The cover popUp() popDown() are automatically called in process(), no need to define it here
 		return 1
 
-/obj/machinery/porta_turret/take_damage(var/force)
+/obj/machinery/porta_turret/take_damage(amount, damage_type, damage_flags, inflicter, armor_pen, target_zone, quiet)
 	if(!raised && !raising)
-		force = force / 8
-		if(force < 5)
-			return
+		amount = amount / 8
+	return ..(amount, damage_type, damage_flags, inflicter, armor_pen, target_zone, quiet)
 
-	health -= force
-	if (force > 5 && prob(45))
-		spark_at(src, amount = 5)
-	if(health <= 0)
-		die()	//the death process :(
+/obj/machinery/porta_turret/bash(obj/item/W, mob/user)
+	if(istype(W) && isliving(user) && user.a_intent == I_HELP && W.item_flags & ITEM_FLAG_NO_BLUDGEON)
+		return FALSE
+	//if the turret was attacked with the intention of harming it:
+	user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
+	user.do_attack_animation(src, W)
+	. = take_damage(W.force, W.damtype, W.damage_flags(), W, W.armor_penetration, user.zone_sel)
+	if(.) //if the force of impact dealt at least 1 damage, the turret gets pissed off
+		handle_attack()
 
-/obj/machinery/porta_turret/bullet_act(obj/item/projectile/Proj)
-	var/damage = Proj.get_structure_damage()
-
-	if(!damage)
+/obj/machinery/porta_turret/bullet_act(obj/item/projectile/P, def_zone)
+	var/bef_health = health
+	. = ..()
+	if(. < 0)
+		return //anything below 0 means special handling
+	if(health == bef_health)
 		return
+	if(enabled && !attacked && !emagged)
+		handle_attack()
 
-	if(enabled)
-		if(!attacked && !emagged)
-			attacked = 1
-			spawn()
-				sleep(60)
-				attacked = 0
-
-	..()
-
-	take_damage(damage)
+///Handles toggling the turret into alert mode after an attack
+/obj/machinery/porta_turret/proc/handle_attack()
+	set waitfor = FALSE
+	if(!enabled || attacked || emagged)
+		return FALSE
+	attacked = TRUE
+	sleep(6 SECONDS)
+	attacked = FALSE
+	return TRUE
 
 /obj/machinery/porta_turret/emp_act(severity)
 	if(enabled)
@@ -383,21 +389,16 @@ var/global/list/turret_icons
 	if(disabled)
 		disabled = 0
 
-/obj/machinery/porta_turret/explosion_act(severity)
+/obj/machinery/porta_turret/set_broken(new_state, cause)
+	var/prev_state = (stat & BROKEN) > 0
 	. = ..()
-	if(. && !QDELETED(src))
-		if(severity == 1 || (severity == 2 && prob(25)))
-			physically_destroyed()
-		else if(severity == 2)
-			take_damage(initial(health) * 8)
+	//Only do the broken effects when actually changing state
+	if((stat & BROKEN) > 0 != prev_state)
+		if(stat & BROKEN)
+			atom_flags |= ATOM_FLAG_CLIMBABLE
+			spark_at(src, amount = 5)
 		else
-			take_damage(initial(health) * 8 / 3)
-
-/obj/machinery/porta_turret/proc/die()	//called when the turret dies, ie, health <= 0
-	health = 0
-	set_broken(TRUE)
-	spark_at(src, amount = 5)
-	atom_flags |= ATOM_FLAG_CLIMBABLE // they're now climbable
+			atom_flags &= ~ATOM_FLAG_CLIMBABLE
 
 /obj/machinery/porta_turret/Process()
 	if(stat & (NOPOWER|BROKEN))
@@ -420,9 +421,9 @@ var/global/list/turret_icons
 		if(!tryToShootAt(secondarytargets)) // if no valid targets, go for secondary targets
 			popDown() // no valid targets, close the cover
 
-	if(auto_repair && (health < max_health))
+	if(auto_repair && is_damaged())
 		use_power_oneoff(20000)
-		health = min(health+1, max_health) // 1HP for 20kJ
+		heal(1) // 1HP for 20kJ
 
 /obj/machinery/porta_turret/proc/assess_and_assign(var/mob/living/L, var/list/targets, var/list/secondarytargets)
 	switch(assess_living(L))
@@ -621,6 +622,9 @@ var/global/list/turret_icons
 	ailock = TC.ailock
 
 	src.power_change()
+
+/obj/machinery/porta_turret/get_material_health_modifier()
+	return 1
 
 /*
 		Portable turret constructions
