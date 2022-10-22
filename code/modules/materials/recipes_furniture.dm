@@ -113,6 +113,9 @@
 	req_amount = 20
 	time = 10
 
+/datum/stack_recipe/furniture/canister/spawn_result(mob/user, location, amount)
+	return new result_type(location)
+
 /datum/stack_recipe/furniture/tank
 	title = "pressure tank"
 	result_type = /obj/item/pipe/tank
