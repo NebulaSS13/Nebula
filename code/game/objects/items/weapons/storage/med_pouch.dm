@@ -270,11 +270,11 @@ Single Use Emergency Pouches
 	detail_color = COLOR_CYAN
 
 /obj/item/chems/inhaler/pouch_auto/oxy_meds/populate_reagents()
-	reagents.add_reagent((/decl/material/liquid/oxy_meds, 5)
+	reagents.add_reagent(/decl/material/liquid/oxy_meds, 5)
 
 /obj/item/chems/inhaler/pouch_auto/detoxifier
 	name = "emergency detoxifier autoinhaler"
-	band_color = COLOR_GREEN
+	detail_color = COLOR_GREEN
 
 /obj/item/chems/inhaler/pouch_auto/detoxifier/populate_reagents()
 	reagents.add_reagent(/decl/material/liquid/detoxifier, 5)
