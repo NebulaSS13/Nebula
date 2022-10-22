@@ -1,6 +1,6 @@
 ///Returns whether the item can take damages or if its invulnerable
 /obj/proc/can_take_damage()
-	return simulated && health != OBJ_HEALTH_NO_DAMAGE && max_health != OBJ_HEALTH_NO_DAMAGE
+	return simulated && (health != OBJ_HEALTH_NO_DAMAGE) && (max_health != OBJ_HEALTH_NO_DAMAGE)
 
 ///Returns the percentage of health that is left for this object
 /obj/proc/get_health_percent()
@@ -8,7 +8,7 @@
 
 ///Return a multiplier to apply to the material integrity when setting the health of the obj from the material
 /obj/proc/get_material_health_modifier()
-	return 1
+	return 1.0
 
 ///Basic damage handling for items. Returns the amount of damage taken after armor if the item was damaged.
 /obj/take_damage(amount, damage_type = BRUTE, damage_flags = 0, inflicter = null, armor_pen = 0, target_zone = null, quiet = FALSE)
@@ -161,6 +161,11 @@
 	dump_contents()
 	if(!skip_qdel)
 		qdel(src)
+
+/obj/physically_destroyed(skip_qdel, quiet)
+	if(!quiet)
+		playsound(src, sound_break, 90, TRUE)
+	. = ..()
 
 /obj/proc/explosion_severity_damage(var/severity)
 	var/mult = explosion_severity_damage_multiplier()

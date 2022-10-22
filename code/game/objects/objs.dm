@@ -49,6 +49,8 @@
 	var/armor_degradation_speed
 	///Sound to make when hit
 	var/hitsound = 'sound/weapons/smash.ogg'
+	///Sound to make when destroyed through brute damage
+	var/sound_break = 'sound/effects/metal_smash1.ogg'
 
 /obj/Destroy()
 	STOP_PROCESSING(SSobj, src)
