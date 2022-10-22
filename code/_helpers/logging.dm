@@ -232,3 +232,13 @@ var/global/log_end= world.system_type == UNIX ? ascii2text(13) : ""
 /proc/report_progress(var/progress_message)
 	admin_notice("<span class='boldannounce'>[progress_message]</span>", R_DEBUG)
 	to_world_log(progress_message)
+
+///Turns a boolean expression to a human readable "TRUE" or "FALSE" string
+#define BOOL2TEXT(VAL) "[(VAL)? "TRUE" : "FALSE"]"
+
+///Helper for printing a string to identify an object in the logs by its ref, x, y, z, and type. Meant to be used inside the /atom/movable's scope.
+#define LOG_MOVABLE "\ref[src]-([x],[y],[z]):[type]"
+
+///Helper for printing a string to identify an object in the logs by its ref, x, y, z, type and the name of the proc. Meant to be used inside the /atom/movable's scope.
+#define LOG_MOVABLE_PROC(PROCNAME) "[LOG_MOVABLE]/[##PROCNAME]()"
+

@@ -13,34 +13,41 @@
 /**
  * Sets the primary material of this obj, and triggers material related updates. 
  * Can take either null, a path to a material decl, or the material decl itself. 
- * If keep_heath is true, the health won't be reset to max_health after updating the material's max_health.
+ * If keep_health is true, the health won't be reset to max_health after updating the material's max_health.
  * If update_material is true, the proc will call material updates, if false it will skip them.
  */
-/obj/proc/set_material(var/new_material, var/keep_heath = FALSE, var/update_material = TRUE)
+/obj/proc/set_material(var/new_material, var/keep_health = FALSE, var/update_material = TRUE)
+	if(atom_flags & ATOM_FLAG_INITIALIZED)
+		log_warning("'[type]' called set_material post init!")
+
 	if(ispath(new_material, /decl/material))
 		material = GET_DECL(new_material)
 	else
 		material = new_material
+	//log_debug("[LOG_MOVABLE_PROC("set_material")]('[log_info_line(material)]', [BOOL2TEXT(keep_health)], [BOOL2TEXT(update_material)]): Defined health/max_health was '[health]'/'[max_health]'.")
 	
+	//#TODO: Will need to handle unsetting materials since we can't just use initial on lists.
 	if(update_material)
-		update_material(keep_heath)
+		update_material(keep_health)
 	return TRUE
 
 /**
  * Sets the reinforcing material of this obj, and triggers material related updates. 
  * Can take either null, a path to a material decl, or the material decl itself.
- * If keep_heath is true, the health won't be reset to max_health after updating the material's max_health.
+ * If keep_health is true, the health won't be reset to max_health after updating the material's max_health.
  * If update_material is true, the proc will call material updates, if false it will skip them.
  */
-/obj/proc/set_reinforcing_material(var/new_material, var/keep_heath = FALSE, var/update_material = TRUE)
-	return FALSE
+/obj/proc/set_reinforcing_material(var/new_material, var/keep_health = FALSE, var/update_material = TRUE)
+	return FALSE //Stub
 
 /**
  * Make sure the properties set by materials are properly updated. 
  * Also ensure properties applied when there are no materials set are properly applied.
+ * Its important that this is run EVEN IF there are no materials set.
  * If keep_health is true, the health var will not be set to max_health, otherwise it will be.
  */
 /obj/proc/update_material(var/keep_health = FALSE, var/should_update_icon = TRUE)
+	//log_debug("[LOG_MOVABLE_PROC("update_material")]: material:'[material]'. Defined health/max_health was '[health]'/'[max_health]'.")
 	update_material_health(null, keep_health)
 	update_material_properties()
 	update_material_armor()
@@ -104,19 +111,20 @@
  * overriden_armor allows passing the armor values and bypass this proc's behavior to set from a proc override, so the proc will simply set the armor and run update_armor().
  */
 /obj/proc/update_material_armor(var/list/overriden_armor)
+	if(!can_take_damage())
+		// LAZYCLEARLIST(armor)
+		// remove_extension(src, /datum/extension/armor)
+		return //Don't bother
+	
 	if(overriden_armor)
 		//If armor is overriden, use that
 		armor = overriden_armor
-	else if(!istype(material) || (istype(material) && !material_armor_multiplier))
-		//If no materials take the value that was set in the definition
-		armor = initial(armor)
-		armor_degradation_speed = initial(armor_degradation_speed)
-	else
+	else if(material_armor_multiplier && istype(material))
 		//If we have a material, and a material_armor_multiplier, get the armor from the material
 		armor_degradation_speed = material.armor_degradation_speed
-		if(length(initial(armor)))
+		if(length(armor))
 			//Allow the material's armor resistances to be partially overriden by the user
-			armor = material.get_armor(material_armor_multiplier) | initial(armor)
+			armor |= material.get_armor(material_armor_multiplier)
 		else
 			armor = material.get_armor(material_armor_multiplier)
 
@@ -155,7 +163,7 @@
 	var/old_max_health = max_health
 	if(override_max_health)
 		max_health = override_max_health //If we got an overriden max_health use that first
-	else if(initial(max_health) != null)
+	else if(!isnull(initial(max_health)))
 		max_health = initial(max_health) //If we set max_health in the definition, that takes priority
 	else if(istype(material))
 		//Otherwise if we got a material fall back to using the material's integrity
@@ -164,9 +172,7 @@
 		var/decl/material/reinf = get_reinf_material()
 		if(reinf)
 			max_health += round(reinf.integrity * get_material_health_modifier(), 0.01) 
-	else
-		CRASH("This should have been intercepted by !can_take_damage()!!!") 
-
+		
 	if(max_health < 1)
 		//Make sure to warn us if the values we set make the max_health be under 1
 		if(material)
@@ -180,13 +186,19 @@
 	else
 		health = max_health //If health was set to the old max_health value before, just keep it at max_health
 
+	//#REMOVEME
+	if(max_health != OBJ_HEALTH_NO_DAMAGE)
+		log_debug("[LOG_MOVABLE_PROC("update_material_health")]: [health? health : "null"]/[max_health? max_health : "null"]")
+	else 
+		log_debug("[LOG_MOVABLE_PROC("update_material_health")]: NO_DAMAGE")
+
 /**
  * Updates the matter amounts in the matter list depending on what main material, or any extra materials, is currently set. 
  * If matter_override is set, it will use that list instead of the matter list in the definition. It will still apply the material amount modifier to all entries.
  */
 /obj/proc/update_matter(var/list/matter_override)
 	//Grab matter from definition
-	matter = matter_override || initial(matter)
+	matter = matter_override? matter_override : matter
 
 	//Add primary materials
 	var/decl/material/primary = get_material()
@@ -198,8 +210,14 @@
 	if(istype(reinf))
 		LAZYSET(matter, reinf.type, MATTER_AMOUNT_REINFORCEMENT)
 
+	if(!primary && length(matter))
+		log_warning("'[src]' '[type]' ([x], [y], [z]) has no primary material set, but still has a matter list with material entries!")
+
 	//Apply amount modifier
 	for(var/mat in matter)
 		matter[mat] = round(matter[mat] * get_matter_amount_modifier())
 
 	UNSETEMPTY(matter)
+
+/obj/item/get_material_health_modifier()
+	return 0.2
