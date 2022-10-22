@@ -215,7 +215,7 @@
 				M.client.eye = M.client.mob
 				M.client.perspective = MOB_PERSPECTIVE
 
-/atom/proc/physically_destroyed(var/skip_qdel)
+/atom/proc/physically_destroyed(var/skip_qdel, var/quiet)
 	SHOULD_CALL_PARENT(TRUE)
 	dump_contents()
 	if(!skip_qdel && !QDELETED(src))

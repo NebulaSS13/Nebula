@@ -6,9 +6,9 @@
 	desc = "It opens and closes."
 	icon = 'icons/obj/doors/Doorint.dmi'
 	icon_state = "door1"
-	anchored = 1
-	opacity = 1
-	density = 1
+	anchored = TRUE
+	opacity = TRUE
+	density = TRUE
 	layer = CLOSED_DOOR_LAYER
 	interact_offline = TRUE
 	construct_state = /decl/machine_construction/default/panel_closed/door
@@ -16,7 +16,11 @@
 	required_interaction_dexterity = DEXTERITY_SIMPLE_MACHINES
 	max_health = 300
 	hitsound = 'sound/weapons/smash.ogg' //sound door makes when hit with a weapon
-
+	dir = SOUTH
+	atmos_canpass = CANPASS_PROC
+	armor = list(
+		DEF_MELEE = ARMOR_MELEE_SMALL //minimum amount of force needed to damage the door with a melee weapon
+	)
 	var/can_open_manually = TRUE
 
 	var/open_layer = OPEN_DOOR_LAYER
@@ -29,7 +33,6 @@
 	var/normalspeed = 1
 	var/heat_proof = 0 // For glass airlocks/opacity firedoors
 	var/destroy_hits = 10 //How many strong hits it takes to destroy the door
-	var/min_force = 10 //minimum amount of force needed to damage the door with a melee weapon
 	var/pry_mod = 1 //difficulty scaling for simple animal door prying
 	var/obj/item/stack/material/repairing
 	var/block_air_zones = 1 //If set, air zones cannot merge across the door even when it is opened.
@@ -40,29 +43,15 @@
 	var/autoset_access = TRUE // Determines whether the door will automatically set its access from the areas surrounding it. Can be used for mapping.
 
 	//Multi-tile doors
-	dir = SOUTH
 	var/width = 1
 
 	//Used for intercepting clicks on our turf. Set 0 to disable click interception
 	var/turf_hand_priority = 3
 
-	atmos_canpass = CANPASS_PROC
-
 	var/set_dir_on_update = TRUE
 
 /obj/machinery/door/proc/can_operate(var/mob/user)
 	. = istype(user) && !user.restrained() && (!issmall(user) || ishuman(user) || issilicon(user) || istype(user, /mob/living/bot))
-
-/obj/machinery/door/attack_generic(var/mob/user, var/damage, var/attack_verb, var/environment_smash)
-	if(environment_smash >= 1)
-		damage = max(damage, 10)
-
-	if(damage >= 10)
-		visible_message("<span class='danger'>\The [user] [attack_verb] into \the [src]!</span>")
-		take_damage(damage)
-	else
-		visible_message("<span class='notice'>\The [user] bonks \the [src] harmlessly.</span>")
-	attack_animation(user)
 
 /obj/machinery/door/Initialize(var/mapload, var/d, var/populate_parts = TRUE, var/obj/structure/door_assembly/assembly = null)
 	if(!populate_parts)
@@ -82,7 +71,6 @@
 	if (turf_hand_priority)
 		set_extension(src, /datum/extension/turf_hand, turf_hand_priority)
 
-	health = max_health
 #ifdef UNIT_TEST
 	if(autoset_access && length(req_access))
 		PRINT_STACK_TRACE("A door with mapped access restrictions was set to autoinitialize access.")
@@ -193,37 +181,26 @@
 	SSmaterials.create_object(/decl/material/solid/metal/steel, loc, 3, /obj/item/stack/material/rods)
 	. = ..()
 
-/obj/machinery/door/bullet_act(var/obj/item/projectile/Proj)
-	..()
-
-	var/damage = Proj.get_structure_damage()
-
-	// Emitter Blasts - these will eventually completely destroy the door, given enough time.
-	if (damage > 90)
-		destroy_hits--
-		if (destroy_hits <= 0)
-			visible_message("<span class='danger'>\The [src.name] disintegrates!</span>")
-			switch (Proj.damage_type)
-				if(BRUTE)
-					physically_destroyed()
-				if(BURN)
-					new /obj/effect/decal/cleanable/ash(src.loc) // Turn it to ashes!
-			qdel(src)
-
-	if(damage)
-		//cap projectile damage so that there's still a minimum number of hits required to break the door
-		take_damage(min(damage, 100), Proj.damage_type)
-
 /obj/machinery/door/hitby(var/atom/movable/AM, var/datum/thrownthing/TT)
-	..()
-	visible_message("<span class='danger'>[src.name] was hit by [AM].</span>")
+	. = ..()
+	visible_message(SPAN_DANGER("[src.name] was hit by [AM]."))
 	var/tforce = 0
+	var/ttype  = BRUTE
+	var/tflags = 0
+	var/tpen   = 0
+
 	if(ismob(AM))
-		tforce = 3 * TT.speed
-	else
-		tforce = AM:throwforce * (TT.speed/THROWFORCE_SPEED_DIVISOR)
-	playsound(src.loc, hitsound, 100, 1)
-	take_damage(tforce)
+		tforce = 3 * TT.speed //#FIXME: Maybe the /datum/thrownthing should return what damage the thing would do?
+
+	else if(isobj(AM))
+		var/obj/O = AM
+		tforce = O.throwforce * (TT.speed/THROWFORCE_SPEED_DIVISOR)
+		ttype  = O.damtype
+		tflags = O.damage_flags()
+		tpen   = O.armor_penetration
+
+	playsound(src, hitsound, 100, TRUE)
+	take_damage(tforce, ttype, tflags, AM, tpen, TT.target_zone)
 
 // This is legacy code that should be revisited, probably by moving the bulk of the logic into here.
 /obj/machinery/door/physical_attack_hand(user)
@@ -296,61 +273,26 @@
 		repairing = null
 		return TRUE
 
-/obj/machinery/door/attackby(obj/item/I, mob/user)
-	. = handle_repair(I, user)
-	if(.)
+/obj/machinery/door/emag_act(var/remaining_charges)
+	if(!density || inoperable())
+		return
+	. = ..() //Let base class emag the components and etc
+	do_animate("emag")
+	sleep(6)
+	open()
+	emagged = TRUE
+
+/obj/machinery/door/bash(obj/item/I, mob/user)
+	if(!density)
 		return
 	return ..()
 
-/obj/machinery/door/emag_act(var/remaining_charges)
-	if(density && operable())
-		do_animate("emag")
-		sleep(6)
-		open()
-		emagged = TRUE
-		return 1
-
-/obj/machinery/door/bash(obj/item/I, mob/user)
-	if(density && user.a_intent == I_HURT && !(I.item_flags & ITEM_FLAG_NO_BLUDGEON))
-		user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
-		user.do_attack_animation(src)
-		if(I.force < min_force)
-			user.visible_message("<span class='danger'>\The [user] hits \the [src] with \the [I] with no visible effect.</span>")
-		else
-			user.visible_message("<span class='danger'>\The [user] forcefully strikes \the [src] with \the [I]!</span>")
-			playsound(src.loc, hitsound, 100, 1)
-			take_damage(I.force, I.damtype)
-		return TRUE
-	return FALSE
-
-/obj/machinery/door/take_damage(var/damage, damtype=BRUTE)
-	var/initialhealth = src.health
-	src.health = max(0, src.health - damage)
-	if(src.health <= 0 && initialhealth > 0)
-		visible_message(SPAN_WARNING("\The [src] breaks down!"))
-		src.set_broken(TRUE)
-	else if(src.health < src.max_health / 4 && initialhealth >= src.max_health / 4)
-		visible_message(SPAN_WARNING("\The [src] looks like it's about to break!"))
-	else if(src.health < src.max_health / 2 && initialhealth >= src.max_health / 2)
-		visible_message(SPAN_WARNING("\The [src] looks seriously damaged!"))
-	else if(src.health < src.max_health * 3/4 && initialhealth >= src.max_health * 3/4)
-		visible_message(SPAN_WARNING("\The [src] shows signs of damage!"))
-	..(max(0, damage - initialhealth), damtype)
+/obj/machinery/door/check_health(lastdamage, lastdamtype, lastdamflags)
+	. = ..()
 	update_icon()
 
-/obj/machinery/door/examine(mob/user)
+/obj/machinery/door/examine(mob/user, distance)
 	. = ..()
-	if(src.health <= 0)
-		to_chat(user, "\The [src] is broken!")
-	else if(src.health < src.max_health / 4)
-		to_chat(user, "\The [src] looks like it's about to break!")
-	else if(src.health < src.max_health / 2)
-		to_chat(user, "\The [src] looks seriously damaged!")
-	else if(src.health < src.max_health * 3/4)
-		to_chat(user, "\The [src] shows signs of damage!")
-	else if(src.health < src.max_health && get_dist(src, user) <= 1)
-		to_chat(user, "\The [src] has some minor scuffing.")
-
 	var/mob/living/carbon/human/H = user
 	if (emagged && istype(H) && (H.skill_check(SKILL_COMPUTER, SKILL_ADEPT) || H.skill_check(SKILL_ELECTRICAL, SKILL_ADEPT)))
 		to_chat(user, SPAN_WARNING("\The [src]'s control panel looks fried."))
@@ -358,7 +300,7 @@
 /obj/machinery/door/set_broken(new_state, cause)
 	. = ..()
 	if(. && new_state && (cause & MACHINE_BROKEN_GENERIC))
-		visible_message("<span class = 'warning'>\The [src.name] breaks!</span>")
+		visible_message(SPAN_WARNING("\The [src.name] breaks!"))
 
 /obj/machinery/door/on_update_icon()
 	if(density)

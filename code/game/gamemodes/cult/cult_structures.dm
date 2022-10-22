@@ -18,47 +18,19 @@
 	name = "Pylon"
 	desc = "A floating crystal that hums with an unearthly energy."
 	icon = 'icons/obj/structures/pylon.dmi'
-	icon_state = "pylon"
-	var/isbroken = 0
+	icon_state  = "pylon"
 	light_power = 0.5
 	light_range = 13
 	light_color = "#3e0000"
+	hitsound = 'sound/effects/Glasshit.ogg'
+	material = /decl/material/solid/gemstone/crystal
 
-/obj/structure/cult/pylon/attack_hand(mob/M)
-	attackpylon(M, 5)
+/obj/structure/cult/pylon/on_update_icon()
+	. = ..()
+	icon_state = "[initial(icon_state)][is_broken()? "-broken" : ""]"
 
-/obj/structure/cult/pylon/attack_generic(var/mob/user, var/damage)
-	attackpylon(user, damage)
-
-/obj/structure/cult/pylon/attackby(obj/item/W, mob/user)
-	attackpylon(user, W.force)
-
-/obj/structure/cult/pylon/proc/attackpylon(mob/user, var/damage)
-	user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
-	if(!isbroken)
-		if(prob(1+ damage * 5))
-			user.visible_message(
-				"<span class='danger'>[user] smashed the pylon!</span>",
-				"<span class='warning'>You hit the pylon, and its crystal breaks apart!</span>",
-				"You hear a tinkle of crystal shards."
-				)
-			user.do_attack_animation(src)
-			playsound(get_turf(src), 'sound/effects/Glassbr3.ogg', 75, 1)
-			isbroken = 1
-			set_density(0)
-			icon_state = "pylon-broken"
-			set_light(0)
-		else
-			to_chat(user, "You hit the pylon!")
-			playsound(get_turf(src), 'sound/effects/Glasshit.ogg', 75, 1)
-	else
-		if(prob(damage * 2))
-			to_chat(user, "You pulverize what was left of the pylon!")
-			qdel(src)
-		else
-			to_chat(user, "You hit the pylon!")
-		playsound(get_turf(src), 'sound/effects/Glasshit.ogg', 75, 1)
-
+/obj/structure/cult/pylon/proc/is_broken()
+	return health < (max_health * 0.25) 
 
 /obj/structure/cult/pylon/proc/repair(mob/user)
 	if(isbroken)
@@ -66,7 +38,24 @@
 		isbroken = 0
 		set_density(1)
 		icon_state = "pylon"
+/obj/structure/cult/pylon/check_health(lastdamage, lastdamtype, lastdamflags)
+	var/was_broken = is_broken()
+	. = ..()
+	if(QDELETED(src))
+		return
+	//Handle going in and out of broken state
+	if(is_broken() && !was_broken)
+		audible_message("You hear a tinkle of crystal shards.")
+		visible_message(SPAN_DANGER("\The [src], and its crystal breaks apart!"))
+		playsound(src, 'sound/effects/Glassbr3.ogg', 75, TRUE)
+		set_density(FALSE)
+		set_light(0)
+		update_icon()
+	
+	else if(!is_broken() && was_broken)
+		set_density(TRUE)
 		set_light(13, 0.5)
+		update_icon()
 
 /obj/structure/cult/pylon/get_artifact_scan_data()
 	return "Tribal pylon - subject resembles statues/emblems built by cargo cult civilisations to honour energy systems from post-warp civilisations."

@@ -13,30 +13,20 @@
 	icon = 'icons/obj/doors/rapid_pdoor.dmi'
 	icon_state = null
 	can_open_manually = FALSE
-
-	// Icon states for different shutter types. Simply change this instead of rewriting the update_icon proc.
-	var/icon_state_open = null
-	var/icon_state_opening = null
-	var/icon_state_closed = null
-	var/icon_state_closing = null
-
-	var/icon_state_open_broken = null
-	var/icon_state_closed_broken = null
-
-	var/open_sound = 'sound/machines/blastdoor_open.ogg'
-	var/close_sound = 'sound/machines/blastdoor_close.ogg'
-
+	material = /decl/material/solid/metal/plasteel
+	armor = list(
+		DEF_MELEE = ARMOR_MELEE_KNIVES,
+		DEF_BOMB  = ARMOR_BOMB_PADDED - 5,
+	)
+	explosion_resistance = 25
 	closed_layer = ABOVE_WINDOW_LAYER
 	dir = NORTH
-	explosion_resistance = 25
 	atom_flags = ATOM_FLAG_ADJACENT_EXCEPTION
 
 	//Most blast doors are infrequently toggled and sometimes used with regular doors anyways,
 	//turning this off prevents awkward zone geometry in places like medbay lobby, for example.
 	block_air_zones = 0
 
-	var/begins_closed = TRUE
-	var/decl/material/implicit_material
 	autoset_access = FALSE // Uses different system with buttons.
 	pry_mod = 1.35
 
@@ -53,6 +43,20 @@
 	frame_type = /obj/structure/door_assembly/blast
 	base_type = /obj/machinery/door/blast
 
+	// Icon states for different shutter types. Simply change this instead of rewriting the update_icon proc.
+	var/icon_state_open = null
+	var/icon_state_opening = null
+	var/icon_state_closed = null
+	var/icon_state_closing = null
+
+	var/icon_state_open_broken = null
+	var/icon_state_closed_broken = null
+
+	var/open_sound = 'sound/machines/blastdoor_open.ogg'
+	var/close_sound = 'sound/machines/blastdoor_close.ogg'
+
+	var/begins_closed = TRUE
+
 /obj/machinery/door/blast/Initialize()
 	. = ..()
 
@@ -61,8 +65,6 @@
 		set_density(0)
 		set_opacity(0)
 		layer = open_layer
-
-	implicit_material = GET_DECL(/decl/material/solid/metal/plasteel)
 
 /obj/machinery/door/blast/examine(mob/user)
 	. = ..()
@@ -143,9 +145,6 @@
 		force_open()
 	else
 		force_close()
-
-/obj/machinery/door/blast/get_material()
-	return implicit_material
 
 // Proc: attackby()
 // Parameters: 2 (C - Item this object was clicked with, user - Mob which clicked this object)
@@ -318,9 +317,18 @@
 	icon_state_open_broken = "blast_open_broken"
 	icon_state_closed_broken = "blast_closed_broken"
 
-	min_force = 30
-	max_health = 1000
+	armor = list(
+		DEF_MELEE  = ARMOR_MELEE_RESISTANT,
+		DEF_BULLET = ARMOR_BALLISTIC_RESISTANT,
+		DEF_LASER  = ARMOR_LASER_MAJOR,
+		DEF_BOMB   = ARMOR_BOMB_RESISTANT,
+		DEF_ENERGY = ARMOR_ENERGY_RESISTANT,
+	)
+	//max_health = 1000
 	block_air_zones = 1
+
+/obj/machinery/door/blast/regular/get_material_health_modifier()
+	return 8.0 //Blast door has high base hp, was 1,000 before switch to depend on material
 
 /obj/machinery/door/blast/regular/escape_pod
 	name = "Escape Pod release Door"
@@ -350,11 +358,20 @@
 
 	open_sound = 'sound/machines/shutters_open.ogg'
 	close_sound = 'sound/machines/shutters_close.ogg'
-	min_force = 15
-	max_health = 500
-	explosion_resistance = 10
+	armor = list(
+		DEF_MELEE  = ARMOR_MELEE_KNIVES,
+		DEF_BULLET = ARMOR_BALLISTIC_MINOR,
+		DEF_LASER  = ARMOR_LASER_MINOR,
+		DEF_BOMB   = ARMOR_BOMB_MINOR,
+		DEF_ENERGY = ARMOR_ENERGY_SMALL,
+	)
+	//max_health = 500
+	explosion_resistance = 10 //#FIXME: Probably should be called explosion attenuation or something, since it mainly is used to attenuate explosion power on the turf
 	pry_mod = 0.55
 	frame_type = /obj/structure/door_assembly/blast/shutter
+
+/obj/machinery/door/blast/shutters/get_material_health_modifier()
+	return 2.0 //Base health was 500 before
 
 /obj/machinery/door/blast/shutters/open
 	begins_closed = FALSE

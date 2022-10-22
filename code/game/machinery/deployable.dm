@@ -1,5 +1,5 @@
 //Deployable machinery stuff
-/obj/machinery/deployable
+/obj/machinery/deployable //#TODO: Bring this up to date with current machinery
 	name = "deployable"
 	desc = "Deployable."
 	icon = 'icons/obj/objects.dmi'
@@ -9,106 +9,99 @@
 	name = "deployable barrier"
 	desc = "A deployable barrier. Swipe your ID card to lock/unlock it."
 	icon = 'icons/obj/objects.dmi'
-	anchored = 0.0
-	density = 1
+	anchored = FALSE
+	density = TRUE
 	icon_state = "barrier0"
 	max_health = 100
-	var/locked = 0.0
+	var/locked = FALSE
 
 /obj/machinery/deployable/barrier/Initialize()
 	. = ..()
-	icon_state = "barrier[src.locked]"
+	update_icon()
+
+/obj/machinery/deployable/barrier/on_update_icon()
+	icon_state = "barrier[locked]"
 
 /obj/machinery/deployable/barrier/attackby(obj/item/W, mob/user)
 	if (istype(W, /obj/item/card/id))
-		if (src.allowed(user))
-			if	(src.emagged < 2.0)
-				src.locked = !src.locked
-				src.anchored = !src.anchored
-				src.icon_state = "barrier[src.locked]"
-				if ((src.locked == 1.0) && (src.emagged < 2.0))
-					to_chat(user, "Barrier lock toggled on.")
-					return
-				else if ((src.locked == 0.0) && (src.emagged < 2.0))
-					to_chat(user, "Barrier lock toggled off.")
-					return
+		if (allowed(user))
+			if(emagged < 2)
+				set_locked(!locked, user)
 			else
 				spark_at(src, amount=2, cardinal_only = TRUE)
-				visible_message("<span class='warning'>BZZzZZzZZzZT</span>")
-				return
-		return
+				visible_message(SPAN_WARNING("BZZzZZzZZzZT"))
+		return TRUE
+	
 	else if(IS_WRENCH(W))
-		if (src.health < src.max_health)
-			src.health = src.max_health
-			src.emagged = 0
-			src.req_access = list(access_security)
-			visible_message("<span class='warning'>[user] repairs \the [src]!</span>")
-			return
-		else if (src.emagged > 0)
-			src.emagged = 0
-			src.req_access = list(access_security)
-			visible_message("<span class='warning'>[user] repairs \the [src]!</span>")
-			return
-		return
-	else
-		switch(W.damtype)
-			if(BURN)
-				src.health -= W.force * 0.75
-			if(BRUTE)
-				src.health -= W.force * 0.5
-			else
-		if (src.health <= 0)
-			src.explode()
-		..()
+		if (is_damaged())
+			heal(max_health)
+			emagged = FALSE
+			req_access = list(access_security)
+			visible_message(SPAN_WARNING("[user] repairs \the [src]!"))
+		else if (emagged > 0)
+			emagged = FALSE
+			req_access = list(access_security)
+			visible_message(SPAN_WARNING("[user] repairs \the [src]!"))
+		return TRUE
+	return ..()
 
-/obj/machinery/deployable/barrier/explosion_act(severity)
-	. = ..()
-	if(. && !QDELETED(src))
-		if(severity == 1)
-			health = 0
-		else if(severity == 2)
-			health -= 25
-		if(health <= 0)
-			explode()
+/obj/machinery/deployable/barrier/take_damage(amount, damage_type, damage_flags, inflicter, armor_pen, target_zone, quiet)
+	//#TODO: Move this to the proper place once we handle armor damage reduction.
+	switch(damage_type)
+		if(BURN)
+			amount *= 0.75
+		if(BRUTE)
+			amount *= 0.5
+	. = ..(amount, damage_type, damage_flags, inflicter, armor_pen, target_zone, quiet)
+
+/obj/machinery/deployable/barrier/physically_destroyed(skip_qdel)
+	explode()
+	SSmaterials.create_object(/decl/material/solid/metal/steel, get_turf(src), 1, /obj/item/stack/material/rods)
+	return ..()
+
+/obj/machinery/deployable/barrier/proc/explode()
+	visible_message(SPAN_DANGER("[src] blows apart!"))
+	spark_at(src, cardinal_only = TRUE)
+	explosion(loc, -1, -1, 0)
+	if(!QDELETED(src))
+		qdel(src)
 
 /obj/machinery/deployable/barrier/emp_act(severity)
-	if(stat & (BROKEN|NOPOWER))
+	if(!use_power || inoperable())
 		return
 	if(prob(50/severity))
-		locked = !locked
-		anchored = !anchored
-		icon_state = "barrier[src.locked]"
+		set_locked(!locked)
+	return ..()
+
+///Lock the barrier in place, or unlock it
+/obj/machinery/deployable/barrier/proc/set_locked(var/state, var/mob/user)
+	locked = state
+	anchored = locked
+	if(user)
+		if(locked)
+			to_chat(user, SPAN_NOTICE("Barrier lock toggled on."))
+		else
+			to_chat(user, SPAN_NOTICE("Barrier lock toggled off."))
+	update_icon()
 
 /obj/machinery/deployable/barrier/CanPass(atom/movable/mover, turf/target, height=0, air_group=0)//So bullets will fly over and stuff.
 	if(air_group || (height==0))
-		return 1
+		return TRUE
 	if(istype(mover) && mover.checkpass(PASS_FLAG_TABLE))
-		return 1
-	else
-		return 0
+		return TRUE
+	return FALSE
 
-/obj/machinery/deployable/barrier/physically_destroyed(skip_qdel)
-	SSmaterials.create_object(/decl/material/solid/metal/steel, get_turf(src), 1, /obj/item/stack/material/rods)
+/obj/machinery/deployable/barrier/emag_act(remaining_charges, mob/user)
 	. = ..()
-	
-/obj/machinery/deployable/barrier/proc/explode()
-	visible_message("<span class='danger'>[src] blows apart!</span>")
-	spark_at(src, cardinal_only = TRUE)
-	explosion(src.loc,-1,-1,0)
-	if(!QDELETED(src))
-		physically_destroyed()
-
-/obj/machinery/deployable/barrier/emag_act(var/remaining_charges, var/mob/user)
-	if (src.emagged == 0)
-		src.emagged = 1
-		src.req_access.Cut()
+	if (!emagged)
+		emagged = TRUE
 		to_chat(user, "You break the ID authentication lock on \the [src].")
-		spark_at(src, amount=2, cardinal_only = TRUE)
-		visible_message("<span class='warning'>BZZzZZzZZzZT</span>")
-		return 1
-	else if (src.emagged == 1)
-		src.emagged = 2
+		spark_at(src, cardinal_only = TRUE)
+		visible_message(SPAN_WARNING("BZZzZZzZZzZT"))
+		return TRUE
+
+	else if (emagged && anchored)
 		to_chat(user, "You short out the anchoring mechanism on \the [src].")
-		spark_at(src, amount=2, cardinal_only = TRUE)
-		visible_message("<span class='warning'>BZZzZZzZZzZT</span>")
-		return 1
+		spark_at(src, cardinal_only = TRUE)
+		visible_message(SPAN_WARNING("BZZzZZzZZzZT"))
+		return TRUE

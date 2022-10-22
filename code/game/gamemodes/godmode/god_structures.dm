@@ -42,17 +42,6 @@
 		linked_god = null
 	return ..()
 
-/obj/structure/deity/attackby(obj/item/W, mob/user)
-	user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
-	user.do_attack_animation(src)
-	playsound(get_turf(src), 'sound/effects/Glasshit.ogg', 50, 1)
-	user.visible_message(
-		"<span class='danger'>[user] hits \the [src] with \the [W]!</span>",
-		"<span class='danger'>You hit \the [src] with \the [W]!</span>",
-		"<span class='danger'>You hear something breaking!</span>"
-		)
-	take_damage(W.force)
-
 /obj/structure/deity/dismantle()
 	SHOULD_CALL_PARENT(FALSE)
 	qdel(src)
@@ -61,9 +50,6 @@
 /obj/structure/deity/physically_destroyed(var/skip_qdel)
 	visible_message(SPAN_DANGER("\The [src] crumbles!"))
 	. = ..()
-
-/obj/structure/deity/bullet_act(var/obj/item/projectile/P)
-	take_damage(P.damage)
 
 /obj/structure/deity/proc/attack_deity(var/mob/living/deity/deity)
 	return

@@ -30,14 +30,14 @@
 	var/list/charge_costs
 	var/list/datum/matter_synth/synths
 
-/obj/item/stack/Initialize(mapload, amount, material)
+/obj/item/stack/Initialize(mapload, _amount, material_key)
 
-	if(ispath(amount, /decl/material))
-		PRINT_STACK_TRACE("Stack initialized with material ([amount]) instead of amount.")
-		material = amount
-	if (isnum(amount) && amount >= 1)
-		src.amount = amount
-	. = ..(mapload, material)
+	if(ispath(_amount, /decl/material))
+		PRINT_STACK_TRACE("Stack initialized with material ([_amount]) instead of amount.")
+		material = _amount
+	if (isnum(_amount) && _amount >= 1)
+		src.amount = _amount
+	. = ..(mapload, material_key)
 	if(!stack_merge_type)
 		stack_merge_type = type
 	if(!singular_name)
@@ -224,10 +224,12 @@
 /obj/item/stack/proc/can_use(var/used)
 	return get_amount() >= used
 
-/obj/item/stack/update_matter()
+/obj/item/stack/update_matter(list/matter_override)
 	//Setup matter_per_piece if it hasn't been already
 	if(!matter_per_piece)
-		matter = initial(matter)
+		if(atom_flags & ATOM_FLAG_INITIALIZED)
+			log_warning("[type] initialized its matter_per_piece list post-initialize!")
+		matter = matter_override? matter_override : matter
 		matter_per_piece = matter?.Copy()
 		if(istype(material))
 			LAZYSET(matter_per_piece, material.type, max(LAZYACCESS(matter_per_piece, material.type), round(MATTER_AMOUNT_PRIMARY * matter_multiplier)))

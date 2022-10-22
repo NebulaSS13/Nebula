@@ -109,11 +109,6 @@
 		reagents.trans_to_turf(get_turf(src), reagents.total_volume)
 	. = ..()
 
-/obj/structure/reagent_dispensers/explosion_act(severity)
-	. = ..()
-	if(. && (severity == 1) || (severity == 2 && prob(50)) || (severity == 3 && prob(5)))
-		physically_destroyed()
-
 //Dispensers
 /obj/structure/reagent_dispensers/watertank
 	name                      = "water tank"

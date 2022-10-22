@@ -23,7 +23,8 @@
 			L.client.eye = src
 		L.forceMove(src)
 		L.set_sdisability(MUTED)
-		health = L.health + 100 //stoning damaged mobs will result in easier to shatter statues
+		max_health = L.health + 100 //stoning damaged mobs will result in easier to shatter statues
+		health = max_health
 		intialTox = L.getToxLoss()
 		intialFire = L.getFireLoss()
 		intialBrute = L.getBruteLoss()
@@ -57,6 +58,7 @@
 		dump_contents()
 		STOP_PROCESSING(SSobj, src)
 		qdel(src)
+		return PROCESS_KILL
 
 /obj/structure/closet/statue/dump_contents()
 	for(var/obj/O in src)
@@ -79,24 +81,10 @@
 /obj/structure/closet/statue/toggle()
 	return
 
-/obj/structure/closet/statue/proc/check_health()
-	if(health <= 0)
-		for(var/mob/M in src)
-			shatter(M)
-
-/obj/structure/closet/statue/bullet_act(var/obj/item/projectile/Proj)
-	health -= Proj.get_structure_damage()
-	check_health()
-
-	return
-
 /obj/structure/closet/statue/explosion_act(severity)
-	for(var/mob/M in src)
+	for(var/mob/living/M in src)
 		M.explosion_act(severity)
-	..()
-	if(!QDELETED(src))
-		health -= 60 / severity
-		check_health()
+	. = ..()
 
 /obj/structure/closet/statue/attackby(obj/item/I, mob/user)
 	health -= I.force
@@ -119,9 +107,7 @@
 /obj/structure/closet/statue/on_update_icon()
 	return
 
-/obj/structure/closet/statue/proc/shatter(mob/user)
-	if (user)
-		user.dust()
-	dump_contents()
-	visible_message("<span class='warning'>[src] shatters!.</span>")
-	qdel(src)
+/obj/structure/closet/statue/shatter(consumed, quiet, skip_qdel)
+	for(var/mob/living/L in src)
+		L.dust()
+	. = ..()

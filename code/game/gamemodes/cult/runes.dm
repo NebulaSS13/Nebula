@@ -283,16 +283,6 @@
 		rune = null
 	return ..()
 
-
-/obj/effect/cultwall/examine(mob/user)
-	. = ..()
-	if(iscultist(user))
-		if(health == max_health)
-			to_chat(user, "<span class='notice'>It is fully intact.</span>")
-		else if(health > max_health * 0.5)
-			to_chat(user, "<span class='warning'>It is damaged.</span>")
-		else
-			to_chat(user, "<span class='danger'>It is about to dissipate.</span>")
 /obj/effect/cultwall/can_be_corroded_by(decl/material/M, amount)
 	return FALSE
 
@@ -306,21 +296,13 @@
 /obj/effect/cultwall/attackby(var/obj/item/I, var/mob/user)
 	if(istype(I, /obj/item/nullrod))
 		user.visible_message(SPAN_NOTICE("\The [user] touches \the [src] with \the [I], and it disappears."), SPAN_NOTICE("You disrupt the vile magic with the deadening field of \the [I]."))
-		qdel(src)
+		physically_destroyed()
 		return TRUE
 	return ..()
 
-/obj/effect/cultwall/bullet_act(var/obj/item/projectile/Proj)
-	if(!(Proj.damage_type == BRUTE || Proj.damage_type == BURN))
-		return
-	take_damage(Proj.damage)
-	..()
-
-/obj/effect/cultwall/proc/take_damage(var/amount)
-	health -= amount
-	if(health <= 0)
-		visible_message("<span class='warning'>\The [src] dissipates.</span>")
-		qdel(src)
+/obj/effect/cultwall/physically_destroyed(skip_qdel)
+	visible_message(SPAN_WARNING("\The [src] dissipates."))
+	return ..()
 
 /obj/effect/rune/ajorney
 	cultname = "astral journey"

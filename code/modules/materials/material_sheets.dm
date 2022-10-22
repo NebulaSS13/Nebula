@@ -19,36 +19,19 @@
 	var/decl/material/reinf_material
 
 /obj/item/stack/material/Initialize(mapload, var/amount, var/_material, var/_reinf_material)
+	if(ispath(_reinf_material, /decl/material))
+		reinf_material = _reinf_material //Base obj class handles setting the reinf material
 	. = ..(mapload, amount, _material)
 	if(!istype(material))
 		log_warning("[src] ([x],[y],[z]) was deleted because it didn't have a valid material set('[material]')!")
 		return INITIALIZE_HINT_QDEL
-	if(!_reinf_material)
-		_reinf_material = reinf_material
-	if(_reinf_material)
-		reinf_material = GET_DECL(_reinf_material)
-		if(!istype(reinf_material))
-			reinf_material = null
 	base_state = icon_state
-	if(material.conductive)
-		obj_flags |= OBJ_FLAG_CONDUCTIBLE
-	else
-		obj_flags &= (~OBJ_FLAG_CONDUCTIBLE)
-	//Sound setup
-	if(material.sound_manipulate)
-		pickup_sound = material.sound_manipulate
-	if(material.sound_dropped)
-		drop_sound = material.sound_dropped
-	update_strings()
 
 /obj/item/stack/material/get_recipes()
 	return material.get_recipes(reinf_material && reinf_material.type)
 
 /obj/item/stack/material/get_codex_value()
 	return (material && !material.hidden_from_codex) ? "[lowertext(material.solid_name)] (material)" : ..()
-
-/obj/item/stack/material/get_reinf_material()
-	return reinf_material
 
 /obj/item/stack/material/proc/update_strings()
 	if(amount>1)
@@ -101,10 +84,6 @@
 		set_reinforcing_material(other.reinf_material, FALSE, FALSE)
 		update_material()
 
-/obj/item/stack/material/update_material(keep_health, should_update_icon)
-	. = ..()
-	update_strings()
-
 /obj/item/stack/material/attackby(var/obj/item/W, var/mob/user)
 
 	if(istype(W, /obj/item/stack/material))
@@ -132,6 +111,29 @@
 	if(material)
 		return ..(override_colour, override_alpha? override_alpha : (100 + max(1, amount/25)*(material.opacity * 255)))
 	return ..()
+
+/obj/item/stack/material/update_material_sounds()
+	. = ..()
+	if(istype(material))
+		pickup_sound = material.sound_manipulate? material.sound_manipulate : initial(pickup_sound)
+		drop_sound   = material.sound_dropped?    material.sound_dropped    : initial(drop_sound)
+
+/obj/item/stack/material/update_material(keep_health = FALSE, should_update_icon = TRUE)
+	. = ..()
+	update_strings()
+
+/obj/item/stack/material/get_reinf_material()
+	return reinf_material
+
+/obj/item/stack/material/set_reinforcing_material(new_material, keep_health = FALSE, update_material = TRUE)
+	if(ispath(new_material, /decl/material))
+		reinf_material = GET_DECL(new_material)
+	else
+		reinf_material = new_material
+
+	if(update_material)
+		update_material(keep_health)
+	return TRUE
 
 /obj/item/stack/material/proc/update_state_from_amount()
 	if(max_icon_state && amount == max_amount)

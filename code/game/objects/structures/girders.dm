@@ -12,10 +12,10 @@
 	parts_amount = 2
 	parts_type = /obj/item/stack/material/strut
 
-	var/cover = 50
+	var/cover = 50 //#FIXME: Cover is very broken and doesn't seem to actually do anything?
 	var/prepped_for_fakewall
 
-/obj/structure/girder/Initialize()
+/obj/structure/girder/Initialize(ml, _mat, _reinf_mat)
 	set_extension(src, /datum/extension/penetration/simple, 100)
 	. = ..()
 
@@ -60,7 +60,6 @@
 	anchored = prob(50)
 
 /obj/structure/girder/bullet_act(var/obj/item/projectile/Proj)
-
 	var/effective_cover = cover
 	if(reinf_material)
 		effective_cover *= 2
@@ -68,18 +67,16 @@
 		effective_cover *= 0.5
 	effective_cover = clamp(FLOOR(effective_cover), 0, 100)
 	if(Proj.original != src && !prob(effective_cover))
-		return PROJECTILE_CONTINUE
-	var/damage = Proj.get_structure_damage()
-	if(!damage)
-		return
-	if(!istype(Proj, /obj/item/projectile/beam))
-		damage *= 0.4
-	if(reinf_material)
-		damage = FLOOR(damage * 0.75)
-	..()
-	if(damage)
-		take_damage(damage)
+		return PROJECTILE_CONTINUE //#FIXME: I have some serious doubt this does anything beside having projectiles miss this more often if its anchored and reinforced???
+	. = ..()
 
+/obj/structure/girder/take_damage(amount, damage_type, damage_flags, inflicter, armor_pen, target_zone, quiet)
+	if(damage_flags & DAM_LASER)
+		amount *= 0.4
+	if(reinf_material)
+		amount = FLOOR(amount * 0.75)
+	. = ..(amount, damage_type, damage_flags, inflicter, armor_pen, target_zone, quiet)
+	
 /obj/structure/girder/CanFluidPass(var/coming_from)
 	return TRUE
 
@@ -188,11 +185,6 @@
 	update_icon()
 	return 1
 
-/obj/structure/girder/explosion_act(severity)
-	..()
-	if(severity == 1 || (severity == 2 && prob(30)) || (severity == 3 && prob(5)))
-		physically_destroyed()
-
 /obj/structure/girder/cult
 	icon= 'icons/obj/cult.dmi'
 	icon_state= "cultgirder"
@@ -206,10 +198,4 @@
 	. = ..()
 
 /obj/structure/girder/wood
-	material = /decl/material/solid/wood/mahogany
-
-/obj/structure/grille/wood
-	material = /decl/material/solid/wood/mahogany
-
-/obj/structure/lattice/wood
 	material = /decl/material/solid/wood/mahogany

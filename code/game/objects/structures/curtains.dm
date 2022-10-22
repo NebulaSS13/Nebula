@@ -72,6 +72,7 @@
 	opacity = TRUE
 	density = FALSE
 	anchored = TRUE
+	material_alteration = 0
 	var/curtain_kind_path = /decl/curtain_kind
 
 /obj/structure/curtain/open
@@ -92,20 +93,16 @@
 
 	SetName(kind.name)
 	curtain_kind_path = kind.type
-	material = GET_DECL(kind.material_key)
+	set_material(kind.material_key)
 	update_matter()
 	update_icon()
 
-/obj/structure/curtain/bullet_act(obj/item/projectile/P, def_zone)
-	if(!P.nodamage)
-		visible_message(SPAN_WARNING("[P] tears \the [src] down!"))
-		qdel(src)
-	else
-		..(P, def_zone)
+/obj/structure/curtain/get_material_health_modifier()
+	return 0.25
 
 /obj/structure/curtain/attack_hand(mob/user)
 	toggle()
-	..()
+	return ..()
 
 /obj/structure/curtain/attackby(obj/item/W, mob/user)
 	if(IS_SCREWDRIVER(W))
@@ -127,14 +124,15 @@
 		var/obj/item/curtain/C = kind.make_item(loc)
 		transfer_fingerprints_to(C)
 		qdel(src)
-	else
-		..()
+		return TRUE
+
+	return ..()
 
 /obj/structure/curtain/proc/toggle()
 	playsound(src, 'sound/effects/curtain.ogg', 15, 1, -5)
 	set_opacity(!opacity)
 
-/obj/structure/curtain/set_opacity()
+/obj/structure/curtain/set_opacity(new_opacity)
 	. = ..()
 	if(.)
 		update_icon()

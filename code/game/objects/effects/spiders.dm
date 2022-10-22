@@ -1,75 +1,14 @@
 //generic procs copied from obj/effect/alien
 /obj/effect/spider
-	name = "web"
+	name = "spider"
 	desc = "It's stringy and sticky."
 	icon = 'icons/effects/effects.dmi'
-	anchored = 1
-	density = 0
+	anchored = TRUE
+	density = FALSE
 	max_health = 15
 
-//similar to weeds, but only barfed out by nurses manually
-/obj/effect/spider/explosion_act(severity)
-	..()
-	if(!QDELETED(src) && (severity == 1 || (severity == 2 && prob(50) || (severity == 3 && prob(5)))))
-		qdel(src)
-
-/obj/effect/spider/attack_hand(mob/user)
-
-	user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
-	user.do_attack_animation(src)
-	if(prob(50))
-		visible_message(SPAN_WARNING("\The [user] tries to squash \the [src], but misses!"))
-		disturbed()
-		return
-
-	var/showed_msg = FALSE
-	if(ishuman(user))
-		var/mob/living/carbon/human/H = user
-		var/decl/natural_attack/attack = H.get_unarmed_attack(src)
-		if(istype(attack))
-			attack.show_attack(H, src, H.zone_sel.selecting, 1)
-			showed_msg = TRUE
-	if(!showed_msg)
-		visible_message(SPAN_DANGER("\The [user] squashes \the [src] flat!"))
-
-	die()
-
 /obj/effect/spider/attackby(var/obj/item/W, var/mob/user)
-	user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
-
-	if(W.attack_verb.len)
-		visible_message("<span class='warning'>\The [src] has been [pick(W.attack_verb)] with \the [W][(user ? " by [user]." : ".")]</span>")
-	else
-		visible_message("<span class='warning'>\The [src] has been attacked with \the [W][(user ? " by [user]." : ".")]</span>")
-
-	var/damage = W.force / 4.0
-
-	if(W.edge)
-		damage += 5
-
-	if(IS_WELDER(W))
-		var/obj/item/weldingtool/WT = W
-
-		if(WT.weld(0, user))
-			damage = 15
-			playsound(loc, 'sound/items/Welder.ogg', 100, 1)
-
-	health -= damage
-	healthcheck()
-
-/obj/effect/spider/bullet_act(var/obj/item/projectile/Proj)
-	..()
-	health -= Proj.get_structure_damage()
-	healthcheck()
-
-/obj/effect/spider/proc/healthcheck()
-	if(health <= 0)
-		qdel(src)
-
-/obj/effect/spider/fire_act(datum/gas_mixture/air, exposed_temperature, exposed_volume)
-	if(exposed_temperature > 300 + T0C)
-		health -= 5
-		healthcheck()
+	return bash(W, user)
 
 /obj/effect/spider/stickyweb
 	icon_state = "stickyweb1"
@@ -133,18 +72,16 @@
 /obj/effect/spider/proc/disturbed()
 	return
 
-/obj/effect/spider/proc/die()
-	visible_message("<span class='alert'>[src] dies!</span>")
-	new /obj/effect/decal/cleanable/spiderling_remains(loc)
-	qdel(src)
-
 /obj/effect/spider/spiderling
 	name = "spiderling"
 	desc = "It never stays still for long."
 	icon_state = "lesser"
-	anchored = 0
+	anchored = FALSE
 	layer = BELOW_OBJ_LAYER
-	health = 3
+	max_health = 20 //Made a bit beefier
+	material = /decl/material/solid/skin/insect
+	w_class = ITEM_SIZE_TINY
+	pass_flags = PASS_FLAG_MOB | PASS_FLAG_GRILLE | PASS_FLAG_TABLE
 	var/mob/living/simple_animal/hostile/giant_spider/greater_form
 	var/last_itch = 0
 	var/amount_grown = -1
@@ -159,6 +96,12 @@
 					  /mob/living/simple_animal/hostile/giant_spider/nurse = 2,
 					  /mob/living/simple_animal/hostile/giant_spider/spitter = 2,
 					  /mob/living/simple_animal/hostile/giant_spider/hunter = 1)
+
+/obj/effect/spider/spiderling/mundane
+	growth_chance = 0 // Just a simple, non-mutant spider
+
+/obj/effect/spider/spiderling/mundane/dormant
+	dormant = TRUE    // It lies in wait, hoping you will walk face first into its web
 
 /obj/effect/spider/spiderling/Initialize(var/mapload, var/atom/parent)
 	greater_form = pickweight(castes)
@@ -178,12 +121,6 @@
 	color = parent?.color || color
 	. = ..()
 
-/obj/effect/spider/spiderling/mundane
-	growth_chance = 0 // Just a simple, non-mutant spider
-
-/obj/effect/spider/spiderling/mundane/dormant
-	dormant = TRUE    // It lies in wait, hoping you will walk face first into its web
-
 /obj/effect/spider/spiderling/Destroy()
 	if(dormant)
 		events_repository.unregister(/decl/observ/moved, src, src, /obj/effect/spider/proc/disturbed)
@@ -191,10 +128,41 @@
 	walk(src, 0) // Because we might have called walk_to, we must stop the walk loop or BYOND keeps an internal reference to us forever.
 	. = ..()
 
-/obj/effect/spider/spiderling/attackby(var/obj/item/W, var/mob/user)
-	..()
+/obj/effect/spider/spiderling/bash(obj/item/W, mob/user)
+	. = ..()
 	if(health > 0)
 		disturbed()
+
+/obj/effect/spider/spiderling/attack_hand(mob/user)
+	if(!istype(user) || user.a_intent == I_HELP)
+		return
+	if(handle_grab_interaction(user))
+		return //For all your suplexing spiders needs
+	user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
+	user.do_attack_animation(src)
+	if(user.skill_fail_prob(SKILL_COMBAT, 50, SKILL_ADEPT))
+		visible_message(SPAN_WARNING("\The [user] tries to squash \the [src], but misses!"))
+		playsound(src, 'sound/effects/throw.ogg', 25, TRUE)
+		disturbed()
+		return
+
+	var/showed_msg = FALSE
+	if(ishuman(user))
+		var/mob/living/carbon/human/H = user
+		var/decl/natural_attack/attack = H.get_unarmed_attack(src)
+		if(istype(attack))
+			attack.show_attack(H, src, H.zone_sel.selecting, 1)
+			showed_msg = TRUE
+			take_damage(attack.get_unarmed_damage(), attack.get_damage_type(), attack.damage_flags(), attack, 0, H.zone_sel)
+
+	if(!showed_msg)
+		visible_message(SPAN_DANGER("\The [user] squashes \the [src]!"))
+
+/obj/effect/spider/spiderling/physically_destroyed(skip_qdel)
+	playsound(src, 'sound/effects/attackblob.ogg', 25, TRUE)
+	visible_message(SPAN_DANGER("\The [src] dies!"))
+	new /obj/effect/decal/cleanable/spiderling_remains(loc)
+	. = ..()
 
 /obj/effect/spider/spiderling/Crossed(var/mob/living/L)
 	if(dormant && istype(L) && L.mob_size > MOB_SIZE_TINY)
@@ -212,10 +180,6 @@
 		forceMove(user.loc)
 	else
 		..()
-
-/obj/effect/spider/spiderling/healthcheck()
-	if(health <= 0)
-		die()
 
 /obj/effect/spider/spiderling/proc/check_vent(obj/machinery/atmospherics/unary/vent_pump/exit_vent)
 	if(QDELETED(exit_vent) || exit_vent.welded) // If it's qdeleted we probably were too, but in that case we won't be making this call due to timer cleanup.
@@ -243,7 +207,7 @@
 	if(loc)
 		var/datum/gas_mixture/environment = loc.return_air()
 		if(environment && environment.gas[/decl/material/gas/methyl_bromide] > 0)
-			die()
+			physically_destroyed()
 			return
 
 	if(travelling_in_vent)
@@ -333,13 +297,12 @@
 	desc = "Something wrapped in silky spider web."
 	icon_state = "cocoon1"
 	health = 60
+	material = /decl/material/solid/cloth //#TODO: Make a spidersilk material I guess
 
 /obj/effect/spider/cocoon/Initialize()
 	. = ..()
 	icon_state = pick("cocoon1","cocoon2","cocoon3")
 
-/obj/effect/spider/cocoon/Destroy()
-	src.visible_message("<span class='warning'>\The [src] splits open.</span>")
-	for(var/atom/movable/A in contents)
-		A.dropInto(loc)
-	return ..()
+/obj/effect/spider/cocoon/physically_destroyed(skip_qdel)
+	visible_message(SPAN_WARNING("\The [src] splits open."))
+	. = ..()

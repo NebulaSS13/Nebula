@@ -210,6 +210,7 @@
 	icon_state = "totem"
 	density = TRUE
 	anchored = TRUE
+	material = /decl/material/solid/stone/marble
 	var/number
 
 /obj/structure/totem/Initialize()

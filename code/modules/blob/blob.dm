@@ -11,6 +11,7 @@
 	mouse_opacity = 2
 	layer = BLOB_SHIELD_LAYER
 	max_health = 30
+	hitsound = 'sound/effects/attackblob.ogg'
 
 	var/regen_rate = 5
 	var/brute_resist = 4.3
@@ -24,9 +25,8 @@
 	var/product = /obj/item/blob_tendril
 	var/attack_freq = 5 //see proc/attempt_attack; lower is more often, min 1
 
-/obj/effect/blob/Initialize()
+/obj/effect/blob/Initialize(ml)
 	. = ..()
-	health = max_health
 	update_icon()
 	START_PROCESSING(SSblob, src)
 
@@ -41,32 +41,21 @@
 
 /obj/effect/blob/explosion_act(var/severity)
 	SHOULD_CALL_PARENT(FALSE)
-	take_damage(rand(140 - (severity * 40), 140 - (severity * 20)) / brute_resist)
+	take_damage(rand(140 - (severity * 40), 140 - (severity * 20)), BRUTE, DAM_EXPLODE, "explosion")
 
 /obj/effect/blob/on_update_icon()
-	if(health > max_health / 2)
-		icon_state = "blob"
-	else
-		icon_state = "blob_damaged"
+	icon_state = "blob[(health <= (max_health / 2))? "_damaged" : ""]" 
 
 /obj/effect/blob/Process(wait, tick)
-	regen()
+	heal(regen_rate)
 	if(tick % attack_freq)
 		return
 	attempt_attack(global.alldirs)
 
-/obj/effect/blob/proc/take_damage(var/damage)
-	health -= damage
-	if(health < 0)
-		playsound(loc, 'sound/effects/splat.ogg', 50, 1)
-		qdel(src)
-	else
-		update_icon()
-
-/obj/effect/blob/proc/regen()
-	health = min(health + regen_rate, max_health)
-	update_icon()
-
+/obj/effect/blob/physically_destroyed(skip_qdel)
+	playsound(loc, 'sound/effects/splat.ogg', 50, TRUE)
+	. = ..()
+	
 /obj/effect/blob/proc/expand(var/turf/T)
 	if(istype(T, /turf/unsimulated/) || isspaceturf(T))
 		return
@@ -149,46 +138,33 @@
 			continue
 		attack_living(victim)
 
-/obj/effect/blob/bullet_act(var/obj/item/projectile/Proj)
-	if(!Proj)
-		return
-
-	switch(Proj.damage_type)
-		if(BRUTE)
-			take_damage(Proj.damage / brute_resist)
-		if(BURN)
-			take_damage((Proj.damage / laser_resist) / fire_resist)
-	return 0
-
 /obj/effect/blob/attackby(var/obj/item/W, var/mob/user)
-	user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
-	user.do_attack_animation(src)
-	playsound(loc, 'sound/effects/attackblob.ogg', 50, 1)
 	if(IS_WIRECUTTER(W))
 		if(prob(user.skill_fail_chance(SKILL_SCIENCE, 90, SKILL_EXPERT)))
 			to_chat(user, SPAN_WARNING("You fail to collect a sample from \the [src]."))
-			return
 		else
 			if(!pruned)
+				user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
+				user.do_attack_animation(src)
+				playsound(loc, hitsound, 25, TRUE)
 				to_chat(user, SPAN_NOTICE("You collect a sample from \the [src]."))
 				new product(user.loc)
 				pruned = TRUE
-				return
 			else
 				to_chat(user, SPAN_WARNING("\The [src] has already been pruned."))
-				return
+		return TRUE
+	return ..()
 
-	var/damage = 0
-	switch(W.damtype)
+/obj/effect/blob/take_damage(amount, damage_type, damage_flags, inflicter, armor_pen, target_zone, quiet)
+	//#TODO: Once we got damage reduction stuff setup move this
+	switch(damage_type)
 		if(BURN)
-			damage = (W.force / fire_resist)
-			if(IS_WELDER(W))
-				playsound(loc, 'sound/items/Welder.ogg', 100, 1)
+			if(damage_flags & DAM_LASER)
+				amount = (amount / laser_resist) //Laser resist apparently stacks with fire resist
+			amount = (amount / fire_resist)
 		if(BRUTE)
-			damage = (W.force / brute_resist)
-
-	take_damage(damage)
-	return
+			amount = (amount / brute_resist)
+	. = ..(amount, damage_type, damage_flags, inflicter, armor_pen, target_zone, quiet)
 
 /obj/effect/blob/core
 	name = "master nucleus"
@@ -206,9 +182,6 @@
 	var/blob_may_process = 1
 	var/reported_low_damage = FALSE
 	var/times_to_pulse = 0
-
-/obj/effect/blob/core/proc/get_health_percent()
-	return ((health / max_health) * 100)
 
 /*
 the master core becomes more vulnereable to damage as it weakens,
@@ -268,7 +241,7 @@ regen() will cover update_icon() for this proc
 		return
 	blob_may_process = 0
 	process_core_health()
-	regen()
+	heal(regen_rate)
 	for(var/I in 1 to times_to_pulse)
 		pulse(20, global.alldirs)
 	attempt_attack(global.alldirs)
@@ -292,7 +265,7 @@ regen() will cover update_icon() for this proc
 	return
 
 /obj/effect/blob/core/secondary/on_update_icon()
-	icon_state = (health / max_health >= 0.5) ? "blob_node" : "blob_factory"
+	icon_state = ((health / max_health) >= 0.5) ? "blob_node" : "blob_factory"
 
 /obj/effect/blob/shield
 	name = "shielding mass"

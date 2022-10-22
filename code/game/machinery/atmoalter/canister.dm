@@ -2,33 +2,27 @@
 	name = "\improper Canister: \[CAUTION\]"
 	icon = 'icons/obj/atmos.dmi'
 	icon_state = "yellow"
-	density = 1
-	max_health = 100
+	density  = TRUE
 	obj_flags = OBJ_FLAG_CONDUCTIBLE
 	w_class = ITEM_SIZE_GARGANTUAN
 	construct_state = /decl/machine_construction/pipe/welder
+	volume = 1000
+	start_pressure = 45 * ONE_ATMOSPHERE
+	interact_offline = TRUE // Allows this to be used when not in powered area.
+	material = /decl/material/solid/metal/steel
 	uncreated_component_parts = null
-	matter = list(
-		/decl/material/solid/metal/steel = 10 * SHEET_MATERIAL_AMOUNT
-	)
-
-	var/valve_open = 0
+	var/valve_open = FALSE
 	var/release_pressure = ONE_ATMOSPHERE
 	var/release_flow_rate = ATMOS_DEFAULT_VOLUME_PUMP //in L/s
-
 	var/canister_color = "yellow"
-	var/can_label = 1
-	start_pressure = 45 * ONE_ATMOSPHERE
+	var/can_label = TRUE
 	var/temperature_resistance = 1000 + T0C
-	volume = 1000
-	interact_offline = 1 // Allows this to be used when not in powered area.
 	var/update_flag = 0
 
-/obj/machinery/portable_atmospherics/canister/Initialize(mapload, material)
-	if(ispath(material))
-		matter = list()
-		matter[material] = 10 * SHEET_MATERIAL_AMOUNT
-	. = ..(mapload)
+//#TODO: Make these use label extension, and maybe allow coloring the sprite with a paint gun or something?
+
+/obj/machinery/portable_atmospherics/canister/get_matter_amount_modifier()
+	return 10 //10 sheets
 
 /obj/machinery/portable_atmospherics/canister/drain_power()
 	return -1

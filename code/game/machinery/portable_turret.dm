@@ -11,17 +11,23 @@
 	name = "turret"
 	icon = 'icons/obj/turrets.dmi'
 	icon_state = "turretCover"
-	anchored = 1
-
-	density = 0
+	anchored = TRUE
+	obj_flags = OBJ_FLAG_ANCHORABLE
+	density = FALSE
 	idle_power_usage = 50		//when inactive, this turret takes up constant 50 Equipment power
 	active_power_usage = 300	//when active, this turret takes up constant 300 Equipment power
-	power_channel = EQUIP	//drains power from the EQUIPMENT channel
-	max_health = 80		//turrets maximal health.
+	material = /decl/material/solid/metal/plasteel
+	initial_access = list(list(access_security, access_bridge))
+	armor  = list(
+		DEF_MELEE  = ARMOR_MELEE_RESISTANT,
+		DEF_BULLET = ARMOR_BALLISTIC_RIFLE,
+		DEF_LASER  = ARMOR_LASER_MAJOR,
+		DEF_ENERGY = ARMOR_ENERGY_RESISTANT,
+		DEF_BOMB   = ARMOR_BOMB_RESISTANT,
+	)
 
 	var/raised = 0			//if the turret cover is "open" and the turret is raised
 	var/raising= 0			//if the turret is currently opening or closing its cover
-	
 	var/auto_repair = 0		//if 1 the turret slowly repairs itself.
 	var/locked = 1			//if the turret's behaviour control access is locked
 	var/controllock = 0		//if the turret responds to control panels
@@ -57,7 +63,6 @@
 	var/wrenching = 0
 	var/last_target			//last target fired at, prevents turrets from erratically firing at all valid targets in range
 
-	initial_access = list(list(access_security, access_bridge))
 
 /obj/machinery/porta_turret/crescent
 	enabled = 0
@@ -81,6 +86,7 @@
 	malf_upgraded = 1
 	to_chat(user, "\The [src] has been upgraded. It's damage and rate of fire has been increased. Auto-regeneration system has been enabled. Power usage has increased.")
 	max_health = round(initial(max_health) * 1.5)
+	check_health()
 	shot_delay = round(initial(shot_delay) / 2)
 	auto_repair = 1
 	change_power_consumption(round(initial(active_power_usage) * 5), POWER_USE_ACTIVE)

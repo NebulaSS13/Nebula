@@ -1,6 +1,6 @@
 /obj/structure/window
 	name = "window"
-	desc = "A window."
+	desc = "A window pane."
 	icon = 'icons/obj/structures/window.dmi'
 	density = 1
 	w_class = ITEM_SIZE_NORMAL
@@ -15,7 +15,7 @@
 	atmos_canpass = CANPASS_PROC
 	handle_generic_blending = TRUE
 	hitsound = 'sound/effects/Glasshit.ogg'
-	max_health = 100
+
 
 	var/damage_per_fire_tick = 2 		// Amount of damage per fire tick. Regular windows are not fireproof so they might as well break quickly.
 	var/construction_state = 2
@@ -39,6 +39,7 @@
 /obj/structure/window/Initialize(var/ml, var/_mat, var/_reinf_mat, var/dir_to_set, var/anchored)
 	. = ..(ml, _mat, _reinf_mat)
 	if(!istype(material))
+		log_warning("\The [src] ([x], [y], [z]) had an invalid material. Deleting!")
 		. = INITIALIZE_HINT_QDEL
 	if(. != INITIALIZE_HINT_QDEL)
 		if(!isnull(anchored))
@@ -51,7 +52,7 @@
 
 // Updating connections may depend on material properties.
 /obj/structure/window/LateInitialize()
-	..()
+	. = ..()
 	//set_anchored(!constructed) // calls update_connections, potentially
 
 	base_color = get_color()
@@ -70,6 +71,12 @@
 			S.update_connections()
 			S.update_icon()
 
+/obj/structure/window/get_matter_amount_modifier()
+	return is_fulltile() ? 4.0 : 1.0
+
+/obj/structure/window/get_material_health_modifier()
+	return is_fulltile() ? 2.5 : 2.0 //Don't put too high a value because the reinforced material also uses this to add extra health
+
 /obj/structure/window/CanFluidPass(var/coming_from)
 	return (!is_fulltile() && coming_from != dir)
 
@@ -77,31 +84,27 @@
 	SHOULD_CALL_PARENT(FALSE)
 	. = shatter()
 
-/obj/structure/window/take_damage(damage = 0)
+/obj/structure/window/take_damage(amount, damage_type, damage_flags, inflicter, armor_pen, target_zone, quiet)
+	if((damage_type == BRUTE) && reinf_material) 
+		amount *= 0.25	//#TODO: once we got damage type multipliers use those instead of this
+	if(!(. = ..(amount, damage_type, damage_flags, inflicter, armor_pen, target_zone, quiet)))
+		return
+	if(!quiet)
+		playsound(loc, "glasscrack", 100, TRUE)
+
+/obj/structure/window/check_health(lastdamage, lastdamtype, lastdamflags)
 	. = ..()
-	playsound(loc, "glasscrack", 100, 1)
+	if(QDELETED(src))
+		return
+	//At low health the window comes unanchored
+	if(!reinf_material && anchored && (lastdamage > 0) && (health <= (max_health * 0.10)))
+		set_anchored(FALSE)
 
-/obj/structure/window/proc/shatter(var/display_message = 1)
-	playsound(src, "shatter", 70, 1)
-	if(display_message)
-		visible_message(SPAN_DANGER("\The [src] shatters!"))
-
-	var/debris_count = is_fulltile() ? 4 : 1
-	material.place_shards(loc, debris_count)
+/obj/structure/window/shatter(consumed = FALSE, quiet = FALSE, skip_qdel = FALSE)
+	var/debris_count = LAZYACCESS(matter, reinf_material) / SHEET_MATERIAL_AMOUNT
 	if(reinf_material)
 		reinf_material.create_object(loc, debris_count, /obj/item/stack/material/rods)
-	qdel(src)
-
-/obj/structure/window/bullet_act(var/obj/item/projectile/Proj)
-	var/proj_damage = Proj.get_structure_damage()
-	if(!proj_damage) return
-	..()
-	take_damage(proj_damage)
-
-/obj/structure/window/explosion_act(severity)
-	..()
-	if(!QDELETED(src) && (severity != 3 || prob(50)))
-		physically_destroyed()
+	. = ..()
 
 /obj/structure/window/CanPass(atom/movable/mover, turf/target, height=0, air_group=0)
 	if(istype(mover) && mover.checkpass(PASS_FLAG_GLASS))
@@ -123,20 +126,10 @@
 	return 1
 
 /obj/structure/window/hitby(atom/movable/AM, var/datum/thrownthing/TT)
-	..()
-	visible_message(SPAN_DANGER("[src] was hit by [AM]."))
-	var/tforce = 0
-	if(ismob(AM)) // All mobs have a multiplier and a size according to mob_defines.dm
-		var/mob/I = AM
-		tforce = I.mob_size * (TT.speed/THROWFORCE_SPEED_DIVISOR)
-	else if(isobj(AM))
-		var/obj/item/I = AM
-		tforce = I.throwforce * (TT.speed/THROWFORCE_SPEED_DIVISOR)
-	if(reinf_material) tforce *= 0.25
-	if(health - tforce <= 7 && !reinf_material)
-		set_anchored(FALSE)
-		step(src, get_dir(AM, src))
-	take_damage(tforce)
+	visible_message(SPAN_DANGER("[src] was hit by [AM].")) //#REMOVEME: Is this really neccessary?
+	. = ..()
+	if(!anchored && !reinf_material)
+		step(src, get_dir(AM, src)) //#TODO: Check if this isn't being done twice when being hit by stuff
 
 /obj/structure/window/attack_hand(mob/user)
 	user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
@@ -279,19 +272,15 @@
 		if(prob(50))
 			SET_STATUS_MAX(affecting_mob, STAT_WEAK, 2)
 		affecting_mob.apply_damage(10, BRUTE, def_zone, used_weapon = src)
-		hit(25)
+		take_damage(25, BRUTE, 0, affecting_mob)
 		qdel(G)
 	else
 		G.affecting.visible_message(SPAN_DANGER("[G.assailant] crushes [G.affecting] against \the [src]!"))
 		SET_STATUS_MAX(affecting_mob, STAT_WEAK, 5)
 		affecting_mob.apply_damage(20, BRUTE, def_zone, used_weapon = src)
-		hit(50)
+		take_damage(50, BRUTE, 0, affecting_mob)
 		qdel(G)
 	return TRUE
-
-/obj/structure/window/proc/hit(var/damage, var/sound_effect = 1)
-	if(reinf_material) damage *= 0.5
-	take_damage(damage)
 
 /obj/structure/window/rotate(mob/user)
 	if(!CanPhysicallyInteract(user))
@@ -369,7 +358,7 @@
 		return base_color
 	return ..()
 
-/obj/structure/window/set_color()
+/obj/structure/window/set_color(new_color)
 	paint_color = color
 	queue_icon_update()
 
@@ -444,8 +433,7 @@
 	if(reinf_material)
 		melting_point += 0.25*reinf_material.melting_point
 	if(exposed_temperature > melting_point)
-		hit(damage_per_fire_tick, 0)
-	..()
+		take_damage(damage_per_fire_tick, BURN, DAM_DISPERSED, "fire", ARMOR_ENERGY_SHIELDED, null, TRUE)
 
 /obj/structure/window/basic
 	icon_state = "window"
@@ -569,6 +557,9 @@
 	icon_state = "light[active]"
 
 //Centcomm windows
+/obj/structure/window/reinforced/crescent
+	max_health = OBJ_HEALTH_NO_DAMAGE
+
 /obj/structure/window/reinforced/crescent/attack_hand()
 	return
 

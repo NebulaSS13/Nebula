@@ -3,7 +3,6 @@
 	desc = "A strong door."
 	icon = 'icons/obj/doors/windoor.dmi'
 	icon_state = "left"
-	min_force = 4
 	hitsound = 'sound/effects/Glasshit.ogg'
 	max_health = 150 //If you change this, consiter changing ../door/window/brigdoor/ health at the bottom of this .dm file
 	visible = 0.0
@@ -12,10 +11,15 @@
 	uncreated_component_parts = null
 	atom_flags = ATOM_FLAG_NO_TEMP_CHANGE | ATOM_FLAG_CHECKS_BORDER
 	opacity = 0
-	explosion_resistance = 5
 	pry_mod = 0.5
 	base_type = /obj/machinery/door/window
 	frame_type = /obj/structure/windoor_assembly
+	material = /decl/material/solid/glass
+	armor = list(
+		DEF_MELEE = ARMOR_MELEE_MINOR - 1,
+		DEF_BOMB  = ARMOR_BOMB_MINOR - 5,
+	)
+	explosion_resistance = 5
 	var/base_state = "left"
 
 /obj/machinery/door/window/get_auto_access()
@@ -37,13 +41,9 @@
 	else
 		icon_state = "[base_state]open"
 
-/obj/machinery/door/window/proc/shatter(var/display_message = 1)
+/obj/machinery/door/window/shatter(consumed = FALSE, quiet = FALSE, skip_qdel = FALSE)
 	frame_type = null
-	new /obj/item/shard(loc)
-	playsound(src, "shatter", 70, 1)
-	if(display_message)
-		visible_message("[src] shatters!")
-	dismantle()
+	. = ..()
 
 /obj/machinery/door/window/dismantle()
 	new /obj/item/stack/cable_coil(loc, 2)
@@ -130,19 +130,13 @@
 
 	return TRUE
 
-/obj/machinery/door/window/take_damage(var/damage)
-	src.health = max(0, src.health - damage)
-	if (src.health <= 0)
-		shatter()
-		return
-
 /obj/machinery/door/window/physical_attack_hand(mob/user)
 	if(istype(user,/mob/living/carbon/human))
 		var/mob/living/carbon/human/H = user
 		if(H.species.can_shred(H))
 			playsound(src.loc, 'sound/effects/Glasshit.ogg', 75, 1)
 			visible_message("<span class='danger'>[user] smashes against the [src.name].</span>", 1)
-			take_damage(25)
+			take_damage(25, BRUTE, DAM_SHARP, user, 0)
 			return TRUE
 	return ..()
 

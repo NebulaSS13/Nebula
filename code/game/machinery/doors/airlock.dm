@@ -767,8 +767,9 @@ About the new airlock wires panel:
 			return TRUE
 		else if(!repairing)
 			// Add some minor damage as evidence of forcing.
-			if(health >= max_health)
-				take_damage(1)
+			if(!is_damaged())
+				//Bypass completely the armor, and don't make noise or pop damaged messages
+				take_damage(1, BRUTE, 0, C, ARMOR_MELEE_SHIELDED, null, TRUE)
 			if(arePowerSystemsOn())
 				to_chat(user, SPAN_WARNING("The airlock's motors resist your efforts to force it."))
 			else if(locked)
@@ -1025,6 +1026,7 @@ About the new airlock wires panel:
 				set_opacity(0)
 				hitsound = 'sound/effects/Glasshit.ogg'
 				max_health = 300
+				heal(max_health)
 				explosion_resistance = 5
 			else
 				door_color = mat.color
@@ -1072,12 +1074,12 @@ About the new airlock wires panel:
 	return
 
 // Braces can act as an extra layer of armor - they will take damage first.
-/obj/machinery/door/airlock/take_damage(var/amount, damtype=BRUTE)
+/obj/machinery/door/airlock/take_damage(amount, damage_type, damage_flags, inflicter, armor_pen, target_zone, quiet)
 	if(brace)
-		brace.take_damage(amount)
-	else
-		..()
-	update_icon()
+		amount = amount - brace.take_damage(amount, damage_type, damage_flags, inflicter, armor_pen, target_zone, quiet)
+	if(amount <= 0)
+		return 0
+	return ..(amount, damage_type, damage_flags, inflicter, armor_pen, target_zone, quiet)
 
 /obj/machinery/door/airlock/examine(mob/user)
 	. = ..()

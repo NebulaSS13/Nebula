@@ -41,7 +41,7 @@
 	update_icon(FALSE)
 
 /obj/structure/railing/get_material_health_modifier()
-	. = 0.2
+	. = 0.3
 
 /obj/structure/railing/update_material_desc(override_desc)
 	if(material)
@@ -69,24 +69,11 @@
 		return !density
 	return TRUE
 
-/obj/structure/railing/examine(mob/user)
+/obj/structure/railing/physically_destroyed(skip_qdel)
+	visible_message(SPAN_DANGER("\The [src] [material.destruction_desc]!"))
+	playsound(loc, 'sound/effects/grillehit.ogg', 50, TRUE)
+	material.place_shards(get_turf(usr))
 	. = ..()
-	if(health < max_health)
-		switch(health / max_health)
-			if(0.0 to 0.5)
-				to_chat(user, "<span class='warning'>It looks severely damaged!</span>")
-			if(0.25 to 0.5)
-				to_chat(user, "<span class='warning'>It looks damaged!</span>")
-			if(0.5 to 1.0)
-				to_chat(user, "<span class='notice'>It has a few scrapes and dents.</span>")
-
-/obj/structure/railing/take_damage(amount)
-	health -= amount
-	if(health <= 0)
-		visible_message("<span class='danger'>\The [src] [material.destruction_desc]!</span>")
-		playsound(loc, 'sound/effects/grillehit.ogg', 50, 1)
-		material.place_shards(get_turf(usr))
-		qdel(src)
 
 /obj/structure/railing/proc/NeighborsCheck(var/UpdateNeighbors = 1)
 	neighbor_status = 0
@@ -245,41 +232,32 @@
 	if(IS_WELDER(W))
 		var/obj/item/weldingtool/F = W
 		if(F.isOn())
-			if(health >= max_health)
-				to_chat(user, "<span class='warning'>\The [src] does not need repairs.</span>")
-				return
-			playsound(src.loc, 'sound/items/Welder.ogg', 50, 1)
-			if(do_after(user, 20, src))
-				if(health >= max_health)
-					return
-				user.visible_message("<span class='notice'>\The [user] repairs some damage to \the [src].</span>", "<span class='notice'>You repair some damage to \the [src].</span>")
-				health = min(health+(max_health/5), max_health)
-			return
+			if(!is_damaged())
+				to_chat(user, SPAN_WARNING("\The [src] does not need repairs."))
+				return TRUE
+			if(F.do_tool_interaction(TOOL_WELDER, user, src, 2 SECONDS, fuel_expenditure = 10, check_skill = SKILL_CONSTRUCTION))
+				if(!is_damaged())
+					return TRUE
+				user.visible_message(
+					SPAN_NOTICE("\The [user] repairs some damage to \the [src]."), 
+					SPAN_NOTICE("You repair some damage to \the [src].")
+					)
+				heal(max_health / 5)
+			return TRUE
 
 	// Install
 	if(IS_SCREWDRIVER(W))
 		if(!density)
 			to_chat(user, "<span class='notice'>You need to wrench \the [src] from back into place first.</span>")
-			return
+			return TRUE
 		user.visible_message(anchored ? "<span class='notice'>\The [user] begins unscrew \the [src].</span>" : "<span class='notice'>\The [user] begins fasten \the [src].</span>" )
 		playsound(loc, 'sound/items/Screwdriver.ogg', 75, 1)
 		if(do_after(user, 10, src) && density)
 			to_chat(user, (anchored ? "<span class='notice'>You have unfastened \the [src] from the floor.</span>" : "<span class='notice'>You have fastened \the [src] to the floor.</span>"))
 			anchored = !anchored
 			update_icon()
-		return
-
-	if(W.force && (W.damtype == BURN || W.damtype == BRUTE))
-		user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
-		visible_message("<span class='danger'>\The [src] has been [LAZYLEN(W.attack_verb) ? pick(W.attack_verb) : "attacked"] with \the [W] by \the [user]!</span>")
-		take_damage(W.force)
-		return
+		return TRUE
 	. = ..()
-
-/obj/structure/railing/explosion_act(severity)
-	..()
-	if(!QDELETED(src))
-		qdel(src)
 
 /obj/structure/railing/can_climb(var/mob/living/user, post_climb_check=0)
 	. = ..()
@@ -293,7 +271,7 @@
 	. = ..()
 	if(.)
 		if(!anchored || material.is_brittle())
-			take_damage(max_health) // Fatboy
+			physically_destroyed() // Fatboy
 
 	user.jump_layer_shift()
 	addtimer(CALLBACK(user, /mob/living/proc/jump_layer_shift_end), 2)

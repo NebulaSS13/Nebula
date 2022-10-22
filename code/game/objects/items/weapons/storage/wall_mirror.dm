@@ -60,42 +60,43 @@
 		flick("mirror_open",src)
 		return
 
-/obj/structure/mirror/take_damage(damage)
-	if(prob(damage))
-		visible_message(SPAN_WARNING("[src] shatters!"))
-		shatter()
-	. = ..()
-
 /obj/structure/mirror/emp_act(severity)
 	mirror_storage.emp_act(severity)
-	..()
+	. = ..()
 
 /obj/structure/mirror/attack_hand(mob/user)
-	use_mirror(user)
-
+	return use_mirror(user)
+	
 /obj/structure/mirror/proc/use_mirror(var/mob/living/carbon/human/user)
 	if(shattered)
 		to_chat(user, SPAN_WARNING("You enter the key combination for the style you want on the panel, but the nanomachines inside \the [src] refuse to come out."))
 		return
 	open_mirror_ui(user, ui_users, "SalonPro Nano-Mirror&trade;", mirror = src)
+	return TRUE
 
-/obj/structure/mirror/proc/shatter()
-	if(shattered)	return
-	shattered = TRUE
-	icon_state = "mirror_broke"
-	var/turf/T = get_turf(src)
-	T.visible_message(SPAN_DANGER("\The [src] [material ? material.destruction_desc : "shatters"]!"))
-	material.place_shards(T)
-	playsound(src, "shatter", 70, 1)
-	desc = "Oh no, seven years of bad luck!"
-
-/obj/structure/mirror/bullet_act(var/obj/item/projectile/Proj)
-	if(prob(Proj.get_structure_damage() * 2))
-		if(!shattered)
-			shatter()
+/obj/structure/mirror/check_health(lastdamage, lastdamtype, lastdamflags)
+	var/old_shattered = shattered
+	. = ..()
+	if(QDELETED(src))
+		return
+	shattered = health < (max_health * 0.25)
+	if((shattered != old_shattered))
+		if(shattered)
+			shattered = TRUE
+			desc = "Oh no, seven years of bad luck!"
+			hitsound = 'sound/effects/hit_on_shattered_glass.ogg'
+			visible_message(SPAN_DANGER("\The [src] [material ? material.destruction_desc : "shatters"]!"))
+			playsound(src, "shatter", 70, TRUE)
+			material.place_shards(get_turf(src))
 		else
-			playsound(src, 'sound/effects/hit_on_shattered_glass.ogg', 70, 1)
-	..()
+			shattered = FALSE
+			desc = initial(desc)
+			hitsound = initial(hitsound)? initial(hitsound) : material.hitsound
+		update_icon()
+
+/obj/structure/mirror/on_update_icon()
+	. = ..()
+	icon_state = shattered? "mirror_broke" : initial(icon_state)
 
 /obj/item/mirror
 	name = "mirror"

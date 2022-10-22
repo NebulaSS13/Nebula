@@ -41,7 +41,7 @@
 // Used with the build type selection multitool extension. Return a list of possible build types to allow multitool toggle.
 /obj/item/stock_parts/circuitboard/proc/get_buildable_types()
 
-/obj/item/stock_parts/circuitboard/Initialize()
+/obj/item/stock_parts/circuitboard/Initialize(ml, material_key)
 	. = ..()
 	if(buildtype_select)
 		if(get_extension(src, /datum/extension/interactive/multitool))

@@ -41,7 +41,7 @@
 
 	//If we should take any damage apply it here
 	if(. > 0)
-		return take_damage(., BRUTE, 0,  wear_cause, ARMOR_MELEE_SHIELDED, null, TRUE)
+		return take_damage(., BRUTE, 0,  wear_cause, ARMOR_MELEE_SHIELDED, null, TRUE) //Bypasses armor completely
 	return 0
 
 /obj/item/proc/update_force()

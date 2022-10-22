@@ -5,6 +5,10 @@
 	icon_state = "folded_wall"
 	material = /decl/material/solid/plastic
 	w_class = ITEM_SIZE_NORMAL
+	armor = list(
+		DEF_MELEE  = ARMOR_MELEE_SMALL,
+		DEF_ENERGY = ARMOR_ENERGY_MINOR,
+	)
 	var/deploy_path = /obj/structure/inflatable/wall
 	var/inflatable_health
 
@@ -93,11 +97,6 @@
 /obj/structure/inflatable/CanPass(atom/movable/mover, turf/target, height=0, air_group=0)
 	return 0
 
-/obj/structure/inflatable/bullet_act(var/obj/item/projectile/Proj)
-	take_damage(Proj.get_structure_damage())
-	if(QDELETED(src))
-		return PROJECTILE_CONTINUE
-
 /obj/structure/inflatable/explosion_act(severity)
 	..()
 	if(!QDELETED(src))
@@ -124,11 +123,10 @@
 	playsound(src, 'sound/effects/tape.ogg', 50, TRUE)
 	last_damage_message = null
 	to_chat(user, SPAN_NOTICE("You tape up some of the damage to \the [src]."))
-	health = clamp(health + 3, 0, max_health)
+	heal(3)
 	taped = TRUE
 
 /obj/structure/inflatable/attackby(obj/item/W, mob/user)
-
 	if((W.damtype == BRUTE || W.damtype == BURN) && (W.can_puncture() || W.force > 10))
 		visible_message(SPAN_DANGER("\The [user] pierces \the [src] with \the [W]!"))
 		deflate(TRUE)
@@ -141,7 +139,7 @@
 
 /obj/structure/inflatable/physically_destroyed(var/skip_qdel)
 	SHOULD_CALL_PARENT(FALSE)
-	. = deflate(1)
+	. = deflate(TRUE)
 
 /obj/structure/inflatable/CtrlClick()
 	return hand_deflate()

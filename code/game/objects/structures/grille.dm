@@ -22,6 +22,18 @@
 	var/list/connections
 	var/list/other_connections
 
+/obj/structure/grille/Initialize()
+	. = ..()
+	if(!istype(material))
+		. = INITIALIZE_HINT_QDEL
+	if(. != INITIALIZE_HINT_QDEL)
+		. = INITIALIZE_HINT_LATELOAD
+
+/obj/structure/grille/LateInitialize()
+	..()
+	update_connections(1)
+	update_icon()
+
 /obj/structure/grille/clear_connections()
 	connections = null
 	other_connections = null
@@ -38,18 +50,6 @@
 		desc = "A lattice of [material.solid_name] rods, with screws to secure it to the floor."
 	else
 		..()
-
-/obj/structure/grille/Initialize()
-	. = ..()
-	if(!istype(material))
-		. = INITIALIZE_HINT_QDEL
-	if(. != INITIALIZE_HINT_QDEL)
-		. = INITIALIZE_HINT_LATELOAD
-
-/obj/structure/grille/LateInitialize()
-	..()
-	update_connections(1)
-	update_icon()
 
 /obj/structure/grille/explosion_act(severity)
 	..()
@@ -85,12 +85,16 @@
 				add_overlay(I)
 
 /obj/structure/grille/Bumped(atom/user)
-	if(ismob(user)) shock(user, 70)
+	if(ismob(user)) 
+		shock(user, 70)
 
 /obj/structure/grille/attack_hand(mob/user)
+	if(user.a_intent == I_HELP || user.a_intent == I_GRAB)
+		return ..()
 
+	//#TODO: Use mob's attack stances for this.
 	user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
-	playsound(loc, 'sound/effects/grillehit.ogg', 80, 1)
+	playsound(loc, hitsound, 80, 1)
 	user.do_attack_animation(src)
 
 	if(shock(user, 70))
@@ -107,7 +111,8 @@
 	attack_generic(user,damage_dealt,attack_message)
 
 /obj/structure/grille/CanPass(atom/movable/mover, turf/target, height=0, air_group=0)
-	if(air_group || (height==0)) return 1
+	if(air_group || (height==0)) 
+		return 1
 	if(istype(mover) && mover.checkpass(PASS_FLAG_GRILLE))
 		return 1
 	else
@@ -117,13 +122,15 @@
 			return !density
 
 /obj/structure/grille/bullet_act(var/obj/item/projectile/Proj)
-	if(!Proj)	return
+	if(!Proj)
+		return
 
 	//Flimsy grilles aren't so great at stopping projectiles. However they can absorb some of the impact
 	var/damage = Proj.get_structure_damage()
 	var/passthrough = 0
 
-	if(!damage) return
+	if(!damage) 
+		return
 
 	//20% chance that the grille provides a bit more cover than usual. Support structure for example might take up 20% of the grille's area.
 	//If they click on the grille itself then we assume they are aiming at the grille itself and the extra cover behaviour is always used.
@@ -147,14 +154,13 @@
 		. = PROJECTILE_CONTINUE
 		damage = clamp(0, (damage - Proj.damage)*(Proj.damage_type == BRUTE? 0.4 : 1), 10) //if the bullet passes through then the grille avoids most of the damage
 
-	take_damage(damage*0.2)
+	take_damage(damage*0.2, Proj.damage_type, Proj.damage_flags(), Proj, Proj.def_zone)
 
 /obj/structure/grille/proc/cut_grille()
-	playsound(loc, 'sound/items/Wirecutter.ogg', 100, 1)
 	if(destroyed)
 		qdel(src)
 	else
-		set_density(0)
+		set_density(FALSE)
 		if(material)
 			material.create_object(get_turf(src), 1, parts_type)
 		destroyed = TRUE
@@ -163,24 +169,24 @@
 
 /obj/structure/grille/attackby(obj/item/W, mob/user)
 	if(IS_WIRECUTTER(W))
-		if(!material.conductive || !shock(user, 100))
+		if((!(obj_flags & OBJ_FLAG_CONDUCTIBLE)|| !shock(user, 100)) && W.do_tool_interaction(TOOL_WIRECUTTERS, usr, src, 2 SECONDS))
 			cut_grille()
+		return TRUE
 
 	else if((IS_SCREWDRIVER(W)) && (istype(loc, /turf/simulated) || anchored))
-		if(!shock(user, 90))
-			playsound(loc, 'sound/items/Screwdriver.ogg', 100, 1)
+		if(!shock(user, 90) && W.do_tool_interaction(TOOL_SCREWDRIVER, usr, src, 1 SECOND))
 			anchored = !anchored
 			user.visible_message(SPAN_NOTICE("[user] [anchored ? "fastens" : "unfastens"] the grille."), \
 								 SPAN_NOTICE("You have [anchored ? "fastened the grille to" : "unfastened the grill from"] the floor."))
 			update_connections(1)
 			update_icon()
-			return
+		return TRUE
 
 //window placing
 	else if(istype(W,/obj/item/stack/material))
 		var/obj/item/stack/material/ST = W
 		if(ST.material.opacity > 0.7)
-			return 0
+			return
 
 		var/dir_to_set = 5
 		if(!is_on_frame())
@@ -189,23 +195,25 @@
 			else
 				dir_to_set = get_dir(loc, user)
 				if(dir_to_set & (dir_to_set - 1)) //Only works for cardinal direcitons, diagonals aren't supposed to work like this.
-					to_chat(user, "<span class='notice'>You can't reach.</span>")
+					to_chat(user, SPAN_NOTICE("You can't reach."))
 					return
 		place_window(user, loc, dir_to_set, ST)
-		return
+		return TRUE
+	return ..()
 
-	else if(!(W.obj_flags & OBJ_FLAG_CONDUCTIBLE) || !shock(user, 70))
-		user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
-		user.do_attack_animation(src)
-		playsound(loc, 'sound/effects/grillehit.ogg', 80, 1)
-		switch(W.damtype)
-			if(BURN)
-				take_damage(W.force)
-			if(BRUTE)
-				take_damage(W.force * 0.1)
-	..()
+/obj/structure/grille/bash(obj/item/W, mob/user)
+	if(W.obj_flags & OBJ_FLAG_CONDUCTIBLE)
+		shock(user, 70)
+	. = ..()
+
+/obj/structure/grille/take_damage(amount, damage_type, damage_flags, inflicter, armor_pen, target_zone, quiet)
+	//#TODO: Implement armor that blocks only a percentage of the damage, instead of a fixed threshold
+	if(damage_type == BRUTE)
+		. = ..(amount * 0.1, damage_type, damage_flags, inflicter, armor_pen, target_zone, quiet)
+	. = ..()
 
 /obj/structure/grille/physically_destroyed(var/skip_qdel)
+	//#FIXME: The logic for handling the destroyed state is kind of cursed..
 	SHOULD_CALL_PARENT(FALSE)
 	if(!destroyed)
 		visible_message(SPAN_DANGER("\The [src] falls to pieces!"))
@@ -216,41 +224,38 @@
 // returns 1 if shocked, 0 otherwise
 /obj/structure/grille/proc/shock(mob/user, prb)
 	if(!anchored || destroyed)		// anchored/destroyed grilles are never connected
-		return 0
-	if(!(material.conductive))
-		return 0
+		return
+	if(!(obj_flags & OBJ_FLAG_CONDUCTIBLE))
+		return
 	if(!prob(prb))
-		return 0
+		return
 	if(!in_range(src, user))//To prevent TK and exosuit users from getting shocked
-		return 0
+		return
 	var/turf/T = get_turf(src)
 	var/obj/structure/cable/C = T.get_cable_node()
-	if(C)
-		if(electrocute_mob(user, C, src))
-			if(C.powernet)
-				C.powernet.trigger_warning()
-			spark_at(src, cardinal_only = TRUE)
-			if(HAS_STATUS(user, STAT_STUN))
-				return 1
-		else
-			return 0
-	return 0
+	if(C && electrocute_mob(user, C, src))
+		if(C.powernet)
+			C.powernet.trigger_warning()
+		spark_at(src, cardinal_only = TRUE)
+		if(HAS_STATUS(user, STAT_STUN))
+			return TRUE
+	return
 
 /obj/structure/grille/fire_act(datum/gas_mixture/air, exposed_temperature, exposed_volume)
-	if(!destroyed)
-		if(exposed_temperature > material.melting_point)
-			take_damage(1)
-	..()
+	if(destroyed)
+		return
+	. = ..()
 
 // Used in mapping to avoid
 /obj/structure/grille/broken
-	destroyed = 1
+	destroyed = TRUE
 	icon_state = "broken"
-	density = 0
+	density = FALSE
 
-/obj/structure/grille/broken/Initialize()
+/obj/structure/grille/broken/Initialize(ml, _mat, _reinf_mat)
 	. = ..()
-	take_damage(rand(1, 5)) //In the destroyed but not utterly threshold.
+	if(. != INITIALIZE_HINT_QDEL && can_take_damage() && ml)
+		take_damage(rand(1, max_health * 0.25)) //In the destroyed but not utterly threshold.
 
 /obj/structure/grille/cult
 	name = "cult grille"
@@ -265,6 +270,9 @@
 /obj/structure/grille/proc/is_on_frame()
 	if(locate(/obj/structure/wall_frame) in loc)
 		return TRUE
+
+/obj/structure/grille/wood
+	material = /decl/material/solid/wood/mahogany
 
 /proc/place_grille(mob/user, loc, obj/item/stack/material/rods/ST)
 	if(ST.in_use)

@@ -264,6 +264,7 @@
 
 /**
  * Causes the target atom to take damages if it can be damaged. Cannot be used to heal the target. The damage value has to be positive.
+ * Returns the amount of damage that was actually dealt to the machine from the incoming damage, after armor and etc... Must return a number.
  * 
  * inflicter is a string or an atom which caused the damage.
  * armor_pen is the armor penetration value.

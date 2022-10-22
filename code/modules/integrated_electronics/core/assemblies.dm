@@ -48,6 +48,9 @@
 		COLOR_ASSEMBLY_PURPLE
 		)
 
+/obj/item/electronic_assembly/get_material_health_modifier()
+	return 0.3
+
 /obj/item/electronic_assembly/examine(mob/user)
 	. = ..()
 	if(IC_FLAG_ANCHORABLE & circuit_flags)
@@ -291,16 +294,6 @@
 		return
 	add_overlay(overlay_image('icons/obj/assemblies/electronic_setups.dmi', "[icon_state]-color", detail_color))
 
-/obj/item/electronic_assembly/examine(mob/user)
-	. = ..()
-	for(var/I in assembly_components)
-		var/obj/item/integrated_circuit/IC = I
-		IC.external_examine(user)
-		if(opened)
-			IC.internal_examine(user)
-	if(opened)
-		interact(user)
-
 //This only happens when this EA is loaded via the printer
 /obj/item/electronic_assembly/proc/post_load()
 	for(var/I in assembly_components)
@@ -483,9 +476,6 @@
 
 /obj/item/electronic_assembly/attack_self(mob/user)
 	interact(user)
-
-/obj/item/electronic_assembly/bullet_act(var/obj/item/projectile/P)
-	take_damage(P.damage)
 
 /obj/item/electronic_assembly/emp_act(severity)
 	. = ..()

@@ -147,29 +147,16 @@
 	icon_state = "window_full"
 
 /obj/structure/window/reinforced/holowindow/attackby(obj/item/W, mob/user)
-
-	if(!istype(W) || W.item_flags & ITEM_FLAG_NO_BLUDGEON) return
-
 	if(IS_SCREWDRIVER(W) || IS_CROWBAR(W) || IS_WRENCH(W))
-		to_chat(user, ("<span class='notice'>It's a holowindow, you can't dismantle it!</span>"))
-	else
-		if(W.damtype == BRUTE || W.damtype == BURN)
-			hit(W.force)
-			if(health <= 7)
-				anchored = 0
-				update_nearby_icons()
-				step(src, get_dir(user, src))
-		else
-			playsound(loc, 'sound/effects/Glasshit.ogg', 75, 1)
-		..()
-	return
+		to_chat(user, SPAN_NOTICE("It's a holowindow, you can't dismantle it!"))
+		return TRUE
+	return ..()
 
-/obj/structure/window/reinforced/holowindow/shatter(var/display_message = 1)
-	playsound(src, "shatter", 70, 1)
-	if(display_message)
+/obj/structure/window/reinforced/holowindow/shatter(consumed, quiet, skip_qdel)
+	playsound(src, "shatter", 70, TRUE)
+	if(quiet)
 		visible_message("[src] fades away as it shatters!")
 	qdel(src)
-	return
 
 /obj/structure/window/reinforced/holowindow/disappearing
 
