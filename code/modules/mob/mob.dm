@@ -1202,8 +1202,10 @@
 /mob/verb/whisper_wrapper()
 	set name = ".Whisper"
 	set hidden = TRUE
-	SStyping.set_indicator_state(client, TRUE)
+	if(config.show_typing_indicator_for_whispers)
+		SStyping.set_indicator_state(client, TRUE)
 	var/message = input("","me (text)") as text|null
-	SStyping.set_indicator_state(client, FALSE)
+	if(config.show_typing_indicator_for_whispers)
+		SStyping.set_indicator_state(client, FALSE)
 	if (message)
 		whisper(message)

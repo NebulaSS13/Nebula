@@ -262,6 +262,8 @@ var/global/list/gamemode_cache = list()
 
 	var/expanded_alt_interactions = FALSE // Set to true to enable look, grab, drop, etc. in the alt interaction menu.
 
+	var/show_typing_indicator_for_whispers = FALSE // Do whispers show typing indicators overhead?
+
 /datum/configuration/VV_hidden()
 	. = ..() | protected_vars
 
@@ -816,6 +818,9 @@ var/global/list/gamemode_cache = list()
 
 				if("no_throttle_localhost")
 					config.no_throttle_localhost = TRUE
+
+				if("show_typing_indicator_for_whispers")
+					config.show_typing_indicator_for_whispers = TRUE
 
 				else
 					log_misc("Unknown setting in configuration: '[name]'")

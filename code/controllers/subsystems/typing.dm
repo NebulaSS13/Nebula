@@ -1,6 +1,6 @@
 SUBSYSTEM_DEF(typing)
 	name = "Typing"
-	flags = SS_BACKGROUND | SS_NO_INIT
+	flags = SS_BACKGROUND
 	wait = 0.5 SECONDS
 
 	/// The skin control to poll for TYPING_STATE_INPUT status.
@@ -19,7 +19,7 @@ SUBSYSTEM_DEF(typing)
 	/// The highest index in a status entry.
 	var/const/MAX_INDEX = 5
 	/// Matches input bar verbs that should set TYPING_STATE_INPUT.
-	var/regex/match_verbs
+	var/static/regex/match_verbs
 	/// A list of clients waiting to be polled for input state.
 	var/list/client/queue = list()
 	/// A list of ckey to list, containing current state data. See .proc/get_entry for details.
@@ -35,7 +35,10 @@ SUBSYSTEM_DEF(typing)
 	*/
 
 /datum/controller/subsystem/typing/Initialize(start_timeofday)
-	match_verbs = regex("^(Me|Say) +\"?\\w+")
+	if(config.show_typing_indicator_for_whispers)
+		match_verbs = regex("^(Me|Say|Whisper) +\"?\\w+")
+	else
+		match_verbs = regex("^(Me|Say) +\"?\\w+")
 	. = ..()
 
 /datum/controller/subsystem/typing/Recover()
