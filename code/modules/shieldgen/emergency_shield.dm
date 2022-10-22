@@ -6,7 +6,11 @@
 	density = TRUE
 	opacity = FALSE
 	anchored = TRUE
+	material = null
 	max_health = 200 //The shield can only take so much beating (prevents perma-prisons)
+	hitsound = 'sound/effects/EMPulse.ogg'
+	obj_flags = OBJ_FLAG_MOVES_UNSUPPORTED | OBJ_FLAG_NOFALL
+	anchor_fall = TRUE
 	var/shield_generate_power = 7500	//how much power we use when regenerating
 	var/shield_idle_power = 1500		//how much power we use when just being sustained.
 
@@ -16,21 +20,18 @@
 /obj/machinery/shield/malfai
 	name = "emergency forcefield"
 	desc = "A weak forcefield which seems to be projected by the emergency atmosphere containment field."
-	health = max_health/2 // Half health, it's not suposed to resist much.
+	max_health = 100 // Half health, it's not suposed to resist much.
 
 /obj/machinery/shield/malfai/Process()
-	health -= 0.5 // Slowly lose integrity over time
-	check_failure()
+	take_damage(0.5, armor_pen = ARMOR_MELEE_SHIELDED, quiet = TRUE) // Slowly lose integrity over time
 
-/obj/machinery/shield/proc/check_failure()
-	if (src.health <= 0)
-		visible_message("<span class='notice'>\The [src] dissipates!</span>")
-		qdel(src)
-		return
-
-/obj/machinery/shield/Initialize()
+/obj/machinery/shield/physically_destroyed(skip_qdel)
+	visible_message(SPAN_NOTICE("\The [src] dissipates!"))
 	. = ..()
-	src.set_dir(pick(1,2,3,4))
+
+/obj/machinery/shield/Initialize(ml)
+	. = ..()
+	set_dir(pick(1,2,3,4))
 	update_nearby_tiles(need_rebuild=1)
 
 /obj/machinery/shield/Destroy()
@@ -43,65 +44,24 @@
 	if(!height || air_group) return 0
 	else return ..()
 
-/obj/machinery/shield/attackby(obj/item/W, mob/user)
-	if(!istype(W)) return
-
-	//Calculate damage
-	var/aforce = W.force
-	if(W.damtype == BRUTE || W.damtype == BURN)
-		src.health -= aforce
-
-	//Play a fitting sound
-	playsound(src.loc, 'sound/effects/EMPulse.ogg', 75, 1)
-
-	check_failure()
-	set_opacity(1)
-	spawn(20) if(!QDELETED(src)) set_opacity(0)
-	user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
-
-	..()
-
-/obj/machinery/shield/bullet_act(var/obj/item/projectile/Proj)
-	health -= Proj.get_structure_damage()
-	..()
-	check_failure()
-	set_opacity(1)
-	spawn(20) if(!QDELETED(src)) set_opacity(0)
-
-/obj/machinery/shield/explosion_act(severity)
+/obj/machinery/shield/check_health(lastdamage, lastdamtype, lastdamflags)
+	if((lastdamage > 0) && (lastdamtype == BRUTE || lastdamtype == BURN))
+		do_flicker()
 	. = ..()
-	if(. && ((severity == 1 && prob(75)) || (severity == 2 && prob(50)) || (severity == 3 && prob(25))))
-		physically_destroyed()
 
-/obj/machinery/shield/emp_act(severity)
-	switch(severity)
-		if(1)
-			qdel(src)
-		if(2)
-			if(prob(50))
-				qdel(src)
+///Makes the shield flicker
+/obj/machinery/shield/proc/do_flicker()
+	set waitfor = FALSE
+	set_opacity(TRUE)
+	sleep(2 SECONDS)
+	if(QDELETED(src))
+		return
+	set_opacity(FALSE)
 
 /obj/machinery/shield/hitby(AM, var/datum/thrownthing/TT)
-	..()
 	//Let everyone know we've been hit!
 	visible_message(SPAN_DANGER("\The [src] was hit by \the [AM]."))
-	//Super realistic, resource-intensive, real-time damage calculations.
-	var/tforce = 0
-	if(ismob(AM)) // All mobs have a multiplier and a size according to mob_defines.dm
-		var/mob/I = AM
-		tforce = I.mob_size * (TT.speed/THROWFORCE_SPEED_DIVISOR)
-	else
-		var/obj/O = AM
-		tforce = O.throwforce * (TT.speed/THROWFORCE_SPEED_DIVISOR)
-	src.health -= tforce
-	//This seemed to be the best sound for hitting a force field.
-	playsound(src.loc, 'sound/effects/EMPulse.ogg', 100, 1)
-	check_failure()
-	//The shield becomes dense to absorb the blow.. purely asthetic.
-	set_opacity(1)
-	spawn(20)
-		if(!QDELETED(src))
-			set_opacity(0)
+	. = ..()
 
 /obj/machinery/shieldgen
 	name = "Emergency shield projector"
@@ -112,7 +72,10 @@
 	opacity = 0
 	anchored = 0
 	initial_access = list(access_engine)
+	obj_flags = OBJ_FLAG_ANCHORABLE | OBJ_FLAG_HOLLOW
 	max_health = 100
+	use_power = POWER_USE_OFF
+	idle_power_usage = 0	
 	var/active = 0
 	var/malfunction = 0 //Malfunction causes parts of the shield to slowly dissapate
 	var/list/deployed_shields = list()
@@ -120,8 +83,6 @@
 	var/is_open = 0 //Whether or not the wires are exposed
 	var/locked = 0
 	var/check_delay = 60	//periodically recheck if we need to rebuild a shield
-	use_power = POWER_USE_OFF
-	idle_power_usage = 0
 
 /obj/machinery/shieldgen/Destroy()
 	collapse_shields()
@@ -170,7 +131,8 @@
 
 /obj/machinery/shieldgen/power_change()
 	. = ..()
-	if(!. || !active) return
+	if(!. || !active)
+		return
 	if (stat & NOPOWER)
 		collapse_shields()
 	else
@@ -198,40 +160,20 @@
 		else
 			check_delay--
 
-/obj/machinery/shieldgen/proc/checkhp()
-	if(health <= 30)
-		src.malfunction = 1
-	if(health <= 0)
-		spawn(0)
-			explosion(get_turf(src.loc), 0, 0, 1, 0, 0, 0)
-		qdel(src)
-	update_icon()
-	return
-
-/obj/machinery/shieldgen/explosion_act(severity)
+/obj/machinery/shieldgen/check_health(lastdamage, lastdamtype, lastdamflags)
+	if(!malfunction && (health <= 30))
+		trigger_malfunction() //#FIXME: Probably should use the broken flag and broken reason?
 	. = ..()
-	if(.)
-		if(severity == 1)
-			health -= 75
-		else if(severity == 2)
-			health -= 30
-			if(prob(15))
-				malfunction = 1
-		else if(severity == 3)
-			health -= 10
-		checkhp()
 
-/obj/machinery/shieldgen/emp_act(severity)
-	switch(severity)
-		if(1)
-			src.health /= 2 //cut health in half
-			malfunction = 1
-			locked = pick(0,1)
-		if(2)
-			if(prob(50))
-				src.health *= 0.3 //chop off a third of the health
-				malfunction = 1
-	checkhp()
+/obj/machinery/shieldgen/melt()
+	var/deloc = get_turf(src.loc)
+	. = ..() //Deleted in melt
+	explosion(deloc, 0, 0, 1, 0, 0, 0)
+
+/obj/machinery/shieldgen/physically_destroyed(skip_qdel)
+	. = ..(TRUE)
+	explosion(loc, 0, 0, 1, 0, 0, 0)
+	qdel(src)
 
 /obj/machinery/shieldgen/interface_interact(mob/user)
 	if(!CanInteract(user, DefaultTopicState()))
@@ -259,58 +201,64 @@
 	return TRUE
 
 /obj/machinery/shieldgen/emag_act(var/remaining_charges, var/mob/user)
+	. = ..()
 	if(!malfunction)
-		malfunction = 1
-		update_icon()
+		trigger_malfunction()
 		return 1
 
-/obj/machinery/shieldgen/attackby(obj/item/W, mob/user)
-	if(IS_SCREWDRIVER(W))
-		playsound(src.loc, 'sound/items/Screwdriver.ogg', 100, 1)
-		if(is_open)
-			to_chat(user, "<span class='notice'>You close the panel.</span>")
-			is_open = 0
-		else
-			to_chat(user, "<span class='notice'>You open the panel and expose the wiring.</span>")
-			is_open = 1
+/obj/machinery/shieldgen/proc/trigger_malfunction()
+	if(malfunction)
+		return
+	malfunction = TRUE
+	update_icon()
 
-	else if(IS_COIL(W) && malfunction && is_open)
-		var/obj/item/stack/cable_coil/coil = W
-		to_chat(user, "<span class='notice'>You begin to replace the wires.</span>")
-		//if(do_after(user, min(60, round( ((max_health/health)*10)+(malfunction*10) ))) //Take longer to repair heavier damage
-		if(do_after(user, 30,src))
-			if (coil.use(1))
-				health = max_health
-				malfunction = 0
-				to_chat(user, "<span class='notice'>You repair the [src]!</span>")
-				update_icon()
+/obj/machinery/shieldgen/can_repair(mob/user)
+	return ..() || malfunction
+	
+/obj/machinery/shieldgen/can_repair_with(obj/item/tool, mob/user)
+	return ..() || IS_COIL(tool)
 
-	else if(IS_WRENCH(W))
-		if(locked)
-			to_chat(user, "The bolts are covered, unlocking this would retract the covers.")
+//Moved here the repair code to clear the malfunction flag
+/obj/machinery/shieldgen/handle_repair(mob/user, obj/item/tool)
+	if(IS_COIL(tool))
+		//#TODO: Check if cables coils are hard intercepted by terminal connectors components
+		if(!panel_open)
+			to_chat(user, SPAN_WARNING("You must open the maintenance panel first to replace the wiring!"))
 			return
-		if(anchored)
-			playsound(src.loc, 'sound/items/Ratchet.ogg', 100, 1)
-			to_chat(user, "<span class='notice'>'You unsecure the [src] from the floor!</span>")
-			if(active)
-				to_chat(user, "<span class='notice'>The [src] shuts off!</span>")
-				src.shields_down()
-			anchored = 0
-		else
-			if(isspaceturf(get_turf(src))) return //No wrenching these in space!
-			playsound(src.loc, 'sound/items/Ratchet.ogg', 100, 1)
-			to_chat(user, "<span class='notice'>You secure the [src] to the floor!</span>")
-			anchored = 1
+		var/obj/item/stack/cable_coil/coil = tool
+		to_chat(user, SPAN_NOTICE("You begin replacing the wiring."))
+		if(user.do_skilled(3 SECONDS, SKILL_ELECTRICAL, src) && coil.use(1) && malfunction)
+			//Really bad people get shocked
+			if(!(stat & NOPOWER) && user.skill_fail_prob(SKILL_ELECTRICAL, 60, SKILL_BASIC))
+				var/power_src = get_first_working_power_source()
+				if(power_src && electrocute_mob(user, power_src, src))
+					to_chat(user, SPAN_DANGER("You wired the thing in reverse and electrocuted yourself!"))
+				return
+			to_chat(user, SPAN_NOTICE("You successfully replaced the wiring!"))
+			malfunction = FALSE
+			update_icon()
+		return TRUE
+	
+	. = ..()
 
+/obj/machinery/shieldgen/wrench_floor_bolts(mob/user, delay)
+	if(locked)
+		to_chat(user, SPAN_WARNING("The bolts are covered, unlocking this would retract the covers."))
+		return
+	. = ..()
+	if(!anchored && active)
+		to_chat(user, SPAN_NOTICE("The [src] shuts off!"))
+		shields_down()
 
-	else if(istype(W, /obj/item/card/id) || istype(W, /obj/item/modular_computer/pda))
-		if(src.allowed(user))
-			src.locked = !src.locked
-			to_chat(user, "The controls are now [src.locked ? "locked." : "unlocked."]")
+/obj/machinery/shieldgen/attackby(obj/item/W, mob/user)
+	if(istype(W, /obj/item/card/id) || istype(W, /obj/item/modular_computer/pda))
+		if(allowed(user))
+			locked = !locked
+			to_chat(user, SPAN_NOTICE("The controls are now [locked ? "locked." : "unlocked."]"))
 		else
-			to_chat(user, "<span class='warning'>Access denied.</span>")
-	else
-		..()
+			to_chat(user, SPAN_WARNING("Access denied."))
+		return TRUE
+	return ..()
 
 
 /obj/machinery/shieldgen/on_update_icon()

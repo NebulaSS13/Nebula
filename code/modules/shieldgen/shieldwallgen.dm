@@ -334,6 +334,12 @@
 		if(3)
 			G.storedpower -= rand(5000, min(G.storedpower, 15000))
 
+/obj/machinery/shieldwall/lava_act()
+	return FALSE
+
+/obj/machinery/shieldwall/can_burn()
+	return FALSE
+
 /obj/machinery/shieldwall/CanPass(atom/movable/mover, turf/target, height=0, air_group=0)
 	if(air_group || (height==0)) return 1
 
