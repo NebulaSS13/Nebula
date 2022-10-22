@@ -17,7 +17,7 @@
 		catch(var/exception/e)
 			failures += "Runtime during creation of [path]: [e]"
 
-	//Create tests
+	// Create tests
 	var/list/constant_tests = list()
 	for(var/test_path in subtypesof(/datum/item_unit_test/constant))
 		constant_tests += new test_path(src)
@@ -25,14 +25,16 @@
 	for(var/test_path in subtypesof(/datum/item_unit_test/volatile))
 		volatile_tests += new test_path(src)
 
-	//Run tests on each objects
+	// Run tests on each object.
 	for(var/objpath in obj_test_instances)
 		//Run constant tests first
 		for(var/datum/item_unit_test/T in constant_tests)
-			T.run_test(obj_test_instances[objpath])
+			if(!T.run_test(obj_test_instances[objpath]))
+				failures += "Failed constant test: [objpath], [T.type]"
 		//Run volatile tests second
 		for(var/datum/item_unit_test/T in volatile_tests)
-			T.run_test(obj_test_instances[objpath])
+			if(!T.run_test(obj_test_instances[objpath]))
+				failures += "Failed volatile test: [objpath], [T.type]"
 
 	if(length(failures))
 		fail("[length(failures)] issue\s with item [length(failures) > 1? "were" : "was"] found:\n[jointext(failures, "\n")]")
@@ -54,7 +56,7 @@
 	IT = _IT
 
 /datum/item_unit_test/proc/run_test(var/obj/item/I)
-	return FALSE
+	return !QDELETED(I)
 
 //Checks that don't modify the objects
 /datum/item_unit_test/constant
