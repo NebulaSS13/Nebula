@@ -109,13 +109,18 @@
 	var/debug = 0
 	var/req_authorizations = 2
 	var/list/authorized = list()
+	var/list/original_authorization
+
+/obj/machinery/computer/shuttle_control/emergency/Initialize()
+	. = ..()
+	original_authorization = authorized?.Copy()
 
 /obj/machinery/computer/shuttle_control/emergency/proc/has_authorization()
 	return (authorized.len >= req_authorizations || emagged)
 
 /obj/machinery/computer/shuttle_control/emergency/proc/reset_authorization()
 	//no need to reset emagged status. If they really want to go back to the station they can.
-	authorized = initial(authorized)
+	authorized = original_authorization?.Copy()
 
 //returns 1 if the ID was accepted and a new authorization was added, 0 otherwise
 /obj/machinery/computer/shuttle_control/emergency/proc/read_authorization(var/obj/item/ident)

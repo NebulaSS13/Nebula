@@ -211,7 +211,7 @@
 
 /obj/item/rig/emag_act(var/remaining_charges, var/mob/user)
 	if(!subverted)
-		req_access.Cut()
+		req_access?.Cut()
 		locked = 0
 		subverted = 1
 		to_chat(user, "<span class='danger'>You short out the access protocol for the suit.</span>")

@@ -77,7 +77,13 @@
 	var/on_turf = isturf(loc)
 	. = ..()
 	if(. && on_turf != isturf(loc))
-		queue_icon_update()
+		update_icon()
+
+/obj/item/stack/forceMove()
+	var/on_turf = isturf(loc)
+	. = ..()
+	if(. && on_turf != isturf(loc))
+		update_icon()
 
 /obj/item/stack/attack_self(mob/user)
 	list_recipes(user)

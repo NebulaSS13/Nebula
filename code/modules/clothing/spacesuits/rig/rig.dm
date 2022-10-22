@@ -103,6 +103,8 @@
 
 	var/banned_modules = list()
 
+	var/list/original_access // Used to restore access after emagging/mending
+
 /obj/item/rig/get_cell()
 	return cell
 
@@ -129,6 +131,7 @@
 
 	if(!length(req_access))
 		locked = 0
+	original_access = req_access?.Copy()
 
 	START_PROCESSING(SSobj, src)
 
