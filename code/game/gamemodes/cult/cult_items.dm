@@ -16,7 +16,7 @@
 	var/obj/item/organ/external/affecting = null
 	if(ishuman(user))
 		var/mob/living/carbon/human/H = user
-		affecting = H.get_organ(zone)
+		affecting = GET_EXTERNAL_ORGAN(H, zone)
 
 	if(affecting)
 		to_chat(user, "<span class='danger'>An unexplicable force rips through your [affecting.name], tearing the sword from your grasp!</span>")

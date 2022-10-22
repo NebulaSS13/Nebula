@@ -97,7 +97,7 @@
 								/obj/item/storage/backpack/clown = TRADER_THIS_TYPE,
 								/obj/item/bananapeel             = TRADER_THIS_TYPE,
 								/obj/item/gun/launcher/money     = TRADER_THIS_TYPE,
-								/obj/item/chems/food/snacks/pie = TRADER_THIS_TYPE,
+								/obj/item/chems/food/pie = TRADER_THIS_TYPE,
 								/obj/item/bikehorn               = TRADER_THIS_TYPE,
 								/obj/item/chems/spray/waterflower = TRADER_THIS_TYPE,
 								/obj/item/gun/launcher/pneumatic/small = TRADER_THIS_TYPE,

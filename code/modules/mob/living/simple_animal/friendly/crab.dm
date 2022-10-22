@@ -2,9 +2,7 @@
 /mob/living/simple_animal/crab
 	name = "crab"
 	desc = "A hard-shelled crustacean. Seems quite content to lounge around all the time."
-	icon_state = "crab"
-	icon_living = "crab"
-	icon_dead = "crab_dead"
+	icon = 'icons/mob/simple_animal/crab.dmi'
 	mob_size = MOB_SIZE_SMALL
 	speak_emote = list("clicks")
 	emote_hear = list("clicks")
@@ -27,8 +25,10 @@
 	bone_material = null
 	bone_amount =   0
 
-	var/obj/item/inventory_head
-	var/obj/item/inventory_mask
+/mob/living/simple_animal/crab/Initialize()
+	if(isnull(hat_offsets))
+		hat_offsets = list("[SOUTH]" = list(-1, -10))
+	. = ..()
 
 /mob/living/simple_animal/crab/Life()
 	. = ..()
@@ -41,7 +41,7 @@
 			if(turns_since_move >= turns_per_move)
 				Move(get_step(src,pick(4,8)))
 				turns_since_move = 0
-	regenerate_icons()
+	update_icon()
 
 //COFFEE! SQUEEEEEEEEE!
 /mob/living/simple_animal/crab/Coffee

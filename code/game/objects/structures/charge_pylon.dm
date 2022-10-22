@@ -21,7 +21,7 @@
 	var/mob/living/carbon/human/H = user
 	var/obj/item/cell/power_cell
 	if(ishuman(user))
-		var/obj/item/organ/internal/cell/cell = locate() in H.internal_organs
+		var/obj/item/organ/internal/cell/cell = H.get_organ(BP_CELL, /obj/item/organ/internal/cell)
 		if(cell && cell.cell)
 			power_cell = cell.cell
 	else if(isrobot(user))
@@ -34,14 +34,15 @@
 	if(power_cell)
 		power_cell.charge = power_cell.maxcharge
 		to_chat(user, "<span class='notice'><b>Your [power_cell] has been charged to capacity.</b></span>")
-	if(isrobot(user))
+	else if(isrobot(user))
 		user.apply_damage(150, BURN, def_zone = BP_CHEST)
 		visible_message("<span class='danger'>Electricity arcs off [user] as it touches \the [src]!</span>")
 		to_chat(user, "<span class='danger'><b>You detect damage to your components!</b></span>")
+		user.throw_at(get_step(user,get_dir(src,user)), 5, 10)
 	else
 		user.electrocute_act(100, src, def_zone = BP_CHEST)
 		visible_message("<span class='danger'>\The [user] has been shocked by \the [src]!</span>")
-	user.throw_at(get_step(user,get_dir(src,user)), 5, 10)
+		user.throw_at(get_step(user,get_dir(src,user)), 5, 10)
 
 /obj/structure/charge_pylon/attackby(var/obj/item/grab/G, mob/user)
 	if(!istype(G))

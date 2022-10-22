@@ -1,7 +1,7 @@
 /turf/simulated/floor/attack_hand(mob/user)
 	if(ishuman(user))
 		var/mob/living/carbon/human/H = user
-		var/obj/item/hand = H.organs_by_name[H.get_active_held_item_slot()]
+		var/obj/item/hand = GET_EXTERNAL_ORGAN(H, H.get_active_held_item_slot())
 		if(hand && try_graffiti(H, hand))
 			return TRUE
 	. = ..()
@@ -10,6 +10,11 @@
 
 	if(!C || !user)
 		return 0
+
+	if(istype(C, /obj/item/stack/tile/roof))
+		var/obj/item/stack/tile/roof/T = C
+		T.try_build_turf(user, src)
+		return TRUE
 
 	if(isCoil(C) || (flooring && istype(C, /obj/item/stack/material/rods)))
 		return ..(C, user)
@@ -173,11 +178,19 @@
 	update_icon()
 	return 1
 
-/turf/simulated/floor/can_build_cable(var/mob/user)
-	if(!is_plating() || flooring)
-		to_chat(user, "<span class='warning'>Removing the tiling first.</span>")
-		return 0
+/turf/simulated/floor/why_cannot_build_cable(var/mob/user, var/cable_error)
+	switch(cable_error)
+		if(0)
+			return
+		if(1)
+			to_chat(user, SPAN_WARNING("Removing the tiling first."))
+		if(2)
+			to_chat(user, SPAN_WARNING("This section is too damaged to support anything. Use a welder to fix the damage."))
+		else //Fallback
+			. = ..()
+
+/turf/simulated/floor/cannot_build_cable()
 	if(broken || burnt)
-		to_chat(user, "<span class='warning'>This section is too damaged to support anything. Use a welder to fix the damage.</span>")
-		return 0
-	return 1
+		return 2
+	if(!is_plating())
+		return 1

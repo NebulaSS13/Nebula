@@ -1,5 +1,6 @@
 SUBSYSTEM_DEF(graphs_update)
 	name = "Graphs (Update)"
+	init_order = SS_INIT_GRAPH
 	priority = SS_PRIORITY_GRAPH
 	flags = SS_KEEP_TIMING
 	runlevels = RUNLEVEL_GAME|RUNLEVEL_POSTGAME

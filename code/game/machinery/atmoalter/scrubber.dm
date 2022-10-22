@@ -1,11 +1,13 @@
 /obj/machinery/portable_atmospherics/powered/scrubber
-	name = "Portable Air Scrubber"
+	name = "portable air scrubber"
 
 	icon = 'icons/obj/atmos.dmi'
 	icon_state = "pscrubber:0"
 	density = 1
 	w_class = ITEM_SIZE_NORMAL
 	base_type = /obj/machinery/portable_atmospherics/powered/scrubber
+	atom_flags = ATOM_FLAG_NO_TEMP_CHANGE | ATOM_FLAG_CLIMBABLE
+	movable_flags = MOVABLE_FLAG_WHEELED
 	var/volume_rate = 800
 
 	volume = 750

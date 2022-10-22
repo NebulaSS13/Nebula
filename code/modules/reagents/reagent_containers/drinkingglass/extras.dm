@@ -1,4 +1,4 @@
-/obj/item/chems/food/drinks/glass2/attackby(obj/item/I, mob/user)
+/obj/item/chems/drinks/glass2/attackby(obj/item/I, mob/user)
 	if(extras.len >= 2) return ..() // max 2 extras, one on each side of the drink
 
 	if(istype(I, /obj/item/glass_extra))
@@ -11,22 +11,21 @@
 			update_icon()
 		else
 			to_chat(user, "<span class=warning>There's no space to put \the [GE] on \the [src]!</span>")
-	else if(istype(I, /obj/item/chems/food/snacks/fruit_slice))
+	else if(istype(I, /obj/item/chems/food/fruit_slice))
 		if(!rim_pos)
 			to_chat(user, "<span class=warning>There's no space to put \the [I] on \the [src]!</span>")
 			return
-		var/obj/item/chems/food/snacks/fruit_slice/FS = I
+		var/obj/item/chems/food/fruit_slice/FS = I
 		extras += FS
 		if(!user.unEquip(FS, src))
 			return
-		FS.pixel_x = 0 // Reset its pixel offsets so the icons work!
-		FS.pixel_y = 0
+		reset_offsets(0) // Reset its pixel offsets so the icons work!
 		to_chat(user, "<span class=notice>You add \the [FS] to \the [src].</span>")
 		update_icon()
 	else
 		return ..()
 
-/obj/item/chems/food/drinks/glass2/attack_hand(mob/user)
+/obj/item/chems/drinks/glass2/attack_hand(mob/user)
 	if(!user.is_holding_offhand(src))
 		return ..()
 
@@ -61,7 +60,7 @@
 	glass_desc = "There is a stick in the glass."
 	icon_state = "stick"
 	color = COLOR_BLACK
-	
+
 /obj/item/glass_extra/stick/Initialize()
 	. = ..()
 	if(prob(50))

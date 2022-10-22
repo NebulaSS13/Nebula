@@ -58,7 +58,7 @@
 			atmos_machines += A
 		if(istype(A, /obj/machinery))
 			machines += A
-		if(istype(A, /obj/effect/landmark/map_load_mark))
+		if(istype(A, /obj/abstract/landmark/map_load_mark))
 			LAZYADD(subtemplates_to_spawn, A)
 
 	var/notsuspended
@@ -73,17 +73,14 @@
 	if(notsuspended)
 		SSmachines.wake()
 
-	for (var/i in machines)
-		var/obj/machinery/machine = i
+	for (var/obj/machinery/machine as anything in machines)
 		machine.power_change()
 
-	for (var/i in turfs)
-		var/turf/T = i
-		T.post_change()
+	for (var/turf/T as anything in turfs)
 		if(template_flags & TEMPLATE_FLAG_NO_RUINS)
 			T.turf_flags |= TURF_FLAG_NORUINS
 		if(template_flags & TEMPLATE_FLAG_NO_RADS)
-			qdel(SSradiation.sources_assoc[i])
+			qdel(SSradiation.sources_assoc[T])
 		if(istype(T,/turf/simulated))
 			var/turf/simulated/sim = T
 			sim.update_air_properties()
@@ -133,7 +130,7 @@
 			global.using_map.accessible_z_levels[num2text(z_index)] = accessibility_weight
 		if (base_turf_for_zs)
 			global.using_map.base_turf_by_z[num2text(z_index)] = base_turf_for_zs
-		global.using_map.player_levels |= z_index
+		global.using_map.player_levels |= z_index // TODO: make maps handle this with /obj/abstract/level_data
 
 	//initialize things that are normally initialized after map load
 	init_atoms(atoms_to_initialise)
@@ -187,7 +184,7 @@
 	return TRUE
 
 /datum/map_template/proc/after_load(z)
-	for(var/obj/effect/landmark/map_load_mark/mark AS_ANYTHING in subtemplates_to_spawn)
+	for(var/obj/abstract/landmark/map_load_mark/mark AS_ANYTHING in subtemplates_to_spawn)
 		subtemplates_to_spawn -= mark
 		mark.load_template()
 	subtemplates_to_spawn = null

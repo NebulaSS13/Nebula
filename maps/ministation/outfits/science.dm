@@ -2,7 +2,7 @@
 	l_ear = /obj/item/radio/headset/headset_sci
 	shoes = /obj/item/clothing/shoes/color/white
 	pda_type = /obj/item/modular_computer/pda/science
-	name = MINISTATION_OUTFIT_JOB_NAME("Scientist")
+	name = "Ministation - Job - Scientist"
 	uniform = /obj/item/clothing/under/color/white
 	id_type = /obj/item/card/id/ministation/scientist
 

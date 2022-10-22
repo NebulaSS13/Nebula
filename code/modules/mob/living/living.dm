@@ -71,7 +71,7 @@ default behaviour is:
 			var/mob/living/tmob = AM
 
 			for(var/mob/living/M in range(tmob, 1))
-				if(tmob.pinned.len || (locate(/obj/item/grab, LAZYLEN(tmob.grabbed_by))))
+				if(LAZYLEN(tmob.pinned) || (locate(/obj/item/grab, LAZYLEN(tmob.grabbed_by))))
 					if ( !(world.time % 5) )
 						to_chat(src, "<span class='warning'>[tmob] is restrained, you cannot push past</span>")
 					now_pushing = 0
@@ -188,7 +188,7 @@ default behaviour is:
 
 /mob/living/proc/updatehealth()
 	if(status_flags & GODMODE)
-		health = 100
+		health = maxHealth
 		set_stat(CONSCIOUS)
 	else
 		health = maxHealth - getOxyLoss() - getToxLoss() - getFireLoss() - getBruteLoss() - getCloneLoss() - getHalLoss()
@@ -384,16 +384,17 @@ default behaviour is:
 /mob/living/proc/restore_all_organs()
 	return
 
+
+/mob/living/carbon/revive()
+	if(handcuffed && !initial(handcuffed))
+		drop_from_inventory(handcuffed)
+	handcuffed = initial(handcuffed)
+	. = ..()
+
 /mob/living/proc/revive()
 	rejuvenate()
 	if(buckled)
 		buckled.unbuckle_mob()
-	if(iscarbon(src))
-		var/mob/living/carbon/C = src
-
-		if (C.handcuffed && !initial(C.handcuffed))
-			C.drop_from_inventory(C.handcuffed)
-		C.handcuffed = initial(C.handcuffed)
 	BITSET(hud_updateflag, HEALTH_HUD)
 	BITSET(hud_updateflag, STATUS_HUD)
 	BITSET(hud_updateflag, LIFE_HUD)
@@ -448,7 +449,7 @@ default behaviour is:
 	set_stat(CONSCIOUS)
 
 	// make the icons look correct
-	regenerate_icons()
+	update_icon()
 
 	BITSET(hud_updateflag, HEALTH_HUD)
 	BITSET(hud_updateflag, STATUS_HUD)
@@ -469,7 +470,7 @@ default behaviour is:
 		timeofdeath = 0
 
 	stat = CONSCIOUS
-	regenerate_icons()
+	update_icon()
 
 	BITSET(hud_updateflag, HEALTH_HUD)
 	BITSET(hud_updateflag, STATUS_HUD)
@@ -481,33 +482,87 @@ default behaviour is:
 /mob/living/carbon/basic_revival(var/repair_brain = TRUE)
 	if(repair_brain && should_have_organ(BP_BRAIN))
 		repair_brain = FALSE
-		var/obj/item/organ/internal/brain/brain = get_internal_organ(BP_BRAIN)
-		if(brain.damage > (brain.max_damage/2))
-			brain.damage = (brain.max_damage/2)
-		if(brain.status & ORGAN_DEAD)
-			brain.status &= ~ORGAN_DEAD
-			START_PROCESSING(SSobj, brain)
-		brain.update_icon()
+		var/obj/item/organ/internal/brain = GET_INTERNAL_ORGAN(src, BP_BRAIN)
+		if(brain)
+			if(brain.damage > (brain.max_damage/2))
+				brain.damage = (brain.max_damage/2)
+			if(brain.status & ORGAN_DEAD)
+				brain.status &= ~ORGAN_DEAD
+				START_PROCESSING(SSobj, brain)
+			brain.update_icon()
 	..(repair_brain)
 
 /mob/living/proc/UpdateDamageIcon()
 	return
 
-/mob/living/handle_grabs_after_move()
+/mob/living/handle_grabs_after_move(var/turf/old_loc, var/direction)
+
 	..()
-	if(!skill_check(SKILL_MEDICAL, SKILL_BASIC))
-		for(var/obj/item/grab/grab in get_active_grabs())
+
+	if(!isturf(loc))
+		for(var/G in get_active_grabs())
+			qdel(G)
+			return
+
+	if(isturf(old_loc))
+		for(var/atom/movable/AM AS_ANYTHING in ret_grab())
+			if(AM != src && AM.loc != loc && !AM.anchored && old_loc.Adjacent(AM))
+				AM.glide_size = glide_size // This is adjusted by grabs again from events/some of the procs below, but doing it here makes it more likely to work with recursive movement.
+				AM.DoMove(get_dir(get_turf(AM), old_loc), src, TRUE)
+
+	var/list/mygrabs = get_active_grabs()
+	for(var/obj/item/grab/G AS_ANYTHING in mygrabs)
+		if(G.assailant_reverse_facing())
+			set_dir(global.reverse_dir[direction])
+		G.assailant_moved()
+		if(QDELETED(G) || QDELETED(G.affecting))
+			mygrabs -= G
+
+	if(!length(mygrabs))
+		return
+
+	if(length(grabbed_by))
+		reset_offsets()
+		reset_plane_and_layer()
+
+	if(direction & (UP|DOWN))
+		var/txt_dir = (direction & UP) ? "upwards" : "downwards"
+		if(old_loc)
+			old_loc.visible_message(SPAN_NOTICE("\The [src] moves [txt_dir]."))
+		for(var/obj/item/grab/G AS_ANYTHING in mygrabs)
+			var/turf/start = G.affecting.loc
+			var/turf/destination = (direction == UP) ? GetAbove(G.affecting) : GetBelow(G.affecting)
+			if(!start.CanZPass(G.affecting, direction))
+				to_chat(src, SPAN_WARNING("\The [start] blocked your pulled object!"))
+				mygrabs -= G
+				qdel(G)
+				continue
+			for(var/atom/A in destination)
+				if(!A.CanMoveOnto(G.affecting, start, 1.5, direction))
+					to_chat(src, SPAN_WARNING("\The [A] blocks the [G.affecting] you were pulling."))
+					mygrabs -= G
+					qdel(G)
+					continue
+			G.affecting.forceMove(destination)
+			if(QDELETED(G) || QDELETED(G.affecting))
+				mygrabs -= G
+			continue
+
+	if(length(mygrabs) && !skill_check(SKILL_MEDICAL, SKILL_BASIC))
+		for(var/obj/item/grab/grab AS_ANYTHING in mygrabs)
 			var/mob/living/affecting_mob = grab.get_affecting_mob()
 			if(affecting_mob)
 				affecting_mob.handle_grab_damage()
 
-/mob/living/Move(a, b, flag)
+/mob/living/Move(NewLoc, Dir)
 	if (buckled)
 		return
+	var/turf/old_loc = loc
 	. = ..()
-	handle_grabs_after_move()
-	if (s_active && !( s_active in contents ) && get_turf(s_active) != get_turf(src))	//check !( s_active in contents ) first so we hopefully don't have to call get_turf() so much.
-		s_active.close(src)
+	if(.)
+		handle_grabs_after_move(old_loc, Dir)
+		if (s_active && !( s_active in contents ) && get_turf(s_active) != get_turf(src))	//check !( s_active in contents ) first so we hopefully don't have to call get_turf() so much.
+			s_active.close(src)
 
 /mob/living/verb/resist()
 	set name = "Resist"
@@ -522,10 +577,11 @@ default behaviour is:
 			process_resist()
 
 /mob/living/proc/process_resist()
+
 	//Getting out of someone's inventory.
 	if(istype(src.loc, /obj/item/holder))
 		escape_inventory(src.loc)
-		return
+		return TRUE
 
 	//unbuckling yourself
 	if(buckled)
@@ -537,6 +593,11 @@ default behaviour is:
 		var/obj/structure/C = loc
 		if(C.mob_breakout(src))
 			return TRUE
+
+	// Get rid of someone riding around on you.
+	if(buckled_mob)
+		unbuckle_mob()
+		return TRUE
 
 /mob/living/proc/escape_inventory(obj/item/holder/H)
 	if(H != src.loc) return
@@ -590,8 +651,14 @@ default behaviour is:
 	set name = "Rest"
 	set category = "IC"
 
-	resting = !resting
-	to_chat(src, "<span class='notice'>You are now [resting ? "resting" : "getting up"]</span>")
+	if(!incapacitated(INCAPACITATION_KNOCKOUT) && canClick())
+		setClickCooldown(3)
+		if(resting && !do_after(src, 2 SECONDS, src, incapacitation_flags = ~INCAPACITATION_FORCELYING))
+			return
+		resting = !resting
+		UpdateLyingBuckledAndVerbStatus()
+		update_icon()
+		to_chat(src, SPAN_NOTICE("You are now [resting ? "resting" : "getting up"]."))
 
 //called when the mob receives a bright flash
 /mob/living/flash_eyes(intensity = FLASH_PROTECTION_MODERATE, override_blindness_check = FALSE, affect_silicon = FALSE, visual = FALSE, type = /obj/screen/fullscreen/flash)
@@ -617,16 +684,9 @@ default behaviour is:
 /mob/living/carbon/human/canUnEquip(obj/item/I)
 	if(!..())
 		return
-	if(I in internal_organs)
-		return
-	if(I in organs)
+	if(I in get_organs())
 		return
 	return 1
-
-/mob/living/carbon/get_contained_external_atoms()
-	. = ..()
-	. -= internal_organs
-	. -= organs
 
 /mob/proc/can_be_possessed_by(var/mob/observer/ghost/possessor)
 	return istype(possessor) && possessor.client
@@ -671,27 +731,29 @@ default behaviour is:
 	to_chat(src, "<span class='notice'>Remember to stay in character for a mob of this type!</span>")
 	return 1
 
-/mob/living/reset_layer()
-	if (jumping)
-		layer = VEHICLE_LOAD_LAYER
-	else if (hiding)
-		layer = HIDING_MOB_LAYER
-	else
-		..()
-
-/mob/living/update_icons()
-	if(auras)
-		overlays |= auras
-
 /mob/living/proc/add_aura(var/obj/aura/aura)
 	LAZYDISTINCTADD(auras,aura)
-	update_icons()
+	update_icon()
 	return 1
 
 /mob/living/proc/remove_aura(var/obj/aura/aura)
 	LAZYREMOVE(auras,aura)
-	update_icons()
+	update_icon()
 	return 1
+
+/mob/living/update_icon()
+	..()
+	compile_overlays()
+
+/mob/living/on_update_icon()
+	SHOULD_CALL_PARENT(TRUE)
+	..()
+	cut_overlays()
+	if(auras)
+		for(var/obj/aura/aura AS_ANYTHING in auras)
+			var/image/A = new()
+			A.appearance = aura
+			add_overlay(A)
 
 /mob/living/Destroy()
 	if(auras)
@@ -729,14 +791,16 @@ default behaviour is:
 	return TRUE
 
 /mob/living/handle_drowning()
+	var/turf/T = get_turf(src)
 	if(!can_drown() || !loc.is_flooded(lying))
+		return FALSE
+	if(!lying && T.above && T.above.is_open() && !T.above.is_flooded() && can_overcome_gravity())
 		return FALSE
 	if(prob(5))
 		var/obj/effect/fluid/F = locate() in loc
 		to_chat(src, SPAN_DANGER("You choke and splutter as you inhale [(F?.reagents && F.reagents.get_primary_reagent_name()) || "liquid"]!"))
 		F?.reagents?.trans_to_holder(get_ingested_reagents(), min(F.reagents.total_volume, rand(2,5)))
 
-	var/turf/T = get_turf(src)
 	T.show_bubbles()
 	return TRUE // Presumably chemical smoke can't be breathed while you're underwater.
 
@@ -790,10 +854,20 @@ default behaviour is:
 	magnitude += GET_CHEMICAL_EFFECT(src, effect)
 	LAZYSET(chem_effects, effect, magnitude)
 
+/mob/living/proc/add_chemical_effect_max(var/effect, var/magnitude = 1)
+	magnitude = max(LAZYACCESS(chem_effects, effect), magnitude)
+	LAZYSET(chem_effects, effect, magnitude)
+
+/mob/living/proc/add_chemical_effect_min(var/effect, var/magnitude = 1)
+	var/old_magnitude = LAZYACCESS(chem_effects, effect)
+	if(!isnull(old_magnitude))
+		magnitude = min(old_magnitude, magnitude)
+	LAZYSET(chem_effects, effect, magnitude)
+
 /mob/living/proc/adjust_immunity(var/amt)
 	return
 
-/mob/living/handle_reading_literacy(var/mob/user, var/text_content, var/skip_delays)
+/mob/living/handle_reading_literacy(var/mob/user, var/text_content, var/skip_delays, var/digital = FALSE)
 	if(skill_check(SKILL_LITERACY, SKILL_ADEPT))
 		. = text_content
 	else
@@ -829,7 +903,8 @@ default behaviour is:
 	if(!has_gravity())
 		return
 	if(isturf(loc) && pull_damage() && prob(getBruteLoss() / 6))
-		blood_splatter(loc, src, large = TRUE)
+		if (!should_have_organ(BP_HEART))
+			blood_splatter(loc, src, large = TRUE)
 		if(prob(25))
 			adjustBruteLoss(1)
 			visible_message(SPAN_DANGER("\The [src]'s [isSynthetic() ? "state worsens": "wounds open more"] from being dragged!"))
@@ -862,7 +937,7 @@ default behaviour is:
 	return "Living"
 
 /mob/living/handle_mouse_drop(atom/over, mob/user)
-	if(user == src && user != over)
+	if(!anchored && user == src && user != over)
 
 		if(isturf(over))
 			var/turf/T = over
@@ -907,3 +982,80 @@ default behaviour is:
 /mob/living/proc/jump_layer_shift_end()
 	jumping = FALSE
 	reset_layer()
+
+/mob/living/proc/get_eye_overlay()
+	return
+
+/mob/living/proc/empty_stomach()
+	return
+
+/mob/living/proc/handle_actions()
+	//Pretty bad, i'd use picked/dropped instead but the parent calls in these are nonexistent
+	for(var/datum/action/A in actions)
+		if(A.CheckRemoval(src))
+			A.Remove(src)
+	for(var/obj/item/I in src)
+		if(I.action_button_name)
+			if(!I.action)
+				I.action = new I.default_action_type
+			I.action.name = I.action_button_name
+			I.action.desc = I.action_button_desc
+			I.action.SetTarget(I)
+			I.action.Grant(src)
+	return
+
+/mob/living/update_action_buttons()
+	if(!hud_used) return
+	if(!client) return
+
+	if(hud_used.hud_shown != 1)	//Hud toggled to minimal
+		return
+
+	client.screen -= hud_used.hide_actions_toggle
+	for(var/datum/action/A in actions)
+		if(A.button)
+			client.screen -= A.button
+
+	if(hud_used.action_buttons_hidden)
+		if(!hud_used.hide_actions_toggle)
+			hud_used.hide_actions_toggle = new(hud_used)
+			hud_used.hide_actions_toggle.UpdateIcon()
+		hud_used.hide_actions_toggle.screen_loc = hud_used.ButtonNumberToScreenCoords(1)
+		client.screen += hud_used.hide_actions_toggle
+		return
+
+	var/button_number = 0
+	for(var/datum/action/A in actions)
+		button_number++
+		if(A.button == null)
+			var/obj/screen/action_button/N = new(hud_used)
+			N.owner = A
+			A.button = N
+
+		var/obj/screen/action_button/B = A.button
+
+		B.UpdateIcon()
+
+		B.SetName(A.UpdateName())
+		B.desc = A.UpdateDesc()
+
+		client.screen += B
+		B.screen_loc = hud_used.ButtonNumberToScreenCoords(button_number)
+
+	if(button_number > 0)
+		if(!hud_used.hide_actions_toggle)
+			hud_used.hide_actions_toggle = new(hud_used)
+			hud_used.hide_actions_toggle.InitialiseIcon(src)
+		hud_used.hide_actions_toggle.screen_loc = hud_used.ButtonNumberToScreenCoords(button_number+1)
+		client.screen += hud_used.hide_actions_toggle
+
+/mob/living/handle_fall_effect(var/turf/landing)
+	..()
+	apply_fall_damage(landing)
+	if(client)
+		var/area/A = get_area(landing)
+		if(A)
+			A.alert_on_fall(src)
+
+/mob/living/proc/apply_fall_damage(var/turf/landing)
+	adjustBruteLoss(rand(max(1, CEILING(mob_size * 0.33)), max(1, CEILING(mob_size * 0.66))))

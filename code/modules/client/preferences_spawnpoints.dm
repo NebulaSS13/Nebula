@@ -1,74 +1,68 @@
-var/global/list/spawntypes
+/decl/spawnpoint
+	var/name                     // Name used in preference setup.
+	var/msg                      // Message to display on the arrivals computer.
+	var/list/turfs               // List of turfs to spawn on.
+	var/always_visible = FALSE   // Whether this spawn point is always visible in selection, ignoring map-specific settings.
 
-/proc/spawntypes()
-	if(!global.spawntypes)
-		global.spawntypes = list()
-		for(var/type in typesof(/datum/spawnpoint)-/datum/spawnpoint)
-			var/datum/spawnpoint/S = type
-			var/display_name = initial(S.display_name)
-			if((display_name in global.using_map.allowed_spawns) || initial(S.always_visible))
-				global.spawntypes[display_name] = new S
-	return global.spawntypes
+	var/list/restrict_job
+	var/list/restrict_job_event_categories
 
-/datum/spawnpoint
-	var/msg		  //Message to display on the arrivals computer.
-	var/list/turfs   //List of turfs to spawn on.
-	var/display_name //Name used in preference setup.
-	var/always_visible = FALSE	// Whether this spawn point is always visible in selection, ignoring map-specific settings.
-	var/list/restrict_job = null
-	var/list/disallow_job = null
+	var/list/disallow_job
+	var/list/disallow_job_event_categories
 
-/datum/spawnpoint/proc/check_job_spawning(job)
-	if(restrict_job && !(job in restrict_job))
-		return 0
+/decl/spawnpoint/proc/check_job_spawning(var/datum/job/job)
 
-	if(disallow_job && (job in disallow_job))
-		return 0
+	if(restrict_job && !(job.type in restrict_job) && !(job.title in restrict_job))
+		return FALSE
 
-	return 1
+	if(restrict_job_event_categories)
+		for(var/event_category in job.event_categories)
+			if(!(event_category in restrict_job_event_categories))
+				return FALSE
+
+	if(disallow_job && ((job.type in disallow_job) || (job.title in disallow_job)))
+		return FALSE
+
+	if(disallow_job_event_categories)
+		for(var/event_category in job.event_categories)
+			if(event_category in disallow_job_event_categories)
+				return FALSE
+
+	return TRUE
 
 //Called after mob is created, moved to a turf and equipped.
-/datum/spawnpoint/proc/after_join(mob/victim)
+/decl/spawnpoint/proc/after_join(mob/victim)
 	return
 
-#ifdef UNIT_TEST
-/datum/spawnpoint/Del()
-	PRINT_STACK_TRACE("Spawn deleted: [log_info_line(src)]")
-	..()
-
-/datum/spawnpoint/Destroy()
-	PRINT_STACK_TRACE("Spawn destroyed: [log_info_line(src)]")
-	. = ..()
-#endif
-
-/datum/spawnpoint/arrivals
-	display_name = "Arrivals Shuttle"
+/decl/spawnpoint/arrivals
+	name = "Arrivals"
 	msg = "has arrived on the station"
 
-/datum/spawnpoint/arrivals/New()
-	..()
+/decl/spawnpoint/arrivals/Initialize()
+	. = ..()
 	turfs = global.latejoin_locations
 
-/datum/spawnpoint/gateway
-	display_name = "Gateway"
+/decl/spawnpoint/gateway
+	name = "Gateway"
 	msg = "has completed translation from offsite gateway"
 
-/datum/spawnpoint/gateway/New()
-	..()
+/decl/spawnpoint/gateway/Initialize()
+	. = ..()
 	turfs = global.latejoin_gateway_locations
 
-/datum/spawnpoint/cryo
-	display_name = "Cryogenic Storage"
+/decl/spawnpoint/cryo
+	name = "Cryogenic Storage"
 	msg = "has completed cryogenic revival"
-	disallow_job = list("Robot")
+	disallow_job_event_categories = list(ASSIGNMENT_ROBOT)
 
-/datum/spawnpoint/cryo/New()
-	..()
+/decl/spawnpoint/cryo/Initialize()
+	. = ..()
 	turfs = global.latejoin_cryo_locations
 
-/datum/spawnpoint/cryo/after_join(mob/living/carbon/human/victim)
-	if(!istype(victim))
+/decl/spawnpoint/cryo/after_join(mob/living/carbon/human/victim)
+	if(!istype(victim) || victim.buckled) // They may have spawned with a wheelchair; don't move them into a pod in that case.
 		return
+
 	var/area/A = get_area(victim)
 	for(var/obj/machinery/cryopod/C in A)
 		if(!C.occupant)
@@ -86,16 +80,11 @@ var/global/list/spawntypes
 			to_chat(victim,SPAN_NOTICE("You are slowly waking up from the cryostasis aboard [global.using_map.full_name]. It might take a few seconds."))
 			return
 
-/datum/spawnpoint/cyborg
-	display_name = "Robot Storage"
+/decl/spawnpoint/cyborg
+	name = "Robot Storage"
 	msg = "has been activated from storage"
-	restrict_job = list("Robot")
+	restrict_job_event_categories = list(ASSIGNMENT_ROBOT)
 
-/datum/spawnpoint/cyborg/New()
-	..()
+/decl/spawnpoint/cyborg/Initialize()
+	. = ..()
 	turfs = global.latejoin_cyborg_locations
-
-/datum/spawnpoint/default
-	display_name = DEFAULT_SPAWNPOINT_ID
-	msg = "has arrived on the station"
-	always_visible = TRUE

@@ -12,11 +12,15 @@
 	)
 
 /decl/slime_colour/grey/handle_blood_reaction(var/datum/reagents/holder)
-	for(var/i = 1, i <= 3, i++)
-		new /obj/item/chems/food/snacks/monkeycube(get_turf(holder.my_atom))
+	var/location = get_turf(holder.get_reaction_loc())
+	if(location)
+		for(var/i = 1, i <= 3, i++)
+			new /obj/item/chems/food/monkeycube(location)
 	return TRUE
 
 /decl/slime_colour/grey/handle_uranium_reaction(var/datum/reagents/holder)
-	holder.my_atom.visible_message(SPAN_WARNING("The core begins to quiver and grow, and soon a new baby slime emerges from it!"))
-	new /mob/living/slime(get_turf(holder.my_atom))
+	var/turf/location = get_turf(holder.get_reaction_loc())
+	if(istype(location))
+		location.visible_message(SPAN_WARNING("The core begins to quiver and grow, and soon a new baby slime emerges from it!"))
+		new /mob/living/slime(location)
 	return TRUE

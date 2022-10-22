@@ -236,13 +236,15 @@
 
 /datum/stack_recipe/prosthetic
 	difficulty = 0
+	var/prosthetic_species = SPECIES_HUMAN
 	var/prosthetic_model = /decl/prosthetics_manufacturer/wooden
 
 /datum/stack_recipe/prosthetic/spawn_result(mob/user, location, amount)
 	var/obj/item/organ/external/limb = ..()
 	if(limb)
-		limb.species = get_species_by_key(SPECIES_HUMAN)
-		limb.robotize(prosthetic_model, apply_material = use_material)
+		limb.set_species(prosthetic_species)
+		limb.robotize(prosthetic_model, apply_material = use_material, check_species = prosthetic_species)
+		limb.status |= ORGAN_CUT_AWAY
 	return limb
 
 /datum/stack_recipe/prosthetic/left_arm

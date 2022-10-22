@@ -21,7 +21,7 @@
 
 	UNSETEMPTY(latencies)
 	var/rank_count = max(1, LAZYLEN(ranks))
-	if(force || last_rating != ceil(combined_rank/rank_count))
+	if(force || last_rating != CEILING(combined_rank/rank_count))
 		if(highest_rank <= 1)
 			if(highest_rank == 0)
 				qdel(src)
@@ -29,7 +29,7 @@
 		else
 			rebuild_power_cache = TRUE
 			sound_to(owner, 'sound/effects/psi/power_unlock.ogg')
-			rating = ceil(combined_rank/rank_count)
+			rating = CEILING(combined_rank/rank_count)
 			cost_modifier = 1
 			if(rating > 1)
 				cost_modifier -= min(1, max(0.1, (rating-1) / 10))
@@ -74,7 +74,7 @@
 
 	var/update_hud
 	if(armor_cost)
-		var/value = max(1, ceil(armor_cost * cost_modifier))
+		var/value = max(1, CEILING(armor_cost * cost_modifier))
 		if(value <= stamina)
 			stamina -= value
 		else
@@ -179,7 +179,7 @@
 
 			// Heal organ damage.
 			if(heal_internal)
-				for(var/obj/item/organ/I in H.internal_organs)
+				for(var/obj/item/organ/I in H.get_internal_organs())
 
 					if(BP_IS_PROSTHETIC(I) || BP_IS_CRYSTAL(I))
 						continue
@@ -191,38 +191,37 @@
 						return
 
 			// Heal broken bones.
-			if(H.bad_external_organs.len)
-				for(var/obj/item/organ/external/E in H.bad_external_organs)
+			for(var/obj/item/organ/external/E in H.bad_external_organs)
 
-					if(BP_IS_PROSTHETIC(E))
-						continue
+				if(BP_IS_PROSTHETIC(E))
+					continue
 
-					if(heal_internal && (E.status & ORGAN_BROKEN) && E.damage < (E.min_broken_damage * config.organ_health_multiplier)) // So we don't mend and autobreak.
-						if(spend_power(heal_rate))
-							if(E.mend_fracture())
-								to_chat(H, SPAN_NOTICE("Your autoredactive faculty coaxes together the shattered bones in your [E.name]."))
-								return
-
-					if(heal_bleeding)
-
-						if((E.status & ORGAN_ARTERY_CUT) && spend_power(heal_rate))
-							to_chat(H, SPAN_NOTICE("Your autoredactive faculty mends the torn artery in your [E.name], stemming the worst of the bleeding."))
-							E.status &= ~ORGAN_ARTERY_CUT
+				if(heal_internal && (E.status & ORGAN_BROKEN) && E.damage < (E.min_broken_damage * config.organ_health_multiplier)) // So we don't mend and autobreak.
+					if(spend_power(heal_rate))
+						if(E.mend_fracture())
+							to_chat(H, SPAN_NOTICE("Your autoredactive faculty coaxes together the shattered bones in your [E.name]."))
 							return
 
-						if(E.status & ORGAN_TENDON_CUT)
-							to_chat(H, SPAN_NOTICE("Your autoredactive faculty repairs the severed tendon in your [E.name]."))
-							E.status &= ~ORGAN_TENDON_CUT
-							return TRUE
+				if(heal_bleeding)
 
-						for(var/datum/wound/W in E.wounds)
+					if((E.status & ORGAN_ARTERY_CUT) && spend_power(heal_rate))
+						to_chat(H, SPAN_NOTICE("Your autoredactive faculty mends the torn artery in your [E.name], stemming the worst of the bleeding."))
+						E.status &= ~ORGAN_ARTERY_CUT
+						return
 
-							if(W.bleeding() && spend_power(heal_rate))
-								to_chat(H, SPAN_NOTICE("Your autoredactive faculty knits together severed veins, stemming the bleeding from \a [W.desc] on your [E.name]."))
-								W.bleed_timer = 0
-								W.clamped = TRUE
-								E.status &= ~ORGAN_BLEEDING
-								return
+					if(E.status & ORGAN_TENDON_CUT)
+						to_chat(H, SPAN_NOTICE("Your autoredactive faculty repairs the severed tendon in your [E.name]."))
+						E.status &= ~ORGAN_TENDON_CUT
+						return TRUE
+
+					for(var/datum/wound/W in E.wounds)
+
+						if(W.bleeding() && spend_power(heal_rate))
+							to_chat(H, SPAN_NOTICE("Your autoredactive faculty knits together severed veins, stemming the bleeding from \a [W.desc] on your [E.name]."))
+							W.bleed_timer = 0
+							W.clamped = TRUE
+							E.status &= ~ORGAN_BLEEDING
+							return
 
 	// Heal radiation, cloneloss and poisoning.
 	if(heal_poison)

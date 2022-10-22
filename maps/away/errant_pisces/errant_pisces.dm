@@ -22,12 +22,8 @@
 	name = "cosmoshark"
 	desc = "Enormous creature that resembles a shark with magenta glowing lines along its body and set of long deep-purple teeth."
 	icon = 'maps/away/errant_pisces/icons/cosmoshark.dmi'
-	icon_state = "shark"
-	icon_living = "shark"
-	icon_dead = "shark_dead"
-	icon_gib = "shark_dead"
 	turns_per_move = 5
-	meat_type = /obj/item/chems/food/snacks/sharkmeat
+	meat_type = /obj/item/chems/food/sharkmeat
 	speed = 2
 	maxHealth = 100
 	health = 100
@@ -36,9 +32,6 @@
 	faction = "shark"
 
 /mob/living/simple_animal/hostile/carp/shark/carp_randomify()
-	return
-
-/mob/living/simple_animal/hostile/carp/shark/on_update_icon()
 	return
 
 /mob/living/simple_animal/hostile/carp/shark/death()
@@ -67,14 +60,14 @@
 				L.forceMove(T)
 			visible_message("<span class='danger'>\The [src] releases [L].</span>")
 
-/obj/item/chems/food/snacks/sharkmeat
+/obj/item/chems/food/sharkmeat
 	name = "cosmoshark fillet"
 	desc = "A fillet of cosmoshark meat."
 	icon_state = "fishfillet"
 	filling_color = "#cecece"
 	center_of_mass = @"{'x':17,'y':13}"
 
-/obj/item/chems/food/snacks/sharkmeat/Initialize()
+/obj/item/chems/food/sharkmeat/Initialize()
 	. = ..()
 	reagents.add_reagent(/decl/material/liquid/nutriment/protein, 5)
 	reagents.add_reagent(/decl/material/liquid/psychoactives, 1)
@@ -237,7 +230,7 @@
 	desc = "A suit in a shape of a space carp. Usually worn by corporate interns who are sent to entertain children during HQ excursions."
 	icon = 'maps/away/errant_pisces/icons/carpsuit.dmi'
 
-/obj/effect/landmark/corpse/carp_fisher
+/obj/abstract/landmark/corpse/carp_fisher
 	name = "carp fisher"
 	corpse_outfits = list(/decl/hierarchy/outfit/corpse/carp_fisher)
 

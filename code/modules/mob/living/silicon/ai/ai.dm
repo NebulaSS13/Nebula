@@ -11,7 +11,7 @@ var/global/list/ai_verbs_default = list(
 	/mob/living/silicon/ai/proc/ai_goto_location,
 	/mob/living/silicon/ai/proc/ai_remove_location,
 	/mob/living/silicon/ai/proc/ai_hologram_change,
-	/mob/living/silicon/ai/proc/ai_network_change,
+	/mob/living/silicon/ai/proc/ai_channel_change,
 	/mob/living/silicon/ai/proc/ai_statuschange,
 	/mob/living/silicon/ai/proc/ai_store_location,
 	/mob/living/silicon/ai/proc/ai_checklaws,
@@ -32,7 +32,8 @@ var/global/list/ai_verbs_default = list(
 	/mob/living/silicon/ai/proc/ai_power_override,
 	/mob/living/silicon/ai/proc/ai_shutdown,
 	/mob/living/silicon/ai/proc/ai_reset_radio_keys,
-	/mob/living/silicon/ai/proc/run_program
+	/mob/living/silicon/ai/proc/run_program,
+	/mob/living/silicon/ai/proc/pick_color
 )
 
 //Not sure why this is necessary...
@@ -57,7 +58,7 @@ var/global/list/ai_verbs_default = list(
 	status_flags = CANSTUN|CANPARALYSE|CANPUSH
 	shouldnt_see = list(/obj/effect/rune)
 	maxHealth = 200
-	var/list/network = list(NETWORK_PUBLIC)
+	var/list/networks = list(CAMERA_CHANNEL_PUBLIC)
 	var/obj/machinery/camera/camera = null
 	var/list/connected_robots = list()
 	var/aiRestorePowerRoutine = 0
@@ -109,7 +110,6 @@ var/global/list/ai_verbs_default = list(
 	var/multitool_mode = 0
 
 	var/default_ai_icon = /datum/ai_icon/blue
-	var/static/list/custom_ai_icons_by_ckey_and_name
 	var/custom_color_tone //This is a hex, despite being converted to rgb by gethologramicon.
 
 /mob/living/silicon/ai/proc/add_ai_verbs()
@@ -233,42 +233,17 @@ var/global/list/ai_verbs_default = list(
 
 	. = ..()
 
+var/global/list/custom_ai_icons_by_ckey_and_name = list()
 /mob/living/silicon/ai/proc/setup_icon()
-	if(LAZYACCESS(custom_ai_icons_by_ckey_and_name, "[ckey][real_name]"))
-		return
-	var/list/custom_icons = list()
-	LAZYSET(custom_ai_icons_by_ckey_and_name, "[ckey][real_name]", custom_icons)
-
-	var/file = safe_file2text(CUSTOM_ITEM_SYNTH_CONFIG)
-	var/lines = splittext(file, "\n")
-
-	var/custom_index = 1
-	var/custom_icon_states = icon_states(CUSTOM_ITEM_SYNTH)
-
-	for(var/line in lines)
-	// split & clean up
-		var/list/Entry = splittext(line, ":")
-		for(var/i = 1 to Entry.len)
-			Entry[i] = trim(Entry[i])
-
-		if(Entry.len < 2)
-			continue
-		if(Entry.len == 2) // This is to handle legacy entries
-			Entry[++Entry.len] = Entry[1]
-
-		if(Entry[1] == src.ckey && Entry[2] == src.real_name)
-			var/alive_icon_state = "[Entry[3]]-ai"
-			var/dead_icon_state = "[Entry[3]]-ai-crash"
-
-			if(!(alive_icon_state in custom_icon_states))
-				to_chat(src, "<span class='warning'>Custom display entry found but the icon state '[alive_icon_state]' is missing!</span>")
-				continue
-
-			if(!(dead_icon_state in custom_icon_states))
-				dead_icon_state = ""
-
-			selected_sprite = new/datum/ai_icon("Custom Icon [custom_index++]", alive_icon_state, dead_icon_state, COLOR_WHITE, CUSTOM_ITEM_SYNTH)
-			custom_icons += selected_sprite
+	if(ckey)
+		if(global.custom_ai_icons_by_ckey_and_name["[ckey][real_name]"])
+			selected_sprite = global.custom_ai_icons_by_ckey_and_name["[ckey][real_name]"]
+		else
+			for(var/datum/custom_icon/cicon AS_ANYTHING in SScustomitems.custom_icons_by_ckey[ckey])
+				if(cicon.category == "AI Icon" && lowertext(real_name) == cicon.character_name)
+					selected_sprite = new /datum/ai_icon("Custom Icon - [cicon.character_name]", cicon.ids_to_icons[1], cicon.ids_to_icons[2], COLOR_WHITE, cicon.ids_to_icons[cicon.ids_to_icons[1]])
+					global.custom_ai_icons_by_ckey_and_name["[ckey][real_name]"] = selected_sprite
+					break
 	update_icon()
 
 /mob/living/silicon/ai/pointed(atom/A as mob|obj|turf in view())
@@ -315,7 +290,7 @@ var/global/list/ai_verbs_default = list(
 			dd_insertObjectList(., ai_icon)
 
 	// Placing custom icons first to have them be at the top
-	. = LAZYACCESS(custom_ai_icons_by_ckey_and_name, "[ckey][real_name]") | .
+	. = global.custom_ai_icons_by_ckey_and_name["[ckey][real_name]"] | .
 
 /mob/living/silicon/ai/var/message_cooldown = 0
 /mob/living/silicon/ai/proc/ai_announcement()
@@ -481,44 +456,38 @@ var/global/list/ai_verbs_default = list(
 	src.view_core()
 
 //Replaces /mob/living/silicon/ai/verb/change_network() in ai.dm & camera.dm
-//Adds in /mob/living/silicon/ai/proc/ai_network_change() instead
-//Addition by Mord_Sith to define AI's network change ability
-/mob/living/silicon/ai/proc/get_camera_network_list()
+//Adds in /mob/living/silicon/ai/proc/ai_channel_change() instead
+//Addition by Mord_Sith to define AI's channel change ability
+/mob/living/silicon/ai/proc/get_camera_channel_list()
 	if(check_unable())
 		return
 
-	var/list/cameralist = new()
-	for (var/obj/machinery/camera/C in cameranet.cameras)
-		if(!C.can_use())
-			continue
-		var/list/tempnetwork = difflist(C.network,restricted_camera_networks,1)
-		for(var/i in tempnetwork)
-			cameralist[i] = i
+	var/list/valid_channels = list()
+	var/list/devices_by_channel = camera_repository.get_devices_by_channel()
+	for(var/channel in devices_by_channel)
+		for(var/datum/extension/network_device/camera/D in devices_by_channel[channel])
+			if(D.cameranet_enabled && D.is_functional())
+				valid_channels += channel
+				break
+	return valid_channels
 
-	cameralist = sortTim(cameralist, /proc/cmp_text_asc)
-	return cameralist
-
-/mob/living/silicon/ai/proc/ai_network_change(var/network in get_camera_network_list())
+/mob/living/silicon/ai/proc/ai_channel_change(var/channel in get_camera_channel_list())
 	set category = "Silicon Commands"
-	set name = "Jump To Network"
+	set name = "Jump To Channel"
 	unset_machine()
 
-	if(!network)
+	if(!channel)
 		return
 
 	if(!eyeobj)
 		view_core()
 		return
 
-	src.network = network
-
-	for(var/obj/machinery/camera/C in cameranet.cameras)
-		if(!C.can_use())
-			continue
-		if(network in C.network)
-			eyeobj.setLoc(get_turf(C))
+	for(var/datum/extension/network_device/camera/D in camera_repository.devices_in_channel(channel))
+		if(D.cameranet_enabled && D.is_functional())
+			eyeobj.setLoc(get_turf(D.holder))
 			break
-	to_chat(src, "<span class='notice'>Switched to [network] camera network.</span>")
+	to_chat(src, "<span class='notice'>Switched to [channel] camera channel.</span>")
 //End of code by Mord_Sith
 
 /mob/living/silicon/ai/proc/ai_statuschange()
@@ -715,6 +684,7 @@ var/global/list/ai_verbs_default = list(
 	to_chat(src, SPAN_NOTICE("Integrated radio encryption keys have been reset."))
 
 /mob/living/silicon/ai/on_update_icon()
+	..()
 	if(!selected_sprite || !(selected_sprite in available_icons()))
 		selected_sprite = get_ai_icon(default_ai_icon)
 
@@ -739,8 +709,8 @@ var/global/list/ai_verbs_default = list(
 	if(rig)
 		rig.force_rest(src)
 
-/mob/living/silicon/ai/handle_reading_literacy(var/mob/user, var/text_content, var/skip_delays, var/ai_show)
-	. = ai_show ? ..(user, text_content, skip_delays) : stars(text_content)
+/mob/living/silicon/ai/handle_reading_literacy(var/mob/user, var/text_content, var/skip_delays, var/digital = FALSE)
+	. = digital ? ..(user, text_content, skip_delays) : stars(text_content)
 
 /mob/living/silicon/ai/proc/ai_take_image()
 	set name = "Take Photo"
@@ -780,9 +750,9 @@ var/global/list/ai_verbs_default = list(
 	run_program("sensormonitor")
 
 /mob/living/silicon/ai/proc/run_program(var/filename)
-	var/datum/extension/interactive/ntos/os = get_extension(src, /datum/extension/interactive/ntos)
+	var/datum/extension/interactive/os/os = get_extension(src, /datum/extension/interactive/os)
 	if(!istype(os))
-		to_chat(src, SPAN_WARNING("You seem to be lacking an NTOS capable device!"))
+		to_chat(src, SPAN_WARNING("You seem to be lacking an OS capable device!"))
 		return
 	if(!os.on)
 		os.system_boot()
@@ -791,3 +761,23 @@ var/global/list/ai_verbs_default = list(
 
 /mob/living/silicon/ai/get_admin_job_string()
 	return "AI"
+
+/mob/living/silicon/ai/eastface()
+	if(holo)
+		holo.set_dir_hologram(client.client_dir(EAST), src)
+	return ..()
+
+/mob/living/silicon/ai/westface()
+	if(holo)
+		holo.set_dir_hologram(client.client_dir(WEST), src)
+	return ..()
+
+/mob/living/silicon/ai/northface()
+	if(holo)
+		holo.set_dir_hologram(client.client_dir(NORTH), src)
+	return ..()
+
+/mob/living/silicon/ai/southface()
+	if(holo)
+		holo.set_dir_hologram(client.client_dir(SOUTH), src)
+	return ..()

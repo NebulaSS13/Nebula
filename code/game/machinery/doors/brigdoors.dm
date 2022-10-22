@@ -44,7 +44,7 @@
 		if(F.id_tag == id_tag)
 			targets += F
 
-	for(var/obj/structure/closet/secure_closet/brig/C in world)
+	for(var/obj/structure/closet/secure_closet/brig/C in global.closets)
 		if(C.id == id_tag)
 			targets += C
 

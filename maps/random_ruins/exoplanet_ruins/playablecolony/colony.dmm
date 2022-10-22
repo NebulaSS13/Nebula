@@ -64,7 +64,6 @@
 "al" = (
 /obj/machinery/power/solar,
 /obj/structure/cable{
-	d2 = 4;
 	icon_state = "0-4"
 	},
 /turf/simulated/floor/tiled/techfloor/grid,
@@ -207,7 +206,7 @@
 /obj/structure/closet/crate,
 /obj/item/stock_parts/circuitboard/fusion/core_control,
 /obj/item/stock_parts/circuitboard/fusion_core,
-/obj/item/stock_parts/circuitboard/fusion_fuel_compressor,
+/obj/item/stock_parts/circuitboard/fuel_compressor,
 /obj/item/stock_parts/circuitboard/fusion_fuel_control,
 /obj/item/stock_parts/circuitboard/fusion_injector,
 /obj/item/stock_parts/circuitboard/fusion_injector,
@@ -268,8 +267,6 @@
 "aM" = (
 /obj/structure/catwalk,
 /obj/structure/cable{
-	d1 = 2;
-	d2 = 8;
 	icon_state = "2-8"
 	},
 /turf/exterior/concrete,
@@ -354,13 +351,9 @@
 "aZ" = (
 /obj/structure/catwalk,
 /obj/structure/cable{
-	d1 = 2;
-	d2 = 8;
 	icon_state = "2-8"
 	},
 /obj/structure/cable{
-	d1 = 1;
-	d2 = 2;
 	icon_state = "1-2"
 	},
 /turf/exterior/concrete,
@@ -383,7 +376,6 @@
 "bc" = (
 /obj/machinery/power/tracker,
 /obj/structure/cable{
-	d2 = 4;
 	icon_state = "0-4"
 	},
 /turf/simulated/floor/tiled/steel_ridged,
@@ -394,13 +386,9 @@
 "be" = (
 /obj/structure/catwalk,
 /obj/structure/cable{
-	d1 = 1;
-	d2 = 2;
 	icon_state = "1-2"
 	},
 /obj/structure/cable{
-	d1 = 2;
-	d2 = 8;
 	icon_state = "2-8"
 	},
 /turf/exterior/concrete,
@@ -413,8 +401,6 @@
 	dir = 8
 	},
 /obj/structure/cable{
-	d1 = 2;
-	d2 = 4;
 	icon_state = "2-4"
 	},
 /turf/simulated/floor/tiled/techfloor,
@@ -462,8 +448,6 @@
 	dir = 4
 	},
 /obj/structure/cable{
-	d1 = 4;
-	d2 = 8;
 	icon_state = "4-8"
 	},
 /turf/simulated/floor/tiled/techfloor,
@@ -475,8 +459,6 @@
 "bm" = (
 /obj/machinery/door/firedoor,
 /obj/structure/cable{
-	d1 = 1;
-	d2 = 2;
 	icon_state = "1-2"
 	},
 /obj/effect/wallframe_spawn/reinforced_borosilicate,
@@ -503,8 +485,6 @@
 	dir = 4
 	},
 /obj/structure/cable{
-	d1 = 4;
-	d2 = 8;
 	icon_state = "4-8"
 	},
 /obj/effect/floor_decal/techfloor,
@@ -516,8 +496,6 @@
 	dir = 4
 	},
 /obj/structure/cable{
-	d1 = 4;
-	d2 = 8;
 	icon_state = "4-8"
 	},
 /obj/effect/floor_decal/techfloor{
@@ -570,7 +548,6 @@
 /area/map_template/colony)
 "bt" = (
 /obj/structure/cable{
-	d2 = 4;
 	icon_state = "0-4"
 	},
 /obj/machinery/power/terminal{
@@ -589,8 +566,6 @@
 	dir = 4
 	},
 /obj/structure/cable{
-	d1 = 4;
-	d2 = 8;
 	icon_state = "4-8"
 	},
 /obj/effect/floor_decal/corner/red{
@@ -606,8 +581,6 @@
 	dir = 9
 	},
 /obj/structure/cable{
-	d1 = 2;
-	d2 = 8;
 	icon_state = "2-8"
 	},
 /turf/simulated/floor/tiled/techfloor,
@@ -643,7 +616,6 @@
 "bA" = (
 /obj/machinery/power/smes/buildable/max_cap_in_out,
 /obj/structure/cable{
-	d2 = 2;
 	icon_state = "0-2"
 	},
 /obj/effect/floor_decal/industrial/outline/yellow,
@@ -655,8 +627,6 @@
 "bB" = (
 /obj/structure/catwalk,
 /obj/structure/cable{
-	d1 = 2;
-	d2 = 4;
 	icon_state = "2-4"
 	},
 /turf/exterior/concrete,
@@ -697,7 +667,6 @@
 	pixel_y = -28
 	},
 /obj/structure/cable{
-	d2 = 4;
 	icon_state = "0-4"
 	},
 /obj/machinery/atmospherics/unary/vent_scrubber/on{
@@ -733,13 +702,9 @@
 "bI" = (
 /obj/structure/catwalk,
 /obj/structure/cable{
-	d1 = 4;
-	d2 = 8;
 	icon_state = "4-8"
 	},
 /obj/structure/cable{
-	d1 = 1;
-	d2 = 4;
 	icon_state = "1-4"
 	},
 /turf/exterior/concrete,
@@ -770,8 +735,6 @@
 "bM" = (
 /obj/structure/catwalk,
 /obj/structure/cable{
-	d1 = 4;
-	d2 = 8;
 	icon_state = "4-8"
 	},
 /turf/exterior/concrete,
@@ -785,7 +748,6 @@
 	dir = 8
 	},
 /obj/structure/cable{
-	d2 = 4;
 	icon_state = "0-4"
 	},
 /obj/effect/floor_decal/techfloor{
@@ -795,13 +757,9 @@
 /area/map_template/colony/engineering)
 "bP" = (
 /obj/structure/cable{
-	d1 = 1;
-	d2 = 8;
 	icon_state = "1-8"
 	},
 /obj/structure/cable{
-	d1 = 1;
-	d2 = 4;
 	icon_state = "1-4"
 	},
 /obj/effect/floor_decal/techfloor,
@@ -809,8 +767,6 @@
 /area/map_template/colony/engineering)
 "bQ" = (
 /obj/structure/cable{
-	d1 = 4;
-	d2 = 8;
 	icon_state = "4-8"
 	},
 /obj/effect/floor_decal/techfloor{
@@ -821,13 +777,9 @@
 "bR" = (
 /obj/structure/catwalk,
 /obj/structure/cable{
-	d1 = 2;
-	d2 = 8;
 	icon_state = "2-8"
 	},
 /obj/structure/cable{
-	d1 = 2;
-	d2 = 4;
 	icon_state = "2-4"
 	},
 /turf/exterior/concrete,
@@ -844,13 +796,9 @@
 "bT" = (
 /obj/structure/catwalk,
 /obj/structure/cable{
-	d1 = 1;
-	d2 = 8;
 	icon_state = "1-8"
 	},
 /obj/structure/cable{
-	d1 = 4;
-	d2 = 8;
 	icon_state = "4-8"
 	},
 /turf/exterior/concrete,
@@ -863,13 +811,9 @@
 	dir = 4
 	},
 /obj/structure/cable{
-	d1 = 1;
-	d2 = 2;
 	icon_state = "1-2"
 	},
 /obj/structure/cable{
-	d1 = 1;
-	d2 = 8;
 	icon_state = "1-8"
 	},
 /obj/effect/floor_decal/techfloor,
@@ -884,8 +828,6 @@
 	dir = 8
 	},
 /obj/structure/cable{
-	d1 = 1;
-	d2 = 2;
 	icon_state = "1-2"
 	},
 /obj/effect/floor_decal/techfloor{
@@ -934,7 +876,6 @@
 /area/map_template/colony/surgery)
 "ca" = (
 /obj/structure/cable{
-	d2 = 2;
 	icon_state = "0-2"
 	},
 /obj/effect/floor_decal/industrial/hatch/orange,
@@ -945,12 +886,11 @@
 /obj/machinery/light{
 	dir = 1
 	},
-/obj/machinery/power/port_gen/pacman/mrs,
+/obj/machinery/port_gen/pacman/mrs,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/map_template/colony/engineering)
 "cb" = (
 /obj/structure/cable{
-	d2 = 8;
 	icon_state = "0-8"
 	},
 /obj/effect/floor_decal/techfloor{
@@ -968,7 +908,6 @@
 "cd" = (
 /obj/structure/grille,
 /obj/structure/cable{
-	d2 = 4;
 	icon_state = "0-4"
 	},
 /turf/exterior/concrete,
@@ -983,18 +922,15 @@
 "cf" = (
 /obj/structure/catwalk,
 /obj/effect/decal/cleanable/dirt,
-/obj/machinery/power/emitter/gyrotron,
+/obj/machinery/emitter/gyrotron,
 /turf/exterior/concrete,
 /area/template_noop)
 "cg" = (
 /obj/structure/cable{
-	d1 = 1;
-	d2 = 2;
 	icon_state = "1-2"
 	},
 /obj/machinery/power/smes/buildable/max_cap_in_out,
 /obj/structure/cable{
-	d2 = 2;
 	icon_state = "0-2"
 	},
 /obj/effect/floor_decal/industrial/outline/yellow,
@@ -1012,8 +948,6 @@
 "ci" = (
 /obj/structure/catwalk,
 /obj/structure/cable{
-	d1 = 1;
-	d2 = 8;
 	icon_state = "1-8"
 	},
 /turf/exterior/concrete,
@@ -1046,8 +980,6 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/structure/cable{
-	d1 = 1;
-	d2 = 2;
 	icon_state = "1-2"
 	},
 /obj/machinery/door/airlock/glass/command,
@@ -1087,12 +1019,9 @@
 "cq" = (
 /obj/structure/grille,
 /obj/structure/cable{
-	d1 = 4;
-	d2 = 8;
 	icon_state = "4-8"
 	},
 /obj/structure/cable{
-	d2 = 4;
 	icon_state = "0-4"
 	},
 /turf/exterior/concrete,
@@ -1100,12 +1029,9 @@
 "cr" = (
 /obj/structure/grille,
 /obj/structure/cable{
-	d1 = 2;
-	d2 = 8;
 	icon_state = "2-8"
 	},
 /obj/structure/cable{
-	d2 = 2;
 	icon_state = "0-2"
 	},
 /turf/exterior/concrete,
@@ -1113,12 +1039,9 @@
 "cs" = (
 /obj/structure/grille,
 /obj/structure/cable{
-	d1 = 1;
-	d2 = 2;
 	icon_state = "1-2"
 	},
 /obj/structure/cable{
-	d2 = 2;
 	icon_state = "0-2"
 	},
 /turf/exterior/concrete,
@@ -1246,8 +1169,6 @@
 "cK" = (
 /obj/structure/catwalk,
 /obj/structure/cable{
-	d1 = 1;
-	d2 = 4;
 	icon_state = "1-4"
 	},
 /turf/exterior/concrete,
@@ -1278,8 +1199,6 @@
 "cP" = (
 /obj/structure/catwalk,
 /obj/structure/cable{
-	d1 = 4;
-	d2 = 8;
 	icon_state = "4-8"
 	},
 /obj/structure/sign/warning/compressed_gas{
@@ -1364,8 +1283,6 @@
 	dir = 8
 	},
 /obj/structure/cable{
-	d1 = 1;
-	d2 = 4;
 	icon_state = "1-4"
 	},
 /obj/effect/floor_decal/techfloor{
@@ -1394,8 +1311,6 @@
 	pixel_y = 20
 	},
 /obj/structure/cable{
-	d1 = 2;
-	d2 = 8;
 	icon_state = "2-8"
 	},
 /obj/effect/floor_decal/techfloor{
@@ -1479,13 +1394,9 @@
 "dl" = (
 /obj/structure/catwalk,
 /obj/structure/cable{
-	d1 = 1;
-	d2 = 4;
 	icon_state = "1-4"
 	},
 /obj/structure/cable{
-	d1 = 4;
-	d2 = 8;
 	icon_state = "4-8"
 	},
 /turf/exterior/concrete,
@@ -1493,8 +1404,6 @@
 "dm" = (
 /obj/structure/catwalk,
 /obj/structure/cable{
-	d1 = 4;
-	d2 = 8;
 	icon_state = "4-8"
 	},
 /obj/machinery/light/spot,
@@ -1502,7 +1411,7 @@
 /area/template_noop)
 "dn" = (
 /obj/structure/catwalk,
-/obj/machinery/power/rad_collector,
+/obj/machinery/rad_collector,
 /obj/effect/decal/cleanable/dirt,
 /turf/exterior/concrete,
 /area/template_noop)
@@ -1596,8 +1505,6 @@
 /area/map_template/colony)
 "dy" = (
 /obj/structure/cable{
-	d1 = 1;
-	d2 = 2;
 	icon_state = "1-2"
 	},
 /obj/structure/reagent_dispensers/fueltank,
@@ -1654,8 +1561,6 @@
 "dE" = (
 /obj/machinery/door/firedoor,
 /obj/structure/cable{
-	d1 = 1;
-	d2 = 2;
 	icon_state = "1-2"
 	},
 /obj/effect/floor_decal/techfloor{
@@ -1673,18 +1578,12 @@
 /area/map_template/colony/surgery)
 "dG" = (
 /obj/structure/cable{
-	d1 = 1;
-	d2 = 8;
 	icon_state = "1-8"
 	},
 /obj/structure/cable{
-	d1 = 1;
-	d2 = 4;
 	icon_state = "1-4"
 	},
 /obj/structure/cable{
-	d1 = 1;
-	d2 = 2;
 	icon_state = "1-2"
 	},
 /obj/effect/floor_decal/techfloor{
@@ -1746,8 +1645,6 @@
 /area/map_template/colony/surgery)
 "dO" = (
 /obj/structure/cable{
-	d1 = 1;
-	d2 = 2;
 	icon_state = "1-2"
 	},
 /obj/effect/floor_decal/techfloor{
@@ -1896,8 +1793,6 @@
 	dir = 4
 	},
 /obj/structure/cable{
-	d1 = 4;
-	d2 = 8;
 	icon_state = "4-8"
 	},
 /obj/machinery/door/airlock/glass/medical,
@@ -1921,8 +1816,6 @@
 	dir = 4
 	},
 /obj/structure/cable{
-	d1 = 4;
-	d2 = 8;
 	icon_state = "4-8"
 	},
 /turf/simulated/floor/tiled/white,
@@ -1935,13 +1828,9 @@
 	dir = 4
 	},
 /obj/structure/cable{
-	d1 = 4;
-	d2 = 8;
 	icon_state = "4-8"
 	},
 /obj/structure/cable{
-	d1 = 2;
-	d2 = 8;
 	icon_state = "2-8"
 	},
 /turf/simulated/floor/tiled/white,
@@ -1954,8 +1843,6 @@
 	dir = 4
 	},
 /obj/structure/cable{
-	d1 = 4;
-	d2 = 8;
 	icon_state = "4-8"
 	},
 /turf/simulated/floor/tiled/white,
@@ -2003,13 +1890,9 @@
 "el" = (
 /obj/structure/catwalk,
 /obj/structure/cable{
-	d1 = 1;
-	d2 = 4;
 	icon_state = "1-4"
 	},
 /obj/structure/cable{
-	d1 = 4;
-	d2 = 8;
 	icon_state = "4-8"
 	},
 /obj/structure/sign/warning/compressed_gas{
@@ -2038,17 +1921,12 @@
 "eo" = (
 /obj/structure/catwalk,
 /obj/structure/cable{
-	d1 = 1;
-	d2 = 4;
 	icon_state = "1-4"
 	},
 /obj/structure/cable{
-	d1 = 4;
-	d2 = 8;
 	icon_state = "4-8"
 	},
 /obj/structure/cable{
-	d2 = 4;
 	icon_state = "0-4"
 	},
 /turf/exterior/concrete,
@@ -2093,13 +1971,9 @@
 	dir = 4
 	},
 /obj/structure/cable{
-	d1 = 1;
-	d2 = 2;
 	icon_state = "1-2"
 	},
 /obj/structure/cable{
-	d1 = 2;
-	d2 = 4;
 	icon_state = "2-4"
 	},
 /obj/effect/floor_decal/techfloor{
@@ -2132,8 +2006,6 @@
 	dir = 4
 	},
 /obj/structure/cable{
-	d1 = 4;
-	d2 = 8;
 	icon_state = "4-8"
 	},
 /obj/machinery/door/airlock/medical,
@@ -2156,8 +2028,6 @@
 	dir = 1
 	},
 /obj/structure/cable{
-	d1 = 4;
-	d2 = 8;
 	icon_state = "4-8"
 	},
 /obj/effect/floor_decal/corner/red{
@@ -2224,8 +2094,6 @@
 	dir = 4
 	},
 /obj/structure/cable{
-	d1 = 2;
-	d2 = 8;
 	icon_state = "2-8"
 	},
 /obj/effect/floor_decal/corner/red{
@@ -2242,8 +2110,6 @@
 /area/map_template/colony/command)
 "eH" = (
 /obj/structure/cable{
-	d1 = 1;
-	d2 = 2;
 	icon_state = "1-2"
 	},
 /obj/structure/closet/crate,
@@ -2289,8 +2155,6 @@
 /area/map_template/colony/atmospherics)
 "eK" = (
 /obj/structure/cable{
-	d1 = 1;
-	d2 = 2;
 	icon_state = "1-2"
 	},
 /obj/machinery/vending/tool{
@@ -2359,7 +2223,6 @@
 	pixel_y = -28
 	},
 /obj/structure/cable{
-	d2 = 4;
 	icon_state = "0-4"
 	},
 /turf/simulated/floor/wood/walnut,
@@ -2388,8 +2251,6 @@
 	dir = 4
 	},
 /obj/structure/cable{
-	d1 = 4;
-	d2 = 8;
 	icon_state = "4-8"
 	},
 /turf/simulated/floor/wood/walnut,
@@ -2423,8 +2284,6 @@
 	dir = 4
 	},
 /obj/structure/cable{
-	d1 = 4;
-	d2 = 8;
 	icon_state = "4-8"
 	},
 /obj/machinery/door/airlock/civilian{
@@ -2503,8 +2362,8 @@
 "fd" = (
 /obj/structure/table/steel_reinforced,
 /obj/item/storage/toolbox/syndicate,
-/obj/item/tape_roll,
-/obj/item/tape_roll,
+/obj/item/ducttape,
+/obj/item/ducttape,
 /obj/item/crowbar/brace_jack,
 /obj/item/clothing/head/hardhat/white,
 /obj/item/grenade/chem_grenade/metalfoam,
@@ -2520,9 +2379,9 @@
 /obj/effect/floor_decal/spline/fancy/wood{
 	dir = 1
 	},
-/obj/item/chems/food/condiment/small/peppermill,
-/obj/item/chems/food/condiment/small/saltshaker,
-/obj/item/chems/food/condiment/small/sugar,
+/obj/item/chems/condiment/small/peppermill,
+/obj/item/chems/condiment/small/saltshaker,
+/obj/item/chems/condiment/small/sugar,
 /turf/simulated/floor/wood/walnut,
 /area/map_template/colony/messhall)
 "ff" = (
@@ -2625,13 +2484,9 @@
 /area/map_template/colony/messhall)
 "fp" = (
 /obj/structure/cable{
-	d1 = 1;
-	d2 = 2;
 	icon_state = "1-2"
 	},
 /obj/structure/cable{
-	d1 = 1;
-	d2 = 4;
 	icon_state = "1-4"
 	},
 /obj/machinery/vending/engineering{
@@ -2654,8 +2509,6 @@
 	dir = 9
 	},
 /obj/structure/cable{
-	d1 = 4;
-	d2 = 8;
 	icon_state = "4-8"
 	},
 /turf/simulated/floor/tiled/techfloor,
@@ -2669,8 +2522,6 @@
 	dir = 1
 	},
 /obj/structure/cable{
-	d1 = 2;
-	d2 = 8;
 	icon_state = "2-8"
 	},
 /turf/simulated/floor/tiled/techfloor,
@@ -2714,8 +2565,6 @@
 /area/map_template/colony)
 "fw" = (
 /obj/structure/cable{
-	d1 = 1;
-	d2 = 4;
 	icon_state = "1-4"
 	},
 /obj/machinery/vending/engivend{
@@ -2729,8 +2578,6 @@
 	dir = 8
 	},
 /obj/structure/cable{
-	d1 = 1;
-	d2 = 2;
 	icon_state = "1-2"
 	},
 /obj/effect/floor_decal/techfloor{
@@ -2747,8 +2594,6 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/effect/floor_decal/techfloor,
 /obj/structure/cable{
-	d1 = 1;
-	d2 = 2;
 	icon_state = "1-2"
 	},
 /turf/simulated/floor/tiled/techfloor,
@@ -2840,8 +2685,6 @@
 "fG" = (
 /obj/machinery/door/firedoor,
 /obj/structure/cable{
-	d1 = 4;
-	d2 = 8;
 	icon_state = "4-8"
 	},
 /obj/machinery/door/airlock/glass/civilian,
@@ -2860,9 +2703,9 @@
 /obj/effect/floor_decal/spline/fancy/wood{
 	dir = 1
 	},
-/obj/item/chems/food/condiment/small/peppermill,
-/obj/item/chems/food/condiment/small/saltshaker,
-/obj/item/chems/food/condiment/small/sugar,
+/obj/item/chems/condiment/small/peppermill,
+/obj/item/chems/condiment/small/saltshaker,
+/obj/item/chems/condiment/small/sugar,
 /turf/simulated/floor/wood/walnut,
 /area/map_template/colony/messhall)
 "fJ" = (
@@ -2892,8 +2735,6 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/structure/cable{
-	d1 = 1;
-	d2 = 2;
 	icon_state = "1-2"
 	},
 /obj/machinery/door/airlock/engineering,
@@ -2936,8 +2777,6 @@
 	dir = 4
 	},
 /obj/structure/cable{
-	d1 = 2;
-	d2 = 4;
 	icon_state = "2-4"
 	},
 /turf/simulated/floor/tiled/techfloor/grid,
@@ -2953,8 +2792,6 @@
 	dir = 4
 	},
 /obj/structure/cable{
-	d1 = 4;
-	d2 = 8;
 	icon_state = "4-8"
 	},
 /turf/simulated/floor/tiled/techfloor,
@@ -2968,8 +2805,6 @@
 	dir = 4
 	},
 /obj/structure/cable{
-	d1 = 4;
-	d2 = 8;
 	icon_state = "4-8"
 	},
 /obj/machinery/door/airlock/atmos,
@@ -2993,8 +2828,6 @@
 	dir = 4
 	},
 /obj/structure/cable{
-	d1 = 4;
-	d2 = 8;
 	icon_state = "4-8"
 	},
 /obj/effect/floor_decal/techfloor{
@@ -3004,13 +2837,9 @@
 /area/map_template/colony)
 "fS" = (
 /obj/structure/cable{
-	d1 = 1;
-	d2 = 2;
 	icon_state = "1-2"
 	},
 /obj/structure/cable{
-	d1 = 2;
-	d2 = 8;
 	icon_state = "2-8"
 	},
 /obj/effect/floor_decal/techfloor{
@@ -3038,8 +2867,6 @@
 	dir = 4
 	},
 /obj/structure/cable{
-	d1 = 1;
-	d2 = 2;
 	icon_state = "1-2"
 	},
 /obj/effect/floor_decal/techfloor{
@@ -3049,13 +2876,9 @@
 /area/map_template/colony)
 "fV" = (
 /obj/structure/cable{
-	d1 = 1;
-	d2 = 8;
 	icon_state = "1-8"
 	},
 /obj/structure/cable{
-	d1 = 2;
-	d2 = 8;
 	icon_state = "2-8"
 	},
 /obj/effect/floor_decal/techfloor{
@@ -3097,8 +2920,6 @@
 	dir = 8
 	},
 /obj/structure/cable{
-	d1 = 1;
-	d2 = 2;
 	icon_state = "1-2"
 	},
 /obj/effect/floor_decal/techfloor{
@@ -3117,8 +2938,6 @@
 	dir = 9
 	},
 /obj/structure/cable{
-	d1 = 2;
-	d2 = 8;
 	icon_state = "2-8"
 	},
 /turf/simulated/floor/tiled/techfloor,
@@ -3145,7 +2964,7 @@
 /obj/effect/floor_decal/spline/fancy/wood{
 	dir = 8
 	},
-/obj/item/chems/food/drinks/pitcher,
+/obj/item/chems/drinks/pitcher,
 /turf/simulated/floor/wood/walnut,
 /area/map_template/colony/messhall)
 "gc" = (
@@ -3196,11 +3015,11 @@
 /obj/item/storage/box/cola/spacewind,
 /obj/item/storage/box/cola/icedtea,
 /obj/item/storage/box/cola/drgibb,
-/obj/item/chems/food/drinks/shaker,
-/obj/item/chems/food/drinks/pitcher,
+/obj/item/chems/drinks/shaker,
+/obj/item/chems/drinks/pitcher,
 /obj/item/chems/glass/beaker/bowl,
-/obj/item/chems/food/condiment/salt,
-/obj/item/chems/food/condiment/enzyme,
+/obj/item/chems/condiment/salt,
+/obj/item/chems/condiment/enzyme,
 /turf/simulated/floor/tiled/freezer,
 /area/map_template/colony/messhall)
 "gf" = (
@@ -3213,7 +3032,6 @@
 	pixel_y = -28
 	},
 /obj/structure/cable{
-	d2 = 8;
 	icon_state = "0-8"
 	},
 /obj/effect/floor_decal/techfloor/hole/right,
@@ -3221,13 +3039,9 @@
 /area/map_template/colony/engineering)
 "gg" = (
 /obj/structure/cable{
-	d1 = 1;
-	d2 = 2;
 	icon_state = "1-2"
 	},
 /obj/structure/cable{
-	d1 = 2;
-	d2 = 4;
 	icon_state = "2-4"
 	},
 /obj/effect/floor_decal/techfloor{
@@ -3243,8 +3057,6 @@
 	dir = 1
 	},
 /obj/structure/cable{
-	d1 = 4;
-	d2 = 8;
 	icon_state = "4-8"
 	},
 /obj/effect/floor_decal/techfloor{
@@ -3260,8 +3072,6 @@
 	dir = 4
 	},
 /obj/structure/cable{
-	d1 = 1;
-	d2 = 2;
 	icon_state = "1-2"
 	},
 /turf/simulated/floor/tiled/techfloor/grid,
@@ -3277,8 +3087,6 @@
 	dir = 8
 	},
 /obj/structure/cable{
-	d1 = 1;
-	d2 = 2;
 	icon_state = "1-2"
 	},
 /turf/simulated/floor/tiled/techfloor,
@@ -3330,8 +3138,6 @@
 	dir = 1
 	},
 /obj/structure/cable{
-	d1 = 2;
-	d2 = 4;
 	icon_state = "2-4"
 	},
 /turf/simulated/floor/tiled/techfloor,
@@ -3354,8 +3160,6 @@
 	dir = 5
 	},
 /obj/structure/cable{
-	d1 = 4;
-	d2 = 8;
 	icon_state = "4-8"
 	},
 /turf/simulated/floor/tiled/techfloor,
@@ -3368,8 +3172,6 @@
 	dir = 4
 	},
 /obj/structure/cable{
-	d1 = 4;
-	d2 = 8;
 	icon_state = "4-8"
 	},
 /obj/effect/floor_decal/techfloor{
@@ -3419,13 +3221,9 @@
 /obj/machinery/atmospherics/pipe/manifold4w/hidden/scrubbers,
 /obj/machinery/atmospherics/pipe/manifold4w/hidden/supply,
 /obj/structure/cable{
-	d1 = 1;
-	d2 = 8;
 	icon_state = "1-8"
 	},
 /obj/structure/cable{
-	d1 = 1;
-	d2 = 4;
 	icon_state = "1-4"
 	},
 /obj/effect/floor_decal/techfloor{
@@ -3449,8 +3247,6 @@
 "gy" = (
 /obj/machinery/door/firedoor,
 /obj/structure/cable{
-	d1 = 1;
-	d2 = 2;
 	icon_state = "1-2"
 	},
 /obj/effect/floor_decal/techfloor{
@@ -3504,8 +3300,6 @@
 	dir = 4
 	},
 /obj/structure/cable{
-	d1 = 4;
-	d2 = 8;
 	icon_state = "4-8"
 	},
 /obj/effect/floor_decal/techfloor{
@@ -3682,7 +3476,6 @@
 	pixel_y = -28
 	},
 /obj/structure/cable{
-	d2 = 8;
 	icon_state = "0-8"
 	},
 /obj/effect/floor_decal/spline/fancy/wood,
@@ -3732,8 +3525,6 @@
 	dir = 4
 	},
 /obj/structure/cable{
-	d1 = 4;
-	d2 = 8;
 	icon_state = "4-8"
 	},
 /obj/effect/floor_decal/techfloor{
@@ -3760,8 +3551,6 @@
 /area/map_template/colony/atmospherics)
 "he" = (
 /obj/structure/cable{
-	d1 = 1;
-	d2 = 8;
 	icon_state = "1-8"
 	},
 /obj/item/radio/intercom{
@@ -3773,8 +3562,6 @@
 "hf" = (
 /obj/effect/floor_decal/techfloor,
 /obj/structure/cable{
-	d1 = 4;
-	d2 = 8;
 	icon_state = "4-8"
 	},
 /obj/effect/floor_decal/techfloor/hole/right,
@@ -3789,8 +3576,6 @@
 	dir = 4
 	},
 /obj/structure/cable{
-	d1 = 4;
-	d2 = 8;
 	icon_state = "4-8"
 	},
 /obj/effect/floor_decal/techfloor{
@@ -3804,8 +3589,6 @@
 "hh" = (
 /obj/effect/floor_decal/techfloor,
 /obj/structure/cable{
-	d1 = 4;
-	d2 = 8;
 	icon_state = "4-8"
 	},
 /obj/machinery/light,
@@ -3828,13 +3611,9 @@
 	dir = 10
 	},
 /obj/structure/cable{
-	d1 = 1;
-	d2 = 4;
 	icon_state = "1-4"
 	},
 /obj/structure/cable{
-	d1 = 4;
-	d2 = 8;
 	icon_state = "4-8"
 	},
 /turf/simulated/floor/tiled/techfloor,
@@ -3856,8 +3635,6 @@
 "hn" = (
 /obj/effect/floor_decal/techfloor,
 /obj/structure/cable{
-	d1 = 4;
-	d2 = 8;
 	icon_state = "4-8"
 	},
 /obj/item/radio/intercom{
@@ -3874,8 +3651,6 @@
 /obj/machinery/door/firedoor,
 /obj/effect/floor_decal/techfloor,
 /obj/structure/cable{
-	d1 = 4;
-	d2 = 8;
 	icon_state = "4-8"
 	},
 /turf/simulated/floor/tiled/techfloor,
@@ -3900,13 +3675,9 @@
 "ht" = (
 /obj/effect/floor_decal/techfloor,
 /obj/structure/cable{
-	d1 = 4;
-	d2 = 8;
 	icon_state = "4-8"
 	},
 /obj/structure/cable{
-	d1 = 1;
-	d2 = 8;
 	icon_state = "1-8"
 	},
 /turf/simulated/floor/tiled/techfloor,
@@ -3926,7 +3697,6 @@
 	pixel_y = -28
 	},
 /obj/structure/cable{
-	d2 = 8;
 	icon_state = "0-8"
 	},
 /turf/simulated/floor/tiled/techfloor,
@@ -3936,16 +3706,12 @@
 	dir = 9
 	},
 /obj/structure/cable{
-	d1 = 1;
-	d2 = 2;
 	icon_state = "1-2"
 	},
 /turf/simulated/floor/tiled/techfloor,
 /area/map_template/colony)
 "hx" = (
 /obj/structure/cable{
-	d1 = 4;
-	d2 = 8;
 	icon_state = "4-8"
 	},
 /obj/effect/floor_decal/spline/fancy/wood{
@@ -4047,8 +3813,6 @@
 /area/map_template/colony/atmospherics)
 "hG" = (
 /obj/structure/cable{
-	d1 = 2;
-	d2 = 4;
 	icon_state = "2-4"
 	},
 /obj/effect/floor_decal/techfloor{
@@ -4071,8 +3835,6 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/structure/cable{
-	d1 = 4;
-	d2 = 8;
 	icon_state = "4-8"
 	},
 /obj/effect/floor_decal/techfloor{
@@ -4123,8 +3885,6 @@
 /area/map_template/colony)
 "hO" = (
 /obj/structure/cable{
-	d1 = 1;
-	d2 = 2;
 	icon_state = "1-2"
 	},
 /obj/effect/floor_decal/techfloor{
@@ -4197,8 +3957,6 @@
 	dir = 4
 	},
 /obj/structure/cable{
-	d1 = 4;
-	d2 = 8;
 	icon_state = "4-8"
 	},
 /obj/machinery/door/airlock/highsecurity,
@@ -4229,8 +3987,6 @@
 	dir = 8
 	},
 /obj/structure/cable{
-	d1 = 1;
-	d2 = 2;
 	icon_state = "1-2"
 	},
 /obj/effect/floor_decal/techfloor{
@@ -4251,8 +4007,6 @@
 /area/map_template/colony)
 "ia" = (
 /obj/structure/cable{
-	d1 = 1;
-	d2 = 2;
 	icon_state = "1-2"
 	},
 /obj/machinery/portable_atmospherics/canister/oxygen,
@@ -4274,8 +4028,6 @@
 	dir = 8
 	},
 /obj/structure/cable{
-	d1 = 1;
-	d2 = 2;
 	icon_state = "1-2"
 	},
 /turf/simulated/floor/tiled/techfloor,
@@ -4321,8 +4073,6 @@
 	dir = 4
 	},
 /obj/structure/cable{
-	d1 = 4;
-	d2 = 8;
 	icon_state = "4-8"
 	},
 /obj/machinery/door/airlock/glass/civilian,
@@ -4376,8 +4126,6 @@
 	dir = 4
 	},
 /obj/structure/cable{
-	d1 = 2;
-	d2 = 8;
 	icon_state = "2-8"
 	},
 /turf/simulated/floor/wood/walnut,
@@ -4452,8 +4200,6 @@
 	dir = 6
 	},
 /obj/structure/cable{
-	d1 = 2;
-	d2 = 4;
 	icon_state = "2-4"
 	},
 /turf/simulated/floor/tiled/steel_grid,
@@ -4494,7 +4240,7 @@
 "iw" = (
 /obj/structure/table/marble,
 /obj/machinery/reagent_temperature,
-/obj/item/chems/food/drinks/shaker,
+/obj/item/chems/drinks/shaker,
 /obj/machinery/vending/boozeomat{
 	density = 0;
 	pixel_y = -32;
@@ -4529,8 +4275,6 @@
 	dir = 4
 	},
 /obj/structure/cable{
-	d1 = 4;
-	d2 = 8;
 	icon_state = "4-8"
 	},
 /obj/machinery/door/airlock/glass/security,
@@ -4587,13 +4331,9 @@
 	dir = 4
 	},
 /obj/structure/cable{
-	d1 = 1;
-	d2 = 2;
 	icon_state = "1-2"
 	},
 /obj/structure/cable{
-	d1 = 2;
-	d2 = 4;
 	icon_state = "2-4"
 	},
 /obj/effect/floor_decal/techfloor{
@@ -4623,8 +4363,6 @@
 	dir = 8
 	},
 /obj/structure/cable{
-	d1 = 4;
-	d2 = 8;
 	icon_state = "4-8"
 	},
 /obj/effect/floor_decal/corner/red{
@@ -4640,13 +4378,9 @@
 	dir = 4
 	},
 /obj/structure/cable{
-	d1 = 4;
-	d2 = 8;
 	icon_state = "4-8"
 	},
 /obj/structure/cable{
-	d1 = 2;
-	d2 = 4;
 	icon_state = "2-4"
 	},
 /turf/simulated/floor/tiled/techfloor,
@@ -4659,8 +4393,6 @@
 	dir = 4
 	},
 /obj/structure/cable{
-	d1 = 4;
-	d2 = 8;
 	icon_state = "4-8"
 	},
 /turf/simulated/floor/tiled/techfloor,
@@ -4673,8 +4405,6 @@
 	dir = 4
 	},
 /obj/structure/cable{
-	d1 = 2;
-	d2 = 8;
 	icon_state = "2-8"
 	},
 /turf/simulated/floor/tiled/techfloor,
@@ -4708,8 +4438,6 @@
 	dir = 8
 	},
 /obj/structure/cable{
-	d1 = 1;
-	d2 = 2;
 	icon_state = "1-2"
 	},
 /turf/simulated/floor/tiled/techfloor,
@@ -4739,8 +4467,6 @@
 /area/map_template/colony/commons)
 "iP" = (
 /obj/structure/cable{
-	d1 = 1;
-	d2 = 2;
 	icon_state = "1-2"
 	},
 /obj/item/stool/bar/padded,
@@ -4773,8 +4499,6 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/structure/cable{
-	d1 = 1;
-	d2 = 2;
 	icon_state = "1-2"
 	},
 /turf/simulated/floor/tiled/steel_grid,
@@ -4790,13 +4514,9 @@
 	dir = 4
 	},
 /obj/structure/cable{
-	d1 = 4;
-	d2 = 8;
 	icon_state = "4-8"
 	},
 /obj/structure/cable{
-	d1 = 2;
-	d2 = 4;
 	icon_state = "2-4"
 	},
 /obj/effect/floor_decal/corner/red{
@@ -4815,8 +4535,6 @@
 	dir = 8
 	},
 /obj/structure/cable{
-	d1 = 4;
-	d2 = 8;
 	icon_state = "4-8"
 	},
 /obj/effect/floor_decal/corner/red{
@@ -4842,8 +4560,6 @@
 	dir = 4
 	},
 /obj/structure/cable{
-	d1 = 4;
-	d2 = 8;
 	icon_state = "4-8"
 	},
 /obj/structure/hygiene/drain,
@@ -4918,8 +4634,6 @@
 	dir = 4
 	},
 /obj/structure/cable{
-	d1 = 1;
-	d2 = 2;
 	icon_state = "1-2"
 	},
 /obj/effect/floor_decal/corner/red{
@@ -4935,8 +4649,6 @@
 	dir = 8
 	},
 /obj/structure/cable{
-	d1 = 1;
-	d2 = 2;
 	icon_state = "1-2"
 	},
 /turf/simulated/floor/tiled/techfloor,
@@ -4998,8 +4710,6 @@
 	dir = 4
 	},
 /obj/structure/cable{
-	d1 = 4;
-	d2 = 8;
 	icon_state = "4-8"
 	},
 /obj/effect/floor_decal/spline/fancy/wood{
@@ -5029,8 +4739,6 @@
 	dir = 4
 	},
 /obj/structure/cable{
-	d1 = 4;
-	d2 = 8;
 	icon_state = "4-8"
 	},
 /obj/machinery/door/airlock/civilian,
@@ -5056,8 +4764,6 @@
 	dir = 9
 	},
 /obj/structure/cable{
-	d1 = 4;
-	d2 = 8;
 	icon_state = "4-8"
 	},
 /turf/simulated/floor/tiled/techfloor,
@@ -5067,8 +4773,6 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/effect/floor_decal/techfloor,
 /obj/structure/cable{
-	d1 = 1;
-	d2 = 2;
 	icon_state = "1-2"
 	},
 /obj/effect/floor_decal/corner/red{
@@ -5081,8 +4785,6 @@
 	dir = 4
 	},
 /obj/structure/cable{
-	d1 = 4;
-	d2 = 8;
 	icon_state = "4-8"
 	},
 /obj/effect/decal/cleanable/dirt,
@@ -5121,8 +4823,6 @@
 	dir = 4
 	},
 /obj/structure/cable{
-	d1 = 4;
-	d2 = 8;
 	icon_state = "4-8"
 	},
 /obj/effect/floor_decal/corner/paleblue{
@@ -5134,8 +4834,6 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/structure/cable{
-	d1 = 1;
-	d2 = 8;
 	icon_state = "1-8"
 	},
 /obj/item/radio/intercom{
@@ -5171,8 +4869,6 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/structure/cable{
-	d1 = 1;
-	d2 = 2;
 	icon_state = "1-2"
 	},
 /obj/machinery/door/airlock/glass/security,
@@ -5186,8 +4882,6 @@
 	dir = 10
 	},
 /obj/structure/cable{
-	d1 = 1;
-	d2 = 2;
 	icon_state = "1-2"
 	},
 /obj/item/radio/intercom{
@@ -5266,8 +4960,6 @@
 	dir = 4
 	},
 /obj/structure/cable{
-	d1 = 2;
-	d2 = 4;
 	icon_state = "2-4"
 	},
 /obj/effect/floor_decal/corner/beige{
@@ -5291,8 +4983,6 @@
 	dir = 4
 	},
 /obj/structure/cable{
-	d1 = 4;
-	d2 = 8;
 	icon_state = "4-8"
 	},
 /obj/effect/floor_decal/corner/paleblue{
@@ -5306,8 +4996,6 @@
 	dir = 1
 	},
 /obj/structure/cable{
-	d1 = 4;
-	d2 = 8;
 	icon_state = "4-8"
 	},
 /obj/effect/floor_decal/techfloor{
@@ -5320,13 +5008,9 @@
 /area/map_template/colony)
 "jN" = (
 /obj/structure/cable{
-	d1 = 1;
-	d2 = 2;
 	icon_state = "1-2"
 	},
 /obj/structure/cable{
-	d1 = 1;
-	d2 = 8;
 	icon_state = "1-8"
 	},
 /obj/effect/floor_decal/techfloor{
@@ -5402,8 +5086,6 @@
 	dir = 4
 	},
 /obj/structure/cable{
-	d1 = 1;
-	d2 = 2;
 	icon_state = "1-2"
 	},
 /obj/machinery/atmospherics/unary/vent_pump/on{
@@ -5438,8 +5120,6 @@
 	dir = 4
 	},
 /obj/structure/cable{
-	d1 = 4;
-	d2 = 8;
 	icon_state = "4-8"
 	},
 /obj/machinery/door/airlock/glass/civilian,
@@ -5450,8 +5130,6 @@
 	dir = 4
 	},
 /obj/structure/cable{
-	d1 = 1;
-	d2 = 2;
 	icon_state = "1-2"
 	},
 /obj/effect/floor_decal/corner/red{
@@ -5489,8 +5167,6 @@
 	dir = 4
 	},
 /obj/structure/cable{
-	d1 = 1;
-	d2 = 2;
 	icon_state = "1-2"
 	},
 /obj/effect/floor_decal/corner/red{
@@ -5544,8 +5220,6 @@
 /area/map_template/colony/hydroponics)
 "ke" = (
 /obj/structure/cable{
-	d1 = 1;
-	d2 = 2;
 	icon_state = "1-2"
 	},
 /obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers{
@@ -5652,8 +5326,6 @@
 	icon_state = "warning"
 	},
 /obj/structure/cable{
-	d1 = 2;
-	d2 = 4;
 	icon_state = "2-4"
 	},
 /obj/machinery/light{
@@ -5811,8 +5483,6 @@
 	dir = 5
 	},
 /obj/structure/cable{
-	d1 = 1;
-	d2 = 2;
 	icon_state = "1-2"
 	},
 /turf/simulated/floor/tiled/techfloor,
@@ -5845,8 +5515,6 @@
 "kG" = (
 /obj/effect/floor_decal/techfloor/orange,
 /obj/structure/cable{
-	d1 = 1;
-	d2 = 2;
 	icon_state = "1-2"
 	},
 /obj/machinery/button/alternate/door/bolts{
@@ -5917,7 +5585,7 @@
 /area/map_template/colony/mineralprocessing)
 "kM" = (
 /obj/structure/crematorium{
-	id = 8
+	id_tag = "playablecolony_crematorium"
 	},
 /obj/effect/floor_decal/industrial/outline/yellow,
 /obj/effect/decal/cleanable/dirt,
@@ -5925,7 +5593,7 @@
 /area/map_template/colony/mineralprocessing)
 "kN" = (
 /obj/machinery/button/crematorium{
-	id_tag = 8;
+	id_tag = "playablecolony_crematorium";
 	pixel_y = 25;
 	req_access = list()
 	},
@@ -5972,16 +5640,12 @@
 	dir = 6
 	},
 /obj/structure/cable{
-	d1 = 1;
-	d2 = 2;
 	icon_state = "1-2"
 	},
 /turf/simulated/floor/tiled/techfloor,
 /area/map_template/colony)
 "kT" = (
 /obj/structure/cable{
-	d1 = 4;
-	d2 = 8;
 	icon_state = "4-8"
 	},
 /obj/machinery/atmospherics/pipe/manifold/hidden/supply{
@@ -5995,8 +5659,6 @@
 	dir = 8
 	},
 /obj/structure/cable{
-	d1 = 1;
-	d2 = 2;
 	icon_state = "1-2"
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
@@ -6077,8 +5739,6 @@
 /area/map_template/colony/atmospherics)
 "le" = (
 /obj/structure/cable{
-	d1 = 1;
-	d2 = 2;
 	icon_state = "1-2"
 	},
 /obj/machinery/atmospherics/pipe/manifold/hidden/supply{
@@ -6092,8 +5752,6 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/structure/cable{
-	d1 = 1;
-	d2 = 4;
 	icon_state = "1-4"
 	},
 /obj/effect/floor_decal/techfloor{
@@ -6129,8 +5787,6 @@
 /area/map_template/colony/mineralprocessing)
 "lj" = (
 /obj/structure/cable{
-	d1 = 4;
-	d2 = 8;
 	icon_state = "4-8"
 	},
 /obj/effect/floor_decal/techfloor{
@@ -6147,8 +5803,6 @@
 /area/map_template/colony)
 "ll" = (
 /obj/structure/cable{
-	d1 = 1;
-	d2 = 8;
 	icon_state = "1-8"
 	},
 /obj/effect/floor_decal/techfloor{
@@ -6209,7 +5863,6 @@
 	pixel_y = -28
 	},
 /obj/structure/cable{
-	d2 = 4;
 	icon_state = "0-4"
 	},
 /obj/structure/catwalk,
@@ -6221,8 +5874,6 @@
 /area/map_template/colony/mineralprocessing)
 "lu" = (
 /obj/structure/cable{
-	d1 = 2;
-	d2 = 8;
 	icon_state = "2-8"
 	},
 /obj/structure/catwalk,
@@ -6310,8 +5961,6 @@
 /obj/item/stack/material/ingot/mapped/silver/ten,
 /obj/structure/catwalk,
 /obj/structure/cable{
-	d1 = 1;
-	d2 = 4;
 	icon_state = "1-4"
 	},
 /obj/effect/floor_decal/industrial/warning/dust{
@@ -6323,8 +5972,6 @@
 "lD" = (
 /obj/structure/catwalk,
 /obj/structure/cable{
-	d1 = 4;
-	d2 = 8;
 	icon_state = "4-8"
 	},
 /obj/effect/decal/cleanable/dirt,
@@ -6422,8 +6069,6 @@
 "lN" = (
 /obj/machinery/door/firedoor,
 /obj/structure/cable{
-	d1 = 1;
-	d2 = 2;
 	icon_state = "1-2"
 	},
 /obj/machinery/door/airlock/glass/security{
@@ -6570,8 +6215,6 @@
 	},
 /obj/structure/catwalk,
 /obj/structure/cable{
-	d1 = 1;
-	d2 = 2;
 	icon_state = "1-2"
 	},
 /obj/effect/floor_decal/industrial/warning/dust{
@@ -6594,8 +6237,6 @@
 /obj/machinery/atmospherics/pipe/simple/hidden,
 /obj/structure/catwalk,
 /obj/structure/cable{
-	d1 = 2;
-	d2 = 8;
 	desc = "A flexible superconducting cable for heavy-duty power transfer. It's been labeled 'chaos reigns'.";
 	icon_state = "2-8"
 	},
@@ -6622,12 +6263,9 @@
 "mc" = (
 /obj/structure/grille,
 /obj/structure/cable{
-	d1 = 4;
-	d2 = 8;
 	icon_state = "4-8"
 	},
 /obj/structure/cable{
-	d2 = 8;
 	icon_state = "0-8"
 	},
 /turf/exterior/concrete,
@@ -6635,12 +6273,9 @@
 "md" = (
 /obj/structure/grille,
 /obj/structure/cable{
-	d1 = 1;
-	d2 = 8;
 	icon_state = "1-8"
 	},
 /obj/structure/cable{
-	d2 = 8;
 	icon_state = "0-8"
 	},
 /turf/exterior/concrete,
@@ -6651,8 +6286,6 @@
 /area/map_template/colony/engineering)
 "mf" = (
 /obj/structure/cable{
-	d1 = 4;
-	d2 = 8;
 	icon_state = "4-8"
 	},
 /obj/structure/bed,
@@ -6695,8 +6328,6 @@
 "mj" = (
 /obj/machinery/door/firedoor,
 /obj/structure/cable{
-	d1 = 1;
-	d2 = 2;
 	icon_state = "1-2"
 	},
 /obj/machinery/door/blast/regular/open{
@@ -6716,13 +6347,10 @@
 "ml" = (
 /obj/machinery/door/firedoor,
 /obj/structure/cable{
-	d1 = 2;
-	d2 = 4;
 	icon_state = "2-4"
 	},
 /obj/effect/wallframe_spawn/reinforced_borosilicate,
 /obj/structure/cable{
-	d2 = 4;
 	icon_state = "0-4"
 	},
 /turf/simulated/floor/plating,
@@ -6731,12 +6359,9 @@
 /obj/machinery/door/firedoor,
 /obj/effect/wallframe_spawn/reinforced_borosilicate,
 /obj/structure/cable{
-	d2 = 8;
 	icon_state = "0-8"
 	},
 /obj/structure/cable{
-	d1 = 2;
-	d2 = 8;
 	icon_state = "2-8"
 	},
 /turf/simulated/floor/plating,
@@ -6758,8 +6383,6 @@
 	dir = 4
 	},
 /obj/structure/cable{
-	d1 = 1;
-	d2 = 2;
 	icon_state = "1-2"
 	},
 /obj/machinery/door/blast/regular/open{
@@ -6771,8 +6394,6 @@
 "mp" = (
 /obj/machinery/door/firedoor,
 /obj/structure/cable{
-	d1 = 1;
-	d2 = 2;
 	icon_state = "1-2"
 	},
 /obj/structure/cable,
@@ -6812,8 +6433,6 @@
 /area/map_template/colony/jail)
 "mu" = (
 /obj/structure/cable{
-	d1 = 4;
-	d2 = 8;
 	icon_state = "4-8"
 	},
 /obj/effect/wallframe_spawn/reinforced_borosilicate,
@@ -6860,8 +6479,6 @@
 	dir = 4
 	},
 /obj/structure/cable{
-	d1 = 4;
-	d2 = 8;
 	icon_state = "4-8"
 	},
 /obj/machinery/door/airlock/command,
@@ -6923,8 +6540,6 @@
 	dir = 9
 	},
 /obj/structure/cable{
-	d1 = 4;
-	d2 = 8;
 	icon_state = "4-8"
 	},
 /obj/effect/floor_decal/techfloor{
@@ -6938,8 +6553,6 @@
 	level = 2
 	},
 /obj/structure/cable{
-	d1 = 4;
-	d2 = 8;
 	icon_state = "4-8"
 	},
 /obj/effect/floor_decal/techfloor{
@@ -6955,8 +6568,6 @@
 	dir = 8
 	},
 /obj/structure/cable{
-	d1 = 2;
-	d2 = 8;
 	icon_state = "2-8"
 	},
 /obj/effect/floor_decal/techfloor{
@@ -7022,8 +6633,6 @@
 	dir = 6
 	},
 /obj/structure/cable{
-	d1 = 1;
-	d2 = 2;
 	icon_state = "1-2"
 	},
 /obj/effect/floor_decal/corner/red{
@@ -7126,8 +6735,6 @@
 /area/map_template/colony)
 "mW" = (
 /obj/structure/cable{
-	d1 = 1;
-	d2 = 2;
 	icon_state = "1-2"
 	},
 /obj/effect/floor_decal/techfloor{
@@ -7170,8 +6777,6 @@
 "na" = (
 /obj/structure/catwalk,
 /obj/structure/cable{
-	d1 = 4;
-	d2 = 8;
 	icon_state = "4-8"
 	},
 /obj/effect/decal/cleanable/dirt,
@@ -7198,8 +6803,6 @@
 	pixel_y = 20
 	},
 /obj/structure/cable{
-	d1 = 4;
-	d2 = 8;
 	icon_state = "4-8"
 	},
 /obj/effect/floor_decal/corner/red{
@@ -7213,8 +6816,6 @@
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/structure/cable{
-	d1 = 4;
-	d2 = 8;
 	icon_state = "4-8"
 	},
 /obj/effect/floor_decal/corner/red{
@@ -7233,13 +6834,9 @@
 /area/map_template/colony/hydroponics)
 "nf" = (
 /obj/structure/cable{
-	d1 = 1;
-	d2 = 4;
 	icon_state = "1-4"
 	},
 /obj/structure/cable{
-	d1 = 1;
-	d2 = 8;
 	icon_state = "1-8"
 	},
 /obj/effect/floor_decal/corner/red{
@@ -7262,7 +6859,6 @@
 	pixel_y = -28
 	},
 /obj/structure/cable{
-	d2 = 4;
 	icon_state = "0-4"
 	},
 /obj/structure/rack,
@@ -7296,8 +6892,6 @@
 	dir = 10
 	},
 /obj/structure/cable{
-	d1 = 1;
-	d2 = 2;
 	icon_state = "1-2"
 	},
 /obj/effect/floor_decal/corner/yellow{
@@ -7363,8 +6957,6 @@
 /area/map_template/colony/airlock)
 "ns" = (
 /obj/structure/cable{
-	d1 = 4;
-	d2 = 8;
 	icon_state = "4-8"
 	},
 /obj/structure/window/reinforced{
@@ -7399,8 +6991,6 @@
 /area/map_template/colony/jail)
 "nw" = (
 /obj/structure/cable{
-	d1 = 1;
-	d2 = 8;
 	icon_state = "1-8"
 	},
 /obj/structure/rack,
@@ -7428,7 +7018,6 @@
 "ny" = (
 /obj/structure/grille,
 /obj/structure/cable{
-	d2 = 4;
 	icon_state = "0-4"
 	},
 /turf/exterior/concrete,
@@ -7436,12 +7025,9 @@
 "nz" = (
 /obj/structure/grille,
 /obj/structure/cable{
-	d1 = 4;
-	d2 = 8;
 	icon_state = "4-8"
 	},
 /obj/structure/cable{
-	d2 = 4;
 	icon_state = "0-4"
 	},
 /turf/exterior/concrete,
@@ -7449,17 +7035,12 @@
 "nA" = (
 /obj/structure/grille,
 /obj/structure/cable{
-	d1 = 1;
-	d2 = 4;
 	icon_state = "1-4"
 	},
 /obj/structure/cable{
-	d2 = 8;
 	icon_state = "0-8"
 	},
 /obj/structure/cable{
-	d1 = 4;
-	d2 = 8;
 	icon_state = "4-8"
 	},
 /turf/exterior/concrete,
@@ -7469,8 +7050,6 @@
 	dir = 5
 	},
 /obj/structure/cable{
-	d1 = 1;
-	d2 = 4;
 	icon_state = "1-4"
 	},
 /turf/simulated/floor/grass,
@@ -7496,8 +7075,6 @@
 	dir = 4
 	},
 /obj/structure/cable{
-	d1 = 1;
-	d2 = 2;
 	icon_state = "1-2"
 	},
 /obj/machinery/light{
@@ -7570,8 +7147,6 @@
 	},
 /obj/machinery/portable_atmospherics/hydroponics,
 /obj/structure/cable{
-	d1 = 4;
-	d2 = 8;
 	icon_state = "4-8"
 	},
 /turf/simulated/floor/tiled/techfloor,
@@ -7640,12 +7215,9 @@
 "nP" = (
 /obj/structure/grille,
 /obj/structure/cable{
-	d1 = 4;
-	d2 = 8;
 	icon_state = "4-8"
 	},
 /obj/structure/cable{
-	d2 = 8;
 	icon_state = "0-8"
 	},
 /turf/exterior/concrete,
@@ -7666,25 +7238,18 @@
 "nR" = (
 /obj/structure/grille,
 /obj/structure/cable{
-	d1 = 4;
-	d2 = 8;
 	icon_state = "4-8"
 	},
 /obj/structure/cable{
-	d2 = 8;
 	icon_state = "0-8"
 	},
 /obj/structure/cable{
-	d1 = 2;
-	d2 = 8;
 	icon_state = "2-8"
 	},
 /turf/exterior/concrete,
 /area/map_template/colony/mineralprocessing)
 "nS" = (
 /obj/structure/cable{
-	d1 = 4;
-	d2 = 8;
 	icon_state = "4-8"
 	},
 /obj/machinery/light,
@@ -7704,8 +7269,6 @@
 /area/map_template/colony/mineralprocessing)
 "nU" = (
 /obj/structure/cable{
-	d1 = 4;
-	d2 = 8;
 	icon_state = "4-8"
 	},
 /obj/effect/floor_decal/industrial/warning{
@@ -7728,8 +7291,6 @@
 "nW" = (
 /obj/machinery/atmospherics/pipe/simple/hidden,
 /obj/structure/cable{
-	d1 = 4;
-	d2 = 8;
 	icon_state = "4-8"
 	},
 /obj/effect/floor_decal/industrial/warning{
@@ -7776,8 +7337,6 @@
 	dir = 10
 	},
 /obj/structure/cable{
-	d1 = 4;
-	d2 = 8;
 	icon_state = "4-8"
 	},
 /obj/effect/decal/cleanable/dirt,
@@ -7791,8 +7350,6 @@
 	dir = 6
 	},
 /obj/structure/cable{
-	d1 = 4;
-	d2 = 8;
 	icon_state = "4-8"
 	},
 /obj/effect/decal/cleanable/dirt,
@@ -7803,13 +7360,9 @@
 	dir = 1
 	},
 /obj/structure/cable{
-	d1 = 1;
-	d2 = 2;
 	icon_state = "1-2"
 	},
 /obj/structure/cable{
-	d1 = 1;
-	d2 = 8;
 	icon_state = "1-8"
 	},
 /obj/effect/decal/cleanable/dirt,
@@ -7927,8 +7480,6 @@
 	},
 /obj/effect/floor_decal/industrial/outline/yellow,
 /obj/structure/cable{
-	d1 = 1;
-	d2 = 2;
 	icon_state = "1-2"
 	},
 /turf/exterior/concrete,
@@ -7938,8 +7489,6 @@
 	dir = 8
 	},
 /obj/structure/cable{
-	d1 = 4;
-	d2 = 8;
 	icon_state = "4-8"
 	},
 /obj/effect/floor_decal/industrial/warning/dust{
@@ -7956,8 +7505,6 @@
 /area/map_template/colony/mineralprocessing)
 "om" = (
 /obj/structure/cable{
-	d1 = 4;
-	d2 = 8;
 	icon_state = "4-8"
 	},
 /obj/effect/floor_decal/industrial/warning/dust{
@@ -7975,8 +7522,6 @@
 	dir = 4
 	},
 /obj/structure/cable{
-	d1 = 4;
-	d2 = 8;
 	icon_state = "4-8"
 	},
 /obj/effect/floor_decal/industrial/warning/dust{
@@ -7994,12 +7539,9 @@
 "oo" = (
 /obj/structure/grille,
 /obj/structure/cable{
-	d2 = 8;
 	icon_state = "0-8"
 	},
 /obj/structure/cable{
-	d1 = 1;
-	d2 = 8;
 	icon_state = "1-8"
 	},
 /turf/exterior/concrete,
@@ -8007,8 +7549,6 @@
 "op" = (
 /obj/structure/catwalk,
 /obj/structure/cable{
-	d1 = 1;
-	d2 = 4;
 	icon_state = "1-4"
 	},
 /obj/effect/decal/cleanable/dirt,
@@ -8017,8 +7557,6 @@
 "oq" = (
 /obj/structure/catwalk,
 /obj/structure/cable{
-	d1 = 4;
-	d2 = 8;
 	icon_state = "4-8"
 	},
 /obj/effect/decal/cleanable/dirt,
@@ -8026,8 +7564,6 @@
 /area/template_noop)
 "or" = (
 /obj/structure/cable{
-	d1 = 4;
-	d2 = 8;
 	icon_state = "4-8"
 	},
 /obj/structure/catwalk,
@@ -8039,8 +7575,6 @@
 /area/template_noop)
 "os" = (
 /obj/structure/cable{
-	d1 = 4;
-	d2 = 8;
 	icon_state = "4-8"
 	},
 /obj/structure/catwalk,
@@ -8070,13 +7604,9 @@
 "ov" = (
 /obj/structure/catwalk,
 /obj/structure/cable{
-	d1 = 2;
-	d2 = 4;
 	icon_state = "2-4"
 	},
 /obj/structure/cable{
-	d1 = 1;
-	d2 = 4;
 	icon_state = "1-4"
 	},
 /obj/effect/floor_decal/industrial/warning/dust{
@@ -8091,8 +7621,6 @@
 /area/map_template/colony/mineralprocessing)
 "ow" = (
 /obj/structure/cable{
-	d1 = 4;
-	d2 = 8;
 	icon_state = "4-8"
 	},
 /obj/effect/wallframe_spawn/reinforced_borosilicate,
@@ -8104,8 +7632,6 @@
 /area/map_template/colony/airlock)
 "ox" = (
 /obj/structure/cable{
-	d1 = 4;
-	d2 = 8;
 	icon_state = "4-8"
 	},
 /obj/effect/floor_decal/industrial/warning/dust{
@@ -8124,8 +7650,6 @@
 "oy" = (
 /obj/structure/catwalk,
 /obj/structure/cable{
-	d1 = 4;
-	d2 = 8;
 	icon_state = "4-8"
 	},
 /obj/effect/decal/cleanable/dirt,
@@ -8172,8 +7696,6 @@
 	pixel_y = 20
 	},
 /obj/structure/cable{
-	d1 = 4;
-	d2 = 8;
 	icon_state = "4-8"
 	},
 /obj/effect/floor_decal/techfloor{
@@ -8266,8 +7788,6 @@
 	dir = 8
 	},
 /obj/structure/cable{
-	d1 = 4;
-	d2 = 8;
 	icon_state = "4-8"
 	},
 /turf/simulated/floor/tiled/techfloor,
@@ -8312,8 +7832,6 @@
 /area/map_template/colony/hydroponics)
 "yN" = (
 /obj/structure/cable{
-	d1 = 1;
-	d2 = 2;
 	icon_state = "1-2"
 	},
 /obj/effect/floor_decal/techfloor{
@@ -8360,8 +7878,6 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/structure/cable{
-	d1 = 1;
-	d2 = 2;
 	icon_state = "1-2"
 	},
 /turf/simulated/floor/grass,
@@ -8374,7 +7890,6 @@
 	pixel_y = -28
 	},
 /obj/structure/cable{
-	d2 = 8;
 	icon_state = "0-8"
 	},
 /obj/machinery/light{
@@ -8390,7 +7905,6 @@
 /area/map_template/colony/hydroponics)
 "IA" = (
 /obj/structure/cable{
-	d2 = 4;
 	icon_state = "0-4"
 	},
 /obj/machinery/power/solar,
@@ -8447,8 +7961,6 @@
 /area/map_template/colony/hydroponics)
 "LT" = (
 /obj/structure/cable{
-	d1 = 1;
-	d2 = 2;
 	icon_state = "1-2"
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
@@ -8492,8 +8004,6 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/structure/cable{
-	d1 = 1;
-	d2 = 2;
 	icon_state = "1-2"
 	},
 /obj/structure/window/reinforced,

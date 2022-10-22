@@ -1,15 +1,13 @@
 /decl/bodytype/feline
-	name =              "humanoid"
-	bodytype_category = BODYTYPE_FELINE
-	limb_blend =        ICON_MULTIPLY
-	icon_base =         'mods/species/tajaran/icons/body.dmi'
-	icon_deformed =     'mods/species/tajaran/icons/deformed_body.dmi'
-	bandages_icon =     'icons/mob/bandage.dmi'
-	lip_icon =          'mods/species/tajaran/icons/lips.dmi'
+	name =                 "humanoid"
+	bodytype_category =    BODYTYPE_FELINE
+	limb_blend =           ICON_MULTIPLY
+	icon_base =            'mods/species/tajaran/icons/body.dmi'
+	icon_deformed =        'mods/species/tajaran/icons/deformed_body.dmi'
+	bandages_icon =        'icons/mob/bandage.dmi'
+	lip_icon =             'mods/species/tajaran/icons/lips.dmi'
 	health_hud_intensity = 1.75
-	tail_animation = 'mods/species/tajaran/icons/tail.dmi'
-	tail = "tajtail"
-	tail_blend = ICON_MULTIPLY
+	bodytype_flag =        BODY_FLAG_FELINE
 
 /decl/bodytype/feline/Initialize()
 	equip_adjust = list(
@@ -25,3 +23,8 @@
 		slot_undershirt_str = list("[NORTH]" = list("x" =  0, "y" = -2), "[EAST]" = list("x" = 0, "y" = -2), "[SOUTH]" = list("x" =  0, "y" = -2),  "[WEST]" = list("x" = 0, "y" = -2))
 	)
 	. = ..()
+
+/obj/item/organ/external/tail/cat
+	tail_animation = 'mods/species/tajaran/icons/tail.dmi'
+	tail = "tajtail"
+	tail_blend = ICON_MULTIPLY

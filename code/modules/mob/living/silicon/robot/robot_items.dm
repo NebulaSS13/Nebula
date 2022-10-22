@@ -12,7 +12,7 @@
 		to_chat(user, SPAN_WARNING("There is nothing loaded inside \the [src]."))
 		return TRUE
 	var/choice = input("Do you wish to eject or analyze \the [loaded_item]?", "Portable Analyzer") as null|anything in list("Eject", "Analyze")
-	if(!choice || !QDELETED(loaded_item) || user.incapacitated() || loc != user)
+	if(!choice || QDELETED(loaded_item) || user.incapacitated() || loc != user)
 		return TRUE
 	if(choice == "Eject")
 		loaded_item.dropInto(user.loc)
@@ -206,7 +206,7 @@
 /obj/item/pen/robopen/proc/RenamePaper(mob/user, obj/item/paper/paper)
 	if ( !user || !paper )
 		return
-	var/n_name = sanitizeSafe(input(user, "What would you like to label the paper?", "Paper Labelling", null)  as text, 32)
+	var/n_name = sanitize_safe(input(user, "What would you like to label the paper?", "Paper Labelling", null)  as text, 32)
 	if ( !user || !paper )
 		return
 
@@ -363,7 +363,7 @@
 		visible_message("\The [user] picks up \the [A] with \the [src]!")
 		return
 
-	to_chat(user, "You fail to pick up \the [A] with \the [src]")
+	to_chat(user, "You fail to pick up \the [A] with \the [src].")
 	return
 
 /obj/item/chems/spray/cleaner/drone
@@ -422,8 +422,8 @@
 	var/base_power_generation = 75 KILOWATTS
 	var/max_fuel_items = 5
 	var/list/fuel_types = list(
-		/obj/item/chems/food/snacks/meat = 2,
-		/obj/item/chems/food/snacks/fish = 1.5
+		/obj/item/chems/food/meat = 2,
+		/obj/item/chems/food/fish = 1.5
 	)
 
 /obj/item/bioreactor/attack_self(var/mob/user)
@@ -438,7 +438,7 @@
 	if(!proximity_flag || !istype(target))
 		return
 
-	var/is_fuel = istype(target, /obj/item/chems/food/snacks/grown)
+	var/is_fuel = istype(target, /obj/item/chems/food/grown)
 	is_fuel = is_fuel || is_type_in_list(target, fuel_types)
 
 	if(!is_fuel)
@@ -469,7 +469,7 @@
 
 	for(var/thing in contents)
 		var/atom/A = thing
-		if(istype(A, /obj/item/chems/food/snacks/grown))
+		if(istype(A, /obj/item/chems/food/grown))
 			generating_power = base_power_generation
 			using_item = A
 		else

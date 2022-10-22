@@ -24,16 +24,14 @@ var/global/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 	var/path
 
 	var/list/station_levels = list() // Z-levels the station exists on
-	var/list/admin_levels = list()   // Z-levels for admin functionality (Centcom, shuttle transit, etc)
+	var/list/admin_levels =   list() // Z-levels for admin functionality (Centcom, shuttle transit, etc)
 	var/list/contact_levels = list() // Z-levels that can be contacted from the station, for eg announcements
-	var/list/player_levels = list()  // Z-levels a character can typically reach
-	var/list/sealed_levels = list()  // Z-levels that don't allow random transit at edge
-	var/list/empty_levels = null     // Empty Z-levels that may be used for various things (currently used by FTL jump)
+	var/list/player_levels =  list() // Z-levels a character can typically reach
+	var/list/sealed_levels =  list() // Z-levels that don't allow random transit at edge
 
 	var/list/map_levels              // Z-levels available to various consoles, such as the crew monitor. Defaults to station_levels if unset.
 
 	var/list/base_turf_by_z = list() // Custom base turf by Z-level. Defaults to world.turf for unlisted Z-levels
-	var/list/usable_email_tlds = list("freemail.net")
 
 	var/base_floor_type = /turf/simulated/floor/airless // The turf type used when generating floors between Z-levels at startup.
 	var/base_floor_area                                 // Replacement area, if a base_floor_type is generated. Leave blank to skip.
@@ -71,8 +69,6 @@ var/global/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 	var/emergency_shuttle_leaving_dock
 	var/emergency_shuttle_recall_message
 
-	var/list/station_networks = list() 		// Camera networks that will show up on the console.
-
 	var/list/holodeck_programs = list() // map of string ids to /datum/holodeck_program instances
 	var/list/holodeck_supported_programs = list() // map of maps - first level maps from list-of-programs string id (e.g. "BarPrograms") to another map
 												  // this is in order to support multiple holodeck program listings for different holodecks
@@ -80,15 +76,19 @@ var/global/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 	                                              // as defined in holodeck_programs
 	var/list/holodeck_restricted_programs = list() // as above... but EVIL!
 
-	var/allowed_spawns = list("Arrivals Shuttle","Gateway", "Cryogenic Storage", "Robot Storage")
-	var/default_spawn = "Arrivals Shuttle"
+	var/allowed_spawns = list(
+		/decl/spawnpoint/arrivals,
+		/decl/spawnpoint/gateway,
+		/decl/spawnpoint/cryo,
+		/decl/spawnpoint/cyborg
+	)
+	var/default_spawn = /decl/spawnpoint/arrivals
+
 	var/flags = 0
 	var/evac_controller_type = /datum/evacuation_controller
-	var/use_overmap = 0		//If overmap should be used (including overmap space travel override)
-	var/overmap_size = 20		//Dimensions of overmap zlevel if overmap is used.
-	var/overmap_z = 0		//If 0 will generate overmap zlevel on init. Otherwise will populate the zlevel provided.
-	var/overmap_event_areas = 0 //How many event "clouds" will be generated
-	var/pray_reward_type = /obj/item/chems/food/snacks/cookie // What reward should be given by admin when a prayer is received?
+	var/list/overmap_ids // Assoc list of overmap ID to overmap type, leave empty to disable overmap.
+
+	var/pray_reward_type = /obj/item/chems/food/cookie // What reward should be given by admin when a prayer is received?
 	var/list/map_markers_to_load
 
 	// The list of lobby screen images to pick() from.
@@ -120,9 +120,11 @@ var/global/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 	var/list/loadout_blacklist	//list of types of loadout items that will not be pickable
 
 	//Economy stuff
-	var/starting_money = 75000		//Money in station account
-	var/department_money = 5000		//Money in department accounts
-	var/salary_modifier	= 1			//Multiplier to starting character money
+	var/starting_money = 75000		       // Money in station account
+	var/department_money = 5000		       // Money in department accounts
+	var/salary_modifier	= 1			       // Multiplier to starting character money
+	var/passport_type = /obj/item/passport // Item type to grant people on join.
+
 	var/list/station_departments = list()//Gets filled automatically depending on jobs allowed
 
 	var/default_species = SPECIES_HUMAN
@@ -152,27 +154,6 @@ var/global/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 		ACCESS_REGION_SUPPLY = list(access_change_ids)
 	)
 
-/datum/map/New()
-	if(!map_levels)
-		map_levels = station_levels.Copy()
-
-	if(!allowed_jobs)
-		allowed_jobs = list()
-		for(var/jtype in subtypesof(/datum/job))
-			var/datum/job/job = jtype
-			if(initial(job.available_by_default))
-				allowed_jobs += jtype
-
-	if(!LAZYLEN(planet_size))
-		planet_size = list(world.maxx, world.maxy)
-
-	current_lobby_screen = pick(lobby_screens)
-	game_year = (text2num(time2text(world.realtime, "YYYY")) + game_year)
-
-	if(ispath(default_job_type, /datum/job))
-		var/datum/job/J = default_job_type
-		default_job_title = initial(J.title)
-
 /datum/map/proc/get_lobby_track(var/exclude)
 	var/lobby_track_type
 	if(LAZYLEN(lobby_tracks) == 1)
@@ -184,7 +165,37 @@ var/global/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 	return GET_DECL(lobby_track_type)
 
 /datum/map/proc/setup_map()
+
+	if(!allowed_jobs)
+		allowed_jobs = list()
+		for(var/jtype in subtypesof(/datum/job))
+			var/datum/job/job = jtype
+			if(initial(job.available_by_default))
+				allowed_jobs += jtype
+
+	if(ispath(default_job_type, /datum/job))
+		var/datum/job/J = default_job_type
+		default_job_title = initial(J.title)
+
+	if(default_spawn && !(default_spawn in allowed_spawns))
+		PRINT_STACK_TRACE("Map datum [type] has default spawn point [default_spawn] not in the allowed spawn list.")
+
+	create_overmaps()
+
+	for(var/spawn_type in allowed_spawns)
+		allowed_spawns -= spawn_type
+		allowed_spawns += GET_DECL(spawn_type)
+
+	if(!map_levels)
+		map_levels = station_levels.Copy()
+
+	if(!LAZYLEN(planet_size))
+		planet_size = list(world.maxx, world.maxy)
+
+	game_year = (text2num(time2text(world.realtime, "YYYY")) + game_year)
+
 	lobby_track = get_lobby_track()
+	update_titlescreen()
 	world.update_status()
 
 /datum/map/proc/setup_job_lists()
@@ -226,7 +237,7 @@ var/global/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 #endif
 
 /datum/map/proc/build_exoplanets()
-	if(!use_overmap)
+	if(!length(overmap_ids))
 		return
 	if(LAZYLEN(planet_size))
 		if(world.maxx < planet_size[1])
@@ -234,10 +245,17 @@ var/global/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 		if(world.maxy < planet_size[2])
 			world.maxy = planet_size[2]
 	for(var/i = 0, i < num_exoplanets, i++)
-		var/exoplanet_type = pick(subtypesof(/obj/effect/overmap/visitable/sector/exoplanet))
+		var/exoplanet_type = pick_exoplanet()
 		INCREMENT_WORLD_Z_SIZE
 		var/obj/effect/overmap/visitable/sector/exoplanet/new_planet = new exoplanet_type(null, world.maxz)
 		new_planet.build_level(planet_size[1], planet_size[2])
+
+/datum/map/proc/pick_exoplanet()
+	var/planets = list()
+	for(var/T in subtypesof(/obj/effect/overmap/visitable/sector/exoplanet))
+		var/obj/effect/overmap/visitable/sector/exoplanet/planet_type = T
+		planets[T] = initial(planet_type.spawn_weight)
+	return pickweight(planets)
 
 // Used to apply various post-compile procedural effects to the map.
 /datum/map/proc/refresh_mining_turfs(var/zlevel)
@@ -261,13 +279,6 @@ var/global/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 	if(!candidates.len)
 		return current_z_level
 	return text2num(pickweight(candidates))
-
-/datum/map/proc/get_empty_zlevel()
-	if(empty_levels == null)
-		INCREMENT_WORLD_Z_SIZE
-		empty_levels = list(world.maxz)
-	return pick(empty_levels)
-
 
 /datum/map/proc/setup_economy()
 	news_network.CreateFeedChannel("News Daily", "Minister of Information", 1, 1)
@@ -331,15 +342,29 @@ var/global/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 	)
 
 /datum/map/proc/show_titlescreen(client/C)
+	set waitfor = FALSE
+
 	winset(C, "lobbybrowser", "is-disabled=false;is-visible=true")
 
-	show_browser(C, current_lobby_screen, "file=titlescreen.png;display=0")
-	show_browser(C, file('html/lobby_titlescreen.html'), "window=lobbybrowser")
+	show_browser(C, current_lobby_screen, "file=titlescreen.gif;display=0")
+
+	if(isnewplayer(C.mob))
+		var/mob/new_player/player = C.mob
+		show_browser(C, player.get_lobby_browser_html(), "window=lobbybrowser")
 
 /datum/map/proc/hide_titlescreen(client/C)
 	if(C.mob) // Check if the client is still connected to something
 		// Hide title screen, allowing player to see the map
 		winset(C, "lobbybrowser", "is-disabled=true;is-visible=false")
+
+/datum/map/proc/update_titlescreen(new_screen)
+	current_lobby_screen = new_screen || pick(lobby_screens)
+	refresh_lobby_browsers()
+
+/datum/map/proc/refresh_lobby_browsers()
+	for(var/mob/new_player/player in global.player_list)
+		show_titlescreen(player.client)
+		player.show_lobby_menu()
 
 /datum/map/proc/create_trade_hubs()
 	new /datum/trade_hub/singleton
@@ -352,3 +377,45 @@ var/global/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 
 /datum/map/proc/get_specops_area()
 	return
+
+/datum/map/proc/summarize_roundend_for(var/mob/player)
+	if(!player)
+		return
+	if(player.stat != DEAD)
+		var/turf/playerTurf = get_turf(player)
+		if(SSevac.evacuation_controller && SSevac.evacuation_controller.round_over() && SSevac.evacuation_controller.emergency_evacuation)
+			if(isNotAdminLevel(playerTurf.z))
+				to_chat(player, "<font color='blue'><b>You managed to survive, but were marooned on [station_name()] as [player.real_name]...</b></font>")
+			else
+				to_chat(player, "<font color='green'><b>You managed to survive the events on [station_name()] as [player.real_name].</b></font>")
+		else if(isAdminLevel(playerTurf.z))
+			to_chat(player, "<font color='green'><b>You successfully underwent crew transfer after events on [station_name()] as [player.real_name].</b></font>")
+		else if(issilicon(player))
+			to_chat(player, "<font color='green'><b>You remain operational after the events on [station_name()] as [player.real_name].</b></font>")
+		else
+			to_chat(player, "<font color='blue'><b>You got through just another workday on [station_name()] as [player.real_name].</b></font>")
+	else
+		if(isghost(player))
+			var/mob/observer/ghost/O = player
+			if(!O.started_as_observer)
+				to_chat(player, "<font color='red'><b>You did not survive the events on [station_name()]...</b></font>")
+		else
+			to_chat(player, "<font color='red'><b>You did not survive the events on [station_name()]...</b></font>")
+
+/datum/map/proc/create_passport(var/mob/living/carbon/human/H)
+	if(!passport_type)
+		return
+	var/obj/item/passport/pass = new passport_type(get_turf(H))
+	if(istype(pass))
+		pass.set_info(H)
+	if(!H.equip_to_slot(pass, slot_in_backpack_str))
+		H.put_in_hands(pass)
+
+/datum/map/proc/create_overmaps()
+	for(var/overmap_id in overmap_ids)
+		var/overmap_type = overmap_ids[overmap_id] || /datum/overmap
+		new overmap_type(overmap_id)
+
+/datum/map/proc/populate_overmap_events()
+	for(var/overmap_id in global.overmaps_by_name)
+		SSmapping.overmap_event_handler.create_events(global.overmaps_by_name[overmap_id])

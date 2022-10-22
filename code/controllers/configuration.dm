@@ -122,6 +122,7 @@ var/global/list/gamemode_cache = list()
 	var/revival_brain_life = -1
 
 	var/use_loyalty_implants = 0
+	var/max_character_aspects = 5
 
 	var/welder_vision = 1
 	var/generate_map = 0
@@ -181,6 +182,7 @@ var/global/list/gamemode_cache = list()
 	var/announce_shuttle_dock_to_irc = FALSE
 
 	var/custom_item_icon_location // File location to look for custom items icons, needs to be relative to the executing binary.
+	var/custom_icon_icon_location // File location to look for custom icons, needs to be relative to the executing binary.
 
 	// Event settings
 	var/expected_round_length = 3 * 60 * 60 * 10 // 3 hours
@@ -246,8 +248,14 @@ var/global/list/gamemode_cache = list()
 
 	var/lock_client_view_x
 	var/lock_client_view_y
-	var/max_client_view_x
-	var/max_client_view_y
+	var/max_client_view_x = MAX_VIEW
+	var/max_client_view_y = MAX_VIEW
+
+	var/allow_diagonal_movement = FALSE
+
+	var/no_throttle_localhost
+
+	var/dex_malus_brainloss_threshold = 30 //The threshold of when brainloss begins to affect dexterity.
 
 	var/static/list/protected_vars = list(
 		"comms_password",
@@ -259,7 +267,7 @@ var/global/list/gamemode_cache = list()
 	. = ..() | protected_vars
 
 /datum/configuration/New()
-	var/list/L = typesof(/datum/game_mode) - /datum/game_mode
+	var/list/L = subtypesof(/datum/game_mode)
 	for (var/T in L)
 		// I wish I didn't have to instance the game modes in order to look up
 		// their information, but it is the only way (at least that I know of).
@@ -331,6 +339,9 @@ var/global/list/gamemode_cache = list()
 
 				if ("custom_item_icon_location")
 					config.custom_item_icon_location = value
+
+				if ("custom_icon_icon_location")
+					config.custom_icon_icon_location = value
 
 				if ("log_ooc")
 					config.log_ooc = 1
@@ -801,6 +812,9 @@ var/global/list/gamemode_cache = list()
 				if("panic_bunker_message")
 					config.panic_bunker_message = value
 
+				if("no_throttle_localhost")
+					config.no_throttle_localhost = TRUE
+
 				else
 					log_misc("Unknown setting in configuration: '[name]'")
 
@@ -812,6 +826,8 @@ var/global/list/gamemode_cache = list()
 			switch(name)
 				if("show_human_death_message")
 					config.show_human_death_message = TRUE
+				if ("max_character_aspects")
+					config.max_character_aspects = text2num(value)
 				if("health_threshold_dead")
 					config.health_threshold_dead = value
 				if("revival_pod_plants")
@@ -874,8 +890,13 @@ var/global/list/gamemode_cache = list()
 				if("max_client_view_y")
 					config.max_client_view_y = text2num(value)
 
+				if("allow_diagonal_movement")
+					config.allow_diagonal_movement = TRUE
+
 				if("use_loyalty_implants")
 					config.use_loyalty_implants = 1
+				if("dexterity_malus_brainloss_threshold")
+					config.dex_malus_brainloss_threshold = text2num(value)
 
 				else
 					log_misc("Unknown setting in configuration: '[name]'")

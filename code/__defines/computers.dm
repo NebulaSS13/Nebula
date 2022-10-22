@@ -11,10 +11,10 @@
 
 // Network mainframe roles
 #define MF_ROLE_FILESERVER  	"FILE SERVER"
-#define MF_ROLE_EMAIL_SERVER  	"EMAIL SERVER"
 #define MF_ROLE_LOG_SERVER  	"LOG SERVER"
 #define MF_ROLE_CREW_RECORDS    "RECORDS SERVER"
 #define MF_ROLE_SOFTWARE    	"SOFTWARE REPOSITORY"
+#define MF_ROLE_ACCOUNT_SERVER  "ACCOUNT SERVER"
 
 // Program bitflags
 #define PROGRAM_CONSOLE    BITFLAG(0)
@@ -40,8 +40,8 @@
 
 #define NETWORK_CONNECTION_WIRELESS			1
 #define NETWORK_CONNECTION_STRONG_WIRELESS	2
-#define NETWORK_CONNECTION_WIRED			3
 #define NETWORK_BASE_BROADCAST_STRENGTH		25
+#define NETWORK_WIRED_CONNECTION_STRENGTH	75
 
 // Caps for network logging. Less than 10 would make logging useless anyway, more than 500 may make the log browser too laggy. Defaults to 100 unless user changes it.
 #define MAX_NETWORK_LOGS 100

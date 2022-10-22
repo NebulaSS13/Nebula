@@ -127,6 +127,10 @@
 	wall_mounted = 1
 	storage_types = CLOSET_STORAGE_ITEMS
 	req_access = list(access_medical_equip)
+	
+/obj/structure/closet/secure_closet/medical_wall/Initialize()
+	. = ..()
+	tool_interaction_flags &= ~TOOL_INTERACTION_ANCHOR
 
 /obj/structure/closet/secure_closet/counselor
 	name = "counselor's locker"
@@ -146,7 +150,7 @@
 		/obj/item/clipboard,
 		/obj/item/folder/cyan,
 		/obj/item/taperecorder,
-		/obj/item/tape/random = 3,
+		/obj/item/magnetic_tape/random = 3,
 		/obj/item/camera,
 		/obj/item/toy/therapy_blue,
 		/obj/item/storage/belt/general

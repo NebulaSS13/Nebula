@@ -91,8 +91,10 @@ var/global/list/admin_verbs_admin = list(
 	/client/proc/add_trader,
 	/client/proc/remove_trader,
 	/datum/admins/proc/sendFax,
+	/datum/admins/proc/show_aspects
 )
 var/global/list/admin_verbs_ban = list(
+	/client/proc/DB_ban_panel,
 	/client/proc/unban_panel,
 	/client/proc/jobbans
 	)
@@ -103,6 +105,7 @@ var/global/list/admin_verbs_sounds = list(
 	)
 
 var/global/list/admin_verbs_fun = list(
+	/client/proc/change_lobby_screen,
 	/client/proc/object_talk,
 	/datum/admins/proc/cmd_admin_dress,
 	/client/proc/cmd_admin_gib_self,
@@ -180,7 +183,6 @@ var/global/list/admin_verbs_debug = list(
 	/client/proc/apply_random_map,
 	/client/proc/overlay_random_map,
 	/client/proc/delete_random_map,
-	/datum/admins/proc/submerge_map,
 	/datum/admins/proc/map_template_load,
 	/datum/admins/proc/map_template_load_new_z,
 	/datum/admins/proc/map_template_upload,
@@ -210,7 +212,13 @@ var/global/list/admin_verbs_debug = list(
 	/client/proc/force_ghost_trap_trigger,
 	/client/proc/spawn_quantum_mechanic,
 	/client/proc/spawn_exoplanet,
-	/client/proc/spawn_ore_pile
+	/client/proc/print_cargo_prices,
+	/client/proc/resend_nanoui_templates,
+	/client/proc/display_del_log,
+	/client/proc/spawn_ore_pile,
+	/datum/admins/proc/force_initialize_weather,
+	/datum/admins/proc/force_weather_state,
+	/datum/admins/proc/force_kill_weather
 	)
 
 var/global/list/admin_verbs_paranoid_debug = list(
@@ -517,8 +525,10 @@ var/global/list/admin_verbs_mod = list(
 
 	var/datum/preferences/D
 	var/client/C = global.ckey_directory[warned_ckey]
-	if(C)	D = C.prefs
-	else	D = SScharacter_setup.preferences_datums[warned_ckey]
+	if(C)
+		D = C.prefs
+	else
+		D = SScharacter_setup.preferences_datums[warned_ckey]
 
 	if(!D)
 		to_chat(src, "<font color='red'>Error: warn(): No such ckey found.</font>")
@@ -652,7 +662,7 @@ var/global/list/admin_verbs_mod = list(
 	var/mob/living/silicon/S = input("Select silicon.", "Rename Silicon.") as null|anything in global.silicon_mob_list
 	if(!S) return
 
-	var/new_name = sanitizeSafe(input(src, "Enter new name. Leave blank or as is to cancel.", "[S.real_name] - Enter new silicon name", S.real_name))
+	var/new_name = sanitize_safe(input(src, "Enter new name. Leave blank or as is to cancel.", "[S.real_name] - Enter new silicon name", S.real_name))
 	if(new_name && new_name != S.real_name)
 		log_and_message_admins("has renamed the silicon '[S.real_name]' to '[new_name]'")
 		S.fully_replace_character_name(new_name)
@@ -771,14 +781,14 @@ var/global/list/admin_verbs_mod = list(
 		M.skin_tone =  -M.skin_tone + 35
 
 	// hair
-	var/new_hstyle = input(usr, "Select a hair style", "Grooming")  as null|anything in global.hair_styles_list
+	var/decl/sprite_accessory/new_hstyle = input(usr, "Select a hair style", "Grooming") as null|anything in decls_repository.get_decls_of_subtype(/decl/sprite_accessory/hair)
 	if(new_hstyle)
-		M.h_style = new_hstyle
+		M.h_style = new_hstyle.type
 
 	// facial hair
-	var/new_fstyle = input(usr, "Select a facial hair style", "Grooming")  as null|anything in global.facial_hair_styles_list
+	var/decl/sprite_accessory/new_fstyle = input(usr, "Select a facial hair style", "Grooming")  as null|anything in decls_repository.get_decls_of_subtype(/decl/sprite_accessory/facial_hair)
 	if(new_fstyle)
-		M.f_style = new_fstyle
+		M.f_style = new_fstyle.type
 
 	var/new_gender = alert(usr, "Please select gender.", "Character Generation", "Male", "Female", "Neuter")
 	if (new_gender)
@@ -900,3 +910,28 @@ var/global/list/admin_verbs_mod = list(
 	T.add_spell(new S)
 	SSstatistics.add_field_details("admin_verb","GS") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 	log_and_message_admins("gave [key_name(T)] the spell [S].")
+
+/client/proc/change_lobby_screen()
+	set name = "Lobby Screen: Change"
+	set category = "Fun"
+
+	if(!check_rights(R_FUN))
+		return
+
+	log_and_message_admins("is trying to change the title screen.")
+	SSstatistics.add_field_details("admin_verb", "LSC")
+
+	switch(alert(usr, "Select option", "Lobby Screen", "Upload custom", "Reset to default", "Cancel"))
+		if("Upload custom")
+			var/file = input(usr) as icon|null
+
+			if(!file) 
+				return
+
+			global.using_map.update_titlescreen(file)
+
+		if("Reset to default")
+			global.using_map.update_titlescreen()
+
+		if("Cancel")
+			return

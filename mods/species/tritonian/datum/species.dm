@@ -1,14 +1,12 @@
 /decl/species/human/tritonian
 	name = SPECIES_TRITONIAN
 	name_plural = "Tritonians"
-	description = "'A human-derived genotype designed for colonizing aquatic worlds."
+	description = "A human-derived genotype designed for colonizing aquatic worlds."
 
 	available_bodytypes = list(
 		/decl/bodytype/human/tritonian,
 		/decl/bodytype/human/masculine/tritonian
 	)
-
-	preview_icon= 'mods/species/tritonian/icons/tritonian_preview.dmi'
 
 	slowdown   = 0.5
 	oxy_mod    = 0.5

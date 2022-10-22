@@ -1,4 +1,4 @@
-#define PROTOCOL_ARTICLE "Protocol article [rand(100,999)]-[uppertext(pick(global.full_alphabet))] subsection #[rand(10,99)]"
+#define PROTOCOL_ARTICLE "Protocol article [rand(100,999)]-[uppertext(pick(global.alphabet))] subsection #[rand(10,99)]"
 
 /obj/item/organ/internal/brain/adherent
 	name = "mentality matrix"
@@ -32,7 +32,7 @@
 			to_chat(user, "<span class='warning'>Nonstandard names are not subject to real-time modification under [PROTOCOL_ARTICLE].</span>")
 			return
 
-		var/newname = sanitizeSafe(input(user, "Enter a new ident.", "Reset Ident") as text, MAX_NAME_LEN)
+		var/newname = sanitize_safe(input(user, "Enter a new ident.", "Reset Ident") as text, MAX_NAME_LEN)
 		if(newname)
 			var/confirm = input(user, "Are you sure you wish your name to become [newname] [res]?","Reset Ident") as anything in list("No", "Yes")
 			if(confirm == "Yes" && owner && user == owner && !owner.incapacitated() && world.time >= next_rename)
@@ -53,10 +53,10 @@
 /obj/item/organ/internal/powered/Process()
 	. = ..()
 	if(owner)
-		var/obj/item/organ/internal/cell/cell = locate() in owner.internal_organs
+		var/obj/item/organ/internal/cell/cell = owner.get_organ(BP_CELL, /obj/item/organ/internal/cell)
 		if(active && !(cell && cell.use(maintenance_cost)))
 			active = FALSE
-			to_chat(owner, "<span class='danger'>Your [name] [gender == PLURAL ? "are" : "is"] out of power!</span>")
+			to_chat(owner, SPAN_DANGER("Your [name] [gender == PLURAL ? "are" : "is"] out of power!"))
 			refresh_action_button()
 
 /obj/item/organ/internal/powered/refresh_action_button()

@@ -174,7 +174,7 @@
 		else if(task == "permissions")
 			if(!D)	return
 			var/list/permissionlist = list()
-			for(var/i=1, i<=R_MAXPERMISSION, i<<=1)		//that <<= is shorthand for i = i << 1. Which is a left bitshift
+			for(var/i=1, i<=R_MAXPERMISSION, i<<=1)		//that <<= is shorthand for i = i << 1. Which is a left BITSHIFT_LEFT
 				permissionlist[rights2text(i)] = i
 			var/new_permission = input("Select a permission to turn on/off", "Permission toggle", null, null) as null|anything in permissionlist
 			if(!new_permission)	return
@@ -227,29 +227,14 @@
 
 		var/delmob = 0
 		switch(alert("Delete old mob?","Message","Yes","No","Cancel"))
-			if("Cancel")	return
-			if("Yes")		delmob = 1
+			if("Cancel")
+				return
+			if("Yes")
+				delmob = TRUE
 
-		log_and_message_admins("has used rudimentary transformation on [key_name_admin(M)]. Transforming to [href_list["simplemake"]]; deletemob=[delmob]")
-
-		switch(href_list["simplemake"])
-			if("observer")			M.change_mob_type( /mob/observer/ghost , null, null, delmob )
-			if("human")				M.change_mob_type( /mob/living/carbon/human , null, null, delmob, href_list["species"])
-			if("monkey")			M.change_mob_type( /mob/living/carbon/human/monkey , null, null, delmob )
-			if("robot")				M.change_mob_type( /mob/living/silicon/robot , null, null, delmob )
-			if("cat")				M.change_mob_type( /mob/living/simple_animal/cat , null, null, delmob )
-			if("runtime")			M.change_mob_type( /mob/living/simple_animal/cat/fluff/runtime , null, null, delmob )
-			if("corgi")				M.change_mob_type( /mob/living/simple_animal/corgi , null, null, delmob )
-			if("ian")				M.change_mob_type( /mob/living/simple_animal/corgi/Ian , null, null, delmob )
-			if("crab")				M.change_mob_type( /mob/living/simple_animal/crab , null, null, delmob )
-			if("coffee")			M.change_mob_type( /mob/living/simple_animal/crab/Coffee , null, null, delmob )
-			if("parrot")			M.change_mob_type( /mob/living/simple_animal/hostile/retaliate/parrot , null, null, delmob )
-			if("polyparrot")		M.change_mob_type( /mob/living/simple_animal/hostile/retaliate/parrot/Poly , null, null, delmob )
-			if("constructarmoured")	M.change_mob_type( /mob/living/simple_animal/construct/armoured , null, null, delmob )
-			if("constructbuilder")	M.change_mob_type( /mob/living/simple_animal/construct/builder , null, null, delmob )
-			if("constructwraith")	M.change_mob_type( /mob/living/simple_animal/construct/wraith , null, null, delmob )
-			if("shade")				M.change_mob_type( /mob/living/simple_animal/shade , null, null, delmob )
-
+		var/transform_key = replacetext(href_list["simplemake"], "_", " ")
+		if(M.try_rudimentary_transform(transform_key, delmob, href_list["species"]))
+			log_and_message_admins("has used rudimentary transformation on [key_name_admin(M)]. Transforming to [transform_key]; deletemob=[delmob]")
 
 	/////////////////////////////////////new ban stuff
 	else if(href_list["unbanf"])
@@ -308,10 +293,10 @@
 		ban_unban_log_save("[key_name(usr)] edited [banned_key]'s ban. Reason: [reason] Duration: [duration]")
 		log_and_message_admins("edited [banned_key]'s ban. Reason: [reason] Duration: [duration]")
 		Banlist.cd = "/base/[banfolder]"
-		Banlist["reason"] << reason
-		Banlist["temp"] << temp
-		Banlist["minutes"] << minutes
-		Banlist["bannedby"] << usr.ckey
+		to_savefile(Banlist, "reason",   reason)
+		to_savefile(Banlist, "temp",     temp)
+		to_savefile(Banlist, "minutes",  minutes)
+		to_savefile(Banlist, "bannedby", usr.ckey)
 		Banlist.cd = "/base"
 		SSstatistics.add_field("ban_edit",1)
 		unbanpanel()
@@ -349,7 +334,7 @@
 			jobs += "<tr align='center' bgcolor='[dept.display_color]'><th colspan='[length(print_jobs)]'><a href='?src=\ref[src];jobban_category=[dept.name];jobban_mob_target=\ref[M]'>[capitalize(dept.name)] Positions</a></th></tr><tr align='center'>"
 			for(var/jobPos in print_jobs)
 				var/datum/job/job = SSjobs.get_by_title(jobPos)
-				if(!job) 
+				if(!job)
 					continue
 				if(jobban_isbanned(M, job.title))
 					jobs += "<td width='20%'><a href='?src=\ref[src];jobban_category=[job.title];jobban_mob_target=\ref[M]'><font color=red>[replacetext(job.title, " ", "&nbsp")]</font></a></td>"
@@ -833,10 +818,8 @@
 			to_chat(usr, "This can only be used on instances of type /mob/living/carbon/human")
 			return
 		var/block=text2num(href_list["block"])
-		//testing("togmutate([href_list["block"]] -> [block])")
 		usr.client.cmd_admin_toggle_block(H,block)
 		show_player_panel(H)
-		//H.regenerate_icons()
 
 	else if(href_list["adminplayeropts"])
 		var/mob/M = locate(href_list["adminplayeropts"])
@@ -930,7 +913,7 @@
 
 		//Job + antagonist
 		if(M.mind)
-			special_role_description = "Role: <b>[M.mind.assigned_role]</b>; Antagonist: <font color='red'><b>[M.mind.get_special_role_name()]</b></font>; Has been rev: [(M.mind.has_been_rev)?"Yes":"No"]"
+			special_role_description = "Role: <b>[M.mind.assigned_role]</b>; Antagonist: <font color='red'><b>[M.mind.get_special_role_name("unknown role")]</b></font>; Has been rev: [(M.mind.has_been_rev)?"Yes":"No"]"
 		else
 			special_role_description = "Role: <i>Mind datum missing</i> Antagonist: <i>Mind datum missing</i>; Has been rev: <i>Mind datum missing</i>;"
 
@@ -1198,10 +1181,6 @@
 			else if(!ispath(path, /obj) && !ispath(path, /turf) && !ispath(path, /mob))
 				removed_paths += dirty_path
 				continue
-			else if(ispath(path, /obj/item/energy_blade/blade))//Not an item one should be able to spawn./N
-				if(!check_rights(R_FUN,0))
-					removed_paths += dirty_path
-					continue
 			else if(ispath(path, /obj/effect/bhole))
 				if(!check_rights(R_FUN,0))
 					removed_paths += dirty_path
@@ -1299,7 +1278,7 @@
 		src.access_news_network()
 
 	else if(href_list["ac_set_channel_name"])
-		src.admincaster_feed_channel.channel_name = sanitizeSafe(input(usr, "Provide a Feed Channel Name", "Network Channel Handler", ""))
+		src.admincaster_feed_channel.channel_name = sanitize_safe(input(usr, "Provide a Feed Channel Name", "Network Channel Handler", ""))
 		src.access_news_network()
 
 	else if(href_list["ac_set_channel_lock"])
@@ -1327,7 +1306,7 @@
 		var/list/available_channels = list()
 		for(var/datum/feed_channel/F in news_network.network_channels)
 			available_channels += F.channel_name
-		src.admincaster_feed_channel.channel_name = sanitizeSafe(input(usr, "Choose receiving Feed Channel", "Network Channel Handler") in available_channels )
+		src.admincaster_feed_channel.channel_name = sanitize_safe(input(usr, "Choose receiving Feed Channel", "Network Channel Handler") in available_channels )
 		src.access_news_network()
 
 	else if(href_list["ac_set_new_message"])

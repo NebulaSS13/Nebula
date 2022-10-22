@@ -8,7 +8,7 @@ var/global/list/all_virtual_listeners = list()
 	sight = SEE_SELF
 
 	virtual_mob = null
-	no_z_overlay = TRUE
+	z_flags = ZMM_IGNORE
 
 	var/atom/movable/host
 	var/host_type = /atom/movable
@@ -37,16 +37,15 @@ var/global/list/all_virtual_listeners = list()
 	return ..()
 
 /mob/observer/virtual/on_update_icon()
+	..()
 	if(!overlay_icons)
 		overlay_icons = list()
 		for(var/i_state in icon_states(icon))
 			overlay_icons[i_state] = image(icon = icon, icon_state = i_state)
-	overlays.Cut()
-
 	if(abilities & VIRTUAL_ABILITY_HEAR)
-		overlays += overlay_icons["hear"]
+		add_overlay(overlay_icons["hear"])
 	if(abilities & VIRTUAL_ABILITY_SEE)
-		overlays += overlay_icons["see"]
+		add_overlay(overlay_icons["see"])
 
 /***********************
 * Virtual Mob Creation *
@@ -54,10 +53,8 @@ var/global/list/all_virtual_listeners = list()
 /atom/movable
 	var/mob/observer/virtual/virtual_mob
 
-/atom/movable/Initialize()
-	. = ..()
-	if(shall_have_virtual_mob())
-		virtual_mob = new virtual_mob(get_turf(src), src)
+// There is a hook in the common /atom/movable/Initialize() fn.
+// The below function was also inlined in that function, as nowhere else used it.
 
-/atom/movable/proc/shall_have_virtual_mob()
-	return ispath(initial(virtual_mob))
+// /atom/movable/proc/shall_have_virtual_mob()
+// 	return ispath(initial(virtual_mob))

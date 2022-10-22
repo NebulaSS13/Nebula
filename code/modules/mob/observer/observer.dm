@@ -14,11 +14,13 @@ var/global/const/GHOST_IMAGE_ALL = ~GHOST_IMAGE_NONE
 	simulated = FALSE
 	stat = DEAD
 	status_flags = GODMODE
+	shift_to_open_context_menu = FALSE
 	var/ghost_image_flag = GHOST_IMAGE_DARKNESS
 	var/image/ghost_image = null //this mobs ghost image, for deleting and stuff
 
 /mob/observer/Initialize()
 	. = ..()
+	glide_size = 0
 	ghost_image = image(src.icon,src)
 	ghost_image.plane = plane
 	ghost_image.layer = layer
@@ -60,7 +62,7 @@ var/global/const/GHOST_IMAGE_ALL = ~GHOST_IMAGE_NONE
 /mob/observer/set_stat()
 	stat = DEAD // They are also always dead
 
-/mob/observer/touch_map_edge()
+/mob/observer/touch_map_edge(var/overmap_id = OVERMAP_ID_SPACE)
 	if(z in global.using_map.sealed_levels)
 		return
 
@@ -82,7 +84,7 @@ var/global/const/GHOST_IMAGE_ALL = ~GHOST_IMAGE_NONE
 		throwing = null
 		to_chat(src, "<span class='notice'>You cannot move further in this direction.</span>")
 
-/mob/observer/handle_reading_literacy(var/mob/user, var/text_content, var/skip_delays)
+/mob/observer/handle_reading_literacy(var/mob/user, var/text_content, var/skip_delays, var/digital = FALSE)
 	. = text_content
 
 /mob/observer/handle_writing_literacy(var/mob/user, var/text_content, var/skip_delays)
@@ -90,3 +92,6 @@ var/global/const/GHOST_IMAGE_ALL = ~GHOST_IMAGE_NONE
 
 /mob/observer/get_admin_job_string()
 	return "Ghost"
+
+/mob/observer/set_glide_size(var/delay)
+	glide_size = 0

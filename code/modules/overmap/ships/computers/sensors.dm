@@ -6,6 +6,7 @@
 	extra_view = 4
 	var/weakref/sensor_ref
 	var/list/last_scan
+	var/tmp/muted = FALSE
 	var/working_sound = 'sound/machines/sensors/dradis.ogg'
 	var/datum/sound_token/sound_token
 	var/sound_id
@@ -53,6 +54,7 @@
 
 	var/obj/machinery/shipsensors/sensors = get_sensors()
 	data["viewing"] = viewing_overmap(user)
+	data["muted"] = muted
 	if(sensors)
 		data["on"] = sensors.use_power
 		data["range"] = sensors.range
@@ -118,6 +120,10 @@
 
 	if (href_list["link"])
 		find_sensors()
+		return TOPIC_REFRESH
+
+	if (href_list["mute"])
+		muted = !muted
 		return TOPIC_REFRESH
 
 	var/obj/machinery/shipsensors/sensors = get_sensors()

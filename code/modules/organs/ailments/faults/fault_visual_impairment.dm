@@ -8,9 +8,9 @@
 /datum/ailment/fault/visual_impair/New()
 	..()
 	if(organ?.owner)
-		organ.owner.add_client_color(/datum/client_color/monochrome)
+		organ.owner.add_client_color(/datum/client_color/achromatopsia)
 
 /datum/ailment/fault/visual_impair/Destroy(force)
 	if(organ?.owner)
-		organ.owner.remove_client_color(/datum/client_color/monochrome)
+		organ.owner.remove_client_color(/datum/client_color/achromatopsia)
 	. = ..()

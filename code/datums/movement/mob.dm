@@ -1,24 +1,3 @@
-// Movement relayed to self handling
-/datum/movement_handler/mob/relayed_movement
-	var/prevent_host_move = FALSE
-	var/list/allowed_movers
-
-/datum/movement_handler/mob/relayed_movement/MayMove(var/mob/mover, var/is_external)
-	if(is_external)
-		return MOVEMENT_PROCEED
-	if(mover == mob && !(prevent_host_move && LAZYLEN(allowed_movers) && !LAZYISIN(allowed_movers, mover)))
-		return MOVEMENT_PROCEED
-	if(LAZYISIN(allowed_movers, mover))
-		return MOVEMENT_PROCEED
-
-	return MOVEMENT_STOP
-
-/datum/movement_handler/mob/relayed_movement/proc/AddAllowedMover(var/mover)
-	LAZYDISTINCTADD(allowed_movers, mover)
-
-/datum/movement_handler/mob/relayed_movement/proc/RemoveAllowedMover(var/mover)
-	LAZYREMOVE(allowed_movers, mover)
-
 // Admin object possession
 /datum/movement_handler/mob/admin_possess/DoMove(var/direction)
 	if(QDELETED(mob.control_object))
@@ -34,18 +13,22 @@
 		control_object.set_dir(direction)
 
 // Death handling
-/datum/movement_handler/mob/death/DoMove()
-	if(mob.stat != DEAD)
+/datum/movement_handler/mob/death/DoMove(var/direction, var/mob/mover)
+	if(mob != mover || mob.stat != DEAD)
 		return
+
 	. = MOVEMENT_HANDLED
+
 	if(!mob.client)
 		return
+
 	mob.ghostize()
 
 // Incorporeal/Ghost movement
 /datum/movement_handler/mob/incorporeal/DoMove(var/direction)
 	. = MOVEMENT_HANDLED
 	direction = mob.AdjustMovementDirection(direction)
+	mob.set_glide_size(0)
 
 	var/turf/T = get_step(mob, direction)
 	if(!mob.MayEnterTurf(T))
@@ -102,24 +85,7 @@
 
 // Buckle movement
 /datum/movement_handler/mob/buckle_relay/DoMove(var/direction, var/mover)
-	// TODO: Datumlize buckle-handling
-	if(istype(mob.buckled, /obj/vehicle))
-		//drunk driving
-		if(HAS_STATUS(mob, STAT_CONFUSE) && prob(20)) //vehicles tend to keep moving in the same direction
-			direction = turn(direction, pick(90, -90))
-		mob.buckled.relaymove(mob, direction)
-		return MOVEMENT_HANDLED
-
-	if(mob.buckled) // Wheelchair driving!
-		if(isspaceturf(mob.loc))
-			return // No wheelchair driving in space
-		if(istype(mob.buckled, /obj/structure/bed/chair/wheelchair))
-			. = MOVEMENT_HANDLED
-			if(!mob.has_held_item_slot())
-				return // No hands to drive your chair? Tough luck!
-			//drunk wheelchair driving
-			direction = mob.AdjustMovementDirection(direction)
-			mob.buckled.DoMove(direction, mob)
+	return mob?.buckled?.handle_buckled_relaymove(src, mob, direction, mover)
 
 /datum/movement_handler/mob/buckle_relay/MayMove(var/mover)
 	if(mob.buckled)
@@ -132,9 +98,11 @@
 
 /datum/movement_handler/mob/delay/DoMove(var/direction, var/mover, var/is_external)
 	if(!is_external)
-		var/delay = max(1, mob.movement_delay())
+		var/delay = max(1, mob.get_movement_delay(direction))
+		if(direction & (direction - 1)) //moved diagonally successfully
+			delay *= sqrt(2)
 		next_move = world.time + delay
-		mob.glide_size = ADJUSTED_GLIDE_SIZE(delay)
+		mob.set_glide_size(delay)
 
 /datum/movement_handler/mob/delay/MayMove(var/mover, var/is_external)
 	if(IS_NOT_SELF(mover) && is_external)
@@ -173,14 +141,14 @@
 
 // Is anything physically preventing movement?
 /datum/movement_handler/mob/physically_restrained/MayMove(var/mob/mover)
-	if(mob.anchored)
-		if(mover == mob)
-			to_chat(mob, SPAN_WARNING("You're anchored down!"))
-		return MOVEMENT_STOP
-
 	if(istype(mob.buckled) && !mob.buckled.buckle_movable)
 		if(mover == mob)
 			to_chat(mob, SPAN_WARNING("You're buckled to \the [mob.buckled]!"))
+		return MOVEMENT_STOP
+
+	if(mob.anchored)
+		if(mover == mob)
+			to_chat(mob, SPAN_WARNING("You're anchored down!"))
 		return MOVEMENT_STOP
 
 	if(LAZYLEN(mob.pinned))
@@ -210,7 +178,9 @@
 	//We are now going to move
 	mob.moving = 1
 
-	direction = mob.AdjustMovementDirection(direction)
+	if(mover == mob)
+		direction = mob.AdjustMovementDirection(direction)
+
 	var/turf/old_turf = get_turf(mob)
 	step(mob, direction)
 
@@ -219,47 +189,6 @@
 	if(mob.loc == old_turf) // Did not move for whatever reason.
 		mob.moving = FALSE
 		return
-
-	var/turf/new_loc = mob.loc
-	if(istype(new_loc))
-		for(var/atom/movable/AM AS_ANYTHING in mob.ret_grab())
-			if(AM != src && AM.loc != mob.loc && !AM.anchored && old_turf.Adjacent(AM))
-				AM.glide_size = mob.glide_size // This is adjusted by grabs again from events/some of the procs below, but doing it here makes it more likely to work with recursive movement.
-				AM.DoMove(get_dir(get_turf(AM), old_turf), mob, TRUE)
-
-		for(var/obj/item/grab/G AS_ANYTHING in mob.get_active_grabs())
-			G.adjust_position()
-
-	for(var/obj/item/grab/G AS_ANYTHING in mob.get_active_grabs())
-		if(G.assailant_reverse_facing())
-			mob.set_dir(global.reverse_dir[direction])
-		G.assailant_moved()
-	for(var/obj/item/grab/G AS_ANYTHING in mob.grabbed_by)
-		G.adjust_position()
-
-	if(direction & (UP|DOWN))
-		var/txt_dir = (direction & UP) ? "upwards" : "downwards"
-		old_turf.visible_message(SPAN_NOTICE("[mob] moves [txt_dir]."))
-		for(var/obj/item/grab/G AS_ANYTHING in mob.get_active_grabs())
-			if(!G.affecting)
-				continue
-			var/turf/start = G.affecting.loc
-			var/turf/destination = (direction == UP) ? GetAbove(G.affecting) : GetBelow(G.affecting)
-			if(!start.CanZPass(G.affecting, direction))
-				to_chat(mob, SPAN_WARNING("\The [start] blocked your pulled object!"))
-				qdel(G)
-				continue
-			if(!destination.CanZPass(G.affecting, direction))
-				to_chat(mob, SPAN_WARNING("The [G.affecting] you were pulling bumps up against \the [destination]."))
-				qdel(G)
-				continue
-			for(var/atom/A in destination)
-				if(!A.CanMoveOnto(G.affecting, start, 1.5, direction))
-					to_chat(mob, SPAN_WARNING("\The [A] blocks the [G.affecting] you were pulling."))
-					qdel(G)
-					continue
-			G.affecting.forceMove(destination)
-			continue
 
 	// Sprinting uses up stamina and causes exertion effects.
 	if(MOVING_QUICKLY(mob))
@@ -295,6 +224,10 @@
 	return T && !((mob_flags & MOB_FLAG_HOLY_BAD) && check_is_holy_turf(T))
 
 /mob/proc/AdjustMovementDirection(var/direction)
+
+	if(!direction || !isnum(direction))
+		return 0
+
 	. = direction
 	if(!HAS_STATUS(src, STAT_CONFUSE))
 		return

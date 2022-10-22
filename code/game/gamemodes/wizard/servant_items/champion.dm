@@ -11,7 +11,7 @@
 		bomb = ARMOR_BOMB_RESISTANT,
 		bio = ARMOR_BIO_MINOR
 		)
-	bodytype_restricted = list(BODYTYPE_HUMANOID)
+	bodytype_equip_flags = BODY_FLAG_HUMANOID
 
 /obj/item/clothing/suit/champarmor
 	name = "champion's armor"
@@ -37,7 +37,7 @@
 	armor = list(
 		melee = ARMOR_MELEE_MINOR
 	)
-	bodytype_restricted = list(BODYTYPE_HUMANOID)
+	bodytype_equip_flags = BODY_FLAG_HUMANOID
 
 /obj/item/clothing/shoes/jackboots/medievalboots
 	name = "leather boots"
@@ -72,7 +72,7 @@
 	if(isliving(loc))
 		if(ishuman(loc))
 			var/mob/living/carbon/human/H = loc
-			var/obj/item/organ/external/E = H.get_organ(H.get_active_held_item_slot())
+			var/obj/item/organ/external/E = GET_EXTERNAL_ORGAN(H, H.get_active_held_item_slot())
 			E?.take_external_damage(burn=2,used_weapon="stovetop")
 		else
 			var/mob/living/M = loc
@@ -82,4 +82,5 @@
 	return 1
 
 /obj/item/sword/excalibur/dropped()
+	. = ..()
 	STOP_PROCESSING(SSobj, src)

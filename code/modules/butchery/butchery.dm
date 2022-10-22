@@ -4,7 +4,7 @@
 #define CARCASS_JOINTED  "jointed"
 
 /mob/living
-	var/meat_type =         /obj/item/chems/food/snacks/meat
+	var/meat_type =         /obj/item/chems/food/meat
 	var/meat_amount =       3
 	var/skin_material =     /decl/material/solid/skin
 	var/skin_amount =       3
@@ -24,19 +24,19 @@
 	blood_splatter(get_turf(src), src, large = TRUE)
 	var/meat_count = 0
 	for(var/i=0;i<meat_amount;i++)
-		var/obj/item/chems/food/snacks/meat/slab = new effective_meat_type(get_turf(src))
+		var/obj/item/chems/food/meat/slab = new effective_meat_type(get_turf(src))
 		LAZYADD(., slab)
 		if(istype(slab))
 			meat_count++
 	if(reagents && meat_count > 0)
 		var/reagent_split = round(reagents.total_volume/meat_count,1)
-		for(var/obj/item/chems/food/snacks/meat/slab in .)
+		for(var/obj/item/chems/food/meat/slab in .)
 			reagents.trans_to_obj(slab, reagent_split)
 
 /mob/living/carbon/human/harvest_meat()
 	. = ..()
-	for(var/obj/item/organ/internal/I in internal_organs)
-		I.removed()
+	for(var/obj/item/organ/internal/I in get_internal_organs())
+		remove_organ(I)
 		LAZYADD(., I)
 
 /mob/living/proc/harvest_skin()
@@ -51,7 +51,7 @@
 	if(bone_material && bone_amount)
 		var/product = SSmaterials.create_object(bone_material, get_turf(src), bone_amount)
 		if(product)
-			LAZYADD(., product) 
+			LAZYADD(., product)
 		blood_splatter(T, src, large = TRUE)
 	if(skull_type)
 		LAZYADD(., new skull_type(T))
@@ -70,6 +70,8 @@
 		DEFAULT_FURNITURE_MATERIAL = MATTER_AMOUNT_PRIMARY
 	)
 	tool_interaction_flags = (TOOL_INTERACTION_ANCHOR | TOOL_INTERACTION_DECONSTRUCT)
+	parts_amount = 2
+	parts_type = /obj/item/stack/material/strut
 
 	var/mob/living/occupant
 	var/occupant_state =   CARCASS_EMPTY
@@ -109,7 +111,7 @@
 		return TRUE
 
 /obj/structure/kitchenspike/proc/try_spike(var/mob/living/target, var/mob/living/user)
-	if(!istype(target) || !Adjacent(user) || user.incapacitated())
+	if(!istype(target) || !Adjacent(user) || user.incapacitated() || target.anchored)
 		return
 
 	if(!anchored)
@@ -147,7 +149,7 @@
 	return istype(victim) && ((victim.meat_type && victim.meat_amount) || (victim.skin_material && victim.skin_amount) || (victim.bone_material && victim.bone_amount))
 
 /obj/structure/kitchenspike/on_update_icon()
-	overlays.Cut()
+	..()
 	if(occupant)
 		occupant.set_dir(SOUTH)
 		var/image/I = image(null)
@@ -155,7 +157,7 @@
 		var/matrix/M = matrix()
 		M.Turn(occupant.butchery_rotation)
 		I.transform = M
-		overlays += I
+		add_overlay(I)
 
 /obj/structure/kitchenspike/mob_breakout(mob/living/escapee)
 	. = ..()

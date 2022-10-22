@@ -8,6 +8,7 @@
 	name = "Breaker Box"
 	icon = 'icons/obj/power.dmi'
 	icon_state = "bbox_off"
+	desc = "A large machine with heavy duty switching circuits used for advanced grid control."
 	//directwired = 0
 	var/icon_state_on = "bbox_on"
 	var/icon_state_off = "bbox_off"
@@ -38,7 +39,6 @@
 
 /obj/machinery/power/breakerbox/examine(mob/user)
 	. = ..()
-	to_chat(user, "Large machine with heavy duty switching circuits used for advanced grid control")
 	if(on)
 		to_chat(user, "<span class='good'>It seems to be online.</span>")
 	else
@@ -73,14 +73,12 @@
 		return TRUE
 
 	busy = 1
-	for(var/mob/O in viewers(user))
-		O.show_message(text("<span class='warning'>\The [user] started reprogramming \the [src]!</span>"), 1)
-
+	user.visible_message(SPAN_NOTICE("\The [user] starts reprogramming \the [src]!"))
 	if(do_after(user, 50,src))
 		set_state(!on)
-		user.visible_message(\
-		"<span class='notice'>[user.name] [on ? "enabled" : "disabled"] the breaker box!</span>",\
-		"<span class='notice'>You [on ? "enabled" : "disabled"] the breaker box!</span>")
+		user.visible_message(
+			SPAN_NOTICE("\The [user] [on ? "enabled" : "disabled"] \the [src]!"),\
+			SPAN_NOTICE("You [on ? "enabled" : "disabled"] \the [src]!"))
 		update_locked = 1
 		spawn(600)
 			update_locked = 0

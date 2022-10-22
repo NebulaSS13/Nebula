@@ -14,7 +14,6 @@
 /decl/species/lizard
 	name = SPECIES_LIZARD
 	name_plural = SPECIES_LIZARD
-	preview_icon = 'mods/species/lizard/icons/preview.dmi'
 	skin_material = /decl/material/solid/skin/lizard
 
 	available_bodytypes = list(
@@ -63,9 +62,18 @@
 
 	reagent_tag = IS_LIZARD
 	base_color = "#066000"
-	blood_color = "#f24b2e"
 	organs_icon = 'mods/species/lizard/icons/organs.dmi'
 
+	blood_types = list(
+		/decl/blood_type/reptile/splus,
+		/decl/blood_type/reptile/sminus,
+		/decl/blood_type/reptile/xplus,
+		/decl/blood_type/reptile/xminus,
+		/decl/blood_type/reptile/sxplus,
+		/decl/blood_type/reptile/sxminus,
+		/decl/blood_type/reptile/oplus,
+		/decl/blood_type/reptile/ominus,
+	)
 	move_trail = /obj/effect/decal/cleanable/blood/tracks/claw
 
 	heat_discomfort_level = 320
@@ -88,6 +96,8 @@
 		BP_EYES = /obj/item/organ/internal/eyes/lizard,
 		BP_BRAIN = /obj/item/organ/internal/brain/lizard
 	)
+
+	override_limb_types = list(BP_TAIL = /obj/item/organ/external/tail/lizard)
 
 	appearance_descriptors = list(
 		/datum/appearance_descriptor/height = 1.25,
@@ -120,8 +130,8 @@
 		/decl/emote/exertion/biological/pant
 	)
 
-/decl/species/lizard/New()
-	..()
+/decl/species/lizard/Initialize()
+	. = ..()
 	LAZYINITLIST(available_cultural_info)
 	LAZYDISTINCTADD(available_cultural_info[TAG_CULTURE], /decl/cultural_info/culture/lizard)
 	LAZYSET(default_cultural_info, TAG_CULTURE, /decl/cultural_info/culture/lizard)

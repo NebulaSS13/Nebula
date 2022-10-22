@@ -18,6 +18,7 @@
 	var/set_flow_rate = ATMOS_DEFAULT_VOLUME_FILTER
 
 	var/list/filtering_outputs = list()	//maps gasids to gas_mixtures
+	var/static/list/gas_decls_by_symbol_cache
 	build_icon_state = "omni_filter"
 	base_type = /obj/machinery/atmospherics/omni/filter/buildable
 
@@ -26,6 +27,15 @@
 
 /obj/machinery/atmospherics/omni/filter/Initialize()
 	. = ..()
+
+	if(!gas_decls_by_symbol_cache)
+		gas_decls_by_symbol_cache = list()
+		var/list/all_materials = decls_repository.get_decls_of_subtype(/decl/material)
+		for(var/mat_type in all_materials)
+			var/decl/material/mat = all_materials[mat_type]
+			if(!mat.hidden_from_codex && !mat.is_abstract() && !isnull(mat.boiling_point) && mat.boiling_point < T20C)
+				gas_decls_by_symbol_cache[mat.gas_symbol] = mat.type
+
 	rebuild_filtering_list()
 	for(var/datum/omni_port/P in ports)
 		P.air.volume = ATMOS_DEFAULT_VOLUME_FILTER
@@ -52,7 +62,7 @@
 					input = P
 				if(ATM_OUTPUT)
 					output = P
-				if(ATM_O2 to ATM_H2)
+				if(ATM_FILTER)
 					gas_filters += P
 
 /obj/machinery/atmospherics/omni/filter/error_check()
@@ -107,7 +117,7 @@
 	ui = SSnano.try_update_ui(user, src, ui_key, ui, data, force_open)
 
 	if (!ui)
-		ui = new(user, src, ui_key, "omni_filter.tmpl", "Omni Filter Control", 330, 330)
+		ui = new(user, src, ui_key, "omni_filter.tmpl", "Omni Filter Control", 550, 550)
 		ui.set_initial_data(data)
 
 		ui.open()
@@ -125,17 +135,18 @@
 
 		var/input = 0
 		var/output = 0
-		var/is_filter = 1
+		var/is_filter = 0
 		var/f_type = null
 		switch(P.mode)
 			if(ATM_INPUT)
 				input = 1
-				is_filter = 0
 			if(ATM_OUTPUT)
 				output = 1
+			if(ATM_FILTER)
+				f_type = mode_send_switch(P)
+				is_filter = 1
+			if(ATM_NONE)
 				is_filter = 0
-			if(ATM_O2 to ATM_H2)
-				f_type = mode_send_switch(P.mode)
 
 		portData[++portData.len] = list("dir" = dir_name(P.direction, capitalize = 1), \
 										"input" = input, \
@@ -151,20 +162,10 @@
 
 	return data
 
-/obj/machinery/atmospherics/omni/filter/proc/mode_send_switch(var/mode = ATM_NONE)
-	switch(mode)
-		if(ATM_O2)
-			return "Oxygen"
-		if(ATM_N2)
-			return "Nitrogen"
-		if(ATM_CO2)
-			return "Carbon Dioxide"
-		if(ATM_N2O)
-			return "Nitrous Oxide"
-		if(ATM_H2)
-			return "Hydrogen"
-		else
-			return null
+/obj/machinery/atmospherics/omni/filter/proc/mode_send_switch(var/datum/omni_port/P)
+	if(P.filtering)
+		var/decl/material/gas/G = GET_DECL(P.filtering)
+		return G.gas_symbol
 
 /obj/machinery/atmospherics/omni/filter/Topic(href, href_list)
 	if(..()) return 1
@@ -188,8 +189,9 @@
 			if("switch_mode")
 				switch_mode(dir_flag(href_list["dir"]), mode_return_switch(href_list["mode"]))
 			if("switch_filter")
-				var/new_filter = input(usr,"Select filter mode:","Change filter",href_list["mode"]) in list("None", "Oxygen", "Nitrogen", "Carbon Dioxide", "Nitrous Oxide", "Hydrogen")
-				switch_filter(dir_flag(href_list["dir"]), mode_return_switch(new_filter))
+				var/new_filter = input(usr,"Select filter mode:","Change filter",href_list["mode"]) in gas_decls_by_symbol_cache
+				if(global.materials_by_gas_symbol[new_filter])
+					switch_filter(dir_flag(href_list["dir"]), ATM_FILTER, global.materials_by_gas_symbol[new_filter])
 
 	update_icon()
 	SSnano.update_uis(src)
@@ -197,35 +199,27 @@
 
 /obj/machinery/atmospherics/omni/filter/proc/mode_return_switch(var/mode)
 	switch(mode)
-		if("Oxygen")
-			return ATM_O2
-		if("Nitrogen")
-			return ATM_N2
-		if("Carbon Dioxide")
-			return ATM_CO2
-		if("Nitrous Oxide")
-			return ATM_N2O
-		if("Hydrogen")
-			return ATM_H2
 		if("in")
 			return ATM_INPUT
 		if("out")
 			return ATM_OUTPUT
-		if("None")
+		if("none")
 			return ATM_NONE
+		if("filtering")
+			return ATM_FILTER
 		else
 			return null
 
-/obj/machinery/atmospherics/omni/filter/proc/switch_filter(var/dir, var/mode)
+/obj/machinery/atmospherics/omni/filter/proc/switch_filter(var/dir, var/mode, var/gas)
 	//check they aren't trying to disable the input or output ~this can only happen if they hack the cached tmpl file
 	for(var/datum/omni_port/P in ports)
 		if(P.direction == dir)
 			if(P.mode == ATM_INPUT || P.mode == ATM_OUTPUT)
 				return
 
-	switch_mode(dir, mode)
+	switch_mode(dir, mode, gas)
 
-/obj/machinery/atmospherics/omni/filter/proc/switch_mode(var/port, var/mode)
+/obj/machinery/atmospherics/omni/filter/proc/switch_mode(var/port, var/mode, var/gas)
 	if(mode == null || !port)
 		return
 	var/datum/omni_port/target_port = null
@@ -242,6 +236,11 @@
 		previous_mode = target_port.mode
 		target_port.mode = mode
 		if(target_port.mode != previous_mode)
+			handle_port_change(target_port)
+			rebuild_filtering_list()
+			target_port.filtering = null
+		if(target_port.filtering != gas && target_port.mode == ATM_FILTER)
+			target_port.filtering = gas
 			handle_port_change(target_port)
 			rebuild_filtering_list()
 		else
@@ -261,9 +260,10 @@
 /obj/machinery/atmospherics/omni/filter/proc/rebuild_filtering_list()
 	filtering_outputs.Cut()
 	for(var/datum/omni_port/P in ports)
-		var/gasid = mode_to_gasid(P.mode)
-		if(gasid)
-			filtering_outputs[gasid] = P.air
+		filtering_outputs[P.filtering] = P.air
+		for(var/mat_type in P.air?.gas)
+			var/decl/material/mat = GET_DECL(mat_type)
+			gas_decls_by_symbol_cache[mat.gas_symbol] = mat.type
 
 /obj/machinery/atmospherics/omni/filter/proc/handle_port_change(var/datum/omni_port/P)
 	switch(P.mode)

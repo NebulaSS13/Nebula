@@ -1,5 +1,5 @@
 
-/obj/item/chems/food/drinks/glass2/fitnessflask
+/obj/item/chems/drinks/glass2/fitnessflask
 	name = "fitness shaker"
 	base_name = "shaker"
 	desc = "Big enough to contain enough protein to get perfectly swole. Don't mind the bits."
@@ -13,19 +13,19 @@
 	rim_pos = null // no fruit slices
 	var/lid_color = "black"
 
-/obj/item/chems/food/drinks/glass2/fitnessflask/Initialize()
+/obj/item/chems/drinks/glass2/fitnessflask/Initialize()
 	. = ..()
 	lid_color = pick("black", "red", "blue")
 	update_icon()
 
-/obj/item/chems/food/drinks/glass2/fitnessflask/on_update_icon()
+/obj/item/chems/drinks/glass2/fitnessflask/on_update_icon()
 	..()
 	icon_state = "[base_icon]_[lid_color]"
 
-/obj/item/chems/food/drinks/glass2/fitnessflask/proteinshake
+/obj/item/chems/drinks/glass2/fitnessflask/proteinshake
 	name = "protein shake"
 
-/obj/item/chems/food/drinks/glass2/fitnessflask/proteinshake/Initialize()
+/obj/item/chems/drinks/glass2/fitnessflask/proteinshake/Initialize()
 	. = ..()
 	reagents.add_reagent(/decl/material/liquid/nutriment, 30)
 	reagents.add_reagent(/decl/material/solid/metal/iron, 10)

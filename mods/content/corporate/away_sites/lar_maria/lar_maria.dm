@@ -16,16 +16,16 @@
 	area_usage_test_exempted_root_areas = list(/area/lar_maria)
 
 ///////////////////////////////////crew and prisoners
-/obj/effect/landmark/corpse/lar_maria
+/obj/abstract/landmark/corpse/lar_maria
 	eye_colors_per_species = list(SPECIES_HUMAN = list(COLOR_RED))//red eyes
 	skin_tones_per_species = list(SPECIES_HUMAN = list(-15))
-	facial_styles_per_species = list(SPECIES_HUMAN = list("Shaved"))
+	facial_styles_per_species = list(SPECIES_HUMAN = list(/decl/sprite_accessory/facial_hair/shaved))
 	genders_per_species = list(SPECIES_HUMAN = list(MALE))
 
 /mob/living/simple_animal/hostile/lar_maria
 	name = "Lar Maria hostile mob"
 	desc = "You shouldn't see me!"
-	icon = 'mods/content/corporate/away_sites/lar_maria/lar_maria_sprites.dmi'
+	icon = 'mods/content/corporate/away_sites/lar_maria/lar_maria_guard_light.dmi'
 	unsuitable_atmos_damage = 15
 	environment_smash = 1
 	faction = "lar_maria"
@@ -39,7 +39,8 @@
 	can_escape = TRUE
 	stop_automated_movement_when_pulled = 0
 	natural_weapon = /obj/item/natural_weapon/punch
-	var/obj/effect/landmark/corpse/lar_maria/corpse = null
+
+	var/obj/abstract/landmark/corpse/lar_maria/corpse = null
 	var/weapon = null
 
 /mob/living/simple_animal/hostile/lar_maria/death(gibbed, deathmessage, show_dead_message)
@@ -54,14 +55,12 @@
 /mob/living/simple_animal/hostile/lar_maria/test_subject
 	name = "test subject"
 	desc = "Sick, filthy, angry and probably crazy human in an orange robe."
-	icon_state = "test_subject"
-	icon_living = "test_subject"
-	icon_dead = "test_subject_dead"
 	maxHealth = 40
 	health = 40
-	corpse = /obj/effect/landmark/corpse/lar_maria/test_subject
+	corpse = /obj/abstract/landmark/corpse/lar_maria/test_subject
+	icon = 'mods/content/corporate/away_sites/lar_maria/lar_maria_test_subject.dmi'
 
-/obj/effect/landmark/corpse/lar_maria/test_subject
+/obj/abstract/landmark/corpse/lar_maria/test_subject
 	name = "dead test subject"
 	corpse_outfits = list(/decl/hierarchy/outfit/corpse/test_subject)
 	spawn_flags = CORPSE_SPAWNER_NO_RANDOMIZATION//no name, no hairs etc.
@@ -71,12 +70,12 @@
 	uniform = /obj/item/clothing/under/color/orange
 	shoes = /obj/item/clothing/shoes/color/orange
 
-/obj/effect/landmark/corpse/lar_maria/zhp_guard
+/obj/abstract/landmark/corpse/lar_maria/zhp_guard
 	name = "dead guard"
 	corpse_outfits = list(/decl/hierarchy/outfit/corpse/zhp_guard)
 	skin_tones_per_species = list(SPECIES_HUMAN = list(-15))
 
-/obj/effect/landmark/corpse/lar_maria/zhp_guard/dark
+/obj/abstract/landmark/corpse/lar_maria/zhp_guard/dark
 	skin_tones_per_species = list(SPECIES_HUMAN = list(-115))
 
 /decl/hierarchy/outfit/corpse/zhp_guard
@@ -88,30 +87,34 @@
 	l_ear = /obj/item/radio/headset
 
 /mob/living/simple_animal/hostile/lar_maria/guard//angry guards armed with batons and shotguns. Still bite
-	name = "\improper security"
+	name = "security"
 	desc = "Guard dressed at Zeng-Hu Pharmaceuticals uniform."
-	icon_state = "guard_light"
 	maxHealth = 60
 	health = 60
 	natural_weapon = /obj/item/baton
 	weapon = /obj/item/baton
-	corpse = /obj/effect/landmark/corpse/lar_maria/zhp_guard
+	corpse = /obj/abstract/landmark/corpse/lar_maria/zhp_guard
 
 /mob/living/simple_animal/hostile/lar_maria/guard/Initialize()
 	. = ..()
 	var/skin_color = pick(list("light","dark"))
-	icon_state = "guard_[skin_color]"
+	if(istype(weapon, /obj/item/gun))
+		if(skin_color == "dark")
+			icon = 'mods/content/corporate/away_sites/lar_maria/lar_maria_guard_dark_ranged.dmi'
+		else
+			icon = 'mods/content/corporate/away_sites/lar_maria/lar_maria_guard_light_ranged.dmi'
+	else
+		if(skin_color == "dark")
+			icon = 'mods/content/corporate/away_sites/lar_maria/lar_maria_guard_dark.dmi'
+		else
+			icon = 'mods/content/corporate/away_sites/lar_maria/lar_maria_guard_light.dmi'
 	if (skin_color == "dark")
-		corpse = /obj/effect/landmark/corpse/lar_maria/zhp_guard/dark
+		corpse = /obj/abstract/landmark/corpse/lar_maria/zhp_guard/dark
 
 /mob/living/simple_animal/hostile/lar_maria/guard/ranged
 	weapon = /obj/item/gun/projectile/shotgun/pump
 	ranged = 1
 	projectiletype = /obj/item/projectile/bullet/shotgun/beanbag
-
-/mob/living/simple_animal/hostile/lar_maria/guard/ranged/Initialize()
-	. = ..()
-	icon_state = "[icon_state]_ranged"
 
 /obj/item/clothing/head/soft/zhp_cap
 	name = "Zeng-Hu Pharmaceuticals cap"
@@ -119,14 +122,14 @@
 	desc = "A green cap with Zeng-Hu Pharmaceuticals symbol on it."
 
 /mob/living/simple_animal/hostile/lar_maria/virologist
-	name = "\improper virologist"
+	name = "virologist"
 	desc = "Virologist dressed at Zeng-Hu Pharmaceuticals uniform."
-	icon_state = "virologist_m"
+	icon = 'mods/content/corporate/away_sites/lar_maria/lar_maria_virologist_m.dmi'
 	maxHealth = 50
 	health = 50
-	corpse = /obj/effect/landmark/corpse/lar_maria/virologist
+	corpse = /obj/abstract/landmark/corpse/lar_maria/virologist
 
-/obj/effect/landmark/corpse/lar_maria/virologist
+/obj/abstract/landmark/corpse/lar_maria/virologist
 	name = "dead virologist"
 	corpse_outfits = list(/decl/hierarchy/outfit/corpse/zhp_virologist)
 
@@ -141,14 +144,14 @@
 	glasses = /obj/item/clothing/glasses/eyepatch/hud/medical
 
 /mob/living/simple_animal/hostile/lar_maria/virologist/female
-	icon_state = "virologist_f"
+	icon = 'mods/content/corporate/away_sites/lar_maria/lar_maria_virologist_f.dmi'
 	weapon = /obj/item/scalpel
-	corpse = /obj/effect/landmark/corpse/lar_maria/virologist_female
+	corpse = /obj/abstract/landmark/corpse/lar_maria/virologist_female
 
-/obj/effect/landmark/corpse/lar_maria/virologist_female
+/obj/abstract/landmark/corpse/lar_maria/virologist_female
 	name = "dead virologist"
 	corpse_outfits = list(/decl/hierarchy/outfit/corpse/zhp_virologist_female)
-	hair_styles_per_species = list(SPECIES_HUMAN = list("Flaired Hair"))
+	hair_styles_per_species = list(SPECIES_HUMAN = list(/decl/sprite_accessory/hair/flair))
 	hair_colors_per_species = list(SPECIES_HUMAN = list("#ae7b48"))
 	genders_per_species = list(SPECIES_HUMAN = list(FEMALE))
 

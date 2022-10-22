@@ -19,7 +19,7 @@
 	landmark_tag = "escape_pod_"+ #NUMBER +"_out"; \
 } \
 /area/shuttle/escape_pod_##NUMBER { \
-	name = "Escape Pod ##NUMBER"; \
+	name = "Escape Pod " + #NUMBER; \
 	area_flags = AREA_FLAG_RAD_SHIELDED | AREA_FLAG_ION_SHIELDED | AREA_FLAG_IS_NOT_PERSISTENT; \
 }
 

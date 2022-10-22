@@ -105,6 +105,10 @@
 #define show_image(target, image)                           target << (image)
 #define send_rsc(target, rsc_content, rsc_name)             target << browse_rsc(rsc_content, rsc_name)
 #define open_link(target, url)                              target << link(url)
+#define to_savefile(target, key, value)                     target[(key)] << (value)
+#define from_savefile(target, key, value)                   target[(key)] >> (value)
+#define to_output(target, output_content, output_args)      target << output((output_content), (output_args))
+#define direct_output(target, value)                        target << (value)
 
 /proc/html_icon(var/thing) // Proc instead of macro to avoid precompiler problems.
 	. = "\icon[thing]"
@@ -112,8 +116,6 @@
 #define MAP_IMAGE_PATH "nano/images/[global.using_map.path]/"
 
 #define map_image_file_name(z_level) "[global.using_map.path]-[z_level].png"
-
-#define RANDOM_BLOOD_TYPE pick(4;"O-", 36;"O+", 3;"A-", 28;"A+", 1;"B-", 20;"B+", 1;"AB-", 5;"AB+")
 
 #define CanInteract(user, state) (CanUseTopic(user, state) == STATUS_INTERACTIVE)
 

@@ -138,7 +138,7 @@
 		src.m_flag = 1
 		if ((A != src.loc && A && A.z == src.z))
 			src.last_move = get_dir(A, src.loc)
-	
+
 	if(!inertia_moving)
 		inertia_next_move = world.time + inertia_move_delay
 		space_drift(direct ? direct : last_move)
@@ -146,8 +146,10 @@
 /client/Move(n, direction)
 	if(!user_acted(src))
 		return
+
 	if(!mob)
 		return // Moved here to avoid nullrefs below
+
 	return mob.SelfMove(direction)
 
 /mob/Process_Spacemove(var/allow_movement)
@@ -161,7 +163,7 @@
 			return backup
 		return -1
 
-/mob/proc/space_do_move(var/allow_move, var/direction)	
+/mob/proc/space_do_move(var/allow_move, var/direction)
 	if(ismovable(allow_move))//push off things in space
 		handle_space_pushoff(allow_move, direction)
 		allow_move = -1

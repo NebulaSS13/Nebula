@@ -81,5 +81,5 @@ var/global/list/banned_ruin_ids = list()
 	template.load(central_turf,centered = TRUE)
 	var/datum/map_template/ruin = template
 	if(istype(ruin))
-		new /obj/effect/landmark/ruin(central_turf, ruin)
+		new /obj/abstract/landmark/ruin(central_turf, ruin)
 	return TRUE

@@ -23,13 +23,13 @@
 
 /obj/item/robotanalyzer/attack(mob/living/M, mob/living/user)
 	if((MUTATION_CLUMSY in user.mutations) && prob(50))
-		to_chat(user, text("<span class='warning'>You try to analyze the floor's vitals!</span>"))
-		for(var/mob/O in viewers(M, null))
-			O.show_message(text("<span class='warning'>[user] has analyzed the floor's vitals!</span>"), 1)
-		user.show_message(text("<span class='notice'>Analyzing Results for The floor:\n\t Overall Status: Healthy</span>"), 1)
-		user.show_message(text("<span class='notice'>\t Damage Specifics: [0]-[0]-[0]-[0]</span>"), 1)
-		user.show_message("<span class='notice'>Key: Suffocation/Toxin/Burns/Brute</span>", 1)
-		user.show_message("<span class='notice'>Body Temperature: ???</span>", 1)
+		user.visible_message(
+			SPAN_WARNING("\The [user] has analyzed the floor's vitals!"),
+			self_message = SPAN_WARNING("You try to analyze the floor's vitals!"))
+		user.show_message(SPAN_NOTICE("Analyzing Results for The floor:\n\t Overall Status: Healthy"))
+		user.show_message(SPAN_NOTICE("\t Damage Specifics: [0]-[0]-[0]-[0]"))
+		user.show_message(SPAN_NOTICE("Key: Suffocation/Toxin/Burns/Brute"))
+		user.show_message(SPAN_NOTICE("Body Temperature: ???"))
 		return
 
 	var/scan_type
@@ -72,16 +72,16 @@
 		if("prosthetics")
 
 			var/mob/living/carbon/human/H = M
-			to_chat(user, "<span class='notice'>Analyzing Results for \the [H]:</span>")
+			to_chat(user, SPAN_NOTICE("Analyzing Results for \the [H]:"))
 			to_chat(user, "Key: <font color='#ffa500'>Electronics</font>/<font color='red'>Brute</font>")
-			var/obj/item/organ/internal/cell/C = H.get_internal_organ(BP_CELL)
+			var/obj/item/organ/internal/cell/C = H.get_organ(BP_CELL, /obj/item/organ/internal/cell)
 			if(C)
 				to_chat(user, SPAN_NOTICE("Cell charge: [C.percent()] %"))
 			else
 				to_chat(user, SPAN_NOTICE("Cell charge: ERROR - Cell not present"))
-			to_chat(user, "<span class='notice'>External prosthetics:</span>")
+			to_chat(user, SPAN_NOTICE("External prosthetics:"))
 			var/organ_found
-			for(var/obj/item/organ/external/E in H.organs)
+			for(var/obj/item/organ/external/E in H.get_external_organs())
 				if(!BP_IS_PROSTHETIC(E))
 					continue
 				organ_found = 1
@@ -89,9 +89,9 @@
 			if(!organ_found)
 				to_chat(user, "No prosthetics located.")
 			to_chat(user, "<hr>")
-			to_chat(user, "<span class='notice'>Internal prosthetics:</span>")
+			to_chat(user, SPAN_NOTICE("Internal prosthetics:"))
 			organ_found = null
-			for(var/obj/item/organ/O in H.internal_organs)
+			for(var/obj/item/organ/O in H.get_internal_organs())
 				if(!BP_IS_PROSTHETIC(O))
 					continue
 				organ_found = 1

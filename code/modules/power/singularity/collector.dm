@@ -2,7 +2,7 @@ var/global/list/rad_collectors = list()
 
 // TODO: swap the hydrogen tanks out for lithium sheets or something like that.
 
-/obj/machinery/power/rad_collector
+/obj/machinery/rad_collector
 	name = "radiation collector array"
 	desc = "A device which uses radiation and hydrogen to produce power."
 	icon = 'icons/obj/machines/rad_collector.dmi'
@@ -29,15 +29,15 @@ var/global/list/rad_collectors = list()
 	var/end_time = 0
 	var/alert_delay = 10 SECONDS
 
-/obj/machinery/power/rad_collector/Initialize()
+/obj/machinery/rad_collector/Initialize()
 	. = ..()
 	rad_collectors += src
 
-/obj/machinery/power/rad_collector/Destroy()
+/obj/machinery/rad_collector/Destroy()
 	rad_collectors -= src
 	. = ..()
 
-/obj/machinery/power/rad_collector/Process()
+/obj/machinery/rad_collector/Process()
 	if((stat & BROKEN) || melted)
 		return
 	var/turf/T = get_turf(src)
@@ -70,12 +70,12 @@ var/global/list/rad_collectors = list()
 		else
 			loaded_tank.air_adjust_gas(/decl/material/gas/hydrogen, -0.01*drainratio*min(last_rads,max_rads)/max_rads) //fuel cost increases linearly with incoming radiation
 
-/obj/machinery/power/rad_collector/CanUseTopic(mob/user)
+/obj/machinery/rad_collector/CanUseTopic(mob/user)
 	if(!anchored)
 		return STATUS_CLOSE
 	return ..()
 
-/obj/machinery/power/rad_collector/interface_interact(mob/user)
+/obj/machinery/rad_collector/interface_interact(mob/user)
 	if(!CanInteract(user, DefaultTopicState()))
 		return FALSE
 	. = TRUE
@@ -89,7 +89,7 @@ var/global/list/rad_collectors = list()
 	else
 		to_chat(user, "<span class='warning'>The controls are locked!</span>")
 
-/obj/machinery/power/rad_collector/attackby(obj/item/W, mob/user)
+/obj/machinery/rad_collector/attackby(obj/item/W, mob/user)
 	if(istype(W, /obj/item/tank/hydrogen))
 		if(!src.anchored)
 			to_chat(user, "<span class='warning'>The [src] needs to be secured to the floor first.</span>")
@@ -110,7 +110,7 @@ var/global/list/rad_collectors = list()
 		if(loaded_tank)
 			to_chat(user, "<span class='notice'>Remove the tank first.</span>")
 			return 1
-		for(var/obj/machinery/power/rad_collector/R in get_turf(src))
+		for(var/obj/machinery/rad_collector/R in get_turf(src))
 			if(R != src)
 				to_chat(user, "<span class='warning'>You cannot install more than one collector on the same spot.</span>")
 				return 1
@@ -118,11 +118,7 @@ var/global/list/rad_collectors = list()
 		src.anchored = !src.anchored
 		user.visible_message("[user.name] [anchored? "secures":"unsecures"] the [src.name].", \
 			"You [anchored? "secure":"undo"] the external bolts.", \
-			"You hear a ratchet")
-		if(anchored && !(stat & BROKEN))
-			connect_to_network()
-		else
-			disconnect_from_network()
+			"You hear a ratchet.")
 		return 1
 	else if(istype(W, /obj/item/card/id)||istype(W, /obj/item/modular_computer))
 		if (src.allowed(user))
@@ -137,18 +133,18 @@ var/global/list/rad_collectors = list()
 		return 1
 	return ..()
 
-/obj/machinery/power/rad_collector/examine(mob/user, distance)
+/obj/machinery/rad_collector/examine(mob/user, distance)
 	. = ..()
 	if (distance <= 3 && !(stat & BROKEN))
 		to_chat(user, "The meter indicates that \the [src] is collecting [last_power] W.")
 		return 1
 
-/obj/machinery/power/rad_collector/explosion_act(severity)
+/obj/machinery/rad_collector/explosion_act(severity)
 	if(severity != 1)
 		eject()
 	. = ..()
 
-/obj/machinery/power/rad_collector/proc/collector_break()
+/obj/machinery/rad_collector/proc/collector_break()
 	if(loaded_tank?.air_contents)
 		var/turf/T = get_turf(src)
 		if(T)
@@ -157,7 +153,6 @@ var/global/list/rad_collectors = list()
 			fragmentate(T, 2, 4, list(/obj/item/projectile/bullet/pellet/fragment/tank/small = 3, /obj/item/projectile/bullet/pellet/fragment/tank = 1))
 			explosion(T, -1, -1, 0)
 			QDEL_NULL(loaded_tank)
-	disconnect_from_network()
 	stat |= BROKEN
 	melted = TRUE
 	anchored = FALSE
@@ -165,10 +160,10 @@ var/global/list/rad_collectors = list()
 	desc += " This one is destroyed beyond repair."
 	update_icon()
 
-/obj/machinery/power/rad_collector/return_air()
+/obj/machinery/rad_collector/return_air()
 	. =loaded_tank?.return_air()
 
-/obj/machinery/power/rad_collector/proc/eject()
+/obj/machinery/rad_collector/proc/eject()
 	locked = 0
 	var/obj/item/tank/hydrogen/Z = src.loaded_tank
 	if (!Z)
@@ -181,17 +176,17 @@ var/global/list/rad_collectors = list()
 	else
 		update_icon()
 
-/obj/machinery/power/rad_collector/proc/receive_pulse(var/pulse_strength)
+/obj/machinery/rad_collector/proc/receive_pulse(var/pulse_strength)
 	if(loaded_tank && active)
 		var/power_produced = 0
 		power_produced = min(100*loaded_tank.air_contents.gas[/decl/material/gas/hydrogen]*pulse_strength*pulse_coeff,max_power)
-		add_avail(power_produced)
+		generate_power(power_produced)
 		last_power_new = power_produced
 		return
 	return
 
 
-/obj/machinery/power/rad_collector/on_update_icon()
+/obj/machinery/rad_collector/on_update_icon()
 	if(melted)
 		icon_state = "ca_melt"
 	else if(active)
@@ -213,7 +208,7 @@ var/global/list/rad_collectors = list()
 		overlays += image(icon, "rads_[rad_power]")
 		overlays += image(icon, "on")
 
-/obj/machinery/power/rad_collector/toggle_power()
+/obj/machinery/rad_collector/toggle_power()
 	active = !active
 	if(active)
 		flick("ca_active", src)

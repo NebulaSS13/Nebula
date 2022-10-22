@@ -13,7 +13,7 @@
 	var/list/spawn_cartridges = null // Set to a list of types to spawn one of each on New()
 
 	var/list/cartridges = list() // Associative, label -> cartridge
-	var/obj/item/chems/container = null
+	var/obj/item/chems/container
 
 	var/ui_title = "Chemical Dispenser"
 
@@ -27,6 +27,14 @@
 	core_skill = SKILL_CHEMISTRY
 	var/can_contaminate = TRUE
 	var/buildable = TRUE
+	var/static/list/acceptable_containers = list(
+		/obj/item/chems/glass,
+		/obj/item/chems/condiment,
+		/obj/item/chems/drinks
+	)
+
+	var/beaker_offset = 0
+	var/beaker_positions = list(0,1)
 
 /obj/machinery/chemical_dispenser/Initialize(mapload, d=0, populate_parts = TRUE)
 	. = ..()
@@ -91,14 +99,14 @@
 			C.dropInto(loc)
 			return TRUE
 
-	if(istype(W, /obj/item/chems/glass) || istype(W, /obj/item/chems/food))
+	if(is_type_in_list(W, acceptable_containers))
 		if(container)
 			to_chat(user, "<span class='warning'>There is already \a [container] on \the [src]!</span>")
 			return TRUE
 
 		var/obj/item/chems/RC = W
 
-		if(!accept_drinking && istype(RC,/obj/item/chems/food))
+		if(!accept_drinking && (istype(RC,/obj/item/chems/condiment) || istype(RC,/obj/item/chems/drinks)))
 			to_chat(user, "<span class='warning'>This machine only accepts beakers!</span>")
 			return TRUE
 
@@ -107,13 +115,30 @@
 			return TRUE
 		if(!user.unEquip(RC, src))
 			return TRUE
-		container =  RC
-		update_icon()
+		set_container(RC)
 		to_chat(user, "<span class='notice'>You set \the [RC] on \the [src].</span>")
-		SSnano.update_uis(src) // update all UIs attached to src
 		return TRUE
-	
+
 	return ..()
+
+/obj/machinery/chemical_dispenser/proc/set_container(var/obj/item/chems/new_container)
+	if(container == new_container)
+		return
+	if(container)
+		events_repository.unregister(/decl/observ/moved, container, src)
+		events_repository.unregister(/decl/observ/destroyed, container, src)
+	container = new_container
+	if(container)
+		events_repository.register(/decl/observ/moved, container, src, .proc/check_container_status)
+		events_repository.register(/decl/observ/destroyed, container, src, .proc/check_container_status)
+	update_icon()
+	SSnano.update_uis(src) // update all UIs attached to src
+
+/obj/machinery/chemical_dispenser/proc/check_container_status()
+	if(container && (QDELETED(container) || container.loc != src))
+		events_repository.unregister(/decl/observ/moved, container, src)
+		events_repository.unregister(/decl/observ/destroyed, container, src)
+		container = null
 
 /obj/machinery/chemical_dispenser/ui_interact(mob/user, ui_key = "main",var/datum/nanoui/ui = null, var/force_open = 1)
 	// this is the data which will be sent to the ui
@@ -128,9 +153,9 @@
 			beakerD[++beakerD.len] = list("name" = R.name, "volume" = REAGENT_VOLUME(container.reagents, rtype))
 	data["beakerContents"] = beakerD
 
-	if(container)
-		data["beakerCurrentVolume"] = container.reagents.total_volume
-		data["beakerMaxVolume"] = container.reagents.maximum_volume
+	if(container) // Container has had null reagents in the past; may be due to qdel without clearing reference.
+		data["beakerCurrentVolume"] = container.reagents?.total_volume || 0
+		data["beakerMaxVolume"] = container.reagents?.maximum_volume || 0
 	else
 		data["beakerCurrentVolume"] = null
 		data["beakerMaxVolume"] = null
@@ -174,22 +199,27 @@
 		return TOPIC_HANDLED
 
 	else if(href_list["ejectBeaker"])
-		if(container)
-			var/obj/item/chems/B = container
+		if(!container)
+			return TOPIC_HANDLED
+
+		var/obj/item/chems/B = container
+		if(CanPhysicallyInteract(user))
+			user.put_in_hands(B)
+		else
 			B.dropInto(loc)
-			container = null
-			update_icon()
-			return TOPIC_REFRESH
-		return TOPIC_HANDLED
+
+		set_container(null)
+		return TOPIC_REFRESH
 
 /obj/machinery/chemical_dispenser/interface_interact(mob/user)
 	ui_interact(user)
 	return TRUE
 
 /obj/machinery/chemical_dispenser/on_update_icon()
-	overlays.Cut()
+	cut_overlays()
 	if(container)
 		var/mutable_appearance/beaker_overlay
 		beaker_overlay = image(src, src, "lil_beaker")
-		beaker_overlay.pixel_x = rand(-10, 5)
-		overlays += beaker_overlay
+		beaker_overlay.pixel_y = beaker_offset
+		beaker_overlay.pixel_x = pick(beaker_positions)
+		add_overlay(beaker_overlay)

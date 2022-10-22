@@ -24,7 +24,7 @@
 	icon_state ="bible"
 
 	startswith = list(
-		/obj/item/chems/food/drinks/bottle/small/beer,
+		/obj/item/chems/drinks/bottle/small/beer,
 		/obj/item/cash/c50,
 		/obj/item/cash/c50,
 	)
@@ -66,7 +66,7 @@
 /obj/item/storage/bible/attack(mob/living/carbon/human/M, mob/living/carbon/human/user)
 	if(user == M || !ishuman(user) || !ishuman(M))
 		return
-	if(user?.mind?.assigned_job?.is_holy)
+	if(user.mind?.assigned_job?.is_holy)
 		user.visible_message(SPAN_NOTICE("\The [user] places \the [src] on \the [M]'s forehead, reciting a prayer..."))
 		if(do_after(user, 5 SECONDS) && user.Adjacent(M))
 			var/decl/pronouns/G = user.get_pronouns()
@@ -80,8 +80,7 @@
 		..()
 
 /obj/item/storage/bible/afterattack(atom/A, mob/user, proximity)
-	if(!proximity) return
-	if(user?.mind?.assigned_job?.is_holy)
+	if(proximity && user?.mind?.assigned_job?.is_holy)
 		if(A.reagents && A.reagents.has_reagent(/decl/material/liquid/water)) //blesses all the water in the holder
 			to_chat(user, SPAN_NOTICE("You bless \the [A].")) // I wish it was this easy in nethack
 			LAZYSET(A.reagents.reagent_data, /decl/material/liquid/water, list("holy" = TRUE))
@@ -109,7 +108,7 @@
 	set desc = "Click to rename your bible."
 
 	if(!renamed)
-		var/input = sanitizeSafe(input("What do you want to rename your bible to? You can only do this once.", ,""), MAX_NAME_LEN)
+		var/input = sanitize_safe(input("What do you want to rename your bible to? You can only do this once.", ,""), MAX_NAME_LEN)
 
 		var/mob/M = usr
 		if(src && input && !M.stat && in_range(M,src))

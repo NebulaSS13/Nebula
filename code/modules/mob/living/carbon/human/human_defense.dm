@@ -29,7 +29,7 @@ meteor_act
 	return blocked
 
 /mob/living/carbon/human/stun_effect_act(var/stun_amount, var/agony_amount, var/def_zone)
-	var/obj/item/organ/external/affected = get_organ(def_zone)
+	var/obj/item/organ/external/affected = GET_EXTERNAL_ORGAN(src, def_zone)
 	if(!affected)
 		return
 
@@ -62,7 +62,7 @@ meteor_act
 	if(!def_zone)
 		def_zone = ran_zone()
 	if(!istype(def_zone))
-		def_zone = get_organ(def_zone)
+		def_zone = GET_EXTERNAL_ORGAN(src, def_zone)
 	if(!def_zone)
 		return ..()
 
@@ -146,15 +146,15 @@ meteor_act
 	if(check_shields(I.force, I, user, target_zone, "the [I.name]"))
 		return null
 
-	var/obj/item/organ/external/affecting = get_organ(hit_zone)
-	if (!affecting || affecting.is_stump())
+	var/obj/item/organ/external/affecting = GET_EXTERNAL_ORGAN(src, hit_zone)
+	if (!affecting)
 		to_chat(user, "<span class='danger'>They are missing that limb!</span>")
 		return null
 
 	return hit_zone
 
 /mob/living/carbon/human/hit_with_weapon(obj/item/I, mob/living/user, var/effective_force, var/hit_zone)
-	var/obj/item/organ/external/affecting = get_organ(hit_zone)
+	var/obj/item/organ/external/affecting = GET_EXTERNAL_ORGAN(src, hit_zone)
 	if(!affecting)
 		return //should be prevented by attacked_with_item() but for sanity.
 
@@ -170,7 +170,7 @@ meteor_act
 	return standard_weapon_hit_effects(I, user, effective_force, hit_zone)
 
 /mob/living/carbon/human/standard_weapon_hit_effects(obj/item/I, mob/living/user, var/effective_force, var/hit_zone)
-	var/obj/item/organ/external/affecting = get_organ(hit_zone)
+	var/obj/item/organ/external/affecting = GET_EXTERNAL_ORGAN(src, hit_zone)
 	if(!affecting)
 		return 0
 
@@ -217,6 +217,9 @@ meteor_act
 	if(W.damtype != BRUTE)
 		return
 
+	if(!should_have_organ(BP_HEART))
+		return
+
 	//make non-sharp low-force weapons less likely to be bloodied
 	if(W.sharp || prob(effective_force*4))
 		if(!(W.atom_flags & ATOM_FLAG_NO_BLOOD))
@@ -259,14 +262,15 @@ meteor_act
 		if(istype(location, /turf/simulated))
 			location.add_blood(src)
 		if(hit_zone)
-			organ = get_organ(hit_zone)
-		var/list/bloody = get_covering_equipped_items(organ.body_part)
-		for(var/obj/item/clothing/C in bloody)
-			C.add_blood(src)
-			C.update_clothing_icon()
+			organ = GET_EXTERNAL_ORGAN(src, hit_zone)
+		if(organ)
+			var/list/bloody = get_covering_equipped_items(organ.body_part)
+			for(var/obj/item/clothing/C in bloody)
+				C.add_blood(src)
+				C.update_clothing_icon()
 
 /mob/living/carbon/human/proc/attack_joint(var/obj/item/organ/external/organ, var/obj/item/W, var/effective_force, var/dislocate_mult, var/blocked)
-	if(!organ || (organ.dislocated == 2) || (organ.dislocated == -1) || blocked >= 100)
+	if(!organ || organ.is_dislocated() || !(organ.limb_flags & ORGAN_FLAG_CAN_DISLOCATE) || blocked >= 100)
 		return 0
 	if(W.damtype != BRUTE)
 		return 0
@@ -280,7 +284,7 @@ meteor_act
 	return 0
 
 /mob/living/carbon/human/emag_act(var/remaining_charges, mob/user, var/emag_source)
-	var/obj/item/organ/external/affecting = get_organ(user.zone_sel.selecting)
+	var/obj/item/organ/external/affecting = GET_EXTERNAL_ORGAN(src, user.zone_sel.selecting)
 	if(!affecting || !affecting.is_robotic())
 		to_chat(user, "<span class='warning'>That limb isn't robotic.</span>")
 		return -1
@@ -326,7 +330,7 @@ meteor_act
 			else if(shield_check)
 				return
 
-		var/obj/item/organ/external/affecting = (zone && get_organ(zone))
+		var/obj/item/organ/external/affecting = (zone && GET_EXTERNAL_ORGAN(src, zone))
 		if(!affecting)
 			visible_message(SPAN_NOTICE("\The [O] misses \the [src] narrowly!"))
 			return
@@ -366,7 +370,7 @@ meteor_act
 /mob/living/carbon/human/embed(var/obj/O, var/def_zone=null, var/datum/wound/supplied_wound)
 	if(!def_zone) ..()
 
-	var/obj/item/organ/external/affecting = get_organ(def_zone)
+	var/obj/item/organ/external/affecting = GET_EXTERNAL_ORGAN(src, def_zone)
 	if(affecting)
 		affecting.embed(O, supplied_wound = supplied_wound)
 
@@ -443,3 +447,103 @@ meteor_act
 	if (was_burned)
 		fire_act(air, temperature)
 	return FALSE
+
+//Removed the horrible safety parameter. It was only being used by ninja code anyways.
+//Now checks siemens_coefficient of the affected area by default
+/mob/living/carbon/human/electrocute_act(var/shock_damage, var/obj/source, var/base_siemens_coeff = 1.0, var/def_zone = null)
+
+	if(status_flags & GODMODE)	return 0	//godmode
+
+	if(species.siemens_coefficient == -1)
+		if(stored_shock_by_ref["\ref[src]"])
+			stored_shock_by_ref["\ref[src]"] += shock_damage
+		else
+			stored_shock_by_ref["\ref[src]"] = shock_damage
+		return
+
+	if (!def_zone)
+		def_zone = pick(BP_L_HAND, BP_R_HAND)
+
+	return ..(shock_damage, source, base_siemens_coeff, def_zone)
+
+/mob/living/carbon/human/explosion_act(severity)
+	..()
+	if(QDELETED(src))
+		return
+
+	var/b_loss = null
+	var/f_loss = null
+	switch (severity)
+		if(1)
+			b_loss = 400
+			f_loss = 100
+			var/atom/target = get_edge_target_turf(src, get_dir(src, get_step_away(src, src)))
+			throw_at(target, 200, 4)
+		if(2)
+			b_loss = 60
+			f_loss = 60
+			if (get_sound_volume_multiplier() >= 0.2)
+				SET_STATUS_MAX(src, STAT_TINNITUS, 30)
+				SET_STATUS_MAX(src, STAT_DEAF, 120)
+			if(prob(70))
+				SET_STATUS_MAX(src, STAT_PARA, 10)
+		if(3)
+			b_loss = 30
+			if (get_sound_volume_multiplier() >= 0.2)
+				SET_STATUS_MAX(src, STAT_TINNITUS, 15)
+				SET_STATUS_MAX(src, STAT_DEAF, 60)
+			if (prob(50))
+				SET_STATUS_MAX(src, STAT_PARA, 10)
+
+	// focus most of the blast on one organ
+	apply_damage(0.7 * b_loss, BRUTE, null, DAM_EXPLODE, used_weapon = "Explosive blast")
+	apply_damage(0.7 * f_loss, BURN, null, DAM_EXPLODE, used_weapon = "Explosive blast")
+
+	// distribute the remaining 30% on all limbs equally (including the one already dealt damage)
+	apply_damage(0.3 * b_loss, BRUTE, null, DAM_EXPLODE | DAM_DISPERSED, used_weapon = "Explosive blast")
+	apply_damage(0.3 * f_loss, BURN, null, DAM_EXPLODE | DAM_DISPERSED, used_weapon = "Explosive blast")
+
+//Used by various things that knock people out by applying blunt trauma to the head.
+//Checks that the species has a "head" (brain containing organ) and that hit_zone refers to it.
+/mob/living/carbon/human/proc/headcheck(var/target_zone, var/brain_tag = BP_BRAIN)
+
+	target_zone = check_zone(target_zone, src)
+
+	var/obj/item/organ/internal/brain = GET_INTERNAL_ORGAN(src, brain_tag)
+	if(!brain || brain.parent_organ != target_zone)
+		return FALSE
+
+	//if the parent organ is significantly larger than the brain organ, then hitting it is not guaranteed
+	var/obj/item/organ/external/head = GET_EXTERNAL_ORGAN(src, target_zone)
+	if(!head)
+		return FALSE
+	if(head.w_class > brain.w_class + 1)
+		return prob(100 / 2**(head.w_class - brain.w_class - 1))
+	return TRUE
+
+///eyecheck()
+///Returns a number between -1 to 2
+/mob/living/carbon/human/eyecheck()
+	var/total_protection = flash_protection
+	if(species.has_organ[species.vision_organ])
+		var/obj/item/organ/internal/eyes/I = get_organ(species.vision_organ, /obj/item/organ/internal/eyes)
+		if(!I?.is_usable())
+			return FLASH_PROTECTION_MAJOR
+		total_protection = I.get_total_protection(flash_protection)
+	else // They can't be flashed if they don't have eyes.
+		return FLASH_PROTECTION_MAJOR
+	return total_protection
+
+/mob/living/carbon/human/flash_eyes(var/intensity = FLASH_PROTECTION_MODERATE, override_blindness_check = FALSE, affect_silicon = FALSE, visual = FALSE, type = /obj/screen/fullscreen/flash)
+	if(species.has_organ[species.vision_organ])
+		var/obj/item/organ/internal/eyes/I = get_organ(species.vision_organ, /obj/item/organ/internal/eyes)
+		if(I)
+			I.additional_flash_effects(intensity)
+	return ..()
+
+/mob/living/carbon/human/proc/getFlashMod()
+	if(species.vision_organ)
+		var/obj/item/organ/internal/eyes/I = get_organ(species.vision_organ, /obj/item/organ/internal/eyes)
+		if(istype(I))
+			return I.flash_mod
+	return species.flash_mod

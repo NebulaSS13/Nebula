@@ -1,17 +1,18 @@
 /mob/living/carbon/human
 
-	var/h_style = "Bald"
-	var/f_style = "Shaved"
+	var/h_style = /decl/sprite_accessory/hair/bald
+	var/f_style = /decl/sprite_accessory/facial_hair/shaved
 
 	var/hair_colour =        COLOR_BLACK
 	var/facial_hair_colour = COLOR_BLACK
 	var/skin_colour =        COLOR_BLACK
 	var/eye_colour =         COLOR_BLACK
 
+	var/regenerate_body_icon = FALSE // If true, the next icon update will also regenerate the body.
+
 	var/skin_tone = 0  //Skin tone
 
 	var/damage_multiplier = 1 //multiplies melee combat damage
-	var/icon_update = 1 //whether icon updating shall take place
 
 	var/lip_style = null	//no lipstick by default- arguably misleading, as it could be used for general makeup
 
@@ -46,8 +47,9 @@
 	var/voice = ""	//Instead of new say code calling GetVoice() over and over and over, we're just going to ask this variable, which gets updated in Life()
 
 	var/last_dam = -1	//Used for determining if we need to process all organs or just some or even none.
-	var/list/bad_external_organs = list()// organs we check until they are good.
-
+	/// organs we check until they are good.
+	var/list/bad_external_organs
+	
 	var/xylophone = 0 //For the spoooooooky xylophone cooldown
 
 	var/mob/remoteview_target = null
@@ -89,6 +91,9 @@
 	var/list/appearance_descriptors
 
 	var/list/smell_cooldown
+
+	/// var for caching last getHalloss() run to avoid looping through organs over and over and over again
+	var/last_pain
 
 	ai = /datum/ai/human
 

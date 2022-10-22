@@ -76,10 +76,8 @@
 				flash_time = round(H.getFlashMod() * flash_time)
 				if(flash_time <= 0)
 					return
-				var/obj/item/organ/internal/eyes/E = H.get_internal_organ(H.species.vision_organ)
-				if(!E)
-					return
-				if(E.is_bruised() && prob(E.damage + 50))
+				var/obj/item/organ/internal/E = GET_INTERNAL_ORGAN(H, H.species.vision_organ)
+				if(E && E.is_bruised() && prob(E.damage + 50))
 					H.flash_eyes()
 					E.damage += rand(1, 5)
 
@@ -112,14 +110,13 @@
 	density = 1
 
 /obj/machinery/flasher/portable/HasProximity(atom/movable/AM)
-	if(!anchored || disable || last_flash && world.time < last_flash + 150)
+	. = ..()
+	if(!. || !anchored || disable || last_flash && world.time < last_flash + 150)
 		return
-
 	if(istype(AM, /mob/living/carbon))
 		var/mob/living/carbon/M = AM
 		if(!MOVING_DELIBERATELY(M))
 			flash()
-
 	if(isanimal(AM))
 		flash()
 

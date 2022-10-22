@@ -1,6 +1,10 @@
 /decl/modpack/dionaea
 	name = "Diona Nymphs"
 
-/decl/modpack/dionaea/initialize()
+/decl/modpack/dionaea/post_initialize()
 	. = ..()
-	LAZYSET(global.holder_mob_icons, "nymph", 'mods/mobs/dionaea/icons/nymph_holder.dmi')
+	var/list/aminals = global.href_to_mob_type["Animals"]
+	if(!islist(aminals))
+		global.href_to_mob_type["Animals"] = list("Diona Nymph" = /mob/living/carbon/alien/diona)
+	else
+		aminals["Diona Nymph"] = /mob/living/carbon/alien/diona

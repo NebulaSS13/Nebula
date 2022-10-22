@@ -12,6 +12,7 @@
 #define MAT_FLAG_BRITTLE            BITFLAG(1)
 #define MAT_FLAG_PADDING            BITFLAG(2)
 #define MAT_FLAG_FUSION_FUEL        BITFLAG(3)
+#define MAT_FLAG_FISSIBLE           BITFLAG(4)	// This material has use in a fission reactor.
 
 #define SHARD_SHARD                 "shard"
 #define SHARD_SHRAPNEL              "shrapnel"
@@ -47,9 +48,33 @@
 #define MAT_VALUE_VERY_SHINY        60
 #define MAT_VALUE_MIRRORED          80
 
+// Wall layering flags
+#define PAINT_PAINTABLE BITFLAG(0)
+#define PAINT_STRIPABLE BITFLAG(1)
+#define PAINT_DETAILABLE BITFLAG(2)
+#define PAINT_WINDOW_PAINTABLE BITFLAG(3)
+#define WALL_HAS_EDGES BITFLAG(4)
+
 #define STRUCTURE_BRITTLE_MATERIAL_DAMAGE_MULTIPLIER 4 // Amount table damage is multiplied by if it is made of a brittle material (e.g. glass)
 
 #define ORE_SURFACE  "surface minerals"
 #define ORE_PRECIOUS "precious metals"
 #define ORE_NUCLEAR  "nuclear fuel"
 #define ORE_EXOTIC   "exotic matter"
+
+//Phase of matter placeholders
+#define MAT_PHASE_SOLID     "solid"
+#define MAT_PHASE_LIQUID    "liquid"
+#define MAT_PHASE_GAS       "gas"
+#define MAT_PHASE_PLASMA    "plasma"
+
+// Fission interactions.
+// For these, associated value is ideal neutron energy for reaction.
+#define INTERACTION_FISSION        "fission"
+#define INTERACTION_ABSORPTION     "absorption"
+#define INTERACTION_SCATTER        "scatter"
+
+#define MAT_RARITY_NOWHERE  0
+#define MAT_RARITY_EXOTIC   5
+#define MAT_RARITY_UNCOMMON 10
+#define MAT_RARITY_MUNDANE  20

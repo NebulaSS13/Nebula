@@ -151,7 +151,7 @@
 
 	engage_string = "Fabricate Net"
 
-	fabrication_type = /obj/item/energy_blade_net
+	fabrication_type = /obj/item/energy_net
 	use_power_cost = 20 KILOWATTS
 	origin_tech = "{'materials':5,'powerstorage':6,'magnets':5,'esoteric':4,'engineering':6}"
 	material = /decl/material/solid/metal/steel

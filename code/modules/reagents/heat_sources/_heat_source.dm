@@ -77,7 +77,7 @@
 			temperature = max(target_temperature, temperature - heating_power)
 		if(temperature != last_temperature)
 			if(container)
-				QUEUE_TEMPERATURE_ATOMS(container)
+				queue_temperature_atoms(container)
 			queue_icon_update()
 		return TRUE // Don't kill this processing loop unless we're not powered.
 	. = ..()
@@ -150,10 +150,10 @@
 
 	dat += "</td></tr>"
 
-	dat += "<tr><td>Current temperature:</td><td>[Floor(temperature - T0C)]C</td></tr>"
+	dat += "<tr><td>Current temperature:</td><td>[FLOOR(temperature - T0C)]C</td></tr>"
 
 	dat += "<tr><td>Loaded container:</td>"
-	dat += "<td>[container ? "[container.name] ([Floor(container.temperature - T0C)]C) <a href='?src=\ref[src];remove_container=1'>Remove</a>" : "None."]</td></tr>"
+	dat += "<td>[container ? "[container.name] ([FLOOR(container.temperature - T0C)]C) <a href='?src=\ref[src];remove_container=1'>Remove</a>" : "None."]</td></tr>"
 
 	dat += "<tr><td>Switched:</td><td><a href='?src=\ref[src];toggle_power=1'>[use_power == POWER_USE_ACTIVE ? "On" : "Off"]</a></td></tr>"
 	dat += "</table>"
@@ -176,7 +176,7 @@
 		return TOPIC_HANDLED
 
 	update_use_power(use_power <= POWER_USE_IDLE ? POWER_USE_ACTIVE : POWER_USE_IDLE)
-	QUEUE_TEMPERATURE_ATOMS(src)
+	queue_temperature_atoms(src)
 	update_icon()
 
 	return TOPIC_REFRESH

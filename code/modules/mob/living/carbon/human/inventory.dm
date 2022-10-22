@@ -31,8 +31,8 @@ This saves us from having to call add_fingerprint() any time something is put in
 	return ..()
 
 /mob/living/carbon/human/proc/has_organ(name)
-	var/obj/item/organ/external/O = organs_by_name[name]
-	return (O && !O.is_stump())
+	var/obj/item/organ/external/O = GET_EXTERNAL_ORGAN(src, name)
+	return !!O
 
 /mob/living/carbon/human/proc/has_organ_for_slot(slot)
 	switch(slot)
@@ -358,32 +358,14 @@ This saves us from having to call add_fingerprint() any time something is put in
 
 /mob/living/carbon/human/get_equipped_items(var/include_carried = 0)
 	. = ..()
-	if(belt)      . += belt
-	if(l_ear)     . += l_ear
-	if(r_ear)     . += r_ear
-	if(glasses)   . += glasses
-	if(gloves)    . += gloves
-	if(head)      . += head
-	if(shoes)     . += shoes
-	if(wear_id)   . += wear_id
-	if(wear_suit) . += wear_suit
-	if(w_uniform) . += w_uniform
-
+	for(var/obj/item/thing in list(belt, l_ear, r_ear, glasses, gloves, head, shoes, wear_id, wear_suit, w_uniform))
+		LAZYADD(., thing)
 	if(include_carried)
-		if(l_store)    . += l_store
-		if(r_store)    . += r_store
-		if(handcuffed) . += handcuffed
-		if(s_store)    . += s_store
+		for(var/obj/item/thing in list(l_store, r_store, handcuffed, s_store))
+			LAZYADD(., thing)
 
 //Same as get_covering_equipped_items, but using target zone instead of bodyparts flags
 /mob/living/carbon/human/proc/get_covering_equipped_item_by_zone(var/zone)
-	var/obj/item/organ/external/O = get_organ(zone)
+	var/obj/item/organ/external/O = GET_EXTERNAL_ORGAN(src, zone)
 	if(O)
 		return get_covering_equipped_item(O.body_part)
-
-/mob/living/carbon/human/has_held_item_slot()
-	for(var/bp in held_item_slots)
-		var/obj/item/organ/external/E = organs_by_name[bp]
-		if(E && !E.is_stump())
-			return TRUE
-	return FALSE

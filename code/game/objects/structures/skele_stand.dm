@@ -23,7 +23,7 @@
 			visible_message(SPAN_NOTICE("\The [user] pushes \the [src], giving the bones a good rattle."))
 	else
 		if(thingy)
-			visible_message(SPAN_NOTICE("\The [src] rattles on [G.his] stand as [G.he] is hit by \the [thingy]."))
+			visible_message(SPAN_NOTICE("\The [src] rattles on [G.his] stand as [G.he] [G.is] hit by \the [thingy]."))
 		else
 			visible_message(SPAN_NOTICE("\The [src] rattles on [G.his] stand."))
 
@@ -88,7 +88,8 @@
 	. = ..()
 
 /obj/structure/skele_stand/on_update_icon()
-	overlays.Cut()
+	..()
 	for(var/slot in swag)
 		var/obj/item/I = swag[slot]
-		overlays += I.get_mob_overlay(null, slot)
+		if(I)
+			add_overlay(I.get_mob_overlay(null, slot))

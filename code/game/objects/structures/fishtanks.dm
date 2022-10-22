@@ -113,7 +113,7 @@ var/global/list/global/aquarium_states_and_layers = list(
 					continue
 				var/cache_key = "[c_states[i]][key_mod]-[i]"
 				if(!global.fishtank_cache[cache_key])
-					var/image/I = image(icon, icon_state = "[c_states[i]][key_mod]", dir = 1<<(i-1))
+					var/image/I = image(icon, icon_state = "[c_states[i]][key_mod]", dir = BITFLAG(i-1))
 					if(global.aquarium_states_and_layers[key_mod])
 						I.layer = global.aquarium_states_and_layers[key_mod]
 					global.fishtank_cache[cache_key] = I
@@ -121,7 +121,7 @@ var/global/list/global/aquarium_states_and_layers = list(
 
 	// Update overlays with contents.
 	icon_state = "base"
-	cut_overlays()
+	..()
 	for(var/atom/movable/AM in contents)
 		if(AM.simulated)
 			add_overlay(AM)

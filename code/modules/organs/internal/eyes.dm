@@ -2,12 +2,15 @@
 /obj/item/organ/internal/eyes
 	name = "eyeballs"
 	icon_state = "eyes"
+	prosthetic_icon = "camera"
+	prosthetic_dead_icon = "camera_broken"
 	gender = PLURAL
 	organ_tag = BP_EYES
 	parent_organ = BP_HEAD
 	surface_accessible = TRUE
 	relative_size = 5
 	max_damage = 45
+	z_flags = ZMM_MANGLE_PLANES
 
 	var/contaminant_guard = 0
 	var/eye_colour = COLOR_BLACK
@@ -19,6 +22,10 @@
 	var/flash_mod
 	var/darksight_range
 	var/eye_blend = ICON_ADD
+
+/obj/item/organ/internal/eyes/robot
+	name = "optical sensor"
+	status = ORGAN_PROSTHETIC
 
 /obj/item/organ/internal/eyes/proc/get_eye_cache_key()
 	last_cached_eye_colour = eye_colour
@@ -41,14 +48,6 @@
 		if(!human_icon_cache[cache_key])
 			human_icon_cache[cache_key] = emissive_overlay(I, "")
 		return human_icon_cache[cache_key]
-
-/obj/item/organ/internal/eyes/replaced(var/mob/living/carbon/human/target)
-
-	// Apply our eye colour to the target.
-	if(istype(target) && eye_colour)
-		target.eye_colour = eye_colour
-		target.update_eyes()
-	..()
 
 /obj/item/organ/internal/eyes/proc/update_colour()
 	if(!owner)
@@ -73,9 +72,9 @@
 	if(is_broken())
 		owner.set_status(STAT_BLIND, 20)
 
-/obj/item/organ/internal/eyes/Initialize()
+/obj/item/organ/internal/eyes/set_species(species_name)
 	. = ..()
-	flash_mod = species.flash_mod
+	flash_mod 		= species.flash_mod
 	darksight_range = species.darksight_range
 
 /obj/item/organ/internal/eyes/proc/get_total_protection(var/flash_protection = FLASH_PROTECTION_NONE)
@@ -84,30 +83,25 @@
 /obj/item/organ/internal/eyes/proc/additional_flash_effects(var/intensity)
 	return -1
 
-/obj/item/organ/internal/eyes/robot
-	name = "optical sensor"
-
-/obj/item/organ/internal/eyes/robot/Initialize()
+/obj/item/organ/internal/eyes/do_install(mob/living/carbon/human/target, affected, in_place, update_icon, detached)
+	// Apply our eye colour to the target.
+	if(istype(target) && eye_colour)
+		target.eye_colour = eye_colour
+		target.update_eyes()
+	if(owner && BP_IS_PROSTHETIC(src))
+		verbs |= /obj/item/organ/internal/eyes/proc/change_eye_color
+		verbs |= /obj/item/organ/internal/eyes/proc/toggle_eye_glow
 	. = ..()
-	robotize()
 
-/obj/item/organ/internal/eyes/removed()
+/obj/item/organ/internal/eyes/do_uninstall(in_place, detach, ignore_children, update_icon)
 	. = ..()
 	verbs -= /obj/item/organ/internal/eyes/proc/change_eye_color
 	verbs -= /obj/item/organ/internal/eyes/proc/toggle_eye_glow
 
-/obj/item/organ/internal/eyes/replaced()
+/obj/item/organ/internal/eyes/robotize(var/company = /decl/prosthetics_manufacturer/basic_human, var/skip_prosthetics = 0, var/keep_organs = 0, var/apply_material = /decl/material/solid/metal/steel, var/check_bodytype, var/check_species)
 	. = ..()
-	if(owner && BP_IS_PROSTHETIC(src))
-		verbs |= /obj/item/organ/internal/eyes/proc/change_eye_color
-		verbs |= /obj/item/organ/internal/eyes/proc/toggle_eye_glow
-
-/obj/item/organ/internal/eyes/robotize(var/company = /decl/prosthetics_manufacturer, var/skip_prosthetics, var/keep_organs, var/apply_material = /decl/material/solid/metal/steel)
-	..()
 	name = "optical sensor"
 	icon = 'icons/obj/robot_component.dmi'
-	icon_state = "camera"
-	dead_icon = "camera_broken"
 
 	if(owner)
 		verbs |= /obj/item/organ/internal/eyes/proc/change_eye_color
@@ -128,7 +122,7 @@
 
 	if(!owner || !BP_IS_PROSTHETIC(src))
 		verbs -= /obj/item/organ/internal/eyes/proc/change_eye_color
-		return	
+		return
 
 	if(owner.incapacitated())
 		return
@@ -137,7 +131,7 @@
 	if(new_eyes && do_after(owner, 10) && owner.change_eye_color(new_eyes))
 		update_colour()
 		// Finally, update the eye icon on the mob.
-		owner.regenerate_icons()
+		owner.refresh_visible_overlays()
 		owner.visible_message(SPAN_NOTICE("\The [owner] changes their eye color."),SPAN_NOTICE("You change your eye color."),)
 
 /obj/item/organ/internal/eyes/proc/toggle_eye_glow()
@@ -149,12 +143,12 @@
 
 	if(!owner || !BP_IS_PROSTHETIC(src))
 		verbs -= /obj/item/organ/internal/eyes/proc/toggle_eye_glow
-		return	
+		return
 
 	if(owner.incapacitated())
 		return
 
-	var/obj/item/organ/external/head/head = owner.get_organ(BP_HEAD)
-	if(istype(head))
+	var/obj/item/organ/external/head/head = owner.get_organ(BP_HEAD, /obj/item/organ/external/head)
+	if(head)
 		head.glowing_eyes = !head.glowing_eyes
-		owner.regenerate_icons()
+		owner.refresh_visible_overlays()

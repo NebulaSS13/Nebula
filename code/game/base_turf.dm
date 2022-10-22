@@ -9,7 +9,12 @@
 //An area can override the z-level base turf, so our solar array areas etc. can be space-based.
 /proc/get_base_turf_by_area(var/turf/T)
 	var/area/A = T.loc
-	if(A?.base_turf)
+	if(HasBelow(T.z))
+		if(istype(A) && A.open_turf)
+			return A.open_turf
+		if(T.open_turf_type)
+			return T.open_turf_type
+	if(istype(A) && A.base_turf)
 		return A.base_turf
 	return get_base_turf(T.z)
 

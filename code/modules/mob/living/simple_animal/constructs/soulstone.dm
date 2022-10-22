@@ -102,7 +102,7 @@
 
 /obj/structure/constructshell
 	name = "empty shell"
-	icon = 'icons/obj/wizard.dmi'
+	icon = 'icons/obj/structures/construct.dmi'
 	icon_state = "construct"
 	desc = "A wicked machine used by those skilled in magical arts. It is inactive."
 

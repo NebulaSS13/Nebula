@@ -3,13 +3,10 @@
 	name = "Away Sites Testing"
 	full_name = "Away Sites Testing Land"
 	path = "away_sites_testing"
-	use_overmap = TRUE
-
-	station_levels = list()
-	contact_levels = list()
-	player_levels = list()
+	overmap_ids = list(OVERMAP_ID_SPACE)
 
 	allowed_spawns = list()
+	default_spawn = null
 
 /datum/map/away_sites_testing/build_away_sites()
 	var/list/unsorted_sites = list_values(SSmapping.away_sites_templates)

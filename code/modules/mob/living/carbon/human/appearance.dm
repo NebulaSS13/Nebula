@@ -14,11 +14,24 @@
 		return
 
 	set_species(new_species)
+	dna.ready_dna(src)
+
+	//Handle spawning stuff
+	species.handle_pre_spawn(src)
+	species.create_missing_organs(src, TRUE) //Not fully replacing would cause problem with organs not being updated
+	apply_species_appearance()
+	apply_species_cultural_info()
+	species.handle_post_spawn(src)
+	reset_blood()
+	full_prosthetic = null	
+	apply_species_inventory_restrictions()
+
 	var/decl/special_role/antag = mind && player_is_antag(mind)
 	if (antag && antag.required_language)
 		add_language(antag.required_language)
 		set_default_language(antag.required_language)
 	reset_hair()
+	refresh_visible_overlays()
 	return 1
 
 /mob/living/carbon/human/set_gender(var/new_gender, var/update_body = FALSE)
@@ -33,50 +46,34 @@
 	set_gender(pronouns.name, TRUE)
 
 /mob/living/carbon/human/proc/change_hair(var/hair_style)
-	if(!hair_style)
+	if(!hair_style || h_style == hair_style || !ispath(hair_style, /decl/sprite_accessory/hair))
 		return
-
-	if(h_style == hair_style)
-		return
-
-	if(!(hair_style in global.hair_styles_list))
-		return
-
 	h_style = hair_style
-
 	update_hair()
 	return 1
 
 /mob/living/carbon/human/proc/change_facial_hair(var/facial_hair_style)
-	if(!facial_hair_style)
+	if(!facial_hair_style || f_style == facial_hair_style || !ispath(facial_hair_style, /decl/sprite_accessory/facial_hair))
 		return
-
-	if(f_style == facial_hair_style)
-		return
-
-	if(!(facial_hair_style in global.facial_hair_styles_list))
-		return
-
 	f_style = facial_hair_style
-
 	update_hair()
 	return 1
 
 /mob/living/carbon/human/proc/reset_hair()
-	var/list/valid_hairstyles = generate_valid_hairstyles()
-	var/list/valid_facial_hairstyles = generate_valid_facial_hairstyles()
+	var/list/valid_hairstyles = get_valid_hairstyle_types()
+	var/list/valid_facial_hairstyles =  get_valid_facial_hairstyle_types()
 
-	if(valid_hairstyles.len)
+	if(length(valid_hairstyles))
 		h_style = pick(valid_hairstyles)
 	else
 		//this shouldn't happen
-		h_style = "Bald"
+		h_style = /decl/sprite_accessory/hair/bald
 
-	if(valid_facial_hairstyles.len)
+	if(length(valid_facial_hairstyles))
 		f_style = pick(valid_facial_hairstyles)
 	else
 		//this shouldn't happen
-		f_style = "Shaved"
+		f_style = /decl/sprite_accessory/facial_hair/shaved
 
 	update_hair()
 
@@ -143,22 +140,13 @@
 
 	return valid_species
 
-/mob/living/carbon/human/proc/generate_valid_hairstyles(var/check_gender = 1)
-	. = list()
-	var/list/hair_styles = species.get_hair_styles()
-	for(var/hair_style in hair_styles)
-		var/datum/sprite_accessory/S = hair_styles[hair_style]
-		if(check_gender)
-			if(gender == MALE && S.gender == FEMALE)
-				continue
-			if(gender == FEMALE && S.gender == MALE)
-				continue
-		.[hair_style] = S
+/mob/living/carbon/human/proc/get_valid_hairstyle_types(var/check_gender = TRUE)
+	return species.get_hair_style_types(bodytype.associated_gender, check_gender)
 
-/mob/living/carbon/human/proc/generate_valid_facial_hairstyles()
-	return species.get_facial_hair_styles(gender)
+/mob/living/carbon/human/proc/get_valid_facial_hairstyle_types(var/check_gender = TRUE)
+	return species.get_facial_hair_style_types(bodytype.associated_gender, check_gender)
 
 /mob/living/carbon/human/proc/force_update_limbs()
-	for(var/obj/item/organ/external/O in organs)
+	for(var/obj/item/organ/external/O in get_external_organs())
 		O.sync_colour_to_human(src)
 	update_body(0)

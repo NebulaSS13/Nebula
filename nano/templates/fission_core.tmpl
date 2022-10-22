@@ -1,0 +1,133 @@
+{{if data.no_cores}}
+	Error: No connected cores detected!
+{{else}}
+	Fission Core #{{:data.current_core}}</br>
+	{{:helper.link('<<', null, {'change_core' : -1})}}{{:helper.link('>>', null, {'change_core' : 1})}}
+	<hr>
+	{{if data.error}}
+		Error: Core inoperable!
+	{{else}}
+		<h3>Core Status</h3>
+		<div class="item">
+			<div class="itemLabel">
+				Neutron Flux:
+			</div>
+			<div class="itemContent">
+				{{:data.neutron_flux}}
+			</div>
+		</div>
+		<div class="item">
+			<div class="itemLabel">
+				Neutron Energy:
+			</div>
+			<div class="itemContent">
+				{{:data.neutron_energy}}
+			</div>
+		</div>
+		<div class="item">
+			<div class="itemLabel">
+				Temperature:
+			</div>
+			<div class="itemContent">
+				{{:data.temperature}}
+			</div>
+		</div>
+		<div class="item">
+			<div class="itemLabel">
+				Control Rod Depth:
+			</div>
+			<div class="itemContent">
+				{{:helper.link(data.control_rod_depth, null, {'machine': data.core, 'control_rod' : 1})}}
+			</div>
+		</div>
+		<hr>
+		<h3>Fuel Status</h3>
+		{{:helper.link('Eject Fuel Rod', 'eject', {'machine' : data.core, 'eject_rod' : data.current_rod}, data.current_rod ? null : 'disabled')}}
+		{{:helper.link(data.rod_exposed ? '<span class="bad">EXPOSED</span>' : 'UNEXPOSED', 'eject', {'machine' : data.core, 'expose_rod' : data.current_rod}, data.current_rod ? null : 'disabled')}}
+		<div class="item">
+			<div class="itemLabel">
+				Fuel Rods:
+			</div>
+			<div class="itemContent">
+			{{for data.rods}}
+				{{:helper.link(value.name, null, {'machine': data.core, 'rod' : (index + 1)})}}<br>
+			{{empty}}
+				No fuel rods inserted into the core.
+			{{/for}}
+			</div>
+		</div>
+		<hr>
+		<div class="item">
+			<div class="itemLabel">
+				Fuel Rod Materials:
+			</div>
+			<div class="itemContent">
+				<table width = '90%'>
+					<th>Material</th>
+					<th>Amount</th>
+					{{for data.rod_materials}}
+						<tr>
+							<td>{{:value.name}}</td>
+							<td>{{:value.amount}}</td>
+						</tr>
+					{{/for}}
+				</table>
+			</div>
+		</div>
+		<hr>
+		{{:helper.link('Toggle Diagnostics', 'eject', {'machine' : data.core, 'toggle_diagnostics' : 1})}}
+		{{if data.diagnostics}}
+			<div class="item">
+				<div class="itemLabel">
+					Neutron Flux Increase:
+				</div>
+				<div class="itemContent">
+					{{:data.lastfluxincrease}}
+				</div>
+			</div>
+			<div class="item">
+				<div class="itemLabel">
+					Neutron Flux Decrease:
+				</div>
+				<div class="itemContent">
+					{{:data.lastfluxdecrease}}
+				</div>
+			</div>
+			<div class="item">
+				<div class="itemLabel">
+					Neutron Flux Delta:
+				</div>
+				<div class="itemContent">
+					{{:data.netfluxchange}}
+				</div>
+			</div>
+			<div class="item">
+				<div class="itemLabel">
+					Neutron Energy Increase:
+				</div>
+				<div class="itemContent">
+					{{:data.lastenergyincrease}}
+				</div>
+			</div>
+			<div class="item">
+				<div class="itemLabel">
+					Neutron Energy Decrease:
+				</div>
+				<div class="itemContent">
+					{{:data.lastenergydecrease}}
+				</div>
+			</div>
+			<div class="item">
+				<div class="itemLabel">
+					Neutron Energy Delta:
+				</div>
+				<div class="itemContent">
+					{{:data.netenergychange}}
+				</div>
+			</div>
+		{{/if}}
+		<div class="item">
+			{{:helper.link('Jump Start', null, {'machine': data.core, 'jump_start' : 1})}}
+		</div>
+	{{/if}}
+{{/if}}

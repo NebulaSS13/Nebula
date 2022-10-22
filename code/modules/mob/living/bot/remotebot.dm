@@ -12,7 +12,7 @@
 	var/obj/item/holding = null
 	var/obj/item/bot_controller/controller = null
 
-/mob/living/bot/remotebot/movement_delay()
+/mob/living/bot/remotebot/get_movement_delay(var/travel_dir)
 	var/tally = ..()
 	tally += speed
 	if(holding)
@@ -48,7 +48,8 @@
 		controller = B
 	return ..()
 
-/mob/living/bot/remotebot/update_icons()
+/mob/living/bot/remotebot/on_update_icon()
+	..()
 	icon_state = "fetchbot[on]"
 
 /mob/living/bot/remotebot/Destroy()
@@ -85,7 +86,7 @@
 	if(working || stat || !on || a == src) //can't touch itself
 		return
 	if(isturf(a) || get_dist(src,a) > 1)
-		walk_to(src,a,0,movement_delay())
+		walk_to(src,a,0,get_movement_delay(get_dir(src, a)))
 	else if(istype(a, /obj/item))
 		pickup(a)
 	else

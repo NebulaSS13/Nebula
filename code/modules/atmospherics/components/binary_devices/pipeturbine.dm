@@ -73,7 +73,7 @@
 	if (kin_energy > 1000000)
 		overlays += image('icons/obj/pipeturbine.dmi', "hi-turb")
 
-/obj/machinery/power/turbinemotor
+/obj/machinery/turbinemotor
 	name = "motor"
 	desc = "Electrogenerator. Converts rotation into power."
 	icon = 'icons/obj/pipeturbine.dmi'
@@ -88,26 +88,26 @@
 	uncreated_component_parts = null
 	construct_state = /decl/machine_construction/default/panel_closed
 
-/obj/machinery/power/turbinemotor/Initialize()
+/obj/machinery/turbinemotor/Initialize()
 	. = ..()
 	updateConnection()
 
-/obj/machinery/power/turbinemotor/proc/updateConnection()
+/obj/machinery/turbinemotor/proc/updateConnection()
 	turbine = null
 	if(src.loc && anchored)
 		turbine = locate(/obj/machinery/atmospherics/pipeturbine) in get_step(src,dir)
 		if (turbine.stat & (BROKEN) || !turbine.anchored || turn(turbine.dir,180) != dir)
 			turbine = null
 
-/obj/machinery/power/turbinemotor/wrench_floor_bolts(user)
+/obj/machinery/turbinemotor/wrench_floor_bolts(user)
 	. = ..()
 	updateConnection()
 
-/obj/machinery/power/turbinemotor/Process()
+/obj/machinery/turbinemotor/Process()
 	updateConnection()
 	if(!turbine || !anchored || stat & (BROKEN))
 		return
 
 	var/power_generated = kin_to_el_ratio * turbine.kin_energy
 	turbine.kin_energy -= power_generated
-	add_avail(power_generated)
+	generate_power(power_generated)

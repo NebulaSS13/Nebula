@@ -123,9 +123,7 @@
 	for(var/obj/item/implant/loyalty/imp in implant_list)
 		if(!imp)	continue
 		if(istype(imp, /obj/item/implant/loyalty))
-			for (var/mob/O in viewers(M, null))
-				O.show_message("<span class='warning'>\The [M] has been implanted by \the [src].</span>", 1)
-
+			M.visible_message(SPAN_NOTICE("\The [M] has been implanted by \the [src]."))
 			if(imp.implanted(M))
 				imp.forceMove(M)
 				imp.imp_in = M

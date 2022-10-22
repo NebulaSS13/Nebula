@@ -7,7 +7,7 @@
 /turf/simulated/wall/ocp_wall,
 /area/map_template/datacapsule)
 "c" = (
-/obj/effect/landmark/scorcher,
+/obj/abstract/landmark/scorcher,
 /turf/template_noop,
 /area/template_noop)
 "d" = (
@@ -21,7 +21,7 @@
 /turf/simulated/floor/reinforced/airless,
 /area/map_template/datacapsule)
 "g" = (
-/obj/effect/landmark/map_load_mark/ejected_datapod,
+/obj/abstract/landmark/map_load_mark/ejected_datapod,
 /turf/simulated/floor/reinforced/airless,
 /area/map_template/datacapsule)
 

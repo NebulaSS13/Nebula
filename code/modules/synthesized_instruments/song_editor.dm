@@ -13,11 +13,11 @@
 
 
 /datum/nano_module/song_editor/proc/pages()
-	return Ceiling(src.song.lines.len / global.musical_config.song_editor_lines_per_page)
+	return CEILING(src.song.lines.len / global.musical_config.song_editor_lines_per_page)
 
 
 /datum/nano_module/song_editor/proc/current_page()
-	return src.song.current_line > 0 ? Ceiling(src.song.current_line / global.musical_config.song_editor_lines_per_page) : src.page
+	return src.song.current_line > 0 ? CEILING(src.song.current_line / global.musical_config.song_editor_lines_per_page) : src.page
 
 
 /datum/nano_module/song_editor/proc/page_bounds(page_num)
@@ -55,7 +55,7 @@
 	var/target = href_list["target"]
 	var/value = text2num(href_list["value"])
 	if (href_list["value"] && !isnum(value))
-		to_chat(usr, "Non-numeric value was supplied")
+		to_chat(usr, "Non-numeric value was supplied.")
 		return 0
 
 	switch (target)

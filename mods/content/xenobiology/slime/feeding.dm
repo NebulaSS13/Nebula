@@ -61,7 +61,7 @@
 	var/datum/ai/slime/slime_ai = ai
 	if(istype(slime_ai))
 		slime_ai.update_mood()
-	regenerate_icons()
+	update_icon()
 
 /mob/living/slime/proc/slime_attach(var/mob/living/M)
 	if(check_valid_feed_target(M) == FEED_RESULT_VALID)
@@ -103,7 +103,7 @@
 			ate_victim = TRUE
 		if(drained)
 			gain_nutrition(drained)
-			var/heal_amt = Floor(drained*0.5)
+			var/heal_amt = FLOOR(drained*0.5)
 			if(heal_amt > 0)
 				adjustOxyLoss(-heal_amt)
 				adjustBruteLoss(-heal_amt)

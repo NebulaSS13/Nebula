@@ -125,12 +125,11 @@ var/global/list/slot_equipment_priority = list( \
 	return null
 
 /mob/proc/get_held_items()
-	var/list/held_obj = get_inactive_held_items()
-	if(length(held_obj))
-		. = held_obj.Copy()
-	held_obj = get_active_hand()
-	if(held_obj)
-		LAZYADD(., held_obj)
+	for(var/obj/item/thing in get_inactive_held_items())
+		LAZYADD(., thing)
+	var/obj/item/thing = get_active_hand()
+	if(istype(thing))
+		LAZYADD(., thing)
 
 /mob/proc/get_empty_hand_slot()
 	return
@@ -176,7 +175,7 @@ var/global/list/slot_equipment_priority = list( \
 	if(W)
 		remove_from_mob(W, target)
 		if(!(W && W.loc)) return 1 // self destroying objects (tk, grabs)
-		update_icons()
+		update_icon()
 		return 1
 	return 0
 
@@ -283,13 +282,11 @@ var/global/list/slot_equipment_priority = list( \
 
 /mob/proc/get_equipped_items(var/include_carried = 0)
 	SHOULD_CALL_PARENT(TRUE)
-	. = list()
-	if(back)      
-		. += back
-	if(wear_mask) 
-		. += wear_mask
+	for(var/obj/item/thing in list(back, wear_mask))
+		LAZYADD(., thing)
 	if(include_carried)
-		. |= get_held_items()
+		for(var/obj/item/thing in get_held_items())
+			LAZYADD(., thing)
 
 /mob/proc/delete_inventory(var/include_carried = FALSE)
 	for(var/entry in get_equipped_items(include_carried))
@@ -327,3 +324,6 @@ var/global/list/slot_equipment_priority = list( \
 
 /mob/proc/ui_toggle_internals()
 	return FALSE
+
+/mob/proc/can_be_buckled(var/mob/user)
+	. = user.Adjacent(src) && !istype(user, /mob/living/silicon/pai)

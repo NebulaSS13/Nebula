@@ -52,7 +52,7 @@
 	name = "hastur's hood"
 	desc = "It's unspeakably stylish."
 	icon = 'icons/clothing/head/hastur.dmi'
-	flags_inv = BLOCKHAIR
+	flags_inv = BLOCKHEADHAIR
 	body_parts_covered = SLOT_HEAD|SLOT_FACE|SLOT_EYES
 
 /obj/item/clothing/head/nursehat
@@ -209,6 +209,7 @@
 	desc = "A wide-brimmed hat, in the prevalent style of America's frontier period. By law, you are required to wear this hat while watching True Grit."
 	icon = 'icons/clothing/head/cowboy.dmi'
 	body_parts_covered = 0
+	protects_against_weather = TRUE
 
 /obj/item/clothing/head/taqiyah
 	name = "taqiyah"

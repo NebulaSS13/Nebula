@@ -115,8 +115,6 @@ var/global/dmm_suite/preloader/_preloader = new
 					continue
 				else
 					world.maxz = zcrd //create a new z_level if needed
-				if(!no_changeturf)
-					WARNING("Z-level expansion occurred without no_changeturf set, this may cause problems when /turf/post_change is called.")
 
 			bounds[MAP_MINX] = min(bounds[MAP_MINX], Clamp(xcrdStart, x_lower, x_upper))
 			bounds[MAP_MINZ] = min(bounds[MAP_MINZ], zcrd)
@@ -338,7 +336,7 @@ var/global/dmm_suite/preloader/_preloader = new
 			instance = new atype(null)
 			initialized_areas_by_type[atype] = instance
 		if(crds)
-			instance.contents.Add(crds)
+			ChangeArea(crds, instance)
 
 	//then instance the /turf and, if multiple tiles are presents, simulates the DMM underlays piling effect
 

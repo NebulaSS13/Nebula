@@ -46,7 +46,7 @@
 /obj/item/rcd/examine(mob/user)
 	. = ..()
 	if(src.type == /obj/item/rcd && loc == user)
-		to_chat(user, "The current mode is '[work_mode]'")
+		to_chat(user, "The current mode is '[work_mode]'.")
 		to_chat(user, "It currently holds [stored_matter]/[max_stored_matter] matter-units.")
 
 /obj/item/rcd/Initialize()
@@ -188,7 +188,7 @@
 
 
 /decl/hierarchy/rcd_mode
-	hierarchy_type = /decl/hierarchy/rcd_mode
+	abstract_type = /decl/hierarchy/rcd_mode
 	var/cost
 	var/delay
 	var/handles_type

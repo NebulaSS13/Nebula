@@ -19,25 +19,25 @@
 		/decl/material/solid/metal/silver =            list(RESOURCE_MID_MIN,  RESOURCE_MID_MAX),
 		/decl/material/solid/metal/uranium =           list(RESOURCE_MID_MIN,  RESOURCE_MID_MAX),
 		/decl/material/solid/metal/osmium =            list(RESOURCE_MID_MIN,  RESOURCE_MID_MAX),
-		/decl/material/solid/mineral/rutile =          list(RESOURCE_MID_MIN,  RESOURCE_MID_MAX)
+		/decl/material/solid/rutile =          list(RESOURCE_MID_MIN,  RESOURCE_MID_MAX)
 	)
 	var/list/deep_metals = list(
 		/decl/material/solid/metal/uranium =           list(RESOURCE_LOW_MIN,  RESOURCE_LOW_MAX),
 		/decl/material/solid/gemstone/diamond =        list(RESOURCE_LOW_MIN,  RESOURCE_LOW_MAX),
 		/decl/material/solid/metal/osmium =            list(RESOURCE_HIGH_MIN, RESOURCE_HIGH_MAX),
 		/decl/material/solid/metallic_hydrogen =       list(RESOURCE_MID_MIN,  RESOURCE_MID_MAX),
-		/decl/material/solid/mineral/rutile =          list(RESOURCE_MID_MIN,  RESOURCE_MID_MAX)
+		/decl/material/solid/rutile =          list(RESOURCE_MID_MIN,  RESOURCE_MID_MAX)
 	)
 	var/list/common_resources = list(
-		/decl/material/solid/mineral/sand =     list(3,5),
-		/decl/material/solid/mineral/clay =     list(3,5),
-		/decl/material/solid/mineral/graphite = list(3,5)
+		/decl/material/solid/sand =     list(3,5),
+		/decl/material/solid/clay =     list(3,5),
+		/decl/material/solid/graphite = list(3,5)
 	)
 
-/datum/random_map/noise/ore/New(var/seed, var/tx, var/ty, var/tz, var/tlx, var/tly, var/do_not_apply, var/do_not_announce, var/never_be_priority = 0)
+/datum/random_map/noise/ore/New(var/tx, var/ty, var/tz, var/tlx, var/tly, var/do_not_apply, var/do_not_announce, var/used_area)
 	rare_val = cell_range * rare_val
 	deep_val = cell_range * deep_val
-	..(seed, tx, ty, tz, (tlx / chunk_size), (tly / chunk_size), do_not_apply, do_not_announce, never_be_priority)
+	..(tx, ty, tz, (tlx / chunk_size), (tly / chunk_size), do_not_apply, do_not_announce)
 
 /datum/random_map/noise/ore/check_map_sanity()
 
@@ -80,9 +80,9 @@
 			if(!istype(T))
 				continue
 
-			if(!priority_process)
-				CHECK_TICK
+			LAZYADD(., T)
 
+			CHECK_TICK
 			var/datum/extension/buried_resources/resources = get_or_create_extension(T, /datum/extension/buried_resources)
 			LAZYINITLIST(resources.resources)
 
@@ -150,7 +150,7 @@
 		/decl/material/solid/metal/silver =            list(RESOURCE_MID_MIN,  RESOURCE_MID_MAX),
 		/decl/material/solid/metal/uranium =           list(RESOURCE_MID_MIN,  RESOURCE_MID_MAX),
 		/decl/material/solid/metal/osmium =            list(RESOURCE_MID_MIN,  RESOURCE_MID_MAX),
-		/decl/material/solid/mineral/rutile =          list(RESOURCE_MID_MIN,  RESOURCE_MID_MAX)
+		/decl/material/solid/rutile =          list(RESOURCE_MID_MIN,  RESOURCE_MID_MAX)
 	)
 	deep_metals = list(
 		/decl/material/solid/ice/aspium =              list(RESOURCE_MID_MIN,  RESOURCE_MID_MAX),
@@ -162,5 +162,5 @@
 		/decl/material/solid/gemstone/diamond =        list(RESOURCE_LOW_MIN,  RESOURCE_LOW_MAX),
 		/decl/material/solid/metal/osmium =            list(RESOURCE_HIGH_MIN, RESOURCE_HIGH_MAX),
 		/decl/material/solid/metallic_hydrogen =       list(RESOURCE_MID_MIN,  RESOURCE_MID_MAX),
-		/decl/material/solid/mineral/rutile =          list(RESOURCE_MID_MIN,  RESOURCE_MID_MAX)
+		/decl/material/solid/rutile =          list(RESOURCE_MID_MIN,  RESOURCE_MID_MAX)
 	)

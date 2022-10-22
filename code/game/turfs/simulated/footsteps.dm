@@ -26,12 +26,6 @@
 		else
 			return get_footstep(flooring.footstep_type, caller)
 
-/turf/Entered(var/mob/living/carbon/human/H)
-	..()
-	if(istype(H))
-		H.handle_footsteps()
-		H.step_count++
-
 /mob/living/carbon/human/proc/has_footsteps()
 	if(species.silent_steps || buckled || lying || throwing)
 		return //people flying, lying down or sitting do not step
@@ -45,6 +39,7 @@
 	return TRUE
 
 /mob/living/carbon/human/proc/handle_footsteps()
+	step_count++
 	if(!has_footsteps())
 		return
 

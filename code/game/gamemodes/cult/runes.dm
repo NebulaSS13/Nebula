@@ -150,7 +150,7 @@
 /obj/effect/rune/teleport/Initialize()
 	. = ..()
 	var/area/A = get_area(src)
-	destination = A.name
+	destination = A.proper_name
 	var/decl/special_role/cultist/cult = GET_DECL(/decl/special_role/cultist)
 	cult.teleport_runes += src
 
@@ -334,7 +334,7 @@
 	var/decl/pronouns/G = user.get_pronouns()
 
 	user.visible_message( \
-		SPAN_NOTICE("\The [user]'s eyes glow blue as [G.he] freezes in place, absolutely motionless."), \
+		SPAN_NOTICE("\The [user]'s eyes glow blue as [G.he] freeze[G.s] in place, absolutely motionless."), \
 		SPAN_OCCULT("The shadow that is your spirit separates itself from your body. You are now in the realm beyond. While this is a great sight, being here strains your mind and body. Hurry..."), \
 		SPAN_NOTICE("You hear only complete silence for a moment."))
 
@@ -419,7 +419,7 @@
 		user.equip_to_slot_or_del(new /obj/item/clothing/shoes/cult(user), slot_shoes_str)
 
 	O = user.get_equipped_item(slot_back_str)
-	if(istype(O, /obj/item/storage) && !istype(O, /obj/item/storage/backpack/cultpack) && user.unEquip(O)) 
+	if(istype(O, /obj/item/storage) && !istype(O, /obj/item/storage/backpack/cultpack) && user.unEquip(O))
 		var/obj/item/storage/backpack/cultpack/C = new /obj/item/storage/backpack/cultpack(user)
 		user.equip_to_slot_or_del(C, slot_back_str)
 		if(C)
@@ -429,7 +429,7 @@
 		var/obj/item/storage/backpack/cultpack/C = new /obj/item/storage/backpack/cultpack(user)
 		user.equip_to_slot_or_del(C, slot_back_str)
 
-	user.update_icons()
+	user.update_icon()
 
 	qdel(src)
 
@@ -569,7 +569,7 @@
 		if(!charges)
 			return statuses
 	if(charges >= 15)
-		for(var/obj/item/organ/external/e in user.organs)
+		for(var/obj/item/organ/external/e in user.get_external_organs())
 			if(e && e.status & ORGAN_BROKEN)
 				e.status &= ~ORGAN_BROKEN
 				statuses += "bones in your [e.name] snap into place"
@@ -717,7 +717,7 @@
 
 	var/decl/pronouns/G = target.get_pronouns()
 	target.visible_message( \
-		SPAN_OCCULT("\The [target]'s eyes glow with a faint red as [G.he] stands up, slowly starting to breathe again."), \
+		SPAN_OCCULT("\The [target]'s eyes glow with a faint red as [G.he] stand[G.s] up, slowly starting to breathe again."), \
 		SPAN_OCCULT("Life... I'm alive again..."), \
 		"You hear a flowing liquid.")
 
@@ -779,7 +779,7 @@
 	log_and_message_admins_many(cultists, "started summoning Nar-sie.")
 
 	var/area/A = get_area(src)
-	command_announcement.Announce("High levels of gravitational disruption detected at \the [A]. Suspected wormhole forming. Investigate it immediately.")
+	command_announcement.Announce("High levels of gravitational disruption detected at \the [A.proper_name]. Suspected wormhole forming. Investigate it immediately.")
 	while(cultists.len > 4 || the_end_comes)
 		cultists = get_cultists()
 		if(cultists.len > 8)

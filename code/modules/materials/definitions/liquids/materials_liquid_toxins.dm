@@ -1,5 +1,6 @@
 /decl/material/liquid/denatured_toxin
 	name = "denatured toxin"
+	uid = "liquid_denatured_toxin"
 	lore_text = "Once toxic, now harmless."
 	taste_description = null
 	taste_mult = null
@@ -10,18 +11,22 @@
 	toxicity_targets_organ = null
 	toxicity = 0
 	hidden_from_codex = TRUE
+	exoplanet_rarity = MAT_RARITY_NOWHERE // It's useless, don't use it.
 
 /decl/material/liquid/plasticide
 	name = "plasticide"
+	uid = "liquid_plasticide"
 	lore_text = "Liquid plastic, do not eat."
 	taste_description = "plastic"
 	color = "#cf3600"
 	toxicity = 5
 	taste_mult = 1.2
 	metabolism = REM * 0.25
+	exoplanet_rarity = MAT_RARITY_UNCOMMON
 
 /decl/material/liquid/amatoxin
 	name = "amatoxin"
+	uid = "liquid_amatoxin"
 	lore_text = "A powerful poison derived from certain species of mushroom."
 	taste_description = "mushroom"
 	color = "#792300"
@@ -33,9 +38,11 @@
 	heating_message = "becomes clear."
 	taste_mult = 1.2
 	metabolism = REM * 0.25
+	exoplanet_rarity = MAT_RARITY_UNCOMMON
 
 /decl/material/liquid/carpotoxin
 	name = "carpotoxin"
+	uid = "liquid_carpotoxin"
 	lore_text = "A deadly neurotoxin produced by the dreaded space carp."
 	taste_description = "fish"
 	color = "#003333"
@@ -48,9 +55,11 @@
 	heating_message = "becomes clear."
 	taste_mult = 1.2
 	metabolism = REM * 0.25
+	exoplanet_rarity = MAT_RARITY_UNCOMMON
 
 /decl/material/liquid/venom
 	name = "spider venom"
+	uid = "liquid_spider_venom"
 	lore_text = "A deadly necrotic toxin produced by giant spiders to disable their prey."
 	taste_description = "absolutely vile"
 	color = "#91d895"
@@ -63,6 +72,7 @@
 	heating_message = "becomes clear."
 	taste_mult = 1.2
 	metabolism = REM * 0.25
+	exoplanet_rarity = MAT_RARITY_UNCOMMON
 
 /decl/material/liquid/venom/affect_blood(var/mob/living/M, var/alien, var/removed, var/datum/reagents/holder)
 	if(prob(REAGENT_VOLUME(holder, type)*2))
@@ -71,12 +81,14 @@
 
 /decl/material/liquid/cyanide //Fast and Lethal
 	name = "cyanide"
+	uid = "liquid_cyanide"
 	lore_text = "A highly toxic chemical."
 	taste_mult = 0.6
 	color = "#cf3600"
 	toxicity = 20
 	metabolism = REM * 2
 	toxicity_targets_organ = BP_HEART
+	exoplanet_rarity = MAT_RARITY_UNCOMMON
 
 /decl/material/liquid/cyanide/affect_blood(var/mob/living/M, var/alien, var/removed, var/datum/reagents/holder)
 	..()
@@ -84,6 +96,7 @@
 
 /decl/material/liquid/heartstopper
 	name = "heartstopper"
+	uid = "liquid_heartstopper"
 	lore_text = "A potent cardiotoxin that paralyzes the heart."
 	taste_description = "intense bitterness"
 	color = "#6b833b"
@@ -92,6 +105,7 @@
 	metabolism = REM * 2
 	toxicity_targets_organ = BP_HEART
 	taste_mult = 1.2
+	exoplanet_rarity = MAT_RARITY_UNCOMMON
 
 /decl/material/liquid/heartstopper/affect_blood(var/mob/living/M, var/alien, var/removed, var/datum/reagents/holder)
 	..()
@@ -110,6 +124,7 @@
 
 /decl/material/liquid/zombiepowder
 	name = "zombie powder"
+	uid = "liquid_zombie_powder"
 	lore_text = "A strong neurotoxin that puts the subject into a death-like state."
 	taste_description = "death"
 	color = "#669900"
@@ -123,6 +138,7 @@
 		/decl/material/solid/metal/copper = 0.4
 	)
 	taste_mult = 1.2
+	exoplanet_rarity = MAT_RARITY_EXOTIC
 
 /decl/material/liquid/zombiepowder/affect_blood(var/mob/living/M, var/alien, var/removed, var/datum/reagents/holder)
 	..()
@@ -134,12 +150,15 @@
 		M.timeofdeath = world.time
 	M.add_chemical_effect(CE_NOPULSE, 1)
 
-/decl/material/liquid/zombiepowder/on_leaving_metabolism(mob/parent, metabolism_class)
-	parent?.status_flags &= ~FAKEDEATH
+/decl/material/liquid/zombiepowder/on_leaving_metabolism(atom/parent, metabolism_class)
+	var/mob/M = parent
+	if(istype(M))
+		M.status_flags &= ~FAKEDEATH
 	. = ..()
 
 /decl/material/liquid/fertilizer //Reagents used for plant fertilizers.
 	name = "fertilizer"
+	uid = "liquid_fertilizer"
 	lore_text = "A chemical mix good for growing plants with."
 	taste_description = "plant food"
 	taste_mult = 0.5
@@ -151,6 +170,7 @@
 
 /decl/material/liquid/weedkiller
 	name = "weedkiller"
+	uid = "liquid_weedkiller"
 	lore_text = "A harmful toxic mixture to kill plantlife. Do not ingest!"
 	taste_mult = 1
 	color = "#49002e"
@@ -161,9 +181,11 @@
 	)
 	metabolism = REM * 0.25
 	defoliant = TRUE
+	exoplanet_rarity = MAT_RARITY_NOWHERE
 
 /decl/material/liquid/tar
 	name = "tar"
+	uid = "liquid_tar"
 	lore_text = "A dark, viscous liquid."
 	taste_description = "petroleum"
 	color = "#140b30"
@@ -180,6 +202,7 @@
 
 /decl/material/liquid/hair_remover
 	name = "hair remover"
+	uid = "liquid_hair_remover"
 	lore_text = "An extremely effective chemical depilator. Do not ingest."
 	taste_description = "acid"
 	color = "#d9ffb3"
@@ -196,6 +219,7 @@
 
 /decl/material/liquid/zombie
 	name = "liquid corruption"
+	uid = "liquid_corruption"
 	lore_text = "A filthy, oily substance which slowly churns of its own accord."
 	taste_description = "decaying blood"
 	color = "#800000"
@@ -204,6 +228,7 @@
 	metabolism = REM * 5
 	overdose = 30
 	hidden_from_codex = TRUE
+	exoplanet_rarity = MAT_RARITY_EXOTIC
 	var/amount_to_zombify = 5
 
 /decl/material/liquid/zombie/affect_touch(var/mob/living/M, var/alien, var/removed, var/datum/reagents/holder)
@@ -223,6 +248,8 @@
 
 /decl/material/liquid/bromide
 	name = "bromide"
+	codex_name = "elemental bromide"
+	uid = "liquid_bromide"
 	lore_text = "A dark, nearly opaque, red-orange, toxic element."
 	taste_description = "pestkiller"
 	color = "#4c3b34"
@@ -232,6 +259,7 @@
 
 /decl/material/liquid/mercury
 	name = "mercury"
+	uid = "liquid_mercury"
 	lore_text = "A chemical element."
 	taste_mult = 0 //mercury apparently is tasteless. IDK
 	color = "#484848"

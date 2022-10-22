@@ -36,20 +36,42 @@ var/global/list/department_radio_keys = list(
 	  ":Z" = "Entertainment",".Z" = "Entertainment",
 	  ":Y" = "Exploration",		".Y" = "Exploration",
 
-	  //kinda localization -- rastaf0
-	  //same keys as above, but on russian keyboard layout. This file uses cp1251 as encoding.
-	  ":ê" = "right ear",	".ê" = "right ear",
-	  ":ä" = "left ear",	".ä" = "left ear",
-	  ":ø" = "intercom",	".ø" = "intercom",
-	  ":ð" = "department",	".ð" = "department",
-	  ":ñ" = "Command",		".ñ" = "Command",
-	  ":ò" = "Science",		".ò" = "Science",
-	  ":ü" = "Medical",		".ü" = "Medical",
-	  ":ó" = "Engineering",	".ó" = "Engineering",
-	  ":û" = "Security",	".û" = "Security",
-	  ":ö" = "whisper",		".ö" = "whisper",
-	  ":å" = "Mercenary",	".å" = "Mercenary",
-	  ":é" = "Supply",		".é" = "Supply",
+//russian version below
+	  ":к" = "right ear",	".к" = "right ear",
+	  ":д" = "left ear",	".д" = "left ear",
+	  ":ш" = "intercom",	".ш" = "intercom",
+	  ":р" = "department",	".р" = "department",
+	  ":с" = "Command",		".с" = "Command",
+	  ":т" = "Science",		".т" = "Science",
+	  ":ь" = "Medical",		".ь" = "Medical",
+	  ":у" = "Engineering",	".у" = "Engineering",
+	  ":ы" = "Security",	".ы" = "Security",
+	  ":ц" = "whisper",		".ц" = "whisper",
+	  ":е" = "Mercenary",	".е" = "Mercenary",
+	  ":г" = "Supply",		".г" = "Supply",
+	  ":ч" = "Raider",		".ч" = "Raider",
+	  ":м" = "Service",		".м" = "Service",
+	  ":з" = "AI Private",	".з" = "AI Private",
+	  ":я" = "Entertainment",".я" = "Entertainment",
+	  ":н" = "Exploration",		".н" = "Exploration",
+
+	  ":К" = "right ear",	".К" = "right ear",
+	  ":Д" = "left ear",	".Д" = "left ear",
+	  ":Ш" = "intercom",	".Ш" = "intercom",
+	  ":Р" = "department",	".Р" = "department",
+	  ":С" = "Command",		".С" = "Command",
+	  ":Т" = "Science",		".Т" = "Science",
+	  ":Ь" = "Medical",		".Ь" = "Medical",
+	  ":У" = "Engineering",	".У" = "Engineering",
+	  ":Ы" = "Security",	".Ы" = "Security",
+	  ":Ц" = "whisper",		".Ц" = "whisper",
+	  ":Е" = "Mercenary",	".Е" = "Mercenary",
+	  ":Г" = "Supply",		".Г" = "Supply",
+	  ":Ч" = "Raider",		".Ч" = "Raider",
+	  ":М" = "Service",		".М" = "Service",
+	  ":З" = "AI Private",	".З" = "AI Private",
+	  ":Я" = "Entertainment",".Я" = "Entertainment",
+	  ":Н" = "Exploration",		".Н" = "Exploration",
 )
 
 
@@ -122,9 +144,10 @@ var/global/list/channel_to_radio_key = new
 
 /mob/living/proc/handle_message_mode(message_mode, message, verb, speaking, used_radios, alt_name)
 	if(message_mode == "intercom")
-		for(var/obj/item/radio/intercom/I in view(1, null))
-			I.talk_into(src, message, verb, speaking)
-			used_radios += I
+		for(var/obj/item/radio/I in view(1, null))
+			if(I.intercom_handling)
+				I.talk_into(src, message, verb, speaking)
+				used_radios += I
 	return 0
 
 /mob/living/proc/handle_speech_sound()
@@ -194,11 +217,11 @@ var/global/list/channel_to_radio_key = new
 
 	// This is broadcast to all mobs with the language,
 	// irrespective of distance or anything else.
-	if(speaking && (speaking.flags & HIVEMIND))
+	if(speaking && (speaking.flags & LANG_FLAG_HIVEMIND))
 		speaking.broadcast(src,trim(message))
 		return 1
 
-	if((is_muzzled()) && !(speaking && (speaking.flags & SIGNLANG)))
+	if((is_muzzled()) && !(speaking && (speaking.flags & LANG_FLAG_SIGNLANG)))
 		to_chat(src, "<span class='danger'>You're muzzled and cannot speak!</span>")
 		return
 
@@ -211,11 +234,12 @@ var/global/list/channel_to_radio_key = new
 	message = trim_left(message)
 	message = handle_autohiss(message, speaking)
 	message = format_say_message(message)
+	message = filter_modify_message(message)
 
 	if(speaking && !speaking.can_be_spoken_properly_by(src))
 		message = speaking.muddle(message)
 
-	if(!(speaking && (speaking.flags & NO_STUTTER)))
+	if(!(speaking && (speaking.flags & LANG_FLAG_NO_STUTTER)))
 		var/list/message_data = list(message, verb, 0)
 		if(handle_speech_problems(message_data))
 			message = message_data[1]
@@ -246,7 +270,7 @@ var/global/list/channel_to_radio_key = new
 		if(speaking)
 			message_range = speaking.get_talkinto_msg_range(message)
 		var/msg
-		if(!speaking || !(speaking.flags & NO_TALK_MSG))
+		if(!speaking || !(speaking.flags & LANG_FLAG_NO_TALK_MSG))
 			msg = "<span class='notice'>\The [src] talks into \the [used_radios[1]].</span>"
 		for(var/mob/living/M in hearers(5, src))
 			if((M != src) && msg)
@@ -260,11 +284,11 @@ var/global/list/channel_to_radio_key = new
 
 	//handle nonverbal and sign languages here
 	if (speaking)
-		if (speaking.flags & NONVERBAL)
+		if (speaking.flags & LANG_FLAG_NONVERBAL)
 			if (prob(30))
 				src.custom_emote(1, "[pick(speaking.signlang_verb)].")
 
-		if (speaking.flags & SIGNLANG)
+		if (speaking.flags & LANG_FLAG_SIGNLANG)
 			log_say("[name]/[key] : SIGN: [message]")
 			return say_signlang(message, pick(speaking.signlang_verb), speaking)
 
@@ -330,7 +354,6 @@ var/global/list/channel_to_radio_key = new
 	return 1
 
 /mob/living/proc/say_signlang(var/message, var/verb="gestures", var/decl/language/language)
-	message = filter_modify_message(message)
 	for (var/mob/O in viewers(src, null))
 		O.hear_signlang(message, verb, language, src)
 	return 1

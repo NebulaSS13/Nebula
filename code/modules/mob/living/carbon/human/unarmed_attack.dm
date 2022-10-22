@@ -61,8 +61,8 @@ var/global/list/sparring_attack_cache = list()
 /decl/natural_attack/proc/is_usable(var/mob/living/carbon/human/user, var/mob/target, var/zone)
 	if(!user.restrained() && !user.incapacitated())
 		for(var/etype in usable_with_limbs)
-			var/obj/item/organ/external/E = user.organs_by_name[etype]
-			if(E && !E.is_stump())
+			var/obj/item/organ/external/E = GET_EXTERNAL_ORGAN(user, etype)
+			if(E)
 				return TRUE
 	return FALSE
 
@@ -106,7 +106,7 @@ var/global/list/sparring_attack_cache = list()
 			if(BP_GROIN)
 				var/decl/pronouns/G = target.get_pronouns()
 				target.visible_message( \
-					SPAN_WARNING("\The [target] looks like [G.he] is in pain!"), \
+					SPAN_WARNING("\The [target] looks like [G.he] [G.is] in pain!"), \
 					SPAN_WARNING(G.get_message_for_being_kicked_in_the_dick()))
 				target.apply_effects(stutter = attack_damage * 2, agony = attack_damage* 3, blocked = armour)
 			if(BP_L_LEG, BP_L_FOOT, BP_R_LEG, BP_R_FOOT)
@@ -126,7 +126,7 @@ var/global/list/sparring_attack_cache = list()
 
 /decl/natural_attack/proc/show_attack(var/mob/living/carbon/human/user, var/mob/living/carbon/human/target, var/zone, var/attack_damage)
 	var/msg = "\The [user] [pick(attack_verb)] \the [target]"
-	var/obj/item/organ/external/affecting = istype(target) && zone && target.get_organ(zone)
+	var/obj/item/organ/external/affecting = istype(target) && zone && GET_EXTERNAL_ORGAN(target, zone)
 	if(affecting)
 		msg = "[msg] in the [affecting.name]"
 	if(islist(attack_noun) && length(attack_noun))
@@ -136,7 +136,7 @@ var/global/list/sparring_attack_cache = list()
 		playsound(user.loc, attack_sound, 25, 1, -1)
 
 /decl/natural_attack/proc/handle_eye_attack(var/mob/living/carbon/human/user, var/mob/living/carbon/human/target)
-	var/obj/item/organ/internal/eyes/eyes = target.get_internal_organ(BP_EYES)
+	var/obj/item/organ/internal/eyes = GET_INTERNAL_ORGAN(target, BP_EYES)
 	var/decl/pronouns/G = user.get_pronouns()
 	if(eyes)
 		eyes.take_internal_damage(rand(3,4), 1)
@@ -191,7 +191,7 @@ var/global/list/sparring_attack_cache = list()
 
 /decl/natural_attack/punch/show_attack(var/mob/living/carbon/human/user, var/mob/living/carbon/human/target, var/zone, var/attack_damage)
 
-	var/obj/item/organ/external/affecting = istype(target) && zone && target.get_organ(zone)
+	var/obj/item/organ/external/affecting = istype(target) && zone && GET_EXTERNAL_ORGAN(target, zone)
 	if(!affecting)
 		return ..()
 
@@ -263,7 +263,7 @@ var/global/list/sparring_attack_cache = list()
 
 /decl/natural_attack/kick/show_attack(var/mob/living/carbon/human/user, var/mob/living/carbon/human/target, var/zone, var/attack_damage)
 
-	var/obj/item/organ/external/affecting = istype(target) && zone && target.get_organ(zone)
+	var/obj/item/organ/external/affecting = istype(target) && zone && GET_EXTERNAL_ORGAN(target, zone)
 	if(!affecting)
 		return ..()
 
@@ -283,20 +283,14 @@ var/global/list/sparring_attack_cache = list()
 
 /decl/natural_attack/stomp/is_usable(var/mob/living/carbon/human/user, var/mob/living/carbon/human/target, var/zone)
 	if(!istype(target))
-		return 0
-
+		return FALSE
 	if (!user.lying && (target.lying || (zone in list(BP_L_FOOT, BP_R_FOOT))))
 		if((user in target.grabbed_by) && target.lying)
-			return 0
-		var/obj/item/organ/external/E = user.organs_by_name[BP_L_FOOT]
-		if(E && !E.is_stump())
-			return 1
-
-		E = user.organs_by_name[BP_R_FOOT]
-		if(E && !E.is_stump())
-			return 1
-
-		return 0
+			return FALSE
+		for(var/bp in list(BP_L_FOOT, BP_R_FOOT))
+			if(GET_EXTERNAL_ORGAN(user, bp))
+				return TRUE
+	return FALSE
 
 /decl/natural_attack/stomp/get_unarmed_damage(var/mob/living/carbon/human/user)
 	var/obj/item/clothing/shoes = user.shoes
@@ -304,7 +298,7 @@ var/global/list/sparring_attack_cache = list()
 
 /decl/natural_attack/stomp/show_attack(var/mob/living/carbon/human/user, var/mob/living/carbon/human/target, var/zone, var/attack_damage)
 
-	var/obj/item/organ/external/affecting = istype(target) && zone && target.get_organ(zone)
+	var/obj/item/organ/external/affecting = istype(target) && zone && GET_EXTERNAL_ORGAN(target, zone)
 	if(!affecting)
 		return ..()
 

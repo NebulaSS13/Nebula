@@ -10,6 +10,7 @@
 	idle_power_usage = 20
 	power_channel = LIGHT
 	required_interaction_dexterity = DEXTERITY_SIMPLE_MACHINES
+	z_flags = ZMM_MANGLE_PLANES
 
 	var/on = 0
 	var/area/connected_area = null
@@ -36,7 +37,7 @@
 		connected_area = get_area(src)
 
 	if(connected_area && name == initial(name))
-		SetName("light switch ([connected_area.name])")
+		SetName("light switch ([connected_area.proper_name])")
 	return INITIALIZE_HINT_LATELOAD
 
 /obj/machinery/light_switch/LateInitialize()
@@ -75,4 +76,11 @@
 	if(CanInteract(user, DefaultTopicState()))
 		playsound(src, "switch", 30)
 		set_state(!on)
+		return TRUE
+
+/obj/machinery/light_switch/attackby(obj/item/I, mob/user)
+	. = ..()
+	if(!.)
+		to_chat(user, SPAN_NOTICE("You flick \the [src] with \the [I]."))
+		interface_interact(user)
 		return TRUE

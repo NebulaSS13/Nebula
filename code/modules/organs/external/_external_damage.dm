@@ -49,7 +49,7 @@
 	//If limb took enough damage, try to cut or tear it off
 	if(owner && loc == owner)
 		owner.updatehealth() //droplimb will call updatehealth() again if it does end up being called
-		if(!is_stump() && (limb_flags & ORGAN_FLAG_CAN_AMPUTATE) && config.limbs_can_break)
+		if((limb_flags & ORGAN_FLAG_CAN_AMPUTATE) && config.limbs_can_break)
 			var/total_damage = brute_dam + burn_dam + brute + burn + spillover
 			var/threshold = max_damage * config.organ_health_multiplier
 			if(total_damage > threshold)
@@ -61,10 +61,9 @@
 		fracture()
 
 	// High brute damage or sharp objects may damage internal organs
-	if(LAZYLEN(internal_organs))
-		if(damage_internal_organs(brute, burn, damage_flags))
-			brute /= 2
-			burn /= 2
+	if(LAZYLEN(internal_organs) && damage_internal_organs(brute, burn, damage_flags))
+		brute /= 2
+		burn  /= 2
 
 	if((status & ORGAN_BROKEN) && brute)
 		jostle_bone(brute)
@@ -207,7 +206,11 @@
 
 // Geneloss/cloneloss.
 /obj/item/organ/external/proc/get_genetic_damage()
-	return ((species && (species.species_flags & SPECIES_FLAG_NO_SCAN)) || BP_IS_PROSTHETIC(src)) ? 0 : genetic_degradation
+	if(species?.species_flags & SPECIES_FLAG_NO_SCAN)
+		return 0
+	if(BP_IS_PROSTHETIC(src))
+		return 0
+	return genetic_degradation
 
 /obj/item/organ/external/proc/remove_genetic_damage(var/amount)
 	if((species.species_flags & SPECIES_FLAG_NO_SCAN) || BP_IS_PROSTHETIC(src))
@@ -248,7 +251,7 @@
 
 // Pain/halloss
 /obj/item/organ/external/proc/get_pain()
-	if(!can_feel_pain() || BP_IS_PROSTHETIC(src))
+	if(!can_feel_pain())
 		return 0
 	var/lasting_pain = 0
 	if(is_broken())
@@ -323,9 +326,9 @@
 	return FALSE
 
 /obj/item/organ/external/proc/get_brute_mod(var/damage_flags)
-	var/obj/item/organ/internal/augment/armor/A = owner && owner.get_internal_organ(BP_AUGMENT_CHEST_ARMOUR)
+	var/obj/item/organ/internal/augment/armor/A = owner?.get_organ(BP_AUGMENT_CHEST_ARMOUR, /obj/item/organ/internal/augment/armor)
 	var/B = 1
-	if(A && istype(A))
+	if(A)
 		B = A.brute_mult
 	if(!BP_IS_PROSTHETIC(src))
 		B *= species.get_brute_mod(owner)
@@ -337,9 +340,9 @@
 	return B + (0.2 * burn_dam/max_damage) //burns make you take more brute damage
 
 /obj/item/organ/external/proc/get_burn_mod(var/damage_flags)
-	var/obj/item/organ/internal/augment/armor/A = owner && owner.get_internal_organ(BP_AUGMENT_CHEST_ARMOUR)
+	var/obj/item/organ/internal/augment/armor/A = owner?.get_organ(BP_AUGMENT_CHEST_ARMOUR, /obj/item/organ/internal/augment/armor)
 	var/B = 1
-	if(A && istype(A))
+	if(A)
 		B = A.burn_mult
 	if(!BP_IS_PROSTHETIC(src))
 		B *= species.get_burn_mod(owner)

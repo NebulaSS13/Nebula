@@ -28,7 +28,7 @@
 	O.alpha = 150
 
 	for(var/organ in targets)
-		var/obj/item/organ/external/E = H.get_organ(organ)
+		var/obj/item/organ/external/E = GET_EXTERNAL_ORGAN(H, organ)
 		if(!E)
 			continue
 		E.take_external_damage(burn=10, used_weapon = "hot iron")
@@ -39,4 +39,5 @@
 			to_chat(H, SPAN_WARNING("You notice that your [E] is burned."))
 
 /spell/hand/burning_grip/tower
+	desc = "Allows you cause an object to heat up intensly in someone's hand, making them drop it and whatever skin is attached."
 	charge_max = 3

@@ -21,7 +21,7 @@
 	. = ..(mapload)
 	if(model_info)
 		if(!ispath(model, /decl/prosthetics_manufacturer))
-			model = /decl/prosthetics_manufacturer
+			model = /decl/prosthetics_manufacturer/basic_human
 		model_info = model
 		var/decl/prosthetics_manufacturer/R = GET_DECL(model)
 		if(R)

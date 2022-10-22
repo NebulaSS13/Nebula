@@ -12,51 +12,40 @@
 	var/base_icon_state = "nboard0"
 	var/const/max_notices = 5
 
-/obj/structure/noticeboard/Initialize()
-
+/obj/structure/noticeboard/Initialize(var/ml)
 	. = ..()
 
 	// Grab any mapped notices.
-	notices = list()
-	for(var/obj/item/paper/note in get_turf(src))
-		note.forceMove(src)
-		LAZYADD(notices, note)
-		if(LAZYLEN(notices) >= max_notices)
-			break
+	if(ml)
+		for(var/obj/item/paper/note in get_turf(src))
+			add_paper(note, skip_icon_update = TRUE)
+			if(LAZYLEN(notices) >= max_notices)
+				break
 
 	// Automatically place noticeboards that aren't mapped to specific positions.
-	if(pixel_x == 0 && pixel_y == 0)
-
+	if(default_pixel_x == 0 && default_pixel_y == 0)
 		var/turf/here = get_turf(src)
-		var/placing = 0
 		for(var/checkdir in global.cardinal)
 			var/turf/T = get_step(here, checkdir)
-			if(!T)
-				continue
-			if(T.density)
-				placing = checkdir
+			if(T && T.density)
+				set_dir(global.reverse_dir[checkdir])
 				break
-			for(var/thing in T)
-				var/atom/A = thing
-				if(A.simulated && !A.CanPass(src, T))
-					placing = checkdir
-					break
-
-		switch(placing)
-			if(NORTH)
-				pixel_x = 0
-				pixel_y = 32
-			if(SOUTH)
-				pixel_x = 0
-				pixel_y = -32
-			if(EAST)
-				pixel_x = 32
-				pixel_y = 0
-			if(WEST)
-				pixel_x = -32
-				pixel_y = 0
 
 	update_icon()
+
+/obj/structure/noticeboard/set_dir(var/ndir)
+	. = ..()
+	if(dir & SOUTH)
+		default_pixel_y = 32
+	else // NORTH is also 0-offset due to the icon.
+		default_pixel_y = 0
+	if(dir & WEST)
+		default_pixel_x = 32
+	else if(dir & EAST)
+		default_pixel_x = -32
+	else
+		default_pixel_x = 0
+	reset_offsets(0)
 
 /obj/structure/noticeboard/proc/add_paper(var/atom/movable/paper, var/skip_icon_update)
 	if(istype(paper))
@@ -69,7 +58,6 @@
 	if(istype(paper) && paper.loc == src)
 		paper.dropInto(loc)
 		LAZYREMOVE(notices, paper)
-		SSpersistence.forget_value(paper, /datum/persistent/paper)
 		if(!skip_icon_update)
 			update_icon()
 
@@ -88,6 +76,7 @@
 		physically_destroyed()
 
 /obj/structure/noticeboard/on_update_icon()
+	..()
 	icon_state = "[base_icon_state][LAZYLEN(notices)]"
 
 /obj/structure/noticeboard/attackby(var/obj/item/thing, var/mob/user)
@@ -96,21 +85,17 @@
 
 		if(isScrewdriver(thing))
 			var/choice = input("Which direction do you wish to place the noticeboard?", "Noticeboard Offset") as null|anything in list("North", "South", "East", "West")
-			if(choice && Adjacent(user) && thing.loc == user && !user.incapacitated())
+			if(choice && CanPhysicallyInteract(user))
 				playsound(loc, 'sound/items/Screwdriver.ogg', 50, 1)
 				switch(choice)
 					if("North")
-						pixel_x = 0
-						pixel_y = 32
+						set_dir(SOUTH)
 					if("South")
-						pixel_x = 0
-						pixel_y = -32
+						set_dir(NORTH)
 					if("East")
-						pixel_x = 32
-						pixel_y = 0
+						set_dir(WEST)
 					if("West")
-						pixel_x = -32
-						pixel_y = 0
+						set_dir(EAST)
 			return TRUE
 
 		if(!istype(thing, /obj/item/paper/sticky) && (istype(thing, /obj/item/paper) || istype(thing, /obj/item/photo)))
@@ -120,7 +105,6 @@
 				add_fingerprint(user)
 				add_paper(thing)
 				to_chat(user, SPAN_NOTICE("You pin \the [thing] to \the [src]."))
-				SSpersistence.track_value(thing, /datum/persistent/paper)
 			else
 				to_chat(user, SPAN_WARNING("You hesitate, certain \the [thing] will not be seen among the many others already attached to \the [src]."))
 			return TRUE

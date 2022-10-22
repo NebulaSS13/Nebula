@@ -18,35 +18,15 @@
 	var/decl/species/S = get_species_by_key(wrapped_species_by_ref["\ref[H]"])
 	return S.default_bodytype.get_base_icon(H, get_deform)
 
-/decl/bodytype/shapeshifter/get_blood_mask(var/mob/living/carbon/human/H)
+/decl/bodytype/shapeshifter/get_blood_overlays(var/mob/living/carbon/human/H)
 	if(!H) return ..()
 	var/decl/species/S = get_species_by_key(wrapped_species_by_ref["\ref[H]"])
-	return S.default_bodytype.get_blood_mask(H)
-
-/decl/bodytype/shapeshifter/get_damage_mask(var/mob/living/carbon/human/H)
-	if(!H) return ..()
-	var/decl/species/S = get_species_by_key(wrapped_species_by_ref["\ref[H]"])
-	return S.default_bodytype.get_damage_mask(H)
+	return S.default_bodytype.get_blood_overlays(H)
 
 /decl/bodytype/shapeshifter/get_damage_overlays(var/mob/living/carbon/human/H)
 	if(!H) return ..()
 	var/decl/species/S = get_species_by_key(wrapped_species_by_ref["\ref[H]"])
 	return S.default_bodytype.get_damage_overlays(H)
-
-/decl/bodytype/shapeshifter/get_tail(var/mob/living/carbon/human/H)
-	if(!H) return ..()
-	var/decl/species/S = get_species_by_key(wrapped_species_by_ref["\ref[H]"])
-	return S.default_bodytype.get_tail(H)
-
-/decl/bodytype/shapeshifter/get_tail_animation(var/mob/living/carbon/human/H)
-	if(!H) return ..()
-	var/decl/species/S = get_species_by_key(wrapped_species_by_ref["\ref[H]"])
-	return S.default_bodytype.get_tail_animation(H)
-
-/decl/bodytype/shapeshifter/get_tail_hair(var/mob/living/carbon/human/H)
-	if(!H) return ..()
-	var/decl/species/S = get_species_by_key(wrapped_species_by_ref["\ref[H]"])
-	return S.default_bodytype.get_tail_hair(H)
 
 /decl/bodytype/shapeshifter/get_husk_icon(var/mob/living/carbon/human/H)
 	if(H)

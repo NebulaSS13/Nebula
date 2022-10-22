@@ -12,9 +12,11 @@
 	reaction_strings = list(/decl/material/liquid/blood = "Causes all nearby slimes to enter a berserk rage.")
 
 /decl/slime_colour/red/handle_blood_reaction(var/datum/reagents/holder)
-	for(var/mob/living/slime/slime in viewers(get_turf(holder.my_atom), 7))
-		var/datum/ai/slime/slime_ai = slime.ai
-		if(istype(slime_ai))
-			slime_ai.rabid = TRUE
-			slime.visible_message(SPAN_DANGER("\The [slime] is driven into a frenzy!"))
+	var/turf/location = get_turf(holder.get_reaction_loc())
+	if(location)
+		for(var/mob/living/slime/slime in viewers(location, 7))
+			var/datum/ai/slime/slime_ai = slime.ai
+			if(istype(slime_ai))
+				slime_ai.rabid = TRUE
+				slime.visible_message(SPAN_DANGER("\The [slime] is driven into a frenzy!"))
 	return TRUE

@@ -14,6 +14,7 @@
 */
 
 #define ui_entire_screen "WEST,SOUTH to EAST,NORTH"
+#define ui_center_fullscreen "CENTER-7,CENTER-7"
 
 //Lower left, persistant menu
 #define ui_inventory "LEFT:6,BOTTOM:5"
@@ -54,9 +55,9 @@
 #define ui_pull_resist "RIGHT-2:26,BOTTOM+1:7"
 #define ui_acti "RIGHT-2:26,BOTTOM:5"
 #define ui_movi "RIGHT-3:24,BOTTOM:5"
-#define ui_attack_selector "RIGHT-3:24,BOTTOM+1:-2"
+#define ui_attack_selector "RIGHT-3:24,BOTTOM+1:6"
 #define ui_zonesel "RIGHT-1:28,BOTTOM:5"
-#define ui_acti_alt "RIGHT-1:28,BOTTOM:5" //alternative intent switcher for when the interface is hidden (F12)
+#define ui_acti_alt "RIGHT-1:28,BOTTOM:5" //alternative intent switcher for when the interface is hidden
 #define ui_stamina "RIGHT-3:24,BOTTOM+1:5"
 
 #define ui_borg_pull "RIGHT-3:24,BOTTOM+1:7"
@@ -124,15 +125,14 @@
 #define ui_iarrowleft "BOTTOM-1,RIGHT-4"
 #define ui_iarrowright "BOTTOM-1,RIGHT-2"
 
-#define ui_spell_master "RIGHT-1:16,TOP-1:16"
-#define ui_genetic_master "RIGHT-1:16,TOP-3:16"
+#define ui_ability_master "RIGHT-2:16,TOP-1:16"
 
 // AI
 #define ui_ai_core "LEFT:6,BOTTOM:5"
 #define ui_ai_announcement "LEFT+1:10,BOTTOM:5"
 #define ui_ai_cam_track "LEFT+2:12,BOTTOM:5"
 #define ui_ai_cam_light "LEFT+3:14,BOTTOM:5"
-#define ui_ai_cam_change_network "LEFT+4:16,BOTTOM:5"
+#define ui_ai_cam_change_channel "LEFT+4:16,BOTTOM:5"
 #define ui_ai_sensor "CENTER-2:18,BOTTOM:5"
 #define ui_ai_crew_manifest "CENTER-1:20,BOTTOM:5"
 #define ui_ai_take_image "CENTER:22,BOTTOM:5"

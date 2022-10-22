@@ -1,9 +1,12 @@
 /decl/special_role
+	abstract_type = /decl/special_role
 
 	// Text shown when becoming this antagonist.
-	var/list/restricted_jobs = 		list()   // Jobs that cannot be this antagonist at roundstart (depending on config)
-	var/list/protected_jobs = 		list()   // As above.
-	var/list/blacklisted_jobs =		list(/datum/job/submap)   // Jobs that can NEVER be this antagonist
+	var/list/restricted_jobs = 		list() // Jobs that cannot be this antagonist at roundstart (depending on config)
+	var/list/protected_jobs = 		list() // As above.
+	var/list/blocked_job_event_categories  // Job event categories that blacklist a job from being this antagonist.
+	// Jobs that can NEVER be this antagonist
+	var/list/blacklisted_jobs =	(/datum/job/submap) 
 
 	// Strings.
 	var/welcome_text = "Cry havoc and let slip the dogs of war!"
@@ -86,15 +89,12 @@
 	// Map template that antag needs to load before spawning. Nulled after it's loaded.
 	var/datum/map_template/base_to_load
 
-/decl/special_role/New()
+/decl/special_role/Initialize()
+	. = ..()
 	if(!name)
 		PRINT_STACK_TRACE("Special role [type] created without name set.")
 	if(ispath(skill_setter))
 		skill_setter = new skill_setter
-	..()
-
-/decl/special_role/Initialize()
-	..()
 	cur_max = hard_cap
 	get_starting_locations()
 	if(!name_plural)
@@ -108,7 +108,6 @@
 			global.hud_icon_reference[name] = antaghud_indicator
 		if(faction_name) 
 			global.hud_icon_reference[faction_name] = antaghud_indicator
-	. = TRUE
 
 /decl/special_role/proc/get_antag_text(mob/recipient)
 	return antag_text
@@ -134,7 +133,7 @@
 		else if(config.use_age_restriction_for_antags && player.current.client.player_age < minimum_player_age)
 			log_debug("[key_name(player)] is not eligible to become a [name]: Is only [player.current.client.player_age] day\s old, has to be [minimum_player_age] day\s!")
 		else if(player.assigned_special_role)
-			log_debug("[key_name(player)] is not eligible to become a [name]: They already have a special role ([player.get_special_role_name()])!")
+			log_debug("[key_name(player)] is not eligible to become a [name]: They already have a special role ([player.get_special_role_name("unknown role")])!")
 		else if (player in pending_antagonists)
 			log_debug("[key_name(player)] is not eligible to become a [name]: They have already been selected for this role!")
 		else if(!can_become_antag(player))

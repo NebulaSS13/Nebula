@@ -17,11 +17,12 @@
 	var/force_danger = 0						// If the grab is strong enough to be able to force someone to do something harmful to them.
 	var/restrains = 0							// If the grab acts like cuffs and prevents action from the victim.
 	var/grab_slowdown = 0.15                    // Multiplier for the object size (w_class or mob_size) of the grabbed atom, applied as slowdown.
-	var/shift = 0
-	var/success_up =   "You get a better grip on rep_affecting."
-	var/success_down = "You adjust your grip on rep_affecting."
-	var/fail_up =      "You can't get a better grip on rep_affecting!"
-	var/fail_down =    "You can't seem to shift your grip on rep_affecting!"
+	var/shift = 0                               // Whether or not this grab causes atoms to adjust their pixel offsets according to grabber dir.
+	var/adjust_plane = TRUE                     // Whether or not this grab causes atoms to adjust their plane/layer according to grabber dir.
+	var/success_up =   "You get a better grip on $rep_affecting$."
+	var/success_down = "You adjust your grip on $rep_affecting$."
+	var/fail_up =      "You can't get a better grip on $rep_affecting$!"
+	var/fail_down =    "You can't seem to relax your grip on $rep_affecting$!"
 	var/icon
 	var/icon_state
 	var/upgrade_cooldown = 40
@@ -44,34 +45,29 @@
 	. = ..()
 
 /decl/grab/proc/string_process(var/obj/item/grab/G, var/to_write, var/obj/item/used_item)
-	to_write = replacetext(to_write, "rep_affecting", G.affecting)
-	to_write = replacetext(to_write, "rep_assailant", G.assailant)
+	to_write = replacetext(to_write, "$rep_affecting$", G.affecting)
+	to_write = replacetext(to_write, "$rep_assailant$", G.assailant)
 	if(used_item)
-		to_write = replacetext(to_write, "rep_item", used_item)
+		to_write = replacetext(to_write, "$rep_item$", used_item)
 	return to_write
 
 /decl/grab/proc/upgrade(var/obj/item/grab/G)
-	if(!upgrab)
-		return
-
-	if(can_upgrade(G))
-		upgrade_effect(G)
-		admin_attack_log(G.assailant, G.affecting, "upgraded grab on their victim to [upgrab]", "was grabbed more tightly to [upgrab]", "upgraded grab to [upgrab] on")
+	if(can_upgrade(G) && upgrade_effect(G))
 		return upgrab
-	else
-		to_chat(G.assailant, "<span class='warning'>[string_process(G, fail_up)]</span>")
-		return
+	to_chat(G.assailant, SPAN_WARNING("[string_process(G, fail_up)]"))
 
 /decl/grab/proc/downgrade(var/obj/item/grab/G)
-	// Starts the process of letting go if there's no downgrade grab
-	if(can_downgrade())
-		downgrade_effect(G)
-		return downgrab
-	else
-		to_chat(G.assailant, "<span class='warning'>[string_process(G, fail_down)]</span>")
+	// If we have no downgrab at all, assume we just drop the grab.
+	if(!downgrab)
+		let_go(G)
 		return
+	if(can_downgrade(G) && downgrade_effect(G))
+		return downgrab
+	to_chat(G.assailant, SPAN_WARNING("[string_process(G, fail_down)]"))
 
 /decl/grab/proc/let_go(var/obj/item/grab/G)
+	if(G.assailant && G.affecting)
+		to_chat(G.assailant, SPAN_NOTICE("You release \the [G.affecting]."))
 	let_go_effect(G)
 	G.force_drop()
 
@@ -91,46 +87,45 @@
 	if(can_throw)
 		. = G.affecting
 		var/mob/thrower = G.loc
-		if(ismob(G.affecting))
-			animate(G.affecting, pixel_x = initial(G.affecting.pixel_x), pixel_y = initial(G.affecting.pixel_y), 4, 1)
 		qdel(G)
 		// check if we're grabbing with our inactive hand
 		for(var/obj/item/grab/grab in thrower.get_inactive_held_items())
 			qdel(grab)
 
-/decl/grab/proc/hit_with_grab(var/obj/item/grab/G)
-	if(downgrade_on_action)
-		G.downgrade()
+/decl/grab/proc/hit_with_grab(var/obj/item/grab/G, var/atom/A, var/P = TRUE)
 
-	if(G.check_action_cooldown() && !G.attacking)
-		var/intent = G.assailant.a_intent
-		switch(intent)
+	if(QDELETED(G) || !istype(G))
+		return FALSE
 
-			if(I_HELP)
-				if(on_hit_help(G))
-					G.action_used()
-					make_log(G, help_action)
+	if(!G.check_action_cooldown() || G.is_currently_resolving_hit)
+		to_chat(G.assailant, SPAN_WARNING("You must wait before you can do that."))
+		return FALSE
 
-			if(I_DISARM)
-				if(on_hit_disarm(G))
-					G.action_used()
-					make_log(G, disarm_action)
+	G.is_currently_resolving_hit = TRUE 
+	switch(G.assailant.a_intent)
+		if(I_HELP)
+			if(on_hit_help(G, A, P))
+				. = help_action || TRUE
+		if(I_DISARM)
+			if(on_hit_disarm(G, A, P))
+				. = disarm_action || TRUE
+		if(I_GRAB)
+			if(on_hit_grab(G, A, P))
+				. = grab_action || TRUE
+		if(I_HURT)
+			if(on_hit_harm(G, A, P))
+				. = harm_action || TRUE
 
-			if(I_GRAB)
-				if(on_hit_grab(G))
-					G.action_used()
-					make_log(G, grab_action)
-
-			if(I_HURT)
-				if(on_hit_harm(G))
-					G.action_used()
-					make_log(G, harm_action)
-
-	else
-		to_chat(G.assailant, "<span class='warning'>You must wait before you can do that.</span>")
-
-/decl/grab/proc/make_log(var/obj/item/grab/G, var/action)
-	admin_attack_log(G.assailant, G.affecting, "[action]s their victim", "was [action]ed", "used [action] on")
+	if(!QDELETED(G))
+		G.is_currently_resolving_hit = FALSE
+		if(.)
+			G.action_used()
+			if(G.assailant)
+				G.assailant.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
+				if(istext(.) && G.affecting)
+					admin_attack_log(G.assailant, G.affecting, "[.]s their victim", "was [.]ed", "used [.] on")
+			if(downgrade_on_action)
+				G.downgrade()
 
 // This is called whenever the assailant moves.
 /decl/grab/proc/assailant_moved(var/obj/item/grab/G)
@@ -141,24 +136,27 @@
 
 /*
 	Override these procs to set how the grab state will work. Some of them are best
-	overriden in the parent of the grab set (for example, the behaviour for on_hit_intent(var/obj/item/grab/G)
+	overriden in the parent of the grab set (for example, the behaviour for on_hit_intent()
 	procs is determined in /decl/grab/normal and then inherited by each intent).
 */
 
 // What happens when you upgrade from one grab state to the next.
 /decl/grab/proc/upgrade_effect(var/obj/item/grab/G)
+	admin_attack_log(G.assailant, G.affecting, "upgraded grab on their victim to [upgrab]", "was grabbed more tightly to [upgrab]", "upgraded grab to [upgrab] on")
+	return TRUE
 
 // Conditions to see if upgrading is possible
 // Only works on mobs.
 /decl/grab/proc/can_upgrade(var/obj/item/grab/G)
-	return !!G.get_affecting_mob()
+	return !!upgrab && !!G.get_affecting_mob()
 
 // What happens when you downgrade from one grab state to the next.
 /decl/grab/proc/downgrade_effect(var/obj/item/grab/G)
+	return TRUE
 
 // Conditions to see if downgrading is possible
 /decl/grab/proc/can_downgrade(var/obj/item/grab/G)
-	return 1
+	return !!downgrab
 
 // What happens when you let go of someone by either dropping the grab
 // or by downgrading from the lowest grab state.
@@ -176,23 +174,23 @@
 // Checks if the special target works on the grabbed humanoid.
 /decl/grab/proc/check_special_target(var/obj/item/grab/G)
 
-// What happens when you hit the grabbed person with the grab on help intent.
-/decl/grab/proc/on_hit_help(var/obj/item/grab/G)
-	return 1
+// What happens when you a target with the grab on help intent.
+/decl/grab/proc/on_hit_help(var/obj/item/grab/G, var/atom/A, var/proximity)
+	return TRUE
 
-// What happens when you hit the grabbed person with the grab on disarm intent.
-/decl/grab/proc/on_hit_disarm(var/obj/item/grab/G)
-	return 1
+// What happens when you a target with the grab on disarm intent.
+/decl/grab/proc/on_hit_disarm(var/obj/item/grab/G, var/atom/A, var/proximity)
+	return TRUE
 
-// What happens when you hit the grabbed person with the grab on grab intent.
-/decl/grab/proc/on_hit_grab(var/obj/item/grab/G)
-	return 1
+// What happens when you a target with the grab on grab intent.
+/decl/grab/proc/on_hit_grab(var/obj/item/grab/G, var/atom/A, var/proximity)
+	return TRUE
 
-// What happens when you hit the grabbed person with the grab on harm intent.
-/decl/grab/proc/on_hit_harm(var/obj/item/grab/G)
-	return 1
+// What happens when you a target with the grab on harm intent.
+/decl/grab/proc/on_hit_harm(var/obj/item/grab/G, var/atom/A, var/proximity)
+	return TRUE
 
-// What happens when you hit the grabbed person with an open hand and you want it
+// What happens when you hit a target with an open hand and you want it
 // to do some special snowflake action based on some other factor such as
 // intent.
 /decl/grab/proc/resolve_openhand_attack(var/obj/item/grab/G)
@@ -212,7 +210,7 @@
 	if(!affecting)
 		return
 	if(affecting.incapacitated(INCAPACITATION_KNOCKOUT | INCAPACITATION_STUNNED))
-		to_chat(G.affecting, "<span class='warning'>You can't resist in your current state!</span>")
+		to_chat(G.affecting, SPAN_WARNING("You can't resist in your current state!"))
 	var/skill_mod = Clamp(affecting.get_skill_difference(SKILL_COMBAT, assailant), -1, 1)
 	var/break_strength = breakability + size_difference(affecting, assailant) + skill_mod
 
@@ -222,17 +220,17 @@
 		break_strength--
 
 	if(break_strength < 1)
-		to_chat(G.affecting, "<span class='warning'>You try to break free but feel that unless something changes, you'll never escape!</span>")
+		to_chat(G.affecting, SPAN_WARNING("You try to break free but feel that unless something changes, you'll never escape!"))
 		return
 
 	var/break_chance = break_chance_table[Clamp(break_strength, 1, break_chance_table.len)]
 	if(prob(break_chance))
 		if(can_downgrade_on_resist && !prob((break_chance+100)/2))
-			affecting.visible_message("<span class='warning'>[affecting] has loosened [assailant]'s grip!</span>")
+			affecting.visible_message(SPAN_WARNING("\The [affecting] has loosened \the [assailant]'s grip!"))
 			G.downgrade()
 			return
 		else
-			affecting.visible_message("<span class='warning'>[affecting] has broken free of [assailant]'s grip!</span>")
+			affecting.visible_message(SPAN_WARNING("\The [affecting] has broken free of \the [assailant]'s grip!"))
 			let_go(G)
 
 /decl/grab/proc/size_difference(mob/A, mob/B)

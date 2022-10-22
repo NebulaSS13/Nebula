@@ -46,8 +46,21 @@
 	if (!isturf(src))	// Not great, but the 'correct' way to do it would add overhead for little benefit.
 		cleanup_events(src)
 
+	var/list/machines = global.state_machines["\ref[src]"]
+	if(length(machines))
+		for(var/base_type in machines)
+			qdel(machines[base_type])
+		global.state_machines -= "\ref[src]"
+
 	return QDEL_HINT_QUEUE
 
 /datum/proc/Process()
 	SHOULD_NOT_SLEEP(TRUE)
 	return PROCESS_KILL
+
+// This is more or less a helper to avoid needing to cast extension holders to atom.
+// Previously called get() and get_holder_of_type().
+// See /atom/get_recursive_loc_of_type() for actual logic.
+/datum/proc/get_recursive_loc_of_type(var/loc_type)
+	SHOULD_CALL_PARENT(FALSE)
+	CRASH("get_recursive_loc_of_type() called on datum type [type] - this proc should only be called on /atom.")

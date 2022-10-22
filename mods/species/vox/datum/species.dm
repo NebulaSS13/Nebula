@@ -13,9 +13,18 @@
 
 #define IS_VOX "vox"
 
+/decl/blood_type/vox
+	name = "vox ichor"
+	antigen_category = "vox"
+	splatter_name = "ichor"
+	splatter_desc = "A smear of thin, sticky alien ichor."
+	splatter_colour = "#2299fc"
+	transfusion_fail_reagent = /decl/material/gas/ammonia
+
 /decl/species/vox
 	name = SPECIES_VOX
 	name_plural = SPECIES_VOX
+	base_prosthetics_model = /decl/prosthetics_manufacturer/vox/crap
 
 	default_emotes = list(
 		/decl/emote/audible/vox_shriek
@@ -53,7 +62,7 @@
 	cold_level_1 = 80
 	cold_level_2 = 50
 	cold_level_3 = -1
-	
+
 	age_descriptor = /datum/appearance_descriptor/age/vox
 
 	gluttonous = GLUT_TINY|GLUT_ITEM_NORMAL
@@ -67,7 +76,7 @@
 	spawn_flags = SPECIES_CAN_JOIN | SPECIES_IS_WHITELISTED
 	appearance_flags = HAS_EYE_COLOR | HAS_HAIR_COLOR
 
-	blood_color = "#2299fc"
+	blood_types = list(/decl/blood_type/vox)
 	flesh_color = "#808d11"
 
 	reagent_tag = IS_VOX
@@ -89,6 +98,8 @@
 		BP_STACK =      /obj/item/organ/internal/voxstack,
 		BP_HINDTONGUE = /obj/item/organ/internal/hindtongue
 		)
+
+	override_limb_types = list(BP_TAIL = /obj/item/organ/external/tail/vox)
 
 	available_pronouns = list(/decl/pronouns/neuter)
 	available_bodytypes = list(/decl/bodytype/vox)
@@ -137,7 +148,6 @@
 
 /decl/species/vox/equip_survival_gear(var/mob/living/carbon/human/H)
 	H.equip_to_slot_or_del(new /obj/item/clothing/mask/gas/vox(H), slot_wear_mask_str)
-
 	if(istype(H.get_equipped_item(slot_back_str), /obj/item/storage/backpack))
 		H.equip_to_slot_or_del(new /obj/item/storage/box/vox(H.back), slot_in_backpack_str)
 		var/obj/item/tank/nitrogen/tank = new(H)
@@ -151,14 +161,14 @@
 
 /decl/species/vox/disfigure_msg(var/mob/living/carbon/human/H)
 	var/decl/pronouns/G = H.get_pronouns()
-	return "<span class='danger'>[G.His] beak-segments are cracked and chipped! [G.He] [G.is] not even recognizable.</span>\n"
-	
+	return SPAN_DANGER("[G.His] beak-segments are cracked and chipped! [G.He] [G.is] not even recognizable.\n")
+
 /decl/species/vox/skills_from_age(age)
 	. = 8
 
 /decl/species/vox/handle_death(var/mob/living/carbon/human/H)
 	..()
-	var/obj/item/organ/internal/voxstack/stack = H.get_organ(BP_STACK)
+	var/obj/item/organ/internal/voxstack/stack = H.get_organ(BP_STACK, /obj/item/organ/internal/voxstack)
 	if (stack)
 		stack.do_backup()
 

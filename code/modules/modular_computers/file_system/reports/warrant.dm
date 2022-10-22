@@ -35,13 +35,13 @@
 /datum/computer_file/report/warrant/arrest
 	title = "Arrest Warrant"
 	form_name = "W-104-A"
+	write_access = list(access_security)
 
 /datum/computer_file/report/warrant/arrest/generate_fields()
 	add_field(/datum/report_field/text_label/header, "Arrest Warrant")
 	add_field(/datum/report_field/simple_text, "Name", "Unknown")
 	add_field(/datum/report_field/pencode_text, "Charges", "No charges")
 	add_field(/datum/report_field/signature, "Authorized by", "Unathorized")
-	set_access(access_edit = access_security)
 
 /datum/computer_file/report/warrant/arrest/get_category()
 	. = ..()
@@ -74,13 +74,13 @@
 /datum/computer_file/report/warrant/search
 	title = "Search Warrant"
 	form_name = "W-104-S"
+	write_access = list(access_security)
 
 /datum/computer_file/report/warrant/search/generate_fields()
 	add_field(/datum/report_field/text_label/header, "Search Warrant")
 	add_field(/datum/report_field/simple_text, "Person/Location", "Unknown")
 	add_field(/datum/report_field/pencode_text, "Reason", "No reason")
 	add_field(/datum/report_field/signature, "Authorized by", "Unathorized")
-	set_access(access_edit = access_security)
 
 /datum/computer_file/report/warrant/search/get_category()
 	. = ..()

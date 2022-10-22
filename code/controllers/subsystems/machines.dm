@@ -62,9 +62,9 @@ SUBSYSTEM_DEF(machines)
 
 #define INTERNAL_PROCESS_STEP(this_step, check_resumed, proc_to_call, cost_var, next_step)\
 if(current_step == this_step || (check_resumed && !resumed)) {\
-	timer = TICK_USAGE_REAL;\
+	timer = TICK_USAGE;\
 	proc_to_call(resumed);\
-	cost_var = MC_AVERAGE(cost_var, TICK_DELTA_TO_MS(TICK_USAGE_REAL - timer));\
+	cost_var = MC_AVERAGE(cost_var, TICK_DELTA_TO_MS(TICK_USAGE - timer));\
 	if(state != SS_RUNNING){\
 		return;\
 	}\
@@ -73,7 +73,7 @@ if(current_step == this_step || (check_resumed && !resumed)) {\
 }
 
 /datum/controller/subsystem/machines/fire(resumed = 0)
-	var/timer = TICK_USAGE_REAL
+	var/timer = TICK_USAGE
 
 	INTERNAL_PROCESS_STEP(SSMACHINES_PIPENETS,TRUE,process_pipenets,cost_pipenets,SSMACHINES_MACHINERY)
 	INTERNAL_PROCESS_STEP(SSMACHINES_MACHINERY,FALSE,process_machinery,cost_machinery,SSMACHINES_POWERNETS)

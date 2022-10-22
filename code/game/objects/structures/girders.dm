@@ -8,6 +8,9 @@
 	material_alteration =    MAT_FLAG_ALTERATION_NAME | MAT_FLAG_ALTERATION_COLOR
 	tool_interaction_flags = (TOOL_INTERACTION_ANCHOR | TOOL_INTERACTION_DECONSTRUCT)
 	maxhealth = 100
+	parts_amount = 2
+	parts_type = /obj/item/stack/material/strut
+
 	var/cover = 50
 	var/prepped_for_fakewall
 
@@ -43,7 +46,7 @@
 	return TRUE
 
 /obj/structure/girder/on_update_icon()
-	. = ..()
+	..()
 	if(!anchored)
 		icon_state = "displaced"
 	else if(reinf_material)
@@ -62,7 +65,7 @@
 		effective_cover *= 2
 	if(!anchored) 
 		effective_cover *= 0.5
-	effective_cover = Clamp(Floor(effective_cover), 0, 100)
+	effective_cover = Clamp(FLOOR(effective_cover), 0, 100)
 	if(Proj.original != src && !prob(effective_cover))
 		return PROJECTILE_CONTINUE
 	var/damage = Proj.get_structure_damage()
@@ -71,7 +74,7 @@
 	if(!istype(Proj, /obj/item/projectile/beam))
 		damage *= 0.4
 	if(reinf_material)
-		damage = Floor(damage * 0.75)
+		damage = FLOOR(damage * 0.75)
 	..()
 	if(damage)
 		take_damage(damage)

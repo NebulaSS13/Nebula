@@ -4,10 +4,6 @@
 	path = "ministation"
 	ground_noun = "floor"
 
-	station_levels = list(1)
-	contact_levels = list(1)
-	player_levels = list(1)
-
 	station_name = "Space Station Zebra"
 	station_short = "Zebra"
 
@@ -16,7 +12,6 @@
 	boss_short    = "Admin"
 	company_name  = "Free Trade Union Residual Delta"
 	company_short = "RD"
-	overmap_event_areas = 11
 
 	default_law_type = /datum/ai_laws/nanotrasen
 
@@ -28,21 +23,6 @@
 	emergency_shuttle_recall_message = "Attention all crew members: emergency evacuation sequence aborted. Return to normal operating conditions."
 	evac_controller_type = /datum/evacuation_controller/ministation_substitute
 
-	station_networks = list(
-		NETWORK_PUBLIC,
-		NETWORK_MINE,
-		NETWORK_SECURITY,
-		NETWORK_RESEARCH,
-		NETWORK_MEDICAL,
-		NETWORK_ENGINEERING,
-		NETWORK_ROBOTS,
-		"Satellite",
-		NETWORK_ALARM_ATMOS,
-		NETWORK_ALARM_CAMERA,
-		NETWORK_ALARM_FIRE,
-		NETWORK_ALARM_MOTION,
-		NETWORK_ALARM_POWER)
-
 	pray_reward_type = /obj/item/mollusc/clam
 
 	starting_money = 5000
@@ -51,8 +31,11 @@
 
 	radiation_detected_message = "High levels of radiation have been detected in proximity of the %STATION_NAME%. Station wide maintenance access has been granted. Please take shelter within the nearest maintenance tunnel."
 
-	allowed_spawns = list("Arrivals Shuttle","Cryogenic Storage")
-	default_spawn = "Arrivals Shuttle"
+	allowed_spawns = list(
+		/decl/spawnpoint/arrivals,
+		/decl/spawnpoint/cryo
+	)
+	default_spawn = /decl/spawnpoint/arrivals
 
 
 /datum/map/ministation/get_map_info()

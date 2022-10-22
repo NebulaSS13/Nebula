@@ -34,12 +34,9 @@ var/global/list/floor_decals = list()
 			I.color = src.color
 			I.alpha = src.alpha
 			if(detail_overlay)
-				var/image/B = overlay_image(icon, "[detail_overlay]", flags=RESET_COLOR)
-				B.color = detail_color
-				I.overlays |= B
+				I.overlays |= overlay_image(icon, "[detail_overlay]", color = detail_color, flags=RESET_COLOR)
 			floor_decals[cache_key] = I
-		if(!T.decals) T.decals = list()
-		T.decals |= floor_decals[cache_key]
+		LAZYDISTINCTADD(T.decals, floor_decals[cache_key])
 		T.add_overlay(floor_decals[cache_key])
 	qdel(src)
 
@@ -62,6 +59,7 @@ var/global/list/floor_decals = list()
 	var/turf/T = get_turf(src)
 	if(length(T.decals))
 		T.decals.len--
+		UNSETEMPTY(T.decals)
 		T.update_icon()
 	atom_flags |= ATOM_FLAG_INITIALIZED
 	return INITIALIZE_HINT_QDEL
@@ -227,6 +225,41 @@ var/global/list/floor_decals = list()
 	icon_state = "bordercolorfull"
 
 /obj/effect/floor_decal/corner/paleblue/bordercee
+	icon_state = "bordercolorcee"
+
+
+/obj/effect/floor_decal/corner/navyblue
+	name = "navy blue corner"
+	color = COLOR_NAVY_BLUE
+
+/obj/effect/floor_decal/corner/navyblue/diagonal
+	icon_state = "corner_white_diagonal"
+
+/obj/effect/floor_decal/corner/navyblue/three_quarters
+	icon_state = "corner_white_three_quarters"
+
+/obj/effect/floor_decal/corner/navyblue/full
+	icon_state = "corner_white_full"
+
+/obj/effect/floor_decal/corner/navyblue/border
+	icon_state = "bordercolor"
+
+/obj/effect/floor_decal/corner/navyblue/half
+	icon_state = "bordercolorhalf"
+
+/obj/effect/floor_decal/corner/navyblue/mono
+	icon_state = "bordercolormonofull"
+
+/obj/effect/floor_decal/corner/navyblue/bordercorner
+	icon_state = "bordercolorcorner"
+
+/obj/effect/floor_decal/corner/navyblue/bordercorner2
+	icon_state = "bordercolorcorner2"
+
+/obj/effect/floor_decal/corner/navyblue/borderfull
+	icon_state = "bordercolorfull"
+
+/obj/effect/floor_decal/corner/navyblue/bordercee
 	icon_state = "bordercolorcee"
 
 /obj/effect/floor_decal/corner/green

@@ -21,7 +21,7 @@
 	cold_protection =    SLOT_HEAD|SLOT_FACE|SLOT_EYES
 	brightness_on = 4
 	light_wedge = LIGHT_WIDE
-	bodytype_restricted = null
+	bodytype_equip_flags = null
 
 /obj/item/clothing/head/helmet/space/rig/on_update_icon(mob/user)
 	..()
@@ -40,7 +40,7 @@
 	body_parts_covered = SLOT_HANDS
 	heat_protection =    SLOT_HANDS
 	cold_protection =    SLOT_HANDS
-	bodytype_restricted = null
+	bodytype_equip_flags = null
 	gender = PLURAL
 
 /obj/item/clothing/gloves/rig/on_update_icon(mob/user)
@@ -60,7 +60,7 @@
 	body_parts_covered = SLOT_FEET
 	cold_protection = SLOT_FEET
 	heat_protection = SLOT_FEET
-	bodytype_restricted = null
+	bodytype_equip_flags = null
 	gender = PLURAL
 
 /obj/item/clothing/shoes/magboots/rig/on_update_icon(mob/user)
@@ -185,7 +185,7 @@
 	body_parts_covered = SLOT_FEET
 	cold_protection = SLOT_FEET
 	heat_protection = SLOT_FEET
-	bodytype_restricted = null
+	bodytype_equip_flags = null
 	gender = PLURAL
 
 /obj/item/clothing/gloves/lightrig
@@ -195,5 +195,5 @@
 	body_parts_covered = SLOT_HANDS
 	heat_protection =    SLOT_HANDS
 	cold_protection =    SLOT_HANDS
-	bodytype_restricted = null
+	bodytype_equip_flags = null
 	gender = PLURAL

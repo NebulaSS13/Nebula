@@ -2,44 +2,91 @@
 <h3>Docking Beacon</h3>
 <div class="item">
     <div class="itemLabel">
-        Dock Name:
+        Construction mode:
     </div>
     <div class="itemContent">
-        {{:helper.link(data.display_name, '', {'edit_display_name' : 1})}}
+        {{:helper.link(data.construction_mode ? 'Enabled' : 'Disabled', null, {'toggle_construction' : '1'}, null , null)}}
     </div>
-    <div class="itemLabel">
-		Docking Size:
-	</div>
-	<div class="itemContent">
-        {{:helper.link(data.size, '', {'edit_size' : 1})}}
-	</div>
-    <div class="itemLabel">
-        Locked:
-    </div>
-    <div class="itemContent">
-        {{:helper.link(data.locked ? 'Locked' : 'Unlocked', '', {'toggle_lock' : 1})}}
-    </div>
-    {{if data.locked}}
+</div>
+{{if data.construction_mode}}
+    <div class="item">
         <div class="itemLabel">
-            Permitted Shuttles
-        </div>
-        <div class="itemContent style="width: 100%;">
-            <div class="statusDisplay" style="min-height: 120px;"> 
-				{{for data.permitted}} 
-					{{:value}}<br> 
-				{{/for}} 
-			</div>
-            {{:helper.link('Add/Remove Permission', '', {'edit_permitted_shuttles' : 1})}}
-        </div>
-        <div class="itemLabel">
-            Access by Codes
+            Construction Size:
         </div>
         <div class="itemContent">
-            {{:helper.link(data.allow_codes ? 'Codes:' : 'No access', '', {'toggle_codes' : 1})}}
-            {{if data.allow_codes}}
-                {{:helper.link(data.codes, '', {'edit_codes' : 1})}}
-            {{/if}}
+            {{:helper.link(data.size, '', {'edit_size' : 1})}}
         </div>
-    {{/if}}
-</div>
-{{:helper.link('Project landing area', '', {'project' : 1})}}
+        <div class="itemLabel">
+            Ship Name:
+        </div>
+        <div class="itemContent">
+            {{:helper.link(data.ship_name ? data.ship_name : 'No name!', 'pencil', {'change_ship_name' : '1'}, null , null)}}
+        </div>
+		<div class="itemLabel">
+			Ship Color:
+		</div>
+		<div class="itemContent">
+			{{:helper.link('Change color', 'pencil', {'change_color' : 1}, null, null)}}
+		</div>
+		<div class="itemLabel">
+			Errors:
+		</div>
+		<div class="itemContent" style="width: 100%;">
+			<div class="statusDisplay" style="min-height: 120px;">
+				{{for data.errors}}
+					{{:value}}<br>
+				{{/for}}
+			</div>
+		</div>
+        <div class="itemContent">
+            {{:helper.link('Finalize Ship', 'arrowthickstop-1-e', {'finalize' : '1'}, null , null)}}
+        </div>
+        <div class="itemContent">
+            {{:helper.link('Check Construction Validity', 'gear', {'check_validity' : '1'}, null , null)}}
+        </div>
+	</div>
+{{else}}
+    <div class="item">
+        <div class="itemLabel">
+            Dock Name:
+        </div>
+        <div class="itemContent">
+            {{:helper.link(data.display_name, '', {'edit_display_name' : 1})}}
+        </div>
+        <div class="itemLabel">
+            Docking Size:
+        </div>
+        <div class="itemContent">
+            {{:helper.link(data.size, '', {'edit_size' : 1})}}
+        </div>
+        <div class="itemLabel">
+            Locked:
+        </div>
+        <div class="itemContent">
+            {{:helper.link(data.locked ? 'Locked' : 'Unlocked', '', {'toggle_lock' : 1})}}
+        </div>
+        {{if data.locked}}
+            <div class="itemLabel">
+                Permitted Shuttles
+            </div>
+            <div class="itemContent style="width: 100%;">
+                <div class="statusDisplay" style="min-height: 120px;"> 
+                    {{for data.permitted}} 
+                        {{:value}}<br> 
+                    {{/for}} 
+                </div>
+                {{:helper.link('Add/Remove Permission', '', {'edit_permitted_shuttles' : 1})}}
+            </div>
+            <div class="itemLabel">
+                Access by Codes
+            </div>
+            <div class="itemContent">
+                {{:helper.link(data.allow_codes ? 'Codes:' : 'No access', '', {'toggle_codes' : 1})}}
+                {{if data.allow_codes}}
+                    {{:helper.link(data.codes, '', {'edit_codes' : 1})}}
+                {{/if}}
+            </div>
+        {{/if}}
+    </div>
+{{/if}}
+{{:helper.link(data.construction_mode ? 'Project Construction Zone' : 'Project Docking Zone', '', {'project' : 1})}}

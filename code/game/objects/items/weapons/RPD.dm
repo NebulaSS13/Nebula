@@ -81,12 +81,12 @@ var/global/list/rpd_pipe_selection_skilled = list()
 
 	var/datum/fabricator_recipe/pipe/P
 	var/pipe_color = "white"
-	var/datum/browser/written/popup
+	var/datum/browser/written_digital/popup
 
 /obj/item/rpd/Initialize()
 	. = ..()
 	if(!length(global.rpd_pipe_selection))
-		return INITIALIZE_HINT_QDEL
+		init_rpd_lists()
 	spark_at(src, amount = 5, holder = src)
 	var/list/L = global.rpd_pipe_selection[global.rpd_pipe_selection[1]]
 	P = L[1]
@@ -147,7 +147,7 @@ var/global/list/rpd_pipe_selection_skilled = list()
 				return
 			playsound(get_turf(user), 'sound/items/Deconstruct.ogg', 50, 1)
 
-		P.build(T, 1, pipe_colors[pipe_color])
+		P.build(T, new/datum/fabricator_build_order(P, 1, list("slected_color" = pipe_colors[pipe_color])))
 		if(prob(20))
 			spark_at(src, amount = 5, holder = src)
 

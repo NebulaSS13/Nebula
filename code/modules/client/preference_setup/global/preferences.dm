@@ -12,6 +12,7 @@ var/global/const/PREF_FANCY = "Fancy"
 var/global/const/PREF_PLAIN = "Plain"
 var/global/const/PREF_PRIMARY = "Primary"
 var/global/const/PREF_ALL = "All"
+var/global/const/PREF_ON = "On"
 var/global/const/PREF_OFF = "Off"
 var/global/const/PREF_BASIC = "Basic"
 var/global/const/PREF_FULL = "Full"
@@ -23,9 +24,10 @@ var/global/const/PREF_CTRL_SHIFT_CLICK = "Ctrl+shift click"
 var/global/const/PREF_HEAR = "Hear"
 var/global/const/PREF_SILENT = "Silent"
 var/global/const/PREF_SHORTHAND = "Shorthand"
-var/global/const/PREF_NEVER = "Never"
 var/global/const/PREF_NON_ANTAG = "Non-Antag Only"
+var/global/const/PREF_NEVER = "Never"
 var/global/const/PREF_ALWAYS = "Always"
+var/global/const/PREF_MYSELF = "Only Against Self"
 
 var/global/list/_client_preferences
 var/global/list/_client_preferences_by_key
@@ -94,9 +96,8 @@ var/global/list/_client_preferences_by_type
 	key = "SOUND_LOBBY"
 
 /datum/client_preference/play_lobby_music/changed(var/mob/preference_mob, var/new_value)
-	if(new_value == PREF_YES)
-		if(isnewplayer(preference_mob))
-			global.using_map.lobby_track.play_to(preference_mob)
+	if(new_value == PREF_YES && isnewplayer(preference_mob))
+		global.using_map.lobby_track.play_to(preference_mob)
 	else
 		sound_to(preference_mob, sound(null, repeat = 0, wait = 0, volume = 85, channel = sound_channels.lobby_channel))
 
@@ -116,6 +117,7 @@ var/global/list/_client_preferences_by_type
 	if(new_value == PREF_NO)
 		sound_to(preference_mob, sound(null, repeat = 0, wait = 0, volume = 0, channel = sound_channels.lobby_channel))
 		sound_to(preference_mob, sound(null, repeat = 0, wait = 0, volume = 0, channel = sound_channels.ambience_channel))
+		sound_to(preference_mob, sound(null, repeat = 0, wait = 0, volume = 0, channel = sound_channels.weather_channel))
 
 /datum/client_preference/ghost_ears
 	description ="Ghost ears"
@@ -203,8 +205,7 @@ var/global/list/_client_preferences_by_type
 /datum/client_preference/fullscreen_mode
 	description = "Fullscreen Mode"
 	key = "FULLSCREEN"
-	options = list(PREF_BASIC, PREF_FULL, PREF_NO)
-	default_value = PREF_NO
+	options = list(PREF_NO, PREF_BASIC, PREF_FULL)
 
 /datum/client_preference/fullscreen_mode/changed(mob/preference_mob, new_value)
 	if(preference_mob.client)
@@ -273,6 +274,11 @@ var/global/list/_client_preferences_by_type
 	key = "TURF_CONTENTS"
 	options = list(PREF_ALT_CLICK, PREF_DOUBLE_CLICK, PREF_OFF)
 
+/datum/client_preference/inquisitive_examine
+	description = "Show additional information in atom examine (codex, etc)"
+	key = "INQUISITIVE_EXAMINE"
+	options = list(PREF_ON, PREF_OFF)
+
 /********************
 * General Staff Preferences *
 ********************/
@@ -327,3 +333,29 @@ var/global/list/_client_preferences_by_type
 	options = list(PREF_SHOW, PREF_HIDE)
 	default_value = PREF_HIDE
 	flags = R_ADMIN|R_DEBUG
+
+/********************
+* Area Info Blurb *
+********************/
+
+/datum/client_preference/area_info_blurb
+	description ="Show area information"
+	key = "AREA_INFO"
+	default_value = PREF_YES
+
+/datum/client_preference/byond_membership/may_set(client/given_client)
+	if(ismob(given_client))
+		var/mob/M = given_client
+		given_client = M.client
+	if(!given_client)
+		return FALSE
+	return given_client.get_byond_membership()
+/******************************
+* Help intent attack blocking *
+******************************/
+
+/datum/client_preference/help_intent_attack_blocking
+	description = "Prevent attacks on help intent"
+	key = "ATTACK_ON_HELP"
+	default_value = PREF_MYSELF
+	options = list(PREF_NEVER, PREF_MYSELF, PREF_ALWAYS)

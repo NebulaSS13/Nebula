@@ -5,11 +5,13 @@
 	color = "#404040"
 	level = 2
 	connect_types = CONNECT_TYPE_HE
+	interact_offline = TRUE //Needs to be set so that pipes don't say they lack power in their description
 	var/initialize_directions_he
 	var/surface = 2	//surface area in m^2
 	var/icon_temperature = T20C //stop small changes in temperature causing an icon refresh
 	build_icon_state = "he"
 	atom_flags = 0 // no painting
+	appearance_flags = KEEP_TOGETHER
 
 	minimum_temperature_difference = 20
 	thermal_conductivity = OPEN_HEAT_TRANSFER_COEFFICIENT
@@ -24,6 +26,7 @@
 /obj/machinery/atmospherics/pipe/simple/heat_exchanging/Initialize()
 	. = ..()
 	color = "#404040" //we don't make use of the fancy overlay system for colours, use this to set the default.
+	add_filter("glow",1, list(type="drop_shadow", x = 0, y = 0, offset = 0, size = 4))
 
 /obj/machinery/atmospherics/pipe/simple/heat_exchanging/set_dir(new_dir)
 	..()
@@ -85,22 +88,26 @@
 		if(pipe_air.temperature && (icon_temperature > 500 || pipe_air.temperature > 500)) //start glowing at 500K
 			if(abs(pipe_air.temperature - icon_temperature) > 10)
 				icon_temperature = pipe_air.temperature
+				var/scale = max((icon_temperature - 500) / 1500, 0)
 
 				var/h_r = heat2color_r(icon_temperature)
 				var/h_g = heat2color_g(icon_temperature)
 				var/h_b = heat2color_b(icon_temperature)
 
 				if(icon_temperature < 2000) //scale up overlay until 2000K
-					var/scale = max((icon_temperature - 500) / 1500, 0)
 					h_r = 64 + (h_r - 64)*scale
 					h_g = 64 + (h_g - 64)*scale
 					h_b = 64 + (h_b - 64)*scale
-
+				var/scale_color = rgb(h_r, h_g, h_b)
 				var/list/animate_targets = get_above_oo() + src
 				for (var/thing in animate_targets)
 					var/atom/movable/AM = thing
-					animate(AM, color = rgb(h_r, h_g, h_b), time = 20, easing = SINE_EASING)
-
+					animate(AM, color = scale_color, time = 2 SECONDS, easing = SINE_EASING)
+				animate_filter("glow", list(color = scale_color, time = 2 SECONDS, easing = LINEAR_EASING))
+				set_light(min(3, scale*2.5), min(3, scale*2.5), scale_color)
+		else
+			set_light(0, 0)
+			
 /obj/machinery/atmospherics/pipe/simple/heat_exchanging/junction
 	icon = 'icons/atmos/junction.dmi'
 	icon_state = "11"

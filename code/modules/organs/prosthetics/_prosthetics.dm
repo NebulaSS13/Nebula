@@ -11,7 +11,7 @@
 /obj/item/organ/external/proc/get_modular_limb_category()
 	. = MODULAR_BODYPART_INVALID
 	if(BP_IS_PROSTHETIC(src) && model)
-		var/decl/prosthetics_manufacturer/manufacturer = decls_repository.get_decl(model)
+		var/decl/prosthetics_manufacturer/manufacturer = GET_DECL(model)
 		if(!isnull(manufacturer?.modular_prosthetic_tier))
 			. = manufacturer.modular_prosthetic_tier
 
@@ -24,7 +24,7 @@
 	if(bodypart_cat == MODULAR_BODYPART_CYBERNETIC)
 		if(!parent_organ)
 			return FALSE
-		var/obj/item/organ/external/parent = user?.get_organ(parent_organ)
+		var/obj/item/organ/external/parent = user && GET_EXTERNAL_ORGAN(user, parent_organ)
 		if(!parent || parent.get_modular_limb_category(user) < MODULAR_BODYPART_CYBERNETIC)
 			return FALSE
 	. = (bodypart_cat != MODULAR_BODYPART_INVALID)
@@ -33,7 +33,7 @@
 /obj/item/organ/external/proc/can_attach_modular_limb_here(var/mob/living/carbon/human/user)
 	var/list/limb_data = user?.species?.has_limbs[organ_tag]
 	if(islist(limb_data) && limb_data["has_children"] > 0)
-		. = (length(children) < limb_data["has_children"])
+		. = (LAZYLEN(children) < limb_data["has_children"])
 
 /obj/item/organ/external/proc/can_be_attached_modular_limb(var/mob/living/carbon/user)
 	var/bodypart_cat = get_modular_limb_category()
@@ -41,7 +41,7 @@
 		return FALSE
 	if(!parent_organ)
 		return FALSE
-	var/obj/item/organ/external/parent = user?.get_organ(parent_organ)
+	var/obj/item/organ/external/parent = user && GET_EXTERNAL_ORGAN(user, parent_organ)
 	if(!parent)
 		return FALSE
 	if(!parent.can_attach_modular_limb_here(user))
@@ -52,13 +52,13 @@
 
 // Checks if an organ (or the parent of one) is in a fit state for modular limb stuff to happen.
 /obj/item/organ/external/proc/check_modular_limb_damage(var/mob/living/carbon/human/user)
-	. =  damage >= min_broken_damage || (status & ORGAN_BROKEN) || is_stump() // can't use is_broken() as the limb has ORGAN_CUT_AWAY
+	. =  damage >= min_broken_damage || (status & ORGAN_BROKEN) // can't use is_broken() as the limb has ORGAN_CUT_AWAY
 
 // Human mob procs:
 // Checks the organ list for limbs meeting a predicate. Way overengineered for such a limited use 
 // case but I can see it being expanded in the future if meat limbs or doona limbs use it.
 /mob/living/carbon/human/proc/get_modular_limbs(var/return_first_found = FALSE, var/validate_proc)
-	for(var/bp in organs)
+	for(var/bp in get_external_organs())
 		var/obj/item/organ/external/E = bp
 		if(!validate_proc || call(E, validate_proc)(src) > MODULAR_BODYPART_INVALID)
 			LAZYADD(., E)
@@ -99,14 +99,13 @@
 	if(E.get_modular_limb_category() <= MODULAR_BODYPART_INVALID)
 		to_chat(src, SPAN_WARNING("\The [E] cannot be attached by your own hand."))
 		return FALSE
-	var/install_to_zone = E.organ_tag
-	if(!isnull(get_organ(install_to_zone)))
+	if(GET_EXTERNAL_ORGAN(src, E.organ_tag))
 		to_chat(src, SPAN_WARNING("There is already a limb attached at that part of your body."))
 		return FALSE
 	if(E.check_modular_limb_damage(src))
 		to_chat(src, SPAN_WARNING("\The [E] is too damaged to be attached."))
 		return FALSE
-	var/obj/item/organ/external/parent = E.parent_organ && get_organ(E.parent_organ)
+	var/obj/item/organ/external/parent = E.parent_organ && GET_EXTERNAL_ORGAN(src, E.parent_organ)
 	if(!parent)
 		to_chat(src, SPAN_WARNING("\The [E] needs an existing limb to be attached to."))
 		return FALSE
@@ -127,7 +126,7 @@
 	if(E.check_modular_limb_damage(src))
 		to_chat(src, SPAN_WARNING("That limb is too damaged to be removed!"))
 		return FALSE
-	var/obj/item/organ/external/parent = E.parent_organ && get_organ(E.parent_organ)
+	var/obj/item/organ/external/parent = E.parent_organ && GET_EXTERNAL_ORGAN(src, E.parent_organ)
 	if(!parent)
 		return FALSE
 	if(parent.check_modular_limb_damage(src))
@@ -153,7 +152,7 @@
 
 	last_special = world.time
 	drop_from_inventory(E)
-	E.replaced(src)
+	src.add_organ(E)
 
 	// Reconnect the organ and children as normally this is done with surgery.
 	E.status &= ~ORGAN_CUT_AWAY
@@ -164,7 +163,7 @@
 	visible_message(
 		SPAN_NOTICE("\The [src] attaches \the [E] to [G.his] body!"),
 		SPAN_NOTICE("You attach \the [E] to your body!"))
-	regenerate_icons() // Not sure why this isn't called by removed(), but without it we don't update our limb appearance.
+	refresh_visible_overlays() // Not sure why this isn't called by removed(), but without it we don't update our limb appearance.
 	return TRUE
 
 /mob/living/carbon/human/proc/detach_limb_verb()
@@ -186,7 +185,7 @@
 		return FALSE
 
 	last_special = world.time
-	E.removed(src)
+	remove_organ(E)
 	E.dropInto(loc)
 	put_in_hands(E)
 	var/decl/pronouns/G = get_pronouns()

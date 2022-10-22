@@ -1,12 +1,4 @@
-//This file was auto-corrected by findeclaration.exe on 25.5.2012 20:42:33
-
 /mob/new_player
-	var/ready = 0
-	var/spawning = 0//Referenced when you want to delete the new_player later on in the code.
-	var/totalPlayers = 0		 //Player counts for the Lobby tab
-	var/totalPlayersReady = 0
-	var/datum/browser/panel
-	var/show_invalid_jobs = 0
 	universal_speak = TRUE
 	mob_sort_value = 10
 	invisibility = 101
@@ -19,9 +11,25 @@
 
 	virtual_mob = null // Hear no evil, speak no evil
 
+	var/ready = 0
+	/// Referenced when you want to delete the new_player later on in the code.
+	var/spawning = 0
+	/// Player counts for the Lobby tab
+	var/totalPlayers = 0
+	var/totalPlayersReady = 0
+	var/show_invalid_jobs = 0
+
+	var/datum/browser/panel
+
+INITIALIZE_IMMEDIATE(/mob/new_player)
 /mob/new_player/Initialize()
 	. = ..()
+	forceMove(null)
 	verbs += /mob/proc/toggle_antag_pool
+
+/mob/new_player/Destroy()
+	QDEL_NULL(panel)
+	. = ..()
 
 /mob/new_player/proc/show_lobby_menu(force = FALSE)
 	if(!SScharacter_setup.initialized && !force)
@@ -30,39 +38,21 @@
 	output += "<div align='center'>"
 	output += "<i>[global.using_map.get_map_info()]</i>"
 	output +="<hr>"
-	output += "<a href='byond://?src=\ref[src];show_preferences=1'>Setup Character</A> "
+	output += "<a href='byond://?src=\ref[src];lobby_setup=1'>Setup Character</A> "
 
 	if(GAME_STATE > RUNLEVEL_LOBBY)
-		output += "<a href='byond://?src=\ref[src];manifest=1'>View the Crew Manifest</A> "
+		output += "<a href='byond://?src=\ref[src];lobby_crew=1'>View the Crew Manifest</A> "
 
-	output += "<a href='byond://?src=\ref[src];observe=1'>Observe</A> "
-
-	if(!IsGuestKey(src.key))
-		establish_db_connection()
-		if(dbcon.IsConnected())
-			var/isadmin = 0
-			if(src.client && src.client.holder)
-				isadmin = 1
-			var/DBQuery/query = dbcon.NewQuery("SELECT `id` FROM `erro_poll_question` WHERE [(isadmin ? "" : "`adminonly` = FALSE AND")] NOW() BETWEEN `starttime` AND `endtime` AND `id` NOT IN (SELECT `pollid` FROM `erro_poll_vote` WHERE `ckey` = \"[ckey]\") AND `id` NOT IN (SELECT `pollid` FROM `erro_poll_textreply` WHERE `ckey` = \"[ckey]\")")
-			query.Execute()
-			var/newpoll = 0
-			while(query.NextRow())
-				newpoll = 1
-				break
-
-			if(newpoll)
-				output += "<b><a href='byond://?src=\ref[src];showpoll=1'>Show Player Polls</A> (NEW!)</b> "
-			else
-				output += "<a href='byond://?src=\ref[src];showpoll=1'>Show Player Polls</A> "
+	output += "<a href='byond://?src=\ref[src];lobby_observe=1'>Observe</A> "
 
 	output += "<hr>Current character: <a href='byond://?src=\ref[client.prefs];load=1'><b>[client.prefs.real_name]</b></a>[client.prefs.job_high ? ", [client.prefs.job_high]" : null]<br>"
 	if(GAME_STATE <= RUNLEVEL_LOBBY)
 		if(ready)
-			output += "<a class='linkOn' href='byond://?src=\ref[src];ready=0'>Un-Ready</a>"
+			output += "<a class='linkOn' href='byond://?src=\ref[src];lobby_ready=1'>Un-Ready</a>"
 		else
-			output += "<a href='byond://?src=\ref[src];ready=1'>Ready Up</a>"
+			output += "<a href='byond://?src=\ref[src];lobby_ready=1'>Ready Up</a>"
 	else
-		output += "<a href='byond://?src=\ref[src];late_join=1'>Join Game!</A>"
+		output += "<a href='byond://?src=\ref[src];lobby_join=1'>Join Game!</A>"
 
 	output += "</div>"
 
@@ -100,28 +90,28 @@
 				if(player.ready)totalPlayersReady++
 
 /mob/new_player/Topic(href, href_list) // This is a full override; does not call parent.
-	if(usr != src)
-		return TOPIC_NOACTION
-	if(!client)
+	if(usr != src || !client)
 		return TOPIC_NOACTION
 
-	if(href_list["show_preferences"])
+	if(href_list["lobby_changelog"])
+		client.changes()
+		return
+
+	if(href_list["lobby_setup"])
 		client.prefs.open_setup_window(src)
 		return 1
 
-	if(href_list["ready"])
-		if(GAME_STATE <= RUNLEVEL_LOBBY) // Make sure we don't ready up after the round has started
-			ready = text2num(href_list["ready"])
-		else
-			ready = 0
+	if(href_list["lobby_ready"])
+		if(GAME_STATE <= RUNLEVEL_LOBBY)
+			ready = !ready
 
 	if(href_list["refresh"])
 		panel.close()
 		show_lobby_menu()
 
-	if(href_list["observe"])
+	if(href_list["lobby_observe"])
 		if(GAME_STATE < RUNLEVEL_LOBBY)
-			to_chat(src, "<span class='warning'>Please wait for server initialization to complete...</span>")
+			to_chat(src, SPAN_WARNING("Please wait for server initialization to complete..."))
 			return
 
 		if(!config.respawn_delay || client.holder || alert(src,"Are you sure you wish to observe? You will have to wait [config.respawn_delay] minute\s before being able to respawn!","Player Setup","Yes","No") == "Yes")
@@ -136,10 +126,10 @@
 			close_spawn_windows()
 			var/obj/O = locate("landmark*Observer-Start")
 			if(istype(O))
-				to_chat(src, "<span class='notice'>Now teleporting.</span>")
+				to_chat(src, SPAN_NOTICE("Now teleporting."))
 				observer.forceMove(O.loc)
 			else
-				to_chat(src, "<span class='danger'>Could not locate an observer spawn point. Use the Teleport verb to jump to the map.</span>")
+				to_chat(src, SPAN_DANGER("Could not locate an observer spawn point. Use the Teleport verb to jump to the map."))
 			observer.timeofdeath = world.time // Set the time of death so that the respawn timer works correctly.
 
 			if(isnull(client.holder))
@@ -161,14 +151,13 @@
 
 			return 1
 
-	if(href_list["late_join"])
-
+	if(href_list["lobby_join"])
 		if(GAME_STATE != RUNLEVEL_GAME)
-			to_chat(usr, "<span class='warning'>The round is either not ready, or has already finished...</span>")
+			to_chat(usr, SPAN_DANGER("The round is either not ready, or has already finished..."))
 			return
 		LateChoices() //show the latejoin job selection menu
 
-	if(href_list["manifest"])
+	if(href_list["lobby_crew"])
 		ViewManifest()
 
 	if(href_list["SelectedJob"])
@@ -190,72 +179,18 @@
 	else if(!href_list["late_join"])
 		show_lobby_menu()
 
-	if(href_list["showpoll"])
-
-		handle_player_polling()
-		return
-
-	if(href_list["pollid"])
-
-		var/pollid = href_list["pollid"]
-		if(istext(pollid))
-			pollid = text2num(pollid)
-		if(isnum(pollid))
-			src.poll_player(pollid)
-		return
-
 	if(href_list["invalid_jobs"])
 		show_invalid_jobs = !show_invalid_jobs
 		LateChoices()
 
-	if(href_list["votepollid"] && href_list["votetype"])
-		var/pollid = text2num(href_list["votepollid"])
-		var/votetype = href_list["votetype"]
-		switch(votetype)
-			if("OPTION")
-				var/optionid = text2num(href_list["voteoptionid"])
-				vote_on_poll(pollid, optionid)
-			if("TEXT")
-				var/replytext = href_list["replytext"]
-				log_text_poll_reply(pollid, replytext)
-			if("NUMVAL")
-				var/id_min = text2num(href_list["minid"])
-				var/id_max = text2num(href_list["maxid"])
-
-				if( (id_max - id_min) > 100 )	//Basic exploit prevention
-					to_chat(usr, "The option ID difference is too big. Please contact administration or the database admin.")
-					return
-
-				for(var/optionid = id_min; optionid <= id_max; optionid++)
-					if(!isnull(href_list["o[optionid]"]))	//Test if this optionid was replied to
-						var/rating
-						if(href_list["o[optionid]"] == "abstain")
-							rating = null
-						else
-							rating = text2num(href_list["o[optionid]"])
-							if(!isnum(rating))
-								return
-
-						vote_on_numval_poll(pollid, optionid, rating)
-			if("MULTICHOICE")
-				var/id_min = text2num(href_list["minoptionid"])
-				var/id_max = text2num(href_list["maxoptionid"])
-
-				if( (id_max - id_min) > 100 )	//Basic exploit prevention
-					to_chat(usr, "The option ID difference is too big. Please contact administration or the database admin.")
-					return
-
-				for(var/optionid = id_min; optionid <= id_max; optionid++)
-					if(!isnull(href_list["option_[optionid]"]))	//Test if this optionid was selected
-						vote_on_poll(pollid, optionid, 1)
-
 /mob/new_player/proc/AttemptLateSpawn(var/datum/job/job, var/spawning_at)
-
 	if(src != usr)
 		return 0
+
 	if(GAME_STATE != RUNLEVEL_GAME)
 		to_chat(usr, "<span class='warning'>The round is either not ready, or has already finished...</span>")
 		return 0
+
 	if(!config.enter_allowed)
 		to_chat(usr, "<span class='notice'>There is an administrative lock on entering the game!</span>")
 		return 0
@@ -266,7 +201,7 @@
 	if(job.is_restricted(client.prefs, src))
 		return
 
-	var/datum/spawnpoint/spawnpoint = job.get_spawnpoint(client)
+	var/decl/spawnpoint/spawnpoint = job.get_spawnpoint(client)
 	if(!spawnpoint)
 		to_chat(src, alert("That spawnpoint is unavailable. Please try another."))
 		return 0
@@ -293,23 +228,7 @@
 	character = SSjobs.equip_rank(character, job.title, 1)					//equips the human
 	SScustomitems.equip_custom_items(character)
 
-	// AIs don't need a spawnpoint, they must spawn at an empty core
-	if(character.mind.assigned_role == "AI")
-
-		character = character.AIize(move=0) // AIize the character, but don't move them yet
-
-		// is_available for AI checks that there is an empty core available in this list
-		var/obj/structure/aicore/deactivated/C = empty_playable_ai_cores[1]
-		empty_playable_ai_cores -= C
-
-		character.forceMove(C.loc)
-		var/mob/living/silicon/ai/A = character
-		A.on_mob_init()
-
-		AnnounceCyborg(character, job.title, "has been downloaded to the empty core in \the [character.loc.loc]")
-		SSticker.mode.handle_latejoin(character)
-
-		qdel(C)
+	if(job.do_spawn_special(character, src, TRUE)) //This replaces the AI spawn logic with a proc stub. Refer to silicon.dm for the spawn logic.
 		qdel(src)
 		return
 
@@ -317,13 +236,13 @@
 	global.universe.OnPlayerLatejoin(character)
 	spawnpoint.after_join(character)
 	if(job.create_record)
-		if(character.mind.assigned_role != "Robot")
+		if(!(ASSIGNMENT_ROBOT in job.event_categories))
 			CreateModularRecord(character)
 			SSticker.minds += character.mind//Cyborgs and AIs handle this in the transform proc.	//TODO!!!!! ~Carn
 			AnnounceArrival(character, job, spawnpoint.msg)
 		else
 			AnnounceCyborg(character, job, spawnpoint.msg)
-		matchmaker.do_matchmaking()
+	callHook("player_latejoin", list(job, character))
 	log_and_message_admins("has joined the round as [character.mind.assigned_role].", character)
 
 	qdel(src)
@@ -344,13 +263,14 @@
 	header += "<b>Welcome, [name].<br></b>"
 	header += "Round Duration: [roundduration2text()]<br>"
 
-	if(SSevac.evacuation_controller.has_evacuated())
-		header += "<font color='red'><b>The [station_name()] has been evacuated.</b></font><br>"
-	else if(SSevac.evacuation_controller.is_evacuating())
-		if(SSevac.evacuation_controller.emergency_evacuation) // Emergency shuttle is past the point of no recall
-			header += "<font color='red'>The [station_name()] is currently undergoing evacuation procedures.</font><br>"
-		else                                           // Crew transfer initiated
-			header += "<font color='red'>The [station_name()] is currently undergoing crew transfer procedures.</font><br>"
+	if(SSevac.evacuation_controller)
+		if(SSevac.evacuation_controller.has_evacuated())
+			header += "<font color='red'><b>The [station_name()] has been evacuated.</b></font><br>"
+		else if(SSevac.evacuation_controller.is_evacuating())
+			if(SSevac.evacuation_controller.emergency_evacuation) // Emergency shuttle is past the point of no recall
+				header += "<font color='red'>The [station_name()] is currently undergoing evacuation procedures.</font><br>"
+			else                                           // Crew transfer initiated
+				header += "<font color='red'>The [station_name()] is currently undergoing crew transfer procedures.</font><br>"
 
 	var/list/dat = list()
 	dat += "Choose from the following open/valid positions:<br>"
@@ -442,7 +362,7 @@
 		var/datum/job/job = SSjobs.get_by_title(mind.assigned_role)
 		if(!job)
 			job = SSjobs.get_by_title(global.using_map.default_job_title)
-		var/datum/spawnpoint/spawnpoint = job.get_spawnpoint(client, client.prefs.ranks[job.title])
+		var/decl/spawnpoint/spawnpoint = job.get_spawnpoint(client, client.prefs.ranks[job.title])
 		spawn_turf = pick(spawnpoint.turfs)
 
 	if(chosen_species)
@@ -451,8 +371,9 @@
 			return null
 		new_character = new(spawn_turf, chosen_species.name)
 		if(chosen_species.has_organ[BP_POSIBRAIN] && client && client.prefs.is_shackled)
-			var/obj/item/organ/internal/posibrain/B = new_character.get_internal_organ(BP_POSIBRAIN)
-			if(B)	B.shackle(client.prefs.get_lawset())
+			var/obj/item/organ/internal/posibrain/B = new_character.get_organ(BP_POSIBRAIN, /obj/item/organ/internal/posibrain)
+			if(B)
+				B.shackle(client.prefs.get_lawset())
 
 	if(!new_character)
 		new_character = new(spawn_turf)
@@ -475,27 +396,16 @@
 		var/memory = client.prefs.records[PREF_MEM_RECORD]
 		if(memory)
 			mind.StoreMemory(memory)
-		if(client.prefs.relations.len)
-			for(var/T in client.prefs.relations)
-				var/TT = matchmaker.relation_types[T]
-				var/datum/relation/R = new TT
-				R.holder = mind
-				R.info = client.prefs.relations_info[T]
-			mind.gen_relations_info = client.prefs.relations_info["general"]
 		mind.transfer_to(new_character)					//won't transfer key since the mind is not active
 
 	new_character.dna.ready_dna(new_character)
 	new_character.dna.b_type = client.prefs.b_type
 	new_character.sync_organ_dna()
-	if(client.prefs.disabilities)
-		// Set defer to 1 if you add more crap here so it only recalculates struc_enzymes once. - N3X
-		new_character.dna.SetSEState(global.GLASSESBLOCK,1,0)
-		new_character.disabilities |= NEARSIGHTED
 
 	// Do the initial caching of the player's body icons.
 	new_character.force_update_limbs()
 	new_character.update_eyes()
-	new_character.regenerate_icons()
+	new_character.refresh_visible_overlays()
 
 	new_character.key = key		//Manually transfer the key to log them in
 	return new_character
@@ -550,7 +460,7 @@
 /mob/new_player/MayRespawn()
 	return 1
 
-/mob/new_player/touch_map_edge()
+/mob/new_player/touch_map_edge(var/overmap_id = OVERMAP_ID_SPACE)
 	return
 
 /mob/new_player/say(var/message)
@@ -566,7 +476,7 @@
 	if(new_track)
 		new_track.play_to(src)
 
-/mob/new_player/handle_reading_literacy(var/mob/user, var/text_content, var/skip_delays)
+/mob/new_player/handle_reading_literacy(var/mob/user, var/text_content, var/skip_delays, var/digital = FALSE)
 	. = text_content
 
 /mob/new_player/handle_writing_literacy(var/mob/user, var/text_content, var/skip_delays)
@@ -574,3 +484,11 @@
 
 /mob/new_player/get_admin_job_string()
 	return "New player"
+
+/hook/roundstart/proc/update_lobby_browsers()
+	global.using_map.refresh_lobby_browsers()
+	return TRUE
+
+/mob/new_player/change_mob_type(var/new_type, var/turf/location, var/new_name, var/delete_old_mob = FALSE, var/subspecies)
+	to_chat(usr, SPAN_WARNING("You cannot convert players who have not entered the game yet!"))
+	return FALSE

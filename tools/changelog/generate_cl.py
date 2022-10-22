@@ -28,7 +28,7 @@ from pathlib import Path
 from ruamel import yaml
 from github import Github, InputGitAuthor
 
-CL_BODY = re.compile(r"(:cl:|🆑)(.+)?\r\n((.|\n|\r)+?)\r\n\/(:cl:|🆑)", re.MULTILINE)
+CL_BODY = re.compile(r"(:cl:|🆑)(.+)?\r?\n((.|\n|\r)+?)\r?\n\/(:cl:|🆑)", re.MULTILINE)
 CL_SPLIT = re.compile(r"(^\w+):\s+(\w.+)", re.MULTILINE)
 
 git_email = os.getenv("GIT_EMAIL")
@@ -50,9 +50,13 @@ if not pr_list.totalCount:
 
 pr = pr_list[0]
 
+if not pr.body:
+    print("No PR body, exiting")
+    exit(0) # Change to '1' if you want the action to fail when no PR description is provided
+
 pr_body = pr.body
 pr_number = pr.number
-pr_author = pr.user.login
+pr_author = pr.user.name or pr.user.login
 
 write_cl = {}
 try:

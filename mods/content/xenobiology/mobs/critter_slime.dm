@@ -2,15 +2,13 @@
 	name = "pet slime"
 	desc = "A lovable, domesticated slime."
 	icon = 'mods/content/xenobiology/icons/slimes/slime_baby.dmi'
-	icon_state = "slime"
-	icon_living = "slime"
-	icon_dead = "slime_dead"
 	speak_emote = list("chirps")
 	health = 100
 	maxHealth = 100
 	response_harm = "stamps on"
 	emote_see = list("jiggles", "bounces in place")
 	gene_damage = -1
+
 	var/slime_type = /decl/slime_colour/grey
 
 /mob/living/simple_animal/slime/Initialize(var/ml, var/_stype = /decl/slime_colour/grey)
@@ -21,11 +19,12 @@
 		return INITIALIZE_HINT_QDEL
 	var/decl/slime_colour/slime_data = GET_DECL(slime_type)
 	SetName("pet [slime_data.name] slime")
-	regenerate_icons()
+	update_icon()
 
-/mob/living/simple_animal/slime/regenerate_icons()
+/mob/living/simple_animal/slime/on_update_icon()
+	SHOULD_CALL_PARENT(FALSE)
 	icon = get_slime_icon()
-	cut_overlays()
+	icon_state = (stat == DEAD ? "slime_dead" : "slime")
 	
 /mob/living/simple_animal/slime/proc/get_slime_icon()
 	var/decl/slime_colour/slime_data = GET_DECL(slime_type)
@@ -60,7 +59,7 @@
 	var/decl/slime_colour/slime_data = GET_DECL(slime_type)
 	return slime_data.adult_icon
 
-/mob/living/simple_animal/slime/adult/regenerate_icons()
+/mob/living/simple_animal/slime/adult/on_update_icon()
 	..()
 	var/decl/slime_colour/slime_data = GET_DECL(slime_type)
 	add_overlay(image(slime_data.mood_icon, "aslime-:33"))

@@ -14,6 +14,7 @@
 	attack_verb = list("attacked", "slapped", "whacked")
 	relative_size = 85
 	damage_reduction = 0
+	scale_max_damage_to_species_health = FALSE
 
 	var/can_use_mmi = TRUE
 	var/mob/living/carbon/brain/brainmob = null
@@ -22,7 +23,7 @@
 	var/healed_threshold = 1
 	var/oxygen_reserve = 6
 
-/obj/item/organ/internal/brain/robotize(var/company = /decl/prosthetics_manufacturer, var/skip_prosthetics, var/keep_organs, var/apply_material = /decl/material/solid/metal/steel)
+/obj/item/organ/internal/brain/robotize(var/company = /decl/prosthetics_manufacturer/basic_human, var/skip_prosthetics = 0, var/keep_organs = 0, var/apply_material = /decl/material/solid/metal/steel, var/check_bodytype, var/check_species)
 	replace_self_with(/obj/item/organ/internal/posibrain)
 
 /obj/item/organ/internal/brain/mechassist()
@@ -33,25 +34,19 @@
 
 /obj/item/organ/internal/brain/proc/replace_self_with(replace_path)
 	var/mob/living/carbon/human/tmp_owner = owner
+	owner.remove_organ(src, FALSE, FALSE, TRUE, TRUE, FALSE)
 	qdel(src)
 	if(tmp_owner)
-		tmp_owner.internal_organs_by_name[organ_tag] = new replace_path(tmp_owner, 1)
+		var/obj/item/organ/org = new replace_path(tmp_owner, null, dna)
+		tmp_owner.add_organ(org, GET_EXTERNAL_ORGAN(tmp_owner, org.parent_organ), TRUE, TRUE)
 		tmp_owner = null
 
-/obj/item/organ/internal/brain/robotize(var/company = /decl/prosthetics_manufacturer, var/skip_prosthetics, var/keep_organs, var/apply_material = /decl/material/solid/metal/steel)
-	. = ..()
-	icon_state = "brain-prosthetic"
-
-/obj/item/organ/internal/brain/Initialize()
+/obj/item/organ/internal/brain/set_species(species_name)
 	. = ..()
 	if(species)
 		set_max_damage(species.total_health)
 	else
 		set_max_damage(200)
-
-	spawn(5)
-		if(brainmob && brainmob.client)
-			brainmob.client.screen.len = null //clear the hud
 
 /obj/item/organ/internal/brain/set_max_damage(var/ndamage)
 	..()
@@ -83,31 +78,32 @@
 	else
 		to_chat(user, "This one seems particularly lifeless. Perhaps it will regain some of its luster later..")
 
-/obj/item/organ/internal/brain/removed(var/mob/living/user)
-	if(!istype(owner))
-		return ..()
+/obj/item/organ/internal/brain/do_install(mob/living/carbon/target, affected, in_place, update_icon, detached)
+	if(!(. = ..()))
+		return
+	if(istype(owner))
+		SetName(initial(name)) //Reset the organ's name to stay coherent if we're putting it back into someone's skull
 
-	if(name == initial(name))
-		name = "\the [owner.real_name]'s [initial(name)]"
+/obj/item/organ/internal/brain/do_uninstall(in_place, detach, ignore_children, update_icon)
+	if(!in_place && istype(owner) && name == initial(name))
+		SetName("\the [owner.real_name]'s [initial(name)]")
+	if(!(. = ..()))
+		return
 
-	transfer_identity(owner)
+/obj/item/organ/internal/brain/on_remove_effects()
+	if(istype(owner))
+		transfer_identity(owner)
+	return ..()
 
-	..()
-
-/obj/item/organ/internal/brain/replaced(var/mob/living/target)
-
-	if(!..()) return 0
-
-	if(target.key)
-		target.ghostize()
-
+/obj/item/organ/internal/brain/on_add_effects()
 	if(brainmob)
 		if(brainmob.mind)
-			brainmob.mind.transfer_to(target)
+			if(owner.key)
+				owner.ghostize()
+			brainmob.mind.transfer_to(owner)
 		else
-			target.key = brainmob.key
-
-	return 1
+			owner.key = brainmob.key
+	return ..()
 
 /obj/item/organ/internal/brain/can_recover()
 	return ~status & ORGAN_DEAD
@@ -210,7 +206,7 @@
 
 /obj/item/organ/internal/brain/proc/brain_damage_callback(var/damage) //Confuse them as a somewhat uncommon aftershock. Side note: Only here so a spawn isn't used. Also, for the sake of a unique timer.
 	if(!QDELETED(owner))
-		to_chat(owner, SPAN_NOTICE("<font size='10'><B>I can't remember which way is forward...</B></font>"))
+		to_chat(owner, SPAN_NOTICE(FONT_HUGE("<B>I can't remember which way is forward...</B>")))
 		ADJ_STATUS(owner, STAT_CONFUSE, damage)
 
 /obj/item/organ/internal/brain/proc/handle_disabilities()
@@ -252,7 +248,7 @@
 	var/blood_volume = owner.get_blood_oxygenation()
 	if(blood_volume < BLOOD_VOLUME_SURVIVE)
 		to_chat(user, "<span class='danger'>Parts of [src] didn't survive the procedure due to lack of air supply!</span>")
-		set_max_damage(Floor(max_damage - 0.25*damage))
+		set_max_damage(FLOOR(max_damage - 0.25*damage))
 	heal_damage(damage)
 
 /obj/item/organ/internal/brain/get_scarring_level()

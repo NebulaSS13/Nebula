@@ -53,7 +53,7 @@
 		unwrenched = !unwrenched
 		visible_message(SPAN_NOTICE("\The [user] wrenches \the [src]'s tap [unwrenched ? "open" : "shut"]."))
 		if(unwrenched)
-			log_and_message_admins("opened a tank at [get_area(loc)].")
+			log_and_message_admins("opened a tank at [get_area_name(loc)].")
 			START_PROCESSING(SSprocessing, src)
 		else
 			STOP_PROCESSING(SSprocessing, src)
@@ -113,9 +113,14 @@
 	icon_state = "watertank"
 	amount_per_transfer_from_this = 10
 	possible_transfer_amounts = @"[10,25,50,100]"
-	initial_capacity = 50000
+	initial_capacity = 7500
 	initial_reagent_types = list(/decl/material/liquid/water = 1)
 	atom_flags = ATOM_FLAG_NO_TEMP_CHANGE | ATOM_FLAG_CLIMBABLE
+	movable_flags = MOVABLE_FLAG_WHEELED
+
+/obj/structure/reagent_dispensers/watertank/firefighter
+	name = "firefighting water reserve"
+	initial_capacity = 50000
 
 /obj/structure/reagent_dispensers/watertank/attackby(obj/item/W, mob/user)
 	if((istype(W, /obj/item/robot_parts/l_arm) || istype(W, /obj/item/robot_parts/r_arm)) && user.unEquip(W))
@@ -133,6 +138,7 @@
 	amount_per_transfer_from_this = 10
 	initial_reagent_types = list(/decl/material/liquid/fuel = 1)
 	atom_flags = ATOM_FLAG_CLIMBABLE
+	movable_flags = MOVABLE_FLAG_WHEELED
 
 	var/obj/item/assembly_holder/rig = null
 
@@ -173,7 +179,7 @@
 	. = ..()
 
 /obj/structure/reagent_dispensers/fueltank/on_update_icon()
-	cut_overlays()
+	..()
 	if(rig)
 		var/image/I = new
 		I.appearance = rig
@@ -187,7 +193,7 @@
 			var/turf/turf = get_turf(src)
 			if(turf)
 				var/area/area = turf.loc || "*unknown area*"
-				log_and_message_admins("[key_name_admin(Proj.firer)] shot a fuel tank in \the [area].")
+				log_and_message_admins("[key_name_admin(Proj.firer)] shot a fuel tank in \the [area.proper_name].")
 			else
 				log_and_message_admins("shot a fuel tank outside the world.")
 
@@ -221,7 +227,7 @@
 	initial_reagent_types = list(/decl/material/liquid/water = 1)
 	tool_interaction_flags = (TOOL_INTERACTION_ANCHOR | TOOL_INTERACTION_DECONSTRUCT)
 	var/cups = 12
-	var/cup_type = /obj/item/chems/food/drinks/sillycup
+	var/cup_type = /obj/item/chems/drinks/sillycup
 
 /obj/structure/reagent_dispensers/water_cooler/attack_hand(var/mob/user)
 	if(cups > 0)

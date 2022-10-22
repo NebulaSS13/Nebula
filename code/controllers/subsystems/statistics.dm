@@ -146,14 +146,14 @@ SUBSYSTEM_DEF(statistics)
 		var/datum/death/death = new
 		var/area/placeofdeath = get_area(dead)
 		death.place_of_death = placeofdeath ? placeofdeath.name : "Unknown area"
-		death.place_of_death = sanitizeSQL(death.place_of_death)
-		death.name = sanitizeSQL(dead.real_name)
-		death.key = sanitizeSQL(dead.key)
-		death.special_role = sanitizeSQL(dead.mind.get_special_role_name())
-		death.job = sanitizeSQL(dead.mind.assigned_role)
+		death.place_of_death = sanitize_sql(death.place_of_death)
+		death.name = sanitize_sql(dead.real_name)
+		death.key = sanitize_sql(dead.key)
+		death.special_role = sanitize_sql(dead.mind.get_special_role_name("No special role"))
+		death.job = sanitize_sql(dead.mind.assigned_role)
 		if(dead.last_attacker_)
-			death.last_attacker_name = sanitizeSQL(dead.last_attacker_.name)
-			death.last_attacker_key =  sanitizeSQL(dead.last_attacker_.client.key)
+			death.last_attacker_name = sanitize_sql(dead.last_attacker_.name)
+			death.last_attacker_key =  sanitize_sql(dead.last_attacker_.client.key)
 		death.gender = dead.gender
 		death.time_of_death = time2text(world.realtime, "YYYY-MM-DD hh:mm:ss")
 		death.coords = "[dead.x], [dead.y], [dead.z]"
@@ -162,8 +162,8 @@ SUBSYSTEM_DEF(statistics)
 		death.brainloss = dead.getBrainLoss()
 		death.oxyloss =   dead.getOxyLoss()
 		death.using_map_name = global.using_map.full_name
-		var/obj/effect/overmap/visitable/cell = map_sectors ? map_sectors["[dead.z]"] : null
-		death.overmap_location_name = cell ? cell.name : "Unknown"
+		var/obj/effect/overmap/visitable/cell = global.overmap_sectors["[dead.z]"]
+		death.overmap_location_name = cell?.name || "Unknown"
 		LAZYADD(deaths, death)
 
 		if(!player_is_antag(dead.mind) && dead.mind.assigned_job && LAZYLEN(dead.mind.assigned_job.department_types))

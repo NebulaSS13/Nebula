@@ -11,7 +11,7 @@
 	program_menu_icon = "flag"
 	nanomodule_path = /datum/nano_module/program/comm
 	extended_desc = "Used to command and control. Can relay long-range communications. This program can not be run on tablet computers."
-	required_access = list(access_bridge)
+	read_access = list(access_bridge)
 	requires_network = 1
 	size = 12
 	usage_flags = PROGRAM_CONSOLE | PROGRAM_LAPTOP
@@ -63,7 +63,7 @@
 	data["message_line2"] = msg_line2
 	data["state"] = current_status
 	data["isAI"] = issilicon(usr)
-	data["authenticated"] = is_autenthicated(user)
+	data["authenticated"] = is_authenticated(user)
 	data["boss_short"] = global.using_map.boss_short
 
 	var/decl/security_state/security_state = GET_DECL(global.using_map.security_state)
@@ -88,17 +88,16 @@
 		data["message_current"] = current_viewing_message
 
 	var/list/processed_evac_options = list()
-	if(!isnull(SSevac.evacuation_controller))
-		for (var/datum/evacuation_option/EO in SSevac.evacuation_controller.available_evac_options())
-			if(EO.abandon_ship)
-				continue
-			var/list/option = list()
-			option["option_text"] = EO.option_text
-			option["option_target"] = EO.option_target
-			option["needs_syscontrol"] = EO.needs_syscontrol
-			option["silicon_allowed"] = EO.silicon_allowed
-			option["requires_shunt"] = EO.requires_shunt
-			processed_evac_options[++processed_evac_options.len] = option
+	for (var/datum/evacuation_option/EO in SSevac.evacuation_controller?.available_evac_options())
+		if(EO.abandon_ship)
+			continue
+		var/list/option = list()
+		option["option_text"] = EO.option_text
+		option["option_target"] = EO.option_target
+		option["needs_syscontrol"] = EO.needs_syscontrol
+		option["silicon_allowed"] = EO.silicon_allowed
+		option["requires_shunt"] = EO.requires_shunt
+		processed_evac_options[++processed_evac_options.len] = option
 	data["evac_options"] = processed_evac_options
 
 	ui = SSnano.try_update_ui(user, src, ui_key, ui, data, force_open)
@@ -108,9 +107,9 @@
 		ui.set_initial_data(data)
 		ui.open()
 
-/datum/nano_module/program/comm/proc/is_autenthicated(var/mob/user)
+/datum/nano_module/program/comm/proc/is_authenticated(var/mob/user)
 	if(program)
-		return program.can_run(user, program.computer.get_network())
+		return program.get_file_perms(get_access(user), user) & OS_READ_ACCESS
 	return 1
 
 /datum/nano_module/program/comm/proc/get_shunt()
@@ -154,14 +153,14 @@
 			current_status = text2num(href_list["target"])
 		if("announce")
 			. = 1
-			if(is_autenthicated(user) && !issilicon(usr) && ntn_comm)
+			if(is_authenticated(user) && !issilicon(usr) && ntn_comm)
 				if(user)
 					var/obj/item/card/id/id_card = user.GetIdCard()
 					crew_announcement.announcer = GetNameAndAssignmentFromId(id_card)
 				else
 					crew_announcement.announcer = "Unknown"
 				if(announcment_cooldown)
-					to_chat(usr, "Please allow at least one minute to pass between announcements")
+					to_chat(usr, "Please allow at least one minute to pass between announcements.")
 					return TRUE
 				var/input = input(usr, "Please write a message to announce to the [station_name()].", "Priority Announcement") as null|message
 				if(!input || !can_still_topic() || filter_block_message(usr, input))
@@ -175,7 +174,7 @@
 			. = 1
 			if(href_list["target"] == "emagged")
 				if(program)
-					if(is_autenthicated(user) && program.computer.emagged() && !issilicon(usr) && ntn_comm)
+					if(is_authenticated(user) && program.computer.emagged() && !issilicon(usr) && ntn_comm)
 						if(centcomm_message_cooldown)
 							to_chat(usr, "<span class='warning'>Arrays recycling. Please stand by.</span>")
 							SSnano.update_uis(src)
@@ -190,7 +189,7 @@
 						spawn(300)//30 second cooldown
 							centcomm_message_cooldown = 0
 			else if(href_list["target"] == "regular")
-				if(is_autenthicated(user) && !issilicon(usr) && ntn_comm)
+				if(is_authenticated(user) && !issilicon(usr) && ntn_comm)
 					if(centcomm_message_cooldown)
 						to_chat(usr, "<span class='warning'>Arrays recycling. Please stand by.</span>")
 						SSnano.update_uis(src)
@@ -209,7 +208,7 @@
 						centcomm_message_cooldown = 0
 		if("evac")
 			. = 1
-			if(is_autenthicated(user))
+			if(SSevac.evacuation_controller && is_authenticated(user))
 				var/datum/evacuation_option/selected_evac_option = SSevac.evacuation_controller.evacuation_options[href_list["target"]]
 				if (isnull(selected_evac_option) || !istype(selected_evac_option))
 					return
@@ -224,7 +223,7 @@
 					SSevac.evacuation_controller.handle_evac_option(selected_evac_option.option_target, user)
 		if("setstatus")
 			. = 1
-			if(is_autenthicated(user) && ntn_cont)
+			if(is_authenticated(user) && ntn_cont)
 				switch(href_list["target"])
 					if("line1")
 						var/linput = reject_bad_text(sanitize(input("Line 1", "Enter Message Text", msg_line1) as text|null, 40), 40)
@@ -242,7 +241,7 @@
 						post_status(href_list["target"])
 		if("setalert")
 			. = 1
-			if(is_autenthicated(user) && !issilicon(usr) && ntn_cont && ntn_comm)
+			if(is_authenticated(user) && !issilicon(usr) && ntn_cont && ntn_comm)
 				var/decl/security_state/security_state = GET_DECL(global.using_map.security_state)
 				var/decl/security_level/target_level = locate(href_list["target"]) in security_state.comm_console_security_levels
 				if(target_level && security_state.can_switch_to(target_level))
@@ -256,7 +255,7 @@
 			current_status = STATE_DEFAULT
 		if("viewmessage")
 			. = 1
-			if(is_autenthicated(user) && ntn_comm)
+			if(is_authenticated(user) && ntn_comm)
 				current_viewing_message_id = text2num(href_list["target"])
 				for(var/list/m in l.messages)
 					if(m["id"] == current_viewing_message_id)
@@ -264,12 +263,12 @@
 				current_status = STATE_VIEWMESSAGE
 		if("delmessage")
 			. = 1
-			if(is_autenthicated(user) && ntn_comm && l != global_message_listener)
+			if(is_authenticated(user) && ntn_comm && l != global_message_listener)
 				l.Remove(current_viewing_message)
 			current_status = STATE_MESSAGELIST
 		if("printmessage")
 			. = 1
-			if(is_autenthicated(user) && ntn_comm)
+			if(is_authenticated(user) && ntn_comm)
 				if(!program.computer.print_paper(current_viewing_message["contents"],current_viewing_message["title"]))
 					to_chat(usr, "<span class='notice'>Hardware Error: Printer was unable to print the selected file.</span>")
 		if("unbolt_doors")

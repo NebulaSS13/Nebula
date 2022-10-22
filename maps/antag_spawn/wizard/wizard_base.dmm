@@ -49,7 +49,7 @@
 	pixel_x = -3;
 	pixel_y = 8
 	},
-/obj/item/chems/food/drinks/flask/barflask,
+/obj/item/chems/drinks/flask/barflask,
 /turf/simulated/floor/carpet,
 /area/map_template/wizard_station)
 "al" = (
@@ -90,7 +90,7 @@
 /area/map_template/wizard_station)
 "aq" = (
 /obj/structure/table/woodentable,
-/obj/item/chems/food/snacks/chawanmushi,
+/obj/item/chems/food/chawanmushi,
 /turf/unsimulated/floor{
 	dir = 8;
 	icon_state = "wood"
@@ -98,7 +98,7 @@
 /area/map_template/wizard_station)
 "ar" = (
 /obj/structure/table/woodentable,
-/obj/effect/landmark{
+/obj/abstract/landmark{
 	name = "Teleport-Scroll"
 	},
 /obj/item/toy/figure/ninja,
@@ -155,7 +155,7 @@
 	},
 /area/map_template/wizard_station)
 "ay" = (
-/obj/effect/landmark/start{
+/obj/abstract/landmark/start{
 	name = "wizard"
 	},
 /turf/simulated/floor/carpet,
@@ -336,9 +336,9 @@
 /area/map_template/wizard_station)
 "aU" = (
 /obj/structure/closet,
-/obj/item/chems/food/drinks/bottle/pwine,
-/obj/item/chems/food/drinks/bottle/agedwhiskey,
-/obj/item/chems/food/drinks/bottle/cognac,
+/obj/item/chems/drinks/bottle/pwine,
+/obj/item/chems/drinks/bottle/agedwhiskey,
+/obj/item/chems/drinks/bottle/cognac,
 /turf/unsimulated/floor{
 	icon_state = "lino"
 	},
@@ -425,7 +425,7 @@
 /area/map_template/wizard_station)
 "bg" = (
 /obj/structure/table/woodentable,
-/obj/item/chems/food/snacks/milosoup,
+/obj/item/chems/food/milosoup,
 /turf/unsimulated/floor{
 	dir = 8;
 	icon_state = "wood"
@@ -570,7 +570,6 @@
 /area/map_template/wizard_station)
 "by" = (
 /obj/structure/table/woodentable,
-/obj/item/cat_hide,
 /turf/unsimulated/floor{
 	icon_state = "cult";
 	name = "plating"

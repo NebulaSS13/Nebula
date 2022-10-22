@@ -9,6 +9,8 @@
 	var/mob/user
 	var/client/client
 	var/listindex
+	var/anchor_offset_x = 0
+	var/anchor_offset_y = 0
 
 /datum/progressbar/New(mob/user, goal_number, atom/target)
 	. = ..()
@@ -21,6 +23,18 @@
 	bar.appearance_flags = APPEARANCE_UI_IGNORE_ALPHA
 	bar.plane = HUD_PLANE
 	bar.layer = HUD_ABOVE_ITEM_LAYER
+
+	// This is used to center the do_after() bar on nonstandard icons.
+	var/icon/icon_icon = icon(target.icon) // /atom/icon isn't an /icon. Noting for posterity that we're going off the idea 
+	var/icon_width = icon_icon.Width()     // that icon() doesn't add to the RSC so doens't involve network overhead.
+	if(icon_width != world.icon_size)
+		anchor_offset_x = round((icon_width/2)-(world.icon_size/2))
+	var/icon_height = icon_icon.Height()
+	if(icon_height != world.icon_size)
+		anchor_offset_y = round((icon_height/2)-(world.icon_size/2))
+	bar.pixel_x = anchor_offset_x
+	bar.pixel_y = anchor_offset_y
+
 	src.user = user
 	if(user)
 		client = user.client
@@ -30,9 +44,9 @@
 	var/list/bars = user.progressbars[bar.loc]
 	bars.Add(src)
 	listindex = bars.len
-	bar.pixel_y = 0
+
 	bar.alpha = 0
-	animate(bar, pixel_y = 32 + (PROGRESSBAR_HEIGHT * (listindex - 1)), alpha = 255, time = PROGRESSBAR_ANIMATION_TIME, easing = SINE_EASING)
+	animate(bar, pixel_y = anchor_offset_y + 32 + (PROGRESSBAR_HEIGHT * (listindex - 1)), alpha = 255, time = PROGRESSBAR_ANIMATION_TIME, easing = SINE_EASING)
 
 /datum/progressbar/proc/update(progress)
 	if (!user || !user.client)
@@ -51,8 +65,8 @@
 
 /datum/progressbar/proc/shiftDown()
 	--listindex
-	bar.pixel_y = 32 + (PROGRESSBAR_HEIGHT * (listindex - 1))
-	var/dist_to_travel = 32 + (PROGRESSBAR_HEIGHT * (listindex - 1)) - PROGRESSBAR_HEIGHT
+	bar.pixel_y = anchor_offset_y + 32 + (PROGRESSBAR_HEIGHT * (listindex - 1))
+	var/dist_to_travel = anchor_offset_y + 32 + (PROGRESSBAR_HEIGHT * (listindex - 1)) - PROGRESSBAR_HEIGHT
 	animate(bar, pixel_y = dist_to_travel, time = PROGRESSBAR_ANIMATION_TIME, easing = SINE_EASING)
 
 /datum/progressbar/Destroy()

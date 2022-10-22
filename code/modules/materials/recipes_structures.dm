@@ -26,6 +26,13 @@
 	time = 50
 	on_floor = 1
 	difficulty = 2
+	set_dir_on_spawn = FALSE
+
+/datum/stack_recipe/noticeboard/spawn_result(mob/user, location, amount)
+	var/obj/structure/noticeboard/board = ..()
+	if(istype(board) && user)
+		board.set_dir(global.reverse_dir[user.dir])
+	return board
 
 /datum/stack_recipe/campfire
 	title = "campfire"

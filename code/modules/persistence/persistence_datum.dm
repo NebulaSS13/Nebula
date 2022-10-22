@@ -2,7 +2,7 @@
 // They basically just handle loading, processing and saving specific forms
 // of persistent data like graffiti and round to round filth.
 
-/datum/persistent
+/decl/persistence_handler
 	var/name                       // Unique descriptive name. Used for generating filename.
 	var/filename                   // Set at runtime. Full path and .json extension for loading saved data.
 	var/entries_expire_at          // Entries are removed if they are older than this number of rounds.
@@ -12,24 +12,24 @@
 	var/ignore_area_flags = FALSE  // Set to TRUE to skip area flag checks such as nonpersistent areas.
 	var/ignore_invalid_loc = FALSE // Set to TRUE to skip checking for a non-null station turf for the entry.
 
-/datum/persistent/New()
+/decl/persistence_handler/Initialize()
 	SetFilename()
-	..()
+	. = ..()
 
-/datum/persistent/proc/SetFilename()
+/decl/persistence_handler/proc/SetFilename()
 	if(name)
-		filename = "data/persistent/[lowertext(global.using_map.name)]-[lowertext(name)].json"
+		filename = "data/persistent/[ckey(global.using_map.name)]-[ckey(name)].json"
 	if(!isnull(entries_decay_at) && !isnull(entries_expire_at))
-		entries_decay_at = Floor(entries_expire_at * entries_decay_at)
+		entries_decay_at = FLOOR(entries_expire_at * entries_decay_at)
 
-/datum/persistent/proc/GetValidTurf(var/turf/T, var/list/tokens)
+/decl/persistence_handler/proc/GetValidTurf(var/turf/T, var/list/tokens)
 	if(T && (T.z in global.using_map.station_levels) && CheckTurfContents(T, tokens))
 		return T
 
-/datum/persistent/proc/CheckTurfContents(var/turf/T, var/list/tokens)
+/decl/persistence_handler/proc/CheckTurfContents(var/turf/T, var/list/tokens)
 	return TRUE
 
-/datum/persistent/proc/CheckTokenSanity(var/list/tokens)
+/decl/persistence_handler/proc/CheckTokenSanity(var/list/tokens)
 	return ( \
 		islist(tokens) && \
 		!isnull(tokens["x"]) && \
@@ -39,10 +39,10 @@
 		tokens["age"] <= entries_expire_at \
 	)
 
-/datum/persistent/proc/CreateEntryInstance(var/turf/creating, var/list/tokens)
+/decl/persistence_handler/proc/CreateEntryInstance(var/turf/creating, var/list/tokens)
 	return
 
-/datum/persistent/proc/ProcessAndApplyTokens(var/list/tokens)
+/decl/persistence_handler/proc/ProcessAndApplyTokens(var/list/tokens)
 
 	// If it's old enough we start to trim down any textual information and scramble strings.
 	if(tokens["message"] && !isnull(entries_decay_at) && !isnull(entry_decay_weight))
@@ -67,7 +67,7 @@
 	if(.)
 		CreateEntryInstance(., tokens)
 
-/datum/persistent/proc/IsValidEntry(var/atom/entry)
+/decl/persistence_handler/proc/IsValidEntry(var/atom/entry)
 	if(!istype(entry))
 		return FALSE
 	if(!isnull(entries_expire_at) && GetEntryAge(entry) >= entries_expire_at)
@@ -80,10 +80,10 @@
 		return FALSE
 	return TRUE
 
-/datum/persistent/proc/GetEntryAge(var/atom/entry)
+/decl/persistence_handler/proc/GetEntryAge(var/atom/entry)
 	return 0
 
-/datum/persistent/proc/CompileEntry(var/atom/entry)
+/decl/persistence_handler/proc/CompileEntry(var/atom/entry)
 	var/turf/T = get_turf(entry)
 	. = list()
 	.["x"] =   T?.x || 0
@@ -91,10 +91,13 @@
 	.["z"] =   T?.z || 0
 	.["age"] = GetEntryAge(entry)
 
-/datum/persistent/proc/FinalizeTokens(var/list/tokens)
+/decl/persistence_handler/proc/FinalizeTokens(var/list/tokens)
 	. = tokens
 
-/datum/persistent/proc/Initialize()
+/decl/persistence_handler/Initialize()
+
+	. = ..()
+
 	if(!fexists(filename))
 		return
 
@@ -118,31 +121,20 @@
 		if(CheckTokenSanity(entry))
 			ProcessAndApplyTokens(entry)
 
-/datum/persistent/proc/Shutdown()
+/decl/persistence_handler/proc/Shutdown()
 	var/list/entries = list()
 	for(var/thing in SSpersistence.tracking_values[type])
 		if(IsValidEntry(thing))
 			entries += list(CompileEntry(thing))
 
-#if DM_VERSION < 513 || (DM_VERSION == 513 && DM_BUILD < 1540)
-	for(var/list/entry in entries)
-		for(var/i in 1 to entry.len)
-			var/item = entry[i]
-			var/encoded_value = (istext(entry[item]) ? url_encode(entry[item]) : entry[item])
-			var/encoded_key = url_encode(item)
-			entry[i] = encoded_key
-			entry[encoded_key] = encoded_value
-	entries.Insert(1, list(list("url_encoded" = TRUE)))
-#endif
-
 	if(fexists(filename))
 		fdel(filename)
 	to_file(file(filename), json_encode(entries))
 
-/datum/persistent/proc/RemoveValue(var/atom/value)
+/decl/persistence_handler/proc/RemoveValue(var/atom/value)
 	qdel(value)
 
-/datum/persistent/proc/GetAdminSummary(var/mob/user, var/can_modify)
+/decl/persistence_handler/proc/GetAdminSummary(var/mob/user, var/can_modify)
 	. = list("<tr><td colspan = 4><b>[capitalize(name)]</b></td></tr>")
 	. += "<tr><td colspan = 4><hr></td></tr>"
 	for(var/thing in SSpersistence.tracking_values[type])
@@ -150,13 +142,13 @@
 			. += "<tr>[GetAdminDataStringFor(thing, can_modify, user)]</tr>"
 	. += "<tr><td colspan = 4><hr></td></tr>"
 
-/datum/persistent/proc/GetAdminDataStringFor(var/thing, var/can_modify, var/mob/user)
+/decl/persistence_handler/proc/GetAdminDataStringFor(var/thing, var/can_modify, var/mob/user)
 	if(can_modify)
 		. = "<td colspan = 3>[thing]</td><td><a href='byond://?src=\ref[src];caller=\ref[user];remove_entry=\ref[thing]'>Destroy</a></td>"
 	else
 		. = "<td colspan = 4>[thing]</td>"
 
-/datum/persistent/Topic(var/href, var/href_list)
+/decl/persistence_handler/Topic(var/href, var/href_list)
 	. = ..()
 	if(!.)
 		if(href_list["remove_entry"])

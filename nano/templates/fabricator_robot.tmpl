@@ -1,0 +1,62 @@
+<!-------------------------------------------------------------------------------------------------
+	Include Shared
+-------------------------------------------------------------------------------------------------->
+{{#def.fab_shared}}
+
+<style>
+	.orgMechanical{
+		color:steelblue;
+	}
+</style>
+
+ <!-- --------------------------------------------------------------------------------------------
+	Organ Filtering
+ ----------------------------------------------------------------------------------------------->
+ {{function fab_limb_config_summary(species) {
+	let summary = " [";
+
+	if(species != undefined) {
+		summary += species;
+	} else {
+		summary += "<span class=bad>!! No species !!</span> ";
+	};
+
+	return summary + "]";
+} }}
+
+{{function fab_limb_config( species, expand_config) { }}
+	<dt class='collapsableList'>
+		{{:helper.link(make_list_toggle_prefix(expand_config, 'Configuration') + (expand_config ? '' : fab_limb_config_summary(species) ), null, {'toggle_config' : 1}, null, 'linkSubtle') }}
+	</dt>
+	{{if expand_config}}
+		<dd style='margin-left: 1em; width:90%;'>
+			<!-- Mode Specifics -->
+			<div class='fabConfigEntry'>
+				<div class='itemLabel'>Current Species:</div> 
+				<div class='itemContent'>{{:helper.link( species, null, {'pick_species' : 1} ) }}</div>
+			</div>
+		</dd>
+	{{/if}}
+{{ } }}
+
+<!-- --------------------------------------------------------------------------------------------
+	Base UI
+ ----------------------------------------------------------------------------------------------->
+<!--Standard fab header-->
+{{fab_header( data.network, data.network_id ); }}
+
+{{if data.functional}}
+	<!--Collapsable list-->
+	<dl class='collapsableList'> 
+		{{ fab_resources_table( data.expand_resources, data.material_storage ); }}
+		{{ fab_construction_queue( data.expand_queue, data.build_queue, data.current_build ); }} 
+		{{ fab_limb_config( data.species, data.expand_config ); }}
+		{{ fab_display_filter( data.category, data.filtering, data.hide_categories ); }}
+	</dl> 
+
+	<!-- Display our design list + filter  -->
+	{{ fab_build_options(data.build_options); }}
+
+{{else}}
+	<p><span class = 'bad'>FABRICATOR OFFLINE. CONTACT SYSTEM ADMINISTRATOR.</span></p>
+{{/if}}

@@ -6,11 +6,11 @@ Used In File(s): \code\game\machinery\computer\camera.dm
 	{{if value.z == config.mapZLevel}}
 		<div class="mapIcon mapIcon16" style="left: {{:(value.x)}}px; bottom: {{:(value.y - 14.75)}}px;">
 			{{if data.current_camera && value.name == data.current_camera.name}}
-				{{:helper.link("#", '', {'switch_camera' : value.camera}, 'selected')}}
+				{{:helper.link("#", '', {'switch_camera' : value.tag}, 'selected')}}
 			{{else value.deact}}
 				{{:helper.link('#', '', {}, 'inactive')}}
 			{{else}}
-				{{:helper.link("#", '', {'switch_camera' : value.camera})}}
+				{{:helper.link("#", '', {'switch_camera' : value.tag})}}
 			{{/if}}
 			<div class="tooltip hidden">
 				{{:value.name}}

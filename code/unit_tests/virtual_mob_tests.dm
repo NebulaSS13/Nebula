@@ -106,15 +106,15 @@
 	. = ..()
 
 /datum/unit_test/virtual/helper/proc/standard_setup()
-	mob_one   = get_named_instance(/mob/fake_mob, get_turf(locate(/obj/effect/landmark/test/virtual_spawn/one)),   "Test Mob 1")
-	mob_two   = get_named_instance(/mob/fake_mob, get_turf(locate(/obj/effect/landmark/test/virtual_spawn/two)),   "Test Mob 2")
-	mob_three = get_named_instance(/mob/fake_mob, get_turf(locate(/obj/effect/landmark/test/virtual_spawn/three)), "Test Mob 3")
+	mob_one   = get_named_instance(/mob/fake_mob, get_turf(locate(/obj/abstract/landmark/test/virtual_spawn/one)),   "Test Mob 1")
+	mob_two   = get_named_instance(/mob/fake_mob, get_turf(locate(/obj/abstract/landmark/test/virtual_spawn/two)),   "Test Mob 2")
+	mob_three = get_named_instance(/mob/fake_mob, get_turf(locate(/obj/abstract/landmark/test/virtual_spawn/three)), "Test Mob 3")
 
 /datum/unit_test/virtual/helper/proc/standard_cleanup()
 	QDEL_NULL(mob_one)
 	QDEL_NULL(mob_two)
 	QDEL_NULL(mob_three)
 
-/obj/effect/landmark/test/virtual_spawn/one
-/obj/effect/landmark/test/virtual_spawn/two
-/obj/effect/landmark/test/virtual_spawn/three
+/obj/abstract/landmark/test/virtual_spawn/one
+/obj/abstract/landmark/test/virtual_spawn/two
+/obj/abstract/landmark/test/virtual_spawn/three

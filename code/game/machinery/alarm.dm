@@ -42,8 +42,9 @@
 #define MAX_TEMPERATURE 90
 #define MIN_TEMPERATURE -40
 
+#define BASE_ALARM_NAME "environment alarm"
 /obj/machinery/alarm
-	name = "alarm"
+	name = BASE_ALARM_NAME
 	icon = 'icons/obj/monitors.dmi'
 	icon_state = "alarm0"
 	anchored = 1
@@ -85,7 +86,7 @@
 
 	var/datum/radio_frequency/radio_connection
 
-	var/list/TLV = list()
+	var/list/TLV = list() // stands for Threshold Limit Value, since it handles exposure amounts
 	var/list/trace_gas = list() //list of other gases that this air alarm is able to detect
 
 	var/danger_level = 0
@@ -128,7 +129,7 @@
 	. = ..()
 
 /obj/machinery/alarm/Destroy()
-	events_repository.unregister(/decl/observ/name_set, src, get_area(src), .proc/change_area_name)
+	events_repository.unregister(/decl/observ/name_set, get_area(src), src, .proc/change_area_name)
 	unregister_radio(src, frequency)
 	return ..()
 
@@ -139,12 +140,13 @@
 	if(!alarm_area)
 		return // spawned in nullspace, presumably as a prototype for construction purposes.
 	area_uid = alarm_area.uid
-	if (name == "alarm")
-		SetName("[alarm_area.name] Air Alarm")
+	update_name(FALSE)
 
 	// breathable air according to human/Life()
-	TLV[/decl/material/gas/oxygen] =			list(16, 19, 135, 140) // Partial pressure, kpa
-	TLV[/decl/material/gas/carbon_dioxide] = list(-1, -1, 5, 10) // Partial pressure, kpa
+	var/decl/material/gas_mat = GET_DECL(/decl/material/gas/oxygen)
+	TLV[gas_mat.gas_name] =	list(16, 19, 135, 140) // Partial pressure, kpa
+	gas_mat = GET_DECL(/decl/material/gas/carbon_dioxide)
+	TLV[gas_mat.gas_name] = list(-1, -1, 5, 10) // Partial pressure, kpa
 	TLV["other"] =			list(-1, -1, 0.2, 0.5) // Partial pressure, kpa
 	TLV["pressure"] =		list(ONE_ATMOSPHERE*0.80,ONE_ATMOSPHERE*0.90,ONE_ATMOSPHERE*1.10,ONE_ATMOSPHERE*1.20) /* kpa */
 	TLV["temperature"] =	list(T0C-26, T0C, T0C+40, T0C+66) // K
@@ -159,6 +161,16 @@
 	for(var/device_tag in alarm_area.air_scrub_names + alarm_area.air_vent_names)
 		send_signal(device_tag, list()) // ask for updates; they initialized before us and we didn't get the data
 	queue_icon_update()
+
+/obj/machinery/alarm/area_changed(area/old_area, area/new_area)
+	. = ..()
+	alarm_area = get_area(src)
+	update_name(TRUE)
+
+/obj/machinery/alarm/proc/update_name(var/reset = TRUE)
+	name = initial(name)
+	if(name == BASE_ALARM_NAME && alarm_area && alarm_area != global.space_area)
+		SetName("[alarm_area.proper_name] [BASE_ALARM_NAME]")
 
 /obj/machinery/alarm/modify_mapped_vars(map_hash)
 	..()
@@ -266,8 +278,10 @@
 		other_moles += environment.gas[g] //this is only going to be used in a partial pressure calc, so we don't need to worry about group_multiplier here.
 
 	pressure_dangerlevel = get_danger_level(environment_pressure, TLV["pressure"])
-	oxygen_dangerlevel = get_danger_level(environment.gas[/decl/material/gas/oxygen]*partial_pressure, TLV[/decl/material/gas/oxygen])
-	co2_dangerlevel = get_danger_level(environment.gas[/decl/material/gas/carbon_dioxide]*partial_pressure, TLV[/decl/material/gas/carbon_dioxide])
+	var/decl/material/gas_mat = GET_DECL(/decl/material/gas/oxygen)
+	oxygen_dangerlevel = get_danger_level(environment.gas[/decl/material/gas/oxygen]*partial_pressure, TLV[gas_mat.gas_name])
+	gas_mat = GET_DECL(/decl/material/gas/carbon_dioxide)
+	co2_dangerlevel = get_danger_level(environment.gas[/decl/material/gas/carbon_dioxide]*partial_pressure, TLV[gas_mat.gas_name])
 	temperature_dangerlevel = get_danger_level(environment.temperature, TLV["temperature"])
 	other_dangerlevel = get_danger_level(other_moles*partial_pressure, TLV["other"])
 
@@ -309,18 +323,19 @@
 
 /obj/machinery/alarm/on_update_icon()
 	// Set pixel offsets
-	pixel_x = 0
-	pixel_y = 0
+	default_pixel_x = 0
+	default_pixel_y = 0
 	var/turf/T = get_step(get_turf(src), turn(dir, 180))
 	if(istype(T) && T.density)
 		if(dir == NORTH)
-			pixel_y = -21
+			default_pixel_y = -21
 		else if(dir == SOUTH)
-			pixel_y = 21
+			default_pixel_y = 21
 		else if(dir == WEST)
-			pixel_x = 21
+			default_pixel_x = 21
 		else if(dir == EAST)
-			pixel_x = -21
+			default_pixel_x = -21
+	reset_offsets(0)
 
 	// Broken or deconstructed states
 	if(!istype(construct_state, /decl/machine_construction/wall_frame/panel_closed))
@@ -377,10 +392,10 @@
 /obj/machinery/alarm/proc/register_env_machine(var/m_id, var/device_type)
 	var/new_name
 	if (device_type=="AVP")
-		new_name = "[alarm_area.name] Vent Pump #[alarm_area.air_vent_names.len+1]"
+		new_name = "[alarm_area.proper_name] Vent Pump #[alarm_area.air_vent_names.len+1]"
 		alarm_area.air_vent_names[m_id] = new_name
 	else if (device_type=="AScr")
-		new_name = "[alarm_area.name] Air Scrubber #[alarm_area.air_scrub_names.len+1]"
+		new_name = "[alarm_area.proper_name] Air Scrubber #[alarm_area.air_scrub_names.len+1]"
 		alarm_area.air_scrub_names[m_id] = new_name
 	send_signal(m_id, list("init" = new_name) )
 
@@ -458,7 +473,7 @@
 	var/datum/signal/alert_signal = new
 	alert_signal.source = src
 	alert_signal.transmission_method = 1
-	alert_signal.data["zone"] = alarm_area.name
+	alert_signal.data["zone"] = alarm_area.proper_name
 	alert_signal.data["type"] = "Atmospheric"
 
 	if(alert_level==2)
@@ -594,9 +609,11 @@
 			for(var/g in env_info?.important_gasses)
 				var/decl/material/mat = GET_DECL(g)
 				thresholds[++thresholds.len] = list("name" = (mat?.gas_symbol_html || "Other"), "settings" = list())
-				selected = TLV[g]
+				selected = TLV[mat.gas_name]
+				if(!selected)
+					continue
 				for(var/i = 1, i <= 4, i++)
-					thresholds[thresholds.len]["settings"] += list(list("env" = g, "val" = i, "selected" = selected[i]))
+					thresholds[thresholds.len]["settings"] += list(list("env" = mat.gas_name, "val" = i, "selected" = selected[i]))
 
 			selected = TLV["pressure"]
 			thresholds[++thresholds.len] = list("name" = "Pressure", "settings" = list())
@@ -653,7 +670,7 @@
 		var/input_temperature = input(user, "What temperature would you like the system to maintain? (Capped between [min_temperature] and [max_temperature]C)", "Thermostat Controls", target_temperature - T0C) as num|null
 		if(isnum(input_temperature) && CanUseTopic(user, state))
 			if(input_temperature > max_temperature || input_temperature < min_temperature)
-				to_chat(user, "Temperature must be between [min_temperature]C and [max_temperature]C")
+				to_chat(user, "Temperature must be between [min_temperature]C and [max_temperature]C.")
 			else
 				target_temperature = input_temperature + T0C
 		return TOPIC_REFRESH
@@ -695,10 +712,12 @@
 					return TOPIC_REFRESH
 
 				if("set_threshold")
+					var/static/list/thresholds = list("lower bound", "low warning", "high warning", "upper bound")
 					var/env = href_list["env"]
-					var/threshold = text2num(href_list["var"])
+					var/threshold = Clamp(text2num(href_list["var"]), 1, 4)
 					var/list/selected = TLV[env]
-					var/list/thresholds = list("lower bound", "low warning", "high warning", "upper bound")
+					if(!threshold || !selected || !selected[threshold])
+						return TOPIC_NOACTION
 					var/newval = input(user, "Enter [thresholds[threshold]] for [env]", "Alarm triggers", selected[threshold]) as null|num
 					if (isnull(newval) || !CanUseTopic(user, state))
 						return TOPIC_HANDLED
@@ -847,19 +866,20 @@ FIRE ALARM
 /obj/machinery/firealarm/on_update_icon()
 	overlays.Cut()
 
-	pixel_x = 0
-	pixel_y = 0
+	default_pixel_x = 0
+	default_pixel_y = 0
 	var/walldir = (dir & (NORTH|SOUTH)) ? global.reverse_dir[dir] : dir
 	var/turf/T = get_step(get_turf(src), walldir)
 	if(istype(T) && T.density)
 		if(dir == SOUTH)
-			pixel_y = 21
+			default_pixel_y = 21
 		else if(dir == NORTH)
-			pixel_y = -21
+			default_pixel_y = -21
 		else if(dir == EAST)
-			pixel_x = 21
+			default_pixel_x = 21
 		else if(dir == WEST)
-			pixel_x = -21
+			default_pixel_x = -21
+	reset_offsets(0)
 
 	icon_state = "casing"
 	if(construct_state && !istype(construct_state, /decl/machine_construction/wall_frame/panel_closed))
@@ -1021,7 +1041,7 @@ FIRE ALARM
 /obj/machinery/firealarm/Destroy()
 	QDEL_NULL(sound_token)
 	. = ..()
-	
+
 /obj/machinery/firealarm/Initialize(mapload, dir)
 	. = ..()
 	if(dir)

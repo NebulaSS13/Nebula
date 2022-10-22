@@ -7,25 +7,41 @@
 	size = 4
 	available_on_network = 1
 	nanomodule_path = /datum/nano_module/program/computer_wordprocessor/
+
+	usage_flags = PROGRAM_ALL
+	category = PROG_OFFICE
+
 	var/browsing
 	var/open_file
 	var/loaded_data
 	var/error
 	var/is_edited
-	usage_flags = PROGRAM_ALL
-	category = PROG_OFFICE
 
-/datum/computer_file/program/wordprocessor/proc/open_file(var/filename)
-	var/datum/computer_file/data/F = get_file(filename)
+/datum/computer_file/program/wordprocessor/on_shutdown(forced)
+	. = ..()
+	browsing = null
+	open_file = null
+	loaded_data = null
+	error = null
+	is_edited = null
+
+/datum/computer_file/program/wordprocessor/proc/open_file(var/openingfile, var/list/accesses, var/mob/user)
+	var/datum/computer_file/data/F = get_file(openingfile)
 	if(F)
+		if(!(F.get_file_perms(accesses, user) & OS_READ_ACCESS))
+			error = "I/O error: You do not have permission to read file '[openingfile]'."
+			return FALSE
 		open_file = F.filename
 		loaded_data = F.stored_data
-		return 1
+		return TRUE
+	error = "I/O error: Unable to open file '[openingfile]'."
 
-/datum/computer_file/program/wordprocessor/proc/save_file(var/filename)
-	. = computer.save_file(filename, loaded_data, /datum/computer_file/data/text)
+/datum/computer_file/program/wordprocessor/proc/save_file(var/savingfile)
+	. = computer.save_file(savingfile, loaded_data, /datum/computer_file/data/text)
 	if(.)
 		is_edited = 0
+
+#define MAX_FIELDS_NUM 50
 
 /datum/computer_file/program/wordprocessor/Topic(href, href_list)
 	if(..())
@@ -59,8 +75,7 @@
 			if(alert("Would you like to save your changes first?",,"Yes","No") == "Yes")
 				save_file(open_file)
 		browsing = 0
-		if(!open_file(href_list["PRG_openfile"]))
-			error = "I/O error: Unable to open file '[href_list["PRG_openfile"]]'."
+		open_file(href_list["PRG_openfile"], NM.get_access(usr), usr)
 
 	if(href_list["PRG_newfile"])
 		. = 1
@@ -75,6 +90,13 @@
 		if(F)
 			open_file = F.filename
 			loaded_data = ""
+
+			// Set the write/mod access to the current account if it exists.
+			var/datum/computer_file/data/account/A = computer.get_account()
+			if(A)
+				var/datum/computer_network/network = computer.get_network()
+				LAZYADD(F.write_access, list(list("[A.login]@[network.network_id]")))
+				LAZYADD(F.mod_access, list(list("[A.login]@[network.network_id]")))
 			return 1
 		else
 			error = "I/O error: Unable to create file '[href_list["PRG_saveasfile"]]'."
@@ -86,6 +108,12 @@
 			return 1
 		var/datum/computer_file/data/F = create_file(newname, loaded_data, /datum/computer_file/data/text)
 		if(F)
+			var/datum/computer_file/data/account/A = computer.get_account()
+			if(A)
+				var/datum/computer_network/network = computer.get_network()
+				LAZYADD(F.write_access, list(list("[A.login]@[network.network_id]")))
+				LAZYADD(F.mod_access, list(list("[A.login]@[network.network_id]")))
+				
 			open_file = F.filename
 		else
 			error = "I/O error: Unable to create file '[href_list["PRG_saveasfile"]]'."
@@ -98,16 +126,33 @@
 			if(!open_file)
 				return 0
 		if(!save_file(open_file))
-			error = "I/O error: Unable to save file '[open_file]'."
+			error = "I/O error: Unable to save file '[open_file]'. Access may be denied."
 		return 1
 
 	if(href_list["PRG_editfile"])
 		var/oldtext = html_decode(loaded_data)
 		oldtext = replacetext(oldtext, "\[br\]", "\n")
-
+		var/datum/computer_file/data/F = get_file(open_file)
+		if(!F)
+			error = "I/O error: File not found."
+			return 1
+		if(!(F.get_file_perms(NM.get_access(usr), usr) & OS_WRITE_ACCESS))
+			error = "I/O error: You do not have permission to edit this file."
+			return 1
 		var/newtext = sanitize(replacetext(input(usr, "Editing file '[open_file]'. You may use most tags used in paper formatting:", "Text Editor", oldtext) as message|null, "\n", "\[br\]"), MAX_TEXTFILE_LENGTH)
 		if(!newtext)
 			return
+
+		//Count the fields
+		var/fields = 0
+		var/regex/re = regex(@"\[field\]","g")
+		while(re.Find(newtext))
+			fields++
+
+		if(fields > MAX_FIELDS_NUM)
+			to_chat(usr, SPAN_WARNING("Too many fields. Sorry, you can't do this."))
+			return
+
 		loaded_data = newtext
 		is_edited = 1
 		return 1
@@ -117,6 +162,8 @@
 		if(!computer.print_paper(digitalPencode2html(loaded_data)))
 			error = "Hardware error: Printer missing or out of paper."
 			return 1
+
+#undef MAX_FIELDS_NUM
 
 /datum/nano_module/program/computer_wordprocessor
 	name = "Word Processor"

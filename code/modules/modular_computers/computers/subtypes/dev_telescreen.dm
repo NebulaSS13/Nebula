@@ -21,31 +21,34 @@
 			shutdown_computer()
 			anchored = FALSE
 			assembly.screen_on = FALSE
-			pixel_x = 0
-			pixel_y = 0
+			default_pixel_x = 0
+			default_pixel_y = 0
+			reset_offsets(0)
 			to_chat(user, "You unsecure \the [src].")
 		else
 			var/choice = input(user, "Where do you want to place \the [src]?", "Offset selection") in list("North", "South", "West", "East", "This tile", "Cancel")
-			var/valid = FALSE
 			switch(choice)
 				if("North")
-					valid = TRUE
-					pixel_y = 32
+					default_pixel_x = 0
+					default_pixel_y = 32
 				if("South")
-					valid = TRUE
-					pixel_y = -32
+					default_pixel_x = 0
+					default_pixel_y = -32
 				if("West")
-					valid = TRUE
-					pixel_x = -32
+					default_pixel_x = -32
+					default_pixel_y = 0
 				if("East")
-					valid = TRUE
-					pixel_x = 32
+					default_pixel_x = 32
+					default_pixel_y = 0
 				if("This tile")
-					valid = TRUE
+					default_pixel_x = 0
+					default_pixel_y = 0
+				else
+					return
+			reset_offsets(0)
 
-			if(valid)
-				anchored = 1
-				assembly.screen_on = TRUE
-				to_chat(user, "You secure \the [src].")
+			anchored = TRUE
+			assembly.screen_on = TRUE
+			to_chat(user, "You secure \the [src].")
 			return
 	..()

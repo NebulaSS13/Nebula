@@ -122,7 +122,7 @@
 /obj/item/modular_computer/CtrlAltClick(mob/user)
 	if(!CanPhysicallyInteract(user))
 		return
-	var/datum/extension/interactive/ntos/os = get_extension(src, /datum/extension/interactive/ntos)
+	var/datum/extension/interactive/os/os = get_extension(src, /datum/extension/interactive/os)
 	if(os)
 		os.open_terminal(user)
 

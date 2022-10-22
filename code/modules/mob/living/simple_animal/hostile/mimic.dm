@@ -22,9 +22,8 @@ var/global/list/protected_objects = list(/obj/machinery,
 	icon =  'icons/obj/closets/bases/crate.dmi'
 	color = COLOR_STEEL
 	icon_state = "crate"
-	icon_living = "crate"
 
-	meat_type = /obj/item/chems/food/snacks/fish
+	meat_type = /obj/item/chems/food/fish
 	speed = 4
 	maxHealth = 100
 	health = 100
@@ -45,6 +44,14 @@ var/global/list/protected_objects = list(/obj/machinery,
 	var/knockdown_people = 0
 	pass_flags = PASS_FLAG_TABLE
 
+/mob/living/simple_animal/hostile/mimic/on_update_icon()
+	SHOULD_CALL_PARENT(FALSE)
+	if(copy_of && copy_of.resolve())
+		appearance = copy_of.resolve()
+	else
+		icon = initial(icon)
+		icon_state = initial(icon_state)
+
 /mob/living/simple_animal/hostile/mimic/Initialize(mapload, var/obj/o, var/mob/living/creator)
 	. = ..()
 	if(o)
@@ -57,19 +64,18 @@ var/global/list/protected_objects = list(/obj/machinery,
 	if(.)
 		audible_emote("growls at [.]")
 
-/mob/living/simple_animal/hostile/mimic/ListTargets()
+/mob/living/simple_animal/hostile/mimic/ListTargets(var/dist = 7)
 	// Return a list of targets that isn't the creator
 	. = ..()
 	if(creator)
-		return . - creator.resolve()
+		. -= creator.resolve()
 
 /mob/living/simple_animal/hostile/mimic/proc/CopyObject(var/obj/O, var/mob/living/creator)
 
 	if((istype(O, /obj/item) || istype(O, /obj/structure)) && !is_type_in_list(O, protected_objects))
 		O.forceMove(src)
 		copy_of = weakref(O)
-		appearance = O
-		icon_living = icon_state
+
 		var/obj/item/W = get_natural_weapon()
 		if(istype(O, /obj/structure))
 			health = (anchored * 50) + 50
@@ -87,8 +93,10 @@ var/global/list/protected_objects = list(/obj/machinery,
 		if(creator)
 			src.creator = weakref(creator)
 			faction = "\ref[creator]" // very unique
-		return 1
-	return
+
+		update_icon()
+		return TRUE
+	return FALSE
 
 /mob/living/simple_animal/hostile/mimic/death()
 	if(!copy_of)
@@ -139,10 +147,8 @@ var/global/list/protected_objects = list(/obj/machinery,
 
 	var/awake = 0
 
-/mob/living/simple_animal/hostile/mimic/sleeping/ListTargets()
-	if(!awake)
-		return null
-	return ..()
+/mob/living/simple_animal/hostile/mimic/sleeping/ListTargets(var/dist = 7)
+	. = awake && ..()
 
 /mob/living/simple_animal/hostile/mimic/sleeping/proc/trigger()
 	if(!awake)

@@ -3,8 +3,8 @@
 	display_name = "Ascent"
 	upgrade_locked = TRUE
 	hide_on_manifest = TRUE
-	sprites = list(
-		"Drone" = "drone-ascent"
+	module_sprites = list(
+		"Drone" = 'mods/species/ascent/icons/drone.dmi'
 	)
 	// The duplicate clustertools in this list are so that they can set up to
 	// hack doors, windows etc. without having to constantly cycle through tools.
@@ -17,7 +17,7 @@
 		/obj/item/clustertool,
 		/obj/item/soap,
 		/obj/item/mop/advanced,
-		/obj/item/plunger,
+		/obj/item/plunger/unbreakable,
 		/obj/item/weldingtool/electric/mantid,
 		/obj/item/extinguisher,
 		/obj/item/t_scanner,
@@ -35,7 +35,9 @@
 		/obj/item/stack/material/cyborg/steel,
 		/obj/item/stack/material/cyborg/aluminium,
 		/obj/item/stack/material/rods/cyborg,
+		/obj/item/stack/material/strut/cyborg,
 		/obj/item/stack/tile/floor/cyborg,
+		/obj/item/stack/tile/roof/cyborg,
 		/obj/item/stack/material/cyborg/glass,
 		/obj/item/stack/material/cyborg/glass/reinforced,
 		/obj/item/stack/material/cyborg/fiberglass,
@@ -94,7 +96,9 @@
 		 /obj/item/stack/material/cyborg/steel,
 		 /obj/item/stack/material/cyborg/aluminium,
 		 /obj/item/stack/material/rods/cyborg,
+		 /obj/item/stack/material/strut/cyborg,
 		 /obj/item/stack/tile/floor/cyborg,
+		 /obj/item/stack/tile/roof/cyborg,
 		 /obj/item/stack/material/cyborg/glass/reinforced
 		))
 		var/obj/item/stack/stack = locate(thing) in equipment
@@ -135,6 +139,8 @@
 	N.charge_costs = list(1000)
 
 /mob/living/silicon/robot/flying/ascent
+	name = "\improper Ascent drone"
+	real_name = "\improper Ascent drone"
 	desc = "A small, sleek, dangerous-looking hover-drone."
 	speak_statement = "clicks"
 	speak_exclamation = "rasps"

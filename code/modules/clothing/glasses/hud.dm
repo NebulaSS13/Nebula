@@ -12,7 +12,7 @@
 	toggle_off_message = "$ITEM$ powers down with a beep."
 	material = /decl/material/solid/metal/aluminium
 	matter = list(/decl/material/solid/glass = MATTER_AMOUNT_REINFORCEMENT)
-	bodytype_restricted = null
+	bodytype_equip_flags = null
 	var/list/icon/current = list() //the current hud icons
 
 /obj/item/clothing/glasses/proc/process_hud(var/mob/M)

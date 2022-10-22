@@ -12,6 +12,7 @@
 	var/minimum_reaction_temperature = 100
 	var/priority = 100
 	var/hidden_from_codex = FALSE
+	var/codex_name
 
 /decl/fusion_reaction/proc/handle_reaction_special(var/obj/effect/fusion_em_field/holder)
 	return 0

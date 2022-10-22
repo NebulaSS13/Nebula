@@ -1,6 +1,7 @@
 /obj/item/organ/internal/lungs
 	name = "lungs"
 	icon_state = "lungs"
+	prosthetic_icon = "lungs-prosthetic"
 	gender = PLURAL
 	organ_tag = BP_LUNGS
 	parent_organ = BP_CHEST
@@ -33,32 +34,11 @@
 /obj/item/organ/internal/lungs/proc/can_drown()
 	return (is_broken() || !has_gills)
 
-/obj/item/organ/internal/lungs/proc/remove_oxygen_deprivation(var/amount)
-	var/last_suffocation = oxygen_deprivation
-	oxygen_deprivation = min(species.total_health,max(0,oxygen_deprivation - amount))
-	return -(oxygen_deprivation - last_suffocation)
+/obj/item/organ/internal/lungs/proc/adjust_oxygen_deprivation(var/amount)
+	oxygen_deprivation = Clamp(oxygen_deprivation + amount, 0, species.total_health)
 
-/obj/item/organ/internal/lungs/proc/add_oxygen_deprivation(var/amount)
-	var/last_suffocation = oxygen_deprivation
-	oxygen_deprivation = min(species.total_health,max(0,oxygen_deprivation + amount))
-	return (oxygen_deprivation - last_suffocation)
-
-// Returns a percentage value for use by GetOxyloss().
-/obj/item/organ/internal/lungs/proc/get_oxygen_deprivation()
-	if(status & ORGAN_DEAD)
-		return 100
-	return round((oxygen_deprivation/species.total_health)*100)
-
-/obj/item/organ/internal/lungs/robotize(var/company = /decl/prosthetics_manufacturer, var/skip_prosthetics, var/keep_organs, var/apply_material = /decl/material/solid/metal/steel)
+/obj/item/organ/internal/lungs/set_species(species_name)
 	. = ..()
-	icon_state = "lungs-prosthetic"
-
-/obj/item/organ/internal/lungs/set_dna(var/datum/dna/new_dna)
-	..()
-	sync_breath_types()
-
-/obj/item/organ/internal/lungs/replaced()
-	..()
 	sync_breath_types()
 
 /**
@@ -96,7 +76,7 @@
 					"You hear someone coughing!",
 				)
 			else
-				var/obj/item/organ/parent = owner.get_organ(parent_organ)
+				var/obj/item/organ/parent = GET_EXTERNAL_ORGAN(owner, parent_organ)
 				owner.visible_message(
 					"blood drips from <B>\the [owner]'s</B> [parent.name]!",
 				)
@@ -115,7 +95,7 @@
 			owner.losebreath = max(3, owner.losebreath)
 
 /obj/item/organ/internal/lungs/proc/rupture()
-	var/obj/item/organ/external/parent = owner.get_organ(parent_organ)
+	var/obj/item/organ/external/parent = GET_EXTERNAL_ORGAN(owner, parent_organ)
 	if(istype(parent))
 		owner.custom_pain("You feel a stabbing pain in your [parent.name]!", 50, affecting = parent)
 	bruise()
@@ -162,7 +142,7 @@
 	var/breatheffect = GET_CHEMICAL_EFFECT(owner, CE_BREATHLOSS)
 	if(!forced && breatheffect && !GET_CHEMICAL_EFFECT(owner, CE_STABLE)) //opiates are bad mmkay
 		safe_pressure_min *= 1 + breatheffect
-	
+
 	if(owner.lying)
 		safe_pressure_min *= 0.8
 
@@ -175,14 +155,16 @@
 	// Not enough to breathe
 	if(inhale_efficiency < 1)
 		if(prob(20) && active_breathing)
-			if(inhale_efficiency < 0.8)
+			if(inhale_efficiency < 0.6)
 				owner.emote("gasp")
 			else if(prob(20))
 				to_chat(owner, SPAN_WARNING("It's hard to breathe..."))
-		breath_fail_ratio = 1 - inhale_efficiency
+		breath_fail_ratio = Clamp(0,(1 - inhale_efficiency + breath_fail_ratio)/2,1)
 		failed_inhale = 1
 	else
-		breath_fail_ratio = 0
+		if(breath_fail_ratio && prob(20))
+			to_chat(owner, SPAN_NOTICE("It gets easier to breathe."))
+		breath_fail_ratio = Clamp(0,breath_fail_ratio-0.05,1)
 
 	owner.oxygen_alert = failed_inhale * 2
 
@@ -326,7 +308,7 @@
 		. += "[pick("wheezing", "gurgling")] sounds"
 
 	var/list/breathtype = list()
-	if(get_oxygen_deprivation() > 50)
+	if(owner.getOxyLossPercent() > 50)
 		breathtype += pick("straining","labored")
 	if(owner.shock_stage > 50)
 		breathtype += pick("shallow and rapid")

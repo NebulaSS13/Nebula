@@ -7,6 +7,8 @@
 	name = "sealant tank injector"
 	icon = 'icons/obj/structures/sealant_props.dmi'
 	icon_state = "injector"
+	density = TRUE
+	anchored = TRUE
 
 	var/list/cartridges
 	var/obj/item/sealant_tank/loaded_tank
@@ -18,7 +20,7 @@
 	. = ..()
 
 /obj/structure/sealant_injector/on_update_icon()
-	cut_overlays()
+	..()
 	if(loaded_tank)
 		add_overlay("tank")
 	if(length(cartridges))	
@@ -64,7 +66,7 @@
 		to_chat(user, SPAN_WARNING("There is no tank loaded."))
 		return TRUE
 
-	var/fill_space = Floor(loaded_tank.max_foam_charges - loaded_tank.foam_charges) / 5
+	var/fill_space = FLOOR(loaded_tank.max_foam_charges - loaded_tank.foam_charges) / 5
 	if(fill_space <= 0)
 		to_chat(user, SPAN_WARNING("\The [loaded_tank] is full."))
 		return TRUE

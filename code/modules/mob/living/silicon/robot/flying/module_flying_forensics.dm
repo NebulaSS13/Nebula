@@ -2,14 +2,14 @@
 	name = "forensic drone module"
 	display_name = "Forensics"
 	channels = list("Security" = TRUE)
-	networks = list(NETWORK_SECURITY)
+	camera_channels = list(CAMERA_CHANNEL_SECURITY)
 	software = list(
 		/datum/computer_file/program/suit_sensors,
 		/datum/computer_file/program/digitalwarrant
 	)
-	sprites = list(
-		"Drone" = "drone-sec",
-		"Eyebot" = "eyebot-security"
+	module_sprites = list(
+		"Drone" = 'icons/mob/robots/flying/flying_security.dmi',
+		"Eyebot" = 'icons/mob/robots/flying/eyebot_security.dmi'
 	)
 	equipment = list(
 		/obj/item/forensics/sample_kit/swabs,

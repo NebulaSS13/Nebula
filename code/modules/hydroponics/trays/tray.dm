@@ -5,11 +5,11 @@
 	icon_state = "hydrotray3"
 	density = 1
 	anchored = 1
-	atom_flags = ATOM_FLAG_OPEN_CONTAINER
 	volume = 100
 	construct_state = /decl/machine_construction/default/panel_closed
 	uncreated_component_parts = null
 	stat_immune = 0
+	atom_flags = ATOM_FLAG_OPEN_CONTAINER | ATOM_FLAG_NO_TEMP_CHANGE | ATOM_FLAG_CLIMBABLE | ATOM_FLAG_NO_REACT
 
 	var/mechanical = 1         // Set to 0 to stop it from drawing the alert lights.
 	var/base_name = "tray"
@@ -474,7 +474,7 @@
 		attack_hand(user)
 
 		var/obj/item/storage/plants/S = O
-		for (var/obj/item/chems/food/snacks/grown/G in locate(user.x,user.y,user.z))
+		for (var/obj/item/chems/food/grown/G in locate(user.x,user.y,user.z))
 			if(!S.can_be_inserted(G, user))
 				return
 			S.handle_item_insertion(G, 1)

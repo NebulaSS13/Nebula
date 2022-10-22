@@ -14,7 +14,9 @@
 /decl/slime_colour/dark_blue/handle_uranium_reaction(var/datum/reagents/holder)
 	. = TRUE
 	sleep(5 SECONDS)
-	playsound(get_turf(holder.my_atom), 'sound/effects/phasein.ogg', 100, 1)
-	for(var/mob/living/M in range (get_turf(holder.my_atom), 7))
-		M.bodytemperature -= 140
-		to_chat(M, SPAN_WARNING("You feel a chill!"))
+	var/location = get_turf(holder.get_reaction_loc())
+	if(location)
+		playsound(location, 'sound/effects/phasein.ogg', 100, 1)
+		for(var/mob/living/M in range(location, 7))
+			M.bodytemperature -= 140
+			to_chat(M, SPAN_WARNING("You feel a chill!"))

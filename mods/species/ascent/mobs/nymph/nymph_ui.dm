@@ -1,5 +1,5 @@
 /obj/screen/intent/ascent_nymph
-	icon = 'mods/species/ascent/icons/species/nymph.dmi'
+	icon = 'mods/species/ascent/icons/ui.dmi'
 	icon_state = "intent_devour"
 	screen_loc = ANYMPH_SCREEN_LOC_INTENT
 
@@ -12,7 +12,7 @@
 		icon_state = "intent_devour"
 
 /obj/screen/ascent_nymph
-	icon = 'mods/species/ascent/icons/species/nymph.dmi'
+	icon = 'mods/species/ascent/icons/ui.dmi'
 
 /obj/screen/ascent_nymph/held
 	name = "held item"

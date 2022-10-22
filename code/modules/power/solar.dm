@@ -4,7 +4,7 @@ var/global/solar_gen_rate = 1500
 var/global/list/solars_list = list()
 
 /obj/machinery/power/solar
-	name = "solar panel"
+	name = "basic solar panel"
 	desc = "A solar electrical generator."
 	icon = 'icons/obj/power.dmi'
 	icon_state = "sp_base"
@@ -174,8 +174,8 @@ var/global/list/solars_list = list()
 
 	// On planets, we take fewer steps because the light is mostly up
 	// Also, many planets barely have any spots with enough clear space around
-	if(global.using_map.use_overmap)
-		var/obj/effect/overmap/visitable/sector/exoplanet/E = map_sectors["[z]"]
+	if(isturf(loc))
+		var/obj/effect/overmap/visitable/sector/exoplanet/E = global.overmap_sectors["[loc.z]"]
 		if(istype(E))
 			steps = 5
 
@@ -229,9 +229,10 @@ var/global/list/solars_list = list()
 	if(!anchored && isturf(loc))
 		if(isWrench(W))
 			anchored = 1
-			pixel_x = 0
-			pixel_y = 0
-			pixel_z = 0
+			default_pixel_x = 0
+			default_pixel_y = 0
+			default_pixel_z = 0
+			reset_offsets(0)
 			user.visible_message("<span class='notice'>[user] wrenches the solar assembly into place.</span>")
 			playsound(src.loc, 'sound/items/Ratchet.ogg', 75, 1)
 			return 1
@@ -306,7 +307,7 @@ var/global/list/solars_list = list()
 		M.unset_control()
 	if(connected_tracker)
 		connected_tracker.unset_control()
-	..()
+	return ..()
 
 /obj/machinery/power/solar_control/disconnect_from_network()
 	..()
@@ -392,7 +393,7 @@ var/global/list/solars_list = list()
 
 	t += "<A href='?src=\ref[src];close=1'>Close</A>"
 
-	var/datum/browser/written/popup = new(user, "solar", name)
+	var/datum/browser/written_digital/popup = new(user, "solar", name)
 	popup.set_content(t)
 	popup.open()
 

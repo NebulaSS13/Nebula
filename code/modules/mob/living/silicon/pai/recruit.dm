@@ -41,7 +41,8 @@ var/global/datum/paiController/paiController			// Global handler for pAI candida
 				pai.SetName(candidate.name)
 			pai.real_name = pai.name
 			pai.key = candidate.key
-			pai.chassis = pai.icon_state = global.possible_chassis[candidate.chassis]
+			pai.chassis = candidate.chassis
+			pai.icon = global.possible_chassis[candidate.chassis]
 			var/list/sayverbs = global.possible_say_verbs[candidate.say_verb]
 			pai.speak_statement = sayverbs[1]
 			pai.speak_exclamation = sayverbs[(sayverbs.len>1 ? 2 : sayverbs.len)]
@@ -64,7 +65,7 @@ var/global/datum/paiController/paiController			// Global handler for pAI candida
 
 		switch(option)
 			if("name")
-				t = sanitizeSafe(input("Enter a name for your pAI", "pAI Name", candidate.name) as text, MAX_NAME_LEN)
+				t = sanitize_safe(input("Enter a name for your pAI", "pAI Name", candidate.name) as text, MAX_NAME_LEN)
 				if(t)
 					candidate.name = t
 			if("desc")
@@ -93,7 +94,7 @@ var/global/datum/paiController/paiController			// Global handler for pAI candida
 				candidate.savefile_load(usr)
 				//In case people have saved unsanitized stuff.
 				if(candidate.name)
-					candidate.name = sanitizeSafe(candidate.name, MAX_NAME_LEN)
+					candidate.name = sanitize_safe(candidate.name, MAX_NAME_LEN)
 				if(candidate.description)
 					candidate.description = sanitize(candidate.description)
 				if(candidate.role)
@@ -108,7 +109,7 @@ var/global/datum/paiController/paiController			// Global handler for pAI candida
 			if("submit")
 				if(candidate)
 					candidate.ready = 1
-					for(var/obj/item/paicard/p in world)
+					for(var/obj/item/paicard/p in global.pai_cards)
 						if(p.looking_for_personality == 1)
 							p.alertUpdate()
 				close_browser(usr, "window=paiRecruit")

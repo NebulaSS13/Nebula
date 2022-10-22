@@ -18,7 +18,7 @@
 
 /obj/machinery/destructive_analyzer/Initialize()
 	. = ..()
-	set_extension(src, /datum/extension/network_device, initial_network_id, initial_network_key, NETWORK_CONNECTION_WIRED)
+	set_extension(src, /datum/extension/network_device, initial_network_id, initial_network_key, NETWORK_CONNECTION_STRONG_WIRELESS)
 
 /obj/machinery/destructive_analyzer/modify_mapped_vars(map_hash)
 	..()
@@ -60,7 +60,7 @@
 
 	var/list/dump_matter
 	for(var/mat in cached_materials)
-		var/amt = Floor(cached_materials[mat]/SHEET_MATERIAL_AMOUNT)
+		var/amt = FLOOR(cached_materials[mat]/SHEET_MATERIAL_AMOUNT)
 		if(amt > 0)
 			LAZYSET(dump_matter, mat, amt)
 	if(length(dump_matter))

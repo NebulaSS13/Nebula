@@ -77,6 +77,44 @@
 	construct_state = /decl/machine_construction/default/panel_closed/item_chassis
 	base_type = /obj/machinery/atmospherics/unary/vent_pump/buildable
 
+/obj/machinery/atmospherics/unary/vent_pump/Initialize()
+	if (!id_tag)
+		id_tag = "[sequential_id("obj/machinery")]"
+	if(controlled)
+		var/area/A = get_area(src)
+		if(A && !A.air_vent_names[id_tag])
+			update_name()
+			events_repository.register(/decl/observ/name_set, A, src, .proc/change_area_name)
+	. = ..()
+	air_contents.volume = ATMOS_DEFAULT_VOLUME_PUMP
+	update_sound()
+
+/obj/machinery/atmospherics/unary/vent_pump/proc/change_area_name(var/area/A, var/old_area_name, var/new_area_name)
+	if(get_area(src) != A)
+		return
+	update_name()
+
+/obj/machinery/atmospherics/unary/vent_pump/area_changed(area/old_area, area/new_area)
+	if(old_area)
+		old_area.air_vent_names -= id_tag
+	. = ..()
+	update_name()
+
+/obj/machinery/atmospherics/unary/vent_pump/proc/update_name()
+	var/area/A = get_area(src)
+	if(!A || A == global.space_area || !controlled)
+		SetName("vent pump")
+		return
+	var/index
+	if(A.air_vent_names[id_tag])
+		index = A.air_vent_names.Find(id_tag)
+	else
+		A.air_vent_names[id_tag] = TRUE
+		index = length(A.air_vent_names)
+	var/new_name = "[A.proper_name] vent pump #[index]"
+	A.air_vent_names[id_tag] = new_name
+	SetName(new_name)
+
 /obj/machinery/atmospherics/unary/vent_pump/buildable
 	uncreated_component_parts = null
 
@@ -100,11 +138,6 @@
 	internal_pressure_bound_default = MAX_PUMP_PRESSURE
 	pressure_checks = 2
 	pressure_checks_default = 2
-
-/obj/machinery/atmospherics/unary/vent_pump/Initialize()
-	. = ..()
-	air_contents.volume = ATMOS_DEFAULT_VOLUME_PUMP
-	update_sound()
 
 /obj/machinery/atmospherics/unary/vent_pump/Destroy()
 	QDEL_NULL(sound_token)
@@ -172,7 +205,6 @@
 	//Figure out the target pressure difference
 	var/pressure_delta = get_pressure_delta(environment)
 	var/transfer_moles
-	//src.visible_message("DEBUG >>> [src]: pressure_delta = [pressure_delta]")
 
 	if((environment.temperature || air_contents.temperature) && pressure_delta > 0.5)
 		if(pump_direction) //internal -> external
@@ -219,25 +251,6 @@
 
 /obj/machinery/atmospherics/unary/vent_pump/area_uid()
 	return controlled ? ..() : "NONE"
-
-/obj/machinery/atmospherics/unary/vent_pump/Initialize()
-	if (!id_tag)
-		id_tag = "[sequential_id("obj/machinery")]"
-	if(controlled)
-		var/area/A = get_area(src)
-		if(A && !A.air_vent_names[id_tag])
-			var/new_name = "[A.name] Vent Pump #[A.air_vent_names.len+1]"
-			A.air_vent_names[id_tag] = new_name
-			SetName(new_name)
-			events_repository.register(/decl/observ/name_set, A, src, .proc/change_area_name)
-	. = ..()
-
-/obj/machinery/atmospherics/unary/vent_pump/proc/change_area_name(var/area/A, var/old_area_name, var/new_area_name)
-	if(get_area(src) != A)
-		return
-	var/new_name = replacetext(A.air_vent_names[id_tag], old_area_name, new_area_name)
-	SetName(new_name)
-	A.air_vent_names[id_tag] = new_name
 
 /obj/machinery/atmospherics/unary/vent_pump/proc/purge()
 	pressure_checks &= ~PRESSURE_CHECK_EXTERNAL
@@ -292,7 +305,7 @@
 			"You hear welding.")
 		return 1
 	if(isMultitool(W))
-		var/datum/browser/written/popup = new(user, "Vent Configuration Utility", "[src] Configuration Panel", 600, 200)
+		var/datum/browser/written_digital/popup = new(user, "Vent Configuration Utility", "[src] Configuration Panel", 600, 200)
 		popup.set_content(jointext(get_console_data(),"<br>"))
 		popup.open()
 		return TRUE
@@ -302,7 +315,7 @@
 /obj/machinery/atmospherics/unary/vent_pump/examine(mob/user, distance)
 	. = ..()
 	if(distance <= 1)
-		to_chat(user, "A small gauge in the corner reads [round(last_flow_rate, 0.1)] L/s; [round(last_power_draw)] W")
+		to_chat(user, "A small gauge in the corner reads [round(last_flow_rate, 0.1)] L/s; [round(last_power_draw)] W.")
 	else
 		to_chat(user, "You are too far away to read the gauge.")
 	if(welded)
@@ -552,7 +565,7 @@
 	if(!sound_id)
 		sound_id = "[sequential_id("vent_z[z]")]"
 	if(can_pump())
-		sound_token = play_looping_sound(src, sound_id, 'sound/machines/vent_hum.ogg', 10, range = 7, falloff = 4)
+		sound_token = play_looping_sound(src, sound_id, 'sound/machines/vent_hum.ogg', 3, range = 7, falloff = 4)
 	else
 		QDEL_NULL(sound_token)
 

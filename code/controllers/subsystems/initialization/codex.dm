@@ -4,6 +4,7 @@ SUBSYSTEM_DEF(codex)
 	init_order = SS_INIT_MISC_CODEX
 	var/regex/linkRegex
 
+	var/list/all_entries =       list()
 	var/list/entries_by_path =   list()
 	var/list/entries_by_string = list()
 	var/list/index_file =        list()
@@ -19,29 +20,20 @@ SUBSYSTEM_DEF(codex)
 	// Create general hardcoded entries.
 	for(var/ctype in typesof(/datum/codex_entry))
 		var/datum/codex_entry/centry = ctype
-		if(initial(centry.display_name) || initial(centry.associated_paths) || initial(centry.associated_strings))
+		if(initial(centry.name) || initial(centry.associated_paths) || initial(centry.associated_strings))
 			centry = new centry()
-			for(var/associated_path in centry.associated_paths)
-				entries_by_path[associated_path] = centry
-			for(var/associated_string in centry.associated_strings)
-				add_entry_by_string(associated_string, centry)
-			if(centry.display_name)
-				add_entry_by_string(centry.display_name, centry)
 
 	// Create categorized entries.
 	var/list/categories = decls_repository.get_decls_of_subtype(/decl/codex_category)
 	for(var/ctype in categories)
 		var/decl/codex_category/cat = categories[ctype]
 		if(cat?.name)
-			cat.Initialize()
+			cat.Populate()
 
 	// Create the index file for later use.
-	for(var/thing in SScodex.entries_by_path)
-		var/datum/codex_entry/entry = SScodex.entries_by_path[thing]
-		index_file[entry.display_name] = entry
-	for(var/thing in SScodex.entries_by_string)
-		var/datum/codex_entry/entry = SScodex.entries_by_string[thing]
-		index_file[entry.display_name] = entry
+	for(var/thing in SScodex.all_entries)
+		var/datum/codex_entry/entry = thing
+		index_file[entry.name] = entry
 	index_file = sortTim(index_file, /proc/cmp_text_asc)
 	. = ..()
 
@@ -68,9 +60,6 @@ SUBSYSTEM_DEF(codex)
 		return entries_by_path[entry]
 	else if(entries_by_string[lowertext(entry)])
 		return entries_by_string[lowertext(entry)]
-
-/datum/controller/subsystem/codex/proc/add_entry_by_string(var/string, var/entry)
-	entries_by_string[lowertext(trim(string))] = entry
 
 /datum/controller/subsystem/codex/proc/get_entry_by_string(var/string)
 	return entries_by_string[lowertext(trim(string))]
@@ -101,7 +90,7 @@ SUBSYSTEM_DEF(codex)
 			results = list()
 			for(var/entry_title in entries_by_string)
 				var/datum/codex_entry/entry = entries_by_string[entry_title]
-				if(findtext(entry.display_name, searching) || \
+				if(findtext(entry.name, searching) || \
 				 findtext(entry.lore_text, searching) || \
 				 findtext(entry.mechanics_text, searching) || \
 				 findtext(entry.antag_text, searching))

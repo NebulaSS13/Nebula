@@ -56,14 +56,22 @@
 
 /obj/structure/proc/create_dismantled_products(var/turf/T)
 	SHOULD_CALL_PARENT(TRUE)
-	if(parts_type)
-		new parts_type(T, (material && material.type), (reinf_material && reinf_material.type))
+	if(parts_type && !ispath(parts_type, /obj/item/stack))
+		for(var/i = 1 to max(parts_amount, 1))
+			new parts_type(T, (material && material.type), (reinf_material && reinf_material.type))
 	else
 		for(var/mat in matter)
 			var/decl/material/M = GET_DECL(mat)
-			var/placing = Floor((matter[mat] / SHEET_MATERIAL_AMOUNT) * 0.75)
+			var/placing
+			if(isnull(parts_amount))
+				placing = (matter[mat] / SHEET_MATERIAL_AMOUNT) * 0.75
+				if(parts_type)
+					placing *= atom_info_repository.get_matter_multiplier_for(parts_type, mat, placing)
+				placing = FLOOR(placing)
+			else
+				placing = parts_amount
 			if(placing > 0)
-				M.place_dismantled_product(T, amount = placing)
+				M.place_dismantled_product(T, FALSE, placing, parts_type)
 	matter = null
 	material = null
 	reinf_material = null
@@ -73,6 +81,7 @@
 	if(!dismantled)
 		dismantled = TRUE
 		create_dismantled_products(get_turf(src))
+		dump_contents()
 		if(!QDELETED(src))
 			qdel(src)
 	. = TRUE

@@ -21,8 +21,7 @@
 	var/failed = 0
 	var/list/found_cables = list()
 
-	//there is a cable list, but for testing purposes we search every cable in the world
-	for(var/obj/structure/cable/C in world)
+	for(var/obj/structure/cable/C in global.cable_list)
 		if(C in found_cables)
 			continue
 		var/list/to_search = list(C)
@@ -62,7 +61,7 @@
 				continue
 			if(failure)
 				failure = "[failure]\n"
-			failure = "[failure]Duplicated APCs in area: [A.name]. #1: [log_info_line(found_apc)]  #2: [log_info_line(APC)]"
+			failure = "[failure]Duplicated APCs in area: [A.proper_name]. #1: [log_info_line(found_apc)]  #2: [log_info_line(APC)]"
 
 	if(failure)
 		fail(failure)
@@ -72,18 +71,37 @@
 
 /datum/unit_test/area_power_tally_accuracy
 	name = "POWER: All areas must have accurate power use values."
+	var/list/channel_names = list("equip", "light", "environ")
+/obj/machinery/test_machine
+	power_channel = EQUIP
+	idle_power_usage = 1000
+	use_power = POWER_USE_IDLE
+
+/datum/unit_test/area_power_tally_accuracy/proc/check_power(var/area/A)
+	var/list/old_values = list(A.used_equip, A.used_light, A.used_environ)
+	A.retally_power()
+	var/list/new_values = list(A.used_equip, A.used_light, A.used_environ)
+	for(var/i in 1 to length(old_values))
+		if(abs(old_values[i] - new_values[i]) > 1) // Round because there can in fact be roundoff error here apparently.
+			. = TRUE
+			log_bad("The area [A.proper_name] had improper power use values on the [channel_names[i]] channel: was [old_values[i]] but should be [new_values[i]].")
+			log_bad("This area contained the following power-using machines on this channel:")
+			for(var/obj/machinery/machine in A)
+				if(machine.power_channel == i)
+					log_bad(log_info_line(machine) + " with power use [machine.get_power_usage()]")
 
 /datum/unit_test/area_power_tally_accuracy/start_test()
 	var/failed = FALSE
-	var/list/channel_names = list("equip", "light", "environ")
+
 	for(var/area/A in global.areas)
-		var/list/old_values = list(A.used_equip, A.used_light, A.used_environ)
-		A.retally_power()
-		var/list/new_values = list(A.used_equip, A.used_light, A.used_environ)
-		for(var/i in 1 to length(old_values))
-			if(abs(old_values[i] - new_values[i]) > 1) // Round because there can in fact be roundoff error here apparently.
-				failed = TRUE
-				log_bad("The area [A.name] had improper power use values on the [channel_names[i]] channel: was [old_values[i]] but should be [new_values[i]].")
+		var/area_failed = check_power(A)
+		if(!area_failed) // spawn a "hand-made" machine and check again
+			var/turf/T = locate() in A.contents
+			if(T)
+				var/obj/machinery/test_machine/machine = new (T)
+				area_failed = check_power(A)
+				qdel(machine)
+		failed |= area_failed
 
 	if(failed)
 		fail("At least one area had improper power use values")

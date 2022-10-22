@@ -173,7 +173,7 @@ Class Procs:
 			for(var/check_atom in T.contents)
 				var/atom/checking = check_atom
 				if(checking.simulated)
-					QUEUE_TEMPERATURE_ATOMS(checking)
+					queue_temperature_atoms(checking)
 			CHECK_TICK
 
 /zone/proc/handle_condensation()
@@ -181,7 +181,7 @@ Class Procs:
 	condensing = TRUE
 	for(var/g in air.gas)
 		var/decl/material/mat = GET_DECL(g)
-		if(air.temperature <= mat.gas_condensation_point)
+		if(!isnull(mat.gas_condensation_point) && (air.temperature <= mat.gas_condensation_point))
 			var/condensation_area = air.group_multiplier / length(air.gas)
 			while(condensation_area > 0 && length(contents))
 				condensation_area--

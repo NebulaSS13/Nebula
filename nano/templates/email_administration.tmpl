@@ -63,7 +63,6 @@
 		</div>
 		<div class="itemContent">
 			{{:helper.link(data.cur_suspended ? 'Unsuspend' : 'Suspend', null, {'ban' : data.cur_uid})}}
-			{{:helper.link('Set Password', null, {'changepass' : data.cur_uid})}}
 			{{:helper.link('Return', null, {'back' : 1})}}
 		</div>
 	</div>
@@ -92,15 +91,10 @@
 {{else}}
 	<h2>Welcome to Email Administration System</h2>
 	<i>SECURE SYSTEM - Have your identification ready</i><br><br>
-	{{:helper.link('Create New Account', null, {'newaccount' : 1})}}<br><br>
 	<b>Select account which you wish to administrate:</b>
 	<table>
 	{{for data.accounts}}
-		<tr><td>{{:helper.link(value.login, null, {'viewaccount' : value.uid})}}
+		<tr><td>{{:helper.link(value.login, null, {'viewaccount' : value.login})}}
 	{{/for}}
 	</table>
-{{/if}}
-{{if data.terminal}}
-<h1>MANUAL SYSTEM ACCESS</h1>
-{{:helper.link('ACTIVATE TERMINAL', null, {'PC_terminal' : 1})}}
 {{/if}}

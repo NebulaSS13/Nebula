@@ -9,7 +9,7 @@
 /turf/simulated/floor/tiled,
 /area/space)
 "e" = (
-/obj/effect/landmark/latejoin,
+/obj/abstract/landmark/latejoin,
 /turf/simulated/floor/tiled,
 /area/space)
 

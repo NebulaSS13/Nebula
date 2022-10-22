@@ -12,6 +12,7 @@
 	volume = 60
 	w_class = ITEM_SIZE_SMALL
 	atom_flags = ATOM_FLAG_OPEN_CONTAINER
+	item_flags = ITEM_FLAG_HOLLOW
 	unacidable = 1 //glass doesn't dissolve in acid
 
 	drop_sound = 'sound/foley/bottledrop1.ogg'
@@ -43,7 +44,7 @@
 	. = ..()
 	if(distance > 2)
 		return
-	
+
 	if(reagents?.total_volume)
 		to_chat(user, "<span class='notice'>It contains [reagents.total_volume] units of liquid.</span>")
 	else
@@ -115,7 +116,8 @@
 	amount_per_transfer_from_this = 20
 	possible_transfer_amounts = @"[10,20,30,60,120,150,180]"
 	volume = 180
-	atom_flags = ATOM_FLAG_OPEN_CONTAINER | ATOM_FLAG_SHOW_REAGENT_NAME
+	atom_flags = ATOM_FLAG_OPEN_CONTAINER
+	show_reagent_name = TRUE
 	unacidable = 0
 	material = /decl/material/solid/plastic
 	material_force_multiplier = 0.2

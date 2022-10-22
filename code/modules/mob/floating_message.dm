@@ -7,6 +7,10 @@ var/global/list/floating_chat_colors = list()
 #define CHAT_MESSAGE_LIFESPAN 5 SECONDS
 /// How long the chat message's end of life fading animation will occur for
 #define CHAT_MESSAGE_EOL_FADE 0.7 SECONDS
+/// Max width of chat message in pixels
+#define CHAT_MESSAGE_WIDTH 128
+/// Max width of chat message in pixels
+#define CHAT_MESSAGE_HEIGHT 64
 
 /atom/movable
 	var/list/stored_chat_text
@@ -21,22 +25,25 @@ var/global/list/floating_chat_colors = list()
 	var/static/regex/html_metachars = new(@"&[A-Za-z]{1,7};", "g")
 	message = replacetext(message, html_metachars, "")
 
-	var/style	//additional style params for the message
+	//additional style params for the message
+	var/style
 	var/fontsize = 7
+	var/limit = 120
+
 	if(small)
 		fontsize = 6
-	var/limit = 50
+
 	if(copytext_char(message, length_char(message) - 1) == "!!")
 		fontsize = 8
-		limit = 30
+		limit = 60
 		style += "font-weight: bold;"
 
 	if(length_char(message) > limit)
 		message = "[copytext_char(message, 1, limit)]..."
 
-	if(!floating_chat_colors[name])
-		floating_chat_colors[name] = get_random_colour(0, 160, 230)
-	style += "color: [floating_chat_colors[name]];"
+	if(!global.floating_chat_colors[name])
+		global.floating_chat_colors[name] = get_random_colour(0, 160, 230)
+	style += "color: [global.floating_chat_colors[name]];"
 
 	// create 2 messages, one that appears if you know the language, and one that appears when you don't know the language
 	var/image/understood = generate_floating_text(src, capitalize(message), style, fontsize, duration, show_to)
@@ -50,12 +57,12 @@ var/global/list/floating_chat_colors = list()
 				C.images += gibberish
 
 /proc/generate_floating_text(atom/movable/holder, message, style, size, duration, show_to)
-	var/image/I = image(null, holder)
+	var/image/I = image(null, get_atom_on_turf(holder))
 	I.plane = HUD_PLANE
 	I.layer = HUD_ABOVE_ITEM_LAYER
 	I.alpha = 0
-	I.maptext_width = 96
-	I.maptext_height = 64
+	I.maptext_width = CHAT_MESSAGE_WIDTH
+	I.maptext_height = CHAT_MESSAGE_HEIGHT
 	I.appearance_flags = APPEARANCE_UI_IGNORE_ALPHA | KEEP_APART
 	I.pixel_w = -round(I.maptext_width/2) + 16
 
@@ -63,8 +70,11 @@ var/global/list/floating_chat_colors = list()
 	I.maptext = "<center><span style=\"[style]\">[message]</span></center>"
 	animate(I, CHAT_MESSAGE_SPAWN_TIME, alpha = 255, pixel_z = 16)
 
+	var/move_up_z = 10
 	for(var/image/old in holder.stored_chat_text)
-		animate(old, CHAT_MESSAGE_SPAWN_TIME, pixel_z = old.pixel_z + 8)
+		var/pixel_z_new = old.pixel_z + move_up_z
+		animate(old, CHAT_MESSAGE_SPAWN_TIME, pixel_z = pixel_z_new)
+
 	LAZYADD(holder.stored_chat_text, I)
 
 	addtimer(CALLBACK(GLOBAL_PROC, .proc/remove_floating_text, holder, I), duration)
@@ -73,9 +83,11 @@ var/global/list/floating_chat_colors = list()
 	return I
 
 /proc/remove_floating_text(atom/movable/holder, image/I)
-	animate(I, CHAT_MESSAGE_EOL_FADE, pixel_z = I.pixel_z + 10, alpha = 0, flags = ANIMATION_PARALLEL)
+	animate(I, CHAT_MESSAGE_EOL_FADE, pixel_z = I.pixel_z + 12, alpha = 0, flags = ANIMATION_PARALLEL)
 	LAZYREMOVE(holder.stored_chat_text, I)
 
 #undef CHAT_MESSAGE_SPAWN_TIME
 #undef CHAT_MESSAGE_LIFESPAN
 #undef CHAT_MESSAGE_EOL_FADE
+#undef CHAT_MESSAGE_WIDTH
+#undef CHAT_MESSAGE_HEIGHT

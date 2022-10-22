@@ -5,16 +5,12 @@ SUBSYSTEM_DEF(persistence)
 
 	var/elevator_fall_path = "data/elevator_falls_tracking.txt"
 	var/elevator_fall_shifts = -1 // This is snowflake, but oh well.
-
 	var/list/tracking_values = list()
-	var/list/persistence_datums = list()
 
 /datum/controller/subsystem/persistence/Initialize()
 	. = ..()
-	for(var/thing in subtypesof(/datum/persistent))
-		var/datum/persistent/P = new thing
-		persistence_datums[thing] = P
-		P.Initialize()
+
+	decls_repository.get_decls_of_subtype(/decl/persistence_handler) // Initialize()s persistence categories.
 
 	// Begin snowflake.
 	var/elevator_file = safe_file2text(elevator_fall_path, FALSE)
@@ -28,8 +24,9 @@ SUBSYSTEM_DEF(persistence)
 	// End snowflake.
 
 /datum/controller/subsystem/persistence/Shutdown()
-	for(var/thing in persistence_datums)
-		var/datum/persistent/P = persistence_datums[thing]
+	var/list/all_persistence_datums = decls_repository.get_decls_of_subtype(/decl/persistence_handler)
+	for(var/thing in all_persistence_datums)
+		var/decl/persistence_handler/P = all_persistence_datums[thing]
 		P.Shutdown()
 
 	// Refer to snowflake above.
@@ -68,11 +65,13 @@ SUBSYSTEM_DEF(persistence)
 
 	var/list/dat = list("<table width = '100%'>")
 	var/can_modify = check_rights(R_ADMIN, 0, user)
-	for(var/thing in persistence_datums)
-		var/datum/persistent/P = persistence_datums[thing]
+	var/list/all_persistence_datums = decls_repository.get_decls_of_subtype(/decl/persistence_handler)
+	for(var/thing in all_persistence_datums)
+		var/decl/persistence_handler/P = all_persistence_datums[thing]
 		if(P.has_admin_data)
 			dat += P.GetAdminSummary(user, can_modify)
 	dat += "</table>"
+
 	var/datum/browser/popup = new(user, "admin_persistence", "Persistence Data")
 	popup.set_content(jointext(dat, null))
 	popup.open()

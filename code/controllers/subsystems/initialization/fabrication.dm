@@ -11,7 +11,7 @@ SUBSYSTEM_DEF(fabrication)
 	var/list/recipes_by_product_type =     list()
 	var/list/fields_by_id =                list()
 
-	// Fabricators who want their initial recipies
+	// Weakrefs to fabricators who want their initial recipies
 	var/list/fabricators_to_init =         list()
 	// These should be removed after rewriting crafting to respect init order.
 	var/list/crafting_recipes_to_init = list()
@@ -41,12 +41,16 @@ SUBSYSTEM_DEF(fabrication)
 		if(ispath(handler.begins_with_object_type))
 			LAZYDISTINCTADD(crafting_procedures_by_type[handler.begins_with_object_type], handler)
 
+	for(var/weakref/weak_fab in fabricators_to_init)
+		var/obj/machinery/fabricator/fab = weak_fab.resolve()
+		fab?.refresh_design_cache()
+	fabricators_to_init.Cut()
+
 	for(var/datum/stack_recipe/recipe in crafting_recipes_to_init)
 		recipe.InitializeMaterials()
 	crafting_recipes_to_init.Cut()
 
 	post_recipe_init = TRUE
-	init_rpd_lists()
 
 	. = ..()
 
@@ -95,6 +99,8 @@ SUBSYSTEM_DEF(fabrication)
 	. = crafting_procedures_by_type[_type]
 
 /datum/controller/subsystem/fabrication/proc/try_craft_with(var/obj/item/target, var/obj/item/thing, var/mob/user)
+	if(QDELETED(target) || QDELETED(thing) || QDELETED(user))
+		return
 	for(var/decl/crafting_stage/initial_stage in SSfabrication.find_crafting_recipes(target.type))
 		if(initial_stage.can_begin_with(target) && initial_stage.is_appropriate_tool(thing))
 			var/obj/item/crafting_holder/H = new /obj/item/crafting_holder(get_turf(target), initial_stage, target, thing, user)
@@ -102,3 +108,6 @@ SUBSYSTEM_DEF(fabrication)
 				return H
 			else
 				qdel(H)
+
+/datum/controller/subsystem/fabrication/proc/queue_design_cache_refresh(var/obj/machinery/fabricator/fab)
+	fabricators_to_init |= weakref(fab)

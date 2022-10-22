@@ -31,8 +31,10 @@
 		/decl/emote/exertion/biological/breath,
 		/decl/emote/exertion/biological/pant
 	)
+	var/blood_color
+	
+/decl/species/alium/Initialize()
 
-/decl/species/alium/New()
 	//Coloring
 	blood_color = RANDOM_RGB
 	flesh_color = RANDOM_RGB
@@ -97,7 +99,12 @@
 	if(prob(5))
 		species_flags |= SPECIES_FLAG_NO_PAIN
 
-	..()
+	. = ..()
+
+/decl/species/alium/get_blood_color(mob/living/carbon/human/H)
+	if(istype(H) && H.isSynthetic())
+		return ..()
+	return blood_color
 
 /decl/species/alium/proc/adapt_to_atmosphere(var/datum/gas_mixture/atmosphere)
 	var/temp_comfort_shift = atmosphere.temperature - body_temperature
@@ -163,7 +170,7 @@
 	to_chat(user, "You can't speak any other languages by default. You can use translator implant that spawns on top of this monolith - it will give you knowledge of any language if you hear it enough times.")
 	var/mob/living/carbon/human/H = user
 	new /obj/item/implanter/translator(get_turf(src))
-	H.set_species(SPECIES_ALIEN)
+	H.change_species(SPECIES_ALIEN)
 	var/decl/cultural_info/culture = H.get_cultural_value(TAG_CULTURE)
 	H.fully_replace_character_name(culture.get_random_name(H, H.gender))
 	H.rename_self("Humanoid Alien", 1)

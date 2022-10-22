@@ -1,6 +1,6 @@
 
 /datum/extension/network_device/broadcaster/router
-	connection_type = NETWORK_CONNECTION_WIRED
+	connection_type = NETWORK_CONNECTION_STRONG_WIRELESS
 
 /datum/extension/network_device/broadcaster/router/New(datum/holder, n_id, n_key, c_type)
 	..()
@@ -12,6 +12,7 @@
 		net = new(network_id)
 	if(!net.router)
 		net.set_router(src)
+		SSnetworking.process_reconnections(network_id)
 
 /datum/extension/network_device/broadcaster/router/proc/is_router()
 	var/datum/computer_network/net = SSnetworking.networks[network_id]

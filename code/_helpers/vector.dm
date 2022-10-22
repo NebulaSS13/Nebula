@@ -21,10 +21,10 @@ increment()
 
 return_angle()
 	Returns the direction (angle in degrees) the object is travelling in.
-	* North = 90°
-	* East  = 0°
-	* South = -90°
-	* West  = 180°
+	* North = 90Â°
+	* East  = 0Â°
+	* South = -90Â°
+	* West  = 180Â°
 
 return_hypotenuse()
 	Returns the distance of travel for each step of the vector, relative to each full step of movement. 1 is a full turf 
@@ -76,9 +76,9 @@ return_location()
 
 	// and some rounding to stop the increments jumping whole turfs - because byond favours certain angles
 	if(angle > -135 && angle < 45)
-		angle = Ceiling(angle)
+		angle = CEILING(angle)
 	else
-		angle = Floor(angle)
+		angle = FLOOR(angle)
 
 	// calculate the offset per increment step
 	if(abs(angle) in list(0, 45, 90, 135, 180))		// check if the angle is a cardinal
@@ -112,11 +112,11 @@ return_location()
 /datum/plot_vector/proc/return_location(var/datum/vector_loc/data)
 	if(!data)
 		data = new()
-	data.loc = locate(round(loc_x / world.icon_size, 1), round(loc_y / world.icon_size, 1), loc_z)
-	if(!data.loc)
+	data.turf = locate(round(loc_x / world.icon_size, 1), round(loc_y / world.icon_size, 1), loc_z)
+	if(!data.turf)
 		return
-	data.pixel_x = loc_x - (data.loc.x * world.icon_size)
-	data.pixel_y = loc_y - (data.loc.y * world.icon_size)
+	data.pixel_x = loc_x - (data.turf.x * world.icon_size)
+	data.pixel_y = loc_y - (data.turf.y * world.icon_size)
 	return data
 
 /* 
@@ -127,9 +127,9 @@ return_turf()
 	Returns the turf the object should be currently located in.
 */
 /datum/vector_loc
-	var/turf/loc
+	var/turf/turf
 	var/pixel_x
 	var/pixel_y
 
 /datum/vector_loc/proc/return_turf()
-	return loc
+	return turf

@@ -36,7 +36,6 @@
 	var/mob/living/original	//TODO: remove.not used in any meaningful way ~Carn. First I'll need to tweak the way silicon-mobs handle minds.
 	var/active = 0
 
-	var/list/known_connections //list of known (RNG) relations between people
 	var/gen_relations_info
 
 	var/assigned_role
@@ -47,7 +46,6 @@
 	var/datum/job/assigned_job
 
 	var/list/datum/objective/objectives = list()
-	var/list/datum/objective/special_verbs = list()
 
 	var/has_been_rev = 0//Tracks if this mind has been a rev or not
 
@@ -62,7 +60,8 @@
 	//put this here for easier tracking ingame
 	var/datum/money_account/initial_account
 
-	var/list/initial_email_login = list("login" = "", "password" = "")
+	var/list/initial_account_login = list("login" = "", "password" = "")
+	var/account_network	// Network id of the network the account was created on.
 
 /datum/mind/New(var/key)
 	src.key = key
@@ -70,8 +69,18 @@
 
 /datum/mind/Destroy()
 	QDEL_NULL_LIST(memories)
+	QDEL_NULL_LIST(objectives)
+	QDEL_NULL(changeling)
 	SSticker.minds -= src
 	. = ..()
+
+/datum/mind/proc/handle_mob_deletion(mob/living/deleted_mob)
+	if (current == deleted_mob)
+		current.spellremove()
+		current = null
+
+	if (original == deleted_mob)
+		original = null
 
 /datum/mind/proc/transfer_to(mob/living/new_character)
 	if(!istype(new_character))
@@ -310,7 +319,7 @@
 					new_objective = new objective_path
 					new_objective.owner = src
 					new_objective:target = M.mind
-					new_objective.explanation_text = "[objective_type] [M.real_name], the [M.mind.get_special_role_name() || M.mind.assigned_role]."
+					new_objective.explanation_text = "[objective_type] [M.real_name], the [M.mind.get_special_role_name(M.mind.assigned_role)]."
 
 			if ("hijack")
 				new_objective = new /datum/objective/hijack
@@ -382,7 +391,7 @@
 		switch(href_list["implant"])
 			if("remove")
 				for(var/obj/item/implant/loyalty/I in H.contents)
-					for(var/obj/item/organ/external/organs in H.organs)
+					for(var/obj/item/organ/external/organs in H.get_external_organs())
 						if(I in organs.implants)
 							qdel(I)
 							break
@@ -493,7 +502,6 @@
 	changeling =            null
 	initial_account =       null
 	objectives =            list()
-	special_verbs =         list()
 	has_been_rev =          0
 	rev_cooldown =          0
 	brigged_since =         -1
@@ -520,12 +528,12 @@
 //AI
 /mob/living/silicon/ai/mind_initialize()
 	..()
-	mind.assigned_role = "AI"
+	mind.assigned_role = ASSIGNMENT_COMPUTER
 
 //BORG
 /mob/living/silicon/robot/mind_initialize()
 	..()
-	mind.assigned_role = "Robot"
+	mind.assigned_role = ASSIGNMENT_ROBOT
 
 //PAI
 /mob/living/silicon/pai/mind_initialize()
@@ -561,7 +569,11 @@
 	mind.assigned_role = "Juggernaut"
 	mind.assigned_special_role = "Cultist"
 
-/datum/mind/proc/get_special_role_name()
-	if(assigned_special_role)
-		var/decl/special_role/special_role = ispath(assigned_special_role, /decl/special_role) && GET_DECL(assigned_special_role)
-		return special_role?.name || assigned_special_role
+/datum/mind/proc/get_special_role_name(var/default_role_name)
+	if(istext(assigned_special_role))
+		return assigned_special_role
+	if(ispath(assigned_special_role, /decl/special_role))
+		var/decl/special_role/special_role = GET_DECL(assigned_special_role)
+		if(istype(special_role))
+			return special_role.name
+	return default_role_name

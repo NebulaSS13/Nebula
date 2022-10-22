@@ -135,9 +135,9 @@
 	visible_message("<span class='warning'>[src] is trying to inject [H]!</span>")
 	if(declare_treatment)
 		var/area/location = get_area(src)
-		broadcast_medical_hud_message("[src] is treating <b>[H]</b> in <b>[location]</b>", src)
+		broadcast_medical_hud_message("[src] is treating <b>[H]</b> in <b>[location.proper_name]</b>", src)
 	busy = 1
-	update_icons()
+	update_icon()
 	if(do_mob(src, H, 30))
 		if(t == 1)
 			reagent_glass.reagents.trans_to_mob(H, injection_amount, CHEM_INJECT)
@@ -145,12 +145,12 @@
 			H.reagents.add_reagent(t, injection_amount)
 		visible_message("<span class='warning'>[src] injects [H] with the syringe!</span>")
 	busy = 0
-	update_icons()
+	update_icon()
 
-/mob/living/bot/medbot/update_icons()
-	overlays.Cut()
+/mob/living/bot/medbot/on_update_icon()
+	..()
 	if(skin)
-		overlays += image('icons/mob/bot/medibot_skins.dmi', "medskin_[skin]")
+		add_overlay(image('icons/mob/bot/medibot_skins.dmi', "medskin_[skin]"))
 	if(busy)
 		icon_state = "medibots"
 	else
@@ -173,10 +173,9 @@
 	else
 		..()
 
-/mob/living/bot/medbot/attack_hand(var/mob/user)
-	var/mob/living/carbon/human/H = user
-	if(H.a_intent == I_DISARM && !is_tipped)
-		H.visible_message(SPAN_DANGER("[H] begins tipping over [src]."), SPAN_WARNING("You begin tipping over [src]..."))
+/mob/living/bot/medbot/default_disarm_interaction(mob/user)
+	if(!is_tipped)
+		user.visible_message(SPAN_DANGER("\The [user] begins tipping over [src]."), SPAN_WARNING("You begin tipping over [src]..."))
 
 		if(world.time > last_tipping_action_voice + 15 SECONDS && vocal)
 			last_tipping_action_voice = world.time // message for tipping happens when we start interacting, message for righting comes after finishing
@@ -184,16 +183,18 @@
 			var/message = pick(messagevoice)
 			say(message)
 			playsound(src, messagevoice[message], 70, FALSE)
+		if(do_after(user, 3 SECONDS, target=src))
+			tip_over(user)
+		return TRUE
+	. = ..()
 
-		if(do_after(H, 3 SECONDS, target=src))
-			tip_over(H)
-
-	else if(H.a_intent == I_HELP && is_tipped)
-		H.visible_message(SPAN_NOTICE("[H] begins righting [src]."), SPAN_NOTICE("You begin righting [src]..."))
-		if(do_after(H, 3 SECONDS, target=src))
-			set_right(H)
-	else
-		Interact(user)
+/mob/living/bot/medbot/default_help_interaction(mob/user)
+	if(is_tipped)
+		user.visible_message(SPAN_NOTICE("\The [user] begins righting [src]."), SPAN_NOTICE("You begin righting [src]..."))
+		if(do_after(user, 3 SECONDS, target=src))
+			set_right(user)
+		return TRUE
+	. = ..()
 
 /mob/living/bot/medbot/GetInteractTitle()
 	. = "<head><title>Medibot v1.0 controls</title></head>"
@@ -281,7 +282,7 @@
 		busy = 0
 		emagged = 1
 		on = 1
-		update_icons()
+		update_icon()
 		. = 1
 
 /mob/living/bot/medbot/explode()
@@ -385,7 +386,7 @@
 		if(MEDBOT_PANIC_ENDING)
 			messagevoice = list("Is this the end?" = 'sound/voice/medbot/is_this_the_end.ogg', "Nooo!" = 'sound/voice/medbot/nooo.ogg')
 		if(MEDBOT_PANIC_END)
-			broadcast_medical_hud_message("PSYCH ALERT: Crewmember [tipper_name] recorded displaying antisocial tendencies torturing bots in [get_area(src)]. Please schedule psych evaluation.", src)
+			broadcast_medical_hud_message("PSYCH ALERT: Crewmember [tipper_name] recorded displaying antisocial tendencies torturing bots in [get_area_name(src)]. Please schedule psych evaluation.", src)
 			set_right() // strong independent medbot
 
 	if(messagevoice && vocal)

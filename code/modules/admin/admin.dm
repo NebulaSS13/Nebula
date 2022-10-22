@@ -175,27 +175,25 @@ var/global/floorIsLava = 0
 					body+="</td>"
 				body += "</tr></table>"
 
-			body += {"<br><br>
-				<b>Rudimentary transformation:</b><font size=2><br>These transformations only create a new mob type and copy stuff over. They do not take into account MMIs and similar mob-specific things. The buttons in 'Transformations' are preferred, when possible.</font><br>
-				<A href='?src=\ref[src];simplemake=observer;mob=\ref[M]'>Observer</A> |
-				\[ Xenos: <A href='?src=\ref[src];simplemake=larva;mob=\ref[M]'>Larva</A>
-				\[ Crew: <A href='?src=\ref[src];simplemake=human;mob=\ref[M]'>Human</A>
-				\[ slime: <A href='?src=\ref[src];simplemake=slime;mob=\ref[M]'>Baby</A>,
-				<A href='?src=\ref[src];simplemake=adultslime;mob=\ref[M]'>Adult</A> \]
-				<A href='?src=\ref[src];simplemake=monkey;mob=\ref[M]'>Monkey</A> |
-				<A href='?src=\ref[src];simplemake=robot;mob=\ref[M]'>Cyborg</A> |
-				<A href='?src=\ref[src];simplemake=cat;mob=\ref[M]'>Cat</A> |
-				<A href='?src=\ref[src];simplemake=runtime;mob=\ref[M]'>Runtime</A> |
-				<A href='?src=\ref[src];simplemake=corgi;mob=\ref[M]'>Corgi</A> |
-				<A href='?src=\ref[src];simplemake=ian;mob=\ref[M]'>Ian</A> |
-				<A href='?src=\ref[src];simplemake=crab;mob=\ref[M]'>Crab</A> |
-				<A href='?src=\ref[src];simplemake=coffee;mob=\ref[M]'>Coffee</A> |
-				\[ Construct: <A href='?src=\ref[src];simplemake=constructarmoured;mob=\ref[M]'>Armoured</A> ,
-				<A href='?src=\ref[src];simplemake=constructbuilder;mob=\ref[M]'>Builder</A> ,
-				<A href='?src=\ref[src];simplemake=constructwraith;mob=\ref[M]'>Wraith</A> \]
-				<A href='?src=\ref[src];simplemake=shade;mob=\ref[M]'>Shade</A>
-				<br>
-			"}
+			body += "<br><br><b>Rudimentary transformation:</b><font size=2><br>These transformations only create a new mob type and copy stuff over. They do not take into account MMIs and similar mob-specific things. The buttons in 'Transformations' are preferred, when possible.</font><br>"
+
+			var/list/href_transform_strings = list()
+			for(var/href_string in global.href_to_mob_type)
+				var/transform_data = global.href_to_mob_type[href_string]
+
+				// It's a category - iterate the contents.
+				if(islist(transform_data))
+					var/list/href_subcat_strings = list()
+					for(var/transform_string in transform_data)
+						href_subcat_strings += "<a href='?src=\ref[src];simplemake=[replacetext(transform_string, " ", "_")];mob=\ref[M]'>[transform_string]</a>"
+					href_transform_strings += "\[ <b>[href_string]:</b> [jointext(href_subcat_strings, " | ")] \]"
+
+				 // It's a single mob type - link it directly.
+				else if(ispath(transform_data))
+					href_transform_strings += "<a href='?src=\ref[src];simplemake=[replacetext(href_string, " ", "_")];mob=\ref[M]'>[href_string]</a>"
+
+			body += jointext(href_transform_strings, " | ")
+
 	body += {"<br><br>
 			<b>Other actions:</b>
 			<br>
@@ -207,7 +205,7 @@ var/global/floorIsLava = 0
 	var/list/language_types = decls_repository.get_decls_of_subtype(/decl/language)
 	for(var/k in language_types)
 		var/decl/language/L = language_types[k]
-		if(!(L.flags & INNATE))
+		if(!(L.flags & LANG_FLAG_INNATE))
 			if(!f)
 				body += " | "
 			else
@@ -246,7 +244,7 @@ var/global/floorIsLava = 0
 	dat += "<B>Player notes</B><HR>"
 	var/savefile/S=new("data/player_notes.sav")
 	var/list/note_keys
-	S >> note_keys
+	from_file(S, note_keys)
 
 	if(filter_term)
 		for(var/t in note_keys)
@@ -273,7 +271,7 @@ var/global/floorIsLava = 0
 /datum/admins/proc/player_has_info(var/key as text)
 	var/savefile/info = new("data/player_saves/[copytext(key, 1, 2)]/[key]/info.sav")
 	var/list/infos
-	info >> infos
+	from_file(info, infos)
 	if(!infos || !infos.len) return 0
 	else return 1
 
@@ -299,7 +297,7 @@ var/global/floorIsLava = 0
 
 	var/savefile/info = new("data/player_saves/[copytext(key, 1, 2)]/[key]/info.sav")
 	var/list/infos
-	info >> infos
+	from_file(info, infos)
 	if(!infos)
 		dat += "No information found on the given key.<br>"
 	else
@@ -317,7 +315,8 @@ var/global/floorIsLava = 0
 			if(I.author == usr.key || I.author == "Adminbot" || ishost(usr))
 				dat += "<A href='?src=\ref[src];remove_player_info=[key];remove_index=[i]'>Remove</A>"
 			dat += "<hr></li>"
-		if(update_file) info << infos
+		if(update_file)
+			direct_output(info, infos)
 
 	dat += "</ul><br><A href='?src=\ref[src];add_player_info=[key]'>Add Comment</A><br>"
 
@@ -1317,7 +1316,7 @@ var/global/floorIsLava = 0
 		return
 
 	if(istype(H))
-		H.regenerate_icons()
+		H.refresh_visible_overlays()
 
 /proc/get_options_bar(whom, detail = 2, name = 0, link = 1, highlight_special = 1, var/datum/ticket/ticket = null)
 	if(!whom)
@@ -1386,6 +1385,7 @@ var/global/floorIsLava = 0
 	log_admin("[key_name(usr)] stuffed [frommob.ckey] into [tomob.name].")
 	SSstatistics.add_field_details("admin_verb","CGD")
 	tomob.ckey = frommob.ckey
+	tomob.teleop = null // no longer (a)ghosting
 	qdel(frommob)
 	return 1
 

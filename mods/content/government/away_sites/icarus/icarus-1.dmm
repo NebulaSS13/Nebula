@@ -298,7 +298,7 @@
 /area/icarus/vessel)
 "bn" = (
 /obj/structure/noticeboard{
-	pixel_y = -25
+	default_pixel_y = -25
 	},
 /obj/machinery/atmospherics/unary/vent_pump/on{
 	dir = 4;
@@ -558,7 +558,7 @@
 /obj/effect/floor_decal/corner/grey/diagonal{
 	dir = 4
 	},
-/obj/item/chems/food/condiment/flour,
+/obj/item/chems/condiment/flour,
 /turf/simulated/floor/tiled,
 /area/icarus/vessel)
 "ce" = (
@@ -699,7 +699,7 @@
 	dir = 4
 	},
 /obj/effect/decal/cleanable/dirt,
-/obj/effect/landmark/corpse/chef,
+/obj/abstract/landmark/corpse/chef,
 /obj/effect/decal/cleanable/blood/splatter,
 /turf/simulated/floor/tiled/white,
 /area/icarus/vessel)
@@ -975,7 +975,7 @@
 /turf/simulated/wall,
 /area/icarus/vessel)
 "ds" = (
-/obj/effect/landmark/corpse/doctor,
+/obj/abstract/landmark/corpse/doctor,
 /obj/effect/decal/cleanable/blood/splatter,
 /turf/simulated/floor/tiled,
 /area/icarus/open)
@@ -1071,7 +1071,7 @@
 /area/icarus/vessel)
 "dI" = (
 /obj/structure/table,
-/obj/item/chems/food/drinks/cans/cola,
+/obj/item/chems/drinks/cans/cola,
 /turf/simulated/floor/tiled,
 /area/icarus/vessel)
 "dJ" = (
@@ -1602,7 +1602,7 @@
 /obj/effect/decal/cleanable/dirt,
 /obj/effect/decal/cleanable/dirt,
 /obj/effect/decal/cleanable/dirt,
-/obj/item/chems/food/drinks/cans/waterbottle,
+/obj/item/chems/drinks/cans/waterbottle,
 /turf/unsimulated/beach/sand,
 /area/icarus/open)
 "fi" = (
@@ -2212,7 +2212,7 @@
 /turf/simulated/floor/plating,
 /area/icarus/vessel)
 "hl" = (
-/obj/effect/landmark/corpse/engineer,
+/obj/abstract/landmark/corpse/engineer,
 /obj/effect/decal/cleanable/blood/splatter,
 /turf/simulated/floor/plating,
 /area/icarus/vessel)

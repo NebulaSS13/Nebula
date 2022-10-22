@@ -151,11 +151,11 @@
 #define INCAPACITATION_WEAKENED 64
 
 #define INCAPACITATION_UNRESISTING (INCAPACITATION_KNOCKOUT|INCAPACITATION_STUNNED)
-#define INCAPACITATION_DISRUPTED (INCAPACITATION_UNRESISTING|INCAPACITATION_WEAKENED)
-#define INCAPACITATION_KNOCKDOWN (INCAPACITATION_KNOCKOUT|INCAPACITATION_FORCELYING)
-#define INCAPACITATION_DISABLED (INCAPACITATION_KNOCKDOWN|INCAPACITATION_STUNNED)
-#define INCAPACITATION_DEFAULT (INCAPACITATION_RESTRAINED|INCAPACITATION_BUCKLED_FULLY|INCAPACITATION_DISABLED)
-#define INCAPACITATION_ALL (~INCAPACITATION_NONE)
+#define INCAPACITATION_DISRUPTED   (INCAPACITATION_UNRESISTING|INCAPACITATION_WEAKENED)
+#define INCAPACITATION_KNOCKDOWN   (INCAPACITATION_KNOCKOUT|INCAPACITATION_FORCELYING)
+#define INCAPACITATION_DISABLED    (INCAPACITATION_KNOCKDOWN|INCAPACITATION_STUNNED)
+#define INCAPACITATION_DEFAULT     (INCAPACITATION_RESTRAINED|INCAPACITATION_BUCKLED_FULLY|INCAPACITATION_DISABLED)
+#define INCAPACITATION_ALL         (~INCAPACITATION_NONE)
 
 // Organs.
 #define BP_MOUTH    "mouth"
@@ -213,7 +213,7 @@
 // Limb flag helpers
 #define BP_IS_DEFORMED(org) (org.limb_flags & ORGAN_FLAG_DEFORMED)
 
-#define SYNTH_BLOOD_COLOUR "#030303"
+#define SYNTH_BLOOD_COLOR "#030303"
 #define SYNTH_FLESH_COLOUR "#575757"
 
 #define MOB_PULL_NONE 0
@@ -256,6 +256,10 @@
 #define SPECIES_ALIEN            "Humanoid"
 #define SPECIES_GOLEM            "Golem"
 
+#define BODY_FLAG_EXCLUDE        BITFLAG(0)
+#define BODY_FLAG_HUMANOID       BITFLAG(1)
+#define BODY_FLAG_MONKEY         BITFLAG(2)
+
 #define BODYTYPE_HUMANOID        "humanoid body"
 #define BODYTYPE_OTHER           "alien body"
 #define BODYTYPE_MONKEY          "small humanoid body"
@@ -297,8 +301,8 @@
 
 #define MOB_FLAG_HOLY_BAD BITFLAG(0)  // If this mob is allergic to holiness
 
-#define MARKING_TARGET_SKIN 0 // Draw a datum/sprite_accessory/marking to the mob's body, eg. tattoos
-#define MARKING_TARGET_HAIR 1 // Draw a datum/sprite_accessory/marking to the mob's hair, eg. ears & horns
+#define MARKING_TARGET_SKIN 0 // Draw a /decl/sprite_accessory/marking to the mob's body, eg. tattoos
+#define MARKING_TARGET_HAIR 1 // Draw a /decl/sprite_accessory/marking to the mob's hair, eg. ears & horns
 
 #define DEXTERITY_NONE            0
 #define DEXTERITY_SIMPLE_MACHINES 1
@@ -314,10 +318,17 @@
 #define INJECTION_PORT 2
 #define INJECTION_PORT_DELAY 3 SECONDS // used by injectors to apply delay due to searching for a port on the injectee's suit
 
-#define ADJUSTED_GLIDE_SIZE(DELAY) (CEILING((WORLD_ICON_SIZE / max((DELAY), world.tick_lag) * world.tick_lag) - world.tick_lag, 1) + (config.glide_size_delay))
+#define ADJUSTED_GLIDE_SIZE(DELAY) (NONUNIT_CEILING((WORLD_ICON_SIZE / max((DELAY), world.tick_lag) * world.tick_lag) - world.tick_lag, 1) + (config.glide_size_delay))
 
 #define PREF_MEM_RECORD "memory"
 #define PREF_SEC_RECORD "sec_record"
 #define PREF_PUB_RECORD "public_record"
 #define PREF_MED_RECORD "med_record"
 #define PREF_GEN_RECORD "gen_record"
+
+// Simple animal icon state flags.
+#define MOB_ICON_HAS_LIVING_STATE BITFLAG(0)
+#define MOB_ICON_HAS_DEAD_STATE   BITFLAG(1)
+#define MOB_ICON_HAS_REST_STATE   BITFLAG(2)
+#define MOB_ICON_HAS_SLEEP_STATE  BITFLAG(3)
+#define MOB_ICON_HAS_GIB_STATE    BITFLAG(4)

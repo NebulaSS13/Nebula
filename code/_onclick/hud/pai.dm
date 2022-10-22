@@ -24,7 +24,7 @@
 
 	mymob.client.screen = list()
 	mymob.client.screen += adding
-	inventory_shown = 0
+	hide_inventory()
 
 /obj/screen/pai
 	icon = 'icons/mob/screen/pai.dmi'

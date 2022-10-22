@@ -18,9 +18,10 @@ var/global/list/random_chem_interaction_blacklist = list(
 	lore_text = "A strange and exotic chemical substance."
 	taste_mult = 0 // Random taste not yet implemented
 	hidden_from_codex = TRUE
+	uid = "chem_random"
 	var/max_effect_number = 8
 	var/list/data = list()
-	var/initialized = FALSE
+	var/data_initialized = FALSE
 
 /decl/material/liquid/random/proc/randomize_data(temperature)
 	data = list()
@@ -49,7 +50,7 @@ var/global/list/random_chem_interaction_blacklist = list(
 	for(var/i in 1 to heat_num)
 		heating_products[pick_n_take(whitelist)] = 1 / heat_num
 
-	initialized = TRUE
+	data_initialized = TRUE
 
 /decl/material/liquid/random/proc/stable_at_temperature(temperature)
 	if(temperature > chilling_point && temperature < heating_point)
@@ -102,6 +103,9 @@ var/global/list/random_chem_interaction_blacklist = list(
 
 // Extra unique types for exoplanet spawns, etc.
 /decl/material/liquid/random/one
+	uid = "chem_random_one"
+
 /decl/material/liquid/random/two
+	uid = "chem_random_two"
 
 #undef FOR_ALL_EFFECTS

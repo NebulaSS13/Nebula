@@ -26,7 +26,7 @@
 		BODYTYPE_SNAKE =        'mods/species/ascent/icons/clothing/mask_serpentid.dmi',
 		BODYTYPE_MANTID_LARGE = 'mods/species/ascent/icons/clothing/mask_gyne.dmi'
 	)
-	bodytype_restricted = list(BODYTYPE_MANTID_SMALL, BODYTYPE_MANTID_LARGE)
+	bodytype_equip_flags = BODY_FLAG_GYNE | BODY_FLAG_ALATE
 	filtered_gases = list(
 		/decl/material/gas/nitrous_oxide,
 		/decl/material/gas/chlorine,
@@ -47,13 +47,13 @@
 		/decl/material/gas/methyl_bromide,
 		/decl/material/gas/methane
 	)
-	bodytype_restricted = list(BODYTYPE_SNAKE)
+	bodytype_equip_flags = BODY_FLAG_SNAKE
 
 /obj/item/clothing/shoes/magboots/ascent
 	name = "mantid mag-claws"
 	desc = "A set of powerful gripping claws."
 	icon = 'mods/species/ascent/icons/magboots/boots.dmi'
-	bodytype_restricted = list(BODYTYPE_MANTID_SMALL, BODYTYPE_MANTID_LARGE)
+	bodytype_equip_flags = BODY_FLAG_GYNE | BODY_FLAG_ALATE
 	sprite_sheets = list(
 		BODYTYPE_MANTID_LARGE = 'mods/species/ascent/icons/magboots/boots_gyne.dmi'
 	)
@@ -61,7 +61,7 @@
 /obj/item/clothing/under/ascent
 	name = "mantid undersuit"
 	desc = "A ribbed, spongy undersuit of some sort. It has a big sleeve for a tail, so it probably isn't for humans."
-	bodytype_restricted = list(BODYTYPE_MANTID_LARGE, BODYTYPE_MANTID_SMALL)
+	bodytype_equip_flags = BODY_FLAG_GYNE | BODY_FLAG_ALATE
 	icon = 'mods/species/ascent/icons/clothing/under.dmi'
 	color = COLOR_DARK_GUNMETAL
 	sprite_sheets = list(
@@ -71,7 +71,7 @@
 /obj/item/clothing/suit/storage/ascent
 	name = "mantid gear harness"
 	desc = "A complex tangle of articulated cables and straps."
-	bodytype_restricted = list(BODYTYPE_MANTID_LARGE, BODYTYPE_MANTID_SMALL, BODYTYPE_SNAKE)
+	bodytype_equip_flags = BODY_FLAG_GYNE | BODY_FLAG_ALATE | BODY_FLAG_SNAKE
 	icon_state = ICON_STATE_WORLD
 	icon = 'mods/species/ascent/icons/clothing/under_harness.dmi'
 	sprite_sheets = list(
@@ -101,5 +101,5 @@
 		allowed |= tool
 		new tool(pockets)
 	pockets.make_exact_fit()
-	allowed |= /obj/item/chems/food/drinks/cans/waterbottle/ascent
-	pockets.can_hold |= /obj/item/chems/food/drinks/cans/waterbottle/ascent
+	allowed |= /obj/item/chems/drinks/cans/waterbottle/ascent
+	pockets.can_hold |= /obj/item/chems/drinks/cans/waterbottle/ascent

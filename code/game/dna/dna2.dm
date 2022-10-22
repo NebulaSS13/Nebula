@@ -82,6 +82,7 @@ var/global/list/datum/dna/gene/dna_genes[0]
 	var/species
 	var/list/body_markings = list()
 	var/lineage
+	//#TODO: Keep track of bodytype!!!!!
 
 // Make a copy of this strand.
 // USE THIS WHEN COPYING STUFF OR YOU'LL GET CORRUPTION!
@@ -118,43 +119,43 @@ var/global/list/datum/dna/gene/dna_genes[0]
 /datum/dna/proc/ResetUIFrom(var/mob/living/carbon/human/character)
 	// INITIALIZE!
 	ResetUI(1)
-	// Hair
-	// FIXME:  Species-specific defaults pls
-	if(!character.h_style)
-		character.h_style = "Skinhead"
-	var/hair = global.hair_styles_list.Find(character.h_style)
 
-	// Facial Hair
-	if(!character.f_style)
-		character.f_style = "Shaved"
-	var/beard	= global.facial_hair_styles_list.Find(character.f_style)
+	SetUIValueRange(DNA_UI_HAIR_R,  HEX_RED(character.hair_colour),          255, 1)
+	SetUIValueRange(DNA_UI_HAIR_G,  HEX_GREEN(character.hair_colour),        255, 1)
+	SetUIValueRange(DNA_UI_HAIR_B,  HEX_BLUE(character.hair_colour),         255, 1)
 
-	SetUIValueRange(DNA_UI_HAIR_R,  HEX_RED(character.hair_colour),   255, 1)
-	SetUIValueRange(DNA_UI_HAIR_G,  HEX_GREEN(character.hair_colour), 255, 1)
-	SetUIValueRange(DNA_UI_HAIR_B,  HEX_BLUE(character.hair_colour),  255, 1)
+	SetUIValueRange(DNA_UI_BEARD_R, HEX_RED(character.facial_hair_colour),   255, 1)
+	SetUIValueRange(DNA_UI_BEARD_G, HEX_GREEN(character.facial_hair_colour), 255, 1)
+	SetUIValueRange(DNA_UI_BEARD_B, HEX_BLUE(character.facial_hair_colour),  255, 1)
 
-	SetUIValueRange(DNA_UI_BEARD_R, HEX_RED(character.hair_colour),   255, 1)
-	SetUIValueRange(DNA_UI_BEARD_G, HEX_GREEN(character.hair_colour), 255, 1)
-	SetUIValueRange(DNA_UI_BEARD_B, HEX_BLUE(character.hair_colour),  255, 1)
+	SetUIValueRange(DNA_UI_EYES_R,  HEX_RED(character.eye_colour),           255, 1)
+	SetUIValueRange(DNA_UI_EYES_G,  HEX_GREEN(character.eye_colour),         255, 1)
+	SetUIValueRange(DNA_UI_EYES_B,  HEX_BLUE(character.eye_colour),          255, 1)
 
-	SetUIValueRange(DNA_UI_EYES_R,  HEX_RED(character.eye_colour),    255, 1)
-	SetUIValueRange(DNA_UI_EYES_G,  HEX_GREEN(character.eye_colour),  255, 1)
-	SetUIValueRange(DNA_UI_EYES_B,  HEX_BLUE(character.eye_colour),   255, 1)
+	SetUIValueRange(DNA_UI_SKIN_R,  HEX_RED(character.skin_colour),          255, 1)
+	SetUIValueRange(DNA_UI_SKIN_G,  HEX_GREEN(character.skin_colour),        255, 1)
+	SetUIValueRange(DNA_UI_SKIN_B,  HEX_BLUE(character.skin_colour),         255, 1)
 
-	SetUIValueRange(DNA_UI_SKIN_R,  HEX_RED(character.skin_colour),   255, 1)
-	SetUIValueRange(DNA_UI_SKIN_G,  HEX_GREEN(character.skin_colour), 255, 1)
-	SetUIValueRange(DNA_UI_SKIN_B,  HEX_BLUE(character.skin_colour),  255, 1)
-
-	SetUIValueRange(DNA_UI_SKIN_TONE, 35-character.skin_tone, 220,    1) // Value can be negative.
+	SetUIValueRange(DNA_UI_SKIN_TONE, 35-character.skin_tone, 220,           1) // Value can be negative.
 
 	SetUIState(DNA_UI_GENDER, character.gender!=MALE, 1)
 
-	SetUIValueRange(DNA_UI_HAIR_STYLE,  hair,  global.hair_styles_list.len, 1)
-	SetUIValueRange(DNA_UI_BEARD_STYLE, beard, global.facial_hair_styles_list.len,1)
+	// Hair
+	// FIXME:  Species-specific defaults pls
+	if(!character.h_style)
+		character.h_style = /decl/sprite_accessory/hair/bald
+	var/list/hair_types = subtypesof(/decl/sprite_accessory/hair)
+	SetUIValueRange(DNA_UI_HAIR_STYLE,  hair_types.Find(character.h_style),  length(hair_types), 1)
+
+	// Facial Hair
+	if(!character.f_style)
+		character.f_style = /decl/sprite_accessory/facial_hair/shaved
+	var/list/beard_types = subtypesof(/decl/sprite_accessory/facial_hair)
+	SetUIValueRange(DNA_UI_BEARD_STYLE, beard_types.Find(character.f_style), length(beard_types), 1)
 
 	body_markings.Cut()
-	for(var/obj/item/organ/external/E in character.organs)
-		if(E.markings.len)
+	for(var/obj/item/organ/external/E in character.get_external_organs())
+		if(LAZYLEN(E.markings))
 			body_markings[E.organ_tag] = E.markings.Copy()
 
 	UpdateUI()
@@ -358,6 +359,8 @@ var/global/list/datum/dna/gene/dna_genes[0]
 		if(length(unique_enzymes) != 32)
 			unique_enzymes = md5(character.real_name)
 	else
+		if(!species)
+			species = global.using_map.default_species
 		if(length(uni_identity) != 3*DNA_UI_LENGTH)
 			uni_identity = "00600200A00E0110148FC01300B0095BD7FD3F4"
 		if(length(struc_enzymes)!= 3*DNA_SE_LENGTH)

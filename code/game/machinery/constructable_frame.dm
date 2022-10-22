@@ -20,7 +20,7 @@
 	update_icon()
 
 /obj/machinery/constructable_frame/dismantle()
-	SSmaterials.create_object(/decl/material/solid/metal/steel, loc, 5)
+	SSmaterials.create_object(/decl/material/solid/metal/steel, loc, 5, object_type = /obj/item/stack/material/strut)
 	qdel(src)
 	return TRUE
 

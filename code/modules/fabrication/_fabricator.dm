@@ -47,7 +47,7 @@
 	var/static/list/stored_substances_to_names = list()
 
 	var/list/design_cache = list()
-	var/list/installed_designs
+	var/list/installed_designs = list()
 
 	var/sound_id
 	var/datum/sound_token/sound_token
@@ -62,6 +62,12 @@
 
 	// If TRUE, fills fabricator with material on initalize
 	var/prefilled = FALSE
+
+	//Collapsing Menus stuff
+	var/ui_expand_queue     = FALSE
+	var/ui_expand_resources = FALSE
+	var/ui_expand_config    = FALSE
+	var/ui_nb_categories    = 1      //Cached amount of categories in loaded designs. Used to decide if we display the category filter or not
 
 /obj/machinery/fabricator/Destroy()
 	QDEL_NULL(currently_building)
@@ -86,7 +92,7 @@
 	sound_id = "[fabricator_sound]"
 
 	// Get any local network we need to be part of.
-	set_extension(src, /datum/extension/network_device, initial_network_id, initial_network_key, NETWORK_CONNECTION_WIRED)
+	set_extension(src, /datum/extension/network_device, initial_network_id, initial_network_key, NETWORK_CONNECTION_STRONG_WIRELESS)
 
 	// Initialize material storage lists.
 	stored_material = list()
@@ -106,14 +112,17 @@
 	if(prefilled)
 		fill_to_capacity()
 
+	if(SSfabrication.post_recipe_init)
+		refresh_design_cache()
+	else
+		SSfabrication.queue_design_cache_refresh(src)
+
 /obj/machinery/fabricator/modify_mapped_vars(map_hash)
 	..()
 	ADJUST_TAG_VAR(initial_network_id, map_hash)
 
 /obj/machinery/fabricator/handle_post_network_connection()
 	..()
-	var/list/base_designs = SSfabrication.get_initial_recipes(fabricator_class)
-	design_cache = islist(base_designs) ? base_designs.Copy() : list() // Don't want to mutate the subsystem cache.
 	refresh_design_cache()
 
 /obj/machinery/fabricator/proc/fill_to_capacity()
@@ -121,10 +130,15 @@
 		stored_material[mat] = storage_capacity[mat]
 
 /obj/machinery/fabricator/proc/refresh_design_cache(var/list/known_tech)
+
+	var/list/base_designs = SSfabrication.get_initial_recipes(fabricator_class)
+	design_cache = islist(base_designs) ? base_designs.Copy() : list() // Don't want to mutate the subsystem cache.
+
 	if(length(installed_designs))
 		design_cache |= installed_designs
+
 	if(!known_tech)
-		known_tech = list()
+		known_tech = get_default_initial_tech_levels()
 		var/datum/extension/network_device/device = get_extension(src, /datum/extension/network_device)
 		var/datum/computer_network/network = device.get_network()
 		if(network)
@@ -132,12 +146,14 @@
 				for(var/tech in db.tech_levels)
 					if(db.tech_levels[tech] > known_tech[tech])
 						known_tech[tech] = db.tech_levels[tech]
-	if(length(known_tech))
-		var/list/unlocked_tech = SSfabrication.get_unlocked_recipes(fabricator_class, known_tech)
-		if(length(unlocked_tech))
-			design_cache |= unlocked_tech
 
+	var/list/unlocked_tech = SSfabrication.get_unlocked_recipes(fabricator_class, known_tech)
+	if(length(unlocked_tech))
+		design_cache |= unlocked_tech
+
+	var/list/unique_categories
 	for(var/datum/fabricator_recipe/R in design_cache)
+		LAZYDISTINCTADD(unique_categories, R.category)
 		if(!length(R.species_locked))
 			continue
 
@@ -148,9 +164,10 @@
 		for(var/species_type in R.species_locked)
 			if(!(ispath(species_variation, species_type)))
 				design_cache.Remove(R)
-				return
+				continue
 
 	design_cache = sortTim(design_cache, /proc/cmp_name_asc)
+	ui_nb_categories = LAZYLEN(unique_categories)
 
 /obj/machinery/fabricator/state_transition(var/decl/machine_construction/default/new_state)
 	. = ..()

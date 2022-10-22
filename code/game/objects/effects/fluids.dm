@@ -8,7 +8,7 @@
 	mouse_opacity = 0
 	layer = FLY_LAYER
 	alpha = 0
-	color = COLOR_OCEAN
+	color = COLOR_LIQUID_WATER
 
 	var/last_flow_strength = 0
 	var/last_flow_dir = 0
@@ -69,7 +69,7 @@
 
 	var/decl/material/main_reagent = reagents.get_primary_reagent_decl()
 	if(main_reagent) // TODO: weighted alpha from all reagents, not just primary
-		alpha = Clamp(ceil(255*(reagents.total_volume/FLUID_DEEP)) * main_reagent.opacity, main_reagent.min_fluid_opacity, main_reagent.max_fluid_opacity)
+		alpha = Clamp(CEILING(255*(reagents.total_volume/FLUID_DEEP)) * main_reagent.opacity, main_reagent.min_fluid_opacity, main_reagent.max_fluid_opacity)
 
 	if(reagents.total_volume <= FLUID_PUDDLE)
 		APPLY_FLUID_OVERLAY("puddle")
@@ -101,7 +101,7 @@
 	name = "mapped flooded area"
 	alpha = 125
 	icon_state = "shallow_still"
-	color = COLOR_OCEAN
+	color = COLOR_LIQUID_WATER
 
 	var/fluid_type = /decl/material/liquid/water
 	var/fluid_initial = FLUID_MAX_DEPTH
@@ -119,26 +119,13 @@
 	fluid_initial = 10
 
 // Permaflood overlay.
-/obj/effect/flood
-	name = ""
-	mouse_opacity = 0
+var/global/obj/abstract/flood/flood_object = new
+/obj/abstract/flood
 	layer = DEEP_FLUID_LAYER
-	color = COLOR_OCEAN
+	color = COLOR_LIQUID_WATER
 	icon = 'icons/effects/liquids.dmi'
 	icon_state = "ocean"
 	alpha = FLUID_MAX_ALPHA
-	simulated = 0
-	density = 0
-	opacity = 0
-	anchored = 1
-
-/obj/effect/flood/explosion_act()
-	SHOULD_CALL_PARENT(FALSE)
-	return
-
-/obj/effect/flood/Initialize()
-	. = ..()
-	verbs.Cut()
 
 /obj/effect/fluid/fire_act(datum/gas_mixture/air, exposed_temperature, exposed_volume)
 	. = ..()

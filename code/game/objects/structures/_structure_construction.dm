@@ -104,7 +104,7 @@
 
 /obj/structure/proc/handle_repair(mob/user, obj/item/tool)
 	var/obj/item/stack/stack = tool
-	var/amount_needed = ceil((maxhealth - health)/DOOR_REPAIR_AMOUNT)
+	var/amount_needed = CEILING((maxhealth - health)/DOOR_REPAIR_AMOUNT)
 	var/used = min(amount_needed,stack.amount)
 	if(used)
 		to_chat(user, SPAN_NOTICE("You fit [used] [stack.singular_name]\s to damaged areas of \the [src]."))
@@ -138,3 +138,19 @@
 	if(.)
 		user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
 		add_fingerprint(user)
+
+/obj/structure/attack_generic(var/mob/user, var/damage, var/attack_verb, var/environment_smash)
+	if(environment_smash >= 1)
+		damage = max(damage, 10)
+
+	if(istype(user))
+		user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
+		user.do_attack_animation(src)
+	if(!damage)
+		return FALSE
+	if(damage >= 10)
+		visible_message(SPAN_DANGER("\The [user] [attack_verb] into [src]!"))
+		take_damage(damage)
+	else
+		visible_message(SPAN_NOTICE("\The [user] bonks \the [src] harmlessly."))
+	return TRUE

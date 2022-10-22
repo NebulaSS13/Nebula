@@ -72,13 +72,3 @@
 
 /obj/item/storage/lunchbox/syndicate/filled
 	filled = TRUE
-
-/obj/item/storage/lunchbox/TCC
-	name = "\improper GCC lunchbox"
-	icon_state = "lunchbox_tcc"
-	item_state = "toolbox_syndi"
-	desc = "A little lunchbox. This one is branded with the flag of the Gilgamesh Colonial Confederation!"
-
-/obj/item/storage/lunchbox/syndicate/filled
-	filled = TRUE
-

@@ -57,16 +57,16 @@
 
 		var/obj/L = null
 
-		for(var/obj/effect/landmark/sloc in landmarks_list)
-			if(sloc.name != C.data) continue
-			if(locate(/mob/living) in sloc.loc) continue
+		for(var/obj/abstract/landmark/sloc in global.landmarks_list)
+			if(sloc.name != C.data || (locate(/mob/living) in sloc.loc))
+				continue
 			L = sloc
 			break
 
 		if(!L)
 			L = locate("landmark*[C.data]") // use old stype
 
-		if(istype(L, /obj/effect/landmark) && isturf(L.loc) && user.unEquip(I))
+		if(istype(L, /obj/abstract/landmark) && isturf(L.loc) && user.unEquip(I))
 			to_chat(usr, "You insert the coordinates into the machine.")
 			to_chat(usr, "A message flashes across the screen reminding the traveller that the nuclear authentication disk is to remain on the [station_name()] at all times.")
 			qdel(I)
@@ -88,7 +88,7 @@
 	var/list/areaindex = list()
 
 	. = TRUE
-	for(var/obj/item/radio/beacon/R in world)
+	for(var/obj/item/radio/beacon/R in global.radio_beacons)
 		if(!R.functioning)
 			continue
 		var/turf/T = get_turf(R)
@@ -103,7 +103,7 @@
 			areaindex[tmpname] = 1
 		L[tmpname] = R
 
-	for (var/obj/item/implant/tracking/I in world)
+	for (var/obj/item/implant/tracking/I in global.tracking_implants)
 		if (!I.implanted || !ismob(I.loc))
 			continue
 		else
@@ -186,8 +186,8 @@
 	icon_state = "pad"
 	idle_power_usage = 10
 	active_power_usage = 2000
-	var/obj/machinery/computer/teleporter/com
 	light_color = "#02d1c7"
+	var/obj/machinery/computer/teleporter/com
 
 /obj/machinery/teleport/hub/Initialize()
 	..()
@@ -201,11 +201,15 @@
 	cut_overlays()
 	if (com?.station?.engaged)
 		add_overlay(emissive_overlay(icon, "[initial(icon_state)]_active_overlay"))
+		z_flags |= ZMM_MANGLE_PLANES
 		set_light(4, 0.4)
 	else
 		set_light(0)
 		if(operable())
 			add_overlay(emissive_overlay(icon, "[initial(icon_state)]_idle_overlay"))
+			z_flags |= ZMM_MANGLE_PLANES
+		else
+			z_flags &= ~ZMM_MANGLE_PLANES
 
 /obj/machinery/teleport/hub/Bumped(var/atom/movable/M)
 	if (com?.station?.engaged)

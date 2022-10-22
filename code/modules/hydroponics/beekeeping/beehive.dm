@@ -263,9 +263,8 @@
 	icon_state = "wax"
 
 var/global/list/wax_recipes = list(new /datum/stack_recipe/candle)
-/obj/item/stack/wax/Initialize()
-	. = ..()
-	recipes = global.wax_recipes
+/obj/item/stack/wax/get_recipes()
+	return global.wax_recipes
 
 /obj/item/bee_pack
 	name = "bee pack"

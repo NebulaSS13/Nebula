@@ -1,6 +1,11 @@
 /turf/simulated
 	name = "station"
-	initial_gas = list(/decl/material/gas/oxygen = MOLES_O2STANDARD, /decl/material/gas/nitrogen = MOLES_N2STANDARD)
+	initial_gas = list(
+		/decl/material/gas/oxygen = MOLES_O2STANDARD,
+		/decl/material/gas/nitrogen = MOLES_N2STANDARD
+	)
+	open_turf_type = /turf/simulated/open
+
 	var/wet = 0
 	var/image/wet_overlay = null
 	var/to_be_destroyed = 0 //Used for fire, if a melting temperature was reached, it will be destroyed
@@ -11,7 +16,7 @@
 // This is not great.
 /turf/simulated/proc/wet_floor(var/wet_val = 1, var/overwrite = FALSE)
 
-	if(locate(/obj/effect/flood) in src)
+	if(is_flooded(absolute = TRUE))
 		return
 
 	if(get_fluid_depth() > FLUID_QDEL_POINT)
@@ -25,12 +30,12 @@
 		wet_overlay = image('icons/effects/water.dmi',src,"wet_floor")
 		overlays += wet_overlay
 
-	timer_id = addtimer(CALLBACK(src,/turf/simulated/proc/unwet_floor),8 SECONDS, TIMER_STOPPABLE|TIMER_UNIQUE|TIMER_NO_HASH_WAIT|TIMER_OVERRIDE)
+	timer_id = addtimer(CALLBACK(src,/turf/simulated/proc/unwet_floor), 8 SECONDS, (TIMER_STOPPABLE|TIMER_UNIQUE|TIMER_NO_HASH_WAIT|TIMER_OVERRIDE))
 
 /turf/simulated/proc/unwet_floor(var/check_very_wet = TRUE)
 	if(check_very_wet && wet >= 2)
 		wet--
-		timer_id = addtimer(CALLBACK(src,/turf/simulated/proc/unwet_floor), 8 SECONDS, TIMER_STOPPABLE|TIMER_UNIQUE|TIMER_NO_HASH_WAIT|TIMER_OVERRIDE)
+		timer_id = addtimer(CALLBACK(src,/turf/simulated/proc/unwet_floor), 8 SECONDS, (TIMER_STOPPABLE|TIMER_UNIQUE|TIMER_NO_HASH_WAIT|TIMER_OVERRIDE))
 		return
 	wet = 0
 	if(wet_overlay)
@@ -93,7 +98,8 @@
 		slip_dist = 4
 		slip_stun = 10
 
-	if(slip("the [floor_type] floor", slip_stun))
+	// Dir check to avoid slipping up and down via ladders.
+	if(slip("the [floor_type] floor", slip_stun) && (dir in global.cardinal))
 		for(var/i = 1 to slip_dist)
 			step(src, dir)
 			sleep(1)
@@ -112,10 +118,11 @@
 				source = S
 	else
 		for(var/bp in list(BP_L_FOOT, BP_R_FOOT))
-			var/obj/item/organ/external/stomper = get_organ(bp)
-			if(istype(stomper) && !stomper.is_stump() && stomper.coating && stomper.coating.total_volume > 1)
+			var/obj/item/organ/external/stomper = GET_EXTERNAL_ORGAN(src, bp)
+			if(stomper && stomper.coating && stomper.coating.total_volume > 1)
 				source = stomper
 	if(!source)
+		species.handle_trail(src, T)
 		return
 
 	var/list/bloodDNA
@@ -160,13 +167,8 @@
 	else if( istype(M, /mob/living/silicon/robot ))
 		new /obj/effect/decal/cleanable/blood/oil(src)
 
-/turf/simulated/proc/can_build_cable(var/mob/user)
-	return 0
-
 /turf/simulated/attackby(var/obj/item/thing, var/mob/user)
-	if(isCoil(thing) && can_build_cable(user))
-		var/obj/item/stack/cable_coil/coil = thing
-		coil.turf_place(src, user)
+	if(isCoil(thing) && try_build_cable(thing, user))
 		return TRUE
 	return ..()
 
@@ -174,12 +176,11 @@
 	var/area/A = loc
 	holy = istype(A) && (A.area_flags & AREA_FLAG_HOLY)
 	levelupdate()
-	if(GAME_STATE >= RUNLEVEL_GAME)
-		fluid_update()
 	. = ..()
-	if(!ml)
-		for(var/turf/space/space in RANGE_TURFS(src, 1))
-			space.update_starlight()
+
+/turf/simulated/initialize_ambient_light(var/mapload)
+	for(var/turf/T AS_ANYTHING in RANGE_TURFS(src, 1))
+		T.update_ambient_light(mapload)
 
 /turf/simulated/Destroy()
 	if (zone)
@@ -188,4 +189,4 @@
 			zone.remove(src)
 		else
 			zone.rebuild()
-	. = ..() 
+	. = ..()

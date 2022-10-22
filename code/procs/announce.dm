@@ -47,7 +47,7 @@ var/global/datum/announcement/minor/minor_announcement = new(new_sound = 'sound/
 
 	if(!msg_sanitized)
 		message = sanitize(message, extra = 0)
-	message_title = sanitizeSafe(message_title)
+	message_title = sanitize_safe(message_title)
 
 	var/msg = FormMessage(message, message_title)
 	for(var/mob/M in global.player_list)

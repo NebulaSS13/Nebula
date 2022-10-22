@@ -43,6 +43,11 @@
 												/obj/structure/wall_frame,
 												/obj/structure/railing)
 
+/mob/living/simple_animal/hostile/Destroy()
+	LAZYCLEARLIST(friends)
+	target_mob = null
+	return ..()
+
 /mob/living/simple_animal/hostile/proc/can_act()
 	if(QDELETED(src) || stat || stop_automation || incapacitated())
 		return FALSE
@@ -101,7 +106,7 @@
 		walk_to(src, pick(orange(2, src)), 1, move_to_delay)
 		return
 	stop_automated_movement = 1
-	if(!target_mob || SA_attackable(target_mob))
+	if(QDELETED(target_mob) || SA_attackable(target_mob))
 		stance = HOSTILE_STANCE_IDLE
 	if(target_mob in ListTargets(10))
 		if(ranged)
@@ -133,6 +138,21 @@
 		return 1
 
 /mob/living/simple_animal/hostile/proc/AttackingTarget()
+
+	if(buckled_mob == target_mob && (!faction || buckled_mob.faction != faction))
+
+		visible_message(SPAN_DANGER("\The [src] attempts to unseat \the [buckled_mob]!"))
+		set_dir(pick(global.cardinal))
+		setClickCooldown(attack_delay)
+
+		if(prob(33))
+			unbuckle_mob()
+			if(buckled_mob != target_mob && !QDELETED(target_mob))
+				to_chat(target_mob, SPAN_DANGER("You are thrown off \the [src]!"))
+				SET_STATUS_MAX(target_mob, STAT_WEAK, 3)
+
+		return target_mob
+
 	face_atom(target_mob)
 	setClickCooldown(attack_delay)
 	if(!Adjacent(target_mob))
@@ -155,8 +175,7 @@
 	walk(src, 0)
 
 /mob/living/simple_animal/hostile/proc/ListTargets(var/dist = 7)
-	var/list/L = hearers(src, dist)
-	return L
+	return hearers(src, dist)-src
 
 /mob/living/simple_animal/hostile/proc/get_accuracy()
 	return Clamp(sa_accuracy - melee_accuracy_mods(), 0, 100)
@@ -208,10 +227,10 @@
 		target_mob = user
 		MoveToTarget()
 
-/mob/living/simple_animal/hostile/attack_hand(mob/M)
+/mob/living/simple_animal/hostile/default_hurt_interaction(mob/user)
 	. = ..()
-	if(M.a_intent == I_HURT && !incapacitated(INCAPACITATION_KNOCKOUT))
-		target_mob = M
+	if(. && !incapacitated(INCAPACITATION_KNOCKOUT))
+		target_mob = user
 		MoveToTarget()
 
 /mob/living/simple_animal/hostile/bullet_act(var/obj/item/projectile/Proj)
@@ -226,18 +245,10 @@
 	visible_message("<span class='danger'>\The [src] [fire_desc] at \the [target]!</span>", 1)
 
 	if(rapid)
-		spawn(1)
-			Shoot(target, src.loc, src)
-			if(casingtype)
-				new casingtype(get_turf(src))
-		spawn(4)
-			Shoot(target, src.loc, src)
-			if(casingtype)
-				new casingtype(get_turf(src))
-		spawn(6)
-			Shoot(target, src.loc, src)
-			if(casingtype)
-				new casingtype(get_turf(src))
+		var/datum/callback/shoot_cb = CALLBACK(src, .proc/shoot_wrapper, target, loc, src)
+		addtimer(shoot_cb, 1)
+		addtimer(shoot_cb, 4)
+		addtimer(shoot_cb, 6)
 	else
 		Shoot(target, src.loc, src)
 		if(casingtype)
@@ -246,6 +257,11 @@
 	stance = HOSTILE_STANCE_IDLE
 	target_mob = null
 	return
+
+/mob/living/simple_animal/hostile/proc/shoot_wrapper(target, location, user)
+	Shoot(target, location, user)
+	if (casingtype)
+		new casingtype(loc)
 
 /mob/living/simple_animal/hostile/proc/Shoot(var/target, var/start, var/user, var/bullet = 0)
 	if(target == start)

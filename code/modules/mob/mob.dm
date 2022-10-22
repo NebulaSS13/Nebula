@@ -1,54 +1,63 @@
-/mob/Destroy()//This makes sure that mobs with clients/keys are not just deleted from the game.
+/mob/Destroy() //This makes sure that mobs with clients/keys are not just deleted from the game.
 	STOP_PROCESSING(SSmobs, src)
 	global.dead_mob_list_ -= src
 	global.living_mob_list_ -= src
 	global.player_list -= src
+
+	QDEL_NULL_LIST(pinned)
+	QDEL_NULL_LIST(embedded)
+
 	unset_machine()
 	QDEL_NULL(hud_used)
+	if(s_active)
+		s_active.close(src)
 	if(istype(ability_master))
 		QDEL_NULL(ability_master)
 	if(istype(skillset))
 		QDEL_NULL(skillset)
 	QDEL_NULL_LIST(grabbed_by)
 	clear_fullscreen()
-	QDEL_NULL(ai)
+	if(istype(ai))
+		QDEL_NULL(ai)
+	remove_screen_obj_references()
 	if(client)
-		remove_screen_obj_references()
 		for(var/atom/movable/AM in client.screen)
 			var/obj/screen/screenobj = AM
-			if(!istype(screenobj) || !screenobj.globalscreen)
+			if(istype(screenobj) && !screenobj.globalscreen)
 				qdel(screenobj)
 		client.screen = list()
-	if(mind && mind.current == src)
-		spellremove(src)
+	if(mind)
+		mind.handle_mob_deletion(src)
+	teleop = null
 	ghostize()
-	..()
-	return QDEL_HINT_HARDDEL
+	return ..()
 
 /mob/proc/remove_screen_obj_references()
-	hands = null
-	purged = null
-	internals = null
-	oxygen = null
-	i_select = null
-	m_select = null
-	toxin = null
-	fire = null
-	bodytemp = null
-	healths = null
-	throw_icon = null
-	nutrition_icon = null
-	pressure = null
-	pain = null
-	item_use_icon = null
-	gun_move_icon = null
-	gun_setting_icon = null
-	ability_master = null
-	zone_sel = null
+	QDEL_NULL_SCREEN(hands)
+	QDEL_NULL_SCREEN(purged)
+	QDEL_NULL_SCREEN(internals)
+	QDEL_NULL_SCREEN(oxygen)
+	QDEL_NULL_SCREEN(toxin)
+	QDEL_NULL_SCREEN(fire)
+	QDEL_NULL_SCREEN(bodytemp)
+	QDEL_NULL_SCREEN(healths)
+	QDEL_NULL_SCREEN(throw_icon)
+	QDEL_NULL_SCREEN(nutrition_icon)
+	QDEL_NULL_SCREEN(hydration_icon)
+	QDEL_NULL_SCREEN(pressure)
+	QDEL_NULL_SCREEN(pain)
+	QDEL_NULL_SCREEN(up_hint)
+	QDEL_NULL_SCREEN(item_use_icon)
+	QDEL_NULL_SCREEN(radio_use_icon)
+	QDEL_NULL_SCREEN(gun_move_icon)
+	QDEL_NULL_SCREEN(gun_setting_icon)
+	QDEL_NULL_SCREEN(ability_master)
+	QDEL_NULL_SCREEN(zone_sel)
 
 /mob/Initialize()
 	. = ..()
-	skillset = new skillset(src)
+	if(ispath(skillset))
+		skillset = new skillset(src)
 	if(!move_intent)
 		move_intent = move_intents[1]
 	if(ispath(move_intent))
@@ -192,11 +201,11 @@
 	return 0
 
 #define ENCUMBERANCE_MOVEMENT_MOD 0.35
-/mob/proc/movement_delay()
+/mob/proc/get_movement_delay(var/travel_dir)
 	. = 0
 	if(isturf(loc))
 		var/turf/T = loc
-		. += T.movement_delay
+		. += T.get_movement_delay(travel_dir)
 	if(HAS_STATUS(src, STAT_DROWSY))
 		. += 6
 	if(lying) //Crawling, it's slower
@@ -216,6 +225,8 @@
 
 /mob/proc/Life()
 	SHOULD_NOT_SLEEP(TRUE)
+	if(QDELETED(src))
+		return PROCESS_KILL
 	if(ability_master)
 		ability_master.update_spells(0)
 
@@ -256,7 +267,7 @@
 /mob/proc/incapacitated(var/incapacitation_flags = INCAPACITATION_DEFAULT)
 	if(status_flags & ENABLE_AI)
 		return TRUE
-	if((incapacitation_flags & INCAPACITATION_FORCELYING) && (resting || pinned.len))
+	if((incapacitation_flags & INCAPACITATION_FORCELYING) && (resting || LAZYLEN(pinned)))
 		return TRUE
 	if((incapacitation_flags & INCAPACITATION_RESTRAINED) && restrained())
 		return TRUE
@@ -485,10 +496,7 @@
 /mob/living/carbon/human/pull_damage()
 	if(!lying || getBruteLoss() + getFireLoss() < 100)
 		return FALSE
-	for(var/thing in organs)
-		var/obj/item/organ/external/e = thing
-		if(!e || e.is_stump())
-			continue
+	for(var/obj/item/organ/external/e in get_external_organs())
 		if((e.status & ORGAN_BROKEN) && !e.splinted)
 			return TRUE
 		if(e.status & ORGAN_BLEEDING)
@@ -499,7 +507,7 @@
 	if(over == user && user != src && !istype(user, /mob/living/silicon/ai))
 		show_inv(user)
 		return TRUE
-	if(istype(over, /obj/vehicle/train))
+	if(!anchored && istype(over, /obj/vehicle/train))
 		var/obj/vehicle/train/beep = over
 		if(!beep.load(src))
 			to_chat(user, SPAN_WARNING("You were unable to load \the [src] onto \the [over]."))
@@ -516,8 +524,6 @@
 	return stat == DEAD
 
 /mob/proc/is_mechanical()
-	if(mind && (mind.assigned_role == "Robot" || mind.assigned_role == "AI"))
-		return 1
 	return istype(src, /mob/living/silicon)
 
 /mob/proc/is_ready()
@@ -549,8 +555,10 @@
 
 	if(client.holder)
 		if(statpanel("MC"))
-			stat("CPU:","[world.cpu]")
+			stat("CPU:", "[Master.format_color_cpu()]")
+			stat("Map CPU:", "[Master.format_color_cpu_map()]")
 			stat("Instances:","[world.contents.len]")
+			stat("World Time:", "[world.time]")
 			stat(null)
 			if(Master)
 				Master.stat_entry()
@@ -578,14 +586,14 @@
 						continue
 					if(A.invisibility > see_invisible)
 						continue
-					if(is_type_in_list(A, shouldnt_see))
+					if(LAZYLEN(shouldnt_see) && is_type_in_list(A, shouldnt_see))
 						continue
 					stat(A)
 
 
 // facing verbs
 /mob/proc/canface()
-	return !incapacitated()
+	return !incapacitated(INCAPACITATION_UNRESISTING)
 
 // Not sure what to call this. Used to check if humans are wearing an AI-controlled exosuit and hence don't need to fall over yet.
 /mob/proc/can_stand_overridden()
@@ -613,6 +621,7 @@
 		drop_held_items()
 	else
 		set_density(initial(density))
+
 	reset_layer()
 
 	//Temporarily moved here from the various life() procs
@@ -620,16 +629,9 @@
 	//It just makes sense for now. ~Carn
 	if( update_icon )	//forces a full overlay update
 		update_icon = 0
-		regenerate_icons()
+		update_icon()
 	if( lying != last_lying )
 		update_transform()
-
-/mob/proc/reset_layer()
-	if(lying)
-		plane = DEFAULT_PLANE
-		layer = LYING_MOB_LAYER
-	else
-		reset_plane_and_layer()
 
 /mob/proc/facedir(var/ndir)
 	if(!canface() || moving || (buckled && (!buckled.buckle_movable && !buckled.buckle_allow_rotation)))
@@ -637,7 +639,7 @@
 	set_dir(ndir)
 	if(buckled && buckled.buckle_movable)
 		buckled.set_dir(ndir)
-	SetMoveCooldown(movement_delay())
+	SetMoveCooldown(get_movement_delay(ndir))
 	return 1
 
 
@@ -684,15 +686,15 @@
 	return visible_implants
 
 /mob/proc/embedded_needs_process()
-	return (embedded.len > 0)
+	return !!LAZYLEN(embedded)
 
 /mob/proc/remove_implant(var/obj/item/implant, var/surgical_removal = FALSE)
 	if(!LAZYLEN(get_visible_implants(0))) //Yanking out last object - removing verb.
 		verbs -= /mob/proc/yank_out_object
 	for(var/obj/item/O in pinned)
 		if(O == implant)
-			pinned -= O
-		if(!pinned.len)
+			LAZYREMOVE(pinned, O)
+		if(!LAZYLEN(pinned))
 			anchored = 0
 	implant.dropInto(loc)
 	implant.add_blood(src)
@@ -703,20 +705,20 @@
 	. = TRUE
 
 /mob/living/silicon/robot/remove_implant(var/obj/item/implant, var/surgical_removal = FALSE)
-	embedded -= implant
+	LAZYREMOVE(embedded, implant)
 	adjustBruteLoss(5)
 	adjustFireLoss(10)
 	. = ..()
 
 /mob/living/carbon/human/remove_implant(var/obj/item/implant, var/surgical_removal = FALSE, var/obj/item/organ/external/affected)
 	if(!affected) //Grab the organ holding the implant.
-		for(var/obj/item/organ/external/organ in organs)
+		for(var/obj/item/organ/external/organ in get_external_organs())
 			for(var/obj/item/O in organ.implants)
 				if(O == implant)
 					affected = organ
 					break
 	if(affected)
-		affected.implants -= implant
+		LAZYREMOVE(affected.implants, implant)
 		for(var/datum/wound/wound in affected.wounds)
 			LAZYREMOVE(wound.embedded_objects, implant)
 		if(!surgical_removal)
@@ -781,11 +783,6 @@
 		var/mob/living/carbon/human/human_user = U
 		human_user.bloody_hands(src)
 	return 1
-
-// A mob should either use update_icon(), overriding this definition, or use update_icons(), not touching update_icon().
-// It should not use both.
-/mob/on_update_icon()
-	return update_icons()
 
 /mob/verb/face_direction()
 
@@ -966,8 +963,9 @@
 		return 0
 	return 1
 
+// Let simple mobs press buttons and levers but nothing more complex.
 /mob/proc/has_dexterity(var/dex_level)
-	. = TRUE
+	. = dex_level <= DEXTERITY_SIMPLE_MACHINES
 
 /mob/proc/check_dexterity(var/dex_level, var/silent)
 	. = has_dexterity(dex_level)
@@ -977,7 +975,7 @@
 /mob/proc/lose_hair()
 	return
 
-/mob/proc/handle_reading_literacy(var/mob/user, var/text_content, var/skip_delays)
+/mob/proc/handle_reading_literacy(var/mob/user, var/text_content, var/skip_delays, var/digital = FALSE)
 	if(!skip_delays)
 		to_chat(src, SPAN_WARNING("You can't make heads or tails of the words."))
 	. = stars(text_content, 5)
@@ -1008,10 +1006,18 @@
 	SHOULD_CALL_PARENT(FALSE)
 	gib()
 
-/mob/explosion_act()
+/mob/get_contained_external_atoms()
 	. = ..()
-	if(!blinded)
-		flash_eyes()
+	if(.)
+		LAZYREMOVE(., get_organs())
+
+/mob/explosion_act(var/severity)
+	. = ..()
+	if(!QDELETED(src))
+		if(severity == 1)
+			physically_destroyed()
+		else if(!blinded)
+			flash_eyes()
 
 /mob/proc/get_telecomms_race_info()
 	return list("Unknown", FALSE)
@@ -1030,3 +1036,117 @@
 
 /mob/proc/get_bodytype()
 	return
+
+/// Update the mouse pointer of the attached client in this mob.
+/mob/proc/update_mouse_pointer()
+	if(!client)
+		return
+
+	client.mouse_pointer_icon = initial(client.mouse_pointer_icon)
+
+	if(examine_cursor_icon && client.keys_held["Shift"])
+		client.mouse_pointer_icon = examine_cursor_icon
+
+/mob/keybind_face_direction(direction)
+	facedir(direction)
+
+/mob/proc/check_emissive_equipment()
+	var/old_zflags = z_flags
+	z_flags &= ~ZMM_MANGLE_PLANES
+	for(var/atom/movable/AM in get_equipped_items(TRUE))
+		if(AM.z_flags & ZMM_MANGLE_PLANES)
+			z_flags |= ZMM_MANGLE_PLANES
+			break
+	if(old_zflags != z_flags)
+		UPDATE_OO_IF_PRESENT
+
+/mob/get_mob()
+	return src
+
+/mob/proc/set_glide_size(var/delay)
+	glide_size = ADJUSTED_GLIDE_SIZE(delay)
+
+/mob/proc/get_weather_protection()
+	for(var/obj/item/brolly in get_held_items())
+		if(brolly.gives_weather_protection())
+			LAZYADD(., brolly)
+	if(!LAZYLEN(.))
+		for(var/turf/T AS_ANYTHING in RANGE_TURFS(loc, 1))
+			for(var/obj/structure/flora/tree/tree in T)
+				if(tree.protects_against_weather)
+					LAZYADD(., tree)
+
+/mob/living/carbon/human/get_weather_protection()
+	. = ..()
+	if(!LAZYLEN(.))
+		var/obj/item/clothing/head/check_head = head
+		if(!istype(check_head) || !check_head.protects_against_weather)
+			return
+		var/obj/item/clothing/suit/check_body = wear_suit
+		if(!istype(check_body) || !check_body.protects_against_weather)
+			return
+		LAZYADD(., check_head)
+		LAZYADD(., check_body)
+
+/mob/proc/get_weather_exposure()
+
+	// We're inside something else.
+	if(!isturf(loc))
+		return WEATHER_IGNORE
+
+	var/turf/T = loc
+	// We're under a roof or otherwise shouldn't be being rained on.
+	if(!T.is_outside())
+
+		// For non-multiz we'll give everyone some nice ambience.
+		if(!HasAbove(T.z))
+			return WEATHER_ROOFED
+
+		// For multi-z, check the actual weather on the turf above.
+		// TODO: maybe make this a property of the z-level marker.
+		var/turf/above = GetAbove(T)
+		if(above.weather)
+			return WEATHER_ROOFED
+
+		// Being more than one level down should exempt us from ambience.
+		return WEATHER_IGNORE
+
+	// Nothing's protecting us from the rain here
+	var/list/weather_protection = get_weather_protection()
+	if(LAZYLEN(weather_protection))
+		return WEATHER_PROTECTED
+
+	return WEATHER_EXPOSED
+
+/mob/proc/IsMultiZAdjacent(var/atom/neighbor)
+
+	var/turf/T = get_turf(src)
+	var/turf/N = get_turf(neighbor)
+
+	// Not on valid turfs.
+	if(QDELETED(src) || QDELETED(neighbor) || !istype(T) || !istype(N))
+		return FALSE
+
+	// On the same z-level, we don't need to care about multiz.
+	if(N.z == T.z)
+		return Adjacent(neighbor)
+
+	// More than one z-level away from each other.
+	if(abs(N.x - T.x) > 1 || abs(N.y - T.y) > 1 || abs(N.z - T.z) > 1)
+		return FALSE
+
+	// Not in a connected z-volume.
+	if(!(N.z in GetConnectedZlevels(T.z)))
+		return FALSE
+
+	// Are they below us?
+	if(N.z < T.z && HasBelow(T.z))
+		var/turf/B = GetBelow(T)
+		return T.is_open() && neighbor.Adjacent(B)
+
+	// Are they above us?
+	if(HasAbove(T.z))
+		var/turf/A = GetAbove(T)
+		return A.is_open() && neighbor.Adjacent(A)
+
+	return FALSE

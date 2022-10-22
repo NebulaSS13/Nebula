@@ -15,7 +15,7 @@
 /obj/item/haircomb/attack_self(mob/user)
 	if(!user.incapacitated())
 		var/decl/pronouns/G = user.get_pronouns()
-		user.visible_message(SPAN_NOTICE("\The [user] uses \the [src] to comb their hair with incredible style and sophistication. What a [G.informal_term]."))
+		user.visible_message(SPAN_NOTICE("\The [user] uses \the [src] to comb [G.his] hair with incredible style and sophistication. What a [G.informal_term]."))
 
 /obj/item/haircomb/brush
 	name = "hairbrush"
@@ -29,7 +29,7 @@
 /obj/item/haircomb/brush/attack_self(mob/user)
 	if(ishuman(user) && !user.incapacitated())
 		var/mob/living/carbon/human/H = user
-		var/datum/sprite_accessory/hair/hair_style = global.hair_styles_list[H.h_style]
+		var/decl/sprite_accessory/hair/hair_style = GET_DECL(H.h_style)
 		if(hair_style.flags & VERY_SHORT)
 			H.visible_message(SPAN_NOTICE("\The [H] just sort of runs \the [src] over their scalp."))
 		else

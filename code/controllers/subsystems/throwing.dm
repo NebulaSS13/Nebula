@@ -26,8 +26,16 @@ SUBSYSTEM_DEF(throwing)
 		var/atom/movable/AM = currentrun[currentrun.len]
 		var/datum/thrownthing/TT = currentrun[AM]
 		currentrun.len--
-		if (QDELETED(AM) || QDELETED(TT))
-			processing -= AM
+		if (QDELETED(AM))
+			if(!QDELETED(TT))
+				qdel(TT) // handles removing from processing list
+			if (MC_TICK_CHECK)
+				return
+			continue
+		if (QDELETED(TT))
+			if(!QDELETED(AM))
+				AM.throwing = null
+				processing -= AM
 			if (MC_TICK_CHECK)
 				return
 			continue
@@ -122,7 +130,7 @@ SUBSYSTEM_DEF(throwing)
 	last_move = world.time
 
 	//calculate how many tiles to move, making up for any missed ticks.
-	var/tilestomove = CEILING(min(((((world.time+world.tick_lag) - start_time + delayed_time) * speed) - (dist_travelled ? dist_travelled : -1)), speed*MAX_TICKS_TO_MAKE_UP) * (world.tick_lag * SSthrowing.wait), 1)
+	var/tilestomove = NONUNIT_CEILING(min(((((world.time+world.tick_lag) - start_time + delayed_time) * speed) - (dist_travelled ? dist_travelled : -1)), speed*MAX_TICKS_TO_MAKE_UP) * (world.tick_lag * SSthrowing.wait), 1)
 	while (tilestomove-- > 0)
 		if (dist_travelled >= maxrange || AM.loc == target_turf)
 			finalize()
@@ -168,10 +176,10 @@ SUBSYSTEM_DEF(throwing)
 				hit = TRUE
 				thrownthing.throw_impact(A, src)
 				break
-		
+
 		if(QDELETED(thrownthing))
 			return
-		
+
 		if(!hit)
 			thrownthing.throw_impact(get_turf(thrownthing), src)  // we haven't hit something yet and we still must, let's hit the ground.
 			thrownthing.space_drift(init_dir)

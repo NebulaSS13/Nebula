@@ -47,7 +47,7 @@
 
 /obj/item/implant/proc/can_implant(mob/M, mob/user, var/target_zone)
 	var/mob/living/carbon/human/H = M
-	if(istype(H) && !H.get_organ(target_zone))
+	if(istype(H) && !GET_EXTERNAL_ORGAN(H, target_zone))
 		to_chat(user, "<span class='warning'>\The [M] is missing that body part.</span>")
 		return FALSE
 	return TRUE
@@ -55,9 +55,9 @@
 /obj/item/implant/proc/implant_in_mob(mob/M, var/target_zone)
 	if (ishuman(M))
 		var/mob/living/carbon/human/H = M
-		var/obj/item/organ/external/affected = H.get_organ(target_zone)
+		var/obj/item/organ/external/affected = GET_EXTERNAL_ORGAN(H, target_zone)
 		if(affected)
-			affected.implants += src
+			LAZYADD(affected.implants, src)
 			part = affected
 
 		BITSET(H.hud_updateflag, IMPLOYAL_HUD)
@@ -72,7 +72,7 @@
 /obj/item/implant/proc/removed()
 	imp_in = null
 	if(part)
-		part.implants -= src
+		LAZYREMOVE(part.implants, src)
 		part = null
 	implanted = 0
 
@@ -119,7 +119,7 @@
 
 /obj/item/implant/Destroy()
 	if(part)
-		part.implants.Remove(src)
+		LAZYREMOVE(part.implants, src)
 	var/obj/item/implanter/implanter = loc
 	if(istype(implanter) && implanter.imp == src)
 		implanter.imp = null

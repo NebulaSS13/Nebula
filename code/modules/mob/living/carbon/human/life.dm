@@ -69,6 +69,8 @@
 		//Updates the number of stored chemicals for powers
 		handle_changeling()
 
+		last_pain = null // Clear the last cached pain value so further getHalloss() calls won't use an old value.
+
 		//Organs and blood
 		handle_organs()
 		stabilize_body_temperature() //Body temperature adjusts itself (self-regulation)
@@ -78,8 +80,6 @@
 		handle_pain()
 
 		handle_stamina()
-
-		handle_medical_side_effects()
 
 	if(!handle_some_updates())
 		return											//We go ahead and process them 5 times for HUD images and other stuff though.
@@ -127,7 +127,7 @@
 
 	if(species_organ)
 		var/active_breaths = 0
-		var/obj/item/organ/internal/lungs/L = get_internal_organ(species_organ)
+		var/obj/item/organ/internal/lungs/L = get_organ(species_organ, /obj/item/organ/internal/lungs)
 		if(L)
 			active_breaths = L.active_breathing
 		..(active_breaths)
@@ -183,7 +183,7 @@
 	//Vision
 	var/obj/item/organ/vision
 	if(species.vision_organ)
-		vision = get_internal_organ(species.vision_organ)
+		vision = GET_INTERNAL_ORGAN(src, species.vision_organ)
 
 	if(!species.vision_organ) // Presumably if a species has no vision organs, they see via some other means.
 		set_status(STAT_BLIND, 0)
@@ -261,14 +261,16 @@
 			damage = 8
 			radiation -= 4 * RADIATION_SPEED_COEFFICIENT
 
-		damage = Floor(damage * species.get_radiation_mod(src))
+		damage = FLOOR(damage * species.get_radiation_mod(src))
 		if(damage)
 			adjustToxLoss(damage * RADIATION_SPEED_COEFFICIENT)
 			immunity = max(0, immunity - damage * 15 * RADIATION_SPEED_COEFFICIENT)
 			updatehealth()
-			if(!isSynthetic() && organs.len)
-				var/obj/item/organ/external/O = pick(organs)
-				if(istype(O)) O.add_autopsy_data("Radiation Poisoning", damage)
+			var/list/limbs = get_external_organs()
+			if(!isSynthetic() && LAZYLEN(limbs))
+				var/obj/item/organ/external/O = pick(limbs)
+				if(istype(O))
+					O.add_autopsy_data("Radiation Poisoning", damage)
 
 	/** breathing **/
 
@@ -304,7 +306,7 @@
 	if(!species_organ)
 		return
 
-	var/obj/item/organ/internal/lungs/L = get_internal_organ(species_organ)
+	var/obj/item/organ/internal/lungs/L = get_organ(species_organ, /obj/item/organ/internal/lungs)
 	if(!L || nervous_system_failure())
 		failed_last_breath = 1
 	else
@@ -312,6 +314,9 @@
 	return !failed_last_breath
 
 /mob/living/carbon/human/handle_environment(datum/gas_mixture/environment)
+
+	..()
+
 	if(!environment || (MUTATION_SPACERES in mutations))
 		return
 
@@ -414,7 +419,7 @@
 				continue
 			if(O.damage + (LOW_PRESSURE_DAMAGE) < O.min_broken_damage) //vacuum does not break bones
 				O.take_external_damage(brute = LOW_PRESSURE_DAMAGE, used_weapon = "Low Pressure")
-		if(getOxyLoss() < 55) // 11 OxyLoss per 4 ticks when wearing internals;    unconsciousness in 16 ticks, roughly half a minute
+		if(getOxyLossPercent() < 55) // 11 OxyLoss per 4 ticks when wearing internals;    unconsciousness in 16 ticks, roughly half a minute
 			adjustOxyLoss(4)  // 16 OxyLoss per 4 ticks when no internals present; unconsciousness in 13 ticks, roughly twenty seconds
 		pressure_alert = -2
 
@@ -519,17 +524,16 @@
 			. += THERMAL_PROTECTION_HAND_RIGHT
 	return min(1,.)
 
-/mob/living/carbon/human/handle_chemicals_in_body()
+/mob/living/carbon/human/apply_chemical_effects()
 	. = ..()
-	if(.)
-		if(has_chemical_effect(CE_GLOWINGEYES, 1))
-			update_eyes()
-		updatehealth()
+	if(has_chemical_effect(CE_GLOWINGEYES, 1))
+		update_eyes()
+		return TRUE
 
 // Check if we should die.
 /mob/living/carbon/human/proc/handle_death_check()
 	if(should_have_organ(BP_BRAIN))
-		var/obj/item/organ/internal/brain/brain = get_internal_organ(BP_BRAIN)
+		var/obj/item/organ/internal/brain = GET_INTERNAL_ORGAN(src, BP_BRAIN)
 		if(!brain || (brain.status & ORGAN_DEAD))
 			return TRUE
 	return species.handle_death_check(src)
@@ -569,7 +573,7 @@
 			adjustHalLoss(-3)
 
 			if(prob(2) && is_asystole() && isSynthetic())
-				visible_message("<b>[src]</b> [pick("emits low pitched whirr","beeps urgently")]")
+				visible_message("<b>[src]</b> [pick("emits low pitched whirr","beeps urgently")].")
 		//CONSCIOUS
 		else
 			set_stat(CONSCIOUS)
@@ -659,7 +663,7 @@
 			//Oxygen damage overlay
 			if(getOxyLoss())
 				var/severity = 0
-				switch(getOxyLoss())
+				switch(getOxyLossPercent())
 					if(10 to 20)		severity = 1
 					if(20 to 25)		severity = 2
 					if(25 to 30)		severity = 3
@@ -703,7 +707,7 @@
 					trauma_val = max(shock_stage,get_shock())/(species.total_health-100)
 				// Collect and apply the images all at once to avoid appearance churn.
 				var/list/health_images = list()
-				for(var/obj/item/organ/external/E in organs)
+				for(var/obj/item/organ/external/E in get_external_organs())
 					if(no_damage && (E.brute_dam || E.burn_dam))
 						no_damage = 0
 					health_images += E.get_damage_hud_image()
@@ -743,9 +747,9 @@
 				else							hydration_icon.icon_state = "hydration4"
 
 		if(isSynthetic())
-			var/obj/item/organ/internal/cell/C = get_internal_organ(BP_CELL)
-			if (istype(C))
-				var/chargeNum = Clamp(ceil(C.percent()/25), 0, 4)	//0-100 maps to 0-4, but give it a paranoid clamp just in case.
+			var/obj/item/organ/internal/cell/C = get_organ(BP_CELL, /obj/item/organ/internal/cell)
+			if(C)
+				var/chargeNum = Clamp(CEILING(C.percent()/25), 0, 4)	//0-100 maps to 0-4, but give it a paranoid clamp just in case.
 				cells.icon_state = "charge[chargeNum]"
 			else
 				cells.icon_state = "charge-empty"
@@ -811,7 +815,7 @@
 	// Puke if toxloss is too high
 	var/vomit_score = 0
 	for(var/tag in list(BP_LIVER,BP_KIDNEYS))
-		var/obj/item/organ/internal/I = get_internal_organ(tag)
+		var/obj/item/organ/internal/I = GET_INTERNAL_ORGAN(src, tag)
 		if(I)
 			vomit_score += I.damage
 		else if (should_have_organ(tag))
@@ -842,8 +846,7 @@
 		mind.changeling.regenerate()
 
 /mob/living/carbon/human/proc/handle_shock()
-	if(status_flags & GODMODE)	return 0	//godmode
-	if(!can_feel_pain())
+	if(!can_feel_pain() || (status_flags & GODMODE))
 		shock_stage = 0
 		return
 
@@ -1003,9 +1006,9 @@
 	if (BITTEST(hud_updateflag, SPECIALROLE_HUD))
 		var/image/holder = hud_list[SPECIALROLE_HUD]
 		holder.icon_state = "hudblank"
-		if(mind && mind.assigned_special_role)
-			var/special_role = mind.get_special_role_name()
-			if(special_role && global.hud_icon_reference[special_role])
+		var/special_role = mind?.get_special_role_name()
+		if(special_role)
+			if(global.hud_icon_reference[special_role])
 				holder.icon_state = global.hud_icon_reference[special_role]
 			else
 				holder.icon_state = "hudsyndicate"
@@ -1038,7 +1041,7 @@
 	if(burn_temperature < 1)
 		return
 
-	for(var/obj/item/organ/external/E in organs)
+	for(var/obj/item/organ/external/E in get_external_organs())
 		if(!(E.body_part & protected_limbs) && prob(20))
 			E.take_external_damage(burn = round(species_heat_mod * log(10, (burn_temperature + 10)), 0.1), used_weapon = "fire")
 

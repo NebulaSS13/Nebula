@@ -86,7 +86,7 @@ field_generator power level display
 			else
 				user.visible_message("[user.name] turns on the [src.name]", \
 					"You turn on the [src.name].", \
-					"You hear heavy droning")
+					"You hear heavy droning.")
 				turn_on()
 				investigate_log("<font color='green'>activated</font> by [user.key].","singulo")
 
@@ -107,14 +107,14 @@ field_generator power level display
 				playsound(src.loc, 'sound/items/Ratchet.ogg', 75, 1)
 				user.visible_message("[user.name] secures [src.name] to the floor.", \
 					"You secure the external reinforcing bolts to the floor.", \
-					"You hear ratchet")
+					"You hear ratchet.")
 				src.anchored = 1
 			if(1)
 				state = 0
 				playsound(src.loc, 'sound/items/Ratchet.ogg', 75, 1)
 				user.visible_message("[user.name] unsecures [src.name] reinforcing bolts from the floor.", \
 					"You undo the external reinforcing bolts.", \
-					"You hear ratchet")
+					"You hear ratchet.")
 				src.anchored = 0
 			if(2)
 				to_chat(user, "<span class='warning'> The [src.name] needs to be unwelded from the floor.</span>")
@@ -130,7 +130,7 @@ field_generator power level display
 					playsound(src.loc, 'sound/items/Welder2.ogg', 50, 1)
 					user.visible_message("[user.name] starts to weld the [src.name] to the floor.", \
 						"You start to weld the [src] to the floor.", \
-						"You hear welding")
+						"You hear welding.")
 					if (do_after(user,20,src))
 						if(!src || !WT.isOn()) return
 						state = 2
@@ -142,7 +142,7 @@ field_generator power level display
 					playsound(src.loc, 'sound/items/Welder2.ogg', 50, 1)
 					user.visible_message("[user.name] starts to cut the [src.name] free from the floor.", \
 						"You start to cut the [src] free from the floor.", \
-						"You hear welding")
+						"You hear welding.")
 					if (do_after(user,20,src))
 						if(!src || !WT.isOn()) return
 						state = 1

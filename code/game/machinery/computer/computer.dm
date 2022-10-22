@@ -1,5 +1,5 @@
 /obj/machinery/computer
-	name = "computer"
+	name = "computer console"
 	icon = 'icons/obj/computer.dmi'
 	icon_state = "computer"
 	density = 1

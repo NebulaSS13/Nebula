@@ -22,8 +22,8 @@ var/global/list/terminal_commands
 	regex = new (pattern, regex_flags)
 	..()
 
-/datum/terminal_command/proc/check_access(mob/user)
-	return has_access(req_access, user.GetAccess())
+/datum/terminal_command/proc/check_access(list/access)
+	return has_access(req_access, access)
 
 /datum/terminal_command/proc/get_nid(text)
 	if(!nid_regex)
@@ -41,7 +41,7 @@ var/global/list/terminal_commands
 		return
 	if(!user.skill_check(core_skill, skill_needed))
 		return skill_fail_message()
-	if(!check_access(user))
+	if(!check_access(terminal.get_access(user)))
 		return "[name]: ACCESS DENIED"
 	if(needs_network && !terminal.computer.get_network_status())
 		return "NETWORK ERROR: Check connection and try again."
@@ -55,7 +55,7 @@ var/global/list/terminal_commands
 // Prints data out, split by page number.
 /datum/terminal_command/proc/print_as_page(list/data, value_name, selected_page, pg_length)
 	. = list()
-	var/max_pages = Ceiling(length(data)/pg_length)
+	var/max_pages = CEILING(length(data)/pg_length)
 	var/pg = clamp(selected_page, 1, max_pages)
 
 	var/start_index = (pg - 1)*pg_length + 1
@@ -94,7 +94,7 @@ Subtypes
 	var/list/manargs = get_arguments(text)
 	if(!length(manargs) || isnum(text2num(manargs[1])))
 		var/selected_page = (length(manargs)) ? text2num(manargs[1]) : 1
-		
+
 		var/list/valid_commands = list()
 		for(var/comm in get_terminal_commands())
 			var/datum/terminal_command/command_datum = comm
@@ -183,15 +183,15 @@ Subtypes
 	var/nid = get_nid(text)
 	if(!nid)
 		return
-	var/datum/extension/interactive/ntos/origin = terminal.computer
+	var/datum/extension/interactive/os/origin = terminal.computer
 	if(!origin || !origin.get_network_status())
 		return
 	var/datum/computer_network/network = origin.get_network()
-	var/datum/extension/interactive/ntos/comp = network.get_os_by_nid(nid)
+	var/datum/extension/interactive/os/comp = network.get_os_by_nid(nid)
 	if(!comp || !comp.host_status() || !comp.get_network_status())
 		return
 	var/area/A = get_area(comp.get_physical_host())
-	return "... Estimating location: \the [A.name]"
+	return "... Estimating location: \the [A.proper_name]"
 
 /datum/terminal_command/ping
 	name = "ping"
@@ -206,12 +206,12 @@ Subtypes
 	if(!nid)
 		. += "ping: Improper syntax. Use ping nid."
 		return
-	var/datum/extension/interactive/ntos/origin = terminal.computer
+	var/datum/extension/interactive/os/origin = terminal.computer
 	if(!origin || !origin.get_network_status())
 		. += "failed. Check network status."
 		return
 	var/datum/computer_network/network = terminal.computer.get_network()
-	var/datum/extension/interactive/ntos/comp = network.get_os_by_nid(nid)
+	var/datum/extension/interactive/os/comp = network.get_os_by_nid(nid)
 	if(!comp || !comp.host_status() || !comp.get_network_status())
 		. += "failed. Target device not responding."
 		return
@@ -229,12 +229,12 @@ Subtypes
 		return "ssh is not supported on remote terminals."
 	if(length(text) < 5)
 		return "ssh: Improper syntax. Use ssh nid."
-	var/datum/extension/interactive/ntos/origin = terminal.computer
+	var/datum/extension/interactive/os/origin = terminal.computer
 	if(!origin || !origin.get_network_status())
 		return "ssh: Check network connectivity."
 	var/nid = text2num(copytext(text, 5))
 	var/datum/computer_network/network = terminal.computer.get_network()
-	var/datum/extension/interactive/ntos/comp = network.get_os_by_nid(nid)
+	var/datum/extension/interactive/os/comp = network.get_os_by_nid(nid)
 	if(comp == origin)
 		return "ssh: Error; can not open remote terminal to self."
 	if(!comp || !comp.host_status() || !comp.get_network_status())
@@ -278,7 +278,7 @@ Subtypes
 		return "cd: Changed to removable disk"
 
 	else if(target == "NETWORK")
-		var/datum/extension/interactive/ntos/origin = terminal.computer
+		var/datum/extension/interactive/os/origin = terminal.computer
 		if(!origin || !origin.get_network_status())
 			return "cd: Check network connectivity."
 		var/datum/computer_network/network = terminal.computer.get_network()
@@ -287,7 +287,7 @@ Subtypes
 		var/datum/extension/network_device/mainframe/M = network.get_device_by_tag(network_tag)
 		if(!istype(M))
 			return "cd: Could not locate file server with tag [network_tag]."
-		if(!M.has_access(user))
+		if(!M.has_access(terminal.get_access(user)))
 			return "cd: Access denied to file server with tag [network_tag]"
 		terminal.current_disk = terminal.disks[/datum/file_storage/network]
 		if(!terminal.current_disk)
@@ -311,7 +311,7 @@ Subtypes
 /datum/terminal_command/ls/proper_input_entered(text, mob/user, datum/terminal/terminal)
 	if(!terminal.current_disk || ispath(terminal.current_disk))
 		return "ls: No disk selected."
-	
+
 	var/list/ls_args = get_arguments(text)
 
 	var/selected_page = (length(ls_args)) ? text2num(ls_args[1]) : 1
@@ -322,7 +322,7 @@ Subtypes
 	var/list/file_data = list()
 	for(var/datum/computer_file/F in files)
 		file_data += "[F.filename].[F.filetype] - [F.size] GQ"
-	
+
 	return print_as_page(file_data, "file", selected_page, terminal.history_max_length - 1)
 
 /datum/terminal_command/remove
@@ -333,31 +333,37 @@ Subtypes
 /datum/terminal_command/remove/proper_input_entered(text, mob/user, datum/terminal/terminal)
 	if(!terminal.current_disk)
 		return "rm: No disk selected."
-	
+
 	var/file_name = copytext(text, 4)
 
-	var/deleted = terminal.current_disk.delete_file(file_name)
+	var/deleted = terminal.current_disk.delete_file(file_name, terminal.get_access(user), user)
 	if(deleted)
 		return "rm: Removed file [file_name]."
 	else
-		return "rm: Failed to remove file [file_name]."
+		return "rm: Failed to remove file [file_name]. Additional access may be required."
 
 /datum/terminal_command/move
 	name = "mv"
-	man_entry = list("Format: mv \[file name\] \[destination\]", "Moves a file in the current disk to another.")
+	man_entry = list("Format: mv \[file name\] \[destination\] \[copying (0/1) \]", "Moves a file in the current disk to another.")
 	pattern = @"^mv"
 
 /datum/terminal_command/move/proper_input_entered(text, mob/user, datum/terminal/terminal)
 	if(!terminal.current_disk)
 		return "mv: No disk selected."
-	
+
 	var/list/mv_args = get_arguments(text)
 	if(length(mv_args) < 2)
-		return "mv: Improper syntax, use mv \[file name\] \[destination\]."
+		return "mv: Improper syntax, use mv \[file name\] \[destination\] \[copying (0/1) \]."
 	var/datum/computer_file/F = terminal.current_disk.get_file(mv_args[1])
 	if(!F)
 		return "mv: Could not find file with name [mv_args[1]]."
-
+	var/copying = length(mv_args > 2) ? text2num(mv_args[3]) : FALSE
+	if(copying == TRUE)
+		if(!(F.get_file_perms(terminal.get_access(user), user) & OS_READ_ACCESS))
+			return "mv: You do not have read access to this file."
+	else
+		if(!(F.get_file_perms(terminal.get_access(user), user) & OS_WRITE_ACCESS))
+			return "mv: You do not have write access to this file. Write access is required when not copying files with mv"
 	// Find the destination.
 	var/datum/file_storage/dest
 	var/target = uppertext(mv_args[2])
@@ -376,14 +382,14 @@ Subtypes
 		if(error)
 			return "mv: [error]"
 	else
-		var/datum/extension/interactive/ntos/origin = terminal.computer
+		var/datum/extension/interactive/os/origin = terminal.computer
 		if(!origin || !origin.get_network_status())
 			return "mv: Check network connectivity."
 		var/datum/computer_network/network = terminal.computer.get_network()
 		var/datum/extension/network_device/mainframe/M = network.get_device_by_tag(target)
 		if(!istype(M))
 			return "mv: Could not locate destination with tag [target]."
-		if(!M.has_access(user))
+		if(!M.has_access(terminal.get_access(user)))
 			return "mv: Access denied to destination with tag [target]"
 		dest = terminal.disks[/datum/file_storage/network]
 		if(!dest)
@@ -397,8 +403,8 @@ Subtypes
 
 	if(!dest)
 		return "mv: Could not locate file destination."
-	
-	terminal.current_move = new(terminal.current_disk, dest, F)
+
+	terminal.current_move = new(terminal.current_disk, dest, F, copying)
 	return "mv: Beginning file move..."
 
 /datum/terminal_command/copy
@@ -409,7 +415,7 @@ Subtypes
 /datum/terminal_command/copy/proper_input_entered(text, mob/user, datum/terminal/terminal)
 	if(!terminal.current_disk)
 		return "cp: No disk selected."
-	
+
 	if(length(text) < 4)
 		return "cp: Improper syntax, use copy \[file name\]."
 
@@ -440,7 +446,7 @@ Subtypes
 	var/datum/computer_file/F = terminal.current_disk.get_file(rename_args[1])
 	if(!F)
 		return "rename: Could not find file with name [rename_args[1]]."
-	
+
 	var/new_name = sanitize(rename_args[2])
 
 	if(length(new_name))
@@ -458,9 +464,109 @@ Subtypes
 	var/list/target_args = get_arguments(text)
 	if(!length(target_args))
 		return "target: The current target network tag is [terminal.network_target]."
-	
+
 	terminal.network_target = uppertext(target_args[1])
 	return "target: Changed network target to [terminal.network_target]."
+
+/datum/terminal_command/login
+	name = "login"
+	man_entry = list("Format: login \[account login\] \[account password\]", "Logs in to the given user account.")
+	pattern = @"^login"
+	needs_network = TRUE
+
+/datum/terminal_command/login/proper_input_entered(text, mob/user, datum/terminal/terminal)
+
+	var/list/login_args = get_arguments(text)
+
+	if(length(login_args) < 2)
+		return "login: Improper syntax, use login \[account login\] \[account password\]."
+
+	var/datum/extension/interactive/os/account_computer = terminal.get_account_computer()
+	var/login_success = account_computer.login_account(login_args[1], login_args[2])
+	if(login_success)
+		return "login: Login successful. Welcome [login_args[1]]!"
+	return "login: Could not log in to account [login_args[1]]. Check password or network connectivity."
+
+/datum/terminal_command/logout
+	name = "logout"
+	man_entry = list("Format: logout", "Logs out of the current user account.")
+	pattern = @"^logout"
+	needs_network =  TRUE
+
+/datum/terminal_command/logout/proper_input_entered(text, mob/user, datum/terminal/terminal)
+	var/datum/extension/interactive/os/account_computer = terminal.get_account_computer()
+	account_computer.logout_account()
+	return "logout: Log out successful."
+
+/datum/terminal_command/permmod
+	name = "permmod"
+	man_entry = list("Format: permmod \[file name\] \[access key\] \[permission mod flags\]", "Modifies or lists the permissions of the given file. Do not pass an access key to list permissions.",
+	"Supported flags are as follows:",
+	"'+/-' - Add or Remove access requirement",
+	"'r/w/m' - Target read/write/modification access",
+	"'u/g' - Add group or individual user access requirement",
+	"For example, the command 'permmod TestFile bronte.lowe +ru' would add bronte.lowe to the read permissions list of the file TestFile."
+	) // TODO: Add an actual flags option for terminal commands in addition to arguments
+	pattern = @"^permmod"
+	needs_network = TRUE
+
+/datum/terminal_command/permmod/proper_input_entered(text, mob/user, datum/terminal/terminal)
+
+	if(!terminal.current_disk)
+		return "permmod: No disk selected."
+
+	var/list/permmod_args = get_arguments(text)
+	if(!length(permmod_args))
+		return "permmod: Improper syntax, use permmod \[file name\] \[access key\] \[permission mod flags\]."
+
+	var/datum/computer_file/F = terminal.current_disk.get_file(permmod_args[1])
+	if(!F)
+		return "permmod: Could not find file with name [permmod_args[1]]."
+
+	if(length(permmod_args) < 3)
+		return F.get_perms_readable()
+
+	var/flags = permmod_args[3]
+	var/mode
+	var/access_key
+	var/perm
+	if(findtext(flags, "-"))
+		mode = "-"
+	else if(findtext(flags, "+"))
+		mode = "+"
+	if(!mode)
+		return "permmod: Invalid flag syntax. Use man command to learn more about permmod flag syntax."
+
+	if(findtext(flags, "r"))
+		perm = OS_READ_ACCESS
+	else if(findtext(flags, "w"))
+		perm = OS_WRITE_ACCESS
+	else if(findtext(flags, "m"))
+		perm = OS_MOD_ACCESS
+	else
+		return "permmod: Invalid flag syntax. Use man command to learn more about permmod flag syntax."
+	var/datum/computer_network/network = terminal.computer.get_network()
+	if(findtext(flags, "u"))
+		var/account_login = permmod_args[2]
+		if(!network.find_account_by_login(account_login))
+			return "permmod: No user account with login '[account_login]' found."
+		access_key = "[account_login]@[network.network_id]"
+	else if(findtext(flags, "g"))
+		var/group_name = permmod_args[2]
+		var/datum/extension/network_device/acl/acl = network.access_controller
+		if(!istype(acl))
+			return "permmod: No active ACL could be located on the network."
+		if(!(group_name in acl.get_all_groups()))
+			return "permmod: No group with name '[group_name]' found."
+		access_key = "[group_name].[network.network_id]"
+	else
+		return "permmod: Invalid flag syntax. Use man command to learn more about permmod flag syntax."
+
+	var/success = F.change_perms(mode, perm, access_key, terminal.get_access(user))
+	if(success)
+		return "permmod: Successfully changed permissions for [F.filename]."
+	else
+		return "permmod: Could not change permissions for [F.filename]. You may lack permission modification access."
 
 // Terminal commands for passing information to public variables and methods follows
 /datum/terminal_command/com
@@ -490,17 +596,17 @@ Subtypes
 	var/list/com_args = get_arguments(text)
 	if(!length(com_args))
 		return "com: Improper syntax, use com \[variable\] \[value\]."
-	
+
 	var/target_tag = terminal.network_target
 	if(!target_tag)
 		return "com: No network target set. Use 'target' to set a network target."
 
 	var/datum/computer_network/network = terminal.computer.get_network()
 	var/datum/extension/network_device/D = network.get_device_by_tag(target_tag)
-	
+
 	if(!istype(D))
 		return "com: Could not find target device with network tag [target_tag]."
-	
+
 	if(!D.has_commands)
 		return "com: Target device cannot receive commmands."
 
@@ -510,7 +616,7 @@ Subtypes
 	else if(length(com_args) == 2)
 		called_args = com_args[2]
 
-	return D.on_command(com_args[1], called_args, user)
+	return D.on_command(com_args[1], called_args, terminal.get_access(user))
 
 // Lists the commands available on the target device.
 /datum/terminal_command/listcom
@@ -520,7 +626,7 @@ Subtypes
 	needs_network = TRUE
 	skill_needed = SKILL_EXPERT
 
-/datum/terminal_command/listcom/proper_input_entered(text, mob/user, datum/terminal/terminal)	
+/datum/terminal_command/listcom/proper_input_entered(text, mob/user, datum/terminal/terminal)
 	var/target_tag = terminal.network_target
 	if(!target_tag)
 		return "listcom: No network target set. Use 'target' to set a network target."
@@ -555,7 +661,7 @@ Subtypes
 		selected_ref = D.command_and_write[selected_alias]
 	else
 		return "listcom: No command with alias '[selected_alias]' found."
-	
+
 	. = list()
 	. += "[selected_ref.name]: [selected_ref.desc]"
 	if(istype(selected_ref, /decl/public_access/public_variable))
@@ -578,7 +684,7 @@ Subtypes
 	var/list/addcom_args = get_arguments(text)
 	if(!length(addcom_args))
 		return "addcom: Improper syntax, use addcom \[type\] \[alias\]. Accepts types 'METHOD' or 'VARIABLE'"
-	
+
 	var/target_tag = terminal.network_target
 	if(!target_tag)
 		return "addcom: No network target set. Use 'target' to set a network target."
@@ -612,7 +718,7 @@ Subtypes
 	var/list/modcom_args = get_arguments(text)
 	if(!length(modcom_args))
 		return "modcom: Improper syntax, use modcom \[alias\] \[index\].'"
-	
+
 	var/target_tag = terminal.network_target
 	if(!target_tag)
 		return "modcom: No network target set. Use 'target' to set a network target."
@@ -629,7 +735,7 @@ Subtypes
 	var/alias = modcom_args[1]
 	var/list/valid_commands = list()
 	var/list/device_command_list
-	// Find the valid methods or variables this command can reference 
+	// Find the valid methods or variables this command can reference
 	if(alias in D.command_and_call)
 		device_command_list = D.command_and_call
 		valid_commands = D.get_public_methods()
@@ -638,7 +744,7 @@ Subtypes
 		valid_commands = D.get_public_variables()
 	else
 		return "modcom: No command with [alias] found."
-	
+
 	var/selected_index = (length(modcom_args) >= 2) ? modcom_args[2] : null
 
 	// If there is no given index, return a list of available indexes.
@@ -651,7 +757,7 @@ Subtypes
 			options += "([index] - [reference.name])"
 			index++
 		return options
-	
+
 	selected_index = text2num(selected_index)
 	if(selected_index > length(valid_commands))
 		return "modcom: Invalid index."
@@ -673,11 +779,11 @@ Subtypes
 	var/list/namecom_args = get_arguments(text)
 	if(length(namecom_args) < 2)
 		return "namecom: Improper syntax, use namecom \[old alias\] \[new alias\]."
-	
+
 	var/target_tag = terminal.network_target
 	if(!target_tag)
 		return "namecom: No network target set. Use 'target' to set a network target."
-	
+
 	var/datum/computer_network/network = terminal.computer.get_network()
 	var/datum/extension/network_device/D = network.get_device_by_tag(target_tag)
 
@@ -703,11 +809,11 @@ Subtypes
 	var/list/rmcom_args = get_arguments(text)
 	if(!length(rmcom_args))
 		return "rmcom: Improper syntax, use rmcom \[alias\]."
-	
+
 	var/target_tag = terminal.network_target
 	if(!target_tag)
 		return "rmcom: No network target set. Use 'target' to set a network target."
-	
+
 	var/datum/computer_network/network = terminal.computer.get_network()
 	var/datum/extension/network_device/D = network.get_device_by_tag(target_tag)
 

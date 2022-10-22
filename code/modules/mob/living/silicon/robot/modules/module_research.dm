@@ -1,15 +1,14 @@
 /obj/item/robot_module/research
 	name = "research module"
-	associated_department = /decl/department/science
 	display_name = "Research"
 	channels = list(
 		"Science" = TRUE
 	)
-	networks = list(
-		NETWORK_RESEARCH
+	camera_channels = list(
+		CAMERA_CHANNEL_RESEARCH
 	)
-	sprites = list(
-		"Droid" = "droid-science"
+	module_sprites = list(
+		"Droid" = 'icons/mob/robots/robot_droid.dmi'
 	)
 	equipment = list(
 		/obj/item/flash,

@@ -1,25 +1,28 @@
 #define CYBORG_POWER_USAGE_MULTIPLIER 2.5 // Multiplier for amount of power cyborgs use.
 
 /mob/living/silicon/robot
-	name = "Cyborg"
-	real_name = "Cyborg"
-	icon = 'icons/mob/robots.dmi'
-	icon_state = "robot"
+	name = "robot"
+	real_name = "robot"
+	icon = 'icons/mob/robots/robot.dmi'
+	icon_state = ICON_STATE_WORLD
 	maxHealth = 300
 	health = 300
 	mob_sort_value = 4
+
+	z_flags = ZMM_MANGLE_PLANES
 
 	mob_bump_flag = ROBOT
 	mob_swap_flags = ROBOT|MONKEY|SLIME|SIMPLE_ANIMAL
 	mob_push_flags = ~HEAVY //trundle trundle
 	skillset = /datum/skillset/silicon/robot
 
+	var/panel_icon = 'icons/mob/robots/_panels.dmi'
+
 	var/lights_on = 0 // Is our integrated light on?
 	var/used_power_this_tick = 0
 	var/power_efficiency = 1
 	var/sight_mode = 0
 	var/custom_name = ""
-	var/custom_sprite = 0 //Due to all the sprites involved, a var for our custom borgs may be best
 	var/crisis //Admin-settable for combat module use.
 	var/crisis_override = 0
 	var/integrated_light_power = 0.6
@@ -28,12 +31,7 @@
 	var/module_category = ROBOT_MODULE_TYPE_GROUNDED
 	var/dismantle_type = /obj/item/robot_parts/robot_suit
 
-//Icon stuff
-
-	var/static/list/eye_overlays
-	var/icontype          //Persistent icontype tracking allows for cleaner icon updates
-	var/module_sprites[0] //Used to store the associations between sprite names and sprite index.
-	var/icon_selected = 1 //If icon selection has been completed yet
+	var/icon_selected = TRUE //If icon selection has been completed yet
 
 //Hud stuff
 
@@ -57,7 +55,6 @@
 
 	var/mob/living/silicon/ai/connected_ai = null
 	var/obj/item/cell/cell = /obj/item/cell/high
-	var/obj/machinery/camera/camera = null
 
 	var/cell_emp_mult = 2.5
 
@@ -115,17 +112,13 @@
 	robot_modules_background = new()
 	robot_modules_background.icon_state = "block"
 	ident = random_id(/mob/living/silicon/robot, 1, 999)
-	module_sprites["Basic"] = "robot"
-	icontype = "Basic"
+
 	updatename(modtype)
 	update_icon()
 
-	if(!scrambledcodes && !camera)
-		camera = new /obj/machinery/camera(src)
-		camera.c_tag = real_name
-		camera.replace_networks(list(NETWORK_PUBLIC,NETWORK_ROBOTS))
-		if(wires.IsIndexCut(BORG_WIRE_CAMERA))
-			camera.status = 0
+	if(!scrambledcodes)
+		set_extension(src, /datum/extension/network_device/camera/robot, null, null, null, TRUE, list(CAMERA_CHANNEL_ROBOTS), name)
+		verbs |= /mob/living/silicon/robot/proc/configure_camera
 	init()
 	initialize_components()
 
@@ -143,6 +136,9 @@
 		cell_component.installed = 1
 
 	add_robot_verbs()
+
+	// Disables lay down verb for robots due they're can't lay down and it cause some movement, vision issues.
+	verbs -= /mob/living/verb/lay_down
 
 	hud_list[HEALTH_HUD]      = new /image/hud_overlay('icons/mob/hud.dmi', src, "hudblank")
 	hud_list[STATUS_HUD]      = new /image/hud_overlay('icons/mob/hud.dmi', src, "hudhealth100")
@@ -229,27 +225,6 @@
 	QDEL_NULL(wires)
 	. = ..()
 
-/mob/living/silicon/robot/proc/set_module_sprites(var/list/new_sprites)
-	if(new_sprites && new_sprites.len)
-		module_sprites = new_sprites.Copy()
-		//Custom_sprite check and entry
-
-		if (custom_sprite == 1)
-			var/list/valid_states = icon_states(CUSTOM_ITEM_SYNTH)
-			if("[ckey]-[modtype]" in valid_states)
-				module_sprites["Custom"] = "[src.ckey]-[modtype]"
-				icon = CUSTOM_ITEM_SYNTH
-				icontype = "Custom"
-			else
-				icontype = module_sprites[1]
-				icon = 'icons/mob/robots.dmi'
-				to_chat(src, "<span class='warning'>Custom Sprite Sheet does not contain a valid icon_state for [ckey]-[modtype]</span>")
-		else
-			icontype = module_sprites[1]
-		icon_state = module_sprites[icontype]
-	update_icon()
-	return module_sprites
-
 /mob/living/silicon/robot/proc/reset_module(var/suppress_alert = null)
 	// Clear hands and module icon.
 	uneq_all()
@@ -325,18 +300,16 @@
 	else
 		changed_name = "[modtype] [braintype]-[num2text(ident)]"
 
-	create_or_rename_email(changed_name, "root.rt")
+	create_or_update_account(changed_name)
 	real_name = changed_name
 	name = real_name
 	if(mind)
 		mind.name = changed_name
 
 	//We also need to update name of internal camera.
-	if (camera)
-		camera.c_tag = changed_name
-
-	if(!custom_sprite) //Check for custom sprite
-		set_custom_sprite()
+	var/datum/extension/network_device/camera/robot/D = get_extension(src, /datum/extension/network_device)
+	if(D)
+		D.display_name = changed_name
 
 	//Flavour text.
 	if(client)
@@ -353,7 +326,7 @@
 
 	spawn(0)
 		var/newname
-		newname = sanitizeName(input(src,"You are a robot. Enter a name, or leave blank for the default name.", "Name change","") as text, MAX_NAME_LEN, allow_numbers = 1)
+		newname = sanitize_name(input(src,"You are a robot. Enter a name, or leave blank for the default name.", "Name change","") as text, MAX_NAME_LEN, allow_numbers = 1)
 		if (newname)
 			custom_name = newname
 
@@ -366,6 +339,7 @@
 	if(!opened && has_power && do_after(usr, 60) && !opened && has_power)
 		to_chat(src, "You [locked ? "un" : ""]lock your panel.")
 		locked = !locked
+
 
 /mob/living/silicon/robot/proc/self_diagnosis()
 	if(!is_component_functioning("diagnosis unit"))
@@ -428,6 +402,19 @@
 	else
 		C.toggled = 1
 		to_chat(src, "<span class='warning'>You enable [C.name].</span>")
+
+/mob/living/silicon/robot/proc/configure_camera()
+	set category = "Silicon Commands"
+	set name = "Configure Camera"
+	set desc = "Configure your internal camera's network settings."
+
+	if(stat == DEAD)
+		return
+
+	var/datum/extension/network_device/camera/C = get_extension(src, /datum/extension/network_device/)
+	if(C)
+		C.ui_interact(src)
+
 /mob/living/silicon/robot/proc/update_robot_light()
 	if(lights_on)
 		if(intenselight)
@@ -524,8 +511,7 @@
 			adjustBruteLoss(-30)
 			updatehealth()
 			add_fingerprint(user)
-			for(var/mob/O in viewers(user, null))
-				O.show_message(text("<span class='warning'>[user] has fixed some of the dents on [src]!</span>"), 1)
+			user.visible_message(SPAN_NOTICE("\The [user] has fixed some of the dents on \the [src]!"))
 		else
 			to_chat(user, "Need more welding fuel!")
 			return
@@ -539,8 +525,7 @@
 			user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
 			adjustFireLoss(-30)
 			updatehealth()
-			for(var/mob/O in viewers(user, null))
-				O.show_message(text("<span class='warning'>[user] has fixed some of the burnt wires on [src]!</span>"), 1)
+			user.visible_message(SPAN_NOTICE("\The [user] has fixed some of the burnt wires on \the [src]!"))
 
 	else if(isCrowbar(W) && user.a_intent != I_HURT)	// crowbar means open or close the cover - we all know what a crowbar is by now
 		if(opened)
@@ -644,7 +629,7 @@
 			to_chat(user, "Unable to locate a radio.")
 	else if (istype(W, /obj/item/card/id)||istype(W, /obj/item/modular_computer)||istype(W, /obj/item/card/robot))			// trying to unlock the interface with an ID card
 		if(emagged)//still allow them to open the cover
-			to_chat(user, "The interface seems slightly damaged")
+			to_chat(user, "The interface seems slightly damaged.")
 		if(opened)
 			to_chat(user, "You must close the cover to swipe an ID card.")
 		else
@@ -684,24 +669,21 @@
 		else if (H.wrapped == W)
 			H.wrapped = null
 
-/mob/living/silicon/robot/attack_hand(mob/user)
+/mob/living/silicon/robot/default_help_interaction(mob/user)
+	if(ishuman(user))
+		user.attempt_hug(src)
+		return TRUE
+	. = ..()
 
-	add_fingerprint(user)
+/mob/living/silicon/robot/default_hurt_interaction(mob/user)
+	var/decl/species/user_species = user.get_species()
+	if(user_species?.can_shred(user))
+		attack_generic(user, rand(30,50), "slashed")
+		return TRUE
+	. = ..()
 
-	if(istype(user,/mob/living/carbon/human))
-
-		var/mob/living/carbon/human/H = user
-		if(H.a_intent == I_HELP && H.attempt_hug(src))
-			return TRUE
-
-		if(H.a_intent == I_GRAB)
-			return ..()
-
-		if(H.a_intent == I_HURT && H.species.can_shred(H))
-			attack_generic(H, rand(30,50), "slashed")
-			return TRUE
-
-	if(opened && !wiresexposed && (!istype(user, /mob/living/silicon)))
+/mob/living/silicon/robot/default_interaction(mob/user)
+	if(user.a_intent != I_GRAB && opened && !wiresexposed && (!istype(user, /mob/living/silicon)))
 		var/datum/robot_component/cell_component = components["power cell"]
 		if(cell)
 			cell.update_icon()
@@ -717,45 +699,46 @@
 			var/obj/item/broken_device = cell_component.wrapped
 			to_chat(user, "You remove \the [broken_device].")
 			user.put_in_active_hand(broken_device)
+		return TRUE
+	. = ..()
 
 //Robots take half damage from basic attacks.
 /mob/living/silicon/robot/attack_generic(var/mob/user, var/damage, var/attack_message)
-	return ..(user,Floor(damage/2),attack_message)
+	return ..(user,FLOOR(damage/2),attack_message)
 
 /mob/living/silicon/robot/get_req_access()
 	return req_access
 
+/mob/living/silicon/robot/get_eye_overlay()
+	var/eye_icon_state = "[icon_state]-eyes"
+	if(check_state_in_icon(eye_icon_state, icon))
+		return emissive_overlay(icon, eye_icon_state)
+
 /mob/living/silicon/robot/on_update_icon()
-	overlays.Cut()
+
+	..()
+
+	icon_state = ICON_STATE_WORLD
 	if(stat == CONSCIOUS)
-		var/eye_icon_state = "eyes-[module_sprites[icontype]]"
-		if(eye_icon_state in icon_states(icon))
-			if(!eye_overlays)
-				eye_overlays = list()
-			var/image/eye_overlay = eye_overlays[eye_icon_state]
-			if(!eye_overlay)
-				eye_overlay = emissive_overlay(icon, eye_icon_state)
-				eye_overlays[eye_icon_state] = eye_overlay
-			overlays += eye_overlay
+		var/image/eyes = get_eye_overlay()
+		if(eyes)
+			add_overlay(eyes)
 
 	if(opened)
-		var/panelprefix = custom_sprite ? src.ckey : "ov"
 		if(wiresexposed)
-			overlays += "[panelprefix]-openpanel +w"
+			add_overlay(image(panel_icon, "ov-openpanel +w"))
 		else if(cell)
-			overlays += "[panelprefix]-openpanel +c"
+			add_overlay(image(panel_icon, "ov-openpanel +c"))
 		else
-			overlays += "[panelprefix]-openpanel -c"
+			add_overlay(image(panel_icon, "ov-openpanel -c"))
 
-	if(module_active && istype(module_active,/obj/item/borg/combat/shield))
-		overlays += "[module_sprites[icontype]]-shield"
+	if(module_active && istype(module_active, /obj/item/borg/combat/shield))
+		add_overlay("[icon_state]-shield")
 
-	if(modtype == "Combat")
-		if(module_active && istype(module_active,/obj/item/borg/combat/mobility))
-			icon_state = "[module_sprites[icontype]]-roll"
-		else
-			icon_state = module_sprites[icontype]
-		return
+	var/datum/extension/hattable/hattable = get_extension(src, /datum/extension/hattable)
+	var/image/hat = hattable?.get_hat_overlay(src)
+	if(hat)
+		add_overlay(hat)
 
 /mob/living/silicon/robot/proc/installed_modules()
 	if(weapon_lock)
@@ -817,7 +800,7 @@
 			return TOPIC_HANDLED
 
 		if(activated(O))
-			to_chat(src, "Already activated")
+			to_chat(src, "Already activated.")
 			return TOPIC_HANDLED
 		if(!module_state_1)
 			module_state_1 = O
@@ -857,7 +840,7 @@
 			else
 				to_chat(src, "Module isn't activated.")
 		else
-			to_chat(src, "Module isn't activated")
+			to_chat(src, "Module isn't activated.")
 		installed_modules()
 		return TOPIC_HANDLED
 	return ..()
@@ -910,9 +893,9 @@
 	lockcharge = 0
 	scrambledcodes = 1
 	//Disconnect it's camera so it's not so easily tracked.
-	if(src.camera)
-		src.camera.clear_all_networks()
-
+	var/datum/extension/network_device/camera/robot/D = get_extension(src, /datum/extension/network_device)
+	if(D)
+		D.remove_channels(D.channels)
 
 /mob/living/silicon/robot/proc/ResetSecurityCodes()
 	set category = "Silicon Commands"
@@ -951,31 +934,36 @@
 	return
 
 /mob/living/silicon/robot/proc/choose_icon(list/module_sprites)
-	set waitfor = 0
-	if(!LAZYLEN(module_sprites))
+
+	set waitfor = FALSE
+
+	if(!length(module_sprites))
 		to_chat(src, "Something is badly wrong with the sprite selection. Harass a coder.")
 		CRASH("Can't setup robot icon for [src] ([src.client]). Module: [module?.name]")
 
 	icon_selected = FALSE
-	if(module_sprites.len == 1 || !client)
-		if(!(icontype in module_sprites))
-			icontype = module_sprites[1]
+
+	var/selected_icon
+	if(length(module_sprites) == 1 || !client)
+		icon = module_sprites[module_sprites[1]]
 	else
 		var/list/options = list()
-		for(var/i in module_sprites)
-			var/image/radial_button = image(icon = src.icon, icon_state = module_sprites[i])
-			radial_button.overlays.Add(image(icon = src.icon, icon_state = "eyes-[module_sprites[i]]"))
-			radial_button.name = i
-			options[i] = radial_button
-		icontype = show_radial_menu(src, src, options, radius = 42, tooltips = TRUE)
+		for(var/sprite in module_sprites)
+			var/image/radial_button =  image(icon = module_sprites[sprite], icon_state = ICON_STATE_WORLD)
+			radial_button.overlays.Add(image(icon = module_sprites[sprite], icon_state = "[ICON_STATE_WORLD]-eyes"))
+			radial_button.name = sprite
+			options[sprite] = radial_button
+		var/chosen_icon = show_radial_menu(src, src, options, radius = 42, tooltips = TRUE)
+		if(!chosen_icon || icon_selected)
+			return
+		selected_icon = chosen_icon
 
-	if(!icontype)
+	if(!selected_icon)
 		return
 
-	icon_state = module_sprites[icontype]
-	update_icon()
-
+	icon = module_sprites[selected_icon]
 	icon_selected = TRUE
+	update_icon()
 	to_chat(src, "Your icon has been set. You now require a module reset to change it.")
 
 /mob/living/silicon/robot/proc/sensor_mode() //Medical/Security HUD controller for borgs
@@ -1055,7 +1043,7 @@
 		if(emagged)
 			return //Prevents the X has hit Y with Z message also you cant emag them twice
 		if(wiresexposed)
-			to_chat(user, "You must close the panel first")
+			to_chat(user, "You must close the panel first.")
 			return
 		else
 			sleep(6)
@@ -1071,7 +1059,7 @@
 				var/time = time2text(world.realtime,"hh:mm:ss")
 				global.lawchanges.Add("[time] <B>:</B> [user.name]([user.key]) emagged [name]([key])")
 				var/decl/pronouns/G = user.get_pronouns(ignore_coverings = TRUE)
-				set_zeroth_law("Only [user.real_name] and people [G.he] designates as being such are operatives.")
+				set_zeroth_law("Only [user.real_name] and people [G.he] designate[G.s] as being such are operatives.")
 				SetLockdown(0)
 				. = 1
 				spawn()
@@ -1100,9 +1088,9 @@
 			return 1
 
 /mob/living/silicon/robot/incapacitated(var/incapacitation_flags = INCAPACITATION_DEFAULT)
-	if ((incapacitation_flags & INCAPACITATION_FORCELYING) && (lockcharge || !is_component_functioning("actuator")))
+	if ((incapacitation_flags & INCAPACITATION_FORCELYING) && (lockcharge || !is_component_functioning("actuator") || !is_component_functioning("power cell")))
 		return 1
-	if ((incapacitation_flags & INCAPACITATION_KNOCKOUT) && !is_component_functioning("actuator"))
+	if ((incapacitation_flags & INCAPACITATION_KNOCKOUT) && !is_component_functioning("power cell"))
 		return 1
 	return ..()
 
@@ -1121,7 +1109,7 @@
 		recalculate_synth_capacities()
 
 /mob/living/silicon/robot/get_admin_job_string()
-	return "Robot"
+	return ASSIGNMENT_ROBOT
 
 /mob/living/silicon/robot/handle_pre_transformation()
 	QDEL_NULL(mmi)

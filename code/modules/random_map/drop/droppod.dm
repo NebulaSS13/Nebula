@@ -23,7 +23,7 @@
 	var/placement_explosion_light = 6
 	var/placement_explosion_flash = 4
 
-/datum/random_map/droppod/New(var/seed, var/tx, var/ty, var/tz, var/tlx, var/tly, var/do_not_apply, var/do_not_announce, var/supplied_drop, var/list/supplied_drops, var/automated)
+/datum/random_map/droppod/New(var/tx, var/ty, var/tz, var/tlx, var/tly, var/do_not_apply, var/do_not_announce, var/used_area, var/supplied_drop, var/list/supplied_drops, var/automated)
 
 	if(supplied_drop)
 		drop_type = supplied_drop
@@ -41,8 +41,8 @@
 /datum/random_map/droppod/generate_map()
 
 	// No point calculating these 200 times.
-	var/x_midpoint = Ceiling(limit_x / 2)
-	var/y_midpoint = Ceiling(limit_y / 2)
+	var/x_midpoint = CEILING(limit_x / 2)
+	var/y_midpoint = CEILING(limit_y / 2)
 
 	// Draw walls/floors/doors.
 	for(var/x = 1, x <= limit_x, x++)
@@ -80,7 +80,7 @@
 
 /datum/random_map/droppod/apply_to_map()
 	if(placement_explosion_dev || placement_explosion_heavy || placement_explosion_light || placement_explosion_flash)
-		var/turf/T = locate((origin_x + Ceiling(limit_x / 2)-1), (origin_y + Ceiling(limit_y / 2)-1), origin_z)
+		var/turf/T = locate((origin_x + CEILING(limit_x / 2)-1), (origin_y + CEILING(limit_y / 2)-1), origin_z)
 		if(istype(T))
 			explosion(T, placement_explosion_dev, placement_explosion_heavy, placement_explosion_light, placement_explosion_flash)
 			sleep(15) // Let the explosion finish proccing before we ChangeTurf(), otherwise it might destroy our spawned objects.
@@ -97,8 +97,8 @@
 
 // Pods are circular. Get the direction this object is facing from the center of the pod.
 /datum/random_map/droppod/get_spawn_dir(var/x, var/y)
-	var/x_midpoint = Ceiling(limit_x / 2)
-	var/y_midpoint = Ceiling(limit_y / 2)
+	var/x_midpoint = CEILING(limit_x / 2)
+	var/y_midpoint = CEILING(limit_y / 2)
 	if(x == x_midpoint && y == y_midpoint)
 		return null
 	var/turf/target = locate(origin_x+x-1, origin_y+y-1, origin_z)
@@ -158,7 +158,7 @@
 	var/mob/living/spawned_mob
 	var/list/spawned_mobs = list()
 
-	var/spawn_path = input("Select a mob type.", "Drop Pod Selection", null) as null|anything in typesof(/mob/living)-/mob/living
+	var/spawn_path = input("Select a mob type.", "Drop Pod Selection", null) as null|anything in subtypesof(/mob/living)
 	if(!spawn_path)
 		return
 
@@ -223,4 +223,4 @@
 	else
 		return
 
-	new /datum/random_map/droppod(null, usr.x-1, usr.y-1, usr.z, supplied_drops = spawned_mobs, automated = automatic_pod)
+	new /datum/random_map/droppod(usr.x-1, usr.y-1, usr.z, supplied_drops = spawned_mobs, automated = automatic_pod)

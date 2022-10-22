@@ -613,10 +613,10 @@
 "bx" = (
 /obj/structure/table/reinforced,
 /obj/effect/floor_decal/corner/blue/diagonal,
-/obj/item/chems/food/condiment/small/saltshaker{
+/obj/item/chems/condiment/small/saltshaker{
 	pixel_x = -3
 	},
-/obj/item/chems/food/condiment/small/peppermill{
+/obj/item/chems/condiment/small/peppermill{
 	pixel_x = 3
 	},
 /turf/unsimulated/floor{
@@ -638,7 +638,7 @@
 /obj/effect/floor_decal/corner/blue/diagonal,
 /obj/item/storage/box/sinpockets,
 /obj/structure/closet/secure_closet/freezer/kitchen,
-/obj/item/chems/food/condiment/enzyme,
+/obj/item/chems/condiment/enzyme,
 /turf/unsimulated/floor{
 	icon_state = "dark"
 	},
@@ -825,7 +825,7 @@
 	},
 /area/map_template/rescue_base/base)
 "bV" = (
-/obj/effect/landmark{
+/obj/abstract/landmark{
 	name = "Response Team"
 	},
 /turf/unsimulated/floor{
@@ -1393,7 +1393,7 @@
 /obj/item/megaphone,
 /obj/item/megaphone,
 /obj/structure/noticeboard{
-	pixel_x = 32
+	default_pixel_x = 32
 	},
 /turf/unsimulated/floor{
 	dir = 1;
@@ -2101,7 +2101,7 @@
 	},
 /area/map_template/rescue_base/base)
 "eu" = (
-/obj/machinery/power/emitter,
+/obj/machinery/emitter,
 /turf/unsimulated/floor{
 	dir = 1;
 	icon_state = "vault"
@@ -2225,10 +2225,10 @@
 /obj/item/taperoll/atmos,
 /obj/item/multitool,
 /obj/item/multitool,
-/obj/item/tape_roll,
-/obj/item/tape_roll,
-/obj/item/tape_roll,
-/obj/item/tape_roll,
+/obj/item/ducttape,
+/obj/item/ducttape,
+/obj/item/ducttape,
+/obj/item/ducttape,
 /obj/item/cell/high,
 /obj/item/cell/high,
 /obj/item/cell/high,

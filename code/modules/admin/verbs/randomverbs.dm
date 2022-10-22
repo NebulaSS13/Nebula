@@ -467,7 +467,6 @@ Traitors and the like can also be revived with the previous role mostly intact.
 
 	if(G_found.mind && !G_found.mind.active)
 		G_found.mind.transfer_to(new_character)	//be careful when doing stuff like this! I've already checked the mind isn't in use
-		new_character.mind.special_verbs = list()
 	else
 		new_character.mind_initialize()
 	if(!new_character.mind.assigned_role)
@@ -561,7 +560,7 @@ Traitors and the like can also be revived with the previous role mostly intact.
 		to_chat(src, "Only administrators may use this command.")
 		return
 	var/input = sanitize(input(usr, "Please enter anything you want. Anything. Serious.", "What?", "") as message|null, extra = 0)
-	var/customname = sanitizeSafe(input(usr, "Pick a title for the report.", "Title") as text|null)
+	var/customname = sanitize_safe(input(usr, "Pick a title for the report.", "Title") as text|null)
 	if(!input)
 		return
 	if(!customname)

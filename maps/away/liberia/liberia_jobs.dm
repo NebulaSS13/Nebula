@@ -8,8 +8,6 @@
 
 /datum/job/submap/merchant
 	title = "Merchant"
-	department_types = /decl/department/civilian
-
 	total_positions = 4
 	info = "You are free traders who have drifted into unknown distances in search of profit. Travel, trade, make profit!"
 	supervisors = "the invisible hand of the market"
@@ -41,7 +39,7 @@
 	movable_flags = MOVABLE_FLAG_EFFECTMOVE
 
 /decl/hierarchy/outfit/job/merchant
-	name = OUTFIT_JOB_NAME("Merchant - Liberia")
+	name = "Job - Merchant - Liberia"
 	shoes = /obj/item/clothing/shoes/color/black
 	l_ear = /obj/item/radio/headset
 	uniform = /obj/item/clothing/under/syndicate/tacticool

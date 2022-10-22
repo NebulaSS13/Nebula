@@ -12,7 +12,8 @@
 
 	var/coughedtime = null
 	var/ignore_rads = FALSE
-	var/cpr_time = 1.0
+	/// Whether the mob is performing cpr or not.
+	var/performing_cpr = FALSE
 	var/lastpuke = 0
 	var/nutrition = 400
 	var/hydration = 400
@@ -27,10 +28,10 @@
 	var/last_taste_text = ""
 
 	// organ-related variables, see organ.dm and human_organs.dm
-	var/list/internal_organs = list()
-	var/list/organs = list()
-	var/list/obj/item/organ/external/organs_by_name = list() // map organ names to organs
-	var/list/internal_organs_by_name = list() // so internal organs have less ickiness too
+	//Shouldn't be accessed directly
+	var/list/organs_by_tag
+	var/tmp/list/internal_organs 
+	var/tmp/list/external_organs 
 
 	var/list/stasis_sources = list()
 	var/stasis_value

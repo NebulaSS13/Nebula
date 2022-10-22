@@ -31,7 +31,7 @@
 		return TRUE
 	return ..()
 
-/obj/item/organ/internal/brain/removed(var/mob/living/user)
+/obj/item/organ/internal/brain/do_uninstall(in_place, detach, ignore_children)
 	if(istype(owner))
 		var/mob/living/simple_animal/borer/borer = HAS_BRAIN_WORMS(owner)
 		if(borer)

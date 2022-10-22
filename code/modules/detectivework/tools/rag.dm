@@ -20,7 +20,7 @@
 	update_name()
 
 /obj/item/chems/glass/rag/Destroy()
-	var/obj/item/chems/food/drinks/bottle/bottle = loc
+	var/obj/item/chems/drinks/bottle/bottle = loc
 	if(istype(bottle) && bottle.rag == src)
 		bottle.rag = null
 		bottle.update_icon()
@@ -62,7 +62,7 @@
 	else
 		icon_state = "rag"
 
-	var/obj/item/chems/food/drinks/bottle/B = loc
+	var/obj/item/chems/drinks/bottle/B = loc
 	if(istype(B))
 		B.update_icon()
 
@@ -113,7 +113,7 @@
 				user.visible_message(
 					SPAN_DANGER("\The [user] brings \the [src] up to \the [target]'s mouth!"),
 					SPAN_DANGER("You bring \the [src] up to \the [target]'s mouth!"),
-					SPAN_WARNING("You hear some struggling and muffled cries of surprise")
+					SPAN_WARNING("You hear some struggling and muffled cries of surprise.")
 				)
 
 				var/grab_time = 6 SECONDS

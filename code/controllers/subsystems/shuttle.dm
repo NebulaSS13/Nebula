@@ -80,7 +80,7 @@ SUBSYSTEM_DEF(shuttle)
 			try_add_landmark_tag(shuttle_landmark_tag, O)
 			landmarks_still_needed -= shuttle_landmark_tag
 		else if(istype(shuttle_landmark, /obj/effect/shuttle_landmark/automatic)) //These find their sector automatically
-			O = map_sectors["[shuttle_landmark.z]"]
+			O = global.overmap_sectors["[shuttle_landmark.z]"]
 			O ? O.add_landmark(shuttle_landmark, shuttle_landmark.shuttle_restricted) : (landmarks_awaiting_sector += shuttle_landmark)
 
 /datum/controller/subsystem/shuttle/proc/unregister_landmark(shuttle_landmark_tag)
@@ -123,10 +123,13 @@ SUBSYSTEM_DEF(shuttle)
 			given_sector.add_landmark(landmark, shuttle_type)
 			. = 1
 
-/datum/controller/subsystem/shuttle/proc/initialize_shuttle(var/shuttle_type, var/map_hash)
+/datum/controller/subsystem/shuttle/proc/initialize_shuttle(var/shuttle_type, var/map_hash, var/list/add_args)
 	var/datum/shuttle/shuttle = shuttle_type
 	if(initial(shuttle.category) != shuttle_type)
-		shuttle = new shuttle(map_hash)
+		var/list/shuttle_args = list(map_hash)
+		if(length(add_args))
+			shuttle_args += add_args
+		shuttle = new shuttle(arglist(shuttle_args))
 		shuttle_areas |= shuttle.shuttle_area
 		return shuttle
 

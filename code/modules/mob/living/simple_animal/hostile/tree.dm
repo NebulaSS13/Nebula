@@ -1,14 +1,10 @@
 /mob/living/simple_animal/hostile/tree
 	name = "pine tree"
 	desc = "A pissed off tree-like alien. It seems annoyed with the festivities..."
-	icon = 'icons/obj/flora/pinetrees.dmi'
-	icon_state = "pine_1"
-	icon_living = "pine_1"
-	icon_dead = "pine_1"
-	icon_gib = "pine_1"
+	icon = 'icons/mob/simple_animal/pinetree.dmi'
 	speak_chance = 0
 	turns_per_move = 5
-	meat_type = /obj/item/chems/food/snacks/fish
+	meat_type = /obj/item/chems/food/fish
 	speed = -1
 	maxHealth = 250
 	health = 250
@@ -22,7 +18,6 @@
 	min_gas = null
 	max_gas = null
 	minbodytemp = 0
-
 	faction = "carp"
 
 /mob/living/simple_animal/hostile/tree/FindTarget()

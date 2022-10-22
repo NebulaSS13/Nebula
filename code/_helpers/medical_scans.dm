@@ -6,7 +6,7 @@
 	scan["time"] = stationtime2text()
 	var/brain_result
 	if(H.should_have_organ(BP_BRAIN))
-		var/obj/item/organ/internal/brain/brain = H.get_internal_organ(BP_BRAIN)
+		var/obj/item/organ/internal/brain = GET_INTERNAL_ORGAN(H, BP_BRAIN)
 		if(!brain || H.stat == DEAD || (H.status_flags & FAKEDEATH))
 			brain_result = 0
 		else if(H.stat != DEAD)
@@ -17,7 +17,7 @@
 
 	var/pulse_result
 	if(H.should_have_organ(BP_HEART))
-		var/obj/item/organ/internal/heart/heart = H.get_internal_organ(BP_HEART)
+		var/obj/item/organ/internal/heart/heart = H.get_organ(BP_HEART, /obj/item/organ/internal/heart)
 		if(!heart)
 			pulse_result = 0
 		else if(BP_IS_PROSTHETIC(heart))
@@ -58,37 +58,35 @@
 			scan["reagents"] += list(reagent)
 
 	scan["external_organs"] = list()
-
-	for(var/obj/item/organ/external/E in H.organs)
-		var/list/O = list()
-		O["name"] = E.name
-		O["is_stump"] = E.is_stump()
-		O["brute_ratio"] = E.brute_ratio
-		O["burn_ratio"] = E.burn_ratio
-		O["limb_flags"] = E.limb_flags
-		O["brute_dam"] = E.brute_dam
-		O["burn_dam"] = E.burn_dam
-		O["scan_results"] = E.get_scan_results(tag)
-		O["tumors"] = E.has_growths()
-
+	for(var/obj/item/organ/external/E in H.get_external_organs())
+		var/list/O =               list()
+		O["name"] =                E.name
+		O["brute_ratio"] =         E.brute_ratio
+		O["burn_ratio"] =          E.burn_ratio
+		O["limb_flags"] =          E.limb_flags
+		O["brute_dam"] =           E.brute_dam
+		O["burn_dam"] =            E.burn_dam
+		O["scan_results"] =        E.get_scan_results(tag)
+		O["tumors"] =              E.has_growths()
+		O["ailments"] =            E.has_diagnosable_ailments(scanner = TRUE)
 		scan["external_organs"] += list(O)
 
 	scan["internal_organs"] = list()
-
-	for(var/obj/item/organ/internal/I in H.internal_organs)
-		var/list/O = list()
-		O["name"] = I.name
-		O["is_broken"] = I.is_broken()
-		O["is_bruised"] = I.is_bruised()
-		O["is_damaged"] = I.is_damaged()
-		O["scan_results"] = I.get_scan_results(tag)
-
+	var/list/internal_organs = H.get_internal_organs()
+	for(var/obj/item/organ/internal/I in internal_organs)
+		var/list/O =               list()
+		O["name"] =                I.name
+		O["is_broken"] =           I.is_broken()
+		O["is_bruised"] =          I.is_bruised()
+		O["is_damaged"] =          I.is_damaged()
+		O["scan_results"] =        I.get_scan_results(tag)
+		O["ailments"] =            I.has_diagnosable_ailments(scanner = TRUE)
 		scan["internal_organs"] += list(O)
 
 	scan["missing_organs"] = list()
 
 	for(var/organ_name in H.species.has_organ)
-		if(!locate(H.species.has_organ[organ_name]) in H.internal_organs)
+		if(!locate(H.species.has_organ[organ_name]) in internal_organs)
 			scan["missing_organs"] += organ_name
 	if(H.sdisabilities & BLINDED)
 		scan["blind"] = TRUE
@@ -180,22 +178,26 @@
 			dat+= "<tr><td colspan='2'><span class='average'>Patient is bradycardic.</span></td></tr>"
 
 
-	var/ratio = scan["blood_volume"]/scan["blood_volume_max"]
-	dat += "<tr><td><strong>Blood pressure:</strong></td><td>[scan["blood_pressure"]]"
-	if(scan["blood_o2"] <= 70)
-		dat += "(<span class='bad'>[scan["blood_o2"]]% blood oxygenation</span>)</td></tr>"
-	else if(scan["blood_o2"] <= 85)
-		dat += "(<span class='average'>[scan["blood_o2"]]% blood oxygenation</span>)</td></tr>"
-	else if(scan["blood_o2"] <= 90)
-		dat += "(<span class='oxyloss'>[scan["blood_o2"]]% blood oxygenation</span>)</td></tr>"
-	else
-		dat += "([scan["blood_o2"]]% blood oxygenation)</td></tr>"
+	if(scan["blood_volume_max"] > 0)
+		var/ratio = scan["blood_volume"]/scan["blood_volume_max"]
+		dat += "<tr><td><strong>Blood pressure:</strong></td><td>[scan["blood_pressure"]]"
+		if(scan["blood_o2"] <= 70)
+			dat += "(<span class='bad'>[scan["blood_o2"]]% blood oxygenation</span>)</td></tr>"
+		else if(scan["blood_o2"] <= 85)
+			dat += "(<span class='average'>[scan["blood_o2"]]% blood oxygenation</span>)</td></tr>"
+		else if(scan["blood_o2"] <= 90)
+			dat += "(<span class='oxyloss'>[scan["blood_o2"]]% blood oxygenation</span>)</td></tr>"
+		else
+			dat += "([scan["blood_o2"]]% blood oxygenation)</td></tr>"
 
-	dat += "<tr><td><strong>Blood volume:</strong></td><td>[scan["blood_volume"]]u/[scan["blood_volume_max"]]u</td></tr>"
+		dat += "<tr><td><strong>Blood volume:</strong></td><td>[scan["blood_volume"]]u/[scan["blood_volume_max"]]u</td></tr>"
 
-	if(skill_level >= SKILL_ADEPT)
-		if(ratio <= 0.70)
-			dat += "<tr><td colspan='2'><span class='bad'>Patient is in Hypovolemic Shock. Transfusion highly recommended.</span></td></tr>"
+		if(skill_level >= SKILL_ADEPT)
+			if(ratio <= 0.70)
+				dat += "<tr><td colspan='2'><span class='bad'>Patient is in Hypovolemic Shock. Transfusion highly recommended.</span></td></tr>"
+	else 
+		dat += "<tr><td><strong>Blood pressure:</strong></td><td><span class='average'>ERROR - Patient has lacks a circulatory system.</span></td></tr>"
+		dat += "<tr><td><strong>Blood volume:</strong></td><td><span class='average'>ERROR - Patient has lacks a circulatory system.</span></td></tr>"
 
 	// Body temperature.
 	/*
@@ -264,42 +266,39 @@
 			break
 		var/row = list()
 		row += "<tr><td>[E["name"]]</td>"
-		if(E["is_stump"])
-			row += "<td><span class='bad'>Missing</span></td>"
-			if(skill_level >= SKILL_ADEPT)
-				row += "<td><span class='bad'>[english_list(E["scan_results"], nothing_text = "&nbsp;")]</span></td>"
-			else
-				row += "<td>&nbsp;</td>"
+		row += "<td>"
+		var/rowdata = list()
+		if(E["brute_dam"] + E["burn_dam"] == 0)
+			rowdata += "None"
+		else if(skill_level < SKILL_ADEPT)
+			if(E["brute_dam"])
+				rowdata += "<span class='bad'>Damaged</span>"
+			if(E["burn_dam"])
+				rowdata += "<span class='average'>Burned</span>"
 		else
-			row += "<td>"
-			var/rowdata = list()
-			if(E["brute_dam"] + E["burn_dam"] == 0)
-				rowdata += "None"
-			else if(skill_level < SKILL_ADEPT)
-				if(E["brute_dam"])
-					rowdata += "<span class='bad'>Damaged</span>"
-				if(E["burn_dam"])
-					rowdata += "<span class='average'>Burned</span>"
-			else
-				if(E["brute_dam"])
-					rowdata += "<span class='bad'>[capitalize(get_wound_severity(E["brute_ratio"], (E["limb_flags"] & ORGAN_FLAG_HEALS_OVERKILL)))] physical trauma</span>"
-				if(E["burn_dam"])
-					rowdata += "<span class='average'>[capitalize(get_wound_severity(E["burn_ratio"], (E["limb_flags"] & ORGAN_FLAG_HEALS_OVERKILL)))] burns</span>"
-			if(E["tumors"])
-				rowdata += "<span class='bad'>Abnormal internal growth</span>"
-			row += "<td>[jointext(rowdata, "<br>")]</td>"
+			if(E["brute_dam"])
+				rowdata += "<span class='bad'>[capitalize(get_wound_severity(E["brute_ratio"], (E["limb_flags"] & ORGAN_FLAG_HEALS_OVERKILL)))] physical trauma</span>"
+			if(E["burn_dam"])
+				rowdata += "<span class='average'>[capitalize(get_wound_severity(E["burn_ratio"], (E["limb_flags"] & ORGAN_FLAG_HEALS_OVERKILL)))] burns</span>"
+		row += "</td><td>[jointext(rowdata, "<br>")]</td>"
 
-			if(skill_level >= SKILL_ADEPT)
-				row += "<td>"
-				row += "<span class='bad'>[english_list(E["scan_results"], nothing_text="&nbsp;")]</span>"
-				row += "</td>"
-			else
-				row += "<td>&nbsp;</td>"
+		if(skill_level >= SKILL_ADEPT)
+			var/list/status = list()
+			if(E["scan_results"])
+				status += "<span class='bad'>[english_list(E["scan_results"], nothing_text = "&nbsp;")]</span>"
+			if(E["tumors"])
+				status += "<span class='bad'>Abnormal internal growth</span>"
+			if(E["ailments"])
+				status += "[jointext(E["ailments"], "<br>")]"
+			row += "<td>[status ? jointext(status, "<br>") : "Nominal."]</td>"
+		else
+			row += "<td>&nbsp;</td>"
+
 		row += "</tr>"
 		subdat += JOINTEXT(row)
+
 	dat += subdat
 	subdat = list()
-
 
 	//Internal Organs
 	if(skill_level >= SKILL_BASIC)
@@ -315,9 +314,18 @@
 				row += "<td><span class='mild'>Minor</span></td>"
 			else
 				row += "<td>None</td>"
-			row += "<td>"
-			row += "<span class='bad'>[english_list(I["scan_results"], nothing_text="&nbsp;")]</span>"
-			row += "</td></tr>"
+
+			if(skill_level >= SKILL_ADEPT)
+				var/list/status = list()
+				if(I["scan_results"])
+					status += "<span class='bad'>[english_list(I["scan_results"], nothing_text = "&nbsp;")]</span>"
+				if(I["ailments"])
+					status += "[jointext(I["ailments"], "<br>")]"
+				row += "<td>[status ? jointext(status, "<br>") : "Nominal."]</td>"
+			else
+				row += "<td>&nbsp;</td>"
+
+			row += "</tr>"
 			subdat += jointext(row, null)
 
 	if(skill_level <= SKILL_ADEPT)

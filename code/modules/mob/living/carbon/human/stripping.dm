@@ -57,14 +57,19 @@
 		if("tie")
 			if(!istype(holder) || !holder.accessories.len)
 				return
-			var/obj/item/clothing/accessory/A = holder.accessories[1]
-			if(holder.accessories.len > 1)
-				A = input("Select an accessory to remove from [holder]") as null|anything in holder.accessories
+	
+			var/obj/item/clothing/accessory/A
+			if(LAZYLEN(holder.accessories) > 1)
+				A = show_radial_menu(user, user, make_item_radial_menu_choices(holder.accessories), radius = 42, tooltips = TRUE)
+			else
+				A = holder.accessories[1]
+			
 			if(!istype(A))
 				return
+			
 			visible_message("<span class='danger'>\The [user] is trying to remove \the [src]'s [A.name]!</span>")
 
-			if(!do_after(user, HUMAN_STRIP_DELAY, src, progress = 0))
+			if(!do_after(user, HUMAN_STRIP_DELAY, src, check_holding = FALSE, progress = FALSE))
 				return
 
 			if(!A || holder.loc != src || !(A in holder.accessories))
@@ -93,7 +98,7 @@
 	else
 		visible_message("<span class='danger'>\The [user] is trying to put \a [held] on \the [src]!</span>")
 
-	if(!do_mob(user, src, HUMAN_STRIP_DELAY))
+	if(!do_mob(user, src, HUMAN_STRIP_DELAY, check_holding = FALSE))
 		return
 
 	if(stripping)

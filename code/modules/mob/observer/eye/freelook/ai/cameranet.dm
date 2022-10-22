@@ -3,7 +3,7 @@
 // The datum containing all the chunks.
 
 /datum/visualnet/camera
-	// The cameras on the map, no matter if they work or not.
+	// The security cameras on the map, no matter if they work or not. This list only contains cameras of type /obj/machinery/camera.
 	var/list/cameras
 	chunk_type = /datum/chunk/camera
 	valid_source_types = list(/obj/machinery/camera, /mob/living/silicon/ai)
@@ -16,6 +16,7 @@
 	cameras.Cut()
 	. = ..()
 
+// Add a camera to a chunk.
 /datum/visualnet/camera/add_source(obj/machinery/camera/c)
 	if(istype(c))
 		if(c in cameras)
@@ -27,9 +28,7 @@
 		var/mob/living/silicon/AI = c
 		return ..(AI, AI.stat != DEAD)
 	else
-		..()
-
-// Add a camera to a chunk.
+		return ..()
 
 /datum/visualnet/camera/remove_source(obj/machinery/camera/c)
 	if(istype(c) && cameras.Remove(c))
@@ -38,4 +37,10 @@
 		var/mob/living/silicon/AI = c
 		return ..(AI, AI.stat != DEAD)
 	else
-		..()
+		. = ..()
+
+/datum/visualnet/camera/is_valid_source(atom/source)
+	. = ..()
+	if(.)
+		return
+	return istype(get_extension(source, /datum/extension/network_device), /datum/extension/network_device/camera)

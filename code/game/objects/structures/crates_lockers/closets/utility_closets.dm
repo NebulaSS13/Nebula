@@ -158,6 +158,10 @@
 	wall_mounted = 1
 	storage_types = CLOSET_STORAGE_ITEMS
 	setup = 0
+	
+/obj/structure/closet/hydrant/Initialize()
+	. = ..()
+	tool_interaction_flags &= ~TOOL_INTERACTION_ANCHOR
 
 /obj/structure/closet/hydrant/WillContain()
 	return list(
@@ -180,6 +184,10 @@
 	storage_types = CLOSET_STORAGE_ITEMS
 	setup = 0
 
+/obj/structure/closet/medical_wall/Initialize()
+	. = ..()
+	tool_interaction_flags &= ~TOOL_INTERACTION_ANCHOR
+
 /obj/structure/closet/medical_wall/filled/WillContain()
 	return list(
 		/obj/random/firstaid,
@@ -194,6 +202,10 @@
 	wall_mounted = 1
 	storage_types = CLOSET_STORAGE_ITEMS
 	setup = 0
+
+/obj/structure/closet/shipping_wall/Initialize()
+	. = ..()
+	tool_interaction_flags &= ~TOOL_INTERACTION_ANCHOR
 
 /obj/structure/closet/shipping_wall/filled/WillContain()
 	return list(

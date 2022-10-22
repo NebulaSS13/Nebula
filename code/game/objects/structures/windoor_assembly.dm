@@ -35,6 +35,7 @@
 	..()
 
 /obj/structure/windoor_assembly/on_update_icon()
+	..()
 	icon_state = "[facing_left ? "l" : "r"]_[secure ? "_secure" : ""]windoor_assembly[anchored && wired ? "02" : "01"]"
 
 /obj/structure/windoor_assembly/CanPass(atom/movable/mover, turf/target, height=0, air_group=0)

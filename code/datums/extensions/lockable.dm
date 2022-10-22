@@ -60,8 +60,8 @@
 	if(href_list["key"] == "E")
 		if(!l_set && !l_setshort)
 			// We're in lock set mode.
-			if(length(code) < Floor(max_code_length * 0.5) || length(code) > max_code_length)
-				error = "Incorrect code length. Must be between [Floor(max_code_length * 0.5)] and [max_code_length] numbers long."
+			if(length(code) < FLOOR(max_code_length * 0.5) || length(code) > max_code_length)
+				error = "Incorrect code length. Must be between [FLOOR(max_code_length * 0.5)] and [max_code_length] numbers long."
 				return TOPIC_REFRESH
 			l_code = code
 			code = null
@@ -106,10 +106,12 @@
 /datum/extension/lockable/proc/attackby(var/obj/item/W, var/mob/user)
 	var/obj/item/A = holder
 	if(locked)
-		if (!is_digital_lock && istype(W, /obj/item/energy_blade/blade) && emag_act(INFINITY, user, "You slice through the lock of \the [holder]"))
-			spark_at(A.loc, amount=5)
-			playsound(A.loc, 'sound/weapons/blade1.ogg', 50, 1)
-			return TRUE
+		if(!is_digital_lock && istype(W, /obj/item/energy_blade))
+			var/obj/item/energy_blade/blade = W
+			if(blade.is_special_cutting_tool() && emag_act(INFINITY, user, "You slice through the lock of \the [holder]."))
+				spark_at(A.loc, amount=5)
+				playsound(A.loc, 'sound/weapons/blade1.ogg', 50, 1)
+				return TRUE
 
 		if(isScrewdriver(W))
 			if (do_after(user, 20 * user.skill_delay_mult(SKILL_DEVICES), holder))

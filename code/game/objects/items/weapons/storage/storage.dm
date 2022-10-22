@@ -38,7 +38,7 @@
 	. = (loc == user && istype(over, /obj/screen)) || ..()
 
 /obj/item/storage/handle_mouse_drop(var/atom/over, var/mob/user)
-	if(canremove && (ishuman(user) || isrobot(user)))
+	if(canremove && (ishuman(user) || isrobot(user) || isanimal(user)) && !user.incapacitated(INCAPACITATION_DISRUPTED))
 		if(over == user)
 			open(user)
 			return TRUE
@@ -49,6 +49,21 @@
 				user.equip_to_slot_if_possible(src, inv.slot_id)
 				return TRUE
 	. = ..()
+
+/obj/item/storage/AltClick(mob/user)
+	if(!canremove)
+		return
+
+	if(!Adjacent(user))
+		return
+
+	if(!(ishuman(user) || isrobot(user) || issmall(user)))
+		return
+	
+	if(user.incapacitated(INCAPACITATION_DISRUPTED))
+		return
+	
+	open(user)
 
 /obj/item/storage/proc/return_inv()
 
@@ -286,7 +301,8 @@
 	return
 
 /obj/item/storage/attack_ghost(mob/user)
-	if(user.client && user.client.holder)
+	var/mob/observer/ghost/G = user
+	if(G.client?.holder || G.antagHUD)
 		show_to(user)
 
 /obj/item/storage/proc/gather_all(var/turf/T, var/mob/user)
@@ -341,7 +357,7 @@
 	if(!istype(scooped))
 		return FALSE
 
-	if(!scooped.holder_type || scooped.buckled || scooped.pinned.len || scooped.mob_size > MOB_SIZE_SMALL || scooped != user || src.loc == scooped)
+	if(!scooped.holder_type || scooped.buckled || LAZYLEN(scooped.pinned) || scooped.mob_size > MOB_SIZE_SMALL || scooped != user || src.loc == scooped)
 		return FALSE
 
 	if(!do_after(user, 1 SECOND, src))

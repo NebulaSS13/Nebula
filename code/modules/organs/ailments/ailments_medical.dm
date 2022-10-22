@@ -4,8 +4,8 @@
 
 /datum/ailment/head/headache
 	name = "headache"
-	treated_by_reagent_type = /decl/material/liquid/painkillers
-	treated_by_reagent_dosage = 1
+	treated_by_chem_effect = CE_PAINKILLER
+	treated_by_chem_effect_strength = 25
 	medication_treatment_message = "Your headache grudgingly fades away."
 
 /datum/ailment/head/headache/on_ailment_event()
@@ -29,7 +29,7 @@
 	treated_by_reagent_type = /decl/material/liquid/nutriment/honey
 	treated_by_reagent_dosage = 1
 	medication_treatment_message = "You swallow, finding that your sore throat is rapidly recovering."
-	diagnosis_string = "$USER_HIS$ throat is red and inflamed."
+	manual_diagnosis_string = "$USER_HIS$ throat is red and inflamed."
 
 /datum/ailment/head/sore_throat/on_ailment_event()
 	to_chat(organ.owner, SPAN_DANGER("You swallow painfully past your sore throat."))
@@ -39,7 +39,7 @@
 	treated_by_reagent_type = /decl/material/liquid/antiseptic
 	treated_by_reagent_dosage = 1
 	medication_treatment_message = "The itching in your sinuses fades away."
-	diagnosis_string = "$USER_HIS$ sinuses are inflamed and running."
+	manual_diagnosis_string = "$USER_HIS$ sinuses are inflamed and running."
 
 /datum/ailment/head/sneezing/can_apply_to(obj/item/organ/_organ)
 	. = ..()
@@ -55,9 +55,9 @@
 	name = "sprained limb"
 	applies_to_organ = list(BP_L_ARM, BP_R_ARM, BP_L_HAND, BP_R_HAND, BP_L_LEG, BP_R_LEG, BP_L_FOOT, BP_R_FOOT)
 	treated_by_item_type = /obj/item/stack/medical/bruise_pack
-	third_person_treatement_message = "$USER$ wraps $TARGET$'s sprained $ORGAN$ in $ITEM$."
-	self_treatement_message = "$USER$ wraps $USER_HIS$ sprained $ORGAN$ in $ITEM$."
-	diagnosis_string = "$USER_HIS$ $ORGAN$ is visibly swollen."
+	third_person_treatment_message = "$USER$ wraps $TARGET$'s sprained $ORGAN$ in $ITEM$."
+	self_treatment_message = "$USER$ wraps $USER_HIS$ sprained $ORGAN$ in $ITEM$."
+	manual_diagnosis_string = "$USER_HIS$ $ORGAN$ is visibly swollen."
 
 /datum/ailment/sprain/on_ailment_event()
 	to_chat(organ.owner, SPAN_DANGER("Your sprained [organ.name] aches distractingly."))
@@ -69,21 +69,21 @@
 /datum/ailment/rash
 	name = "rash"
 	treated_by_item_type = /obj/item/stack/medical/ointment
-	third_person_treatement_message = "$USER$ salves $TARGET$'s rash-stricken $ORGAN$ with $ITEM$."
-	self_treatement_message = "$USER$ salves $USER_HIS$ rash-stricken $ORGAN$ with $ITEM$."
-	diagnosis_string = "$USER_HIS$ $ORGAN$ is covered in a bumpy red rash."
+	third_person_treatment_message = "$USER$ salves $TARGET$'s rash-stricken $ORGAN$ with $ITEM$."
+	self_treatment_message = "$USER$ salves $USER_HIS$ rash-stricken $ORGAN$ with $ITEM$."
+	manual_diagnosis_string = "$USER_HIS$ $ORGAN$ is covered in a bumpy red rash."
 
 /datum/ailment/rash/on_ailment_event()
 	to_chat(organ.owner, SPAN_DANGER("A bright red rash on your [organ.name] itches distractingly."))
 	organ.owner.setClickCooldown(3)
-	
+
 /datum/ailment/coughing
 	name = "coughing"
 	specific_organ_subtype = /obj/item/organ/internal/lungs
 	applies_to_organ = list(BP_LUNGS)
 	treated_by_reagent_type = /decl/material/liquid/antiseptic
 	medication_treatment_message = "The tickling in your throat fades away."
-	diagnosis_string = "$USER_HIS$ throat is red and inflamed."
+	manual_diagnosis_string = "$USER_HIS$ throat is red and inflamed."
 
 /datum/ailment/coughing/can_apply_to(obj/item/organ/_organ)
 	. = ..()
@@ -97,9 +97,10 @@
 
 /datum/ailment/sore_joint
 	name = "sore joint"
-	treated_by_reagent_type = /decl/material/liquid/painkillers
+	treated_by_chem_effect = CE_PAINKILLER
+	treated_by_chem_effect_strength = 25
 	medication_treatment_message = "The dull pulse of pain in your $ORGAN$ fades away."
-	diagnosis_string = "$USER_HIS$ $ORGAN$ is visibly swollen."
+	manual_diagnosis_string = "$USER_HIS$ $ORGAN$ is visibly swollen."
 
 /datum/ailment/sore_joint/on_ailment_event()
 	var/obj/item/organ/external/E = organ
@@ -110,12 +111,13 @@
 
 /datum/ailment/sore_joint/can_apply_to(obj/item/organ/_organ)
 	var/obj/item/organ/external/E = _organ
-	. = ..() && !isnull(E.joint) && E.dislocated > -1
+	. = ..() && !isnull(E.joint) && (E.limb_flags & ORGAN_FLAG_CAN_DISLOCATE)
 
 /datum/ailment/sore_back
 	name = "sore back"
 	applies_to_organ = list(BP_CHEST)
-	treated_by_reagent_type = /decl/material/liquid/painkillers
+	treated_by_chem_effect = CE_PAINKILLER
+	treated_by_chem_effect_strength = 25
 	medication_treatment_message = "You straighten, finding that your back is no longer hurting."
 
 /datum/ailment/sore_back/on_ailment_event()
@@ -135,7 +137,7 @@
 
 /datum/ailment/cramps
 	name = "cramps"
-	treated_by_reagent_type = /decl/material/liquid/painkillers
+	treated_by_reagent_type = /decl/material/liquid/sedatives // in lieu of muscle relaxants
 	medication_treatment_message = "The painful cramping in your $ORGAN$ relaxes."
 
 /datum/ailment/cramps/on_ailment_event()

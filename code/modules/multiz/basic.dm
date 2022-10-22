@@ -4,28 +4,6 @@ var/global/list/z_levels = list() // Each Z-level is associated with the relevan
 /proc/get_map_data(z)
 	return z > 0 && z_levels.len >= z ? z_levels[z] : null
 
-// If the height is more than 1, we mark all contained levels as connected.
-// This is in New because it is an auxiliary effect specifically needed pre-init.
-/obj/effect/landmark/map_data/New(turf/loc, _height)
-	..()
-	if(!istype(loc)) // Using loc.z is safer when using the maploader and New.
-		return
-	if(_height)
-		height = _height
-	for(var/i = (loc.z - height + 1) to (loc.z-1))
-		if (z_levels.len <i)
-			z_levels.len = i
-		z_levels[i] = src
-
-	if (length(SSzcopy.zlev_maximums))
-		SSzcopy.calculate_zstack_limits()
-
-/obj/effect/landmark/map_data/Destroy(forced)
-	if(forced)
-		new type(loc, height) // Will replace our references in z_levels
-		return ..()
-	return QDEL_HINT_LETMELIVE
-
 // Thankfully, no bitwise magic is needed here.
 /proc/GetAbove(var/atom/atom)
 	var/turf/turf = get_turf(atom)
@@ -41,10 +19,17 @@ var/global/list/z_levels = list() // Each Z-level is associated with the relevan
 
 /proc/GetConnectedZlevels(z)
 	. = list(z)
+	// Traverse up and down to get the multiz stack.
 	for(var/level = z, HasBelow(level), level--)
 		. |= level-1
 	for(var/level = z, HasAbove(level), level++)
 		. |= level+1
+
+	// Check stack for any laterally connected neighbors.
+	for(var/tz in .)
+		var/obj/abstract/level_data/level = global.levels_by_z["[tz]"]
+		if(level)
+			level.find_connected_levels(.)
 
 var/global/list/connected_z_cache = list()
 /proc/AreConnectedZLevels(var/zA, var/zB)

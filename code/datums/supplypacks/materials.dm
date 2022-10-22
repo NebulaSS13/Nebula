@@ -1,51 +1,5 @@
 /decl/hierarchy/supply_pack/materials
 	name = "Materials"
-	cost = null
-
-/decl/hierarchy/supply_pack/materials/yellow_cloth20
-	name = "20 yellow cloth"
-	contains = list(/obj/item/stack/material/bolt/mapped/yellow/twenty)
-	containername = "yellow cloth crate"
-
-/decl/hierarchy/supply_pack/materials/teal_cloth20
-	name = "20 teal cloth"
-	contains = list(/obj/item/stack/material/bolt/mapped/teal/twenty)
-	containername = "teal cloth crate"
-
-/decl/hierarchy/supply_pack/materials/black_cloth20
-	name = "20 black cloth"
-	contains = list(/obj/item/stack/material/bolt/mapped/black/twenty)
-	containername = "black cloth crate"
-
-/decl/hierarchy/supply_pack/materials/green_cloth20
-	name = "20 green cloth"
-	contains = list(/obj/item/stack/material/bolt/mapped/green/twenty)
-	containername = "green cloth crate"
-
-/decl/hierarchy/supply_pack/materials/purple_cloth20
-	name = "20 purple cloth"
-	contains = list(/obj/item/stack/material/bolt/mapped/purple/twenty)
-	containername = "purple cloth crate"
-
-/decl/hierarchy/supply_pack/materials/blue_cloth20
-	name = "20 blue cloth"
-	contains = list(/obj/item/stack/material/bolt/mapped/blue/twenty)
-	containername = "blue cloth crate"
-
-/decl/hierarchy/supply_pack/materials/beige_cloth20
-	name = "20 beige cloth"
-	contains = list(/obj/item/stack/material/bolt/mapped/beige/twenty)
-	containername = "beige cloth crate"
-
-/decl/hierarchy/supply_pack/materials/lime_cloth20
-	name = "20 lime cloth"
-	contains = list(/obj/item/stack/material/bolt/mapped/lime/twenty)
-	containername = "lime cloth crate"
-
-/decl/hierarchy/supply_pack/materials/red_cloth20
-	name = "20 red cloth"
-	contains = list(/obj/item/stack/material/bolt/mapped/red/twenty)
-	containername = "red cloth crate"
 
 // Material sheets (50 - full stack)
 /decl/hierarchy/supply_pack/materials/steel50
@@ -98,6 +52,10 @@
 	contains = list(/obj/item/stack/material/reinforced/mapped/ocp/fifty)
 	containername = "osmium carbide plasteel sheets crate"
 
+/decl/hierarchy/supply_pack/materials/graphite50
+	name = "50 graphite bricks"
+	contains = list(/obj/item/stack/material/brick/mapped/graphite/fifty)
+
 // Material sheets (10 - Smaller amounts, less cost efficient)
 /decl/hierarchy/supply_pack/materials/marble10
 	name = "10 slabs of marble"
@@ -138,6 +96,10 @@
 	name = "10 diamond sheets"
 	contains = list(/obj/item/stack/material/gemstone/mapped/diamond/ten)
 	containername = "diamond sheets crate"
+
+/decl/hierarchy/supply_pack/materials/graphite10
+	name = "10 graphite bricks"
+	contains = list(/obj/item/stack/material/brick/mapped/graphite/ten)
 
 //wood zone
 /decl/hierarchy/supply_pack/materials/wood50

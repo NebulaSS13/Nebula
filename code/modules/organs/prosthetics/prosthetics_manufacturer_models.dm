@@ -1,5 +1,9 @@
+/decl/prosthetics_manufacturer/basic_human
+	name = "Unbranded"
+	allowed_bodytypes = list(BODYTYPE_HUMANOID)
+
 /decl/prosthetics_manufacturer/wooden
-	name = "wooden prosthesis"
+	name = "crude wooden"
 	desc = "A crude wooden prosthetic."
 	icon = 'icons/mob/human_races/cyberlimbs/morgan/morgan_main.dmi'
 	modifier_string = "wooden"
@@ -8,3 +12,6 @@
 	movement_slowdown = 1
 	is_robotic = FALSE
 	modular_prosthetic_tier = MODULAR_BODYPART_PROSTHETIC
+	allowed_bodytypes = list(BODYTYPE_HUMANOID)
+
+DEFINE_ROBOLIMB_MODEL_ASPECTS(/decl/prosthetics_manufacturer/wooden, pirate, 0)

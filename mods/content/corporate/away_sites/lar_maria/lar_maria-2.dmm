@@ -15,7 +15,7 @@
 /turf/simulated/floor/reinforced,
 /area/space)
 "ae" = (
-/obj/effect/landmark/map_data{
+/obj/abstract/map_data{
 	height = 2
 	},
 /turf/simulated/floor/reinforced,
@@ -30,7 +30,6 @@
 "ai" = (
 /obj/effect/floor_decal/solarpanel,
 /obj/structure/cable/yellow{
-	d2 = 2;
 	icon_state = "0-2"
 	},
 /obj/machinery/power/solar,
@@ -38,110 +37,78 @@
 /area/space)
 "aj" = (
 /obj/structure/cable/yellow{
-	d1 = 1;
-	d2 = 4;
 	icon_state = "1-4"
 	},
 /obj/structure/cable/yellow{
-	d1 = 2;
-	d2 = 4;
 	icon_state = "2-4"
 	},
 /turf/simulated/floor/reinforced,
 /area/space)
 "ak" = (
 /obj/structure/cable/yellow{
-	d1 = 4;
-	d2 = 8;
 	icon_state = "4-8"
 	},
 /obj/structure/cable/yellow{
-	d1 = 1;
-	d2 = 4;
 	icon_state = "1-4"
 	},
 /obj/structure/cable/yellow{
-	d1 = 2;
-	d2 = 4;
 	icon_state = "2-4"
 	},
 /turf/simulated/floor/reinforced,
 /area/space)
 "al" = (
 /obj/structure/cable/yellow{
-	d1 = 1;
-	d2 = 4;
 	icon_state = "1-4"
 	},
 /obj/structure/cable/yellow{
-	d1 = 2;
-	d2 = 4;
 	icon_state = "2-4"
 	},
 /obj/structure/cable/yellow{
-	d1 = 4;
-	d2 = 8;
 	icon_state = "4-8"
 	},
 /turf/simulated/floor/reinforced,
 /area/space)
 "am" = (
 /obj/structure/cable/yellow{
-	d1 = 2;
-	d2 = 8;
 	icon_state = "2-8"
 	},
 /turf/simulated/floor/reinforced,
 /area/space)
 "an" = (
 /obj/structure/cable/yellow{
-	d1 = 2;
-	d2 = 4;
 	icon_state = "2-4"
 	},
 /turf/simulated/floor/reinforced,
 /area/space)
 "ao" = (
 /obj/structure/cable/yellow{
-	d1 = 4;
-	d2 = 8;
 	icon_state = "4-8"
 	},
 /obj/structure/cable/yellow{
-	d1 = 1;
-	d2 = 8;
 	icon_state = "1-8"
 	},
 /obj/structure/cable/yellow{
-	d1 = 2;
-	d2 = 8;
 	icon_state = "2-8"
 	},
 /turf/simulated/floor/reinforced,
 /area/space)
 "ap" = (
 /obj/structure/cable/yellow{
-	d1 = 1;
-	d2 = 8;
 	icon_state = "1-8"
 	},
 /obj/structure/cable/yellow{
-	d1 = 2;
-	d2 = 8;
 	icon_state = "2-8"
 	},
 /turf/simulated/floor/reinforced,
 /area/space)
 "ar" = (
 /obj/structure/cable/yellow{
-	d1 = 1;
-	d2 = 2;
 	icon_state = "1-2"
 	},
 /turf/simulated/floor/reinforced,
 /area/space)
 "au" = (
-/obj/machinery/power/port_gen/pacman/super,
+/obj/machinery/port_gen/pacman/super,
 /turf/simulated/floor/plating,
 /area/lar_maria/solar_control)
 "av" = (
@@ -166,7 +133,6 @@
 "az" = (
 /obj/machinery/power/solar_control/autostart,
 /obj/structure/cable/yellow{
-	d2 = 2;
 	icon_state = "0-2"
 	},
 /turf/simulated/floor/plating,
@@ -179,7 +145,6 @@
 /area/space)
 "aB" = (
 /obj/structure/cable/yellow{
-	d2 = 4;
 	icon_state = "0-4"
 	},
 /obj/machinery/power/tracker{
@@ -189,39 +154,27 @@
 /area/space)
 "aC" = (
 /obj/structure/cable/yellow{
-	d1 = 4;
-	d2 = 8;
 	icon_state = "4-8"
 	},
 /turf/simulated/floor/reinforced,
 /area/space)
 "aD" = (
 /obj/structure/cable/yellow{
-	d1 = 2;
-	d2 = 4;
 	icon_state = "2-4"
 	},
 /obj/structure/cable/yellow{
-	d1 = 4;
-	d2 = 8;
 	icon_state = "4-8"
 	},
 /turf/simulated/floor/reinforced,
 /area/space)
 "aE" = (
 /obj/structure/cable/yellow{
-	d1 = 4;
-	d2 = 8;
 	icon_state = "4-8"
 	},
 /obj/structure/cable/yellow{
-	d1 = 1;
-	d2 = 4;
 	icon_state = "1-4"
 	},
 /obj/structure/cable/yellow{
-	d1 = 2;
-	d2 = 4;
 	icon_state = "2-4"
 	},
 /obj/machinery/button/access/exterior{
@@ -237,16 +190,12 @@
 	id_tag = "ZHPWestSolar_outer"
 	},
 /obj/structure/cable/yellow{
-	d1 = 4;
-	d2 = 8;
 	icon_state = "4-8"
 	},
 /turf/simulated/floor/plating,
 /area/lar_maria/solar_control)
 "aG" = (
 /obj/structure/cable/yellow{
-	d1 = 4;
-	d2 = 8;
 	icon_state = "4-8"
 	},
 /obj/machinery/atmospherics/unary/vent_pump/high_volume/external_air{
@@ -273,20 +222,15 @@
 	id_tag = "ZHPWestSolar_inner"
 	},
 /obj/structure/cable/yellow{
-	d1 = 4;
-	d2 = 8;
 	icon_state = "4-8"
 	},
 /turf/simulated/floor/plating,
 /area/lar_maria/solar_control)
 "aI" = (
 /obj/structure/cable/yellow{
-	d2 = 8;
 	icon_state = "0-8"
 	},
 /obj/structure/cable/yellow{
-	d1 = 1;
-	d2 = 8;
 	icon_state = "1-8"
 	},
 /obj/machinery/power/terminal,
@@ -306,12 +250,9 @@
 /area/lar_maria/solar_control)
 "aK" = (
 /obj/structure/cable/yellow{
-	d2 = 4;
 	icon_state = "0-4"
 	},
 /obj/structure/cable/yellow{
-	d1 = 1;
-	d2 = 4;
 	icon_state = "1-4"
 	},
 /obj/machinery/power/terminal,
@@ -332,8 +273,6 @@
 	id_tag = "ZHPEastSolar_inner"
 	},
 /obj/structure/cable/yellow{
-	d1 = 4;
-	d2 = 8;
 	icon_state = "4-8"
 	},
 /obj/effect/decal/cleanable/blood,
@@ -341,8 +280,6 @@
 /area/lar_maria/solar_control)
 "aM" = (
 /obj/structure/cable/yellow{
-	d1 = 4;
-	d2 = 8;
 	icon_state = "4-8"
 	},
 /obj/machinery/atmospherics/unary/vent_pump/high_volume/external_air{
@@ -370,8 +307,6 @@
 	id_tag = "ZHPEastSolar_outer"
 	},
 /obj/structure/cable/yellow{
-	d1 = 4;
-	d2 = 8;
 	icon_state = "4-8"
 	},
 /obj/effect/decal/cleanable/blood,
@@ -379,18 +314,12 @@
 /area/lar_maria/solar_control)
 "aO" = (
 /obj/structure/cable/yellow{
-	d1 = 4;
-	d2 = 8;
 	icon_state = "4-8"
 	},
 /obj/structure/cable/yellow{
-	d1 = 2;
-	d2 = 8;
 	icon_state = "2-8"
 	},
 /obj/structure/cable/yellow{
-	d1 = 1;
-	d2 = 8;
 	icon_state = "1-8"
 	},
 /obj/effect/decal/cleanable/blood,
@@ -403,8 +332,6 @@
 /area/space)
 "aP" = (
 /obj/structure/cable/yellow{
-	d1 = 4;
-	d2 = 8;
 	icon_state = "4-8"
 	},
 /obj/effect/decal/cleanable/blood,
@@ -412,43 +339,32 @@
 /area/space)
 "aQ" = (
 /obj/structure/cable/yellow{
-	d1 = 4;
-	d2 = 8;
 	icon_state = "4-8"
 	},
-/obj/effect/landmark/corpse/lar_maria/test_subject,
+/obj/abstract/landmark/corpse/lar_maria/test_subject,
 /obj/effect/decal/cleanable/blood,
 /turf/simulated/floor/reinforced,
 /area/space)
 "aR" = (
 /obj/structure/cable/yellow{
-	d1 = 4;
-	d2 = 8;
 	icon_state = "4-8"
 	},
 /obj/structure/cable/yellow{
-	d1 = 2;
-	d2 = 8;
 	icon_state = "2-8"
 	},
 /turf/simulated/floor/reinforced,
 /area/space)
 "aS" = (
 /obj/structure/cable/yellow{
-	d1 = 2;
-	d2 = 8;
 	icon_state = "2-8"
 	},
 /obj/structure/cable/yellow{
-	d1 = 4;
-	d2 = 8;
 	icon_state = "4-8"
 	},
 /turf/simulated/floor/reinforced,
 /area/space)
 "aT" = (
 /obj/structure/cable/yellow{
-	d2 = 8;
 	icon_state = "0-8"
 	},
 /obj/machinery/power/tracker{
@@ -460,25 +376,18 @@
 /obj/effect/floor_decal/solarpanel,
 /obj/machinery/power/solar,
 /obj/structure/cable/yellow{
-	d2 = 4;
 	icon_state = "0-4"
 	},
 /turf/simulated/floor/reinforced,
 /area/space)
 "aV" = (
 /obj/structure/cable/yellow{
-	d1 = 1;
-	d2 = 2;
 	icon_state = "1-2"
 	},
 /obj/structure/cable/yellow{
-	d1 = 1;
-	d2 = 4;
 	icon_state = "1-4"
 	},
 /obj/structure/cable/yellow{
-	d1 = 1;
-	d2 = 8;
 	icon_state = "1-8"
 	},
 /turf/simulated/floor/reinforced,
@@ -487,7 +396,6 @@
 /obj/effect/floor_decal/solarpanel,
 /obj/machinery/power/solar,
 /obj/structure/cable/yellow{
-	d2 = 8;
 	icon_state = "0-8"
 	},
 /turf/simulated/floor/reinforced,
@@ -495,23 +403,18 @@
 "aX" = (
 /obj/machinery/power/smes/buildable,
 /obj/structure/cable{
-	d2 = 4;
 	icon_state = "0-4"
 	},
 /turf/simulated/floor/plating,
 /area/lar_maria/solar_control)
 "aY" = (
 /obj/structure/cable{
-	d1 = 4;
-	d2 = 8;
 	icon_state = "4-8"
 	},
 /turf/simulated/floor/plating,
 /area/lar_maria/solar_control)
 "aZ" = (
 /obj/structure/cable{
-	d1 = 2;
-	d2 = 8;
 	icon_state = "2-8"
 	},
 /turf/simulated/floor/plating,
@@ -522,8 +425,6 @@
 /area/lar_maria/solar_control)
 "bb" = (
 /obj/structure/cable{
-	d1 = 2;
-	d2 = 4;
 	icon_state = "2-4"
 	},
 /obj/effect/decal/cleanable/blood,
@@ -532,7 +433,6 @@
 "bc" = (
 /obj/machinery/power/smes/buildable,
 /obj/structure/cable{
-	d2 = 8;
 	icon_state = "0-8"
 	},
 /turf/simulated/floor/plating,
@@ -540,7 +440,6 @@
 "bd" = (
 /obj/effect/floor_decal/solarpanel,
 /obj/structure/cable/yellow{
-	d2 = 4;
 	icon_state = "0-4"
 	},
 /obj/machinery/power/solar,
@@ -549,7 +448,6 @@
 "be" = (
 /obj/effect/floor_decal/solarpanel,
 /obj/structure/cable/yellow{
-	d2 = 8;
 	icon_state = "0-8"
 	},
 /obj/machinery/power/solar,
@@ -557,8 +455,6 @@
 /area/space)
 "bf" = (
 /obj/structure/cable/yellow{
-	d1 = 1;
-	d2 = 8;
 	icon_state = "1-8"
 	},
 /turf/simulated/floor/reinforced,
@@ -572,8 +468,6 @@
 	dir = 6
 	},
 /obj/structure/cable{
-	d1 = 1;
-	d2 = 2;
 	icon_state = "1-2"
 	},
 /turf/simulated/floor/plating,
@@ -598,8 +492,6 @@
 /area/lar_maria/solar_control)
 "bl" = (
 /obj/structure/cable/yellow{
-	d1 = 1;
-	d2 = 4;
 	icon_state = "1-4"
 	},
 /turf/simulated/floor/reinforced,
@@ -607,8 +499,6 @@
 "bn" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/structure/cable{
-	d1 = 1;
-	d2 = 2;
 	icon_state = "1-2"
 	},
 /turf/simulated/floor/plating,
@@ -618,7 +508,7 @@
 /turf/simulated/floor/plating,
 /area/lar_maria/solar_control)
 "bp" = (
-/obj/effect/landmark/corpse/lar_maria/zhp_guard,
+/obj/abstract/landmark/corpse/lar_maria/zhp_guard,
 /obj/effect/decal/cleanable/blood,
 /turf/simulated/floor/plating,
 /area/lar_maria/solar_control)
@@ -628,8 +518,6 @@
 /area/lar_maria/solar_control)
 "bs" = (
 /obj/structure/cable{
-	d1 = 1;
-	d2 = 2;
 	icon_state = "1-2"
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
@@ -671,13 +559,9 @@
 	dir = 4
 	},
 /obj/structure/cable{
-	d1 = 1;
-	d2 = 2;
 	icon_state = "1-2"
 	},
 /obj/structure/cable{
-	d1 = 1;
-	d2 = 4;
 	icon_state = "1-4"
 	},
 /turf/simulated/floor/plating,
@@ -687,8 +571,6 @@
 	dir = 8
 	},
 /obj/structure/cable{
-	d1 = 4;
-	d2 = 8;
 	icon_state = "4-8"
 	},
 /obj/effect/decal/cleanable/blood,
@@ -703,7 +585,6 @@
 	dir = 8
 	},
 /obj/structure/cable{
-	d2 = 8;
 	icon_state = "0-8"
 	},
 /turf/simulated/floor/plating,
@@ -725,8 +606,6 @@
 /obj/machinery/door/firedoor,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/structure/cable{
-	d1 = 1;
-	d2 = 2;
 	icon_state = "1-2"
 	},
 /obj/machinery/door/airlock/engineering,
@@ -785,8 +664,6 @@
 "bP" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/structure/cable{
-	d1 = 1;
-	d2 = 2;
 	icon_state = "1-2"
 	},
 /turf/simulated/floor/plating,
@@ -845,7 +722,7 @@
 /turf/simulated/floor/wood,
 /area/lar_maria/dorms)
 "ca" = (
-/obj/effect/landmark/corpse/lar_maria/virologist,
+/obj/abstract/landmark/corpse/lar_maria/virologist,
 /obj/effect/decal/cleanable/blood,
 /turf/simulated/floor/wood,
 /area/lar_maria/dorms)
@@ -867,7 +744,7 @@
 /turf/simulated/floor/tiled,
 /area/lar_maria/library)
 "cf" = (
-/obj/effect/landmark/corpse/lar_maria/virologist,
+/obj/abstract/landmark/corpse/lar_maria/virologist,
 /obj/effect/decal/cleanable/blood,
 /turf/simulated/floor/tiled,
 /area/lar_maria/library)
@@ -894,8 +771,6 @@
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/structure/cable{
-	d1 = 1;
-	d2 = 2;
 	icon_state = "1-2"
 	},
 /turf/simulated/floor/plating,
@@ -1105,8 +980,6 @@
 	dir = 4
 	},
 /obj/structure/cable{
-	d1 = 1;
-	d2 = 2;
 	icon_state = "1-2"
 	},
 /turf/simulated/floor/plating,
@@ -1143,7 +1016,7 @@
 /turf/simulated/floor/wood,
 /area/lar_maria/dorms)
 "cZ" = (
-/obj/effect/landmark/corpse/lar_maria/test_subject,
+/obj/abstract/landmark/corpse/lar_maria/test_subject,
 /obj/effect/decal/cleanable/blood,
 /turf/simulated/floor/wood,
 /area/lar_maria/dorms)
@@ -1351,7 +1224,7 @@
 /turf/simulated/floor/tiled,
 /area/lar_maria/library)
 "dK" = (
-/obj/effect/landmark/corpse/lar_maria/test_subject,
+/obj/abstract/landmark/corpse/lar_maria/test_subject,
 /obj/effect/decal/cleanable/blood,
 /turf/simulated/floor/tiled,
 /area/lar_maria/library)
@@ -1398,13 +1271,9 @@
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/structure/cable{
-	d1 = 1;
-	d2 = 2;
 	icon_state = "1-2"
 	},
 /obj/structure/cable{
-	d1 = 1;
-	d2 = 4;
 	icon_state = "1-4"
 	},
 /turf/simulated/floor/plating,
@@ -1415,8 +1284,6 @@
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/structure/cable{
-	d1 = 4;
-	d2 = 8;
 	icon_state = "4-8"
 	},
 /turf/simulated/floor/plating,
@@ -1428,7 +1295,6 @@
 	},
 /obj/machinery/atmospherics/pipe/manifold/visible/blue,
 /obj/structure/cable{
-	d2 = 8;
 	icon_state = "0-8"
 	},
 /turf/simulated/floor/plating,
@@ -1515,7 +1381,6 @@
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/structure/cable{
-	d2 = 2;
 	icon_state = "0-2"
 	},
 /turf/simulated/floor/tiled,
@@ -1533,7 +1398,7 @@
 /turf/simulated/floor/wood,
 /area/lar_maria/dorms)
 "el" = (
-/obj/effect/landmark/corpse/lar_maria/virologist_female,
+/obj/abstract/landmark/corpse/lar_maria/virologist_female,
 /obj/effect/decal/cleanable/blood,
 /turf/simulated/floor/wood,
 /area/lar_maria/dorms)
@@ -1573,8 +1438,6 @@
 /obj/machinery/door/firedoor,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/structure/cable{
-	d1 = 1;
-	d2 = 2;
 	icon_state = "1-2"
 	},
 /obj/machinery/door/airlock/glass,
@@ -1603,8 +1466,6 @@
 	dir = 8
 	},
 /obj/structure/cable{
-	d1 = 1;
-	d2 = 2;
 	icon_state = "1-2"
 	},
 /turf/simulated/floor/tiled,
@@ -1628,7 +1489,7 @@
 /area/lar_maria/office)
 "eD" = (
 /obj/structure/bed/chair/office/light,
-/obj/effect/landmark/corpse/lar_maria/virologist_female,
+/obj/abstract/landmark/corpse/lar_maria/virologist_female,
 /obj/effect/decal/cleanable/blood,
 /turf/simulated/floor/tiled,
 /area/lar_maria/office)
@@ -1680,7 +1541,7 @@
 	dir = 1
 	},
 /obj/random/trash,
-/obj/effect/landmark/corpse/lar_maria/test_subject,
+/obj/abstract/landmark/corpse/lar_maria/test_subject,
 /obj/effect/decal/cleanable/blood,
 /turf/simulated/floor/tiled/white,
 /area/lar_maria/head_m)
@@ -1691,8 +1552,6 @@
 "eO" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/structure/cable{
-	d1 = 1;
-	d2 = 2;
 	icon_state = "1-2"
 	},
 /turf/simulated/floor/tiled,
@@ -1712,15 +1571,13 @@
 "eR" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/structure/cable{
-	d1 = 1;
-	d2 = 2;
 	icon_state = "1-2"
 	},
 /turf/simulated/floor/tiled,
 /area/lar_maria/office)
 "eS" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
-/obj/effect/landmark/corpse/lar_maria/test_subject,
+/obj/abstract/landmark/corpse/lar_maria/test_subject,
 /obj/effect/decal/cleanable/blood,
 /turf/simulated/floor/tiled,
 /area/lar_maria/office)
@@ -1813,7 +1670,6 @@
 	},
 /obj/machinery/atmospherics/unary/vent_scrubber/on,
 /obj/structure/cable{
-	d2 = 2;
 	icon_state = "0-2"
 	},
 /turf/simulated/floor/tiled/white,
@@ -1878,8 +1734,6 @@
 	dir = 5
 	},
 /obj/structure/cable{
-	d1 = 1;
-	d2 = 4;
 	icon_state = "1-4"
 	},
 /turf/simulated/floor/tiled/white,
@@ -1895,8 +1749,6 @@
 	dir = 4
 	},
 /obj/structure/cable{
-	d1 = 4;
-	d2 = 8;
 	icon_state = "4-8"
 	},
 /turf/simulated/floor/tiled/white,
@@ -1909,8 +1761,6 @@
 	dir = 4
 	},
 /obj/structure/cable{
-	d1 = 4;
-	d2 = 8;
 	icon_state = "4-8"
 	},
 /turf/simulated/floor/tiled,
@@ -1920,13 +1770,9 @@
 	dir = 4
 	},
 /obj/structure/cable{
-	d1 = 1;
-	d2 = 2;
 	icon_state = "1-2"
 	},
 /obj/structure/cable{
-	d1 = 2;
-	d2 = 8;
 	icon_state = "2-8"
 	},
 /turf/simulated/floor/tiled,
@@ -1941,7 +1787,7 @@
 /turf/simulated/floor/tiled,
 /area/lar_maria/office)
 "fA" = (
-/obj/effect/landmark/corpse/lar_maria/test_subject,
+/obj/abstract/landmark/corpse/lar_maria/test_subject,
 /obj/effect/decal/cleanable/blood,
 /turf/simulated/floor/tiled,
 /area/lar_maria/office)
@@ -2023,13 +1869,9 @@
 "fQ" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/structure/cable{
-	d1 = 1;
-	d2 = 2;
 	icon_state = "1-2"
 	},
 /obj/structure/cable{
-	d1 = 1;
-	d2 = 4;
 	icon_state = "1-4"
 	},
 /turf/simulated/floor/tiled,
@@ -2042,7 +1884,6 @@
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/structure/cable{
-	d2 = 8;
 	icon_state = "0-8"
 	},
 /turf/simulated/floor/tiled,
@@ -2120,8 +1961,6 @@
 "gf" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/structure/cable{
-	d1 = 1;
-	d2 = 2;
 	icon_state = "1-2"
 	},
 /obj/effect/decal/cleanable/blood,
@@ -2145,8 +1984,6 @@
 	dir = 4
 	},
 /obj/structure/cable{
-	d1 = 1;
-	d2 = 2;
 	icon_state = "1-2"
 	},
 /turf/simulated/floor/tiled,
@@ -2183,19 +2020,18 @@
 	},
 /obj/machinery/atmospherics/unary/vent_scrubber/on,
 /obj/structure/cable{
-	d2 = 2;
 	icon_state = "0-2"
 	},
 /turf/simulated/floor/wood,
 /area/lar_maria/dorms)
 "go" = (
 /obj/structure/bed/padded,
-/obj/effect/landmark/corpse/lar_maria/virologist,
+/obj/abstract/landmark/corpse/lar_maria/virologist,
 /turf/simulated/floor/wood,
 /area/lar_maria/dorms)
 "gp" = (
 /obj/random/trash,
-/obj/effect/landmark/corpse/lar_maria/test_subject,
+/obj/abstract/landmark/corpse/lar_maria/test_subject,
 /obj/effect/decal/cleanable/blood,
 /turf/simulated/floor/tiled/white,
 /area/lar_maria/head_m)
@@ -2212,8 +2048,6 @@
 /obj/machinery/door/firedoor,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/structure/cable{
-	d1 = 1;
-	d2 = 2;
 	icon_state = "1-2"
 	},
 /turf/simulated/floor/tiled,
@@ -2238,8 +2072,6 @@
 /obj/machinery/door/firedoor,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/structure/cable{
-	d1 = 1;
-	d2 = 2;
 	icon_state = "1-2"
 	},
 /turf/simulated/floor/wood,
@@ -2286,8 +2118,6 @@
 	dir = 4
 	},
 /obj/structure/cable{
-	d1 = 1;
-	d2 = 2;
 	icon_state = "1-2"
 	},
 /turf/simulated/floor/tiled,
@@ -2335,8 +2165,6 @@
 "gM" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/structure/cable{
-	d1 = 1;
-	d2 = 2;
 	icon_state = "1-2"
 	},
 /turf/simulated/floor/tiled,
@@ -2468,7 +2296,6 @@
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/structure/cable{
-	d2 = 2;
 	icon_state = "0-2"
 	},
 /turf/simulated/floor/tiled,
@@ -2549,7 +2376,6 @@
 /area/lar_maria/hallway)
 "hw" = (
 /obj/structure/cable{
-	d2 = 4;
 	icon_state = "0-4"
 	},
 /obj/effect/floor_decal/industrial/warning{
@@ -2559,8 +2385,6 @@
 /area/lar_maria/hallway)
 "hx" = (
 /obj/structure/cable{
-	d1 = 4;
-	d2 = 8;
 	icon_state = "4-8"
 	},
 /turf/simulated/floor/tiled,
@@ -2568,18 +2392,12 @@
 "hy" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/structure/cable{
-	d1 = 1;
-	d2 = 2;
 	icon_state = "1-2"
 	},
 /obj/structure/cable{
-	d1 = 1;
-	d2 = 8;
 	icon_state = "1-8"
 	},
 /obj/structure/cable{
-	d1 = 1;
-	d2 = 4;
 	icon_state = "1-4"
 	},
 /turf/simulated/floor/tiled,
@@ -2589,11 +2407,9 @@
 	dir = 8
 	},
 /obj/structure/cable{
-	d1 = 4;
-	d2 = 8;
 	icon_state = "4-8"
 	},
-/obj/effect/landmark/corpse/lar_maria/test_subject,
+/obj/abstract/landmark/corpse/lar_maria/test_subject,
 /obj/effect/decal/cleanable/blood,
 /turf/simulated/floor/tiled,
 /area/lar_maria/hallway)
@@ -2602,8 +2418,6 @@
 	dir = 4
 	},
 /obj/structure/cable{
-	d1 = 4;
-	d2 = 8;
 	icon_state = "4-8"
 	},
 /obj/random/trash,
@@ -2614,8 +2428,6 @@
 	dir = 4
 	},
 /obj/structure/cable{
-	d1 = 4;
-	d2 = 8;
 	icon_state = "4-8"
 	},
 /obj/effect/floor_decal/industrial/warning{
@@ -2629,8 +2441,6 @@
 	dir = 4
 	},
 /obj/structure/cable{
-	d1 = 4;
-	d2 = 8;
 	icon_state = "4-8"
 	},
 /obj/machinery/door/airlock/glass,
@@ -2639,13 +2449,9 @@
 "hD" = (
 /obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers,
 /obj/structure/cable{
-	d1 = 4;
-	d2 = 8;
 	icon_state = "4-8"
 	},
 /obj/structure/cable{
-	d1 = 1;
-	d2 = 8;
 	icon_state = "1-8"
 	},
 /turf/simulated/floor/tiled,
@@ -2655,8 +2461,6 @@
 	dir = 4
 	},
 /obj/structure/cable{
-	d1 = 4;
-	d2 = 8;
 	icon_state = "4-8"
 	},
 /turf/simulated/floor/tiled,
@@ -2667,8 +2471,6 @@
 	dir = 4
 	},
 /obj/structure/cable{
-	d1 = 4;
-	d2 = 8;
 	icon_state = "4-8"
 	},
 /turf/simulated/floor/tiled,
@@ -2678,8 +2480,6 @@
 	dir = 9
 	},
 /obj/structure/cable{
-	d1 = 1;
-	d2 = 8;
 	icon_state = "1-8"
 	},
 /turf/simulated/floor/tiled,
@@ -2746,7 +2546,7 @@
 /turf/simulated/floor/plating,
 /area/lar_maria/hallway)
 "hT" = (
-/obj/effect/landmark/corpse/lar_maria/zhp_guard/dark,
+/obj/abstract/landmark/corpse/lar_maria/zhp_guard/dark,
 /obj/effect/decal/cleanable/blood,
 /turf/simulated/floor/tiled,
 /area/lar_maria/hallway)
@@ -2755,8 +2555,6 @@
 /area/lar_maria/hallway)
 "hV" = (
 /obj/structure/cable{
-	d1 = 1;
-	d2 = 2;
 	icon_state = "1-2"
 	},
 /obj/machinery/atmospherics/pipe/manifold/hidden/supply{
@@ -2811,7 +2609,7 @@
 "id" = (
 /obj/structure/table/marble,
 /obj/machinery/door/firedoor,
-/obj/item/chems/food/condiment/flour,
+/obj/item/chems/condiment/flour,
 /obj/item/storage/fancy/egg_box,
 /turf/simulated/floor/tiled/white,
 /area/lar_maria/mess_hall)
@@ -2830,7 +2628,7 @@
 /turf/simulated/floor/tiled/freezer,
 /area/lar_maria/mess_hall)
 "ih" = (
-/obj/effect/landmark/corpse/lar_maria/test_subject,
+/obj/abstract/landmark/corpse/lar_maria/test_subject,
 /obj/effect/decal/cleanable/blood,
 /turf/simulated/floor/tiled/freezer,
 /area/lar_maria/mess_hall)
@@ -2860,7 +2658,6 @@
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/structure/cable{
-	d2 = 2;
 	icon_state = "0-2"
 	},
 /obj/machinery/washing_machine,
@@ -2869,8 +2666,6 @@
 "io" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/structure/cable{
-	d1 = 2;
-	d2 = 4;
 	icon_state = "2-4"
 	},
 /turf/simulated/floor/tiled,
@@ -2880,13 +2675,9 @@
 	dir = 8
 	},
 /obj/structure/cable{
-	d1 = 4;
-	d2 = 8;
 	icon_state = "4-8"
 	},
 /obj/structure/cable{
-	d1 = 1;
-	d2 = 4;
 	icon_state = "1-4"
 	},
 /turf/simulated/floor/tiled,
@@ -2896,8 +2687,6 @@
 	dir = 4
 	},
 /obj/structure/cable{
-	d1 = 4;
-	d2 = 8;
 	icon_state = "4-8"
 	},
 /turf/simulated/floor/tiled,
@@ -2907,8 +2696,6 @@
 	dir = 4
 	},
 /obj/structure/cable{
-	d1 = 4;
-	d2 = 8;
 	icon_state = "4-8"
 	},
 /obj/machinery/alarm{
@@ -2925,8 +2712,6 @@
 	dir = 4
 	},
 /obj/structure/cable{
-	d1 = 4;
-	d2 = 8;
 	icon_state = "4-8"
 	},
 /turf/simulated/floor/tiled,
@@ -2937,16 +2722,12 @@
 	dir = 4
 	},
 /obj/structure/cable{
-	d1 = 4;
-	d2 = 8;
 	icon_state = "4-8"
 	},
 /turf/simulated/floor/tiled,
 /area/lar_maria/hallway)
 "iu" = (
 /obj/structure/cable{
-	d1 = 4;
-	d2 = 8;
 	icon_state = "4-8"
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
@@ -2956,8 +2737,6 @@
 /area/lar_maria/hallway)
 "iv" = (
 /obj/structure/cable{
-	d1 = 1;
-	d2 = 8;
 	icon_state = "1-8"
 	},
 /obj/random/trash,
@@ -2986,7 +2765,7 @@
 /obj/structure/bed/chair{
 	dir = 4
 	},
-/obj/effect/landmark/corpse/lar_maria/virologist,
+/obj/abstract/landmark/corpse/lar_maria/virologist,
 /obj/effect/decal/cleanable/blood,
 /turf/simulated/floor/tiled,
 /area/lar_maria/mess_hall)
@@ -3007,7 +2786,7 @@
 /turf/simulated/floor/tiled/white,
 /area/lar_maria/mess_hall)
 "iD" = (
-/obj/effect/landmark/corpse/lar_maria/virologist_female,
+/obj/abstract/landmark/corpse/lar_maria/virologist_female,
 /obj/effect/decal/cleanable/blood,
 /turf/simulated/floor/tiled/white,
 /area/lar_maria/mess_hall)
@@ -3030,7 +2809,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 5
 	},
-/obj/effect/landmark/corpse/lar_maria/test_subject,
+/obj/abstract/landmark/corpse/lar_maria/test_subject,
 /obj/effect/decal/cleanable/blood,
 /turf/simulated/floor/tiled/white,
 /area/lar_maria/head_f)
@@ -3042,8 +2821,6 @@
 	dir = 4
 	},
 /obj/structure/cable{
-	d1 = 1;
-	d2 = 4;
 	icon_state = "1-4"
 	},
 /obj/effect/decal/cleanable/blood,
@@ -3059,8 +2836,6 @@
 	dir = 4
 	},
 /obj/structure/cable{
-	d1 = 4;
-	d2 = 8;
 	icon_state = "4-8"
 	},
 /obj/effect/decal/cleanable/blood,
@@ -3072,8 +2847,6 @@
 	},
 /obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers,
 /obj/structure/cable{
-	d1 = 1;
-	d2 = 8;
 	icon_state = "1-8"
 	},
 /obj/effect/decal/cleanable/blood,
@@ -3183,13 +2956,9 @@
 /area/lar_maria/mess_hall)
 "jc" = (
 /obj/structure/cable/yellow{
-	d1 = 1;
-	d2 = 4;
 	icon_state = "1-4"
 	},
 /obj/structure/cable/yellow{
-	d1 = 1;
-	d2 = 8;
 	icon_state = "1-8"
 	},
 /turf/simulated/floor/reinforced,
@@ -3306,8 +3075,6 @@
 	dir = 8
 	},
 /obj/structure/cable{
-	d1 = 1;
-	d2 = 32;
 	icon_state = "32-1"
 	},
 /turf/simulated/open,

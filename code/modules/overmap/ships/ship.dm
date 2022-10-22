@@ -59,13 +59,22 @@ var/global/const/OVERMAP_SPEED_CONSTANT = (1 SECOND)
 
 /obj/effect/overmap/visitable/ship/proc/get_thrust_limit()
 	for(var/datum/extension/ship_engine/E in engines)
-		if(E.thrust_limit > 0 && E.thrust_limit < .)
+		if(E.thrust_limit > .)
 			. = E.thrust_limit
 
 
 /obj/effect/overmap/visitable/ship/relaymove(mob/user, direction, accel_limit)
-	operator_skill = user.get_skill_value(SKILL_PILOT)
+	update_operator_skill(user)
 	accelerate(direction, accel_limit)
+
+/**
+ * Updates `operator_skill` to match the current user's skill level, or to null if no user is provided.
+ * Will skip observers to avoid allowing unintended external influences on flight.
+ */
+/obj/effect/overmap/visitable/ship/proc/update_operator_skill(mob/user)
+	if (isobserver(user))
+		return
+	operator_skill = user?.get_skill_value(SKILL_PILOT)
 
 /obj/effect/overmap/visitable/ship/get_scan_data(mob/user)
 	. = ..()
@@ -140,7 +149,7 @@ var/global/const/OVERMAP_SPEED_CONSTANT = (1 SECOND)
 	for(var/i = 1 to 2)
 		if(MOVING(speed[i], min_speed))
 			. = min(., ((speed[i] > 0 ? 1 : -1) - position[i]) / speed[i])
-	. = max(ceil(.),0)
+	. = max(CEILING(.),0)
 
 /obj/effect/overmap/visitable/ship/proc/halt()
 	adjust_speed(-speed[1], -speed[2])

@@ -160,7 +160,7 @@ var/global/list/meteors_cataclysm = list(\
 	if(loc == dest)
 		qdel(src)
 
-/obj/effect/meteor/touch_map_edge()
+/obj/effect/meteor/touch_map_edge(var/overmap_id = OVERMAP_ID_SPACE)
 	if(move_count > TRANSITIONEDGE)
 		qdel(src)
 
@@ -332,8 +332,8 @@ var/global/list/meteors_cataclysm = list(\
 /obj/effect/meteor/supermatter
 	name = "supermatter shard"
 	desc = "Oh god, what will be next..?"
-	icon = 'icons/obj/engine.dmi'
-	icon_state = "darkmatter"
+	icon = 'icons/obj/supermatter_32.dmi'
+	icon_state = "supermatter"
 
 /obj/effect/meteor/supermatter/meteor_effect()
 	..()

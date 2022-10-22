@@ -154,7 +154,7 @@ mob
 		// Testing object types (and layers)
 		overlays+=/obj/effect/overlayTest
 
-		loc = locate (10,10,1)
+		forceMove(locate(10,10,1))
 	verb
 		Browse_Icon()
 			set name = "1. Browse Icon"
@@ -163,7 +163,7 @@ mob
 			// Send the icon to src's local cache
 			send_rsc(src, getFlatIcon(src), iconName)
 			// Display the icon in their browser
-			src<<browse("<body bgcolor='#000000'><p><img src='[iconName]'></p></body>")
+			direct_output(src, browse("<body bgcolor='#000000'><p><img src='[iconName]'></p></body>"))
 
 		Output_Icon()
 			set name = "2. Output Icon"
@@ -343,26 +343,26 @@ world
 		--digits
 		switch(which)
 			if(0)
-				r = (r << 4) | ch
+				r = BITSHIFT_LEFT(r, 4) | ch
 				if(single)
-					r |= r << 4
+					r |= BITSHIFT_LEFT(r, 4)
 					++which
 				else if(!(digits & 1)) ++which
 			if(1)
-				g = (g << 4) | ch
+				g = BITSHIFT_LEFT(g, 4) | ch
 				if(single)
-					g |= g << 4
+					g |= BITSHIFT_LEFT(g, 4)
 					++which
 				else if(!(digits & 1)) ++which
 			if(2)
-				b = (b << 4) | ch
+				b = BITSHIFT_LEFT(b, 4) | ch
 				if(single)
-					b |= b << 4
+					b |= BITSHIFT_LEFT(b, 4)
 					++which
 				else if(!(digits & 1)) ++which
 			if(3)
-				alpha = (alpha << 4) | ch
-				if(single) alpha |= alpha << 4
+				alpha = BITSHIFT_LEFT(alpha, 4) | ch
+				if(single) alpha |= BITSHIFT_LEFT(alpha, 4)
 
 	. = list(r, g, b)
 	if(usealpha) . += alpha
@@ -392,16 +392,16 @@ world
 		--digits
 		switch(which)
 			if(0)
-				hue = (hue << 4) | ch
+				hue = BITSHIFT_LEFT(hue, 4) | ch
 				if(digits == (usealpha ? 6 : 4)) ++which
 			if(1)
-				sat = (sat << 4) | ch
+				sat = BITSHIFT_LEFT(sat, 4) | ch
 				if(digits == (usealpha ? 4 : 2)) ++which
 			if(2)
-				val = (val << 4) | ch
+				val = BITSHIFT_LEFT(val, 4) | ch
 				if(digits == (usealpha ? 2 : 0)) ++which
 			if(3)
-				alpha = (alpha << 4) | ch
+				alpha = BITSHIFT_LEFT(alpha, 4) | ch
 
 	. = list(hue, sat, val)
 	if(usealpha) . += alpha
@@ -416,7 +416,7 @@ world
 	var/val = HSV[3]
 
 	// Compress hue into easier-to-manage range
-	hue -= hue >> 8
+	hue -= BITSHIFT_RIGHT(hue, 8)
 	if(hue >= 0x5fa) hue -= 0x5fa
 
 	var/hi,mid,lo,r,g,b
@@ -476,17 +476,17 @@ world
 	if(val < 0) val = 0
 	if(val > 255) val = 255
 	. = "#"
-	. += TO_HEX_DIGIT(hue >> 8)
-	. += TO_HEX_DIGIT(hue >> 4)
+	. += TO_HEX_DIGIT(BITSHIFT_RIGHT(hue, 8))
+	. += TO_HEX_DIGIT(BITSHIFT_RIGHT(hue, 4))
 	. += TO_HEX_DIGIT(hue)
-	. += TO_HEX_DIGIT(sat >> 4)
+	. += TO_HEX_DIGIT(BITSHIFT_RIGHT(sat, 4))
 	. += TO_HEX_DIGIT(sat)
-	. += TO_HEX_DIGIT(val >> 4)
+	. += TO_HEX_DIGIT(BITSHIFT_RIGHT(val, 4))
 	. += TO_HEX_DIGIT(val)
 	if(!isnull(alpha))
 		if(alpha < 0) alpha = 0
 		if(alpha > 255) alpha = 255
-		. += TO_HEX_DIGIT(alpha >> 4)
+		. += TO_HEX_DIGIT(BITSHIFT_RIGHT(alpha, 4))
 		. += TO_HEX_DIGIT(alpha)
 
 /*
@@ -523,8 +523,8 @@ world
 	if(!HSV2[2]) HSV2[1] = HSV1[1]
 
 	// Compress hues into easier-to-manage range
-	HSV1[1] -= HSV1[1] >> 8
-	HSV2[1] -= HSV2[1] >> 8
+	HSV1[1] -= BITSHIFT_RIGHT(HSV1[1], 8)
+	HSV2[1] -= BITSHIFT_RIGHT(HSV2[1], 8)
 
 	var/hue_diff = HSV2[1] - HSV1[1]
 	if(hue_diff > 765) hue_diff -= 1530
@@ -576,7 +576,7 @@ world
 	if(hue < 0 || hue >= 1536) hue %= 1536
 	if(hue < 0) hue += 1536
 	// Compress hue into easier-to-manage range
-	hue -= hue >> 8
+	hue -= BITSHIFT_RIGHT(hue, 8)
 	return hue / (1530/360)
 
 /proc/AngleToHue(angle)
@@ -597,7 +597,7 @@ world
 	if(HSV[1] < 0) HSV[1] += 1536
 
 	// Compress hue into easier-to-manage range
-	HSV[1] -= HSV[1] >> 8
+	HSV[1] -= BITSHIFT_RIGHT(HSV[1], 8)
 
 	if(angle < 0 || angle >= 360) angle -= 360 * round(angle / 360)
 	HSV[1] = round(HSV[1] + angle * (1530/360), 1)
@@ -742,9 +742,17 @@ The _flatIcons list is a cache for generated icon files.
 					add = icon(I.icon, I.icon_state)
 		else // 'I' is an appearance object.
 			if(istype(A,/obj/machinery/atmospherics) && (I in A.underlays))
-				add = getFlatIcon(new /image(I), I.dir, curicon, curstate, curblend, 1)
+				add = getFlatIcon(new /image(I), I.dir, curicon, null, curblend, 1)
 			else
-				add = getFlatIcon(new/image(I), curdir, curicon, curstate, curblend, always_use_defdir)
+				/*
+				The state var is null so that it uses the appearance's state, not ours or the default
+				Falling back to our state if state is null would be incorrect overlay logic (overlay with null state does not inherit it from parent to which it is attached)
+
+				If icon is null on an overlay it will inherit the icon from the attached parent, so we _do_ pass curicon ...
+				but it does not do so if its icon_state is ""/null, so we check beforehand to exclude this
+				*/
+				var/icon_to_pass = (!I.icon_state && !I.icon) ? null : curicon
+				add = getFlatIcon(new/image(I), curdir, icon_to_pass, null, curblend, always_use_defdir)
 
 		// Find the new dimensions of the flat icon to fit the added overlay
 		addX1 = min(flatX1, I.pixel_x + 1)
@@ -864,53 +872,64 @@ The _flatIcons list is a cache for generated icon files.
 				result.Swap(i, gap + i)
 				swapped = 1
 	return result
-/*
-generate_image function generates image of specified range and location
-arguments tx, ty, tz are target coordinates (requred), range defines render distance to opposite corner (requred)
-cap_mode is capturing mode (optional), user is capturing mob (requred only wehen cap_mode = CAPTURE_MODE_REGULAR),
-lighting determines lighting capturing (optional), suppress_errors suppreses errors and continues to capture (optional).
+/**
+ * Generate_image function generates image of specified range and location:
+ * * arguments `target_x`, `target_y`, `target_z` are target coordinates (requred).
+ * * `range` defines render distance to opposite corner (requred).
+ * * lighting determines lighting capturing (optional), suppress_errors suppreses errors and continues to capture (optional).
+ * * `checker` is a person from which side will be perfored capture check, should be `/mob/living` target_ype.
 */
-/proc/generate_image(var/tx as num, var/ty as num, var/tz as num, var/range as num, var/cap_mode = CAPTURE_MODE_PARTIAL, var/mob/living/user, var/lighting = 1, var/suppress_errors = 1)
-	var/list/turfstocapture = list()
-	//Lines below determine what tiles will be rendered
-	for(var/xoff = 0 to range)
-		for(var/yoff = 0 to range)
-			var/turf/T = locate(tx + xoff,ty + yoff,tz)
-			if(T)
-				if(cap_mode == CAPTURE_MODE_REGULAR)
-					if(user.can_capture_turf(T))
-						turfstocapture.Add(T)
-						continue
-				else
-					turfstocapture.Add(T)
-			else
-				//Capture includes non-existan turfs
-				if(!suppress_errors)
-					return
-	//Lines below determine what objects will be rendered
-	var/list/atoms = list()
-	for(var/turf/T in turfstocapture)
-		atoms.Add(T)
-		for(var/atom/A in T)
-			if(istype(A, /atom/movable/lighting_overlay) && lighting) //Special case for lighting
-				atoms.Add(A)
+/proc/create_area_image(target_x, target_y, target_z, range, show_lighting = TRUE, mob/living/checker)
+	// They're all should be set.
+	ASSERT(target_x)
+	ASSERT(target_y)
+	ASSERT(target_z)
+	ASSERT(range)
+
+	// - Collecting list of turfs to render -
+
+	var/list/render_turfs = list()
+	for(var/x_offset = 0 to range)
+		for(var/y_offset = 0 to range)
+			var/turf/T = locate(target_x + x_offset, target_y + y_offset, target_z)
+			if(checker && !checker?.can_capture_turf(T))
 				continue
-			if(A.invisibility) continue
-			atoms.Add(A)
-	//Lines below actually render all colected data
-	atoms = sort_atoms_by_layer(atoms)
-	var/icon/cap = icon('icons/effects/96x96.dmi', "")
-	cap.Scale(range*32, range*32)
-	cap.Blend("#000", ICON_OVERLAY)
-	for(var/atom/A in atoms)
-		if(A)
-			var/icon/img = getFlatIcon(A)
-			if(istype(img, /icon))
-				if(istype(A, /mob/living) && A:lying)
-					img.BecomeLying()
-				var/xoff = (A.x - tx) * 32
-				var/yoff = (A.y - ty) * 32
-				cap.Blend(img, blendMode2iconMode(A.blend_mode),  A.pixel_x + xoff, A.pixel_y + yoff)
+			else
+				render_turfs.Add(T)
 
-	return cap
+	// - Collecting list of atoms to render -
 
+	var/list/render_atoms = list()
+	for(var/turf/T as anything in render_turfs)
+		render_atoms.Add(T)
+
+		for(var/atom/A as anything in T)
+			// In some cases we want to filter lighting overlays.
+			if(istype(A, /atom/movable/lighting_overlay) && show_lighting)
+				render_atoms.Add(A)
+				continue
+			
+			if(!A.alpha || A.invisibility)
+				continue
+
+			render_atoms.Add(A)
+
+	// - Performing rendering with collected atoms in list -
+
+	render_atoms = sort_atoms_by_layer(render_atoms)
+	var/icon/capture = icon('icons/effects/96x96.dmi', "")
+	capture.Scale(range * world.icon_size, range * world.icon_size)
+	capture.Blend(COLOR_BLACK, ICON_OVERLAY)
+	for(var/atom/A as anything in render_atoms)
+		var/icon/atom_icon = getFlatIcon(A)
+	
+		if(ismob(A))
+			var/mob/M = A
+			if(M.lying)
+				atom_icon.BecomeLying()
+
+		var/x_offset = (A.x - target_x) * world.icon_size
+		var/y_offset = (A.y - target_y) * world.icon_size
+		capture.Blend(atom_icon, blendMode2iconMode(A.blend_mode), A.pixel_x + x_offset, A.pixel_y + y_offset)
+
+	return capture

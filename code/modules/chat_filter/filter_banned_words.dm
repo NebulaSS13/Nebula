@@ -7,8 +7,8 @@
 	summary = "Blocks speech, emotes, character names and announcements that contain banned words. Contact an admin for information on which words are banned."
 	can_deny_message = TRUE
 
-/decl/chat_filter/regexp/banned_words/New()
-	..()
+/decl/chat_filter/regexp/banned_words/Initialize()
+	. = ..()
 	disabled = TRUE
 	var/list/banned_words = cached_json_decode(safe_file2text(BANNED_WORD_LOCATION, FALSE))
 	if(length(banned_words))

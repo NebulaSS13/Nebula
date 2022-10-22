@@ -55,9 +55,6 @@
 		return
 
 	log_debug("Player: [joining] is now offsite rank: [job.title] ([name]), JCP:[job.current_positions], JPL:[job.total_positions]")
-	if(joining.mind)
-		joining.mind.assigned_job = job
-		joining.mind.assigned_role = job.title
 	joining.faction = name
 	job.current_positions++
 
@@ -81,14 +78,15 @@
 			job.apply_fingerprints(character)
 			var/list/spawn_in_storage = SSjobs.equip_custom_loadout(character, job)
 			if(spawn_in_storage)
-				for(var/datum/gear/G in spawn_in_storage)
-					G.spawn_in_storage_or_drop(user_human, user_human.client.prefs.Gear()[G.display_name])
+				for(var/decl/loadout_option/G in spawn_in_storage)
+					G.spawn_in_storage_or_drop(user_human, user_human.client.prefs.Gear()[G.name])
 			SScustomitems.equip_custom_items(user_human)
 
 		character.job = job.title
-		if(character.mind)
-			character.mind.assigned_job = job
-			character.mind.assigned_role = character.job
+		if(!character.mind)
+			character.mind_initialize()
+		character.mind.assigned_job = job
+		character.mind.assigned_role = character.job
 
 		job.create_cash_on_hand(character)
 		to_chat(character, "<B>You are [job.total_positions == 1 ? "the" : "a"] [job.title] of the [name].</B>")
@@ -112,6 +110,7 @@
 		SSticker.mode.handle_offsite_latejoin(character)
 		global.universe.OnPlayerLatejoin(character)
 		log_and_message_admins("has joined the round as offsite role [character.mind.assigned_role].", character)
+		callHook("submap_join", list(job, character))
 		if(character.cannot_stand()) equip_wheelchair(character)
 		job.post_equip_rank(character, job.title)
 		qdel(joining)

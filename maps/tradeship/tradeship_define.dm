@@ -4,10 +4,6 @@
 	path = "tradeship"
 	ground_noun = "deck"
 
-	station_levels = list(1, 2, 3, 4)
-	contact_levels = list(1, 2, 3, 4)
-	player_levels = list(1, 2, 3, 4)
-
 	station_name  = "Tradeship Ocelot Alpha"
 	station_short = "Ocelot"
 
@@ -16,9 +12,8 @@
 	boss_short    = "Merchant Admiral"
 	company_name  = "Legit Cargo Ltd."
 	company_short = "LC"
-	overmap_event_areas = 11
 	lobby_screens = list('maps/tradeship/lobby/bloodmoney.png','maps/tradeship/lobby/vapormoney.png')
-	use_overmap = 1
+	overmap_ids = list(OVERMAP_ID_SPACE)
 	num_exoplanets = 1
 	welcome_sound = 'sound/effects/cowboysting.ogg'
 	emergency_shuttle_leaving_dock = "Attention all hands: the escape pods have been launched, maintaining burn for %ETA%."

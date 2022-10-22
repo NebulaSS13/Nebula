@@ -62,6 +62,8 @@
 
 	blend_objects = list(/obj/machinery/door/firedoor, /obj/structure/wall_frame, /turf/unsimulated/wall, /obj/structure/window) // Objects which to blend with
 
+	var/allow_multiple_instances_on_same_tile = FALSE
+
 /obj/machinery/door/firedoor/autoset
 	autoset_access = TRUE	//subtype just to make mapping away sites with custom access usage
 	req_access = list()
@@ -69,7 +71,7 @@
 /obj/machinery/door/firedoor/Initialize()
 	. = ..()
 	for(var/obj/machinery/door/firedoor/F in loc)
-		if(F != src)
+		if(F != src && !F.allow_multiple_instances_on_same_tile)
 			return INITIALIZE_HINT_QDEL
 	var/area/A = get_area(src)
 	ASSERT(istype(A))
@@ -378,10 +380,11 @@
 	set_light(0)
 	var/do_set_light = FALSE
 
-	if(connections & (NORTH|SOUTH))
-		set_dir(EAST)
-	else
-		set_dir(SOUTH)
+	if(set_dir_on_update)
+		if(connections & (NORTH|SOUTH))
+			set_dir(EAST)
+		else
+			set_dir(SOUTH)
 
 	if(density)
 		icon_state = "closed"
@@ -394,7 +397,7 @@
 			for(var/d=1;d<=4;d++)
 				var/cdir = global.cardinal[d]
 				for(var/i=1;i<=ALERT_STATES.len;i++)
-					if(dir_alerts[d] & (1<<(i-1)))
+					if(dir_alerts[d] & BITFLAG(i-1))
 						overlays += new/icon(icon,"alert_[ALERT_STATES[i]]", dir=cdir)
 						do_set_light = TRUE
 	else
@@ -409,3 +412,47 @@
 	overlays += panel_overlay
 	overlays += weld_overlay
 	overlays += lights_overlay
+
+//Single direction firedoors.
+/obj/machinery/door/firedoor/border
+	icon = 'icons/obj/doors/hazard/door_border.dmi'
+	allow_multiple_instances_on_same_tile = TRUE
+	air_properties_vary_with_direction = TRUE
+	set_dir_on_update = FALSE
+	heat_proof = TRUE
+
+	//There is a glass window so you can see through the door
+	//This is needed due to BYOND limitations in controlling visibility
+	glass = TRUE
+
+/obj/machinery/door/firedoor/border/autoset
+	autoset_access = TRUE
+	req_access = list()
+
+/obj/machinery/door/firedoor/border/CanPass(atom/movable/mover, turf/target, height = 0, air_group = 0)
+	if(istype(mover) && mover.checkpass(PASS_FLAG_GLASS))
+		return TRUE
+	if(get_dir(loc, target) == dir) //Make sure looking at appropriate border
+		if(air_group)
+			return FALSE
+		return !density
+	else
+		return TRUE
+
+/obj/machinery/door/firedoor/border/CheckExit(atom/movable/mover, turf/target)
+	if(istype(mover) && mover.checkpass(PASS_FLAG_GLASS))
+		return TRUE
+	if(get_dir(loc, target) == dir)
+		return !density
+	else
+		return TRUE
+
+/obj/machinery/door/firedoor/border/update_nearby_tiles(need_rebuild)
+	var/turf/simulated/source = get_turf(src)
+	var/turf/simulated/destination = get_step(source,dir)
+
+	update_heat_protection(loc)
+
+	if(istype(source)) SSair.mark_for_update(source)
+	if(istype(destination)) SSair.mark_for_update(destination)
+	return TRUE

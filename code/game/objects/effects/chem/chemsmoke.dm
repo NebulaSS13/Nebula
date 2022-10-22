@@ -136,16 +136,17 @@
 	var/contained = carry.get_reagents()
 	var/area/A = get_area(location)
 
-	var/where = "[A.name] | [location.x], [location.y]"
+	var/where = "[A.proper_name] | [location.x], [location.y]"
 	var/whereLink = "<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[location.x];Y=[location.y];Z=[location.z]'>[where]</a>"
 
 	if(show_log)
-		if(carry.my_atom.fingerprintslast)
-			var/mob/M = get_mob_by_key(carry.my_atom.fingerprintslast)
+		var/atom/location = carry?.get_reaction_loc()
+		if(location?.fingerprintslast)
+			var/mob/M = get_mob_by_key(location.fingerprintslast)
 			var/more = ""
 			if(M)
 				more = "(<A HREF='?_src_=holder;adminmoreinfo=\ref[M]'>?</a>)"
-			log_and_message_admins("A chemical smoke reaction has taken place in ([whereLink])[contained]. Last associated key is [carry.my_atom.fingerprintslast][more].")
+			log_and_message_admins("A chemical smoke reaction has taken place in ([whereLink])[contained]. Last associated key is [location.fingerprintslast][more].")
 		else
 			log_and_message_admins("A chemical smoke reaction has taken place in ([whereLink]). No associated key.")
 

@@ -1,8 +1,7 @@
 /mob/living/silicon/robot/drone
 	name = "maintenance drone"
 	real_name = "drone"
-	icon = 'icons/mob/robots_drones.dmi'
-	icon_state = "repairbot"
+	icon = 'icons/mob/robots/drones/drone.dmi'
 	maxHealth = 35
 	health = 35
 	cell_emp_mult = 1
@@ -41,7 +40,7 @@
 	var/hat_y = -13
 
 	holder_type = /obj/item/holder/drone
-	ntos_type = null
+	os_type = null
 	starting_stock_parts = null
 
 /mob/living/silicon/robot/drone/Initialize()
@@ -52,7 +51,7 @@
 	remove_language(/decl/language/binary)
 	add_language(/decl/language/binary, 0)
 	add_language(/decl/language/binary/drone, 1)
-	set_extension(src, /datum/extension/hattable, hat_x, hat_y)
+	set_extension(src, /datum/extension/hattable, list(hat_x, hat_y))
 
 	default_language = /decl/language/binary/drone
 	// NO BRAIN.
@@ -93,7 +92,7 @@
 	if(too_many_active_drones())
 		to_chat(src, "<span class='danger'>The maximum number of active drones has been reached..</span>")
 		return 0
-	if(jobban_isbanned(possessor,"Robot"))
+	if(jobban_isbanned(possessor,ASSIGNMENT_ROBOT))
 		to_chat(usr, "<span class='danger'>You are banned from playing synthetics and cannot spawn as a drone.</span>")
 		return 0
 	if(!possessor.MayRespawn(1,DRONE_SPAWN_DELAY))
@@ -114,7 +113,7 @@
 
 /mob/living/silicon/robot/drone/construction
 	name = "construction drone"
-	icon_state = "constructiondrone"
+	icon = 'icons/mob/robots/drones/drone_construction.dmi'
 	laws = /datum/ai_laws/construction_drone
 	module_type = /obj/item/robot_module/drone/construction
 	can_pull_size = ITEM_SIZE_STRUCTURE
@@ -144,23 +143,16 @@
 		real_name = "[initial(name)] ([random_id(type,100,999)])"
 	SetName(real_name)
 
-/mob/living/silicon/robot/drone/on_update_icon()
-
-	cut_overlays()
-	if(stat == 0)
+/mob/living/silicon/robot/drone/get_eye_overlay()
+	var/image/ret = ..()
+	if(ret)
 		if(controlling_ai)
-			add_overlay("eyes-[icon_state]-ai")
+			ret.color = COLOR_GREEN
 		else if(emagged)
-			add_overlay("eyes-[icon_state]-emag")
+			ret.color = COLOR_RED
 		else
-			add_overlay("eyes-[icon_state]")
-	else
-		add_overlay("eyes")
-
-	var/datum/extension/hattable/hattable = get_extension(src, /datum/extension/hattable)
-	var/image/I = hattable?.get_hat_overlay(src)
-	if(I)
-		add_overlay(I)
+			ret.color = COLOR_CYAN
+	return ret
 
 /mob/living/silicon/robot/drone/choose_icon()
 	return

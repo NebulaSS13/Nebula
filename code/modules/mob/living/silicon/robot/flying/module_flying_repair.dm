@@ -2,14 +2,14 @@
 	name = "repair drone module"
 	display_name = "Repair"
 	channels = list ("Engineering" = TRUE)
-	networks = list(NETWORK_ENGINEERING)
+	camera_channels = list(CAMERA_CAMERA_CHANNEL_ENGINEERING)
 	software = list(
 		/datum/computer_file/program/power_monitor,
 		/datum/computer_file/program/supermatter_monitor
 	)
-	sprites = list(
-		"Drone" = "drone-engineer",
-		"Eyebot" = "eyebot-engineering"
+	module_sprites = list(
+		"Drone" = 'icons/mob/robots/flying/flying_engineering.dmi',
+		"Eyebot" = 'icons/mob/robots/flying/eyebot_engineering.dmi'
 	)
 	equipment = list(
 		/obj/item/borg/sight/meson,
@@ -34,13 +34,15 @@
 		/obj/item/stack/material/cyborg/steel,
 		/obj/item/stack/material/cyborg/aluminium,
 		/obj/item/stack/material/rods/cyborg,
+		/obj/item/stack/material/strut/cyborg,
 		/obj/item/stack/tile/floor/cyborg,
+		/obj/item/stack/tile/roof/cyborg,
 		/obj/item/stack/material/cyborg/glass,
 		/obj/item/stack/material/cyborg/glass/reinforced,
 		/obj/item/stack/material/cyborg/fiberglass,
 		/obj/item/stack/cable_coil/cyborg,
 		/obj/item/stack/material/cyborg/plasteel,
-		/obj/item/plunger
+		/obj/item/plunger/unbreakable
 	)
 	synths = list(
 		/datum/matter_synth/metal = 	 30000,
@@ -68,7 +70,9 @@
 		 /obj/item/stack/material/cyborg/steel,
 		 /obj/item/stack/material/cyborg/aluminium,
 		 /obj/item/stack/material/rods/cyborg,
+		 /obj/item/stack/material/strut/cyborg,
 		 /obj/item/stack/tile/floor/cyborg,
+		 /obj/item/stack/tile/roof/cyborg,
 		 /obj/item/stack/material/cyborg/glass/reinforced
 		))
 		var/obj/item/stack/stack = locate(thing) in equipment

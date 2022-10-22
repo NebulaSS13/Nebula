@@ -72,8 +72,8 @@ avoid code duplication. This includes items that may sometimes act as a standard
 		if(devour(I))
 			return TRUE
 	if(user.a_intent == I_HELP)
-		var/obj/item/organ/external/E = get_organ(user.zone_sel.selecting)
-		if(istype(E) && !E.is_stump())
+		var/obj/item/organ/external/E = GET_EXTERNAL_ORGAN(src, user.zone_sel.selecting)
+		if(E)
 			for(var/datum/ailment/ailment in E.ailments)
 				if(ailment.treated_by_item(I))
 					ailment.was_treated_by_item(I, user, src)
@@ -90,11 +90,23 @@ avoid code duplication. This includes items that may sometimes act as a standard
 	var/mob/living/attackee = null
 
 //I would prefer to rename this attack_as_weapon(), but that would involve touching hundreds of files.
-/obj/item/proc/attack(mob/living/M, mob/living/user, var/target_zone)
+/obj/item/proc/attack(mob/living/M, mob/living/user, var/target_zone, animate = TRUE)
 	if(item_flags & ITEM_FLAG_NO_BLUDGEON)
-		return 0
-	if(M == user && user.a_intent != I_HURT)
-		return 0
+		return FALSE
+
+	// If on help, possibly don't attack.
+	if(user.a_intent == I_HELP)
+		switch(user.get_preference_value(/datum/client_preference/help_intent_attack_blocking))
+			if(PREF_ALWAYS)
+				if(user == M)
+					to_chat(user, SPAN_WARNING("You refrain from hitting yourself with \the [src] as you are on help intent."))
+				else
+					to_chat(user, SPAN_WARNING("You refrain from hitting \the [M] with \the [src] as you are on help intent."))
+				return FALSE
+			if(PREF_MYSELF)
+				if(user == M)
+					to_chat(user, SPAN_WARNING("You refrain from hitting yourself with \the [src] as you are on help intent."))
+					return FALSE
 
 	/////////////////////////
 
@@ -102,7 +114,8 @@ avoid code duplication. This includes items that may sometimes act as a standard
 		admin_attack_log(user, M, "Attacked using \a [src] (DAMTYE: [uppertext(damtype)])", "Was attacked with \a [src] (DAMTYE: [uppertext(damtype)])", "used \a [src] (DAMTYE: [uppertext(damtype)]) to attack")
 	/////////////////////////
 	user.setClickCooldown(attack_cooldown + w_class)
-	user.do_attack_animation(M)
+	if(animate)
+		user.do_attack_animation(M)
 	if(!user.aura_check(AURA_TYPE_WEAPON, src, user))
 		return 0
 

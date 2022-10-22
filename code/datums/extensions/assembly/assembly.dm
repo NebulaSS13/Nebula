@@ -41,7 +41,7 @@
 	parts += P
 	if(user)
 		user.unEquip(P, holder)
-		to_chat(user, "You install \the [P] into \the [assembly_name]")
+		to_chat(user, "You install \the [P] into \the [assembly_name].")
 	return TRUE
 
 /datum/extension/assembly/proc/uninstall_component(var/mob/living/user, var/obj/item/stock_parts/P)
@@ -52,7 +52,7 @@
 	else
 		var/atom/movable/H = holder
 		P.dropInto(H.loc)
-	if(P.type in critical_parts)
+	if(enabled && (P.type in critical_parts))
 		critical_shutdown()
 
 /datum/extension/assembly/proc/add_replace_component(var/mob/living/user, var/part_type, var/obj/item/stock_parts/P)

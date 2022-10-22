@@ -81,7 +81,7 @@ var/global/list/image/splatter_cache=list()
 /obj/effect/decal/cleanable/blood/on_update_icon()
 	if(basecolor == "rainbow") basecolor = get_random_colour(1)
 	color = basecolor
-	if(basecolor == SYNTH_BLOOD_COLOUR)
+	if(basecolor == SYNTH_BLOOD_COLOR)
 		SetName("oil")
 		desc = "It's black and greasy."
 	else
@@ -94,11 +94,9 @@ var/global/list/image/splatter_cache=list()
 	if(amount < 1)
 		return
 
-	var/obj/item/organ/external/l_foot = perp.get_organ(BP_L_FOOT)
-	var/obj/item/organ/external/r_foot = perp.get_organ(BP_R_FOOT)
-	var/hasfeet = 1
-	if((!l_foot || l_foot.is_stump()) && (!r_foot || r_foot.is_stump()))
-		hasfeet = 0
+	var/obj/item/organ/external/l_foot = GET_EXTERNAL_ORGAN(perp, BP_L_FOOT)
+	var/obj/item/organ/external/r_foot = GET_EXTERNAL_ORGAN(perp, BP_R_FOOT)
+	var/hasfeet = l_foot && r_foot
 	
 	var/transferred_data = blood_data ? blood_data[pick(blood_data)] : null
 	if(perp.shoes && !perp.buckled)//Adding blood to shoes
@@ -109,7 +107,7 @@ var/global/list/image/splatter_cache=list()
 		if(l_foot)
 			l_foot.add_coating(chemical, amount, transferred_data)
 		if(r_foot)
-			l_foot.add_coating(chemical, amount, transferred_data)
+			r_foot.add_coating(chemical, amount, transferred_data)
 	else if (perp.buckled && istype(perp.buckled, /obj/structure/bed/chair/wheelchair))
 		var/obj/structure/bed/chair/wheelchair/W = perp.buckled
 		W.bloodiness = 4

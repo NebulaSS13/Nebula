@@ -3,7 +3,9 @@
 
 /datum/extension/ship_engine/ion_thruster/burn(var/partial = 1)
 	var/obj/machinery/ion_thruster/thruster = holder
-	. = istype(thruster) && thruster.burn(partial)
+	if(istype(thruster) && thruster.get_thrust(partial))
+		return get_exhaust_velocity() * thruster.thrust_effectiveness
+	return 0
 
 /datum/extension/ship_engine/ion_thruster/get_exhaust_velocity()
 	. = 300 // Arbitrary value based on being slightly less than a default configuration gas engine.
@@ -32,26 +34,42 @@
 	desc = "An advanced propulsion device, using energy and minutes amount of gas to generate thrust."
 	icon = 'icons/obj/ship_engine.dmi'
 	icon_state = "nozzle2"
+	density = 1
 	power_channel = ENVIRON
 	idle_power_usage = 100
 	anchored = TRUE
 	construct_state = /decl/machine_construction/default/panel_closed
 	use_power = POWER_USE_IDLE
 
+	// TODO: modify these with upgraded parts?
 	var/thrust_limit = 1
-	var/burn_cost = 750
-	var/generated_thrust = 2.5
+	var/thrust_cost = 750
+	var/thrust_effectiveness = 1
 
-/obj/machinery/ion_thruster/proc/burn(var/partial)
-	if(!use_power || !powered())
-		return 0
-	use_power_oneoff(burn_cost)
-	. = thrust_limit * generated_thrust
+/obj/machinery/ion_thruster/attackby(obj/item/I, mob/user)
+	if(isMultitool(I) && !panel_open)
+		var/datum/extension/ship_engine/engine = get_extension(src, /datum/extension/ship_engine)
+		if(engine.sync_to_ship())
+			to_chat(user, SPAN_NOTICE("\The [src] emits a ping as it syncs its controls to a nearby ship."))
+		else
+			to_chat(user, SPAN_WARNING("\The [src] flashes an error!"))
+		return TRUE
+
+	. = ..()
+
+/obj/machinery/ion_thruster/proc/get_thrust()
+	if(use_power && powered())
+		use_power_oneoff(thrust_cost)
+		return thrust_limit
+	return 0
 
 /obj/machinery/ion_thruster/on_update_icon()
 	cut_overlays()
 	if(!(stat & (NOPOWER | BROKEN)))
 		add_overlay(emissive_overlay(icon, "ion_glow"))
+		z_flags |= ZMM_MANGLE_PLANES
+	else
+		z_flags &= ~ZMM_MANGLE_PLANES
 
 /obj/machinery/ion_thruster/power_change()
 	. = ..()

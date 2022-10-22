@@ -1,5 +1,5 @@
 /obj/item/inflatable
-	name = "inflatable"
+	name = "inflatable item"
 	w_class = ITEM_SIZE_NORMAL
 	icon = 'icons/obj/structures/inflatable.dmi'
 	var/deploy_path = null
@@ -37,7 +37,7 @@
 	deploy_path = /obj/structure/inflatable/door
 
 /obj/structure/inflatable
-	name = "inflatable"
+	name = "inflatable structure"
 	desc = "An inflated membrane. Do not puncture."
 	density = 1
 	anchored = 1
@@ -120,7 +120,7 @@
 	add_fingerprint(user)
 
 /obj/structure/inflatable/can_repair_with(obj/item/tool)
-	. = istype(tool, /obj/item/tape_roll) && (health < maxhealth)
+	. = istype(tool, /obj/item/ducttape) && (health < maxhealth)
 
 /obj/structure/inflatable/handle_repair(mob/user, obj/item/tool)
 	if(taped)
@@ -190,6 +190,7 @@
 
 	icon_state = "door_closed"
 	undeploy_path = /obj/item/inflatable/door
+	atmos_canpass = CANPASS_PROC
 
 	var/state = 0 //closed, 1 == open
 	var/isSwitchingStates = 0
@@ -251,6 +252,7 @@
 	isSwitchingStates = 0
 
 /obj/structure/inflatable/door/on_update_icon()
+	..()
 	if(state)
 		icon_state = "door_open"
 	else

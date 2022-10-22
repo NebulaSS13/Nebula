@@ -1,5 +1,5 @@
-/obj/item/chems/food/snacks/grown/ambrosiavulgaris
+/obj/item/chems/food/grown/ambrosiavulgaris
 	plantname = "biteleaf"
 
-/obj/item/chems/food/snacks/grown/ambrosiadeus
+/obj/item/chems/food/grown/ambrosiadeus
 	plantname = "biteleafdeus"

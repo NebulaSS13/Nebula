@@ -3,8 +3,8 @@
 	display_name = "Illegal"
 	hide_on_manifest = 1
 	upgrade_locked = TRUE
-	sprites = list(
-		"Dread" = "securityrobot"
+	module_sprites = list(
+		"Dread" = 'icons/mob/robots/robot_security.dmi'
 	)
 	equipment = list(
 		/obj/item/flash,

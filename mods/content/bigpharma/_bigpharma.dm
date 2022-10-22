@@ -37,10 +37,23 @@ var/global/list/reagent_names_to_icon_state
 	if(!meds.original_reagent)
 		remove_extension(thing, /datum/extension/obfuscated_medication)
 		return
+
+	// Labelled bottles should be left alone.
+	if(istype(thing, /obj/item/chems/glass/bottle))
+		var/obj/item/chems/glass/bottle/bottle = thing
+		if(!bottle.autolabel && bottle.label_text)
+			remove_extension(thing, /datum/extension/obfuscated_medication)
+			return
+
 	// Okay, now apply the obfuscation.
-	var/new_name = meds.get_name()
+	var/new_name = get_medication_name_from_reagent_name(meds.original_reagent)
 	if(new_name)
-		thing.SetName(new_name)
+		if(istype(thing, /obj/item/chems))
+			var/obj/item/chems/chems = thing
+			chems.label_text = new_name
+			chems.update_name_label()
+		else
+			thing.SetName(new_name)
 	if(meds.container_description)
 		thing.desc = meds.container_description
-	thing.update_icon()	
+	thing.update_icon()

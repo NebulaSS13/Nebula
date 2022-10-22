@@ -27,7 +27,7 @@
 	guestbanned = 1
 	must_fill = 1
 	not_random_selectable = 1
-	forced_spawnpoint = "Captain Compartment"
+	forced_spawnpoint = /decl/spawnpoint/cryo/captain
 
 /datum/job/tradeship_captain/equip(var/mob/living/carbon/human/H)
 	. = ..()
@@ -47,11 +47,16 @@
 		return
 	global.using_map.station_short = ship
 	global.using_map.station_name = "Tradeship [ship]"
-	var/obj/effect/overmap/visitable/ship/tradeship/B = locate() in world
-	if(B)
-		B.SetName(global.using_map.station_name)
-	command_announcement.Announce("Attention all hands on [global.using_map.station_name]! Thank you for your attention.", "Ship re-Christened")
-	verbs -= /mob/proc/tradehouse_rename_ship
+
+	for(var/sz in global.overmap_sectors)
+		var/obj/effect/overmap/visitable/ship/tradeship/B = global.overmap_sectors[sz]
+		if(istype(B))
+			B.SetName(global.using_map.station_name)
+			command_announcement.Announce("Attention all hands on [global.using_map.station_name]! Thank you for your attention.", "Ship Re-Christened")
+			verbs -= /mob/proc/tradehouse_rename_ship
+			return
+
+	to_chat(src, SPAN_WARNING("Could not find an appropriate overmap object for this verb to rename, sorry."))
 
 /mob/proc/tradehouse_rename_company()
 	set name = "Rename Tradehouse"
@@ -72,7 +77,6 @@
 	title = "First Mate"
 	supervisors = "the Captain"
 	outfit_type = /decl/hierarchy/outfit/job/tradeship/mate
-	hud_icon = "hudheadofpersonnel"
 	head_position = 1
 	department_types = list(
 		/decl/department/command,

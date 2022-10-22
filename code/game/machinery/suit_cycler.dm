@@ -73,24 +73,24 @@
 		LAZYADD(new_overlays, helmet.get_mob_overlay(null, slot_head_str))
 	if(occupant)
 		LAZYADD(new_overlays, image(occupant))
-	LAZYADD(new_overlays, image(icon, "overbase"))
+	LAZYADD(new_overlays, image(icon, "overbase", layer = ABOVE_HUMAN_LAYER))
 
 	if(locked || active)
-		LAZYADD(new_overlays, image(icon, "closed"))
+		LAZYADD(new_overlays, image(icon, "closed", layer = ABOVE_HUMAN_LAYER))
 	else
-		LAZYADD(new_overlays, image(icon, "open"))
+		LAZYADD(new_overlays, image(icon, "open", layer = ABOVE_HUMAN_LAYER))
 
 	if(irradiating)
-		LAZYADD(new_overlays, image(icon, "light_radiation"))
+		LAZYADD(new_overlays, image(icon, "light_radiation", layer = ABOVE_HUMAN_LAYER))
 		set_light(3, 0.8, COLOR_RED_LIGHT)
 	else if(active)
-		LAZYADD(new_overlays, image(icon, "light_active"))
+		LAZYADD(new_overlays, image(icon, "light_active", layer = ABOVE_HUMAN_LAYER))
 		set_light(3, 0.8, COLOR_YELLOW)
 	else
 		set_light(0)
 
 	if(panel_open)
-		LAZYADD(new_overlays, image(icon, "panel"))
+		LAZYADD(new_overlays, image(icon, "panel", layer = ABOVE_HUMAN_LAYER))
 
 	overlays = new_overlays
 
@@ -115,7 +115,10 @@
 	update_icon()
 
 /obj/machinery/suit_cycler/Destroy()
-	DROP_NULL(occupant)
+	if(occupant)
+		occupant.dropInto(loc)
+		occupant.reset_view()
+		occupant = null
 	DROP_NULL(suit)
 	DROP_NULL(helmet)
 	DROP_NULL(boots)
@@ -142,12 +145,11 @@
 	if(do_after(user, 20, src))
 		if(!istype(target) || locked || suit || helmet || !target.Adjacent(user) || !user.Adjacent(src) || user.incapacitated())
 			return FALSE
-		if (target.client)
-			target.client.perspective = EYE_PERSPECTIVE
-			target.client.eye = src
+		target.reset_view(src)
 		target.forceMove(src)
 		occupant = target
 		add_fingerprint(user)
+		update_icon()
 		return TRUE
 	return FALSE
 
@@ -284,7 +286,7 @@
 		dat += "<b>Target product:</b> <A href='?src=\ref[src];select_department=1'>[target_modification.name]</a>, <A href='?src=\ref[src];select_bodytype=1'>[target_bodytype]</a>."
 		dat += "<br><A href='?src=\ref[src];apply_paintjob=1'>Apply customisation routine</a><br><hr>"
 
-	var/datum/browser/written/popup = new(user, "suit_cycler", "Suit Cycler")
+	var/datum/browser/written_digital/popup = new(user, "suit_cycler", "Suit Cycler")
 	popup.set_content(JOINTEXT(dat))
 	popup.open()
 
@@ -443,10 +445,11 @@
 	if (!occupant)
 		return
 
-	occupant.reset_view()
 	occupant.dropInto(loc)
+	occupant.reset_view()
 	occupant = null
 
+	update_icon()
 	add_fingerprint(user)
 	updateUsrDialog()
 
@@ -456,13 +459,14 @@
 	if(!target_bodytype || !target_modification)
 		return
 
-	if(helmet) helmet.refit_for_bodytype(target_bodytype)
-	if(suit)   suit.refit_for_bodytype(target_bodytype)
-	if(boots)  boots.refit_for_bodytype(target_bodytype)
-
-	target_modification.RefitItem(helmet)
-	target_modification.RefitItem(suit)
-
-	if(helmet) helmet.SetName("refitted [helmet.name]")
-	if(suit)   suit.SetName("refitted [suit.name]")
-	if(boots)  boots.SetName("refitted [initial(boots.name)]")
+	if(helmet)
+		target_modification.RefitItem(helmet)
+		helmet.refit_for_bodytype(target_bodytype)
+		helmet.SetName("refitted [helmet.name]")
+	if(suit)
+		target_modification.RefitItem(suit)
+		suit.refit_for_bodytype(target_bodytype)
+		suit.SetName("refitted [suit.name]")
+	if(boots)
+		boots.refit_for_bodytype(target_bodytype)
+		boots.SetName("refitted [initial(boots.name)]")

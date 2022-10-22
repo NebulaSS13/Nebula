@@ -16,8 +16,9 @@
 #define SS_PRIORITY_AIR            80  // ZAS processing.
 #define SS_PRIORITY_THROWING       75  // Throwing calculation and constant checks
 #define SS_PRIORITY_MATERIALS      60  // Multi-tick chemical reactions.
-#define SS_PRIORITY_LIGHTING       50	// Queued lighting engine updates.
-#define SS_PRIORITY_SPACEDRIFT     40  // Drifting things
+#define SS_PRIORITY_LIGHTING       50  // Queued lighting engine updates.
+#define SS_PRIORITY_SPACEDRIFT     40  // Drifting things.
+#define SS_PRIORITY_INPUT          20  // Input things.
 #define SS_PRIORITY_ICON_UPDATE    20  // Queued icon updates. Mostly used by APCs and tables.
 #define SS_PRIORITY_ALARM          20  // Alarm processing.
 #define SS_PRIORITY_EVENT          20  // Event processing and queue handling.
@@ -50,7 +51,8 @@
 #define SS_PRIORITY_CHAR_SETUP    25   // Writes player preferences to savefiles.
 #define SS_PRIORITY_COMPUTER_NETS 25   // Handles computer network devices hookups
 #define SS_PRIORITY_GARBAGE       20   // Garbage collection.
-
+#define SS_PRIORITY_WEATHER       10   // Weather processing.
+#define SS_PRIORITY_BLOB          0    // Blob processing.
 
 // Subsystem fire priority, from lowest to highest priority
 // If the subsystem isn't listed here it's either DEFAULT or PROCESS (if it's a processing subsystem child)

@@ -89,7 +89,6 @@
 /obj/effect/wallframe_spawn/reinforced,
 /obj/machinery/door/blast/regular,
 /obj/structure/cable{
-	d2 = 2;
 	icon_state = "0-2"
 	},
 /turf/simulated/floor/airless,
@@ -145,7 +144,6 @@
 	},
 /obj/item/stack/cable_coil,
 /obj/structure/cable{
-	d2 = 2;
 	icon_state = "0-2"
 	},
 /obj/machinery/atmospherics/pipe/simple/visible/black{
@@ -159,9 +157,8 @@
 /turf/simulated/floor,
 /area/smugglers/base)
 "az" = (
-/obj/machinery/power/port_gen/pacman,
+/obj/machinery/port_gen/pacman,
 /obj/structure/cable{
-	d2 = 2;
 	icon_state = "0-2"
 	},
 /obj/machinery/atmospherics/pipe/simple/visible/black{
@@ -178,8 +175,6 @@
 	dir = 4
 	},
 /obj/structure/cable{
-	d1 = 1;
-	d2 = 2;
 	icon_state = "1-2"
 	},
 /turf/simulated/floor,
@@ -189,8 +184,6 @@
 	dir = 4
 	},
 /obj/structure/cable{
-	d1 = 1;
-	d2 = 2;
 	icon_state = "1-2"
 	},
 /turf/simulated/floor,
@@ -200,8 +193,6 @@
 	dir = 1
 	},
 /obj/structure/cable{
-	d1 = 1;
-	d2 = 2;
 	icon_state = "1-2"
 	},
 /turf/simulated/floor,
@@ -301,16 +292,12 @@
 	dir = 8
 	},
 /obj/structure/cable{
-	d1 = 2;
-	d2 = 4;
 	icon_state = "2-4"
 	},
 /turf/simulated/floor,
 /area/smugglers/base)
 "aO" = (
 /obj/structure/cable{
-	d1 = 4;
-	d2 = 8;
 	icon_state = "4-8"
 	},
 /turf/simulated/floor,
@@ -318,8 +305,6 @@
 "aP" = (
 /obj/effect/decal/cleanable/blood/drip,
 /obj/structure/cable{
-	d1 = 4;
-	d2 = 8;
 	icon_state = "4-8"
 	},
 /obj/item/wirecutters,
@@ -328,31 +313,22 @@
 "aQ" = (
 /obj/structure/cable,
 /obj/structure/cable{
-	d1 = 32;
-	d2 = 4;
 	icon_state = "32-4"
 	},
 /obj/structure/cable{
-	d1 = 16;
-	d2 = 0;
 	dir = 4;
 	icon_state = "0-2"
 	},
 /obj/structure/cable{
-	d2 = 8;
 	icon_state = "0-8"
 	},
 /turf/simulated/floor,
 /area/smugglers/base)
 "aR" = (
 /obj/structure/cable{
-	d1 = 4;
-	d2 = 8;
 	icon_state = "4-8"
 	},
 /obj/structure/cable{
-	d1 = 1;
-	d2 = 8;
 	icon_state = "1-8"
 	},
 /turf/simulated/floor,
@@ -360,13 +336,9 @@
 "aS" = (
 /obj/effect/decal/cleanable/blood/drip,
 /obj/structure/cable{
-	d1 = 4;
-	d2 = 8;
 	icon_state = "4-8"
 	},
 /obj/structure/cable{
-	d1 = 1;
-	d2 = 8;
 	icon_state = "1-8"
 	},
 /turf/simulated/floor,
@@ -377,14 +349,10 @@
 	pixel_y = 8
 	},
 /obj/structure/cable{
-	d1 = 2;
-	d2 = 8;
 	icon_state = "2-8"
 	},
 /obj/machinery/atmospherics/pipe/simple/visible/black,
 /obj/structure/cable{
-	d1 = 1;
-	d2 = 8;
 	icon_state = "1-8"
 	},
 /turf/simulated/floor,
@@ -411,8 +379,6 @@
 /area/smugglers/base)
 "aY" = (
 /obj/structure/cable{
-	d1 = 1;
-	d2 = 2;
 	icon_state = "1-2"
 	},
 /turf/simulated/floor,
@@ -447,8 +413,6 @@
 /area/smugglers/base)
 "be" = (
 /obj/structure/cable{
-	d1 = 1;
-	d2 = 2;
 	icon_state = "1-2"
 	},
 /obj/machinery/atmospherics/pipe/simple/visible/black,
@@ -524,8 +488,6 @@
 /area/mine/explored)
 "bp" = (
 /obj/structure/cable{
-	d1 = 1;
-	d2 = 2;
 	icon_state = "1-2"
 	},
 /obj/machinery/light/small{
@@ -583,8 +545,6 @@
 /area/smugglers/base)
 "bu" = (
 /obj/structure/cable{
-	d1 = 1;
-	d2 = 2;
 	icon_state = "1-2"
 	},
 /obj/machinery/light/small{
@@ -629,8 +589,6 @@
 /area/smugglers/base)
 "bA" = (
 /obj/structure/cable{
-	d1 = 1;
-	d2 = 4;
 	icon_state = "1-4"
 	},
 /obj/machinery/atmospherics/binary/pump{
@@ -641,16 +599,12 @@
 "bB" = (
 /obj/machinery/door/airlock/maintenance,
 /obj/structure/cable{
-	d1 = 4;
-	d2 = 8;
 	icon_state = "4-8"
 	},
 /turf/simulated/floor,
 /area/smugglers/office)
 "bC" = (
 /obj/structure/cable{
-	d1 = 4;
-	d2 = 8;
 	icon_state = "4-8"
 	},
 /obj/effect/decal/cleanable/dirt,
@@ -662,7 +616,6 @@
 /obj/item/pen,
 /obj/item/flashlight/lamp,
 /obj/structure/cable{
-	d2 = 8;
 	icon_state = "0-8"
 	},
 /obj/machinery/power/apc{
@@ -816,8 +769,6 @@
 	name = "Restroom"
 	},
 /obj/structure/cable{
-	d1 = 1;
-	d2 = 2;
 	icon_state = "1-2"
 	},
 /turf/simulated/floor,
@@ -829,15 +780,13 @@
 /obj/effect/decal/cleanable/dirt,
 /obj/effect/decal/cleanable/dirt,
 /obj/structure/cable{
-	d1 = 1;
-	d2 = 2;
 	icon_state = "1-2"
 	},
 /turf/simulated/floor/tiled,
 /area/smugglers/dorms)
 "ce" = (
 /obj/structure/noticeboard{
-	pixel_y = 30
+	default_pixel_y = 30
 	},
 /obj/effect/decal/cleanable/dirt,
 /obj/structure/table,
@@ -996,7 +945,7 @@
 /area/space)
 "db" = (
 /obj/effect/decal/cleanable/blood,
-/obj/effect/landmark/corpse/doctor,
+/obj/abstract/landmark/corpse/doctor,
 /turf/simulated/floor/asteroid,
 /area/mine/explored)
 "eb" = (

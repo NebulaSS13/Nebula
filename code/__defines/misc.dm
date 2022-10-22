@@ -99,11 +99,8 @@
 #ifndef CUSTOM_ITEM_CONFIG
 #define CUSTOM_ITEM_CONFIG "config/custom_items/"
 #endif
-#ifndef CUSTOM_ITEM_SYNTH_CONFIG
-#define CUSTOM_ITEM_SYNTH_CONFIG "config/custom_sprites.txt"
-#endif
-#ifndef CUSTOM_ITEM_SYNTH
-#define CUSTOM_ITEM_SYNTH 'icons/mob/custom_synthetic.dmi'
+#ifndef CUSTOM_ICON_CONFIG
+#define CUSTOM_ICON_CONFIG "config/custom_icons/"
 #endif
 
 #define WALL_CAN_OPEN 1
@@ -118,11 +115,6 @@
 // Special return values from bullet_act(). Positive return values are already used to indicate the blocked level of the projectile.
 #define PROJECTILE_CONTINUE   -1 //if the projectile should continue flying after calling bullet_act()
 #define PROJECTILE_FORCE_MISS -2 //if the projectile should treat the attack as a miss (suppresses attack and admin logs) - only applies to mobs.
-
-//Camera capture modes
-#define CAPTURE_MODE_REGULAR 0 //Regular polaroid camera mode
-#define CAPTURE_MODE_ALL 1 //Admin camera mode
-#define CAPTURE_MODE_PARTIAL 3 //Simular to regular mode, but does not do dummy check
 
 //objectives
 #define CONFIG_OBJECTIVE_NONE 2
@@ -160,8 +152,6 @@
 #define CELLSIZE (world.icon_size/CELLS)	//Size of a cell in pixels
 
 #define PIXEL_MULTIPLIER WORLD_ICON_SIZE/32
-
-#define DEFAULT_SPAWNPOINT_ID "Default"
 
 #define MIDNIGHT_ROLLOVER		864000	//number of deciseconds in a day
 
@@ -233,13 +223,12 @@
 #endif
 
 // Surgery candidate flags.
-#define SURGERY_NO_ROBOTIC        1
-#define SURGERY_NO_CRYSTAL        2
-#define SURGERY_NO_STUMP          4
-#define SURGERY_NO_FLESH          8
-#define SURGERY_NEEDS_INCISION   16
-#define SURGERY_NEEDS_RETRACTED  32
-#define SURGERY_NEEDS_ENCASEMENT 64
+#define SURGERY_NO_ROBOTIC       BITFLAG(0)
+#define SURGERY_NO_CRYSTAL       BITFLAG(1)
+#define SURGERY_NO_FLESH         BITFLAG(2)
+#define SURGERY_NEEDS_INCISION   BITFLAG(3)
+#define SURGERY_NEEDS_RETRACTED  BITFLAG(4)
+#define SURGERY_NEEDS_ENCASEMENT BITFLAG(5)
 
 //Inserts 'a' or 'an' before X in ways \a doesn't allow
 #define ADD_ARTICLE(X) "[(lowertext(X[1]) in global.vowels) ? "an" : "a"] [X]"
@@ -264,7 +253,6 @@
 
 #define hex2num(X) text2num(X, 16)
 
-#define GET_DECL(D) (ispath(D, /decl) ? (decls_repository.fetched_decls[D] || decls_repository.get_decl(D)) : null)
 #define Z_ALL_TURFS(Z) block(locate(1, 1, Z), locate(world.maxx, world.maxy, Z))
 
 #if DM_BUILD < 1540
@@ -272,3 +260,27 @@
 #else
 #define AS_ANYTHING as anything
 #endif
+
+//NOTE: INTENT_HOTKEY_* defines are not actual intents!
+//they are here to support hotkeys
+#define INTENT_HOTKEY_LEFT  "left"
+#define INTENT_HOTKEY_RIGHT "right"
+
+//Turf/area values for 'this space is outside' checks
+#define OUTSIDE_AREA null
+#define OUTSIDE_NO   FALSE
+#define OUTSIDE_YES  TRUE
+
+// Weather exposure values for being rained on or hailed on.
+#define WEATHER_IGNORE   -1
+#define WEATHER_EXPOSED   0
+#define WEATHER_ROOFED    1
+#define WEATHER_PROTECTED 2
+
+// Literacy check constants.
+#define WRITTEN_SKIP     0
+#define WRITTEN_PHYSICAL 1
+#define WRITTEN_DIGITAL  2
+
+// arbitrary low pressure bound for wind weather effects
+#define MIN_WIND_PRESSURE 10

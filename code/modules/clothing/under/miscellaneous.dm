@@ -106,6 +106,9 @@
 	desc = "A black suit and red tie. Very formal."
 	icon = 'icons/clothing/under/suits/suit_black.dmi'
 
+/obj/item/clothing/under/suit_jacket/waistcoat
+	starting_accessories = list(/obj/item/clothing/accessory/wcoat/black)
+
 /obj/item/clothing/under/suit_jacket/really_black
 	name = "executive suit"
 	desc = "A formal black suit and red tie, intended for the galaxy's finest."
@@ -386,7 +389,7 @@
 	name = "gear harness"
 	desc = "How... minimalist."
 	icon = 'icons/clothing/under/harness.dmi'
-	bodytype_restricted = null
+	bodytype_equip_flags = null
 	body_parts_covered = 0
 
 /obj/item/clothing/under/frontier

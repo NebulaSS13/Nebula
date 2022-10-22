@@ -1,9 +1,10 @@
 /obj/item/organ/internal/heart
 	name = "heart"
-	icon_state = "heart-on"
 	organ_tag = "heart"
 	parent_organ = BP_CHEST
+	icon_state = "heart-on"
 	dead_icon = "heart-off"
+	prosthetic_icon = "heart-prosthetic"
 	var/pulse = PULSE_NORM
 	var/heartbeat = 0
 	var/beat_sound = 'sound/effects/singlebeat.ogg'
@@ -16,15 +17,6 @@
 
 /obj/item/organ/internal/heart/open
 	open = 1
-
-/obj/item/organ/internal/heart/die()
-	if(dead_icon)
-		icon_state = dead_icon
-	..()
-
-/obj/item/organ/internal/heart/robotize(var/company = /decl/prosthetics_manufacturer, var/skip_prosthetics, var/keep_organs, var/apply_material = /decl/material/solid/metal/steel)
-	. = ..()
-	icon_state = "heart-prosthetic"
 
 /obj/item/organ/internal/heart/Process()
 	if(owner)
@@ -124,7 +116,7 @@
 		//Bleeding out
 		var/blood_max = 0
 		var/list/do_spray = list()
-		for(var/obj/item/organ/external/temp in owner.organs)
+		for(var/obj/item/organ/external/temp in owner.get_external_organs())
 
 			if(BP_IS_PROSTHETIC(temp))
 				continue
@@ -150,7 +142,7 @@
 							blood_max += W.damage / 40
 
 			if(temp.status & ORGAN_ARTERY_CUT)
-				var/bleed_amount = Floor((owner.vessel.total_volume / (temp.applied_pressure || !open_wound ? 400 : 250))*temp.arterial_bleed_severity)
+				var/bleed_amount = FLOOR((owner.vessel.total_volume / (temp.applied_pressure || !open_wound ? 400 : 250))*temp.arterial_bleed_severity)
 				if(bleed_amount)
 					if(open_wound)
 						blood_max += bleed_amount
@@ -181,7 +173,7 @@
 			//AB occurs every heartbeat, this only throttles the visible effect
 			next_blood_squirt = world.time + 80
 			var/turf/sprayloc = get_turf(owner)
-			blood_max -= owner.drip(ceil(blood_max/3), sprayloc)
+			blood_max -= owner.drip(CEILING(blood_max/3), sprayloc)
 			if(blood_max > 0)
 				blood_max -= owner.blood_squirt(blood_max, sprayloc)
 				if(blood_max > 0)
@@ -223,3 +215,10 @@
 
 /obj/item/organ/internal/heart/get_mechanical_assisted_descriptor()
 	return "pacemaker-assisted [name]"
+
+/obj/item/organ/internal/heart/rejuvenate(ignore_prosthetic_prefs)
+	. = ..()
+	if(!BP_IS_PROSTHETIC(src))
+		pulse = PULSE_NORM
+	else 
+		pulse = PULSE_NONE

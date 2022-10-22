@@ -15,7 +15,7 @@
 	for(var/obj/machinery/camera/cam in range(severity_range,C))
 		if(is_valid_camera(cam))
 			if(prob(2*severity))
-				cam.destroy()
+				cam.take_damage(100, ELECTROCUTE, TRUE)
 			else
 				if(!cam.wires.IsIndexCut(CAMERA_WIRE_POWER))
 					cam.wires.CutWireIndex(CAMERA_WIRE_POWER)
@@ -36,4 +36,4 @@
 /datum/event/camera_damage/proc/is_valid_camera(var/obj/machinery/camera/C)
 	// Only return a functional camera, not installed in a silicon, and that exists somewhere players have access
 	var/turf/T = get_turf(C)
-	return T && C.can_use() && !istype(C.loc, /mob/living/silicon) && (T.z in global.using_map.player_levels)
+	return T && C.can_use() && (T.z in global.using_map.player_levels)

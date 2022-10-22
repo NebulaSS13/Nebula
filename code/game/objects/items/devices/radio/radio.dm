@@ -41,6 +41,8 @@
 
 	var/last_radio_sound = -INFINITY
 
+	var/intercom_handling = FALSE
+
 /obj/item/radio/proc/set_frequency(new_frequency)
 	radio_controller.remove_object(src, frequency)
 	frequency = new_frequency
@@ -227,6 +229,9 @@
 	if(.)
 		SSnano.update_uis(src)
 
+/mob/announcer // used only for autosay
+	simulated = FALSE
+
 /obj/item/radio/proc/autosay(var/message, var/from, var/channel, var/sayverb = "states") //BS12 EDIT
 	var/datum/radio_frequency/connection = null
 	if(channel && channels && channels.len > 0)
@@ -238,7 +243,7 @@
 		channel = null
 	if (!istype(connection))
 		return
-	var/mob/living/silicon/ai/A = new /mob/living/silicon/ai(src, null, null, 1)
+	var/mob/announcer/A = new()
 	A.fully_replace_character_name(from)
 	talk_into(A, message, channel, sayverb)
 	qdel(A)
@@ -266,7 +271,7 @@
 	//  Fix for permacell radios, but kinda eh about actually fixing them.
 	if(!M || !message) return 0
 
-	if(speaking && (speaking.flags & (NONVERBAL|SIGNLANG))) return 0
+	if(speaking && (speaking.flags & (LANG_FLAG_NONVERBAL|LANG_FLAG_SIGNLANG))) return 0
 
 	if (!broadcasting)
 		// Sedation chemical effect should prevent radio use.
@@ -342,12 +347,12 @@
 		jobname = "No id"
 
 	// --- AI ---
-	else if (isAI(M))
-		jobname = "AI"
+	else if (isAI(M) || istype(M, /mob/announcer))
+		jobname = ASSIGNMENT_COMPUTER
 
 	// --- Cyborg ---
 	else if (isrobot(M))
-		jobname = "Robot"
+		jobname = ASSIGNMENT_ROBOT
 
 	// --- Personal AI (pAI) ---
 	else if (istype(M, /mob/living/silicon/pai))
@@ -816,7 +821,7 @@
 
 /obj/item/radio/phone/medbay
 	frequency = MED_I_FREQ
-	
+
 /obj/item/radio/phone/medbay/Initialize()
 	. = ..()
 	internal_channels = global.default_medbay_channels.Copy()
@@ -839,6 +844,7 @@
 /obj/item/radio/exosuit
 	name = "exosuit radio"
 	cell = null
+	intercom_handling = TRUE
 
 /obj/item/radio/exosuit/get_cell()
 	. = ..()

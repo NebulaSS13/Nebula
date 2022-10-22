@@ -12,19 +12,12 @@
 	return
 
 /datum/extension/obfuscated_medication/proc/get_original_reagent(var/obj/item/donor)
-	return donor?.reagents?.get_primary_reagent_name()
-
-/datum/extension/obfuscated_medication/proc/get_name()
-	return "\improper [get_medication_name_from_reagent_name(original_reagent)] [container_name]"
+	return donor?.reagents?.get_primary_reagent_name(codex = TRUE)
 
 /datum/extension/obfuscated_medication/bottle
 	container_name = "bottle"
 	container_description = "A small glass bottle of medication."
 	expected_type = /obj/item/chems/glass/bottle
-
-/datum/extension/obfuscated_medication/bottle/update_appearance()
-	var/obj/item/bottle = holder
-	bottle.icon_state = get_medication_icon_state_from_reagent_name(original_reagent, "bottle-", 1, 4)
 
 /datum/extension/obfuscated_medication/pill
 	container_name = "pill"
@@ -48,7 +41,7 @@
 /datum/extension/obfuscated_medication/pill_bottle/get_original_reagent(var/obj/item/donor)
 	for(var/obj/item/chems/pill/pill in donor?.contents)
 		if(pill.reagents?.total_volume)
-			return pill.reagents.get_primary_reagent_name()
+			return pill.reagents.get_primary_reagent_name(codex = TRUE)
 
 /datum/extension/obfuscated_medication/pill_bottle/update_appearance()
 	var/obj/item/storage/pill_bottle/bottle = holder
@@ -62,7 +55,7 @@
 /datum/extension/obfuscated_medication/foil_pack/get_original_reagent(var/obj/item/donor)
 	for(var/obj/item/chems/pill/pill in donor?.contents)
 		if(pill.reagents?.total_volume)
-			return pill.reagents.get_primary_reagent_name()
+			return pill.reagents.get_primary_reagent_name(codex = TRUE)
 
 /datum/extension/obfuscated_medication/foil_pack/update_appearance()
 	var/obj/item/storage/pill_bottle/foil_pack/foil_pack = holder

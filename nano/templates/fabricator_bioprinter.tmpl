@@ -1,0 +1,93 @@
+<!-- --------------------------------------------------------------------------------------------
+	Include Shared Helper Functions 
+-- --------------------------------------------------------------------------------------------->
+{{#def.fab_shared}}
+
+<style>
+	.orgBiological{
+		color:chartreuse;
+	}
+
+	.dnaInfo{
+		min-width: 360px;
+	}
+
+	.dnaProp{
+		float:right;
+	}
+
+	.dnaUE{
+		float:right;
+		text-transform: uppercase;
+		font-family: monospace;
+	}
+</style>
+
+ <!-- --------------------------------------------------------------------------------------------
+	Utilities
+ ----------------------------------------------------------------------------------------------->
+ <!--List DNA information-->
+{{function display_dna(dna) { }}
+	<ul class='dnaInfo'>
+		<li style='white-space:nowrap;'>UE: <span class='dnaUE'>{{:dna.UE}}</span></li>
+		<li>Name: <span class='dnaProp'>{{:dna.real_name}}</span></li>
+		<li>Specie: <span class='dnaProp'>{{:dna.species}}</span></li>
+		<li>Blood Type: <span class='dnaProp'>{{:dna.btype}}<span></li>
+	</ul>
+{{ } }}
+
+ <!-- --------------------------------------------------------------------------------------------
+	Organ Filtering
+ ----------------------------------------------------------------------------------------------->
+{{function fab_organ_config_summary(dna) {
+	let summary = " [";
+
+	if(dna != undefined) {
+		summary += "DNA: " + dna.real_name + ", " + dna.species;
+	} else {
+		summary += "<span class=bad>!! No DNA !!</span> ";
+	};
+	
+	return summary + "]";
+} }}
+
+ {{function fab_organ_config( dna, expand_config) { }}
+	<dt class='collapsableList'>
+		{{:helper.link(make_list_toggle_prefix(expand_config, 'Configuration') + (expand_config ? '' : fab_organ_config_summary(dna) ), null, {'toggle_config' : 1}, null, 'linkSubtle') }}
+	</dt>
+	{{if expand_config}}
+		<dd style='margin-left:1em;'>
+			<!-- Mode Specifics -->
+			<div class='fabConfigEntry'>
+				{{if dna}}
+					<div class='itemLabel'>{{:helper.link('DNA:', 'trash', {'flush_dna' : 1} ) }}</div>
+					<div class='itemContent' style='margin-left: 2em;'>{{display_dna(dna);}}</div>
+				{{else}}
+					<div class='itemLabel'>DNA:</div>
+					<div class='itemContent' style='margin-left: 2em;'><p class='bad' style='font-style: italic; font-size: small;'>No DNA sample loaded.</p></div>
+				{{/if}}
+			</div>
+		</dd>
+	{{/if}}
+ {{ } }}
+
+<!-- --------------------------------------------------------------------------------------------
+	Base UI
+ ----------------------------------------------------------------------------------------------->
+<!--Standard fab header-->
+{{fab_header( data.network, data.network_id ); }}
+
+{{if data.functional}}
+	<!--Collapsable list-->
+	<dl class='collapsableList'> 
+		{{ fab_resources_table( data.expand_resources, data.material_storage ); }}
+		{{ fab_construction_queue( data.expand_queue, data.build_queue, data.current_build ); }} 
+		{{ fab_organ_config( data.dna, data.expand_config ); }}
+	</dl> 
+
+	<!-- Display our custom made design list  -->
+	{{ fab_build_options(data.build_options); }}
+
+{{else}}
+	<p><span class = 'bad'>FABRICATOR OFFLINE. CONTACT SYSTEM ADMINISTRATOR.</span></p>
+{{/if}}

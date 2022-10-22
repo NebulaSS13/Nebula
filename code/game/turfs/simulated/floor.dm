@@ -26,6 +26,9 @@
 /turf/simulated/floor/is_plating()
 	return !flooring
 
+/turf/simulated/floor/get_base_movement_delay()
+	return flooring?.movement_delay || ..()
+
 /turf/simulated/floor/protects_atom(var/atom/A)
 	return (A.level <= 1 && !is_plating()) || ..()
 
@@ -62,8 +65,6 @@
 //This proc auto corrects the grass tiles' siding.
 /turf/simulated/floor/proc/make_plating(var/place_product, var/defer_icon_update)
 
-	overlays.Cut()
-
 	for(var/obj/effect/decal/writing/W in src)
 		qdel(W)
 
@@ -77,7 +78,16 @@
 	if(flooring)
 		flooring.on_remove()
 		if(flooring.build_type && place_product)
-			new flooring.build_type(src)
+			// If build type uses material stack, check for it
+			// Because material stack uses different arguments
+			// And we need to use build material to spawn stack
+			if(ispath(flooring.build_type, /obj/item/stack/material))
+				var/decl/material/M = GET_DECL(flooring.build_material)
+				if(!M)
+					CRASH("[src] at ([x], [y], [z]) cannot create stack because it has a bad build_material path: '[flooring.build_material]'")
+				M.create_object(src, flooring.build_cost, flooring.build_type)
+			else
+				new flooring.build_type(src)
 		flooring = null
 
 	set_light(0)

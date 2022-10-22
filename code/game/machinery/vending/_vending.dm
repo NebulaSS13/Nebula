@@ -141,7 +141,7 @@
 	if (!emagged)
 		emagged = 1
 		req_access.Cut()
-		to_chat(user, "You short out the product lock on \the [src]")
+		to_chat(user, "You short out the product lock on \the [src].")
 		return 1
 
 /obj/machinery/vending/attackby(obj/item/W, mob/user)
@@ -270,7 +270,7 @@
 		data["mode"] = 1
 		data["product"] = currently_vending.item_name
 		data["price"] = cur.format_value(currently_vending.price)
-		data["message_err"] = 0
+		data["price_num"] = FLOOR(currently_vending.price / cur.absolute_value)
 		data["message"] = status_message
 		data["message_err"] = status_error
 	else
@@ -287,6 +287,7 @@
 				"key" =    key,
 				"name" =   I.item_name,
 				"price" =  cur.format_value(I.price),
+				"price_num" = FLOOR(I.price / cur.absolute_value),
 				"color" =  I.display_color,
 				"amount" = I.get_amount())))
 
@@ -300,7 +301,7 @@
 
 	ui = SSnano.try_update_ui(user, src, ui_key, ui, data, force_open)
 	if (!ui)
-		ui = new(user, src, ui_key, "vending_machine.tmpl", name, 440, 600)
+		ui = new(user, src, ui_key, "vending_machine.tmpl", name, 520, 600)
 		ui.set_initial_data(data)
 		ui.open()
 
@@ -369,7 +370,7 @@
 	if(vend_reply && last_reply + vend_delay + 200 <= world.time)
 		speak(vend_reply)
 		last_reply = world.time
-	
+
 /obj/machinery/vending/proc/finish_vending(var/datum/stored_items/vending_products/product)
 	set waitfor = FALSE
 	if(!product)
@@ -432,8 +433,7 @@
 	if (!message)
 		return
 
-	for(var/mob/O in hearers(src, null))
-		O.show_message("<span class='game say'><span class='name'>\The [src]</span> beeps, \"[message]\"</span>",2)
+	audible_message("<span class='game say'><span class='name'>\The [src]</span> beeps, \"[message]\"</span>")
 	return
 
 /obj/machinery/vending/powered()

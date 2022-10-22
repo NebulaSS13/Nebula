@@ -178,8 +178,8 @@
 	//randomize clickpoint a bit based on dispersion
 	if(dispersion)
 		var/radius = round((dispersion*0.443)*world.icon_size*0.8) //0.443 = sqrt(pi)/4 = 2a, where a is the side length of a square that shares the same area as a circle with diameter = dispersion
-		p_x = between(0, p_x + rand(-radius, radius), world.icon_size)
-		p_y = between(0, p_y + rand(-radius, radius), world.icon_size)
+		p_x = between(0, p_x + gaussian(0, radius) * 0.25, world.icon_size)
+		p_y = between(0, p_y + gaussian(0, radius) * 0.25, world.icon_size)
 
 //Used to change the direction of the projectile in flight.
 /obj/item/projectile/proc/redirect(var/new_x, var/new_y, var/atom/starting_loc, var/mob/new_firer=null, var/is_ricochet = FALSE)
@@ -424,8 +424,11 @@
 	original = target
 
 	var/list/calculated = list(null,null,null)
-	if(isliving(source) && params)
-		calculated = calculate_projectile_Angle_and_pixel_offsets(source, params)
+	var/mob/living/S = source
+	if(istype(S))
+		S = S.get_effective_gunner()
+	if(istype(S) && S.client && params)
+		calculated = calculate_projectile_Angle_and_pixel_offsets(S, params)
 		p_x = calculated[2]
 		p_y = calculated[3]
 		setAngle(calculated[1])
@@ -592,7 +595,7 @@
 	time_offset = 0
 	var/required_moves = 0
 	if(speed > 0)
-		required_moves = Floor(elapsed_time_deciseconds / speed, 1)
+		required_moves = FLOOR(elapsed_time_deciseconds / speed)
 		if(required_moves > SSprojectiles.global_max_tick_moves)
 			var/overrun = required_moves - SSprojectiles.global_max_tick_moves
 			required_moves = SSprojectiles.global_max_tick_moves

@@ -32,7 +32,6 @@
 /area/lar_maria/vir_main)
 "ai" = (
 /obj/structure/cable{
-	d2 = 4;
 	icon_state = "0-4"
 	},
 /obj/machinery/atmospherics/pipe/zpipe/up/scrubbers{
@@ -42,8 +41,6 @@
 	dir = 4
 	},
 /obj/structure/cable{
-	d1 = 16;
-	d2 = 0;
 	dir = 4;
 	icon_state = "16-0"
 	},
@@ -51,8 +48,6 @@
 /area/lar_maria/morgue)
 "aj" = (
 /obj/structure/cable{
-	d1 = 2;
-	d2 = 8;
 	icon_state = "2-8"
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
@@ -104,14 +99,12 @@
 /area/lar_maria/morgue)
 "aq" = (
 /obj/structure/cable{
-	d1 = 1;
-	d2 = 4;
 	icon_state = "1-4"
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 5
 	},
-/obj/effect/landmark/corpse/lar_maria/zhp_guard/dark,
+/obj/abstract/landmark/corpse/lar_maria/zhp_guard/dark,
 /obj/effect/decal/cleanable/blood,
 /turf/simulated/floor/plating,
 /area/lar_maria/morgue)
@@ -123,8 +116,6 @@
 	dir = 5
 	},
 /obj/structure/cable{
-	d1 = 4;
-	d2 = 8;
 	icon_state = "4-8"
 	},
 /turf/simulated/floor/plating,
@@ -141,8 +132,6 @@
 	},
 /obj/machinery/door/firedoor,
 /obj/structure/cable{
-	d1 = 4;
-	d2 = 8;
 	icon_state = "4-8"
 	},
 /turf/simulated/floor/plating,
@@ -155,8 +144,6 @@
 	dir = 4
 	},
 /obj/structure/cable{
-	d1 = 4;
-	d2 = 8;
 	icon_state = "4-8"
 	},
 /turf/simulated/floor/plating,
@@ -169,8 +156,6 @@
 	dir = 4
 	},
 /obj/structure/cable{
-	d1 = 4;
-	d2 = 8;
 	icon_state = "4-8"
 	},
 /turf/simulated/floor/plating,
@@ -185,8 +170,6 @@
 	dir = 4
 	},
 /obj/structure/cable{
-	d1 = 4;
-	d2 = 8;
 	icon_state = "4-8"
 	},
 /turf/simulated/floor/plating,
@@ -199,8 +182,6 @@
 	dir = 10
 	},
 /obj/structure/cable{
-	d1 = 2;
-	d2 = 8;
 	icon_state = "2-8"
 	},
 /turf/simulated/floor/tiled,
@@ -256,7 +237,7 @@
 /area/lar_maria/vir_main)
 "aK" = (
 /obj/structure/bed,
-/obj/effect/landmark/corpse/lar_maria/test_subject,
+/obj/abstract/landmark/corpse/lar_maria/test_subject,
 /obj/machinery/light{
 	dir = 1
 	},
@@ -282,8 +263,6 @@
 	icon_state = "tube1"
 	},
 /obj/structure/cable{
-	d1 = 1;
-	d2 = 2;
 	icon_state = "1-2"
 	},
 /turf/simulated/floor/tiled,
@@ -318,12 +297,12 @@
 /area/lar_maria/cells)
 "aW" = (
 /obj/structure/bed/padded,
-/obj/effect/landmark/corpse/lar_maria/test_subject,
+/obj/abstract/landmark/corpse/lar_maria/test_subject,
 /turf/simulated/floor/tiled,
 /area/lar_maria/cells)
 "aX" = (
 /obj/structure/bed/padded,
-/obj/effect/landmark/corpse/lar_maria/test_subject,
+/obj/abstract/landmark/corpse/lar_maria/test_subject,
 /obj/machinery/alarm{
 	alarm_id = "xenobio1_alarm";
 	pixel_y = 24
@@ -361,7 +340,7 @@
 /turf/simulated/floor/plating,
 /area/lar_maria/cells)
 "bc" = (
-/obj/effect/landmark/corpse/lar_maria/test_subject,
+/obj/abstract/landmark/corpse/lar_maria/test_subject,
 /turf/simulated/floor/plating,
 /area/lar_maria/cells)
 "bd" = (
@@ -415,8 +394,6 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/structure/cable{
-	d1 = 1;
-	d2 = 2;
 	icon_state = "1-2"
 	},
 /turf/simulated/floor/tiled,
@@ -430,7 +407,7 @@
 /obj/structure/hygiene/shower{
 	dir = 4
 	},
-/obj/effect/landmark/corpse/lar_maria/virologist,
+/obj/abstract/landmark/corpse/lar_maria/virologist,
 /obj/effect/decal/cleanable/blood,
 /turf/simulated/floor/tiled/white,
 /area/lar_maria/vir_main)
@@ -447,7 +424,7 @@
 /turf/simulated/floor/tiled/white,
 /area/lar_maria/vir_main)
 "bp" = (
-/obj/effect/landmark/corpse/lar_maria/virologist_female,
+/obj/abstract/landmark/corpse/lar_maria/virologist_female,
 /obj/effect/decal/cleanable/blood,
 /turf/simulated/floor/tiled/white,
 /area/lar_maria/vir_main)
@@ -497,7 +474,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 6
 	},
-/obj/effect/landmark/corpse/lar_maria/test_subject,
+/obj/abstract/landmark/corpse/lar_maria/test_subject,
 /obj/effect/decal/cleanable/blood,
 /turf/simulated/floor/tiled,
 /area/lar_maria/cells)
@@ -541,7 +518,7 @@
 /area/lar_maria/cells)
 "bE" = (
 /obj/structure/mattress/dirty,
-/obj/effect/landmark/corpse/lar_maria/test_subject,
+/obj/abstract/landmark/corpse/lar_maria/test_subject,
 /turf/simulated/floor/plating,
 /area/lar_maria/cells)
 "bF" = (
@@ -664,7 +641,6 @@
 	pixel_x = -24
 	},
 /obj/structure/cable{
-	d2 = 2;
 	icon_state = "0-2"
 	},
 /turf/simulated/floor/tiled/white,
@@ -697,7 +673,7 @@
 /area/lar_maria/cells)
 "ce" = (
 /obj/machinery/door/window/westleft,
-/obj/effect/landmark/corpse/lar_maria/test_subject,
+/obj/abstract/landmark/corpse/lar_maria/test_subject,
 /obj/machinery/door/blast/regular/open{
 	dir = 4;
 	icon_state = "pdoor0";
@@ -706,7 +682,7 @@
 /turf/simulated/floor/plating,
 /area/lar_maria/cells)
 "cf" = (
-/obj/effect/landmark/corpse/lar_maria/virologist,
+/obj/abstract/landmark/corpse/lar_maria/virologist,
 /obj/effect/decal/cleanable/blood,
 /turf/simulated/floor/plating,
 /area/lar_maria/morgue)
@@ -730,8 +706,6 @@
 	icon_state = "tube1"
 	},
 /obj/structure/cable{
-	d1 = 1;
-	d2 = 2;
 	icon_state = "1-2"
 	},
 /obj/machinery/alarm{
@@ -745,8 +719,6 @@
 /obj/machinery/door/airlock/virology,
 /obj/machinery/door/firedoor,
 /obj/structure/cable{
-	d1 = 1;
-	d2 = 2;
 	icon_state = "1-2"
 	},
 /turf/simulated/floor/tiled/white,
@@ -829,7 +801,7 @@
 /obj/structure/hygiene/toilet{
 	dir = 4
 	},
-/obj/effect/landmark/corpse/lar_maria/test_subject,
+/obj/abstract/landmark/corpse/lar_maria/test_subject,
 /obj/effect/decal/cleanable/blood,
 /turf/simulated/floor/tiled/white,
 /area/lar_maria/cells)
@@ -857,7 +829,8 @@
 /area/lar_maria/cells)
 "cy" = (
 /obj/structure/crematorium{
-	dir = 4
+	dir = 4;
+	id_tag = "lar_maria_crematorium"
 	},
 /obj/machinery/atmospherics/unary/vent_scrubber/on{
 	dir = 4
@@ -866,6 +839,7 @@
 /area/lar_maria/morgue)
 "cz" = (
 /obj/machinery/button/crematorium{
+	id_tag = "lar_maria_crematorium";
 	pixel_y = -20
 	},
 /obj/effect/decal/cleanable/blood,
@@ -880,7 +854,6 @@
 	pixel_y = -24
 	},
 /obj/structure/cable{
-	d2 = 4;
 	icon_state = "0-4"
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
@@ -896,8 +869,6 @@
 /obj/machinery/door/airlock/virology,
 /obj/machinery/door/firedoor,
 /obj/structure/cable{
-	d1 = 4;
-	d2 = 8;
 	icon_state = "4-8"
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
@@ -910,13 +881,9 @@
 /area/lar_maria/morgue)
 "cC" = (
 /obj/structure/cable{
-	d1 = 1;
-	d2 = 2;
 	icon_state = "1-2"
 	},
 /obj/structure/cable{
-	d1 = 1;
-	d2 = 8;
 	icon_state = "1-8"
 	},
 /obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers{
@@ -929,8 +896,6 @@
 /area/lar_maria/vir_hallway)
 "cD" = (
 /obj/structure/cable{
-	d1 = 1;
-	d2 = 2;
 	icon_state = "1-2"
 	},
 /mob/living/simple_animal/hostile/lar_maria/virologist,
@@ -968,7 +933,7 @@
 	dir = 4
 	},
 /obj/machinery/optable,
-/obj/effect/landmark/corpse/lar_maria/test_subject,
+/obj/abstract/landmark/corpse/lar_maria/test_subject,
 /obj/effect/decal/cleanable/blood,
 /turf/simulated/floor/tiled/white,
 /area/lar_maria/vir_main)
@@ -1128,7 +1093,7 @@
 /obj/structure/sign/warning/biohazard{
 	pixel_y = 32
 	},
-/obj/effect/landmark/corpse/lar_maria/test_subject,
+/obj/abstract/landmark/corpse/lar_maria/test_subject,
 /obj/effect/decal/cleanable/blood,
 /turf/simulated/floor/plating,
 /area/lar_maria/cells)
@@ -1180,8 +1145,6 @@
 	},
 /obj/random/trash,
 /obj/structure/cable{
-	d1 = 1;
-	d2 = 4;
 	icon_state = "1-4"
 	},
 /turf/simulated/floor/tiled,
@@ -1195,21 +1158,15 @@
 	},
 /obj/machinery/door/firedoor,
 /obj/structure/cable{
-	d1 = 4;
-	d2 = 8;
 	icon_state = "4-8"
 	},
 /turf/simulated/floor/tiled,
 /area/lar_maria/vir_hallway)
 "dl" = (
 /obj/structure/cable{
-	d1 = 4;
-	d2 = 8;
 	icon_state = "4-8"
 	},
 /obj/structure/cable{
-	d1 = 1;
-	d2 = 8;
 	icon_state = "1-8"
 	},
 /turf/simulated/floor/tiled,
@@ -1218,8 +1175,6 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/structure/cable{
-	d1 = 4;
-	d2 = 8;
 	icon_state = "4-8"
 	},
 /turf/simulated/floor/tiled,
@@ -1230,24 +1185,18 @@
 	},
 /obj/machinery/door/firedoor,
 /obj/structure/cable{
-	d1 = 4;
-	d2 = 8;
 	icon_state = "4-8"
 	},
 /turf/simulated/floor/tiled,
 /area/lar_maria/vir_hallway)
 "do" = (
 /obj/structure/cable{
-	d1 = 4;
-	d2 = 8;
 	icon_state = "4-8"
 	},
 /turf/simulated/floor/tiled,
 /area/lar_maria/vir_hallway)
 "dp" = (
 /obj/structure/cable{
-	d1 = 2;
-	d2 = 8;
 	icon_state = "2-8"
 	},
 /turf/simulated/floor/tiled,
@@ -1337,7 +1286,7 @@
 /turf/simulated/floor/plating,
 /area/lar_maria/sec_wing)
 "dE" = (
-/obj/effect/landmark/corpse/lar_maria/virologist,
+/obj/abstract/landmark/corpse/lar_maria/virologist,
 /obj/effect/decal/cleanable/blood,
 /turf/simulated/floor/tiled,
 /area/lar_maria/vir_hallway)
@@ -1393,8 +1342,6 @@
 	dir = 10
 	},
 /obj/structure/cable{
-	d1 = 1;
-	d2 = 2;
 	icon_state = "1-2"
 	},
 /turf/simulated/floor/tiled,
@@ -1467,7 +1414,7 @@
 /area/lar_maria/vir_aux)
 "ea" = (
 /obj/machinery/door/window/southright,
-/obj/effect/landmark/corpse/lar_maria/test_subject,
+/obj/abstract/landmark/corpse/lar_maria/test_subject,
 /obj/effect/decal/cleanable/blood,
 /turf/simulated/floor/tiled/white,
 /area/lar_maria/vir_aux)
@@ -1506,7 +1453,7 @@
 /area/lar_maria/sec_wing)
 "eh" = (
 /obj/structure/bed/roller,
-/obj/effect/landmark/corpse/lar_maria/test_subject,
+/obj/abstract/landmark/corpse/lar_maria/test_subject,
 /turf/simulated/floor/tiled/white,
 /area/lar_maria/vir_ward)
 "ei" = (
@@ -1525,8 +1472,6 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/machinery/door/firedoor,
 /obj/structure/cable{
-	d1 = 1;
-	d2 = 2;
 	icon_state = "1-2"
 	},
 /turf/simulated/floor/tiled,
@@ -1564,7 +1509,7 @@
 /area/space)
 "eq" = (
 /obj/structure/bed/padded,
-/obj/effect/landmark/corpse/lar_maria/test_subject,
+/obj/abstract/landmark/corpse/lar_maria/test_subject,
 /obj/effect/decal/cleanable/blood,
 /turf/simulated/floor/tiled,
 /area/lar_maria/cells)
@@ -1607,7 +1552,7 @@
 /obj/structure/bed/chair{
 	dir = 1
 	},
-/obj/effect/landmark/corpse/lar_maria/zhp_guard,
+/obj/abstract/landmark/corpse/lar_maria/zhp_guard,
 /turf/simulated/floor/tiled,
 /area/lar_maria/sec_wing)
 "ex" = (
@@ -1678,8 +1623,6 @@
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/structure/cable{
-	d1 = 1;
-	d2 = 2;
 	icon_state = "1-2"
 	},
 /turf/simulated/floor/tiled,
@@ -1752,9 +1695,8 @@
 	pixel_x = -24
 	},
 /obj/machinery/atmospherics/unary/vent_scrubber/on,
-/obj/effect/landmark/corpse/lar_maria/zhp_guard/dark,
+/obj/abstract/landmark/corpse/lar_maria/zhp_guard/dark,
 /obj/structure/cable{
-	d2 = 2;
 	icon_state = "0-2"
 	},
 /turf/simulated/floor/tiled,
@@ -1780,7 +1722,6 @@
 	pixel_y = -24
 	},
 /obj/structure/cable{
-	d2 = 4;
 	icon_state = "0-4"
 	},
 /turf/simulated/floor/tiled/white,
@@ -1790,8 +1731,6 @@
 	dir = 6
 	},
 /obj/structure/cable{
-	d1 = 4;
-	d2 = 8;
 	icon_state = "4-8"
 	},
 /turf/simulated/floor/tiled/white,
@@ -1803,8 +1742,6 @@
 	dir = 4
 	},
 /obj/structure/cable{
-	d1 = 4;
-	d2 = 8;
 	icon_state = "4-8"
 	},
 /turf/simulated/floor/tiled/white,
@@ -1815,13 +1752,9 @@
 	dir = 4
 	},
 /obj/structure/cable{
-	d1 = 1;
-	d2 = 2;
 	icon_state = "1-2"
 	},
 /obj/structure/cable{
-	d1 = 1;
-	d2 = 8;
 	icon_state = "1-8"
 	},
 /turf/simulated/floor/tiled,
@@ -1912,8 +1845,6 @@
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/structure/cable{
-	d1 = 1;
-	d2 = 2;
 	icon_state = "1-2"
 	},
 /turf/simulated/floor/tiled,
@@ -1973,7 +1904,6 @@
 	},
 /obj/machinery/atmospherics/unary/vent_pump/on,
 /obj/structure/cable{
-	d2 = 2;
 	icon_state = "0-2"
 	},
 /obj/machinery/computer/modular,
@@ -2004,7 +1934,6 @@
 	},
 /obj/machinery/atmospherics/unary/vent_pump/on,
 /obj/structure/cable{
-	d2 = 2;
 	icon_state = "0-2"
 	},
 /turf/simulated/floor/plating,
@@ -2032,8 +1961,6 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/structure/cable{
-	d1 = 1;
-	d2 = 2;
 	icon_state = "1-2"
 	},
 /turf/simulated/floor/tiled,
@@ -2050,13 +1977,9 @@
 	icon_state = "tube1"
 	},
 /obj/structure/cable{
-	d1 = 1;
-	d2 = 2;
 	icon_state = "1-2"
 	},
 /obj/structure/cable{
-	d1 = 1;
-	d2 = 4;
 	icon_state = "1-4"
 	},
 /turf/simulated/floor/tiled,
@@ -2069,8 +1992,6 @@
 	dir = 4
 	},
 /obj/structure/cable{
-	d1 = 4;
-	d2 = 8;
 	icon_state = "4-8"
 	},
 /turf/simulated/floor/tiled,
@@ -2085,8 +2006,6 @@
 	dir = 4
 	},
 /obj/structure/cable{
-	d1 = 4;
-	d2 = 8;
 	icon_state = "4-8"
 	},
 /turf/simulated/floor/tiled/white,
@@ -2099,8 +2018,6 @@
 	dir = 4
 	},
 /obj/structure/cable{
-	d1 = 4;
-	d2 = 8;
 	icon_state = "4-8"
 	},
 /turf/simulated/floor/tiled/white,
@@ -2117,8 +2034,6 @@
 	health = 1e+006
 	},
 /obj/structure/cable{
-	d1 = 1;
-	d2 = 8;
 	icon_state = "1-8"
 	},
 /turf/simulated/floor/tiled/white,
@@ -2164,11 +2079,9 @@
 /turf/simulated/floor/plating,
 /area/lar_maria/cells)
 "fK" = (
-/obj/effect/landmark/corpse/lar_maria/test_subject,
+/obj/abstract/landmark/corpse/lar_maria/test_subject,
 /obj/effect/decal/cleanable/blood,
 /obj/structure/cable{
-	d1 = 1;
-	d2 = 4;
 	icon_state = "1-4"
 	},
 /obj/machinery/atmospherics/pipe/manifold/hidden/supply,
@@ -2195,8 +2108,6 @@
 	id_tag = "Cells_ld_BD"
 	},
 /obj/structure/cable{
-	d1 = 4;
-	d2 = 8;
 	icon_state = "4-8"
 	},
 /turf/simulated/floor/tiled,
@@ -2210,13 +2121,9 @@
 	},
 /obj/effect/decal/cleanable/blood,
 /obj/structure/cable{
-	d1 = 4;
-	d2 = 8;
 	icon_state = "4-8"
 	},
 /obj/structure/cable{
-	d1 = 2;
-	d2 = 4;
 	icon_state = "2-4"
 	},
 /turf/simulated/floor/tiled,
@@ -2229,8 +2136,6 @@
 	dir = 4
 	},
 /obj/structure/cable{
-	d1 = 4;
-	d2 = 8;
 	icon_state = "4-8"
 	},
 /turf/simulated/floor/tiled,
@@ -2244,8 +2149,6 @@
 	},
 /obj/random/trash,
 /obj/structure/cable{
-	d1 = 4;
-	d2 = 8;
 	icon_state = "4-8"
 	},
 /obj/machinery/alarm{
@@ -2263,8 +2166,6 @@
 	},
 /obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers,
 /obj/structure/cable{
-	d1 = 4;
-	d2 = 8;
 	icon_state = "4-8"
 	},
 /turf/simulated/floor/tiled,
@@ -2278,8 +2179,6 @@
 	dir = 4
 	},
 /obj/structure/cable{
-	d1 = 4;
-	d2 = 8;
 	icon_state = "4-8"
 	},
 /turf/simulated/floor/tiled,
@@ -2294,8 +2193,6 @@
 	dir = 4
 	},
 /obj/structure/cable{
-	d1 = 4;
-	d2 = 8;
 	icon_state = "4-8"
 	},
 /turf/simulated/floor/tiled,
@@ -2304,13 +2201,9 @@
 /obj/machinery/atmospherics/pipe/manifold/hidden/supply,
 /obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers,
 /obj/structure/cable{
-	d1 = 4;
-	d2 = 8;
 	icon_state = "4-8"
 	},
 /obj/structure/cable{
-	d1 = 1;
-	d2 = 4;
 	icon_state = "1-4"
 	},
 /turf/simulated/floor/tiled,
@@ -2326,8 +2219,6 @@
 	dir = 4
 	},
 /obj/structure/cable{
-	d1 = 4;
-	d2 = 8;
 	icon_state = "4-8"
 	},
 /obj/machinery/alarm{
@@ -2345,8 +2236,6 @@
 	},
 /obj/random/trash,
 /obj/structure/cable{
-	d1 = 4;
-	d2 = 8;
 	icon_state = "4-8"
 	},
 /turf/simulated/floor/tiled,
@@ -2362,8 +2251,6 @@
 	dir = 1
 	},
 /obj/structure/cable{
-	d1 = 4;
-	d2 = 8;
 	icon_state = "4-8"
 	},
 /turf/simulated/floor/tiled,
@@ -2379,8 +2266,6 @@
 	dir = 4
 	},
 /obj/structure/cable{
-	d1 = 4;
-	d2 = 8;
 	icon_state = "4-8"
 	},
 /turf/simulated/floor/tiled,
@@ -2402,8 +2287,6 @@
 	id_tag = "CellsBD"
 	},
 /obj/structure/cable{
-	d1 = 4;
-	d2 = 8;
 	icon_state = "4-8"
 	},
 /turf/simulated/floor/tiled,
@@ -2419,8 +2302,6 @@
 	dir = 4
 	},
 /obj/structure/cable{
-	d1 = 4;
-	d2 = 8;
 	icon_state = "4-8"
 	},
 /turf/simulated/floor/tiled,
@@ -2442,8 +2323,6 @@
 	id_tag = "CellsBD"
 	},
 /obj/structure/cable{
-	d1 = 4;
-	d2 = 8;
 	icon_state = "4-8"
 	},
 /turf/simulated/floor/tiled,
@@ -2456,13 +2335,9 @@
 	dir = 4
 	},
 /obj/structure/cable{
-	d1 = 1;
-	d2 = 8;
 	icon_state = "1-8"
 	},
 /obj/structure/cable{
-	d1 = 1;
-	d2 = 2;
 	icon_state = "1-2"
 	},
 /turf/simulated/floor/tiled,
@@ -2514,8 +2389,6 @@
 	pixel_x = -25
 	},
 /obj/structure/cable{
-	d1 = 1;
-	d2 = 2;
 	icon_state = "1-2"
 	},
 /turf/simulated/floor/tiled,
@@ -2528,7 +2401,7 @@
 /obj/structure/bed/chair{
 	dir = 4
 	},
-/obj/effect/landmark/corpse/lar_maria/test_subject,
+/obj/abstract/landmark/corpse/lar_maria/test_subject,
 /obj/effect/decal/cleanable/blood,
 /turf/simulated/floor/tiled,
 /area/lar_maria/cells)
@@ -2547,8 +2420,6 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/structure/cable{
-	d1 = 1;
-	d2 = 2;
 	icon_state = "1-2"
 	},
 /turf/simulated/floor/tiled,
@@ -2670,8 +2541,6 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/structure/cable{
-	d1 = 1;
-	d2 = 2;
 	icon_state = "1-2"
 	},
 /turf/simulated/floor/tiled,
@@ -2698,19 +2567,17 @@
 /area/lar_maria/sec_wing)
 "gI" = (
 /obj/structure/cable/yellow{
-	d2 = 4;
 	icon_state = "0-4"
 	},
 /obj/machinery/power/terminal{
 	dir = 8
 	},
-/obj/effect/landmark/corpse/lar_maria/zhp_guard,
+/obj/abstract/landmark/corpse/lar_maria/zhp_guard,
 /turf/simulated/floor/plating,
 /area/lar_maria/sec_wing)
 "gJ" = (
-/obj/machinery/power/port_gen/pacman/mrs,
+/obj/machinery/port_gen/pacman/mrs,
 /obj/structure/cable/yellow{
-	d2 = 8;
 	icon_state = "0-8"
 	},
 /turf/simulated/floor/plating,
@@ -2854,7 +2721,7 @@
 /turf/simulated/floor/plating,
 /area/lar_maria/cells)
 "hd" = (
-/obj/structure/stairs/south,
+/obj/structure/stairs/long,
 /turf/simulated/floor/tiled,
 /area/lar_maria/vir_access)
 "he" = (
@@ -2887,7 +2754,7 @@
 /area/lar_maria/vir_access)
 "hk" = (
 /obj/structure/hygiene/shower,
-/obj/effect/landmark/corpse/lar_maria/test_subject,
+/obj/abstract/landmark/corpse/lar_maria/test_subject,
 /obj/effect/decal/cleanable/blood,
 /turf/simulated/floor/tiled/white,
 /area/lar_maria/vir_access)
@@ -2960,7 +2827,6 @@
 	pixel_x = 24
 	},
 /obj/structure/cable{
-	d2 = 2;
 	icon_state = "0-2"
 	},
 /turf/simulated/floor/tiled,
@@ -3034,8 +2900,6 @@
 /area/lar_maria/vir_access)
 "hG" = (
 /obj/structure/cable{
-	d1 = 1;
-	d2 = 2;
 	icon_state = "1-2"
 	},
 /turf/simulated/floor/tiled,
@@ -3125,7 +2989,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 4
 	},
-/obj/effect/landmark/corpse/lar_maria/zhp_guard/dark,
+/obj/abstract/landmark/corpse/lar_maria/zhp_guard/dark,
 /obj/effect/decal/cleanable/blood,
 /turf/simulated/floor/tiled/white,
 /area/lar_maria/vir_access)
@@ -3188,7 +3052,7 @@
 /obj/machinery/light/small{
 	dir = 8
 	},
-/obj/effect/landmark/corpse/lar_maria/test_subject,
+/obj/abstract/landmark/corpse/lar_maria/test_subject,
 /obj/effect/decal/cleanable/blood,
 /turf/simulated/floor/plating,
 /area/lar_maria/cells)
@@ -3232,8 +3096,6 @@
 	icon_state = "tube1"
 	},
 /obj/structure/cable{
-	d1 = 1;
-	d2 = 2;
 	icon_state = "1-2"
 	},
 /turf/simulated/floor/tiled,
@@ -3261,8 +3123,6 @@
 	dir = 5
 	},
 /obj/structure/cable{
-	d1 = 1;
-	d2 = 4;
 	icon_state = "1-4"
 	},
 /turf/simulated/floor/tiled,
@@ -3282,8 +3142,6 @@
 	id_tag = "VirAccessBD"
 	},
 /obj/structure/cable{
-	d1 = 4;
-	d2 = 8;
 	icon_state = "4-8"
 	},
 /turf/simulated/floor/tiled,
@@ -3296,8 +3154,6 @@
 	dir = 4
 	},
 /obj/structure/cable{
-	d1 = 4;
-	d2 = 8;
 	icon_state = "4-8"
 	},
 /turf/simulated/floor/tiled,
@@ -3310,24 +3166,18 @@
 	dir = 9
 	},
 /obj/structure/cable{
-	d1 = 4;
-	d2 = 8;
 	icon_state = "4-8"
 	},
 /turf/simulated/floor/tiled,
 /area/lar_maria/vir_access)
 "ii" = (
 /obj/structure/cable{
-	d1 = 4;
-	d2 = 8;
 	icon_state = "4-8"
 	},
 /turf/simulated/floor/tiled,
 /area/lar_maria/vir_access)
 "ij" = (
 /obj/structure/cable{
-	d1 = 1;
-	d2 = 8;
 	icon_state = "1-8"
 	},
 /turf/simulated/floor/tiled,
@@ -3538,7 +3388,7 @@
 /obj/structure/hygiene/shower{
 	dir = 1
 	},
-/obj/effect/landmark/corpse/lar_maria/virologist,
+/obj/abstract/landmark/corpse/lar_maria/virologist,
 /obj/effect/decal/cleanable/blood,
 /turf/simulated/floor/tiled/white,
 /area/lar_maria/vir_access)
@@ -3614,8 +3464,6 @@
 /area/lar_maria/morgue)
 "kb" = (
 /obj/structure/cable{
-	d1 = 4;
-	d2 = 8;
 	icon_state = "4-8"
 	},
 /obj/machinery/atmospherics/valve/shutoff{

@@ -70,7 +70,7 @@
 		empulse(src, heavy_range, lighter_range, 0)
 		var/turf/T = get_turf(src)
 		var/area/A = get_area(src)
-		log_game("EMP with size ([heavy_range], [lighter_range]) in area [A] ([T.x], [T.y], [T.z])")
+		log_game("EMP with size ([heavy_range], [lighter_range]) in area [A.proper_name] ([T.x], [T.y], [T.z])")
 		visible_message("<span class='notice'>\the [src] suddenly activates.</span>", "<span class='notice'>Few lightnings jump between [src]'s rotating hands. You feel everything metal being pulled towards \the [src].</span>")
 		for(var/mob/living/carbon/M in hear(10, get_turf(src)))
 			eye_safety = M.eyecheck()

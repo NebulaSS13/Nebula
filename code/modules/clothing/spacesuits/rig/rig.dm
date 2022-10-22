@@ -285,7 +285,7 @@
 
 				if(!failed_to_seal && wearer.back == src && piece == compare_piece)
 
-					if(seal_delay && !instant && !do_after(wearer,seal_delay,src,needhand=0))
+					if(seal_delay && !instant && !do_after(wearer,seal_delay,src,check_holding=0))
 						failed_to_seal = 1
 
 					switch(msg_type)
@@ -477,7 +477,7 @@
 
 	data["charge"] =       cell ? round(cell.charge,1) : 0
 	data["maxcharge"] =    cell ? cell.maxcharge : 0
-	data["chargestatus"] = cell ? Floor(cell.percent()/2) : 0
+	data["chargestatus"] = cell ? FLOOR(cell.percent()/2) : 0
 
 	data["emagged"] =       subverted
 	data["coverlock"] =     locked
@@ -575,7 +575,7 @@
 	. = ..()
 
 /obj/item/rig/get_req_access()
-	if(!security_check_enabled)
+	if(!security_check_enabled || !locked)
 		return list()
 	return ..()
 
@@ -776,6 +776,8 @@
 		wearer = null
 
 /obj/item/rig/proc/deselect_module()
+	if(!selected_module)
+		return
 	if(selected_module.suit_overlay_inactive)
 		selected_module.suit_overlay = selected_module.suit_overlay_inactive
 	else

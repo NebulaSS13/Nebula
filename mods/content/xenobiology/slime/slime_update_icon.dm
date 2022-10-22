@@ -1,21 +1,20 @@
 /mob/living/slime/on_update_icon()
-	regenerate_icons()
 
-/mob/living/slime/regenerate_icons()
 	var/decl/slime_colour/slime_data = GET_DECL(slime_type)
 	icon = (stat != DEAD && is_adult) ? slime_data.adult_icon : slime_data.baby_icon // dead adults have no icon
 	icon_state = initial(icon_state)
 	if(stat == DEAD)
-		icon_state = "[icon_state]_[cores ? "dead" : "nocore"]"
+		icon_state = "[icon_state]-[cores ? "dead" : "nocore"]"
 		layer = initial(layer)
 	else if(feeding_on)
 		var/mob/feed_mob = feeding_on.resolve()
-		icon_state = "[icon_state]_eat"
+		icon_state = "[icon_state]-eat"
 		layer = feed_mob.layer + 0.5
 	else
 		layer = initial(layer)
 
-	cut_overlays()
+	..()
+
 	var/datum/ai/slime/slime_ai = ai
 	if(stat != DEAD && istype(slime_ai) && slime_ai.mood)
 		add_overlay(image(slime_data.mood_icon, "aslime-[slime_ai.mood]"))

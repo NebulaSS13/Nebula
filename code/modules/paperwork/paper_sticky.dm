@@ -6,11 +6,20 @@
 	icon_state = "pad_full"
 	item_state = "paper"
 	w_class = ITEM_SIZE_SMALL
+	material = /decl/material/solid/wood
 
 	var/papers = 50
 	var/written_text
 	var/written_by
 	var/paper_type = /obj/item/paper/sticky
+
+/obj/item/sticky_pad/proc/update_matter()
+	matter = list(
+		/decl/material/solid/wood = round((papers * SHEET_MATERIAL_AMOUNT) * 0.2)
+	)
+
+/obj/item/sticky_pad/create_matter()
+	update_matter()
 
 /obj/item/sticky_pad/on_update_icon()
 	if(papers <= 15)
@@ -33,7 +42,7 @@
 		if(writing_space <= 0)
 			to_chat(user, SPAN_WARNING("There is no room left on \the [src]."))
 			return
-		var/text = sanitizeSafe(input("What would you like to write?") as text, writing_space)
+		var/text = sanitize_safe(input("What would you like to write?") as text, writing_space)
 		if(!text || thing.loc != user || (!Adjacent(user) && loc != user) || user.incapacitated())
 			return
 		user.visible_message(SPAN_NOTICE("\The [user] jots a note down on \the [src]."))
@@ -66,6 +75,7 @@
 		if(papers <= 0)
 			qdel(src)
 		else
+			update_matter()
 			update_icon()
 
 /obj/item/sticky_pad/random/Initialize()
@@ -79,13 +89,14 @@
 	color = COLOR_YELLOW
 	slot_flags = 0
 	layer = ABOVE_WINDOW_LAYER
+	persist_on_init = FALSE
 
 /obj/item/paper/sticky/Initialize()
 	. = ..()
 	events_repository.register(/decl/observ/moved, src, src, /obj/item/paper/sticky/proc/reset_persistence_tracking)
 
 /obj/item/paper/sticky/proc/reset_persistence_tracking()
-	SSpersistence.forget_value(src, /datum/persistent/paper/sticky)
+	SSpersistence.forget_value(src, /decl/persistence_handler/paper/sticky)
 	pixel_x = 0
 	pixel_y = 0
 
@@ -123,18 +134,19 @@
 			return
 
 	if(user.unEquip(src, source_turf))
-		SSpersistence.track_value(src, /datum/persistent/paper/sticky)
+		SSpersistence.track_value(src, /decl/persistence_handler/paper/sticky)
 		if(params)
 			var/list/mouse_control = params2list(params)
 			if(mouse_control["icon-x"])
-				pixel_x = text2num(mouse_control["icon-x"]) - 16
+				default_pixel_x = text2num(mouse_control["icon-x"]) - 16
 				if(dir_offset & EAST)
-					pixel_x += 32
+					default_pixel_x += 32
 				else if(dir_offset & WEST)
-					pixel_x -= 32
+					default_pixel_x -= 32
 			if(mouse_control["icon-y"])
-				pixel_y = text2num(mouse_control["icon-y"]) - 16
+				default_pixel_y = text2num(mouse_control["icon-y"]) - 16
 				if(dir_offset & NORTH)
-					pixel_y += 32
+					default_pixel_y += 32
 				else if(dir_offset & SOUTH)
-					pixel_y -= 32
+					default_pixel_y -= 32
+			reset_offsets(0)

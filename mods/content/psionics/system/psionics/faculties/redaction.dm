@@ -7,6 +7,7 @@
 /decl/psionic_power/redaction
 	faculty = PSI_REDACTION
 	admin_log = FALSE
+	abstract_type = /decl/psionic_power/redaction
 
 /decl/psionic_power/redaction/proc/check_dead(var/mob/living/target)
 	if(!istype(target))
@@ -50,9 +51,9 @@
 		return FALSE
 	. = ..()
 	if(.)
-		var/obj/item/organ/external/E = target.get_organ(user.zone_sel.selecting)
+		var/obj/item/organ/external/E = GET_EXTERNAL_ORGAN(target, user.zone_sel.selecting)
 
-		if(!E || E.is_stump())
+		if(!E)
 			to_chat(user, SPAN_WARNING("They are missing that limb."))
 			return TRUE
 

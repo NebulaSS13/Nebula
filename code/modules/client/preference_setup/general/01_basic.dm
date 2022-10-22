@@ -12,21 +12,37 @@
 /datum/category_item/player_setup_item/physical/basic/load_character(datum/pref_record_reader/R)
 	pref.gender =         R.read("gender")
 	pref.bodytype =       R.read("bodytype")
-	pref.spawnpoint =     R.read("spawnpoint")
 	pref.real_name =      R.read("real_name")
 	pref.be_random_name = R.read("name_is_always_random")
+
+	pref.spawnpoint = R.read("spawnpoint")
+	for(var/decl/spawnpoint/spawnpoint AS_ANYTHING in global.using_map.allowed_spawns)
+		if(pref.spawnpoint == spawnpoint.name)
+			pref.spawnpoint = spawnpoint.type
+			break
+	if(!ispath(pref.spawnpoint, /decl/spawnpoint))
+		pref.spawnpoint = global.using_map.default_spawn
 
 /datum/category_item/player_setup_item/physical/basic/save_character(datum/pref_record_writer/W)
 	W.write("gender",                pref.gender)
 	W.write("bodytype",              pref.bodytype)
-	W.write("spawnpoint",            pref.spawnpoint)
 	W.write("real_name",             pref.real_name)
 	W.write("name_is_always_random", pref.be_random_name)
 
-/datum/category_item/player_setup_item/physical/basic/sanitize_character()
+	var/decl/spawnpoint/spawnpoint = GET_DECL(pref.spawnpoint)
+	W.write("spawnpoint", spawnpoint.name)
 
-	var/decl/species/S  = get_species_by_key(pref.species) || get_species_by_key(global.using_map.default_species)
-	pref.spawnpoint     = sanitize_inlist(pref.spawnpoint, spawntypes(), initial(pref.spawnpoint))
+/datum/category_item/player_setup_item/physical/basic/sanitize_character()
+	
+	var/valid_spawn = FALSE
+	for(var/decl/spawnpoint/spawnpoint AS_ANYTHING in global.using_map.allowed_spawns)
+		if(pref.spawnpoint == spawnpoint.type)
+			valid_spawn = TRUE
+			break
+	if(!valid_spawn)
+		pref.spawnpoint = global.using_map.default_spawn
+
+	var/decl/species/S = get_species_by_key(pref.species) || get_species_by_key(global.using_map.default_species)
 	pref.be_random_name = sanitize_integer(pref.be_random_name, 0, 1, initial(pref.be_random_name))
 
 	var/decl/pronouns/pronouns
@@ -52,14 +68,23 @@
 	. += "<a href='?src=\ref[src];always_random_name=1'>Always Random Name: [pref.be_random_name ? "Yes" : "No"]</a>"
 	. += "<hr>"
 
+	. += "<b>Bodytype:</b> "
 	var/decl/species/S = get_species_by_key(pref.species)
-	var/decl/bodytype/B = S.get_bodytype_by_name(pref.bodytype)
-	. += "<b>Bodytype:</b> <a href='?src=\ref[src];bodytype=1'>[capitalize(B.name)]</a><br>"
+	for(var/decl/bodytype/B in S.available_bodytypes)
+		if(B.name == pref.bodytype)
+			. += "<span class='linkOn'>[capitalize(B.name)]</span>"
+		else
+			. += "<a href='?src=\ref[src];bodytype=\ref[B]'>[capitalize(B.name)]</a>"
 
-	var/decl/pronouns/G = get_pronouns_by_gender(pref.gender)
-	. += "<b>Pronouns:</b> <a href='?src=\ref[src];gender=1'>[capitalize(G.name)]</a><br>"
+	. += "<br><b>Pronouns:</b> "
+	for(var/decl/pronouns/G in S.available_pronouns)
+		if(G.name == pref.gender)
+			. += "<span class='linkOn'>[capitalize(G.name)]</span>"
+		else
+			. += "<a href='?src=\ref[src];gender=\ref[G]'>[capitalize(G.name)]</a>"
 
-	. += "<b>Spawn point</b>: <a href='?src=\ref[src];spawnpoint=1'>[pref.spawnpoint]</a>"
+	var/decl/spawnpoint/spawnpoint = GET_DECL(pref.spawnpoint)
+	. += "<br><b>Spawn point</b>: <a href='?src=\ref[src];spawnpoint=1'>[spawnpoint.name]</a>"
 	. = jointext(.,null)
 
 /datum/category_item/player_setup_item/physical/basic/OnTopic(var/href,var/list/href_list, var/mob/user)
@@ -70,7 +95,7 @@
 		if (!isnull(raw_name) && CanUseTopic(user))
 
 			var/decl/cultural_info/check = GET_DECL(pref.cultural_info[TAG_CULTURE])
-			var/new_name = check.sanitize_name(raw_name, pref.species)
+			var/new_name = check.sanitize_cultural_name(raw_name, pref.species)
 			if(filter_block_message(user, new_name))
 				return TOPIC_NOACTION
 
@@ -90,30 +115,26 @@
 		return TOPIC_REFRESH
 
 	else if(href_list["gender"])
-		var/decl/pronouns/new_gender = input(user, "Choose your character's pronouns:", CHARACTER_PREFERENCE_INPUT_TITLE) as null|anything in S.available_pronouns
-		S = get_species_by_key(pref.species)
+		var/decl/pronouns/new_gender = locate(href_list["gender"])
 		if(istype(new_gender) && CanUseTopic(user) && (new_gender in S.available_pronouns))
 			pref.gender = new_gender.name
-			if(!(pref.f_style in S.get_facial_hair_styles(pref.gender)))
-				ResetFacialHair()
 		return TOPIC_REFRESH_UPDATE_PREVIEW
 
 	else if(href_list["bodytype"])
-		var/decl/bodytype/new_body = input(user, "Choose your character's bodytype:", CHARACTER_PREFERENCE_INPUT_TITLE) as null|anything in S.available_bodytypes
-		S = get_species_by_key(pref.species)
+		var/decl/bodytype/new_body = locate(href_list["bodytype"])
 		if(istype(new_body) && CanUseTopic(user) && (new_body in S.available_bodytypes))
 			pref.bodytype = new_body.name
 			if(new_body.associated_gender) // Set to default for male/female to avoid confusing people
 				pref.gender = new_body.associated_gender
+			if(!(pref.f_style in S.get_facial_hair_style_types(new_body.associated_gender)))
+				ResetFacialHair()
 		return TOPIC_REFRESH_UPDATE_PREVIEW
 
 	else if(href_list["spawnpoint"])
-		var/list/spawnkeys = list()
-		for(var/spawntype in spawntypes())
-			spawnkeys += spawntype
-		var/choice = input(user, "Where would you like to spawn when late-joining?") as null|anything in spawnkeys
-		if(!choice || !spawntypes()[choice] || !CanUseTopic(user))	return TOPIC_NOACTION
-		pref.spawnpoint = choice
+		var/decl/spawnpoint/choice = input(user, "Where would you like to spawn when late-joining?") as null|anything in global.using_map.allowed_spawns
+		if(!istype(choice) || !CanUseTopic(user))
+			return TOPIC_NOACTION
+		pref.spawnpoint = choice.type
 		return TOPIC_REFRESH
 
 	return ..()

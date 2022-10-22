@@ -5,7 +5,7 @@
 	else
 		return ..(gibbed,"no message")
 
-/mob/living/carbon/brain/gib()
+/mob/living/carbon/brain/gib(anim="gibbed-m",do_gibs)
 	if(istype(container, /obj/item/mmi))
 		qdel(container)//Gets rid of the MMI if there is one
 	if(loc)

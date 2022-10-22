@@ -6,7 +6,7 @@
 /turf/simulated/wall/wood,
 /area/template_noop)
 "c" = (
-/obj/machinery/power/port_gen/pacman,
+/obj/machinery/port_gen/pacman,
 /turf/simulated/floor/wood,
 /area/template_noop)
 "d" = (

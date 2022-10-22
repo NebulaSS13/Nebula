@@ -3,993 +3,970 @@
 
 
 /* No telebacon. just no...
-/datum/recipe/telebacon
+/decl/recipe/telebacon
 	items = list(
-		/obj/item/chems/food/snacks/meat,
+		/obj/item/chems/food/meat,
 		/obj/item/assembly/signaler
 	)
-	result = /obj/item/chems/food/snacks/telebacon
+	result = /obj/item/chems/food/telebacon
 
 I said no!
-/datum/recipe/syntitelebacon
+/decl/recipe/syntitelebacon
 	items = list(
-		/obj/item/chems/food/snacks/meat/syntiflesh,
+		/obj/item/chems/food/meat/syntiflesh,
 		/obj/item/assembly/signaler
 	)
-	result = /obj/item/chems/food/snacks/telebacon
+	result = /obj/item/chems/food/telebacon
 */
 
-/datum/recipe/friedegg
-	reagents = list(/decl/material/solid/mineral/sodiumchloride = 1, /decl/material/solid/blackpepper = 1)
+/decl/recipe/friedegg
+	reagents = list(/decl/material/solid/sodiumchloride = 1, /decl/material/solid/blackpepper = 1)
 	items = list(
-		/obj/item/chems/food/snacks/egg
+		/obj/item/chems/food/egg
 	)
-	result = /obj/item/chems/food/snacks/friedegg
+	reagent_mix = REAGENT_REPLACE // no raw egg
+	result = /obj/item/chems/food/friedegg
 
-/datum/recipe/friedegg2
-	items = list(
-		/obj/item/chems/food/snacks/egg,
-		/obj/item/chems/food/snacks/egg,
-	)
-	result = /obj/item/chems/food/snacks/friedegg
-
-/datum/recipe/boiledegg
+/decl/recipe/boiledegg
 	reagents = list(/decl/material/liquid/water = 10)
 	items = list(
-		/obj/item/chems/food/snacks/egg
+		/obj/item/chems/food/egg
 	)
-	result = /obj/item/chems/food/snacks/boiledegg
+	reagent_mix = REAGENT_REPLACE // no raw egg or water
+	result = /obj/item/chems/food/boiledegg
 
-/datum/recipe/classichotdog
+/decl/recipe/classichotdog
 	items = list(
-		/obj/item/chems/food/snacks/bun,
+		/obj/item/chems/food/bun,
 		/obj/item/holder/corgi
 	)
-	result = /obj/item/chems/food/snacks/classichotdog
+	result = /obj/item/chems/food/classichotdog
 
-/datum/recipe/jellydonut
-	reagents = list(/decl/material/liquid/drink/juice/berry = 5, /decl/material/liquid/nutriment/sugar = 5)
-	items = list(
-		/obj/item/chems/food/snacks/dough
-	)
-	result = /obj/item/chems/food/snacks/donut/jelly
-
-/datum/recipe/jellydonut/cherry
-	reagents = list(/decl/material/liquid/nutriment/cherryjelly = 5, /decl/material/liquid/nutriment/sugar = 5)
-	items = list(
-		/obj/item/chems/food/snacks/dough
-	)
-	result = /obj/item/chems/food/snacks/donut/cherryjelly
-
-/datum/recipe/donut
+/decl/recipe/donut
+	display_name = "Plain Donut"
 	reagents = list(/decl/material/liquid/nutriment/sugar = 5)
 	items = list(
-		/obj/item/chems/food/snacks/dough
+		/obj/item/chems/food/dough
 	)
-	result = /obj/item/chems/food/snacks/donut/normal
+	result = /obj/item/chems/food/donut
 
-/datum/recipe/meatburger
+/decl/recipe/donut/jelly
+	display_name = "Berry Jelly Donut"
+	reagents = list(/decl/material/liquid/drink/juice/berry = 5, /decl/material/liquid/nutriment/sugar = 5)
+	result = /obj/item/chems/food/donut/jelly
+
+/decl/recipe/donut/jelly/cherry
+	display_name = "Cherry Jelly Donut"
+	reagents = list(/decl/material/liquid/nutriment/cherryjelly = 5, /decl/material/liquid/nutriment/sugar = 5)
+
+/decl/recipe/plainburger
+	display_name = "plain burger"
 	items = list(
-		/obj/item/chems/food/snacks/bun,
-		/obj/item/chems/food/snacks/cutlet
+		/obj/item/chems/food/bun,
+		/obj/item/chems/food/cutlet
 	)
-	result = /obj/item/chems/food/snacks/meatburger
+	result = /obj/item/chems/food/burger
 
-/datum/recipe/brainburger
+/decl/recipe/brainburger
 	items = list(
-		/obj/item/chems/food/snacks/bun,
+		/obj/item/chems/food/bun,
 		/obj/item/organ/internal/brain
 	)
-	result = /obj/item/chems/food/snacks/brainburger
+	result = /obj/item/chems/food/brainburger
 
-/datum/recipe/roburger
+/decl/recipe/roburger
 	items = list(
-		/obj/item/chems/food/snacks/bun,
+		/obj/item/chems/food/bun,
 		/obj/item/robot_parts/head
 	)
-	result = /obj/item/chems/food/snacks/roburger
+	result = /obj/item/chems/food/roburger
 
-/datum/recipe/xenoburger
+/decl/recipe/xenoburger
 	items = list(
-		/obj/item/chems/food/snacks/bun,
-		/obj/item/chems/food/snacks/xenomeat
+		/obj/item/chems/food/bun,
+		/obj/item/chems/food/xenomeat
 	)
-	result = /obj/item/chems/food/snacks/xenoburger
+	result = /obj/item/chems/food/xenoburger
 
-/datum/recipe/fishburger
+/decl/recipe/fishburger
 	items = list(
-		/obj/item/chems/food/snacks/bun,
-		/obj/item/chems/food/snacks/fish
+		/obj/item/chems/food/bun,
+		/obj/item/chems/food/fish
 	)
-	result = /obj/item/chems/food/snacks/fishburger
+	result = /obj/item/chems/food/fishburger
 
-/datum/recipe/tofuburger
+/decl/recipe/tofuburger
 	items = list(
-		/obj/item/chems/food/snacks/bun,
-		/obj/item/chems/food/snacks/tofu
+		/obj/item/chems/food/bun,
+		/obj/item/chems/food/tofu
 	)
-	result = /obj/item/chems/food/snacks/tofuburger
+	result = /obj/item/chems/food/tofuburger
 
-/datum/recipe/ghostburger
+/decl/recipe/ghostburger
 	items = list(
-		/obj/item/chems/food/snacks/bun,
+		/obj/item/chems/food/bun,
 		/obj/item/ectoplasm //where do you even find this stuff
 	)
-	result = /obj/item/chems/food/snacks/ghostburger
+	result = /obj/item/chems/food/ghostburger
 
-/datum/recipe/clownburger
+/decl/recipe/clownburger
 	items = list(
-		/obj/item/chems/food/snacks/bun,
+		/obj/item/chems/food/bun,
 		/obj/item/clothing/mask/gas/clown_hat
 	)
-	result = /obj/item/chems/food/snacks/clownburger
+	result = /obj/item/chems/food/clownburger
 
-/datum/recipe/mimeburger
+/decl/recipe/mimeburger
 	items = list(
-		/obj/item/chems/food/snacks/bun,
+		/obj/item/chems/food/bun,
 		/obj/item/clothing/head/beret
 	)
-	result = /obj/item/chems/food/snacks/mimeburger
+	result = /obj/item/chems/food/mimeburger
 
-/datum/recipe/bunbun
+/decl/recipe/bunbun
 	items = list(
-		/obj/item/chems/food/snacks/bun,
-		/obj/item/chems/food/snacks/bun
+		/obj/item/chems/food/bun = 2
 	)
-	result = /obj/item/chems/food/snacks/bunbun
+	result = /obj/item/chems/food/bunbun
 
-/datum/recipe/hotdog
+/decl/recipe/hotdog
+	display_name = "plain hotdog"
 	items = list(
-		/obj/item/chems/food/snacks/bun,
-		/obj/item/chems/food/snacks/sausage
+		/obj/item/chems/food/bun,
+		/obj/item/chems/food/sausage
 	)
-	result = /obj/item/chems/food/snacks/hotdog
+	result = /obj/item/chems/food/hotdog
 
-/datum/recipe/waffles
+/decl/recipe/waffles
 	reagents = list(/decl/material/liquid/nutriment/batter/cakebatter = 20)
-	result = /obj/item/chems/food/snacks/waffles
+	result = /obj/item/chems/food/waffles
 
-/datum/recipe/pancakesblu
+/decl/recipe/pancakesblu
 	reagents = list(/decl/material/liquid/nutriment/batter = 20)
 	fruit = list("blueberries" = 2)
-	result = /obj/item/chems/food/snacks/pancakesblu
+	result = /obj/item/chems/food/pancakesblu
 
-/datum/recipe/pancakes
+/decl/recipe/pancakes
+	display_name = "plain pancakes"
 	reagents = list(/decl/material/liquid/nutriment/batter = 20)
-	result = /obj/item/chems/food/snacks/pancakes
+	result = /obj/item/chems/food/pancakes
 
-/datum/recipe/donkpocket
+/decl/recipe/donkpocket
 	items = list(
-		/obj/item/chems/food/snacks/doughslice,
-		/obj/item/chems/food/snacks/meatball
+		/obj/item/chems/food/doughslice,
+		/obj/item/chems/food/meatball
 	)
-	result = /obj/item/chems/food/snacks/donkpocket //SPECIAL
+	result = /obj/item/chems/food/donkpocket //SPECIAL
 
-/datum/recipe/donkpocket/proc/warm_up(var/obj/item/chems/food/snacks/donkpocket/being_cooked)
+/decl/recipe/donkpocket/proc/warm_up(var/obj/item/chems/food/donkpocket/being_cooked)
 	being_cooked.heat()
 
-/datum/recipe/donkpocket/make_food(var/obj/container)
-	var/obj/item/chems/food/snacks/donkpocket/being_cooked = ..(container)
-	warm_up(being_cooked)
-	return being_cooked
+/decl/recipe/donkpocket/make_food(var/obj/container)
+	. = ..(container)
+	for(var/obj/item/chems/food/donkpocket/being_cooked in .)
+		warm_up(being_cooked)
 
-/datum/recipe/donkpocket2
+/decl/recipe/donkpocket/rawmeatball
+	display_name = "Raw Donk-Pocket"
 	items = list(
-		/obj/item/chems/food/snacks/doughslice,
-		/obj/item/chems/food/snacks/rawmeatball
+		/obj/item/chems/food/doughslice,
+		/obj/item/chems/food/rawmeatball
 	)
-	result = /obj/item/chems/food/snacks/donkpocket //SPECIAL
 
-/datum/recipe/donkpocket2/proc/warm_up(var/obj/item/chems/food/snacks/donkpocket/being_cooked)
-	being_cooked.heat()
-
-/datum/recipe/donkpocket2/make_food(var/obj/container)
-	var/obj/item/chems/food/snacks/donkpocket/being_cooked = ..(container)
-	warm_up(being_cooked)
-	return being_cooked
-
-/datum/recipe/donkpocket/warm
+/decl/recipe/donkpocket/warm
+	display_name = "Warm Donk-Pocket"
 	reagents = list() //This is necessary since this is a child object of the above recipe and we don't want donk pockets to need flour
 	items = list(
-		/obj/item/chems/food/snacks/donkpocket
+		/obj/item/chems/food/donkpocket
 	)
-	result = /obj/item/chems/food/snacks/donkpocket //SPECIAL
+	result = /obj/item/chems/food/donkpocket //SPECIAL
 
-/datum/recipe/donkpocket/warm/make_food(var/obj/container)
-	var/obj/item/chems/food/snacks/donkpocket/being_cooked = locate() in container
-	if(being_cooked && !being_cooked.warm)
-		warm_up(being_cooked)
-	return being_cooked
+/decl/recipe/donkpocket/warm/check_items(obj/container)
+	. = ..()
+	if(!.)
+		return FALSE
+	for(var/obj/item/chems/food/donkpocket/being_cooked in container.get_contained_external_atoms())
+		if(!being_cooked.warm)
+			return TRUE
+	return FALSE
 
-/datum/recipe/meatbread
+/decl/recipe/donkpocket/warm/make_food(var/obj/container)
+	for(var/obj/item/chems/food/donkpocket/being_cooked in container.get_contained_external_atoms())
+		if(!being_cooked.warm)
+			warm_up(being_cooked)
+			return list(being_cooked)
+
+/decl/recipe/meatbread
+	display_name = "plain meatbread loaf"
 	items = list(
-		/obj/item/chems/food/snacks/dough,
-		/obj/item/chems/food/snacks/dough,
-		/obj/item/chems/food/snacks/cutlet,
-		/obj/item/chems/food/snacks/cutlet,
-		/obj/item/chems/food/snacks/cheesewedge,
-		/obj/item/chems/food/snacks/cheesewedge,
+		/obj/item/chems/food/dough = 2,
+		/obj/item/chems/food/cutlet = 2,
+		/obj/item/chems/food/cheesewedge = 2,
 	)
-	result = /obj/item/chems/food/snacks/sliceable/meatbread
+	result = /obj/item/chems/food/sliceable/meatbread
 
-/datum/recipe/xenomeatbread
+/decl/recipe/xenomeatbread
 	items = list(
-		/obj/item/chems/food/snacks/dough,
-		/obj/item/chems/food/snacks/dough,
-		/obj/item/chems/food/snacks/xenomeat,
-		/obj/item/chems/food/snacks/xenomeat,
-		/obj/item/chems/food/snacks/cheesewedge,
-		/obj/item/chems/food/snacks/cheesewedge,
+		/obj/item/chems/food/dough = 2,
+		/obj/item/chems/food/xenomeat = 2,
+		/obj/item/chems/food/cheesewedge = 2,
 	)
-	result = /obj/item/chems/food/snacks/sliceable/xenomeatbread
+	result = /obj/item/chems/food/sliceable/xenomeatbread
 
-/datum/recipe/bananabread
+/decl/recipe/bananabread
 	fruit = list("banana" = 2)
 	reagents = list(/decl/material/liquid/drink/milk = 5, /decl/material/liquid/nutriment/sugar = 5)
 	items = list(
-		/obj/item/chems/food/snacks/dough,
-		/obj/item/chems/food/snacks/dough,
+		/obj/item/chems/food/dough = 2,
 	)
-	result = /obj/item/chems/food/snacks/sliceable/bananabread
+	result = /obj/item/chems/food/sliceable/bananabread
 
-/datum/recipe/omelette
+/decl/recipe/omelette
 	items = list(
-		/obj/item/chems/food/snacks/egg,
-		/obj/item/chems/food/snacks/egg,
-		/obj/item/chems/food/snacks/cheesewedge,
+		/obj/item/chems/food/egg = 2,
+		/obj/item/chems/food/cheesewedge,
 	)
-	result = /obj/item/chems/food/snacks/omelette
+	reagent_mix = REAGENT_REPLACE // no raw egg
+	result = /obj/item/chems/food/omelette
 
-/datum/recipe/muffin
+/decl/recipe/muffin
 	reagents = list(/decl/material/liquid/nutriment/batter/cakebatter = 10)
-	result = /obj/item/chems/food/snacks/muffin
+	result = /obj/item/chems/food/muffin
 
-/datum/recipe/eggplantparm
+/decl/recipe/eggplantparm
 	fruit = list("eggplant" = 1)
 	items = list(
-		/obj/item/chems/food/snacks/cheesewedge,
-		/obj/item/chems/food/snacks/cheesewedge
+		/obj/item/chems/food/cheesewedge = 2
 		)
-	result = /obj/item/chems/food/snacks/eggplantparm
+	result = /obj/item/chems/food/eggplantparm
 
-/datum/recipe/soylenviridians
+/decl/recipe/soylenviridians
 	fruit = list("soybeans" = 1)
 	reagents = list(/decl/material/liquid/nutriment/flour = 10)
-	result = /obj/item/chems/food/snacks/soylenviridians
+	reagent_mix = REAGENT_REPLACE // no raw flour
+	result = /obj/item/chems/food/soylenviridians
 
-/datum/recipe/soylentgreen
+/decl/recipe/soylentgreen
 	reagents = list(/decl/material/liquid/nutriment/flour = 10)
 	items = list(
-		/obj/item/chems/food/snacks/meat/human,
-		/obj/item/chems/food/snacks/meat/human
+		/obj/item/chems/food/meat/human = 2
 	)
-	result = /obj/item/chems/food/snacks/soylentgreen
+	reagent_mix = REAGENT_REPLACE // no raw flour
+	result = /obj/item/chems/food/soylentgreen
 
-/datum/recipe/meatpie
+/decl/recipe/meatpie
 	items = list(
-		/obj/item/chems/food/snacks/sliceable/flatdough,
-		/obj/item/chems/food/snacks/cutlet
+		/obj/item/chems/food/sliceable/flatdough,
+		/obj/item/chems/food/cutlet
 	)
-	result = /obj/item/chems/food/snacks/meatpie
+	result = /obj/item/chems/food/meatpie
 
-/datum/recipe/tofupie
+/decl/recipe/tofupie
 	items = list(
-		/obj/item/chems/food/snacks/sliceable/flatdough,
-		/obj/item/chems/food/snacks/tofu,
+		/obj/item/chems/food/sliceable/flatdough,
+		/obj/item/chems/food/tofu,
 	)
-	result = /obj/item/chems/food/snacks/tofupie
+	result = /obj/item/chems/food/tofupie
 
-/datum/recipe/xemeatpie
+/decl/recipe/xemeatpie
 	items = list(
-		/obj/item/chems/food/snacks/sliceable/flatdough,
-		/obj/item/chems/food/snacks/xenomeat,
+		/obj/item/chems/food/sliceable/flatdough,
+		/obj/item/chems/food/xenomeat,
 	)
-	result = /obj/item/chems/food/snacks/xemeatpie
+	result = /obj/item/chems/food/xemeatpie
 
-/datum/recipe/bananapie
+/decl/recipe/bananapie
 	fruit = list("banana" = 1)
 	reagents = list(/decl/material/liquid/nutriment/sugar = 5)
-	items = list(/obj/item/chems/food/snacks/sliceable/flatdough)
-	result = /obj/item/chems/food/snacks/bananapie
+	items = list(/obj/item/chems/food/sliceable/flatdough)
+	result = /obj/item/chems/food/bananapie
 
-/datum/recipe/cherrypie
+/decl/recipe/cherrypie
 	fruit = list("cherries" = 1)
 	reagents = list(/decl/material/liquid/nutriment/sugar = 10)
 	items = list(
-		/obj/item/chems/food/snacks/sliceable/flatdough,
+		/obj/item/chems/food/sliceable/flatdough,
 	)
-	result = /obj/item/chems/food/snacks/cherrypie
+	result = /obj/item/chems/food/cherrypie
 
-/datum/recipe/berryclafoutis
+/decl/recipe/berryclafoutis
 	fruit = list("berries" = 1)
 	items = list(
-		/obj/item/chems/food/snacks/sliceable/flatdough,
+		/obj/item/chems/food/sliceable/flatdough,
 	)
-	result = /obj/item/chems/food/snacks/berryclafoutis
+	result = /obj/item/chems/food/berryclafoutis
 
-/datum/recipe/chaosdonut
+/decl/recipe/chaosdonut
 	reagents = list(/decl/material/liquid/frostoil = 5, /decl/material/liquid/capsaicin = 5, /decl/material/liquid/nutriment/sugar = 5)
 	items = list(
-		/obj/item/chems/food/snacks/dough
+		/obj/item/chems/food/dough
 	)
-	result = /obj/item/chems/food/snacks/donut/chaos
+	result = /obj/item/chems/food/donut/chaos
 
-/datum/recipe/meatkabob
+/decl/recipe/meatkabob
 	items = list(
 		/obj/item/stack/material/rods,
-		/obj/item/chems/food/snacks/cutlet,
-		/obj/item/chems/food/snacks/cutlet
+		/obj/item/chems/food/cutlet = 2
 	)
-	result = /obj/item/chems/food/snacks/meatkabob
+	result = /obj/item/chems/food/meatkabob
 
-/datum/recipe/tofukabob
+/decl/recipe/tofukabob
 	items = list(
 		/obj/item/stack/material/rods,
-		/obj/item/chems/food/snacks/tofu,
-		/obj/item/chems/food/snacks/tofu,
+		/obj/item/chems/food/tofu = 2,
 	)
-	result = /obj/item/chems/food/snacks/tofukabob
+	result = /obj/item/chems/food/tofukabob
 
-/datum/recipe/tofubread
+/decl/recipe/tofubread
 	items = list(
-		/obj/item/chems/food/snacks/dough,
-		/obj/item/chems/food/snacks/dough,
-		/obj/item/chems/food/snacks/dough,
-		/obj/item/chems/food/snacks/tofu,
-		/obj/item/chems/food/snacks/tofu,
-		/obj/item/chems/food/snacks/tofu,
-		/obj/item/chems/food/snacks/cheesewedge,
-		/obj/item/chems/food/snacks/cheesewedge,
-		/obj/item/chems/food/snacks/cheesewedge,
+		/obj/item/chems/food/dough = 3,
+		/obj/item/chems/food/tofu = 3,
+		/obj/item/chems/food/cheesewedge = 3,
 	)
-	result = /obj/item/chems/food/snacks/sliceable/tofubread
+	result = /obj/item/chems/food/sliceable/tofubread
 
-/datum/recipe/loadedbakedpotato
+/decl/recipe/loadedbakedpotato
 	fruit = list("potato" = 1)
-	items = list(/obj/item/chems/food/snacks/cheesewedge)
-	result = /obj/item/chems/food/snacks/loadedbakedpotato
+	items = list(/obj/item/chems/food/cheesewedge)
+	result = /obj/item/chems/food/loadedbakedpotato
 
-/datum/recipe/cheesyfries
+/decl/recipe/cheesyfries
 	items = list(
-		/obj/item/chems/food/snacks/fries,
-		/obj/item/chems/food/snacks/cheesewedge,
+		/obj/item/chems/food/fries,
+		/obj/item/chems/food/cheesewedge,
 	)
-	result = /obj/item/chems/food/snacks/cheesyfries
+	result = /obj/item/chems/food/cheesyfries
 
-/datum/recipe/cubancarp
+/decl/recipe/cubancarp
 	fruit = list("chili" = 1)
 	reagents = list(/decl/material/liquid/nutriment/batter = 10)
 	items = list(
-		/obj/item/chems/food/snacks/fish
+		/obj/item/chems/food/fish
 	)
-	result = /obj/item/chems/food/snacks/cubancarp
+	result = /obj/item/chems/food/cubancarp
 
-/datum/recipe/popcorn
-	reagents = list(/decl/material/solid/mineral/sodiumchloride = 5)
+/decl/recipe/popcorn
+	reagents = list(/decl/material/solid/sodiumchloride = 5)
 	fruit = list("corn" = 1)
-	result = /obj/item/chems/food/snacks/popcorn
+	result = /obj/item/chems/food/popcorn
 
-/datum/recipe/cookie
+/decl/recipe/cookie
+	display_name = "plain cookie"
 	reagents = list(/decl/material/liquid/nutriment/batter/cakebatter = 5, /decl/material/liquid/nutriment/coco = 5)
+	reagent_mix = REAGENT_REPLACE // no raw batter
+	result = /obj/item/chems/food/cookie
 
-	result = /obj/item/chems/food/snacks/cookie
-
-/datum/recipe/fortunecookie
+/decl/recipe/fortunecookie
 	reagents = list(/decl/material/liquid/nutriment/sugar = 5)
 	items = list(
-		/obj/item/chems/food/snacks/doughslice,
+		/obj/item/chems/food/doughslice,
 		/obj/item/paper,
 	)
-	result = /obj/item/chems/food/snacks/fortunecookie
+	result = /obj/item/chems/food/fortunecookie
 
-/datum/recipe/fortunecookie/make_food(obj/container)
+/decl/recipe/fortunecookie/make_food(obj/container)
 	var/obj/item/paper/paper = locate() in container
-	paper.loc = null //prevent deletion
-	var/obj/item/chems/food/snacks/fortunecookie/being_cooked = ..(container)
-	paper.loc = being_cooked
+	paper.forceMove(null) //prevent deletion
+	var/obj/item/chems/food/fortunecookie/being_cooked = ..(container)
+	paper.forceMove(being_cooked)
 	being_cooked.trash = paper //so the paper is left behind as trash without special-snowflake(TM Nodrak) code ~carn
 	return being_cooked
 
-/datum/recipe/fortunecookie/check_items(var/obj/container)
+/decl/recipe/fortunecookie/check_items(var/obj/container)
 	. = ..()
 	if(.)
 		var/obj/item/paper/paper = locate() in container
 		if(!paper || !paper.info)
 			return FALSE
-	return .
 
-/datum/recipe/plainsteak
-	items = list(/obj/item/chems/food/snacks/meat)
-	result = /obj/item/chems/food/snacks/plainsteak
+/decl/recipe/plainsteak
+	items = list(/obj/item/chems/food/meat)
+	result = /obj/item/chems/food/plainsteak
 
-/datum/recipe/meatsteak
-	reagents = list(/decl/material/solid/mineral/sodiumchloride = 1, /decl/material/solid/blackpepper = 1)
-	items = list(/obj/item/chems/food/snacks/cutlet)
-	result = /obj/item/chems/food/snacks/meatsteak
+/decl/recipe/meatsteak
+	reagents = list(/decl/material/solid/sodiumchloride = 1, /decl/material/solid/blackpepper = 1)
+	items = list(/obj/item/chems/food/cutlet)
+	result = /obj/item/chems/food/meatsteak
 
-/datum/recipe/loadedsteak
+/decl/recipe/loadedsteak
 	reagents = list(/decl/material/liquid/nutriment/garlicsauce = 5)
 	fruit = list("onion" = 1, "mushroom" = 1)
-	items = list(/obj/item/chems/food/snacks/cutlet)
-	result = /obj/item/chems/food/snacks/loadedsteak
+	items = list(/obj/item/chems/food/cutlet)
+	result = /obj/item/chems/food/loadedsteak
 
-/datum/recipe/syntisteak
-	reagents = list(/decl/material/solid/mineral/sodiumchloride = 1, /decl/material/solid/blackpepper = 1)
-	items = list(/obj/item/chems/food/snacks/meat/syntiflesh)
-	result = /obj/item/chems/food/snacks/meatsteak/synthetic
+/decl/recipe/syntisteak
+	reagents = list(/decl/material/solid/sodiumchloride = 1, /decl/material/solid/blackpepper = 1)
+	items = list(/obj/item/chems/food/meat/syntiflesh)
+	result = /obj/item/chems/food/meatsteak/synthetic
 
-/datum/recipe/pizzamargherita
+/decl/recipe/pizzamargherita
 	fruit = list("tomato" = 1)
 	items = list(
-		/obj/item/chems/food/snacks/sliceable/flatdough,
-		/obj/item/chems/food/snacks/cheesewedge,
-		/obj/item/chems/food/snacks/cheesewedge,
-		/obj/item/chems/food/snacks/cheesewedge,
+		/obj/item/chems/food/sliceable/flatdough,
+		/obj/item/chems/food/cheesewedge = 3,
 	)
-	result = /obj/item/chems/food/snacks/sliceable/pizza/margherita
+	result = /obj/item/chems/food/sliceable/pizza/margherita
 
-/datum/recipe/meatpizza
+/decl/recipe/meatpizza
 	fruit = list("tomato" = 1)
 	items = list(
-		/obj/item/chems/food/snacks/sliceable/flatdough,
-		/obj/item/chems/food/snacks/cutlet,
-		/obj/item/chems/food/snacks/cutlet,
-		/obj/item/chems/food/snacks/cheesewedge
+		/obj/item/chems/food/sliceable/flatdough,
+		/obj/item/chems/food/cutlet = 2,
+		/obj/item/chems/food/cheesewedge
 	)
-	result = /obj/item/chems/food/snacks/sliceable/pizza/meatpizza
+	result = /obj/item/chems/food/sliceable/pizza/meatpizza
 
-/datum/recipe/mushroompizza
+/decl/recipe/mushroompizza
 	fruit = list("mushroom" = 5, "tomato" = 1)
 	items = list(
-		/obj/item/chems/food/snacks/sliceable/flatdough,
-		/obj/item/chems/food/snacks/cheesewedge
+		/obj/item/chems/food/sliceable/flatdough,
+		/obj/item/chems/food/cheesewedge
 	)
-	result = /obj/item/chems/food/snacks/sliceable/pizza/mushroompizza
+	result = /obj/item/chems/food/sliceable/pizza/mushroompizza
 
-/datum/recipe/vegetablepizza
+/decl/recipe/vegetablepizza
 	fruit = list("eggplant" = 1, "carrot" = 1, "corn" = 1, "tomato" = 1)
 	items = list(
-		/obj/item/chems/food/snacks/sliceable/flatdough,
-		/obj/item/chems/food/snacks/cheesewedge
+		/obj/item/chems/food/sliceable/flatdough,
+		/obj/item/chems/food/cheesewedge
 	)
-	result = /obj/item/chems/food/snacks/sliceable/pizza/vegetablepizza
+	result = /obj/item/chems/food/sliceable/pizza/vegetablepizza
 
-/datum/recipe/spacylibertyduff
+/decl/recipe/spacylibertyduff
 	reagents = list(/decl/material/liquid/water = 10, /decl/material/liquid/ethanol/vodka = 5, /decl/material/liquid/psychotropics = 5)
-	result = /obj/item/chems/food/snacks/spacylibertyduff
+	result = /obj/item/chems/food/spacylibertyduff
 
-/datum/recipe/amanitajelly
+/decl/recipe/amanitajelly
 	reagents = list(/decl/material/liquid/water = 10, /decl/material/liquid/ethanol/vodka = 5, /decl/material/liquid/amatoxin = 5)
-	result = /obj/item/chems/food/snacks/amanitajelly
+	result = /obj/item/chems/food/amanitajelly
 
-/datum/recipe/amanitajelly/make_food(var/obj/container)
-	var/obj/item/chems/food/snacks/amanitajelly/being_cooked = ..(container)
+/decl/recipe/amanitajelly/make_food(var/obj/container)
+	var/obj/item/chems/food/amanitajelly/being_cooked = ..(container)
 	being_cooked.reagents.clear_reagent(/decl/material/liquid/amatoxin)
 	return being_cooked
 
-/datum/recipe/meatballsoup
+/decl/recipe/meatballsoup
 	fruit = list("carrot" = 1, "potato" = 1)
 	reagents = list(/decl/material/liquid/water = 10)
-	items = list(/obj/item/chems/food/snacks/meatball)
-	result = /obj/item/chems/food/snacks/meatballsoup
+	items = list(/obj/item/chems/food/meatball)
+	reagent_mix = REAGENT_REPLACE // Remove extra water
+	result = /obj/item/chems/food/meatballsoup
 
-/datum/recipe/vegetablesoup
+/decl/recipe/vegetablesoup
 	fruit = list("carrot" = 1, "potato" = 1, "corn" = 1, "eggplant" = 1)
 	reagents = list(/decl/material/liquid/water = 10)
-	result = /obj/item/chems/food/snacks/vegetablesoup
+	reagent_mix = REAGENT_REPLACE // Remove extra water
+	result = /obj/item/chems/food/vegetablesoup
 
-/datum/recipe/nettlesoup
+/decl/recipe/nettlesoup
 	fruit = list("nettle" = 1, "potato" = 1)
 	reagents = list(/decl/material/liquid/water = 10)
 	items = list(
-		/obj/item/chems/food/snacks/egg
+		/obj/item/chems/food/egg
 	)
-	result = /obj/item/chems/food/snacks/nettlesoup
+	reagent_mix = REAGENT_REPLACE // Remove extra water and egg
+	result = /obj/item/chems/food/nettlesoup
 
-/datum/recipe/wishsoup
+/decl/recipe/wishsoup
 	reagents = list(/decl/material/liquid/water = 20)
-	result= /obj/item/chems/food/snacks/wishsoup
+	reagent_mix = REAGENT_REPLACE // Remove extra water
+	result= /obj/item/chems/food/wishsoup
 
-/datum/recipe/hotchili
+/decl/recipe/hotchili
 	fruit = list("chili" = 1, "tomato" = 1)
-	items = list(/obj/item/chems/food/snacks/cutlet)
-	result = /obj/item/chems/food/snacks/hotchili
+	items = list(/obj/item/chems/food/cutlet)
+	result = /obj/item/chems/food/hotchili
 
-/datum/recipe/coldchili
+/decl/recipe/coldchili
 	fruit = list("icechili" = 1, "tomato" = 1)
-	items = list(/obj/item/chems/food/snacks/cutlet)
-	result = /obj/item/chems/food/snacks/coldchili
+	items = list(/obj/item/chems/food/cutlet)
+	result = /obj/item/chems/food/coldchili
 
-/datum/recipe/amanita_pie
+/decl/recipe/amanita_pie
 	reagents = list(/decl/material/liquid/amatoxin = 5)
-	items = list(/obj/item/chems/food/snacks/sliceable/flatdough)
-	result = /obj/item/chems/food/snacks/amanita_pie
+	items = list(/obj/item/chems/food/sliceable/flatdough)
+	result = /obj/item/chems/food/amanita_pie
 
-/datum/recipe/plump_pie
+/decl/recipe/plump_pie
 	fruit = list("plumphelmet" = 1)
-	items = list(/obj/item/chems/food/snacks/sliceable/flatdough)
-	result = /obj/item/chems/food/snacks/plump_pie
+	items = list(/obj/item/chems/food/sliceable/flatdough)
+	result = /obj/item/chems/food/plump_pie
 
-/datum/recipe/spellburger
+/decl/recipe/spellburger
 	items = list(
-		/obj/item/chems/food/snacks/meatburger,
+		/obj/item/chems/food/burger,
 		/obj/item/clothing/head/wizard,
 	)
-	result = /obj/item/chems/food/snacks/spellburger
+	result = /obj/item/chems/food/spellburger
 
-/datum/recipe/bigbiteburger
+/decl/recipe/bigbiteburger
 	items = list(
-		/obj/item/chems/food/snacks/meatburger,
-		/obj/item/chems/food/snacks/meat,
-		/obj/item/chems/food/snacks/meat,
-		/obj/item/chems/food/snacks/egg,
+		/obj/item/chems/food/burger,
+		/obj/item/chems/food/meat = 2,
+		/obj/item/chems/food/egg,
 	)
-	result = /obj/item/chems/food/snacks/bigbiteburger
+	reagent_mix = REAGENT_REPLACE // no raw egg
+	result = /obj/item/chems/food/bigbiteburger
 
-/datum/recipe/enchiladas
+/decl/recipe/enchiladas
 	fruit = list("chili" = 2, "corn" = 1)
-	items = list(/obj/item/chems/food/snacks/cutlet)
-	result = /obj/item/chems/food/snacks/enchiladas
+	items = list(/obj/item/chems/food/cutlet)
+	result = /obj/item/chems/food/enchiladas
 
-/datum/recipe/creamcheesebread
+/decl/recipe/creamcheesebread
 	items = list(
-		/obj/item/chems/food/snacks/dough,
-		/obj/item/chems/food/snacks/dough,
-		/obj/item/chems/food/snacks/cheesewedge,
-		/obj/item/chems/food/snacks/cheesewedge,
+		/obj/item/chems/food/dough = 2,
+		/obj/item/chems/food/cheesewedge = 2,
 	)
-	result = /obj/item/chems/food/snacks/sliceable/creamcheesebread
+	result = /obj/item/chems/food/sliceable/creamcheesebread
 
-/datum/recipe/monkeysdelight
+/decl/recipe/monkeysdelight
 	fruit = list("banana" = 1)
-	reagents = list(/decl/material/solid/mineral/sodiumchloride = 1, /decl/material/solid/blackpepper = 1, /decl/material/liquid/nutriment/flour = 10)
+	reagents = list(/decl/material/solid/sodiumchloride = 1, /decl/material/solid/blackpepper = 1, /decl/material/liquid/nutriment/flour = 10)
 	items = list(
-		/obj/item/chems/food/snacks/monkeycube
+		/obj/item/chems/food/monkeycube
 	)
-	result = /obj/item/chems/food/snacks/monkeysdelight
+	result = /obj/item/chems/food/monkeysdelight
 
-/datum/recipe/baguette
-	reagents = list(/decl/material/solid/mineral/sodiumchloride = 1, /decl/material/solid/blackpepper = 1)
+/decl/recipe/baguette
+	reagents = list(/decl/material/solid/sodiumchloride = 1, /decl/material/solid/blackpepper = 1)
 	items = list(
-		/obj/item/chems/food/snacks/dough,
-		/obj/item/chems/food/snacks/dough,
+		/obj/item/chems/food/dough = 2,
 	)
-	result = /obj/item/chems/food/snacks/baguette
+	result = /obj/item/chems/food/baguette
 
-/datum/recipe/fishandchips
+/decl/recipe/fishandchips
 	items = list(
-		/obj/item/chems/food/snacks/fries,
-		/obj/item/chems/food/snacks/fish
+		/obj/item/chems/food/fries,
+		/obj/item/chems/food/fish
 	)
-	result = /obj/item/chems/food/snacks/fishandchips
+	result = /obj/item/chems/food/fishandchips
 
-/datum/recipe/bread
+/decl/recipe/bread
+	display_name = "loaf of bread"
 	items = list(
-		/obj/item/chems/food/snacks/dough,
-		/obj/item/chems/food/snacks/dough,
-		/obj/item/chems/food/snacks/egg
+		/obj/item/chems/food/dough = 2,
+		/obj/item/chems/food/egg
 	)
-	result = /obj/item/chems/food/snacks/sliceable/bread
+	reagent_mix = REAGENT_REPLACE // no raw egg/flour
+	result = /obj/item/chems/food/sliceable/bread
 
-/datum/recipe/sandwich
+/decl/recipe/sandwich
+	display_name = "plain sandwich"
 	items = list(
-		/obj/item/chems/food/snacks/meatsteak,
-		/obj/item/chems/food/snacks/slice/bread,
-		/obj/item/chems/food/snacks/slice/bread,
-		/obj/item/chems/food/snacks/cheesewedge,
+		/obj/item/chems/food/meatsteak,
+		/obj/item/chems/food/slice/bread = 2,
+		/obj/item/chems/food/cheesewedge,
 	)
-	result = /obj/item/chems/food/snacks/sandwich
+	result = /obj/item/chems/food/sandwich
 
-/datum/recipe/toastedsandwich
+/decl/recipe/toastedsandwich
 	items = list(
-		/obj/item/chems/food/snacks/sandwich
+		/obj/item/chems/food/sandwich
 	)
-	result = /obj/item/chems/food/snacks/toastedsandwich
+	result = /obj/item/chems/food/toastedsandwich
 
-/datum/recipe/grilledcheese
+/decl/recipe/grilledcheese
 	items = list(
-		/obj/item/chems/food/snacks/slice/bread,
-		/obj/item/chems/food/snacks/slice/bread,
-		/obj/item/chems/food/snacks/cheesewedge,
+		/obj/item/chems/food/slice/bread = 2,
+		/obj/item/chems/food/cheesewedge,
 	)
-	result = /obj/item/chems/food/snacks/grilledcheese
+	result = /obj/item/chems/food/grilledcheese
 
-/datum/recipe/tomatosoup
+/decl/recipe/tomatosoup
 	fruit = list("tomato" = 2)
 	reagents = list(/decl/material/liquid/water = 10)
-	result = /obj/item/chems/food/snacks/tomatosoup
+	result = /obj/item/chems/food/tomatosoup
 
-/datum/recipe/rofflewaffles
+/decl/recipe/rofflewaffles
 	reagents = list(/decl/material/liquid/psychotropics = 5, /decl/material/liquid/nutriment/batter/cakebatter = 20)
-	result = /obj/item/chems/food/snacks/rofflewaffles
+	result = /obj/item/chems/food/rofflewaffles
 
-/datum/recipe/stew
+/decl/recipe/stew
 	fruit = list("potato" = 1, "tomato" = 1, "carrot" = 1, "eggplant" = 1, "mushroom" = 1)
 	reagents = list(/decl/material/liquid/water = 10)
-	items = list(/obj/item/chems/food/snacks/meat)
-	result = /obj/item/chems/food/snacks/stew
+	items = list(/obj/item/chems/food/meat)
+	result = /obj/item/chems/food/stew
 
-/datum/recipe/jelliedtoast
+/decl/recipe/jelliedtoast
 	reagents = list(/decl/material/liquid/nutriment/cherryjelly = 5)
 	items = list(
-		/obj/item/chems/food/snacks/slice/bread,
+		/obj/item/chems/food/slice/bread,
 	)
-	result = /obj/item/chems/food/snacks/jelliedtoast/cherry
+	result = /obj/item/chems/food/jelliedtoast/cherry
 
-/datum/recipe/milosoup
+/decl/recipe/milosoup
 	reagents = list(/decl/material/liquid/water = 10)
 	items = list(
-		/obj/item/chems/food/snacks/soydope,
-		/obj/item/chems/food/snacks/soydope,
-		/obj/item/chems/food/snacks/tofu,
-		/obj/item/chems/food/snacks/tofu,
+		/obj/item/chems/food/soydope = 2,
+		/obj/item/chems/food/tofu = 2,
 	)
-	result = /obj/item/chems/food/snacks/milosoup
+	result = /obj/item/chems/food/milosoup
 
-/datum/recipe/stewedsoymeat
+/decl/recipe/stewedsoymeat
 	fruit = list("carrot" = 1, "tomato" = 1)
 	items = list(
-		/obj/item/chems/food/snacks/soydope,
-		/obj/item/chems/food/snacks/soydope
+		/obj/item/chems/food/soydope = 2
 	)
-	result = /obj/item/chems/food/snacks/stewedsoymeat
+	result = /obj/item/chems/food/stewedsoymeat
 
-/datum/recipe/boiledspagetti
+/decl/recipe/boiledspagetti
 	reagents = list(/decl/material/liquid/water = 10)
 	items = list(
-		/obj/item/chems/food/snacks/spagetti,
+		/obj/item/chems/food/spagetti,
 	)
-	result = /obj/item/chems/food/snacks/boiledspagetti
+	result = /obj/item/chems/food/boiledspagetti
 
-/datum/recipe/boiledrice
+/decl/recipe/boiledrice
 	reagents = list(/decl/material/liquid/water = 10, /decl/material/liquid/nutriment/rice = 10)
-	result = /obj/item/chems/food/snacks/boiledrice
+	result = /obj/item/chems/food/boiledrice
 
-/datum/recipe/chazuke
+/decl/recipe/chazuke
 	reagents = list(/decl/material/liquid/nutriment/rice/chazuke = 10)
-	result = /obj/item/chems/food/snacks/boiledrice/chazuke
+	result = /obj/item/chems/food/boiledrice/chazuke
 
-/datum/recipe/katsucurry
+/decl/recipe/katsucurry
 	fruit = list("apple" = 1, "carrot" = 1, "potato" = 1)
 	reagents = list(/decl/material/liquid/water = 10, /decl/material/liquid/nutriment/rice = 10, /decl/material/liquid/nutriment/flour = 5)
 	items = list(
-		/obj/item/chems/food/snacks/meat/chicken
+		/obj/item/chems/food/meat/chicken
 	)
-	result = /obj/item/chems/food/snacks/katsucurry
+	result = /obj/item/chems/food/katsucurry
 
-/datum/recipe/ricepudding
+/decl/recipe/ricepudding
 	reagents = list(/decl/material/liquid/drink/milk = 5, /decl/material/liquid/nutriment/rice = 10)
-	result = /obj/item/chems/food/snacks/ricepudding
+	result = /obj/item/chems/food/ricepudding
 
-/datum/recipe/pastatomato
+/decl/recipe/pastatomato
 	fruit = list("tomato" = 2)
 	reagents = list(/decl/material/liquid/water = 10)
-	items = list(/obj/item/chems/food/snacks/spagetti)
-	result = /obj/item/chems/food/snacks/pastatomato
+	items = list(/obj/item/chems/food/spagetti)
+	result = /obj/item/chems/food/pastatomato
 
-/datum/recipe/poppypretzel
+/decl/recipe/poppypretzel
 	fruit = list("poppy" = 1)
-	items = list(/obj/item/chems/food/snacks/dough)
-	result = /obj/item/chems/food/snacks/poppypretzel
+	items = list(/obj/item/chems/food/dough)
+	result = /obj/item/chems/food/poppypretzel
 
-/datum/recipe/meatballspagetti
+/decl/recipe/meatballspagetti
 	reagents = list(/decl/material/liquid/water = 10)
 	items = list(
-		/obj/item/chems/food/snacks/spagetti,
-		/obj/item/chems/food/snacks/meatball,
-		/obj/item/chems/food/snacks/meatball,
+		/obj/item/chems/food/spagetti,
+		/obj/item/chems/food/meatball = 2,
 	)
-	result = /obj/item/chems/food/snacks/meatballspagetti
+	result = /obj/item/chems/food/meatballspagetti
 
-/datum/recipe/spesslaw
+/decl/recipe/spesslaw
 	reagents = list(/decl/material/liquid/water = 10)
 	items = list(
-		/obj/item/chems/food/snacks/spagetti,
-		/obj/item/chems/food/snacks/meatball,
-		/obj/item/chems/food/snacks/meatball,
-		/obj/item/chems/food/snacks/meatball,
-		/obj/item/chems/food/snacks/meatball,
+		/obj/item/chems/food/spagetti,
+		/obj/item/chems/food/meatball = 4,
 	)
-	result = /obj/item/chems/food/snacks/spesslaw
+	result = /obj/item/chems/food/spesslaw
 
-/datum/recipe/nanopasta
+/decl/recipe/nanopasta
 	reagents = list(/decl/material/liquid/water = 10)
-	items = list(/obj/item/chems/food/snacks/spagetti,
-				/obj/item/stack/nanopaste)
-	result = /obj/item/chems/food/snacks/nanopasta
+	items = list(
+		/obj/item/chems/food/spagetti,
+		/obj/item/stack/nanopaste
+	)
+	result = /obj/item/chems/food/nanopasta
 
-/datum/recipe/superbiteburger
+/decl/recipe/superbiteburger
 	fruit = list("tomato" = 1)
-	reagents = list(/decl/material/solid/mineral/sodiumchloride = 5, /decl/material/solid/blackpepper = 5)
+	reagents = list(/decl/material/solid/sodiumchloride = 5, /decl/material/solid/blackpepper = 5)
 	items = list(
-		/obj/item/chems/food/snacks/bigbiteburger,
-		/obj/item/chems/food/snacks/dough,
-		/obj/item/chems/food/snacks/meat,
-		/obj/item/chems/food/snacks/cheesewedge,
-		/obj/item/chems/food/snacks/boiledegg,
+		/obj/item/chems/food/bigbiteburger,
+		/obj/item/chems/food/dough,
+		/obj/item/chems/food/meat,
+		/obj/item/chems/food/cheesewedge,
+		/obj/item/chems/food/boiledegg,
 	)
-	result = /obj/item/chems/food/snacks/superbiteburger
+	result = /obj/item/chems/food/superbiteburger
 
-/datum/recipe/candiedapple
+/decl/recipe/candiedapple
 	fruit = list("apple" = 1)
 	reagents = list(/decl/material/liquid/water = 10, /decl/material/liquid/nutriment/sugar = 5)
-	result = /obj/item/chems/food/snacks/candiedapple
+	result = /obj/item/chems/food/candiedapple
 
-/datum/recipe/applepie
+/decl/recipe/applepie
 	fruit = list("apple" = 1)
-	items = list(/obj/item/chems/food/snacks/sliceable/flatdough)
-	result = /obj/item/chems/food/snacks/applepie
+	items = list(/obj/item/chems/food/sliceable/flatdough)
+	result = /obj/item/chems/food/applepie
 
-/datum/recipe/jellyburger
+/decl/recipe/jellyburger
 	reagents = list(/decl/material/liquid/nutriment/cherryjelly = 5)
 	items = list(
-		/obj/item/chems/food/snacks/bun
+		/obj/item/chems/food/bun
 	)
-	result = /obj/item/chems/food/snacks/jellyburger/cherry
+	result = /obj/item/chems/food/jellyburger/cherry
 
-/datum/recipe/twobread
+/decl/recipe/twobread
 	reagents = list(/decl/material/liquid/ethanol/wine = 5)
 	items = list(
-		/obj/item/chems/food/snacks/slice/bread,
-		/obj/item/chems/food/snacks/slice/bread,
+		/obj/item/chems/food/slice/bread = 2,
 	)
-	result = /obj/item/chems/food/snacks/twobread
+	result = /obj/item/chems/food/twobread
 
-/datum/recipe/threebread
+/decl/recipe/threebread
 	items = list(
-		/obj/item/chems/food/snacks/twobread,
-		/obj/item/chems/food/snacks/slice/bread,
+		/obj/item/chems/food/twobread,
+		/obj/item/chems/food/slice/bread,
 	)
-	result = /obj/item/chems/food/snacks/threebread
+	result = /obj/item/chems/food/threebread
 
-/datum/recipe/cherrysandwich
+/decl/recipe/cherrysandwich
 	reagents = list(/decl/material/liquid/nutriment/cherryjelly = 5)
 	items = list(
-		/obj/item/chems/food/snacks/slice/bread,
-		/obj/item/chems/food/snacks/slice/bread,
+		/obj/item/chems/food/slice/bread = 2,
 	)
-	result = /obj/item/chems/food/snacks/jellysandwich/cherry
+	result = /obj/item/chems/food/jellysandwich/cherry
 
-/datum/recipe/bloodsoup
+/decl/recipe/bloodsoup
 	reagents = list(/decl/material/liquid/blood = 30)
-	result = /obj/item/chems/food/snacks/bloodsoup
+	result = /obj/item/chems/food/bloodsoup
+	hidden_from_codex = TRUE
 
-/datum/recipe/chocolateegg
+/decl/recipe/chocolateegg
 	items = list(
-		/obj/item/chems/food/snacks/egg,
-		/obj/item/chems/food/snacks/chocolatebar,
+		/obj/item/chems/food/egg,
+		/obj/item/chems/food/chocolatebar,
 	)
-	result = /obj/item/chems/food/snacks/chocolateegg
+	reagent_mix = REAGENT_REPLACE // no raw egg
+	result = /obj/item/chems/food/chocolateegg
 
-/datum/recipe/sausage
+/decl/recipe/sausage
+	display_name = "plain sausage"
 	items = list(
-		/obj/item/chems/food/snacks/rawmeatball,
-		/obj/item/chems/food/snacks/rawcutlet,
+		/obj/item/chems/food/rawmeatball,
+		/obj/item/chems/food/rawcutlet,
 	)
-	result = /obj/item/chems/food/snacks/sausage
+	result = /obj/item/chems/food/sausage
 
-/datum/recipe/fatsausage
+/decl/recipe/fatsausage
 	reagents = list(/decl/material/solid/blackpepper = 2)
 	items = list(
-		/obj/item/chems/food/snacks/rawmeatball,
-		/obj/item/chems/food/snacks/rawcutlet,
+		/obj/item/chems/food/rawmeatball,
+		/obj/item/chems/food/rawcutlet,
 	)
-	result = /obj/item/chems/food/snacks/fatsausage
+	result = /obj/item/chems/food/fatsausage
 
-/datum/recipe/fishfingers
+/decl/recipe/fishfingers
 	reagents = list(/decl/material/liquid/nutriment/flour = 10)
 	items = list(
-		/obj/item/chems/food/snacks/egg,
-		/obj/item/chems/food/snacks/fish
+		/obj/item/chems/food/egg,
+		/obj/item/chems/food/fish
 	)
-	result = /obj/item/chems/food/snacks/fishfingers
+	reagent_mix = REAGENT_REPLACE // no raw egg/fish
+	result = /obj/item/chems/food/fishfingers
 
-/datum/recipe/mysterysoup
+/decl/recipe/mysterysoup
 	reagents = list(/decl/material/liquid/water = 10)
 	items = list(
-		/obj/item/chems/food/snacks/badrecipe,
-		/obj/item/chems/food/snacks/tofu,
-		/obj/item/chems/food/snacks/egg,
-		/obj/item/chems/food/snacks/cheesewedge,
+		/obj/item/chems/food/badrecipe,
+		/obj/item/chems/food/tofu,
+		/obj/item/chems/food/egg,
+		/obj/item/chems/food/cheesewedge,
 	)
-	result = /obj/item/chems/food/snacks/mysterysoup
+	reagent_mix = REAGENT_REPLACE // Has its own special products
+	result = /obj/item/chems/food/mysterysoup
 
-/datum/recipe/pumpkinpie
+/decl/recipe/pumpkinpie
 	fruit = list("pumpkin" = 1)
 	reagents = list(/decl/material/liquid/nutriment/sugar = 5)
-	items = list(/obj/item/chems/food/snacks/sliceable/flatdough)
-	result = /obj/item/chems/food/snacks/sliceable/pumpkinpie
+	items = list(/obj/item/chems/food/sliceable/flatdough)
+	reagent_mix = REAGENT_REPLACE // no raw flour
+	result = /obj/item/chems/food/sliceable/pumpkinpie
 
-/datum/recipe/plumphelmetbiscuit
+/decl/recipe/plumphelmetbiscuit
 	fruit = list("plumphelmet" = 1)
 	reagents = list(/decl/material/liquid/nutriment/batter = 10)
-	result = /obj/item/chems/food/snacks/plumphelmetbiscuit
+	result = /obj/item/chems/food/plumphelmetbiscuit
 
-/datum/recipe/plumphelmetbiscuitvegan
+/decl/recipe/plumphelmetbiscuitvegan
+	display_name = "Vegan Plump Biscuit"
 	fruit = list("plumphelmet" = 1)
 	reagents = list(/decl/material/liquid/nutriment/flour = 10, /decl/material/liquid/water = 10)
-	result = /obj/item/chems/food/snacks/plumphelmetbiscuit
+	result = /obj/item/chems/food/plumphelmetbiscuit
 
-/datum/recipe/mushroomsoup
+/decl/recipe/mushroomsoup
 	fruit = list("mushroom" = 1)
 	reagents = list(/decl/material/liquid/drink/milk = 10)
-	result = /obj/item/chems/food/snacks/mushroomsoup
+	reagent_mix = REAGENT_REPLACE // get that milk outta here
+	result = /obj/item/chems/food/mushroomsoup
 
-/datum/recipe/chawanmushi
+/decl/recipe/chawanmushi
 	fruit = list("mushroom" = 1)
 	reagents = list(/decl/material/liquid/water = 10, /decl/material/liquid/nutriment/soysauce = 5)
 	items = list(
-		/obj/item/chems/food/snacks/egg,
-		/obj/item/chems/food/snacks/egg
+		/obj/item/chems/food/egg = 2
 	)
-	result = /obj/item/chems/food/snacks/chawanmushi
+	reagent_mix = REAGENT_REPLACE // no raw egg
+	result = /obj/item/chems/food/chawanmushi
 
-/datum/recipe/beetsoup
+/decl/recipe/beetsoup
 	fruit = list("whitebeet" = 1, "cabbage" = 1)
 	reagents = list(/decl/material/liquid/water = 10)
-	result = /obj/item/chems/food/snacks/beetsoup
+	result = /obj/item/chems/food/beetsoup
 
-/datum/recipe/appletart
+/decl/recipe/appletart
 	fruit = list("goldapple" = 1)
-	items = list(/obj/item/chems/food/snacks/sliceable/flatdough)
-	result = /obj/item/chems/food/snacks/appletart
+	items = list(/obj/item/chems/food/sliceable/flatdough)
+	reagent_mix = REAGENT_REPLACE // no raw flour
+	result = /obj/item/chems/food/appletart
 
-/datum/recipe/tossedsalad
+/decl/recipe/tossedsalad
 	fruit = list("cabbage" = 2, "tomato" = 1, "carrot" = 1, "apple" = 1)
-	result = /obj/item/chems/food/snacks/tossedsalad
+	result = /obj/item/chems/food/tossedsalad
 
-/datum/recipe/aesirsalad
+/decl/recipe/aesirsalad
 	fruit = list("goldapple" = 1, "biteleafdeus" = 1)
-	result = /obj/item/chems/food/snacks/aesirsalad
+	result = /obj/item/chems/food/aesirsalad
 
-/datum/recipe/validsalad
+/decl/recipe/validsalad
 	fruit = list("potato" = 1, "biteleaf" = 3)
-	items = list(/obj/item/chems/food/snacks/meatball)
-	result = /obj/item/chems/food/snacks/validsalad
+	items = list(/obj/item/chems/food/meatball)
+	result = /obj/item/chems/food/validsalad
 
-/datum/recipe/cracker
-	reagents = list(/decl/material/solid/mineral/sodiumchloride = 1)
+/decl/recipe/cracker
+	reagents = list(/decl/material/solid/sodiumchloride = 1)
 	items = list(
-		/obj/item/chems/food/snacks/doughslice
+		/obj/item/chems/food/doughslice
 	)
-	result = /obj/item/chems/food/snacks/cracker
+	result = /obj/item/chems/food/cracker
 
-/datum/recipe/stuffing
-	reagents = list(/decl/material/liquid/water = 10, /decl/material/solid/mineral/sodiumchloride = 1, /decl/material/solid/blackpepper = 1)
+/decl/recipe/stuffing
+	reagents = list(/decl/material/liquid/water = 10, /decl/material/solid/sodiumchloride = 1, /decl/material/solid/blackpepper = 1)
 	items = list(
-		/obj/item/chems/food/snacks/sliceable/bread,
+		/obj/item/chems/food/sliceable/bread,
 	)
-	result = /obj/item/chems/food/snacks/stuffing
+	result = /obj/item/chems/food/stuffing
 
-/datum/recipe/tofurkey
+/decl/recipe/tofurkey
 	items = list(
-		/obj/item/chems/food/snacks/tofu,
-		/obj/item/chems/food/snacks/tofu,
-		/obj/item/chems/food/snacks/stuffing,
+		/obj/item/chems/food/tofu = 2,
+		/obj/item/chems/food/stuffing,
 	)
-	result = /obj/item/chems/food/snacks/tofurkey
+	result = /obj/item/chems/food/tofurkey
 
 //////////////////////////////////////////
 // bs12 food port stuff
 //////////////////////////////////////////
 
-/datum/recipe/taco
+/decl/recipe/taco
 	items = list(
-		/obj/item/chems/food/snacks/doughslice,
-		/obj/item/chems/food/snacks/cutlet,
-		/obj/item/chems/food/snacks/cheesewedge
+		/obj/item/chems/food/doughslice,
+		/obj/item/chems/food/cutlet,
+		/obj/item/chems/food/cheesewedge
 	)
-	result = /obj/item/chems/food/snacks/taco
+	result = /obj/item/chems/food/taco
 
-/datum/recipe/bun
+/decl/recipe/bun
+	display_name = "plain bun"
 	items = list(
-		/obj/item/chems/food/snacks/dough
+		/obj/item/chems/food/dough
 	)
-	result = /obj/item/chems/food/snacks/bun
+	result = /obj/item/chems/food/bun
 
-/datum/recipe/flatbread
+/decl/recipe/flatbread
 	items = list(
-		/obj/item/chems/food/snacks/sliceable/flatdough
+		/obj/item/chems/food/sliceable/flatdough
 	)
-	result = /obj/item/chems/food/snacks/flatbread
+	result = /obj/item/chems/food/flatbread
 
-/datum/recipe/meatball
+/decl/recipe/meatball
 	items = list(
-		/obj/item/chems/food/snacks/rawmeatball
+		/obj/item/chems/food/rawmeatball
 	)
-	result = /obj/item/chems/food/snacks/meatball
+	result = /obj/item/chems/food/meatball
 
-/datum/recipe/cutlet
+/decl/recipe/cutlet
 	items = list(
-		/obj/item/chems/food/snacks/rawcutlet
+		/obj/item/chems/food/rawcutlet
 	)
-	result = /obj/item/chems/food/snacks/cutlet
+	result = /obj/item/chems/food/cutlet
 
-/datum/recipe/fries
+/decl/recipe/fries
+	display_name = "potato chips"
 	items = list(
-		/obj/item/chems/food/snacks/rawsticks
+		/obj/item/chems/food/rawsticks
 	)
-	result = /obj/item/chems/food/snacks/fries
+	result = /obj/item/chems/food/fries
 
-/datum/recipe/onionrings
+/decl/recipe/onionrings
 	fruit = list("onion" = 1)
 	reagents = list(/decl/material/liquid/nutriment/batter = 10)
-	result = /obj/item/chems/food/snacks/onionrings
+	result = /obj/item/chems/food/onionrings
 
-/datum/recipe/mint
+/decl/recipe/mint
 	reagents = list(/decl/material/liquid/nutriment/sugar = 5, /decl/material/liquid/frostoil = 5)
-	result = /obj/item/chems/food/snacks/mint
+	result = /obj/item/chems/food/mint
 
 // Cakes.
-/datum/recipe/cake
+/decl/recipe/cake
 	reagents = list(/decl/material/liquid/nutriment/batter/cakebatter = 60)
-	result = /obj/item/chems/food/snacks/sliceable/plaincake
+	reagent_mix = REAGENT_REPLACE // no raw batter
+	result = /obj/item/chems/food/sliceable/plaincake
 
-/datum/recipe/cake/carrot
+/decl/recipe/cake/carrot
 	fruit = list("carrot" = 3)
-	result = /obj/item/chems/food/snacks/sliceable/carrotcake
+	result = /obj/item/chems/food/sliceable/carrotcake
 
-/datum/recipe/cake/cheese
+/decl/recipe/cake/cheese
 	items = list(
-		/obj/item/chems/food/snacks/cheesewedge,
-		/obj/item/chems/food/snacks/cheesewedge
+		/obj/item/chems/food/cheesewedge = 2
 	)
-	result = /obj/item/chems/food/snacks/sliceable/cheesecake
+	result = /obj/item/chems/food/sliceable/cheesecake
 
-/datum/recipe/cake/orange
+/decl/recipe/cake/orange
 	fruit = list("orange" = 1)
-	result = /obj/item/chems/food/snacks/sliceable/orangecake
+	result = /obj/item/chems/food/sliceable/orangecake
 
-/datum/recipe/cake/lime
+/decl/recipe/cake/lime
 	fruit = list("lime" = 1)
-	result = /obj/item/chems/food/snacks/sliceable/limecake
+	result = /obj/item/chems/food/sliceable/limecake
 
-/datum/recipe/cake/lemon
+/decl/recipe/cake/lemon
 	fruit = list("lemon" = 1)
-	result = /obj/item/chems/food/snacks/sliceable/lemoncake
+	result = /obj/item/chems/food/sliceable/lemoncake
 
-/datum/recipe/cake/chocolate
-	items = list(/obj/item/chems/food/snacks/chocolatebar)
-	result = /obj/item/chems/food/snacks/sliceable/chocolatecake
+/decl/recipe/cake/chocolate
+	items = list(/obj/item/chems/food/chocolatebar)
+	result = /obj/item/chems/food/sliceable/chocolatecake
 
-/datum/recipe/cake/birthday
+/decl/recipe/cake/birthday
 	reagents = list(/decl/material/liquid/nutriment/batter/cakebatter = 60, /decl/material/liquid/nutriment/sprinkles = 10)
-	result = /obj/item/chems/food/snacks/sliceable/birthdaycake
+	result = /obj/item/chems/food/sliceable/birthdaycake
 
-/datum/recipe/cake/apple
+/decl/recipe/cake/apple
 	fruit = list("apple" = 2)
-	result = /obj/item/chems/food/snacks/sliceable/applecake
+	result = /obj/item/chems/food/sliceable/applecake
 
-/datum/recipe/cake/brain
+/decl/recipe/cake/brain
 	items = list(/obj/item/organ/internal/brain)
-	result = /obj/item/chems/food/snacks/sliceable/braincake
+	result = /obj/item/chems/food/sliceable/braincake
 
-/datum/recipe/cake/chocolatebar
+/decl/recipe/cake/chocolatebar
 	reagents = list(/decl/material/liquid/drink/milk/chocolate = 10, /decl/material/liquid/nutriment/coco = 5, /decl/material/liquid/nutriment/sugar = 5)
-	result = /obj/item/chems/food/snacks/chocolatebar
+	result = /obj/item/chems/food/chocolatebar
 
-/datum/recipe/boiledspiderleg
+/decl/recipe/boiledspiderleg
 	reagents = list(/decl/material/liquid/water = 10)
 	items = list(
-		/obj/item/chems/food/snacks/spider
+		/obj/item/chems/food/spider
 	)
-	result = /obj/item/chems/food/snacks/spider/cooked
+	result = /obj/item/chems/food/spider/cooked
 
-/datum/recipe/pelmen
+/decl/recipe/pelmen
 	items = list(
-		/obj/item/chems/food/snacks/doughslice,
-		/obj/item/chems/food/snacks/doughslice,
-		/obj/item/chems/food/snacks/rawmeatball
+		/obj/item/chems/food/doughslice = 2,
+		/obj/item/chems/food/rawmeatball
 	)
-	result = /obj/item/chems/food/snacks/pelmen
+	result = /obj/item/chems/food/pelmen
 
-/datum/recipe/pelmeni_boiled
+/decl/recipe/pelmeni_boiled
 	reagents = list(/decl/material/liquid/water = 10)
 	items = list(
-		/obj/item/chems/food/snacks/pelmen,
-		/obj/item/chems/food/snacks/pelmen,
-		/obj/item/chems/food/snacks/pelmen,
-		/obj/item/chems/food/snacks/pelmen,
-		/obj/item/chems/food/snacks/pelmen
+		/obj/item/chems/food/pelmen = 5
 	)
-	result = /obj/item/chems/food/snacks/pelmeni_boiled
+	result = /obj/item/chems/food/pelmeni_boiled

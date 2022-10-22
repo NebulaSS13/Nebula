@@ -26,7 +26,7 @@ SUBSYSTEM_DEF(jobs)
 
 /datum/controller/subsystem/jobs/proc/get_department_by_type(var/dept_ref)
 	if(!length(departments_by_type))
-		departments_by_type = sortTim(decls_repository.get_decls_of_subtype(/decl/department), /proc/cmp_departments_dsc, TRUE)
+		departments_by_type = sortTim(decls_repository.get_decls_of_type(/decl/department), /proc/cmp_departments_dsc, TRUE)
 	. = departments_by_type[dept_ref]
 
 /datum/controller/subsystem/jobs/Initialize(timeofday)
@@ -38,10 +38,6 @@ SUBSYSTEM_DEF(jobs)
 		if(!job)
 			job = new jobtype
 		primary_job_datums += job
-
-	for(var/datum/job/job in primary_job_datums)
-		if(isnull(job.primary_department))
-			job.primary_department = job.department_types[1]
 
 	// Create abstract submap archetype jobs for use in prefs, etc.
 	archetype_job_datums.Cut()
@@ -78,7 +74,7 @@ SUBSYSTEM_DEF(jobs)
 				if(J)
 					J.total_positions = text2num(value)
 					J.spawn_positions = text2num(value)
-					if(name == "AI" || name == "Robot")//I dont like this here but it will do for now
+					if((ASSIGNMENT_ROBOT in J.event_categories) || (ASSIGNMENT_COMPUTER in J.event_categories))
 						J.total_positions = 0
 
 	// Init skills.
@@ -89,6 +85,7 @@ SUBSYSTEM_DEF(jobs)
 
 	// Update title and path tracking, submap list, etc.
 	// Populate/set up map job lists.
+	primary_job_datums = sortTim(primary_job_datums, /proc/cmp_job_desc)
 	job_lists_by_map_name = list("[global.using_map.full_name]" = list("jobs" = primary_job_datums, "default_to_hidden" = FALSE))
 
 	for(var/atype in submap_archetypes)
@@ -99,6 +96,7 @@ SUBSYSTEM_DEF(jobs)
 			if(job)
 				LAZYADD(submap_job_datums, job)
 		if(LAZYLEN(submap_job_datums))
+			submap_job_datums = sortTim(submap_job_datums, /proc/cmp_job_desc)
 			job_lists_by_map_name[arch.descriptor] = list("jobs" = submap_job_datums, "default_to_hidden" = TRUE)
 
 	// Update global map blacklists and whitelists.
@@ -129,9 +127,6 @@ SUBSYSTEM_DEF(jobs)
 	// Set up syndicate phrases.
 	syndicate_code_phrase = generate_code_phrase()
 	syndicate_code_response	= generate_code_phrase()
-
-	// Set up AI spawn locations
-	spawn_empty_ai()
 
 	. = ..()
 
@@ -417,37 +412,37 @@ SUBSYSTEM_DEF(jobs)
 	var/list/loadout_taken_slots = list()
 	if(H.client.prefs.Gear() && job.loadout_allowed)
 		for(var/thing in H.client.prefs.Gear())
-			var/datum/gear/G = gear_datums[thing]
+			var/decl/loadout_option/G = global.gear_datums[thing]
 			if(G)
-				var/permitted = 0
+				var/permitted = FALSE
 				if(G.allowed_branches)
 					if(H.char_branch && (H.char_branch.type in G.allowed_branches))
-						permitted = 1
+						permitted = TRUE
 				else
-					permitted = 1
+					permitted = TRUE
 
 				if(permitted)
 					if(G.allowed_roles)
 						if(job.type in G.allowed_roles)
-							permitted = 1
+							permitted = TRUE
 						else
-							permitted = 0
+							permitted = FALSE
 					else
-						permitted = 1
+						permitted = TRUE
 
 				if(permitted && G.allowed_skills)
 					for(var/required in G.allowed_skills)
 						if(!H.skill_check(required,G.allowed_skills[required]))
-							permitted = 0
+							permitted = FALSE
 
 				if(G.whitelisted && (!(H.species.name in G.whitelisted)))
-					permitted = 0
+					permitted = FALSE
 
 				if(!permitted)
-					to_chat(H, "<span class='warning'>Your current species, job, branch, skills or whitelist status does not permit you to spawn with [thing]!</span>")
+					to_chat(H, SPAN_WARNING("Your current species, job, branch, skills or whitelist status does not permit you to spawn with [thing]!"))
 					continue
 
-				if(!G.slot || G.slot == slot_tie_str || (G.slot in loadout_taken_slots) || !G.spawn_on_mob(H, H.client.prefs.Gear()[G.display_name]))
+				if(!G.slot || G.slot == slot_tie_str || (G.slot in loadout_taken_slots) || !G.spawn_on_mob(H, H.client.prefs.Gear()[G.name]))
 					spawn_in_storage.Add(G)
 				else
 					loadout_taken_slots.Add(G.slot)
@@ -486,10 +481,10 @@ SUBSYSTEM_DEF(jobs)
 		H.skillset.obtain_from_client(job, H.client)
 
 		//Equip job items.
-		job.setup_account(H)
 		job.equip(H, H.mind ? H.mind.role_alt_title : "", H.char_branch, H.char_rank)
 		job.apply_fingerprints(H)
 		spawn_in_storage = equip_custom_loadout(H, job)
+		job.setup_account(H)
 	else
 		to_chat(H, "Your job is [rank] and the game just can't handle it! Please report this bug to an administrator.")
 
@@ -498,10 +493,10 @@ SUBSYSTEM_DEF(jobs)
 	if(!joined_late || job.latejoin_at_spawnpoints)
 		var/obj/S = job.get_roundstart_spawnpoint()
 
-		if(istype(S, /obj/effect/landmark/start) && isturf(S.loc))
+		if(istype(S, /obj/abstract/landmark/start) && isturf(S.loc))
 			H.forceMove(S.loc)
 		else
-			var/datum/spawnpoint/spawnpoint = job.get_spawnpoint(H.client)
+			var/decl/spawnpoint/spawnpoint = job.get_spawnpoint(H.client)
 			H.forceMove(pick(spawnpoint.turfs))
 			spawnpoint.after_join(H)
 
@@ -510,13 +505,10 @@ SUBSYSTEM_DEF(jobs)
 			H.buckled.forceMove(H.loc)
 			H.buckled.set_dir(H.dir)
 
-	if(rank != "Robot" && rank != "AI")		//These guys get their emails later.
-		var/domain = "freemail.net"
-		if(H.char_branch?.email_domain)
-			domain = H.char_branch.email_domain
+	if(!(ASSIGNMENT_ROBOT in job.event_categories) && !(ASSIGNMENT_COMPUTER in job.event_categories)) //These guys get their emails later.
 		var/datum/computer_network/network = get_local_network_at(get_turf(H))
 		if(network)
-			network.create_email(H, H.real_name, domain, rank)
+			network.create_account(H, H.real_name, null, H.real_name, null, TRUE)
 
 	// If they're head, give them the account info for their department
 	if(H.mind && job.head_position)
@@ -531,10 +523,11 @@ SUBSYSTEM_DEF(jobs)
 		H.StoreMemory(remembered_info, /decl/memory_options/system)
 
 	var/alt_title = null
-	if(H.mind)
-		H.mind.assigned_job = job
-		H.mind.assigned_role = rank
-		alt_title = H.mind.role_alt_title
+	if(!H.mind)
+		H.mind_initialize()
+	H.mind.assigned_job = job
+	H.mind.assigned_role = rank
+	alt_title = H.mind.role_alt_title
 
 	var/mob/other_mob = job.handle_variant_join(H, alt_title)
 	if(other_mob)
@@ -542,25 +535,19 @@ SUBSYSTEM_DEF(jobs)
 		return other_mob
 
 	if(spawn_in_storage)
-		for(var/datum/gear/G in spawn_in_storage)
-			G.spawn_in_storage_or_drop(H, H.client.prefs.Gear()[G.display_name])
+		for(var/decl/loadout_option/G in spawn_in_storage)
+			G.spawn_in_storage_or_drop(H, H.client.prefs.Gear()[G.name])
 
 	to_chat(H, "<font size = 3><B>You are [job.total_positions == 1 ? "the" : "a"] [alt_title ? alt_title : rank].</B></font>")
 
 	if(job.supervisors)
 		to_chat(H, "<b>As the [alt_title ? alt_title : rank] you answer directly to [job.supervisors]. Special circumstances may change this.</b>")
 
-	to_chat(H, "<b>To speak on your department's radio channel use :h. For the use of other channels, examine your headset.</b>")
+	if(H.has_headset_in_ears())
+		to_chat(H, "<b>To speak on your department's radio channel use :h. For the use of other channels, examine your headset.</b>")
 
 	if(job.req_admin_notify)
 		to_chat(H, "<b>You are playing a job that is important for Game Progression. If you have to disconnect, please notify the admins via adminhelp.</b>")
-
-	//Gives glasses to the vision impaired
-	if(H.disabilities & NEARSIGHTED)
-		var/equipped = H.equip_to_slot_or_del(new /obj/item/clothing/glasses/prescription(H), slot_glasses_str)
-		if(equipped)
-			var/obj/item/clothing/glasses/G = H.glasses
-			G.prescription = 7
 
 	if(H.needs_wheelchair())
 		equip_wheelchair(H)
@@ -571,7 +558,7 @@ SUBSYSTEM_DEF(jobs)
 
 	job.post_equip_rank(H, alt_title || rank)
 
-	INVOKE_ASYNC(GLOBAL_PROC, .proc/show_location_blurb, H.client, 30)
+	H.client.show_location_blurb(30)
 
 	return H
 
@@ -579,7 +566,7 @@ SUBSYSTEM_DEF(jobs)
 	return positions_by_department[dept] || list()
 
 /datum/controller/subsystem/jobs/proc/spawn_empty_ai()
-	for(var/obj/effect/landmark/start/S in landmarks_list)
+	for(var/obj/abstract/landmark/start/S in global.landmarks_list)
 		if(S.name != "AI")
 			continue
 		if(locate(/mob/living) in S.loc)
@@ -587,21 +574,18 @@ SUBSYSTEM_DEF(jobs)
 		empty_playable_ai_cores += new /obj/structure/aicore/deactivated(get_turf(S))
 	return 1
 
-/proc/show_location_blurb(client/C, duration)
-	set waitfor = 0
-
-	if(!C)
-		return
+/client/proc/show_location_blurb(duration)
+	set waitfor = FALSE
 
 	var/location_name = station_name()
 
-	var/obj/effect/overmap/visitable/V = C.mob.get_owning_overmap_object()
+	var/obj/effect/overmap/visitable/V = mob.get_owning_overmap_object()
 	if(istype(V))
 		location_name = V.name
 
 	var/style = "font-family: 'Fixedsys'; -dm-text-outline: 1 black; font-size: 11px;"
-	var/area/A = get_area(C.mob)
-	var/text = "[stationdate2text()], [stationtime2text()]\n[location_name], [A.name]"
+	var/area/A = get_area(mob)
+	var/text = "[stationdate2text()], [stationtime2text()]\n[location_name], [A.proper_name]"
 	text = uppertext(text)
 
 	var/obj/effect/overlay/T = new()
@@ -612,16 +596,17 @@ SUBSYSTEM_DEF(jobs)
 	T.appearance_flags = APPEARANCE_UI_IGNORE_ALPHA
 	T.screen_loc = "LEFT+1,BOTTOM+2"
 
-	C.screen += T
+	screen += T
 	animate(T, alpha = 255, time = 10)
-	for(var/i = 1 to length(text)+1)
-		T.maptext = "<span style=\"[style]\">[copytext(text,1,i)] </span>"
+	for(var/i = 1 to length_char(text) + 1)
+		T.maptext = "<span style=\"[style]\">[copytext_char(text, 1, i)] </span>"
 		sleep(1)
 
-	addtimer(CALLBACK(GLOBAL_PROC, .proc/fade_location_blurb, C, T), duration)
+	addtimer(CALLBACK(GLOBAL_PROC, .proc/fade_location_blurb, src, T), duration)
 
 /proc/fade_location_blurb(client/C, obj/T)
 	animate(T, alpha = 0, time = 5)
 	sleep(5)
-	C.screen -= T
+	if(C)
+		C.screen -= T
 	qdel(T)

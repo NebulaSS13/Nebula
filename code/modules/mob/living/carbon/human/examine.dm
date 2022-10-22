@@ -10,6 +10,12 @@
 	var/skipeyes = 0
 	var/skipface = 0
 
+	if(user.zone_sel)
+		if(BP_TAIL in species.has_limbs)
+			user.zone_sel.icon_state = "zone_sel_tail"
+		else
+			user.zone_sel.icon_state = "zone_sel"
+
 	//exosuits and helmets obscure our view and stuff.
 	if(wear_suit)
 		skipgloves = wear_suit.flags_inv & HIDEGLOVES
@@ -85,9 +91,10 @@
 	//held items
 	for(var/bp in held_item_slots)
 		var/datum/inventory_slot/inv_slot = LAZYACCESS(held_item_slots, bp)
-		var/obj/item/organ/external/E = organs_by_name[bp]
 		if(inv_slot?.holding)
-			msg += "[G.He] [G.is] holding [inv_slot.holding.get_examine_line()] in [G.his] [E.name].\n"
+			var/obj/item/organ/external/E = GET_EXTERNAL_ORGAN(src, bp)
+			if(E)
+				msg += "[G.He] [G.is] holding [inv_slot.holding.get_examine_line()] in [G.his] [E.name].\n"
 
 	//gloves
 	if(gloves && !skipgloves)
@@ -96,11 +103,11 @@
 		var/list/jazzhands = get_hands_organs()
 		var/datum/reagents/coating
 		for(var/obj/item/organ/external/E in jazzhands)
-			if(!E.is_stump() && E.coating)
+			if(E.coating)
 				coating = E.coating
 				break
 		if(coating)
-			msg += "There's something <font color='[coating.get_color()]'>something on [G.his] hands</font>!\n"
+			msg += "There's <font color='[coating.get_color()]'>something on [G.his] hands</font>!\n"
 
 	//belt
 	if(belt)
@@ -112,8 +119,8 @@
 	else
 		var/datum/reagents/coating
 		for(var/bp in list(BP_L_FOOT, BP_R_FOOT))
-			var/obj/item/organ/external/E = get_organ(bp)
-			if(E && !E.is_stump() && E.coating)
+			var/obj/item/organ/external/E = GET_EXTERNAL_ORGAN(src, bp)
+			if(E && E.coating)
 				coating = E.coating
 				break
 		if(coating)
@@ -161,7 +168,7 @@
 
 	//Disfigured face
 	if(!skipface) //Disfigurement only matters for the head currently.
-		var/obj/item/organ/external/head/E = get_organ(BP_HEAD)
+		var/obj/item/organ/external/E = GET_EXTERNAL_ORGAN(src, BP_HEAD)
 		if(E && (E.status & ORGAN_DISFIGURED)) //Check to see if we even have a head and if the head's disfigured.
 			if(E.species) //Check to make sure we have a species
 				msg += E.species.disfigure_msg(src)
@@ -170,7 +177,7 @@
 
 	//splints
 	for(var/organ in list(BP_L_LEG, BP_R_LEG, BP_L_ARM, BP_R_ARM))
-		var/obj/item/organ/external/o = get_organ(organ)
+		var/obj/item/organ/external/o = GET_EXTERNAL_ORGAN(src, organ)
 		if(o && o.splinted && o.splinted.loc == o)
 			msg += "<span class='warning'>[G.He] [G.has] \a [o.splinted] on [G.his] [o.name]!</span>\n"
 
@@ -208,7 +215,7 @@
 	if (admin_paralyzed)
 		msg += SPAN_OCCULT("OOC: [G.He] [G.has] been paralyzed by staff. Please avoid interacting with [G.him] unless cleared to do so by staff.") + "\n"
 
-	var/obj/item/organ/external/head/H = organs_by_name[BP_HEAD]
+	var/obj/item/organ/external/head/H = get_organ(BP_HEAD, /obj/item/organ/external/head)
 	if(istype(H) && H.forehead_graffiti && H.graffiti_style)
 		msg += "<span class='notice'>[G.He] [G.has] \"[H.forehead_graffiti]\" written on [G.his] [H.name] in [H.graffiti_style]!</span>\n"
 
@@ -226,7 +233,7 @@
 
 		var/list/organ_data = species.has_limbs[organ_tag]
 		var/organ_descriptor = organ_data["descriptor"]
-		var/obj/item/organ/external/E = organs_by_name[organ_tag]
+		var/obj/item/organ/external/E = GET_EXTERNAL_ORGAN(src, organ_tag)
 
 		if(!E)
 			wound_flavor_text[organ_descriptor] = "<b>[G.He] [G.is] missing [G.his] [organ_descriptor].</b>\n"
@@ -250,21 +257,23 @@
 					hidden_bleeders[hidden] = list()
 				hidden_bleeders[hidden] += E.name
 		else
-			if(E.is_stump())
-				wound_flavor_text[E.name] += "<b>[G.He] [G.has] a stump where [G.his] [organ_descriptor] should be.</b>\n"
-				if(LAZYLEN(E.wounds) && E.parent)
-					wound_flavor_text[E.name] += "[G.He] [G.has] [E.get_wounds_desc()] on [G.his] [E.parent.name].<br>"
-			else
-				if(!is_synth && BP_IS_PROSTHETIC(E) && (E.parent && !BP_IS_PROSTHETIC(E.parent) && !BP_IS_ASSISTED(E.parent)))
-					wound_flavor_text[E.name] = "[G.He] [G.has] a [E.name].\n"
-				var/wounddesc = E.get_wounds_desc()
-				if(wounddesc != "nothing")
-					wound_flavor_text[E.name] += "[G.He] [G.has] [wounddesc] on [G.his] [E.name].<br>"
+			if(!is_synth && BP_IS_PROSTHETIC(E) && (E.parent && !BP_IS_PROSTHETIC(E.parent) && !BP_IS_ASSISTED(E.parent)))
+				wound_flavor_text[E.name] = "[G.He] [G.has] a [E.name].\n"
+			var/wounddesc = E.get_wounds_desc()
+			if(wounddesc != "nothing")
+				wound_flavor_text[E.name] += "[G.He] [G.has] [wounddesc] on [G.his] [E.name].<br>"
 		if(!hidden || distance <=1)
-			if(E.dislocated > 0)
+			if(E.is_dislocated())
 				wound_flavor_text[E.name] += "[G.His] [E.joint] is dislocated!<br>"
 			if(((E.status & ORGAN_BROKEN) && E.brute_dam > E.min_broken_damage) || (E.status & ORGAN_MUTATED))
 				wound_flavor_text[E.name] += "[G.His] [E.name] is dented and swollen!<br>"
+			if(E.status & ORGAN_DEAD)
+				if(BP_IS_PROSTHETIC(E) || BP_IS_CRYSTAL(E))
+					wound_flavor_text[E.name] += "[G.His] [E.name] is irrecoverably damaged!<br>"
+				else
+					wound_flavor_text[E.name] += "[G.His] [E.name] is grey and necrotic!<br>"
+			else if(E.damage >= E.max_damage && E.germ_level >= INFECTION_LEVEL_TWO)
+				wound_flavor_text[E.name] += "[G.His] [E.name] is likely beyond saving, and has begun to decay!<br>"
 
 		for(var/datum/wound/wound in E.wounds)
 			var/list/embedlist = wound.embedded_objects
@@ -335,11 +344,6 @@
 
 	if(print_flavor_text()) msg += "[print_flavor_text()]\n"
 
-	if(mind && user.mind && name == real_name)
-		var/list/relations = matchmaker.get_relationships_between(user.mind, mind, TRUE)
-		if(length(relations))
-			msg += "<br><span class='notice'>You know them. <a href='byond://?src=\ref[src];show_relations=1'>More...</a></span><br>"
-
 	msg += "*---------*</span><br>"
 	msg += applying_pressure
 
@@ -351,6 +355,14 @@
 	var/show_descs = show_descriptors_to(user)
 	if(show_descs)
 		msg += "<span class='notice'>[jointext(show_descs, "<br>")]</span>"
+
+	var/list/human_examines = decls_repository.get_decls_of_subtype(/decl/human_examination)
+	for(var/exam in human_examines)
+		var/decl/human_examination/HE = human_examines[exam]
+		var/adding_text = HE.do_examine(user, distance, src)
+		if(adding_text)
+			msg += adding_text
+
 	to_chat(user, jointext(msg, null))
 
 //Helper procedure. Called by /mob/living/carbon/human/examine() and /mob/living/carbon/human/Topic() to determine HUD access to security and medical records.

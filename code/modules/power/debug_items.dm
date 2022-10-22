@@ -12,7 +12,7 @@
 
 /obj/machinery/power/debug_items/proc/show_info(var/mob/user)
 	if(!powernet)
-		to_chat(user, "This device is not connected to a powernet")
+		to_chat(user, "This device is not connected to a powernet.")
 		return
 
 	to_chat(user, "Connected to powernet: [powernet]")

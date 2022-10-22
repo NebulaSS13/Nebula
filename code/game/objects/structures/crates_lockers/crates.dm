@@ -152,7 +152,7 @@
 	desc = "A crate of emergency rations."
 
 /obj/structure/closet/crate/freezer/rations/WillContain()
-	return list(/obj/random/mre = 6, /obj/item/chems/food/drinks/cans/waterbottle = 12)
+	return list(/obj/random/mre = 6, /obj/item/chems/drinks/cans/waterbottle = 12)
 
 /obj/structure/closet/crate/freezer/meat
 	name = "meat crate"
@@ -160,9 +160,9 @@
 
 /obj/structure/closet/crate/freezer/meat/WillContain()
 	return list(
-		/obj/item/chems/food/snacks/meat/beef = 4,
-		/obj/item/chems/food/snacks/meat/syntiflesh = 4,
-		/obj/item/chems/food/snacks/fish = 4
+		/obj/item/chems/food/meat/beef = 4,
+		/obj/item/chems/food/meat/syntiflesh = 4,
+		/obj/item/chems/food/fish = 4
 	)
 
 /obj/structure/closet/crate/bin
@@ -257,6 +257,7 @@
 	closet_appearance = /decl/closet_appearance/cart/biohazard
 	storage_capacity = 2 * MOB_SIZE_LARGE
 	storage_types = CLOSET_STORAGE_ITEMS|CLOSET_STORAGE_MOBS|CLOSET_STORAGE_STRUCTURES
+	movable_flags = MOVABLE_FLAG_WHEELED
 
 /obj/structure/closet/crate/secure/biohazard/blanks/WillContain()
 	return list(/obj/structure/closet/body_bag/cryobag/blank)
@@ -272,6 +273,7 @@
 	desc = "A heavy cart used for organ disposal with markings indicating the things inside are probably gross."
 	req_access = list(access_surgery)
 	closet_appearance = /decl/closet_appearance/cart/biohazard/alt
+	movable_flags = MOVABLE_FLAG_WHEELED
 
 /obj/structure/closet/crate/paper_refill
 	name = "paper refill crate"

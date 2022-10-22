@@ -32,6 +32,10 @@
 	title = "regular floor tile"
 	result_type = /obj/item/stack/tile/floor
 
+/datum/stack_recipe/tile/metal/roof
+	title = "roofing tile"
+	result_type = /obj/item/stack/tile/roof
+
 /datum/stack_recipe/tile/metal/mono
 	title = "mono floor tile"
 	result_type = /obj/item/stack/tile/mono
@@ -92,3 +96,8 @@
 /datum/stack_recipe/tile/walnut
 	title = "walnut floor tile"
 	result_type = /obj/item/stack/tile/walnut
+
+
+/datum/stack_recipe/tile/metal/pool
+	title = "pool floor tile"
+	result_type = /obj/item/stack/tile/pool

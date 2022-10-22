@@ -7,7 +7,7 @@
 	exclaim_verb = "calls"
 	colour = "alien"
 	key = "v"
-	flags = WHITELISTED
+	flags = LANG_FLAG_WHITELISTED
 	space_chance = 50
 	syllables = list(
 			"ca", "ra", "ma", "sa", "na", "ta", "la", "sha",
@@ -34,7 +34,7 @@
 	exclaim_verb = "trills"
 	colour = "alien"
 	key = "i"
-	flags = WHITELISTED
+	flags = LANG_FLAG_WHITELISTED
 	space_chance = 50
 	syllables = list(
 			"ca", "ra", "ma", "sa", "na", "ta", "la", "sha", "scha", "a", "a",
@@ -49,6 +49,7 @@
 	name = "Neo-Avian Milieu"
 	description = "Neo-avians form a loose coalition of family and flock groupings, and are usually in an extreme minority in human settlements. \
 	They tend to cope poorly with confined, crowded spaces like human habs, and often make their homes in hab domes or other spacious facilities."
+	language = /decl/language/neoavian
 	secondary_langs = list(
 		/decl/language/corvid,
 		/decl/language/neoavian,

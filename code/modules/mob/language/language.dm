@@ -5,28 +5,31 @@
 */
 
 /decl/language
-	var/name                          // Fluff name of language if any.
-	var/desc = "You should not have this language." // Short description for 'Check Languages'.
-	var/speech_verb = "says"          // 'says', 'hisses', 'farts'.
-	var/ask_verb = "asks"             // Used when sentence ends in a ?
-	var/exclaim_verb = "exclaims"     // Used when sentence ends in a !
-	var/whisper_verb                  // Optional. When not specified speech_verb + quietly/softly is used instead.
-	var/signlang_verb = list("signs", "gestures") // list of emotes that might be displayed if this language has NONVERBAL or SIGNLANG flags
-	var/colour = "body"               // CSS style to use for strings in this language.
-	var/key = ""                      // Character used to speak in language
-	var/flags = 0                     // Various language flags.
-	var/native                        // If set, non-native speakers will have trouble speaking.
-	var/list/syllables                // Used when scrambling text for a non-speaker.
-	var/list/space_chance = 55        // Likelihood of getting a space in the random scramble string
-	var/machine_understands = 1       // Whether machines can parse and understand this language
-	var/shorthand = "???"			  // Shorthand that shows up in chat for this language.
-	var/list/partial_understanding				  // List of languages that can /somehwat/ understand it, format is: name = chance of understanding a word
-	var/warning = ""
-	var/hidden_from_codex			  // If it should not show up in Codex
-	var/category = /decl/language    // Used to point at root language types that shouldn't be visible
-	var/list/scramble_cache = list()
-	var/list/speech_sounds
-	var/allow_repeated_syllables = TRUE
+	abstract_type = /decl/language    // Used to point at root language types that shouldn't be visible
+
+	// Short description for 'Check Languages'.
+	var/desc = "You should not have this language."
+	// list of emotes that might be displayed if this language has LANG_FLAG_NONVERBAL or LANG_FLAG_SIGNLANG flags
+	var/signlang_verb = list("signs", "gestures")
+
+	var/name                            // Fluff name of language if any.
+	var/speech_verb = "says"            // 'says', 'hisses', 'farts'.
+	var/ask_verb = "asks"               // Used when sentence ends in a ?
+	var/exclaim_verb = "exclaims"       // Used when sentence ends in a !
+	var/whisper_verb                    // Optional. When not specified speech_verb + quietly/softly is used instead.
+	var/colour = "body"                 // CSS style to use for strings in this language.
+	var/key = ""                        // Character used to speak in language
+	var/flags = 0                       // Various language flags.
+	var/native                          // If set, non-native speakers will have trouble speaking.
+	var/list/syllables                  // Used when scrambling text for a non-speaker.
+	var/list/space_chance = 55          // Likelihood of getting a space in the random scramble string
+	var/machine_understands = 1         // Whether machines can parse and understand this language
+	var/shorthand = "???"               // Shorthand that shows up in chat for this language.
+	var/list/partial_understanding      // List of languages that can /somehwat/ understand it, format is: name = chance of understanding a word
+	var/hidden_from_codex               // If it should not show up in Codex
+	var/list/scramble_cache = list()    // Cached syllable strings for masking when heard by a non-speaker
+	var/list/speech_sounds              // List of sounds to randomly play.
+	var/allow_repeated_syllables = TRUE // Control for handling some of the random lang/name gen.
 
 /decl/language/proc/get_spoken_sound()
 	if(speech_sounds)
@@ -51,7 +54,7 @@
 	var/possible_syllables = allow_repeated_syllables ? syllables : syllables.Copy()
 	for(var/i = 0;i<name_count;i++)
 		var/new_name = ""
-		for(var/x = rand(Floor(syllable_count/syllable_divisor),syllable_count);x>0;x--)
+		for(var/x = rand(FLOOR(syllable_count/syllable_divisor),syllable_count);x>0;x--)
 			if(!length(possible_syllables))
 				break
 			new_name += allow_repeated_syllables ? pick(possible_syllables) : pick_n_take(possible_syllables)
@@ -122,17 +125,17 @@
 	scramble_cache[input] = scrambled_text
 	if(scramble_cache.len > SCRAMBLE_CACHE_LEN)
 		scramble_cache.Cut(1, scramble_cache.len-SCRAMBLE_CACHE_LEN-1)
-	
+
 	return scrambled_text
 
 /decl/language/proc/format_message(message, verb)
-	return "[verb], <span class='message'><span class='[colour]'>\"[capitalize(filter_modify_message(message))]\"</span></span>"
+	return "[verb], <span class='message'><span class='[colour]'>\"[capitalize(message)]\"</span></span>"
 
 /decl/language/proc/format_message_plain(message, verb)
-	return "[verb], \"[capitalize(filter_modify_message(message))]\""
+	return "[verb], \"[capitalize(message)]\""
 
 /decl/language/proc/format_message_radio(message, verb)
-	return "[verb], <span class='[colour]'>\"[capitalize(filter_modify_message(message))]\"</span>"
+	return "[verb], <span class='[colour]'>\"[capitalize(message)]\"</span>"
 
 /decl/language/proc/get_talkinto_msg_range(message)
 	// if you yell, you'll be heard from two tiles over instead of one
@@ -201,7 +204,7 @@
 	if (only_species_language && speaking != GET_DECL(species_language))
 		return 0
 
-	return (speaking.can_speak_special(src) && (universal_speak || (speaking && speaking.flags & INNATE) || (speaking in src.languages)))
+	return (speaking.can_speak_special(src) && (universal_speak || (speaking && speaking.flags & LANG_FLAG_INNATE) || (speaking in src.languages)))
 
 /mob/proc/get_language_prefix()
 	return get_prefix_key(/decl/prefix/language)
@@ -218,7 +221,7 @@
 	var/dat = "<b><font size = 5>Known Languages</font></b><br/><br/>"
 
 	for(var/decl/language/L in languages)
-		if(!(L.flags & NONGLOBAL))
+		if(!(L.flags & LANG_FLAG_NONGLOBAL))
 			dat += "<b>[L.name]([L.shorthand]) ([get_language_prefix()][L.key])</b><br/>[L.desc]<br/><br/>"
 
 	show_browser(src, dat, "window=checklanguage")
@@ -232,7 +235,7 @@
 		dat += "Current default language: [lang.name] - <a href='byond://?src=\ref[src];default_lang=reset'>reset</a><br/><br/>"
 
 	for(var/decl/language/L in languages)
-		if(!(L.flags & NONGLOBAL))
+		if(!(L.flags & LANG_FLAG_NONGLOBAL))
 			if(L == default_language)
 				dat += "<b>[L.name]([L.shorthand]) ([get_language_prefix()][L.key])</b> - default - <a href='byond://?src=\ref[src];default_lang=reset'>reset</a><br/>[L.desc]<br/><br/>"
 			else if (can_speak(L))

@@ -81,6 +81,13 @@ var/global/list/global/tank_gauge_cache = list()
 
 	. = ..()
 
+/obj/item/tank/get_single_monetary_worth()
+	. = ..()
+	for(var/gas in air_contents?.gas)
+		var/decl/material/gas_data = GET_DECL(gas)
+		. += gas_data.get_value() * air_contents.gas[gas] * GAS_WORTH_MULTIPLIER
+	. = max(1, round(.))
+
 /obj/item/tank/examine(mob/user)
 	. = ..()
 	var/descriptive
@@ -203,8 +210,9 @@ var/global/list/global/tank_gauge_cache = list()
 
 	if(istype(W, /obj/item/flamethrower))
 		var/obj/item/flamethrower/F = W
-		if(!F.status || F.tank || !user.unEquip(src, F))
+		if(!F.secured || F.tank || !user.unEquip(src, F))
 			return
+
 		master = F
 		F.tank = src
 
@@ -219,13 +227,7 @@ var/global/list/global/tank_gauge_cache = list()
 		proxyassembly.assembly.attack_self(user)
 
 /obj/item/tank/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1)
-	var/mob/living/carbon/location = null
-
-	if(istype(loc, /obj/item/rig))		// check for tanks in rigs
-		if(istype(loc.loc, /mob/living/carbon))
-			location = loc.loc
-	else if(istype(loc, /mob/living/carbon))
-		location = loc
+	var/mob/living/carbon/location = get_recursive_loc_of_type(/mob/living/carbon)
 
 	var/using_internal
 	if(istype(location))
@@ -581,7 +583,8 @@ var/global/list/global/tank_gauge_cache = list()
 	tank.update_icon()
 
 /obj/item/tankassemblyproxy/HasProximity(atom/movable/AM)
-	if(assembly)
+	. = ..()
+	if(. && assembly)
 		assembly.HasProximity(AM)
 
 //Fragmentation projectiles

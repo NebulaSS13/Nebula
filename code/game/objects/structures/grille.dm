@@ -11,6 +11,9 @@
 	rad_resistance_modifier = 0.1
 	color = COLOR_STEEL
 	material = /decl/material/solid/metal/steel
+	parts_type = /obj/item/stack/material/rods
+	parts_amount = 2
+
 	handle_generic_blending = TRUE
 	material_alteration = MAT_FLAG_ALTERATION_COLOR | MAT_FLAG_ALTERATION_NAME
 	maxhealth = 20
@@ -56,7 +59,6 @@
 /obj/structure/grille/on_update_icon()
 	..()
 	var/on_frame = is_on_frame()
-	overlays.Cut()
 	if(destroyed)
 		if(on_frame)
 			icon_state = "broke_onframe"
@@ -69,18 +71,18 @@
 			for(var/i = 1 to 4)
 				var/conn = connections ? connections[i] : "0"
 				if(other_connections && other_connections[i] != "0")
-					I = image(icon, "grille_other_onframe[conn]", dir = 1<<(i-1))
+					I = image(icon, "grille_other_onframe[conn]", dir = BITFLAG(i-1))
 				else
-					I = image(icon, "grille_onframe[conn]", dir = 1<<(i-1))
-				overlays += I
+					I = image(icon, "grille_onframe[conn]", dir = BITFLAG(i-1))
+				add_overlay(I)
 		else
 			for(var/i = 1 to 4)
 				var/conn = connections ? connections[i] : "0"
 				if(other_connections && other_connections[i] != "0")
-					I = image(icon, "grille_other[conn]", dir = 1<<(i-1))
+					I = image(icon, "grille_other[conn]", dir = BITFLAG(i-1))
 				else
-					I = image(icon, "grille[conn]", dir = 1<<(i-1))
-				overlays += I
+					I = image(icon, "grille[conn]", dir = BITFLAG(i-1))
+				add_overlay(I)
 
 /obj/structure/grille/Bumped(atom/user)
 	if(ismob(user)) shock(user, 70)
@@ -159,8 +161,9 @@
 	else
 		set_density(0)
 		if(material)
-			material.create_object(get_turf(src), 1,/obj/item/stack/material/rods)
+			material.create_object(get_turf(src), 1, parts_type)
 		destroyed = TRUE
+		parts_amount = 1
 		update_icon()
 
 /obj/structure/grille/attackby(obj/item/W, mob/user)
@@ -279,10 +282,3 @@
 		var/obj/structure/grille/F = new(loc, ST.material.type)
 		user.visible_message(SPAN_NOTICE("\The [user] finishes building \a [F]."))
 		F.add_fingerprint(user)
-
-/obj/structure/grille/create_dismantled_products(var/turf/T)
-	if(material)
-		material.create_object(get_turf(src), (destroyed ? 1 : 2), /obj/item/stack/material/rods)
-		matter -= material.type
-		material = null
-	. = ..()

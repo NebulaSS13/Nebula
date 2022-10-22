@@ -12,7 +12,7 @@
 		rad = ARMOR_RAD_SHIELDED
 	)
 	max_pressure_protection = ENG_VOIDSUIT_MAX_PRESSURE
-	bodytype_restricted = list(BODYTYPE_MANTID_SMALL)
+	bodytype_equip_flags = BODY_FLAG_ALATE
 
 /obj/item/clothing/suit/space/void/ascent
 	name = "\improper Ascent voidsuit"
@@ -28,7 +28,7 @@
 		bio = ARMOR_BIO_SHIELDED,
 		rad = ARMOR_RAD_SHIELDED
 	)
-	bodytype_restricted = list(BODYTYPE_MANTID_SMALL)
+	bodytype_equip_flags = BODY_FLAG_ALATE
 	allowed = list(
 		/obj/item/clustertool,
 		/obj/item/tank/mantid,
@@ -36,5 +36,5 @@
 		/obj/item/weldingtool/electric/mantid,
 		/obj/item/multitool/mantid,
 		/obj/item/stack/medical/resin,
-		/obj/item/chems/food/drinks/cans/waterbottle/ascent
+		/obj/item/chems/drinks/cans/waterbottle/ascent
 	)

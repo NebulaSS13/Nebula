@@ -92,16 +92,16 @@ var/global/list/datum/supply_drop_loot/supply_drop
 /datum/supply_drop_loot/food/New()
 	..()
 	contents = list(
-		/obj/item/chems/food/condiment/flour,
-		/obj/item/chems/food/condiment/flour,
-		/obj/item/chems/food/condiment/flour,
-		/obj/item/chems/food/drinks/milk,
-		/obj/item/chems/food/drinks/milk,
+		/obj/item/chems/condiment/flour,
+		/obj/item/chems/condiment/flour,
+		/obj/item/chems/condiment/flour,
+		/obj/item/chems/drinks/milk,
+		/obj/item/chems/drinks/milk,
 		/obj/item/storage/fancy/egg_box,
-		/obj/item/chems/food/snacks/tofu,
-		/obj/item/chems/food/snacks/tofu,
-		/obj/item/chems/food/snacks/meat,
-		/obj/item/chems/food/snacks/meat)
+		/obj/item/chems/food/tofu,
+		/obj/item/chems/food/tofu,
+		/obj/item/chems/food/meat,
+		/obj/item/chems/food/meat)
 
 /datum/supply_drop_loot/armour
 	name = "Armour"
@@ -188,9 +188,9 @@ var/global/list/datum/supply_drop_loot/supply_drop
 /datum/supply_drop_loot/power/New()
 	..()
 	contents = list(
-		/obj/machinery/power/port_gen/pacman,
-		/obj/machinery/power/port_gen/pacman/super,
-		/obj/machinery/power/port_gen/pacman/mrs)
+		/obj/machinery/port_gen/pacman,
+		/obj/machinery/port_gen/pacman/super,
+		/obj/machinery/port_gen/pacman/mrs)
 
 /datum/supply_drop_loot/power/contents()
 	return list(pick(contents))

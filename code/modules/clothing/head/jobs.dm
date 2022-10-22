@@ -32,7 +32,7 @@
 	name = "chaplain's hood"
 	desc = "It's hood that covers the head. It keeps you warm during the space winters."
 	icon = 'icons/clothing/head/chaplain.dmi'
-	flags_inv = BLOCKHAIR
+	flags_inv = BLOCKHEADHAIR
 	body_parts_covered = SLOT_HEAD
 
 //Chaplain
@@ -40,7 +40,7 @@
 	name = "nun hood"
 	desc = "Maximum piety in this star system."
 	icon = 'icons/clothing/head/nun.dmi'
-	flags_inv = BLOCKHAIR
+	flags_inv = BLOCKHEADHAIR
 	body_parts_covered = SLOT_HEAD
 
 //Medical

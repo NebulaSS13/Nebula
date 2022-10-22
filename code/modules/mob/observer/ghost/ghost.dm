@@ -6,7 +6,7 @@ var/global/list/image/ghost_sightless_images = list() //this is a list of images
 	desc = "It's a g-g-g-g-ghooooost!" //jinkies!
 	icon = 'icons/mob/mob.dmi'
 	icon_state = "ghost"
-	appearance_flags = KEEP_TOGETHER
+	appearance_flags = KEEP_TOGETHER | LONG_GLIDE
 	blinded = 0
 	anchored = 1	//  don't get pushed around
 	universal_speak = TRUE
@@ -60,7 +60,11 @@ var/global/list/image/ghost_sightless_images = list() //this is a list of images
 			mind = new /datum/mind(key)
 			mind.current = src
 	if(!T)
-		T = pick(global.latejoin_locations | global.latejoin_cryo_locations | global.latejoin_gateway_locations)
+		var/list/spawn_locs = global.latejoin_locations | global.latejoin_cryo_locations | global.latejoin_gateway_locations
+		if(length(spawn_locs))
+			T = pick(spawn_locs)
+		else
+			T = locate(1, 1, 1)
 	forceMove(T)
 
 	if(!name)							//To prevent nameless ghosts
@@ -184,22 +188,24 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 		ghost.timeofdeath = world.time // Because the living mob won't have a time of death and we want the respawn timer to work properly.
 		announce_ghost_joinleave(ghost)
 
-/mob/observer/ghost/can_use_hands()	return 0
-/mob/observer/ghost/is_active()		return 0
+/mob/observer/ghost/can_use_hands()
+	return FALSE
+
+/mob/observer/ghost/is_active()
+	return FALSE
 
 /mob/observer/ghost/Stat()
 	. = ..()
-	if(statpanel("Status"))
-		if(SSevac.evacuation_controller)
-			var/eta_status = SSevac.evacuation_controller.get_status_panel_eta()
-			if(eta_status)
-				stat(null, eta_status)
+	if(statpanel("Status") && SSevac.evacuation_controller)
+		var/eta_status = SSevac.evacuation_controller.get_status_panel_eta()
+		if(eta_status)
+			stat(null, eta_status)
 
 /mob/observer/ghost/verb/reenter_corpse()
 	set category = "Ghost"
 	set name = "Re-enter Corpse"
 	if(!client)	return
-	if(!(mind && mind.current && can_reenter_corpse))
+	if(QDELETED(mind) || QDELETED(mind.current) || !can_reenter_corpse)
 		to_chat(src, "<span class='warning'>You have no body.</span>")
 		return
 	if(mind.current.key && copytext(mind.current.key,1,2)!="@")	//makes sure we don't accidentally kick any clients
@@ -238,7 +244,7 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 		return
 	var/mob/observer/ghost/M = src
 	if(jobban_isbanned(M, "AntagHUD"))
-		to_chat(src, SPAN_WARNING("You have been banned from using this feature"))
+		to_chat(src, SPAN_WARNING("You have been banned from using this feature."))
 		return
 	if(config.antag_hud_restricted && !M.has_enabled_antagHUD && !client.holder)
 		var/response = alert(src, "If you turn this on, you will not be able to take any part in the round.","Are you sure you want to turn this feature on?","Yes","No")

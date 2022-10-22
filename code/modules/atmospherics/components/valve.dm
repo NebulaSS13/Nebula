@@ -24,6 +24,7 @@
 	frame_type = /obj/item/pipe
 	construct_state = /decl/machine_construction/default/panel_closed/item_chassis
 	base_type = /obj/machinery/atmospherics/valve/buildable
+	interact_offline = TRUE
 
 /obj/machinery/atmospherics/valve/buildable
 	uncreated_component_parts = null

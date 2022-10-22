@@ -5,10 +5,10 @@
 	speech_verb = "says"
 	whisper_verb = "whispers"
 	colour = "solcom"
-	flags = WHITELISTED
+	flags = LANG_FLAG_WHITELISTED | LANG_FLAG_RESTRICTED
 	shorthand = "???"
 	space_chance = 40
-	category = /decl/language/human
+	abstract_type = /decl/language/human
 
 /decl/language/human/get_spoken_verb(var/msg_end)
 	switch(msg_end)
@@ -41,7 +41,7 @@
 	whisper_verb = "whispers"
 	colour = ""
 	key = "1"
-	flags = WHITELISTED
+	flags = LANG_FLAG_WHITELISTED
 	shorthand = "C"
 	partial_understanding = list()
 	syllables = list(

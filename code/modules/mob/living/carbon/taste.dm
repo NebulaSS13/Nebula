@@ -29,9 +29,12 @@ calculate text size per text.
 			var/decl/material/R = GET_DECL(reagent_type)
 			if(!R.taste_mult)
 				continue
-			if(istype(R, /decl/material/liquid/nutriment))
+			var/decl/material/liquid/nutriment/N = R
+			if(istype(N) && LAZYACCESS(reagent_data, reagent_type))
 				var/list/taste_data = LAZYACCESS(reagent_data, reagent_type)
 				for(var/taste in taste_data)
+					if(!istext(taste))
+						continue
 					if(taste in tastes)
 						tastes[taste] += taste_data[taste]
 					else

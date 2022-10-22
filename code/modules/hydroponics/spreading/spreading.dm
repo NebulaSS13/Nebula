@@ -18,7 +18,7 @@
 			//make vine zero start off fully matured
 			new /obj/effect/vine(T, seed, null, 1)
 
-			log_and_message_admins("Spacevines spawned in \the [get_area(T)]", location = T)
+			log_and_message_admins("Spacevines spawned in \the [get_area_name(T)]", location = T)
 			return
 		log_and_message_admins("<span class='notice'>Event: Spacevines failed to find a viable turf.</span>")
 
@@ -103,6 +103,7 @@
 
 /obj/effect/vine/Destroy()
 	wake_neighbors()
+	parent = null
 	STOP_PROCESSING(SSvines, src)
 	return ..()
 
@@ -120,7 +121,7 @@
 
 	var/ikey = "\ref[seed]-plant-[growth]"
 	if(!SSplants.plant_icon_cache[ikey])
-		SSplants.plant_icon_cache[ikey] = seed.get_icon(growth)
+		SSplants.plant_icon_cache[ikey] = seed.get_growth_stage_overlay(growth)
 	overlays += SSplants.plant_icon_cache[ikey]
 
 	if(growth > 2 && growth == max_growth)
@@ -179,10 +180,9 @@
 			direction &= ~shroom.dir
 
 	var/list/dirList = list()
-
-	for(var/i=1,i<=16,i <<= 1)
-		if(direction & i)
-			dirList += i
+	for(var/checkdir in global.alldirs)
+		if(direction & checkdir)
+			dirList += checkdir
 
 	if(dirList.len)
 		var/newDir = pick(dirList)

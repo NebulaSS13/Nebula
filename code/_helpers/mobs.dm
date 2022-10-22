@@ -1,48 +1,21 @@
-/atom/movable/proc/get_mob()
-	return
-
-/obj/vehicle/train/get_mob()
-	return buckled_mob
-
-/mob/get_mob()
-	return src
-
-/mob/living/bot/mulebot/get_mob()
-	if(load && istype(load, /mob/living))
-		return list(src, load)
-	return src
-
 //helper for inverting armor blocked values into a multiplier
 #define blocked_mult(blocked) max(1 - (blocked/100), 0)
 
 /proc/mobs_in_view(var/range, var/source)
-	var/list/mobs = list()
 	for(var/atom/movable/AM in view(range, source))
 		var/M = AM.get_mob()
 		if(M)
-			mobs += M
-
-	return mobs
+			LAZYDISTINCTADD(., M)
 
 /proc/random_hair_style(gender, species)
-	species = species || global.using_map.default_species
-	var/h_style = "Bald"
-
-	var/decl/species/mob_species = get_species_by_key(species)
-	var/list/valid_hairstyles = mob_species.get_hair_styles()
-	if(valid_hairstyles.len)
-		h_style = pick(valid_hairstyles)
-
-	return h_style
+	var/decl/species/mob_species = get_species_by_key(species || global.using_map.default_species)
+	var/list/valid_styles = mob_species?.get_hair_style_types(gender)
+	return length(valid_styles) ? pick(valid_styles) : /decl/sprite_accessory/hair/bald
 
 /proc/random_facial_hair_style(gender, var/species)
-	species = species || global.using_map.default_species
-	var/f_style = "Shaved"
-	var/decl/species/mob_species = get_species_by_key(species)
-	var/list/valid_facialhairstyles = mob_species.get_facial_hair_styles(gender)
-	if(valid_facialhairstyles.len)
-		f_style = pick(valid_facialhairstyles)
-		return f_style
+	var/decl/species/mob_species = get_species_by_key(species || global.using_map.default_species)
+	var/list/valid_styles = mob_species?.get_facial_hair_style_types(gender)
+	return length(valid_styles) ? pick(valid_styles) : /decl/sprite_accessory/facial_hair/shaved
 
 /proc/random_name(gender, species)
 	if(species)
@@ -98,7 +71,7 @@
 /proc/get_exposed_defense_zone(var/atom/movable/target)
 	return pick(BP_HEAD, BP_L_HAND, BP_R_HAND, BP_L_FOOT, BP_R_FOOT, BP_L_ARM, BP_R_ARM, BP_L_LEG, BP_R_LEG, BP_CHEST, BP_GROIN)
 
-/proc/do_mob(mob/user , mob/target, time = 30, target_zone = 0, uninterruptible = 0, progress = 1, var/incapacitation_flags = INCAPACITATION_DEFAULT)
+/proc/do_mob(mob/user , mob/target, time = 30, target_zone = 0, uninterruptible = 0, progress = 1, incapacitation_flags = INCAPACITATION_DEFAULT, check_holding = TRUE)
 	if(!user || !target)
 		return 0
 	var/user_loc = user.loc
@@ -109,7 +82,7 @@
 
 	var/target_loc = target.loc
 
-	var/holding = user.get_active_hand()
+	var/holding = check_holding && user.get_active_hand()
 	var/datum/progressbar/progbar
 	if (progress)
 		progbar = new(user, time, target)
@@ -118,7 +91,7 @@
 	var/starttime = world.time
 	. = 1
 	while (world.time < endtime)
-		sleep(1)
+		stoplag(1)
 		if (progress)
 			progbar.update(world.time - starttime)
 		if(!user || !target)
@@ -139,7 +112,7 @@
 			. = 0
 			break
 
-		if(user.get_active_hand() != holding)
+		if(check_holding && user.get_active_hand() != holding)
 			. = 0
 			break
 
@@ -150,7 +123,7 @@
 	if (progbar)
 		qdel(progbar)
 
-/proc/do_after(mob/user, delay, atom/target = null, needhand = 1, progress = 1, var/incapacitation_flags = INCAPACITATION_DEFAULT, var/same_direction = 0, var/can_move = 0)
+/proc/do_after(mob/user, delay, atom/target = null, check_holding = 1, progress = 1, var/incapacitation_flags = INCAPACITATION_DEFAULT, var/same_direction = 0, var/can_move = 0)
 	if(!user)
 		return 0
 	var/atom/target_loc = null
@@ -178,7 +151,7 @@
 	var/starttime = world.time
 	. = 1
 	while (world.time < endtime)
-		sleep(1)
+		stoplag(1)
 		if (progress)
 			progbar.update(world.time - starttime)
 
@@ -194,7 +167,7 @@
 			. = 0
 			break
 
-		if(needhand)
+		if(check_holding)
 			if(user.get_active_hand() != holding)
 				. = 0
 				break
@@ -298,7 +271,7 @@
 		return val
 	if(istext(val))
 		var/list/vals = splittext(val, "x")
-		return Floor(max(text2num(vals[1]), text2num(vals[2]))/2)
+		return FLOOR(max(text2num(vals[1]), text2num(vals[2]))/2)
 	return 0
 
 // If all of these flags are present, it should come out at exactly 1. Yes, this

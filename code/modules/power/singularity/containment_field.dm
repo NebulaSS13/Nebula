@@ -31,15 +31,15 @@
 	return 0
 
 /obj/machinery/containment_field/HasProximity(atom/movable/AM)
-	if(istype(AM,/mob/living/silicon) && prob(40))
-		shock(AM)
-		return 1
-	if(istype(AM,/mob/living/carbon) && prob(50))
-		shock(AM)
-		return 1
-	return 0
-
-
+	. = ..()
+	if(.)
+		if(istype(AM,/mob/living/silicon) && prob(40))
+			shock(AM)
+			return TRUE
+		if(istype(AM,/mob/living/carbon) && prob(50))
+			shock(AM)
+			return TRUE
+		return FALSE
 
 /obj/machinery/containment_field/shock(mob/living/user)
 	if(hasShocked)

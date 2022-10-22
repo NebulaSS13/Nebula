@@ -62,16 +62,15 @@
 			return
 
 		if(WT.remove_fuel(0,user))
-			var/obj/item/stack/material/new_item = SSmaterials.create_object((material?.type || /decl/material/solid/metal/steel), usr.loc, 1)
 			visible_message(SPAN_NOTICE("\The [src] is fused together by \the [user] with \the [WT]."), 3, SPAN_NOTICE("You hear welding."), 2)
-			if(new_item)
+			for(var/obj/item/stack/material/new_item in SSmaterials.create_object((material?.type || /decl/material/solid/metal/steel), usr.loc, 1))
 				new_item.add_to_stacks(usr)
 				if(user.is_holding_offhand(src))
 					user.put_in_hands(new_item)
 			use(2)
 		return
 
-	if (istype(W, /obj/item/tape_roll))
+	if (istype(W, /obj/item/ducttape))
 		var/obj/item/stack/medical/splint/ghetto/new_splint = new(user.loc)
 		new_splint.dropInto(loc)
 		new_splint.add_fingerprint(user)

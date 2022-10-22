@@ -6,5 +6,7 @@
 	reaction_strings = list(/decl/material/solid/metal/uranium = "Synthesises a potion that turns an adult slime into a docile pet.")
 
 /decl/slime_colour/light_pink/handle_uranium_reaction(var/datum/reagents/holder)
-	new /obj/item/slime_potion/advanced(get_turf(holder.my_atom))
+	var/location = get_turf(holder.get_reaction_loc())
+	if(location)
+		new /obj/item/slime_potion/advanced(location)
 	return TRUE

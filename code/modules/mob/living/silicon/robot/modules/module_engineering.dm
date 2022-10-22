@@ -1,12 +1,11 @@
 /obj/item/robot_module/engineering
 	name = "engineering robot module"
-	associated_department = /decl/department/engineering
 	display_name = "Engineering"
 	channels = list(
 		"Engineering" = 1
 	)
-	networks = list(
-		NETWORK_ENGINEERING
+	camera_channels = list(
+		CAMERA_CAMERA_CHANNEL_ENGINEERING
 	)
 	software = list(
 		/datum/computer_file/program/power_monitor,
@@ -15,11 +14,11 @@
 	supported_upgrades = list(
 		/obj/item/borg/upgrade/rcd
 	)
-	sprites = list(
-		"Basic" = "Engineering",
-		"Antique" = "engineerrobot",
-		"Landmate" = "landmate",
-		"Landmate - Treaded" = "engiborg+tread"
+	module_sprites = list(
+		"Basic"              = 'icons/mob/robots/robot_engineer_old.dmi',
+		"Antique"            = 'icons/mob/robots/robot_engineer_old_alt.dmi',
+		"Landmate"           = 'icons/mob/robots/robot_engineer.dmi',
+		"Landmate - Treaded" = 'icons/mob/robots/robot_engineer_treaded.dmi'
 	)
 	no_slip = 1
 	equipment = list(
@@ -43,12 +42,14 @@
 		/obj/item/paint_sprayer,
 		/obj/item/inflatable_dispenser/robot,
 		/obj/item/inducer/borg,
-		/obj/item/plunger,
+		/obj/item/plunger/unbreakable,
 		/obj/item/matter_decompiler,
 		/obj/item/stack/material/cyborg/steel,
 		/obj/item/stack/material/cyborg/aluminium,
 		/obj/item/stack/material/rods/cyborg,
+		/obj/item/stack/material/strut/cyborg,
 		/obj/item/stack/tile/floor/cyborg,
+		/obj/item/stack/tile/roof/cyborg,
 		/obj/item/stack/material/cyborg/glass,
 		/obj/item/stack/material/cyborg/glass/reinforced,
 		/obj/item/stack/material/cyborg/fiberglass,
@@ -86,7 +87,9 @@
 		 /obj/item/stack/material/cyborg/steel,
 		 /obj/item/stack/material/cyborg/aluminium,
 		 /obj/item/stack/material/rods/cyborg,
+		 /obj/item/stack/material/strut/cyborg,
 		 /obj/item/stack/tile/floor/cyborg,
+		 /obj/item/stack/tile/roof/cyborg,
 		 /obj/item/stack/material/cyborg/glass/reinforced
 		))
 		var/obj/item/stack/stack = locate(thing) in equipment

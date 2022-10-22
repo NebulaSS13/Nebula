@@ -18,7 +18,7 @@
 		addtimer(CALLBACK(src, .proc/do_side_effect, H), 0)
 
 /datum/genetics/side_effect/proc/do_side_effect(mob/living/carbon/human/H)
-	var/tp = pick(typesof(/datum/genetics/side_effect) - /datum/genetics/side_effect)
+	var/tp = pick(subtypesof(/datum/genetics/side_effect))
 	var/datum/genetics/side_effect/S = new tp
 
 	S.start(H)
@@ -41,7 +41,7 @@
 /datum/genetics/side_effect/genetic_burn/finish(mob/living/carbon/human/H)
 	if(!H.reagents.has_reagent(/decl/material/liquid/oxy_meds))
 		for(var/organ_name in global.all_limb_tags)
-			var/obj/item/organ/external/E = H.get_organ(organ_name)
+			var/obj/item/organ/external/E = GET_EXTERNAL_ORGAN(H, organ_name)
 			E.take_external_damage(0, 5, 0)
 
 /datum/genetics/side_effect/bone_snap
@@ -55,7 +55,7 @@
 	H.visible_message("<B>\The [H]</B>'s limbs start shivering uncontrollably.")
 /datum/genetics/side_effect/bone_snap/finish(mob/living/carbon/human/H)
 	if(!H.reagents.has_reagent(/decl/material/liquid/brute_meds))
-		var/obj/item/organ/external/E = pick(H.organs)
+		var/obj/item/organ/external/E = pick(H.get_external_organs())
 		if(E)
 			E.take_external_damage(20, 0, 0)
 			E.fracture()

@@ -49,7 +49,7 @@
 			return
 		if (!in_range(src, user) && src.loc != user)
 			return
-		t = sanitizeSafe(t, MAX_NAME_LEN)
+		t = sanitize_safe(t, MAX_NAME_LEN)
 		if (t)
 			src.SetName("body bag - ")
 			src.name += t
@@ -71,9 +71,9 @@
 	else
 		icon_state = "closed_unlocked"
 
-	src.overlays.Cut()
+	..()
 	if(has_label)
-		src.overlays += image(src.icon, "bodybag_label")
+		add_overlay("bodybag_label")
 
 /obj/structure/closet/body_bag/store_mobs(var/stored_units)
 	contains_body = ..()

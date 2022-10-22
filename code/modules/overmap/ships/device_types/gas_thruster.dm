@@ -8,7 +8,7 @@
 	var/obj/machinery/atmospherics/unary/engine/E = holder
 	if(!is_on())
 		return 0
-	if(!has_fuel() || (0 < E.use_power_oneoff(charge_per_burn)) || check_blockage())
+	if(!has_fuel() || (0 < E.use_power_oneoff(charge_per_burn * thrust_limit)) || check_blockage())
 		E.audible_message(src, SPAN_WARNING("[holder] coughs once and goes silent!"))
 		E.update_use_power(POWER_USE_OFF)
 		return 0
@@ -40,12 +40,13 @@
 /datum/extension/ship_engine/gas/get_exhaust_velocity(var/datum/gas_mixture/propellant)
 	if(!is_on() || !has_fuel())
 		return 0
+	propellant = propellant || get_propellant()
 	if(!propellant)
-		propellant = get_propellant()
+		return 0
 
 	var/exit_pressure = get_nozzle_exit_pressure()
 	var/ratio_specific_heat = get_ratio_specific_heat(propellant)
-	if(propellant.return_pressure() <= MINIMUM_PRESSURE_DIFFERENCE_TO_SUSPEND)
+	if((propellant.return_pressure() - exit_pressure) <= MINIMUM_PRESSURE_DIFFERENCE_TO_SUSPEND)
 		return 0
 	var/mm = propellant.specific_mass()
 	if(mm == 0)
@@ -68,9 +69,8 @@
 
 /datum/extension/ship_engine/gas/proc/get_ratio_specific_heat(var/datum/gas_mixture/propellant)
 	var/ratio_specific_heat = 0
-	if(!propellant)
-		propellant = get_propellant()
-	if(!length(propellant.gas) || !propellant.total_moles)
+	propellant = propellant || get_propellant()
+	if(!propellant || !length(propellant.gas) || !propellant.total_moles)
 		return 0.01 // Divide by zero protection.
 
 	for(var/mat in propellant.gas)

@@ -18,7 +18,7 @@ var/global/list/_default_hug_messages = list(
 
 		if(get_dir(src, target) == target.dir)
 			hug_3p = "$USER$ rubs $TARGET$'s back soothingly."
-			hug_1p = "You rubs $TARGET$'s back soothingly."
+			hug_1p = "You rub $TARGET$'s back soothingly."
 		else
 			hug_3p = "$USER$ hugs $TARGET$ to make $TARGET_HIM$ feel better."
 			hug_1p = "You hug $TARGET$ to make $TARGET_HIM$ feel better."

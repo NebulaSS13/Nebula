@@ -1,11 +1,11 @@
 /mob/living/carbon/human
 	move_intents = list(/decl/move_intent/walk)
 
-/mob/living/carbon/human/movement_delay()
+/mob/living/carbon/human/get_movement_delay(var/travel_dir)
 	var/tally = ..()
 
-	var/obj/item/organ/external/H = get_organ(BP_GROIN) // gets species slowdown, which can be reset by robotize()
-	if(istype(H))
+	var/obj/item/organ/external/H = GET_EXTERNAL_ORGAN(src, BP_GROIN) // gets species slowdown, which can be reset by robotize()
+	if(H)
 		tally += H.slowdown
 
 	tally += species.handle_movement_delay_special(src)
@@ -26,8 +26,8 @@
 
 	if(istype(buckled, /obj/structure/bed/chair/wheelchair))
 		for(var/organ_name in list(BP_L_HAND, BP_R_HAND, BP_L_ARM, BP_R_ARM))
-			var/obj/item/organ/external/E = get_organ(organ_name)
-			tally += E ? E.movement_delay(4) : 4
+			var/obj/item/organ/external/E = GET_EXTERNAL_ORGAN(src, organ_name)
+			tally += E ? E.get_movement_delay(4) : 4
 	else
 		var/total_item_slowdown = -1
 		for(var/slot in global.all_inventory_slots)
@@ -41,8 +41,8 @@
 		tally += total_item_slowdown
 
 		for(var/organ_name in list(BP_L_LEG, BP_R_LEG, BP_L_FOOT, BP_R_FOOT))
-			var/obj/item/organ/external/E = get_organ(organ_name)
-			tally += E ? E.movement_delay(4) : 4
+			var/obj/item/organ/external/E = GET_EXTERNAL_ORGAN(src, organ_name)
+			tally += E ? E.get_movement_delay(4) : 4
 
 	if(shock_stage >= 10 || get_stamina() <= 0)
 		tally += 3
@@ -130,7 +130,6 @@
 /mob/living/carbon/human/Move()
 	. = ..()
 	if(.) //We moved
-		species.handle_exertion(src)
 
 		var/stamina_cost = 0
 		for(var/obj/item/grab/G AS_ANYTHING in get_active_grabs())
@@ -140,10 +139,10 @@
 			adjust_stamina(stamina_cost)
 
 		handle_leg_damage()
-
+		species.handle_post_move(src)
 		if(client)
 			var/turf/B = GetAbove(src)
-			up_hint.icon_state = "uphint[(B ? B.is_open() : 0)]"
+			up_hint.icon_state = "uphint[!!(B && TURF_IS_MIMICKING(B))]"
 
 /mob/living/carbon/human/proc/handle_leg_damage()
 	if(!can_feel_pain())
@@ -152,7 +151,7 @@
 	for(var/obj/item/cane/C in get_held_items())
 		crutches++
 	for(var/organ_name in list(BP_L_LEG, BP_R_LEG, BP_L_FOOT, BP_R_FOOT))
-		var/obj/item/organ/external/E = get_organ(organ_name)
+		var/obj/item/organ/external/E = GET_EXTERNAL_ORGAN(src, organ_name)
 		if(E && (E.is_dislocated() || E.is_broken()))
 			if(crutches)
 				crutches--
@@ -161,3 +160,17 @@
 
 /mob/living/carbon/human/can_sprint()
 	return (stamina > 0)
+
+/mob/living/carbon/human/UpdateLyingBuckledAndVerbStatus()
+	var/old_buckled_lying = !!buckled?.buckle_lying
+	var/old_lying = lying
+	. = ..()
+	if(!buckled)
+		if(lying && !old_lying && !resting) // fell down
+			if(ismob(buckled))
+				var/mob/M = buckled
+				M.unbuckle_mob()
+			var/decl/bodytype/B = get_bodytype()
+			playsound(loc, isSynthetic() ? pick(B.synthetic_bodyfall_sounds) : pick(B.bodyfall_sounds), 50, TRUE, -1)
+		else if(!lying && !old_buckled_lying)
+			handle_stance() // Force an immediate stance update.

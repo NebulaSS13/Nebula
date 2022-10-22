@@ -15,6 +15,8 @@
 	matter = list(/decl/material/solid/fiberglass = MATTER_AMOUNT_REINFORCEMENT)
 	origin_tech = "{'engineering':1}"
 	drop_sound = 'sound/foley/tooldrop1.ogg'
+	z_flags = ZMM_MANGLE_PLANES
+
 	var/lit_colour = COLOR_PALE_ORANGE
 	var/waterproof = FALSE
 	var/welding = 0 	//Whether or not the welding tool is off(0), on(1) or currently welding(2)
@@ -86,37 +88,44 @@
 
 /obj/item/weldingtool/attackby(obj/item/W, mob/user)
 	if(welding)
-		to_chat(user, SPAN_DANGER("Stop welding first!"))
+		to_chat(user, SPAN_WARNING("Stop welding first!"))
 		return
 
 	if(isScrewdriver(W))
+		if(isrobot(loc))
+			to_chat(user, SPAN_WARNING("You cannot modify your own welder!"))
+			return
+
 		status = !status
+		
 		if(status)
 			to_chat(user, SPAN_NOTICE("You secure the welder."))
 		else
 			to_chat(user, SPAN_NOTICE("The welder can now be attached and modified."))
-		src.add_fingerprint(user)
-		return
 
-	if((!status) && (istype(W,/obj/item/stack/material/rods)))
-		var/obj/item/stack/material/rods/R = W
-		R.use(1)
-		var/obj/item/flamethrower/F = new/obj/item/flamethrower(user.loc)
-		user.drop_from_inventory(src, F)
-		F.weldtool = src
-		master = F
 		add_fingerprint(user)
 		return
 
+	if(!status && istype(W, /obj/item/stack/material/rods))
+		var/obj/item/stack/material/rods/R = W
+		R.use(1)
+		user.drop_from_inventory(src)
+		user.put_in_hands(new /obj/item/flamethrower(get_turf(src), src))
+		qdel(src)
+		return TRUE
+
 	if (istype(W, /obj/item/welder_tank))
-		if (tank)
+		if(tank)
 			to_chat(user, SPAN_WARNING("\The [src] already has a tank attached - remove it first."))
 			return
+
 		if(!(src in user.get_held_items()))
 			to_chat(user, SPAN_WARNING("You must hold the welder in your hands to attach a tank."))
 			return
-		if (!user.unEquip(W, src))
+		
+		if(!user.unEquip(W, src))
 			return
+
 		tank = W
 		user.visible_message("[user] slots \a [W] into \the [src].", "You slot \a [W] into \the [src].")
 		w_class = tank.size_in_use
@@ -304,7 +313,7 @@
 /obj/item/weldingtool/attack(mob/living/M, mob/living/user, target_zone)
 	if(ishuman(M))
 		var/mob/living/carbon/human/H = M
-		var/obj/item/organ/external/S = H.organs_by_name[target_zone]
+		var/obj/item/organ/external/S = GET_EXTERNAL_ORGAN(H, target_zone)
 
 		if(!S || !S.is_robotic() || user.a_intent != I_HELP)
 			return ..()

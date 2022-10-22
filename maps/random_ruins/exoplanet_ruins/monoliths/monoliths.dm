@@ -22,31 +22,33 @@
 /obj/structure/monolith/Initialize()
 	. = ..()
 	icon_state = "jaggy[rand(1,4)]"
-	if(global.using_map.use_overmap)
-		var/obj/effect/overmap/visitable/sector/exoplanet/E = map_sectors["[z]"]
-		if(istype(E))
-			desc += "\nThere are images on it: [E.get_engravings()]"
+
+	var/obj/effect/overmap/visitable/sector/exoplanet/E = global.overmap_sectors["[z]"]
+	if(istype(E))
+		desc += "\nThere are images on it: [E.get_engravings()]"
 	update_icon()
 
 /obj/structure/monolith/on_update_icon()
 	..()
-	overlays.Cut()
 	if(active)
 		var/image/I = emissive_overlay(icon,"[icon_state]decor")
 		I.appearance_flags = RESET_COLOR
 		I.color = get_random_colour(0, 150, 255)
-		overlays += I
+		z_flags |= ZMM_MANGLE_PLANES
+		add_overlay(I)
 		set_light(2, 0.3, I.color)
+	else
+		z_flags &= ~ZMM_MANGLE_PLANES
 
 	var/turf/exterior/T = get_turf(src)
 	if(istype(T))
 		var/image/I = overlay_image(icon, "dugin", T.dirt_color, RESET_COLOR)
-		overlays += I
+		add_overlay(I)
 
 /obj/structure/monolith/attack_hand(mob/user)
-	visible_message("[user] touches \the [src].")
-	if(global.using_map.use_overmap && istype(user,/mob/living/carbon/human))
-		var/obj/effect/overmap/visitable/sector/exoplanet/E = map_sectors["[z]"]
+	visible_message("\The [user] touches \the [src].")
+	if(istype(user, /mob/living/carbon/human))
+		var/obj/effect/overmap/visitable/sector/exoplanet/E = global.overmap_sectors["[z]"]
 		if(istype(E))
 			var/mob/living/carbon/human/H = user
 			if(!H.isSynthetic())

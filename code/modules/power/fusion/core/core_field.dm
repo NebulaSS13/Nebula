@@ -1,7 +1,9 @@
-#define FUSION_ENERGY_PER_K        20
-#define FUSION_INSTABILITY_DIVISOR 50000
-#define FUSION_RUPTURE_THRESHOLD   10000
-#define FUSION_REACTANT_CAP        10000
+#define FUSION_ENERGY_PER_K         20
+#define FUSION_INSTABILITY_DIVISOR  50000
+#define FUSION_RUPTURE_THRESHOLD    10000
+#define FUSION_FIELD_CAP_COEFF	    5000
+#define FUSION_COHESION_LOSS_COEFF 3
+#define FUSION_COHESION_LOSS_LIMIT  4.5
 
 /obj/effect/fusion_em_field
 	name = "electromagnetic field"
@@ -20,8 +22,11 @@
 	var/field_strength = 0.01
 	var/tick_instability = 0
 	var/percent_unstable = 0
+	var/field_cohesion = 100 //Should be 100-0.
+	var/fusion_reactant_cap
+	var/cohesion_regeneration = 1
 
-	var/obj/machinery/power/fusion_core/owned_core
+	var/obj/machinery/fusion_core/owned_core
 	var/list/reactants = list()
 	var/list/particle_catchers = list()
 
@@ -29,7 +34,9 @@
 		/obj/item/projectile,
 		/obj/effect,
 		/obj/structure/cable,
-		/obj/machinery/atmospherics
+		/obj/machinery/atmospherics,
+		/obj/machinery/air_sensor,
+		/obj/machinery/power/terminal
 		)
 
 	var/light_min_range = 2
@@ -40,7 +47,7 @@
 	var/last_range
 	var/last_power
 
-/obj/effect/fusion_em_field/Initialize(mapload, var/obj/machinery/power/fusion_core/new_owned_core)
+/obj/effect/fusion_em_field/Initialize(mapload, var/obj/machinery/fusion_core/new_owned_core)
 	. = ..()
 
 	set_light(light_min_range, light_min_power)
@@ -106,7 +113,7 @@
 	React()
 
 	// Dump power to our powernet.
-	owned_core.add_avail(FUSION_ENERGY_PER_K * plasma_temperature)
+	owned_core.generate_power(FUSION_ENERGY_PER_K * plasma_temperature)
 
 	// Energy decay.
 	if(plasma_temperature >= 1)
@@ -119,13 +126,14 @@
 		var/amount = reactants[reactant]
 		if(amount < 1)
 			reactants.Remove(reactant)
-		else if(amount >= FUSION_REACTANT_CAP)
+		else if(amount >= fusion_reactant_cap)
 			var/radiate = rand(3 * amount / 4, amount / 4)
 			reactants[reactant] -= radiate
 			radiation += radiate
 
 	check_instability()
 	Radiate()
+	handle_cohesion()
 	if(radiation)
 		SSradiation.radiate(src, round(radiation*0.001))
 	return 1
@@ -146,8 +154,8 @@
 			alpha = 230
 		else
 			var/temp_mod = ((plasma_temperature-5000)/20000)
-			use_range = light_min_range + ceil((light_max_range-light_min_range)*temp_mod)
-			use_power = light_min_power + ceil((light_max_power-light_min_power)*temp_mod)
+			use_range = light_min_range + CEILING((light_max_range-light_min_range)*temp_mod)
+			use_power = light_min_power + CEILING((light_max_power-light_min_power)*temp_mod)
 			switch (plasma_temperature)
 				if (1000 to 6000)
 					light_color = COLOR_ORANGE
@@ -184,47 +192,38 @@
 			if(percent_unstable > 0)
 				percent_unstable = max(0, percent_unstable-rand(0.01,0.03))
 
-	if(percent_unstable >= 1)
+	if(field_cohesion == 0)
 		owned_core.Shutdown(force_rupture=1)
-	else
-		if(percent_unstable > 0.5 && prob(percent_unstable*100))
-			if(plasma_temperature < FUSION_RUPTURE_THRESHOLD)
+		
+	if(percent_unstable > 0.5 && prob(percent_unstable*100))
+		if(plasma_temperature < FUSION_RUPTURE_THRESHOLD)
+			visible_message("<span class='danger'>\The [src] ripples uneasily, like a disturbed pond.</span>")
+		else
+			var/flare
+			var/fuel_loss
+			if(percent_unstable < 0.7)
 				visible_message("<span class='danger'>\The [src] ripples uneasily, like a disturbed pond.</span>")
+				fuel_loss = prob(5)
+			else if(percent_unstable < 0.9)
+				visible_message("<span class='danger'>\The [src] undulates violently, shedding plumes of plasma!</span>")
+				flare = prob(50)
+				fuel_loss = prob(20)
 			else
-				var/flare
-				var/fuel_loss
-				var/rupture
-				if(percent_unstable < 0.7)
-					visible_message("<span class='danger'>\The [src] ripples uneasily, like a disturbed pond.</span>")
-					fuel_loss = prob(5)
-				else if(percent_unstable < 0.9)
-					visible_message("<span class='danger'>\The [src] undulates violently, shedding plumes of plasma!</span>")
-					flare = prob(50)
-					fuel_loss = prob(20)
-					rupture = prob(5)
-				else
-					visible_message("<span class='danger'>\The [src] is wracked by a series of horrendous distortions, buckling and twisting like a living thing!</span>")
-					flare = 1
-					fuel_loss = prob(50)
-					rupture = prob(25)
+				visible_message("<span class='danger'>\The [src] is wracked by a series of horrendous distortions, buckling and twisting like a living thing!</span>")
+				flare = 1
+				fuel_loss = prob(50)
+			var/lost_plasma = (plasma_temperature*percent_unstable)
+			radiation += lost_plasma
+			if(flare)
+				radiation += plasma_temperature/2
 
-				if(rupture)
-					owned_core.Shutdown(force_rupture=1)
-				else
-					var/lost_plasma = (plasma_temperature*percent_unstable)
-					radiation += lost_plasma
-					if(flare)
-						radiation += plasma_temperature/2
-					plasma_temperature -= lost_plasma
-
-					if(fuel_loss)
-						for(var/particle in reactants)
-							var/lost_fuel = reactants[particle]*percent_unstable
-							radiation += lost_fuel
-							reactants[particle] -= lost_fuel
-							if(reactants[particle] <= 0)
-								reactants.Remove(particle)
-					Radiate()
+			if(fuel_loss)
+				for(var/particle in reactants)
+					var/lost_fuel = reactants[particle]*percent_unstable
+					radiation += lost_fuel
+					reactants[particle] -= lost_fuel
+					if(reactants[particle] <= 0)
+						reactants.Remove(particle)
 	return
 
 /obj/effect/fusion_em_field/proc/is_shutdown_safe()
@@ -234,7 +233,7 @@
 	set waitfor = FALSE
 	visible_message("<span class='danger'>\The [src] shudders like a dying animal before flaring to eye-searing brightness and rupturing!</span>")
 	set_light(15, 15, "#ccccff")
-	empulse(get_turf(src), ceil(plasma_temperature/1000), ceil(plasma_temperature/300))
+	empulse(get_turf(src), CEILING(plasma_temperature/1000), CEILING(plasma_temperature/300))
 	sleep(5)
 	RadiateAll()
 	explosion(get_turf(owned_core),-1,-1,8,10) // Blow out all the windows.
@@ -258,6 +257,7 @@
 		calc_size = 13
 	field_strength = new_strength
 	change_size(calc_size)
+	fusion_reactant_cap = field_strength * FUSION_FIELD_CAP_COEFF // Excess reactants will be ejected over the next few calls to Process()
 
 /obj/effect/fusion_em_field/proc/AddEnergy(var/a_energy, var/a_plasma_temperature)
 	energy += a_energy
@@ -307,8 +307,8 @@
 
 /obj/effect/fusion_em_field/proc/Radiate()
 	if(isturf(loc))
-		var/empsev = max(1, min(3, ceil(size/2)))
-		for(var/atom/movable/AM in range(max(1,Floor(size/2)), loc))
+		var/empsev = max(1, min(3, CEILING(size/2)))
+		for(var/atom/movable/AM in range(max(1,FLOOR(size/2)), loc))
 
 			if(AM == src || AM == owned_core || !AM.simulated)
 				continue
@@ -329,7 +329,6 @@
 		var/datum/gas_mixture/environment = owned_core.loc.return_air()
 		if(environment && environment.temperature < (T0C+1000)) // Putting an upper bound on it to stop it being used in a TEG.
 			environment.add_thermal_energy(plasma_temperature*20000)
-	radiation = 0
 
 /obj/effect/fusion_em_field/proc/change_size(var/newsize = 1)
 	var/changed = 0
@@ -367,7 +366,7 @@
 		//determine a random amount to actually react this cycle, and remove it from the standard pool
 		//this is a hack, and quite nonrealistic :(
 		for(var/reactant in react_pool)
-			react_pool[reactant] = rand(Floor(react_pool[reactant]/2),react_pool[reactant])
+			react_pool[reactant] = rand(FLOOR(react_pool[reactant]/2),react_pool[reactant])
 			reactants[reactant] -= react_pool[reactant]
 			if(!react_pool[reactant])
 				react_pool -= reactant
@@ -424,7 +423,7 @@
 						continue
 
 				//randomly determined amount to react
-				var/amount_reacting = rand(1, max_num_reactants)
+				var/amount_reacting = max_num_reactants
 
 				//removing the reacting substances from the list of substances that are primed to react this cycle
 				//if there aren't enough of that substance (there should be) then modify the reactant amounts accordingly
@@ -486,7 +485,10 @@
 	update_icon()
 	return 0
 
+/obj/effect/fusion_em_field/proc/handle_cohesion()
+	field_cohesion = clamp(((field_cohesion + cohesion_regeneration) - clamp(percent_unstable*FUSION_COHESION_LOSS_COEFF, 0, FUSION_COHESION_LOSS_LIMIT)),0,100)
+
 #undef FUSION_HEAT_CAP
 #undef FUSION_INSTABILITY_DIVISOR
 #undef FUSION_RUPTURE_THRESHOLD
-#undef FUSION_REACTANT_CAP
+#undef FUSION_FIELD_CAP_COEFF

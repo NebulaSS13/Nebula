@@ -2,10 +2,7 @@
 /mob/living/simple_animal/hostile/bear
 	name = "space bear"
 	desc = "RawrRawr!!"
-	icon_state = "bear"
-	icon_living = "bear"
-	icon_dead = "bear_dead"
-	icon_gib = "bear_gib"
+	icon = 'icons/mob/simple_animal/bear_space.dmi'
 	speak = list("RAWR!","Rawr!","GRR!","Growl!")
 	speak_emote = list("growls", "roars")
 	emote_hear = list("rawrs","grumbles","grawls")
@@ -26,7 +23,7 @@
 	max_gas = null
 	minbodytemp = 0
 
-	meat_type = /obj/item/chems/food/snacks/bearmeat
+	meat_type = /obj/item/chems/food/bearmeat
 	meat_amount = 10
 	bone_amount = 20
 	skin_amount = 20
@@ -43,9 +40,7 @@
 /mob/living/simple_animal/hostile/bear/do_delayed_life_action()
 	..()
 	if(isspaceturf(loc))
-		icon_state = "bear"
-	else
-		icon_state = "bearfloor"
+		icon_state += "-space"
 
 	switch(stance)
 
@@ -97,12 +92,12 @@
 		target_mob = user
 	..()
 
-/mob/living/simple_animal/hostile/bear/attack_hand(mob/M)
+/mob/living/simple_animal/hostile/bear/attack_hand(mob/user)
 	if(stance != HOSTILE_STANCE_ATTACK && stance != HOSTILE_STANCE_ATTACKING)
 		stance = HOSTILE_STANCE_ALERT
 		stance_step = 6
-		target_mob = M
-	..()
+		target_mob = user
+	. = ..()
 
 /mob/living/simple_animal/hostile/bear/FindTarget()
 	. = ..()
@@ -123,7 +118,7 @@
 	if(ishuman(target_mob))
 		var/mob/living/carbon/human/H = target_mob
 		var/dam_zone = pick(BP_CHEST, BP_L_HAND, BP_R_HAND, BP_L_LEG, BP_R_LEG)
-		var/obj/item/organ/external/affecting = H.get_organ(ran_zone(dam_zone, target = H))
+		var/obj/item/organ/external/affecting = GET_EXTERNAL_ORGAN(H, ran_zone(dam_zone, target = H))
 		H.apply_damage(damage, BRUTE, affecting, DAM_SHARP|DAM_EDGE) //TODO damage_flags var on simple_animals, maybe?
 		return H
 	else if(isliving(target_mob))

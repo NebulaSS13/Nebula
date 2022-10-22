@@ -7,8 +7,8 @@
 	var/health = 0
 	var/maxhealth = 50
 	var/hitsound = 'sound/weapons/smash.ogg'
-	var/breakable
 	var/parts_type
+	var/parts_amount
 	var/footstep_type
 	var/mob_offset
 
@@ -35,7 +35,7 @@
 	. = ..()
 	update_materials()
 	if(!CanFluidPass())
-		fluid_update()
+		fluid_update(TRUE)
 
 /obj/structure/proc/show_examined_damage(mob/user, var/perc)
 	if(maxhealth == -1)
@@ -145,37 +145,38 @@
 		take_damage(dmg)
 
 /obj/structure/Destroy()
-	reset_mobs_offset()
 	var/turf/T = get_turf(src)
+	. = ..()
 	if(T)
 		T.fluid_update()
+		for(var/atom/movable/AM in T)
+			AM.reset_offsets()
+			AM.reset_plane_and_layer()
+
+/obj/structure/Crossed(O)
 	. = ..()
+	if(ismob(O))
+		var/mob/M = O
+		M.reset_offsets()
+		M.reset_plane_and_layer()
 
-/obj/structure/Crossed(mob/living/M)
-	if(istype(M))
-		M.on_structure_offset(mob_offset)
-	..()
-
-/obj/structure/proc/reset_mobs_offset()
-	for(var/mob/living/M in loc)
-		M.on_structure_offset(0)
+/obj/structure/Uncrossed(O)
+	. = ..()
+	if(ismob(O))
+		var/mob/M = O
+		M.reset_offsets()
+		M.reset_plane_and_layer()
 
 /obj/structure/Move()
+	var/turf/T = get_turf(src)
 	. = ..()
 	if(. && !CanFluidPass())
 		fluid_update()
-
-/obj/structure/attack_hand(mob/user)
-	..()
-	if(breakable)
-		if(MUTATION_HULK in user.mutations)
-			user.say(pick(";RAAAAAAAARGH!", ";HNNNNNNNNNGGGGGGH!", ";GWAAAAAAAARRRHHH!", "NNNNNNNNGGGGGGGGHH!", ";AAAAAAARRRGH!" ))
-			attack_generic(user,1,"smashes")
-		else if(istype(user,/mob/living/carbon/human))
-			var/mob/living/carbon/human/H = user
-			if(H.species.can_shred(user))
-				attack_generic(user,1,"slices")
-	return ..()
+		if(T)
+			T.fluid_update()
+			for(var/atom/movable/AM in T)
+				AM.reset_offsets()	
+				AM.reset_plane_and_layer()
 
 /obj/structure/grab_attack(var/obj/item/grab/G)
 	if (!G.force_danger())

@@ -12,11 +12,11 @@
 /turf/simulated/wall,
 /area/test_area/proximity)
 "e" = (
-/obj/effect/landmark/proximity_spawner,
+/obj/abstract/landmark/proximity_spawner,
 /turf/simulated/floor,
 /area/test_area/proximity)
 "f" = (
-/obj/effect/landmark/proximity_wall,
+/obj/abstract/landmark/proximity_wall,
 /turf/simulated/wall,
 /area/test_area/proximity)
 

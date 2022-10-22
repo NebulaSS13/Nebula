@@ -21,6 +21,7 @@ var/global/list/outfits_decls_by_type_
 
 /decl/hierarchy/outfit
 	name = "Naked"
+	abstract_type = /decl/hierarchy/outfit
 
 	var/uniform = null
 	var/suit = null
@@ -53,14 +54,12 @@ var/global/list/outfits_decls_by_type_
 	var/list/backpack_overrides
 	var/flags = OUTFIT_RESET_EQUIPMENT
 
-/decl/hierarchy/outfit/New()
-	..()
+/decl/hierarchy/outfit/Initialize()
+	. = ..()
 	backpack_overrides = backpack_overrides || list()
-
-	if(is_hidden_category())
-		return
-	outfits_decls_by_type_[type] = src
-	dd_insertObjectList(outfits_decls_, src)
+	if(!is_abstract())
+		outfits_decls_by_type_[type] = src
+		dd_insertObjectList(outfits_decls_, src)
 
 /decl/hierarchy/outfit/proc/pre_equip(mob/living/carbon/human/H)
 	if(flags & OUTFIT_RESET_EQUIPMENT)
@@ -92,7 +91,7 @@ var/global/list/outfits_decls_by_type_
 
 	if(!(OUTFIT_ADJUSTMENT_SKIP_POST_EQUIP & equip_adjustments))
 		post_equip(H)
-	H.update_icons()
+	H.update_icon()
 	if(W) // We set ID info last to ensure the ID photo is as correct as possible.
 		H.set_id_info(W)
 	return 1
@@ -108,8 +107,8 @@ var/global/list/outfits_decls_by_type_
 			H.species.equip_default_fallback_uniform(H)
 	if(holster && H.w_uniform)
 		var/obj/item/clothing/accessory/equip_holster = new holster
-		H.w_uniform.attackby(H, equip_holster)
-		if(equip_holster.loc != H.w_uniform)
+		H.w_uniform.attackby(equip_holster, H)
+		if(equip_holster.loc != H.w_uniform && !QDELETED(equip_holster))
 			qdel(equip_holster)
 	if(suit)
 		H.equip_to_slot_or_del(new suit(H),slot_wear_suit_str)
@@ -165,7 +164,16 @@ var/global/list/outfits_decls_by_type_
 				H.equip_to_slot_or_del(backpack, slot_back_str)
 
 	if(H.species && !(OUTFIT_ADJUSTMENT_SKIP_SURVIVAL_GEAR & equip_adjustments))
-		H.species.equip_survival_gear(H, flags&OUTFIT_EXTENDED_SURVIVAL)
+		if(flags & OUTFIT_EXTENDED_SURVIVAL)
+			H.species.equip_survival_gear(H, /obj/item/storage/box/engineer)
+		else if(H.client?.prefs?.survival_box_choice && global.survival_box_choices[H.client.prefs.survival_box_choice])
+			var/decl/survival_box_option/box = global.survival_box_choices[H.client.prefs.survival_box_choice]
+			H.species.equip_survival_gear(H, box.box_type)
+		else
+			H.species.equip_survival_gear(H)
+
+	if(H.client?.prefs?.give_passport)
+		global.using_map.create_passport(H)
 
 /decl/hierarchy/outfit/proc/equip_id(var/mob/living/carbon/human/H, var/rank, var/assignment, var/equip_adjustments)
 	if(!id_slot || !id_type)

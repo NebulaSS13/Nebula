@@ -94,6 +94,7 @@
 		holstered.add_fingerprint(user)
 		holstered.queue_icon_update()
 		user.put_in_hands(holstered)
+		holstered = null
 		storage.w_class = initial(storage.w_class)
 		atom_holder.update_icon()
 		return 1

@@ -92,7 +92,7 @@
 			return 0
 	var/obj/item/paicard/card = new(T)
 	var/mob/living/silicon/pai/pai = new(card)
-	pai.SetName(sanitizeSafe(input(choice, "Enter your pAI name:", "pAI Name", "Personal AI") as text))
+	pai.SetName(sanitize_safe(input(choice, "Enter your pAI name:", "pAI Name", "Personal AI") as text))
 	pai.real_name = pai.name
 	pai.key = choice.key
 	card.setPersonality(pai)
@@ -202,37 +202,37 @@
 		if(!(A.type in areas_all))
 			areas_all.Add(A.type)
 
-	for(var/obj/machinery/power/apc/APC in world)
+	for(var/obj/machinery/power/apc/APC in SSmachines.machinery)
 		var/area/A = get_area(APC)
 		if(!(A.type in areas_with_APC))
 			areas_with_APC.Add(A.type)
 
-	for(var/obj/machinery/alarm/alarm in world)
+	for(var/obj/machinery/alarm/alarm in SSmachines.machinery)
 		var/area/A = get_area(alarm)
 		if(!(A.type in areas_with_air_alarm))
 			areas_with_air_alarm.Add(A.type)
 
-	for(var/obj/machinery/network/requests_console/RC in world)
+	for(var/obj/machinery/network/requests_console/RC in SSmachines.machinery)
 		var/area/A = get_area(RC)
 		if(!(A.type in areas_with_RC))
 			areas_with_RC.Add(A.type)
 
-	for(var/obj/machinery/light/L in world)
+	for(var/obj/machinery/light/L in SSmachines.machinery)
 		var/area/A = get_area(L)
 		if(!(A.type in areas_with_light))
 			areas_with_light.Add(A.type)
 
-	for(var/obj/machinery/light_switch/LS in world)
+	for(var/obj/machinery/light_switch/LS in SSmachines.machinery)
 		var/area/A = get_area(LS)
 		if(!(A.type in areas_with_LS))
 			areas_with_LS.Add(A.type)
 
-	for(var/obj/item/radio/intercom/I in world)
+	for(var/obj/item/radio/intercom/I in SSmachines.machinery)
 		var/area/A = get_area(I)
 		if(!(A.type in areas_with_intercom))
 			areas_with_intercom.Add(A.type)
 
-	for(var/obj/machinery/camera/C in world)
+	for(var/obj/machinery/camera/C in SSmachines.machinery)
 		var/area/A = get_area(C)
 		if(!(A.type in areas_with_camera))
 			areas_with_camera.Add(A.type)
@@ -311,15 +311,15 @@
 	if(alert("Are you sure? This will start up the engine. Should only be used during debug!",,"Yes","No") != "Yes")
 		return
 
-	for(var/obj/machinery/power/emitter/E in world)
+	for(var/obj/machinery/emitter/E in SSmachines.machinery)
 		if(E.anchored)
 			E.active = 1
 
-	for(var/obj/machinery/field_generator/F in world)
+	for(var/obj/machinery/field_generator/F in SSmachines.machinery)
 		if(F.anchored)
 			F.Varedit_start = 1
 	spawn(30)
-		for(var/obj/machinery/the_singularitygen/G in world)
+		for(var/obj/machinery/the_singularitygen/G in SSmachines.machinery)
 			if(G.anchored)
 				var/obj/singularity/S = new /obj/singularity(get_turf(G), 50)
 				spawn(0)
@@ -337,7 +337,7 @@
 				//S.dissipate_track = 0
 				//S.dissipate_strength = 10
 
-	for(var/obj/machinery/power/rad_collector/Rad in world)
+	for(var/obj/machinery/rad_collector/Rad in SSmachines.machinery)
 		if(Rad.anchored)
 			if(!Rad.loaded_tank)
 				Rad.loaded_tank = new /obj/item/tank/hydrogen(Rad)
@@ -346,7 +346,7 @@
 			if(!Rad.active)
 				Rad.toggle_power()
 
-	for(var/obj/machinery/power/smes/SMES in world)
+	for(var/obj/machinery/power/smes/SMES in SSmachines.machinery)
 		if(SMES.anchored)
 			SMES.input_attempt = 1
 
@@ -468,10 +468,10 @@
 	set name = "Spawn Material Stack"
 	if(!check_rights(R_DEBUG)) return
 
-	var/material = input("Select material to spawn") as null|anything in SSmaterials.materials_by_name
+	var/decl/material/material = input("Select material to spawn") as null|anything in SSmaterials.materials
 	if(!material)
 		return
-	SSmaterials.create_object(material, get_turf(mob), 50)
+	SSmaterials.create_object(material.type, get_turf(mob), 50)
 
 /client/proc/force_ghost_trap_trigger()
 	set category = "Debug"
@@ -516,3 +516,35 @@
 
 	new_planet.update_daynight()
 	new_planet.build_level()
+
+/client/proc/display_del_log()
+	set category = "Debug"
+	set name = "Display del() Log"
+	set desc = "Display del's log of everything that's passed through it."
+
+	if(!check_rights(R_DEBUG))
+		return
+
+	. = list("<B>List of things that have gone through qdel this round</B><BR><BR><ol>")
+	sortTim(SSgarbage.items, cmp = /proc/cmp_qdel_item_time, associative = TRUE)
+	for(var/path in SSgarbage.items)
+		var/datum/qdel_item/I = SSgarbage.items[path]
+		. += "<li><u>[path]</u><ul>"
+		if(I.failures)
+			. += "<li>Failures: [I.failures]</li>"
+		. += "<li>qdel() Count: [I.qdels]</li>"
+		. += "<li>Destroy() Cost: [I.destroy_time]ms</li>"
+		if(I.hard_deletes)
+			. += "<li>Total Hard Deletes [I.hard_deletes]</li>"
+			. += "<li>Time Spent Hard Deleting: [I.hard_delete_time]ms</li>"
+		if(I.slept_destroy)
+			. += "<li>Sleeps: [I.slept_destroy]</li>"
+		if(I.no_respect_force)
+			. += "<li>Ignored force: [I.no_respect_force]</li>"
+		if(I.no_hint)
+			. += "<li>No hint: [I.no_hint]</li>"
+		. += "</ul></li>"
+
+	. += "</ol>"
+
+	show_browser(usr, JOINTEXT(.), "window=dellog")

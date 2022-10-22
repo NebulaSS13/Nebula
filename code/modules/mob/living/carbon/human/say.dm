@@ -1,10 +1,10 @@
 /mob/living/carbon/human/say(var/message, var/decl/language/speaking, var/verb = "says", var/alt_name = "", whispering)
 	if(!whispering)
-		var/obj/item/organ/internal/voicebox/voice = locate() in internal_organs
+		var/obj/item/organ/internal/voicebox/voice = locate() in get_internal_organs()
 		// Check if the language they're speaking is vocal and not supplied by a machine, and if they are currently suffocating.
 		whispering = (whispering || has_chemical_effect(CE_VOICELOSS, 1))
-		if((!speaking || !(speaking.flags & (NONVERBAL|SIGNLANG))) && (!voice || !voice.is_usable() || !voice.assists_languages[speaking]) && !isSynthetic() && need_breathe() && failed_last_breath)
-			var/obj/item/organ/internal/lungs/L = get_internal_organ(species.breathing_organ)
+		if((!speaking || !(speaking.flags & (LANG_FLAG_NONVERBAL|LANG_FLAG_SIGNLANG))) && (!voice || !voice.is_usable() || !voice.assists_languages[speaking]) && !isSynthetic() && need_breathe() && failed_last_breath)
+			var/obj/item/organ/internal/lungs/L = get_organ(species.breathing_organ, /obj/item/organ/internal/lungs)
 			if(!L || L.breath_fail_ratio > 0.9)
 				if(L && world.time < L.last_successful_breath + 2 MINUTES) //if we're in grace suffocation period, give it up for last words
 					to_chat(src, SPAN_WARNING("You use your remaining air to say something!"))
@@ -60,6 +60,8 @@
 	if(!speaking)
 		if(istype(other, /mob/living/silicon))
 			return TRUE
+		if(istype(other, /mob/announcer))
+			return TRUE
 		if(istype(other, /mob/living/carbon/brain))
 			return TRUE
 	return ..()
@@ -90,8 +92,8 @@
 
 	if(voice_sub)
 		return voice_sub
-	if(mind && mind.changeling && mind.changeling.mimicing)
-		return mind.changeling.mimicing
+	if(mind && mind.changeling && mind.changeling.mimicking)
+		return mind.changeling.mimicking
 	return real_name
 
 /mob/living/carbon/human/say_quote(var/message, var/decl/language/speaking = null)
@@ -110,6 +112,7 @@
 
 /mob/living/carbon/human/handle_speech_problems(var/list/message_data)
 	if(HAS_STATUS(src, STAT_SILENCE) || (sdisabilities & MUTED))
+		to_chat(src, SPAN_WARNING("You are unable to speak!"))
 		message_data[1] = ""
 		. = 1
 
@@ -127,10 +130,11 @@
 	switch(message_mode)
 		if("intercom")
 			if(!src.restrained())
-				for(var/obj/item/radio/intercom/I in view(1))
-					I.talk_into(src, message, null, verb, speaking)
-					I.add_fingerprint(src)
-					used_radios += I
+				for(var/obj/item/radio/I in view(1))
+					if(I.intercom_handling)
+						I.talk_into(src, message, null, verb, speaking)
+						I.add_fingerprint(src)
+						used_radios += I
 		if("headset")
 			if(l_ear && istype(l_ear,/obj/item/radio))
 				var/obj/item/radio/R = l_ear
@@ -193,7 +197,7 @@
 	if(ispath(speaking, /decl/language))
 		speaking = GET_DECL(speaking)
 	if(species && speaking && (speaking.name in species.assisted_langs))
-		for(var/obj/item/organ/internal/voicebox/I in src.internal_organs)
+		for(var/obj/item/organ/internal/voicebox/I in get_internal_organs())
 			if(I.is_usable() && I.assists_languages[speaking])
 				return TRUE
 		return FALSE

@@ -14,3 +14,5 @@
 	show_client_mouseover_highlight = TRUE
 /obj/structure/ladder
 	show_client_mouseover_highlight = TRUE
+/obj/structure/closet
+	show_client_mouseover_highlight = TRUE

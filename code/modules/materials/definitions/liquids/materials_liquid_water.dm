@@ -1,13 +1,17 @@
 /decl/material/liquid/water
 	name = "water"
+	uid = "liquid_water"
 	solid_name = "ice"
 	gas_name = "water vapour"
 	lore_text = "A ubiquitous chemical substance composed of hydrogen and oxygen."
-	color = COLOR_OCEAN
+	color = COLOR_LIQUID_WATER
 	gas_tile_overlay = "generic"
 	gas_overlay_limit = 0.5
 	gas_specific_heat = 30
-	gas_molar_mass = 0.020
+	molar_mass = 0.020
+	boiling_point = 100 CELSIUS
+	melting_point = 0 CELSIUS
+	latent_heat = 2258
 	gas_condensation_point = 308.15 // 35C. Dew point is ~20C but this is better for gameplay considerations.
 	gas_symbol_html = "H<sub>2</sub>O"
 	gas_symbol = "H2O"
@@ -18,6 +22,7 @@
 	glass_desc = "The father of all refreshments."
 	slipperiness = 8
 	dirtiness = DIRTINESS_CLEAN
+	turf_touch_threshold = 0.1
 	chilling_point = T0C
 	chilling_products = list(
 		/decl/material/solid/ice = 1
@@ -51,7 +56,7 @@
 
 #define WATER_LATENT_HEAT 9500 // How much heat is removed when applied to a hot turf, in J/unit (9500 makes 120 u of water roughly equivalent to 2L
 /decl/material/liquid/water/touch_turf(var/turf/T, var/amount, var/datum/reagents/holder)
-	
+
 	..()
 
 	if(!istype(T))
@@ -81,9 +86,9 @@
 
 /decl/material/liquid/water/touch_obj(var/obj/O, var/amount, var/datum/reagents/holder)
 	..()
-	if(istype(O, /obj/item/chems/food/snacks/monkeycube))
-		var/obj/item/chems/food/snacks/monkeycube/cube = O
-		if(!cube.wrapped)
+	if(istype(O, /obj/item/chems/food/monkeycube))
+		var/obj/item/chems/food/monkeycube/cube = O
+		if(!cube.wrapper_type)
 			cube.Expand()
 
 /decl/material/liquid/water/touch_mob(var/mob/living/M, var/amount, var/datum/reagents/holder)

@@ -8,7 +8,7 @@
 	scan_sound = 'sound/effects/fastbeep.ogg'
 	printout_color = "#eeffe8"
 	var/static/list/valid_targets = list(
-		/obj/item/chems/food/snacks/grown,
+		/obj/item/chems/food/grown,
 		/obj/item/grown,
 		/obj/machinery/portable_atmospherics/hydroponics,
 		/obj/item/seeds
@@ -20,15 +20,15 @@
 	return FALSE
 
 /obj/item/scanner/plant/scan(atom/A, mob/user)
-	scan_title = "[A] at [get_area(A)]"
+	scan_title = "[A] at [get_area_name(A)]"
 	scan_data = plant_scan_results(A)
 	show_menu(user)
 
 /proc/plant_scan_results(obj/target)
 	var/datum/seed/grown_seed
 	var/datum/reagents/grown_reagents
-	if(istype(target,/obj/item/chems/food/snacks/grown))
-		var/obj/item/chems/food/snacks/grown/G = target
+	if(istype(target,/obj/item/chems/food/grown))
+		var/obj/item/chems/food/grown/G = target
 		grown_seed = SSplants.seeds[G.plantname]
 		grown_reagents = G.reagents
 

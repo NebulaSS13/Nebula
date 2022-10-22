@@ -2,10 +2,7 @@
 	name = "mouse"
 	real_name = "mouse"
 	desc = "It's a small rodent."
-	icon_state = "mouse_gray"
-	item_state = "mouse_gray"
-	icon_living = "mouse_gray"
-	icon_dead = "mouse_gray_dead"
+	icon = 'icons/mob/simple_animal/mouse_gray.dmi'
 	speak = list("Squeek!","SQUEEK!","Squeek?")
 	speak_emote = list("squeeks","squeeks","squiks")
 	emote_hear = list("squeeks","squeaks","squiks")
@@ -35,6 +32,7 @@
 	skin_material = /decl/material/solid/skin/fur
 
 	var/body_color //brown, gray and white, leave blank for random
+	var/splatted = FALSE
 
 /mob/living/simple_animal/mouse/Life()
 	. = ..()
@@ -46,21 +44,15 @@
 
 	if(!ckey && stat == CONSCIOUS && prob(0.5))
 		set_stat(UNCONSCIOUS)
-		icon_state = "mouse_[body_color]_sleep"
 		wander = 0
 		speak_chance = 0
 		//snuffles
 	else if(stat == UNCONSCIOUS)
 		if(ckey || prob(1))
 			set_stat(CONSCIOUS)
-			icon_state = "mouse_[body_color]"
 			wander = 1
 		else if(prob(5))
 			INVOKE_ASYNC(src, .proc/audible_emote, "snuffles.")
-
-/mob/living/simple_animal/mouse/lay_down()
-	..()
-	icon_state = resting ? "mouse_[body_color]_sleep" : "mouse_[body_color]"
 
 /mob/living/simple_animal/mouse/Initialize()
 	verbs += /mob/living/proc/ventcrawl
@@ -73,19 +65,25 @@
 	switch(body_color)
 		if("gray")
 			skin_material = /decl/material/solid/skin/fur/gray
+			icon = 'icons/mob/simple_animal/mouse_gray.dmi'
 		if("white")
 			skin_material = /decl/material/solid/skin/fur/white
-	icon_state = "mouse_[body_color]"
-	item_state = "mouse_[body_color]"
-	icon_living = "mouse_[body_color]"
-	icon_dead = "mouse_[body_color]_dead"
+			icon = 'icons/mob/simple_animal/mouse_white.dmi'
+		if("brown")
+			icon = 'icons/mob/simple_animal/mouse_brown.dmi'
+
 	desc = "It's a small [body_color] rodent, often seen hiding in maintenance areas and making a nuisance of itself."
 	. = ..()
 
 /mob/living/simple_animal/mouse/proc/splat()
-	icon_dead = "mouse_[body_color]_splat"
 	adjustBruteLoss(maxHealth)  // Enough damage to kill
-	src.death()
+	splatted = TRUE
+	death()
+
+/mob/living/simple_animal/mouse/on_update_icon()
+	. = ..()
+	if(stat == DEAD && splatted)
+		icon_state = "world-splat"
 
 /mob/living/simple_animal/mouse/Crossed(AM)
 	if( ishuman(AM) )
@@ -101,15 +99,15 @@
 
 /mob/living/simple_animal/mouse/white
 	body_color = "white"
-	icon_state = "mouse_white"
+	icon = 'icons/mob/simple_animal/mouse_white.dmi'
 
 /mob/living/simple_animal/mouse/gray
 	body_color = "gray"
-	icon_state = "mouse_gray"
+	icon = 'icons/mob/simple_animal/mouse_gray.dmi'
 
 /mob/living/simple_animal/mouse/brown
 	body_color = "brown"
-	icon_state = "mouse_brown"
+	icon = 'icons/mob/simple_animal/mouse_brown.dmi'
 
 //TOM IS ALIVE! SQUEEEEEEEE~K :)
 /mob/living/simple_animal/mouse/brown/Tom

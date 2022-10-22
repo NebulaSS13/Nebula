@@ -1,14 +1,16 @@
 /obj/item/chems
-	name = "Container"
+	name = "container"
 	desc = "..."
 	icon = 'icons/obj/items/chem/container.dmi'
 	icon_state = null
 	w_class = ITEM_SIZE_SMALL
 
+	var/base_name
 	var/amount_per_transfer_from_this = 5
 	var/possible_transfer_amounts = @"[5,10,15,25,30]"
 	var/volume = 30
 	var/label_text
+	var/show_reagent_name = FALSE
 
 /obj/item/chems/proc/cannot_interact(mob/user)
 	if(!CanPhysicallyInteract(user))
@@ -20,10 +22,12 @@
 	return FALSE
 
 /obj/item/chems/proc/get_base_name()
-	. = initial(name)
+	if(!base_name)
+		base_name = initial(name)
+	. = base_name
 
 /obj/item/chems/on_reagent_change()
-	if(atom_flags & ATOM_FLAG_SHOW_REAGENT_NAME)
+	if(show_reagent_name)
 		var/decl/material/R = reagents?.get_primary_reagent_decl()
 		var/newname = get_base_name()
 		if(R)
@@ -56,7 +60,7 @@
 
 /obj/item/chems/attackby(obj/item/W, mob/user)
 	if(istype(W, /obj/item/pen) || istype(W, /obj/item/flashlight/pen))
-		var/tmp_label = sanitizeSafe(input(user, "Enter a label for [name]", "Label", label_text), MAX_NAME_LEN)
+		var/tmp_label = sanitize_safe(input(user, "Enter a label for [name]", "Label", label_text), MAX_NAME_LEN)
 		if(length(tmp_label) > 10)
 			to_chat(user, "<span class='notice'>The label can be at most 10 characters long.</span>")
 		else
@@ -67,10 +71,10 @@
 		return ..()
 
 /obj/item/chems/proc/update_name_label()
-	if(label_text == "")
-		SetName(initial(name))
+	if(!label_text || label_text == "")
+		SetName(get_base_name())
 	else
-		SetName("[initial(name)] ([label_text])")
+		SetName("[get_base_name()] ([label_text])")
 
 /obj/item/chems/proc/standard_dispenser_refill(var/mob/user, var/obj/structure/reagent_dispensers/target) // This goes into afterattack
 	if(!istype(target))
@@ -149,7 +153,7 @@
 
 			user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN) //puts a limit on how fast people can eat/drink things
 			self_feed_message(user)
-			reagents.trans_to_mob(user, issmall(user) ? ceil(amount_per_transfer_from_this/2) : amount_per_transfer_from_this, CHEM_INGEST)
+			reagents.trans_to_mob(user, issmall(user) ? CEILING(amount_per_transfer_from_this/2) : amount_per_transfer_from_this, CHEM_INGEST)
 			feed_sound(user)
 			add_trace_DNA(user)
 			return 1
@@ -221,3 +225,7 @@
 		to_chat(user, "<span class='notice'>The [src] contains: [reagents.get_reagents(precision = prec)].</span>")
 	else if((loc == user) && user.skill_check(SKILL_CHEMISTRY, SKILL_EXPERT))
 		to_chat(user, "<span class='notice'>Using your chemistry knowledge, you identify the following reagents in \the [src]: [reagents.get_reagents(!user.skill_check(SKILL_CHEMISTRY, SKILL_PROF), 5)].</span>")
+
+/obj/item/chems/shatter(consumed)
+	reagents.splash(get_turf(src), reagents.total_volume)
+	. = ..()

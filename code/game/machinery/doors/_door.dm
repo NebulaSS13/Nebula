@@ -53,6 +53,8 @@
 
 	atmos_canpass = CANPASS_PROC
 
+	var/set_dir_on_update = TRUE
+
 /obj/machinery/door/proc/can_operate(var/mob/user)
 	. = istype(user) && !user.restrained() && (!issmall(user) || ishuman(user) || issilicon(user) || istype(user, /mob/living/bot))
 
@@ -67,7 +69,9 @@
 		visible_message("<span class='notice'>\The [user] bonks \the [src] harmlessly.</span>")
 	attack_animation(user)
 
-/obj/machinery/door/Initialize()
+/obj/machinery/door/Initialize(var/mapload, var/d, var/populate_parts = TRUE, var/obj/structure/door_assembly/assembly = null)
+	if(!populate_parts)
+		inherit_from_assembly(assembly)
 	set_extension(src, /datum/extension/penetration, /datum/extension/penetration/proc_call, .proc/CheckPenetration)
 	..()
 	. = INITIALIZE_HINT_LATELOAD
@@ -88,6 +92,15 @@
 	if(autoset_access && length(req_access))
 		PRINT_STACK_TRACE("A door with mapped access restrictions was set to autoinitialize access.")
 #endif
+
+/obj/machinery/door/proc/inherit_from_assembly(var/obj/structure/door_assembly/assembly)
+	if (assembly && istype(assembly))
+		frame_type = assembly.type
+		if(assembly.electronics)
+			var/obj/item/stock_parts/circuitboard/electronics = assembly.electronics
+			install_component(electronics, FALSE, FALSE) // will be refreshed in parent call; unsafe to refresh prior to calling ..() in Initialize
+			electronics.construct(src)
+		return TRUE
 
 /obj/machinery/door/LateInitialize(mapload, dir=0, populate_parts=TRUE)
 	..()
@@ -139,10 +152,11 @@
 		explosion_resistance = density ? initial(explosion_resistance) : 0
 
 /obj/machinery/door/set_dir(new_dir)
-	if(new_dir & (EAST|WEST))
-		new_dir = WEST
-	else
-		new_dir = SOUTH
+	if(set_dir_on_update)
+		if(new_dir & (EAST|WEST))
+			new_dir = WEST
+		else
+			new_dir = SOUTH
 
 	. = ..(new_dir)
 
@@ -243,7 +257,7 @@
 
 		//figure out how much metal we need
 		var/amount_needed = (maxhealth - health) / DOOR_REPAIR_AMOUNT
-		amount_needed = ceil(amount_needed)
+		amount_needed = CEILING(amount_needed)
 
 		var/obj/item/stack/stack = I
 		var/transfer
@@ -379,52 +393,57 @@
 				flick("door_deny", src)
 				playsound(src.loc, 'sound/machines/buzz-two.ogg', 50, 0)
 
-/obj/machinery/door/proc/open(var/forced = 0)
+/obj/machinery/door/proc/open(forced = FALSE)
 	if(!can_open(forced))
 		return
+
 	operating = 1
 
 	do_animate("opening")
 	icon_state = "door0"
-	set_opacity(0)
-	sleep(3)
-	src.set_density(0)
+	set_opacity(FALSE)
+
+	sleep(0.5 SECONDS)
+	src.set_density(FALSE)
 	update_nearby_tiles()
-	sleep(7)
+
+	sleep(0.5 SECONDS)
 	src.layer = open_layer
 	update_icon()
-	set_opacity(0)
+	set_opacity(FALSE)
 	operating = 0
 
 	if(autoclose)
 		close_door_at = next_close_time()
 
-	return 1
+	return TRUE
 
 /obj/machinery/door/proc/next_close_time()
 	return world.time + (normalspeed ? 150 : 5)
 
-/obj/machinery/door/proc/close(var/forced = 0)
+/obj/machinery/door/proc/close(forced = FALSE)
 	if(!can_close(forced))
 		return
+
 	operating = 1
 
 	close_door_at = 0
 	do_animate("closing")
-	sleep(3)
-	src.set_density(1)
-	src.layer = closed_layer
+
+	sleep(0.5 SECONDS)
+	src.set_density(TRUE)
 	update_nearby_tiles()
-	sleep(7)
+	src.layer = closed_layer
+
+	sleep(0.5 SECONDS)
 	update_icon()
 	if(visible && !glass)
-		set_opacity(1)	//caaaaarn!
+		set_opacity(TRUE)
 	operating = 0
 
 	//I shall not add a check every x ticks if a door has closed over some fire.
 	var/obj/fire/fire = locate() in loc
-	if(fire)
-		qdel(fire)
+	qdel(fire)
 
 /obj/machinery/door/proc/toggle(to_open = density)
 	if(to_open)
@@ -529,6 +548,9 @@
 	for(var/obj/item/stock_parts/access_lock/lock in get_all_components_of_type(/obj/item/stock_parts/access_lock))
 		if(lock.locked && length(lock.req_access))
 			. |= lock.req_access
+
+	for(var/obj/item/stock_parts/network_receiver/network_lock/lock in get_all_components_of_type(/obj/item/stock_parts/network_receiver/network_lock))
+		. |= lock.get_req_access()
 
 /obj/machinery/door/do_simple_ranged_interaction(var/mob/user)
 	if((!requiresID() || allowed(null)) && can_operate(user) && can_open_manually)

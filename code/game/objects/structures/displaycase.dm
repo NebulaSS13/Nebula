@@ -80,6 +80,7 @@
 		update_icon()
 
 /obj/structure/displaycase/on_update_icon()
+	..()
 	if(destroyed)
 		icon_state = "glassboxb"
 	else
@@ -116,13 +117,7 @@
 
 	if(!locked || destroyed)
 		var/obj/item/selected_item
-		var/list/options = list()
-
-		for(var/atom/movable/AM in src)
-			var/image/radial_button = image(icon = AM.icon, icon_state = AM.icon_state)
-			options[AM] = radial_button
-
-		selected_item = show_radial_menu(user, src, options, radius = 42, require_near = TRUE, use_labels = TRUE)
+		selected_item = show_radial_menu(user, src, make_item_radial_menu_choices(src), radius = 42, require_near = TRUE, use_labels = TRUE)
 		if(QDELETED(selected_item) || !contents.Find(selected_item) || !Adjacent(user) || user.incapacitated())
 			return
 
@@ -132,6 +127,6 @@
 		return TRUE
 
 	else if(!destroyed && user.a_intent == I_HURT)
-		visible_message(SPAN_WARNING("[user] kicks \the [src]."), SPAN_WARNING("You kick \the [src]"))
+		visible_message(SPAN_WARNING("[user] kicks \the [src]."), SPAN_WARNING("You kick \the [src]."))
 		take_damage(2)
 		return TRUE

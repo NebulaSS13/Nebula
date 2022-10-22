@@ -369,9 +369,17 @@
 	initial_flooring = /decl/flooring/crystal
 
 /turf/simulated/floor/glass
-	icon = 'icons/turf/flooring/glassfloor.dmi'
-	icon_state = "glassfloor"
+	name = "glass floor"
+	icon = 'icons/turf/flooring/glass.dmi'
+	icon_state = "glass"
 	initial_flooring = /decl/flooring/glass
 
 /turf/simulated/floor/glass/boro
 	initial_flooring = /decl/flooring/glass/boro
+
+//Water go splish
+/turf/simulated/floor/pool
+	name = "pool floor"
+	icon = 'icons/turf/flooring/pool.dmi'
+	icon_state = "pool"
+	initial_flooring = /decl/flooring/pool

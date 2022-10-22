@@ -126,6 +126,7 @@
 	matter = list(/decl/material/solid/metal/steel = MATTER_AMOUNT_TRACE)
 
 /obj/item/clothing/suit/straight_jacket/equipped(var/mob/user, var/slot)
+	. = ..()
 	if(slot == slot_wear_suit_str)
 		if(iscarbon(user))
 			var/mob/living/carbon/C = user

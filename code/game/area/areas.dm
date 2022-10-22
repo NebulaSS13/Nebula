@@ -11,6 +11,8 @@ var/global/list/areas = list()
 	luminosity =    0
 	mouse_opacity = 0
 
+	var/proper_name /// Automatically set by SetName and Initialize; cached result of strip_improper(name).
+
 	var/fire
 	var/party
 	var/eject
@@ -42,7 +44,10 @@ var/global/list/areas = list()
 	var/list/ambience = list('sound/ambience/ambigen1.ogg','sound/ambience/ambigen3.ogg','sound/ambience/ambigen4.ogg','sound/ambience/ambigen5.ogg','sound/ambience/ambigen6.ogg','sound/ambience/ambigen7.ogg','sound/ambience/ambigen8.ogg','sound/ambience/ambigen9.ogg','sound/ambience/ambigen10.ogg','sound/ambience/ambigen11.ogg','sound/ambience/ambigen12.ogg','sound/ambience/ambigen14.ogg')
 	var/list/forced_ambience
 	var/sound_env = STANDARD_STATION
-	var/turf/base_turf //The base turf type of the area, which can be used to override the z-level's base turf
+	var/description //A text-based description of what this area is for.
+
+	var/base_turf // The base turf type of the area, which can be used to override the z-level's base turf
+	var/open_turf // The base turf of the area if it has a turf below it in multizi. Overrides turf-specific open type
 
 	var/static/global_uid = 0
 	var/uid
@@ -53,10 +58,14 @@ var/global/list/areas = list()
 	var/list/air_scrub_names = list()
 	var/list/air_vent_info = list()
 	var/list/air_scrub_info = list()
+	var/list/blurbed_stated_to = list() //This list of names is here to make sure we don't state our descriptive blurb to a person more than once.
+
+	var/tmp/is_outside = OUTSIDE_NO
 
 /area/New()
 	icon_state = ""
 	uid = ++global_uid
+	proper_name = strip_improper(name)
 	luminosity = !dynamic_lighting
 	..()
 
@@ -76,7 +85,7 @@ var/global/list/areas = list()
 /area/Del()
 	global.areas -= src
 	. = ..()
-	
+
 /area/Destroy()
 	global.areas -= src
 	..()
@@ -87,6 +96,7 @@ var/global/list/areas = list()
 /proc/ChangeArea(var/turf/T, var/area/A)
 	if(!istype(A))
 		CRASH("Area change attempt failed: invalid area supplied.")
+	var/old_outside = T.is_outside()
 	var/area/old_area = get_area(T)
 	if(old_area == A)
 		return
@@ -101,6 +111,9 @@ var/global/list/areas = list()
 
 	for(var/obj/machinery/M in T)
 		M.area_changed(old_area, A) // They usually get moved events, but this is the one way an area can change without triggering one.
+
+	if(T.is_outside == OUTSIDE_AREA && T.is_outside() != old_outside)
+		T.update_weather()
 
 /area/proc/alert_on_fall(var/mob/living/carbon/human/H)
 	return
@@ -294,7 +307,6 @@ var/global/list/mob/living/forced_ambiance_list = new
 	if(!istype(A,/mob/living))	return
 
 	var/mob/living/L = A
-	if(!L.ckey)	return
 
 	if(!L.lastarea)
 		L.lastarea = get_area(L.loc)
@@ -305,13 +317,28 @@ var/global/list/mob/living/forced_ambiance_list = new
 			thunk(L)
 		L.update_floating()
 
-	play_ambience(L)
+	if(L.ckey)
+		play_ambience(L)
+		do_area_blurb(L)
+
 	L.lastarea = newarea
+
 
 /area/Exited(A)
 	if(isliving(A))
 		clear_ambience(A)
 	return ..()
+
+/area/proc/do_area_blurb(var/mob/living/L)
+	if(isnull(description))
+		return
+
+	if(L?.get_preference_value(/datum/client_preference/area_info_blurb) != PREF_YES)
+		return
+
+	if(!(L.ckey in blurbed_stated_to))
+		blurbed_stated_to += L.ckey
+		to_chat(L, SPAN_NOTICE(FONT_SMALL("[description]")))
 
 /area/proc/play_ambience(var/mob/living/L)
 	// Ambience goes down here -- make sure to list each area seperately for ease of adding things in later, thanks! Note: areas adjacent to each other should have the same sounds to prevent cutoff when possible.- LastyScratch
@@ -348,7 +375,7 @@ var/global/list/mob/living/forced_ambiance_list = new
 
 	if(istype(mob,/mob/living/carbon/human/))
 		var/mob/living/carbon/human/H = mob
-		if(prob(H.skill_fail_chance(SKILL_EVA, 100, SKILL_PROF)))
+		if(prob(H.skill_fail_chance(SKILL_EVA, 100, SKILL_ADEPT)))
 			if(!MOVING_DELIBERATELY(H))
 				ADJ_STATUS(H, STAT_STUN, 6)
 				ADJ_STATUS(H, STAT_WEAK, 6)
@@ -422,3 +449,7 @@ var/global/list/mob/living/forced_ambiance_list = new
 
 /area/proc/has_turfs()
 	return !!(locate(/turf) in src)
+
+/area/SetName(new_name)
+	. = ..()
+	proper_name = strip_improper(new_name)

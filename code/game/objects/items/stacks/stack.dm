@@ -13,6 +13,8 @@
 	gender = PLURAL
 	origin_tech = "{'materials':1}"
 
+	/// A copy of initial matter list when this atom initialized. Stack matter should always assume a single tile.
+	var/list/matter_per_piece
 	var/singular_name
 	var/plural_name
 	var/base_state
@@ -27,7 +29,6 @@
 	var/uses_charge
 	var/list/charge_costs
 	var/list/datum/matter_synth/synths
-	var/list/datum/stack_recipe/recipes
 
 /obj/item/stack/Initialize(mapload, amount, material)
 
@@ -65,8 +66,12 @@
 /obj/item/stack/get_matter_amount_modifier()
 	. = amount * matter_multiplier
 
+/obj/item/stack/proc/get_recipes()
+	return
+
 /obj/item/stack/proc/list_recipes(mob/user, recipes_sublist)
-	if (!recipes)
+	var/list/recipes = get_recipes()
+	if(!islist(recipes) || !length(recipes))
 		return
 	if (!src || get_amount() <= 0)
 		close_browser(user, "window=stack")
@@ -160,7 +165,7 @@
 	if (href_list["make"])
 		if (src.get_amount() < 1) qdel(src) //Never should happen
 
-		var/list/recipes_list = recipes
+		var/list/recipes_list = get_recipes()
 		if (href_list["sublist"])
 			var/datum/stack_recipe_list/srl = recipes_list[text2num(href_list["sublist"])]
 			recipes_list = srl.recipes
@@ -186,12 +191,16 @@
 	return 1
 
 /obj/item/stack/create_matter()
-	..()
-	initial_matter = matter?.Copy()
+	matter_per_piece = matter?.Copy() // this is used for refreshing matter amount in update_matter()
+	if(istype(material))
+		LAZYINITLIST(matter_per_piece)
+		matter_per_piece[material.type] = max(matter_per_piece[material.type], round(MATTER_AMOUNT_PRIMARY * matter_multiplier))
+	. = ..()
 
 /obj/item/stack/proc/update_matter()
-	matter = initial_matter?.Copy()
-	create_matter()
+	matter = list()
+	for(var/mat in matter_per_piece)
+		matter[mat] = (matter_per_piece[mat] * amount)
 
 /obj/item/stack/proc/use(var/used)
 	if (!can_use(used))
@@ -319,7 +328,7 @@
 /obj/item/stack/get_storage_cost()	//Scales storage cost to stack size
 	. = ..()
 	if (amount < max_amount)
-		. = ceil(. * amount / max_amount)
+		. = CEILING(. * amount / max_amount)
 
 /obj/item/stack/attack_hand(mob/user)
 	if(user.is_holding_offhand(src))

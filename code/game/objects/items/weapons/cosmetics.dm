@@ -42,9 +42,9 @@
 
 	if(ishuman(A))
 		var/mob/living/carbon/human/H = A
-		var/obj/item/organ/external/head/head = H.organs_by_name[BP_HEAD]
+		var/obj/item/organ/external/head/head = H.get_organ(BP_HEAD, /obj/item/organ/external/head)
 
-		if(!istype(head))
+		if(!head)
 			return
 
 		if(user.a_intent == I_HELP && target_zone == BP_HEAD)
@@ -61,7 +61,7 @@
 			else
 				user.visible_message("<span class='warning'>[user] begins to do [H]'s lips with \the [src].</span>", \
 									 "<span class='notice'>You begin to apply \the [src].</span>")
-				if(do_after(user, 20, H) && do_after(H, 20, needhand = 0, progress = 0, incapacitation_flags = INCAPACITATION_NONE))	//user needs to keep their active hand, H does not.
+				if(do_after(user, 20, H) && do_after(H, 20, check_holding = 0, progress = 0, incapacitation_flags = INCAPACITATION_NONE))	//user needs to keep their active hand, H does not.
 					user.visible_message("<span class='notice'>[user] does [H]'s lips with \the [src].</span>", \
 										 "<span class='notice'>You apply \the [src].</span>")
 					H.lip_style = color

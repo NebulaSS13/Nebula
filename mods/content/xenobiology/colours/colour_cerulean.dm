@@ -6,5 +6,7 @@
 	reaction_strings = list(/decl/material/solid/metal/uranium = "Synthesises a steroid that can enhance a slime core to have three uses.")
 
 /decl/slime_colour/cerulean/handle_uranium_reaction(var/datum/reagents/holder)
-	new /obj/item/slime_extract_enhancer(get_turf(holder.my_atom))
+	var/location = get_turf(holder.get_reaction_loc())
+	if(location)
+		new /obj/item/slime_extract_enhancer(location)
 	return TRUE

@@ -13,7 +13,7 @@
 	var/initial_id_tag
 	var/list/stored =     list()
 	var/list/harvesting = list()
-	var/obj/machinery/power/fusion_core/harvest_from
+	var/obj/machinery/fusion_core/harvest_from
 
 /obj/machinery/kinetic_harvester/Initialize()
 	set_extension(src, /datum/extension/local_network_member)
@@ -46,7 +46,7 @@
 	var/datum/local_network/lan = lanm.get_local_network()
 
 	if(lan)	
-		var/list/fusion_cores = lan.get_devices(/obj/machinery/power/fusion_core)
+		var/list/fusion_cores = lan.get_devices(/obj/machinery/fusion_core)
 		if(fusion_cores && fusion_cores.len)
 			harvest_from = fusion_cores[1]
 	return harvest_from
@@ -66,7 +66,7 @@
 	data["materials"] = list()
 	for(var/mat in stored)
 		var/decl/material/material = GET_DECL(mat)
-		var/sheets = Floor(stored[mat]/(SHEET_MATERIAL_AMOUNT * 1.5))
+		var/sheets = FLOOR(stored[mat]/(SHEET_MATERIAL_AMOUNT * 1.5))
 		data["materials"] += list(list("name" = material.solid_name, "amount" = sheets, "harvest" = harvesting[mat], "mat_ref" = "\ref[material]"))
 
 	ui = SSnano.try_update_ui(user, src, ui_key, ui, data, force_open)
@@ -112,7 +112,7 @@
 		var/decl/material/material = locate(href_list["remove_mat"])
 		if(istype(material))
 			var/sheet_cost = (SHEET_MATERIAL_AMOUNT * 1.5)
-			var/sheets = Floor(stored[material.type]/sheet_cost)
+			var/sheets = FLOOR(stored[material.type]/sheet_cost)
 			if(sheets > 0)
 				material.create_object(loc, sheets)
 				stored[material.type] -= (sheets * sheet_cost)

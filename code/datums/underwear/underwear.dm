@@ -7,12 +7,7 @@
 /*************
 * Categories *
 *************/
-/datum/category_group/underwear
-	var/sort_order		// Lower sort order is applied as icons first
-
-/datum/category_group/underwear/dd_SortValue()
-	return sort_order
-
+// Lower sort order is applied as icons first
 /datum/category_group/underwear/top
 	name = "Underwear, top"
 	sort_order = 1

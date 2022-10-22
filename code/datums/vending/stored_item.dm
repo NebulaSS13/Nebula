@@ -11,12 +11,7 @@
 	src.storing_object = storing_object
 	src.item_path = path
 	src.amount = amount
-
-	if(!name)
-		var/atom/tmp = path
-		src.item_name = initial(tmp.name)
-	else
-		src.item_name = name
+	src.item_name = name || atom_info_repository.get_name_for(path)
 	..()
 
 /datum/stored_items/Destroy()

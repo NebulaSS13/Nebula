@@ -12,6 +12,8 @@
 	is   = "is"
 	does = "does"
 	self = "himself"
+	s    = "s"
+	es   = "es"
 	
 	// Thanks oldcoders.
 	var/static/list/weird_euphemisms_for_your_balls = list(

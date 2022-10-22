@@ -51,14 +51,14 @@
 				internals.icon_state = "internal0"
 	return null
 
-/mob/living/carbon/proc/get_breath_from_environment(var/volume_needed=STD_BREATH_VOLUME)
+/mob/living/carbon/proc/get_breath_from_environment(var/volume_needed=STD_BREATH_VOLUME, var/atom/location = src.loc)
 	if(volume_needed <= 0)
 		return
 	var/datum/gas_mixture/breath = null
 
 	var/datum/gas_mixture/environment
-	if(loc)
-		environment = loc.return_air()
+	if(location)
+		environment = location.return_air()
 
 	if(environment)
 		breath = environment.remove_volume(volume_needed)
@@ -69,7 +69,7 @@
 		if(istype(wear_mask, /obj/item/clothing/mask) && breath)
 			var/obj/item/clothing/mask/M = wear_mask
 			var/datum/gas_mixture/filtered = M.filter_air(breath)
-			loc.assume_air(filtered)
+			location.assume_air(filtered)
 		return breath
 	return null
 
@@ -95,4 +95,10 @@
 
 /mob/living/carbon/proc/handle_post_breath(datum/gas_mixture/breath)
 	if(breath)
-		loc.assume_air(breath) //by default, exhale
+		//by default, exhale
+		var/datum/gas_mixture/internals_air = internal?.return_air()
+		var/datum/gas_mixture/loc_air = loc?.return_air()
+		if(internals_air?.return_pressure() < loc_air.return_pressure()) // based on the assumption it has a one-way valve for gas release
+			internals_air?.merge(breath)
+		else
+			loc_air?.merge(breath)

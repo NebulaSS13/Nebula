@@ -11,12 +11,12 @@
 	var/list/next_stages
 	var/product
 
-/decl/crafting_stage/New()
+/decl/crafting_stage/Initialize()
+	. = ..()
 	var/stages = list()
 	for(var/nid in next_stages)
 		stages += GET_DECL(nid)
 	next_stages = stages
-	..()
 
 /decl/crafting_stage/proc/can_begin_with(var/obj/item/thing)
 	. = istype(thing, begins_with_object_type)
@@ -92,7 +92,7 @@
 
 /decl/crafting_stage/tape
 	consume_completion_trigger = FALSE
-	completion_trigger_type = /obj/item/tape_roll
+	completion_trigger_type = /obj/item/ducttape
 
 /decl/crafting_stage/pipe
 	completion_trigger_type = /obj/item/pipe

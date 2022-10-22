@@ -1,17 +1,19 @@
-#define TOPIC_UPDATE_PREVIEW 4
-#define TOPIC_REFRESH_UPDATE_PREVIEW (TOPIC_REFRESH|TOPIC_UPDATE_PREVIEW)
-
 var/global/const/CHARACTER_PREFERENCE_INPUT_TITLE = "Character Preference"
-
-/datum/category_group/player_setup_category/physical_preferences
-	name = "Physical"
-	sort_order = 1
-	category_item_type = /datum/category_item/player_setup_item/physical
 
 /datum/category_group/player_setup_category/background_preferences
 	name = "Background"
-	sort_order = 2
+	sort_order = 1 // must go first because species
 	category_item_type = /datum/category_item/player_setup_item/background
+
+/datum/category_group/player_setup_category/physical_preferences
+	name = "Physical"
+	sort_order = 2
+	category_item_type = /datum/category_item/player_setup_item/physical
+
+/datum/category_group/player_setup_category/aspect_preferences
+	name = "Aspects"
+	sort_order = 3
+	category_item_type = /datum/category_item/player_setup_item/aspects
 
 /datum/category_group/player_setup_category/background_preferences/content(var/mob/user)
 	. = ""
@@ -20,38 +22,38 @@ var/global/const/CHARACTER_PREFERENCE_INPUT_TITLE = "Character Preference"
 
 /datum/category_group/player_setup_category/occupation_preferences
 	name = "Occupation"
-	sort_order = 3
+	sort_order = 4
 	category_item_type = /datum/category_item/player_setup_item/occupation
 
 /datum/category_group/player_setup_category/record_preferences
 	name = "Records"
-	sort_order = 4
+	sort_order = 5
 	category_item_type = /datum/category_item/player_setup_item/records
 
 /datum/category_group/player_setup_category/appearance_preferences
 	name = "Roles"
-	sort_order = 5
+	sort_order = 6
 	category_item_type = /datum/category_item/player_setup_item/antagonism
 
-/datum/category_group/player_setup_category/relations_preferences
-	name = "Matchmaking"
-	sort_order = 6
-	category_item_type = /datum/category_item/player_setup_item/relations
-
 /datum/category_group/player_setup_category/loadout_preferences
-	name = "Loadout"
+	name = "Equipment"
 	sort_order = 7
 	category_item_type = /datum/category_item/player_setup_item/loadout
 
-/datum/category_group/player_setup_category/global_preferences
-	name = "Global"
-	sort_order = 8
-	category_item_type = /datum/category_item/player_setup_item/player_global
-
 /datum/category_group/player_setup_category/law_pref
 	name = "Laws"
-	sort_order = 9
+	sort_order = 8
 	category_item_type = /datum/category_item/player_setup_item/law_pref
+
+/datum/category_group/player_setup_category/controls
+	name = "Controls"
+	sort_order = 9
+	category_item_type = /datum/category_item/player_setup_item/controls
+
+/datum/category_group/player_setup_category/global_preferences
+	name = "Global"
+	sort_order = 10
+	category_item_type = /datum/category_item/player_setup_item/player_global
 
 
 /****************************
@@ -124,26 +126,28 @@ var/global/const/CHARACTER_PREFERENCE_INPUT_TITLE = "Character Preference"
 /**************************
 * Category Category Setup *
 **************************/
-/datum/category_group/player_setup_category
-	var/sort_order = 0
-
-/datum/category_group/player_setup_category/dd_SortValue()
-	return sort_order
-
 /datum/category_group/player_setup_category/proc/sanitize_setup()
 	for(var/datum/category_item/player_setup_item/PI in items)
 		PI.sanitize_preferences()
 	for(var/datum/category_item/player_setup_item/PI in items)
 		PI.sanitize_character()
+	for(var/datum/category_item/player_setup_item/PI in items)
+		PI.finalize_character()
 
 /datum/category_group/player_setup_category/proc/load_character(datum/pref_record_reader/R)
 	for(var/datum/category_item/player_setup_item/PI in items)
 		PI.load_character(R)
+	for(var/datum/category_item/player_setup_item/PI in items)
+		PI.sanitize_character()
+	for(var/datum/category_item/player_setup_item/PI in items)
+		PI.finalize_character()
 
 /datum/category_group/player_setup_category/proc/save_character(datum/pref_record_writer/W)
 	// Sanitize all data, then save it
 	for(var/datum/category_item/player_setup_item/PI in items)
 		PI.sanitize_character()
+	for(var/datum/category_item/player_setup_item/PI in items)
+		PI.finalize_character()
 	for(var/datum/category_item/player_setup_item/PI in items)
 		PI.save_character(W)
 
@@ -221,6 +225,9 @@ var/global/const/CHARACTER_PREFERENCE_INPUT_TITLE = "Character Preference"
 /datum/category_item/player_setup_item/proc/sanitize_character()
 	return
 
+/datum/category_item/player_setup_item/proc/finalize_character()
+	return
+
 /datum/category_item/player_setup_item/proc/sanitize_preferences()
 	return
 
@@ -244,6 +251,13 @@ var/global/const/CHARACTER_PREFERENCE_INPUT_TITLE = "Character Preference"
 		pref_mob.client.prefs.update_preview_icon()
 
 	// And again: above operation is slow/may sleep, clients disappear whenever.
+	pref_mob = preference_mob()
+	if(!pref_mob || !pref_mob.client)
+		return 1
+	if(. & TOPIC_HARD_REFRESH)
+		pref_mob.client.prefs.open_setup_window(usr)
+
+	// And again again: above operation is slow/may sleep, clients disappear whenever.
 	pref_mob = preference_mob()
 	if(!pref_mob || !pref_mob.client)
 		return 1

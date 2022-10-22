@@ -4,116 +4,115 @@
 	icon = 'icons/obj/supplybeacon.dmi'
 	desc = "An inactive, hacked supply beacon stamped with the Nyx Rapid Fabrication logo. Good for one (1) ballistic supply pod shipment."
 	icon_state = "beacon"
-	var/deploy_path = /obj/machinery/power/supply_beacon
+	material = /decl/material/solid/metal/steel
+	w_class = ITEM_SIZE_NO_CONTAINER
+
+	var/deploy_path = /obj/structure/supply_beacon
 	var/deploy_time = 30
 
 /obj/item/supply_beacon/supermatter
 	name = "inactive supermatter supply beacon"
-	deploy_path = /obj/machinery/power/supply_beacon/supermatter
+	deploy_path = /obj/structure/supply_beacon/supermatter
 
 /obj/item/supply_beacon/attack_self(var/mob/user)
-	user.visible_message("<span class='notice'>\The [user] begins setting up \the [src].</span>")
+	user.visible_message(SPAN_NOTICE("\The [user] begins setting up \the [src]."))
 	if(!do_after(user, deploy_time, src))
 		return
 	if(!user.unEquip(src))
 		return
 	var/obj/S = new deploy_path(get_turf(user))
-	user.visible_message("<span class='notice'>\The [user] deploys \the [S].</span>")
+	user.visible_message(SPAN_NOTICE("\The [user] deploys \the [S]."))
 	qdel(src)
 
-/obj/machinery/power/supply_beacon
+/obj/structure/supply_beacon
 	name = "supply beacon"
-	desc = "A bulky moonshot supply beacon. Someone has been messing with the wiring."
+	desc = "A bulky long-distance supply beacon. Someone has been messing with the wiring."
 	icon = 'icons/obj/supplybeacon.dmi'
 	icon_state = "beacon"
+	anchored = FALSE
+	density =  TRUE
+	material = /decl/material/solid/metal/steel
 
-	anchored = 0
-	density = 1
-	stat = 0
-
-	var/target_drop_time
-	var/drop_delay = 450
-	var/expended
 	var/drop_type
+	var/expended =   FALSE
+	var/activated =  FALSE
+	var/drop_delay = 45 SECONDS
+	var/target_drop_time
 
-/obj/machinery/power/supply_beacon/Initialize()
+/obj/structure/supply_beacon/Initialize()
 	. = ..()
-	if(!drop_type) drop_type = pick(supply_drop_random_loot_types())
+	if(!drop_type)
+		drop_type = pick(supply_drop_random_loot_types())
 
-/obj/machinery/power/supply_beacon/supermatter
+/obj/structure/supply_beacon/supermatter
 	name = "supermatter supply beacon"
 	drop_type = "supermatter"
 
-/obj/machinery/power/supply_beacon/attackby(var/obj/item/W, var/mob/user)
-	if(!use_power && isWrench(W))
-		if(!anchored && !connect_to_network())
-			to_chat(user, "<span class='warning'>This device must be placed over an exposed cable.</span>")
-			return
+/obj/structure/supply_beacon/attackby(var/obj/item/W, var/mob/user)
+	if(!activated && isWrench(W))
 		anchored = !anchored
-		user.visible_message("<span class='notice'>\The [user] [anchored ? "secures" : "unsecures"] \the [src].</span>")
+		user.visible_message(SPAN_NOTICE("\The [user] [anchored ? "secures" : "unsecures"] \the [src]."))
 		playsound(src.loc, 'sound/items/Ratchet.ogg', 50, 1)
-		return
+		return TRUE
 	return ..()
 
-/obj/machinery/power/supply_beacon/physical_attack_hand(var/mob/user)
+/obj/structure/supply_beacon/attack_hand(var/mob/user)
+
 	if(expended)
-		update_use_power(POWER_USE_OFF)
-		to_chat(user, "<span class='warning'>\The [src] has used up its charge.</span>")
+		to_chat(user, SPAN_WARNING("\The [src] has used up its charge."))
 		return TRUE
 
-	if(anchored)
-		if(use_power)
-			deactivate(user)
-		else
-			activate(user)
+	if(!anchored)
+		to_chat(user, SPAN_WARNING("You need to secure \the [src] with a wrench first!"))
 		return TRUE
+
+	if(activated)
+		deactivate(user)
 	else
-		to_chat(user, "<span class='warning'>You need to secure the beacon with a wrench first!</span>")
-		return TRUE
+		activate(user)
+	return TRUE
 
-/obj/machinery/power/supply_beacon/proc/activate(var/mob/user)
+/obj/structure/supply_beacon/proc/activate(var/mob/user)
 	if(expended)
-		return
-	if(surplus() < 500)
-		if(user) to_chat(user, "<span class='notice'>The connected wire doesn't have enough current.</span>")
 		return
 	set_light(3, 3, "#00ccaa")
 	icon_state = "beacon_active"
-	update_use_power(POWER_USE_IDLE)
-	admin_attacker_log(user, "has activated \a [src] at [get_area(src)]")
-	if(user) to_chat(user, "<span class='notice'>You activate the beacon. The supply drop will be dispatched soon.</span>")
+	activated = TRUE
+	START_PROCESSING(SSobj, src)
+	admin_attacker_log(user, "has activated \a [src] at [get_area_name(src)]")
+	if(user)
+		to_chat(user, SPAN_NOTICE("You activate \the [src]. The supply drop will be dispatched soon."))
 
-/obj/machinery/power/supply_beacon/proc/deactivate(var/mob/user, var/permanent)
+/obj/structure/supply_beacon/proc/deactivate(var/mob/user, var/permanent)
 	if(permanent)
 		expended = 1
 		icon_state = "beacon_depleted"
 	else
 		icon_state = "beacon"
-	set_light(0)
-	update_use_power(POWER_USE_OFF)
-	target_drop_time = null
-	if(user) to_chat(user, "<span class='notice'>You deactivate the beacon.</span>")
 
-/obj/machinery/power/supply_beacon/Destroy()
-	if(use_power)
+	set_light(0)
+	activated = FALSE
+	STOP_PROCESSING(SSobj, src)
+	target_drop_time = null
+	if(user)
+		to_chat(user, SPAN_NOTICE("You deactivate \the [src]."))
+
+/obj/structure/supply_beacon/Destroy()
+	if(activated)
 		deactivate()
 	..()
 
-/obj/machinery/power/supply_beacon/Process()
-	if(expended)
+/obj/structure/supply_beacon/Process()
+	if(expended || !activated)
 		return PROCESS_KILL
-	if(!use_power)
-		return
-	if(draw_power(500) < 500)
-		deactivate()
-		return
 	if(!target_drop_time)
 		target_drop_time = world.time + drop_delay
-	else if(world.time >= target_drop_time)
-		deactivate(permanent = 1)
-		var/drop_x = src.x-2
-		var/drop_y = src.y-2
-		var/drop_z = src.z
+	if(world.time >= target_drop_time)
+		deactivate(permanent = TRUE)
 		command_announcement.Announce("Nyx Rapid Fabrication priority supply request #[rand(1000,9999)]-[rand(100,999)] recieved. Shipment dispatched via ballistic supply pod for immediate delivery. Have a nice day.", "Thank You For Your Patronage")
-		spawn(rand(100,300))
-			new /datum/random_map/droppod/supply(null, drop_x, drop_y, drop_z, supplied_drop = drop_type) // Splat.
+		addtimer(CALLBACK(src, .proc/drop_cargo), rand(20 SECONDS, 30 SECONDS))
+
+/obj/structure/supply_beacon/proc/drop_cargo(var/drop_x, var/drop_y, var/drop_z)
+	if(!QDELETED(src) && isturf(loc))
+		var/turf/T = loc
+		new /datum/random_map/droppod/supply(T.x-2, T.y-2, T.z, supplied_drop = drop_type) // Splat.

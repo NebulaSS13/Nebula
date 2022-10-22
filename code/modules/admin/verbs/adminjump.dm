@@ -17,7 +17,7 @@
 	var/list/areas = area_repository.get_areas_by_z_level()
 	var/area/A = areas[selected_area]
 	mob.jumpTo(pick(get_area_turfs(A)))
-	log_and_message_admins("jumped to [A]")
+	log_and_message_admins("jumped to [A.proper_name]")
 	SSstatistics.add_field_details("admin_verb","JA") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
 /client/proc/jumptoturf(var/turf/T)
@@ -148,5 +148,5 @@
 	if(A)
 		M.jumpTo(pick(get_area_turfs(A)))
 		SSstatistics.add_field_details("admin_verb","SMOB") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
-		log_and_message_admins("teleported [key_name(M)] to [A].")
+		log_and_message_admins("teleported [key_name(M)] to [A.proper_name].")
 

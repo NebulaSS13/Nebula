@@ -5,7 +5,6 @@
 "ab" = (
 /obj/machinery/power/smes/buildable/preset/liberia,
 /obj/structure/cable/blue{
-	d2 = 2;
 	icon_state = "0-2"
 	},
 /turf/simulated/floor/tiled/techfloor/grid,
@@ -19,8 +18,6 @@
 	},
 /obj/machinery/shield_diffuser,
 /obj/structure/cable/blue{
-	d1 = 1;
-	d2 = 2;
 	icon_state = "1-2"
 	},
 /turf/simulated/floor/tiled/techfloor/grid,
@@ -102,7 +99,6 @@
 	dir = 9
 	},
 /obj/structure/cable{
-	d2 = 4;
 	icon_state = "0-4"
 	},
 /turf/simulated/floor/tiled/techfloor,
@@ -116,8 +112,6 @@
 /area/liberia/merchantstorage)
 "aq" = (
 /obj/structure/cable{
-	d1 = 4;
-	d2 = 8;
 	icon_state = "4-8"
 	},
 /obj/machinery/light{
@@ -137,8 +131,6 @@
 	dir = 8
 	},
 /obj/structure/cable/blue{
-	d1 = 4;
-	d2 = 8;
 	icon_state = "4-8"
 	},
 /obj/structure/disposalpipe/junction/mirrored,
@@ -146,8 +138,6 @@
 /area/liberia/hallway)
 "as" = (
 /obj/structure/cable{
-	d1 = 4;
-	d2 = 8;
 	icon_state = "4-8"
 	},
 /obj/effect/floor_decal/techfloor{
@@ -161,7 +151,6 @@
 	pixel_y = 24
 	},
 /obj/structure/cable/blue{
-	d2 = 2;
 	icon_state = "0-2"
 	},
 /turf/simulated/floor/tiled/techfloor,
@@ -204,8 +193,6 @@
 	req_access = newlist()
 	},
 /obj/structure/cable{
-	d1 = 4;
-	d2 = 8;
 	icon_state = "4-8"
 	},
 /turf/simulated/floor,
@@ -213,8 +200,6 @@
 "az" = (
 /obj/machinery/meter/turf,
 /obj/structure/cable{
-	d1 = 4;
-	d2 = 8;
 	icon_state = "4-8"
 	},
 /obj/structure/sign{
@@ -230,9 +215,8 @@
 /turf/simulated/floor,
 /area/liberia/engineeringreactor)
 "aA" = (
-/obj/machinery/power/port_gen/pacman/super/potato,
+/obj/machinery/port_gen/pacman/super/potato,
 /obj/structure/cable{
-	d2 = 8;
 	icon_state = "0-8"
 	},
 /turf/simulated/floor,
@@ -259,8 +243,6 @@
 	dir = 10
 	},
 /obj/structure/cable/blue{
-	d1 = 1;
-	d2 = 4;
 	icon_state = "1-4"
 	},
 /turf/simulated/floor/tiled/techfloor,
@@ -286,13 +268,9 @@
 	dir = 8
 	},
 /obj/structure/cable/blue{
-	d1 = 2;
-	d2 = 8;
 	icon_state = "2-8"
 	},
 /obj/structure/cable/blue{
-	d1 = 2;
-	d2 = 4;
 	icon_state = "2-4"
 	},
 /turf/simulated/floor/tiled/techfloor,
@@ -303,8 +281,6 @@
 	},
 /obj/effect/floor_decal/techfloor/corner,
 /obj/structure/cable/blue{
-	d1 = 4;
-	d2 = 8;
 	icon_state = "4-8"
 	},
 /turf/simulated/floor/tiled/techfloor,
@@ -321,20 +297,15 @@
 	dir = 4
 	},
 /obj/structure/cable/blue{
-	d1 = 1;
-	d2 = 2;
 	icon_state = "1-2"
 	},
 /turf/simulated/floor/tiled/techfloor,
 /area/liberia/engineeringreactor)
 "aI" = (
 /obj/structure/cable/blue{
-	d1 = 4;
-	d2 = 8;
 	icon_state = "4-8"
 	},
 /obj/structure/cable/blue{
-	d2 = 8;
 	icon_state = "0-8"
 	},
 /obj/effect/wallframe_spawn/reinforced,
@@ -342,7 +313,6 @@
 /area/liberia/merchantstorage)
 "aK" = (
 /obj/structure/cable/blue{
-	d2 = 2;
 	icon_state = "0-2"
 	},
 /obj/machinery/ion_thruster{
@@ -387,8 +357,6 @@
 	name = "Warehouse Shutters"
 	},
 /obj/structure/cable/blue{
-	d1 = 1;
-	d2 = 2;
 	icon_state = "1-2"
 	},
 /obj/machinery/button/blast_door{
@@ -408,11 +376,9 @@
 /turf/simulated/floor/tiled/techfloor,
 /area/liberia/merchantstorage)
 "aR" = (
-/obj/machinery/power/shield_generator,
+/obj/machinery/shield_generator,
 /obj/structure/cable,
 /obj/structure/cable/blue{
-	d1 = 1;
-	d2 = 2;
 	icon_state = "1-2"
 	},
 /turf/simulated/floor/tiled/techfloor/grid,
@@ -440,8 +406,6 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/structure/cable/blue{
-	d1 = 1;
-	d2 = 2;
 	icon_state = "1-2"
 	},
 /obj/machinery/door/firedoor,
@@ -475,16 +439,12 @@
 	dir = 4
 	},
 /obj/structure/cable/blue{
-	d1 = 4;
-	d2 = 8;
 	icon_state = "4-8"
 	},
 /turf/simulated/floor/tiled/monotile,
 /area/liberia/hallway)
 "aZ" = (
 /obj/structure/cable/blue{
-	d1 = 1;
-	d2 = 4;
 	icon_state = "1-4"
 	},
 /obj/effect/floor_decal/techfloor/corner{
@@ -504,8 +464,6 @@
 	dir = 4
 	},
 /obj/structure/cable/blue{
-	d1 = 4;
-	d2 = 8;
 	icon_state = "4-8"
 	},
 /turf/simulated/floor/tiled/techfloor,
@@ -520,8 +478,6 @@
 /area/liberia/mule)
 "bc" = (
 /obj/structure/cable/blue{
-	d1 = 2;
-	d2 = 8;
 	icon_state = "2-8"
 	},
 /obj/effect/floor_decal/corner_techfloor_grid{
@@ -543,8 +499,6 @@
 	dir = 4
 	},
 /obj/structure/cable/blue{
-	d1 = 4;
-	d2 = 8;
 	icon_state = "4-8"
 	},
 /turf/simulated/floor/tiled/techfloor,
@@ -592,8 +546,6 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/effect/catwalk_plated,
 /obj/structure/cable/blue{
-	d1 = 1;
-	d2 = 2;
 	icon_state = "1-2"
 	},
 /turf/simulated/floor/plating,
@@ -772,7 +724,6 @@
 	pixel_y = 24
 	},
 /obj/structure/cable/blue{
-	d2 = 2;
 	icon_state = "0-2"
 	},
 /turf/simulated/floor/tiled/dark/monotile,
@@ -848,8 +799,6 @@
 	},
 /obj/structure/table,
 /obj/structure/cable/blue{
-	d1 = 1;
-	d2 = 2;
 	icon_state = "1-2"
 	},
 /turf/simulated/floor/tiled/steel_grid,
@@ -920,7 +869,6 @@
 	dir = 4
 	},
 /obj/structure/cable/blue{
-	d2 = 2;
 	icon_state = "0-2"
 	},
 /obj/structure/cable/blue,
@@ -930,8 +878,6 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/structure/cable/blue{
-	d1 = 1;
-	d2 = 4;
 	icon_state = "1-4"
 	},
 /turf/simulated/floor/wood/walnut,
@@ -949,8 +895,6 @@
 	},
 /obj/effect/floor_decal/industrial/warning/fulltile,
 /obj/structure/cable/blue{
-	d1 = 4;
-	d2 = 8;
 	icon_state = "4-8"
 	},
 /turf/simulated/floor/tiled/monotile,
@@ -964,8 +908,6 @@
 	},
 /obj/effect/catwalk_plated,
 /obj/structure/cable/blue{
-	d1 = 4;
-	d2 = 8;
 	icon_state = "4-8"
 	},
 /obj/structure/disposalpipe/segment/bent{
@@ -982,8 +924,6 @@
 	},
 /obj/effect/catwalk_plated,
 /obj/structure/cable/blue{
-	d1 = 4;
-	d2 = 8;
 	icon_state = "4-8"
 	},
 /turf/simulated/floor/plating,
@@ -995,8 +935,6 @@
 /obj/machinery/atmospherics/pipe/manifold/hidden/supply,
 /obj/effect/catwalk_plated,
 /obj/structure/cable/blue{
-	d1 = 1;
-	d2 = 8;
 	icon_state = "1-8"
 	},
 /turf/simulated/floor/plating,
@@ -1041,7 +979,6 @@
 	dir = 8
 	},
 /obj/structure/cable/blue{
-	d2 = 2;
 	icon_state = "0-2"
 	},
 /turf/simulated/floor/plating,
@@ -1058,13 +995,9 @@
 /area/liberia/mule)
 "bQ" = (
 /obj/structure/cable/blue{
-	d1 = 1;
-	d2 = 2;
 	icon_state = "1-2"
 	},
 /obj/structure/cable/blue{
-	d1 = 2;
-	d2 = 4;
 	icon_state = "2-4"
 	},
 /turf/simulated/floor/tiled/dark,
@@ -1076,8 +1009,6 @@
 	},
 /obj/machinery/door/firedoor,
 /obj/structure/cable/blue{
-	d1 = 4;
-	d2 = 8;
 	icon_state = "4-8"
 	},
 /turf/simulated/floor/tiled/dark/monotile,
@@ -1088,8 +1019,6 @@
 	},
 /obj/machinery/atmospherics/unary/vent_scrubber/on,
 /obj/structure/cable/blue{
-	d1 = 4;
-	d2 = 8;
 	icon_state = "4-8"
 	},
 /turf/simulated/floor/tiled,
@@ -1102,8 +1031,6 @@
 	dir = 6
 	},
 /obj/structure/cable/blue{
-	d1 = 4;
-	d2 = 8;
 	icon_state = "4-8"
 	},
 /turf/simulated/floor/tiled,
@@ -1128,8 +1055,6 @@
 	dir = 4
 	},
 /obj/structure/cable/blue{
-	d1 = 4;
-	d2 = 8;
 	icon_state = "4-8"
 	},
 /turf/simulated/floor/tiled,
@@ -1199,8 +1124,6 @@
 /area/liberia/mule)
 "cb" = (
 /obj/structure/cable/blue{
-	d1 = 1;
-	d2 = 2;
 	icon_state = "1-2"
 	},
 /obj/effect/floor_decal/techfloor{
@@ -1231,8 +1154,6 @@
 /area/liberia/mule)
 "ce" = (
 /obj/structure/cable/blue{
-	d1 = 1;
-	d2 = 2;
 	icon_state = "1-2"
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
@@ -1243,8 +1164,6 @@
 /area/liberia/mule)
 "cf" = (
 /obj/structure/cable/blue{
-	d1 = 1;
-	d2 = 4;
 	icon_state = "1-4"
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/cyan{
@@ -1264,8 +1183,6 @@
 	dir = 4
 	},
 /obj/structure/cable/blue{
-	d1 = 4;
-	d2 = 8;
 	icon_state = "4-8"
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/cyan{
@@ -1276,8 +1193,6 @@
 "ch" = (
 /obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers,
 /obj/structure/cable/blue{
-	d1 = 4;
-	d2 = 8;
 	icon_state = "4-8"
 	},
 /obj/machinery/atmospherics/pipe/manifold/hidden/cyan{
@@ -1329,8 +1244,6 @@
 	dir = 4
 	},
 /obj/structure/cable/blue{
-	d1 = 4;
-	d2 = 8;
 	icon_state = "4-8"
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/cyan{
@@ -1345,13 +1258,9 @@
 	dir = 4
 	},
 /obj/structure/cable/blue{
-	d1 = 1;
-	d2 = 8;
 	icon_state = "1-8"
 	},
 /obj/structure/cable/blue{
-	d1 = 4;
-	d2 = 8;
 	icon_state = "4-8"
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/cyan{
@@ -1375,7 +1284,6 @@
 	dir = 4
 	},
 /obj/structure/cable/blue{
-	d2 = 8;
 	icon_state = "0-8"
 	},
 /obj/effect/paint_stripe/yellow,
@@ -1451,8 +1359,6 @@
 	},
 /obj/structure/table,
 /obj/structure/cable/blue{
-	d1 = 1;
-	d2 = 2;
 	icon_state = "1-2"
 	},
 /turf/simulated/floor/tiled/steel_grid,
@@ -1530,8 +1436,6 @@
 /area/liberia/mule)
 "cD" = (
 /obj/structure/cable/blue{
-	d1 = 1;
-	d2 = 4;
 	icon_state = "1-4"
 	},
 /obj/machinery/atmospherics/unary/vent_scrubber/on{
@@ -1548,8 +1452,6 @@
 	req_access = newlist()
 	},
 /obj/structure/cable/blue{
-	d1 = 1;
-	d2 = 2;
 	icon_state = "1-2"
 	},
 /obj/effect/floor_decal/techfloor{
@@ -1571,7 +1473,6 @@
 	pixel_y = 24
 	},
 /obj/structure/cable/blue{
-	d2 = 2;
 	icon_state = "0-2"
 	},
 /turf/simulated/floor/tiled/techfloor/grid,
@@ -1625,8 +1526,6 @@
 	dir = 1
 	},
 /obj/structure/cable/blue{
-	d1 = 4;
-	d2 = 8;
 	icon_state = "4-8"
 	},
 /obj/machinery/alarm/liberia{
@@ -1641,8 +1540,6 @@
 "cN" = (
 /obj/effect/paint/silver,
 /obj/structure/cable/blue{
-	d1 = 4;
-	d2 = 8;
 	icon_state = "4-8"
 	},
 /obj/effect/paint_stripe/yellow,
@@ -1653,8 +1550,6 @@
 	dir = 8
 	},
 /obj/structure/cable/blue{
-	d1 = 4;
-	d2 = 8;
 	icon_state = "4-8"
 	},
 /obj/machinery/atmospherics/unary/vent_pump/on{
@@ -1664,8 +1559,6 @@
 /area/liberia/mule)
 "cP" = (
 /obj/structure/cable/blue{
-	d1 = 4;
-	d2 = 8;
 	icon_state = "4-8"
 	},
 /turf/simulated/floor/tiled/dark,
@@ -1675,8 +1568,6 @@
 	dir = 4
 	},
 /obj/structure/cable/blue{
-	d1 = 4;
-	d2 = 8;
 	icon_state = "4-8"
 	},
 /turf/simulated/floor/tiled/dark,
@@ -1697,8 +1588,6 @@
 	opacity = 0
 	},
 /obj/structure/cable/blue{
-	d1 = 4;
-	d2 = 8;
 	icon_state = "4-8"
 	},
 /obj/effect/paint_stripe/yellow,
@@ -1719,8 +1608,6 @@
 	dir = 1
 	},
 /obj/structure/cable/blue{
-	d1 = 4;
-	d2 = 8;
 	icon_state = "4-8"
 	},
 /turf/simulated/floor/tiled,
@@ -1731,8 +1618,6 @@
 	dir = 10
 	},
 /obj/structure/cable/blue{
-	d1 = 4;
-	d2 = 8;
 	icon_state = "4-8"
 	},
 /turf/simulated/floor/tiled,
@@ -1742,8 +1627,6 @@
 	dir = 10
 	},
 /obj/structure/cable/blue{
-	d1 = 4;
-	d2 = 8;
 	icon_state = "4-8"
 	},
 /turf/simulated/floor/tiled,
@@ -1753,8 +1636,6 @@
 	dir = 10
 	},
 /obj/structure/cable/blue{
-	d1 = 4;
-	d2 = 8;
 	icon_state = "4-8"
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/red{
@@ -1764,13 +1645,9 @@
 /area/liberia/mule)
 "cX" = (
 /obj/structure/cable/blue{
-	d1 = 1;
-	d2 = 4;
 	icon_state = "1-4"
 	},
 /obj/structure/cable/blue{
-	d1 = 1;
-	d2 = 2;
 	icon_state = "1-2"
 	},
 /obj/effect/floor_decal/techfloor{
@@ -1783,8 +1660,6 @@
 /area/liberia/engineeringstorage)
 "cY" = (
 /obj/structure/cable/blue{
-	d1 = 1;
-	d2 = 4;
 	icon_state = "1-4"
 	},
 /turf/simulated/floor/tiled/techfloor,
@@ -1801,8 +1676,6 @@
 /area/liberia/traidingroom)
 "da" = (
 /obj/structure/cable/blue{
-	d1 = 2;
-	d2 = 8;
 	icon_state = "2-8"
 	},
 /turf/simulated/floor/tiled/techfloor,
@@ -1825,16 +1698,12 @@
 /area/liberia/bridge)
 "dc" = (
 /obj/structure/cable/blue{
-	d1 = 2;
-	d2 = 8;
 	icon_state = "2-8"
 	},
 /obj/structure/railing/mapped{
 	dir = 4
 	},
 /obj/structure/cable/blue{
-	d1 = 4;
-	d2 = 8;
 	icon_state = "4-8"
 	},
 /obj/machinery/firealarm{
@@ -1845,8 +1714,6 @@
 /area/liberia/engineeringstorage)
 "dd" = (
 /obj/structure/cable/blue{
-	d1 = 1;
-	d2 = 2;
 	icon_state = "1-2"
 	},
 /obj/effect/floor_decal/techfloor{
@@ -1866,8 +1733,6 @@
 /obj/effect/wallframe_spawn/reinforced/titanium,
 /obj/effect/paint/silver,
 /obj/structure/cable/blue{
-	d1 = 4;
-	d2 = 8;
 	icon_state = "4-8"
 	},
 /obj/effect/paint_stripe/yellow,
@@ -1898,21 +1763,15 @@
 	},
 /obj/structure/catwalk,
 /obj/structure/cable/blue{
-	d1 = 4;
-	d2 = 8;
 	icon_state = "4-8"
 	},
 /turf/simulated/floor/plating,
 /area/liberia/mule)
 "dk" = (
 /obj/structure/cable/blue{
-	d1 = 2;
-	d2 = 4;
 	icon_state = "2-4"
 	},
 /obj/structure/cable/blue{
-	d1 = 1;
-	d2 = 2;
 	icon_state = "1-2"
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
@@ -1937,11 +1796,9 @@
 	},
 /obj/structure/catwalk,
 /obj/structure/cable/blue{
-	d1 = 2;
-	d2 = 8;
 	icon_state = "2-8"
 	},
-/obj/structure/fuel_port{
+/obj/structure/fuel_port/hydrogen{
 	pixel_x = 32;
 	pixel_y = -32
 	},
@@ -2031,8 +1888,6 @@
 	dir = 4
 	},
 /obj/structure/cable/blue{
-	d1 = 1;
-	d2 = 2;
 	icon_state = "1-2"
 	},
 /turf/simulated/floor/tiled/techfloor,
@@ -2084,7 +1939,6 @@
 /obj/machinery/cell_charger,
 /obj/machinery/atmospherics/unary/vent_scrubber/on,
 /obj/structure/cable/blue{
-	d2 = 2;
 	icon_state = "0-2"
 	},
 /obj/random/powercell,
@@ -2119,8 +1973,6 @@
 	req_access = newlist()
 	},
 /obj/structure/cable/blue{
-	d1 = 4;
-	d2 = 8;
 	icon_state = "4-8"
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
@@ -2137,8 +1989,6 @@
 /area/liberia/engineeringlobby)
 "dA" = (
 /obj/structure/cable/blue{
-	d1 = 4;
-	d2 = 8;
 	icon_state = "4-8"
 	},
 /obj/effect/catwalk_plated,
@@ -2181,8 +2031,6 @@
 	},
 /obj/effect/catwalk_plated,
 /obj/structure/cable/blue{
-	d1 = 2;
-	d2 = 4;
 	icon_state = "2-4"
 	},
 /turf/simulated/floor/plating,
@@ -2193,8 +2041,6 @@
 	},
 /obj/effect/catwalk_plated,
 /obj/structure/cable/blue{
-	d1 = 4;
-	d2 = 8;
 	icon_state = "4-8"
 	},
 /turf/simulated/floor/plating,
@@ -2228,8 +2074,6 @@
 	},
 /obj/effect/floor_decal/industrial/warning/fulltile,
 /obj/structure/cable/blue{
-	d1 = 4;
-	d2 = 8;
 	icon_state = "4-8"
 	},
 /turf/simulated/floor/tiled/dark,
@@ -2255,8 +2099,6 @@
 	dir = 4
 	},
 /obj/structure/cable/blue{
-	d1 = 2;
-	d2 = 8;
 	icon_state = "2-8"
 	},
 /turf/simulated/floor/tiled,
@@ -2282,8 +2124,6 @@
 	dir = 4
 	},
 /obj/structure/cable/blue{
-	d1 = 4;
-	d2 = 8;
 	icon_state = "4-8"
 	},
 /obj/machinery/atmospherics/pipe/manifold/hidden/supply{
@@ -2297,8 +2137,6 @@
 /area/liberia/atmos)
 "dN" = (
 /obj/structure/cable/blue{
-	d1 = 4;
-	d2 = 8;
 	icon_state = "4-8"
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
@@ -2314,16 +2152,12 @@
 /area/liberia/atmos)
 "dO" = (
 /obj/structure/cable/blue{
-	d1 = 2;
-	d2 = 8;
 	icon_state = "2-8"
 	},
 /obj/effect/catwalk_plated,
 /obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers,
 /obj/machinery/atmospherics/pipe/manifold/hidden/supply,
 /obj/structure/cable/blue{
-	d1 = 1;
-	d2 = 2;
 	icon_state = "1-2"
 	},
 /obj/structure/disposalpipe/segment{
@@ -2333,8 +2167,6 @@
 /area/liberia/hallway)
 "dP" = (
 /obj/structure/cable/blue{
-	d1 = 1;
-	d2 = 4;
 	icon_state = "1-4"
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
@@ -2344,16 +2176,12 @@
 /area/liberia/engineeringstorage)
 "dQ" = (
 /obj/structure/cable/blue{
-	d1 = 1;
-	d2 = 8;
 	icon_state = "1-8"
 	},
 /obj/effect/floor_decal/borderfloor{
 	dir = 6
 	},
 /obj/structure/cable/blue{
-	d1 = 1;
-	d2 = 2;
 	icon_state = "1-2"
 	},
 /obj/machinery/firealarm{
@@ -2370,8 +2198,6 @@
 	dir = 8
 	},
 /obj/structure/cable/blue{
-	d1 = 1;
-	d2 = 2;
 	icon_state = "1-2"
 	},
 /obj/effect/floor_decal/corner/green{
@@ -2388,8 +2214,6 @@
 	},
 /obj/effect/catwalk_plated,
 /obj/structure/cable/blue{
-	d1 = 4;
-	d2 = 8;
 	icon_state = "4-8"
 	},
 /turf/simulated/floor/plating,
@@ -2443,8 +2267,6 @@
 	dir = 4
 	},
 /obj/structure/cable/blue{
-	d1 = 4;
-	d2 = 8;
 	icon_state = "4-8"
 	},
 /turf/simulated/floor/tiled/monotile,
@@ -2458,13 +2280,9 @@
 	},
 /obj/effect/catwalk_plated,
 /obj/structure/cable/blue{
-	d1 = 4;
-	d2 = 8;
 	icon_state = "4-8"
 	},
 /obj/structure/cable/blue{
-	d1 = 2;
-	d2 = 8;
 	icon_state = "2-8"
 	},
 /obj/structure/disposalpipe/segment/bent,
@@ -2477,8 +2295,6 @@
 	},
 /obj/effect/catwalk_plated,
 /obj/structure/cable/blue{
-	d1 = 1;
-	d2 = 8;
 	icon_state = "1-8"
 	},
 /turf/simulated/floor/plating,
@@ -2497,8 +2313,6 @@
 	dir = 4
 	},
 /obj/structure/cable/blue{
-	d1 = 4;
-	d2 = 8;
 	icon_state = "4-8"
 	},
 /turf/simulated/floor/tiled/techfloor,
@@ -2511,13 +2325,9 @@
 	dir = 6
 	},
 /obj/structure/cable/blue{
-	d1 = 1;
-	d2 = 4;
 	icon_state = "1-4"
 	},
 /obj/structure/cable/blue{
-	d1 = 4;
-	d2 = 8;
 	icon_state = "4-8"
 	},
 /turf/simulated/floor/tiled/techfloor,
@@ -2566,8 +2376,6 @@
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/structure/cable/blue{
-	d1 = 1;
-	d2 = 2;
 	icon_state = "1-2"
 	},
 /obj/effect/floor_decal/corner/blue{
@@ -2623,16 +2431,12 @@
 /obj/item/instrument/guitar,
 /obj/structure/table,
 /obj/structure/cable/blue{
-	d1 = 1;
-	d2 = 2;
 	icon_state = "1-2"
 	},
 /turf/simulated/floor/tiled/steel_grid,
 /area/liberia/mule)
 "ej" = (
 /obj/structure/cable/blue{
-	d1 = 1;
-	d2 = 8;
 	icon_state = "1-8"
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
@@ -2666,8 +2470,6 @@
 	dir = 1
 	},
 /obj/structure/cable/blue{
-	d1 = 1;
-	d2 = 2;
 	icon_state = "1-2"
 	},
 /turf/simulated/floor/plating,
@@ -2800,8 +2602,6 @@
 	pixel_x = -28
 	},
 /obj/structure/cable/blue{
-	d1 = 1;
-	d2 = 2;
 	icon_state = "1-2"
 	},
 /obj/machinery/shield_diffuser,
@@ -2811,16 +2611,12 @@
 "ez" = (
 /obj/machinery/atmospherics/unary/vent_scrubber/on,
 /obj/structure/cable/blue{
-	d1 = 1;
-	d2 = 2;
 	icon_state = "1-2"
 	},
 /obj/effect/floor_decal/borderfloor/corner{
 	dir = 1
 	},
 /obj/structure/cable/blue{
-	d1 = 2;
-	d2 = 4;
 	icon_state = "2-4"
 	},
 /obj/effect/floor_decal/corner/green/three_quarters{
@@ -2830,8 +2626,6 @@
 /area/liberia/hallway)
 "eA" = (
 /obj/structure/cable/blue{
-	d1 = 1;
-	d2 = 2;
 	icon_state = "1-2"
 	},
 /obj/effect/floor_decal/borderfloor/corner{
@@ -2845,8 +2639,6 @@
 	},
 /obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers,
 /obj/structure/cable/blue{
-	d1 = 2;
-	d2 = 8;
 	icon_state = "2-8"
 	},
 /obj/effect/floor_decal/corner/green/three_quarters{
@@ -2860,8 +2652,6 @@
 	dir = 8
 	},
 /obj/structure/cable/blue{
-	d1 = 1;
-	d2 = 2;
 	icon_state = "1-2"
 	},
 /obj/effect/floor_decal/corner/green{
@@ -2934,8 +2724,6 @@
 	dir = 5
 	},
 /obj/structure/cable/yellow{
-	d1 = 1;
-	d2 = 2;
 	icon_state = "1-2"
 	},
 /turf/simulated/floor/tiled/steel_grid,
@@ -3004,7 +2792,6 @@
 	pixel_x = 24
 	},
 /obj/structure/cable/blue{
-	d2 = 8;
 	icon_state = "0-8"
 	},
 /obj/effect/floor_decal/corner/blue{
@@ -3079,8 +2866,6 @@
 /area/liberia/atmos)
 "eZ" = (
 /obj/structure/cable/blue{
-	d1 = 2;
-	d2 = 4;
 	icon_state = "2-4"
 	},
 /obj/effect/floor_decal/borderfloor/corner{
@@ -3092,8 +2877,6 @@
 	dir = 4
 	},
 /obj/structure/cable/blue{
-	d1 = 4;
-	d2 = 8;
 	icon_state = "4-8"
 	},
 /obj/effect/floor_decal/corner/yellow{
@@ -3141,8 +2924,6 @@
 	},
 /obj/effect/catwalk_plated,
 /obj/structure/cable/blue{
-	d1 = 4;
-	d2 = 8;
 	icon_state = "4-8"
 	},
 /turf/simulated/floor/plating,
@@ -3161,8 +2942,6 @@
 /obj/effect/floor_decal/techfloor,
 /obj/machinery/door/airlock,
 /obj/structure/cable/blue{
-	d1 = 4;
-	d2 = 8;
 	icon_state = "4-8"
 	},
 /turf/simulated/floor/tiled/techfloor,
@@ -3184,8 +2963,6 @@
 	dir = 8
 	},
 /obj/structure/cable/blue{
-	d1 = 4;
-	d2 = 8;
 	icon_state = "4-8"
 	},
 /obj/effect/submap_landmark/spawnpoint/liberia,
@@ -3196,8 +2973,6 @@
 	dir = 9
 	},
 /obj/structure/cable/blue{
-	d1 = 2;
-	d2 = 8;
 	icon_state = "2-8"
 	},
 /obj/effect/submap_landmark/spawnpoint/liberia,
@@ -3205,8 +2980,6 @@
 /area/liberia/cryo)
 "fk" = (
 /obj/structure/cable/blue{
-	d1 = 1;
-	d2 = 2;
 	icon_state = "1-2"
 	},
 /turf/simulated/floor/tiled,
@@ -3232,8 +3005,6 @@
 	dir = 8
 	},
 /obj/structure/cable/blue{
-	d1 = 1;
-	d2 = 2;
 	icon_state = "1-2"
 	},
 /obj/effect/floor_decal/corner/green{
@@ -3251,13 +3022,9 @@
 	pixel_x = -32
 	},
 /obj/structure/cable/blue{
-	d1 = 1;
-	d2 = 2;
 	icon_state = "1-2"
 	},
 /obj/structure/cable/blue{
-	d1 = 1;
-	d2 = 4;
 	icon_state = "1-4"
 	},
 /obj/effect/floor_decal/corner/green{
@@ -3316,9 +3083,9 @@
 /obj/item/chems/ivbag/blood/OPlus,
 /obj/item/chems/ivbag/blood/OMinus,
 /obj/item/chems/ivbag/blood/OMinus,
-/obj/item/chems/food/snacks/candy/donor,
-/obj/item/chems/food/snacks/candy/donor,
-/obj/item/chems/food/snacks/candy/donor,
+/obj/item/chems/food/candy/donor,
+/obj/item/chems/food/candy/donor,
+/obj/item/chems/food/candy/donor,
 /obj/effect/floor_decal/corner/blue{
 	dir = 6
 	},
@@ -3440,8 +3207,6 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/effect/catwalk_plated,
 /obj/structure/cable/blue{
-	d1 = 1;
-	d2 = 2;
 	icon_state = "1-2"
 	},
 /turf/simulated/floor/plating,
@@ -3451,8 +3216,6 @@
 /area/liberia/traidingroom)
 "fG" = (
 /obj/structure/cable/blue{
-	d1 = 4;
-	d2 = 8;
 	icon_state = "4-8"
 	},
 /obj/machinery/firealarm{
@@ -3510,8 +3273,6 @@
 	dir = 10
 	},
 /obj/structure/cable/blue{
-	d1 = 2;
-	d2 = 8;
 	icon_state = "2-8"
 	},
 /obj/effect/floor_decal/corner/blue{
@@ -3588,7 +3349,6 @@
 	pixel_y = 24
 	},
 /obj/structure/cable/blue{
-	d2 = 2;
 	icon_state = "0-2"
 	},
 /obj/effect/submap_landmark/spawnpoint/liberia,
@@ -3637,13 +3397,9 @@
 	},
 /obj/effect/catwalk_plated,
 /obj/structure/cable/blue{
-	d1 = 1;
-	d2 = 2;
 	icon_state = "1-2"
 	},
 /obj/structure/cable/blue{
-	d1 = 1;
-	d2 = 4;
 	icon_state = "1-4"
 	},
 /turf/simulated/floor/plating,
@@ -3661,8 +3417,6 @@
 	pixel_y = -20
 	},
 /obj/structure/cable/blue{
-	d1 = 4;
-	d2 = 8;
 	icon_state = "4-8"
 	},
 /turf/simulated/floor/plating,
@@ -3676,13 +3430,9 @@
 	},
 /obj/effect/catwalk_plated,
 /obj/structure/cable/blue{
-	d1 = 4;
-	d2 = 8;
 	icon_state = "4-8"
 	},
 /obj/structure/cable/blue{
-	d1 = 2;
-	d2 = 8;
 	icon_state = "2-8"
 	},
 /turf/simulated/floor/plating,
@@ -3701,8 +3451,6 @@
 	req_access = newlist()
 	},
 /obj/structure/cable/blue{
-	d1 = 4;
-	d2 = 8;
 	icon_state = "4-8"
 	},
 /turf/simulated/floor/tiled/monotile,
@@ -3798,8 +3546,6 @@
 /obj/machinery/door/firedoor,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/structure/cable/blue{
-	d1 = 1;
-	d2 = 2;
 	icon_state = "1-2"
 	},
 /turf/simulated/floor/tiled/freezer,
@@ -3870,8 +3616,6 @@
 	},
 /obj/effect/floor_decal/spline/plain/brown,
 /obj/structure/cable/blue{
-	d1 = 2;
-	d2 = 4;
 	icon_state = "2-4"
 	},
 /turf/simulated/floor/wood/ebony,
@@ -3883,8 +3627,6 @@
 	},
 /obj/effect/floor_decal/spline/plain/brown,
 /obj/structure/cable/blue{
-	d1 = 4;
-	d2 = 8;
 	icon_state = "4-8"
 	},
 /turf/simulated/floor/wood/ebony,
@@ -3898,13 +3640,9 @@
 	},
 /obj/effect/floor_decal/spline/plain/brown,
 /obj/structure/cable/blue{
-	d1 = 2;
-	d2 = 8;
 	icon_state = "2-8"
 	},
 /obj/structure/cable/blue{
-	d1 = 1;
-	d2 = 2;
 	icon_state = "1-2"
 	},
 /turf/simulated/floor/wood/ebony,
@@ -3974,8 +3712,6 @@
 	},
 /obj/effect/catwalk_plated,
 /obj/structure/cable/blue{
-	d1 = 2;
-	d2 = 4;
 	icon_state = "2-4"
 	},
 /turf/simulated/floor/plating,
@@ -4000,7 +3736,6 @@
 	pixel_x = -24
 	},
 /obj/structure/cable/blue{
-	d2 = 4;
 	icon_state = "0-4"
 	},
 /obj/machinery/light_switch{
@@ -4014,13 +3749,9 @@
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/structure/cable/blue{
-	d1 = 1;
-	d2 = 8;
 	icon_state = "1-8"
 	},
 /obj/structure/cable/blue{
-	d1 = 1;
-	d2 = 2;
 	icon_state = "1-2"
 	},
 /turf/simulated/floor/tiled/freezer,
@@ -4107,7 +3838,7 @@
 /obj/item/clothing/under/lawyer,
 /obj/item/clothing/under/suit_jacket/navy,
 /obj/random/handgun,
-/obj/item/chems/food/drinks/bottle/premiumwine,
+/obj/item/chems/drinks/bottle/premiumwine,
 /obj/machinery/atmospherics/unary/vent_scrubber/on{
 	dir = 4
 	},
@@ -4132,11 +3863,9 @@
 	pixel_y = 24
 	},
 /obj/structure/cable/blue{
-	d2 = 4;
 	icon_state = "0-4"
 	},
 /obj/structure/cable/blue{
-	d2 = 2;
 	icon_state = "0-2"
 	},
 /turf/simulated/floor/wood/ebony,
@@ -4152,8 +3881,6 @@
 	pixel_y = 24
 	},
 /obj/structure/cable/blue{
-	d1 = 4;
-	d2 = 8;
 	icon_state = "4-8"
 	},
 /turf/simulated/floor/wood/ebony,
@@ -4176,8 +3903,6 @@
 	dir = 4
 	},
 /obj/structure/cable/blue{
-	d1 = 4;
-	d2 = 8;
 	icon_state = "4-8"
 	},
 /turf/simulated/floor/wood/ebony,
@@ -4190,8 +3915,6 @@
 	dir = 4
 	},
 /obj/structure/cable/blue{
-	d1 = 4;
-	d2 = 8;
 	icon_state = "4-8"
 	},
 /obj/structure/disposalpipe/segment,
@@ -4203,13 +3926,9 @@
 	dir = 1
 	},
 /obj/structure/cable/blue{
-	d1 = 4;
-	d2 = 8;
 	icon_state = "4-8"
 	},
 /obj/structure/cable/blue{
-	d1 = 2;
-	d2 = 4;
 	icon_state = "2-4"
 	},
 /turf/simulated/floor/wood/walnut,
@@ -4222,8 +3941,6 @@
 	dir = 4
 	},
 /obj/structure/cable/blue{
-	d1 = 4;
-	d2 = 8;
 	icon_state = "4-8"
 	},
 /turf/simulated/floor/wood/walnut,
@@ -4237,8 +3954,6 @@
 	},
 /obj/machinery/light,
 /obj/structure/cable/blue{
-	d1 = 1;
-	d2 = 8;
 	icon_state = "1-8"
 	},
 /turf/simulated/floor/wood/walnut,
@@ -4247,8 +3962,6 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/structure/cable/blue{
-	d1 = 1;
-	d2 = 2;
 	icon_state = "1-2"
 	},
 /turf/simulated/floor/wood/walnut,
@@ -4280,8 +3993,6 @@
 	},
 /obj/machinery/door/firedoor,
 /obj/structure/cable/blue{
-	d1 = 1;
-	d2 = 2;
 	icon_state = "1-2"
 	},
 /turf/simulated/floor/wood/walnut,
@@ -4297,8 +4008,6 @@
 	dir = 6
 	},
 /obj/structure/cable/blue{
-	d1 = 2;
-	d2 = 4;
 	icon_state = "2-4"
 	},
 /turf/simulated/floor/tiled/freezer,
@@ -4309,8 +4018,6 @@
 	dir = 9
 	},
 /obj/structure/cable/blue{
-	d1 = 1;
-	d2 = 8;
 	icon_state = "1-8"
 	},
 /turf/simulated/floor/tiled/freezer,
@@ -4339,8 +4046,6 @@
 	},
 /obj/item/folder,
 /obj/structure/cable/blue{
-	d1 = 4;
-	d2 = 8;
 	icon_state = "4-8"
 	},
 /turf/simulated/floor/wood/ebony,
@@ -4348,8 +4053,6 @@
 "hh" = (
 /obj/effect/floor_decal/spline/plain/brown,
 /obj/structure/cable/blue{
-	d1 = 4;
-	d2 = 8;
 	icon_state = "4-8"
 	},
 /turf/simulated/floor/wood/ebony,
@@ -4371,8 +4074,6 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/machinery/door/firedoor,
 /obj/structure/cable/blue{
-	d1 = 1;
-	d2 = 2;
 	icon_state = "1-2"
 	},
 /turf/simulated/floor/wood/walnut,
@@ -4384,8 +4085,6 @@
 "hl" = (
 /obj/structure/disposalpipe/segment,
 /obj/structure/cable/blue{
-	d1 = 4;
-	d2 = 8;
 	icon_state = "4-8"
 	},
 /turf/simulated/floor/wood/walnut,
@@ -4401,8 +4100,6 @@
 	dir = 9
 	},
 /obj/structure/cable/blue{
-	d1 = 1;
-	d2 = 8;
 	icon_state = "1-8"
 	},
 /turf/simulated/floor/tiled/freezer,
@@ -4446,7 +4143,6 @@
 	pixel_y = 24
 	},
 /obj/structure/cable/blue{
-	d2 = 4;
 	icon_state = "0-4"
 	},
 /turf/simulated/floor/carpet,
@@ -4458,8 +4154,6 @@
 	dir = 1
 	},
 /obj/structure/cable/blue{
-	d1 = 1;
-	d2 = 8;
 	icon_state = "1-8"
 	},
 /turf/simulated/floor/carpet,
@@ -4662,7 +4356,7 @@
 "hS" = (
 /obj/structure/closet/secure_closet/freezer/fridge,
 /obj/effect/floor_decal/industrial/outline/yellow,
-/obj/item/chems/food/condiment/enzyme,
+/obj/item/chems/condiment/enzyme,
 /turf/simulated/floor/tiled/freezer,
 /area/liberia/bar)
 "hT" = (
@@ -4674,8 +4368,6 @@
 	pixel_x = -25
 	},
 /obj/structure/cable/blue{
-	d1 = 1;
-	d2 = 2;
 	icon_state = "1-2"
 	},
 /obj/effect/floor_decal/borderfloor{
@@ -4710,8 +4402,6 @@
 	dir = 6
 	},
 /obj/structure/cable/yellow{
-	d1 = 1;
-	d2 = 2;
 	icon_state = "1-2"
 	},
 /turf/simulated/floor/tiled/steel_grid,
@@ -4731,8 +4421,6 @@
 /obj/item/flashlight,
 /obj/random/tool,
 /obj/structure/cable/blue{
-	d1 = 4;
-	d2 = 8;
 	icon_state = "4-8"
 	},
 /turf/simulated/floor/tiled/techfloor,
@@ -4746,8 +4434,6 @@
 	pixel_y = -32
 	},
 /obj/structure/cable/yellow{
-	d1 = 4;
-	d2 = 8;
 	icon_state = "4-8"
 	},
 /obj/structure/disposalpipe/segment{
@@ -4760,16 +4446,12 @@
 	dir = 1
 	},
 /obj/structure/cable/yellow{
-	d1 = 4;
-	d2 = 8;
 	icon_state = "4-8"
 	},
 /obj/structure/disposalpipe/segment{
 	dir = 4
 	},
 /obj/structure/cable/yellow{
-	d1 = 1;
-	d2 = 8;
 	icon_state = "1-8"
 	},
 /turf/simulated/floor/tiled/steel_grid,
@@ -4782,8 +4464,6 @@
 	dir = 1
 	},
 /obj/structure/cable/yellow{
-	d1 = 1;
-	d2 = 8;
 	icon_state = "1-8"
 	},
 /obj/structure/disposalpipe/segment{
@@ -4797,8 +4477,6 @@
 	dir = 8
 	},
 /obj/structure/cable/blue{
-	d1 = 1;
-	d2 = 2;
 	icon_state = "1-2"
 	},
 /obj/effect/floor_decal/borderfloor/corner{
@@ -4824,8 +4502,6 @@
 	dir = 4
 	},
 /obj/structure/cable/blue{
-	d1 = 4;
-	d2 = 8;
 	icon_state = "4-8"
 	},
 /turf/simulated/floor/tiled/techfloor,
@@ -4846,8 +4522,6 @@
 	dir = 4
 	},
 /obj/structure/cable/blue{
-	d1 = 4;
-	d2 = 8;
 	icon_state = "4-8"
 	},
 /obj/machinery/door/firedoor,
@@ -4924,7 +4598,6 @@
 	},
 /obj/machinery/atmospherics/pipe/simple/visible/cyan,
 /obj/structure/cable/yellow{
-	d2 = 2;
 	icon_state = "0-2"
 	},
 /turf/simulated/floor/tiled/techfloor/grid,
@@ -4941,8 +4614,6 @@
 /area/liberia/bridge)
 "iA" = (
 /obj/structure/cable/yellow{
-	d1 = 2;
-	d2 = 8;
 	icon_state = "2-8"
 	},
 /obj/structure/catwalk,
@@ -4968,8 +4639,6 @@
 	dir = 4
 	},
 /obj/structure/cable/blue{
-	d1 = 1;
-	d2 = 2;
 	icon_state = "1-2"
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden,
@@ -4988,8 +4657,6 @@
 /obj/machinery/door/firedoor,
 /obj/effect/floor_decal/industrial/warning/fulltile,
 /obj/structure/cable/blue{
-	d1 = 4;
-	d2 = 8;
 	icon_state = "4-8"
 	},
 /obj/structure/disposalpipe/segment{
@@ -5006,8 +4673,6 @@
 	dir = 4
 	},
 /obj/structure/cable/blue{
-	d1 = 4;
-	d2 = 8;
 	icon_state = "4-8"
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
@@ -5027,8 +4692,6 @@
 	dir = 4
 	},
 /obj/structure/cable/blue{
-	d1 = 4;
-	d2 = 8;
 	icon_state = "4-8"
 	},
 /turf/simulated/floor/plating,
@@ -5042,8 +4705,6 @@
 	},
 /obj/effect/catwalk_plated,
 /obj/structure/cable/blue{
-	d1 = 2;
-	d2 = 4;
 	icon_state = "2-4"
 	},
 /turf/simulated/floor/plating,
@@ -5073,13 +4734,9 @@
 /area/liberia/bridge)
 "iS" = (
 /obj/structure/cable/yellow{
-	d1 = 1;
-	d2 = 4;
 	icon_state = "1-4"
 	},
 /obj/structure/cable/yellow{
-	d1 = 4;
-	d2 = 8;
 	icon_state = "4-8"
 	},
 /obj/structure/catwalk,
@@ -5094,8 +4751,6 @@
 	req_access = list("ACCESS_MERCHANT")
 	},
 /obj/structure/cable/yellow{
-	d1 = 4;
-	d2 = 8;
 	icon_state = "4-8"
 	},
 /obj/machinery/button/access/exterior{
@@ -5130,8 +4785,6 @@
 	dir = 1
 	},
 /obj/structure/cable/yellow{
-	d1 = 4;
-	d2 = 8;
 	icon_state = "4-8"
 	},
 /turf/simulated/floor/plating,
@@ -5155,8 +4808,6 @@
 	dir = 4
 	},
 /obj/structure/cable/yellow{
-	d1 = 4;
-	d2 = 8;
 	icon_state = "4-8"
 	},
 /obj/machinery/button/access/interior{
@@ -5177,8 +4828,6 @@
 	},
 /obj/effect/catwalk_plated,
 /obj/structure/cable/blue{
-	d1 = 1;
-	d2 = 8;
 	icon_state = "1-8"
 	},
 /turf/simulated/floor/plating,
@@ -5202,16 +4851,12 @@
 	dir = 4
 	},
 /obj/structure/cable/blue{
-	d1 = 4;
-	d2 = 8;
 	icon_state = "4-8"
 	},
 /turf/simulated/floor/plating,
 /area/liberia/hallway)
 "ja" = (
 /obj/structure/cable/yellow{
-	d1 = 1;
-	d2 = 8;
 	icon_state = "1-8"
 	},
 /obj/structure/disposalpipe/segment,
@@ -5235,13 +4880,9 @@
 /area/liberia/hallway)
 "jh" = (
 /obj/structure/cable/yellow{
-	d1 = 4;
-	d2 = 8;
 	icon_state = "4-8"
 	},
 /obj/structure/cable/yellow{
-	d1 = 2;
-	d2 = 4;
 	icon_state = "2-4"
 	},
 /obj/structure/catwalk,
@@ -5252,8 +4893,6 @@
 /area/space)
 "jo" = (
 /obj/structure/cable/blue{
-	d1 = 1;
-	d2 = 2;
 	icon_state = "1-2"
 	},
 /obj/machinery/space_heater,
@@ -5273,10 +4912,9 @@
 /obj/machinery/light{
 	dir = 8
 	},
-/obj/machinery/power/port_gen/pacman/mrs,
+/obj/machinery/port_gen/pacman/mrs,
 /obj/effect/floor_decal/industrial/warning/full,
 /obj/structure/cable/blue{
-	d2 = 4;
 	icon_state = "0-4"
 	},
 /turf/simulated/floor/tiled/techfloor/grid,
@@ -5398,8 +5036,6 @@
 /area/liberia/merchantstorage)
 "jF" = (
 /obj/structure/cable/yellow{
-	d1 = 1;
-	d2 = 2;
 	icon_state = "1-2"
 	},
 /obj/structure/catwalk,
@@ -5536,7 +5172,6 @@
 	pixel_x = 24
 	},
 /obj/structure/cable/blue{
-	d2 = 8;
 	icon_state = "0-8"
 	},
 /turf/simulated/floor/carpet/magenta,
@@ -5597,8 +5232,6 @@
 	dir = 6
 	},
 /obj/structure/cable/blue{
-	d1 = 1;
-	d2 = 2;
 	icon_state = "1-2"
 	},
 /turf/simulated/floor/carpet/magenta,
@@ -5640,7 +5273,6 @@
 	dir = 8
 	},
 /obj/structure/cable/blue{
-	d2 = 2;
 	icon_state = "0-2"
 	},
 /turf/simulated/floor/plating,
@@ -5659,8 +5291,6 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/structure/cable/blue{
-	d1 = 1;
-	d2 = 2;
 	icon_state = "1-2"
 	},
 /obj/machinery/door/firedoor,
@@ -5696,8 +5326,6 @@
 	pixel_y = 24
 	},
 /obj/structure/cable/blue{
-	d1 = 2;
-	d2 = 4;
 	icon_state = "2-4"
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
@@ -5719,13 +5347,9 @@
 	dir = 4
 	},
 /obj/structure/cable/blue{
-	d1 = 4;
-	d2 = 8;
 	icon_state = "4-8"
 	},
 /obj/structure/cable/blue{
-	d1 = 2;
-	d2 = 4;
 	icon_state = "2-4"
 	},
 /turf/simulated/floor/tiled/techfloor,
@@ -5746,8 +5370,6 @@
 	dir = 4
 	},
 /obj/structure/cable/blue{
-	d1 = 4;
-	d2 = 8;
 	icon_state = "4-8"
 	},
 /turf/simulated/floor/tiled/techfloor,
@@ -5765,8 +5387,6 @@
 	dir = 4
 	},
 /obj/structure/cable/blue{
-	d1 = 4;
-	d2 = 8;
 	icon_state = "4-8"
 	},
 /obj/machinery/door/firedoor,
@@ -5783,8 +5403,6 @@
 	dir = 4
 	},
 /obj/structure/cable/blue{
-	d1 = 4;
-	d2 = 8;
 	icon_state = "4-8"
 	},
 /turf/simulated/floor/carpet,
@@ -5800,13 +5418,9 @@
 	dir = 9
 	},
 /obj/structure/cable/blue{
-	d1 = 1;
-	d2 = 8;
 	icon_state = "1-8"
 	},
 /obj/structure/cable/blue{
-	d1 = 1;
-	d2 = 4;
 	icon_state = "1-4"
 	},
 /turf/simulated/floor/carpet,
@@ -5819,8 +5433,6 @@
 	dir = 1
 	},
 /obj/structure/cable/blue{
-	d1 = 2;
-	d2 = 8;
 	icon_state = "2-8"
 	},
 /obj/effect/submap_landmark/spawnpoint/liberia,
@@ -5843,8 +5455,6 @@
 /obj/effect/floor_decal/corner_techfloor_grid,
 /obj/effect/floor_decal/techfloor/corner,
 /obj/structure/cable/blue{
-	d1 = 1;
-	d2 = 2;
 	icon_state = "1-2"
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/universal,
@@ -5906,8 +5516,6 @@
 	dir = 4
 	},
 /obj/structure/cable/blue{
-	d1 = 1;
-	d2 = 2;
 	icon_state = "1-2"
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden,
@@ -5938,13 +5546,9 @@
 	dir = 4
 	},
 /obj/structure/cable/blue{
-	d1 = 4;
-	d2 = 8;
 	icon_state = "4-8"
 	},
 /obj/structure/cable/blue{
-	d1 = 1;
-	d2 = 4;
 	icon_state = "1-4"
 	},
 /turf/simulated/floor/tiled/techfloor,
@@ -5964,8 +5568,6 @@
 /area/liberia/atmos)
 "kJ" = (
 /obj/structure/cable/blue{
-	d1 = 2;
-	d2 = 4;
 	icon_state = "2-4"
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
@@ -5986,7 +5588,6 @@
 /area/liberia/hallway)
 "kL" = (
 /obj/structure/cable/blue{
-	d2 = 2;
 	icon_state = "0-2"
 	},
 /obj/effect/floor_decal/borderfloor{
@@ -6000,8 +5601,6 @@
 /area/liberia/atmos)
 "kM" = (
 /obj/structure/cable/blue{
-	d1 = 1;
-	d2 = 2;
 	icon_state = "1-2"
 	},
 /obj/machinery/atmospherics/unary/vent_scrubber/on{
@@ -6015,8 +5614,6 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/effect/catwalk_plated,
 /obj/structure/cable/blue{
-	d1 = 1;
-	d2 = 2;
 	icon_state = "1-2"
 	},
 /turf/simulated/floor/plating,
@@ -6045,8 +5642,6 @@
 /area/liberia/atmos)
 "kS" = (
 /obj/structure/cable/blue{
-	d1 = 2;
-	d2 = 4;
 	icon_state = "2-4"
 	},
 /turf/simulated/floor/tiled/white,
@@ -6060,16 +5655,12 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/effect/catwalk_plated,
 /obj/structure/cable/blue{
-	d1 = 1;
-	d2 = 2;
 	icon_state = "1-2"
 	},
 /turf/simulated/floor/plating,
 /area/liberia/hallway)
 "kU" = (
 /obj/structure/cable/blue{
-	d1 = 1;
-	d2 = 2;
 	icon_state = "1-2"
 	},
 /obj/machinery/atmospherics/unary/vent_pump/on,
@@ -6092,13 +5683,9 @@
 	},
 /obj/effect/catwalk_plated,
 /obj/structure/cable/blue{
-	d1 = 1;
-	d2 = 2;
 	icon_state = "1-2"
 	},
 /obj/structure/cable/blue{
-	d1 = 1;
-	d2 = 4;
 	icon_state = "1-4"
 	},
 /turf/simulated/floor/plating,
@@ -6115,8 +5702,6 @@
 /area/liberia/medbay)
 "la" = (
 /obj/structure/cable/blue{
-	d1 = 1;
-	d2 = 2;
 	icon_state = "1-2"
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
@@ -6131,13 +5716,9 @@
 	dir = 9
 	},
 /obj/structure/cable/yellow{
-	d1 = 1;
-	d2 = 8;
 	icon_state = "1-8"
 	},
 /obj/structure/cable/yellow{
-	d1 = 4;
-	d2 = 8;
 	icon_state = "4-8"
 	},
 /obj/effect/floor_decal/techfloor,
@@ -6148,8 +5729,6 @@
 /area/liberia/engineeringstorage)
 "lc" = (
 /obj/structure/cable/yellow{
-	d1 = 4;
-	d2 = 8;
 	icon_state = "4-8"
 	},
 /obj/effect/floor_decal/techfloor,
@@ -6163,8 +5742,6 @@
 /area/liberia/engineeringstorage)
 "ld" = (
 /obj/structure/cable/yellow{
-	d1 = 4;
-	d2 = 8;
 	icon_state = "4-8"
 	},
 /obj/effect/floor_decal/techfloor,
@@ -6172,8 +5749,6 @@
 /area/liberia/engineeringstorage)
 "le" = (
 /obj/structure/cable/blue{
-	d1 = 4;
-	d2 = 8;
 	icon_state = "4-8"
 	},
 /obj/structure/railing/mapped{
@@ -6191,14 +5766,10 @@
 	dir = 4
 	},
 /obj/structure/cable/blue{
-	d1 = 1;
-	d2 = 8;
 	icon_state = "1-8"
 	},
 /obj/effect/catwalk_plated,
 /obj/structure/cable/blue{
-	d1 = 4;
-	d2 = 8;
 	icon_state = "4-8"
 	},
 /turf/simulated/floor/plating,
@@ -6221,8 +5792,6 @@
 /obj/effect/decal/cleanable/dirt,
 /obj/structure/catwalk,
 /obj/structure/cable/blue{
-	d1 = 1;
-	d2 = 4;
 	icon_state = "1-4"
 	},
 /turf/simulated/floor/plating,
@@ -6237,8 +5806,6 @@
 	},
 /obj/structure/catwalk,
 /obj/structure/cable/blue{
-	d1 = 4;
-	d2 = 8;
 	icon_state = "4-8"
 	},
 /turf/simulated/floor/plating,
@@ -6260,8 +5827,6 @@
 	pixel_y = 22
 	},
 /obj/structure/cable/blue{
-	d1 = 4;
-	d2 = 8;
 	icon_state = "4-8"
 	},
 /turf/simulated/floor/tiled/techfloor,
@@ -6277,8 +5842,6 @@
 	dir = 1
 	},
 /obj/structure/cable/blue{
-	d1 = 1;
-	d2 = 8;
 	icon_state = "1-8"
 	},
 /obj/machinery/atmospherics/pipe/manifold/hidden{
@@ -6289,8 +5852,6 @@
 "ll" = (
 /obj/machinery/meter,
 /obj/structure/cable/blue{
-	d1 = 1;
-	d2 = 4;
 	icon_state = "1-4"
 	},
 /obj/effect/floor_decal/borderfloor{
@@ -6312,13 +5873,9 @@
 	tag_west = 2
 	},
 /obj/structure/cable/blue{
-	d1 = 4;
-	d2 = 8;
 	icon_state = "4-8"
 	},
 /obj/structure/cable/yellow{
-	d1 = 1;
-	d2 = 2;
 	icon_state = "1-2"
 	},
 /turf/simulated/floor/tiled/steel_grid,
@@ -6328,8 +5885,6 @@
 	dir = 4
 	},
 /obj/structure/cable/blue{
-	d1 = 1;
-	d2 = 8;
 	icon_state = "1-8"
 	},
 /turf/simulated/floor/tiled/steel_grid,
@@ -6387,8 +5942,6 @@
 	dir = 10
 	},
 /obj/structure/cable/blue{
-	d1 = 1;
-	d2 = 2;
 	icon_state = "1-2"
 	},
 /obj/effect/floor_decal/corner/blue{
@@ -6445,8 +5998,6 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/structure/cable/blue{
-	d1 = 1;
-	d2 = 2;
 	icon_state = "1-2"
 	},
 /turf/simulated/floor/tiled/white,
@@ -6462,7 +6013,6 @@
 	pixel_x = 24
 	},
 /obj/structure/cable/blue{
-	d2 = 2;
 	icon_state = "0-2"
 	},
 /turf/simulated/floor/carpet/green,
@@ -6473,8 +6023,6 @@
 	},
 /obj/machinery/atmospherics/unary/vent_pump/on,
 /obj/structure/cable/blue{
-	d1 = 2;
-	d2 = 4;
 	icon_state = "2-4"
 	},
 /turf/simulated/floor/carpet/magenta,
@@ -6494,8 +6042,6 @@
 	dir = 10
 	},
 /obj/structure/cable/blue{
-	d1 = 1;
-	d2 = 2;
 	icon_state = "1-2"
 	},
 /turf/simulated/floor/carpet/green,
@@ -6517,13 +6063,9 @@
 	dir = 8
 	},
 /obj/structure/cable/blue{
-	d1 = 1;
-	d2 = 4;
 	icon_state = "1-4"
 	},
 /obj/structure/cable/blue{
-	d1 = 4;
-	d2 = 8;
 	icon_state = "4-8"
 	},
 /obj/machinery/atmospherics/pipe/manifold/hidden/supply,
@@ -6586,16 +6128,12 @@
 	pixel_x = -25
 	},
 /obj/structure/cable/blue{
-	d1 = 1;
-	d2 = 2;
 	icon_state = "1-2"
 	},
 /turf/simulated/floor/tiled/steel_grid,
 /area/liberia/engineeringlobby)
 "mr" = (
 /obj/structure/cable/blue{
-	d1 = 4;
-	d2 = 8;
 	icon_state = "4-8"
 	},
 /turf/simulated/floor/wood/walnut,
@@ -6607,8 +6145,6 @@
 /obj/effect/floor_decal/corner_techfloor_grid,
 /obj/effect/floor_decal/techfloor/corner,
 /obj/structure/cable/blue{
-	d1 = 1;
-	d2 = 2;
 	icon_state = "1-2"
 	},
 /turf/simulated/floor/tiled/techfloor,
@@ -6644,8 +6180,6 @@
 /area/liberia/merchantstorage)
 "mT" = (
 /obj/structure/cable/blue{
-	d1 = 1;
-	d2 = 2;
 	icon_state = "1-2"
 	},
 /obj/effect/floor_decal/borderfloor{
@@ -6667,16 +6201,12 @@
 	dir = 4
 	},
 /obj/structure/cable/blue{
-	d1 = 4;
-	d2 = 8;
 	icon_state = "4-8"
 	},
 /turf/simulated/floor/wood/walnut,
 /area/liberia/bar)
 "ns" = (
 /obj/structure/cable/blue{
-	d1 = 1;
-	d2 = 2;
 	icon_state = "1-2"
 	},
 /turf/simulated/floor/tiled,
@@ -6757,7 +6287,6 @@
 	name = "Aft Port Solar Array"
 	},
 /obj/structure/cable/yellow{
-	d2 = 2;
 	icon_state = "0-2"
 	},
 /turf/simulated/floor/reinforced/airless,
@@ -6802,7 +6331,6 @@
 	dir = 8
 	},
 /obj/structure/cable/yellow{
-	d2 = 2;
 	icon_state = "0-2"
 	},
 /turf/simulated/floor/tiled/steel_grid,
@@ -6822,8 +6350,6 @@
 	dir = 4
 	},
 /obj/structure/cable/blue{
-	d1 = 4;
-	d2 = 8;
 	icon_state = "4-8"
 	},
 /turf/simulated/floor/tiled,
@@ -6831,14 +6357,12 @@
 "pF" = (
 /obj/structure/cable/blue,
 /obj/structure/cable/blue{
-	d2 = 2;
 	icon_state = "0-2"
 	},
 /obj/machinery/ion_thruster{
 	dir = 4
 	},
 /obj/structure/cable/blue{
-	d2 = 4;
 	icon_state = "0-4"
 	},
 /turf/simulated/floor/airless,
@@ -6857,8 +6381,6 @@
 	dir = 8
 	},
 /obj/structure/cable/blue{
-	d1 = 1;
-	d2 = 4;
 	icon_state = "1-4"
 	},
 /obj/effect/floor_decal/corner/yellow{
@@ -6868,18 +6390,12 @@
 /area/liberia/engineeringlobby)
 "pS" = (
 /obj/structure/cable/yellow{
-	d1 = 4;
-	d2 = 8;
 	icon_state = "4-8"
 	},
 /obj/structure/cable/yellow{
-	d1 = 2;
-	d2 = 4;
 	icon_state = "2-4"
 	},
 /obj/structure/cable/yellow{
-	d1 = 1;
-	d2 = 4;
 	icon_state = "1-4"
 	},
 /obj/structure/catwalk,
@@ -6897,8 +6413,6 @@
 	dir = 4
 	},
 /obj/structure/cable/blue{
-	d1 = 4;
-	d2 = 8;
 	icon_state = "4-8"
 	},
 /turf/simulated/floor/tiled/techfloor,
@@ -7006,8 +6520,6 @@
 	dir = 4
 	},
 /obj/structure/cable/blue{
-	d1 = 1;
-	d2 = 2;
 	icon_state = "1-2"
 	},
 /turf/simulated/floor/tiled/techfloor,
@@ -7052,8 +6564,6 @@
 	},
 /obj/effect/catwalk_plated,
 /obj/structure/cable/blue{
-	d1 = 4;
-	d2 = 8;
 	icon_state = "4-8"
 	},
 /turf/simulated/floor/plating,
@@ -7065,7 +6575,6 @@
 	pixel_x = -24
 	},
 /obj/structure/cable/blue{
-	d2 = 2;
 	icon_state = "0-2"
 	},
 /turf/simulated/floor/tiled,
@@ -7121,8 +6630,6 @@
 	dir = 9
 	},
 /obj/structure/cable/blue{
-	d1 = 1;
-	d2 = 8;
 	icon_state = "1-8"
 	},
 /obj/structure/disposalpipe/segment/bent{
@@ -7144,8 +6651,6 @@
 /obj/effect/paint/silver,
 /obj/effect/paint_stripe/yellow,
 /obj/structure/cable/blue{
-	d1 = 1;
-	d2 = 2;
 	icon_state = "1-2"
 	},
 /turf/simulated/wall/r_titanium,
@@ -7164,8 +6669,6 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/structure/cable/blue{
-	d1 = 1;
-	d2 = 2;
 	icon_state = "1-2"
 	},
 /obj/machinery/door/firedoor,
@@ -7184,7 +6687,6 @@
 	pixel_y = 24
 	},
 /obj/structure/cable/blue{
-	d2 = 2;
 	icon_state = "0-2"
 	},
 /turf/simulated/floor/tiled/techfloor,
@@ -7214,8 +6716,6 @@
 	dir = 1
 	},
 /obj/structure/cable/yellow{
-	d1 = 4;
-	d2 = 8;
 	icon_state = "4-8"
 	},
 /obj/structure/disposalpipe/segment{
@@ -7225,8 +6725,6 @@
 /area/liberia/atmos)
 "sQ" = (
 /obj/structure/cable/blue{
-	d1 = 1;
-	d2 = 2;
 	icon_state = "1-2"
 	},
 /obj/effect/floor_decal/borderfloor/corner{
@@ -7245,8 +6743,6 @@
 	dir = 10
 	},
 /obj/structure/cable/blue{
-	d1 = 1;
-	d2 = 2;
 	icon_state = "1-2"
 	},
 /obj/effect/floor_decal/spline/fancy/wood,
@@ -7361,8 +6857,6 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/structure/cable/blue{
-	d1 = 1;
-	d2 = 2;
 	icon_state = "1-2"
 	},
 /obj/effect/floor_decal/corner/yellow,
@@ -7374,7 +6868,6 @@
 "uS" = (
 /obj/structure/cable/blue,
 /obj/structure/cable/blue{
-	d2 = 2;
 	icon_state = "0-2"
 	},
 /obj/machinery/ion_thruster{
@@ -7403,8 +6896,6 @@
 /area/liberia/bridge)
 "vR" = (
 /obj/structure/cable/blue{
-	d1 = 1;
-	d2 = 2;
 	icon_state = "1-2"
 	},
 /turf/simulated/floor/wood/ebony,
@@ -7421,8 +6912,6 @@
 	dir = 4
 	},
 /obj/structure/cable/yellow{
-	d1 = 4;
-	d2 = 8;
 	icon_state = "4-8"
 	},
 /obj/machinery/button/access/interior{
@@ -7483,8 +6972,6 @@
 	dir = 4
 	},
 /obj/structure/cable/blue{
-	d1 = 1;
-	d2 = 2;
 	icon_state = "1-2"
 	},
 /obj/machinery/atmospherics/binary/pump/on{
@@ -7495,7 +6982,6 @@
 "xx" = (
 /obj/structure/cable/blue,
 /obj/structure/cable/blue{
-	d2 = 2;
 	icon_state = "0-2"
 	},
 /obj/machinery/ion_thruster{
@@ -7538,8 +7024,6 @@
 /area/liberia/hallway)
 "yp" = (
 /obj/structure/cable/blue{
-	d1 = 4;
-	d2 = 8;
 	icon_state = "4-8"
 	},
 /obj/machinery/light_switch{
@@ -7612,8 +7096,6 @@
 	dir = 4
 	},
 /obj/structure/cable/blue{
-	d1 = 1;
-	d2 = 2;
 	icon_state = "1-2"
 	},
 /turf/simulated/floor/tiled/techfloor,
@@ -7707,8 +7189,6 @@
 	dir = 1
 	},
 /obj/structure/cable/blue{
-	d1 = 4;
-	d2 = 8;
 	icon_state = "4-8"
 	},
 /obj/structure/disposalpipe/segment/bent{
@@ -7723,11 +7203,9 @@
 "Bx" = (
 /obj/structure/cable/blue,
 /obj/structure/cable/blue{
-	d2 = 2;
 	icon_state = "0-2"
 	},
 /obj/structure/cable/blue{
-	d2 = 4;
 	icon_state = "0-4"
 	},
 /obj/machinery/ion_thruster{
@@ -7752,7 +7230,6 @@
 	dir = 4
 	},
 /obj/structure/cable/yellow{
-	d2 = 2;
 	icon_state = "0-2"
 	},
 /obj/machinery/light{
@@ -7778,8 +7255,6 @@
 /area/liberia/merchantstorage)
 "BX" = (
 /obj/structure/cable/blue{
-	d1 = 4;
-	d2 = 8;
 	icon_state = "4-8"
 	},
 /turf/simulated/wall/r_wall/prepainted,
@@ -7808,13 +7283,9 @@
 	},
 /obj/effect/catwalk_plated,
 /obj/structure/cable/blue{
-	d1 = 1;
-	d2 = 8;
 	icon_state = "1-8"
 	},
 /obj/structure/cable/blue{
-	d1 = 4;
-	d2 = 8;
 	icon_state = "4-8"
 	},
 /turf/simulated/floor/plating,
@@ -7844,8 +7315,6 @@
 /area/liberia/hallway)
 "Ei" = (
 /obj/structure/cable/blue{
-	d1 = 4;
-	d2 = 8;
 	icon_state = "4-8"
 	},
 /obj/machinery/alarm/liberia{
@@ -7888,7 +7357,6 @@
 	pixel_x = -24
 	},
 /obj/structure/cable/blue{
-	d2 = 4;
 	icon_state = "0-4"
 	},
 /turf/simulated/floor/tiled/freezer,
@@ -7915,8 +7383,6 @@
 	dir = 4
 	},
 /obj/structure/cable/blue{
-	d1 = 4;
-	d2 = 8;
 	icon_state = "4-8"
 	},
 /obj/machinery/light_switch{
@@ -7978,8 +7444,6 @@
 /area/liberia/engineeringlobby)
 "Gu" = (
 /obj/structure/cable/blue{
-	d1 = 4;
-	d2 = 8;
 	icon_state = "4-8"
 	},
 /obj/machinery/door/airlock/maintenance{
@@ -8003,8 +7467,6 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/structure/cable/blue{
-	d1 = 1;
-	d2 = 2;
 	icon_state = "1-2"
 	},
 /obj/effect/floor_decal/corner/green/full,
@@ -8018,13 +7480,9 @@
 	dir = 4
 	},
 /obj/structure/cable/blue{
-	d1 = 1;
-	d2 = 8;
 	icon_state = "1-8"
 	},
 /obj/structure/cable/blue{
-	d1 = 2;
-	d2 = 8;
 	icon_state = "2-8"
 	},
 /turf/simulated/floor/tiled,
@@ -8040,7 +7498,6 @@
 	pixel_x = 24
 	},
 /obj/structure/cable/blue{
-	d2 = 8;
 	icon_state = "0-8"
 	},
 /turf/simulated/floor/plating,
@@ -8068,7 +7525,6 @@
 	pixel_y = 24
 	},
 /obj/structure/cable/blue{
-	d2 = 8;
 	icon_state = "0-8"
 	},
 /turf/simulated/floor/tiled/techfloor/grid,
@@ -8103,7 +7559,6 @@
 	dir = 4
 	},
 /obj/structure/cable/yellow{
-	d2 = 8;
 	icon_state = "0-8"
 	},
 /obj/effect/floor_decal/techfloor{
@@ -8123,8 +7578,6 @@
 /area/liberia/merchantstorage)
 "Ht" = (
 /obj/structure/cable/blue{
-	d1 = 1;
-	d2 = 8;
 	icon_state = "1-8"
 	},
 /turf/simulated/floor/wood/walnut,
@@ -8167,8 +7620,6 @@
 /area/liberia/personellroom1)
 "HQ" = (
 /obj/structure/cable/blue{
-	d1 = 4;
-	d2 = 8;
 	icon_state = "4-8"
 	},
 /obj/effect/floor_decal/corner_techfloor_grid,
@@ -8196,7 +7647,6 @@
 "Io" = (
 /obj/machinery/shipsensors,
 /obj/structure/cable/blue{
-	d2 = 8;
 	icon_state = "0-8"
 	},
 /turf/simulated/floor/reinforced/airless,
@@ -8206,13 +7656,9 @@
 	dir = 10
 	},
 /obj/structure/cable/blue{
-	d1 = 4;
-	d2 = 8;
 	icon_state = "4-8"
 	},
 /obj/structure/cable/blue{
-	d1 = 1;
-	d2 = 2;
 	icon_state = "1-2"
 	},
 /turf/simulated/floor/tiled,
@@ -8224,8 +7670,6 @@
 /obj/effect/paint/silver,
 /obj/effect/paint_stripe/yellow,
 /obj/structure/cable/blue{
-	d1 = 1;
-	d2 = 8;
 	icon_state = "1-8"
 	},
 /turf/simulated/wall/r_titanium,
@@ -8280,8 +7724,6 @@
 	req_access = list("ACCESS_MERCHANT")
 	},
 /obj/structure/cable/yellow{
-	d1 = 4;
-	d2 = 8;
 	icon_state = "4-8"
 	},
 /obj/machinery/button/access/exterior{
@@ -8311,7 +7753,6 @@
 	pixel_x = -24
 	},
 /obj/structure/cable/blue{
-	d2 = 4;
 	icon_state = "0-4"
 	},
 /obj/effect/floor_decal/spline/fancy/wood{
@@ -8322,13 +7763,9 @@
 /area/liberia/personellroom1)
 "Kh" = (
 /obj/structure/cable/blue{
-	d1 = 4;
-	d2 = 8;
 	icon_state = "4-8"
 	},
 /obj/structure/cable/blue{
-	d1 = 2;
-	d2 = 4;
 	icon_state = "2-4"
 	},
 /obj/effect/floor_decal/corner_techfloor_grid{
@@ -8366,21 +7803,15 @@
 /area/liberia/captain)
 "KH" = (
 /obj/structure/cable/blue{
-	d1 = 4;
-	d2 = 8;
 	icon_state = "4-8"
 	},
 /turf/simulated/wall/r_wall/prepainted,
 /area/liberia/captain)
 "Lh" = (
 /obj/structure/cable/yellow{
-	d1 = 2;
-	d2 = 8;
 	icon_state = "2-8"
 	},
 /obj/structure/cable/yellow{
-	d1 = 1;
-	d2 = 8;
 	icon_state = "1-8"
 	},
 /obj/structure/catwalk,
@@ -8401,7 +7832,6 @@
 /obj/effect/floor_decal/solarpanel,
 /obj/machinery/power/tracker,
 /obj/structure/cable/yellow{
-	d2 = 4;
 	icon_state = "0-4"
 	},
 /turf/simulated/floor/reinforced/airless,
@@ -8434,8 +7864,6 @@
 	},
 /obj/effect/catwalk_plated,
 /obj/structure/cable/blue{
-	d1 = 4;
-	d2 = 8;
 	icon_state = "4-8"
 	},
 /turf/simulated/floor/plating,
@@ -8492,13 +7920,9 @@
 /area/liberia/traidingroom)
 "Nt" = (
 /obj/structure/cable/yellow{
-	d1 = 1;
-	d2 = 4;
 	icon_state = "1-4"
 	},
 /obj/structure/cable/yellow{
-	d1 = 2;
-	d2 = 4;
 	icon_state = "2-4"
 	},
 /obj/structure/catwalk,
@@ -8517,8 +7941,6 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/structure/cable/blue{
-	d1 = 1;
-	d2 = 2;
 	icon_state = "1-2"
 	},
 /turf/simulated/floor/tiled/techfloor,
@@ -8531,8 +7953,6 @@
 	dir = 6
 	},
 /obj/structure/cable/blue{
-	d1 = 2;
-	d2 = 4;
 	icon_state = "2-4"
 	},
 /turf/simulated/floor/wood/walnut,
@@ -8545,13 +7965,9 @@
 /area/liberia/toiletroom1)
 "OC" = (
 /obj/structure/cable/yellow{
-	d1 = 2;
-	d2 = 4;
 	icon_state = "2-4"
 	},
 /obj/structure/cable/yellow{
-	d1 = 1;
-	d2 = 4;
 	icon_state = "1-4"
 	},
 /obj/structure/catwalk,
@@ -8598,8 +8014,6 @@
 	dir = 10
 	},
 /obj/structure/cable/blue{
-	d1 = 2;
-	d2 = 8;
 	icon_state = "2-8"
 	},
 /turf/simulated/floor/tiled/techfloor,
@@ -8622,7 +8036,6 @@
 "PW" = (
 /obj/machinery/shipsensors,
 /obj/structure/cable/blue{
-	d2 = 2;
 	icon_state = "0-2"
 	},
 /obj/effect/floor_decal/industrial/warning/full,
@@ -8637,8 +8050,6 @@
 /area/liberia/bridge)
 "Qj" = (
 /obj/structure/cable/blue{
-	d1 = 4;
-	d2 = 8;
 	icon_state = "4-8"
 	},
 /obj/effect/floor_decal/techfloor{
@@ -8692,8 +8103,6 @@
 /obj/effect/paint/silver,
 /obj/effect/paint_stripe/yellow,
 /obj/structure/cable/blue{
-	d1 = 2;
-	d2 = 4;
 	icon_state = "2-4"
 	},
 /obj/machinery/door/firedoor,
@@ -8728,8 +8137,6 @@
 /area/liberia/guestroom2)
 "Rz" = (
 /obj/structure/cable/blue{
-	d1 = 4;
-	d2 = 8;
 	icon_state = "4-8"
 	},
 /obj/effect/floor_decal/borderfloor,
@@ -8764,8 +8171,6 @@
 "Sb" = (
 /obj/effect/floor_decal/spline/plain/brown,
 /obj/structure/cable/blue{
-	d1 = 1;
-	d2 = 8;
 	icon_state = "1-8"
 	},
 /turf/simulated/floor/wood/ebony,
@@ -8781,8 +8186,6 @@
 /area/liberia/officeroom)
 "SN" = (
 /obj/structure/cable/blue{
-	d1 = 1;
-	d2 = 2;
 	icon_state = "1-2"
 	},
 /obj/structure/railing/mapped,
@@ -8810,8 +8213,6 @@
 "SU" = (
 /obj/effect/floor_decal/techfloor,
 /obj/structure/cable/blue{
-	d1 = 4;
-	d2 = 8;
 	icon_state = "4-8"
 	},
 /turf/simulated/floor/tiled/techfloor,
@@ -8829,13 +8230,9 @@
 /obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers,
 /obj/machinery/atmospherics/pipe/manifold4w/hidden/supply,
 /obj/structure/cable/blue{
-	d1 = 4;
-	d2 = 8;
 	icon_state = "4-8"
 	},
 /obj/structure/cable/blue{
-	d1 = 1;
-	d2 = 4;
 	icon_state = "1-4"
 	},
 /turf/simulated/floor/tiled/techfloor,
@@ -8848,8 +8245,6 @@
 	dir = 1
 	},
 /obj/structure/cable/blue{
-	d1 = 4;
-	d2 = 8;
 	icon_state = "4-8"
 	},
 /obj/structure/disposalpipe/segment/bent{
@@ -8862,8 +8257,6 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/structure/cable/blue{
-	d1 = 1;
-	d2 = 2;
 	icon_state = "1-2"
 	},
 /obj/machinery/door/firedoor,
@@ -8879,8 +8272,6 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/structure/cable/blue{
-	d1 = 1;
-	d2 = 2;
 	icon_state = "1-2"
 	},
 /obj/effect/floor_decal/corner/yellow{
@@ -8896,13 +8287,9 @@
 /obj/machinery/atmospherics/pipe/manifold/hidden/supply,
 /obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers,
 /obj/structure/cable/blue{
-	d1 = 4;
-	d2 = 8;
 	icon_state = "4-8"
 	},
 /obj/structure/cable/blue{
-	d1 = 1;
-	d2 = 4;
 	icon_state = "1-4"
 	},
 /turf/simulated/floor/plating,
@@ -8915,8 +8302,6 @@
 	dir = 1
 	},
 /obj/structure/cable/blue{
-	d1 = 4;
-	d2 = 8;
 	icon_state = "4-8"
 	},
 /turf/simulated/floor/tiled/techfloor,
@@ -8932,8 +8317,6 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/structure/cable/blue{
-	d1 = 1;
-	d2 = 2;
 	icon_state = "1-2"
 	},
 /turf/simulated/floor/wood/walnut,
@@ -8967,8 +8350,6 @@
 /area/liberia/merchantstorage)
 "Vc" = (
 /obj/structure/cable/blue{
-	d1 = 1;
-	d2 = 8;
 	icon_state = "1-8"
 	},
 /obj/effect/floor_decal/techfloor{
@@ -9021,8 +8402,6 @@
 	dir = 4
 	},
 /obj/structure/cable/blue{
-	d1 = 4;
-	d2 = 8;
 	icon_state = "4-8"
 	},
 /obj/machinery/door/firedoor,
@@ -9034,8 +8413,6 @@
 	dir = 4
 	},
 /obj/structure/cable/blue{
-	d1 = 4;
-	d2 = 8;
 	icon_state = "4-8"
 	},
 /turf/simulated/floor/wood/walnut,
@@ -9058,8 +8435,6 @@
 /area/liberia/hallway)
 "Wx" = (
 /obj/structure/cable/blue{
-	d1 = 4;
-	d2 = 8;
 	icon_state = "4-8"
 	},
 /obj/effect/floor_decal/borderfloor,
@@ -9101,7 +8476,6 @@
 /area/liberia/hallway)
 "WS" = (
 /obj/structure/cable/blue{
-	d2 = 2;
 	icon_state = "0-2"
 	},
 /obj/machinery/ion_thruster{
@@ -9136,8 +8510,6 @@
 /area/liberia/hallway)
 "XH" = (
 /obj/structure/cable/blue{
-	d1 = 2;
-	d2 = 8;
 	icon_state = "2-8"
 	},
 /turf/simulated/floor/carpet/blue,
@@ -9185,8 +8557,6 @@
 	dir = 4
 	},
 /obj/structure/cable/blue{
-	d1 = 1;
-	d2 = 2;
 	icon_state = "1-2"
 	},
 /turf/simulated/floor/tiled/techfloor,
@@ -9241,8 +8611,6 @@
 /area/liberia/bridge)
 "ZN" = (
 /obj/structure/cable/yellow{
-	d1 = 1;
-	d2 = 2;
 	icon_state = "1-2"
 	},
 /obj/structure/disposalpipe/segment,
@@ -9251,13 +8619,9 @@
 /area/space)
 "ZO" = (
 /obj/structure/cable/yellow{
-	d1 = 4;
-	d2 = 8;
 	icon_state = "4-8"
 	},
 /obj/structure/cable/yellow{
-	d1 = 1;
-	d2 = 4;
 	icon_state = "1-4"
 	},
 /obj/structure/catwalk,

@@ -10,6 +10,7 @@
 	bone_material = null
 	bone_amount = 0
 
+	var/dexterity = DEXTERITY_FULL
 	var/syndicate = 0
 	var/const/MAIN_CHANNEL = "Main Frequency"
 	var/lawchannel = MAIN_CHANNEL // Default channel on which to state laws
@@ -34,17 +35,20 @@
 
 	var/list/access_rights
 	var/obj/item/card/id/idcard = /obj/item/card/id/synthetic
-	// Various machinery stock parts used by stuff like NTOS (should be merged with above at some point)
+	// Various machinery stock parts used by stuff like OS (should be merged with above at some point)
 	var/list/stock_parts = list()
 	var/list/starting_stock_parts = list(
 		/obj/item/stock_parts/computer/processor_unit,
 		/obj/item/stock_parts/computer/hard_drive/silicon,
 		/obj/item/stock_parts/computer/network_card
 	)
-	var/ntos_type = /datum/extension/interactive/ntos/silicon
+	var/os_type = /datum/extension/interactive/os/silicon
 
 	#define SEC_HUD 1 //Security HUD mode
 	#define MED_HUD 2 //Medical HUD mode
+
+/mob/living/silicon/has_dexterity(var/dex_level)
+	return dexterity >= dex_level
 
 /mob/living/silicon/Initialize()
 	global.silicon_mob_list += src
@@ -56,8 +60,8 @@
 		silicon_camera = new silicon_camera(src)
 	for(var/T in starting_stock_parts)
 		stock_parts += new T(src)
-	if(ntos_type)
-		set_extension(src, ntos_type)
+	if(os_type)
+		set_extension(src, os_type)
 		verbs |= /mob/living/silicon/proc/access_computer
 
 	add_language(/decl/language/human/common)
@@ -75,7 +79,7 @@
 
 /mob/living/silicon/fully_replace_character_name(new_name)
 	..()
-	create_or_rename_email(new_name, "root.rt")
+	create_or_update_account(new_name)
 	if(istype(idcard))
 		idcard.registered_name = new_name
 
@@ -96,7 +100,7 @@
 	switch(severity)
 		if(1)
 			src.take_organ_damage(0, 16, bypass_armour = TRUE)
-			if(prob(50)) 
+			if(prob(50))
 				SET_STATUS_MAX(src, STAT_STUN, rand(5,10))
 			else
 				ADJ_STATUS(src, STAT_CONFUSE, rand(2,40))
@@ -225,7 +229,7 @@
 		dat += "Current default language: [lang.name] - <a href='byond://?src=\ref[src];default_lang=reset'>reset</a><br/><br/>"
 
 	for(var/decl/language/L in languages)
-		if(!(L.flags & NONGLOBAL))
+		if(!(L.flags & LANG_FLAG_NONGLOBAL))
 			var/default_str
 			if(L == default_language)
 				default_str = " - default - <a href='byond://?src=\ref[src];default_lang=reset'>reset</a>"
@@ -383,7 +387,7 @@
 	return BULLET_IMPACT_METAL
 
 /mob/living/silicon/proc/get_computer_network()
-	var/datum/extension/interactive/ntos/os = get_extension(src, /datum/extension/interactive/ntos)
+	var/datum/extension/interactive/os/os = get_extension(src, /datum/extension/interactive/os)
 	if(os)
 		return os.get_network()
 
@@ -412,21 +416,21 @@
 
 /mob/living/silicon/proc/access_computer()
 	set category = "Silicon Commands"
-	set name = "Boot NTOS Device"
+	set name = "Boot OS Device"
 
 	if(incapacitated())
 		to_chat(src, SPAN_WARNING("You are in no state to do that right now."))
 		return
 
-	var/datum/extension/interactive/ntos/os = get_extension(src, /datum/extension/interactive/ntos)
+	var/datum/extension/interactive/os/os = get_extension(src, /datum/extension/interactive/os)
 	if(!istype(os))
-		to_chat(src, SPAN_WARNING("You seem to be lacking an NTOS capable device!"))
+		to_chat(src, SPAN_WARNING("You seem to be lacking an OS capable device!"))
 		return
 
 	if(!os.on)
 		os.system_boot()
 	if(!os.on)
-		to_chat(src, SPAN_WARNING("ERROR: NTOS failed to boot."))
+		to_chat(src, SPAN_WARNING("ERROR: OS failed to boot."))
 		return
 
 	os.ui_interact(src)
@@ -436,3 +440,8 @@
 
 /mob/living/silicon/get_telecomms_race_info()
 	return list("Artificial Life", TRUE)
+
+/mob/living/silicon/proc/process_os()
+	var/datum/extension/interactive/os = get_extension(src, /datum/extension/interactive/os)
+	if(os)
+		os.Process()

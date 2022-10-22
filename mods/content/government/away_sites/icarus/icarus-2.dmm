@@ -118,7 +118,7 @@
 /obj/structure/bed/chair{
 	dir = 8
 	},
-/obj/effect/landmark/corpse/bridgeofficer,
+/obj/abstract/landmark/corpse/bridgeofficer,
 /turf/simulated/floor/tiled,
 /area/icarus/vessel)
 "aB" = (
@@ -469,8 +469,8 @@
 /area/icarus/vessel)
 "bG" = (
 /obj/structure/closet,
-/obj/item/chems/food/drinks/bottle/tequila,
-/obj/item/chems/food/drinks/bottle/wine,
+/obj/item/chems/drinks/bottle/tequila,
+/obj/item/chems/drinks/bottle/wine,
 /obj/machinery/atmospherics/unary/vent_pump/on{
 	dir = 1;
 	level = 2
@@ -568,7 +568,7 @@
 /area/icarus/vessel)
 "bZ" = (
 /obj/structure/closet,
-/obj/item/chems/food/drinks/flask/shiny,
+/obj/item/chems/drinks/flask/shiny,
 /turf/simulated/floor/tiled,
 /area/icarus/vessel)
 "ca" = (
@@ -607,7 +607,7 @@
 /obj/structure/bed/chair{
 	dir = 8
 	},
-/obj/effect/landmark/corpse/engineer,
+/obj/abstract/landmark/corpse/engineer,
 /obj/effect/decal/cleanable/blood,
 /turf/simulated/floor/tiled,
 /area/icarus/vessel)
@@ -643,7 +643,7 @@
 /area/icarus/vessel)
 "ck" = (
 /obj/structure/closet,
-/obj/item/chems/food/drinks/golden_cup,
+/obj/item/chems/drinks/golden_cup,
 /turf/simulated/floor/tiled,
 /area/icarus/vessel)
 "cl" = (
@@ -752,7 +752,7 @@
 /area/icarus/vessel)
 "cA" = (
 /obj/structure/table/woodentable,
-/obj/item/chems/food/drinks/bottle/whiskey,
+/obj/item/chems/drinks/bottle/whiskey,
 /turf/simulated/floor/tiled,
 /area/icarus/vessel)
 "cB" = (
@@ -1009,7 +1009,7 @@
 /obj/structure/bed/chair/comfy/brown{
 	dir = 4
 	},
-/obj/effect/landmark/corpse/scientist,
+/obj/abstract/landmark/corpse/scientist,
 /obj/effect/decal/cleanable/blood,
 /turf/simulated/floor/tiled,
 /area/icarus/vessel)
@@ -1267,8 +1267,6 @@
 /area/icarus/open)
 "ea" = (
 /obj/structure/cable{
-	d1 = 1;
-	d2 = 2;
 	icon_state = "1-2"
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
@@ -1283,8 +1281,6 @@
 /area/icarus/open)
 "ec" = (
 /obj/structure/cable{
-	d1 = 1;
-	d2 = 2;
 	icon_state = "1-2"
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
@@ -1309,8 +1305,6 @@
 /area/icarus/open)
 "eg" = (
 /obj/structure/cable{
-	d1 = 1;
-	d2 = 2;
 	icon_state = "1-2"
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
@@ -1319,8 +1313,6 @@
 /area/icarus/open)
 "eh" = (
 /obj/structure/cable{
-	d1 = 1;
-	d2 = 2;
 	icon_state = "1-2"
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
@@ -1343,8 +1335,6 @@
 /area/icarus/vessel)
 "ek" = (
 /obj/structure/cable{
-	d1 = 1;
-	d2 = 2;
 	icon_state = "1-2"
 	},
 /obj/machinery/atmospherics/pipe/manifold/hidden/supply{
@@ -1368,8 +1358,6 @@
 "en" = (
 /obj/machinery/door/airlock,
 /obj/structure/cable{
-	d1 = 1;
-	d2 = 2;
 	icon_state = "1-2"
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
@@ -1410,8 +1398,6 @@
 /area/icarus/open)
 "ev" = (
 /obj/structure/cable{
-	d1 = 1;
-	d2 = 2;
 	icon_state = "1-2"
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
@@ -1462,8 +1448,6 @@
 /area/icarus/vessel)
 "eF" = (
 /obj/structure/cable{
-	d1 = 1;
-	d2 = 2;
 	icon_state = "1-2"
 	},
 /obj/machinery/light/small{
@@ -1526,8 +1510,6 @@
 /area/icarus/vessel)
 "eQ" = (
 /obj/structure/cable{
-	d1 = 1;
-	d2 = 2;
 	icon_state = "1-2"
 	},
 /obj/machinery/atmospherics/pipe/manifold4w/hidden/supply,
@@ -1583,8 +1565,6 @@
 /area/icarus/open)
 "fa" = (
 /obj/structure/cable{
-	d1 = 1;
-	d2 = 4;
 	icon_state = "1-4"
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
@@ -1592,8 +1572,6 @@
 /area/icarus/vessel)
 "fb" = (
 /obj/structure/cable{
-	d1 = 2;
-	d2 = 8;
 	icon_state = "2-8"
 	},
 /turf/simulated/floor/plating,
@@ -1608,7 +1586,6 @@
 "fd" = (
 /obj/effect/floor_decal/solarpanel,
 /obj/structure/cable/yellow{
-	d2 = 2;
 	icon_state = "0-2"
 	},
 /obj/machinery/power/solar,
@@ -1617,7 +1594,6 @@
 "fe" = (
 /obj/machinery/power/solar_control,
 /obj/structure/cable/yellow{
-	d2 = 4;
 	icon_state = "0-4"
 	},
 /turf/simulated/floor/plating,
@@ -1627,12 +1603,9 @@
 	dir = 4
 	},
 /obj/structure/cable/yellow{
-	d2 = 2;
 	icon_state = "0-2"
 	},
 /obj/structure/cable/yellow{
-	d1 = 2;
-	d2 = 8;
 	icon_state = "2-8"
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
@@ -1645,13 +1618,9 @@
 /area/icarus/vessel)
 "fh" = (
 /obj/structure/cable/yellow{
-	d1 = 1;
-	d2 = 4;
 	icon_state = "1-4"
 	},
 /obj/structure/cable/yellow{
-	d1 = 2;
-	d2 = 4;
 	icon_state = "2-4"
 	},
 /obj/effect/floor_decal/industrial/hatch/yellow,
@@ -1659,18 +1628,12 @@
 /area/icarus/open)
 "fi" = (
 /obj/structure/cable/yellow{
-	d1 = 4;
-	d2 = 8;
 	icon_state = "4-8"
 	},
 /obj/structure/cable/yellow{
-	d1 = 1;
-	d2 = 4;
 	icon_state = "1-4"
 	},
 /obj/structure/cable/yellow{
-	d1 = 2;
-	d2 = 4;
 	icon_state = "2-4"
 	},
 /obj/effect/floor_decal/industrial/hatch/yellow,
@@ -1678,8 +1641,6 @@
 /area/icarus/open)
 "fj" = (
 /obj/structure/cable/yellow{
-	d1 = 2;
-	d2 = 8;
 	icon_state = "2-8"
 	},
 /obj/effect/floor_decal/industrial/hatch/yellow,
@@ -1689,8 +1650,6 @@
 "fk" = (
 /obj/machinery/door/airlock/external,
 /obj/structure/cable/yellow{
-	d1 = 1;
-	d2 = 2;
 	icon_state = "1-2"
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
@@ -1698,8 +1657,6 @@
 /area/icarus/vessel)
 "fl" = (
 /obj/structure/cable/yellow{
-	d1 = 2;
-	d2 = 4;
 	icon_state = "2-4"
 	},
 /obj/effect/floor_decal/industrial/hatch/yellow,
@@ -1708,18 +1665,12 @@
 /area/icarus/open)
 "fm" = (
 /obj/structure/cable/yellow{
-	d1 = 4;
-	d2 = 8;
 	icon_state = "4-8"
 	},
 /obj/structure/cable/yellow{
-	d1 = 2;
-	d2 = 8;
 	icon_state = "2-8"
 	},
 /obj/structure/cable/yellow{
-	d1 = 1;
-	d2 = 8;
 	icon_state = "1-8"
 	},
 /obj/effect/floor_decal/industrial/hatch/yellow,
@@ -1727,13 +1678,9 @@
 /area/icarus/open)
 "fn" = (
 /obj/structure/cable/yellow{
-	d1 = 2;
-	d2 = 8;
 	icon_state = "2-8"
 	},
 /obj/structure/cable/yellow{
-	d1 = 1;
-	d2 = 8;
 	icon_state = "1-8"
 	},
 /obj/effect/floor_decal/industrial/hatch/yellow,
@@ -1747,8 +1694,6 @@
 /area/icarus/open)
 "fp" = (
 /obj/structure/cable/yellow{
-	d1 = 1;
-	d2 = 2;
 	icon_state = "1-2"
 	},
 /obj/effect/floor_decal/industrial/hatch/yellow,
@@ -1756,8 +1701,6 @@
 /area/icarus/open)
 "fq" = (
 /obj/structure/cable/yellow{
-	d1 = 1;
-	d2 = 2;
 	icon_state = "1-2"
 	},
 /obj/machinery/atmospherics/unary/vent_pump/high_volume/shuttle{
@@ -1769,21 +1712,15 @@
 "fr" = (
 /obj/machinery/door/airlock/external,
 /obj/structure/cable/yellow{
-	d1 = 1;
-	d2 = 2;
 	icon_state = "1-2"
 	},
 /turf/simulated/floor/plating,
 /area/icarus/open)
 "fs" = (
 /obj/structure/cable/yellow{
-	d1 = 4;
-	d2 = 8;
 	icon_state = "4-8"
 	},
 /obj/structure/cable/yellow{
-	d1 = 2;
-	d2 = 4;
 	icon_state = "2-4"
 	},
 /obj/effect/floor_decal/industrial/hatch/yellow,
@@ -1791,18 +1728,12 @@
 /area/icarus/open)
 "ft" = (
 /obj/structure/cable/yellow{
-	d1 = 1;
-	d2 = 2;
 	icon_state = "1-2"
 	},
 /obj/structure/cable/yellow{
-	d1 = 1;
-	d2 = 8;
 	icon_state = "1-8"
 	},
 /obj/structure/cable/yellow{
-	d1 = 1;
-	d2 = 4;
 	icon_state = "1-4"
 	},
 /obj/effect/floor_decal/industrial/hatch/yellow,
@@ -1811,8 +1742,6 @@
 /area/icarus/open)
 "fu" = (
 /obj/structure/cable/yellow{
-	d1 = 4;
-	d2 = 8;
 	icon_state = "4-8"
 	},
 /obj/effect/floor_decal/industrial/hatch/yellow,
@@ -1820,13 +1749,9 @@
 /area/icarus/open)
 "fv" = (
 /obj/structure/cable/yellow{
-	d1 = 4;
-	d2 = 8;
 	icon_state = "4-8"
 	},
 /obj/structure/cable/yellow{
-	d1 = 2;
-	d2 = 8;
 	icon_state = "2-8"
 	},
 /obj/effect/floor_decal/industrial/hatch/yellow,
@@ -1834,18 +1759,12 @@
 /area/icarus/open)
 "fw" = (
 /obj/structure/cable/yellow{
-	d1 = 1;
-	d2 = 8;
 	icon_state = "1-8"
 	},
 /obj/structure/cable/yellow{
-	d1 = 4;
-	d2 = 8;
 	icon_state = "4-8"
 	},
 /obj/structure/cable/yellow{
-	d1 = 2;
-	d2 = 8;
 	icon_state = "2-8"
 	},
 /obj/effect/floor_decal/industrial/hatch/yellow,
@@ -1862,7 +1781,7 @@
 /turf/simulated/floor/reinforced,
 /area/icarus/open)
 "gb" = (
-/obj/effect/landmark/map_data{
+/obj/abstract/map_data{
 	height = 2
 	},
 /turf/unsimulated/mineral,

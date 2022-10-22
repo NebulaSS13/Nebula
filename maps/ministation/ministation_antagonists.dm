@@ -22,10 +22,12 @@
 /decl/special_role/loyalist
 	initial_spawn_req = 1
 	initial_spawn_target = 2
+	command_department_id = /decl/department/command
 
 /decl/special_role/revolutionary
 	initial_spawn_req = 1
 	initial_spawn_target = 2
+	command_department_id = /decl/department/command
 
 /datum/map/ministation/potential_theft_targets = list(
 		"an owl mask"                        = /obj/item/clothing/mask/gas/owl_mask,
@@ -37,7 +39,7 @@
 		"a pair of magboots"                 = /obj/item/clothing/shoes/magboots,
 		"the master blueprints"              = /obj/item/blueprints,
 		"a sample of slime extract"          = /obj/item/slime_extract,
-		"a piece of corgi meat"              = /obj/item/chems/food/snacks/meat/corgi,
+		"a piece of corgi meat"              = /obj/item/chems/food/meat/corgi,
 		"the hypospray"                      = /obj/item/chems/hypospray,
 		"the captain's pinpointer"           = /obj/item/pinpointer,
 		"the championship belt"              = /obj/item/storage/belt/champion,

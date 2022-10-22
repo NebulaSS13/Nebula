@@ -2,7 +2,7 @@
 	icon = 'icons/atmos/vent_scrubber.dmi'
 	icon_state = "map_scrubber_off"
 
-	name = "Air Scrubber"
+	name = "air scrubber"
 	desc = "Has a valve and pump attached to it."
 	use_power = POWER_USE_OFF
 	idle_power_usage = 150		//internal circuitry, friction losses and stuff
@@ -77,8 +77,10 @@
 		icon_state = "weld"
 	else if((stat & NOPOWER) || !use_power)
 		icon_state = "off"
+	else if(scrubbing == SCRUBBER_EXCHANGE)
+		icon_state = "on"
 	else
-		icon_state = "[scrubbing ? "on" : "in"]"
+		icon_state = "in"
 
 	build_device_underlays()
 
@@ -92,18 +94,35 @@
 				scrubbing_gas += g
 	var/area/A = get_area(src)
 	if(A && !A.air_scrub_names[id_tag])
-		var/new_name = "[A.name] Vent Scrubber #[A.air_scrub_names.len+1]"
-		A.air_scrub_names[id_tag] = new_name
-		SetName(new_name)
+		update_name()
 		events_repository.register(/decl/observ/name_set, A, src, .proc/change_area_name)
 	. = ..()
 
 /obj/machinery/atmospherics/unary/vent_scrubber/proc/change_area_name(var/area/A, var/old_area_name, var/new_area_name)
 	if(get_area(src) != A)
 		return
-	var/new_name = replacetext(A.air_scrub_names[id_tag], old_area_name, new_area_name)
-	SetName(new_name)
+	update_name()
+
+/obj/machinery/atmospherics/unary/vent_scrubber/area_changed(area/old_area, area/new_area)
+	if(old_area)
+		old_area.air_scrub_names -= id_tag
+	. = ..()
+	update_name()
+
+/obj/machinery/atmospherics/unary/vent_scrubber/proc/update_name()
+	var/area/A = get_area(src)
+	if(!A || A == global.space_area)
+		SetName("vent scrubber")
+		return
+	var/index
+	if(A.air_scrub_names[id_tag])
+		index = A.air_scrub_names.Find(id_tag)
+	else
+		A.air_scrub_names[id_tag] = TRUE
+		index = length(A.air_scrub_names)
+	var/new_name = "[A.proper_name] vent scrubber #[index]"
 	A.air_scrub_names[id_tag] = new_name
+	SetName(new_name)
 
 /obj/machinery/atmospherics/unary/vent_scrubber/RefreshParts()
 	. = ..()
@@ -221,7 +240,7 @@
 /obj/machinery/atmospherics/unary/vent_scrubber/examine(mob/user, distance)
 	. = ..()
 	if(distance <= 1)
-		to_chat(user, "A small gauge in the corner reads [round(last_flow_rate, 0.1)] L/s; [round(last_power_draw)] W")
+		to_chat(user, "A small gauge in the corner reads [round(last_flow_rate, 0.1)] L/s; [round(last_power_draw)] W.")
 	else
 		to_chat(user, "You are too far away to read the gauge.")
 	if(welded)

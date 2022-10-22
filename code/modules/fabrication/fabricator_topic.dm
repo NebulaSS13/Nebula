@@ -18,7 +18,7 @@
 		try_dump_material(href_list["eject_mat"])
 		. = TOPIC_REFRESH
 	
-	if(href_list["settings"])
+	if(href_list["network_settings"])
 		var/datum/extension/network_device/D = get_extension(src, /datum/extension/network_device)
 		D.ui_interact(user)
 		. = TOPIC_REFRESH
@@ -39,6 +39,17 @@
 		if(CanInteract(user, DefaultTopicState()))
 			filter_string = new_filter_string
 			. = TOPIC_REFRESH
+	
+	//Tab expanding/collapsing
+	if(href_list["toggle_resources"])
+		ui_expand_resources = !ui_expand_resources
+		. = TOPIC_REFRESH
+	if(href_list["toggle_queue"])
+		ui_expand_queue = !ui_expand_queue
+		. = TOPIC_REFRESH
+	if(href_list["toggle_config"])
+		ui_expand_config = !ui_expand_config
+		. = TOPIC_REFRESH
 
 /obj/machinery/fabricator/proc/try_cancel_build(var/datum/fabricator_build_order/order)
 	if(istype(order) && currently_building != order && is_functioning())
@@ -53,7 +64,7 @@
 	mat_name = lowertext(mat_name)
 	for(var/mat_path in stored_substances_to_names)
 		if(stored_substances_to_names[mat_path] == mat_name && stored_material[mat_path] > SHEET_MATERIAL_AMOUNT)
-			var/sheet_count = Floor(stored_material[mat_path]/SHEET_MATERIAL_AMOUNT)
+			var/sheet_count = FLOOR(stored_material[mat_path]/SHEET_MATERIAL_AMOUNT)
 			stored_material[mat_path] -= sheet_count * SHEET_MATERIAL_AMOUNT
 			SSmaterials.create_object(mat_path, get_turf(src), sheet_count)
 			break

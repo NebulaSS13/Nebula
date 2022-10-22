@@ -83,7 +83,7 @@
 
 	last_process = world.time
 
-/obj/machinery/auto_clone/get_artifact_scan_data()
+/obj/machinery/auto_cloner/get_artifact_scan_data()
 	return "Automated cloning pod - appears to rely on an artificial ecosystem formed by semi-organic nanomachines and the contained liquid.<br> \
 	The liquid resembles protoplasmic residue supportive of unicellular organism developmental conditions.<br> \
 	The structure is composed of a titanium alloy."

@@ -3,6 +3,7 @@
 ////////////////////////////////////////////////////////////////////////////////
 /obj/item/chems/pill
 	name = "pill"
+	base_name = "pill"
 	desc = "A pill."
 	icon = 'icons/obj/items/chem/pill.dmi'
 	icon_state = null
@@ -43,7 +44,7 @@
 		if(!M.can_eat(src))
 			return
 		M.visible_message(SPAN_NOTICE("[M] swallows a pill."), SPAN_NOTICE("You swallow \the [src]."), null, 2)
-		if(reagents.total_volume)
+		if(reagents?.total_volume)
 			reagents.trans_to_mob(M, reagents.total_volume, CHEM_INGEST)
 		qdel(src)
 		return 1

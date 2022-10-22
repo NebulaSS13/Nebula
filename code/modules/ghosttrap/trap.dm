@@ -89,7 +89,7 @@
 	if(!can_set_own_name)
 		return
 
-	var/newname = sanitizeSafe(input(target,"Enter a name, or leave blank for the default name.", "Name change",target.real_name) as text, MAX_NAME_LEN)
+	var/newname = sanitize_safe(input(target,"Enter a name, or leave blank for the default name.", "Name change",target.real_name) as text, MAX_NAME_LEN)
 	if (newname && newname != "")
 		target.real_name = newname
 		target.SetName(target.real_name)
@@ -99,7 +99,7 @@
 ***********************************/
 /decl/ghosttrap/positronic_brain
 	name = "positronic brain"
-	ban_checks = list("AI","Robot")
+	ban_checks = list("AI",ASSIGNMENT_ROBOT)
 	pref_check = "ghost_posibrain"
 	ghost_trap_message = "They are occupying a positronic brain now."
 
@@ -147,9 +147,9 @@
 	ghost_trap_message = "They are occupying a maintenance drone now."
 	can_set_own_name = FALSE
 
-/decl/ghosttrap/maintenance_drone/New()
+/decl/ghosttrap/maintenance_drone/Initialize()
+	. = ..()
 	minutes_since_death = DRONE_SPAWN_DELAY
-	..()
 
 /decl/ghosttrap/maintenance_drone/forced(var/mob/user)
 	request_player(new /mob/living/silicon/robot/drone(get_turf(user)), "Someone is attempting to reboot a maintenance drone.", 30 SECONDS)

@@ -1,8 +1,8 @@
 /atom/movable
 	/// The mimic (if any) that's *directly* copying us.
 	var/tmp/atom/movable/openspace/mimic/bound_overlay
-	/// If TRUE, this atom is ignored by Z-Mimic.
-	var/no_z_overlay
+	/// Movable-level Z-Mimic flags. This uses ZMM_* flags, not ZM_* flags.
+	var/z_flags = 0
 
 /atom/movable/forceMove(atom/dest)
 	. = ..(dest)
@@ -33,13 +33,13 @@
 
 	var/turf/T = loc
 
-	if (TURF_IS_MIMICING(T.above))
+	if (TURF_IS_MIMICKING(T.above))
 		SSzcopy.queued_overlays += bound_overlay
 		bound_overlay.queued += 1
 	else
 		qdel(bound_overlay)
 
-// Grabs a list of every openspace object that's directly or indirectly mimicing this object. Returns an empty list if none found.
+// Grabs a list of every openspace object that's directly or indirectly mimicking this object. Returns an empty list if none found.
 /atom/movable/proc/get_above_oo()
 	. = list()
 	var/atom/movable/curr = src
@@ -85,11 +85,13 @@
 	blend_mode = BLEND_MULTIPLY
 	color = SHADOWER_DARKENING_COLOR
 
-/atom/movable/openspace/multiplier/Destroy()
+/atom/movable/openspace/multiplier/Destroy(force)
+	if(!force)
+		PRINT_STACK_TRACE("Turf shadower improperly qdel'd.")
+		return QDEL_HINT_LETMELIVE
 	var/turf/myturf = loc
 	if (istype(myturf))
 		myturf.shadower = null
-
 	return ..()
 
 /atom/movable/openspace/multiplier/proc/copy_lighting(atom/movable/lighting_overlay/LO)
@@ -166,7 +168,7 @@
 
 /atom/movable/openspace/mimic/forceMove(turf/dest)
 	. = ..()
-	if (TURF_IS_MIMICING(dest))
+	if (TURF_IS_MIMICKING(dest))
 		if (destruction_timer)
 			deltimer(destruction_timer)
 			destruction_timer = null
@@ -184,7 +186,7 @@
 /atom/movable/openspace/turf_proxy
 	plane = OPENTURF_MAX_PLANE
 	mouse_opacity = 0
-	no_z_overlay = TRUE  // Only one of these should ever be visible at a time, the mimic logic will handle that.
+	z_flags = ZMM_IGNORE  // Only one of these should ever be visible at a time, the mimic logic will handle that.
 
 /atom/movable/openspace/turf_proxy/attackby(obj/item/W, mob/user)
 	loc.attackby(W, user)

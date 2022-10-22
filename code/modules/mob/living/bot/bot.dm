@@ -48,7 +48,7 @@
 
 /mob/living/bot/Initialize()
 	. = ..()
-	update_icons()
+	update_icon()
 
 	botcard = new /obj/item/card/id(src)
 	botcard.access = botcard_access?.Copy()
@@ -120,8 +120,11 @@
 /mob/living/bot/attack_ai(var/mob/living/user)
 	Interact(user)
 
-/mob/living/bot/attack_hand(var/mob/user)
-	Interact(user)
+/mob/living/bot/default_interaction(mob/user)
+	. = ..()
+	if(!.)
+		Interact(user)
+		return TRUE
 
 /mob/living/bot/proc/Interact(var/mob/user)
 	add_fingerprint(user)
@@ -347,7 +350,7 @@
 		return 0
 	on = 1
 	set_light(light_strength)
-	update_icons()
+	update_icon()
 	resetTarget()
 	patrol_path = list()
 	ignore_list = list()
@@ -356,7 +359,7 @@
 /mob/living/bot/proc/turn_off()
 	on = 0
 	set_light(0)
-	update_icons()
+	update_icon()
 
 /mob/living/bot/proc/explode()
 	qdel(src)

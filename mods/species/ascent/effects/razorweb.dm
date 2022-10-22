@@ -22,6 +22,7 @@
 	icon = 'mods/species/ascent/icons/razorweb.dmi'
 	icon_state = "razorweb"
 	anchored = TRUE
+	z_flags = ZMM_MANGLE_PLANES
 
 	var/mob/owner
 	var/decays = TRUE
@@ -136,20 +137,21 @@
 	var/armour_prob = prob(100 * L.get_blocked_ratio(null, BRUTE, damage = ARMOR_MELEE_RESISTANT))
 	if(H && prob(35))
 		var/obj/item/organ/external/E
-		for(var/thing in shuffle(H.organs_by_name))
-			var/obj/item/organ/external/limb = H.organs_by_name[thing]
-			if(!istype(limb) || limb.is_stump() || !(limb.limb_flags & ORGAN_FLAG_CAN_AMPUTATE))
+		var/list/limbs = H.get_external_organs()
+		if(limbs)
+			limbs = limbs.Copy()
+		for(var/obj/item/organ/external/limb in shuffle(limbs))
+			if(!istype(limb) || !(limb.limb_flags & ORGAN_FLAG_CAN_AMPUTATE))
 				continue
 			var/is_vital = FALSE
 			for(var/obj/item/organ/internal/I in limb.internal_organs)
-				if(I.vital)
+				if(H.species?.is_vital_organ(H, I))
 					is_vital = TRUE
 					break
 			if(!is_vital)
-				E = thing
+				E = limb
 				break
 		if(E && !armour_prob)
-			E = H.organs_by_name[E]
 			visible_message(SPAN_DANGER("The crystalline strands slice straight through \the [H]'s [E.amputation_point || E.name]!"))
 			E.dismember()
 			severed = TRUE

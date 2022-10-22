@@ -30,7 +30,7 @@
 	return 1
 
 /obj/item/shield
-	name = "shield"
+	name = "abstract shield"
 	var/base_block_chance = 60
 
 /obj/item/shield/handle_shield(mob/user, var/damage, atom/damage_source = null, mob/attacker = null, var/def_zone = null, var/attack_text = "the attack")
@@ -106,9 +106,12 @@
 	can_block_lasers = TRUE
 	slowdown_general = 1.5
 
+/obj/item/shield/riot/metal/security //A cosmetic difference.
+	icon = 'icons/obj/items/shield/metal_security.dmi'
+
 /obj/item/shield/buckler
 	name = "buckler"
-	desc = "A wooden buckler used to block sharp things from entering your body back in the day.."
+	desc = "A wooden buckler used to block sharp things from entering your body back in the day."
 	icon = 'icons/obj/items/shield/buckler.dmi'
 	icon_state = "buckler"
 	slot_flags = SLOT_BACK
@@ -140,7 +143,7 @@
 	name = "energy combat shield"
 	desc = "A shield capable of stopping most projectile and melee attacks. It can be retracted, expanded, and stored anywhere."
 	icon = 'icons/obj/items/shield/e_shield.dmi'
-	icon_state = "eshield0" // eshield1 for expanded
+	icon_state = "eshield" // eshield1 for expanded
 	obj_flags = OBJ_FLAG_CONDUCTIBLE
 	force = 3.0
 	throwforce = 5
@@ -150,6 +153,11 @@
 	origin_tech = "{'materials':4,'magnets':3,'esoteric':4}"
 	attack_verb = list("shoved", "bashed")
 	var/active = 0
+	var/shield_light_color = "#006aff"
+
+/obj/item/shield/energy/Initialize()
+	. = ..()
+	update_icon()
 
 /obj/item/shield/energy/handle_shield(mob/user)
 	if(!active)
@@ -196,8 +204,8 @@
 	return
 
 /obj/item/shield/energy/on_update_icon()
-	icon_state = "eshield[active]"
+	icon_state = "[initial(icon_state)][active]"
 	if(active)
-		set_light(1.5, 1.5, "#006aff")
+		set_light(1.5, 1.5, shield_light_color)
 	else
 		set_light(0)

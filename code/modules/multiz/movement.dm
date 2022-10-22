@@ -8,10 +8,13 @@
 	set name = "Move Down"
 	set category = "IC"
 
-	SelfMove(DOWN)
+	move_down()
 
 /mob/proc/move_up()
 	SelfMove(UP)
+
+/mob/proc/move_down()
+	SelfMove(DOWN)
 
 /mob/living/carbon/human/move_up()
 	var/turf/old_loc = loc
@@ -50,6 +53,11 @@
 	if(species && species.can_overcome_gravity(src))
 		return 1
 	else
+		var/turf/T = loc
+		if(((T.get_physical_height() + T.get_fluid_depth()) >= FLUID_DEEP) || T.get_fluid_depth() >= FLUID_MAX_DEPTH)
+			if(can_float())
+				return 1
+
 		for(var/atom/a in src.loc)
 			if(a.atom_flags & ATOM_FLAG_CLIMBABLE)
 				return 1
@@ -96,7 +104,7 @@
 		return
 
 	var/turf/T = loc
-	if(!T.CanZPass(src, DOWN) || !below.CanZPass(src, DOWN))
+	if(!T.CanZPass(src, DOWN))
 		return
 
 	// No gravity in space, apparently.
@@ -144,6 +152,12 @@
 			if(!A.CanPass(src, location_override))
 				return FALSE
 
+		//We cannot sink if we can swim
+		if(location_override.get_fluid_depth() >= FLUID_DEEP && (below == loc))
+			if(!(below.get_fluid_depth() >= 0.95 * FLUID_MAX_DEPTH)) //No salmon skipping up a stream of falling water
+				return TRUE
+			return !can_float()
+
 
 	return TRUE
 
@@ -173,23 +187,35 @@
 		return species.can_fall(src)
 
 /atom/movable/proc/handle_fall(var/turf/landing)
-	forceMove(landing)
+	var/turf/previous = get_turf(loc)
+	Move(landing, get_dir(previous, landing))
 	if(locate(/obj/structure/stairs) in landing)
+		return 1
+	if(landing.get_fluid_depth() >= FLUID_DEEP)
+		var/primary_fluid = landing.get_fluid_name()
+		if(previous.get_fluid_depth() >= FLUID_DEEP) //We're sinking further
+			visible_message(SPAN_NOTICE("\The [src] sinks deeper down into \the [primary_fluid]!"), SPAN_NOTICE("\The [primary_fluid] rushes around you as you sink!"))
+			playsound(previous, pick(SSfluids.gurgles), 50, 1)
+		else
+			visible_message(SPAN_NOTICE("\The [src] falls into the [primary_fluid]!"), SPAN_NOTICE("What a splash!"))
+			playsound(src,  'sound/effects/watersplash.ogg', 30, TRUE)
 		return 1
 	else
 		handle_fall_effect(landing)
 
 /atom/movable/proc/handle_fall_effect(var/turf/landing)
+	SHOULD_CALL_PARENT(TRUE)
 	if(istype(landing) && landing.is_open())
 		visible_message("\The [src] falls through \the [landing]!", "You hear a whoosh of displaced air.")
 	else
 		visible_message("\The [src] slams into \the [landing]!", "You hear something slam into the [global.using_map.ground_noun].")
-		if(fall_damage())
+		var/fall_damage = fall_damage()
+		if(fall_damage > 0)
 			for(var/mob/living/M in landing.contents)
 				if(M == src)
 					continue
 				visible_message("\The [src] hits \the [M.name]!")
-				M.take_overall_damage(fall_damage())
+				M.take_overall_damage(fall_damage)
 
 /atom/movable/proc/fall_damage()
 	return 0
@@ -201,11 +227,11 @@
 		return 100
 	return BASE_STORAGE_COST(w_class)
 
-/mob/living/carbon/human/handle_fall_effect(var/turf/landing)
+/mob/living/carbon/human/apply_fall_damage(var/turf/landing)
+	if(status_flags & GODMODE)
+		return
 	if(species && species.handle_fall_special(src, landing))
 		return
-
-	..()
 	var/min_damage = 7
 	var/max_damage = 14
 	apply_damage(rand(min_damage, max_damage), BRUTE, BP_HEAD, armor_pen = 50)
@@ -221,28 +247,21 @@
 	if(prob(skill_fail_chance(SKILL_HAULING, 40, SKILL_EXPERT, 2)))
 		var/list/victims = list()
 		for(var/tag in list(BP_L_FOOT, BP_R_FOOT, BP_L_ARM, BP_R_ARM))
-			var/obj/item/organ/external/E = get_organ(tag)
-			if(E && !E.is_stump() && !E.dislocated && !BP_IS_PROSTHETIC(E))
+			var/obj/item/organ/external/E = GET_EXTERNAL_ORGAN(src, tag)
+			if(E && !E.is_dislocated() && (E.limb_flags & ORGAN_FLAG_CAN_DISLOCATE) && !BP_IS_PROSTHETIC(E))
 				victims += E
 		if(victims.len)
 			var/obj/item/organ/external/victim = pick(victims)
 			victim.dislocate()
 			to_chat(src, "<span class='warning'>You feel a sickening pop as your [victim.joint] is wrenched out of the socket.</span>")
-
-	if(client)
-		var/area/A = get_area(landing)
-		if(A)
-			A.alert_on_fall(src)
 	updatehealth()
-
 
 /mob/living/carbon/human/proc/climb_up(atom/A)
 	if(!isturf(loc) || !bound_overlay || bound_overlay.destruction_timer || is_physically_disabled())	// This destruction_timer check ideally wouldn't be required, but I'm not awake enough to refactor this to not need it.
 		return FALSE
 
 	var/turf/T = get_turf(A)
-	var/turf/above = GetAbove(src)
-	if(above && T.Adjacent(bound_overlay) && above.CanZPass(src, UP)) //Certain structures will block passage from below, others not
+	if(T.Adjacent(bound_overlay) && T.CanZPass(src, UP)) //Certain structures will block passage from below, others not
 		if(loc.has_gravity() && !can_overcome_gravity())
 			return FALSE
 
@@ -266,7 +285,7 @@
 			z_eye = null
 			return
 		var/turf/above = GetAbove(src)
-		if(istype(above) && above.is_open())
+		if(istype(above) && TURF_IS_MIMICKING(above))
 			z_eye = new /atom/movable/z_observer/z_up(src, src)
 			to_chat(src, "<span class='notice'>You look up.</span>")
 			reset_view(z_eye)
@@ -287,7 +306,7 @@
 			z_eye = null
 			return
 		var/turf/T = get_turf(src)
-		if(T && T.is_open() && HasBelow(T.z))
+		if(T && TURF_IS_MIMICKING(T) && HasBelow(T.z))
 			z_eye = new /atom/movable/z_observer/z_down(src, src)
 			to_chat(src, "<span class='notice'>You look down.</span>")
 			reset_view(z_eye)
@@ -295,6 +314,28 @@
 		to_chat(src, "<span class='notice'>You can see \the [T ? T : "floor"].</span>")
 	else
 		to_chat(src, "<span class='notice'>You can't look below right now.</span>")
+
+//Swimming and floating
+/atom/movable/proc/can_float()
+	return FALSE
+
+/mob/living/can_float()
+	return !is_physically_disabled()
+
+/mob/living/simple_animal/aquatic/can_float()
+	return TRUE
+
+/mob/living/simple_animal/hostile/aquatic/can_float()
+	return TRUE
+
+/mob/living/simple_animal/hostile/retaliate/aquatic/can_float()
+	return TRUE
+
+/mob/living/carbon/human/can_float()
+	return species.can_float(src)
+
+/mob/living/silicon/can_float()
+	return FALSE //If they can fly otherwise it will be checked first
 
 /mob/living
 	var/atom/movable/z_observer/z_eye
@@ -318,7 +359,7 @@
 	forceMove(get_step(owner, UP))
 	if(isturf(src.loc))
 		var/turf/T = src.loc
-		if(T.is_open())
+		if(T && TURF_IS_MIMICKING(T))
 			return
 	owner.reset_view(null)
 	owner.z_eye = null
@@ -327,7 +368,7 @@
 /atom/movable/z_observer/z_down/follow()
 	forceMove(get_step(owner, DOWN))
 	var/turf/T = get_turf(owner)
-	if(T && T.is_open())
+	if(T && TURF_IS_MIMICKING(T))
 		return
 	owner.reset_view(null)
 	owner.z_eye = null

@@ -38,7 +38,7 @@
 			dat += "<tr><td colspan = 2>No candidates found.</td></tr>"
 		dat += "<table>"
 
-	var/datum/browser/written/popup = new(user, "psi_assay_\ref[src]", "Psi-Assay")
+	var/datum/browser/written_digital/popup = new(user, "psi_assay_\ref[src]", "Psi-Assay")
 	popup.set_content(jointext(dat,null))
 	popup.open()
 

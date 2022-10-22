@@ -2,7 +2,7 @@
 /crew_sensor_modifier/tracking/process_crew_data(var/mob/living/carbon/human/H, var/obj/item/clothing/under/C, var/turf/pos, var/list/crew_data)
 	if(pos)
 		var/area/A = get_area(pos)
-		crew_data["area"] = sanitize(A.name)
+		crew_data["area"] = A.proper_name
 		crew_data["x"] = pos.x
 		crew_data["y"] = pos.y
 		crew_data["z"] = pos.z

@@ -5,11 +5,6 @@
  *
  *
  */
-
-#define FAILURE 0
-#define SUCCESS 1
-
-
 /datum/unit_test/apc_area_test
 	name = "MAP: Area Test APC / Scrubbers / Vents"
 
@@ -25,7 +20,7 @@
 			continue
 		area_test_count++
 		var/area_good = 1
-		var/bad_msg = "--------------- [A.name]([A.type])"
+		var/bad_msg = "--------------- [A.proper_name]([A.type])"
 
 		var/exemptions = get_exemptions(A)
 		if(!A.apc && !(exemptions & global.using_map.NO_APC))
@@ -147,7 +142,7 @@
 /datum/unit_test/wire_dir_and_icon_stat/start_test()
 	var/list/bad_cables = list()
 
-	for(var/obj/structure/cable/C in world)
+	for(var/obj/structure/cable/C in global.cable_list)
 		var/expected_icon_state = "[C.d1]-[C.d2]"
 		if(C.icon_state != expected_icon_state)
 			bad_cables |= C
@@ -171,7 +166,7 @@
 /datum/unit_test/closet_test/start_test()
 	var/bad_tests = 0
 
-	for(var/obj/structure/closet/C in world)
+	for(var/obj/structure/closet/C in global.closets)
 		if(!C.opened && isPlayerLevel(C.z))
 			var/total_content_size = 0
 			for(var/atom/movable/AM in C.contents)
@@ -196,7 +191,7 @@
 /datum/unit_test/closet_containment_test/start_test()
 	var/bad_tests = 0
 
-	for(var/obj/structure/closet/C in world)
+	for(var/obj/structure/closet/C in global.closets)
 		if(exceptions[C.type])
 			continue
 		if(!C.opened && isPlayerLevel(C.z))
@@ -265,28 +260,16 @@
 	name = "MAP: All allowed_spawns entries should have spawnpoints on map."
 
 /datum/unit_test/correct_allowed_spawn_test/start_test()
-	var/failed = FALSE
+	var/list/failed = list()
+	for(var/decl/spawnpoint/spawnpoint AS_ANYTHING in global.using_map.allowed_spawns)
+		if(!length(spawnpoint.turfs))
+			log_unit_test("Map allows spawning in [spawnpoint.name], but [spawnpoint.name] has no associated spawn turfs.")
+			failed += spawnpoint.type
 
-	for(var/spawn_name in global.using_map.allowed_spawns)
-		var/datum/spawnpoint/spawnpoint = spawntypes()[spawn_name]
-		if(!spawnpoint)
-			log_unit_test("Map allows spawning in [spawn_name], but [spawn_name] is null!")
-			failed = TRUE
-		else if(!length(spawnpoint.turfs))
-			log_unit_test("Map allows spawning in [spawn_name], but [spawn_name] has no associated spawn turfs.")
-			failed = TRUE
-
-	if(failed)
-		log_unit_test("Following spawn points exist:")
-		for(var/spawnpoint in spawntypes())
-			log_unit_test("\t[spawnpoint] ([any2ref(spawnpoint)])")
-		log_unit_test("Following spawn points are allowed:")
-		for(var/spawnpoint in global.using_map.allowed_spawns)
-			log_unit_test("\t[spawnpoint] ([any2ref(spawnpoint)])")
-		fail("Some of the entries in allowed_spawns have no spawnpoint turfs.")
+	if(length(failed))
+		fail("Some allowed spawnpoints have no spawnpoint turfs:\n[jointext(failed, "\n")]")
 	else
-		pass("All entries in allowed_spawns have spawnpoints.")
-
+		pass("All allowed spawnpoints have spawnpoint turfs.")
 	return 1
 
 //=======================================================================================
@@ -333,15 +316,15 @@
 	var/safe_landmarks = 0
 	var/space_landmarks = 0
 
-	for(var/lm in landmarks_list)
-		var/obj/effect/landmark/landmark = lm
-		if(istype(landmark, /obj/effect/landmark/test/safe_turf))
+	for(var/lm in global.landmarks_list)
+		var/obj/abstract/landmark/landmark = lm
+		if(istype(landmark, /obj/abstract/landmark/test/safe_turf))
 			log_debug("Safe landmark found: [log_info_line(landmark)]")
 			safe_landmarks++
-		else if(istype(landmark, /obj/effect/landmark/test/space_turf))
+		else if(istype(landmark, /obj/abstract/landmark/test/space_turf))
 			log_debug("Space landmark found: [log_info_line(landmark)]")
 			space_landmarks++
-		else if(istype(landmark, /obj/effect/landmark/test))
+		else if(istype(landmark, /obj/abstract/landmark/test))
 			log_debug("Test landmark with unknown tag found: [log_info_line(landmark)]")
 
 	if(safe_landmarks != 1 || space_landmarks != 1)
@@ -365,12 +348,12 @@
 
 	for(var/obj/machinery/cryopod/C in SSmachines.machinery)
 		if(!C.control_computer)
-			log_bad("[get_area(C)] lacks a cryopod control computer while holding a cryopod.")
+			log_bad("[get_area_name(C)] lacks a cryopod control computer while holding a cryopod.")
 			pass = FALSE
 
 	for(var/obj/machinery/computer/cryopod/C in SSmachines.machinery)
 		if(!(locate(/obj/machinery/cryopod) in get_area(C)))
-			log_bad("[get_area(C)] lacks a cryopod while holding a control computer.")
+			log_bad("[get_area_name(C)] lacks a cryopod while holding a control computer.")
 			pass = FALSE
 
 	if(pass)
@@ -388,7 +371,7 @@
 /datum/unit_test/camera_nil_c_tag_check/start_test()
 	var/pass = TRUE
 
-	for(var/obj/machinery/camera/C in world)
+	for(var/obj/machinery/camera/C in SSmachines.machinery)
 		if(!C.c_tag)
 			log_bad("Following camera does not have a c_tag set: [log_info_line(C)]")
 			pass = FALSE
@@ -409,7 +392,7 @@
 	var/cameras_by_ctag = list()
 	var/checked_cameras = 0
 
-	for(var/obj/machinery/camera/C in world)
+	for(var/obj/machinery/camera/C in SSmachines.machinery)
 		if(!C.c_tag)
 			continue
 		checked_cameras++
@@ -542,7 +525,7 @@
 
 /datum/unit_test/station_pipes_shall_not_leak/start_test()
 	var/failures = 0
-	for(var/obj/machinery/atmospherics/pipe/P in world)
+	for(var/obj/machinery/atmospherics/pipe/P in SSmachines.machinery)
 		if(P.leaking && isStationLevel(P.z))
 			failures++
 			log_bad("Following pipe is leaking: [log_info_line(P)]")
@@ -823,7 +806,7 @@
 
 /datum/unit_test/doors_shall_be_on_appropriate_turfs/start_test()
 	var/bad_doors = 0
-	for(var/obj/machinery/door/D in world)
+	for(var/obj/machinery/door/D in SSmachines.machinery)
 		if(QDELETED(D))
 			continue
 		if(!isturf(D.loc))
@@ -831,7 +814,7 @@
 			log_bad("Invalid door turf: [log_info_line(D.loc)]]")
 		else
 			var/list/turf_exceptions
-			var/obj/effect/landmark/map_data/MD = get_map_data(D.loc.z)
+			var/obj/abstract/map_data/MD = get_map_data(D.loc.z)
 			if(UNLINT(MD?.UT_turf_exceptions_by_door_type))
 				turf_exceptions = UNLINT(MD.UT_turf_exceptions_by_door_type[D.type])
 
@@ -848,6 +831,3 @@
 	else
 		pass("All doors are on appropriate turfs")
 	return TRUE
-
-#undef SUCCESS
-#undef FAILURE

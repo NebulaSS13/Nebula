@@ -22,7 +22,7 @@
 /decl/special_role/cultist
 	name = "Cultist"
 	name_plural = "Cultists"
-	blacklisted_jobs = list(/datum/job/ai, /datum/job/cyborg, /datum/job/submap)
+	blacklisted_jobs = list(/datum/job/submap)
 	feedback_tag = "cult_objective"
 	antag_indicator = "hudcultist"
 	welcome_text = "You have a tome in your possession; one that will help you start the cult. Use it well and remember - there are others."
@@ -38,6 +38,7 @@
 	antaghud_indicator = "hudcultist"
 	skill_setter = /datum/antag_skill_setter/station
 	faction = "cult"
+	blocked_job_event_categories = list(ASSIGNMENT_ROBOT, ASSIGNMENT_COMPUTER)
 
 	var/allow_narsie = 1
 	var/powerless = 0

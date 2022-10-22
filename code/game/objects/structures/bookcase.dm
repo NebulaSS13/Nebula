@@ -34,7 +34,7 @@ var/global/list/station_bookcases = list()
 		if(istype(O, /obj/item/book) && user.unEquip(O, src))
 			update_icon()
 		else if(istype(O, /obj/item/pen))
-			var/newname = sanitizeSafe(input("What would you like to title this bookshelf?"), MAX_NAME_LEN)
+			var/newname = sanitize_safe(input("What would you like to title this bookshelf?"), MAX_NAME_LEN)
 			if(!newname)
 				return
 			else
@@ -71,6 +71,7 @@ var/global/list/station_bookcases = list()
 			physically_destroyed()
 
 /obj/structure/bookcase/on_update_icon()
+	..()
 	if(contents.len < 5)
 		icon_state = "book-[contents.len]"
 	else

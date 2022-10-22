@@ -54,6 +54,10 @@
 		to_chat(user, "<span class='warning'>There is nobody on \the [src]. It would be pointless to turn the suppressor on.</span>")
 		return TRUE
 
+	if(stat & (NOPOWER|BROKEN))
+		to_chat(user, "<span class='warning'>You try to switch on the suppressor, yet nothing happens.</span>")
+		return
+
 	if(user != victim && !suppressing) // Skip checks if you're doing it to yourself or turning it off, this is an anti-griefing mechanic more than anything.
 		user.visible_message("<span class='warning'>\The [user] begins switching on \the [src]'s neural suppressor.</span>")
 		if(!do_after(user, 30, src) || !user || !src || user.incapacitated() || !user.Adjacent(src))
@@ -123,8 +127,15 @@
 	check_victim()
 	if(src.victim && get_turf(victim) == get_turf(src) && victim.lying)
 		to_chat(usr, "<span class='warning'>\The [src] is already occupied!</span>")
-		return 0
+		return FALSE
 	if(patient.buckled)
 		to_chat(usr, "<span class='notice'>Unbuckle \the [patient] first!</span>")
-		return 0
-	return 1
+		return FALSE
+	if(patient.anchored)
+		return FALSE
+	return TRUE
+
+/obj/machinery/optable/power_change()
+	. = ..()
+	if(stat & (NOPOWER|BROKEN))
+		suppressing = FALSE

@@ -3,7 +3,7 @@
 		var/matrix/M
 		if(client && max(client.last_view_x_dim, client.last_view_y_dim) > 7)
 			M = matrix()
-			M.Scale(ceil(client.last_view_x_dim/7), ceil(client.last_view_y_dim/7))
+			M.Scale(CEILING(client.last_view_x_dim/7), CEILING(client.last_view_y_dim/7))
 		pain.transform = M
 		animate(pain, alpha = target, time = 15, easing = ELASTIC_EASING)
 		animate(pain, alpha = 0, time = 20)
@@ -22,9 +22,9 @@
 	// Excessive halloss is horrible, just give them enough to make it visible.
 	if(!nohalloss && power)
 		if(affecting)
-			affecting.add_pain(ceil(power/2))
+			affecting.add_pain(CEILING(power/2))
 		else
-			adjustHalLoss(ceil(power/2))
+			adjustHalLoss(CEILING(power/2))
 	flash_pain(min(round(2*power)+55, 255))
 
 	// Anti message spam checks
@@ -58,7 +58,7 @@
 		return
 	var/maxdam = 0
 	var/obj/item/organ/external/damaged_organ = null
-	for(var/obj/item/organ/external/E in organs)
+	for(var/obj/item/organ/external/E in get_external_organs())
 		if(!E.can_feel_pain()) continue
 		var/dam = E.get_damage()
 		// make the choice of the organ depend on damage,
@@ -82,18 +82,19 @@
 				msg = "OH GOD! Your [damaged_organ.name] is [burning ? "on fire" : "hurting terribly"]!"
 		custom_pain(msg, maxdam, prob(10), damaged_organ, TRUE)
 	// Damage to internal organs hurts a lot.
-	for(var/obj/item/organ/internal/I in internal_organs)
+	for(var/obj/item/organ/internal/I in get_internal_organs())
 		if(prob(1) && !((I.status & ORGAN_DEAD) || BP_IS_PROSTHETIC(I)) && I.damage > 5)
-			var/obj/item/organ/external/parent = get_organ(I.parent_organ)
-			var/pain = 10
-			var/message = "You feel a dull pain in your [parent.name]"
-			if(I.is_bruised())
-				pain = 25
-				message = "You feel a pain in your [parent.name]"
-			if(I.is_broken())
-				pain = 50
-				message = "You feel a sharp pain in your [parent.name]"
-			src.custom_pain(message, pain, affecting = parent)
+			var/obj/item/organ/external/parent = GET_EXTERNAL_ORGAN(src, I.parent_organ)
+			if(parent)
+				var/pain = 10
+				var/message = "You feel a dull pain in your [parent.name]"
+				if(I.is_bruised())
+					pain = 25
+					message = "You feel a pain in your [parent.name]"
+				if(I.is_broken())
+					pain = 50
+					message = "You feel a sharp pain in your [parent.name]"
+				src.custom_pain(message, pain, affecting = parent)
 
 
 	if(prob(1))

@@ -18,8 +18,11 @@
 		return FALSE
 
 	if(. == TOOL_USE_SUCCESS)
-		var/decl/tool_archetype/tool_archetype = GET_DECL(archetype)
-		to_chat(user, SPAN_NOTICE("You finish [success_message || tool_archetype.use_message] \the [target] with \the [src]."))
+		if(success_message)
+			user.visible_message(
+				SPAN_NOTICE("\The [user] finishes [success_message] \the [target] with \the [src]."), 
+				SPAN_NOTICE("You finish [success_message] \the [target] with \the [src].")
+			)
 		return TRUE
 
 	if(. == TOOL_USE_FAILURE_NOMESSAGE && failure_message)
@@ -28,6 +31,8 @@
 
 /obj/item/examine(mob/user, distance, infix, suffix)
 	. = ..()
+	if(!user || user.get_preference_value(/datum/client_preference/inquisitive_examine) == PREF_OFF)
+		return
 	var/datum/extension/tool/tool = get_extension(src, /datum/extension/tool)
 	var/list/tool_strings
 	for(var/tool_type in tool?.tool_values)

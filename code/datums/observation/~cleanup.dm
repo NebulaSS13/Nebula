@@ -44,7 +44,7 @@ var/global/list/event_listen_count = list()
 	for(var/entry in global.all_observable_events)
 		var/decl/observ/event = entry
 		if(event.unregister_global(listener))
-			log_debug("[event] - [listener] was deleted while still registered to global events.")
+			log_debug("[event] ([event.type]) - [log_info_line(listener)] was deleted while still registered to global events.")
 			if(!(--listen_count))
 				return
 
@@ -56,7 +56,7 @@ var/global/list/event_listen_count = list()
 		if(proc_owners)
 			for(var/proc_owner in proc_owners)
 				if(event.unregister(event_source, proc_owner))
-					log_debug("[event] - [event_source] was deleted while still being listened to by [proc_owner].")
+					log_debug("[event] ([event.type]) - [log_info_line(event_source)] was deleted while still being listened to by [log_info_line(proc_owner)].")
 					if(!(--source_listener_count))
 						return
 
@@ -66,6 +66,6 @@ var/global/list/event_listen_count = list()
 		var/decl/observ/event = entry
 		for(var/event_source in event.event_sources)
 			if(event.unregister(event_source, listener))
-				log_debug("[event] - [listener] was deleted while still listening to [event_source].")
+				log_debug("[event] ([event.type]) - [log_info_line(listener)] was deleted while still listening to [log_info_line(event_source)].")
 				if(!(--listener_count))
 					return

@@ -1,13 +1,7 @@
-// Macro functions.
-#define RAND_F(LOW, HIGH) (rand()*(HIGH-LOW) + LOW)
-#define ceil(x) (-round(-(x)))
-#define CEILING(x, y) ( -round(-(x) / (y)) * (y) )
-#define MULT_BY_RANDOM_COEF(VAR,LO,HI) VAR =  round((VAR * rand(LO * 100, HI * 100))/100, 0.1)
-
 // min is inclusive, max is exclusive
 /proc/Wrap(val, min, max)
 	var/d = max - min
-	var/t = Floor((val - min) / d)
+	var/t = FLOOR((val - min) / d)
 	return val - (t * d)
 
 /proc/Default(a, b)
@@ -30,12 +24,6 @@
 	if(!x && !y) return 0
 	var/a = arccos(x / sqrt(x*x + y*y))
 	return y >= 0 ? a : -a
-
-/proc/Floor(x)
-	return round(x)
-
-/proc/Ceiling(x)
-	return -round(-x)
 
 // Greatest Common Divisor: Euclid's algorithm.
 /proc/Gcd(a, b)
@@ -65,7 +53,7 @@
 	return (val >= min) && (val <= max)
 
 /proc/IsInteger(x)
-	return Floor(x) == x
+	return FLOOR(x) == x
 
 /proc/IsMultiple(x, y)
 	return x % y == 0
@@ -134,9 +122,3 @@
 
 /matrix/proc/get_angle()
 	return Atan2(b,a)
-
-#define MODULUS_FLOAT(X, Y) ( (X) - (Y) * round((X) / (Y)) )
-
-// Will filter out extra rotations and negative rotations
-// E.g: 540 becomes 180. -180 becomes 180.
-#define SIMPLIFY_DEGREES(degrees) (MODULUS_FLOAT((degrees), 360))

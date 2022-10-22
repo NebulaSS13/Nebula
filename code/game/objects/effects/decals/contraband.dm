@@ -7,27 +7,23 @@
 	icon = 'icons/obj/contraband.dmi'
 	force = 0
 
-
 /obj/item/contraband/poster
 	name = "rolled-up poster"
 	desc = "The poster comes with its own automatic adhesive mechanism, for easy pinning to any vertical surface."
 	icon_state = "rolled_poster"
 	var/poster_type
 
-/obj/item/contraband/poster/Initialize(mapload, var/given_poster_type)
+/obj/item/contraband/poster/Initialize(var/ml, var/material_key, var/given_poster_type)
 	if(given_poster_type && !ispath(given_poster_type, /decl/poster))
 		. = INITIALIZE_HINT_QDEL
 		CRASH("Invalid poster type: [log_info_line(given_poster_type)]")
-
 	poster_type = given_poster_type || poster_type
 	if(!poster_type)
 		poster_type = pick(subtypesof(/decl/poster))
-
 	var/list/posters = subtypesof(/decl/poster)
 	var/serial_number = posters.Find(poster_type)
 	name += " - No. [serial_number]"
-
-	return ..(mapload)
+	return ..(ml, material_key)
 
 //Places the poster on a wall
 /obj/item/contraband/poster/afterattack(var/atom/A, var/mob/user, var/adjacent, var/clickparams)
@@ -37,26 +33,30 @@
 	//must place on a wall and user must not be inside a closet/exosuit/whatever
 	var/turf/W = get_turf(A)
 	if(!istype(W) || !W.is_wall() || !isturf(user.loc))
-		to_chat(user, "<span class='warning'>You can't place this here!</span>")
+		to_chat(user, SPAN_WARNING("You can't place this here!"))
 		return
 
 	var/placement_dir = get_dir(user, W)
 	if (!(placement_dir in global.cardinal))
-		to_chat(user, "<span class='warning'>You must stand directly in front of the wall you wish to place that on.</span>")
+		to_chat(user, SPAN_WARNING("You must stand directly in front of the wall you wish to place that on."))
 		return
 
 	if (ArePostersOnWall(W))
-		to_chat(user, "<span class='notice'>There is already a poster there!</span>")
+		to_chat(user, SPAN_WARNING("There is already a poster there!"))
 		return
 
-	user.visible_message("<span class='notice'>\The [user] starts placing a poster on \the [W].</span>","<span class='notice'>You start placing the poster on \the [W].</span>")
+	user.visible_message(
+		SPAN_NOTICE("\The [user] starts placing a poster on \the [W]."),
+		SPAN_NOTICE("You start placing the poster on \the [W]."))
 
-	var/obj/structure/sign/poster/P = new (user.loc, placement_dir, poster_type)
+	var/obj/structure/sign/poster/P = new (user.loc, null, null, placement_dir, poster_type)
 	qdel(src)
 	flick("poster_being_set", P)
 	// Time to place is equal to the time needed to play the flick animation
 	if(do_after(user, 28, W) && W.is_wall() && !ArePostersOnWall(W, P))
-		user.visible_message("<span class='notice'>\The [user] has placed a poster on \the [W].</span>","<span class='notice'>You have placed the poster on \the [W].</span>")
+		user.visible_message(
+			SPAN_NOTICE("\The [user] has placed a poster on \the [W]."),
+			SPAN_NOTICE("You have placed the poster on \the [W]."))
 	else
 		// We cannot rely on user being on the appropriate turf when placement fails
 		P.roll_and_drop(get_step(W, turn(placement_dir, 180)))
@@ -91,8 +91,8 @@
 /obj/structure/sign/poster/bay_50
 	poster_type = /decl/poster/bay_50
 
-/obj/structure/sign/poster/Initialize(mapload, var/placement_dir = null, var/give_poster_type = null)
-	. = ..(mapload)
+/obj/structure/sign/poster/Initialize(var/ml, var/_mat, var/_reinf_mat, var/placement_dir = null, var/give_poster_type = null)
+	. = ..(ml, _mat, _reinf_mat)
 	if(!poster_type)
 		if(give_poster_type)
 			poster_type = give_poster_type
@@ -100,19 +100,18 @@
 			poster_type = pick(subtypesof(/decl/poster))
 	set_poster(poster_type)
 
+	pixel_x = 0
+	pixel_y = 0
 	switch (placement_dir)
 		if (NORTH)
-			pixel_x = 0
-			pixel_y = 32
+			default_pixel_y = 32
 		if (SOUTH)
-			pixel_x = 0
-			pixel_y = -32
+			default_pixel_y = -32
 		if (EAST)
-			pixel_x = 32
-			pixel_y = 0
+			default_pixel_x = 32
 		if (WEST)
-			pixel_x = -32
-			pixel_y = 0
+			default_pixel_x = -32
+	reset_offsets(0)
 
 /obj/structure/sign/poster/proc/set_poster(var/poster_type)
 	var/decl/poster/design = GET_DECL(poster_type)
@@ -151,7 +150,7 @@
 		add_fingerprint(user)
 
 /obj/structure/sign/poster/proc/roll_and_drop(turf/newloc)
-	new/obj/item/contraband/poster(newloc, poster_type)
+	new /obj/item/contraband/poster(newloc, null, poster_type)
 	qdel(src)
 
 /decl/poster

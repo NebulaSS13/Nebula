@@ -57,45 +57,55 @@ var/global/list/alien_whitelist = list()
 
 //todo: admin aliens
 /proc/is_alien_whitelisted(mob/M, var/species)
+
 	if(!M || !species)
-		return 0
-	if(!config.usealienwhitelist)
-		return 1
-	if(check_rights(R_ADMIN, 0, M))
-		return 1
+		return FALSE
+
+	// Forbidden languages do not care about admin rights.
+	if(istype(species,/decl/language))
+		var/decl/language/L = species
+		if(L.flags & LANG_FLAG_FORBIDDEN)
+			return FALSE
+
+	if(check_rights(R_ADMIN, FALSE, M))
+		return TRUE
 
 	if(istype(species,/decl/language))
 		var/decl/language/L = species
-		if(!(L.flags & (WHITELISTED|RESTRICTED)))
-			return 1
+		if(L.flags & LANG_FLAG_RESTRICTED)
+			return FALSE
+		if(!config.usealienwhitelist || !(L.flags & LANG_FLAG_WHITELISTED))
+			return TRUE
 		return whitelist_lookup(L.name, M.ckey)
 
 	if(istype(species,/decl/species))
 		var/decl/species/S = species
-		if(!(S.spawn_flags & (SPECIES_IS_WHITELISTED|SPECIES_IS_RESTRICTED)))
-			return 1
+		if(S.spawn_flags & SPECIES_IS_RESTRICTED)
+			return FALSE
+		if(!config.usealienwhitelist || !(S.spawn_flags & SPECIES_IS_WHITELISTED))
+			return TRUE
 		return whitelist_lookup(S.get_root_species_name(M), M.ckey)
 
-	return 0
+	return FALSE
 
 /proc/whitelist_lookup(var/item, var/ckey)
 	if(!alien_whitelist)
-		return 0
+		return FALSE
 
 	if(config.usealienwhitelistSQL)
 		//SQL Whitelist
 		if(!(ckey in alien_whitelist))
-			return 0;
+			return FALSE
 		var/list/whitelisted = alien_whitelist[ckey]
 		if(lowertext(item) in whitelisted)
-			return 1
+			return TRUE
 	else
 		//Config File Whitelist
 		for(var/s in alien_whitelist)
 			if(findtext(s,"[ckey] - [item]"))
-				return 1
+				return TRUE
 			if(findtext(s,"[ckey] - All"))
-				return 1
-	return 0
+				return TRUE
+	return FALSE
 
 #undef WHITELISTFILE

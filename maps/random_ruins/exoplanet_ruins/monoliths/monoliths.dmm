@@ -4,7 +4,7 @@
 /area/template_noop)
 "b" = (
 /obj/structure/monolith,
-/obj/effect/landmark/clear,
+/obj/abstract/landmark/clear,
 /turf/template_noop,
 /area/template_noop)
 "c" = (
@@ -25,7 +25,7 @@
 /turf/simulated/floor/fixed/alium/ruin,
 /area/template_noop)
 "e" = (
-/obj/effect/landmark/clear,
+/obj/abstract/landmark/clear,
 /turf/template_noop,
 /area/template_noop)
 

@@ -166,7 +166,7 @@
 	pipe_class = PIPE_CLASS_OTHER
 
 /datum/fabricator_recipe/pipe/device/outlet_injector
-	name = "injector"
+	name = "injector outlet"
 	desc = "Passively injects gas into its surroundings. Has a valve attached to it that can control flow rate."
 	build_icon = 'icons/atmos/injector.dmi'
 	build_icon_state = "map_injector"
@@ -186,6 +186,18 @@
 	colorable = FALSE
 	pipe_color = null
 	constructed_path = /obj/structure/hygiene/drain
+	pipe_class = PIPE_CLASS_OTHER
+
+/datum/fabricator_recipe/pipe/device/drain/bath
+	name = "sealable gutter"
+	desc = "You probably can't get sucked down the plughole. Specially not when it's closed!"
+	build_icon = 'icons/obj/drain.dmi'
+	build_icon_state = "drain_bath"
+	path = /obj/item/drain/bath
+	connect_types = null
+	colorable = FALSE
+	pipe_color = null
+	constructed_path = /obj/structure/hygiene/drain/bath
 	pipe_class = PIPE_CLASS_OTHER
 
 /datum/fabricator_recipe/pipe/device/tank

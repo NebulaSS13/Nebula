@@ -7,7 +7,7 @@
 
 /atom/movable/Entered(var/atom/movable/atom, var/atom/old_loc)
 	. = ..()
-	QUEUE_TEMPERATURE_ATOMS(atom)
+	queue_temperature_atoms(atom)
 
 /obj
 	temperature_coefficient = null
@@ -24,7 +24,7 @@
 	create_matter()
 
 /obj/proc/HandleObjectHeating(var/obj/item/heated_by, var/mob/user, var/adjust_temp)
-	if(ATOM_IS_TEMPERATURE_SENSITIVE(src))
+	if(ATOM_SHOULD_TEMPERATURE_ENQUEUE(src))
 		visible_message(SPAN_NOTICE("\The [user] carefully heats \the [src] with \the [heated_by]."))
 		var/diff_temp = (adjust_temp - temperature)
 		if(diff_temp >= 0)
@@ -33,7 +33,7 @@
 
 /mob/Initialize()
 	. = ..()
-	temperature_coefficient = isnull(temperature_coefficient) ? Clamp(MAX_TEMPERATURE_COEFFICIENT - Floor(mob_size/4), MIN_TEMPERATURE_COEFFICIENT, MAX_TEMPERATURE_COEFFICIENT) : temperature_coefficient
+	temperature_coefficient = isnull(temperature_coefficient) ? Clamp(MAX_TEMPERATURE_COEFFICIENT - FLOOR(mob_size/4), MIN_TEMPERATURE_COEFFICIENT, MAX_TEMPERATURE_COEFFICIENT) : temperature_coefficient
 
 /atom/proc/ProcessAtomTemperature()
 	SHOULD_NOT_SLEEP(TRUE)

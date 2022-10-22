@@ -1,3 +1,5 @@
+var/global/list/closets = list()
+
 /obj/structure/closet
 	name = "closet"
 	desc = "It's a basic storage unit."
@@ -6,6 +8,7 @@
 	density = 1
 	maxhealth = 100
 	material = /decl/material/solid/metal/steel
+	tool_interaction_flags = TOOL_INTERACTION_ANCHOR
 
 	var/welded = 0
 	var/large = 1
@@ -25,9 +28,13 @@
 	var/opened = FALSE
 	var/locked = FALSE
 
+/obj/structure/closet/Destroy()
+	global.closets -= src
+	. = ..()
+
 /obj/structure/closet/Initialize()
 	..()
-
+	global.closets += src
 	if((setup & CLOSET_HAS_LOCK))
 		verbs += /obj/structure/closet/proc/togglelock_verb
 
@@ -55,7 +62,7 @@
 	. = ..()
 	if(distance <= 1 && !opened)
 		var/content_size = 0
-		for(var/atom/movable/AM in src.contents)
+		for(var/atom/movable/AM in contents)
 			if(!AM.anchored)
 				content_size += content_size(AM)
 		if(!content_size)
@@ -68,6 +75,10 @@
 			to_chat(user, "There is still some free space.")
 		else
 			to_chat(user, "It is full.")
+
+	var/mob/observer/ghost/G = user
+	if(isghost(G) && (G.client?.holder || G.antagHUD))
+		to_chat(user, "It contains: [counting_english_list(contents)]")
 
 /obj/structure/closet/CanPass(atom/movable/mover, turf/target, height=0, air_group=0)
 	if(air_group || (height==0 || wall_mounted)) return 1
@@ -153,7 +164,7 @@
 /obj/structure/closet/proc/store_mobs(var/stored_units)
 	. = 0
 	for(var/mob/living/M in loc)
-		if(M.buckled || M.pinned.len || M.anchored)
+		if(M.buckled || LAZYLEN(M.pinned) || M.anchored)
 			continue
 		var/mob_size = content_size(M)
 		if(CLOSET_CHECK_TOO_BIG(mob_size))
@@ -230,7 +241,7 @@
 	if(user.a_intent == I_HURT && W.force)
 		return ..()
 
-	if(!opened && istype(W, /obj/item/stack/material))
+	if(!opened && (istype(W, /obj/item/stack/material) || isWrench(W)) )
 		return ..()
 
 	if(src.opened)
@@ -266,8 +277,9 @@
 			W.pixel_z = 0
 			W.pixel_w = 0
 		return
-	else if(istype(W, /obj/item/energy_blade/blade))
-		if(emag_act(INFINITY, user, "<span class='danger'>The locker has been sliced open by [user] with \an [W]</span>!", "<span class='danger'>You hear metal being sliced and sparks flying.</span>"))
+	else if(istype(W, /obj/item/energy_blade))
+		var/obj/item/energy_blade/blade = W
+		if(blade.is_special_cutting_tool() && emag_act(INFINITY, user, "<span class='danger'>The locker has been sliced open by [user] with \an [W]</span>!", "<span class='danger'>You hear metal being sliced and sparks flying.</span>"))
 			spark_at(src.loc, amount=5)
 			playsound(src.loc, 'sound/weapons/blade1.ogg', 50, 1)
 			open()
@@ -340,18 +352,15 @@
 		to_chat(usr, "<span class='warning'>This mob type can't use this verb.</span>")
 
 /obj/structure/closet/on_update_icon()
+	..()
 	if(opened)
 		icon_state = "open"
-		overlays.Cut()
+	else if(broken)
+		icon_state = "closed_emagged[welded ? "_welded" : ""]"
+	else if(locked)
+		icon_state = "closed_locked[welded ? "_welded" : ""]"
 	else
-		if(broken)
-			icon_state = "closed_emagged[welded ? "_welded" : ""]"
-		else
-			if(locked)
-				icon_state = "closed_locked[welded ? "_welded" : ""]"
-			else
-				icon_state = "closed_unlocked[welded ? "_welded" : ""]"
-			overlays.Cut()
+		icon_state = "closed_unlocked[welded ? "_welded" : ""]"
 
 /obj/structure/closet/proc/req_breakout()
 	if(opened)

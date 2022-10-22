@@ -1,9 +1,7 @@
 /mob/living/simple_animal/tomato
 	name = "tomato"
 	desc = "It's a horrifyingly enormous beef tomato, and it's packing extra beef!"
-	icon_state = "tomato"
-	icon_living = "tomato"
-	icon_dead = "tomato_dead"
+	icon = 'icons/mob/simple_animal/tomato.dmi'
 	speak_chance = 0
 	turns_per_move = 5
 	maxHealth = 15
@@ -14,8 +12,8 @@
 	natural_weapon = /obj/item/natural_weapon/bite
 	pass_flags = PASS_FLAG_TABLE
 
-	meat_type = /obj/item/chems/food/snacks/tomatomeat
+	meat_type = /obj/item/chems/food/tomatomeat
 	bone_material = null
 	bone_amount =   0
-	skin_material = null 
+	skin_material = null
 	skin_amount =   null

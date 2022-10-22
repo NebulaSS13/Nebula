@@ -26,6 +26,7 @@
 		/obj/item/flame,
 		/obj/item/paper,
 		/obj/item/paper_bundle,
+		/obj/item/passport,
 		/obj/item/pen,
 		/obj/item/photo,
 		/obj/item/chems/dropper,
@@ -42,6 +43,7 @@
 		/obj/item/clothing/accessory/armor/tag,
 		)
 	slot_flags = SLOT_ID
+	material = /decl/material/solid/leather
 
 	var/obj/item/card/id/front_id = null
 	var/obj/item/charge_stick/front_stick = null
@@ -99,6 +101,20 @@
 		return I.GetAccess()
 	else
 		return ..()
+
+
+/obj/item/storage/wallet/AltClick(mob/user)
+	if (user != loc || user.incapacitated() || !ishuman(user))
+		return ..()
+
+	var/obj/item/card/id/id = GetIdCard()
+	if (istype(id))
+		remove_from_storage(id)
+		user.put_in_hands(id)
+		return
+
+	return ..()
+
 
 /obj/item/storage/wallet/random/Initialize()
 	. = ..()

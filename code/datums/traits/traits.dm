@@ -40,7 +40,7 @@ var/global/list/_trait_types
 	var/decl/trait/T = GET_DECL(trait_type)
 	if(!T.Validate(trait_level))
 		return FALSE
-	
+
 	LAZYSET(traits, trait_type, trait_level)
 	return TRUE
 
@@ -48,7 +48,7 @@ var/global/list/_trait_types
 	var/decl/trait/T = GET_DECL(trait_type)
 	if(!T.Validate(trait_level))
 		return FALSE
-	
+
 	if(!traits) // If traits haven't been setup before, check if we need to do so now
 		var/species_level = species.traits[trait_type]
 		if(species_level == trait_level) // Matched the default species trait level, ignore
@@ -69,14 +69,11 @@ var/global/list/_trait_types
 	traits = traits || list() // But we do ensure that humans don't null their traits list, to avoid copying from species again
 
 /decl/trait
+	abstract_type = /decl/trait
+	crash_on_abstract_init = TRUE
 	var/name
 	var/description
 	var/list/levels = list(TRAIT_LEVEL_EXISTS) // Should either only contain TRAIT_LEVEL_EXISTS or a set of the other TRAIT_LEVEL_* levels
-	var/abstract_type = /decl/trait
-
-/decl/trait/New()
-	if(type == abstract_type)
-		CRASH("Invalid initialization")
 
 /decl/trait/proc/Validate(level)
 	SHOULD_NOT_OVERRIDE(TRUE)

@@ -37,12 +37,12 @@
 			to_chat(owner, "<span class='notice'>Nearly opaque lenses slide down to shield your eyes.</span>")
 			innate_flash_protection = FLASH_PROTECTION_MAJOR
 			owner.overlay_fullscreen("eyeshield", /obj/screen/fullscreen/blind)
-			owner.update_icons()
+			owner.update_icon()
 		else
 			to_chat(owner, "<span class='notice'>Your protective lenses retract out of the way.</span>")
 			innate_flash_protection = FLASH_PROTECTION_VULNERABLE
 			addtimer(CALLBACK(src, .proc/remove_shield), 1 SECONDS)
-			owner.update_icons()
+			owner.update_icon()
 		refresh_action_button()
 
 /obj/item/organ/internal/eyes/insectoid/serpentid/proc/remove_shield()
@@ -103,6 +103,8 @@
 
 	//Effects of bloodloss
 	switch(blood_volume)
+		if(BLOOD_VOLUME_SAFE to (INFINITY))
+			lowblood_tally = 0
 		if(BLOOD_VOLUME_OKAY to BLOOD_VOLUME_SAFE)
 			lowblood_tally = 2
 			if(prob(1))
@@ -164,7 +166,7 @@
 	vital = 0
 
 /obj/item/organ/external/head/insectoid/serpentid/get_eye_overlay()
-	var/obj/item/organ/internal/eyes/eyes = owner.get_internal_organ(owner.species.vision_organ || BP_EYES)
+	var/obj/item/organ/internal/eyes/eyes = owner.get_organ((owner.species.vision_organ || BP_EYES), /obj/item/organ/internal/eyes)
 	if(eyes)
 		return eyes.get_special_overlay()
 

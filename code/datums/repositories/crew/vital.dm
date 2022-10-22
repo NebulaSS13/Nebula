@@ -4,7 +4,7 @@
 	crew_data["pulse"] = "N/A"
 	crew_data["pulse_span"] = "neutral"
 	if(!H.isSynthetic() && H.should_have_organ(BP_HEART))
-		var/obj/item/organ/internal/heart/O = H.get_internal_organ(BP_HEART)
+		var/obj/item/organ/internal/heart/O = H.get_organ(BP_HEART, /obj/item/organ/internal/heart)
 		if (!O || !BP_IS_PROSTHETIC(O)) // Don't make medical freak out over prosthetic hearts
 			crew_data["true_pulse"] = H.pulse()
 			crew_data["pulse"] = H.get_pulse(GETPULSE_TOOL)
@@ -24,7 +24,7 @@
 	crew_data["charge"] = "N/A"
 	crew_data["charge_span"] = "N/A"
 	if(H.isSynthetic())
-		var/obj/item/organ/internal/cell/cell = H.get_internal_organ(BP_CELL)
+		var/obj/item/organ/internal/cell/cell = H.get_organ(BP_CELL, /obj/item/organ/internal/cell)
 		if(cell)
 			crew_data["charge"] = cell.percent()
 			if(cell.percent() <= 10)
@@ -74,7 +74,7 @@
 		crew_data["charge_span"] = "good"
 
 	if(crew_data["true_oxygenation"] != -1)
-		crew_data["pressure"] = "[Floor(120+rand(-5,5))]/[Floor(80+rand(-5,5))]"
+		crew_data["pressure"] = "[FLOOR(120+rand(-5,5))]/[FLOOR(80+rand(-5,5))]"
 		crew_data["true_oxygenation"] = 100
 		crew_data["oxygenation"] = "normal"
 		crew_data["oxygenation_span"] = "good"
@@ -91,7 +91,7 @@
 		crew_data["charge_span"] = "bad"
 
 	if(crew_data["true_oxygenation"] != -1)
-		crew_data["pressure"] = "[Floor((120+rand(-5,5))*0.25)]/[Floor((80+rand(-5,5))*0.25)]"
+		crew_data["pressure"] = "[FLOOR((120+rand(-5,5))*0.25)]/[FLOOR((80+rand(-5,5))*0.25)]"
 		crew_data["true_oxygenation"] = 25
 		crew_data["oxygenation"] = "extremely low"
 		crew_data["oxygenation_span"] = "bad"

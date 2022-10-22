@@ -8,13 +8,13 @@
 	var/associated_department
 	var/hide_on_manifest = 0
 	var/channels = list()
-	var/networks = list()
+	var/camera_channels = list()
 	var/languages = list(
 		/decl/language/human/common = TRUE,
 		/decl/language/legal = TRUE,
 		/decl/language/sign = FALSE
 		)
-	var/sprites = list()
+	var/list/module_sprites = list()
 	var/can_be_pushed = 1
 	var/no_slip = 0
 	var/obj/item/borg/upgrade/jetpack = null
@@ -29,7 +29,7 @@
 
 	// Bookkeeping
 	var/list/original_languages = list()
-	var/list/added_networks = list()
+	var/list/added_channels = list()
 
 	// Gear lists/types.
 	var/obj/item/emag
@@ -51,7 +51,7 @@
 
 	grant_skills(R)
 	grant_software(R)
-	add_camera_networks(R)
+	add_camera_channels(R)
 	add_languages(R)
 	add_subsystems(R)
 	apply_status_flags(R)
@@ -67,8 +67,8 @@
 	finalize_emag(R)
 	finalize_synths(R)
 
-	R.set_module_sprites(sprites)
-	R.choose_icon(R.module_sprites)
+	if(R.client)
+		R.choose_icon(get_sprites_for(R))
 
 /obj/item/robot_module/proc/build_equipment()
 	var/list/created_equipment = list()
@@ -116,15 +116,22 @@
 		emag = null
 
 /obj/item/robot_module/proc/Reset(var/mob/living/silicon/robot/R)
-	remove_camera_networks(R)
+	remove_camera_channels(R)
 	remove_languages(R)
 	remove_subsystems(R)
 	remove_status_flags(R)
 	reset_skills(R)
-
 	if(R.silicon_radio)
 		R.silicon_radio.recalculateChannels()
-	R.choose_icon(R.set_module_sprites(list("Default" = initial(R.icon_state))))
+	R.choose_icon(list("Basic" = initial(R.icon)))
+
+/obj/item/robot_module/proc/get_sprites_for(var/mob/living/silicon/robot/R)
+	. = module_sprites
+	if(R.ckey)
+		for(var/datum/custom_icon/cicon AS_ANYTHING in SScustomitems.custom_icons_by_ckey[R.ckey])
+			if(cicon.category == display_name && lowertext(R.real_name) == cicon.character_name)
+				for(var/state in cicon.ids_to_icons)
+					.[state] = cicon.ids_to_icons[state]
 
 /obj/item/robot_module/Destroy()
 	QDEL_NULL_LIST(equipment)
@@ -180,17 +187,20 @@
 		R.add_language(language_datum.name, original_languages[original_language])
 	original_languages.Cut()
 
-/obj/item/robot_module/proc/add_camera_networks(var/mob/living/silicon/robot/R)
-	if(R.camera && (NETWORK_ROBOTS in R.camera.network))
-		for(var/network in networks)
-			if(!(network in R.camera.network))
-				R.camera.add_network(network)
-				added_networks |= network
+/obj/item/robot_module/proc/add_camera_channels(var/mob/living/silicon/robot/R)
+	var/datum/extension/network_device/camera/robot/D = get_extension(R, /datum/extension/network_device/camera)
+	if(D)
+		var/list/robot_channels = D.channels
+		if(CAMERA_CHANNEL_ROBOTS in robot_channels)
+			for(var/channel in camera_channels)
+				if(!(channel in robot_channels))
+					D.add_channels(channel)
+					added_channels |= channel
 
-/obj/item/robot_module/proc/remove_camera_networks(var/mob/living/silicon/robot/R)
-	if(R.camera)
-		R.camera.remove_networks(added_networks)
-	added_networks.Cut()
+/obj/item/robot_module/proc/remove_camera_channels(var/mob/living/silicon/robot/R)
+	var/datum/extension/network_device/camera/robot/D = get_extension(R, /datum/extension/network_device/camera)
+	D.remove_channels(added_channels)
+	added_channels.Cut()
 
 /obj/item/robot_module/proc/add_subsystems(var/mob/living/silicon/robot/R)
 	for(var/subsystem_type in subsystems)
@@ -223,7 +233,7 @@
 		buff.remove()
 
 /obj/item/robot_module/proc/grant_software(var/mob/living/silicon/robot/R)
-	var/datum/extension/interactive/ntos/os = get_extension(R, /datum/extension/interactive/ntos)
+	var/datum/extension/interactive/os/os = get_extension(R, /datum/extension/interactive/os)
 	if(os && os.has_component(PART_HDD))
 		var/obj/item/stock_parts/computer/hard_drive/disk = os.get_component(PART_HDD)
 		for(var/T in software)

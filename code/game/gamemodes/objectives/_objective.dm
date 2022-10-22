@@ -14,6 +14,8 @@ var/global/list/all_objectives = list()
 
 /datum/objective/Destroy()
 	global.all_objectives -= src
+	owner = null
+	target = null
 	. = ..()
 
 /datum/objective/proc/find_target()

@@ -78,6 +78,7 @@
 #define COLOR_AMBER            "#ffbf00"
 #define COLOR_COMMAND_BLUE     "#46698c"
 #define COLOR_SKY_BLUE         "#5ca1cc"
+#define COLOR_FONT_ORANGE      "#e67300"
 #define COLOR_PALE_ORANGE      "#b88a3b"
 #define COLOR_CIVIE_GREEN      "#b7f27d"
 #define COLOR_TITANIUM         "#d1e6e3"
@@ -91,7 +92,6 @@
 #define COLOR_CRYSTAL          "#00c8a5"
 #define COLOR_ASTEROID_ROCK    "#735555"
 #define COLOR_DIAMOND          "#d8d4ea"
-
 
 #define	PIPE_COLOR_GREY        "#808080"
 #define	PIPE_COLOR_RED         "#ff0000"
@@ -184,8 +184,8 @@
 #define LIGHT_COLOR_EMERGENCY  "#ff3232" //Red color used by emergency lighting. rgb(255, 50, 50)
 
 // Used by fluid system.
-#define COLOR_OCEAN "#99f5ff"
-
+#define COLOR_LIQUID_WATER "#99f5ff"
+#define COLOR_ICE          "#eef5ff"
 // Used to easily change research colour in case of ???
 #define COLOR_RESEARCH COLOR_PURPLE_GRAY
 
@@ -203,3 +203,7 @@
 #define CODEX_COLOR_ANTAG     "#e5a2a2"
 
 #define COLOR_WEBHOOK_DEFAULT 0x8bbbd5
+
+// Colors for input/hotkey panel.
+#define COLOR_INPUT_DISABLED "#f0f0f0"
+#define COLOR_INPUT_ENABLED "#d3b5b5"

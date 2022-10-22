@@ -23,6 +23,7 @@
 /obj/item/clothing/accessory/armor/plate
 	name = "light armor plate"
 	desc = "A basic armor plate made of steel-reinforced synthetic fibers. Attaches to a plate carrier."
+	icon = 'icons/clothing/accessories/armor/armor_light.dmi'
 	body_parts_covered = SLOT_UPPER_BODY|SLOT_LOWER_BODY
 	armor = list(
 		melee = ARMOR_MELEE_KNIVES,

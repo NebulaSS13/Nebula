@@ -1,9 +1,9 @@
-/decl/special_role/raider/New()
+/decl/special_role/raider/Initialize()
 	. = ..()
 	LAZYSET(outfits_per_species, SPECIES_VOX, /decl/hierarchy/outfit/vox_raider)
 	
 /decl/hierarchy/outfit/vox_raider
-	name = OUTFIT_JOB_NAME("Vox Raider")
+	name = "Job - Vox Raider"
 	shoes =      /obj/item/clothing/shoes/magboots/vox
 	gloves =     /obj/item/clothing/gloves/vox
 	mask =       /obj/item/clothing/mask/gas/swat/vox
@@ -49,7 +49,7 @@
 	addtimer(CALLBACK(src, .proc/do_post_voxifying, vox), 1)
 
 /obj/item/storage/mirror/raider/proc/do_post_voxifying(var/mob/living/carbon/human/vox)
-	var/newname = sanitizeSafe(input(vox,"Enter a name, or leave blank for the default name.", "Name change","") as text, MAX_NAME_LEN)
+	var/newname = sanitize_safe(input(vox,"Enter a name, or leave blank for the default name.", "Name change","") as text, MAX_NAME_LEN)
 	if(!newname || newname == "")
 		var/decl/cultural_info/voxculture = GET_DECL(/decl/cultural_info/culture/vox/raider)
 		newname = voxculture.get_random_name()

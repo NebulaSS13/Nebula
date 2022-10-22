@@ -3,6 +3,7 @@
 var/global/list/same_wires = list()
 // 14 colours, if you're adding more than 14 wires then add more colours here
 var/global/list/wireColours = list("red", "blue", "green", "darkred", "orange", "brown", "gold", "gray", "cyan", "navy", "purple", "pink", "black", "yellow")
+var/global/list/wireColourNames = list("darkred" = "dark red")
 
 /datum/wires
 	var/random = 0 // Will the wires be different for every single instance.
@@ -56,7 +57,7 @@ var/global/list/wireColours = list("red", "blue", "green", "darkred", "orange", 
 	var/list/colours_to_pick = wireColours.Copy() // Get a copy, not a reference.
 	var/list/indexes_to_pick = list()
 	//Generate our indexes
-	for(var/i = 1; i < MAX_FLAG && i < (1 << wire_count); i += i)
+	for(var/i = 1; i < MAX_FLAG && i < BITFLAG(wire_count); i += i)
 		indexes_to_pick += i
 	colours_to_pick.len = wire_count // Downsize it to our specifications.
 
@@ -86,7 +87,6 @@ var/global/list/wireColours = list("red", "blue", "green", "darkred", "orange", 
 
 	var/datum/browser/popup = new(user, "wires", holder.name, window_x, window_y)
 	popup.set_content(html)
-	popup.set_title_image(user.browse_rsc_icon(holder.icon, holder.icon_state))
 	popup.open()
 	return TRUE
 
@@ -102,9 +102,15 @@ var/global/list/wireColours = list("red", "blue", "green", "darkred", "orange", 
 	if(!user.skill_check(SKILL_ELECTRICAL, SKILL_BASIC))
 		wires_used = shuffle(wires_used)
 
+	var/list/replace_colours = user?.get_visual_colour_substitutions() || list()
 	for(var/colour in wires_used)
+
+		var/colour_name = replace_colours[colour] || colour
+		if(colour_name in wireColourNames)
+			colour_name = wireColourNames[colour_name] 
+
 		html += "<tr>"
-		html += "<td[row_options1]><font color='[colour]'>&#9724;</font>[capitalize(colour)]</td>"
+		html += "<td[row_options1]><font color='[colour_name]'>&#9724;</font>[capitalize(colour_name)]</td>"
 		html += "<td[row_options2]>"
 		html += "<A href='?src=\ref[src];action=1;cut=[colour]'>[IsColourCut(colour) ? "Mend" :  "Cut"]</A>"
 		html += " <A href='?src=\ref[src];action=1;pulse=[colour]'>Pulse</A>"
@@ -338,21 +344,21 @@ var/global/const/POWER = 8
 	CutWireColour(wires[r])
 
 /datum/wires/proc/RandomCutAll(var/probability = 10)
-	for(var/i = 1; i < MAX_FLAG && i < (1 << wire_count); i += i)
+	for(var/i = 1; i < MAX_FLAG && i < BITFLAG(wire_count); i += i)
 		if(prob(probability))
 			CutWireIndex(i)
 
 /datum/wires/proc/CutAll()
-	for(var/i = 1; i < MAX_FLAG && i < (1 << wire_count); i += i)
+	for(var/i = 1; i < MAX_FLAG && i < BITFLAG(wire_count); i += i)
 		CutWireIndex(i)
 
 /datum/wires/proc/IsAllCut()
-	if(wires_status == (1 << wire_count) - 1)
+	if(wires_status == BITFLAG(wire_count) - 1)
 		return 1
 	return 0
 
 /datum/wires/proc/MendAll()
-	for(var/i = 1; i < MAX_FLAG && i < (1 << wire_count); i += i)
+	for(var/i = 1; i < MAX_FLAG && i < BITFLAG(wire_count); i += i)
 		if(IsIndexCut(i))
 			CutWireIndex(i)
 

@@ -1,3 +1,4 @@
+#define MAX_QUEUED_ORDERS 100
 /obj/machinery/fabricator/proc/update_current_build(var/spend_time)
 
 	if(!istype(currently_building) || !is_functioning())
@@ -9,13 +10,13 @@
 		return
 
 	// Print the item.
-	do_build(currently_building.target_recipe, currently_building.multiplier)
+	do_build(currently_building)
 	QDEL_NULL(currently_building)
 	get_next_build()
 	update_icon()
 
-/obj/machinery/fabricator/proc/do_build(var/datum/fabricator_recipe/recipe, var/amount)
-	. = recipe.build(get_turf(src), amount)
+/obj/machinery/fabricator/proc/do_build(var/datum/fabricator_build_order/order)
+	. = order.target_recipe.build(get_turf(src), order)
 	if(output_dir)
 		for(var/atom/movable/product in .)
 			step(product, output_dir)
@@ -43,33 +44,52 @@
 	updateUsrDialog()
 
 /obj/machinery/fabricator/proc/try_queue_build(var/datum/fabricator_recipe/recipe, var/multiplier)
-
 	// Do some basic sanity checking.
 	if(!is_functioning() || !istype(recipe) || !(recipe in design_cache))
 		return
 	multiplier = sanitize_integer(multiplier, 1, 100, 1)
-	if(!ispath(recipe.path, /obj/item/stack) && multiplier > 1)
-		multiplier = 1
 
 	// Check if sufficient resources exist.
 	for(var/material in recipe.resources)
 		if(stored_material[material] < round(recipe.resources[material] * mat_efficiency) * multiplier)
 			return
 
-	// Generate and track a new order.
-	var/datum/fabricator_build_order/order = new
-	order.remaining_time = recipe.build_time
-	order.target_recipe =  recipe
-	order.multiplier =     multiplier
-	queued_orders +=       order
+	//Ask subclass if its okay to print
+	if(!can_build(recipe, multiplier))
+		return
 
-	// Remove/earmark resources.
-	for(var/material in recipe.resources)
-		var/removed_mat = round(recipe.resources[material] * mat_efficiency) * multiplier
-		stored_material[material] = max(0, stored_material[material] - removed_mat)
-		order.earmarked_materials[material] = removed_mat
+	var/amount_queued = 1
+	if(!ispath(recipe.path, /obj/item/stack) && multiplier > 1)
+		// For non-stacks, multipliers just queue more orders.
+		amount_queued = multiplier
+		multiplier = 1
+	// Generate and track the new order(s).
+	amount_queued = min(amount_queued, MAX_QUEUED_ORDERS - length(queued_orders))
+	for(var/i in 1 to amount_queued)
+		var/datum/fabricator_build_order/order = make_order(recipe, multiplier)
+		queued_orders += order
+
+		// Remove/earmark resources.
+		for(var/material in recipe.resources)
+			var/removed_mat = round(recipe.resources[material] * mat_efficiency) * multiplier
+			stored_material[material] = max(0, stored_material[material] - removed_mat)
+			order.earmarked_materials[material] = removed_mat
 
 	if(!currently_building)
 		get_next_build()
 	else
 		start_building()
+
+//Allow storing more details in the order for fabricator subclasses
+/obj/machinery/fabricator/proc/make_order(var/datum/fabricator_recipe/recipe, var/multiplier)
+	var/datum/fabricator_build_order/order = new
+	order.remaining_time = recipe.build_time
+	order.target_recipe =  recipe
+	order.multiplier =     multiplier
+	return order
+
+//Override this to add more conditions to printing an object
+/obj/machinery/fabricator/proc/can_build(var/datum/fabricator_recipe/recipe, var/multiplier)
+	return TRUE
+
+#undef MAX_QUEUED_ORDERS

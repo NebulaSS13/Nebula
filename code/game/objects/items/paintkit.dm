@@ -6,12 +6,17 @@
 	var/new_icon                 // What base icon will the new exosuit use?
 	var/new_state = "ripley"     // What base icon state with the new exosuit use.
 	var/uses = 1                 // Uses before the kit deletes itself.
+	var/custom = FALSE
+
+/obj/item/kit/get_single_monetary_worth()
+	. = max(round(..()), (custom ? 100 : 750) * uses) // Luxury good, value is entirely artificial.
 
 /obj/item/kit/examine(mob/user)
 	. = ..()
 	to_chat(user, "It has [uses] use\s left.")
 
 /obj/item/kit/inherit_custom_item_data(var/datum/custom_item/citem)
+	custom = TRUE
 	new_name =  citem.item_name
 	new_desc =  citem.item_desc
 	new_state = citem.item_state
@@ -51,7 +56,7 @@
 
 		var/mob/living/carbon/human/H = user
 		if(istype(H))
-			bodytype_restricted = list(H.get_bodytype_category())
+			bodytype_equip_flags = H.bodytype.bodytype_flag
 		kit.use(1,user)
 		reconsider_single_icon()
 		return TRUE
@@ -70,7 +75,7 @@
 
 		var/mob/living/carbon/human/H = user
 		if(istype(H))
-			bodytype_restricted = list(H.get_bodytype_category())
+			bodytype_equip_flags = H.bodytype.bodytype_flag
 		kit.use(1,user)
 		reconsider_single_icon()
 		return TRUE
@@ -88,12 +93,20 @@
 	to_chat(user, "This kit will add a '[new_name]' decal to a exosuit'.")
 
 // exosuit kits.
-/obj/item/kit/paint/powerloader/flames_red
-	name = "\"Firestarter\" exosuit decal kit"
-	new_name = "red flames"
-	new_state = "flames_red"
+/obj/item/kit/paint/flames_red
+	name = "\"Firestarter\" exosuit customisation kit"
+	new_icon = "flames_red"
 
-/obj/item/kit/paint/powerloader/flames_blue
-	name = "\"Burning Chrome\" exosuit decal kit"
-	new_name = "blue flames"
-	new_state = "flames_blue"
+/obj/item/kit/paint/flames_blue
+	name = "\"Burning Chrome\" exosuit customisation kit"
+	new_icon = "flames_blue"
+
+/obj/item/kit/paint/camouflage
+	name = "\"Guerilla\" exosuit customisation kit"
+	desc = "An old military pattern for jungle warfare, now available for general use."
+	new_icon = "cammo1"
+
+/obj/item/kit/paint/camouflage/forest
+	name = "\"Alpine\" exosuit customisation kit"
+	new_icon = "cammo2"
+	desc = "A muted pattern for alpine environments. Don't miss the forest for the trees!"

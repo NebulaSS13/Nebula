@@ -41,19 +41,37 @@
 
 	update_icon()
 
+/obj/item/ammo_casing/Crossed(atom/AM)
+	..()
+
+	if(isliving(AM))
+		var/mob/living/L = AM
+
+		if(L.buckled)
+			return
+
+		if(!MOVING_DELIBERATELY(L) && prob(10))
+			playsound(src, pick(fall_sounds), 50, 1)
+			var/turf/turf_current = get_turf(src)
+			var/turf/turf_destiinaton = get_step(turf_current, AM.dir)
+			if(turf_destiinaton.Adjacent(turf_current))
+				throw_at(turf_destiinaton, 2, 2, spin = FALSE)
+				animate(src, pixel_x = rand(-16, 16), pixel_y = rand(-16, 16), transform = turn(matrix(), rand(120, 300)), time = rand(3, 8))
+
 /obj/item/ammo_casing/proc/leave_residue()
-	var/mob/living/carbon/human/H = get_holder_of_type(src, /mob/living/carbon/human)
-	var/obj/item/gun/G = get_holder_of_type(src, /obj/item/gun)
-	put_residue_on(G)
-	if(H)
-		for(var/bp in H.held_item_slots)
-			var/datum/inventory_slot/inv_slot = H.held_item_slots[bp]
-			if(G == inv_slot?.holding)
-				var/target = H.get_covering_equipped_item_by_zone(bp)
-				if(!target)
-					target = H.get_organ(bp)
-				put_residue_on(target)
-				break
+	var/obj/item/gun/G = get_recursive_loc_of_type(/obj/item/gun)
+	if(G)
+		put_residue_on(G)
+		var/mob/living/carbon/human/H = G.get_recursive_loc_of_type(/mob/living/carbon/human)
+		if(H)
+			for(var/bp in H.held_item_slots)
+				var/datum/inventory_slot/inv_slot = H.held_item_slots[bp]
+				if(G == inv_slot?.holding)
+					var/target = H.get_covering_equipped_item_by_zone(bp)
+					if(!target)
+						target = GET_EXTERNAL_ORGAN(H, bp)
+					put_residue_on(target)
+					break
 	if(prob(30))
 		put_residue_on(get_turf(src))
 
@@ -69,7 +87,7 @@
 			return
 
 		var/tmp_label = ""
-		var/label_text = sanitizeSafe(input(user, "Inscribe some text into \the [initial(BB.name)]","Inscription",tmp_label), MAX_NAME_LEN)
+		var/label_text = sanitize_safe(input(user, "Inscribe some text into \the [initial(BB.name)]","Inscription",tmp_label), MAX_NAME_LEN)
 		if(length(label_text) > 20)
 			to_chat(user, "<span class='warning'>The inscription can be at most 20 characters long.</span>")
 		else if(!label_text)

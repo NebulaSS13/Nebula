@@ -43,7 +43,7 @@
 
 	if(!device.stored_stick)
 		if(usr)
-			to_chat(usr, "There is no [get_currency_name()]-stick in \the [src]")
+			to_chat(usr, "There is no [get_currency_name()]-stick in \the [src].")
 		return
 
 	device.eject_stick(usr)
@@ -59,7 +59,7 @@
 		dropInto(loc)
 	stored_stick = null
 
-	var/datum/extension/interactive/ntos/os = get_extension(loc, /datum/extension/interactive/ntos)
+	var/datum/extension/interactive/os/os = get_extension(loc, /datum/extension/interactive/os)
 	if(os)
 		os.event_idremoved()
 	loc.verbs -= /obj/item/stock_parts/computer/charge_stick_slot/proc/verb_eject_stick

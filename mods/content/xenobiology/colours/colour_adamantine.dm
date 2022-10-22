@@ -13,6 +13,8 @@
 	return TRUE
 
 /decl/slime_colour/adamantine/handle_uranium_reaction(var/datum/reagents/holder)
-	var/obj/effect/golemrune/Z = new /obj/effect/golemrune(get_turf(holder.my_atom))
-	Z.announce_to_ghosts()
+	var/location = get_turf(holder.get_reaction_loc())
+	if(location)
+		var/obj/effect/golemrune/Z = new(location)
+		Z.announce_to_ghosts()
 	return TRUE

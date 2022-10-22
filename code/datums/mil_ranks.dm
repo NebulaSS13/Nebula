@@ -16,9 +16,12 @@ var/global/datum/mil_branches/mil_branches = new()
  *  Global object for handling branches
  */
 /datum/mil_branches
-	var/list/branches                   // All branches that exist
-	var/list/spawn_branches_            // Branches that a player can choose for spawning, not including species restrictions.
-	var/list/spawn_branches_by_species_ // Branches that a player can choose for spawning, with species restrictions. Populated on a needed basis
+	/// All branches that exist
+	var/list/branches = list()
+	/// Branches that a player can choose for spawning, not including species restrictions.
+	var/list/spawn_branches_ = list()
+	/// Branches that a player can choose for spawning, with species restrictions. Populated on a needed basis
+	var/list/spawn_branches_by_species_ = list()
 
 /**
  *  Retrieve branch object by branch name
@@ -107,9 +110,6 @@ var/global/datum/mil_branches/mil_branches = new()
 	var/list/spawn_rank_types // list of paths used to init the spawn_ranks list. Subset of rank_types
 
 	var/assistant_job
-
-	// Email addresses will be created under this domain name. Mostly for the looks.
-	var/email_domain = "freemail.net"
 
 	var/list/min_skill
 

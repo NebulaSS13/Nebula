@@ -14,7 +14,7 @@
 		/decl/material/solid/metal/silver,
 		/decl/material/solid/metal/platinum,
 		/decl/material/solid/metal/steel,
-		/decl/material/solid/mineral/graphite
+		/decl/material/solid/graphite
 	)
 	var/list/show_materials
 
@@ -22,7 +22,7 @@
 	show_materials = always_show_materials.Copy()
 	. = ..()
 	create_reagents(INFINITY)
-	QUEUE_TEMPERATURE_ATOMS(src)
+	queue_temperature_atoms(src)
 
 // Outgas anything that is in gas form. Check what you put into the smeltery, nerds.
 /obj/machinery/material_processing/smeltery/on_reagent_change()
@@ -64,7 +64,8 @@
 
 /obj/machinery/material_processing/smeltery/power_change()
 	. = ..()
-	QUEUE_TEMPERATURE_ATOMS(src)
+	if(.)
+		queue_temperature_atoms(src)
 
 /obj/machinery/material_processing/smeltery/proc/can_eat(var/obj/item/eating)
 	for(var/mtype in eating.matter)
@@ -89,20 +90,20 @@
 				continue
 			eaten++
 			if(eating.reagents?.total_volume)
-				eating.reagents.trans_to_obj(src, Floor(eating.reagents.total_volume * 0.75)) // liquid reagents, lossy
+				eating.reagents.trans_to_obj(src, FLOOR(eating.reagents.total_volume * 0.75)) // liquid reagents, lossy
 			for(var/mtype in eating.matter)
-				reagents.add_reagent(mtype, Floor(eating.matter[mtype] * REAGENT_UNITS_PER_MATERIAL_UNIT))
+				reagents.add_reagent(mtype, FLOOR(eating.matter[mtype] * REAGENT_UNITS_PER_MATERIAL_UNIT))
 			qdel(eating)
 			if(eaten >= MAX_INTAKE_ORE_PER_TICK)
 				break
 		if(emagged)
 			for(var/mob/living/carbon/human/H in input_turf)
-				for(var/obj/item/organ/external/eating in H.organs)
-					if(!eating.simulated || eating.anchored || eating.is_stump() || !can_eat(eating) || !prob(5))
+				for(var/obj/item/organ/external/eating in H.get_external_organs())
+					if(!eating.simulated || eating.anchored || !can_eat(eating) || !prob(5))
 						continue
 					visible_message(SPAN_DANGER("\The [src] rips \the [H]'s [eating.name] clean off!"))
 					for(var/mtype in eating.matter)
-						reagents.add_reagent(mtype, Floor(eating.matter[mtype] * REAGENT_UNITS_PER_MATERIAL_UNIT))
+						reagents.add_reagent(mtype, FLOOR(eating.matter[mtype] * REAGENT_UNITS_PER_MATERIAL_UNIT))
 					eating.dismember(silent = TRUE)
 					qdel(eating)
 					break
@@ -110,7 +111,7 @@
 	if(output_turf)
 		for(var/mtype in casting)
 			var/ramt = REAGENT_VOLUME(reagents, mtype) || 0
-			var/samt = Floor((ramt / REAGENT_UNITS_PER_MATERIAL_UNIT) / SHEET_MATERIAL_AMOUNT)
+			var/samt = FLOOR((ramt / REAGENT_UNITS_PER_MATERIAL_UNIT) / SHEET_MATERIAL_AMOUNT)
 			if(samt > 0)
 				SSmaterials.create_object(mtype, output_turf, samt)
 				reagents.remove_reagent(mtype, ramt)
@@ -149,7 +150,7 @@
 		var/ramt = REAGENT_VOLUME(reagents, mtype) || 0
 		if(ramt <= 0 && !show_all_materials && !(mtype in always_show_materials))
 			continue
-		var/samt = Floor((ramt / REAGENT_UNITS_PER_MATERIAL_UNIT) / SHEET_MATERIAL_AMOUNT)
+		var/samt = FLOOR((ramt / REAGENT_UNITS_PER_MATERIAL_UNIT) / SHEET_MATERIAL_AMOUNT)
 		var/obj/item/stack/material/sheet = mat.default_solid_form
 		materials += list(list("label" = "[mat.liquid_name]<br>[ramt]u ([samt] [samt == 1 ? initial(sheet.singular_name) : initial(sheet.plural_name)])", "casting" = (mtype in casting), "key" = "\ref[mat]"))
 		data["materials"] = materials

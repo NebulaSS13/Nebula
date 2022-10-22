@@ -7,12 +7,17 @@
 	var/address			// unique network address, cannot be set by user
 	var/network_tag		// human-readable network address, can be set by user. Networks enforce uniqueness, will change it if there's clash.
 	var/connection_type = NETWORK_CONNECTION_STRONG_WIRELESS  // affects signal strength
+	var/connection_attempts = 0
 
-	var/has_commands = FALSE  // Whether or not this device can be configured to receive commands to modify and call public variables and methods. 
+	var/has_commands = FALSE  // Whether or not this device can be configured to receive commands to modify and call public variables and methods.
 	var/list/command_and_call // alias -> public method to be called.
 	var/list/command_and_write // alias -> public variable to be written to or read from.
 
 	var/last_rand_time 		   // Last time a random method was called.
+
+	// These variables are for the *device's* public variables and methods, if they exist.
+	var/list/device_variables
+	var/list/device_methods
 
 /datum/extension/network_device/New(datum/holder, n_id, n_key, c_type, autojoin = TRUE)
 	..()
@@ -25,7 +30,14 @@
 	network_tag = "[uppertext(replacetext(O.name, " ", "_"))]-[sequential_id(type)]"
 	if(autojoin)
 		SSnetworking.queue_connection(src)
-	
+
+	if(length(device_variables))
+		for(var/path in device_variables)
+			device_variables[path] = GET_DECL(path)
+	if(length(device_methods))
+		for(var/path in device_methods)
+			device_methods[path] = GET_DECL(path)
+
 	if(has_commands)
 		reload_commands()
 
@@ -39,8 +51,10 @@
 		return FALSE
 	return net.add_device(src)
 
-/datum/extension/network_device/proc/disconnect()
+/datum/extension/network_device/proc/disconnect(net_down)
 	var/datum/computer_network/net = SSnetworking.networks[network_id]
+	if (net_down)
+		SSnetworking.queue_reconnect(src, network_id)
 	if(!net)
 		return FALSE
 	return net.remove_device(src)
@@ -48,11 +62,16 @@
 /datum/extension/network_device/proc/check_connection(specific_action)
 	var/datum/computer_network/net = SSnetworking.networks[network_id]
 	if(!net)
+		// We should already be queued for reconnect if it went down, so do nothing.
 		return FALSE
-	if(!net.check_connection(src, specific_action) || !net.add_device(src))
-		return FALSE
+	if(!net.check_connection(src, specific_action) || net.devices_by_tag[network_tag] != src)
+		// The connection has failed but the network is still up, so we try to reconnect.
+		if(connect())
+			net = SSnetworking.networks[network_id]
+		else
+			return FALSE
 	return net.get_signal_strength(src)
-	
+
 /datum/extension/network_device/proc/get_signal_wordlevel()
 	var/datum/computer_network/network = get_network()
 	if(!network)
@@ -66,12 +85,17 @@
 		return "High Signal"
 
 /datum/extension/network_device/proc/get_nearby_networks()
-	var/list/networks = list()
+	var/list/wired_networks = list()
+	var/list/wireless_networks = list()
 	for(var/id in SSnetworking.networks)
 		var/datum/computer_network/net = SSnetworking.networks[id]
-		if(net.check_connection(src))
-			networks |= id
-	return networks
+		switch(net.check_connection(src))
+			if(WIRED_CONNECTION)
+				wired_networks |= id
+			if(WIRELESS_CONNECTION)
+				wireless_networks |= id
+	// We return it like this so that wired networks have their connections prioritized.
+	return wired_networks + wireless_networks
 
 /datum/extension/network_device/proc/is_banned()
 	var/datum/computer_network/net = get_network()
@@ -108,6 +132,8 @@
 /datum/extension/network_device/proc/set_new_id(new_id, user)
 	var/list/networks = get_nearby_networks()
 	if(new_id in networks)
+		if(!SSnetworking.networks[network_id]) // old network is down, so we should unqueue from its reconnect list
+			SSnetworking.unqueue_reconnect(src, network_id)
 		disconnect()
 		network_id = new_id
 		to_chat(user, SPAN_NOTICE("Network ID changed to '[network_id]'."))
@@ -155,6 +181,16 @@
 		network.update_device_tag(src, network_tag, new_tag)
 	network_tag = new_tag
 
+/datum/extension/network_device/proc/get_wired_connection()
+	var/obj/machinery/M = holder
+	if(!istype(M))
+		return
+	var/obj/item/stock_parts/computer/lan_port/port = M.get_component_of_type(/obj/item/stock_parts/computer/lan_port)
+	if(!port || !port.terminal)
+		return
+	var/obj/structure/network_cable/terminal/term = port.terminal
+	return term.get_graph()
+
 /datum/extension/network_device/nano_host()
 	return holder.nano_host()
 
@@ -164,7 +200,7 @@
 	data["network_key"] = network_id ? "******" : "NOT SET"
 	data["network_tag"] = network_tag
 	data["status"] = get_signal_wordlevel()
-	
+
 	data["commands"] = has_commands
 	if(has_commands)
 		// For public methods.
@@ -179,7 +215,7 @@
 			var/decl/public_access/variable = command_and_write[thing]
 			var_list += list(list("alias" = thing, "reference" = "\ref[variable]", "reference_name" = "[variable.name]"))
 		data["variables"] = var_list
-				
+
 	return data
 
 /datum/extension/network_device/ui_interact(mob/user, ui_key, datum/nanoui/ui, force_open, datum/nanoui/master_ui, datum/topic_state/state)
@@ -209,33 +245,53 @@
 		do_change_net_tag(user)
 		return TOPIC_REFRESH
 
-/datum/extension/network_device/proc/has_access(mob/user)
+/datum/extension/network_device/proc/has_access(list/accesses)
 	var/datum/computer_network/network = get_network()
 	if(!network)
 		return TRUE // If not on network, always TRUE for access, as there isn't anything to access.
-	if(!user)
-		return FALSE
-	var/obj/item/card/id/network/id = user.GetIdCard()
-	if(id && istype(id, /obj/item/card/id/network) && network.access_controller && (id.user_id in network.access_controller.administrators))
-		return TRUE
 	var/obj/M = holder
-	return M.check_access(user)
+	if(!accesses)
+		accesses  = list()
+	return M.check_access_list(accesses)
 
-// Return the target of any commands passed to this device.
-/datum/extension/network_device/proc/get_command_target()
-	if(istype(holder, /obj/machinery))
+// Return the target of the command passed to this device.
+/datum/extension/network_device/proc/get_command_target(command)
+	var/decl/public_access/public_thing
+	if(command_and_call && command_and_call[command])
+		public_thing = command_and_call[command]
+	else if(command_and_write && command_and_write[command])
+		public_thing = command_and_write[command]
+	else
+		return
+	if(device_variables && (public_thing.type in device_variables))
+		return src
+	if(device_methods && (public_thing.type in device_methods))
+		return src
+	if((public_thing.type in get_holder_variables()) || (public_thing in get_holder_methods()))
 		return holder
 
 // Return the public methods and variables available for commands.
 /datum/extension/network_device/proc/get_public_methods()
-	var/obj/machinery/M = get_command_target()
-	if(istype(M))
-		return M.public_methods
+	var/list/public_methods = get_holder_methods()
+	if(device_methods)
+		public_methods += device_methods
+	return public_methods
 
 /datum/extension/network_device/proc/get_public_variables()
-	var/obj/machinery/M = get_command_target()
+	var/list/public_variables = get_holder_variables()
+	if(device_variables)
+		public_variables += device_variables
+	return public_variables
+
+/datum/extension/network_device/proc/get_holder_methods()
+	var/obj/machinery/M = holder
 	if(istype(M))
-		return M.public_variables
+		return M.public_methods?.Copy()
+
+/datum/extension/network_device/proc/get_holder_variables()
+	var/obj/machinery/M = holder
+	if(istype(M))
+		return M.public_variables?.Copy()
 
 /datum/extension/network_device/proc/set_command_reference(list/selected_commands, alias, reference)
 	if(!alias || !reference)
@@ -251,11 +307,11 @@
 /datum/extension/network_device/proc/change_command_alias(old_alias, new_alias)
 	new_alias = sanitize(new_alias)
 	new_alias = replacetext(new_alias, " ", "") // Strip spaces from the key.
-	
+
 	// Check if a command with the new alias already exists
 	if(LAZYACCESS(command_and_call, new_alias) || LAZYACCESS(command_and_write, new_alias))
 		return FALSE
-	
+
 	if(LAZYACCESS(command_and_call, old_alias))
 		LAZYSET(command_and_call, new_alias, LAZYACCESS(command_and_call, old_alias))
 		LAZYREMOVE(command_and_call, old_alias)
@@ -276,19 +332,19 @@
 	return FALSE
 
 // Any modification of public vars and calling methods from network commands. Return text feedback on success/unsuccess of command.
-/datum/extension/network_device/proc/on_command(command, command_args, mob/user)
-	var/datum/command_target = get_command_target()
+/datum/extension/network_device/proc/on_command(command, command_args, list/access)
+	var/datum/command_target = get_command_target(command)
 	if(!has_commands)
 		return "Device cannot receive commands."
 	if(!command_target)
 		return "No valid target found for command '[command]'"
-	if(!has_access(user))
+	if(!has_access(access))
 		return "Access denied."
-	if(command_and_call[command])
+	if(LAZYACCESS(command_and_call, command))
 		var/decl/public_access/public_method/method = command_and_call[command]
-		method.perform(command_target, command_args)
-		return "Successfully called method '[command]' on [network_tag]."
-	if(command_and_write[command])
+		var/output = method.perform(arglist(list(command_target) + command_args))
+		return "Successfully called method '[command]' on [network_tag]." + "[output ? " Device reported: [output]" : null]"
+	if(LAZYACCESS(command_and_write, command))
 		var/decl/public_access/public_variable/variable = command_and_write[command]
 		if(command_args) // Write to a var.
 			command_args = sanitize_command_args(command_args, variable.var_type)
@@ -336,13 +392,15 @@
 						return FALSE
 
 // Calls a random method for skill failure etc.
-/datum/extension/network_device/proc/random_method(var/user)
+/datum/extension/network_device/proc/random_method(list/access)
 	if(world.time < last_rand_time + 5 SECONDS)
 		return "Reinstancing command system, please try again in a few moments."
-	if(user && !has_access(user))
+	if(access && !has_access(access))
 		return "Access denied"
-	var/rand_alias = pick(command_and_call)
-	var/decl/public_access/public_method/rand_method = command_and_call[rand_alias]
+	var/rand_alias = SAFEPICK(command_and_call)
+	var/decl/public_access/public_method/rand_method = LAZYACCESS(command_and_call, rand_alias)
+	if(!istype(rand_method))
+		return "No commands found."
 	rand_method.perform(get_command_target())
 	last_rand_time = world.time
 	return "Encoding fault, incorrect command resolution likely"
@@ -352,10 +410,6 @@
 	LAZYCLEARLIST(command_and_call)
 	LAZYCLEARLIST(command_and_write)
 
-	var/obj/machinery/M = get_command_target()
-	if(!has_commands || !istype(M))
-		return
-
 	var/list/pub_methods = get_public_methods()
 	var/list/pub_vars = get_public_variables()
 
@@ -363,14 +417,14 @@
 		var/decl/public_access/pub = pub_methods[path]
 		var/alias = pub.name
 		alias = replacetext(alias, " ", "_")
-		LAZYSET(command_and_call, alias, pub) 
+		LAZYSET(command_and_call, alias, pub)
 
 	for(var/path in pub_vars)
 		var/decl/public_access/pub = pub_vars[path]
 		var/alias = pub.name
 		alias = replacetext(alias, " ", "_")
-		LAZYSET(command_and_write, alias, pub) 
-	
+		LAZYSET(command_and_write, alias, pub)
+
 //Subtype for passive devices, doesn't init until asked for
 /datum/extension/network_device/lazy
 	base_type = /datum/extension/network_device

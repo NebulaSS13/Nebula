@@ -297,4 +297,4 @@
 		if (STATE_DOCKED) return "docked"
 
 /datum/computer/file/embedded_program/docking/proc/get_name()
-	return display_name ? display_name : "[get_area(master)] ([master.x], [master.y])"
+	return display_name ? display_name : "[get_area_name(master)] ([master.x], [master.y])"

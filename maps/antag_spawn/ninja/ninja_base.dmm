@@ -303,7 +303,7 @@
 /obj/effect/floor_decal/carpet/blue{
 	dir = 9
 	},
-/obj/effect/landmark{
+/obj/abstract/landmark{
 	name = "ninjastart"
 	},
 /turf/unsimulated/floor{
@@ -505,7 +505,7 @@
 /obj/effect/floor_decal/carpet/blue{
 	dir = 6
 	},
-/obj/effect/landmark{
+/obj/abstract/landmark{
 	name = "ninjastart"
 	},
 /turf/unsimulated/floor{
@@ -681,7 +681,7 @@
 /area/map_template/ninja_dojo/dojo)
 "bF" = (
 /obj/structure/table/woodentable,
-/obj/item/chems/food/drinks/dry_ramen,
+/obj/item/chems/drinks/dry_ramen,
 /turf/unsimulated/floor{
 	dir = 8;
 	icon_state = "wood"
@@ -741,7 +741,7 @@
 	},
 /area/map_template/ninja_dojo/dojo)
 "bN" = (
-/obj/effect/landmark{
+/obj/abstract/landmark{
 	name = "ninjastart"
 	},
 /turf/unsimulated/floor{
@@ -789,7 +789,7 @@
 /area/map_template/ninja_dojo/dojo)
 "bS" = (
 /obj/structure/table/woodentable,
-/obj/item/chems/food/snacks/soylentgreen,
+/obj/item/chems/food/soylentgreen,
 /turf/unsimulated/floor{
 	dir = 8;
 	icon_state = "wood"
@@ -899,7 +899,7 @@
 	},
 /area/map_template/ninja_dojo/dojo)
 "cf" = (
-/obj/effect/landmark{
+/obj/abstract/landmark{
 	name = "ninjastart"
 	},
 /obj/effect/floor_decal/carpet{

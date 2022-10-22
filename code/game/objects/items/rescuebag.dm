@@ -82,9 +82,8 @@
 
 /obj/structure/closet/body_bag/rescue/on_update_icon()
 	..()
-	overlays.Cut()
 	if(airtank)
-		overlays += image(icon, "tank")
+		add_overlay("tank")
 
 /obj/structure/closet/body_bag/rescue/attackby(obj/item/W, mob/user, var/click_params)
 	if(istype(W,/obj/item/tank/))

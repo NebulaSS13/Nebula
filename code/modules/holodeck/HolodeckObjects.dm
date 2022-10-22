@@ -404,12 +404,8 @@
 //Holocarp
 
 /mob/living/simple_animal/hostile/carp/holodeck
-	icon = 'icons/mob/hologram.dmi'
-	icon_state = "Carp"
-	icon_living = "Carp"
-	icon_dead = "Carp"
+	icon = 'icons/mob/simple_animal/holocarp.dmi'
 	alpha = 127
-	icon_gib = null
 	meat_amount = 0
 	meat_type = null
 
@@ -417,6 +413,7 @@
 	return
 
 /mob/living/simple_animal/hostile/carp/holodeck/on_update_icon()
+	SHOULD_CALL_PARENT(FALSE)
 	return
 
 /mob/living/simple_animal/hostile/carp/holodeck/Initialize()
@@ -433,7 +430,7 @@
 		faction = "carp"
 		natural_weapon.force = initial(natural_weapon.force)
 
-/mob/living/simple_animal/hostile/carp/holodeck/gib()
+/mob/living/simple_animal/hostile/carp/holodeck/gib(anim="gibbed-m",do_gibs)
 	death()
 
 /mob/living/simple_animal/hostile/carp/holodeck/death()

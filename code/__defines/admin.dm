@@ -1,5 +1,5 @@
 // A set of constants used to determine which type of mute an admin wishes to apply.
-// Please read and understand the muting/automuting stuff before changing these. MUTE_IC_AUTO, etc. = (MUTE_IC << 1)
+// Please read and understand the muting/automuting stuff before changing these. MUTE_IC_AUTO, etc.
 // Therefore there needs to be a gap between the flags for the automute flags.
 #define MUTE_IC        BITFLAG(0)
 #define MUTE_OOC       BITFLAG(1)
@@ -49,3 +49,12 @@
 
 #define LAST_CKEY(M) (M.ckey || M.last_ckey)
 #define LAST_KEY(M)  (M.key || M.last_ckey)
+
+///Max length of a keypress command before it's considered to be a forged packet/bogus command
+#define MAX_KEYPRESS_COMMANDLENGTH 16
+///Maximum keys that can be bound to one button
+#define MAX_COMMANDS_PER_KEY 5
+///Maximum keys per keybind
+#define MAX_KEYS_PER_KEYBIND 3
+///Length of held key buffer
+#define HELD_KEY_BUFFER_LENGTH 15

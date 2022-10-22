@@ -32,7 +32,7 @@
 	return ..()
 
 /obj/proc/get_matter_amount_modifier()
-	. = ceil(w_class * 0.25)
+	. = CEILING(w_class * BASE_OBJECT_MATTER_MULTPLIER)
 
 /obj/item/proc/is_used_on(obj/O, mob/user)
 	return
@@ -206,3 +206,6 @@
 
 /obj/get_object_size()
 	return w_class
+
+/obj/get_mob()
+	return buckled_mob

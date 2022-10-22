@@ -7,10 +7,7 @@
 /mob/living/simple_animal/hostile/retaliate/goat/king
 	name = "king of goats"
 	desc = "The oldest and wisest of goats; king of his race, peerless in dignity and power. His golden fleece radiates nobility."
-	icon = 'icons/mob/simple_animal/king_of_goats.dmi'
-	icon_state = "king_goat"
-	icon_living = "king_goat"
-	icon_dead = "goat_dead"
+	icon = 'icons/mob/simple_animal/goat_king.dmi'
 	speak_emote = list("brays in a booming voice")
 	emote_hear = list("brays in a booming voice")
 	emote_see = list("stamps a mighty foot, shaking the surroundings")
@@ -60,8 +57,7 @@
 /mob/living/simple_animal/hostile/retaliate/goat/king/phase2
 	name = "emperor of goats"
 	desc = "The King of Kings, God amongst men, and your superior in every way."
-	icon_state = "king_goat2"
-	icon_living = "king_goat2"
+	icon = 'icons/mob/simple_animal/goat_king_phase_2.dmi'
 	meat_amount = 36
 	health = 750
 	maxHealth = 750
@@ -97,10 +93,7 @@
 /mob/living/simple_animal/hostile/retaliate/goat/guard
 	name = "honour guard"
 	desc = "A very handsome and noble beast."
-	icon = 'icons/mob/simple_animal/king_of_goats.dmi'
-	icon_state = "goat_guard"
-	icon_living = "goat_guard"
-	icon_dead = "goat_guard_dead"
+	icon = 'icons/mob/simple_animal/goat_guard.dmi'
 	health = 125
 	maxHealth = 125
 	natural_weapon = /obj/item/natural_weapon/goathorns
@@ -114,9 +107,7 @@
 /mob/living/simple_animal/hostile/retaliate/goat/guard/master
 	name = "master of the guard"
 	desc = "A very handsome and noble beast - the most trusted of all the king's men."
-	icon_state = "goat_guard_m"
-	icon_living = "goat_guard_m"
-	icon_dead = "goat_guard_m_dead"
+	icon = 'icons/mob/simple_animal/goat_master.dmi'
 	health = 200
 	maxHealth = 200
 	natural_weapon = /obj/item/natural_weapon/goathorns
@@ -193,9 +184,9 @@
 	visible_message("<span class='cultannounce'>\The [src]' wounds close with a flash, and when he emerges, he's even larger than before!</span>")
 
 /mob/living/simple_animal/hostile/retaliate/goat/king/phase2/on_update_icon()
+	..()
 	if(phase3)
-		icon_state = "king_goat3"
-		icon_living = "king_goat3"
+		icon_state += "-enraged"
 		set_scale(1.5)
 	else
 		set_scale(1.25)

@@ -7,6 +7,7 @@
 	w_class = ITEM_SIZE_SMALL
 	blood_overlay_type = "helmetblood"
 
+	var/protects_against_weather = FALSE
 	var/image/light_overlay_image
 	var/light_overlay = "helmet_light"
 	var/light_applied
@@ -25,7 +26,7 @@
 /obj/item/clothing/head/attack_self(mob/user)
 	if(brightness_on)
 		if(!isturf(user.loc))
-			to_chat(user, "You cannot turn the light on while in this [user.loc]")
+			to_chat(user, "You cannot turn the light on while in this [user.loc].")
 			return
 		on = !on
 		to_chat(user, "You [on ? "enable" : "disable"] the helmet light.")

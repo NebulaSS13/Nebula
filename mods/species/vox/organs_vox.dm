@@ -44,7 +44,7 @@
 		/decl/material/solid/cardboard =              TRUE,
 		/decl/material/solid/cloth =                  TRUE,
 		/decl/material/solid/slag =                   TRUE,
-		/decl/material/solid/mineral/sodiumchloride = TRUE
+		/decl/material/solid/sodiumchloride = TRUE
 	)
 	var/static/list/can_process_matter = list(
 		/decl/material/solid/glass =               TRUE,
@@ -62,18 +62,18 @@
 		/decl/material/solid/metal/osmium =        TRUE,
 		/decl/material/solid/metal/copper =        TRUE,
 		/decl/material/solid/metal/aluminium =     TRUE,
-		/decl/material/solid/mineral/sand =        TRUE,
-		/decl/material/solid/mineral/graphite =    TRUE,
-		/decl/material/solid/mineral/pitchblende = TRUE,
-		/decl/material/solid/mineral/hematite =    TRUE,
-		/decl/material/solid/mineral/quartz =      TRUE,
-		/decl/material/solid/mineral/pyrite =      TRUE,
-		/decl/material/solid/mineral/spodumene =   TRUE,
-		/decl/material/solid/mineral/cinnabar =    TRUE,
-		/decl/material/solid/mineral/phosphorite = TRUE,
-		/decl/material/solid/mineral/potash =      TRUE,
-		/decl/material/solid/mineral/bauxite =     TRUE,
-		/decl/material/solid/mineral/rutile = 	   TRUE
+		/decl/material/solid/sand =        TRUE,
+		/decl/material/solid/graphite =    TRUE,
+		/decl/material/solid/pitchblende = TRUE,
+		/decl/material/solid/hematite =    TRUE,
+		/decl/material/solid/quartz =      TRUE,
+		/decl/material/solid/pyrite =      TRUE,
+		/decl/material/solid/spodumene =   TRUE,
+		/decl/material/solid/cinnabar =    TRUE,
+		/decl/material/solid/phosphorite = TRUE,
+		/decl/material/solid/potash =      TRUE,
+		/decl/material/solid/bauxite =     TRUE,
+		/decl/material/solid/rutile = 	   TRUE
 	)
 	var/list/stored_matter = list()
 
@@ -108,7 +108,7 @@
 
 				// Process it.
 				if(can_digest_matter[mat])
-					owner.adjust_nutrition(max(1, Floor(digested/100)))
+					owner.adjust_nutrition(max(1, FLOOR(digested/100)))
 					updated_stacks = TRUE
 				else if(can_process_matter[mat])
 					LAZYDISTINCTADD(check_materials, mat)
@@ -120,7 +120,7 @@
 			if(M && stored_matter[mat] >= SHEET_MATERIAL_AMOUNT)
 
 				// Remove as many sheets as possible from the gizzard.
-				var/sheets = Floor(stored_matter[mat]/SHEET_MATERIAL_AMOUNT)
+				var/sheets = FLOOR(stored_matter[mat]/SHEET_MATERIAL_AMOUNT)
 				stored_matter[mat] -= SHEET_MATERIAL_AMOUNT * sheets
 				if(stored_matter[mat] <= 0)
 					stored_matter -= mat
@@ -200,25 +200,29 @@
 /obj/item/organ/internal/voxstack/proc/backup_inviable()
 	return 	(!istype(backup) || backup == owner.mind || (backup.current && backup.current.stat != DEAD))
 
-/obj/item/organ/internal/voxstack/replaced()
-	if(!..()) return 0
-	if(prompting) // Don't spam the player with twenty dialogs because someone doesn't know what they're doing or panicking.
-		return 0
+/obj/item/organ/internal/voxstack/on_add_effects()
+	if(!..() || prompting) // Don't spam the player with twenty dialogs because someone doesn't know what they're doing or panicking.
+		return FALSE
+
+	//Need spawn here so that this interactive bit doesn't lock up init
 	if(owner && !backup_inviable())
-		var/current_owner = owner
+		prompt_revive_callback(owner)
+	return TRUE
+
+/obj/item/organ/internal/voxstack/proc/prompt_revive_callback(var/mob/living/carbon/C)
+	set waitfor = FALSE
+	if(C && !backup_inviable())
 		prompting = TRUE
 		var/response = alert(find_dead_player(ownerckey, 1), "Your neural backup has been placed into a new body. Do you wish to return to life as the mind of [backup.name]?", "Resleeving", "Yes", "No")
 		prompting = FALSE
-		if(src && response == "Yes" && owner == current_owner)
+		if(src && response == "Yes" && owner == C)
 			overwrite()
 	sleep(-1)
 	do_backup()
 
-	return 1
-
-/obj/item/organ/internal/voxstack/removed()
-	var/obj/item/organ/external/head = owner.get_organ(parent_organ)
-	owner.visible_message(SPAN_DANGER("\The [src] rips gaping holes in \the [owner]'s [head.name] as it is torn loose!"))
+/obj/item/organ/internal/voxstack/on_remove_effects(mob/living/last_owner)
+	var/obj/item/organ/external/head = GET_EXTERNAL_ORGAN(last_owner, parent_organ)
+	last_owner.visible_message(SPAN_DANGER("\The [src] rips gaping holes in \the [last_owner]'s [head.name] as it is torn loose!"))
 	head.take_external_damage(rand(15,20))
 	for(var/obj/item/organ/internal/O in head.contents)
 		O.take_internal_damage(rand(30,70))

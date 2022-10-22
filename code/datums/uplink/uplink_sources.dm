@@ -1,4 +1,4 @@
-#define NO_GUARANTEE_NO_EXTRA_COST_DESC(X) "Installs an uplink into " + X + " if, and only if, found on your person. Has no TC cost."
+#define NO_GUARANTEE_NO_EXTRA_COST_DESC(X) "Installs an uplink into [X] if, and only if, found on your person. Has no TC cost."
 
 #define SETUP_FAILED TRUE
 
@@ -17,7 +17,10 @@ var/global/list/default_uplink_source_priority = list(
 
 /decl/uplink_source/pda
 	name = "PDA"
+
+/decl/uplink_source/pda/Initialize()
 	desc = NO_GUARANTEE_NO_EXTRA_COST_DESC("a PDA")
+	. = ..()
 
 /decl/uplink_source/pda/setup_uplink_source(var/mob/M, var/amount)
 
@@ -47,7 +50,10 @@ var/global/list/default_uplink_source_priority = list(
 
 /decl/uplink_source/radio
 	name = "Radio"
+
+/decl/uplink_source/radio/Initialize()
 	desc = NO_GUARANTEE_NO_EXTRA_COST_DESC("a radio")
+	. = ..()
 
 /decl/uplink_source/radio/setup_uplink_source(var/mob/M, var/amount)
 	var/obj/item/radio/R = find_in_mob(M, /obj/item/radio)
@@ -78,7 +84,7 @@ var/global/list/default_uplink_source_priority = list(
 	if(!istype(H))
 		return SETUP_FAILED
 
-	var/obj/item/organ/external/head = H.organs_by_name[BP_HEAD]
+	var/obj/item/organ/external/head = GET_EXTERNAL_ORGAN(H, BP_HEAD)
 	if(!head)
 		return SETUP_FAILED
 
@@ -86,7 +92,7 @@ var/global/list/default_uplink_source_priority = list(
 	U.imp_in = H
 	U.implanted = TRUE
 	U.part = head
-	head.implants += U
+	LAZYADD(head.implants, U)
 
 	U.implanted(H) // This proc handles the installation feedback
 

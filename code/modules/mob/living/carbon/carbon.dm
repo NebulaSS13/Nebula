@@ -1,8 +1,11 @@
 /mob/living/carbon/Initialize()
 	//setup reagent holders
-	bloodstr = new/datum/reagents/metabolism(120, src, CHEM_INJECT)
-	touching = new/datum/reagents/metabolism(1000, src, CHEM_TOUCH)
-	reagents = bloodstr
+	if(!bloodstr)
+		bloodstr = new/datum/reagents/metabolism(120, src, CHEM_INJECT)
+	if(!reagents)
+		reagents = bloodstr
+	if(!touching)
+		touching = new/datum/reagents/metabolism(1000, src, CHEM_TOUCH)
 
 	if (!default_language && species_language)
 		default_language = species_language
@@ -10,8 +13,9 @@
 
 /mob/living/carbon/Destroy()
 	QDEL_NULL(touching)
-	bloodstr = null // We don't qdel(bloodstr) because it's the same as qdel(reagents)
-	QDEL_NULL_LIST(internal_organs)
+	QDEL_NULL(bloodstr)
+	reagents = null //We assume reagents is a reference to bloodstr here
+	delete_organs()
 	QDEL_NULL_LIST(hallucinations)
 	if(loc)
 		for(var/mob/M in contents)
@@ -63,7 +67,7 @@
 				var/d = rand(round(I.force / 4), I.force)
 				if(istype(src, /mob/living/carbon/human))
 					var/mob/living/carbon/human/H = src
-					var/obj/item/organ/external/organ = H.get_organ(BP_CHEST)
+					var/obj/item/organ/external/organ = GET_EXTERNAL_ORGAN(H, BP_CHEST)
 					if (istype(organ))
 						organ.take_external_damage(d, 0)
 					H.updatehealth()
@@ -75,21 +79,11 @@
 				if(prob(src.getBruteLoss() - 50))
 					gib()
 
-/mob/living/carbon/gib()
+/mob/living/carbon/gib(anim="gibbed-m",do_gibs)
 	for(var/mob/M in contents)
 		M.dropInto(loc)
 		visible_message(SPAN_DANGER("\The [M] bursts out of \the [src]!"))
 	..()
-
-/mob/living/carbon/attack_hand(mob/user)
-	var/obj/item/organ/external/temp = user.get_organ(user.get_active_held_item_slot())
-	if(!temp)
-		to_chat(user, SPAN_WARNING("You don't have a usable limb!"))
-		return TRUE
-	if(!temp.is_usable())
-		to_chat(user, SPAN_WARNING("You can't use your [temp.name]."))
-		return TRUE
-	. = ..()
 
 /mob/living/carbon/electrocute_act(var/shock_damage, var/obj/source, var/siemens_coeff = 1.0, var/def_zone = null)
 	if(status_flags & GODMODE)	return 0	//godmode
@@ -206,17 +200,6 @@
 /mob/living/carbon/flash_eyes(intensity = FLASH_PROTECTION_MODERATE, override_blindness_check = FALSE, affect_silicon = FALSE, visual = FALSE, type = /obj/screen/fullscreen/flash)
 	if(eyecheck() < intensity || override_blindness_check)
 		return ..()
-
-// ++++ROCKDTBEN++++ MOB PROCS -- Ask me before touching.
-// Stop! ... Hammertime! ~Carn
-
-/mob/living/carbon/proc/getDNA()
-	return dna
-
-/mob/living/carbon/proc/setDNA(var/datum/dna/newDNA)
-	dna = newDNA
-
-// ++++ROCKDTBEN++++ MOB PROCS //END
 
 //Throwing stuff
 /mob/proc/throw_item(atom/target)
@@ -358,9 +341,10 @@
 	<BR><B>Head(Mask):</B> <A href='?src=\ref[src];item=mask'>[(wear_mask ? wear_mask : "Nothing")]</A>"}
 
 	for(var/bp in held_item_slots)
-		var/datum/inventory_slot/inv_slot = held_item_slots[bp]
-		var/obj/item/organ/external/E = get_organ(bp)
-		dat += "<BR><b>[capitalize(E.name)]:</b> <A href='?src=\ref[src];item=[bp]'>[inv_slot.holding?.name || "nothing"]</A>"
+		var/obj/item/organ/external/E = GET_EXTERNAL_ORGAN(src, bp)
+		if(E)
+			var/datum/inventory_slot/inv_slot = held_item_slots[bp]
+			dat += "<BR><b>[capitalize(E.name)]:</b> <A href='?src=\ref[src];item=[bp]'>[inv_slot.holding?.name || "nothing"]</A>"
 
 	dat += {"<BR><B>Back:</B> <A href='?src=\ref[src];item=back'>[(back ? back : "Nothing")]</A> [((istype(wear_mask, /obj/item/clothing/mask) && istype(back, /obj/item/tank) && !( internal )) ? text(" <A href='?src=\ref[];item=internal'>Set Internal</A>", src) : "")]
 	<BR>[(internal ? text("<A href='?src=\ref[src];item=internal'>Remove Internal</A>") : "")]
@@ -414,9 +398,6 @@
 	for(var/source in stasis_sources)
 		stasis_value += stasis_sources[source]
 	stasis_sources.Cut()
-
-/mob/living/carbon/get_sex()
-	return species.get_sex(src)
 
 /mob/living/carbon/proc/set_nutrition(var/amt)
 	nutrition = Clamp(amt, 0, initial(nutrition))

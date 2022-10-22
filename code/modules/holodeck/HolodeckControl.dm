@@ -290,7 +290,7 @@
 	linkedholodeck.sound_env = A.sound_env
 
 	spawn(30)
-		for(var/obj/effect/landmark/L in linkedholodeck)
+		for(var/obj/abstract/landmark/L in linkedholodeck)
 			if(L.name=="Atmospheric Test Start")
 				spawn(20)
 					var/turf/T = get_turf(L)

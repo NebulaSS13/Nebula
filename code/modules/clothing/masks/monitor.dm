@@ -6,6 +6,7 @@
 	body_parts_covered = SLOT_EYES
 	dir = SOUTH
 	icon = 'icons/clothing/mask/monitor.dmi'
+	z_flags = ZMM_MANGLE_PLANES
 
 	action_button_name = "Set Monitor State"
 	action_button_desc = "Allows you to choose state for your monitor"
@@ -73,7 +74,7 @@
 /obj/item/clothing/mask/monitor/mob_can_equip(var/mob/living/carbon/human/user, var/slot)
 	. = ..()
 	if(. && (slot == slot_head_str || slot == slot_wear_mask_str))
-		var/obj/item/organ/external/E = user.organs_by_name[BP_HEAD]
+		var/obj/item/organ/external/E = GET_EXTERNAL_ORGAN(user, BP_HEAD)
 		if(!istype(E) || !BP_IS_PROSTHETIC(E))
 			to_chat(user, SPAN_WARNING("You must have a robotic head to install this upgrade."))
 			return FALSE

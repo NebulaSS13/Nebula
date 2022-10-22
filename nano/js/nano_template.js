@@ -60,7 +60,7 @@ var NanoTemplate = function () {
                 _compiledTemplates[key] = doT.template(_templates[key], null, _templates)
             }
             catch (error) {
-                alert(error.message);
+                alert('ERROR: Compiling template key "' + key + '" ("' + _templateData[key] + '") failed with error: ' + error);
             }
         }
     };
@@ -84,8 +84,6 @@ var NanoTemplate = function () {
                 compileTemplates();
             }
             if (typeof _compiledTemplates[templateKey] != 'function') {
-                alert(_compiledTemplates[templateKey]);
-                alert('ERROR: Template "' + templateKey + '" failed to compile!');
                 return '<h2>Template error (failed to compile)</h2>';
             }
             return _compiledTemplates[templateKey].call(this, data['data'], data['config'], _helpers);

@@ -1,97 +1,66 @@
 /obj/machinery/camera/network/engineering
-	network = list(NETWORK_ENGINEERING)
+	preset_channels = list(CAMERA_CAMERA_CHANNEL_ENGINEERING)
+	initial_access = list(access_engine)
 
 /obj/machinery/camera/network/ert
-	network = list(NETWORK_ERT)
+	preset_channels = list(CAMERA_CHANNEL_ERT)
+	cameranet_enabled = FALSE
+	initial_access = list(access_engine)
 
 /obj/machinery/camera/network/medbay
-	network = list(NETWORK_MEDICAL)
+	preset_channels = list(CAMERA_CHANNEL_MEDICAL)
+	initial_access = list(access_medical)
 
 /obj/machinery/camera/network/mercenary
-	network = list(NETWORK_MERCENARY)
+	preset_channels = list(CAMERA_CHANNEL_MERCENARY)
+	cameranet_enabled = FALSE
+	initial_access = list(access_syndicate)
 
 /obj/machinery/camera/network/mining
-	network = list(NETWORK_MINE)
+	preset_channels = list(CAMERA_CHANNEL_MINE)
+	initial_access = list(access_mining)
 
 /obj/machinery/camera/network/research
-	network = list(NETWORK_RESEARCH)
+	preset_channels = list(CAMERA_CHANNEL_RESEARCH)
+	initial_access = list(access_research)
 
 /obj/machinery/camera/network/security
-	network = list(NETWORK_SECURITY)
+	preset_channels = list(CAMERA_CHANNEL_SECURITY)
+	initial_access = list(access_security)
 
-/obj/machinery/camera/network/thunder
-	network = list(NETWORK_THUNDER)
+/obj/machinery/camera/network/television
+	preset_channels = list(CAMERA_CHANNEL_TELEVISION)
+	cameranet_enabled = FALSE
+	requires_connection = FALSE
 
 // EMP
 
-/obj/machinery/camera/emp_proof/Initialize()
-	..()
-	. = upgradeEmpProof()
+/obj/machinery/camera/emp_proof/populate_parts(full_populate)
+	. = ..()
+	install_component(/obj/item/stock_parts/capacitor/adv, TRUE)
 
 // X-RAY
 
 /obj/machinery/camera/xray
 	icon_state = "xraycam" // Thanks to Krutchen for the icons.
 
-/obj/machinery/camera/xray/Initialize()
+/obj/machinery/camera/xray/populate_parts(full_populate)
 	. = ..()
-	upgradeXRay()
+	install_component(/obj/item/stock_parts/scanning_module/adv, TRUE)
 
 // MOTION
 
-/obj/machinery/camera/motion/Initialize()
+/obj/machinery/camera/motion/populate_parts(full_populate)
 	. = ..()
-	upgradeMotion()
+	install_component(/obj/item/stock_parts/micro_laser, TRUE)
 
 // ALL UPGRADES
 
-/obj/machinery/camera/all/Initialize()
+/obj/machinery/camera/all/populate_parts(full_populate)
 	. = ..()
-	upgradeEmpProof()
-	upgradeXRay()
-	upgradeMotion()
+	install_component(/obj/item/stock_parts/capacitor/adv, TRUE)
+	install_component(/obj/item/stock_parts/scanning_module/adv, TRUE)
+	install_component(/obj/item/stock_parts/micro_laser, TRUE)
 
 // AUTONAME left as a map stub
 /obj/machinery/camera/autoname
-
-// CHECKS
-
-/obj/machinery/camera/proc/isEmpProof()
-	var/O = locate(/obj/item/stock_parts/capacitor/adv) in assembly.upgrades
-	return O
-
-/obj/machinery/camera/proc/isXRay()
-	var/obj/item/stock_parts/scanning_module/O = locate(/obj/item/stock_parts/scanning_module) in assembly.upgrades
-	if (O && O.rating >= 2)
-		return O
-	return null
-
-/obj/machinery/camera/proc/isMotion()
-	var/O = locate(/obj/item/assembly/prox_sensor) in assembly.upgrades
-	return O
-
-// UPGRADE PROCS
-
-/obj/machinery/camera/proc/upgradeEmpProof()
-	assembly.upgrades.Add(new /obj/item/stock_parts/capacitor/adv(assembly))
-	setPowerUsage()
-	update_coverage()
-
-/obj/machinery/camera/proc/upgradeXRay()
-	assembly.upgrades.Add(new /obj/item/stock_parts/scanning_module/adv(assembly))
-	setPowerUsage()
-	update_coverage()
-
-/obj/machinery/camera/proc/upgradeMotion()
-	assembly.upgrades.Add(new /obj/item/assembly/prox_sensor(assembly))
-	setPowerUsage()
-	STOP_PROCESSING_MACHINE(src, MACHINERY_PROCESS_SELF)
-	update_coverage()
-
-/obj/machinery/camera/proc/setPowerUsage()
-	var/mult = 1
-	if (isXRay())
-		mult++
-	if (isMotion())
-		mult++
-	change_power_consumption(mult*initial(active_power_usage), POWER_USE_ACTIVE)

@@ -29,10 +29,16 @@
 		<div class="itemContent">
 			BACKUP ROUTER / RELAY
 		</div>
-	{{/if}} 
+	{{/if}}
+	<div class="itemLabel">
+		Wi-Fi Connections:
+	</div>
+	<div class="itemContent">
+		{{:helper.link(data.wifi ? "ENABLED" : "DISABLED", null, { "toggle_wifi" : 1 })}}
+	</div>
 	<div class="item">
 		{{:helper.link("NETWORK SETTINGS", null, { "settings" : 1 })}}
 	</div>
 	<hr>
 	<i>EXONET Firmware v110.04.4h Copyright EXONETWORKS INC</i>
-{{/if}} 
+{{/if}}

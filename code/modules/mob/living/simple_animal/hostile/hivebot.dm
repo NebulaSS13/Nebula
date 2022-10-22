@@ -2,9 +2,6 @@
 	name = "hivebot"
 	desc = "A junky looking robot with four spiky legs."
 	icon = 'icons/mob/simple_animal/hivebot.dmi'
-	icon_state = "basic"
-	icon_living = "basic"
-	icon_dead = "basic"
 	health = 55
 	maxHealth = 55
 	natural_weapon = /obj/item/natural_weapon/drone_slicer
@@ -18,7 +15,7 @@
 	natural_armor = list(
 		melee = ARMOR_MELEE_KNIVES
 		)
-	bleed_colour = SYNTH_BLOOD_COLOUR
+	bleed_colour = SYNTH_BLOOD_COLOR
 	gene_damage = -1
 
 	meat_type =     null
@@ -57,11 +54,11 @@
 /*
 Teleporter beacon, and its subtypes
 */
-/mob/living/simple_animal/hostile/hivebot/tele
+/mob/living/simple_animal/hostile/hivebot/tele // _why is this a mob_
 	name = "beacon"
 	desc = "Some odd beacon thing."
+	icon = 'icons/obj/structures/hivebot_props.dmi'
 	icon_state = "def_radar-off"
-	icon_living = "def_radar-off"
 	health = 200
 	maxHealth = 200
 	status_flags = 0
@@ -142,9 +139,6 @@ The megabot
 	name = "hivemind"
 	desc = "A huge quadruped robot equipped with a myriad of weaponry."
 	icon = 'icons/mob/simple_animal/megabot.dmi'
-	icon_state = "megabot"
-	icon_living = "megabot"
-	icon_dead = "megabot_dead"
 	health = 440
 	maxHealth = 440
 	natural_weapon = /obj/item/natural_weapon/circular_saw
@@ -189,21 +183,19 @@ The megabot
 		deactivate()
 
 /mob/living/simple_animal/hostile/hivebot/mega/on_update_icon()
+	..()
 	if(stat != DEAD)
 		if(deactivated)
-			icon_state = "megabot_standby"
-			icon_living = "megabot_standby"
+			add_overlay("[icon_state]-standby")
 			return
-
-		overlays.Cut()
-		overlays += image(icon, "active_indicator")
+		add_overlay("[icon_state]-active")
 		switch(attack_mode)
 			if(ATTACK_MODE_MELEE)
-				overlays += image(icon, "melee")
+				add_overlay("[icon_state]-melee")
 			if(ATTACK_MODE_LASER)
-				overlays += image(icon, "laser")
+				add_overlay("[icon_state]-laser")
 			if(ATTACK_MODE_ROCKET)
-				overlays += image(icon, "rocket")
+				add_overlay("[icon_state]-rocket")
 
 /mob/living/simple_animal/hostile/hivebot/mega/proc/switch_mode(var/new_mode)
 	if(!new_mode || new_mode == attack_mode)

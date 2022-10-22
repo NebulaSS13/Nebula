@@ -1,40 +1,52 @@
 /datum/browser
 	var/mob/user
 	var/title
-	var/window_id // window_id is used as the window name for browse and onclose
-	var/width = 0
-	var/height = 0
-	var/atom/ref = null
+	/// window_id is used as the window name for browse and onclose
+	var/window_id
+	var/width
+	var/height
+	var/atom/ref
 	var/window_options = "focus=0;can_close=1;can_minimize=1;can_maximize=0;can_resize=1;titlebar=1;" // window option is set using window_id
-	var/stylesheets[0]
-	var/scripts[0]
-	var/title_image
+	/// this CSS sheet is common to all UIs
+	var/common_stylesheet = 'html/browser/common.css'
+	var/list/stylesheets = list()
+	var/list/scripts = list()
 	var/head_elements
 	var/body_elements
 	var/head_content = ""
 	var/content = ""
 	var/title_buttons = ""
-	var/written_text = FALSE
+	var/written_text = WRITTEN_SKIP
 
-/datum/browser/written
-	written_text = TRUE
+/datum/browser/written_physical
+	written_text = WRITTEN_PHYSICAL
 
-/datum/browser/New(nuser, nwindow_id, ntitle = 0, nwidth = 0, nheight = 0, var/atom/nref = null)
+/datum/browser/written_digital
+	written_text = WRITTEN_DIGITAL
+
+/datum/browser/New(nuser, nwindow_id, ntitle, nwidth, nheight, atom/nref)
 
 	user = nuser
 	window_id = nwindow_id
-	if (ntitle)
+
+	if(ntitle)
 		set_title(ntitle)
-	if (nwidth)
+	
+	if(nwidth)
 		width = nwidth
-	if (nheight)
+	
+	if(nheight)
 		height = nheight
-	if (nref)
+
+	if(nref)
 		ref = nref
+
 	// If a client exists, but they have disabled fancy windowing, disable it!
-	if(user && user.client && user.client.get_preference_value(/datum/client_preference/browser_style) == PREF_PLAIN)
+	if(user?.client?.get_preference_value(/datum/client_preference/browser_style) == PREF_PLAIN)
 		return
-	add_stylesheet("common", 'html/browser/common.css') // this CSS sheet is common to all UIs
+
+	if(common_stylesheet)
+		add_stylesheet("common", common_stylesheet)
 
 /datum/browser/proc/set_title(ntitle)
 	title = replacetext(replacetext(ntitle,"\proper ",""),"\improper ","")
@@ -47,9 +59,6 @@
 
 /datum/browser/proc/set_window_options(nwindow_options)
 	window_options = nwindow_options
-
-/datum/browser/proc/set_title_image(ntitle_image)
-	//title_image = ntitle_image
 
 /datum/browser/proc/add_stylesheet(name, file)
 	stylesheets[name] = file
@@ -77,8 +86,6 @@
 		head_content += "<script type='text/javascript' src='[filename]'></script>"
 
 	var/title_attributes = "class='uiTitle'"
-	if (title_image)
-		title_attributes = "class='uiTitle icon' style='background-image: url([title_image]);'"
 
 	return {"<!DOCTYPE html>
 <html>
@@ -106,18 +113,20 @@
 	[content]
 	[get_footer()]
 	"}
-	if(written_text)
-		. = user.handle_reading_literacy(user, .)
+	if(written_text != WRITTEN_SKIP)
+		. = user.handle_reading_literacy(user, ., digital = (written_text == WRITTEN_DIGITAL))
 
-/datum/browser/proc/open(var/use_onclose = 1)
+/datum/browser/proc/open(use_onclose = TRUE)
 	var/window_size = ""
-	if (width && height)
-		window_size = "size=[width]x[height];"
+	if(width && height)
+		window_size = "size=[width||0]x[height||0];"
+
 	show_browser(user, get_content(), "window=[window_id];[window_size][window_options]")
-	if (use_onclose)
+
+	if(use_onclose)
 		onclose(user, window_id, ref)
 
-/datum/browser/proc/update(var/force_open = 0, var/use_onclose = 1)
+/datum/browser/proc/update(force_open, use_onclose = TRUE)
 	if(force_open)
 		open(use_onclose)
 	else
@@ -126,77 +135,49 @@
 /datum/browser/proc/close()
 	close_browser(user, "window=[window_id]")
 
-// This will allow you to show an icon in the browse window
-// This is added to mob so that it can be used without a reference to the browser object
-// There is probably a better place for this...
-/mob/proc/browse_rsc_icon(icon, icon_state, direction = -1)
-	/*
-	var/icon/I
-	if (direction >= 0)
-		I = new /icon(icon, icon_state, direction)
-	else
-		I = new /icon(icon, icon_state)
-		direction = "default"
+/**
+ * Registers the on-close verb for a browse window (client/verb/.windowclose)
+ * this will be called when the close-button of a window is pressed.
 
-	var/filename = "[ckey("[icon]_[icon_state]_[direction]")].png"
-	send_rsc(src, I, filename)
-	return filename
-	*/
-
-
-// Registers the on-close verb for a browse window (client/verb/.windowclose)
-// this will be called when the close-button of a window is pressed.
-//
-// This is usually only needed for devices that regularly update the browse window,
-// e.g. canisters, timers, etc.
-//
-// windowid should be the specified window name
-// e.g. code is	: show_browser(user, text, "window=fred")
-// then use 	: onclose(user, "fred")
-//
-// Optionally, specify the "ref" parameter as the controlled atom (usually src)
-// to pass a "close=1" parameter to the atom's Topic() proc for special handling.
-// Otherwise, the user mob's machine var will be reset directly.
-//
-/proc/onclose(mob/user, windowid, var/atom/ref=null)
-	if(!user || !user.client) return
-	var/param = "null"
-	if(ref)
-		param = "\ref[ref]"
+ * This is usually only needed for devices that regularly update the browse window,
+ * e.g. canisters, timers, etc.
+ *
+ * windowid should be the specified window name
+ * e.g. code is	: show_browser(user, text, "window=fred")
+ * then use 	: onclose(user, "fred")
+ *
+ * Optionally, specify the "ref" parameter as the controlled atom (usually src)
+ * to pass a "close=1" parameter to the atom's Topic() proc for special handling.
+ * Otherwise, the user mob's machine var will be reset directly.
+ */
+/proc/onclose(mob/user, windowid, atom/ref)
+	if(!user || !user.client) 
+		return
+	
+	var/param = ref ? "\ref[ref]" : "null"
 	addtimer(CALLBACK(user, /mob/proc/post_onclose, windowid, param), 2)
 
-/mob/proc/post_onclose(var/windowid, var/param)
+/mob/proc/post_onclose(windowid, param)
 	if(client)
 		winset(src, windowid, "on-close=\".windowclose [param]\"")
 
-//	log_debug("OnClose [user]: [windowid] : ["on-close=\".windowclose [param]\""]")
 
+/** 
+ * the on-close client verb
+ * 
+ * called when a browser popup window is closed after registering with proc/onclose()
+ * if a valid atom reference is supplied, call the atom's Topic() with "close=1"
+ * otherwise, just reset the client mob's machine var.
+ */
+/client/verb/windowclose(atomref as text)
+	set name = ".windowclose"
+	set hidden = TRUE
+	if (atomref != "null")
+		atomref = locate(atomref)
+		if (atomref)
+			usr = src?.mob
+			Topic("close=1", list("close" = "1"), atomref)
+			return
 
-
-// the on-close client verb
-// called when a browser popup window is closed after registering with proc/onclose()
-// if a valid atom reference is supplied, call the atom's Topic() with "close=1"
-// otherwise, just reset the client mob's machine var.
-//
-/client/verb/windowclose(var/atomref as text)
-	set hidden = 1						// hide this verb from the user's panel
-	set name = ".windowclose"			// no autocomplete on cmd line
-
-//	log_debug("windowclose: [atomref]")
-
-	if(atomref!="null")				// if passed a real atomref
-		var/hsrc = locate(atomref)	// find the reffed atom
-		if(hsrc)
-//			log_debug("[src] Topic [href] [hsrc]")
-
-			usr = src.mob
-			src.Topic("close=1", list("close"="1"), hsrc)	// this will direct to the atom's
-			return										// Topic() proc via client.Topic()
-
-	// no atomref specified (or not found)
-	// so just reset the user mob's machine var
-	if(src && src.mob)
-//		log_debug("[src] was [src.mob.machine], setting to null")
-
-		src.mob.unset_machine()
-	return
+	if (src?.mob)
+		mob.unset_machine()

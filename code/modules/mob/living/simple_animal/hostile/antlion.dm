@@ -2,9 +2,6 @@
 	name = "antlion"
 	desc = "A large insectoid creature."
 	icon = 'icons/mob/simple_animal/antlion.dmi'
-	icon_state = "antlion" // these are placeholders, as otherwise the mob is complete
-	icon_living = "antlion"
-	icon_dead = "antlion_dead"
 	mob_size = MOB_SIZE_MEDIUM
 	speak_emote = list("clicks")
 	emote_hear = list("clicks its mandibles")
@@ -21,7 +18,7 @@
 		)
 	ability_cooldown = 30 SECONDS
 
-	meat_type =     /obj/item/chems/food/snacks/xenomeat
+	meat_type =     /obj/item/chems/food/xenomeat
 	meat_amount =   5
 	skin_material = /decl/material/solid/skin/insect
 	skin_amount =   15
@@ -106,9 +103,7 @@
 /mob/living/simple_animal/hostile/antlion/mega
 	name = "antlion queen"
 	desc = "A huge antlion. It looks displeased."
-	icon_state = "queen"
-	icon_living = "queen"
-	icon_dead = "queen_dead"
+	icon = 'icons/mob/simple_animal/antlion_queen.dmi'
 	mob_size = MOB_SIZE_LARGE
 	health = 275
 	maxHealth = 275

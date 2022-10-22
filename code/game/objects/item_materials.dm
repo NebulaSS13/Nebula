@@ -5,6 +5,8 @@
 		alpha = 100 + material.opacity * 255
 	if(blood_overlay)
 		overlays += blood_overlay
+	if(global.contamination_overlay && contaminated)
+		overlays += global.contamination_overlay
 
 /obj/item/apply_hit_effect(mob/living/target, mob/living/user, var/hit_zone)
 	. = ..()
@@ -47,6 +49,9 @@
 			new_force = material.get_edge_damage()
 		else
 			new_force = material.get_blunt_damage()
+			if(item_flags & ITEM_FLAG_HOLLOW)
+				new_force *= HOLLOW_OBJECT_MATTER_MULTIPLIER
+
 		new_force = round(new_force*material_force_multiplier)
 		force = min(new_force, max_force)
 
@@ -56,7 +61,10 @@
 	attack_cooldown = initial(attack_cooldown)
 	if(material)
 		armor_penetration += 2*max(0, material.brute_armor - 2)
-		throwforce = round(material.get_blunt_damage() * thrown_material_force_multiplier)
+		throwforce = material.get_blunt_damage() * thrown_material_force_multiplier
+		if(item_flags & ITEM_FLAG_HOLLOW)
+			throwforce *= HOLLOW_OBJECT_MATTER_MULTIPLIER
+		throwforce = round(throwforce)
 		attack_cooldown += material.get_attack_cooldown()
 
 /obj/item/proc/set_material(var/new_material)
@@ -82,3 +90,8 @@
 			else
 				remove_extension(src, armor_type)
 	queue_icon_update()
+
+/obj/item/get_matter_amount_modifier()
+	. = ..()
+	if(item_flags & ITEM_FLAG_HOLLOW)
+		. *= HOLLOW_OBJECT_MATTER_MULTIPLIER

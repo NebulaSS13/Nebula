@@ -57,7 +57,7 @@
 
 //cameras
 /obj/machinery/camera/network/ministation/sat
-	network = list("Satellite")
+	preset_channels = list("Satellite")
 
 /obj/machinery/camera/motion/ministation
-	network = list("Satellite")
+	preset_channels = list("Satellite")

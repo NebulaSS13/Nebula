@@ -93,6 +93,7 @@ What is the naming convention for planes or layers?
 	//ABOVE TURF
 	#define DECAL_LAYER                 2.03
 	#define RUNE_LAYER                  2.04
+	#define AO_LAYER                    2.045
 	#define ABOVE_TILE_LAYER            2.05
 	#define EXPOSED_PIPE_LAYER          2.06
 	#define EXPOSED_WIRE_LAYER          2.07
@@ -101,7 +102,6 @@ What is the naming convention for planes or layers?
 	#define BLOOD_LAYER                 2.10
 	#define MOUSETRAP_LAYER             2.11
 	#define PLANT_LAYER                 2.12
-	#define AO_LAYER                    2.13
 	//HIDING MOB
 	#define HIDING_MOB_LAYER            2.14
 	#define SHALLOW_FLUID_LAYER         2.15
@@ -189,14 +189,3 @@ What is the naming convention for planes or layers?
   #define HUD_ITEM_LAYER           3
   #define HUD_ABOVE_ITEM_LAYER     4
   #define HUD_ABOVE_HUD_LAYER      5
-
-/atom
-	plane = DEFAULT_PLANE
-
-/atom/proc/hud_layerise()
-	plane = HUD_PLANE
-	layer = HUD_ITEM_LAYER
-
-/atom/proc/reset_plane_and_layer()
-	plane = initial(plane)
-	layer = initial(layer)

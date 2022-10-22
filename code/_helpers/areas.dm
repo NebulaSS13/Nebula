@@ -23,7 +23,7 @@
 /proc/group_areas_by_name(var/list/predicates)
 	. = list()
 	for(var/area/A in get_filtered_areas(predicates))
-		group_by(., A.name, A)
+		group_by(., A.proper_name, A)
 
 /proc/group_areas_by_z_level(var/list/predicates)
 	. = list()
@@ -80,13 +80,16 @@
 	. = (A.z in z_levels)
 
 /proc/is_station_area(var/area/A)
-	. = isStationLevel(A.z)
+	if(istype(A))
+		. = isStationLevel(A.z)
 
 /proc/is_contact_area(var/area/A)
-	. = isContactLevel(A.z)
+	if(istype(A))
+		. = isContactLevel(A.z)
 
 /proc/is_player_area(var/area/A)
-	. = isPlayerLevel(A.z)
+	if(istype(A))
+		. = isPlayerLevel(A.z)
 
 /proc/is_not_space_area(var/area/A)
 	. = !istype(A,/area/space)
@@ -95,7 +98,8 @@
 	. = !istype(A) || !(A.area_flags & AREA_FLAG_SHUTTLE)
 
 /proc/is_area_with_turf(var/area/A)
-	. = isnum(A.x)
+	if(istype(A))
+		. = isnum(A.x)
 
 /proc/is_area_without_turf(var/area/A)
 	. = !is_area_with_turf(A)

@@ -6,14 +6,6 @@
  *
  */
 
-#define UT_NORMAL 1                   // Standard one atmosphere 20celsius
-#define UT_VACUUM 2                   // Vacume on simulated turfs
-#define UT_NORMAL_COLD 3              // Cold but standard atmosphere.
-
-#define FAILURE 0
-#define SUCCESS 1
-#define SKIP 2
-
 //
 // Generic check for an area.
 //
@@ -75,7 +67,7 @@
 					return test_result
 
 
-			if(UT_NORMAL || UT_NORMAL_COLD)
+			if(UT_NORMAL, UT_NORMAL_COLD)
 				if(abs(pressure - ONE_ATMOSPHERE) > 10)
 					test_result["msg"] = "Pressure out of bounds: [pressure] | [t_msg]"
 					return test_result
@@ -153,7 +145,7 @@
 	if(world.time < testtime)
 		return 0
 	for(var/area/A in shuttle.shuttle_area)
-		var/list/test = test_air_in_area(A.type)
+		var/list/test = test_air_in_area(A.type, global.using_map.shuttle_atmos_expectation)
 		if(isnull(test))
 			fail("Check Runtimed")
 			return 1
@@ -163,9 +155,3 @@
 			if(SKIP)    skip(test["msg"])
 			else        fail(test["msg"])
 	return 1
-
-#undef UT_NORMAL
-#undef UT_VACUUM
-#undef UT_NORMAL_COLD
-#undef SUCCESS
-#undef FAILURE
