@@ -36,8 +36,20 @@
 /obj/abstract/can_be_corroded_by(decl/material/M, amount)
 	return FALSE
 
+/obj/abstract/can_take_damage()
+	return FALSE
+
 /obj/abstract/take_damage(amount, damage_type, damage_flags, inflicter, armor_pen, target_zone, quiet)
 	return 0 //Must return a number
 
 /obj/abstract/heal(amount)
 	return 0 //Must return a number
+
+/obj/abstract/update_material(keep_health, should_update_icon)
+	return
+
+/obj/abstract/update_matter(list/matter_override)
+	return
+
+/obj/abstract/set_material(new_material, keep_heath, update_material)
+	return
