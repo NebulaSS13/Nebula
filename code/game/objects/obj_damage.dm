@@ -243,6 +243,9 @@
 	. = ..()
 	if(!.)
 		return
+	//#TODO: This migh be better handled by the item itself? Not sure.
+	user.setClickCooldown(W.attack_cooldown)
+	user.do_attack_animation(src, W)
 	. = take_damage(W.force, W.damtype, W.damage_flags(), user, W.armor_penetration, user.zone_sel)
 	if(. > 0)
 		if(hitsound)
