@@ -18,7 +18,7 @@
 /turf
 	temperature_coefficient = MIN_TEMPERATURE_COEFFICIENT
 
-/obj/Initialize(ml)
+/obj/Initialize(ml, ...)
 	if(isnull(health))
 		health = max_health //Make sure to propagate max_health to health var before material setup, for consistency
 	
@@ -31,7 +31,7 @@
 	if(rmat)
 		set_reinforcing_material(rmat, should_set_health, FALSE) //Keep initially set health, and don't do material updates
 	//Setup armor, properties, health, matter etc
-	update_material()
+	update_material(should_set_health, FALSE) //Don't update icon in the base class since some implementation of initialize need to do some other things before
 
 	. = ..()
 
