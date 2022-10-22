@@ -79,7 +79,7 @@
 	if(length(shields))
 		var/obj/machinery/shield_generator/shield_gen = pick(shields)
 		//Minor breaches aren't enough to let through frying amounts of power
-		if(shield_gen.take_shield_damage(30 * severity, SHIELD_DAMTYPE_EM) <= SHIELD_BREACHED_MINOR)
+		if(shield_gen.take_shield_damage(30 * severity, ELECTROCUTE) <= SHIELD_BREACHED_MINOR)
 			shielded = TRUE
 
 	valid_apcs = list()
