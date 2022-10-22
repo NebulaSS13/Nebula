@@ -105,7 +105,7 @@
 	vars[varname] = value
 
 /datum/proc/get_initial_variable_value(varname)
-	return initial(vars[varname])
+	return initial(vars[varname]) //#FIXME: initial doesn't work on lists or objects
 
 /datum/proc/make_view_variables_variable_entry(var/varname, var/value, var/hide_watch = 0)
 	return {"

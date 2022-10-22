@@ -140,6 +140,7 @@
 	max_shots = 4
 	has_safety = FALSE
 
+//#FIXME: This should really use the tool archetype stuff
 /obj/item/gun/energy/plasmacutter/proc/slice(var/mob/M = null)
 	if(!safety() && power_supply.checked_use(charge_cost)) //consumes a shot per use
 		if(M)

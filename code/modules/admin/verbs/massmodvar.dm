@@ -113,7 +113,7 @@
 	switch(class)
 
 		if("restore to default")
-			O.vars[variable] = initial(O.vars[variable])
+			O.vars[variable] = initial(O.vars[variable])  //#FIXME: initial doesn't work on lists or objects
 			if(method)
 				if(istype(O, /mob))
 					for(var/mob/M in SSmobs.mob_list)

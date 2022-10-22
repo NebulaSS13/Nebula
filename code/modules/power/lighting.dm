@@ -281,7 +281,7 @@
 		if(expected_to_be_on() && (W.obj_flags & OBJ_FLAG_CONDUCTIBLE))
 			spark_at(src, cardinal_only = TRUE)
 			if (prob(75))
-				electrocute_mob(user, get_area(src), src, rand(0.7,1.0))
+				electrocute_mob(user, get_area(src), src, rand(0.7,1.0)) //#FIXME: If someone use a terminal or a cell to power this thing this might not work??
 
 
 // returns whether this light is expected to be on, disregarding internal state other than power
