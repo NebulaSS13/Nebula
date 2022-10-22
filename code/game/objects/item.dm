@@ -98,8 +98,8 @@
 	return origin_tech
 
 /obj/item/Initialize(var/ml, var/material_key)
-	if(!ispath(material_key, /decl/material))
-		material = material_key //Base class will handle setting the value
+	if(ispath(material_key, /decl/material))
+		material = material_key //Base class will handle the rest
 	. = ..()
 	if(randpixel && (!pixel_x && !pixel_y) && isturf(loc)) //hopefully this will prevent us from messing with mapper-set pixel_x/y
 		pixel_x = rand(-randpixel, randpixel)
@@ -860,5 +860,3 @@ modules/mob/living/carbon/human/life.dm if you die, you will be zoomed out.
 	if(istype(M) && M.client && M.machine == src)
 		src.attack_self(M)
 
-/obj/item/get_material_health_modifier()
-	return 0.2
