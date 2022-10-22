@@ -253,6 +253,20 @@ var/global/list/turret_icons
 		new /obj/item/assembly/prox_sensor(loc)
 	. = ..()
 
+/obj/machinery/porta_turret/wrench_floor_bolts(mob/user, delay)
+	if(enabled || raised)
+		to_chat(user, SPAN_WARNING("You cannot unsecure \a [src] while its active!"))
+		return
+	if(wrenching)
+		to_chat(user, SPAN_WARNING("Someone is already [anchored ? "un" : ""]securing \the [src]!"))
+		return
+	if(!anchored && isspaceturf(get_turf(src)))
+		to_chat(user, SPAN_WARNING("Cannot secure \a [src] in space!"))
+		return
+	wrenching = TRUE
+	. = ..()
+	wrenching = FALSE
+
 /obj/machinery/porta_turret/attackby(obj/item/I, mob/user)
 	if(stat & BROKEN)
 		if(IS_CROWBAR(I))
@@ -266,37 +280,6 @@ var/global/list/turret_icons
 				else
 					to_chat(user, "<span class='notice'>You remove the turret but did not manage to salvage anything.</span>")
 
-	else if(IS_WRENCH(I))
-		if(enabled || raised)
-			to_chat(user, "<span class='warning'>You cannot unsecure an active turret!</span>")
-			return
-		if(wrenching)
-			to_chat(user, "<span class='warning'>Someone is already [anchored ? "un" : ""]securing the turret!</span>")
-			return
-		if(!anchored && isspaceturf(get_turf(src)))
-			to_chat(user, "<span class='warning'>Cannot secure turrets in space!</span>")
-			return
-
-		user.visible_message( \
-				"<span class='warning'>[user] begins [anchored ? "un" : ""]securing the turret.</span>", \
-				"<span class='notice'>You begin [anchored ? "un" : ""]securing the turret.</span>" \
-			)
-
-		wrenching = 1
-		if(do_after(user, 50, src))
-			//This code handles moving the turret around. After all, it's a portable turret!
-			if(!anchored)
-				playsound(loc, 'sound/items/Ratchet.ogg', 100, 1)
-				anchored = 1
-				update_icon()
-				to_chat(user, "<span class='notice'>You secure the exterior bolts on the turret.</span>")
-			else if(anchored)
-				playsound(loc, 'sound/items/Ratchet.ogg', 100, 1)
-				anchored = 0
-				to_chat(user, "<span class='notice'>You unsecure the exterior bolts on the turret.</span>")
-				update_icon()
-		wrenching = 0
-
 	else if(istype(I, /obj/item/card/id)||istype(I, /obj/item/modular_computer))
 		//Behavior lock/unlock mangement
 		if(allowed(user))
@@ -305,20 +288,11 @@ var/global/list/turret_icons
 			updateUsrDialog()
 		else
 			to_chat(user, "<span class='notice'>Access denied.</span>")
-
-	else
-		//if the turret was attacked with the intention of harming it:
-		user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
-		take_damage(I.force * 0.5)
-		if(I.force * 0.5 > 1) //if the force of impact dealt at least 1 damage, the turret gets pissed off
-			if(!attacked && !emagged)
-				attacked = 1
-				spawn()
-					sleep(60)
-					attacked = 0
-		..()
+		return TRUE
+	return ..()
 
 /obj/machinery/porta_turret/emag_act(var/remaining_charges, var/mob/user)
+	set waitfor = FALSE
 	if(!emagged)
 		//Emagging the turret makes it go bonkers and stun everyone. It also makes
 		//the turret shoot much, much faster.
@@ -505,8 +479,6 @@ var/global/list/turret_icons
 		return
 	if(raising || raised)
 		return
-	if(stat & BROKEN)
-		return
 	set_raised_raising(raised, 1)
 	update_icon()
 
@@ -525,8 +497,6 @@ var/global/list/turret_icons
 	if(disabled)
 		return
 	if(raising || !raised)
-		return
-	if(stat & BROKEN)
 		return
 	set_raised_raising(raised, 1)
 	update_icon()

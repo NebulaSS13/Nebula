@@ -541,7 +541,7 @@ About the new airlock wires panel:
 	if (src.isElectrified())
 		if (istype(mover, /obj/item))
 			var/obj/item/i = mover
-			if(i.material && i.material.conductive)
+			if(i.obj_flags & OBJ_FLAG_CONDUCTIBLE)
 				spark_at(src, amount=5, cardinal_only = TRUE)
 	return ..()
 

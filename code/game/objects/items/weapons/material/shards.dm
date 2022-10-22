@@ -67,24 +67,26 @@
 		if(WT.weld(0, user))
 			material.create_object(get_turf(src))
 			qdel(src)
-			return
-	if(istype(W, /obj/item/stack/cable_coil))
+			return TRUE
+		return TRUE
 
+	if(istype(W, /obj/item/stack/cable_coil))
 		if(!material || (material.shard_type in list(SHARD_SPLINTER, SHARD_SHRAPNEL)))
 			to_chat(user, SPAN_WARNING("\The [src] is not suitable for using as a shank."))
-			return
+			return TRUE
 		if(has_handle)
 			to_chat(user, SPAN_WARNING("\The [src] already has a handle."))
-			return
+			return TRUE
 		var/obj/item/stack/cable_coil/cable = W
 		if(cable.use(3))
 			to_chat(user, SPAN_NOTICE("You wind some cable around the thick end of \the [src]."))
 			has_handle = cable.color
 			SetName("[material.solid_name] shank")
 			update_icon()
-			return
+			return TRUE
 		to_chat(user, SPAN_WARNING("You need 3 or more units of cable to give \the [src] a handle."))
-		return
+		return TRUE
+	
 	return ..()
 
 /obj/item/shard/on_update_icon()

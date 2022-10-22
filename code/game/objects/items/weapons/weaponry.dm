@@ -216,11 +216,10 @@
 /obj/effect/energy_net/user_unbuckle_mob(mob/user)
 	return escape_net(user)
 
-
 /obj/effect/energy_net/proc/escape_net(mob/user)
 	visible_message(
-		"<span class='warning'>\The [user] attempts to free themselves from \the [src]!</span>",
-		"<span class='warning'>You attempt to free yourself from \the [src]!</span>"
+		SPAN_WARNING("\The [user] attempts to free themselves from \the [src]!"),
+		SPAN_WARNING("You attempt to free yourself from \the [src]!")
 		)
 	if(user.do_skilled(rand(min_free_time, max_free_time), SKILL_HAULING, src, incapacitation_flags = INCAPACITATION_DISABLED))
 		physically_destroyed()

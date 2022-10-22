@@ -109,7 +109,7 @@
 		P.make_energy()
 
 	var/power_failure = FALSE
-	if(initial(health)/health < 0.5 && prob(5))
+	if(((max_health/health) < 0.5) && prob(5))
 		visible_message("<span class='warning'>\The [src] shudders and sparks</span>")
 		power_failure = TRUE
 	// Now spend it.
@@ -412,6 +412,7 @@
 			for(var/obj/item/integrated_circuit/input/S in assembly_components)
 				S.attackby_react(I,user,user.a_intent)
 			return ..()
+
 	else if(IS_MULTITOOL(I) || istype(I, /obj/item/integrated_electronics/wirer) || istype(I, /obj/item/integrated_electronics/debugger))
 		if(opened)
 			interact(user)
@@ -420,7 +421,8 @@
 			to_chat(user, "<span class='warning'>[src]'s hatch is closed, so you can't fiddle with the internal components.</span>")
 			for(var/obj/item/integrated_circuit/input/S in assembly_components)
 				S.attackby_react(I,user,user.a_intent)
-			return ..()
+			//Run base class' attackby
+
 	else if(istype(I, /obj/item/cell))
 		if(!opened)
 			to_chat(user, "<span class='warning'>[src]'s hatch is closed, so you can't access \the [src]'s power supplier.</span>")
@@ -441,10 +443,13 @@
 			to_chat(user, "<span class='notice'>You slot \the [cell] inside \the [src]'s power supplier.</span>")
 			return TRUE
 		return FALSE
+
 	else if(istype(I, /obj/item/integrated_electronics/detailer))
 		var/obj/item/integrated_electronics/detailer/D = I
 		detail_color = D.detail_color
 		update_icon()
+		return FALSE //detailer handles things in after_attack()
+
 	else if(IS_SCREWDRIVER(I))
 		var/hatch_locked = FALSE
 		for(var/obj/item/integrated_circuit/manipulation/hatchlock/H in assembly_components)
@@ -461,18 +466,21 @@
 		opened = !opened
 		to_chat(user, "<span class='notice'>You [opened ? "open" : "close"] the maintenance hatch of [src].</span>")
 		update_icon()
+		return TRUE
+	
 	else if(IS_COIL(I))
 		var/obj/item/stack/cable_coil/C = I
 		if(is_damaged() && do_after(user, 10, src) && C.use(1))
 			user.visible_message("\The [user] patches up \the [src].")
 			health = min(max_health, health + 5)
-	else
-		if(user.a_intent == I_HURT) // Kill it
-			to_chat(user, "<span class='danger'>\The [user] hits \the [src] with \the [I]</span>")
-			take_damage(I.force)
-		else
-			for(var/obj/item/integrated_circuit/input/S in assembly_components)
-				S.attackby_react(I,user,user.a_intent)
+		return TRUE
+
+	else if(user.a_intent != I_HURT)
+		for(var/obj/item/integrated_circuit/input/S in assembly_components)
+			S.attackby_react(I,user,user.a_intent)
+		return TRUE	
+	
+	return ..() //Handle weapon attacks and etc
 
 /obj/item/electronic_assembly/attack_self(mob/user)
 	interact(user)

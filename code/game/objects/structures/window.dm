@@ -158,10 +158,6 @@
 	return TRUE
 
 /obj/structure/window/attackby(obj/item/W, mob/user)
-	if(!istype(W)) return//I really wish I did not need this
-
-	if(W.item_flags & ITEM_FLAG_NO_BLUDGEON) return
-
 	if(IS_SCREWDRIVER(W))
 		if(reinf_material && construction_state >= 1)
 			construction_state = 3 - construction_state
@@ -176,10 +172,14 @@
 			set_anchored(!anchored)
 			playsound(loc, 'sound/items/Screwdriver.ogg', 75, 1)
 			to_chat(user, (anchored ? SPAN_NOTICE("You have fastened the window to the floor.") : SPAN_NOTICE("You have unfastened the window.")))
+		return TRUE
+
 	else if(IS_CROWBAR(W) && reinf_material && construction_state <= 1)
 		construction_state = 1 - construction_state
 		playsound(loc, 'sound/items/Crowbar.ogg', 75, 1)
 		to_chat(user, (construction_state ? SPAN_NOTICE("You have pried the window into the frame.") : SPAN_NOTICE("You have pried the window out of the frame.")))
+		return TRUE
+
 	else if(IS_WRENCH(W) && !anchored && (!construction_state || !reinf_material))
 		if(!material)
 			to_chat(user, SPAN_NOTICE("You're not sure how to dismantle \the [src] properly."))
@@ -187,6 +187,8 @@
 			playsound(src.loc, 'sound/items/Ratchet.ogg', 75, 1)
 			visible_message(SPAN_NOTICE("[user] dismantles \the [src]."))
 			dismantle()
+		return TRUE
+
 	else if(IS_COIL(W) && is_fulltile())
 		if (polarized)
 			to_chat(user, SPAN_WARNING("\The [src] is already polarized."))
@@ -196,6 +198,8 @@
 			playsound(src.loc, 'sound/effects/sparks1.ogg', 75, 1)
 			polarized = TRUE
 			to_chat(user, SPAN_NOTICE("You wire and polarize \the [src]."))
+		return TRUE
+
 	else if (IS_WIRECUTTER(W))
 		if (!polarized)
 			to_chat(user, SPAN_WARNING("\The [src] is not polarized."))
@@ -207,6 +211,8 @@
 		id = null
 		playsound(loc, 'sound/items/Wirecutter.ogg', 75, 1)
 		to_chat(user, SPAN_NOTICE("You cut the wiring and remove the polarization from \the [src]."))
+		return TRUE
+	
 	else if(IS_MULTITOOL(W))
 		if (!polarized)
 			to_chat(user, SPAN_WARNING("\The [src] is not polarized."))
@@ -222,6 +228,7 @@
 			id = sanitize_safe(response, MAX_NAME_LEN)
 			to_chat(user, SPAN_NOTICE("The new ID of \the [src] is [id]."))
 		return
+
 	else if(istype(W, /obj/item/gun/energy/plasmacutter) && anchored)
 		var/obj/item/gun/energy/plasmacutter/cutter = W
 		if(!cutter.slice(user))
@@ -233,18 +240,9 @@
 			playsound(src, 'sound/items/Welder.ogg', 80, 1)
 			construction_state = 0
 			set_anchored(0)
-	else if (!istype(W, /obj/item/paint_sprayer))
-		user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
-		if(W.damtype == BRUTE || W.damtype == BURN)
-			user.do_attack_animation(src)
-			hit(W.force)
-			if(health <= 7)
-				set_anchored(FALSE)
-				step(src, get_dir(user, src))
-		else
-			playsound(loc, 'sound/effects/Glasshit.ogg', 75, 1)
-		..()
-	return
+		return TRUE
+
+	return ..()
 
 // TODO: generalize to matter list and parts_type.
 /obj/structure/window/create_dismantled_products(turf/T)
@@ -319,9 +317,7 @@
 
 //checks if this window is full-tile one
 /obj/structure/window/proc/is_fulltile()
-	if(dir & (dir - 1))
-		return 1
-	return 0
+	return (dir & (dir - 1)) > 0
 
 /obj/structure/window/examine(mob/user)
 	. = ..(user)

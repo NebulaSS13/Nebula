@@ -64,10 +64,9 @@
 /obj/item/stack/material/rods/attackby(obj/item/W, mob/user)
 	if(IS_WELDER(W))
 		var/obj/item/weldingtool/WT = W
-
 		if(!can_use(2))
-			to_chat(user, "<span class='warning'>You need at least two rods to do this.</span>")
-			return
+			to_chat(user, SPAN_WARNING("You need at least two rods to do this."))
+			return TRUE
 
 		if(WT.weld(0,user))
 			visible_message(SPAN_NOTICE("\The [src] is fused together by \the [user] with \the [WT]."), 3, SPAN_NOTICE("You hear welding."), 2)
@@ -76,13 +75,13 @@
 				if(user.is_holding_offhand(src))
 					user.put_in_hands(new_item)
 			use(2)
-		return
+		return TRUE
 
 	if (istype(W, /obj/item/stack/tape_roll/duct_tape))
 		var/obj/item/stack/tape_roll/duct_tape/T = W
 		if(!T.can_use(4))
 			to_chat(user, SPAN_WARNING("You need 4 [T.plural_name] to make a splint!"))
-			return
+			return TRUE
 		T.use(4)
 
 		var/obj/item/stack/medical/splint/ghetto/new_splint = new(user.loc)
@@ -91,11 +90,11 @@
 		playsound(user, 'sound/effects/tape.ogg', 50, TRUE)
 		user.visible_message(SPAN_NOTICE("\The [user] constructs \a [new_splint] out of a [singular_name]."), \
 				SPAN_NOTICE("You use make \a [new_splint] out of a [singular_name]."))
-		src.use(1)
+		use(1)
 
-		return
+		return TRUE
 
-	..()
+	return ..()
 
 /obj/item/stack/material/rods/attack_self(mob/user)
 	add_fingerprint(user)
