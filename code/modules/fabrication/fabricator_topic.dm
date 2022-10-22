@@ -5,21 +5,21 @@
 			return TOPIC_HANDLED
 		show_category = choice
 		. = TOPIC_REFRESH
-	
+
 	if(href_list["make"])
 		try_queue_build(locate(href_list["make"]), text2num(href_list["multiplier"]))
 		. = TOPIC_REFRESH
-	
+
 	if(href_list["cancel"])
 		try_cancel_build(locate(href_list["cancel"]))
 		. = TOPIC_REFRESH
-	
+
 	if(href_list["eject_mat"])
 		var/decl/material/mat = locate(href_list["eject_mat"])
 		if(istype(mat))
 			try_dump_material(mat.type)
 			. = TOPIC_REFRESH
-	
+
 	if(href_list["network_settings"])
 		var/datum/extension/network_device/D = get_extension(src, /datum/extension/network_device)
 		D.ui_interact(user)
@@ -41,7 +41,7 @@
 		if(CanInteract(user, DefaultTopicState()))
 			filter_string = new_filter_string
 			. = TOPIC_REFRESH
-	
+
 	//Tab expanding/collapsing
 	if(href_list["toggle_resources"])
 		ui_expand_resources = !ui_expand_resources
@@ -67,7 +67,7 @@
 		return
 	// TODO: proper liquid reagent ejection checks (acid sheet ejection...).
 	var/decl/material/mat = GET_DECL(mat_path)
-	if(mat?.phase_at_stp() != MAT_PHASE_SOLID)
+	if(mat?.phase_at_temperature() != MAT_PHASE_SOLID)
 		stored_material[mat_path] = 0
 	else
 		var/sheet_count = FLOOR(stored_material[mat_path]/SHEET_MATERIAL_AMOUNT)
