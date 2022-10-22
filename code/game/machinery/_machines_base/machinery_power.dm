@@ -186,5 +186,29 @@ This is /obj/machinery level code to properly manage power usage from the area.
 		return
 	P.newavail += amount
 
+///Returns the first power component found that is in working condition, and can provide power.
+/obj/machinery/proc/get_first_working_power_component()
+	for(var/obj/item/stock_parts/power/P in get_all_components_of_type(/obj/item/stock_parts/power))
+		if(!P.is_functional())
+			continue
+		return P
+
+///Returns the power source (powernet, area, or cell) that powers the first working power component found
+/obj/machinery/proc/get_first_working_power_source()
+	var/obj/item/stock_parts/power/C = get_first_working_power_component()
+	if(!C)
+		return
+		
+	if(istype(C, /obj/item/stock_parts/power/terminal))
+		var/obj/item/stock_parts/power/terminal/T = C
+		var/obj/machinery/power/terminal/TM =  T.terminal
+		. = TM?.powernet
+
+	else if(istype(C, /obj/item/stock_parts/power/apc))
+		. = get_area(src)
+
+	else if(istype(C, /obj/item/stock_parts/power/battery))
+		. = C.get_cell()
+
 #undef REPORT_POWER_CONSUMPTION_CHANGE
 #undef MACHINE_UPDATES_FROM_AREA_POWER
