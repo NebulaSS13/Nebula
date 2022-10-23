@@ -54,6 +54,7 @@
 	simulated = FALSE
 	anchored = TRUE
 	mouse_opacity = FALSE
+	abstract_type = /atom/movable/openspace // unsure if this is valid, check with Lohi
 
 /atom/movable/openspace/can_fall()
 	return FALSE

@@ -1,15 +1,3 @@
-/obj/item/frame_holder
-	material = /decl/material/solid/metal/steel
-	matter = list(
-		/decl/material/solid/plastic = MATTER_AMOUNT_REINFORCEMENT,
-		/decl/material/solid/metal/osmium = MATTER_AMOUNT_TRACE
-	)
-
-/obj/item/frame_holder/Initialize(mapload, var/newloc)
-	..()
-	new /obj/structure/heavy_vehicle_frame(newloc)
-	return  INITIALIZE_HINT_QDEL
-
 /obj/structure/heavy_vehicle_frame
 	name = "exosuit frame"
 	desc = "The frame for an exosuit, apparently."

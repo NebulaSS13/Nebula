@@ -319,7 +319,8 @@
 		BruteForce(user)
 
 /obj/item/paper/monitorkey
-	name = "Monitor Decryption Key"
+	name = "monitor decryption key"
+	info = "The paper is smudged and unreadable."
 
 /obj/item/paper/monitorkey/Initialize()
 	..()
@@ -328,6 +329,8 @@
 /obj/item/paper/monitorkey/LateInitialize()
 	. = ..()
 	var/turf/T = get_turf(src)
+	if(!T)
+		return
 	var/list/our_z = GetConnectedZlevels(T.z)
 	for(var/obj/machinery/network/message_server/server in SSmachines.machinery)
 		if((server.z in our_z) && !(server.stat & (BROKEN|NOPOWER)) && !isnull(server.decryptkey))

@@ -1,6 +1,8 @@
 /obj
 	layer = OBJ_LAYER
 	animate_movement = 2
+	is_spawnable_type = TRUE
+	abstract_type = /obj
 
 	var/obj_flags
 	var/list/req_access
@@ -212,8 +214,8 @@
 	if(obj_flags & OBJ_FLAG_MOVES_UNSUPPORTED)
 		var/turf/forward = get_step(get_turf(src), dir)
 		var/turf/reverse = get_step(get_turf(src), global.reverse_dir[dir])
-		//If we're wall mounted and don't have a wall either facing us, or in the opposite direction, don't apply the offset. 
-		// This is mainly for things that can be both wall mounted and floor mounted. 
+		//If we're wall mounted and don't have a wall either facing us, or in the opposite direction, don't apply the offset.
+		// This is mainly for things that can be both wall mounted and floor mounted.
 		// Its sort of a hack for now. But objects don't handle being on a wall or not. (They don't change their flags, layer, etc when on a wall or anything)
 		if(!forward && !reverse)
 			return

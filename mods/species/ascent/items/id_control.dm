@@ -48,9 +48,10 @@
 	owner?.add_language(/decl/language/mantid/worldnet)
 
 /obj/item/organ/internal/controller/do_uninstall(in_place, detach, ignore_children)
+	if(owner)
+		var/datum/extension/access_provider/owner_access = get_extension(owner, /datum/extension/access_provider)
+		owner_access?.unregister_id(src)
 	var/mob/living/carbon/H = owner
-	var/datum/extension/access_provider/owner_access = get_extension(owner, /datum/extension/access_provider)
-	owner_access?.unregister_id(src)
 	. = ..()
 	if(H && !(locate(type) in H.get_internal_organs()))
 		H.remove_language(/decl/language/mantid/worldnet)

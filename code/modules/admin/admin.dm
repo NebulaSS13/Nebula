@@ -1119,13 +1119,17 @@ var/global/floorIsLava = 0
 	set desc = "(atom path) Spawn an atom"
 	set name = "Spawn"
 
-	if(!check_rights(R_SPAWN))	return
+	if(!check_rights(R_SPAWN))
+		return
 
-	var/list/types = typesof(/atom)
+	object = lowertext(trim(object))
+	if(!object)
+		return
+
 	var/list/matches = new()
-
-	for(var/path in types)
-		if(findtext("[path]", object))
+	for(var/path in subtypesof(/atom))
+		var/atom/path_cast = path
+		if(TYPE_IS_SPAWNABLE(path_cast) && findtext(lowertext("[path]"), object))
 			matches += path
 
 	if(matches.len==0)

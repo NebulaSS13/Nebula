@@ -12,7 +12,7 @@
 	for(var/mandatory_type in mandatory_uid_types)
 		for(var/decl_type in typesof(mandatory_type))
 			var/decl/decl = decl_type
-			if(DECL_TYPE_IS_ABSTRACT(decl))
+			if(TYPE_IS_ABSTRACT(decl))
 				continue
 			decl = GET_DECL(decl_type)
 			if(!istext(decl.uid))
@@ -22,7 +22,7 @@
 	var/list/seen_uids = list()
 	for(var/decl_type in typesof(/decl))
 		var/decl/decl = decl_type
-		if(DECL_TYPE_IS_ABSTRACT(decl))
+		if(TYPE_IS_ABSTRACT(decl))
 			continue
 		decl = GET_DECL(decl_type)
 		if(isnull(decl.uid))

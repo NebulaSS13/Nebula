@@ -8,6 +8,12 @@
 
 /obj/item/ai_verbs
 	name = "AI verb holder"
+	is_spawnable_type = FALSE // Do not manually spawn this, it will runtime/break.
+
+/obj/item/ai_verbs/Initialize(ml, material_key)
+	if(!istype(loc, /obj/item/rig_module/ai_container))
+		return INITIALIZE_HINT_QDEL
+	. = ..()
 
 /obj/item/ai_verbs/verb/hardsuit_interface()
 	set category = "Hardsuit"

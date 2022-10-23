@@ -5,10 +5,7 @@
 	desc = "A combination autopainter and flash anodizer designed to give electronic assemblies a colorful, wear-resistant finish."
 	icon = 'icons/obj/assemblies/electronic_tools.dmi'
 	icon_state = "detailer"
-	obj_flags = OBJ_FLAG_CONDUCTIBLE
 	item_flags = ITEM_FLAG_NO_BLUDGEON
-	w_class = ITEM_SIZE_SMALL
-	material = /decl/material/solid/metal/aluminium
 	matter = list(
 		/decl/material/solid/metal/steel = MATTER_AMOUNT_REINFORCEMENT,
 		/decl/material/solid/fiberglass = MATTER_AMOUNT_TRACE,

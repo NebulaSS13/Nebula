@@ -17,6 +17,8 @@
 	randpixel                  = 8
 	applies_material_name      = FALSE //Handled in override
 	randpixel                  = 6
+	is_spawnable_type          = TRUE
+
 	///Associative list of cache key to the generate icons for the ore piles. We pre-generate a pile of all possible ore icon states, and make them available
 	var/static/list/cached_ore_icon_states
 	///A list of all the existing ore icon states in the ore file
@@ -137,7 +139,6 @@
 	material = /decl/material/solid/bauxite
 /obj/item/stack/material/ore/rutile
 	material = /decl/material/solid/rutile
-
 /obj/item/stack/material/ore/hydrogen_hydrate
 	material = /decl/material/solid/ice/hydrogen // todo: set back to hydrate when clathrate is added to hydrogen hydrate dname
 /obj/item/stack/material/ore/methane

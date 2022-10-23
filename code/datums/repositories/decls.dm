@@ -1,4 +1,4 @@
-// /decl is a subtype used for singletons that should never have more than one instance 
+// /decl is a subtype used for singletons that should never have more than one instance
 // in existence at a time. If you want to use a /decl you should use a pattern like:
 //     var/decl/somedecl/mydecl = GET_DECL(/decl/somedecl)
 
@@ -33,7 +33,7 @@ var/global/repository/decls/decls_repository = new
 	for(var/decl_type in typesof(/decl))
 		var/decl/decl = decl_type
 		var/decl_uid = initial(decl.uid)
-		if(decl_uid && (!DECL_TYPE_IS_ABSTRACT(decl) || initial(decl.allow_abstract_init)))
+		if(decl_uid && (!TYPE_IS_ABSTRACT(decl) || initial(decl.allow_abstract_init)))
 			fetched_decl_ids[decl_uid] = decl
 
 /repository/decls/proc/get_decl_by_id(var/decl_id)
@@ -41,7 +41,7 @@ var/global/repository/decls/decls_repository = new
 
 /repository/decls/proc/get_decl(var/decl/decl_type)
 	ASSERT(ispath(decl_type, /decl))
-	if(DECL_TYPE_IS_ABSTRACT(decl_type) && !initial(decl_type.allow_abstract_init))
+	if(TYPE_IS_ABSTRACT(decl_type) && !initial(decl_type.allow_abstract_init))
 		return // We do not instantiate abstract decls.
 	. = fetched_decls[decl_type]
 	if(!.)
@@ -100,8 +100,8 @@ var/global/repository/decls/decls_repository = new
 		fetched_decl_subtypes[decl_prototype] = .
 
 /decl
+	abstract_type = /decl
 	var/uid
-	var/abstract_type = /decl
 	var/initialized = FALSE
 	var/allow_abstract_init = FALSE
 

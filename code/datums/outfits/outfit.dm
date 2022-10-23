@@ -57,7 +57,7 @@ var/global/list/outfits_decls_by_type_
 /decl/hierarchy/outfit/Initialize()
 	. = ..()
 	backpack_overrides = backpack_overrides || list()
-	if(!DECL_INSTANCE_IS_ABSTRACT(src))
+	if(!INSTANCE_IS_ABSTRACT(src))
 		outfits_decls_by_type_[type] = src
 		dd_insertObjectList(outfits_decls_, src)
 

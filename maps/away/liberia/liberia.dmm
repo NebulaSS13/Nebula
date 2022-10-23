@@ -2428,7 +2428,7 @@
 /obj/effect/floor_decal/corner/brown{
 	dir = 10
 	},
-/obj/item/instrument/guitar,
+/obj/item/guitar,
 /obj/structure/table,
 /obj/structure/cable/blue{
 	icon_state = "1-2"

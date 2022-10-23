@@ -3,8 +3,8 @@
 	desc = "This item type is used to spawn random objects at round-start."
 	icon = 'icons/misc/mark.dmi'
 	icon_state = "rup"
+	abstract_type = /obj/random
 	var/spawn_nothing_percentage = 0 // this variable determines the likelyhood that this random object will not spawn anything
-
 	var/spawn_method = /obj/random/proc/spawn_item
 
 // creates a new object and deletes itself
@@ -21,14 +21,14 @@
 	if(isnull(loc))
 		return
 
-	var/build_path = pickweight(spawn_choices())
-
-	var/atom/A = new build_path(src.loc)
-	if(pixel_x || pixel_y)
+	var/atom/A = create_instance(pickweight(spawn_choices()), loc)
+	if(A && (pixel_x || pixel_y))
 		A.pixel_x = pixel_x
 		A.pixel_y = pixel_y
-
 	return A
+
+/obj/random/proc/create_instance(var/build_path, var/spawn_loc)
+	return new build_path(spawn_loc)
 
 // Returns an associative list in format path:weight
 /obj/random/proc/spawn_choices()
@@ -995,7 +995,7 @@ something, make sure it's not in one of the other lists.*/
 				/obj/item/storage/box/monkeycubes = 5,
 				/obj/item/storage/firstaid/surgery = 4,
 				/obj/item/cell/infinite = 1,
-				/obj/item/archaeological_find = 2,
+				/obj/random/archaeological_find = 2,
 				/obj/structure/artifact = 1,
 				/obj/item/multitool/hacktool = 2,
 				/obj/item/surgicaldrill = 7,
@@ -1139,7 +1139,7 @@ var/global/list/random_useful_
 /proc/get_random_useful_type()
 	if(!random_useful_)
 		random_useful_ = list()
-		random_useful_ += /obj/item/pen/crayon/random
+		random_useful_ += /obj/random/crayon
 		random_useful_ += /obj/item/pen
 		random_useful_ += /obj/item/pen/blue
 		random_useful_ += /obj/item/pen/red
@@ -1400,10 +1400,18 @@ var/global/list/random_useful_
 	name = "random potted plant"
 	desc = "This is a random potted plant."
 	icon = 'icons/obj/structures/potted_plants.dmi'
-	icon_state = "plant-26"	
+	icon_state = "plant-26"
 	spawn_nothing_percentage = 0
 	var/static/list/blacklisted_plants = list(/obj/structure/flora/pottedplant/unusual)
 
 /obj/random/pottedplant/spawn_choices()
 	return subtypesof(/obj/structure/flora/pottedplant) - blacklisted_plants
 
+/obj/random/crayon
+	name = "random crayon"
+	desc = "This is a random crayon."
+	icon = 'icons/obj/items/crayons.dmi'
+	icon_state = "crayonred"
+
+/obj/random/crayon/spawn_choices()
+	return subtypesof(/obj/item/pen/crayon)

@@ -2,6 +2,8 @@
 //Types that use this should consider overriding emp_act() and hear_talk(), unless they shield their contents somehow.
 /obj/item/storage/internal
 	health = ITEM_HEALTH_NO_DAMAGE
+	abstract_type = /obj/item/storage/internal
+	is_spawnable_type = FALSE
 	var/obj/item/master_item
 
 /obj/item/storage/internal/Initialize()

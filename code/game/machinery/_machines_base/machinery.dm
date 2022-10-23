@@ -85,6 +85,7 @@ Class Procs:
 	matter = list(
 		/decl/material/solid/metal/steel = MATTER_AMOUNT_PRIMARY
 	)
+	abstract_type = /obj/machinery
 
 	var/stat = 0
 	var/waterproof = TRUE

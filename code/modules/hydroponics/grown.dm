@@ -8,7 +8,7 @@
 	slot_flags = SLOT_HOLSTER
 	material = /decl/material/solid/plantmatter
 
-	var/plantname
+	var/plantname = "apple" // Setting as a default in case this is spawned manually.
 	var/datum/seed/seed
 	var/potency = -1
 
@@ -27,7 +27,7 @@
 	trash = seed.get_trash_type()
 	if(!dried_type)
 		dried_type = type
-	
+
 	. = ..(mapload) //Init reagents
 	update_icon()
 
@@ -312,9 +312,8 @@ var/global/list/_wood_materials = list(
 
 // Predefined types for placing on the map.
 
-/obj/item/chems/food/grown/mushroom/libertycap
+/obj/item/chems/food/grown/libertycap
 	plantname = "libertycap"
-
 
 /obj/item/chems/food/grown/ambrosiavulgaris
 	plantname = "biteleaf"
@@ -331,27 +330,31 @@ var/global/list/fruit_icon_cache = list()
 
 /obj/item/chems/food/fruit_slice/Initialize(mapload, var/datum/seed/S)
 	. = ..(mapload)
-	// Need to go through and make a general image caching controller. Todo.
-	if(!istype(S))
-		return INITIALIZE_HINT_QDEL
+
+	if(!istype(S)) // Just a default to prevent crashes on manual creation.
+		S = SSplants.seeds["apple"]
 
 	name = "[S.seed_name] slice"
 	desc = "A slice of \a [S.seed_name]. Tasty, probably."
 	seed = S
+	update_icon()
 
-	var/rind_colour = S.get_trait(TRAIT_PRODUCT_COLOUR)
-	var/flesh_colour = S.get_trait(TRAIT_FLESH_COLOUR)
-	if(!flesh_colour) flesh_colour = rind_colour
+/obj/item/chems/food/fruit_slice/on_update_icon()
+	. = ..()
+	if(!istype(seed))
+		return
+	var/rind_colour = seed.get_trait(TRAIT_PRODUCT_COLOUR)
+	var/flesh_colour = seed.get_trait(TRAIT_FLESH_COLOUR) || rind_colour
 	if(!fruit_icon_cache["rind-[rind_colour]"])
 		var/image/I = image(icon,"fruit_rind")
 		I.color = rind_colour
 		fruit_icon_cache["rind-[rind_colour]"] = I
-	overlays |= fruit_icon_cache["rind-[rind_colour]"]
+	add_overlay(fruit_icon_cache["rind-[rind_colour]"])
 	if(!fruit_icon_cache["slice-[rind_colour]"])
 		var/image/I = image(icon,"fruit_slice")
 		I.color = flesh_colour
 		fruit_icon_cache["slice-[rind_colour]"] = I
-	overlays |= fruit_icon_cache["slice-[rind_colour]"]
+	add_overlay(fruit_icon_cache["slice-[rind_colour]"])
 
 /obj/item/chems/food/grown/afterattack(atom/target, mob/user, flag)
 	if(!flag && isliving(user))

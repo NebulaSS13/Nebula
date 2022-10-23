@@ -327,11 +327,12 @@
 
 
 /obj/item/drill_head
-	var/durability = 0
 	name = "drill head"
 	desc = "A replaceable drill head usually used in exosuit drills."
 	icon = 'icons/obj/items/tool/drill_head.dmi'
 	icon_state = "drill_head"
+	material = /decl/material/solid/metal/steel
+	var/durability = 0
 
 /obj/item/drill_head/proc/get_percent_durability()
 	return round((durability / material.integrity) * 50)

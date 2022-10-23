@@ -14,6 +14,8 @@
 	drop_sound = 'sound/foley/tooldrop2.ogg'
 	singular_name = "sheet"
 	plural_name = "sheets"
+	abstract_type = /obj/item/stack/material
+	is_spawnable_type = FALSE // Mapped subtypes set this so they can be spawned from the verb.
 	var/decl/material/reinf_material
 
 /obj/item/stack/material/Initialize(mapload, var/amount, var/_material, var/_reinf_material)

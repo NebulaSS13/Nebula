@@ -2,6 +2,7 @@
 	icon = 'icons/obj/structures/barricade.dmi'
 	w_class = ITEM_SIZE_STRUCTURE
 	layer = STRUCTURE_LAYER
+	abstract_type = /obj/structure
 
 	var/last_damage_message
 	var/health = 0
