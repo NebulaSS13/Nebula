@@ -775,7 +775,11 @@ var/global/list/json_cache = list()
 			if(islist(decoded)) // To prevent cache mutation.
 				return deepCopyList(decoded)
 			else if(decoded)
-				return decoded	
+				return decoded
 		catch(var/exception/e)
 			log_error("Exception during JSON decoding ([json_to_decode]): [e]")
 	return list()
+
+/// Is this a dense (all keys have non-null values) associative list with at least one entry?
+/proc/is_dense_assoc(var/list/L)
+	return length(L) > 0 && !isnull(L[L[1]])
