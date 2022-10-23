@@ -1,0 +1,6 @@
+author: MistakeNot4892
+delete-after: true
+changes:
+  - tweak: Using 'say' or 'me' in the client text bar will now show the typing indicator
+      as though you used the F3 hotkey.
+  - tweak: Synthetic mobs and ghosts now have their own speech overlay appearance.
