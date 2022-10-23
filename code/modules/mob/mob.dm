@@ -7,6 +7,8 @@
 	QDEL_NULL_LIST(pinned)
 	QDEL_NULL_LIST(embedded)
 
+	QDEL_NULL(typing_indicator)
+
 	unset_machine()
 	QDEL_NULL(hud_used)
 	if(active_storage)
@@ -826,7 +828,9 @@
 
 /mob/proc/set_stat(var/new_stat)
 	. = stat != new_stat
-	stat = new_stat
+	if(.)
+		stat = new_stat
+		SStyping.set_indicator_state(client, FALSE)
 
 /mob/verb/northfaceperm()
 	set hidden = 1
@@ -1166,3 +1170,42 @@
 	src.machine = O
 	if(istype(O))
 		O.in_use = 1
+
+// Mob procs relating to the typing indicator subsystem.
+/mob/Logout()
+	if (typing_indicator)
+		vis_contents -= typing_indicator
+	is_typing = FALSE
+	..()
+
+/mob/proc/get_speech_bubble_state_modifier()
+	return
+
+/mob/verb/say_wrapper()
+	set name = ".Say"
+	set hidden = TRUE
+	SStyping.set_indicator_state(client, TRUE)
+	var/message = input("","say (text)") as text|null
+	SStyping.set_indicator_state(client, FALSE)
+	if (message)
+		say_verb(message)
+
+/mob/verb/me_wrapper()
+	set name = ".Me"
+	set hidden = TRUE
+	SStyping.set_indicator_state(client, TRUE)
+	var/message = input("","me (text)") as text|null
+	SStyping.set_indicator_state(client, FALSE)
+	if (message)
+		me_verb(message)
+
+/mob/verb/whisper_wrapper()
+	set name = ".Whisper"
+	set hidden = TRUE
+	if(config.show_typing_indicator_for_whispers)
+		SStyping.set_indicator_state(client, TRUE)
+	var/message = input("","me (text)") as text|null
+	if(config.show_typing_indicator_for_whispers)
+		SStyping.set_indicator_state(client, FALSE)
+	if (message)
+		whisper(message)

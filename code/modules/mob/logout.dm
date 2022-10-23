@@ -6,7 +6,7 @@
 	log_access("Logout: [key_name(src)]")
 
 	hide_client_images()
-	remove_typing_indicator()
+	SStyping.set_indicator_state(client, FALSE)
 
 	. = ..()
 	my_client = null

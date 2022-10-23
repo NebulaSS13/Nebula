@@ -460,3 +460,6 @@ RADIATION_LOWER_LIMIT 0.15
 
 ## Uncomment this to enable expanded alt interactions with objects.
 #EXPANDED_ALT_INTERACTIONS
+
+## Uncomment this to show a typing indicator for people writing whispers.
+#SHOW_TYPING_INDICATOR_FOR_WHISPERS

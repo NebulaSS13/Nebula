@@ -276,20 +276,23 @@
 
 //Overlays
 /atom/movable/overlay
-	var/atom/master = null
-	var/follow_proc = /atom/movable/proc/move_to_loc_or_null
 	anchored = TRUE
 	simulated = FALSE
+	var/atom/master = null
+	var/follow_proc = /atom/movable/proc/move_to_loc_or_null
+	var/expected_master_type = /atom
 
 /atom/movable/overlay/Initialize()
 	if(!loc)
 		PRINT_STACK_TRACE("[type] created in nullspace.")
 		return INITIALIZE_HINT_QDEL
 	master = loc
+	if(expected_master_type && !istype(master, expected_master_type))
+		return INITIALIZE_HINT_QDEL
 	SetName(master.name)
 	set_dir(master.dir)
 
-	if(istype(master, /atom/movable))
+	if(follow_proc && istype(master, /atom/movable))
 		events_repository.register(/decl/observ/moved, master, src, follow_proc)
 		SetInitLoc()
 

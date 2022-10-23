@@ -448,3 +448,6 @@
 /mob/living/silicon/handle_flashed(var/obj/item/flash/flash, var/flash_strength)
 	SET_STATUS_MAX(src, STAT_WEAK, flash_strength)
 	return TRUE
+
+/mob/living/silicon/get_speech_bubble_state_modifier()
+	return "synth"

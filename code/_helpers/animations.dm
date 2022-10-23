@@ -8,6 +8,8 @@
 	addtimer(CALLBACK(GLOBAL_PROC, .proc/remove_images_from_clients, I, show_to), 0.5 SECONDS)
 
 /proc/animate_speech_bubble(image/I, list/show_to, duration)
+	if(!I)
+		return
 	var/matrix/M = matrix()
 	M.Scale(0,0)
 	I.transform = M

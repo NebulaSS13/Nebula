@@ -176,3 +176,7 @@
 	var/datum/ai/ai						// Type abused. Define with path and will automagically create. Determines behaviour for clientless mobs.
 
 	var/holder_type
+	/// If this mob is or was piloted by a player with typing indicators enabled, an instance of one.
+	var/atom/movable/overlay/typing_indicator/typing_indicator
+	/// Whether this mob is currently typing, if piloted by a player.
+	var/is_typing
