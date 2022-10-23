@@ -366,18 +366,15 @@ INITIALIZE_IMMEDIATE(/obj/effect/gas_overlay)
 /decl/material/proc/get_boiling_temp(var/pressure = ONE_ATMOSPHERE)
 	return (1 / (1/max(boiling_point, TCMB)) - ((R_IDEAL_GAS_EQUATION * log(pressure / ONE_ATMOSPHERE)) / (latent_heat * molar_mass)))
 
-// Returns the phase of the matterial at the given temperature and pressure
-/decl/material/proc/phase_at_temperature(var/temperature, var/pressure = ONE_ATMOSPHERE)
+/// Returns the phase of the matterial at the given temperature and pressure
+/// Defaults to standard temperature and pressure (20c at one atmosphere)
+/decl/material/proc/phase_at_temperature(var/temperature = T20C, var/pressure = ONE_ATMOSPHERE)
 	//#TODO: implement plasma temperature and do pressure checks
-	if(temperature >= get_boiling_temp(pressure))
+	if(!isnull(boiling_point) && temperature >= get_boiling_temp(pressure))
 		return MAT_PHASE_GAS
-	else if(temperature >= heating_point)
+	else if(!isnull(heating_point) && temperature >= heating_point)
 		return MAT_PHASE_LIQUID
 	return MAT_PHASE_SOLID
-
-/// Returns the phase of matter this material is at standard temperature and pressure (20c at one atmosphere)
-/decl/material/proc/phase_at_stp()
-	return phase_at_temperature(T20C, ONE_ATMOSPHERE)
 
 // Used by walls when qdel()ing to avoid neighbor merging.
 /decl/material/placeholder

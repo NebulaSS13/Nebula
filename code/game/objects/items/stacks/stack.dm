@@ -73,17 +73,17 @@
 		I.maptext = STYLE_SMALLFONTS_OUTLINE(get_amount(), 6, (color || COLOR_WHITE), COLOR_BLACK)
 		add_overlay(I)
 
-/obj/item/stack/on_enter_storage(obj/item/storage/S)
+/obj/item/stack/Move()
+	var/on_turf = isturf(loc)
 	. = ..()
-	queue_icon_update() // queue here as it may not have updated loc yet
+	if(. && on_turf != isturf(loc))
+		update_icon()
 
-/obj/item/stack/equipped(mob/user, slot)
+/obj/item/stack/forceMove()
+	var/on_turf = isturf(loc)
 	. = ..()
-	update_icon()
-
-/obj/item/stack/dropped(mob/user)
-	. = ..()
-	update_icon()
+	if(. && on_turf != isturf(loc))
+		update_icon()
 
 /obj/item/stack/attack_self(mob/user)
 	list_recipes(user)
