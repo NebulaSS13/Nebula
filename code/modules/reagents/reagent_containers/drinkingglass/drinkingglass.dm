@@ -125,7 +125,8 @@ var/global/const/DRINK_ICON_NOISY = "noise"
 			LAZYADD(extra_text, GE.glass_desc)
 		else if(istype(extra, /obj/item/chems/food/fruit_slice))
 			LAZYADD(extra_text, "There is \a [extra] on the rim.")
-	to_chat(user, SPAN_NOTICE(jointext(extra_text," ")))
+	if(length(extra_text))
+		to_chat(user, SPAN_NOTICE(jointext(extra_text," ")))
 
 
 /obj/item/chems/drinks/glass2/proc/get_filling_overlay(amount, overlay)
