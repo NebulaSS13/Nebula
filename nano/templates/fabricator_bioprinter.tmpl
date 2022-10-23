@@ -1,5 +1,5 @@
 <!-- --------------------------------------------------------------------------------------------
-	Include Shared Helper Functions 
+	Include Shared Helper Functions
 -- --------------------------------------------------------------------------------------------->
 {{#def.fab_shared}}
 
@@ -40,14 +40,14 @@
 	Organ Filtering
  ----------------------------------------------------------------------------------------------->
 {{function fab_organ_config_summary(dna) {
-	let summary = " [";
+	var summary = " [";
 
 	if(dna != undefined) {
 		summary += "DNA: " + dna.real_name + ", " + dna.species;
 	} else {
 		summary += "<span class=bad>!! No DNA !!</span> ";
 	};
-	
+
 	return summary + "]";
 } }}
 
@@ -79,11 +79,11 @@
 
 {{if data.functional}}
 	<!--Collapsable list-->
-	<dl class='collapsableList'> 
+	<dl class='collapsableList'>
 		{{ fab_resources_table( data.expand_resources, data.material_storage ); }}
-		{{ fab_construction_queue( data.expand_queue, data.build_queue, data.current_build ); }} 
+		{{ fab_construction_queue( data.expand_queue, data.build_queue, data.current_build ); }}
 		{{ fab_organ_config( data.dna, data.expand_config ); }}
-	</dl> 
+	</dl>
 
 	<!-- Display our custom made design list  -->
 	{{ fab_build_options(data.build_options); }}

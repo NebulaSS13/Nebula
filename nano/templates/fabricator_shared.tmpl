@@ -3,8 +3,8 @@
 
 <!-- Style sheet -->
 <style>
-	/**************************** 
-	 * Build Options Table 
+	/****************************
+	 * Build Options Table
 	 ****************************/
 	.fabBuildOptnTbl{
 		width: 100%;
@@ -17,8 +17,8 @@
 	}
 	/*Cost list*/
 	.fabBuildOptnTbl ul{
-		width: 100%; 
-		font-size: small; 
+		width: 100%;
+		font-size: small;
 		white-space: nowrap;
 	}
 	.fabBuildOptnTbl tr{
@@ -37,13 +37,13 @@
 	 * Config Entry
 	*****************************/
 	.fabConfigEntry{
-		display: inline-block; 
-		white-space: nowrap; 
+		display: inline-block;
+		white-space: nowrap;
 		width: 100%;
 	}
 
-	/**************************** 
-	 * Collapsible List 
+	/****************************
+	 * Collapsible List
 	 ****************************/
 	dl.collapsableList{
 		font-family: monospace;
@@ -64,7 +64,7 @@
 		background:#181818;
 		padding-left: 1.2em; /*Pads out the leading +/- character and space*/
 	}
-	
+
 	.collapsableList dd{
 		display: inline-block;
 	}
@@ -73,8 +73,8 @@
 		display: inline-block;
 	}
 
-	/**************************** 
-	 * Special Links 
+	/****************************
+	 * Special Links
 	 ****************************/
 	.linkSubtle{
 		background:none;
@@ -118,7 +118,7 @@
 	}
 
 	/****************************
-	 * Descriptive Text 
+	 * Descriptive Text
 	 ****************************/
 	span.detail{
 		color: hsl(120, 100%, 30%);
@@ -128,13 +128,13 @@
 </style>
 
 <!-- --------------------------------------------------------------------------------------------
-	Utilities 
+	Utilities
 -- ---------------------------------------------------------------------------------------------->
 
 <!-- Returns the length of the longest material name in the material storage list (Used for padding material names since IE11 doesn't do padding) -->
 {{function get_longest_material_name(material_storage){
-	let longest = 0;
-	for(let item in material_storage){
+	var longest = 0;
+	for(var item in material_storage){
 		if(material_storage[item].name.length > longest){
 			longest = material_storage[item].name.length;
 		};
@@ -147,7 +147,7 @@
 	var billions = amount / 1000000000;
 	var millions = amount / 1000000;
 	var thousands = amount / 1000;
-	
+
 	if(billions >= 1){
 		return String(fixed? billions.toFixed(3) : billions) + '<span style=\'font-size:smaller;\'>G</span>';
 	}
@@ -158,15 +158,15 @@
 		return String(fixed? thousands.toFixed(3) : thousands) + '<span style=\'font-size:smaller;\'>K</span>';
 	}
 
-	return String((fixed? amount.toFixed(3) : amount)); 
+	return String((fixed? amount.toFixed(3) : amount));
 } }}
 
 <!-- If a string is shorter than padlengnth, we add padchar until its as long as padlength (Since IE11 doesn't support native padding we do it here) -->
 {{function pad_string(str, padlength, padchar) {
-	let padding = '';
-	let strlen = str.length;
+	var padding = '';
+	var strlen = str.length;
 	if(padlength > strlen){
-		for(let i = 0; i < (padlength - strlen); i++) {
+		for(var i = 0; i < (padlength - strlen); i++) {
 			padding += padchar;
 		};
 	};
@@ -179,7 +179,7 @@
 } }}
 
 <!-- --------------------------------------------------------------------------------------------
-	Status Header 
+	Status Header
 -- --------------------------------------------------------------------------------------------->
 {{function fab_header(network, network_id) { }}
 	{{net_connection_settings(network, network_id);}}
@@ -191,11 +191,11 @@
 
  <!-- Creates a short, one line string summing up the state of the materials in the fabricator -->
  {{function make_material_list_summary(material_storage) {
-	let summary = '';
+	var summary = '';
 	if(material_storage){
-		let nbempty = 0;
-		for(let item in material_storage){
-			let current =  material_storage[item].name.substr(0,2) + ':' +  shorten_number(material_storage[item].stored, true) + ' ';
+		var nbempty = 0;
+		for(var item in material_storage){
+			var current =  material_storage[item].name.substr(0,2) + ':' +  shorten_number(material_storage[item].stored, true) + ' ';
 			if(material_storage[item].stored <= 0){
 				nbempty += 1;
 			};
@@ -239,8 +239,8 @@
 	Toggleable Build Queue
  ----------------------------------------------------------------------------------------------->
  <!-- Makes a one line short summary of build queue of the fabricator -->
- {{function make_queue_summary(current_build, build_queue) { 
-	let summary = '';
+ {{function make_queue_summary(current_build, build_queue) {
+	var summary = '';
 	if(current_build){
 		summary += current_build.name + ' (' + current_build.multiplier + ') ' + current_build.progress;
 	}
@@ -296,7 +296,7 @@
 	</script>
 {{ } }}
 
-{{function fab_configuration_summary_color(expand_config, color) { 
+{{function fab_configuration_summary_color(expand_config, color) {
 	if(!expand_config){
 		return ' [' + '<span style=\'color:' + color + ';\'>Color</span>] ';
 	}
