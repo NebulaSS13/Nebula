@@ -8,7 +8,7 @@
 	else if (isnull(minutes))
 		PRINT_STACK_TRACE("Null minutes value supplied to minutes_to_readable().")
 		return "BAD INPUT"
-	
+
 	var/hours = 0
 	var/days = 0
 	var/weeks = 0
@@ -104,6 +104,21 @@ var/global/round_start_time = 0
 	round_start_time = world.time
 	return 1
 
+/proc/ticks2readable(tick_time)
+	var/hours = round(tick_time / (1 HOUR))
+	var/minutes = round((tick_time % (1 HOUR)) / (1 MINUTE))
+	var/seconds = round((tick_time % (1 MINUTE)) / (1 SECOND))
+	var/out = list()
+	if(hours > 0)
+		out += "[hours] hour\s"
+	if(minutes > 0)
+		out += "[minutes] minute\s"
+	if(seconds > 0)
+		out += "[seconds] second\s"
+	if(length(out))
+		return english_list(out)
+	return null
+
 /proc/roundduration2text()
 	if(!round_start_time)
 		return "00:00"
@@ -134,7 +149,7 @@ var/global/rollovercheck_last_timeofday = 0
 	global.rollovercheck_last_timeofday = world.timeofday
 	return global.midnight_rollovers
 
-/// Increases delay as the server gets more overloaded 
+/// Increases delay as the server gets more overloaded
 /// as sleeps aren't cheap and sleeping only to wake up and sleep again is wasteful
 #define DELTA_CALC max(((max(TICK_USAGE, world.cpu) / 100) * max(Master.sleep_delta-1,1)), 1)
 
