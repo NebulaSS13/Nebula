@@ -421,9 +421,15 @@ var/global/list/cached_paper_overlays
 		return
 
 	var/obj/item/paper_bundle/B = new(loc)
-	if(user && !user.unEquip(src, B) || !user.unEquip(other, B))
-		to_chat(user, SPAN_WARNING("You can't drop it!"))
-		return
+	if(user)
+		if(!user.canUnEquip(src))
+			to_chat(user, SPAN_WARNING("You can't unequip \the [src]!"))
+			return
+		if(!user.canUnEquip(other))
+			to_chat(user, SPAN_WARNING("You can't unequip \the [other]!"))
+			return
+		user.unEquip(src, B) 
+		user.unEquip(other, B)
 
 	if (name != initial(name))
 		B.SetName(name)

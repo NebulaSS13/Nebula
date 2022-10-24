@@ -22,10 +22,9 @@
 	copycontents = replacetext(copycontents, "<font face=\"[original.crayonfont]\" color=", "<font face=\"[original.crayonfont]\" nocolor=")
 	copy.set_content("<font color = #101010>[copycontents]</font>", "Copy - [original.name]")
 
-	user.unEquip(src) //#TODO: Set playdropsound to false whenever it gets merged
+	qdel(src)
 	user.put_in_active_hand(original)
 	user.put_in_hands(copy)
-	qdel(src)
 	return copy
 
 /obj/item/paint_sprayer/get_alt_interactions(mob/user)
