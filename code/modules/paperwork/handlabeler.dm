@@ -171,7 +171,6 @@
 
 		to_chat(user, SPAN_NOTICE("You slice \the [P] into [label_added] small strips and insert them into \the [src]'s paper feed."))
 		add_paper_labels(label_added)
-		user.unEquip(W)
 		qdel(W)
 		update_icon()
 		return TRUE

@@ -62,9 +62,12 @@
 		dat += "<A href='?src=\ref[src];remove=\ref[I]'>Remove</A> <A href='?src=\ref[src];rename=\ref[I]'>Rename</A> - <A href='?src=\ref[src];examine=\ref[I]'>[I.name]</A><BR>"
 
 	user.set_machine(src)
-	show_browser(user, dat, "window=folder")
-	onclose(user, "folder")
+	show_browser(user, dat, "window=[initial(name)]")
+	onclose(user, initial(name))
 	return TRUE
+
+/obj/item/folder/DefaultTopicState()
+	return global.physical_topic_state
 
 /obj/item/folder/OnTopic(mob/user, href_list, datum/topic_state/state)
 	if(href_list["remove"])

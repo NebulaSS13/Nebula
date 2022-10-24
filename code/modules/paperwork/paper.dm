@@ -91,7 +91,6 @@ var/global/list/cached_paper_overlays
 	return 0.2
 
 /obj/item/paper/proc/set_content(text,title)
-	set waitfor = FALSE //Uh, why?
 	if(title)
 		SetName(title)
 	info = html_encode(text)
@@ -422,9 +421,9 @@ var/global/list/cached_paper_overlays
 		return
 
 	var/obj/item/paper_bundle/B = new(loc)
-	if(user)
-		user.unEquip(src,   B)
-		user.unEquip(other, B)
+	if(user && !user.unEquip(src, B) || !user.unEquip(other, B))
+		to_chat(user, SPAN_WARNING("You can't drop it!"))
+		return
 
 	if (name != initial(name))
 		B.SetName(name)
@@ -504,6 +503,13 @@ var/global/list/cached_paper_overlays
 	if(n_name)
 		SetName(length(n_name) > 0? n_name : initial(name))
 	add_fingerprint(usr)
+
+/obj/item/paper/dropped(mob/user)
+	. = ..()
+	if(CanUseTopic(user, DefaultTopicState()))
+		updateUsrDialog()
+	else
+		close_browser(user, name)
 
 //
 //Topic state for paper since we can use it within clipboards and folders

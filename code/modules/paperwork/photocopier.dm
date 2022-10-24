@@ -44,11 +44,16 @@
 	var/accept_refill     = FALSE              //Whether we should handle attackby paper to be sent to the paper bin, or to the scanner slot
 	var/total_printing    = 0                  //The total number of pages we are printing in the current run
 
-/obj/machinery/photocopier/Initialize(ml)
+/obj/machinery/photocopier/Initialize(mapload, d=0, populate_parts = TRUE)
 	. = ..()
-	if(.!= INITIALIZE_HINT_QDEL && ml && printer)
+	if(.!= INITIALIZE_HINT_QDEL && populate_parts && printer)
 		//Mapped photocopiers shall spawn with ink and paper
 		printer.make_full()
+
+/obj/machinery/photocopier/Destroy()
+	scanner_item = null
+	printer = null
+	return ..()
 
 /obj/machinery/photocopier/RefreshParts()
 	. = ..()
@@ -178,6 +183,9 @@
 		ui.set_initial_data(data)
 		ui.open()
 
+/obj/machinery/photocopier/DefaultTopicState()
+	return global.physical_topic_state
+
 /obj/machinery/photocopier/OnTopic(user, href_list, state)
 	//We don't plug in the printer's own OnTopic here since we don't want to allow the user control over it
 	
@@ -243,21 +251,7 @@
 
 /**Creates a clone of the specified item. Returns a list of cloned items. */
 /obj/machinery/photocopier/proc/scan_item(var/obj/item/I)
-	if(istype(I, /obj/item/paper))
-		var/obj/item/paper/P = I
-		LAZYADD(., P.Clone())
-
-	else if(istype(I, /obj/item/photo))
-		var/obj/item/photo/Ph = I
-		LAZYADD(., Ph.Clone())
-
-	else if(istype(I, /obj/item/paper_bundle))
-		var/obj/item/paper_bundle/B = I
-		for(var/obj/item/page in B.pages)
-			LAZYADD(., scan_item(page))
-
-	else
-		CRASH("Got an unhandled item type '[I?.type]'")
+	LAZYADD(., clone_paper_work_item(I))
 
 /**Check if the amount of toner and paper are available */
 /obj/machinery/photocopier/proc/has_enough_to_print(var/req_toner = TONER_USAGE_PAPER, var/req_paper = 1)

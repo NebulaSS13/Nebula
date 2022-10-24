@@ -19,12 +19,13 @@
 	var/list/papers
 	var/tmp/max_papers = 50
 
-/obj/item/clipboard/Initialize()
+/obj/item/clipboard/Initialize(ml, material_key)
 	. = ..()
 	update_icon()
 
 /obj/item/clipboard/Destroy()
 	QDEL_NULL_LIST(papers)
+	stored_pen = null
 	return ..()
 
 /obj/item/clipboard/handle_mouse_drop(atom/over, mob/user)
@@ -50,10 +51,14 @@
 
 /obj/item/clipboard/proc/push_paper(var/obj/item/P)
 	LAZYINSERT(papers, P, 1)
+	updateUsrDialog()
+	update_icon()
 
 /obj/item/clipboard/proc/pop_paper()
 	. = top_paper()
 	LAZYREMOVE(papers, 1)
+	updateUsrDialog()
+	update_icon()
 
 /obj/item/clipboard/on_update_icon()
 	..()
@@ -72,14 +77,10 @@
 			return
 		push_paper(W)
 		to_chat(user, SPAN_NOTICE("You clip the [W] onto \the [src]."))
-		if(user.machine)
-			attack_self(user)
-		update_icon()
 		return TRUE
 
 	else if(top_paper?.attackby(W, user))
-		if(user.machine)
-			attack_self(user)
+		updateUsrDialog()
 		update_icon()
 		return TRUE
 
@@ -116,8 +117,8 @@
 	dat += "</TABLE>"
 
 	user.set_machine(src)
-	show_browser(user, dat, "window=clipboard")
-	onclose(user, "clipboard")
+	show_browser(user, dat, "window=[initial(name)]")
+	onclose(user, initial(name))
 	add_fingerprint(usr)
 	return
 
@@ -125,8 +126,7 @@
 	if(!stored_pen && I.w_class <= ITEM_SIZE_TINY && IS_PEN(I) && user.unEquip(I, src))
 		stored_pen = I
 		to_chat(user, SPAN_NOTICE("You slot \the [I] into \the [src]."))
-		if(user.machine)
-			attack_self(user)
+		updateUsrDialog()
 		update_icon()
 		return TRUE
 	else if(stored_pen)
@@ -140,14 +140,16 @@
 		user.put_in_hands(stored_pen)
 		. = stored_pen
 		stored_pen = null
-		if(user.machine)
-			attack_self(user)
+		updateUsrDialog()
 		update_icon()
 		return .
 	else if(!stored_pen)
 		to_chat(user, SPAN_WARNING("There is no pen in \the [src]."))
 	else
 		to_chat(user, SPAN_WARNING("Your hands are full.")) 
+
+/obj/item/clipboard/DefaultTopicState()
+	return global.physical_topic_state
 
 /obj/item/clipboard/OnTopic(mob/user, href_list, datum/topic_state/state)
 	. = ..()
@@ -186,8 +188,15 @@
 
 	//Update everything
 	if(. & TOPIC_REFRESH)
-		attack_self(user)
+		updateUsrDialog()
 		update_icon()
+
+/obj/item/clipboard/dropped(mob/user)
+	. = ..()
+	if(CanUseTopic(user, DefaultTopicState()))
+		updateUsrDialog()
+	else
+		close_browser(user, initial(name))
 
 /obj/item/clipboard/ebony
 	material = /decl/material/solid/wood/ebony

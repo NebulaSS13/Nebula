@@ -95,6 +95,10 @@ var/global/list/adminfaxes     = list()	//cache for faxes that have been sent to
 
 /obj/machinery/faxmachine/Destroy()
 	global.allfaxes -= src
+	disk_reader = null
+	card_reader = null
+	printer = null
+	scanner_item = null
 	. = ..()
 
 /obj/machinery/faxmachine/on_update_icon()
@@ -194,6 +198,9 @@ var/global/list/adminfaxes     = list()	//cache for faxes that have been sent to
 		ui.set_initial_data(data)
 		ui.open()
 
+/obj/machinery/faxmachine/DefaultTopicState()
+	return global.physical_topic_state
+
 /obj/machinery/faxmachine/OnTopic(mob/user, list/href_list, datum/topic_state/state)
 	if(!CanInteract(user, state))
 		to_chat(user, SPAN_WARNING("You must be close to \the [src] to do this!"))
@@ -218,9 +225,9 @@ var/global/list/adminfaxes     = list()	//cache for faxes that have been sent to
 			return TOPIC_REFRESH
 
 		//Prioritize the quick dial value
-		dest_uri = replacetext(sanitize(href_list["quick_dial"]), " ", "_")
+		dest_uri = replacetext(sanitize(href_list["quick_dial"], encode = FALSE), " ", "_")
 		if(!length(dest_uri))
-			dest_uri = replacetext(sanitize(href_list["network_uri"]), " ", "_")
+			dest_uri = replacetext(sanitize(href_list["network_uri"], encode = FALSE), " ", "_")
 		if(!length(dest_uri))
 			to_chat(user, SPAN_WARNING("You must specify a destination!"))
 			return TOPIC_NOACTION
@@ -290,18 +297,18 @@ var/global/list/adminfaxes     = list()	//cache for faxes that have been sent to
 
 	// --- Quick Dial Operations  ---
 	if(href_list["add_qd"])
-		var/qduri = uppertext(replacetext(sanitize(href_list["network_uri"]), " ", "_"))
+		var/qduri = uppertext(replacetext(sanitize(href_list["network_uri"], encode = FALSE), " ", "_"))
 		if(!length(qduri))
 			to_chat(user, SPAN_WARNING("Please specify a destination URI!"))
 			return TOPIC_NOACTION
 
 		var/inputname = input(user, "Name for the new quick dial contact?", "New quick dial contact")
-		if(length(inputname))
+		if(length(inputname) && CanPhysicallyInteract(user))
 			add_quick_dial_contact(sanitize_name(inputname, MAX_NAME_LEN, TRUE, TRUE), qduri, user)
 		return TOPIC_REFRESH
 
 	if(href_list["rem_qd"])
-		var/qduri = uppertext(replacetext(sanitize(href_list["quick_dial"]), " ", "_"))
+		var/qduri = uppertext(replacetext(sanitize(href_list["quick_dial"], encode = FALSE), " ", "_"))
 		var/qdname
 		for(var/key in quick_dial)
 			if(quick_dial[key] == qduri)
@@ -345,7 +352,8 @@ var/global/list/adminfaxes     = list()	//cache for faxes that have been sent to
 	
 	if(user)
 		to_chat(user, SPAN_NOTICE("You place \the [I] into \the [src]'s scanner."))
-		user.unEquip(I, src)
+		if(!user.unEquip(I, src))
+			return FALSE
 	else
 		I.dropInto(src)
 	scanner_item = I
@@ -537,7 +545,6 @@ var/global/list/adminfaxes     = list()	//cache for faxes that have been sent to
 
 /**Cause the nanoui to update, also updates the icon of the machine. */
 /obj/machinery/faxmachine/proc/update_ui()
-	log_debug("updating [src] ui and icon")
 	SSnano.update_uis(src)
 	update_icon()
 

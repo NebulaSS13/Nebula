@@ -199,7 +199,7 @@
 	if(distance <= 1)
 		interact(user)
 	else
-		to_chat(user, SPAN_WARNING("It is too far away."))
+		to_chat(user, SPAN_WARNING("It's too far away."))
 
 /obj/item/paper_bundle/interact(mob/user)
 	var/dat
@@ -368,7 +368,9 @@
 		//Merge the thing
 		insert_sheet_at(user, I, at_hint)
 		if(user)
-			user.unEquip(I, src)
+			if(!user.unEquip(I, src))
+				to_chat(user, SPAN_WARNING("You can't unequip \the [I]!"))
+				return
 			I.add_fingerprint(user)
 		else
 			I.forceMove(src)
