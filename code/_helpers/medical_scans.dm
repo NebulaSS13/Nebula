@@ -195,6 +195,9 @@
 	if(skill_level >= SKILL_ADEPT)
 		if(ratio <= 0.70)
 			dat += "<tr><td colspan='2'><span class='bad'>Patient is in Hypovolemic Shock. Transfusion highly recommended.</span></td></tr>"
+	else
+		dat += "<tr><td><strong>Blood pressure:</strong></td><td><span class='average'>ERROR - Patient has lacks a circulatory system.</span></td></tr>"
+		dat += "<tr><td><strong>Blood volume:</strong></td><td><span class='average'>ERROR - Patient has lacks a circulatory system.</span></td></tr>"
 
 	// Body temperature.
 	/*
@@ -263,24 +266,21 @@
 			break
 		var/row = list()
 		row += "<tr><td>[E["name"]]</td>"
-		if(E["is_stump"])
-			row += "<td><span class='bad'>Missing</span></td>"
+
+		var/rowdata = list()
+		if(E["brute_dam"] + E["burn_dam"] == 0)
+			rowdata += "None"
+		else if(skill_level < SKILL_ADEPT)
+			if(E["brute_dam"])
+				rowdata += "<span class='bad'>Damaged</span>"
+			if(E["burn_dam"])
+				rowdata += "<span class='average'>Burned</span>"
 		else
-			row += "<td>"
-			var/rowdata = list()
-			if(E["brute_dam"] + E["burn_dam"] == 0)
-				rowdata += "None"
-			else if(skill_level < SKILL_ADEPT)
-				if(E["brute_dam"])
-					rowdata += "<span class='bad'>Damaged</span>"
-				if(E["burn_dam"])
-					rowdata += "<span class='average'>Burned</span>"
-			else
-				if(E["brute_dam"])
-					rowdata += "<span class='bad'>[capitalize(get_wound_severity(E["brute_ratio"], (E["limb_flags"] & ORGAN_FLAG_HEALS_OVERKILL)))] physical trauma</span>"
-				if(E["burn_dam"])
-					rowdata += "<span class='average'>[capitalize(get_wound_severity(E["burn_ratio"], (E["limb_flags"] & ORGAN_FLAG_HEALS_OVERKILL)))] burns</span>"
-			row += "</td><td>[jointext(rowdata, "<br>")]</td>"
+			if(E["brute_dam"])
+				rowdata += "<span class='bad'>[capitalize(get_wound_severity(E["brute_ratio"], (E["limb_flags"] & ORGAN_FLAG_HEALS_OVERKILL)))] physical trauma</span>"
+			if(E["burn_dam"])
+				rowdata += "<span class='average'>[capitalize(get_wound_severity(E["burn_ratio"], (E["limb_flags"] & ORGAN_FLAG_HEALS_OVERKILL)))] burns</span>"
+		row += "<td>[jointext(rowdata, "<br>")]</td>"
 
 		if(skill_level >= SKILL_ADEPT)
 			var/list/status = list()
