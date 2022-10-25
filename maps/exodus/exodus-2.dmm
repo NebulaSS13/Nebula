@@ -19839,7 +19839,7 @@
 /turf/simulated/floor/tiled/steel_grid,
 /area/exodus/hallway/primary/central_one)
 "aPx" = (
-/obj/structure/dispenser/oxygen,
+/obj/structure/tank_rack/oxygen,
 /obj/effect/floor_decal/industrial/warning{
 	dir = 4
 	},
@@ -46844,7 +46844,7 @@
 /turf/simulated/floor/tiled/white,
 /area/exodus/research/mixing)
 "bST" = (
-/obj/structure/dispenser,
+/obj/structure/tank_rack,
 /obj/effect/floor_decal/industrial/warning,
 /turf/simulated/floor/tiled/white,
 /area/exodus/research/mixing)
@@ -53092,9 +53092,7 @@
 /turf/simulated/floor,
 /area/exodus/construction)
 "cfK" = (
-/obj/structure/dispenser{
-	hydrogentanks = 0
-	},
+/obj/structure/tank_rack/oxygen,
 /turf/simulated/floor/tiled/steel_grid,
 /area/exodus/engineering/engine_eva)
 "cfL" = (
@@ -60277,9 +60275,7 @@
 /turf/simulated/floor/tiled/white,
 /area/exodus/crew_quarters/heads/hor)
 "cxD" = (
-/obj/structure/dispenser{
-	oxygentanks = 0
-	},
+/obj/structure/tank_rack/hydrogen,
 /obj/machinery/light,
 /obj/effect/floor_decal/industrial/warning{
 	dir = 1;

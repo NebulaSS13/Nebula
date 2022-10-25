@@ -1638,7 +1638,7 @@
 /turf/simulated/floor/tiled,
 /area/ministation/cargo)
 "eG" = (
-/obj/structure/dispenser/oxygen,
+/obj/structure/tank_rack/oxygen,
 /obj/effect/floor_decal/corner/beige{
 	dir = 6
 	},
@@ -5142,7 +5142,7 @@
 /turf/simulated/floor/tiled,
 /area/ministation/eva)
 "nU" = (
-/obj/structure/dispenser/oxygen,
+/obj/structure/tank_rack/oxygen,
 /obj/effect/floor_decal/industrial/warning{
 	dir = 5
 	},
@@ -11792,7 +11792,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 9
 	},
-/obj/structure/dispenser/oxygen,
+/obj/structure/tank_rack/oxygen,
 /turf/simulated/floor/tiled,
 /area/ministation/engine)
 "Fs" = (

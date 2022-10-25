@@ -3076,7 +3076,7 @@
 /turf/simulated/open,
 /area/lar_maria/solar_control)
 "nb" = (
-/obj/structure/dispenser/oxygen,
+/obj/structure/tank_rack/oxygen,
 /obj/machinery/light/small{
 	dir = 8
 	},

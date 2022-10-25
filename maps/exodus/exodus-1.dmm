@@ -3451,7 +3451,7 @@
 /turf/simulated/floor/tiled/steel_grid,
 /area/exodus/engineering/atmos)
 "jn" = (
-/obj/structure/dispenser,
+/obj/structure/tank_rack,
 /obj/machinery/vending/wallmed1{
 	pixel_x = 7;
 	pixel_y = 32

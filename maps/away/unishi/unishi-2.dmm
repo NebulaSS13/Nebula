@@ -801,7 +801,7 @@
 /turf/simulated/floor,
 /area/unishi/common)
 "cq" = (
-/obj/structure/dispenser,
+/obj/structure/tank_rack,
 /turf/simulated/floor,
 /area/unishi/common)
 "cr" = (
