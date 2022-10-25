@@ -48,6 +48,14 @@
 	name = "ammunition (holdout)"
 	path = /obj/item/ammo_magazine/pistol/small
 
+/datum/fabricator_recipe/arms_ammo/hidden/magazine_practice
+	name = "ammunition (pistol, practice)"
+	path = /obj/item/ammo_magazine/pistol/practice
+
+/datum/fabricator_recipe/arms_ammo/hidden/magazine_flass
+	name = "ammunition (pistol, flash)"
+	path = /obj/item/ammo_magazine/pistol/flash
+
 /datum/fabricator_recipe/arms_ammo/hidden/magazine_smg_topmounted
 	name = "ammunition (SMG, top mounted)"
 	path = /obj/item/ammo_magazine/smg
