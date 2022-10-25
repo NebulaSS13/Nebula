@@ -891,7 +891,7 @@
 /turf/simulated/floor/tiled/monotile,
 /area/nexus/civilian)
 "iz" = (
-/obj/structure/filingcabinet,
+/obj/structure/filing_cabinet,
 /obj/effect/floor_decal/corner/yellow/diagonal,
 /turf/simulated/floor/tiled,
 /area/nexus/engineering)
@@ -1449,7 +1449,7 @@
 /turf/simulated/floor/tiled,
 /area/nexus/hallway/starboard/aft)
 "mT" = (
-/obj/structure/filingcabinet/chestdrawer,
+/obj/structure/filing_cabinet/chestdrawer,
 /obj/machinery/alarm,
 /turf/simulated/floor/tiled/techfloor,
 /area/nexus/command/port)
@@ -4919,7 +4919,7 @@
 /turf/simulated/floor/tiled,
 /area/nexus/hallway/starboard)
 "UB" = (
-/obj/structure/filingcabinet/chestdrawer,
+/obj/structure/filing_cabinet/chestdrawer,
 /obj/machinery/alarm,
 /turf/simulated/floor/tiled/techfloor,
 /area/nexus/command/starboard)

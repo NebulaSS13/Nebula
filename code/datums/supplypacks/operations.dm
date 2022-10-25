@@ -91,7 +91,7 @@
 					 /obj/item/folder/yellow,
 					 /obj/item/hand_labeler,
 					 /obj/item/stack/tape_roll/duct_tape,
-					 /obj/structure/filingcabinet/chestdrawer,
+					 /obj/structure/filing_cabinet/chestdrawer,
 					 /obj/item/paper_bin)
 	name = "Office supplies"
 	containertype = /obj/structure/closet/crate/large

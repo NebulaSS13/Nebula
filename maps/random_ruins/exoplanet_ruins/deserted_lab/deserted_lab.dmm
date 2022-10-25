@@ -294,7 +294,7 @@
 /area/template_noop)
 "bg" = (
 /obj/random/trash,
-/obj/structure/filingcabinet/wallcabinet{
+/obj/structure/filing_cabinet/wall{
 	pixel_y = -32
 	},
 /obj/effect/decal/cleanable/blood/drip,

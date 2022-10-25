@@ -307,7 +307,7 @@
 /turf/simulated/floor/tiled,
 /area/icarus/vessel)
 "bf" = (
-/obj/structure/filingcabinet,
+/obj/structure/filing_cabinet,
 /turf/simulated/floor/tiled,
 /area/icarus/vessel)
 "bg" = (
@@ -451,7 +451,7 @@
 /turf/simulated/floor/tiled,
 /area/icarus/vessel)
 "bD" = (
-/obj/structure/filingcabinet,
+/obj/structure/filing_cabinet,
 /obj/machinery/atmospherics/unary/vent_scrubber/on,
 /turf/simulated/floor/tiled,
 /area/icarus/vessel)

@@ -435,7 +435,7 @@
 /turf/simulated/floor/tiled,
 /area/ministation/bridge)
 "bi" = (
-/obj/structure/filingcabinet,
+/obj/structure/filing_cabinet,
 /obj/machinery/light_switch{
 	pixel_y = 28
 	},
@@ -2118,7 +2118,7 @@
 	dir = 8;
 	pixel_x = -24
 	},
-/obj/structure/filingcabinet,
+/obj/structure/filing_cabinet,
 /turf/simulated/floor/tiled,
 /area/ministation/cargo)
 "fS" = (
@@ -2774,7 +2774,7 @@
 	pixel_x = 4;
 	pixel_y = 26
 	},
-/obj/structure/filingcabinet/wallcabinet{
+/obj/structure/filing_cabinet/wall{
 	pixel_x = 32
 	},
 /turf/simulated/floor/carpet/red,
@@ -8734,7 +8734,7 @@
 /turf/simulated/floor/tiled,
 /area/ministation/hop)
 "xm" = (
-/obj/structure/filingcabinet/chestdrawer,
+/obj/structure/filing_cabinet/chestdrawer,
 /turf/simulated/floor/tiled,
 /area/ministation/hop)
 "xn" = (
@@ -10900,7 +10900,7 @@
 	dir = 1;
 	pixel_y = -22
 	},
-/obj/structure/filingcabinet/chestdrawer,
+/obj/structure/filing_cabinet/chestdrawer,
 /obj/machinery/light{
 	dir = 4;
 	icon_state = "tube1"
@@ -15994,7 +15994,7 @@
 /turf/simulated/floor,
 /area/ministation/atmospherics)
 "Vd" = (
-/obj/structure/filingcabinet,
+/obj/structure/filing_cabinet,
 /obj/machinery/firealarm{
 	dir = 4;
 	pixel_x = 24
