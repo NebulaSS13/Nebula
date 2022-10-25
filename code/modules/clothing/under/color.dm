@@ -38,6 +38,10 @@
 	name = "blue jumpsuit"
 	color = "#0066ff"
 
+/obj/item/clothing/under/color/lightblue
+	name = "light blue jumpsuit"
+	color = COLOR_LIGHT_CYAN
+
 /obj/item/clothing/under/color/pink
 	name = "pink jumpsuit"
 	color = "#df20a6"
