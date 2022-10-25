@@ -27,3 +27,22 @@
 		physically_destroyed()
 		return TRUE
 	return attack_hand(user)
+
+/obj/structure/largecrate/animal
+	name = "animal crate"
+	var/animal_type
+
+/obj/structure/largecrate/animal/Initialize()
+	. = ..()
+	if(animal_type)
+		var/mob/critter = new animal_type(src)
+		name = "[name] ([critter.name])"
+
+/obj/structure/largecrate/animal/cat
+	animal_type = /mob/living/simple_animal/cat
+
+/obj/structure/largecrate/animal/cow
+	animal_type = /mob/living/simple_animal/cow
+
+/obj/structure/largecrate/animal/corgi
+	animal_type = /mob/living/simple_animal/corgi
