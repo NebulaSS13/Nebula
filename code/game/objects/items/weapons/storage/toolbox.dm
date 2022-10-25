@@ -67,6 +67,9 @@
 	attack_cooldown = 10
 	startswith = list(/obj/item/clothing/gloves/insulated, /obj/item/screwdriver, /obj/item/wrench, /obj/item/weldingtool, /obj/item/crowbar, /obj/item/wirecutters, /obj/item/multitool)
 
+/obj/item/storage/toolbox/syndicate/powertools
+	startswith = list(/obj/item/clothing/gloves/insulated, /obj/item/power_drill, /obj/item/weldingtool/electric, /obj/item/hydraulic_cutter, /obj/item/multitool)
+
 /obj/item/storage/toolbox/repairs
 	name = "electronics toolbox"
 	desc = "A box full of boxes, with electrical machinery parts and tools needed to get them where they're needed."
@@ -74,9 +77,9 @@
 	item_state = "toolbox_yellow"
 	startswith = list(
 		/obj/item/stack/cable_coil,
-		/obj/item/screwdriver, 
+		/obj/item/screwdriver,
 		/obj/item/wrench,
-		/obj/item/crowbar, 
+		/obj/item/crowbar,
 		/obj/item/wirecutters,
 		/obj/item/storage/box/parts_pack/manipulator,
 		/obj/item/storage/box/parts_pack/laser,

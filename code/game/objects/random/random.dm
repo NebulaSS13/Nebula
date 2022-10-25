@@ -51,13 +51,29 @@
 	icon_state = ICON_STATE_WORLD
 
 /obj/random/tool/spawn_choices()
-	return list(/obj/item/screwdriver,
-				/obj/item/wirecutters,
-				/obj/item/weldingtool,
-				/obj/item/weldingtool/largetank,
-				/obj/item/crowbar,
-				/obj/item/wrench,
-				/obj/item/flashlight)
+	return list(
+		/obj/item/screwdriver,
+		/obj/item/wirecutters,
+		/obj/item/weldingtool,
+		/obj/item/weldingtool/largetank,
+		/obj/item/crowbar,
+		/obj/item/wrench,
+		/obj/item/flashlight
+	)
+
+/obj/random/tool/power
+	name = "random powertool"
+	desc = "This is a random rare powertool for maintenance"
+	icon_state = "tool_2"
+
+/obj/random/tool/power/spawn_choices()
+	return list(
+		/obj/random/tool =                 320,
+		/obj/item/weldingtool/electric =    15,
+		/obj/item/weldingtool/experimental = 3,
+		/obj/item/hydraulic_cutter =         1,
+		/obj/item/power_drill =              1
+	)
 
 /obj/random/technology_scanner
 	name = "random scanner"
