@@ -85,12 +85,12 @@ var/global/list/adminfaxes     = list()	//cache for faxes that have been sent to
 	var/tmp/current_page      = "main"
 	var/tmp/dest_uri                   //The currently set destination URI for the target machine. Format is "[network_tag].[network_id]"
 
-/obj/machinery/faxmachine/Initialize(ml)
+/obj/machinery/faxmachine/Initialize(mapload, d=0, populate_parts = TRUE)
 	. = ..()
 	if(. != INITIALIZE_HINT_QDEL)
 		global.allfaxes += src
 		set_extension(src, /datum/extension/network_device/fax)
-		if(ml && printer)
+		if(populate_parts && printer)
 			printer.make_full()
 
 /obj/machinery/faxmachine/Destroy()
