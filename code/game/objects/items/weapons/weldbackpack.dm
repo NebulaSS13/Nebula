@@ -153,11 +153,10 @@
 	. = ..()
 	if(is_welder_attached())
 		var/mutable_appearance/welder_image = new(welder)
+		welder_image.appearance_flags |= RESET_COLOR
+		welder_image.plane = FLOAT_PLANE //Use parent plane
 		welder_image.pixel_y = 0
 		welder_image.pixel_x = 15
-		welder_image.pixel_z = 0  //For some reasons, the mutalbe_appearence starts with pixel_z == 6? Might be a really obscure bug in the inventory system?
-		welder_image.plane = HUD_PLANE
-		welder_image.layer = HUD_ABOVE_HUD_LAYER
 		add_overlay(welder_image)
 
 /obj/item/chems/weldpack/examine(mob/user)
@@ -190,6 +189,7 @@
 	else
 		welder.forceMove(src)
 	update_icon()
+	update_held_icon()
 	return TRUE
 
 /obj/item/chems/weldpack/proc/detach_gun(var/mob/user)
@@ -200,6 +200,7 @@
 	to_chat(user, SPAN_NOTICE("You detach \the [welder] from \the [src]."))
 	user.put_in_active_hand(welder)
 	update_icon()
+	update_held_icon()
 	return TRUE
 
 //Empty variant
