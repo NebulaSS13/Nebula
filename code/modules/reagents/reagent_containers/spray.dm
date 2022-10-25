@@ -65,16 +65,20 @@
 		else
 			A.visible_message(SPAN_NOTICE("\The [user] sprays \the [A] with \the [src]."))
 	else
-		spawn(0)
-			var/obj/effect/effect/water/chempuff/D = new/obj/effect/effect/water/chempuff(get_turf(src))
-			var/turf/my_target = get_turf(A)
-			D.create_reagents(amount_per_transfer_from_this)
-			if(!src)
-				return
-			reagents.trans_to_obj(D, amount_per_transfer_from_this)
-			D.set_color()
-			D.set_up(my_target, spray_particles, particle_move_delay)
+		create_chempuff(A)
 	return TRUE
+
+/obj/item/chems/spray/proc/create_chempuff(var/atom/movable/target, var/particle_amount)
+	set waitfor = FALSE
+	
+	var/obj/effect/effect/water/chempuff/D = new/obj/effect/effect/water/chempuff(get_turf(src))
+	D.create_reagents(amount_per_transfer_from_this)
+	if(QDELETED(src))
+		return
+	reagents.trans_to_obj(D, amount_per_transfer_from_this)
+	D.set_color()
+	D.set_up(get_turf(target), particle_amount? particle_amount : spray_particles, particle_move_delay)
+	return D
 
 /obj/item/chems/spray/attack_self(var/mob/user)
 	if(has_safety())
@@ -188,7 +192,7 @@
 	possible_transfer_amounts = null
 	volume = 600
 	origin_tech = "{'combat':3,'materials':3,'engineering':3}"
-	particle_move_delay = 8
+	particle_move_delay = 2 //Was hardcoded to 2 before, and 8 was slower than most mob's move speed
 	material = /decl/material/solid/metal/steel
 	matter = list(/decl/material/solid/fiberglass = MATTER_AMOUNT_REINFORCEMENT)
 
@@ -200,17 +204,9 @@
 	var/list/the_targets = list(T, T1, T2)
 
 	for(var/a = 1 to 3)
-		spawn(0)
-			if(reagents.total_volume < 1)
-				break
-			var/obj/effect/effect/water/chempuff/D = new/obj/effect/effect/water/chempuff(get_turf(src))
-			var/turf/my_target = the_targets[a]
-			D.create_reagents(amount_per_transfer_from_this)
-			if(!src)
-				return
-			reagents.trans_to_obj(D, amount_per_transfer_from_this)
-			D.set_color()
-			D.set_up(my_target, rand(6, 8), 2)
+		if(reagents.total_volume < 1)
+			break
+		create_chempuff(the_targets[a], rand(6, 8))
 	return
 
 /obj/item/chems/spray/plantbgone
