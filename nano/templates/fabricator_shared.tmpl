@@ -133,8 +133,8 @@
 
 <!-- Returns the length of the longest material name in the material storage list (Used for padding material names since IE11 doesn't do padding) -->
 {{function get_longest_material_name(material_storage){
-	let longest = 0;
-	for(let item in material_storage){
+	var longest = 0;
+	for(var item in material_storage){
 		if(material_storage[item].name.length > longest){
 			longest = material_storage[item].name.length;
 		};
@@ -163,10 +163,10 @@
 
 <!-- If a string is shorter than padlengnth, we add padchar until its as long as padlength (Since IE11 doesn't support native padding we do it here) -->
 {{function pad_string(str, padlength, padchar) {
-	let padding = '';
-	let strlen = str.length;
+	var padding = '';
+	var strlen = str.length;
 	if(padlength > strlen){
-		for(let i = 0; i < (padlength - strlen); i++) {
+		for(var i = 0; i < (padlength - strlen); i++) {
 			padding += padchar;
 		};
 	};
@@ -191,11 +191,11 @@
 
  <!-- Creates a short, one line string summing up the state of the materials in the fabricator -->
  {{function make_material_list_summary(material_storage) {
-	let summary = '';
+	var summary = '';
 	if(material_storage){
-		let nbempty = 0;
-		for(let item in material_storage){
-			let current =  material_storage[item].name.substr(0,2) + ':' +  shorten_number(material_storage[item].stored, true) + ' ';
+		var nbempty = 0;
+		for(var item in material_storage){
+			var current =  material_storage[item].name.substr(0,2) + ':' +  shorten_number(material_storage[item].stored, true) + ' ';
 			if(material_storage[item].stored <= 0){
 				nbempty += 1;
 			};
@@ -240,7 +240,7 @@
  ----------------------------------------------------------------------------------------------->
  <!-- Makes a one line short summary of build queue of the fabricator -->
  {{function make_queue_summary(current_build, build_queue) {
-	let summary = '';
+	var summary = '';
 	if(current_build){
 		summary += current_build.name + ' (' + current_build.multiplier + ') ' + current_build.progress;
 	}

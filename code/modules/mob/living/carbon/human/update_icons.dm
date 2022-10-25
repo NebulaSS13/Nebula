@@ -880,6 +880,8 @@ var/global/list/damage_icon_parts = list()
 		hud_used.hidden_inventory_update()
 		hud_used.persistant_inventory_update()
 		update_action_buttons()
+	if(internals && internal)
+		internals.icon_state = "internal1"
 
 //Human Overlays Indexes/////////
 #undef HO_MUTATIONS_LAYER
