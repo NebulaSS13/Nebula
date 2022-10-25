@@ -56,13 +56,13 @@
 /obj/item/chems/water_balloon/examine(mob/user, distance, infix, suffix)
 	. = ..()
 	if(distance == 1)
-		to_chat(user, "It's [reagents.total_volume > 0? "filled with liquid slushing around" : "empty"].")
+		to_chat(user, "It's [reagents?.total_volume > 0? "filled with liquid slushing around" : "empty"].")
 
 /obj/item/chems/water_balloon/on_reagent_change()
 	. = ..()
-	w_class = (reagents.total_volume > 0)? ITEM_SIZE_SMALL : ITEM_SIZE_TINY
+	w_class = (reagents?.total_volume > 0)? ITEM_SIZE_SMALL : ITEM_SIZE_TINY
 	//#TODO: Maybe acids should handle eating their own containers themselves?
-	for(var/reagent in reagents.reagent_volumes)
+	for(var/reagent in reagents?.reagent_volumes)
 		var/decl/material/M = GET_DECL(reagent)
 		if(M.solvent_power >= MAT_SOLVENT_STRONG)
 			visible_message(SPAN_DANGER("\The [M] chews through \the [src]!"))
@@ -70,7 +70,7 @@
 
 /obj/item/chems/water_balloon/throw_impact(atom/hit_atom, datum/thrownthing/TT)
 	..()
-	if(reagents && reagents.total_volume > 0)
+	if(reagents?.total_volume > 0)
 		visible_message(SPAN_WARNING("\The [src] bursts!"))
 		physically_destroyed()
 
@@ -83,7 +83,7 @@
 
 /obj/item/chems/water_balloon/on_update_icon()
 	. = ..()
-	if(reagents.total_volume > 0)
+	if(reagents?.total_volume > 0)
 		icon_state = "waterballoon"
 		item_state = "balloon"
 	else
