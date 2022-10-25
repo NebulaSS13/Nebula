@@ -94,6 +94,11 @@
 	desc = "A stylish, if purple, beret. For personnel that are more inclined towards style than safety."
 	color = COLOR_PURPLE
 
+/obj/item/clothing/head/beret/orange
+	name = "orange beret"
+	desc = "A stylish orange beret. For personnel that are more inclined towards style than safety."
+	color = COLOR_ORANGE
+
 /obj/item/clothing/head/beret/plaincolor
 	name = "beret"
 	desc = "A simple, solid color beret. This one has no emblems or insignia on it."
