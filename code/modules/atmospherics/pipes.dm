@@ -306,6 +306,9 @@
 /obj/machinery/atmospherics/pipe/simple/visible/blue
 	color = PIPE_COLOR_BLUE
 
+/obj/machinery/atmospherics/pipe/simple/visible/purple
+	color = PIPE_COLOR_PURPLE
+
 /obj/machinery/atmospherics/pipe/simple/visible/fuel
 	name = "fuel pipe"
 	color = PIPE_COLOR_ORANGE
@@ -350,6 +353,9 @@
 
 /obj/machinery/atmospherics/pipe/simple/hidden/blue
 	color = PIPE_COLOR_BLUE
+
+/obj/machinery/atmospherics/pipe/simple/hidden/purple
+	color = PIPE_COLOR_PURPLE
 
 /obj/machinery/atmospherics/pipe/simple/hidden/fuel
 	name = "fuel pipe"
@@ -432,6 +438,9 @@
 /obj/machinery/atmospherics/pipe/manifold/visible/blue
 	color = PIPE_COLOR_BLUE
 
+/obj/machinery/atmospherics/pipe/manifold/visible/purple
+	color = PIPE_COLOR_PURPLE
+
 /obj/machinery/atmospherics/pipe/manifold/visible/fuel
 	name = "fuel pipe manifold"
 	color = PIPE_COLOR_ORANGE
@@ -475,6 +484,9 @@
 
 /obj/machinery/atmospherics/pipe/manifold/hidden/blue
 	color = PIPE_COLOR_BLUE
+
+/obj/machinery/atmospherics/pipe/manifold/hidden/purple
+	color = PIPE_COLOR_PURPLE
 
 /obj/machinery/atmospherics/pipe/manifold/hidden/fuel
 	name = "fuel pipe manifold"
