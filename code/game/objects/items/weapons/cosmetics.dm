@@ -25,9 +25,9 @@
 		icon_state = "the_stick"
 	else
 		icon_state = ""
-		
+
 	add_overlay(list(
-		overlay_image(icon, "lipstick_[open]", flags=RESET_COLOR), 
+		overlay_image(icon, "lipstick_[open]", flags=RESET_COLOR),
 		overlay_image(icon, "key")
 	))
 
@@ -88,7 +88,7 @@
 	color = "#218c17"
 	color_desc = "emerald"
 
-/obj/item/lipstick/turquoise 
+/obj/item/lipstick/turquoise
 	name = "turquoise lipstick"
 	color = "#0098f0"
 	color_desc = "turquoise"
@@ -107,6 +107,11 @@
 	name = "moonstone lipstick"
 	color = "#d8d5d5"
 	color_desc = "moonstone"
+
+/obj/item/lipstick/purple
+	name = "garnet lipstick"
+	color = "#440044"
+	color_desc = "garnet"
 
 /obj/item/lipstick/black
 	name = "onyx lipstick"
