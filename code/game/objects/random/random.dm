@@ -440,6 +440,7 @@
 	var/vermin_chance = 0.1
 	var/list/locker_vermin = list(
 		/mob/living/simple_animal/mouse,
+		/mob/living/simple_animal/mouse/rat,
 		/mob/living/simple_animal/opossum
 	)
 
