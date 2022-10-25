@@ -360,6 +360,41 @@
 	M.add_chemical_effect(CE_OXYGENATED, 1)
 	holder.remove_reagent(/decl/material/gas/carbon_monoxide, 2 * removed)
 
+/decl/material/liquid/clotting_agent
+	name = "clotting agent"
+	uid = "chem_clotting_agent"
+	lore_text = "A medication used to rapidly clot internal hemorrhages by increasing the effectiveness of platelets."
+	metabolism = REM * 0.5
+	overdose = REAGENTS_OVERDOSE * 0.5
+	color = "#4246c7"
+	scannable = TRUE
+
+/decl/material/liquid/clotting_agent/affect_blood(mob/living/M, removed, datum/reagents/holder)
+	SET_STATUS_MAX(M, STAT_BLURRY, 30)
+	M.add_chemical_effect(CE_BLOCKAGE, (15 + REAGENT_VOLUME(holder, type))/100)
+	for(var/obj/item/organ/external/E in M.get_external_organs())
+		if(!(E.status & (ORGAN_ARTERY_CUT|ORGAN_BLEEDING)) || !prob(2 + REAGENT_VOLUME(holder, type)))
+			continue
+		if(E.status & ORGAN_ARTERY_CUT)
+			E.status &= ~ORGAN_ARTERY_CUT
+			break
+		if(E.status & ORGAN_BLEEDING)
+			var/closed_wound = FALSE
+			for(var/datum/wound/W in E.wounds)
+				if(W.bleeding() && !W.clamped)
+					W.clamped = TRUE
+					closed_wound = TRUE
+					break
+			if(closed_wound)
+				break
+	..()
+
+/decl/material/liquid/clotting_agent/affect_overdose(var/mob/living/M)
+	var/obj/item/organ/internal/heart = GET_INTERNAL_ORGAN(M, BP_HEART)
+	if(heart && prob(25))
+		heart.take_general_damage(rand(1,3))
+	return ..()
+
 #define DETOXIFIER_EFFECTIVENESS 6 // 6u of opiates removed per 1u of detoxifier; 5u is enough to remove 30u, i.e. an overdose
 #define DETOXIFIER_DOSE_EFFECTIVENESS 2 // 2u of metabolised opiates removed per 1u of detoxifier; will leave you vulnerable to another OD if you use more
 /decl/material/liquid/detoxifier
@@ -399,3 +434,4 @@
 			break
 #undef DETOXIFIER_EFFECTIVENESS
 #undef DETOXIFIER_DOSE_EFFECTIVENESS
+

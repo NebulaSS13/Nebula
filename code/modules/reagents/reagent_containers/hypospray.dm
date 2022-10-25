@@ -108,11 +108,11 @@
 		usermessage = "You load \the [V] into \the [src] as you remove the old one."
 	else
 		usermessage = "You load \the [V] into \the [src]."
-	
+
 	if(ATOM_IS_OPEN_CONTAINER(V))
 		V.atom_flags ^= ATOM_FLAG_OPEN_CONTAINER
 		V.update_icon()
-	
+
 	loaded_vial = V
 	reagents.maximum_volume = loaded_vial.reagents.maximum_volume
 	loaded_vial.reagents.trans_to_holder(reagents, volume)
@@ -241,6 +241,20 @@
 
 /obj/item/chems/hypospray/autoinjector/hallucinogenics/populate_reagents()
 	reagents.add_reagent(/decl/material/liquid/hallucinogenics, reagents.maximum_volume)
+
+////////////////////////////////////////////////////////////////////////////////
+// Autoinjector - Clotting agent
+////////////////////////////////////////////////////////////////////////////////
+
+/obj/item/chems/hypospray/autoinjector/clotting
+	name = "autoinjector (clotting agent)"
+	desc = "A refined version of the standard autoinjector, allowing greater capacity. This variant excels at treating bleeding wounds and internal bleeding."
+
+/obj/item/chems/hypospray/autoinjector/clotting/populate_reagents()
+	. = ..()
+	var/amt = round(reagents.maximum_volume*0.5)
+	reagents.add_reagent(/decl/material/liquid/stabilizer, amt)
+	reagents.add_reagent(/decl/material/liquid/clotting_agent, (reagents.maximum_volume - amt))
 
 ////////////////////////////////////////////////////////////////////////////////
 // Autoinjector - Empty

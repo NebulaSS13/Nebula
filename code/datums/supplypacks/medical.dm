@@ -53,6 +53,11 @@
 	contains = list(/obj/item/storage/firstaid/stab = 3)
 	containername = "stability kit crate"
 
+/decl/hierarchy/supply_pack/medical/clotting
+	name = "EMERGENCY - Clotting kit"
+	contains = list(/obj/item/storage/firstaid/clotting = 3)
+	containername = "clotting kit crate"
+
 /decl/hierarchy/supply_pack/medical/bloodpack
 	name = "Refills - Blood Bags (Empty)"
 	contains = list(/obj/item/storage/box/bloodpacks = 3)
