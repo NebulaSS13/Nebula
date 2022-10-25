@@ -18,8 +18,9 @@
 
 	var/logo_list = list()
 	var/logo = ""
+	var/signature //Signature entered by the admin
 
-/obj/item/paper/admin/Initialize()
+/obj/item/paper/admin/Initialize(mapload, material_key, _text, _title, list/md)
 	. = ..()
 	generateInteractions()
 
@@ -156,5 +157,8 @@
 		updateDisplay()
 		return
 
-/obj/item/paper/admin/get_signature()
-	return input(usr, "Enter the name you wish to sign the paper with (will prompt for multiple entries, in order of entry)", "Signature") as text|null
+/obj/item/paper/admin/get_signature(obj/item/pen/P, mob/user)
+	return signature
+
+/obj/item/paper/admin/proc/set_signature(var/sig)
+	signature = sig

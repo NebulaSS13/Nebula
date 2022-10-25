@@ -1565,15 +1565,23 @@
 	if(href_list["asf_pick_fax"])
 		var/obj/machinery/faxmachine/F = locate(href_list["destination"])
 		if(istype(F))
+			close_browser(src.owner, "faxpicker")
 			var/datum/extension/network_device/D = get_extension(F, /datum/extension/network_device)
-			var/datum/computer_network/CN = D?.get_network()
+			if(!D)
+				log_debug("'[log_info_line(F)]' couldn't get network_device extension!")
+				return
+			var/datum/computer_network/CN = D.get_network()
 			if(CN)
 				var/obj/item/paper/admin/P = new /obj/item/paper/admin
 				faxreply      = P //Store the message instance
 				P.admindatum  = src
-				P.origin      = href_list["sender"] || input(src.owner, "Please specify who the fax is coming from", "Origin")
+				P.origin      = href_list["sender"] || (input(src.owner, "Please specify the sender's name", "Origin", global.using_map.boss_name) as text | null)
 				P.destination_ref = weakref(F)
 				P.adminbrowse()
+			else
+				log_debug("Couldn't get computer network for [log_info_line(D)], where network_id is '[D.network_id]'.")
+		else
+			log_debug("Tried to send a fax to an invalid machine!:[log_info_line(F)]\nhref:[log_info_line(href_list)]")
 
 /mob/living/proc/can_centcom_reply()
 	return 0

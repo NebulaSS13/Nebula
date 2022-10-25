@@ -1477,59 +1477,79 @@ var/global/floorIsLava = 0
 
 /datum/admins/var/obj/item/paper/admin/faxreply // var to hold fax replies in
 
+/proc/cmp_network_device_tag_asc(atom/a, atom/b)
+	var/datum/extension/network_device/NA = get_extension(a, /datum/extension/network_device)
+	var/datum/extension/network_device/NB = get_extension(b, /datum/extension/network_device)
+	return sorttext(NB? "[NB.network_id].[NB.network_tag]" : "", NA? "[NA.network_id].[NA.network_tag]" : "")
+
 /datum/admins/proc/show_fax_picker(var/list/possible_targets, var/mob/user)
-	var/html = ""
-	html += "<form>"
-	html += "<input type=\"hidden\" name=\"asf_pick_fax\" id=\"asf_pick_fax\" value=\"1\"/>"
-	html += "<label>Sender Name:<input type=\"text\" name=\"sender\" id=\"sender\" required minlength=\"1\" maxlength=\"[MAX_DESC_LEN]\"></label>"
-	html += "<label>Target Fax Machine:<select name=\"destination\" id=\"destination\">"
-	for(var/key in possible_targets)
-		var/obj/machinery/faxmachine/F = possible_targets[key]
+	// var/html = "<form name='faxpicker' action='?src=\ref[src]' method='get'>"
+	// html += "<input type=\"hidden\" name=\"asf_pick_fax\" id=\"asf_pick_fax\" value=\"1\"/>"
+	// html += "<label>Sender Name:</BR><input type=\"text\" name=\"sender\" id=\"sender\" required minlength=\"1\" maxlength=\"[MAX_DESC_LEN]\" value=\"[using_map.boss_name]\"></label></BR>"
+	// html += "<label>Target Fax Machine:</BR><select name=\"destination\" id=\"destination\" style=\"width:384px;\">"
+	// for(var/obj/machinery/faxmachine/F in possible_targets)
+	// 	var/datum/extension/network_device/N = get_extension(F, /datum/extension/network_device)
+	// 	var/datum/computer_network/CN = N?.get_network()
+	// 	if(!N || !CN)
+	// 		continue
+	// 	var/area/A = get_area(F)
+	// 	html += "<option value=\"\ref[F]\">[CN.network_id].[N.network_tag] [A? "([A])" : ""]</option>"
+	// html += "</select></label></BR>"
+	// html += "<button type=\"submit\">Continue ...</button></BR>"
+	// html += "</form>"
+	var/html = "<h2>Pick a target fax machine:</h2>"
+	possible_targets = sortTim(possible_targets, /proc/cmp_network_device_tag_asc, FALSE)
+	for(var/obj/machinery/faxmachine/F in possible_targets)
 		var/datum/extension/network_device/N = get_extension(F, /datum/extension/network_device)
 		var/datum/computer_network/CN = N?.get_network()
 		if(!N || !CN)
 			continue
 		var/area/A = get_area(F)
-		html += "<option value=\"\ref[F]\">[CN.network_id].[N.network_tag] [A? "([A])" : ""]</option>"
-	html += "</select></label>"
-	html += "<button type=\"submit\">Pick</button>"
-	html += "</form>"
+		html += "<li><a href='?src=\ref[src];asf_pick_fax=1;destination=\ref[F]'>[CN.network_id].[N.network_tag] [A? "([A])" : ""]</a></li>"
+	html = "<ul>[html]</ul>"
 	html = "<html><header/><body>[html]</body></html>"
-	show_browser(user, html, "window=faxpicker")
+	show_browser(user, html, "size=512x800;window=faxpicker;title=")
 
 /datum/admins/proc/sendFax()
 	set waitfor = FALSE //This takes a while to process
 	set category = "Special Verbs"
 	set name = "Send Fax"
-	set desc = "Sends a fax to this machine"
+	set desc = "Create and send a fax to the specified fax machine."
 
 	var/mob/user = usr
-	if(!check_rights(R_ADMIN | R_MOD, "Error: you are not an admin!", user?.client))
+	if (!istype(src, /datum/admins))
+		src = user.client.holder
+	if(!istype(src, /datum/admins) || !check_rights(R_ADMIN | R_MOD, "Error: you must have admin/moderator rights to send a fax!", user?.client))
 		return
 
 	var/list/possible_targets
-	for(var/key in SSnetworking.networks)
-		var/datum/computer_network/N = SSnetworking.networks[key]
+	for(var/_key in SSnetworking.networks)
+		var/datum/computer_network/N = SSnetworking.networks[_key]
 		if(!N)
 			continue
-		LAZYADD(possible_targets, N.get_devices_by_type(/obj/machinery/faxmachine))
+		var/list/found = N.get_devices_by_type(/obj/machinery/faxmachine) //This thing returns empty lists! It's ruude.
+		if(length(found))
+			LAZYADD(possible_targets, found)
 
 	if(length(possible_targets))
-		show_fax_picker(possible_targets, usr) //Topic will handle the rest!
+		show_fax_picker(possible_targets, user) //Topic will handle the rest!
+	else
+		to_chat(user, SPAN_WARNING("There aren't any fax machines connected to a network in the world!"))
 
 /datum/admins/proc/faxCallback(var/obj/item/paper/admin/P, var/obj/machinery/faxmachine/destination)
 	var/customname = input(src.owner, "Pick a title for the report", "Title")
 	P.SetName("[P.origin] - [customname]")
 	P.desc = "This is a paper titled '" + P.name + "'."
 
-	var/shouldStamp = TRUE
-	if(!P.sender && alert("Would you like the fax stamped?",, "Yes", "No") == "No") // admin initiated
-		shouldStamp = FALSE
-
-	if(shouldStamp)
+	if(P.sender || alert("Would you like the fax stamped?",, "Yes", "No") == "Yes")
 		var/image/stampoverlay = image('icons/obj/bureaucracy.dmi', icon_state = "paper_stamp-boss", pixel_x = rand(-2, 0), pixel_y = rand(-2, 0))
 		stampoverlay.appearance_flags |= RESET_COLOR
 		P.apply_custom_stamp(stampoverlay, "by the [P.origin] Quantum Relay")
+
+	if(P.sender || alert("Would you like the fax signed?",, "Yes", "No") == "Yes")
+		var/sig = input(src.owner, "Enter the name you wish to sign the paper with.", "Signature") as text|null
+		if(length(sig))
+			P.set_signature(sig)
 
 	var/decl/public_access/public_method/recv = GET_DECL(/decl/public_access/public_method/fax_receive_document)
 	if(recv.perform(destination, P, P.origin))
