@@ -98,7 +98,7 @@
 	l_ear =   /obj/item/radio/headset
 	uniform = /obj/item/clothing/under/color/black
 	belt =    /obj/item/flashlight
-	hands =   list(/obj/item/modular_computer/pda/syndicate)
+	hands =   list(/obj/item/modular_computer/pda/ninja)
 
 /decl/special_role/ninja/equip(var/mob/living/carbon/human/player)
 	. = ..()

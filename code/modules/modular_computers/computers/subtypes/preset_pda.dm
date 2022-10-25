@@ -22,11 +22,23 @@
 		default_programs |= /datum/computer_file/program/uplink
 	return ..()
 
-/obj/item/modular_computer/pda/syndicate
-	color = COLOR_GRAY20
+/obj/item/modular_computer/pda/mercenary
+	color = COLOR_DARK_RED
 	decals = list(
 		"stripe" = COLOR_RED,
-		"stripe2" = COLOR_DARK_RED
+	)
+
+/obj/item/modular_computer/pda/ert
+	color = COLOR_OFF_WHITE
+	decals = list(
+		"stripe" = COLOR_DARK_BLUE_GRAY,
+		"stripe2" = COLOR_GOLD
+	)
+
+/obj/item/modular_computer/pda/ninja
+	color = COLOR_GRAY20
+	decals = list(
+		"stripe" = COLOR_BLACK
 	)
 
 /obj/item/modular_computer/pda/heads
@@ -64,7 +76,7 @@
 
 /obj/item/modular_computer/pda/heads/captain/install_default_hardware()
 	default_hardware |= /obj/item/stock_parts/computer/scanner/paper
-	. = ..() 
+	. = ..()
 
 /obj/item/modular_computer/pda/science
 	color = COLOR_OFF_WHITE

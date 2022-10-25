@@ -2181,7 +2181,7 @@
 /area/map_template/merc_spawn)
 "va" = (
 /obj/structure/table,
-/obj/item/modular_computer/pda/syndicate,
+/obj/item/modular_computer/pda/mercenary,
 /turf/simulated/floor/tiled,
 /area/map_template/merc_spawn)
 "vg" = (
