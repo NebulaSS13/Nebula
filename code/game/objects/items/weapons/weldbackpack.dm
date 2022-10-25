@@ -12,6 +12,7 @@
 	drop_sound   = 'sound/effects/holster/holsterin.ogg'
 	pickup_sound = 'sound/effects/holster/holsterout.ogg'
 	tank         = null
+	randpixel    = 0 //Prevent randpixel from screwing with backpack overlays
 
 	var/obj/item/chems/weldpack/linked_pack
 
@@ -184,7 +185,8 @@
 		welder.turn_off(user)
 
 	if(user && (user == welder.loc))
-		user.unEquip(welder, src)
+		if(!user.unEquip(welder, src))
+			return
 	else
 		welder.forceMove(src)
 	update_icon()
