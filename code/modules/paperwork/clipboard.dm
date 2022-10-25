@@ -64,10 +64,16 @@
 	..()
 	var/obj/item/top_paper = top_paper()
 	if(top_paper)
-		add_overlay(overlay_image(top_paper.icon, top_paper.icon_state, flags=RESET_COLOR))
-		add_overlay(top_paper.overlays)
+		var/mutable_appearance/I = new /mutable_appearance(top_paper)
+		I.appearance_flags |= RESET_COLOR
+		I.plane = FLOAT_PLANE
+		I.pixel_x = 0
+		I.pixel_y = 0
+		I.pixel_w = 0
+		I.pixel_z = 0 //randpixel 
+		add_overlay(I)
 	if(stored_pen)
-		add_overlay(overlay_image(icon, "clipboard_pen", flags=RESET_COLOR))
+		add_overlay(overlay_image(icon, "clipboard_pen", stored_pen.color, RESET_COLOR))
 	add_overlay(overlay_image(icon, "clipboard_over", flags=RESET_COLOR))
 
 /obj/item/clipboard/attackby(obj/item/W, mob/user)
