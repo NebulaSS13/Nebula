@@ -140,6 +140,14 @@
 	labels = list("rubber")
 	ammo_type = /obj/item/ammo_casing/pistol/rubber
 
+/obj/item/ammo_magazine/pistol/practice
+	labels = list("practice")
+	ammo_type = /obj/item/ammo_casing/pistol/practice
+
+/obj/item/ammo_magazine/pistol/flash
+	labels = list("flash")
+	ammo_type = /obj/item/ammo_casing/pistol/flash
+
 /obj/item/ammo_magazine/pistol/small
 	icon_state = "holdout"
 	material = /decl/material/solid/metal/steel
@@ -149,6 +157,14 @@
 
 /obj/item/ammo_magazine/pistol/small/empty
 	initial_ammo = 0
+
+/obj/item/ammo_magazine/pistol/small/rubber
+	labels = list("rubber")
+	ammo_type = /obj/item/ammo_casing/pistol/small/rubber
+
+/obj/item/ammo_magazine/pistol/small/practice
+	labels = list("practice")
+	ammo_type = /obj/item/ammo_casing/pistol/small/practice
 
 /obj/item/ammo_magazine/box/smallpistol
 	name = "ammunition box (pistol, small)"
