@@ -768,3 +768,95 @@
 	. = ..()
 	if (proximity)
 		visible_message("<span class='warning'>\The [src] says, \"[pick(possible_answers) ]\" as it hits \the [O]!</span>")
+
+
+//////////////////////////////////////////////////////
+//					Chess Pieces					//
+//////////////////////////////////////////////////////
+
+/obj/item/toy/chess
+	name = "oversized chess piece"
+	desc = "This should never display."
+	icon = 'icons/obj/items/chess.dmi'
+	w_class = ITEM_SIZE_LARGE
+	force = 1
+	throwforce = 1
+	drop_sound = 'sound/foley/glass.ogg'
+	color = COLOR_OFF_WHITE
+	abstract_type = /obj/item/toy/chess
+	// Some offsets so they start nicely center-ish on the turf.
+	randpixel = 0
+	pixel_y = 6
+	pixel_x = 0
+	var/rule_info
+
+/obj/item/toy/chess/examine(mob/user, distance, infix, suffix)
+	. = ..()
+	if(rule_info)
+		to_chat(user, SPAN_NOTICE(rule_info))
+
+/obj/item/toy/chess/pawn
+	name = "oversized white pawn"
+	desc = "A large pawn piece for playing chess. It's made of white enamel."
+	rule_info = "Pawns can move forward one square, if that square is unoccupied. If the pawn has not yet moved, it has the option of moving two squares forward provided both squares in front of the pawn are unoccupied. A pawn cannot move backward. They can only capture an enemy piece on either of the two tiles diagonally in front of them, but not the tile directly in front of them."
+	icon_state = "pawn"
+
+/obj/item/toy/chess/pawn/black
+	name = "oversized black pawn"
+	desc = "A large pawn piece for playing chess. It's made of black enamel."
+	color = COLOR_GRAY40
+
+/obj/item/toy/chess/rook
+	name = "oversized white rook"
+	desc = "A large rook piece for playing chess. It's made of white enamel."
+	rule_info = "The Rook can move any number of vacant squares vertically or horizontally."
+	icon_state = "rook"
+
+/obj/item/toy/chess/rook/black
+	name = "oversized black rook"
+	desc = "A large rook piece for playing chess. It's made of black enamel."
+	color = COLOR_GRAY40
+
+/obj/item/toy/chess/knight
+	name = "oversized white knight"
+	desc = "A large knight piece for playing chess. It's made of white enamel. Sadly, you can't ride it."
+	rule_info = "The Knight can either move two squares horizontally and one square vertically or two squares vertically and one square horizontally. The knight's movement can also be viewed as an 'L' laid out at any horizontal or vertical angle."
+	icon_state = "knight"
+
+/obj/item/toy/chess/knight/black
+	name = "oversized black knight"
+	desc = "A large knight piece for playing chess. It's made of black enamel. 'Just a flesh wound.'"
+	color = COLOR_GRAY40
+
+/obj/item/toy/chess/bishop
+	name = "oversized white bishop"
+	desc = "A large bishop piece for playing chess. It's made of white enamel."
+	rule_info = "The Bishop can move any number of vacant squares in any diagonal direction."
+	icon_state = "bishop"
+
+/obj/item/toy/chess/bishop/black
+	name = "oversized black bishop"
+	desc = "A large bishop piece for playing chess. It's made of black enamel."
+	color = COLOR_GRAY40
+
+/obj/item/toy/chess/queen
+	name = "oversized white queen"
+	desc = "A large queen piece for playing chess. It's made of white enamel."
+	rule_info = "The Queen can move any number of vacant squares diagonally, horizontally, or vertically."
+	icon_state = "queen"
+
+/obj/item/toy/chess/queen/black
+	name = "oversized black queen"
+	desc = "A large queen piece for playing chess. It's made of black enamel."
+	color = COLOR_GRAY40
+
+/obj/item/toy/chess/king
+	name = "oversized white king"
+	desc = "A large king piece for playing chess. It's made of white enamel."
+	rule_info = "The King can move exactly one square horizontally, vertically, or diagonally. If your opponent captures this piece, you lose."
+	icon_state = "king"
+
+/obj/item/toy/chess/king/black
+	name = "oversized black king"
+	desc = "A large king piece for playing chess. It's made of black enamel."
+	color = COLOR_GRAY40
