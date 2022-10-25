@@ -1415,3 +1415,21 @@ var/global/list/random_useful_
 
 /obj/random/crayon/spawn_choices()
 	return subtypesof(/obj/item/pen/crayon)
+
+/obj/random/umbrella
+	name = "Random Umbrella"
+	desc = "This is a random umbrella."
+	icon = 'icons/obj/items/umbrella.dmi'
+	icon_state = "map"
+	color = COLOR_GRAY20
+
+/obj/random/umbrella/spawn_choices()
+	return list(
+		/obj/item/umbrella,
+		/obj/item/umbrella/blue,
+		/obj/item/umbrella/green,
+		/obj/item/umbrella/red,
+		/obj/item/umbrella/yellow,
+		/obj/item/umbrella/orange,
+		/obj/item/umbrella/purple
+	)

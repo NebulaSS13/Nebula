@@ -63,6 +63,11 @@
 	description = "A selection of knives."
 	path = /obj/item/knife
 
+/decl/loadout_option/utility/umbrella
+	name = "umbrella"
+	path = /obj/item/umbrella
+	flags = GEAR_HAS_COLOR_SELECTION
+
 /decl/loadout_option/utility/knives/get_gear_tweak_options()
 	. = ..()
 	LAZYINITLIST(.[/datum/gear_tweak/path])
