@@ -31,12 +31,14 @@ SUBSYSTEM_DEF(zlevels)
 	var/list/connected_z_cache = list()
 
 /datum/controller/subsystem/zlevels/Initialize(start_timeofday)
-	. = ..()
 	for(var/z = 1 to world.maxz)
-		if(!levels_by_z["[z]"])
+		var/obj/abstract/level_data/level = levels_by_z["[z]"]
+		if(!level)
 			log_warning("No level data found for z[z], generating a filler level object.")
-			new /obj/abstract/level_data/filler(locate(round(world.maxx*0.5), round(world.maxz*0.5), z))
+			level = new /obj/abstract/level_data/filler(locate(round(world.maxx*0.5), round(world.maxz*0.5), z))
+		level.setup_level_data()
 		report_progress("z[z]: [get_level_name(z)]")
+	. = ..()
 
 /datum/controller/subsystem/zlevels/proc/get_level_name(var/z)
 	z = "[z]"
@@ -50,12 +52,16 @@ SUBSYSTEM_DEF(zlevels)
 		return overmap_entity.name
 	return "Sector #[z]"
 
-/datum/controller/subsystem/zlevels/proc/increment_world_z_size(var/new_level_type = /obj/abstract/level_data/filler)
+/datum/controller/subsystem/zlevels/proc/increment_world_z_size(var/new_level_type = /obj/abstract/level_data/filler, var/defer_setup = FALSE)
 	world.maxz++
 	connected_z_cache.Cut()
 	if(SSzcopy.zlev_maximums.len)
 		SSzcopy.calculate_zstack_limits()
-	new new_level_type(locate(round(world.maxx*0.5), round(world.maxz*0.5), world.maxz))
+	var/obj/abstract/level_data/level = new new_level_type(locate(round(world.maxx*0.5), round(world.maxz*0.5), world.maxz), defer_setup)
+	if(level.base_turf_type && level.base_turf_type != world.turf)
+		for(var/turf/T as anything in block(locate(1, 1, .),locate(world.maxx, world.maxy, level.my_z)))
+			T.ChangeTurf(level.base_turf_type)
+	return level
 
 /datum/controller/subsystem/zlevels/proc/levels_are_z_connected(var/za, var/zb)
 	return (za > 0 && zb > 0 && za <= world.maxz && zb <= world.maxz) && ((za == zb) || ((length(connected_z_cache) >= za && connected_z_cache[za] && length(connected_z_cache[za]) >= zb) ? connected_z_cache[za][zb] : are_connected_levels(za, zb)))

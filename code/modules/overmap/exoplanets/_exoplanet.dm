@@ -37,7 +37,6 @@
 	var/list/actors = list() 	//things that appear in engravings on xenoarch finds.
 	var/list/species = list() 	//list of names to use for simple animals instead of 'alien creature'
 
-	var/datum/gas_mixture/atmosphere
 	var/list/breathgas = list()			//list of gases animals/plants require to survive
 	var/badgas							//id of gas that is toxic to life here
 
@@ -78,6 +77,7 @@
 
 	var/spawn_weight = 100	// Decides how often this planet will be picked for generation
 
+	var/obj/abstract/level_data/level_data = /obj/abstract/level_data/planet
 	var/obj/abstract/weather_system/weather_system = /decl/state/weather/calm // Initial weather is passed to the system as its default state.
 
 /obj/effect/overmap/visitable/sector/exoplanet/proc/get_strata()
@@ -97,6 +97,11 @@
 	if(global.overmaps_by_name[overmap_id])
 		forceMove(locate(1, 1, z_level))
 	return ..()
+
+
+/obj/effect/overmap/visitable/sector/exoplanet/proc/generate_level_data()
+	level_data = new level_data(locate(round(world.maxx*0.5), round(world.maxy*0.5), z_level)
+	return level_data
 
 /obj/effect/overmap/visitable/sector/exoplanet/proc/build_level(max_x, max_y)
 
@@ -125,12 +130,13 @@
 		weather_system.water_material = water_material
 		weather_system.ice_material = ice_material
 
+	generate_level_data()
 	generate_habitability()
 	generate_atmosphere()
 	for(var/datum/exoplanet_theme/T in themes)
 		T.adjust_atmosphere(src)
 	select_strata()
-	generate_flora(atmosphere?.temperature || T20C)
+	generate_flora(level_data?.exterior_atmosphere?.temperature || T20C)
 	generate_map()
 	generate_landing(2)
 	generate_features()

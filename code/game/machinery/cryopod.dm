@@ -211,21 +211,26 @@
 			B.force_open()
 			break
 
-	var/list/possible_locations = list()
-	var/obj/effect/overmap/visitable/O = global.overmap_sectors["[z]"]
-	if(istype(O))
-		for(var/obj/effect/overmap/visitable/OO in range(O,2))
-			if((OO.sector_flags & OVERMAP_SECTOR_IN_SPACE) || istype(OO,/obj/effect/overmap/visitable/sector/exoplanet))
-				possible_locations |= text2num(level)
+	var/newz
+	if(prob(10))
+		var/list/possible_locations
+		var/obj/effect/overmap/visitable/O = global.overmap_sectors["[z]"]
+		if(istype(O))
+			for(var/obj/effect/overmap/visitable/OO in range(O,2))
+				if((OO.sector_flags & OVERMAP_SECTOR_IN_SPACE) || istype(OO,/obj/effect/overmap/visitable/sector/exoplanet))
+					LAZYDISTINCTADD(possible_locations, text2num(level))
+		if(length(possible_locations))
+			newz = pick(possible_locations)
+	if(!newz)
+		var/obj/abstract/level_data/level = SSzlevels.increment_world_z_size(/obj/abstract/level_data/space)
+		newz = level?.my_z
 
-	var/newz = get_empty_zlevel(/turf/space)
-	if(possible_locations.len && prob(10))
-		newz = pick(possible_locations)
-	var/turf/nloc = locate(rand(TRANSITIONEDGE, world.maxx-TRANSITIONEDGE), rand(TRANSITIONEDGE, world.maxy-TRANSITIONEDGE),newz)
-	if(!isspaceturf(nloc))
-		explosion(nloc, 1, 2, 3)
-	playsound(loc,'sound/effects/rocket.ogg',100)
-	forceMove(nloc)
+	if(newz)
+		var/turf/nloc = locate(rand(TRANSITIONEDGE, world.maxx-TRANSITIONEDGE), rand(TRANSITIONEDGE, world.maxy-TRANSITIONEDGE), newz)
+		if(!isspaceturf(nloc))
+			explosion(nloc, 1, 2, 3)
+		playsound(loc,'sound/effects/rocket.ogg',100)
+		forceMove(nloc)
 
 //Don't use these for in-round leaving
 // don't tell me what to do chinsky
