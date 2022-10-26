@@ -45,14 +45,13 @@ INITIALIZE_IMMEDIATE(/obj/abstract/level_data)
 	else
 		SSzlevels.levels_by_id[level_id] = src
 
-	if(take_starlight_ambience)
-		ambient_light_level = config.starlight
-		ambient_light_color = SSskybox.background_color
-
 	if(SSzlevels.initialized && !defer_level_setup)
 		setup_level_data()
 
 /obj/abstract/level_data/proc/setup_level_data()
+	if(take_starlight_ambience)
+		ambient_light_level = config.starlight
+		ambient_light_color = SSskybox.background_color
 	if(base_turf)
 		SSzlevels.base_turf_by_z["[my_z]"] = base_turf
 	if(level_flags & ZLEVEL_STATION)
@@ -90,9 +89,9 @@ INITIALIZE_IMMEDIATE(/obj/abstract/level_data)
 		neighbor.add_connected_levels(found)
 
 /obj/abstract/level_data/proc/build_exterior_atmosphere()
-	if(islist(exterior_atmosphere))
-		var/list/exterior_atmos_composition = exterior_atmosphere
-		exterior_atmosphere = new
+	var/list/exterior_atmos_composition = exterior_atmosphere
+	exterior_atmosphere = new
+	if(islist(exterior_atmos_composition))
 		for(var/gas in exterior_atmos_composition)
 			exterior_atmosphere.adjust_gas(gas, exterior_atmos_composition[gas], FALSE)
 		exterior_atmosphere.temperature = exterior_atmos_temp
