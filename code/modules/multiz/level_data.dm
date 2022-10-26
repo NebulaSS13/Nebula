@@ -5,12 +5,20 @@
 #define ZLEVEL_SEALED  BITFLAG(4)
 
 /obj/abstract/level_data
+	/// z-level associated with this datum
 	var/my_z
+	/// A unique identifier for the level, used for SSzlevels looup
 	var/level_id
-	var/level_name
+	/// The base turf of the level (space, rock, etc)
 	var/base_turf
+	/// A list of ids that this level connects to horizontally.
 	var/list/connects_to
+	/// Various flags indicating what this level functions as.
 	var/level_flags
+	/// Temperature of standard exterior atmosphere.
+	var/exterior_atmos_temp = T20C
+	/// Gaxmix datum returned to exterior return_air. Set to assoc list of material to moles to initialize the gas datum.
+	var/datum/gas_mixture/exterior_atmosphere
 
 INITIALIZE_IMMEDIATE(/obj/abstract/level_data)
 /obj/abstract/level_data/Initialize()
@@ -64,7 +72,25 @@ INITIALIZE_IMMEDIATE(/obj/abstract/level_data)
 		var/obj/abstract/level_data/neighbor = SSzlevels.levels_by_id[other_id] 
 		neighbor.add_connected_levels(found)
 
-// Mappable subtypes.
+/obj/abstract/level_data/proc/build_exterior_atmosphere()
+	if(islist(exterior_atmosphere))
+		var/list/exterior_atmos_composition = exterior_atmosphere
+		exterior_atmosphere = new
+		for(var/gas in exterior_atmos_composition)
+			exterior_atmosphere.adjust_gas(gas, exterior_atmos_composition[gas], FALSE)
+		exterior_atmosphere.temperature = exterior_atmos_temp
+		exterior_atmosphere.update_values()
+		exterior_atmosphere.check_tile_graphic()
+
+/obj/abstract/level_data/proc/get_exterior_atmosphere()
+	if(exterior_atmosphere)
+		var/datum/gas_mixture/gas = new
+		gas.copy_from(exterior_atmosphere)
+		return gas
+
+/*
+ * Mappable subtypes.
+ */
 /obj/abstract/level_data/main_level
 	name = "Main Station Level"
 	level_flags = (ZLEVEL_STATION|ZLEVEL_CONTACT|ZLEVEL_PLAYER)
@@ -86,3 +112,11 @@ INITIALIZE_IMMEDIATE(/obj/abstract/level_data)
 // Used by the subsystem to populate the full z-level list during init.
 /obj/abstract/level_data/filler
 	name = "Filler Level"
+
+/obj/abstract/level_data/planet
+	name = "Planetary Surface"
+	exterior_atmosphere = list(
+		/decl/material/gas/oxygen =   MOLES_O2STANDARD,
+		/decl/material/gas/nitrogen = MOLES_N2STANDARD
+	)
+	exterior_atmos_temp = T20C

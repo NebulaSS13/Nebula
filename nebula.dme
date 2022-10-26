@@ -3533,7 +3533,6 @@
 #include "maps\~mapsystem\maps_antagonism.dm"
 #include "maps\~mapsystem\maps_areas.dm"
 #include "maps\~mapsystem\maps_currency.dm"
-#include "maps\~mapsystem\maps_environment.dm"
 #include "maps\~mapsystem\maps_jobs.dm"
 #include "maps\~mapsystem\maps_unit_testing.dm"
 #include "maps\~unit_tests\unit_testing.dm"

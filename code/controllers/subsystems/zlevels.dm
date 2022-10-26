@@ -1,7 +1,7 @@
 SUBSYSTEM_DEF(zlevels)
 	name = "Z-Levels"
 	flags = SS_NO_FIRE
-	init_order = SS_INIT_MISC_LATE
+	init_order = SS_INIT_ZLEVELS
 
 	/// Associative list of levels by strict z-level
 	var/list/levels_by_z =  list()
