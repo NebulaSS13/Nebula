@@ -1,6 +1,3 @@
-/obj/abstract/level_data/unit_test
-	level_flags = ZLEVEL_SEALED
-
 /*******************
 * Unit Test Runner *
 *******************/

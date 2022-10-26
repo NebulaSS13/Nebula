@@ -18,8 +18,6 @@
 
 // Bit faster than return_air() for exoplanet exterior turfs
 /turf/exterior/get_air_graphic()
-	if(owner)
-		return owner.atmosphere?.graphic
 	var/obj/abstract/level_data/level = SSzlevels.levels_by_z["[z]"]
 	return level?.exterior_atmosphere?.graphic
 
@@ -84,14 +82,10 @@
 	. = ..()
 
 /turf/exterior/return_air()
-	var/datum/gas_mixture/gas
-	if(owner)
-		gas = new
-		gas.copy_from(owner.atmosphere)
-	else
-		var/obj/abstract/level_data/level = SSzlevels.levels_by_z["[z]"]
-		gas = level?.get_exterior_atmosphere()
-
+	var/obj/abstract/level_data/level = SSzlevels.levels_by_z["[z]"]
+	var/datum/gas_mixture/gas = level?.get_exterior_atmosphere()
+	if(!gas)
+		return
 	var/initial_temperature = gas.temperature
 	if(weather)
 		initial_temperature = weather.adjust_temperature(initial_temperature)

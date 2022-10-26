@@ -1,5 +1,9 @@
 //Generates initial generic alien plants
-/obj/effect/overmap/visitable/sector/exoplanet/proc/generate_flora(var/temperature)
+/obj/effect/overmap/visitable/sector/exoplanet/proc/generate_flora()
+
+	var/obj/abstract/level_data/level_data = zlevels[1]
+	var/temperature = level_data?.exterior_atmosphere?.temperature || T20C
+
 	for(var/i = 1 to flora_diversity)
 		var/datum/seed/S = new()
 		S.randomize(temperature)
@@ -38,13 +42,19 @@
 
 //Adapts seeds to this planet's atmopshere. Any special planet-speicific adaptations should go here too
 /obj/effect/overmap/visitable/sector/exoplanet/proc/adapt_seed(var/datum/seed/S)
-	S.set_trait(TRAIT_IDEAL_HEAT,          atmosphere.temperature + rand(-5,5),800,70)
+
+	var/obj/abstract/level_data/level_data = zlevels[1]
+	var/datum/gas_mixture/atmosphere = level_data?.exterior_atmosphere
+	var/atmosphere_temperature = atmosphere?.temperature || T20C
+	var/atmosphere_pressure = atmosphere?.return_pressure() || 0
+
+	S.set_trait(TRAIT_IDEAL_HEAT,          atmosphere_temperature + rand(-5,5),800,70)
 	S.set_trait(TRAIT_HEAT_TOLERANCE,      S.get_trait(TRAIT_HEAT_TOLERANCE) + rand(-5,5),800,70)
-	S.set_trait(TRAIT_LOWKPA_TOLERANCE,    atmosphere.return_pressure() + rand(-5,-50),80,0)
-	S.set_trait(TRAIT_HIGHKPA_TOLERANCE,   atmosphere.return_pressure() + rand(5,50),500,110)
+	S.set_trait(TRAIT_LOWKPA_TOLERANCE,    atmosphere_pressure + rand(-5,-50),80,0)
+	S.set_trait(TRAIT_HIGHKPA_TOLERANCE,   atmosphere_pressure + rand(5,50),500,110)
 	if(S.exude_gasses)
 		S.exude_gasses -= badgas
-	if(atmosphere && length(atmosphere.gas))
+	if(length(atmosphere?.gas))
 		if(S.consume_gasses)
 			S.consume_gasses = list(pick(atmosphere.gas)) // ensure that if the plant consumes a gas, the atmosphere will have it
 		for(var/g in atmosphere.gas)
@@ -52,7 +62,7 @@
 			if(mat.gas_flags & XGM_GAS_CONTAMINANT)
 				S.set_trait(TRAIT_TOXINS_TOLERANCE, rand(10,15))
 	if(prob(50))
-		var/chem_type = SSmaterials.get_random_chem(TRUE, atmosphere ? atmosphere.temperature : T0C)
+		var/chem_type = SSmaterials.get_random_chem(TRUE, atmosphere?.temperature || T0C)
 		if(chem_type)
 			var/nutriment = S.chems[/decl/material/liquid/nutriment]
 			S.chems.Cut()

@@ -20,8 +20,9 @@
 		water.appearance_flags = PIXEL_SCALE
 		water.transform = water.transform.Turn(rand(0,360))
 		skybox_image.overlays += water
-	
-	if(atmosphere && atmosphere.return_pressure() > SOUND_MINIMUM_PRESSURE)
+
+	var/obj/abstract/level_data/level_data = zlevels[1]	
+	if(level_data.exterior_atmosphere?.return_pressure() > SOUND_MINIMUM_PRESSURE)
 
 		var/atmo_color = get_atmosphere_color()
 		if(!atmo_color)
@@ -62,8 +63,9 @@
 
 /obj/effect/overmap/visitable/sector/exoplanet/proc/get_atmosphere_color()
 	var/list/colors = list()
-	for(var/g in atmosphere.gas)
-		var/decl/material/mat = GET_DECL(g)
-		colors += mat.color
+	for(var/obj/abstract/level_data/level_data in zlevels)	
+		for(var/g in level_data.exterior_atmosphere?.gas)
+			var/decl/material/mat = GET_DECL(g)
+			colors += mat.color
 	if(colors.len)
 		return MixColors(colors)
