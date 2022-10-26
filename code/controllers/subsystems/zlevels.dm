@@ -61,6 +61,10 @@ SUBSYSTEM_DEF(zlevels)
 	if(level.base_turf_type && level.base_turf_type != world.turf)
 		for(var/turf/T as anything in block(locate(1, 1, .),locate(world.maxx, world.maxy, level.my_z)))
 			T.ChangeTurf(level.base_turf_type)
+	if(level.base_area_type && level.base_area_type != world.area)
+		var/area/A = new level.base_area_type
+		for(var/turf/T as anything in block(locate(1, 1, .),locate(world.maxx, world.maxy, level.my_z)))
+			ChangeArea(T, A)
 	return level
 
 /datum/controller/subsystem/zlevels/proc/levels_are_z_connected(var/za, var/zb)

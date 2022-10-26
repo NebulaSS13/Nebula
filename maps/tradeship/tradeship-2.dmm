@@ -5295,7 +5295,9 @@
 /turf/simulated/floor/tiled,
 /area/ship/trade/crew/saloon)
 "xh" = (
-/obj/abstract/level_data/main_level,
+/obj/abstract/level_data/main_level{
+	name = "Tradeship Habitation Deck";
+},
 /turf/space,
 /area/space)
 "xn" = (

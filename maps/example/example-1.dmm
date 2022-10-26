@@ -500,7 +500,9 @@
 /turf/simulated/floor/tiled/dark/monotile,
 /area/example/first)
 "xq" = (
-/obj/abstract/level_data/main_level,
+/obj/abstract/level_data/main_level{
+	name = "Example First Deck";
+},
 /turf/space,
 /area/space)
 "xR" = (

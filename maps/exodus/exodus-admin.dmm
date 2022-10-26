@@ -3205,7 +3205,9 @@
 	},
 /area/tdome/tdomeadmin)
 "sKA" = (
-/obj/abstract/level_data/admin_level,
+/obj/abstract/level_data/admin_level{
+	name = "Centcomm";
+},
 /turf/space,
 /area/space)
 "sMD" = (
