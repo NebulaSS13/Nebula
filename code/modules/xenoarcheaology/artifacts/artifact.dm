@@ -67,7 +67,7 @@
 			touched(G.assailant)
 
 	var/datum/gas_mixture/enivonment = T.return_air()
-	if(enivonment.return_pressure() >= SOUND_MINIMUM_PRESSURE)
+	if(enivonment?.return_pressure() >= SOUND_MINIMUM_PRESSURE)
 		check_triggers(/datum/artifact_trigger/proc/on_gas_exposure, enivonment)
 
 	for(var/datum/artifact_effect/effect in list(my_effect, secondary_effect))
