@@ -16,7 +16,7 @@
 	has_trees = FALSE
 	spawn_weight = 50	// These are pretty boring
 
-/obj/effect/overmap/visitable/sector/exoplanet/barren/generate_flora(var/temperature)
+/obj/effect/overmap/visitable/sector/exoplanet/barren/generate_flora()
 	if(prob(10))
 		flora_diversity = 1
 	..()

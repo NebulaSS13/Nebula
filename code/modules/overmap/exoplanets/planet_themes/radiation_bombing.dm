@@ -2,9 +2,12 @@
 	name = "Radiation Bombardment"
 
 /datum/exoplanet_theme/radiation_bombing/adjust_atmosphere(obj/effect/overmap/visitable/sector/exoplanet/E)
-	if(E.atmosphere)
-		E.atmosphere.temperature += rand(20, 100)
-		E.atmosphere.update_values()
+	var/add_temp = rand(20, 100)
+	for(var/obj/abstract/level_data/level_data in E.zlevels)
+		level_data.exterior_atmos_temp += add_temp
+		if(level_data.exterior_atmosphere)
+			level_data.exterior_atmosphere.temperature = level_data.exterior_atmos_temp
+			level_data.exterior_atmosphere.update_values()
 
 /datum/exoplanet_theme/radiation_bombing/get_sensor_data()
 	return "Hotspots of radiation detected."

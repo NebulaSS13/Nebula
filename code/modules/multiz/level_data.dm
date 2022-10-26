@@ -110,12 +110,6 @@ INITIALIZE_IMMEDIATE(/obj/abstract/level_data)
 	name = "Player Level"
 	level_flags = (ZLEVEL_CONTACT|ZLEVEL_PLAYER)
 
-#undef ZLEVEL_STATION
-#undef ZLEVEL_ADMIN
-#undef ZLEVEL_CONTACT
-#undef ZLEVEL_PLAYER
-#undef ZLEVEL_SEALED
-
 // Used by the subsystem to populate the full z-level list during init.
 /obj/abstract/level_data/filler
 	name = "Filler Level"
@@ -126,14 +120,24 @@ INITIALIZE_IMMEDIATE(/obj/abstract/level_data)
 /obj/abstract/level_data/space
 	name = "Space Level"
 
-/obj/abstract/level_data/planet
+/obj/abstract/level_data/exoplanet
 	name = "Planetary Surface"
 	exterior_atmosphere = list(
 		/decl/material/gas/oxygen =   MOLES_O2STANDARD,
 		/decl/material/gas/nitrogen = MOLES_N2STANDARD
 	)
 	exterior_atmos_temp = T20C
+	level_flags = ZLEVEL_SEALED
+
+/obj/abstract/level_data/unit_test
+	level_flags =(ZLEVEL_CONTACT|ZLEVEL_PLAYER|ZLEVEL_SEALED)
 
 // Used as a dummy z-level for the overmap.
 /obj/abstract/level_data/overmap
 	name = "Sensor Display"
+
+#undef ZLEVEL_STATION
+#undef ZLEVEL_ADMIN
+#undef ZLEVEL_CONTACT
+#undef ZLEVEL_PLAYER
+#undef ZLEVEL_SEALED
