@@ -103,7 +103,7 @@ var/global/dmm_suite/preloader/_preloader = new
 			var/ycrd = text2num(dmmRegex.group[4]) + y_offset - 1
 			var/zcrd = text2num(dmmRegex.group[5]) + z_offset - 1
 
-			var/is_connected_to_lower_levels = ARE_Z_CONNECTED(zcrd, z_offset)
+			var/is_connected_to_lower_levels = SSzlevels.levels_are_z_connected(zcrd, z_offset)
 			var/is_on_an_existing_zlevel = zcrd <= world.maxz
 
 			if (is_on_an_existing_zlevel && !is_connected_to_lower_levels)

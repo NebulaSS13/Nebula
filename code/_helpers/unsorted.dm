@@ -364,7 +364,7 @@ Turf and target are seperate in case you want to teleport some distance from a t
 
 /proc/get_valid_silicon_zs(z)
 	if(z)
-		return GetConnectedZlevels(z)
+		return SSzlevels.get_connected_levels(z)
 	return list() //We return an empty list, because we are apparently in nullspace
 
 //Returns a list of all mobs with their name

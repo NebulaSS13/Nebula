@@ -25,23 +25,6 @@ var/global/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 
 	// TODO: move all the lobby stuff onto this handler.
 	var/lobby_handler = /decl/lobby_handler
-
-	var/list/station_levels = list() // Z-levels the station exists on
-	var/list/admin_levels =   list() // Z-levels for admin functionality (Centcom, shuttle transit, etc)
-	var/list/contact_levels = list() // Z-levels that can be contacted from the station, for eg announcements
-	var/list/player_levels =  list() // Z-levels a character can typically reach
-	var/list/sealed_levels =  list() // Z-levels that don't allow random transit at edge
-
-	var/list/map_levels              // Z-levels available to various consoles, such as the crew monitor. Defaults to station_levels if unset.
-
-	var/list/base_turf_by_z = list() // Custom base turf by Z-level. Defaults to world.turf for unlisted Z-levels
-
-	var/base_floor_type = /turf/simulated/floor/airless // The turf type used when generating floors between Z-levels at startup.
-	var/base_floor_area                                 // Replacement area, if a base_floor_type is generated. Leave blank to skip.
-
-	//This list contains the z-level numbers which can be accessed via space travel and the percentile chances to get there.
-	var/list/accessible_z_levels = list()
-
 	var/list/allowed_jobs	       //Job datums to use.
 	                               //Works a lot better so if we get to a point where three-ish maps are used
 	                               //We don't have to C&P ones that are only common between two of them
@@ -203,8 +186,8 @@ var/global/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 		allowed_spawns -= spawn_type
 		allowed_spawns += GET_DECL(spawn_type)
 
-	if(!map_levels)
-		map_levels = station_levels.Copy()
+	if(!SSzlevels.map_levels)
+		SSzlevels.map_levels = SSzlevels.station_levels.Copy()
 
 	if(!LAZYLEN(planet_size))
 		planet_size = list(world.maxx, world.maxy)
@@ -274,7 +257,7 @@ var/global/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 			world.maxy = planet_size[2]
 	for(var/i = 0, i < num_exoplanets, i++)
 		var/exoplanet_type = pick_exoplanet()
-		INCREMENT_WORLD_Z_SIZE
+		SSzlevels.increment_world_z_size()
 		var/obj/effect/overmap/visitable/sector/exoplanet/new_planet = new exoplanet_type(null, world.maxz)
 		new_planet.build_level(planet_size[1], planet_size[2])
 
@@ -303,7 +286,7 @@ var/global/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 
 // By default transition randomly to another zlevel
 /datum/map/proc/get_transit_zlevel(var/current_z_level)
-	var/list/candidates = global.using_map.accessible_z_levels.Copy()
+	var/list/candidates = SSzlevels.accessible_z_levels.Copy()
 	candidates.Remove(num2text(current_z_level))
 
 	if(!candidates.len)
@@ -444,15 +427,3 @@ var/global/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 /datum/map/proc/populate_overmap_events()
 	for(var/overmap_id in global.overmaps_by_name)
 		SSmapping.overmap_event_handler.create_events(global.overmaps_by_name[overmap_id])
-
-/datum/map/proc/get_zlevel_name(var/z)
-	z = "[z]"
-	if(!z)
-		return "Unknown Sector"
-	var/obj/abstract/level_data/level = global.levels_by_z[z]
-	if(level?.level_name)
-		return level.level_name
-	var/obj/effect/overmap/overmap_entity = global.overmap_sectors[z]
-	if(overmap_entity?.name)
-		return overmap_entity.name
-	return "Sector #[z]"

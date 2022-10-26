@@ -27,7 +27,7 @@
 				computer.show_error(user, "Unable to contact the supply shuttle.")
 			return FALSE
 		var/obj/physical_router = net.router.holder
-		if(!ARE_Z_CONNECTED(shuttle.waypoint_station.z, physical_router.z))
+		if(!SSzlevels.levels_are_z_connected(shuttle.waypoint_station.z, physical_router.z))
 			if(loud)
 				computer.show_error(user, "Unable to contact a supply shuttle serving your location.")
 			return FALSE

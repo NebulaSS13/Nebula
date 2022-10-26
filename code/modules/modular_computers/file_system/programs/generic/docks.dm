@@ -32,7 +32,7 @@
 /datum/nano_module/program/docking/proc/refresh_docks()
 	docking_controllers.Cut()
 	docking_beacons.Cut()
-	var/list/zlevels = GetConnectedZlevels(get_host_z())
+	var/list/zlevels = SSzlevels.get_connected_levels(get_host_z())
 	for(var/obj/machinery/embedded_controller/radio/airlock/docking_port/D in SSmachines.machinery)
 		if(D.z in zlevels)
 			var/shuttleside = 0

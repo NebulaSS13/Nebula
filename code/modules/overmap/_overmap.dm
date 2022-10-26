@@ -56,11 +56,11 @@
 		
 /datum/overmap/proc/generate_overmap()
 	testing("Building overmap [name]...")
-	INCREMENT_WORLD_Z_SIZE
+	SSzlevels.increment_world_z_size()
 	assigned_z = world.maxz
 	testing("Putting [name] on [assigned_z].")
 	populate_overmap()
-	global.using_map.sealed_levels |= assigned_z
+	SSzlevels.sealed_levels |= assigned_z
 	. = TRUE
 
 /datum/overmap/proc/travel(var/turf/space/T, var/atom/movable/A)

@@ -164,7 +164,7 @@
 	. = ..()
 	if(!.)
 		return FALSE
-	if(!living_observers_present(GetConnectedZlevels(z)))
+	if(!living_observers_present(SSzlevels.get_connected_levels(z)))
 		return
 	//Health
 	if(stat == DEAD)

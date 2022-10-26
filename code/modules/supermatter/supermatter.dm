@@ -300,7 +300,7 @@ var/global/list/supermatter_delam_accent_sounds = list(
 	if(!istype(TS))
 		return
 
-	var/list/affected_z = GetConnectedZlevels(TS.z)
+	var/list/affected_z = SSzlevels.get_connected_levels(TS.z)
 
 	// Effect 1: Radiation, weakening to all mobs on Z level
 	for(var/z in affected_z)

@@ -86,7 +86,7 @@ var/global/list/shuttle_landmarks = list()
 		var/list/translation = get_turf_translation(get_turf(shuttle.current_location), get_turf(src), A.contents)
 		if(check_collision(base_area, list_values(translation)))
 			return FALSE
-	var/conn = GetConnectedZlevels(z)
+	var/conn = SSzlevels.get_connected_levels(z)
 	for(var/w in (z - shuttle.multiz) to z)
 		if(!(w in conn))
 			return FALSE
