@@ -19,9 +19,13 @@
 	var/exterior_atmos_temp = T20C
 	/// Gaxmix datum returned to exterior return_air. Set to assoc list of material to moles to initialize the gas datum.
 	var/datum/gas_mixture/exterior_atmosphere
+	/// Default turf for this level on creation (if created via z-level incrementing)
+	var/base_turf_type = /turf/space
+	/// Default area for this level on creation (as above)
+	var/base_area_type = /area/space
 
 INITIALIZE_IMMEDIATE(/obj/abstract/level_data)
-/obj/abstract/level_data/Initialize()
+/obj/abstract/level_data/Initialize(var/ml, var/defer_level_setup = FALSE)
 	. = ..()
 	my_z = z
 	forceMove(null)
@@ -35,9 +39,12 @@ INITIALIZE_IMMEDIATE(/obj/abstract/level_data)
 	else
 		SSzlevels.levels_by_id[level_id] = src
 
+	if(SSzlevels.initialized && !defer_level_setup)
+		setup_level_data()
+
+/obj/abstract/level_data/proc/setup_level_data()
 	if(base_turf)
 		SSzlevels.base_turf_by_z["[my_z]"] = base_turf
-
 	if(level_flags & ZLEVEL_STATION)
 		SSzlevels.station_levels |= my_z
 	if(level_flags & ZLEVEL_ADMIN)
@@ -48,7 +55,7 @@ INITIALIZE_IMMEDIATE(/obj/abstract/level_data)
 		SSzlevels.player_levels  |= my_z
 	if(level_flags & ZLEVEL_SEALED)
 		SSzlevels.sealed_levels  |= my_z
-	forceMove(null)
+	build_exterior_atmosphere()
 
 /obj/abstract/level_data/Destroy(var/force)
 	if(force)
@@ -113,6 +120,12 @@ INITIALIZE_IMMEDIATE(/obj/abstract/level_data)
 /obj/abstract/level_data/filler
 	name = "Filler Level"
 
+/obj/abstract/level_data/empty
+	name = "Empty Level"
+
+/obj/abstract/level_data/space
+	name = "Space Level"
+
 /obj/abstract/level_data/planet
 	name = "Planetary Surface"
 	exterior_atmosphere = list(
@@ -120,3 +133,7 @@ INITIALIZE_IMMEDIATE(/obj/abstract/level_data)
 		/decl/material/gas/nitrogen = MOLES_N2STANDARD
 	)
 	exterior_atmos_temp = T20C
+
+// Used as a dummy z-level for the overmap.
+/obj/abstract/level_data/overmap
+	name = "Sensor Display"

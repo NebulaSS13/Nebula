@@ -20,7 +20,8 @@
 /turf/exterior/get_air_graphic()
 	if(owner)
 		return owner.atmosphere?.graphic
-	return global.using_map.exterior_atmosphere?.graphic
+	var/obj/abstract/level_data/level = SSzlevels.levels_by_z["[z]"]
+	return level?.exterior_atmosphere?.graphic
 
 /turf/exterior/Initialize(mapload, no_update_icon = FALSE)
 
@@ -88,7 +89,8 @@
 		gas = new
 		gas.copy_from(owner.atmosphere)
 	else
-		gas = global.using_map.get_exterior_atmosphere()
+		var/obj/abstract/level_data/level = SSzlevels.levels_by_z["[z]"]
+		gas = level?.get_exterior_atmosphere()
 
 	var/initial_temperature = gas.temperature
 	if(weather)

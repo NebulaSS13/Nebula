@@ -8,17 +8,17 @@
 
 	var/overmap_edge_type = /turf/unsimulated/map/edge
 	var/overmap_turf_type = /turf/unsimulated/map
-	var/map_turf_type = /turf/space
-	var/map_area_type = /area/overmap
+	var/overmap_area_type = /area/overmap
+	var/empty_level_type =  /obj/abstract/level_data/space
 
 	var/list/valid_event_types
+
+	/// list used to cache empty zlevels to avoid needless z-stack bloat
+	var/list/cached_temporary_sectors = list()
 
 /datum/overmap/New(var/_name)
 
 	name = _name
-
-	if(!map_turf_type)
-		map_turf_type = world.turf
 
 	if(!name)
 		PRINT_STACK_TRACE("Unnamed overmap datum instantiated: [type]")
@@ -45,7 +45,7 @@
 	..()
 
 /datum/overmap/proc/populate_overmap()
-	var/area/overmap/A = new map_area_type
+	var/area/overmap/A = new overmap_area_type
 	for(var/square in block(locate(1, 1, assigned_z), locate(map_size_x, map_size_y, assigned_z)))
 		var/turf/T = square
 		if(T.x == map_size_x || T.y == map_size_y)
@@ -56,7 +56,7 @@
 		
 /datum/overmap/proc/generate_overmap()
 	testing("Building overmap [name]...")
-	SSzlevels.increment_world_z_size()
+	SSzlevels.increment_world_z_size(/obj/abstract/level_data/overmap)
 	assigned_z = world.maxz
 	testing("Putting [name] on [assigned_z].")
 	populate_overmap()
@@ -122,25 +122,33 @@
 			source.forceMove(null)
 			if(!QDELETED(source))
 				testing("Caching [M] for future use")
-				if(!(map_turf_type in global.cached_temporary_sectors))
-					global.cached_temporary_sectors[map_turf_type] = list()
-				global.cached_temporary_sectors[map_turf_type] |= source
+				if(!length(cached_temporary_sectors[empty_level_type]))
+					cached_temporary_sectors[empty_level_type] = list()
+				cached_temporary_sectors[empty_level_type] |= source
 
 /datum/overmap/proc/create_temporary_sector(x,y)
 
+	// There's already a sector at this x/y
 	var/obj/effect/overmap/visitable/sector/temporary/res = locate(x, y, assigned_z)
 	if(istype(res) && !QDELETED(res))
 		return res
 
-	if(length(global.cached_temporary_sectors[map_turf_type]))
-		res = pick(global.cached_temporary_sectors[map_turf_type])
-
-		global.cached_temporary_sectors[map_turf_type] -= res
-		if(!length(global.cached_temporary_sectors[map_turf_type]))
-			global.cached_temporary_sectors -= map_turf_type
-
+	// We might have a sector cached we can give them.
+	if(length(cached_temporary_sectors[empty_level_type]))
+		res = pick_n_take(cached_temporary_sectors[empty_level_type])
+		if(!length(cached_temporary_sectors[empty_level_type]))
+			cached_temporary_sectors -= empty_level_type
 		if(istype(res) && !QDELETED(res))
 			res.forceMove(locate(x, y, assigned_z))
 			return res
 
-	return new /obj/effect/overmap/visitable/sector/temporary(null, x, y, get_empty_zlevel(map_turf_type))
+	// Create a new one.
+	var/obj/abstract/level_data/level = SSzlevels.increment_world_z_size(empty_level_type)
+	return new /obj/effect/overmap/visitable/sector/temporary(null, x, y, level.my_z)
+
+/datum/overmap/proc/discard_temporary_sector(var/obj/effect/overmap/visitable/sector/temporary/sector)
+	if(!length(cached_temporary_sectors[empty_level_type]))
+		return
+	cached_temporary_sectors[empty_level_type] -= sector
+	if(!length(cached_temporary_sectors[empty_level_type]))
+		cached_temporary_sectors -= empty_level_type
