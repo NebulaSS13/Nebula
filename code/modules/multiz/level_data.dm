@@ -23,6 +23,12 @@
 	var/base_turf_type = /turf/space
 	/// Default area for this level on creation (as above)
 	var/base_area_type = /area/space
+	/// Set to false to leave dark
+	var/take_starlight_ambience = TRUE
+	/// This default makes turfs not generate light. Adjust to have exterior areas be lit.
+	var/ambient_light_level = 0
+	/// Colour of ambient light.
+	var/ambient_light_color = COLOR_WHITE
 
 INITIALIZE_IMMEDIATE(/obj/abstract/level_data)
 /obj/abstract/level_data/Initialize(var/ml, var/defer_level_setup = FALSE)
@@ -38,6 +44,10 @@ INITIALIZE_IMMEDIATE(/obj/abstract/level_data)
 		PRINT_STACK_TRACE("Duplicate level_id '[level_id]' for z[my_z].")
 	else
 		SSzlevels.levels_by_id[level_id] = src
+
+	if(take_starlight_ambience)
+		ambient_light_level = config.starlight
+		ambient_light_color = SSskybox.background_color
 
 	if(SSzlevels.initialized && !defer_level_setup)
 		setup_level_data()
@@ -128,13 +138,16 @@ INITIALIZE_IMMEDIATE(/obj/abstract/level_data)
 	)
 	exterior_atmos_temp = T20C
 	level_flags = ZLEVEL_SEALED
+	take_starlight_ambience = FALSE // This is set up by the exoplanet object.
 
 /obj/abstract/level_data/unit_test
-	level_flags =(ZLEVEL_CONTACT|ZLEVEL_PLAYER|ZLEVEL_SEALED)
+	name = "Test Area"
+	level_flags = (ZLEVEL_CONTACT|ZLEVEL_PLAYER|ZLEVEL_SEALED)
 
 // Used as a dummy z-level for the overmap.
 /obj/abstract/level_data/overmap
 	name = "Sensor Display"
+	take_starlight_ambience = FALSE // Overmap doesn't care about ambient lighting
 
 #undef ZLEVEL_STATION
 #undef ZLEVEL_ADMIN

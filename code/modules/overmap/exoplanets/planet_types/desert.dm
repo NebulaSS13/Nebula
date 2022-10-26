@@ -18,7 +18,8 @@
 
 /obj/effect/overmap/visitable/sector/exoplanet/desert/generate_map()
 	if(prob(70))
-		lightlevel = rand(5,10)/10	//deserts are usually :lit:
+		var/obj/abstract/level_data/level_data = zlevels[1]
+		level_data.ambient_light_level = rand(5,10)/10	//deserts are usually :lit:
 	..()
 
 /obj/effect/overmap/visitable/sector/exoplanet/desert/get_target_temperature()
