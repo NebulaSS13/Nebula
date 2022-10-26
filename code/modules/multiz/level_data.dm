@@ -4,9 +4,6 @@
 #define ZLEVEL_PLAYER  BITFLAG(3)
 #define ZLEVEL_SEALED  BITFLAG(4)
 
-var/global/list/levels_by_z =  list()
-var/global/list/levels_by_id = list()
-
 /obj/abstract/level_data
 	var/my_z
 	var/level_id
@@ -20,29 +17,30 @@ INITIALIZE_IMMEDIATE(/obj/abstract/level_data)
 	. = ..()
 	my_z = z
 	forceMove(null)
-	if(global.levels_by_z["[my_z]"])
+	if(SSzlevels.levels_by_z["[my_z]"])
 		PRINT_STACK_TRACE("Duplicate level data created for z[z].")
-	global.levels_by_z["[my_z]"] = src
+	SSzlevels.levels_by_z["[my_z]"] = src
 	if(!level_id)
 		level_id = "leveldata_[my_z]_[sequential_id(/obj/abstract/level_data)]"
-	if(level_id in global.levels_by_id)
+	if(level_id in SSzlevels.levels_by_id)
 		PRINT_STACK_TRACE("Duplicate level_id '[level_id]' for z[my_z].")
 	else
-		global.levels_by_id[level_id] = src
+		SSzlevels.levels_by_id[level_id] = src
 
 	if(base_turf)
-		global.using_map.base_turf_by_z["[my_z]"] = base_turf
+		SSzlevels.base_turf_by_z["[my_z]"] = base_turf
 
 	if(level_flags & ZLEVEL_STATION)
-		global.using_map.station_levels |= my_z
+		SSzlevels.station_levels |= my_z
 	if(level_flags & ZLEVEL_ADMIN)
-		global.using_map.admin_levels   |= my_z
+		SSzlevels.admin_levels   |= my_z
 	if(level_flags & ZLEVEL_CONTACT)
-		global.using_map.contact_levels |= my_z
+		SSzlevels.contact_levels |= my_z
 	if(level_flags & ZLEVEL_PLAYER)
-		global.using_map.player_levels  |= my_z
+		SSzlevels.player_levels  |= my_z
 	if(level_flags & ZLEVEL_SEALED)
-		global.using_map.sealed_levels  |= my_z
+		SSzlevels.sealed_levels  |= my_z
+	forceMove(null)
 
 /obj/abstract/level_data/Destroy(var/force)
 	if(force)
@@ -52,7 +50,7 @@ INITIALIZE_IMMEDIATE(/obj/abstract/level_data)
 
 /obj/abstract/level_data/proc/find_connected_levels(var/list/found)
 	for(var/other_id in connects_to)
-		var/obj/abstract/level_data/neighbor = global.levels_by_id[other_id] 
+		var/obj/abstract/level_data/neighbor = SSzlevels.levels_by_id[other_id] 
 		neighbor.add_connected_levels(found)
 
 /obj/abstract/level_data/proc/add_connected_levels(var/list/found)
@@ -63,7 +61,7 @@ INITIALIZE_IMMEDIATE(/obj/abstract/level_data)
 	if(!length(connects_to))
 		return
 	for(var/other_id in connects_to)
-		var/obj/abstract/level_data/neighbor = global.levels_by_id[other_id] 
+		var/obj/abstract/level_data/neighbor = SSzlevels.levels_by_id[other_id] 
 		neighbor.add_connected_levels(found)
 
 // Mappable subtypes.
@@ -84,3 +82,7 @@ INITIALIZE_IMMEDIATE(/obj/abstract/level_data)
 #undef ZLEVEL_CONTACT
 #undef ZLEVEL_PLAYER
 #undef ZLEVEL_SEALED
+
+// Used by the subsystem to populate the full z-level list during init.
+/obj/abstract/level_data/filler
+	name = "Filler Level"

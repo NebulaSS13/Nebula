@@ -324,7 +324,7 @@ var/global/datum/controller/radio/radio_controller
 /datum/radio_frequency/proc/send_to_filter(obj/source, datum/signal/signal, var/radio_filter, var/turf/start_point = null, var/range = null)
 	var/list/z_levels
 	if(start_point)
-		z_levels = GetConnectedZlevels(start_point.z)
+		z_levels = SSzlevels.get_connected_levels(start_point.z)
 
 	for(var/obj/device in devices[radio_filter])
 		if(device == source)

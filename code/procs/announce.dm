@@ -31,7 +31,7 @@ var/global/datum/announcement/minor/minor_announcement = new(new_sound = 'sound/
 	log = do_log
 	newscast = do_newscast
 
-/datum/announcement/proc/Announce(var/message, var/new_title = "", var/new_sound = null, var/do_newscast = newscast, var/msg_sanitized = 0, var/zlevels = global.using_map.contact_levels)
+/datum/announcement/proc/Announce(var/message, var/new_title = "", var/new_sound = null, var/do_newscast = newscast, var/msg_sanitized = 0, var/zlevels = SSzlevels.contact_levels)
 	if(!message)
 		return
 
@@ -50,7 +50,7 @@ var/global/datum/announcement/minor/minor_announcement = new(new_sound = 'sound/
 
 	var/msg = FormMessage(message, message_title)
 	for(var/mob/M in global.player_list)
-		if((get_z(M) in (zlevels | global.using_map.admin_levels)) && !isnewplayer(M) && !isdeaf(M))
+		if((get_z(M) in (zlevels | SSzlevels.admin_levels)) && !isnewplayer(M) && !isdeaf(M))
 			to_chat(M, msg)
 			if(message_sound)
 				sound_to(M, message_sound)

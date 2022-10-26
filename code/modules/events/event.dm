@@ -157,7 +157,7 @@
 	startedAt = world.time
 
 	if(!affecting_z)
-		affecting_z = global.using_map.station_levels
+		affecting_z = SSzlevels.station_levels
 
 	setup()
 	..()

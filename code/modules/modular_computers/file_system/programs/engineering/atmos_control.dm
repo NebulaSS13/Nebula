@@ -71,7 +71,7 @@
 		var/list/alarmsDanger = list()
 
 		for(var/obj/machinery/alarm/alarm in monitored_alarms)
-			if (!Z || !AreConnectedZLevels(Z, alarm.z))
+			if (!Z || !SSzlevels.are_connected_levels(Z, alarm.z))
 				continue
 			var/alarm_name = sanitize(alarm.name)
 			alarm_name = replacetext(alarm_name, " Air Alarm", "") // shorten titles

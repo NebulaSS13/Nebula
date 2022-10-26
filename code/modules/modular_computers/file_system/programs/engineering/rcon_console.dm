@@ -138,7 +138,7 @@
 	if(!network)
 		return FALSE
 
-	if(!ARE_Z_CONNECTED(network.get_router_z(), get_z(M)))
+	if(!SSzlevels.levels_are_z_connected(network.get_router_z(), get_z(M)))
 		return FALSE
 	
 	if(istype(M, /obj/machinery/power/smes))

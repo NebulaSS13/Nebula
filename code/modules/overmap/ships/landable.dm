@@ -63,7 +63,7 @@
 /obj/effect/overmap/visitable/ship/landable/find_z_levels()
 	if(!use_mapped_z_levels)
 		for(var/i = 0 to multiz)
-			INCREMENT_WORLD_Z_SIZE
+			SSzlevels.increment_world_z_size()
 			map_z += world.maxz
 
 		if(multiz)

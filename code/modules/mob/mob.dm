@@ -1142,7 +1142,7 @@
 		return FALSE
 
 	// Not in a connected z-volume.
-	if(!(N.z in GetConnectedZlevels(T.z)))
+	if(!(N.z in SSzlevels.get_connected_levels(T.z)))
 		return FALSE
 
 	// Are they below us?

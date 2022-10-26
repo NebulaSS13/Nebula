@@ -51,7 +51,7 @@
 
 // TODO: remove this when tcomms are moved to network devices.
 /proc/get_message_server_for_z(z)
-	var/list/local_zs = GetConnectedZlevels(z)
+	var/list/local_zs = SSzlevels.get_connected_levels(z)
 	for(var/obj/machinery/network/message_server/MS in SSmachines.machinery)
 		if((MS.z in local_zs) && !(MS.stat & (BROKEN|NOPOWER)))
 			return MS
