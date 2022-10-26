@@ -4198,7 +4198,7 @@
 "hz" = (
 /obj/machinery/vending/cigarette{
 	dir = 1;
-	products = list(/obj/item/storage/fancy/cigarettes = 10, /obj/item/storage/box/matches = 10, /obj/item/flame/lighter/zippo = 4, /obj/item/clothing/mask/smokable/cigarette/cigar/havana = 2)
+	products = list(/obj/item/storage/fancy/cigarettes=10,/obj/item/storage/box/matches=10,/obj/item/flame/lighter/zippo=4,/obj/item/clothing/mask/smokable/cigarette/cigar/havana=2)
 	},
 /turf/simulated/floor/wood/walnut,
 /area/liberia/bar)
@@ -6279,6 +6279,12 @@
 	},
 /turf/simulated/floor/tiled,
 /area/liberia/hallway)
+"oJ" = (
+/obj/abstract/level_data/player_level{
+	name = "Liberia";
+},
+/turf/space,
+/area/space)
 "oM" = (
 /obj/effect/floor_decal/solarpanel,
 /obj/machinery/power/solar{
@@ -8839,7 +8845,7 @@ aa
 "}
 (2,1,1) = {"
 aa
-aa
+oJ
 aa
 aa
 aa

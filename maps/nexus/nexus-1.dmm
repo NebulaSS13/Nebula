@@ -2556,7 +2556,9 @@
 /turf/simulated/floor/plating,
 /area/nexus/command)
 "xX" = (
-/obj/abstract/level_data/main_level,
+/obj/abstract/level_data/main_level{
+	name = "Nexus Lower Deck";
+},
 /turf/space,
 /area/space)
 "yf" = (

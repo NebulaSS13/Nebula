@@ -15135,7 +15135,9 @@
 /turf/simulated/floor/plating,
 /area/ministation/disused)
 "NO" = (
-/obj/abstract/level_data/main_level,
+/obj/abstract/level_data/main_level{
+	name = "Outpost Zebra";
+},
 /turf/space,
 /area/space)
 "NR" = (
