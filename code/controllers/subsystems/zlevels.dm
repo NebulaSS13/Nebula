@@ -33,10 +33,10 @@ SUBSYSTEM_DEF(zlevels)
 /datum/controller/subsystem/zlevels/Initialize(start_timeofday)
 	for(var/z = 1 to world.maxz)
 		var/obj/abstract/level_data/level = levels_by_z["[z]"]
-		if(!level)
-			log_warning("No level data found for z[z], generating a filler level object.")
-			level = new /obj/abstract/level_data/filler(locate(round(world.maxx*0.5), round(world.maxz*0.5), z))
-		level.setup_level_data()
+		if(level)
+			level.setup_level_data()
+		else
+			PRINT_STACK_TRACE("Missing z-level data object for z["[z]"]!")
 		report_progress("z[z]: [get_level_name(z)]")
 	. = ..()
 
@@ -52,11 +52,17 @@ SUBSYSTEM_DEF(zlevels)
 		return overmap_entity.name
 	return "Sector #[z]"
 
-/datum/controller/subsystem/zlevels/proc/increment_world_z_size(var/new_level_type = /obj/abstract/level_data/filler, var/defer_setup = FALSE)
+/datum/controller/subsystem/zlevels/proc/increment_world_z_size(var/new_level_type, var/defer_setup = FALSE)
+
 	world.maxz++
 	connected_z_cache.Cut()
 	if(SSzcopy.zlev_maximums.len)
 		SSzcopy.calculate_zstack_limits()
+
+	if(!new_level_type)
+		PRINT_STACK_TRACE("Missing z-level data type for z["[world.maxz]"]!")
+		return
+
 	var/obj/abstract/level_data/level = new new_level_type(locate(round(world.maxx*0.5), round(world.maxz*0.5), world.maxz), defer_setup)
 	if(level.base_turf_type && level.base_turf_type != world.turf)
 		for(var/turf/T as anything in block(locate(1, 1, .),locate(world.maxx, world.maxy, level.my_z)))

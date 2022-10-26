@@ -3497,6 +3497,7 @@
 #include "code\unit_tests\uplink_tests.dm"
 #include "code\unit_tests\view_variables_test.dm"
 #include "code\unit_tests\zas_tests.dm"
+#include "code\unit_tests\zlevel_tests.dm"
 #include "code\unit_tests\~helpers.dm"
 #include "interface\interface.dm"
 #include "interface\skin.dmf"

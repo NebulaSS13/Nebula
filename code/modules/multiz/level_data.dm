@@ -120,10 +120,6 @@ INITIALIZE_IMMEDIATE(/obj/abstract/level_data)
 	name = "Player Level"
 	level_flags = (ZLEVEL_CONTACT|ZLEVEL_PLAYER)
 
-// Used by the subsystem to populate the full z-level list during init.
-/obj/abstract/level_data/filler
-	name = "Filler Level"
-
 /obj/abstract/level_data/empty
 	name = "Empty Level"
 
