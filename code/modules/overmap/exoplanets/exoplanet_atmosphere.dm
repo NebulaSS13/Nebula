@@ -8,12 +8,10 @@
 		var/decl/species/S = get_species_by_key(global.using_map.default_species)
 		target_temp = clamp(target_temp, S.cold_level_1 + rand(1,5), S.heat_level_1 - rand(1,5))
 
-	for(var/obj/abstract/level_data/level_data in zlevels)
-		level_data.exterior_atmos_temp = target_temp
-
 	//Skip fun gas gen for perfect terran worlds
 	if(habitability_class == HABITABILITY_IDEAL)
 		for(var/obj/abstract/level_data/level_data in zlevels)
+			level_data.exterior_atmos_temp = target_temp
 			level_data.exterior_atmosphere = list(
 				/decl/material/gas/oxygen = MOLES_O2STANDARD,
 				/decl/material/gas/nitrogen = MOLES_N2STANDARD
@@ -93,6 +91,7 @@
 		var/adjusted_moles = gas_list[g] * target_moles / MOLES_CELLSTANDARD
 		set_gasmix[g] = adjusted_moles
 	for(var/obj/abstract/level_data/level_data in zlevels)
+		level_data.exterior_atmos_temp = target_temp
 		level_data.exterior_atmosphere = set_gasmix.Copy()
 		level_data.setup_level_data()
 

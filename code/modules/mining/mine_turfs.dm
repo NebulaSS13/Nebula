@@ -30,15 +30,15 @@ var/global/list/mining_floors = list()
 
 /turf/simulated/floor/asteroid/Initialize()
 	. = ..()
-	if (!mining_floors["[src.z]"])
-		mining_floors["[src.z]"] = list()
-	mining_floors["[src.z]"] += src
+	if (!global.mining_floors["[src.z]"])
+		global.mining_floors["[src.z]"] = list()
+	global.mining_floors["[src.z]"] += src
 	if(prob(20))
 		overlay_detail = "asteroid[rand(0,9)]"
 
 /turf/simulated/floor/asteroid/Destroy()
-	if (mining_floors["[src.z]"])
-		mining_floors["[src.z]"] -= src
+	if (global.mining_floors["[src.z]"])
+		global.mining_floors["[src.z]"] -= src
 	return ..()
 
 /turf/simulated/floor/asteroid/explosion_act(severity)

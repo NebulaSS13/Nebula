@@ -212,9 +212,6 @@ var/global/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 /datum/map/proc/send_welcome()
 	return
 
-/datum/map/proc/perform_map_generation()
-	return
-
 /datum/map/proc/build_away_sites()
 #ifdef UNIT_TEST
 	report_progress("Unit testing, so not loading away sites")
@@ -270,17 +267,6 @@ var/global/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 		var/obj/effect/overmap/visitable/sector/exoplanet/planet_type = T
 		planets[T] = initial(planet_type.spawn_weight)
 	return pickweight(planets)
-
-// Used to apply various post-compile procedural effects to the map.
-/datum/map/proc/refresh_mining_turfs(var/zlevel)
-
-	set background = 1
-	set waitfor = 0
-
-	for(var/thing in mining_floors["[zlevel]"])
-		var/turf/simulated/floor/asteroid/M = thing
-		if(istype(M))
-			M.updateMineralOverlays()
 
 /datum/map/proc/get_network_access(var/network)
 	return 0
