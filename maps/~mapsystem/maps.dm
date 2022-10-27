@@ -186,8 +186,8 @@ var/global/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 		allowed_spawns -= spawn_type
 		allowed_spawns += GET_DECL(spawn_type)
 
-	if(!SSzlevels.map_levels)
-		SSzlevels.map_levels = SSzlevels.station_levels.Copy()
+	if(!SSmapping.map_levels)
+		SSmapping.map_levels = SSmapping.station_levels.Copy()
 
 	if(!LAZYLEN(planet_size))
 		planet_size = list(world.maxx, world.maxy)
@@ -254,7 +254,7 @@ var/global/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 			world.maxy = planet_size[2]
 	for(var/i = 0, i < num_exoplanets, i++)
 		var/exoplanet_type = pick_exoplanet()
-		var/obj/abstract/level_data/exoplanet/planet_level = SSzlevels.increment_world_z_size(/obj/abstract/level_data/exoplanet, TRUE)
+		var/obj/abstract/level_data/exoplanet/planet_level = SSmapping.increment_world_z_size(/obj/abstract/level_data/exoplanet, TRUE)
 		var/obj/effect/overmap/visitable/sector/exoplanet/new_planet = new exoplanet_type(null, world.maxz)
 		new_planet.zlevels += planet_level
 		new_planet.build_level(planet_size[1], planet_size[2])
@@ -273,7 +273,7 @@ var/global/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 
 // By default transition randomly to another zlevel
 /datum/map/proc/get_transit_zlevel(var/current_z_level)
-	var/list/candidates = SSzlevels.accessible_z_levels.Copy()
+	var/list/candidates = SSmapping.accessible_z_levels.Copy()
 	candidates.Remove(num2text(current_z_level))
 
 	if(!candidates.len)

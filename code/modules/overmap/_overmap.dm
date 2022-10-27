@@ -53,14 +53,14 @@
 		else
 			T = T.ChangeTurf(overmap_turf_type)
 		ChangeArea(T, A)
-		
+
 /datum/overmap/proc/generate_overmap()
 	testing("Building overmap [name]...")
-	SSzlevels.increment_world_z_size(/obj/abstract/level_data/overmap)
+	SSmapping.increment_world_z_size(/obj/abstract/level_data/overmap)
 	assigned_z = world.maxz
 	testing("Putting [name] on [assigned_z].")
 	populate_overmap()
-	SSzlevels.sealed_levels |= assigned_z
+	SSmapping.sealed_levels |= assigned_z
 	. = TRUE
 
 /datum/overmap/proc/travel(var/turf/space/T, var/atom/movable/A)
@@ -143,7 +143,7 @@
 			return res
 
 	// Create a new one.
-	var/obj/abstract/level_data/level = SSzlevels.increment_world_z_size(empty_level_type)
+	var/obj/abstract/level_data/level = SSmapping.increment_world_z_size(empty_level_type)
 	return new /obj/effect/overmap/visitable/sector/temporary(null, x, y, level.my_z)
 
 /datum/overmap/proc/discard_temporary_sector(var/obj/effect/overmap/visitable/sector/temporary/sector)

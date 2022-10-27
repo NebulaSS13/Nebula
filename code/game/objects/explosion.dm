@@ -198,7 +198,7 @@
 			CHECK_TICK
 			continue
 
-		if (!SSzlevels.levels_are_z_connected(T.z, epicenter.z))
+		if (!SSmapping.levels_are_z_connected(T.z, epicenter.z))
 			CHECK_TICK
 			continue
 

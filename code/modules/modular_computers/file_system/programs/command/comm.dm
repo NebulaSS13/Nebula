@@ -165,7 +165,7 @@
 				var/input = input(usr, "Please write a message to announce to the [station_name()].", "Priority Announcement") as null|message
 				if(!input || !can_still_topic() || filter_block_message(usr, input))
 					return 1
-				var/affected_zlevels = SSzlevels.get_connected_levels(get_host_z())
+				var/affected_zlevels = SSmapping.get_connected_levels(get_host_z())
 				crew_announcement.Announce(input, zlevels = affected_zlevels)
 				announcment_cooldown = 1
 				spawn(600)//One minute cooldown

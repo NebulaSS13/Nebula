@@ -9,7 +9,7 @@
 	affected_levels = zlevels
 
 /datum/universal_state/jump/OnEnter()
-	var/obj/abstract/level_data/space_zlevel = SSzlevels.increment_world_z_size(/obj/abstract/level_data/space) //get a place for stragglers
+	var/obj/abstract/level_data/space_zlevel = SSmapping.increment_world_z_size(/obj/abstract/level_data/space) //get a place for stragglers
 	for(var/mob/living/M in SSmobs.mob_list)
 		if(M.z in affected_levels)
 			var/area/A = get_area(M)
@@ -23,9 +23,9 @@
 		goast.mouse_opacity = 0	//can't let you click that Dave
 		goast.set_invisibility(SEE_INVISIBLE_LIVING)
 		goast.alpha = 255
-	old_accessible_z_levels = SSzlevels.accessible_z_levels.Copy()
+	old_accessible_z_levels = SSmapping.accessible_z_levels.Copy()
 	for(var/z in affected_levels)
-		SSzlevels.accessible_z_levels -= "[z]" //not accessible during the jump
+		SSmapping.accessible_z_levels -= "[z]" //not accessible during the jump
 
 /datum/universal_state/jump/OnExit()
 	for(var/mob/M in duplicated)
@@ -33,7 +33,7 @@
 			clear_duplicated(M)
 
 	duplicated.Cut()
-	SSzlevels.accessible_z_levels = old_accessible_z_levels
+	SSmapping.accessible_z_levels = old_accessible_z_levels
 	old_accessible_z_levels = null
 
 /datum/universal_state/jump/OnPlayerLatejoin(var/mob/living/M)

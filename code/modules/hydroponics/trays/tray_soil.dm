@@ -48,7 +48,7 @@
 	if(seed)
 		name = seed.display_name
 	check_plant_health()
-	connected_zlevels = SSzlevels.get_connected_levels(z)
+	connected_zlevels = SSmapping.get_connected_levels(z)
 
 /obj/machinery/portable_atmospherics/hydroponics/soil/invisible/Process()
 	if(!seed)

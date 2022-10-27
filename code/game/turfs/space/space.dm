@@ -83,10 +83,10 @@
 	return ..()
 
 /turf/space/LateInitialize()
-	if(SSzlevels.base_floor_area)
-		var/area/new_area = locate(SSzlevels.base_floor_area) || new SSzlevels.base_floor_area
+	if(SSmapping.base_floor_area)
+		var/area/new_area = locate(SSmapping.base_floor_area) || new SSmapping.base_floor_area
 		ChangeArea(src, new_area)
-	ChangeTurf(SSzlevels.base_floor_type)
+	ChangeTurf(SSmapping.base_floor_type)
 
 // override for space turfs, since they should never hide anything
 /turf/space/levelupdate()

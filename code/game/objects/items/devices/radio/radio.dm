@@ -498,7 +498,7 @@
 	if(!connection)	return 0	//~Carn
 	return Broadcast_Message(connection, M, voicemask, pick(M.speak_emote),
 					  src, message, displayname, jobname, real_name, M.voice_name,
-					  filter_type, signal.data["compression"], SSzlevels.get_connected_levels(position.z), connection.frequency, verb, speaking,
+					  filter_type, signal.data["compression"], SSmapping.get_connected_levels(position.z), connection.frequency, verb, speaking,
 					  "[connection.frequency]", channel_color_presets["Menacing Maroon"])
 
 
@@ -811,7 +811,7 @@
 
 /obj/item/radio/announcer/Initialize()
 	. = ..()
-	forceMove(locate(1,1,SSzlevels.contact_levels.len ? SSzlevels.contact_levels[1] : 1))
+	forceMove(locate(1,1,SSmapping.contact_levels.len ? SSmapping.contact_levels[1] : 1))
 
 /obj/item/radio/announcer/subspace
 	subspace_transmission = 1

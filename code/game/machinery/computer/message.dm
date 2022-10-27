@@ -240,7 +240,7 @@
 	//Find a server
 	if (href_list["find"])
 		var/list/local_message_servers = list()
-		var/list/local_zs = SSzlevels.get_connected_levels(z)
+		var/list/local_zs = SSmapping.get_connected_levels(z)
 		for(var/obj/machinery/network/message_server/MS in SSmachines.machinery)
 			if((MS.z in local_zs) && !(MS.stat & (BROKEN|NOPOWER)))
 				local_message_servers += MS
@@ -331,7 +331,7 @@
 	var/turf/T = get_turf(src)
 	if(!T)
 		return
-	var/list/our_z = SSzlevels.get_connected_levels(T.z)
+	var/list/our_z = SSmapping.get_connected_levels(T.z)
 	for(var/obj/machinery/network/message_server/server in SSmachines.machinery)
 		if((server.z in our_z) && !(server.stat & (BROKEN|NOPOWER)) && !isnull(server.decryptkey))
 			info = "<center><h2>Daily Key Reset</h2></center><br>The new message monitor key is '[server.decryptkey]'.<br>This key is only intended for personnel granted access to the messaging server. Keep it safe.<br>If necessary, change the password to a more secure one."

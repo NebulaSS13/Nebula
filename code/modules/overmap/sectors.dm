@@ -125,7 +125,7 @@ var/global/list/known_overmap_sectors
 	return get_filtered_areas(list(/proc/area_belongs_to_zlevels = map_z))
 
 /obj/effect/overmap/visitable/proc/find_z_levels()
-	map_z = SSzlevels.get_connected_levels(z)
+	map_z = SSmapping.get_connected_levels(z)
 
 /obj/effect/overmap/visitable/proc/register_z_levels()
 	var/datum/overmap/overmap = global.overmaps_by_z["[z]"]
@@ -133,13 +133,13 @@ var/global/list/known_overmap_sectors
 		for(var/zlevel in map_z)
 			global.overmap_sectors["[zlevel]"] = src
 
-	SSzlevels.player_levels |= map_z
+	SSmapping.player_levels |= map_z
 	if(!(sector_flags & OVERMAP_SECTOR_IN_SPACE))
-		SSzlevels.sealed_levels |= map_z
+		SSmapping.sealed_levels |= map_z
 	if(sector_flags & OVERMAP_SECTOR_BASE)
-		SSzlevels.station_levels |= map_z
-		SSzlevels.contact_levels |= map_z
-		SSzlevels.map_levels |= map_z
+		SSmapping.station_levels |= map_z
+		SSmapping.contact_levels |= map_z
+		SSmapping.map_levels |= map_z
 
 //Helper for init.
 /obj/effect/overmap/visitable/proc/check_ownership(obj/object)

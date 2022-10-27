@@ -13,10 +13,10 @@
 	var/list/sorted_sites = sortTim(unsorted_sites, /proc/cmp_sort_templates_tallest_to_shortest)
 	for (var/datum/map_template/A in sorted_sites)
 		A.load_new_z(centered = FALSE)
-		testing("Spawning [A] in [english_list(SSzlevels.get_connected_levels(world.maxz))]")
+		testing("Spawning [A] in [english_list(SSmapping.get_connected_levels(world.maxz))]")
 		if(A.template_flags & TEMPLATE_FLAG_TEST_DUPLICATES)
 			A.load_new_z(centered = FALSE)
-			testing("Spawning [A] in [english_list(SSzlevels.get_connected_levels(world.maxz))]")
+			testing("Spawning [A] in [english_list(SSmapping.get_connected_levels(world.maxz))]")
 
 /proc/cmp_sort_templates_tallest_to_shortest(var/datum/map_template/a, var/datum/map_template/b)
 	return b.tallness - a.tallness
