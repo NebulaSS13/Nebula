@@ -43,4 +43,7 @@
 	path = /obj/item/modular_computer/tablet
 
 /datum/fabricator_recipe/protolathe/comp_frames/telescreen_frame
-	path = /obj/item/modular_computer/telescreen
+	path = /obj/item/frame/modular_telescreen
+
+/datum/fabricator_recipe/protolathe/comp_frames/telescreen_frame_kit
+	path = /obj/item/frame/modular_telescreen/kit

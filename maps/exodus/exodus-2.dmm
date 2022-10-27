@@ -15729,7 +15729,7 @@
 /obj/machinery/atmospherics/unary/vent_scrubber/on{
 	dir = 4
 	},
-/obj/item/modular_computer/telescreen/preset/generic/mapped{
+/obj/machinery/computer/modular/telescreen/preset/generic{
 	dir = 4
 	},
 /turf/simulated/floor/tiled/steel_grid,
@@ -19500,7 +19500,7 @@
 	dir = 4
 	},
 /obj/machinery/recharger,
-/obj/item/modular_computer/telescreen/preset/generic/mapped{
+/obj/machinery/computer/modular/telescreen/preset/generic{
 	dir = 8
 	},
 /turf/simulated/floor/carpet,
@@ -21194,7 +21194,7 @@
 /obj/structure/cable{
 	icon_state = "4-8"
 	},
-/obj/item/modular_computer/telescreen/preset/generic/mapped{
+/obj/machinery/computer/modular/telescreen/preset/generic{
 	dir = 1
 	},
 /obj/effect/floor_decal/corner/lime{
@@ -21944,7 +21944,7 @@
 	pixel_x = -22
 	},
 /obj/item/stool/bar/padded,
-/obj/item/modular_computer/telescreen/preset/generic/mapped{
+/obj/machinery/computer/modular/telescreen/preset/generic{
 	dir = 4
 	},
 /turf/simulated/floor/wood/walnut,
@@ -33990,7 +33990,7 @@
 /obj/item/deck/cards{
 	pixel_y = 4
 	},
-/obj/item/modular_computer/telescreen/preset/generic/mapped{
+/obj/machinery/computer/modular/telescreen/preset/generic{
 	dir = 1
 	},
 /turf/simulated/floor/wood/walnut,
@@ -38198,7 +38198,7 @@
 /turf/simulated/floor/tiled/white,
 /area/exodus/medical/chemistry)
 "bBV" = (
-/obj/item/modular_computer/telescreen/preset/generic/mapped{
+/obj/machinery/computer/modular/telescreen/preset/generic{
 	dir = 2
 	},
 /obj/effect/floor_decal/corner/lime{
@@ -40121,7 +40121,7 @@
 /obj/effect/floor_decal/corner/blue{
 	dir = 6
 	},
-/obj/item/modular_computer/telescreen/preset/generic/mapped{
+/obj/machinery/computer/modular/telescreen/preset/generic{
 	dir = 8
 	},
 /turf/simulated/floor/tiled/steel_grid,
@@ -48816,7 +48816,7 @@
 	pixel_x = -22;
 	pixel_y = -10
 	},
-/obj/item/modular_computer/telescreen/preset/generic/mapped{
+/obj/machinery/computer/modular/telescreen/preset/generic{
 	dir = 4
 	},
 /turf/simulated/floor/wood/walnut,

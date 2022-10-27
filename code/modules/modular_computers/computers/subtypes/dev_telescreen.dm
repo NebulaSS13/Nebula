@@ -1,65 +1,116 @@
-/obj/item/modular_computer/telescreen
+//////////////////////////////////////////////////////////////////
+// Telescreen Circuit
+//////////////////////////////////////////////////////////////////
+
+/obj/item/stock_parts/circuitboard/modular_computer/telescreen
+	name = "circuitboard (modular telescreen)"
+	board_type = "wall"
+	build_path = /obj/machinery/computer/modular/telescreen
+	req_components = list(
+		/obj/item/stock_parts/console_screen = 1,
+		/obj/item/stock_parts/computer/processor_unit = 1
+	)
+	additional_spawn_components = list(
+		/obj/item/stock_parts/power/apc/buildable = 1, 
+		/obj/item/stock_parts/computer/network_card = 1, 
+		/obj/item/stock_parts/computer/hard_drive/super = 1
+	)
+
+//////////////////////////////////////////////////////////////////
+// Telescreen Frame
+//////////////////////////////////////////////////////////////////
+
+/obj/item/frame/modular_telescreen
+	name = "modular telescreen frame"
+	desc = "Used for building wall-mounted modular telescreen computers."
+	icon = 'icons/obj/modular_computers/modular_telescreen.dmi'
+	icon_state = "frame"
+	build_machine_type = /obj/machinery/computer/modular/telescreen
+
+/obj/item/frame/modular_telescreen/kit
+	fully_construct = TRUE
+	name = "modular telescreen  kit"
+	desc = "An all-in-one wall-mounted modular telescreen computer kit, comes preassembled."
+	icon_state = "frame_kit"
+
+//////////////////////////////////////////////////////////////////
+// Telescreen OS
+//////////////////////////////////////////////////////////////////
+
+/datum/extension/interactive/os/console/telescreen
+	screen_icon_file = 'icons/obj/modular_computers/modular_telescreen.dmi'
+	expected_type = /obj/machinery/computer/modular/telescreen
+
+/datum/extension/interactive/os/console/telescreen/get_hardware_flag()
+	return PROGRAM_TELESCREEN
+
+//////////////////////////////////////////////////////////////////
+// Telescreen Computer
+//////////////////////////////////////////////////////////////////
+
+/obj/machinery/computer/modular/telescreen
 	name               = "telescreen"
 	desc               = "A wall-mounted touchscreen computer."
 	icon               = 'icons/obj/modular_computers/modular_telescreen.dmi'
 	icon_state         = "telescreen"
-	anchored           = FALSE
+	anchored           = TRUE
 	density            = FALSE
-	light_strength     = 4
-	w_class            = ITEM_SIZE_HUGE
-	computer_type      = /datum/extension/assembly/modular_computer/telescreen
-	obj_flags          = 0
+	obj_flags          = OBJ_FLAG_MOVES_UNSUPPORTED
 	directional_offset = "{'NORTH':{'y':-20}, 'SOUTH':{'y':24}, 'EAST':{'x':-24}, 'WEST':{'x':24}}"
-	center_of_mass     = "{'x':0, 'y':-8}"
-	matter             = list(
-		/decl/material/solid/metal/aluminium = MATTER_AMOUNT_SECONDARY,
-		/decl/material/solid/metal/copper    = MATTER_AMOUNT_REINFORCEMENT,
-		/decl/material/solid/silicon         = MATTER_AMOUNT_REINFORCEMENT,
-	)
+	idle_power_usage   = 75
+	active_power_usage = 300
+	max_hardware_size  = 2 //make sure we can only put smaller components in here
+	construct_state    = /decl/machine_construction/wall_frame/panel_closed
+	base_type          = /obj/machinery/computer/modular/telescreen
+	frame_type         = /obj/item/frame/modular_telescreen
+	//Behaves like a touchscreen
+	stat_immune        = NOINPUT
+	icon_keyboard      = null
+	interact_sounds    = null
+	clicksound         = null
+	required_interaction_dexterity = DEXTERITY_TOUCHSCREENS
+	os_type            = /datum/extension/interactive/os/console/telescreen
 
-/obj/item/modular_computer/telescreen/mapped
-	anchored  = TRUE
-
-/obj/item/modular_computer/telescreen/Initialize()
+/obj/machinery/computer/modular/telescreen/update_directional_offset(force = FALSE)
+	if(!force && (!length(directional_offset) || !is_wall_mounted())) 
+		return
 	. = ..()
-	//Update anchored state
-	set_anchored(anchored)
 
-/obj/item/modular_computer/telescreen/enable_computer(mob/user)
-	if(!anchored)
-		return //Can't turn on when not anchored
-	. = ..()
+/obj/machinery/computer/modular/telescreen/on_update_icon()
+	cut_overlays()
+	icon_state = initial(icon_state)
 
-/obj/item/modular_computer/telescreen/afterattack(atom/target, mob/user, proximity)
-	. = ..()
-	var/turf/T = target
-	if(isturf(T) && proximity && T.is_wall() && user.do_skilled(2 SECONDS, SKILL_ELECTRICAL, target) && !QDELETED(src))
-		user.unEquip(src, get_turf(user)) //Always place on our tile
-		set_dir(global.reverse_dir[user.dir])
-		set_anchored(TRUE)
-		visible_message(SPAN_NOTICE("\The [user] secures \the [src]."), SPAN_NOTICE("You secure \the [src]."), range = 3)
-		playsound(src, 'sound/effects/metalhit.ogg', 25, TRUE)
+	var/can_see_circuit = FALSE
+	if(panel_open)
+		add_overlay("panel_open")
+		can_see_circuit = TRUE
+	else if(reason_broken & MACHINE_BROKEN_GENERIC)
+		add_overlay("inside_broken")
+		can_see_circuit = TRUE
 
-/obj/item/modular_computer/telescreen/proc/set_anchored(var/state)
-	var/datum/extension/assembly/modular_computer/telescreen/assembly = get_extension(src, /datum/extension/assembly)
-	anchored = state
-	if(anchored)
-		obj_flags |= OBJ_FLAG_MOVES_UNSUPPORTED
-		assembly.screen_on = TRUE
-		update_directional_offset()
+	if(can_see_circuit)
+		var/obj/item/stock_parts/circuitboard/C = get_component_of_type(/obj/item/stock_parts/circuitboard)
+		if(C)
+			if(!C.is_functional())
+				add_overlay("circuit_broken")
+			else if(istype(construct_state, /decl/machine_construction/wall_frame/no_wires)) //only way to check if unwired
+				add_overlay("circuit_unwired")
+			else
+				add_overlay("circuit")
+
+	if(!panel_open && (reason_broken & MACHINE_BROKEN_GENERIC))
+		add_overlay("panel_broken")
+	
+	if(inoperable())
+		set_light(0)
+		var/screen = get_component_of_type(/obj/item/stock_parts/console_screen)
+		if(screen)
+			if(reason_broken & MACHINE_BROKEN_GENERIC)
+				add_overlay("comp_screen_broken")
+			else
+				add_overlay("comp_screen")
 	else
-		obj_flags &= ~OBJ_FLAG_MOVES_UNSUPPORTED
-		default_pixel_x = 0
-		default_pixel_y = -8 //The sprite is a bit offset to the top currently
-		reset_offsets(0)
-		shutdown_computer()
-		assembly.screen_on = FALSE
-		set_dir(SOUTH) //Revert to item direction
-
-/obj/item/modular_computer/telescreen/attackby(var/obj/item/W, var/mob/user)
-	if(IS_CROWBAR(W) && anchored)
-		if(W.do_tool_interaction(TOOL_CROWBAR, user, src, 2 SECONDS))
-			set_anchored(FALSE)
-			visible_message(SPAN_NOTICE("\The [user] unsecures \the [src]."), SPAN_NOTICE("You unsecure \the [src]."), range = 3)
-			return TRUE
-	. = ..()
+		set_light(light_range_on, light_power_on, light_color)
+		var/screen_overlay = get_screen_overlay()
+		if(screen_overlay)
+			add_overlay(screen_overlay)

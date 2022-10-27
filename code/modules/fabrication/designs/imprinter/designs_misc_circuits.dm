@@ -383,6 +383,9 @@
 /datum/fabricator_recipe/imprinter/circuit/modular_computer
 	path = /obj/item/stock_parts/circuitboard/modular_computer
 
+/datum/fabricator_recipe/imprinter/circuit/modular_computer_telescreen
+	path = /obj/item/stock_parts/circuitboard/modular_computer/telescreen
+
 /datum/fabricator_recipe/imprinter/circuit/shipsensors
 	path = /obj/item/stock_parts/circuitboard/shipsensors
 

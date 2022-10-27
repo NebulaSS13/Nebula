@@ -5513,7 +5513,7 @@
 /obj/structure/cable{
 	icon_state = "4-8"
 	},
-/obj/item/modular_computer/telescreen/preset/engineering/mapped{
+/obj/machinery/computer/modular/telescreen/preset/engineering{
 	dir = 2
 	},
 /turf/simulated/floor/tiled,
