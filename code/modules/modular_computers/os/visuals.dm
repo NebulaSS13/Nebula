@@ -20,7 +20,10 @@
 	if(screen_icon_file)
 		var/image/I
 		if(active_program)
-			I = image(screen_icon_file, active_program.program_icon_state)
+			if(active_program.program_icon_state in icon_states(screen_icon_file))
+				I = image(screen_icon_file, active_program.program_icon_state)
+			else
+				I = image(screen_icon_file, default_icon) //Fallback icon
 		else
 			I = image(screen_icon_file, menu_icon)
 		I.appearance_flags |= RESET_COLOR

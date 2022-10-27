@@ -14,6 +14,7 @@
 	var/screen_icon_file									// dmi where the screen overlays are kept, defaults to holder's icon if unset
 	var/menu_icon = "menu"									// Icon state overlay when the computer is turned on, but no program is loaded that would override the screen.
 	var/screensaver_icon = "standby"
+	var/default_icon = "generic"							//Overlay icon for programs that have a screen overlay the host doesn't have.
 
 	// Used for deciding if various tray icons need to be updated
 	var/last_battery_percent							
