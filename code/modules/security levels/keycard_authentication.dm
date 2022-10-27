@@ -195,4 +195,9 @@
 	if(config.ert_admin_call_only) return 1
 	return SSticker.mode && SSticker.mode.ert_disabled
 
+/obj/machinery/keycard_auth/update_directional_offset(force = FALSE)
+	if(!force && (!length(directional_offset) || !is_wall_mounted())) //Check if the thing is actually mapped onto a table or something
+		return
+	. = ..()
+
 var/global/maint_all_access = 0
