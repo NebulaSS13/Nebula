@@ -75,7 +75,7 @@
 
 	if(!(old_loc && new_loc)) // Allows inventive admins to move drones between non-adjacent Z-levels by moving them to null space first I suppose
 		return
-	if(SSzlevels.levels_are_z_connected(old_loc.z, new_loc.z))
+	if(SSmapping.levels_are_z_connected(old_loc.z, new_loc.z))
 		return
 
 	// None of the tests passed, good bye

@@ -7,7 +7,7 @@
 /obj/abstract/level_data
 	/// z-level associated with this datum
 	var/my_z
-	/// A unique identifier for the level, used for SSzlevels looup
+	/// A unique identifier for the level, used for SSmapping looup
 	var/level_id
 	/// The base turf of the level (space, rock, etc)
 	var/base_turf
@@ -20,9 +20,9 @@
 	/// Gaxmix datum returned to exterior return_air. Set to assoc list of material to moles to initialize the gas datum.
 	var/datum/gas_mixture/exterior_atmosphere
 	/// Default turf for this level on creation (if created via z-level incrementing)
-	var/base_turf_type = /turf/space
+	var/created_base_turf_type = /turf/space
 	/// Default area for this level on creation (as above)
-	var/base_area_type = /area/space
+	var/created_base_area_type = /area/space
 	/// Set to false to leave dark
 	var/take_starlight_ambience = TRUE
 	/// This default makes turfs not generate light. Adjust to have exterior areas be lit.
@@ -35,17 +35,17 @@ INITIALIZE_IMMEDIATE(/obj/abstract/level_data)
 	. = ..()
 	my_z = z
 	forceMove(null)
-	if(SSzlevels.levels_by_z["[my_z]"])
+	if(SSmapping.levels_by_z["[my_z]"])
 		PRINT_STACK_TRACE("Duplicate level data created for z[z].")
-	SSzlevels.levels_by_z["[my_z]"] = src
+	SSmapping.levels_by_z["[my_z]"] = src
 	if(!level_id)
 		level_id = "leveldata_[my_z]_[sequential_id(/obj/abstract/level_data)]"
-	if(level_id in SSzlevels.levels_by_id)
+	if(level_id in SSmapping.levels_by_id)
 		PRINT_STACK_TRACE("Duplicate level_id '[level_id]' for z[my_z].")
 	else
-		SSzlevels.levels_by_id[level_id] = src
+		SSmapping.levels_by_id[level_id] = src
 
-	if(SSzlevels.initialized && !defer_level_setup)
+	if(SSmapping.initialized && !defer_level_setup)
 		setup_level_data()
 
 /obj/abstract/level_data/proc/setup_level_data()
@@ -54,24 +54,35 @@ INITIALIZE_IMMEDIATE(/obj/abstract/level_data)
 		ambient_light_level = config.starlight
 		ambient_light_color = SSskybox.background_color
 	if(base_turf)
-		SSzlevels.base_turf_by_z["[my_z]"] = base_turf
+		SSmapping.base_turf_by_z["[my_z]"] = base_turf
 	if(level_flags & ZLEVEL_STATION)
-		SSzlevels.station_levels |= my_z
+		SSmapping.station_levels |= my_z
 	if(level_flags & ZLEVEL_ADMIN)
-		SSzlevels.admin_levels   |= my_z
+		SSmapping.admin_levels   |= my_z
 	if(level_flags & ZLEVEL_CONTACT)
-		SSzlevels.contact_levels |= my_z
+		SSmapping.contact_levels |= my_z
 	if(level_flags & ZLEVEL_PLAYER)
-		SSzlevels.player_levels  |= my_z
+		SSmapping.player_levels  |= my_z
 	if(level_flags & ZLEVEL_SEALED)
-		SSzlevels.sealed_levels  |= my_z
+		SSmapping.sealed_levels  |= my_z
 
 	build_exterior_atmosphere()
 	if(config.generate_map)
 		build_level()
 
 /obj/abstract/level_data/proc/build_level()
-	return
+	var/change_turf = (created_base_turf_type && created_base_turf_type != world.turf)
+	var/change_area = (created_base_area_type && created_base_area_type != world.area)
+	if(!change_turf && !change_area)
+		return
+	var/corner_start = locate(1, 1, my_z)
+	var/corner_end =   locate(world.maxx, world.maxy, my_z)
+	var/area/A = change_area && new level.created_base_area_type
+	for(var/turf/T as anything in block(corner_start, corner_end))
+		if(change_turf)
+			T = T.ChangeTurf(level.created_base_turf_type)
+		if(change_area)
+			ChangeArea(T, A)
 
 /obj/abstract/level_data/Destroy(var/force)
 	if(force)
@@ -81,7 +92,7 @@ INITIALIZE_IMMEDIATE(/obj/abstract/level_data)
 
 /obj/abstract/level_data/proc/find_connected_levels(var/list/found)
 	for(var/other_id in connects_to)
-		var/obj/abstract/level_data/neighbor = SSzlevels.levels_by_id[other_id]
+		var/obj/abstract/level_data/neighbor = SSmapping.levels_by_id[other_id]
 		neighbor.add_connected_levels(found)
 
 /obj/abstract/level_data/proc/add_connected_levels(var/list/found)
@@ -92,7 +103,7 @@ INITIALIZE_IMMEDIATE(/obj/abstract/level_data)
 	if(!length(connects_to))
 		return
 	for(var/other_id in connects_to)
-		var/obj/abstract/level_data/neighbor = SSzlevels.levels_by_id[other_id]
+		var/obj/abstract/level_data/neighbor = SSmapping.levels_by_id[other_id]
 		neighbor.add_connected_levels(found)
 
 /obj/abstract/level_data/proc/build_exterior_atmosphere()
@@ -151,7 +162,11 @@ INITIALIZE_IMMEDIATE(/obj/abstract/level_data)
 	name = "Mining Level"
 	level_flags = (ZLEVEL_PLAYER|ZLEVEL_SEALED)
 
+/obj/abstract/level_data/mining_level/asteroid
+	base_turf = /turf/simulated/floor/asteroid
+
 /obj/abstract/level_data/mining_level/build_level()
+	..()
 	new /datum/random_map/automata/cave_system(1, 1, my_z, world.maxx, world.maxy)
 	new /datum/random_map/noise/ore(1, 1, my_z, world.maxx, world.maxy)
 	refresh_mining_turfs()

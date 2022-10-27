@@ -222,7 +222,7 @@
 		if(length(possible_locations))
 			newz = pick(possible_locations)
 	if(!newz)
-		var/obj/abstract/level_data/level = SSzlevels.increment_world_z_size(/obj/abstract/level_data/space)
+		var/obj/abstract/level_data/level = SSmapping.increment_world_z_size(/obj/abstract/level_data/space)
 		newz = level?.my_z
 
 	if(newz)

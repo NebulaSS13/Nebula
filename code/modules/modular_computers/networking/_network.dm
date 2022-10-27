@@ -49,7 +49,7 @@
 		return FALSE
 	if(D in devices)
 		return TRUE
-	
+
 	if(!check_connection(D))
 		return FALSE
 
@@ -77,7 +77,7 @@
 	else if(istype(D, /datum/extension/network_device/camera))
 		var/datum/extension/network_device/camera/C = D
 		add_camera_to_channels(C, C.channels)
-	
+
 	D.network_tag = newtag
 	devices |= D
 	devices_by_tag[D.network_tag] = D
@@ -161,15 +161,15 @@
 		if(!broadcast_strength)
 			continue
 
-		// For long ranged devices, checking to make sure there's at least a functional broadcaster somewhere.		
+		// For long ranged devices, checking to make sure there's at least a functional broadcaster somewhere.
 		functional_broadcaster = TRUE
 
 		var/d_z = get_z(D.holder)
 		var/b_z = get_z(B.holder)
 
-		if(!SSzlevels.levels_are_z_connected(d_z, b_z))
+		if(!SSmapping.levels_are_z_connected(d_z, b_z))
 			continue
-		
+
 		if(d_z != b_z)  // If the broadcaster is not in the same z-level as the device, the broadcast strength is halved.
 			broadcast_strength = round(broadcast_strength/2)
 		var/distance = get_dist(get_turf(B.holder), get_turf(D.holder))
@@ -222,7 +222,7 @@
 	var/datum/computer_network/target_network = SSnetworking.networks[target_id]
 	if(!target_network)
 		return
-	
+
 	if(target_network == src)
 		if(network_features_enabled & feature)
 			return target_network
@@ -264,7 +264,7 @@
 /proc/get_local_network_at(turf/T)
 	for(var/id in SSnetworking.networks)
 		var/datum/computer_network/net = SSnetworking.networks[id]
-		if(net.router && SSzlevels.levels_are_z_connected(get_z(net.router.holder), get_z(T)))
+		if(net.router && SSmapping.levels_are_z_connected(get_z(net.router.holder), get_z(T)))
 			return net
 
 /datum/computer_network/proc/get_mainframes_by_role(mainframe_role = MF_ROLE_FILESERVER, list/accesses)

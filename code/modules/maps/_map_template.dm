@@ -7,7 +7,6 @@
 	var/loaded = 0 // Times loaded this round
 	var/list/shuttles_to_initialise = list()
 	var/list/subtemplates_to_spawn
-	var/base_turf_for_zs = null
 	var/accessibility_weight = 0
 	var/template_flags = TEMPLATE_FLAG_ALLOW_DUPLICATES
 	var/modify_tag_vars = TRUE // Will modify tag vars so that duplicate templates are handled properly. May have compatibility issues with legacy maps (esp. with ferry shuttles).
@@ -133,10 +132,8 @@
 
 	for (var/z_index = bounds[MAP_MINZ]; z_index <= bounds[MAP_MAXZ]; z_index++)
 		if (accessibility_weight)
-			SSzlevels.accessible_z_levels[num2text(z_index)] = accessibility_weight
-		if (base_turf_for_zs)
-			SSzlevels.base_turf_by_z[num2text(z_index)] = base_turf_for_zs
-		SSzlevels.player_levels |= z_index // TODO: make maps handle this with /obj/abstract/level_data
+			SSmapping.accessible_z_levels[num2text(z_index)] = accessibility_weight
+		SSmapping.player_levels |= z_index // TODO: make maps handle this with /obj/abstract/level_data
 
 	//initialize things that are normally initialized after map load
 	init_atoms(atoms_to_initialise)

@@ -37,7 +37,7 @@
 		plantcolors = _plant_colors
 	..()
 
-	SSzlevels.base_turf_by_z[num2text(tz)] = land_type
+	SSmapping.base_turf_by_z[num2text(tz)] = land_type
 
 /datum/random_map/noise/exoplanet/get_map_char(var/value)
 	if(water_type && noise2value(value) < water_level)
@@ -117,4 +117,4 @@
 				var/neighbors = get_neighbors(x, y, TRUE)
 				for(var/cell in neighbors)
 					if(noise2value(map[cell]) >= water_level)
-						map[cell] = COAST_VALUE		
+						map[cell] = COAST_VALUE
