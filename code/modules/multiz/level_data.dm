@@ -49,6 +49,7 @@ INITIALIZE_IMMEDIATE(/obj/abstract/level_data)
 		setup_level_data()
 
 /obj/abstract/level_data/proc/setup_level_data()
+
 	if(take_starlight_ambience)
 		ambient_light_level = config.starlight
 		ambient_light_color = SSskybox.background_color
@@ -64,7 +65,13 @@ INITIALIZE_IMMEDIATE(/obj/abstract/level_data)
 		SSzlevels.player_levels  |= my_z
 	if(level_flags & ZLEVEL_SEALED)
 		SSzlevels.sealed_levels  |= my_z
+
 	build_exterior_atmosphere()
+	if(config.generate_map)
+		build_level()
+
+/obj/abstract/level_data/proc/build_level()
+	return
 
 /obj/abstract/level_data/Destroy(var/force)
 	if(force)
@@ -74,7 +81,7 @@ INITIALIZE_IMMEDIATE(/obj/abstract/level_data)
 
 /obj/abstract/level_data/proc/find_connected_levels(var/list/found)
 	for(var/other_id in connects_to)
-		var/obj/abstract/level_data/neighbor = SSzlevels.levels_by_id[other_id] 
+		var/obj/abstract/level_data/neighbor = SSzlevels.levels_by_id[other_id]
 		neighbor.add_connected_levels(found)
 
 /obj/abstract/level_data/proc/add_connected_levels(var/list/found)
@@ -85,7 +92,7 @@ INITIALIZE_IMMEDIATE(/obj/abstract/level_data)
 	if(!length(connects_to))
 		return
 	for(var/other_id in connects_to)
-		var/obj/abstract/level_data/neighbor = SSzlevels.levels_by_id[other_id] 
+		var/obj/abstract/level_data/neighbor = SSzlevels.levels_by_id[other_id]
 		neighbor.add_connected_levels(found)
 
 /obj/abstract/level_data/proc/build_exterior_atmosphere()
@@ -132,12 +139,30 @@ INITIALIZE_IMMEDIATE(/obj/abstract/level_data)
 		/decl/material/gas/nitrogen = MOLES_N2STANDARD
 	)
 	exterior_atmos_temp = T20C
-	level_flags = ZLEVEL_SEALED
+	level_flags = (ZLEVEL_PLAYER|ZLEVEL_SEALED)
 	take_starlight_ambience = FALSE // This is set up by the exoplanet object.
 
 /obj/abstract/level_data/unit_test
 	name = "Test Area"
 	level_flags = (ZLEVEL_CONTACT|ZLEVEL_PLAYER|ZLEVEL_SEALED)
+
+// Used to generate mining ores etc.
+/obj/abstract/level_data/mining_level
+	name = "Mining Level"
+	level_flags = (ZLEVEL_PLAYER|ZLEVEL_SEALED)
+
+/obj/abstract/level_data/mining_level/build_level()
+	new /datum/random_map/automata/cave_system(1, 1, my_z, world.maxx, world.maxy)
+	new /datum/random_map/noise/ore(1, 1, my_z, world.maxx, world.maxy)
+	refresh_mining_turfs()
+
+/obj/abstract/level_data/mining_level/proc/refresh_mining_turfs()
+	set waitfor = FALSE
+	for(var/thing in global.mining_floors["[my_z]"])
+		var/turf/simulated/floor/asteroid/M = thing
+		if(istype(M))
+			M.updateMineralOverlays()
+		CHECK_TICK
 
 // Used as a dummy z-level for the overmap.
 /obj/abstract/level_data/overmap

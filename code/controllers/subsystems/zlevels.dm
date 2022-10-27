@@ -18,19 +18,22 @@ SUBSYSTEM_DEF(zlevels)
 	/// List of z-levels that don't allow random transit at edge
 	var/list/sealed_levels =  list()
 	/// Custom base turf by Z-level. Defaults to world.turf for unlisted Z-levels
-	var/list/base_turf_by_z = list() 
+	var/list/base_turf_by_z = list()
 	/// This list contains the z-level numbers which can be accessed via space travel and the percentile chances to get there.
 	var/list/accessible_z_levels = list()
 	/// Z-levels available to various consoles, such as the crew monitor. Defaults to station_levels if unset.
 	var/list/map_levels
 	/// The turf type used when generating floors between Z-levels at startup.
-	var/base_floor_type = /turf/simulated/floor/airless 
+	var/base_floor_type = /turf/simulated/floor/airless
 	/// Replacement area, if a base_floor_type is generated. Leave blank to skip.
 	var/base_floor_area
 	/// A list of connected z-levels to avoid repeatedly rebuilding connections
 	var/list/connected_z_cache = list()
 
 /datum/controller/subsystem/zlevels/Initialize(start_timeofday)
+#ifdef UNIT_TEST
+	config.generate_map = TRUE
+#endif
 	for(var/z = 1 to world.maxz)
 		var/obj/abstract/level_data/level = levels_by_z["[z]"]
 		if(level)

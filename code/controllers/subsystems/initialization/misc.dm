@@ -4,15 +4,6 @@ SUBSYSTEM_DEF(misc)
 	flags = SS_NO_FIRE
 
 /datum/controller/subsystem/misc/Initialize()
-
-#ifdef UNIT_TEST
-	config.generate_map = TRUE
-#endif
-
-	if(config.generate_map)
-		global.using_map.perform_map_generation()
-
 	setupgenetics()
-
 	transfer_controller = new
 	. = ..()
