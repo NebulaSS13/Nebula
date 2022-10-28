@@ -26,6 +26,18 @@ var/global/obj/temp_reagents_holder = new
 			my_atom.reagents = null
 		my_atom = null
 
+//Don't forget to call set_holder() after getting the copy!
+/datum/reagents/Clone(datum/reagents/copy_instance = null)
+	if(!copy_instance)
+		copy_instance = new type(maximum_volume, global.temp_reagents_holder)
+	copy_instance = ..(copy_instance)
+
+	for(var/rtype in reagent_volumes)
+		var/list/rdata = LAZYACCESS(reagent_data, rtype)
+		copy_instance.add_reagent(rtype, reagent_volumes[rtype], rdata?.Copy(), TRUE, TRUE)
+	copy_instance.handle_update(TRUE) //No reacting
+	return copy_instance
+
 /datum/reagents/proc/get_reaction_loc()
 	return my_atom
 
@@ -164,8 +176,14 @@ var/global/obj/temp_reagents_holder = new
 	if(my_atom)
 		my_atom.on_reagent_change()
 
-/datum/reagents/proc/add_reagent(var/reagent_type, var/amount, var/data = null, var/safety = 0, var/defer_update = FALSE)
+///Set and call updates on the target holder. 
+/datum/reagents/proc/set_holder(var/obj/new_holder)
+	my_atom = new_holder
+	if(my_atom)
+		my_atom.on_reagent_change()
+	handle_update()
 
+/datum/reagents/proc/add_reagent(var/reagent_type, var/amount, var/data = null, var/safety = 0, var/defer_update = FALSE)
 	amount = NONUNIT_FLOOR(min(amount, REAGENTS_FREE_SPACE(src)), MINIMUM_CHEMICAL_VOLUME)
 	if(amount <= 0)
 		return FALSE

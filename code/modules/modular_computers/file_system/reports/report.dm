@@ -98,16 +98,19 @@ The recursive option resets access to all fields in the report as well.
 	fields += field
 	return field
 
-/datum/computer_file/report/clone()
-	var/datum/computer_file/report/temp = ..()
-	temp.title = title
-	temp.form_name = form_name
-	temp.creator = creator
-	temp.file_time = file_time
+/datum/computer_file/report/Clone(datum/computer_file/report/copy_instance = null, rename = FALSE)
+	if(!copy_instance)
+		copy_instance = new type
+	copy_instance = ..(copy_instance, rename)
+
+	copy_instance.title     = title
+	copy_instance.form_name = form_name
+	copy_instance.creator   = creator
+	copy_instance.file_time = file_time
 	for(var/i = 1, i <= length(fields), i++)
-		var/datum/report_field/new_field = temp.fields[i]
+		var/datum/report_field/new_field = copy_instance.fields[i]
 		new_field.copy_value(fields[i])
-	return temp
+	return copy_instance
 
 /datum/computer_file/report/proc/display_name()
 	return "Form [form_name]: [title]"

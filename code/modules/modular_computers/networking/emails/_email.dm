@@ -25,7 +25,7 @@
 	if(!(recipient in get_accounts_unsorted()))
 		return FALSE
 	
-	var/datum/computer_file/data/email_message/received_copy = received.clone()
+	var/datum/computer_file/data/email_message/received_copy = received.Clone()
 	received_copy.set_timestamp()
 	recipient.inbox.Add(received_copy)
 	
@@ -40,6 +40,6 @@
 		for(var/datum/computer_file/data/account/email_account in get_accounts_unsorted())
 			if(email_account.broadcaster)
 				continue
-			var/datum/computer_file/data/email_message/new_message = received.clone()
+			var/datum/computer_file/data/email_message/new_message = received.Clone()
 			send_email(recipient, "[email_account.login]@[network_id]", new_message)
 	return TRUE

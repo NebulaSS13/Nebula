@@ -34,16 +34,18 @@
 /datum/computer_file/program/nano_host()
 	return computer && computer.nano_host()
 
-/datum/computer_file/program/clone()
-	var/datum/computer_file/program/temp = ..()
-	temp.read_access = read_access
-	temp.nanomodule_path = nanomodule_path
-	temp.filedesc = filedesc
-	temp.program_icon_state = program_icon_state
-	temp.requires_network = requires_network
-	temp.requires_network_feature = requires_network_feature
-	temp.usage_flags = usage_flags
-	return temp
+/datum/computer_file/program/Clone(datum/computer_file/program/copy_instance = null, rename = FALSE)
+	if(!copy_instance)
+		copy_instance = new type
+	copy_instance = ..(copy_instance, rename)
+	copy_instance.read_access        = read_access
+	copy_instance.nanomodule_path    = nanomodule_path
+	copy_instance.filedesc           = filedesc
+	copy_instance.program_icon_state = program_icon_state
+	copy_instance.requires_network   = requires_network
+	copy_instance.requires_network_feature = requires_network_feature
+	copy_instance.usage_flags        = usage_flags
+	return copy_instance
 
 // Used by programs that manipulate files.
 /datum/computer_file/program/proc/get_file(var/filename, var/directory, var/list/accesses, var/mob/user)

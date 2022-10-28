@@ -434,7 +434,7 @@
 			if(CF.unsendable)
 				continue
 			if(CF.filename == picked_file)
-				msg_attachment = CF.clone()
+				msg_attachment = CF.Clone()
 				break
 		if(!istype(msg_attachment))
 			msg_attachment = null
@@ -455,7 +455,7 @@
 		if(!drive)
 			return 1
 
-		downloading = current_message.attachment.clone()
+		downloading = current_message.attachment.Clone()
 		download_progress = 0
 		return 1
 

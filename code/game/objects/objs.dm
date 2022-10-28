@@ -263,6 +263,36 @@
 /obj/proc/populate_reagents()
 	return
 
+//#TODO: Implement me for all other objects!
+/obj/Clone(obj/copy_instance = null)
+	if(!copy_instance)
+		copy_instance = new type
+	
+	//Obj stuff
+	copy_instance.color      = color
+	copy_instance.opacity    = opacity
+	copy_instance.alpha      = alpha
+	copy_instance.req_access = req_access?.Copy()
+	copy_instance.matter     = matter?.Copy()
+
+	//#TODO: once item damage in, check health!
+
+	//Atom stuff
+	copy_instance.SetName(name)
+	copy_instance.blood_DNA    = blood_DNA
+	copy_instance.was_bloodied = was_bloodied
+	copy_instance.blood_color  = blood_color
+	copy_instance.germ_level   = germ_level
+	copy_instance.temperature  = temperature
+
+	//Setup reagents
+	copy_instance.reagents = reagents?.Clone()
+	if(copy_instance.reagents)
+		copy_instance.reagents.set_holder(copy_instance)
+
+	update_icon()
+	return copy_instance
+
 /**
  * Returns a list with the contents that may be spawned in this object.
  * This shouldn't include things that are necessary for the object to operate, like machine components. 

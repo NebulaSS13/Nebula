@@ -20,11 +20,13 @@
 	category = PROG_COMMAND
 	var/datum/comm_message_listener/message_core = new
 
-/datum/computer_file/program/comm/clone()
-	var/datum/computer_file/program/comm/temp = ..()
-	temp.message_core.messages = null
-	temp.message_core.messages = message_core.messages.Copy()
-	return temp
+/datum/computer_file/program/comm/Clone(datum/computer_file/program/comm/copy_instance = null, rename = FALSE)
+	if(!copy_instance)
+		copy_instance = new type
+	copy_instance = ..(copy_instance, rename)
+	copy_instance.message_core.messages = null
+	copy_instance.message_core.messages = message_core.messages.Copy()
+	return copy_instance
 
 /datum/nano_module/program/comm
 	name = "Command and Communications Program"

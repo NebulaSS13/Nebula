@@ -68,23 +68,22 @@
 
 /datum/computer_file/data/account/proc/receive_mail(var/datum/computer_file/data/email_message/received_message, var/datum/computer_network/network)
 
-/datum/computer_file/data/account/clone()
-	var/datum/computer_file/data/account/copy = ..(TRUE) // We always rename the file since a copied account is always a backup.
-	copy.backup = TRUE
-
-	copy.login = login
-	copy.password = password
-	copy.can_login = can_login
-	copy.suspended = suspended
-
-	copy.groups = groups.Copy()
-	copy.parent_groups = parent_groups.Copy()
-
-	copy.fullname = fullname
+/datum/computer_file/data/account/Clone(datum/computer_file/data/account/copy_instance = null, rename = TRUE)
+	if(!copy_instance)
+		copy_instance = new type
+	copy_instance = ..(copy_instance, TRUE) // We always rename the file since a copied account is always a backup.
+	copy_instance.backup        = TRUE
+	copy_instance.login         = login
+	copy_instance.password      = password
+	copy_instance.can_login     = can_login
+	copy_instance.suspended     = suspended
+	copy_instance.groups        = groups.Copy()
+	copy_instance.parent_groups = parent_groups.Copy()
+	copy_instance.fullname      = fullname
 
 	// TODO: Don't backup e-mails for now - they are themselves other files which makes this complicated. In the future
 	// accounts will point to e-mails stored seperately on a server.
-	return copy
+	return copy_instance
 
 // Address namespace (@internal-services.net) for email addresses with special purpose only!.
 /datum/computer_file/data/account/service
