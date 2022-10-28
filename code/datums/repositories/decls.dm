@@ -126,3 +126,6 @@ var/global/repository/decls/decls_repository = new
 	SHOULD_CALL_PARENT(FALSE)
 	PRINT_STACK_TRACE("Prevented attempt to delete a /decl instance: [log_info_line(src)]")
 	return QDEL_HINT_LETMELIVE
+
+/decl/Clone(datum/copy_instance)
+	CRASH("You can't clone a singleton!")
