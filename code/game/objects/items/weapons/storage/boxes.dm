@@ -188,10 +188,16 @@
 	startswith = list(/obj/item/grenade/chem_grenade/teargas = 7)
 
 /obj/item/storage/box/emps
-	name = "box of emp grenades"
+	name = "box of EMP grenades"
 	desc = "A box containing 5 military grade EMP grenades.<br> WARNING: Do not use near unshielded electronics or biomechanical augmentations, death or permanent paralysis may occur."
 	icon_state = "flashbang"
 	startswith = list(/obj/item/grenade/empgrenade = 5)
+
+/obj/item/storage/box/empslite
+	name = "box of low-yield EMP grenades"
+	desc = "A box containing 5 low yield EMP grenades.<br> WARNING: Do not use near unshielded electronics or biomechanical augmentations, death or permanent paralysis may occur."
+	icon_state = "flashbang"
+	startswith = list(/obj/item/grenade/empgrenade/low_yield = 5)
 
 /obj/item/storage/box/frags
 	name = "box of frag grenades"
