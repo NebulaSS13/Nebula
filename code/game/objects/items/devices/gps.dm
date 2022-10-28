@@ -31,10 +31,6 @@ var/global/list/all_gps_units = list()
 	var/obj/compass_holder/compass
 	var/list/decals
 
-// Mapped type for away site GPS.
-/obj/item/gps/marker
-	is_special_gps_marker = TRUE
-
 /obj/item/gps/Initialize()
 	global.all_gps_units += src
 	. = ..()
@@ -385,3 +381,45 @@ var/global/list/all_gps_units = list()
 /decl/interaction_handler/gps_toggle/invoked(atom/target, mob/user)
 	var/obj/item/gps/G = target
 	G.toggle_tracking(user)
+
+/*
+ * Subtypes
+ */
+
+// Mapped type for away site GPS.
+/obj/item/gps/marker/Initialize()
+	. = ..()
+	if(!tracking)
+		toggle_tracking()
+
+/obj/item/gps/marker/special
+	is_special_gps_marker = TRUE
+
+// Department subtypes.
+/obj/item/gps/mining
+	color = "#c08f45"
+	decals = list(
+		"stripe-outside" = "#702e98",
+		"stripe-inside" =  "#702e98"
+	)
+
+/obj/item/gps/science
+	color = "#dbcfdf"
+	decals = list(
+		"stripe-outside" = "#cc33ff",
+		"stripe-inside" =  "#9933ff"
+	)
+
+/obj/item/gps/medical
+	color = "#ebebeb"
+	decals = list(
+		"stripe-outside" = "#6ab8fe",
+		"stripe-inside" =  "#339efe"
+	)
+
+/obj/item/gps/explorer
+	color = "#4a4a4a"
+	decals = list(
+		"stripe-outside" = "#500677",
+		"stripe-inside" =  "#68099e"
+	)
