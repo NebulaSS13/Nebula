@@ -1388,15 +1388,18 @@ var/global/list/random_useful_
 	icon_state = "lipstick_closed"
 
 /obj/random/lipstick/spawn_choices()
-	return list(/obj/item/lipstick,
-				/obj/item/lipstick/blue,
-				/obj/item/lipstick/green,
-				/obj/item/lipstick/turquoise,
-				/obj/item/lipstick/violet,
-				/obj/item/lipstick/yellow,
-				/obj/item/lipstick/orange,
-				/obj/item/lipstick/white,
-				/obj/item/lipstick/black)
+	return list(
+		/obj/item/lipstick,
+		/obj/item/lipstick/blue,
+		/obj/item/lipstick/green,
+		/obj/item/lipstick/turquoise,
+		/obj/item/lipstick/violet,
+		/obj/item/lipstick/yellow,
+		/obj/item/lipstick/orange,
+		/obj/item/lipstick/white,
+		/obj/item/lipstick/black,
+		/obj/item/lipstick/purple
+	)
 
 /obj/random/seaweed
 	name = "random seaweed"
