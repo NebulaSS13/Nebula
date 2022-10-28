@@ -5,33 +5,33 @@
 	log_say("[key_name(src)] : [message]")
 
 /mob/living/silicon/robot/handle_message_mode(message_mode, message, verb, speaking, used_radios, alt_name)
-	..()
 	if(message_mode)
 		if(!is_component_functioning("radio"))
-			to_chat(src, "<span class='warning'>Your radio isn't functional at this time.</span>")
-			return 0
+			to_chat(src, SPAN_WARNING("Your radio isn't functional at this time."))
+			return FALSE
 		if(message_mode == "general")
 			message_mode = null
-		return silicon_radio.talk_into(src,message,message_mode,verb,speaking)
+		return silicon_radio.talk_into(src, message, message_mode, verb, speaking)
+	return ..()
 
 /mob/living/silicon/ai/handle_message_mode(message_mode, message, verb, speaking, used_radios, alt_name)
-	..()
-	if(message_mode == "department")
-		return holopad_talk(message, verb, speaking)
-	else if(message_mode)
+	if(message_mode)
+		if(message_mode == "department")
+			return holopad_talk(message, verb, speaking)
 		if (ai_radio.disabledAi || !has_power() || stat)
 			to_chat(src, "<span class='danger'>System Error - Transceiver Disabled.</span>")
-			return 0
+			return FALSE
 		if(message_mode == "general")
 			message_mode = null
 		return ai_radio.talk_into(src,message,message_mode,verb,speaking)
+	return ..()
 
 /mob/living/silicon/pai/handle_message_mode(message_mode, message, verb, speaking, used_radios, alt_name)
-	..()
 	if(message_mode)
 		if(message_mode == "general")
 			message_mode = null
 		return silicon_radio.talk_into(src,message,message_mode,verb,speaking)
+	return ..()
 
 /mob/living/silicon/say_quote(var/text)
 	var/ending = copytext(text, length(text))

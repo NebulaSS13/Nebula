@@ -130,7 +130,7 @@
 
 /obj/machinery/alarm/Destroy()
 	reset_area(alarm_area, null)
-	unregister_radio(src, frequency)
+	unregister_radio_to_controller(src, frequency)
 	return ..()
 
 /obj/machinery/alarm/Initialize(mapload, var/dir)
