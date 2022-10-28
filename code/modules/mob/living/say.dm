@@ -139,13 +139,49 @@ var/global/list/channel_to_radio_key = new
 	message_data[1] = message
 	message_data[2] = verb
 
+// Grabs any radios equipped to the mob, with message_mode used to
+// determine relevancy. See handle_message_mode below.
+/mob/living/proc/get_radios(var/message_mode)
+
+	if(!message_mode)
+		return
+
+	var/list/possible_radios
+	if(message_mode == "right ear" || message_mode == "left ear")
+		var/use_right = message_mode == "right ear"
+		var/obj/item/thing = get_equipped_item(use_right ? slot_r_ear_str : slot_l_ear_str)
+		if(thing)
+			LAZYDISTINCTADD(possible_radios, thing)
+		else
+			thing = get_equipped_item(use_right ? BP_R_HAND : BP_L_HAND)
+			if(thing)
+				LAZYDISTINCTADD(possible_radios, thing)
+	else
+		for(var/slot in global.ear_slots)
+			var/thing = get_equipped_item(slot)
+			if(thing)
+				LAZYDISTINCTADD(possible_radios, thing)
+
+	if(length(possible_radios))
+		for(var/atom/movable/thing as anything in possible_radios)
+			var/obj/item/radio/radio = thing.get_radio(message_mode)
+			if(istype(radio))
+				LAZYDISTINCTADD(., radio)
+
+// This proc takes in a string (message_mode) which maps to a radio key in global.department_radio_keys
+// It then processes the message_mode to implement an additional behavior needed for the message, such
+// as retrieving radios or looking for an intercom nearby.
 /mob/living/proc/handle_message_mode(message_mode, message, verb, speaking, used_radios, alt_name)
-	if(message_mode == "intercom")
-		for(var/obj/item/radio/I in view(1, null))
+	var/list/assess_items_as_radios = get_radios(message_mode)
+	if(message_mode == "intercom" && !restrained())
+		for(var/obj/item/radio/I in view(1))
 			if(I.intercom_handling)
-				I.talk_into(src, message, verb, speaking)
-				used_radios += I
-	return 0
+				LAZYDISTINCTADD(assess_items_as_radios, I)
+	for(var/obj/item/radio/radio as anything in assess_items_as_radios)
+		used_radios += radio
+		radio.add_fingerprint(src)
+		radio.talk_into(src, message, message_mode, verb, speaking)
+		. = TRUE
 
 /mob/living/proc/handle_speech_sound()
 	var/list/returns[2]

@@ -42,6 +42,9 @@
 
 	var/intercom_handling = FALSE
 
+/obj/item/radio/get_radio(var/message_mode)
+	return src
+
 /obj/item/radio/proc/set_frequency(new_frequency)
 	radio_controller.remove_object(src, frequency)
 	frequency = new_frequency
@@ -248,7 +251,7 @@
 	qdel(A)
 
 // Interprets the message mode when talking into a radio, possibly returning a connection datum
-/obj/item/radio/proc/handle_message_mode(mob/living/M, message, message_mode)
+/obj/item/radio/proc/get_connection_from_message_mode(mob/living/M, message, message_mode)
 	// If a channel isn't specified, send to common.
 	if(!message_mode || message_mode == "headset")
 		return radio_connection
@@ -317,7 +320,7 @@
 	*/
 
 	//#### Grab the connection datum ####//
-	var/datum/radio_frequency/connection = handle_message_mode(M, message, channel)
+	var/datum/radio_frequency/connection = get_connection_from_message_mode(M, message, channel)
 	if (!istype(connection))
 		return 0
 

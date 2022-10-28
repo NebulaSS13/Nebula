@@ -48,13 +48,12 @@
 	to_chat(user, "The following channels are available:")
 	to_chat(user, radio_desc)
 
-/obj/item/radio/headset/handle_message_mode(mob/living/M, message, channel)
-	if (channel == "special")
+/obj/item/radio/headset/get_connection_from_message_mode(mob/living/M, message, message_mode)
+	if (message_mode == "special")
 		if (translate_binary)
 			var/decl/language/binary = GET_DECL(/decl/language/binary)
 			binary.broadcast(M, message)
 		return null
-
 	return ..()
 
 /obj/item/radio/headset/receive_range(freq, level, aiOverride = 0)

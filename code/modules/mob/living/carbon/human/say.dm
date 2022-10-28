@@ -114,46 +114,10 @@
 	return ..(message_data)
 
 /mob/living/carbon/human/handle_message_mode(message_mode, message, verb, speaking, used_radios, alt_name)
-	var/use_mode = null
-	switch(message_mode)
-
-		if("intercom")
-			if(!restrained())
-				for(var/obj/item/radio/I in view(1))
-					if(I.intercom_handling)
-						used_radios += I
-
-		if("right ear", "left ear")
-			var/use_right = message_mode == "right ear"
-			var/obj/item/radio/R = get_equipped_item(use_right ? slot_r_ear_str : slot_l_ear_str)
-			if(!istype(R))
-				R = null
-				var/datum/inventory_slot/inv_slot = LAZYACCESS(held_item_slots, (use_right ? BP_R_HAND : BP_L_HAND))
-				if(istype(inv_slot?.holding, /obj/item/radio))
-					R = inv_slot.holding
-			if(R)
-				used_radios += R
-
-		if("whisper") //It's going to get sanitized again immediately, so decode.
-			whisper_say(html_decode(message), speaking, alt_name)
-			return 1
-
-		else
-			// Headsets are default.
-			if(message_mode)
-				var/obj/item/radio/R
-				for(var/slot in global.ear_slots)
-					R = get_equipped_item(slot)
-					if(istype(R))
-						break
-				if(!istype(R))
-					R = GetRadio()
-				if(istype(R))
-					used_radios += R
-
-	for(var/obj/item/radio in used_radios)
-		radio.add_fingerprint(src)
-		radio.talk_into(src,message,use_mode,verb,speaking)
+	if(message_mode == "whisper") //It's going to get sanitized again immediately, so decode.
+		whisper_say(html_decode(message), speaking, alt_name)
+		return TRUE
+	return ..()
 
 /mob/living/carbon/human/handle_speech_sound()
 	if(species.speech_sounds && prob(species.speech_chance))
