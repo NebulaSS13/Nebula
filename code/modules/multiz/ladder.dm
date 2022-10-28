@@ -141,8 +141,10 @@
 	if(istype(AIeye))
 		instant_climb(AIeye)
 
-/obj/structure/ladder/attack_robot(var/mob/M)
-	climb(M)
+/obj/structure/ladder/attack_robot(var/mob/user)
+	if(CanPhysicallyInteract(user))
+		climb(user)
+		return TRUE
 
 /obj/structure/ladder/proc/instant_climb(var/mob/M)
 	var/atom/target_ladder = getTargetLadder(M)

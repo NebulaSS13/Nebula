@@ -9,17 +9,17 @@
 
 /obj/structure/anomaly_container/Initialize()
 	. = ..()
-
 	var/obj/structure/artifact/A = locate() in loc
 	if(A)
 		contain(A)
 
 /obj/structure/anomaly_container/attack_hand(var/mob/user)
 	release()
+	return TRUE
 
 /obj/structure/anomaly_container/attack_robot(var/mob/user)
-	if(Adjacent(user))
-		release()
+	if(CanPhysicallyInteract(user))
+		return attack_hand(user)
 
 /obj/structure/anomaly_container/proc/contain(var/obj/structure/artifact/artifact)
 	if(contained)

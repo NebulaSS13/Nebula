@@ -58,7 +58,7 @@
 /obj/structure/morgue/proc/close()
 	if(!open)
 		return
-	
+
 	if(!connected_tray)
 		return
 
@@ -72,7 +72,7 @@
 	open = FALSE
 	update_icon()
 
-/obj/structure/morgue/attack_hand(mob/user)	
+/obj/structure/morgue/attack_hand(mob/user)
 	if(open)
 		close()
 	else
@@ -81,7 +81,7 @@
 	return ..()
 
 /obj/structure/morgue/attack_robot(mob/user)
-	if(Adjacent(user))
+	if(CanPhysicallyInteract(user))
 		return attack_hand(user)
 
 /obj/structure/morgue/relaymove(mob/user)
@@ -114,8 +114,8 @@
 	return ..()
 
 /obj/structure/morgue_tray/attack_robot(mob/user)
-	if(Adjacent(user))
-		attack_hand(user)
+	if(CanPhysicallyInteract(user))
+		return attack_hand(user)
 
 /obj/structure/morgue_tray/receive_mouse_drop(atom/dropping, mob/user)
 	. = ..()

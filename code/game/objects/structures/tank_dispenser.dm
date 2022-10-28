@@ -43,7 +43,7 @@
 /obj/structure/tank_rack/dump_contents()
 	hydrogen_tanks = null
 	oxygen_tanks = null
-	. = ..()
+	return ..()
 
 /obj/structure/tank_rack/on_update_icon()
 	..()
@@ -62,10 +62,9 @@
 		if(5 to INFINITY)
 			add_overlay("hydrogen-5")
 
-/obj/structure/tank_rack/attack_ai(mob/living/silicon/ai/user)
-	if(user.Adjacent(src))
+/obj/structure/tank_rack/attack_robot(mob/user)
+	if(CanPhysicallyInteract(user))
 		return attack_hand(user)
-	..()
 
 /obj/structure/tank_rack/attack_hand(mob/user)
 	var/list/dat = list()
@@ -81,18 +80,21 @@
 	if(istype(I, /obj/item/tank))
 		var/list/adding_to_list
 		if(istype(I, /obj/item/tank/oxygen) || istype(I, /obj/item/tank/air))
+			LAZYINITLIST(oxygen_tanks)
 			adding_to_list = oxygen_tanks
 		else if(istype(I, /obj/item/tank/hydrogen))
+			LAZYINITLIST(hydrogen_tanks)
 			adding_to_list = hydrogen_tanks
 		if(LAZYLEN(adding_to_list) >= 10)
 			to_chat(user, SPAN_WARNING("\The [src] is full."))
+			UNSETEMPTY(adding_to_list)
 			return TRUE
 		if(!user.unEquip(I, src))
 			return TRUE
 		LAZYADD(adding_to_list, weakref(I))
 		to_chat(user, SPAN_NOTICE("You put [I] in [src]."))
-		if(LAZYLEN(adding_to_list) < 5)
-			update_icon()
+		update_icon()
+		attack_hand(user)
 		return TRUE
 	return ..()
 
