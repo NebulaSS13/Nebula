@@ -51,22 +51,19 @@
 	if(!mapload && persist_on_init)
 		SSpersistence.track_value(src, /decl/persistence_handler/paper)
 
-/**Creates a complete copy of this object */
-/obj/item/paper/proc/Clone()
-	var/obj/item/paper/P = new(loc, , info, name)
-	P.fields             = fields
-	P.last_modified_ckey = last_modified_ckey
-	P.rigged             = rigged
-	P.is_crumpled        = is_crumpled
-	P.stamp_text         = stamp_text
-	P.applied_stamps     = LAZYLEN(applied_stamps)? applied_stamps.Copy() : null
-	P.metadata           = LAZYLEN(metadata)?       metadata.Copy()       : null
-
-	P.set_color(color)
-	P.set_opacity(opacity)
-	P.updateinfolinks()
-	P.update_icon()
-	return P
+/obj/item/paper/Clone(obj/item/paper/copy_instance = null)
+	if(!copy_instance)
+		copy_instance = new type(null, material, info, name)
+	
+	copy_instance.fields             = fields
+	copy_instance.last_modified_ckey = last_modified_ckey
+	copy_instance.rigged             = rigged
+	copy_instance.is_crumpled        = is_crumpled
+	copy_instance.stamp_text         = stamp_text
+	copy_instance.applied_stamps     = LAZYLEN(applied_stamps)? applied_stamps.Copy() : null
+	copy_instance.metadata           = LAZYLEN(metadata)?       metadata.Copy()       : null
+	copy_instance.updateinfolinks()
+	return ..(copy_instance) //Calls update_icon()
 
 /obj/item/paper/get_matter_amount_modifier()
 	return 0.2

@@ -149,6 +149,23 @@
 	else
 		return ..()
 
+/obj/item/Clone(obj/item/copy_instance = null)
+	if(!copy_instance)
+		copy_instance = new type(null, material)
+	copy_instance.contaminated = contaminated
+	copy_instance.blood_overlay = image(blood_overlay)
+
+	//Health
+	copy_instance.health = health
+	//#TODO: once item damage in, check health!
+
+	//Coating
+	copy_instance.coating = coating?.Clone()
+	if(copy_instance.coating)
+		copy_instance.coating.set_holder(copy_instance)
+
+	return ..(copy_instance) //Calls update_icon()
+
 //Checks if the item is being held by a mob, and if so, updates the held icons
 /obj/item/proc/update_twohanding()
 	update_held_icon()

@@ -33,15 +33,3 @@
 			var/obj/item/paper_bundle/PP = P
 			PP.attack_self(user)
 			. = TOPIC_HANDLED
-
-/**Call the clone proc on a paperwork item, if its a valid paperwork item. */
-/proc/clone_paper_work_item(var/obj/item/I)
-	if(istype(I, /obj/item/paper))
-		var/obj/item/paper/P = I
-		return P.Clone()
-	if(istype(I, /obj/item/photo))
-		var/obj/item/photo/P = I
-		return P.Clone()
-	if(istype(I, /obj/item/paper_bundle))
-		var/obj/item/paper_bundle/P = I
-		return P.Clone()

@@ -86,21 +86,23 @@ var/global/list/datum/dna/gene/dna_genes[0]
 
 // Make a copy of this strand.
 // USE THIS WHEN COPYING STUFF OR YOU'LL GET CORRUPTION!
-/datum/dna/proc/Clone()
-	var/datum/dna/new_dna = new()
-	new_dna.lineage=lineage
-	new_dna.unique_enzymes=unique_enzymes
-	new_dna.b_type=b_type
-	new_dna.real_name=real_name
-	new_dna.species=species || global.using_map.default_species
-	new_dna.body_markings=body_markings.Copy()
-	for(var/b=1;b<=DNA_SE_LENGTH;b++)
-		new_dna.SE[b]=SE[b]
-		if(b<=DNA_UI_LENGTH)
-			new_dna.UI[b]=UI[b]
-	new_dna.UpdateUI()
-	new_dna.UpdateSE()
-	return new_dna
+/datum/dna/Clone(datum/dna/copy_instance = null)
+	if(!copy_instance)
+		copy_instance = new type
+	copy_instance.lineage        = lineage
+	copy_instance.unique_enzymes = unique_enzymes
+	copy_instance.b_type         = b_type
+	copy_instance.real_name      = real_name
+	copy_instance.species        = species || global.using_map.default_species
+	copy_instance.body_markings  = body_markings.Copy()
+	for(var/b=1; b<=DNA_SE_LENGTH; b++)
+		copy_instance.SE[b] = SE[b]
+		if(b <= DNA_UI_LENGTH)
+			copy_instance.UI[b] = UI[b]
+	copy_instance.UpdateUI()
+	copy_instance.UpdateSE()
+	return copy_instance
+
 ///////////////////////////////////////
 // UNIQUE IDENTITY
 ///////////////////////////////////////

@@ -251,7 +251,7 @@
 
 /**Creates a clone of the specified item. Returns a list of cloned items. */
 /obj/machinery/photocopier/proc/scan_item(var/obj/item/I)
-	LAZYADD(., clone_paper_work_item(I))
+	LAZYADD(., I.Clone())
 
 /**Check if the amount of toner and paper are available */
 /obj/machinery/photocopier/proc/has_enough_to_print(var/req_toner = TONER_USAGE_PAPER, var/req_paper = 1)

@@ -67,3 +67,11 @@
 /datum/proc/get_recursive_loc_of_type(var/loc_type)
 	SHOULD_CALL_PARENT(FALSE)
 	CRASH("get_recursive_loc_of_type() called on datum type [type] - this proc should only be called on /atom.")
+
+/**
+ * This proc returns a copy of the src datum.
+ * Copy here implies a copy as similar in terms of look and contents, but internally may differ a bit. 
+ * copy_instance is an optional parameter with the instance to copy the content of the src datum into. It's expected to be of a subtype of the src of the proc being called on.
+ */
+/datum/proc/Clone(var/datum/copy_instance = null)
+	return

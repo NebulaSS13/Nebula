@@ -23,7 +23,7 @@
 /obj/item/disk/proc/write_file(var/datum/computer_file/data/F, var/new_name = null)
 	if(F.block_size > free_blocks)
 		return FALSE
-	F = F.clone()
+	F = F.Clone()
 	if(length(new_name))
 		F.filename = new_name
 
@@ -42,7 +42,7 @@
 /**Clone the file. */
 /obj/item/disk/proc/copy_file(var/name)
 	var/datum/computer_file/F = LAZYACCESS(stored_files, name)
-	return F?.clone()
+	return F?.Clone()
 
 /**Delete a specific file. Fails if file is write protected, and force is FALSE. */
 /obj/item/disk/proc/delete_file(var/name, var/force = FALSE)

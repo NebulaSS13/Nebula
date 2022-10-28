@@ -11,15 +11,17 @@
 	. = ..()
 	QDEL_NULL(attachment)
 
-/datum/computer_file/data/email_message/clone()
-	var/datum/computer_file/data/email_message/temp = ..()
-	temp.title = title
-	temp.source = source
-	temp.spam = spam
-	temp.timestamp = timestamp
+/datum/computer_file/data/email_message/Clone(datum/computer_file/data/email_message/copy_instance = null, rename = FALSE)
+	if(!copy_instance)
+		copy_instance = new type
+	copy_instance = ..(copy_instance, rename)
+	copy_instance.title = title
+	copy_instance.source = source
+	copy_instance.spam = spam
+	copy_instance.timestamp = timestamp
 	if(attachment)
-		temp.attachment = attachment.clone()
-	return temp
+		copy_instance.attachment = attachment.Clone()
+	return copy_instance
 
 // Turns /email_message/ file into regular /data/ file.
 /datum/computer_file/data/email_message/proc/export()

@@ -35,22 +35,23 @@ var/global/file_uid = 0
 	. = ..()
 
 // Returns independent copy of this file.
-/datum/computer_file/proc/clone(var/rename = 0)
-	var/datum/computer_file/temp = new type
-	temp.unsendable = unsendable
-	temp.undeletable = undeletable
-	temp.size = size
+/datum/computer_file/Clone(datum/computer_file/copy_instance = null, var/rename = FALSE)
+	if(!copy_instance)
+		copy_instance = new type
+	copy_instance.unsendable  = unsendable
+	copy_instance.undeletable = undeletable
+	copy_instance.size        = size
 	if(metadata)
-		temp.metadata = metadata.Copy()
+		copy_instance.metadata = metadata.Copy()
 	if(rename)
-		temp.filename = filename + copy_string
+		copy_instance.filename = filename + copy_string
 	else
-		temp.filename = filename
-	temp.filetype = filetype
-	temp.read_access = read_access
-	temp.write_access = write_access
-	temp.mod_access = mod_access
-	return temp
+		copy_instance.filename = filename
+	copy_instance.filetype     = filetype
+	copy_instance.read_access  = read_access
+	copy_instance.write_access = write_access
+	copy_instance.mod_access   = mod_access
+	return copy_instance
 
 /datum/computer_file/proc/get_file_perms(var/list/accesses, var/mob/user)
 	. = 0

@@ -509,7 +509,7 @@ var/global/list/adminfaxes     = list()	//cache for faxes that have been sent to
 
 	//Call receive on the target machine
 	var/decl/public_access/public_method/send_method = GET_DECL(/decl/public_access/public_method/fax_receive_document)
-	if(send_method.perform(target, clone_paper_work_item(scanner_item), "[get_area(src)]'s [src]", sender_dev.get_network_URI()))
+	if(send_method.perform(target, scanner_item.Clone(), "[get_area(src)]'s [src]", sender_dev.get_network_URI()))
 		log_history("Outgoing", "'[scanner_item]', from '[get_area(src)]'s [src]' @ '[sender_dev.get_network_URI()]' to '[get_area(target)]'s [target]' @ '[target_dev.get_network_URI()]'.")
 		//#TODO: sync the animation, sound and message together when I got enough patience.
 		ping("Message transmitted successfully.")
@@ -661,7 +661,7 @@ var/global/list/adminfaxes     = list()	//cache for faxes that have been sent to
 
 /**Helper for sending a fax from a fax machine to an admin destination. */
 /proc/send_fax_to_admin(var/mob/sender, var/obj/item/doc, var/network_URI, var/obj/machinery/faxmachine/source_fax)
-	var/obj/item/rcvdcopy = clone_paper_work_item(doc)
+	var/obj/item/rcvdcopy = doc.Clone()
 	if(!rcvdcopy)
 		return
 	rcvdcopy.forceMove(null)
