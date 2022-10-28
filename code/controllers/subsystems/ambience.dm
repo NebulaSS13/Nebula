@@ -30,25 +30,20 @@ SUBSYSTEM_DEF(ambience)
 		return FALSE
 
 	// If we're dynamically lit, we want ambient light regardless of neighbors.
-	. = TURF_IS_DYNAMICALLY_LIT_UNSAFE(src)
+	var/lit = TURF_IS_DYNAMICALLY_LIT_UNSAFE(src)
 	// If we're not, we want ambient light if one of our neighbors needs to show spillover from corners.
-	if(!.)
+	if(!lit)
 		for(var/turf/T in RANGE_TURFS(src, 1))
 			// Fuck if I know how these turfs are located in an area that is not an area.
 			if(isloc(T.loc) && TURF_IS_DYNAMICALLY_LIT_UNSAFE(T))
-				. = TRUE
+				lit = TRUE
 				break
 
-	if(.)
-		// Grab what we need to set ambient light.
-		// TODO: z-level data handlers should store this information in a cheaply accessible way.
-		var/obj/effect/overmap/visitable/sector/exoplanet/planet = global.overmap_sectors["[z]"]
-		if(istype(planet))
-			if(planet.lightlevel)
-				set_ambient_light(COLOR_WHITE, planet.lightlevel)
-				return TRUE
-		else if(config.exterior_ambient_light)
-			set_ambient_light(SSskybox.background_color, config.exterior_ambient_light)
+	if(lit)
+		// Grab what we need to set ambient light from our level handler.
+		var/obj/abstract/level_data/level_data = SSmapping.levels_by_z[z]
+		if(level_data?.ambient_light_level)
+			set_ambient_light(level_data.ambient_light_color, level_data.ambient_light_level)
 			return TRUE
 
 	clear_ambient_light()

@@ -569,7 +569,7 @@
 	var/obj/machinery/computer/teleporter/tporter = get_pin_data_as_type(IC_INPUT, 1, /obj/machinery/computer/teleporter)
 	var/step_dir = get_pin_data(IC_INPUT, 2)
 
-	if(!SSmapping.levels_are_z_connected(get_z(src), get_z(tporter)))
+	if(!LEVELS_ARE_Z_CONNECTED(get_z(src), get_z(tporter)))
 		tporter = null
 
 	var/turf/rift_location = get_turf(src)

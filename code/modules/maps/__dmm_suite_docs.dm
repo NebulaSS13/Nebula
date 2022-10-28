@@ -1,5 +1,3 @@
-var/global/dmm_suite/maploader = new
-
 /*
 
 	dmm_suite version 1.0
@@ -53,10 +51,3 @@ var/global/dmm_suite/maploader = new
 	.dmm files. Errors in the .dmm format will cause runtime errors.
 
 	*/
-
-// dmm_files: A list of .dmm files to load (Required).
-// z_offset: A number representing the z-level on which to start loading the map (Optional).
-// cropMap: When true, the map will be cropped to fit the existing world dimensions (Optional).
-// measureOnly: When true, no changes will be made to the world (Optional).
-// no_changeturf: When true, turf/AfterChange won't be called on loaded turfs
-/dmm_suite/proc/load_map(var/list/dmm_files, var/x_offset, var/y_offset, var/z_offset, var/cropMap, var/measureOnly, var/no_changeturf)

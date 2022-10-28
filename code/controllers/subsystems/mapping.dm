@@ -47,7 +47,13 @@ SUBSYSTEM_DEF(mapping)
 	/// A list of connected z-levels to avoid repeatedly rebuilding connections
 	var/list/connected_z_cache = list()
 
+/datum/controller/subsystem/mapping/New()
+	levels_by_z.len = world.maxz // Populate with nulls so we don't get index errors later.
+	..()
+
 /datum/controller/subsystem/mapping/Initialize(timeofday)
+
+	. = ..()
 
 	// Load our banned map list, if we have one.
 	if(banned_dmm_location && fexists(banned_dmm_location))
@@ -80,6 +86,18 @@ SUBSYSTEM_DEF(mapping)
 
 	// Build away sites.
 	global.using_map.build_away_sites()
+
+	// Initialize z-level objects.
+#ifdef UNIT_TEST
+	config.generate_map = TRUE
+#endif
+	for(var/z = 1 to world.maxz)
+		var/obj/abstract/level_data/level = levels_by_z[z]
+		if(!istype(level))
+			// TODO: Remove this and swap log_debug() out for a stack trace when the system is more refined/robust.
+			level = new /obj/abstract/level_data/space(locate(round(world.maxx*0.5), round(world.maxy*0.5), z))
+			log_debug("Missing z-level data object for z["[z]"]!")
+		level.setup_level_data()
 
 	. = ..()
 
@@ -125,45 +143,32 @@ SUBSYSTEM_DEF(mapping)
 	return map_templates_by_category[temple_cat]
 
 // Z-Level procs after this point.
-/datum/controller/subsystem/mapping/Initialize(start_timeofday)
-#ifdef UNIT_TEST
-	config.generate_map = TRUE
-#endif
-	for(var/z = 1 to world.maxz)
-		var/obj/abstract/level_data/level = levels_by_z["[z]"]
-		if(level)
-			level.setup_level_data()
-		else
-			PRINT_STACK_TRACE("Missing z-level data object for z["[z]"]!")
-		report_progress("z[z]: [get_level_name(z)]")
-	. = ..()
-
-/datum/controller/subsystem/mapping/proc/get_level_name(var/z)
-	z = "[z]"
-	if(!z)
-		return "Unknown Sector"
-	var/obj/abstract/level_data/level = levels_by_z[z]
-	if(level?.name)
-		return level.name
-	var/obj/effect/overmap/overmap_entity = global.overmap_sectors[z]
-	if(overmap_entity?.name)
-		return overmap_entity.name
-	return "Sector #[z]"
+/datum/controller/subsystem/mapping/proc/get_gps_level_name(var/z)
+	if(z)
+		var/obj/abstract/level_data/level = levels_by_z[z]
+		if(level?.name)
+			return level.get_gps_level_name()
+	return "Unknown Sector"
 
 /datum/controller/subsystem/mapping/proc/increment_world_z_size(var/new_level_type, var/defer_setup = FALSE)
+
 	world.maxz++
+	levels_by_z.len = world.maxz
 	connected_z_cache.Cut()
+
 	if(SSzcopy.zlev_maximums.len)
 		SSzcopy.calculate_zstack_limits()
 	if(!new_level_type)
 		PRINT_STACK_TRACE("Missing z-level data type for z["[world.maxz]"]!")
 		return
-	return new new_level_type(locate(round(world.maxx*0.5), round(world.maxz*0.5), world.maxz), defer_setup)
 
-/datum/controller/subsystem/mapping/proc/levels_are_z_connected(var/za, var/zb)
-	return (za > 0 && zb > 0 && za <= world.maxz && zb <= world.maxz) && ((za == zb) || ((length(connected_z_cache) >= za && connected_z_cache[za] && length(connected_z_cache[za]) >= zb) ? connected_z_cache[za][zb] : are_connected_levels(za, zb)))
+	var/obj/abstract/level_data/level = new new_level_type(locate(round(world.maxx*0.5), round(world.maxz*0.5), world.maxz), defer_setup)
+	level.initialize_level()
+	return level
 
 /datum/controller/subsystem/mapping/proc/get_connected_levels(z)
+	if(!isnull(z) || z <= 0  || z > length(levels_by_z))
+		CRASH("Invalid z-level supplied to get_connected_levels: [z || "NULL"]")
 	. = list(z)
 	// Traverse up and down to get the multiz stack.
 	for(var/level = z, HasBelow(level), level--)
@@ -172,7 +177,7 @@ SUBSYSTEM_DEF(mapping)
 		. |= level+1
 	// Check stack for any laterally connected neighbors.
 	for(var/tz in .)
-		var/obj/abstract/level_data/level = levels_by_z["[tz]"]
+		var/obj/abstract/level_data/level = levels_by_z[tz]
 		if(level)
 			level.find_connected_levels(.)
 

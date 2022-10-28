@@ -5,6 +5,8 @@
 #define ZLEVEL_SEALED  BITFLAG(4)
 
 /obj/abstract/level_data
+	/// Name displayed on GPS when this sector is shown.
+	var/gps_name
 	/// z-level associated with this datum
 	var/my_z
 	/// A unique identifier for the level, used for SSmapping looup
@@ -33,11 +35,21 @@
 INITIALIZE_IMMEDIATE(/obj/abstract/level_data)
 /obj/abstract/level_data/Initialize(var/ml, var/defer_level_setup = FALSE)
 	. = ..()
+
 	my_z = z
 	forceMove(null)
-	if(SSmapping.levels_by_z["[my_z]"])
-		PRINT_STACK_TRACE("Duplicate level data created for z[z].")
-	SSmapping.levels_by_z["[my_z]"] = src
+
+	if(SSmapping.levels_by_z.len < my_z)
+		SSmapping.levels_by_z.len = max(SSmapping.levels_by_z.len, my_z)
+		PRINT_STACK_TRACE("Attempting to initialize a z-level that has not incremented world.maxz.")
+
+	// Swap out the old one but preserve any relevant references etc.
+	if(SSmapping.levels_by_z[my_z])
+		var/obj/abstract/level_data/old_level = SSmapping.levels_by_z[my_z]
+		old_level.replace_with(src)
+		qdel(old_level)
+
+	SSmapping.levels_by_z[my_z] = src
 	if(!level_id)
 		level_id = "leveldata_[my_z]_[sequential_id(/obj/abstract/level_data)]"
 	if(level_id in SSmapping.levels_by_id)
@@ -47,6 +59,32 @@ INITIALIZE_IMMEDIATE(/obj/abstract/level_data)
 
 	if(SSmapping.initialized && !defer_level_setup)
 		setup_level_data()
+
+/obj/abstract/level_data/Destroy(var/force)
+	if(force)
+		new type(locate(round(world.maxx/2), round(world.maxy/2), my_z))
+		return ..()
+	return QDEL_HINT_LETMELIVE
+
+/obj/abstract/level_data/proc/replace_with(var/obj/abstract/level_data/new_level)
+	new_level.copy_from(src)
+
+/obj/abstract/level_data/proc/copy_from(var/obj/abstract/level_data/old_level)
+	return
+
+/obj/abstract/level_data/proc/initialize_level()
+	var/change_turf = (created_base_turf_type && created_base_turf_type != world.turf)
+	var/change_area = (created_base_area_type && created_base_area_type != world.area)
+	if(!change_turf && !change_area)
+		return
+	var/corner_start = locate(1, 1, my_z)
+	var/corner_end =   locate(world.maxx, world.maxy, my_z)
+	var/area/A = change_area ? new created_base_area_type : null
+	for(var/turf/T as anything in block(corner_start, corner_end))
+		if(change_turf)
+			T = T.ChangeTurf(created_base_turf_type)
+		if(change_area)
+			ChangeArea(T, A)
 
 /obj/abstract/level_data/proc/setup_level_data()
 
@@ -71,24 +109,7 @@ INITIALIZE_IMMEDIATE(/obj/abstract/level_data)
 		build_level()
 
 /obj/abstract/level_data/proc/build_level()
-	var/change_turf = (created_base_turf_type && created_base_turf_type != world.turf)
-	var/change_area = (created_base_area_type && created_base_area_type != world.area)
-	if(!change_turf && !change_area)
-		return
-	var/corner_start = locate(1, 1, my_z)
-	var/corner_end =   locate(world.maxx, world.maxy, my_z)
-	var/area/A = change_area && new level.created_base_area_type
-	for(var/turf/T as anything in block(corner_start, corner_end))
-		if(change_turf)
-			T = T.ChangeTurf(level.created_base_turf_type)
-		if(change_area)
-			ChangeArea(T, A)
-
-/obj/abstract/level_data/Destroy(var/force)
-	if(force)
-		new type(locate(round(world.maxx/2), round(world.maxy/2), my_z))
-		return ..()
-	return QDEL_HINT_LETMELIVE
+	return
 
 /obj/abstract/level_data/proc/find_connected_levels(var/list/found)
 	for(var/other_id in connects_to)
@@ -122,29 +143,32 @@ INITIALIZE_IMMEDIATE(/obj/abstract/level_data)
 		gas.copy_from(exterior_atmosphere)
 		return gas
 
+/obj/abstract/level_data/proc/get_gps_level_name()
+	if(!gps_name)
+		var/obj/effect/overmap/overmap_entity = global.overmap_sectors["[z]"]
+		if(overmap_entity?.name)
+			gps_name = overmap_entity.name
+		else if(name)
+			gps_name = name
+		else
+			gps_name = "Sector #[my_z]"
+	return gps_name
+
 /*
  * Mappable subtypes.
  */
 /obj/abstract/level_data/main_level
-	name = "Main Station Level"
 	level_flags = (ZLEVEL_STATION|ZLEVEL_CONTACT|ZLEVEL_PLAYER)
 
 /obj/abstract/level_data/admin_level
-	name = "Admin Level"
 	level_flags = (ZLEVEL_ADMIN|ZLEVEL_SEALED)
 
 /obj/abstract/level_data/player_level
-	name = "Player Level"
 	level_flags = (ZLEVEL_CONTACT|ZLEVEL_PLAYER)
 
-/obj/abstract/level_data/empty
-	name = "Empty Level"
-
 /obj/abstract/level_data/space
-	name = "Space Level"
 
 /obj/abstract/level_data/exoplanet
-	name = "Planetary Surface"
 	exterior_atmosphere = list(
 		/decl/material/gas/oxygen =   MOLES_O2STANDARD,
 		/decl/material/gas/nitrogen = MOLES_N2STANDARD
@@ -154,12 +178,10 @@ INITIALIZE_IMMEDIATE(/obj/abstract/level_data)
 	take_starlight_ambience = FALSE // This is set up by the exoplanet object.
 
 /obj/abstract/level_data/unit_test
-	name = "Test Area"
 	level_flags = (ZLEVEL_CONTACT|ZLEVEL_PLAYER|ZLEVEL_SEALED)
 
 // Used to generate mining ores etc.
 /obj/abstract/level_data/mining_level
-	name = "Mining Level"
 	level_flags = (ZLEVEL_PLAYER|ZLEVEL_SEALED)
 
 /obj/abstract/level_data/mining_level/asteroid
