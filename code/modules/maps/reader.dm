@@ -4,6 +4,7 @@
 
 //global datum that will preload variables on atoms instanciation
 var/global/use_preloader = FALSE
+var/global/dmm_suite/maploader = new
 var/global/dmm_suite/preloader/_preloader = new
 
 /datum/map_load_metadata
@@ -33,7 +34,13 @@ var/global/dmm_suite/preloader/_preloader = new
  * 2) Read the map line by line, parsing the result (using parse_grid)
  *
  */
-/dmm_suite/load_map(var/dmm_file, var/x_offset, var/y_offset, var/z_offset, var/cropMap, var/measureOnly, var/no_changeturf, var/clear_contents, var/lower_crop_x, var/lower_crop_y, var/upper_crop_x, var/upper_crop_y, var/initialized_areas_by_type)
+
+// dmm_files: A list of .dmm files to load (Required).
+// z_offset: A number representing the z-level on which to start loading the map (Optional).
+// cropMap: When true, the map will be cropped to fit the existing world dimensions (Optional).
+// measureOnly: When true, no changes will be made to the world (Optional).
+// no_changeturf: When true, turf/AfterChange won't be called on loaded turfs
+/dmm_suite/proc/load_map(var/dmm_file, var/x_offset, var/y_offset, var/z_offset, var/cropMap, var/measureOnly, var/no_changeturf, var/clear_contents, var/lower_crop_x, var/lower_crop_y, var/upper_crop_x, var/upper_crop_y, var/initialized_areas_by_type)
 	//How I wish for RAII
 	Master.StartLoadingMap()
 	space_key = null
@@ -103,7 +110,7 @@ var/global/dmm_suite/preloader/_preloader = new
 			var/ycrd = text2num(dmmRegex.group[4]) + y_offset - 1
 			var/zcrd = text2num(dmmRegex.group[5]) + z_offset - 1
 
-			var/is_connected_to_lower_levels = SSmapping.levels_are_z_connected(zcrd, z_offset)
+			var/is_connected_to_lower_levels = LEVELS_ARE_Z_CONNECTED(zcrd, z_offset)
 			var/is_on_an_existing_zlevel = zcrd <= world.maxz
 
 			if (is_on_an_existing_zlevel && !is_connected_to_lower_levels)
@@ -113,8 +120,8 @@ var/global/dmm_suite/preloader/_preloader = new
 			if(zexpansion && !measureOnly) // don't actually expand the world if we're only measuring bounds
 				if(cropMap)
 					continue
-				else
-					world.maxz = zcrd //create a new z_level if needed
+				while(world.maxz < zcrd) //create new z_levels if needed.
+					SSmapping.increment_world_z_size(/obj/abstract/level_data/space)
 
 			bounds[MAP_MINX] = min(bounds[MAP_MINX], clamp(xcrdStart, x_lower, x_upper))
 			bounds[MAP_MINZ] = min(bounds[MAP_MINZ], zcrd)
@@ -191,15 +198,15 @@ var/global/dmm_suite/preloader/_preloader = new
 
 	if(bounds[1] == 1.#INF) // Shouldn't need to check every item
 		return null
-	else
-		if(!measureOnly)
-			if(clear_contents)
-				for(var/atom/to_delete in atoms_to_delete)
-					qdel(to_delete)
-		var/datum/map_load_metadata/M = new
-		M.bounds = bounds
-		M.atoms_to_initialise = atoms_to_initialise
-		return M
+
+	if(!measureOnly)
+		if(clear_contents)
+			for(var/atom/to_delete in atoms_to_delete)
+				qdel(to_delete)
+	var/datum/map_load_metadata/M = new
+	M.bounds = bounds
+	M.atoms_to_initialise = atoms_to_initialise
+	return M
 
 /**
  * Fill a given tile with its area/turf/objects/mobs
