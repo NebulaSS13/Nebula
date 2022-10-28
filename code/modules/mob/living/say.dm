@@ -140,12 +140,40 @@ var/global/list/channel_to_radio_key = new
 	message_data[2] = verb
 
 /mob/living/proc/handle_message_mode(message_mode, message, verb, speaking, used_radios, alt_name)
-	if(message_mode == "intercom")
-		for(var/obj/item/radio/I in view(1, null))
-			if(I.intercom_handling)
-				I.talk_into(src, message, verb, speaking)
-				used_radios += I
-	return 0
+
+	// Check the mob's get_radio() in case of inbuilt radios in the future.
+	var/list/assess_items_as_radios = list(src)
+	switch(message_mode)
+
+		if("intercom")
+			if(!restrained())
+				for(var/obj/item/radio/I in view(1))
+					if(I.intercom_handling)
+						assess_items_as_radios += I
+
+		if("right ear", "left ear")
+			var/use_right = message_mode == "right ear"
+			var/obj/item/thing = get_equipped_item(use_right ? slot_r_ear_str : slot_l_ear_str)
+			if(thing)
+				assess_items_as_radios |= thing
+			else
+				thing = get_equipped_item(use_right ? BP_R_HAND : BP_L_HAND)
+				if(thing)
+					assess_items_as_radios |= thing
+		else
+			// Headsets are default.
+			if(message_mode)
+				for(var/slot in global.ear_slots)
+					var/thing = get_equipped_item(slot)
+					if(thing)
+						assess_items_as_radios |= thing
+
+	for(var/atom/movable/thing in assess_items_as_radios)
+		var/obj/item/radio/radio = thing.get_radio(message_mode)
+		if(istype(radio))
+			used_radios += radio
+			radio.add_fingerprint(src)
+			radio.talk_into(src, message, message_mode, verb, speaking)
 
 /mob/living/proc/handle_speech_sound()
 	var/list/returns[2]

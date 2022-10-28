@@ -493,6 +493,9 @@
 /atom/proc/get_cell()
 	return
 
+/atom/proc/get_radio(var/message_mode)
+	return
+
 /atom/proc/building_cost()
 	. = list()
 

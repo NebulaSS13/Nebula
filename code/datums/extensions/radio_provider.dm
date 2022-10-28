@@ -25,5 +25,13 @@
 	if(istype(radio_provider))
 		return radio_provider.GetRadios(message_mode)
 
-/atom/movable/proc/GetRadio(message_mode)
+/*
+// Example implementation if extension is desired.
+/atom/movable/Initialize()
+	. = ..()
+	var/datum/extension/radio_provider/radio = get_or_create_extension(src, /datum/extension/radio_provider)
+	radio.register_radio(some_radio)
+
+/atom/movable/get_radio(message_mode)
 	return LAZYACCESS(GetRadios(message_mode), 1)
+*/
