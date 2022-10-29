@@ -13,7 +13,7 @@
 	initial_spawn_req = 4
 	initial_spawn_target = 6
 	min_player_age = 14
-	default_access = list(access_hacked, access_mercenary)
+	default_access = list(access_mercenary)
 
 	faction = "mercenary"
 

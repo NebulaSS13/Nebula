@@ -28,33 +28,6 @@
 	add_antagonist(M.mind, 1, 0, 1) // Equip them and move them to spawn.
 	return M
 
-/decl/special_role/proc/create_id(var/mob/living/carbon/human/player, var/equip = TRUE)
-	if(!id_title || !id_type)
-		return
-	var/obj/item/card/id/W = new id_type(player)
-	if(length(default_access))
-		W.access |= default_access
-	W.assignment = id_title
-	player.set_id_info(W)
-	if(equip)
-		player.equip_to_slot_or_del(W, slot_wear_id_str)
-	return W
-
-/decl/special_role/proc/create_radio(var/freq, var/mob/living/carbon/human/player)
-	var/obj/item/radio/R
-
-	switch(freq)
-		if(SYND_FREQ)
-			R = new/obj/item/radio/headset/syndicate(player)
-		if(RAID_FREQ)
-			R = new/obj/item/radio/headset/raider(player)
-		else
-			R = new/obj/item/radio/headset(player)
-			R.set_frequency(freq)
-
-	player.equip_to_slot_or_del(R, slot_l_ear_str)
-	return R
-
 /decl/special_role/proc/create_nuke(var/atom/paper_spawn_loc, var/datum/mind/code_owner)
 
 	// Decide on a code.
