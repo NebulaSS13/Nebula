@@ -29,10 +29,9 @@
 /obj/item/umbrella/on_update_icon()
 	icon_state = get_world_inventory_state()
 	if(is_open)
-		icon_state = "[icon_state]-open" 
+		icon_state = "[icon_state]-open"
 
 /obj/item/umbrella/adjust_mob_overlay(mob/living/user_mob, bodytype, image/overlay, slot, bodypart)
-	. = ..()
 	if(overlay && is_open && check_state_in_icon("[overlay.icon_state]-open", overlay.icon))
 		overlay.icon_state = "[overlay.icon_state]-open"
-	return overlay
+	return ..()

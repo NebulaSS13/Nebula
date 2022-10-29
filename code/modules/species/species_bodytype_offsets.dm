@@ -33,6 +33,7 @@ The slots that you can use are found in items_clothing.dm and are the inventory 
 			var/icon/final_I = new(icon_template)
 			var/list/shifts = equip_adjust[slot]
 
+			// TODO: consider adding all icons offset from the same base icon to the same cached icon.
 			// Apply all pixel shifts for each direction.
 			for(var/shift_facing in shifts)
 				var/list/facing_list = shifts[shift_facing]
@@ -40,8 +41,10 @@ The slots that you can use are found in items_clothing.dm and are the inventory 
 				var/icon/equip = new(mob_icon, icon_state = mob_state, dir = use_dir)
 				var/icon/canvas = new(icon_template)
 				canvas.Blend(equip, ICON_OVERLAY, facing_list["x"]+1, facing_list["y"]+1)
-				final_I.Insert(canvas, dir = use_dir)
-			equip_overlays[image_key] = overlay_image(final_I, color = color, flags = RESET_COLOR)
+				final_I.Insert(canvas, mob_state, dir = use_dir)
+
+			equip_overlays[image_key] = overlay_image(final_I, mob_state, color = color, flags = RESET_COLOR)
+
 		var/image/I = new() // We return a copy of the cached image, in case downstream procs mutate it.
 		I.appearance = equip_overlays[image_key]
 		return I
