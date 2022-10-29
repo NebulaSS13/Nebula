@@ -1483,20 +1483,6 @@ var/global/floorIsLava = 0
 	return sorttext(NB? "[NB.network_id].[NB.network_tag]" : "", NA? "[NA.network_id].[NA.network_tag]" : "")
 
 /datum/admins/proc/show_fax_picker(var/list/possible_targets, var/mob/user)
-	// var/html = "<form name='faxpicker' action='?src=\ref[src]' method='get'>"
-	// html += "<input type=\"hidden\" name=\"asf_pick_fax\" id=\"asf_pick_fax\" value=\"1\"/>"
-	// html += "<label>Sender Name:</BR><input type=\"text\" name=\"sender\" id=\"sender\" required minlength=\"1\" maxlength=\"[MAX_DESC_LEN]\" value=\"[using_map.boss_name]\"></label></BR>"
-	// html += "<label>Target Fax Machine:</BR><select name=\"destination\" id=\"destination\" style=\"width:384px;\">"
-	// for(var/obj/machinery/faxmachine/F in possible_targets)
-	// 	var/datum/extension/network_device/N = get_extension(F, /datum/extension/network_device)
-	// 	var/datum/computer_network/CN = N?.get_network()
-	// 	if(!N || !CN)
-	// 		continue
-	// 	var/area/A = get_area(F)
-	// 	html += "<option value=\"\ref[F]\">[CN.network_id].[N.network_tag] [A? "([A])" : ""]</option>"
-	// html += "</select></label></BR>"
-	// html += "<button type=\"submit\">Continue ...</button></BR>"
-	// html += "</form>"
 	var/html = "<h2>Pick a target fax machine:</h2>"
 	possible_targets = sortTim(possible_targets, /proc/cmp_network_device_tag_asc, FALSE)
 	for(var/obj/machinery/faxmachine/F in possible_targets)
