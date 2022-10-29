@@ -22,7 +22,6 @@
 	initial_spawn_target = 2
 	min_player_age = 14
 	faction = "foundation"
-	id_type = /obj/item/card/id/foundation
 	default_outfit = /decl/hierarchy/outfit/foundation
 	id_title = "Foundation Agent"
 
@@ -43,4 +42,5 @@
 	hands =    list(/obj/item/storage/briefcase/foundation)
 	l_ear =    /obj/item/radio/headset/foundation
 	holster =  /obj/item/clothing/accessory/storage/holster/armpit
+	id_type = /obj/item/card/id/foundation
 	id_slot =  slot_wear_id_str

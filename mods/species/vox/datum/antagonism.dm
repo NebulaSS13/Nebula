@@ -4,6 +4,7 @@
 
 /decl/hierarchy/outfit/vox_raider
 	name = "Job - Vox Raider"
+	l_ear =      /obj/item/radio/headset/raider
 	shoes =      /obj/item/clothing/shoes/magboots/vox
 	gloves =     /obj/item/clothing/gloves/vox
 	mask =       /obj/item/clothing/mask/gas/swat/vox
@@ -13,6 +14,7 @@
 	holster =    /obj/item/clothing/accessory/storage/holster/armpit
 	suit_store = /obj/item/flashlight
 	hands =      list(/obj/item/gun/launcher/alien/spikethrower)
+	id_type =    /obj/item/card/id/syndicate
 
 /decl/hierarchy/outfit/vox_raider/equip(mob/living/carbon/human/H, rank, assignment, equip_adjustments)
 	uniform = pick(/obj/item/clothing/under/vox/vox_robes, /obj/item/clothing/under/vox/vox_casual)

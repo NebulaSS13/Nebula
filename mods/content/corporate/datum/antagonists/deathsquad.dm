@@ -11,6 +11,7 @@
 		access_cent_storage
 	)
 	antaghud_indicator = "huddeathsquad"
+	default_access = list(access_cent_specops)
 
 	hard_cap = 4
 	hard_cap_round = 8
@@ -28,6 +29,7 @@
 
 /decl/hierarchy/outfit/commando
 	name =     "Special Role - Deathsquad Commando"
+	l_ear =    /obj/item/radio/headset/deathsquad
 	uniform =  /obj/item/clothing/under/color/green
 	l_pocket = /obj/item/plastique
 	shoes =    /obj/item/clothing/shoes/jackboots/swat
@@ -53,13 +55,14 @@
 	. = ..()
 	if(.)
 		player.implant_loyalty(player)
-		create_radio(DTH_FREQ, player)
 
-/decl/special_role/deathsquad/create_id(mob/living/carbon/human/player, equip)
-	var/obj/item/card/id/id = ..()
-	if(player && id)
-		id.access |= get_all_station_access()
-		id.icon_state = "centcom"
+/obj/item/radio/headset/deathsquad
+	origin_tech = "{'esoteric':2}"
+	syndie = 1
+
+/obj/item/radio/headset/deathsquad/Initialize()
+	. = ..()
+	set_frequency(DTH_FREQ)
 
 /decl/special_role/deathsquad/update_antag_mob(var/datum/mind/player)
 

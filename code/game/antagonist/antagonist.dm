@@ -68,7 +68,6 @@
 	// ID card stuff.
 	var/default_access = list()
 	var/id_title
-	var/id_type = /obj/item/card/id
 	var/rig_type
 
 	var/default_outfit
