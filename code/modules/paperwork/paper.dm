@@ -142,7 +142,7 @@
 	return TRUE
 
 /obj/item/paper/attack_ai(mob/living/silicon/ai/user)
-	interact(user)
+	interact(user, readonly = TRUE)
 	return TRUE
 
 /obj/item/paper/attack(mob/living/carbon/M, mob/living/carbon/user)
