@@ -25,8 +25,8 @@ var/global/list/adminfaxes     = list()	//cache for faxes that have been sent to
 		/obj/item/stock_parts/keyboard              = 1,
 		/obj/item/stock_parts/power/apc/buildable   = 1,
 		/obj/item/stock_parts/computer/lan_port     = 1,
-		/obj/item/stock_parts/disk_reader/buildable = 1,
-		/obj/item/stock_parts/card_reader/buildable = 1,
+		/obj/item/stock_parts/item_holder/disk_reader/buildable = 1,
+		/obj/item/stock_parts/item_holder/card_reader/buildable = 1,
 		/obj/item/stock_parts/access_lock/buildable = 1,
 	)
 
@@ -62,8 +62,8 @@ var/global/list/adminfaxes     = list()	//cache for faxes that have been sent to
 	active_power_usage      = 200
 	construct_state         = /decl/machine_construction/default/panel_closed
 	maximum_component_parts = list(
-		/obj/item/stock_parts/disk_reader = 1,
-		/obj/item/stock_parts/card_reader = 1,
+		/obj/item/stock_parts/item_holder/disk_reader = 1,
+		/obj/item/stock_parts/item_holder/card_reader = 1,
 		/obj/item/stock_parts/printer     = 1,
 		/obj/item/stock_parts             = 15,
 	)
@@ -74,8 +74,8 @@ var/global/list/adminfaxes     = list()	//cache for faxes that have been sent to
 	public_methods = list(
 		/decl/public_access/public_method/fax_receive_document,
 	)
-	var/obj/item/stock_parts/disk_reader/disk_reader  //Cached ref to the disk_reader component. Used for handling data disks.
-	var/obj/item/stock_parts/card_reader/card_reader  //Cached ref to the card_reader component. Used for scanning a user's id card.
+	var/obj/item/stock_parts/item_holder/disk_reader/disk_reader  //Cached ref to the disk_reader component. Used for handling data disks.
+	var/obj/item/stock_parts/item_holder/card_reader/card_reader  //Cached ref to the card_reader component. Used for scanning a user's id card.
 	var/obj/item/stock_parts/printer/printer          //Cached ref to the printer component. Used for printing things.
 	var/obj/item/scanner_item                         //Item to fax
 	var/list/quick_dial                              //List of name tag to network ids for other fax machines that the user added as quick dial options
@@ -109,8 +109,8 @@ var/global/list/adminfaxes     = list()	//cache for faxes that have been sent to
 
 /obj/machinery/faxmachine/RefreshParts()
 	. = ..()
-	disk_reader = get_component_of_type(/obj/item/stock_parts/disk_reader)
-	card_reader = get_component_of_type(/obj/item/stock_parts/card_reader)
+	disk_reader = get_component_of_type(/obj/item/stock_parts/item_holder/disk_reader)
+	card_reader = get_component_of_type(/obj/item/stock_parts/item_holder/card_reader)
 	printer     = get_component_of_type(/obj/item/stock_parts/printer)
 
 	if(disk_reader)
@@ -169,7 +169,7 @@ var/global/list/adminfaxes     = list()	//cache for faxes that have been sent to
 		LAZYADD(., printer.ui_data(user))
 
 	//Card reader stuff
-	var/obj/item/card/C = card_reader?.get_card()
+	var/obj/item/card/C = card_reader?.get_inserted()
 	LAZYSET(., "has_card_reader",  !isnull(card_reader))
 	LAZYSET(., "id_card",          C)
 	LAZYSET(., "data_card",        card_reader?.get_data_card())
@@ -181,7 +181,7 @@ var/global/list/adminfaxes     = list()	//cache for faxes that have been sent to
 		LAZYSET(., "id_card_info", info)
 
 	//Disk stuff
-	var/obj/item/disk/D = disk_reader?.get_disk()
+	var/obj/item/disk/D = disk_reader?.get_inserted()
 	LAZYSET(., "has_disk_drive",   !isnull(disk_reader))
 	LAZYSET(., "disk",             D)
 	LAZYSET(., "disk_name",        D?.name)
@@ -242,7 +242,7 @@ var/global/list/adminfaxes     = list()	//cache for faxes that have been sent to
 	// --- Insert/Eject ---
 	if(href_list["id_card"])
 		if(card_reader)
-			var/obj/item/card/C = card_reader.get_card()
+			var/obj/item/card/C = card_reader.get_inserted()
 			if(C)
 				eject_card(user)
 			else
@@ -320,7 +320,7 @@ var/global/list/adminfaxes     = list()	//cache for faxes that have been sent to
 
 /**Returns the inserted card if there is a reader and if there is a card. Otherwise print a warning to the user, if a user was passed */
 /obj/machinery/faxmachine/proc/try_get_card(var/mob/user)
-	var/obj/item/card/C = card_reader?.get_card()
+	var/obj/item/card/C = card_reader?.get_inserted()
 	if(!card_reader)
 		if(user)
 			to_chat(user, SPAN_WARNING("There is no card reader!"))
@@ -333,7 +333,7 @@ var/global/list/adminfaxes     = list()	//cache for faxes that have been sent to
 
 /**Warn the user if the disk cannot be accessed. Otherwise returns the disk in the disk reader. */
 /obj/machinery/faxmachine/proc/try_get_disk(var/mob/user)
-	var/obj/item/disk/D = disk_reader?.get_disk()
+	var/obj/item/disk/D = disk_reader?.get_inserted()
 	if(!disk_reader)
 		if(user)
 			to_chat(user, SPAN_WARNING("There is no disk drive!"))
@@ -388,7 +388,7 @@ var/global/list/adminfaxes     = list()	//cache for faxes that have been sent to
 		to_chat(user, SPAN_WARNING("\The '[ID]' is not a valid id card or data card!"))
 		return FALSE
 		
-	card_reader.insert_card(ID, user)
+	card_reader.insert_item(ID, user)
 	to_chat(user, SPAN_NOTICE("Loading \the '[ID]'..."))
 	return TRUE
 
@@ -396,7 +396,7 @@ var/global/list/adminfaxes     = list()	//cache for faxes that have been sent to
 	if(!card_reader)
 		to_chat(user, SPAN_WARNING("\The [src] has no card reader installed."))
 		return FALSE
-	card_reader.eject_card(user)
+	card_reader.eject_item(user)
 	update_ui()
 	return TRUE
 
@@ -404,10 +404,10 @@ var/global/list/adminfaxes     = list()	//cache for faxes that have been sent to
 	if(!disk_reader)
 		to_chat(user, SPAN_WARNING("\The [src] has no disk drive installed."))
 		return FALSE
-	if(disk_reader.get_disk())
+	if(disk_reader.get_inserted())
 		to_chat(user, SPAN_WARNING("There is already \a [D] in \the [src]."))
 		return FALSE
-	if(!disk_reader.insert_disk(D, user))
+	if(!disk_reader.insert_item(D, user))
 		return FALSE
 
 	//Read any existing disk data
@@ -426,7 +426,7 @@ var/global/list/adminfaxes     = list()	//cache for faxes that have been sent to
 	if(!disk_reader)
 		to_chat(user, SPAN_WARNING("\The [src] has no disk drive installed."))
 		return FALSE
-	disk_reader.eject_disk(user)
+	disk_reader.eject_item(user)
 	LAZYCLEARLIST(quick_dial)
 	LAZYCLEARLIST(fax_history)
 	update_ui()
@@ -586,7 +586,7 @@ var/global/list/adminfaxes     = list()	//cache for faxes that have been sent to
 
 /obj/machinery/faxmachine/proc/log_history(var/operation, var/text)
 	LAZYADD(fax_history, "[stationdate2text()], [stationtime2text()]: [operation] - [text]")
-	var/obj/item/disk/D = disk_reader?.get_disk()
+	var/obj/item/disk/D = disk_reader?.get_inserted()
 	if(!D)
 		return
 	var/datum/computer_file/data/hist = new

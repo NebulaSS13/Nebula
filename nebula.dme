@@ -773,6 +773,7 @@
 #include "code\game\machinery\_machines_base\stock_parts\building_material.dm"
 #include "code\game\machinery\_machines_base\stock_parts\card_reader.dm"
 #include "code\game\machinery\_machines_base\stock_parts\disk_reader.dm"
+#include "code\game\machinery\_machines_base\stock_parts\item_holder.dm"
 #include "code\game\machinery\_machines_base\stock_parts\legacy_parts.dm"
 #include "code\game\machinery\_machines_base\stock_parts\network_lock.dm"
 #include "code\game\machinery\_machines_base\stock_parts\network_receiver.dm"
