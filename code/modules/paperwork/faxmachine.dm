@@ -103,7 +103,7 @@ var/global/list/adminfaxes     = list()	//cache for faxes that have been sent to
 	. = ..()
 
 /obj/machinery/faxmachine/on_update_icon()
-	if(scanner_item)
+	if(!QDELETED(scanner_item))
 		icon_state = "faxpaper" //not using an overlay, because animations
 	else
 		icon_state = initial(icon_state)
@@ -151,7 +151,7 @@ var/global/list/adminfaxes     = list()	//cache for faxes that have been sent to
 
 	LAZYSET(., "quick_dial_targets", uiqd)
 	LAZYSET(., "fax_history",        fax_history)
-	LAZYSET(., "scanner_item",       "[scanner_item]")
+	LAZYSET(., "scanner_item",       "[!QDELETED(scanner_item)? scanner_item : ""]")
 	LAZYSET(., "is_cooling_down",    (time_cooldown_end > world.timeofday))
 	LAZYSET(., "dest_uri",           dest_uri)
 	LAZYSET(., "src",                "\ref[src]")
@@ -213,7 +213,8 @@ var/global/list/adminfaxes     = list()	//cache for faxes that have been sent to
 
 	// --- Sending Fax ---
 	if(href_list["send"])
-		if(!scanner_item)
+		if(QDELETED(scanner_item))
+			to_chat(user, SPAN_WARNING("You must insert something to send first!"))
 			return TOPIC_NOACTION
 		if(world.timeofday < time_cooldown_end)
 			to_chat(user, SPAN_WARNING("\The [src] isn't ready yet for sending again! [max(0, time_cooldown_end - world.timeofday) / (1 SECOND)] second\s left."))
@@ -254,7 +255,7 @@ var/global/list/adminfaxes     = list()	//cache for faxes that have been sent to
 		return TOPIC_REFRESH
 
 	if(href_list["insert_item"])
-		if(scanner_item)
+		if(!QDELETED(scanner_item))
 			to_chat(user, SPAN_WARNING("There's already a [scanner_item] in \the [src]!"))
 			return TOPIC_NOACTION
 		else
@@ -345,7 +346,7 @@ var/global/list/adminfaxes     = list()	//cache for faxes that have been sent to
 	return D
 
 /obj/machinery/faxmachine/proc/insert_scanner_item(var/obj/item/I, var/mob/user)
-	if(scanner_item)
+	if(!QDELETED(scanner_item))
 		if(user)
 			to_chat(user, SPAN_WARNING("\The [src] already has something being scanned!"))
 		return FALSE
@@ -361,7 +362,7 @@ var/global/list/adminfaxes     = list()	//cache for faxes that have been sent to
 	return TRUE
 
 /obj/machinery/faxmachine/proc/eject_scanner_item(var/mob/user)
-	if(!scanner_item)
+	if(QDELETED(scanner_item))
 		if(user)
 			to_chat(user, SPAN_WARNING("There's nothing to eject from \the [src]."))
 		return FALSE 
@@ -415,6 +416,9 @@ var/global/list/adminfaxes     = list()	//cache for faxes that have been sent to
 	return TRUE
 
 /obj/machinery/faxmachine/proc/send_fax(var/mob/user, var/target_net_tag, var/target_net_id)
+	if(QDELETED(scanner_item))
+		to_chat(user, SPAN_WARNING("You need to insert something to fax first!"))
+		return FALSE
 	if(inoperable())
 		return FALSE
 	if(world.timeofday < time_cooldown_end)
