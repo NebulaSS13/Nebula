@@ -194,7 +194,7 @@
 	//Try to save file, possibly won't fit size-wise
 	var/datum/computer_file/backup
 	if(istype(F))
-		backup = F.clone()
+		backup = F.Clone()
 		remove_file(F)
 	else
 		F = new file_type()

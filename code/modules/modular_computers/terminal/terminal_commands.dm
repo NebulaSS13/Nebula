@@ -394,7 +394,7 @@ Subtypes
 	var/datum/file_storage/disk = file_loc[1]
 	var/datum/computer_file/file = file_loc[3]
 	
-	var/datum/computer_file/copy = file.clone(TRUE)
+	var/datum/computer_file/copy = file.Clone(null, TRUE)
 	if(!istype(copy))
 		return
 	var/success = disk.store_file(copy, file_loc[2], FALSE, terminal.get_access(user), user)
