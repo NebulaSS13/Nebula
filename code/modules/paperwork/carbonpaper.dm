@@ -8,7 +8,7 @@
 
 /obj/item/paper/carbon/update_contents_overlays()
 	if(length(info))
-		add_overlay(get_paper_overlay("paper_stack_words"))
+		add_overlay("paper_stack_words")
 
 /obj/item/paper/carbon/proc/remove_copy(var/mob/user)
 	var/obj/item/paper/original = Clone()

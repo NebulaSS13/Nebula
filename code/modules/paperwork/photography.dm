@@ -103,7 +103,7 @@
 	add_overlay(small_img)
 	tiny = image(img)
 	tiny.transform *= 0.5 * scale
-	tiny.underlays += get_paper_overlay("photo_underlay")
+	tiny.underlays += image(icon, "photo_underlay")
 	tiny.pixel_x = -WORLD_ICON_SIZE * (photo_size-1)/2 - 3
 	tiny.pixel_y = -WORLD_ICON_SIZE * (photo_size-1)/2 + 3
 

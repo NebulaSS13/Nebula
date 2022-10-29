@@ -3,7 +3,7 @@
 	var/imbue = null
 
 /obj/item/paper/talisman/update_contents_overlays()
-	add_overlay(get_paper_overlay("paper_talisman"))
+	add_overlay(overlay_image('icons/obj/bureaucracy.dmi', icon_state = "paper_talisman", flags = RESET_COLOR))
 
 /obj/item/paper/talisman/attack_self(var/mob/user)
 	if(iscultist(user))

@@ -1,25 +1,6 @@
 // large amount of fields creates a heavy load on the server, see updateinfolinks() and addtofield()
 #define MAX_FIELDS 50
 
-///Precached overlays commonly used by papers
-var/global/list/cached_paper_overlays
-
-/**Returns the cached paper overlay/underlay with the specified name. Also handles caching the images if needed.*/
-/proc/get_paper_overlay(var/name)
-	if(!LAZYLEN(global.cached_paper_overlays))
-		cache_paper_overlays()
-	return global.cached_paper_overlays[name]
-
-/**Caches the paper overlays/underlays we use frequently.*/
-/proc/cache_paper_overlays()
-	if(LAZYLEN(cached_paper_overlays))
-		return
-	LAZYSET(cached_paper_overlays, "paper_words",       overlay_image('icons/obj/bureaucracy.dmi', icon_state = "paper_words"))
-	LAZYSET(cached_paper_overlays, "paper_stack_words", overlay_image('icons/obj/bureaucracy.dmi', icon_state = "paper_stack_words"))
-	LAZYSET(cached_paper_overlays, "paper_talisman",    overlay_image('icons/obj/bureaucracy.dmi', icon_state = "paper_talisman", flags = RESET_COLOR))
-	LAZYSET(cached_paper_overlays, "sticky_words",      overlay_image('icons/obj/stickynotes.dmi', icon_state = "paper_words"))
-	LAZYSET(cached_paper_overlays, "photo_underlay",    overlay_image('icons/obj/bureaucracy.dmi', icon_state = "photo"))
-
 /*
  * Paper
  * also scraps of paper
@@ -116,7 +97,7 @@ var/global/list/cached_paper_overlays
 /**Applies the overlay displayed when the paper contains some text. */
 /obj/item/paper/proc/update_contents_overlays()
 	if(length(info))
-		add_overlay(get_paper_overlay("paper_words"))
+		add_overlay("paper_words")
 
 /obj/item/paper/proc/update_space(var/new_text)
 	if(new_text)
