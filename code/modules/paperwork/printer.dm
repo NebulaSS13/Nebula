@@ -289,9 +289,9 @@
 			return FALSE
 		print_paper(queued_element)
 
-	//place
+	//#TODO: machinery should allow a component to trigger and wait for an animation sequence. So that we can drop out the paper in sync.
 	queued_element.dropInto(get_turf(loc))
-	playsound(loc, "sound/machines/dotprinter.ogg", 50, TRUE)
+	playsound(loc, "sound/machines/dotprinter.ogg", 50, TRUE) 
 	return TRUE
 
 /obj/item/stock_parts/printer/proc/print_picture(var/obj/item/photo/P)

@@ -25,6 +25,7 @@ var/global/list/adminfaxes     = list()	//cache for faxes that have been sent to
 		/obj/item/stock_parts/keyboard              = 1,
 		/obj/item/stock_parts/power/apc/buildable   = 1,
 		/obj/item/stock_parts/computer/lan_port     = 1,
+		/obj/item/stock_parts/computer/network_card = 1,
 		/obj/item/stock_parts/item_holder/disk_reader/buildable = 1,
 		/obj/item/stock_parts/item_holder/card_reader/buildable = 1,
 		/obj/item/stock_parts/access_lock/buildable = 1,
@@ -114,11 +115,11 @@ var/global/list/adminfaxes     = list()	//cache for faxes that have been sent to
 	printer     = get_component_of_type(/obj/item/stock_parts/printer)
 
 	if(disk_reader)
-		disk_reader.register_on_insert(CALLBACK(src, /obj/machinery/faxmachine/proc/update_ui))
+		disk_reader.register_on_insert(CALLBACK(src, /obj/machinery/faxmachine/proc/on_insert_disk))
 		disk_reader.register_on_eject( CALLBACK(src, /obj/machinery/faxmachine/proc/update_ui))
 
 	if(card_reader)
-		card_reader.register_on_insert(CALLBACK(src, /obj/machinery/faxmachine/proc/update_ui))
+		card_reader.register_on_insert(CALLBACK(src, /obj/machinery/faxmachine/proc/on_insert_card))
 		card_reader.register_on_eject( CALLBACK(src, /obj/machinery/faxmachine/proc/update_ui))
 
 	if(printer)
@@ -135,12 +136,6 @@ var/global/list/adminfaxes     = list()	//cache for faxes that have been sent to
 	if(istype(construct_state, /decl/machine_construction/default/panel_closed))
 		if(istype(I, /obj/item/paper) || istype(I, /obj/item/photo) || istype(I, /obj/item/paper_bundle))
 			return insert_scanner_item(I, user)
-
-		else if(istype(I, /obj/item/card))
-			return insert_card(I, user)
-		
-		else if(istype(I, /obj/item/disk))
-			return insert_disk(I, user)
 	. = ..()
 
 /obj/machinery/faxmachine/ui_data(mob/user, ui_key)
@@ -249,8 +244,10 @@ var/global/list/adminfaxes     = list()	//cache for faxes that have been sent to
 				var/obj/item/card/id/ID = user.get_active_hand()
 				if(!istype(ID) && !istype(ID, /obj/item/card/data))
 					to_chat(user, SPAN_WARNING("You need to hold a valid id/data card!"))
-				else 
-					insert_card(ID, user)
+				else if(card_reader.should_swipe)
+					to_chat(user, SPAN_WARNING("\The [card_reader] is currently set to swipe mode, which is unsupported by this machine. Please contact your system administrator."))
+				else
+					card_reader.insert_item(ID, user)
 		else
 			to_chat(user, SPAN_WARNING("The card reader is not responding!"))
 			return TOPIC_NOACTION
@@ -283,12 +280,15 @@ var/global/list/adminfaxes     = list()	//cache for faxes that have been sent to
 /**Handle disk operations topics. */
 /obj/machinery/faxmachine/proc/OnTopic_DiskOps(mob/user, list/href_list, datum/topic_state/state)
 	if(href_list["insert_disk"])
+		if(!disk_reader)
+			to_chat(user, SPAN_WARNING("There is no disk drive installed on \the [src]!"))
+			return TOPIC_NOACTION
 		var/obj/item/disk/D = user.get_active_hand()
 		if(!istype(D))
 			to_chat(user, SPAN_WARNING("You need to hold a valid data disk!"))
 			return TOPIC_NOACTION
 		else
-			insert_disk(D, user)
+			disk_reader.insert_item(D, user)
 		return TOPIC_REFRESH
 		
 	if(href_list["eject_disk"])
@@ -375,52 +375,34 @@ var/global/list/adminfaxes     = list()	//cache for faxes that have been sent to
 	update_ui()
 	return TRUE
 
-/obj/machinery/faxmachine/proc/insert_card(var/obj/item/card/C, var/mob/user)
-	if(!card_reader)
-		to_chat(user, SPAN_WARNING("\The [src] has no card reader installed."))
-		return
-	if(!card_reader.is_functional())
-		to_chat(user, SPAN_WARNING("\The [card_reader] isn't working."))
-		return
-
-	var/obj/item/card/id/ID = C
-	if(!(istype(ID) || istype(ID, /obj/item/card/data)))
-		to_chat(user, SPAN_WARNING("\The '[ID]' is not a valid id card or data card!"))
-		return FALSE
-		
-	card_reader.insert_item(ID, user)
-	to_chat(user, SPAN_NOTICE("Loading \the '[ID]'..."))
-	return TRUE
+/obj/machinery/faxmachine/proc/on_insert_card(var/obj/item/card/C, var/mob/user)
+	if(card_reader.should_swipe) //We don't support swiping
+		if(user)
+			to_chat(user, SPAN_WARNING("\The [card_reader] is currently set to swipe mode, which is unsupported by this machine. Please contact your system administrator."))
+		return 
+	if(user)
+		to_chat(user, SPAN_NOTICE("Loading \the '[C]'..."))
+	update_ui()
 
 /obj/machinery/faxmachine/proc/eject_card(var/mob/user)
 	if(!card_reader)
-		to_chat(user, SPAN_WARNING("\The [src] has no card reader installed."))
+		if(user)
+			to_chat(user, SPAN_WARNING("\The [src] has no card reader installed."))
 		return FALSE
 	card_reader.eject_item(user)
 	update_ui()
 	return TRUE
 
-/obj/machinery/faxmachine/proc/insert_disk(var/obj/item/disk/D, var/mob/user)
-	if(!disk_reader)
-		to_chat(user, SPAN_WARNING("\The [src] has no disk drive installed."))
-		return FALSE
-	if(disk_reader.get_inserted())
-		to_chat(user, SPAN_WARNING("There is already \a [D] in \the [src]."))
-		return FALSE
-	if(!disk_reader.insert_item(D, user))
-		return FALSE
-
+/obj/machinery/faxmachine/proc/on_insert_disk(var/obj/item/disk/D, var/mob/user)
 	//Read any existing disk data
-	var/datum/computer_file/data/qdfile   = D.read_file(FAX_QUICK_DIAL_FILE)
+	var/datum/computer_file/data/qdfile = D.read_file(FAX_QUICK_DIAL_FILE)
 	if(qdfile)
 		quick_dial = json_decode(qdfile.stored_data)
 
 	var/datum/computer_file/data/histfile = D.read_file(FAX_HISTORY_FILE)
 	if(histfile)
 		fax_history = json_decode(histfile.stored_data)
-
 	update_ui()
-	return TRUE
 
 /obj/machinery/faxmachine/proc/eject_disk(var/mob/user)
 	if(!disk_reader)
@@ -458,12 +440,31 @@ var/global/list/adminfaxes     = list()	//cache for faxes that have been sent to
 		to_chat(user, SPAN_WARNING("No internet connection!"))
 		return FALSE
 
+	var/obj/item/card/id/ID = try_get_card()
+	ID = istype(ID)? ID : null
+
 	//If sending to admins, don't try to get a target network or device
 	var/target_URI = uppertext("[target_net_tag].[target_net_id]")
-	if(target_URI in global.using_map.map_admin_faxes)
+	var/list/target_admin_fax = LAZYACCESS(global.using_map.map_admin_faxes, target_URI)
+	if(target_admin_fax)
+		var/list/fax_req_access = target_admin_fax["access"]
+		if(!emagged)
+			if(!has_access(req_access, ID?.GetAccess()))
+				to_chat(user, SPAN_WARNING("You do not have the right credentials to use the send function on this device!"))
+				return FALSE
+			if(!has_access(fax_req_access, ID?.GetAccess()))
+				to_chat(user, SPAN_WARNING("You do not have the right credentials to send a fax to this recipient!"))
+				return FALSE
+		else if(prob(1))
+			spark_at(src, 1)
+
 		.= send_fax_to_admin(user, scanner_item, target_URI, src)
-		ping("Message transmitted successfully.")
+		log_history("Outgoing", "'[scanner_item]', from '[get_area(src)]'s [src]' @ '[sender_dev.get_network_URI()]' to [target_admin_fax["name"]]' @ '[target_URI]'.")
+		update_ui()
+		flick("faxsend", src)
+		//#TODO: sync the animation, sound and message together when I got enough patience.
 		playsound(src, 'sound/machines/fax_send.ogg', 30, FALSE, 0, 4)
+		ping("Message transmitted successfully!")
 		time_cooldown_end = world.timeofday + FAX_ADMIN_COOLDOWN
 		return TRUE
 
@@ -489,14 +490,12 @@ var/global/list/adminfaxes     = list()	//cache for faxes that have been sent to
 		CRASH("There is a network_device extension without a holder!")
 
 	//Authenticate as needed
-	var/obj/item/card/id/ID = try_get_card()
-	ID = istype(ID)? ID : null
 	if(!emagged)
 		if(!has_access(req_access, ID?.GetAccess()))
-			to_chat(user, SPAN_WARNING("You do not have sufficient credentials to use the send function on this device!"))
+			to_chat(user, SPAN_WARNING("You do not have the right credentials to use the send function on this device!"))
 			return FALSE
 		if(!has_access(target.req_access, ID?.GetAccess()))
-			to_chat(user, SPAN_WARNING("You do not have sufficient credentials to send a fax to this recipient!"))
+			to_chat(user, SPAN_WARNING("You do not have the right credentials to send a fax to this recipient!"))
 			return FALSE
 	else if(prob(1))
 		spark_at(src, 1)
@@ -508,6 +507,7 @@ var/global/list/adminfaxes     = list()	//cache for faxes that have been sent to
 	var/decl/public_access/public_method/send_method = GET_DECL(/decl/public_access/public_method/fax_receive_document)
 	if(send_method.perform(target, clone_paper_work_item(scanner_item), "[get_area(src)]'s [src]", sender_dev.get_network_URI()))
 		log_history("Outgoing", "'[scanner_item]', from '[get_area(src)]'s [src]' @ '[sender_dev.get_network_URI()]' to '[get_area(target)]'s [target]' @ '[target_dev.get_network_URI()]'.")
+		//#TODO: sync the animation, sound and message together when I got enough patience.
 		ping("Message transmitted successfully.")
 		playsound(src, 'sound/machines/fax_send.ogg', 30, FALSE, 0, 4)
 		update_ui()
@@ -556,9 +556,15 @@ var/global/list/adminfaxes     = list()	//cache for faxes that have been sent to
 		return FALSE
 	if((network_id != sender_net.network_id) && !sender.has_internet_connection(network_id))
 		return FALSE
-	if(uppertext("[network_tag].[network_id]") in global.using_map.map_admin_faxes)
-		return TRUE //If we have at least a connection to the network and an admin fax uri go ahead
-	var/datum/computer_network/target_net         
+	
+	//Handle fake admin network addresses
+	var/target_uri = uppertext("[network_tag].[network_id]")
+	if(target_uri in global.using_map.map_admin_faxes)
+		var/list/admin_faxes    = LAZYACCESS(global.using_map.map_admin_faxes, target_uri)
+		var/list/required_access = LAZYACCESS(admin_faxes, "access")
+		return has_access(required_access, provided_access) //With access we can send faxes to the selected admin address
+	
+	var/datum/computer_network/target_net
 	if(network_id != sender_net.network_id)
 		target_net = sender_net?.get_internet_connection(network_id)
 	else
@@ -658,8 +664,8 @@ var/global/list/adminfaxes     = list()	//cache for faxes that have been sent to
 	LAZYADD(global.adminfaxes, rcvdcopy)
 
 	var/list/fax_details  = LAZYACCESS(global.using_map?.map_admin_faxes, network_URI)
-	var/dest_display_name = LAZYACCESS(fax_details, 1) || network_URI
-	var/font_colour       = LAZYACCESS(fax_details, 2) || "#006100"
+	var/dest_display_name = LAZYACCESS(fax_details, "name") || network_URI
+	var/font_colour       = LAZYACCESS(fax_details, "color") || "#006100"
 	var/faxname           = "[uppertext(dest_display_name)] FAX"
 	var/reply_type        = dest_display_name
 

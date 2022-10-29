@@ -19,11 +19,6 @@
 		return TRUE
 	. = ..()
 
-/obj/item/stock_parts/item_holder/attack_hand(mob/user)
-	if(is_item_inserted() && istype(loc, /obj/machinery))
-		eject_item(user)
-		return TRUE
-	. = ..()
 
 /obj/item/stock_parts/item_holder/attack_self(mob/user)
 	if(is_item_inserted())

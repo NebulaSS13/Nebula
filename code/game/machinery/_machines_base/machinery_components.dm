@@ -223,7 +223,7 @@ var/global/list/machine_path_to_circuit_type
 
 // Use to block interactivity if panel is not open, etc.
 /obj/machinery/proc/components_are_accessible(var/path)
-	if(ispath(path, /obj/item/stock_parts/access_lock))
+	if(ispath(path, /obj/item/stock_parts/access_lock) || ispath(path, /obj/item/stock_parts/item_holder))
 		return TRUE
 	return panel_open
 

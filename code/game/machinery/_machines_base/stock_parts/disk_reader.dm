@@ -1,3 +1,4 @@
+//#TODO: disk reader should have its own includable tmpl, and override ui_data so machines don't have to reimplemnt the disk stuff a million time in their ui.
 /**
  * Stock part for reading/writing to an inserted data disk.
  */

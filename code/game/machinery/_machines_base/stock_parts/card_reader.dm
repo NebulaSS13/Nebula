@@ -1,3 +1,7 @@
+//#TODO: card reader should have its own includable tmpl, and override ui_data so machines don't have to reimplemnt the id card stuff a million time.
+/**
+ * Stock part for accessing/holding the subtypes of /obj/item/card.
+ */
 /obj/item/stock_parts/item_holder/card_reader
 	name       = "RFID card reader"
 	desc       = "A RFID card reader for various authentication or data sharing usages."
