@@ -1,0 +1,10 @@
+author: noelle-lavenza
+delete-after: true
+changes:
+  - rscadd: Adds inhalers.
+  - rscadd: Sleepers can now remove chemicals from the lungs via a lung lavage.
+  - tweak: Autoinjectors in oxygen deprivation pouches have been replaced with oxygel
+      inhalers.
+  - tweak: Chemicals can now be properly inhaled into the lungs.
+  - tweak: Coughing removes one to two units of reagents from your lungs.
+  - tweak: Coughing can now only be manually done once every three seconds.
