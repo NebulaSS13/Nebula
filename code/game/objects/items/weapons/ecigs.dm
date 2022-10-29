@@ -114,7 +114,7 @@
 				Deactivate()
 				to_chat(C,SPAN_NOTICE("\The [src]'s power meter flashes a low battery warning and shuts down."))
 				return
-			ec_cartridge.reagents.trans_to_mob(C, REM, CHEM_INGEST, 0.4) // Most of it is not inhaled... balance reasons.
+			ec_cartridge.reagents.trans_to_mob(C, REM, CHEM_INHALE, 0.4) // Most of it is not inhaled... balance reasons.
 
 /obj/item/clothing/mask/smokable/ecig/on_update_icon()
 	. = ..()

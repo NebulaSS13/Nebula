@@ -19,7 +19,7 @@
 	body_parts_covered = SLOT_UPPER_BODY | SLOT_LOWER_BODY| SLOT_ARMS
 	armor = list(laser = ARMOR_LASER_MINOR, energy = ARMOR_ENERGY_MINOR, bomb = ARMOR_BOMB_MINOR)
 	allowed = list(/obj/item/flashlight,/obj/item/tank/emergency,/obj/item/extinguisher,/obj/item/clothing/head/hardhat)
-	
+
 	gas_transfer_coefficient = 0.90
 	permeability_coefficient = 0.50
 
@@ -45,10 +45,10 @@
 	desc = "Use in case of bomb."
 	icon = 'icons/clothing/head/bombsuit.dmi'
 	armor = list(
-		melee = ARMOR_MELEE_VERY_HIGH, 
-		bullet = ARMOR_BALLISTIC_MINOR, 
-		laser = ARMOR_LASER_SMALL, 
-		energy = ARMOR_ENERGY_RESISTANT, 
+		melee = ARMOR_MELEE_VERY_HIGH,
+		bullet = ARMOR_BALLISTIC_MINOR,
+		laser = ARMOR_LASER_SMALL,
+		energy = ARMOR_ENERGY_RESISTANT,
 		bomb = ARMOR_BOMB_SHIELDED
 		)
 	flags_inv = HIDEMASK|HIDEEARS|BLOCK_HEAD_HAIR
@@ -63,10 +63,10 @@
 	gas_transfer_coefficient = 0.01
 	permeability_coefficient = 0.01
 	armor = list(
-		melee = ARMOR_MELEE_VERY_HIGH, 
-		bullet = ARMOR_BALLISTIC_MINOR, 
-		laser = ARMOR_LASER_SMALL, 
-		energy = ARMOR_ENERGY_RESISTANT, 
+		melee = ARMOR_MELEE_VERY_HIGH,
+		bullet = ARMOR_BALLISTIC_MINOR,
+		laser = ARMOR_LASER_SMALL,
+		energy = ARMOR_ENERGY_RESISTANT,
 		bomb = ARMOR_BOMB_SHIELDED
 		)
 	flags_inv = HIDEJUMPSUIT|HIDETAIL
@@ -97,7 +97,7 @@
 	flags_inv = HIDEMASK|HIDEEARS|HIDEEYES|HIDEFACE|BLOCK_ALL_HAIR
 	body_parts_covered = SLOT_HEAD|SLOT_FACE|SLOT_EYES|SLOT_EARS
 	armor = list(
-		bio = ARMOR_BIO_RESISTANT, 
+		bio = ARMOR_BIO_RESISTANT,
 		rad = ARMOR_RAD_SHIELDED
 		)
 	matter = list(
@@ -117,7 +117,7 @@
 	body_parts_covered = SLOT_UPPER_BODY|SLOT_LOWER_BODY|SLOT_LEGS|SLOT_ARMS|SLOT_HANDS|SLOT_FEET
 	allowed = list(/obj/item/flashlight,/obj/item/tank/emergency,/obj/item/clothing/head/radiation,/obj/item/clothing/mask/gas,/obj/item/geiger)
 	armor = list(
-		bio = ARMOR_BIO_RESISTANT, 
+		bio = ARMOR_BIO_RESISTANT,
 		rad = ARMOR_RAD_SHIELDED
 		)
 	flags_inv = HIDEJUMPSUIT|HIDETAIL|HIDEGLOVES|HIDESHOES
@@ -141,7 +141,7 @@
 	icon = 'icons/clothing/head/chem_hood.dmi'
 	permeability_coefficient = 0
 	armor = list(
-		bio = ARMOR_BIO_RESISTANT, 
+		bio = ARMOR_BIO_RESISTANT,
 		rad = ARMOR_RAD_MINOR
 		)
 	flags_inv = HIDEEARS|BLOCK_HEAD_HAIR
@@ -162,9 +162,9 @@
 	gas_transfer_coefficient = 0
 	permeability_coefficient = 0
 	body_parts_covered = SLOT_UPPER_BODY|SLOT_LOWER_BODY|SLOT_LEGS|SLOT_FEET|SLOT_ARMS|SLOT_HANDS
-	allowed = list(/obj/item/tank/emergency,/obj/item/pen,/obj/item/flashlight/pen,/obj/item/scanner/health,/obj/item/ano_scanner,/obj/item/clothing/head/chem_hood,/obj/item/clothing/mask/gas,/obj/item/geiger)
+	allowed = list(/obj/item/tank/emergency,/obj/item/pen,/obj/item/flashlight/pen,/obj/item/scanner/health,/obj/item/scanner/breath,/obj/item/ano_scanner,/obj/item/clothing/head/chem_hood,/obj/item/clothing/mask/gas,/obj/item/geiger)
 	armor = list(
-		bio = ARMOR_BIO_RESISTANT, 
+		bio = ARMOR_BIO_RESISTANT,
 		rad = ARMOR_RAD_MINOR
 		)
 	flags_inv = HIDEGLOVES|HIDESHOES|HIDEJUMPSUIT|HIDETAIL

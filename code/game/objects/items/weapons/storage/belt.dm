@@ -160,6 +160,7 @@
 	icon = 'icons/clothing/belt/medical.dmi'
 	can_hold = list(
 		/obj/item/scanner/health,
+		/obj/item/scanner/breath,
 		/obj/item/chems/dropper,
 		/obj/item/chems/glass/beaker,
 		/obj/item/chems/glass/bottle,
@@ -174,6 +175,7 @@
 		/obj/item/clothing/head/surgery,
 		/obj/item/clothing/gloves/latex,
 		/obj/item/chems/hypospray,
+		/obj/item/chems/inhaler,
 		/obj/item/clothing/glasses/hud/health,
 		/obj/item/crowbar,
 		/obj/item/flashlight,

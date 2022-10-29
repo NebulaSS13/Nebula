@@ -15,6 +15,8 @@
 	var/label_text
 	var/presentation_flags = 0
 	var/show_reagent_name = FALSE
+	var/detail_color
+	var/detail_state
 
 /obj/item/chems/Initialize(ml, material_key)
 	. = ..()
@@ -35,6 +37,11 @@
 	if(!base_name)
 		base_name = initial(name)
 	. = base_name
+
+/obj/item/chems/on_update_icon()
+	. = ..()
+	if(detail_state)
+		add_overlay(overlay_image(icon, "[icon_state][detail_state]", detail_color || COLOR_WHITE, RESET_COLOR))
 
 /obj/item/chems/proc/update_container_name()
 	var/newname = get_base_name()
@@ -248,6 +255,13 @@
 	else
 		reagents.maximum_volume = max(reagents.maximum_volume, volume)
 	. = ..()
+
+/obj/item/chems/proc/set_detail_color(var/new_color)
+	if(new_color != detail_color)
+		detail_color = new_color
+		update_icon()
+		return TRUE
+	return FALSE
 
 //
 // Interactions

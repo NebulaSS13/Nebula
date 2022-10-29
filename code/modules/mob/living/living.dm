@@ -399,17 +399,8 @@ default behaviour is:
 /mob/living/proc/rejuvenate()
 
 	// Wipe all of our reagent lists.
-	var/datum/reagents/bloodstr_reagents = get_injected_reagents()
-	if(bloodstr_reagents)
-		bloodstr_reagents.clear_reagents()
-	var/datum/reagents/touching_reagents = get_contact_reagents()
-	if(touching_reagents)
-		touching_reagents.clear_reagents()
-	var/datum/reagents/ingested_reagents = get_ingested_reagents()
-	if(ingested_reagents)
-		ingested_reagents.clear_reagents()
-	if(reagents)
-		reagents.clear_reagents()
+	for(var/datum/reagents/reagent_list as anything in get_metabolizing_reagent_holders(include_contact = TRUE))
+		reagent_list.clear_reagents()
 
 	// shut down various types of badness
 	setToxLoss(0)
@@ -792,9 +783,17 @@ default behaviour is:
 	if(!lying && T.above && T.above.is_open() && !T.above.is_flooded() && can_overcome_gravity())
 		return FALSE
 	if(prob(5))
+		var/datum/reagents/metabolism/inhaled = get_inhaled_reagents()
+		var/datum/reagents/metabolism/ingested = get_ingested_reagents()
 		var/obj/effect/fluid/F = locate() in loc
 		to_chat(src, SPAN_DANGER("You choke and splutter as you inhale [(F?.reagents && F.reagents.get_primary_reagent_name()) || "liquid"]!"))
-		F?.reagents?.trans_to_holder(get_ingested_reagents(), min(F.reagents.total_volume, rand(2,5)))
+		var/inhale_amount = 0
+		if(inhaled)
+			inhale_amount = rand(2,5)
+			F?.reagents?.trans_to_holder(inhaled, min(F.reagents.total_volume, inhale_amount))
+		if(ingested)
+			var/ingest_amount = 5 - inhale_amount
+			F?.reagents?.trans_to_holder(ingested, min(F.reagents.total_volume, ingest_amount))
 
 	T.show_bubbles()
 	return TRUE // Presumably chemical smoke can't be breathed while you're underwater.
@@ -923,6 +922,9 @@ default behaviour is:
 	return reagents
 
 /mob/living/proc/get_injected_reagents()
+	return reagents
+
+/mob/living/proc/get_inhaled_reagents()
 	return reagents
 
 /mob/living/proc/get_adjusted_metabolism(metabolism)
@@ -1054,6 +1056,13 @@ default behaviour is:
 
 /mob/living/proc/apply_fall_damage(var/turf/landing)
 	adjustBruteLoss(rand(max(1, CEILING(mob_size * 0.33)), max(1, CEILING(mob_size * 0.66))))
+
+/mob/living/proc/get_metabolizing_reagent_holders(var/include_contact = FALSE)
+	for(var/datum/reagents/adding in list(reagents, get_ingested_reagents(), get_inhaled_reagents()))
+		LAZYDISTINCTADD(., adding)
+	if(include_contact)
+		for(var/datum/reagents/adding in list(get_injected_reagents(), get_contact_reagents()))
+			LAZYDISTINCTADD(., adding)
 
 /mob/living/get_alt_interactions(mob/user)
 	. = ..()

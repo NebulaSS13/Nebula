@@ -46,7 +46,7 @@
 
 // Get valid, unique reagent holders for metabolizing. Avoids metabolizing the same holder twice in a tick.
 /mob/living/proc/get_unique_metabolizing_reagent_holders()
-	for(var/datum/reagents/metabolism/holder in list(get_contact_reagents(), get_ingested_reagents(), get_injected_reagents()))
+	for(var/datum/reagents/metabolism/holder in list(get_contact_reagents(), get_ingested_reagents(), get_injected_reagents(), get_inhaled_reagents()))
 		LAZYDISTINCTADD(., holder)
 
 /mob/living/proc/handle_chemicals_in_body()
@@ -81,9 +81,8 @@
 					break
 			if(still_processing_reagent)
 				continue
-
-			var/decl/material/R = T
-			var/dose = LAZYACCESS(chem_doses, T) - initial(R.metabolism)*2
+			var/decl/material/R = GET_DECL(T)
+			var/dose = LAZYACCESS(chem_doses, T) - R.metabolism*2
 			LAZYSET(chem_doses, T, dose)
 			if(LAZYACCESS(chem_doses, T) <= 0)
 				LAZYREMOVE(chem_doses, T)
@@ -99,6 +98,7 @@
 	if(burn_regen || brute_regen)
 		heal_organ_damage(brute_regen, burn_regen)
 		return TRUE
+
 
 /mob/living/proc/handle_random_events()
 	return

@@ -15,7 +15,12 @@
 	possible_transfer_amounts = null
 	atom_flags = ATOM_FLAG_OPEN_CONTAINER
 	slot_flags = SLOT_LOWER_BODY
-	material = /decl/material/solid/metal/steel
+	material = /decl/material/solid/plastic
+	matter = list(
+		/decl/material/solid/fiberglass = MATTER_AMOUNT_REINFORCEMENT,
+		/decl/material/solid/metal/aluminium = MATTER_AMOUNT_TRACE,
+		/decl/material/solid/metal/silver = MATTER_AMOUNT_TRACE
+	)
 
 	// autoinjectors takes less time than a normal syringe (overriden for hypospray).
 	// This delay is only applied when injecting concious mobs, and is not applied for self-injection
@@ -67,7 +72,7 @@
 		var/contained = REAGENT_LIST(src)
 		var/trans = reagents.trans_to_mob(M, amount_per_transfer_from_this, CHEM_INJECT)
 		admin_inject_log(user, M, src, contained, trans)
-		to_chat(user, SPAN_NOTICE("[trans] units injected. [reagents.total_volume] units remaining in \the [src]."))
+		to_chat(user, SPAN_NOTICE("[trans] unit\s injected. [reagents.total_volume] unit\s remaining in \the [src]."))
 
 	return
 
@@ -84,10 +89,6 @@
 	time = 0 // hyposprays are instant for conscious people
 	single_use = FALSE
 	material = /decl/material/solid/metal/steel
-	matter = list(
-		/decl/material/solid/fiberglass = MATTER_AMOUNT_REINFORCEMENT,
-		/decl/material/solid/metal/silver = MATTER_AMOUNT_TRACE
-	)
 	var/obj/item/chems/glass/beaker/vial/loaded_vial
 
 /obj/item/chems/hypospray/vial/Initialize()
@@ -175,9 +176,9 @@
 	origin_tech = "{'materials':2,'biotech':2}"
 	slot_flags = SLOT_LOWER_BODY | SLOT_EARS
 	w_class = ITEM_SIZE_TINY
-	material = /decl/material/solid/plastic
-	matter = list(/decl/material/solid/fiberglass = MATTER_AMOUNT_REINFORCEMENT)
-	var/band_color = COLOR_CYAN
+	detail_state = "_band"
+	detail_color = COLOR_CYAN
+
 
 /obj/item/chems/hypospray/autoinjector/populate_reagents()
 	reagents.add_reagent(/decl/material/liquid/adrenaline, reagents.maximum_volume)
@@ -193,7 +194,6 @@
 /obj/item/chems/hypospray/autoinjector/on_update_icon()
 	. = ..()
 	icon_state = "[initial(icon_state)][(reagents?.total_volume) > 0]"
-	add_overlay(overlay_image(icon, "injector_band", band_color, RESET_COLOR))
 
 /obj/item/chems/hypospray/autoinjector/examine(mob/user)
 	. = ..(user)
@@ -207,7 +207,7 @@
 ////////////////////////////////////////////////////////////////////////////////
 /obj/item/chems/hypospray/autoinjector/detox
 	name = "autoinjector (antitox)"
-	band_color = COLOR_GREEN
+	detail_color = COLOR_GREEN
 
 /obj/item/chems/hypospray/autoinjector/detox/populate_reagents()
 	reagents.add_reagent(/decl/material/liquid/antitoxins, reagents.maximum_volume)
@@ -217,7 +217,7 @@
 ////////////////////////////////////////////////////////////////////////////////
 /obj/item/chems/hypospray/autoinjector/pain
 	name = "autoinjector (painkiller)"
-	band_color = COLOR_PURPLE
+	detail_color = COLOR_PURPLE
 
 /obj/item/chems/hypospray/autoinjector/pain/populate_reagents()
 	reagents.add_reagent(/decl/material/liquid/painkillers, reagents.maximum_volume)
@@ -227,7 +227,7 @@
 ////////////////////////////////////////////////////////////////////////////////
 /obj/item/chems/hypospray/autoinjector/antirad
 	name = "autoinjector (anti-rad)"
-	band_color = COLOR_AMBER
+	detail_color = COLOR_AMBER
 
 /obj/item/chems/hypospray/autoinjector/antirad/populate_reagents()
 	reagents.add_reagent(/decl/material/liquid/antirads, reagents.maximum_volume)
@@ -237,7 +237,7 @@
 ////////////////////////////////////////////////////////////////////////////////
 /obj/item/chems/hypospray/autoinjector/hallucinogenics
 	name = "autoinjector"
-	band_color = COLOR_DARK_GRAY
+	detail_color = COLOR_DARK_GRAY
 
 /obj/item/chems/hypospray/autoinjector/hallucinogenics/populate_reagents()
 	reagents.add_reagent(/decl/material/liquid/hallucinogenics, reagents.maximum_volume)
@@ -247,7 +247,7 @@
 ////////////////////////////////////////////////////////////////////////////////
 /obj/item/chems/hypospray/autoinjector/empty
 	name = "autoinjector"
-	band_color = COLOR_WHITE
+	detail_color = COLOR_WHITE
 
 /obj/item/chems/hypospray/autoinjector/empty/populate_reagents()
 	return

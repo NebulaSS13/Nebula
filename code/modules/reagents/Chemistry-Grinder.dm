@@ -52,12 +52,12 @@
 		istype(O,/obj/item/chems/drinks/glass2) || \
 		istype(O,/obj/item/chems/drinks/shaker))
 
-		if (beaker)
+		if(beaker)
 			return TRUE
 		else
 			if(!user.unEquip(O, src))
 				return FALSE
-			beaker =  O
+			beaker = O
 			update_icon()
 			SSnano.update_uis(src)
 			return FALSE

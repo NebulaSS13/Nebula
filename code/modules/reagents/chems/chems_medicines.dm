@@ -122,10 +122,10 @@
 
 	var/removing = (4 * removed)
 	var/datum/reagents/ingested = M.get_ingested_reagents()
-	for(var/R in ingested.reagent_volumes)
+	for(var/R in ingested?.reagent_volumes)
 		var/decl/material/chem = GET_DECL(R)
 		if((remove_generic && chem.toxicity) || (R in remove_toxins))
-			M.reagents.remove_reagent(R, removing)
+			ingested.remove_reagent(R, removing)
 			return
 
 	for(var/R in M.reagents?.reagent_volumes)
@@ -359,3 +359,43 @@
 /decl/material/liquid/oxy_meds/affect_blood(var/mob/living/M, var/removed, var/datum/reagents/holder)
 	M.add_chemical_effect(CE_OXYGENATED, 1)
 	holder.remove_reagent(/decl/material/gas/carbon_monoxide, 2 * removed)
+
+#define DETOXIFIER_EFFECTIVENESS 6 // 6u of opiates removed per 1u of detoxifier; 5u is enough to remove 30u, i.e. an overdose
+#define DETOXIFIER_DOSE_EFFECTIVENESS 2 // 2u of metabolised opiates removed per 1u of detoxifier; will leave you vulnerable to another OD if you use more
+/decl/material/liquid/detoxifier
+	name = "detoxifier"
+	lore_text = "A compound designed to purge opiates and narcotics from the body when inhaled or injected."
+	taste_description = "bitterness"
+	color = "#6666ff"
+	metabolism = REM
+	scannable = TRUE
+	affect_blood_on_inhale = TRUE
+	affect_blood_on_ingest = FALSE
+	value = 1.5
+	uid = "chem_detoxifier"
+
+/decl/material/liquid/detoxifier/affect_blood(var/mob/living/M, var/alien, var/removed, var/datum/reagents/holder)
+	var/charges = removed * DETOXIFIER_EFFECTIVENESS
+	var/dosecharges = LAZYACCESS(M.chem_doses, type) * DETOXIFIER_DOSE_EFFECTIVENESS
+	for(var/datum/reagents/container as anything in M.get_metabolizing_reagent_holders())
+		for(var/reagent_type in container.reagent_volumes)
+			var/decl/material/liquid/painkillers/painkiller = GET_DECL(reagent_type)
+			if(!istype(painkiller) || !painkiller.narcotic)
+				continue
+			var/amount = min(charges, REAGENT_VOLUME(container, reagent_type))
+			if(amount)
+				charges -= amount
+				container.remove_reagent(reagent_type, amount)
+			var/dose_amount = min(dosecharges, LAZYACCESS(M.chem_doses, reagent_type))
+			if(dose_amount)
+				var/dose = LAZYACCESS(M.chem_doses, reagent_type) - dose_amount
+				LAZYSET(M.chem_doses, reagent_type, dose)
+				if(M.chem_doses[reagent_type] <= 0)
+					LAZYREMOVE(M.chem_doses, reagent_type)
+				dosecharges -= dose_amount
+			if(charges <= 0 && dosecharges <= 0)
+				break
+		if(charges <= 0 && dosecharges <= 0)
+			break
+#undef DETOXIFIER_EFFECTIVENESS
+#undef DETOXIFIER_DOSE_EFFECTIVENESS

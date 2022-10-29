@@ -141,6 +141,7 @@
 		/obj/item/chems/syringe,
 		/obj/item/chems/hypospray,
 		/obj/item/chems/hypospray/autoinjector,
+		/obj/item/chems/inhaler,
 		/obj/item/syringe_cartridge,
 		/obj/item/plastique,
 		/obj/item/clothing/mask/smokable,

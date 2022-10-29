@@ -36,6 +36,7 @@
 		/obj/item/gun,
 		/obj/item/storage/firstaid,
 		/obj/item/chems/hypospray,
+		/obj/item/chems/inhaler,
 		/obj/item/roller,
 		/obj/item/suit_cooling_unit
 	)
@@ -108,6 +109,7 @@
 		/obj/item/gun,
 		/obj/item/storage/firstaid, 
 		/obj/item/chems/hypospray, 
+		/obj/item/chems/inhaler, 
 		/obj/item/roller, 
 		/obj/item/suit_cooling_unit
 	)

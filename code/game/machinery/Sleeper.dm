@@ -19,6 +19,7 @@
 	var/obj/item/chems/glass/beaker = null
 	var/filtering = 0
 	var/pump
+	var/lavage = FALSE // Are we rinsing reagents from the lungs?
 	var/list/stasis_settings = list(1, 2, 5, 10)
 	var/stasis = 1
 	var/pump_speed
@@ -123,6 +124,16 @@
 						ingested.trans_to_obj(beaker, pump_speed * trans_amt)
 		else
 			toggle_pump()
+	if(lavage)
+		if(beaker?.reagents)
+			if (beaker.reagents.total_volume < beaker.reagents.maximum_volume)
+				var/datum/reagents/inhaled = occupant.get_inhaled_reagents()
+				var/trans_volume = LAZYLEN(inhaled?.reagent_volumes)
+				if(inhaled && trans_volume)
+					inhaled.trans_to_obj(beaker, pump_speed * trans_volume)
+		else
+			toggle_lavage()
+
 
 	if(iscarbon(occupant) && stasis > 1)
 		occupant.SetStasis(stasis)
@@ -193,6 +204,7 @@
 		data["beaker"] = -1
 	data["filtering"] = filtering
 	data["pump"] = pump
+	data["lavage"] = lavage
 	data["stasis"] = stasis
 	data["skill_check"] = user.skill_check(SKILL_MEDICAL, SKILL_BASIC)
 	ui = SSnano.try_update_ui(user, src, ui_key, ui, data, force_open)
@@ -228,6 +240,10 @@
 	if(href_list["pump"])
 		if(filtering != text2num(href_list["pump"]))
 			toggle_pump()
+			return TOPIC_REFRESH
+	if(href_list["lavage"])
+		if(lavage != text2num(href_list["lavage"]))
+			toggle_lavage()
 			return TOPIC_REFRESH
 	if(href_list["chemical"])
 		var/obj/canister = locate(href_list["chemical"])
@@ -306,8 +322,21 @@
 	if(!occupant || !beaker)
 		pump = 0
 		return
-	to_chat(occupant, SPAN_WARNING("You feel a tube jammed down your throat."))
 	pump = !pump
+	if(pump)
+		to_chat(occupant, SPAN_WARNING("You feel a tube jammed down your throat."))
+	else
+		to_chat(occupant, SPAN_WARNING("You feel a tube retract from your throat."))
+
+/obj/machinery/sleeper/proc/toggle_lavage()
+	if(!occupant || !beaker)
+		lavage = FALSE
+		return
+	lavage = !lavage
+	if (lavage)
+		to_chat(occupant, SPAN_WARNING("You feel a tube jammed down your windpipe."))
+	else
+		to_chat(occupant, SPAN_NOTICE("You feel a tube retract from your windpipe."))
 
 /obj/machinery/sleeper/proc/go_in(var/mob/M, var/mob/user)
 	if(!M || M.anchored)
@@ -366,6 +395,7 @@
 		beaker = null
 		toggle_filter()
 		toggle_pump()
+		toggle_lavage()
 
 /obj/machinery/sleeper/proc/inject_chemical(var/mob/living/user, var/obj/canister, var/amount, var/target_transfer_type = CHEM_INJECT)
 	if(stat & (BROKEN|NOPOWER))

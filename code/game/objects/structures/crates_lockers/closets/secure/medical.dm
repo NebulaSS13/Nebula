@@ -75,6 +75,7 @@
 	    /obj/item/tank/emergency/oxygen/engi,
 	    /obj/item/clothing/glasses/hud/health,
 	    /obj/item/scanner/health,
+	    /obj/item/scanner/breath,
 	    /obj/item/radio/off,
 	    /obj/random/medical,
 	    /obj/item/crowbar,
@@ -127,7 +128,7 @@
 	wall_mounted = 1
 	storage_types = CLOSET_STORAGE_ITEMS
 	req_access = list(access_medical_equip)
-	
+
 /obj/structure/closet/secure_closet/medical_wall/Initialize()
 	. = ..()
 	tool_interaction_flags &= ~TOOL_INTERACTION_ANCHOR
@@ -179,6 +180,7 @@
 		/obj/item/clothing/suit/storage/toggle/labcoat/virologist,
 		/obj/item/clothing/mask/surgical,
 		/obj/item/scanner/health,
+		/obj/item/scanner/breath,
 		/obj/item/clothing/glasses/hud/health
 	)
 

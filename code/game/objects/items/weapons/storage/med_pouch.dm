@@ -31,9 +31,8 @@ Single Use Emergency Pouches
 	. = ..()
 	name = "emergency [injury_type] pouch"
 	make_exact_fit()
-	for(var/obj/item/chems/hypospray/autoinjector/A in contents)
-		A.band_color = color
-		A.update_icon()
+	for(var/obj/item/chems/C in contents)
+		C.set_detail_color(color)
 
 /obj/item/storage/med_pouch/on_update_icon()
 	. = ..()
@@ -113,7 +112,7 @@ Single Use Emergency Pouches
 
 	startswith = list(
 		/obj/item/chems/hypospray/autoinjector/pouch_auto/stabilizer,
-		/obj/item/chems/hypospray/autoinjector/pouch_auto/oxy_meds,
+		/obj/item/chems/inhaler/pouch_auto/oxy_meds,
 		/obj/item/chems/hypospray/autoinjector/pouch_auto/adrenaline,
 		/obj/item/chems/pill/pouch_pill/stabilizer,
 		/obj/item/chems/pill/pouch_pill/oxy_meds
@@ -165,9 +164,32 @@ Single Use Emergency Pouches
 	6) Stay in place once they respond.\
 		"}
 
+/obj/item/storage/med_pouch/overdose
+	name = "overdose treatment pouch"
+	injury_type = "overdose"
+	color = COLOR_PALE_BLUE_GRAY
+
+	startswith = list(
+		/obj/item/chems/hypospray/autoinjector/pouch_auto/stabilizer,
+		/obj/item/chems/inhaler/pouch_auto/oxy_meds,
+		/obj/item/chems/inhaler/pouch_auto/detoxifier,
+		/obj/item/chems/hypospray/autoinjector/pouch_auto/adrenaline
+	)
+	instructions = {"
+	1) Tear open the emergency medical pack using the easy open tab at the top.\n\
+	\t2) Carefully remove all items from the pouch and discard the pouch.\n\
+	\t3) Apply all autoinjectors and autoinhalers to the injured party. DO NOT give the injured party any pills, foods, or liquids.\n\
+	\t5) Contact the medical team with your location.\n\
+	\t6) Find a source of oxygen if possible.\n\
+	\t7) Update the medical team with your new location.\n\
+	8) Stay in place once they respond.\
+		"}
+
+// Pills
+
 /obj/item/chems/pill/pouch_pill
 	name       = "emergency pill"
-	desc       = "An emergency pill from an emergency medical pouch"
+	desc       = "An emergency pill from an emergency medical pouch."
 	icon_state = "pill2"
 	volume     = 15
 	abstract_type = /obj/item/chems/pill/pouch_pill
@@ -200,9 +222,11 @@ Single Use Emergency Pouches
 /obj/item/chems/pill/pouch_pill/burn_meds/populate_reagents()
 	reagents.add_reagent(/decl/material/liquid/burn_meds, reagents.maximum_volume)
 
+// Injectors
+
 /obj/item/chems/hypospray/autoinjector/pouch_auto
 	name = "emergency autoinjector"
-	desc = "An emergency autoinjector from an emergency medical pouch"
+	desc = "An emergency autoinjector from an emergency medical pouch."
 
 /obj/item/chems/hypospray/autoinjector/pouch_auto/stabilizer
 	name = "emergency stabilizer autoinjector"
@@ -234,3 +258,23 @@ Single Use Emergency Pouches
 	name = "emergency nanoblood autoinjector"
 /obj/item/chems/hypospray/autoinjector/pouch_auto/nanoblood/populate_reagents()
 	reagents.add_reagent(/decl/material/liquid/nanoblood, 5)
+
+// Inhalers
+
+/obj/item/chems/inhaler/pouch_auto
+	name = "emergency autoinhaler"
+	desc = "An emergency autoinhaler from an emergency medical pouch."
+
+/obj/item/chems/inhaler/pouch_auto/oxy_meds
+	name = "emergency oxygel autoinhaler"
+	detail_color = COLOR_CYAN
+
+/obj/item/chems/inhaler/pouch_auto/oxy_meds/populate_reagents()
+	reagents.add_reagent(/decl/material/liquid/oxy_meds, 5)
+
+/obj/item/chems/inhaler/pouch_auto/detoxifier
+	name = "emergency detoxifier autoinhaler"
+	detail_color = COLOR_GREEN
+
+/obj/item/chems/inhaler/pouch_auto/detoxifier/populate_reagents()
+	reagents.add_reagent(/decl/material/liquid/detoxifier, 5)

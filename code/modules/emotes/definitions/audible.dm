@@ -96,8 +96,19 @@
 
 /decl/emote/audible/cough
 	key = "cough"
-	emote_message_3p = "USER coughs!"
-	conscious = 0
+
+/decl/emote/audible/cough/check_user(var/mob/living/carbon/user)
+	. = ..()
+	if(!.)
+		return .
+	var/obj/item/organ/internal/lungs/lung = user.get_organ(BP_LUNGS)
+	. = lung?.active_breathing && !user.isSynthetic()
+
+/decl/emote/audible/cough/do_emote(var/mob/living/carbon/user, var/extra_params)
+	if(!istype(user))
+		to_chat(user, SPAN_WARNING("You are unable to cough."))
+		return
+	user.cough(deliberate = TRUE)
 
 /decl/emote/audible/cry
 	key = "cry"

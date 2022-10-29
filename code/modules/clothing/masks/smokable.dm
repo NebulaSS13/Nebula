@@ -57,7 +57,7 @@
 			var/mob/living/carbon/human/C = loc
 			smoke_loc = C.loc
 			if ((src == C.get_equipped_item(slot_wear_mask_str) || manual) && C.check_has_mouth()) // if it's in the human/monkey mouth, transfer reagents to the mob
-				reagents.trans_to_mob(C, smoke_amount * amount, CHEM_INGEST, 0.2)
+				reagents.trans_to_mob(C, smoke_amount * amount, CHEM_INHALE, 0.2)
 				add_trace_DNA(C)
 		else // else just remove some of the reagents
 			reagents.remove_any(smoke_amount * amount)
@@ -101,7 +101,7 @@
 			I = emissive_overlay(icon, "[icon_state]-on")
 		I.appearance_flags |= RESET_COLOR
 		add_overlay(I)
-		
+
 	if(ismob(loc))
 		var/mob/living/M = loc
 		M.update_inv_wear_mask(0)

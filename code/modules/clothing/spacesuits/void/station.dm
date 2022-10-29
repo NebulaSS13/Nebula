@@ -90,7 +90,7 @@
 	name = "medical voidsuit"
 	desc = "A sterile voidsuit with minor radiation shielding and a suite of self-cleaning technology. Standard issue in most orbital medical facilities."
 	icon = 'icons/clothing/spacesuit/void/medical/suit.dmi'
-	allowed = list(/obj/item/flashlight,/obj/item/tank,/obj/item/suit_cooling_unit,/obj/item/storage/firstaid,/obj/item/scanner/health,/obj/item/stack/medical)
+	allowed = list(/obj/item/flashlight,/obj/item/tank,/obj/item/suit_cooling_unit,/obj/item/storage/firstaid,/obj/item/scanner/health,/obj/item/scanner/breath,/obj/item/stack/medical)
 	armor = list(
 		melee = ARMOR_MELEE_KNIVES,
 		laser = ARMOR_LASER_MINOR,
@@ -265,7 +265,7 @@
 	name = "streamlined medical voidsuit"
 	desc = "A more recent and stylish model of Vey-Med voidsuit, with a minor upgrade to radiation shielding."
 	icon = 'icons/clothing/spacesuit/void/medical_alt/suit.dmi'
-	allowed = list(/obj/item/flashlight,/obj/item/tank,/obj/item/suit_cooling_unit,/obj/item/storage/firstaid,/obj/item/scanner/health,/obj/item/stack/medical)
+	allowed = list(/obj/item/flashlight,/obj/item/tank,/obj/item/suit_cooling_unit,/obj/item/storage/firstaid,/obj/item/scanner/health,/obj/item/scanner/breath,/obj/item/stack/medical)
 	armor = list(
 		melee = ARMOR_MELEE_KNIVES,
 		laser = ARMOR_LASER_MINOR,

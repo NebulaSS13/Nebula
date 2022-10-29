@@ -188,13 +188,15 @@
 				/obj/item/stack/medical/advanced/ointment = 2,
 				/obj/item/stack/medical/splint = 1,
 				/obj/item/chems/hypospray/autoinjector = 3,
+				/obj/item/chems/inhaler = 3,
 				/obj/item/storage/pill_bottle/burn_meds = 2,
 				/obj/item/storage/pill_bottle/antitox = 2,
 				/obj/item/storage/med_pouch/trauma = 2,
 				/obj/item/storage/med_pouch/burn = 2,
 				/obj/item/storage/med_pouch/toxin = 2,
 				/obj/item/storage/med_pouch/radiation = 2,
-				/obj/item/storage/med_pouch/oxyloss = 2)
+				/obj/item/storage/med_pouch/oxyloss = 2,
+				/obj/item/storage/med_pouch/overdose = 2)
 
 /obj/random/firstaid
 	name = "Random First Aid Kit"

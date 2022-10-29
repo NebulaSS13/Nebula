@@ -83,6 +83,7 @@ INITIALIZE_IMMEDIATE(/obj/effect/gas_overlay)
 	var/default_solid_form = /obj/item/stack/material/sheet
 
 	var/affect_blood_on_ingest = TRUE
+	var/affect_blood_on_inhale = TRUE
 
 	var/narcosis = 0 // Not a great word for it. Constant for causing mild confusion when ingested.
 	var/toxicity = 0 // Organ damage from ingestion.
@@ -208,6 +209,7 @@ INITIALIZE_IMMEDIATE(/obj/effect/gas_overlay)
 	var/metabolism = REM // This would be 0.2 normally
 	var/ingest_met = 0
 	var/touch_met = 0
+	var/inhale_met = 0
 	var/overdose = 0
 	var/scannable = 0 // Shows up on health analyzers.
 	var/color = COLOR_BEIGE
@@ -545,6 +547,10 @@ INITIALIZE_IMMEDIATE(/obj/effect/gas_overlay)
 			removed = ingest_met
 		if(CHEM_TOUCH)
 			removed = touch_met
+		if(CHEM_INHALE)
+			removed = inhale_met
+	if(!removed)
+		removed = metabolism
 	if(!removed)
 		removed = metabolism
 	removed = M.get_adjusted_metabolism(removed)
@@ -564,6 +570,8 @@ INITIALIZE_IMMEDIATE(/obj/effect/gas_overlay)
 				affect_ingest(M, effective, holder)
 			if(CHEM_TOUCH)
 				affect_touch(M, effective, holder)
+			if(CHEM_INHALE)
+				affect_inhale(M, effective, holder)
 	holder.remove_reagent(type, removed)
 
 /decl/material/proc/affect_blood(var/mob/living/M, var/removed, var/datum/reagents/holder)
@@ -603,6 +611,10 @@ INITIALIZE_IMMEDIATE(/obj/effect/gas_overlay)
 /decl/material/proc/affect_ingest(var/mob/living/M, var/removed, var/datum/reagents/holder)
 	if(affect_blood_on_ingest)
 		affect_blood(M, removed * 0.5, holder)
+
+/decl/material/proc/affect_inhale(var/mob/living/M, var/removed, var/datum/reagents/holder)
+	if(affect_blood_on_inhale)
+		affect_blood(M, removed * 0.75, holder)
 
 /decl/material/proc/affect_touch(var/mob/living/M, var/removed, var/datum/reagents/holder)
 
