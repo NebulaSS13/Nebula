@@ -264,7 +264,7 @@
 	if(!(F.get_file_perms(accesses, user) & OS_READ_ACCESS))
 		return OS_FILE_NO_READ
 	
-	var/datum/computer_file/cloned_file = F.clone(TRUE)
+	var/datum/computer_file/cloned_file = F.Clone(null, TRUE)
 	if(!istype(cloned_file))
 		return OS_FILE_NO_READ
 	
