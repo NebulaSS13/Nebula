@@ -20,7 +20,8 @@
 
 /obj/item/storage/box/mixedglasses/Initialize(ml, material_key)
 	. = ..()
-	make_exact_fit()
+	if(length(contents))
+		make_exact_fit()
 
 ////////////////////////////////////////////////////////////////////
 // Box of Glasses
@@ -34,7 +35,8 @@
 	. = ..()
 	//Name the box accordingly
 	setup_name()
-	make_exact_fit()
+	if(length(contents))
+		make_exact_fit()
 
 /obj/item/storage/box/glasses/proc/setup_name()
 	var/list/cnt = WillContain()
@@ -77,7 +79,8 @@
 /obj/item/storage/box/glass_extras/Initialize(ml, material_key)
 	. = ..()
 	setup_name()
-	make_exact_fit()
+	if(length(contents))
+		make_exact_fit()
 
 /obj/item/storage/box/glass_extras/proc/setup_name()
 	var/list/cnt = WillContain()

@@ -18,7 +18,8 @@
 
 /obj/item/storage/csi_markers/Initialize(ml, material_key)
 	. = ..()
-	make_exact_fit()
+	if(length(contents))
+		make_exact_fit()
 
 /obj/item/csi_marker
 	name = "crime scene marker"

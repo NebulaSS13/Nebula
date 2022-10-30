@@ -25,4 +25,5 @@
 
 /obj/item/storage/briefcase/foundation/Initialize(ml, material_key)
 	. = ..()
-	make_exact_fit()
+	if(length(contents))
+		make_exact_fit()

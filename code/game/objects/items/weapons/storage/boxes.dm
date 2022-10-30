@@ -449,9 +449,10 @@
 	item_state = "syringe_kit"
 	use_to_pickup = 1 // for picking up broken bulbs, not that most people will try
 
-/obj/item/storage/box/lights/Initialize()
+/obj/item/storage/box/lights/Initialize(ml, material_key)
 	. = ..()
-	make_exact_fit()
+	if(length(contents))
+		make_exact_fit()
 
 /obj/item/storage/box/lights/bulbs/WillContain()
 	return list(/obj/item/light/bulb = 21)

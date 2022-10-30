@@ -28,8 +28,9 @@ Single Use Emergency Pouches
 
 /obj/item/storage/med_pouch/Initialize(ml, material_key)
 	. = ..()
-	name = "emergency [injury_type] pouch"
-	make_exact_fit()
+	SetName("emergency [injury_type] pouch")
+	if(length(contents))
+		make_exact_fit()
 	for(var/obj/item/chems/C in contents)
 		C.set_detail_color(color)
 
