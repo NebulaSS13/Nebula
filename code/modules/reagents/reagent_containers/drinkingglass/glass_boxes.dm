@@ -39,10 +39,11 @@
 		make_exact_fit()
 
 /obj/item/storage/box/glasses/proc/setup_name()
+	//#TODO: This really should handle atom_creator stuff too..
 	var/list/cnt = WillContain()
 	if((islist(cnt) || ispath(cnt)) && length(cnt))
 		var/atom/movable/O = ispath(cnt) ? cnt : cnt[1]
-		SetName("box of [initial(O.name)]\s") //#FIXME: Can't get plural from name.
+		SetName("box of [initial(O.name)]") //#FIXME: Can't get plural from name.
 
 /obj/item/storage/box/glasses/square/WillContain()
 	return list(/obj/item/chems/drinks/glass2/square = storage_slots)
@@ -83,10 +84,11 @@
 		make_exact_fit()
 
 /obj/item/storage/box/glass_extras/proc/setup_name()
+	//#TODO: This really should handle atom_creator stuff too..
 	var/list/cnt = WillContain()
 	if((islist(cnt) || ispath(cnt)) && length(cnt))
 		var/atom/movable/O = ispath(cnt) ? cnt : cnt[1]
-		SetName("box of [initial(O.name)]\s")  //#FIXME: Can't get plural from name.
+		SetName("box of [initial(O.name)]")  //#FIXME: Can't get plural from name.
 
 /obj/item/storage/box/glass_extras/straws/WillContain()
 	return list(/obj/item/glass_extra/straw = storage_slots)
