@@ -394,8 +394,10 @@
 	. = ..()
 	//Reset the name to the default cig pack. Done for codex reasons, since it indexes things by initial names
 	var/obj/item/storage/fancy/cigarettes/C = /obj/item/storage/fancy/cigarettes
-	SetName(initial(C.name))
-	desc = "[initial(desc)] 'F' has been scribbled on it."
+	if(name == initial(name))
+		SetName(initial(C.name))
+	if(desc == initial(desc))
+		desc = "[initial(desc)] 'F' has been scribbled on it."
 
 /obj/item/storage/fancy/cigarettes/flash_powder/populate_reagents()
 	reagents.add_reagent(/decl/material/solid/metal/aluminium, max_storage_space)
@@ -410,8 +412,10 @@
 	. = ..()
 	//Reset the name to the default cig pack. Done for codex reasons, since it indexes things by initial names
 	var/obj/item/storage/fancy/cigarettes/C = /obj/item/storage/fancy/cigarettes
-	SetName(initial(C.name))
-	desc = "[initial(desc)] 'S' has been scribbled on it."
+	if(name == initial(name))
+		SetName(initial(C.name))
+	if(desc == initial(desc))
+		desc = "[initial(desc)] 'S' has been scribbled on it."
 
 /obj/item/storage/fancy/cigarettes/chemsmoke/populate_reagents()
 	reagents.add_reagent(/decl/material/solid/potassium,        max_storage_space)
@@ -426,8 +430,10 @@
 	. = ..()
 	//Reset the name to the default cig pack. Done for codex reasons, since it indexes things by initial names
 	var/obj/item/storage/fancy/cigarettes/C = /obj/item/storage/fancy/cigarettes
-	SetName(initial(C.name))
-	desc = "[initial(desc)] 'MB' has been scribbled on it." //#TODO: maybe fix the lore for that?
+	if(name == initial(name))
+		SetName(initial(C.name))
+	if(desc == initial(desc))
+		desc = "[initial(desc)] 'MB' has been scribbled on it." //#TODO: maybe fix the lore for that?
 
 /obj/item/storage/fancy/cigarettes/mindbreak/populate_reagents()
 	reagents.add_reagent(/decl/material/solid/silicon,         max_storage_space)
@@ -442,8 +448,10 @@
 	. = ..()
 	//Reset the name to the default cig pack. Done for codex reasons, since it indexes things by initial names
 	var/obj/item/storage/fancy/cigarettes/C = /obj/item/storage/fancy/cigarettes
-	SetName(initial(C.name))
-	desc = "[initial(desc)] 'T' has been scribbled on it." //#TODO: maybe fix the lore for that?
+	if(name == initial(name))
+		SetName(initial(C.name))
+	if(desc == initial(desc))
+		desc = "[initial(desc)] 'T' has been scribbled on it." //#TODO: maybe fix the lore for that?
 
 /obj/item/storage/fancy/cigarettes/tricord/populate_reagents()
 	reagents.add_reagent(/decl/material/liquid/regenerator, (4 * max_storage_space))
