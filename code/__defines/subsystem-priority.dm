@@ -20,6 +20,7 @@
 #define SS_PRIORITY_SPACEDRIFT     40  // Drifting things.
 #define SS_PRIORITY_INPUT          20  // Input things.
 #define SS_PRIORITY_ICON_UPDATE    20  // Queued icon updates. Mostly used by APCs and tables.
+#define SS_PRIORITY_AMBIENCE       20  // Queued ambient lighting updates.
 #define SS_PRIORITY_ALARM          20  // Alarm processing.
 #define SS_PRIORITY_EVENT          20  // Event processing and queue handling.
 #define SS_PRIORITY_SHUTTLE        20  // Shuttle movement.

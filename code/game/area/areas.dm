@@ -33,7 +33,6 @@ var/global/list/areas = list()
 	var/oneoff_environ =      0
 	var/has_gravity =         TRUE
 	var/air_doors_activated = FALSE
-	var/show_starlight =      FALSE
 
 	var/obj/machinery/power/apc/apc
 	var/list/all_doors		//Added by Strumpetplaya - Alarm Change - Contains a list of doors adjacent to this area

@@ -68,6 +68,7 @@
 	else
 		luminosity = 1
 
+	SSambience.queued += src
 
 	if (opacity)
 		has_opaque_atom = TRUE
@@ -427,6 +428,7 @@
 		is_outside = new_outside
 		if(!skip_weather_update)
 			update_weather()
+		SSambience.queued += src
 		return TRUE
 	return FALSE
 

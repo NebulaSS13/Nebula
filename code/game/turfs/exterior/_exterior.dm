@@ -36,8 +36,6 @@
 			ChangeArea(src, owner.planetary_area)
 
 	. = ..(mapload)	// second param is our own, don't pass to children
-	if (mapload)
-		setup_environmental_lighting()
 
 	var/air_graphic = get_air_graphic()
 	if(length(air_graphic))
@@ -66,21 +64,6 @@
 	if(istype(ext))
 		ext.affecting_heat_sources = last_affecting_heat_sources
 	return ext
-
-/turf/exterior/proc/setup_environmental_lighting()
-	if (is_outside())
-		if (owner)
-			set_ambient_light(COLOR_WHITE, owner.lightlevel)
-			return
-
-		if (config.starlight)
-			var/area/A = loc
-			if (A.show_starlight)
-				set_ambient_light(SSskybox.background_color)
-			else if (ambient_light)
-				clear_ambient_light()
-	else if (ambient_light)
-		clear_ambient_light()
 
 /turf/exterior/is_plating()
 	return !density
@@ -139,7 +122,7 @@
 	SHOULD_CALL_PARENT(FALSE)
 	if(!istype(src, get_base_turf_by_area(src)) && (severity == 1 || (severity == 2 && prob(40))))
 		ChangeTurf(get_base_turf_by_area(src))
-	
+
 /turf/exterior/on_update_icon()
 	. = ..() // Recalc AO and flooding overlay.
 	cut_overlays()
