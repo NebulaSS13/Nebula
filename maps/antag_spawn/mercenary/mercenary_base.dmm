@@ -2437,7 +2437,7 @@
 /area/map_template/merc_spawn)
 "Ko" = (
 /obj/machinery/mech_recharger,
-/obj/structure/mech_wreckage,
+/obj/structure/mech_wreckage/military,
 /turf/simulated/floor/tiled/techfloor,
 /area/map_template/merc_spawn)
 "Kz" = (
