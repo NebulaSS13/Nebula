@@ -55,9 +55,6 @@ var/global/list/closets = list()
 	if(!opened && mapload) // if closed and it's the map loading phase, relevant items at the crate's loc are put in the contents
 		store_contents()
 
-/obj/structure/closet/proc/WillContain()
-	return null
-
 /obj/structure/closet/examine(mob/user, distance)
 	. = ..()
 	if(distance <= 1 && !opened)

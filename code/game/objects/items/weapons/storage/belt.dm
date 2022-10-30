@@ -134,25 +134,25 @@
 		)
 	material = /decl/material/solid/leather
 
-/obj/item/storage/belt/utility/full/Initialize()
-	. = ..()
-	new /obj/item/screwdriver(src)
-	new /obj/item/wrench(src)
-	new /obj/item/weldingtool(src)
-	new /obj/item/crowbar(src)
-	new /obj/item/wirecutters(src)
-	new /obj/item/stack/cable_coil/random(src, 30)
-	update_icon()
+/obj/item/storage/belt/utility/full/WillContain()
+	return list(
+		/obj/item/screwdriver,
+		/obj/item/wrench,
+		/obj/item/weldingtool,
+		/obj/item/crowbar,
+		/obj/item/wirecutters,
+		/obj/item/stack/cable_coil/random,
+	)
 
-/obj/item/storage/belt/utility/atmostech/Initialize()
-	. = ..()
-	new /obj/item/screwdriver(src)
-	new /obj/item/wrench(src)
-	new /obj/item/weldingtool(src)
-	new /obj/item/crowbar(src)
-	new /obj/item/wirecutters(src)
-	new /obj/item/t_scanner(src)
-	update_icon()
+/obj/item/storage/belt/utility/atmostech/WillContain()
+	return list(
+		/obj/item/screwdriver,
+		/obj/item/wrench,
+		/obj/item/weldingtool,
+		/obj/item/crowbar,
+		/obj/item/wirecutters,
+		/obj/item/t_scanner,
+	)
 
 /obj/item/storage/belt/medical
 	name = "medical belt"
@@ -409,16 +409,8 @@
 		/obj/item/soulstone
 	)
 
-/obj/item/storage/belt/soulstone/full/Initialize()
-	. = ..()
-	new /obj/item/soulstone(src)
-	new /obj/item/soulstone(src)
-	new /obj/item/soulstone(src)
-	new /obj/item/soulstone(src)
-	new /obj/item/soulstone(src)
-	new /obj/item/soulstone(src)
-	new /obj/item/soulstone(src)
-
+/obj/item/storage/belt/soulstone/full/WillContain()
+	return list(/obj/item/soulstone = storage_slots)
 
 /obj/item/storage/belt/champion
 	name = "championship belt"
@@ -436,7 +428,7 @@
 	icon = 'icons/clothing/belt/swatbelt.dmi'
 	storage_slots = 10
 
-/obj/item/storage/belt/holster/security/tactical/Initialize()
+/obj/item/storage/belt/holster/security/tactical/Initialize(ml, material_key)
 	.=..()
 	LAZYSET(slowdown_per_slot, slot_belt_str, 1)
 
@@ -459,7 +451,7 @@
 	max_w_class = ITEM_SIZE_NORMAL
 	max_storage_space = ITEM_SIZE_NORMAL * 4
 
-/obj/item/storage/belt/waistpack/big/Initialize()
+/obj/item/storage/belt/waistpack/big/Initialize(ml, material_key)
 	.=..()
 	LAZYSET(slowdown_per_slot, slot_belt_str, 1)
 
@@ -477,11 +469,9 @@
 		)
 	material = /decl/material/solid/fiberglass //need something that doesn't burn
 
-
-/obj/item/storage/belt/fire_belt/full
-	startswith = list(
-		/obj/item/inflatable,
-		/obj/item/inflatable,
+/obj/item/storage/belt/fire_belt/full/WillContain()
+	return list(
+		/obj/item/inflatable = 2,
 		/obj/item/inflatable/door,
 		/obj/item/extinguisher/mini,
 		/obj/item/grenade/chem_grenade/water = 2

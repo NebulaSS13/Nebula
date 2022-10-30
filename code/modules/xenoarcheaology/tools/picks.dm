@@ -99,18 +99,21 @@
 	max_storage_space = 18
 	max_w_class = ITEM_SIZE_NORMAL
 	use_to_pickup = 1
-	startswith = list(
-		/obj/item/pickaxe/xeno/brush,
-		/obj/item/pickaxe/xeno/one_pick,
-		/obj/item/pickaxe/xeno/two_pick,
-		/obj/item/pickaxe/xeno/three_pick,
-		/obj/item/pickaxe/xeno/four_pick,
-		/obj/item/pickaxe/xeno/five_pick,
-		/obj/item/pickaxe/xeno/six_pick)
 	material = /decl/material/solid/leather/synth
 
-/obj/item/storage/excavation/empty
-	startswith = null
+/obj/item/storage/excavation/WillContain()
+	return list(
+			/obj/item/pickaxe/xeno/brush,
+			/obj/item/pickaxe/xeno/one_pick,
+			/obj/item/pickaxe/xeno/two_pick,
+			/obj/item/pickaxe/xeno/three_pick,
+			/obj/item/pickaxe/xeno/four_pick,
+			/obj/item/pickaxe/xeno/five_pick,
+			/obj/item/pickaxe/xeno/six_pick
+		)
+
+/obj/item/storage/excavation/empty/WillContain()
+	return
 
 /obj/item/storage/excavation/handle_item_insertion()
 	..()

@@ -252,6 +252,12 @@
 /obj/proc/populate_reagents()
 	return
 
+/**
+ * Returns a list with the contents that may be spawned in this object.
+ */
+/obj/proc/WillContain()
+	return
+
 ////////////////////////////////////////////////////////////////
 // Interactions
 ////////////////////////////////////////////////////////////////

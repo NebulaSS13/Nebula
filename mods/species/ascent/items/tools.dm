@@ -58,4 +58,6 @@ MANTIDIFY(/obj/item/tank/jetpack/carbondioxide, "maneuvering pack",          "pr
 	desc = "A box full of bottled water."
 	icon = 'mods/species/ascent/icons/ascent_doodads.dmi'
 	icon_state = "box"
-	startswith = list(/obj/item/chems/drinks/cans/waterbottle/ascent = 7)
+
+/obj/item/storage/box/water/ascent/WillContain()
+	return list(/obj/item/chems/drinks/cans/waterbottle/ascent = 7)

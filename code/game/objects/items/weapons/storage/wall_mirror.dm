@@ -28,15 +28,18 @@
 	use_sound = 'sound/effects/closet_open.ogg'
 	max_w_class = ITEM_SIZE_NORMAL
 	max_storage_space = DEFAULT_LARGEBOX_STORAGE
-	startswith = list(
-		/obj/item/haircomb/random,
-		/obj/item/haircomb/brush,
-		/obj/random/medical/lite,
-		/obj/item/lipstick,
-		/obj/random/lipstick,
-		/obj/random/soap,
-		/obj/item/chems/spray/cleaner/deodorant,
-		/obj/item/towel/random)
+
+/obj/item/storage/internal/mirror_storage/WillContain()
+	return list(
+			/obj/item/haircomb/random,
+			/obj/item/haircomb/brush,
+			/obj/random/medical/lite,
+			/obj/item/lipstick,
+			/obj/random/lipstick,
+			/obj/random/soap,
+			/obj/item/chems/spray/cleaner/deodorant,
+			/obj/item/towel/random
+		)
 
 /obj/structure/mirror/Destroy()
 	QDEL_NULL(mirror_storage)
