@@ -2057,7 +2057,7 @@
 /turf/simulated/floor/plating,
 /area/map_template/merc_spawn)
 "nR" = (
-/obj/structure/dispenser/oxygen,
+/obj/structure/tank_rack/oxygen,
 /obj/structure/railing/mapped/no_density{
 	dir = 4
 	},

@@ -8192,7 +8192,7 @@
 /obj/structure/railing/mapped{
 	dir = 8
 	},
-/obj/structure/dispenser/oxygen,
+/obj/structure/tank_rack/oxygen,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/liberia/engineeringstorage)
 "SP" = (

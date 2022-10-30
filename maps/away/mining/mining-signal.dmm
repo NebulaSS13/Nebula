@@ -957,7 +957,7 @@
 /turf/simulated/floor/tiled/dark,
 /area/outpost/abandoned)
 "dq" = (
-/obj/structure/dispenser,
+/obj/structure/tank_rack,
 /turf/simulated/floor/tiled/dark,
 /area/outpost/abandoned)
 "dr" = (

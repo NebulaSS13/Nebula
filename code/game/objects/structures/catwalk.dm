@@ -93,8 +93,8 @@
 		return TRUE
 
 /obj/structure/catwalk/attack_robot(var/mob/user)
-	if(Adjacent(user))
-		attack_hand(user)
+	if(CanPhysicallyInteract(user))
+		return attack_hand(user)
 
 /obj/structure/catwalk/attackby(obj/item/C, mob/user)
 	. = ..()

@@ -1950,7 +1950,7 @@
 /turf/simulated/floor/tiled/monotile,
 /area/ship/trade/cargo/lower)
 "hc" = (
-/obj/structure/dispenser/oxygen,
+/obj/structure/tank_rack/oxygen,
 /obj/machinery/firealarm{
 	dir = 1;
 	pixel_y = -24

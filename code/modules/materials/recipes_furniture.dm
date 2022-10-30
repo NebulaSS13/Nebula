@@ -102,6 +102,11 @@
 	result_type = /obj/structure/closet
 	time = 15
 
+/datum/stack_recipe/furniture/tank_dispenser
+	title = "tank dispenser"
+	result_type = /obj/structure/tank_rack
+	time = 15
+
 /datum/stack_recipe/furniture/canister
 	title = "canister"
 	result_type = /obj/machinery/portable_atmospherics/canister

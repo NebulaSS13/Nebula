@@ -582,11 +582,10 @@ var/global/list/supermatter_delam_accent_sounds = list(
 	return 0
 
 /obj/machinery/power/supermatter/attack_robot(mob/user)
-	if(Adjacent(user))
+	if(CanPhysicallyInteract(user))
 		return attack_hand(user)
-	else
-		ui_interact(user)
-	return
+	ui_interact(user)
+	return TRUE
 
 /obj/machinery/power/supermatter/attack_ai(mob/living/silicon/ai/user)
 	ui_interact(user)

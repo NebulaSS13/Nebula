@@ -1085,7 +1085,7 @@
 /turf/simulated/floor/plating,
 /area/errant_pisces/enginering)
 "di" = (
-/obj/structure/dispenser/oxygen,
+/obj/structure/tank_rack/oxygen,
 /turf/simulated/floor/plating,
 /area/errant_pisces/enginering)
 "dj" = (
@@ -6312,7 +6312,7 @@
 /turf/simulated/floor/plating,
 /area/errant_pisces/fishing_wing)
 "qY" = (
-/obj/structure/dispenser/oxygen,
+/obj/structure/tank_rack/oxygen,
 /turf/simulated/floor/plating,
 /area/errant_pisces/fishing_wing)
 "qZ" = (

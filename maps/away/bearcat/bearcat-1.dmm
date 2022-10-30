@@ -2436,7 +2436,7 @@
 /turf/simulated/floor/usedup,
 /area/ship/scrap/maintenance/storage)
 "eV" = (
-/obj/structure/dispenser/oxygen,
+/obj/structure/tank_rack/oxygen,
 /turf/simulated/floor/usedup,
 /area/ship/scrap/maintenance/eva)
 "eW" = (

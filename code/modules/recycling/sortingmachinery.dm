@@ -14,10 +14,12 @@
 	var/tag_x
 
 /obj/structure/bigDelivery/attack_robot(mob/user)
-	unwrap(user)
+	if(CanPhysicallyInteract(user))
+		return attack_hand(user)
 
 /obj/structure/bigDelivery/attack_hand(mob/user)
 	unwrap(user)
+	return TRUE
 
 /obj/structure/bigDelivery/proc/unwrap(var/mob/user)
 	if(Adjacent(user))
@@ -145,10 +147,12 @@
 	qdel(src)
 
 /obj/item/smallDelivery/attack_robot(mob/user)
-	unwrap(user)
+	if(CanPhysicallyInteract(user))
+		return attack_self(user)
 
 /obj/item/smallDelivery/attack_self(mob/user)
 	unwrap(user)
+	return TRUE
 
 /obj/item/smallDelivery/attackby(obj/item/W, mob/user)
 	if(istype(W, /obj/item/destTagger))
@@ -419,7 +423,7 @@
 
 /obj/machinery/disposal/deliveryChute/Bumped(var/atom/movable/AM) //Go straight into the chute
 
-	if(istype(AM, /obj/item/projectile) || istype(AM, /obj/effect))	
+	if(istype(AM, /obj/item/projectile) || istype(AM, /obj/effect))
 		return
 
 	if(get_dir(src, AM) != dir)

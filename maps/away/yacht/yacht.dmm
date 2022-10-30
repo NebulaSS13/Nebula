@@ -615,7 +615,7 @@
 /turf/simulated/floor/plating,
 /area/yacht/engine)
 "bS" = (
-/obj/structure/dispenser/oxygen,
+/obj/structure/tank_rack/oxygen,
 /obj/effect/decal/cleanable/dirt,
 /turf/simulated/floor/plating,
 /area/yacht/engine)

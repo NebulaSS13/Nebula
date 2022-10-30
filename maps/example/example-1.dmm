@@ -868,7 +868,7 @@
 /turf/simulated/floor,
 /area/turbolift/example/first)
 "Ss" = (
-/obj/structure/dispenser/oxygen,
+/obj/structure/tank_rack/oxygen,
 /obj/effect/floor_decal/corner/orange/half{
 	dir = 1
 	},

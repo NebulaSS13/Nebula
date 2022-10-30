@@ -246,7 +246,7 @@
 /turf/simulated/floor/plating,
 /area/nexus/hallway/starboard/fore)
 "ck" = (
-/obj/structure/dispenser,
+/obj/structure/tank_rack,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/nexus/engineering/storage)
 "cl" = (

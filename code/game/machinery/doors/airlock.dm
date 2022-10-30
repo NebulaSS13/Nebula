@@ -456,6 +456,7 @@ About the new airlock wires panel:
 
 /obj/machinery/door/airlock/attack_robot(mob/user)
 	ui_interact(user)
+	return TRUE
 
 /obj/machinery/door/airlock/attack_ai(mob/living/silicon/ai/user)
 	ui_interact(user)
