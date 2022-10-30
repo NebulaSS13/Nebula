@@ -396,6 +396,8 @@
 			return 1
 
 /obj/item/storage/proc/make_exact_fit()
+	if(length(contents) <= 0)
+		log_warning("[type] is calling make_exact_fit() while completely empty! This is likely a mistake.")
 	storage_slots = contents.len
 
 	can_hold.Cut()

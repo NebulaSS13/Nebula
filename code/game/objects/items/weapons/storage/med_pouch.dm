@@ -203,6 +203,7 @@ Single Use Emergency Pouches
 /obj/item/chems/pill/pouch_pill/Initialize(ml, material_key)
 	. = ..()
 	if(!reagents?.total_volume)
+		log_warning("[log_info_line(src)] was deleted for containing no reagents during init!")
 		return INITIALIZE_HINT_QDEL
 
 /obj/item/chems/pill/pouch_pill/initialize_reagents(populate = TRUE)
