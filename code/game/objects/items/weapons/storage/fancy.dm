@@ -387,8 +387,14 @@
 ////////////////////////////////////////////////////////////////////////////////
 
 // Flash Powder Pack
+/obj/item/storage/fancy/cigarettes/flash_powder
+	name = "pack of flash powder laced Trans-Stellar Duty-frees"
+
 /obj/item/storage/fancy/cigarettes/flash_powder/Initialize(ml, material_key)
 	. = ..()
+	//Reset the name to the default cig pack. Done for codex reasons, since it indexes things by initial names
+	var/obj/item/storage/fancy/cigarettes/C = /obj/item/storage/fancy/cigarettes
+	SetName(initial(C.name))
 	desc = "[initial(desc)] 'F' has been scribbled on it."
 
 /obj/item/storage/fancy/cigarettes/flash_powder/populate_reagents()
@@ -397,8 +403,14 @@
 	reagents.add_reagent(/decl/material/solid/sulfur,          max_storage_space)
 
 //Chemsmoke Pack
+/obj/item/storage/fancy/cigarettes/chemsmoke
+	name = "pack of smoke powder laced Trans-Stellar Duty-frees"
+
 /obj/item/storage/fancy/cigarettes/chemsmoke/Initialize(ml, material_key)
 	. = ..()
+	//Reset the name to the default cig pack. Done for codex reasons, since it indexes things by initial names
+	var/obj/item/storage/fancy/cigarettes/C = /obj/item/storage/fancy/cigarettes
+	SetName(initial(C.name))
 	desc = "[initial(desc)] 'S' has been scribbled on it."
 
 /obj/item/storage/fancy/cigarettes/chemsmoke/populate_reagents()
@@ -407,8 +419,14 @@
 	reagents.add_reagent(/decl/material/solid/phosphorus,       max_storage_space)
 
 //Mindbreak Pack (now called /decl/chemical_reaction/hallucinogenics)
+/obj/item/storage/fancy/cigarettes/mindbreak
+	name = "pack of mindbreak toxin laced Trans-Stellar Duty-frees" //#TODO: maybe fix the lore for that?
+
 /obj/item/storage/fancy/cigarettes/mindbreak/Initialize(ml, material_key)
 	. = ..()
+	//Reset the name to the default cig pack. Done for codex reasons, since it indexes things by initial names
+	var/obj/item/storage/fancy/cigarettes/C = /obj/item/storage/fancy/cigarettes
+	SetName(initial(C.name))
 	desc = "[initial(desc)] 'MB' has been scribbled on it." //#TODO: maybe fix the lore for that?
 
 /obj/item/storage/fancy/cigarettes/mindbreak/populate_reagents()
@@ -417,8 +435,14 @@
 	reagents.add_reagent(/decl/material/liquid/antitoxins,     max_storage_space)
 
 //Tricord pack (now called /decl/material/liquid/regenerator)
+/obj/item/storage/fancy/cigarettes/tricord
+	name = "pack of tricordazine laced Trans-Stellar Duty-frees" //#TODO: maybe fix the lore for that?
+
 /obj/item/storage/fancy/cigarettes/tricord/Initialize(ml, material_key)
 	. = ..()
+	//Reset the name to the default cig pack. Done for codex reasons, since it indexes things by initial names
+	var/obj/item/storage/fancy/cigarettes/C = /obj/item/storage/fancy/cigarettes
+	SetName(initial(C.name))
 	desc = "[initial(desc)] 'T' has been scribbled on it." //#TODO: maybe fix the lore for that?
 
 /obj/item/storage/fancy/cigarettes/tricord/populate_reagents()
