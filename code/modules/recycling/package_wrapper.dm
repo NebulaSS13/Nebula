@@ -38,13 +38,6 @@
 	throwforce       = 1
 	throw_range      = 5
 	throw_speed      = 3
-	///Types that the wrapper cannot wrap, ever
-	var/static/list/wrap_blacklist = list(
-		/obj/item/parcel,
-		/obj/item/parcel/gift,
-		/obj/item/evidencebag,
-		/obj/item/stack/package_wrap,
-	)
 	///Check to prevent people from wrapping something multiple times at once.
 	var/tmp/currently_wrapping = FALSE 
 	///The type of wrapped item that will be produced
@@ -59,7 +52,7 @@
 	return FALSE //Don't allow splitting the stacks, because it would create cardboard tubes out of nowhere
 
 /obj/item/stack/package_wrap/proc/can_wrap(var/atom/movable/AM)
-	return istype(AM) && AM.simulated && !AM.anchored && !is_type_in_list(AM, wrap_blacklist) && (isobj(AM) || ishuman(AM))
+	return istype(AM) && AM.simulated && !AM.anchored && !is_type_in_list(AM, get_blacklist()) && (isobj(AM) || ishuman(AM))
 
 ///Attempts wrapping the given object. Returns the wrapper object containing the wrapped object.
 /obj/item/stack/package_wrap/proc/wrap(var/atom/movable/AM, var/mob/user)
@@ -125,6 +118,16 @@
 			var/mob/M = loc
 			M.put_in_active_hand(tube)
 	. = ..()
+
+///Types that the wrapper cannot wrap, ever
+/obj/item/stack/package_wrap/proc/get_blacklist()
+	var/static/list/wrap_blacklist = list(
+		/obj/item/parcel,
+		/obj/item/parcel/gift,
+		/obj/item/evidencebag,
+		/obj/item/stack/package_wrap,
+	)
+	return wrap_blacklist
 
 ///////////////////////////////////////////////////////////////////////////////////////
 // Gift Wrapper

@@ -20,13 +20,6 @@
 	var/tmp/icon_state_prefix = "parcel"
 	///Color of the dropped paper trash on unwrapping.
 	var/tmp/trash_color = "#b97644"
-	///Static list of atom types that can be wrapped. Includes subtypes of the specified types.
-	var/static/list/type_whitelist = list(
-		/obj/item,
-		/obj/structure,
-		/obj/machinery,
-		/mob/living/carbon/human,
-	)
 
 /obj/item/parcel/Initialize(ml, material_key, var/atom/movable/contained_object = null, var/_attached_note = null)
 	. = ..(ml, material_key)
@@ -93,7 +86,7 @@
 	. += "<BR/>It can opened by using it while held, if its small enough."
 
 /obj/item/parcel/proc/make_parcel(var/atom/movable/AM, var/mob/user)
-	if(!is_type_in_list(AM, type_whitelist))
+	if(!is_type_in_list(AM, get_whitelist()))
 		log_warning("[src] ([x], [y], [z]) was passed an invalid atom type to contain[istype(AM, /datum)? " '[AM.type]'" : ", value: [AM]"].")
 		return
 	var/parcel_name
@@ -264,6 +257,16 @@
 			if(M.client)
 				M.client.eye = M.client.mob
 				M.client.perspective = MOB_PERSPECTIVE
+
+///list of atom types that can be wrapped. Includes subtypes of the specified types.
+/obj/item/parcel/proc/get_whitelist()
+	var/static/list/type_whitelist = list(
+		/obj/item,
+		/obj/structure,
+		/obj/machinery,
+		/mob/living/carbon/human,
+	)
+	return type_whitelist
 
 /////////////////////////////////////////////////////////////////////
 // Gift
