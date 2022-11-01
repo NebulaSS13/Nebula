@@ -30,12 +30,12 @@
 /obj/item/storage/pill_bottle/antitoxins/WillContain()
 	return list(/obj/item/chems/pill/antitoxins = 21)
 
-/obj/item/storage/pill_bottle/adrenaline
-	name = "pill bottle (adrenaline)"
+/obj/item/storage/pill_bottle/stabilizer
+	name = "pill bottle (stabilizer)"
 	desc = "Contains pills used to stabilize patients."
 	wrapper_color = COLOR_PALE_BLUE_GRAY
 
-/obj/item/storage/pill_bottle/adrenaline/WillContain()
+/obj/item/storage/pill_bottle/stabilizer/WillContain()
 	return list(/obj/item/chems/pill/stabilizer = 21)
 
 /obj/item/storage/pill_bottle/burn_meds
