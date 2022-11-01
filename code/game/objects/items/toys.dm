@@ -56,7 +56,7 @@
 /obj/item/chems/water_balloon/examine(mob/user, distance, infix, suffix)
 	. = ..()
 	if(distance == 1)
-		to_chat(user, "It's [reagents?.total_volume > 0? "filled with liquid slushing around" : "empty"].")
+		to_chat(user, "It's [reagents?.total_volume > 0? "filled with liquid sloshing around" : "empty"].")
 
 /obj/item/chems/water_balloon/on_reagent_change()
 	. = ..()
