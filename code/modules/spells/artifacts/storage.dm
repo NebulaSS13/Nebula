@@ -17,8 +17,8 @@
 
 /obj/structure/closet/wizard/armor/WillContain()
 	return list(
-		/obj/item/clothing/shoes/sandal, //In case they've lost them.
-		/obj/item/clothing/gloves/wizard, //To complete the outfit
+		/obj/item/clothing/shoes/sandal,
+		/obj/item/clothing/gloves/wizard,
 		/obj/item/clothing/suit/space/void/wizard,
 		/obj/item/clothing/head/helmet/space/void/wizard
 	)
