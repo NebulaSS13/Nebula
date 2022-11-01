@@ -208,7 +208,7 @@ Sells devices, odds and ends, and medical stuff
 								/obj/item/uv_light                  = TRADER_THIS_TYPE,
 								/obj/item/mmi                       = TRADER_ALL,
 								/obj/item/robotanalyzer             = TRADER_THIS_TYPE,
-								/obj/item/toner_cartridge           = TRADER_THIS_TYPE,
+								/obj/item/chems/toner_cartridge     = TRADER_THIS_TYPE,
 								/obj/item/camera_film               = TRADER_THIS_TYPE,
 								/obj/item/camera                    = TRADER_THIS_TYPE,
 								/obj/item/destTagger                = TRADER_THIS_TYPE,
