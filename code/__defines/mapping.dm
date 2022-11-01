@@ -1,3 +1,5 @@
+#define LEVELS_ARE_Z_CONNECTED(ZA, ZB) ((ZA > 0 && ZB > 0 && ZA <= world.maxz && ZB <= world.maxz) && ((ZA == ZB) || ((length(SSmapping.connected_z_cache) >= ZA && SSmapping.connected_z_cache[ZA] && length(SSmapping.connected_z_cache[ZA]) >= ZB) ? SSmapping.connected_z_cache[ZA][ZB] : SSmapping.are_connected_levels(ZA, ZB))))
+
 // Maploader bounds indices
 #define MAP_MINX 1
 #define MAP_MINY 2

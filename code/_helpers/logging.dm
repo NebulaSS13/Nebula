@@ -197,7 +197,7 @@ var/global/log_end= world.system_type == UNIX ? ascii2text(13) : ""
 	return "[..()] ([isnum(z) ? "[x],[y],[z]" : "0,0,0"])"
 
 /turf/get_log_info_line()
-	var/obj/effect/overmap/visitable/O = global.overmap_sectors["[z]"]
+	var/obj/effect/overmap/visitable/O = global.overmap_sectors[num2text(z)]
 	if(istype(O))
 		return "[..()] ([x],[y],[z] - [O.name]) ([loc ? loc.type : "NULL"])"
 	else

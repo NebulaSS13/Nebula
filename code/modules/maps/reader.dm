@@ -40,7 +40,7 @@ var/global/dmm_suite/preloader/_preloader = new
 // cropMap: When true, the map will be cropped to fit the existing world dimensions (Optional).
 // measureOnly: When true, no changes will be made to the world (Optional).
 // no_changeturf: When true, turf/AfterChange won't be called on loaded turfs
-/dmm_suite/proc/load_map(var/dmm_file, var/x_offset, var/y_offset, var/z_offset, var/cropMap, var/measureOnly, var/no_changeturf, var/clear_contents, var/lower_crop_x, var/lower_crop_y, var/upper_crop_x, var/upper_crop_y, var/initialized_areas_by_type)
+/dmm_suite/proc/load_map(var/dmm_file, var/x_offset, var/y_offset, var/z_offset, var/cropMap, var/measureOnly, var/no_changeturf, var/clear_contents, var/lower_crop_x, var/lower_crop_y, var/upper_crop_x, var/upper_crop_y, var/initialized_areas_by_type, var/level_data_type)
 	//How I wish for RAII
 	Master.StartLoadingMap()
 	space_key = null
@@ -50,14 +50,14 @@ var/global/dmm_suite/preloader/_preloader = new
 	initialized_areas_by_type = initialized_areas_by_type || list()
 	if(!(world.area in initialized_areas_by_type))
 		initialized_areas_by_type[world.area] = locate(world.area)
-	. = load_map_impl(dmm_file, x_offset, y_offset, z_offset, cropMap, measureOnly, no_changeturf, clear_contents, lower_crop_x, upper_crop_x, lower_crop_y, upper_crop_y, initialized_areas_by_type)
+	. = load_map_impl(dmm_file, x_offset, y_offset, z_offset, cropMap, measureOnly, no_changeturf, clear_contents, lower_crop_x, upper_crop_x, lower_crop_y, upper_crop_y, initialized_areas_by_type, level_data_type)
 	#ifdef TESTING
 	if(turfsSkipped)
 		testing("Skipped loading [turfsSkipped] default turfs")
 	#endif
 	Master.StopLoadingMap()
 
-/dmm_suite/proc/load_map_impl(dmm_file, x_offset, y_offset, z_offset, cropMap, measureOnly, no_changeturf, clear_contents, x_lower = -INFINITY, x_upper = INFINITY, y_lower = -INFINITY, y_upper = INFINITY, initialized_areas_by_type)
+/dmm_suite/proc/load_map_impl(dmm_file, x_offset, y_offset, z_offset, cropMap, measureOnly, no_changeturf, clear_contents, x_lower = -INFINITY, x_upper = INFINITY, y_lower = -INFINITY, y_upper = INFINITY, initialized_areas_by_type, level_data_type = /obj/abstract/level_data/space)
 	var/tfile = dmm_file//the map file we're creating
 	if(isfile(tfile))
 		tfile = safe_file2text(tfile, FALSE)
@@ -110,19 +110,15 @@ var/global/dmm_suite/preloader/_preloader = new
 			var/ycrd = text2num(dmmRegex.group[4]) + y_offset - 1
 			var/zcrd = text2num(dmmRegex.group[5]) + z_offset - 1
 
-			var/is_connected_to_lower_levels = LEVELS_ARE_Z_CONNECTED(zcrd, z_offset)
-			var/is_on_an_existing_zlevel = zcrd <= world.maxz
-
-			if (is_on_an_existing_zlevel && !is_connected_to_lower_levels)
+			var/zexpansion = zcrd > world.maxz
+			if(!zexpansion && !LEVELS_ARE_Z_CONNECTED(zcrd, z_offset))
 				continue
 
-			var/zexpansion = zcrd > world.maxz
 			if(zexpansion && !measureOnly) // don't actually expand the world if we're only measuring bounds
 				if(cropMap)
 					continue
 				while(world.maxz < zcrd) //create new z_levels if needed.
-					SSmapping.increment_world_z_size(/obj/abstract/level_data/space)
-
+					SSmapping.increment_world_z_size(level_data_type)
 			bounds[MAP_MINX] = min(bounds[MAP_MINX], clamp(xcrdStart, x_lower, x_upper))
 			bounds[MAP_MINZ] = min(bounds[MAP_MINZ], zcrd)
 			bounds[MAP_MAXZ] = max(bounds[MAP_MAXZ], zcrd)

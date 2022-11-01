@@ -18,7 +18,7 @@
 	for(var/num in map_z)
 		global.overmap_sectors -= "[num]"
 
-	var/datum/overmap/overmap = global.overmaps_by_z["[z]"]
+	var/datum/overmap/overmap = global.overmaps_by_z[num2text(z)]
 	if(istype(overmap))
 		overmap.discard_temporary_sector(src)
 

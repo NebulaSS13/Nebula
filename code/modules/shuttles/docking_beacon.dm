@@ -314,7 +314,7 @@
 
 	// Otherwise, use the planetary or world area.
 	if(!base_area)
-		var/obj/effect/overmap/visitable/sector/exoplanet/planet = global.overmap_sectors["[z]"]
+		var/obj/effect/overmap/visitable/sector/exoplanet/planet = global.overmap_sectors[num2text(z)]
 		if(istype(planet))
 			base_area = ispath(planet.planetary_area) ? planet.planetary_area : planet.planetary_area.type
 		else

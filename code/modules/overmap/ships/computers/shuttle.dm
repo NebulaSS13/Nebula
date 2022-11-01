@@ -61,7 +61,7 @@
 		to_chat(usr, SPAN_WARNING("The manual controls look hopelessly complex to you!"))
 
 /obj/machinery/computer/shuttle_control/explore/proc/start_landing(var/mob/user, var/datum/shuttle/autodock/overmap/shuttle)
-	var/obj/effect/overmap/visitable/current_sector = global.overmap_sectors["[z]"]
+	var/obj/effect/overmap/visitable/current_sector = global.overmap_sectors[num2text(z)]
 	var/obj/effect/overmap/visitable/target_sector
 	if(current_sector && istype(current_sector))
 
@@ -87,7 +87,7 @@
 			if(landing_eye.look(user, list(shuttle_tag, target_sector))) // Placement of the eye was successful
 				landing_eye.extension_eye.forceMove(eye_turf)
 				return
-	
+
 	to_chat(user, SPAN_WARNING("You are unable to land!"))
 	return
 
@@ -116,7 +116,7 @@
 		else
 			qdel(lz)
 	to_chat(user, SPAN_WARNING("Invalid landing zone!"))
-	
+
 /obj/machinery/computer/shuttle_control/proc/end_landing()
 	var/datum/extension/eye/landing_eye = get_extension(src, /datum/extension/eye/)
 	if(landing_eye)

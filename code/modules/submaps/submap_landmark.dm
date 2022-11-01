@@ -32,10 +32,10 @@ INITIALIZE_IMMEDIATE(/obj/abstract/submap_landmark/spawnpoint)
 
 /obj/abstract/submap_landmark/spawnpoint/Initialize()
 	. = ..()
-	LAZYADD(global.submap_spawnpoints_by_z["[z]"], src)
+	LAZYADD(global.submap_spawnpoints_by_z[num2text(z)], src)
 
 /obj/abstract/submap_landmark/spawnpoint/Destroy()
-	LAZYREMOVE(global.submap_spawnpoints_by_z["[z]"], src)
+	LAZYREMOVE(global.submap_spawnpoints_by_z[num2text(z)], src)
 	. = ..()
 
 /obj/abstract/submap_landmark/spawnpoint/survivor

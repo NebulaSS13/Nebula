@@ -34,7 +34,7 @@
 		//Set up gases for living things
 		var/list/all_gasses = decls_repository.get_decl_paths_of_subtype(/decl/material/gas)
 		if(!LAZYLEN(breathgas))
-			var/list/goodgases = all_gasses.Copy() 
+			var/list/goodgases = all_gasses.Copy()
 			var/gasnum = min(rand(1,3), goodgases.len)
 			for(var/i = 1 to gasnum)
 				var/gas = pick(goodgases)
@@ -85,10 +85,10 @@
 
 /obj/abstract/landmark/exoplanet_spawn/LateInitialize()
 	. = ..()
-	var/obj/effect/overmap/visitable/sector/exoplanet/E = global.overmap_sectors["[z]"]
+	var/obj/effect/overmap/visitable/sector/exoplanet/E = global.overmap_sectors[num2text(z)]
 	if(istype(E))
 		do_spawn(E)
-		
+
 /obj/abstract/landmark/exoplanet_spawn/proc/do_spawn(var/obj/effect/overmap/visitable/sector/exoplanet/planet)
 	if(LAZYLEN(planet.fauna_types))
 		var/beastie = pick(planet.fauna_types)

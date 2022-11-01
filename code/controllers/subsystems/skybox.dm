@@ -102,13 +102,13 @@ SUBSYSTEM_DEF(skybox)
 		mapedge_cache["[dir]"] = MA
 
 /datum/controller/subsystem/skybox/proc/get_skybox(z)
-	if(!skybox_cache["[z]"])
-		skybox_cache["[z]"] = generate_skybox(z)
-		var/obj/effect/overmap/visitable/O = global.overmap_sectors["[z]"]
+	if(!skybox_cache[num2text(z)])
+		skybox_cache[num2text(z)] = generate_skybox(z)
+		var/obj/effect/overmap/visitable/O = global.overmap_sectors[num2text(z)]
 		if(istype(O))
 			for(var/zlevel in O.map_z)
-				skybox_cache["[zlevel]"] = skybox_cache["[z]"]
-	return skybox_cache["[z]"]
+				skybox_cache["[zlevel]"] = skybox_cache[num2text(z)]
+	return skybox_cache[num2text(z)]
 
 /datum/controller/subsystem/skybox/proc/generate_skybox(z)
 	var/image/res = image(skybox_icon)
@@ -123,7 +123,7 @@ SUBSYSTEM_DEF(skybox)
 	res.overlays += base
 
 	if(use_overmap_details)
-		var/obj/effect/overmap/visitable/O = global.overmap_sectors["[z]"]
+		var/obj/effect/overmap/visitable/O = global.overmap_sectors[num2text(z)]
 		if(istype(O))
 			var/image/overmap = image(skybox_icon)
 			overmap.overlays += O.generate_skybox()
@@ -141,7 +141,7 @@ SUBSYSTEM_DEF(skybox)
 
 /datum/controller/subsystem/skybox/proc/rebuild_skyboxes(var/list/zlevels)
 	for(var/z in zlevels)
-		skybox_cache["[z]"] = generate_skybox(z)
+		skybox_cache[num2text(z)] = generate_skybox(z)
 
 	for(var/client/C)
 		C.update_skybox(1)

@@ -25,7 +25,7 @@
 		goast.alpha = 255
 	old_accessible_z_levels = SSmapping.accessible_z_levels.Copy()
 	for(var/z in affected_levels)
-		SSmapping.accessible_z_levels -= "[z]" //not accessible during the jump
+		SSmapping.accessible_z_levels -= num2text(z) //not accessible during the jump
 
 /datum/universal_state/jump/OnExit()
 	for(var/mob/M in duplicated)

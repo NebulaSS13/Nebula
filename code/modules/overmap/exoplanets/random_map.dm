@@ -37,7 +37,7 @@
 		plantcolors = _plant_colors
 	..()
 
-	SSmapping.base_turf_by_z[num2text(tz)] = land_type
+	SSmapping.base_turf_by_z[tz] = land_type
 
 /datum/random_map/noise/exoplanet/get_map_char(var/value)
 	if(water_type && noise2value(value) < water_level)

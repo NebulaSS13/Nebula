@@ -16,7 +16,7 @@
 
 /turf/exterior/wildgrass/Initialize()
 	. = ..()
-	var/obj/effect/overmap/visitable/sector/exoplanet/E = global.overmap_sectors["[z]"]
+	var/obj/effect/overmap/visitable/sector/exoplanet/E = global.overmap_sectors[num2text(z)]
 	if(istype(E) && E.grass_color)
 		color = E.grass_color
 

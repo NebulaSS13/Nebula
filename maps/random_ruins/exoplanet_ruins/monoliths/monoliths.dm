@@ -22,7 +22,7 @@
 	. = ..()
 	icon_state = "jaggy[rand(1,4)]"
 
-	var/obj/effect/overmap/visitable/sector/exoplanet/E = global.overmap_sectors["[z]"]
+	var/obj/effect/overmap/visitable/sector/exoplanet/E = global.overmap_sectors[num2text(z)]
 	if(istype(E))
 		desc += "\nThere are images on it: [E.get_engravings()]"
 	update_icon()
@@ -47,7 +47,7 @@
 /obj/structure/monolith/attack_hand(mob/user)
 	visible_message("\The [user] touches \the [src].")
 	if(istype(user, /mob/living/carbon/human))
-		var/obj/effect/overmap/visitable/sector/exoplanet/E = global.overmap_sectors["[z]"]
+		var/obj/effect/overmap/visitable/sector/exoplanet/E = global.overmap_sectors[num2text(z)]
 		if(istype(E))
 			var/mob/living/carbon/human/H = user
 			if(!H.isSynthetic())
