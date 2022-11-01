@@ -134,6 +134,11 @@
 	var/list/boxes = list()// If the boxes are stacked, they come here
 	var/boxtag = ""
 
+/obj/item/pizzabox/Initialize(ml, material_key)
+	. = ..()
+	if(ispath(pizza))
+		pizza = new pizza(src)
+
 /obj/item/pizzabox/on_update_icon()
 	. = ..()
 
@@ -189,12 +194,11 @@
 		to_chat(user, "<span class='warning'>You take \the [src.pizza] out of \the [src].</span>")
 		src.pizza = null
 		update_icon()
-		return
+		return TRUE
 
 	if( boxes.len > 0 )
 		if(!user.is_holding_offhand(src))
-			..()
-			return
+			return ..()
 
 		var/obj/item/pizzabox/box = boxes[boxes.len]
 		boxes -= box
@@ -203,8 +207,8 @@
 		to_chat(user, "<span class='warning'>You remove the topmost [src] from your hand.</span>")
 		box.update_icon()
 		update_icon()
-		return
-	..()
+		return TRUE
+	return ..()
 
 /obj/item/pizzabox/attack_self(mob/user)
 
@@ -231,7 +235,7 @@
 
 			if( (boxes.len+1) + boxestoadd.len <= 5 )
 				if(!user.unEquip(box, src))
-					return
+					return TRUE
 				box.boxes = list()// clear the box boxes so we don't have boxes inside boxes. - Xzibit
 				src.boxes.Add( boxestoadd )
 
@@ -244,13 +248,13 @@
 		else
 			to_chat(user, "<span class='warning'>Close \the [box] first!</span>")
 
-		return
+		return TRUE
 
 	if( istype(I, /obj/item/chems/food/sliceable/pizza/) )
 
 		if( src.open )
 			if(!user.unEquip(I, src))
-				return
+				return TRUE
 			src.pizza = I
 
 			update_icon()
@@ -258,12 +262,12 @@
 			to_chat(user, "<span class='warning'>You put \the [I] in \the [src]!</span>")
 		else
 			to_chat(user, "<span class='warning'>You try to push \the [I] through the lid but it doesn't work!</span>")
-		return
+		return TRUE
 
 	if(IS_PEN(I))
 
 		if( src.open )
-			return
+			return TRUE
 
 		var/t = sanitize(input("Enter what you want to add to the tag:", "Write", null, null) as text, 30)
 
@@ -274,25 +278,21 @@
 		boxtotagto.boxtag = copytext("[boxtotagto.boxtag][t]", 1, 30)
 
 		update_icon()
-		return
-	..()
+		return TRUE
+	return ..()
 
-/obj/item/pizzabox/margherita/Initialize()
-	. = ..()
-	pizza = new /obj/item/chems/food/sliceable/pizza/margherita(src)
+/obj/item/pizzabox/margherita
+	pizza = /obj/item/chems/food/sliceable/pizza/margherita
 	boxtag = "Margherita Deluxe"
 
-/obj/item/pizzabox/vegetable/Initialize()
-	. = ..()
-	pizza = new /obj/item/chems/food/sliceable/pizza/vegetablepizza(src)
+/obj/item/pizzabox/vegetable
+	pizza = /obj/item/chems/food/sliceable/pizza/vegetablepizza
 	boxtag = "Gourmet Vegatable"
 
-/obj/item/pizzabox/mushroom/Initialize()
-	. = ..()
-	pizza = new /obj/item/chems/food/sliceable/pizza/mushroompizza(src)
+/obj/item/pizzabox/mushroom
+	pizza = /obj/item/chems/food/sliceable/pizza/mushroompizza
 	boxtag = "Mushroom Special"
 
-/obj/item/pizzabox/meat/Initialize()
-	. = ..()
-	pizza = new /obj/item/chems/food/sliceable/pizza/meatpizza(src)
+/obj/item/pizzabox/meat
+	pizza = /obj/item/chems/food/sliceable/pizza/meatpizza
 	boxtag = "Meatlover's Supreme"
