@@ -26,7 +26,7 @@
 		/obj/item/stack/package_wrap/fifty      = 2,
 		/obj/item/stack/package_wrap/gift/fifty = 2
 	)
-	containername = "arts and Crafts crate"
+	containername = "arts and crafts crate"
 
 
 /decl/hierarchy/supply_pack/nonessent/card_packs
