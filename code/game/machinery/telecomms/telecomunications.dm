@@ -162,12 +162,12 @@ var/global/list/obj/machinery/telecomms/telecomms_list = list()
 
 /obj/machinery/telecomms/Move()
 	. = ..()
-	listening_levels = SSmapping.get_connected_levels(z)
+	listening_levels = (z ? SSmapping.get_connected_levels(z) : list())
 	update_power()
 
 /obj/machinery/telecomms/forceMove(var/newloc)
 	. = ..(newloc)
-	listening_levels = SSmapping.get_connected_levels(z)
+	listening_levels = (z ? SSmapping.get_connected_levels(z) : list())
 	update_power()
 
 /obj/machinery/telecomms/proc/update_power()

@@ -60,6 +60,11 @@ INITIALIZE_IMMEDIATE(/obj/abstract/level_data)
 	if(SSmapping.initialized && !defer_level_setup)
 		setup_level_data()
 
+/obj/abstract/level_data/proc/post_template_load(var/datum/map_template/template)
+	if(template.accessibility_weight)
+		SSmapping.accessible_z_levels[num2text(my_z)] = template.accessibility_weight
+	SSmapping.player_levels |= my_z
+
 /obj/abstract/level_data/Destroy(var/force)
 	if(force)
 		new type(locate(round(world.maxx/2), round(world.maxy/2), my_z))
@@ -92,7 +97,7 @@ INITIALIZE_IMMEDIATE(/obj/abstract/level_data)
 		ambient_light_level = config.starlight
 		ambient_light_color = SSskybox.background_color
 	if(base_turf)
-		SSmapping.base_turf_by_z["[my_z]"] = base_turf
+		SSmapping.base_turf_by_z[my_z] = base_turf
 	if(level_flags & ZLEVEL_STATION)
 		SSmapping.station_levels |= my_z
 	if(level_flags & ZLEVEL_ADMIN)
@@ -145,7 +150,7 @@ INITIALIZE_IMMEDIATE(/obj/abstract/level_data)
 
 /obj/abstract/level_data/proc/get_gps_level_name()
 	if(!gps_name)
-		var/obj/effect/overmap/overmap_entity = global.overmap_sectors["[z]"]
+		var/obj/effect/overmap/overmap_entity = global.overmap_sectors[num2text(z)]
 		if(overmap_entity?.name)
 			gps_name = overmap_entity.name
 		else if(name)
@@ -187,7 +192,7 @@ INITIALIZE_IMMEDIATE(/obj/abstract/level_data)
 /obj/abstract/level_data/mining_level/asteroid
 	base_turf = /turf/simulated/floor/asteroid
 
-/obj/abstract/level_data/mining_level/build_level()
+/obj/abstract/level_data/mining_level/post_template_load()
 	..()
 	new /datum/random_map/automata/cave_system(1, 1, my_z, world.maxx, world.maxy)
 	new /datum/random_map/noise/ore(1, 1, my_z, world.maxx, world.maxy)

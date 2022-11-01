@@ -54,7 +54,7 @@
 	if(z_level)
 		. = list()
 		for(var/z in SSmapping.get_connected_levels(z_level))
-			. += alarms_by_z["[z]"] || list()
+			. += alarms_by_z[num2text(z)] || list()
 	else
 		return alarms
 

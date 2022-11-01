@@ -141,7 +141,7 @@
 	. = ..()
 
 /obj/effect/shuttle_landmark/ship/Destroy()
-	var/obj/effect/overmap/visitable/ship/landable/ship = global.overmap_sectors["[z]"]
+	var/obj/effect/overmap/visitable/ship/landable/ship = global.overmap_sectors[num2text(z)]
 	if(istype(ship) && ship.landmark == src)
 		ship.landmark = null
 	. = ..()

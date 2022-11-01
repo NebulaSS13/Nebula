@@ -1,5 +1,3 @@
-#define LEVELS_ARE_Z_CONNECTED(ZA, ZB) (ZA > 0 && ZB > 0 && ZA <= world.maxz && ZB <= world.maxz) && ((ZA == ZB) || ((length(SSmapping.connected_z_cache) >= ZA && SSmapping.connected_z_cache[ZA] && length(SSmapping.connected_z_cache[ZA]) >= ZB) ? SSmapping.connected_z_cache[ZA][ZB] : SSmapping.are_connected_levels(ZA, ZB)))
-
 #define TURF_IS_MIMICKING(T) (isturf(T) && (T:z_flags & ZM_MIMIC_BELOW))
 #define CHECK_OO_EXISTENCE(OO) if (OO && !TURF_IS_MIMICKING(OO.loc)) { qdel(OO); }
 #define UPDATE_OO_IF_PRESENT CHECK_OO_EXISTENCE(bound_overlay); if (bound_overlay) { update_above(); }

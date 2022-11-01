@@ -55,7 +55,7 @@ var/global/list/shuttle_landmarks = list()
 	if(!istype(docking_controller))
 		log_error("Could not find docking controller for shuttle waypoint '[name]', docking tag was '[docking_tag]'.")
 
-	var/obj/effect/overmap/visitable/location = global.overmap_sectors["[z]"]
+	var/obj/effect/overmap/visitable/location = global.overmap_sectors[num2text(z)]
 	if(location && location.docking_codes)
 		docking_controller.docking_codes = location.docking_codes
 
@@ -66,9 +66,9 @@ var/global/list/shuttle_landmarks = list()
 		ADJUST_TAG_VAR(docking_controller, map_hash)
 
 /obj/effect/shuttle_landmark/forceMove()
-	var/obj/effect/overmap/visitable/map_origin = global.overmap_sectors["[z]"]
+	var/obj/effect/overmap/visitable/map_origin = global.overmap_sectors[num2text(z)]
 	. = ..()
-	var/obj/effect/overmap/visitable/map_destination = global.overmap_sectors["[z]"]
+	var/obj/effect/overmap/visitable/map_destination = global.overmap_sectors[num2text(z)]
 	if(map_origin != map_destination)
 		if(map_origin)
 			map_origin.remove_landmark(src, shuttle_restricted)

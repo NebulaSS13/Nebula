@@ -47,13 +47,10 @@ SUBSYSTEM_DEF(mapping)
 	/// A list of connected z-levels to avoid repeatedly rebuilding connections
 	var/list/connected_z_cache = list()
 
-/datum/controller/subsystem/mapping/New()
-	levels_by_z.len = world.maxz // Populate with nulls so we don't get index errors later.
-	..()
+/datum/controller/subsystem/mapping/PreInit()
+	reindex_lists()
 
 /datum/controller/subsystem/mapping/Initialize(timeofday)
-
-	. = ..()
 
 	// Load our banned map list, if we have one.
 	if(banned_dmm_location && fexists(banned_dmm_location))
@@ -96,7 +93,7 @@ SUBSYSTEM_DEF(mapping)
 		if(!istype(level))
 			// TODO: Remove this and swap log_debug() out for a stack trace when the system is more refined/robust.
 			level = new /obj/abstract/level_data/space(locate(round(world.maxx*0.5), round(world.maxy*0.5), z))
-			log_debug("Missing z-level data object for z["[z]"]!")
+			log_debug("Missing z-level data object for z[num2text(z)]!")
 		level.setup_level_data()
 
 	. = ..()
@@ -150,11 +147,15 @@ SUBSYSTEM_DEF(mapping)
 			return level.get_gps_level_name()
 	return "Unknown Sector"
 
+/datum/controller/subsystem/mapping/proc/reindex_lists()
+	levels_by_z.len = world.maxz // Populate with nulls so we don't get index errors later.
+	base_turf_by_z.len = world.maxz
+	connected_z_cache.Cut()
+
 /datum/controller/subsystem/mapping/proc/increment_world_z_size(var/new_level_type, var/defer_setup = FALSE)
 
 	world.maxz++
-	levels_by_z.len = world.maxz
-	connected_z_cache.Cut()
+	reindex_lists()
 
 	if(SSzcopy.zlev_maximums.len)
 		SSzcopy.calculate_zstack_limits()
@@ -167,8 +168,8 @@ SUBSYSTEM_DEF(mapping)
 	return level
 
 /datum/controller/subsystem/mapping/proc/get_connected_levels(z)
-	if(!isnull(z) || z <= 0  || z > length(levels_by_z))
-		CRASH("Invalid z-level supplied to get_connected_levels: [z || "NULL"]")
+	if(z <= 0  || z > length(levels_by_z))
+		CRASH("Invalid z-level supplied to get_connected_levels: [isnull(z) ? "NULL" : z]")
 	. = list(z)
 	// Traverse up and down to get the multiz stack.
 	for(var/level = z, HasBelow(level), level--)
