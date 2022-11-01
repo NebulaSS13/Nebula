@@ -254,7 +254,7 @@
 
 /**
  * Returns a list with the contents that may be spawned in this object.
- * This shouldn't include things that are neccessary for the object to operate, like machine components. 
+ * This shouldn't include things that are necessary for the object to operate, like machine components. 
  * Its mainly for populating storage and the like.
  */
 /obj/proc/WillContain()
