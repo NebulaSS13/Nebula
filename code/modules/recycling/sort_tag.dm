@@ -10,7 +10,7 @@
 	var/tag_y = 0
 
 /datum/extension/sorting_tag/New(datum/holder, var/_destination, var/_icon_state, var/_tag_x = 0, var/_tag_y = 0)
-	. = ..(holder)
+	..(holder)
 	destination = _destination
 	tag_icon_state = _icon_state
 	tag_x = _tag_x
