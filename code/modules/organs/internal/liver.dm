@@ -13,7 +13,7 @@
 
 /obj/item/organ/internal/liver/organ_can_heal()
 	// We're busy processing other stuff.
-	if(GET_CHEMICAL_EFFECT(owner, CE_ALCOHOL) || GET_CHEMICAL_EFFECT(owner, CE_TOXIN) || owner?.radiation)
+	if(GET_CHEMICAL_EFFECT(owner, CE_ALCOHOL))
 		return FALSE
 	return ..()
 

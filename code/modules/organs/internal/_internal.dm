@@ -184,7 +184,7 @@
 	if(owner.get_blood_oxygenation() < BLOOD_VOLUME_SAFE)
 		return FALSE
 	// Our owner is under stress.
-	if(GET_CHEMICAL_EFFECT(owner, CE_TOXIN) || owner.is_asystole())
+	if(GET_CHEMICAL_EFFECT(owner, CE_TOXIN) || owner.radiation || owner.is_asystole())
 		return FALSE
 	// If we haven't hit the regeneration cutoff point, heal.
 	if(!min_regeneration_cutoff_threshold || !past_damage_threshold(min_regeneration_cutoff_threshold))
