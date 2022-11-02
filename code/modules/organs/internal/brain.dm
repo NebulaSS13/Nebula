@@ -15,12 +15,10 @@
 	relative_size = 85
 	damage_reduction = 0
 	scale_max_damage_to_species_health = FALSE
+	damage_threshold_count = 10 // We can regenerate in 10 discrete stages of max_damage.
 
 	var/can_use_mmi = TRUE
 	var/mob/living/carbon/brain/brainmob = null
-	var/const/damage_threshold_count = 10
-	var/damage_threshold_value
-	var/healed_threshold = 1
 	var/oxygen_reserve = 6
 
 /obj/item/organ/internal/brain/getToxLoss()
@@ -32,10 +30,6 @@
 		set_max_damage(species.total_health)
 	else
 		set_max_damage(200)
-
-/obj/item/organ/internal/brain/set_max_damage(var/ndamage)
-	..()
-	damage_threshold_value = round(max_damage / damage_threshold_count)
 
 /obj/item/organ/internal/brain/Destroy()
 	QDEL_NULL(brainmob)
@@ -93,13 +87,8 @@
 /obj/item/organ/internal/brain/can_recover()
 	return ~status & ORGAN_DEAD
 
-/obj/item/organ/internal/brain/proc/get_current_damage_threshold()
-	return round(damage / damage_threshold_value)
 
-/obj/item/organ/internal/brain/proc/past_damage_threshold(var/threshold)
-	return (get_current_damage_threshold() > threshold)
-
-/obj/item/organ/internal/brain/proc/handle_severe_brain_damage()
+/obj/item/organ/internal/brain/proc/handle_severe_damage()
 	set waitfor = FALSE
 	healed_threshold = 0
 	to_chat(owner, "<span class = 'notice' font size='10'><B>Where am I...?</B></span>")
@@ -113,13 +102,13 @@
 	to_chat(owner, "<span class = 'notice' font size='10'><B>What happened...?</B></span>")
 	alert(owner, "You have taken massive brain damage! You will not be able to remember the events leading up to your injury.", "Brain Damaged")
 
+/obj/item/organ/internal/brain/check_regen_threshold()
+	return GET_CHEMICAL_EFFECT(owner, CE_BRAIN_REGEN) || ..()
+
 /obj/item/organ/internal/brain/Process()
 	if(owner)
 		if(damage > max_damage / 2 && healed_threshold)
-			handle_severe_brain_damage()
-
-		if(damage < (max_damage / 4))
-			healed_threshold = 1
+			handle_severe_damage()
 
 		handle_disabilities()
 		handle_damage_effects()
@@ -136,48 +125,44 @@
 				oxygen_reserve = min(initial(oxygen_reserve), oxygen_reserve+1)
 			if(!oxygen_reserve) //(hardcrit)
 				SET_STATUS_MAX(owner, STAT_PARA, 3)
-			var/can_heal = damage && damage < max_damage && (damage % damage_threshold_value || GET_CHEMICAL_EFFECT(owner, CE_BRAIN_REGEN) || (!past_damage_threshold(3) && GET_CHEMICAL_EFFECT(owner, CE_STABLE)))
-			var/damprob
-			//Effects of bloodloss
-			var/stability_effect = GET_CHEMICAL_EFFECT(owner, CE_STABLE)
-			switch(blood_volume)
 
-				if(BLOOD_VOLUME_SAFE to INFINITY)
-					if(can_heal)
-						damage = max(damage-1, 0)
-				if(BLOOD_VOLUME_OKAY to BLOOD_VOLUME_SAFE)
-					if(prob(1))
-						to_chat(owner, "<span class='warning'>You feel [pick("dizzy","woozy","faint")]...</span>")
-					damprob = stability_effect ? 30 : 60
-					if(!past_damage_threshold(2) && prob(damprob))
-						take_internal_damage(1)
-				if(BLOOD_VOLUME_BAD to BLOOD_VOLUME_OKAY)
-					SET_STATUS_MAX(owner, STAT_BLURRY, 6)
-					damprob = stability_effect ? 40 : 80
-					if(!past_damage_threshold(4) && prob(damprob))
-						take_internal_damage(1)
-					if(!HAS_STATUS(owner, STAT_PARA) && prob(10))
-						SET_STATUS_MAX(owner, STAT_PARA, rand(1,3))
-						to_chat(owner, "<span class='warning'>You feel extremely [pick("dizzy","woozy","faint")]...</span>")
-				if(BLOOD_VOLUME_SURVIVE to BLOOD_VOLUME_BAD)
-					SET_STATUS_MAX(owner, STAT_BLURRY, 6)
-					damprob = stability_effect ? 60 : 100
-					if(!past_damage_threshold(6) && prob(damprob))
-						take_internal_damage(1)
-					if(!HAS_STATUS(owner, STAT_PARA) && prob(15))
-						SET_STATUS_MAX(owner, STAT_PARA, rand(3,5))
-						to_chat(owner, "<span class='warning'>You feel extremely [pick("dizzy","woozy","faint")]...</span>")
-				if(-(INFINITY) to BLOOD_VOLUME_SURVIVE) // Also see heart.dm, being below this point puts you into cardiac arrest.
-					SET_STATUS_MAX(owner, STAT_BLURRY, 6)
-					damprob = stability_effect ? 80 : 100
-					if(prob(damprob))
-						take_internal_damage(1)
-					if(prob(damprob))
-						take_internal_damage(1)
+			//Effects of bloodloss
+			if(blood_volume < BLOOD_VOLUME_SAFE)
+				var/damprob
+				var/stability_effect = GET_CHEMICAL_EFFECT(owner, CE_STABLE)
+				switch(blood_volume)
+					if(BLOOD_VOLUME_OKAY to BLOOD_VOLUME_SAFE)
+						if(prob(1))
+							to_chat(owner, "<span class='warning'>You feel [pick("dizzy","woozy","faint")]...</span>")
+						damprob = stability_effect ? 30 : 60
+						if(!past_damage_threshold(2) && prob(damprob))
+							take_internal_damage(1)
+					if(BLOOD_VOLUME_BAD to BLOOD_VOLUME_OKAY)
+						SET_STATUS_MAX(owner, STAT_BLURRY, 6)
+						damprob = stability_effect ? 40 : 80
+						if(!past_damage_threshold(4) && prob(damprob))
+							take_internal_damage(1)
+						if(!HAS_STATUS(owner, STAT_PARA) && prob(10))
+							SET_STATUS_MAX(owner, STAT_PARA, rand(1,3))
+							to_chat(owner, "<span class='warning'>You feel extremely [pick("dizzy","woozy","faint")]...</span>")
+					if(BLOOD_VOLUME_SURVIVE to BLOOD_VOLUME_BAD)
+						SET_STATUS_MAX(owner, STAT_BLURRY, 6)
+						damprob = stability_effect ? 60 : 100
+						if(!past_damage_threshold(6) && prob(damprob))
+							take_internal_damage(1)
+						if(!HAS_STATUS(owner, STAT_PARA) && prob(15))
+							SET_STATUS_MAX(owner, STAT_PARA, rand(3,5))
+							to_chat(owner, "<span class='warning'>You feel extremely [pick("dizzy","woozy","faint")]...</span>")
+					if(-(INFINITY) to BLOOD_VOLUME_SURVIVE) // Also see heart.dm, being below this point puts you into cardiac arrest.
+						SET_STATUS_MAX(owner, STAT_BLURRY, 6)
+						damprob = stability_effect ? 80 : 100
+						if(prob(damprob))
+							take_internal_damage(1)
+						if(prob(damprob))
+							take_internal_damage(1)
 	..()
 
 /obj/item/organ/internal/brain/take_internal_damage(var/damage, var/silent)
-	set waitfor = 0
 	..()
 	if(damage >= 10) //This probably won't be triggered by oxyloss or mercury. Probably.
 		var/damage_secondary = damage * 0.20

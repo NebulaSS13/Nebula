@@ -3,6 +3,17 @@
 ****************************************************/
 /obj/item/organ/internal
 	scale_max_damage_to_species_health = TRUE
+
+	// Damage healing vars (moved here from brains)
+	/*
+	/// Number of gradiations of damage we can recover in. ie. set to 10, we can recover up to the most recent 10% damage. Leave null to disable regen.
+	var/damage_threshold_count
+	/// Actual amount of health constituting one gradiation.
+	var/damage_threshold_value
+	/// The last gradiation we healed to.
+	var/healed_threshold = 1
+	*/
+
 	var/tmp/alive_icon //icon to use when the organ is alive
 	var/tmp/dead_icon // Icon to use when the organ has died.
 	var/tmp/prosthetic_icon //Icon to use when the organ is robotic
@@ -93,6 +104,8 @@
 	max_damage = FLOOR(ndamage)
 	min_broken_damage = FLOOR(0.75 * max_damage)
 	min_bruised_damage = FLOOR(0.25 * max_damage)
+	if(damage_threshold_count > 0)
+		damage_threshold_value = round(max_damage / damage_threshold_count)
 
 /obj/item/organ/internal/take_general_damage(var/amount, var/silent = FALSE)
 	take_internal_damage(amount, silent)
@@ -136,13 +149,19 @@
 
 /obj/item/organ/internal/Process()
 	..()
-	handle_regeneration()
+	if(damage_threshold_count)
+		handle_regeneration()
+
+/obj/item/organ/internal/proc/check_regen_threshold()
+	return (damage % damage_threshold_value) || (!past_damage_threshold(3) && GET_CHEMICAL_EFFECT(owner, CE_STABLE))
 
 /obj/item/organ/internal/proc/handle_regeneration()
-	if(!damage || BP_IS_PROSTHETIC(src) || !owner || GET_CHEMICAL_EFFECT(owner, CE_TOXIN) || owner.is_asystole())
+	if(!damage_threshold_count || !(status & ORGAN_DEAD) || BP_IS_PROSTHETIC(src) || !owner || GET_CHEMICAL_EFFECT(owner, CE_TOXIN) || owner.is_asystole())
 		return
-	if(damage < 0.1*max_damage)
-		heal_damage(0.1)
+	if(damage < (max_damage / 4))
+		healed_threshold = 1
+	if(damage && damage < max_damage && check_regen_threshold() && owner?.get_blood_oxygenation() >= BLOOD_VOLUME_SAFE)
+		damage = max(damage-1, 0)
 
 /obj/item/organ/internal/proc/surgical_fix(mob/user)
 	if(damage > min_broken_damage)
@@ -183,3 +202,10 @@
 
 /obj/item/organ/internal/is_internal()
 	return TRUE
+
+// Damage recovery procs! Very exciting.
+/obj/item/organ/internal/proc/get_current_damage_threshold()
+	return damage_threshold_value > 0 ? round(damage / damage_threshold_value) : INFINITY
+
+/obj/item/organ/internal/proc/past_damage_threshold(var/threshold)
+	return (get_current_damage_threshold() > threshold)
