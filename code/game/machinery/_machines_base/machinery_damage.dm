@@ -1,7 +1,16 @@
-///Returns the multiplier applied to BRUTE damage affecting internal components vs the machine frame itself.
-//This is a trade-off because several things like doors needs to be bashable to bits, and having to destroy internal components first made things a bit ridiculous, and made machine unsalvageable..
+/**
+ * Returns the multiplier applied to BRUTE damage affecting internal components vs the machine frame itself. 
+ * This is a trade-off because several things like doors needs to be bashable to bits, and having to destroy internal components first made things a bit ridiculous, 
+ * and made machine unsalvageable..
+*/
 /obj/machinery/proc/physical_damage_to_components_multiplier()
 	return 0.25
+
+/**
+ * Returns the base time an emp should cause the machine to go into EMPED status. If null, will never go into EMPED. 
+ */
+/obj/machinery/proc/get_base_emp_duration()
+	return MACHINERY_EMP_DEFAULT_DURATION
 
 /obj/machinery/take_damage(amount, damage_type = BRUTE, damage_flags = 0, inflicter = null, armor_pen = 0, target_zone = null, quiet = FALSE)
 	//Let's not bother initializing all the components for nothing
@@ -26,7 +35,7 @@
 	var/list/shielding = get_all_components_of_type(/obj/item/stock_parts/shielding)
 	for(var/obj/item/stock_parts/shielding/soak in shielding)
 		if(damtype in soak.protection_types)
-			amount -= soak.take_damage(amount, damtype)
+			amount -= soak.take_damage(amount, damtype, damage_flags, inflicter, armor_pen, target_zone, TRUE)
 	if(amount <= 0)
 		return initial_damage
 
@@ -88,25 +97,44 @@
 		spark_at(loc, rand(1, 4), FALSE, src) //Gives some much needed feedback
 	update_icon()
 
-/obj/machinery/emp_act(severity)
+//skip_emp_stat will completely skip over setting the EMPED flag
+/obj/machinery/emp_act(severity, var/skip_emp_stat = FALSE)
 	if(use_power && operable())
 		new /obj/effect/temp_visual/emp_burst(loc)
 		spark_at(loc, rand(1, 5), FALSE, src)
 		use_power_oneoff(7500/severity) //#TODO: Maybe use the active power usage value instead of a random power literal
 		take_damage(100/severity, ELECTROCUTE, 0, "power spike")
+
+		var/emptime = get_base_emp_duration()
+		//#TODO: Not entirely sure if this should be handled here. However it does make emps a whole lot more relevant/consistent, and less niche.
+		if(!skip_emp_stat && (emptime > 0) && !(stat_immune & EMPED))
+			stat |= EMPED
+			addtimer(CALLBACK(.proc/emp_end, severity), (emptime / severity), TIMER_UNIQUE | TIMER_OVERRIDE)
 	. = ..()
+
+///Called by the base machinery code when the EMPED state expires.
+/obj/machinery/proc/emp_end(var/severity)
+	stat &= ~EMPED
 
 /obj/machinery/bash(obj/item/W, mob/user)
 	//Add a lower damage threshold for machines
-	if(!istype(W) || W.force <= 5)
+	if(!istype(W) || W.force <= 5) //#FIXME: probably should use the armor thresholds system
 		return FALSE
 	. = ..()
 
 // This is really pretty crap and should be overridden for specific machines.
 /obj/machinery/fluid_act(var/datum/reagents/fluids)
 	..()
+	if(QDELETED(src))
+		return
 	if(!waterproof && operable() && (fluids.total_volume > FLUID_DEEP))
-		explosion_act(3)
+		var/short_damage = active_power_usage
+		if(take_damage(short_damage, ELECTROCUTE, DAM_DISPERSED, "overvoltage", quiet = TRUE) > 0)
+			if(QDELETED(src))
+				explosion(get_turf(src), 0, 0, 1, 2, z_transfer = 0) //#FIXME: if we handle water damage in check_health eventually, move that over there
+			else
+				use_power_oneoff(active_power_usage) //The thing is shorting
+				spark_at(get_turf(src), 2, FALSE)
 
 /obj/machinery/attack_generic(var/mob/user, var/damage, var/attack_verb, var/environment_smash)
 	if(environment_smash >= 1)

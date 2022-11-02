@@ -1037,13 +1037,6 @@ default behaviour is:
 /mob/living/proc/apply_fall_damage(var/turf/landing)
 	adjustBruteLoss(rand(max(1, CEILING(mob_size * 0.33)), max(1, CEILING(mob_size * 0.66))))
 
-//#TODO: Generalize some of the damage stuff so that we get sensible damage from mobs being thrown at stuff
-// /mob/living/throw_impact(atom/hit_atom, datum/thrownthing/TT)
-// 	if(!(. = ..()))
-// 		return
-// 	//Apply damage to whatever we've hit
-// 	hit_atom.take_damage(mob_size * (TT.speed/THROWFORCE_SPEED_DIVISOR), BRUTE, 0, TT.thrower) // All mobs have a multiplier and a size according to mob_defines.dm
-
 /mob/living/proc/get_metabolizing_reagent_holders(var/include_contact = FALSE)
 	for(var/datum/reagents/adding in list(reagents, get_ingested_reagents(), get_inhaled_reagents()))
 		LAZYDISTINCTADD(., adding)

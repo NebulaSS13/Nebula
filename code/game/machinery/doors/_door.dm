@@ -182,25 +182,8 @@
 	. = ..()
 
 /obj/machinery/door/hitby(var/atom/movable/AM, var/datum/thrownthing/TT)
-	. = ..()
 	visible_message(SPAN_DANGER("[src.name] was hit by [AM]."))
-	var/tforce = 0
-	var/ttype  = BRUTE
-	var/tflags = 0
-	var/tpen   = 0
-
-	if(ismob(AM))
-		tforce = 3 * TT.speed //#FIXME: Maybe the /datum/thrownthing should return what damage the thing would do?
-
-	else if(isobj(AM))
-		var/obj/O = AM
-		tforce = O.throwforce * (TT.speed/THROWFORCE_SPEED_DIVISOR)
-		ttype  = O.damtype
-		tflags = O.damage_flags()
-		tpen   = O.armor_penetration
-
-	playsound(src, hitsound, 100, TRUE)
-	take_damage(tforce, ttype, tflags, AM, tpen, TT.target_zone)
+	. = ..()
 
 // This is legacy code that should be revisited, probably by moving the bulk of the logic into here.
 /obj/machinery/door/physical_attack_hand(user)
@@ -292,23 +275,23 @@
 		repairing = null
 		return TRUE
 
-/obj/machinery/door/emag_act(var/remaining_charges)
+/obj/machinery/door/emag_act(remaining_charges, mob/user, emag_source)
 	if(!density || inoperable())
 		return
 	. = ..() //Let base class emag the components and etc
 	do_animate("emag")
-	sleep(6)
-	open()
 	emagged = TRUE
+	addtimer(CALLBACK(.proc/open), 6, TIMER_UNIQUE | TIMER_OVERRIDE)
 
 /obj/machinery/door/bash(obj/item/I, mob/user)
 	if(!density)
-		return
+		return 0
 	return ..()
 
 /obj/machinery/door/check_health(lastdamage, lastdamtype, lastdamflags)
 	. = ..()
-	update_icon()
+	if(!QDELETED(src))
+		update_icon()
 
 /obj/machinery/door/examine(mob/user, distance)
 	. = ..()
@@ -348,6 +331,8 @@
 			if(density && !(stat & (NOPOWER|BROKEN)))
 				flick("door_deny", src)
 				playsound(src.loc, 'sound/machines/buzz-two.ogg', 50, 0)
+		else
+			log_warning("[type]/do_animate() was called with invalid animation name '[animation]'!")
 
 /obj/machinery/door/proc/open(forced = FALSE)
 	if(!can_open(forced))

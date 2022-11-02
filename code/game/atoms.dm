@@ -267,7 +267,7 @@
 	SHOULD_CALL_PARENT(TRUE)
 	if(isliving(AM))
 		var/mob/living/M = AM
-		M.apply_damage(TT.speed*5, BRUTE) //#TODO: What the fuck?
+		M.apply_damage(TT.speed*5, BRUTE) //#TODO: Why is it a magic number?
 
 //returns 1 if made bloody, returns 0 otherwise
 /atom/proc/add_blood(mob/living/carbon/human/M)

@@ -92,18 +92,10 @@
 		max_local_temp = max(max_local_temp, env.temperature)
 
 	if(prob(50) && (max_pressure - min_pressure > max_pressure_diff || max_local_temp > max_temp))
-		take_damage(1)
+		take_damage(1, BRUTE, 0, "pressure")
 
 /obj/structure/inflatable/CanPass(atom/movable/mover, turf/target, height=0, air_group=0)
 	return 0
-
-/obj/structure/inflatable/explosion_act(severity)
-	..()
-	if(!QDELETED(src))
-		if(severity == 1)
-			physically_destroyed()
-		else if(severity == 2 || (severity == 3 && prob(50)))
-			deflate(TRUE)
 
 /obj/structure/inflatable/attack_hand(mob/user)
 	add_fingerprint(user)

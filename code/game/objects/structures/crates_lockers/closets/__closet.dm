@@ -215,11 +215,6 @@ var/global/list/closets = list()
 		to_chat(user, "<span class='notice'>It won't budge!</span>")
 		update_icon()
 
-/obj/structure/closet/explosion_act(severity)
-	..()
-	if(!QDELETED(src) && (severity == 1 || (severity == 2 && prob(50)) || (severity == 3 && prob(5))))
-		physically_destroyed()
-
 /obj/structure/closet/bullet_act(var/obj/item/projectile/Proj)
 	if(Proj.penetrating)
 		var/distance = get_dist(Proj.starting, get_turf(loc))
@@ -227,10 +222,7 @@ var/global/list/closets = list()
 			Proj.attack_mob(L, distance)
 			if(!(--Proj.penetrating))
 				break
-	var/proj_damage = Proj.get_structure_damage()
-	if(proj_damage)
-		..()
-		take_damage(proj_damage)
+	. = ..()
 
 /obj/structure/closet/attackby(obj/item/W, mob/user)
 	

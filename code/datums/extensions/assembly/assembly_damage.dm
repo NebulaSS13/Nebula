@@ -15,6 +15,7 @@
 	H.physically_destroyed()
 	qdel(src)
 
+//#TODO: Figure out what to do with this???
 /datum/extension/assembly/proc/take_damage(var/amount, var/component_probability, var/damage_casing = 1, var/randomize = 1)
 	//if(!modifiable)
 	//	return

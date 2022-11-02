@@ -90,7 +90,7 @@
 	if(!(. = ..(amount, damage_type, damage_flags, inflicter, armor_pen, target_zone, quiet)))
 		return
 	if(!quiet)
-		playsound(loc, "glasscrack", 100, TRUE)
+		playsound(loc, "glasscrack", 80, TRUE)
 
 /obj/structure/window/check_health(lastdamage, lastdamtype, lastdamflags)
 	. = ..()
@@ -134,15 +134,7 @@
 /obj/structure/window/attack_hand(mob/user)
 	user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
 	if (user.a_intent && user.a_intent == I_HURT)
-
-		if (istype(user,/mob/living/carbon/human))
-			var/mob/living/carbon/human/H = user
-			if(H.species.can_shred(H))
-				attack_generic(H,25)
-				return
-
 		playsound(src.loc, 'sound/effects/glassknock.ogg', 80, 1)
-		user.do_attack_animation(src)
 		user.visible_message(SPAN_DANGER("\The [user] bangs against \the [src]!"),
 							SPAN_DANGER("You bang against \the [src]!"),
 							"You hear a banging sound.")
@@ -151,6 +143,8 @@
 		user.visible_message("[user.name] knocks on the [src.name].",
 							"You knock on the [src.name].",
 							"You hear a knocking sound.")
+	//Base class will handle damage and attack stuff
+	. = ..()
 
 /obj/structure/window/do_simple_ranged_interaction(var/mob/user)
 	visible_message(SPAN_NOTICE("Something knocks on \the [src]."))

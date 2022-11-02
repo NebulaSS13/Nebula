@@ -1073,7 +1073,7 @@
 	if(client)
 		var/datum/global_hud/global_hud = get_global_hud()
 		client.screen.Remove(global_hud.nvg, global_hud.thermal, global_hud.meson, global_hud.science)
-	if(machine)
+	if(machine) //#FIXME: This should be type checked, since machine is regularly type abused.
 		var/viewflags = machine.check_eye(src)
 		if(viewflags < 0)
 			reset_view(null, 0)

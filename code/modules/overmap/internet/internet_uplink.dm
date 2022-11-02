@@ -57,11 +57,11 @@ var/global/list/internet_uplinks = list()
 
 	var/datum/gas_mixture/env = return_air()
 	if(!istype(env) || env.return_pressure() < 10) // Vacuum cooling is insufficient for this machine.
-		take_damage(10, BURN)
+		take_damage(10, BURN, quiet = TRUE)
 		return
 	env.add_thermal_energy(active_power_usage * inefficiency)
 	if(env.temperature > max_temperature)
-		take_damage(5, BURN)
+		take_damage(5, BURN, quiet = TRUE)
 
 /obj/machinery/internet_uplink/set_broken(new_state, cause)
 	. = ..()

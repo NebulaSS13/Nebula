@@ -28,24 +28,6 @@
 /obj/item/airlock_brace/get_material_health_modifier()
 	return 0.6
 
-/obj/item/airlock_brace/examine(mob/user)
-	. = ..()
-	to_chat(user, examine_health())
-
-// This is also called from airlock's examine, so it's a different proc to prevent code copypaste.
-/obj/item/airlock_brace/proc/examine_health()
-	switch(get_percent_health())
-		if(-100 to 25)
-			return "<span class='danger'>\The [src] looks seriously damaged, and probably won't last much more.</span>"
-		if(25 to 50)
-			return "<span class='notice'>\The [src] looks damaged.</span>"
-		if(50 to 75)
-			return "\The [src] looks slightly damaged."
-		if(75 to 99)
-			return "\The [src] has few dents."
-		if(99 to INFINITY)
-			return "\The [src] is in excellent condition."
-
 /obj/item/airlock_brace/on_update_icon()
 	. = ..()
 	if(airlock)
@@ -53,7 +35,7 @@
 	else
 		icon_state = "brace_open"
 
-/obj/item/airlock_brace/Initialize()
+/obj/item/airlock_brace/Initialize(ml, material_key)
 	. = ..()
 	if(!electronics)
 		electronics = new (src)
@@ -70,7 +52,10 @@
 	electronics.attack_self(user)
 
 /obj/item/airlock_brace/attackby(obj/item/W, mob/user)
-	..()
+	. = ..()
+	if(.)
+		return TRUE
+
 	if (istype(W.GetIdCard(), /obj/item/card/id))
 		if(!airlock)
 			attack_self(user)
@@ -84,7 +69,7 @@
 					unlock_brace(usr)
 			else
 				to_chat(user, "You swipe \the [C] through \the [src], but it does not react.")
-		return
+		return TRUE
 
 	if (istype(W, /obj/item/crowbar/brace_jack))
 		if(!airlock)
@@ -108,6 +93,7 @@
 				to_chat(user, "You repair some dents on \the [src]. It is in perfect condition now.")
 			else
 				to_chat(user, "You repair some dents on \the [src].")
+		return TRUE
 
 
 /obj/item/airlock_brace/physically_destroyed(skip_qdel)

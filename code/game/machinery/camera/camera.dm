@@ -103,11 +103,7 @@
 
 /obj/machinery/camera/Process()
 	if((stat & EMPED) && world.time >= affected_by_emp_until)
-		stat &= ~EMPED
-		cancelCameraAlarm()
-		update_icon()
-		update_coverage()
-
+		//#TODO: Maybe investigate this? I'm not sure if its a bad indent, or if it's really meant to be part of the emp end code? Seems like it shouldn't depend on the EMPED flag.
 		if (detectTime > 0)
 			var/elapsed = world.time - detectTime
 			if (elapsed > alarm_delay)
@@ -168,43 +164,20 @@
 		newTarget(AM)
 
 /obj/machinery/camera/emp_act(severity)
-	if(!(stat_immune & EMPED) && prob(100/severity))
-		if(!affected_by_emp_until || (world.time < affected_by_emp_until))
-			affected_by_emp_until = max(affected_by_emp_until, world.time + (90 SECONDS / severity))
-		else
-			stat |= EMPED
-			set_light(0)
-			triggerCameraAlarm()
-			update_icon()
-			update_coverage()
-			START_PROCESSING_MACHINE(src, MACHINERY_PROCESS_SELF)
-
-/obj/machinery/camera/bullet_act(var/obj/item/projectile/P)
-	take_damage(P.get_structure_damage())
-
-/obj/machinery/camera/explosion_act(severity)
-	..()
-	if(!QDELETED(src) && (severity == 1 || prob(50)))
-		set_broken(TRUE)
-
-/obj/machinery/camera/hitby(var/atom/movable/AM)
-	..()
-	if (istype(AM, /obj))
-		var/obj/O = AM
-		if (O.throwforce >= src.toughness)
-			visible_message("<span class='warning'><B>[src] was hit by [O].</B></span>")
-		take_damage(O.throwforce)
-
-/obj/machinery/camera/physical_attack_hand(mob/living/carbon/human/user)
-	if(!istype(user))
+	. = ..()
+	if(!(stat & EMPED))
 		return
-	if(user.species.can_shred(user))
-		user.do_attack_animation(src)
-		visible_message("<span class='warning'>\The [user] slashes at [src]!</span>")
-		playsound(src.loc, 'sound/weapons/slash.ogg', 100, 1)
-		add_hiddenprint(user)
-		take_damage(25)
-		return TRUE
+	set_light(0) //#FIXME: That's apparently mostly handled by the AI code and the wire code. So there might be some issues here toggling it off but not on after emps
+	triggerCameraAlarm()
+	update_coverage()
+	START_PROCESSING_MACHINE(src, MACHINERY_PROCESS_SELF)
+	update_icon()
+
+/obj/machinery/camera/emp_end(severity)
+	. = ..()
+	cancelCameraAlarm()
+	update_coverage()
+	update_icon()
 
 /obj/machinery/camera/attackby(obj/item/W, mob/user)
 	if(istype(W, /obj/item/paper))

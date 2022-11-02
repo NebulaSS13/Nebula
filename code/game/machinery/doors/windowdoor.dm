@@ -132,6 +132,7 @@
 
 /obj/machinery/door/window/physical_attack_hand(mob/user)
 	if(istype(user,/mob/living/carbon/human))
+		//#TODO: Probably should be updated to use get_unarmed_attack and get_natural_attack
 		var/mob/living/carbon/human/H = user
 		if(H.species.can_shred(H))
 			playsound(src.loc, 'sound/effects/Glasshit.ogg', 75, 1)
@@ -170,9 +171,6 @@
 	if(operating)
 		return
 
-	if(bash(I, user))
-		return TRUE
-
 	. = ..()
 	if(.)
 		return
@@ -191,7 +189,7 @@
 
 /obj/machinery/door/window/bash(obj/item/I, mob/user)
 	//Emags and ninja swords? You may pass.
-	if (istype(I, /obj/item/energy_blade))
+	if (istype(I, /obj/item/energy_blade)) //#TODO: Maybe this needs some looking at? Seems a bit odd to emp and open from an energy blade?
 		var/obj/item/energy_blade/blade = I
 		if(blade.is_special_cutting_tool() && emag_act(10, user))
 			spark_at(src.loc, amount=5)

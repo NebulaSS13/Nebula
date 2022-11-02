@@ -153,8 +153,8 @@
 	return ..()
 
 /obj/structure/window/reinforced/holowindow/shatter(consumed, quiet, skip_qdel)
-	playsound(src, "shatter", 70, TRUE)
-	if(quiet)
+	if(!quiet)
+		playsound(src, "shatter", 70, TRUE)
 		visible_message("[src] fades away as it shatters!")
 	qdel(src)
 
@@ -166,12 +166,7 @@
 		return
 
 	if(src.density && istype(I, /obj/item) && !istype(I, /obj/item/card))
-		var/aforce = I.force
-		playsound(src.loc, 'sound/effects/Glasshit.ogg', 75, 1)
-		visible_message("<span class='danger'>\The [src] was hit by \the [I].</span>")
-		if(I.damtype == BRUTE || I.damtype == BURN)
-			take_damage(aforce)
-		return
+		return ..()
 
 	src.add_fingerprint(user)
 	if (!src.requiresID())
@@ -186,10 +181,10 @@
 	else if (src.density)
 		flick(text("[]deny", src.base_state), src)
 
-/obj/machinery/door/window/holowindoor/shatter(var/display_message = 1)
+/obj/machinery/door/window/holowindoor/shatter(consumed = FALSE, quiet = FALSE, skip_qdel = FALSE)
 	src.set_density(0)
-	playsound(src, "shatter", 70, 1)
-	if(display_message)
+	if(!quiet)
+		playsound(src, "shatter", 70, 1)
 		visible_message("[src] fades away as it shatters!")
 	qdel(src)
 

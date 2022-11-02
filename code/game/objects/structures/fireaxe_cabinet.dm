@@ -7,12 +7,15 @@
 	density = 0
 	obj_flags = OBJ_FLAG_MOVES_UNSUPPORTED
 	directional_offset = "{'NORTH':{'y':-32}, 'SOUTH':{'y':32}, 'EAST':{'x':-32}, 'WEST':{'x':32}}"
-
-	var/damage_threshold = 15
+	hitsound = 'sound/effects/Glasshit.ogg'
+	sound_break =  'sound/effects/Glassbr3.ogg'
+	armor = list(DEF_MELEE = ARMOR_MELEE_KNIVES)
 	var/open
 	var/unlocked
 	var/shattered
 	var/obj/item/twohanded/fireaxe/fireaxe
+
+//#TODO: Need some more work to properly handle the broken state
 
 /obj/structure/fireaxecabinet/on_update_icon()
 	..()
@@ -25,7 +28,8 @@
 
 /obj/structure/fireaxecabinet/Initialize()
 	. = ..()
-	fireaxe = new(src)
+	if(!fireaxe)
+		fireaxe = new(src)
 	update_icon()
 
 /obj/structure/fireaxecabinet/attack_ai(var/mob/user)
@@ -77,24 +81,6 @@
 				to_chat(user, "<span class='notice'>You place \the [fireaxe] into \the [src].</span>")
 				update_icon()
 			return
-
-	if(O.force)
-		user.setClickCooldown(10)
-		attack_animation(user)
-		playsound(user, 'sound/effects/Glasshit.ogg', 50, 1)
-		visible_message("<span class='danger'>[user] [pick(O.attack_verb)] \the [src]!</span>")
-		if(damage_threshold > O.force)
-			to_chat(user, "<span class='danger'>Your strike is deflected by the reinforced glass!</span>")
-			return
-		if(shattered)
-			return
-		shattered = 1
-		unlocked = 1
-		open = 1
-		playsound(user, 'sound/effects/Glassbr3.ogg', 100, 1)
-		update_icon()
-		return
-
 	return ..()
 
 /obj/structure/fireaxecabinet/proc/toggle_open(var/mob/user)

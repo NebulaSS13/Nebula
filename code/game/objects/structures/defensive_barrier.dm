@@ -10,7 +10,8 @@
 	can_buckle = TRUE
 	material =   /decl/material/solid/metal/steel
 	material_alteration = MAT_FLAG_ALTERATION_DESC | MAT_FLAG_ALTERATION_NAME
-	max_health = 200
+	max_health = 200 //if changing this, need to change it in the item as well
+	hitsound = 'sound/effects/bang.ogg'
 	var/secured
 
 /obj/structure/defensive_barrier/Initialize()
@@ -90,22 +91,19 @@
 	visible_message(SPAN_NOTICE("\The [user] packs up \the [src]."))
 	var/obj/item/defensive_barrier/B = new(get_turf(user), material?.type)
 	playsound(src, 'sound/items/Deconstruct.ogg', 100, 1)
-	B.stored_health = health
-	B.stored_max_health = max_health
+	B.health = health
+	B.max_health = max_health
+	B.check_health()
 	B.add_fingerprint(user)
 	qdel(src)
 	return TRUE
 
 /obj/structure/defensive_barrier/CtrlClick(mob/living/user)
-	try_pack_up(user)
+	try_pack_up(user) //#TODO: Maybe turn that into an alt-interaction?
 
 /obj/structure/defensive_barrier/attack_hand(mob/user)
-
-	var/decl/species/species = user.get_species()
-	if(ishuman(user) && species?.can_shred(user) && user.a_intent == I_HURT)
-		take_damage(20)
-		user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
-		return TRUE
+	if(user.a_intent == I_HURT)
+		return ..() //Use base class smashing handling
 
 	if(user.a_intent == I_GRAB)
 		try_pack_up(user)
@@ -138,12 +136,9 @@
 
 	. = ..()
 
-/obj/structure/defensive_barrier/take_damage(damage)
-	if(damage)
-		playsound(src.loc, 'sound/effects/bang.ogg', 75, 1)
-		damage = round(damage * 0.5)
-		if(damage)
-			..()
+/obj/structure/defensive_barrier/take_damage(amount, damage_type = BRUTE, damage_flags = 0, inflicter = null, armor_pen = 0, target_zone = null, quiet = FALSE)
+	//#TODO: once we got something for handling damage reduction, move this out of here!
+	. = ..(round(amount * 0.5), damage_type, damage_flags, inflicter, armor_pen, target_zone, quiet)
 
 /obj/structure/defensive_barrier/proc/check_cover(obj/item/projectile/P, turf/from)
 	var/turf/cover = get_turf(src)
@@ -168,13 +163,8 @@
 	icon_state = "barrier_hand"
 	w_class = ITEM_SIZE_LARGE
 	material = /decl/material/solid/metal/steel
-	var/stored_health = 200
-	var/stored_max_health = 200
-
-/obj/item/defensive_barrier/Initialize(ml, material_key)
-	. = ..()
-	if(material)
-		name = "[material.solid_name] [initial(name)]"
+	material_alteration = MAT_FLAG_ALTERATION_NAME
+	max_health = 200
 
 /obj/item/defensive_barrier/proc/turf_check(mob/user)
 	var/turf/T = get_turf(user)
@@ -187,26 +177,35 @@
 	return TRUE
 
 /obj/item/defensive_barrier/attack_self(mob/user)
-
 	if(!turf_check(user) || !do_after(user, 1 SECOND, src) || !turf_check(user))
 		return TRUE
 
 	playsound(src, 'sound/effects/extout.ogg', 100, 1)
 	var/obj/structure/defensive_barrier/B = new(get_turf(user), material?.type)
 	B.set_dir(user.dir)
-	B.health = stored_health
+	B.health = health
+	B.check_health()
 	if(loc == user)
 		user.drop_from_inventory(src)
 	qdel(src)
 
+/obj/item/defensive_barrier/can_repair_with(obj/item/tool, mob/user)
+	return IS_WELDER(tool)
+
+/obj/item/defensive_barrier/handle_repair(mob/user, obj/item/tool)
+	var/repair_time = max(5, round((max_health - health) / 5))
+	if(tool.do_tool_interaction(TOOL_WELDER, user, src, repair_time,
+		"repairing the damage to", "repairing the damage to",
+		"You fail to patch the damage to \the [src].",
+		fuel_expenditure = 1
+	))
+		playsound(get_turf(src), 'sound/items/Welder2.ogg', 25, TRUE)
+		heal(max_health)
+	return TRUE
+
 /obj/item/defensive_barrier/attackby(obj/item/W, mob/user)
-	if(stored_health < stored_max_health && IS_WELDER(W))
-		if(W.do_tool_interaction(TOOL_WELDER, user, src,        \
-		  max(5, round((stored_max_health-stored_health) / 5)), \
-		  "repairing the damage to", "repairing the damage to", \
-		  "You fail to patch the damage to \the [src].",        \
-		  fuel_expenditure = 1
-		))
-			stored_health = stored_max_health
-		return TRUE
+	if(can_repair_with(W) && can_repair(user))
+		user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
+		add_fingerprint(user)
+		return handle_repair(user, W)
 	. = ..()

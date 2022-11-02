@@ -48,7 +48,10 @@
 /obj/proc/is_damaged()
 	return can_take_damage() && (health < max_health)
 
-///Returns a text string to describe the current damage level of the item, or null if non-applicable.
+/**
+ * Returns a text string to describe the current damage level of the item, or null if non-applicable.
+ * health_ratio is a percentage of health from 0.0 to 1.0.
+*/
 /obj/proc/get_examined_damage_string(var/health_ratio)
 	if(!can_take_damage())
 		return

@@ -16,10 +16,11 @@
 	material = DEFAULT_WALL_MATERIAL
 	handle_generic_blending = TRUE
 	tool_interaction_flags = (TOOL_INTERACTION_ANCHOR | TOOL_INTERACTION_DECONSTRUCT)
-	max_health = 40
 	parts_amount = 2
 	parts_type = /obj/item/stack/material/strut
-
+	armor = list(
+		DEF_MELEE = ARMOR_MELEE_KNIVES,
+	)
 	var/paint_color
 	var/stripe_color
 	var/list/connections
@@ -134,24 +135,10 @@
 			paint_color = adjust_brightness(paint_color, bleach_factor)
 		update_icon()
 
-/obj/structure/wall_frame/bullet_act(var/obj/item/projectile/Proj)
-	var/proj_damage = Proj.get_structure_damage()
-	var/damage = min(proj_damage, 100)
-	take_damage(damage)
-	return
-
-/obj/structure/wall_frame/hitby(AM, var/datum/thrownthing/TT)
-	..()
-	var/tforce = 0
-	if(ismob(AM)) // All mobs have a multiplier and a size according to mob_defines.dm
-		var/mob/I = AM
-		tforce = I.mob_size * (TT.speed/THROWFORCE_SPEED_DIVISOR)
-	else
-		var/obj/O = AM
-		tforce = O.throwforce * (TT.speed/THROWFORCE_SPEED_DIVISOR)
-	if (tforce < 15)
-		return
-	take_damage(tforce)
+/obj/structure/wall_frame/take_damage(amount, damage_type = BRUTE, damage_flags = 0, inflicter = null, armor_pen = 0, target_zone = null, quiet = FALSE)
+	if(damage_flags & DAM_BULLET)
+		amount = min(amount, 100)
+	. = ..(amount, damage_type, damage_flags, inflicter, armor_pen, target_zone, quiet)
 
 /obj/structure/wall_frame/get_color()
 	return paint_color

@@ -33,21 +33,6 @@
 	if(distance <= 1)
 		to_chat(user, "It looks [locked ? "locked. You can open it with your ID card" : "unlocked"].")
 
-/obj/structure/displaycase/explosion_act(severity)
-	..()
-	if(!QDELETED(src))
-		if(severity == 1)
-			new /obj/item/shard(loc)
-			for(var/atom/movable/AM in src)
-				AM.dropInto(loc)
-			qdel(src)
-		else if(prob(50))
-			take_damage(20 - (severity * 5))
-
-/obj/structure/displaycase/bullet_act(var/obj/item/projectile/Proj)
-	..()
-	take_damage(Proj.get_structure_damage())
-
 /obj/structure/proc/subtract_matter(var/obj/subtracting)
 	if(!length(matter))
 		return

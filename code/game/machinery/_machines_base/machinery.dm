@@ -366,6 +366,13 @@ Class Procs:
 	else if(frame_type)
 		frame = new frame_type(get_turf(src), dir)
 
+	if(can_take_damage() && health <= 0)
+		//If the machine was destroyed, either dump a broken frame, or damage it a bit
+		if(prob(20))
+			frame.physically_destroyed(FALSE, TRUE)
+		else
+			frame.take_damage(((rand(1, 8) / 10) * frame.max_health), BRUTE, 0, null, ARMOR_MELEE_SHIELDED, null, TRUE)
+
 	var/list/expelled_components = list()
 	for(var/I in component_parts)
 		var/component = uninstall_component(I, refresh_parts = FALSE)

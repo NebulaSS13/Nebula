@@ -546,7 +546,7 @@ About the new airlock wires panel:
 	return ..()
 
 /obj/machinery/door/airlock/physical_attack_hand(mob/user)
-	if(!istype(usr, /mob/living/silicon))
+	if(!istype(usr, /mob/living/silicon)) //#TODO: Might be better to let the electrocute_mob proc handles this instead of type checking?
 		if(src.isElectrified())
 			if(src.shock(user, 100))
 				return TRUE
@@ -741,6 +741,7 @@ About the new airlock wires panel:
 			. = ..()
 		return
 
+	//#TODO: Make this use standard repair procs
 	if(!repairing && IS_WELDER(C) && !operating && density)
 		var/obj/item/weldingtool/W = C
 		if(!W.weld(0,user))
@@ -783,7 +784,7 @@ About the new airlock wires panel:
 					close(1)
 			return TRUE
 
-	if(istype(C, /obj/item/twohanded/fireaxe) && !arePowerSystemsOn() && !(user.a_intent == I_HURT))
+	if(istype(C, /obj/item/twohanded/fireaxe) && !arePowerSystemsOn() && (user.a_intent != I_HURT))
 		var/obj/item/twohanded/fireaxe/F = C
 		if(F.is_held_twohanded(user))
 			if(locked)
@@ -819,21 +820,33 @@ About the new airlock wires panel:
 		return ..()
 
 /obj/machinery/door/airlock/bash(obj/item/I, mob/user)
-			//if door is unbroken, hit with fire axe using harm intent
-	if (istype(I, /obj/item/twohanded/fireaxe) && !(stat & BROKEN) && user.a_intent == I_HURT)
-		user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
-		var/obj/item/twohanded/fireaxe/F = I
-		if (F.wielded)
-			playsound(src, 'sound/weapons/smash.ogg', 100, 1)
-			health -= F.force_wielded * 2
-			if(health <= 0)
-				user.visible_message(SPAN_DANGER("[user] smashes \the [I] into the airlock's control panel! It explodes in a shower of sparks!"), SPAN_DANGER("You smash \the [I] into the airlock's control panel! It explodes in a shower of sparks!"))
-				health = 0
-				set_broken(TRUE)
-			else
-				user.visible_message(SPAN_DANGER("[user] smashes \the [I] into the airlock's control panel!"))
-			return TRUE
-	return ..()
+	. = ..()
+	if((. < 1) || (user.a_intent != I_HURT) || (stat & BROKEN) || !istype(I, /obj/item/twohanded/fireaxe))
+		return
+
+	//Special handling for wielded fireaxe hurt intent hits
+	var/obj/item/twohanded/fireaxe/F = I
+	if (F.wielded)
+		//Check if we broke the shielding
+		var/list/shielding = get_all_components_of_type(/obj/item/stock_parts/shielding)
+		var/still_has_shielding = FALSE
+		for(var/obj/item/stock_parts/shielding/S in shielding)
+			if(S.is_functional())
+				still_has_shielding = TRUE
+				break
+
+		//If we broke the shielding, we deal a massive amount of damage to the circuitboard
+		if(!still_has_shielding)
+			var/obj/item/stock_parts/circuitboard/C = get_component_of_type(/obj/item/stock_parts/circuitboard)
+			if(C?.is_functional() && !istype(C, /obj/item/stock_parts/circuitboard/broken))
+				if(C.take_damage(F.force_wielded * 2, F.damtype, F.damage_flags(), F, ARMOR_MELEE_SHIELDED, null, TRUE))
+					user.visible_message(
+						SPAN_DANGER("[user] smashes \the [I] into the airlock's control panel! It explodes in a shower of sparks!"), 
+						SPAN_DANGER("You smash \the [I] into the airlock's control panel! It explodes in a shower of sparks!")
+					)
+					playsound(src, 'sound/effects/bang.ogg', 80, TRUE)
+					spark_at(loc, 10, FALSE)
+					//#TODO: Maybe going down a state to panel_open could be interesting here?
 
 /obj/machinery/door/airlock/cannot_transition_to(state_path, mob/user)
 	if(ispath(state_path, /decl/machine_construction/default/deconstructed))
@@ -1058,7 +1071,7 @@ About the new airlock wires panel:
 		var/duration = SecondsToTicks(30 / severity)
 		if(electrified_until > -1 && (duration + world.time) > electrified_until)
 			electrify(duration)
-	..()
+	. = ..()
 
 /obj/machinery/door/airlock/power_change() //putting this is obj/machinery/door itself makes non-airlock doors turn invisible for some reason
 	. = ..()
@@ -1088,8 +1101,7 @@ About the new airlock wires panel:
 	if (lock_cut_state == BOLTS_CUT)
 		to_chat(user, "The door bolts have been cut.")
 	if(brace)
-		to_chat(user, "\The [brace] is installed on \the [src], preventing it from opening.")
-		to_chat(user, brace.examine_health())
+		to_chat(user, "\The [brace] is installed on \the [src], preventing it from opening. [brace.get_examined_damage_string(brace.get_health_percent() / 100)]")
 
 /obj/machinery/door/airlock/autoname
 

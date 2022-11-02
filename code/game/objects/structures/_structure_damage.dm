@@ -28,3 +28,16 @@
 /obj/structure/physically_destroyed(var/skip_qdel)
 	if(..(TRUE))
 		return dismantle() //#FIXME: This might not be generic enough?
+
+/obj/structure/attack_hand(mob/user)
+	//Only humans need to have their attack_hand intercepted in here for dealing unarmed damages
+	if(user.a_intent == I_HURT && Adjacent(user) && ishuman(user))
+		var/mob/living/carbon/human/H = user
+		var/decl/natural_attack/NA = H.get_unarmed_attack(src, user.zone_sel)
+		H.do_attack_animation(src)
+		H.setClickCooldown(NA.delay)
+		NA.show_attack(H, src, H.zone_sel, NA.get_unarmed_damage())
+		take_damage(NA.get_unarmed_damage(), NA.get_damage_type(), NA.damage_flags(), H, 0, H.zone_sel)
+		return TRUE
+	. = ..()
+	

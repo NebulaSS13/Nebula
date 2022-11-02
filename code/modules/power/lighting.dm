@@ -240,6 +240,20 @@
 		return SPAN_WARNING("You must first remove the lightbulb!")
 	return ..()
 
+/obj/machinery/light/bash(obj/item/W, mob/user)
+	. = ..()
+	if(!.)
+		return
+	if(lightbulb && prob(90)) //Chance to hit the light
+		if((lightbulb.status != LIGHT_BROKEN))
+			. = lightbulb.bash(W, user)
+			if(lightbulb.status == LIGHT_BROKEN)
+				user.visible_message(SPAN_DANGER("[user.name] smashed the light!"), SPAN_DANGER("You smash the light!"), "You hear a tinkle of breaking glass.")
+			else 
+				to_chat(user, SPAN_DANGER("You hit the light!"))
+		if(W.obj_flags & OBJ_FLAG_CONDUCTIBLE)
+			shock(user, 50)
+
 /obj/machinery/light/attackby(obj/item/W, mob/user)
 	. = ..()
 	if(. || panel_open)
@@ -257,31 +271,15 @@
 			return
 		to_chat(user, "You insert [W].")
 		insert_bulb(W)
-		src.add_fingerprint(user)
-
-		// attempt to break the light
-		//If xenos decide they want to smash a light bulb with a toolbox, who am I to stop them? /N
-
-	else if(lightbulb && (lightbulb.status != LIGHT_BROKEN) && user.a_intent != I_HELP)
-
-		if(prob(1 + W.force * 5))
-
-			user.visible_message("<span class='warning'>[user.name] smashed the light!</span>", "<span class='warning'>You smash the light!</span>", "You hear a tinkle of breaking glass.")
-			if(on && (W.obj_flags & OBJ_FLAG_CONDUCTIBLE))
-				if (prob(12))
-					electrocute_mob(user, get_area(src), src, 0.3)
-			broken()
-
-		else
-			to_chat(user, "You hit the light!")
+		add_fingerprint(user)
+		return TRUE
 
 	// attempt to stick weapon into light socket
 	else if(!lightbulb)
 		to_chat(user, "You stick \the [W] into the light socket!")
 		if(expected_to_be_on() && (W.obj_flags & OBJ_FLAG_CONDUCTIBLE))
-			spark_at(src, cardinal_only = TRUE)
-			if (prob(75))
-				electrocute_mob(user, get_area(src), src, rand(0.7,1.0)) //#FIXME: If someone use a terminal or a cell to power this thing this might not work??
+			shock(user, 75)
+		return TRUE
 
 
 // returns whether this light is expected to be on, disregarding internal state other than power
@@ -375,6 +373,7 @@
 	update_icon()
 
 /obj/machinery/light/proc/fix()
+	//#FIXME: This should also fix any power components
 	if(get_status() == LIGHT_OK || !lightbulb)
 		return
 	lightbulb.status = LIGHT_OK
@@ -470,7 +469,8 @@
 	force = 2
 	throwforce = 5
 	w_class = ITEM_SIZE_TINY
-	material = /decl/material/solid/metal/steel
+	material = /decl/material/solid/glass
+	matter = list(/decl/material/solid/metal/aluminium = MATTER_AMOUNT_REINFORCEMENT)
 	atom_flags = ATOM_FLAG_NO_TEMP_CHANGE | ATOM_FLAG_CAN_BE_PAINTED
 	obj_flags = OBJ_FLAG_HOLLOW
 
@@ -546,9 +546,10 @@
 		LIGHTMODE_READY = list(l_range = 5, l_power = 1, l_color = LIGHT_COLOR_GREEN),
 	)
 
-/obj/item/light/throw_impact(atom/hit_atom)
-	..()
-	shatter()
+/obj/item/light/throw_impact(atom/hit_atom, datum/thrownthing/TT)
+	if(material?.is_brittle())
+		take_damage(rand(4,16) * (TT.speed / THROWFORCE_SPEED_DIVISOR))
+	. = ..()
 
 /obj/item/light/bulb/fire
 	name = "fire bulb"
@@ -585,7 +586,6 @@
 // attack bulb/tube with object
 // if a syringe, can inject flammable liquids to make it explode
 /obj/item/light/attackby(var/obj/item/I, var/mob/user)
-	..()
 	if(istype(I, /obj/item/chems/syringe) && I.reagents?.total_volume)
 		var/obj/item/chems/syringe/S = I
 		to_chat(user, "You inject the solution into \the [src].")
@@ -597,29 +597,54 @@
 				break
 		S.reagents.clear_reagents()
 		return TRUE
-	. = ..()
+	return ..()
 
 // called after an attack with a light item
 // shatter light, unless it was an attempt to put it in a light socket
 // now only shatter if the intent was harm
 
 /obj/item/light/afterattack(atom/target, mob/user, proximity)
-	if(!proximity) return
+	if(!proximity) 
+		return
 	if(istype(target, /obj/machinery/light))
 		return
 	if(user.a_intent != I_HURT)
 		return
 
-	shatter()
+	if(material?.is_brittle())
+		take_damage(max_health * 0.75, BRUTE)
 
-/obj/item/light/shatter()
+/obj/item/light/proc/shatter_bulb()
 	if(status == LIGHT_OK || status == LIGHT_BURNED)
 		src.visible_message("<span class='warning'>[name] shatters.</span>","<span class='warning'>You hear a small glass object shatter.</span>")
 		status = LIGHT_BROKEN
 		force = 5
 		sharp = 1
+		health = min(health, max_health * 0.25) //Make sure the health is at least under the threshold
 		playsound(src.loc, 'sound/effects/Glasshit.ogg', 75, 1)
 		update_icon()
+
+/obj/item/light/proc/fix_bulb()
+	if(status == LIGHT_BROKEN || status == LIGHT_BURNED)
+		status = LIGHT_OK
+		force = initial(force)
+		sharp = initial(sharp)
+		if(is_damaged())
+			heal(max_health)
+		update_icon()
+
+/obj/item/light/check_health(lastdamage, lastdamtype, lastdamflags)
+	if(!can_take_damage())
+		return
+	if((health <= (max_health * 0.25)) && status != LIGHT_BROKEN)
+		shatter_bulb()
+	else if(!lastdamage && (status == LIGHT_BROKEN) && (health > (max_health * 0.25)))
+		fix_bulb()
+	
+	var/obj/machinery/M = loc
+	if(health <= 0 && istype(M) && (src in M))
+		health = 1 //Don't go poof when inside a machine, so people have to remove the remains
+	. = ..()
 
 /obj/item/light/proc/switch_on()
 	switchcount++

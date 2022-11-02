@@ -119,11 +119,12 @@
 			playsound(loc, material.tableslam_noise, 50, 1)
 		else
 			playsound(loc, 'sound/weapons/tablehit1.ogg', 50, 1)
-		var/list/L = take_damage(rand(1,5))
-		for(var/obj/item/shard/S in L)
-			if(S.sharp && prob(50))
-				affecting_mob.visible_message(SPAN_DANGER("\The [S] slices into [affecting_mob]'s face!"), SPAN_DANGER("\The [S] slices into your face!"))
-				affecting_mob.standard_weapon_hit_effects(S, G.assailant, S.force*2, BP_HEAD)
+
+		if(take_damage(rand(1,5), BRUTE, 0, affecting_mob) && QDELETED(src))
+			for(var/obj/item/shard/S in loc)
+				if(S.sharp && prob(50))
+					affecting_mob.visible_message(SPAN_DANGER("\The [S] slices into [affecting_mob]'s face!"), SPAN_DANGER("\The [S] slices into your face!"))
+					affecting_mob.standard_weapon_hit_effects(S, G.assailant, S.force*2, BP_HEAD)
 		qdel(G)
 	else if(atom_flags & ATOM_FLAG_CLIMBABLE)
 		var/obj/occupied = turf_is_crowded()
