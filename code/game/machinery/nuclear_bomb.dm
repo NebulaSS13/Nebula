@@ -394,7 +394,7 @@ var/global/bomb_set
 /obj/item/storage/secure/briefcase/nukedisk
 	desc = "A large briefcase with a digital locking system."
 
-/obj/item/storage/secure/briefcase/WillContain()
+/obj/item/storage/secure/briefcase/nukedisk/WillContain()
 	return list(
 		/obj/item/disk/nuclear,
 		/obj/item/pinpointer,
