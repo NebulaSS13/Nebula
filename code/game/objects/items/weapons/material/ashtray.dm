@@ -47,14 +47,14 @@
 			update_icon()
 	return ..()
 
-/obj/item/ashtray/throw_impact(atom/hit_atom)
+/obj/item/ashtray/throw_impact(atom/hit_atom, datum/thrownthing/TT)
 	. = ..()
 	if(length(contents))
 		visible_message(SPAN_DANGER("\The [src] slams into [hit_atom], spilling its contents!"))
 		dump_contents()
 		remove_extension(src, /datum/extension/scent)
 		update_icon()
-	take_damage(3, BRUTE, 0, hit_atom)
+	take_damage(TT.speed, BRUTE, 0, hit_atom)
 
 /obj/item/ashtray/plastic
 	material = /decl/material/solid/plastic

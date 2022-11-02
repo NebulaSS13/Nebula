@@ -59,11 +59,11 @@
 
 	compile_overlays()
 
-/obj/item/chems/glass/beaker/throw_impact(atom/hit_atom)
+/obj/item/chems/glass/beaker/throw_impact(atom/hit_atom, datum/thrownthing/TT)
 	. = ..()
 	if(ATOM_IS_OPEN_CONTAINER(src))
 		reagents.splash(hit_atom, rand(reagents.total_volume*0.25,reagents.total_volume), min_spill = 60, max_spill = 100)
-	take_damage(rand(4,8))
+	take_damage(rand(4,8) * (TT.speed/THROWFORCE_SPEED_DIVISOR))
 
 /obj/item/chems/glass/beaker/large
 	name = "large beaker"
