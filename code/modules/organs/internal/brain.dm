@@ -19,6 +19,8 @@
 
 	var/can_use_mmi = TRUE
 	var/mob/living/carbon/brain/brainmob = null
+	var/should_announce_brain_damage = TRUE
+
 	var/oxygen_reserve = 6
 
 /obj/item/organ/internal/brain/getToxLoss()
@@ -90,7 +92,7 @@
 
 /obj/item/organ/internal/brain/proc/handle_severe_damage()
 	set waitfor = FALSE
-	healed_threshold = 0
+	should_announce_brain_damage = FALSE
 	to_chat(owner, "<span class = 'notice' font size='10'><B>Where am I...?</B></span>")
 	sleep(5 SECONDS)
 	if(!owner)
@@ -107,8 +109,10 @@
 
 /obj/item/organ/internal/brain/Process()
 	if(owner)
-		if(damage > max_damage / 2 && healed_threshold)
+		if(damage >= round(max_damage / 2) && should_announce_brain_damage)
 			handle_severe_damage()
+		else if(damage < (max_damage / 4))
+			should_announce_brain_damage = TRUE
 
 		handle_disabilities()
 		handle_damage_effects()
