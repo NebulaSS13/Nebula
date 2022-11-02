@@ -1,4 +1,5 @@
 /mob/living/proc/ingest(var/datum/reagents/from, var/datum/reagents/target, var/amount = 1, var/multiplier = 1, var/copy = 0)
+	events_repository.raise_event(/decl/observ/ingested, src, from, target, amount, multiplier, copy)
 	. = from.trans_to_holder(target,amount,multiplier,copy)
 
 /mob/living/carbon/ingest(var/datum/reagents/from, var/datum/reagents/target, var/amount = 1, var/multiplier = 1, var/copy = 0) //we kind of 'sneak' a proc in here for ingesting stuff so we can play with it.
