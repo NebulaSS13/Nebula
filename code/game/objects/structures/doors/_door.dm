@@ -4,13 +4,11 @@
 	icon_state = "metal"
 	hitsound = 'sound/weapons/genhit.ogg'
 	material_alteration = MAT_FLAG_ALTERATION_NAME | MAT_FLAG_ALTERATION_DESC | MAT_FLAG_ALTERATION_COLOR
-	max_health = 50
 	density =  TRUE
 	anchored = TRUE
 	opacity =  TRUE
 
 	var/datum/lock/lock
-
 	var/has_window = FALSE
 	var/changing_state = FALSE
 	var/icon_base
@@ -26,8 +24,6 @@
 		icon_base = material.door_icon_base
 	update_icon()
 	update_nearby_tiles(need_rebuild = TRUE)
-	if(material?.luminescence)
-		set_light(material.luminescence, 0.5, material.color)
 
 /obj/structure/door/Destroy()
 	update_nearby_tiles()
@@ -153,6 +149,11 @@
 		if(M.restrained() || issmall(M))
 			return
 	open()
+
+/obj/structure/door/update_material_properties()
+	. = ..()
+	if(material?.luminescence)
+		set_light(material.luminescence, 0.5, material.color)
 
 /obj/structure/door/iron
 	material = /decl/material/solid/metal/iron
