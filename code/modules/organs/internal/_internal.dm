@@ -9,8 +9,8 @@
 	var/damage_threshold_count = 5
 	/// Max threshold before we stop regenerating without stabilizer.
 	var/max_regeneration_cutoff_threshold = 3
-	/// Min threshold at which we stop regenerating back to 0 damage.
-	var/min_regeneration_cutoff_threshold = 1
+	/// Min threshold at which we stop regenerating back to 0 damage. Null/0 to always respect thresholds.
+	var/min_regeneration_cutoff_threshold
 	/// Actual amount of health constituting one gradiation.
 	var/damage_threshold_value
 
@@ -27,6 +27,7 @@
 	if(!alive_icon)
 		alive_icon = initial(icon_state)
 	. = ..()
+	set_max_damage(absolute_max_damage)
 
 /obj/item/organ/internal/set_species(species_name)
 	. = ..()
@@ -150,18 +151,29 @@
 /obj/item/organ/internal/Process()
 	SHOULD_CALL_PARENT(TRUE)
 	..()
-	if(damage && !(status & ORGAN_DEAD))
+	if(owner && damage && !(status & ORGAN_DEAD))
 		handle_damage_effects()
-		if(organ_can_heal())
-			handle_organ_healing()
-
-/obj/item/organ/internal/proc/handle_severe_damage()
-	set waitfor = FALSE
-	return FALSE
 
 /obj/item/organ/internal/proc/handle_damage_effects()
-	if(damage >= round(max_damage / 2))
-		handle_severe_damage()
+	SHOULD_CALL_PARENT(TRUE)
+	if(organ_can_heal())
+
+		// Determine the lowest our damage can go with the current state.
+		// If we're under the min regeneration cutoff threshold, we can always heal to zero.
+		// If we don't have one set, we can only heal to the nearest threshold value.
+		var/min_heal_val = 0
+		if(!min_regeneration_cutoff_threshold || past_damage_threshold(min_regeneration_cutoff_threshold))
+			min_heal_val = (get_current_damage_threshold() * damage_threshold_value)
+
+		// We clamp/round here so that we don't accidentally heal past the threshold and
+		// cheat our way into a full second threshold of healing.
+		damage = clamp(damage-get_organ_heal_amount(), min_heal_val, absolute_max_damage)
+
+		// If we're within 1 damage of the nearest threshold (such as 0), round us down.
+		// This should be removed when float-aware modulo comes in in 515, but for now is needed
+		// as modulo only deals with integers, but organ regeneration is <= 0.3 by default.
+		if(!(damage % damage_threshold_value))
+			damage = round(damage)
 
 /obj/item/organ/internal/proc/get_organ_heal_amount()
 	if(damage >= min_broken_damage)
@@ -172,36 +184,21 @@
 
 /obj/item/organ/internal/proc/organ_can_heal()
 	// We cannot regenerate, period.
-	if(!damage_threshold_count || BP_IS_PROSTHETIC(src))
-		return FALSE
-	// We have no damage to heal, or we're dead.
-	if(!damage || damage >= max_damage || !can_recover())
-		return FALSE
-	// We're not in a body.
-	if(!owner)
-		return FALSE
-	// We're blood-starved.
-	if(owner.get_blood_oxygenation() < BLOOD_VOLUME_SAFE)
+	if(!damage_threshold_count || !damage_threshold_value || BP_IS_PROSTHETIC(src))
 		return FALSE
 	// Our owner is under stress.
-	if(GET_CHEMICAL_EFFECT(owner, CE_TOXIN) || owner.radiation || owner.is_asystole())
+	if(owner.get_blood_oxygenation() < BLOOD_VOLUME_SAFE || GET_CHEMICAL_EFFECT(owner, CE_TOXIN) || owner.radiation || owner.is_asystole())
 		return FALSE
 	// If we haven't hit the regeneration cutoff point, heal.
-	if(!min_regeneration_cutoff_threshold || !past_damage_threshold(min_regeneration_cutoff_threshold))
+	if(min_regeneration_cutoff_threshold && !past_damage_threshold(min_regeneration_cutoff_threshold))
 		return TRUE
-	// We have room to heal within this threshold, or we're not past our cutoff threshold, or we've got stabilizer in our system.
+	// We have room to heal within this threshold, and we either:
+	// - do not have a max cutoff threshold (point at which no further regeneration will occur)
+	// - are not past our max cutoff threshold
+	// - are dosed with stabilizer (ignores max cutoff threshold)
 	if((damage % damage_threshold_value) && (!max_regeneration_cutoff_threshold || !past_damage_threshold(max_regeneration_cutoff_threshold) || GET_CHEMICAL_EFFECT(owner, CE_STABLE)))
 		return TRUE
 	return FALSE
-
-/obj/item/organ/internal/proc/handle_organ_healing()
-	// Partial values can lead to <1 damage lingering.
-	if(round(damage) == 0)
-		heal_damage(damage)
-	else
-		var/heal_amt = get_organ_heal_amount()
-		if(heal_amt)
-			heal_damage(heal_amt)
 
 /obj/item/organ/internal/proc/surgical_fix(mob/user)
 	if(damage > min_broken_damage)
@@ -236,9 +233,9 @@
 /obj/item/organ/internal/on_update_icon()
 	. = ..()
 	if(BP_IS_PROSTHETIC(src) && prosthetic_icon)
-		icon_state = ((status & ORGAN_DEAD) && prosthetic_dead_icon)? 	prosthetic_dead_icon : prosthetic_icon
+		icon_state = ((status & ORGAN_DEAD) && prosthetic_dead_icon) ? prosthetic_dead_icon : prosthetic_icon
 	else
-		icon_state = ((status & ORGAN_DEAD) && dead_icon)? 				dead_icon : alive_icon
+		icon_state = ((status & ORGAN_DEAD) && dead_icon) ? dead_icon : alive_icon
 
 /obj/item/organ/internal/is_internal()
 	return TRUE

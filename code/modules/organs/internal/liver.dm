@@ -10,12 +10,12 @@
 	min_broken_damage = 45
 	max_damage = 70
 	relative_size = 60
+	// Liver recovers a lot better than most meat.
+	min_regeneration_cutoff_threshold = 2
+	max_regeneration_cutoff_threshold = 5
 
 /obj/item/organ/internal/liver/organ_can_heal()
-	// We're busy processing other stuff.
-	if(GET_CHEMICAL_EFFECT(owner, CE_ALCOHOL))
-		return FALSE
-	return ..()
+	return !GET_CHEMICAL_EFFECT(owner, CE_ALCOHOL) && ..()
 
 /obj/item/organ/internal/liver/Process()
 

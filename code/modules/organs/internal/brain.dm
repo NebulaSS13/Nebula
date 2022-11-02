@@ -86,10 +86,8 @@
 /obj/item/organ/internal/brain/can_recover()
 	return ~status & ORGAN_DEAD
 
-/obj/item/organ/internal/brain/handle_severe_damage()
-	..()
-	if(!should_announce_brain_damage)
-		return
+/obj/item/organ/internal/brain/proc/handle_severe_damage()
+	set waitfor = FALSE
 	should_announce_brain_damage = FALSE
 	to_chat(owner, "<span class = 'notice' font size='10'><B>Where am I...?</B></span>")
 	sleep(5 SECONDS)
@@ -103,7 +101,10 @@
 	alert(owner, "You have taken massive brain damage! You will not be able to remember the events leading up to your injury.", "Brain Damaged")
 
 /obj/item/organ/internal/brain/organ_can_heal()
-	return (damage && !(status & ORGAN_DEAD) && GET_CHEMICAL_EFFECT(owner, CE_BRAIN_REGEN)) || ..()
+	return (damage && GET_CHEMICAL_EFFECT(owner, CE_BRAIN_REGEN)) || ..()
+
+/obj/item/organ/internal/brain/get_organ_heal_amount()
+	return 1
 
 /obj/item/organ/internal/brain/Process()
 	if(owner)
@@ -195,8 +196,13 @@
 	else if((owner.disabilities & NERVOUS) && prob(10))
 		SET_STATUS_MAX(owner, STAT_STUTTER, 10)
 
+
 /obj/item/organ/internal/brain/handle_damage_effects()
 	..()
+
+	if(damage >= round(max_damage / 2) && should_announce_brain_damage)
+		handle_severe_damage()
+
 	if(!BP_IS_PROSTHETIC(src) && prob(1))
 		owner.custom_pain("Your head feels numb and painful.",10)
 	if(is_bruised() && prob(1) && !HAS_STATUS(owner, STAT_BLURRY))
