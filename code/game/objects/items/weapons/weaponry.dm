@@ -199,18 +199,10 @@
 		var/decl/natural_attack/use_attack = H.get_unarmed_attack()
 		if(use_attack)
 			use_attack.show_attack(user, src, user.zone_sel, use_attack.get_unarmed_damage())
+			user.setClickCooldown(use_attack.delay)
+			user.do_attack_animation(src)
 			take_damage(use_attack.get_unarmed_damage(), use_attack.get_damage_type(), use_attack.damage_flags(), user, 0, user.zone_sel)
 			return TRUE
-			
-	else if(isanimal(user))
-		var/mob/living/simple_animal/A = user
-		attackby(A.get_natural_weapon(), user)
-		return TRUE
-
-	else if(isliving(user)) //Fallback
-		var/mob/living/L = user
-		attack_generic(user, L.mob_size, "attacked")
-		return TRUE
 	return FALSE
 
 /obj/effect/energy_net/user_unbuckle_mob(mob/user)
@@ -221,7 +213,7 @@
 		SPAN_WARNING("\The [user] attempts to free themselves from \the [src]!"),
 		SPAN_WARNING("You attempt to free yourself from \the [src]!")
 		)
-	if(user.do_skilled(rand(min_free_time, max_free_time), SKILL_HAULING, src, incapacitation_flags = INCAPACITATION_DISABLED))
+	if(do_after(user,rand(min_free_time, max_free_time), src, incapacitation_flags = INCAPACITATION_DISABLED))
 		physically_destroyed()
 		return TRUE
 	else
