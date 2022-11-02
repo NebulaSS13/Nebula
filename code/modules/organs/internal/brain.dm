@@ -15,12 +15,9 @@
 	relative_size = 85
 	damage_reduction = 0
 	scale_max_damage_to_species_health = FALSE
-	damage_threshold_count = 10 // We can regenerate in 10 discrete stages of max_damage.
-
 	var/can_use_mmi = TRUE
 	var/mob/living/carbon/brain/brainmob = null
 	var/should_announce_brain_damage = TRUE
-
 	var/oxygen_reserve = 6
 
 /obj/item/organ/internal/brain/getToxLoss()
@@ -89,9 +86,10 @@
 /obj/item/organ/internal/brain/can_recover()
 	return ~status & ORGAN_DEAD
 
-
-/obj/item/organ/internal/brain/proc/handle_severe_damage()
-	set waitfor = FALSE
+/obj/item/organ/internal/brain/handle_severe_damage()
+	..()
+	if(!should_announce_brain_damage)
+		return
 	should_announce_brain_damage = FALSE
 	to_chat(owner, "<span class = 'notice' font size='10'><B>Where am I...?</B></span>")
 	sleep(5 SECONDS)
@@ -104,18 +102,16 @@
 	to_chat(owner, "<span class = 'notice' font size='10'><B>What happened...?</B></span>")
 	alert(owner, "You have taken massive brain damage! You will not be able to remember the events leading up to your injury.", "Brain Damaged")
 
-/obj/item/organ/internal/brain/check_regen_threshold()
-	return GET_CHEMICAL_EFFECT(owner, CE_BRAIN_REGEN) || ..()
+/obj/item/organ/internal/brain/organ_can_heal()
+	return (damage && !(status & ORGAN_DEAD) && GET_CHEMICAL_EFFECT(owner, CE_BRAIN_REGEN)) || ..()
 
 /obj/item/organ/internal/brain/Process()
 	if(owner)
-		if(damage >= round(max_damage / 2) && should_announce_brain_damage)
-			handle_severe_damage()
-		else if(damage < (max_damage / 4))
+
+		if(damage < (max_damage / 4))
 			should_announce_brain_damage = TRUE
 
 		handle_disabilities()
-		handle_damage_effects()
 
 		// Brain damage from low oxygenation or lack of blood.
 		if(owner.should_have_organ(BP_HEART))
@@ -199,10 +195,9 @@
 	else if((owner.disabilities & NERVOUS) && prob(10))
 		SET_STATUS_MAX(owner, STAT_STUTTER, 10)
 
-/obj/item/organ/internal/brain/proc/handle_damage_effects()
-	if(owner.stat)
-		return
-	if(damage > 0 && prob(1))
+/obj/item/organ/internal/brain/handle_damage_effects()
+	..()
+	if(!BP_IS_PROSTHETIC(src) && prob(1))
 		owner.custom_pain("Your head feels numb and painful.",10)
 	if(is_bruised() && prob(1) && !HAS_STATUS(owner, STAT_BLURRY))
 		to_chat(owner, "<span class='warning'>It becomes hard to see for some reason.</span>")

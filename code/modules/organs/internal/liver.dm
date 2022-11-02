@@ -11,6 +11,12 @@
 	max_damage = 70
 	relative_size = 60
 
+/obj/item/organ/internal/liver/organ_can_heal()
+	// We're busy processing other stuff.
+	if(GET_CHEMICAL_EFFECT(owner, CE_ALCOHOL) || GET_CHEMICAL_EFFECT(owner, CE_TOXIN) || owner?.radiation)
+		return FALSE
+	return ..()
+
 /obj/item/organ/internal/liver/Process()
 
 	..()
@@ -48,13 +54,6 @@
 
 	if(alcotox)
 		take_internal_damage(alcotox, prob(90)) // Chance to warn them
-
-	// Heal a bit if needed and we're not busy. This allows recovery from low amounts of toxloss.
-	if(!alco && !GET_CHEMICAL_EFFECT(owner, CE_TOXIN) && !owner.radiation && damage > 0)
-		if(damage < min_broken_damage)
-			heal_damage(0.2)
-		if(damage < min_bruised_damage)
-			heal_damage(0.3)
 
 	//Blood regeneration if there is some space
 	owner.regenerate_blood(0.1 + GET_CHEMICAL_EFFECT(owner, CE_BLOODRESTORE))

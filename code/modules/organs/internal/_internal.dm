@@ -5,14 +5,14 @@
 	scale_max_damage_to_species_health = TRUE
 
 	// Damage healing vars (moved here from brains)
-	/*
 	/// Number of gradiations of damage we can recover in. ie. set to 10, we can recover up to the most recent 10% damage. Leave null to disable regen.
-	var/damage_threshold_count
+	var/damage_threshold_count = 5
+	/// Max threshold before we stop regenerating without stabilizer.
+	var/max_regeneration_cutoff_threshold = 3
+	/// Min threshold at which we stop regenerating back to 0 damage.
+	var/min_regeneration_cutoff_threshold = 1
 	/// Actual amount of health constituting one gradiation.
 	var/damage_threshold_value
-	/// The last gradiation we healed to.
-	var/healed_threshold = 1
-	*/
 
 	var/tmp/alive_icon //icon to use when the organ is alive
 	var/tmp/dead_icon // Icon to use when the organ has died.
@@ -148,20 +148,60 @@
 	. = "[.][name]"
 
 /obj/item/organ/internal/Process()
+	SHOULD_CALL_PARENT(TRUE)
 	..()
-	if(damage_threshold_count)
-		handle_regeneration()
+	if(damage && !(status & ORGAN_DEAD))
+		handle_damage_effects()
+		if(organ_can_heal())
+			handle_organ_healing()
 
-/obj/item/organ/internal/proc/check_regen_threshold()
-	return (damage % damage_threshold_value) || (!past_damage_threshold(3) && GET_CHEMICAL_EFFECT(owner, CE_STABLE))
+/obj/item/organ/internal/proc/handle_severe_damage()
+	set waitfor = FALSE
+	return FALSE
 
-/obj/item/organ/internal/proc/handle_regeneration()
-	if(!damage_threshold_count || !(status & ORGAN_DEAD) || BP_IS_PROSTHETIC(src) || !owner || GET_CHEMICAL_EFFECT(owner, CE_TOXIN) || owner.is_asystole())
-		return
-	if(damage < (max_damage / 4))
-		healed_threshold = 1
-	if(damage && damage < max_damage && check_regen_threshold() && owner?.get_blood_oxygenation() >= BLOOD_VOLUME_SAFE)
-		damage = max(damage-1, 0)
+/obj/item/organ/internal/proc/handle_damage_effects()
+	if(damage >= round(max_damage / 2))
+		handle_severe_damage()
+
+/obj/item/organ/internal/proc/get_organ_heal_amount()
+	if(damage >= min_broken_damage)
+		return 0.1
+	if(damage >= min_bruised_damage)
+		return 0.2
+	return 0.3
+
+/obj/item/organ/internal/proc/organ_can_heal()
+	// We cannot regenerate, period.
+	if(!damage_threshold_count || BP_IS_PROSTHETIC(src))
+		return FALSE
+	// We have no damage to heal, or we're dead.
+	if(!damage || damage >= max_damage || !can_recover())
+		return FALSE
+	// We're not in a body.
+	if(!owner)
+		return FALSE
+	// We're blood-starved.
+	if(owner.get_blood_oxygenation() < BLOOD_VOLUME_SAFE)
+		return FALSE
+	// Our owner is under stress.
+	if(GET_CHEMICAL_EFFECT(owner, CE_TOXIN) || owner.is_asystole())
+		return FALSE
+	// If we haven't hit the regeneration cutoff point, heal.
+	if(!min_regeneration_cutoff_threshold || !past_damage_threshold(min_regeneration_cutoff_threshold))
+		return TRUE
+	// We have room to heal within this threshold, or we're not past our cutoff threshold, or we've got stabilizer in our system.
+	if((damage % damage_threshold_value) && (!max_regeneration_cutoff_threshold || !past_damage_threshold(max_regeneration_cutoff_threshold) || GET_CHEMICAL_EFFECT(owner, CE_STABLE)))
+		return TRUE
+	return FALSE
+
+/obj/item/organ/internal/proc/handle_organ_healing()
+	// Partial values can lead to <1 damage lingering.
+	if(round(damage) == 0)
+		heal_damage(damage)
+	else
+		var/heal_amt = get_organ_heal_amount()
+		if(heal_amt)
+			heal_damage(heal_amt)
 
 /obj/item/organ/internal/proc/surgical_fix(mob/user)
 	if(damage > min_broken_damage)
@@ -169,7 +209,7 @@
 		scarring = 1 - 0.3 * scarring ** 2 // Between ~15 and 30 percent loss
 		var/new_max_dam = FLOOR(scarring * max_damage)
 		if(new_max_dam < max_damage)
-			to_chat(user, "<span class='warning'>Not every part of [src] could be saved, some dead tissue had to be removed, making it more suspectable to damage in the future.</span>")
+			to_chat(user, SPAN_WARNING("Not every part of [src] could be saved; some dead tissue had to be removed, making it more susceptible to damage in the future."))
 			set_max_damage(new_max_dam)
 	heal_damage(damage)
 
