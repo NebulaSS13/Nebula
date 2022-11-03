@@ -30,25 +30,30 @@ var/global/list/random_chem_interaction_blacklist = list(
 		shuffle(effects_to_get)
 		effects_to_get.Cut(max_effect_number + 1)
 	effects_to_get += subtypesof(/decl/random_chem_effect/general_properties)
-	
+
 	var/list/decls = decls_repository.get_decls_unassociated(effects_to_get)
 	for(var/item in decls)
 		var/decl/random_chem_effect/effect = item
 		effect.prototype_process(src, temperature)
-	
+
 	var/whitelist = subtypesof(/decl/material)
 	for(var/bad_type in global.random_chem_interaction_blacklist)
 		whitelist -= typesof(bad_type)
 
+
 	var/chill_num = pick(1,2,4)
+	chilling_point = rand(-100 CELSIUS, T0C) // arbitrary values
 	chilling_products = list()
 	for(var/i in 1 to chill_num)
 		chilling_products[pick_n_take(whitelist)] = 1 / chill_num // it's possible that these form a valid reaction, but we're OK with that.
 
+	heating_point = rand(100 CELSIUS, HIGH_SMELTING_HEAT_POINT) // also arbitrary values
 	var/heat_num = pick(1,2,4)
 	heating_products = list()
 	for(var/i in 1 to heat_num)
 		heating_products[pick_n_take(whitelist)] = 1 / heat_num
+
+	color = rgb(rand(255), rand(255), rand(255))
 
 	data_initialized = TRUE
 
