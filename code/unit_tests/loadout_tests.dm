@@ -121,6 +121,7 @@
 	return TRUE
 
 /decl/loadout_option/loadout_test
+	name = "loadout test"
 	path = /obj/unit_test/loadout
 	custom_setup_proc = /obj/unit_test/loadout/proc/loadout_proc
 	custom_setup_proc_arguments = list(5)
