@@ -6,8 +6,6 @@
 	taste_mult = null
 	color = "#808080"
 	metabolism = REM
-	heating_products = null
-	heating_point = null
 	toxicity_targets_organ = null
 	toxicity = 0
 	hidden_from_codex = TRUE
@@ -164,8 +162,6 @@
 	taste_mult = 0.5
 	toxicity = 0.5 // It's not THAT poisonous.
 	color = "#664330"
-	heating_point = null
-	heating_products = null
 	metabolism = REM * 0.25
 
 /decl/material/liquid/weedkiller
@@ -208,8 +204,6 @@
 	color = "#d9ffb3"
 	toxicity = 1
 	overdose = REAGENTS_OVERDOSE
-	heating_products = null
-	heating_point = null
 	taste_mult = 1.2
 	metabolism = REM * 0.25
 
