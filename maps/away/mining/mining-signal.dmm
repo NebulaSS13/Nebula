@@ -1045,7 +1045,7 @@
 /turf/simulated/floor/tiled/white/airless,
 /area/outpost/abandoned)
 "dE" = (
-/obj/effect/decal/remains,
+/obj/item/remains,
 /obj/structure/table,
 /obj/item/shard{
 	icon_state = "shardlarge"
@@ -1620,7 +1620,7 @@
 /area/outpost/abandoned)
 "fv" = (
 /obj/effect/decal/cleanable/dirt,
-/obj/effect/decal/remains,
+/obj/item/remains,
 /turf/simulated/floor/tiled/airless,
 /area/outpost/abandoned)
 "fw" = (

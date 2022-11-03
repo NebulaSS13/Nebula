@@ -280,8 +280,6 @@
 	gas_symbol = "Cl"
 	taste_description = "bleach"
 	metabolism = REM
-	heating_point = null
-	heating_products = null
 	toxicity = 15
 
 /decl/material/gas/sulfur_dioxide

@@ -195,7 +195,7 @@
 		if(skill_level >= SKILL_ADEPT)
 			if(ratio <= 0.70)
 				dat += "<tr><td colspan='2'><span class='bad'>Patient is in Hypovolemic Shock. Transfusion highly recommended.</span></td></tr>"
-	else 
+	else
 		dat += "<tr><td><strong>Blood pressure:</strong></td><td><span class='average'>ERROR - Patient has lacks a circulatory system.</span></td></tr>"
 		dat += "<tr><td><strong>Blood volume:</strong></td><td><span class='average'>ERROR - Patient has lacks a circulatory system.</span></td></tr>"
 
@@ -266,7 +266,6 @@
 			break
 		var/row = list()
 		row += "<tr><td>[E["name"]]</td>"
-		row += "<td>"
 		var/rowdata = list()
 		if(E["brute_dam"] + E["burn_dam"] == 0)
 			rowdata += "None"
@@ -280,7 +279,7 @@
 				rowdata += "<span class='bad'>[capitalize(get_wound_severity(E["brute_ratio"], (E["limb_flags"] & ORGAN_FLAG_HEALS_OVERKILL)))] physical trauma</span>"
 			if(E["burn_dam"])
 				rowdata += "<span class='average'>[capitalize(get_wound_severity(E["burn_ratio"], (E["limb_flags"] & ORGAN_FLAG_HEALS_OVERKILL)))] burns</span>"
-		row += "</td><td>[jointext(rowdata, "<br>")]</td>"
+		row += "<td>[jointext(rowdata, "<br>")]</td>"
 
 		if(skill_level >= SKILL_ADEPT)
 			var/list/status = list()

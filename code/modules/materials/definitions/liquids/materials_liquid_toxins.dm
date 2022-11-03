@@ -6,8 +6,6 @@
 	taste_mult = null
 	color = "#808080"
 	metabolism = REM
-	heating_products = null
-	heating_point = null
 	toxicity_targets_organ = null
 	toxicity = 0
 	hidden_from_codex = TRUE
@@ -131,6 +129,7 @@
 	metabolism = REM
 	toxicity = 3
 	toxicity_targets_organ = BP_BRAIN
+	heating_point = 100 CELSIUS
 	heating_message = "melts into a liquid slurry."
 	heating_products = list(
 		/decl/material/liquid/carpotoxin = 0.2,
@@ -164,8 +163,6 @@
 	taste_mult = 0.5
 	toxicity = 0.5 // It's not THAT poisonous.
 	color = "#664330"
-	heating_point = null
-	heating_products = null
 	metabolism = REM * 0.25
 
 /decl/material/liquid/weedkiller
@@ -179,6 +176,7 @@
 		/decl/material/liquid/bromide = 0.4,
 		/decl/material/liquid/water = 0.6
 	)
+	heating_point = 100 CELSIUS
 	metabolism = REM * 0.25
 	defoliant = TRUE
 	exoplanet_rarity = MAT_RARITY_NOWHERE
@@ -208,8 +206,6 @@
 	color = "#d9ffb3"
 	toxicity = 1
 	overdose = REAGENTS_OVERDOSE
-	heating_products = null
-	heating_point = null
 	taste_mult = 1.2
 	metabolism = REM * 0.25
 
