@@ -3,8 +3,8 @@
 	uid = "gas_oxygen"
 	lore_text = "An ubiquitous oxidizing agent."
 	flags = MAT_FLAG_FUSION_FUEL
-	gas_specific_heat = 20	
-	molar_mass = 0.032	
+	gas_specific_heat = 20
+	molar_mass = 0.032
 	latent_heat = 213
 	boiling_point = -183 CELSIUS
 	gas_flags = XGM_GAS_OXIDIZER
@@ -36,10 +36,10 @@
 	name = "carbon dioxide"
 	uid = "gas_carbon_dioxide"
 	lore_text = "A byproduct of respiration."
-	gas_specific_heat = 30	
+	gas_specific_heat = 30
 	molar_mass = 0.044
 	latent_heat = 380
-	boiling_point = -78 CELSIUS	
+	boiling_point = -78 CELSIUS
 	gas_symbol_html = "CO<sub>2</sub>"
 	gas_symbol = "CO2"
 
@@ -50,7 +50,7 @@
 	gas_specific_heat = 30
 	molar_mass = 0.028
 	latent_heat = 216
-	boiling_point = -192 CELSIUS	
+	boiling_point = -192 CELSIUS
 	gas_symbol_html = "CO"
 	gas_symbol = "CO"
 	taste_description = "stale air"
@@ -90,10 +90,10 @@
 	name = "methyl bromide"
 	uid = "gas_methyl_bromide"
 	lore_text = "A once-popular fumigant and weedkiller."
-	gas_specific_heat = 42.59 
+	gas_specific_heat = 42.59
 	molar_mass = 0.095
 	latent_heat = 253
-	boiling_point = 4 CELSIUS		  
+	boiling_point = 4 CELSIUS
 	gas_symbol_html = "CH<sub>3</sub>Br"
 	gas_symbol = "CH3Br"
 	taste_description = "pestkiller"
@@ -119,10 +119,10 @@
 	name = "sleeping agent"
 	uid = "gas_sleeping_agent"
 	lore_text = "A mild sedative. Also known as laughing gas."
-	gas_specific_heat = 40	
+	gas_specific_heat = 40
 	molar_mass = 0.044
 	latent_heat = 376
-	boiling_point = -90 CELSIUS	
+	boiling_point = -90 CELSIUS
 	gas_tile_overlay = "sleeping_agent"
 	gas_overlay_limit = 1
 	gas_flags = XGM_GAS_OXIDIZER //N2O is a powerful oxidizer
@@ -149,7 +149,7 @@
 	name = "nitrogen"
 	uid = "gas_nitrogen"
 	lore_text = "An ubiquitous noble gas."
-	gas_specific_heat = 20	
+	gas_specific_heat = 20
 	molar_mass = 0.028
 	latent_heat = 199
 	boiling_point = -195 CELSIUS
@@ -183,7 +183,7 @@
 /decl/material/gas/methane
 	name = "methane"
 	uid = "gas_methane"
-	gas_specific_heat = 30	
+	gas_specific_heat = 30
 	molar_mass = 0.016
 	latent_heat = 510
 	boiling_point = -162 CELSIUS
@@ -280,8 +280,6 @@
 	gas_symbol = "Cl"
 	taste_description = "bleach"
 	metabolism = REM
-	heating_point = null
-	heating_products = null
 	toxicity = 15
 
 /decl/material/gas/sulfur_dioxide
