@@ -58,6 +58,30 @@
 		name_suffix = uppertext(copytext(name, 1, 1))
 	build_denominations()
 
+/decl/currency/validate()
+	. = ..()
+	if(absolute_value < 1)
+		. += "Absolute currency value is less than 1."
+	if(!name)
+		. += "No name set."
+	if(!name_prefix && !name_suffix)
+		. += "No name modifiers set."
+	if(!name_singular)
+		. += "No singular name set."
+
+	var/list/coinage_states = icon_states(icon)
+	for(var/datum/denomination/denomination in denominations)
+		if(!istext(denomination.name))
+			. += "Non-text name found for '[denomination.type]'."
+		else if(!(denomination.state in coinage_states))
+			. += "State '[denomination.state]' not found in icon file for '[denomination.type]'."
+		else if(denomination.mark && !(denomination.mark in coinage_states))
+			. += "Mark state '[denomination.mark]' not found in icon file for '[denomination.type]'."
+		else if(!isnum(denomination.marked_value))
+			. += "Non-numerical denomination marked value found for '[denomination]'."
+		else if(!denomination.overlay)
+			. += "Null overlay found for '[denomination]'."
+
 /decl/currency/proc/format_value(var/amt)
 	. = "[name_prefix][FLOOR(amt / absolute_value)][name_suffix]"
 

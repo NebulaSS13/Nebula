@@ -8,7 +8,7 @@
 	shock_level = 40
 	delicate = 1
 	surgery_candidate_flags = SURGERY_NO_ROBOTIC | SURGERY_NEEDS_ENCASEMENT
-	surgery_step_category = /decl/surgery_step/internal
+	abstract_type = /decl/surgery_step/internal
 
 //////////////////////////////////////////////////////////////////
 //	Organ mending surgery step

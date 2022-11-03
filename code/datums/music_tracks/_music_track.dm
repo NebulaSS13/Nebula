@@ -11,6 +11,21 @@
 	. = ..()
 	license = GET_DECL(license)
 
+/decl/music_track/validate()
+	. = ..()
+	if(!song)
+		. += "Missing song"
+	if(!title)
+		. += "Missing title"
+	if(istype(license, /decl/license))
+		if(license.attribution_mandatory)
+			if(!artist || cmptext(artist, "unknown"))
+				. += "Invalid artist"
+			if(!url || cmptext(url, "unknown"))
+				. += "Invalid url"
+	else
+		. += "Invalid license"
+
 /decl/music_track/proc/play_to(var/listener)
 	to_chat(listener, "<span class='good'>Now Playing:</span>")
 	to_chat(listener, "<span class='good'>[title][artist ? " by [artist]" : ""][album ? " ([album])" : ""]</span>")

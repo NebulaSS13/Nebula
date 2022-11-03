@@ -8,7 +8,7 @@
 //	generic surgery step datum
 //////////////////////////////////////////////////////////////////
 /decl/surgery_step/generic
-	surgery_step_category = /decl/surgery_step/generic
+	abstract_type = /decl/surgery_step/generic
 	can_infect = 1
 	shock_level = 10
 	surgery_candidate_flags = SURGERY_NO_ROBOTIC | SURGERY_NO_CRYSTAL

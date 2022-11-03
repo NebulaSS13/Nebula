@@ -391,6 +391,9 @@ INITIALIZE_IMMEDIATE(/obj/effect/gas_overlay)
 			for(var/i = 0 to 7)
 				if(!check_state_in_icon("[i]", icon_reinf))
 					. += "'[icon_reinf]' - missing directional reinf icon state '[i]'"
+
+	if(length(color) != 7)
+		. += "invalid color (not #RRGGBB)"
 #undef FALSEWALL_STATE
 
 // Return the matter comprising this material.

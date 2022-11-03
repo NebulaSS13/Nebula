@@ -1,7 +1,7 @@
 /datum/unit_test/chemistry
 	name = "CHEMISTRY: Reagent Template"
 	template = /datum/unit_test/chemistry
-	
+
 	var/container_volume = 45
 	var/donor_type = /obj/item
 	var/recipient_type = /obj/item
@@ -124,24 +124,6 @@
 	. = ..()
 	if(!.)
 		from.reagents.trans_to_mob(target, container_volume * 0.5)
-
-/datum/unit_test/reagent_colors_test
-	name = "CHEMISTRY: Reagents must have valid colors without alpha in color value"
-
-/datum/unit_test/reagent_colors_test/start_test()
-	var/list/bad_reagents = list()
-
-	for(var/T in decls_repository.get_decl_paths_of_subtype(/decl/material))
-		var/decl/material/R = T
-		if(length(initial(R.color)) != 7)
-			bad_reagents += "[T] ([initial(R.color)])"
-
-	if(length(bad_reagents))
-		fail("Reagents with invalid colors found: [english_list(bad_reagents)]")
-	else
-		pass("All reagents have valid colors.")
-
-	return 1
 
 /datum/unit_test/chem_recipes_shall_not_overlap
 	name = "CHEMISTRY: Chem recipes shall not be subsets of other chem recipes for other reagents"

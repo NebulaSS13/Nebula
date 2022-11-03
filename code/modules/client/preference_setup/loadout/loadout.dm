@@ -379,6 +379,15 @@ var/global/list/gear_datums = list()
 		else
 			gear_tweaks += new tweak
 
+/decl/loadout_option/validate()
+	. = ..()
+	if(!name)
+		. += "missing display name"
+	else if(isnull(cost) || cost < 0)
+		. += "invalid cost"
+	else if(!path)
+		. += "missing path definition"
+
 /decl/loadout_option/proc/get_gear_tweak_options()
 	. = list()
 
