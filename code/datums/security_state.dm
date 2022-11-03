@@ -152,6 +152,8 @@
 
 	var/datum/alarm_appearance/alarm_appearance
 
+	abstract_type = /decl/security_level
+
 /decl/security_level/Initialize()
 	. = ..()
 	if(ispath(alarm_appearance, /datum/alarm_appearance))
@@ -190,7 +192,7 @@
 	all_security_levels = list(/decl/security_level/default/code_green, /decl/security_level/default/code_blue, /decl/security_level/default/code_red, /decl/security_level/default/code_delta)
 
 /decl/security_level/default
-	abstract_type = /decl/security_level
+	abstract_type = /decl/security_level/default
 	icon = 'icons/misc/security_state.dmi'
 
 	var/static/datum/announcement/priority/security/security_announcement_up = new(do_log = 0, do_newscast = 1, new_sound = sound('sound/misc/notice1.ogg'))

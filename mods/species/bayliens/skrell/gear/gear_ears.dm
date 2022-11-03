@@ -44,6 +44,7 @@
 /decl/loadout_option/ears/skrell
 	name = "skrell headtail accessory selection"
 	category = /decl/loadout_category/ears
+	abstract_type = /decl/loadout_option/ears/skrell
 	whitelisted = list(SPECIES_SKRELL)
 	path = /obj/item/clothing/ears/skrell
 	flags = GEAR_HAS_COLOR_SELECTION | GEAR_HAS_SUBTYPE_SELECTION

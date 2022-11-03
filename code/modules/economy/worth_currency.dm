@@ -49,6 +49,7 @@
 	var/absolute_value = 1 // Divisor for cash pile worth. Should never be <1 or non-integer (think of it like cents).
 	var/list/denominations = list()
 	var/list/denominations_by_value = list()
+	abstract_type = /decl/currency
 
 /decl/currency/Initialize()
 	. = ..()

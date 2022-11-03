@@ -346,6 +346,8 @@ var/global/list/gear_datums = list()
 	var/list/faction_restricted // List of types of cultural datums that will allow this loadout option.
 	var/whitelisted             // Species name to check the whitelist for.
 
+	abstract_type = /decl/loadout_option
+
 /decl/loadout_option/Initialize()
 	. = ..()
 
