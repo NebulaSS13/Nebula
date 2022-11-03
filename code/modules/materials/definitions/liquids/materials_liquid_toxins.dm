@@ -129,10 +129,11 @@
 	metabolism = REM
 	toxicity = 3
 	toxicity_targets_organ = BP_BRAIN
+	heating_point = 100 CELSIUS
 	heating_message = "melts into a liquid slurry."
 	heating_products = list(
-		/decl/material/liquid/carpotoxin = 0.2, 
-		/decl/material/liquid/sedatives = 0.4, 
+		/decl/material/liquid/carpotoxin = 0.2,
+		/decl/material/liquid/sedatives = 0.4,
 		/decl/material/solid/metal/copper = 0.4
 	)
 	taste_mult = 1.2
@@ -172,9 +173,10 @@
 	color = "#49002e"
 	toxicity = 4
 	heating_products = list(
-		/decl/material/liquid/bromide = 0.4, 
+		/decl/material/liquid/bromide = 0.4,
 		/decl/material/liquid/water = 0.6
 	)
+	heating_point = 100 CELSIUS
 	metabolism = REM * 0.25
 	defoliant = TRUE
 	exoplanet_rarity = MAT_RARITY_NOWHERE
@@ -188,7 +190,7 @@
 	toxicity = 4
 	heating_products = list(
 		/decl/material/liquid/acetone = 0.4,
-		/decl/material/solid/carbon = 0.4, 
+		/decl/material/solid/carbon = 0.4,
 		/decl/material/liquid/ethanol = 0.2
 	)
 	heating_point = 145 CELSIUS
