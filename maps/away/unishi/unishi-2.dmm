@@ -2231,7 +2231,7 @@
 /turf/simulated/floor,
 /area/unishi/smresearch)
 "gg" = (
-/obj/effect/decal/remains,
+/obj/item/remains,
 /obj/item/clothing/under/chief_engineer,
 /obj/random/shoes,
 /obj/item/clothing/suit/storage/toggle/labcoat/science{
@@ -2305,7 +2305,7 @@
 /area/unishi/smresearch)
 "gq" = (
 /obj/machinery/atmospherics/pipe/manifold/visible/yellow,
-/obj/effect/decal/remains,
+/obj/item/remains,
 /turf/simulated/floor/tiled/techfloor,
 /area/unishi/smresearch)
 "gr" = (
@@ -2363,7 +2363,7 @@
 /turf/simulated/floor,
 /area/unishi/smresearch)
 "gy" = (
-/obj/effect/decal/remains,
+/obj/item/remains,
 /obj/effect/decal/cleanable/blood,
 /obj/machinery/atmospherics/unary/vent_scrubber/on{
 	dir = 4
@@ -2514,7 +2514,7 @@
 /area/unishi/smresearch)
 "gM" = (
 /obj/effect/decal/cleanable/blood,
-/obj/effect/decal/remains,
+/obj/item/remains,
 /obj/random/shoes,
 /obj/item/clothing/under/pj/blue,
 /turf/simulated/floor/tiled/techfloor,
@@ -2675,7 +2675,7 @@
 /area/space)
 "hh" = (
 /obj/effect/decal/cleanable/blood,
-/obj/effect/decal/remains,
+/obj/item/remains,
 /obj/item/clothing/suit/storage/toggle/labcoat/science{
 	name = "\improper labcoat"
 	},
@@ -2753,7 +2753,7 @@
 	name = "Biohazard Shutter";
 	opacity = 0
 	},
-/obj/effect/decal/remains,
+/obj/item/remains,
 /obj/random/shoes,
 /turf/simulated/floor,
 /area/unishi/smresearch)
@@ -2768,7 +2768,7 @@
 /area/unishi/smresearch)
 "hs" = (
 /obj/machinery/atmospherics/pipe/simple/visible/green,
-/obj/effect/decal/remains,
+/obj/item/remains,
 /obj/random/shoes,
 /obj/machinery/light/small,
 /obj/item/remains,
