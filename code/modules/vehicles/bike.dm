@@ -204,9 +204,9 @@
 
 
 /obj/vehicle/bike/Destroy()
-	qdel(trail)
-	qdel(engine)
-	..()
+	QDEL_NULL(trail)
+	QDEL_NULL(engine)
+	return ..()
 
 
 /obj/vehicle/bike/thermal

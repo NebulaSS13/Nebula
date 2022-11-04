@@ -46,12 +46,21 @@
 	if(!plural_name)
 		plural_name = "[singular_name]s"
 
-/obj/item/stack/Destroy()
-	if(uses_charge)
-		return 1
+/obj/item/stack/Destroy(force)
+	if(uses_charge && !force)
+		return QDEL_HINT_LETMELIVE // This is a sin.
 	if (src && usr && usr.machine == src)
 		close_browser(usr, "window=stack")
 	return ..()
+
+/obj/item/stack/proc/delete_if_empty()
+	if (uses_charge)
+		return FALSE
+	var/real_amount = get_amount()
+	if (real_amount <= 0)
+		qdel(src)
+		return TRUE
+	return FALSE
 
 /obj/item/stack/examine(mob/user, distance)
 	. = ..()
@@ -188,7 +197,7 @@
 		list_recipes(usr, text2num(href_list["sublist"]))
 
 	if (href_list["make"])
-		if (src.get_amount() < 1) qdel(src) //Never should happen
+		delete_if_empty() //Never should happen
 
 		var/list/recipes_list = get_recipes()
 		if (href_list["sublist"])
@@ -232,9 +241,7 @@
 		return FALSE
 	if(!uses_charge)
 		amount -= used
-		if (amount <= 0)
-			qdel(src) //should be safe to qdel immediately since if someone is still using this stack it will persist for a little while longer
-		else
+		if(!delete_if_empty())
 			update_icon()
 			update_matter()
 		return TRUE

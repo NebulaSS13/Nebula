@@ -482,7 +482,7 @@
 	var/list/neighoursByDirection = list()
 
 /atom/movable/graph_test/Initialize()
-	..()
+	. = ..()
 	node = new/datum/node/physical/test/("Node", src)
 	new/datum/graph(list(node), list())
 
