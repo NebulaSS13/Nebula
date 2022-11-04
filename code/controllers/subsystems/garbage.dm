@@ -124,7 +124,8 @@ SUBSYSTEM_DEF(garbage)
 		count = 0 //so if we runtime on the Cut, we don't try again.
 		tobequeued.Cut(1,c+1)
 
-	for (var/ref in tobequeued)
+	for(var/refidx in 1 to length(tobequeued))
+		var/ref = tobequeued[refidx]
 		count++
 		Queue(ref, GC_QUEUE_PREQUEUE+1)
 		if (MC_TICK_CHECK)
@@ -149,7 +150,10 @@ SUBSYSTEM_DEF(garbage)
 
 	lastlevel = level
 
-	for (var/refID in queue)
+	//We do this rather then for(var/refID in queue) because that sort of for loop copies the whole list.
+	//Normally this isn't expensive, but the gc queue can grow to 40k items, and that gets costly/causes overrun.
+	for (var/refidx in 1 to length(queue))
+		var/refID = queue[refidx]
 		if (!refID)
 			count++
 			if (MC_TICK_CHECK)
