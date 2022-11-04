@@ -38,6 +38,12 @@
 /obj/item/chems/food/standard_pour_into(mob/user, atom/target)
 	return FALSE
 
+/obj/item/chems/food/update_container_name()
+	return FALSE
+
+/obj/item/chems/food/update_container_desc()
+	return FALSE
+
 /obj/item/chems/food/Initialize()
 	.=..()
 	amount_per_transfer_from_this = bitesize
