@@ -69,9 +69,6 @@ var/global/list/aspect_categories = list() // Containers for ease of printing da
 		return FALSE
 	return TRUE
 
-/decl/aspect/dd_SortValue()
-	return sort_value
-
 /decl/aspect/proc/apply(var/mob/living/carbon/human/holder)
 	return (istype(holder))
 
@@ -157,7 +154,7 @@ var/global/list/aspect_categories = list() // Containers for ease of printing da
 	var/do_update = FALSE
 	if(LAZYLEN(personal_aspects))
 		if(need_aspect_sort)
-			personal_aspects = dd_sortedObjectList(personal_aspects)
+			personal_aspects = sort_list(personal_aspects, /proc/cmp_aspect_asc)
 			need_aspect_sort = FALSE
 		for(var/decl/aspect/A as anything in personal_aspects)
 			if(!aspect_types || (aspect_types & A.aspect_flags))

@@ -75,7 +75,7 @@
 	handle_default_votes()
 	result = choices.Copy()
 	shuffle(result) //This looks idiotic, but it will randomize the order in which winners are picked in the event of ties.
-	sortTim(result, /proc/cmp_numeric_dsc, 1)
+	sort_list(result, /proc/cmp_numeric_dsc, 1)
 	if(length(result) > results_length)
 		result.Cut(results_length + 1, 0)
 

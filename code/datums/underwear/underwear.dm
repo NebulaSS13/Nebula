@@ -47,11 +47,6 @@
 	if(has_color)
 		tweaks += gear_tweak_free_color_choice()
 
-/datum/category_item/underwear/dd_SortValue()
-	if(always_last)
-		return "~"+name
-	return name
-
 /datum/category_item/underwear/proc/is_default(var/gender)
 	return is_default
 

@@ -528,7 +528,7 @@ SUBSYSTEM_DEF(zcopy)
 				D.plane = T.shadower.plane
 			found_oo += D
 
-	sortTim(found_oo, /proc/cmp_planelayer)
+	sort_list(found_oo, /proc/cmp_planelayer)
 
 	var/list/atoms_list_list = list()
 	for (var/thing in found_oo)

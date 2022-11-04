@@ -73,7 +73,7 @@
 			CRASH("Expected an /obj/item path, was [log_info_line(selection_type)]")
 		var/path_name_san = replacetext(path_name, "\improper", "")
 		valid_paths_san[path_name_san] = selection_type
-	src.valid_paths = sortTim(valid_paths, /proc/cmp_text_asc)
+	src.valid_paths = sort_list(valid_paths, /proc/cmp_text_asc)
 
 /datum/gear_tweak/path/type/New(var/type_path)
 	..(atomtype2nameassoclist(type_path))

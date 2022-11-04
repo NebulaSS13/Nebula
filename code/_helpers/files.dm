@@ -7,7 +7,7 @@
 	var/path = root
 
 	for(var/i=0, i<max_iterations, i++)
-		var/list/choices = sortTim(flist(path), /proc/cmp_text_asc)
+		var/list/choices = sort_list(flist(path), /proc/cmp_text_asc)
 		if(path != root)
 			choices.Insert(1,"/")
 

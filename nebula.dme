@@ -142,7 +142,7 @@
 #include "code\_helpers\visual_filters.dm"
 #include "code\_helpers\washing.dm"
 #include "code\_helpers\sorts\__main.dm"
-#include "code\_helpers\sorts\TimSort.dm"
+#include "code\_helpers\sorts\list_sort.dm"
 #include "code\_onclick\adjacent.dm"
 #include "code\_onclick\ai.dm"
 #include "code\_onclick\click.dm"

@@ -20,7 +20,7 @@
 
 /atom/movable/proc/update_filters()
 	filters = null
-	filter_data = sortTim(filter_data, /proc/cmp_filter_data_priority, TRUE)
+	filter_data = sort_list(filter_data, /proc/cmp_filter_data_priority, TRUE)
 	for(var/f in filter_data)
 		var/list/data = filter_data[f]
 		var/list/arguments = data.Copy()
@@ -49,9 +49,9 @@
 	var/list/monkeypatched_params = params.Copy()
 	monkeypatched_params.Insert(1, null)
 	var/index = filter_data.Find(filter_name)
-	
+
 	// First, animate ourselves.
-	monkeypatched_params[1] = filters[index]   
+	monkeypatched_params[1] = filters[index]
 	animate(arglist(monkeypatched_params))
 
 	// If we're being copied by Z-Mimic, update mimics too.

@@ -52,13 +52,13 @@ SUBSYSTEM_DEF(materials)
 			LAZYADD(cocktails_by_primary_ingredient[reagent], cocktail)
 	// Sort to avoid supersets/subsets being unreachable.
 	for(var/reagent in cocktails_by_primary_ingredient)
-		sortTim(cocktails_by_primary_ingredient[reagent], /proc/cmp_cocktail_des)
+		sort_list(cocktails_by_primary_ingredient[reagent], /proc/cmp_cocktail_des)
 
 	// Various other material functions.
 	build_material_lists()       // Build core material lists.
 	build_fusion_reaction_list() // Build fusion reaction tree.
-	materials = sortTim(SSmaterials.materials, /proc/cmp_name_asc)
-	materials_by_name = sortTim(SSmaterials.materials_by_name, /proc/cmp_name_or_type_asc, TRUE)
+	materials = sort_list(SSmaterials.materials, /proc/cmp_name_asc)
+	materials_by_name = sort_list(SSmaterials.materials_by_name, /proc/cmp_name_or_type_asc, TRUE)
 
 	var/alpha_inc = 256 / DAMAGE_OVERLAY_COUNT
 	for(var/i = 1; i <= DAMAGE_OVERLAY_COUNT; i++)

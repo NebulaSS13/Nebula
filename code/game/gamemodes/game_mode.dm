@@ -212,7 +212,7 @@ var/global/list/additional_antag_types = list()
 			all_candidates += antag.candidates
 			antag_templates_by_initial_spawn_req[antag] = antag.initial_spawn_req
 
-		sortTim(antag_templates_by_initial_spawn_req, /proc/cmp_numeric_asc, TRUE)
+		sort_list(antag_templates_by_initial_spawn_req, /proc/cmp_numeric_asc, TRUE)
 		antag_templates = list()
 		for(var/template in antag_templates_by_initial_spawn_req)
 			antag_templates += template
@@ -222,7 +222,7 @@ var/global/list/additional_antag_types = list()
 			valid_templates_per_candidate[candidate]++
 
 		valid_templates_per_candidate = shuffle(valid_templates_per_candidate) // shuffle before sorting so that candidates with the same number of templates will be in random order
-		sortTim(valid_templates_per_candidate, /proc/cmp_numeric_asc, TRUE)
+		sort_list(valid_templates_per_candidate, /proc/cmp_numeric_asc, TRUE)
 		var/list/sorted_candidates = list()
 		for(var/sorted_candidate in valid_templates_per_candidate)
 			sorted_candidates += sorted_candidate

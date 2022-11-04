@@ -10,7 +10,7 @@
 	material = /decl/material/solid/plastic
 	matter = list(
 		/decl/material/solid/metal/copper    = MATTER_AMOUNT_REINFORCEMENT,
-		/decl/material/solid/silicon         = MATTER_AMOUNT_REINFORCEMENT, 
+		/decl/material/solid/silicon         = MATTER_AMOUNT_REINFORCEMENT,
 		/decl/material/solid/metal/steel     = MATTER_AMOUNT_REINFORCEMENT,
 		/decl/material/solid/metal/plutonium = MATTER_AMOUNT_TRACE,
 	)
@@ -29,7 +29,7 @@
 	suit_sensor_jammer_methods_by_type = list()
 	for(var/jammer_method_type in subtypesof(/suit_sensor_jammer_method))
 		var/new_method = new jammer_method_type(src, /obj/item/suit_sensor_jammer/proc/may_process_crew_data)
-		dd_insertObjectList(suit_sensor_jammer_methods, new_method)
+		insert_sorted(suit_sensor_jammer_methods, new_method, /proc/cmp_name_asc)
 		suit_sensor_jammer_methods_by_type[jammer_method_type] = new_method
 	jammer_method = suit_sensor_jammer_methods[1]
 	update_icon()

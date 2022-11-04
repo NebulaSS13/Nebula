@@ -194,7 +194,7 @@
 
 	if(field_cohesion == 0)
 		owned_core.Shutdown(force_rupture=1)
-		
+
 	if(percent_unstable > 0.5 && prob(percent_unstable*100))
 		if(plasma_temperature < FUSION_RUPTURE_THRESHOLD)
 			visible_message("<span class='danger'>\The [src] ripples uneasily, like a disturbed pond.</span>")
@@ -400,7 +400,7 @@
 				continue
 
 			/// Sort based on reaction priority to avoid deut-deut eating all the deut before deut-trit can run etc.
-			sortTim(possible_reactions, /proc/cmp_fusion_reaction_des)
+			sort_list(possible_reactions, /proc/cmp_fusion_reaction_des)
 
 			//split up the reacting atoms between the possible reactions
 			while(possible_reactions.len)

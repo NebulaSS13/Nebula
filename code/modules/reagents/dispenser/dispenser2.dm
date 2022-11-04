@@ -77,7 +77,7 @@
 
 	C.forceMove(src)
 	cartridges[lab.labels[1]] = C
-	cartridges = sortTim(cartridges, /proc/cmp_text_asc)
+	cartridges = sort_list(cartridges, /proc/cmp_text_asc)
 	SSnano.update_uis(src)
 	return TRUE
 

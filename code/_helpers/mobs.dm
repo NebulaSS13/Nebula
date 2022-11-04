@@ -20,7 +20,7 @@
 /proc/random_name(gender, species)
 	if(species)
 		var/decl/species/current_species = get_species_by_key(species)
-		if(current_species) 
+		if(current_species)
 			var/decl/cultural_info/current_culture = GET_DECL(current_species.default_cultural_info[TAG_CULTURE])
 			if(current_culture)
 				return current_culture.get_random_name(null, gender)
@@ -319,5 +319,5 @@ var/global/list/bodypart_coverage_cache = list()
 	. = global.bodypart_coverage_cache[key]
 
 /proc/get_sorted_mob_list()
-	. = sortTim(SSmobs.mob_list.Copy(), /proc/cmp_name_asc)
-	. = sortTim(., /proc/cmp_mob_sortvalue_asc)
+	. = sort_list(SSmobs.mob_list.Copy(), /proc/cmp_name_asc)
+	. = sort_list(., /proc/cmp_mob_sortvalue_asc)

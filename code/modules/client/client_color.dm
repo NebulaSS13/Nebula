@@ -27,7 +27,7 @@
 	if(!has_client_color(color_type))
 		var/datum/client_color/CC = new color_type()
 		client_colors |= CC
-		sortTim(client_colors, /proc/cmp_clientcolor_priority)
+		sort_list(client_colors, /proc/cmp_clientcolor_priority)
 		update_client_color()
 
 

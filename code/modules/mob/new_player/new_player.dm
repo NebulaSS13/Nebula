@@ -298,7 +298,7 @@ INITIALIZE_IMMEDIATE(/mob/new_player)
 
 	var/added_job = FALSE
 	if(length(job_summaries))
-		job_summaries = sortTim(job_summaries, /proc/cmp_departments_dsc, FALSE)
+		job_summaries = sort_list(job_summaries, /proc/cmp_departments_dsc, FALSE)
 		for(var/job_category in job_summaries)
 			if(length(job_summaries[job_category]))
 				var/decl/department/job_dept = job_category

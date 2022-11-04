@@ -126,7 +126,7 @@
 	for(var/obj/machinery/power/smes/buildable/SMES in SSmachines.machinery)
 		if(can_connect_to(SMES))
 			known_SMESs.Add(SMES)
-	known_SMESs = sortTim(known_SMESs, /proc/cmp_rcon_tag_asc)
+	known_SMESs = sort_list(known_SMESs, /proc/cmp_rcon_tag_asc)
 
 	known_breakers = new /list()
 	for(var/obj/machinery/power/breakerbox/breaker in SSmachines.machinery)
@@ -140,7 +140,7 @@
 
 	if(!ARE_Z_CONNECTED(network.get_router_z(), get_z(M)))
 		return FALSE
-	
+
 	if(istype(M, /obj/machinery/power/smes))
 		var/obj/machinery/power/smes/buildable/SMES = M
 		return SMES.RCon_tag && SMES.RCon_tag != "NO_TAG" && SMES.RCon

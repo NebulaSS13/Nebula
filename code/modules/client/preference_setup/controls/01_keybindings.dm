@@ -213,7 +213,7 @@
 				if(!length(pref.key_bindings[old_key]))
 					pref.key_bindings -= old_key
 			pref.key_bindings[full_key] += list(kb_name)
-			pref.key_bindings[full_key] = sortTim(pref.key_bindings[full_key], /proc/cmp_text_asc)
+			pref.key_bindings[full_key] = sort_list(pref.key_bindings[full_key], /proc/cmp_text_asc)
 
 			show_browser(user, null, "window=capturekeypress")
 			user.client.set_macros()
@@ -238,7 +238,7 @@
 			var/datum/keybinding/kb = global.keybindings_by_name[kb_name]
 			for(var/key in kb.hotkey_keys)
 				pref.key_bindings[key] += list(kb_name)
-				pref.key_bindings[key] = sortTim(pref.key_bindings[key], /proc/cmp_text_asc)
+				pref.key_bindings[key] = sort_list(pref.key_bindings[key], /proc/cmp_text_asc)
 			user.client.set_macros()
 			return TOPIC_REFRESH
 

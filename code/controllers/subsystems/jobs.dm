@@ -26,7 +26,7 @@ SUBSYSTEM_DEF(jobs)
 
 /datum/controller/subsystem/jobs/proc/get_department_by_type(var/dept_ref)
 	if(!length(departments_by_type))
-		departments_by_type = sortTim(decls_repository.get_decls_of_type(/decl/department), /proc/cmp_departments_dsc, TRUE)
+		departments_by_type = sort_list(decls_repository.get_decls_of_type(/decl/department), /proc/cmp_departments_dsc, TRUE)
 	. = departments_by_type[dept_ref]
 
 /datum/controller/subsystem/jobs/Initialize(timeofday)
@@ -85,7 +85,7 @@ SUBSYSTEM_DEF(jobs)
 
 	// Update title and path tracking, submap list, etc.
 	// Populate/set up map job lists.
-	primary_job_datums = sortTim(primary_job_datums, /proc/cmp_job_desc)
+	primary_job_datums = sort_list(primary_job_datums, /proc/cmp_job_desc)
 	job_lists_by_map_name = list("[global.using_map.full_name]" = list("jobs" = primary_job_datums, "default_to_hidden" = FALSE))
 
 	for(var/atype in submap_archetypes)
@@ -96,7 +96,7 @@ SUBSYSTEM_DEF(jobs)
 			if(job)
 				LAZYADD(submap_job_datums, job)
 		if(LAZYLEN(submap_job_datums))
-			submap_job_datums = sortTim(submap_job_datums, /proc/cmp_job_desc)
+			submap_job_datums = sort_list(submap_job_datums, /proc/cmp_job_desc)
 			job_lists_by_map_name[arch.descriptor] = list("jobs" = submap_job_datums, "default_to_hidden" = TRUE)
 
 	// Update global map blacklists and whitelists.

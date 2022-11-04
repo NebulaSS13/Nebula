@@ -258,7 +258,7 @@ var/global/floorIsLava = 0
 		dat += "No notes found."
 	else
 		dat += "<table>"
-		note_keys = sortTim(note_keys, /proc/cmp_text_asc)
+		note_keys = sort_list(note_keys, /proc/cmp_text_asc)
 		for(var/t in note_keys)
 			dat += "<tr><td><a href='?src=\ref[src];notes=show;ckey=[t]'>[t]</a></td></tr>"
 		dat += "</table><br>"

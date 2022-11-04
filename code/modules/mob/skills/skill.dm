@@ -38,9 +38,6 @@ var/global/list/skills = list()
 		for(var/decl/hierarchy/skill/C in children)
 			global.skills |= C.get_descendents()
 
-/decl/hierarchy/skill/dd_SortValue()
-	return sort_priority
-
 /decl/hierarchy/skill/organizational
 	name = "Organizational"
 	sort_priority = 1

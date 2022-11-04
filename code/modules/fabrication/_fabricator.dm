@@ -147,7 +147,7 @@
 				design_cache.Remove(R)
 				continue
 
-	design_cache = sortTim(design_cache, /proc/cmp_name_asc)
+	design_cache = sort_list(design_cache, /proc/cmp_name_asc)
 	ui_nb_categories = LAZYLEN(unique_categories)
 
 	if(length(add_mat_to_storage_cap))

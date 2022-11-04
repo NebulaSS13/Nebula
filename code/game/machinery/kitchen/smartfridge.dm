@@ -279,7 +279,7 @@
 			return
 
 	var/datum/stored_items/I = new/datum/stored_items(src, O.type, O.name)
-	dd_insertObjectList(item_records, I)
+	insert_sorted(item_records, I, /proc/cmp_stored_items_asc)
 	stock(I, O)
 
 /obj/machinery/smartfridge/proc/stock(var/datum/stored_items/I, var/obj/item/O)

@@ -134,6 +134,3 @@
 
 /decl/emote/proc/can_target()
 	return (emote_message_1p_target || emote_message_3p_target)
-
-/decl/emote/dd_SortValue()
-	return key

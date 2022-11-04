@@ -145,7 +145,7 @@ var/global/list/view_variables_no_assoc = list("verbs", "contents","screen","ima
 /proc/make_view_variables_var_list(datum/D)
 	. = list()
 	var/list/variables = D.VV_get_variables()
-	variables = sortTim(variables, /proc/cmp_text_asc)
+	variables = sort_list(variables, /proc/cmp_text_asc)
 	for(var/x in variables)
 		. += make_view_variables_var_entry(D, x, D.get_variable_value(x))
 	return jointext(., null)

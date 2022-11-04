@@ -59,7 +59,7 @@ var/global/list/outfits_decls_by_type_
 	backpack_overrides = backpack_overrides || list()
 	if(!INSTANCE_IS_ABSTRACT(src))
 		outfits_decls_by_type_[type] = src
-		dd_insertObjectList(outfits_decls_, src)
+		insert_sorted(outfits_decls_, src, /proc/cmp_name_asc)
 
 /decl/hierarchy/outfit/proc/pre_equip(mob/living/carbon/human/H)
 	if(flags & OUTFIT_RESET_EQUIPMENT)
@@ -202,6 +202,3 @@ var/global/list/outfits_decls_by_type_
 	var/obj/item/modular_computer/pda/pda = new pda_type(H)
 	if(H.equip_to_slot_or_store_or_drop(pda, pda_slot))
 		return pda
-
-/decl/hierarchy/outfit/dd_SortValue()
-	return name

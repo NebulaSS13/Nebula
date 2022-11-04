@@ -271,7 +271,7 @@ var/global/list/custom_ai_icons_by_ckey_and_name = list()
 	for(var/ai_icon_type in get_ai_icon_subtypes())
 		var/datum/ai_icon/ai_icon = global.ai_icon_subtypes[ai_icon_type]
 		if(ai_icon.may_used_by_ai(src))
-			dd_insertObjectList(., ai_icon)
+			insert_sorted(., ai_icon, /proc/cmp_name_asc)
 
 	// Placing custom icons first to have them be at the top
 	. = global.custom_ai_icons_by_ckey_and_name["[ckey][real_name]"] | .

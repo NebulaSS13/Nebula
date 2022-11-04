@@ -36,7 +36,7 @@ var/global/list/cargoprices = list()
 	set name = "Print Cargo Prices"
 	set category = "Debug"
 
-	global.cargoprices = sortTim(global.cargoprices, /proc/cmp_numeric_asc, TRUE)
+	global.cargoprices = sort_list(global.cargoprices, /proc/cmp_numeric_asc, TRUE)
 	var/pad = 0
 	for(var/key in global.cargoprices)
 		pad = max(pad, length_char(key)+2)
@@ -50,9 +50,9 @@ var/global/list/cargoprices = list()
 	switch(security_level)
 		if(SUPPLY_SECURITY_ELEVATED)
 			if(security_state.all_security_levels.len > 1)
-				security_level = security_state.all_security_levels[2] 
+				security_level = security_state.all_security_levels[2]
 			else
-				security_level = security_state.high_security_level 
+				security_level = security_state.high_security_level
 		if(SUPPLY_SECURITY_HIGH)
 			security_level = security_state.high_security_level
 	if(!istype(security_level))
@@ -80,7 +80,7 @@ var/global/list/cargoprices = list()
 	. = list()
 	for(var/entry in sp.contains)
 		for(var/i = 1 to max(1, sp.contains[entry]))
-			dd_insertObjectList(.,new entry(location))
+			insert_sorted(., new entry(location), /proc/cmp_name_asc)
 
 /decl/supply_method/proc/setup_manifest(var/decl/hierarchy/supply_pack/sp)
 	. = list()

@@ -119,3 +119,15 @@
 	. = istype(b, /datum/computer_file/directory) - istype(a, /datum/computer_file/directory) // Prioritize directories over other files.
 	if(!.)
 		return sorttext(b.filename, a.filename)
+
+/proc/cmp_access_asc(datum/access/a, datum/access/b)
+	return sorttext("[b.access_type][b.desc]", "[a.access_type][a.desc]")
+
+/proc/cmp_aspect_asc(decl/aspect/a, decl/aspect/b)
+	return b.sort_value - a.sort_value
+
+/proc/cmp_uplink_item_asc(datum/uplink_item/a, datum/uplink_item/b)
+	return b.cost(INFINITY, null) - a.cost(INFINITY, null)
+
+/proc/cmp_stored_items_asc(datum/stored_items/a, datum/stored_items/b)
+	return sorttext(b.item_name, a.item_name)

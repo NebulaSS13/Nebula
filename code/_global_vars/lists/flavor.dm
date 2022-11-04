@@ -34,10 +34,10 @@ var/global/list/station_prefixes = list("", "Imperium", "Heretical", "Cuban",
 
 var/global/list/station_names = list("", "Stanford", "Dwarf", "Alien",
 	"Aegis", "Death-World", "Rogue", "Safety", "Paranoia",
-	"Explosive", "North", "West", "East", "South", "Slant-ways", 
-	"Widdershins", "Rimward", "Expensive", "Procreatory", "Imperial", 
-	"Unidentified", "Immoral", "Carp", "Orc", "Pete", "Control", 
-	"Nettle", "Class", "Crab", "Fist", "Corrogated", "Skeleton", 
+	"Explosive", "North", "West", "East", "South", "Slant-ways",
+	"Widdershins", "Rimward", "Expensive", "Procreatory", "Imperial",
+	"Unidentified", "Immoral", "Carp", "Orc", "Pete", "Control",
+	"Nettle", "Class", "Crab", "Fist", "Corrogated", "Skeleton",
 	"Gentleman", "Capitalist", "Communist", "Bear", "Beard", "Space",
 	"Star", "Moon", "System", "Mining", "Research", "Supply", "Military",
 	"Orbital", "Battle", "Science", "Asteroid", "Home", "Production",
@@ -133,4 +133,4 @@ GLOBAL_GETTER(cable_colors, /list, SetupCableColors())
 		var/color = initial(C.color)
 
 		.[name] = color
-	. = sortTim(., /proc/cmp_text_asc)
+	. = sort_list(., /proc/cmp_text_asc)

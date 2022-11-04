@@ -53,7 +53,7 @@
 			if(!C.is_stealthed())
 				Lines += C.key
 
-	for(var/line in sortTim(Lines, /proc/cmp_text_asc))
+	for(var/line in sort_list(Lines, /proc/cmp_text_asc))
 		msg += "[line]\n"
 
 	msg += "<b>Total Players: [length(Lines)]</b>"

@@ -9,9 +9,6 @@
 		var/jammer_method_type = jammer_methods[jammer_method]
 		jammer_methods[jammer_method] = new jammer_method_type(holder, proc_call)
 
-/suit_sensor_jammer_method/dd_SortValue()
-	return name
-
 /suit_sensor_jammer_method/proc/enable()
 	for(var/jammer_method in jammer_methods)
 		crew_repository.add_modifier(jammer_method, jammer_methods[jammer_method])

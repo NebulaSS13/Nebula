@@ -58,7 +58,7 @@
 		var/obj/item/stamp/S = new stamp_type
 		stamps[capitalize(S.name)] = S
 
-	var/list/show_stamps = list("EXIT" = null) + sortTim(stamps, /proc/cmp_text_asc) // the list that will be shown to the user to pick from
+	var/list/show_stamps = list("EXIT" = null) + sort_list(stamps, /proc/cmp_text_asc) // the list that will be shown to the user to pick from
 
 	var/input_stamp = input(user, "Choose a stamp to disguise as.", "Choose a stamp.") in show_stamps
 

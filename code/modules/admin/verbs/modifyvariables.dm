@@ -126,7 +126,7 @@
 
 	var/list/names = null
 	if(!assoc)
-		names = sortTim(L, /proc/cmp_text_asc)
+		names = sort_list(L, /proc/cmp_text_asc)
 
 	var/variable
 	var/assoc_key
@@ -372,7 +372,7 @@
 		for (var/V in O.vars)
 			names += V
 
-		names = sortTim(names, /proc/cmp_text_asc)
+		names = sort_list(names, /proc/cmp_text_asc)
 
 		variable = input("Which var?","Var") as null|anything in names
 		if(!variable)	return

@@ -1,5 +1,5 @@
 /datum/job
-	var/title                                 // The name of the job	
+	var/title                                 // The name of the job
 	var/list/software_on_spawn = list()       // Defines the software files that spawn on tablets and labtops
 	var/list/department_types = list()        // What departments the job is in.
 	var/autoset_department = TRUE             // If department list is empty, use map default.
@@ -79,9 +79,6 @@
 		hud_icon = "hud[ckey(title)]"
 
 	..()
-
-/datum/job/dd_SortValue()
-	return title
 
 /datum/job/proc/equip(var/mob/living/carbon/human/H, var/alt_title, var/datum/mil_branch/branch, var/datum/mil_rank/grade)
 

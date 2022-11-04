@@ -63,7 +63,7 @@
 	to_chat(src, "Location '[camera_loc]' stored.")
 
 /mob/living/silicon/ai/proc/sorted_stored_locations()
-	return sortTim(stored_locations, /proc/cmp_text_asc)
+	return sort_list(stored_locations, /proc/cmp_text_asc)
 
 /mob/living/silicon/ai/proc/ai_goto_location(loc in sorted_stored_locations())
 	set category = "Silicon Commands"
@@ -120,7 +120,7 @@
 		else
 			TB.others[name] = M
 
-	var/list/targets = sortTim(TB.humans, /proc/cmp_text_asc) + sortTim(TB.others, /proc/cmp_text_asc)
+	var/list/targets = sort_list(TB.humans, /proc/cmp_text_asc) + sort_list(TB.others, /proc/cmp_text_asc)
 	src.track = TB
 	return targets
 

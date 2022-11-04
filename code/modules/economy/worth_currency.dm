@@ -64,7 +64,7 @@
 /decl/currency/proc/build_denominations()
 	for(var/datum/denomination/denomination in denominations)
 		denominations_by_value["[denomination.marked_value]"] = denomination
-	sortTim(denominations, /proc/cmp_currency_denomination_des)
+	sort_list(denominations, /proc/cmp_currency_denomination_des)
 
 /decl/currency/credits
 	name =          "credits"

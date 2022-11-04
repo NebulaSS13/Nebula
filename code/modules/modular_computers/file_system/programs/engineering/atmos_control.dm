@@ -24,7 +24,7 @@
 	for(var/obj/machinery/alarm/alarm in SSmachines.machinery)
 		if(!monitored_alarm_ids || (alarm.alarm_id && (alarm.alarm_id in monitored_alarm_ids)))
 			monitored_alarms += alarm
-	monitored_alarms = dd_sortedObjectList(monitored_alarms)
+	monitored_alarms = sort_list(monitored_alarms, /proc/cmp_name_asc)
 
 /datum/nano_module/atmos_control/Topic(href, href_list, state)
 	if(..())
@@ -51,10 +51,10 @@
 			filter_strings[weakref(usr)] = string
 		alarm_data_cache -= weakref(usr)
 		return TOPIC_REFRESH
-	
+
 	if(href_list["refresh"])
 		alarm_data_cache -= weakref(usr)
-		return TOPIC_REFRESH		
+		return TOPIC_REFRESH
 
 /datum/nano_module/atmos_control/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1, var/master_ui = null, var/datum/topic_state/state = global.default_topic_state)
 	var/list/data = host.initial_data()
@@ -88,11 +88,11 @@
 				alarms[++alarms.len] = list("name" = alarm_name, "ref"= "\ref[alarm]", "danger" = danger_level)
 
 		alarms_data = list()
-		alarms_data["alarms"] =       sortTim(alarms,       /proc/cmp_list_name_key_asc)
-		alarms_data["alarmsAlert"] =  sortTim(alarmsAlert,  /proc/cmp_list_name_key_asc)
-		alarms_data["alarmsDanger"] = sortTim(alarmsDanger, /proc/cmp_list_name_key_asc)
+		alarms_data["alarms"] =       sort_list(alarms,       /proc/cmp_list_name_key_asc)
+		alarms_data["alarmsAlert"] =  sort_list(alarmsAlert,  /proc/cmp_list_name_key_asc)
+		alarms_data["alarmsDanger"] = sort_list(alarmsDanger, /proc/cmp_list_name_key_asc)
 		alarm_data_cache[weakref(user)] = alarms_data
-	
+
 	data += alarms_data
 	data["filter"] = filter || "---"
 

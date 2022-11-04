@@ -527,7 +527,7 @@
 		return
 
 	. = list("<B>List of things that have gone through qdel this round</B><BR><BR><ol>")
-	sortTim(SSgarbage.items, cmp = /proc/cmp_qdel_item_time, associative = TRUE)
+	sort_list(SSgarbage.items, cmp = /proc/cmp_qdel_item_time, associative = TRUE)
 	for(var/path in SSgarbage.items)
 		var/datum/qdel_item/I = SSgarbage.items[path]
 		. += "<li><u>[path]</u><ul>"

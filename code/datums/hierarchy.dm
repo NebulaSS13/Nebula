@@ -10,7 +10,7 @@
 	for(var/subtype in subtypesof(type))
 		var/decl/hierarchy/child = GET_DECL(subtype) // Might be a grandchild, which has already been handled.
 		if(child.parent_type == type)
-			dd_insertObjectList(children, child)
+			insert_sorted(children, child, /proc/cmp_name_asc)
 			child.parent = src
 	. = ..()
 
@@ -24,6 +24,3 @@
 	for(var/decl/hierarchy/child in children)
 		if(child.children)
 			. |= child.get_descendents()
-
-/decl/hierarchy/dd_SortValue()
-	return name

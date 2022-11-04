@@ -121,7 +121,7 @@ var/global/const/HOLOPAD_MODE = RANGE_BASED
 							holopadlist["[A.proper_name]"] = H	//Define a list and fill it with the area of every holopad in the world
 						if (H.holopadType == HOLOPAD_LONG_RANGE && (H.z in zlevels_long))
 							holopadlist["[A.proper_name]"] = H
-				holopadlist = sortTim(holopadlist, /proc/cmp_text_asc)
+				holopadlist = sort_list(holopadlist, /proc/cmp_text_asc)
 				var/temppad = input(user, "Which holopad would you like to contact?", "holopad list") as null|anything in holopadlist
 				targetpad = holopadlist["[temppad]"]
 				if(targetpad==src)

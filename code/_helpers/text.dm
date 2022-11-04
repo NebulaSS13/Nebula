@@ -262,39 +262,6 @@
 	return html_encode(replace_characters(t,repl_chars))
 
 /*
- * Text searches
- */
-
-//Checks the beginning of a string for a specified sub-string
-//Returns the position of the substring or 0 if it was not found
-/proc/dd_hasprefix(text, prefix)
-	var/start = 1
-	var/end = length(prefix) + 1
-	return findtext(text, prefix, start, end)
-
-//Checks the beginning of a string for a specified sub-string. This proc is case sensitive
-//Returns the position of the substring or 0 if it was not found
-/proc/dd_hasprefix_case(text, prefix)
-	var/start = 1
-	var/end = length(prefix) + 1
-	return findtextEx(text, prefix, start, end)
-
-//Checks the end of a string for a specified substring.
-//Returns the position of the substring or 0 if it was not found
-/proc/dd_hassuffix(text, suffix)
-	var/start = length(text) - length(suffix)
-	if(start)
-		return findtext(text, suffix, start, null)
-	return
-
-//Checks the end of a string for a specified substring. This proc is case sensitive
-//Returns the position of the substring or 0 if it was not found
-/proc/dd_hassuffix_case(text, suffix)
-	var/start = length(text) - length(suffix)
-	if(start)
-		return findtextEx(text, suffix, start, null)
-
-/*
  * Text modification
  */
 

@@ -176,7 +176,7 @@
 		choices |= PAINT_REGION_PAINT
 	if (W.material.wall_flags & PAINT_STRIPABLE)
 		choices |= PAINT_REGION_STRIPE
-	var/choice = input(user, input_text) as null|anything in sortTim(choices, /proc/cmp_text_asc)
+	var/choice = input(user, input_text) as null|anything in sort_list(choices, /proc/cmp_text_asc)
 	if (user.incapacitated() || !W || !user.Adjacent(W))
 		return FALSE
 	return choice
@@ -204,7 +204,7 @@
 
 /obj/item/paint_sprayer/proc/select_wall_frame_region(var/obj/structure/wall_frame/WF, var/mob/user, var/input_text)
 	var/list/choices = list(PAINT_REGION_PAINT, PAINT_REGION_STRIPE)
-	var/choice = input(user, input_text) as null|anything in sortTim(choices, /proc/cmp_text_asc)
+	var/choice = input(user, input_text) as null|anything in sort_list(choices, /proc/cmp_text_asc)
 	if (user.incapacitated() || !WF || !user.Adjacent(WF))
 		return FALSE
 	return choice
@@ -326,7 +326,7 @@
 		choices |= PAINT_REGION_STRIPE
 	if (D.paintable & PAINT_WINDOW_PAINTABLE)
 		choices |= PAINT_REGION_WINDOW
-	choice = input(user, input_text) as null|anything in sortTim(choices, /proc/cmp_text_asc)
+	choice = input(user, input_text) as null|anything in sort_list(choices, /proc/cmp_text_asc)
 	if (user.incapacitated() || !D || !user.Adjacent(D))
 		return FALSE
 	return choice

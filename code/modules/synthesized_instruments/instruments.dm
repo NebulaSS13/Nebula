@@ -13,7 +13,7 @@
 
 	var/list/delta_1 = list()
 	for (var/key in samples)	delta_1 += text2num(key)
-	sortTim(delta_1, associative=0)
+	sort_list(delta_1, associative=0)
 
 	for (var/indx1=1 to delta_1.len-1)
 		var/from_key = delta_1[indx1]

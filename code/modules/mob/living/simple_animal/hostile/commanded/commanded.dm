@@ -21,6 +21,8 @@
 		command_buffer.Add(lowertext(html_decode(message)))
 	return 0
 
+
+#define HAS_PREFIX(text, prefix) findtext(text, prefix, 1, length(prefix) + 1)
 /mob/living/simple_animal/hostile/commanded/Life()
 	. = ..()
 	if(!.)
@@ -29,7 +31,7 @@
 		var/mob/speaker = command_buffer[1]
 		var/text = command_buffer[2]
 		var/filtered_name = lowertext(html_decode(name))
-		if(dd_hasprefix(text,filtered_name) || dd_hasprefix(text,"everyone") || dd_hasprefix(text, "everybody")) //in case somebody wants to command 8 bears at once.
+		if(HAS_PREFIX(text, filtered_name) || HAS_PREFIX(text, "everyone") || HAS_PREFIX(text, "everybody")) //in case somebody wants to command 8 bears at once.
 			var/substring = copytext(text,length(filtered_name)+1) //get rid of the name.
 			listen(speaker,substring)
 		command_buffer.Remove(command_buffer[1],command_buffer[2])
@@ -40,8 +42,7 @@
 				follow_target()
 			if(COMMANDED_STOP)
 				commanded_stop()
-
-
+#undef HAS_PREFIX
 
 /mob/living/simple_animal/hostile/commanded/FindTarget(var/new_stance = HOSTILE_STANCE_ATTACK)
 	if(!allowed_targets.len)

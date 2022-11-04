@@ -9,7 +9,7 @@
 		if(emote_datum.check_user(src))
 			usable_emotes[emote_datum.key] = emote_datum
 	if(!skip_sort)
-		usable_emotes = sortTim(usable_emotes, /proc/cmp_text_asc)
+		usable_emotes = sort_list(usable_emotes, /proc/cmp_text_asc)
 
 /mob/Initialize()
 	. = ..()

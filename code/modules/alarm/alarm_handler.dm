@@ -33,7 +33,7 @@
 	alarms_assoc[origin] = existing
 	LAZYDISTINCTADD(alarms_by_z["[existing.alarm_z()]"], existing)
 	if(new_alarm)
-		alarms = dd_sortedObjectList(alarms)
+		alarms = sort_list(alarms, /proc/cmp_name_asc)
 		on_alarm_change(existing, ALARM_RAISED)
 
 	return new_alarm

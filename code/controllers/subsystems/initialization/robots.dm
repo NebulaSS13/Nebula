@@ -30,7 +30,7 @@ SUBSYSTEM_DEF(robots)
 	// This is done via loop instead of just assignment in order to trim associations.
 	for(var/title in (mob_types_by_title|mmi_types_by_title))
 		robot_alt_titles |= capitalize(title)
-	sortTim(robot_alt_titles, /proc/cmp_text_asc)
+	sort_list(robot_alt_titles, /proc/cmp_text_asc)
 
 	for(var/module_type in subtypesof(/obj/item/robot_module))
 		var/obj/item/robot_module/module = module_type
@@ -47,7 +47,7 @@ SUBSYSTEM_DEF(robots)
 				LAZYINITLIST(modules_by_category[module_category])
 				LAZYSET(modules_by_category[module_category], module_name, module)
 			all_module_names |= module_name
-	all_module_names = sortTim(all_module_names, /proc/cmp_text_asc)
+	all_module_names = sort_list(all_module_names, /proc/cmp_text_asc)
 
 /datum/controller/subsystem/robots/proc/get_available_modules(var/module_category, var/crisis_mode, var/include_override)
 	. = list()

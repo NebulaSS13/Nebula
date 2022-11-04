@@ -46,7 +46,7 @@ SUBSYSTEM_DEF(codex)
 	// Create the index file for later use.
 	for(var/datum/codex_entry/entry as anything in all_entries)
 		index_file[entry.name] = entry
-	index_file = sortTim(index_file, /proc/cmp_text_asc)
+	index_file = sort_list(index_file, /proc/cmp_text_asc)
 	. = ..()
 
 /datum/controller/subsystem/codex/proc/parse_links(string, viewer)
@@ -104,7 +104,7 @@ SUBSYSTEM_DEF(codex)
 				var/datum/codex_entry/entry = entries_by_string[entry_title]
 				if(findtext(entry.name, searching) || findtext(entry.lore_text, searching) || findtext(entry.mechanics_text, searching) || findtext(entry.antag_text, searching))
 					results |= entry
-		search_cache[searching] = sortTim(results, /proc/cmp_name_asc)
+		search_cache[searching] = sort_list(results, /proc/cmp_name_asc)
 	return search_cache[searching]
 
 /datum/controller/subsystem/codex/Topic(href, href_list)

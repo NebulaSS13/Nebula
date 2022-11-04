@@ -192,9 +192,6 @@ var/global/const/CHARACTER_PREFERENCE_INPUT_TITLE = "Character Preference"
 	pref = null
 	return ..()
 
-/datum/category_item/player_setup_item/dd_SortValue()
-	return sort_order
-
 /*
 * Called when the item is asked to load per character settings
 */

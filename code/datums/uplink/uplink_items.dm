@@ -9,7 +9,7 @@ var/global/datum/uplink/uplink = new()
 	items_assoc = list()
 	items = init_subtypes(/datum/uplink_item)
 	categories = init_subtypes(/datum/uplink_category)
-	categories = dd_sortedObjectList(categories)
+	categories = sort_list(categories, /proc/cmp_name_asc)
 
 	for(var/datum/uplink_item/item in items)
 		if(!item.name)
@@ -24,7 +24,7 @@ var/global/datum/uplink/uplink = new()
 				item.category = category
 
 	for(var/datum/uplink_category/category in categories)
-		category.items = dd_sortedObjectList(category.items)
+		category.items = sort_list(category.items, /proc/cmp_uplink_item_asc)
 
 /datum/uplink_item
 	var/name
@@ -110,9 +110,6 @@ var/global/datum/uplink/uplink = new()
 	log_and_message_admins("used \the [U.loc] to buy \a [src]")
 	if(user)
 		uplink_purchase_repository.add_entry(user.mind, src, cost)
-
-/datum/uplink_item/dd_SortValue()
-	return cost(INFINITY, null)
 
 /********************************
 *                           	*

@@ -11,7 +11,7 @@
 	for(var/option in lobby_options)
 		lobby_options += new option(src)
 		lobby_options -= option
-	lobby_options = sortTim(lobby_options, /proc/cmp_lobby_option_asc)
+	lobby_options = sort_list(lobby_options, /proc/cmp_lobby_option_asc)
 
 /decl/lobby_handler/proc/get_lobby_header(var/mob/new_player/viewer)
 	return "<i>[global.using_map.get_map_info()]</i><hr>"

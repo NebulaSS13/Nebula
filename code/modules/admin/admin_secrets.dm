@@ -19,7 +19,7 @@ var/global/datum/admin_secrets/admin_secrets = new()
 
 		var/datum/admin_secret_item/item = new item_type()
 		var/datum/admin_secret_category/category = category_assoc[item.category]
-		dd_insertObjectList(category.items, item)
+		insert_sorted(category.items, item, /proc/cmp_name_asc)
 		items += item
 
 //
@@ -50,9 +50,6 @@ var/global/datum/admin_secrets/admin_secrets = new()
 	var/feedback = 1
 	var/permissions = R_HOST
 	var/warn_before_use = 0
-
-/datum/admin_secret_item/dd_SortValue()
-	return "[name]"
 
 /datum/admin_secret_item/proc/name()
 	return name

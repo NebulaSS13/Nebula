@@ -213,7 +213,7 @@
 	for(var/atom_type in atom_types)
 		var/atom/A = atom_type
 		.[initial(A.name)] = atom_type
-	. = sortTim(., /proc/cmp_text_asc)
+	. = sort_list(., /proc/cmp_text_asc)
 
 /proc/atomtype2nameassoclist(var/atom_type)
 	return atomtypes2nameassoclist(typesof(atom_type))

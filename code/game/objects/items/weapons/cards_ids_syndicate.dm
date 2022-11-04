@@ -252,7 +252,7 @@ var/global/list/id_card_states
 			if(color_pair)
 				CS.name += " - [color_pair]"
 			id_card_states += CS
-		id_card_states = dd_sortedObjectList(id_card_states)
+		id_card_states = sort_list(id_card_states, /proc/cmp_name_asc)
 
 	return id_card_states
 
@@ -263,6 +263,3 @@ var/global/list/id_card_states
 	var/color
 	var/detail_color
 	var/extra_details
-
-/datum/card_state/dd_SortValue()
-	return name

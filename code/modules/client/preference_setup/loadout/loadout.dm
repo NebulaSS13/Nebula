@@ -168,7 +168,7 @@ var/global/list/gear_datums = list()
 	for(var/job_title in (pref.job_medium|pref.job_low|pref.job_high))
 		var/datum/job/J = SSjobs.get_by_title(job_title)
 		if(J)
-			dd_insertObjectList(jobs, J)
+			insert_sorted(jobs, J, /proc/cmp_job_asc)
 
 	var/mob/user = preference_mob()
 	for(var/gear_name in current_category_decl.gear)

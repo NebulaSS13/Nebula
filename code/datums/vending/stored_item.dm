@@ -19,9 +19,6 @@
 	QDEL_NULL_LIST(instances)
 	. = ..()
 
-/datum/stored_items/dd_SortValue()
-	return item_name
-
 /datum/stored_items/proc/get_amount()
 	return amount
 
