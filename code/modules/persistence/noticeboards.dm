@@ -64,23 +64,6 @@
 	var/nb_notices = LAZYLEN(notices)
 	icon_state = "[bis.base_icon_state][nb_notices > 0? "0[nb_notices]" : ""]"
 
-/obj/structure/noticeboard/handle_default_screwdriver_attackby(mob/user, obj/item/screwdriver/S)
-	var/choice = input("Which direction do you wish to place the noticeboard?", "Noticeboard Offset") as null|anything in list("North", "South", "East", "West")
-	if(choice && S.do_tool_interaction(TOOL_SCREWDRIVER, user, src, 1 SECOND))
-		default_pixel_x = 0
-		default_pixel_y = 0
-		switch(choice)
-			if("North")
-				default_pixel_y = 32
-			if("South")
-				default_pixel_y = -32
-			if("East")
-				default_pixel_x = 32
-			if("West")
-				default_pixel_x = -32
-		reset_offsets(0)
-	return TRUE
-
 /obj/structure/noticeboard/attackby(var/obj/item/thing, var/mob/user)
 	if(!istype(thing, /obj/item/paper/sticky) && (istype(thing, /obj/item/paper) || istype(thing, /obj/item/photo)))
 		if(jobban_isbanned(user, "Graffiti"))
