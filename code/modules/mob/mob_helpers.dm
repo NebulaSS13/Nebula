@@ -704,3 +704,27 @@ var/global/list/intents = list(I_HELP,I_DISARM,I_GRAB,I_HURT)
 		var/datum/client_color/col = thing
 		for(var/col_name in col.wire_colour_substitutions)
 			.[col_name] = col.wire_colour_substitutions[col_name]
+
+/**
+ * Tries to find a readily accessible pen in the user's held items, and in some of its inventory slots.
+ * Shouldn't search recursively.
+ */
+/mob/proc/get_accessible_pen()
+	//We might save a few loop iterations by just looking in the active hand first
+	var/obj/item/I = get_active_hand()
+	if(IS_PEN(I))
+		return I
+
+	//Look if we're holding a pen elsewhere
+	for(I in get_held_items()) 
+		if(IS_PEN(I))
+			return I
+
+	//Try looking if we got a rig module with integrated pen
+	var/obj/item/rig/R = get_equipped_item(slot_back_str)
+	if(istype(R))
+		var/obj/item/rig_module/device/pen/P = locate(/obj/item/rig_module/device/pen) in R.installed_modules
+		if(!R.offline && P)
+			return P.device
+
+	//Base mob only has slot_back and slot_wear_mask, so not much else to check

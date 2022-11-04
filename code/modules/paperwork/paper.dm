@@ -300,7 +300,7 @@
 			return TOPIC_NOACTION
 
 		//Try to find a usable pen on the user, if not abort
-		var/obj/item/I = get_accessible_pen(user)
+		var/obj/item/I = user.get_accessible_pen()
 		if(!IS_PEN(I))
 			to_chat(user, SPAN_WARNING("You need something to write with!"))
 			return TOPIC_NOACTION

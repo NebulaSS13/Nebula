@@ -164,12 +164,12 @@
 	if(href_list["pen"] && remove_pen(user))
 		. = TOPIC_REFRESH
 
-	else if(href_list["addpen"] && add_pen(get_accessible_pen(user), user))
+	else if(href_list["addpen"] && add_pen(user.get_accessible_pen(), user))
 		. = TOPIC_REFRESH
 
 	else if(href_list["write"])
 		if(tpaper)
-			var/obj/item/I = get_accessible_pen(user)
+			var/obj/item/I = user.get_accessible_pen()
 			//We can also use the stored pen if we have one and a free hand
 			if(!I && IS_PEN(stored_pen))
 				I = remove_pen(user)
