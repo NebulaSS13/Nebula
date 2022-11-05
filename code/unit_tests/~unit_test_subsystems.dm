@@ -33,6 +33,7 @@ SUBSYSTEM_DEF(unit_tests)
 	SSticker.master_mode = "extended"
 	for(var/test_datum_type in get_test_datums())
 		queue += new test_datum_type
+	sortTim(queue, /proc/cmp_unit_test_priority)
 	log_unit_test("[queue.len] unit tests loaded.")
 	. = ..()
 

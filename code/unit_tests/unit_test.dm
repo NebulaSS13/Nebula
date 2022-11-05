@@ -56,6 +56,7 @@ var/global/ascii_reset = "[ascii_esc]\[0m"
 	var/disabled = 0    // If we want to keep a unit test in the codebase but not run it for some reason.
 	var/async = 0       // If the check can be left to do it's own thing, you must define a check_result() proc if you use this.
 	var/reported = 0	// If it's reported a success or failure.  Any tests that have not are assumed to be failures.
+	var/priority = 0    // Unit tests with higher priorities run first. UTs with the same priority are sorted alphabetically.
 	var/why_disabled = "No reason set."   // If we disable a unit test we will display why so it reminds us to check back on it later.
 
 	var/static/safe_landmark
