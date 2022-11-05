@@ -1,0 +1,13 @@
+author: PsyCommando
+delete-after: true
+changes:
+  - tweak: Tweaked police tape. Now called barricade tape, and the tape itself now
+      handles neighbours better.
+  - tweak: Photo cameras now have skilled interactions. And can eject their film cartridge.
+  - tweak: Hand labeler can now be refilled with paper sheets, or paper material sheets.
+      It can also now remove labels. And has a new menu for changing mode.
+  - tweak: Fax machine is now buildable, and make use of the network system.
+  - tweak: Fax machine has a new UI, and new functionalities. Like history logging
+      and contact saving. The data is saved to a data disk and can be transferred
+      from machine to machine.
+  - tweak: Numerous paperwork simple browser UIs have had some touch up and polish.
