@@ -154,6 +154,7 @@ var/global/world_topic_last = world.timeofday
 	..(reason)
 
 /world/Del()
+	Master.Shutdown()
 	callHook("shutdown")
 	return ..()
 
