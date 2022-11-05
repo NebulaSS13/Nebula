@@ -1045,10 +1045,10 @@
 		var/obj/item/fax = locate(href_list["AdminFaxView"])
 		if (istype(fax, /obj/item/paper))
 			var/obj/item/paper/P = fax
-			P.show_content(usr,1)
+			P.interact(usr, TRUE)
 		else if (istype(fax, /obj/item/photo))
 			var/obj/item/photo/H = fax
-			H.show(usr)
+			H.interact(usr)
 		else if (istype(fax, /obj/item/paper_bundle))
 			//having multiple people turning pages on a paper_bundle can cause issues
 			//open a browse window listing the contents instead
@@ -1070,26 +1070,23 @@
 
 		if (istype(bundle.pages[page], /obj/item/paper))
 			var/obj/item/paper/P = bundle.pages[page]
-			P.show_content(src.owner, 1)
+			P.interact(src.owner, TRUE)
 		else if (istype(bundle.pages[page], /obj/item/photo))
 			var/obj/item/photo/H = bundle.pages[page]
-			H.show(src.owner)
+			H.interact(src.owner)
 		return
 
 	else if(href_list["FaxReply"])
 		var/mob/sender = locate(href_list["FaxReply"])
-		var/obj/machinery/photocopier/faxmachine/fax = locate(href_list["originfax"])
+		var/obj/machinery/faxmachine/fax = locate(href_list["originfax"])
 		var/replyorigin = href_list["replyorigin"]
 
-
-		var/obj/item/paper/admin/P = new /obj/item/paper/admin( null ) //hopefully the null loc won't cause trouble for us
+		var/obj/item/paper/admin/P = new /obj/item/paper/admin
 		faxreply = P
-
 		P.admindatum = src
 		P.origin = replyorigin
-		P.destination = fax
+		P.destination_ref = weakref(fax)
 		P.sender = sender
-
 		P.adminbrowse()
 
 	else if(href_list["jumpto"])
@@ -1565,6 +1562,26 @@
 
 		show_player_panel(M)
 
+	if(href_list["asf_pick_fax"])
+		var/obj/machinery/faxmachine/F = locate(href_list["destination"])
+		if(istype(F))
+			close_browser(src.owner, "faxpicker")
+			var/datum/extension/network_device/D = get_extension(F, /datum/extension/network_device)
+			if(!D)
+				log_debug("'[log_info_line(F)]' couldn't get network_device extension!")
+				return
+			var/datum/computer_network/CN = D.get_network()
+			if(CN)
+				var/obj/item/paper/admin/P = new /obj/item/paper/admin
+				faxreply      = P //Store the message instance
+				P.admindatum  = src
+				P.origin      = href_list["sender"] || (input(src.owner, "Please specify the sender's name", "Origin", global.using_map.boss_name) as text | null)
+				P.destination_ref = weakref(F)
+				P.adminbrowse()
+			else
+				log_debug("Couldn't get computer network for [log_info_line(D)], where network_id is '[D.network_id]'.")
+		else
+			log_debug("Tried to send a fax to an invalid machine!:[log_info_line(F)]\nhref:[log_info_line(href_list)]")
 
 /mob/living/proc/can_centcom_reply()
 	return 0

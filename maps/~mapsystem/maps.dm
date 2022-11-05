@@ -62,7 +62,12 @@ var/global/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 	// Current game year. Uses current system year + game_year num.
 	var/game_year = 288
 
-	var/map_admin_faxes = list()
+	/**
+	 * Associative list of network URIs to a list with their display name, color, and "req_access formated" needed access list.
+	 * EX: list("BIG_BOSS.COM" = list("name" = "Big boss", "color" = "#00ff00", "access" = list(list(access_heads, access_clown))))
+	 */
+	var/list/map_admin_faxes
+
 
 	var/shuttle_docked_message
 	var/shuttle_leaving_dock
@@ -205,9 +210,17 @@ var/global/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 
 	game_year = (text2num(time2text(world.realtime, "YYYY")) + game_year)
 
+	setup_admin_faxes()
+
 	lobby_track = get_lobby_track()
 	update_titlescreen()
 	world.update_status()
+
+///Generates the default admin faxes addresses
+/datum/map/proc/setup_admin_faxes()
+	LAZYSET(map_admin_faxes, uppertext(replacetext("[boss_name].COM",          " ", "_")), list("name" = "[boss_name]",           "color" = "#006100", "access" = list(access_heads)))
+	LAZYSET(map_admin_faxes, uppertext(replacetext("[boss_short]_SUPPLY.COM",  " ", "_")), list("name" = "[boss_short] Supply",   "color" = "#5f4519", "access" = list(access_heads)))
+	LAZYSET(map_admin_faxes, uppertext(replacetext("[system_name]_POLICE.GOV", " ", "_")), list("name" = "[system_name] Police",  "color" = "#1f66a0", "access" = list(access_heads)))
 
 /datum/map/proc/setup_job_lists()
 	return

@@ -240,7 +240,7 @@
 /obj/item/form_printer
 	//name = "paperwork printer"
 	name = "paper dispenser"
-	icon = 'icons/obj/bureaucracy.dmi'
+	icon = 'icons/obj/items/paper_bin.dmi'
 	icon_state = "paper_bin1"
 	item_state = "sheet-metal"
 	health = ITEM_HEALTH_NO_DAMAGE
@@ -260,7 +260,7 @@
 	deploy_paper(get_turf(src))
 
 /obj/item/form_printer/proc/deploy_paper(var/turf/T)
-	T.visible_message("<span class='notice'>\The [src.loc] dispenses a sheet of crisp white paper.</span>")
+	T.visible_message(SPAN_NOTICE("\The [src.loc] dispenses a sheet of crisp white paper."))
 	new /obj/item/paper(T)
 
 

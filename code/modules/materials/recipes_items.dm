@@ -293,3 +293,15 @@
 	result_type    = /obj/item/paper
 	res_amount     = 4
 	max_res_amount = 30
+
+/datum/stack_recipe/paper_sheets/spawn_result(user, location, amount)
+	var/obj/item/paper/P = ..()
+	if(amount > 1)
+		var/obj/item/paper_bundle/B = new(location)
+		B.merge(P)
+		for(var/i = 1 to (amount - 1))
+			if(B.get_amount_papers() >= B.max_pages)
+				B = new(location)
+			B.merge(new /obj/item/paper(location))
+		return B
+	return P

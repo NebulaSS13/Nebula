@@ -62,8 +62,8 @@
 		to_chat(user, "You can <a href='?src=\ref[src];ghostscan=1'>scan</a> this circuit.");
 
 
-/obj/item/electronic_assembly/proc/take_damage(var/amnt)
-	health = health - amnt
+/obj/item/electronic_assembly/take_damage(amount, damtype, silent)
+	health = health - amount
 	if(health <= 0)
 		visible_message("<span class='danger'>\The [src] falls to pieces!</span>")
 		qdel(src)

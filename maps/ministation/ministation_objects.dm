@@ -87,3 +87,29 @@
 
 /obj/machinery/camera/motion/ministation
 	preset_channels = list("Satellite")
+
+//Detective bs
+/obj/item/camera_film/high
+	name = "high capacity film cartridge"
+	max_uses  = 30
+	uses_left = 30
+
+/obj/item/camera/detective
+	name = "detective's camera"
+	desc = "A single use disposable polaroid photo camera."
+
+/obj/item/camera/detective/Initialize()
+	. = ..()
+	film = new /obj/item/camera_film/high(src)
+
+/obj/item/camera/detective/attackby(obj/item/I, mob/user)
+	if(istype(I, /obj/item/camera_film))
+		return FALSE //Prevent reloading
+	return ..()
+
+/obj/item/camera/detective/eject_film(mob/user)
+	return
+
+/obj/item/camera/detective/get_alt_interactions(mob/user)
+	. = ..()
+	LAZYREMOVE(., /decl/interaction_handler/camera_eject_film)

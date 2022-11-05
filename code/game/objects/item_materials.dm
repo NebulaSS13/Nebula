@@ -97,3 +97,10 @@
 	. = ..()
 	if(item_flags & ITEM_FLAG_HOLLOW)
 		. *= HOLLOW_OBJECT_MATTER_MULTIPLIER
+
+/obj/item/create_matter()
+	..()
+	LAZYINITLIST(matter)
+	if(istype(material))
+		matter[material.type] = max(matter[material.type], round(MATTER_AMOUNT_PRIMARY * get_matter_amount_modifier()))
+	UNSETEMPTY(matter)

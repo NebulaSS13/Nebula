@@ -3,3 +3,6 @@
 #define PEN_FLAG_FANCY      BITFLAG(2) //If the pen is a fancy pen, mainly decides the font used
 #define PEN_FLAG_CRAYON     BITFLAG(3) //If the pen is a crayon, mainly decides the font used
 #define PEN_FLAG_DEL_EMPTY  BITFLAG(4) //If the pen is deleted when its use count reaches 0
+
+#define TONER_USAGE_PAPER 1 //Amount of toner a paper uses
+#define TONER_USAGE_PHOTO 5 //Amount of toner a photo uses

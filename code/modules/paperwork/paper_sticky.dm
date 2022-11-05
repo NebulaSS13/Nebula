@@ -1,17 +1,23 @@
+////////////////////////////////////////////////
+// Sticky Note Pad
+////////////////////////////////////////////////
 /obj/item/sticky_pad
-	name = "sticky note pad"
-	desc = "A pad of densely packed sticky notes."
-	color = COLOR_YELLOW
-	icon = 'icons/obj/stickynotes.dmi'
-	icon_state = "pad_full"
-	item_state = "paper"
-	w_class = ITEM_SIZE_SMALL
-	material = /decl/material/solid/paper
+	name               = "sticky note pad"
+	desc               = "A pad of densely packed sticky notes."
+	color              = COLOR_YELLOW
+	icon               = 'icons/obj/stickynotes.dmi'
+	icon_state         = "pad_full"
+	item_state         = "paper"
+	w_class            = ITEM_SIZE_SMALL
+	material           = /decl/material/solid/paper
+	var/papers         = 50
+	var/tmp/max_papers = 50
+	var/paper_type     = /obj/item/paper/sticky
+	var/obj/item/paper/top                        //The instanciated paper on the top of the pad, if there's one
 
-	var/papers = 50
-	var/written_text
-	var/written_by
-	var/paper_type = /obj/item/paper/sticky
+/obj/item/sticky_pad/Initialize(ml, material_key)
+	. = ..()
+	update_top_paper()
 
 /obj/item/sticky_pad/proc/update_matter()
 	matter = list(
@@ -29,68 +35,65 @@
 		icon_state = "pad_used"
 	else
 		icon_state = "pad_full"
-	if(written_text)
+
+	if(top?.info)
 		icon_state = "[icon_state]_writing"
 
 /obj/item/sticky_pad/attackby(var/obj/item/thing, var/mob/user)
-	if(IS_PEN(thing))
-
-		if(jobban_isbanned(user, "Graffiti"))
-			to_chat(user, SPAN_WARNING("You are banned from leaving persistent information across rounds."))
-			return
-
-		var/writing_space = MAX_MESSAGE_LEN - length(written_text)
-		if(writing_space <= 0)
-			to_chat(user, SPAN_WARNING("There is no room left on \the [src]."))
-			return
-		var/text = sanitize_safe(input("What would you like to write?") as text, writing_space)
-		if(!text || thing.loc != user || (!Adjacent(user) && loc != user) || user.incapacitated())
-			return
-		user.visible_message(SPAN_NOTICE("\The [user] jots a note down on \the [src]."))
-		written_by = user.ckey
-		if(written_text)
-			written_text = "[written_text] [text]"
-		else
-			written_text = text
+	if(IS_PEN(thing) || istype(thing, /obj/item/stamp))
+		. = top?.attackby(thing, user)
 		update_icon()
-		return
-	..()
+		return .
+	return ..()
 
 /obj/item/sticky_pad/examine(mob/user)
 	. = ..()
 	to_chat(user, SPAN_NOTICE("It has [papers] sticky note\s left."))
 	to_chat(user, SPAN_NOTICE("You can click it on grab intent to pick it up."))
 
+/obj/item/sticky_pad/dragged_onto(mob/user)
+	user.put_in_hands(top)
+	. = ..()
+
 /obj/item/sticky_pad/attack_hand(var/mob/user)
 	if(user.a_intent == I_GRAB)
-		..()
-	else
-		var/obj/item/paper/paper = new paper_type(get_turf(src))
-		paper.set_content(written_text, "sticky note")
-		paper.last_modified_ckey = written_by
-		paper.color = color
-		written_text = null
-		user.put_in_hands(paper)
-		to_chat(user, SPAN_NOTICE("You pull \the [paper] off \the [src]."))
+		return ..()
+	else if(top)
+		user.put_in_active_hand(top)
+		top = null
 		papers--
+		update_top_paper()
+		to_chat(user, SPAN_NOTICE("You pull \the [top] off \the [src]."))
+
 		if(papers <= 0)
 			qdel(src)
 		else
-			update_matter()
+			update_top_paper()
 			update_icon()
+		return TRUE
+
+/**Creates the paper the user can write on, if there's any paper left. */
+/obj/item/sticky_pad/proc/update_top_paper()
+	if(!top && papers > 0)
+		top = new paper_type(src)
+		top.set_color(color)
 
 /obj/item/sticky_pad/random/Initialize()
 	. = ..()
 	color = pick(COLOR_YELLOW, COLOR_LIME, COLOR_CYAN, COLOR_ORANGE, COLOR_PINK)
 
+////////////////////////////////////////////////
+// Sticky Note Sheet
+////////////////////////////////////////////////
 /obj/item/paper/sticky
-	name = "sticky note"
-	desc = "Note to self: buy more sticky notes."
-	icon = 'icons/obj/stickynotes.dmi'
-	color = COLOR_YELLOW
-	slot_flags = 0
-	layer = ABOVE_WINDOW_LAYER
+	name            = "sticky note"
+	desc            = "Note to self: buy more sticky notes."
+	icon            = 'icons/obj/stickynotes.dmi'
+	color           = COLOR_YELLOW
+	slot_flags      = 0
+	layer           = ABOVE_WINDOW_LAYER
 	persist_on_init = FALSE
+	item_flags      = ITEM_FLAG_CAN_TAPE
 
 /obj/item/paper/sticky/Initialize()
 	. = ..()
@@ -106,10 +109,9 @@
 	events_repository.unregister(/decl/observ/moved, src, src)
 	. = ..()
 
-/obj/item/paper/sticky/on_update_icon()
-	. = ..()
-	if(icon_state != "scrap")
-		icon_state = info ? "paper_words" : "paper"
+/obj/item/paper/sticky/update_contents_overlays()
+	if(length(info))
+		add_overlay("sticky_words")
 
 // Copied from duct tape.
 /obj/item/paper/sticky/attack_hand()
@@ -122,7 +124,7 @@
 
 /obj/item/paper/sticky/afterattack(var/A, var/mob/user, var/flag, var/params)
 
-	if(!in_range(user, A) || istype(A, /obj/machinery/door) || istype(A, /obj/item/storage) || icon_state == "scrap")
+	if(!in_range(user, A) || istype(A, /obj/machinery/door) || istype(A, /obj/item/storage) || is_crumpled)
 		return
 
 	var/turf/target_turf = get_turf(A)

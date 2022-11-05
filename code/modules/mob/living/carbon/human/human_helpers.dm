@@ -335,3 +335,14 @@
 		if(get_equipped_item(slot) == I)
 			return TRUE
 	return FALSE
+
+/mob/living/carbon/human/get_accessible_pen()
+	if((. = ..()))
+		return .
+
+	//Look for other slots
+	var/static/list/PEN_CHECK_SLOTS = list(slot_l_ear_str, slot_r_ear_str, slot_l_store_str, slot_r_store_str, slot_s_store_str)
+	for(var/slot in PEN_CHECK_SLOTS)
+		var/obj/item/I = get_equipped_item(slot)
+		if(IS_PEN(I))
+			return I

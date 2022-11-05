@@ -640,7 +640,7 @@
 	return list(/obj/item/flashlight/lantern,
 				/obj/item/flashlight/flare,
 				/obj/item/flashlight/pen,
-				/obj/item/toner,
+				/obj/item/chems/toner_cartridge,
 				/obj/item/paicard,
 				/obj/item/destTagger,
 				/obj/item/beartrap,
@@ -1205,7 +1205,7 @@ var/global/list/random_useful_
 /obj/random/clipboard
 	name = "random clipboard"
 	desc = "This is a random material clipboard."
-	icon = 'icons/obj/bureaucracy.dmi'
+	icon = 'icons/obj/items/clipboard.dmi'
 	icon_state = "clipboard_preview"
 
 /obj/random/clipboard/spawn_choices()

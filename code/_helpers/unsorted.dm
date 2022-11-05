@@ -784,3 +784,16 @@ var/global/list/WALLITEMS = list(
 // call to generate a stack trace and print to runtime logs
 /proc/get_stack_trace(msg, file, line)
 	CRASH("%% [file],[line] %% [msg]")
+
+/**Returns a number string with its ordinal suffix th, st, nd, rd */
+/proc/get_ordinal_string(var/num)
+	if(num < 10 && num > 20) //11, 12, 13 are exceptions in english, and just get 'th' like everything else
+		switch(num % 10)
+			if(1)
+				return "[num]st"
+			if(2)
+				return "[num]nd"
+			if(3)
+				return "[num]rd"
+	return "[num]th"
+	

@@ -108,13 +108,6 @@
 /obj/item/proc/get_origin_tech()
 	return origin_tech
 
-/obj/item/create_matter()
-	..()
-	LAZYINITLIST(matter)
-	if(istype(material))
-		matter[material.type] = max(matter[material.type], round(MATTER_AMOUNT_PRIMARY * get_matter_amount_modifier()))
-	UNSETEMPTY(matter)
-
 /obj/item/Initialize(var/ml, var/material_key)
 	if(!ispath(material_key, /decl/material))
 		material_key = material
@@ -988,3 +981,11 @@ modules/mob/living/carbon/human/life.dm if you die, you will be zoomed out.
 	var/mob/M = src.loc
 	if(istype(M) && M.client && M.machine == src)
 		src.attack_self(M)
+
+//#TODO: Stub implementation. Probably should be unified into /obj along with health..
+/obj/item/proc/take_damage(var/amount, var/damtype, var/silent = FALSE)
+	if(health == -1) // This object does not take damage.
+		return
+	health = clamp(health - amount, 0, max_health)
+	if(health <= 0)
+		physically_destroyed()

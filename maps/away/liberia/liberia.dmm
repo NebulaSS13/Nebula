@@ -5019,10 +5019,8 @@
 /area/liberia/bridge)
 "jD" = (
 /obj/structure/table/glass,
-/obj/machinery/photocopier/faxmachine{
-	department = "Merchant Outpost";
+/obj/machinery/faxmachine{
 	req_access = list("ACCESS_MERCHANT");
-	send_access = list("ACCESS_MERCHANT")
 	},
 /obj/effect/floor_decal/corner/blue/mono,
 /turf/simulated/floor/tiled/dark/monotile,

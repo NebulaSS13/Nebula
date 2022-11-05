@@ -139,8 +139,7 @@
 	if(href_list["print"])
 		if(length(stored_scan))
 			playsound(loc, "sound/machines/dotprinter.ogg", 30, 1)
-			var/paper_content = "<h3>[src] analysis report #[++report_num]</h3>[stored_scan["data"]]"
-			new/obj/item/paper(get_turf(src), paper_content, "artifact report #[report_num] ([stored_scan["name"]])")
+			new/obj/item/paper(get_turf(src), null, "<h3>[src] analysis report #[++report_num]</h3>[stored_scan["data"]]", "artifact report #[report_num] ([stored_scan["name"]])")
 		. = TOPIC_HANDLED
 
 //Overriden by subtypes to provide fluff description of object function.

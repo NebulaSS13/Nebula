@@ -94,8 +94,8 @@ SUBSYSTEM_DEF(supply)
 					var/atom/A = atom
 					if(find_slip && istype(A,/obj/item/paper/manifest))
 						var/obj/item/paper/manifest/slip = A
-						if(!slip.is_copy && length(slip.stamped))
-							add_points_from_source(slip.order_total * slip_return_rebate, "manifest")
+						if(!LAZYACCESS(slip.metadata, "is_copy") && LAZYLEN(slip.applied_stamps))
+							add_points_from_source(LAZYACCESS(slip.metadata, "order_total") * slip_return_rebate, "manifest")
 							find_slip = 0
 						continue
 
@@ -159,8 +159,8 @@ SUBSYSTEM_DEF(supply)
 			info +="CONTENTS:<br><ul>"
 
 			slip = new /obj/item/paper/manifest(A, JOINTEXT(info))
-			slip.order_total = SP.cost
-			slip.is_copy = 0
+			LAZYSET(slip.metadata, "order_total", SP.cost)
+			LAZYSET(slip.metadata, "is_copy",     FALSE)
 
 		//spawn the stuff, finish generating the manifest while you're at it
 		if(SP.access)

@@ -28,6 +28,20 @@ var/global/floorIsLava = 0
 	for(var/mob/M in SSmobs.mob_list)
 		if(check_rights(rights, 0, M))
 			to_chat(M, message)
+
+/proc/message_staff_fax(var/obj/item/paper/admin/fax, var/obj/machinery/faxmachine/destination, var/owner, var/dest_network_id = "UNKNOWN", var/dest_network_tag = "UNKNOWN")
+	var/msg
+	if(fax.sender)
+		msg = "<span class='log_message'><span class='prefix'>FAX LOG:</span>[key_name_admin(owner)] replied to a fax message from [key_name_admin(fax.sender)] (<a href='?_src_=holder;AdminFaxView=\ref[fax]'>VIEW</a>)</span>"
+		log_admin("[key_name(owner)] replied to a fax message from [key_name(fax.sender)]")
+	else
+		msg = "<span class='log_message'><span class='prefix'>FAX LOG:</span>[key_name_admin(owner)] has sent a fax message to \the [get_area(fax)]'s [destination] ('[dest_network_id]'.'[dest_network_tag]')(<a href='?_src_=holder;AdminFaxView=\ref[fax]'>VIEW</a>)</span>"
+		log_admin("[key_name(owner)] has sent a fax message to \the [get_area(fax)]'s [destination] ('[dest_network_id]'.'[dest_network_tag]')")
+
+	for(var/client/C in global.admins)
+		if(C && C.holder && (R_INVESTIGATE & C.holder.rights))
+			to_chat(C, msg)
+
 ///////////////////////////////////////////////////////////////////////////////////////////////Panels
 
 /datum/admins/proc/show_player_panel(var/mob/M in SSmobs.mob_list)
@@ -1460,93 +1474,76 @@ var/global/floorIsLava = 0
 			to_chat(M, SPAN_OCCULT("OOC: You have been released from paralysis by staff and can return to your game."))
 		log_and_message_admins("has [HAS_STATUS(M, STAT_PARA) ? "paralyzed" : "unparalyzed"] [key_name(M)].")
 
+
+/datum/admins/var/obj/item/paper/admin/faxreply // var to hold fax replies in
+
+/proc/cmp_network_device_tag_asc(atom/a, atom/b)
+	var/datum/extension/network_device/NA = get_extension(a, /datum/extension/network_device)
+	var/datum/extension/network_device/NB = get_extension(b, /datum/extension/network_device)
+	return sorttext(NB? "[NB.network_id].[NB.network_tag]" : "", NA? "[NA.network_id].[NA.network_tag]" : "")
+
+/datum/admins/proc/show_fax_picker(var/list/possible_targets, var/mob/user)
+	var/html = "<h2>Pick a target fax machine:</h2>"
+	possible_targets = sortTim(possible_targets, /proc/cmp_network_device_tag_asc, FALSE)
+	for(var/obj/machinery/faxmachine/F in possible_targets)
+		var/datum/extension/network_device/N = get_extension(F, /datum/extension/network_device)
+		var/datum/computer_network/CN = N?.get_network()
+		if(!N || !CN)
+			continue
+		var/area/A = get_area(F)
+		html += "<li><a href='?src=\ref[src];asf_pick_fax=1;destination=\ref[F]'>[CN.network_id].[N.network_tag] [A? "([A])" : ""]</a></li>"
+	html = "<ul>[html]</ul>"
+	html = "<html><header/><body>[html]</body></html>"
+	show_browser(user, html, "size=512x800;window=faxpicker;title=")
+
 /datum/admins/proc/sendFax()
+	set waitfor = FALSE //This takes a while to process
 	set category = "Special Verbs"
 	set name = "Send Fax"
-	set desc = "Sends a fax to this machine"
-	var/department = input("Choose a fax", "Fax") as null|anything in global.alldepartments
-	for(var/obj/machinery/photocopier/faxmachine/sendto in global.allfaxes)
-		if(sendto.department == department)
+	set desc = "Create and send a fax to the specified fax machine."
 
-			if (!istype(src,/datum/admins))
-				src = usr.client.holder
-			if (!istype(src,/datum/admins))
-				to_chat(usr, "Error: you are not an admin!")
-				return
+	var/mob/user = usr
+	if (!istype(src, /datum/admins))
+		src = user.client.holder
+	if(!istype(src, /datum/admins) || !check_rights(R_ADMIN | R_MOD, "Error: you must have admin/moderator rights to send a fax!", user?.client))
+		return
 
-			var/replyorigin = input(src.owner, "Please specify who the fax is coming from", "Origin") as text|null
+	var/list/possible_targets
+	for(var/_key in SSnetworking.networks)
+		var/datum/computer_network/N = SSnetworking.networks[_key]
+		if(!N)
+			continue
+		var/list/found = N.get_devices_by_type(/obj/machinery/faxmachine) //This thing returns empty lists! It's ruude.
+		if(length(found))
+			LAZYADD(possible_targets, found)
 
-			var/obj/item/paper/admin/P = new /obj/item/paper/admin( null ) //hopefully the null loc won't cause trouble for us
-			faxreply = P
+	if(length(possible_targets))
+		show_fax_picker(possible_targets, user) //Topic will handle the rest!
+	else
+		to_chat(user, SPAN_WARNING("There aren't any fax machines connected to a network in the world!"))
 
-			P.admindatum = src
-			P.origin = replyorigin
-			P.destination = sendto
-
-			P.adminbrowse()
-
-
-datum/admins/var/obj/item/paper/admin/faxreply // var to hold fax replies in
-
-/datum/admins/proc/faxCallback(var/obj/item/paper/admin/P, var/obj/machinery/photocopier/faxmachine/destination)
-	var/customname = input(src.owner, "Pick a title for the report", "Title") as text|null
-
+/datum/admins/proc/faxCallback(var/obj/item/paper/admin/P, var/obj/machinery/faxmachine/destination)
+	var/customname = input(src.owner, "Pick a title for the report", "Title")
 	P.SetName("[P.origin] - [customname]")
 	P.desc = "This is a paper titled '" + P.name + "'."
 
-	var/shouldStamp = 1
-	if(!P.sender) // admin initiated
-		switch(alert("Would you like the fax stamped?",, "Yes", "No"))
-			if("No")
-				shouldStamp = 0
+	if(P.sender || alert("Would you like the fax stamped?",, "Yes", "No") == "Yes")
+		var/image/stampoverlay = image('icons/obj/bureaucracy.dmi', icon_state = "paper_stamp-boss", pixel_x = rand(-2, 0), pixel_y = rand(-2, 0))
+		stampoverlay.appearance_flags |= RESET_COLOR
+		P.apply_custom_stamp(stampoverlay, "by the [P.origin] Quantum Relay")
 
-	if(shouldStamp)
-		P.stamps += "<hr><i>This paper has been stamped by the [P.origin] Quantum Relay.</i>"
+	if(P.sender || alert("Would you like the fax signed?",, "Yes", "No") == "Yes")
+		var/sig = input(src.owner, "Enter the name you wish to sign the paper with.", "Signature") as text|null
+		if(length(sig))
+			P.set_signature(sig)
 
-		var/image/stampoverlay = image('icons/obj/bureaucracy.dmi')
-		var/x
-		var/y
-		x = rand(-2, 0)
-		y = rand(-1, 2)
-		P.offset_x += x
-		P.offset_y += y
-		stampoverlay.pixel_x = x
-		stampoverlay.pixel_y = y
-
-		if(!P.ico)
-			P.ico = new
-		P.ico += "paper_stamp-boss"
-		stampoverlay.icon_state = "paper_stamp-boss"
-
-		if(!P.stamped)
-			P.stamped = new
-		P.stamped += /obj/item/stamp/boss
-		P.overlays += stampoverlay
-
-	var/obj/item/rcvdcopy
-	rcvdcopy = destination.copy(P)
-	rcvdcopy.forceMove(null) //hopefully this shouldn't cause trouble
-	global.adminfaxes += rcvdcopy
-
-
-
-	if(destination.recievefax(P))
-		to_chat(src.owner, "<span class='notice'>Message reply to transmitted successfully.</span>")
-		if(P.sender) // sent as a reply
-			log_admin("[key_name(src.owner)] replied to a fax message from [key_name(P.sender)]")
-			for(var/client/C in global.admins)
-				if((R_INVESTIGATE) & C.holder.rights)
-					to_chat(C, "<span class='log_message'><span class='prefix'>FAX LOG:</span>[key_name_admin(src.owner)] replied to a fax message from [key_name_admin(P.sender)] (<a href='?_src_=holder;AdminFaxView=\ref[rcvdcopy]'>VIEW</a>)</span>")
-		else
-			log_admin("[key_name(src.owner)] has sent a fax message to [destination.department]")
-			for(var/client/C in global.admins)
-				if((R_INVESTIGATE) & C.holder.rights)
-					to_chat(C, "<span class='log_message'><span class='prefix'>FAX LOG:</span>[key_name_admin(src.owner)] has sent a fax message to [destination.department] (<a href='?_src_=holder;AdminFaxView=\ref[rcvdcopy]'>VIEW</a>)</span>")
-
+	var/decl/public_access/public_method/recv = GET_DECL(/decl/public_access/public_method/fax_receive_document)
+	if(recv.perform(destination, P, P.origin))
+		var/datum/extension/network_device/N  = get_extension(destination, /datum/extension/network_device)
+		to_chat(src.owner, SPAN_NOTICE("Message reply to transmitted successfully."))
+		message_staff_fax(P, destination, src.owner, N?.network_id, N?.network_tag)
 	else
-		to_chat(src.owner, "<span class='warning'>Message reply failed.</span>")
+		to_chat(src.owner, SPAN_WARNING("Message reply failed."))
 
-	spawn(100)
-		qdel(P)
-		faxreply = null
-	return
+	LAZYADD(global.adminfaxes, P)
+	faxreply = null
