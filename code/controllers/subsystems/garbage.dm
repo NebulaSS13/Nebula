@@ -134,10 +134,10 @@ SUBSYSTEM_DEF(garbage)
 	//Normally this isn't expensive, but the gc queue can grow to 40k items, and that gets costly/causes overrun.
 	for (var/refidx in 1 to length(queue))
 		var/refID = queue[refidx]
-		if (!refID)
+		if (isnull(refID))
 			count++
 			if (MC_TICK_CHECK)
-				break
+				return
 			continue
 
 		var/GCd_at_time = queue[refID]
@@ -148,7 +148,7 @@ SUBSYSTEM_DEF(garbage)
 		var/datum/D
 		D = locate(refID)
 
-		if (!D || D.gc_destroyed != GCd_at_time) // So if something else coincidently gets the same ref, it's not deleted by mistake
+		if (isnull(D) || D.gc_destroyed != GCd_at_time) // So if something else coincidently gets the same ref, it's not deleted by mistake
 			++gcedlasttick
 			++totalgcs
 			pass_counts[level]++
@@ -156,10 +156,11 @@ SUBSYSTEM_DEF(garbage)
 			reference_find_on_fail -= refID		//It's deleted we don't care anymore.
 			#endif
 			if (MC_TICK_CHECK)
-				break
+				return
 			continue
 
 		// Something's still referring to the qdel'd object.
+		fail_counts[level]++
 		switch (level)
 			if (GC_QUEUE_CHECK)
 				#ifdef TESTING
@@ -176,20 +177,18 @@ SUBSYSTEM_DEF(garbage)
 				if(!I.failures)
 					to_world_log("GC: -- \ref[D] | [type] was unable to be GC'd --")
 				I.failures++
-				fail_counts[level]++
 			if (GC_QUEUE_HARDDELETE)
 				if(harddel_halt)
 					continue
-				fail_counts[level]++
 				HardDelete(D)
 				if (MC_TICK_CHECK)
-					break
+					return
 				continue
 
 		Queue(D, level+1)
 
 		if (MC_TICK_CHECK)
-			break
+			return
 	if (count)
 		queue.Cut(1,count+1)
 		count = 0
@@ -207,9 +206,6 @@ SUBSYSTEM_DEF(garbage)
 
 	D.gc_destroyed = gctime
 	var/list/queue = queues[level]
-	if (queue[refid])
-		queue -= refid // Removing any previous references that were GC'd so that the current object will be at the end of the list.
-
 	queue[refid] = gctime
 
 //this is mainly to separate things profile wise.
@@ -283,14 +279,14 @@ SUBSYSTEM_DEF(garbage)
 // Should be treated as a replacement for the 'del' keyword.
 // Datums passed to this will be given a chance to clean up references to allow the GC to collect them.
 /proc/qdel(datum/D, force=FALSE, ...)
-	if(!D)
+	if(isnull(D))
 		return
 	if(!istype(D))
 		PRINT_STACK_TRACE("qdel() can only handle /datum (sub)types, was passed: [log_info_line(D)]")
 		del(D)
 		return
 	var/datum/qdel_item/I = SSgarbage.items[D.type]
-	if (!I)
+	if (isnull(I))
 		I = SSgarbage.items[D.type] = new /datum/qdel_item(D.type)
 
 	I.qdels++
@@ -313,7 +309,7 @@ SUBSYSTEM_DEF(garbage)
 		else
 			I.destroy_time += TICK_USAGE_TO_MS(start_tick)
 
-		if(!D)
+		if(isnull(D))
 			return
 
 		switch(hint)
