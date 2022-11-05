@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <base href="../../" />
+    <link rel="stylesheet" href="dmdoc.css" />
+    <title>&#x2F;obj&#x2F;item&#x2F;disk - Space Station 13 - Nebula13</title>
+</head>
+<body>
+<header>
+    <a href="index.html">Space Station 13 - Nebula13</a> -
+    <a href="index.html#modules">Modules</a> -
+    <a href="index.html#types">Types</a>
+ &mdash; <a href="obj/item/disk.html#proc">Proc Details</a></header>
+<main>
+<h1>disk <aside>/<a href="obj.html">obj</a>/<a href="obj/item.html">item</a>/<a href="obj/item/disk.html">disk</a></aside>
+        
+    
+            <a href="https://github.com/NebulaSS13/Nebula/blob/adf0ad25b23474c6fc22c5d524d05382f8ece273/code/game/objects/items/weapons/tech_disks.dm#L4">
+        <img src="git.png" width="16" height="16" title="code&#x2F;game&#x2F;objects&#x2F;items&#x2F;weapons&#x2F;tech_disks.dm 4"/></a></h1>
+
+<table class="summary" cellspacing="0"><tr><td colspan="2"><h2>Procs</h2></td></tr>
+            <tr><th><a href="obj/item/disk.html#proc/contains_file_type">contains_file_type</a></th><td>Returns the first file with the matching file_extension, or null if it can't find one</td></tr>
+            <tr><th><a href="obj/item/disk.html#proc/copy_file">copy_file</a></th><td>Clone the file.</td></tr>
+            <tr><th><a href="obj/item/disk.html#proc/delete_all">delete_all</a></th><td>Like a full disk format. Erase all files, even if write protected!</td></tr>
+            <tr><th><a href="obj/item/disk.html#proc/delete_file">delete_file</a></th><td>Delete a specific file. Fails if file is write protected, and force is FALSE.</td></tr>
+            <tr><th><a href="obj/item/disk.html#proc/read_file">read_file</a></th><td>Read and returns a file by filename.</td></tr>
+            <tr><th><a href="obj/item/disk.html#proc/simple_pick_file">simple_pick_file</a></th><td>Offers a simple input box to pick and return the name of a file currently on disk.</td></tr>
+            <tr><th><a href="obj/item/disk.html#proc/write_file">write_file</a></th><td>Writes a file to the disk. Fails if the file is bigger than the amount of free blocks left.</td></tr></table><h2 id="proc">Proc Details</h2><h3 id="proc/contains_file_type"><aside class="declaration">proc </aside>contains_file_type<aside>(file_extension) 
+        
+    
+            <a href="https://github.com/NebulaSS13/Nebula/blob/adf0ad25b23474c6fc22c5d524d05382f8ece273/code/game/objects/items/weapons/tech_disks.dm#L63">
+        <img src="git.png" width="16" height="16" title="code&#x2F;game&#x2F;objects&#x2F;items&#x2F;weapons&#x2F;tech_disks.dm 63"/></a></aside>
+        </h3>
+        <p>Returns the first file with the matching file_extension, or null if it can't find one</p><h3 id="proc/copy_file"><aside class="declaration">proc </aside>copy_file<aside>(name) 
+        
+    
+            <a href="https://github.com/NebulaSS13/Nebula/blob/adf0ad25b23474c6fc22c5d524d05382f8ece273/code/game/objects/items/weapons/tech_disks.dm#L43">
+        <img src="git.png" width="16" height="16" title="code&#x2F;game&#x2F;objects&#x2F;items&#x2F;weapons&#x2F;tech_disks.dm 43"/></a></aside>
+        </h3>
+        <p>Clone the file.</p><h3 id="proc/delete_all"><aside class="declaration">proc </aside>delete_all<aside>() 
+        
+    
+            <a href="https://github.com/NebulaSS13/Nebula/blob/adf0ad25b23474c6fc22c5d524d05382f8ece273/code/game/objects/items/weapons/tech_disks.dm#L58">
+        <img src="git.png" width="16" height="16" title="code&#x2F;game&#x2F;objects&#x2F;items&#x2F;weapons&#x2F;tech_disks.dm 58"/></a></aside>
+        </h3>
+        <p>Like a full disk format. Erase all files, even if write protected!</p><h3 id="proc/delete_file"><aside class="declaration">proc </aside>delete_file<aside>(name, force) 
+        
+    
+            <a href="https://github.com/NebulaSS13/Nebula/blob/adf0ad25b23474c6fc22c5d524d05382f8ece273/code/game/objects/items/weapons/tech_disks.dm#L48">
+        <img src="git.png" width="16" height="16" title="code&#x2F;game&#x2F;objects&#x2F;items&#x2F;weapons&#x2F;tech_disks.dm 48"/></a></aside>
+        </h3>
+        <p>Delete a specific file. Fails if file is write protected, and force is FALSE.</p><h3 id="proc/read_file"><aside class="declaration">proc </aside>read_file<aside>(name) 
+        
+    
+            <a href="https://github.com/NebulaSS13/Nebula/blob/adf0ad25b23474c6fc22c5d524d05382f8ece273/code/game/objects/items/weapons/tech_disks.dm#L39">
+        <img src="git.png" width="16" height="16" title="code&#x2F;game&#x2F;objects&#x2F;items&#x2F;weapons&#x2F;tech_disks.dm 39"/></a></aside>
+        </h3>
+        <p>Read and returns a file by filename.</p><h3 id="proc/simple_pick_file"><aside class="declaration">proc </aside>simple_pick_file<aside>(/<a href="mob.html">mob</a>/user) 
+        
+    
+            <a href="https://github.com/NebulaSS13/Nebula/blob/adf0ad25b23474c6fc22c5d524d05382f8ece273/code/game/objects/items/weapons/tech_disks.dm#L72">
+        <img src="git.png" width="16" height="16" title="code&#x2F;game&#x2F;objects&#x2F;items&#x2F;weapons&#x2F;tech_disks.dm 72"/></a></aside>
+        </h3>
+        <p>Offers a simple input box to pick and return the name of a file currently on disk.</p><h3 id="proc/write_file"><aside class="declaration">proc </aside>write_file<aside>(/<a href="datum.html">datum</a>/computer_file/data/F, new_name) 
+        
+    
+            <a href="https://github.com/NebulaSS13/Nebula/blob/adf0ad25b23474c6fc22c5d524d05382f8ece273/code/game/objects/items/weapons/tech_disks.dm#L23">
+        <img src="git.png" width="16" height="16" title="code&#x2F;game&#x2F;objects&#x2F;items&#x2F;weapons&#x2F;tech_disks.dm 23"/></a></aside>
+        </h3>
+        <p>Writes a file to the disk. Fails if the file is bigger than the amount of free blocks left.</p></main>
+<footer>
+    nebula.dme
+    <a href="https://github.com/NebulaSS13/Nebula/tree/adf0ad25b23474c6fc22c5d524d05382f8ece273">adf0ad2</a>
+        (dev) &mdash; <a href="https://github.com/SpaceManiac/SpacemanDMM/blob/master/src/dmdoc/README.md">dmdoc 1.4.1</a></footer>
+</body>
+</html>
