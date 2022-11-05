@@ -223,12 +223,12 @@
 	startswith = list(
 		/obj/item/storage/belt/fire_belt/full,
 		/obj/item/clothing/suit/fire,
-		/obj/item/extinguisher,
+		/obj/item/chems/spray/extinguisher,
 		/obj/item/clothing/gloves/fire,
 		/obj/item/clothing/accessory/fire_overpants,
 		/obj/item/tank/emergency/oxygen/double/red,
 		/obj/item/clothing/head/hardhat/firefighter,
-		/obj/item/extinguisher
+		/obj/item/chems/spray/extinguisher
 	)
 /*
  * Satchel Types

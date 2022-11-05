@@ -20,7 +20,7 @@
 		/obj/item/gripper,
 		/obj/item/mop/advanced,
 		/obj/item/gripper/no_use/loader,
-		/obj/item/extinguisher/mini,
+		/obj/item/chems/spray/extinguisher/mini,
 		/obj/item/paint_sprayer,
 		/obj/item/inducer/borg,
 		/obj/item/plunger/unbreakable,

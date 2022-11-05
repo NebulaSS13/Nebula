@@ -368,7 +368,7 @@
 	else
 		return 0
 
-/obj/item/throw_impact(atom/hit_atom)
+/obj/item/throw_impact(atom/hit_atom, datum/thrownthing/TT)
 	..()
 	if(isliving(hit_atom)) //Living mobs handle hit sounds differently.
 		var/volume = get_volume_by_throwforce_and_or_w_class()
@@ -381,7 +381,7 @@
 			playsound(hit_atom, 'sound/weapons/throwtap.ogg', 1, volume, -1)
 
 // apparently called whenever an item is removed from a slot, container, or anything else.
-/obj/item/proc/dropped(mob/user)
+/obj/item/proc/dropped(var/mob/user, var/play_dropsound = TRUE)
 
 	SHOULD_CALL_PARENT(TRUE)
 	if(randpixel)
@@ -389,7 +389,7 @@
 	update_twohanding()
 	for(var/obj/item/thing in user?.get_held_items())
 		thing.update_twohanding()
-	if(drop_sound && SSticker.mode)
+	if(play_dropsound && drop_sound && SSticker.mode)
 		addtimer(CALLBACK(src, .proc/dropped_sound_callback), 0, (TIMER_OVERRIDE | TIMER_UNIQUE))
 
 	if(user && (z_flags & ZMM_MANGLE_PLANES))
@@ -935,29 +935,6 @@ modules/mob/living/carbon/human/life.dm if you die, you will be zoomed out.
 
 /obj/item/proc/attack_message_name()
 	return "\a [src]"
-
-/obj/item/proc/fill_from_pressurized_fluid_source(obj/structure/source, mob/user)
-	if(!istype(source) || !source.is_pressurized_fluid_source())
-		return FALSE
-	var/free_space =  FLOOR(REAGENTS_FREE_SPACE(reagents))
-	if(free_space <= 0)
-		to_chat(user, SPAN_WARNING("\The [src] is full!"))
-		return TRUE
-	if(istype(source, /obj/structure/reagent_dispensers))
-		free_space = min(free_space, source.reagents?.total_volume)
-		if(free_space <= 0)
-			to_chat(user, SPAN_WARNING("There is not enough fluid in \the [source] to fill \the [src]."))
-			return TRUE
-	if(free_space > 0)
-		if(istype(source, /obj/structure/reagent_dispensers/watertank))
-			source.reagents.trans_to_obj(src, free_space)
-		else
-			reagents.add_reagent(/decl/material/liquid/water, free_space) //#FIXME: Maybe it would be better not to create water from a type check like that in the base item code? Idk.
-		if(reagents && reagents.total_volume >= reagents.maximum_volume)
-			to_chat(user, SPAN_NOTICE("You fill \the [src] with [free_space] unit\s from \the [source]."))
-			reagents.touch(src)
-			return TRUE
-	return FALSE
 
 /obj/item/proc/add_coating(reagent_type, amount, data)
 	if(!coating)

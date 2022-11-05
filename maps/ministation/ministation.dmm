@@ -2425,11 +2425,11 @@
 /area/ministation/science)
 "gI" = (
 /obj/structure/table,
-/obj/item/extinguisher{
+/obj/item/chems/spray/extinguisher{
 	pixel_x = 4;
 	pixel_y = 3
 	},
-/obj/item/extinguisher,
+/obj/item/chems/spray/extinguisher,
 /obj/machinery/atmospherics/unary/vent_scrubber/on,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
@@ -4465,7 +4465,7 @@
 /obj/structure/rack{
 	dir = 1
 	},
-/obj/item/extinguisher,
+/obj/item/chems/spray/extinguisher,
 /obj/item/clothing/head/hardhat/red,
 /obj/random/gloves,
 /turf/simulated/floor/plating,
@@ -5708,7 +5708,7 @@
 	pixel_x = -2;
 	pixel_y = -1
 	},
-/obj/item/extinguisher,
+/obj/item/chems/spray/extinguisher,
 /obj/effect/floor_decal/industrial/warning{
 	dir = 10
 	},
@@ -10896,7 +10896,7 @@
 	name = "Station Intercom (General)";
 	pixel_y = -35
 	},
-/obj/item/extinguisher,
+/obj/item/chems/spray/extinguisher,
 /turf/simulated/floor/holofloor/lino,
 /area/ministation/telecomms)
 "Dg" = (
@@ -11921,7 +11921,7 @@
 /obj/structure/rack{
 	dir = 8
 	},
-/obj/item/extinguisher{
+/obj/item/chems/spray/extinguisher{
 	pixel_x = 8
 	},
 /obj/item/clothing/gloves/thick,

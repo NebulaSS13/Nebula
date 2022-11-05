@@ -701,7 +701,7 @@
 "aGC" = (
 /obj/structure/table,
 /obj/item/storage/firstaid/fire,
-/obj/item/extinguisher,
+/obj/item/chems/spray/extinguisher,
 /obj/machinery/camera/network/crescent{
 	c_tag = "Shuttle Bridge West"
 	},
@@ -1427,7 +1427,7 @@
 	pixel_x = 2;
 	pixel_y = 3
 	},
-/obj/item/extinguisher,
+/obj/item/chems/spray/extinguisher,
 /obj/item/crowbar,
 /turf/simulated/floor/tiled/monotile,
 /area/shuttle/escape_shuttle)
@@ -2909,7 +2909,7 @@
 	},
 /area/tdome/tdomeobserve)
 "lQQ" = (
-/obj/item/extinguisher,
+/obj/item/chems/spray/extinguisher,
 /turf/unsimulated/floor{
 	icon_state = "lino"
 	},

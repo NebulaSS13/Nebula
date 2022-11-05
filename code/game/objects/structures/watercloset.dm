@@ -345,9 +345,6 @@ var/global/list/hygiene_props = list()
 	anchored = 1
 	var/busy = 0 	//Something's being washed at the moment
 
-/obj/structure/hygiene/sink/is_pressurized_fluid_source()
-	return TRUE
-
 /obj/structure/hygiene/sink/receive_mouse_drop(var/atom/dropping, var/mob/user)
 	. = ..()
 	if(!. && isitem(dropping) && ATOM_IS_OPEN_CONTAINER(dropping))
@@ -443,7 +440,7 @@ var/global/list/hygiene_props = list()
 		return TRUE
 	busy = 0
 
-	if(istype(O, /obj/item/extinguisher/)) return TRUE // We're washing, not filling.
+	if(istype(O, /obj/item/chems/spray/extinguisher)) return TRUE // We're washing, not filling.
 
 	O.clean_blood()
 	user.visible_message( \
@@ -459,9 +456,6 @@ var/global/list/hygiene_props = list()
 	name = "puddle"
 	icon_state = "puddle"
 	clogged = -1 // how do you clog a puddle
-
-/obj/structure/hygiene/sink/puddle/is_pressurized_fluid_source()
-	return FALSE
 
 /obj/structure/hygiene/sink/puddle/attack_hand(var/mob/M)
 	icon_state = "puddle-splash"

@@ -126,7 +126,7 @@
 		/obj/item/hatchet,
 		/obj/item/scanner/plant,
 		/obj/item/stack/tape_roll,
-		/obj/item/extinguisher/mini,
+		/obj/item/chems/spray/extinguisher/mini,
 		/obj/item/marshalling_wand,
 		/obj/item/geiger,
 		/obj/item/hand_labeler,
@@ -180,7 +180,7 @@
 		/obj/item/crowbar,
 		/obj/item/flashlight,
 		/obj/item/stack/tape_roll,
-		/obj/item/extinguisher/mini,
+		/obj/item/chems/spray/extinguisher/mini,
 		/obj/item/storage/med_pouch,
 		/obj/item/bodybag,
 		/obj/item/clothing/gloves
@@ -471,7 +471,7 @@
 	overlay_flags = BELT_OVERLAY_ITEMS
 	can_hold = list(
 		/obj/item/grenade/chem_grenade/water,
-		/obj/item/extinguisher/mini,
+		/obj/item/chems/spray/extinguisher/mini,
 		/obj/item/inflatable,
 		/obj/item/inflatable/door
 		)
@@ -483,6 +483,6 @@
 		/obj/item/inflatable,
 		/obj/item/inflatable,
 		/obj/item/inflatable/door,
-		/obj/item/extinguisher/mini,
+		/obj/item/chems/spray/extinguisher/mini,
 		/obj/item/grenade/chem_grenade/water = 2
 	)

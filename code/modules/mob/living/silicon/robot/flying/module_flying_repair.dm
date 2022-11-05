@@ -13,7 +13,7 @@
 	)
 	equipment = list(
 		/obj/item/borg/sight/meson,
-		/obj/item/extinguisher,
+		/obj/item/chems/spray/extinguisher,
 		/obj/item/weldingtool/largetank,
 		/obj/item/screwdriver,
 		/obj/item/wrench,

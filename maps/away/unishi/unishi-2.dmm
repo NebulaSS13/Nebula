@@ -1573,9 +1573,9 @@
 /area/unishi/xenobio)
 "ew" = (
 /obj/structure/table/glass,
-/obj/item/extinguisher,
-/obj/item/extinguisher,
-/obj/item/extinguisher,
+/obj/item/chems/spray/extinguisher,
+/obj/item/chems/spray/extinguisher,
+/obj/item/chems/spray/extinguisher,
 /obj/item/storage/box/monkeycubes,
 /obj/machinery/power/apc{
 	dir = 1;

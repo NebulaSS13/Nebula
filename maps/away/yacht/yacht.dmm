@@ -651,7 +651,7 @@
 /turf/simulated/floor/plating,
 /area/yacht/engine)
 "bW" = (
-/obj/item/extinguisher,
+/obj/item/chems/spray/extinguisher,
 /obj/machinery/portable_atmospherics/hydroponics,
 /obj/effect/decal/cleanable/dirt,
 /turf/simulated/floor/wood/yew,

@@ -79,7 +79,7 @@
 	    /obj/item/radio/off,
 	    /obj/random/medical,
 	    /obj/item/crowbar,
-	    /obj/item/extinguisher/mini,
+	    /obj/item/chems/spray/extinguisher/mini,
 	    /obj/item/storage/box/freezer,
 	    /obj/item/clothing/accessory/storage/vest,
 	)

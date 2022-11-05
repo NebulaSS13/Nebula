@@ -1,23 +1,28 @@
 /obj/item/chems/spray
-	name = "spray bottle"
-	desc = "A spray bottle, with an unscrewable top."
-	icon = 'icons/obj/janitor.dmi'
-	icon_state = "cleaner"
-	item_state = "cleaner"
-	item_flags = ITEM_FLAG_NO_BLUDGEON
-	atom_flags = ATOM_FLAG_OPEN_CONTAINER
-	slot_flags = SLOT_LOWER_BODY
-	throwforce = 3
-	w_class = ITEM_SIZE_SMALL
-	throw_speed = 2
-	throw_range = 10
-	amount_per_transfer_from_this = 10
-	unacidable = 1 //plastic
-	possible_transfer_amounts = @"[5,10]"
-	volume = 250
-	var/spray_size = 3
-	var/list/spray_sizes = list(1,3)
-	var/step_delay = 10 // lower is faster
+	name                              = "spray bottle"
+	desc                              = "A spray bottle, with an unscrewable top."
+	icon                              = 'icons/obj/janitor.dmi'
+	icon_state                        = "cleaner"
+	item_state                        = "cleaner"
+	item_flags                        = ITEM_FLAG_NO_BLUDGEON
+	atom_flags                        = ATOM_FLAG_OPEN_CONTAINER
+	slot_flags                        = SLOT_LOWER_BODY
+	w_class                           = ITEM_SIZE_SMALL
+	throw_speed                       = 2
+	throw_range                       = 10
+	throwforce                        = 3
+	attack_cooldown                   = DEFAULT_QUICK_COOLDOWN
+	unacidable                        = TRUE //plastic
+	material                          = /decl/material/solid/plastic
+	volume                            = 250
+	amount_per_transfer_from_this     = 10
+	possible_transfer_amounts         = @"[5,10]"
+	var/tmp/possible_particle_amounts = @"[1,3]"                    ///Possible chempuff particles amount for each transfer amount setting
+	var/spray_particles               = 3                           ///Amount of chempuff particles
+	var/tmp/particle_move_delay       = 10                          ///lower is faster
+	var/tmp/sound_spray               = 'sound/effects/spray2.ogg'  ///Sound played when spraying
+	var/safety                        = FALSE                       ///Whether the safety is on
+	
 
 /obj/item/chems/spray/Initialize()
 	. = ..()
@@ -35,12 +40,10 @@
 			return
 
 	if(reagents.total_volume < amount_per_transfer_from_this)
-		to_chat(user, "<span class='notice'>\The [src] is empty!</span>")
+		to_chat(user, SPAN_WARNING("\The [src] is empty!"))
 		return
 
 	Spray_at(A, user, proximity)
-
-	user.setClickCooldown(DEFAULT_QUICK_COOLDOWN)
 
 	if(reagents.has_reagent(/decl/material/liquid/acid))
 		log_and_message_admins("fired sulphuric acid from \a [src].", user)
@@ -51,54 +54,86 @@
 	return
 
 /obj/item/chems/spray/proc/Spray_at(atom/movable/A, mob/user, proximity)
-	playsound(src.loc, 'sound/effects/spray2.ogg', 50, 1, -6)
+	if(has_safety() && safety)
+		to_chat(user, SPAN_WARNING("The safety is on!"))
+		return
+	playsound(src, sound_spray, 50, TRUE, -6)
 	if (A.density && proximity)
 		reagents.splash(A, amount_per_transfer_from_this)
 		if(A == user)
-			A.visible_message("<span class='notice'>\The [user] sprays themselves with \the [src].</span>")
+			A.visible_message(SPAN_NOTICE("\The [user] sprays themselves with \the [src]."))
 		else
-			A.visible_message("<span class='notice'>\The [user] sprays \the [A] with \the [src].</span>")
+			A.visible_message(SPAN_NOTICE("\The [user] sprays \the [A] with \the [src]."))
 	else
-		spawn(0)
-			var/obj/effect/effect/water/chempuff/D = new/obj/effect/effect/water/chempuff(get_turf(src))
-			var/turf/my_target = get_turf(A)
-			D.create_reagents(amount_per_transfer_from_this)
-			if(!src)
-				return
-			reagents.trans_to_obj(D, amount_per_transfer_from_this)
-			D.set_color()
-			D.set_up(my_target, spray_size, step_delay)
-	return
+		create_chempuff(A)
+	return TRUE
+
+/obj/item/chems/spray/proc/create_chempuff(var/atom/movable/target, var/particle_amount)
+	set waitfor = FALSE
+	
+	var/obj/effect/effect/water/chempuff/D = new/obj/effect/effect/water/chempuff(get_turf(src))
+	D.create_reagents(amount_per_transfer_from_this)
+	if(QDELETED(src))
+		return
+	reagents.trans_to_obj(D, amount_per_transfer_from_this)
+	D.set_color()
+	D.set_up(get_turf(target), particle_amount? particle_amount : spray_particles, particle_move_delay)
+	return D
 
 /obj/item/chems/spray/attack_self(var/mob/user)
-	if(!possible_transfer_amounts)
-		return
-	amount_per_transfer_from_this = next_in_list(amount_per_transfer_from_this, cached_json_decode(possible_transfer_amounts))
-	spray_size = next_in_list(spray_size, spray_sizes)
-	to_chat(user, "<span class='notice'>You adjusted the pressure nozzle. You'll now use [amount_per_transfer_from_this] units per spray.</span>")
+	if(has_safety())
+		toggle_safety()
+		return TRUE
+	else
+		//If no safety, we just toggle the nozzle
+		var/decl/interaction_handler/IH = GET_DECL(/decl/interaction_handler/next_spray_amount)
+		if(IH.is_possible(src, user))
+			IH.invoked(src, user)
+			return TRUE
+
+///Whether the spray has a safety toggle
+/obj/item/chems/spray/proc/has_safety()
+	return FALSE
+
+/obj/item/chems/spray/proc/toggle_safety()
+	safety = !safety
+	to_chat(usr, SPAN_NOTICE("You switch the safety [safety ? "on" : "off"]."))
 
 /obj/item/chems/spray/examine(mob/user, distance)
 	. = ..()
-	if(distance == 0 && loc == user)
+	if(loc == user)
 		to_chat(user, "[round(reagents.total_volume)] unit\s left.")
+	if(has_safety() && distance <= 1)
+		to_chat(user, "The safety is [safety ? "on" : "off"].")
 
-/obj/item/chems/spray/verb/empty()
+/obj/item/chems/get_alt_interactions(mob/user)
+	. = ..()
+	LAZYADD(., /decl/interaction_handler/empty/chems)
+	LAZYADD(., /decl/interaction_handler/next_spray_amount)
 
-	set name = "Empty Spray Bottle"
-	set category = "Object"
-	set src in usr
+///Toggle the spray size and transfer amount between the possible options
+/decl/interaction_handler/next_spray_amount
+	name                 = "Next Nozzle Setting"
+	expected_target_type = /obj/item/chems/spray
+	interaction_flags    = INTERACTION_NEEDS_INVENTORY | INTERACTION_NEEDS_PHYSICAL_INTERACTION
 
-	if (alert(usr, "Are you sure you want to empty that?", "Empty Bottle:", "Yes", "No") != "Yes")
+/decl/interaction_handler/next_spray_amount/is_possible(obj/item/chems/spray/target, mob/user, obj/item/prop)
+	. = ..()
+	if(.)
+		return !isnull(target.possible_transfer_amounts)
+
+/decl/interaction_handler/next_spray_amount/invoked(obj/item/chems/spray/target, mob/user)
+	if(!target.possible_transfer_amounts)
 		return
-	if(isturf(usr.loc))
-		to_chat(usr, "<span class='notice'>You empty \the [src] onto the floor.</span>")
-		reagents.splash(usr.loc, reagents.total_volume)
+	target.amount_per_transfer_from_this = next_in_list(target.amount_per_transfer_from_this, cached_json_decode(target.possible_transfer_amounts))
+	target.spray_particles = next_in_list(target.spray_particles, cached_json_decode(target.possible_particle_amounts))
+	to_chat(user, SPAN_NOTICE("You adjusted the pressure nozzle. You'll now use [target.amount_per_transfer_from_this] units per spray."))
 
 //space cleaner
 /obj/item/chems/spray/cleaner
 	name = "space cleaner"
 	desc = "BLAM!-brand non-foaming space cleaner!"
-	step_delay = 6
+	particle_move_delay = 6
 
 /obj/item/chems/spray/cleaner/populate_reagents()
 	reagents.add_reagent(/decl/material/liquid/cleaner, reagents.maximum_volume)
@@ -124,26 +159,14 @@
 	icon_state = ICON_STATE_WORLD
 	possible_transfer_amounts = null
 	volume = 60
-	var/safety = 1
-	step_delay = 1
+	particle_move_delay = 1
+	safety = TRUE
 
 /obj/item/chems/spray/pepper/populate_reagents()
 	reagents.add_reagent(/decl/material/liquid/capsaicin/condensed, reagents.maximum_volume)
 
-/obj/item/chems/spray/pepper/examine(mob/user, distance)
-	. = ..()
-	if(distance <= 1)
-		to_chat(user, "The safety is [safety ? "on" : "off"].")
-
-/obj/item/chems/spray/pepper/attack_self(var/mob/user)
-	safety = !safety
-	to_chat(usr, "<span class = 'notice'>You switch the safety [safety ? "on" : "off"].</span>")
-
-/obj/item/chems/spray/pepper/Spray_at(atom/A)
-	if(safety)
-		to_chat(usr, "<span class = 'warning'>The safety is on!</span>")
-		return
-	..()
+/obj/item/chems/spray/pepper/has_safety()
+	return TRUE
 
 /obj/item/chems/spray/waterflower
 	name = "water flower"
@@ -169,7 +192,7 @@
 	possible_transfer_amounts = null
 	volume = 600
 	origin_tech = "{'combat':3,'materials':3,'engineering':3}"
-	step_delay = 8
+	particle_move_delay = 2 //Was hardcoded to 2 before, and 8 was slower than most mob's move speed
 	material = /decl/material/solid/metal/steel
 	matter = list(/decl/material/solid/fiberglass = MATTER_AMOUNT_REINFORCEMENT)
 
@@ -181,16 +204,9 @@
 	var/list/the_targets = list(T, T1, T2)
 
 	for(var/a = 1 to 3)
-		spawn(0)
-			if(reagents.total_volume < 1) break
-			var/obj/effect/effect/water/chempuff/D = new/obj/effect/effect/water/chempuff(get_turf(src))
-			var/turf/my_target = the_targets[a]
-			D.create_reagents(amount_per_transfer_from_this)
-			if(!src)
-				return
-			reagents.trans_to_obj(D, amount_per_transfer_from_this)
-			D.set_color()
-			D.set_up(my_target, rand(6, 8), 2)
+		if(reagents.total_volume < 1)
+			break
+		create_chempuff(the_targets[a], rand(6, 8))
 	return
 
 /obj/item/chems/spray/plantbgone

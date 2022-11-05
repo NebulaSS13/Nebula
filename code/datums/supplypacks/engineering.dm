@@ -201,7 +201,7 @@
 	contains = list(/obj/item/clothing/suit/fire,
 			/obj/item/clothing/mask/gas,
 			/obj/item/tank/emergency/oxygen/double/red,
-			/obj/item/extinguisher,
+			/obj/item/chems/spray/extinguisher,
 			/obj/item/clothing/head/hardhat/red)
 	containertype = /obj/structure/closet/firecloset
 	containername = "fire-safety closet"

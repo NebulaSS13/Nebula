@@ -155,7 +155,7 @@
 /obj/proc/can_embed()
 	return is_sharp(src)
 
-/obj/examine(mob/user)
+/obj/examine(mob/user, distance, infix, suffix)
 	. = ..()
 	if((obj_flags & OBJ_FLAG_ROTATABLE))
 		to_chat(user, SPAN_SUBTLE("\The [src] can be rotated with alt-click."))
