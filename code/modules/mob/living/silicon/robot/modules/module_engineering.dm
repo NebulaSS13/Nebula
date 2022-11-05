@@ -28,7 +28,7 @@
 		/obj/item/weldingtool/largetank,
 		/obj/item/screwdriver,
 		/obj/item/wrench,
-		/obj/item/crowbar,
+		/obj/item/crowbar/brace_jack,
 		/obj/item/wirecutters,
 		/obj/item/multitool,
 		/obj/item/t_scanner,
