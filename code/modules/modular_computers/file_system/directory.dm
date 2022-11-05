@@ -11,9 +11,10 @@
 /datum/computer_file/directory/Destroy()
 	for(var/weakref/file_ref in held_files)
 		var/datum/computer_file/held_file = file_ref.resolve()
-		if(held_file)
-			holder.remove_file(held_file, forced = TRUE)
-	
+		var/obj/item/stock_parts/computer/hard_drive/hard_drive = holder?.resolve()
+		if(held_file && hard_drive)
+			hard_drive.remove_file(held_file, forced = TRUE)
+
 	QDEL_NULL(temp_file_refs)
 	. = ..()
 
@@ -48,7 +49,7 @@
 // * OS_WRITE_ACCESS on all contained files is required for transferring/deleting directories.
 /datum/computer_file/directory/proc/get_held_perms(list/accesses, mob/user, list/counted_dirs = list())
 	. = get_file_perms(accesses, user)
-	
+
 	if(!accesses || (isghost(user) && check_rights(R_ADMIN, 0, user))) // As with normal file perms, either internal use or admin-ghost usage.
 		return
 
@@ -57,7 +58,7 @@
 		var/datum/computer_file/held_file = file_ref.resolve()
 		if(!held_file)
 			held_files -= file_ref
-		
+
 		if(istype(held_file, /datum/computer_file/directory))
 			var/datum/computer_file/directory/dir = held_file
 			if(dir in counted_dirs)
@@ -65,14 +66,14 @@
 			. += dir.get_held_perms(accesses, user, counted_dirs)
 		else
 			. &= held_file.get_file_perms(accesses, user)
-		
+
 		if(. == 0) // We've already lost all permissions, don't bother checking anything else.
 			return
 
 /datum/computer_file/directory/get_file_path()
 	var/parent_paths = ..()
 	if(parent_paths)
-		return parent_paths + "/" + filename 
+		return parent_paths + "/" + filename
 	return filename
 
 /datum/computer_file/directory/clone(var/rename = 0)
