@@ -34,11 +34,12 @@
 		pinned_target = T
 	else
 		set_density(1)
-		pinned_target.set_density(0)
-		pinned_target.layer = OBJ_LAYER
-		events_repository.unregister(/decl/observ/moved, pinned_target, src)
-		events_repository.unregister(/decl/observ/moved, src, pinned_target)
-		pinned_target.stake = null
+		if(pinned_target)
+			pinned_target.set_density(0)
+			pinned_target.layer = OBJ_LAYER
+			events_repository.unregister(/decl/observ/moved, pinned_target, src)
+			events_repository.unregister(/decl/observ/moved, src, pinned_target)
+			pinned_target.stake = null
 		pinned_target = null
 
 /obj/structure/target_stake/Destroy()

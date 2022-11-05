@@ -16,6 +16,10 @@
 	. = ..()
 	SSpsi.psi_monitors += src
 
+/obj/machinery/psi_monitor/Destroy()
+	SSpsi.psi_monitors -= src
+	return ..()
+
 /obj/machinery/psi_monitor/emag_act(var/remaining_charges, var/mob/user)
 	if(!emagged)
 		emagged = TRUE

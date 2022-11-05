@@ -221,9 +221,11 @@
 // Includes normal radio uplink, multitool uplink,
 // implant uplink (not the implant tool) and a preset headset uplink.
 
+/obj/item/radio/uplink/var/tc_amount = DEFAULT_TELECRYSTAL_AMOUNT
+
 /obj/item/radio/uplink/attack_self(mob/user)
 	if(!hidden_uplink && user.mind)
-		hidden_uplink = new(src, user.mind, DEFAULT_TELECRYSTAL_AMOUNT)
+		hidden_uplink = new(src, user.mind, tc_amount)
 	if(hidden_uplink)
 		hidden_uplink.trigger(user)
 

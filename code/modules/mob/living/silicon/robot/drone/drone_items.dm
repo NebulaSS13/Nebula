@@ -283,6 +283,13 @@
 	var/datum/matter_synth/wood = null
 	var/datum/matter_synth/plastic = null
 
+/obj/item/matter_decompiler/Destroy()
+	metal = null
+	glass = null
+	wood = null
+	plastic = null
+	return ..()
+
 /obj/item/matter_decompiler/attack(mob/living/carbon/M, mob/living/carbon/user)
 	return
 

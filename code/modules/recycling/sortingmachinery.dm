@@ -18,13 +18,17 @@
 		return attack_hand(user)
 
 /obj/structure/bigDelivery/attack_hand(mob/user)
-	unwrap(user)
+	if(Adjacent(user))
+		unwrap(src)
 	return TRUE
 
-/obj/structure/bigDelivery/proc/unwrap(var/mob/user)
-	if(Adjacent(user))
-		// Destroy will drop our wrapped object on the turf, so let it.
-		qdel(src)
+/obj/structure/bigDelivery/proc/unwrap()
+	if(isloc(loc))
+		if(!QDELETED(wrapped)) //sometimes items can disappear. For example, bombs. --rastaf0
+			wrapped.dropInto(loc)
+			wrapped = null
+		dump_contents()
+	qdel(src)
 
 /obj/structure/bigDelivery/attackby(obj/item/W, mob/user)
 	if(istype(W, /obj/item/destTagger))
@@ -110,18 +114,6 @@
 			to_chat(user, "<span class='notice'>It is labeled \"[sortTag]\"</span>")
 		if(examtext)
 			to_chat(user, "<span class='notice'>It has a note attached which reads, \"[examtext]\"</span>")
-
-/obj/structure/bigDelivery/Destroy()
-	if(wrapped) //sometimes items can disappear. For example, bombs. --rastaf0
-		wrapped.dropInto(loc)
-		if(istype(wrapped, /obj/structure/closet))
-			var/obj/structure/closet/O = wrapped
-			O.welded = 0
-		wrapped = null
-	var/turf/T = get_turf(src)
-	for(var/atom/movable/AM in contents)
-		AM.forceMove(T)
-	return ..()
 
 /obj/item/smallDelivery
 	desc = "A small wrapped package."

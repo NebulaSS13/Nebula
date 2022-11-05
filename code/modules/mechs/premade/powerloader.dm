@@ -123,7 +123,6 @@
 	desc = "A mix and match of industrial parts designed to withstand fires."
 
 /mob/living/exosuit/premade/firefighter/Initialize()
-	. = ..()
 	if(!arms)
 		arms = new /obj/item/mech_component/manipulators/powerloader(src)
 		arms.color = "#385b3c"
@@ -138,6 +137,8 @@
 		body.color = "#385b3c"
 
 	material = GET_DECL(/decl/material/solid/metal/plasteel/ocp)
+
+	. = ..()
 
 /mob/living/exosuit/premade/firefighter/spawn_mech_equipment()
 	..()

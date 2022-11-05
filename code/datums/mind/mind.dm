@@ -71,6 +71,8 @@
 	QDEL_NULL_LIST(objectives)
 	QDEL_NULL(changeling)
 	SSticker.minds -= src
+	current = null
+	original = null
 	. = ..()
 
 /datum/mind/proc/handle_mob_deletion(mob/living/deleted_mob)
