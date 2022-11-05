@@ -519,3 +519,4 @@
 	charge_costs = list(1)
 	stack_merge_type = /obj/item/stack/package_wrap
 	health = ITEM_HEALTH_NO_DAMAGE
+	is_spawnable_type = FALSE

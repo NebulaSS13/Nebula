@@ -10,6 +10,7 @@
 	anchored =      TRUE
 	unacidable =    TRUE
 	invisibility =  INVISIBILITY_MAXIMUM+1
+	is_spawnable_type = FALSE
 	abstract_type = /obj/abstract
 
 /obj/abstract/Initialize()

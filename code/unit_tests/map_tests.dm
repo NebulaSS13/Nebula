@@ -707,6 +707,7 @@
 	packages_awaiting_delivery[package] = start_tag
 
 /obj/structure/disposalholder/unit_test
+	is_spawnable_type = FALSE // NO
 	var/datum/unit_test/networked_disposals_shall_deliver_tagged_packages/test
 	speed = 100
 

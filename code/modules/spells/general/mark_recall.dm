@@ -56,6 +56,7 @@
 	anchored = 1
 	unacidable = 1
 	layer = TURF_LAYER
+	is_spawnable_type = FALSE // invalid without spell passed
 
 	var/spell/mark_recall/spell
 

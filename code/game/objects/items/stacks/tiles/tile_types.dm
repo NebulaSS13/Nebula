@@ -73,6 +73,7 @@
 	stack_merge_type = /obj/item/stack/tile/wood
 	build_type = /obj/item/stack/tile/wood
 	health = ITEM_HEALTH_NO_DAMAGE
+	is_spawnable_type = FALSE
 
 /obj/item/stack/tile/mahogany
 	name = "mahogany floor tile"
@@ -225,6 +226,7 @@
 	stack_merge_type = /obj/item/stack/tile/floor
 	build_type = /obj/item/stack/tile/floor
 	health = ITEM_HEALTH_NO_DAMAGE
+	is_spawnable_type = FALSE
 
 /obj/item/stack/tile/roof/cyborg
 	name = "roofing tile synthesizer"
@@ -236,6 +238,7 @@
 	stack_merge_type = /obj/item/stack/tile/roof
 	build_type = /obj/item/stack/tile/roof
 	health = ITEM_HEALTH_NO_DAMAGE
+	is_spawnable_type = FALSE
 
 /obj/item/stack/tile/linoleum
 	name = "linoleum"

@@ -478,6 +478,7 @@
 	src.name = name
 
 /atom/movable/graph_test
+	is_spawnable_type = FALSE
 	var/datum/node/physical/node
 	var/list/neighoursByDirection = list()
 

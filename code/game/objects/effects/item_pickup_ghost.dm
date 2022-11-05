@@ -1,4 +1,5 @@
 /obj/effect/temporary/item_pickup_ghost
+	is_spawnable_type = FALSE
 	var/lifetime = 0.2 SECONDS
 
 /obj/effect/temporary/item_pickup_ghost/Initialize(var/mapload, var/obj/item/picked_up)

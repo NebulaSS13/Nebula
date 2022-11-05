@@ -6,6 +6,7 @@
 	gender = NEUTER
 	matter = null // Don't shove it in the autholathe.
 	health = ITEM_HEALTH_NO_DAMAGE
+	is_spawnable_type = FALSE
 
 /obj/item/stack/material/cyborg/Initialize()
 	. = ..()

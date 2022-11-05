@@ -232,6 +232,7 @@
 		SSnano.update_uis(src)
 
 /mob/announcer // used only for autosay
+	is_spawnable_type = FALSE
 	simulated = FALSE
 
 /obj/item/radio/proc/autosay(var/message, var/from, var/channel, var/sayverb = "states") //BS12 EDIT

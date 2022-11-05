@@ -6,6 +6,7 @@
 	opacity =      FALSE
 	density =      FALSE
 	invisibility = INVISIBILITY_MAXIMUM
+	is_spawnable_type = FALSE
 	var/decl/radio_chatter/owner
 
 /obj/item/radio/virtual/Initialize(var/ml, var/decl/radio_chatter/_owner)

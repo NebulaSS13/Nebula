@@ -2,6 +2,7 @@
 	see_in_dark = 2
 	see_invisible = SEE_INVISIBLE_LIVING
 	transform_animate_time = ANIM_LYING_TIME
+	abstract_type = /mob/living
 
 	//Health and life related vars
 	var/maxHealth = 100 //Maximum health that should be possible.
