@@ -371,7 +371,7 @@ SUBSYSTEM_DEF(garbage)
 	user_find_references()
 
 /datum/proc/user_find_references()
-	if(alert("Running this will lock everything up for about 5 minutes. Would you like to begin the search?", "Find References", "No", "Yes")) == "No")
+	if(alert("Running this will lock everything up for about 5 minutes. Would you like to begin the search?", "Find References", "No", "Yes") == "No")
 		return
 	find_references()
 
