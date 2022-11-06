@@ -71,7 +71,11 @@ GLOBAL_PROTECTED_UNTYPED(game_id, null)
 	return match
 
 /world/New()
-
+// Remove when https://www.byond.com/forum/post/2833191 is fixed
+#ifdef UNIT_TEST
+	maxx = max(maxx, 127)
+	maxy = max(maxy, 127)
+#endif
 	//set window title
 	name = "[config.server_name] - [global.using_map.full_name]"
 
