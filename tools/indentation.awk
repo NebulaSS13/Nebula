@@ -16,12 +16,16 @@
 		}
 	}
 
-	if ($0 ~ /,[\t ]*\\?\r?$/ || # comma at EOL
-	    $0 ~ /list[\t ]*\([\t ]*\\?\r?$/ || # start of a list()
-	    $0 ~ /pick[\t ]*\([\t ]*\\?\r?$/ ) { # start of a pick()
-		comma = 1
-	} else {
-		comma = 0
+	if ( $0 !~ /^[\t ]+\/[\/*]/ ) # Current line is not a comment, update comma state.
+	{
+		if ($0 ~ /,[\t ]*(\/[\/*].*)?\\?\\?\r?$/ || # comma at EOL
+			$0 ~ /list[\t ]*\([\t ]*(\/[\/*].*)?\\?\r?$/ || # start of a list()
+			$0 ~ /typesof[\t ]*\([\t ]*(\/[\/*].*)?\\?\r?$/ || # start of a typesof()
+			$0 ~ /pick[\t ]*\([\t ]*(\/[\/*].*)?\\?\r?$/ ) { # start of a pick()
+			comma = 1
+		} else {
+			comma = 0
+		}
 	}
 }
 
