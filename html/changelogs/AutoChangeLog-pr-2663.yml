@@ -1,5 +1,0 @@
-author: PsyCommando
-delete-after: true
-changes:
-  - bugfix: fixed item drop sound playing when throwing something.
-  - soundadd: added a balloon bursting sound effect.
