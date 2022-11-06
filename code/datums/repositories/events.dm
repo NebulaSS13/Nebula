@@ -10,12 +10,12 @@ var/global/repository/events/events_repository = new
 /repository/events/proc/register(var/event_type, var/datum/event_source, var/datum/listener, var/proc_call)
 	var/decl/observ/event = GET_DECL(event_type)
 	if(event)
-		event.register(event_source, listener, proc_call)
+		return event.register(event_source, listener, proc_call)
 
 /repository/events/proc/unregister(var/event_type, var/datum/event_source, var/datum/listener, var/proc_call)
 	var/decl/observ/event = GET_DECL(event_type)
 	if(event)
-		event.unregister(event_source, listener, proc_call)
+		return event.unregister(event_source, listener, proc_call)
 
 /repository/events/proc/register_global(var/event_type, var/datum/listener, var/proc_call)
 	var/decl/observ/event = GET_DECL(event_type)
