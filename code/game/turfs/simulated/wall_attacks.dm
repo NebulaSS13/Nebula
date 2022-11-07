@@ -117,7 +117,7 @@
 	if(locate(/obj/effect/overlay/wallrot) in src)
 		if(IS_WELDER(W))
 			var/obj/item/weldingtool/WT = W
-			if( WT.remove_fuel(0,user) )
+			if( WT.weld(0,user) )
 				to_chat(user, "<span class='notice'>You burn away the fungi with \the [WT].</span>")
 				playsound(src, 'sound/items/Welder.ogg', 10, 1)
 				for(var/obj/effect/overlay/wallrot/WR in src)
@@ -134,7 +134,7 @@
 
 		var/obj/item/weldingtool/WT = W
 
-		if(WT.remove_fuel(0,user))
+		if(WT.weld(0,user))
 			to_chat(user, "<span class='notice'>You start repairing the damage to [src].</span>")
 			playsound(src, 'sound/items/Welder.ogg', 100, 1)
 			if(do_after(user, max(5, damage / 5), src) && WT && WT.isOn())
@@ -156,7 +156,7 @@
 				return TRUE
 
 			var/obj/item/weldingtool/WT = W
-			if(!WT.remove_fuel(0,user))
+			if(!WT.weld(0,user))
 				return
 			dismantle_verb = "cutting"
 			dismantle_sound = 'sound/items/Welder.ogg'
@@ -251,7 +251,7 @@
 				var/cut_cover
 				if(istype(W,/obj/item/weldingtool))
 					var/obj/item/weldingtool/WT = W
-					if(WT.remove_fuel(0,user))
+					if(WT.weld(0,user))
 						cut_cover=1
 					else
 						return
@@ -297,7 +297,7 @@
 				var/cut_cover
 				if(istype(W, /obj/item/weldingtool))
 					var/obj/item/weldingtool/WT = W
-					if( WT.remove_fuel(0,user) )
+					if( WT.weld(0,user) )
 						cut_cover=1
 					else
 						return

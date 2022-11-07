@@ -47,9 +47,9 @@
 	return list(
 		/obj/item/clothing/head/welding = 3,
 		/obj/item/weldingtool/largetank = 3,
-		/obj/item/weldpack = 3,
+		/obj/item/chems/weldpack = 3,
 		/obj/item/clothing/glasses/welding = 3,
-		/obj/item/welder_tank = 6
+		/obj/item/chems/welder_tank = 6
 	)
 
 /obj/structure/closet/secure_closet/engineering_personal

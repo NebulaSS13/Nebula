@@ -28,7 +28,7 @@
 			return TRUE
 		playsound(loc, pick('sound/items/Welder.ogg', 'sound/items/Welder2.ogg'), 50, 1)
 		visible_message(SPAN_NOTICE("\The [user] starts slicing apart \the [src] with \the [welder]."))
-		if(!do_after(user, 3 SECONDS, src) || QDELETED(src) || !welder.remove_fuel(5, user))
+		if(!do_after(user, 3 SECONDS, src) || QDELETED(src) || !welder.weld(5, user))
 			return TRUE
 		playsound(loc, pick('sound/items/Welder.ogg', 'sound/items/Welder2.ogg'), 50, 1)
 		visible_message(SPAN_NOTICE("\The [user] completely dismantles \the [src] with \the [welder]."))

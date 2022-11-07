@@ -686,7 +686,7 @@ var/global/list/turret_icons
 
 				playsound(loc, pick('sound/items/Welder.ogg', 'sound/items/Welder2.ogg'), 50, 1)
 				if(do_after(user, 20, src))
-					if(!src || !WT.remove_fuel(5, user)) return
+					if(!src || !WT.weld(5, user)) return
 					build_step = 1
 					to_chat(user, "You remove the turret's interior metal armor.")
 					SSmaterials.create_object(/decl/material/solid/metal/steel, loc, 2)
@@ -763,7 +763,7 @@ var/global/list/turret_icons
 
 				playsound(loc, pick('sound/items/Welder.ogg', 'sound/items/Welder2.ogg'), 50, 1)
 				if(do_after(user, 30, src))
-					if(!src || !WT.remove_fuel(5, user))
+					if(!src || !WT.weld(5, user))
 						return
 					build_step = 8
 					to_chat(user, "<span class='notice'>You weld the turret's armor down.</span>")

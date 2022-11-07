@@ -20,7 +20,7 @@
 			return TRUE
 
 		to_chat(user, "You begin repairing damage to \the [holder]...")
-		if(WT.remove_fuel(round(damage/75)) && do_after(usr, damage/10))
+		if(WT.weld(round(damage/75)) && do_after(usr, damage/10))
 			damage = 0
 			to_chat(user, "You repair \the [holder].")
 		return TRUE

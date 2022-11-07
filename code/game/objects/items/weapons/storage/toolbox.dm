@@ -29,7 +29,7 @@
 		/obj/item/chems/spray/extinguisher/mini,
 		/obj/item/radio,
 		/obj/item/weldingtool/mini,
-		/obj/item/welder_tank/mini
+		/obj/item/chems/welder_tank/mini
 	)
 
 /obj/item/storage/toolbox/mechanical

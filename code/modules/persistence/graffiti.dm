@@ -39,12 +39,13 @@
 
 /obj/effect/decal/writing/attackby(var/obj/item/thing, var/mob/user)
 	if(IS_WELDER(thing))
-		var/obj/item/weldingtool/welder = thing
-		if(welder.isOn() && welder.remove_fuel(0,user) && do_after(user, 5, src) && !QDELETED(src))
-			playsound(src.loc, 'sound/items/Welder2.ogg', 50, 1)
-			user.visible_message("<span class='notice'>\The [user] clears away some graffiti.</span>")
+		if(thing.do_tool_interaction(TOOL_WELDER, user, src, 3 SECONDS))
+			playsound(src, 'sound/items/Welder2.ogg', 50, TRUE)
+			user.visible_message(SPAN_NOTICE("\The [user] clears away some graffiti."))
 			qdel(src)
-	else if(thing.sharp)
+			return TRUE
+
+	else if(thing.sharp && user.a_intent != I_HELP) //Check intent so you don't go insane trying to unscrew a light fixture over a graffiti
 
 		if(jobban_isbanned(user, "Graffiti"))
 			to_chat(user, SPAN_WARNING("You are banned from leaving persistent information across rounds."))
@@ -52,12 +53,12 @@
 
 		var/_message = sanitize(input("Enter an additional message to engrave.", "Graffiti") as null|text, trim = TRUE)
 		if(_message && loc && user && !user.incapacitated() && user.Adjacent(loc) && thing.loc == user)
-			user.visible_message("<span class='warning'>\The [user] begins carving something into \the [loc].</span>")
+			user.visible_message(SPAN_WARNING("\The [user] begins carving something into \the [loc]."))
 			if(do_after(user, max(20, length(_message)), src) && loc)
-				user.visible_message("<span class='danger'>\The [user] carves some graffiti into \the [loc].</span>")
+				user.visible_message(SPAN_DANGER("\The [user] carves some graffiti into \the [loc]."))
 				message = "[message] [_message]"
 				author = user.ckey
 				if(lowertext(message) == "elbereth")
-					to_chat(user, "<span class='notice'>You feel much safer.</span>")
+					to_chat(user, SPAN_NOTICE("You feel much safer."))
 	else
 		. = ..()

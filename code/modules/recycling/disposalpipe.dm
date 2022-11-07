@@ -206,7 +206,7 @@
 	src.add_fingerprint(user, 0, I)
 	if(istype(I, /obj/item/weldingtool))
 		var/obj/item/weldingtool/W = I
-		if(W.remove_fuel(0,user))
+		if(W.weld(0,user))
 			playsound(src.loc, 'sound/items/Welder2.ogg', 100, 1)
 			// check if anything changed over 2 seconds
 			var/turf/uloc = user.loc
@@ -763,7 +763,7 @@
 	if(istype(I, /obj/item/weldingtool))
 		var/obj/item/weldingtool/W = I
 
-		if(W.remove_fuel(0,user))
+		if(W.weld(0,user))
 			playsound(src.loc, 'sound/items/Welder2.ogg', 100, 1)
 			// check if anything changed over 2 seconds
 			var/turf/uloc = user.loc

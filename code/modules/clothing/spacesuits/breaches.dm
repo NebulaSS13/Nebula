@@ -221,7 +221,7 @@
 			return
 
 		var/obj/item/weldingtool/WT = W
-		if(!WT.remove_fuel(5))
+		if(!WT.weld(5))
 			to_chat(user, SPAN_WARNING("You need more welding fuel to repair this suit."))
 			return
 

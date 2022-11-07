@@ -167,7 +167,7 @@
 			if(0)
 				to_chat(user, "<span class='warning'>\The [src] needs to be wrenched to the floor.</span>")
 			if(1)
-				if (WT.remove_fuel(0,user))
+				if (WT.weld(0,user))
 					playsound(loc, 'sound/items/Welder2.ogg', 50, 1)
 					user.visible_message("[user.name] starts to weld [src] to the floor.", \
 						"You start to weld [src] to the floor.", \
@@ -179,7 +179,7 @@
 				else
 					to_chat(user, "<span class='warning'>You need more welding fuel to complete this task.</span>")
 			if(2)
-				if (WT.remove_fuel(0,user))
+				if (WT.weld(0,user))
 					playsound(loc, 'sound/items/Welder2.ogg', 50, 1)
 					user.visible_message("[user.name] starts to cut [src] free from the floor.", \
 						"You start to cut [src] free from the floor.", \

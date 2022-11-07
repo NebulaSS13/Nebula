@@ -212,7 +212,7 @@
 		return//Already doing something.
 	if(IS_WELDER(C) && !repairing)
 		var/obj/item/weldingtool/W = C
-		if(W.remove_fuel(0, user))
+		if(W.weld(0, user))
 			playsound(src, 'sound/items/Welder.ogg', 100, 1)
 			if(do_after(user, 2 SECONDS, src))
 				if(!W.isOn()) return

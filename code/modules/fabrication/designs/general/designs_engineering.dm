@@ -148,3 +148,6 @@
 
 /datum/fabricator_recipe/engineering/stirling_piston
 	path = /obj/item/tank/stirling/empty
+
+/datum/fabricator_recipe/engineering/welderpack
+	path = /obj/item/chems/weldpack/empty

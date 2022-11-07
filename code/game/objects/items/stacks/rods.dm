@@ -63,7 +63,7 @@
 			to_chat(user, "<span class='warning'>You need at least two rods to do this.</span>")
 			return
 
-		if(WT.remove_fuel(0,user))
+		if(WT.weld(0,user))
 			visible_message(SPAN_NOTICE("\The [src] is fused together by \the [user] with \the [WT]."), 3, SPAN_NOTICE("You hear welding."), 2)
 			for(var/obj/item/stack/material/new_item in SSmaterials.create_object((material?.type || /decl/material/solid/metal/steel), usr.loc, 1))
 				new_item.add_to_stacks(usr)

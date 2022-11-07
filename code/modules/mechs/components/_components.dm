@@ -142,7 +142,7 @@
 	if(!WT.isOn())
 		to_chat(user, SPAN_WARNING("Turn \the [WT] on, first."))
 		return
-	if(WT.remove_fuel((SKILL_MAX + 1) - user.get_skill_value(SKILL_CONSTRUCTION), user))
+	if(WT.weld((SKILL_MAX + 1) - user.get_skill_value(SKILL_CONSTRUCTION), user))
 		user.visible_message(
 			SPAN_NOTICE("\The [user] begins welding the damage on \the [src]..."),
 			SPAN_NOTICE("You begin welding the damage on \the [src]...")

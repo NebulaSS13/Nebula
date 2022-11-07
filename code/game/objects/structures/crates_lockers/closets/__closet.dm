@@ -248,7 +248,7 @@ var/global/list/closets = list()
 			return 0
 		if(IS_WELDER(W))
 			var/obj/item/weldingtool/WT = W
-			if(WT.remove_fuel(0,user))
+			if(WT.weld(0,user))
 				slice_into_parts(WT, user)
 				return
 		if(istype(W, /obj/item/gun/energy/plasmacutter))
@@ -284,7 +284,7 @@ var/global/list/closets = list()
 		return
 	else if(IS_WELDER(W) && (setup & CLOSET_CAN_BE_WELDED))
 		var/obj/item/weldingtool/WT = W
-		if(!WT.remove_fuel(0,user))
+		if(!WT.weld(0,user))
 			if(!WT.isOn())
 				return
 			else

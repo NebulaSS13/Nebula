@@ -122,7 +122,7 @@
 	if(reinf_material && reinf_material.default_solid_form && IS_WELDER(W))
 		var/obj/item/weldingtool/WT = W
 		if(WT.isOn() && WT.get_fuel() > 2 && use(2))
-			WT.remove_fuel(2, user)
+			WT.weld(2, user)
 			to_chat(user, SPAN_NOTICE("You recover some [reinf_material.use_name] from \the [src]."))
 			reinf_material.create_object(get_turf(user), 1)
 			return TRUE

@@ -240,7 +240,7 @@
 		if(!WT.isOn())
 			to_chat(user, SPAN_WARNING("Turn \the [WT] on, first."))
 			return
-		if(WT.remove_fuel(1, user))
+		if(WT.weld(1, user))
 
 			var/last_reinforced_state = is_reinforced
 			visible_message("\The [user] begins welding the metal reinforcement inside \the [src].")

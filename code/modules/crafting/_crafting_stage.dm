@@ -71,7 +71,7 @@
 
 /decl/crafting_stage/welding/consume(var/mob/user, var/obj/item/thing, var/obj/item/target)
 	var/obj/item/weldingtool/T = thing
-	. = istype(T) && T.remove_fuel(0, user) && T.isOn()
+	. = istype(T) && T.weld(0, user) && T.isOn()
 
 /decl/crafting_stage/welding
 	consume_completion_trigger = FALSE
