@@ -1,0 +1,9 @@
+author: PsyCommando
+delete-after: true
+changes:
+  - bugfix: Telescreen can no longer be used when held, as it was intended.
+  - bugfix: Telescreen now properly install on walls.
+  - imageadd: Added basic directional icon states for the telescreen.
+  - imageadd: Added construction state icons for the telescreen.
+  - tweak: Changed all instances of telescreens in the map files to use auto directional
+      offset, and face proper direction.
