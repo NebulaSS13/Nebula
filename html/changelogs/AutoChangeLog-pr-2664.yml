@@ -1,0 +1,6 @@
+author: PsyCommando
+delete-after: true
+changes:
+  - bugfix: Fixed welderpack getting stuck in the inventory.
+  - tweak: Welderpack now has its own attached welding gun, which works a lot like
+      defibrillator paddles.
