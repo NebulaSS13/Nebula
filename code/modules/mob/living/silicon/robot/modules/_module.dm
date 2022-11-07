@@ -112,7 +112,7 @@
 /obj/item/robot_module/proc/finalize_emag()
 	if(istype(emag))
 		emag.canremove = FALSE
-	else
+	else if(emag)
 		log_debug("Invalid var type in [type] emag creation - [emag]")
 		emag = null
 
