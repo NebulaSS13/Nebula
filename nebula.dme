@@ -2548,7 +2548,6 @@
 #include "code\modules\modular_computers\computers\modular_computer\assembly_laptop.dm"
 #include "code\modules\modular_computers\computers\modular_computer\assembly_pda.dm"
 #include "code\modules\modular_computers\computers\modular_computer\assembly_tablet.dm"
-#include "code\modules\modular_computers\computers\modular_computer\assembly_telescreen.dm"
 #include "code\modules\modular_computers\computers\modular_computer\core.dm"
 #include "code\modules\modular_computers\computers\modular_computer\interaction.dm"
 #include "code\modules\modular_computers\computers\modular_computer\variables.dm"

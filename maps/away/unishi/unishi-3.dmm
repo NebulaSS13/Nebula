@@ -872,8 +872,8 @@
 /area/unishi/living)
 "cD" = (
 /obj/structure/bed/chair/padded/black,
-/obj/item/modular_computer/telescreen/preset/generic{
-	pixel_y = 30
+/obj/machinery/computer/modular/telescreen/preset/generic{
+	dir = 2
 	},
 /turf/simulated/floor/tiled,
 /area/unishi/living)

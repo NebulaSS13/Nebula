@@ -5511,8 +5511,8 @@
 /obj/structure/cable{
 	icon_state = "4-8"
 	},
-/obj/item/modular_computer/telescreen/preset/engineering{
-	pixel_y = 28
+/obj/machinery/computer/modular/telescreen/preset/engineering{
+	dir = 2
 	},
 /turf/simulated/floor/tiled,
 /area/nexus/engineering)

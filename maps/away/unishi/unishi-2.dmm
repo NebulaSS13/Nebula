@@ -781,9 +781,8 @@
 /turf/simulated/floor,
 /area/unishi/common)
 "cn" = (
-/obj/item/modular_computer/telescreen/preset/generic{
-	dir = 1;
-	pixel_y = -28
+/obj/machinery/computer/modular/telescreen/preset/generic{
+	dir = 1
 	},
 /obj/structure/table/glass,
 /obj/item/pen/green,
@@ -791,9 +790,8 @@
 /turf/simulated/floor/tiled/dark,
 /area/unishi/classroom)
 "co" = (
-/obj/item/modular_computer/telescreen/preset/generic{
-	dir = 1;
-	pixel_y = -28
+/obj/machinery/computer/modular/telescreen/preset/generic{
+	dir = 1
 	},
 /turf/simulated/floor/tiled/dark,
 /area/unishi/classroom)

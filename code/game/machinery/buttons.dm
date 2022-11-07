@@ -78,6 +78,12 @@
 	else
 		icon_state = "launcherbtt"
 
+//#TODO: Button might want their cases to handle being installed on tables to stay coherent with mapped button on tables?
+/obj/machinery/button/update_directional_offset(force = FALSE)
+	if(!force && (!length(directional_offset) || !is_wall_mounted())) //Check if the button is actually mapped onto a table or something
+		return
+	. = ..()
+
 /decl/public_access/public_variable/button_active
 	expected_type = /obj/machinery/button
 	name = "button toggle"
