@@ -481,6 +481,7 @@
 	is_spawnable_type = FALSE
 	var/datum/node/physical/node
 	var/list/neighoursByDirection = list()
+	is_spawnable_type = FALSE
 
 /atom/movable/graph_test/Initialize()
 	. = ..()
