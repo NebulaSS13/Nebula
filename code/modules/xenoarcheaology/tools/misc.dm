@@ -1,59 +1,59 @@
 /obj/structure/bookcase/manuals/xenoarchaeology
 	name = "Xenoarchaeology Manuals bookcase"
 
-/obj/structure/bookcase/manuals/xenoarchaeology/Initialize()
-	. = ..()
-	new /obj/item/book/manual/excavation(src)
-	new /obj/item/book/manual/mass_spectrometry(src)
-	new /obj/item/book/manual/materials_chemistry_analysis(src)
-	new /obj/item/book/manual/anomaly_testing(src)
-	new /obj/item/book/manual/anomaly_spectroscopy(src)
-	new /obj/item/book/manual/stasis(src)
-	update_icon()
+/obj/structure/bookcase/manuals/xenoarchaeology/WillContain()
+	return list(
+		/obj/item/book/manual/excavation,
+		/obj/item/book/manual/mass_spectrometry,
+		/obj/item/book/manual/materials_chemistry_analysis,
+		/obj/item/book/manual/anomaly_testing,
+		/obj/item/book/manual/anomaly_spectroscopy,
+		/obj/item/book/manual/stasis,
+	)
 
 /obj/structure/closet/secure_closet/xenoarchaeologist
 	name = "Xenoarchaeologist Locker"
 	req_access = list(access_xenoarch)
 	closet_appearance = /decl/closet_appearance/secure_closet/expedition/science
 
-/obj/structure/closet/secure_closet/xenoarchaeologist/Initialize()
-	. = ..()
-	if(prob(50))
-		new /obj/item/storage/backpack/toxins(src)
-	if(prob(50))
-		new /obj/item/storage/backpack/dufflebag(src)
-	new /obj/item/clothing/under/color/white(src)
-	new /obj/item/clothing/suit/storage/toggle/labcoat(src)
-	new /obj/item/clothing/shoes/color/white(src)
-	new /obj/item/clothing/glasses/science(src)
-	new /obj/item/radio/headset/headset_sci(src)
-	new /obj/item/clothing/mask/gas(src)
-	new /obj/item/clipboard(src)
-	new /obj/item/storage/belt/archaeology(src)
-	new /obj/item/storage/excavation(src)
-	new /obj/item/stack/tape_roll/barricade_tape/research(src)
+/obj/structure/closet/secure_closet/xenoarchaeologist/WillContain()
+	return list(
+		new /datum/atom_creator/simple(/obj/item/storage/backpack/toxins,    50),
+		new /datum/atom_creator/simple(/obj/item/storage/backpack/dufflebag, 50),
+		/obj/item/clothing/under/color/white,
+		/obj/item/clothing/suit/storage/toggle/labcoat,
+		/obj/item/clothing/shoes/color/white,
+		/obj/item/clothing/glasses/science,
+		/obj/item/radio/headset/headset_sci,
+		/obj/item/clothing/mask/gas,
+		/obj/item/clipboard,
+		/obj/item/storage/belt/archaeology,
+		/obj/item/storage/excavation,
+		/obj/item/stack/tape_roll/barricade_tape/research,
+	)
 
 /obj/structure/closet/excavation
 	name = "excavation tools"
 	closet_appearance = /decl/closet_appearance/secure_closet/engineering/tools
 
-/obj/structure/closet/excavation/Initialize()
-	. = ..()
-	new /obj/item/storage/belt/archaeology(src)
-	new /obj/item/storage/excavation(src)
-	new /obj/item/flashlight/lantern(src)
-	new /obj/item/ano_scanner(src)
-	new /obj/item/depth_scanner(src)
-	new /obj/item/core_sampler(src)
-	new /obj/item/gps(src)
-	new /obj/item/pinpointer/radio(src)
-	new /obj/item/clothing/glasses/meson(src)
-	new /obj/item/pickaxe(src)
-	new /obj/item/measuring_tape(src)
-	new /obj/item/pickaxe/xeno/hand(src)
-	new /obj/item/storage/bag/fossils(src)
-	new /obj/item/hand_labeler(src)
-	new /obj/item/stack/tape_roll/barricade_tape/research(src)
+/obj/structure/closet/excavation/WillContain()
+	return list(
+		/obj/item/storage/belt/archaeology,
+		/obj/item/storage/excavation,
+		/obj/item/flashlight/lantern,
+		/obj/item/ano_scanner,
+		/obj/item/depth_scanner,
+		/obj/item/core_sampler,
+		/obj/item/gps,
+		/obj/item/pinpointer/radio,
+		/obj/item/clothing/glasses/meson,
+		/obj/item/pickaxe,
+		/obj/item/measuring_tape,
+		/obj/item/pickaxe/xeno/hand,
+		/obj/item/storage/bag/fossils,
+		/obj/item/hand_labeler,
+		/obj/item/stack/tape_roll/barricade_tape/research,
+	)
 
 /obj/machinery/alarm/isolation
 	req_access = list(list(access_research, access_atmospherics, access_engine_equip))

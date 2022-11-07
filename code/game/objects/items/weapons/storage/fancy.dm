@@ -52,11 +52,13 @@
 		/obj/item/chems/food/egg,
 		/obj/item/chems/food/boiledegg
 		)
-	startswith = list(/obj/item/chems/food/egg = 12)
 	material = /decl/material/solid/cardboard
 
-/obj/item/storage/fancy/egg_box/empty
-	startswith = null
+/obj/item/storage/fancy/egg_box/WillContain()
+	return list(/obj/item/chems/food/egg = 12)
+
+/obj/item/storage/fancy/egg_box/empty/WillContain()
+	return
 
 /*
  * Cracker Packet
@@ -71,8 +73,10 @@
 	w_class = ITEM_SIZE_SMALL
 	key_type = /obj/item/chems/food/cracker
 	can_hold = list(/obj/item/chems/food/cracker)
-	startswith = list(/obj/item/chems/food/cracker = 6)
 	material = /decl/material/solid/cardboard
+
+/obj/item/storage/fancy/crackers/WillContain()
+	return list(/obj/item/chems/food/cracker = 6)
 
 /*
  * Crayon Box
@@ -87,15 +91,18 @@
 	max_w_class = ITEM_SIZE_TINY
 	max_storage_space = 6
 	key_type = /obj/item/pen/crayon
-	startswith = list(
-		/obj/item/pen/crayon/red,
-		/obj/item/pen/crayon/orange,
-		/obj/item/pen/crayon/yellow,
-		/obj/item/pen/crayon/green,
-		/obj/item/pen/crayon/blue,
-		/obj/item/pen/crayon/purple,
-		)
 	material = /decl/material/solid/cardboard
+
+/obj/item/storage/fancy/crayons/WillContain()
+	return list(
+			/obj/item/pen/crayon/red,
+			/obj/item/pen/crayon/orange,
+			/obj/item/pen/crayon/yellow,
+			/obj/item/pen/crayon/green,
+			/obj/item/pen/crayon/blue,
+			/obj/item/pen/crayon/purple,
+		)
+
 
 /obj/item/storage/fancy/crayons/on_update_icon()
 	. = ..()
@@ -122,12 +129,18 @@
 	slot_flags = SLOT_LOWER_BODY
 	material = /decl/material/solid/cardboard
 	key_type = /obj/item/clothing/mask/smokable/cigarette
-	startswith = list(/obj/item/clothing/mask/smokable/cigarette = 6)
+	atom_flags = ATOM_FLAG_NO_REACT | ATOM_FLAG_OPEN_CONTAINER | ATOM_FLAG_NO_TEMP_CHANGE
 
-/obj/item/storage/fancy/cigarettes/Initialize()
+/obj/item/storage/fancy/cigarettes/WillContain()
+	return list(/obj/item/clothing/mask/smokable/cigarette = 6)
+
+/obj/item/storage/fancy/cigarettes/Initialize(ml, material_key)
 	. = ..()
-	atom_flags |= ATOM_FLAG_NO_REACT|ATOM_FLAG_OPEN_CONTAINER
+	initialize_reagents()
+
+/obj/item/storage/fancy/cigarettes/initialize_reagents(populate)
 	create_reagents(5 * max_storage_space)//so people can inject cigarettes without opening a packet, now with being able to inject the whole one
+	. = ..()
 
 /obj/item/storage/fancy/cigarettes/remove_from_storage(obj/item/W, atom/new_location)
 	// Don't try to transfer reagents to lighters
@@ -172,18 +185,21 @@
 	desc = "A packet of six imported Dromedary Company cancer sticks. A label on the packaging reads, \"Wouldn't a slow death make a change?\"."
 	icon = 'icons/obj/items/storage/cigpack/dromedary.dmi'
 	icon_state = "Dpacket"
-	startswith = list(/obj/item/clothing/mask/smokable/cigarette/dromedaryco = 6)
+
+/obj/item/storage/fancy/cigarettes/dromedaryco/WillContain()
+	return list(/obj/item/clothing/mask/smokable/cigarette/dromedaryco = 6)
 
 /obj/item/storage/fancy/cigarettes/killthroat
 	name = "pack of Acme Co. cigarettes"
 	desc = "A packet of six Acme Company cigarettes. For those who somehow want to obtain the record for the most amount of cancerous tumors."
 	icon = 'icons/obj/items/storage/cigpack/acme.dmi'
 	icon_state = "Bpacket"
-	startswith = list(/obj/item/clothing/mask/smokable/cigarette/killthroat = 6)
 
-/obj/item/storage/fancy/cigarettes/killthroat/Initialize()
-	. = ..()
-	fill_cigarre_package(src,list(/decl/material/liquid/fuel = 4))
+/obj/item/storage/fancy/cigarettes/killthroat/WillContain()
+	return list(/obj/item/clothing/mask/smokable/cigarette/killthroat = 6)
+
+/obj/item/storage/fancy/cigarettes/killthroat/populate_reagents()
+	reagents.add_reagent(/decl/material/liquid/fuel, (max_storage_space * 4))
 
 // New exciting ways to kill your lungs! - Earthcrusher //
 
@@ -193,7 +209,9 @@
 	icon = 'icons/obj/items/storage/cigpack/lucky_stars.dmi'
 	icon_state = "LSpacket"
 	item_state = "Dpacket" //I actually don't mind cig packs not showing up in the hand. whotf doesn't just keep them in their pockets/coats //
-	startswith = list(/obj/item/clothing/mask/smokable/cigarette/luckystars = 6)
+
+/obj/item/storage/fancy/cigarettes/luckystars/WillContain()
+	return list(/obj/item/clothing/mask/smokable/cigarette/luckystars = 6)
 
 /obj/item/storage/fancy/cigarettes/jerichos
 	name = "pack of Jerichos"
@@ -201,7 +219,9 @@
 	icon = 'icons/obj/items/storage/cigpack/jerichos.dmi'
 	icon_state = "Jpacket"
 	item_state = "Dpacket"
-	startswith = list(/obj/item/clothing/mask/smokable/cigarette/jerichos = 6)
+
+/obj/item/storage/fancy/cigarettes/jerichos/WillContain()
+	return list(/obj/item/clothing/mask/smokable/cigarette/jerichos = 6)
 
 /obj/item/storage/fancy/cigarettes/menthols
 	name = "pack of Temperamento Menthols"
@@ -209,9 +229,10 @@
 	icon = 'icons/obj/items/storage/cigpack/menthol.dmi'
 	icon_state = "TMpacket"
 	item_state = "Dpacket"
-
 	key_type = /obj/item/clothing/mask/smokable/cigarette/menthol
-	startswith = list(/obj/item/clothing/mask/smokable/cigarette/menthol = 6)
+
+/obj/item/storage/fancy/cigarettes/menthols/WillContain()
+	return list(/obj/item/clothing/mask/smokable/cigarette/menthol = 6)
 
 /obj/item/storage/fancy/cigarettes/carcinomas
 	name = "pack of Carcinoma Angels"
@@ -219,7 +240,9 @@
 	icon = 'icons/obj/items/storage/cigpack/carcinoma.dmi'
 	icon_state = "CApacket"
 	item_state = "Dpacket"
-	startswith = list(/obj/item/clothing/mask/smokable/cigarette/carcinomas = 6)
+
+/obj/item/storage/fancy/cigarettes/carcinomas/WillContain()
+	return list(/obj/item/clothing/mask/smokable/cigarette/carcinomas = 6)
 
 /obj/item/storage/fancy/cigarettes/professionals
 	name = "pack of Professional 120s"
@@ -227,7 +250,9 @@
 	icon_state = "P100packet"
 	icon = 'icons/obj/items/storage/cigpack/professionals.dmi'
 	item_state = "Dpacket"
-	startswith = list(/obj/item/clothing/mask/smokable/cigarette/professionals = 6)
+
+/obj/item/storage/fancy/cigarettes/professionals/WillContain()
+	return list(/obj/item/clothing/mask/smokable/cigarette/professionals = 6)
 
 //cigarellos
 /obj/item/storage/fancy/cigarettes/cigarello
@@ -238,26 +263,36 @@
 	item_state = "Dpacket"
 	max_storage_space = 5
 	key_type = /obj/item/clothing/mask/smokable/cigarette/trident
-	startswith = list(/obj/item/clothing/mask/smokable/cigarette/trident = 5)
+
+/obj/item/storage/fancy/cigarettes/cigarello/WillContain()
+	return list(/obj/item/clothing/mask/smokable/cigarette/trident = 5)
 
 /obj/item/storage/fancy/cigarettes/cigarello/variety
 	name = "pack of Trident Fruit cigars"
 	desc = "The Trident brand's wood tipped little cigar, favored by the Sol corps diplomatique for their pleasant aroma. Machine made on Mars for over 100 years. This is a fruit variety pack."
 	icon = 'icons/obj/items/storage/cigpack/cigarillo_fruity.dmi'
 	icon_state = "CRFpacket"
-	startswith = list(	/obj/item/clothing/mask/smokable/cigarette/trident/watermelon,
-						/obj/item/clothing/mask/smokable/cigarette/trident/orange,
-						/obj/item/clothing/mask/smokable/cigarette/trident/grape,
-						/obj/item/clothing/mask/smokable/cigarette/trident/cherry,
-						/obj/item/clothing/mask/smokable/cigarette/trident/berry)
+
+/obj/item/storage/fancy/cigarettes/cigarello/variety/WillContain()
+	return list(
+				/obj/item/clothing/mask/smokable/cigarette/trident/watermelon,
+				/obj/item/clothing/mask/smokable/cigarette/trident/orange,
+				/obj/item/clothing/mask/smokable/cigarette/trident/grape,
+				/obj/item/clothing/mask/smokable/cigarette/trident/cherry,
+				/obj/item/clothing/mask/smokable/cigarette/trident/berry
+			)
 
 /obj/item/storage/fancy/cigarettes/cigarello/mint
 	name = "pack of Trident Menthol cigars"
 	desc = "The Trident brand's wood tipped little cigar, favored by the Sol corps diplomatique for their pleasant aroma. Machine made on Mars for over 100 years. These are the menthol variety."
 	icon = 'icons/obj/items/storage/cigpack/cigarillo_menthol.dmi'
 	icon_state = "CRMpacket"
-	startswith = list(/obj/item/clothing/mask/smokable/cigarette/trident/mint = 5)
 
+/obj/item/storage/fancy/cigarettes/cigarello/mint/WillContain()
+	return list(/obj/item/clothing/mask/smokable/cigarette/trident/mint = 5)
+/*
+ * Cigar
+*/
 /obj/item/storage/fancy/cigar
 	name = "cigar case"
 	desc = "A case for holding your cigars when you are not smoking them."
@@ -271,23 +306,29 @@
 	storage_slots = 7
 	material = /decl/material/solid/wood/mahogany
 	key_type = /obj/item/clothing/mask/smokable/cigarette/cigar
-	startswith = list(/obj/item/clothing/mask/smokable/cigarette/cigar = 6)
+	atom_flags = ATOM_FLAG_NO_REACT | ATOM_FLAG_NO_TEMP_CHANGE
 
-/obj/item/storage/fancy/cigar/Initialize()
+/obj/item/storage/fancy/cigar/Initialize(ml, material_key)
 	. = ..()
-	atom_flags |= ATOM_FLAG_NO_REACT
+	initialize_reagents()
+
+/obj/item/storage/fancy/cigar/initialize_reagents(populate)
 	create_reagents(10 * storage_slots)
+	. = ..()
+
+/obj/item/storage/fancy/cigar/WillContain()
+	return list(/obj/item/clothing/mask/smokable/cigarette/cigar = 6)
 
 /obj/item/storage/fancy/cigar/remove_from_storage(obj/item/W, atom/new_location)
 	var/obj/item/clothing/mask/smokable/cigarette/cigar/C = W
-	if(!istype(C)) return
+	if(!istype(C)) 
+		return
 	reagents.trans_to_obj(C, (reagents.total_volume/contents.len))
-	..()
+	return ..()
 
 /*
  * Vial Box
  */
-
 /obj/item/storage/fancy/vials
 	icon = 'icons/obj/vialbox.dmi'
 	icon_state = "vialbox"
@@ -297,7 +338,9 @@
 	storage_slots = 12
 	material = /decl/material/solid/plastic
 	key_type = /obj/item/chems/glass/beaker/vial
-	startswith = list(/obj/item/chems/glass/beaker/vial = 12)
+
+/obj/item/storage/fancy/vials/WillContain()
+	return list(/obj/item/chems/glass/beaker/vial = 12)
 
 /obj/item/storage/fancy/vials/on_update_icon()
 	. = ..()
@@ -338,3 +381,77 @@
 /obj/item/storage/lockbox/vials/attackby(obj/item/W, mob/user)
 	. = ..()
 	update_icon()
+
+////////////////////////////////////////////////////////////////////////////////
+// Syndie Cigs
+////////////////////////////////////////////////////////////////////////////////
+
+// Flash Powder Pack
+/obj/item/storage/fancy/cigarettes/flash_powder
+	name = "pack of flash powder laced Trans-Stellar Duty-frees"
+
+/obj/item/storage/fancy/cigarettes/flash_powder/Initialize(ml, material_key)
+	. = ..()
+	//Reset the name to the default cig pack. Done for codex reasons, since it indexes things by initial names
+	var/obj/item/storage/fancy/cigarettes/C = /obj/item/storage/fancy/cigarettes
+	if(name == initial(name))
+		SetName(initial(C.name))
+	if(desc == initial(desc))
+		desc = "[initial(desc)] 'F' has been scribbled on it."
+
+/obj/item/storage/fancy/cigarettes/flash_powder/populate_reagents()
+	reagents.add_reagent(/decl/material/solid/metal/aluminium, max_storage_space)
+	reagents.add_reagent(/decl/material/solid/potassium,       max_storage_space)
+	reagents.add_reagent(/decl/material/solid/sulfur,          max_storage_space)
+
+//Chemsmoke Pack
+/obj/item/storage/fancy/cigarettes/chemsmoke
+	name = "pack of smoke powder laced Trans-Stellar Duty-frees"
+
+/obj/item/storage/fancy/cigarettes/chemsmoke/Initialize(ml, material_key)
+	. = ..()
+	//Reset the name to the default cig pack. Done for codex reasons, since it indexes things by initial names
+	var/obj/item/storage/fancy/cigarettes/C = /obj/item/storage/fancy/cigarettes
+	if(name == initial(name))
+		SetName(initial(C.name))
+	if(desc == initial(desc))
+		desc = "[initial(desc)] 'S' has been scribbled on it."
+
+/obj/item/storage/fancy/cigarettes/chemsmoke/populate_reagents()
+	reagents.add_reagent(/decl/material/solid/potassium,        max_storage_space)
+	reagents.add_reagent(/decl/material/liquid/nutriment/sugar, max_storage_space)
+	reagents.add_reagent(/decl/material/solid/phosphorus,       max_storage_space)
+
+//Mindbreak Pack (now called /decl/chemical_reaction/hallucinogenics)
+/obj/item/storage/fancy/cigarettes/mindbreak
+	name = "pack of mindbreak toxin laced Trans-Stellar Duty-frees" //#TODO: maybe fix the lore for that?
+
+/obj/item/storage/fancy/cigarettes/mindbreak/Initialize(ml, material_key)
+	. = ..()
+	//Reset the name to the default cig pack. Done for codex reasons, since it indexes things by initial names
+	var/obj/item/storage/fancy/cigarettes/C = /obj/item/storage/fancy/cigarettes
+	if(name == initial(name))
+		SetName(initial(C.name))
+	if(desc == initial(desc))
+		desc = "[initial(desc)] 'MB' has been scribbled on it." //#TODO: maybe fix the lore for that?
+
+/obj/item/storage/fancy/cigarettes/mindbreak/populate_reagents()
+	reagents.add_reagent(/decl/material/solid/silicon,         max_storage_space)
+	reagents.add_reagent(/decl/material/liquid/fuel/hydrazine, max_storage_space)
+	reagents.add_reagent(/decl/material/liquid/antitoxins,     max_storage_space)
+
+//Tricord pack (now called /decl/material/liquid/regenerator)
+/obj/item/storage/fancy/cigarettes/tricord
+	name = "pack of tricordazine laced Trans-Stellar Duty-frees" //#TODO: maybe fix the lore for that?
+
+/obj/item/storage/fancy/cigarettes/tricord/Initialize(ml, material_key)
+	. = ..()
+	//Reset the name to the default cig pack. Done for codex reasons, since it indexes things by initial names
+	var/obj/item/storage/fancy/cigarettes/C = /obj/item/storage/fancy/cigarettes
+	if(name == initial(name))
+		SetName(initial(C.name))
+	if(desc == initial(desc))
+		desc = "[initial(desc)] 'T' has been scribbled on it." //#TODO: maybe fix the lore for that?
+
+/obj/item/storage/fancy/cigarettes/tricord/populate_reagents()
+	reagents.add_reagent(/decl/material/liquid/regenerator, (4 * max_storage_space))

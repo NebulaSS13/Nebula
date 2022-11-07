@@ -27,7 +27,8 @@
 /obj/item/storage/firstaid/regular
 	icon_state = "firstaid"
 
-	startswith = list(
+/obj/item/storage/firstaid/regular/WillContain()
+	return list(
 		/obj/item/stack/medical/bruise_pack = 2,
 		/obj/item/stack/medical/ointment = 2,
 		/obj/item/storage/pill_bottle/antibiotics,
@@ -41,11 +42,10 @@
 	icon_state = "radfirstaid"
 	item_state = "firstaid-ointment"
 
-	startswith = list(
-		/obj/item/storage/med_pouch/trauma = 4
-		)
+/obj/item/storage/firstaid/trauma/WillContain()
+	return list(/obj/item/storage/med_pouch/trauma = 4)
 
-/obj/item/storage/firstaid/trauma/Initialize()
+/obj/item/storage/firstaid/trauma/Initialize(ml, material_key)
 	. = ..()
 	icon_state = pick("radfirstaid", "radfirstaid2", "radfirstaid3")
 
@@ -55,11 +55,10 @@
 	icon_state = "ointment"
 	item_state = "firstaid-ointment"
 
-	startswith = list(
-		/obj/item/storage/med_pouch/burn = 4
-		)
+/obj/item/storage/firstaid/fire/WillContain()
+	return list(/obj/item/storage/med_pouch/burn = 4)
 
-/obj/item/storage/firstaid/fire/Initialize()
+/obj/item/storage/firstaid/fire/Initialize(ml, material_key)
 	. = ..()
 	icon_state = pick("ointment","firefirstaid")
 
@@ -69,11 +68,10 @@
 	icon_state = "antitoxin"
 	item_state = "firstaid-toxin"
 
-	startswith = list(
-		/obj/item/storage/med_pouch/toxin = 4
-		)
+/obj/item/storage/firstaid/toxin/WillContain()
+	return list(/obj/item/storage/med_pouch/toxin = 4)
 
-/obj/item/storage/firstaid/toxin/Initialize()
+/obj/item/storage/firstaid/toxin/Initialize(ml, material_key)
 	. = ..()
 	icon_state = pick("antitoxin","antitoxfirstaid","antitoxfirstaid2","antitoxfirstaid3")
 
@@ -83,9 +81,8 @@
 	icon_state = "o2"
 	item_state = "firstaid-o2"
 
-	startswith = list(
-		/obj/item/storage/med_pouch/oxyloss = 4
-		)
+/obj/item/storage/firstaid/o2/WillContain()
+	return list(/obj/item/storage/med_pouch/oxyloss = 4)
 
 /obj/item/storage/firstaid/adv
 	name = "advanced first-aid kit"
@@ -93,7 +90,8 @@
 	icon_state = "purplefirstaid"
 	item_state = "firstaid-advanced"
 
-	startswith = list(
+/obj/item/storage/firstaid/adv/WillContain()
+	return list(
 		/obj/item/storage/pill_bottle/assorted,
 		/obj/item/stack/medical/advanced/bruise_pack = 3,
 		/obj/item/stack/medical/advanced/ointment = 2,
@@ -106,7 +104,8 @@
 	icon_state = "bezerk"
 	item_state = "firstaid-advanced"
 
-	startswith = list(
+/obj/item/storage/firstaid/combat/WillContain()
+	return list(
 		/obj/item/storage/pill_bottle/brute_meds,
 		/obj/item/storage/pill_bottle/burn_meds,
 		/obj/item/storage/pill_bottle/oxygen,
@@ -122,7 +121,8 @@
 	icon_state = "stabfirstaid"
 	item_state = "firstaid-advanced"
 
-	startswith = list(
+/obj/item/storage/firstaid/stab/WillContain()
+	return list(
 		/obj/item/storage/med_pouch/trauma,
 		/obj/item/storage/med_pouch/burn,
 		/obj/item/storage/med_pouch/oxyloss,
@@ -156,7 +156,8 @@
 		/obj/item/stack/nanopaste
 	)
 
-	startswith = list(
+/obj/item/storage/firstaid/surgery/WillContain()
+	return list(
 		/obj/item/bonesetter,
 		/obj/item/cautery,
 		/obj/item/circular_saw,
@@ -181,7 +182,8 @@
 		/obj/item/stack/cable_coil
 	)
 
-	startswith = list(
+/obj/item/storage/firstaid/surgery/ghetto/WillContain()
+	return list(
 		/obj/item/screwdriver,
 		/obj/item/wrench,
 		/obj/item/hatchet,

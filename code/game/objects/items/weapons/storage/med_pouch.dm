@@ -15,7 +15,6 @@ Single Use Emergency Pouches
 	material = /decl/material/solid/plastic
 	var/injury_type = "generic"
 	var/static/image/cross_overlay
-
 	var/instructions = {"
 	1) Tear open the emergency medical pack using the easy open tab at the top.\n\
 	\t2) Carefully remove all items from the pouch and discard the pouch.\n\
@@ -27,10 +26,11 @@ Single Use Emergency Pouches
 	8) Stay in place once they respond.\
 		"}
 
-/obj/item/storage/med_pouch/Initialize()
+/obj/item/storage/med_pouch/Initialize(ml, material_key)
 	. = ..()
-	name = "emergency [injury_type] pouch"
-	make_exact_fit()
+	SetName("emergency [injury_type] pouch")
+	if(length(contents))
+		make_exact_fit()
 	for(var/obj/item/chems/C in contents)
 		C.set_detail_color(color)
 
@@ -65,14 +65,6 @@ Single Use Emergency Pouches
 	name = "trauma pouch"
 	injury_type = "trauma"
 	color = COLOR_RED
-
-	startswith = list(
-	/obj/item/chems/hypospray/autoinjector/pouch_auto/stabilizer,
-	/obj/item/chems/hypospray/autoinjector/pouch_auto/painkillers,
-	/obj/item/chems/pill/pouch_pill/stabilizer,
-	/obj/item/chems/pill/pouch_pill/brute_meds,
-	/obj/item/stack/medical/bruise_pack = 2,
-		)
 	instructions = {"
 	1) Tear open the emergency medical pack using the easy open tab at the top.\n\
 	\t2) Carefully remove all items from the pouch and discard the pouch.\n\
@@ -83,18 +75,19 @@ Single Use Emergency Pouches
 	7) Stay in place once they respond.\
 		"}
 
+/obj/item/storage/med_pouch/trauma/WillContain()
+	return list(
+			/obj/item/chems/hypospray/autoinjector/pouch_auto/stabilizer,
+			/obj/item/chems/hypospray/autoinjector/pouch_auto/painkillers,
+			/obj/item/chems/pill/pouch_pill/stabilizer,
+			/obj/item/chems/pill/pouch_pill/brute_meds,
+			/obj/item/stack/medical/bruise_pack = 2,
+		)
+
 /obj/item/storage/med_pouch/burn
 	name = "burn pouch"
 	injury_type = "burn"
 	color = COLOR_SEDONA
-
-	startswith = list(
-	/obj/item/chems/hypospray/autoinjector/pouch_auto/nanoblood,
-	/obj/item/chems/hypospray/autoinjector/pouch_auto/painkillers,
-	/obj/item/chems/hypospray/autoinjector/pouch_auto/adrenaline,
-	/obj/item/chems/pill/pouch_pill/burn_meds,
-	/obj/item/stack/medical/ointment = 2,
-		)
 	instructions = {"
 	1) Tear open the emergency medical pack using the easy open tab at the top.\n\
 	\t2) Carefully remove all items from the pouch and discard the pouch.\n\
@@ -105,18 +98,19 @@ Single Use Emergency Pouches
 	7) Stay in place once they respond.\
 		"}
 
+/obj/item/storage/med_pouch/burn/WillContain()
+	return list(
+			/obj/item/chems/hypospray/autoinjector/pouch_auto/nanoblood,
+			/obj/item/chems/hypospray/autoinjector/pouch_auto/painkillers,
+			/obj/item/chems/hypospray/autoinjector/pouch_auto/adrenaline,
+			/obj/item/chems/pill/pouch_pill/burn_meds,
+			/obj/item/stack/medical/ointment = 2,
+		)
+
 /obj/item/storage/med_pouch/oxyloss
 	name = "low oxygen pouch"
 	injury_type = "low oxygen"
 	color = COLOR_BLUE
-
-	startswith = list(
-		/obj/item/chems/hypospray/autoinjector/pouch_auto/stabilizer,
-		/obj/item/chems/inhaler/pouch_auto/oxy_meds,
-		/obj/item/chems/hypospray/autoinjector/pouch_auto/adrenaline,
-		/obj/item/chems/pill/pouch_pill/stabilizer,
-		/obj/item/chems/pill/pouch_pill/oxy_meds
-	)
 	instructions = {"
 	1) Tear open the emergency medical pack using the easy open tab at the top.\n\
 	\t2) Carefully remove all items from the pouch and discard the pouch.\n\
@@ -128,15 +122,19 @@ Single Use Emergency Pouches
 	8) Stay in place once they respond.\
 		"}
 
+/obj/item/storage/med_pouch/oxyloss/WillContain()
+	return list(
+		/obj/item/chems/hypospray/autoinjector/pouch_auto/stabilizer,
+		/obj/item/chems/inhaler/pouch_auto/oxy_meds,
+		/obj/item/chems/hypospray/autoinjector/pouch_auto/adrenaline,
+		/obj/item/chems/pill/pouch_pill/stabilizer,
+		/obj/item/chems/pill/pouch_pill/oxy_meds
+	)
+
 /obj/item/storage/med_pouch/toxin
 	name = "toxin pouch"
 	injury_type = "toxin"
 	color = COLOR_GREEN
-
-	startswith = list(
-	/obj/item/chems/hypospray/autoinjector/pouch_auto/antitoxins,
-	/obj/item/chems/pill/pouch_pill/antitoxins
-		)
 	instructions = {"
 	1) Tear open the emergency medical pack using the easy open tab at the top.\n\
 	\t2) Carefully remove all items from the pouch and discard the pouch.\n\
@@ -145,16 +143,17 @@ Single Use Emergency Pouches
 	\t5) Contact the medical team with your location.
 	6) Stay in place once they respond.\
 		"}
+
+/obj/item/storage/med_pouch/toxin/WillContain()
+	return list(
+			/obj/item/chems/hypospray/autoinjector/pouch_auto/antitoxins,
+			/obj/item/chems/pill/pouch_pill/antitoxins
+		)
 
 /obj/item/storage/med_pouch/radiation
 	name = "radiation pouch"
 	injury_type = "radiation"
 	color = COLOR_AMBER
-
-	startswith = list(
-	/obj/item/chems/hypospray/autoinjector/antirad,
-	/obj/item/chems/pill/pouch_pill/antitoxins
-		)
 	instructions = {"
 	1) Tear open the emergency medical pack using the easy open tab at the top.\n\
 	\t2) Carefully remove all items from the pouch and discard the pouch.\n\
@@ -164,17 +163,16 @@ Single Use Emergency Pouches
 	6) Stay in place once they respond.\
 		"}
 
+/obj/item/storage/med_pouch/radiation/WillContain()
+	return list(
+			/obj/item/chems/hypospray/autoinjector/antirad,
+			/obj/item/chems/pill/pouch_pill/antitoxins
+		)
+
 /obj/item/storage/med_pouch/overdose
 	name = "overdose treatment pouch"
 	injury_type = "overdose"
 	color = COLOR_PALE_BLUE_GRAY
-
-	startswith = list(
-		/obj/item/chems/hypospray/autoinjector/pouch_auto/stabilizer,
-		/obj/item/chems/inhaler/pouch_auto/oxy_meds,
-		/obj/item/chems/inhaler/pouch_auto/detoxifier,
-		/obj/item/chems/hypospray/autoinjector/pouch_auto/adrenaline
-	)
 	instructions = {"
 	1) Tear open the emergency medical pack using the easy open tab at the top.\n\
 	\t2) Carefully remove all items from the pouch and discard the pouch.\n\
@@ -185,6 +183,14 @@ Single Use Emergency Pouches
 	8) Stay in place once they respond.\
 		"}
 
+/obj/item/storage/med_pouch/overdose/WillContain()
+	return list(
+		/obj/item/chems/hypospray/autoinjector/pouch_auto/stabilizer,
+		/obj/item/chems/inhaler/pouch_auto/oxy_meds,
+		/obj/item/chems/inhaler/pouch_auto/detoxifier,
+		/obj/item/chems/hypospray/autoinjector/pouch_auto/adrenaline
+	)
+
 // Pills
 
 /obj/item/chems/pill/pouch_pill
@@ -194,9 +200,10 @@ Single Use Emergency Pouches
 	volume     = 15
 	abstract_type = /obj/item/chems/pill/pouch_pill
 
-/obj/item/chems/pill/pouch_pill/Initialize()
+/obj/item/chems/pill/pouch_pill/Initialize(ml, material_key)
 	. = ..()
 	if(!reagents?.total_volume)
+		log_warning("[log_info_line(src)] was deleted for containing no reagents during init!")
 		return INITIALIZE_HINT_QDEL
 
 /obj/item/chems/pill/pouch_pill/initialize_reagents(populate = TRUE)

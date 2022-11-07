@@ -49,4 +49,6 @@
 	name = "box of spare wrist computers"
 	desc = "A box of spare wrist microcomputers."
 	icon_state = "pda"
-	startswith = list(/obj/item/modular_computer/pda/wrist = 5)
+
+/obj/item/storage/box/wrist/WillContain()
+	return list(/obj/item/modular_computer/pda/wrist = 5)

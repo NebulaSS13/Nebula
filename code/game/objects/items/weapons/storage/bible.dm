@@ -14,7 +14,7 @@
 
 /obj/item/storage/bible/Initialize()
 	. = ..()
-	if(length(startswith))
+	if(length(contents))
 		make_exact_fit()
 
 /obj/item/storage/bible/booze
@@ -22,7 +22,8 @@
 	desc = "To be applied to the head repeatedly."
 	icon_state ="bible"
 
-	startswith = list(
+/obj/item/storage/bible/booze/WillContain()
+	return list(
 		/obj/item/chems/drinks/bottle/small/beer,
 		/obj/item/cash/c50,
 		/obj/item/cash/c50,

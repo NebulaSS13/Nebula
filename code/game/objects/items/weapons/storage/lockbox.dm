@@ -77,18 +77,16 @@
 	name = "lockbox of loyalty implants"
 	req_access = list(access_security)
 
-/obj/item/storage/lockbox/loyalty/Initialize()
-	. = ..()
-	new /obj/item/implantcase/loyalty(src)
-	new /obj/item/implantcase/loyalty(src)
-	new /obj/item/implantcase/loyalty(src)
-	new /obj/item/implanter/loyalty(src)
+/obj/item/storage/lockbox/loyalty/WillContain()
+	return list(
+		/obj/item/implantcase/loyalty = 3,
+		/obj/item/implanter/loyalty
+	)
 
 /obj/item/storage/lockbox/clusterbang
 	name = "lockbox of clusterbangs"
 	desc = "You have a bad feeling about opening this."
 	req_access = list(access_security)
 
-/obj/item/storage/lockbox/clusterbang/Initialize()
-	. = ..()
-	new /obj/item/grenade/flashbang/clusterbang(src)
+/obj/item/storage/lockbox/clusterbang/WillContain()
+	return list(/obj/item/grenade/flashbang/clusterbang)

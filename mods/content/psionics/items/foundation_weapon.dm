@@ -17,8 +17,13 @@
 /obj/item/storage/briefcase/foundation/disrupts_psionics()
 	return FALSE
 
-/obj/item/storage/briefcase/foundation/Initialize()
+/obj/item/storage/briefcase/foundation/WillContain()
+	return list(
+		/obj/item/ammo_magazine/speedloader/nullglass,
+		/obj/item/gun/projectile/revolver/foundation,
+	)
+
+/obj/item/storage/briefcase/foundation/Initialize(ml, material_key)
 	. = ..()
-	new /obj/item/ammo_magazine/speedloader/nullglass(src)
-	new /obj/item/gun/projectile/revolver/foundation(src)
-	make_exact_fit()
+	if(length(contents))
+		make_exact_fit()

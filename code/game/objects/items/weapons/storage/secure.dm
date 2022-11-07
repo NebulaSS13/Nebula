@@ -124,10 +124,8 @@
 	icon_locking = "safeb"
 	icon_opened = "safe0"
 
-/obj/item/storage/secure/safe/Initialize()
-	. = ..()
-	new /obj/item/paper(src)
-	new /obj/item/pen(src)
-
-/obj/item/storage/secure/safe/attack_hand(mob/user)
-	return attack_self(user)
+/obj/item/storage/secure/safe/WillContain()
+	return list(
+		/obj/item/pen,
+		/obj/item/paper
+	)

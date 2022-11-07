@@ -95,27 +95,23 @@
 /obj/item/storage/wallet/GetChargeStick()
 	return front_stick
 
-/obj/item/storage/wallet/random/Initialize()
-	. = ..()
-	var/item1_type = pick( /obj/item/cash/c10,/obj/item/cash/c100,/obj/item/cash/c1000,/obj/item/cash/c20,/obj/item/cash/c200,/obj/item/cash/c50, /obj/item/cash/c500)
-	var/item2_type
+/obj/item/storage/wallet/random/WillContain()
+	. = list(
+		new /datum/atom_creator/weighted(list(/obj/item/cash/c10,/obj/item/cash/c100,/obj/item/cash/c1000,/obj/item/cash/c20,/obj/item/cash/c200,/obj/item/cash/c50, /obj/item/cash/c500)),
+		new /datum/atom_creator/weighted(list(/obj/item/coin/silver, /obj/item/coin/silver, /obj/item/coin/gold, /obj/item/coin/iron, /obj/item/coin/iron, /obj/item/coin/iron)),
+	)
 	if(prob(50))
-		item2_type = pick( /obj/item/cash/c10,/obj/item/cash/c100,/obj/item/cash/c1000,/obj/item/cash/c20,/obj/item/cash/c200,/obj/item/cash/c50, /obj/item/cash/c500)
-	var/item3_type = pick( /obj/item/coin/silver, /obj/item/coin/silver, /obj/item/coin/gold, /obj/item/coin/iron, /obj/item/coin/iron, /obj/item/coin/iron )
+		. += new /datum/atom_creator/weighted(list(/obj/item/cash/c10,/obj/item/cash/c100,/obj/item/cash/c1000,/obj/item/cash/c20,/obj/item/cash/c200,/obj/item/cash/c50, /obj/item/cash/c500))
 
-	if(item1_type)
-		new item1_type(src)
-	if(item2_type)
-		new item2_type(src)
-	if(item3_type)
-		new item3_type(src)
+/obj/item/storage/wallet/random/Initialize(ml, material_key)
+	. = ..()
 	update_icon()
 
 /obj/item/storage/wallet/poly
 	name = "polychromic wallet"
 	desc = "You can recolor it! Fancy! The future is NOW!"
 
-/obj/item/storage/wallet/poly/Initialize()
+/obj/item/storage/wallet/poly/Initialize(ml, material_key)
 	. = ..()
 	color = get_random_colour()
 	update_icon()

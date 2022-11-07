@@ -119,8 +119,12 @@
 /obj/item/storage/box/holobadge
 	name = "holobadge box"
 	desc = "A box containing security holobadges."
-	startswith = list(/obj/item/clothing/accessory/badge/holo = 4,
-					  /obj/item/clothing/accessory/badge/holo/cord = 2)
+
+/obj/item/storage/box/holobadge/WillContain()
+	return list(
+			/obj/item/clothing/accessory/badge/holo      = 4,
+			/obj/item/clothing/accessory/badge/holo/cord = 2
+		)
 
 /obj/item/clothing/accessory/badge/old
 	name = "faded badge"

@@ -24,9 +24,6 @@
 	var/collection_mode = TRUE //FALSE = pick one at a time, TRUE = pick all on tile
 	var/use_sound = "rustle" //sound played when used. null for no sound.
 
-	//initializes the contents of the storage with some items based on an assoc list. The assoc key must be an item path,
-	//the assoc value can either be the quantity, or a list whose first value is the quantity and the rest are args.
-	var/list/startswith
 	var/datum/storage_ui/storage_ui = /datum/storage_ui/default
 	var/opened = null
 	var/open_sound = null
@@ -362,7 +359,7 @@
 
 	return FALSE
 
-/obj/item/storage/Initialize()
+/obj/item/storage/Initialize(ml, material_key)
 	. = ..()
 	if(allow_quick_empty)
 		verbs += /obj/item/storage/verb/quick_empty
@@ -380,18 +377,9 @@
 	storage_ui = new storage_ui(src)
 	prepare_ui()
 
-	if(startswith)
-		for(var/item_path in startswith)
-			var/list/data = startswith[item_path]
-			if(islist(data))
-				var/qty = data[1]
-				var/list/argsl = data.Copy()
-				argsl[1] = src
-				for(var/i in 1 to qty)
-					new item_path(arglist(argsl))
-			else
-				for(var/i in 1 to (isnull(data)? 1 : data))
-					new item_path(src)
+	var/list/will_contain = WillContain()
+	if(length(will_contain))
+		create_objects_in_loc(src, will_contain)
 		update_icon()
 
 /obj/item/storage/emp_act(severity)
@@ -408,6 +396,8 @@
 			return 1
 
 /obj/item/storage/proc/make_exact_fit()
+	if(length(contents) <= 0)
+		log_warning("[type] is calling make_exact_fit() while completely empty! This is likely a mistake.")
 	storage_slots = contents.len
 
 	can_hold.Cut()

@@ -4,19 +4,22 @@
 	icon = 'icons/obj/forensics.dmi'
 	icon_state = "cards"
 	w_class = ITEM_SIZE_TINY
-	startswith = list(
-		/obj/item/csi_marker/n1 = 1,
-		/obj/item/csi_marker/n2 = 1,
-		/obj/item/csi_marker/n3 = 1,
-		/obj/item/csi_marker/n4 = 1,
-		/obj/item/csi_marker/n5 = 1,
-		/obj/item/csi_marker/n6 = 1,
-		/obj/item/csi_marker/n7 = 1
+
+/obj/item/storage/csi_markers/WillContain()
+	return list(
+		/obj/item/csi_marker/n1,
+		/obj/item/csi_marker/n2,
+		/obj/item/csi_marker/n3,
+		/obj/item/csi_marker/n4,
+		/obj/item/csi_marker/n5,
+		/obj/item/csi_marker/n6,
+		/obj/item/csi_marker/n7
 	)
 
-/obj/item/storage/csi_markers/Initialize()
+/obj/item/storage/csi_markers/Initialize(ml, material_key)
 	. = ..()
-	make_exact_fit()
+	if(length(contents))
+		make_exact_fit()
 
 /obj/item/csi_marker
 	name = "crime scene marker"

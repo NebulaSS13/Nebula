@@ -34,10 +34,5 @@
 	desc = "A box of spare PDA microcomputers."
 	icon_state = "pdabox"
 
-/obj/item/storage/box/PDAs/Initialize()
-	. = ..()
-	new /obj/item/modular_computer/pda(src)
-	new /obj/item/modular_computer/pda(src)
-	new /obj/item/modular_computer/pda(src)
-	new /obj/item/modular_computer/pda(src)
-	new /obj/item/modular_computer/pda(src)
+/obj/item/storage/box/PDAs/WillContain()
+	return list(/obj/item/modular_computer/pda = 5)

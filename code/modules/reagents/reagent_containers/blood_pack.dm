@@ -2,7 +2,9 @@
 	name = "blood packs box"
 	desc = "This box contains blood packs."
 	icon_state = "sterile"
-	startswith = list(/obj/item/chems/ivbag = 7)
+	
+/obj/item/storage/box/bloodpacks/WillContain()
+	return list(/obj/item/chems/ivbag = 7)
 
 /obj/item/chems/ivbag
 	name = "\improper IV bag"

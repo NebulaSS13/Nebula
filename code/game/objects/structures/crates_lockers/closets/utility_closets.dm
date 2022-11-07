@@ -47,8 +47,6 @@
 		/obj/item/flashlight
 		)
 
-/obj/structure/closet/firecloset/chief
-
 /obj/structure/closet/firecloset/chief/WillContain()
 	return list(
 		/obj/item/storage/med_pouch/burn,
@@ -67,38 +65,24 @@
 	desc = "It's a storage unit for tools."
 	closet_appearance = /decl/closet_appearance/secure_closet/engineering/tools
 
-/obj/structure/closet/toolcloset/Initialize()
-	. = ..()
-	if(prob(40))
-		new /obj/item/clothing/suit/storage/hazardvest(src)
-	if(prob(70))
-		new /obj/item/flashlight(src)
-	if(prob(70))
-		new /obj/item/screwdriver(src)
-	if(prob(70))
-		new /obj/item/wrench(src)
-	if(prob(70))
-		new /obj/item/weldingtool(src)
-	if(prob(70))
-		new /obj/item/crowbar(src)
-	if(prob(70))
-		new /obj/item/wirecutters(src)
-	if(prob(70))
-		new /obj/item/t_scanner(src)
-	if(prob(20))
-		new /obj/item/storage/belt/utility(src)
-	if(prob(30))
-		new /obj/item/stack/cable_coil/random(src)
-	if(prob(30))
-		new /obj/item/stack/cable_coil/random(src)
-	if(prob(30))
-		new /obj/item/stack/cable_coil/random(src)
-	if(prob(20))
-		new /obj/item/multitool(src)
-	if(prob(5))
-		new /obj/item/clothing/gloves/insulated(src)
-	if(prob(40))
-		new /obj/item/clothing/head/hardhat(src)
+/obj/structure/closet/firecloset/chief/WillContain()
+	return list(
+		new /datum/atom_creator/simple(/obj/item/clothing/suit/storage/hazardvest, 40),
+		new /datum/atom_creator/simple(/obj/item/flashlight,                70),
+		new /datum/atom_creator/simple(/obj/item/screwdriver,               70),
+		new /datum/atom_creator/simple(/obj/item/wrench,                    70),
+		new /datum/atom_creator/simple(/obj/item/weldingtool,               70),
+		new /datum/atom_creator/simple(/obj/item/crowbar,                   70),
+		new /datum/atom_creator/simple(/obj/item/wirecutters,               70),
+		new /datum/atom_creator/simple(/obj/item/t_scanner,                 70),
+		new /datum/atom_creator/simple(/obj/item/storage/belt/utility,      20),
+		new /datum/atom_creator/simple(/obj/item/stack/cable_coil/random,   30),
+		new /datum/atom_creator/simple(/obj/item/stack/cable_coil/random,   30),
+		new /datum/atom_creator/simple(/obj/item/stack/cable_coil/random,   30),
+		new /datum/atom_creator/simple(/obj/item/multitool,                 20),
+		new /datum/atom_creator/simple(/obj/item/clothing/gloves/insulated,  5),
+		new /datum/atom_creator/simple(/obj/item/clothing/head/hardhat,     40),
+	)
 
 
 /*
@@ -112,10 +96,8 @@
 /obj/structure/closet/radiation/WillContain()
 	return list(
 		/obj/item/storage/med_pouch/radiation = 2,
-		/obj/item/clothing/suit/radiation,
-		/obj/item/clothing/head/radiation,
-		/obj/item/clothing/suit/radiation,
-		/obj/item/clothing/head/radiation,
+		/obj/item/clothing/suit/radiation = 2,
+		/obj/item/clothing/head/radiation = 2,
 		/obj/item/geiger = 2)
 
 /*
@@ -161,7 +143,7 @@
 	obj_flags = OBJ_FLAG_MOVES_UNSUPPORTED
 	directional_offset = "{'NORTH':{'y':-32}, 'SOUTH':{'y':32}, 'EAST':{'x':-32}, 'WEST':{'x':32}}"
 	
-/obj/structure/closet/hydrant/Initialize()
+/obj/structure/closet/hydrant/Initialize(ml, _mat, _reinf_mat)
 	. = ..()
 	tool_interaction_flags &= ~TOOL_INTERACTION_ANCHOR
 

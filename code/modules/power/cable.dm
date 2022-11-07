@@ -496,13 +496,6 @@ By design, d1 is the smallest direction and d2 is the highest
 	stack_merge_type = /obj/item/stack/cable_coil
 	matter_multiplier = 0.15
 
-/obj/item/stack/cable_coil/Initialize()
-	. = ..()
-	set_extension(src, /datum/extension/tool/variable, list(
-		TOOL_CABLECOIL = TOOL_QUALITY_DEFAULT,
-		TOOL_SUTURES =   TOOL_QUALITY_MEDIOCRE
-	))
-
 /obj/item/stack/cable_coil/single
 	amount = 1
 
@@ -517,6 +510,10 @@ By design, d1 is the smallest direction and d2 is the highest
 
 /obj/item/stack/cable_coil/Initialize(mapload, c_length = MAXCOIL, var/param_color = null)
 	. = ..(mapload, c_length)
+	set_extension(src, /datum/extension/tool/variable, list(
+		TOOL_CABLECOIL = TOOL_QUALITY_DEFAULT,
+		TOOL_SUTURES =   TOOL_QUALITY_MEDIOCRE
+	))
 	src.amount = c_length
 	if (param_color) // It should be red by default, so only recolor it if parameter was specified.
 		color = param_color
@@ -845,7 +842,7 @@ By design, d1 is the smallest direction and d2 is the highest
 /obj/item/stack/cable_coil/lime
 	color = COLOR_LIME
 
-/obj/item/stack/cable_coil/random/Initialize()
+/obj/item/stack/cable_coil/random/Initialize(mapload, c_length, param_color)
 	var/list/possible_cable_colours = get_global_cable_colors()
 	color = possible_cable_colours[pick(possible_cable_colours)]
 	. = ..()

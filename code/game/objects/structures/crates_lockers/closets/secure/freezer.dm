@@ -41,8 +41,8 @@
 	closet_appearance = null
 	req_access = list(access_heads_vault)
 
-/obj/structure/closet/secure_closet/freezer/money/Initialize()
-	. = ..()
+/obj/structure/closet/secure_closet/freezer/money/WillContain()
+	. = list()
 	//let's make hold a substantial amount.
 	var/created_size = 0
 	for(var/i = 1 to 200) //sanity loop limit
@@ -50,6 +50,6 @@
 		var/bundle_size = initial(cash_type.w_class) / 2
 		if(created_size + bundle_size <= storage_capacity)
 			created_size += bundle_size
-			new cash_type(src)
+			. += cash_type
 		else
 			break

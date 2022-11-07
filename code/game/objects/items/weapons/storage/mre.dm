@@ -15,19 +15,22 @@ MRE Stuff
 	item_flags = ITEM_FLAG_HOLLOW
 	var/main_meal = /obj/item/storage/mrebag
 	var/meal_desc = "This one is menu 1, meat pizza."
-	startswith = list(
-	/obj/item/storage/mrebag/dessert,
-	/obj/item/storage/fancy/crackers,
-	/obj/random/mre/spread,
-	/obj/random/mre/drink,
-	/obj/random/mre/sauce,
-	/obj/item/kitchen/utensil/spork/plastic
+
+/obj/item/storage/mre/WillContain()
+	. = list(
+		main_meal,
+		/obj/item/storage/mrebag/dessert,
+		/obj/item/storage/fancy/crackers,
+		/obj/random/mre/spread,
+		/obj/random/mre/drink,
+		/obj/random/mre/sauce,
+		/obj/item/kitchen/utensil/spork/plastic
 	)
 
-/obj/item/storage/mre/Initialize()
-	create_objects_in_loc(src, main_meal)
+/obj/item/storage/mre/Initialize(ml, material_key)
 	. = ..()
-	make_exact_fit()
+	if(length(contents))
+		make_exact_fit()
 
 /obj/item/storage/mre/examine(mob/user)
 	. = ..()
@@ -79,13 +82,16 @@ MRE Stuff
 	meal_desc = "This one is menu 9, boiled rice."
 	icon_state = "vegmre"
 	main_meal = /obj/item/storage/mrebag/menu9
-	startswith = list(
-	/obj/item/storage/mrebag/dessert/menu9,
-	/obj/item/storage/fancy/crackers,
-	/obj/random/mre/spread/vegan,
-	/obj/random/mre/drink,
-	/obj/random/mre/sauce/vegan,
-	/obj/item/kitchen/utensil/spoon/plastic
+
+/obj/item/storage/mre/menu9/WillContain()
+	. = list(
+		main_meal,
+		/obj/item/storage/mrebag/dessert/menu9,
+		/obj/item/storage/fancy/crackers,
+		/obj/random/mre/spread/vegan,
+		/obj/random/mre/drink,
+		/obj/random/mre/sauce/vegan,
+		/obj/item/kitchen/utensil/spoon/plastic
 	)
 
 /obj/item/storage/mre/menu10
@@ -93,11 +99,14 @@ MRE Stuff
 	meal_desc = "This one is menu 10, protein."
 	icon_state = "meatmre"
 	main_meal = /obj/item/storage/mrebag/menu10
-	startswith = list(
-	/obj/item/chems/food/candy/proteinbar,
-	/obj/item/chems/condiment/small/packet/protein,
-	/obj/random/mre/sauce/sugarfree,
-	/obj/item/kitchen/utensil/spoon/plastic
+
+/obj/item/storage/mre/menu10/WillContain()
+	. = list(
+		main_meal,
+		/obj/item/chems/food/candy/proteinbar,
+		/obj/item/chems/condiment/small/packet/protein,
+		/obj/random/mre/sauce/sugarfree,
+		/obj/item/kitchen/utensil/spoon/plastic
 	)
 
 /obj/item/storage/mre/menu11
@@ -105,11 +114,14 @@ MRE Stuff
 	meal_desc = "This one doesn't have a menu listing. How very odd."
 	icon_state = "crayonmre"
 	main_meal = /obj/item/storage/fancy/crayons
-	startswith = list(
-	/obj/item/storage/mrebag/dessert/menu11,
-	/obj/random/mre/sauce/crayon,
-	/obj/random/mre/sauce/crayon,
-	/obj/random/mre/sauce/crayon
+
+/obj/item/storage/mre/menu11/WillContain()
+	return list(
+		main_meal,
+		/obj/item/storage/mrebag/dessert/menu11,
+		/obj/random/mre/sauce/crayon,
+		/obj/random/mre/sauce/crayon,
+		/obj/random/mre/sauce/crayon
 	)
 
 /obj/item/storage/mre/menu11/special
@@ -129,9 +141,11 @@ MRE Stuff
 	max_w_class = ITEM_SIZE_SMALL
 	opened = FALSE
 	open_sound = 'sound/effects/bubbles.ogg'
-	startswith = list(/obj/item/chems/food/slice/meatpizza/filled)
 	material = /decl/material/solid/plastic
 	matter = list(/decl/material/solid/metal/aluminium = MATTER_AMOUNT_TRACE)
+
+/obj/item/storage/mrebag/WillContain()
+	return list(/obj/item/chems/food/slice/meatpizza/filled)
 
 /obj/item/storage/mrebag/on_update_icon()
 	. = ..()
@@ -146,42 +160,44 @@ MRE Stuff
 		to_chat(usr, "<span class='notice'>The pouch heats up as you break the vaccum seal.</span>")
 	. = ..()
 
-/obj/item/storage/mrebag/menu2
-	startswith = list(/obj/item/chems/food/slice/margherita/filled)
+/obj/item/storage/mrebag/menu2/WillContain()
+	return list(/obj/item/chems/food/slice/margherita/filled)
 
-/obj/item/storage/mrebag/menu3
-	startswith = list(/obj/item/chems/food/slice/vegetablepizza/filled)
+/obj/item/storage/mrebag/menu3/WillContain()
+	return list(/obj/item/chems/food/slice/vegetablepizza/filled)
 
-/obj/item/storage/mrebag/menu4
-	startswith = list(/obj/item/chems/food/hamburger)
+/obj/item/storage/mrebag/menu4/WillContain()
+	return list(/obj/item/chems/food/hamburger)
 
-/obj/item/storage/mrebag/menu5
-	startswith = list(/obj/item/chems/food/taco)
+/obj/item/storage/mrebag/menu5/WillContain()
+	return list(/obj/item/chems/food/taco)
 
-/obj/item/storage/mrebag/menu6
-	startswith = list(/obj/item/chems/food/slice/meatbread/filled)
+/obj/item/storage/mrebag/menu6/WillContain()
+	return list(/obj/item/chems/food/slice/meatbread/filled)
 
-/obj/item/storage/mrebag/menu7
-	startswith = list(/obj/item/chems/food/tossedsalad)
+/obj/item/storage/mrebag/menu7/WillContain()
+	return list(/obj/item/chems/food/tossedsalad)
 
-/obj/item/storage/mrebag/menu8
-	startswith = list(/obj/item/chems/food/hotchili)
+/obj/item/storage/mrebag/menu8/WillContain()
+	return list(/obj/item/chems/food/hotchili)
 
-/obj/item/storage/mrebag/menu9
-	startswith = list(/obj/item/chems/food/boiledrice)
+/obj/item/storage/mrebag/menu9/WillContain()
+	return list(/obj/item/chems/food/boiledrice)
 
-/obj/item/storage/mrebag/menu10
-	startswith = list(/obj/item/chems/food/meatcube)
+/obj/item/storage/mrebag/menu10/WillContain()
+	return list(/obj/item/chems/food/meatcube)
 
 /obj/item/storage/mrebag/dessert
 	name = "dessert"
 	desc = "A vacuum-sealed bag containing the MRE's dessert."
 	icon_state = "pouch_small"
 	open_sound = 'sound/effects/rip1.ogg'
-	startswith = list(/obj/random/mre/dessert)
 
-/obj/item/storage/mrebag/dessert/menu9
-	startswith = list(/obj/item/chems/food/plumphelmetbiscuit)
+/obj/item/storage/mrebag/dessert/WillContain()
+	return list(/obj/random/mre/dessert)
 
-/obj/item/storage/mrebag/dessert/menu11
-	startswith = list(/obj/item/pen/crayon/rainbow)
+/obj/item/storage/mrebag/dessert/menu9/WillContain()
+	return list(/obj/item/chems/food/plumphelmetbiscuit)
+
+/obj/item/storage/mrebag/dessert/menu11/WillContain()
+	return list(/obj/item/pen/crayon/rainbow)

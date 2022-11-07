@@ -17,9 +17,9 @@
 	name       = "body bags"
 	desc       = "This box contains body bags."
 	icon_state = "bodybags"
-	startswith = list(
-		/obj/item/bodybag = 7,
-	)
+
+/obj/item/storage/box/bodybags/WillContain()
+	return list(/obj/item/bodybag = 7)
 
 /obj/structure/closet/body_bag
 	name = "body bag"

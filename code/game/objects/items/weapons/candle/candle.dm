@@ -87,4 +87,6 @@
 	max_storage_space = 7
 	slot_flags = SLOT_LOWER_BODY
 	material = /decl/material/solid/cardboard
-	startswith = list(/obj/item/flame/candle = 7)
+	
+/obj/item/storage/candle_box/WillContain()
+	return list(/obj/item/flame/candle = 7)
