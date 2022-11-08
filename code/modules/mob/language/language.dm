@@ -4,6 +4,16 @@
 	Datum based languages. Easily editable and modular.
 */
 
+/* Current unused keys, please update when you use one.
+ * e
+ * j
+ * l
+ * m
+ * n
+ * r
+ * t
+ * w
+*/
 /decl/language
 	abstract_type = /decl/language    // Used to point at root language types that shouldn't be visible
 

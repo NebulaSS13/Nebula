@@ -168,7 +168,7 @@
 	amount = abs(amount)
 
 	if (!heal)
-		amount = amount * species.get_toxins_mod(src)
+		amount *= get_toxin_resistance()
 		var/antitox = GET_CHEMICAL_EFFECT(src, CE_ANTITOX)
 		if(antitox)
 			amount *= 1 - antitox * 0.25
