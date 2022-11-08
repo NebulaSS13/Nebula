@@ -13,14 +13,6 @@
 	icon = 'maps/ministation/ministation_areas.dmi'
 	icon_state = "default"
 
-/area/ministation/arrival_shuttle
-	name = "Arrivals Shuttle"
-	requires_power = 0
-	icon_state = "light_blue"
-	sound_env = SMALL_ENCLOSED
-	base_turf = /turf/space
-	area_flags = AREA_FLAG_RAD_SHIELDED | AREA_FLAG_ION_SHIELDED
-
 /area/ministation/supply_dock
 	name = "Supply Shuttle Dock"
 	icon_state = "yellow"
@@ -138,6 +130,14 @@
 	name = "\improper Library"
 	icon_state = "LIB"
 
+/area/ministation/disused
+	name = "\improper Disused Section"
+	icon_state = "pink"
+
+/area/ministation/disused_office
+	name = "\improper Disused Office"
+	icon_state = "dark_blue"
+
 /area/ministation/atmospherics
 	name = "\improper Atmospherics"
 	req_access = list(access_atmospherics)
@@ -209,3 +209,7 @@
 	secure = TRUE
 	req_access = list(access_ai_upload)
 	icon_state = "light_blue"
+
+/area/shuttle/escape_shuttle
+	name = "\improper Emergency Shuttle"
+	icon_state = "shuttle"

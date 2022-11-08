@@ -17,11 +17,19 @@
 
 	lobby_screens = list('maps/ministation/ministation_lobby.png')
 
-	//TEMPORARY NOTE: Evac messages are temporary until its set up properly. Make sure they're changed later.
-	emergency_shuttle_leaving_dock = "Attention all crew members: the escape shuttle will be arriving shortly, please prepare to board."
-	emergency_shuttle_called_message = "Attention all crew members: emergency evacuation procedures are now in effect. Please make your way to the port hallway docking area in a calm and orderly manner."
-	emergency_shuttle_recall_message = "Attention all crew members: emergency evacuation sequence aborted. Return to normal operating conditions."
-	evac_controller_type = /datum/evacuation_controller/ministation_substitute
+	shuttle_docked_message = "The public ferry to %dock_name% has docked with the station. It will depart in approximately %ETD%"
+	shuttle_leaving_dock   = "The public ferry has left the station. Estimate %ETA% until the ferry docks at %dock_name%."
+	shuttle_called_message = "A public ferry to %dock_name% has been scheduled. It will arrive in approximately %ETA%"
+	shuttle_recall_message = "The scheduled ferry has been cancelled."
+
+	emergency_shuttle_docked_message = "The emergency shuttle has docked with the station. You have approximately %ETD% to board the emergency shuttle."
+	emergency_shuttle_leaving_dock = "The emergency shuttle has left the station. Estimate %ETA% until the shuttle docks at %dock_name%."
+	emergency_shuttle_called_message = "An emergency evacuation shuttle has been called. It will arrive in approximately %ETA%."
+	emergency_shuttle_called_sound = 'sound/AI/shuttlecalled.ogg'
+
+	emergency_shuttle_recall_message = "The emergency shuttle has been recalled."
+
+	evac_controller_type = /datum/evacuation_controller/shuttle
 
 	pray_reward_type = /obj/item/mollusc/clam
 
@@ -40,10 +48,4 @@
 
 /datum/map/ministation/get_map_info()
 	return "You're aboard the <b>[station_name],</b> an older station once used for unethical scientific research. It has long since been repurposed as deep space communication relay, though only on paper. \
-	Onboard activity is at the whims of the [boss_name] who treat the station as a glorafied dogsbody, and sometimes guinea pig."
-
-/datum/evacuation_controller/ministation_substitute
-	name = "lazy ministation evac controller"
-	evac_prep_delay =    6 MINUTES
-	evac_launch_delay =  1 SECONDS
-	evac_transit_delay = 1 SECONDS
+	Onboard activity is at the whims of the [boss_name] who treat the station as a glorified dogsbody, and sometimes guinea pig."
