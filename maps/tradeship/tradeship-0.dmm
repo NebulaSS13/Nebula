@@ -641,8 +641,6 @@
 	level = 2
 	},
 /obj/effect/decal/cleanable/dirt,
-/obj/structure/table/gamblingtable,
-/obj/item/chems/food/fish/mollusc,
 /obj/item/trash/mollusc_shell/clam,
 /turf/simulated/floor,
 /area/ship/trade/disused)
@@ -749,7 +747,6 @@
 	name = "shank"
 	},
 /obj/item/synthesized_instrument/synthesizer,
-/obj/item/twohanded/spear,
 /turf/simulated/floor,
 /area/ship/trade/fore_port_underside_maint)
 "bE" = (
@@ -1097,7 +1094,6 @@
 /turf/simulated/floor/carpet/green,
 /area/ship/trade/disused)
 "hc" = (
-/obj/item/megaphone,
 /obj/item/radio,
 /obj/structure/table/woodentable/walnut,
 /turf/simulated/floor/wood/walnut,
@@ -1159,6 +1155,10 @@
 "jT" = (
 /turf/simulated/floor/airless,
 /area/ship/trade/livestock)
+"kH" = (
+/obj/structure/window/reinforced,
+/turf/simulated/floor,
+/area/ship/trade/loading_bay)
 "kO" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
@@ -1587,9 +1587,6 @@
 /obj/random/trash,
 /turf/simulated/floor,
 /area/ship/trade/loading_bay)
-"zw" = (
-/turf/simulated/floor/carpet/green,
-/area/ship/trade/disused)
 "AG" = (
 /obj/structure/disposalpipe/segment{
 	dir = 1;
@@ -1604,6 +1601,9 @@
 /mob/living/simple_animal/mouse,
 /turf/simulated/floor,
 /area/ship/trade/aft_starboard_underside_maint)
+"AT" = (
+/turf/simulated/floor/carpet/green,
+/area/ship/trade/disused)
 "AZ" = (
 /obj/machinery/smartfridge/secure/extract,
 /turf/simulated/floor/tiled/white,
@@ -1820,6 +1820,11 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 10
 	},
+/obj/random/voidsuit,
+/obj/random/voidhelmet,
+/obj/structure/closet/emcloset,
+/obj/random/voidsuit,
+/obj/random/voidhelmet,
 /turf/simulated/floor,
 /area/ship/trade/aft_starboard_underside_maint)
 "KZ" = (
@@ -1993,8 +1998,6 @@
 /area/ship/trade/aft_starboard_underside_maint)
 "Qh" = (
 /obj/structure/table/woodentable/mahogany,
-/obj/item/gun/launcher/crossbow,
-/obj/item/stack/material/rods,
 /obj/item/cell/crap/empty,
 /turf/simulated/floor/wood/walnut,
 /area/ship/trade/disused)
@@ -2068,7 +2071,6 @@
 	pixel_y = 25
 	},
 /obj/effect/decal/cleanable/dirt,
-/obj/structure/flora/pottedplant/bamboo,
 /turf/simulated/floor,
 /area/ship/trade/disused)
 "TA" = (
@@ -2083,9 +2085,6 @@
 /obj/structure/curtain/medical,
 /turf/simulated/floor,
 /area/ship/trade/disused)
-"Ux" = (
-/turf/simulated/floor/carpet/red,
-/area/ship/trade/disused)
 "UI" = (
 /obj/structure/disposaloutlet{
 	dir = 4
@@ -2095,6 +2094,10 @@
 	},
 /turf/simulated/floor,
 /area/ship/trade/loading_bay)
+"VT" = (
+/obj/machinery/hologram/holopad/longrange,
+/turf/simulated/floor/wood/walnut,
+/area/ship/trade/disused)
 "Xe" = (
 /turf/simulated/wall,
 /area/ship/trade/fore_port_underside_maint)
@@ -2130,6 +2133,9 @@
 	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/ship/trade/undercomms)
+"Ym" = (
+/turf/simulated/floor/carpet/red,
+/area/ship/trade/disused)
 "YH" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
@@ -2187,6 +2193,12 @@
 	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/ship/trade/livestock)
+"ZC" = (
+/obj/structure/window/reinforced{
+	dir = 1
+	},
+/turf/simulated/floor,
+/area/ship/trade/loading_bay)
 "ZR" = (
 /obj/structure/window/basic,
 /obj/structure/curtain/open/bed,
@@ -4854,7 +4866,7 @@ aa
 aa
 SC
 Ff
-Ux
+Ym
 Xe
 Nq
 ak
@@ -5265,7 +5277,7 @@ aa
 ab
 en
 ae
-en
+VT
 DV
 ax
 pU
@@ -5679,9 +5691,9 @@ JQ
 JQ
 ac
 JQ
-sO
+kH
 IQ
-sO
+ZC
 tD
 wG
 Ky
@@ -5756,7 +5768,7 @@ aa
 aa
 ab
 gf
-zw
+AT
 JQ
 Mb
 ap
@@ -5837,8 +5849,8 @@ aa
 aa
 aa
 SC
-zw
-Ux
+AT
+Ym
 JQ
 Yh
 Ft
@@ -5919,8 +5931,8 @@ aa
 aa
 aa
 SC
-zw
-Ux
+AT
+Ym
 JQ
 lv
 DT

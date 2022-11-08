@@ -9,7 +9,12 @@
 	restricted_area = 30
 	sector_flags = OVERMAP_SECTOR_KNOWN|OVERMAP_SECTOR_BASE|OVERMAP_SECTOR_IN_SPACE
 
-	initial_generic_waypoints = list("nav_tradeship_below_bow", "nav_tradeship_below_starboardastern", "nav_tradeship_starboard_dock_pod")
+	initial_generic_waypoints = list(
+		"nav_tradeship_below_bow",
+		"nav_tradeship_below_starboardastern"
+	)
+	//exploration and rescue shuttles can only dock port side, b/c there's only one door.
 	initial_restricted_waypoints = list(
-		/datum/shuttle/autodock/overmap/exploration = list("nav_tradeship_port_dock_shuttle"), // exploration ship can only dock portside
+		/datum/shuttle/autodock/overmap/exploration = list("nav_tradeship_port_dock_shuttle"),
+		/datum/shuttle/autodock/overmap/rescue = list("nav_tradeship_starboard_dock_rescue")
 	)

@@ -244,6 +244,10 @@
 	name = "\improper Exploration Shuttle"
 	icon_state = "tcomsatcham"
 
+/area/ship/trade/shuttle/rescue
+	name = "\improper Rescue Shuttle"
+	icon_state = "tcomsatcham"
+
 /area/ship/trade/maintenance/solars
 	name = "\improper Solar Array Access"
 	icon_state = "SolarcontrolA"
