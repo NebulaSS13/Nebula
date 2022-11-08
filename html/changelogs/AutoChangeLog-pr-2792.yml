@@ -1,4 +1,0 @@
-author: PsyCommando
-delete-after: true
-changes:
-  - bugfix: Fixed some empty box variants having no storage slots on spawn.
