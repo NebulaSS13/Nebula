@@ -20120,7 +20120,7 @@
 /area/exodus/chapel/main)
 "aQc" = (
 /obj/machinery/door/airlock/external/bolted{
-	id_tag = "rescue_shuttle_dock_outer";
+	id_tag = "exodus_rescue_shuttle_dock_outer";
 	name = "Docking Port Airlock"
 	},
 /obj/machinery/shield_diffuser,
@@ -20128,11 +20128,11 @@
 /area/exodus/hallway/secondary/entry/aft)
 "aQd" = (
 /obj/machinery/door/airlock/external/bolted{
-	id_tag = "rescue_shuttle_dock_outer";
+	id_tag = "exodus_rescue_shuttle_dock_outer";
 	name = "Docking Port Airlock"
 	},
 /obj/machinery/button/access/exterior{
-	id_tag = "rescue_shuttle_dock_airlock";
+	id_tag = "exodus_rescue_shuttle_dock_airlock";
 	name = "exterior access button";
 	pixel_x = -26;
 	pixel_y = -5
@@ -60617,12 +60617,12 @@
 	dir = 5
 	},
 /obj/machinery/embedded_controller/radio/airlock/docking_port{
-	id_tag = "rescue_shuttle_dock_airlock";
+	id_tag = "exodus_rescue_shuttle_dock_airlock";
 	pixel_y = 25;
-	tag_airpump = "rescue_shuttle_dock_pump";
-	tag_chamber_sensor = "rescue_shuttle_dock_sensor";
-	tag_exterior_door = "rescue_shuttle_dock_outer";
-	tag_interior_door = "rescue_shuttle_dock_inner"
+	tag_airpump = "exodus_rescue_shuttle_dock_pump";
+	tag_chamber_sensor = "exodus_rescue_shuttle_dock_sensor";
+	tag_exterior_door = "exodus_rescue_shuttle_dock_outer";
+	tag_interior_door = "exodus_rescue_shuttle_dock_inner"
 	},
 /turf/simulated/floor/plating,
 /area/exodus/hallway/secondary/entry/aft)
@@ -60657,7 +60657,7 @@
 	},
 /obj/machinery/atmospherics/unary/vent_pump/high_volume/external_air{
 	dir = 4;
-	id_tag = "rescue_shuttle_dock_pump"
+	id_tag = "exodus_rescue_shuttle_dock_pump"
 	},
 /turf/simulated/floor/plating,
 /area/exodus/hallway/secondary/entry/aft)
@@ -60669,7 +60669,7 @@
 	dir = 9
 	},
 /obj/machinery/button/access/interior{
-	id_tag = "rescue_shuttle_dock_airlock";
+	id_tag = "exodus_rescue_shuttle_dock_airlock";
 	name = "interior access button";
 	pixel_x = -8;
 	pixel_y = 26
@@ -60694,7 +60694,7 @@
 	dir = 4
 	},
 /obj/machinery/door/airlock/external/bolted{
-	id_tag = "rescue_shuttle_dock_inner";
+	id_tag = "exodus_rescue_shuttle_dock_inner";
 	name = "Docking Port Airlock"
 	},
 /turf/simulated/floor/tiled/techfloor/grid,
@@ -60739,7 +60739,7 @@
 	},
 /obj/machinery/atmospherics/unary/vent_pump/high_volume/external_air{
 	dir = 1;
-	id_tag = "rescue_shuttle_dock_pump"
+	id_tag = "exodus_rescue_shuttle_dock_pump"
 	},
 /turf/simulated/floor/plating,
 /area/exodus/hallway/secondary/entry/aft)
@@ -60827,7 +60827,7 @@
 	dir = 10
 	},
 /obj/machinery/airlock_sensor{
-	id_tag = "rescue_shuttle_dock_sensor";
+	id_tag = "exodus_rescue_shuttle_dock_sensor";
 	pixel_x = -25
 	},
 /turf/simulated/floor/plating,
@@ -60854,7 +60854,7 @@
 /area/exodus/maintenance/incinerator)
 "cAk" = (
 /obj/machinery/door/airlock/external/bolted{
-	id_tag = "rescue_shuttle_dock_inner";
+	id_tag = "exodus_rescue_shuttle_dock_inner";
 	name = "Docking Port Airlock"
 	},
 /turf/simulated/floor/tiled/techfloor/grid,
