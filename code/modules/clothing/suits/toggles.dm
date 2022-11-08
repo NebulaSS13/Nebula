@@ -1,14 +1,14 @@
 //Jackets with buttons, used for labcoats, IA jackets, First Responder jackets, and brown jackets.
 /obj/item/clothing/suit/storage/toggle
-	var/buttons // null means no toggle, TRUE means unbuttoned, FALSE means buttoned closed
+	var/buttons // null means no toggle, TRUE means unbuttoned, FALSE means buttoned closed. Set during Initialize() based on icon
 	var/obj/item/clothing/head/hood
 
 /obj/item/clothing/suit/storage/toggle/Initialize()
-	. = ..()
 	if(check_state_in_icon("[icon_state]_open", icon))
 		buttons = TRUE
 	if(ispath(hood))
 		hood = new hood(src)
+	. = ..()
 
 /obj/item/clothing/suit/storage/toggle/Destroy()
 	if(istype(hood))
@@ -41,13 +41,14 @@
 		var/mob/M = hood.loc
 		M.drop_from_inventory(hood)
 	hood.forceMove(src)
+	update_clothing_icon()
 
 /obj/item/clothing/suit/storage/toggle/proc/toggle_buttons(var/mob/user)
 	if(!CanPhysicallyInteract(usr) || isnull(buttons))
 		return FALSE
 	buttons = !buttons
 	if(user)
-		to_chat(user, "You [buttons ? "un" : ""]button up the coat.")
+		to_chat(user, SPAN_NOTICE("You [buttons ? "unbutton" : "button up"] \the [src]."))
 	update_icon()
 	update_clothing_icon()	//so our overlays update
 
@@ -81,6 +82,7 @@
 		remove_hood()
 	else
 		M.equip_to_slot_if_possible(hood, slot_head_str, 0, 0, 1)
+	update_clothing_icon()
 	return TRUE
 
 // Short-circuit this for quick interaction when worn.
