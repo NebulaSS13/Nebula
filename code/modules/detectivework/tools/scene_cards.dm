@@ -5,7 +5,7 @@
 	icon_state = "cards"
 	w_class = ITEM_SIZE_TINY
 
-/obj/item/storage/csi_markers/WillContain()
+/obj/item/storage/box/csi_markers/WillContain()
 	return list(
 		/obj/item/csi_marker/n1,
 		/obj/item/csi_marker/n2,
