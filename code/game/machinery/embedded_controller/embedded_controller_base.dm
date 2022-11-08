@@ -188,3 +188,45 @@
 		new_frequency = sanitize_frequency(new_frequency, RADIO_LOW_FREQ, RADIO_HIGH_FREQ)
 		controller.set_frequency(new_frequency)
 		return MT_REFRESH
+
+/decl/stock_part_preset/radio/receiver/vent_pump/airlock
+	frequency = EXTERNAL_AIR_FREQ
+	filter    = null
+
+/decl/stock_part_preset/radio/event_transmitter/vent_pump/airlock
+	frequency = EXTERNAL_AIR_FREQ
+	filter    = null
+
+/obj/machinery/atmospherics/unary/vent_pump/airlock
+	controlled                      = FALSE
+	external_pressure_bound         = MAX_PUMP_PRESSURE
+	external_pressure_bound_default = MAX_PUMP_PRESSURE
+	internal_pressure_bound         = MAX_PUMP_PRESSURE
+	internal_pressure_bound_default = MAX_PUMP_PRESSURE
+	stock_part_presets              = list(
+		/decl/stock_part_preset/radio/receiver/vent_pump/airlock = 1,
+		/decl/stock_part_preset/radio/event_transmitter/vent_pump/airlock = 1
+	)
+
+/obj/machinery/atmospherics/unary/vent_pump/cabled/airlock
+	controlled                      = FALSE
+	external_pressure_bound         = MAX_PUMP_PRESSURE
+	external_pressure_bound_default = MAX_PUMP_PRESSURE
+	internal_pressure_bound         = MAX_PUMP_PRESSURE
+	internal_pressure_bound_default = MAX_PUMP_PRESSURE
+	stock_part_presets              = list(
+		/decl/stock_part_preset/radio/receiver/vent_pump/airlock = 1,
+		/decl/stock_part_preset/radio/event_transmitter/vent_pump/airlock = 1,
+		/decl/stock_part_preset/terminal_connect/offset_dir = 1,
+	)
+
+/obj/machinery/atmospherics/unary/vent_pump/high_volume/airlock
+	controlled                      = FALSE
+	external_pressure_bound         = MAX_PUMP_PRESSURE
+	external_pressure_bound_default = MAX_PUMP_PRESSURE
+	internal_pressure_bound         = MAX_PUMP_PRESSURE
+	internal_pressure_bound_default = MAX_PUMP_PRESSURE
+	stock_part_presets              = list(
+		/decl/stock_part_preset/radio/receiver/vent_pump/airlock = 1,
+		/decl/stock_part_preset/radio/event_transmitter/vent_pump/airlock = 1
+	)

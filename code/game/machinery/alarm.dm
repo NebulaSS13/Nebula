@@ -117,6 +117,8 @@
 
 /obj/machinery/alarm/nobreach
 	breach_detection = 0
+/obj/machinery/alarm/nobreach/airlock
+	frequency = EXTERNAL_AIR_FREQ
 
 /obj/machinery/alarm/monitor
 	report_danger_level = 0
