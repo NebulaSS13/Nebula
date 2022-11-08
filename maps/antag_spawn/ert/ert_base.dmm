@@ -1733,7 +1733,7 @@
 "dx" = (
 /obj/machinery/embedded_controller/radio/simple_docking_controller{
 	frequency = 1331;
-	id_tag = "rescue_base";
+	id_tag = "ert_rescue_base";
 	pixel_x = 5;
 	pixel_y = -25
 	},
@@ -1775,7 +1775,7 @@
 /area/map_template/rescue_base/base)
 "dC" = (
 /obj/machinery/door/airlock/external/shuttle{
-	id_tag = "rescue_base_hatch";
+	id_tag = "ert_rescue_base_hatch";
 	name = "Landing Pad"
 	},
 /turf/unsimulated/floor{
@@ -1881,7 +1881,7 @@
 "dQ" = (
 /obj/effect/floor_decal/industrial/outline/yellow,
 /obj/machinery/door/airlock/external/shuttle{
-	id_tag = "rescue_base_hatch"
+	id_tag = "ert_rescue_base_hatch"
 	},
 /turf/unsimulated/floor{
 	icon_state = "asteroidfloor"
@@ -2474,7 +2474,7 @@
 /area/map_template/rescue_base/start)
 "eX" = (
 /obj/machinery/door/airlock/external/shuttle{
-	id_tag = "rescue_shuttle_outer";
+	id_tag = "ert_rescue_shuttle_outer";
 	name = "Ship External Access"
 	},
 /obj/effect/shuttle_landmark/ert/start,
@@ -2510,10 +2510,10 @@
 "fc" = (
 /obj/machinery/atmospherics/unary/vent_pump/high_volume/shuttle{
 	dir = 4;
-	id_tag = "rescue_shuttle_pump"
+	id_tag = "ert_rescue_shuttle_pump"
 	},
 /obj/machinery/airlock_sensor/shuttle{
-	id_tag = "rescue_shuttle_sensor";
+	id_tag = "ert_rescue_shuttle_sensor";
 	pixel_x = 8;
 	pixel_y = 25
 	},
@@ -2532,11 +2532,11 @@
 "fe" = (
 /obj/machinery/atmospherics/unary/vent_pump/high_volume/shuttle{
 	dir = 8;
-	id_tag = "rescue_shuttle_pump"
+	id_tag = "ert_rescue_shuttle_pump"
 	},
 /obj/machinery/embedded_controller/radio/airlock/docking_port{
 	frequency = 1331;
-	id_tag = "rescue_shuttle";
+	id_tag = "ert_rescue_shuttle";
 	initial_access = list();
 	pixel_x = -8;
 	pixel_y = 25
@@ -2639,7 +2639,7 @@
 "ft" = (
 /obj/machinery/atmospherics/unary/vent_pump/high_volume/shuttle{
 	dir = 4;
-	id_tag = "rescue_shuttle_pump"
+	id_tag = "ert_rescue_shuttle_pump"
 	},
 /obj/machinery/light{
 	dir = 8
@@ -2658,7 +2658,7 @@
 "fw" = (
 /obj/machinery/atmospherics/unary/vent_pump/high_volume/shuttle{
 	dir = 8;
-	id_tag = "rescue_shuttle_pump"
+	id_tag = "ert_rescue_shuttle_pump"
 	},
 /obj/machinery/light{
 	dir = 4
@@ -2685,7 +2685,7 @@
 "fA" = (
 /obj/machinery/atmospherics/pipe/simple/visible,
 /obj/machinery/door/airlock/external/shuttle{
-	id_tag = "rescue_shuttle_inner";
+	id_tag = "ert_rescue_shuttle_inner";
 	name = "Ship External Access"
 	},
 /turf/simulated/floor/plating,
@@ -2744,7 +2744,7 @@
 "fH" = (
 /obj/machinery/atmospherics/pipe/manifold/visible,
 /obj/machinery/button/access/shuttle/interior{
-	id_tag = "rescue_shuttle";
+	id_tag = "ert_rescue_shuttle";
 	initial_access = list("ACCESS_CENT_SPECOPS");
 	name = "interior access button";
 	pixel_x = 25;
