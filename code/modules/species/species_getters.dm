@@ -62,9 +62,6 @@
 /decl/species/proc/get_burn_mod(var/mob/living/carbon/human/H)
 	. = burn_mod
 
-/decl/species/proc/get_toxins_mod(var/mob/living/carbon/human/H)
-	. = toxins_mod
-
 /decl/species/proc/get_radiation_mod(var/mob/living/carbon/human/H)
 	. = (H && H.isSynthetic() ? 0.5 : radiation_mod)
 

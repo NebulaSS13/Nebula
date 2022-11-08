@@ -645,17 +645,19 @@ INITIALIZE_IMMEDIATE(/obj/effect/gas_overlay)
 		M.add_chemical_effect(CE_TOXIN, toxicity)
 		var/dam = (toxicity * removed)
 		if(toxicity_targets_organ && ishuman(M))
-			var/mob/living/carbon/human/H = M
-			var/obj/item/organ/internal/I = GET_INTERNAL_ORGAN(H, toxicity_targets_organ)
-			if(I)
-				var/can_damage = I.max_damage - I.damage
-				if(can_damage > 0)
-					if(dam > can_damage)
-						I.take_internal_damage(can_damage, silent=TRUE)
-						dam -= can_damage
-					else
-						I.take_internal_damage(dam, silent=TRUE)
-						dam = 0
+			var/organ_damage = dam * M.get_toxin_resistance()
+			if(organ_damage > 0)
+				var/mob/living/carbon/human/H = M
+				var/obj/item/organ/internal/I = GET_INTERNAL_ORGAN(H, toxicity_targets_organ)
+				if(I)
+					var/can_damage = I.max_damage - I.damage
+					if(can_damage > 0)
+						if(organ_damage > can_damage)
+							I.take_internal_damage(can_damage, silent=TRUE)
+							dam -= can_damage
+						else
+							I.take_internal_damage(organ_damage, silent=TRUE)
+							dam = 0
 		if(dam > 0)
 			M.adjustToxLoss(toxicity_targets_organ ? (dam * 0.75) : dam)
 
