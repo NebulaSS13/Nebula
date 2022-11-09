@@ -71,7 +71,11 @@
 	QDEL_NULL_LIST(objectives)
 	QDEL_NULL(changeling)
 	SSticker.minds -= src
+	if(current?.mind == src)
+		current.mind = null
 	current = null
+	if(original?.mind == src)
+		original.mind = null
 	original = null
 	. = ..()
 

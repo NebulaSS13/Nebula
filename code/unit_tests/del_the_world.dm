@@ -101,7 +101,7 @@
 			break
 
 		if(world.time > start_time + time_needed + 8 MINUTES)
-			fail("Something has gone horribly wrong, the garbage queue has been processing for well over 10 minutes. What the hell did you do??")
+			fail("The garbage queue has been processing for well over 10 minutes. Something is likely broken.")
 			break
 
 		//Immediately fire the gc right after
