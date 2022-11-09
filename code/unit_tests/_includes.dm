@@ -9,6 +9,5 @@
 	#include "override_tests.dm"
 	#include "proximity_tests.dm"
 	#include "secrets.dm"
-	#include "trait_tests.dm"
 	#include "virtual_mob_tests.dm"
 #endif

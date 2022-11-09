@@ -9,7 +9,7 @@
 /decl/surgery_step/robotics
 	can_infect = 0
 	surgery_candidate_flags = SURGERY_NO_CRYSTAL | SURGERY_NO_FLESH
-	surgery_step_category = /decl/surgery_step/robotics
+	abstract_type = /decl/surgery_step/robotics
 
 /decl/surgery_step/robotics/get_skill_reqs(mob/living/user, mob/living/target, obj/item/tool)
 	return SURGERY_SKILLS_ROBOTIC

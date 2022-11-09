@@ -1,25 +1,3 @@
-/datum/unit_test/loadout_test_shall_have_name_cost_path
-	name = "LOADOUT: Entries shall have name, cost, and path definitions"
-
-/datum/unit_test/loadout_test_shall_have_name_cost_path/start_test()
-	var/list/failed = list()
-	for(var/gear_name in global.gear_datums)
-		var/decl/loadout_option/G = global.gear_datums[gear_name]
-
-		if(!G.name)
-			failed += "[G]: Missing display name."
-		else if(isnull(G.cost) || G.cost < 0)
-			failed += "[G]: Invalid cost."
-		else if(!G.path)
-			failed += "[G]: Missing path definition."
-
-	if(length(failed))
-		fail("[length(failed)] /decl/loadout definition\s had invalid display names, costs, or path definitions:\n[jointext(failed, "\n")]")
-	else
-		pass("All /decl/loadout definitions had valid display names, costs and path definitions.")
-	return  1
-
-
 /datum/unit_test/loadout_test_shall_have_valid_icon_states
 	name = "LOADOUT: Entries shall have valid icon states"
 
@@ -103,7 +81,7 @@
 
 /datum/unit_test/loadout_custom_setup_tweaks_shall_have_valid_procs/start_test()
 
-	var/list/failures = list()	
+	var/list/failures = list()
 	for(var/gear_name in global.gear_datums)
 		var/decl/loadout_option/G = global.gear_datums[gear_name]
 		var/datum/instance
@@ -143,6 +121,7 @@
 	return TRUE
 
 /decl/loadout_option/loadout_test
+	name = "loadout test"
 	path = /obj/unit_test/loadout
 	custom_setup_proc = /obj/unit_test/loadout/proc/loadout_proc
 	custom_setup_proc_arguments = list(5)

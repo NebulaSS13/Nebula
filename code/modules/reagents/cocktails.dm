@@ -3,6 +3,7 @@
 // replaces the previous system, which used chemical reactions.
 
 /decl/cocktail
+	abstract_type = /decl/cocktail
 	/// Cocktail name, applied to the glass.
 	var/name
 	/// Cocktail description, applied to the glass.
@@ -92,6 +93,11 @@
 /decl/cocktail/proc/can_use_sprite(obj/item/prop)
 	// assume we already match; just check types
 	return is_type_in_list(prop, display_types)
+
+/decl/cocktail/validate()
+	. = ..()
+	if(!length(ratios))
+		. += "no ratios defined for cocktail"
 
 /decl/cocktail/grog
 	name = "grog"

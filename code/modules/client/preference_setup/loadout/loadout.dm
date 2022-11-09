@@ -346,6 +346,8 @@ var/global/list/gear_datums = list()
 	var/list/faction_restricted // List of types of cultural datums that will allow this loadout option.
 	var/whitelisted             // Species name to check the whitelist for.
 
+	abstract_type = /decl/loadout_option
+
 /decl/loadout_option/Initialize()
 	. = ..()
 
@@ -378,6 +380,15 @@ var/global/list/gear_datums = list()
 			gear_tweaks += new tweak(optargs)
 		else
 			gear_tweaks += new tweak
+
+/decl/loadout_option/validate()
+	. = ..()
+	if(!name)
+		. += "missing display name"
+	else if(isnull(cost) || cost < 0)
+		. += "invalid cost"
+	else if(!path)
+		. += "missing path definition"
 
 /decl/loadout_option/proc/get_gear_tweak_options()
 	. = list()

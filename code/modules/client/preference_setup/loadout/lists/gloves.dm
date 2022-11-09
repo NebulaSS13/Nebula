@@ -1,10 +1,11 @@
 /decl/loadout_category/hands
 	name = "Handwear"
-	
+
 /decl/loadout_option/gloves
 	cost = 2
 	slot = slot_gloves_str
 	category = /decl/loadout_category/hands
+	abstract_type = /decl/loadout_option/gloves
 
 /decl/loadout_option/gloves/colored
 	name = "gloves, colored"

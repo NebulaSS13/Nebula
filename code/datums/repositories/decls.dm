@@ -33,7 +33,7 @@ var/global/repository/decls/decls_repository = new
 	for(var/decl_type in typesof(/decl))
 		var/decl/decl = decl_type
 		var/decl_uid = initial(decl.uid)
-		if(decl_uid && (!TYPE_IS_ABSTRACT(decl) || initial(decl.allow_abstract_init)))
+		if(decl_uid && (!TYPE_IS_ABSTRACT(decl) || (initial(decl.decl_flags) & DECL_FLAG_ALLOW_ABSTRACT_INIT)))
 			fetched_decl_ids[decl_uid] = decl
 
 /repository/decls/proc/get_decl_by_id(var/decl_id)
@@ -41,7 +41,7 @@ var/global/repository/decls/decls_repository = new
 
 /repository/decls/proc/get_decl(var/decl/decl_type)
 	ASSERT(ispath(decl_type, /decl))
-	if(TYPE_IS_ABSTRACT(decl_type) && !initial(decl_type.allow_abstract_init))
+	if(TYPE_IS_ABSTRACT(decl_type) && !(initial(decl_type.decl_flags) & DECL_FLAG_ALLOW_ABSTRACT_INIT))
 		return // We do not instantiate abstract decls.
 	. = fetched_decls[decl_type]
 	if(!.)
@@ -102,8 +102,8 @@ var/global/repository/decls/decls_repository = new
 /decl
 	abstract_type = /decl
 	var/uid
+	var/decl_flags = null // DECL_FLAG_ALLOW_ABSTRACT_INIT, DECL_FLAG_MANDATORY_UID
 	var/initialized = FALSE
-	var/allow_abstract_init = FALSE
 
 /decl/proc/Initialize()
 	SHOULD_CALL_PARENT(TRUE)
@@ -112,6 +112,15 @@ var/global/repository/decls/decls_repository = new
 		CRASH("[type] initialized more than once!")
 	initialized = TRUE
 	return INITIALIZE_HINT_NORMAL
+
+/decl/proc/validate()
+	SHOULD_CALL_PARENT(TRUE)
+	var/list/failures = list()
+	if((decl_flags & DECL_FLAG_MANDATORY_UID) && !istext(uid))
+		failures += "non-text UID '[uid || "(NULL)"]' on mandatory type"
+	else if(uid && !istext(uid))
+		failures += "non-null, non-text UID '[uid]'"
+	return failures
 
 /decl/Destroy()
 	SHOULD_CALL_PARENT(FALSE)

@@ -436,6 +436,14 @@ var/global/const/DEFAULT_SPECIES_HEALTH = 200
 
 	build_codex_strings()
 
+/decl/species/validate()
+	. = ..()
+	for(var/trait_type in traits)
+		var/trait_level = traits[trait_type]
+		var/decl/trait/T = GET_DECL(trait_type)
+		if(!T.validate_level(trait_level))
+			. += "invalid levels for species trait [trait_type]"
+
 /decl/species/proc/equip_survival_gear(var/mob/living/carbon/human/H, var/box_type = /obj/item/storage/box/survival)
 	var/obj/item/storage/backpack/backpack = H.get_equipped_item(slot_back_str)
 	if(istype(backpack))
