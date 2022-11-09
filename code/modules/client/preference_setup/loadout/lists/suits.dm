@@ -4,6 +4,7 @@
 /decl/loadout_option/suit
 	slot = slot_wear_suit_str
 	category = /decl/loadout_category/suit
+	abstract_type = /decl/loadout_option/suit
 
 /decl/loadout_option/suit/poncho
 	name = "poncho selection"

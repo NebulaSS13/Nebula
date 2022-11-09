@@ -32,7 +32,14 @@ var/global/list/surgery_tool_exception_cache = list()
 	var/hidden_from_codex                // Is this surgery a secret?
 	var/list/additional_codex_lines
 	var/expected_mob_type = /mob/living/carbon/human
-	var/surgery_step_category = /decl/surgery_step
+	abstract_type = /decl/surgery_step
+
+/decl/surgery_step/validate()
+	. = ..()
+	if (!description)
+		. += "Missing description"
+	else if (!istext(description))
+		. += "Non-text description"
 
 //returns how fast the tool is for this step
 /decl/surgery_step/proc/get_speed_modifier(var/mob/user, var/mob/target, var/obj/item/tool)

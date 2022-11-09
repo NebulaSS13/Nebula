@@ -4,6 +4,7 @@
 /decl/loadout_option/avian
 	whitelisted = list(SPECIES_AVIAN)
 	category = /decl/loadout_category/avian
+	abstract_type = /decl/loadout_option/avian
 
 /decl/loadout_option/avian/uniform_selection
 	name = "Neo-Avian uniform selection"

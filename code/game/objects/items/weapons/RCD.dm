@@ -189,6 +189,7 @@
 
 /decl/hierarchy/rcd_mode
 	abstract_type = /decl/hierarchy/rcd_mode
+	expected_type = /decl/hierarchy/rcd_mode
 	var/cost
 	var/delay
 	var/handles_type

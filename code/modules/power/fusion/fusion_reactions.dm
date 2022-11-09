@@ -14,6 +14,18 @@
 	var/hidden_from_codex = FALSE
 	var/codex_name
 
+/decl/fusion_reaction/validate()
+	. = ..()
+	if(p_react && !ispath(p_react, /decl/material))
+		. += "invalid primary reactant type [p_react]."
+	if(s_react && !ispath(s_react, /decl/material))
+		. += "invalid secondary reactant type [s_react]."
+	for(var/product in products)
+		if(!ispath(product, /decl/material))
+			. += "invalid product type [product || "(NULL)"]."
+		else if(products[product] <= 0)
+			. += "invalid product amount for [product]."
+
 /decl/fusion_reaction/proc/handle_reaction_special(var/obj/effect/fusion_em_field/holder)
 	return 0
 

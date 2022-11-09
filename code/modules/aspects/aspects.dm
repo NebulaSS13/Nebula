@@ -54,6 +54,16 @@ var/global/list/aspect_categories = list() // Containers for ease of printing da
 		if(istype(parent))
 			LAZYDISTINCTADD(parent.children, src)
 
+/decl/aspect/validate()
+	. = ..()
+	if(initial(parent) && !istype(parent))
+		. += "invalid parent - [parent || "NULL"]"
+	for(var/decl/aspect/A as anything in children)
+		if(!istype(A))
+			. += "invalid child - [A || "NULL"]"
+		else if(A.parent != src)
+			. += "child [A || "NULL"] does not have correct parent - expected [src], got [A.parent || "NULL"]"
+
 /decl/aspect/proc/applies_to_organ(var/organ)
 	return FALSE
 

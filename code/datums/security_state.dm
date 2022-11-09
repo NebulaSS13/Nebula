@@ -152,10 +152,22 @@
 
 	var/datum/alarm_appearance/alarm_appearance
 
+	abstract_type = /decl/security_level
+
 /decl/security_level/Initialize()
 	. = ..()
 	if(ispath(alarm_appearance, /datum/alarm_appearance))
 		alarm_appearance = new alarm_appearance
+
+/decl/security_level/validate()
+	. = ..()
+	var/initial_appearance = initial(alarm_appearance)
+	if(!initial_appearance)
+		. += "alarm_appearance was not set"
+	else if(!ispath(initial_appearance))
+		. += "alarm_appearance was not set to a /datum/alarm_appearance subpath"
+	else if(!istype(alarm_appearance, /datum/alarm_appearance))
+		. += "alarm_appearance creation failed (check runtimes?)"
 
 // Called when we're switching from a lower security level to this one.
 /decl/security_level/proc/switching_up_to()
@@ -180,6 +192,7 @@
 	all_security_levels = list(/decl/security_level/default/code_green, /decl/security_level/default/code_blue, /decl/security_level/default/code_red, /decl/security_level/default/code_delta)
 
 /decl/security_level/default
+	abstract_type = /decl/security_level/default
 	icon = 'icons/misc/security_state.dmi'
 
 	var/static/datum/announcement/priority/security/security_announcement_up = new(do_log = 0, do_newscast = 1, new_sound = sound('sound/misc/notice1.ogg'))

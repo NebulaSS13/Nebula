@@ -102,6 +102,22 @@
 		if(faction_name)
 			global.hud_icon_reference[faction_name] = antaghud_indicator
 
+/decl/special_role/validate()
+	. = ..()
+	// Grab initial in case it was already successfully loaded.
+	var/initial_base_to_load = initial(base_to_load)
+	if(isnull(initial_base_to_load))
+		return
+	if(!istext(initial_base_to_load))
+		. += "had non-text base_to_load value '[initial_base_to_load]'."
+		return
+	var/datum/map_template/base = SSmapping.get_template(initial_base_to_load)
+	if(!istype(base))
+		. += "failed to retrieve base_to_load template '[initial_base_to_load]'."
+		return
+	if(!base.loaded && !load_required_map())
+		. += "failed to load base_to_load template '[base.name]'."
+
 /decl/special_role/proc/get_antag_text(mob/recipient)
 	return antag_text
 
