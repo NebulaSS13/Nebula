@@ -116,9 +116,18 @@
 		var/mob/M = oldloc
 		M.put_in_active_hand(tube)
 
-/obj/item/stack/package_wrap/update_matter()
+/obj/item/stack/package_wrap/create_matter()
 	. = ..()
-	matter[/decl/material/solid/cardboard] = MATTER_AMOUNT_PRIMARY * HOLLOW_OBJECT_MATTER_MULTIPLIER
+	//Cardboard for the tube, isn't in the matter_per_piece list, has to be added after that's been initialized
+	LAZYSET(matter, /decl/material/solid/cardboard, MATTER_AMOUNT_PRIMARY * HOLLOW_OBJECT_MATTER_MULTIPLIER) 
+
+/obj/item/stack/package_wrap/update_matter()
+	//Keep track of the cardboard amount to prevent it creating infinite cardboard matter each times the stack changes
+	var/cardboard_amount = LAZYACCESS(matter, /decl/material/solid/cardboard)
+	matter = list()
+	for(var/mat in matter_per_piece)
+		matter[mat] = (matter_per_piece[mat] * amount)
+	matter[/decl/material/solid/cardboard] = cardboard_amount 
 
 ///Types that the wrapper cannot wrap, ever
 /obj/item/stack/package_wrap/proc/get_blacklist()
