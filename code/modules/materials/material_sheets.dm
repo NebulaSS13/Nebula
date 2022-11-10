@@ -9,7 +9,8 @@
 	max_amount = 60
 	randpixel = 3
 	icon = 'icons/obj/materials.dmi'
-	matter = null
+	material = null //! Material will be set only during Initialize, or the stack is invalid.
+	matter = null   //! As with material, these stacks should only set this in Initialize as they are abstract 'shapes' rather than discrete objects.
 	pickup_sound = 'sound/foley/tooldrop3.ogg'
 	drop_sound = 'sound/foley/tooldrop2.ogg'
 	singular_name = "sheet"
@@ -17,15 +18,20 @@
 	var/decl/material/reinf_material
 
 /obj/item/stack/material/Initialize(mapload, var/amount, var/_material, var/_reinf_material)
-	. = ..(mapload, amount, _material)
-	if(!istype(material))
-		return INITIALIZE_HINT_QDEL
+
 	if(!_reinf_material)
 		_reinf_material = reinf_material
+
 	if(_reinf_material)
 		reinf_material = GET_DECL(_reinf_material)
 		if(!istype(reinf_material))
 			reinf_material = null
+
+	. = ..(mapload, amount, _material)
+	if(!istype(material))
+		log_warning("[src] ([x],[y],[z]) was deleted because it didn't have a valid material set('[material]')!")
+		return INITIALIZE_HINT_QDEL
+
 	base_state = icon_state
 	if(material.conductive)
 		obj_flags |= OBJ_FLAG_CONDUCTIBLE
@@ -43,11 +49,10 @@
 	return material
 
 /obj/item/stack/material/create_matter()
-	matter = list()
-	if(istype(material))
-		matter[material.type] = MATTER_AMOUNT_PRIMARY * matter_multiplier
+	// Set our reinf material in the matter list so that the base
+	// stack material population runs properly and includes it.
 	if(istype(reinf_material))
-		matter[reinf_material.type] = MATTER_AMOUNT_REINFORCEMENT * matter_multiplier
+		LAZYSET(matter, reinf_material.type, MATTER_AMOUNT_REINFORCEMENT)  // No matter_multiplier as this is applied in parent.
 	..()
 
 /obj/item/stack/material/proc/update_strings()
