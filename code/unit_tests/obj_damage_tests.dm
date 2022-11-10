@@ -71,3 +71,17 @@
 		to_world_log("Item type [I.type]: [failure_text]")
 		return FALSE
 	return TRUE
+
+/////////////////////////////////////////////////////////
+// Items shall get a valid health from materials
+/////////////////////////////////////////////////////////
+/** Makes sure that if we have a material setting up our health, it actually sets it to something sane. */
+/datum/item_unit_test/constant/items_shall_get_a_valid_health_from_materials/run_test(var/obj/item/I)
+	//If any health is specified or if the object is invincible skip. Return true on no material too since its not our job to validate the material logic
+	if(!isnull(initial(I.health)) || !isnull(initial(I.max_health)) || !I.material)
+		return TRUE
+	
+	if((I.max_health < 1.0) || (I.health < 1.0))
+		to_world_log("Item type [I.type]: had its health/max_health set to a value < 1 by its material '[I.material.type]', where '[I.material.name]''s 'integrity' == '[I.material.integrity]', and '[I]''s 'material_health_multiplier' == '[I.material_health_multiplier]'.")
+		return FALSE
+	return TRUE
