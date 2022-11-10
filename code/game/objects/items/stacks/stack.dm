@@ -216,21 +216,16 @@
 	return get_amount() >= used
 
 /obj/item/stack/create_matter()
-	//Preserve matter_per_piece if already set, so it can be set manually.
-	if(!matter_per_piece)
-		matter_per_piece = matter?.Copy() // this is used for refreshing matter amount in update_matter()
+	matter_per_piece = matter?.Copy() // this is used for refreshing matter amount in update_matter()
 	if(istype(material))
 		LAZYINITLIST(matter_per_piece)
 		matter_per_piece[material.type] = max(matter_per_piece[material.type], round(MATTER_AMOUNT_PRIMARY * matter_multiplier))
-	//Don't call the parent, we handle matter completely differently, and it does a lot of stuff we'd just be overwriting completely
-	update_matter()
+	. = ..()
 
 /obj/item/stack/proc/update_matter()
-	//Preserve the matter contents for stacks that have extra matter not in matter_per_piece
-	LAZYINITLIST(matter)
+	matter = list()
 	for(var/mat in matter_per_piece)
 		matter[mat] = (matter_per_piece[mat] * amount)
-	UNSETEMPTY(matter)
 
 /obj/item/stack/proc/use(var/used)
 	if (!can_use(used))
@@ -238,7 +233,7 @@
 	if(!uses_charge)
 		amount -= used
 		if (amount <= 0)
-			on_used_last()
+			qdel(src) //should be safe to qdel immediately since if someone is still using this stack it will persist for a little while longer
 		else
 			update_icon()
 			update_matter()
@@ -251,10 +246,6 @@
 			S.use_charge(charge_costs[i] * used) // Doesn't need to be deleted
 		update_icon()
 		return TRUE
-
-///When the last item in the stack has been used up, this is called. Default behavior is deleting itself.
-/obj/item/stack/proc/on_used_last()
-	qdel(src) //should be safe to qdel immediately since if someone is still using this stack it will persist for a little while longer
 
 /obj/item/stack/proc/add(var/extra)
 	if(!uses_charge)

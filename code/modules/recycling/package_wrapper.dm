@@ -32,8 +32,6 @@
 	w_class          = ITEM_SIZE_NORMAL
 	max_amount       = 50
 	material         = /decl/material/solid/paper
-	matter           = list(/decl/material/solid/cardboard = MATTER_AMOUNT_PRIMARY * HOLLOW_OBJECT_MATTER_MULTIPLIER) //For the tube
-	matter_per_piece = list(/decl/material/solid/paper = MATTER_AMOUNT_PRIMARY)
 	force            = 1
 	throwforce       = 1
 	throw_range      = 5
@@ -104,20 +102,23 @@
 		return
 	return wrap(M, user)
 
-/obj/item/stack/package_wrap/on_used_last()
+/obj/item/stack/package_wrap/use(used)
+	var/oldloc = loc
+	if(!(. = ..()))
+		return .
+	if(!uses_charge && ((amount <= 0) || QDELETED(src)))
+		on_used_last(oldloc)
+
+/obj/item/stack/package_wrap/proc/on_used_last(var/oldloc)
 	//Drop the cardboard tube after we're emptied out
-	var/obj/item/c_tube/tube = new(get_turf(src))
-	if(ismob(loc))
-		var/mob/M = loc
-		M.unEquip(src, null)
+	var/obj/item/c_tube/tube = new(get_turf(oldloc))
+	if(ismob(oldloc))
+		var/mob/M = oldloc
 		M.put_in_active_hand(tube)
-	else if(istype(loc, /obj/item/storage))
-		var/obj/item/storage/S = loc
-		S.remove_from_storage(src, null)
-		if(ismob(loc))
-			var/mob/M = loc
-			M.put_in_active_hand(tube)
+
+/obj/item/stack/package_wrap/update_matter()
 	. = ..()
+	matter[/decl/material/solid/cardboard] = MATTER_AMOUNT_PRIMARY * HOLLOW_OBJECT_MATTER_MULTIPLIER
 
 ///Types that the wrapper cannot wrap, ever
 /obj/item/stack/package_wrap/proc/get_blacklist()

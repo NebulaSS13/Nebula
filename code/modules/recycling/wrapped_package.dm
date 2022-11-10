@@ -111,7 +111,7 @@
 			parcel_name = "normal-sized [initial(name)]"
 		if(ITEM_SIZE_LARGE)
 			parcel_name = "large [initial(name)]"
-		if(ITEM_SIZE_HUGE || ITEM_SIZE_GARGANTUAN)
+		if(ITEM_SIZE_HUGE, ITEM_SIZE_GARGANTUAN)
 			parcel_name = "huge [initial(name)]"
 		else
 			parcel_name = "enormous [initial(name)]"
