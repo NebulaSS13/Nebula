@@ -1,0 +1,5 @@
+author: PsyCommando
+delete-after: true
+changes:
+  - bugfix: Prevent mapped security cameras from becoming completely unlocked and
+      accessible by anyone whenever there's a network outage.

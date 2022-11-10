@@ -15,6 +15,10 @@
 	uncreated_component_parts = null
 	construct_state = /decl/machine_construction/wall_frame/panel_closed
 	frame_type = /obj/item/frame/camera
+	//Deny all by default, so mapped presets can't be messed with during a network outage.
+	stock_part_presets = list(
+		/decl/stock_part_preset/network_lock/camera,
+	)
 	var/list/preset_channels
 	var/cameranet_enabled = TRUE
 	var/requires_connection = TRUE
@@ -332,3 +336,10 @@
 /obj/machinery/camera/proc/nano_structure()
 	var/datum/extension/network_device/camera/D = get_extension(src, /datum/extension/network_device/)
 	return D.nano_structure()
+
+//Prevent literally anyone without access from tampering with the cameras if there's a network outage
+/decl/stock_part_preset/network_lock/camera
+	expected_part_type = /obj/item/stock_parts/network_receiver/network_lock
+
+/decl/stock_part_preset/network_lock/camera/do_apply(obj/machinery/camera/machine, obj/item/stock_parts/network_receiver/network_lock/part)
+	part.auto_deny_all = TRUE
