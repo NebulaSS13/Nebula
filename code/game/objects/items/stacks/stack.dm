@@ -21,7 +21,6 @@
 	var/plural_icon_state
 	var/max_icon_state
 	var/amount = 1
-	var/list/initial_matter
 	var/matter_multiplier = 1
 	var/max_amount //also see stack recipes initialisation, param "max_res_amount" must be equal to this max_amount
 	var/stack_merge_type  //determines whether different stack types can merge
