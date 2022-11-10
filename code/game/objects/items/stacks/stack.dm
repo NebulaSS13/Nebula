@@ -233,7 +233,7 @@
 	if(!uses_charge)
 		amount -= used
 		if (amount <= 0)
-			qdel(src) //should be safe to qdel immediately since if someone is still using this stack it will persist for a little while longer
+			on_used_last()
 		else
 			update_icon()
 			update_matter()
@@ -246,6 +246,9 @@
 			S.use_charge(charge_costs[i] * used) // Doesn't need to be deleted
 		update_icon()
 		return TRUE
+
+/obj/item/stack/proc/on_used_last()
+	qdel(src) //should be safe to qdel immediately since if someone is still using this stack it will persist for a little while longer
 
 /obj/item/stack/proc/add(var/extra)
 	if(!uses_charge)

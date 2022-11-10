@@ -102,19 +102,14 @@
 		return
 	return wrap(M, user)
 
-/obj/item/stack/package_wrap/use(used)
-	var/oldloc = loc
-	if(!(. = ..()))
-		return .
-	if(!uses_charge && ((amount <= 0) || QDELETED(src)))
-		on_used_last(oldloc)
-
-/obj/item/stack/package_wrap/proc/on_used_last(var/oldloc)
+/obj/item/stack/package_wrap/on_used_last()
 	//Drop the cardboard tube after we're emptied out
-	var/obj/item/c_tube/tube = new(get_turf(oldloc))
-	if(ismob(oldloc))
-		var/mob/M = oldloc
+	var/obj/item/c_tube/tube = new(get_turf(loc))
+	if(ismob(loc))
+		var/mob/M = loc
+		M.unEquip(src, null, FALSE)
 		M.put_in_active_hand(tube)
+	return ..()
 
 /obj/item/stack/package_wrap/create_matter()
 	. = ..()
