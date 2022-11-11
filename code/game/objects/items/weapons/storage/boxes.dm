@@ -499,11 +499,11 @@
 	icon_state = "box"
 /obj/item/storage/box/glowsticks/WillContain()
 	return list(
-			/obj/item/flashlight/flare/glowstick        = 1, 
+			/obj/item/flashlight/flare/glowstick        = 1,
 			/obj/item/flashlight/flare/glowstick/red    = 1,
 			/obj/item/flashlight/flare/glowstick/blue   = 1,
 			/obj/item/flashlight/flare/glowstick/orange = 1,
-			/obj/item/flashlight/flare/glowstick/yellow = 1, 
+			/obj/item/flashlight/flare/glowstick/yellow = 1,
 			/obj/item/flashlight/flare/glowstick/random = 1
 		)
 
@@ -694,6 +694,9 @@
 
 /obj/item/storage/box/snack/chips/WillContain()
 	return list(/obj/item/chems/food/chips = 7)
+
+/obj/item/storage/box/snack/buns/WillContain()
+	return list(/obj/item/chems/food/bun = 7)
 
 //canned goods in cardboard
 /obj/item/storage/box/canned
