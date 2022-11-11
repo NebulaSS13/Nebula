@@ -43,16 +43,16 @@
 	modifiers = list("fancy")
 
 /datum/stack_recipe/furniture/sofa/m
-	result_type = /obj/structure/bed/sofa/m
-	title = "middle sofa"
+	result_type = /obj/structure/bed/sofa/middle
+	title = "sofa, middle"
 
 /datum/stack_recipe/furniture/sofa/l
-	result_type = /obj/structure/bed/sofa/l
-	title = "left sofa"
+	result_type = /obj/structure/bed/sofa/left
+	title = "sofa, left"
 
 /datum/stack_recipe/furniture/sofa/r
-	result_type = /obj/structure/bed/sofa/r
-	title = "right sofa"
+	result_type = /obj/structure/bed/sofa/right
+	title = "sofa, right"
 
 /datum/stack_recipe/furniture/door
 	title = "door"
