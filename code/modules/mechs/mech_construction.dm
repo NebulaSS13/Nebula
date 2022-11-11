@@ -107,7 +107,6 @@
 		H.holding = system
 		system.screen_loc = H.screen_loc
 
-	system.screen_loc = H.screen_loc
 	system.hud_layerise()
 
 	hud_elements |= system
