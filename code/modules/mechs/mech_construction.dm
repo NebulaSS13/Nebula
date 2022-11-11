@@ -79,7 +79,7 @@
 			if(!found)
 				return FALSE
 	else
-		return FALSE	
+		return FALSE
 
 	if(user)
 		var/delay = 30 * user.skill_delay_mult(SKILL_DEVICES)
@@ -103,7 +103,9 @@
 	ME.installed(src)
 
 	var/obj/screen/exosuit/hardpoint/H = hardpoint_hud_elements[system_hardpoint]
-	H.holding = system
+	if(H)
+		H.holding = system
+		system.screen_loc = H.screen_loc
 
 	system.screen_loc = H.screen_loc
 	system.hud_layerise()
