@@ -19,6 +19,9 @@ var/global/list/navbeacons = list()
 /obj/machinery/navbeacon/Initialize()
 	. = ..()
 
+	if(istext(codes)) // Mapping helper.
+		codes = cached_json_decode(codes)
+
 	var/turf/T = loc
 	hide(!T.is_plating())
 
