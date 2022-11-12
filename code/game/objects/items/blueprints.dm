@@ -15,6 +15,9 @@
 	if(set_valid_z_levels())
 		set_extension(src, /datum/extension/eye/blueprints)
 
+/obj/item/blueprints/preserve_in_cryopod(var/obj/machinery/cryopod/pod)
+	return TRUE
+
 /obj/item/blueprints/attack_self(mob/user)
 	if (!ishuman(user) || !user.check_dexterity(DEXTERITY_COMPLEX_TOOLS)) // Monkeys et al. cannot blueprint.
 		to_chat(user, SPAN_WARNING("This stack of blue paper means nothing to you."))

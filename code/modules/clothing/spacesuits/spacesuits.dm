@@ -46,6 +46,9 @@
 		verbs += /obj/item/clothing/head/helmet/space/proc/toggle_tint
 		update_tint()
 
+/obj/item/clothing/head/helmet/space/preserve_in_cryopod(var/obj/machinery/cryopod/pod)
+	return TRUE
+
 /obj/item/clothing/head/helmet/space/proc/toggle_camera()
 	set name = "Toggle Helmet Camera"
 	set category = "Object"

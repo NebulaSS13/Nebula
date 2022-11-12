@@ -757,6 +757,9 @@
 	spawn_flags = IC_SPAWN_RESEARCH
 	action_flags = IC_ACTION_LONG_RANGE
 
+/obj/item/integrated_circuit/input/teleporter_locator/preserve_in_cryopod(var/obj/machinery/cryopod/pod)
+	return TRUE
+
 /obj/item/integrated_circuit/input/teleporter_locator/get_topic_data(mob/user)
 	var/datum/integrated_io/O = outputs[1]
 	var/obj/machinery/computer/teleporter/current_console = O.data_as_type(/obj/machinery/computer/teleporter)

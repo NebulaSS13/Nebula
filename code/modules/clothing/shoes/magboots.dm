@@ -16,6 +16,9 @@
 	var/obj/item/clothing/shoes/covering_shoes
 	var/online_slowdown = 3
 
+/obj/item/clothing/shoes/magboots/preserve_in_cryopod(var/obj/machinery/cryopod/pod)
+	return TRUE
+
 /obj/item/clothing/shoes/magboots/proc/set_slowdown()
 	LAZYSET(slowdown_per_slot, slot_shoes_str, (covering_shoes ? max(0, LAZYACCESS(covering_shoes.slowdown_per_slot, slot_shoes_str)) : 0))	//So you can't put on magboots to make you walk faster.
 	if(magpulse)

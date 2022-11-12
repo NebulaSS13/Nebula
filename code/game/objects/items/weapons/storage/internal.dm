@@ -12,6 +12,9 @@
 	name = master_item.name
 	verbs -= /obj/item/verb/verb_pickup
 
+/obj/item/storage/internal/preserve_in_cryopod(var/obj/machinery/cryopod/pod)
+	return TRUE
+
 /obj/item/storage/internal/Destroy()
 	master_item = null
 	. = ..()
