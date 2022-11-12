@@ -395,6 +395,9 @@ var/global/const/NO_EMAG_ACT = -50
 	. = ..()
 	access = get_all_station_access()
 
+/obj/item/card/id/captains_spare/preserve_in_cryopod(var/obj/machinery/cryopod/pod)
+	return TRUE
+
 /obj/item/card/id/synthetic
 	name = "\improper Synthetic ID"
 	desc = "Access module for lawed synthetics."

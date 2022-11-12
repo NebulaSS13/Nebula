@@ -26,6 +26,9 @@ var/global/list/pai_cards = list()
 	overlays += "pai-off"
 	global.pai_cards += src
 
+/obj/item/paicard/preserve_in_cryopod(var/obj/machinery/cryopod/pod)
+	return TRUE
+
 /obj/item/paicard/Destroy()
 	global.pai_cards -= src
 	//Will stop people throwing friend pAIs into the singularity so they can respawn

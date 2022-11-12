@@ -106,6 +106,9 @@
 	autofiring_by = null
 	. = ..()
 
+/obj/item/gun/preserve_in_cryopod(var/obj/machinery/cryopod/pod)
+	return TRUE
+
 /obj/item/gun/proc/set_autofire(var/atom/fire_at, var/mob/fire_by)
 	. = TRUE
 	if(!istype(fire_at) || !istype(fire_by))

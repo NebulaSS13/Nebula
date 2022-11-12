@@ -161,23 +161,6 @@
 	var/obj/machinery/computer/cryopod/control_computer
 	var/applies_stasis = 1
 
-	// These items are preserved when the process() despawn proc occurs.
-	var/list/preserve_items = list(
-		/obj/item/integrated_circuit/manipulation/wormhole,
-		/obj/item/integrated_circuit/input/teleporter_locator,
-		/obj/item/card/id/captains_spare,
-		/obj/item/aicard,
-		/obj/item/mmi,
-		/obj/item/paicard,
-		/obj/item/gun,
-		/obj/item/pinpointer,
-		/obj/item/clothing/suit,
-		/obj/item/clothing/shoes/magboots,
-		/obj/item/blueprints,
-		/obj/item/clothing/head/helmet/space,
-		/obj/item/storage/internal
-	)
-
 	construct_state = /decl/machine_construction/default/panel_closed
 	uncreated_component_parts = null
 	stat_immune = 0
@@ -355,28 +338,14 @@
 
 	for(var/obj/item/W in items)
 
-		var/preserve = null
-		// Snowflaaaake.
-		if(istype(W, /obj/item/mmi))
-			var/obj/item/mmi/brain = W
-			if(brain.brainmob && brain.brainmob.client && brain.brainmob.key)
-				preserve = 1
-			else
-				continue
-		else
-			for(var/T in preserve_items)
-				if(istype(W,T))
-					preserve = 1
-					break
-
-		if(!preserve)
+		if(!W.preserve_in_cryopod())
 			qdel(W)
+			continue
+		if(control_computer && control_computer.allow_items)
+			control_computer.frozen_items += W
+			W.forceMove(null)
 		else
-			if(control_computer && control_computer.allow_items)
-				control_computer.frozen_items += W
-				W.forceMove(null)
-			else
-				W.forceMove(get_turf(src))
+			W.forceMove(get_turf(src))
 
 	//Update any existing objectives involving this mob.
 	for(var/datum/objective/O in global.all_objectives)

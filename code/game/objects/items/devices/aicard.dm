@@ -11,8 +11,10 @@
 	var/flush
 	var/mob/living/silicon/ai/carded_ai
 
-/obj/item/aicard/attack_self(mob/user)
+/obj/item/aicard/preserve_in_cryopod(var/obj/machinery/cryopod/pod)
+	return TRUE
 
+/obj/item/aicard/attack_self(mob/user)
 	ui_interact(user)
 
 /obj/item/aicard/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1, var/datum/topic_state/state = global.inventory_topic_state)
