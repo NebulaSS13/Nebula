@@ -135,7 +135,7 @@
 
 	var/severed = FALSE
 	var/armour_prob = prob(100 * L.get_blocked_ratio(null, BRUTE, damage = ARMOR_MELEE_RESISTANT))
-	if(H && prob(35))
+	if(H?.species && prob(35))
 		var/obj/item/organ/external/E
 		var/list/limbs = H.get_external_organs()
 		if(limbs)
@@ -145,7 +145,7 @@
 				continue
 			var/is_vital = FALSE
 			for(var/obj/item/organ/internal/I in limb.internal_organs)
-				if(H.species?.is_vital_organ(H, I))
+				if(I.organ_tag in H.species.vital_organs)
 					is_vital = TRUE
 					break
 			if(!is_vital)

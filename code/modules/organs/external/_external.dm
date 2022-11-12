@@ -1322,7 +1322,7 @@ Note that amputating the affected organ does in fact remove the infection from t
 
 		if(!keep_organs)
 			for(var/obj/item/organ/thing in internal_organs)
-				if(!thing.vital && !BP_IS_PROSTHETIC(thing))
+				if(!(thing.organ_tag in owner.species.vital_organs) && !BP_IS_PROSTHETIC(thing))
 					qdel(thing)
 
 		owner.refresh_modular_limb_verbs()

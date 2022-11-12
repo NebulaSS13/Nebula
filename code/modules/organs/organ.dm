@@ -16,7 +16,6 @@
 	// Status tracking.
 	var/status = 0                         // Various status flags (such as robotic)
 	var/organ_properties = 0               // A flag for telling what capabilities this organ has. ORGAN_PROP_PROSTHETIC, ORGAN_PROP_CRYSTAL, etc..
-	var/vital                              // Lose a vital limb, die immediately.
 
 	// Reference data.
 	var/mob/living/carbon/human/owner      // Current mob owning the organ.
@@ -163,8 +162,6 @@
 	STOP_PROCESSING(SSobj, src)
 	QDEL_NULL_LIST(ailments)
 	death_time = REALTIMEOFDAY
-	if(owner?.species?.is_vital_organ(owner, src))
-		owner.death()
 	update_icon()
 
 /obj/item/organ/Process()

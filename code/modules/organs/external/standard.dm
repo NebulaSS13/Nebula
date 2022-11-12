@@ -13,7 +13,6 @@
 	w_class = ITEM_SIZE_HUGE //Used for dismembering thresholds, in addition to storage. Humans are w_class 6, so it makes sense that chest is w_class 5.
 	cavity_max_w_class = ITEM_SIZE_NORMAL
 	body_part = SLOT_UPPER_BODY
-	vital = 1
 	amputation_point = "spine"
 	joint = "neck"
 	parent_organ = null
@@ -31,8 +30,8 @@
 	if( L && L.is_bruised())
 		. += "Lung ruptured"
 
-/obj/item/organ/external/chest/die() 
-	//Special handling for synthetics 
+/obj/item/organ/external/chest/die()
+	//Special handling for synthetics
 	if(BP_IS_PROSTHETIC(src) || BP_IS_CRYSTAL(src))
 		return
 	. = ..()
@@ -53,8 +52,8 @@
 	cavity_name = "abdominal"
 	limb_flags = ORGAN_FLAG_CAN_AMPUTATE | ORGAN_FLAG_CAN_BREAK
 
-/obj/item/organ/external/groin/die() 
-	//Special handling for synthetics 
+/obj/item/organ/external/groin/die()
+	//Special handling for synthetics
 	if(BP_IS_PROSTHETIC(src) || BP_IS_CRYSTAL(src))
 		return
 	. = ..()

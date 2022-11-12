@@ -26,6 +26,22 @@
 // Takes care of organ related updates, such as broken and missing limbs
 /mob/living/carbon/human/proc/handle_organs()
 
+	// Check for the presence (or lack of) vital organs like the brain.
+	// Set a timer after this point, since we want a little bit of
+	// wiggle room before the body dies for good (brain transplants).
+	if(stat != DEAD)
+		if(species.check_vital_organ_missing(src))
+			SET_STATUS_MAX(src, STAT_PARA, 5)
+			if(vital_organ_missing_time)
+				if(world.time >= vital_organ_missing_time)
+					death()
+			else
+				vital_organ_missing_time = world.time + species.vital_organ_failure_death_delay
+		else
+			vital_organ_missing_time = null
+
+
+
 	//processing internal organs is pretty cheap, do that first.
 	for(var/obj/item/organ/I in internal_organs)
 		I.Process()
@@ -291,7 +307,7 @@
 
 /mob/living/carbon/human/on_lost_organ(var/obj/item/organ/O)
 	if(!(. = ..()))
-		return 
+		return
 	//Move some blood over to the organ
 	if(!BP_IS_PROSTHETIC(O) && O.species && O.reagents?.total_volume < 5)
 		vessel.trans_to(O, 5 - O.reagents.total_volume, 1, 1)
