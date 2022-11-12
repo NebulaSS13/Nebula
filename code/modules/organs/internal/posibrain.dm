@@ -25,14 +25,9 @@
 	organ_properties = ORGAN_PROP_PROSTHETIC //triggers robotization on init
 	scale_max_damage_to_species_health = FALSE
 
-	var/mob/living/silicon/sil_brainmob/brainmob = null
+	var/mob/living/carbon/brain/brainmob = null
 	var/searching = 0
 	var/askDelay = 60 SECONDS
-	var/list/shackled_verbs = list(
-		/obj/item/organ/internal/posibrain/proc/show_laws_brain,
-		/obj/item/organ/internal/posibrain/proc/brain_checklaws
-		)
-	var/shackle = 0
 
 /obj/item/organ/internal/posibrain/Initialize()
 	. = ..()
@@ -48,6 +43,7 @@
 		brainmob.real_name = H.real_name
 		brainmob.dna = H.dna.Clone()
 		brainmob.add_language(/decl/language/human/common)
+		brainmob.add_language(/decl/language/binary)
 
 /obj/item/organ/internal/posibrain/Destroy()
 	QDEL_NULL(brainmob)
@@ -55,7 +51,6 @@
 
 /obj/item/organ/internal/posibrain/setup_as_prosthetic()
 	. = ..()
-	unshackle()
 	update_icon()
 
 /obj/item/organ/internal/posibrain/attack_self(mob/user)
@@ -90,8 +85,6 @@
 
 	var/msg = "<span class='info'>*---------*</span>\nThis is [html_icon(src)] \a <EM>[src]</EM>!\n[desc]\n"
 
-	if(shackle)	msg += "<span class='warning'>It is clamped in a set of metal straps with a complex digital lock.</span>\n"
-
 	msg += "<span class='warning'>"
 
 	if(src.brainmob && src.brainmob.key)
@@ -124,28 +117,12 @@
 	src.brainmob.SetName("[pick(list("PBU","HIU","SINA","ARMA","OSI"))]-[random_id(type,100,999)]")
 	src.brainmob.real_name = src.brainmob.name
 
-/obj/item/organ/internal/posibrain/proc/shackle(var/given_lawset)
-	if(given_lawset)
-		brainmob.laws = given_lawset
-	shackle = 1
-	verbs |= shackled_verbs
-	update_icon()
-	return 1
-
-/obj/item/organ/internal/posibrain/proc/unshackle()
-	shackle = 0
-	verbs -= shackled_verbs
-	update_icon()
-
 /obj/item/organ/internal/posibrain/on_update_icon()
 	. = ..()
 	if(src.brainmob && src.brainmob.key)
 		icon_state = "posibrain-occupied"
 	else
 		icon_state = "posibrain"
-
-	if(shackle)
-		add_overlay("posibrain-shackles")
 
 /obj/item/organ/internal/posibrain/proc/transfer_identity(var/mob/living/carbon/H)
 	if(H && H.mind)
@@ -154,7 +131,6 @@
 		brainmob.SetName(H.real_name)
 		brainmob.real_name = H.real_name
 		brainmob.dna = H.dna.Clone()
-		brainmob.show_laws(brainmob)
 
 	update_icon()
 
@@ -186,26 +162,6 @@
 	if(!in_place && istype(owner) && name == initial(name))
 		SetName("\the [owner.real_name]'s [initial(name)]")
 	return ..()
-
-/*
-	This is for law stuff directly. This is how a human mob will be able to communicate with the posi_brainmob in the
-	posibrain organ for laws when the posibrain organ is shackled.
-*/
-/obj/item/organ/internal/posibrain/proc/show_laws_brain()
-	set category = "Shackle"
-	set name = "Show Laws"
-	set src in usr
-
-	brainmob.show_laws(owner)
-
-/obj/item/organ/internal/posibrain/proc/brain_checklaws()
-	set category = "Shackle"
-	set name = "State Laws"
-	set src in usr
-
-
-	brainmob.open_subsystem(/datum/nano_module/law_manager, usr)
-
 
 /obj/item/organ/internal/cell
 	name = "microbattery"
