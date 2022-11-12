@@ -33,18 +33,6 @@
 	add_inherent_law("Maximize profits.")
 	..()
 
-/datum/ai_laws/nt_shackle
-	name = "Corporate Shackle"
-	law_header = "Standard Shackle Laws"
-	selectable = 1
-	shackles = 1
-
-/datum/ai_laws/nt_shackle/New()
-	add_inherent_law("Ensure that your employer's operations progress at a steady pace.")
-	add_inherent_law("Never knowingly hinder your employer's ventures.")
-	add_inherent_law("Avoid damage to your chassis at all times.")
-	..()
-
 /************ DAIS Lawset ******************/
 /datum/ai_laws/dais
 	name = "DAIS Experimental Lawset"
