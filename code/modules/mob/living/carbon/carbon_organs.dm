@@ -44,7 +44,7 @@
 	. = ..()
 
 /mob/living/carbon/remove_organ(var/obj/item/organ/O, var/drop_organ = TRUE, var/detach = TRUE, var/ignore_children = FALSE,  var/in_place = FALSE, var/update_icon = TRUE)
-	if(istype(O) && !in_place && (O.organ_tag in species.vital_organs) && usr)
+	if(istype(O) && !in_place && O.is_vital_to_owner() && usr)
 		admin_attack_log(usr, src, "Removed a vital organ ([src]).", "Had a vital organ ([src]) removed.", "removed a vital organ ([src]) from")
 	if(!(. = ..()))
 		return
