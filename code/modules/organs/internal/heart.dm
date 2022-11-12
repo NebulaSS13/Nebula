@@ -15,6 +15,10 @@
 	var/open
 	var/list/external_pump
 
+/obj/item/organ/internal/heart/on_holder_death(var/gibbed)
+	pulse = PULSE_NONE
+	update_icon()
+
 /obj/item/organ/internal/heart/open
 	open = 1
 
@@ -38,13 +42,13 @@
 	// pulse mod starts out as just the chemical effect amount
 	var/pulse_mod = GET_CHEMICAL_EFFECT(owner, CE_PULSE)
 	var/is_stable = GET_CHEMICAL_EFFECT(owner, CE_STABLE)
-		
+
 	// If you have enough heart chemicals to be over 2, you're likely to take extra damage.
 	if(pulse_mod > 2 && !is_stable)
 		var/damage_chance = (pulse_mod - 2) ** 2
 		if(prob(damage_chance))
 			take_internal_damage(0.5)
-	
+
 	// Now pulse mod is impacted by shock stage and other things too
 	if(owner.shock_stage > 30)
 		pulse_mod++
@@ -220,5 +224,5 @@
 	. = ..()
 	if(!BP_IS_PROSTHETIC(src))
 		pulse = PULSE_NORM
-	else 
+	else
 		pulse = PULSE_NONE
