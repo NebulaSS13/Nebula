@@ -1322,7 +1322,7 @@ Note that amputating the affected organ does in fact remove the infection from t
 
 		if(!keep_organs)
 			for(var/obj/item/organ/thing in internal_organs)
-				if(!(thing.organ_tag in owner.species.vital_organs) && !BP_IS_PROSTHETIC(thing))
+				if(!thing.is_vital_to_owner() && !BP_IS_PROSTHETIC(thing))
 					qdel(thing)
 
 		owner.refresh_modular_limb_verbs()
@@ -1619,3 +1619,13 @@ Note that amputating the affected organ does in fact remove the infection from t
 			owner.gib()
 	else
 		return ..()
+
+/obj/item/organ/external/is_vital_to_owner()
+	if(isnull(vital_to_owner))
+		. = ..()
+		if(!.)
+			for(var/obj/item/organ/O in children)
+				if(O.is_vital_to_owner())
+					vital_to_owner = TRUE
+					break
+	return vital_to_owner

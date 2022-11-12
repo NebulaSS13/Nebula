@@ -18,7 +18,7 @@
 
 	blood_types = list(/decl/blood_type/coolant)
 	vital_organs = list(
-		BP_BRAIN,
+		BP_POSIBRAIN,
 		BP_CELL
 	)
 

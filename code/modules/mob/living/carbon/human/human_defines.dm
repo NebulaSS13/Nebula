@@ -94,6 +94,8 @@
 	/// var for caching last getHalloss() run to avoid looping through organs over and over and over again
 	var/last_pain
 
+	var/vital_organ_missing_time
+
 	ai = /datum/ai/human
 
 /mob/living/carbon/human/proc/get_age()

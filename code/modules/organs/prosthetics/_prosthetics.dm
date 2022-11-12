@@ -18,7 +18,7 @@
 // Checks if a limb could theoretically be removed.
 // Note that this does not currently bother checking if a child or internal organ is vital.
 /obj/item/organ/external/proc/can_remove_modular_limb(var/mob/living/carbon/human/user)
-	if((owner?.species && (organ_tag in owner.species.vital_organs)) || !(limb_flags & ORGAN_FLAG_CAN_AMPUTATE))
+	if((owner?.species && is_vital_to_owner()) || !(limb_flags & ORGAN_FLAG_CAN_AMPUTATE))
 		return FALSE
 	var/bodypart_cat = get_modular_limb_category()
 	if(bodypart_cat == MODULAR_BODYPART_CYBERNETIC)

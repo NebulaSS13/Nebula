@@ -143,12 +143,7 @@
 		for(var/obj/item/organ/external/limb in shuffle(limbs))
 			if(!istype(limb) || !(limb.limb_flags & ORGAN_FLAG_CAN_AMPUTATE))
 				continue
-			var/is_vital = FALSE
-			for(var/obj/item/organ/internal/I in limb.internal_organs)
-				if(I.organ_tag in H.species.vital_organs)
-					is_vital = TRUE
-					break
-			if(!is_vital)
+			if(!limb.is_vital_to_owner())
 				E = limb
 				break
 		if(E && !armour_prob)
