@@ -1,6 +1,6 @@
-// This is a temporary workaround for the slot => bodypart 
-// changes. In the long term this should be removed after 
-// all the `slot_l/r_hand-foo` states are renamed to just 
+// This is a temporary workaround for the slot => bodypart
+// changes. In the long term this should be removed after
+// all the `slot_l/r_hand-foo` states are renamed to just
 // `l/r_hand-foo`. TODO: check if this is still here in 2025.
 var/global/list/bodypart_to_slot_lookup_table = list(
 	BP_L_HAND = "slot_l_hand",
@@ -25,7 +25,7 @@ var/global/list/bodypart_to_slot_lookup_table = list(
 var/global/list/icon_state_cache = list()
 /proc/check_state_in_icon(var/checkstate, var/checkicon, var/high_accuracy = FALSE)
 	// isicon() is apparently quite expensive so short-circuit out early if we can.
-	if(!istext(checkstate) || isnull(checkicon) || !(isfile(checkicon) || isicon(checkicon))) 
+	if(!istext(checkstate) || isnull(checkicon) || !(isfile(checkicon) || isicon(checkicon)))
 		return FALSE
 	var/checkkey = "\ref[checkicon]"
 	var/list/check = global.icon_state_cache[checkkey]
@@ -106,10 +106,13 @@ var/global/list/icon_state_cache = list()
 /obj/item/proc/get_icon_for_bodytype(var/bodytype)
 	. = LAZYACCESS(sprite_sheets, bodytype) || icon
 
+// Ensure ..() is called only at the end of this proc, and that `overlay` is mutated rather than replaced.
+// This is necessary to ensure that all the overlays are generated and tracked prior to being passed to
+// the bodytype offset proc, which can scrub icon/icon_state information as part of the offset process.
 /obj/item/proc/adjust_mob_overlay(var/mob/living/user_mob, var/bodytype,  var/image/overlay, var/slot, var/bodypart)
 	if(ishuman(user_mob))
 		var/mob/living/carbon/human/H = user_mob
-		if(H.get_bodytype_category() != bodytype) 
+		if(H.get_bodytype_category() != bodytype)
 			var/list/overlays_to_offset = overlay.overlays
 			overlay = H.bodytype.get_offset_overlay_image(FALSE, overlay.icon, overlay.icon_state, color, (bodypart || slot))
 			for(var/thing in overlays_to_offset)
