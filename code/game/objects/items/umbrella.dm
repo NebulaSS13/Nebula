@@ -44,7 +44,6 @@
 	add_overlay(I)
 
 /obj/item/umbrella/adjust_mob_overlay(mob/living/user_mob, bodytype, image/overlay, slot, bodypart)
-	. = ..()
 	if(overlay)
 		if(is_open && check_state_in_icon("[overlay.icon_state]-open", overlay.icon))
 			overlay.icon_state = "[overlay.icon_state]-open"
@@ -56,7 +55,7 @@
 		I.color = tip_color
 		I.appearance_flags |= RESET_COLOR
 		overlay.overlays += I
-	return overlay
+	return ..()
 
 /obj/item/umbrella/blue
 	fabric_color = COLOR_BLUE_GRAY
