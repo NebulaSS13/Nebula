@@ -6,7 +6,6 @@
 	organ_tag = BP_BRAIN
 	desc = "A disgusting space slug."
 	parent_organ = BP_HEAD
-	vital = 1
 	var/list/chemical_types
 
 /obj/item/organ/internal/borer/Process()

@@ -25,7 +25,10 @@
 	skin_material = null
 
 	blood_types = list(/decl/blood_type/coolant)
-
+	vital_organs = list(
+		BP_BRAIN,
+		BP_CELL
+	)
 	available_pronouns = list(/decl/pronouns)
 	available_bodytypes = list(
 		/decl/bodytype/adherent,

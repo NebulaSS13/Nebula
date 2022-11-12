@@ -183,14 +183,15 @@ var/global/const/DEFAULT_SPECIES_HEALTH = 200
 		BP_APPENDIX = /obj/item/organ/internal/appendix,
 		BP_EYES =     /obj/item/organ/internal/eyes
 		)
+
 	var/vision_organ              // If set, this organ is required for vision.
 	var/breathing_organ           // If set, this organ is required for breathing.
 
 	var/list/override_organ_types // Used for species that only need to change one or two entries in has_organ.
 
-	//List of organ tags, with the amount and type required for living by this species
-	//#REMOVEME: The vital organ stuff was apparently mostly dropped, so its a bit pointless to improve it...
-	var/list/vital_organs
+	// Losing an organ from the list below will give a grace period (also below) then kill the mob.
+	var/list/vital_organs = list(BP_BRAIN)
+	var/vital_organ_failure_death_delay = 25 SECONDS
 
 	var/obj/effect/decal/cleanable/blood/tracks/move_trail = /obj/effect/decal/cleanable/blood/tracks/footprints // What marks are left when walking
 
@@ -438,6 +439,11 @@ var/global/const/DEFAULT_SPECIES_HEALTH = 200
 
 /decl/species/validate()
 	. = ..()
+
+	for(var/organ_tag in vital_organs)
+		if(!(organ_tag in has_organ) && !(organ_tag in has_limbs))
+			. += "vital organ '[organ_tag]' not present in organ/limb lists"
+
 	for(var/trait_type in traits)
 		var/trait_level = traits[trait_type]
 		var/decl/trait/T = GET_DECL(trait_type)
@@ -476,25 +482,6 @@ var/global/const/DEFAULT_SPECIES_HEALTH = 200
 			if(ispath(E.type, organ_data["path"]))
 				return TRUE
 	return FALSE
-
-/decl/species/proc/is_missing_vital_organ(var/mob/living/carbon/human/H)
-	for(var/tag in vital_organs)
-		var/obj/item/organ/internal/I = GET_INTERNAL_ORGAN(H, tag)
-		var/list/organ_data = vital_organs[tag]
-		//#TODO: whenever we implement having several organs of the same type change this to check for the minimum amount!
-		if(!I || !ispath(I.type, organ_data["path"]))
-			return TRUE
-	return FALSE
-
-/decl/species/proc/is_vital_organ(var/mob/living/carbon/human/H, var/obj/item/organ/O)
-	if(!LAZYLEN(vital_organs))
-		return FALSE
-	//An organ organ is considered vital if there's less than the required amount of said organ type in the mob after we remove it
-	var/list/organ_data = vital_organs[O.organ_tag]
-	if(!organ_data || !ispath(O.type, organ_data["path"]))
-		return FALSE
-	//#TODO: whenever we implement having several organs of the same type change this to check for the minimum amount!
-	return TRUE
 
 //fully_replace: If true, all existing organs will be discarded. Useful when doing mob transformations, and not caring about the existing organs
 /decl/species/proc/create_missing_organs(var/mob/living/carbon/human/H, var/fully_replace = FALSE)
@@ -722,9 +709,6 @@ var/global/const/DEFAULT_SPECIES_HEALTH = 200
 /decl/species/proc/get_blood_color(var/mob/living/carbon/human/H)
 	var/decl/blood_type/blood = get_blood_decl(H)
 	return istype(blood) ? blood.splatter_colour : COLOR_BLOOD_HUMAN
-
-/decl/species/proc/handle_death_check(var/mob/living/carbon/human/H)
-	return FALSE
 
 // Impliments different trails for species depending on if they're wearing shoes.
 /decl/species/proc/get_move_trail(var/mob/living/carbon/human/H)
@@ -980,3 +964,11 @@ var/global/const/DEFAULT_SPECIES_HEALTH = 200
 	H.mob_swap_flags = swap_flags
 	H.mob_push_flags = push_flags
 	H.pass_flags = pass_flags
+
+/decl/species/proc/check_vital_organ_missing(var/mob/living/carbon/H)
+	if(length(vital_organs))
+		for(var/organ_tag in vital_organs)
+			var/obj/item/organ/O = H.get_organ(organ_tag, /obj/item/organ)
+			if(!O || (O.status & ORGAN_DEAD))
+				return TRUE
+	return FALSE

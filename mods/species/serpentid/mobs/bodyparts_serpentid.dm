@@ -163,7 +163,6 @@
 
 /obj/item/organ/external/head/insectoid/serpentid
 	name = "head"
-	vital = 0
 
 /obj/item/organ/external/head/insectoid/serpentid/get_eye_overlay()
 	var/obj/item/organ/internal/eyes/eyes = owner.get_organ((owner.species.vision_organ || BP_EYES), /obj/item/organ/internal/eyes)

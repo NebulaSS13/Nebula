@@ -92,6 +92,10 @@
 	if(!owner)
 		return
 
+	if(owner.vital_organ_missing_time)
+		owner.losebreath = max(10, owner.losebreath)
+		return
+
 	if (germ_level > INFECTION_LEVEL_ONE && active_breathing)
 		if(prob(5))
 			owner.cough()		//respitory tract infection

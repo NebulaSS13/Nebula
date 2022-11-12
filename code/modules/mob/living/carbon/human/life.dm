@@ -535,14 +535,6 @@
 		update_eyes()
 		return TRUE
 
-// Check if we should die.
-/mob/living/carbon/human/proc/handle_death_check()
-	if(should_have_organ(BP_BRAIN))
-		var/obj/item/organ/internal/brain = GET_INTERNAL_ORGAN(src, BP_BRAIN)
-		if(!brain || (brain.status & ORGAN_DEAD))
-			return TRUE
-	return species.handle_death_check(src)
-
 /mob/living/carbon/human/handle_regular_status_updates()
 	if(!handle_some_updates())
 		return 0
@@ -555,12 +547,6 @@
 		set_status(STAT_SILENCE, 0)
 	else				//ALIVE. LIGHTS ARE ON
 		updatehealth()	//TODO
-
-		if(handle_death_check())
-			death()
-			blinded = 1
-			set_status(STAT_SILENCE, 0)
-			return 1
 
 		if(hallucination_power)
 			handle_hallucinations()
