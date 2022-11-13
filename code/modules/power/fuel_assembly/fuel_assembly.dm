@@ -4,7 +4,7 @@
 	icon_state = "fuel_assembly"
 	layer = 4
 	abstract_type = /obj/item/fuel_assembly
-	material = /decl/material/solid/metal/uranium
+	max_health = 150
 
 	var/material_name
 	var/percent_depleted = 1
@@ -87,6 +87,9 @@
 
 /obj/item/fuel_assembly/hydrogen
 	material = /decl/material/gas/hydrogen
+
+/obj/item/fuel_assembly/uranium
+	material = /decl/material/solid/metal/uranium
 
 /obj/item/fuel_assembly/plutonium
 	material = /decl/material/solid/metal/plutonium
