@@ -4,11 +4,8 @@
 	icon = 'icons/obj/assemblies/electronic_components.dmi'
 	icon_state = "template"
 	w_class = ITEM_SIZE_TINY
-	material = /decl/material/solid/silicon
-	matter = list(
-		/decl/material/solid/metal/copper = MATTER_AMOUNT_SECONDARY, 
-		/decl/material/solid/metal/steel  = MATTER_AMOUNT_REINFORCEMENT
-	)
+	matter = list()				// To be filled later
+	max_health = 25 //#TODO: Use material for health
 	var/obj/item/electronic_assembly/assembly // Reference to the assembly holding this circuit, if any.
 	var/extended_desc
 	var/list/inputs
@@ -81,10 +78,9 @@ a creative player the means to solve many problems.  Circuits are held inside an
 	setup_io(outputs, /datum/integrated_io, outputs_default, IC_OUTPUT)
 	outputs_default = null
 	setup_io(activators, /datum/integrated_io/activate, null, IC_ACTIVATOR)
+	if(!matter[/decl/material/solid/metal/steel])
+		matter[/decl/material/solid/metal/steel] = w_class * SScircuit.cost_multiplier // Default cost. //#TODO: Maybe move that stuff to the new material system that does essentially the same thing?
 	. = ..()
-
-/obj/item/integrated_circuit/get_matter_amount_modifier()
-	return SScircuit.cost_multiplier
 
 /obj/item/integrated_circuit/proc/on_data_written() //Override this for special behaviour when new data gets pushed to the circuit.
 	return

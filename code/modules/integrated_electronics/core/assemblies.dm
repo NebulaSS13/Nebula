@@ -8,14 +8,9 @@
 	icon = 'icons/obj/assemblies/electronic_setups.dmi'
 	icon_state = "setup_small"
 	item_flags = ITEM_FLAG_NO_BLUDGEON
-	material = /decl/material/solid/metal/aluminium
-	matter = list(
-		/decl/material/solid/plastic     = MATTER_AMOUNT_SECONDARY,
-		/decl/material/solid/metal/steel = MATTER_AMOUNT_TRACE,
-	)
+	matter = list()		// To be filled later
 	pass_flags = 0
 	anchored = FALSE
-	material_health_multiplier = 0.5
 	var/list/assembly_components = list()
 	var/list/ckeys_allowed_to_scan = list() // Players who built the circuit can scan it as a ghost.
 	var/max_components = IC_MAX_SIZE_BASE
@@ -30,6 +25,9 @@
 	var/creator // circuit creator if any
 	var/interact_page = 0
 	var/components_per_page = 5
+	max_health = 30
+	pass_flags = 0
+	anchored = FALSE
 	var/detail_color = COLOR_ASSEMBLY_BLACK
 	var/list/color_whitelist = list( //This is just for checking that hacked colors aren't in the save data.
 		COLOR_ASSEMBLY_BLACK,
