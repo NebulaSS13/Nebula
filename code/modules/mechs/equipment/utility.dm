@@ -349,6 +349,8 @@
 	. = ..()
 	to_chat(user, "It [get_visible_durability()].")
 
+/obj/item/drill_head/steel
+	material = /decl/material/solid/metal/steel
 
 /obj/item/drill_head/titanium
 	material = /decl/material/solid/metal/titanium
@@ -359,10 +361,9 @@
 /obj/item/drill_head/diamond
 	material = /decl/material/solid/gemstone/diamond
 
-/obj/item/drill_head/set_material(new_material)
+/obj/item/drill_head/Initialize()
 	. = ..()
-	if(material)
-		durability = 2 * material.integrity
+	durability = 2 * material.integrity
 
 /obj/item/mech_equipment/drill
 	name = "drill"
@@ -529,7 +530,7 @@
 
 
 /obj/item/mech_equipment/drill/steel
-	drill_head = /obj/item/drill_head
+	drill_head = /obj/item/drill_head/steel
 
 /obj/item/mech_equipment/drill/titanium
 	drill_head = /obj/item/drill_head/titanium
