@@ -452,6 +452,13 @@
 				// we can't use implanted() here since it's often interactive
 				imp_device.imp_in = owner
 				imp_device.implanted = TRUE
+
+			//Since limbs attached during surgery have their internal organs detached, we want to re-attach them if we're doing the proper install of the parent limb
+			else if(istype(implant, /obj/item/organ) && !detached)
+				var/obj/item/organ/O = implant
+				if(O.parent_organ == organ_tag)
+					//The add_organ chain will automatically handle properly removing the detached flag, and moving it to the proper lists
+					owner.add_organ(O, src, in_place, update_icon, detached)
 	else
 		//Handle installing into a stand-alone parent limb to keep dropped limbs in some kind of coherent state
 		if(!affected)
