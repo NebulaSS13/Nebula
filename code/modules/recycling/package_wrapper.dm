@@ -17,7 +17,7 @@
 			if(MOB_SIZE_TINY)
 				nb_sheets = 2
 		return nb_sheets
-	
+
 	CRASH("Tried to get the amount of paper sheets needed to wrap invalid object type '[O? O.type : "null"]'.")
 
 ///////////////////////////////////////////////////////////////////////////////////////
@@ -37,7 +37,7 @@
 	throw_range      = 5
 	throw_speed      = 3
 	///Check to prevent people from wrapping something multiple times at once.
-	var/tmp/currently_wrapping = FALSE 
+	var/tmp/currently_wrapping = FALSE
 	///The type of wrapped item that will be produced
 	var/tmp/wrapped_result_type = /obj/item/parcel
 
@@ -78,7 +78,7 @@
 		var/obj/item/parcel/wrapper = new wrapped_result_type(get_turf(target))
 		wrapper.make_parcel(target, user) //Call this directly so it applies our fingerprints
 		. = wrapper
-	
+
 	else if(ishuman(target))
 		var/mob/living/carbon/human/H = target
 		if(H.incapacitated(INCAPACITATION_DISABLED | INCAPACITATION_RESTRAINED))
@@ -103,18 +103,17 @@
 	return wrap(M, user)
 
 /obj/item/stack/package_wrap/on_used_last()
+	var/mob/M = loc
+	. = ..()
 	//Drop the cardboard tube after we're emptied out
-	var/obj/item/c_tube/tube = new(get_turf(loc))
-	if(ismob(loc))
-		var/mob/M = loc
-		M.unEquip(src, null, FALSE)
+	var/obj/item/c_tube/tube = new(get_turf(M))
+	if(istype(M))
 		M.put_in_active_hand(tube)
-	return ..()
 
 /obj/item/stack/package_wrap/create_matter()
 	. = ..()
 	//Cardboard for the tube, isn't in the matter_per_piece list, has to be added after that's been initialized
-	LAZYSET(matter, /decl/material/solid/cardboard, MATTER_AMOUNT_PRIMARY * HOLLOW_OBJECT_MATTER_MULTIPLIER) 
+	LAZYSET(matter, /decl/material/solid/cardboard, MATTER_AMOUNT_PRIMARY * HOLLOW_OBJECT_MATTER_MULTIPLIER)
 
 /obj/item/stack/package_wrap/update_matter()
 	//Keep track of the cardboard amount to prevent it creating infinite cardboard matter each times the stack changes
@@ -122,7 +121,7 @@
 	matter = list()
 	for(var/mat in matter_per_piece)
 		matter[mat] = (matter_per_piece[mat] * amount)
-	matter[/decl/material/solid/cardboard] = cardboard_amount 
+	matter[/decl/material/solid/cardboard] = cardboard_amount
 
 ///Types that the wrapper cannot wrap, ever
 /obj/item/stack/package_wrap/proc/get_blacklist()
