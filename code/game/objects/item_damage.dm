@@ -124,3 +124,6 @@
 ///Returns whether the item can take damages or if its invulnerable
 /obj/item/proc/can_take_damage()
 	return health != ITEM_HEALTH_NO_DAMAGE && max_health != ITEM_HEALTH_NO_DAMAGE
+
+/obj/item/proc/is_damaged()
+	return can_take_damage() && (health < max_health)

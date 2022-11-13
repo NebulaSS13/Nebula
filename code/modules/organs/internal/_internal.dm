@@ -95,9 +95,6 @@
 /obj/item/organ/internal/proc/bruise()
 	damage = max(damage, min_bruised_damage)
 
-/obj/item/organ/internal/proc/is_damaged()
-	return damage > 0
-
 /obj/item/organ/internal/proc/is_bruised()
 	return damage >= min_bruised_damage
 
