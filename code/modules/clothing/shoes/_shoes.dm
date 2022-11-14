@@ -58,100 +58,96 @@
 		. = ..()
 
 /obj/item/clothing/shoes/proc/add_cuffs(var/obj/item/handcuffs/cuffs, var/mob/user)
-	if(!can_add_cuffs)
-		if(user)
-			to_chat(user, SPAN_WARNING("\The [cuffs] can't be attached to \the [src]."))
+	if (!can_add_cuffs)
+		to_chat(user, SPAN_WARNING("\The [cuffs] can't be attached to \the [src]."))
 		return
-	if(attached_cuffs)
-		if(user)
-			to_chat(user, SPAN_WARNING("\The [src] already has [attached_cuffs] attached."))
+	if (attached_cuffs)
+		to_chat(user, SPAN_WARNING("\The [src] already has [attached_cuffs] attached."))
 		return
-	if(user)
-		if(!user.do_skilled(5 SECONDS, SKILL_COMBAT, src) || (QDELETED(cuffs) || QDELETED(src)))
-			return
+	if (do_after(user, 5 SECONDS))
 		if(!user.unEquip(cuffs, src))
 			return
 		user.visible_message(SPAN_ITALIC("\The [user] attaches \the [cuffs] to \the [src]."), range = 2)
-	else
-		cuffs.forceMove(src)
-
-	attached_cuffs = cuffs
-	if(cuffs)
-		LAZYINITLIST(slowdown_per_slot[slot_shoes_str])
 		verbs |= /obj/item/clothing/shoes/proc/remove_cuffs
-		slowdown_per_slot[slot_shoes_str] += attached_cuffs.elastic ? 10 : 15
-	return TRUE
+		LAZYINITLIST(slowdown_per_slot[slot_shoes_str])
+		slowdown_per_slot[slot_shoes_str] += cuffs.elastic ? 10 : 15
+		attached_cuffs = cuffs
 
 /obj/item/clothing/shoes/proc/remove_cuffs(var/mob/user)
-	if(!attached_cuffs)
+	set name = "Remove Shoe Cuffs"
+	set desc = "Get rid of those limiters and lengthen your stride."
+	set category = "Object"
+	set src in usr
+
+	user = user || usr
+	if (!user)
 		return
-	if(user)
-		if(!user.do_skilled(5 SECONDS, SKILL_COMBAT, src) && (QDELETED(src) || QDELETED(attached_cuffs)))
-			return FALSE
-		user.put_in_hands(attached_cuffs)
+	if (!attached_cuffs)
+		return
+	if (user.incapacitated())
+		return
+	if (do_after(user, 5 SECONDS))
+		if (!user.put_in_hands(attached_cuffs))
+			to_chat(usr, SPAN_WARNING("You need an empty, unbroken hand to remove the [attached_cuffs] from the [src]."))
+			return
 		user.visible_message(SPAN_ITALIC("\The [user] removes \the [attached_cuffs] from \the [src]."), range = 2)
 		attached_cuffs.add_fingerprint(user)
-	else
-		attached_cuffs.dropInto(loc)
-
-	verbs -= /obj/item/clothing/shoes/proc/remove_cuffs
-	if(slowdown_per_slot[slot_shoes_str])
+		LAZYINITLIST(slowdown_per_slot[slot_shoes_str])
 		slowdown_per_slot[slot_shoes_str] -= attached_cuffs.elastic ? 10 : 15
-	attached_cuffs = null
+		verbs -= /obj/item/clothing/shoes/proc/remove_cuffs
+		attached_cuffs = null
 
 /obj/item/clothing/shoes/proc/add_hidden(var/obj/item/I, var/mob/user)
 	if (!(I.item_flags & ITEM_FLAG_CAN_HIDE_IN_SHOES)) // fail silently
 		return FALSE
 	if (!can_add_hidden_item)
-		if(user)
-			to_chat(user, SPAN_WARNING("\The [src] can't hold anything."))
-		return FALSE
+		to_chat(user, SPAN_WARNING("\The [src] can't hold anything."))
+		return TRUE
 	if (hidden_item)
-		if(user)
-			to_chat(user, SPAN_WARNING("\The [src] already holds \an [hidden_item]."))
-		return FALSE
+		to_chat(user, SPAN_WARNING("\The [src] already holds \an [hidden_item]."))
+		return TRUE
 	if (I.w_class > hidden_item_max_w_class)
-		if(user)
-			to_chat(user, SPAN_WARNING("\The [I] is too large to fit in the [src]."))
-		return FALSE
-
-	if(user)
-		if(!do_after(user, 1 SECONDS) || (QDELETED(src) || QDELETED(hidden_item)))
-			return FALSE
+		to_chat(user, SPAN_WARNING("\The [I] is too large to fit in the [src]."))
+		return TRUE
+	if (do_after(user, 1 SECONDS))
 		if(!user.unEquip(I, src))
-			return FALSE
+			return TRUE
 		user.visible_message(SPAN_ITALIC("\The [user] shoves \the [I] into \the [src]."), range = 1)
-	else
-		I.forceMove(src)
-
-	verbs |= /obj/item/clothing/shoes/proc/remove_hidden
-	hidden_item = I
-	return TRUE
+		verbs |= /obj/item/clothing/shoes/proc/remove_hidden
+		hidden_item = I
+		return TRUE
 
 /obj/item/clothing/shoes/proc/remove_hidden(var/mob/user)
-	if(!hidden_item)
-		return FALSE
-	
-	if(user)
-		if(user.incapacitated())
-			return FALSE
-		if(loc != user)
-			return FALSE
-		if(!do_after(user, 2 SECONDS) || (QDELETED(src) || QDELETED(hidden_item)))
-			return FALSE
-		user.put_in_hands(hidden_item)
-		user.visible_message(SPAN_ITALIC("\The [user] pulls \the [hidden_item] from \the [src]."), range = 1)
-	else
-		hidden_item.dropInto(loc)
+	set name = "Remove Shoe Item"
+	set desc = "Pull out whatever's hidden in your foot gloves."
+	set category = "Object"
+	set src in usr
 
-	playsound(get_turf(src), 'sound/effects/holster/tactiholsterout.ogg', 25)
-	verbs -= /obj/item/clothing/shoes/proc/remove_hidden
-	hidden_item = null
+	user = user || usr
+	if (!user)
+		return
+	if (!hidden_item)
+		return FALSE
+	if (user.incapacitated())
+		return FALSE
+	if (loc != user)
+		return FALSE
+	if (do_after(user, 2 SECONDS))
+		if (!user.put_in_hands(hidden_item))
+			to_chat(usr, SPAN_WARNING("You need an empty, unbroken hand to pull the [hidden_item] from the [src]."))
+			return TRUE
+		user.visible_message(SPAN_ITALIC("\The [user] pulls \the [hidden_item] from \the [src]."), range = 1)
+		playsound(get_turf(src), 'sound/effects/holster/tactiholsterout.ogg', 25)
+		verbs -= /obj/item/clothing/shoes/proc/remove_hidden
+		hidden_item = null
 	return TRUE
 
 /obj/item/clothing/shoes/proc/handle_movement(var/turf/walking, var/running)
 	if (attached_cuffs && running)
 		attached_cuffs.take_damage(1, armor_pen = 100)
+		if(QDELETED(attached_cuffs))
+			verbs -= /obj/item/clothing/shoes/proc/remove_cuffs
+			attached_cuffs = null
 	return
 
 /obj/item/clothing/shoes/update_clothing_icon()
@@ -179,33 +175,3 @@
 		S.blend_mode = BLEND_ADD
 		overlay.overlays += S
 	. = ..()
-
-// Interactions
-/obj/item/clothing/shoes/get_alt_interactions(mob/user)
-	. = ..()
-	LAZYADD(., /decl/interaction_handler/remove_cuffs/shoes)
-	LAZYADD(., /decl/interaction_handler/remove_item/shoes)
-
-//Remove Shoe Cuffs
-/decl/interaction_handler/remove_cuffs/shoes
-	name = "Remove Shoe Handcuffs"
-	expected_target_type = /obj/item/clothing/shoes
-
-/decl/interaction_handler/remove_cuffs/shoes/is_possible(obj/item/clothing/shoes/target, mob/user, obj/item/prop)
-	return ..() && target.attached_cuffs
-
-/decl/interaction_handler/remove_cuffs/shoes/invoked(obj/item/clothing/shoes/target, mob/user)
-	target.remove_cuffs(user)
-	return TRUE
-
-//Remove Hidden Item
-/decl/interaction_handler/remove_item/shoes
-	name = "Remove Shoe Item"
-	expected_target_type = /obj/item/clothing/shoes
-
-/decl/interaction_handler/remove_item/shoes/is_possible(obj/item/clothing/shoes/target, mob/user, obj/item/prop)
-	return ..() && target.hidden_item
-
-/decl/interaction_handler/remove_item/shoes/invoked(obj/item/clothing/shoes/target, mob/user)
-	target.remove_hidden(user)
-	return TRUE
