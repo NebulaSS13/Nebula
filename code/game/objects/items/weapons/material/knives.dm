@@ -8,7 +8,6 @@
 	attack_verb = list("slashed", "stabbed", "sliced", "torn", "ripped", "diced", "cut")
 	material = /decl/material/solid/metal/steel
 	origin_tech = "{'materials':1}"
-	max_health = ITEM_HEALTH_NO_DAMAGE
 	obj_flags = OBJ_FLAG_CONDUCTIBLE
 	sharp = TRUE
 	edge = TRUE
@@ -50,6 +49,9 @@
 			return eyestab(M, user)
 
 	return ..()
+
+/obj/item/knife/can_take_wear_damage()
+	return FALSE //Prevents knives from shattering/breaking from usage
 
 //table knives
 /obj/item/knife/table

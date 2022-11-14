@@ -13,14 +13,20 @@
 /obj/item/apply_hit_effect(mob/living/target, mob/living/user, var/hit_zone)
 	. = ..()
 	if(material && (material.is_brittle() || target.get_blocked_ratio(hit_zone, BRUTE, damage_flags(), armor_penetration, force) * 100 >= material.hardness/5))
-		check_shatter()
+		apply_wear()
 
 /obj/item/on_parry(damage_source)
 	if(istype(damage_source, /obj/item))
-		check_shatter()
+		apply_wear()
 
-/obj/item/proc/check_shatter()
-	if(material && can_take_damage() && prob(material.hardness))
+/**
+ * Whether the object will take wear damage when used as a weapon.
+ */
+/obj/item/proc/can_take_wear_damage()
+	return TRUE
+
+/obj/item/proc/apply_wear()
+	if(material && can_take_damage() && can_take_wear_damage() && prob(material.hardness))
 		if(material.is_brittle())
 			health = 0
 		else

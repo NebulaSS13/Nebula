@@ -6,13 +6,15 @@
 	applies_material_colour = 0
 	desc = "A handy utility blade for the discerning augmentee. Warranty void if used for cutting."
 	base_parry_chance = 30
-	max_health = ITEM_HEALTH_NO_DAMAGE
 	material_force_multiplier = 0.2
 	sharp = 1
 	edge = 1
 	attack_verb = list("stabbed", "sliced", "cut")
 	applies_material_colour = 0
 	origin_tech = "{'materials':1,'engineering':1,'combat':2}"
+
+/obj/item/armblade/can_take_wear_damage()
+	return FALSE
 
 /obj/item/organ/internal/augment/active/simple/armblade
 	name = "embedded blade"
