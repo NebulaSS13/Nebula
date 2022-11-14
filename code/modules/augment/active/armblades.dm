@@ -12,6 +12,7 @@
 	attack_verb = list("stabbed", "sliced", "cut")
 	applies_material_colour = 0
 	origin_tech = "{'materials':1,'engineering':1,'combat':2}"
+	material = /decl/material/solid/metal/steel
 
 /obj/item/armblade/can_take_wear_damage()
 	return FALSE
