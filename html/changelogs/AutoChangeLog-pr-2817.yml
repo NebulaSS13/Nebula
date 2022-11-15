@@ -1,5 +1,0 @@
-author: PsyCommando
-delete-after: true
-changes:
-  - bugfix: Fix limb reattachment surgery not properly installing any contained internal
-      organs once the last step was completed.
