@@ -68,6 +68,7 @@
 			off_x = rand(-3, 3)
 			off_y = rand(-6, 11)
 
+		//Keep the full icon path, since subclasses may not have the label in their icon file
 		var/image/I = image('icons/obj/items/storage/deliverypackage.dmi', "delivery_label", pixel_x = off_x, pixel_y = off_y)
 		add_overlay(I)
 
@@ -97,6 +98,7 @@
 		parcel_size = round(O.w_class)
 	else if(ismob(AM))
 		var/mob/M = AM
+		//#FIXME: These will almost 100% be badly named for their size. Since according to scale crab, cat and corgis are bigger than gargantuan for example.
 		parcel_size = round(M.mob_size)
 	else
 		CRASH("Make parcel got passed an invalid atom type '[AM?.type]'.")
@@ -188,10 +190,9 @@
 	else if(IS_PEN(W))
 		var/old_note = attached_note
 		var/new_note = sanitize(input(user, "What note would you like to add to \the [src]?", "Add Note", attached_note))
-		update_icon()
-		if(new_note != old_note)
-			if(W.do_tool_interaction(TOOL_PEN, user, src, 2 SECONDS))
-				attached_note = new_note
+		if((new_note != old_note) && user.Adjacent(src) && W.do_tool_interaction(TOOL_PEN, user, src, 2 SECONDS) && user.Adjacent(src))
+			attached_note = new_note
+			update_icon()
 		return TRUE
 
 	else if(W.sharp && user.a_intent == I_HELP)
@@ -231,6 +232,7 @@
 	S.tag_icon_state = "delivery_tag"
 	S.tag_x          = off_x
 	S.tag_y          = off_y
+	update_icon()
 	playsound(src, 'sound/effects/checkout.ogg', 40, TRUE, 2)
 
 /obj/item/parcel/physically_destroyed(skip_qdel)

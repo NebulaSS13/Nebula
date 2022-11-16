@@ -36,6 +36,7 @@
 	throwforce       = 1
 	throw_range      = 5
 	throw_speed      = 3
+	item_flags       = ITEM_FLAG_NO_BLUDGEON
 	///Check to prevent people from wrapping something multiple times at once.
 	var/tmp/currently_wrapping = FALSE
 	///The type of wrapped item that will be produced
@@ -56,11 +57,22 @@
 /obj/item/stack/package_wrap/proc/wrap(var/atom/movable/AM, var/mob/user)
 	if(currently_wrapping && user)
 		return
+	if(AM == user)
+		to_chat(user, SPAN_WARNING("You cannot wrap yourself!"))
+		return
+	if(ishuman(AM))
+		var/mob/living/carbon/human/H = AM
+		if(!H.incapacitated(INCAPACITATION_DISABLED | INCAPACITATION_RESTRAINED))
+			if(user)
+				to_chat(user, SPAN_WARNING("\The [H] is moving around too much. Restrain or incapacitate them first."))
+			return
+
 	var/paper_to_use = AM.wrapping_paper_needed_to_wrap()
 	if(!can_use(paper_to_use))
 		if(user)
 			to_chat(user, SPAN_WARNING("There isn't enough [plural_name] in \the [src] to wrap \the [AM]!"))
 		return
+
 	currently_wrapping = TRUE
 	if(user && !user.do_skilled(clamp(paper_to_use, 2, 6) SECONDS, SKILL_HAULING, AM))
 		currently_wrapping = FALSE
@@ -99,6 +111,7 @@
 /obj/item/stack/package_wrap/afterattack(var/obj/target, mob/user, proximity_flag, click_parameters)
 	if(!proximity_flag || !can_wrap(target) || (user.isEquipped(target) && !user.canUnEquip(target)))
 		return
+	user.setClickCooldown(attack_cooldown)
 	return wrap(target, user) || ..()
 
 /obj/item/stack/package_wrap/on_used_last()
