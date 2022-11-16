@@ -76,21 +76,28 @@
 /obj/item/stack/package_wrap/proc/create_wrapper(var/atom/movable/target, var/mob/user)
 	if(isobj(target))
 		var/obj/item/parcel/wrapper = new wrapped_result_type(get_turf(target))
-		wrapper.make_parcel(target, user) //Call this directly so it applies our fingerprints
-		. = wrapper
+		if(wrapper.make_parcel(target, user)) //Call this directly so it applies our fingerprints
+			. = wrapper
+		else
+			log_warning("Failed to create_wrapper() on \the '[target]'('[target.type]')([target.x], [target.y], [target.z]) with \the '[src]'('[type]')([x], [y], [z]).")
+			qdel(wrapper)
 
 	else if(ishuman(target))
 		var/mob/living/carbon/human/H = target
 		if(H.incapacitated(INCAPACITATION_DISABLED | INCAPACITATION_RESTRAINED))
 			var/obj/item/parcel/wrapper = new wrapped_result_type(get_turf(target))
-			wrapper.make_parcel(target, user) //Call this directly so it applies our fingerprints
-			admin_attack_log(user, H, "Used \a [src] to wrap their victim", "Was wrapepd with \a [src]", "used \the [src] to wrap")
-			. = wrapper
+			if(wrapper.make_parcel(target, user)) //Call this directly so it applies our fingerprints
+				admin_attack_log(user, H, "Used \a [src] to wrap their victim", "Was wrapepd with \a [src]", "used \the [src] to wrap")
+				. = wrapper
+			else
+				log_warning("Failed to create_wrapper() on \the '[target]'('[target.type]')([target.x], [target.y], [target.z]) with \the '[src]'('[type]')([x], [y], [z]).")
+				qdel(wrapper)
+
 		else if(user)
 			to_chat(user, SPAN_WARNING("\The [target] moving around too much. Restrain or incapacitate them first."))
 
 /obj/item/stack/package_wrap/afterattack(var/obj/target, mob/user, proximity_flag, click_parameters)
-	if(!proximity_flag || !can_wrap(target))
+	if(!proximity_flag || !can_wrap(target) || (user.isEquipped(target) && !user.canUnEquip(target)))
 		return
 	return wrap(target, user) || ..()
 

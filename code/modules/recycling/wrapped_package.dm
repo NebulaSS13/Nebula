@@ -134,9 +134,11 @@
 	//And then put it in the user's hands if it makes sense
 	if(ismob(AM.loc))
 		var/mob/M = AM.loc
-		M.unEquip(AM, src)
+		if(!M.unEquip(AM, src))
+			CRASH("Tried to make a parcel from an item in a mob's inventory that cannot be unequipped. Should have been filtered out before. [log_info_line(src)]")
 		if(M == user)
 			user.put_in_hands(src)
+
 	if(istype(AM.loc, /obj/item/storage))
 		var/obj/item/storage/S = AM.loc
 		S.remove_from_storage(AM, src)
