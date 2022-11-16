@@ -49,7 +49,7 @@
 
 /obj/item/destTagger/OnTopic(user, href_list, state)
 	if(href_list["set_tag"])
-		current_tag = href_list["set_tag"]
+		current_tag = sanitize_safe(href_list["set_tag"], encode = FALSE)
 		to_chat(user, SPAN_NOTICE("You set \the [src] to <b>[current_tag]</b>."))
 		playsound(src.loc, 'sound/machines/pda_click.ogg', 30, TRUE)
 		. = TOPIC_REFRESH
@@ -58,7 +58,8 @@
 		var/dest = input(user, "Please enter custom location.", "Location", current_tag)
 		if(CanUseTopic(user, state))
 			if(dest)
-				current_tag = dest
+				current_tag = sanitize_safe(dest, encode = FALSE)
+				add_previous_tag(current_tag)
 				to_chat(user, SPAN_NOTICE("You designate a custom location on \the [src], set to <b>[current_tag]</b>."))
 				playsound(src.loc, 'sound/machines/pda_click.ogg', 30, TRUE)
 			else
