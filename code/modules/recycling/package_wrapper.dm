@@ -101,14 +101,6 @@
 		return
 	return wrap(target, user) || ..()
 
-/obj/item/stack/package_wrap/attack(mob/living/M, mob/living/user, target_zone, animate)
-	if(user.a_intent != I_HELP)
-		return ..()
-	user.setClickCooldown(attack_cooldown + w_class)
-	if(!can_wrap(M))
-		return
-	return wrap(M, user)
-
 /obj/item/stack/package_wrap/on_used_last()
 	var/mob/M = loc
 	. = ..()
