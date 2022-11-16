@@ -67,15 +67,16 @@
 	. = ..()
 
 /obj/item/organ/internal/augment/active/cyberbrain/Process()
-	var/datum/extension/assembly/assembly = get_extension(src, /datum/extension/assembly)
-	if(assembly)
-		assembly.Process()
-		if(!assembly.enabled)
-			return
-
-	var/datum/extension/interactive/os/os = get_extension(src, /datum/extension/interactive/os)
-	if(os)
-		os.Process()
+	..()
+	if(!is_broken() && !(status & ORGAN_DEAD))
+		var/datum/extension/assembly/assembly = get_extension(src, /datum/extension/assembly)
+		if(assembly)
+			assembly.Process()
+			if(!assembly.enabled)
+				return
+		var/datum/extension/interactive/os/os = get_extension(src, /datum/extension/interactive/os)
+		if(os)
+			os.Process()
 
 /*
  *

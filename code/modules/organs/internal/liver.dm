@@ -10,6 +10,12 @@
 	min_broken_damage = 45
 	max_damage = 70
 	relative_size = 60
+	// Liver recovers a lot better than most meat.
+	min_regeneration_cutoff_threshold = 2
+	max_regeneration_cutoff_threshold = 5
+
+/obj/item/organ/internal/liver/organ_can_heal()
+	return !GET_CHEMICAL_EFFECT(owner, CE_ALCOHOL) && ..()
 
 /obj/item/organ/internal/liver/Process()
 
@@ -49,13 +55,6 @@
 	if(alcotox)
 		take_internal_damage(alcotox, prob(90)) // Chance to warn them
 
-	// Heal a bit if needed and we're not busy. This allows recovery from low amounts of toxloss.
-	if(!alco && !GET_CHEMICAL_EFFECT(owner, CE_TOXIN) && !owner.radiation && damage > 0)
-		if(damage < min_broken_damage)
-			heal_damage(0.2)
-		if(damage < min_bruised_damage)
-			heal_damage(0.3)
-
 	//Blood regeneration if there is some space
 	owner.regenerate_blood(0.1 + GET_CHEMICAL_EFFECT(owner, CE_BLOODRESTORE))
 
@@ -66,7 +65,3 @@
 			owner.adjust_nutrition(-10)
 		else if(owner.nutrition >= 200)
 			owner.adjust_nutrition(-3)
-
-//We got it covered in Process with more detailed thing
-/obj/item/organ/internal/liver/handle_regeneration()
-	return

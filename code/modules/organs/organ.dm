@@ -330,7 +330,7 @@
 	CRASH("Not Implemented")
 
 /obj/item/organ/proc/heal_damage(amount)
-	if (can_recover())
+	if(can_recover())
 		damage = clamp(0, damage - round(amount, 0.1), max_damage)
 
 /obj/item/organ/proc/robotize(var/company = /decl/prosthetics_manufacturer/basic_human, var/skip_prosthetics = 0, var/keep_organs = 0, var/apply_material = /decl/material/solid/metal/steel, var/check_bodytype, var/check_species)
