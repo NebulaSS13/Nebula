@@ -27,10 +27,10 @@
 	if(contained_object && !make_parcel(contained_object))
 		log_warning("[src] ([x], [y], [z]) failed to set its package content. Deleting!")
 		return INITIALIZE_HINT_QDEL
-		
+
 	if(length(_attached_note))
 		attached_note = _attached_note
-		
+
 	update_icon()
 
 /obj/item/parcel/on_update_icon()
@@ -51,7 +51,7 @@
 	var/datum/extension/sorting_tag/S = get_extension(src, /datum/extension/sorting_tag)
 	if(S)
 		S.apply_tag_overlay()
-	
+
 	//Put a label on if we added a note
 	if(length(attached_note) && icon_state != "[icon_state_prefix]_1")
 		var/off_x = 0
@@ -70,7 +70,7 @@
 
 		var/image/I = image('icons/obj/items/storage/deliverypackage.dmi', "delivery_label", pixel_x = off_x, pixel_y = off_y)
 		add_overlay(I)
-	
+
 /obj/item/parcel/examine(mob/user, distance)
 	. = ..()
 	if(distance < 3)
@@ -256,9 +256,7 @@
 
 		if(ismob(AM))
 			var/mob/M = AM
-			if(M.client)
-				M.client.eye = M.client.mob
-				M.client.perspective = MOB_PERSPECTIVE
+			M.reset_view()
 
 ///list of atom types that can be wrapped. Includes subtypes of the specified types.
 /obj/item/parcel/proc/get_whitelist()
