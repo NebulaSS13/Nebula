@@ -1,4 +1,4 @@
-#define MAX_DEST_TAGGER_PREVIOUS_TAGS 25 //Give them 25 memory slot until they begin overwriting the last in the list
+#define MAX_DEST_TAGGER_PREVIOUS_TAGS 25 //Give them 25 memory slot until they begin overwriting the first in the list
 
 /obj/item/destTagger
 	name       = "destination tagger"
@@ -22,10 +22,8 @@
 ///Add a previous destionation tag to the list and perform rotation of the tag history if neccessary.
 /obj/item/destTagger/proc/add_previous_tag(var/text)
 	if(LAZYLEN(last_used_tags) >= MAX_DEST_TAGGER_PREVIOUS_TAGS)
-		last_used_tags.Cut(1, MAX_DEST_TAGGER_PREVIOUS_TAGS - 1)
-		last_used_tags.Insert(1, text)
-	else
-		LAZYADD(last_used_tags, text)
+		last_used_tags.Cut(1, 2)
+	LAZYADD(last_used_tags, text)
 
 /obj/item/destTagger/interact(mob/user)
 
