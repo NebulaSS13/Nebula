@@ -180,7 +180,6 @@
 		if(length(O.current_tag))
 			to_chat(user, SPAN_NOTICE("You have labeled the destination as [O.current_tag]."))
 			attach_destination_tag(O.current_tag)
-			playsound(src, 'sound/machines/twobeep.ogg', 50, TRUE)
 		else
 			to_chat(user, SPAN_WARNING("You need to set a destination tag first!"))
 		return TRUE
@@ -231,6 +230,7 @@
 	S.tag_icon_state = "delivery_tag"
 	S.tag_x          = off_x
 	S.tag_y          = off_y
+	playsound(src, 'sound/effects/checkout.ogg', 40, TRUE, 2)
 
 /obj/item/parcel/physically_destroyed(skip_qdel)
 	. = ..()

@@ -52,7 +52,7 @@
 	if(href_list["set_tag"])
 		current_tag = href_list["set_tag"]
 		to_chat(user, SPAN_NOTICE("You set \the [src] to <b>[current_tag]</b>."))
-		playsound(src.loc, 'sound/machines/chime.ogg', 50, TRUE)
+		playsound(src.loc, 'sound/machines/pda_click.ogg', 30, TRUE)
 		. = TOPIC_REFRESH
 
 	if(href_list["input_tag"])
@@ -61,11 +61,11 @@
 			if(dest)
 				current_tag = dest
 				to_chat(user, SPAN_NOTICE("You designate a custom location on \the [src], set to <b>[current_tag]</b>."))
-				playsound(src.loc, 'sound/machines/chime.ogg', 50, TRUE)
+				playsound(src.loc, 'sound/machines/pda_click.ogg', 30, TRUE)
 			else
 				current_tag = null
 				to_chat(user, SPAN_NOTICE("You clear \the [src]'s custom location."))
-				playsound(src.loc, 'sound/machines/chime.ogg', 50, TRUE)
+				playsound(src.loc, 'sound/machines/quiet_beep.ogg', 30, TRUE)
 			. = TOPIC_REFRESH
 		else
 			. = TOPIC_HANDLED
