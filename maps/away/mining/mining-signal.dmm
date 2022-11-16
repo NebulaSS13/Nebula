@@ -777,7 +777,7 @@
 /turf/simulated/floor/wood,
 /area/outpost/abandoned)
 "cN" = (
-/obj/structure/filingcabinet/tall,
+/obj/structure/filing_cabinet/tall,
 /turf/simulated/floor/carpet/blue,
 /area/outpost/abandoned)
 "cO" = (
@@ -800,7 +800,7 @@
 /turf/simulated/floor/tiled/dark,
 /area/outpost/abandoned)
 "cS" = (
-/obj/structure/filingcabinet/tall,
+/obj/structure/filing_cabinet/tall,
 /turf/simulated/floor/tiled/dark,
 /area/outpost/abandoned)
 "cT" = (

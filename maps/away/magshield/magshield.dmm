@@ -2615,7 +2615,7 @@
 /turf/simulated/floor/airless,
 /area/magshield/east)
 "hJ" = (
-/obj/structure/filingcabinet/chestdrawer,
+/obj/structure/filing_cabinet/chestdrawer,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /turf/simulated/floor/carpet/blue,
@@ -2652,7 +2652,7 @@
 /turf/simulated/floor/airless,
 /area/magshield/east)
 "hR" = (
-/obj/structure/filingcabinet/chestdrawer,
+/obj/structure/filing_cabinet/chestdrawer,
 /obj/machinery/atmospherics/pipe/manifold/hidden/supply{
 	dir = 8
 	},

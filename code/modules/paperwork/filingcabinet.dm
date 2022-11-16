@@ -1,14 +1,7 @@
-/* Filing cabinets!
- * Contains:
- *		Filing Cabinets
- *		Security Record Cabinets
- *		Medical Record Cabinets
- */
-
 /////////////////////////////////////////////////////////////////
 // Filling Cabinet
 /////////////////////////////////////////////////////////////////
-/obj/structure/filingcabinet
+/obj/structure/filing_cabinet
 	name                   = "filing cabinet"
 	desc                   = "A large cabinet with drawers."
 	icon                   = 'icons/obj/structures/filling_cabinets.dmi'
@@ -24,16 +17,17 @@
 		/obj/item/folder,
 		/obj/item/photo,
 		/obj/item/paper_bundle,
-		/obj/item/forensics/sample)
+		/obj/item/forensics/sample
+	)
 
-/obj/structure/filingcabinet/Initialize(ml, _mat, _reinf_mat)
+/obj/structure/filing_cabinet/Initialize(ml, _mat, _reinf_mat)
 	if(ml)
 		for(var/obj/item/I in loc)
 			if(is_type_in_list(I, can_hold))
 				I.forceMove(src)
 	. = ..()
 
-/obj/structure/filingcabinet/attackby(obj/item/P, mob/user)
+/obj/structure/filing_cabinet/attackby(obj/item/P, mob/user)
 	if(is_type_in_list(P, can_hold))
 		if(!user.unEquip(P, src))
 			return
@@ -44,8 +38,7 @@
 		return TRUE
 
 	return ..()
-
-/obj/structure/filingcabinet/interact(mob/user)
+/obj/structure/filing_cabinet/interact(mob/user)
 	user.set_machine(src)
 	var/dat = "<HR><TABLE>"
 	for(var/obj/item/P in src)
@@ -53,10 +46,10 @@
 	dat += "</TABLE>"
 	show_browser(user, "<html><head><title>[name]</title></head><body>[dat]</body></html>", "window=filingcabinet;size=350x300")
 
-/obj/structure/filingcabinet/attack_hand(mob/user)
+/obj/structure/filing_cabinet/attack_hand(mob/user)
 	return interact(user)
 
-/obj/structure/filingcabinet/OnTopic(mob/user, href_list, datum/topic_state/state)
+/obj/structure/filing_cabinet/OnTopic(mob/user, href_list, datum/topic_state/state)
 	if(href_list["retrieve"])
 		close_browser(user, "window=filingcabinet")
 		var/obj/item/P = locate(href_list["retrieve"])
@@ -66,25 +59,74 @@
 			updateUsrDialog()
 			. = TOPIC_REFRESH
 
-/////////////////////////////////////////////////////////////////
-// Chest Drawer
-/////////////////////////////////////////////////////////////////
-/obj/structure/filingcabinet/chestdrawer
+// Subtypes for mapping!
+/obj/structure/filing_cabinet/chestdrawer
 	name       = "chest drawer"
 	icon_state = "chestdrawer"
 
-/////////////////////////////////////////////////////////////////
-// Wall Filling Cabinet
-/////////////////////////////////////////////////////////////////
-/obj/structure/filingcabinet/wallcabinet
+/obj/structure/filing_cabinet/wall
 	name               = "wall-mounted filing cabinet"
 	desc               = "A filing cabinet installed into a cavity in the wall to save space. Wow!"
 	icon_state         = "wallcabinet"
 	obj_flags          = OBJ_FLAG_MOVES_UNSUPPORTED
 	directional_offset = "{'NORTH':{'y':-32}, 'SOUTH':{'y':32}, 'EAST':{'x':-32}, 'WEST':{'x':32}}"
 
-/////////////////////////////////////////////////////////////////
-// Tall Filling Cabinet
-/////////////////////////////////////////////////////////////////
-/obj/structure/filingcabinet/tall
+/obj/structure/filing_cabinet/tall
 	icon_state = "tallcabinet"
+
+// Record cabinets fill with paper records on first interaction.
+/obj/structure/filing_cabinet/records
+	name = "security record archive"
+	var/generated = FALSE
+	var/archive_name = "security record"
+
+// We generate records on first interaction, as latejoin,
+// joining crew, etc. are hard to plan for and order around.
+// It's also a fair few atoms to worry about.
+/obj/structure/filing_cabinet/records/attack_hand(mob/user)
+	if(!generated)
+		generate_records()
+	return ..()
+
+/obj/structure/filing_cabinet/records/proc/generate_records()
+	generated = TRUE
+	var/datum/computer_network/network = get_local_network_at(get_turf(src))
+	if(!network)
+		return
+	for(var/datum/computer_file/report/crew_record/record in network.get_crew_records())
+		var/obj/item/paper/record_paperwork = new(src)
+		record_paperwork.name = "[archive_name] - [record.get_name()]"
+		record_paperwork.info = collate_data(record)
+		record_paperwork.update_icon()
+
+/obj/structure/filing_cabinet/records/proc/collate_data(var/datum/computer_file/report/crew_record/record)
+	. = list()
+	. += "<b>Name:</b> [record.get_name()]"
+	. += "<b>Criminal Status:</b> [record.get_criminalStatus()]"
+	. += "<b>Details:</b> [record.get_security_record()]"
+	return jointext(., "<br>")
+
+/obj/structure/filing_cabinet/records/medical
+	name = "medical record archive"
+	archive_name = "medical record"
+
+/obj/structure/filing_cabinet/records/medical/collate_data(var/datum/computer_file/report/crew_record/record)
+	. = list()
+	. += "<b>Name:</b> [record.get_name()]"
+	. += "<b>Gender:</b> [record.get_sex()]"
+	. += "<b>Species:</b> [record.get_species_name()]"
+	. += "<b>Blood Type:</b> [record.get_bloodtype()]"
+	. += "<b>Details:</b> [record.get_medical_record()]"
+	return jointext(., "<br>")
+
+/obj/structure/filing_cabinet/records/medical
+	name = "employment record archive"
+	archive_name = "employment record"
+
+/obj/structure/filing_cabinet/records/medical/collate_data(var/datum/computer_file/report/crew_record/record)
+	. = list()
+	. += "<b>Name:</b> [record.get_name()]"
+	. += "<b>Gender:</b> [record.get_sex()]"
+	. += "<b>Species:</b> [record.get_species_name()]"
+	. += "<b>Details:</b> [record.get_employment_record()]"
+	return jointext(., "<br>")

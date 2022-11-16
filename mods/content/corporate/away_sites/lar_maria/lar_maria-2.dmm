@@ -1490,7 +1490,7 @@
 /turf/simulated/floor/tiled,
 /area/lar_maria/office)
 "eE" = (
-/obj/structure/filingcabinet/chestdrawer,
+/obj/structure/filing_cabinet/chestdrawer,
 /turf/simulated/floor/tiled,
 /area/lar_maria/office)
 "eF" = (

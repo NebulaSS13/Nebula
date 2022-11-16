@@ -132,7 +132,7 @@
 /turf/simulated/wall/r_wall,
 /area/map_template/colony/surgery)
 "ax" = (
-/obj/structure/filingcabinet/chestdrawer,
+/obj/structure/filing_cabinet/chestdrawer,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/map_template/colony/command)
 "ay" = (
