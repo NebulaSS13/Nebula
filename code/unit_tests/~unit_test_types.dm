@@ -23,7 +23,12 @@
 	w_class = ITEM_SIZE_HUGE
 
 /obj/random/unit_test/spawn_choices()
-	return list(/obj/unit_test_light, /obj/unit_test_heavy, /obj/unit_test_medium)
+	var/static/list/spawnable_choices = list(
+		/obj/unit_test_light,
+		/obj/unit_test_heavy,
+		/obj/unit_test_medium
+	)
+	return spawnable_choices
 
 /obj/unit_test
 	icon = 'icons/effects/landmarks.dmi'
