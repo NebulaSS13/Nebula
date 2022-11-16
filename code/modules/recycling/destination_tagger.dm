@@ -43,7 +43,6 @@
 	dat += "</tr></table></tt>"
 
 	show_browser(user, dat, "window=destTagScreen;size=450x375")
-	onclose(user, "destTagScreen")
 
 /obj/item/destTagger/attack_self(mob/user)
 	interact(user)
