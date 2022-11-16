@@ -179,10 +179,11 @@
 
 /obj/item/parcel/attackby(obj/item/W, mob/user)
 	if(istype(W, /obj/item/destTagger))
+		user.setClickCooldown(attack_cooldown)
 		var/obj/item/destTagger/O = W
 		if(length(O.current_tag))
-			to_chat(user, SPAN_NOTICE("You have labeled the destination as [O.current_tag]."))
-			attach_destination_tag(O.current_tag)
+			to_chat(user, SPAN_NOTICE("You have labeled the destination as '[O.current_tag]'."))
+			attach_destination_tag(O, user)
 		else
 			to_chat(user, SPAN_WARNING("You need to set a destination tag first!"))
 		return TRUE
