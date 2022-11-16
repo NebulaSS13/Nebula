@@ -159,6 +159,7 @@
 		visible_message(SPAN_NOTICE("\The [user] unwrapped \the [src]!"), SPAN_NOTICE("You unwrapped \the [src]!"))
 		if(!length(contents))
 			to_chat(user, SPAN_WARNING("\The [src] was empty!"))
+		playsound(src, 'sound/items/poster_ripped.ogg', 50, TRUE)
 		physically_destroyed()
 		return TRUE
 	return FALSE
