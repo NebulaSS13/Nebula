@@ -237,12 +237,13 @@
 	playsound(src, 'sound/effects/checkout.ogg', 40, TRUE, 2)
 
 /obj/item/parcel/physically_destroyed(skip_qdel)
-	. = ..()
-	if(istype(material) && matter?[material.type])
+	if(istype(material) && LAZYACCESS(matter, material.type))
 		var/list/cuttings = material.place_cuttings(get_turf(src), matter[material.type])
 		//Make the bits of paper the right color
 		for(var/obj/item/C in cuttings)
+			C.applies_material_colour = FALSE //Prevents the update_icon code from recoloring this white
 			C.set_color(trash_color)
+	. = ..()
 
 /obj/item/parcel/dump_contents()
 	for(var/thing in get_contained_external_atoms())
