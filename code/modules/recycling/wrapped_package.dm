@@ -147,7 +147,7 @@
 		AM.forceMove(src)
 
 	//Make sure we contain exactly the amount of paper sheets used to wrap ourselves
-	LAZYSET(matter, material.type, wrapping_paper_needed_for_obj(AM) * SHEET_MATERIAL_AMOUNT)
+	LAZYSET(matter, material.type, (AM.wrapping_paper_needed_to_wrap() * SHEET_MATERIAL_AMOUNT))
 	update_icon()
 	update_held_icon()
 	return TRUE

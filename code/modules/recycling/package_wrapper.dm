@@ -1,24 +1,24 @@
+//#TODO: Maybe get the surface area of something instead of using sizes since they're not very accurate
 ///Returns the amount of sheets of wrapping paper that the given object would need to be wrapped.
-/proc/wrapping_paper_needed_for_obj(var/obj/O)
-	if(istype(O))
-		return min(O.w_class, 8) //At most, since 20 sheets is a bit much for structures
+/atom/movable/proc/wrapping_paper_needed_to_wrap()
+	CRASH("Tried to get the amount of paper sheets needed to wrap invalid object type '[type]'.")
 
-	else if(ismob(O))
-		//Mob size is scaled weirdly, so we have to slap it through a switch
-		var/mob/M = O
-		var/nb_sheets = 1
-		switch(M.mob_size)
-			if(MOB_SIZE_LARGE)
-				nb_sheets = 15
-			if(MOB_SIZE_MEDIUM)
-				nb_sheets = 10
-			if(MOB_SIZE_SMALL)
-				nb_sheets = 5
-			if(MOB_SIZE_TINY)
-				nb_sheets = 2
-		return nb_sheets
+/obj/wrapping_paper_needed_to_wrap()
+	return min(w_class, 8) //At most, since 20 sheets is a bit much for structures
 
-	CRASH("Tried to get the amount of paper sheets needed to wrap invalid object type '[O? O.type : "null"]'.")
+/mob/living/wrapping_paper_needed_to_wrap()
+	//Mob size is scaled weirdly, so we have to slap it through a switch
+	var/nb_sheets = 1
+	switch(mob_size)
+		if(MOB_SIZE_LARGE)
+			nb_sheets = 15
+		if(MOB_SIZE_MEDIUM)
+			nb_sheets = 10
+		if(MOB_SIZE_SMALL)
+			nb_sheets = 5
+		if(MOB_SIZE_TINY)
+			nb_sheets = 2
+	return nb_sheets
 
 ///////////////////////////////////////////////////////////////////////////////////////
 // Parcel Wrapper
@@ -56,7 +56,7 @@
 /obj/item/stack/package_wrap/proc/wrap(var/atom/movable/AM, var/mob/user)
 	if(currently_wrapping && user)
 		return
-	var/paper_to_use = wrapping_paper_needed_for_obj(AM)
+	var/paper_to_use = AM.wrapping_paper_needed_to_wrap()
 	if(!can_use(paper_to_use))
 		if(user)
 			to_chat(user, SPAN_WARNING("There isn't enough [plural_name] in \the [src] to wrap \the [AM]!"))
