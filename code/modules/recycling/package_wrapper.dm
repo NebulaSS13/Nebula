@@ -62,7 +62,7 @@
 			to_chat(user, SPAN_WARNING("There isn't enough [plural_name] in \the [src] to wrap \the [AM]!"))
 		return
 	currently_wrapping = TRUE
-	if(!user?.do_skilled(clamp(paper_to_use, 2, 6) SECONDS, SKILL_HAULING, AM))
+	if(user && !user.do_skilled(clamp(paper_to_use, 2, 6) SECONDS, SKILL_HAULING, AM))
 		currently_wrapping = FALSE
 		return
 	. = create_wrapper(AM, user)
