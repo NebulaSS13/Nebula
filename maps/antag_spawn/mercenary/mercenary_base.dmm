@@ -528,6 +528,31 @@
 /obj/structure/cable,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/map_template/merc_shuttle)
+"aX" = (
+/obj/machinery/atmospherics/pipe/simple/visible/fuel{
+	dir = 4
+	},
+/obj/effect/floor_decal/industrial/outline/yellow,
+/obj/abstract/landmark{
+	name = "Nuclear-Bomb"
+	},
+/obj/structure/railing/mapped{
+	dir = 8
+	},
+/obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers,
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/map_template/merc_shuttle/rear)
+"aY" = (
+/obj/effect/wallframe_spawn/reinforced_borosilicate,
+/obj/machinery/door/blast/regular/open{
+	density = 0;
+	dir = 8;
+	icon_state = "pdoor0";
+	id_tag = "merc_fuel"
+	},
+/obj/effect/paint/black,
+/turf/simulated/floor/plating,
+/area/map_template/merc_shuttle/rear)
 "aZ" = (
 /obj/effect/paint/red,
 /obj/machinery/atmospherics/pipe/simple/hidden{
@@ -712,6 +737,13 @@
 	},
 /turf/simulated/wall/r_titanium,
 /area/map_template/merc_shuttle)
+"br" = (
+/obj/structure/cable{
+	icon_state = "4-8"
+	},
+/obj/machinery/atmospherics/binary/passive_gate,
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/map_template/merc_shuttle/rear)
 "bs" = (
 /obj/machinery/shield_diffuser,
 /obj/machinery/door/airlock/external{
@@ -783,7 +815,9 @@
 /obj/item/crowbar,
 /obj/item/crowbar,
 /obj/machinery/button/blast_door{
+	dir = 1;
 	id_tag = "merc_airlock";
+	pixel_y = 8;
 	req_access = list("ACCESS_MERCENARY")
 	},
 /obj/item/binoculars,
@@ -878,18 +912,8 @@
 /turf/simulated/floor/tiled/techfloor,
 /area/map_template/merc_shuttle/rear)
 "bI" = (
-/obj/effect/wallframe_spawn/reinforced_borosilicate,
-/obj/machinery/atmospherics/pipe/manifold/visible/fuel{
-	dir = 4
-	},
-/obj/machinery/door/blast/regular/open{
-	density = 0;
-	dir = 8;
-	icon_state = "pdoor0";
-	id_tag = "merc_fuel"
-	},
-/obj/effect/paint/black,
-/turf/simulated/floor/plating,
+/obj/machinery/atmospherics/pipe/simple/hidden/universal,
+/turf/simulated/floor/tiled/techfloor/grid,
 /area/map_template/merc_shuttle/rear)
 "bJ" = (
 /obj/structure/handrail{
@@ -943,13 +967,6 @@
 	pixel_y = 26
 	},
 /turf/simulated/floor/reinforced/carbon_dioxide,
-/area/map_template/merc_shuttle/rear)
-"bO" = (
-/obj/structure/cable{
-	icon_state = "4-8"
-	},
-/obj/machinery/atmospherics/pipe/simple/hidden/blue,
-/turf/simulated/floor/tiled/techfloor/grid,
 /area/map_template/merc_shuttle/rear)
 "bP" = (
 /obj/structure/cable{
@@ -1019,10 +1036,6 @@
 "bV" = (
 /obj/effect/paint/red,
 /turf/simulated/wall/titanium,
-/area/map_template/merc_shuttle/rear)
-"bW" = (
-/obj/machinery/atmospherics/binary/passive_gate,
-/turf/simulated/floor/tiled/techfloor/grid,
 /area/map_template/merc_shuttle/rear)
 "bX" = (
 /obj/structure/cable{
@@ -1608,22 +1621,6 @@
 /obj/vehicle/bike/electric,
 /turf/simulated/floor/airless,
 /area/space)
-"cW" = (
-/obj/machinery/atmospherics/pipe/simple/visible/fuel{
-	dir = 4
-	},
-/obj/effect/floor_decal/industrial/outline/yellow,
-/obj/abstract/landmark{
-	name = "Nuclear-Bomb"
-	},
-/obj/structure/railing/mapped{
-	dir = 8
-	},
-/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
-	dir = 4
-	},
-/turf/simulated/floor/tiled/techfloor/grid,
-/area/map_template/merc_shuttle/rear)
 "cX" = (
 /obj/structure/handrail{
 	dir = 1
@@ -6944,10 +6941,10 @@ bl
 bv
 aR
 bG
-bO
-bW
+br
+bI
 ci
-cW
+aX
 bF
 bF
 bF
@@ -7147,7 +7144,7 @@ be
 bn
 bx
 bE
-bI
+aY
 bQ
 bY
 ck
