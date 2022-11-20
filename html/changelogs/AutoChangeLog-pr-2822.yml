@@ -1,4 +1,0 @@
-author: PsyCommando
-delete-after: true
-changes:
-  - bugfix: Fix disconnected pipes + blastdoors button on desperado/mercenary base.
