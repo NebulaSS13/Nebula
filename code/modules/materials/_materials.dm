@@ -507,7 +507,8 @@ INITIALIZE_IMMEDIATE(/obj/effect/gas_overlay)
 
 	//If we got more than expected, just make a shard with that amount
 	if(matter_left > 0)
-		var/obj/S = create_object(target, 1, shard_type)
+		var/list/O = create_object(target, 1, shard_type)
+		var/obj/S = O[O.len]
 		LAZYSET(S.matter, type, matter_left)
 		LAZYADD(., S)
 

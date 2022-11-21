@@ -27416,8 +27416,8 @@
 /area/exodus/maintenance/locker)
 "bgj" = (
 /obj/structure/table,
-/obj/item/wrapping_paper,
-/obj/item/wrapping_paper,
+/obj/item/stack/package_wrap/fifty,
+/obj/item/stack/package_wrap/fifty,
 /obj/machinery/network/requests_console{
 	department = "Cargo Bay";
 	pixel_y = 30

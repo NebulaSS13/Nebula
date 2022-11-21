@@ -53,7 +53,7 @@
 		/obj/item/card/id,
 		/obj/item/book,
 		/obj/item/newspaper,
-		/obj/item/smallDelivery,
+		/obj/item/parcel,
 		/obj/item/forensics/sample
 		)
 

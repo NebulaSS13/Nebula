@@ -385,7 +385,7 @@ var/global/list/diversion_junctions = list()
 	for(var/mob/living/silicon/robot/drone/D in stuff)
 		wrapcheck = 1
 
-	for(var/obj/item/smallDelivery/O in stuff)
+	for(var/obj/item/parcel/O in stuff)
 		wrapcheck = 1
 
 	if(wrapcheck == 1)

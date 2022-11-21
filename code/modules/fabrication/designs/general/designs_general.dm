@@ -156,3 +156,8 @@
 
 /datum/fabricator_recipe/emergency_tank
 	path = /obj/item/tank/emergency
+
+/datum/fabricator_recipe/package_wrapper
+	path = /obj/item/stack/package_wrap
+/datum/fabricator_recipe/gift_wrapper
+	path = /obj/item/stack/package_wrap/gift

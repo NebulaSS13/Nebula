@@ -11,7 +11,7 @@
 	. = ..()
 	if(distance <= 1 && !opened)
 		to_chat(user, "The lid is [locked ? "tightly secured with screws." : "unsecured and can be opened."]")
-		
+
 /obj/structure/closet/coffin/can_open()
 	. =  ..()
 	if(locked)
@@ -21,13 +21,14 @@
 	if(!opened && IS_SCREWDRIVER(W))
 		to_chat(user, SPAN_NOTICE("You begin screwing [src]'s lid [locked ? "open" : "shut"]."))
 		playsound(src, 'sound/items/Screwdriver.ogg', 100, 1)
-		if(do_after(user, screwdriver_time_needed, src))	
+		if(do_after(user, screwdriver_time_needed, src))
 			locked = !locked
 			to_chat(user, SPAN_NOTICE("You [locked ? "screw down" : "unscrew"] [src]'s lid."))
 		else
 			to_chat(user, "You must remain still to [locked ? "unlock" : "lock"] [src].")
+		return TRUE
 	else
-		..()
+		return ..()
 
 /obj/structure/closet/coffin/toggle(mob/user)
 	if(!(opened ? close() : open()))
