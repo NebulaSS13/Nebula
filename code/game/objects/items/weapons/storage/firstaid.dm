@@ -192,3 +192,10 @@
 		/obj/item/flame/lighter,
 		/obj/item/stack/cable_coil
 	)
+
+/obj/item/storage/firstaid/clotting
+	name = "clotting kit"
+	desc = "Contains chemicals to stop bleeding."
+
+/obj/item/storage/firstaid/clotting/WillContain()
+	return list(/obj/item/chems/hypospray/autoinjector/clotting = 8)
