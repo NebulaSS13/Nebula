@@ -87,4 +87,15 @@
 	return TRUE
 
 /////////////////////////////////////////////////////////
+// Items shall be destroyed gracefully
 /////////////////////////////////////////////////////////
+/**Damages items to destruction and see if it throws runtimes. Type starts with z so it's run last.*/
+/datum/item_unit_test/volatile/z_items_shall_be_destroyed_gracefully/run_test(var/obj/item/I)
+	try
+		var/damage_dealt = I.can_take_damage() ? (I.max_health + 1) : 9999 //Arbitrary large damage value for invincible things
+		I.take_damage(damage_dealt, BRUTE, 0, "TEST", ARMOR_PIERCING_BYPASSED) //Just let the exception handler do its job
+		. = TRUE
+	catch(var/exception/E)
+		IT.report_failure(src, I.type, "Threw an exception when destroyed by brute damage! '[E]', [E.file]:[E.line].")
+		. = FALSE
+		throw E
