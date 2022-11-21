@@ -44,6 +44,9 @@
 	QDEL_NULL_LIST(ailments)
 	return ..()
 
+/obj/item/organ/proc/on_holder_death(var/gibbed)
+	return
+
 /obj/item/organ/proc/refresh_action_button()
 	return action
 
