@@ -29,8 +29,8 @@ General Public License version 3.
 
 
 <h3 id="modules">Modules
-<aside>(143 modules,
-    46/4164 macros, 1.1%)</aside></h3>
+<aside>(146 modules,
+    46/4165 macros, 1.1%)</aside></h3>
 <ul class="index-tree modules">
     <li><a href="(builtins).html" title="(builtins)">(builtins)</a></li>
     <li class="has-children"><span title="code">code</span><ul class="index-tree">
@@ -226,7 +226,12 @@ Thanks to forum_account for saving the day, the library can be found
     <li><a href="code/modules/reagents/reagent_containers/syringes.html" title="code&#x2F;modules&#x2F;reagents&#x2F;reagent_containers&#x2F;syringes">syringes</a></li>
     </ul></li>
     </ul></li>
-    <li><span class="no-substance">recycling&#x2F;</span><a href="code/modules/recycling/disposalpipe.html" title="code&#x2F;modules&#x2F;recycling&#x2F;disposalpipe">disposalpipe</a></li>
+    <li class="has-children"><span title="code&#x2F;modules&#x2F;recycling">recycling</span><ul class="index-tree">
+    <li><a href="code/modules/recycling/disposalpipe.html" title="code&#x2F;modules&#x2F;recycling&#x2F;disposalpipe">disposalpipe</a></li>
+    <li><a href="code/modules/recycling/package_wrapper.html" title="code&#x2F;modules&#x2F;recycling&#x2F;package_wrapper">package_wrapper</a></li>
+    <li><a href="code/modules/recycling/sort_tag.html" title="code&#x2F;modules&#x2F;recycling&#x2F;sort_tag">sort_tag</a></li>
+    <li><a href="code/modules/recycling/wrapped_package.html" title="code&#x2F;modules&#x2F;recycling&#x2F;wrapped_package">wrapped_package</a></li>
+    </ul></li>
     <li><span class="no-substance">shieldgen&#x2F;</span><a href="code/modules/shieldgen/shieldwallgen.html" title="code&#x2F;modules&#x2F;shieldgen&#x2F;shieldwallgen">shieldwallgen</a></li>
     <li class="has-children"><span title="code&#x2F;modules&#x2F;spells">spells</span><ul class="index-tree">
     <li><span class="no-substance">aoe_turf&#x2F;conjure&#x2F;</span><a href="code/modules/spells/aoe_turf/conjure/construct.html" title="code&#x2F;modules&#x2F;spells&#x2F;aoe_turf&#x2F;conjure&#x2F;construct">construct</a></li>
@@ -261,7 +266,7 @@ Thanks to forum_account for saving the day, the library can be found
 
 
 <h3 id="types">Types
-<aside>(116 detailed/302 documented/17954 total, 1.7%)</aside></h3>
+<aside>(120 detailed/308 documented/17959 total, 1.7%)</aside></h3>
 <ul class="index-tree">
     <li><a href="global.html" title="(global)">(global)</a></li>
     <li><a href="area.html" title="&#x2F;area">area</a></li>
@@ -343,6 +348,7 @@ To remove:
 remove_extension(atom, /datum/extension/scent)<ul class="index-tree">
     <li><a href="datum/extension/scent/custom.html" title="&#x2F;datum&#x2F;extension&#x2F;scent&#x2F;custom">custom</a></li>
     </ul></li>
+    <li><a href="datum/extension/sorting_tag.html" title="&#x2F;datum&#x2F;extension&#x2F;sorting_tag">sorting_tag</a> - Sorting tag for the sorting machinery.</li>
     <li><a href="datum/extension/tool.html" title="&#x2F;datum&#x2F;extension&#x2F;tool">tool</a></li>
     </ul></li>
     <li><span class="no-substance" title="&#x2F;datum&#x2F;follow_holder">follow_holder</span> - Follow Metadata</li>
@@ -555,6 +561,7 @@ Parameters: var/obj/item/card/id</li>
     <li><span class="no-substance" title="&#x2F;obj&#x2F;item&#x2F;borg&#x2F;overdrive">overdrive</span> - Cyborg Spec Items</li>
     <li><span class="no-substance" title="&#x2F;obj&#x2F;item&#x2F;borg&#x2F;sight">sight</span> - HUD/SIGHT things</li>
     </ul></li>
+    <li><span class="no-substance" title="&#x2F;obj&#x2F;item&#x2F;c_tube">c_tube</span> - Basically a trash item left from using paper rolls.</li>
     <li class="has-children"><span class="no-substance" title="&#x2F;obj&#x2F;item&#x2F;camera">camera</span> - camera<ul class="index-tree">
     <li><span class="no-substance" title="&#x2F;obj&#x2F;item&#x2F;camera&#x2F;siliconcam">siliconcam</span> - AI-specific</li>
     </ul></li>
@@ -590,6 +597,7 @@ Parameters: var/obj/item/card/id</li>
     <li><a href="obj/item/chems/weldpack.html" title="&#x2F;obj&#x2F;item&#x2F;chems&#x2F;weldpack">weldpack</a></li>
     </ul></li>
     <li><a href="obj/item/clothing.html" title="&#x2F;obj&#x2F;item&#x2F;clothing">clothing</a></li>
+    <li><a href="obj/item/destTagger.html" title="&#x2F;obj&#x2F;item&#x2F;destTagger">destTagger</a></li>
     <li><span class="no-substance">dice&#x2F;d20&#x2F;</span><span class="no-substance" title="&#x2F;obj&#x2F;item&#x2F;dice&#x2F;d20&#x2F;cursed">cursed</span> - Cursed Dice</li>
     <li><a href="obj/item/disk.html" title="&#x2F;obj&#x2F;item&#x2F;disk">disk</a></li>
     <li><span class="no-substance">flame&#x2F;lighter&#x2F;</span><span class="no-substance" title="&#x2F;obj&#x2F;item&#x2F;flame&#x2F;lighter&#x2F;zippo">zippo</span> - Zippo</li>
@@ -616,6 +624,7 @@ Parameters: var/obj/item/card/id</li>
     <li><span class="no-substance" title="&#x2F;obj&#x2F;item&#x2F;paper&#x2F;cig">cig</span> - Ported Straight from TG. I am not sorry. - BloodyMan  //YOU SHOULD BE</li>
     </ul></li>
     <li><a href="obj/item/paper_bundle.html" title="&#x2F;obj&#x2F;item&#x2F;paper_bundle">paper_bundle</a></li>
+    <li><a href="obj/item/parcel.html" title="&#x2F;obj&#x2F;item&#x2F;parcel">parcel</a> - A parcel wrapper for items and structures that can be wrapped in wrapping paper.</li>
     <li><span class="no-substance" title="&#x2F;obj&#x2F;item&#x2F;photo">photo</span> - photo</li>
     <li><span class="no-substance" title="&#x2F;obj&#x2F;item&#x2F;pickaxe">pickaxe</span> - 'pickaxes' but theyre drills actually</li>
     <li><span class="no-substance">radio&#x2F;</span><span class="no-substance" title="&#x2F;obj&#x2F;item&#x2F;radio&#x2F;borg">borg</span> - Borg Radios</li>
@@ -623,6 +632,9 @@ Parameters: var/obj/item/card/id</li>
     <li><span class="no-substance" title="&#x2F;obj&#x2F;item&#x2F;shovel">shovel</span> - Shovel</li>
     <li class="has-children"><a href="obj/item/stack.html" title="&#x2F;obj&#x2F;item&#x2F;stack">stack</a><ul class="index-tree">
     <li><span class="no-substance">material&#x2F;</span><a href="obj/item/stack/material/ore.html" title="&#x2F;obj&#x2F;item&#x2F;stack&#x2F;material&#x2F;ore">ore</a></li>
+    <li class="has-children"><a href="obj/item/stack/package_wrap.html" title="&#x2F;obj&#x2F;item&#x2F;stack&#x2F;package_wrap">package_wrap</a><ul class="index-tree">
+    <li><span class="no-substance" title="&#x2F;obj&#x2F;item&#x2F;stack&#x2F;package_wrap&#x2F;gift">gift</span> - Variant of the wrapping paper that result in gift wrapped items.</li>
+    </ul></li>
     <li class="has-children"><span title="&#x2F;obj&#x2F;item&#x2F;stack&#x2F;tape_roll">tape_roll</span> - Base class for all things tape, with a limit amount of uses.<ul class="index-tree">
     <li><a href="obj/item/stack/tape_roll/barricade_tape.html" title="&#x2F;obj&#x2F;item&#x2F;stack&#x2F;tape_roll&#x2F;barricade_tape">barricade_tape</a></li>
     </ul></li>
@@ -719,7 +731,7 @@ Parameters: var/obj/item/card/id</li>
 </main>
 <footer>
     nebula.dme
-    <a href="https://github.com/NebulaSS13/Nebula/tree/55e4f163e897f97ee118878a66f99541341a9f82">55e4f16</a>
+    <a href="https://github.com/NebulaSS13/Nebula/tree/53ac4b5c52dcdfeddf3f20808f9f050e5cf8c55a">53ac4b5</a>
         (dev) &mdash; <a href="https://github.com/SpaceManiac/SpacemanDMM/blob/master/src/dmdoc/README.md">dmdoc 1.4.1</a></footer>
 </body>
 </html>
