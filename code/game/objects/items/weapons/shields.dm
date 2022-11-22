@@ -164,6 +164,7 @@
 	var/shield_light_color = "#006aff"
 
 /obj/item/shield/energy/Initialize()
+	set_extension(src, /datum/extension/base_icon_state, copytext(initial(icon_state), 1, length(initial(icon_state))))
 	. = ..()
 	update_icon()
 
@@ -213,9 +214,8 @@
 
 /obj/item/shield/energy/on_update_icon()
 	. = ..()
-	var/base_name = initial(icon_state)
-	base_name = copytext(base_name, 1, length(base_name)) //Cut the 0 at the end of the initial string
-	icon_state = "[base_name][active]" 	//Replace 0 with current state
+	var/datum/extension/base_icon_state/base_name = get_extension(src, /datum/extension/base_icon_state)
+	icon_state = "[base_name.base_icon_state][active]" 	//Replace 0 with current state
 	if(active)
 		set_light(1.5, 1.5, shield_light_color)
 	else
