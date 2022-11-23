@@ -461,6 +461,7 @@
 	exoplanet_rarity = MAT_RARITY_NOWHERE
 	icon_base = 'icons/turf/walls/solid.dmi'
 	icon_reinf = 'icons/turf/walls/reinforced.dmi'
+	use_reinf_state = null
 	wall_flags = PAINT_PAINTABLE|PAINT_STRIPABLE|WALL_HAS_EDGES
 
 // Likewise.
