@@ -1,4 +1,0 @@
-author: PsyCommando
-delete-after: true
-changes:
-  - bugfix: Fixed /obj/item/chems being shattered in nullspace causing a runtime.
