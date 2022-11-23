@@ -220,7 +220,7 @@
 
 /obj/item/robot_parts/robot_component/take_damage(amount, damtype, silent)
 	switch(damtype)
-		if(BURN || ELECTROCUTE)
+		if(BURN, ELECTROCUTE)
 			burn += amount
 		if(BRUTE)
 			brute += amount
