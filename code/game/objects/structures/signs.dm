@@ -86,6 +86,7 @@
 /obj/structure/sign/warning
 	name = "\improper WARNING"
 	icon_state = "securearea"
+	directional_offset = "{'NORTH':{'y':-32}, 'SOUTH':{'y':32}, 'WEST':{'x':34}, 'EAST':{'x':-34}}"
 
 /obj/structure/sign/warning/detailed
 	icon_state = "securearea2"

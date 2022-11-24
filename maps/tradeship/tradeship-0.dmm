@@ -163,15 +163,19 @@
 /turf/simulated/floor/plating,
 /area/ship/trade/livestock)
 "au" = (
-/obj/effect/floor_decal/industrial/warning{
-	dir = 9;
-	icon_state = "warning"
+/obj/structure/cable{
+	icon_state = "4-8"
 	},
-/obj/machinery/door/airlock/external/bolted{
-	id_tag = "lower_cargo_in";
-	name = "Internal Cargo Airlock"
+/obj/effect/floor_decal/corner/beige{
+	dir = 10
 	},
-/turf/simulated/floor/tiled/techfloor/grid,
+/obj/machinery/atmospherics/pipe/simple/hidden{
+	dir = 4
+	},
+/obj/structure/cable{
+	icon_state = "2-8"
+	},
+/turf/simulated/floor/tiled/steel_grid,
 /area/ship/trade/loading_bay)
 "av" = (
 /obj/effect/floor_decal/industrial/warning{
@@ -186,19 +190,23 @@
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/ship/trade/loading_bay)
 "aw" = (
-/obj/effect/floor_decal/industrial/warning{
-	dir = 9;
-	icon_state = "warning"
+/obj/structure/cable{
+	icon_state = "4-8"
 	},
-/obj/machinery/atmospherics/unary/vent_pump/high_volume/external_air{
-	dir = 4;
-	id_tag = "lower_cargo_pump"
+/obj/effect/floor_decal/corner/beige{
+	dir = 10
 	},
-/obj/machinery/airlock_sensor{
-	id_tag = "lower_cargo_sensor";
-	pixel_x = -20
+/obj/machinery/atmospherics/pipe/simple/hidden{
+	dir = 4
 	},
-/turf/simulated/floor/tiled/techfloor/grid,
+/obj/effect/decal/cleanable/dirt,
+/obj/machinery/button/access/interior{
+	dir = 1;
+	id_tag = "lower_cargo";
+	pixel_y = 0;
+	pixel_z = 0
+	},
+/turf/simulated/floor/tiled/steel_grid,
 /area/ship/trade/loading_bay)
 "ax" = (
 /obj/item/stool/padded,
@@ -209,12 +217,16 @@
 /turf/simulated/floor/tiled,
 /area/ship/trade/disused)
 "ay" = (
-/obj/effect/floor_decal/industrial/warning/corner{
-	dir = 1;
-	icon_state = "warningcorner"
+/obj/effect/floor_decal/industrial/warning{
+	dir = 9;
+	icon_state = "warning"
 	},
-/obj/machinery/atmospherics/pipe/simple/hidden{
-	dir = 4
+/obj/machinery/door/airlock/external/bolted{
+	id_tag = "lower_cargo_in";
+	name = "Internal Cargo Airlock"
+	},
+/obj/structure/cable{
+	icon_state = "1-2"
 	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/ship/trade/loading_bay)
@@ -232,21 +244,17 @@
 /area/ship/trade/disused)
 "aA" = (
 /obj/effect/floor_decal/industrial/warning{
-	dir = 5;
+	dir = 9;
 	icon_state = "warning"
 	},
 /obj/machinery/atmospherics/unary/vent_pump/high_volume/external_air{
-	dir = 8;
+	dir = 4;
 	id_tag = "lower_cargo_pump"
 	},
-/obj/machinery/embedded_controller/radio/airlock/airlock_controller{
-	dir = 8;
-	id_tag = "lower_cargo";
-	pixel_x = 25;
-	tag_airpump = "lower_cargo_pump";
-	tag_chamber_sensor = "lower_cargo_sensor";
-	tag_exterior_door = "lower_cargo_out";
-	tag_interior_door = "lower_cargo_in"
+/obj/machinery/airlock_sensor{
+	dir = 4;
+	id_tag = "lower_cargo_sensor";
+	pixel_x = 0
 	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/ship/trade/loading_bay)
@@ -266,8 +274,15 @@
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/ship/trade/loading_bay)
 "aC" = (
+/obj/effect/floor_decal/industrial/warning/corner{
+	dir = 1;
+	icon_state = "warningcorner"
+	},
 /obj/machinery/atmospherics/pipe/simple/hidden{
 	dir = 4
+	},
+/obj/structure/cable{
+	icon_state = "1-2"
 	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/ship/trade/loading_bay)
@@ -343,12 +358,11 @@
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/ship/trade/loading_bay)
 "aK" = (
-/obj/effect/floor_decal/industrial/warning/corner{
-	dir = 8;
-	icon_state = "warningcorner"
-	},
 /obj/machinery/atmospherics/pipe/simple/hidden{
 	dir = 4
+	},
+/obj/structure/cable{
+	icon_state = "1-2"
 	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/ship/trade/loading_bay)
@@ -364,22 +378,27 @@
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/ship/trade/loading_bay)
 "aM" = (
-/obj/effect/floor_decal/industrial/warning{
-	dir = 10;
-	icon_state = "warning"
+/obj/effect/floor_decal/industrial/warning/corner{
+	dir = 8;
+	icon_state = "warningcorner"
 	},
-/obj/machinery/door/airlock/external/bolted{
-	id_tag = "lower_cargo_out";
-	name = "External Cargo Airlock"
+/obj/machinery/atmospherics/pipe/simple/hidden{
+	dir = 4
+	},
+/obj/structure/cable{
+	icon_state = "1-2"
 	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/ship/trade/loading_bay)
 "aN" = (
 /obj/effect/floor_decal/industrial/warning{
-	dir = 6;
+	dir = 10;
 	icon_state = "warning"
 	},
-/obj/machinery/door/airlock/external/bolted{
+/obj/structure/cable{
+	icon_state = "1-2"
+	},
+/obj/machinery/door/airlock/external/glass/bolted{
 	id_tag = "lower_cargo_out";
 	name = "External Cargo Airlock"
 	},
@@ -506,6 +525,26 @@
 /obj/machinery/door/firedoor/autoset,
 /turf/simulated/floor/plating,
 /area/ship/trade/aft_starboard_underside_maint)
+"ba" = (
+/obj/effect/floor_decal/industrial/warning{
+	dir = 5;
+	icon_state = "warning"
+	},
+/obj/machinery/atmospherics/unary/vent_pump/high_volume/external_air{
+	dir = 8;
+	id_tag = "lower_cargo_pump"
+	},
+/obj/machinery/embedded_controller/radio/airlock/airlock_controller{
+	dir = 8;
+	id_tag = "lower_cargo";
+	pixel_x = 0;
+	tag_airpump = "lower_cargo_pump";
+	tag_chamber_sensor = "lower_cargo_sensor";
+	tag_exterior_door = "lower_cargo_out";
+	tag_interior_door = "lower_cargo_in"
+	},
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/ship/trade/loading_bay)
 "bb" = (
 /obj/effect/floor_decal/industrial/warning/corner{
 	dir = 8;
@@ -513,6 +552,32 @@
 	},
 /turf/simulated/floor,
 /area/ship/trade/loading_bay)
+"bc" = (
+/obj/effect/floor_decal/industrial/warning{
+	dir = 6;
+	icon_state = "warning"
+	},
+/obj/machinery/door/airlock/external/glass/bolted{
+	id_tag = "lower_cargo_out";
+	name = "External Cargo Airlock"
+	},
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/ship/trade/loading_bay)
+"bd" = (
+/obj/machinery/button/access/exterior/cabled{
+	id_tag = "lower_cargo"
+	},
+/obj/structure/cable{
+	icon_state = "0-4"
+	},
+/turf/simulated/floor/airless,
+/area/space)
+"be" = (
+/obj/structure/cable{
+	icon_state = "1-8"
+	},
+/turf/simulated/floor/airless,
+/area/space)
 "bg" = (
 /obj/effect/floor_decal/industrial/warning{
 	dir = 1;
@@ -763,18 +828,6 @@
 	},
 /turf/simulated/floor/tiled,
 /area/ship/trade/loading_bay)
-"bO" = (
-/obj/structure/cable{
-	icon_state = "4-8"
-	},
-/obj/effect/floor_decal/corner/beige{
-	dir = 10
-	},
-/obj/machinery/atmospherics/pipe/simple/hidden{
-	dir = 4
-	},
-/turf/simulated/floor/tiled/steel_grid,
-/area/ship/trade/loading_bay)
 "bP" = (
 /obj/structure/cable{
 	icon_state = "4-8"
@@ -960,24 +1013,6 @@
 /obj/item/minihoe,
 /turf/simulated/floor,
 /area/ship/trade/aft_starboard_underside_maint)
-"cI" = (
-/obj/structure/cable{
-	icon_state = "4-8"
-	},
-/obj/effect/floor_decal/corner/beige{
-	dir = 10
-	},
-/obj/machinery/atmospherics/pipe/simple/hidden{
-	dir = 4
-	},
-/obj/effect/decal/cleanable/dirt,
-/obj/machinery/button/access/interior{
-	id_tag = "lower_cargo";
-	pixel_y = 12;
-	pixel_z = -33
-	},
-/turf/simulated/floor/tiled/steel_grid,
-/area/ship/trade/loading_bay)
 "cX" = (
 /obj/machinery/alarm{
 	dir = 4;
@@ -2028,14 +2063,6 @@
 /obj/machinery/door/firedoor,
 /turf/simulated/floor/plating,
 /area/ship/trade/loading_bay)
-"SK" = (
-/obj/machinery/button/access/exterior{
-	id_tag = "lower_cargo";
-	pixel_y = -10;
-	pixel_z = 32
-	},
-/turf/simulated/floor/airless,
-/area/space)
 "SS" = (
 /obj/item/radio/intercom{
 	pixel_y = 25
@@ -5253,13 +5280,13 @@ ao
 yO
 aI
 pi
-cI
-yO
 aw
+yO
+aA
 aB
 aJ
 qK
-SK
+bd
 aa
 aa
 aa
@@ -5335,13 +5362,13 @@ bL
 II
 bz
 yQ
-bO
 au
 ay
 aC
 aK
 aM
-ai
+aN
+be
 aa
 aa
 aa
@@ -5422,7 +5449,7 @@ av
 aD
 aO
 aP
-aN
+bc
 ai
 aa
 aa
@@ -5501,7 +5528,7 @@ aI
 JI
 bQ
 aX
-aA
+ba
 aE
 aL
 aX
