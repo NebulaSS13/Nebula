@@ -54,6 +54,9 @@
 	if(!gibbed && deathmessage != "no message") // This is gross, but reliable. Only brains use it.
 		src.visible_message("<b>\The [src.name]</b> [deathmessage]")
 
+	for(var/obj/item/organ/O in get_organs())
+		O.on_holder_death(gibbed)
+
 	set_stat(DEAD)
 	adjust_stamina(-100)
 	reset_plane_and_layer()
