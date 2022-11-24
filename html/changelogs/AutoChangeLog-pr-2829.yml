@@ -1,0 +1,5 @@
+author: PsyCommando
+delete-after: true
+changes:
+  - bugfix: Fixed bad switch case in robot_component/take_damage() causing BURN and
+      ELECTROCUTE damage to get ignored.
