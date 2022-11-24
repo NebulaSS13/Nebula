@@ -16,7 +16,7 @@
 <h1>obj <aside>/<a href="obj.html">obj</a></aside><aside> inherits /<a href="atom.html">atom</a>/<a href="atom/movable.html">movable</a></aside>
         
     
-            <a href="https://github.com/NebulaSS13/Nebula/blob/3f180d7f4c83e4ad2d748e2f0bab5e4e38dee04b/code/game/atoms_temperature.dm#L12">
+            <a href="https://github.com/NebulaSS13/Nebula/blob/f86ef5c43e549574bdac08d49c5d3801ff0ce33d/code/game/atoms_temperature.dm#L12">
         <img src="git.png" width="16" height="16" title="code&#x2F;game&#x2F;atoms_temperature.dm 12"/></a></h1>
 
 <table class="summary" cellspacing="0"><tr><td colspan="2"><h2>Procs</h2></td></tr>
@@ -36,7 +36,7 @@ An alternative to using a list for defining our starting reagents since apparent
 force will force the default offset to be 0 if there are no directional_offset string.</td></tr></table><h2 id="proc">Proc Details</h2><h3 id="proc/WillContain"><aside class="declaration">proc </aside>WillContain<aside>() 
         
     
-            <a href="https://github.com/NebulaSS13/Nebula/blob/3f180d7f4c83e4ad2d748e2f0bab5e4e38dee04b/code/game/objects/objs.dm#L271">
+            <a href="https://github.com/NebulaSS13/Nebula/blob/f86ef5c43e549574bdac08d49c5d3801ff0ce33d/code/game/objects/objs.dm#L271">
         <img src="git.png" width="16" height="16" title="code&#x2F;game&#x2F;objects&#x2F;objs.dm 271"/></a></aside>
         </h3>
         <p>Returns a list with the contents that may be spawned in this object.
@@ -44,20 +44,20 @@ This shouldn't include things that are necessary for the object to operate, like
 Its mainly for populating storage and the like.</p><h3 id="proc/hitby">hitby<aside>(/<a href="atom.html">atom</a>/<a href="atom/movable.html">movable</a>/AM, /<a href="datum.html">datum</a>/thrownthing/TT) 
         
     
-            <a href="https://github.com/NebulaSS13/Nebula/blob/3f180d7f4c83e4ad2d748e2f0bab5e4e38dee04b/code/game/objects/objs.dm#L22">
+            <a href="https://github.com/NebulaSS13/Nebula/blob/f86ef5c43e549574bdac08d49c5d3801ff0ce33d/code/game/objects/objs.dm#L22">
         <img src="git.png" width="16" height="16" title="code&#x2F;game&#x2F;objects&#x2F;objs.dm 22"/></a></aside>
         </h3>
         <p>JSON list of directions to x,y offsets to be applied to the object depending on its direction EX: {'NORTH':{'x':12,'y':5}, 'EAST':{'x':10,'y':50}}</p><h3 id="proc/initialize_reagents"><aside class="declaration">proc </aside>initialize_reagents<aside>(populate) 
         
     
-            <a href="https://github.com/NebulaSS13/Nebula/blob/3f180d7f4c83e4ad2d748e2f0bab5e4e38dee04b/code/game/objects/objs.dm#L251">
+            <a href="https://github.com/NebulaSS13/Nebula/blob/f86ef5c43e549574bdac08d49c5d3801ff0ce33d/code/game/objects/objs.dm#L251">
         <img src="git.png" width="16" height="16" title="code&#x2F;game&#x2F;objects&#x2F;objs.dm 251"/></a></aside>
         </h3>
         <p>Init starting reagents and/or reagent var. Not called at the /obj level.
 populate: If set to true, we expect map load/admin spawned reagents to be set.</p><h3 id="proc/is_wall_mounted"><aside class="declaration">proc </aside>is_wall_mounted<aside>() 
         
     
-            <a href="https://github.com/NebulaSS13/Nebula/blob/3f180d7f4c83e4ad2d748e2f0bab5e4e38dee04b/code/game/objects/objs.dm#L235">
+            <a href="https://github.com/NebulaSS13/Nebula/blob/f86ef5c43e549574bdac08d49c5d3801ff0ce33d/code/game/objects/objs.dm#L235">
         <img src="git.png" width="16" height="16" title="code&#x2F;game&#x2F;objects&#x2F;objs.dm 235"/></a></aside>
         </h3>
         <p>Returns whether the object should be considered as hanging off a wall. 
@@ -65,7 +65,7 @@ This is userful because wall-mounted things are actually on the adjacent floor t
 Which means we have to deal with directional offsets differently. Such as with buttons mounted on a table, or on a wall.</p><h3 id="proc/populate_reagents"><aside class="declaration">proc </aside>populate_reagents<aside>() 
         
     
-            <a href="https://github.com/NebulaSS13/Nebula/blob/3f180d7f4c83e4ad2d748e2f0bab5e4e38dee04b/code/game/objects/objs.dm#L263">
+            <a href="https://github.com/NebulaSS13/Nebula/blob/f86ef5c43e549574bdac08d49c5d3801ff0ce33d/code/game/objects/objs.dm#L263">
         <img src="git.png" width="16" height="16" title="code&#x2F;game&#x2F;objects&#x2F;objs.dm 263"/></a></aside>
         </h3>
         <p>Actually populates the reagents.
@@ -73,14 +73,14 @@ Can be easily nulled out or fully overriden without having to rewrite the comple
 An alternative to using a list for defining our starting reagents since apparently overriding the value of a list creates an (init) proc each time.</p><h3 id="proc/update_directional_offset"><aside class="declaration">proc </aside>update_directional_offset<aside>(force) 
         
     
-            <a href="https://github.com/NebulaSS13/Nebula/blob/3f180d7f4c83e4ad2d748e2f0bab5e4e38dee04b/code/game/objects/objs.dm#L212">
+            <a href="https://github.com/NebulaSS13/Nebula/blob/f86ef5c43e549574bdac08d49c5d3801ff0ce33d/code/game/objects/objs.dm#L212">
         <img src="git.png" width="16" height="16" title="code&#x2F;game&#x2F;objects&#x2F;objs.dm 212"/></a></aside>
         </h3>
         <p>Applies the offset stored in the directional_offset json list depending on the current direction.
 force will force the default offset to be 0 if there are no directional_offset string.</p></main>
 <footer>
     nebula.dme
-    <a href="https://github.com/NebulaSS13/Nebula/tree/3f180d7f4c83e4ad2d748e2f0bab5e4e38dee04b">3f180d7</a>
+    <a href="https://github.com/NebulaSS13/Nebula/tree/f86ef5c43e549574bdac08d49c5d3801ff0ce33d">f86ef5c</a>
         (dev) &mdash; <a href="https://github.com/SpaceManiac/SpacemanDMM/blob/master/src/dmdoc/README.md">dmdoc 1.4.1</a></footer>
 </body>
 </html>
