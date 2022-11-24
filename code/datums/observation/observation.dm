@@ -61,7 +61,7 @@
 	var/expected_type = /datum          // The expected event source for this event. register() will CRASH() if it receives an unexpected type.
 	var/list/event_sources = list()     // Associative list of event sources, each with their own associative list. This associative list contains an instance/list of procs to call when the event is raised.
 	var/list/global_listeners = list()  // Associative list of instances that listen to all events of this type (as opposed to events belonging to a specific source) and the proc to call.
-	var/flags                           // See _defines.dm for available flags and what they do
+	VAR_PROTECTED/flags                 // See _defines.dm for available flags and what they do
 
 /decl/observ/Initialize()
 	. = ..()
