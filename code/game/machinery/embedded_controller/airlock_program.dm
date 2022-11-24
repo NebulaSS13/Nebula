@@ -259,8 +259,7 @@
 						signalPump(tag_pump_out_external, 0)
 				else
 					cycleDoors(target_state)
-					state = STATE_IDLE
-					target_state = TARGET_NONE
+					stop_cycling()
 
 
 		if(STATE_DEPRESSURIZE)
@@ -278,8 +277,7 @@
 							state = STATE_PREPARE
 					else
 						cycleDoors(target_state)
-						state = STATE_IDLE
-						target_state = TARGET_NONE
+						stop_cycling()
 
 
 	memory["processing"] = (state != target_state)
@@ -374,9 +372,25 @@
 
 /datum/computer/file/embedded_program/proc/signalCycling(var/cycling = TRUE)
 	var/datum/signal/signal = new
-	signal.data["tag"] = tag
+	//Send signal to buttons first
+	signal.data["tag"] = id_tag
 	signal.data["set_airlock_cycling"] = cycling
-	post_signal(signal, tag)
+	post_signal(signal)
+
+/datum/computer/file/embedded_program/airlock/signalCycling(cycling = TRUE)
+	. = ..()
+	var/datum/signal/signal = new
+	signal.data["set_airlock_cycling"] = cycling
+	//Send signal to sensors
+	if(length(tag_chamber_sensor))
+		signal.data["tag"] = tag_chamber_sensor
+		post_signal(signal)
+	if(length(tag_interior_sensor))
+		signal.data["tag"] = tag_interior_sensor
+		post_signal(signal)
+	if(length(tag_exterior_sensor))
+		signal.data["tag"] = tag_exterior_sensor
+		post_signal(signal)
 
 /*----------------------------------------------------------
 toggleDoor()

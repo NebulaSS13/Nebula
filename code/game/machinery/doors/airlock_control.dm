@@ -104,7 +104,10 @@
 		/decl/public_access/public_variable/set_airlock_cycling/airlock_sensor
 	)
 	public_methods = list(/decl/public_access/public_method/toggle_input_toggle)
-	stock_part_presets = list(/decl/stock_part_preset/radio/basic_transmitter/airlock_sensor = 1, /decl/stock_part_preset/radio/receiver/airlock_sensor = 1)
+	stock_part_presets = list(
+		/decl/stock_part_preset/radio/basic_transmitter/airlock_sensor = 1,
+		/decl/stock_part_preset/radio/receiver/airlock_sensor = 1
+	)
 	uncreated_component_parts = list(
 		/obj/item/stock_parts/power/apc,
 		/obj/item/stock_parts/radio/transmitter/basic/buildable,
@@ -132,11 +135,12 @@
 	if(inoperable() || !use_power)
 		set_light(0)
 		return
-	if(alert)
-		add_overlay("sensor_light_alert")
-		set_light(l_range = 1, l_power = 0.2, l_color = "#ff0000")
-	else if(master_cycling)
+	//Cycling takes priority over alert
+	if(master_cycling)
 		add_overlay("sensor_light_cycle")
+		set_light(l_range = 1, l_power = 0.2, l_color = "#ff0000")
+	else if(alert)
+		add_overlay("sensor_light_alert")
 		set_light(l_range = 1, l_power = 0.2, l_color = "#ff0000")
 	else
 		add_overlay("sensor_light_standby")
