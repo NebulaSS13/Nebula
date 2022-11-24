@@ -116,7 +116,7 @@
 	base_type = /obj/machinery/airlock_sensor/buildable
 	construct_state = /decl/machine_construction/wall_frame/panel_closed/simple
 	frame_type = /obj/item/frame/button/airlock_sensor
-	directional_offset = "{'NORTH':{'y':-32}, 'SOUTH':{'y':32}, 'EAST':{'x':32}, 'WEST':{'x':-32}}"
+	directional_offset = "{'NORTH':{'y':-20}, 'SOUTH':{'y':24}, 'EAST':{'x':-22}, 'WEST':{'x':22}}"
 	var/alert = FALSE
 	var/master_cycling = FALSE
 	var/pressure
@@ -235,7 +235,7 @@
 		/obj/item/stock_parts/radio/transmitter/on_event/buildable,
 		/obj/item/stock_parts/radio/receiver/buildable,
 	)
-	directional_offset = "{'NORTH':{'y':-32}, 'SOUTH':{'y':32}, 'EAST':{'x':32}, 'WEST':{'x':-32}}"
+	directional_offset = "{'NORTH':{'y':-22}, 'SOUTH':{'y':24}, 'EAST':{'x':-20}, 'WEST':{'x':20}}"
 	frame_type = /obj/item/frame/button/access
 	base_type = /obj/machinery/button/access/buildable
 	var/command = "cycle"
