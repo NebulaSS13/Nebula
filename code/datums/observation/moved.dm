@@ -11,7 +11,7 @@
 /decl/observ/moved
 	name = "Moved"
 	expected_type = /atom/movable
-	flags = OBSERVATION_NO_GLOBAL_REGISTRATIONS
+	//flags = OBSERVATION_NO_GLOBAL_REGISTRATIONS // Uncomment this line when waddling does not rely on global moved
 
 /decl/observ/moved/register(var/atom/movable/mover, var/datum/listener, var/proc_call)
 	. = ..()
