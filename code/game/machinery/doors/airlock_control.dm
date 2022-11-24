@@ -287,6 +287,18 @@
 /obj/machinery/button/access/exterior
 	command = "cycle_exterior"
 
+/obj/machinery/button/access/exterior/cabled
+	uncreated_component_parts = list(
+		/obj/item/stock_parts/power/terminal,
+		/obj/item/stock_parts/radio/transmitter/on_event/buildable,
+		/obj/item/stock_parts/radio/receiver/buildable,
+	)
+	stock_part_presets = list(
+		/decl/stock_part_preset/radio/event_transmitter/access_button = 1,
+		/decl/stock_part_preset/radio/receiver/access_button = 1,
+		/decl/stock_part_preset/terminal_setup,
+	)
+
 /obj/machinery/button/access/shuttle
 	stock_part_presets = list(
 		/decl/stock_part_preset/radio/event_transmitter/access_button/shuttle = 1
