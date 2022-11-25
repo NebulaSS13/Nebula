@@ -131,8 +131,8 @@
 		if(prob(75))
 			target.emote("scream")
 		for(var/bp in target.held_item_slots)
-			var/datum/inventory_slot/inv_slot = target.held_item_slots[bp]
-			if(inv_slot?.holding?.simulated && prob(75) && target.unEquip(inv_slot.holding))
+			var/obj/item/thing = target.get_equipped_item(bp)
+			if(thing?.simulated && prob(75) && target.unEquip(thing))
 				var/obj/item/organ/external/E = GET_EXTERNAL_ORGAN(target, bp)
 				target.visible_message(SPAN_DANGER("\The [target] drops what they were holding as their [E ? E.name : "hand"] spasms!"))
 		return TRUE

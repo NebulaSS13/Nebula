@@ -89,11 +89,10 @@ var/global/list/sparring_attack_cache = list()
 					check_zone = BP_L_HAND
 				else if(check_zone == BP_R_ARM)
 					check_zone = BP_R_HAND
-				var/datum/inventory_slot/inv_slot = LAZYACCESS(target.held_item_slots, check_zone)
-				if(inv_slot?.holding)
-					// Disarm left hand
-					target.visible_message(SPAN_DANGER("\The [inv_slot.holding] was knocked right out of [target]'s grasp!"))
-					target.drop_from_inventory(inv_slot.holding)
+				var/equipped = target.get_equipped_item(check_zone)
+				if(equipped)
+					target.visible_message(SPAN_DANGER("\The [equipped] was knocked right out of [target]'s grasp!"))
+					target.drop_from_inventory(equipped)
 			if(BP_CHEST)
 				if(!target.lying)
 					var/turf/T = get_step(get_turf(target), get_dir(get_turf(user), get_turf(target)))

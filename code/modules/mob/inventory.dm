@@ -46,26 +46,6 @@
 		return equip_to_storage_or_drop(W)
 	return store
 
-//The list of slots by priority. equip_to_appropriate_slot() uses this list. Doesn't matter if a mob type doesn't have a slot.
-var/global/list/slot_equipment_priority = list( \
-		slot_back_str,\
-		slot_wear_id_str,\
-		slot_w_uniform_str,\
-		slot_wear_suit_str,\
-		slot_wear_mask_str,\
-		slot_head_str,\
-		slot_shoes_str,\
-		slot_gloves_str,\
-		slot_l_ear_str,\
-		slot_r_ear_str,\
-		slot_glasses_str,\
-		slot_belt_str,\
-		slot_s_store_str,\
-		slot_tie_str,\
-		slot_l_store_str,\
-		slot_r_store_str\
-	)
-
 //Checks if a given slot can be accessed at this time, either to equip or unequip I
 /mob/proc/slot_is_accessible(var/slot, var/obj/item/I, mob/user=null)
 	return 1
@@ -75,7 +55,7 @@ var/global/list/slot_equipment_priority = list( \
 /mob/proc/equip_to_appropriate_slot(obj/item/W, var/skip_store = 0)
 	if(!istype(W))
 		return FALSE
-	for(var/slot in slot_equipment_priority)
+	for(var/slot in global.slot_equipment_priority)
 		if(skip_store)
 			if(slot == slot_s_store_str || slot == slot_l_store_str || slot == slot_r_store_str)
 				continue
