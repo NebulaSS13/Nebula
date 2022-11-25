@@ -70,7 +70,7 @@
 /obj/item/clothing/head/headphones/proc/play_music(mob/user)
 	if(!user || !user.client)
 		return
-	if(!(user.get_inventory_slot(src) in list(slot_l_ear_str, slot_r_ear_str)))
+	if(!(user.get_equipped_slot_for_item(src) in list(slot_l_ear_str, slot_r_ear_str)))
 		return
 	if(current_track)
 		var/decl/music_track/track = GET_DECL(global.music_tracks[current_track])

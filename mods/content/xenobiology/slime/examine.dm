@@ -1,4 +1,4 @@
-/mob/living/slime/examine(mob/user)
+/mob/living/slime/show_other_examine_strings(mob/user, distance, infix, suffix, hideflags, decl/pronouns/pronouns)
 	. = ..()
 	var/list/msg = list()
 	if(stat == DEAD)

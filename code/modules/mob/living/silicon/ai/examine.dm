@@ -1,4 +1,4 @@
-/mob/living/silicon/ai/examine(mob/user)
+/mob/living/silicon/ai/show_other_examine_strings(mob/user, distance, infix, suffix, hideflags, decl/pronouns/pronouns)
 	. = ..()
 
 	var/msg = ""

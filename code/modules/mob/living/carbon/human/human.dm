@@ -1287,13 +1287,6 @@
 	bodytemperature += value
 	return bodytemperature
 
-/mob/living/carbon/human/proc/get_hands_organs()
-	. = list()
-	for(var/bp in held_item_slots)
-		var/org = GET_EXTERNAL_ORGAN(src, bp)
-		if(org)
-			. |= org
-
 /mob/living/carbon/human/get_admin_job_string()
 	return job || uppertext(species.name)
 

@@ -158,7 +158,6 @@
 #define INCAPACITATION_ALL         (~INCAPACITATION_NONE)
 
 // Organs.
-#define BP_MOUTH    "mouth"
 #define BP_EYES     "eyes"
 #define BP_HEART    "heart"
 #define BP_LUNGS    "lungs"

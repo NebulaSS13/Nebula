@@ -1,4 +1,4 @@
-/mob/living/silicon/robot/examine(mob/user, distance)
+/mob/living/silicon/robot/show_other_examine_strings(mob/user, distance, infix, suffix, hideflags, decl/pronouns/pronouns)
 	var/custom_infix = custom_name ? ", [modtype] [braintype]" : ""
 	. = ..(user, distance, infix = custom_infix)
 
