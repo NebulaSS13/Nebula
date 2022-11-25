@@ -54,6 +54,11 @@
 	update_icon()
 	return TRUE
 
+/obj/machinery/dummy_airlock_controller/set_id_tag(new_id_tag)
+	unset_target_controller()
+	. = ..()
+	setup_target_controller()
+
 /obj/machinery/dummy_airlock_controller/proc/unset_target_controller()
 	if(master_controller)
 		master_controller.remove_remote_terminal(src)

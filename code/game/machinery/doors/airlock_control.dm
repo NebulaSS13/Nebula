@@ -166,6 +166,11 @@
 	master_cycling = state
 	update_icon()
 
+/obj/machinery/airlock_sensor/set_id_tag(var/new_id_tag)
+	. = ..()
+	for(var/obj/item/stock_parts/radio/R in get_all_components_of_type(/obj/item/stock_parts/radio))
+		R.set_id_tag(id_tag)
+
 /decl/public_access/public_variable/airlock_pressure
 	expected_type = /obj/machinery/airlock_sensor
 	name = "airlock sensor pressure"
@@ -260,6 +265,11 @@
 	else
 		add_overlay("button_light_standby")
 		set_light(l_range = 2, l_power = 0.4, l_color = "#99ff33")
+
+/obj/machinery/button/access/set_id_tag(var/new_id_tag)
+	. = ..()
+	for(var/obj/item/stock_parts/radio/R in get_all_components_of_type(/obj/item/stock_parts/radio))
+		R.set_id_tag(id_tag)
 
 /decl/public_access/public_variable/set_airlock_cycling/access_button
 	expected_type = /obj/machinery/button/access
