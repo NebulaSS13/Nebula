@@ -42,7 +42,6 @@
 	if(!master_controller)
 		//#TODO: Show error UI
 		return FALSE
-	appearance = master_controller
 	master_controller.ui_interact(user, state = remote_state)
 	return TRUE
 
