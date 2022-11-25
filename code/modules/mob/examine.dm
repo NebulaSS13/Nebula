@@ -128,7 +128,7 @@
 	if(buckled)
 		. += SPAN_WARNING("[pronouns.He] [pronouns.is] [html_icon(buckled)] buckled to [buckled]!")
 	if(length(.))
-		to_chat(user, jointext(., ""))
+		to_chat(user, jointext(., "\n"))
 
 /mob/proc/show_other_examine_strings(mob/user, distance, infix, suffix, hideflags, decl/pronouns/pronouns)
 	return

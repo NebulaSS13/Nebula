@@ -65,15 +65,12 @@
 	if(G)
 		put_residue_on(G)
 		var/mob/living/carbon/human/H = G.get_recursive_loc_of_type(/mob/living/carbon/human)
-		if(H)
-			for(var/bp in H.held_item_slots)
-				var/datum/inventory_slot/inv_slot = H.held_item_slots[bp]
-				if(G == inv_slot?.holding)
-					var/target = H.get_covering_equipped_item_by_zone(bp)
-					if(!target)
-						target = GET_EXTERNAL_ORGAN(H, bp)
+		if(H && (G in H.get_held_items()))
+			var/bp = H.get_equipped_slot_for_item(G)
+			if(bp)
+				var/target = H.get_covering_equipped_item_by_zone(bp) || GET_EXTERNAL_ORGAN(H, bp)
+				if(target)
 					put_residue_on(target)
-					break
 	if(prob(30))
 		put_residue_on(get_turf(src))
 
