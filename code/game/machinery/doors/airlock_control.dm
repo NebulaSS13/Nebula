@@ -134,6 +134,15 @@
 	. = ..()
 	update_icon()
 
+/obj/machinery/airlock_sensor/examine(mob/user, distance, infix, suffix)
+	. = ..()
+	if(distance < 2)
+		to_chat(user, SPAN_INFO("The pressure indicator reads '[pressure? round(pressure, 0.1) : 0] kPa'."))
+	if(master_cycling)
+		to_chat(user, SPAN_WARNING("It's warning that the master airlock is cycling!"))
+	if(alert)
+		to_chat(user, SPAN_WARNING("The low-pressure warning light is blinking!"))
+
 /obj/machinery/airlock_sensor/on_update_icon()
 	cut_overlays()
 	if(inoperable() || !use_power)
@@ -297,6 +306,13 @@
 	uncreated_component_parts = list(
 		/obj/item/stock_parts/power/apc,
 	)
+
+/obj/machinery/button/access/examine(mob/user, distance, infix, suffix)
+	. = ..()
+	if(distance < 2)
+		to_chat(user, SPAN_INFO("The button reads '[command]'."))
+	if(master_cycling)
+		to_chat(user, SPAN_WARNING("It's warning that the master airlock is cycling!"))
 
 /obj/machinery/button/access/on_update_icon()
 	cut_overlays()
