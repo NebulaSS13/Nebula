@@ -40,7 +40,7 @@
 	//The last time we were tipped/righted and said a voice line, to avoid spam
 	var/last_tipping_action_voice = 0
 
-/mob/living/bot/medbot/examine(mob/user)
+/mob/living/bot/medbot/show_other_examine_strings(mob/user, distance, infix, suffix, hideflags, decl/pronouns/pronouns)
 	. = ..()
 	if(tipped_status == MEDBOT_PANIC_NONE)
 		return

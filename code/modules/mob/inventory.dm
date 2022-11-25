@@ -223,20 +223,23 @@ var/global/list/slot_equipment_priority = list( \
 /mob/proc/isEquipped(obj/item/I)
 	if(!I)
 		return 0
-	return get_inventory_slot(I) != 0
+	return get_equipped_slot_for_item(I) != 0
 
 /mob/proc/canUnEquip(obj/item/I)
 	if(!I) //If there's nothing to drop, the drop is automatically successful.
 		return 1
-	var/slot = get_inventory_slot(I)
+	var/slot = get_equipped_slot_for_item(I)
 	if(!slot && !istype(I.loc, /obj/item/rig_module))
 		return 1 //already unequipped, so success
 	return I.mob_can_unequip(src, slot)
 
-/mob/proc/get_inventory_slot(obj/item/I)
+/mob/proc/get_equipped_slot_for_item(obj/item/I)
 	for(var/s in global.all_inventory_slots)
 		if(get_equipped_item(s) == I)
 			return s
+
+/mob/proc/get_inventory_slot_datum(var/slot)
+	return
 
 //This differs from remove_from_mob() in that it checks if the item can be unequipped first. Use drop_from_inventory if you don't want to check.
 /mob/proc/unEquip(obj/item/I, var/atom/target, var/play_dropsound = TRUE)
@@ -269,12 +272,19 @@ var/global/list/slot_equipment_priority = list( \
 
 //Returns the item equipped to the specified slot, if any.
 /mob/proc/get_equipped_item(var/slot)
+
+	// Check equipment slots.
 	SHOULD_CALL_PARENT(TRUE)
 	switch(slot)
 		if(slot_back_str)
 			return _back
 		if(slot_wear_mask_str)
 			return _wear_mask
+
+	// Check held item slots.
+	var/held_slots = get_held_item_slots()
+	var/datum/inventory_slot/inv_slot = LAZYACCESS(held_slots, slot)
+	return inv_slot?.holding
 
 /mob/proc/get_equipped_items(var/include_carried = 0)
 	SHOULD_CALL_PARENT(TRUE)
@@ -325,3 +335,15 @@ var/global/list/slot_equipment_priority = list( \
 
 /mob/proc/can_be_buckled(var/mob/user)
 	. = user.Adjacent(src) && !istype(user, /mob/living/silicon/pai)
+
+/mob/proc/get_held_item_slots()
+	return
+
+/mob/proc/get_inventory_slots()
+	return
+
+/mob/proc/get_hands_organs()
+	for(var/bp in get_held_item_slots())
+		var/org = GET_EXTERNAL_ORGAN(src, bp)
+		if(org)
+			LAZYDISTINCTADD(., org)

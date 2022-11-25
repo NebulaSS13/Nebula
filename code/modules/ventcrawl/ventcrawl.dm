@@ -34,7 +34,7 @@ var/global/list/ventcrawl_machinery = list(
 
 /mob/living/proc/is_allowed_vent_crawl_item(var/obj/item/carried_item)
 	if(is_type_in_list(carried_item, can_enter_vent_with))
-		return !get_inventory_slot(carried_item)
+		return !get_equipped_slot_for_item(carried_item)
 
 /mob/living/carbon/is_allowed_vent_crawl_item(var/obj/item/carried_item)
 	return (carried_item in get_internal_organs()) || ..()

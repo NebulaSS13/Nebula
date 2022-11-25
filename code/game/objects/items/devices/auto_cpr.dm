@@ -57,7 +57,7 @@
 		return PROCESS_KILL
 
 	var/mob/living/carbon/human/H = loc
-	if(H.get_inventory_slot(src) != slot_wear_suit_str)
+	if(H.get_equipped_slot_for_item(src) != slot_wear_suit_str)
 		return PROCESS_KILL
 
 	if(world.time > last_pump + 15 SECONDS)

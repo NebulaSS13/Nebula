@@ -119,7 +119,7 @@
 		return TOPIC_HANDLED
 	return ..()
 
-/mob/living/simple_animal/crow/examine(mob/user)
+/mob/living/simple_animal/crow/show_examined_worn_held_items(mob/user, distance, infix, suffix, hideflags, decl/pronouns/pronouns)
 	. = ..()
 	if(Adjacent(src))
 		if(messenger_bag)

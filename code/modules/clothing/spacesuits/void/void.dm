@@ -197,7 +197,7 @@ else if(##equipment_var) {\
 
 	if(!istype(H)) return
 	if(H.incapacitated()) return
-	var/slot = H.get_inventory_slot(src)
+	var/slot = H.get_equipped_slot_for_item(src)
 	if(slot != slot_wear_suit_str && !(slot in H.held_item_slots))
 		return// let them eject those tanks when they're in hand or stuff for ease of use
 
@@ -216,7 +216,7 @@ else if(##equipment_var) {\
 		return ..()
 
 	if(IS_SCREWDRIVER(W))
-		if(user.get_inventory_slot(src) == slot_wear_suit_str)//maybe I should make this into a proc?
+		if(user.get_equipped_slot_for_item(src) == slot_wear_suit_str)//maybe I should make this into a proc?
 			to_chat(user, "<span class='warning'>You cannot modify \the [src] while it is being worn.</span>")
 			return
 
@@ -241,7 +241,7 @@ else if(##equipment_var) {\
 			to_chat(user, "\The [src] does not have anything installed.")
 		return
 	else if(istype(W,/obj/item/clothing/head/helmet/space))
-		if(user.get_inventory_slot(src) == slot_wear_suit_str)
+		if(user.get_equipped_slot_for_item(src) == slot_wear_suit_str)
 			to_chat(user, "<span class='warning'>You cannot modify \the [src] while it is being worn.</span>")
 			return
 		if(helmet)
@@ -254,7 +254,7 @@ else if(##equipment_var) {\
 			playsound(loc, 'sound/items/Deconstruct.ogg', 50, 1)
 		return
 	else if(istype(W,/obj/item/clothing/shoes/magboots))
-		if(user.get_inventory_slot(src) == slot_wear_suit_str)
+		if(user.get_equipped_slot_for_item(src) == slot_wear_suit_str)
 			to_chat(user, "<span class='warning'>You cannot modify \the [src] while it is being worn.</span>")
 			return
 		if(boots)
@@ -267,7 +267,7 @@ else if(##equipment_var) {\
 			playsound(loc, 'sound/items/Deconstruct.ogg', 50, 1)
 		return
 	else if(istype(W,/obj/item/tank))
-		if(user.get_inventory_slot(src) == slot_wear_suit_str)
+		if(user.get_equipped_slot_for_item(src) == slot_wear_suit_str)
 			to_chat(user, "<span class='warning'>You cannot modify \the [src] while it is being worn.</span>")
 			return
 		if(tank)

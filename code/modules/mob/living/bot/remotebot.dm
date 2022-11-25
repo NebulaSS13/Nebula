@@ -18,7 +18,7 @@
 		tally += (2 * holding.w_class)
 	return tally
 
-/mob/living/bot/remotebot/examine(mob/user)
+/mob/living/bot/remotebot/show_other_examine_strings(mob/user, distance, infix, suffix, hideflags, decl/pronouns/pronouns)
 	. = ..()
 	if(holding)
 		to_chat(user, "<span class='notice'>It is holding \the [html_icon(holding)] [holding].</span>")

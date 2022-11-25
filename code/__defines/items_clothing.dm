@@ -27,13 +27,24 @@
 #define HIDETAIL           BITFLAG(4)
 
 // WARNING: The following flags apply only to the helmets and masks!
-#define HIDEMASK           BITFLAG(0)
-#define HIDEEARS           BITFLAG(1) // Headsets and such.
-#define HIDEEYES           BITFLAG(2) // Glasses.
-#define HIDEFACE           BITFLAG(3) // Dictates whether we appear as "Unknown".
-#define BLOCK_HEAD_HAIR    BITFLAG(4)    // Hides the user's hair overlay, and replace it with short hairs. Leaves facial hair.
-#define BLOCK_FACIAL_HAIR  BITFLAG(5)    // Hides the user's hair, facial and otherwise.
+#define HIDEMASK           BITFLAG(5)
+#define HIDEEARS           BITFLAG(6) // Headsets and such.
+#define HIDEEYES           BITFLAG(7) // Glasses.
+#define HIDEFACE           BITFLAG(8) // Dictates whether we appear as "Unknown".
+#define BLOCK_HEAD_HAIR    BITFLAG(9)    // Hides the user's hair overlay, and replace it with short hairs. Leaves facial hair.
+#define BLOCK_FACIAL_HAIR  BITFLAG(10)    // Hides the user's hair, facial and otherwise.
 #define BLOCK_ALL_HAIR     (BLOCK_HEAD_HAIR | BLOCK_FACIAL_HAIR)
+
+var/global/list/equipment_visibility_flags = list(
+	HIDEGLOVES,
+	HIDESUITSTORAGE,
+	HIDEJUMPSUIT,
+	HIDESHOES,
+	HIDEMASK,
+	HIDEEYES,
+	HIDEEARS,
+	HIDEFACE
+)
 
 // Inventory slot strings.
 // since numbers cannot be used as associative list keys.
@@ -176,18 +187,21 @@
 #define HUD_JANITOR  BITFLAG(3)
 
 // Limbs.
-#define BP_L_FOOT       "l_foot"
-#define BP_R_FOOT       "r_foot"
-#define BP_L_LEG        "l_leg"
-#define BP_R_LEG        "r_leg"
-#define BP_L_HAND       "l_hand"
-#define BP_R_HAND       "r_hand"
-#define BP_L_ARM        "l_arm"
-#define BP_R_ARM        "r_arm"
-#define BP_HEAD         "head"
-#define BP_CHEST        "chest"
-#define BP_GROIN        "groin"
-#define BP_TAIL         "tail"
+#define BP_L_FOOT "l_foot"
+#define BP_R_FOOT "r_foot"
+#define BP_L_LEG  "l_leg"
+#define BP_R_LEG  "r_leg"
+#define BP_L_HAND "l_hand"
+#define BP_R_HAND "r_hand"
+#define BP_L_ARM  "l_arm"
+#define BP_R_ARM  "r_arm"
+#define BP_HEAD   "head"
+#define BP_CHEST  "chest"
+#define BP_GROIN  "groin"
+#define BP_TAIL   "tail"
+
+// Other inventory-related slots (also organs).
+#define BP_MOUTH  "mouth"
 
 var/global/list/all_limb_tags = list(BP_CHEST, BP_GROIN, BP_TAIL, BP_HEAD, BP_L_ARM, BP_R_ARM, BP_L_HAND, BP_R_HAND, BP_L_LEG, BP_R_LEG, BP_L_FOOT, BP_R_FOOT)
 var/global/list/all_limb_tags_by_depth = list(BP_HEAD, BP_L_HAND, BP_R_HAND, BP_L_ARM, BP_R_ARM, BP_L_FOOT, BP_R_FOOT, BP_L_LEG, BP_R_LEG, BP_GROIN, BP_TAIL, BP_CHEST)
@@ -197,25 +211,26 @@ var/global/list/default_onmob_icons = list(
 	BP_R_HAND =          'icons/mob/onmob/items/righthand.dmi'
 )
 
+// This list should be sorted by display priority/order for mob examine to look nice.
 var/global/list/all_inventory_slots = list(
-	slot_back_str,
 	BP_L_HAND,
 	BP_R_HAND,
+	BP_MOUTH,
 	slot_w_uniform_str,
 	slot_head_str,
 	slot_wear_suit_str,
-	slot_l_ear_str,
-	slot_r_ear_str,
+	slot_s_store_str,
+	slot_back_str,
+	slot_gloves_str,
 	slot_belt_str,
 	slot_shoes_str,
 	slot_wear_mask_str,
-	slot_handcuffed_str,
-	slot_wear_id_str,
-	slot_gloves_str,
 	slot_glasses_str,
-	slot_s_store_str,
+	slot_l_ear_str,
+	slot_r_ear_str,
+	slot_wear_id_str,
+	slot_handcuffed_str,
 	slot_tie_str,
 	slot_l_store_str,
 	slot_r_store_str
 )
-
