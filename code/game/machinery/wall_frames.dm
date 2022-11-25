@@ -251,7 +251,6 @@
 	///Used when configuring a dummy controller
 	var/master_controller_id_tag
 
-
 /obj/item/frame/button/airlock_controller/modify_positioning(obj/machinery/product, _dir, click_params)
 	if(length(master_controller_id_tag))
 		product.set_id_tag(master_controller_id_tag)
@@ -309,18 +308,22 @@
 	if(!IS_MULTITOOL(W))
 		return ..()
 	//Handle kit configuration
-	var/list/possible_kit_types = list(/obj/machinery/dummy_airlock_controller)
-	for(var/path in typesof(/obj/machinery/embedded_controller/radio))
+	var/obj/machinery/M = /obj/machinery/dummy_airlock_controller
+	//var/list/possible_kit_types = list(/obj/machinery/dummy_airlock_controller)
+	var/list/possible_kit_type_names = list(initial(M.name) = /obj/machinery/dummy_airlock_controller)
+
+	for(var/path in (subtypesof(/obj/machinery/embedded_controller/radio) || subtypesof(/obj/machinery/embedded_controller/radio/airlock)))
 		var/obj/machinery/embedded_controller/radio/controller = path
 		var/base_type = initial(controller.base_type) || path
-		possible_kit_types |= base_type
+		M = base_type
+		possible_kit_type_names[initial(M.name)] = base_type
 
-	var/choice = input(user, "Chose the type of controller to build:", "Select Controller Type") as null|anything in possible_kit_types
+	var/choice = input(user, "Chose the type of controller to build:", "Select Controller Type") as null|anything in possible_kit_type_names
 	if(!choice || !CanPhysicallyInteract(user))
 		build_machine_type = initial(build_machine_type)
 		return
-	build_machine_type = choice
-	var/obj/machinery/M = build_machine_type
+	build_machine_type = possible_kit_type_names[choice]
+	M = build_machine_type
 	to_chat(user, SPAN_NOTICE("You set the kit type to '[initial(M.name)]'!"))
 	return TRUE
 
