@@ -251,19 +251,18 @@
 	///Used when configuring a dummy controller
 	var/master_controller_id_tag
 
-/obj/item/frame/button/airlock_controller/kit
-	fully_construct = TRUE
-	name = "airlock controller kit"
-	desc = "An all-in-one airlock sensor kit, comes preassembled with a radio transmitter. Use a multitool on the circuit to determine which type you want, and then hit this with the the circuit."
 
 /obj/item/frame/button/airlock_controller/modify_positioning(obj/machinery/product, _dir, click_params)
 	if(length(master_controller_id_tag))
 		product.set_id_tag(master_controller_id_tag)
 	. = ..()
 
+/obj/item/frame/button/airlock_controller/proc/warn_not_setup(var/mob/user)
+	to_chat(user, SPAN_WARNING("First hit this with a circuitboard to properly setup the controller's software!"))
+
 /obj/item/frame/button/airlock_controller/try_build(turf/on_wall, click_params)
 	if(!build_machine_type)
-		to_chat(usr, SPAN_WARNING("First hit this with a circuitboard to properly setup the controller's software!"))
+		warn_not_setup(usr)
 		return
 	return ..()
 
@@ -295,6 +294,34 @@
 		M = build_machine_type
 		to_chat(user, SPAN_NOTICE("You setup \the [src]'s software to work as a '[initial(M.name)]', using \the [W]."))
 		return .
+
+/obj/item/frame/button/airlock_controller/kit
+	fully_construct = TRUE
+	name = "airlock controller kit"
+	desc = "An all-in-one airlock controller kit, comes preassembled with a radio transmitter. Use a multitool on the kit to select what type of controller to build."
+
+/obj/item/frame/button/airlock_controller/kit/warn_not_setup(mob/user)
+	to_chat(user, SPAN_WARNING("First, use a multitool on the kit to properly setup the controller's software!"))
+
+//Let them also hit it with a circuitboard if they so wish. But multitool is better when you don't want to print one for nothing..
+/obj/item/frame/button/airlock_controller/kit/attackby(obj/item/W, mob/user)
+	if(!IS_MULTITOOL(W))
+		return ..()
+	//Handle kit configuration
+	var/list/possible_kit_types = list(/obj/machinery/dummy_airlock_controller)
+	for(var/path in typesof(/obj/machinery/embedded_controller/radio))
+		var/obj/machinery/embedded_controller/radio/controller = path
+		var/base_type = initial(controller.base_type) || path
+		possible_kit_types |= base_type
+
+	var/choice = input(user, "Chose the type of controller to build:", "Select Controller Type") as null|anything in possible_kit_types
+	if(!choice || !CanPhysicallyInteract(user))
+		build_machine_type = initial(build_machine_type)
+		return
+	build_machine_type = choice
+	var/obj/machinery/M = build_machine_type
+	to_chat(user, SPAN_NOTICE("You set the kit type to '[initial(M.name)]'!"))
+	return TRUE
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////
 // Airlock controller setup abstract
