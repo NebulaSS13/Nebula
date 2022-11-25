@@ -90,6 +90,9 @@
 /decl/public_access/public_variable/airlock_bolt_state/access_var(obj/machinery/door/airlock/door)
 	return door.locked ? "locked" : "unlocked"
 
+/////////////////////////////////////////////////////////////////////////////////////
+// Airlock Sensor
+/////////////////////////////////////////////////////////////////////////////////////
 /obj/machinery/airlock_sensor
 	name = "airlock sensor"
 	icon = 'icons/obj/airlock_machines.dmi'
@@ -108,6 +111,7 @@
 		/decl/stock_part_preset/radio/basic_transmitter/airlock_sensor = 1,
 		/decl/stock_part_preset/radio/receiver/airlock_sensor = 1
 	)
+	//#TODO: Make the sensor considered as missing parts if it doesn't have at the very least a transmitter
 	uncreated_component_parts = list(
 		/obj/item/stock_parts/power/apc,
 		/obj/item/stock_parts/radio/transmitter/basic/buildable,
@@ -219,6 +223,9 @@
 /obj/machinery/airlock_sensor/shuttle
 	stock_part_presets = list(/decl/stock_part_preset/radio/basic_transmitter/airlock_sensor/shuttle = 1)
 
+/////////////////////////////////////////////////////////////////////////////////////
+// Airlock Button
+/////////////////////////////////////////////////////////////////////////////////////
 /obj/machinery/button/access
 	icon = 'icons/obj/airlock_machines.dmi'
 	icon_state = "button"
@@ -235,6 +242,7 @@
 		/decl/stock_part_preset/radio/event_transmitter/access_button = 1,
 		/decl/stock_part_preset/radio/receiver/access_button = 1,
 	)
+	//#TODO: Make the button considered as missing parts if it doesn't have at the very least a transmitter
 	uncreated_component_parts = list(
 		/obj/item/stock_parts/power/apc,
 		/obj/item/stock_parts/radio/transmitter/on_event/buildable,
@@ -245,6 +253,37 @@
 	base_type = /obj/machinery/button/access/buildable
 	var/command = "cycle"
 	var/tmp/master_cycling = FALSE ///Whether the master airlock controller is actually cycling so we can update our icon
+
+/obj/machinery/button/access/interior
+	command = "cycle_interior"
+
+/obj/machinery/button/access/exterior
+	command = "cycle_exterior"
+
+/obj/machinery/button/access/exterior/cabled
+	//Still create a tesla link, to stay coherent with how one would create that button from scratch in-game.
+	uncreated_component_parts = list(
+		/obj/item/stock_parts/power/apc,
+		/obj/item/stock_parts/power/terminal/buildable,
+		/obj/item/stock_parts/radio/transmitter/on_event/buildable,
+		/obj/item/stock_parts/radio/receiver/buildable,
+	)
+	stock_part_presets = list(
+		/decl/stock_part_preset/radio/event_transmitter/access_button = 1,
+		/decl/stock_part_preset/radio/receiver/access_button = 1,
+		/decl/stock_part_preset/terminal_setup,
+	)
+
+/obj/machinery/button/access/shuttle
+	stock_part_presets = list(
+		/decl/stock_part_preset/radio/event_transmitter/access_button/shuttle = 1
+	)
+
+/obj/machinery/button/access/shuttle/interior
+	command = "cycle_interior"
+
+/obj/machinery/button/access/shuttle/exterior
+	command = "cycle_exterior"
 
 /obj/machinery/button/access/buildable
 	uncreated_component_parts = list(
@@ -279,6 +318,28 @@
 	for(var/obj/item/stock_parts/radio/R in get_all_components_of_type(/obj/item/stock_parts/radio))
 		R.set_id_tag(id_tag)
 
+//
+// Button Part Presets
+//
+/decl/stock_part_preset/radio/receiver/access_button
+	frequency = EXTERNAL_AIR_FREQ
+	receive_and_write = list(
+		"set_airlock_cycling" = /decl/public_access/public_variable/set_airlock_cycling/access_button,
+	)
+
+/decl/stock_part_preset/radio/event_transmitter/access_button
+	frequency = EXTERNAL_AIR_FREQ
+	event = /decl/public_access/public_variable/button_active
+	transmit_on_event = list(
+		"command" = /decl/public_access/public_variable/button_command
+	)
+
+/decl/stock_part_preset/radio/event_transmitter/access_button/shuttle
+	frequency = SHUTTLE_AIR_FREQ
+
+//
+// Public Variables
+//
 /decl/public_access/public_variable/set_airlock_cycling/access_button
 	expected_type = /obj/machinery/button/access
 	can_write     = TRUE
@@ -292,41 +353,6 @@
 		return
 	owner.master_cycling = new_value
 	owner.update_icon()
-
-/decl/stock_part_preset/radio/receiver/access_button
-	frequency = EXTERNAL_AIR_FREQ
-	receive_and_write = list(
-		"set_airlock_cycling" = /decl/public_access/public_variable/set_airlock_cycling/access_button,
-	)
-
-/obj/machinery/button/access/interior
-	command = "cycle_interior"
-
-/obj/machinery/button/access/exterior
-	command = "cycle_exterior"
-
-/obj/machinery/button/access/exterior/cabled
-	uncreated_component_parts = list(
-		/obj/item/stock_parts/power/terminal,
-		/obj/item/stock_parts/radio/transmitter/on_event/buildable,
-		/obj/item/stock_parts/radio/receiver/buildable,
-	)
-	stock_part_presets = list(
-		/decl/stock_part_preset/radio/event_transmitter/access_button = 1,
-		/decl/stock_part_preset/radio/receiver/access_button = 1,
-		/decl/stock_part_preset/terminal_setup,
-	)
-
-/obj/machinery/button/access/shuttle
-	stock_part_presets = list(
-		/decl/stock_part_preset/radio/event_transmitter/access_button/shuttle = 1
-	)
-
-/obj/machinery/button/access/shuttle/interior
-	command = "cycle_interior"
-
-/obj/machinery/button/access/shuttle/exterior
-	command = "cycle_exterior"
 
 /decl/public_access/public_variable/button_command
 	expected_type = /obj/machinery/button/access
@@ -343,13 +369,3 @@
 	. = ..()
 	if(.)
 		button.command = new_val
-
-/decl/stock_part_preset/radio/event_transmitter/access_button
-	frequency = EXTERNAL_AIR_FREQ
-	event = /decl/public_access/public_variable/button_active
-	transmit_on_event = list(
-		"command" = /decl/public_access/public_variable/button_command
-	)
-
-/decl/stock_part_preset/radio/event_transmitter/access_button/shuttle
-	frequency = SHUTTLE_AIR_FREQ

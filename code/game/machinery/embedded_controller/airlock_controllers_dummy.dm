@@ -1,21 +1,28 @@
 ///Provides remote access to a controller (since they must be unique).
 /obj/machinery/dummy_airlock_controller
-	name            = "airlock control terminal"
-	icon            = 'icons/obj/airlock_machines.dmi'
-	icon_state      = "airlock_control_off"
-	layer           = ABOVE_OBJ_LAYER
-	obj_flags       = OBJ_FLAG_MOVES_UNSUPPORTED
-	unacidable      = TRUE
-	construct_state = /decl/machine_construction/wall_frame/panel_closed
-	frame_type      = /obj/item/frame/button/airlock_controller
+	name               = "remote airlock control terminal"
+	desc               = "A secondary airlock control terminal meant to be subordinated to a master airlock control terminal to allow remotely controlling the later from the former."
+	icon               = 'icons/obj/airlock_machines.dmi'
+	icon_state         = "airlock_control_off"
+	layer              = ABOVE_OBJ_LAYER
+	obj_flags          = OBJ_FLAG_MOVES_UNSUPPORTED
+	unacidable         = TRUE
+	base_type          = /obj/machinery/dummy_airlock_controller
+	construct_state    = /decl/machine_construction/wall_frame/panel_closed
+	frame_type         = /obj/item/frame/button/airlock_controller
+	directional_offset = "{'NORTH':{'y':-22}, 'SOUTH':{'y':24}, 'EAST':{'x':-22}, 'WEST':{'x':22}}"
+	power_channel      = ENVIRON //Same as airlock controller
+	required_interaction_dexterity = DEXTERITY_TOUCHSCREENS
+	///Topic state used to interact remotely with the master controller's UI
 	var/datum/topic_state/remote/remote_state
-	var/obj/machinery/embedded_controller/radio/airlock/master_controller //Master controller we're subordinated to
+	///Master controller we're subordinated to
+	var/obj/machinery/embedded_controller/radio/airlock/master_controller
 
 /obj/machinery/dummy_airlock_controller/Initialize(mapload, d, populate_parts)
 	. = ..()
 	set_extension(src, /datum/extension/interactive/multitool/embedded_controller_terminal)
 	update_icon()
-	if(length(id_tag))
+	if(mapload && length(id_tag))
 		return INITIALIZE_HINT_LATELOAD
 
 /obj/machinery/dummy_airlock_controller/LateInitialize()
