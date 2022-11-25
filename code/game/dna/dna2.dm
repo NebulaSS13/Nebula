@@ -95,7 +95,7 @@ var/global/list/datum/dna/gene/dna_genes[0]
 	copy_instance.real_name      = real_name
 	copy_instance.species        = species || global.using_map.default_species
 	copy_instance.body_markings  = body_markings.Copy()
-	for(var/b=1; b<=DNA_SE_LENGTH; b++)
+	for(var/b in 1 to DNA_SE_LENGTH)
 		copy_instance.SE[b] = SE[b]
 		if(b <= DNA_UI_LENGTH)
 			copy_instance.UI[b] = UI[b]
