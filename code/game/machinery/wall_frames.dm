@@ -299,6 +299,7 @@
 	fully_construct = TRUE
 	name = "airlock controller kit"
 	desc = "An all-in-one airlock controller kit, comes preassembled with a radio transmitter. Use a multitool on the kit to select what type of controller to build."
+	build_machine_type = /obj/machinery/embedded_controller/radio/airlock/airlock_controller  //Must set a default one, otherwise building_cost calcs will fail
 
 /obj/item/frame/button/airlock_controller/kit/warn_not_setup(mob/user)
 	to_chat(user, SPAN_WARNING("First, use a multitool on the kit to properly setup the controller's software!"))
