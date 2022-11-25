@@ -248,20 +248,54 @@
 	name = "airlock controller frame"
 	desc = "Used to build airlock controllers. Use a multitool on the circuit to determine which type you want, and then hit this with the the circuit."
 	build_machine_type = null
+	///Used when configuring a dummy controller
+	var/master_controller_id_tag
+
+/obj/item/frame/button/airlock_controller/kit
+	fully_construct = TRUE
+	name = "airlock controller kit"
+	desc = "An all-in-one airlock sensor kit, comes preassembled with a radio transmitter. Use a multitool on the circuit to determine which type you want, and then hit this with the the circuit."
+
+/obj/item/frame/button/airlock_controller/modify_positioning(obj/machinery/product, _dir, click_params)
+	if(length(master_controller_id_tag))
+		product.set_id_tag(master_controller_id_tag)
+	. = ..()
 
 /obj/item/frame/button/airlock_controller/try_build(turf/on_wall, click_params)
 	if(!build_machine_type)
-		to_chat(usr, SPAN_WARNING("First hit this with a circuitboard to configure it!"))
+		to_chat(usr, SPAN_WARNING("First hit this with a circuitboard to properly setup the controller's software!"))
 		return
 	return ..()
 
+/obj/item/frame/button/airlock_controller/afterattack(obj/machinery/embedded_controller/radio/target, mob/user, proximity_flag, click_parameters)
+	if((. = ..()) || !ispath(build_machine_type, /obj/machinery/dummy_airlock_controller))
+		return .
+	if(istype(target, /obj/machinery/dummy_airlock_controller))
+		var/obj/machinery/dummy_airlock_controller/D = target
+		target = D.master_controller
+		. = TRUE
+	if(istype(target))
+		master_controller_id_tag = target.id_tag
+		to_chat(user, SPAN_NOTICE("You successfully link \the [src]'s master ID tag with \the [target]'s ID tag. \The [src] should now work with \the [target] with the default settings."))
+		return TRUE
+	master_controller_id_tag = null
+
 /obj/item/frame/button/airlock_controller/attackby(obj/item/W, mob/user)
-	if(istype(W, /obj/item/stock_parts/circuitboard))
-		var/obj/item/stock_parts/circuitboard/board = W
-		if(ispath(board.build_path, /obj/machinery/embedded_controller/radio))
-			build_machine_type = board.build_path
-			to_chat(user, SPAN_NOTICE("You configure \the [src] using \the [W]."))
-			return TRUE
+	if(!istype(W, /obj/item/stock_parts/circuitboard))
+		return ..()
+	var/obj/item/stock_parts/circuitboard/board = W
+	var/obj/machinery/M
+	if(ispath(board.build_path, /obj/machinery/embedded_controller/radio))
+		build_machine_type = board.build_path
+		. = TRUE
+	if(ispath(board.build_path, /obj/machinery/dummy_airlock_controller))
+		build_machine_type = board.build_path
+		. = TRUE
+	if(.)
+		M = build_machine_type
+		to_chat(user, SPAN_NOTICE("You setup \the [src]'s software to work as a '[initial(M.name)]', using \the [W]."))
+		return .
+
 ////////////////////////////////////////////////////////////////////////////////////////////////////////
 // Airlock controller setup abstract
 ////////////////////////////////////////////////////////////////////////////////////////////////////////

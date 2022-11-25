@@ -79,6 +79,7 @@
 		var/obj/machinery/embedded_controller/radio/controller = path
 		var/base_type = initial(controller.base_type) || path
 		. |= base_type
+	. |= /obj/machinery/dummy_airlock_controller //Let us build the dummy controller
 
 /obj/item/stock_parts/circuitboard/camera
 	name = "circuitboard (camera)"
