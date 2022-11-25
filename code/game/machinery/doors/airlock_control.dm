@@ -115,7 +115,7 @@
 	)
 	base_type = /obj/machinery/airlock_sensor/buildable
 	construct_state = /decl/machine_construction/wall_frame/panel_closed/simple
-	frame_type = /obj/item/frame/button/airlock_sensor
+	frame_type = /obj/item/frame/button/airlock_controller_config/airlock_sensor
 	directional_offset = "{'NORTH':{'y':-20}, 'SOUTH':{'y':24}, 'EAST':{'x':-22}, 'WEST':{'x':22}}"
 	var/alert = FALSE
 	var/master_cycling = FALSE
@@ -241,12 +241,20 @@
 		/obj/item/stock_parts/radio/receiver/buildable,
 	)
 	directional_offset = "{'NORTH':{'y':-22}, 'SOUTH':{'y':24}, 'EAST':{'x':-20}, 'WEST':{'x':20}}"
-	frame_type = /obj/item/frame/button/access
+	frame_type = /obj/item/frame/button/airlock_controller_config/access
 	base_type = /obj/machinery/button/access/buildable
 	var/command = "cycle"
 	var/tmp/master_cycling = FALSE ///Whether the master airlock controller is actually cycling so we can update our icon
 
 /obj/machinery/button/access/buildable
+	uncreated_component_parts = list(
+		/obj/item/stock_parts/power/apc,
+	)
+/obj/machinery/button/access/interior/buildable
+	uncreated_component_parts = list(
+		/obj/item/stock_parts/power/apc,
+	)
+/obj/machinery/button/access/exterior/buildable
 	uncreated_component_parts = list(
 		/obj/item/stock_parts/power/apc,
 	)
