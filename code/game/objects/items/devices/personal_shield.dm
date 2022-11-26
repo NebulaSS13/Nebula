@@ -2,11 +2,11 @@
 	name = "personal shield"
 	desc = "Truely a life-saver: this device protects its user from being hit by objects moving very, very fast, though only for a few shots."
 	icon = 'icons/obj/items/weapon/batterer.dmi'
-	icon_state = "batterer"
+	icon_state = ICON_STATE_WORLD
 	material = /decl/material/solid/plastic
 	matter = list(
-		/decl/material/solid/metal/gold     = MATTER_AMOUNT_REINFORCEMENT, 
-		/decl/material/solid/silicon        = MATTER_AMOUNT_REINFORCEMENT, 
+		/decl/material/solid/metal/gold     = MATTER_AMOUNT_REINFORCEMENT,
+		/decl/material/solid/silicon        = MATTER_AMOUNT_REINFORCEMENT,
 		/decl/material/solid/metal/titanium = MATTER_AMOUNT_SECONDARY,
 		/decl/material/solid/metal/uranium  = MATTER_AMOUNT_TRACE,
 	)

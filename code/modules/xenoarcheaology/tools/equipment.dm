@@ -44,7 +44,8 @@
 /obj/item/storage/belt/archaeology
 	name = "excavation gear-belt"
 	desc = "Can hold various excavation gear."
-	icon_state = "gearbelt"
+	icon = 'icons/clothing/belt/gearbelt.dmi'
+	icon_state = ICON_STATE_WORLD
 	item_state = ACCESSORY_SLOT_UTILITY
 	can_hold = list(
 		/obj/item/core_sampler,
