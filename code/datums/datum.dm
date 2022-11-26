@@ -88,7 +88,7 @@
  * Override this, instead of Clone() itself.
  */
 /datum/proc/GetCloneArgs()
-    return
+	return
 
 /**
  * Used to allow sub-classes to do further processing on the cloned instance returned by Clone().
@@ -96,4 +96,4 @@
  * ** Please avoid running update code in here if possible. You could always override Clone() for this kind of things, so we don't end up with 50 calls to update_icon in the chain. **
  */
 /datum/proc/PopulateClone(var/datum/clone)
-    return clone
+	return clone
