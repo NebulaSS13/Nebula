@@ -132,3 +132,35 @@
 
 	vis_locs = null //clears this atom out of all vis_contents
 	clear_vis_contents(src)
+
+/atom/GetCloneArgs()
+	return list(loc)
+
+/atom/PopulateClone(atom/clone)
+	//Not entirely sure about icon stuff. Some legacy things would need it copied, but not more recently coded atoms..
+	clone.appearance = appearance
+	clone.set_invisibility(invisibility)
+
+	clone.SetName(name)
+	clone.set_density(density)
+	clone.set_opacity(opacity)
+	clone.set_gender(gender, FALSE)
+	clone.set_dir(dir)
+
+	clone.blood_DNA    = listdeeperCopy(blood_DNA)
+	clone.was_bloodied = was_bloodied
+	clone.blood_color  = blood_color
+	clone.germ_level   = germ_level
+	clone.temperature  = temperature
+
+	//Setup reagents
+	QDEL_NULL(clone.reagents)
+	clone.reagents = reagents?.Clone()
+	if(clone.reagents)
+		clone.reagents.set_holder(clone) //Holder MUST be set after cloning reagents
+	return clone
+
+/atom/movable/PopulateClone(atom/movable/clone)
+	clone = ..()
+	clone.anchored = anchored
+	return clone

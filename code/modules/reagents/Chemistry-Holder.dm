@@ -26,17 +26,18 @@ var/global/obj/temp_reagents_holder = new
 			my_atom.reagents = null
 		my_atom = null
 
-//Don't forget to call set_holder() after getting the copy!
-/datum/reagents/Clone(datum/reagents/copy_instance = null)
-	if(!copy_instance)
-		copy_instance = new type(maximum_volume, global.temp_reagents_holder)
-	copy_instance = ..(copy_instance)
+/datum/reagents/GetCloneArgs()
+	return list(maximum_volume, global.temp_reagents_holder) //Always clone with the dummy holder to prevent things being done on the owner atom
 
-	for(var/rtype in reagent_volumes)
-		var/list/rdata = LAZYACCESS(reagent_data, rtype)
-		copy_instance.add_reagent(rtype, reagent_volumes[rtype], rdata?.Copy(), TRUE, TRUE)
-	copy_instance.handle_update(TRUE) //No reacting
-	return copy_instance
+//Don't forget to call set_holder() after getting the copy!
+/datum/reagents/PopulateClone(datum/reagents/clone)
+	clone.primary_reagent = primary_reagent
+	clone.reagent_volumes = listdeeperCopy(reagent_volumes)
+	clone.reagent_data    = listdeeperCopy(reagent_data)
+	clone.total_volume    = total_volume
+	clone.maximum_volume  = maximum_volume
+	clone.cached_color    = cached_color
+	return clone
 
 /datum/reagents/proc/get_reaction_loc()
 	return my_atom
@@ -176,8 +177,10 @@ var/global/obj/temp_reagents_holder = new
 	if(my_atom)
 		my_atom.on_reagent_change()
 
-///Set and call updates on the target holder. 
+///Set and call updates on the target holder.
 /datum/reagents/proc/set_holder(var/obj/new_holder)
+	if(my_atom == new_holder)
+		return
 	my_atom = new_holder
 	if(my_atom)
 		my_atom.on_reagent_change()

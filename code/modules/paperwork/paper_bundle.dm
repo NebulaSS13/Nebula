@@ -459,16 +459,11 @@
 	LAZYADD(., /decl/interaction_handler/rename/paper_bundle)
 	LAZYADD(., /decl/interaction_handler/unbundle/paper_bundle)
 
-/obj/item/paper_bundle/Clone(obj/item/paper_bundle/copy_instance = null)
-	if(!copy_instance)
-		copy_instance = new type(null, material)
-	copy_instance = ..(copy_instance) //Calls update_icon()
-
+/obj/item/paper_bundle/PopulateClone(obj/item/paper_bundle/clone)
+	clone = ..()
 	for(var/obj/item/I in pages)
-		copy_instance.merge(I.Clone())
-		
-	return copy_instance
-
+		clone.merge(I.Clone())
+	return clone
 
 /obj/item/paper_bundle/verb/rename()
 	set name = "Rename Bundle"

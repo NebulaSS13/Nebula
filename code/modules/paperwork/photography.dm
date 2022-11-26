@@ -80,11 +80,13 @@
 		scribble = _scribble
 	update_icon()
 
-/obj/item/photo/Clone(obj/item/photo/copy_instance = null)
-	if(!copy_instance)
-		copy_instance = new type(null, material, img, scribble)
-	copy_instance.photo_size = photo_size
-	return ..(copy_instance) //Calls update_icon()
+/obj/item/photo/GetCloneArgs()
+	return list(null, material, img, scribble)
+
+/obj/item/photo/PopulateClone(obj/item/photo/clone)
+	clone = ..()
+	clone.photo_size = photo_size
+	return clone
 
 /obj/item/photo/attack_self(mob/user)
 	user.examinate(src)

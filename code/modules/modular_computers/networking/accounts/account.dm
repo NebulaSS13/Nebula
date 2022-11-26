@@ -7,7 +7,7 @@
 	var/suspended = FALSE	// Whether the account is banned by the SA.
 	var/list/logged_in_os = list() // OS which are currently logged into this account. Used for e-mail notifications, currently.
 
-	var/list/groups = list() // Groups which this account is a member of. 
+	var/list/groups = list() // Groups which this account is a member of.
 	var/list/parent_groups = list() // Parent groups with a child/children which this account is a member of.
 
 	var/fullname	= "N/A"
@@ -53,7 +53,7 @@
 	logged_in_os.Cut()
 	groups.Cut()
 	parent_groups.Cut()
-	
+
 	QDEL_NULL_LIST(inbox)
 	QDEL_NULL_LIST(outbox)
 	QDEL_NULL_LIST(spam)
@@ -68,22 +68,23 @@
 
 /datum/computer_file/data/account/proc/receive_mail(var/datum/computer_file/data/email_message/received_message, var/datum/computer_network/network)
 
-/datum/computer_file/data/account/Clone(datum/computer_file/data/account/copy_instance = null, rename = TRUE)
-	if(!copy_instance)
-		copy_instance = new type
-	copy_instance = ..(copy_instance, TRUE) // We always rename the file since a copied account is always a backup.
-	copy_instance.backup        = TRUE
-	copy_instance.login         = login
-	copy_instance.password      = password
-	copy_instance.can_login     = can_login
-	copy_instance.suspended     = suspended
-	copy_instance.groups        = groups.Copy()
-	copy_instance.parent_groups = parent_groups.Copy()
-	copy_instance.fullname      = fullname
+/datum/computer_file/data/account/Clone(rename)
+	. = ..(TRUE) // We always rename the file since a copied account is always a backup.
+
+/datum/computer_file/data/account/PopulateClone(datum/computer_file/data/account/clone)
+	clone = ..()
+	clone.backup        = TRUE
+	clone.login         = login
+	clone.password      = password
+	clone.can_login     = can_login
+	clone.suspended     = suspended
+	clone.groups        = listdeeperCopy(groups)
+	clone.parent_groups = listdeeperCopy(parent_groups)
+	clone.fullname      = fullname
 
 	// TODO: Don't backup e-mails for now - they are themselves other files which makes this complicated. In the future
 	// accounts will point to e-mails stored seperately on a server.
-	return copy_instance
+	return clone
 
 // Address namespace (@internal-services.net) for email addresses with special purpose only!.
 /datum/computer_file/data/account/service

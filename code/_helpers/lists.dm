@@ -750,6 +750,21 @@ proc/dd_sortedObjectList(list/incoming)
 		if(islist(.[i]))
 			.[i] = .(.[i])
 
+///Same as deepCopyList but actually Clone() datums, and sub-lists. Will leave atom refs alone.
+/proc/listdeeperCopy(list/L)
+	if(isatom(L))
+		return L //Atom refs returns as-is
+	if(istype(L, /datum))
+		var/datum/D = L
+		return D.Clone()
+	//Anything else that's not a list just return the ref
+	if(!islist(L))
+		return L
+	. = L.Copy()
+	for(var/i = 1 to length(L))
+		if(islist(.[i]))
+			.[i] = listdeeperCopy(.[i])
+
 #define IS_VALID_INDEX(list, index) (list.len && index > 0 && index <= list.len)
 
 // Returns the first key where T fulfills ispath
