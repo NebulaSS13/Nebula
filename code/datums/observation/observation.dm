@@ -212,10 +212,10 @@
 
 /decl/observ/proc/raise_event()
 	// Sanity
-	if (!args.len)
+	if(!length(args))
 		return FALSE
 
-	if (global_listeners.len)
+	if(length(global_listeners))
 		// Call the global listeners.
 		for (var/listener in global_listeners)
 			var/list/callbacks = global_listeners[listener]
@@ -231,12 +231,11 @@
 
 	// Call the listeners for this specific event source, if they exist.
 	var/source = args[1]
-	if (source && event_sources[source])
-		var/list/listeners = event_sources[source]
+	var/list/listeners = event_sources[source]
+	if(length(listeners))
 		for (var/listener in listeners)
 			var/list/callbacks = listeners[listener]
 			for (var/proc_call in callbacks)
-
 				// If the callback crashes, record the error and remove it.
 				try
 					call(listener, proc_call)(arglist(args))
@@ -244,5 +243,4 @@
 					error("[e.name] - [e.file] - [e.line]")
 					error(e.desc)
 					unregister(source, listener, proc_call)
-
 	return TRUE
