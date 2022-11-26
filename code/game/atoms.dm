@@ -195,6 +195,7 @@
 /atom/proc/update_icon()
 	SHOULD_CALL_PARENT(TRUE)
 	on_update_icon(arglist(args))
+	events_repository.raise_event(/decl/observ/updated_icon, src)
 
 /atom/proc/on_update_icon()
 	SHOULD_CALL_PARENT(FALSE) //Don't call the stub plz
