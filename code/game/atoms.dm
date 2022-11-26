@@ -92,7 +92,7 @@
 /atom/proc/set_density(var/new_density)
 	if(density != new_density)
 		density = !!new_density
-		events_repository.raise_event(/decl/observ/density_set, src, !density, density)
+		RAISE_EVENT(/decl/observ/density_set, src, !density, density)
 
 /atom/proc/bullet_act(obj/item/projectile/P, def_zone)
 	P.on_hit(src, 0, def_zone)
@@ -147,7 +147,7 @@
 
 	to_chat(user, "[html_icon(src)] That's [f_name] [suffix]")
 	to_chat(user, desc)
-	events_repository.raise_event(/decl/observ/atom_examined, src, user, distance)
+	RAISE_EVENT(/decl/observ/atom_examined, src, user, distance)
 	return TRUE
 
 // called by mobs when e.g. having the atom as their machine, loc (AKA mob being inside the atom) or buckled var set.
@@ -181,7 +181,7 @@
 			if(L.light_angle)
 				L.source_atom.update_light()
 
-	events_repository.raise_event(/decl/observ/dir_set, src, old_dir, new_dir)
+	RAISE_EVENT(/decl/observ/dir_set, src, old_dir, new_dir)
 
 /atom/proc/set_icon_state(var/new_icon_state)
 	SHOULD_CALL_PARENT(TRUE)
@@ -195,7 +195,7 @@
 /atom/proc/update_icon()
 	SHOULD_CALL_PARENT(TRUE)
 	on_update_icon(arglist(args))
-	events_repository.raise_event(/decl/observ/updated_icon, src)
+	RAISE_EVENT(/decl/observ/updated_icon, src)
 
 /atom/proc/on_update_icon()
 	SHOULD_CALL_PARENT(FALSE) //Don't call the stub plz

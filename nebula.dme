@@ -64,6 +64,7 @@
 #include "code\__defines\mob_status.dm"
 #include "code\__defines\mobs.dm"
 #include "code\__defines\movement.dm"
+#include "code\__defines\observ.dm"
 #include "code\__defines\organs.dm"
 #include "code\__defines\overmap.dm"
 #include "code\__defines\paperwork.dm"

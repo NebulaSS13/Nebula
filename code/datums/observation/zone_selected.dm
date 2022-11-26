@@ -20,4 +20,4 @@
 /obj/screen/zone_sel/set_selected_zone(bodypart)
 	var/old_selecting = selecting
 	if((. = ..()))
-		events_repository.raise_event(/decl/observ/zone_selected, src, old_selecting, selecting)
+		RAISE_EVENT(/decl/observ/zone_selected, src, old_selecting, selecting)

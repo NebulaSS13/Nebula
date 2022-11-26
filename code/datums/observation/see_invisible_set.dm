@@ -20,4 +20,4 @@
 	var/old_see_invisible = see_invisible
 	if(old_see_invisible != new_see_invisible)
 		see_invisible = new_see_invisible
-		events_repository.raise_event(/decl/observ/see_invisible_set, src, old_see_invisible, new_see_invisible)
+		RAISE_EVENT(/decl/observ/see_invisible_set, src, old_see_invisible, new_see_invisible)

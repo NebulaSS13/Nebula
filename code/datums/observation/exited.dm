@@ -19,4 +19,4 @@
 
 /atom/Exited(atom/movable/exitee, atom/new_loc)
 	. = ..()
-	events_repository.raise_event(/decl/observ/exited, src, exitee, new_loc)
+	RAISE_EVENT(/decl/observ/exited, src, exitee, new_loc)

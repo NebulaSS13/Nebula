@@ -85,7 +85,7 @@
 	if(eyeobj)
 		eyeobj.possess(src)
 
-	events_repository.raise_event(/decl/observ/logged_in, src)
+	RAISE_EVENT(/decl/observ/logged_in, src)
 
 	hud_reset(TRUE)
 

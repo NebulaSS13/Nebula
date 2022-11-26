@@ -17,4 +17,4 @@
 /datum/controller/subsystem/shuttle/initialize_shuttle()
 	. = ..()
 	if(.)
-		events_repository.raise_event(/decl/observ/shuttle_added, .)
+		RAISE_EVENT(/decl/observ/shuttle_added, .)
