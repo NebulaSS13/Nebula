@@ -66,7 +66,7 @@
 	desc = "It's disgustingly soft to the touch. And warm. Too warm."
 	dirt_color = "#c40031"
 	footstep_type = /decl/footsteps/mud
-	
+
 /turf/exterior/water/stomach
 	name = "juices"
 	desc = "Half-digested chunks of vines are floating in the puddle of some liquid."
@@ -74,4 +74,5 @@
 	icon = 'icons/turf/exterior/water_still.dmi'
 	reagent_type = /decl/material/liquid/acid/stomach
 	color = "#c7c27c"
+	base_color = "#c7c27c"
 	dirt_color = "#c40031"
