@@ -91,7 +91,7 @@
 		global.universe.OnTurfChange(W)
 
 	if(W.density != old_density)
-		events_repository.raise_event(/decl/observ/density_set, W, old_density, W.density)
+		RAISE_EVENT(/decl/observ/density_set, W, old_density, W.density)
 
 	// lighting stuff
 

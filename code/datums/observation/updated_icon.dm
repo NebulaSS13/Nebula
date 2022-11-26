@@ -4,9 +4,9 @@
 //		Raised when: An /atom updates its icon via the on_update_icon() proc.
 //
 //		Arguments that the called proc should expect:
-//			/atom: The atom who update icons.
+//			/atom: The atom who updated icon.
 //
-//      Refer to /atom/proc/update_icon() for event calling logic.
+//      Refer to /atom update_icon() proc for event calling logic.
 
 /decl/observ/updated_icon
 	name = "Updated Icon"

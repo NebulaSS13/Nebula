@@ -186,7 +186,7 @@
 
 	// observ
 	if(!loc)
-		events_repository.raise_event(/decl/observ/moved, src, origin, null)
+		RAISE_EVENT(/decl/observ/moved, src, origin, null)
 
 	// freelook
 	if(opacity)
@@ -238,7 +238,7 @@
 				unbuckle_mob()
 
 		if(!loc)
-			events_repository.raise_event(/decl/observ/moved, src, old_loc, null)
+			RAISE_EVENT(/decl/observ/moved, src, old_loc, null)
 
 		// freelook
 		if(opacity)

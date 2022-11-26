@@ -207,7 +207,7 @@
 /obj/item/examine(mob/user, distance)
 	var/desc_comp = "" //For "description composite"
 	desc_comp += "It is a [w_class_description()] item."
-	
+
 	var/desc_damage = get_examined_damage_string()
 	if(length(desc_damage))
 		desc_comp += "<BR/>[desc_damage]"
@@ -395,8 +395,8 @@
 	if(user && (z_flags & ZMM_MANGLE_PLANES))
 		addtimer(CALLBACK(user, /mob/proc/check_emissive_equipment), 0, TIMER_UNIQUE)
 
-	events_repository.raise_event(/decl/observ/mob_unequipped, user, src)
-	events_repository.raise_event(/decl/observ/item_unequipped, src, user)
+	RAISE_EVENT(/decl/observ/mob_unequipped, user, src)
+	RAISE_EVENT_REPEAT(/decl/observ/item_unequipped, src, user)
 
 // called just as an item is picked up (loc is not yet changed)
 /obj/item/proc/pickup(mob/user)
@@ -444,8 +444,8 @@
 	if(user && (z_flags & ZMM_MANGLE_PLANES))
 		addtimer(CALLBACK(user, /mob/proc/check_emissive_equipment), 0, TIMER_UNIQUE)
 
-	events_repository.raise_event(/decl/observ/mob_equipped, user, src, slot)
-	events_repository.raise_event(/decl/observ/item_equipped, src, user, slot)
+	RAISE_EVENT(/decl/observ/mob_equipped, user, src, slot)
+	RAISE_EVENT_REPEAT(/decl/observ/item_equipped, src, user, slot)
 
 // As above but for items being equipped to an active module on a robot.
 /obj/item/proc/equipped_robot(var/mob/user)

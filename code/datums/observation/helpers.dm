@@ -1,5 +1,5 @@
 /atom/movable/proc/recursive_move(var/atom/movable/am, var/old_loc, var/new_loc)
-	events_repository.raise_event(/decl/observ/moved, src, old_loc, new_loc)
+	RAISE_EVENT(/decl/observ/moved, src, old_loc, new_loc)
 
 /atom/movable/proc/move_to_turf(var/atom/movable/am, var/old_loc, var/new_loc)
 	var/turf/T = get_turf(new_loc)
