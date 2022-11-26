@@ -44,12 +44,10 @@
 					break
 	return 1
 
-/datum/computer_file/program/revelation/Clone(datum/computer_file/program/revelation/copy_instance = null, rename = FALSE)
-	if(!copy_instance)
-		copy_instance = new type
-	copy_instance = ..(copy_instance, rename)
-	copy_instance.armed = armed
-	return copy_instance
+/datum/computer_file/program/revelation/PopulateClone(datum/computer_file/program/revelation/clone)
+	clone = ..()
+	clone.armed = armed
+	return clone
 
 /datum/nano_module/program/revelation
 	name = "Revelation Virus"

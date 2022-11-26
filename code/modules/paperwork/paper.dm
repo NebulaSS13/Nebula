@@ -51,19 +51,25 @@
 	if(!mapload && persist_on_init)
 		SSpersistence.track_value(src, /decl/persistence_handler/paper)
 
-/obj/item/paper/Clone(obj/item/paper/copy_instance = null)
-	if(!copy_instance)
-		copy_instance = new type(null, material, info, name)
-	
-	copy_instance.fields             = fields
-	copy_instance.last_modified_ckey = last_modified_ckey
-	copy_instance.rigged             = rigged
-	copy_instance.is_crumpled        = is_crumpled
-	copy_instance.stamp_text         = stamp_text
-	copy_instance.applied_stamps     = LAZYLEN(applied_stamps)? applied_stamps.Copy() : null
-	copy_instance.metadata           = LAZYLEN(metadata)?       metadata.Copy()       : null
-	copy_instance.updateinfolinks()
-	return ..(copy_instance) //Calls update_icon()
+/obj/item/paper/GetCloneArgs()
+	return list(null, material, info, name)
+
+/obj/item/paper/PopulateClone(obj/item/paper/clone)
+	clone = ..()
+	clone.fields             = fields
+	clone.last_modified_ckey = last_modified_ckey
+	clone.rigged             = rigged
+	clone.is_crumpled        = is_crumpled
+	clone.stamp_text         = stamp_text
+	clone.applied_stamps     = LAZYLEN(applied_stamps)? listdeeperCopy(applied_stamps) : null
+	clone.metadata           = LAZYLEN(metadata)?       listdeeperCopy(metadata)       : null
+	return clone
+
+/obj/item/paper/Clone()
+	var/obj/item/paper/clone = ..()
+	if(clone)
+		clone.updateinfolinks()
+	return clone
 
 /obj/item/paper/get_matter_amount_modifier()
 	return 0.2
@@ -406,7 +412,7 @@
 		if(!user.canUnEquip(other))
 			to_chat(user, SPAN_WARNING("You can't unequip \the [other]!"))
 			return
-		user.unEquip(src, B) 
+		user.unEquip(src, B)
 		user.unEquip(other, B)
 
 	if (name != initial(name))

@@ -76,17 +76,15 @@
 		return parent_paths + "/" + filename
 	return filename
 
-/datum/computer_file/directory/Clone(datum/computer_file/directory/copy_instance, rename = FALSE)
-	if(!copy_instance)
-		copy_instance = new type
-	copy_instance = ..(copy_instance, rename)
-	copy_instance.inherit_perms = inherit_perms
+/datum/computer_file/directory/PopulateClone(datum/computer_file/directory/clone)
+	clone = ..()
+	clone.inherit_perms = inherit_perms
 	// Add copies of all of our stored files
 	for(var/datum/computer_file/stored in get_held_files())
 		// Do not rename cloned files.
-		var/datum/computer_file/stored_clone = stored.Clone(null, FALSE)
+		var/datum/computer_file/stored_clone = stored.Clone(FALSE)
 		if(stored_clone)
-			copy_instance.held_files += weakref(stored_clone)
-			copy_instance.temp_file_refs += stored_clone
+			clone.held_files += weakref(stored_clone)
+			clone.temp_file_refs += stored_clone
 
-	return copy_instance
+	return clone

@@ -69,9 +69,31 @@
 	CRASH("get_recursive_loc_of_type() called on datum type [type] - this proc should only be called on /atom.")
 
 /**
- * This proc returns a copy of the src datum.
- * Copy here implies a copy as similar in terms of look and contents, but internally may differ a bit. 
- * copy_instance is an optional parameter with the instance to copy the content of the src datum into. It's expected to be of a subtype of the src of the proc being called on.
+ * This proc returns a clone of the src datum.
+ * Clone here implies a copy similar in terms of look and contents, but internally may differ a bit.
+ * The clone shall not keep references onto instances owned by the original, in most cases.
+ * Try to avoid overriding this proc directly and instead override GetCloneArgs() and PopulateClone().
  */
-/datum/proc/Clone(var/datum/copy_instance = null)
-	return
+/datum/proc/Clone()
+	SHOULD_CALL_PARENT(TRUE)
+	var/list/newargs = GetCloneArgs()
+	if(newargs)
+		. = new type(arglist(newargs))
+	else
+		. = new type
+	return PopulateClone(.)
+
+/**
+ * Returns a list with the arguments passed to the new() of a cloned instance.
+ * Override this, instead of Clone() itself.
+ */
+/datum/proc/GetCloneArgs()
+    return
+
+/**
+ * Used to allow sub-classes to do further processing on the cloned instance returned by Clone().
+ * Override this, instead of Clone() itself.
+ * ** Please avoid running update code in here if possible. You could always override Clone() for this kind of things, so we don't end up with 50 calls to update_icon in the chain. **
+ */
+/datum/proc/PopulateClone(var/datum/clone)
+    return clone
