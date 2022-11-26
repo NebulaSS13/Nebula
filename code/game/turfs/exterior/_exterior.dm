@@ -6,6 +6,7 @@
 	layer = PLATING_LAYER
 	open_turf_type = /turf/exterior/open
 	turf_flags = TURF_FLAG_BACKGROUND
+	var/base_color
 	var/diggable = 1
 	var/dirt_color = "#7c5e42"
 	var/possible_states = 0
@@ -23,7 +24,10 @@
 
 /turf/exterior/Initialize(mapload, no_update_icon = FALSE)
 
-	color = null
+	if(base_color)
+		color = base_color
+	else
+		color = null
 
 	if(possible_states > 0)
 		icon_state = "[rand(0, possible_states)]"
@@ -44,13 +48,12 @@
 	if (no_update_icon)
 		return
 
-	if (mapload)	// If this is a mapload, then our neighbors will be updating their own icons too -- doing it for them is rude.
+	// If this is a mapload, then our neighbors will be updating their own icons too -- doing it for them is rude.
+	if(mapload)
 		update_icon()
 	else
 		for (var/turf/T in RANGE_TURFS(src, 1))
-			if (T == src)
-				continue
-			if (TICK_CHECK)	// not CHECK_TICK -- only queue if the server is overloaded
+			if(TICK_CHECK) // not CHECK_TICK -- only queue if the server is overloaded
 				T.queue_icon_update()
 			else
 				T.update_icon()
