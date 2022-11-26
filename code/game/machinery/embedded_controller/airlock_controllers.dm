@@ -99,7 +99,6 @@
 
 //Access controller for door control - used in virology and the like
 /obj/machinery/embedded_controller/radio/airlock/access_controller
-	icon = 'icons/obj/airlock_machines.dmi'
 	name = "Access Controller"
 	tag_secure = 1
 	base_type = /obj/machinery/embedded_controller/radio/airlock/access_controller

@@ -95,7 +95,7 @@
 /////////////////////////////////////////////////////////////////////////////////////
 /obj/machinery/airlock_sensor
 	name = "airlock sensor"
-	icon = 'icons/obj/airlock_machines.dmi'
+	icon = 'icons/obj/machines/airlock_sensor.dmi'
 	icon_state = "sensor"
 	layer = ABOVE_WINDOW_LAYER
 	anchored = TRUE
@@ -236,7 +236,7 @@
 // Airlock Button
 /////////////////////////////////////////////////////////////////////////////////////
 /obj/machinery/button/access
-	icon = 'icons/obj/airlock_machines.dmi'
+	icon = 'icons/obj/machines/button_airlock.dmi'
 	icon_state = "button"
 	name = "access button"
 	interact_offline = TRUE

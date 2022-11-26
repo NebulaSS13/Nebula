@@ -386,8 +386,8 @@
 // Airlock Sensor Frame
 ////////////////////////////////////////////////////////////////////////////////////////////////////////
 /obj/item/frame/button/airlock_controller_config/airlock_sensor
-	icon = 'icons/obj/airlock_machines.dmi'
-	icon_state = "sensor"
+	icon = 'icons/obj/machines/airlock_sensor.dmi'
+	icon_state = ICON_STATE_WORLD
 	name = "airlock sensor"
 	desc = "An airlock sensor frame. Use on an airlock controller to pre-configure it."
 	build_machine_type = /obj/machinery/airlock_sensor/buildable
@@ -435,8 +435,8 @@
 /obj/item/frame/button/airlock_controller_config/access
 	name = "button frame (airlock)"
 	desc  = "Use on an airlock controller to pre-configure it."
-	icon = 'icons/obj/airlock_machines.dmi'
-	icon_state = "button"
+	icon = 'icons/obj/machines/button_airlock.dmi'
+	icon_state = ICON_STATE_WORLD
 	build_machine_type = /obj/machinery/button/access/buildable
 	///The type of the interior button to build for this frame
 	var/interior_button_type = /obj/machinery/button/access/interior/buildable
