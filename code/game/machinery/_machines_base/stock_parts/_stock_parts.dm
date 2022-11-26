@@ -96,11 +96,11 @@
 	if(can_take_damage())
 		if(!is_functional())
 			to_chat(user, SPAN_WARNING("It is completely broken."))
-		else if(health < (0.5 * max_health))
+		else if(get_percent_health() < 50)
 			to_chat(user, SPAN_WARNING("It is heavily damaged."))
-		else if(health < (0.75 * max_health))
+		else if(get_percent_health() < 75)
 			to_chat(user, SPAN_NOTICE("It is showing signs of damage."))
-		else if(health < max_health)
+		else if(is_damaged())
 			to_chat(user, SPAN_NOTICE("It is showing some wear and tear."))
 
 //Machines handle damaging for us, so don't do it twice

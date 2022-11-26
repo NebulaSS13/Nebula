@@ -4,7 +4,7 @@
 		return 0 //Must return a number
 	if(damage < 0)
 		CRASH("Item '[type]' take_damage proc was called with negative damage.") //Negative damage are an implementation issue.
-	
+
 	//Apply armor
 	var/datum/extension/armor/A = get_extension(src, /datum/extension/armor)
 	if(A)
@@ -123,7 +123,17 @@
 
 ///Returns whether the item can take damages or if its invulnerable
 /obj/item/proc/can_take_damage()
-	return health != ITEM_HEALTH_NO_DAMAGE && max_health != ITEM_HEALTH_NO_DAMAGE
+	return (health != ITEM_HEALTH_NO_DAMAGE) && (max_health != ITEM_HEALTH_NO_DAMAGE)
 
+///Returns whether the object is currently damaged.
 /obj/item/proc/is_damaged()
 	return can_take_damage() && (health < max_health)
+
+///Returns the percentage of health remaining for this object.
+/obj/item/proc/get_percent_health()
+	return can_take_damage()? round((health * 100)/max_health, 0.01) : 100
+
+///Returns the percentage of damage done to this object.
+/obj/item/proc/get_percent_damage()
+	//Clamp from 0 to 100 so health values larger than max_health don't return unhelpful numbers
+	return clamp(100 - get_percent_health(), 0, 100)

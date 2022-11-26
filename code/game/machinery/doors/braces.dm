@@ -33,7 +33,7 @@
 
 // This is also called from airlock's examine, so it's a different proc to prevent code copypaste.
 /obj/item/airlock_brace/proc/examine_health()
-	switch(health_percentage())
+	switch(get_percent_health())
 		if(-100 to 25)
 			return "<span class='danger'>\The [src] looks seriously damaged, and probably won't last much more.</span>"
 		if(25 to 50)
@@ -97,13 +97,13 @@
 
 	if(IS_WELDER(W))
 		var/obj/item/weldingtool/C = W
-		if(health == max_health)
+		if(!is_damaged())
 			to_chat(user, "\The [src] does not require repairs.")
 			return
 		if(C.weld(0,user))
 			playsound(src, 'sound/items/Welder.ogg', 100, 1)
 			health = min(health + rand(20,30), max_health)
-			if(health == max_health)
+			if(!is_damaged())
 				to_chat(user, "You repair some dents on \the [src]. It is in perfect condition now.")
 			else
 				to_chat(user, "You repair some dents on \the [src].")
@@ -128,9 +128,3 @@
 	airlock = null
 	update_icon()
 
-/obj/item/airlock_brace/proc/health_percentage()
-	if(!max_health)
-		return 0
-	if(!can_take_damage())
-		return 100
-	return (health / max_health) * 100

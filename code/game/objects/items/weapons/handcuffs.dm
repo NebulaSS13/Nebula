@@ -33,7 +33,7 @@
 /obj/item/handcuffs/examine(mob/user)
 	. = ..()
 	if (health > 0 && max_health > 0)
-		var display = health / max_health * 100
+		var display = get_percent_health()
 		if (display > 66)
 			return
 		to_chat(user, SPAN_WARNING("They look [display < 33 ? "badly ": ""]damaged."))

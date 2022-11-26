@@ -54,8 +54,8 @@
 		to_chat(user, "<span class='notice'>The anchoring bolts [anchored ? "are" : "can be"] <b>wrenched</b> in place and the maintenance panel [opened ? "can be" : "is"] <b>screwed</b> in place.</span>")
 	else
 		to_chat(user, "<span class='notice'>The maintenance panel [opened ? "can be" : "is"] <b>screwed</b> in place.</span>")
-	if(health != max_health)
-		if(health <= (max_health/2))
+	if(is_damaged())
+		if(get_percent_health() <= 50)
 			to_chat(user,"<span class='warning'>It looks pretty beat up.</span>")
 		else
 			to_chat(user, "<span class='warning'>Its got a few dents in it.</span>")
@@ -69,7 +69,7 @@
 	if(health < 1)
 		visible_message(SPAN_DANGER("\The [src] falls to pieces!"))
 		physically_destroyed()
-	else if(health < (max_health * 0.15) && prob(5))
+	else if((get_percent_health() < 15) && prob(5))
 		visible_message(SPAN_DANGER("\The [src] starts to break apart!"))
 
 /obj/item/electronic_assembly/proc/check_interactivity(mob/user)
@@ -474,7 +474,7 @@
 		update_icon()
 	else if(IS_COIL(I))
 		var/obj/item/stack/cable_coil/C = I
-		if(can_take_damage() && (health < max_health) && do_after(user, 10, src) && C.use(1))
+		if(is_damaged() && do_after(user, 10, src) && C.use(1))
 			user.visible_message("\The [user] patches up \the [src].")
 			health = min(max_health, health + 5)
 	else

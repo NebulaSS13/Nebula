@@ -31,10 +31,10 @@
 	if(can_take_damage() && lastdamage > 0)
 		switch(lastdamtype)
 			if(ELECTROCUTE)
-				if(prob(50) && cell && health < (max_health/2))
+				if(prob(50) && cell && (get_percent_health() < 50))
 					cell.emp_act(3)
 			if(BRUTE)
-				if(prob(20) && cell && health < (max_health/2))
+				if(prob(20) && cell && (get_percent_health() < 50))
 					cell.explosion_act(3)
 	. = ..()
 

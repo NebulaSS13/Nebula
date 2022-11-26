@@ -168,7 +168,7 @@
 		var/obj/machinery/portable_atmospherics/canister/C = dropping
 		if(pilot_coverage < 100)
 			to_chat(user, SPAN_NOTICE("This type of chassis doesn't support internals."))
-			return TRUE	
+			return TRUE
 		if(!C.anchored && do_after(user, 5, src))
 			if(C.anchored)
 				return
@@ -188,10 +188,10 @@
 /obj/item/mech_component/chassis/return_diagnostics(mob/user)
 	..()
 	if(diagnostics)
-		to_chat(user, SPAN_NOTICE(" Diagnostics Unit Integrity: <b>[round((((diagnostics.max_health - diagnostics.health) / diagnostics.max_health)) * 100)]%</b>"))
+		to_chat(user, SPAN_NOTICE(" Diagnostics Unit Integrity: <b>[round(get_percent_health())]%</b>"))
 	else
 		to_chat(user, SPAN_WARNING(" Diagnostics Unit Missing or Non-functional."))
 	if(m_armour)
-		to_chat(user, SPAN_NOTICE(" Armor Integrity: <b>[round((((m_armour.max_health - m_armour.health) / m_armour.max_health)) * 100)]%</b>"))
+		to_chat(user, SPAN_NOTICE(" Armor Integrity: <b>[round(m_armour.get_percent_health())]%</b>"))
 	else
 		to_chat(user, SPAN_WARNING(" Armor Missing or Non-functional."))
