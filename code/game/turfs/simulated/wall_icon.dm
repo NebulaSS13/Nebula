@@ -19,7 +19,7 @@
 			W.wall_connections = null
 			W.other_connections = null
 			iterate_turfs += W
-		for(var/turf/simulated/wall/W AS_ANYTHING in iterate_turfs)
+		for(var/turf/simulated/wall/W as anything in iterate_turfs)
 			W.update_icon()
 	else
 		wall_connections = null
@@ -176,7 +176,7 @@
 		var/integrity = material.integrity
 		if(reinf_material)
 			integrity += reinf_material.integrity
-		add_overlay(SSmaterials.wall_damage_overlays[Clamp(round(damage / integrity * DAMAGE_OVERLAY_COUNT) + 1, 1, DAMAGE_OVERLAY_COUNT)])
+		add_overlay(SSmaterials.wall_damage_overlays[clamp(round(damage / integrity * DAMAGE_OVERLAY_COUNT) + 1, 1, DAMAGE_OVERLAY_COUNT)])
 
 /turf/simulated/wall/proc/can_join_with(var/turf/simulated/wall/W)
 	if(material && istype(W.material))

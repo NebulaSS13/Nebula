@@ -27,10 +27,10 @@
 	slices_num = 3
 	center_of_mass = @"{'x':16,'y':16}"
 
-/obj/item/chems/food/sliceable/flatdough/Initialize()
+/obj/item/chems/food/sliceable/flatdough/populate_reagents()
 	. = ..()
 	reagents.add_reagent(/decl/material/liquid/nutriment/protein, 1)
-	reagents.add_reagent(/decl/material/liquid/nutriment, 3)
+	reagents.add_reagent(/decl/material/liquid/nutriment,         3)
 
 /obj/item/chems/food/doughslice
 	name = "dough slice"

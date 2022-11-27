@@ -48,7 +48,7 @@
 /turf/simulated/floor/plating,
 /area/template_noop)
 "k" = (
-/obj/structure/filingcabinet,
+/obj/structure/filing_cabinet,
 /obj/effect/decal/cleanable/cobweb,
 /turf/simulated/floor/lino,
 /area/template_noop)
@@ -249,7 +249,7 @@
 /turf/simulated/floor/lino,
 /area/template_noop)
 "X" = (
-/obj/structure/filingcabinet,
+/obj/structure/filing_cabinet,
 /turf/simulated/floor/lino,
 /area/template_noop)
 "Y" = (

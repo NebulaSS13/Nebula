@@ -51,7 +51,7 @@
 	return /decl/material/liquid/slimejelly
 
 /mob/living/slime/adjustToxLoss(var/amount)
-	toxloss = Clamp(toxloss + amount, 0, maxHealth)
+	toxloss = clamp(toxloss + amount, 0, maxHealth)
 
 /mob/living/slime/setToxLoss(var/amount)
 	adjustToxLoss(amount-getToxLoss())
@@ -263,13 +263,6 @@
 				playsound(loc, 'sound/weapons/punchmiss.ogg', 25, 1, -1)
 				visible_message(SPAN_DANGER("\The [user] has attempted to punch \the [src]!"))
 				return TRUE
-			if(MUTATION_HULK in user.mutations)
-				damage += 5
-				if(feeding_on)
-					set_feeding_on()
-				if(istype(slime_ai) && slime_ai.current_target)
-					slime_ai.current_target = null
-				throw_at(get_edge_target_turf(src, get_dir(user, src)), 2, 10, user, FALSE)
 			playsound(loc, "punch", 25, 1, -1)
 			visible_message(SPAN_DANGER("\The [user] has punched \the [src]!"))
 			adjustBruteLoss(damage)
@@ -311,7 +304,7 @@
 			adjustToxLoss(-10)
 
 /mob/living/slime/adjust_nutrition(var/amt)
-	nutrition = Clamp(nutrition + amt, 0, get_max_nutrition())
+	nutrition = clamp(nutrition + amt, 0, get_max_nutrition())
 
 /mob/living/slime/proc/get_hunger_state()
 	. = 0

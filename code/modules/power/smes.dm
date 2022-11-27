@@ -115,7 +115,7 @@
 
 /obj/machinery/power/smes/proc/input_power(var/percentage)
 	var/to_input = target_load * (percentage/100)
-	to_input = between(0, to_input, target_load)
+	to_input = clamp(0, to_input, target_load)
 	input_available = 0
 	if(percentage == 100)
 		inputting = 2
@@ -165,9 +165,9 @@
 		var/is_input_available = FALSE
 		for(var/obj/item/stock_parts/power/terminal/term in power_components)
 			if(!term.terminal || !term.terminal.powernet)
-				continue			
+				continue
 			is_input_available = TRUE
-			term.terminal.powernet.smes_demand += target_load		
+			term.terminal.powernet.smes_demand += target_load
 			term.terminal.powernet.inputting.Add(src)
 		if(!is_input_available)
 			target_load = 0 // We won't input any power without powernet connection.
@@ -196,7 +196,7 @@
 		return
 
 	var/total_restore = output_used * (percent_load / 100) // First calculate amount of power used from our output
-	total_restore = between(0, total_restore, output_used) // Now clamp the value between 0 and actual output, just for clarity.
+	total_restore = clamp(0, total_restore, output_used) // Now clamp the value between 0 and actual output, just for clarity.
 	total_restore = output_used - total_restore			   // And, at last, subtract used power from outputted power, to get amount of power we will give back to the SMES.
 
 	// now recharge this amount

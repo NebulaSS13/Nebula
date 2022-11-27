@@ -19,6 +19,7 @@
 	var/obj/item/chems/glass/beaker = null
 	var/filtering = 0
 	var/pump
+	var/lavage = FALSE // Are we rinsing reagents from the lungs?
 	var/list/stasis_settings = list(1, 2, 5, 10)
 	var/stasis = 1
 	var/pump_speed
@@ -35,7 +36,7 @@
 
 /obj/machinery/sleeper/standard/Initialize(mapload, d, populate_parts)
 	. = ..()
-	add_reagent_canister(null, new /obj/item/chems/chem_disp_cartridge/stabilizer()) 
+	add_reagent_canister(null, new /obj/item/chems/chem_disp_cartridge/stabilizer())
 	add_reagent_canister(null, new /obj/item/chems/chem_disp_cartridge/sedatives())
 	add_reagent_canister(null, new /obj/item/chems/chem_disp_cartridge/painkillers())
 	add_reagent_canister(null, new /obj/item/chems/chem_disp_cartridge/antitoxins())
@@ -123,6 +124,16 @@
 						ingested.trans_to_obj(beaker, pump_speed * trans_amt)
 		else
 			toggle_pump()
+	if(lavage)
+		if(beaker?.reagents)
+			if (beaker.reagents.total_volume < beaker.reagents.maximum_volume)
+				var/datum/reagents/inhaled = occupant.get_inhaled_reagents()
+				var/trans_volume = LAZYLEN(inhaled?.reagent_volumes)
+				if(inhaled && trans_volume)
+					inhaled.trans_to_obj(beaker, pump_speed * trans_volume)
+		else
+			toggle_lavage()
+
 
 	if(iscarbon(occupant) && stasis > 1)
 		occupant.SetStasis(stasis)
@@ -136,7 +147,7 @@
 		var/list/icon_scale_values = occupant.get_icon_scale_mult()
 		var/desired_scale_x = icon_scale_values[1]
 		var/desired_scale_y = icon_scale_values[2]
-		
+
 		var/matrix/M = matrix()
 		M.Scale(desired_scale_x, desired_scale_y)
 		M.Translate(0, (1.5 * world.icon_size) * (desired_scale_y - 1))
@@ -167,7 +178,11 @@
 			empties++
 			continue
 		var/list/reagent = list()
-		reagent["name"] =   canister.label || "unlabeled"
+		var/datum/extension/labels/lab = get_extension(canister, /datum/extension/labels)
+		if(length(lab?.labels))
+			reagent	["name"] = (lab.labels[1])
+		else
+			reagent	["name"] = "unlabeled"
 		reagent["id"] =     "\ref[canister]"
 		reagent["amount"] = canister.reagents.total_volume
 		loaded_reagents += list(reagent)
@@ -189,6 +204,7 @@
 		data["beaker"] = -1
 	data["filtering"] = filtering
 	data["pump"] = pump
+	data["lavage"] = lavage
 	data["stasis"] = stasis
 	data["skill_check"] = user.skill_check(SKILL_MEDICAL, SKILL_BASIC)
 	ui = SSnano.try_update_ui(user, src, ui_key, ui, data, force_open)
@@ -224,6 +240,10 @@
 	if(href_list["pump"])
 		if(filtering != text2num(href_list["pump"]))
 			toggle_pump()
+			return TOPIC_REFRESH
+	if(href_list["lavage"])
+		if(lavage != text2num(href_list["lavage"]))
+			toggle_lavage()
 			return TOPIC_REFRESH
 	if(href_list["chemical"])
 		var/obj/canister = locate(href_list["chemical"])
@@ -302,8 +322,21 @@
 	if(!occupant || !beaker)
 		pump = 0
 		return
-	to_chat(occupant, SPAN_WARNING("You feel a tube jammed down your throat."))
 	pump = !pump
+	if(pump)
+		to_chat(occupant, SPAN_WARNING("You feel a tube jammed down your throat."))
+	else
+		to_chat(occupant, SPAN_WARNING("You feel a tube retract from your throat."))
+
+/obj/machinery/sleeper/proc/toggle_lavage()
+	if(!occupant || !beaker)
+		lavage = FALSE
+		return
+	lavage = !lavage
+	if (lavage)
+		to_chat(occupant, SPAN_WARNING("You feel a tube jammed down your windpipe."))
+	else
+		to_chat(occupant, SPAN_NOTICE("You feel a tube retract from your windpipe."))
 
 /obj/machinery/sleeper/proc/go_in(var/mob/M, var/mob/user)
 	if(!M || M.anchored)
@@ -362,6 +395,7 @@
 		beaker = null
 		toggle_filter()
 		toggle_pump()
+		toggle_lavage()
 
 /obj/machinery/sleeper/proc/inject_chemical(var/mob/living/user, var/obj/canister, var/amount, var/target_transfer_type = CHEM_INJECT)
 	if(stat & (BROKEN|NOPOWER))
@@ -385,7 +419,7 @@
 
 /obj/machinery/sleeper/RefreshParts()
 	..()
-	pump_speed = 2 + max(Clamp(total_component_rating_of_type(/obj/item/stock_parts/scanning_module), 1, 10), 1)
+	pump_speed = 2 + max(clamp(total_component_rating_of_type(/obj/item/stock_parts/scanning_module), 1, 10), 1)
 	max_canister_capacity = 5 + round(total_component_rating_of_type(/obj/item/stock_parts/manipulator)/2)
 
 /obj/machinery/sleeper/emag_act(var/remaining_charges, var/mob/user)

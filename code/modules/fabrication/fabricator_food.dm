@@ -5,10 +5,8 @@
 	icon = 'icons/obj/machines/fabricators/replicator.dmi'
 	icon_state = "replicator"
 	base_icon_state = "replicator"
+	base_storage_capacity_mult = 5
 	has_recycler = FALSE
-	base_storage_capacity = list(
-		/decl/material/liquid/nutriment = 100
-	)
 
 /obj/machinery/fabricator/replicator/hear_talk(var/mob/M, var/text, var/verb, var/decl/language/speaking)
 	if(speaking && !speaking.machine_understands)

@@ -1,4 +1,3 @@
-
 /obj/item/gun/projectile/pistol
 	name = "pistol"
 	icon = 'icons/obj/guns/pistol.dmi'
@@ -9,6 +8,9 @@
 	accuracy_power = 7
 	safety_icon = "safety"
 	ammo_indicator = TRUE
+
+/obj/item/gun/projectile/pistol/rubber
+	magazine_type = /obj/item/ammo_magazine/pistol/rubber
 
 /obj/item/gun/projectile/pistol/update_base_icon()
 	var/base_state = get_world_inventory_state()
@@ -70,3 +72,4 @@
 	icon = 'icons/obj/guns/holdout_pistol_silencer.dmi'
 	icon_state = ICON_STATE_WORLD
 	w_class = ITEM_SIZE_SMALL
+	material = /decl/material/solid/metal/steel

@@ -144,13 +144,13 @@ var/global/list/datum/dna/gene/dna_genes[0]
 	// FIXME:  Species-specific defaults pls
 	if(!character.h_style)
 		character.h_style = /decl/sprite_accessory/hair/bald
-	var/list/hair_types = subtypesof(/decl/sprite_accessory/hair)
+	var/list/hair_types = decls_repository.get_decl_paths_of_subtype(/decl/sprite_accessory/hair)
 	SetUIValueRange(DNA_UI_HAIR_STYLE,  hair_types.Find(character.h_style),  length(hair_types), 1)
 
 	// Facial Hair
 	if(!character.f_style)
 		character.f_style = /decl/sprite_accessory/facial_hair/shaved
-	var/list/beard_types = subtypesof(/decl/sprite_accessory/facial_hair)
+	var/list/beard_types = decls_repository.get_decl_paths_of_subtype(/decl/sprite_accessory/facial_hair)
 	SetUIValueRange(DNA_UI_BEARD_STYLE, beard_types.Find(character.f_style), length(beard_types), 1)
 
 	body_markings.Cut()

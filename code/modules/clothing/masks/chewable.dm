@@ -8,14 +8,15 @@
 	var/chem_volume = 0
 	var/chewtime = 0
 	var/brand
-	var/list/filling = list()
 
 /obj/item/clothing/mask/chewable/Initialize()
 	. = ..()
 	atom_flags |= ATOM_FLAG_NO_REACT // so it doesn't react until you light it
+	initialize_reagents()
+
+/obj/item/clothing/mask/chewable/initialize_reagents(populate = TRUE)
 	create_reagents(chem_volume) // making the cigarrete a chemical holder with a maximum volume of 15
-	for(var/R in filling)
-		reagents.add_reagent(R, filling[R])
+	. = ..()
 
 /obj/item/clothing/mask/chewable/equipped(var/mob/living/user, var/slot)
 	..()
@@ -38,7 +39,7 @@
 	if(reagents && reagents.total_volume)
 		if(ishuman(loc))
 			var/mob/living/carbon/human/C = loc
-			if (src == C.wear_mask && C.check_has_mouth())
+			if (src == C.get_equipped_item(slot_wear_mask_str) && C.check_has_mouth())
 				reagents.trans_to_mob(C, REM, CHEM_INGEST, 0.2)
 			add_trace_DNA(C)
 		else
@@ -84,12 +85,16 @@
 /obj/item/clothing/mask/chewable/tobacco/lenni
 	name = "chewing tobacco"
 	desc = "A chewy wad of tobacco. Cut in long strands and treated with syrups so it tastes less like a ash-tray when you stuff it into your face."
-	filling = list(/decl/material/solid/tobacco = 2)
+
+/obj/item/clothing/mask/chewable/tobacco/lenni/populate_reagents()
+	reagents.add_reagent(/decl/material/solid/tobacco, 2)
 
 /obj/item/clothing/mask/chewable/tobacco/redlady
 	name = "chewing tobacco"
 	desc = "A chewy wad of fine tobacco. Cut in long strands and treated with syrups so it doesn't taste like a ash-tray when you stuff it into your face"
-	filling = list(/decl/material/solid/tobacco/fine = 2)
+
+/obj/item/clothing/mask/chewable/tobacco/redlady/populate_reagents()
+	reagents.add_reagent(/decl/material/solid/tobacco/fine, 2)
 
 /obj/item/clothing/mask/chewable/tobacco/nico
 	name = "nicotine gum"
@@ -97,10 +102,12 @@
 	icon = 'icons/clothing/mask/chewables/gum_nicotine.dmi'
 	type_butt = /obj/item/trash/cigbutt/spitgum
 
-/obj/item/clothing/mask/chewable/tobacco/nico/Initialize()
+/obj/item/clothing/mask/chewable/tobacco/nico/initialize_reagents(populate = TRUE)
 	. = ..()
-	reagents.add_reagent(/decl/material/liquid/nicotine, 2)
 	color = reagents.get_color()
+
+/obj/item/clothing/mask/chewable/tobacco/nico/populate_reagents()
+	reagents.add_reagent(/decl/material/liquid/nicotine, 2)
 
 /obj/item/clothing/mask/chewable/candy
 	name = "wad"
@@ -112,19 +119,21 @@
 	slot_flags = SLOT_EARS | SLOT_FACE
 	chem_volume = 50
 	chewtime = 300
-	filling = list(/decl/material/liquid/nutriment/sugar = 2)
 	var/initial_payload_amount = 3
+
+/obj/item/clothing/mask/chewable/candy/populate_reagents()
+	reagents.add_reagent(/decl/material/liquid/nutriment/sugar, 2)
+	var/list/possible_payloads = get_possible_initial_reagents()
+	if(length(possible_payloads))
+		reagents.add_reagent(pick(possible_payloads), initial_payload_amount)
 
 /obj/item/clothing/mask/chewable/candy/proc/get_possible_initial_reagents()
 	return
 
-/obj/item/clothing/mask/chewable/candy/Initialize()
+/obj/item/clothing/mask/chewable/candy/initialize_reagents(populate)
 	. = ..()
-	var/list/possible_payloads = get_possible_initial_reagents()
-	if(length(possible_payloads))
-		reagents.add_reagent(pick(possible_payloads), initial_payload_amount)
-		color = reagents.get_color()
-		desc += " This one is labeled '[reagents.get_primary_reagent_name()]'."
+	color = reagents.get_color()
+	desc += " This one is labeled '[reagents.get_primary_reagent_name()]'."
 
 /obj/item/trash/cigbutt/spitgum
 	name = "old gum"
@@ -163,12 +172,9 @@
 	initial_payload_amount = 10
 
 /obj/item/clothing/mask/chewable/candy/lolli/on_update_icon()
+	. = ..()
 	icon_state = get_world_inventory_state()
-	cut_overlays()
-	var/image/I = image(icon, "[icon_state]-stick")
-	I.appearance_flags |= RESET_COLOR
-	I.color = color
-	add_overlay(I)
+	add_overlay(overlay_image(icon, "[icon_state]-stick", color, RESET_COLOR))
 
 /obj/item/clothing/mask/chewable/candy/lolli/get_possible_initial_reagents()
 	return list(
@@ -206,8 +212,11 @@
 /obj/item/clothing/mask/chewable/candy/lolli/weak_meds
 	name = "medicine lollipop"
 	desc = "A sucrose sphere on a small handle, it has been infused with medication."
-	filling = list(/decl/material/liquid/nutriment/sugar = 6)
 	initial_payload_amount = 15
+
+/obj/item/clothing/mask/chewable/candy/populate_reagents()
+	. = ..()
+	reagents.add_reagent(/decl/material/liquid/nutriment/sugar, 4) //6u in total
 
 /obj/item/clothing/mask/chewable/candy/lolli/weak_meds/get_possible_initial_reagents()
 	return list(

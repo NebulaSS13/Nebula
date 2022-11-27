@@ -239,7 +239,7 @@
 		var/datum/shuttle_log/s_log = SSshuttle.shuttle_logs[src]
 		s_log.handle_move(current_location, destination)
 
-	var/list/new_turfs = translate_turfs(turf_translation, current_location.base_area, current_location.base_turf)
+	var/list/new_turfs = translate_turfs(turf_translation, current_location.base_area, current_location.base_turf, TRUE)
 	current_location = destination
 
 	// if there's a zlevel above our destination, paint in a ceiling on it so we retain our air
@@ -291,9 +291,9 @@
 			var/datum/powernet/NewPN = new()
 			NewPN.add_cable(C)
 			propagate_network(C,C.powernet)
-	for(var/obj/machinery/atmospherics/pipe AS_ANYTHING in pipes)
+	for(var/obj/machinery/atmospherics/pipe as anything in pipes)
 		pipe.atmos_init() // this will clear pipenet/pipeline
-	for(var/obj/machinery/atmospherics/pipe AS_ANYTHING in pipes)
+	for(var/obj/machinery/atmospherics/pipe as anything in pipes)
 		pipe.build_network()
 
 //returns 1 if the shuttle has a valid arrive time

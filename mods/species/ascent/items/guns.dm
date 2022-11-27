@@ -10,7 +10,6 @@
 	self_recharge = 1
 	w_class = ITEM_SIZE_HUGE
 	one_hand_penalty = 6
-	multi_aim = 1
 	burst_delay = 3
 	burst = 3
 	accuracy = -1
@@ -21,10 +20,7 @@
 		list(mode_name="shock",  projectile_type = /obj/item/projectile/beam/stun/shock),
 		list(mode_name="lethal", projectile_type = /obj/item/projectile/beam/particle)
 		)
-	sprite_sheets = list(
-		BODYTYPE_MANTID_LARGE = 'mods/species/ascent/icons/particle_rifle/inhands_gyne.dmi',
-		BODYTYPE_SNAKE =        'mods/species/ascent/icons/particle_rifle/inhands_serpentid.dmi'
-		)
+	sprite_sheets = list(BODYTYPE_MANTID_LARGE = 'mods/species/ascent/icons/particle_rifle/inhands_gyne.dmi')
 
 /obj/item/gun/energy/particle/small
 	name = "particle projector"

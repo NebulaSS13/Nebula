@@ -69,7 +69,7 @@
 	return 1
 
 /datum/unit_test/air_alarm_connectivity/subsystems_to_await()
-	return list(SStimer)
+	return list(SStimer, SSalarm, SSmachines)
 
 /datum/unit_test/air_alarm_connectivity/check_result()
 	var/failed = FALSE
@@ -84,13 +84,25 @@
 		if(alarm.stat & (NOPOWER | BROKEN))
 			continue
 
-		for(var/tag in A.air_vent_names) // The point of this test is that while the names list is registered at init, the info is transmitted by radio.
+		//Make a list of devices that are being controlled by their air alarms
+		var/list/vents_in_area = list()
+		var/list/scrubbers_in_area = list()
+		for(var/obj/machinery/atmospherics/unary/vent_pump/V in A.contents)
+			if(V.controlled)
+				vents_in_area[V.id_tag] = V
+		for(var/obj/machinery/atmospherics/unary/vent_scrubber/V in A.contents)
+			if(V.controlled)
+				scrubbers_in_area[V.id_tag] = V
+
+		for(var/tag in vents_in_area) // The point of this test is that while the names list is registered at init, the info is transmitted by radio.
 			if(!A.air_vent_info[tag])
-				log_bad("Vent [A.air_vent_names[tag]] with id_tag [tag] did not update the air alarm in area [A].")
+				var/obj/machinery/atmospherics/unary/vent_pump/V = vents_in_area[tag]
+				log_bad("Vent [A.air_vent_names[tag]] ([V.x], [V.y], [V.z]) with id_tag [tag] did not update the air alarm in area [A].")
 				failed = TRUE
-		for(var/tag in A.air_scrub_names)
+		for(var/tag in scrubbers_in_area)
 			if(!A.air_scrub_info[tag])
-				log_bad("Scrubber [A.air_scrub_names[tag]] with id_tag [tag] did not update the air alarm in area [A].")
+				var/obj/machinery/atmospherics/unary/vent_scrubber/V = scrubbers_in_area[tag]
+				log_bad("Scrubber [A.air_scrub_names[tag]] ([V.x], [V.y], [V.z]) with id_tag [tag] did not update the air alarm in area [A].")
 				failed = TRUE
 
 	if(failed)
@@ -261,7 +273,7 @@
 
 /datum/unit_test/correct_allowed_spawn_test/start_test()
 	var/list/failed = list()
-	for(var/decl/spawnpoint/spawnpoint AS_ANYTHING in global.using_map.allowed_spawns)
+	for(var/decl/spawnpoint/spawnpoint as anything in global.using_map.allowed_spawns)
 		if(!length(spawnpoint.turfs))
 			log_unit_test("Map allows spawning in [spawnpoint.name], but [spawnpoint.name] has no associated spawn turfs.")
 			failed += spawnpoint.type
@@ -804,6 +816,9 @@
 /datum/unit_test/doors_shall_be_on_appropriate_turfs
 	name = "MAP: Doors shall be on appropriate turfs"
 
+/obj/abstract/map_data/proc/get_door_turf_exceptions(var/obj/machinery/door/D)
+	return LAZYACCESS(UT_turf_exceptions_by_door_type, D.type)
+
 /datum/unit_test/doors_shall_be_on_appropriate_turfs/start_test()
 	var/bad_doors = 0
 	for(var/obj/machinery/door/D in SSmachines.machinery)
@@ -813,10 +828,8 @@
 			bad_doors++
 			log_bad("Invalid door turf: [log_info_line(D.loc)]]")
 		else
-			var/list/turf_exceptions
 			var/obj/abstract/map_data/MD = get_map_data(D.loc.z)
-			if(UNLINT(MD?.UT_turf_exceptions_by_door_type))
-				turf_exceptions = UNLINT(MD.UT_turf_exceptions_by_door_type[D.type])
+			var/list/turf_exceptions = MD?.get_door_turf_exceptions(D)
 
 			var/is_bad_door = FALSE
 			for(var/turf/T in D.locs)

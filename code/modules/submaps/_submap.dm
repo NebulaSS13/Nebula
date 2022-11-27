@@ -41,7 +41,7 @@
 		jobs[job.title] = job
 
 	if(!associated_z)
-		testing( "Submap error - [name]/[archetype ? archetype.descriptor : "NO ARCHETYPE"] could not find an associated z-level for spawnpoint placement.")
+		testing( "Submap error - [name]/[archetype ? archetype.descriptor : "NO ARCHETYPE"] could not find an associated z-level for spawnpoint registration.")
 		qdel(src)
 		return
 
@@ -50,16 +50,15 @@
 		sync_cell(cell)
 
 	// Add the spawn points to the appropriate job list.
-	var/added_spawnpoint
+	var/registered_spawnpoint
 	for(var/check_z in GetConnectedZlevels(associated_z))
-		for(var/thing in block(locate(1, 1, check_z), locate(world.maxx, world.maxy, check_z)))
-			for(var/obj/effect/submap_landmark/spawnpoint/landmark in thing)
-				var/datum/job/submap/job = jobs[landmark.name]
-				if(istype(job))
-					job.spawnpoints += landmark
-					added_spawnpoint = TRUE
+		for(var/obj/abstract/submap_landmark/spawnpoint/landmark in LAZYACCESS(global.submap_spawnpoints_by_z, "[check_z]"))
+			var/datum/job/submap/job = jobs[landmark.name]
+			if(istype(job))
+				job.spawnpoints += landmark
+				registered_spawnpoint = TRUE
 
-	if(!added_spawnpoint)
+	if(!registered_spawnpoint)
 		testing( "Submap error - [name]/[archetype ? archetype.descriptor : "NO ARCHETYPE"] has no job spawn points.")
 		qdel(src)
 		return

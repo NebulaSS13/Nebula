@@ -8,6 +8,5 @@
 	possible_transfer_amounts = @"[5,10]"
 	volume = 250
 
-/obj/item/chems/spray/luminol/Initialize()
-	. = ..()
-	reagents.add_reagent(/decl/material/liquid/luminol, 250)
+/obj/item/chems/spray/luminol/populate_reagents()
+	reagents.add_reagent(/decl/material/liquid/luminol, reagents.maximum_volume)

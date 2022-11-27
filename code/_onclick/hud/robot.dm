@@ -186,8 +186,8 @@ var/global/obj/screen/robot_inventory
 	var/mob/living/silicon/robot/R = mymob
 
 	if(R.shown_robot_modules)
-		if(R.s_active)
-			R.s_active.close(R) //Closes the inventory ui.
+		if(R.active_storage)
+			R.active_storage.close(R) //Closes the inventory ui.
 		//Modules display is shown
 		//R.client.screen += robot_inventory	//"store" icon
 

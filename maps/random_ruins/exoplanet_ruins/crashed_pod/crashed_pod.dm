@@ -2,7 +2,6 @@ var/global/list/crashed_pod_areas = list()
 
 /datum/map_template/ruin/exoplanet/crashed_pod
 	name = "crashed survival pod"
-	id = "crashed_pod"
 	description = "A crashed survival pod from a destroyed ship."
 	suffixes = list("crashed_pod/crashed_pod.dmm")
 	cost = 2
@@ -38,15 +37,15 @@ var/global/list/crashed_pod_areas = list()
 		signal might draw help, but even if you should be so lucky, you must survive long \
 		enough for it to arrive."
 
-/obj/effect/submap_landmark/spawnpoint/crashed_pod_survivor
+/obj/abstract/submap_landmark/spawnpoint/crashed_pod_survivor
 	name = "Stranded Survivor"
 
-/obj/effect/submap_landmark/joinable_submap/crashed_pod
+/obj/abstract/submap_landmark/joinable_submap/crashed_pod
 	name = "Crashed Survival Pod"
 	archetype = /decl/submap_archetype/crashed_pod
 	submap_datum_type = /datum/submap/crashed_pod
 
-/obj/effect/submap_landmark/joinable_submap/crashed_pod/Initialize(mapload)
+/obj/abstract/submap_landmark/joinable_submap/crashed_pod/Initialize(mapload)
 	var/list/possible_ship_names = list(
 		"Hornet",		"Witchmoth",	"Planthopper",
 		"Mayfly",		"Locust",		"Cicada",

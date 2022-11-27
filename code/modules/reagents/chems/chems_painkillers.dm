@@ -24,7 +24,7 @@
 	var/dizziness_severity = 1
 	var/narcotic = TRUE
 
-/decl/material/liquid/painkillers/affect_blood(var/mob/living/M, var/alien, var/removed, var/datum/reagents/holder)
+/decl/material/liquid/painkillers/affect_blood(var/mob/living/M, var/removed, var/datum/reagents/holder)
 	var/volume = REAGENT_VOLUME(holder, type)
 	var/effectiveness = 1
 	var/dose = LAZYACCESS(M.chem_doses, type)
@@ -93,7 +93,7 @@
 		M.add_chemical_effect(CE_ALCOHOL_TOXIC, 1)
 		M.add_chemical_effect(CE_BREATHLOSS, 1 * boozed) //drinking and opiating suppresses breathing.
 
-/decl/material/liquid/painkillers/affect_overdose(var/mob/living/M, var/alien, var/datum/reagents/holder)
+/decl/material/liquid/painkillers/affect_overdose(var/mob/living/M)
 	..()
 	if(!narcotic)
 		return

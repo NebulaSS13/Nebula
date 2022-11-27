@@ -1,7 +1,6 @@
 /obj/item/clothing/head/helmet
 	name = "helmet"
 	desc = "Reinforced headgear. Protects the head from impacts."
-
 	icon = 'icons/clothing/head/armor/helmet.dmi'
 	valid_accessory_slots = list(ACCESSORY_SLOT_HELM_C)
 	restricted_accessory_slots = list(ACCESSORY_SLOT_HELM_C)
@@ -14,7 +13,7 @@
 		energy = ARMOR_ENERGY_SMALL,
 		bomb = ARMOR_BOMB_PADDED
 		)
-	flags_inv = HIDEEARS|BLOCKHEADHAIR
+	flags_inv = HIDEEARS|BLOCK_HEAD_HAIR
 	cold_protection = SLOT_HEAD
 	min_cold_protection_temperature = HELMET_MIN_COLD_PROTECTION_TEMPERATURE
 	heat_protection = SLOT_HEAD
@@ -167,12 +166,12 @@
 	desc = "Ave, Imperator, morituri te salutant."
 	icon = 'icons/clothing/head/armor/gladiator.dmi'
 	valid_accessory_slots = null
-	flags_inv = HIDEMASK|HIDEEARS|HIDEEYES|BLOCKHAIR
+	flags_inv = HIDEMASK|HIDEEARS|HIDEEYES|BLOCK_HEAD_HAIR
 	body_parts_covered = SLOT_HEAD|SLOT_FACE
 	siemens_coefficient = 1
 
 /obj/item/clothing/head/helmet/augment
-	name = "Augment Array"
+	name = "augment array"
 	desc = "A helmet with optical and cranial augments coupled to it."
 	icon = 'icons/clothing/head/armor/augment.dmi'
 	valid_accessory_slots = null
@@ -183,8 +182,8 @@
 		energy = ARMOR_ENERGY_RESISTANT,
 		bomb = ARMOR_BOMB_PADDED
 		)
-	flags_inv = HIDEEARS|HIDEEYES
-	body_parts_covered = SLOT_HEAD|SLOT_EYES|BLOCKHEADHAIR
+	flags_inv = HIDEEARS|HIDEEYES|BLOCK_HEAD_HAIR
+	body_parts_covered = SLOT_HEAD|SLOT_EYES
 	cold_protection = SLOT_HEAD
 	min_cold_protection_temperature = SPACE_HELMET_MIN_COLD_PROTECTION_TEMPERATURE
 	siemens_coefficient = 0.5

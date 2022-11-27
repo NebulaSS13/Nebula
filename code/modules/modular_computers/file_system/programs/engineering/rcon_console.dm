@@ -8,7 +8,8 @@
 	extended_desc = "This program allows remote control of power distribution systems. This program can not be run on tablet computers."
 	read_access = list(access_engine)
 	network_destination = "RCON remote control system"
-	requires_network_feature = NETWORK_SYSTEMCONTROL
+	requires_network = 1
+	requires_network_feature = NET_FEATURE_SYSTEMCONTROL
 	usage_flags = PROGRAM_LAPTOP | PROGRAM_CONSOLE
 	size = 19
 	category = PROG_ENG

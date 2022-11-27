@@ -4,6 +4,7 @@
 	icon_state = "globe"
 	sector_flags = OVERMAP_SECTOR_KNOWN
 	free_landing = TRUE
+
 	var/area/planetary_area
 
 	var/lightlevel = 0 		//This default makes turfs not generate light. Adjust to have exoplanents be lit.
@@ -21,7 +22,6 @@
 	var/x_size
 	var/y_size
 
-	var/landmark_type = /obj/effect/shuttle_landmark/automatic
 	var/shuttle_size = 20  		 //'diameter' of expected shuttle in turfs
 	var/landing_points_to_place  // number of landing points to place, calculated dynamically based on planet size
 
@@ -155,6 +155,7 @@
 	return engravings
 
 /obj/effect/overmap/visitable/sector/exoplanet/Process(wait, tick)
+
 	if(animals.len < 0.5*max_animal_count && !repopulating)
 		repopulating = 1
 		max_animal_count = round(max_animal_count * 0.5)
@@ -163,10 +164,11 @@
 		handle_repopulation()
 
 	if(daycycle)
+		wait = max(1, wait)
 		if(tick % round(daycycle / wait) == 0)
 			night = !night
 			daycolumn = 1
-		if(daycolumn && tick % round(daycycle_column_delay / wait) == 0)
+		if(daycolumn && (tick % round(daycycle_column_delay / wait)) == 0)
 			update_daynight()
 
 /obj/effect/overmap/visitable/sector/exoplanet/proc/update_daynight()
@@ -174,7 +176,10 @@
 	if(!night)
 		light = lightlevel
 	for(var/turf/exterior/T in block(locate(daycolumn,1,min(map_z)),locate(daycolumn,maxy,max(map_z))))
-		T.set_light(light)
+		if (light)
+			T.set_ambient_light(COLOR_WHITE, light)
+		else
+			T.clear_ambient_light()
 	daycolumn++
 	if(daycolumn > maxx)
 		daycolumn = 0
@@ -202,14 +207,16 @@
 				new map_type(x_origin, y_origin, zlevel, x_size, y_size, FALSE, TRUE, planetary_area)
 
 /obj/effect/overmap/visitable/sector/exoplanet/proc/generate_features()
-	for(var/T in subtypesof(/datum/map_template/ruin/exoplanet))
-		var/datum/map_template/ruin/exoplanet/ruin = T
-		if(ruin_tags_whitelist && !(ruin_tags_whitelist & initial(ruin.ruin_tags)))
+	var/list/ruins = SSmapping.get_templates_by_category(MAP_TEMPLATE_CATEGORY_EXOPLANET)
+	for(var/ruin_name in ruins)
+		var/datum/map_template/ruin = ruins[ruin_name]
+		var/ruin_tags = ruin.get_ruin_tags()
+		if(ruin_tags_whitelist && !(ruin_tags_whitelist & ruin_tags))
 			continue
-		if(ruin_tags_blacklist & initial(ruin.ruin_tags))
+		if(ruin_tags_blacklist & ruin_tags)
 			continue
-		possible_features += new ruin
-	spawned_features = seedRuins(map_z, features_budget, /area/exoplanet, possible_features, maxx, maxy)
+		possible_features += ruin
+	spawned_features = seed_ruins(map_z, features_budget, /area/exoplanet, possible_features, maxx, maxy)
 
 /obj/effect/overmap/visitable/sector/exoplanet/proc/generate_daycycle()
 	if(lightlevel)
@@ -275,8 +282,8 @@
 
 	if(LAZYLEN(spawned_features) && user.skill_check(SKILL_SCIENCE, SKILL_ADEPT))
 		var/ruin_num = 0
-		for(var/datum/map_template/ruin/exoplanet/R in spawned_features)
-			if(!(R.ruin_tags & RUIN_NATURAL))
+		for(var/datum/map_template/R in spawned_features)
+			if(!(R.get_ruin_tags() & RUIN_NATURAL))
 				ruin_num++
 		if(ruin_num)
 			extra_data += "<br>[ruin_num] possible artificial structure\s detected."
@@ -291,5 +298,4 @@
 	ambience = list('sound/effects/wind/wind_2_1.ogg','sound/effects/wind/wind_2_2.ogg','sound/effects/wind/wind_3_1.ogg','sound/effects/wind/wind_4_1.ogg','sound/effects/wind/wind_4_2.ogg','sound/effects/wind/wind_5_1.ogg')
 	always_unpowered = 1
 	area_flags = AREA_FLAG_IS_BACKGROUND | AREA_FLAG_EXTERNAL
-	show_starlight = TRUE
 	is_outside = OUTSIDE_YES

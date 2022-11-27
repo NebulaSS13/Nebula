@@ -25,30 +25,40 @@ var/global/list/random_chem_interaction_blacklist = list(
 
 /decl/material/liquid/random/proc/randomize_data(temperature)
 	data = list()
-	var/list/effects_to_get = subtypesof(/decl/random_chem_effect/random_properties)
+
+	var/list/effects_to_get = decls_repository.get_decl_paths_of_subtype(/decl/random_chem_effect/random_properties)
+	effects_to_get = effects_to_get.Copy()
 	if(length(effects_to_get) > max_effect_number)
 		shuffle(effects_to_get)
 		effects_to_get.Cut(max_effect_number + 1)
-	effects_to_get += subtypesof(/decl/random_chem_effect/general_properties)
-	
+
+	var/list/general_effects = decls_repository.get_decl_paths_of_subtype(/decl/random_chem_effect/general_properties)
+	effects_to_get += general_effects
+
 	var/list/decls = decls_repository.get_decls_unassociated(effects_to_get)
 	for(var/item in decls)
 		var/decl/random_chem_effect/effect = item
 		effect.prototype_process(src, temperature)
-	
-	var/whitelist = subtypesof(/decl/material)
+
+	var/list/material_whitelist = decls_repository.get_decl_paths_of_subtype(/decl/material)
+	var/whitelist = material_whitelist.Copy()
 	for(var/bad_type in global.random_chem_interaction_blacklist)
 		whitelist -= typesof(bad_type)
 
+
 	var/chill_num = pick(1,2,4)
+	chilling_point = rand(-100 CELSIUS, T0C) // arbitrary values
 	chilling_products = list()
 	for(var/i in 1 to chill_num)
 		chilling_products[pick_n_take(whitelist)] = 1 / chill_num // it's possible that these form a valid reaction, but we're OK with that.
 
+	heating_point = rand(100 CELSIUS, HIGH_SMELTING_HEAT_POINT) // also arbitrary values
 	var/heat_num = pick(1,2,4)
 	heating_products = list()
 	for(var/i in 1 to heat_num)
 		heating_products[pick_n_take(whitelist)] = 1 / heat_num
+
+	color = rgb(rand(255), rand(255), rand(255))
 
 	data_initialized = TRUE
 
@@ -56,10 +66,10 @@ var/global/list/random_chem_interaction_blacklist = list(
 	if(temperature > chilling_point && temperature < heating_point)
 		return TRUE
 
-/decl/material/liquid/random/affect_blood(var/mob/living/M, var/alien, var/removed, var/datum/reagents/holder)
+/decl/material/liquid/random/affect_blood(var/mob/living/M, var/removed, var/datum/reagents/holder)
 	FOR_ALL_EFFECTS
 		var/data = REAGENT_DATA(holder, type)
-		effect.affect_blood(M, alien, removed, LAZYACCESS(data, effect.type))
+		effect.affect_blood(M, removed, LAZYACCESS(data, effect.type))
 
 /decl/material/liquid/random/proc/on_chemicals_analyze(mob/user)
 	to_chat(user, get_scan_data(user))

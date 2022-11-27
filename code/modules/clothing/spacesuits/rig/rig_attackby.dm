@@ -7,7 +7,7 @@
 			return
 
 	// Pass repair items on to the chestpiece.
-	if(chest && (istype(W,/obj/item/stack/material) || isWelder(W)))
+	if(chest && (istype(W,/obj/item/stack/material) || IS_WELDER(W)))
 		return chest.attackby(W,user)
 
 	// Lock or unlock the access panel.
@@ -30,7 +30,7 @@
 		to_chat(user, "You [locked ? "lock" : "unlock"] \the [src] access panel.")
 		return
 
-	else if(isCrowbar(W))
+	else if(IS_CROWBAR(W))
 
 		if(!open && locked)
 			to_chat(user, "The access panel is locked shut.")
@@ -40,12 +40,12 @@
 		to_chat(user, "You [open ? "open" : "close"] the access panel.")
 		return
 
-	else if(isScrewdriver(W))
+	else if(IS_SCREWDRIVER(W))
 		p_open = !p_open
 		to_chat(user, "You [p_open ? "open" : "close"] the wire cover.")
 
 	// Hacking.
-	else if(isWirecutter(W) || isMultitool(W))
+	else if(IS_WIRECUTTER(W) || IS_MULTITOOL(W))
 		if(p_open)
 			wires.Interact(user)
 		else
@@ -73,7 +73,7 @@
 
 			if(istype(src.loc,/mob/living/carbon/human))
 				var/mob/living/carbon/human/H = src.loc
-				if(H.back == src)
+				if(H.get_equipped_item(slot_back_str) == src)
 					to_chat(user, "<span class='danger'>You can't install a hardsuit module while the suit is being worn.</span>")
 					return 1
 
@@ -118,7 +118,7 @@
 			src.cell = W
 			return
 
-		else if(isWrench(W))
+		else if(IS_WRENCH(W))
 
 			var/list/current_mounts = list()
 			if(cell) current_mounts   += "cell"
@@ -131,7 +131,7 @@
 
 			if(istype(src.loc,/mob/living/carbon/human) && to_remove != "cell" && to_remove != "tank")
 				var/mob/living/carbon/human/H = src.loc
-				if(H.back == src)
+				if(H.get_equipped_item(slot_back_str) == src)
 					to_chat(user, "You can't remove an installed device while the hardsuit is being worn.")
 					return
 
@@ -211,7 +211,7 @@
 
 /obj/item/rig/emag_act(var/remaining_charges, var/mob/user)
 	if(!subverted)
-		req_access.Cut()
+		req_access?.Cut()
 		locked = 0
 		subverted = 1
 		to_chat(user, "<span class='danger'>You short out the access protocol for the suit.</span>")

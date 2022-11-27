@@ -18,10 +18,13 @@
 /turf
 	temperature_coefficient = MIN_TEMPERATURE_COEFFICIENT
 
-/obj/Initialize()
+/obj/Initialize(mapload)
 	. = ..()
-	temperature_coefficient = isnull(temperature_coefficient) ? Clamp(MAX_TEMPERATURE_COEFFICIENT - w_class, MIN_TEMPERATURE_COEFFICIENT, MAX_TEMPERATURE_COEFFICIENT) : temperature_coefficient
+	temperature_coefficient = isnull(temperature_coefficient) ? clamp(MAX_TEMPERATURE_COEFFICIENT - w_class, MIN_TEMPERATURE_COEFFICIENT, MAX_TEMPERATURE_COEFFICIENT) : temperature_coefficient
 	create_matter()
+	//Only apply directional offsets if the mappers haven't set any offsets already
+	if(!pixel_x && !pixel_y && !pixel_w && !pixel_z)
+		update_directional_offset()
 
 /obj/proc/HandleObjectHeating(var/obj/item/heated_by, var/mob/user, var/adjust_temp)
 	if(ATOM_SHOULD_TEMPERATURE_ENQUEUE(src))
@@ -33,7 +36,7 @@
 
 /mob/Initialize()
 	. = ..()
-	temperature_coefficient = isnull(temperature_coefficient) ? Clamp(MAX_TEMPERATURE_COEFFICIENT - FLOOR(mob_size/4), MIN_TEMPERATURE_COEFFICIENT, MAX_TEMPERATURE_COEFFICIENT) : temperature_coefficient
+	temperature_coefficient = isnull(temperature_coefficient) ? clamp(MAX_TEMPERATURE_COEFFICIENT - FLOOR(mob_size/4), MIN_TEMPERATURE_COEFFICIENT, MAX_TEMPERATURE_COEFFICIENT) : temperature_coefficient
 
 /atom/proc/ProcessAtomTemperature()
 	SHOULD_NOT_SLEEP(TRUE)

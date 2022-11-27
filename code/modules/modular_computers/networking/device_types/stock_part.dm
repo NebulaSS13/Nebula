@@ -1,17 +1,7 @@
 // Attached to a stock part for issuing commands to machinery via networks.
 /datum/extension/network_device/stock_part
 	has_commands = TRUE
-
-// Network receivers check the access of the parent machine, and do not check for network administrator access.
-/datum/extension/network_device/stock_part/has_access(mob/user)
-	var/datum/computer_network/network = get_network()
-	if(!network)
-		return TRUE // If not on network, always TRUE for access, as there isn't anything to access.
-	if(!user)
-		return FALSE
-	var/atom/H = holder
-	var/obj/M = H.loc
-	return M.check_access(user)
+	internet_allowed = TRUE // GOOSE devices, network locks, etc. can all connect over PLEXUS
 
 /datum/extension/network_device/stock_part/get_wired_connection()
 	var/atom/H = holder

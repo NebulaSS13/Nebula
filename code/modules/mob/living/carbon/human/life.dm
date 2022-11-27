@@ -36,8 +36,6 @@
 	var/co2_alert = 0
 	var/fire_alert = 0
 	var/pressure_alert = 0
-	var/temperature_alert = 0
-	var/heartbeat = 0
 	var/stamina = 100
 
 /mob/living/carbon/human/Life()
@@ -95,7 +93,7 @@
 	if(stat == DEAD)
 		stamina = 0
 	else
-		stamina = Clamp(stamina + amt, 0, 100)
+		stamina = clamp(stamina + amt, 0, 100)
 		if(stamina <= 0)
 			to_chat(src, SPAN_WARNING("You are exhausted!"))
 			if(MOVING_QUICKLY(src))
@@ -147,7 +145,7 @@
 		if(zone_exposure >= 1)
 			return 1
 		pressure_adjustment_coefficient = max(pressure_adjustment_coefficient, zone_exposure)
-	pressure_adjustment_coefficient = Clamp(pressure_adjustment_coefficient, 0, 1) // So it isn't less than 0 or larger than 1.
+	pressure_adjustment_coefficient = clamp(pressure_adjustment_coefficient, 0, 1) // So it isn't less than 0 or larger than 1.
 
 	return pressure_adjustment_coefficient
 
@@ -204,8 +202,7 @@
 	if(stat != DEAD)
 		if ((disabilities & COUGHING) && prob(5) && GET_STATUS(src, STAT_PARA) <= 1)
 			drop_held_items()
-			spawn(0)
-				emote("cough")
+			cough()
 
 /mob/living/carbon/human/handle_mutations_and_radiation()
 	if(getFireLoss())
@@ -213,14 +210,13 @@
 			heal_organ_damage(0,1)
 
 	// DNA2 - Gene processing.
-	// The HULK stuff that was here is now in the hulk gene.
 	for(var/datum/dna/gene/gene in dna_genes)
 		if(!gene.block)
 			continue
 		if(gene.is_active(src))
 			gene.OnMobLife(src)
 
-	radiation = Clamp(radiation,0,500)
+	radiation = clamp(radiation,0,500)
 
 	if(!radiation)
 		if(species.appearance_flags & RADIATION_GLOWS)
@@ -275,25 +271,32 @@
 	/** breathing **/
 
 /mob/living/carbon/human/handle_chemical_smoke(var/datum/gas_mixture/environment)
-	if(wear_mask && (wear_mask.item_flags & ITEM_FLAG_BLOCK_GAS_SMOKE_EFFECT))
-		return
-	if(glasses && (glasses.item_flags & ITEM_FLAG_BLOCK_GAS_SMOKE_EFFECT))
-		return
-	if(head && (head.item_flags & ITEM_FLAG_BLOCK_GAS_SMOKE_EFFECT))
-		return
+	for(var/slot in global.standard_headgear_slots)
+		var/obj/item/gear = get_equipped_item(slot)
+		if(istype(gear) && (gear.item_flags & ITEM_FLAG_BLOCK_GAS_SMOKE_EFFECT))
+			return
 	..()
 
 /mob/living/carbon/human/get_breath_from_internal(volume_needed=STD_BREATH_VOLUME)
 	if(internal)
 
 		var/obj/item/tank/rig_supply
-		if(istype(back,/obj/item/rig))
-			var/obj/item/rig/rig = back
-			if(!rig.offline && (rig.air_supply && internal == rig.air_supply))
-				rig_supply = rig.air_supply
+		var/obj/item/rig/rig = get_equipped_item(slot_back_str)
+		if(istype(rig) && !rig.offline && (rig.air_supply && internal == rig.air_supply))
+			rig_supply = rig.air_supply
 
-		if (!rig_supply && (!contents.Find(internal) || !((wear_mask && (wear_mask.item_flags & ITEM_FLAG_AIRTIGHT)) || (head && (head.item_flags & ITEM_FLAG_AIRTIGHT)))))
-			set_internals(null)
+		if(!rig_supply)
+			if(!contents.Find(internal))
+				set_internals(null)
+			else
+				var/found_mask = FALSE
+				for(var/slot in global.airtight_slots)
+					var/obj/item/gear = get_equipped_item(slot)
+					if(gear && (gear.item_flags & ITEM_FLAG_AIRTIGHT))
+						found_mask = TRUE
+						break
+				if(!found_mask)
+					set_internals(null)
 
 		if(internal)
 			return internal.remove_air_volume(volume_needed)
@@ -364,7 +367,7 @@
 				temp_adj = (1-thermal_protection) * ((loc_temp - bodytemperature) / BODYTEMP_HEAT_DIVISOR)
 
 		//Use heat transfer as proportional to the gas density. However, we only care about the relative density vs standard 101 kPa/20 C air. Therefore we can use mole ratios
-		bodytemperature += between(BODYTEMP_COOLING_MAX, temp_adj*relative_density, BODYTEMP_HEATING_MAX)
+		bodytemperature += clamp(BODYTEMP_COOLING_MAX, temp_adj*relative_density, BODYTEMP_HEATING_MAX)
 
 	// +/- 50 degrees from 310.15K is the 'safe' zone, where no damage is dealt.
 	if(bodytemperature >= getSpeciesOrSynthTemp(HEAT_LEVEL_1))
@@ -462,8 +465,9 @@
 /mob/living/carbon/human/proc/get_heat_protection_flags(temperature) //Temperature is the temperature you're being exposed to.
 	. = 0
 	//Handle normal clothing
-	for(var/obj/item/clothing/C in list(head,wear_suit,w_uniform,shoes,gloves,wear_mask))
-		if(C)
+	for(var/slot in global.standard_clothing_slots)
+		var/obj/item/clothing/C = get_equipped_item(slot)
+		if(istype(C))
 			if(C.max_heat_protection_temperature && C.max_heat_protection_temperature >= temperature)
 				. |= C.heat_protection
 			if(C.accessories.len)
@@ -475,8 +479,9 @@
 /mob/living/carbon/human/proc/get_cold_protection_flags(temperature)
 	. = 0
 	//Handle normal clothing
-	for(var/obj/item/clothing/C in list(head,wear_suit,w_uniform,shoes,gloves,wear_mask))
-		if(C)
+	for(var/slot in global.standard_clothing_slots)
+		var/obj/item/clothing/C = get_equipped_item(slot)
+		if(istype(C))
 			if(C.min_cold_protection_temperature && C.min_cold_protection_temperature <= temperature)
 				. |= C.cold_protection
 			if(C.accessories.len)
@@ -610,6 +615,7 @@
 					SET_STATUS_MAX(src, STAT_ASLEEP, 5)
 
 		// If you're dirty, your gloves will become dirty, too.
+		var/obj/item/gloves = get_equipped_item(slot_gloves_str)
 		if(gloves && germ_level > gloves.germ_level && prob(10))
 			gloves.germ_level += 1
 
@@ -749,7 +755,7 @@
 		if(isSynthetic())
 			var/obj/item/organ/internal/cell/C = get_organ(BP_CELL, /obj/item/organ/internal/cell)
 			if(C)
-				var/chargeNum = Clamp(CEILING(C.percent()/25), 0, 4)	//0-100 maps to 0-4, but give it a paranoid clamp just in case.
+				var/chargeNum = clamp(CEILING(C.percent()/25), 0, 4)	//0-100 maps to 0-4, but give it a paranoid clamp just in case.
 				cells.icon_state = "charge[chargeNum]"
 			else
 				cells.icon_state = "charge-empty"
@@ -947,8 +953,10 @@
 	if (BITTEST(hud_updateflag, ID_HUD) && hud_list[ID_HUD])
 		var/image/holder = hud_list[ID_HUD]
 		holder.icon_state = "hudunknown"
-		if(wear_id)
-			var/obj/item/card/id/I = wear_id.GetIdCard()
+
+		var/obj/item/id = get_equipped_item(slot_wear_id_str)
+		if(id)
+			var/obj/item/card/id/I = id.GetIdCard()
 			if(I)
 				var/datum/job/J = SSjobs.get_by_title(I.GetJobName())
 				if(J)
@@ -960,8 +968,9 @@
 		var/image/holder = hud_list[WANTED_HUD]
 		holder.icon_state = "hudblank"
 		var/perpname = name
-		if(wear_id)
-			var/obj/item/card/id/I = wear_id.GetIdCard()
+		var/obj/item/id = get_equipped_item(slot_wear_id_str)
+		if(id)
+			var/obj/item/card/id/I = id.GetIdCard()
 			if(I)
 				perpname = I.registered_name
 

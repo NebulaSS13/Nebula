@@ -27,7 +27,7 @@
 		return TRUE
 
 	//To lay cable.
-	if(isCoil(thing) && target.try_build_cable(thing, user))
+	if(IS_COIL(thing) && target.try_build_cable(thing, user))
 		return TRUE
 
 	for(var/atom/movable/M in target.below)
@@ -68,6 +68,7 @@
 	density = 0
 	pathweight = 100000 //Seriously, don't try and path over this one numbnuts
 	z_flags = ZM_MIMIC_DEFAULTS | ZM_MIMIC_OVERWRITE | ZM_MIMIC_NO_AO | ZM_ALLOW_ATMOS
+	turf_flags = TURF_FLAG_BACKGROUND
 
 /turf/simulated/open/flooded
 	name = "open water"

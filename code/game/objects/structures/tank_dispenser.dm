@@ -1,117 +1,133 @@
-/obj/structure/dispenser
-	name = "tank storage unit"
+/obj/structure/tank_rack
+	name = "tank rack"
 	desc = "A simple yet bulky storage device for gas tanks. Has room for up to ten oxygen tanks, and ten hydrogen tanks."
 	icon = 'icons/obj/structures/tank_dispenser.dmi'
 	icon_state = "dispenser"
-	density = 1
-	anchored = 1.0
-	tool_interaction_flags = TOOL_INTERACTION_ANCHOR
+	density = TRUE
+	anchored = TRUE
+	material = /decl/material/solid/metal/steel
+	tool_interaction_flags = TOOL_INTERACTION_ANCHOR | TOOL_INTERACTION_DECONSTRUCT
+	var/list/oxygen_tanks =   6
+	var/list/hydrogen_tanks = 6
 
-	var/oxygentanks = 10
-	var/hydrogentanks = 10
-	var/list/oxytanks = list()	//sorry for the similar var names
-	var/list/hydtanks = list()
-
-/obj/structure/dispenser/oxygen
-	hydrogentanks = 0
-
-/obj/structure/dispenser/hydrogen
-	oxygentanks = 0
-
-/obj/structure/dispenser/Initialize()
+/obj/structure/tank_rack/Initialize()
 	. = ..()
+
+	if(isnum(oxygen_tanks) && oxygen_tanks > 0)
+		var/spawn_oxy = oxygen_tanks
+		oxygen_tanks = list()
+		for(var/i in 1 to spawn_oxy)
+			oxygen_tanks += weakref(new /obj/item/tank/oxygen(src))
+	else
+		oxygen_tanks = null
+
+	if(isnum(hydrogen_tanks) && hydrogen_tanks > 0)
+		var/spawn_hyd = hydrogen_tanks
+		hydrogen_tanks = list()
+		for(var/i in 1 to spawn_hyd)
+			hydrogen_tanks += weakref(new /obj/item/tank/hydrogen(src))
+	else
+		hydrogen_tanks = null
+
 	update_icon()
 
-/obj/structure/dispenser/on_update_icon()
+/obj/structure/tank_rack/examine(mob/user, distance)
+	. = ..()
+	to_chat(user, SPAN_NOTICE("It is holding [LAZYLEN(oxygen_tanks)] air tank\s and [LAZYLEN(hydrogen_tanks)] hydrogen tank\s."))
+
+/obj/structure/tank_rack/Destroy()
+	QDEL_NULL_LIST(hydrogen_tanks)
+	QDEL_NULL_LIST(oxygen_tanks)
+	return ..()
+
+/obj/structure/tank_rack/dump_contents()
+	hydrogen_tanks = null
+	oxygen_tanks = null
+	return ..()
+
+/obj/structure/tank_rack/on_update_icon()
 	..()
-	switch(oxygentanks)
+
+	var/oxycount = LAZYLEN(oxygen_tanks)
+	switch(oxycount)
 		if(1 to 3)
-			add_overlay("oxygen-[oxygentanks]")
+			add_overlay("oxygen-[oxycount]")
 		if(4 to INFINITY)
 			add_overlay("oxygen-4")
-	switch(hydrogentanks)
+
+	var/hydrocount = LAZYLEN(hydrogen_tanks)
+	switch(hydrocount)
 		if(1 to 4)
-			add_overlay("hydrogen-[hydrogentanks]")
+			add_overlay("hydrogen-[hydrocount]")
 		if(5 to INFINITY)
 			add_overlay("hydrogen-5")
 
-/obj/structure/dispenser/attack_ai(mob/living/silicon/ai/user)
-	if(user.Adjacent(src))
+/obj/structure/tank_rack/attack_robot(mob/user)
+	if(CanPhysicallyInteract(user))
 		return attack_hand(user)
-	..()
 
-/obj/structure/dispenser/attack_hand(mob/user)
-	user.set_machine(src)
-	var/dat = "[src]<br><br>"
-	dat += "Oxygen tanks: [oxygentanks] - [oxygentanks ? "<A href='?src=\ref[src];oxygen=1'>Dispense</A>" : "empty"]<br>"
-	dat += "Hydrogen tanks: [hydrogentanks] - [hydrogentanks ? "<A href='?src=\ref[src];hydrogen=1'>Dispense</A>" : "empty"]"
-	show_browser(user, dat, "window=dispenser")
-	onclose(user, "dispenser")
-	return
+/obj/structure/tank_rack/attack_hand(mob/user)
+	var/list/dat = list()
+	var/oxycount = LAZYLEN(oxygen_tanks)
+	dat += "Oxygen tanks: [oxycount] - [oxycount ? "<A href='?src=\ref[src];oxygen=1'>Dispense</A>" : "empty"]<br>"
+	var/hydrocount = LAZYLEN(hydrogen_tanks)
+	dat += "Hydrogen tanks: [hydrocount] - [hydrocount ? "<A href='?src=\ref[src];hydrogen=1'>Dispense</A>" : "empty"]"
+	var/datum/browser/popup = new(user, "window=tank_rack")
+	popup.set_content(jointext(dat, "<br>"))
+	popup.open()
 
-
-/obj/structure/dispenser/attackby(obj/item/I, mob/user)
-	. = ..()
-	if(!.)
+/obj/structure/tank_rack/attackby(obj/item/I, mob/user)
+	if(istype(I, /obj/item/tank))
+		var/list/adding_to_list
 		if(istype(I, /obj/item/tank/oxygen) || istype(I, /obj/item/tank/air))
-			if(oxygentanks < 10)
-				if(!user.unEquip(I, src))
-					return
-				oxytanks.Add(I)
-				oxygentanks++
-				to_chat(user, "<span class='notice'>You put [I] in [src].</span>")
-				if(oxygentanks < 5)
-					update_icon()
-			else
-				to_chat(user, "<span class='notice'>[src] is full.</span>")
-			updateUsrDialog()
-			return
-		if(istype(I, /obj/item/tank/hydrogen))
-			if(hydrogentanks < 10)
-				if(!user.unEquip(I, src))
-					return
-				hydtanks.Add(I)
-				hydrogentanks++
-				to_chat(user, "<span class='notice'>You put [I] in [src].</span>")
-				if(oxygentanks < 6)
-					update_icon()
-			else
-				to_chat(user, "<span class='notice'>[src] is full.</span>")
-			updateUsrDialog()
-			return
+			LAZYINITLIST(oxygen_tanks)
+			adding_to_list = oxygen_tanks
+		else if(istype(I, /obj/item/tank/hydrogen))
+			LAZYINITLIST(hydrogen_tanks)
+			adding_to_list = hydrogen_tanks
+		if(LAZYLEN(adding_to_list) >= 10)
+			to_chat(user, SPAN_WARNING("\The [src] is full."))
+			UNSETEMPTY(adding_to_list)
+			return TRUE
+		if(!user.unEquip(I, src))
+			return TRUE
+		LAZYADD(adding_to_list, weakref(I))
+		to_chat(user, SPAN_NOTICE("You put [I] in [src]."))
+		update_icon()
+		attack_hand(user)
+		return TRUE
+	return ..()
 
-/obj/structure/dispenser/Topic(href, href_list)
-	if(usr.stat || usr.restrained())
-		return
-	if(Adjacent(usr))
-		usr.set_machine(src)
-		if(href_list["oxygen"])
-			if(oxygentanks > 0)
-				var/obj/item/tank/oxygen/O
-				if(oxytanks.len == oxygentanks)
-					O = oxytanks[1]
-					oxytanks.Remove(O)
-				else
-					O = new /obj/item/tank/oxygen(loc)
-				O.dropInto(loc)
-				to_chat(usr, "<span class='notice'>You take [O] out of [src].</span>")
-				oxygentanks--
-				update_icon()
-		if(href_list["hydrogen"])
-			if(hydrogentanks > 0)
-				var/obj/item/tank/hydrogen/P
-				if(hydtanks.len == hydrogentanks)
-					P = hydtanks[1]
-					hydtanks.Remove(P)
-				else
-					P = new /obj/item/tank/hydrogen(loc)
-				P.dropInto(loc)
-				to_chat(usr, "<span class='notice'>You take [P] out of [src].</span>")
-				hydrogentanks--
-				update_icon()
-		add_fingerprint(usr)
-		updateUsrDialog()
+/obj/structure/tank_rack/OnTopic(mob/user, href_list, datum/topic_state/state)
+
+	var/list/remove_tank_from
+	if(href_list["oxygen"])
+		remove_tank_from = oxygen_tanks
+	else if(href_list["hydrogen"])
+		remove_tank_from = hydrogen_tanks
 	else
-		close_browser(usr, "window=dispenser")
-		return
-	return
+		return TOPIC_NOACTION
+
+	if(LAZYLEN(remove_tank_from))
+		var/weakref/tankref = remove_tank_from[length(remove_tank_from)]
+		LAZYREMOVE(remove_tank_from, tankref)
+		var/obj/item/tank/O = tankref?.resolve()
+		if(istype(O) && !QDELETED(O) && O.loc == src)
+			O.dropInto(loc)
+			to_chat(user, SPAN_NOTICE("You take \the [O] out of \the [src]."))
+			update_icon()
+			attack_hand(user)
+		return TOPIC_REFRESH
+
+/*
+ * Mappable subtypes.
+ */
+/obj/structure/tank_rack/oxygen
+	hydrogen_tanks = 0
+
+/obj/structure/tank_rack/hydrogen
+	oxygen_tanks = 0
+
+/obj/structure/tank_rack/empty
+	hydrogen_tanks = 0
+	oxygen_tanks = 0

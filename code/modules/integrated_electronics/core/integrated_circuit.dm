@@ -78,7 +78,7 @@ a creative player the means to solve many problems.  Circuits are held inside an
 	outputs_default = null
 	setup_io(activators, /datum/integrated_io/activate, null, IC_ACTIVATOR)
 	if(!matter[/decl/material/solid/metal/steel])
-		matter[/decl/material/solid/metal/steel] = w_class * SScircuit.cost_multiplier // Default cost.
+		matter[/decl/material/solid/metal/steel] = w_class * SScircuit.cost_multiplier // Default cost. //#TODO: Maybe move that stuff to the new material system that does essentially the same thing?
 	. = ..()
 
 /obj/item/integrated_circuit/proc/on_data_written() //Override this for special behaviour when new data gets pushed to the circuit.
@@ -285,7 +285,7 @@ a creative player the means to solve many problems.  Circuits are held inside an
 
 	else if(href_list["remove"] && assembly)
 		var/obj/item/held_item_obj = held_item
-		if(isScrewdriver(held_item_obj))
+		if(IS_SCREWDRIVER(held_item_obj))
 			disconnect_all()
 			dropInto(loc)
 			playsound(src, 'sound/items/Crowbar.ogg', 50, 1)

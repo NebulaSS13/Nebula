@@ -34,25 +34,15 @@
 		if (!speaker || (src.sdisabilities & BLINDED || src.blinded) || !(speaker in view(src)))
 			message = stars(message)
 
-	if(!(language && (language.flags & LANG_FLAG_INNATE))) // skip understanding checks for LANG_FLAG_INNATE languages
-		if(!say_understands(speaker,language))
-			if(istype(speaker,/mob/living/simple_animal))
-				var/mob/living/simple_animal/S = speaker
-				message = pick(S.speak)
+	var/understands_language = say_understands(speaker, language)
+	if(!(language && (language.flags & LANG_FLAG_INNATE))) // skip understanding checks for INNATE languages
+		if(!understands_language)
+			if(language)
+				message = language.scramble(speaker, message, languages)
 			else
-				if(language)
-					message = language.scramble(message, languages)
-				else
-					message = stars(message)
+				message = stars(message)
 
-	var/speaker_name = "Unknown"
-	if(speaker)
-		speaker_name = speaker.name
-
-	if(istype(speaker, /mob/living/carbon/human))
-		var/mob/living/carbon/human/H = speaker
-		speaker_name = H.GetVoice()
-
+	var/speaker_name = speaker?.GetVoice() || "Unknown"
 	if(italics)
 		message = "<i>[message]</i>"
 
@@ -74,7 +64,7 @@
 	else
 		if (language)
 			var/nverb = verb
-			if (say_understands(speaker, language))
+			if (understands_language)
 				var/skip = FALSE
 				if (isliving(src))
 					var/mob/living/L = src
@@ -127,7 +117,7 @@
 					return
 			else
 				if(language)
-					message = language.scramble(message, languages)
+					message = language.scramble(speaker, message, languages)
 				else
 					message = stars(message)
 
@@ -156,7 +146,7 @@
 		if (ishuman(speaker))
 			var/mob/living/carbon/human/H = speaker
 
-			if(H.wear_mask && istype(H.wear_mask,/obj/item/clothing/mask/chameleon/voice))
+			if(istype(H.get_equipped_item(slot_wear_mask_str), /obj/item/clothing/mask/chameleon/voice))
 				changed_voice = 1
 				var/list/impersonated = new()
 				var/mob/living/carbon/human/I = impersonated[speaker_name]
@@ -170,7 +160,7 @@
 
 				// If I's display name is currently different from the voice name and using an agent ID then don't impersonate
 				// as this would allow the AI to track I and realize the mismatch.
-				if(I && !(I.name != speaker_name && I.wear_id && istype(I.wear_id,/obj/item/card/id/syndicate)))
+				if(I && !(I.name != speaker_name && istype(I.get_equipped_item(slot_wear_id_str),/obj/item/card/id/syndicate)))
 					impersonating = I
 					jobname = impersonating.get_assignment()
 				else

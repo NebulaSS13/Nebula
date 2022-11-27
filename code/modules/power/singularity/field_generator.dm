@@ -48,7 +48,7 @@ field_generator power level display
 	// Scale % power to % num_power_levels and truncate value
 	var/level = round(num_power_levels * power / field_generator_max_power)
 	// Clamp between 0 and num_power_levels for out of range power values
-	level = between(0, level, num_power_levels)
+	level = clamp(0, level, num_power_levels)
 	if(level)
 		overlays += "+p[level]"
 
@@ -100,7 +100,7 @@ field_generator power level display
 	if(active)
 		to_chat(user, "The [src] needs to be off.")
 		return
-	else if(isWrench(W))
+	else if(IS_WRENCH(W))
 		switch(state)
 			if(0)
 				state = 1
@@ -119,14 +119,14 @@ field_generator power level display
 			if(2)
 				to_chat(user, "<span class='warning'> The [src.name] needs to be unwelded from the floor.</span>")
 				return
-	else if(isWelder(W))
+	else if(IS_WELDER(W))
 		var/obj/item/weldingtool/WT = W
 		switch(state)
 			if(0)
 				to_chat(user, "<span class='warning'>The [src.name] needs to be wrenched to the floor.</span>")
 				return
 			if(1)
-				if (WT.remove_fuel(0,user))
+				if (WT.weld(0,user))
 					playsound(src.loc, 'sound/items/Welder2.ogg', 50, 1)
 					user.visible_message("[user.name] starts to weld the [src.name] to the floor.", \
 						"You start to weld the [src] to the floor.", \
@@ -138,7 +138,7 @@ field_generator power level display
 				else
 					return
 			if(2)
-				if (WT.remove_fuel(0,user))
+				if (WT.weld(0,user))
 					playsound(src.loc, 'sound/items/Welder2.ogg', 50, 1)
 					user.visible_message("[user.name] starts to cut the [src.name] free from the floor.", \
 						"You start to cut the [src] free from the floor.", \
@@ -208,8 +208,7 @@ field_generator power level display
 	if(draw_power(round(power_draw)) >= power_draw)
 		return 1
 	else
-		for(var/mob/M in viewers(src))
-			M.show_message("<span class='warning'>\The [src] shuts down!</span>")
+		visible_message(SPAN_WARNING("\The [src] shuts down!"))
 		turn_off()
 		investigate_log("ran out of power and <font color='red'>deactivated</font>","singulo")
 		src.power = 0

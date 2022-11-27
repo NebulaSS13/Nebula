@@ -339,7 +339,7 @@
 
 	else
 		if(user.a_intent != I_HURT)
-			if(isMultitool(thing))
+			if(IS_MULTITOOL(thing))
 				if(hardpoints_locked)
 					to_chat(user, SPAN_WARNING("Hardpoint system access is disabled."))
 					return
@@ -355,7 +355,7 @@
 					return
 				to_chat(user, SPAN_WARNING("\The [src] has no hardpoint systems to remove."))
 				return
-			else if(isWrench(thing))
+			else if(IS_WRENCH(thing))
 				if(!maintenance_protocols)
 					to_chat(user, SPAN_WARNING("The securing bolts are not visible while maintenance protocols are disabled."))
 					return
@@ -367,7 +367,7 @@
 				visible_message(SPAN_NOTICE("\The [user] loosens and removes the securing bolts, dismantling \the [src]."))
 				dismantle()
 				return
-			else if(isWelder(thing))
+			else if(IS_WELDER(thing))
 				if(!getBruteLoss())
 					return
 				var/list/damaged_parts = list()
@@ -378,7 +378,7 @@
 				if(CanPhysicallyInteract(user) && !QDELETED(to_fix) && (to_fix in src) && to_fix.brute_damage)
 					to_fix.repair_brute_generic(thing, user)
 				return
-			else if(isCoil(thing))
+			else if(IS_COIL(thing))
 				if(!getFireLoss())
 					return
 				var/list/damaged_parts = list()
@@ -389,7 +389,7 @@
 				if(CanPhysicallyInteract(user) && !QDELETED(to_fix) && (to_fix in src) && to_fix.burn_damage)
 					to_fix.repair_burn_generic(thing, user)
 				return
-			else if(isScrewdriver(thing))
+			else if(IS_SCREWDRIVER(thing))
 				if(!maintenance_protocols)
 					to_chat(user, SPAN_WARNING("The cell compartment remains locked while maintenance protocols are disabled."))
 					return
@@ -408,7 +408,7 @@
 				hud_power_control.queue_icon_update()
 				body.cell = null
 				return
-			else if(isCrowbar(thing))
+			else if(IS_CROWBAR(thing))
 				if(!hatch_locked)
 					to_chat(user, SPAN_NOTICE("The cockpit isn't locked. There is no need for this."))
 					return

@@ -5,7 +5,7 @@
 	item_flags = 0
 	max_pressure_protection = VOIDSUIT_MAX_PRESSURE
 	min_pressure_protection = 0
-	flags_inv = HIDEFACE|BLOCKHAIR
+	flags_inv = HIDEEARS|HIDEEYES|BLOCK_HEAD_HAIR
 	permeability_coefficient = 0.01
 	armor = list(
 		melee = ARMOR_MELEE_MAJOR, 

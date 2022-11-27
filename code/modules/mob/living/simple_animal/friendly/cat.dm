@@ -17,6 +17,7 @@
 	possession_candidate = 1
 	pass_flags = PASS_FLAG_TABLE
 	skin_material = /decl/material/solid/skin/fur/orange
+	base_animal_type = /mob/living/simple_animal/cat
 
 	var/turns_since_scan = 0
 	var/mob/living/simple_animal/mouse/movement_target
@@ -137,6 +138,7 @@
 	desc = "The by-product of cat farming."
 	icon = 'icons/obj/items/sheet_hide.dmi'
 	icon_state = "sheet-cat"
+	material = /decl/material/solid/leather/fur
 
 //Basic friend AI
 /mob/living/simple_animal/cat/fluff

@@ -15,7 +15,7 @@
 		/obj/item/chems/glass/bucket,
 		/obj/item/scalpel/laser,
 		/obj/item/circular_saw,
-		/obj/item/extinguisher,
+		/obj/item/chems/spray/extinguisher,
 		/obj/item/gripper/cultivator,
 		/obj/item/scanner/plant,
 		/obj/item/robot_harvester

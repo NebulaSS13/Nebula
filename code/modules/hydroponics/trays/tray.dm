@@ -119,11 +119,17 @@
 		/decl/material/liquid/mutagenics =  15
 	)
 
-/obj/machinery/portable_atmospherics/hydroponics/AltClick()
-	if(mechanical && !usr.incapacitated() && Adjacent(usr))
-		close_lid(usr)
-		return 1
-	return ..()
+/obj/machinery/portable_atmospherics/hydroponics/proc/set_seed(var/new_seed)
+	if(seed)
+		clear_seed()
+	seed = new_seed
+	if(seed.scannable_result)
+		set_extension(src, /datum/extension/scannable, seed.scannable_result)
+
+/obj/machinery/portable_atmospherics/hydroponics/proc/clear_seed()
+	seed = null
+	if(has_extension(src, /datum/extension/scannable))
+		remove_extension(src, /datum/extension/scannable)
 
 /obj/machinery/portable_atmospherics/hydroponics/attack_ghost(var/mob/observer/ghost/user)
 	if(!(harvest && seed && ispath(seed.product_type, /mob)))
@@ -170,7 +176,7 @@
 		if(istype(Proj, /obj/item/projectile/energy/floramut/gene))
 			var/obj/item/projectile/energy/floramut/gene/G = Proj
 			if(seed)
-				seed = seed.diverge_mutate_gene(G.gene, get_turf(loc))	//get_turf just in case it's not in a turf.
+				set_seed(seed.diverge_mutate_gene(G.gene, get_turf(loc)))	//get_turf just in case it's not in a turf.
 		else
 			mutate(1)
 			return
@@ -274,7 +280,7 @@
 
 	if(!seed.get_trait(TRAIT_HARVEST_REPEAT))
 		yield_mod = 0
-		seed = null
+		clear_seed()
 		dead = 0
 		age = 0
 		sampled = 0
@@ -295,7 +301,8 @@
 	if(!silent)
 		to_chat(user, SPAN_NOTICE("You remove the dead [seed.display_name]."))
 
-	seed = null
+	clear_seed()
+
 	dead = 0
 	sampled = 0
 	age = 0
@@ -309,9 +316,12 @@
 /obj/machinery/portable_atmospherics/hydroponics/proc/weed_invasion()
 
 	//Remove the seed if something is already planted.
-	if(seed) seed = null
-	seed = SSplants.seeds[pick(list("reishi", "nettles", "amanita", "mushrooms", "plumphelmet", "towercap", "harebells", "weeds"))]
-	if(!seed) return //Weed does not exist, someone fucked up.
+	if(seed)
+		clear_seed()
+	set_seed(SSplants.seeds[pick(list("reishi", "nettles", "amanita", "mushrooms", "plumphelmet", "towercap", "harebells", "weeds"))])
+
+	if(!seed)
+		return //Weed does not exist, someone fucked up.
 
 	dead = 0
 	age = 0
@@ -341,7 +351,7 @@
 	// If it's not in the global list, then no products of the line have been
 	// harvested yet and it's safe to assume it's restricted to this tray.
 	if(!isnull(SSplants.seeds[seed.name]))
-		seed = seed.diverge()
+		set_seed(seed.diverge())
 	seed.mutate(severity,get_turf(src))
 
 	return
@@ -380,7 +390,7 @@
 	var/previous_plant = seed.display_name
 	var/newseed = seed.get_mutant_variant()
 	if(newseed in SSplants.seeds)
-		seed = SSplants.seeds[newseed]
+		set_seed(SSplants.seeds[newseed])
 	else
 		return
 
@@ -490,7 +500,7 @@
 		qdel(O)
 		check_health()
 
-	else if(mechanical && isWrench(O))
+	else if(mechanical && IS_WRENCH(O))
 
 		//If there's a connector here, the portable_atmospherics setup can handle it.
 		if(locate(/obj/machinery/atmospherics/portables_connector/) in loc)
@@ -527,7 +537,7 @@
 
 	to_chat(user, SPAN_NOTICE("You plant the [S.seed.seed_name] [S.seed.seed_noun]."))
 	lastproduce = 0
-	seed = S.seed //Grab the seed datum.
+	set_seed(S.seed) //Grab the seed datum.
 	dead = 0
 	age = 1
 
@@ -618,7 +628,7 @@
 /obj/machinery/portable_atmospherics/hydroponics/proc/plant()
 	var/obj/item/seeds/S = locate() in get_turf(src)
 	if(S.seed)
-		seed = S.seed
+		set_seed(S.seed)
 		lastproduce = 0
 		dead = 0
 		age = 1
@@ -634,3 +644,21 @@
 		harvest()
 	return TRUE
 
+
+/obj/machinery/portable_atmospherics/hydroponics/get_alt_interactions(var/mob/user)
+	. = ..()
+	LAZYADD(., /decl/interaction_handler/hydroponics_close_lid)
+
+/decl/interaction_handler/hydroponics_close_lid
+	name = "Open/Close Lid"
+	expected_target_type = /obj/machinery/portable_atmospherics/hydroponics
+
+/decl/interaction_handler/hydroponics_close_lid/is_possible(var/atom/target, var/mob/user)
+	. = ..()
+	if(.)
+		var/obj/machinery/portable_atmospherics/hydroponics/T = target
+		return T.mechanical
+
+/decl/interaction_handler/hydroponics_close_lid/invoked(var/atom/target, var/mob/user)
+	var/obj/machinery/portable_atmospherics/hydroponics/T = target
+	T.close_lid(user)

@@ -36,8 +36,8 @@
 
 /obj/item/chems/food/fish/poison
 	fish_type = "space carp"
-
-/obj/item/chems/food/fish/poison/Initialize()
+	
+/obj/item/chems/food/fish/poison/populate_reagents()
 	. = ..()
 	reagents.add_reagent(/decl/material/liquid/carpotoxin, 6)
 
@@ -85,6 +85,10 @@
 	icon = 'icons/obj/molluscs.dmi'
 	icon_state = "mollusc"
 	w_class = ITEM_SIZE_TINY
+	material = /decl/material/liquid/nutriment/slime_meat
+	matter = list(
+		/decl/material/solid/bone/fish = MATTER_AMOUNT_SECONDARY,
+	)
 	var/meat_type = /obj/item/chems/food/fish/mollusc
 	var/shell_type = /obj/item/trash/mollusc_shell
 

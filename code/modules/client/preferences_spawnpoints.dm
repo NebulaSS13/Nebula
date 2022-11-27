@@ -2,7 +2,6 @@
 	var/name                     // Name used in preference setup.
 	var/msg                      // Message to display on the arrivals computer.
 	var/list/turfs               // List of turfs to spawn on.
-	var/always_visible = FALSE   // Whether this spawn point is always visible in selection, ignoring map-specific settings.
 
 	var/list/restrict_job
 	var/list/restrict_job_event_categories
@@ -68,7 +67,7 @@
 		if(!C.occupant)
 
 			// Store any held or equipped items.
-			var/obj/item/storage/backpack/pack = victim.back
+			var/obj/item/storage/backpack/pack = victim.get_equipped_item(slot_back_str)
 			if(istype(pack))
 				for(var/atom/movable/thing in victim.get_held_items())
 					victim.drop_from_inventory(thing)

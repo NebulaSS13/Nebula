@@ -51,9 +51,9 @@
 	else
 		icon_state = "blob_damaged"
 
-/obj/effect/blob/Process(wait, times_fired)
+/obj/effect/blob/Process(wait, tick)
 	regen()
-	if(times_fired % attack_freq)
+	if(tick % attack_freq)
 		return
 	attempt_attack(global.alldirs)
 
@@ -166,7 +166,7 @@
 	user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
 	user.do_attack_animation(src)
 	playsound(loc, 'sound/effects/attackblob.ogg', 50, 1)
-	if(isWirecutter(W))
+	if(IS_WIRECUTTER(W))
 		if(prob(user.skill_fail_chance(SKILL_SCIENCE, 90, SKILL_EXPERT)))
 			to_chat(user, SPAN_WARNING("You fail to collect a sample from \the [src]."))
 			return
@@ -182,11 +182,11 @@
 
 	var/damage = 0
 	switch(W.damtype)
-		if("fire")
+		if(BURN)
 			damage = (W.force / fire_resist)
-			if(isWelder(W))
+			if(IS_WELDER(W))
 				playsound(loc, 'sound/items/Welder.ogg', 100, 1)
-		if("brute")
+		if(BRUTE)
 			damage = (W.force / brute_resist)
 
 	take_damage(damage)
@@ -205,7 +205,6 @@
 	light_color = BLOB_COLOR_CORE
 	layer = BLOB_CORE_LAYER
 
-	var/growth_range = 8 // Maximal distance for new blob pieces from this core.
 	var/blob_may_process = 1
 	var/reported_low_damage = FALSE
 	var/times_to_pulse = 0
@@ -285,7 +284,6 @@ regen() will cover update_icon() for this proc
 	icon_state = "blob_node"
 	maxHealth = 125
 	regen_rate = 1
-	growth_range = 4
 	damage_min = 15
 	damage_max = 20
 	layer = BLOB_NODE_LAYER
@@ -349,6 +347,7 @@ regen() will cover update_icon() for this proc
 	item_state = "blob_tendril"
 	w_class = ITEM_SIZE_LARGE
 	attack_verb = list("smacked", "smashed", "whipped")
+	material = /decl/material/solid/plantmatter
 	var/is_tendril = TRUE
 	var/types_of_tendril = list("solid", "fire")
 

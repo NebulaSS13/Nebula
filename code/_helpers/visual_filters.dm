@@ -8,11 +8,14 @@
 /proc/cmp_filter_data_priority(list/A, list/B)
 	return A["priority"] - B["priority"]
 
+// Defining this for future proofing and ease of searching for erroneous usage.
+/image/proc/add_filter(filter_name, priority, list/params)
+	filters += filter(arglist(params))
+
 /atom/movable/proc/add_filter(filter_name, priority, list/params)
-	LAZYINITLIST(filter_data)
 	var/list/p = params.Copy()
 	p["priority"] = priority
-	filter_data[filter_name] = p
+	LAZYSET(filter_data, filter_name, p)
 	update_filters()
 
 /atom/movable/proc/update_filters()
@@ -26,8 +29,9 @@
 	UPDATE_OO_IF_PRESENT
 
 /atom/movable/proc/get_filter(filter_name)
-	if(filter_data && filter_data[filter_name])
-		return filters[filter_data.Find(filter_name)]
+	var/filter_index = filter_data?.Find(filter_name)
+	if(filter_index > 0 && filter_index <= length(filters))
+		return filters[filter_index]
 
 // Polaris Extensions
 /atom/movable/proc/remove_filter(filter_name)
@@ -52,6 +56,6 @@
 
 	// If we're being copied by Z-Mimic, update mimics too.
 	if (bound_overlay)
-		for (var/atom/movable/AM AS_ANYTHING in get_above_oo())
+		for (var/atom/movable/AM as anything in get_above_oo())
 			monkeypatched_params[1] = AM.filters[index]
 			animate(arglist(monkeypatched_params))

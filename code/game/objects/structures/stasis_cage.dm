@@ -24,8 +24,9 @@
 	try_release(user)
 
 /obj/structure/stasis_cage/attack_robot(var/mob/user)
-	if(Adjacent(user))
+	if(CanPhysicallyInteract(user))
 		try_release(user)
+		return TRUE
 
 /obj/structure/stasis_cage/proc/try_release(mob/user)
 	if(!contained)

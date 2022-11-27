@@ -9,6 +9,7 @@
 
 	category = /datum/shuttle/autodock/overmap
 	var/skill_needed = SKILL_BASIC
+	var/landing_skill_needed = SKILL_EXPERT
 	var/operator_skill = SKILL_MIN
 
 /datum/shuttle/autodock/overmap/New(var/map_hash, var/obj/effect/shuttle_landmark/start_waypoint)

@@ -18,7 +18,6 @@ var/global/list/ventcrawl_machinery = list(
 	)
 
 /mob/living/var/list/icon/pipes_shown = list()
-/mob/living/var/last_played_vent
 /mob/living/var/is_ventcrawling = 0
 /mob/var/next_play_vent = 0
 
@@ -46,8 +45,9 @@ var/global/list/ventcrawl_machinery = list(
 		return TRUE
 	if(carried_item in get_external_organs())
 		return TRUE
-	if(carried_item in list(w_uniform, gloves, glasses, wear_mask, l_ear, r_ear, belt, l_store, r_store))
-		return TRUE
+	for(var/slot in list(slot_w_uniform_str, slot_glasses_str, slot_glasses_str, slot_wear_mask_str, slot_l_ear_str, slot_r_ear_str, slot_belt_str, slot_l_store_str, slot_r_store_str))
+		if(get_equipped_item(slot) == carried_item)
+			return TRUE
 	if(carried_item in get_held_items())
 		return carried_item.w_class <= ITEM_SIZE_NORMAL
 	return ..()

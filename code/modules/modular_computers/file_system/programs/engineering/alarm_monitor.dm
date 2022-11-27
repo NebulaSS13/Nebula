@@ -8,6 +8,8 @@
 	program_menu_icon = "alert"
 	extended_desc = "This program provides visual interface for the alarm system."
 	requires_network = 1
+	requires_network_feature = NET_FEATURE_SYSTEMCONTROL
+
 	network_destination = "alarm monitoring network"
 	size = 5
 	category = PROG_MONITOR
@@ -32,7 +34,6 @@
 
 /datum/nano_module/alarm_monitor
 	name = "Alarm monitor"
-	var/list_cameras = 0						// Whether or not to list camera references. A future goal would be to merge this with the enginering/security camera console. Currently really only for AI-use.
 	var/list/datum/alarm_handler/alarm_handlers // The particular list of alarm handlers this alarm monitor should present to the user.
 	available_to_ai = FALSE
 

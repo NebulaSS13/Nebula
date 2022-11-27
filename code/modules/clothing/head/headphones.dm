@@ -6,7 +6,7 @@
 	volume_multiplier = 0.5
 	body_parts_covered = SLOT_HEAD|SLOT_EARS
 	gender = PLURAL
-
+	flags_inv = 0
 	var/headphones_on = 0
 	var/sound_channel
 	var/current_track
@@ -17,6 +17,7 @@
 	sound_channel = global.sound_channels.RequestChannel(type)
 
 /obj/item/clothing/head/headphones/on_update_icon()
+	. = ..()
 	icon_state = get_world_inventory_state()
 	if(headphones_on)
 		icon_state = "[icon_state]-on"
@@ -105,7 +106,7 @@
 		return TOPIC_REFRESH
 	if(href_list["vol"])
 		var/adj = text2num(href_list["vol"])
-		music_volume = Clamp(music_volume + adj, 0, 100)
+		music_volume = clamp(music_volume + adj, 0, 100)
 		if(headphones_on)
 			play_music(user)
 		interact(user)

@@ -22,6 +22,9 @@
 	desc = "A tank of oxygen. This one is yellow."
 	icon = 'icons/obj/items/tanks/tank_yellow.dmi'
 
+/obj/item/tank/oxygen/empty
+	starting_pressure = list()
+
 /*
  * Air
  */
@@ -44,6 +47,9 @@
 	obj_flags = OBJ_FLAG_CONDUCTIBLE
 	slot_flags = null
 	starting_pressure = list(/decl/material/gas/hydrogen = 3*ONE_ATMOSPHERE)
+
+/obj/item/tank/hydrogen/empty
+	starting_pressure = list()
 
 /*
  * Emergency Oxygen

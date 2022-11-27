@@ -7,7 +7,7 @@
 /turf/template_noop,
 /area/template_noop)
 "d" = (
-/obj/structure/flora/ausbushes/lavendergrass,
+/obj/structure/flora/bush/lavendergrass,
 /turf/template_noop,
 /area/template_noop)
 "e" = (
@@ -22,7 +22,7 @@
 /turf/exterior/water,
 /area/template_noop)
 "h" = (
-/obj/structure/flora/ausbushes/reedbush,
+/obj/structure/flora/bush/reedbush,
 /turf/exterior/water,
 /area/template_noop)
 "i" = (
@@ -33,7 +33,7 @@
 /turf/exterior/wildgrass,
 /area/template_noop)
 "k" = (
-/obj/structure/flora/ausbushes/palebush,
+/obj/structure/flora/bush/palebush,
 /turf/exterior/wildgrass,
 /area/template_noop)
 "l" = (
@@ -41,7 +41,7 @@
 /turf/exterior/wildgrass,
 /area/template_noop)
 "m" = (
-/obj/structure/flora/ausbushes,
+/obj/structure/flora/bush,
 /turf/exterior/wildgrass,
 /area/template_noop)
 

@@ -5,10 +5,15 @@
 	var/mob/registered_user = null
 	color = COLOR_GRAY40
 	detail_color = COLOR_NT_RED
+	var/static/list/base_access = list(
+		access_maint_tunnels,
+		access_hacked,
+		access_external_airlocks
+	)
 
 /obj/item/card/id/syndicate/Initialize()
 	. = ..()
-	access = syndicate_access.Copy()
+	access = base_access.Copy()
 
 /obj/item/card/id/syndicate/station_access/Initialize()
 	. = ..() // Same as the normal Syndicate id, only already has all station access
@@ -192,7 +197,7 @@
 					age = initial(age)
 					formal_name_prefix = initial(formal_name_prefix)
 					formal_name_suffix = initial(formal_name_suffix)
-					access = syndicate_access.Copy()
+					access = base_access.Copy()
 					assignment = initial(assignment)
 					blood_type = initial(blood_type)
 					dna_hash = initial(dna_hash)
@@ -257,7 +262,6 @@ var/global/list/id_card_states
 	var/item_state
 	var/color
 	var/detail_color
-	var/details
 	var/extra_details
 
 /datum/card_state/dd_SortValue()

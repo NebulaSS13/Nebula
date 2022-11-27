@@ -9,7 +9,7 @@ var/global/datum/repository/crew/crew_repository = new()
 /datum/repository/crew/New()
 	cache_data = list()
 	cache_data_alert = list()
-	
+
 	var/PriorityQueue/general_modifiers = new/PriorityQueue(/proc/cmp_crew_sensor_modifier)
 	var/PriorityQueue/binary_modifiers = new/PriorityQueue(/proc/cmp_crew_sensor_modifier)
 	var/PriorityQueue/vital_modifiers = new/PriorityQueue(/proc/cmp_crew_sensor_modifier)
@@ -54,7 +54,7 @@ var/global/datum/repository/crew/crew_repository = new()
 		if(C.has_sensor && pos && pos.z == z_level && C.sensor_mode != SUIT_SENSOR_OFF)
 			if(istype(C.loc, /mob/living/carbon/human))
 				var/mob/living/carbon/human/H = C.loc
-				if(H.w_uniform != C)
+				if(H.get_equipped_item(slot_w_uniform_str) != C)
 					continue
 
 				var/list/crewmemberData = list("sensor_type"=C.sensor_mode, "stat"=H.stat, "area"="", "x"=-1, "y"=-1, "z"=-1, "ref"="\ref[H]")
@@ -82,12 +82,10 @@ var/global/datum/repository/crew/crew_repository = new()
 /datum/repository/crew/proc/scan()
 	var/list/tracked = list()
 	for(var/mob/living/carbon/human/H in SSmobs.mob_list)
-		if(istype(H.w_uniform, /obj/item/clothing/under))
-			var/obj/item/clothing/under/C = H.w_uniform
-			if (C.has_sensor)
-				tracked |= C
+		var/obj/item/clothing/under/C = H.get_equipped_item(slot_w_uniform_str)
+		if(istype(C) && C.has_sensor)
+			tracked |= C
 	return tracked
-
 
 /datum/repository/crew/proc/run_queues(H, C, pos, crewmemberData)
 	for(var/modifier_queue in modifier_queues)

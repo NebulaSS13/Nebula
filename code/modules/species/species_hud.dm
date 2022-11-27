@@ -13,6 +13,8 @@
 	var/has_internals = 1 // Set to draw the internals toggle button.
 	var/has_up_hint = 1   // Set to draw the "look-up" hint icon
 	var/list/equip_slots = list() // Checked by mob_can_equip().
+	var/list/persistent_slots = list() // Built in New(), used for unhidable inv updates
+	var/list/hidden_slots = list() // Built in New(), used for hidable inv updates
 
 	// Contains information on the position and tag for all inventory slots
 	// to be drawn for the mob. This is fairly delicate, try to avoid messing with it
@@ -37,8 +39,16 @@
 
 /datum/hud_data/New()
 	..()
-	for(var/slot in gear)
-		equip_slots |= gear[slot]["slot"]
+	for(var/hud_slot in gear)
+		var/actual_slot = gear[hud_slot]["slot"]
+		equip_slots |= actual_slot
+
+		// Build reference lists for inventory updates
+		// HUD gear lists use horrible toggle things not proper slot strings :(
+		if(actual_slot in global.persistent_inventory_slots)
+			persistent_slots[hud_slot] = actual_slot
+		else if(actual_slot in global.hidden_inventory_slots)
+			hidden_slots[hud_slot] = actual_slot
 
 	if(has_hands)
 		equip_slots |= slot_handcuffed_str

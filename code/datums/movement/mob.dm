@@ -25,9 +25,9 @@
 	mob.ghostize()
 
 // Incorporeal/Ghost movement
-/datum/movement_handler/mob/incorporeal/DoMove(var/direction)
+/datum/movement_handler/mob/incorporeal/DoMove(var/direction, var/mob/mover)
 	. = MOVEMENT_HANDLED
-	direction = mob.AdjustMovementDirection(direction)
+	direction = mob.AdjustMovementDirection(direction, mover)
 	mob.set_glide_size(0)
 
 	var/turf/T = get_step(mob, direction)
@@ -156,7 +156,7 @@
 			to_chat(mob, SPAN_WARNING("You're pinned down by \a [mob.pinned[1]]!"))
 		return MOVEMENT_STOP
 
-	for(var/obj/item/grab/G AS_ANYTHING in mob.grabbed_by)
+	for(var/obj/item/grab/G as anything in mob.grabbed_by)
 		if(G.assailant != mob && G.assailant != mover && (mob.restrained() || G.stop_move()))
 			if(mover == mob)
 				to_chat(mob, SPAN_WARNING("You're restrained and cannot move!"))
@@ -179,7 +179,7 @@
 	mob.moving = 1
 
 	if(mover == mob)
-		direction = mob.AdjustMovementDirection(direction)
+		direction = mob.AdjustMovementDirection(direction, mover)
 
 	var/turf/old_turf = get_turf(mob)
 	step(mob, direction)
@@ -223,12 +223,26 @@
 /mob/proc/MayEnterTurf(var/turf/T)
 	return T && !((mob_flags & MOB_FLAG_HOLY_BAD) && check_is_holy_turf(T))
 
-/mob/proc/AdjustMovementDirection(var/direction)
+/**
+ * This proc adjusts movement direction for mobs with STAT_CONFUSE.
+ *
+ * Returns a direction, randomly adjusted if the mob had STAT_CONFUSE.
+ *
+ * Arguments:
+ * * direction: The direction, mob was going to move before adjustment
+ * * mover: The initiator of movement
+ */
+/mob/proc/AdjustMovementDirection(var/direction, var/mob/mover)
 
 	if(!direction || !isnum(direction))
 		return 0
 
 	. = direction
+
+	// If we are moved not on our own, we don't get move debuff
+	if(src != mover)
+		return
+
 	if(!HAS_STATUS(src, STAT_CONFUSE))
 		return
 

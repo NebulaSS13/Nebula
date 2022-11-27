@@ -9,6 +9,7 @@
 	w_class = ITEM_SIZE_SMALL
 	throw_speed = 3
 	throw_range = 10
+	is_spawnable_type = FALSE
 
 	var/secured = 0
 	var/obj/item/assembly/a_left = null
@@ -24,16 +25,16 @@
 	if(!QDELETED(a_left))
 		a_left.holder = null
 		QDEL_NULL(a_left)
-	else 
+	else
 		a_left = null
 	if(!QDELETED(a_right))
 		a_right.holder = null
 		QDEL_NULL(a_right)
-	else 
+	else
 		a_right = null
 	if(!QDELETED(special_assembly))
 		QDEL_NULL(special_assembly)
-	else 
+	else
 		special_assembly = null
 	return ..()
 
@@ -140,7 +141,7 @@
 
 
 /obj/item/assembly_holder/attackby(obj/item/W as obj, mob/user as mob)
-	if(isScrewdriver(W))
+	if(IS_SCREWDRIVER(W))
 		if(!a_left || !a_right)
 			to_chat(user, "<span class='warning'>BUG:Assembly part missing, please report this!</span>")
 			return
@@ -221,15 +222,17 @@
 			to_chat(user, "\The [src] can be attached!")
 
 /obj/item/assembly_holder/on_update_icon()
-	overlays.Cut()
+	. = ..()
 	if(a_left)
-		overlays += "[a_left.icon_state]_left"
+		var/list/left_overlays = list(overlay_image(icon, "[a_left.icon_state]_left"))
 		for(var/O in a_left.attached_overlays)
-			overlays += "[O]_l"
+			left_overlays += "[O]_l"
+		add_overlay(left_overlays)
 	if(a_right)
-		src.overlays += "[a_right.icon_state]_right"
+		var/list/right_overlays = list(overlay_image(icon, "[a_right.icon_state]_right"))
 		for(var/O in a_right.attached_overlays)
-			overlays += "[O]_r"
+			right_overlays += "[O]_r"
+		add_overlay(right_overlays)
 	if(master)
 		master.update_icon()
 

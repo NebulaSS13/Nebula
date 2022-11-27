@@ -39,6 +39,16 @@ var/global/list/REVERSE_LIGHTING_CORNER_DIAGONAL = list(0, 0, 0, 0, 3, 4, 0, 0, 
 	var/below_g = 0
 	var/below_b = 0
 
+	// Ambient turf lighting that's not inherited from a light source. These are updated as absolute values.
+	var/ambient_r = 0
+	var/ambient_g = 0
+	var/ambient_b = 0
+
+	// The turf above us' ambient
+	var/above_ambient_r = 0
+	var/above_ambient_g = 0
+	var/above_ambient_b = 0
+
 	// The final intensity, all things considered.
 	var/apparent_r = 0
 	var/apparent_g = 0
@@ -54,9 +64,14 @@ var/global/list/REVERSE_LIGHTING_CORNER_DIAGONAL = list(0, 0, 0, 0, 3, 4, 0, 0, 
 /datum/lighting_corner/New(turf/new_turf, diagonal, oi)
 	SSlighting.lighting_corners += src
 
+	var/has_ambience = FALSE
+
 	t1 = new_turf
 	z = new_turf.z
 	t1i = oi
+
+	if (new_turf.ambient_light)
+		has_ambience = TRUE
 
 	var/vertical   = diagonal & ~(diagonal - 1) // The horizontal directions (4 and 8) are bigger than the vertical ones (1 and 2), so we can reliably say the lsb is the horizontal direction.
 	var/horizontal = diagonal & ~vertical       // Now that we know the horizontal one we can get the vertical one.
@@ -69,6 +84,7 @@ var/global/list/REVERSE_LIGHTING_CORNER_DIAGONAL = list(0, 0, 0, 0, 3, 4, 0, 0, 
 	// So we'll have this hardcode instead.
 	var/turf/T
 
+
 	// Diagonal one is easy.
 	T = get_step(new_turf, diagonal)
 	if (T) // In case we're on the map's border.
@@ -78,6 +94,8 @@ var/global/list/REVERSE_LIGHTING_CORNER_DIAGONAL = list(0, 0, 0, 0, 3, 4, 0, 0, 
 		t2 = T
 		t2i = REVERSE_LIGHTING_CORNER_DIAGONAL[diagonal]
 		T.corners[t2i] = src
+		if (T.ambient_light)
+			has_ambience = TRUE
 
 	// Now the horizontal one.
 	T = get_step(new_turf, horizontal)
@@ -88,6 +106,8 @@ var/global/list/REVERSE_LIGHTING_CORNER_DIAGONAL = list(0, 0, 0, 0, 3, 4, 0, 0, 
 		t3 = T
 		t3i = REVERSE_LIGHTING_CORNER_DIAGONAL[((T.x > x) ? EAST : WEST) | ((T.y > y) ? NORTH : SOUTH)] // Get the dir based on coordinates.
 		T.corners[t3i] = src
+		if (T.ambient_light)
+			has_ambience = TRUE
 
 	// And finally the vertical one.
 	T = get_step(new_turf, vertical)
@@ -98,8 +118,12 @@ var/global/list/REVERSE_LIGHTING_CORNER_DIAGONAL = list(0, 0, 0, 0, 3, 4, 0, 0, 
 		t4 = T
 		t4i = REVERSE_LIGHTING_CORNER_DIAGONAL[((T.x > x) ? EAST : WEST) | ((T.y > y) ? NORTH : SOUTH)] // Get the dir based on coordinates.
 		T.corners[t4i] = src
+		if (T.ambient_light)
+			has_ambience = TRUE
 
 	update_active()
+	if (has_ambience)
+		init_ambient()
 
 #define OVERLAY_PRESENT(T) (T && T.lighting_overlay)
 
@@ -112,6 +136,36 @@ var/global/list/REVERSE_LIGHTING_CORNER_DIAGONAL = list(0, 0, 0, 0, 3, 4, 0, 0, 
 #undef OVERLAY_PRESENT
 
 #define GET_ABOVE(T) (HasAbove(T:z) ? get_step(T, UP) : null)
+#define GET_BELOW(T) (HasBelow(T:z) ? get_step(T, DOWN) : null)
+
+#define UPDATE_APPARENT(T, CH) T.apparent_##CH = T.self_##CH + T.below_##CH + T.ambient_##CH + T.above_ambient_##CH
+
+/datum/lighting_corner/proc/init_ambient()
+	var/sum_r = 0
+	var/sum_g = 0
+	var/sum_b = 0
+
+	var/turf/T
+	for (var/i in 1 to 4)
+		// this is ugly as fuck, but it's still more legible than doing this with a macro
+		switch (i)
+			if (1) T = t1
+			if (2) T = t2
+			if (3) T = t3
+			if (4) T = t4
+
+		if (!T || !T.ambient_light)
+			continue
+
+		sum_r += (HEX_RED(T.ambient_light) / 255) * T.ambient_light_multiplier
+		sum_g += (HEX_GREEN(T.ambient_light) / 255) * T.ambient_light_multiplier
+		sum_b += (HEX_BLUE(T.ambient_light) / 255) * T.ambient_light_multiplier
+
+	sum_r /= 4
+	sum_g /= 4
+	sum_b /= 4
+
+	update_ambient_lumcount(sum_r, sum_g, sum_b)
 
 // God that was a mess, now to do the rest of the corner code! Hooray!
 /datum/lighting_corner/proc/update_lumcount(delta_r, delta_g, delta_b, now = FALSE)
@@ -122,9 +176,9 @@ var/global/list/REVERSE_LIGHTING_CORNER_DIAGONAL = list(0, 0, 0, 0, 3, 4, 0, 0, 
 	self_g += delta_g
 	self_b += delta_b
 
-	apparent_r = self_r + below_r
-	apparent_g = self_g + below_g
-	apparent_b = self_b + below_b
+	UPDATE_APPARENT(src, r)
+	UPDATE_APPARENT(src, g)
+	UPDATE_APPARENT(src, b)
 
 	var/turf/T
 	var/Ti
@@ -140,7 +194,7 @@ var/global/list/REVERSE_LIGHTING_CORNER_DIAGONAL = list(0, 0, 0, 0, 3, 4, 0, 0, 
 	else	// Nothing above us that cares about below light.
 		T = null
 
-	if (T)
+	if (TURF_IS_DYNAMICALLY_LIT(T))
 		if (!T.corners || !T.corners[Ti])
 			T.generate_missing_corners()
 		var/datum/lighting_corner/above = T.corners[Ti]
@@ -150,13 +204,11 @@ var/global/list/REVERSE_LIGHTING_CORNER_DIAGONAL = list(0, 0, 0, 0, 3, 4, 0, 0, 
 	if (needs_update)
 		return
 
-	if (!now)
+	if (now)
+		update_overlays(TRUE)
+	else
 		needs_update = TRUE
 		SSlighting.corner_queue += src
-	else
-		update_overlays(TRUE)
-
-#undef GET_ABOVE
 
 /datum/lighting_corner/proc/update_below_lumcount(delta_r, delta_g, delta_b, now = FALSE)
 	if (!(delta_r + delta_g + delta_b))
@@ -166,9 +218,9 @@ var/global/list/REVERSE_LIGHTING_CORNER_DIAGONAL = list(0, 0, 0, 0, 3, 4, 0, 0, 
 	below_g += delta_g
 	below_b += delta_b
 
-	apparent_r = self_r + below_r
-	apparent_g = self_g + below_g
-	apparent_b = self_b + below_b
+	UPDATE_APPARENT(src, r)
+	UPDATE_APPARENT(src, g)
+	UPDATE_APPARENT(src, b)
 
 	// This needs to be down here instead of the above if so the lum values are properly updated.
 	if (needs_update)
@@ -179,6 +231,69 @@ var/global/list/REVERSE_LIGHTING_CORNER_DIAGONAL = list(0, 0, 0, 0, 3, 4, 0, 0, 
 		SSlighting.corner_queue += src
 	else
 		update_overlays(TRUE)
+
+/datum/lighting_corner/proc/update_ambient_lumcount(delta_r, delta_g, delta_b, skip_update = FALSE)
+	ambient_r += delta_r
+	ambient_g += delta_g
+	ambient_b += delta_b
+
+	UPDATE_APPARENT(src, r)
+	UPDATE_APPARENT(src, g)
+	UPDATE_APPARENT(src, b)
+
+	var/turf/T
+	var/Ti
+
+	if (t1)
+		T = t1
+		Ti = t1i
+	else if (t2)
+		T = t2
+		Ti = t2i
+	else if (t3)
+		T = t3
+		Ti = t3i
+	else if (t4)
+		T = t4
+		Ti = t4i
+	else
+		// This should be impossible to reach -- how do we exist without at least one master turf?
+		CRASH("Corner has no masters!")
+
+	var/datum/lighting_corner/below = src
+
+	var/turf/lasT
+
+	// We init before Z-Mimic, cannot rely on above/below.
+	while ((lasT = T) && (T = GET_BELOW(T)) && (lasT.z_flags & ZM_ALLOW_LIGHTING) && TURF_IS_DYNAMICALLY_LIT_UNSAFE(T))
+		T.ambient_has_indirect = TRUE
+
+		if (!T.corners || !T.corners[Ti])
+			T.generate_missing_corners()
+
+		ASSERT(T.corners?.len)
+
+		below = T.corners[Ti]
+		below.above_ambient_r += delta_r
+		below.above_ambient_g += delta_g
+		below.above_ambient_b += delta_b
+
+		UPDATE_APPARENT(below, r)
+		UPDATE_APPARENT(below, g)
+		UPDATE_APPARENT(below, b)
+
+		if (!skip_update && !below.needs_update)
+			below.needs_update = TRUE
+			SSlighting.corner_queue += below
+
+	if (needs_update || skip_update)
+		return
+
+	// Always queue for this, not important enough to hit the synchronous path.
+	needs_update = TRUE
+	SSlighting.corner_queue += src
+
+#undef UPDATE_APPARENT
 
 /datum/lighting_corner/proc/update_overlays(now = FALSE)
 	var/lr = apparent_r

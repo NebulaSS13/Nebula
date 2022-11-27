@@ -28,7 +28,7 @@
 	if(prob(seed.get_trait(((TRAIT_POTENCY)/2)*3)))
 		entangle(victim)
 	var/mob/living/carbon/human/H = victim
-	if(istype(H) && H.shoes)
+	if(istype(H) && H.get_equipped_item(slot_shoes_str))
 		return
 	seed.do_thorns(victim,src)
 	seed.do_sting(victim,src,pick(BP_R_FOOT,BP_L_FOOT,BP_R_LEG,BP_L_LEG))
@@ -73,10 +73,12 @@
 		var/mob/living/carbon/human/H = victim
 		if(H.species.species_flags & SPECIES_FLAG_NO_TANGLE)
 			return
-		if(victim.loc != loc && istype(H.shoes, /obj/item/clothing/shoes/magboots) && (H.shoes.item_flags & ITEM_FLAG_NOSLIP) || H.species.check_no_slip(H))
+
+		var/obj/item/clothing/shoes/magboots/magboots = H.get_equipped_item(slot_shoes_str)
+		if(victim.loc != loc && istype(magboots) && (magboots.item_flags & ITEM_FLAG_NOSLIP) || H.species.check_no_slip(H))
 			visible_message("<span class='danger'>Tendrils lash to drag \the [victim] but \the [src] can't pull them across the ground!</span>")
 			return
-	
+
 	victim.visible_message("<span class='danger'>Tendrils lash out from \the [src] and drag \the [victim] in!</span>", "<span class='danger'>Tendrils lash out from \the [src] and drag you in!</span>")
 	victim.forceMove(loc)
 	if(buckle_mob(victim))

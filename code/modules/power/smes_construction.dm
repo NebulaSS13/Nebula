@@ -10,7 +10,7 @@
 	name = "superconductive magnetic coil"
 	desc = "Standard superconductive magnetic coil with average capacity and I/O rating."
 	icon = 'icons/obj/items/stock_parts/stock_parts.dmi'
-	icon_state = "smes_coil"			// Just few icons patched together. If someone wants to make better icon, feel free to do so!
+	icon_state = "smes_coil"
 	w_class = ITEM_SIZE_LARGE							// It's LARGE (backpack size)
 	origin_tech = "{'materials':7,'powerstorage':7,'engineering':5}"
 	base_type = /obj/item/stock_parts/smes_coil
@@ -30,6 +30,7 @@
 /obj/item/stock_parts/smes_coil/weak
 	name = "basic superconductive magnetic coil"
 	desc = "Cheaper model of standard superconductive magnetic coil. It's capacity and I/O rating are considerably lower."
+	icon_state = "smes_coil_weak"
 	ChargeCapacity = 10 KILOWATTS
 	IOCapacity = 150 KILOWATTS
 
@@ -37,16 +38,19 @@
 /obj/item/stock_parts/smes_coil/super_capacity
 	name = "superconductive capacitance coil"
 	desc = "Specialised version of standard superconductive magnetic coil. This one has significantly stronger containment field, allowing for significantly larger power storage. It's IO rating is much lower, however."
+	icon_state = "smes_coil_capacitance"
 	ChargeCapacity = 250 KILOWATTS
 	IOCapacity = 100 KILOWATTS
+	rating = 2
 
 // 40% Charge Capacity, 500% I/O Capacity. Technically turns SMES into large super capacitor. Ideal for shields.
 /obj/item/stock_parts/smes_coil/super_io
 	name = "superconductive transmission coil"
-	desc = "Specialised version of standard superconductive magnetic coil. While this one won't store almost any power, it rapidly transfers power, making it useful in systems which require large throughput."
+	desc = "Specialised version of standard superconductive magnetic coil. While this one won't store almost any power, it rapidly transfers current, making it useful in systems which require large throughput."
+	icon_state = "smes_coil_transmission"
 	ChargeCapacity = 20 KILOWATTS
 	IOCapacity = 1.25 MEGAWATTS
-
+	rating = 2
 
 // DEPRECATED
 // These are used on individual outposts as backup should power line be cut, or engineering outpost lost power.
@@ -134,7 +138,7 @@
 		capacity *= 1.2
 		input_level_max *= 2
 		output_level_max *= 2
-	charge = between(0, charge, capacity)
+	charge = clamp(0, charge, capacity)
 
 // Proc: total_system_failure()
 // Parameters: 2 (intensity - how strong the failure is, user - person which caused the failure)
@@ -145,7 +149,7 @@
 	// Possible effects:
 	// Sparks - Lets out few sparks, mostly fire hazard if flammable gas present. Otherwise purely aesthetic.
 	// Shock - Depending on intensity harms the user. Insultated Gloves protect against weaker shocks, but strong shock bypasses them.
-	// EMP Pulse - Lets out EMP pulse discharge which screws up nearby electronics.
+	// EMP - Lets out EMP discharge which screws up nearby electronics.
 	// Light Overload - X% chance to overload each lighting circuit in connected powernet. APC based.
 	// APC Failure - X% chance to destroy APC causing very weak explosion too. Won't cause hull breach or serious harm.
 	// SMES Explosion - X% chance to destroy the SMES, in moderate explosion. May cause small hull breach.
@@ -162,12 +166,10 @@
 
 	// Check if user has protected gloves.
 	var/user_protected = 0
-	if(h_user.gloves)
-		var/obj/item/clothing/gloves/G = h_user.gloves
-		if(G.siemens_coefficient == 0)
-			user_protected = 1
+	var/obj/item/clothing/gloves/G = h_user.get_equipped_item(slot_gloves_str)
+	if(istype(G) && G.siemens_coefficient == 0)
+		user_protected = 1
 	log_and_message_admins("SMES FAILURE: <b>[src.x]X [src.y]Y [src.z]Z</b> User: [usr.ckey], Intensity: [intensity]/100 - <A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[src.x];Y=[src.y];Z=[src.z]'>JMP</a>")
-
 
 	switch (intensity)
 		if (0 to 15)
@@ -296,7 +298,7 @@
 		if(!(stat & BROKEN))
 			return SPAN_WARNING("You have to disassemble the terminal[num_terminals > 1 ? "s" : ""] first!")
 		if(user)
-			if(!do_after(user, 5 SECONDS * number_of_components(/obj/item/stock_parts/smes_coil), src) && isCrowbar(user.get_active_hand()))
+			if(!do_after(user, 5 SECONDS * number_of_components(/obj/item/stock_parts/smes_coil), src) && IS_CROWBAR(user.get_active_hand()))
 				return MCS_BLOCK
 			if(check_total_system_failure(user))
 				return MCS_BLOCK
@@ -340,7 +342,7 @@
 	if (!..())
 
 		// Multitool - change RCON tag
-		if(isMultitool(W))
+		if(IS_MULTITOOL(W))
 			var/newtag = input(user, "Enter new RCON tag. Use \"NO_TAG\" to disable RCON or leave empty to cancel.", "SMES RCON system") as text
 			if(newtag)
 				RCon_tag = newtag
@@ -364,14 +366,14 @@
 // Parameters: 1 (new_input - New input value in Watts)
 // Description: Sets input setting on this SMES. Trims it if limits are exceeded.
 /obj/machinery/power/smes/buildable/proc/set_input(var/new_input = 0)
-	input_level = between(0, new_input, input_level_max)
+	input_level = clamp(0, new_input, input_level_max)
 	update_icon()
 
 // Proc: set_output()
 // Parameters: 1 (new_output - New output value in Watts)
 // Description: Sets output setting on this SMES. Trims it if limits are exceeded.
 /obj/machinery/power/smes/buildable/proc/set_output(var/new_output = 0)
-	output_level = between(0, new_output, output_level_max)
+	output_level = clamp(0, new_output, output_level_max)
 	update_icon()
 
 /obj/machinery/power/smes/buildable/emp_act(var/severity)

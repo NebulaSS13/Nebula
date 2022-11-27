@@ -4,6 +4,7 @@
 	icon = 'icons/obj/forensics.dmi'
 	w_class = ITEM_SIZE_TINY
 	item_flags = ITEM_FLAG_NO_PRINT
+	material = /decl/material/solid/glass
 
 // Sampling kits
 

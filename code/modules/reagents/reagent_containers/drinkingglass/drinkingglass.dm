@@ -29,7 +29,7 @@ var/global/const/DRINK_ICON_NOISY = "noise"
 	amount_per_transfer_from_this = 5
 	possible_transfer_amounts = @"[5,10,15,30]"
 	atom_flags = ATOM_FLAG_OPEN_CONTAINER
-	show_reagent_name = TRUE
+	presentation_flags = PRESENTATION_FLAG_NAME | PRESENTATION_FLAG_DESC
 	temperature_coefficient = 4
 	item_flags = ITEM_FLAG_HOLLOW
 
@@ -99,11 +99,12 @@ var/global/const/DRINK_ICON_NOISY = "noise"
 /obj/item/chems/drinks/glass2/get_base_name()
 	. = base_name
 
+/obj/item/chems/drinks/glass2/get_base_desc()
+	. = custom_desc || ..()
+
 /obj/item/chems/drinks/glass2/on_reagent_change()
 	temperature_coefficient = 4 / max(1, reagents.total_volume)
 	..()
-	var/decl/material/R = reagents.get_primary_reagent_decl()
-	desc = R?.glass_desc || custom_desc || initial(desc)
 
 /obj/item/chems/drinks/glass2/proc/can_add_extra(obj/item/glass_extra/GE)
 	if(!("[base_icon]_[GE.glass_addition]left" in icon_states(icon)))
@@ -112,6 +113,21 @@ var/global/const/DRINK_ICON_NOISY = "noise"
 		return 0
 
 	return 1
+
+/obj/item/chems/drinks/glass2/examine(mob/user, distance)
+	. = ..()
+	if(!istype(user) || distance > 1)
+		return
+	var/list/extra_text
+	for(var/extra in extras)
+		if(istype(extra, /obj/item/glass_extra))
+			var/obj/item/glass_extra/GE = extra
+			LAZYADD(extra_text, GE.glass_desc)
+		else if(istype(extra, /obj/item/chems/food/fruit_slice))
+			LAZYADD(extra_text, "There is \a [extra] on the rim.")
+	if(length(extra_text))
+		to_chat(user, SPAN_NOTICE(jointext(extra_text," ")))
+
 
 /obj/item/chems/drinks/glass2/proc/get_filling_overlay(amount, overlay)
 	var/image/I = new()
@@ -125,11 +141,19 @@ var/global/const/DRINK_ICON_NOISY = "noise"
 	return I
 
 /obj/item/chems/drinks/glass2/on_update_icon()
+	. = ..()
 	underlays.Cut()
-	overlays.Cut()
+	icon_state = base_icon
 
 	if (LAZYLEN(reagents?.reagent_volumes) > 0)
 		var/decl/material/R = reagents.get_primary_reagent_decl()
+		if(R.cocktail_ingredient)
+			for(var/decl/cocktail/cocktail in SSmaterials.get_cocktails_by_primary_ingredient(R.type))
+				if(cocktail.matches(src) && cocktail.has_sprite(src) && cocktail.can_use_sprite(src))
+					icon_state = null // hide the main sprite
+					add_overlay(image(cocktail.glass_icon, cocktail.glass_icon_state))
+					return // don't do the rest--todo semiprocedural cocktail sprites with fizz/ice/vapor
+
 		var/list/under_liquid = list()
 		var/list/over_liquid = list()
 
@@ -155,11 +179,11 @@ var/global/const/DRINK_ICON_NOISY = "noise"
 		var/image/filling = get_filling_overlay(amnt, R.glass_icon)
 		filling.color = reagents.get_color()
 		if(filling_overlayed)
-			overlays += filling
+			add_overlay(filling)
 		else
 			underlays += filling
 
-		overlays += over_liquid
+		add_overlay(over_liquid)
 
 	var/side = "left"
 	for(var/item in extras)

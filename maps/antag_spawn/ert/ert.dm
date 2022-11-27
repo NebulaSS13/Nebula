@@ -1,13 +1,12 @@
 /datum/map_template/ruin/antag_spawn/ert
 	name = "ERT Base"
-	id = "ert_spawn"
 	suffixes = list("ert/ert_base.dmm")
 	modify_tag_vars = FALSE
 	shuttles_to_initialise = list(/datum/shuttle/autodock/multi/antag/rescue)
 	apc_test_exempt_areas = list(
 		/area/map_template/rescue_base = NO_SCRUBBER|NO_VENT|NO_APC
 	)
-		
+
 
 /datum/shuttle/autodock/multi/antag/rescue
 	name = "Rescue"
@@ -17,7 +16,7 @@
 		"nav_ert_start"
 		)
 	shuttle_area = /area/map_template/rescue_base/start
-	dock_target = "rescue_shuttle"
+	dock_target = "ert_rescue_shuttle"
 	current_location = "nav_ert_start"
 	home_waypoint = "nav_ert_start"
 	announcer = "Proximity Sensor Array"
@@ -27,7 +26,7 @@
 /obj/effect/shuttle_landmark/ert/start
 	name = "Response Team Base"
 	landmark_tag = "nav_ert_start"
-	docking_controller = "rescue_base"
+	docking_controller = "ert_rescue_base"
 
 // Areas
 

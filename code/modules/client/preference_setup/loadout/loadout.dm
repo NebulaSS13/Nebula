@@ -145,8 +145,6 @@ var/global/list/gear_datums = list()
 		var/category_cost = 0
 		for(var/gear in LC.gear)
 			var/decl/loadout_option/G = LC.gear[gear]
-			if(G.is_abstract())
-				continue
 			if(gear in pref.gear_list[pref.gear_slot])
 				category_cost += G.cost
 
@@ -176,7 +174,7 @@ var/global/list/gear_datums = list()
 	for(var/gear_name in current_category_decl.gear)
 
 		var/decl/loadout_option/G = current_category_decl.gear[gear_name]
-		if(G.is_abstract() || !G.can_be_taken_by(user, pref))
+		if(!G.can_be_taken_by(user, pref))
 			continue
 
 		var/ticked = (G.name in pref.gear_list[pref.gear_slot])
@@ -348,11 +346,10 @@ var/global/list/gear_datums = list()
 	var/list/faction_restricted // List of types of cultural datums that will allow this loadout option.
 	var/whitelisted             // Species name to check the whitelist for.
 
+	abstract_type = /decl/loadout_option
+
 /decl/loadout_option/Initialize()
 	. = ..()
-
-	if(is_abstract())
-		return .
 
 	if(name && (!global.using_map.loadout_blacklist || !(type in global.using_map.loadout_blacklist)))
 		global.gear_datums[name] = src
@@ -383,6 +380,15 @@ var/global/list/gear_datums = list()
 			gear_tweaks += new tweak(optargs)
 		else
 			gear_tweaks += new tweak
+
+/decl/loadout_option/validate()
+	. = ..()
+	if(!name)
+		. += "missing display name"
+	else if(isnull(cost) || cost < 0)
+		. += "invalid cost"
+	else if(!path)
+		. += "missing path definition"
 
 /decl/loadout_option/proc/get_gear_tweak_options()
 	. = list()

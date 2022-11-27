@@ -2,6 +2,8 @@
 	density = 1
 	plane = DEFAULT_PLANE
 	layer = MOB_LAYER
+	abstract_type = /mob
+	is_spawnable_type = TRUE
 
 	appearance_flags = PIXEL_SCALE | LONG_GLIDE
 	animate_movement = 2
@@ -111,10 +113,13 @@
 	var/decl/move_intent/default_walk_intent
 	var/decl/move_intent/default_run_intent
 
+	// TODO: REMOVE DIRECT REFERENCES
+	var/obj/item/_back
+	var/obj/item/clothing/mask/_wear_mask
+	// END TODO
+
+	var/obj/item/storage/active_storage
 	var/obj/buckled = null//Living
-	var/obj/item/back = null//Human/Monkey
-	var/obj/item/storage/s_active = null//Carbon
-	var/obj/item/clothing/mask/wear_mask = null//Carbon
 	var/in_throw_mode = 0
 
 	var/can_pull_size = ITEM_SIZE_STRUCTURE // Maximum w_class the mob can pull.
@@ -171,3 +176,7 @@
 	var/datum/ai/ai						// Type abused. Define with path and will automagically create. Determines behaviour for clientless mobs.
 
 	var/holder_type
+	/// If this mob is or was piloted by a player with typing indicators enabled, an instance of one.
+	var/atom/movable/overlay/typing_indicator/typing_indicator
+	/// Whether this mob is currently typing, if piloted by a player.
+	var/is_typing

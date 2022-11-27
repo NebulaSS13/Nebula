@@ -9,7 +9,7 @@
 /decl/surgery_step/robotics
 	can_infect = 0
 	surgery_candidate_flags = SURGERY_NO_CRYSTAL | SURGERY_NO_FLESH
-	surgery_step_category = /decl/surgery_step/robotics
+	abstract_type = /decl/surgery_step/robotics
 
 /decl/surgery_step/robotics/get_skill_reqs(mob/living/user, mob/living/target, obj/item/tool)
 	return SURGERY_SKILLS_ROBOTIC
@@ -191,9 +191,9 @@
 		if(BP_IS_BRITTLE(affected))
 			to_chat(user, SPAN_WARNING("\The [target]'s [affected.name] is too brittle to be repaired normally."))
 			return FALSE
-		if(isWelder(tool))
+		if(IS_WELDER(tool))
 			var/obj/item/weldingtool/welder = tool
-			if(!welder.isOn() || !welder.remove_fuel(1,user))
+			if(!welder.isOn() || !welder.weld(1,user))
 				return FALSE
 		if(istype(tool, /obj/item/gun/energy/plasmacutter))
 			var/obj/item/gun/energy/plasmacutter/cutter = tool

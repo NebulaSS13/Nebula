@@ -4,7 +4,7 @@
 	desc = "A special crowbar that can be used to safely remove airlock braces from airlocks."
 	w_class = ITEM_SIZE_NORMAL
 	icon = 'icons/obj/items/tool/maintenance_jack.dmi'
-	icon_state = "maintenance_jack"
+	icon_state = ICON_STATE_WORLD
 	force = 17.5 //It has a hammer head, should probably do some more damage. - Cirra
 	attack_cooldown = 2.5*DEFAULT_WEAPON_COOLDOWN
 	melee_accuracy_bonus = -25
@@ -48,6 +48,7 @@
 
 
 /obj/item/airlock_brace/on_update_icon()
+	. = ..()
 	if(airlock)
 		icon_state = "brace_closed"
 	else
@@ -99,12 +100,12 @@
 			unlock_brace(user)
 		return
 
-	if(isWelder(W))
+	if(IS_WELDER(W))
 		var/obj/item/weldingtool/C = W
 		if(health == max_health)
 			to_chat(user, "\The [src] does not require repairs.")
 			return
-		if(C.remove_fuel(0,user))
+		if(C.weld(0,user))
 			playsound(src, 'sound/items/Welder.ogg', 100, 1)
 			health = min(health + rand(20,30), max_health)
 			if(health == max_health)
@@ -113,8 +114,8 @@
 				to_chat(user, "You repair some dents on \the [src].")
 
 
-/obj/item/airlock_brace/proc/take_damage(var/amount)
-	health = between(0, health - amount, max_health)
+/obj/item/airlock_brace/take_damage(amount, damtype, silent)
+	health = clamp(health - amount, 0, max_health)
 	if(!health)
 		if(airlock)
 			airlock.visible_message("<span class='danger'>\The [src] breaks off of \the [airlock]!</span>")

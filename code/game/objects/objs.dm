@@ -1,6 +1,8 @@
 /obj
 	layer = OBJ_LAYER
 	animate_movement = 2
+	is_spawnable_type = TRUE
+	abstract_type = /obj
 
 	var/obj_flags
 	var/list/req_access
@@ -11,10 +13,11 @@
 	var/sharp = 0		// whether this object cuts
 	var/edge = 0		// whether this object is more likely to dismember
 	var/in_use = 0 // If we have a user using us, this will be set on. We will check if the user has stopped using us, and thus stop updating and LAGGING EVERYTHING!
-	var/damtype = "brute"
+	var/damtype = BRUTE
 	var/armor_penetration = 0
 	var/anchor_fall = FALSE
 	var/holographic = 0 //if the obj is a holographic object spawned by the holodeck
+	var/tmp/directional_offset ///JSON list of directions to x,y offsets to be applied to the object depending on its direction EX: {'NORTH':{'x':12,'y':5}, 'EAST':{'x':10,'y':50}}
 
 /obj/hitby(atom/movable/AM, var/datum/thrownthing/TT)
 	..()
@@ -33,9 +36,6 @@
 
 /obj/proc/get_matter_amount_modifier()
 	. = CEILING(w_class * BASE_OBJECT_MATTER_MULTPLIER)
-
-/obj/item/proc/is_used_on(obj/O, mob/user)
-	return
 
 /obj/assume_air(datum/gas_mixture/giver)
 	if(loc)
@@ -92,21 +92,6 @@
 /obj/proc/interact(mob/user)
 	return
 
-/mob/proc/unset_machine()
-	src.machine = null
-
-/mob/proc/set_machine(var/obj/O)
-	if(src.machine)
-		unset_machine()
-	src.machine = O
-	if(istype(O))
-		O.in_use = 1
-
-/obj/item/proc/updateSelfDialog()
-	var/mob/M = src.loc
-	if(istype(M) && M.client && M.machine == src)
-		src.attack_self(M)
-
 /obj/proc/hide(var/hide)
 	set_invisibility(hide ? INVISIBILITY_MAXIMUM : initial(invisibility))
 
@@ -141,7 +126,7 @@
 
 /obj/attackby(obj/item/O, mob/user)
 	if(obj_flags & OBJ_FLAG_ANCHORABLE)
-		if(isWrench(O))
+		if(IS_WRENCH(O))
 			wrench_floor_bolts(user)
 			update_icon()
 			return
@@ -170,12 +155,7 @@
 /obj/proc/can_embed()
 	return is_sharp(src)
 
-/obj/AltClick(mob/user)
-	if(obj_flags & OBJ_FLAG_ROTATABLE)
-		rotate(user)
-	..()
-
-/obj/examine(mob/user)
+/obj/examine(mob/user, distance, infix, suffix)
 	. = ..()
 	if((obj_flags & OBJ_FLAG_ROTATABLE))
 		to_chat(user, SPAN_SUBTLE("\The [src] can be rotated with alt-click."))
@@ -192,7 +172,7 @@
 		return
 
 	set_dir(turn(dir, 90))
-	update_icon() 
+	update_icon()
 
 //For things to apply special effects after damaging an organ, called by organ's take_damage
 /obj/proc/after_wounding(obj/item/organ/external/organ, datum/wound)
@@ -209,3 +189,105 @@
 
 /obj/get_mob()
 	return buckled_mob
+
+/obj/set_dir(ndir)
+	. = ..()
+	if(directional_offset)
+		update_directional_offset()
+
+/obj/Move()
+	. = ..()
+	if(directional_offset)
+		update_directional_offset()
+
+/obj/forceMove(atom/dest)
+	. = ..()
+	if(directional_offset)
+		update_directional_offset()
+
+/** 
+ * Applies the offset stored in the directional_offset json list depending on the current direction.
+ * force will force the default offset to be 0 if there are no directional_offset string.
+ */
+/obj/proc/update_directional_offset(var/force = FALSE)
+	if(!force && !length(directional_offset))
+		return
+
+	default_pixel_x = 0
+	default_pixel_y = 0
+	default_pixel_w = 0
+	default_pixel_z = 0
+
+	var/list/diroff = cached_json_decode(directional_offset)
+	var/list/curoff = diroff["[uppertext(dir2text(dir))]"]
+	if(length(curoff))
+		default_pixel_x = curoff["x"] || 0
+		default_pixel_y = curoff["y"] || 0
+		default_pixel_w = curoff["w"] || 0
+		default_pixel_z = curoff["z"] || 0
+	reset_offsets(0)
+
+/** 
+ * Returns whether the object should be considered as hanging off a wall. 
+ * This is userful because wall-mounted things are actually on the adjacent floor tile offset towards the wall.
+ * Which means we have to deal with directional offsets differently. Such as with buttons mounted on a table, or on a wall.
+ */
+/obj/proc/is_wall_mounted()
+	//If this flag is on, and we have an offset, we're most likely wall mounted
+	if(obj_flags & OBJ_FLAG_MOVES_UNSUPPORTED || anchor_fall)
+		var/turf/forward = get_step(get_turf(src), dir)
+		var/turf/reverse = get_step(get_turf(src), global.reverse_dir[dir])
+		//If we're wall mounted and don't have a wall either facing us, or in the opposite direction, don't apply the offset. 
+		// This is mainly for things that can be both wall mounted and floor mounted. Like buttons, which mappers seem to really like putting on tables.
+		// Its sort of a hack for now. But objects don't handle being on a wall or not. (They don't change their flags, layer, etc when on a wall or anything)
+		if(!forward?.is_wall() && !reverse?.is_wall())
+			return
+	return TRUE
+
+/**
+ * Init starting reagents and/or reagent var. Not called at the /obj level.
+ * populate: If set to true, we expect map load/admin spawned reagents to be set.
+ */
+/obj/proc/initialize_reagents(var/populate = TRUE)
+	SHOULD_CALL_PARENT(TRUE)
+	if(reagents?.total_volume > 0)
+		log_warning("\The [src] possibly is initializing its reagents more than once!")
+	if(populate)
+		populate_reagents()
+
+/**
+ * Actually populates the reagents.
+ * Can be easily nulled out or fully overriden without having to rewrite the complete reagent init logic.
+ * An alternative to using a list for defining our starting reagents since apparently overriding the value of a list creates an (init) proc each time.
+ */
+/obj/proc/populate_reagents()
+	return
+
+/**
+ * Returns a list with the contents that may be spawned in this object.
+ * This shouldn't include things that are necessary for the object to operate, like machine components. 
+ * Its mainly for populating storage and the like.
+ */
+/obj/proc/WillContain()
+	return
+
+////////////////////////////////////////////////////////////////
+// Interactions
+////////////////////////////////////////////////////////////////
+/obj/get_alt_interactions(var/mob/user)
+	. = ..()
+	LAZYADD(., /decl/interaction_handler/rotate)
+
+/decl/interaction_handler/rotate
+	name = "Rotate"
+	expected_target_type = /obj
+
+/decl/interaction_handler/rotate/is_possible(atom/target, mob/user, obj/item/prop)
+	. = ..()
+	if(.)
+		var/obj/O = target
+		. = !!(O.obj_flags & OBJ_FLAG_ROTATABLE)
+
+/decl/interaction_handler/rotate/invoked(atom/target, mob/user, obj/item/prop)
+	var/obj/O = target
+	O.rotate(user)

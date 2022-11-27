@@ -85,7 +85,8 @@ var/global/image/contamination_overlay = image('icons/effects/contamination.dmi'
 	//Burn eyes if exposed.
 	if(vsc.contaminant_control.EYE_BURNS)
 		var/found_eyeguard = FALSE
-		for(var/obj/item/clothing/thing in list(head, wear_mask, glasses))
+		for(var/slot in global.standard_headgear_slots)
+			var/obj/item/clothing/thing = get_equipped_item(slot)
 			if(istype(thing) && (thing.body_parts_covered & SLOT_EYES))
 				found_eyeguard = TRUE
 				break
@@ -105,13 +106,14 @@ var/global/image/contamination_overlay = image('icons/effects/contamination.dmi'
 	if(E && !E.contaminant_guard)
 		if(prob(20)) to_chat(src, "<span class='danger'>Your eyes burn!</span>")
 		E.damage += 2.5
-		SET_STATUS_MAX(src, STAT_BLURRY, 50) 
+		SET_STATUS_MAX(src, STAT_BLURRY, 50)
 		if (prob(max(0,E.damage - 15) + 1) && !GET_STATUS(src, STAT_BLIND))
 			to_chat(src, "<span class='danger'>You are blinded!</span>")
 			SET_STATUS_MAX(src, STAT_BLIND, 20)
 
 /mob/living/carbon/human/proc/contaminant_head_protected()
 	//Checks if the head is adequately sealed.
+	var/obj/item/head = get_equipped_item(slot_head_str)
 	if(head)
 		if(vsc.contaminant_control.STRICT_PROTECTION_ONLY)
 			if(head.item_flags & ITEM_FLAG_NO_CONTAMINATION)
@@ -123,8 +125,9 @@ var/global/image/contamination_overlay = image('icons/effects/contamination.dmi'
 /mob/living/carbon/human/proc/contaminant_suit_protected()
 	//Checks if the suit is adequately sealed.
 	var/coverage = 0
-	for(var/obj/item/protection in list(wear_suit, gloves, shoes))
-		if(!protection)
+	for(var/slot in list(slot_wear_suit_str, slot_gloves_str, slot_shoes_str))
+		var/obj/item/protection = get_equipped_item(slot)
+		if(!istype(protection))
 			continue
 		if(vsc.contaminant_control.STRICT_PROTECTION_ONLY && !(protection.item_flags & ITEM_FLAG_NO_CONTAMINATION))
 			return 0
@@ -137,7 +140,8 @@ var/global/image/contamination_overlay = image('icons/effects/contamination.dmi'
 
 /mob/living/carbon/human/proc/suit_contamination()
 	//Runs over the things that can be contaminated and does so.
-	if(w_uniform) w_uniform.contaminate()
-	if(shoes) shoes.contaminate()
-	if(gloves) gloves.contaminate()
+	for(var/slot in list(slot_w_uniform_str, slot_shoes_str, slot_gloves_str))
+		var/obj/item/gear = get_equipped_item(slot)
+		if(istype(gear))
+			gear.contaminate()
 

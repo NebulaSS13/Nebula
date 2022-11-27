@@ -97,12 +97,12 @@
 	if(capacitor)
 		to_chat(user, "<span class='notice'>The installed [capacitor.name] has a charge level of [round((capacitor.charge/capacitor.max_charge)*100)]%.</span>")
 	if(!cell || !capacitor)
-		to_chat(user, "<span class='notice'>The capacitor charge indicator is blinking <font color ='[COLOR_RED]'>red</font>. Maybe you should check the cell or capacitor.</span>")
+		to_chat(user, "<span class='notice'>The capacitor charge indicator is blinking [SPAN_RED("red")]. Maybe you should check the cell or capacitor.</span>")
 	else
 		if(capacitor.charge < power_cost)
-			to_chat(user, "<span class='notice'>The capacitor charge indicator is <font color ='[COLOR_ORANGE]'>amber</font>.</span>")
+			to_chat(user, "<span class='notice'>The capacitor charge indicator is [SPAN_ORANGE("amber")].</span>")
 		else
-			to_chat(user, "<span class='notice'>The capacitor charge indicator is <font color ='[COLOR_GREEN]'>green</font>.</span>")
+			to_chat(user, "<span class='notice'>The capacitor charge indicator is [SPAN_GREEN("green")].</span>")
 
 /obj/item/gun/magnetic/attackby(var/obj/item/thing, var/mob/user)
 
@@ -119,7 +119,7 @@
 			update_icon()
 			return
 
-		if(isScrewdriver(thing))
+		if(IS_SCREWDRIVER(thing))
 			if(!capacitor)
 				to_chat(user, "<span class='warning'>\The [src] has no capacitor installed.</span>")
 				return

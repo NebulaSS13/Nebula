@@ -51,7 +51,7 @@
 			adjustBruteLoss(-1)
 
 /mob/living/slime/proc/handle_turf_contents()
-	// If we're standing on top of a dead mob or small items, we can 
+	// If we're standing on top of a dead mob or small items, we can
 	// ingest it (or just melt it a little if we're too small)
 	// Also helps to keep our cell tidy!
 	if(!length(loc?.contents))
@@ -98,7 +98,7 @@
 					adjust_nutrition(M.eaten_by_slime(src))
 					queue_icon_update()
 				break
-			
+
 			if(istype(AM, /obj/item/remains))
 				if(prob(5))
 					adjust_nutrition(rand(2,3))

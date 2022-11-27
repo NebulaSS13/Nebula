@@ -20,15 +20,15 @@
 	w_class = ITEM_SIZE_HUGE
 	slot_flags = SLOT_BACK
 	icon_state = ICON_STATE_WORLD
-
 	pickup_sound = 'sound/foley/scrape1.ogg'
 	drop_sound = 'sound/foley/tooldrop1.ogg'
+	abstract_type = /obj/item/twohanded
 
 	var/wielded = 0
 	var/force_wielded = 0
 	var/force_unwielded
-	var/wieldsound = null
-	var/unwieldsound = null
+	var/wieldsound = 'sound/foley/scrape1.ogg'
+	var/unwieldsound = 'sound/foley/tooldrop1.ogg'
 	var/base_name
 	var/unwielded_material_force_multiplier = 0.25
 	var/wielded_parry_bonus = 15
@@ -39,10 +39,14 @@
 /obj/item/twohanded/update_twohanding()
 	var/mob/living/M = loc
 	if(istype(M) && M.can_wield_item(src) && is_held_twohanded(M))
-		wielded = 1
+		wielded = TRUE
+		if(wieldsound)
+			playsound(src, wieldsound, 50)
 		force = force_wielded
 	else
-		wielded = 0
+		wielded = FALSE
+		if(unwieldsound)
+			playsound(src, unwieldsound, 50)
 		force = force_unwielded
 	update_icon()
 	..()
@@ -128,12 +132,12 @@
 	..()
 
 /obj/item/twohanded/spear/on_update_icon()
-	overlays.Cut()
-	if(applies_material_colour && material)
-		color = material.color
-		alpha = 100 + material.opacity * 255
-	overlays += get_shaft_overlay("shaft")
-	overlays += mutable_appearance(icon, "cable", cable_color)
+	. = ..()
+	add_overlay(list(
+			get_shaft_overlay("shaft"),
+			mutable_appearance(icon, "cable", cable_color)
+		))
+
 
 /obj/item/twohanded/spear/adjust_mob_overlay(var/mob/living/user_mob, var/bodytype,  var/image/overlay, var/slot, var/bodypart)
 	if(overlay)

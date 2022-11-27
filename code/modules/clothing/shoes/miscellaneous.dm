@@ -7,7 +7,6 @@
 	permeability_coefficient = 0.05
 	item_flags = ITEM_FLAG_NOSLIP
 	origin_tech = "{'esoteric':3}"
-	var/list/clothing_choices = list()
 	siemens_coefficient = 0.8
 	bodytype_equip_flags = null
 	matter = list(/decl/material/solid/metal/steel = MATTER_AMOUNT_REINFORCEMENT)
@@ -16,11 +15,11 @@
 	name = "\improper SWAT boots"
 	desc = "When you want to turn up the heat."
 	armor = list(
-		melee = ARMOR_MELEE_VERY_HIGH, 
-		bullet = ARMOR_BALLISTIC_RIFLE, 
+		melee = ARMOR_MELEE_VERY_HIGH,
+		bullet = ARMOR_BALLISTIC_RIFLE,
 		laser = ARMOR_LASER_HANDGUNS,
-		energy = ARMOR_ENERGY_SMALL, 
-		bomb = ARMOR_BOMB_RESISTANT, 
+		energy = ARMOR_ENERGY_SMALL,
+		bomb = ARMOR_BOMB_RESISTANT,
 		bio = ARMOR_BIO_MINOR
 		)
 	item_flags = ITEM_FLAG_NOSLIP
@@ -72,7 +71,7 @@
 /obj/item/clothing/shoes/dress/on_update_icon()
 	. = ..()
 	if(check_state_in_icon("[icon_state]_inset", icon))
-		overlays += overlay_image(icon, "[icon_state]_inset", inset_color, RESET_COLOR)
+		add_overlay(overlay_image(icon, "[icon_state]_inset", inset_color, RESET_COLOR))
 
 /obj/item/clothing/shoes/dress/white
 	name = "white dress shoes"

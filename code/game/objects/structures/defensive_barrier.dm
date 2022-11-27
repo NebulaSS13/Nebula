@@ -138,7 +138,7 @@
 
 /obj/structure/defensive_barrier/attackby(obj/item/W, mob/user)
 
-	if(isScrewdriver(W) && density)
+	if(IS_SCREWDRIVER(W) && density)
 		user.visible_message(SPAN_NOTICE("\The [user] begins to [secured ? "secure" : "unsecure"] \the [src]..."))
 		playsound(src, 'sound/items/Screwdriver.ogg', 100, 1)
 		if(!do_after(user, 30, src))
@@ -212,7 +212,7 @@
 	qdel(src)
 
 /obj/item/defensive_barrier/attackby(obj/item/W, mob/user)
-	if(stored_health < stored_max_health && isWelder(W))
+	if(stored_health < stored_max_health && IS_WELDER(W))
 		if(W.do_tool_interaction(TOOL_WELDER, user, src,        \
 		  max(5, round((stored_max_health-stored_health) / 5)), \
 		  "repairing the damage to", "repairing the damage to", \

@@ -7,6 +7,7 @@
 	icon = 'icons/obj/power.dmi'
 	icon_state = "circ-unassembled"
 	anchored = 0
+	connect_types = CONNECT_TYPE_REGULAR|CONNECT_TYPE_FUEL
 	obj_flags = OBJ_FLAG_ANCHORABLE | OBJ_FLAG_ROTATABLE
 	layer = STRUCTURE_LAYER
 

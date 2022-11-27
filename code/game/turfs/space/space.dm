@@ -9,24 +9,19 @@
 	thermal_conductivity = OPEN_HEAT_TRANSFER_COEFFICIENT
 	permit_ao = FALSE
 	z_eventually_space = TRUE
+	turf_flags = TURF_FLAG_BACKGROUND
 
 	/// If we're an edge.
 	var/edge = 0
 	/// Force this one to pretend it's an overedge turf.
-	var/forced_dirs = 0 
+	var/forced_dirs = 0
 
-/turf/space/update_ambient_light(var/mapload)
-	if(config.starlight && (locate(/turf/simulated) in RANGE_TURFS(src, 1)))
-		set_light(config.starlight, 0.75, l_color = SSskybox.background_color)
-	else
-		set_light(0)
-
-/turf/space/Initialize(var/mapload)
+/turf/space/Initialize()
 
 	SHOULD_CALL_PARENT(FALSE)
 	atom_flags |= ATOM_FLAG_INITIALIZED
 
-	update_ambient_light(mapload)
+	SSambience.queued += src
 
 	//We might be an edge
 	if(y == world.maxy || forced_dirs & NORTH)
@@ -76,7 +71,7 @@
 		if (AM.simulated && !AM.anchored)
 			AM.throw_at(get_step(src, global.reverse_dir[direction]), 5, 1)
 
-		if(istype(AM, /obj/effect/decal)) 
+		if(istype(AM, /obj/effect/decal))
 			qdel(AM)
 
 /turf/space/Destroy()
@@ -97,9 +92,6 @@
 /turf/space/levelupdate()
 	for(var/obj/O in src)
 		O.hide(0)
-
-/turf/space/is_solid_structure()
-	return locate(/obj/structure/lattice, src) //counts as solid structure if it has a lattice
 
 /turf/space/attackby(obj/item/C, mob/user)
 

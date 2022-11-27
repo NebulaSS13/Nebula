@@ -68,7 +68,7 @@ var/global/list/adminhelp_ignored_words = list("unknown","the","a","an","of","mo
 
 	//handle muting and automuting
 	if(prefs.muted & MUTE_ADMINHELP)
-		to_chat(src, "<font color='red'>Error: Admin-PM: You cannot send adminhelps (Muted).</font>")
+		to_chat(src, SPAN_WARNING("Error: Admin-PM: You cannot send adminhelps (Muted)."))
 		return
 
 	adminhelped = 1 //Determines if they get the message to reply by clicking the name.
@@ -131,7 +131,7 @@ var/global/list/adminhelp_ignored_words = list("unknown","the","a","an","of","mo
 			to_chat(X, msg)
 			window_flash(X)
 	//show it to the person adminhelping too
-	to_chat(src, "<font color='blue'>PM to-<b>Staff</b> (<a href='?src=\ref[usr];close_ticket=\ref[ticket]'>CLOSE</a>): [original_msg]</font>")
+	to_chat(src, SPAN_BLUE("PM to-<b>Staff</b> (<a href='?src=\ref[usr];close_ticket=\ref[ticket]'>CLOSE</a>): [original_msg]"))
 	var/admin_number_present = global.admins.len - admin_number_afk
 	log_admin("HELP: [key_name(src)]: [original_msg] - heard by [admin_number_present] non-AFK admins.")
 	if(admin_number_present <= 0)

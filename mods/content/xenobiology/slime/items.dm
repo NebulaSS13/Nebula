@@ -10,6 +10,7 @@
 	throw_range = 6
 	origin_tech = "{'biotech':4}"
 	atom_flags = ATOM_FLAG_OPEN_CONTAINER
+	material = /decl/material/liquid/slimejelly
 	var/slime_type = /decl/slime_colour/grey
 	var/Uses = 1 // uses before it goes inert
 	var/enhanced = 0 //has it been enhanced before?
@@ -38,9 +39,15 @@
 	if(!ispath(slime_type, /decl/slime_colour))
 		PRINT_STACK_TRACE("Slime extract initialized with non-decl slime colour: [slime_type || "NULL"].")
 	SSstatistics.extracted_slime_cores_amount++
-	create_reagents(100)
-	reagents.add_reagent(/decl/material/liquid/slimejelly, 30)
+	initialize_reagents()
 	update_icon()
+
+/obj/item/slime_extract/initialize_reagents(populate)
+	create_reagents(100)
+	. = ..()
+
+/obj/item/slime_extract/populate_reagents()
+	reagents.add_reagent(/decl/material/liquid/slimejelly, 30)
 
 /obj/item/slime_extract/on_reagent_change()
 	. = ..()
@@ -49,6 +56,7 @@
 		slime_data.handle_reaction(reagents)
 
 /obj/item/slime_extract/on_update_icon()
+	. = ..()
 	icon_state = get_world_inventory_state()
 	var/decl/slime_colour/slime_data = GET_DECL(slime_type)
 	icon = slime_data.extract_icon

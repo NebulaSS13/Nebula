@@ -491,7 +491,7 @@
 	pixel_x = -12;
 	pixel_y = 2
 	},
-/obj/item/storage/mirror{
+/obj/structure/mirror{
 	dir = 4;
 	pixel_x = -28
 	},
@@ -1013,7 +1013,7 @@
 "cy" = (
 /obj/machinery/button/access/shuttle/exterior{
 	id_tag = "raider_west_control";
-	req_access = list("ACCESS_SYNDICATE")
+	req_access = list("ACCESS_RAIDER")
 	},
 /obj/effect/paint/black,
 /turf/simulated/wall/raidershuttle,
@@ -1160,7 +1160,7 @@
 	id_tag = "skipjack_shuttle";
 	pixel_x = -25;
 	pixel_y = 8;
-	req_access = list("ACCESS_SYNDICATE")
+	req_access = list("ACCESS_RAIDER")
 	},
 /obj/machinery/atmospherics/unary/vent_pump/high_volume/external_air{
 	dir = 4;
@@ -1224,7 +1224,7 @@
 /obj/machinery/button/access/shuttle/interior{
 	id_tag = "raider_west_control";
 	pixel_x = -22;
-	req_access = list("ACCESS_SYNDICATE")
+	req_access = list("ACCESS_RAIDER")
 	},
 /turf/simulated/floor/plating,
 /area/map_template/skipjack_station/start)
@@ -1336,7 +1336,7 @@
 	name = "interior access button";
 	pixel_x = 25;
 	pixel_y = 25;
-	req_access = list("ACCESS_SYNDICATE")
+	req_access = list("ACCESS_RAIDER")
 	},
 /turf/simulated/floor/plating,
 /area/map_template/skipjack_station/start)
@@ -1459,7 +1459,7 @@
 /turf/simulated/floor/shuttle/red,
 /area/map_template/skipjack_station/start)
 "dD" = (
-/obj/machinery/suit_cycler/syndicate{
+/obj/machinery/suit_cycler/nonstandard/raider{
 	locked = 0
 	},
 /turf/simulated/floor/shuttle/red,

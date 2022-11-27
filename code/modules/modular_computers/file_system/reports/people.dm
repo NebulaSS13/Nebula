@@ -42,7 +42,7 @@
 	message.stored_data = body
 	message.source = server.login
 	message.attachment = attach_report
-	server.send_mail(recipient, message, net)
+	net.send_email(server, recipient, message)
 
 /datum/report_field/people/proc/format_output(name, rank, milrank)
 	. = list()

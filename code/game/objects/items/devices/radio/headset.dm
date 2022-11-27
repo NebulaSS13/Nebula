@@ -23,9 +23,10 @@
 /obj/item/radio/headset/Initialize()
 	. = ..()
 	internal_channels.Cut()
-	for(var/T in encryption_keys)
+	for(var/i in 1 to LAZYLEN(encryption_keys))
+		var/T = encryption_keys[i]
 		if(ispath(T))
-			encryption_keys = new T(src)
+			encryption_keys[i] = new T(src)
 	if(ks1type)
 		encryption_keys += new ks1type(src)
 	if(ks2type)
@@ -47,13 +48,12 @@
 	to_chat(user, "The following channels are available:")
 	to_chat(user, radio_desc)
 
-/obj/item/radio/headset/handle_message_mode(mob/living/M, message, channel)
-	if (channel == "special")
+/obj/item/radio/headset/get_connection_from_message_mode(mob/living/M, message, message_mode)
+	if (message_mode == "special")
 		if (translate_binary)
 			var/decl/language/binary = GET_DECL(/decl/language/binary)
 			binary.broadcast(M, message)
 		return null
-
 	return ..()
 
 /obj/item/radio/headset/receive_range(freq, level, aiOverride = 0)
@@ -61,8 +61,9 @@
 		return ..(freq, level)
 	if(ishuman(src.loc))
 		var/mob/living/carbon/human/H = src.loc
-		if(H.l_ear == src || H.r_ear == src)
-			return ..(freq, level)
+		for(var/slot in global.ear_slots)
+			if(H.get_equipped_item(slot) == src)
+				return ..(freq, level)
 	return -1
 
 /obj/item/radio/headset/syndicate
@@ -277,10 +278,10 @@
 /obj/item/radio/headset/attackby(obj/item/W, mob/user)
 //	..()
 	user.set_machine(src)
-	if (!( isScrewdriver(W) || (istype(W, /obj/item/encryptionkey/ ))))
+	if (!( IS_SCREWDRIVER(W) || (istype(W, /obj/item/encryptionkey/ ))))
 		return
 
-	if(isScrewdriver(W))
+	if(IS_SCREWDRIVER(W))
 		if(encryption_keys.len)
 			for(var/ch_name in channels)
 				radio_controller.remove_object(src, radiochannels[ch_name])

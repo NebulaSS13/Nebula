@@ -358,6 +358,9 @@ SUBSYSTEM_DEF(zcopy)
 		if (OO.dir != OO.associated_atom.dir)
 			OO.set_dir(OO.associated_atom.dir)
 
+		if (OO.particles != OO.associated_atom.particles)
+			OO.particles = OO.associated_atom.particles
+
 		OO.appearance = OO.associated_atom
 		OO.z_flags = OO.associated_atom.z_flags
 		OO.plane = OPENTURF_MAX_PLANE - OO.depth

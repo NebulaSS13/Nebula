@@ -8,10 +8,11 @@
 	natural_weapon = /obj/item/natural_weapon/claws
 	can_escape = TRUE
 	max_gas = list(
-		/decl/material/gas/chlorine = 2, 
+		/decl/material/gas/chlorine = 2,
 		/decl/material/gas/carbon_dioxide = 5
 	)
 	known_commands = list("stay", "stop", "attack", "follow", "dance", "boogie", "boogy")
+	base_animal_type = /mob/living/simple_animal/hostile/bear // used for language, ignore type
 
 /mob/living/simple_animal/hostile/commanded/bear/hit_with_weapon(obj/item/O, mob/living/user, var/effective_force, var/hit_zone)
 	. = ..()

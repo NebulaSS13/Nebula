@@ -8,14 +8,13 @@
 	w_class = ITEM_SIZE_NORMAL
 	max_w_class = ITEM_SIZE_SMALL
 	max_storage_space = 4
-	var/mob/affecting = null
-	var/deity_name = "Christ"
+	material = /decl/material/solid/cardboard
 	var/renamed = 0
 	var/icon_changed = 0
 
 /obj/item/storage/bible/Initialize()
 	. = ..()
-	if(length(startswith))
+	if(length(contents))
 		make_exact_fit()
 
 /obj/item/storage/bible/booze
@@ -23,7 +22,8 @@
 	desc = "To be applied to the head repeatedly."
 	icon_state ="bible"
 
-	startswith = list(
+/obj/item/storage/bible/booze/WillContain()
+	return list(
 		/obj/item/chems/drinks/bottle/small/beer,
 		/obj/item/cash/c50,
 		/obj/item/cash/c50,

@@ -10,7 +10,6 @@
 	matter = list(/decl/material/solid/fiberglass = MATTER_AMOUNT_REINFORCEMENT)
 
 	var/translate_binary = 0
-	var/translate_hive = 0
 	var/syndie = 0
 	var/list/channels = list()
 

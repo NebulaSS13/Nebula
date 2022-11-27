@@ -6,6 +6,8 @@
 	allow_quick_empty = 1
 	use_to_pickup = 1
 	slot_flags = SLOT_LOWER_BODY
+	material = /decl/material/solid/plastic
+	item_flags = ITEM_FLAG_HOLLOW
 
 /obj/item/storage/bag/handle_item_insertion(obj/item/W, prevent_warning = 0)
 	. = ..()
@@ -56,6 +58,7 @@
 	update_icon()
 
 /obj/item/storage/bag/trash/on_update_icon()
+	. = ..()
 	switch(w_class)
 		if(2) icon_state = "[initial(icon_state)]"
 		if(3) icon_state = "[initial(icon_state)]1"

@@ -93,15 +93,16 @@
 #define COLOR_ASTEROID_ROCK    "#735555"
 #define COLOR_DIAMOND          "#d8d4ea"
 
-#define	PIPE_COLOR_GREY        "#808080"
-#define	PIPE_COLOR_RED         "#ff0000"
-#define	PIPE_COLOR_BLUE        "#0000ff"
-#define	PIPE_COLOR_CYAN        "#00ffff"
-#define	PIPE_COLOR_GREEN       "#00ff00"
-#define	PIPE_COLOR_YELLOW      "#ffcc00"
-#define	PIPE_COLOR_BLACK       "#444444"
-#define	PIPE_COLOR_ORANGE      "#b95a00"
+#define PIPE_COLOR_GREY        "#808080"
+#define PIPE_COLOR_RED         "#ff0000"
+#define PIPE_COLOR_BLUE        "#0000ff"
+#define PIPE_COLOR_CYAN        "#00ffff"
+#define PIPE_COLOR_GREEN       "#00ff00"
+#define PIPE_COLOR_YELLOW      "#ffcc00"
+#define PIPE_COLOR_BLACK       "#444444"
+#define PIPE_COLOR_ORANGE      "#b95a00"
 #define PIPE_COLOR_WHITE       "#ffffff"
+#define PIPE_COLOR_PURPLE      "#880088"
 
 #define	COMMS_COLOR_DEFAULT    "#ff00ff"
 #define	COMMS_COLOR_ENTERTAIN  "#666666"
@@ -198,12 +199,14 @@
 #define RANDOM_RGB rgb(rand(0,255), rand(0,255), rand(0,255))
 
 // Codex category colours.
-#define CODEX_COLOR_LORE      "#abdb9b"
-#define CODEX_COLOR_MECHANICS "#9ebcd8"
-#define CODEX_COLOR_ANTAG     "#e5a2a2"
-
 #define COLOR_WEBHOOK_DEFAULT 0x8bbbd5
 
 // Colors for input/hotkey panel.
 #define COLOR_INPUT_DISABLED "#f0f0f0"
 #define COLOR_INPUT_ENABLED "#d3b5b5"
+
+#define COLOR_DARKMODE_BACKGROUND "#202020"
+#define COLOR_DARKMODE_DARKBACKGROUND "#171717"
+#define COLOR_DARKMODE_TEXT "#a4bad6"
+
+#define COLORED_SQUARE(COLOR) "<span style='font-face: fixedsys; font-size: 14px; background-color: [COLOR]; color: [COLOR]'>___</span>"

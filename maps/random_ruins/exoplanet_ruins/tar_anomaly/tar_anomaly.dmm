@@ -6,7 +6,7 @@
 /turf/template_noop,
 /area/template_noop)
 "c" = (
-/obj/structure/flora/ausbushes/lavendergrass,
+/obj/structure/flora/bush/lavendergrass,
 /turf/template_noop,
 /area/template_noop)
 "d" = (
@@ -15,7 +15,7 @@
 /turf/exterior/shrouded,
 /area/template_noop)
 "e" = (
-/obj/structure/flora/ausbushes/fullgrass,
+/obj/structure/flora/bush/fullgrass,
 /turf/template_noop,
 /area/template_noop)
 "f" = (

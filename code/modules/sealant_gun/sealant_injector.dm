@@ -1,7 +1,8 @@
-/obj/item/chems/chem_disp_cartridge/foaming_agent
-	spawn_reagent = /decl/material/liquid/foaming_agent
-/obj/item/chems/chem_disp_cartridge/polyacid
-	spawn_reagent = /decl/material/liquid/acid/polyacid
+/obj/item/chems/chem_disp_cartridge/foaming_agent/populate_reagents()
+	reagents.add_reagent(/decl/material/liquid/foaming_agent, reagents.maximum_volume)
+
+/obj/item/chems/chem_disp_cartridge/polyacid/populate_reagents()
+	reagents.add_reagent(/decl/material/liquid/acid/polyacid, reagents.maximum_volume)
 
 /obj/structure/sealant_injector
 	name = "sealant tank injector"
@@ -56,10 +57,6 @@
 
 	. = ..()
 
-/obj/structure/sealant_injector/AltClick(mob/user)
-	if(Adjacent(user) && CanPhysicallyInteract(user))
-		try_inject(user)
-
 /obj/structure/sealant_injector/proc/try_inject(mob/user)
 
 	if(!loaded_tank)
@@ -99,3 +96,15 @@
 		return TRUE
 
 	. = ..()
+
+/obj/structure/sealant_injector/get_alt_interactions(var/mob/user)
+	. = ..()
+	LAZYADD(., /decl/interaction_handler/sealant_try_inject)
+
+/decl/interaction_handler/sealant_try_inject
+	name = "Inject Sealant"
+	expected_target_type = /obj/structure/sealant_injector
+
+/decl/interaction_handler/sealant_try_inject/invoked(var/atom/target, var/mob/user)
+	var/obj/structure/sealant_injector/SI = target
+	SI.try_inject(user)

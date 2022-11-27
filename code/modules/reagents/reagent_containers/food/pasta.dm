@@ -34,7 +34,7 @@
 	nutriment_amt = 6
 	bitesize = 4
 
-/obj/item/chems/food/pastatomato/Initialize()
+/obj/item/chems/food/pastatomato/populate_reagents()
 	. = ..()
 	reagents.add_reagent(/decl/material/liquid/drink/juice/tomato, 10)
 
@@ -48,7 +48,7 @@
 	nutriment_amt = 6
 	bitesize = 4
 
-/obj/item/chems/food/nanopasta/Initialize()
+/obj/item/chems/food/nanopasta/populate_reagents()
 	. = ..()
 	reagents.add_reagent(/decl/material/liquid/nanitefluid, 10)
 
@@ -62,8 +62,7 @@
 	nutriment_desc = list("noodles" = 4)
 	nutriment_amt = 4
 	bitesize = 2
-
-/obj/item/chems/food/meatballspagetti/Initialize()
+/obj/item/chems/food/meatballspagetti/populate_reagents()
 	. = ..()
 	reagents.add_reagent(/decl/material/liquid/nutriment/protein, 4)
 
@@ -77,6 +76,6 @@
 	nutriment_amt = 4
 	bitesize = 2
 
-/obj/item/chems/food/spesslaw/Initialize()
+/obj/item/chems/food/spesslaw/populate_reagents()
 	. = ..()
 	reagents.add_reagent(/decl/material/liquid/nutriment/protein, 4)

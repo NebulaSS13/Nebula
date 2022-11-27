@@ -10,6 +10,8 @@
 	throw_range = 4
 	throwforce = 7
 	w_class = ITEM_SIZE_NORMAL
+	material = /decl/material/solid/glass
+	health = ITEM_HEALTH_NO_DAMAGE
 
 /obj/item/nullrod/attack(mob/M, mob/living/user) //Paste from old-code to decult with a null rod.
 	admin_attack_log(user, M, "Attacked using \a [src]", "Was attacked with \a [src]", "used \a [src] to attack")
@@ -68,6 +70,8 @@
 	icon_state = "energynet"
 	throwforce = 0
 	force = 0
+	health = 100
+	max_health = 100
 	var/net_type = /obj/effect/energy_net
 
 /obj/item/energy_net/safari
@@ -138,9 +142,6 @@
 	START_PROCESSING(SSobj, src)
 
 /obj/effect/energy_net/Destroy()
-	if(istype(captured, /mob/living/carbon))
-		if(captured.handcuffed == src)
-			captured.handcuffed = null
 	if(captured)
 		unbuckle_mob()
 	STOP_PROCESSING(SSobj, src)
@@ -172,10 +173,6 @@
 	if(M.buckled)
 		M.buckled.unbuckle_mob()
 	buckle_mob(M)
-	if(istype(M, /mob/living/carbon))
-		var/mob/living/carbon/C = M
-		if(!C.handcuffed)
-			C.handcuffed = src
 	return 1
 
 /obj/effect/energy_net/post_buckle_mob(mob/living/M)
@@ -216,9 +213,6 @@
 			health -= rand(10, 20)
 		else
 			health -= rand(1,3)
-
-	else if (MUTATION_HULK in user.mutations)
-		health = 0
 	else
 		health -= rand(5,8)
 

@@ -1,6 +1,5 @@
 /datum/map_template/ruin/exoplanet/ec_old_crash
 	name = "Expeditionary Ship"
-	id = "ec_old_wreck"
 	description = "An abandoned ancient STL exploration ship."
 	prefix = "mods/content/government/ruins/"
 	suffixes = list("ec_old_crash/ec_old_crash.dmm")
@@ -59,6 +58,7 @@
 	icon = 'icons/obj/bureaucracy.dmi'
 	icon_state = "docs_part"
 	item_state = "paper"
+	material = /decl/material/solid/cardboard //#TODO: Replace with paper
 
 /obj/item/ecletters/Initialize()
 	. = ..()

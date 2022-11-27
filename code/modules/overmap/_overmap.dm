@@ -6,10 +6,12 @@
 	var/map_size_x = 20
 	var/map_size_y = 20
 
+	var/overmap_edge_type = /turf/unsimulated/map/edge
+	var/overmap_turf_type = /turf/unsimulated/map
 	var/map_turf_type = /turf/space
 	var/map_area_type = /area/overmap
+
 	var/list/valid_event_types
-	var/empty_z_level_turf
 
 /datum/overmap/New(var/_name)
 
@@ -26,6 +28,7 @@
 	global.overmaps_by_name[name] = src
 
 	generate_overmap()
+	testing("Overmap build for [name] complete.")
 
 	if(!assigned_z)
 		PRINT_STACK_TRACE("Overmap datum generated null assigned z_level.")
@@ -41,23 +44,23 @@
 
 	..()
 
+/datum/overmap/proc/populate_overmap()
+	var/area/overmap/A = new map_area_type
+	for(var/square in block(locate(1, 1, assigned_z), locate(map_size_x, map_size_y, assigned_z)))
+		var/turf/T = square
+		if(T.x == map_size_x || T.y == map_size_y)
+			T = T.ChangeTurf(overmap_edge_type)
+		else
+			T = T.ChangeTurf(overmap_turf_type)
+		ChangeArea(T, A)
+		
 /datum/overmap/proc/generate_overmap()
 	testing("Building overmap [name]...")
 	INCREMENT_WORLD_Z_SIZE
 	assigned_z = world.maxz
 	testing("Putting [name] on [assigned_z].")
-
-	var/area/overmap/A = new map_area_type
-	for(var/square in block(locate(1, 1, assigned_z), locate(map_size_x, map_size_y, assigned_z)))
-		var/turf/T = square
-		if(T.x == map_size_x || T.y == map_size_y)
-			T = T.ChangeTurf(/turf/unsimulated/map/edge)
-		else
-			T = T.ChangeTurf(/turf/unsimulated/map)
-		ChangeArea(T, A)
-
+	populate_overmap()
 	global.using_map.sealed_levels |= assigned_z
-	testing("Overmap build for [name] complete.")
 	. = TRUE
 
 /datum/overmap/proc/travel(var/turf/space/T, var/atom/movable/A)

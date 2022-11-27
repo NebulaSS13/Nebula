@@ -88,8 +88,8 @@
 	var/mouse_x = text2num(click_data["icon-x"])-1 // Ranging from 0 to 31
 	var/mouse_y = text2num(click_data["icon-y"])-1
 
-	var/cell_x = Clamp(round(mouse_x/CELLSIZE), 0, CELLS-1) // Ranging from 0 to CELLS-1
-	var/cell_y = Clamp(round(mouse_y/CELLSIZE), 0, CELLS-1)
+	var/cell_x = clamp(round(mouse_x/CELLSIZE), 0, CELLS-1) // Ranging from 0 to CELLS-1
+	var/cell_y = clamp(round(mouse_y/CELLSIZE), 0, CELLS-1)
 
 	var/list/center = cached_json_decode(W.center_of_mass)
 
@@ -122,7 +122,7 @@
 	scatter_contents(FALSE, get_turf(hit_atom))
 
 /obj/item/storage/tray/on_update_icon()
-	..()
+	. = ..()
 	clear_vis_contents(src)
 	for(var/obj/item/I in contents)
 		I.vis_flags |= VIS_INHERIT_PLANE | VIS_INHERIT_LAYER

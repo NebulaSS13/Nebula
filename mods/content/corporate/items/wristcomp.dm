@@ -27,22 +27,12 @@
 				overlay.overlays += I
 	. = ..()
 
-/obj/item/modular_computer/pda/wrist/AltClick(var/mob/user)
-	if(!CanPhysicallyInteract(user))
-		return
-	var/datum/extension/assembly/assembly = get_extension(src, /datum/extension/assembly)
-	var/obj/item/stock_parts/computer/card_slot/card_slot = assembly.get_component(PART_CARD)
-	if(card_slot?.stored_card)
-		card_slot.eject_id(user)
-	else
-		..()
-
 /obj/item/modular_computer/pda/wrist/attack_hand(var/mob/user)
 	if(loc == user)
 		if(user.incapacitated() || user.restrained())
 			return
 		var/mob/living/carbon/human/H = user
-		if(istype(H) && src == H.wear_id)
+		if(istype(H) && src == H.get_equipped_item(slot_wear_id_str))
 			return attack_self(user)
 	return ..()
 
@@ -59,4 +49,6 @@
 	name = "box of spare wrist computers"
 	desc = "A box of spare wrist microcomputers."
 	icon_state = "pda"
-	startswith = list(/obj/item/modular_computer/pda/wrist = 5)
+
+/obj/item/storage/box/wrist/WillContain()
+	return list(/obj/item/modular_computer/pda/wrist = 5)

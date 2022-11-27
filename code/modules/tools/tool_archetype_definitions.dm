@@ -26,9 +26,15 @@
 
 /decl/tool_archetype/hatchet
 	name = "hatchet"
+	use_sound = 'sound/items/axe_wood.ogg'
 	use_message = "chopping"
 
 /decl/tool_archetype/wrench
 	name = "wrench"
 	use_sound = 'sound/items/Ratchet.ogg'
 	codex_key = TOOL_CODEX_WRENCH
+
+/decl/tool_archetype/shovel
+	name = "shovel"
+	use_sound = 'sound/items/shovel_dirt.ogg'
+	use_message = "digging"

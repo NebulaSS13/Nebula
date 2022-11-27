@@ -468,16 +468,17 @@
 	set name = "Spawn Material Stack"
 	if(!check_rights(R_DEBUG)) return
 
-	var/decl/material/material = input("Select material to spawn") as null|anything in SSmaterials.materials
+	var/material = input("Select material to spawn") as null|anything in SSmaterials.materials_by_name
 	if(!material)
 		return
-	SSmaterials.create_object(material.type, get_turf(mob), 50)
+	var/decl/material/M = SSmaterials.materials_by_name[material]
+	M.create_object(get_turf(mob), 50)
 
 /client/proc/force_ghost_trap_trigger()
 	set category = "Debug"
 	set name = "Force Ghost Trap Trigger"
 	if(!check_rights(R_DEBUG)) return
-	var/decl/ghosttrap/trap = input("Select a ghost trap.", "Force Ghost Trap Trigger") as null|anything in typesof(/decl/ghosttrap)
+	var/decl/ghosttrap/trap = input("Select a ghost trap.", "Force Ghost Trap Trigger") as null|anything in decls_repository.get_decl_paths_of_type(/decl/ghosttrap)
 	if(!trap)
 		return
 	trap = GET_DECL(trap)
@@ -533,6 +534,8 @@
 		if(I.failures)
 			. += "<li>Failures: [I.failures]</li>"
 		. += "<li>qdel() Count: [I.qdels]</li>"
+		if(I.early_destroy)
+			. += "<li>Early destroy count: [I.early_destroy]</li>"
 		. += "<li>Destroy() Cost: [I.destroy_time]ms</li>"
 		if(I.hard_deletes)
 			. += "<li>Total Hard Deletes [I.hard_deletes]</li>"

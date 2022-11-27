@@ -4,7 +4,7 @@
 	icon = 'icons/obj/items/blueprints.dmi'
 	icon_state = "blueprints"
 	attack_verb = list("attacked", "bapped", "hit")
-
+	material = /decl/material/solid/cardboard
 	var/valid_z_levels = list()
 	var/area_prefix
 
@@ -14,6 +14,9 @@
 
 	if(set_valid_z_levels())
 		set_extension(src, /datum/extension/eye/blueprints)
+
+/obj/item/blueprints/preserve_in_cryopod(var/obj/machinery/cryopod/pod)
+	return TRUE
 
 /obj/item/blueprints/attack_self(mob/user)
 	if (!ishuman(user) || !user.check_dexterity(DEXTERITY_COMPLEX_TOOLS)) // Monkeys et al. cannot blueprint.

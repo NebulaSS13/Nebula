@@ -94,7 +94,7 @@
 		var/turf/T = get_turf(R)
 		if (!T)
 			continue
-		if(!(T.z in global.using_map.player_levels))
+		if(!isPlayerLevel(T.z))
 			continue
 		var/tmpname = T.loc.name
 		if(areaindex[tmpname])
@@ -114,7 +114,7 @@
 			var/turf/T = get_turf(M)
 			if(!T)
 				continue
-			if(!(T.z in global.using_map.player_levels))
+			if(!isPlayerLevel(T.z))
 				continue
 			var/tmpname = M.real_name
 			if(areaindex[tmpname])
@@ -176,9 +176,8 @@
 /obj/machinery/teleport
 	name = "teleport"
 	icon = 'icons/obj/machines/teleporter.dmi'
-	density = 1
-	anchored = 1.0
-	var/lockeddown = 0
+	density = TRUE
+	anchored = TRUE
 
 /obj/machinery/teleport/hub
 	name = "teleporter pad"

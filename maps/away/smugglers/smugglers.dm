@@ -11,7 +11,6 @@
 
 /datum/map_template/ruin/away_site/smugglers
 	name = "Smugglers' Base"
-	id = "awaysite_smugglers"
 	description = "Yarr."
 	suffixes = list("smugglers/smugglers.dmm")
 	cost = 1
@@ -82,7 +81,7 @@
 	icon = 'icons/obj/materials/ore.dmi'
 
 /obj/random/ore_smug/spawn_choices()
-	return subtypesof(/obj/item/ore)
+	return subtypesof(/obj/item/stack/material/ore)
 
 /obj/random/ammo_magazine_smug
 	name = "Random Ammo Magazine"
@@ -91,11 +90,13 @@
 	icon_state = "magnum"
 
 /obj/random/ammo_magazine_smug/spawn_choices()
-	return list(
+	var/static/list/spawnable_choices = list(
 		/obj/item/ammo_magazine/pistol,
 		/obj/item/ammo_magazine/speedloader,
 		/obj/item/ammo_magazine/rifle,
-		/obj/item/ammo_magazine/rifle)
+		/obj/item/ammo_magazine/rifle
+	)
+	return spawnable_choices
 
 /obj/structure/closet/crate/plastic_smug_ammo
 	name = "dirty plastic crate"

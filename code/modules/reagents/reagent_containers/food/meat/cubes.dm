@@ -13,7 +13,7 @@
 	var/monkey_type = /mob/living/carbon/human/monkey
 	var/wrapper_type
 
-/obj/item/chems/food/monkeycube/Initialize()
+/obj/item/chems/food/monkeycube/populate_reagents()
 	. = ..()
 	reagents.add_reagent(/decl/material/liquid/nutriment/protein, 10)
 

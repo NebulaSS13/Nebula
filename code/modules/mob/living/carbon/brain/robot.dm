@@ -11,4 +11,5 @@
 	src.brainmob.real_name = src.brainmob.name
 
 /obj/item/mmi/digital/robot/on_update_icon()
+	. = ..()
 	icon_state = initial(icon_state)

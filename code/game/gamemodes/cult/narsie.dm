@@ -10,7 +10,7 @@ var/global/list/narsie_list = list()
 	pixel_y = -256
 
 	current_size = 9 //It moves/eats like a max-size singulo, aside from range. --NEO.
-	contained = 0 // Are we going to move around?
+	move_self = 1 // Are we going to move around?
 	dissipate = 0 // Do we lose energy over time?
 	grav_pull = 10 //How many tiles out do we pull?
 	consume_range = 3 //How many tiles out do we eat
@@ -43,7 +43,7 @@ var/global/list/narsie_list = list()
 /obj/singularity/narsie/large/Initialize()
 	. = ..()
 	if(announce)
-		to_world("<font size='15' color='red'><b>[uppertext(name)] HAS RISEN</b></font>")
+		to_world(SPAN_DANGER("<font size='15'>[uppertext(name)] HAS RISEN!</font>"))
 		sound_to(world, sound('sound/effects/wind/wind_5_1.ogg'))
 
 	narsie_spawn_animation()

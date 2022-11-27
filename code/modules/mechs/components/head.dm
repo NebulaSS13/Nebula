@@ -112,7 +112,7 @@
 		install_software(thing, user)
 		return
 
-	if(isScrewdriver(thing))
+	if(IS_SCREWDRIVER(thing))
 		var/result = ..()
 		update_software()
 		return result

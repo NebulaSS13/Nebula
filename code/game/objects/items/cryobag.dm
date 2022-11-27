@@ -7,7 +7,6 @@
 	icon_state = "bodybag_folded"
 	origin_tech = "{'biotech':4}"
 	material = /decl/material/solid/plastic
-	material = /decl/material/solid/plastic
 	matter = list(
 		/decl/material/solid/fiberglass = MATTER_AMOUNT_REINFORCEMENT,
 		/decl/material/solid/metal/silver = MATTER_AMOUNT_TRACE,
@@ -115,6 +114,12 @@
 	desc = "Pretty useless now.."
 	icon_state = "bodybag_used"
 	icon = 'icons/obj/closets/cryobag.dmi'
+	material = /decl/material/solid/plastic
+	matter = list(
+		/decl/material/solid/fiberglass = MATTER_AMOUNT_REINFORCEMENT,
+		/decl/material/solid/metal/silver = MATTER_AMOUNT_TRACE,
+		/decl/material/solid/metal/gold = MATTER_AMOUNT_TRACE
+	)
 
 /obj/structure/closet/body_bag/cryobag/blank
 	stasis_power = 60

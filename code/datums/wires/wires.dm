@@ -140,7 +140,7 @@ var/global/list/wireColourNames = list("darkred" = "dark red")
 
 			holder.add_hiddenprint(L)
 			if(href_list["cut"]) // Toggles the cut/mend status
-				if(isWirecutter(I) || isWirecutter(offhand_item))
+				if(IS_WIRECUTTER(I) || IS_WIRECUTTER(offhand_item))
 					var/colour = href_list["cut"]
 					CutWireColour(colour)
 					if(prob(L.skill_fail_chance(SKILL_ELECTRICAL, 20, SKILL_ADEPT)))
@@ -152,7 +152,7 @@ var/global/list/wireColourNames = list("darkred" = "dark red")
 				else
 					to_chat(L, "<span class='error'>You need wirecutters!</span>")
 			else if(href_list["pulse"])
-				if(isMultitool(I) || isMultitool(offhand_item))
+				if(IS_MULTITOOL(I) || IS_MULTITOOL(offhand_item))
 					var/colour = href_list["pulse"]
 					if(prob(L.skill_fail_chance(SKILL_ELECTRICAL, 30, SKILL_ADEPT)))
 						RandomPulse()

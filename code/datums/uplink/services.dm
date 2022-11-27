@@ -61,6 +61,7 @@
 	w_class = ITEM_SIZE_TINY
 	icon = 'icons/obj/items/device/flash_synthetic.dmi'
 	icon_state = ICON_STATE_WORLD
+	health = ITEM_HEALTH_NO_DAMAGE
 	var/state = AWAITING_ACTIVATION
 	var/service_label = "Unnamed Service"
 	var/service_duration = 0 SECONDS
@@ -111,6 +112,7 @@
 	visible_message("<span class='warning'>\The [src] shuts down with a spark.</span>")
 
 /obj/item/uplink_service/on_update_icon()
+	. = ..()
 	icon_state = get_world_inventory_state()
 	switch(state)
 		if(CURRENTLY_ACTIVE)

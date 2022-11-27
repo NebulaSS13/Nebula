@@ -66,8 +66,9 @@
 	var/contraband_icons = icon_states('icons/obj/contraband.dmi')
 	var/list/invalid_posters = list()
 
-	for(var/poster_type in subtypesof(/decl/poster))
-		var/decl/poster/P = GET_DECL(poster_type)
+	var/list/all_posters = decls_repository.get_decls_of_subtype(/decl/poster)
+	for(var/poster_type in all_posters)
+		var/decl/poster/P = all_posters[poster_type]
 		if(!(P.icon_state in contraband_icons))
 			invalid_posters += poster_type
 

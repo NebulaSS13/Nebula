@@ -80,63 +80,38 @@
 			front_stick = W
 
 /obj/item/storage/wallet/on_update_icon()
-	overlays.Cut()
+	. = ..()
 	if(front_id)
 		var/tiny_state = "id-generic"
 		if(("id-"+front_id.icon_state) in icon_states(icon))
 			tiny_state = "id-"+front_id.icon_state
-		var/image/tiny_image = new/image(icon, icon_state = tiny_state)
-		tiny_image.appearance_flags = RESET_COLOR
-		overlays += tiny_image
+		add_overlay(overlay_image(icon, tiny_state, flags = RESET_COLOR))
 
-/obj/item/storage/wallet/GetIdCard()
-	return front_id
+/obj/item/storage/wallet/GetIdCards()
+	. = ..()
+	if(istype(front_id))
+		LAZYDISTINCTADD(., front_id)
 
 /obj/item/storage/wallet/GetChargeStick()
 	return front_stick
 
-/obj/item/storage/wallet/GetAccess()
-	var/obj/item/I = GetIdCard()
-	if(I)
-		return I.GetAccess()
-	else
-		return ..()
-
-
-/obj/item/storage/wallet/AltClick(mob/user)
-	if (user != loc || user.incapacitated() || !ishuman(user))
-		return ..()
-
-	var/obj/item/card/id/id = GetIdCard()
-	if (istype(id))
-		remove_from_storage(id)
-		user.put_in_hands(id)
-		return
-
-	return ..()
-
-
-/obj/item/storage/wallet/random/Initialize()
-	. = ..()
-	var/item1_type = pick( /obj/item/cash/c10,/obj/item/cash/c100,/obj/item/cash/c1000,/obj/item/cash/c20,/obj/item/cash/c200,/obj/item/cash/c50, /obj/item/cash/c500)
-	var/item2_type
+/obj/item/storage/wallet/random/WillContain()
+	. = list(
+		new /datum/atom_creator/weighted(list(/obj/item/cash/c10,/obj/item/cash/c100,/obj/item/cash/c1000,/obj/item/cash/c20,/obj/item/cash/c200,/obj/item/cash/c50, /obj/item/cash/c500)),
+		new /datum/atom_creator/weighted(list(/obj/item/coin/silver, /obj/item/coin/silver, /obj/item/coin/gold, /obj/item/coin/iron, /obj/item/coin/iron, /obj/item/coin/iron)),
+	)
 	if(prob(50))
-		item2_type = pick( /obj/item/cash/c10,/obj/item/cash/c100,/obj/item/cash/c1000,/obj/item/cash/c20,/obj/item/cash/c200,/obj/item/cash/c50, /obj/item/cash/c500)
-	var/item3_type = pick( /obj/item/coin/silver, /obj/item/coin/silver, /obj/item/coin/gold, /obj/item/coin/iron, /obj/item/coin/iron, /obj/item/coin/iron )
+		. += new /datum/atom_creator/weighted(list(/obj/item/cash/c10,/obj/item/cash/c100,/obj/item/cash/c1000,/obj/item/cash/c20,/obj/item/cash/c200,/obj/item/cash/c50, /obj/item/cash/c500))
 
-	if(item1_type)
-		new item1_type(src)
-	if(item2_type)
-		new item2_type(src)
-	if(item3_type)
-		new item3_type(src)
+/obj/item/storage/wallet/random/Initialize(ml, material_key)
+	. = ..()
 	update_icon()
 
 /obj/item/storage/wallet/poly
 	name = "polychromic wallet"
 	desc = "You can recolor it! Fancy! The future is NOW!"
 
-/obj/item/storage/wallet/poly/Initialize()
+/obj/item/storage/wallet/poly/Initialize(ml, material_key)
 	. = ..()
 	color = get_random_colour()
 	update_icon()
@@ -163,3 +138,20 @@
 		if(src)
 			icon_state = initial(icon_state)
 			update_icon()
+
+/obj/item/storage/wallet/get_alt_interactions(var/mob/user)
+	. = ..()
+	LAZYADD(., /decl/interaction_handler/remove_id/wallet)
+
+/decl/interaction_handler/remove_id/wallet
+	expected_target_type = /obj/item/storage/wallet
+
+/decl/interaction_handler/remove_id/wallet/is_possible(atom/target, mob/user, obj/item/prop)
+	. = ..() && ishuman(user)
+	
+/decl/interaction_handler/remove_id/wallet/invoked(atom/target, mob/user, obj/item/prop)
+	var/obj/item/storage/wallet/W = target
+	var/obj/item/card/id/id = W.GetIdCard()
+	if (istype(id))
+		W.remove_from_storage(id)
+		user.put_in_hands(id)

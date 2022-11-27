@@ -21,12 +21,11 @@
 		to_chat(user, "It has [contents.len] cig butts in it.")
 
 /obj/item/ashtray/on_update_icon()
-	..()
-	overlays.Cut()
+	. = ..()
 	if (contents.len == max_butts)
-		overlays |= image('icons/obj/objects.dmi',"ashtray_full")
+		add_overlay("ashtray_full")
 	else if (contents.len >= max_butts/2)
-		overlays |= image('icons/obj/objects.dmi',"ashtray_half")
+		add_overlay("ashtray_half")
 
 /obj/item/ashtray/attackby(obj/item/W, mob/user)
 	if (health <= 0)

@@ -27,30 +27,29 @@
 	var/obj/screen/default_attack_selector/attack_selector
 
 	//Equipment slots
-	var/obj/item/wear_suit = null
-	var/obj/item/w_uniform = null
-	var/obj/item/shoes = null
-	var/obj/item/belt = null
-	var/obj/item/gloves = null
-	var/obj/item/glasses = null
-	var/obj/item/head = null
-	var/obj/item/l_ear = null
-	var/obj/item/r_ear = null
-	var/obj/item/wear_id = null
-	var/obj/item/r_store = null
-	var/obj/item/l_store = null
-	var/obj/item/s_store = null
+	// TODO REMOVE DIRECT REFERENCES
+	var/obj/item/_w_uniform
+	var/obj/item/_wear_suit
+	var/obj/item/_shoes
+	var/obj/item/_l_ear
+	var/obj/item/_r_ear
+	var/obj/item/_r_store
+	var/obj/item/_l_store
+	var/obj/item/_s_store
+	var/obj/item/_head
+	var/obj/item/_belt
+	var/obj/item/_gloves
+	var/obj/item/_glasses
+	var/obj/item/_wear_id
+	// END TODO
 
 	var/icon/stand_icon = null
-	var/icon/lying_icon = null
 
 	var/voice = ""	//Instead of new say code calling GetVoice() over and over and over, we're just going to ask this variable, which gets updated in Life()
 
 	var/last_dam = -1	//Used for determining if we need to process all organs or just some or even none.
 	/// organs we check until they are good.
 	var/list/bad_external_organs
-	
-	var/xylophone = 0 //For the spoooooooky xylophone cooldown
 
 	var/mob/remoteview_target = null
 	var/hand_blood_color

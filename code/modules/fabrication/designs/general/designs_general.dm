@@ -8,10 +8,10 @@
 	path = /obj/machinery/floor_light
 
 /datum/fabricator_recipe/extinguisher
-	path = /obj/item/extinguisher/empty
+	path = /obj/item/chems/spray/extinguisher/empty
 
 /datum/fabricator_recipe/extinguisher/mini
-	path = /obj/item/extinguisher/mini/empty
+	path = /obj/item/chems/spray/extinguisher/mini/empty
 
 /datum/fabricator_recipe/jar
 	path = /obj/item/glass_jar
@@ -153,3 +153,11 @@
 	fabricator_types = list(
 		FABRICATOR_CLASS_GENERAL
 	)
+
+/datum/fabricator_recipe/emergency_tank
+	path = /obj/item/tank/emergency
+
+/datum/fabricator_recipe/package_wrapper
+	path = /obj/item/stack/package_wrap
+/datum/fabricator_recipe/gift_wrapper
+	path = /obj/item/stack/package_wrap/gift

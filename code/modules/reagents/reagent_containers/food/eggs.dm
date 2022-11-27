@@ -32,18 +32,17 @@
 	qdel(src)
 
 /obj/item/chems/food/egg/attackby(obj/item/W, mob/user)
-	if(istype( W, /obj/item/pen/crayon ))
-		var/obj/item/pen/crayon/C = W
-		var/clr = C.colourName
+	if(IS_PEN(W))
+		var/clr = W.get_tool_property(TOOL_PEN, TOOL_PROP_COLOR_NAME)
 
 		if(!(clr in list("blue","green","mime","orange","purple","rainbow","red","yellow")))
-			to_chat(usr, "<span class='notice'>The egg refuses to take on this color!</span>")
+			to_chat(usr, SPAN_WARNING("The egg refuses to take on this color!"))
 			return
 
-		to_chat(usr, "<span class='notice'>You color \the [src] [clr]</span>")
+		to_chat(usr, SPAN_NOTICE("You color \the [src] [clr]"))
 		icon_state = "egg-[clr]"
-	else
-		..()
+		return TRUE
+	return ..()
 
 /obj/item/chems/food/egg/blue
 	icon_state = "egg-blue"
@@ -69,7 +68,7 @@
 /obj/item/chems/food/egg/yellow
 	icon_state = "egg-yellow"
 
-/obj/item/chems/food/egg/lizard/Initialize()
+/obj/item/chems/food/egg/lizard/populate_reagents()
 	. = ..()
 	reagents.add_reagent(/decl/material/liquid/nutriment/protein/egg, 5)
 	if(prob(30))	//extra nutriment
@@ -83,11 +82,11 @@
 	center_of_mass = @"{'x':16,'y':14}"
 	bitesize = 1
 
-/obj/item/chems/food/friedegg/Initialize()
+/obj/item/chems/food/friedegg/populate_reagents()
 	. = ..()
 	reagents.add_reagent(/decl/material/liquid/nutriment/protein, 3)
-	reagents.add_reagent(/decl/material/solid/sodiumchloride, 1)
-	reagents.add_reagent(/decl/material/solid/blackpepper, 1)
+	reagents.add_reagent(/decl/material/solid/sodiumchloride,     1)
+	reagents.add_reagent(/decl/material/solid/blackpepper,        1)
 
 /obj/item/chems/food/boiledegg
 	name = "boiled egg"
@@ -95,7 +94,7 @@
 	icon_state = "egg"
 	filling_color = "#ffffff"
 
-/obj/item/chems/food/boiledegg/Initialize()
+/obj/item/chems/food/boiledegg/populate_reagents()
 	. = ..()
 	reagents.add_reagent(/decl/material/liquid/nutriment/protein, 2)
 
@@ -108,7 +107,7 @@
 	center_of_mass = @"{'x':16,'y':13}"
 	bitesize = 1
 
-/obj/item/chems/food/omelette/Initialize()
+/obj/item/chems/food/omelette/populate_reagents()
 	. = ..()
 	reagents.add_reagent(/decl/material/liquid/nutriment/protein, 8)
 
@@ -120,7 +119,7 @@
 	filling_color = "#f0f2e4"
 	center_of_mass = @"{'x':17,'y':10}"
 	bitesize = 1
-
-/obj/item/chems/food/chawanmushi/Initialize()
+	
+/obj/item/chems/food/chawanmushi/populate_reagents()
 	. = ..()
 	reagents.add_reagent(/decl/material/liquid/nutriment/protein, 5)

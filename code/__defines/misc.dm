@@ -2,6 +2,7 @@
 // Turf-only flags.
 #define TURF_FLAG_NOJAUNT             BITFLAG(0) // This is used in literally one place, turf.dm, to block ethereal jaunt.
 #define TURF_FLAG_NORUINS             BITFLAG(1) // Used by the ruin generator to skip placing loaded ruins on this turf.
+#define TURF_FLAG_BACKGROUND          BITFLAG(2) // Used by shuttle movement to determine if it should be ignored by turf translation.
 
 #define TRANSITIONEDGE 7 // Distance from edge to move to another z-level.
 #define RUIN_MAP_EDGE_PAD 15
@@ -238,7 +239,7 @@
 #define SOULSTONE_ESSENCE 1
 
 #define INCREMENT_WORLD_Z_SIZE world.maxz++; global.connected_z_cache.Cut(); if (SSzcopy.zlev_maximums.len) { SSzcopy.calculate_zstack_limits() }
-#define ARE_Z_CONNECTED(ZA, ZB) (ZA > 0 && ZB > 0 && ZA <= world.maxz && ZB <= world.maxz && ((ZA == ZB) || ((global.connected_z_cache.len >= ZA && global.connected_z_cache[ZA]) ? global.connected_z_cache[ZA][ZB] : AreConnectedZLevels(ZA, ZB))))
+#define ARE_Z_CONNECTED(ZA, ZB) (ZA > 0 && ZB > 0 && ZA <= world.maxz && ZB <= world.maxz && ((ZA == ZB) || ((length(global.connected_z_cache) >= ZA && global.connected_z_cache[ZA] && length(global.connected_z_cache[ZA]) >= ZB) ? global.connected_z_cache[ZA][ZB] : AreConnectedZLevels(ZA, ZB))))
 
 //Request Console Department Types
 #define RC_ASSIST 1		//Request Assistance
@@ -254,12 +255,6 @@
 #define hex2num(X) text2num(X, 16)
 
 #define Z_ALL_TURFS(Z) block(locate(1, 1, Z), locate(world.maxx, world.maxy, Z))
-
-#if DM_BUILD < 1540
-#define AS_ANYTHING as()
-#else
-#define AS_ANYTHING as anything
-#endif
 
 //NOTE: INTENT_HOTKEY_* defines are not actual intents!
 //they are here to support hotkeys
@@ -284,3 +279,10 @@
 
 // arbitrary low pressure bound for wind weather effects
 #define MIN_WIND_PRESSURE 10
+
+#define TYPE_IS_ABSTRACT(D) (initial(D.abstract_type) == D)
+#define TYPE_IS_SPAWNABLE(D) (!TYPE_IS_ABSTRACT(D) && initial(D.is_spawnable_type))
+#define INSTANCE_IS_ABSTRACT(D) (D.abstract_type == D.type)
+
+//Damage stuff
+#define ITEM_HEALTH_NO_DAMAGE -1

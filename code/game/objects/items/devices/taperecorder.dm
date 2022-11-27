@@ -45,7 +45,7 @@
 
 
 /obj/item/taperecorder/attackby(obj/item/I, mob/user, params)
-	if(isScrewdriver(I))
+	if(IS_SCREWDRIVER(I))
 		maintenance = !maintenance
 		to_chat(user, "<span class='notice'>You [maintenance ? "open" : "secure"] the lid.</span>")
 		return
@@ -106,7 +106,7 @@
 
 		if(speaking)
 			if(!speaking.machine_understands)
-				msg = speaking.scramble(msg)
+				msg = speaking.scramble(M, msg)
 			mytape.record_speech("[M.name] [speaking.format_message_plain(msg, verb)]")
 		else
 			mytape.record_speech("[M.name] [verb], \"[msg]\"")
@@ -280,13 +280,13 @@
 		var/playedmessage = mytape.storedinfo[i]
 		if (findtextEx(playedmessage,"*",1,2)) //remove marker for action sounds
 			playedmessage = copytext(playedmessage,2)
-		T.audible_message("<font color=Maroon><B>Tape Recorder</B>: [playedmessage]</font>")
+		T.audible_message(SPAN_MAROON("<B>Tape Recorder</B>: [playedmessage]"))
 
 		if(mytape.storedinfo.len < i+1)
 			playsleepseconds = 1
 			sleep(10)
 			T = get_turf(src)
-			T.audible_message("<font color=Maroon><B>Tape Recorder</B>: End of recording.</font>")
+			T.audible_message(SPAN_MAROON("<B>Tape Recorder</B>: End of recording."))
 			playsound(src, 'sound/machines/click.ogg', 10, 1)
 			break
 		else
@@ -295,7 +295,7 @@
 		if(playsleepseconds > 14)
 			sleep(10)
 			T = get_turf(src)
-			T.audible_message("<font color=Maroon><B>Tape Recorder</B>: Skipping [playsleepseconds] seconds of silence</font>")
+			T.audible_message(SPAN_MAROON("<B>Tape Recorder</B>: Skipping [playsleepseconds] seconds of silence"))
 			playsleepseconds = 1
 		sleep(10 * playsleepseconds)
 
@@ -305,19 +305,19 @@
 
 	if(emagged)
 		var/turf/T = get_turf(src)
-		T.audible_message("<font color=Maroon><B>Tape Recorder</B>: This tape recorder will self-destruct in... Five.</font>")
+		T.audible_message(SPAN_MAROON("<B>Tape Recorder</B>: This tape recorder will self-destruct in... Five."))
 		sleep(10)
 		T = get_turf(src)
-		T.audible_message("<font color=Maroon><B>Tape Recorder</B>: Four.</font>")
+		T.audible_message(SPAN_MAROON("<B>Tape Recorder</B>: Four."))
 		sleep(10)
 		T = get_turf(src)
-		T.audible_message("<font color=Maroon><B>Tape Recorder</B>: Three.</font>")
+		T.audible_message(SPAN_MAROON("<B>Tape Recorder</B>: Three."))
 		sleep(10)
 		T = get_turf(src)
-		T.audible_message("<font color=Maroon><B>Tape Recorder</B>: Two.</font>")
+		T.audible_message(SPAN_MAROON("<B>Tape Recorder</B>: Two."))
 		sleep(10)
 		T = get_turf(src)
-		T.audible_message("<font color=Maroon><B>Tape Recorder</B>: One.</font>")
+		T.audible_message(SPAN_MAROON("<B>Tape Recorder</B>: One."))
 		sleep(10)
 		explode()
 
@@ -368,6 +368,7 @@
 
 
 /obj/item/taperecorder/on_update_icon()
+	. = ..()
 	var/datum/extension/base_icon_state/bis = get_extension(src, /datum/extension/base_icon_state)
 
 	if(!mytape)
@@ -400,11 +401,12 @@
 	var/ruined = 0
 	var/doctored = 0
 
-
-/obj/item/magnetic_tape/on_update_icon()
-	overlays.Cut()
-	if(ruined && max_capacity)
-		overlays += "ribbonoverlay"
+//draw_ribbon: Whether we draw the ruined ribbon overlay. Only used by quantum tape.
+//#FIXME: Probably should be handled better.
+/obj/item/magnetic_tape/on_update_icon(var/draw_ribbon = TRUE)
+	. = ..()
+	if(draw_ribbon && ruined && max_capacity)
+		add_overlay(overlay_image(icon, "ribbonoverlay", flags = RESET_COLOR))
 
 
 /obj/item/magnetic_tape/fire_act(datum/gas_mixture/air, exposed_temperature, exposed_volume)
@@ -441,7 +443,7 @@
 /obj/item/magnetic_tape/attackby(obj/item/I, mob/user, params)
 	if(user.incapacitated())
 		return
-	if(ruined && isScrewdriver(I))
+	if(ruined && IS_SCREWDRIVER(I))
 		if(!max_capacity)
 			to_chat(user, "<span class='notice'>There is no tape left inside.</span>")
 			return
@@ -450,7 +452,7 @@
 			to_chat(user, "<span class='notice'>You wound the tape back in.</span>")
 			fix()
 		return
-	else if(istype(I, /obj/item/pen))
+	else if(IS_PEN(I))
 		if(loc == user)
 			var/new_name = input(user, "What would you like to label the tape?", "Tape labeling") as null|text
 			if(isnull(new_name)) return
@@ -462,7 +464,7 @@
 				SetName("tape")
 				to_chat(user, "<span class='notice'>You scratch off the label.</span>")
 		return
-	else if(isWirecutter(I))
+	else if(IS_WIRECUTTER(I))
 		cut(user)
 	else if(istype(I, /obj/item/magnetic_tape/loose))
 		join(user, I)
@@ -502,7 +504,7 @@
 		var/index = text2num(href_list["cut_after"])
 		if(index >= timestamp.len)
 			return
-		
+
 		to_chat(user, "<span class='notice'>You remove part of the tape off.</span>")
 		get_loose_tape(user, index)
 		cut(user)
@@ -539,7 +541,7 @@
 	return
 
 /obj/item/magnetic_tape/loose/on_update_icon()
-	return
+	. = ..(FALSE)
 
 /obj/item/magnetic_tape/loose/get_loose_tape()
 	return

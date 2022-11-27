@@ -13,6 +13,7 @@
 	build_icon = 'icons/obj/pipe-item.dmi'
 	pipe_class = PIPE_CLASS_BINARY
 	atom_flags = ATOM_FLAG_CAN_BE_PAINTED | ATOM_FLAG_NO_REACT
+	obj_flags = OBJ_FLAG_MOVES_UNSUPPORTED
 
 	frame_type = /obj/item/pipe
 	uncreated_component_parts = null // No apc connection
@@ -27,7 +28,6 @@
 	//minimum pressure before check_pressure(...) should be called
 	var/maximum_pressure = 210 * ONE_ATMOSPHERE
 	var/fatigue_pressure = 170 * ONE_ATMOSPHERE
-	var/alert_pressure = 170 * ONE_ATMOSPHERE
 	var/datum/sound_token/sound_token
 
 /obj/machinery/atmospherics/pipe/drain_power()
@@ -61,7 +61,7 @@
 
 /obj/machinery/atmospherics/pipe/proc/update_sound(var/playing)
 	if(playing && !sound_token)
-		sound_token = play_looping_sound(src, SOUND_ID, "sound/machines/pipeleak.ogg", volume = 8, range = 3, falloff = 1, prefer_mute = TRUE)
+		sound_token = play_looping_sound(src, SOUND_ID, 'sound/machines/pipeleak.ogg', volume = 8, range = 3, falloff = 1, prefer_mute = TRUE)
 	else if(!playing && sound_token)
 		QDEL_NULL(sound_token)
 
@@ -176,7 +176,7 @@
 /obj/machinery/atmospherics/pipe/set_color(new_color)
 	..()
 	//for updating connected atmos device pipes (i.e. vents, manifolds, etc)
-	for(var/obj/machinery/atmospherics/node AS_ANYTHING in nodes_to_networks)
+	for(var/obj/machinery/atmospherics/node as anything in nodes_to_networks)
 		node.update_icon()
 
 /obj/machinery/atmospherics/pipe/proc/try_leak()
@@ -218,9 +218,6 @@
 
 	dir = SOUTH
 	initialize_directions = SOUTH|NORTH
-
-	var/minimum_temperature_difference = 300
-	var/thermal_conductivity = 0 //WALL_HEAT_TRANSFER_COEFFICIENT No
 
 	level = 1
 
@@ -276,7 +273,7 @@
 	level = 2
 
 /obj/machinery/atmospherics/pipe/simple/visible/scrubbers
-	name = "Scrubbers pipe"
+	name = "scrubbers pipe"
 	desc = "A one meter section of scrubbers pipe."
 	icon_state = "11-scrubbers"
 	connect_types = CONNECT_TYPE_SCRUBBER
@@ -284,7 +281,7 @@
 	color = PIPE_COLOR_RED
 
 /obj/machinery/atmospherics/pipe/simple/visible/supply
-	name = "Air supply pipe"
+	name = "air supply pipe"
 	desc = "A one meter section of supply pipe."
 	icon_state = "11-supply"
 	connect_types = CONNECT_TYPE_SUPPLY
@@ -309,12 +306,14 @@
 /obj/machinery/atmospherics/pipe/simple/visible/blue
 	color = PIPE_COLOR_BLUE
 
+/obj/machinery/atmospherics/pipe/simple/visible/purple
+	color = PIPE_COLOR_PURPLE
+
 /obj/machinery/atmospherics/pipe/simple/visible/fuel
-	name = "Fuel pipe"
+	name = "fuel pipe"
 	color = PIPE_COLOR_ORANGE
 	maximum_pressure = 420*ONE_ATMOSPHERE
 	fatigue_pressure = 350*ONE_ATMOSPHERE
-	alert_pressure = 350*ONE_ATMOSPHERE
 	connect_types = CONNECT_TYPE_FUEL
 
 /obj/machinery/atmospherics/pipe/simple/hidden
@@ -322,7 +321,7 @@
 	alpha = 128		//set for the benefit of mapping - this is reset to opaque when the pipe is spawned in game
 
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers
-	name = "Scrubbers pipe"
+	name = "scrubbers pipe"
 	desc = "A one meter section of scrubbers pipe."
 	icon_state = "11-scrubbers"
 	connect_types = CONNECT_TYPE_SCRUBBER
@@ -330,7 +329,7 @@
 	color = PIPE_COLOR_RED
 
 /obj/machinery/atmospherics/pipe/simple/hidden/supply
-	name = "Air supply pipe"
+	name = "air supply pipe"
 	desc = "A one meter section of supply pipe."
 	icon_state = "11-supply"
 	connect_types = CONNECT_TYPE_SUPPLY
@@ -355,12 +354,14 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/blue
 	color = PIPE_COLOR_BLUE
 
+/obj/machinery/atmospherics/pipe/simple/hidden/purple
+	color = PIPE_COLOR_PURPLE
+
 /obj/machinery/atmospherics/pipe/simple/hidden/fuel
-	name = "Fuel pipe"
+	name = "fuel pipe"
 	color = PIPE_COLOR_ORANGE
 	maximum_pressure = 420*ONE_ATMOSPHERE
 	fatigue_pressure = 350*ONE_ATMOSPHERE
-	alert_pressure = 350*ONE_ATMOSPHERE
 	connect_types = CONNECT_TYPE_FUEL
 
 /obj/machinery/atmospherics/pipe/manifold
@@ -437,8 +438,11 @@
 /obj/machinery/atmospherics/pipe/manifold/visible/blue
 	color = PIPE_COLOR_BLUE
 
+/obj/machinery/atmospherics/pipe/manifold/visible/purple
+	color = PIPE_COLOR_PURPLE
+
 /obj/machinery/atmospherics/pipe/manifold/visible/fuel
-	name = "Fuel pipe manifold"
+	name = "fuel pipe manifold"
 	color = PIPE_COLOR_ORANGE
 	connect_types = CONNECT_TYPE_FUEL
 
@@ -481,8 +485,11 @@
 /obj/machinery/atmospherics/pipe/manifold/hidden/blue
 	color = PIPE_COLOR_BLUE
 
+/obj/machinery/atmospherics/pipe/manifold/hidden/purple
+	color = PIPE_COLOR_PURPLE
+
 /obj/machinery/atmospherics/pipe/manifold/hidden/fuel
-	name = "Fuel pipe manifold"
+	name = "fuel pipe manifold"
 	color = PIPE_COLOR_ORANGE
 	connect_types = CONNECT_TYPE_FUEL
 
@@ -719,7 +726,7 @@
 /obj/machinery/atmospherics/proc/universal_underlays(var/direction)
 	var/turf/T = loc
 	var/connections = list("", "-supply", "-scrubbers")
-	for(var/obj/machinery/atmospherics/node AS_ANYTHING in nodes_in_dir(direction))
+	for(var/obj/machinery/atmospherics/node as anything in nodes_in_dir(direction))
 		if(node.icon_connect_type in connections)
 			connections[node.icon_connect_type] = node
 	for(var/suffix in connections)

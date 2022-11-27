@@ -202,17 +202,12 @@
 	animals lunging, etc.
 */
 /mob/proc/RangedAttack(var/atom/A, var/params)
-	if(!mutations.len)
-		return FALSE
-
-	if((MUTATION_LASER in mutations) && a_intent == I_HURT)
-		LaserEyes(A) // moved into a proc below
-		return TRUE
+	return FALSE
 
 /*
 	Restrained ClickOn
 
-	Used when you are handcuffed and click things.
+	Used when you are cuffed and click things.
 	Not currently used by anything but could easily be.
 */
 /mob/proc/RestrainedClickOn(var/atom/A)
@@ -266,13 +261,11 @@
 	Unused except for AI
 */
 /mob/proc/AltClickOn(var/atom/A)
-	var/datum/extension/on_click/alt = get_extension(A, /datum/extension/on_click/alt)
-	if(alt && alt.on_click(src))
-		return
 	A.AltClick(src)
 
-
 /atom/proc/AltClick(var/mob/user)
+	if(try_handle_interactions(user, get_alt_interactions(user)))
+		return TRUE
 	if(user?.get_preference_value(/datum/client_preference/show_turf_contents) == PREF_ALT_CLICK)
 		. = show_atom_list_for_turf(user, get_turf(src))
 
@@ -320,32 +313,6 @@
 
 /atom/proc/CtrlAltClick(var/mob/user)
 	return
-
-/*
-	Misc helpers
-
-	Laser Eyes: as the name implies, handles this since nothing else does currently
-	face_atom: turns the mob towards what you clicked on
-*/
-/mob/proc/LaserEyes(atom/A)
-	return
-
-/mob/living/LaserEyes(atom/A)
-	setClickCooldown(DEFAULT_QUICK_COOLDOWN)
-	var/turf/T = get_turf(src)
-
-	var/obj/item/projectile/beam/LE = new (T)
-	LE.icon = 'icons/effects/genetics.dmi'
-	LE.icon_state = "eyelasers"
-	playsound(usr.loc, 'sound/weapons/taser2.ogg', 75, 1)
-	LE.launch(A)
-/mob/living/carbon/human/LaserEyes()
-	if(nutrition>0)
-		..()
-		adjust_nutrition(-(rand(1,5)))
-		handle_regular_hud_updates()
-	else
-		to_chat(src, SPAN_WARNING("You're out of energy! You need food!"))
 
 // Simple helper to face what you clicked on, in case it should be needed in more than one place
 /mob/proc/face_atom(var/atom/A)

@@ -9,7 +9,7 @@
 /mob/verb/say_verb(message as text)
 	set name = "Say"
 	set category = "IC"
-	remove_typing_indicator()
+	SStyping.set_indicator_state(client, FALSE)
 	if(!filter_block_message(usr, message))
 		usr.say(message)
 
@@ -17,7 +17,7 @@
 	set name = "Me"
 	set category = "IC"
 
-	remove_typing_indicator()
+	SStyping.set_indicator_state(client, FALSE)
 	if(!filter_block_message(usr, message))
 		message = sanitize(message)
 		if(use_me)
@@ -28,41 +28,17 @@
 /mob/proc/say_dead(var/message)
 	communicate(/decl/communication_channel/dsay, client, message)
 
-/mob/proc/say_understands(var/mob/other,var/decl/language/speaking = null)
-
-	if (src.stat == 2)		//Dead
-		return 1
-
-	//Universal speak makes everything understandable, for obvious reasons.
-	else if(src.universal_speak || src.universal_understand)
-		return 1
-
-	//Languages are handled after.
-	if (!speaking)
-		if(!other)
-			return 1
-		if(other.universal_speak)
-			return 1
-		if(isAI(src) && ispAI(other))
-			return 1
-		if (istype(other, src.type) || istype(src, other.type))
-			return 1
-		return 0
-
-	if(speaking.flags & LANG_FLAG_INNATE)
-		return 1
-
-	//Language check.
-	for(var/decl/language/L in src.languages)
-		if(speaking.name == L.name)
-			return 1
-
-	return 0
+/mob/proc/say_understands(mob/speaker, decl/language/speaking)
+	if(stat == DEAD || universal_speak || universal_understand)
+		return TRUE
+	if(speaking)
+		return speaking.can_be_understood_by(speaker, src)
+	return (!speaker || speaker.universal_speak || istype(speaker, type) || istype(src, speaker.type))
 
 /mob/proc/say_quote(var/message, var/decl/language/speaking = null)
 	var/ending = copytext(message, length(message))
 	if(speaking)
-		return speaking.get_spoken_verb(ending)
+		return speaking.get_spoken_verb(src, ending)
 
 	var/verb = pick(speak_emote)
 	if(verb == "says") //a little bit of a hack, but we can't let speak_emote default to an empty list without breaking other things
@@ -80,13 +56,13 @@
 
 	return get_turf(src)
 
-/mob/proc/say_test(var/text)
+/mob/proc/check_speech_punctuation_state(var/text)
 	var/ending = copytext(text, length(text))
 	if (ending == "?")
-		return "1"
+		return "question"
 	else if (ending == "!")
-		return "2"
-	return "0"
+		return "exclamation"
+	return "statement"
 
 //parses the message mode code (e.g. :h, :w) from text, such as that supplied to say.
 //returns the message mode string or null for no message mode.
@@ -119,4 +95,5 @@
 	. = is_muzzled()
 
 /mob/proc/is_muzzled()
-	return istype(wear_mask, /obj/item/clothing/mask/muzzle) || istype(wear_mask, /obj/item/clothing/sealant)
+	var/obj/item/mask = get_equipped_item(slot_wear_mask_str)
+	return istype(mask, /obj/item/clothing/mask/muzzle) || istype(mask, /obj/item/clothing/sealant)

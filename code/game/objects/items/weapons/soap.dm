@@ -1,3 +1,6 @@
+#define SOAP_MAX_VOLUME     30 //Maximum volume the soap can contain
+#define SOAP_CLEANER_ON_WET 15 //Volume of cleaner generated when wetting the soap
+
 /obj/item/soap
 	name = "soap"
 	desc = "A cheap bar of soap. Doesn't smell."
@@ -9,6 +12,9 @@
 	throwforce = 0
 	throw_speed = 4
 	throw_range = 20
+	material = /decl/material/liquid/cleaner
+	health = 5
+	max_health = 5
 	var/key_data
 
 	var/list/valid_colors = list(COLOR_GREEN_GRAY, COLOR_RED_GRAY, COLOR_BLUE_GRAY, COLOR_BROWN, COLOR_PALE_PINK, COLOR_PALE_BTL_GREEN, COLOR_OFF_WHITE, COLOR_GRAY40, COLOR_GOLD)
@@ -18,10 +24,16 @@
 	var/decal_name
 	var/list/decals = list("diamond", "heart", "circle", "triangle", "")
 
+/obj/item/soap/initialize_reagents(populate = TRUE)
+	create_reagents(SOAP_MAX_VOLUME)
+	. = ..()
+
+/obj/item/soap/populate_reagents()
+	wet()
+	
 /obj/item/soap/Initialize()
 	. = ..()
-	create_reagents(30)
-	wet()
+	initialize_reagents()
 	var/shape = pick(valid_shapes)
 	var/scent = pick(valid_scents)
 	var/smelly = pick(scent_intensity)
@@ -32,7 +44,7 @@
 	update_icon()
 
 /obj/item/soap/proc/wet()
-	reagents.add_reagent(/decl/material/liquid/cleaner, 15)
+	reagents.add_reagent(/decl/material/liquid/cleaner, SOAP_CLEANER_ON_WET)
 
 /obj/item/soap/Crossed(var/mob/living/AM)
 	if(istype(AM))
@@ -44,13 +56,13 @@
 	//So this is a workaround. This also makes more sense from an IC standpoint. ~Carn
 	var/cleaned = FALSE
 	if(user.client && (target in user.client.screen))
-		to_chat(user, "<span class='notice'>You need to take that [target.name] off before cleaning it.</span>")
+		to_chat(user, SPAN_NOTICE("You need to take that [target.name] off before cleaning it."))
 	else if(istype(target,/obj/effect/decal/cleanable/blood))
-		to_chat(user, "<span class='notice'>You scrub \the [target.name] out.</span>")
+		to_chat(user, SPAN_NOTICE("You scrub \the [target.name] out."))
 		target.clean_blood() //Blood is a cleanable decal, therefore needs to be accounted for before all cleanable decals.
 		cleaned = TRUE
 	else if(istype(target,/obj/effect/decal/cleanable))
-		to_chat(user, "<span class='notice'>You scrub \the [target.name] out.</span>")
+		to_chat(user, SPAN_NOTICE("You scrub \the [target.name] out."))
 		qdel(target)
 		cleaned = TRUE
 	else if(isturf(target) || istype(target, /obj/structure/catwalk))
@@ -63,10 +75,10 @@
 			to_chat(user, SPAN_NOTICE("You scrub \the [target] clean."))
 			cleaned = TRUE
 	else if(istype(target,/obj/structure/hygiene/sink))
-		to_chat(user, "<span class='notice'>You wet \the [src] in the sink.</span>")
+		to_chat(user, SPAN_NOTICE("You wet \the [src] in the sink."))
 		wet()
 	else
-		to_chat(user, "<span class='notice'>You clean \the [target.name].</span>")
+		to_chat(user, SPAN_NOTICE("You clean \the [target.name]."))
 		target.clean_blood() //Clean bloodied atoms. Blood decals themselves need to be handled above.
 		cleaned = TRUE
 
@@ -93,7 +105,7 @@
 /obj/item/soap/attackby(var/obj/item/I, var/mob/user)
 	if(istype(I, /obj/item/key))
 		if(!key_data)
-			to_chat(user, "<span class='notice'>You imprint \the [I] into \the [src].</span>")
+			to_chat(user, SPAN_NOTICE("You imprint \the [I] into \the [src]."))
 			var/obj/item/key/K = I
 			key_data = K.key_data
 			update_icon()
@@ -101,8 +113,11 @@
 	..()
 
 /obj/item/soap/on_update_icon()
-	overlays.Cut()
+	. = ..()
 	if(key_data)
-		overlays += image(icon, icon_state = "soap_key_overlay")
+		add_overlay("soap_key_overlay")
 	else if(decal_name)
-		overlays +=	overlay_image(icon, "decal-[decal_name]")
+		add_overlay("decal-[decal_name]")
+	
+#undef SOAP_MAX_VOLUME
+#undef SOAP_CLEANER_ON_WET

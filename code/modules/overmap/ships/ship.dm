@@ -6,6 +6,7 @@ var/global/const/OVERMAP_SPEED_CONSTANT = (1 SECOND)
 	icon_state = "ship"
 	requires_contact = TRUE
 	can_move = TRUE
+	appearance_flags = TILE_BOUND | LONG_GLIDE
 
 	var/moving_state = "ship_moving"
 
@@ -23,7 +24,6 @@ var/global/const/OVERMAP_SPEED_CONSTANT = (1 SECOND)
 	var/damping_strength = null
 	var/vessel_size = SHIP_SIZE_LARGE	// arbitrary number, affects how likely are we to evade meteors
 
-
 	var/list/navigation_viewers // list of weakrefs to people viewing the overmap via this ship
 
 /obj/effect/overmap/visitable/ship/Initialize()
@@ -35,7 +35,6 @@ var/global/const/OVERMAP_SPEED_CONSTANT = (1 SECOND)
 	base_sensor_visibility = round((vessel_mass/SENSOR_COEFFICENT),1)
 
 /obj/effect/overmap/visitable/ship/Destroy()
-	STOP_PROCESSING(SSobj, src)
 	SSshuttle.ships -= src
 	for(var/thing in get_linked_machines_of_type(/obj/machinery/computer/ship))
 		var/obj/machinery/computer/ship/machine = thing
@@ -45,7 +44,7 @@ var/global/const/OVERMAP_SPEED_CONSTANT = (1 SECOND)
 
 /obj/effect/overmap/visitable/ship/proc/set_thrust_limit(var/thrust_limit)
 	for(var/datum/extension/ship_engine/E in engines)
-		E.thrust_limit = Clamp(thrust_limit, 0, 1)
+		E.thrust_limit = clamp(thrust_limit, 0, 1)
 
 /obj/effect/overmap/visitable/ship/proc/set_engine_power(var/engine_power)
 	for(var/datum/extension/ship_engine/E in engines)
@@ -80,7 +79,7 @@ var/global/const/OVERMAP_SPEED_CONSTANT = (1 SECOND)
 	. = ..()
 	. += "<br>Mass: [vessel_mass] tons."
 	if(!is_still())
-		. += "<br>Heading: [dir2angle(get_heading())], speed [get_speed() * KM_OVERMAP_RATE]"
+		. += "<br>Heading: [get_heading_angle()], speed [get_speed() * KM_OVERMAP_RATE]"
 	if(instant_contact)
 		. += "<br>It is broadcasting a distress signal."
 
@@ -114,8 +113,7 @@ var/global/const/OVERMAP_SPEED_CONSTANT = (1 SECOND)
 	var/burns_per_grid = 1/ (burn_delay * get_speed())
 	return round(num_burns / burns_per_grid)
 
-/obj/effect/overmap/visitable/ship/Process()
-	. = ..()
+/obj/effect/overmap/visitable/ship/Process(wait, tick)
 	damping_strength = 0
 	for(var/datum/ship_inertial_damper/I in inertial_dampers)
 		var/obj/machinery/inertial_damper/ID = I.holder
@@ -125,9 +123,12 @@ var/global/const/OVERMAP_SPEED_CONSTANT = (1 SECOND)
 /obj/effect/overmap/visitable/ship/on_update_icon()
 	if(!is_still())
 		icon_state = moving_state
-		set_dir(get_heading())
+		var/matrix/M = matrix()
+		M.Turn(get_heading_angle())
+		transform = M
 	else
 		icon_state = initial(icon_state)
+		transform = null
 
 	..()
 
@@ -153,11 +154,12 @@ var/global/const/OVERMAP_SPEED_CONSTANT = (1 SECOND)
 
 /obj/effect/overmap/visitable/ship/proc/halt()
 	adjust_speed(-speed[1], -speed[2])
-	halted = 1
+	halted = TRUE
 
 /obj/effect/overmap/visitable/ship/proc/unhalt()
 	if(!SSshuttle.overmap_halted)
-		halted = 0
+		halted = FALSE
+		update_moving()
 
 /obj/effect/overmap/visitable/ship/Bump(var/atom/A)
 	if(istype(A,/turf/unsimulated/map/edge))
@@ -171,7 +173,7 @@ var/global/const/OVERMAP_SPEED_CONSTANT = (1 SECOND)
 	..()
 	for(var/obj/machinery/computer/ship/S in SSmachines.machinery)
 		S.attempt_hook_up(src)
-	for(var/datum/extension/ship_engine/E in ship_engines)
+	for(var/datum/extension/ship_engine/E in global.ship_engines)
 		if(check_ownership(E.holder))
 			engines |= E
 	for(var/datum/ship_inertial_damper/I in global.ship_inertial_dampers)
@@ -186,9 +188,6 @@ var/global/const/OVERMAP_SPEED_CONSTANT = (1 SECOND)
 
 /obj/effect/overmap/visitable/ship/proc/get_speed_sensor_increase()
 	return min(get_speed() * 1000, 50) //Engines should never increase sensor visibility by more than 50.
-
-/obj/effect/overmap/proc/get_vessel_mass() //Same as above.
-	return vessel_mass
 
 #undef MOVING
 #undef SANITIZE_SPEED

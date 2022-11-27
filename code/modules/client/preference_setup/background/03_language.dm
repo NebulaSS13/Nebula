@@ -89,7 +89,7 @@
 	for(var/thing in language_types)
 		var/decl/language/lang = language_types[thing]
 		// Abstract, forbidden and restricted languages aren't supposed to be available to anyone in chargen.
-		if(lang.is_abstract() || (lang.flags & (LANG_FLAG_FORBIDDEN|LANG_FLAG_RESTRICTED)))
+		if(lang.flags & (LANG_FLAG_FORBIDDEN|LANG_FLAG_RESTRICTED))
 			continue
 		// Admin don't need to worry about whitelisted checks or culture datums, give them everything.
 		// Non-whitelisted languages should be handled by culture datums.

@@ -56,7 +56,7 @@
 /obj/machinery/atmospherics/unary/outlet_injector/Initialize()
 	. = ..()
 	//Give it a small reservoir for injecting. Also allows it to have a higher flow rate limit than vent pumps, to differentiate injectors a bit more.
-	air_contents.volume = ATMOS_DEFAULT_VOLUME_PUMP + 500	
+	air_contents.volume = ATMOS_DEFAULT_VOLUME_PUMP + 500
 
 /obj/machinery/atmospherics/unary/outlet_injector/on_update_icon()
 	if(stat & NOPOWER)
@@ -128,7 +128,7 @@
 	update_icon()
 
 /obj/machinery/atmospherics/unary/outlet_injector/attackby(var/obj/item/O, var/mob/user)
-	if(isMultitool(O))
+	if(IS_MULTITOOL(O))
 		var/datum/browser/written_digital/popup = new (user, "Vent Configuration Utility", "[src] Configuration Panel", 600, 200)
 		popup.set_content(jointext(get_console_data(),"<br>"))
 		popup.open()
@@ -147,7 +147,7 @@
 	return machine.volume_rate
 
 /decl/public_access/public_variable/volume_rate/write_var(obj/machinery/atmospherics/unary/outlet_injector/machine, new_value)
-	new_value = Clamp(new_value, 0, machine.air_contents.volume)
+	new_value = clamp(new_value, 0, machine.air_contents.volume)
 	. = ..()
 	if(.)
 		machine.volume_rate = new_value

@@ -515,7 +515,7 @@ nanoui is used to open and update nano browser uis
 
 	if(href_list["mapZLevel"])
 		var/map_z = text2num(href_list["mapZLevel"])
-		if(map_z in global.using_map.map_levels)
+		if(isMapLevel(map_z))
 			set_map_z_level(map_z)
 			map_update = 1
 

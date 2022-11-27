@@ -49,7 +49,7 @@
 	if(electric)
 		if(istype(src.loc, /mob/living/carbon/human))
 			var/mob/living/carbon/human/M = src.loc
-			if(M.glasses != src)
+			if(M.get_equipped_item(slot_glasses_str) != src)
 				to_chat(M, SPAN_DANGER("\The [src] malfunction[gender != PLURAL ? "s":""], releasing a small spark."))
 			else
 				SET_STATUS_MAX(M, STAT_BLIND, 2)
@@ -72,6 +72,7 @@
 		update_vision()
 
 /obj/item/clothing/glasses/on_update_icon()
+	. = ..()
 	icon_state = ICON_STATE_WORLD
 	if(active && check_state_in_icon("[icon_state]-active", icon))
 		icon_state = "[icon_state]-active"

@@ -20,7 +20,7 @@
 /obj/machinery/telecomms/attackby(obj/item/P, mob/user)
 
 	// Using a multitool lets you access the receiver's interface
-	if(isMultitool(P))
+	if(IS_MULTITOOL(P))
 		interface_interact(user)
 		return TRUE
 
@@ -29,7 +29,7 @@
 		var/obj/item/stack/nanopaste/T = P
 		if (integrity < 100)               								//Damaged, let's repair!
 			if (T.use(1))
-				integrity = between(0, integrity + rand(10,20), 100)
+				integrity = clamp(0, integrity + rand(10,20), 100)
 				to_chat(usr, "You apply the Nanopaste to [src], repairing some of the damage.")
 		else
 			to_chat(usr, "This machine is already in perfect condition.")
@@ -53,14 +53,14 @@
 /obj/machinery/telecomms/dismantle()
 	for(var/obj/x in (contents - component_parts))
 		x.dropInto(loc)
-	. = ..()	
+	. = ..()
 
 // This should all be a multitool extension, but outside the scope of current rework.
 /obj/machinery/telecomms/CanUseTopic(mob/user)
 	// You need a multitool to use this, or be silicon
 	if(!issilicon(user))
 		// istype returns false if the value is null
-		if(!isMultitool(user.get_active_hand()))
+		if(!IS_MULTITOOL(user.get_active_hand()))
 			return STATUS_CLOSE
 	return ..()
 
@@ -135,7 +135,7 @@
 
 	dat += "</font>"
 	temp = ""
-	
+
 	var/datum/browser/written_digital/popup = new(user, "tcommmachine", "Telecommunications Machine Configuration Panel", 520, 600)
 	popup.set_content(JOINTEXT(dat))
 	popup.open()
@@ -146,13 +146,13 @@
 
 	var/obj/item/multitool/P = null
 	// Let's double check
-	if(!issilicon(user) && isMultitool(user.get_active_hand()))
+	if(!issilicon(user) && IS_MULTITOOL(user.get_active_hand()))
 		P = user.get_active_hand()
 	else if(isAI(user))
 		var/mob/living/silicon/ai/U = user
 		P = U.aiMulti
 	else if(isrobot(user) && in_range(user, src))
-		if(isMultitool(user.get_active_hand()))
+		if(IS_MULTITOOL(user.get_active_hand()))
 			P = user.get_active_hand()
 	return P
 
@@ -208,7 +208,7 @@
 	if(..())
 		return 1
 	if(!issilicon(usr))
-		if(!isMultitool(usr.get_active_hand()))
+		if(!IS_MULTITOOL(usr.get_active_hand()))
 			return
 
 	if(stat & (BROKEN|NOPOWER))

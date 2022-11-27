@@ -5,7 +5,7 @@
 	return 0
 
 /mob/living/carbon/human/check_rig_status(check_offline)
-	var/obj/item/rig/rig = back
+	var/obj/item/rig/rig = get_equipped_item(slot_back_str)
 	if(!istype(rig) || rig.canremove)
 		return 0 //not wearing a rig control unit or it's offline or unsealed
 	if(check_offline)
@@ -15,7 +15,7 @@
 /obj/item/clothing/head/helmet/space/rig
 	name = "helmet"
 	item_flags = ITEM_FLAG_THICKMATERIAL
-	flags_inv = 		 HIDEEARS|HIDEEYES|HIDEFACE|BLOCKHAIR
+	flags_inv = 		 HIDEEARS|HIDEEYES|HIDEFACE|BLOCK_ALL_HAIR
 	body_parts_covered = SLOT_HEAD|SLOT_FACE|SLOT_EYES
 	heat_protection =    SLOT_HEAD|SLOT_FACE|SLOT_EYES
 	cold_protection =    SLOT_HEAD|SLOT_FACE|SLOT_EYES
@@ -24,7 +24,7 @@
 	bodytype_equip_flags = null
 
 /obj/item/clothing/head/helmet/space/rig/on_update_icon(mob/user)
-	..()
+	. = ..()
 	icon_state = get_world_inventory_state()
 	if(user?.check_rig_status() && check_state_in_icon("[icon_state]-sealed", icon))
 		icon_state = "[icon_state]-sealed"
@@ -44,7 +44,7 @@
 	gender = PLURAL
 
 /obj/item/clothing/gloves/rig/on_update_icon(mob/user)
-	..()
+	. = ..()
 	icon_state = get_world_inventory_state()
 	if(user?.check_rig_status() && check_state_in_icon("[icon_state]-sealed", icon))
 		icon_state = "[icon_state]-sealed"
@@ -64,7 +64,7 @@
 	gender = PLURAL
 
 /obj/item/clothing/shoes/magboots/rig/on_update_icon(mob/user)
-	..()
+	. = ..()
 	icon_state = get_world_inventory_state()
 	if(user?.check_rig_status() && check_state_in_icon("[icon_state]-sealed", icon))
 		icon_state = "[icon_state]-sealed"
@@ -90,7 +90,7 @@
 	var/list/supporting_limbs = list() //If not-null, automatically splints breaks. Checked when removing the suit.
 
 /obj/item/clothing/suit/space/rig/on_update_icon(mob/user)
-	..()
+	. = ..()
 	icon_state = get_world_inventory_state()
 	if(user?.check_rig_status() && check_state_in_icon("[icon_state]-sealed", icon))
 		icon_state = "[icon_state]-sealed"
@@ -110,7 +110,7 @@
 
 // Some space suits are equipped with reactive membranes that support broken limbs
 /obj/item/clothing/suit/space/rig/proc/can_support(var/mob/living/carbon/human/user)
-	if(user.wear_suit != src)
+	if(user.get_equipped_item(slot_wear_suit_str) != src)
 		return 0 //not wearing the suit
 	return user.check_rig_status(1)
 
@@ -146,11 +146,11 @@
 		return 0
 
 	var/mob/living/carbon/human/H = loc
-	if(!istype(H) || !H.back)
+	if(!istype(H))
 		return 0
 
-	var/obj/item/rig/suit = H.back
-	if(!suit || !istype(suit) || !suit.installed_modules.len)
+	var/obj/item/rig/suit = H.get_equipped_item(slot_back_str)
+	if(!istype(suit) || !suit.installed_modules.len)
 		return 0
 
 	for(var/obj/item/rig_module/module in suit.installed_modules)

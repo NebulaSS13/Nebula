@@ -8,7 +8,7 @@
 	layer = SIDE_WINDOW_LAYER
 	anchored = 1.0
 	atom_flags = ATOM_FLAG_NO_TEMP_CHANGE | ATOM_FLAG_CHECKS_BORDER | ATOM_FLAG_CAN_BE_PAINTED
-	obj_flags = OBJ_FLAG_ROTATABLE
+	obj_flags = OBJ_FLAG_ROTATABLE | OBJ_FLAG_MOVES_UNSUPPORTED
 	alpha = 180
 	material = /decl/material/solid/glass
 	rad_resistance_modifier = 0.5
@@ -92,10 +92,9 @@
 		visible_message(SPAN_DANGER("\The [src] shatters!"))
 
 	var/debris_count = is_fulltile() ? 4 : 1
-	for(var/i = 0 to debris_count)
-		material.place_shard(loc)
-		if(reinf_material)
-			reinf_material.create_object(loc, 1, /obj/item/stack/material/rods)
+	material.place_shards(loc, debris_count)
+	if(reinf_material)
+		reinf_material.create_object(loc, debris_count, /obj/item/stack/material/rods)
 	qdel(src)
 
 /obj/structure/window/bullet_act(var/obj/item/projectile/Proj)
@@ -146,13 +145,7 @@
 
 /obj/structure/window/attack_hand(mob/user)
 	user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
-	if(MUTATION_HULK in user.mutations)
-		user.say(pick(";RAAAAAAAARGH!", ";HNNNNNNNNNGGGGGGH!", ";GWAAAAAAAARRRHHH!", "NNNNNNNNGGGGGGGGHH!", ";AAAAAAARRRGH!"))
-		user.visible_message(SPAN_DANGER("[user] smashes through [src]!"))
-		user.do_attack_animation(src)
-		shatter()
-
-	else if (user.a_intent && user.a_intent == I_HURT)
+	if (user.a_intent && user.a_intent == I_HURT)
 
 		if (istype(user,/mob/living/carbon/human))
 			var/mob/living/carbon/human/H = user
@@ -181,7 +174,7 @@
 
 	if(W.item_flags & ITEM_FLAG_NO_BLUDGEON) return
 
-	if(isScrewdriver(W))
+	if(IS_SCREWDRIVER(W))
 		if(reinf_material && construction_state >= 1)
 			construction_state = 3 - construction_state
 			update_nearby_icons()
@@ -195,18 +188,18 @@
 			set_anchored(!anchored)
 			playsound(loc, 'sound/items/Screwdriver.ogg', 75, 1)
 			to_chat(user, (anchored ? SPAN_NOTICE("You have fastened the window to the floor.") : SPAN_NOTICE("You have unfastened the window.")))
-	else if(isCrowbar(W) && reinf_material && construction_state <= 1)
+	else if(IS_CROWBAR(W) && reinf_material && construction_state <= 1)
 		construction_state = 1 - construction_state
 		playsound(loc, 'sound/items/Crowbar.ogg', 75, 1)
 		to_chat(user, (construction_state ? SPAN_NOTICE("You have pried the window into the frame.") : SPAN_NOTICE("You have pried the window out of the frame.")))
-	else if(isWrench(W) && !anchored && (!construction_state || !reinf_material))
+	else if(IS_WRENCH(W) && !anchored && (!construction_state || !reinf_material))
 		if(!material)
 			to_chat(user, SPAN_NOTICE("You're not sure how to dismantle \the [src] properly."))
 		else
 			playsound(src.loc, 'sound/items/Ratchet.ogg', 75, 1)
 			visible_message(SPAN_NOTICE("[user] dismantles \the [src]."))
 			dismantle()
-	else if(isCoil(W) && is_fulltile())
+	else if(IS_COIL(W) && is_fulltile())
 		if (polarized)
 			to_chat(user, SPAN_WARNING("\The [src] is already polarized."))
 			return
@@ -215,7 +208,7 @@
 			playsound(src.loc, 'sound/effects/sparks1.ogg', 75, 1)
 			polarized = TRUE
 			to_chat(user, SPAN_NOTICE("You wire and polarize \the [src]."))
-	else if (isWirecutter(W))
+	else if (IS_WIRECUTTER(W))
 		if (!polarized)
 			to_chat(user, SPAN_WARNING("\The [src] is not polarized."))
 			return
@@ -226,7 +219,7 @@
 		id = null
 		playsound(loc, 'sound/items/Wirecutter.ogg', 75, 1)
 		to_chat(user, SPAN_NOTICE("You cut the wiring and remove the polarization from \the [src]."))
-	else if(isMultitool(W))
+	else if(IS_MULTITOOL(W))
 		if (!polarized)
 			to_chat(user, SPAN_WARNING("\The [src] is not polarized."))
 			return
@@ -548,18 +541,12 @@
 	desc = "A remote control switch for electrochromic windows."
 	var/range = 7
 	stock_part_presets = null // This isn't a radio-enabled button; it communicates with nearby structures in view.
-	uncreated_component_parts = list(
-		/obj/item/stock_parts/power/apc/buildable
-	)
 	frame_type = /obj/item/frame/button/light_switch/windowtint
 	construct_state = /decl/machine_construction/wall_frame/panel_closed/simple
-	base_type = /obj/machinery/button/windowtint/buildable
-
-/obj/machinery/button/windowtint/buildable
-	uncreated_component_parts = null
+	base_type = /obj/machinery/button/windowtint
 
 /obj/machinery/button/windowtint/attackby(obj/item/W, mob/user)
-	if(isMultitool(W))
+	if(IS_MULTITOOL(W))
 		var/t = sanitize_safe(input(user, "Enter the ID for the button.", name, id_tag), MAX_NAME_LEN)
 		if(!CanPhysicallyInteract(user))
 			return TRUE

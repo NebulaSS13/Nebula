@@ -1,6 +1,5 @@
 /datum/map_template/ruin/antag_spawn/ninja
 	name = "Ninja Base"
-	id = "ninja_spawn"
 	suffixes = list("ninja/ninja_base.dmm")
 	modify_tag_vars = FALSE
 	shuttles_to_initialise = list(/datum/shuttle/autodock/multi/antag/ninja)
@@ -32,7 +31,7 @@
 	requires_power = 0
 	dynamic_lighting = TRUE
 	area_flags = AREA_FLAG_RAD_SHIELDED | AREA_FLAG_ION_SHIELDED
-	req_access = list(access_syndicate)
+	req_access = list(access_ninja)
 
 /area/map_template/ninja_dojo/dojo
 	name = "\improper Clan Dojo"

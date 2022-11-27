@@ -313,7 +313,7 @@
 	},
 /area/map_template/rescue_base/base)
 "aR" = (
-/obj/item/storage/mirror,
+/obj/structure/mirror,
 /turf/unsimulated/wall,
 /area/map_template/rescue_base/base)
 "aS" = (
@@ -654,7 +654,7 @@
 	},
 /area/map_template/rescue_base/base)
 "bC" = (
-/obj/structure/flora/ausbushes/fullgrass,
+/obj/structure/flora/bush/fullgrass,
 /turf/unsimulated/floor{
 	icon_state = "asteroidplating"
 	},
@@ -721,7 +721,7 @@
 	},
 /area/map_template/rescue_base/base)
 "bK" = (
-/obj/structure/flora/ausbushes/fullgrass,
+/obj/structure/flora/bush/fullgrass,
 /turf/unsimulated/floor{
 	icon_state = "asteroid"
 	},
@@ -905,8 +905,8 @@
 	pixel_x = 4;
 	pixel_y = 32
 	},
-/obj/item/taperoll/police,
-/obj/item/taperoll/police,
+/obj/item/stack/tape_roll/barricade_tape/police,
+/obj/item/stack/tape_roll/barricade_tape/police,
 /turf/unsimulated/floor{
 	dir = 1;
 	icon_state = "vault"
@@ -1423,8 +1423,8 @@
 /obj/item/chems/spray/antiseptic,
 /obj/item/chems/spray/antiseptic,
 /obj/item/storage/box/bloodpacks,
-/obj/item/tape/medical,
-/obj/item/tape/medical,
+/obj/item/stack/tape_roll/barricade_tape/medical,
+/obj/item/stack/tape_roll/barricade_tape/medical,
 /obj/item/flashlight/pen,
 /obj/item/flashlight/pen,
 /turf/unsimulated/floor{
@@ -1550,7 +1550,7 @@
 	},
 /area/map_template/rescue_base/base)
 "dd" = (
-/obj/structure/flora/ausbushes/palebush,
+/obj/structure/flora/bush/palebush,
 /turf/unsimulated/floor{
 	icon_state = "asteroid"
 	},
@@ -1643,7 +1643,7 @@
 	},
 /area/map_template/rescue_base/base)
 "dp" = (
-/obj/structure/flora/ausbushes/sunnybush,
+/obj/structure/flora/bush/sunnybush,
 /turf/unsimulated/floor{
 	icon_state = "asteroid"
 	},
@@ -1733,7 +1733,7 @@
 "dx" = (
 /obj/machinery/embedded_controller/radio/simple_docking_controller{
 	frequency = 1331;
-	id_tag = "rescue_base";
+	id_tag = "ert_rescue_base";
 	pixel_x = 5;
 	pixel_y = -25
 	},
@@ -1775,7 +1775,7 @@
 /area/map_template/rescue_base/base)
 "dC" = (
 /obj/machinery/door/airlock/external/shuttle{
-	id_tag = "rescue_base_hatch";
+	id_tag = "ert_rescue_base_hatch";
 	name = "Landing Pad"
 	},
 /turf/unsimulated/floor{
@@ -1881,7 +1881,7 @@
 "dQ" = (
 /obj/effect/floor_decal/industrial/outline/yellow,
 /obj/machinery/door/airlock/external/shuttle{
-	id_tag = "rescue_base_hatch"
+	id_tag = "ert_rescue_base_hatch"
 	},
 /turf/unsimulated/floor{
 	icon_state = "asteroidfloor"
@@ -2219,16 +2219,16 @@
 /area/map_template/rescue_base/base)
 "eB" = (
 /obj/structure/table/reinforced,
-/obj/item/taperoll/engineering,
-/obj/item/taperoll/engineering,
-/obj/item/taperoll/atmos,
-/obj/item/taperoll/atmos,
+/obj/item/stack/tape_roll/barricade_tape/engineering,
+/obj/item/stack/tape_roll/barricade_tape/engineering,
+/obj/item/stack/tape_roll/barricade_tape/atmos,
+/obj/item/stack/tape_roll/barricade_tape/atmos,
 /obj/item/multitool,
 /obj/item/multitool,
-/obj/item/ducttape,
-/obj/item/ducttape,
-/obj/item/ducttape,
-/obj/item/ducttape,
+/obj/item/stack/tape_roll/duct_tape,
+/obj/item/stack/tape_roll/duct_tape,
+/obj/item/stack/tape_roll/duct_tape,
+/obj/item/stack/tape_roll/duct_tape,
 /obj/item/cell/high,
 /obj/item/cell/high,
 /obj/item/cell/high,
@@ -2474,7 +2474,7 @@
 /area/map_template/rescue_base/start)
 "eX" = (
 /obj/machinery/door/airlock/external/shuttle{
-	id_tag = "rescue_shuttle_outer";
+	id_tag = "ert_rescue_shuttle_outer";
 	name = "Ship External Access"
 	},
 /obj/effect/shuttle_landmark/ert/start,
@@ -2510,10 +2510,10 @@
 "fc" = (
 /obj/machinery/atmospherics/unary/vent_pump/high_volume/shuttle{
 	dir = 4;
-	id_tag = "rescue_shuttle_pump"
+	id_tag = "ert_rescue_shuttle_pump"
 	},
 /obj/machinery/airlock_sensor/shuttle{
-	id_tag = "rescue_shuttle_sensor";
+	id_tag = "ert_rescue_shuttle_sensor";
 	pixel_x = 8;
 	pixel_y = 25
 	},
@@ -2532,11 +2532,11 @@
 "fe" = (
 /obj/machinery/atmospherics/unary/vent_pump/high_volume/shuttle{
 	dir = 8;
-	id_tag = "rescue_shuttle_pump"
+	id_tag = "ert_rescue_shuttle_pump"
 	},
 /obj/machinery/embedded_controller/radio/airlock/docking_port{
 	frequency = 1331;
-	id_tag = "rescue_shuttle";
+	id_tag = "ert_rescue_shuttle";
 	initial_access = list();
 	pixel_x = -8;
 	pixel_y = 25
@@ -2639,7 +2639,7 @@
 "ft" = (
 /obj/machinery/atmospherics/unary/vent_pump/high_volume/shuttle{
 	dir = 4;
-	id_tag = "rescue_shuttle_pump"
+	id_tag = "ert_rescue_shuttle_pump"
 	},
 /obj/machinery/light{
 	dir = 8
@@ -2658,7 +2658,7 @@
 "fw" = (
 /obj/machinery/atmospherics/unary/vent_pump/high_volume/shuttle{
 	dir = 8;
-	id_tag = "rescue_shuttle_pump"
+	id_tag = "ert_rescue_shuttle_pump"
 	},
 /obj/machinery/light{
 	dir = 4
@@ -2685,13 +2685,13 @@
 "fA" = (
 /obj/machinery/atmospherics/pipe/simple/visible,
 /obj/machinery/door/airlock/external/shuttle{
-	id_tag = "rescue_shuttle_inner";
+	id_tag = "ert_rescue_shuttle_inner";
 	name = "Ship External Access"
 	},
 /turf/simulated/floor/plating,
 /area/map_template/rescue_base/start)
 "fB" = (
-/obj/structure/flora/ausbushes/palebush,
+/obj/structure/flora/bush/palebush,
 /turf/unsimulated/floor{
 	icon_state = "asteroidplating"
 	},
@@ -2744,7 +2744,7 @@
 "fH" = (
 /obj/machinery/atmospherics/pipe/manifold/visible,
 /obj/machinery/button/access/shuttle/interior{
-	id_tag = "rescue_shuttle";
+	id_tag = "ert_rescue_shuttle";
 	initial_access = list("ACCESS_CENT_SPECOPS");
 	name = "interior access button";
 	pixel_x = 25;

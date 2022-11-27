@@ -160,7 +160,7 @@
 			return
 
 	//Hacking init.
-	if(isMultitool(I) || isWirecutter(I))
+	if(IS_MULTITOOL(I) || IS_WIRECUTTER(I))
 		if(panel_open)
 			attack_hand(user)
 		return

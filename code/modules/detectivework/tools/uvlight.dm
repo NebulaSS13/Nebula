@@ -38,7 +38,7 @@
 		update_icon()
 
 /obj/item/uv_light/on_update_icon()
-	cut_overlays()
+	. = ..()
 	if(on)
 		if(plane == HUD_PLANE)
 			add_overlay("[icon_state]-on")

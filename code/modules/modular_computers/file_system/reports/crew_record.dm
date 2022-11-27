@@ -9,6 +9,8 @@ var/global/arrest_security_status =  "Arrest"
 /datum/computer_file/report/crew_record
 	filetype = "CDB"
 	size = 2
+	write_access = list(list(access_bridge))
+
 	var/icon/photo_front = null
 	var/icon/photo_side = null
 
@@ -80,9 +82,7 @@ var/global/arrest_security_status =  "Arrest"
 				if(BP_IS_PROSTHETIC(E))
 					organ_data += "[E.model ? "[E.model] " : null][E.name] prosthetic"
 			for(var/obj/item/organ/internal/I in H.get_internal_organs())
-				if(BP_IS_ASSISTED(I))
-					organ_data += I.get_mechanical_assisted_descriptor()
-				else if (BP_IS_PROSTHETIC(I))
+				if (BP_IS_PROSTHETIC(I))
 					organ_data += "[I.name] prosthetic"
 			set_implants(jointext(organ_data, "\[*\]"))
 
@@ -167,7 +167,7 @@ var/global/arrest_security_status =  "Arrest"
 	CR.load_from_mob(H)
 	var/datum/computer_network/network = get_local_network_at(get_turf(H))
 	if(network)
-		network.store_file(CR, MF_ROLE_CREW_RECORDS)
+		network.store_file(CR, OS_RECORDS_DIR, TRUE, mainframe_role = MF_ROLE_CREW_RECORDS)
 	return CR
 
 // Gets crew records filtered by set of positions
@@ -262,7 +262,7 @@ FIELD_SHORT("Faction", faction, access_bridge, access_bridge, FALSE, TRUE)
 FIELD_LONG("Qualifications", skillset, access_bridge, access_bridge, TRUE)
 
 // ANTAG RECORDS
-FIELD_LONG("Exploitable Information", antag_record, access_syndicate, access_syndicate, FALSE)
+FIELD_LONG("Exploitable Information", antag_record, access_hacked, access_hacked, FALSE)
 
 //Options builderes
 /datum/report_field/options/crew_record/rank/proc/record_ranks()

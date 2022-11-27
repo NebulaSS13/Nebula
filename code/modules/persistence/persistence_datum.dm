@@ -23,7 +23,7 @@
 		entries_decay_at = FLOOR(entries_expire_at * entries_decay_at)
 
 /decl/persistence_handler/proc/GetValidTurf(var/turf/T, var/list/tokens)
-	if(T && (T.z in global.using_map.station_levels) && CheckTurfContents(T, tokens))
+	if(T && isStationLevel(T.z) && CheckTurfContents(T, tokens))
 		return T
 
 /decl/persistence_handler/proc/CheckTurfContents(var/turf/T, var/list/tokens)
@@ -73,7 +73,7 @@
 	if(!isnull(entries_expire_at) && GetEntryAge(entry) >= entries_expire_at)
 		return FALSE
 	var/turf/T = get_turf(entry)
-	if(!ignore_invalid_loc && (!T || !(T.z in global.using_map.station_levels)))
+	if(!ignore_invalid_loc && (!T || !isStationLevel(T.z)))
 		return FALSE
 	var/area/A = get_area(T)
 	if(!ignore_area_flags && (!A || (A.area_flags & AREA_FLAG_IS_NOT_PERSISTENT)))

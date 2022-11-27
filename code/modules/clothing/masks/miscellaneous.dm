@@ -22,7 +22,7 @@
 
 // Clumsy folks can't take the mask off themselves.
 /obj/item/clothing/mask/muzzle/attack_hand(mob/user)
-	if(user.wear_mask == src && !user.check_dexterity(DEXTERITY_GRIP))
+	if(user.get_equipped_item(slot_wear_mask_str) == src && !user.check_dexterity(DEXTERITY_GRIP))
 		return 0
 	..()
 
@@ -67,7 +67,7 @@
 	desc = "A rubber pig mask."
 	icon = 'icons/clothing/mask/pig.dmi'
 	icon_state = ICON_STATE_WORLD
-	flags_inv = HIDEFACE|BLOCKHAIR
+	flags_inv = HIDEFACE|BLOCK_ALL_HAIR
 	w_class = ITEM_SIZE_SMALL
 	siemens_coefficient = 0.9
 	body_parts_covered = SLOT_HEAD|SLOT_FACE|SLOT_EYES
@@ -77,7 +77,7 @@
 	desc = "A mask made of soft vinyl and latex, representing the head of a horse."
 	icon = 'icons/clothing/mask/horsehead.dmi'
 	icon_state = ICON_STATE_WORLD
-	flags_inv = HIDEFACE|BLOCKHAIR
+	flags_inv = HIDEFACE|BLOCK_ALL_HAIR
 	body_parts_covered = SLOT_HEAD|SLOT_FACE|SLOT_EYES
 	w_class = ITEM_SIZE_SMALL
 	siemens_coefficient = 0.9
@@ -124,7 +124,7 @@
 	desc = "A rubber mask."
 	icon = 'icons/clothing/mask/balaclava.dmi'
 	icon_state = ICON_STATE_WORLD
-	flags_inv = HIDEFACE|BLOCKHAIR
+	flags_inv = HIDEFACE|BLOCK_ALL_HAIR
 	siemens_coefficient = 0.9
 	body_parts_covered = SLOT_HEAD|SLOT_FACE|SLOT_EYES
 	material = /decl/material/solid/cloth

@@ -229,6 +229,7 @@
 	..()
 
 /obj/item/mech_equipment/light/on_update_icon()
+	. = ..()
 	if(on)
 		icon_state = "[initial(icon_state)]-on"
 		set_light(l_range, l_power)
@@ -326,11 +327,12 @@
 
 
 /obj/item/drill_head
-	var/durability = 0
 	name = "drill head"
 	desc = "A replaceable drill head usually used in exosuit drills."
 	icon = 'icons/obj/items/tool/drill_head.dmi'
 	icon_state = "drill_head"
+	material = /decl/material/solid/metal/steel
+	var/durability = 0
 
 /obj/item/drill_head/proc/get_percent_durability()
 	return round((durability / material.integrity) * 50)
@@ -429,7 +431,7 @@
 		if (!ore_box)
 			continue
 		var/list/atoms_in_range = range(1, at_turf)
-		for(var/obj/item/ore/ore in atoms_in_range)
+		for(var/obj/item/stack/material/ore/ore in atoms_in_range)
 			if (!(get_dir(owner, ore) & owner.dir))
 				continue
 			ore.Move(ore_box)
@@ -736,7 +738,7 @@
 /obj/item/mech_equipment/camera/attackby(obj/item/W, mob/user)
 	. = ..()
 
-	if(isScrewdriver(W))
+	if(IS_SCREWDRIVER(W))
 		var/datum/extension/network_device/camera/mech/D = get_extension(src, /datum/extension/network_device)
 		D.ui_interact(user)
 

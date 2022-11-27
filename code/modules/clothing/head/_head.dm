@@ -1,11 +1,12 @@
 /obj/item/clothing/head
-	name = "head"
-	icon_state = ICON_STATE_WORLD
-	icon = 'icons/clothing/head/softcap.dmi'
-	body_parts_covered = SLOT_HEAD
-	slot_flags = SLOT_HEAD
-	w_class = ITEM_SIZE_SMALL
-	blood_overlay_type = "helmetblood"
+	name                = "head"
+	icon_state          = ICON_STATE_WORLD
+	icon                = 'icons/clothing/head/softcap.dmi'
+	blood_overlay_type  = "helmetblood"
+	w_class             = ITEM_SIZE_SMALL
+	flags_inv           = BLOCK_HEAD_HAIR
+	slot_flags          = SLOT_HEAD
+	body_parts_covered  = SLOT_HEAD
 
 	var/protects_against_weather = FALSE
 	var/image/light_overlay_image
@@ -64,12 +65,10 @@
 	return FALSE
 
 /obj/item/clothing/head/on_update_icon(var/mob/user)
-	..()
+	. = ..()
 	if(on)
 		add_light_overlay()
-	if(istype(user,/mob/living/carbon/human))
-		var/mob/living/carbon/human/H = user
-		H.update_inv_head()
+	update_clothing_icon()
 
 /obj/item/clothing/head/proc/add_light_overlay()
 	if(use_single_icon)

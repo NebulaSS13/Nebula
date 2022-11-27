@@ -7,37 +7,28 @@
 	w_class = ITEM_SIZE_TINY
 	throwforce = 4
 	obj_flags = OBJ_FLAG_CONDUCTIBLE
+	item_flags = ITEM_FLAG_HOLLOW
 	slot_flags = SLOT_LOWER_BODY
 	attack_verb = list("burnt", "singed")
 	lit_heat = 1500
-	var/max_fuel = 5
-	var/random_colour = FALSE
-	var/list/available_colors = list(
-		COLOR_WHITE,
-		COLOR_BLUE_GRAY,
-		COLOR_GREEN_GRAY,
-		COLOR_BOTTLE_GREEN,
-		COLOR_DARK_GRAY,
-		COLOR_RED_GRAY,
-		COLOR_GUNMETAL,
-		COLOR_RED,
-		COLOR_YELLOW,
-		COLOR_CYAN,
-		COLOR_GREEN,
-		COLOR_VIOLET,
-		COLOR_NAVY_BLUE,
-		COLOR_PINK
-	)
+	material = /decl/material/solid/plastic
+	matter = list(/decl/material/solid/metal/steel = MATTER_AMOUNT_TRACE)
+	var/tmp/max_fuel = 5
 
 /obj/item/flame/lighter/Initialize()
 	. = ..()
-	create_reagents(max_fuel)
-	reagents.add_reagent(/decl/material/liquid/fuel, max_fuel)
+	initialize_reagents()
 	set_extension(src, /datum/extension/base_icon_state, icon_state)
-	if(random_colour)
-		color = pick(available_colors)
 	update_icon()
 	set_extension(src, /datum/extension/tool, list(TOOL_CAUTERY = TOOL_QUALITY_BAD))
+
+/obj/item/flame/lighter/initialize_reagents(populate = TRUE)
+	if(!reagents)
+		create_reagents(max_fuel)
+	. = ..()
+	
+/obj/item/flame/lighter/populate_reagents()
+	reagents.add_reagent(/decl/material/liquid/fuel, max_fuel)
 
 /obj/item/flame/lighter/proc/light(mob/user)
 	if(submerged())
@@ -84,13 +75,12 @@
 		extinguish(user)
 
 /obj/item/flame/lighter/on_update_icon()
+	. = ..()
 	var/datum/extension/base_icon_state/bis = get_extension(src, /datum/extension/base_icon_state)
-
-	overlays.Cut()
 	if(lit)
-		overlays += overlay_image(icon, "[bis.base_icon_state]_flame", flags=RESET_COLOR)
+		add_overlay(overlay_image(icon, "[bis.base_icon_state]_flame", flags=RESET_COLOR))
 	else
-		overlays += overlay_image(icon, "[bis.base_icon_state]_striker", flags=RESET_COLOR)
+		add_overlay(overlay_image(icon, "[bis.base_icon_state]_striker", flags=RESET_COLOR))
 
 /obj/item/flame/lighter/attack(var/mob/living/M, var/mob/living/carbon/user)
 	if(!istype(M, /mob))
@@ -99,8 +89,8 @@
 	if(lit)
 		M.IgniteMob()
 
-		if(istype(M.wear_mask, /obj/item/clothing/mask/smokable/cigarette) && user.zone_sel.selecting == BP_MOUTH)
-			var/obj/item/clothing/mask/smokable/cigarette/cig = M.wear_mask
+		var/obj/item/clothing/mask/smokable/cigarette/cig = M.get_equipped_item(slot_wear_mask_str)
+		if(istype(cig) && user.zone_sel.selecting == BP_MOUTH)
 			if(M == user)
 				cig.attackby(src, user)
 			else
@@ -144,7 +134,26 @@
 	name = "pink lighter"
 
 /obj/item/flame/lighter/random
-	random_colour = TRUE
+	var/static/list/available_colors = list(
+		COLOR_WHITE,
+		COLOR_BLUE_GRAY,
+		COLOR_GREEN_GRAY,
+		COLOR_BOTTLE_GREEN,
+		COLOR_DARK_GRAY,
+		COLOR_RED_GRAY,
+		COLOR_GUNMETAL,
+		COLOR_RED,
+		COLOR_YELLOW,
+		COLOR_CYAN,
+		COLOR_GREEN,
+		COLOR_VIOLET,
+		COLOR_NAVY_BLUE,
+		COLOR_PINK
+	)
+
+/obj/item/flame/lighter/random/Initialize(ml, material_key)
+	. = ..()
+	set_color(pick(available_colors))
 
 /******
  Zippo
@@ -155,24 +164,15 @@
 	icon_state = "zippo"
 	item_state = "zippo"
 	max_fuel = 10
-	available_colors = list(
-		COLOR_WHITE,
-		COLOR_WHITE,
-		COLOR_WHITE,
-		COLOR_DARK_GRAY,
-		COLOR_GUNMETAL,
-		COLOR_BRONZE,
-		COLOR_BRASS
-	)
+	material = /decl/material/solid/metal/stainlesssteel
 
 /obj/item/flame/lighter/zippo/on_update_icon()
+	. = ..()
 	var/datum/extension/base_icon_state/bis = get_extension(src, /datum/extension/base_icon_state)
-
-	overlays.Cut()
 	if(lit)
 		icon_state = "[bis.base_icon_state]_open"
 		item_state = "[bis.base_icon_state]_open"
-		overlays += overlay_image(icon, "[bis.base_icon_state]_flame", flags=RESET_COLOR)
+		add_overlay(overlay_image(icon, "[bis.base_icon_state]_flame", flags=RESET_COLOR))
 	else
 		icon_state = "[bis.base_icon_state]"
 		item_state = "[bis.base_icon_state]"
@@ -201,12 +201,14 @@
 	name = "gunmetal zippo"
 
 /obj/item/flame/lighter/zippo/brass
-	color = COLOR_BRASS
 	name = "brass zippo"
+	material = /decl/material/solid/metal/brass
+	applies_material_colour = TRUE
 
 /obj/item/flame/lighter/zippo/bronze
-	color = COLOR_BRONZE
 	name = "bronze zippo"
+	material = /decl/material/solid/metal/bronze
+	applies_material_colour = TRUE
 
 /obj/item/flame/lighter/zippo/pink
 	color = COLOR_PINK
@@ -214,14 +216,37 @@
 
 //Spawn using the colour list in the master type
 /obj/item/flame/lighter/zippo/random
-	random_colour = TRUE
+	var/static/list/available_materials = list(
+		/decl/material/solid/metal/brass,
+		/decl/material/solid/metal/bronze,
+		/decl/material/solid/metal/blackbronze,
+		/decl/material/solid/metal/stainlesssteel = list(null, COLOR_WHITE, COLOR_DARK_GRAY, COLOR_GUNMETAL), //null color is the natural material color
+	)
+	applies_material_colour = TRUE
+	applies_material_name = TRUE
+
+/obj/item/flame/lighter/zippo/random/Initialize(ml, material_key)
+	var/picked_mat = pick(available_materials)
+	var/picked_color
+	if(length(available_materials[picked_mat]))
+		var/list/available = available_materials[picked_mat]
+		picked_color = pick(available)
+		log_debug("Picked color : '[picked_color]' out of [length(available)]")
+		if(picked_color)
+			applies_material_colour = FALSE
+
+	. = ..(ml, picked_mat)
+
+	if(picked_color)
+		set_color(picked_color)
 
 //Legacy icon states for custom items
-/obj/item/flame/lighter/zippo/custom/Initialize()
+/obj/item/flame/lighter/zippo/custom/Initialize(ml, material_key)
 	. = ..()
-	color = null
+	set_color(null)
 
 /obj/item/flame/lighter/zippo/custom/on_update_icon()
+	. = ..()
 	var/datum/extension/base_icon_state/bis = get_extension(src, /datum/extension/base_icon_state)
 
 	if(lit)

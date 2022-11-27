@@ -1,6 +1,5 @@
 /datum/map_template/ruin/antag_spawn/mercenary
 	name = "Mercenary Base"
-	id = "mercenary_spawn"
 	suffixes = list("mercenary/mercenary_base.dmm")
 	shuttles_to_initialise = list(/datum/shuttle/autodock/overmap/merc_shuttle)
 	template_flags = TEMPLATE_FLAG_TEST_DUPLICATES
@@ -74,13 +73,13 @@
 /area/map_template/merc_spawn
 	name = "\improper TCV Tersten Tenacity"
 	icon_state = "syndie-ship"
-	req_access = list(access_syndicate)
+	req_access = list(access_mercenary)
 
 /area/map_template/merc_shuttle
 	name = "\improper Desperado Fore Compartment"
 	icon_state = "yellow"
 	area_flags = AREA_FLAG_RAD_SHIELDED | AREA_FLAG_ION_SHIELDED
-	req_access = list(access_syndicate)
+	req_access = list(access_mercenary)
 
 /area/map_template/merc_shuttle/rear
 	name = "\improper Desperado Rear Compartment"

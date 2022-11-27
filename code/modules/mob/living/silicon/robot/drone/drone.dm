@@ -33,8 +33,6 @@
 
 	silicon_camera = /obj/item/camera/siliconcam/drone_camera
 
-	//Used for self-mailing.
-	var/mail_destination = ""
 	var/module_type = /obj/item/robot_module/drone
 	var/hat_x = 0
 	var/hat_y = -13
@@ -167,7 +165,7 @@
 		to_chat(user, "<span class='danger'>\The [src] is not compatible with \the [W].</span>")
 		return TRUE
 
-	else if(isCrowbar(W) && user.a_intent != I_HURT)
+	else if(IS_CROWBAR(W) && user.a_intent != I_HURT)
 		to_chat(user, "<span class='danger'>\The [src] is hermetically sealed. You can't open the case.</span>")
 		return
 

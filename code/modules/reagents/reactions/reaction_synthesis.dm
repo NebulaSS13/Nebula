@@ -3,6 +3,7 @@
 	result = null
 	result_amount = 1
 	mix_message = "The solution hardens and begins to crystallize."
+	abstract_type = /decl/chemical_reaction/synthesis
 
 /decl/chemical_reaction/synthesis/fiberglass
 	name = "Fiberglass"

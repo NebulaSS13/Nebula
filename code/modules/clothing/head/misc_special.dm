@@ -64,7 +64,7 @@
 		usr.update_action_buttons()
 
 /obj/item/clothing/head/welding/on_update_icon()
-	..()
+	. = ..()
 	icon_state = get_world_inventory_state()
 	if(up && check_state_in_icon("[icon_state]_up", icon))
 		icon_state = "[icon_state]_up"
@@ -108,8 +108,8 @@
 	desc = "Perfect for winter in Siberia, da?"
 	icon_state = ICON_STATE_WORLD
 	icon = 'icons/clothing/head/ushanka.dmi'
-	flags_inv = HIDEEARS|BLOCKHEADHAIR
-	cold_protection = SLOT_HEAD
+	flags_inv = HIDEEARS|BLOCK_HEAD_HAIR
+	cold_protection = SLOT_HEAD | SLOT_EARS
 	min_cold_protection_temperature = HELMET_MIN_COLD_PROTECTION_TEMPERATURE
 	var/up = FALSE
 
@@ -120,7 +120,7 @@
 	update_icon()
 
 /obj/item/clothing/head/ushanka/on_update_icon()
-	..()
+	. = ..()
 	icon_state = get_world_inventory_state()
 	if(up && check_state_in_icon("[icon_state]_up", icon))
 		icon_state = "[icon_state]_up"
@@ -139,7 +139,7 @@
 	desc = "A jack o' lantern! Believed to ward off evil spirits."
 	icon_state = ICON_STATE_WORLD
 	icon = 'icons/clothing/head/pumpkin.dmi'
-	flags_inv = HIDEMASK|HIDEEARS|HIDEEYES|HIDEFACE|BLOCKHAIR
+	flags_inv = HIDEMASK|HIDEEARS|HIDEEYES|HIDEFACE|BLOCK_ALL_HAIR
 	body_parts_covered = SLOT_HEAD|SLOT_FACE|SLOT_EYES
 	brightness_on = 2
 	light_overlay = "helmet_light"
@@ -155,6 +155,8 @@
 	icon = 'icons/clothing/head/cat.dmi'
 	body_parts_covered = 0
 	siemens_coefficient = 1.5
+	flags_inv = 0
+	armor = null
 
 /obj/item/clothing/head/richard
 	name = "chicken mask"
@@ -162,4 +164,4 @@
 	icon_state = ICON_STATE_WORLD
 	icon = 'icons/clothing/head/richard.dmi'
 	body_parts_covered = SLOT_HEAD|SLOT_FACE
-	flags_inv = BLOCKHAIR
+	flags_inv = BLOCK_ALL_HAIR

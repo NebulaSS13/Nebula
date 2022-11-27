@@ -18,7 +18,7 @@
 
 /obj/item/gun/launcher/sealant/on_update_icon()
 	update_world_inventory_state()
-	cut_overlays()
+	. = ..()
 	if(loaded_tank)
 		add_overlay("[icon_state]-tank")
 

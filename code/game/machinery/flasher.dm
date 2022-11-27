@@ -5,6 +5,8 @@
 	desc = "A wall-mounted flashbulb device."
 	icon = 'icons/obj/machines/flash_mounted.dmi'
 	icon_state = "mflash1"
+	directional_offset = "{'NORTH':{'y':-32}, 'SOUTH':{'y':32}, 'EAST':{'x':32}, 'WEST':{'x':-32}}"
+	obj_flags = OBJ_FLAG_MOVES_UNSUPPORTED
 	var/range = 2 //this is roughly the size of brig cell
 	var/disable = 0
 	var/last_flash = 0 //Don't want it getting spammed like regular flashes
@@ -34,7 +36,7 @@
 
 //Don't want to render prison breaks impossible
 /obj/machinery/flasher/attackby(obj/item/W, mob/user)
-	if(isWirecutter(W))
+	if(IS_WIRECUTTER(W))
 		add_fingerprint(user, 0, W)
 		src.disable = !src.disable
 		if (src.disable)
@@ -52,7 +54,7 @@
 		return
 
 /obj/machinery/flasher/proc/flash()
-	if (!(powered()))
+	if (stat & NOPOWER)
 		return
 
 	if ((src.disable) || (src.last_flash && world.time < src.last_flash + 150))
@@ -121,7 +123,7 @@
 		flash()
 
 /obj/machinery/flasher/portable/attackby(obj/item/W, mob/user)
-	if(isWrench(W))
+	if(IS_WRENCH(W))
 		add_fingerprint(user)
 		src.anchored = !src.anchored
 

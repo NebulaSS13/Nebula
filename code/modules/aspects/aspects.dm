@@ -27,7 +27,7 @@ var/global/list/aspect_categories = list() // Containers for ease of printing da
 	var/list/incompatible_with                           // Typelist of aspects that prevent this one from being taken
 	var/available_at_chargen = TRUE                      // Whether or not aspect is shown in chargen prefs
 	var/aspect_flags = 0
-	var/transfer_with_mind = TRUE
+	var/transfer_with_mind = TRUE // TODO: IMPLEMENT
 	var/sort_value = 0
 	var/list/permitted_species
 	var/list/blocked_species
@@ -53,6 +53,16 @@ var/global/list/aspect_categories = list() // Containers for ease of printing da
 			AC.hide_from_chargen = FALSE
 		if(istype(parent))
 			LAZYDISTINCTADD(parent.children, src)
+
+/decl/aspect/validate()
+	. = ..()
+	if(initial(parent) && !istype(parent))
+		. += "invalid parent - [parent || "NULL"]"
+	for(var/decl/aspect/A as anything in children)
+		if(!istype(A))
+			. += "invalid child - [A || "NULL"]"
+		else if(A.parent != src)
+			. += "child [A || "NULL"] does not have correct parent - expected [src], got [A.parent || "NULL"]"
 
 /decl/aspect/proc/applies_to_organ(var/organ)
 	return FALSE

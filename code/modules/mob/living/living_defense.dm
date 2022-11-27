@@ -53,7 +53,7 @@
 		return TRUE
 	. = TRUE
 	var/list/newargs = args - args[1]
-	for(var/obj/aura/aura AS_ANYTHING in auras)
+	for(var/obj/aura/aura as anything in auras)
 		var/result = 0
 		switch(type)
 			if(AURA_TYPE_WEAPON)
@@ -115,17 +115,8 @@
 
 //returns 0 if the effects failed to apply for some reason, 1 otherwise.
 /mob/living/standard_weapon_hit_effects(obj/item/I, mob/living/user, var/effective_force, var/hit_zone)
-	if(!effective_force)
-		return 0
-
-	//Hulk modifier
-	if(MUTATION_HULK in user.mutations)
-		effective_force *= 2
-
-	//Apply weapon damage
-	var/damage_flags = I.damage_flags()
-
-	return apply_damage(effective_force, I.damtype, hit_zone, damage_flags, used_weapon=I, armor_pen=I.armor_penetration)
+	if(effective_force)
+		return apply_damage(effective_force, I.damtype, hit_zone, I.damage_flags(), used_weapon=I, armor_pen=I.armor_penetration)
 
 //this proc handles being hit by a thrown atom
 /mob/living/hitby(var/atom/movable/AM, var/datum/thrownthing/TT)
@@ -256,7 +247,7 @@
 	return
 
 /mob/living/proc/adjust_fire_stacks(add_fire_stacks) //Adjusting the amount of fire_stacks we have on person
-	fire_stacks = Clamp(fire_stacks + add_fire_stacks, FIRE_MIN_STACKS, FIRE_MAX_STACKS)
+	fire_stacks = clamp(fire_stacks + add_fire_stacks, FIRE_MIN_STACKS, FIRE_MAX_STACKS)
 
 /mob/living/proc/handle_fire()
 	if(fire_stacks < 0)

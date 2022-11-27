@@ -18,7 +18,7 @@
 
 /obj/machinery/destructive_analyzer/Initialize()
 	. = ..()
-	set_extension(src, /datum/extension/network_device, initial_network_id, initial_network_key, NETWORK_CONNECTION_STRONG_WIRELESS)
+	set_extension(src, /datum/extension/network_device, initial_network_id, initial_network_key, RECEIVER_STRONG_WIRELESS)
 
 /obj/machinery/destructive_analyzer/modify_mapped_vars(map_hash)
 	..()
@@ -81,7 +81,7 @@
 
 /obj/machinery/destructive_analyzer/attackby(var/obj/item/O, var/mob/user)
 
-	if(isMultitool(O) && user.a_intent != I_HURT)
+	if(IS_MULTITOOL(O) && user.a_intent != I_HURT)
 		var/datum/extension/local_network_member/fabnet = get_extension(src, /datum/extension/local_network_member)
 		fabnet.get_new_tag(user)
 		return TRUE
@@ -148,3 +148,4 @@
 	icon = 'icons/obj/items/stock_parts/stock_parts.dmi'
 	icon_state = "smes_coil"
 	origin_tech = "{'materials':19,'engineering':19,'exoticmatter':19,'powerstorage':19,'wormholes':19,'biotech':19,'combat':19,'magnets':19,'programming':19,'esoteric':19}"
+	health = ITEM_HEALTH_NO_DAMAGE

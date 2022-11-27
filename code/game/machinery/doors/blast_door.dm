@@ -154,7 +154,7 @@
 /obj/machinery/door/blast/attackby(obj/item/C, mob/user)
 	add_fingerprint(user, 0, C)
 	if(!panel_open) //Do this here so the door won't change state while prying out the circuit
-		if(isCrowbar(C) || (istype(C, /obj/item/twohanded/fireaxe) && C:wielded == 1))
+		if(IS_CROWBAR(C) || (istype(C, /obj/item/twohanded/fireaxe) && C:wielded == 1))
 			if(((stat & NOPOWER) || (stat & BROKEN)) && !( operating ))
 				to_chat(user, "<span class='notice'>You begin prying at \the [src]...</span>")
 				if(do_after(user, 2 SECONDS, src))
@@ -264,9 +264,16 @@
 		/decl/stock_part_preset/radio/receiver/blast_door_button = 1
 	)
 	uncreated_component_parts = list(
-		/obj/item/stock_parts/power/apc/buildable,
+		/obj/item/stock_parts/power/apc,
 		/obj/item/stock_parts/radio/transmitter/on_event/buildable,
 		/obj/item/stock_parts/radio/receiver/buildable
+	)
+	base_type = /obj/machinery/button/blast_door/buildable
+	frame_type = /obj/item/frame/button/blastdoor
+
+/obj/machinery/button/blast_door/buildable
+	uncreated_component_parts = list(
+		/obj/item/stock_parts/power/apc
 	)
 
 /obj/machinery/button/blast_door/Initialize(mapload)

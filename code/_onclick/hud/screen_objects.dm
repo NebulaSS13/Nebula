@@ -348,8 +348,9 @@
 			usr.swap_hand()
 		if("hand")
 			usr.swap_hand()
-		else if(usr.attack_ui(slot_id))
-			usr.update_inv_hands(0)
+		else
+			if(usr.attack_ui(slot_id))
+				usr.update_inv_hands(0)
 	return 1
 
 // Character setup stuff

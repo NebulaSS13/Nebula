@@ -30,14 +30,14 @@ var/global/list/floor_light_cache = list()
 	update_icon()
 
 /obj/machinery/floor_light/attackby(var/obj/item/W, var/mob/user)
-	if(isScrewdriver(W))
+	if(IS_SCREWDRIVER(W))
 		anchored = !anchored
 		if(use_power)
 			update_use_power(POWER_USE_OFF)
 		visible_message("<span class='notice'>\The [user] has [anchored ? "attached" : "detached"] \the [src].</span>")
-	else if(isWelder(W) && (damaged || (stat & BROKEN)))
+	else if(IS_WELDER(W) && (damaged || (stat & BROKEN)))
 		var/obj/item/weldingtool/WT = W
-		if(!WT.remove_fuel(0, user))
+		if(!WT.weld(0, user))
 			to_chat(user, "<span class='warning'>\The [src] must be on to complete this task.</span>")
 			return
 		playsound(src.loc, 'sound/items/Welder.ogg', 50, 1)
@@ -48,7 +48,7 @@ var/global/list/floor_light_cache = list()
 		visible_message("<span class='notice'>\The [user] has repaired \the [src].</span>")
 		set_broken(FALSE)
 		damaged = null
-	else if(isWrench(W))
+	else if(IS_WRENCH(W))
 		playsound(src.loc, 'sound/items/Ratchet.ogg', 75, 1)
 		to_chat(user, "<span class='notice'>You dismantle the floor light.</span>")
 

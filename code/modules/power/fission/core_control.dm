@@ -6,7 +6,7 @@
 	idle_power_usage = 250
 	active_power_usage = 500
 	var/initial_id_tag = "fission"
-	
+
 	var/current_core = 1 // Which core connected to the console is being controlled/viewed.
 	var/current_rod = 0  // Which fuel rod in the selected core is being viewed. 0 if no rod is being viewed.
 	var/diagnostics = FALSE // Whether or not the control computer displays advanced diagnostics.
@@ -19,7 +19,7 @@
 		fission.set_tag(null, initial_id_tag)
 
 /obj/machinery/computer/fission/attackby(var/obj/item/W, var/mob/user)
-	if(isMultitool(W))
+	if(IS_MULTITOOL(W))
 		var/datum/extension/local_network_member/fission = get_extension(src, /datum/extension/local_network_member)
 		fission.get_new_tag(user)
 		return TRUE
@@ -38,7 +38,7 @@
 		if(!length(fission_cores))
 			.["no_cores"] = 1
 			return
-		current_core = Clamp(current_core, 1, length(fission_cores))
+		current_core = clamp(current_core, 1, length(fission_cores))
 		var/obj/machinery/atmospherics/unary/fission_core/selected_core = fission_cores[current_core]
 		if(istype(selected_core))
 			if(selected_core.stat & (BROKEN|NOPOWER))
@@ -59,16 +59,16 @@
 				if(current_core < 1)
 					current_core = num_cores
 		return TOPIC_REFRESH
-	
+
 	if(href_list["toggle_diagnostics"])
 		diagnostics = !diagnostics
 		return TOPIC_REFRESH
-	
+
 	if(href_list["machine"])
 		var/obj/machinery/atmospherics/unary/fission_core/C = locate(href_list["machine"])
 		if(!istype(C))
 			return TOPIC_NOACTION
-		
+
 		if(!lan || !lan.is_connected(C))
 			return TOPIC_NOACTION
 
@@ -76,7 +76,7 @@
 			var/new_depth = input(user,"Enter the desired control rod depth between 0 and 1:" ,"Control Rod Depth", 0) as num|null
 			if(!CanInteract(user, state))
 				return TOPIC_NOACTION
-			C.adjust_control_rods(Clamp(new_depth, 0, 1))
+			C.adjust_control_rods(clamp(new_depth, 0, 1))
 			return TOPIC_REFRESH
 
 		if(href_list["jump_start"])
@@ -85,12 +85,12 @@
 				return TOPIC_NOACTION
 			C.jump_start()
 			return TOPIC_REFRESH
-		
+
 		if(href_list["rod"])
 			var/new_rod = text2num(href_list["rod"])
 			current_rod = (current_rod == new_rod ? 0 : new_rod)
 			return TOPIC_REFRESH
-	
+
 		if(href_list["eject_rod"])
 			if(!C.eject_rod(current_rod))
 				to_chat(user, SPAN_WARNING("You cannot eject rods from \the [C] while it is active!"))

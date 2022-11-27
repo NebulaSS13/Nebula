@@ -209,7 +209,7 @@
 	dir = 1
 	},
 /obj/machinery/computer/cryopod{
-	pixel_y = -32
+	dir = 1
 	},
 /obj/abstract/landmark/latejoin/cryo,
 /obj/structure/cable{
@@ -287,7 +287,7 @@
 	dir = 1
 	},
 /obj/machinery/computer/cryopod{
-	pixel_y = -32
+	dir = 1
 	},
 /obj/structure/cable{
 	icon_state = "4-8"
@@ -1828,7 +1828,7 @@
 /area/ship/trade/maintenance/techstorage)
 "eW" = (
 /obj/machinery/computer/cryopod{
-	pixel_x = 32
+	dir = 8
 	},
 /obj/machinery/light{
 	dir = 4
@@ -1950,7 +1950,7 @@
 /turf/simulated/floor/tiled/monotile,
 /area/ship/trade/cargo/lower)
 "hc" = (
-/obj/structure/dispenser/oxygen,
+/obj/structure/tank_rack/oxygen,
 /obj/machinery/firealarm{
 	dir = 1;
 	pixel_y = -24
@@ -2339,8 +2339,8 @@
 /area/ship/trade/maintenance/techstorage)
 "rB" = (
 /obj/effect/decal/cleanable/dirt,
-/obj/item/ore/iron,
-/obj/item/ore/coal{
+/obj/item/stack/material/ore/iron,
+/obj/item/stack/material/ore/coal{
 	pixel_x = 3;
 	pixel_y = 3
 	},
@@ -2428,7 +2428,7 @@
 /area/ship/trade/maintenance/eva)
 "ui" = (
 /obj/structure/closet/crate,
-/obj/item/ore/strangerock,
+/obj/item/strangerock,
 /obj/item/fossil,
 /obj/item/fossil/animal,
 /obj/item/fossil/animal,
@@ -3263,7 +3263,7 @@
 /turf/simulated/wall/r_wall/hull,
 /area/ship/trade/crew/dorms2)
 "Vm" = (
-/obj/item/ducttape,
+/obj/item/stack/tape_roll/duct_tape,
 /obj/item/stack/material/reinforced/mapped/plasteel/fifty,
 /obj/item/stack/material/ingot/mapped/copper/fifty,
 /obj/item/stack/material/rods/fifty,
@@ -3277,8 +3277,8 @@
 /obj/item/stack/material/reinforced/mapped/fiberglass/fifty,
 /obj/item/clothing/head/welding,
 /obj/item/stack/material/cardstock/mapped/cardboard/fifty,
-/obj/item/ducttape,
-/obj/item/taperoll/engineering,
+/obj/item/stack/tape_roll/duct_tape,
+/obj/item/stack/tape_roll/barricade_tape/engineering,
 /turf/simulated/floor/tiled/techfloor,
 /area/ship/trade/maintenance/techstorage)
 "VX" = (
@@ -3337,7 +3337,7 @@
 	},
 /obj/item/t_scanner,
 /obj/item/cell/high,
-/obj/item/ducttape,
+/obj/item/stack/tape_roll/duct_tape,
 /obj/item/stock_parts/circuitboard/air_alarm,
 /obj/item/stock_parts/circuitboard/airlock_electronics,
 /obj/item/stock_parts/circuitboard/airlock_electronics,

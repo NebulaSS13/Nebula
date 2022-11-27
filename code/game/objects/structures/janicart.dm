@@ -7,8 +7,6 @@
 	density = 1
 	atom_flags = ATOM_FLAG_NO_TEMP_CHANGE | ATOM_FLAG_OPEN_CONTAINER | ATOM_FLAG_CLIMBABLE
 	movable_flags = MOVABLE_FLAG_WHEELED
-	//copypaste sorry
-	var/amount_per_transfer_from_this = 5 //shit I dunno, adding this so syringes stop runtime erroring. --NeoFite
 	var/obj/item/storage/bag/trash/mybag	= null
 	var/obj/item/mop/mymop = null
 	var/obj/item/chems/spray/myspray = null
@@ -185,8 +183,6 @@
 		/datum/movement_handler/move_relay_self/janicart
 	)
 
-	//copypaste sorry
-	var/amount_per_transfer_from_this = 5 //shit I dunno, adding this so syringes stop runtime erroring. --NeoFite
 	var/obj/item/storage/bag/trash/mybag = null
 	var/callme = "pimpin' ride"	//how do people refer to it?
 
@@ -243,7 +239,7 @@
 	if(isspaceturf(loc))
 		return
 	. = MOVEMENT_HANDLED
-	DoMove(mob.AdjustMovementDirection(direction), mob)
+	DoMove(mob.AdjustMovementDirection(direction, mover), mob)
 
 /obj/structure/bed/chair/janicart/relaymove(mob/user, direction)
 	if(user.incapacitated(INCAPACITATION_DISRUPTED))
@@ -264,3 +260,5 @@
 	icon = 'icons/obj/vehicles.dmi'
 	icon_state = "keys"
 	w_class = ITEM_SIZE_TINY
+	material = /decl/material/solid/metal/steel
+	matter = list(/decl/material/solid/plastic = MATTER_AMOUNT_TRACE)

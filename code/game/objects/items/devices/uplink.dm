@@ -13,15 +13,20 @@
 /obj/item/uplink
 	name = "hidden uplink"
 	desc = "There is something wrong if you're examining this."
+	health = ITEM_HEALTH_NO_DAMAGE
+	material = /decl/material/solid/plastic
+	matter = list(
+		/decl/material/solid/metal/copper    = MATTER_AMOUNT_REINFORCEMENT,
+		/decl/material/solid/silicon         = MATTER_AMOUNT_REINFORCEMENT,
+		/decl/material/solid/metal/aluminium = MATTER_AMOUNT_REINFORCEMENT,
+	)
+	is_spawnable_type = FALSE
 	var/active = 0
 	var/datum/uplink_category/category 	= 0		// The current category we are in
 	var/exploit_id								// Id of the current exploit record we are viewing
 
 	var/welcome = "Welcome, Operative"	// Welcoming menu message
 	var/uses 							// Numbers of crystals
-	var/list/ItemsCategory				// List of categories with lists of items
-	var/list/ItemsReference				// List of references with an associated item
-	var/list/nanoui_items				// List of items for NanoUI use
 	var/nanoui_menu = 0					// The current menu we are in
 	var/list/nanoui_data = new 			// Additional data for NanoUI use
 
@@ -235,6 +240,6 @@
 	if(!hidden_uplink && user.mind)
 		hidden_uplink = new(src, user.mind, DEFAULT_TELECRYSTAL_AMOUNT)
 	. = ..()
-	
+
 /obj/item/uplink/contained/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1, var/uistate = global.contained_topic_state)
 	return ..()

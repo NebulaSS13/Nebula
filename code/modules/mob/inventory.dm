@@ -73,7 +73,7 @@ var/global/list/slot_equipment_priority = list( \
 //puts the item "W" into an appropriate slot in a human's inventory
 //returns 0 if it cannot, 1 if successful
 /mob/proc/equip_to_appropriate_slot(obj/item/W, var/skip_store = 0)
-	if(!istype(W)) 
+	if(!istype(W))
 		return FALSE
 	for(var/slot in slot_equipment_priority)
 		if(skip_store)
@@ -85,11 +85,10 @@ var/global/list/slot_equipment_priority = list( \
 
 /mob/proc/equip_to_storage(obj/item/newitem)
 	// Try put it in their backpack
-	if(istype(src.back,/obj/item/storage))
-		var/obj/item/storage/backpack = src.back
-		if(backpack.can_be_inserted(newitem, null, 1))
-			newitem.forceMove(src.back)
-			return backpack
+	var/obj/item/storage/backpack = get_equipped_item(slot_back_str)
+	if(istype(backpack) && backpack.can_be_inserted(newitem, null, 1))
+		newitem.forceMove(backpack)
+		return backpack
 
 	// Try to place it in any item that can store stuff, on the mob.
 	for(var/obj/item/storage/S in src.contents)
@@ -171,9 +170,9 @@ var/global/list/slot_equipment_priority = list( \
 
 // Removes an item from inventory and places it in the target atom.
 // If canremove or other conditions need to be checked then use unEquip instead.
-/mob/proc/drop_from_inventory(var/obj/item/W, var/atom/target = null)
+/mob/proc/drop_from_inventory(var/obj/item/W, var/atom/target = null, var/play_dropsound = TRUE)
 	if(W)
-		remove_from_mob(W, target)
+		remove_from_mob(W, target, play_dropsound)
 		if(!(W && W.loc)) return 1 // self destroying objects (tk, grabs)
 		update_icon()
 		return 1
@@ -211,18 +210,15 @@ var/global/list/slot_equipment_priority = list( \
 */
 /mob/proc/u_equip(obj/W)
 	SHOULD_CALL_PARENT(TRUE)
-	if(W == back)
-		back = null
+	if(W == _back)
+		_back = null
 		update_inv_back(0)
 		return TRUE
-	if(W == wear_mask)
-		wear_mask = null
-		refresh_mask(W)
+	if(W == _wear_mask)
+		_wear_mask = null
+		update_inv_wear_mask(0)
 		return TRUE
 	return FALSE
-
-/mob/proc/refresh_mask(var/obj/item/removed)
-	update_inv_wear_mask(0)
 
 /mob/proc/isEquipped(obj/item/I)
 	if(!I)
@@ -243,14 +239,14 @@ var/global/list/slot_equipment_priority = list( \
 			return s
 
 //This differs from remove_from_mob() in that it checks if the item can be unequipped first. Use drop_from_inventory if you don't want to check.
-/mob/proc/unEquip(obj/item/I, var/atom/target)
+/mob/proc/unEquip(obj/item/I, var/atom/target, var/play_dropsound = TRUE)
 	if(!canUnEquip(I))
 		return FALSE
-	drop_from_inventory(I, target)
+	drop_from_inventory(I, target, play_dropsound)
 	return TRUE
 
 //Attemps to remove an object on a mob.
-/mob/proc/remove_from_mob(var/obj/O, var/atom/target)
+/mob/proc/remove_from_mob(var/obj/O, var/atom/target, var/play_dropsound = TRUE)
 	if(!O) // Nothing to remove, so we succeed.
 		return 1
 	src.u_equip(O)
@@ -264,7 +260,7 @@ var/global/list/slot_equipment_priority = list( \
 			I.forceMove(target)
 		else
 			I.dropInto(loc)
-		I.dropped(src)
+		I.dropped(src, play_dropsound)
 	return 1
 
 /mob/proc/drop_held_items()
@@ -275,15 +271,17 @@ var/global/list/slot_equipment_priority = list( \
 /mob/proc/get_equipped_item(var/slot)
 	SHOULD_CALL_PARENT(TRUE)
 	switch(slot)
-		if(slot_back_str) 
-			return back
-		if(slot_wear_mask_str) 
-			return wear_mask
+		if(slot_back_str)
+			return _back
+		if(slot_wear_mask_str)
+			return _wear_mask
 
 /mob/proc/get_equipped_items(var/include_carried = 0)
 	SHOULD_CALL_PARENT(TRUE)
-	for(var/obj/item/thing in list(back, wear_mask))
-		LAZYADD(., thing)
+	for(var/slot in list(slot_back_str, slot_wear_mask_str))
+		var/obj/item/thing = get_equipped_item(slot)
+		if(istype(thing))
+			LAZYADD(., thing)
 	if(include_carried)
 		for(var/obj/item/thing in get_held_items())
 			LAZYADD(., thing)

@@ -28,7 +28,7 @@
 	. = ..()
 
 /obj/machinery/power/terminal/attackby(obj/item/W, mob/user)
-	if(isWirecutter(W))
+	if(IS_WIRECUTTER(W))
 		var/turf/T = get_turf(src)
 		var/obj/machinery/machine = master_machine()
 

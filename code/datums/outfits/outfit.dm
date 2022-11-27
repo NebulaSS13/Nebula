@@ -22,6 +22,7 @@ var/global/list/outfits_decls_by_type_
 /decl/hierarchy/outfit
 	name = "Naked"
 	abstract_type = /decl/hierarchy/outfit
+	expected_type = /decl/hierarchy/outfit
 
 	var/uniform = null
 	var/suit = null
@@ -57,7 +58,7 @@ var/global/list/outfits_decls_by_type_
 /decl/hierarchy/outfit/Initialize()
 	. = ..()
 	backpack_overrides = backpack_overrides || list()
-	if(!is_abstract())
+	if(!INSTANCE_IS_ABSTRACT(src))
 		outfits_decls_by_type_[type] = src
 		dd_insertObjectList(outfits_decls_, src)
 
@@ -105,11 +106,14 @@ var/global/list/outfits_decls_by_type_
 		H.equip_to_slot_or_del(new uniform(H),slot_w_uniform_str)
 		if(!H.get_equipped_item(slot_w_uniform_str))
 			H.species.equip_default_fallback_uniform(H)
-	if(holster && H.w_uniform)
-		var/obj/item/clothing/accessory/equip_holster = new holster
-		H.w_uniform.attackby(equip_holster, H)
-		if(equip_holster.loc != H.w_uniform && !QDELETED(equip_holster))
-			qdel(equip_holster)
+
+		var/obj/item/equip_uniform = H.get_equipped_item(slot_w_uniform_str)
+		if(holster && equip_uniform)
+			var/obj/item/clothing/accessory/equip_holster = new holster
+			equip_uniform.attackby(equip_holster, H)
+			if(equip_holster.loc != equip_uniform && !QDELETED(equip_holster))
+				qdel(equip_holster)
+
 	if(suit)
 		H.equip_to_slot_or_del(new suit(H),slot_wear_suit_str)
 	if(back)

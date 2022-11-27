@@ -20,7 +20,9 @@
 /obj/item/storage/box/botanydisk
 	name = "flora disk box"
 	desc = "A box of flora data disks, apparently."
-	startswith = list(/obj/item/disk/botany = 14)
+	
+/obj/item/storage/box/botanydisk/WillContain()
+	return list(/obj/item/disk/botany = 14)
 
 /obj/machinery/botany
 	icon = 'icons/obj/hydroponics/hydroponics_machines.dmi'
@@ -77,13 +79,13 @@
 			to_chat(user, "You load [W] into [src].")
 		return
 
-	if(isScrewdriver(W))
+	if(IS_SCREWDRIVER(W))
 		open = !open
 		to_chat(user, "<span class='notice'>You [open ? "open" : "close"] the maintenance panel.</span>")
 		return
 
 	if(open)
-		if(isCrowbar(W))
+		if(IS_CROWBAR(W))
 			dismantle()
 			return
 

@@ -9,7 +9,7 @@
 		immunity = min(immunity + 0.25, immunity_norm)
 
 /mob/living/carbon/adjust_immunity(var/amt)
-	immunity = Clamp(immunity + amt, 0, immunity_norm)
+	immunity = clamp(immunity + amt, 0, immunity_norm)
 
 /mob/living/carbon/proc/get_immunity()
 	var/antibiotic_boost = REAGENT_VOLUME(reagents, /decl/material/liquid/antibiotics) / (REAGENTS_OVERDOSE/2)

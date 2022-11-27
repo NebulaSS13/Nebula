@@ -3,6 +3,7 @@
 	icon = 'icons/obj/machines/power/fusion.dmi'
 	icon_state = "fuel_assembly"
 	layer = 4
+	abstract_type = /obj/item/fuel_assembly
 
 	var/material_name
 	var/percent_depleted = 1
@@ -13,7 +14,7 @@
 /obj/item/fuel_assembly/Initialize(mapload, var/_material, var/list/makeup, var/_colour)
 	. = ..(mapload, _material)
 	LAZYINITLIST(matter)
-	
+
 	if(LAZYLEN(makeup))
 		if(length(makeup) == 1) // Rod is only made from one material.
 			var/decl/material/mat = GET_DECL(makeup[1])
@@ -48,6 +49,7 @@
 	update_icon()
 
 /obj/item/fuel_assembly/on_update_icon()
+	. = ..()
 	icon_state = "fuel_assembly"
 	if(material)
 		color = material.color
@@ -59,7 +61,7 @@
 		color = MixColors(colors)
 	var/image/I = image(icon, "fuel_assembly_bracket")
 	I.appearance_flags |= RESET_COLOR
-	set_overlays(I)
+	add_overlay(I)
 
 /obj/item/fuel_assembly/Process()
 	if(!radioactivity)
@@ -78,7 +80,7 @@
 
 /obj/item/fuel_assembly/tritium
 	material = /decl/material/gas/hydrogen/tritium
-	
+
 /obj/item/fuel_assembly/supermatter
 	material = /decl/material/solid/exotic_matter
 

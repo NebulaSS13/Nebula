@@ -9,6 +9,7 @@
 	throw_speed = 1
 	throw_range = 3
 	force = 15
+	material = /decl/material/solid/stone/cult
 	var/list/potentials = list(
 		SPECIES_HUMAN = /obj/item/storage/bag/cash/infinite
 	)
@@ -34,8 +35,8 @@
 	to_chat(user, "\The [src] crumbles in your hands.")
 	qdel(src)
 
-/obj/item/storage/bag/cash/infinite
-	startswith = list(/obj/item/cash/c1000 = 1)
+/obj/item/storage/bag/cash/infinite/WillContain()
+	return /obj/item/cash/c1000
 
 //HUMAN
 /obj/item/storage/bag/cash/infinite/remove_from_storage(obj/item/W, atom/new_location)

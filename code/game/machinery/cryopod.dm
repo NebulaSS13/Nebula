@@ -15,7 +15,8 @@
 	icon_state = "cellconsole"
 	density = 0
 	interact_offline = 1
-	var/mode = null
+	obj_flags = OBJ_FLAG_MOVES_UNSUPPORTED
+	directional_offset = "{'NORTH':{'y':-24}, 'SOUTH':{'y':32}, 'EAST':{'x':-24}, 'WEST':{'x':-24}}"
 
 	//Used for logging people entering cryosleep and important items they are carrying.
 	var/list/frozen_crew = list()
@@ -116,12 +117,12 @@
 		. = TOPIC_REFRESH
 
 /obj/item/stock_parts/circuitboard/cryopodcontrol
-	name = "Circuit board (Cryogenic Oversight Console)"
+	name = "circuit board (Cryogenic Oversight Console)"
 	build_path = /obj/machinery/computer/cryopod
 	origin_tech = "{'programming':3}"
 
 /obj/item/stock_parts/circuitboard/robotstoragecontrol
-	name = "Circuit board (Robotic Storage Console)"
+	name = "circuit board (Robotic Storage Console)"
 	build_path = /obj/machinery/computer/cryopod/robot
 	origin_tech = "{'programming':3}"
 
@@ -158,25 +159,7 @@
 	var/time_entered = 0          // Used to keep track of the safe period.
 
 	var/obj/machinery/computer/cryopod/control_computer
-	var/last_no_computer_message = 0
 	var/applies_stasis = 1
-
-	// These items are preserved when the process() despawn proc occurs.
-	var/list/preserve_items = list(
-		/obj/item/integrated_circuit/manipulation/wormhole,
-		/obj/item/integrated_circuit/input/teleporter_locator,
-		/obj/item/card/id/captains_spare,
-		/obj/item/aicard,
-		/obj/item/mmi,
-		/obj/item/paicard,
-		/obj/item/gun,
-		/obj/item/pinpointer,
-		/obj/item/clothing/suit,
-		/obj/item/clothing/shoes/magboots,
-		/obj/item/blueprints,
-		/obj/item/clothing/head/helmet/space,
-		/obj/item/storage/internal
-	)
 
 	construct_state = /decl/machine_construction/default/panel_closed
 	uncreated_component_parts = null
@@ -355,28 +338,14 @@
 
 	for(var/obj/item/W in items)
 
-		var/preserve = null
-		// Snowflaaaake.
-		if(istype(W, /obj/item/mmi))
-			var/obj/item/mmi/brain = W
-			if(brain.brainmob && brain.brainmob.client && brain.brainmob.key)
-				preserve = 1
-			else
-				continue
-		else
-			for(var/T in preserve_items)
-				if(istype(W,T))
-					preserve = 1
-					break
-
-		if(!preserve)
+		if(!W.preserve_in_cryopod())
 			qdel(W)
+			continue
+		if(control_computer && control_computer.allow_items)
+			control_computer.frozen_items += W
+			W.forceMove(null)
 		else
-			if(control_computer && control_computer.allow_items)
-				control_computer.frozen_items += W
-				W.forceMove(null)
-			else
-				W.forceMove(get_turf(src))
+			W.forceMove(get_turf(src))
 
 	//Update any existing objectives involving this mob.
 	for(var/datum/objective/O in global.all_objectives)
@@ -596,7 +565,7 @@
 		to_chat(user, "<span class='notice'>Someone else is attempting to open this.</span>")
 		return
 	if (closed)
-		if (isCrowbar(W))
+		if (IS_CROWBAR(W))
 			busy = 1
 			visible_message("[user] starts to pry the glass cover off of \the [src].")
 			if (!do_after(user, 50, src))

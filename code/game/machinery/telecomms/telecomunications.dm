@@ -26,14 +26,12 @@ var/global/list/obj/machinery/telecomms/telecomms_list = list()
 	var/list/freq_listening = list() // list of frequencies to tune into: if none, will listen to all
 	var/list/channel_tags = list() // a list specifying what to tag packets on different frequencies
 
-	var/machinetype = 0 // just a hacky way of preventing alike machines from pairing
 	var/toggled = 1 	// Is it toggled on
 	var/on = 1
 	var/integrity = 100 // basically HP, loses integrity by heat
 	var/produces_heat = 1	//whether the machine will produce heat when on.
 	var/delay = 10 // how many process() ticks to delay per heat
 	var/long_range_link = 0	// Can you link it across Z levels or on the otherside of the map? (Relay & Hub)
-	var/circuitboard = null // string pointing to a circuitboard type
 	var/hide = 0				// Is it a hidden machine?
 	var/listening_levels = null	// null = auto set in Initialize() - these are the z levels that the machine is listening to.
 	var/overloaded_for = 0
@@ -216,7 +214,7 @@ var/global/list/obj/machinery/telecomms/telecomms_list = list()
 		if((T0C + 200) to INFINITY)					// More than 200C, INFERNO. Takes damage every tick.
 			damage_chance = 100
 	if (damage_chance && prob(damage_chance))
-		integrity = between(0, integrity - 1, 100)
+		integrity = clamp(0, integrity - 1, 100)
 
 
 	if(delay > 0)
@@ -268,9 +266,7 @@ var/global/list/obj/machinery/telecomms/telecomms_list = list()
 	density = 1
 	anchored = 1
 	idle_power_usage = 600
-	machinetype = 1
 	produces_heat = 0
-	circuitboard = /obj/item/stock_parts/circuitboard/telecomms/receiver
 	base_type = /obj/machinery/telecomms/receiver
 	outage_probability = 10
 
@@ -319,8 +315,6 @@ var/global/list/obj/machinery/telecomms/telecomms_list = list()
 	density = 1
 	anchored = 1
 	idle_power_usage = 1600
-	machinetype = 7
-	circuitboard = /obj/item/stock_parts/circuitboard/telecomms/hub
 	base_type = /obj/machinery/telecomms/hub
 	long_range_link = 1
 	netspeed = 40
@@ -352,8 +346,6 @@ var/global/list/obj/machinery/telecomms/telecomms_list = list()
 	density = 1
 	anchored = 1
 	idle_power_usage = 1000
-	machinetype = 2
-	circuitboard = /obj/item/stock_parts/circuitboard/telecomms/bus
 	base_type = /obj/machinery/telecomms/bus
 	netspeed = 40
 	var/change_frequency = 0
@@ -404,9 +396,7 @@ var/global/list/obj/machinery/telecomms/telecomms_list = list()
 	density = 1
 	anchored = 1
 	idle_power_usage = 600
-	machinetype = 3
 	delay = 5
-	circuitboard = /obj/item/stock_parts/circuitboard/telecomms/processor
 	base_type = /obj/machinery/telecomms/processor
 	var/process_mode = 1 // 1 = Uncompress Signals, 0 = Compress Signals
 
@@ -442,20 +432,11 @@ var/global/list/obj/machinery/telecomms/telecomms_list = list()
 	density = 1
 	anchored = 1
 	idle_power_usage = 300
-	machinetype = 4
-	circuitboard = /obj/item/stock_parts/circuitboard/telecomms/server
 	base_type = /obj/machinery/telecomms/server
 	var/list/log_entries = list()
 	var/list/stored_names = list()
-	var/list/TrafficActions = list()
 	var/logs = 0 // number of logs
 	var/totaltraffic = 0 // gigabytes (if > 1024, divide by 1024 -> terrabytes)
-
-	var/list/memory = list()	// stored memory
-	var/encryption = "null" // encryption key: ie "password"
-	var/salt = "null"		// encryption salt: ie "123comsat"
-							// would add up to md5("password123comsat")
-	var/language = "human"
 	var/obj/item/radio/headset/server_radio = null
 
 /obj/machinery/telecomms/server/Initialize()

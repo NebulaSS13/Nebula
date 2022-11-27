@@ -155,9 +155,6 @@
 		if (3)
 			burn_damage = 7.5
 
-	var/mult = 1 + !!(BP_IS_ASSISTED(src)) // This macro returns (large) bitflags.
-	burn_damage *= mult/species.get_burn_mod(owner) //ignore burn mod for EMP damage
-
 	var/power = 4 - severity //stupid reverse severity
 	for(var/obj/item/I in implants)
 		if(I.obj_flags & OBJ_FLAG_CONDUCTIBLE)
@@ -288,7 +285,7 @@
 				stage++
 				return TRUE
 		if(2)
-			if(W.sharp || istype(W,/obj/item/hemostat) || isWirecutter(W))
+			if(W.sharp || istype(W,/obj/item/hemostat) || IS_WIRECUTTER(W))
 				var/list/radial_buttons = make_item_radial_menu_choices(get_contents_recursive())
 				if(LAZYLEN(radial_buttons))
 					var/obj/item/removing = show_radial_menu(user, src, radial_buttons, radius = 42, require_near = TRUE, use_labels = TRUE, check_locs = list(src))
@@ -455,6 +452,13 @@
 				// we can't use implanted() here since it's often interactive
 				imp_device.imp_in = owner
 				imp_device.implanted = TRUE
+
+			//Since limbs attached during surgery have their internal organs detached, we want to re-attach them if we're doing the proper install of the parent limb
+			else if(istype(implant, /obj/item/organ) && !detached)
+				var/obj/item/organ/O = implant
+				if(O.parent_organ == organ_tag)
+					//The add_organ chain will automatically handle properly removing the detached flag, and moving it to the proper lists
+					owner.add_organ(O, src, in_place, update_icon, detached)
 	else
 		//Handle installing into a stand-alone parent limb to keep dropped limbs in some kind of coherent state
 		if(!affected)
@@ -490,15 +494,15 @@
 	if(!owner)
 		return
 	if((body_part & SLOT_FOOT_LEFT) || (body_part & SLOT_FOOT_RIGHT))
-		owner.drop_from_inventory(owner.shoes)
+		owner.drop_from_inventory(owner.get_equipped_item(slot_shoes_str))
 	if((body_part & SLOT_HAND_LEFT) || (body_part & SLOT_HAND_RIGHT))
-		owner.drop_from_inventory(owner.gloves)
+		owner.drop_from_inventory(owner.get_equipped_item(slot_gloves_str))
 	if(body_part & SLOT_HEAD)
-		owner.drop_from_inventory(owner.head)
-		owner.drop_from_inventory(owner.glasses)
-		owner.drop_from_inventory(owner.l_ear)
-		owner.drop_from_inventory(owner.r_ear)
-		owner.drop_from_inventory(owner.wear_mask)
+		owner.drop_from_inventory(owner.get_equipped_item(slot_head_str))
+		owner.drop_from_inventory(owner.get_equipped_item(slot_glasses_str))
+		owner.drop_from_inventory(owner.get_equipped_item(slot_l_ear_str))
+		owner.drop_from_inventory(owner.get_equipped_item(slot_r_ear_str))
+		owner.drop_from_inventory(owner.get_equipped_item(slot_wear_mask_str))
 
 //Helper proc used by various tools for repairing robot limbs
 /obj/item/organ/external/proc/robo_repair(var/repair_amount, var/damage_type, var/damage_desc, obj/item/tool, mob/living/user)
@@ -553,20 +557,18 @@ This function completely restores a damaged organ to perfect condition.
 /obj/item/organ/external/rejuvenate(var/ignore_prosthetic_prefs)
 
 	damage_state = "00"
-	status = 0
 	brute_dam = 0
 	brute_ratio = 0
 	burn_dam = 0
 	burn_ratio = 0
 	germ_level = 0
 	genetic_degradation = 0
+	pain = 0
 
 	for(var/datum/wound/wound in wounds)
 		qdel(wound)
 	number_wounds = 0
 
-	damage = 0
-	pain = 0
 
 	// handle internal organs
 	for(var/obj/item/organ/current_organ in internal_organs)
@@ -578,16 +580,12 @@ This function completely restores a damaged organ to perfect condition.
 			implanted_object.forceMove(get_turf(src))
 			LAZYREMOVE(implants, implanted_object)
 
-	if(ishuman(owner) && !ignore_prosthetic_prefs && owner.client?.prefs?.real_name == owner.real_name)
-		for(var/decl/aspect/aspect as anything in owner.personal_aspects)
-			if(aspect.applies_to_organ(organ_tag))
-				aspect.apply(owner)
-		owner.updatehealth()
-
 	undislocate(TRUE)
 
-	if(!QDELETED(src) && species)
-		species.post_organ_rejuvenate(src, owner)
+	. = ..() // Clear damage, reapply aspects.
+
+	if(owner)
+		owner.updatehealth()
 
 //#TODO: Rejuvination hacks should probably be removed
 /obj/item/organ/external/remove_rejuv()
@@ -1107,11 +1105,12 @@ Note that amputating the affected organ does in fact remove the infection from t
 		holder = owner
 	if(!holder)
 		return
-	if (holder.handcuffed && (body_part in list(SLOT_ARM_LEFT, SLOT_ARM_RIGHT, SLOT_HAND_LEFT, SLOT_HAND_RIGHT)))
+	var/obj/item/cuffs = holder.get_equipped_item(slot_handcuffed_str)
+	if(cuffs && (body_part in list(SLOT_ARM_LEFT, SLOT_ARM_RIGHT, SLOT_HAND_LEFT, SLOT_HAND_RIGHT)))
 		holder.visible_message(\
-			"\The [holder.handcuffed.name] falls off of [holder.name].",\
-			"\The [holder.handcuffed.name] falls off you.")
-		holder.drop_from_inventory(holder.handcuffed)
+			"\The [cuffs] falls off of [holder.name].",\
+			"\The [cuffs] falls off you.")
+		holder.unEquip(cuffs)
 
 // checks if all wounds on the organ are bandaged
 /obj/item/organ/external/proc/is_bandaged()
@@ -1219,8 +1218,8 @@ Note that amputating the affected organ does in fact remove the infection from t
 	// This is mostly for the ninja suit to stop ninja being so crippled by breaks.
 	// TODO: consider moving this to a suit proc or process() or something during
 	// hardsuit rewrite.
-	if(!splinted && owner && istype(owner.wear_suit, /obj/item/clothing/suit/space/rig))
-		var/obj/item/clothing/suit/space/rig/suit = owner.wear_suit
+	var/obj/item/clothing/suit/space/rig/suit = owner.get_equipped_item(slot_wear_suit_str)
+	if(!splinted && owner && istype(suit))
 		suit.handle_fracture(owner, src)
 
 /obj/item/organ/external/proc/mend_fracture()
@@ -1266,6 +1265,10 @@ Note that amputating the affected organ does in fact remove the infection from t
 	. = ..()
 
 	slowdown = 0
+
+	// Don't override our existing model unless a specific model is being passed in.
+	if(!company)
+		company = model || /decl/prosthetics_manufacturer
 
 	var/decl/prosthetics_manufacturer/R
 	if(istype(company, /decl/prosthetics_manufacturer))
@@ -1465,11 +1468,11 @@ Note that amputating the affected organ does in fact remove the infection from t
 		is_detached = FALSE //External prosthetics are never detached
 	return ..(is_detached)
 
-/obj/item/organ/external/proc/disfigure(var/type = "brute")
+/obj/item/organ/external/proc/disfigure(var/type = BRUTE)
 	if(status & ORGAN_DISFIGURED)
 		return
 	if(owner)
-		if(type == "brute")
+		if(type == BRUTE)
 			owner.visible_message("<span class='danger'>You hear a sickening cracking sound coming from \the [owner]'s [name].</span>",	\
 			"<span class='danger'>Your [name] becomes a mangled mess!</span>",	\
 			"<span class='danger'>You hear a sickening crack.</span>")
@@ -1544,7 +1547,7 @@ Note that amputating the affected organ does in fact remove the infection from t
 		to_chat(owner, "<span class='danger'>You feel extreme pain!</span>")
 
 		var/max_halloss = round(owner.species.total_health * 0.8 * ((100 - armor) / 100)) //up to 80% of passing out, further reduced by armour
-		add_pain(Clamp(0, max_halloss - owner.getHalLoss(), 30))
+		add_pain(clamp(0, max_halloss - owner.getHalLoss(), 30))
 
 //Adds autopsy data for used_weapon.
 /obj/item/organ/external/proc/add_autopsy_data(var/used_weapon, var/damage)

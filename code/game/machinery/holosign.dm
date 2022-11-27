@@ -8,6 +8,8 @@
 	idle_power_usage = 2
 	active_power_usage = 70
 	anchored = 1
+	obj_flags = OBJ_FLAG_MOVES_UNSUPPORTED
+	directional_offset = "{'NORTH':{'y':-32}, 'SOUTH':{'y':32}, 'EAST':{'x':32}, 'WEST':{'x':-32}}"
 	var/lit = 0
 	var/on_icon = "sign_on"
 
@@ -71,7 +73,7 @@
 	name = "holosign switch"
 	desc = "A remote control switch for holosign."
 	icon = 'icons/obj/power.dmi'
-	icon_state = "crema_switch"
+	icon_state = "crematorium_switch"
 
 /obj/machinery/button/holosign/on_update_icon()
 	icon_state = "light[active]"

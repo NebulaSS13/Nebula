@@ -35,6 +35,18 @@
 /datum/fabricator_recipe/tool/minihoe
 	path = /obj/item/minihoe
 
+/datum/fabricator_recipe/tool/inflatable_wall
+	path = /obj/item/inflatable
+
+/datum/fabricator_recipe/tool/inflatable_door
+	path = /obj/item/inflatable/door
+
 /datum/fabricator_recipe/tool/welder_industrial
 	path = /obj/item/weldingtool/largetank
 	hidden = TRUE
+
+/datum/fabricator_recipe/tool/hoist_kit
+	path = /obj/item/hoist_kit
+
+/datum/fabricator_recipe/tool/mobile_ladder
+	path = /obj/item/mobile_ladder

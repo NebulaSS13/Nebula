@@ -2095,7 +2095,8 @@
 /obj/item/toy/therapy_blue,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/item/defibrillator/compact/loaded,
-/obj/item/modular_computer/telescreen/preset/medical{
+/obj/machinery/computer/modular/telescreen/preset/medical{
+	dir = 8;
 	pixel_x = 31;
 	pixel_y = -2
 	},
@@ -4401,7 +4402,7 @@
 	dir = 8;
 	icon_state = "bulb1"
 	},
-/obj/item/storage/mirror{
+/obj/structure/mirror{
 	pixel_y = 29
 	},
 /obj/structure/hygiene/sink{
@@ -4813,7 +4814,7 @@
 	dir = 5
 	},
 /obj/machinery/keycard_auth{
-	pixel_y = 21
+	dir = 2
 	},
 /turf/simulated/floor/tiled/dark,
 /area/ship/trade/command/bridge)
@@ -5013,9 +5014,9 @@
 /obj/item/storage/box/ammo/shotgunshells,
 /obj/item/handcuffs,
 /obj/item/boombox,
-/obj/item/taperoll/bureaucracy,
+/obj/item/stack/tape_roll/barricade_tape/bureaucracy,
 /obj/machinery/keycard_auth{
-	pixel_y = 21
+	dir = 2
 	},
 /turf/simulated/floor/wood,
 /area/ship/trade/command/captain)
@@ -5557,7 +5558,7 @@
 /obj/item/flash,
 /obj/item/clothing/glasses/sunglasses,
 /obj/item/storage/box/evidence,
-/obj/item/taperoll/police,
+/obj/item/stack/tape_roll/barricade_tape/police,
 /obj/item/holowarrant,
 /obj/item/storage/briefcase/crimekit,
 /obj/item/taperecorder,
@@ -5986,7 +5987,7 @@
 /area/ship/trade/dock)
 "JA" = (
 /obj/machinery/keycard_auth{
-	pixel_y = 21
+	dir = 2
 	},
 /turf/simulated/floor/carpet,
 /area/ship/trade/command/fmate)
@@ -6508,7 +6509,7 @@
 	dir = 4
 	},
 /obj/machinery/keycard_auth{
-	pixel_y = 21
+	dir = 2
 	},
 /turf/simulated/floor/tiled/dark,
 /area/ship/trade/command/bridge)
@@ -6524,7 +6525,7 @@
 /obj/structure/closet/medical_wall/filled{
 	pixel_y = -32
 	},
-/obj/item/ducttape,
+/obj/item/stack/tape_roll/duct_tape,
 /obj/item/storage/firstaid/surgery,
 /turf/simulated/floor/tiled/white,
 /area/ship/trade/crew/medbay)
@@ -6972,7 +6973,7 @@
 /obj/machinery/cryopod/lifepod,
 /obj/machinery/door/window/southright,
 /obj/machinery/computer/cryopod{
-	pixel_x = 32
+	dir = 8
 	},
 /turf/simulated/floor/wood,
 /area/ship/trade/command/captain)

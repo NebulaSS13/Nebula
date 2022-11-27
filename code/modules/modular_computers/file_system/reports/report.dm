@@ -166,8 +166,8 @@ Overriden so that read access is required to have write access
 */
 /datum/computer_file/report/get_file_perms(list/accesses, mob/user)
 	var/perms = ..()
-	if(!(perms & OS_WRITE_ACCESS))
-		perms &= ~OS_READ_ACCESS
+	if(!(perms & OS_READ_ACCESS))
+		perms &= ~OS_WRITE_ACCESS
 	return perms
 
 // Manually changing the permissions of a report will change *all* contained fields to match.

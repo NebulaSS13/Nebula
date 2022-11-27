@@ -145,14 +145,18 @@
 		</div>
 		<div class='statusDisplay'>
 		<table style="width:100%">
-		<tr><th style="width:40%">Name<th>Coordinates<th>Actions
+		<tr><td><b>Name</b></td><td><b>Coordinates</b></td><td colspan = 5><b>Actions</b></td></tr>
 		{{for data.locations}}
-			<tr class="candystripe"><td>{{:value.name}}
-			<td>{{:value.x}} : {{:value.y}}
-			<td>{{:helper.link('Plot course', 'arrowreturnthick-1-e', { 'x' : value.x, 'y' : value.y }, null, null)}}
-			{{:helper.link('Remove', 'close', { 'remove' : value.reference }, null, null)}}
+			<tr class="candystripe">
+			<td>{{:value.name}}</td>
+			<td>{{:value.x}} : {{:value.y}}</td>
+			<td>{{:helper.link('Plot course',                                           'arrowreturnthick-1-e', { 'x' : value.x, 'y'   : value.y },         null, null)}}</td>
+			<td>{{:helper.link(value.tracking ? 'Disable tracking' : 'Enable tracking', null,                   { 'toggle_wp_tracking' : value.reference }, null, null)}}</td>
+			<td>{{:helper.link('Set color',                                             null,                   { 'set_wp_color'       : value.reference }, null, null)}}</td>
+			<td>{{:helper.link('Remove',                                                'close',                { 'remove' : value.reference },             null, null)}}</td>
+			</tr>
 		{{/for}}
-		</table>
+		</tr></table>
 	</div>
 	</div>
 	

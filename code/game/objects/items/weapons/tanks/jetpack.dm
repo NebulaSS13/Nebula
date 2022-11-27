@@ -10,7 +10,6 @@
 	var/datum/effect/effect/system/trail/ion/ion_trail
 	var/on = 0.0
 	var/stabilization_on = 0
-	var/volume_rate = 500              //Needed for borg jetpack transfer
 	action_button_name = "Toggle Jetpack"
 	material = /decl/material/solid/metal/steel
 	matter = list(/decl/material/solid/metal/aluminium = MATTER_AMOUNT_REINFORCEMENT)
@@ -37,7 +36,7 @@
 	to_chat(usr, "You toggle the stabilization [stabilization_on? "on":"off"].")
 
 /obj/item/tank/jetpack/on_update_icon(override)
-	cut_overlays()
+	. = ..()
 	if(on)
 		add_overlay("[icon_state]-on")
 
@@ -104,4 +103,4 @@
 	name = "integrated manuvering module thrusterpack"
 	desc = "The 'manuvering' part of a manuvering jet module for a hardsuit. You could... probably use this standalone?"
 	var/obj/item/rig/holder
-	
+

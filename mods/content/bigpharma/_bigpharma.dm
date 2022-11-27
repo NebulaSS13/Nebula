@@ -51,9 +51,9 @@ var/global/list/reagent_names_to_icon_state
 		if(istype(thing, /obj/item/chems))
 			var/obj/item/chems/chems = thing
 			chems.label_text = new_name
-			chems.update_name_label()
+			chems.update_container_name()
 		else
-			thing.SetName(new_name)
+			thing.attach_label(null, null, new_name)
 	if(meds.container_description)
 		thing.desc = meds.container_description
 	thing.update_icon()

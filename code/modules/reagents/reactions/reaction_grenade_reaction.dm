@@ -1,5 +1,6 @@
 /decl/chemical_reaction/grenade_reaction
 	result = null
+	abstract_type = /decl/chemical_reaction/grenade_reaction
 	result_amount = 1
 
 /decl/chemical_reaction/grenade_reaction/explosion_potassium
@@ -45,7 +46,7 @@
 						SET_STATUS_MAX(M, STAT_STUN, 5)
 
 /decl/chemical_reaction/grenade_reaction/emp_pulse
-	name = "EMP Pulse"
+	name = "Electromagnetic Pulse"
 	lore_text = "This reaction causes an electromagnetic pulse that knocks out machinery in a sizable radius."
 	required_reagents = list(
 		/decl/material/solid/metal/uranium = 1,
@@ -111,10 +112,9 @@
 
 /decl/chemical_reaction/grenade_reaction/foam/on_reaction(var/datum/reagents/holder, var/created_volume, var/reaction_flags)
 	..()
-	var/location = get_turf(holder.get_reaction_loc())
+	var/turf/location = get_turf(holder.get_reaction_loc())
 	if(location)
-		for(var/mob/M in viewers(5, location))
-			to_chat(M, "<span class='warning'>The solution spews out foam!</span>")
+		location.visible_message(SPAN_WARNING("The solution spews out foam!"), range = 5)
 		var/datum/effect/effect/system/foam_spread/s = new()
 		s.set_up(created_volume, location, holder, 0)
 		s.start()
@@ -129,16 +129,15 @@
 
 /decl/chemical_reaction/grenade_reaction/metalfoam/on_reaction(var/datum/reagents/holder, var/created_volume, var/reaction_flags)
 	..()
-	var/location = holder.get_reaction_loc()
+	var/atom/location = holder.get_reaction_loc()
 	if(location)
 		if(istype(location, /obj/item/sealant_tank))
 			var/obj/item/sealant_tank/foam = location
-			foam.foam_charges = Clamp(foam.foam_charges + created_volume, 0, foam.max_foam_charges)
+			foam.foam_charges = clamp(foam.foam_charges + created_volume, 0, foam.max_foam_charges)
 			return
 		location = get_turf(location)
 		if(location)
-			for(var/mob/M in viewers(5, location))
-				to_chat(M, "<span class='warning'>The solution spews out a metalic foam!</span>")
+			location.visible_message(SPAN_WARNING("The solution spews out a metallic foam!"), range = 5)
 			var/datum/effect/effect/system/foam_spread/s = new()
 			s.set_up(created_volume, location, holder, 1)
 			s.start()
@@ -152,10 +151,9 @@
 
 /decl/chemical_reaction/grenade_reaction/ironfoam/on_reaction(var/datum/reagents/holder, var/created_volume, var/reaction_flags)
 	..()
-	var/location = get_turf(holder.get_reaction_loc())
+	var/turf/location = get_turf(holder.get_reaction_loc())
 	if(location)
-		for(var/mob/M in viewers(5, location))
-			to_chat(M, "<span class='warning'>The solution spews out a metalic foam!</span>")
+		location.visible_message(SPAN_WARNING("The solution spews out a metallic foam!"), range = 5)
 		var/datum/effect/effect/system/foam_spread/s = new()
 		s.set_up(created_volume, location, holder, 2)
 		s.start()

@@ -18,6 +18,8 @@
 	allow_quick_empty = 1
 	allow_quick_gather = 1
 	collection_mode = 1
+	material = /decl/material/solid/plastic
+	item_flags = ITEM_FLAG_HOLLOW
 	var/linked
 
 /obj/item/storage/laundry_basket/attack_hand(mob/user)
@@ -47,12 +49,11 @@
 	return
 
 /obj/item/storage/laundry_basket/on_update_icon()
+	. = ..()
 	if(contents.len)
 		icon_state = "laundry-full"
 	else
 		icon_state = "laundry-empty"
-	return
-
 
 /obj/item/storage/laundry_basket/handle_mouse_drop(var/atom/over, var/mob/user)
 	if(over == user)

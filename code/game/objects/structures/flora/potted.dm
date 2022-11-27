@@ -1,3 +1,27 @@
+////////////////////////////////////////
+// Potted Plants
+////////////////////////////////////////
+/obj/structure/flora/pottedplant
+	name         = "potted plant"
+	desc         = "Really brings the room together."
+	icon         = 'icons/obj/structures/potted_plants.dmi'
+	icon_state   = "plant-01"
+	anchored     = FALSE
+	layer        = ABOVE_HUMAN_LAYER
+	w_class      = ITEM_SIZE_LARGE
+	remains_type = /obj/effect/decal/cleanable/dirt
+	hitsound     = 'sound/effects/glass_crack2.ogg'
+	snd_cut      = 'sound/effects/break_ceramic.ogg'
+	material     = /decl/material/solid/stone/ceramic
+	matter       = list(
+		/decl/material/solid/clay        = MATTER_AMOUNT_REINFORCEMENT,
+		/decl/material/solid/sand        = MATTER_AMOUNT_REINFORCEMENT,
+		/decl/material/solid/plantmatter = MATTER_AMOUNT_SECONDARY,     //#TODO: Maybe eventually drop the plant, or some seeds or something?
+	)
+
+/obj/structure/flora/pottedplant/get_material_health_modifier()
+	return 0.80
+
 //potted plants credit: Flashkirby
 //potted plants 27-30: Cajoes
 /obj/structure/flora/pottedplant/fern

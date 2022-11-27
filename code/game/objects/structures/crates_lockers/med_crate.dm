@@ -9,7 +9,7 @@
 		/obj/item/stack/medical/advanced/bruise_pack = 10,
 		/obj/item/chems/pill/sugariron = 6,
 		/obj/item/storage/pill_bottle/painkillers = 2,
-		/obj/item/storage/pill_bottle/adrenaline
+		/obj/item/storage/pill_bottle/stabilizer
 		)
 
 /obj/structure/closet/crate/med_crate/burn
@@ -33,9 +33,9 @@
 
 /obj/structure/closet/crate/med_crate/oxyloss/WillContain()
 	return list(
-		/obj/item/scanner/health = 2,
+		/obj/item/scanner/breath = 2,
 		/obj/item/storage/pill_bottle/oxygen = 2,
-		/obj/item/storage/pill_bottle/adrenaline
+		/obj/item/storage/pill_bottle/stabilizer
 	)
 /obj/structure/closet/crate/med_crate/toxin
 	name = "\improper Toxin crate"

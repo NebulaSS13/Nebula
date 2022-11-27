@@ -27,7 +27,7 @@ var/global/defer_powernet_rebuild = 0      // True if net rebuild will be called
 #define BROKEN   BITFLAG(0)
 #define NOPOWER  BITFLAG(1)
 #define MAINT    BITFLAG(2) // Under maintenance.
-#define EMPED    BITFLAG(3) // Temporary broken by EMP pulse.
+#define EMPED    BITFLAG(3) // Temporary broken by EMP.
 #define NOSCREEN BITFLAG(4) // No UI shown via direct interaction
 #define NOINPUT  BITFLAG(5) // No input taken from direct interaction
 
@@ -51,7 +51,7 @@ var/global/defer_powernet_rebuild = 0      // True if net rebuild will be called
 
 #define CAMERA_CHANNEL_ROBOTS "Robots"
 #define CAMERA_CHANNEL_MINE "Mining"
-#define CAMERA_CHANNEL_SECRET "Secret"	
+#define CAMERA_CHANNEL_SECRET "Secret"
 
 // Non-station channels
 #define CAMERA_CHANNEL_CRESCENT "Crescent"

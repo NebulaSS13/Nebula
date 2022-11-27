@@ -5,6 +5,7 @@
 	anchored = FALSE
 	density =  TRUE
 	layer =    BELOW_OBJ_LAYER
+	obj_flags = OBJ_FLAG_MOVES_UNSUPPORTED
 	material_alteration =    MAT_FLAG_ALTERATION_NAME | MAT_FLAG_ALTERATION_COLOR
 	tool_interaction_flags = (TOOL_INTERACTION_ANCHOR | TOOL_INTERACTION_DECONSTRUCT)
 	maxhealth = 100
@@ -59,13 +60,13 @@
 	anchored = prob(50)
 
 /obj/structure/girder/bullet_act(var/obj/item/projectile/Proj)
-	
+
 	var/effective_cover = cover
 	if(reinf_material)
 		effective_cover *= 2
-	if(!anchored) 
+	if(!anchored)
 		effective_cover *= 0.5
-	effective_cover = Clamp(FLOOR(effective_cover), 0, 100)
+	effective_cover = clamp(FLOOR(effective_cover), 0, 100)
 	if(Proj.original != src && !prob(effective_cover))
 		return PROJECTILE_CONTINUE
 	var/damage = Proj.get_structure_damage()
@@ -186,14 +187,6 @@
 	reinf_material = M
 	update_icon()
 	return 1
-
-/obj/structure/girder/attack_hand(mob/user)
-	if (MUTATION_HULK in user.mutations)
-		visible_message(SPAN_DANGER("\The [user] smashes \the [src] apart!"))
-		dismantle()
-		return
-	return ..()
-
 
 /obj/structure/girder/explosion_act(severity)
 	..()

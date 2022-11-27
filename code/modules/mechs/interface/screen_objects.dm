@@ -1,5 +1,5 @@
 // Screen objects hereon out.
-#define MECH_UI_STYLE(X) "<span style=\"font-family: 'Small Fonts'; -dm-text-outline: 1 black; font-size: 5px;\">[X]</span>"
+#define MECH_UI_STYLE(X) STYLE_SMALLFONTS_OUTLINE(X, 5, COLOR_BLACK, COLOR_WHITE)
 
 /obj/screen/exosuit
 	name = "hardpoint"
@@ -72,7 +72,7 @@
 		maptext = ""
 		return
 
-	maptext =  SPAN_STYLE("font-family: 'Small Fonts'; -dm-text-outline: 1 black; font-size: 7px;", "[holding.get_hardpoint_maptext()]")
+	maptext =  STYLE_SMALLFONTS_OUTLINE("[holding.get_hardpoint_maptext()]", 7, COLOR_WHITE, COLOR_BLACK)
 
 	var/ui_damage = (!owner.body.diagnostics || !owner.body.diagnostics.is_functional() || ((owner.emp_damage>EMP_GUI_DISRUPT) && prob(owner.emp_damage)))
 
@@ -83,7 +83,7 @@
 
 	if(ui_damage)
 		value = -1
-		maptext = SPAN_STYLE("font-family: 'Small Fonts'; -dm-text-outline: 1 black; font-size: 7px;", "ERROR")
+		maptext = STYLE_SMALLFONTS_OUTLINE("ERROR", 7, COLOR_WHITE, COLOR_BLACK)
 	else
 		if((owner.emp_damage>EMP_GUI_DISRUPT) && prob(owner.emp_damage*2))
 			if(prob(10))
@@ -205,7 +205,7 @@
 /obj/screen/exosuit/toggle/on_update_icon()
 	. = ..()
 	icon_state = "[initial(icon_state)][toggled ? "_enabled" : ""]"
-	maptext = FONT_COLORED(toggled ? COLOR_WHITE : COLOR_GRAY, MECH_UI_STYLE(uitext))
+	maptext = "<font color='[toggled ? COLOR_WHITE : COLOR_GRAY]'>[MECH_UI_STYLE(uitext)]</font>"
 
 /obj/screen/exosuit/toggle/Click()
 	if(..()) toggled()
@@ -392,7 +392,7 @@
 /obj/screen/exosuit/heat/proc/Update()
 	//Relative value of heat
 	if(owner && owner.body && owner.body.diagnostics?.is_functional() && gauge_needle)
-		var/value = Clamp(owner.bodytemperature / (owner.material.melting_point * 1.55), 0, 1)
+		var/value = clamp(owner.bodytemperature / (owner.material.melting_point * 1.55), 0, 1)
 		var/matrix/rot_matrix = matrix()
 		rot_matrix.Turn(Interpolate(-90, 90, value))
 		rot_matrix.Translate(0, -2)

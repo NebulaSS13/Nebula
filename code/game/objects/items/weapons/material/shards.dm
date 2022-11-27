@@ -28,7 +28,7 @@
 	. = ..()
 	if(. && !has_handle)
 		var/mob/living/carbon/human/H = user
-		if(istype(H) && !H.gloves && !(H.species.species_flags & SPECIES_FLAG_NO_MINOR_CUT))
+		if(istype(H) && !H.get_equipped_item(slot_gloves_str) && !(H.species.species_flags & SPECIES_FLAG_NO_MINOR_CUT))
 			var/obj/item/organ/external/hand = GET_EXTERNAL_ORGAN(H, H.get_active_held_item_slot())
 			if(istype(hand) && !BP_IS_PROSTHETIC(hand))
 				to_chat(H, SPAN_DANGER("You slice your hand on \the [src]!"))
@@ -54,6 +54,7 @@
 		qdel(src)
 
 /obj/item/shard/on_update_icon()
+	. = ..()
 	if(material)
 		color = material.color
 		// 1-(1-x)^2, so that glass shards with 0.3 opacity end up somewhat visible at 0.51 opacity
@@ -63,9 +64,9 @@
 		alpha = 255
 
 /obj/item/shard/attackby(obj/item/W, mob/user)
-	if(isWelder(W) && material.shard_can_repair)
+	if(IS_WELDER(W) && material.shard_can_repair)
 		var/obj/item/weldingtool/WT = W
-		if(WT.remove_fuel(0, user))
+		if(WT.weld(0, user))
 			material.create_object(get_turf(src))
 			qdel(src)
 			return
@@ -89,13 +90,9 @@
 	return ..()
 
 /obj/item/shard/on_update_icon()
-	overlays.Cut()
 	. = ..()
 	if(has_handle)
-		var/image/I = image(icon, "handle")
-		I.appearance_flags |= RESET_COLOR
-		I.color = has_handle
-		overlays += I
+		add_overlay(overlay_image(icon, "handle", has_handle, RESET_COLOR))
 
 /obj/item/shard/Crossed(atom/movable/AM)
 	..()
@@ -112,10 +109,12 @@
 			if(H.species.siemens_coefficient<0.5 || (H.species.species_flags & (SPECIES_FLAG_NO_EMBED|SPECIES_FLAG_NO_MINOR_CUT))) //Thick skin.
 				return
 
-			if( H.shoes || ( H.wear_suit && (H.wear_suit.body_parts_covered & SLOT_FEET) ) )
+			var/obj/item/shoes = H.get_equipped_item(slot_shoes_str)
+			var/obj/item/suit = H.get_equipped_item(slot_wear_suit_str)
+			if(shoes || (suit && (suit.body_parts_covered & SLOT_FEET)))
 				return
 
-			to_chat(M, "<span class='danger'>You step on \the [src]!</span>")
+			to_chat(M, SPAN_DANGER("You step on \the [src]!"))
 
 			var/list/check = list(BP_L_FOOT, BP_R_FOOT)
 			while(check.len)

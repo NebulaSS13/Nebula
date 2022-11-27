@@ -23,7 +23,7 @@
 	set_overlays(image(icon = 'icons/obj/furniture.dmi', icon_state = "w_overlay", layer = ABOVE_HUMAN_LAYER))
 
 /obj/structure/bed/chair/wheelchair/attackby(obj/item/W, mob/user)
-	if(isWrench(W) || istype(W,/obj/item/stack) || isWirecutter(W))
+	if(IS_WRENCH(W) || istype(W,/obj/item/stack) || IS_WIRECUTTER(W))
 		return
 	..()
 
@@ -113,7 +113,7 @@
 	if(!mob.has_held_item_slot())
 		return // No hands to drive your chair? Tough luck!
 	//drunk wheelchair driving
-	direction = mob.AdjustMovementDirection(direction)
+	direction = mob.AdjustMovementDirection(direction, mover)
 	DoMove(direction, mob)
 
 /obj/structure/bed/chair/wheelchair/relaymove(mob/user, direction)
@@ -129,7 +129,8 @@
 	icon_state = "wheelchair-item"
 	item_state = "rbed"
 	w_class = ITEM_SIZE_LARGE
-
+	health = 50
+	max_health = 50
 	var/structure_form_type = /obj/structure/bed/chair/wheelchair
 
 /obj/item/wheelchair_kit/attack_self(mob/user)
@@ -142,3 +143,9 @@
 		user.visible_message(SPAN_NOTICE("<b>[user]</b> lays out \the [W.name]."))
 		W.add_fingerprint(user)
 		qdel(src)
+
+/obj/item/wheelchair_kit/physically_destroyed(skip_qdel)
+	//Make sure if the kit is destroyed to drop the same stuff as the actual wheelchair
+	var/obj/structure/S = new structure_form_type(get_turf(src)) 
+	S.physically_destroyed()
+	. = ..()

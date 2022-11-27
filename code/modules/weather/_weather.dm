@@ -63,7 +63,7 @@ var/global/list/weather_by_z = list()
 	for(var/tz in affecting_zs)
 		if(global.weather_by_z["[tz]"] == src)
 			global.weather_by_z -= "[tz]" 
-		for(var/turf/T AS_ANYTHING in block(locate(1, 1, tz), locate(world.maxx, world.maxy, tz)))
+		for(var/turf/T as anything in block(locate(1, 1, tz), locate(world.maxx, world.maxy, tz)))
 			if(T.weather == src)
 				remove_vis_contents(T, vis_contents_additions)
 				T.weather = null

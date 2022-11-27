@@ -4,6 +4,7 @@
 // "Useful" items - I'm guessing things that might be used at work?
 /decl/loadout_option/utility
 	category = /decl/loadout_category/utility
+	abstract_type = /decl/loadout_option/utility
 
 /decl/loadout_option/utility/briefcase
 	name = "briefcase"
@@ -62,6 +63,11 @@
 	name = "utility knife selection"
 	description = "A selection of knives."
 	path = /obj/item/knife
+
+/decl/loadout_option/utility/umbrella
+	name = "umbrella"
+	path = /obj/item/umbrella
+	flags = GEAR_HAS_COLOR_SELECTION
 
 /decl/loadout_option/utility/knives/get_gear_tweak_options()
 	. = ..()

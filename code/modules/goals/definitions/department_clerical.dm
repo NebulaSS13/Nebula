@@ -100,6 +100,7 @@
 	desc = "This densely typed sheaf of documents is filled with legalese and jargon. You can't make heads or tails of them."
 	icon = 'icons/obj/goal_paperwork.dmi'
 	icon_state = "generic"
+	material = /decl/material/solid/cardboard //#TODO: replace with paper
 
 	var/datum/goal/department/paperwork/associated_goal
 	var/list/all_signatories
@@ -116,6 +117,7 @@
 	. = ..()
 
 /obj/item/paperwork/on_update_icon()
+	. = ..()
 	icon_state = "[icon_state][length(has_signed) || ""]"
 
 /obj/item/paperwork/examine(mob/user, distance)
@@ -127,7 +129,7 @@
 			to_chat(user, SPAN_NOTICE("It has been signed by: [english_list(has_signed)]."))
 
 /obj/item/paperwork/attackby(obj/item/W, mob/user)
-	if(istype(W, /obj/item/pen))
+	if(IS_PEN(W))
 		if(user.real_name in has_signed)
 			to_chat(user, SPAN_WARNING("You have already signed \the [src]."))
 			return

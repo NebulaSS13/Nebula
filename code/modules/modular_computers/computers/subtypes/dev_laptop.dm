@@ -9,22 +9,13 @@
 	interact_sounds = list("keyboard", "keystroke")
 	interact_sound_volume = 20
 	computer_type = /datum/extension/assembly/modular_computer/laptop
+	matter = list(
+		/decl/material/solid/metal/aluminium = MATTER_AMOUNT_SECONDARY,
+		/decl/material/solid/metal/copper    = MATTER_AMOUNT_REINFORCEMENT,
+		/decl/material/solid/silicon         = MATTER_AMOUNT_REINFORCEMENT,
+	)
 	var/icon_state_closed = "laptop-closed"
 	
-/obj/item/modular_computer/laptop/AltClick(var/mob/user)
-// Prevents carrying of open laptops inhand.
-// While they work inhand, i feel it'd make tablets lose some of their high-mobility advantage they have over laptops now.
-	if(!CanPhysicallyInteract(user))
-		return
-	if(!istype(loc, /turf/))
-		to_chat(usr, "\The [src] has to be on a stable surface first!")
-		return
-	anchored = !anchored
-	var/datum/extension/assembly/modular_computer/assembly = get_extension(src, computer_type)
-	if(assembly)
-		assembly.screen_on = anchored
-	update_icon()
-
 /obj/item/modular_computer/laptop/on_update_icon()
 	if(anchored)
 		..()
@@ -35,3 +26,20 @@
 
 /obj/item/modular_computer/laptop/preset
 	anchored = FALSE
+
+/obj/item/modular_computer/laptop/get_alt_interactions(var/mob/user)
+	. = ..()
+	LAZYADD(., /decl/interaction_handler/laptop_open)
+
+/decl/interaction_handler/laptop_open
+	name = "Open Laptop"
+	expected_target_type = /obj/item/modular_computer/laptop
+	interaction_flags = INTERACTION_NEEDS_PHYSICAL_INTERACTION | INTERACTION_NEEDS_TURF
+
+/decl/interaction_handler/laptop_open/invoked(atom/target, mob/user, obj/item/prop)
+	var/obj/item/modular_computer/laptop/L = target
+	L.anchored = !L.anchored
+	var/datum/extension/assembly/modular_computer/assembly = get_extension(L, L.computer_type)
+	if(assembly)
+		assembly.screen_on = L.anchored
+	L.update_icon()

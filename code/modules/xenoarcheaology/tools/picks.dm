@@ -6,7 +6,8 @@
 	force = 3
 	throwforce = 0
 	attack_verb = list("stabbed", "jabbed", "spiked", "attacked")
-	material = /decl/material/solid/metal/steel
+	material = /decl/material/solid/metal/chromium
+	matter = list(/decl/material/solid/metal/steel = MATTER_AMOUNT_SECONDARY)
 	w_class = ITEM_SIZE_SMALL
 	drill_verb = "delicately picking"
 	digspeed = 20
@@ -28,6 +29,8 @@
 	drill_sound = 'sound/weapons/thudswoosh.ogg'
 	drill_verb = "brushing"
 	sharp = 0
+	material = /decl/material/solid/wood
+	matter = list(/decl/material/solid/metal/steel = MATTER_AMOUNT_REINFORCEMENT)
 
 /obj/item/pickaxe/xeno/one_pick
 	name = "2cm pick"
@@ -73,7 +76,8 @@
 	excavation_amount = 30
 	drill_sound = 'sound/items/Crowbar.ogg'
 	drill_verb = "clearing"
-	material = /decl/material/solid/metal/steel
+	material = /decl/material/solid/metal/chromium
+	matter = list(/decl/material/solid/metal/steel = MATTER_AMOUNT_SECONDARY)
 	w_class = ITEM_SIZE_NORMAL
 	force = 6
 	throwforce = 3
@@ -95,14 +99,21 @@
 	max_storage_space = 18
 	max_w_class = ITEM_SIZE_NORMAL
 	use_to_pickup = 1
-	startswith = list(
-		/obj/item/pickaxe/xeno/brush,
-		/obj/item/pickaxe/xeno/one_pick,
-		/obj/item/pickaxe/xeno/two_pick,
-		/obj/item/pickaxe/xeno/three_pick,
-		/obj/item/pickaxe/xeno/four_pick,
-		/obj/item/pickaxe/xeno/five_pick,
-		/obj/item/pickaxe/xeno/six_pick)
+	material = /decl/material/solid/leather/synth
+
+/obj/item/storage/excavation/WillContain()
+	return list(
+			/obj/item/pickaxe/xeno/brush,
+			/obj/item/pickaxe/xeno/one_pick,
+			/obj/item/pickaxe/xeno/two_pick,
+			/obj/item/pickaxe/xeno/three_pick,
+			/obj/item/pickaxe/xeno/four_pick,
+			/obj/item/pickaxe/xeno/five_pick,
+			/obj/item/pickaxe/xeno/six_pick
+		)
+
+/obj/item/storage/excavation/empty/WillContain()
+	return
 
 /obj/item/storage/excavation/handle_item_insertion()
 	..()

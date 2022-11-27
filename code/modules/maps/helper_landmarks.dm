@@ -1,25 +1,35 @@
 //Load a random map template from the list. Maploader handles it to avoid order of init madness
 /obj/abstract/landmark/map_load_mark
 	name = "map loader landmark"
-	var/list/templates	//list of template types to pick from
+	var/list/map_template_names	//list of template names to pick from
 
-/obj/abstract/landmark/map_load_mark/proc/get_template()
-	. = LAZYLEN(templates) && pick(templates)
-
-/obj/abstract/landmark/map_load_mark/proc/load_template()
-	var/template = get_template()
-	var/turf/spawn_loc = get_turf(src)
-	qdel(src)
-	if(ispath(template, /datum/map_template) && istype(spawn_loc))
-		var/datum/map_template/M = new template
-		M.load(spawn_loc, TRUE)
-
-INITIALIZE_IMMEDIATE(/obj/abstract/landmark/map_load_mark/non_template)
-/obj/abstract/landmark/map_load_mark/non_template
-	name = "compile-time map loader landmark"
-/obj/abstract/landmark/map_load_mark/non_template/Initialize()
+/obj/abstract/landmark/map_load_mark/Initialize(var/mapload)
 	. = ..()
-	LAZYADD(SSmapping.compile_time_map_markers, src)
+	if(!mapload)
+		return INITIALIZE_HINT_LATELOAD
+
+/obj/abstract/landmark/map_load_mark/LateInitialize()
+	load_subtemplate()
+
+/obj/abstract/landmark/map_load_mark/proc/get_subtemplate()
+	. = LAZYLEN(map_template_names) && pick(map_template_names)
+
+/obj/abstract/landmark/map_load_mark/proc/load_subtemplate()
+	// Commenting this out temporarily as DMMS breaks when asychronously
+	// loading overlapping map templates. TODO: more robust queuing behavior
+	//set waitfor = FALSE
+
+	var/datum/map_template/template = get_subtemplate()
+	var/turf/spawn_loc = get_turf(src)
+
+	if(!QDELETED(src))
+		qdel(src)
+
+	if(istype(spawn_loc))
+		if(istext(template))
+			template = SSmapping.get_template(template)
+		if(istype(template))
+			template.load(spawn_loc, TRUE)
 
 //Throw things in the area around randomly
 /obj/abstract/landmark/carnage_mark

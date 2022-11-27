@@ -24,7 +24,7 @@
 	. = ..()
 	if(!scrubbing_gas)
 		scrubbing_gas = list()
-		for(var/g in subtypesof(/decl/material/gas))
+		for(var/g in decls_repository.get_decl_paths_of_subtype(/decl/material/gas))
 			if(g != /decl/material/gas/oxygen && g != /decl/material/gas/nitrogen)
 				scrubbing_gas += g
 
@@ -128,7 +128,7 @@
 		. = TOPIC_REFRESH
 	if (href_list["volume_adj"])
 		var/diff = text2num(href_list["volume_adj"])
-		volume_rate = Clamp(volume_rate+diff, minrate, maxrate)
+		volume_rate = clamp(volume_rate+diff, minrate, maxrate)
 		. = TOPIC_REFRESH
 
 	if(.)
@@ -186,7 +186,7 @@
 		icon_state = "scrubber:0"
 
 /obj/machinery/portable_atmospherics/powered/scrubber/huge/attackby(var/obj/item/I, var/mob/user)
-	if(isWrench(I))
+	if(IS_WRENCH(I))
 		if(use_power == POWER_USE_ACTIVE)
 			to_chat(user, "<span class='warning'>Turn \the [src] off first!</span>")
 			return
@@ -208,7 +208,7 @@
 	base_type = /obj/machinery/portable_atmospherics/powered/scrubber/huge/stationary
 
 /obj/machinery/portable_atmospherics/powered/scrubber/huge/stationary/attackby(var/obj/item/I, var/mob/user)
-	if(isWrench(I))
+	if(IS_WRENCH(I))
 		to_chat(user, "<span class='warning'>The bolts are too tight for you to unscrew!</span>")
 		return
 

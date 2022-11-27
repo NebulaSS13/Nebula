@@ -33,6 +33,7 @@
 	belt = /obj/item/gun/energy/gun
 	glasses = /obj/item/clothing/glasses/sunglasses
 	back = /obj/item/storage/backpack/satchel
+	pda_type = /obj/item/modular_computer/pda/ert
 
 	id_slot = slot_wear_id_str
 	id_type = /obj/item/card/id/centcom/ERT
@@ -46,6 +47,7 @@
 	glasses = /obj/item/clothing/glasses/sunglasses
 	gloves = /obj/item/clothing/gloves/thick/swat
 	l_pocket = /obj/item/chems/pill/cyanide
+	pda_type = /obj/item/modular_computer/pda/mercenary
 
 	id_slot = slot_wear_id_str
 	id_type = /obj/item/card/id/syndicate

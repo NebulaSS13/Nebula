@@ -20,34 +20,34 @@
 /decl/hierarchy/supply_pack/livecargo/corgi
 	name = "Live - Corgi"
 	contains = list(/mob/living/simple_animal/corgi)
-	containertype = /obj/structure/largecrate/mule
+	containertype = /obj/structure/largecrate/animal
 	containername = "corgi crate"
 
 //farm animals - useless and annoying, but potentially a good source of food. expensive because they're live animals and their produce is available cheaper
 /decl/hierarchy/supply_pack/livecargo/cow
 	name = "Live - Cow"
 	contains = list(/mob/living/simple_animal/cow)
-	containertype = /obj/structure/largecrate/mule
+	containertype = /obj/structure/largecrate/animal
 	containername = "cow crate"
 	access = access_hydroponics
 
 /decl/hierarchy/supply_pack/livecargo/goat
 	name = "Live - Goat"
 	contains = list(/mob/living/simple_animal/hostile/retaliate/goat)
-	containertype = /obj/structure/largecrate/mule
+	containertype = /obj/structure/largecrate/animal
 	containername = "goat crate"
 	access = access_hydroponics
 
 /decl/hierarchy/supply_pack/livecargo/goose
 	name = "Live - Goose"
 	contains = list(/mob/living/simple_animal/hostile/retaliate/goose)
-	containertype = /obj/structure/largecrate/mule
+	containertype = /obj/structure/largecrate/animal
 	containername = "goose containment unit"
 	access = access_hydroponics
 
 /decl/hierarchy/supply_pack/livecargo/chicken
 	name = "Live - Chicken"
 	contains = list(/mob/living/simple_animal/chick = 5)
-	containertype = /obj/structure/largecrate/mule
+	containertype = /obj/structure/largecrate/animal
 	containername = "chicken crate"
 	access = access_hydroponics

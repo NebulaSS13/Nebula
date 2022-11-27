@@ -133,7 +133,7 @@
 		/obj/item/wrench,
 		/obj/item/tank/emergency,
 		/obj/item/clothing/mask/gas,
-		/obj/item/taperoll/engineering
+		/obj/item/stack/tape_roll/barricade_tape/engineering
 	)
 	body_parts_covered = SLOT_UPPER_BODY
 
@@ -172,8 +172,10 @@
 		/obj/item/stack/medical,
 		/obj/item/chems/dropper,
 		/obj/item/chems/hypospray,
+		/obj/item/chems/inhaler,
 		/obj/item/chems/syringe,
 		/obj/item/scanner/health,
+		/obj/item/scanner/breath,
 		/obj/item/flashlight,
 		/obj/item/radio,
 		/obj/item/tank/emergency,
@@ -195,8 +197,10 @@
 		/obj/item/stack/medical,
 		/obj/item/chems/dropper,
 		/obj/item/chems/hypospray,
+		/obj/item/chems/inhaler,
 		/obj/item/chems/syringe,
-		/obj/item/scanner/health, 
+		/obj/item/scanner/health,
+		/obj/item/scanner/breath,
 		/obj/item/flashlight,
 		/obj/item/radio,
 		/obj/item/tank/emergency,
@@ -215,8 +219,10 @@
 		/obj/item/stack/medical,
 		/obj/item/chems/dropper,
 		/obj/item/chems/hypospray,
+		/obj/item/chems/inhaler,
 		/obj/item/chems/syringe,
 		/obj/item/scanner/health,
+		/obj/item/scanner/breath,
 		/obj/item/flashlight,
 		/obj/item/radio,
 		/obj/item/tank/emergency,

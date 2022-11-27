@@ -184,7 +184,7 @@ var/global/obj/temp_reagents_holder = new
 	UNSETEMPTY(reagent_volumes)
 
 	if(defer_update)
-		total_volume = Clamp(total_volume + amount, 0, maximum_volume) // approximation, call update_total() if deferring
+		total_volume = clamp(total_volume + amount, 0, maximum_volume) // approximation, call update_total() if deferring
 	else
 		handle_update(safety)
 	return TRUE
@@ -197,7 +197,7 @@ var/global/obj/temp_reagents_holder = new
 	if(reagent_volumes.len > 1 || reagent_volumes[reagent_type] <= 0)
 		cached_color = null
 	if(defer_update)
-		total_volume = Clamp(total_volume - amount, 0, maximum_volume) // approximation, call update_total() if deferring
+		total_volume = clamp(total_volume - amount, 0, maximum_volume) // approximation, call update_total() if deferring
 	else
 		handle_update(safety)
 	return TRUE
@@ -213,7 +213,7 @@ var/global/obj/temp_reagents_holder = new
 		cached_color = null
 
 		if(defer_update)
-			total_volume = Clamp(total_volume - amount, 0, maximum_volume) // approximation, call update_total() if deferring
+			total_volume = clamp(total_volume - amount, 0, maximum_volume) // approximation, call update_total() if deferring
 		else
 			handle_update()
 
@@ -276,7 +276,7 @@ var/global/obj/temp_reagents_holder = new
 		clear_reagents()
 		return
 
-	var/removing = Clamp(NONUNIT_FLOOR(amount, MINIMUM_CHEMICAL_VOLUME), 0, total_volume) // not ideal but something is making total_volume become NaN
+	var/removing = clamp(NONUNIT_FLOOR(amount, MINIMUM_CHEMICAL_VOLUME), 0, total_volume) // not ideal but something is making total_volume become NaN
 	if(!removing || total_volume <= 0)
 		. = 0
 		clear_reagents()
@@ -536,6 +536,10 @@ var/global/obj/temp_reagents_holder = new
 				return L.ingest(src, R, amount, multiplier, copy) //perhaps this is a bit of a hack, but currently there's no common proc for eating reagents
 		if(type == CHEM_TOUCH)
 			var/datum/reagents/R = L.get_contact_reagents()
+			if(R)
+				return trans_to_holder(R, amount, multiplier, copy, defer_update = defer_update)
+		if(type == CHEM_INHALE)
+			var/datum/reagents/R = L.get_inhaled_reagents()
 			if(R)
 				return trans_to_holder(R, amount, multiplier, copy, defer_update = defer_update)
 	var/datum/reagents/R = new /datum/reagents(amount, global.temp_reagents_holder)

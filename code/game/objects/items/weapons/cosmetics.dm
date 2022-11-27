@@ -4,9 +4,11 @@
 	desc = "An unbranded tube of lipstick."
 	icon = 'icons/obj/items/lipstick.dmi'
 	icon_state = "lipstick_0"
+	item_flags = ITEM_FLAG_HOLLOW
 	w_class = ITEM_SIZE_TINY
 	slot_flags = SLOT_EARS
 	color = "#e00606"
+	material = /decl/material/solid/plastic
 	var/color_desc = "ruby"
 	var/open = FALSE
 
@@ -18,16 +20,16 @@
 
 //'lipstick' and 'key' are both coloured by var color
 /obj/item/lipstick/on_update_icon()
+	. = ..()
 	if(open)
 		icon_state = "the_stick"
 	else
 		icon_state = ""
-	var/new_overlays
-	LAZYADD(new_overlays, overlay_image(icon, "lipstick_[open]", flags=RESET_COLOR))
-	LAZYADD(new_overlays, overlay_image(icon, "key"))
-	if(blood_overlay)
-		LAZYADD(new_overlays, blood_overlay)
-	overlays = new_overlays
+
+	add_overlay(list(
+		overlay_image(icon, "lipstick_[open]", flags=RESET_COLOR),
+		overlay_image(icon, "key")
+	))
 
 /obj/item/lipstick/attack_self(mob/user)
 	open = !open
@@ -86,7 +88,7 @@
 	color = "#218c17"
 	color_desc = "emerald"
 
-/obj/item/lipstick/turquoise 
+/obj/item/lipstick/turquoise
 	name = "turquoise lipstick"
 	color = "#0098f0"
 	color_desc = "turquoise"
@@ -105,6 +107,11 @@
 	name = "moonstone lipstick"
 	color = "#d8d5d5"
 	color_desc = "moonstone"
+
+/obj/item/lipstick/purple
+	name = "garnet lipstick"
+	color = "#440044"
+	color_desc = "garnet"
 
 /obj/item/lipstick/black
 	name = "onyx lipstick"

@@ -16,6 +16,11 @@
 	bullet_color = COLOR_OFF_WHITE
 	marking_color = COLOR_SUN
 
+/obj/item/ammo_casing/pistol/flash
+	desc = "A bullet casing loaded with a chemical charge."
+	projectile_type = /obj/item/projectile/energy/flash
+	marking_color = COLOR_ORANGE
+
 /obj/item/ammo_casing/pistol/emp
 	name = "haywire round"
 	desc = "A pistol bullet casing fitted with a single-use ion pulse generator."
@@ -31,7 +36,7 @@
 	icon = 'icons/obj/ammo/casings/small_pistol.dmi'
 	caliber = CALIBER_PISTOL_SMALL
 	projectile_type = /obj/item/projectile/bullet/pistol/holdout
-	
+
 /obj/item/ammo_casing/pistol/small/rubber
 	desc = "A small pistol rubber bullet casing."
 	projectile_type = /obj/item/projectile/bullet/pistol/rubber/holdout

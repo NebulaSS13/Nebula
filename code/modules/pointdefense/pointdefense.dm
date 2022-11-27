@@ -86,7 +86,7 @@
 	return data
 
 /obj/machinery/pointdefense_control/attackby(var/obj/item/thing, var/mob/user)
-	if(isMultitool(thing))
+	if(IS_MULTITOOL(thing))
 		var/datum/extension/local_network_member/pointdefense = get_extension(src, /datum/extension/local_network_member)
 		pointdefense.get_new_tag(user)
 		//Check if there is more than 1 controller
@@ -138,7 +138,7 @@
 	. = ..()
 
 /obj/machinery/pointdefense/attackby(var/obj/item/thing, var/mob/user)
-	if(isMultitool(thing))
+	if(IS_MULTITOOL(thing))
 		var/datum/extension/local_network_member/pointdefense = get_extension(src, /datum/extension/local_network_member)
 		pointdefense.get_new_tag(user)
 		return TRUE

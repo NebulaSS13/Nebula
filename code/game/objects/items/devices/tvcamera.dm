@@ -6,6 +6,13 @@
 	item_state = null
 	w_class = ITEM_SIZE_LARGE
 	slot_flags = SLOT_LOWER_BODY
+	material = /decl/material/solid/plastic
+	matter = list(
+		/decl/material/solid/metal/copper    = MATTER_AMOUNT_REINFORCEMENT, 
+		/decl/material/solid/silicon         = MATTER_AMOUNT_REINFORCEMENT, 
+		/decl/material/solid/metal/aluminium = MATTER_AMOUNT_REINFORCEMENT,
+		/decl/material/solid/glass           = MATTER_AMOUNT_TRACE,
+	)
 	var/channel = "General News Feed"
 	var/video_enabled = FALSE
 	var/obj/item/radio/radio
@@ -28,14 +35,14 @@
 	. = ..()
 	to_chat(user, "Video feed is currently: [video_enabled ? "Online" : "Offline"]")
 	to_chat(user, "Audio feed is currently: [radio.broadcasting ? "Online" : "Offline"]")
-	to_chat(user, "Photography setting is currently: [on ? "On" : "Off"]")
+	to_chat(user, "Photography setting is currently: [turned_on ? "On" : "Off"]")
 
 /obj/item/camera/tvcamera/attack_self(mob/user)
 	add_fingerprint(user)
 	user.set_machine(src)
 	var/dat = list()
-	dat += "Photography mode is currently: <a href='?src=\ref[src];photo=1'>[on ? "On" : "Off"]</a><br>"
-	dat += "Photography focus is currently: <a href='?src=\ref[src];focus=1'>[size]</a><br>"
+	dat += "Photography mode is currently: <a href='?src=\ref[src];photo=1'>[turned_on ? "On" : "Off"]</a><br>"
+	dat += "Photography focus is currently: <a href='?src=\ref[src];focus=1'>[field_of_view]</a><br>"
 	dat += "Channel name is: <a href='?src=\ref[src];channel=1'>[channel ? channel : "unidentified broadcast"]</a><br>"
 	dat += "Video streaming is: <a href='?src=\ref[src];video=1'>[video_enabled ? "Online" : "Offline"]</a><br>"
 	dat += "Microphone is: <a href='?src=\ref[src];sound=1'>[radio.broadcasting ? "Online" : "Offline"]</a><br>"
@@ -49,7 +56,7 @@
 	if(..())
 		return 1
 	if (href_list["photo"])
-		on = !on
+		turned_on = !turned_on
 	if (href_list["focus"])
 		change_size()
 	if(href_list["channel"])
@@ -84,12 +91,10 @@
 	. = ..()
 
 /obj/item/camera/tvcamera/on_update_icon()
-	cut_overlays()
+	. = ..()
 	if(video_enabled)
 		add_overlay("[icon_state]-on")
-	var/mob/living/carbon/human/H = loc
-	if(istype(H))
-		H.update_inv_hands()
+	update_held_icon()
 
 /* Assembly by a roboticist */
 /obj/item/robot_parts/head/attackby(var/obj/item/assembly/S, mob/user)
@@ -112,6 +117,7 @@ Using robohead because of restricting to roboticist */
 	item_state = "head"
 	var/buildstep = 0
 	w_class = ITEM_SIZE_LARGE
+	material = /decl/material/solid/metal/steel
 
 /obj/item/TVAssembly/attackby(var/obj/item/W, var/mob/user)
 	switch(buildstep)
@@ -129,7 +135,7 @@ Using robohead because of restricting to roboticist */
 				desc = "This TV camera assembly has a camera and audio module."
 				return
 		if(2)
-			if(isCoil(W))
+			if(IS_COIL(W))
 				var/obj/item/stack/cable_coil/C = W
 				if(!C.use(3))
 					to_chat(user, "<span class='notice'>You need three cable coils to wire the devices.</span>")
@@ -140,7 +146,7 @@ Using robohead because of restricting to roboticist */
 				desc = "This TV camera assembly has wires sticking out"
 				return
 		if(3)
-			if(isWirecutter(W))
+			if(IS_WIRECUTTER(W))
 				to_chat(user, "<span class='notice'> You trim the wires.</span>")
 				buildstep++
 				desc = "This TV camera assembly needs casing."

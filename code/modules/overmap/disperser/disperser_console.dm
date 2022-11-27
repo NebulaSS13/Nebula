@@ -133,7 +133,7 @@
 		data["strength"] = strength
 		data["range"] = range
 		data["next_shot"] = round(get_next_shot_seconds())
-		data["nopower"] = !data["faillink"] && (!front.powered() || !middle.powered() || !back.powered())
+		data["nopower"] = !data["faillink"] && ((front.stat | middle.stat | back.stat) & NOPOWER)
 		data["skill"] = user.get_skill_value(core_skill) > skill_offset
 
 		var/charge = SPAN_BOLD("UNKNOWN ERROR")

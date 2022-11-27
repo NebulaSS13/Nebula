@@ -103,11 +103,14 @@
 	if(!target.check_has_mouth())
 		to_chat(user, "<span class='warning'>\The [target] doesn't have a mouth.</span>")
 		return
-	if(target.wear_mask && target != breather)
+
+	var/obj/item/mask = target.get_equipped_item(slot_wear_mask_str)
+	if(mask && target != breather)
 		to_chat(user, "<span class='warning'>\The [target] is already wearing a mask.</span>")
 		return
-	if(target.head && (target.head.body_parts_covered & SLOT_FACE))
-		to_chat(user, "<span class='warning'>Remove their [target.head] first.</span>")
+	var/obj/item/head = target.get_equipped_item(slot_head_str)
+	if(head && (head.body_parts_covered & SLOT_FACE))
+		to_chat(user, "<span class='warning'>Remove their [head] first.</span>")
 		return
 	if(!tank)
 		to_chat(user, "<span class='warning'>There is no tank in \the [src].</span>")
@@ -123,13 +126,14 @@
 		to_chat(user, "<span class='warning'>\The pump is already in use.</span>")
 		return
 	//Checking if breather is still valid
-	if(target == breather && target.wear_mask != contained)
+	mask = target.get_equipped_item(slot_wear_mask_str)
+	if(target == breather && (!mask || mask != contained))
 		to_chat(user, "<span class='warning'>\The [target] is not using the supplied mask.</span>")
 		return
 	return 1
 
 /obj/machinery/oxygen_pump/attackby(obj/item/W, mob/user)
-	if(isScrewdriver(W))
+	if(IS_SCREWDRIVER(W))
 		stat ^= MAINT
 		user.visible_message("<span class='notice'>\The [user] [stat & MAINT ? "opens" : "closes"] \the [src].</span>", "<span class='notice'>You [stat & MAINT ? "open" : "close"] \the [src].</span>")
 		if(stat & MAINT)

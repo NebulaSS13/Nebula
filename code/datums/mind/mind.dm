@@ -49,7 +49,6 @@
 
 	var/has_been_rev = 0//Tracks if this mind has been a rev or not
 
-	var/faction 			//associated faction
 	var/datum/changeling/changeling		//changeling holder
 
 	var/rev_cooldown = 0

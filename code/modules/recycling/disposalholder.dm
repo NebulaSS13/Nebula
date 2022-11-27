@@ -29,16 +29,9 @@
 	// note AM since can contain mobs or objs
 	for(var/atom/movable/AM in stuff)
 		AM.forceMove(src)
-		if(istype(AM, /obj/structure/bigDelivery) && !hasmob)
-			var/obj/structure/bigDelivery/T = AM
-			src.destinationTag = T.sortTag
-		if(istype(AM, /obj/item/smallDelivery) && !hasmob)
-			var/obj/item/smallDelivery/T = AM
-			src.destinationTag = T.sortTag
-		//Drones can mail themselves through maint.
-		if(is_drone(AM))
-			var/mob/living/silicon/robot/drone/drone = AM
-			src.destinationTag = drone.mail_destination
+		var/datum/extension/sorting_tag/ST = get_extension(AM, /datum/extension/sorting_tag)
+		if(ST)
+			destinationTag = ST.destination
 
 /obj/structure/disposalholder/proc/check_mob(list/stuff, max_depth = 1)
 	. = list()
@@ -138,11 +131,10 @@
 
 	U.last_special = world.time+100
 
-	if (src.loc)
-		for (var/mob/M in hearers(src.loc.loc))
-			to_chat(M, "<FONT size=[max(0, 5 - get_dist(src, M))]>CLONG, clong!</FONT>")
-
-	playsound(src.loc, 'sound/effects/clang.ogg', 50, 0, 0)
+	var/turf/our_turf = get_turf(src)
+	if (our_turf)
+		our_turf.audible_message("You hear a clanging noise.")
+		playsound(our_turf, 'sound/effects/clang.ogg', 50, 0, 0)
 
 // called to vent all gas in holder to a location
 /obj/structure/disposalholder/proc/vent_gas(var/atom/location)

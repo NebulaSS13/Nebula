@@ -12,12 +12,20 @@
 
 /obj/item/stock_parts/computer/attackby(var/obj/item/W, var/mob/user)
 	// Multitool. Runs diagnostics
-	if(isMultitool(W))
+	if(IS_MULTITOOL(W))
 		to_chat(user, "***** DIAGNOSTICS REPORT *****")
 		to_chat(user, jointext(diagnostics(), "\n"))
 		to_chat(user, "******************************")
 		return 1
 	return ..()
+
+/obj/item/stock_parts/computer/on_install(obj/machinery/machine)
+	. = ..()
+	do_after_install(machine, TRUE)
+
+/obj/item/stock_parts/computer/on_uninstall(obj/machinery/machine, temporary)
+	do_before_uninstall(machine, TRUE)
+	. = ..()
 
 // Called on multitool click, prints diagnostic information to the user.
 /obj/item/stock_parts/computer/proc/diagnostics()
@@ -49,3 +57,7 @@
 	var/datum/extension/interactive/os/os = get_extension(loc, /datum/extension/interactive/os)
 	if(os)
 		os.recalc_power_usage()
+
+/obj/item/stock_parts/computer/proc/do_after_install(atom/device, loud)
+
+/obj/item/stock_parts/computer/proc/do_before_uninstall(atom/device, loud)

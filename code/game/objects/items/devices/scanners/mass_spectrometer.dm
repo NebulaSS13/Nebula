@@ -20,6 +20,7 @@
 	update_icon()
 
 /obj/item/scanner/spectrometer/on_update_icon()
+	. = ..()
 	icon_state = initial(icon_state)
 	if(reagents.total_volume)
 		icon_state += "_s"

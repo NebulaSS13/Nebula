@@ -8,8 +8,6 @@
 
 	var/wet = 0
 	var/image/wet_overlay = null
-	var/to_be_destroyed = 0 //Used for fire, if a melting temperature was reached, it will be destroyed
-	var/max_fire_temperature_sustained = 0 //The max temperature of the fire which it was subjected to
 	var/dirt = 0
 	var/timer_id
 
@@ -110,12 +108,11 @@
 /mob/living/carbon/human/HandleBloodTrail(turf/simulated/T)
 	// Tracking blood
 	var/obj/item/source
-	if(shoes)
-		var/obj/item/clothing/shoes/S = shoes
-		if(istype(S))
-			S.handle_movement(src, MOVING_QUICKLY(src))
-			if(S.coating && S.coating.total_volume > 1)
-				source = S
+	var/obj/item/clothing/shoes/shoes = get_equipped_item(slot_shoes_str)
+	if(istype(shoes))
+		shoes.handle_movement(src, MOVING_QUICKLY(src))
+		if(shoes.coating && shoes.coating.total_volume > 1)
+			source = shoes
 	else
 		for(var/bp in list(BP_L_FOOT, BP_R_FOOT))
 			var/obj/item/organ/external/stomper = GET_EXTERNAL_ORGAN(src, bp)
@@ -168,7 +165,7 @@
 		new /obj/effect/decal/cleanable/blood/oil(src)
 
 /turf/simulated/attackby(var/obj/item/thing, var/mob/user)
-	if(isCoil(thing) && try_build_cable(thing, user))
+	if(IS_COIL(thing) && try_build_cable(thing, user))
 		return TRUE
 	return ..()
 
@@ -177,10 +174,6 @@
 	holy = istype(A) && (A.area_flags & AREA_FLAG_HOLY)
 	levelupdate()
 	. = ..()
-
-/turf/simulated/initialize_ambient_light(var/mapload)
-	for(var/turf/T AS_ANYTHING in RANGE_TURFS(src, 1))
-		T.update_ambient_light(mapload)
 
 /turf/simulated/Destroy()
 	if (zone)

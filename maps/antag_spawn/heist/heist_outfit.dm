@@ -1,5 +1,7 @@
 /decl/hierarchy/outfit/raider
 	name =    "Special Role - Raider"
+	l_ear = /obj/item/radio/headset/raider
+	id_type = /obj/item/card/id/syndicate
 	var/list/raider_uniforms = list(
 		/obj/item/clothing/under/soviet,
 		/obj/item/clothing/under/pirate,
@@ -71,7 +73,7 @@
 	randomize_clothing()
 	. = ..()
 	if(. && H)
-		if(!H.shoes)
+		if(!H.get_equipped_item(slot_shoes_str))
 			H.equip_to_slot_or_del(new /obj/item/clothing/shoes/sandal(H), slot_shoes_str)
 
 		var/new_gun = pick(raider_guns)
@@ -97,9 +99,9 @@
 			var/datum/extension/holster/holster_extension = get_extension(holster, /datum/extension/holster)
 			holster_extension.holstered = primary
 			primary.forceMove(holster)
-		else if(!H.belt && (primary.slot_flags & SLOT_LOWER_BODY))
+		else if(!H.get_equipped_item(slot_belt_str) && (primary.slot_flags & SLOT_LOWER_BODY))
 			H.equip_to_slot_or_del(primary, slot_belt_str)
-		else if(!H.back && (primary.slot_flags & SLOT_BACK))
+		else if(!H.get_equipped_item(slot_back_str) && (primary.slot_flags & SLOT_BACK))
 			H.equip_to_slot_or_del(primary, slot_back_str)
 		else
 			H.put_in_hands(primary)
@@ -117,7 +119,7 @@
 				H.put_in_hands(ammobox)
 
 		if(holster)
-			var/obj/item/clothing/under/uniform = H.w_uniform
+			var/obj/item/clothing/under/uniform = H.get_equipped_item(slot_w_uniform_str)
 			if(istype(uniform) && uniform.can_attach_accessory(holster))
 				uniform.attackby(holster, H)
 			else

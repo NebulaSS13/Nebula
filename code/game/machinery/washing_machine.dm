@@ -118,7 +118,7 @@
 
 /obj/machinery/washing_machine/attackby(obj/item/W, mob/user)
 	if(!(state & WASHER_STATE_CLOSED))
-		if(!crayon && istype(W,/obj/item/pen/crayon))
+		if(!crayon && IS_PEN(W))
 			if(!user.unEquip(W, src))
 				return
 			crayon = W

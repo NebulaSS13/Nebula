@@ -1,4 +1,4 @@
-/obj/effect/submap_landmark
+/obj/abstract/submap_landmark
 	icon = 'icons/misc/mark.dmi'
 	invisibility = INVISIBILITY_MAXIMUM
 	anchored = TRUE
@@ -6,12 +6,12 @@
 	density = FALSE
 	opacity = FALSE
 
-/obj/effect/submap_landmark/joinable_submap
+/obj/abstract/submap_landmark/joinable_submap
 	icon_state = "x4"
 	var/archetype
 	var/submap_datum_type = /datum/submap
 
-/obj/effect/submap_landmark/joinable_submap/Initialize(var/mapload)
+/obj/abstract/submap_landmark/joinable_submap/Initialize(var/mapload)
 	. = ..(mapload)
 	if(!SSmapping.submaps[name] && ispath(archetype, /decl/submap_archetype))
 		var/datum/submap/submap = new submap_datum_type(z)
@@ -24,8 +24,18 @@
 			to_world_log( "Submap error - mapped landmark had invalid archetype.")
 	return INITIALIZE_HINT_QDEL
 
-/obj/effect/submap_landmark/spawnpoint
+var/global/list/submap_spawnpoints_by_z = list()
+INITIALIZE_IMMEDIATE(/obj/abstract/submap_landmark/spawnpoint)
+/obj/abstract/submap_landmark/spawnpoint
 	icon_state = "x3"
 
-/obj/effect/submap_landmark/spawnpoint/survivor
+/obj/abstract/submap_landmark/spawnpoint/Initialize()
+	. = ..()
+	LAZYADD(global.submap_spawnpoints_by_z["[z]"], src)
+
+/obj/abstract/submap_landmark/spawnpoint/Destroy()
+	LAZYREMOVE(global.submap_spawnpoints_by_z["[z]"], src)
+	. = ..()
+
+/obj/abstract/submap_landmark/spawnpoint/survivor
 	name = "Survivor"

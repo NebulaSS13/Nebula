@@ -1,7 +1,5 @@
 /decl/grab
-
 	var/name = "generic grab"
-	var/fancy_desc
 	var/decl/grab/upgrab						// The grab that this will upgrade to if it upgrades, null means no upgrade
 	var/decl/grab/downgrab						// The grab that this will downgrade to if it downgrades, null means break grab on downgrade
 	var/stop_move = 0							// Whether or not the grabbed person can move out of the grab
@@ -101,7 +99,7 @@
 		to_chat(G.assailant, SPAN_WARNING("You must wait before you can do that."))
 		return FALSE
 
-	G.is_currently_resolving_hit = TRUE 
+	G.is_currently_resolving_hit = TRUE
 	switch(G.assailant.a_intent)
 		if(I_HELP)
 			if(on_hit_help(G, A, P))
@@ -211,7 +209,7 @@
 		return
 	if(affecting.incapacitated(INCAPACITATION_KNOCKOUT | INCAPACITATION_STUNNED))
 		to_chat(G.affecting, SPAN_WARNING("You can't resist in your current state!"))
-	var/skill_mod = Clamp(affecting.get_skill_difference(SKILL_COMBAT, assailant), -1, 1)
+	var/skill_mod = clamp(affecting.get_skill_difference(SKILL_COMBAT, assailant), -1, 1)
 	var/break_strength = breakability + size_difference(affecting, assailant) + skill_mod
 
 	if(affecting.incapacitated(INCAPACITATION_ALL))
@@ -223,7 +221,7 @@
 		to_chat(G.affecting, SPAN_WARNING("You try to break free but feel that unless something changes, you'll never escape!"))
 		return
 
-	var/break_chance = break_chance_table[Clamp(break_strength, 1, break_chance_table.len)]
+	var/break_chance = break_chance_table[clamp(break_strength, 1, break_chance_table.len)]
 	if(prob(break_chance))
 		if(can_downgrade_on_resist && !prob((break_chance+100)/2))
 			affecting.visible_message(SPAN_WARNING("\The [affecting] has loosened \the [assailant]'s grip!"))

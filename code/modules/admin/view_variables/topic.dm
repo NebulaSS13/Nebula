@@ -151,17 +151,6 @@
 		if(usr.client)
 			usr.client.cmd_assume_direct_control(M)
 
-	else if(href_list["make_skeleton"])
-		if(!check_rights(R_FUN))	return
-
-		var/mob/living/carbon/human/H = locate(href_list["make_skeleton"])
-		if(!istype(H))
-			to_chat(usr, "This can only be used on instances of type /mob/living/carbon/human")
-			return
-
-		H.ChangeToSkeleton()
-		href_list["datumrefresh"] = href_list["make_skeleton"]
-
 	else if(href_list["delthis"])
 		if(!check_rights(R_DEBUG|R_SERVER))	return
 
@@ -559,17 +548,17 @@
 			return
 
 		switch(Text)
-			if("brute")
+			if(BRUTE)
 				L.adjustBruteLoss(amount)
-			if("fire")
+			if(BURN)
 				L.adjustFireLoss(amount)
-			if("toxin")
+			if(TOX)
 				L.adjustToxLoss(amount)
-			if("oxygen")
+			if(OXY)
 				L.adjustOxyLoss(amount)
-			if("brain")
+			if(BP_BRAIN)
 				L.adjustBrainLoss(amount)
-			if("clone")
+			if(CLONE)
 				L.adjustCloneLoss(amount)
 			else
 				to_chat(usr, "You caused an error. DEBUG: Text:[Text] Mob:[L]")

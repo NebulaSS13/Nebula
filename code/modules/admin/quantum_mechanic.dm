@@ -33,7 +33,7 @@
 
 	Q.reload_fullscreen()
 
-	for(var/language in subtypesof(/decl/language))
+	for(var/language in decls_repository.get_decl_paths_of_subtype(/decl/language))
 		Q.add_language(language)
 
 	spark_at(Q)
@@ -277,7 +277,7 @@
 
 /obj/item/card/id/quantum/Initialize()
 	. = ..()
-	access = get_all_accesses() | get_all_centcom_access() | get_all_syndicate_access()
+	access = get_all_accesses() | get_all_centcom_access() | get_all_antagonist_access()
 
 /obj/item/card/id/quantum/attack_hand(mob/user)
 	if(!user)

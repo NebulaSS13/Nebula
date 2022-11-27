@@ -11,6 +11,7 @@
 	throw_speed = 1
 	throw_range = 2
 	w_class = ITEM_SIZE_TINY
+	material = /decl/material/solid/cardboard //#TODO: Replace with paper
 	var/currency
 	var/absolute_worth = 0
 	var/can_flip = TRUE // Cooldown tracker for single-coin flips.
@@ -24,7 +25,7 @@
 		update_from_worth()
 
 /obj/item/cash/get_base_value()
-	. = holographic ? 0 : absolute_worth 
+	. = holographic ? 0 : absolute_worth
 
 /obj/item/cash/proc/set_currency(var/new_currency)
 	currency = new_currency
@@ -59,9 +60,9 @@
 		L.absorb_cash(src, user)
 
 /obj/item/cash/on_update_icon()
+	. = ..()
 	icon_state = ""
 	var/draw_worth = get_worth()
-	cut_overlays()
 	var/decl/currency/cur = GET_DECL(currency)
 	var/i = 0
 	for(var/datum/denomination/denomination in cur.denominations)
@@ -122,7 +123,7 @@
 		return TRUE
 
 	var/amount = input(usr, "How many [cur.name] do you want to take? (0 to [get_worth() - 1])", "Take Money", 20) as num
-	amount = round(Clamp(amount, 0, FLOOR(get_worth() - 1)))
+	amount = round(clamp(amount, 0, FLOOR(get_worth() - 1)))
 
 	if(!amount || QDELETED(src) || get_worth() <= 1 || user.incapacitated() || loc != user)
 		return TRUE
@@ -173,7 +174,8 @@
 	icon_state = ICON_STATE_WORLD
 	desc = "A digital stick that holds an amount of money."
 	w_class = ITEM_SIZE_TINY
-
+	material = /decl/material/solid/plastic
+	matter = list(/decl/material/solid/metal/copper = MATTER_AMOUNT_TRACE, /decl/material/solid/silicon = MATTER_AMOUNT_TRACE)
 	var/max_worth = 5000
 	var/loaded_worth = 0
 	var/creator			// Who originally created this card. Mostly for book-keeping purposes. In game these cards are 'anonymous'.
@@ -247,7 +249,7 @@
 		var/decl/currency/cur = GET_DECL(currency)
 		to_chat(user, SPAN_NOTICE("[html_icon(src)] [src] chirps, \"Completed transfer of [amount] [cur.name].\""))
 		return TRUE
-	
+
 	if(lock.attackby(W, user))
 		return TRUE
 	return ..()
@@ -260,7 +262,7 @@
 
 /obj/item/charge_stick/attack_self(var/mob/user)
 	var/datum/extension/lockable/lock = get_extension(src, /datum/extension/lockable)
-	lock.ui_interact(user)		
+	lock.ui_interact(user)
 
 /obj/item/charge_stick/proc/is_locked()
 	var/datum/extension/lockable/lock = get_extension(src, /datum/extension/lockable)
@@ -275,7 +277,7 @@
 		overlays += I
 
 	if(get_world_inventory_state() == ICON_STATE_WORLD)
-		return 
+		return
 
 	var/datum/extension/lockable/lock = get_extension(src, /datum/extension/lockable)
 	if(lock.locked)
@@ -316,6 +318,6 @@
 
 /atom/movable/proc/GetChargeStick()
 	return null
-	
+
 /obj/item/charge_stick/GetChargeStick()
 	return src

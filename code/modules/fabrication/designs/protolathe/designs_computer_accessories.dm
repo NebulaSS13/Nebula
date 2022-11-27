@@ -31,3 +31,19 @@
 
 /datum/fabricator_recipe/protolathe/comp_acc/medical_scanner
 	path = /obj/item/stock_parts/computer/scanner/medical
+
+//////////////////////////////////////////////////////////////////
+// Frames
+//////////////////////////////////////////////////////////////////
+/datum/fabricator_recipe/protolathe/comp_frames
+	category = "Computer Frames"
+	path = /obj/item/modular_computer/laptop
+
+/datum/fabricator_recipe/protolathe/comp_frames/tablet_frame
+	path = /obj/item/modular_computer/tablet
+
+/datum/fabricator_recipe/protolathe/comp_frames/telescreen_frame
+	path = /obj/item/frame/modular_telescreen
+
+/datum/fabricator_recipe/protolathe/comp_frames/telescreen_frame_kit
+	path = /obj/item/frame/modular_telescreen/kit

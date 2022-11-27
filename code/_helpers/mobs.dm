@@ -123,7 +123,7 @@
 	if (progbar)
 		qdel(progbar)
 
-/proc/do_after(mob/user, delay, atom/target = null, check_holding = 1, progress = 1, var/incapacitation_flags = INCAPACITATION_DEFAULT, var/same_direction = 0, var/can_move = 0)
+/proc/do_after(mob/user, delay, atom/target = null, check_holding = 1, progress = 1, incapacitation_flags = INCAPACITATION_DEFAULT, same_direction = 0, can_move = 0, max_distance, check_in_view = 0)
 	if(!user)
 		return 0
 	var/atom/target_loc = null
@@ -159,7 +159,11 @@
 			drifting = 0
 			original_loc = user.loc
 
-		if(QDELETED(user) || user.incapacitated(incapacitation_flags) || (!drifting && user.loc != original_loc && !can_move) || (same_direction && user.dir != original_dir))
+		if(QDELETED(user) || user.incapacitated(incapacitation_flags) || (!drifting && user.loc != original_loc && !can_move) || (same_direction && user.dir != original_dir) || (!isnull(max_distance) && get_dist(user, target) > max_distance))
+			. = 0
+			break
+
+		if(check_in_view && !(target in view(max_distance, user)))
 			. = 0
 			break
 

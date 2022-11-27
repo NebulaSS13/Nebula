@@ -17,6 +17,15 @@
 	edge =              0
 	armor_penetration = 0
 
+	material = /decl/material/solid/metal/steel
+	matter = list(
+		/decl/material/solid/plastic          = MATTER_AMOUNT_SECONDARY,
+		/decl/material/solid/glass            = MATTER_AMOUNT_REINFORCEMENT,
+		/decl/material/solid/metal/copper     = MATTER_AMOUNT_REINFORCEMENT,
+		/decl/material/solid/metal/plutonium  = MATTER_AMOUNT_REINFORCEMENT,
+		/decl/material/solid/gemstone/diamond = MATTER_AMOUNT_REINFORCEMENT,
+	)
+
 	var/lighting_color = COLOR_SABER_GREEN
 
 	var/active = FALSE
@@ -141,7 +150,7 @@
 	. = active ? ITEM_SIZE_NO_CONTAINER : ..()
 
 /obj/item/energy_blade/on_update_icon()
-	cut_overlays()
+	. = ..()
 	icon_state = get_world_inventory_state()
 	if(active && check_state_in_icon("[icon_state]-extended", icon))
 		if(plane == HUD_PLANE)

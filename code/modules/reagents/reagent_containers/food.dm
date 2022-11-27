@@ -38,10 +38,14 @@
 /obj/item/chems/food/standard_pour_into(mob/user, atom/target)
 	return FALSE
 
+/obj/item/chems/food/update_container_name()
+	return FALSE
+
+/obj/item/chems/food/update_container_desc()
+	return FALSE
+
 /obj/item/chems/food/Initialize()
 	.=..()
-	if(nutriment_amt)
-		reagents.add_reagent(nutriment_type, nutriment_amt, nutriment_desc)
 	amount_per_transfer_from_this = bitesize
 
 	//Placeholder for effect that trigger on eating that aren't tied to reagents.
@@ -265,8 +269,17 @@
 	update_icon()
 
 /obj/item/chems/food/on_update_icon()
-	cut_overlays()
+	. = ..()
+	//Since other things that don't have filling override this, slap it into its own proc to avoid the overhead of scanning through the icon file
+	apply_filling_overlay() //#TODO: Maybe generalise food item icons.
+
+/obj/item/chems/food/proc/apply_filling_overlay()
 	if(check_state_in_icon("[icon_state]_filling", icon))
-		var/image/I = image(icon, "[icon_state]_filling")
-		I.color = filling_color
-		add_overlay(I)
+		add_overlay(overlay_image(icon, "[icon_state]_filling", filling_color))
+
+//Since we automatically create some reagents types for the nutriments, make sure we call this proc when overriding it
+/obj/item/chems/food/populate_reagents()
+	. = ..()
+	SHOULD_CALL_PARENT(TRUE)
+	if(nutriment_amt)
+		reagents.add_reagent(nutriment_type, nutriment_amt, nutriment_desc)

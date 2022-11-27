@@ -385,7 +385,7 @@ var/global/list/diversion_junctions = list()
 	for(var/mob/living/silicon/robot/drone/D in stuff)
 		wrapcheck = 1
 
-	for(var/obj/item/smallDelivery/O in stuff)
+	for(var/obj/item/parcel/O in stuff)
 		wrapcheck = 1
 
 	if(wrapcheck == 1)
@@ -472,7 +472,7 @@ var/global/list/diversion_junctions = list()
 	return ..()
 
 /obj/machinery/disposal_switch/attackby(obj/item/I, mob/user, params)
-	if(isCrowbar(I))
+	if(IS_CROWBAR(I))
 		var/obj/item/disposal_switch_construct/C = new/obj/item/disposal_switch_construct(src.loc, id_tag)
 		transfer_fingerprints_to(C)
 		user.visible_message("<span class='notice'>\The [user] deattaches \the [src]</span>")
@@ -500,6 +500,7 @@ var/global/list/diversion_junctions = list()
 	icon = 'icons/obj/recycling.dmi'
 	icon_state = "switch-off"
 	w_class = ITEM_SIZE_LARGE
+	material = /decl/material/solid/metal/steel
 	var/id_tag
 
 /obj/item/disposal_switch_construct/Initialize(var/id)
@@ -535,7 +536,6 @@ var/global/list/diversion_junctions = list()
 	icon_state = "outlet"
 	density = 1
 	anchored = 1
-	var/active = 0
 	var/turf/target	// this will be where the output objects are 'thrown' to.
 	var/mode = 0
 	atom_flags = ATOM_FLAG_NO_TEMP_CHANGE | ATOM_FLAG_CLIMBABLE
@@ -574,7 +574,7 @@ var/global/list/diversion_junctions = list()
 	if(!I || !user)
 		return
 	src.add_fingerprint(user, 0, I)
-	if(isScrewdriver(I))
+	if(IS_SCREWDRIVER(I))
 		if(mode==0)
 			mode=1
 			playsound(src.loc, 'sound/items/Screwdriver.ogg', 50, 1)
@@ -587,7 +587,7 @@ var/global/list/diversion_junctions = list()
 			return
 	else if(istype(I,/obj/item/weldingtool) && mode==1)
 		var/obj/item/weldingtool/W = I
-		if(W.remove_fuel(0,user))
+		if(W.weld(0,user))
 			playsound(src.loc, 'sound/items/Welder2.ogg', 100, 1)
 			to_chat(user, "You start slicing the floorweld off the disposal outlet.")
 			if(do_after(user,20, src))

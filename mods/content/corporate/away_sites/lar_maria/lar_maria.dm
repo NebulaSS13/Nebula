@@ -8,7 +8,6 @@
 
 /datum/map_template/ruin/away_site/lar_maria
 	name = "Lar Maria"
-	id = "awaysite_lar_maria"
 	description = "An orbital virus research station."
 	prefix = "mods/content/corporate/away_sites/"
 	suffixes = list("lar_maria/lar_maria-1.dmm", "lar_maria/lar_maria-2.dmm")

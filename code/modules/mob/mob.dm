@@ -7,10 +7,12 @@
 	QDEL_NULL_LIST(pinned)
 	QDEL_NULL_LIST(embedded)
 
+	QDEL_NULL(typing_indicator)
+
 	unset_machine()
 	QDEL_NULL(hud_used)
-	if(s_active)
-		s_active.close(src)
+	if(active_storage)
+		active_storage.close(src)
 	if(istype(ability_master))
 		QDEL_NULL(ability_master)
 	if(istype(skillset))
@@ -214,7 +216,7 @@
 #undef ENCUMBERANCE_MOVEMENT_MOD
 
 /mob/proc/encumbrance()
-	for(var/obj/item/grab/G AS_ANYTHING in get_active_grabs())
+	for(var/obj/item/grab/G as anything in get_active_grabs())
 		. = max(., G.grab_slowdown())
 	. *= (0.8 ** size_strength_mod())
 	. *= (0.5 + 1.5 * (SKILL_MAX - get_skill_value(SKILL_HAULING))/(SKILL_MAX - SKILL_MIN))
@@ -322,7 +324,7 @@
 
 	if((is_blind(src) || usr.stat) && !isobserver(src))
 		to_chat(src, "<span class='notice'>Something is there but you can't see it.</span>")
-		return 1
+		return TRUE
 
 	face_atom(A)
 
@@ -350,6 +352,8 @@
 		var/turf/target_turf = get_turf(A)
 		if(source_turf && source_turf.z == target_turf?.z)
 			distance = get_dist(source_turf, target_turf)
+
+	events_repository.raise_event(/decl/observ/mob_examining, src, A)
 
 	if(!A.examine(src, distance))
 		PRINT_STACK_TRACE("Improper /examine() override: [log_info_line(A)]")
@@ -826,7 +830,9 @@
 
 /mob/proc/set_stat(var/new_stat)
 	. = stat != new_stat
-	stat = new_stat
+	if(.)
+		stat = new_stat
+		SStyping.set_indicator_state(client, FALSE)
 
 /mob/verb/northfaceperm()
 	set hidden = 1
@@ -1071,7 +1077,7 @@
 		if(brolly.gives_weather_protection())
 			LAZYADD(., brolly)
 	if(!LAZYLEN(.))
-		for(var/turf/T AS_ANYTHING in RANGE_TURFS(loc, 1))
+		for(var/turf/T as anything in RANGE_TURFS(loc, 1))
 			for(var/obj/structure/flora/tree/tree in T)
 				if(tree.protects_against_weather)
 					LAZYADD(., tree)
@@ -1079,10 +1085,10 @@
 /mob/living/carbon/human/get_weather_protection()
 	. = ..()
 	if(!LAZYLEN(.))
-		var/obj/item/clothing/head/check_head = head
+		var/obj/item/clothing/head/check_head = get_equipped_item(slot_head_str)
 		if(!istype(check_head) || !check_head.protects_against_weather)
 			return
-		var/obj/item/clothing/suit/check_body = wear_suit
+		var/obj/item/clothing/suit/check_body = get_equipped_item(slot_wear_suit_str)
 		if(!istype(check_body) || !check_body.protects_against_weather)
 			return
 		LAZYADD(., check_head)
@@ -1150,3 +1156,58 @@
 		return A.is_open() && neighbor.Adjacent(A)
 
 	return FALSE
+
+/mob/proc/handle_flashed(var/obj/item/flash/flash, var/flash_strength)
+	return FALSE
+
+/mob/proc/do_flash_animation()
+	return
+
+/mob/proc/unset_machine()
+	src.machine = null
+
+/mob/proc/set_machine(var/obj/O)
+	if(src.machine)
+		unset_machine()
+	src.machine = O
+	if(istype(O))
+		O.in_use = 1
+
+// Mob procs relating to the typing indicator subsystem.
+/mob/Logout()
+	if (typing_indicator)
+		vis_contents -= typing_indicator
+	is_typing = FALSE
+	..()
+
+/mob/proc/get_speech_bubble_state_modifier()
+	return
+
+/mob/verb/say_wrapper()
+	set name = ".Say"
+	set hidden = TRUE
+	SStyping.set_indicator_state(client, TRUE)
+	var/message = input("","say (text)") as text|null
+	SStyping.set_indicator_state(client, FALSE)
+	if (message)
+		say_verb(message)
+
+/mob/verb/me_wrapper()
+	set name = ".Me"
+	set hidden = TRUE
+	SStyping.set_indicator_state(client, TRUE)
+	var/message = input("","me (text)") as text|null
+	SStyping.set_indicator_state(client, FALSE)
+	if (message)
+		me_verb(message)
+
+/mob/verb/whisper_wrapper()
+	set name = ".Whisper"
+	set hidden = TRUE
+	if(config.show_typing_indicator_for_whispers)
+		SStyping.set_indicator_state(client, TRUE)
+	var/message = input("","me (text)") as text|null
+	if(config.show_typing_indicator_for_whispers)
+		SStyping.set_indicator_state(client, FALSE)
+	if (message)
+		whisper(message)

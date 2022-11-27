@@ -37,7 +37,7 @@
 		sound_id = "[type]_[sequential_id(/obj/machinery/computer/ship/sensors)]"
 
 	var/obj/machinery/shipsensors/sensors = get_sensors()
-	if(sensors && linked && sensors.use_power ** sensors.powered())
+	if(linked && sensors?.use_power && !(sensors.stat & NOPOWER))
 		var/volume = 10
 		if(!sound_token)
 			sound_token = play_looping_sound(src, sound_id, working_sound, volume = volume, range = 10)
@@ -62,7 +62,7 @@
 		data["critical_heat"] = sensors.critical_heat
 		if(sensors.is_broken())
 			data["status"] = "DESTROYED"
-		else if(!sensors.powered())
+		else if(sensors.stat & NOPOWER)
 			data["status"] = "NO POWER"
 		else if(!sensors.in_vacuum())
 			data["status"] = "VACUUM SEAL BROKEN"
@@ -133,7 +133,7 @@
 			if(!CanInteract(user,state))
 				return TOPIC_NOACTION
 			if (nrange)
-				sensors.set_range(Clamp(nrange, 1, world.view))
+				sensors.set_range(clamp(nrange, 1, world.view))
 			return TOPIC_REFRESH
 		if (href_list["toggle"])
 			sensors.toggle()
@@ -213,7 +213,7 @@
 
 /obj/machinery/shipsensors/power_change()
 	. = ..()
-	if(use_power && !powered())
+	if(use_power && (stat & NOPOWER))
 		toggle()
 
 /obj/machinery/shipsensors/proc/set_range(nrange)
@@ -228,7 +228,7 @@
 
 /obj/machinery/shipsensors/RefreshParts()
 	..()
-	sensor_strength = Clamp(total_component_rating_of_type(/obj/item/stock_parts/manipulator), 0, 5)
+	sensor_strength = clamp(total_component_rating_of_type(/obj/item/stock_parts/manipulator), 0, 5)
 
 /obj/machinery/shipsensors/weak
 	heat_reduction = 0.2

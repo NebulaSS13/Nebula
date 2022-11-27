@@ -18,10 +18,6 @@
 	one_hand_penalty = 2
 	bulk = 3
 
-/obj/item/gun/projectile/revolver/AltClick()
-	if(CanPhysicallyInteract(usr))
-		spin_cylinder()
-
 /obj/item/gun/projectile/revolver/verb/spin_cylinder()
 	set name = "Spin cylinder"
 	set desc = "Fun when you're bored out of your skull."
@@ -67,3 +63,15 @@
 	cap = FALSE
 	update_icon()
 	return 1
+
+/obj/item/gun/projectile/revolver/get_alt_interactions(var/mob/user)
+	. = ..()
+	LAZYADD(., /decl/interaction_handler/revolver_spin_cylinder)
+
+/decl/interaction_handler/revolver_spin_cylinder
+	name = "Spin Cylinder"
+	expected_target_type = /obj/item/gun/projectile/revolver
+
+/decl/interaction_handler/revolver_spin_cylinder/invoked(var/atom/target, var/mob/user)
+	var/obj/item/gun/projectile/revolver/R = target
+	R.spin_cylinder()

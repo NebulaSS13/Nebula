@@ -9,7 +9,7 @@
 	w_class = ITEM_SIZE_SMALL
 	throw_speed = 1
 	throw_range = 15
-	var/state
+	material = /decl/material/solid/plastic
 	var/datum/gas_mixture/air_contents = null
 
 /obj/item/latexballon/proc/blow(obj/item/tank/tank)

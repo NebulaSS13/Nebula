@@ -14,11 +14,14 @@
 	drop_sound = 'sound/foley/tooldrop2.ogg'
 	singular_name = "sheet"
 	plural_name = "sheets"
+	abstract_type = /obj/item/stack/material
+	is_spawnable_type = FALSE // Mapped subtypes set this so they can be spawned from the verb.
 	var/decl/material/reinf_material
 
 /obj/item/stack/material/Initialize(mapload, var/amount, var/_material, var/_reinf_material)
 	. = ..(mapload, amount, _material)
 	if(!istype(material))
+		log_warning("[src] ([x],[y],[z]) was deleted because it didn't have a valid material set('[material]')!")
 		return INITIALIZE_HINT_QDEL
 	if(!_reinf_material)
 		_reinf_material = reinf_material
@@ -31,6 +34,11 @@
 		obj_flags |= OBJ_FLAG_CONDUCTIBLE
 	else
 		obj_flags &= (~OBJ_FLAG_CONDUCTIBLE)
+	//Sound setup
+	if(material.sound_manipulate)
+		pickup_sound = material.sound_manipulate
+	if(material.sound_dropped)
+		drop_sound = material.sound_dropped
 	update_strings()
 
 /obj/item/stack/material/get_recipes()
@@ -63,6 +71,13 @@
 		SetName("reinforced [name]")
 		desc = "[desc]\nIt is reinforced with the [reinf_material.use_name] lattice."
 
+	if(material.stack_origin_tech)
+		origin_tech = material.stack_origin_tech
+	else if(reinf_material && reinf_material.stack_origin_tech)
+		origin_tech = reinf_material.stack_origin_tech
+	else
+		origin_tech = initial(origin_tech)
+
 /obj/item/stack/material/use(var/used)
 	. = ..()
 	update_strings()
@@ -77,15 +92,6 @@
 	if((reinf_material && reinf_material.type) != (M.reinf_material && M.reinf_material.type))
 		return FALSE
 	return TRUE
-
-/obj/item/stack/material/update_strings()
-	. = ..()
-	if(material.stack_origin_tech)
-		origin_tech = material.stack_origin_tech
-	else if(reinf_material && reinf_material.stack_origin_tech)
-		origin_tech = reinf_material.stack_origin_tech
-	else
-		origin_tech = initial(origin_tech)
 
 /obj/item/stack/material/transfer_to(obj/item/stack/material/M, var/tamount=null)
 	if(!is_same(M))
@@ -113,10 +119,10 @@
 			material.reinforce(user, W, src)
 		return TRUE
 
-	if(reinf_material && reinf_material.default_solid_form && isWelder(W))
+	if(reinf_material && reinf_material.default_solid_form && IS_WELDER(W))
 		var/obj/item/weldingtool/WT = W
 		if(WT.isOn() && WT.get_fuel() > 2 && use(2))
-			WT.remove_fuel(2, user)
+			WT.weld(2, user)
 			to_chat(user, SPAN_NOTICE("You recover some [reinf_material.use_name] from \the [src]."))
 			reinf_material.create_object(get_turf(user), 1)
 			return TRUE
@@ -124,6 +130,7 @@
 	return ..()
 
 /obj/item/stack/material/on_update_icon()
+	. = ..()
 	color = material.color
 	alpha = 100 + max(1, amount/25)*(material.opacity * 255)
 	update_state_from_amount()
@@ -339,6 +346,7 @@
 	uses_charge = 1
 	charge_costs = list(500)
 	material = /decl/material/solid/metal/steel
+	health = ITEM_HEALTH_NO_DAMAGE
 
 /obj/item/stack/material/strut/get_recipes()
 	return material.get_strut_recipes(reinf_material && reinf_material.type)

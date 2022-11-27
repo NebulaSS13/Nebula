@@ -20,19 +20,20 @@
 
 // Bitmasks for the flags_inv variable. These determine when a piece of clothing hides another, i.e. a helmet hiding glasses.
 // WARNING: The following flags apply only to the external suit!
-#define HIDEGLOVES      BITFLAG(0)
-#define HIDESUITSTORAGE BITFLAG(1)
-#define HIDEJUMPSUIT    BITFLAG(2)
-#define HIDESHOES       BITFLAG(3)
-#define HIDETAIL        BITFLAG(4)
+#define HIDEGLOVES         BITFLAG(0)
+#define HIDESUITSTORAGE    BITFLAG(1)
+#define HIDEJUMPSUIT       BITFLAG(2)
+#define HIDESHOES          BITFLAG(3)
+#define HIDETAIL           BITFLAG(4)
 
 // WARNING: The following flags apply only to the helmets and masks!
-#define HIDEMASK      BITFLAG(0)
-#define HIDEEARS      BITFLAG(1) // Headsets and such.
-#define HIDEEYES      BITFLAG(2) // Glasses.
-#define HIDEFACE      BITFLAG(3) // Dictates whether we appear as "Unknown".
-#define BLOCKHEADHAIR BITFLAG(4)    // Hides the user's hair overlay. Leaves facial hair.
-#define BLOCKHAIR     BITFLAG(5)    // Hides the user's hair, facial and otherwise.
+#define HIDEMASK           BITFLAG(0)
+#define HIDEEARS           BITFLAG(1) // Headsets and such.
+#define HIDEEYES           BITFLAG(2) // Glasses.
+#define HIDEFACE           BITFLAG(3) // Dictates whether we appear as "Unknown".
+#define BLOCK_HEAD_HAIR    BITFLAG(4)    // Hides the user's hair overlay, and replace it with short hairs. Leaves facial hair.
+#define BLOCK_FACIAL_HAIR  BITFLAG(5)    // Hides the user's hair, facial and otherwise.
+#define BLOCK_ALL_HAIR     (BLOCK_HEAD_HAIR | BLOCK_FACIAL_HAIR)
 
 // Inventory slot strings.
 // since numbers cannot be used as associative list keys.

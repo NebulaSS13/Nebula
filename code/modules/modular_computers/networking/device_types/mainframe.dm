@@ -7,7 +7,6 @@ var/global/list/all_mainframe_roles = list(
 )
 
 /datum/extension/network_device/mainframe
-	connection_type = NETWORK_CONNECTION_STRONG_WIRELESS
 	expected_type = /obj/machinery
 	var/max_log_count = 100
 	var/list/roles = list()
@@ -32,64 +31,55 @@ var/global/list/all_mainframe_roles = list(
 	if(istype(M))
 		return M.get_component_of_type(/obj/item/stock_parts/computer/hard_drive)
 
+// File storage procs
 /datum/extension/network_device/mainframe/proc/get_all_files()
 	var/obj/item/stock_parts/computer/hard_drive/HDD = get_storage()
 	if(HDD)
 		return HDD.stored_files
 
-/datum/extension/network_device/mainframe/proc/get_file(filename)
+/datum/extension/network_device/mainframe/proc/get_file(filename, directory)
 	var/obj/item/stock_parts/computer/hard_drive/HDD = get_storage()
 	if(HDD)
-		return HDD.find_file_by_name(filename)
+		return HDD.find_file_by_name(filename, directory)
 
-/datum/extension/network_device/mainframe/proc/delete_file(filename, list/accesses, mob/user)
+/datum/extension/network_device/mainframe/proc/delete_file(datum/computer_file/F, list/accesses, mob/user)
 	var/obj/item/stock_parts/computer/hard_drive/HDD = get_storage()
 	if(HDD)
-		var/datum/computer_file/data/F = HDD.find_file_by_name(filename)
-		if(!F || F.undeletable)
-			return FALSE
 		return HDD.remove_file(F, accesses, user)
 
-/datum/extension/network_device/mainframe/proc/store_file(datum/computer_file/file)
+/datum/extension/network_device/mainframe/proc/store_file(datum/computer_file/file, directory, create_directories, list/accesses, mob/user, overwrite = TRUE)
 	var/obj/item/stock_parts/computer/hard_drive/HDD = get_storage()
 	if(!HDD)
-		return FALSE
-	var/datum/computer_file/data/old_version = HDD.find_file_by_name(file.filename)
-	if(old_version)
-		HDD.remove_file(old_version)
-	if(!HDD.store_file(file))
-		HDD.store_file(old_version)
-		return FALSE
-	else
-		return TRUE
+		return OS_HARDDRIVE_ERROR
+	
+	return HDD.store_file(file, directory, create_directories, accesses, user, overwrite)
 
-/datum/extension/network_device/mainframe/proc/save_file(newname, new_data)
+/datum/extension/network_device/mainframe/proc/try_store_file(datum/computer_file/file, directory, list/accesses, mob/user)
 	var/obj/item/stock_parts/computer/hard_drive/HDD = get_storage()
 	if(!HDD)
-		return FALSE
+		return OS_HARDDRIVE_ERROR
+	
+	return HDD.try_store_file(file, directory, accesses, user)
 
-	var/datum/computer_file/data/F = HDD.find_file_by_name(newname)
-	//Try to save file, possibly won't fit size-wise
-	var/datum/computer_file/data/backup
-	if(F)
-		backup = F.clone()
-		HDD.remove_file(F)
-	else
-		F = new()
-	F.stored_data = new_data
-	F.calculate_size()
-	if(!HDD.store_file(F))
-		if(backup)
-			HDD.store_file(backup)
-		return FALSE
-	return TRUE
-
-/datum/extension/network_device/mainframe/proc/append_to_file(filename, data)
+/datum/extension/network_device/mainframe/proc/save_file(newname, directory, new_data, list/metadata, list/accesses, mob/user)
 	var/obj/item/stock_parts/computer/hard_drive/HDD = get_storage()
 	if(!HDD)
-		return FALSE
-	var/datum/computer_file/data/logfile/F = get_file(filename)
-	if(F)
+		return OS_HARDDRIVE_ERROR
+	return HDD.save_file(newname, directory, new_data, metadata, accesses, user)
+
+/datum/extension/network_device/mainframe/proc/parse_directory(directory_path, create_directories)
+	var/obj/item/stock_parts/computer/hard_drive/HDD = get_storage()
+	if(!HDD)
+		return OS_HARDDRIVE_ERROR
+	
+	return HDD.parse_directory(directory_path, create_directories)
+
+/datum/extension/network_device/mainframe/proc/append_to_file(filename, directory, data)
+	var/obj/item/stock_parts/computer/hard_drive/HDD = get_storage()
+	if(!HDD)
+		return OS_HARDDRIVE_ERROR
+	var/datum/computer_file/data/logfile/F = get_file(filename, directory)
+	if(istype(F))
 		var/list/logs = splittext(F.stored_data, "\[br\]")
 		logs.Add(data)
 		if(length(logs) > max_log_count)
@@ -100,8 +90,7 @@ var/global/list/all_mainframe_roles = list(
 		F = new()
 		F.filename = filename
 		F.stored_data = data
-	store_file(F)
-	return TRUE
+	return store_file(F, directory)
 
 /datum/extension/network_device/mainframe/proc/get_capacity()
 	var/obj/item/stock_parts/computer/hard_drive/HDD = get_storage()
@@ -122,9 +111,9 @@ var/global/list/all_mainframe_roles = list(
 	for(var/F in subtypesof(/datum/computer_file/report))
 		var/datum/computer_file/report/type = F
 		if(initial(type.available_on_network))
-			store_file(new type)
+			store_file(new type, "reports", TRUE)
 
 	for(var/F in subtypesof(/datum/computer_file/program))
 		var/datum/computer_file/program/type = F
 		if(initial(type.available_on_network))
-			store_file(new type)
+			store_file(new type, OS_PROGRAMS_DIR, TRUE)

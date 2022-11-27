@@ -89,9 +89,9 @@
 	if (!(status & ORGAN_DISFIGURED))
 		if (brute_dam > 40)
 			if (prob(50))
-				disfigure("brute")
+				disfigure(BRUTE)
 		if (burn_dam > 40)
-			disfigure("burn")
+			disfigure(BURN)
 
 /obj/item/organ/external/head/on_update_icon()
 
@@ -137,7 +137,8 @@
 
 	if(owner.h_style)
 		var/decl/sprite_accessory/hair/hair_style = GET_DECL(owner.h_style)
-		if(owner.head && (owner.head.flags_inv & BLOCKHEADHAIR))
+		var/obj/item/head = owner.get_equipped_item(slot_head_str)
+		if(head && (head.flags_inv & BLOCK_HEAD_HAIR))
 			if(!(hair_style.flags & VERY_SHORT))
 				hair_style = GET_DECL(/decl/sprite_accessory/hair/short)
 		if(hair_style)

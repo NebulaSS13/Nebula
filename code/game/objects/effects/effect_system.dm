@@ -97,7 +97,6 @@ steam.start() -- spawns the effect
 	name = "sparks"
 	icon_state = "sparks"
 	icon = 'icons/effects/effects.dmi'
-	var/amount = 6.0
 	anchored = 1.0
 	mouse_opacity = 0
 
@@ -172,7 +171,6 @@ steam.start() -- spawns the effect
 	opacity = 1
 	anchored = 0.0
 	mouse_opacity = 0
-	var/amount = 6.0
 	var/time_to_live = 100
 
 	//Remove this bit to use the old smoke
@@ -192,15 +190,12 @@ steam.start() -- spawns the effect
 /obj/effect/effect/smoke/proc/affect(var/mob/living/carbon/M)
 	if (!istype(M))
 		return 0
-	if (M.internal != null)
-		if(M.wear_mask && (M.wear_mask.item_flags & ITEM_FLAG_AIRTIGHT))
-			return 0
-		if(istype(M,/mob/living/carbon/human))
-			var/mob/living/carbon/human/H = M
-			if(H.head && (H.head.item_flags & ITEM_FLAG_AIRTIGHT))
-				return 0
-		return 0
-	return 1
+	if(M.internal != null)
+		for(var/slot in global.airtight_slots)
+			var/obj/item/gear = M.get_equipped_item(slot)
+			if(gear && (gear.item_flags & ITEM_FLAG_AIRTIGHT))
+				return FALSE
+	return TRUE
 
 /////////////////////////////////////////////
 // Illumination
@@ -236,7 +231,7 @@ steam.start() -- spawns the effect
 	M.adjustOxyLoss(1)
 	if (M.coughedtime != 1)
 		M.coughedtime = 1
-		M.emote("cough")
+		M.cough()
 		spawn ( 20 )
 			M.coughedtime = 0
 
@@ -265,7 +260,7 @@ steam.start() -- spawns the effect
 	ADJ_STATUS(M, STAT_ASLEEP, 1)
 	if (M.coughedtime != 1)
 		M.coughedtime = 1
-		M.emote("cough")
+		M.cough()
 		spawn ( 20 )
 			M.coughedtime = 0
 /////////////////////////////////////////////
@@ -285,7 +280,7 @@ steam.start() -- spawns the effect
 /obj/effect/effect/smoke/mustard/affect(var/mob/living/carbon/human/R)
 	if (!..())
 		return 0
-	if (R.wear_suit != null)
+	if (R.get_equipped_item(slot_wear_suit_str))
 		return 0
 
 	R.take_overall_damage(0, 0.75)

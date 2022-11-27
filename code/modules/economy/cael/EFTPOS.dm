@@ -3,6 +3,8 @@
 	desc = "Swipe your ID card to make purchases electronically."
 	icon = 'icons/obj/items/device/eftpos.dmi'
 	icon_state = "eftpos"
+	material = /decl/material/solid/plastic
+	matter = list(/decl/material/solid/silicon = MATTER_AMOUNT_REINFORCEMENT, /decl/material/solid/metal/copper = MATTER_AMOUNT_REINFORCEMENT)
 	var/machine_id = ""
 	var/eftpos_name = "Default EFTPOS scanner"
 	var/transaction_locked = 0
@@ -23,54 +25,37 @@
 		currency = global.using_map.default_currency
 
 	//create a short manual as well
-	var/obj/item/paper/R = new(src.loc)
-	R.SetName("Steps to success: Correct EFTPOS Usage")
 	//Temptative new manual:
-	R.info += "<b>First EFTPOS setup:</b><br>"
-	R.info += "1. Memorise your EFTPOS command code (provided with all EFTPOS devices).<br>"
-	R.info += "2. Connect the EFTPOS to the account in which you want to receive the funds.<br><br>"
-	R.info += "<b>When starting a new transaction:</b><br>"
-	R.info += "1. Enter the amount of money you want to charge and a purpose message for the new transaction.<br>"
-	R.info += "2. Lock the new transaction. If you want to modify or cancel the transaction, you simply have to reset your EFTPOS device.<br>"
-	R.info += "3. Give the EFTPOS device to your customer, he/she must finish the transaction by swiping their ID card or a charge card with enough funds.<br>"
-	R.info += "4. If everything is done correctly, the money will be transferred. To unlock the device you will have to reset the EFTPOS device.<br>"
-
-
-	//stamp the paper
-	var/image/stampoverlay = image('icons/obj/bureaucracy.dmi')
-	stampoverlay.icon_state = "paper_stamp-boss"
-	if(!R.stamped)
-		R.stamped = new
-	R.offset_x += 0
-	R.offset_y += 0
-	R.ico += "paper_stamp-boss"
-	R.stamped += /obj/item/stamp
-	R.overlays += stampoverlay
-	R.stamps += "<HR><i>This paper has been stamped by the EFTPOS device.</i>"
+	var/txt
+	txt =  "<b>First EFTPOS setup:</b><br>"
+	txt += "1. Memorise your EFTPOS command code (provided with all EFTPOS devices).<br>"
+	txt += "2. Connect the EFTPOS to the account in which you want to receive the funds.<br><br>"
+	txt += "<b>When starting a new transaction:</b><br>"
+	txt += "1. Enter the amount of money you want to charge and a purpose message for the new transaction.<br>"
+	txt += "2. Lock the new transaction. If you want to modify or cancel the transaction, you simply have to reset your EFTPOS device.<br>"
+	txt += "3. Give the EFTPOS device to your customer, he/she must finish the transaction by swiping their ID card or a charge card with enough funds.<br>"
+	txt += "4. If everything is done correctly, the money will be transferred. To unlock the device you will have to reset the EFTPOS device.<br>"
+	
+	var/obj/item/paper/R = new(src.loc, null, txt, "Steps to success: Correct EFTPOS Usage")
+	R.apply_custom_stamp(
+		overlay_image('icons/obj/bureaucracy.dmi', icon_state = "paper_stamp-boss", flags = RESET_COLOR), 
+		"by \the [src]")
 
 	//by default, connect to the station account
 	//the user of the EFTPOS device can change the target account though, and no-one will be the wiser (except whoever's being charged)
 	linked_account = station_account
 
 /obj/item/eftpos/proc/print_reference()
-	var/obj/item/paper/R = new(src.loc)
-	R.SetName("Reference: [eftpos_name]")
-	R.info = "<b>[eftpos_name] reference</b><br><br>"
-	R.info += "Access code: [access_code]<br><br>"
-	R.info += "<b>Do not lose or misplace this code.</b><br>"
-
-	//stamp the paper
-	var/image/stampoverlay = image('icons/obj/bureaucracy.dmi')
-	stampoverlay.icon_state = "paper_stamp-boss"
-	if(!R.stamped)
-		R.stamped = new
-	R.stamped += /obj/item/stamp
-	R.overlays += stampoverlay
-	R.stamps += "<HR><i>This paper has been stamped by the EFTPOS device.</i>"
-	var/obj/item/smallDelivery/D = new(R.loc)
-	R.forceMove(D)
-	D.wrapped = R
-	D.SetName("small parcel - 'EFTPOS access code'")
+	var/obj/item/paper/R = new(src.loc, null, 
+		"<b>[eftpos_name] reference</b><br><br>Access code: [access_code]<br><br><b>Do not lose or misplace this code.</b><br>", 
+		"Reference: [eftpos_name]")
+	R.apply_custom_stamp(
+		overlay_image('icons/obj/bureaucracy.dmi', icon_state = "paper_stamp-boss", flags = RESET_COLOR), 
+		"by the [src]")
+	
+	
+	var/obj/item/parcel/D = new(R.loc, null, R, "EFTPOS access code")
+	D.attach_label(usr, null, "EFTPOS access code")
 
 /obj/item/eftpos/attack_self(mob/user)
 	if(get_dist(src,user) <= 1)

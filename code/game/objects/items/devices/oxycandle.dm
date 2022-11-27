@@ -69,6 +69,7 @@
 	air_contents.adjust_multi(/decl/material/gas/oxygen, air_mix[/decl/material/gas/oxygen])
 
 /obj/item/oxycandle/on_update_icon()
+	. = ..()
 	if(on == 1)
 		icon_state = "oxycandle_on"
 		item_state = icon_state

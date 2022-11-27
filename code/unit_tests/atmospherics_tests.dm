@@ -41,7 +41,7 @@
 
 /datum/unit_test/atmos_machinery/proc/check_moles_conserved(var/case_name, var/list/before_gas_mixes, var/list/after_gas_mixes)
 	var/failed = FALSE
-	for(var/gasid in subtypesof(/decl/material/gas))
+	for(var/gasid in decls_repository.get_decl_paths_of_subtype(/decl/material/gas))
 		var/before = 0
 		for(var/gasmix in before_gas_mixes)
 			var/datum/gas_mixture/G = before_gas_mixes[gasmix]
@@ -197,7 +197,7 @@
 	name = "ATMOS MACHINERY: scrub_gas() Conserves Moles"
 
 /datum/unit_test/atmos_machinery/conserve_moles/scrub_gas/start_test()
-	var/list/filtering = subtypesof(/decl/material/gas)
+	var/list/filtering = decls_repository.get_decl_paths_of_subtype(/decl/material/gas)
 	for(var/case_name in test_cases)
 		var/gas_mix_data = test_cases[case_name]
 		var/list/before_gas_mixes = create_gas_mixes(gas_mix_data)
@@ -213,14 +213,12 @@
 	name = "ATMOS MACHINERY: filter_gas() Conserves Moles"
 
 /datum/unit_test/atmos_machinery/conserve_moles/filter_gas/start_test()
-	var/list/filtering = subtypesof(/decl/material/gas)
+	var/list/filtering = decls_repository.get_decl_paths_of_subtype(/decl/material/gas)
 	for(var/case_name in test_cases)
 		var/gas_mix_data = test_cases[case_name]
 		var/list/before_gas_mixes = create_gas_mixes(gas_mix_data)
 		var/list/after_gas_mixes = create_gas_mixes(gas_mix_data)
-
 		filter_gas(null, filtering, after_gas_mixes["source"], after_gas_mixes["sink"], after_gas_mixes["source"], null, INFINITY)
-
 		check_moles_conserved(case_name, before_gas_mixes, after_gas_mixes)
 
 	return 1
@@ -235,7 +233,7 @@
 		var/list/after_gas_mixes = create_gas_mixes(gas_mix_data)
 
 		var/list/filtering = list()
-		for(var/gasid in subtypesof(/decl/material/gas))
+		for(var/gasid in decls_repository.get_decl_paths_of_subtype(/decl/material/gas))
 			filtering[gasid] = after_gas_mixes["sink"] //just filter everything to sink
 
 		filter_gas_multi(null, filtering, after_gas_mixes["source"], after_gas_mixes["sink"], null, INFINITY)
@@ -254,7 +252,7 @@
 		var/list/after_gas_mixes = create_gas_mixes(gas_mix_data)
 
 		var/list/mix_sources = list()
-		var/list/all_gasses = subtypesof(/decl/material/gas)
+		var/list/all_gasses = decls_repository.get_decl_paths_of_subtype(/decl/material/gas)
 		var/gas_count = length(all_gasses)
 		for(var/gasid in all_gasses)
 			var/datum/gas_mixture/mix_source = after_gas_mixes["sink"]
@@ -339,7 +337,7 @@
 /datum/unit_test/atmos_machinery_node_reciprocity/start_test()
 	var/fail = FALSE
 	for(var/obj/machinery/atmospherics/machine in SSmachines.machinery)
-		for(var/obj/machinery/atmospherics/node AS_ANYTHING in machine.nodes_to_networks)
+		for(var/obj/machinery/atmospherics/node as anything in machine.nodes_to_networks)
 			if(node == machine)
 				log_bad("[log_info_line(machine)] was its own node.")
 				fail = TRUE

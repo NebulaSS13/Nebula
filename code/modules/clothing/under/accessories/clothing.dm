@@ -90,6 +90,7 @@
 	var/sleeves_rolled = FALSE
 
 /obj/item/clothing/accessory/tangzhuang/on_update_icon()
+	. = ..()
 	icon_state = get_world_inventory_state()
 	if(sleeves_rolled && check_state_in_icon("[icon_state]-sleeves", icon))
 		icon_state = "[icon_state]-sleeves"

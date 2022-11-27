@@ -77,9 +77,12 @@
 
 
 /obj/machinery/gateway/centerstation/proc/toggleon(mob/user)
-	if(!ready)			return
-	if(linked.len != 8)	return
-	if(!powered())		return
+	if(!ready)
+		return
+	if(linked.len != 8)
+		return
+	if(stat & NOPOWER)
+		return
 	if(!awaygate)
 		to_chat(user, "<span class='notice'>Error: No destination found.</span>")
 		return
@@ -123,7 +126,7 @@
 		return
 
 /obj/machinery/gateway/centerstation/attackby(obj/item/W, mob/user)
-	if(isMultitool(W))
+	if(IS_MULTITOOL(W))
 		to_chat(user, "The gate is already calibrated, there is no work for you to do here.")
 		return
 
@@ -215,7 +218,7 @@
 	M.set_dir(SOUTH)
 
 /obj/machinery/gateway/centeraway/attackby(obj/item/W, mob/user)
-	if(isMultitool(W))
+	if(IS_MULTITOOL(W))
 		if(calibrated)
 			to_chat(user, "The gate is already calibrated, there is no work for you to do here.")
 			return

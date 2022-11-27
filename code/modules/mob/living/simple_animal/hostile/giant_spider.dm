@@ -33,6 +33,7 @@
 	break_stuff_probability = 25
 	pry_time = 8 SECONDS
 	pry_desc = "clawing"
+	base_animal_type = /mob/living/simple_animal/hostile/giant_spider
 
 	meat_type = /obj/item/chems/food/spider
 	meat_amount = 3

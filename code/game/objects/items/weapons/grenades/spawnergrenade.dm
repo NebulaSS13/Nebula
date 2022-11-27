@@ -3,7 +3,6 @@
 	name = "delivery grenade"
 	icon = 'icons/obj/items/grenades/delivery.dmi'
 	origin_tech = "{'materials':3,'magnets':4}"
-	var/banglet = 0
 	var/spawner_type = null // must be an object path
 	var/deliveryamt = 1 // amount of type to deliver
 

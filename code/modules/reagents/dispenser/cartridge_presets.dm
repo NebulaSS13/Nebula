@@ -4,162 +4,97 @@
 /obj/item/chems/chem_disp_cartridge/medium
 	volume = CARTRIDGE_VOLUME_MEDIUM
 
+/**
+ * Helper macro to define a new cartridge type for a given reagent.
+ * CART_TYPE: the type suffix to append to the cartridge type path.
+ * REAGENT_TYPE: The reagent decl path to fill the cartridge with.
+ */
+#define DEFINE_CARTRIDGE_FOR_CHEM(CART_TYPE, REAGENT_TYPE) /obj/item/chems/chem_disp_cartridge/##CART_TYPE/populate_reagents(){reagents.add_reagent(REAGENT_TYPE, reagents.maximum_volume);}
+
 // Multiple
-/obj/item/chems/chem_disp_cartridge/water
-	spawn_reagent = /decl/material/liquid/water
-/obj/item/chems/chem_disp_cartridge/sugar
-	spawn_reagent = /decl/material/liquid/nutriment/sugar
+DEFINE_CARTRIDGE_FOR_CHEM(water, /decl/material/liquid/water)
+DEFINE_CARTRIDGE_FOR_CHEM(sugar, /decl/material/liquid/nutriment/sugar)
 
 // Chemistry
-/obj/item/chems/chem_disp_cartridge/hydrazine
-	spawn_reagent = /decl/material/liquid/fuel/hydrazine
-/obj/item/chems/chem_disp_cartridge/lithium
-	spawn_reagent = /decl/material/solid/lithium
-/obj/item/chems/chem_disp_cartridge/carbon
-	spawn_reagent = /decl/material/solid/carbon
-/obj/item/chems/chem_disp_cartridge/ammonia
-	spawn_reagent = /decl/material/gas/ammonia
-/obj/item/chems/chem_disp_cartridge/acetone
-	spawn_reagent = /decl/material/liquid/acetone
-/obj/item/chems/chem_disp_cartridge/sodium
-	spawn_reagent = /decl/material/solid/sodium
-/obj/item/chems/chem_disp_cartridge/aluminium
-	spawn_reagent = /decl/material/solid/metal/aluminium
-/obj/item/chems/chem_disp_cartridge/silicon
-	spawn_reagent = /decl/material/solid/silicon
-/obj/item/chems/chem_disp_cartridge/phosphorus
-	spawn_reagent = /decl/material/solid/phosphorus
-/obj/item/chems/chem_disp_cartridge/sulfur
-	spawn_reagent = /decl/material/solid/sulfur
-/obj/item/chems/chem_disp_cartridge/hclacid
-	spawn_reagent = /decl/material/liquid/acid/hydrochloric
-/obj/item/chems/chem_disp_cartridge/potassium
-	spawn_reagent = /decl/material/solid/potassium
-/obj/item/chems/chem_disp_cartridge/iron
-	spawn_reagent = /decl/material/solid/metal/iron
-/obj/item/chems/chem_disp_cartridge/copper
-	spawn_reagent = /decl/material/solid/metal/copper
-/obj/item/chems/chem_disp_cartridge/mercury
-	spawn_reagent = /decl/material/liquid/mercury
-/obj/item/chems/chem_disp_cartridge/radium
-	spawn_reagent = /decl/material/solid/metal/radium
-/obj/item/chems/chem_disp_cartridge/ethanol
-	spawn_reagent = /decl/material/liquid/ethanol
-/obj/item/chems/chem_disp_cartridge/sacid
-	spawn_reagent = /decl/material/liquid/acid
-/obj/item/chems/chem_disp_cartridge/tungsten
-	spawn_reagent = /decl/material/solid/metal/tungsten
+DEFINE_CARTRIDGE_FOR_CHEM(hydrazine,  /decl/material/liquid/fuel/hydrazine)
+DEFINE_CARTRIDGE_FOR_CHEM(lithium,    /decl/material/solid/lithium)
+DEFINE_CARTRIDGE_FOR_CHEM(carbon,     /decl/material/solid/carbon)
+DEFINE_CARTRIDGE_FOR_CHEM(ammonia,    /decl/material/gas/ammonia)
+DEFINE_CARTRIDGE_FOR_CHEM(acetone,    /decl/material/liquid/acetone)
+DEFINE_CARTRIDGE_FOR_CHEM(sodium,     /decl/material/solid/sodium)
+DEFINE_CARTRIDGE_FOR_CHEM(aluminium,  /decl/material/solid/metal/aluminium)
+DEFINE_CARTRIDGE_FOR_CHEM(silicon,    /decl/material/solid/silicon)
+DEFINE_CARTRIDGE_FOR_CHEM(phosphorus, /decl/material/solid/phosphorus)
+DEFINE_CARTRIDGE_FOR_CHEM(sulfur,     /decl/material/solid/sulfur)
+DEFINE_CARTRIDGE_FOR_CHEM(hclacid,    /decl/material/liquid/acid/hydrochloric)
+DEFINE_CARTRIDGE_FOR_CHEM(potassium,  /decl/material/solid/potassium)
+DEFINE_CARTRIDGE_FOR_CHEM(iron,       /decl/material/solid/metal/iron)
+DEFINE_CARTRIDGE_FOR_CHEM(copper,     /decl/material/solid/metal/copper)
+DEFINE_CARTRIDGE_FOR_CHEM(mercury,    /decl/material/liquid/mercury)
+DEFINE_CARTRIDGE_FOR_CHEM(radium,     /decl/material/solid/metal/radium)
+DEFINE_CARTRIDGE_FOR_CHEM(ethanol,    /decl/material/liquid/ethanol)
+DEFINE_CARTRIDGE_FOR_CHEM(sacid,      /decl/material/liquid/acid)
+DEFINE_CARTRIDGE_FOR_CHEM(tungsten,   /decl/material/solid/metal/tungsten)
+
 
 // Bar, alcoholic
-/obj/item/chems/chem_disp_cartridge/beer
-	spawn_reagent = /decl/material/liquid/ethanol/beer
-/obj/item/chems/chem_disp_cartridge/kahlua
-	spawn_reagent = /decl/material/liquid/ethanol/coffee
-/obj/item/chems/chem_disp_cartridge/whiskey
-	spawn_reagent = /decl/material/liquid/ethanol/whiskey
-/obj/item/chems/chem_disp_cartridge/wine
-	spawn_reagent = /decl/material/liquid/ethanol/wine
-/obj/item/chems/chem_disp_cartridge/vodka
-	spawn_reagent = /decl/material/liquid/ethanol/vodka
-/obj/item/chems/chem_disp_cartridge/gin
-	spawn_reagent = /decl/material/liquid/ethanol/gin
-/obj/item/chems/chem_disp_cartridge/rum
-	spawn_reagent = /decl/material/liquid/ethanol/rum
-/obj/item/chems/chem_disp_cartridge/tequila
-	spawn_reagent = /decl/material/liquid/ethanol/tequila
-/obj/item/chems/chem_disp_cartridge/vermouth
-	spawn_reagent = /decl/material/liquid/ethanol/vermouth
-/obj/item/chems/chem_disp_cartridge/cognac
-	spawn_reagent = /decl/material/liquid/ethanol/cognac
-/obj/item/chems/chem_disp_cartridge/ale
-	spawn_reagent = /decl/material/liquid/ethanol/ale
-/obj/item/chems/chem_disp_cartridge/mead
-	spawn_reagent = /decl/material/liquid/ethanol/mead
+DEFINE_CARTRIDGE_FOR_CHEM(beer,     /decl/material/liquid/ethanol/beer)
+DEFINE_CARTRIDGE_FOR_CHEM(kahlua,   /decl/material/liquid/ethanol/coffee)
+DEFINE_CARTRIDGE_FOR_CHEM(whiskey,  /decl/material/liquid/ethanol/whiskey)
+DEFINE_CARTRIDGE_FOR_CHEM(wine,     /decl/material/liquid/ethanol/wine)
+DEFINE_CARTRIDGE_FOR_CHEM(vodka,    /decl/material/liquid/ethanol/vodka)
+DEFINE_CARTRIDGE_FOR_CHEM(gin,      /decl/material/liquid/ethanol/gin)
+DEFINE_CARTRIDGE_FOR_CHEM(rum,      /decl/material/liquid/ethanol/rum)
+DEFINE_CARTRIDGE_FOR_CHEM(tequila,  /decl/material/liquid/ethanol/tequila)
+DEFINE_CARTRIDGE_FOR_CHEM(vermouth, /decl/material/liquid/ethanol/vermouth)
+DEFINE_CARTRIDGE_FOR_CHEM(cognac,   /decl/material/liquid/ethanol/cognac)
+DEFINE_CARTRIDGE_FOR_CHEM(ale,      /decl/material/liquid/ethanol/ale)
+DEFINE_CARTRIDGE_FOR_CHEM(mead,     /decl/material/liquid/ethanol/mead)
 
 // Bar, soft
-/obj/item/chems/chem_disp_cartridge/ice
-	spawn_reagent = /decl/material/solid/ice
-/obj/item/chems/chem_disp_cartridge/black_tea
-	spawn_reagent = /decl/material/liquid/drink/tea/black
-/obj/item/chems/chem_disp_cartridge/green_tea
-	spawn_reagent = /decl/material/liquid/drink/tea/green
-/obj/item/chems/chem_disp_cartridge/chai_tea
-	spawn_reagent = /decl/material/liquid/drink/tea/chai
-/obj/item/chems/chem_disp_cartridge/red_tea
-	spawn_reagent = /decl/material/liquid/drink/tea/red
-/obj/item/chems/chem_disp_cartridge/cola
-	spawn_reagent = /decl/material/liquid/drink/cola
-/obj/item/chems/chem_disp_cartridge/citrussoda
-	spawn_reagent = /decl/material/liquid/drink/citrussoda
-/obj/item/chems/chem_disp_cartridge/cherrycola
-	spawn_reagent = /decl/material/liquid/drink/cherrycola
-/obj/item/chems/chem_disp_cartridge/lemonade
-	spawn_reagent = /decl/material/liquid/drink/lemonade
-/obj/item/chems/chem_disp_cartridge/tonic
-	spawn_reagent = /decl/material/liquid/drink/tonic
-/obj/item/chems/chem_disp_cartridge/sodawater
-	spawn_reagent = /decl/material/liquid/drink/sodawater
-/obj/item/chems/chem_disp_cartridge/lemon_lime
-	spawn_reagent = /decl/material/liquid/drink/lemon_lime
-/obj/item/chems/chem_disp_cartridge/orange
-	spawn_reagent = /decl/material/liquid/drink/juice/orange
-/obj/item/chems/chem_disp_cartridge/lime
-	spawn_reagent = /decl/material/liquid/drink/juice/lime
-/obj/item/chems/chem_disp_cartridge/watermelon
-	spawn_reagent = /decl/material/liquid/drink/juice/watermelon
+DEFINE_CARTRIDGE_FOR_CHEM(ice,        /decl/material/solid/ice)
+DEFINE_CARTRIDGE_FOR_CHEM(black_tea,  /decl/material/liquid/drink/tea/black)
+DEFINE_CARTRIDGE_FOR_CHEM(green_tea,  /decl/material/liquid/drink/tea/green)
+DEFINE_CARTRIDGE_FOR_CHEM(chai_tea,   /decl/material/liquid/drink/tea/chai)
+DEFINE_CARTRIDGE_FOR_CHEM(red_tea,    /decl/material/liquid/drink/tea/red)
+DEFINE_CARTRIDGE_FOR_CHEM(cola,       /decl/material/liquid/drink/cola)
+DEFINE_CARTRIDGE_FOR_CHEM(citrussoda, /decl/material/liquid/drink/citrussoda)
+DEFINE_CARTRIDGE_FOR_CHEM(cherrycola, /decl/material/liquid/drink/cherrycola)
+DEFINE_CARTRIDGE_FOR_CHEM(lemonade,   /decl/material/liquid/drink/lemonade)
+DEFINE_CARTRIDGE_FOR_CHEM(tonic,      /decl/material/liquid/drink/tonic)
+DEFINE_CARTRIDGE_FOR_CHEM(sodawater,  /decl/material/liquid/drink/sodawater)
+DEFINE_CARTRIDGE_FOR_CHEM(lemon_lime, /decl/material/liquid/drink/lemon_lime)
+DEFINE_CARTRIDGE_FOR_CHEM(orange,     /decl/material/liquid/drink/juice/orange)
+DEFINE_CARTRIDGE_FOR_CHEM(lime,       /decl/material/liquid/drink/juice/lime)
+DEFINE_CARTRIDGE_FOR_CHEM(watermelon, /decl/material/liquid/drink/juice/watermelon)
 
 // Bar, syrups
-/obj/item/chems/chem_disp_cartridge/syrup_chocolate
-	spawn_reagent = /decl/material/liquid/drink/syrup/chocolate
-/obj/item/chems/chem_disp_cartridge/syrup_caramel
-	spawn_reagent = /decl/material/liquid/drink/syrup/caramel
-/obj/item/chems/chem_disp_cartridge/syrup_vanilla
-	spawn_reagent = /decl/material/liquid/drink/syrup/vanilla
-/obj/item/chems/chem_disp_cartridge/syrup_pumpkin
-	spawn_reagent = /decl/material/liquid/drink/syrup/pumpkin
+DEFINE_CARTRIDGE_FOR_CHEM(syrup_chocolate, /decl/material/liquid/drink/syrup/chocolate)
+DEFINE_CARTRIDGE_FOR_CHEM(syrup_caramel,   /decl/material/liquid/drink/syrup/caramel)
+DEFINE_CARTRIDGE_FOR_CHEM(syrup_vanilla,   /decl/material/liquid/drink/syrup/vanilla)
+DEFINE_CARTRIDGE_FOR_CHEM(syrup_pumpkin,   /decl/material/liquid/drink/syrup/pumpkin)
 
 // Bar, coffee
-/obj/item/chems/chem_disp_cartridge/coffee
-	spawn_reagent = /decl/material/liquid/drink/coffee
-/obj/item/chems/chem_disp_cartridge/hot_coco
-	spawn_reagent = /decl/material/liquid/drink/hot_coco
-/obj/item/chems/chem_disp_cartridge/milk
-	spawn_reagent = /decl/material/liquid/drink/milk
-/obj/item/chems/chem_disp_cartridge/soymilk
-	spawn_reagent = /decl/material/liquid/drink/milk/soymilk
-/obj/item/chems/chem_disp_cartridge/cream
-	spawn_reagent = /decl/material/liquid/drink/milk/cream
+DEFINE_CARTRIDGE_FOR_CHEM(coffee,   /decl/material/liquid/drink/coffee)
+DEFINE_CARTRIDGE_FOR_CHEM(hot_coco, /decl/material/liquid/drink/hot_coco)
+DEFINE_CARTRIDGE_FOR_CHEM(milk,     /decl/material/liquid/drink/milk)
+DEFINE_CARTRIDGE_FOR_CHEM(soymilk,  /decl/material/liquid/drink/milk/soymilk)
+DEFINE_CARTRIDGE_FOR_CHEM(cream,    /decl/material/liquid/drink/milk/cream)
 
 // ERT
-/obj/item/chems/chem_disp_cartridge/adrenaline
-	spawn_reagent = /decl/material/liquid/adrenaline
-/obj/item/chems/chem_disp_cartridge/retrovirals
-	spawn_reagent = /decl/material/liquid/retrovirals
-/obj/item/chems/chem_disp_cartridge/painkillers
-	spawn_reagent = /decl/material/liquid/painkillers
-/obj/item/chems/chem_disp_cartridge/antiseptic
-	spawn_reagent = /decl/material/liquid/antiseptic
-/obj/item/chems/chem_disp_cartridge/burn_meds
-	spawn_reagent = /decl/material/liquid/burn_meds
-/obj/item/chems/chem_disp_cartridge/oxy_meds
-	spawn_reagent = /decl/material/liquid/oxy_meds
-/obj/item/chems/chem_disp_cartridge/regenerator
-	spawn_reagent = /decl/material/liquid/regenerator
-/obj/item/chems/chem_disp_cartridge/antitoxins
-	spawn_reagent = /decl/material/liquid/antitoxins
-/obj/item/chems/chem_disp_cartridge/antirads
-	spawn_reagent = /decl/material/liquid/antirads
-/obj/item/chems/chem_disp_cartridge/neuroannealer
-	spawn_reagent = /decl/material/liquid/neuroannealer
-/obj/item/chems/chem_disp_cartridge/eyedrops
-	spawn_reagent = /decl/material/liquid/eyedrops
-/obj/item/chems/chem_disp_cartridge/brute_meds
-	spawn_reagent = /decl/material/liquid/brute_meds
-/obj/item/chems/chem_disp_cartridge/amphetamines
-	spawn_reagent = /decl/material/liquid/amphetamines
-/obj/item/chems/chem_disp_cartridge/antibiotics
-	spawn_reagent = /decl/material/liquid/antibiotics
-/obj/item/chems/chem_disp_cartridge/sedatives
-	spawn_reagent = /decl/material/liquid/sedatives
-/obj/item/chems/chem_disp_cartridge/stabilizer
-	spawn_reagent = /decl/material/liquid/stabilizer
+DEFINE_CARTRIDGE_FOR_CHEM(adrenaline,     /decl/material/liquid/adrenaline)
+DEFINE_CARTRIDGE_FOR_CHEM(retrovirals,    /decl/material/liquid/retrovirals)
+DEFINE_CARTRIDGE_FOR_CHEM(painkillers,    /decl/material/liquid/painkillers)
+DEFINE_CARTRIDGE_FOR_CHEM(antiseptic,     /decl/material/liquid/antiseptic)
+DEFINE_CARTRIDGE_FOR_CHEM(burn_meds,      /decl/material/liquid/burn_meds)
+DEFINE_CARTRIDGE_FOR_CHEM(oxy_meds,       /decl/material/liquid/oxy_meds)
+DEFINE_CARTRIDGE_FOR_CHEM(regenerator,    /decl/material/liquid/regenerator)
+DEFINE_CARTRIDGE_FOR_CHEM(antitoxins,     /decl/material/liquid/antitoxins)
+DEFINE_CARTRIDGE_FOR_CHEM(antirads,       /decl/material/liquid/antirads)
+DEFINE_CARTRIDGE_FOR_CHEM(neuroannealer,  /decl/material/liquid/neuroannealer)
+DEFINE_CARTRIDGE_FOR_CHEM(eyedrops,       /decl/material/liquid/eyedrops)
+DEFINE_CARTRIDGE_FOR_CHEM(brute_meds,     /decl/material/liquid/brute_meds)
+DEFINE_CARTRIDGE_FOR_CHEM(amphetamines,   /decl/material/liquid/amphetamines)
+DEFINE_CARTRIDGE_FOR_CHEM(antibiotics,    /decl/material/liquid/antibiotics)
+DEFINE_CARTRIDGE_FOR_CHEM(sedatives,      /decl/material/liquid/sedatives)
+DEFINE_CARTRIDGE_FOR_CHEM(stabilizer,     /decl/material/liquid/stabilizer)

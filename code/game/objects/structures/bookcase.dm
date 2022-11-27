@@ -15,7 +15,7 @@ var/global/list/station_bookcases = list()
 	for(var/obj/item/I in loc)
 		if(istype(I, /obj/item/book))
 			I.forceMove(src)
-	if(z in global.using_map.station_levels)
+	if(isStationLevel(z))
 		global.station_bookcases += src
 	. = ..()
 
@@ -28,12 +28,12 @@ var/global/list/station_bookcases = list()
 		b.dropInto(loc)
 	. = ..()
 
-/obj/structure/bookcase/attackby(obj/O, mob/user)
+/obj/structure/bookcase/attackby(obj/item/O, mob/user)
 	. = ..()
 	if(!.)
 		if(istype(O, /obj/item/book) && user.unEquip(O, src))
 			update_icon()
-		else if(istype(O, /obj/item/pen))
+		else if(IS_PEN(O))
 			var/newname = sanitize_safe(input("What would you like to title this bookshelf?"), MAX_NAME_LEN)
 			if(!newname)
 				return

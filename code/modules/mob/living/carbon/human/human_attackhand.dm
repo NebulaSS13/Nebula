@@ -154,9 +154,6 @@
 	real_damage += attack.get_unarmed_damage(H)
 	real_damage *= damage_multiplier
 	rand_damage *= damage_multiplier
-	if(MUTATION_HULK in H.mutations)
-		real_damage *= 2 // Hulks do twice the damage
-		rand_damage *= 2
 	real_damage = max(1, real_damage)
 	// Apply additional unarmed effects.
 	attack.apply_effects(H, src, rand_damage, hit_zone)
@@ -246,13 +243,17 @@
 			to_chat(H, SPAN_WARNING("They don't have a mouth, you cannot do mouth-to-mouth resuscitation!"))
 			return TRUE
 
-		if((H.head && (H.head.body_parts_covered & SLOT_FACE)) || (H.wear_mask && (H.wear_mask.body_parts_covered & SLOT_FACE)))
-			to_chat(H, SPAN_WARNING("You need to remove your mouth covering for mouth-to-mouth resuscitation!"))
-			return TRUE
+		for(var/slot in global.airtight_slots)
+			var/obj/item/gear = H.get_equipped_item(slot)
+			if(gear && (gear.body_parts_covered & SLOT_FACE))
+				to_chat(H, SPAN_WARNING("You need to remove your mouth covering for mouth-to-mouth resuscitation!"))
+				return TRUE
 
-		if((head && (head.body_parts_covered & SLOT_FACE)) || (wear_mask && (wear_mask.body_parts_covered & SLOT_FACE)))
-			to_chat(H, SPAN_WARNING("You need to remove \the [src]'s mouth covering for mouth-to-mouth resuscitation!"))
-			return TRUE
+		for(var/slot in global.airtight_slots)
+			var/obj/item/gear = get_equipped_item(slot)
+			if(gear && (gear.body_parts_covered & SLOT_FACE))
+				to_chat(H, SPAN_WARNING("You need to remove \the [src]'s mouth covering for mouth-to-mouth resuscitation!"))
+				return TRUE
 
 		if(!GET_INTERNAL_ORGAN(H, H.species.breathing_organ))
 			to_chat(H, SPAN_WARNING("You need lungs for mouth-to-mouth resuscitation!"))

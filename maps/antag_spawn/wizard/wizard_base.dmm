@@ -129,7 +129,7 @@
 "av" = (
 /obj/structure/table/woodentable,
 /obj/machinery/chemical_dispenser/bar_soft/full,
-/obj/item/radio/intercom/syndicate{
+/obj/item/radio/intercom/wizard{
 	dir = 8;
 	pixel_x = 22
 	},
@@ -165,7 +165,7 @@
 /turf/simulated/floor/carpet,
 /area/map_template/wizard_station)
 "aA" = (
-/obj/item/radio/intercom/syndicate{
+/obj/item/radio/intercom/wizard{
 	dir = 8;
 	pixel_x = 22
 	},
@@ -256,7 +256,7 @@
 /area/map_template/wizard_station)
 "aL" = (
 /obj/structure/table/woodentable,
-/obj/item/radio/intercom/syndicate{
+/obj/item/radio/intercom/wizard{
 	dir = 4;
 	pixel_x = -22
 	},
@@ -403,7 +403,7 @@
 /obj/effect/floor_decal/spline/fancy/wood{
 	dir = 8
 	},
-/obj/item/radio/intercom/syndicate{
+/obj/item/radio/intercom/wizard{
 	dir = 1;
 	pixel_y = -22
 	},
@@ -416,7 +416,7 @@
 	dir = 4;
 	pixel_x = 11
 	},
-/obj/item/storage/mirror{
+/obj/structure/mirror{
 	pixel_x = 32
 	},
 /turf/unsimulated/floor{
@@ -455,7 +455,7 @@
 /obj/item/clothing/suit/wizrobe/gentlecoat,
 /obj/item/clothing/head/wizard/cap,
 /obj/item/staff/gentcane,
-/obj/item/radio/intercom/syndicate{
+/obj/item/radio/intercom/wizard{
 	dir = 1;
 	pixel_y = -22
 	},
@@ -487,7 +487,7 @@
 	},
 /area/map_template/wizard_station)
 "bn" = (
-/obj/item/radio/intercom/syndicate{
+/obj/item/radio/intercom/wizard{
 	dir = 1;
 	pixel_y = -22
 	},
@@ -503,7 +503,7 @@
 	},
 /area/map_template/wizard_station)
 "bp" = (
-/obj/item/radio/intercom/syndicate{
+/obj/item/radio/intercom/wizard{
 	pixel_y = 22
 	},
 /turf/unsimulated/floor{
@@ -545,7 +545,7 @@
 	},
 /area/map_template/wizard_station)
 "bv" = (
-/obj/structure/flora/ausbushes/fullgrass,
+/obj/structure/flora/bush/fullgrass,
 /turf/unsimulated/floor{
 	icon_state = "grass0";
 	name = "grass"
@@ -600,7 +600,7 @@
 	},
 /area/map_template/wizard_station)
 "bC" = (
-/obj/structure/flora/ausbushes/grassybush,
+/obj/structure/flora/bush/grassybush,
 /turf/unsimulated/floor{
 	icon_state = "grass0";
 	name = "grass"

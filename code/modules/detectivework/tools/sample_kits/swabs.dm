@@ -10,6 +10,11 @@
 		/datum/forensics/trace_dna,
 		/datum/forensics/blood_dna
 	)
+	material = /decl/material/solid/plastic
+	matter = list(
+		/decl/material/solid/cloth = MATTER_AMOUNT_REINFORCEMENT,
+		/decl/material/solid/glass = MATTER_AMOUNT_REINFORCEMENT,
+	)
 
 /obj/item/forensics/sample_kit/swabs/attack(var/mob/living/carbon/human/H, var/mob/user)
 	if(!istype(H))
@@ -80,5 +85,5 @@
 	)
 
 /obj/item/forensics/sample/swab/on_update_icon()
-	if(length(evidence))
-		icon_state = "swab_used"
+	. = ..()
+	icon_state = "swab[length(evidence)? "_used" : ""]"

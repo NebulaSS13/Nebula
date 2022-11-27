@@ -8,6 +8,7 @@
 	icon_base = 'icons/turf/walls/stone.dmi'
 	table_icon_base = "stone"
 	icon_reinf = 'icons/turf/walls/reinforced_stone.dmi'
+	wall_flags = 0 //Since we're using an unpaintable icon_base and icon_reinf
 	value = 1.5
 	exoplanet_rarity = MAT_RARITY_UNCOMMON
 
@@ -38,6 +39,7 @@
 	icon_base = 'icons/turf/walls/stone.dmi'
 	table_icon_base = "stone"
 	icon_reinf = 'icons/turf/walls/reinforced_stone.dmi'
+	wall_flags = 0 //Since we're using an unpaintable icon_base and icon_reinf
 	color = "#404c53"
 	value = 0.5
 	exoplanet_rarity = MAT_RARITY_UNCOMMON
@@ -60,6 +62,7 @@
 	icon_base = 'icons/turf/walls/stone.dmi'
 	table_icon_base = "stone"
 	icon_reinf = 'icons/turf/walls/reinforced_stone.dmi'
+	wall_flags = 0 //Since we're using an unpaintable icon_base and icon_reinf
 	color = "#b5c5a2"
 	value = 3
 	exoplanet_rarity = MAT_RARITY_UNCOMMON
@@ -86,6 +89,7 @@
 	icon_base = 'icons/turf/walls/stone.dmi'
 	table_icon_base = "stone"
 	icon_reinf = 'icons/turf/walls/reinforced_stone.dmi'
+	wall_flags = 0 //Since we're using an unpaintable icon_base and icon_reinf
 	color = "#98be30"
 	value = 0.5
 	exoplanet_rarity = MAT_RARITY_NOWHERE // Don't spawn this in plants.

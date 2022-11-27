@@ -12,7 +12,6 @@
 	mouse_opacity = 0
 	animate_movement = 0
 	var/amount = 3
-	var/expand = 1
 	var/metal = 0
 
 /obj/effect/effect/foam/Initialize(mapload, var/ismetal = 0)
@@ -158,7 +157,7 @@
 		qdel(src)
 
 /obj/structure/foamedmetal/attack_hand(var/mob/user)
-	if ((MUTATION_HULK in user.mutations) || (prob(75 - metal * 25)))
+	if (prob(75 - metal * 25))
 		user.visible_message("<span class='warning'>[user] smashes through the foamed metal.</span>", "<span class='notice'>You smash through the metal foam wall.</span>")
 		qdel(src)
 	else

@@ -32,11 +32,11 @@
 
 /obj/structure/skele_stand/attack_hand(mob/user)
 	if(swag.len)
-		var/obj/item/clothing/C = input("What piece of clothing do you want to remove?", "Skeleton undressing") as null|anything in list_values(swag)
+		var/obj/item/clothing/C = input("What piece of clothing do you want to remove?", "Skeleton Undressing") as null|anything in list_values(swag)
 		if(C)
 			swag -= get_key_by_value(swag, C)
 			user.put_in_hands(C)
-			to_chat(user,"<span class='notice'>You take \the [C] off \the [src]</span>")
+			to_chat(user, SPAN_NOTICE("You take \the [C] off \the [src]."))
 			update_icon()
 	else
 		rattle_bones(user, null)
@@ -54,7 +54,7 @@
 		to_chat(user,"[gender == MALE ? "He" : "She"] is wearing [english_list(swagnames)].")
 
 /obj/structure/skele_stand/attackby(obj/item/W, mob/user)
-	if(istype(W,/obj/item/pen))
+	if(IS_PEN(W))
 		var/nuname = sanitize(input(user,"What do you want to name this skeleton as?","Skeleton Christening",name) as text|null)
 		if(nuname && CanPhysicallyInteract(user))
 			SetName(nuname)

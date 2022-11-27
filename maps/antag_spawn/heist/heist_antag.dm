@@ -6,17 +6,14 @@
 	welcome_text = "Use :H to talk on your encrypted channel."
 	flags = ANTAG_OVERRIDE_JOB | ANTAG_OVERRIDE_MOB | ANTAG_CLEAR_EQUIPMENT | ANTAG_CHOOSE_NAME | ANTAG_VOTABLE | ANTAG_SET_APPEARANCE | ANTAG_HAS_LEADER
 	antaghud_indicator = "hudraider"
-
 	hard_cap = 6
 	hard_cap_round = 10
 	initial_spawn_req = 4
 	initial_spawn_target = 6
 	min_player_age = 14
-
-	id_type = /obj/item/card/id/syndicate
-
+	default_access = list(access_raider)
 	faction = "pirate"
-	base_to_load = /datum/map_template/ruin/antag_spawn/heist
+	base_to_load = "Heist Base"
 	default_outfit = /decl/hierarchy/outfit/raider
 	id_title = "Visitor"
 
@@ -67,18 +64,6 @@
 			return 0
 	return 1
 
-/decl/special_role/raider/create_id(mob/living/carbon/human/player, equip)
-	var/obj/item/card/id/id = ..()
-	if(player && id)
-		var/obj/item/storage/wallet/W = new(player)
-		W.handle_item_insertion(id)
-		if(player.equip_to_slot_or_del(W, slot_wear_id_str))
-			var/obj/item/cash/cash = new(get_turf(player))
-			cash.adjust_worth(rand(50,150)*10)
-			player.put_in_hands(cash)
-
 /decl/special_role/raider/equip(var/mob/living/carbon/human/player)
 	default_outfit = LAZYACCESS(outfits_per_species, player.species.name) || initial(default_outfit)
 	. = ..()
-	if(.)
-		create_radio(RAID_FREQ, player)

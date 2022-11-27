@@ -9,6 +9,7 @@
 	item_state = "contsolid"
 	w_class = ITEM_SIZE_SMALL
 	max_w_class = ITEM_SIZE_TINY
+	item_flags =  ITEM_FLAG_HOLLOW
 	max_storage_space = 21
 	can_hold = list(
 		/obj/item/chems/pill,
@@ -22,7 +23,6 @@
 
 	var/pop_sound = 'sound/effects/peelz.ogg'
 	var/wrapper_color
-	var/label
 
 /obj/item/storage/pill_bottle/remove_from_storage(obj/item/W, atom/new_location, NoUpdate)
 	. = ..()
@@ -70,9 +70,6 @@
 	update_icon()
 
 /obj/item/storage/pill_bottle/on_update_icon()
-	cut_overlays()
+	. = ..()
 	if(wrapper_color)
-		var/image/I = image(icon, "pillbottle_wrap")
-		I.color = wrapper_color
-		I.appearance_flags |= RESET_COLOR
-		add_overlay(I)
+		add_overlay(overlay_image(icon, "pillbottle_wrap", wrapper_color, RESET_COLOR))

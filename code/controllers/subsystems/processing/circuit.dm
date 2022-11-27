@@ -12,7 +12,6 @@ PROCESSING_SUBSYSTEM_DEF(circuit)
 	var/list/cached_components = list()              // Associative list of [component_path]:[component] pairs
 	var/list/all_assemblies = list()                 // Associative list of [assembly_name]:[assembly_path] pairs
 	var/list/cached_assemblies = list()              // Associative list of [assembly_path]:[assembly] pairs
-	var/list/all_circuits = list()                   // Associative list of [circuit_name]:[circuit_path] pairs
 	var/list/circuit_fabricator_recipe_list = list() // Associative list of [category_name]:[list_of_circuit_paths] pairs
 	var/cost_multiplier = SHEET_MATERIAL_AMOUNT / 10 // Each circuit cost unit is 200cm3
 

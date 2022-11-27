@@ -1,4 +1,5 @@
 /decl/chemical_reaction
+	abstract_type = /decl/chemical_reaction
 	var/name = null
 	var/result = null
 	var/list/required_reagents = list()

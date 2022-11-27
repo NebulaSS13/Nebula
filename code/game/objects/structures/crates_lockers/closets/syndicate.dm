@@ -56,7 +56,7 @@
 	new /obj/item/pinpointer/nukeop(src)
 	new /obj/item/pinpointer/nukeop(src)
 	new /obj/item/pinpointer/nukeop(src)
-	new /obj/item/modular_computer/pda/syndicate(src)
+	new /obj/item/modular_computer/pda/mercenary(src)
 	var/obj/item/radio/uplink/U = new(src)
 	U.hidden_uplink.uses = 40
 	return

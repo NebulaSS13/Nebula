@@ -58,7 +58,6 @@ var/global/list/ai_verbs_default = list(
 	status_flags = CANSTUN|CANPARALYSE|CANPUSH
 	shouldnt_see = list(/obj/effect/rune)
 	maxHealth = 200
-	var/list/networks = list(CAMERA_CHANNEL_PUBLIC)
 	var/obj/machinery/camera/camera = null
 	var/list/connected_robots = list()
 	var/aiRestorePowerRoutine = 0
@@ -74,7 +73,6 @@ var/global/list/ai_verbs_default = list(
 
 	var/camera_light_on = 0	//Defines if the AI toggled the light on the camera it's looking through.
 	var/datum/trackable/track = null
-	var/last_announcement = ""
 	var/control_disabled = 0
 	var/datum/announcement/priority/announcement
 	var/obj/machinery/ai_powersupply/psupply = null // Backwards reference to AI's powersupply object.
@@ -85,24 +83,10 @@ var/global/list/ai_verbs_default = list(
 
 	//NEWMALF VARIABLES
 	var/malfunctioning = 0						// Master var that determines if AI is malfunctioning.
-	var/datum/malf_hardware/hardware = null		// Installed piece of hardware.
-	var/datum/malf_research/research = null		// Malfunction research datum.
 	var/obj/machinery/power/apc/hack = null		// APC that is currently being hacked.
 	var/list/hacked_apcs = null					// List of all hacked APCs
-	var/hacking = 0								// Set to 1 if AI is hacking APC, cyborg, other AI, or running system override.
-	var/system_override = 0						// Set to 1 if system override is initiated, 2 if succeeded.
-	var/hack_can_fail = 1						// If 0, all abilities have zero chance of failing.
-	var/hack_fails = 0							// This increments with each failed hack, and determines the warning message text.
-	var/errored = 0								// Set to 1 if runtime error occurs. Only way of this happening i can think of is admin fucking up with varedit.
-	var/bombing_core = 0						// Set to 1 if core auto-destruct is activated
-	var/bombing_station = 0						// Set to 1 if station nuke auto-destruct is activated
-	var/override_CPUStorage = 0					// Bonus/Penalty CPU Storage. For use by admins/testers.
-	var/override_CPURate = 0					// Bonus/Penalty CPU generation rate. For use by admins/testers.
 	var/uncardable = 0							// Whether the AI can be carded when malfunctioning.
 	var/hacked_apcs_hidden = 0					// Whether the hacked APCs belonging to this AI are hidden, reduces CPU generation from APCs.
-	var/intercepts_communication = 0			// Whether the AI intercepts fax and emergency transmission communications.
-	var/last_failed_malf_message = null
-	var/last_failed_malf_title = null
 
 	var/datum/ai_icon/selected_sprite			// The selected icon set
 	var/carded
@@ -239,7 +223,7 @@ var/global/list/custom_ai_icons_by_ckey_and_name = list()
 		if(global.custom_ai_icons_by_ckey_and_name["[ckey][real_name]"])
 			selected_sprite = global.custom_ai_icons_by_ckey_and_name["[ckey][real_name]"]
 		else
-			for(var/datum/custom_icon/cicon AS_ANYTHING in SScustomitems.custom_icons_by_ckey[ckey])
+			for(var/datum/custom_icon/cicon as anything in SScustomitems.custom_icons_by_ckey[ckey])
 				if(cicon.category == "AI Icon" && lowertext(real_name) == cicon.character_name)
 					selected_sprite = new /datum/ai_icon("Custom Icon - [cicon.character_name]", cicon.ids_to_icons[1], cicon.ids_to_icons[2], COLOR_WHITE, cicon.ids_to_icons[cicon.ids_to_icons[1]])
 					global.custom_ai_icons_by_ckey_and_name["[ckey][real_name]"] = selected_sprite
@@ -595,7 +579,7 @@ var/global/list/custom_ai_icons_by_ckey_and_name = list()
 		var/obj/item/aicard/card = W
 		card.grab_ai(src, user)
 
-	else if(isWrench(W))
+	else if(IS_WRENCH(W))
 		if(anchored)
 			user.visible_message("<span class='notice'>\The [user] starts to unbolt \the [src] from the plating...</span>")
 			if(!do_after(user,40, src))
@@ -781,3 +765,6 @@ var/global/list/custom_ai_icons_by_ckey_and_name = list()
 	if(holo)
 		holo.set_dir_hologram(client.client_dir(SOUTH), src)
 	return ..()
+
+/mob/living/silicon/ai/say_understands(mob/speaker, decl/language/speaking)
+	return (!speaking && ispAI(speaker)) || ..()

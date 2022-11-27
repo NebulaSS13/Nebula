@@ -33,14 +33,14 @@
 		origin_tech = null
 
 /obj/item/implantcase/on_update_icon()
+	. = ..()
 	if (imp)
 		icon_state = "implantcase-[imp.implant_color]"
 	else
 		icon_state = "implantcase-0"
-	return
 
 /obj/item/implantcase/attackby(obj/item/I, mob/user)
-	if (istype(I, /obj/item/pen))
+	if (IS_PEN(I))
 		var/t = input(user, "What would you like the label to be?", src.name, null)
 		if (user.get_active_hand() != I)
 			return

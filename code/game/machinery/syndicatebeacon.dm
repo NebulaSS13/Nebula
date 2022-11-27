@@ -124,7 +124,7 @@
 		to_chat(user, "<span class='danger'>You need to screw the beacon to the floor first!</span>")
 
 /obj/machinery/singularity_beacon/attackby(obj/item/W, mob/user)
-	if(isScrewdriver(W))
+	if(IS_SCREWDRIVER(W))
 		if(use_power)
 			to_chat(user, "<span class='danger'>You need to deactivate the beacon first!</span>")
 			return

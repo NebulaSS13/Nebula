@@ -21,6 +21,7 @@
 	one_hand_penalty = 0
 	has_safety = FALSE
 	item_flags = ITEM_FLAG_INVALID_FOR_CHAMELEON
+	is_spawnable_type = FALSE // Do not manually spawn this, it will runtime/break.
 
 /obj/item/gun/energy/gun/secure/mounted/Initialize()
 	var/mob/borg = get_recursive_loc_of_type(/mob/living/silicon/robot)

@@ -9,7 +9,7 @@
 /turf/space,
 /area/space)
 "ac" = (
-/obj/effect/submap_landmark/joinable_submap/unishi,
+/obj/abstract/submap_landmark/joinable_submap/unishi,
 /turf/space,
 /area/space)
 "ad" = (
@@ -109,18 +109,18 @@
 /turf/simulated/floor/tiled,
 /area/unishi/bridge)
 "ax" = (
-/obj/effect/submap_landmark/spawnpoint/unishi_crew,
+/obj/abstract/submap_landmark/spawnpoint/unishi_crew,
 /turf/simulated/floor/tiled,
 /area/unishi/bridge)
 "ay" = (
-/obj/effect/submap_landmark/spawnpoint/unishi_crew,
+/obj/abstract/submap_landmark/spawnpoint/unishi_crew,
 /obj/machinery/atmospherics/unary/vent_pump/on{
 	dir = 4
 	},
 /turf/simulated/floor/tiled,
 /area/unishi/bridge)
 "az" = (
-/obj/effect/submap_landmark/spawnpoint/unishi_crew,
+/obj/abstract/submap_landmark/spawnpoint/unishi_crew,
 /obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers{
 	dir = 8
 	},
@@ -286,7 +286,7 @@
 /turf/simulated/floor/tiled,
 /area/unishi/bridge)
 "bb" = (
-/obj/structure/bedsheetbin,
+/obj/structure/bedsheetbin/mapped,
 /obj/structure/closet/wardrobe,
 /obj/random/handgun,
 /turf/simulated/floor,
@@ -872,8 +872,8 @@
 /area/unishi/living)
 "cD" = (
 /obj/structure/bed/chair/padded/black,
-/obj/item/modular_computer/telescreen/preset/generic{
-	pixel_y = 30
+/obj/machinery/computer/modular/telescreen/preset/generic{
+	dir = 2
 	},
 /turf/simulated/floor/tiled,
 /area/unishi/living)
@@ -996,7 +996,7 @@
 /turf/simulated/floor/tiled,
 /area/unishi/living)
 "cU" = (
-/obj/effect/submap_landmark/spawnpoint/unishi_researcher,
+/obj/abstract/submap_landmark/spawnpoint/unishi_researcher,
 /turf/simulated/floor/tiled,
 /area/unishi/living)
 "cV" = (
@@ -1036,7 +1036,7 @@
 /turf/simulated/floor/tiled,
 /area/unishi/living)
 "da" = (
-/obj/structure/filingcabinet/chestdrawer,
+/obj/structure/filing_cabinet/chestdrawer,
 /obj/machinery/atmospherics/unary/vent_scrubber/on{
 	dir = 4
 	},
@@ -1151,7 +1151,7 @@
 	dir = 8;
 	pixel_x = -15
 	},
-/obj/item/storage/mirror{
+/obj/structure/mirror{
 	pixel_x = -28
 	},
 /obj/machinery/atmospherics/unary/vent_scrubber/on{

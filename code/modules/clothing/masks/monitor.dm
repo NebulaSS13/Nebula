@@ -63,7 +63,7 @@
 /obj/item/clothing/mask/monitor/equipped()
 	..()
 	var/mob/living/carbon/human/H = loc
-	if(istype(H) && H.wear_mask == src)
+	if(istype(H) && H.get_equipped_item(slot_wear_mask_str) == src)
 		canremove = 0
 		to_chat(H, SPAN_NOTICE("\The [src] connects to your display output."))
 
@@ -93,7 +93,7 @@
 	if(!istype(H) || H != usr)
 		return
 
-	if(H.wear_mask != src)
+	if(H.get_equipped_item(slot_wear_mask_str) != src)
 		to_chat(usr, "<span class='warning'>You have not installed \the [src] yet.</span>")
 		return
 
@@ -104,14 +104,13 @@
 		options[i] = radial_button
 
 	var/choice = show_radial_menu(usr, usr, options, radius = 42, require_near = TRUE, tooltips = TRUE)
-	if(choice && (H.wear_mask == src) && !QDELETED(src) && !H.incapacitated(INCAPACITATION_DISABLED))
+	if(choice && (H.get_equipped_item(slot_wear_mask_str) == src) && !QDELETED(src) && !H.incapacitated(INCAPACITATION_DISABLED))
 		monitor_state_index = choice
 		update_icon()
 
 /obj/item/clothing/mask/monitor/on_update_icon()
+	. = ..()
 	if(!(monitor_state_index in monitor_states))
 		monitor_state_index = initial(monitor_state_index)
 	icon_state = "[initial(icon_state)]-[monitor_states[monitor_state_index]]"
-	var/mob/living/carbon/human/H = loc
-	if(istype(H))
-		H.update_inv_wear_mask()
+	update_clothing_icon()

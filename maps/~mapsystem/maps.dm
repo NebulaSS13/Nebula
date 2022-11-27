@@ -23,6 +23,9 @@ var/global/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 	var/full_name = "Unnamed Map"
 	var/path
 
+	// TODO: move all the lobby stuff onto this handler.
+	var/lobby_handler = /decl/lobby_handler
+
 	var/list/station_levels = list() // Z-levels the station exists on
 	var/list/admin_levels =   list() // Z-levels for admin functionality (Centcom, shuttle transit, etc)
 	var/list/contact_levels = list() // Z-levels that can be contacted from the station, for eg announcements
@@ -59,7 +62,12 @@ var/global/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 	// Current game year. Uses current system year + game_year num.
 	var/game_year = 288
 
-	var/map_admin_faxes = list()
+	/**
+	 * Associative list of network URIs to a list with their display name, color, and "req_access formated" needed access list.
+	 * EX: list("BIG_BOSS.COM" = list("name" = "Big boss", "color" = "#00ff00", "access" = list(list(access_heads, access_clown))))
+	 */
+	var/list/map_admin_faxes
+
 
 	var/shuttle_docked_message
 	var/shuttle_leaving_dock
@@ -89,7 +97,6 @@ var/global/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 	var/list/overmap_ids // Assoc list of overmap ID to overmap type, leave empty to disable overmap.
 
 	var/pray_reward_type = /obj/item/chems/food/cookie // What reward should be given by admin when a prayer is received?
-	var/list/map_markers_to_load
 
 	// The list of lobby screen images to pick() from.
 	var/list/lobby_screens = list('icons/default_lobby.png')
@@ -153,6 +160,7 @@ var/global/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 		ACCESS_REGION_GENERAL = list(access_change_ids),
 		ACCESS_REGION_SUPPLY = list(access_change_ids)
 	)
+	var/secrets_directory
 
 /datum/map/proc/get_lobby_track(var/exclude)
 	var/lobby_track_type
@@ -161,10 +169,20 @@ var/global/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 	else if(LAZYLEN(lobby_tracks))
 		lobby_track_type = pickweight(lobby_tracks - exclude)
 	else
-		lobby_track_type = pick(subtypesof(/decl/music_track) - exclude)
+		lobby_track_type = pick(decls_repository.get_decl_paths_of_subtype(/decl/music_track) - exclude)
 	return GET_DECL(lobby_track_type)
 
 /datum/map/proc/setup_map()
+
+	if(secrets_directory)
+		secrets_directory = trim(lowertext(secrets_directory))
+		if(!length(secrets_directory))
+			log_warning("[type] secrets_directory is zero length after trim.")
+		if(copytext(secrets_directory, -1) != "/")
+			secrets_directory = "[secrets_directory]/"
+		if(!fexists(secrets_directory))
+			log_warning("[type] secrets_directory does not exist.")
+		SSsecrets.load_directories |= secrets_directory
 
 	if(!allowed_jobs)
 		allowed_jobs = list()
@@ -180,8 +198,6 @@ var/global/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 	if(default_spawn && !(default_spawn in allowed_spawns))
 		PRINT_STACK_TRACE("Map datum [type] has default spawn point [default_spawn] not in the allowed spawn list.")
 
-	create_overmaps()
-
 	for(var/spawn_type in allowed_spawns)
 		allowed_spawns -= spawn_type
 		allowed_spawns += GET_DECL(spawn_type)
@@ -194,9 +210,17 @@ var/global/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 
 	game_year = (text2num(time2text(world.realtime, "YYYY")) + game_year)
 
+	setup_admin_faxes()
+
 	lobby_track = get_lobby_track()
 	update_titlescreen()
 	world.update_status()
+
+///Generates the default admin faxes addresses
+/datum/map/proc/setup_admin_faxes()
+	LAZYSET(map_admin_faxes, uppertext(replacetext("[boss_name].COM",          " ", "_")), list("name" = "[boss_name]",           "color" = "#006100", "access" = list(access_heads)))
+	LAZYSET(map_admin_faxes, uppertext(replacetext("[boss_short]_SUPPLY.COM",  " ", "_")), list("name" = "[boss_short] Supply",   "color" = "#5f4519", "access" = list(access_heads)))
+	LAZYSET(map_admin_faxes, uppertext(replacetext("[system_name]_POLICE.GOV", " ", "_")), list("name" = "[system_name] Police",  "color" = "#1f66a0", "access" = list(access_heads)))
 
 /datum/map/proc/setup_job_lists()
 	return
@@ -214,25 +238,28 @@ var/global/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 #else
 	report_progress("Loading away sites...")
 	var/list/sites_by_spawn_weight = list()
-	for (var/site_name in SSmapping.away_sites_templates)
-		var/datum/map_template/ruin/away_site/site = SSmapping.away_sites_templates[site_name]
+	var/list/away_sites_templates = SSmapping.get_templates_by_category(MAP_TEMPLATE_CATEGORY_AWAYSITE)
+	for (var/site_name in away_sites_templates)
+		var/datum/map_template/site = away_sites_templates[site_name]
 
 		if((site.template_flags & TEMPLATE_FLAG_SPAWN_GUARANTEED) && site.load_new_z()) // no check for budget, but guaranteed means guaranteed
 			report_progress("Loaded guaranteed away site [site]!")
-			away_site_budget -= site.cost
+			away_site_budget -= site.get_template_cost()
 			continue
 
-		sites_by_spawn_weight[site] = site.spawn_weight
+		sites_by_spawn_weight[site] = site.get_spawn_weight()
 	while (away_site_budget > 0 && sites_by_spawn_weight.len)
-		var/datum/map_template/ruin/away_site/selected_site = pickweight(sites_by_spawn_weight)
+		var/datum/map_template/selected_site = pickweight(sites_by_spawn_weight)
 		if (!selected_site)
 			break
 		sites_by_spawn_weight -= selected_site
-		if(selected_site.cost > away_site_budget)
+		var/site_cost = selected_site.get_template_cost()
+		if(site_cost > away_site_budget)
 			continue
 		if (selected_site.load_new_z())
 			report_progress("Loaded away site [selected_site]!")
-			away_site_budget -= selected_site.cost
+			away_site_budget -= site_cost
+
 	report_progress("Finished loading away sites, remaining budget [away_site_budget], remaining sites [sites_by_spawn_weight.len]")
 #endif
 
@@ -385,22 +412,22 @@ var/global/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 		var/turf/playerTurf = get_turf(player)
 		if(SSevac.evacuation_controller && SSevac.evacuation_controller.round_over() && SSevac.evacuation_controller.emergency_evacuation)
 			if(isNotAdminLevel(playerTurf.z))
-				to_chat(player, "<font color='blue'><b>You managed to survive, but were marooned on [station_name()] as [player.real_name]...</b></font>")
+				to_chat(player, SPAN_NEUTRAL("<b>You managed to survive, but were marooned on [station_name()] as [player.real_name]...</b>"))
 			else
-				to_chat(player, "<font color='green'><b>You managed to survive the events on [station_name()] as [player.real_name].</b></font>")
+				to_chat(player, SPAN_GOOD("<b>You managed to survive the events on [station_name()] as [player.real_name].</b>"))
 		else if(isAdminLevel(playerTurf.z))
-			to_chat(player, "<font color='green'><b>You successfully underwent crew transfer after events on [station_name()] as [player.real_name].</b></font>")
+			to_chat(player, SPAN_GOOD("<b>You successfully underwent crew transfer after events on [station_name()] as [player.real_name].</b>"))
 		else if(issilicon(player))
-			to_chat(player, "<font color='green'><b>You remain operational after the events on [station_name()] as [player.real_name].</b></font>")
+			to_chat(player, SPAN_GOOD("<b>You remain operational after the events on [station_name()] as [player.real_name].</b>"))
 		else
-			to_chat(player, "<font color='blue'><b>You got through just another workday on [station_name()] as [player.real_name].</b></font>")
+			to_chat(player, SPAN_NEUTRAL("<b>You got through just another workday on [station_name()] as [player.real_name].</b>"))
 	else
 		if(isghost(player))
 			var/mob/observer/ghost/O = player
 			if(!O.started_as_observer)
-				to_chat(player, "<font color='red'><b>You did not survive the events on [station_name()]...</b></font>")
+				to_chat(player, SPAN_BAD("<b>You did not survive the events on [station_name()]...</b>"))
 		else
-			to_chat(player, "<font color='red'><b>You did not survive the events on [station_name()]...</b></font>")
+			to_chat(player, SPAN_BAD("<b>You did not survive the events on [station_name()]...</b>"))
 
 /datum/map/proc/create_passport(var/mob/living/carbon/human/H)
 	if(!passport_type)
@@ -411,11 +438,18 @@ var/global/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 	if(!H.equip_to_slot(pass, slot_in_backpack_str))
 		H.put_in_hands(pass)
 
-/datum/map/proc/create_overmaps()
-	for(var/overmap_id in overmap_ids)
-		var/overmap_type = overmap_ids[overmap_id] || /datum/overmap
-		new overmap_type(overmap_id)
-
 /datum/map/proc/populate_overmap_events()
 	for(var/overmap_id in global.overmaps_by_name)
 		SSmapping.overmap_event_handler.create_events(global.overmaps_by_name[overmap_id])
+
+/datum/map/proc/get_zlevel_name(var/z)
+	z = "[z]"
+	if(!z)
+		return "Unknown Sector"
+	var/obj/abstract/level_data/level = global.levels_by_z[z]
+	if(level?.level_name)
+		return level.level_name
+	var/obj/effect/overmap/overmap_entity = global.overmap_sectors[z]
+	if(overmap_entity?.name)
+		return overmap_entity.name
+	return "Sector #[z]"

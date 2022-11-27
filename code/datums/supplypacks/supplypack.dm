@@ -1,6 +1,7 @@
 /decl/hierarchy/supply_pack
 	name = "Supply Packs"
 	abstract_type = /decl/hierarchy/supply_pack
+	expected_type = /decl/hierarchy/supply_pack
 	var/list/contains = list()
 	var/manifest = ""
 	var/cost
@@ -50,9 +51,9 @@ var/global/list/cargoprices = list()
 	switch(security_level)
 		if(SUPPLY_SECURITY_ELEVATED)
 			if(security_state.all_security_levels.len > 1)
-				security_level = security_state.all_security_levels[2] 
+				security_level = security_state.all_security_levels[2]
 			else
-				security_level = security_state.high_security_level 
+				security_level = security_state.high_security_level
 		if(SUPPLY_SECURITY_HIGH)
 			security_level = security_state.high_security_level
 	if(!istype(security_level))

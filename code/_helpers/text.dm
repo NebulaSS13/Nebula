@@ -33,7 +33,7 @@
 		if(input_length > max_length)
 			to_chat(usr, SPAN_WARNING("Your message is too long by [input_length - max_length] character\s."))
 			return
-		input = copytext_char(input, 1, max_length)
+		input = copytext_char(input, 1, max_length + 1)
 
 	if(extra)
 		input = replace_characters(input, list("\n"=" ","\t"=" "))
@@ -198,6 +198,49 @@
 			if(32)			//space
 				dat += "_"
 	return jointext(dat, null)
+
+//Used to strip text of everything but letters and numbers, and select special symbols.
+//Requires that the filename has an alphanumeric character.
+/proc/sanitize_for_file(text)
+	if(!text) return ""
+	var/list/dat = list()
+	var/has_alphanumeric = FALSE
+	var/last_was_fullstop = FALSE
+	for(var/i=1, i<=length(text), i++)
+		var/ascii_char = text2ascii(text,i)
+		switch(ascii_char)
+			if(65 to 90)	//A-Z
+				dat += ascii2text(ascii_char)
+				has_alphanumeric = TRUE
+				last_was_fullstop = FALSE
+			if(97 to 122)	//a-z
+				dat += ascii2text(ascii_char)
+				has_alphanumeric = TRUE
+				last_was_fullstop = FALSE
+			if(48 to 57)	//0-9
+				dat += ascii2text(ascii_char)
+				has_alphanumeric = TRUE
+				last_was_fullstop = FALSE
+			if(32)			//space
+				dat += ascii2text(ascii_char)
+				last_was_fullstop = FALSE
+			if(33, 36, 40, 41, 42, 45, 95) //!, $, (, ), *, -, _
+				dat += ascii2text(ascii_char)
+				last_was_fullstop = FALSE
+			if(46)			//.
+				if(last_was_fullstop) // No repeats of . to avoid confusion with ..
+					continue
+				dat += ascii2text(ascii_char)
+				last_was_fullstop = TRUE
+
+	if(!has_alphanumeric)
+		return ""
+
+	if(dat[length(dat)] == ".")	//kill trailing .
+		dat.Cut(length(dat))
+	return jointext(dat, null)
+
+
 // UNICODE: Convert to regex?
 
 //Returns null if there is any bad text in the string
@@ -640,5 +683,52 @@ var/global/list/fullstop_alternatives = list(".", "!", "?")
 #define APPEND_FULLSTOP_IF_NEEDED(TXT) ((copytext_char(TXT, -1, 0) in global.fullstop_alternatives) ? TXT : "[TXT].")
 
 /proc/make_rainbow(var/msg)
+	var/static/list/rainbow_classes = list(
+		"font_red",
+		"font_orange",
+		"font_yellow",
+		"font_green",
+		"font_blue",
+		"font_violet",
+		"font_purple"
+	)
 	for(var/i = 1 to length(msg))
-		. += "<font color='[get_random_colour(1)]'>[copytext(msg, i, i+1)]</font>"
+		. += "<span class='[pick(rainbow_classes)]'>[copytext(msg, i, i+1)]</span>"
+
+// Returns direction-string, rounded to multiples of 22.5, from the first parameter to the second
+// N, NNE, NE, ENE, E, ESE, SE, SSE, S, SSW, SW, WSW, W, WNW, NW, NNW
+/proc/get_compass_direction_string(var/turf/A, var/turf/B)
+	var/degree = Get_Angle(A, B)
+	switch(round(degree, 22.5) % 360) // % appears to round down floats, hence below values all being integers
+		if(0)
+			return "North"
+		if(22)
+			return "North-Northeast"
+		if(45)
+			return "Northeast"
+		if(67)
+			return "East-Northeast"
+		if(90)
+			return "East"
+		if(112)
+			return "East-Southeast"
+		if(135)
+			return "Southeast"
+		if(157)
+			return "South-Southeast"
+		if(180)
+			return "South"
+		if(202)
+			return "South-Southwest"
+		if(225)
+			return "Southwest"
+		if(247)
+			return "West-Southwest"
+		if(270)
+			return "West"
+		if(292)
+			return "West-Northwest"
+		if(315)
+			return "Northwest"
+		if(337)
+			return "North-Northwest"

@@ -29,6 +29,7 @@
 	desc = "A fossilised, pre-Stygian alien crustacean."
 	icon = 'icons/obj/xenoarchaeology.dmi'
 	icon_state = "shell"
+	material = /decl/material/solid/stone/sandstone //Should probably be limestone, but whatever
 
 /obj/item/fossil/plant
 	name = "fossilised plant"
@@ -92,7 +93,7 @@
 					set_density(1)
 		else
 			to_chat(user, SPAN_NOTICE("\The [src] is already complete."))
-	else if(istype(W,/obj/item/pen))
+	else if(IS_PEN(W))
 		plaque_contents = sanitize(input("What would you like to write on the plaque:","Skeleton plaque",""))
 		user.visible_message("[user] writes something on the base of [src].","You relabel the plaque on the base of [src].")
 	else

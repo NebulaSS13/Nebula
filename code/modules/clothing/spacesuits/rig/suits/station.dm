@@ -206,7 +206,7 @@
 	boots =  /obj/item/clothing/shoes/magboots/rig/hazmat
 	gloves = /obj/item/clothing/gloves/rig/hazmat
 
-	allowed = list(/obj/item/flashlight,/obj/item/tank,/obj/item/suit_cooling_unit,/obj/item/stack/flag,/obj/item/storage/excavation,/obj/item/pickaxe,/obj/item/scanner/health,/obj/item/measuring_tape,/obj/item/ano_scanner,/obj/item/depth_scanner,/obj/item/core_sampler,/obj/item/gps,/obj/item/pinpointer/radio,/obj/item/radio/beacon,/obj/item/pickaxe/xeno,/obj/item/storage/bag/fossils)
+	allowed = list(/obj/item/flashlight,/obj/item/tank,/obj/item/suit_cooling_unit,/obj/item/stack/flag,/obj/item/storage/excavation,/obj/item/pickaxe,/obj/item/scanner/health,/obj/item/scanner/breath,/obj/item/measuring_tape,/obj/item/ano_scanner,/obj/item/depth_scanner,/obj/item/core_sampler,/obj/item/gps,/obj/item/pinpointer/radio,/obj/item/radio/beacon,/obj/item/pickaxe/xeno,/obj/item/storage/bag/fossils)
 
 	anomaly_shielding = 1
 	req_access = list(access_tox)
@@ -252,7 +252,7 @@
 	boots =  /obj/item/clothing/shoes/magboots/rig/medical
 	gloves = /obj/item/clothing/gloves/rig/medical
 
-	allowed = list(/obj/item/flashlight,/obj/item/tank,/obj/item/suit_cooling_unit,/obj/item/storage/firstaid,/obj/item/scanner/health,/obj/item/stack/medical,/obj/item/roller,/obj/item/auto_cpr,/obj/item/inflatable_dispenser)
+	allowed = list(/obj/item/flashlight,/obj/item/tank,/obj/item/suit_cooling_unit,/obj/item/storage/firstaid,/obj/item/scanner/health,/obj/item/scanner/breath,/obj/item/stack/medical,/obj/item/roller,/obj/item/auto_cpr,/obj/item/inflatable_dispenser)
 
 	req_access = list(access_medical_equip)
 

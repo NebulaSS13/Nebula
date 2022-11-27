@@ -13,7 +13,7 @@
 	)
 	equipment = list(
 		/obj/item/borg/sight/meson,
-		/obj/item/extinguisher,
+		/obj/item/chems/spray/extinguisher,
 		/obj/item/weldingtool/largetank,
 		/obj/item/screwdriver,
 		/obj/item/wrench,
@@ -23,8 +23,8 @@
 		/obj/item/t_scanner,
 		/obj/item/scanner/gas,
 		/obj/item/geiger,
-		/obj/item/taperoll/engineering,
-		/obj/item/taperoll/atmos,
+		/obj/item/stack/tape_roll/barricade_tape/engineering,
+		/obj/item/stack/tape_roll/barricade_tape/atmos,
 		/obj/item/gripper,
 		/obj/item/gripper/no_use/loader,
 		/obj/item/lightreplacer,

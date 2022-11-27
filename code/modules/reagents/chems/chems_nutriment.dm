@@ -4,7 +4,6 @@
 	lore_text = "All the vitamins, minerals, and carbohydrates the body needs in pure form."
 	taste_mult = 4
 	metabolism = REM * 4
-	hidden_from_codex = TRUE // They don't need to generate a codex entry, their recipes will do that.
 	color = "#664330"
 	value = 1.2
 	fruit_descriptor = "nutritious"
@@ -38,22 +37,22 @@
 				data -= taste
 	. = data
 
-/decl/material/liquid/nutriment/affect_blood(var/mob/living/M, var/alien, var/removed, var/datum/reagents/holder)
+/decl/material/liquid/nutriment/affect_blood(var/mob/living/M, var/removed, var/datum/reagents/holder)
 	if(!injectable)
 		M.adjustToxLoss(0.2 * removed)
 		return
-	affect_ingest(M, alien, removed, holder)
+	affect_ingest(M, removed, holder)
 
-/decl/material/liquid/nutriment/affect_ingest(var/mob/living/M, var/alien, var/removed, var/datum/reagents/holder)
-	adjust_nutrition(M, alien, removed)
+/decl/material/liquid/nutriment/affect_ingest(var/mob/living/M, var/removed, var/datum/reagents/holder)
+	adjust_nutrition(M, removed)
 
 	if(M.HasTrait(/decl/trait/metabolically_inert))
 		return
 
-	M.heal_organ_damage(0.5 * removed, 0) //what	
+	M.heal_organ_damage(0.5 * removed, 0) //what
 	M.add_chemical_effect(CE_BLOODRESTORE, 4 * removed)
 
-/decl/material/liquid/nutriment/proc/adjust_nutrition(var/mob/living/carbon/M, var/alien, var/removed)
+/decl/material/liquid/nutriment/proc/adjust_nutrition(var/mob/living/carbon/M, var/removed)
 	var/nut_removed = removed
 	var/hyd_removed = removed
 	if(nutriment_factor)
@@ -91,10 +90,9 @@
 	color = "#440000"
 	uid = "chem_nutriment_protein"
 
-/decl/material/liquid/nutriment/protein/adjust_nutrition(mob/living/carbon/M, alien, removed)
+/decl/material/liquid/nutriment/protein/adjust_nutrition(mob/living/carbon/M, removed)
 	var/malus_level = M.GetTraitLevel(/decl/trait/malus/animal_protein)
 	var/malus_factor = malus_level ? malus_level * 0.25 : 0
-
 	M.adjustToxLoss(removed * malus_factor)
 	M.adjust_nutrition(nutriment_factor * removed * (1 - malus_factor))
 
@@ -137,6 +135,7 @@
 
 /decl/material/liquid/nutriment/batter
 	name = "batter"
+	codex_name = "plain batter"
 	lore_text = "A gooey mixture of eggs and flour, a base for turning wheat into food."
 	taste_description = "blandness"
 	nutriment_factor = 3
@@ -151,13 +150,14 @@
 
 /decl/material/liquid/nutriment/batter/cakebatter
 	name = "cake batter"
+	codex_name = null
 	lore_text = "A gooey mixture of eggs, flour and sugar, a important precursor to cake!"
 	taste_description = "sweetness"
 	color = "#ffe992"
 	uid = "chem_nutriment_cakebatter"
 
 /decl/material/liquid/nutriment/coffee
-	name = "coffee powder"
+	name = "ground coffee"
 	lore_text = "A bitter powder made by grinding coffee beans."
 	taste_description = "bitterness"
 	taste_mult = 1.3
@@ -166,7 +166,7 @@
 	fruit_descriptor = "bitter"
 	uid = "chem_nutriment_coffeepowder"
 
-/decl/material/liquid/nutriment/coffee/affect_blood(var/mob/living/M, var/alien, var/removed, var/datum/reagents/holder)
+/decl/material/liquid/nutriment/coffee/affect_blood(var/mob/living/M, var/removed, var/datum/reagents/holder)
 	..()
 	M.add_chemical_effect(CE_PULSE, 2)
 
@@ -177,7 +177,7 @@
 	uid = "chem_nutriment_instantcoffee"
 
 /decl/material/liquid/nutriment/tea
-	name = "tea powder"
+	name = "tea leaves"
 	lore_text = "A dark, tart powder made from black tea leaves."
 	taste_description = "tartness"
 	taste_mult = 1.3

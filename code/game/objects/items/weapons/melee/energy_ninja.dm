@@ -7,6 +7,7 @@
 	w_class = ITEM_SIZE_TINY //technically it's just energy or something, I dunno
 	active_attack_verb = list("attacked", "slashed", "stabbed", "sliced", "torn", "ripped", "diced", "cut")
 	hitsound = 'sound/weapons/blade1.ogg'
+	is_spawnable_type = FALSE // Do not manually spawn this, it will runtime/break.
 
 	active =              TRUE
 	active_force =        40 //Normal attacks deal very high damage - about the same as wielded fire axe

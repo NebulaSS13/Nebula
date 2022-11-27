@@ -7,7 +7,7 @@
 	anchored = 1.0
 	layer = CATWALK_LAYER
 	footstep_type = /decl/footsteps/catwalk
-	obj_flags = OBJ_FLAG_NOFALL
+	obj_flags = OBJ_FLAG_NOFALL | OBJ_FLAG_MOVES_UNSUPPORTED
 	handle_generic_blending = TRUE
 	tool_interaction_flags = TOOL_INTERACTION_DECONSTRUCT
 	material = /decl/material/solid/metal/steel
@@ -93,8 +93,8 @@
 		return TRUE
 
 /obj/structure/catwalk/attack_robot(var/mob/user)
-	if(Adjacent(user))
-		attack_hand(user)
+	if(CanPhysicallyInteract(user))
+		return attack_hand(user)
 
 /obj/structure/catwalk/attackby(obj/item/C, mob/user)
 	. = ..()

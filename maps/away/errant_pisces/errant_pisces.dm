@@ -12,7 +12,6 @@
 
 /datum/map_template/ruin/away_site/errant_pisces
 	name = "Errant Pisces"
-	id = "awaysite_errant_pisces"
 	description = "Carp trawler"
 	suffixes = list("errant_pisces/errant_pisces.dmm")
 	cost = 1
@@ -66,14 +65,13 @@
 	icon_state = "fishfillet"
 	filling_color = "#cecece"
 	center_of_mass = @"{'x':17,'y':13}"
+	bitesize = 8
 
-/obj/item/chems/food/sharkmeat/Initialize()
+/obj/item/chems/food/sharkmeat/populate_reagents()
 	. = ..()
 	reagents.add_reagent(/decl/material/liquid/nutriment/protein, 5)
-	reagents.add_reagent(/decl/material/liquid/psychoactives, 1)
-	reagents.add_reagent(/decl/material/gas/chlorine, 1)
-	src.bitesize = 8
-
+	reagents.add_reagent(/decl/material/liquid/psychoactives,     1)
+	reagents.add_reagent(/decl/material/gas/chlorine,             1)
 
 /obj/structure/net//if you want to have fun, make them to be draggable as a whole unless at least one piece is attached to a non-space turf or anchored object
 	name = "industrial net"
@@ -192,6 +190,7 @@
 	amount = 30
 
 /obj/item/stack/net/on_update_icon()
+	. = ..()
 	if(amount == 1)
 		icon_state = "net"
 	else

@@ -32,6 +32,6 @@ INITIALIZE_IMMEDIATE(/obj/abstract/weather_system)
 		global.weather_by_z["[tz]"] = src
 
 	// Update turf weather.
-	for(var/turf/T AS_ANYTHING in block(locate(1, 1, highest_z), locate(world.maxx, world.maxy, highest_z)))
+	for(var/turf/T as anything in block(locate(1, 1, highest_z), locate(world.maxx, world.maxy, highest_z)))
 		T.update_weather(src)
 		CHECK_TICK

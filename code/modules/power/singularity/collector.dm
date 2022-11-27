@@ -102,11 +102,11 @@ var/global/list/rad_collectors = list()
 		src.loaded_tank = W
 		update_icon()
 		return 1
-	else if(isCrowbar(W))
+	else if(IS_CROWBAR(W))
 		if(loaded_tank && !src.locked)
 			eject()
 			return 1
-	else if(isWrench(W))
+	else if(IS_WRENCH(W))
 		if(loaded_tank)
 			to_chat(user, "<span class='notice'>Remove the tank first.</span>")
 			return 1

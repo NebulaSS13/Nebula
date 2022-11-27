@@ -19,7 +19,6 @@
 	var/mode = 0
 	var/concentration = 0
 	var/con_lock = 0
-	var/transfer_moles = 0
 	var/datum/gas_mixture/air
 	var/list/nodes // lazy list of nodes
 	var/datum/pipe_network/network
@@ -44,14 +43,14 @@
 	if(LAZYLEN(nodes))
 		return
 	master.atmos_init()
-	for(var/obj/machinery/atmospherics/node AS_ANYTHING in nodes)
+	for(var/obj/machinery/atmospherics/node as anything in nodes)
 		node.atmos_init()
 	master.build_network()
-	for(var/obj/machinery/atmospherics/node AS_ANYTHING in nodes)
+	for(var/obj/machinery/atmospherics/node as anything in nodes)
 		node.build_network()
 
 /datum/omni_port/proc/disconnect()
-	for(var/obj/machinery/atmospherics/node AS_ANYTHING in nodes)
+	for(var/obj/machinery/atmospherics/node as anything in nodes)
 		node.disconnect(master)
 		master.disconnect(node)
 

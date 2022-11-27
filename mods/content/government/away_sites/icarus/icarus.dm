@@ -38,7 +38,6 @@
 
 /datum/map_template/ruin/away_site/icarus
 	name = "Fallen Icarus"
-	id = "awaysite_icarus"
 	description = "The crashlanding site of the SEV Icarus."
 	prefix = "mods/content/government/away_sites/"
 	suffixes = list("icarus/icarus-1.dmm", "icarus/icarus-2.dmm")
@@ -82,7 +81,7 @@
 	color = COLOR_GRAY40
 	label = "label_warning"
 /obj/item/paper/icarus/log
-	name = "Printed piece of paper"
+	name = "printed piece of paper"
 	info = "\[LOG\]: Orbit stabilized. Next correction burst, est.: 2 hrs 12 m<br>\
 			\[LOG\]: Orbit stabiliztion. Announcing...<br>\
 			\[ANN\]: Attention all hands, SEV Icarus is stabilizing orbit in 30 seconds. Prepare for possible gravitational spikes.<br>\

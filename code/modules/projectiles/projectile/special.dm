@@ -124,7 +124,7 @@
 
 /obj/item/projectile/energy/florayield/on_hit(var/atom/target, var/blocked = 0)
 	var/mob/M = target
-	if(ishuman(target)) //These rays make plantmen fat.
+	if(ishuman(target))
 		var/mob/living/carbon/human/H = M
 		if((H.species.species_flags & SPECIES_FLAG_IS_PLANT) && (H.nutrition < 500))
 			H.adjust_nutrition(30)
@@ -170,6 +170,14 @@
 	icon_state = ICON_STATE_WORLD
 	var/primed = null
 	throwforce = 15
+	material = /decl/material/solid/fiberglass
+	matter = list(
+		/decl/material/solid/metal/aluminium = MATTER_AMOUNT_REINFORCEMENT,
+		/decl/material/solid/metal/copper    = MATTER_AMOUNT_TRACE,
+		/decl/material/solid/silicon         = MATTER_AMOUNT_TRACE,
+		/decl/material/liquid/anfo           = MATTER_AMOUNT_REINFORCEMENT,
+		/decl/material/liquid/fuel           = MATTER_AMOUNT_REINFORCEMENT,
+	)
 
 /obj/item/missile/throw_impact(atom/hit_atom)
 	..()

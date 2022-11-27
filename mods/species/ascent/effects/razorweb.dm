@@ -3,6 +3,7 @@
 	desc = "A wad of crystalline monofilament."
 	icon = 'mods/species/ascent/icons/razorweb.dmi'
 	icon_state = "wad"
+	material = /decl/material/solid/quartz
 	var/web_type = /obj/effect/razorweb
 
 /obj/item/razorweb/throw_impact(var/atom/hit_atom)
@@ -32,8 +33,7 @@
 	var/image/web
 	var/static/species_immunity_list = list(
 		SPECIES_MANTID_ALATE   = TRUE,
-		SPECIES_MANTID_GYNE    = TRUE,
-		SPECIES_SERPENTID      = TRUE
+		SPECIES_MANTID_GYNE    = TRUE
 	)
 
 /obj/effect/razorweb/Destroy()

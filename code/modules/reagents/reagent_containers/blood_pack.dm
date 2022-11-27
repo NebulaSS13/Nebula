@@ -2,7 +2,9 @@
 	name = "blood packs box"
 	desc = "This box contains blood packs."
 	icon_state = "sterile"
-	startswith = list(/obj/item/chems/ivbag = 7)
+	
+/obj/item/storage/box/bloodpacks/WillContain()
+	return list(/obj/item/chems/ivbag = 7)
 
 /obj/item/chems/ivbag
 	name = "\improper IV bag"
@@ -30,15 +32,11 @@
 		w_class = ITEM_SIZE_TINY
 
 /obj/item/chems/ivbag/on_update_icon()
-	overlays.Cut()
+	. = ..()
 	var/percent = round(reagents.total_volume / volume * 100)
 	if(reagents.total_volume)
-		var/image/filling = image('icons/obj/bloodpack.dmi', "[round(percent,25)]")
-		filling.color = reagents.get_color()
-		overlays += filling
-	overlays += image('icons/obj/bloodpack.dmi', "top")
-	if(attached)
-		overlays += image('icons/obj/bloodpack.dmi', "dongle")
+		add_overlay(overlay_image(icon, "[round(percent,25)]", reagents.get_color()))
+	add_overlay(attached? "dongle" : "top")
 
 /obj/item/chems/ivbag/handle_mouse_drop(atom/over, mob/user)
 	if(ismob(loc))
@@ -75,9 +73,8 @@
 	reagents.trans_to_mob(attached, amount_per_transfer_from_this, CHEM_INJECT)
 	update_icon()
 
-/obj/item/chems/ivbag/nanoblood/Initialize()
-	. = ..()
-	reagents.add_reagent(/decl/material/liquid/nanoblood, volume)
+/obj/item/chems/ivbag/nanoblood/populate_reagents()
+	reagents.add_reagent(/decl/material/liquid/nanoblood, reagents.maximum_volume)
 
 /obj/item/chems/ivbag/blood
 	name = "blood pack"
@@ -87,7 +84,10 @@
 	. = ..()
 	if(blood_type)
 		name = "blood pack ([blood_type])"
-		reagents.add_reagent(/decl/material/liquid/blood, volume, list("donor" = null, "blood_DNA" = null, "blood_type" = blood_type, "trace_chem" = null))
+
+/obj/item/chems/ivbag/blood/populate_reagents()
+	if(blood_type)
+		reagents.add_reagent(/decl/material/liquid/blood, reagents.maximum_volume, list("donor" = null, "blood_DNA" = null, "blood_type" = blood_type, "trace_chem" = null))
 
 /obj/item/chems/ivbag/blood/APlus
 	blood_type = "A+"

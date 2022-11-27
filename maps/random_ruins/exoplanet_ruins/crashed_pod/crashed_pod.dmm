@@ -17,7 +17,7 @@
 /obj/structure/wall_frame,
 /obj/structure/grille,
 /obj/structure/window/borosilicate_reinforced/full,
-/obj/effect/submap_landmark/joinable_submap/crashed_pod,
+/obj/abstract/submap_landmark/joinable_submap/crashed_pod,
 /turf/simulated/floor/plating,
 /area/map_template/crashed_pod)
 "ae" = (
@@ -123,7 +123,7 @@
 /obj/structure/hygiene/toilet{
 	dir = 8
 	},
-/obj/item/storage/mirror{
+/obj/structure/mirror{
 	pixel_x = 27
 	},
 /obj/item/stock_parts/circuitboard/solar_control,
@@ -447,7 +447,7 @@
 /turf/simulated/floor/tiled/techfloor,
 /area/map_template/crashed_pod)
 "aZ" = (
-/obj/effect/submap_landmark/spawnpoint/crashed_pod_survivor,
+/obj/abstract/submap_landmark/spawnpoint/crashed_pod_survivor,
 /obj/structure/bed/chair/shuttle/black,
 /obj/structure/window/reinforced{
 	dir = 8
@@ -471,7 +471,7 @@
 /turf/simulated/floor/plating,
 /area/map_template/crashed_pod)
 "bc" = (
-/obj/effect/submap_landmark/spawnpoint/crashed_pod_survivor,
+/obj/abstract/submap_landmark/spawnpoint/crashed_pod_survivor,
 /obj/structure/bed/chair/shuttle/black,
 /obj/effect/decal/cleanable/dirt,
 /turf/simulated/floor/tiled/dark/monotile,
@@ -499,7 +499,7 @@
 /turf/simulated/floor/tiled/dark,
 /area/map_template/crashed_pod)
 "bf" = (
-/obj/effect/submap_landmark/spawnpoint/crashed_pod_survivor,
+/obj/abstract/submap_landmark/spawnpoint/crashed_pod_survivor,
 /obj/structure/bed/chair/shuttle/black,
 /obj/structure/window/reinforced{
 	dir = 4

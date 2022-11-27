@@ -17,6 +17,7 @@ var/global/list/overmap_helm_computers
 	icon_screen = "helm"
 	light_color = "#7faaff"
 	core_skill = SKILL_PILOT
+
 	var/autopilot = 0
 	var/list/known_sectors = list()
 	var/dx		//desitnation
@@ -25,15 +26,26 @@ var/global/list/overmap_helm_computers
 	var/accellimit = 1 //manual limiter for acceleration
 	/// The mob currently operating the helm - The last one to click one of the movement buttons and be on the overmap screen. Set to `null` for autopilot or when the mob isn't in range.
 	var/weakref/current_operator
+	var/obj/compass_holder/overmap/compass
 
 /obj/machinery/computer/ship/helm/Initialize()
 	. = ..()
 	LAZYADD(global.overmap_helm_computers, src)
-	for(var/obj/effect/overmap/visitable/sector AS_ANYTHING in global.known_overmap_sectors)
+	for(var/obj/effect/overmap/visitable/sector as anything in global.known_overmap_sectors)
 		add_known_sector(sector)
+
+/obj/machinery/computer/ship/helm/attempt_hook_up(obj/effect/overmap/visitable/ship/sector)
+	. = ..()
+	if(linked)
+		if(!compass)
+			compass = new(src)
+	else
+		if(compass)
+			QDEL_NULL(compass)
 
 /obj/machinery/computer/ship/helm/Destroy()
 	. = ..()
+	QDEL_NULL(compass)
 	LAZYREMOVE(global.overmap_helm_computers, src)
 
 /obj/machinery/computer/ship/helm/proc/add_known_sector(var/obj/effect/overmap/visitable/sector)
@@ -67,7 +79,7 @@ var/global/list/overmap_helm_computers
 			var/direction = get_dir(linked.loc, T)
 			var/acceleration = min(linked.get_delta_v(), accellimit)
 			var/speed = linked.get_speed()
-			var/heading = linked.get_heading()
+			var/heading = linked.get_heading_dir()
 
 			// Destination is current grid or speedlimit is exceeded
 			if ((get_dist(linked.loc, T) <= brake_path) || speed > speedlimit)
@@ -85,7 +97,9 @@ var/global/list/overmap_helm_computers
 			to_chat(current_operator_actual, SPAN_DANGER("\The [src]'s autopilot is active and wrests control from you!"))
 			set_operator(null, TRUE, TRUE)
 
-		return
+	if(compass)
+		compass.recalculate_heading(FALSE)
+		compass.rebuild_overlay_lists(TRUE)
 
 /obj/machinery/computer/ship/helm/relaymove(var/mob/user, direction)
 	if(viewing_overmap(user) && linked)
@@ -114,7 +128,7 @@ var/global/list/overmap_helm_computers
 		data["d_y"] = dy
 		data["speedlimit"] = speedlimit ? speedlimit : "Halted"
 		data["accel"] = min(round(linked.get_delta_v(), 0.01),accellimit)
-		data["heading"] = linked.get_heading() ? dir2angle(linked.get_heading()) : 0
+		data["heading"] = linked.get_heading_angle()
 		data["autopilot"] = autopilot
 		data["manual_control"] = viewing_overmap(user)
 		data["canburn"] = linked.can_burn()
@@ -134,12 +148,15 @@ var/global/list/overmap_helm_computers
 
 		var/list/locations[0]
 		for (var/key in known_sectors)
+
 			var/datum/computer_file/data/waypoint/R = known_sectors[key]
 			var/list/rdata[0]
-			rdata["name"] = R.fields["name"]
-			rdata["x"] = R.fields["x"]
-			rdata["y"] = R.fields["y"]
+			rdata["name"] =      R.fields["name"]
+			rdata["x"] =         R.fields["x"]
+			rdata["y"] =         R.fields["y"]
+			rdata["tracking"] =  R.fields["tracking"]
 			rdata["reference"] = "\ref[R]"
+
 			locations.Add(list(rdata))
 
 		data["locations"] = locations
@@ -180,29 +197,53 @@ var/global/list/overmap_helm_computers
 				var/newy = input("Input new entry y coordinate", "Coordinate input", linked.y) as num
 				if(!CanInteract(user,state))
 					return TOPIC_NOACTION
-				R.fields["x"] = Clamp(newx, 1, world.maxx)
-				R.fields["y"] = Clamp(newy, 1, world.maxy)
+				R.fields["x"] = clamp(newx, 1, world.maxx)
+				R.fields["y"] = clamp(newy, 1, world.maxy)
 		known_sectors[sec_name] = R
+		compass.set_waypoint("\ref[R]", R.fields["name"], R.fields["x"], R.fields["y"], 1, R.fields["color"] || COLOR_CYAN)
+		compass.hide_waypoint("\ref[R]")
 
 	if (href_list["remove"])
 		var/datum/computer_file/data/waypoint/R = locate(href_list["remove"])
 		if(R)
 			known_sectors.Remove(R.fields["name"])
+			compass.clear_waypoint("\ref[R]")
 			qdel(R)
+
+	if(href_list["toggle_wp_tracking"])
+		var/datum/computer_file/data/waypoint/R = locate(href_list["toggle_wp_tracking"])
+		if(R && (R.fields["name"] in known_sectors))
+			R.fields["tracking"] = !R.fields["tracking"]
+			to_chat(user, SPAN_NOTICE("[R.fields["name"]] is [R.fields["tracking"] ? "now" : "no longer"] being tracked."))
+			if(R.fields["tracking"])
+				compass.set_waypoint("\ref[R]", R.fields["name"], R.fields["x"], R.fields["y"], 1, R.fields["color"] || COLOR_CYAN)
+				compass.show_waypoint("\ref[R]")
+			else
+				compass.hide_waypoint("\ref[R]")
+
+	if(href_list["set_wp_color"])
+		var/datum/computer_file/data/waypoint/R = locate(href_list["set_wp_color"])
+		if(!R || !(R.fields["name"] in known_sectors))
+			return TOPIC_NOACTION
+		var/new_color = input(user, "Please select the main colour.", "Crayon colour") as color
+		if(!CanInteract(user,state) || !R || known_sectors[R.fields["name"]] != R)
+			return TOPIC_NOACTION
+		R.fields["color"] = new_color
+		compass.set_waypoint("\ref[R]", R.fields["name"], R.fields["x"], R.fields["y"], 1, new_color)
 
 	if (href_list["setx"])
 		var/newx = input("Input new destiniation x coordinate", "Coordinate input", dx) as num|null
 		if(!CanInteract(user,state))
-			return
+			return TOPIC_NOACTION
 		if (newx)
-			dx = Clamp(newx, 1, world.maxx)
+			dx = clamp(newx, 1, world.maxx)
 
 	if (href_list["sety"])
 		var/newy = input("Input new destiniation y coordinate", "Coordinate input", dy) as num|null
 		if(!CanInteract(user,state))
-			return
+			return TOPIC_NOACTION
 		if (newy)
-			dy = Clamp(newy, 1, world.maxy)
+			dy = clamp(newy, 1, world.maxy)
 
 	if (href_list["x"] && href_list["y"])
 		dx = text2num(href_list["x"])
@@ -215,7 +256,7 @@ var/global/list/overmap_helm_computers
 	if (href_list["speedlimit"])
 		var/newlimit = input("Input new speed limit for autopilot (0 to brake)", "Autopilot speed limit", speedlimit) as num|null
 		if(newlimit)
-			speedlimit = Clamp(newlimit, 0, 100)
+			speedlimit = clamp(newlimit, 0, 100)
 	if (href_list["accellimit"])
 		var/newlimit = input("Input new acceleration limit", "Acceleration limit", accellimit) as num|null
 		if(newlimit)
@@ -240,7 +281,7 @@ var/global/list/overmap_helm_computers
 	if (href_list["manual"])
 		if(!isliving(user))
 			to_chat(user, SPAN_WARNING("You can't use this."))
-			return
+			return TOPIC_NOACTION
 		viewing_overmap(user) ? unlook(user) : look(user)
 
 	add_fingerprint(user)
@@ -250,13 +291,15 @@ var/global/list/overmap_helm_computers
 	. = ..()
 	if (current_operator?.resolve() == user)
 		set_operator(null)
-
+	if(user.client && compass)
+		user.client.screen -= compass
 
 /obj/machinery/computer/ship/helm/look(mob/user)
 	. = ..()
 	if (!autopilot)
 		set_operator(user)
-
+	if(user.client && compass)
+		user.client.screen |= compass
 
 /**
  * Updates `current_operator` to the new user, or `null` and ejects the old operator from the overmap view - Only one person on a helm at a time!
@@ -332,7 +375,7 @@ var/global/list/overmap_helm_computers
 	data["s_y"] = linked.y
 	data["speed"] = round(linked.get_speed() * KM_OVERMAP_RATE, 0.01)
 	data["accel"] = round(linked.get_delta_v(), 0.01)
-	data["heading"] = linked.get_heading() ? dir2angle(linked.get_heading()) : 0
+	data["heading"] = linked.get_heading_angle()
 	data["viewing"] = viewing_overmap(user)
 
 	if(linked.get_speed())

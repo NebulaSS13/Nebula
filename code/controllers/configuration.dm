@@ -36,7 +36,6 @@ var/global/list/gamemode_cache = list()
 	var/vote_no_dead = 0				// dead people can't vote (tbi)
 	var/vote_no_dead_crew_transfer = 0	// dead people can't vote on crew transfer votes
 //	var/enable_authentication = 0		// goon authentication
-	var/del_new_on_log = 1				// del's new players if they log before they spawn in
 	var/feature_object_spell_system = 0 //spawns a spellbook which gives object-type spells instead of verb-type spells for the wizard
 	var/traitor_scaling = 0 			//if amount of traitors scales based on amount of players
 	var/objectives_disabled = 0 			//if objectives are disabled or not
@@ -154,8 +153,6 @@ var/global/list/gamemode_cache = list()
 	var/use_age_restriction_for_jobs = 0   //Do jobs use account age restrictions?   --requires database
 	var/use_age_restriction_for_antags = 0 //Do antags use account age restrictions? --requires database
 
-	var/simultaneous_pm_warning_timeout = 100
-
 	var/use_iterative_explosions //Defines whether the server uses iterative or circular explosions.
 	var/iterative_explosives_z_threshold = 10
 	var/iterative_explosives_z_multiplier = 0.75
@@ -263,6 +260,10 @@ var/global/list/gamemode_cache = list()
 		"login_export_addr"
 	)
 
+	var/expanded_alt_interactions = FALSE // Set to true to enable look, grab, drop, etc. in the alt interaction menu.
+
+	var/show_typing_indicator_for_whispers = FALSE // Do whispers show typing indicators overhead?
+
 /datum/configuration/VV_hidden()
 	. = ..() | protected_vars
 
@@ -330,6 +331,9 @@ var/global/list/gamemode_cache = list()
 
 				if ("use_iterative_explosions")
 					use_iterative_explosions = 1
+
+				if ("expanded_alt_interactions")
+					expanded_alt_interactions = 1
 
 				if ("explosion_z_threshold")
 					iterative_explosives_z_threshold = text2num(value)
@@ -814,6 +818,9 @@ var/global/list/gamemode_cache = list()
 
 				if("no_throttle_localhost")
 					config.no_throttle_localhost = TRUE
+
+				if("show_typing_indicator_for_whispers")
+					config.show_typing_indicator_for_whispers = TRUE
 
 				else
 					log_misc("Unknown setting in configuration: '[name]'")

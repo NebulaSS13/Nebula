@@ -3,11 +3,12 @@
 	desc = "A sealed tank used to keep hull sealant foam contained under pressure."
 	icon = 'icons/obj/sealant_tank.dmi'
 	icon_state = "tank"
+	material = /decl/material/solid/metal/steel
 	var/foam_charges = 0
 	var/max_foam_charges = 60
 
 /obj/item/sealant_tank/on_update_icon()
-	cut_overlays()
+	. = ..()
 	add_overlay("fill_[FLOOR((foam_charges/max_foam_charges) * 5)]")
 
 /obj/item/sealant_tank/examine(mob/user, distance)
@@ -27,7 +28,7 @@
 	if(foam_charges)
 		var/turf/T = get_turf(src)
 		if(T)
-			T.visible_message(SPAN_WARNING("The ruptured [src.name] spews out metalic foam!"))
+			T.visible_message(SPAN_WARNING("The ruptured [src.name] spews out metallic foam!"))
 			var/datum/effect/effect/system/foam_spread/s = new()
 			s.set_up(foam_charges, T, reagents, 1)
 			s.start()

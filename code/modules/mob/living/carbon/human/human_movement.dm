@@ -56,9 +56,6 @@
 	if(facing_dir)
 		tally += 3 // Locking direction will slow you down.
 
-	if(MUTATION_FAT in src.mutations)
-		tally += 1.5
-
 	if (bodytemperature < species.cold_discomfort_level)
 		tally += (species.cold_discomfort_level - bodytemperature) / 10 * 1.75
 
@@ -98,10 +95,11 @@
 	. = ..()
 
 /mob/living/carbon/human/proc/get_jetpack()
+	var/obj/item/back = get_equipped_item(slot_back_str)
 	if(back)
 		if(istype(back,/obj/item/tank/jetpack))
 			return back
-		else if(istype(back,/obj/item/rig))
+		if(istype(back,/obj/item/rig))
 			var/obj/item/rig/rig = back
 			for(var/obj/item/rig_module/maneuvering_jets/module in rig.installed_modules)
 				return module.jets
@@ -123,6 +121,7 @@
 /mob/living/carbon/human/Check_Shoegrip()
 	if(species.check_no_slip(src))
 		return 1
+	var/obj/item/shoes = get_equipped_item(slot_shoes_str)
 	if(shoes && (shoes.item_flags & ITEM_FLAG_NOSLIP) && istype(shoes, /obj/item/clothing/shoes/magboots))  //magboots + dense_object = no floating
 		return 1
 	return 0
@@ -132,7 +131,7 @@
 	if(.) //We moved
 
 		var/stamina_cost = 0
-		for(var/obj/item/grab/G AS_ANYTHING in get_active_grabs())
+		for(var/obj/item/grab/G as anything in get_active_grabs())
 			stamina_cost -= G.grab_slowdown()
 		stamina_cost = round(stamina_cost)
 		if(stamina_cost < 0)

@@ -63,7 +63,7 @@
 // RefreshParts has been called, likely meaning other componenets were added/removed.
 /obj/item/stock_parts/proc/on_refresh(var/obj/machinery/machine)
 
-/obj/item/stock_parts/proc/take_damage(amount, damtype)
+/obj/item/stock_parts/take_damage(amount, damtype, silent)
 	if(!is_functional() || (damtype in ignore_damage_types))
 		return
 	var/taken = min(amount, health)

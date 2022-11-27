@@ -6,12 +6,12 @@
 	bodytype_equip_flags = BODY_FLAG_HUMANOID
 	heat_protection = SLOT_HEAD
 	armor = list(
-		melee = ARMOR_MELEE_RESISTANT, 
-		bullet = ARMOR_BALLISTIC_MINOR, 
+		melee = ARMOR_MELEE_RESISTANT,
+		bullet = ARMOR_BALLISTIC_MINOR,
 		laser = ARMOR_LASER_SMALL,
-		energy = ARMOR_ENERGY_MINOR, 
-		bomb = ARMOR_BOMB_PADDED, 
-		bio = ARMOR_BIO_SHIELDED, 
+		energy = ARMOR_ENERGY_MINOR,
+		bomb = ARMOR_BOMB_PADDED,
+		bio = ARMOR_BIO_SHIELDED,
 		rad = ARMOR_RAD_MINOR
 		)
 	max_heat_protection_temperature = SPACE_SUIT_MAX_HEAT_PROTECTION_TEMPERATURE
@@ -26,12 +26,12 @@
 	w_class = ITEM_SIZE_HUGE//bulky item
 	desc = "A high-tech dark red space suit. Used for AI satellite maintenance."
 	armor = list(
-		melee = ARMOR_MELEE_RESISTANT, 
-		bullet = ARMOR_BALLISTIC_MINOR, 
+		melee = ARMOR_MELEE_RESISTANT,
+		bullet = ARMOR_BALLISTIC_MINOR,
 		laser = ARMOR_LASER_SMALL,
-		energy = ARMOR_ENERGY_MINOR, 
-		bomb = ARMOR_BOMB_PADDED, 
-		bio = ARMOR_BIO_SHIELDED, 
+		energy = ARMOR_ENERGY_MINOR,
+		bomb = ARMOR_BOMB_PADDED,
+		bio = ARMOR_BIO_SHIELDED,
 		rad = ARMOR_RAD_MINOR
 		)
 	allowed = list(/obj/item/flashlight,/obj/item/tank,/obj/item/suit_cooling_unit)
@@ -99,7 +99,7 @@ else if(##equipment_var) {\
 
 	if(!istype(H)) return
 
-	if(H.wear_suit != src)
+	if(H.get_equipped_item(slot_wear_suit_str) != src)
 		return
 
 	if(boots)
@@ -107,15 +107,16 @@ else if(##equipment_var) {\
 			boots.canremove = 0
 
 	if(helmet)
-		if(H.head)
-			to_chat(M, "You are unable to deploy your suit's helmet as \the [H.head] is in the way.")
+		var/obj/item/head = H.get_equipped_item(slot_head_str)
+		if(head)
+			to_chat(M, "You are unable to deploy your suit's helmet as \the [head] is in the way.")
 		else if (H.equip_to_slot_if_possible(helmet, slot_head_str))
 			to_chat(M, "Your suit's helmet deploys with a hiss.")
 			playsound(loc, helmet_deploy_sound, 30)
 			helmet.canremove = 0
 
 	if(tank)
-		if(H.s_store) //In case someone finds a way.
+		if(H.get_equipped_item(slot_s_store_str)) //In case someone finds a way.
 			to_chat(M, "Alarmingly, the valve on your suit's installed tank fails to engage.")
 		else if (H.equip_to_slot_if_possible(tank, slot_s_store_str))
 			to_chat(M, "The valve on your suit's installed tank safely engages.")
@@ -131,14 +132,14 @@ else if(##equipment_var) {\
 		helmet.canremove = 1
 		H = helmet.loc
 		if(istype(H))
-			if(helmet && H.head == helmet)
+			if(helmet && H.get_equipped_item(slot_head_str) == helmet)
 				H.drop_from_inventory(helmet, src)
 
 	if(boots)
 		boots.canremove = 1
 		H = boots.loc
 		if(istype(H))
-			if(boots && H.shoes == boots)
+			if(boots && H.get_equipped_item(slot_shoes_str) == boots)
 				H.drop_from_inventory(boots, src)
 
 	if(tank)
@@ -161,16 +162,17 @@ else if(##equipment_var) {\
 
 	if(!istype(H)) return
 	if(H.incapacitated()) return
-	if(H.wear_suit != src) return
+	if(H.get_equipped_item(slot_wear_suit_str) != src) return
 
-	if(H.head == helmet)
+	var/obj/item/head = H.get_equipped_item(slot_head_str)
+	if(head == helmet)
 		to_chat(H, "<span class='notice'>You retract your suit helmet.</span>")
 		helmet.canremove = 1
 		playsound(loc, helmet_retract_sound, 30)
 		H.drop_from_inventory(helmet, src)
 	else
-		if(H.head)
-			to_chat(H, "<span class='danger'>You cannot deploy your helmet while wearing \the [H.head].</span>")
+		if(head)
+			to_chat(H, "<span class='danger'>You cannot deploy your helmet while wearing \the [head].</span>")
 			return
 		if(H.equip_to_slot_if_possible(helmet, slot_head_str))
 			helmet.pickup(H)
@@ -213,7 +215,7 @@ else if(##equipment_var) {\
 	if(istype(W,/obj/item/clothing/accessory) || istype(W, /obj/item/hand_labeler))
 		return ..()
 
-	if(isScrewdriver(W))
+	if(IS_SCREWDRIVER(W))
 		if(user.get_inventory_slot(src) == slot_wear_suit_str)//maybe I should make this into a proc?
 			to_chat(user, "<span class='warning'>You cannot modify \the [src] while it is being worn.</span>")
 			return

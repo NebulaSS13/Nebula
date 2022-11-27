@@ -3,7 +3,7 @@
 /proc/is_on_same_plane_or_station(var/z1, var/z2)
 	if(z1 == z2)
 		return 1
-	if((z1 in global.using_map.station_levels) &&	(z2 in global.using_map.station_levels))
+	if(isStationLevel(z1) && isStationLevel(z2))
 		return 1
 	return 0
 
@@ -15,11 +15,6 @@
 				if(T && (T.z in zlevels))
 					return TRUE
 	return FALSE
-
-/proc/get_area(O)
-	RETURN_TYPE(/area)
-	var/turf/loc = get_turf(O)
-	return loc?.loc
 
 /proc/get_area_name(O) //get area's proper name
 	var/area/A = get_area(O)
@@ -53,6 +48,13 @@
 	source.luminosity = lum
 
 	return heard
+
+// These are procs rather than macros so they can be used as predicates, I think(?)
+/proc/isSealedLevel(var/level)
+	return level in global.using_map.sealed_levels
+
+/proc/isMapLevel(var/level)
+	return level in global.using_map.map_levels
 
 /proc/isStationLevel(var/level)
 	return level in global.using_map.station_levels

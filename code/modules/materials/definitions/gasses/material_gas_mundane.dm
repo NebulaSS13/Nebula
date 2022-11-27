@@ -3,8 +3,8 @@
 	uid = "gas_oxygen"
 	lore_text = "An ubiquitous oxidizing agent."
 	flags = MAT_FLAG_FUSION_FUEL
-	gas_specific_heat = 20	
-	molar_mass = 0.032	
+	gas_specific_heat = 20
+	molar_mass = 0.032
 	latent_heat = 213
 	boiling_point = -183 CELSIUS
 	gas_flags = XGM_GAS_OXIDIZER
@@ -28,7 +28,7 @@
 	metabolism = 0.05
 	value = 0.3
 
-/decl/material/gas/helium/affect_blood(var/mob/living/M, var/alien, var/removed, var/datum/reagents/holder)
+/decl/material/gas/helium/affect_blood(var/mob/living/M, var/removed, var/datum/reagents/holder)
 	..()
 	M.add_chemical_effect(CE_SQUEAKY, 1)
 
@@ -36,10 +36,10 @@
 	name = "carbon dioxide"
 	uid = "gas_carbon_dioxide"
 	lore_text = "A byproduct of respiration."
-	gas_specific_heat = 30	
+	gas_specific_heat = 30
 	molar_mass = 0.044
 	latent_heat = 380
-	boiling_point = -78 CELSIUS	
+	boiling_point = -78 CELSIUS
 	gas_symbol_html = "CO<sub>2</sub>"
 	gas_symbol = "CO2"
 
@@ -50,13 +50,13 @@
 	gas_specific_heat = 30
 	molar_mass = 0.028
 	latent_heat = 216
-	boiling_point = -192 CELSIUS	
+	boiling_point = -192 CELSIUS
 	gas_symbol_html = "CO"
 	gas_symbol = "CO"
 	taste_description = "stale air"
 	metabolism = 0.05 // As with helium.
 
-/decl/material/gas/carbon_monoxide/affect_blood(var/mob/living/M, var/alien, var/removed, var/datum/reagents/holder)
+/decl/material/gas/carbon_monoxide/affect_blood(var/mob/living/M, var/removed, var/datum/reagents/holder)
 	if(!istype(M))
 		return
 	var/warning_message
@@ -90,10 +90,10 @@
 	name = "methyl bromide"
 	uid = "gas_methyl_bromide"
 	lore_text = "A once-popular fumigant and weedkiller."
-	gas_specific_heat = 42.59 
+	gas_specific_heat = 42.59
 	molar_mass = 0.095
 	latent_heat = 253
-	boiling_point = 4 CELSIUS		  
+	boiling_point = 4 CELSIUS
 	gas_symbol_html = "CH<sub>3</sub>Br"
 	gas_symbol = "CH3Br"
 	taste_description = "pestkiller"
@@ -102,7 +102,7 @@
 	)
 	value = 0.25
 
-/decl/material/gas/methyl_bromide/affect_blood(var/mob/living/M, var/alien, var/removed, var/datum/reagents/holder)
+/decl/material/gas/methyl_bromide/affect_blood(var/mob/living/M, var/removed, var/datum/reagents/holder)
 	. = ..()
 	if(!ishuman(M))
 		return
@@ -119,10 +119,10 @@
 	name = "sleeping agent"
 	uid = "gas_sleeping_agent"
 	lore_text = "A mild sedative. Also known as laughing gas."
-	gas_specific_heat = 40	
+	gas_specific_heat = 40
 	molar_mass = 0.044
 	latent_heat = 376
-	boiling_point = -90 CELSIUS	
+	boiling_point = -90 CELSIUS
 	gas_tile_overlay = "sleeping_agent"
 	gas_overlay_limit = 1
 	gas_flags = XGM_GAS_OXIDIZER //N2O is a powerful oxidizer
@@ -131,7 +131,7 @@
 	metabolism = 0.05 // So that low dosages have a chance to build up in the body.
 	value = 0.25
 
-/decl/material/gas/nitrous_oxide/affect_blood(var/mob/living/M, var/alien, var/removed, var/datum/reagents/holder)
+/decl/material/gas/nitrous_oxide/affect_blood(var/mob/living/M, var/removed, var/datum/reagents/holder)
 	var/dosage = LAZYACCESS(M.chem_doses, type)
 	if(dosage >= 1)
 		if(prob(5)) SET_STATUS_MAX(M, STAT_ASLEEP, 3)
@@ -149,7 +149,7 @@
 	name = "nitrogen"
 	uid = "gas_nitrogen"
 	lore_text = "An ubiquitous noble gas."
-	gas_specific_heat = 20	
+	gas_specific_heat = 20
 	molar_mass = 0.028
 	latent_heat = 199
 	boiling_point = -195 CELSIUS
@@ -183,7 +183,7 @@
 /decl/material/gas/methane
 	name = "methane"
 	uid = "gas_methane"
-	gas_specific_heat = 30	
+	gas_specific_heat = 30
 	molar_mass = 0.016
 	latent_heat = 510
 	boiling_point = -162 CELSIUS
@@ -254,7 +254,7 @@
 	gas_symbol = "Xe"
 	value = 0.25
 
-/decl/material/gas/xenon/affect_blood(var/mob/living/M, var/alien, var/removed, var/datum/reagents/holder)
+/decl/material/gas/xenon/affect_blood(var/mob/living/M, var/removed, var/datum/reagents/holder)
 	var/dosage = LAZYACCESS(M.chem_doses, type)
 	if(dosage >= 1)
 		if(prob(5)) SET_STATUS_MAX(M, STAT_ASLEEP, 3)
@@ -280,8 +280,6 @@
 	gas_symbol = "Cl"
 	taste_description = "bleach"
 	metabolism = REM
-	heating_point = null
-	heating_products = null
 	toxicity = 15
 
 /decl/material/gas/sulfur_dioxide

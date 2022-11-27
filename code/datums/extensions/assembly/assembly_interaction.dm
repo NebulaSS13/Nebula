@@ -1,5 +1,5 @@
 /datum/extension/assembly/proc/attackby(var/obj/item/W, var/mob/user)
-	if(isWrench(W))
+	if(IS_WRENCH(W))
 		if(parts.len)
 			to_chat(user, "Remove all components from \the [holder] before disassembling it.")
 			return TRUE
@@ -9,7 +9,7 @@
 		qdel(holder)
 		return TRUE
 
-	if(isWelder(W))
+	if(IS_WELDER(W))
 		var/obj/item/weldingtool/WT = W
 		if(!WT.isOn())
 			to_chat(user, "\The [W] is off.")
@@ -20,12 +20,12 @@
 			return TRUE
 
 		to_chat(user, "You begin repairing damage to \the [holder]...")
-		if(WT.remove_fuel(round(damage/75)) && do_after(usr, damage/10))
+		if(WT.weld(round(damage/75)) && do_after(usr, damage/10))
 			damage = 0
 			to_chat(user, "You repair \the [holder].")
 		return TRUE
 
-	if(isScrewdriver(W))
+	if(IS_SCREWDRIVER(W))
 		if(!parts.len)
 			to_chat(user, "This device doesn't have any components installed.")
 			return TRUE

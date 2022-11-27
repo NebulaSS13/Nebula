@@ -28,7 +28,7 @@
 			return TRUE
 		playsound(loc, pick('sound/items/Welder.ogg', 'sound/items/Welder2.ogg'), 50, 1)
 		visible_message(SPAN_NOTICE("\The [user] starts slicing apart \the [src] with \the [welder]."))
-		if(!do_after(user, 3 SECONDS, src) || QDELETED(src) || !welder.remove_fuel(5, user))
+		if(!do_after(user, 3 SECONDS, src) || QDELETED(src) || !welder.weld(5, user))
 			return TRUE
 		playsound(loc, pick('sound/items/Welder.ogg', 'sound/items/Welder2.ogg'), 50, 1)
 		visible_message(SPAN_NOTICE("\The [user] completely dismantles \the [src] with \the [welder]."))
@@ -110,10 +110,10 @@
 		to_chat(user, SPAN_NOTICE("You fit [used] [stack.singular_name]\s to damaged areas of \the [src]."))
 		stack.use(used)
 		last_damage_message = null
-		health = between(health, health + used*DOOR_REPAIR_AMOUNT, maxhealth)
+		health = clamp(health, health + used*DOOR_REPAIR_AMOUNT, maxhealth)
 
 /obj/structure/attackby(obj/item/O, mob/user)
-	
+
 	if(O.force && user.a_intent == I_HURT)
 		attack_animation(user)
 		visible_message(SPAN_DANGER("\The [src] has been [pick(O.attack_verb)] with \the [O] by \the [user]!"))
@@ -121,17 +121,17 @@
 		take_damage(O.force)
 		. = TRUE
 
-	else if(isWrench(O))
+	else if(IS_WRENCH(O))
 		. = handle_default_wrench_attackby(user, O)
-	else if(isScrewdriver(O))
+	else if(IS_SCREWDRIVER(O))
 		. = handle_default_screwdriver_attackby(user, O)
-	else if(isWelder(O))
+	else if(IS_WELDER(O))
 		. = handle_default_welder_attackby(user, O)
-	else if(isCrowbar(O))
+	else if(IS_CROWBAR(O))
 		. = handle_default_crowbar_attackby(user, O)
-	else if(isCoil(O))
+	else if(IS_COIL(O))
 		. = handle_default_cable_attackby(user, O)
-	else if(isWirecutter(O))
+	else if(IS_WIRECUTTER(O))
 		. = handle_default_wirecutter_attackby(user, O)
 	else if(can_repair_with(O) && can_repair(user))
 		. = handle_repair(user, O)

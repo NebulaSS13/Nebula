@@ -91,11 +91,6 @@ default behaviour is:
 				now_pushing = 0
 				return
 			if(tmob.a_intent != I_HELP)
-				if(istype(tmob, /mob/living/carbon/human) && (MUTATION_FAT in tmob.mutations))
-					if(prob(40) && !(MUTATION_FAT in src.mutations))
-						to_chat(src, "<span class='danger'>You fail to push [tmob]'s fat ass out of the way.</span>")
-						now_pushing = 0
-						return
 				for(var/obj/item/shield/riot/shield in tmob.get_held_items())
 					if(prob(99))
 						now_pushing = 0
@@ -229,7 +224,7 @@ default behaviour is:
 /mob/living/proc/adjustBruteLoss(var/amount)
 	if (status_flags & GODMODE)
 		return
-	health = Clamp(health - amount, 0, maxHealth)
+	health = clamp(health - amount, 0, maxHealth)
 
 /mob/living/proc/getOxyLoss()
 	return 0
@@ -306,16 +301,6 @@ default behaviour is:
 		//Leave this commented out, it will cause storage items to exponentially add duplicate to the list
 		//for(var/obj/item/storage/S in Storage.return_inv()) //Check for storage items
 		//	L += get_contents(S)
-
-		for(var/obj/item/gift/G in Storage.return_inv()) //Check for gift-wrapped items
-			L += G.gift
-			if(istype(G.gift, /obj/item/storage))
-				L += get_contents(G.gift)
-
-		for(var/obj/item/smallDelivery/D in Storage.return_inv()) //Check for package wrapped items
-			L += D.wrapped
-			if(istype(D.wrapped, /obj/item/storage)) //this should never happen
-				L += get_contents(D.wrapped)
 		return L
 
 	else
@@ -323,16 +308,6 @@ default behaviour is:
 		L += src.contents
 		for(var/obj/item/storage/S in src.contents)	//Check for storage items
 			L += get_contents(S)
-
-		for(var/obj/item/gift/G in src.contents) //Check for gift-wrapped items
-			L += G.gift
-			if(istype(G.gift, /obj/item/storage))
-				L += get_contents(G.gift)
-
-		for(var/obj/item/smallDelivery/D in src.contents) //Check for package wrapped items
-			L += D.wrapped
-			if(istype(D.wrapped, /obj/item/storage)) //this should never happen
-				L += get_contents(D.wrapped)
 		return L
 
 /mob/living/proc/check_contents_for(A)
@@ -386,9 +361,9 @@ default behaviour is:
 
 
 /mob/living/carbon/revive()
-	if(handcuffed && !initial(handcuffed))
-		drop_from_inventory(handcuffed)
-	handcuffed = initial(handcuffed)
+	var/obj/item/cuffs = get_equipped_item(slot_handcuffed_str)
+	if (cuffs)
+		unEquip(cuffs, get_turf(src))
 	. = ..()
 
 /mob/living/proc/revive()
@@ -404,17 +379,8 @@ default behaviour is:
 /mob/living/proc/rejuvenate()
 
 	// Wipe all of our reagent lists.
-	var/datum/reagents/bloodstr_reagents = get_injected_reagents()
-	if(bloodstr_reagents)
-		bloodstr_reagents.clear_reagents()
-	var/datum/reagents/touching_reagents = get_contact_reagents()
-	if(touching_reagents)
-		touching_reagents.clear_reagents()
-	var/datum/reagents/ingested_reagents = get_ingested_reagents()
-	if(ingested_reagents)
-		ingested_reagents.clear_reagents()
-	if(reagents)
-		reagents.clear_reagents()
+	for(var/datum/reagents/reagent_list as anything in get_metabolizing_reagent_holders(include_contact = TRUE))
+		reagent_list.clear_reagents()
 
 	// shut down various types of badness
 	setToxLoss(0)
@@ -505,13 +471,13 @@ default behaviour is:
 			return
 
 	if(isturf(old_loc))
-		for(var/atom/movable/AM AS_ANYTHING in ret_grab())
+		for(var/atom/movable/AM as anything in ret_grab())
 			if(AM != src && AM.loc != loc && !AM.anchored && old_loc.Adjacent(AM))
 				AM.glide_size = glide_size // This is adjusted by grabs again from events/some of the procs below, but doing it here makes it more likely to work with recursive movement.
 				AM.DoMove(get_dir(get_turf(AM), old_loc), src, TRUE)
 
 	var/list/mygrabs = get_active_grabs()
-	for(var/obj/item/grab/G AS_ANYTHING in mygrabs)
+	for(var/obj/item/grab/G as anything in mygrabs)
 		if(G.assailant_reverse_facing())
 			set_dir(global.reverse_dir[direction])
 		G.assailant_moved()
@@ -529,7 +495,7 @@ default behaviour is:
 		var/txt_dir = (direction & UP) ? "upwards" : "downwards"
 		if(old_loc)
 			old_loc.visible_message(SPAN_NOTICE("\The [src] moves [txt_dir]."))
-		for(var/obj/item/grab/G AS_ANYTHING in mygrabs)
+		for(var/obj/item/grab/G as anything in mygrabs)
 			var/turf/start = G.affecting.loc
 			var/turf/destination = (direction == UP) ? GetAbove(G.affecting) : GetBelow(G.affecting)
 			if(!start.CanZPass(G.affecting, direction))
@@ -549,7 +515,7 @@ default behaviour is:
 			continue
 
 	if(length(mygrabs) && !skill_check(SKILL_MEDICAL, SKILL_BASIC))
-		for(var/obj/item/grab/grab AS_ANYTHING in mygrabs)
+		for(var/obj/item/grab/grab as anything in mygrabs)
 			var/mob/living/affecting_mob = grab.get_affecting_mob()
 			if(affecting_mob)
 				affecting_mob.handle_grab_damage()
@@ -561,8 +527,8 @@ default behaviour is:
 	. = ..()
 	if(.)
 		handle_grabs_after_move(old_loc, Dir)
-		if (s_active && !( s_active in contents ) && get_turf(s_active) != get_turf(src))	//check !( s_active in contents ) first so we hopefully don't have to call get_turf() so much.
-			s_active.close(src)
+		if (active_storage && !( active_storage in contents ) && get_turf(active_storage) != get_turf(src))	//check !( active_storage in contents ) first so we hopefully don't have to call get_turf() so much.
+			active_storage.close(src)
 
 /mob/living/verb/resist()
 	set name = "Resist"
@@ -750,7 +716,7 @@ default behaviour is:
 	..()
 	cut_overlays()
 	if(auras)
-		for(var/obj/aura/aura AS_ANYTHING in auras)
+		for(var/obj/aura/aura as anything in auras)
 			var/image/A = new()
 			A.appearance = aura
 			add_overlay(A)
@@ -797,9 +763,17 @@ default behaviour is:
 	if(!lying && T.above && T.above.is_open() && !T.above.is_flooded() && can_overcome_gravity())
 		return FALSE
 	if(prob(5))
+		var/datum/reagents/metabolism/inhaled = get_inhaled_reagents()
+		var/datum/reagents/metabolism/ingested = get_ingested_reagents()
 		var/obj/effect/fluid/F = locate() in loc
 		to_chat(src, SPAN_DANGER("You choke and splutter as you inhale [(F?.reagents && F.reagents.get_primary_reagent_name()) || "liquid"]!"))
-		F?.reagents?.trans_to_holder(get_ingested_reagents(), min(F.reagents.total_volume, rand(2,5)))
+		var/inhale_amount = 0
+		if(inhaled)
+			inhale_amount = rand(2,5)
+			F?.reagents?.trans_to_holder(inhaled, min(F.reagents.total_volume, inhale_amount))
+		if(ingested)
+			var/ingest_amount = 5 - inhale_amount
+			F?.reagents?.trans_to_holder(ingested, min(F.reagents.total_volume, ingest_amount))
 
 	T.show_bubbles()
 	return TRUE // Presumably chemical smoke can't be breathed while you're underwater.
@@ -928,6 +902,9 @@ default behaviour is:
 	return reagents
 
 /mob/living/proc/get_injected_reagents()
+	return reagents
+
+/mob/living/proc/get_inhaled_reagents()
 	return reagents
 
 /mob/living/proc/get_adjusted_metabolism(metabolism)
@@ -1059,3 +1036,43 @@ default behaviour is:
 
 /mob/living/proc/apply_fall_damage(var/turf/landing)
 	adjustBruteLoss(rand(max(1, CEILING(mob_size * 0.33)), max(1, CEILING(mob_size * 0.66))))
+
+/mob/living/proc/get_metabolizing_reagent_holders(var/include_contact = FALSE)
+	for(var/datum/reagents/adding in list(reagents, get_ingested_reagents(), get_inhaled_reagents()))
+		LAZYDISTINCTADD(., adding)
+	if(include_contact)
+		for(var/datum/reagents/adding in list(get_injected_reagents(), get_contact_reagents()))
+			LAZYDISTINCTADD(., adding)
+
+/mob/living/get_alt_interactions(mob/user)
+	. = ..()
+	LAZYADD(., /decl/interaction_handler/admin_kill)
+
+/decl/interaction_handler/admin_kill
+	name = "Admin Kill"
+	expected_user_type = /mob/observer
+	expected_target_type = /mob/living
+	interaction_flags = 0
+
+/decl/interaction_handler/admin_kill/is_possible(atom/target, mob/user, obj/item/prop)
+	. = ..()
+	if(.)
+		if(!check_rights(R_INVESTIGATE, 0, user))
+			return FALSE
+		var/mob/living/M = target
+		if(M.stat == DEAD)
+			return FALSE
+
+/decl/interaction_handler/admin_kill/invoked(atom/target, mob/user, obj/item/prop)
+	var/mob/living/M = target
+	var/key_name = key_name(M)
+	if(alert(user, "Do you wish to kill [key_name]?", "Kill \the [M]?", "No", "Yes") != "Yes")
+		return FALSE
+	if(!is_possible(target, user, prop))
+		to_chat(user, SPAN_NOTICE("You were unable to kill [key_name]."))
+		return FALSE
+	M.death()
+	log_and_message_admins("\The [user] admin-killed [key_name].")
+
+/mob/living/get_speech_bubble_state_modifier()
+	return isSynthetic() ? "synth" : ..()

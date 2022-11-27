@@ -95,15 +95,17 @@
 	. = ..()
 
 /obj/item/clothing/on_update_icon()
-	..()
+	. = ..()
 	var/base_state = get_world_inventory_state()
-	cut_overlays()
 	if(markings_icon && markings_color)
 		add_overlay(mutable_appearance(icon, "[base_state][markings_icon]", markings_color))
+	var/list/new_overlays
 	for(var/obj/item/clothing/accessory/accessory in accessories)
 		var/image/I = accessory.get_attached_inventory_overlay(base_state)
 		if(I)
-			add_overlay(I)
+			LAZYADD(new_overlays, I)
+	if(LAZYLEN(new_overlays))
+		add_overlay(new_overlays)
 
 /obj/item/clothing/proc/change_smell(smell = SMELL_DEFAULT)
 	smell_state = smell

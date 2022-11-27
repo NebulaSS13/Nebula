@@ -3,6 +3,7 @@
 	desc = "An engine used to power a small vehicle."
 	icon = 'icons/obj/objects.dmi'
 	w_class = ITEM_SIZE_HUGE
+	material = /decl/material/solid/metal/steel
 	var/stat = 0
 	var/trail_type
 	var/cost_per_move = 5
@@ -41,7 +42,7 @@
 			user.drop_from_inventory(I)
 			I.forceMove(src)
 		return 1
-	else if(isCrowbar(I))
+	else if(IS_CROWBAR(I))
 		if(cell)
 			to_chat(user, "You pry out \the [cell].")
 			cell.dropInto(loc)

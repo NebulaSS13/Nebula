@@ -23,23 +23,51 @@
 	var/max_pressure_diff = 60
 
 	var/oxygen_deprivation = 0
-	var/safe_exhaled_max = 6
 	var/safe_toxins_max = 0.2
-	var/SA_para_min = 1
-	var/SA_sleep_min = 5
 	var/breathing = 0
 	var/last_successful_breath
 	var/breath_fail_ratio // How badly they failed a breath. Higher is worse.
 
+	var/datum/reagents/metabolism/inhaled
+
+/obj/item/organ/internal/lungs/Destroy()
+	QDEL_NULL(inhaled)
+	. = ..()
+
+/obj/item/organ/internal/lungs/initialize_reagents(populate)
+	if(!inhaled)
+		inhaled = new/datum/reagents/metabolism(240, (owner || src), CHEM_INHALE)
+	if(!inhaled.my_atom)
+		inhaled.my_atom = src
+	. = ..()
+
+/obj/item/organ/internal/lungs/do_install(mob/living/carbon/human/target, obj/item/organ/external/affected, in_place)
+	if(!(. = ..()))
+		return
+	inhaled.my_atom = owner
+	inhaled.parent = owner
+
+/obj/item/organ/internal/lungs/do_uninstall(in_place, detach, ignore_children)
+	. = ..()
+	if(inhaled)
+		inhaled.my_atom = src
+		inhaled.parent = null
+
 /obj/item/organ/internal/lungs/proc/can_drown()
-	return (is_broken() || !has_gills)
+	return !has_gills || !is_usable()
 
 /obj/item/organ/internal/lungs/proc/adjust_oxygen_deprivation(var/amount)
-	oxygen_deprivation = Clamp(oxygen_deprivation + amount, 0, species.total_health)
+	oxygen_deprivation = clamp(oxygen_deprivation + amount, 0, species.total_health)
 
 /obj/item/organ/internal/lungs/set_species(species_name)
 	. = ..()
 	sync_breath_types()
+
+// This call needs to be split out to make sure that all the ingested things are metabolised
+// before the process call is made on any of the other organs
+/obj/item/organ/internal/lungs/proc/metabolize()
+	if(is_usable())
+		inhaled.metabolize()
 
 /**
  *  Set these lungs' breath types based on the lungs' species
@@ -58,6 +86,7 @@
 		poison_types =        list(/decl/material/gas/chlorine = TRUE)
 		exhale_type =         /decl/material/gas/carbon_dioxide
 
+
 /obj/item/organ/internal/lungs/Process()
 	..()
 	if(!owner)
@@ -65,7 +94,7 @@
 
 	if (germ_level > INFECTION_LEVEL_ONE && active_breathing)
 		if(prob(5))
-			owner.emote("cough")		//respitory tract infection
+			owner.cough()		//respitory tract infection
 
 	if(is_bruised() && !owner.is_asystole())
 		if(prob(2))
@@ -159,12 +188,12 @@
 				owner.emote("gasp")
 			else if(prob(20))
 				to_chat(owner, SPAN_WARNING("It's hard to breathe..."))
-		breath_fail_ratio = Clamp(0,(1 - inhale_efficiency + breath_fail_ratio)/2,1)
+		breath_fail_ratio = clamp(0,(1 - inhale_efficiency + breath_fail_ratio)/2,1)
 		failed_inhale = 1
 	else
 		if(breath_fail_ratio && prob(20))
 			to_chat(owner, SPAN_NOTICE("It gets easier to breathe."))
-		breath_fail_ratio = Clamp(0,breath_fail_ratio-0.05,1)
+		breath_fail_ratio = clamp(0,breath_fail_ratio-0.05,1)
 
 	owner.oxygen_alert = failed_inhale * 2
 
@@ -191,13 +220,14 @@
 			continue
 		// Little bit of sanity so we aren't trying to add 0.0000000001 units of CO2, and so we don't end up with 99999 units of CO2.
 		var/reagent_amount = breath.gas[gasname] * REAGENT_UNITS_PER_GAS_MOLE * ratio
-		if(reagent_amount < 0.05)
+		if(reagent_amount < MINIMUM_CHEMICAL_VOLUME)
 			continue
-		owner.reagents.add_reagent(gasname, reagent_amount)
+		inhaled.add_reagent(gasname, reagent_amount)
 		breath.adjust_gas(gasname, -breath.gas[gasname], update = 0) //update after
 
 	// Moved after reagent injection so we don't instantly poison ourselves with CO2 or whatever.
-	if(exhale_type && (!istype(owner.wear_mask) || !(exhale_type in owner.wear_mask.filtered_gases)))
+	var/obj/item/clothing/mask/mask = owner.get_equipped_item(slot_wear_mask_str)
+	if(exhale_type && (!istype(mask) || !(exhale_type in mask.filtered_gases)))
 		breath.adjust_gas_temp(exhale_type, inhaled_gas_used, owner.bodytemperature, update = 0) //update afterwards
 
 	// Were we able to breathe?
@@ -242,13 +272,12 @@
 		if(breath.temperature <= species.cold_level_1)
 			if(prob(20))
 				to_chat(owner, "<span class='danger'>You feel your face freezing and icicles forming in your lungs!</span>")
-			switch(breath.temperature)
-				if(species.cold_level_3 to species.cold_level_2)
-					damage = COLD_GAS_DAMAGE_LEVEL_3
-				if(species.cold_level_2 to species.cold_level_1)
-					damage = COLD_GAS_DAMAGE_LEVEL_2
-				else
-					damage = COLD_GAS_DAMAGE_LEVEL_1
+			if(breath.temperature < species.cold_level_3)
+				damage = COLD_GAS_DAMAGE_LEVEL_3
+			else if(breath.temperature < species.cold_level_2)
+				damage = COLD_GAS_DAMAGE_LEVEL_2
+			else
+				damage = COLD_GAS_DAMAGE_LEVEL_1
 
 			if(prob(20))
 				owner.apply_damage(damage, BURN, BP_HEAD, used_weapon = "Excessive Cold")
@@ -259,13 +288,12 @@
 			if(prob(20))
 				to_chat(owner, "<span class='danger'>You feel your face burning and a searing heat in your lungs!</span>")
 
-			switch(breath.temperature)
-				if(species.heat_level_1 to species.heat_level_2)
-					damage = HEAT_GAS_DAMAGE_LEVEL_1
-				if(species.heat_level_2 to species.heat_level_3)
-					damage = HEAT_GAS_DAMAGE_LEVEL_2
-				else
-					damage = HEAT_GAS_DAMAGE_LEVEL_3
+			if(breath.temperature < species.heat_level_2)
+				damage = HEAT_GAS_DAMAGE_LEVEL_1
+			else if(breath.temperature < species.heat_level_3)
+				damage = HEAT_GAS_DAMAGE_LEVEL_2
+			else
+				damage = HEAT_GAS_DAMAGE_LEVEL_3
 
 			if(prob(20))
 				owner.apply_damage(damage, BURN, BP_HEAD, used_weapon = "Excessive Heat")
@@ -322,3 +350,25 @@
 /obj/item/organ/internal/lungs/gills
 	name = "lungs and gills"
 	has_gills = TRUE
+
+/mob/living/carbon/proc/cough(var/deliberate = FALSE)
+	var/obj/item/organ/internal/lungs/lung = get_organ(BP_LUNGS)
+	if(!lung || !lung.active_breathing || isSynthetic() || stat == DEAD || (deliberate && lastcough + 3 SECONDS > world.time))
+		return
+
+	if(lung.breath_fail_ratio > 0.9 && world.time > lung.last_successful_breath + 2 MINUTES)
+		if(deliberate)
+			to_chat(src, SPAN_WARNING("You try to cough, but no air comes out!"))
+		return
+
+	if(deliberate && incapacitated())
+		to_chat(src, SPAN_WARNING("You cannot do that right now."))
+		return
+
+	audible_message("<b>[src]</b> coughs!", "You cough!", radio_message = "coughs!") // styled like an emote
+
+	lastcough = world.time
+
+	// Coughing clears out 1-2 reagents from the lungs.
+	if(lung.inhaled.total_volume > 0 && loc)
+		lung.inhaled.splash(loc, rand(1, 2))

@@ -25,7 +25,7 @@
 	. = ..()
 	if(!handle_color)
 		handle_color = pick(valid_colours)
-	overlays += overlay_image(icon, "[get_world_inventory_state()]_handle", handle_color, flags=RESET_COLOR)
+	add_overlay(overlay_image(icon, "[get_world_inventory_state()]_handle", handle_color, flags=RESET_COLOR))
 
 /obj/item/wirecutters/adjust_mob_overlay(var/mob/living/user_mob, var/bodytype,  var/image/overlay, var/slot, var/bodypart)
 	if(overlay)
@@ -39,11 +39,13 @@
 	return ret
 
 /obj/item/wirecutters/attack(mob/living/carbon/C, mob/user)
-	if(istype(C) && user.a_intent == I_HELP && (C.handcuffed) && (istype(C.handcuffed, /obj/item/handcuffs/cable)))
+	var/obj/item/handcuffs/cable/cuffs = C.get_equipped_item(slot_handcuffed_str)
+	if(istype(C) && user.a_intent == I_HELP && (istype(cuffs)))
 		usr.visible_message("\The [usr] cuts \the [C]'s restraints with \the [src]!",\
 		"You cut \the [C]'s restraints with \the [src]!",\
 		"You hear cable being cut.")
-		C.handcuffed = null
+		C.unEquip(cuffs)
+		qdel(cuffs)
 		if(C.buckled && C.buckled.buckle_require_restraints)
 			C.buckled.unbuckle_mob()
 		C.update_inv_handcuffed()

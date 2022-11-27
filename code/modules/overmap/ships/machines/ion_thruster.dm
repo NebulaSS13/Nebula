@@ -15,7 +15,7 @@
 
 /datum/extension/ship_engine/ion_thruster/has_fuel()
 	var/obj/machinery/ion_thruster/thruster = holder
-	. = istype(thruster) && thruster.powered() && !(thruster.stat & NOPOWER)
+	. = istype(thruster) && !(thruster.stat & NOPOWER)
 
 /datum/extension/ship_engine/ion_thruster/get_status()
 	. = list()
@@ -23,7 +23,7 @@
 	var/obj/machinery/ion_thruster/thruster = holder
 	if(!istype(thruster))
 		. += "Hardware failure - check machinery."
-	else if(!thruster.powered())
+	else if(thruster.stat & NOPOWER)
 		. += "Insufficient power or hardware offline."
 	else
 		. += "Online."
@@ -47,7 +47,7 @@
 	var/thrust_effectiveness = 1
 
 /obj/machinery/ion_thruster/attackby(obj/item/I, mob/user)
-	if(isMultitool(I) && !panel_open)
+	if(IS_MULTITOOL(I) && !panel_open)
 		var/datum/extension/ship_engine/engine = get_extension(src, /datum/extension/ship_engine)
 		if(engine.sync_to_ship())
 			to_chat(user, SPAN_NOTICE("\The [src] emits a ping as it syncs its controls to a nearby ship."))
@@ -58,10 +58,9 @@
 	. = ..()
 
 /obj/machinery/ion_thruster/proc/get_thrust()
-	if(use_power && powered())
-		use_power_oneoff(thrust_cost)
-		return thrust_limit
-	return 0
+	if(!use_power || (stat & NOPOWER))
+		return 0
+	return thrust_limit
 
 /obj/machinery/ion_thruster/on_update_icon()
 	cut_overlays()

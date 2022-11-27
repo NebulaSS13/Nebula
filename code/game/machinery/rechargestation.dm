@@ -13,7 +13,6 @@
 
 	var/overlay_icon = 'icons/obj/objects.dmi'
 	var/mob/living/occupant = null
-	var/charging = 0
 	var/last_overlay_state
 
 	var/charging_power			// W. Power rating used for charging the cyborg. 120 kW if un-upgraded
@@ -87,10 +86,9 @@
 		var/obj/item/organ/internal/cell/potato = H.get_organ(BP_CELL, /obj/item/organ/internal/cell)
 		if(potato)
 			target = potato.cell
-		if((!target || target.percent() > 95) && istype(H.back,/obj/item/rig))
-			var/obj/item/rig/R = H.back
-			if(R.cell && !R.cell.fully_charged())
-				target = R.cell
+		var/obj/item/rig/R = H.get_equipped_item(slot_back_str)
+		if((!target || target.percent() > 95) && istype(R) && R.cell && !R.cell.fully_charged())
+			target = R.cell
 
 	if(target && !target.fully_charged())
 		var/diff = min(target.maxcharge - target.charge, charging_power * CELLRATE) // Capped by charging_power / tick
@@ -129,8 +127,8 @@
 
 /obj/machinery/recharge_station/RefreshParts()
 	..()
-	var/man_rating = Clamp(total_component_rating_of_type(/obj/item/stock_parts/manipulator), 0, 10)
-	var/cap_rating = Clamp(total_component_rating_of_type(/obj/item/stock_parts/capacitor), 0, 10)
+	var/man_rating = clamp(total_component_rating_of_type(/obj/item/stock_parts/manipulator), 0, 10)
+	var/cap_rating = clamp(total_component_rating_of_type(/obj/item/stock_parts/capacitor), 0, 10)
 
 	charging_power = 40000 + 40000 * cap_rating
 	weld_rate = max(0, man_rating - 3)
@@ -199,8 +197,8 @@
 		var/mob/living/carbon/human/H = M
 		if(H.isSynthetic())
 			return 1
-		if(istype(H.back,/obj/item/rig))
-			var/obj/item/rig/R = H.back
+		var/obj/item/rig/R = H.get_equipped_item(slot_back_str)
+		if(istype(R))
 			return R.cell
 		return GET_INTERNAL_ORGAN(H, BP_CELL)
 	return 0

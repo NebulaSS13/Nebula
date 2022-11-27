@@ -620,7 +620,7 @@
 /turf/simulated/open,
 /area/ship/trade/maintenance/solars)
 "yp" = (
-/obj/item/ore/iron,
+/obj/item/stack/material/ore/iron,
 /turf/simulated/floor/reinforced/airless,
 /area/space)
 "yt" = (
@@ -763,7 +763,7 @@
 	dir = 4
 	},
 /obj/machinery/door/firedoor,
-/obj/item/taperoll/engineering/applied,
+/obj/structure/tape_barricade/engineering,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/ship/trade/bridge_unused)
 "DZ" = (

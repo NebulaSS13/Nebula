@@ -9,8 +9,10 @@
 	throw_range = 10
 	w_class = ITEM_SIZE_NORMAL
 	attack_verb = list("mopped", "bashed", "bludgeoned", "whacked")
-	var/mopping = 0
-	var/mopcount = 0
+	material = /decl/material/solid/wood
+	matter = list(
+		/decl/material/solid/cloth = MATTER_AMOUNT_SECONDARY,
+	)
 	var/mopspeed = 40
 	var/list/moppable_types = list(
 		/obj/effect/decal/cleanable,
@@ -20,7 +22,11 @@
 
 /obj/item/mop/Initialize()
 	. = ..()
+	initialize_reagents()
+
+/obj/item/mop/initialize_reagents(populate = TRUE)
 	create_reagents(30)
+	. = ..()
 
 /obj/item/mop/afterattack(atom/A, mob/user, proximity)
 	if(!proximity)
@@ -91,7 +97,8 @@
 
 /obj/item/mop/advanced/Initialize()
 	. = ..()
-	START_PROCESSING(SSobj, src)
+	if(refill_enabled)
+		START_PROCESSING(SSobj, src)
 
 /obj/item/mop/advanced/attack_self(mob/user)
 	refill_enabled = !refill_enabled
@@ -99,18 +106,17 @@
 		START_PROCESSING(SSobj, src)
 	else
 		STOP_PROCESSING(SSobj,src)
-	to_chat(user, "<span class='notice'>You set the condenser switch to the '[refill_enabled ? "ON" : "OFF"]' position.</span>")
+	to_chat(user, SPAN_NOTICE("You set the condenser switch to the '[refill_enabled ? "ON" : "OFF"]' position."))
 	playsound(user, 'sound/machines/click.ogg', 30, 1)
 
 /obj/item/mop/advanced/Process()
-	if(reagents.total_volume < 30)
+	if(reagents.total_volume < reagents.maximum_volume)
 		reagents.add_reagent(refill_reagent, refill_rate)
 
 /obj/item/mop/advanced/examine(mob/user)
 	. = ..()
-	to_chat(user, "<span class='notice'>The condenser switch is set to <b>[refill_enabled ? "ON" : "OFF"]</b>.</span>")
+	to_chat(user, SPAN_NOTICE("The condenser switch is set to <b>[refill_enabled ? "ON" : "OFF"]</b>."))
 
 /obj/item/mop/advanced/Destroy()
-	if(refill_enabled)
-		STOP_PROCESSING(SSobj, src)
+	STOP_PROCESSING(SSobj, src)
 	return ..()

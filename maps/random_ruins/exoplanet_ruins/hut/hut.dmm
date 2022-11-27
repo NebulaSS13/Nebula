@@ -26,7 +26,7 @@
 /turf/simulated/floor/tiled/dark,
 /area/template_noop)
 "i" = (
-/obj/structure/filingcabinet,
+/obj/structure/filing_cabinet,
 /obj/effect/decal/cleanable/cobweb,
 /turf/simulated/floor/tiled/dark,
 /area/template_noop)

@@ -211,6 +211,7 @@ function run_code_tests {
     run_test "check icon state limit (mods)" "python3 tools/check_icon_state_limit.py mods"
     run_test "check icon state limit (maps)" "python3 tools/check_icon_state_limit.py maps"
     run_test_ci "check changelog builds" "python3 tools/changelog/ss13_genchangelog.py html/changelog.html html/changelogs"
+    run_test "check files included" "python3 tools/validate_dme.py < nebula.dme"
 }
 
 function run_byond_tests {
@@ -221,6 +222,7 @@ function run_byond_tests {
     else msg "configured map is '$MAP_PATH'"
     fi
     cp config/example/* config/
+    cp data/secrets/example/* data/secrets/
     if [[ "$CI" == "true" ]]; then
         msg "installing BYOND"
         ./install-byond.sh || exit 1

@@ -1,4 +1,5 @@
 /decl/cultural_info/religion
+	abstract_type = /decl/cultural_info/religion
 	desc_type = "Religion"
 	category = TAG_RELIGION
 	language = null

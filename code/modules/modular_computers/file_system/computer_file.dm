@@ -11,6 +11,7 @@ var/global/file_uid = 0
 	var/obj/item/stock_parts/computer/hard_drive/holder 	// Holder that contains this file.
 	var/unsendable = 0										// Whether the file may be sent to someone via file transfer or other means.
 	var/undeletable = 0										// Whether the file may be deleted. Setting to 1 prevents deletion/renaming/etc.
+	var/unrenamable = 0										// Whether the file may be renamed. Setting to 1 prevents renaming.
 	var/uid													// UID of this file
 	var/list/metadata										// Any metadata the file uses.
 	var/papertype = /obj/item/paper
@@ -28,11 +29,9 @@ var/global/file_uid = 0
 		metadata = md.Copy()
 
 /datum/computer_file/Destroy()
+	if(holder)
+		holder.remove_file(src, forced = TRUE)
 	. = ..()
-	if(!holder)
-		return
-
-	holder.remove_file(src)
 
 // Returns independent copy of this file.
 /datum/computer_file/proc/clone(var/rename = 0)
@@ -139,3 +138,16 @@ var/global/file_uid = 0
 			return TRUE
 		else
 			return FALSE
+
+/datum/computer_file/proc/get_directory()
+	if(holder)
+		return holder.stored_files[src]
+
+/datum/computer_file/proc/get_file_path()
+	var/datum/computer_file/parent = get_directory()
+	var/list/dir_names = list()
+	while(istype(parent))
+		dir_names.Insert(1, parent.filename)
+		parent = parent.get_directory()
+	
+	return jointext(dir_names, "/")

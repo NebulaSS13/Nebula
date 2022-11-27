@@ -19,13 +19,13 @@
 
 	var/ore_this_tick = 0
 	for(var/obj/structure/ore_box/unloading in input_turf)
-		for(var/obj/item/ore in unloading)
+		for(var/obj/item/stack/material/ore in unloading)
 			ore.dropInto(output_turf)
 			ore_this_tick++
 			if(ore_this_tick >= MAX_UNLOAD_ORE_PER_TICK || length(output_turf.contents) >= MAX_UNLOAD_TURF_CONTENTS)
 				return
 
-	for(var/obj/item/ore in input_turf)
+	for(var/obj/item/stack/material/ore in input_turf)
 		if(ore.simulated && !ore.anchored)
 			ore.dropInto(output_turf)
 			ore_this_tick++

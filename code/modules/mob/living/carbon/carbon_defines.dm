@@ -2,7 +2,11 @@
 	gender = MALE
 
 	var/life_tick = 0      // The amount of life ticks that have processed on this mob.
-	var/obj/item/handcuffed = null //Whether or not the mob is handcuffed
+
+	// TODO REMOVE DIRECT REFERENCES
+	var/obj/item/_handcuffed = null //Whether or not the mob is cuffed
+	// END TODO
+
 	//Surgery info
 	//Active emote/pose
 	var/pose = null
@@ -15,6 +19,8 @@
 	/// Whether the mob is performing cpr or not.
 	var/performing_cpr = FALSE
 	var/lastpuke = 0
+	var/lastcough = 0
+
 	var/nutrition = 400
 	var/hydration = 400
 
@@ -30,8 +36,8 @@
 	// organ-related variables, see organ.dm and human_organs.dm
 	//Shouldn't be accessed directly
 	var/list/organs_by_tag
-	var/tmp/list/internal_organs 
-	var/tmp/list/external_organs 
+	var/tmp/list/internal_organs
+	var/tmp/list/external_organs
 
 	var/list/stasis_sources = list()
 	var/stasis_value

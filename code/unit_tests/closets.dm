@@ -14,12 +14,14 @@
 	var/list/bad_decal_colour
 	var/list/bad_decal_state
 
-	for(var/check_appearance in typesof(/decl/closet_appearance)-except_appearances)
-		var/decl/closet_appearance/closet = GET_DECL(check_appearance)
+	var/list/closet_appearances = decls_repository.get_decls_of_type(/decl/closet_appearance)
+	for(var/check_appearance in closet_appearances)
+		if(check_appearance in except_appearances)
+			continue
+		var/decl/closet_appearance/closet = closet_appearances[check_appearance]
 		if(!closet)
 			LAZYADD(bad_decl, "[check_appearance]")
 			continue
-
 		if(!closet.icon)
 			LAZYADD(bad_icon, "[closet.type]")
 		if(!closet.color)

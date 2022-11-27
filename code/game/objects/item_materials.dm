@@ -1,10 +1,12 @@
 /obj/item/on_update_icon()
-	overlays.Cut()
+	. = ..()
+	SHOULD_CALL_PARENT(TRUE)
+	cut_overlays()
 	if(applies_material_colour && material)
 		color = material.color
 		alpha = 100 + material.opacity * 255
 	if(blood_overlay)
-		overlays += blood_overlay
+		add_overlay(blood_overlay)
 	if(global.contamination_overlay && contaminated)
 		overlays += global.contamination_overlay
 
@@ -34,7 +36,7 @@
 	T.visible_message(SPAN_DANGER("\The [src] [material ? material.destruction_desc : "shatters"]!"))
 	playsound(src, "shatter", 70, 1)
 	if(!consumed && material && w_class > ITEM_SIZE_SMALL)
-		material.place_shard(T)
+		material.place_shards(T)
 	qdel(src)
 
 /obj/item/get_material()
@@ -95,3 +97,10 @@
 	. = ..()
 	if(item_flags & ITEM_FLAG_HOLLOW)
 		. *= HOLLOW_OBJECT_MATTER_MULTIPLIER
+
+/obj/item/create_matter()
+	..()
+	LAZYINITLIST(matter)
+	if(istype(material))
+		matter[material.type] = max(matter[material.type], round(MATTER_AMOUNT_PRIMARY * get_matter_amount_modifier()))
+	UNSETEMPTY(matter)

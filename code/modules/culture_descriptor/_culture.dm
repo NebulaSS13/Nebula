@@ -1,4 +1,5 @@
 /decl/cultural_info
+	abstract_type = /decl/cultural_info
 	var/name
 	var/desc_type
 	var/description

@@ -3,7 +3,6 @@
 	var/time = 0
 	var/new_volume = 100
 	var/datum/sound_token/token
-	var/sound_id
 
 
 /datum/musical_event/New(datum/sound_player/source, datum/sound_token/token, time, volume)

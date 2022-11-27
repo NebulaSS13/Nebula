@@ -5,6 +5,7 @@
 	var/config_sound = 'sound/items/Ratchet.ogg'  // Sound or list of sounds to play when this tool is selected as a variable tool head.
 	var/codex_key
 	var/use_message = "adjusting"
+	var/list/properties                           // A list of named tool specific properties this tool offers, and the default value of that property, if applicable. 
 
 /decl/tool_archetype/proc/can_use_tool(var/obj/item/tool, var/expend_fuel = 0)
 	return istype(tool) && tool.get_tool_quality(type) > 0

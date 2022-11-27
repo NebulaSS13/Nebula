@@ -48,6 +48,7 @@
 		..()
 
 /obj/item/cane/concealed/on_update_icon()
+	. = ..()
 	if(concealed_blade)
 		SetName(initial(name))
 		icon_state = initial(icon_state)

@@ -82,7 +82,7 @@
 /turf/simulated/floor/wood/walnut,
 /area/yacht/bridge)
 "ap" = (
-/obj/structure/filingcabinet/chestdrawer,
+/obj/structure/filing_cabinet/chestdrawer,
 /obj/effect/decal/cleanable/cobweb2,
 /obj/effect/decal/cleanable/dirt,
 /turf/simulated/floor/wood/walnut,
@@ -137,7 +137,7 @@
 /turf/simulated/floor/wood/walnut,
 /area/yacht/bridge)
 "av" = (
-/obj/item/storage/mirror,
+/obj/structure/mirror,
 /turf/simulated/wall/walnut,
 /area/yacht/living)
 "aw" = (
@@ -579,7 +579,7 @@
 /area/yacht/living)
 "bL" = (
 /obj/machinery/light/small,
-/obj/structure/filingcabinet,
+/obj/structure/filing_cabinet,
 /turf/simulated/floor/carpet/purple,
 /area/yacht/living)
 "bM" = (
@@ -615,7 +615,7 @@
 /turf/simulated/floor/plating,
 /area/yacht/engine)
 "bS" = (
-/obj/structure/dispenser/oxygen,
+/obj/structure/tank_rack/oxygen,
 /obj/effect/decal/cleanable/dirt,
 /turf/simulated/floor/plating,
 /area/yacht/engine)
@@ -651,7 +651,7 @@
 /turf/simulated/floor/plating,
 /area/yacht/engine)
 "bW" = (
-/obj/item/extinguisher,
+/obj/item/chems/spray/extinguisher,
 /obj/machinery/portable_atmospherics/hydroponics,
 /obj/effect/decal/cleanable/dirt,
 /turf/simulated/floor/wood/yew,

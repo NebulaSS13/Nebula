@@ -27,7 +27,6 @@
 	preload_rsc = 0
 
 	// * Sound stuff *
-	var/ambience_playing = null
 	var/played = 0
 
 	// * Security *

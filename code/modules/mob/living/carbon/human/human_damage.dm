@@ -10,7 +10,7 @@
 
 	//TODO: fix husking
 	if(((maxHealth - getFireLoss()) < config.health_threshold_dead) && stat == DEAD)
-		ChangeToHusk()
+		make_husked()
 	return
 
 /mob/living/carbon/human/adjustBrainLoss(var/amount)
@@ -29,9 +29,7 @@
 			updatehealth()
 
 /mob/living/carbon/human/getBrainLoss()
-	if(status_flags & GODMODE)
-		return 0	//godmode
-
+	if(status_flags & GODMODE)	return 0	//godmode
 	if(should_have_organ(BP_BRAIN))
 		var/obj/item/organ/internal/sponge = GET_INTERNAL_ORGAN(src, BP_BRAIN)
 		if(sponge)
@@ -41,7 +39,6 @@
 				return sponge.damage
 		else
 			return species.total_health
-
 	return 0
 
 //Straight pain values, not affected by painkillers etc

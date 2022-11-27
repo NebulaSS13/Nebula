@@ -1,12 +1,7 @@
 /decl/special_role/loyalist
 	name = "Head Loyalist"
 	name_plural = "Loyalists"
-	feedback_tag = "loyalist_objective"
 	antag_indicator = "hud_loyal_head"
-	victory_text = "The heads of staff remained at their posts! The loyalists win!"
-	loss_text = "The heads of staff did not stop the revolution!"
-	victory_feedback_tag = "win - rev heads killed"
-	loss_feedback_tag = "loss - heads killed"
 	antaghud_indicator = "hudloyalist"
 	flags = 0
 	blocked_job_event_categories = list(ASSIGNMENT_ROBOT, ASSIGNMENT_COMPUTER)

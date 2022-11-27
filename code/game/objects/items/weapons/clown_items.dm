@@ -25,6 +25,11 @@
 	throw_speed = 3
 	throw_range = 15
 	attack_verb = list("HONKED")
+	material = /decl/material/solid/metal/steel
+	matter = list( 
+		/decl/material/solid/plastic = MATTER_AMOUNT_SECONDARY
+	)
+	item_flags = ITEM_FLAG_HOLLOW
 	var/spam_flag = 0
 	var/audio_files = list("sound/items/bikehorn.ogg")
 
@@ -43,3 +48,5 @@
 	icon_state = "air_horn"
 	item_state = "air_horn"
 	audio_files = list("sound/items/air_horn_1.ogg", "sound/items/air_horn_2.ogg")
+	material = /decl/material/solid/metal/aluminium
+	item_flags = ITEM_FLAG_HOLLOW

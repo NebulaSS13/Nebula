@@ -41,10 +41,6 @@
 		return
 
 	if(stat != DEAD)
-
-		if((MUTATION_FAT in src.mutations) && (move_intent.flags & MOVE_INTENT_EXERTIVE) && src.bodytemperature <= 360)
-			bodytemperature += 2
-
 		var/nut_removed = DEFAULT_HUNGER_FACTOR/10
 		var/hyd_removed = DEFAULT_THIRST_FACTOR/10
 		if (move_intent.flags & MOVE_INTENT_EXERTIVE)
@@ -170,13 +166,12 @@
 				t_him = "him"
 			else if (src.gender == FEMALE)
 				t_him = "her"
-			if (istype(src,/mob/living/carbon/human) && src:w_uniform)
-				var/mob/living/carbon/human/H = src
-				H.w_uniform.add_fingerprint(M)
 
-			var/show_ssd
-			var/mob/living/carbon/human/H = src
-			if(istype(H)) show_ssd = H.species.show_ssd
+			var/obj/item/uniform = get_equipped_item(slot_w_uniform_str)
+			if(uniform)
+				uniform.add_fingerprint(M)
+
+			var/show_ssd = get_species_name()
 			if(show_ssd && ssd_check())
 				M.visible_message("<span class='notice'>[M] shakes [src] trying to wake [t_him] up!</span>", \
 				"<span class='notice'>You shake [src], but they do not respond... Maybe they have S.S.D?</span>")
@@ -209,7 +204,7 @@
 	src.throw_mode_off()
 	if(src.stat || !target)
 		return
-	if(target.type == /obj/screen) 
+	if(target.type == /obj/screen)
 		return
 
 	if(!item)
@@ -240,7 +235,7 @@
 		var/obj/item/I = item
 		itemsize = I.w_class
 
-	if(!unEquip(item))
+	if(!unEquip(item, play_dropsound = FALSE))
 		return
 	if(!item || !isturf(item.loc))
 		return
@@ -279,21 +274,19 @@
 	bodytemperature += temp_inc
 
 /mob/living/carbon/can_use_hands()
-	if(handcuffed)
+	if(get_equipped_item(slot_handcuffed_str))
 		return 0
 	if(buckled && ! istype(buckled, /obj/structure/bed/chair)) // buckling does not restrict hands
 		return 0
 	return 1
 
 /mob/living/carbon/restrained()
-	if (handcuffed)
-		return 1
-	return
+	return get_equipped_item(slot_handcuffed_str)
 
 /mob/living/carbon/u_equip(obj/item/W)
 	. = ..()
-	if(!. && W == handcuffed)
-		handcuffed = null
+	if(!. && W == get_equipped_item(slot_handcuffed_str))
+		_handcuffed = null
 		update_inv_handcuffed()
 		if(buckled && buckled.buckle_require_restraints)
 			buckled.unbuckle_mob()
@@ -318,27 +311,13 @@
 		SET_STATUS_MAX(src, STAT_WEAK, stun_duration)
 		. = TRUE
 
-/mob/living/carbon/get_default_language()
-	. = ..()
-	if(. && !can_speak(.))
-		. = null
-
-/mob/living/carbon/get_any_good_language(set_default=FALSE)
-	. = ..()
-	if(!.)
-		for (var/decl/language/L in languages)
-			if(can_speak(L))
-				. = L
-				if (set_default)
-					set_default_language(.)
-				break
-
 /mob/living/carbon/show_inv(mob/user)
 	user.set_machine(src)
+	var/obj/item/mask = get_equipped_item(slot_wear_mask_str)
 	var/dat = {"
 	<B><HR><FONT size=3>[name]</FONT></B>
 	<BR><HR>
-	<BR><B>Head(Mask):</B> <A href='?src=\ref[src];item=mask'>[(wear_mask ? wear_mask : "Nothing")]</A>"}
+	<BR><B>Head(Mask):</B> <A href='?src=\ref[src];item=mask'>[(mask ? mask : "Nothing")]</A>"}
 
 	for(var/bp in held_item_slots)
 		var/obj/item/organ/external/E = GET_EXTERNAL_ORGAN(src, bp)
@@ -346,7 +325,8 @@
 			var/datum/inventory_slot/inv_slot = held_item_slots[bp]
 			dat += "<BR><b>[capitalize(E.name)]:</b> <A href='?src=\ref[src];item=[bp]'>[inv_slot.holding?.name || "nothing"]</A>"
 
-	dat += {"<BR><B>Back:</B> <A href='?src=\ref[src];item=back'>[(back ? back : "Nothing")]</A> [((istype(wear_mask, /obj/item/clothing/mask) && istype(back, /obj/item/tank) && !( internal )) ? text(" <A href='?src=\ref[];item=internal'>Set Internal</A>", src) : "")]
+	var/obj/item/back = get_equipped_item(slot_back_str)
+	dat += {"<BR><B>Back:</B> <A href='?src=\ref[src];item=back'>[(back || "Nothing")]</A> [((istype(mask, /obj/item/clothing/mask) && istype(back, /obj/item/tank) && !( internal )) ? text(" <A href='?src=\ref[];item=internal'>Set Internal</A>", src) : "")]
 	<BR>[(internal ? text("<A href='?src=\ref[src];item=internal'>Remove Internal</A>") : "")]
 	<BR><A href='?src=\ref[src];item=pockets'>Empty Pockets</A>
 	<BR><A href='?src=\ref[user];refresh=1'>Refresh</A>
@@ -400,13 +380,13 @@
 	stasis_sources.Cut()
 
 /mob/living/carbon/proc/set_nutrition(var/amt)
-	nutrition = Clamp(amt, 0, initial(nutrition))
+	nutrition = clamp(amt, 0, initial(nutrition))
 
 /mob/living/carbon/adjust_nutrition(var/amt)
 	set_nutrition(nutrition + amt)
 
 /mob/living/carbon/proc/set_hydration(var/amt)
-	hydration = Clamp(amt, 0, initial(hydration))
+	hydration = clamp(amt, 0, initial(hydration))
 
 /mob/living/carbon/adjust_hydration(var/amt)
 	set_hydration(hydration + amt)
@@ -452,10 +432,11 @@
 	return "Carbon-based"
 
 /mob/living/carbon/proc/get_possible_internals_sources()
-	. = list("back" = list(back, "on"))
+	. = list("back" = list(get_equipped_item(slot_back_str), "on"))
 
 /mob/living/carbon/proc/breathing_hole_covered()
-	. = (wear_mask && (wear_mask?.item_flags & ITEM_FLAG_AIRTIGHT))
+	var/obj/item/mask = get_equipped_item(slot_wear_mask_str)
+	. = (mask && (mask?.item_flags & ITEM_FLAG_AIRTIGHT))
 
 /mob/living/carbon/ui_toggle_internals()
 
@@ -510,7 +491,7 @@
 					break
 			if(!is_poison)
 				valid_tank = TRUE
-			
+
 		if(valid_tank && (!selected_obj || selected_obj.air_contents.gas[breathes_gas] <  checking.air_contents.gas[breathes_gas]))
 			selected_obj =  checking
 			selected_slot = slot_name
@@ -521,3 +502,18 @@
 			set_internals(selected_obj, "\the [selected_obj] [selected_from] your [selected_slot]")
 		else
 			set_internals(selected_obj, "\the [selected_obj]")
+
+/mob/living/carbon/handle_flashed(var/obj/item/flash/flash, var/flash_strength)
+
+	var/safety = eyecheck()
+	if(safety >= FLASH_PROTECTION_MODERATE || flash_strength <= 0) // May be modified by human proc.
+		return FALSE
+
+	flash_eyes(FLASH_PROTECTION_MODERATE - safety)
+	SET_STATUS_MAX(src, STAT_STUN, (flash_strength / 2))
+	SET_STATUS_MAX(src, STAT_BLURRY, flash_strength)
+	SET_STATUS_MAX(src, STAT_CONFUSE, (flash_strength + 2))
+	if(flash_strength > 3)
+		drop_held_items()
+	if(flash_strength > 5)
+		SET_STATUS_MAX(src, STAT_WEAK, 2)

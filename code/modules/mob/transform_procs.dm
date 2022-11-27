@@ -1,9 +1,7 @@
 /mob/living/carbon/human/proc/monkeyize()
 	if (HAS_TRANSFORMATION_MOVEMENT_HANDLER(src))
 		return
-	for(var/obj/item/W in src)
-		if (W==w_uniform) // will be torn
-			continue
+	for(var/obj/item/W in get_contained_external_atoms())
 		drop_from_inventory(W)
 	refresh_visible_overlays()
 	ADD_TRANSFORMATION_MOVEMENT_HANDLER(src)
@@ -263,7 +261,7 @@
 
 
 /mob/living/carbon/human/proc/zombify()
-	ChangeToHusk()
+	make_husked()
 	mutations |= MUTATION_CLUMSY
 	src.visible_message("<span class='danger'>\The [src]'s skin decays before your very eyes!</span>", "<span class='danger'>Your entire body is ripe with pain as it is consumed down to flesh and bones. You ... hunger. Not only for flesh, but to spread this gift.</span>")
 	if (src.mind)

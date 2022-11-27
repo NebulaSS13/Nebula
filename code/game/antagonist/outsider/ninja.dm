@@ -5,24 +5,21 @@
 	welcome_text = "<span class='info'>You are an elite mercenary assassin of the Spider Clan. You have a variety of abilities at your disposal, thanks to your nano-enhanced cyber armor.</span>"
 	flags = ANTAG_OVERRIDE_JOB | ANTAG_OVERRIDE_MOB | ANTAG_CLEAR_EQUIPMENT | ANTAG_CHOOSE_NAME | ANTAG_RANDSPAWN | ANTAG_VOTABLE | ANTAG_SET_APPEARANCE
 	antaghud_indicator = "hudninja"
-
 	initial_spawn_req = 1
 	initial_spawn_target = 1
 	hard_cap = 1
 	hard_cap_round = 3
 	min_player_age = 18
-
-	id_type = /obj/item/card/id/syndicate
-
+	default_access = list(access_ninja)
 	faction = "ninja"
-	base_to_load = /datum/map_template/ruin/antag_spawn/ninja
-
+	base_to_load = "Ninja Base"
 	default_outfit = /decl/hierarchy/outfit/ninja
 	id_title = "Infiltrator"
 	rig_type = /obj/item/rig/light/ninja
 
 /decl/special_role/ninja/attempt_random_spawn()
-	if(config.ninjas_allowed) ..()
+	if(config.ninjas_allowed)
+		..()
 
 /decl/special_role/ninja/create_objectives(var/datum/mind/ninja)
 
@@ -98,7 +95,8 @@
 	l_ear =   /obj/item/radio/headset
 	uniform = /obj/item/clothing/under/color/black
 	belt =    /obj/item/flashlight
-	hands =   list(/obj/item/modular_computer/pda/syndicate)
+	hands =   list(/obj/item/modular_computer/pda/ninja)
+	id_type = /obj/item/card/id/syndicate
 
 /decl/special_role/ninja/equip(var/mob/living/carbon/human/player)
 	. = ..()

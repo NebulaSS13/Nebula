@@ -29,22 +29,15 @@
 	var/fabricator_class = FABRICATOR_CLASS_GENERAL
 	var/filter_string
 
-	var/list/stored_material
-	var/list/storage_capacity
-	var/list/base_storage_capacity = list(
-		/decl/material/solid/metal/steel =     SHEET_MATERIAL_AMOUNT * 20,
-		/decl/material/solid/metal/aluminium = SHEET_MATERIAL_AMOUNT * 20,
-		/decl/material/solid/metal/copper =    SHEET_MATERIAL_AMOUNT * 20,
-		/decl/material/solid/fiberglass =      SHEET_MATERIAL_AMOUNT * 10,
-		/decl/material/solid/glass =           SHEET_MATERIAL_AMOUNT * 10,
-		/decl/material/solid/plastic =         SHEET_MATERIAL_AMOUNT * 10
-	)
+	var/list/stored_material = list()
+	var/list/storage_capacity = list()
+	var/base_storage_capacity_mult = 20
+	var/list/base_storage_capacity = list()
 
 	var/show_category = "All"
 	var/fab_status_flags = 0
 	var/mat_efficiency = 1.1
 	var/build_time_multiplier = 1
-	var/static/list/stored_substances_to_names = list()
 
 	var/list/design_cache = list()
 	var/list/installed_designs = list()
@@ -80,7 +73,8 @@
 	if(length(storage_capacity))
 		var/list/material_names = list()
 		for(var/thing in storage_capacity)
-			material_names += "[storage_capacity[thing]] [stored_substances_to_names[thing]]"
+			var/decl/material/mat = GET_DECL(thing)
+			material_names += "[storage_capacity[thing]] [mat.use_name]"
 		to_chat(user, SPAN_NOTICE("It can store [english_list(material_names)]."))
 	if(has_recycler)
 		to_chat(user, SPAN_NOTICE("It has a built-in shredder that can recycle most items, although any materials it cannot use will be wasted."))
@@ -92,25 +86,7 @@
 	sound_id = "[fabricator_sound]"
 
 	// Get any local network we need to be part of.
-	set_extension(src, /datum/extension/network_device, initial_network_id, initial_network_key, NETWORK_CONNECTION_STRONG_WIRELESS)
-
-	// Initialize material storage lists.
-	stored_material = list()
-	for(var/mat in base_storage_capacity)
-		stored_material[mat] = 0
-
-		// Update global type to string cache.
-		if(!stored_substances_to_names[mat])
-			if(ispath(mat, /decl/material))
-				var/decl/material/mat_instance = GET_DECL(mat)
-				if(istype(mat_instance))
-					stored_substances_to_names[mat] =  lowertext(mat_instance.name)
-			else if(ispath(mat, /decl/material))
-				var/decl/material/reg = mat
-				stored_substances_to_names[mat] = lowertext(initial(reg.name))
-
-	if(prefilled)
-		fill_to_capacity()
+	set_extension(src, /datum/extension/network_device, initial_network_id, initial_network_key, RECEIVER_STRONG_WIRELESS)
 
 	if(SSfabrication.post_recipe_init)
 		refresh_design_cache()
@@ -152,7 +128,12 @@
 		design_cache |= unlocked_tech
 
 	var/list/unique_categories
+	var/list/add_mat_to_storage_cap = list()
 	for(var/datum/fabricator_recipe/R in design_cache)
+
+		for(var/mat in R.resources)
+			add_mat_to_storage_cap |= mat
+
 		LAZYDISTINCTADD(unique_categories, R.category)
 		if(!length(R.species_locked))
 			continue
@@ -168,6 +149,24 @@
 
 	design_cache = sortTim(design_cache, /proc/cmp_name_asc)
 	ui_nb_categories = LAZYLEN(unique_categories)
+
+	if(length(add_mat_to_storage_cap))
+		var/need_storage_recalc = FALSE
+		for(var/mat in add_mat_to_storage_cap)
+			if(mat in base_storage_capacity)
+				continue
+			need_storage_recalc = TRUE
+			base_storage_capacity[mat] = (SHEET_MATERIAL_AMOUNT * base_storage_capacity_mult)
+			if(!(mat in stored_material))
+				stored_material[mat] = 0
+
+		if(need_storage_recalc)
+			RefreshParts()
+
+	// We handle this here, as we don't know what materials should be stocked prior to updating our recipes.
+	if(prefilled)
+		prefilled = FALSE
+		fill_to_capacity()
 
 /obj/machinery/fabricator/state_transition(var/decl/machine_construction/default/new_state)
 	. = ..()
@@ -185,7 +184,7 @@
 /obj/machinery/fabricator/proc/is_functioning()
 	. = use_power != POWER_USE_OFF && !(stat & NOPOWER) && !(stat & BROKEN) && !(fab_status_flags & FAB_DISABLED)
 
-/obj/machinery/fabricator/Process(var/wait)
+/obj/machinery/fabricator/Process(wait, tick)
 	..()
 	if(use_power == POWER_USE_ACTIVE && (fab_status_flags & FAB_BUSY))
 		update_current_build(wait)
@@ -211,11 +210,12 @@
 //Updates overall lathe storage size.
 /obj/machinery/fabricator/RefreshParts()
 	..()
-	var/mb_rating = Clamp(total_component_rating_of_type(/obj/item/stock_parts/matter_bin), 0, 10)
-	var/man_rating = Clamp(total_component_rating_of_type(/obj/item/stock_parts/manipulator), 0.5, 3.5)
-	storage_capacity = list()
+	var/mb_rating = clamp(total_component_rating_of_type(/obj/item/stock_parts/matter_bin), 0, 10)
+	var/man_rating = clamp(total_component_rating_of_type(/obj/item/stock_parts/manipulator), 0.5, 3.5)
 	for(var/mat in base_storage_capacity)
 		storage_capacity[mat] = mb_rating * base_storage_capacity[mat]
+		if(!(mat in stored_material))
+			stored_material[mat] = 0
 	mat_efficiency = initial(mat_efficiency) - man_rating * 0.1
 	build_time_multiplier = initial(build_time_multiplier) * man_rating
 

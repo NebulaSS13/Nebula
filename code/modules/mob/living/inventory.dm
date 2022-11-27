@@ -14,6 +14,7 @@
 /mob/living
 	var/held_item_slot_selected
 	var/list/held_item_slots
+	var/list/inventory_slots
 
 /mob/living/has_held_item_slot()
 	. = LAZYLEN(held_item_slots) >= 1
@@ -50,7 +51,7 @@
 
 /mob/living/get_active_hand()
 	var/datum/inventory_slot/inv_slot = LAZYACCESS(held_item_slots, get_active_held_item_slot())
-	. = inv_slot?.holding
+	return inv_slot?.holding
 
 /mob/living/get_active_held_item_slot()
 	. = held_item_slot_selected
@@ -87,8 +88,12 @@
 /mob/living/get_equipped_item(var/slot)
 	. = ..()
 	if(!.)
-		var/datum/inventory_slot/inv_slot = LAZYACCESS(held_item_slots, slot)
-		. = inv_slot?.holding
+		var/datum/inventory_slot/inv_slot
+		if(LAZYLEN(inventory_slots))
+			inv_slot = inventory_slots[slot]
+		else if(LAZYLEN(held_item_slots))
+			inv_slot = held_item_slots[slot]
+		return inv_slot?.holding
 
 /mob/living/drop_from_hand(var/slot, var/atom/Target)
 	var/datum/inventory_slot/inv_slot = LAZYACCESS(held_item_slots, slot)

@@ -41,7 +41,7 @@
 	if(SL.up_description)
 		alert_desc = SL.up_description
 
-	to_chat(src, SPAN_NOTICE("The alert level on the [station_name()] is currently: <font color=[SL.light_color_alarm]><B>[SL.name]</B></font>. [alert_desc]"))
+	to_chat(src, SPAN_NOTICE("The alert level on the [station_name()] is currently: <span class='[SL.light_color_class]'><B>[SL.name]</B></span>. [alert_desc]"))
 
 	// bolds the changelog button on the interface so we know there are updates.
 	if(client.prefs?.lastchangelog != global.changelog_hash)

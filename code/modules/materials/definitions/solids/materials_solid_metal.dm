@@ -7,13 +7,17 @@
 	weight = MAT_VALUE_HEAVY
 	hardness = MAT_VALUE_RIGID
 	wall_support_value = MAT_VALUE_HEAVY
+	wall_flags = PAINT_PAINTABLE
 	wall_blend_icons = list(
 		'icons/turf/walls/wood.dmi' = TRUE,
 		'icons/turf/walls/stone.dmi' = TRUE
 	)
 	default_solid_form = /obj/item/stack/material/ingot
 	table_icon_base = "metal"
+	door_icon_base = "metal"
 	abstract_type = /decl/material/solid/metal
+	icon_base = 'icons/turf/walls/metal.dmi'
+	icon_reinf = 'icons/turf/walls/reinforced_metal.dmi'
 
 /decl/material/solid/metal/uranium
 	name = "uranium"
@@ -188,8 +192,8 @@
 	. = ..()
 	if(reinforce_material)	//recipes below don't support composite materials
 		return
-	. += new/datum/stack_recipe/key(src)
 	. += new/datum/stack_recipe/furniture/closet(src)
+	. += new/datum/stack_recipe/furniture/tank_dispenser(src)
 	. += new/datum/stack_recipe/furniture/canister(src)
 	. += new/datum/stack_recipe/furniture/tank(src)
 	. += new/datum/stack_recipe/cannon(src)
@@ -206,7 +210,6 @@
 	. += new/datum/stack_recipe/apc(src)
 	. += new/datum/stack_recipe/air_alarm(src)
 	. += new/datum/stack_recipe/fire_alarm(src)
-	. += new/datum/stack_recipe_list("modular computer frames", create_recipe_list(/datum/stack_recipe/computer))
 
 /decl/material/solid/metal/steel/holographic
 	name = "holographic steel"
@@ -389,7 +392,7 @@
 	reflectiveness = MAT_VALUE_MATTE
 	taste_description = "metal"
 
-/decl/material/solid/metal/iron/affect_ingest(var/mob/living/M, var/alien, var/removed, var/datum/reagents/holder)
+/decl/material/solid/metal/iron/affect_ingest(var/mob/living/M, var/removed, var/datum/reagents/holder)
 	if(M.HasTrait(/decl/trait/metabolically_inert))
 		return
 
@@ -456,6 +459,10 @@
 	value = 3
 	default_solid_form = /obj/item/stack/material/cubes
 	exoplanet_rarity = MAT_RARITY_NOWHERE
+	icon_base = 'icons/turf/walls/solid.dmi'
+	icon_reinf = 'icons/turf/walls/reinforced.dmi'
+	use_reinf_state = null
+	wall_flags = PAINT_PAINTABLE|PAINT_STRIPABLE|WALL_HAS_EDGES
 
 // Likewise.
 /decl/material/solid/metal/alienalloy/elevatorium

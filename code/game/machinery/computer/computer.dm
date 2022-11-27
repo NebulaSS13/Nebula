@@ -10,7 +10,6 @@
 	uncreated_component_parts = null
 	stat_immune = 0
 	frame_type = /obj/machinery/constructable_frame/computerframe/deconstruct
-	var/processing = 0
 
 	var/icon_keyboard = "generic_key"
 	var/icon_screen = "generic"
@@ -40,7 +39,7 @@
 
 	if(reason_broken & MACHINE_BROKEN_NO_PARTS)
 		set_light(0)
-		icon = 'icons/obj/computer.dmi'
+		icon = 'icons/obj/computer.dmi' //#FIXME: I really don't know why you'd do that after re-initializing it above.
 		icon_state = "wired"
 		var/screen = get_component_of_type(/obj/item/stock_parts/console_screen)
 		var/keyboard = get_component_of_type(/obj/item/stock_parts/keyboard)

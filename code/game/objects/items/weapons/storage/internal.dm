@@ -1,6 +1,9 @@
 //A storage item intended to be used by other items to provide storage functionality.
 //Types that use this should consider overriding emp_act() and hear_talk(), unless they shield their contents somehow.
 /obj/item/storage/internal
+	health = ITEM_HEALTH_NO_DAMAGE
+	abstract_type = /obj/item/storage/internal
+	is_spawnable_type = FALSE
 	var/obj/item/master_item
 
 /obj/item/storage/internal/Initialize()
@@ -8,6 +11,9 @@
 	master_item = loc
 	name = master_item.name
 	verbs -= /obj/item/verb/verb_pickup
+
+/obj/item/storage/internal/preserve_in_cryopod(var/obj/machinery/cryopod/pod)
+	return TRUE
 
 /obj/item/storage/internal/Destroy()
 	master_item = null
@@ -58,24 +64,23 @@
 
 	if(ishuman(user))
 		var/mob/living/carbon/human/H = user
-		if(H.l_store == master_item && !H.get_active_hand())	//Prevents opening if it's in a pocket.
-			H.put_in_hands(master_item)
-			H.l_store = null
-			return 0
-		if(H.r_store == master_item && !H.get_active_hand())
-			H.put_in_hands(master_item)
-			H.r_store = null
-			return 0
+		for(var/slot in global.pocket_slots)
+			var/obj/item/pocket = H.get_equipped_item(slot)
+			if(pocket == master_item && !H.get_active_hand())
+				H.unEquip(master_item)
+				H.put_in_hands(master_item)
+				return FALSE
 
 	src.add_fingerprint(user)
 	if (master_item.loc == user)
 		src.open(user)
-		return 0
+		return FALSE
 
 	for(var/mob/M in range(1, master_item.loc))
-		if (M.s_active == src)
+		if (M.active_storage == src)
 			src.close(M)
-	return 1
+
+	return TRUE
 
 /obj/item/storage/internal/Adjacent(var/atom/neighbor)
 	return master_item.Adjacent(neighbor)

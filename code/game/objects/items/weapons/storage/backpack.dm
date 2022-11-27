@@ -219,16 +219,16 @@
 	desc = "A large dufflebag for holding extra tools and supplies."
 	icon = 'icons/obj/items/storage/backpack/dufflebag_eng.dmi'
 
-/obj/item/storage/backpack/dufflebag/firefighter
-	startswith = list(
+/obj/item/storage/backpack/dufflebag/firefighter/WillContain()
+	return list(
 		/obj/item/storage/belt/fire_belt/full,
 		/obj/item/clothing/suit/fire,
-		/obj/item/extinguisher,
+		/obj/item/chems/spray/extinguisher,
 		/obj/item/clothing/gloves/fire,
 		/obj/item/clothing/accessory/fire_overpants,
 		/obj/item/tank/emergency/oxygen/double/red,
 		/obj/item/clothing/head/hardhat/firefighter,
-		/obj/item/extinguisher
+		/obj/item/chems/spray/extinguisher
 	)
 /*
  * Satchel Types
@@ -242,8 +242,8 @@
 /obj/item/storage/backpack/satchel/grey
 	name = "grey satchel"
 
-/obj/item/storage/backpack/satchel/grey/withwallet
-	startswith = list(/obj/item/storage/wallet/random)
+/obj/item/storage/backpack/satchel/grey/withwallet/WillContain()
+	return /obj/item/storage/wallet/random
 
 /obj/item/storage/backpack/satchel/leather //brown, master type
 	name = "brown leather satchel"
@@ -339,7 +339,9 @@
 	max_w_class = ITEM_SIZE_NORMAL
 	max_storage_space = 15
 	cant_hold = list(/obj/item/storage/backpack/satchel/flat) //muh recursive backpacks
-	startswith = list(
+
+/obj/item/storage/backpack/satchel/flat/WillContain()
+	return list(
 		/obj/item/stack/tile/floor,
 		/obj/item/crowbar
 	)
@@ -371,7 +373,7 @@
 	var/marking_colour
 
 /obj/item/storage/backpack/ert/on_update_icon()
-	cut_overlays()
+	. = ..()
 	if(marking_state)
 		var/image/I = image(icon, marking_state)
 		I.color = marking_colour

@@ -20,7 +20,6 @@
 	var/colour = "body"                 // CSS style to use for strings in this language.
 	var/key = ""                        // Character used to speak in language
 	var/flags = 0                       // Various language flags.
-	var/native                          // If set, non-native speakers will have trouble speaking.
 	var/list/syllables                  // Used when scrambling text for a non-speaker.
 	var/list/space_chance = 55          // Likelihood of getting a space in the random scramble string
 	var/machine_understands = 1         // Whether machines can parse and understand this language
@@ -30,6 +29,14 @@
 	var/list/scramble_cache = list()    // Cached syllable strings for masking when heard by a non-speaker
 	var/list/speech_sounds              // List of sounds to randomly play.
 	var/allow_repeated_syllables = TRUE // Control for handling some of the random lang/name gen.
+
+/decl/language/proc/can_be_understood_by(var/mob/living/speaker, var/mob/living/listener)
+	if(flags & LANG_FLAG_INNATE)
+		return TRUE
+	for(var/decl/language/L in listener.languages)
+		if(name == L.name)
+			return TRUE
+	return FALSE
 
 /decl/language/proc/get_spoken_sound()
 	if(speech_sounds)
@@ -61,7 +68,7 @@
 		LAZYADD(., capitalize(lowertext(new_name)))
 	. = "[trim(jointext(., " "))]"
 
-/decl/language/proc/scramble(var/input, var/list/known_languages)
+/decl/language/proc/scramble(mob/living/speaker, input, list/known_languages)
 
 	var/understand_chance = 0
 	for(var/decl/language/L in known_languages)
@@ -145,7 +152,7 @@
 	log_say("[key_name(speaker)] : ([name]) [message]")
 
 	if(!speaker_mask) speaker_mask = speaker.name
-	message = format_message(message, get_spoken_verb(message))
+	message = format_message(message, get_spoken_verb(speaker, message))
 	for(var/mob/player in global.player_list)
 		player.hear_broadcast(src, speaker, speaker_mask, message)
 
@@ -166,7 +173,7 @@
 /decl/language/proc/check_special_condition(var/mob/other)
 	return 1
 
-/decl/language/proc/get_spoken_verb(var/msg_end)
+/decl/language/proc/get_spoken_verb(mob/living/speaker, msg_end)
 	switch(msg_end)
 		if("!")
 			return exclaim_verb

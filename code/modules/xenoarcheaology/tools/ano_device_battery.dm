@@ -3,22 +3,30 @@
 	desc = "Curious device that can replicate the effects of anomalies without needing to understand their inner workings."
 	icon = 'icons/obj/xenoarchaeology.dmi'
 	icon_state = "anobattery0"
+	material = /decl/material/solid/plastic
+	matter = list(
+		/decl/material/solid/metal/chromium   = MATTER_AMOUNT_SECONDARY,
+		/decl/material/solid/metal/zinc       = MATTER_AMOUNT_REINFORCEMENT,
+		/decl/material/solid/gemstone/diamond = MATTER_AMOUNT_REINFORCEMENT,
+		/decl/material/solid/lithium          = MATTER_AMOUNT_TRACE,
+	)
 	var/datum/artifact_effect/battery_effect
 	var/capacity = 300
 	var/stored_charge = 0
 
 /obj/item/anobattery/on_update_icon()
+	. = ..()
 	icon_state = "anobattery[round(percent(),25)]"
 
 /obj/item/anobattery/proc/percent()
 	return round(min(100, (stored_charge/capacity)*100))
 
 /obj/item/anobattery/proc/add_charge(var/amount)
-	stored_charge = Clamp(stored_charge + amount, 0, capacity)
+	stored_charge = clamp(stored_charge + amount, 0, capacity)
 	update_icon()
 
 /obj/item/anobattery/proc/use_power(var/amount)
-	stored_charge = Clamp(stored_charge - amount, 0, capacity)
+	stored_charge = clamp(stored_charge - amount, 0, capacity)
 	if(stored_charge <= 0 && !QDELETED(battery_effect))
 		qdel(battery_effect)
 	update_icon()
@@ -32,6 +40,13 @@
 	desc = "APU allows users to safely (relatively) harness powers beyond their understanding, as long as they've been stored in anomaly power cells."
 	icon = 'icons/obj/xenoarchaeology.dmi'
 	icon_state = "anodev_empty"
+	material = /decl/material/solid/plastic
+	matter = list(
+		/decl/material/solid/metal/chromium   = MATTER_AMOUNT_SECONDARY,
+		/decl/material/solid/metal/gold       = MATTER_AMOUNT_REINFORCEMENT,
+		/decl/material/solid/metal/copper     = MATTER_AMOUNT_REINFORCEMENT,
+		/decl/material/solid/silicon          = MATTER_AMOUNT_TRACE,
+	)
 	var/activated = 0
 	var/duration = 1
 	var/interval = 1
@@ -142,11 +157,11 @@
 		return TOPIC_HANDLED
 	if(href_list["duration"])
 		var/timedif = text2num(href_list["duration"])
-		duration = Clamp(duration + timedif, 1, 30)
+		duration = clamp(duration + timedif, 1, 30)
 		. = TOPIC_REFRESH
 	else if(href_list["interval"])
 		var/timedif = text2num(href_list["interval"])
-		interval = Clamp(interval + timedif, 1, 10)
+		interval = clamp(interval + timedif, 1, 10)
 		. = TOPIC_REFRESH
 	else if(href_list["startup"])
 		if(inserted_battery && inserted_battery.battery_effect && (inserted_battery.stored_charge > 0) )
@@ -166,6 +181,7 @@
 		. = TOPIC_REFRESH
 
 /obj/item/anodevice/on_update_icon()
+	. = ..()
 	if(inserted_battery)
 		icon_state = "anodev[round(inserted_battery.percent(),25)]"
 	else

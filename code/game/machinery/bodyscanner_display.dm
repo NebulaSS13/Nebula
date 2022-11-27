@@ -1,9 +1,8 @@
 /obj/machinery/body_scan_display
-	name = "Body Scan Display"
+	name = "body scan display"
 	desc = "A wall-mounted display linked to a body scanner."
 	icon = 'icons/obj/modular_computers/modular_telescreen.dmi'
-	icon_state = "operating"
-	var/icon_state_unpowered = "telescreen"
+	icon_state = "telescreen"
 	anchored = TRUE
 	density = 0
 	idle_power_usage = 75
@@ -12,12 +11,20 @@
 	uncreated_component_parts = null
 	stat_immune = 0
 	w_class = ITEM_SIZE_HUGE
+	obj_flags = OBJ_FLAG_MOVES_UNSUPPORTED
+	directional_offset = "{'NORTH':{'y':-32}, 'SOUTH':{'y':32}, 'EAST':{'x':32}, 'WEST':{'x':-32}}"
 	var/list/bodyscans = list()
 	var/selected = 0
 
 /obj/machinery/body_scan_display/proc/add_new_scan(var/list/scan)
 	bodyscans += list(scan.Copy())
 	updateUsrDialog()
+
+/obj/machinery/body_scan_display/on_update_icon()
+	. = ..()
+	cut_overlays()
+	if(!(stat & (BROKEN|NOPOWER)))
+		add_overlay("operating")
 
 /obj/machinery/body_scan_display/OnTopic(mob/user, href_list)
 	if(href_list["view"])

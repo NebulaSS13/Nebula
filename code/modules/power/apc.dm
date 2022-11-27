@@ -92,6 +92,7 @@ var/global/list/all_apcs = list()
 	icon_state = "apc0"
 	icon = 'icons/obj/apc.dmi'
 	anchored = 1
+	obj_flags = OBJ_FLAG_MOVES_UNSUPPORTED
 	use_power = POWER_USE_IDLE // Has custom handling here.
 	power_channel = LOCAL      // Do not manipulate this; you don't want to power the APC off itself.
 	interact_offline = TRUE    // Can use UI even if unpowered
@@ -99,6 +100,8 @@ var/global/list/all_apcs = list()
 	initial_access = list(access_engine_equip)
 	clicksound = "switch"
 	layer = ABOVE_WINDOW_LAYER
+	directional_offset = "{'NORTH':{'y':22}, 'SOUTH':{'y':-22}, 'EAST':{'x':22}, 'WEST':{'x':-22}}"
+
 	var/powered_down = FALSE
 	var/area/area
 	var/areastring = null
@@ -176,18 +179,12 @@ var/global/list/all_apcs = list()
 /obj/machinery/power/apc/Initialize(mapload, var/ndir, var/populate_parts = TRUE)
 	global.all_apcs += src
 	if(areastring)
-		area = get_area_by_name(strip_improper(areastring))
+		reset_area(null, get_area_by_name(strip_improper(areastring)))
 	else
-		var/area/A = get_area(src)
+		reset_area(null, get_area(src))
 		//if area isn't specified use current
-		area = A
 	if(!area)
 		return ..() // Spawned in nullspace means it's a test entity or prototype.
-	if(autoname)
-		SetName("\improper [area.proper_name] APC")
-	area.apc = src
-
-	events_repository.register(/decl/observ/name_set, area, src, .proc/change_area_name)
 
 	. = ..()
 
@@ -201,22 +198,36 @@ var/global/list/all_apcs = list()
 	power_change()
 
 /obj/machinery/power/apc/Destroy()
-	global.all_apcs -= src
 	if(area)
-		update()
-		area.apc = null
-		area.power_light = 0
-		area.power_equip = 0
-		area.power_environ = 0
-		area.power_change()
-
-		events_repository.unregister(/decl/observ/name_set, area, src, .proc/change_area_name)
+		reset_area(area, null)
+	global.all_apcs -= src
 
 	// Malf AI, removes the APC from AI's hacked APCs list.
 	if((hacker) && (hacker.hacked_apcs) && (src in hacker.hacked_apcs))
 		hacker.hacked_apcs -= src
 
 	return ..()
+
+// Attempts to set the area and update all refs. Calling this outside of Initialize is experimental at best.
+/obj/machinery/power/apc/proc/reset_area(area/old_area, area/new_area)
+	if(new_area == old_area)
+		return
+	if(old_area && old_area == area)
+		area = null
+		old_area.apc = null
+		old_area.power_light = 0
+		old_area.power_equip = 0
+		old_area.power_environ = 0
+		power_alarm.clearAlarm(old_area, src)
+		old_area.power_change()
+		events_repository.unregister(/decl/observ/name_set, old_area, src, .proc/change_area_name)
+	if(new_area)
+		ASSERT(isnull(new_area.apc))
+		ASSERT(isnull(area))
+		new_area.apc = src
+		area = new_area
+		change_area_name(new_area, null, new_area.name)
+		events_repository.register(/decl/observ/name_set, new_area, src, .proc/change_area_name)
 
 /obj/machinery/power/apc/get_req_access()
 	if(!locked)
@@ -282,21 +293,6 @@ var/global/list/all_apcs = list()
 			channel_leds[POWERCHAN_ON + 1] = overlay_image(icon,"apco[channel]",COLOR_LIME)
 			channel_leds[POWERCHAN_ON_AUTO + 1] = overlay_image(icon,"apco[channel]",COLOR_BLUE)
 			channel++
-
-	if(update_state < 0)
-		default_pixel_x = 0
-		default_pixel_y = 0
-		var/turf/T = get_step(get_turf(src), dir)
-		if(istype(T) && T.density)
-			if(dir == SOUTH)
-				default_pixel_y = -22
-			else if(dir == NORTH)
-				default_pixel_y = 22
-			else if(dir == EAST)
-				default_pixel_x = 22
-			else if(dir == WEST)
-				default_pixel_x = -22
-		reset_offsets()
 
 	var/update = check_updates() 		//returns 0 if no need to update icons.
 						// 1 if we need to update the icon_state
@@ -443,7 +439,7 @@ var/global/list/all_apcs = list()
 	queue_icon_update()
 
 /obj/machinery/power/apc/attackby(obj/item/W, mob/user)
-	if (istype(construct_state, /decl/machine_construction/wall_frame/panel_closed/hackable/hacking) && (isMultitool(W) || isWirecutter(W) || istype(W, /obj/item/assembly/signaler)))
+	if (istype(construct_state, /decl/machine_construction/wall_frame/panel_closed/hackable/hacking) && (IS_MULTITOOL(W) || IS_WIRECUTTER(W) || istype(W, /obj/item/assembly/signaler)))
 		return wires.Interact(user)
 	return ..()
 
@@ -913,9 +909,9 @@ var/global/list/all_apcs = list()
 		power.charge_wait_counter = initial(power.charge_wait_counter)
 
 /obj/machinery/power/apc/proc/change_area_name(var/area/A, var/old_area_name, var/new_area_name)
-	if(A != get_area(src) || !autoname)
+	if(A != area || !autoname)
 		return
-	SetName(replacetext(name,old_area_name,new_area_name))
+	SetName("[A.proper_name] APC")
 
 // overload the lights in this APC area
 /obj/machinery/power/apc/proc/overload_lighting(var/chance = 100)
@@ -966,11 +962,16 @@ var/global/list/all_apcs = list()
 			environ = state
 	force_update_channels()
 
-/obj/machinery/power/apc/area_changed()
+/obj/machinery/power/apc/area_changed(area/old_area, area/new_area)
 	. = ..()
-	//Make sure to resume processing if our area changed to something else than null
 	if(QDELETED(src))
 		return
+	if(. && !areastring) // if areastring is there, we do not update our area as we are supposed to be operating in some kind of "remote" mode
+		reset_area(old_area, new_area)
+		// Attempting the most aggressive recalculation available here; unclear if this is "correct."
+		force_update_channels()
+		power_change()
+	//Make sure to resume processing if our area changed to something else than null
 	if(area && !(processing_flags & MACHINERY_PROCESS_SELF))
 		START_PROCESSING_MACHINE(src, MACHINERY_PROCESS_SELF)
 

@@ -781,9 +781,8 @@
 /turf/simulated/floor,
 /area/unishi/common)
 "cn" = (
-/obj/item/modular_computer/telescreen/preset/generic{
-	dir = 1;
-	pixel_y = -28
+/obj/machinery/computer/modular/telescreen/preset/generic{
+	dir = 1
 	},
 /obj/structure/table/glass,
 /obj/item/pen/green,
@@ -791,9 +790,8 @@
 /turf/simulated/floor/tiled/dark,
 /area/unishi/classroom)
 "co" = (
-/obj/item/modular_computer/telescreen/preset/generic{
-	dir = 1;
-	pixel_y = -28
+/obj/machinery/computer/modular/telescreen/preset/generic{
+	dir = 1
 	},
 /turf/simulated/floor/tiled/dark,
 /area/unishi/classroom)
@@ -801,7 +799,7 @@
 /turf/simulated/floor,
 /area/unishi/common)
 "cq" = (
-/obj/structure/dispenser,
+/obj/structure/tank_rack,
 /turf/simulated/floor,
 /area/unishi/common)
 "cr" = (
@@ -1573,9 +1571,9 @@
 /area/unishi/xenobio)
 "ew" = (
 /obj/structure/table/glass,
-/obj/item/extinguisher,
-/obj/item/extinguisher,
-/obj/item/extinguisher,
+/obj/item/chems/spray/extinguisher,
+/obj/item/chems/spray/extinguisher,
+/obj/item/chems/spray/extinguisher,
 /obj/item/storage/box/monkeycubes,
 /obj/machinery/power/apc{
 	dir = 1;
@@ -2062,7 +2060,7 @@
 /area/unishi/common)
 "fJ" = (
 /obj/machinery/portable_atmospherics/hydroponics,
-/obj/item/weedkiller,
+/obj/item/plantspray/weedkiller,
 /turf/simulated/floor/tiled/dark,
 /area/unishi/common)
 "fK" = (
@@ -2231,7 +2229,7 @@
 /turf/simulated/floor,
 /area/unishi/smresearch)
 "gg" = (
-/obj/effect/decal/remains,
+/obj/item/remains,
 /obj/item/clothing/under/chief_engineer,
 /obj/random/shoes,
 /obj/item/clothing/suit/storage/toggle/labcoat/science{
@@ -2305,7 +2303,7 @@
 /area/unishi/smresearch)
 "gq" = (
 /obj/machinery/atmospherics/pipe/manifold/visible/yellow,
-/obj/effect/decal/remains,
+/obj/item/remains,
 /turf/simulated/floor/tiled/techfloor,
 /area/unishi/smresearch)
 "gr" = (
@@ -2363,7 +2361,7 @@
 /turf/simulated/floor,
 /area/unishi/smresearch)
 "gy" = (
-/obj/effect/decal/remains,
+/obj/item/remains,
 /obj/effect/decal/cleanable/blood,
 /obj/machinery/atmospherics/unary/vent_scrubber/on{
 	dir = 4
@@ -2514,7 +2512,7 @@
 /area/unishi/smresearch)
 "gM" = (
 /obj/effect/decal/cleanable/blood,
-/obj/effect/decal/remains,
+/obj/item/remains,
 /obj/random/shoes,
 /obj/item/clothing/under/pj/blue,
 /turf/simulated/floor/tiled/techfloor,
@@ -2675,7 +2673,7 @@
 /area/space)
 "hh" = (
 /obj/effect/decal/cleanable/blood,
-/obj/effect/decal/remains,
+/obj/item/remains,
 /obj/item/clothing/suit/storage/toggle/labcoat/science{
 	name = "\improper labcoat"
 	},
@@ -2753,7 +2751,7 @@
 	name = "Biohazard Shutter";
 	opacity = 0
 	},
-/obj/effect/decal/remains,
+/obj/item/remains,
 /obj/random/shoes,
 /turf/simulated/floor,
 /area/unishi/smresearch)
@@ -2768,7 +2766,7 @@
 /area/unishi/smresearch)
 "hs" = (
 /obj/machinery/atmospherics/pipe/simple/visible/green,
-/obj/effect/decal/remains,
+/obj/item/remains,
 /obj/random/shoes,
 /obj/machinery/light/small,
 /obj/item/remains,

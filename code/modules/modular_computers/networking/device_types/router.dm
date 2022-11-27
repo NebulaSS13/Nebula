@@ -1,7 +1,4 @@
 
-/datum/extension/network_device/broadcaster/router
-	connection_type = NETWORK_CONNECTION_STRONG_WIRELESS
-
 /datum/extension/network_device/broadcaster/router/New(datum/holder, n_id, n_key, c_type)
 	..()
 	broadcast()

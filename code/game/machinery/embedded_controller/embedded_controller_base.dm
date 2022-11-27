@@ -50,6 +50,7 @@
 	power_channel = ENVIRON
 	density = 0
 	unacidable = 1
+	obj_flags = OBJ_FLAG_MOVES_UNSUPPORTED
 	var/frequency = EXTERNAL_AIR_FREQ
 	var/datum/radio_frequency/radio_connection
 

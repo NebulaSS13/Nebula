@@ -215,8 +215,9 @@
 	if (!bloody_hands)
 		verbs -= /mob/living/carbon/human/proc/bloody_doodle
 
-	if (src.gloves)
-		to_chat(src, "<span class='warning'>Your [src.gloves] are getting in the way.</span>")
+	var/obj/item/gloves = get_equipped_item(slot_gloves_str)
+	if (gloves)
+		to_chat(src, SPAN_WARNING("Your [gloves] are getting in the way."))
 		return
 
 	var/turf/simulated/T = src.loc

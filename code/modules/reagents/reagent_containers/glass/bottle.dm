@@ -20,7 +20,6 @@
 
 	var/label_color
 	var/lid_color = COLOR_GRAY80
-	var/list/initial_reagents 	// reagents that should spawn in the bottle
 	var/autolabel = TRUE  		// if set, will add label with the name of the first initial reagent
 
 /obj/item/chems/glass/bottle/pickup(mob/user)
@@ -62,42 +61,59 @@
 
 /obj/item/chems/glass/bottle/Initialize()
 	. = ..()
-	if(LAZYLEN(initial_reagents))
-		for(var/R in initial_reagents)
-			reagents.add_reagent(R, initial_reagents[R])
-		if(autolabel && !label_text) // don't override preset labels
-			var/decl/material/R = GET_DECL(initial_reagents[1])
-			label_text = R.name
-	if(label_text)
-		update_name_label()
 	update_icon()
+
+/obj/item/chems/glass/bottle/populate_reagents()
+	. = ..()
+	SHOULD_CALL_PARENT(TRUE)
+	if((reagents.total_volume > 0) && autolabel && !label_text) // don't override preset labels
+		label_text = reagents.get_primary_reagent_name()
 
 /obj/item/chems/glass/bottle/stabilizer
 	desc = "A small bottle. Contains stabilizer - used to stabilize patients."
-	initial_reagents = list(/decl/material/liquid/stabilizer = 60)
+
+/obj/item/chems/glass/bottle/stabilizer/populate_reagents()
+	reagents.add_reagent(/decl/material/liquid/stabilizer, reagents.maximum_volume)
+	. = ..()
 
 /obj/item/chems/glass/bottle/bromide
 	desc = "A small bottle of bromide. Do not drink, it is poisonous."
-	initial_reagents = list(/decl/material/liquid/bromide = 60)
+
+/obj/item/chems/glass/bottle/bromide/populate_reagents()
+	reagents.add_reagent(/decl/material/liquid/bromide, reagents.maximum_volume)
+	. = ..()
 
 /obj/item/chems/glass/bottle/cyanide
 	desc = "A small bottle of cyanide. Bitter almonds?"
-	initial_reagents = list(/decl/material/liquid/cyanide = 30) //volume changed to match chloral
+
+/obj/item/chems/glass/bottle/cyanide/populate_reagents()
+	reagents.add_reagent(/decl/material/liquid/cyanide, reagents.maximum_volume / 2) //volume changed to match chloral
+	. = ..()
 
 /obj/item/chems/glass/bottle/sedatives
 	desc = "A small bottle of soporific medication. Just the fumes make you sleepy."
-	initial_reagents = list(/decl/material/liquid/sedatives = 60)
+
+/obj/item/chems/glass/bottle/sedatives/populate_reagents()
+	reagents.add_reagent(/decl/material/liquid/sedatives, reagents.maximum_volume)
+	. = ..()
 
 /obj/item/chems/glass/bottle/antitoxin
 	desc = "A small bottle of antitoxins. Counters poisons, and repairs damage. A wonder drug."
-	initial_reagents = list(/decl/material/liquid/antitoxins = 60)
+
+/obj/item/chems/glass/bottle/antitoxin/populate_reagents()
+	reagents.add_reagent(/decl/material/liquid/antitoxins, reagents.maximum_volume)
+	. = ..()
 
 /obj/item/chems/glass/bottle/mutagenics
 	desc = "A small bottle of unstable mutagen. Randomly changes the DNA structure of whoever comes in contact."
-	initial_reagents = list(/decl/material/liquid/mutagenics = 60)
 
-/obj/item/chems/glass/bottle/ammonia
-	initial_reagents = list(/decl/material/gas/ammonia = 60)
+/obj/item/chems/glass/bottle/mutagenics/populate_reagents()
+	reagents.add_reagent(/decl/material/liquid/mutagenics, reagents.maximum_volume)
+	. = ..()
+
+/obj/item/chems/glass/bottle/ammonia/populate_reagents()
+	reagents.add_reagent(/decl/material/gas/ammonia, reagents.maximum_volume)
+	. = ..()
 
 /obj/item/chems/glass/bottle/eznutrient
 	label_text = "EZ NUtrient"
@@ -105,7 +121,10 @@
 	label_color = COLOR_PALE_BTL_GREEN
 	lid_color = COLOR_PALE_BTL_GREEN
 	material = /decl/material/solid/plastic
-	initial_reagents = list(/decl/material/liquid/fertilizer = 60)
+
+/obj/item/chems/glass/bottle/eznutrient/populate_reagents()
+	reagents.add_reagent(/decl/material/liquid/fertilizer, reagents.maximum_volume)
+	. = ..()
 
 /obj/item/chems/glass/bottle/left4zed
 	label_text = "Left-4-Zed"
@@ -113,10 +132,12 @@
 	label_color = COMMS_COLOR_SCIENCE
 	lid_color = COMMS_COLOR_SCIENCE
 	material = /decl/material/solid/plastic
-	initial_reagents = list(
-		/decl/material/liquid/fertilizer = 50,
-		/decl/material/liquid/mutagenics = 10
-	)
+
+/obj/item/chems/glass/bottle/left4zed/populate_reagents()
+	var/mutagen_amount = round(reagents.maximum_volume / 6)
+	reagents.add_reagent(/decl/material/liquid/fertilizer, reagents.maximum_volume - mutagen_amount)
+	reagents.add_reagent(/decl/material/liquid/mutagenics, mutagen_amount)
+	. = ..()
 
 /obj/item/chems/glass/bottle/robustharvest
 	label_text = "Robust Harvest"
@@ -124,25 +145,36 @@
 	label_color = COLOR_ASSEMBLY_GREEN
 	lid_color = COLOR_ASSEMBLY_GREEN
 	material = /decl/material/solid/plastic
-	initial_reagents = list(
-		/decl/material/liquid/fertilizer = 50,
-		/decl/material/gas/ammonia = 10
-	)
 
-/obj/item/chems/glass/bottle/pacid
-	initial_reagents = list(/decl/material/liquid/acid/polyacid = 60)
+/obj/item/chems/glass/bottle/robustharvest/populate_reagents()
+	var/amonia_amount = round(reagents.maximum_volume / 6)
+	reagents.add_reagent(/decl/material/liquid/fertilizer, reagents.maximum_volume - amonia_amount)
+	reagents.add_reagent(/decl/material/gas/ammonia,       amonia_amount)
+	. = ..()
 
+/obj/item/chems/glass/bottle/pacid/populate_reagents()
+	reagents.add_reagent(/decl/material/liquid/acid/polyacid, reagents.maximum_volume)
+	. = ..()
 /obj/item/chems/glass/bottle/adminordrazine
 	desc = "A small bottle. Contains the liquid essence of the gods."
 	material = /decl/material/solid/metal/gold
 	lid_color = COLOR_CYAN_BLUE
 	label_color = COLOR_CYAN_BLUE
-	initial_reagents = list(/decl/material/liquid/adminordrazine = 60)
+
+/obj/item/chems/glass/bottle/adminordrazine/populate_reagents()
+	reagents.add_reagent(/decl/material/liquid/adminordrazine, reagents.maximum_volume)
+	. = ..()
 
 /obj/item/chems/glass/bottle/capsaicin
 	desc = "A small bottle. Contains hot sauce."
-	initial_reagents = list(/decl/material/liquid/capsaicin = 60)
+
+/obj/item/chems/glass/bottle/capsaicin/populate_reagents()
+	reagents.add_reagent(/decl/material/liquid/capsaicin, reagents.maximum_volume)
+	. = ..()
 
 /obj/item/chems/glass/bottle/frostoil
 	desc = "A small bottle. Contains cold sauce."
-	initial_reagents = list(/decl/material/liquid/frostoil = 60)
+
+/obj/item/chems/glass/bottle/frostoil/populate_reagents()
+	reagents.add_reagent(/decl/material/liquid/frostoil, reagents.maximum_volume)
+	. = ..()

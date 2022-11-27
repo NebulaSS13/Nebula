@@ -90,25 +90,27 @@ var/global/list/channel_to_radio_key = new
 	return key
 
 /mob/living/proc/binarycheck()
-
-	if (istype(src, /mob/living/silicon/pai))
-		return
-
-	if (!ishuman(src))
-		return
-
-	var/mob/living/carbon/human/H = src
-	if (H.l_ear || H.r_ear)
-		var/obj/item/radio/headset/dongle
-		if(istype(H.l_ear,/obj/item/radio/headset))
-			dongle = H.l_ear
-		else
-			dongle = H.r_ear
-		if(!istype(dongle)) return
-		if(dongle.translate_binary) return 1
+	for(var/slot in global.ear_slots)
+		var/obj/item/radio/headset/dongle = get_equipped_item(slot)
+		if(istype(dongle) && dongle.translate_binary)
+			return TRUE
+	return FALSE
 
 /mob/living/proc/get_default_language()
-	. = ispath(default_language, /decl/language) && GET_DECL(default_language)
+	var/lang = ispath(default_language, /decl/language) && GET_DECL(default_language)
+	if(can_speak(lang))
+		return lang
+
+/mob/living/proc/get_any_good_language(set_default=FALSE)
+	. = get_default_language()
+	if(!.)
+		for(var/decl/language/L in languages)
+			if(can_speak(L))
+				. = L
+				if(set_default)
+					set_default_language(.)
+				return
+
 
 /mob/living/is_silenced()
 	. = ..() || HAS_STATUS(src, STAT_SILENCE)
@@ -121,12 +123,7 @@ var/global/list/channel_to_radio_key = new
 
 	. = 0
 
-	if((MUTATION_HULK in mutations) && health >= 25 && length(message))
-		message = "[uppertext(message)]!!!"
-		verb = pick("yells","roars","hollers")
-		message_data[3] = 0
-		. = 1
-	else if(HAS_STATUS(src, STAT_SLUR))
+	if(HAS_STATUS(src, STAT_SLUR))
 		message = slur(message)
 		verb = pick("slobbers","slurs")
 		. = 1
@@ -142,13 +139,49 @@ var/global/list/channel_to_radio_key = new
 	message_data[1] = message
 	message_data[2] = verb
 
+// Grabs any radios equipped to the mob, with message_mode used to
+// determine relevancy. See handle_message_mode below.
+/mob/living/proc/get_radios(var/message_mode)
+
+	if(!message_mode)
+		return
+
+	var/list/possible_radios
+	if(message_mode == "right ear" || message_mode == "left ear")
+		var/use_right = message_mode == "right ear"
+		var/obj/item/thing = get_equipped_item(use_right ? slot_r_ear_str : slot_l_ear_str)
+		if(thing)
+			LAZYDISTINCTADD(possible_radios, thing)
+		else
+			thing = get_equipped_item(use_right ? BP_R_HAND : BP_L_HAND)
+			if(thing)
+				LAZYDISTINCTADD(possible_radios, thing)
+	else
+		for(var/slot in global.ear_slots)
+			var/thing = get_equipped_item(slot)
+			if(thing)
+				LAZYDISTINCTADD(possible_radios, thing)
+
+	if(length(possible_radios))
+		for(var/atom/movable/thing as anything in possible_radios)
+			var/obj/item/radio/radio = thing.get_radio(message_mode)
+			if(istype(radio))
+				LAZYDISTINCTADD(., radio)
+
+// This proc takes in a string (message_mode) which maps to a radio key in global.department_radio_keys
+// It then processes the message_mode to implement an additional behavior needed for the message, such
+// as retrieving radios or looking for an intercom nearby.
 /mob/living/proc/handle_message_mode(message_mode, message, verb, speaking, used_radios, alt_name)
-	if(message_mode == "intercom")
-		for(var/obj/item/radio/I in view(1, null))
+	var/list/assess_items_as_radios = get_radios(message_mode)
+	if(message_mode == "intercom" && !restrained())
+		for(var/obj/item/radio/I in view(1))
 			if(I.intercom_handling)
-				I.talk_into(src, message, verb, speaking)
-				used_radios += I
-	return 0
+				LAZYDISTINCTADD(assess_items_as_radios, I)
+	for(var/obj/item/radio/radio as anything in assess_items_as_radios)
+		used_radios += radio
+		radio.add_fingerprint(src)
+		radio.talk_into(src, message, message_mode, verb, speaking)
+		. = TRUE
 
 /mob/living/proc/handle_speech_sound()
 	var/list/returns[2]
@@ -305,11 +338,16 @@ var/global/list/channel_to_radio_key = new
 
 		get_mobs_and_objs_in_view_fast(T, message_range, listening, listening_obj, /datum/client_preference/ghost_ears)
 
+	var/speech_bubble_state = check_speech_punctuation_state(message)
+	var/speech_state_modifier = get_speech_bubble_state_modifier()
+	if(speech_bubble_state && speech_state_modifier)
+		speech_bubble_state = "[speech_state_modifier]_[speech_bubble_state]"
 
-	var/speech_bubble_test = say_test(message)
-	var/image/speech_bubble = image('icons/mob/talk.dmi',src,"h[speech_bubble_test]")
-	speech_bubble.layer = layer
-	speech_bubble.plane = plane
+	var/image/speech_bubble
+	if(speech_bubble_state)
+		speech_bubble = image('icons/mob/talk.dmi', src, speech_bubble_state)
+		speech_bubble.layer = layer
+		speech_bubble.plane = plane
 
 	var/list/speech_bubble_recipients = list()
 	for(var/mob/M in listening)
@@ -358,8 +396,5 @@ var/global/list/channel_to_radio_key = new
 		O.hear_signlang(message, verb, language, src)
 	return 1
 
-/obj/effect/speech_bubble
-	var/mob/parent
-
-/mob/living/proc/GetVoice()
+/mob/proc/GetVoice()
 	return name

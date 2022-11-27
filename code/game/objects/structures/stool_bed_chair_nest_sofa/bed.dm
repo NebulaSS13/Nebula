@@ -96,7 +96,7 @@
 			add_padding(padding_type)
 			return
 
-		else if(isWirecutter(W))
+		else if(IS_WIRECUTTER(W))
 			if(!reinf_material)
 				to_chat(user, "\The [src] has no padding to remove.")
 				return
@@ -170,7 +170,7 @@
 		add_overlay(iv)
 
 /obj/structure/bed/roller/attackby(obj/item/I, mob/user)
-	if(isWrench(I) || istype(I, /obj/item/stack) || isWirecutter(I))
+	if(IS_WRENCH(I) || istype(I, /obj/item/stack) || IS_WIRECUTTER(I))
 		return 1
 	if(iv_stand && !beaker && istype(I, /obj/item/chems))
 		if(!user.unEquip(I, src))
@@ -265,6 +265,11 @@
 	slot_flags = SLOT_BACK
 	w_class = ITEM_SIZE_LARGE
 	pickup_sound = 'sound/foley/pickup2.ogg'
+	material = /decl/material/solid/metal/steel
+	matter = list(
+		/decl/material/solid/plastic = MATTER_AMOUNT_SECONDARY, 
+		/decl/material/solid/cloth = MATTER_AMOUNT_REINFORCEMENT,
+	)
 	var/structure_form_type = /obj/structure/bed/roller	//The deployed form path.
 
 /obj/item/roller/get_single_monetary_worth()

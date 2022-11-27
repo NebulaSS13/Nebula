@@ -4,6 +4,7 @@
 	material = /decl/material/MAT_TYPE;                                    \
 	reinf_material = REINF_TYPE;                                           \
 	amount = 1;                                                            \
+	is_spawnable_type = TRUE;                                              \
 }                                                                          \
 /obj/item/stack/material/##STACK_TYPE/mapped/##MAT_ID/five {               \
 	name = "5 " + MAT_NAME;                                                \

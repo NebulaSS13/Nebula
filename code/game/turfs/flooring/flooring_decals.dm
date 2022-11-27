@@ -26,13 +26,15 @@ var/global/list/floor_decals = list()
 	var/turf/T = get_turf(src)
 	if(istype(T))
 		layer = T.is_plating() ? DECAL_PLATING_LAYER : DECAL_LAYER
-		var/cache_key = "[alpha]-[color]-[dir]-[icon_state]-[plane]-[layer]-[detail_overlay]-[detail_color]"
+		var/cache_key = "[alpha]-[color]-[dir]-[icon_state]-[plane]-[layer]-[detail_overlay]-[detail_color]-[pixel_x]-[pixel_y]"
 		if(!floor_decals[cache_key])
 			var/image/I = image(icon = src.icon, icon_state = src.icon_state, dir = src.dir)
 			I.layer = layer
 			I.appearance_flags = appearance_flags
 			I.color = src.color
 			I.alpha = src.alpha
+			I.pixel_x = src.pixel_x
+			I.pixel_y = src.pixel_y
 			if(detail_overlay)
 				I.overlays |= overlay_image(icon, "[detail_overlay]", color = detail_color, flags=RESET_COLOR)
 			floor_decals[cache_key] = I

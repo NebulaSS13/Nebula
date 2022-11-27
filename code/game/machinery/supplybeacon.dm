@@ -49,7 +49,7 @@
 	drop_type = "supermatter"
 
 /obj/structure/supply_beacon/attackby(var/obj/item/W, var/mob/user)
-	if(!activated && isWrench(W))
+	if(!activated && IS_WRENCH(W))
 		anchored = !anchored
 		user.visible_message(SPAN_NOTICE("\The [user] [anchored ? "secures" : "unsecures"] \the [src]."))
 		playsound(src.loc, 'sound/items/Ratchet.ogg', 50, 1)

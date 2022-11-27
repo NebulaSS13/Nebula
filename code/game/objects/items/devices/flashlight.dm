@@ -33,6 +33,7 @@
 	update_icon()
 
 /obj/item/flashlight/on_update_icon()
+	. = ..()
 	if (flashlight_flags & FLASHLIGHT_ALWAYS_ON)
 		return // Prevent update_icon shennanigans with objects that won't have on/off variant sprites
 
@@ -99,7 +100,8 @@
 
 		var/mob/living/carbon/human/H = M	//mob has protective eyewear
 		if(istype(H))
-			for(var/obj/item/clothing/C in list(H.head,H.wear_mask,H.glasses))
+			for(var/slot in global.standard_headgear_slots)
+				var/obj/item/clothing/C = H.get_equipped_item(slot)
 				if(istype(C) && (C.body_parts_covered & SLOT_EYES))
 					to_chat(user, "<span class='warning'>You're going to need to remove [C] first.</span>")
 					return
@@ -146,12 +148,20 @@
 		if(H.getBrainLoss() > 15)
 			to_chat(user, "<span class='notice'>There's visible lag between left and right pupils' reactions.</span>")
 
-		var/list/pinpoint = list(/decl/material/liquid/painkillers=5,/decl/material/liquid/amphetamines=1)
-		var/list/dilating = list(/decl/material/liquid/psychoactives=5,/decl/material/liquid/hallucinogenics=1,/decl/material/liquid/adrenaline=1)
+		var/static/list/pinpoint = list(
+			/decl/material/liquid/painkillers = 5,
+			/decl/material/liquid/amphetamines = 1
+		)
+		var/static/list/dilating = list(
+			/decl/material/liquid/psychoactives = 5,
+			/decl/material/liquid/hallucinogenics = 1,
+			/decl/material/liquid/adrenaline = 1
+		)
+
 		var/datum/reagents/ingested = H.get_ingested_reagents()
-		if(H.reagents.has_any_reagent(pinpoint) || ingested.has_any_reagent(pinpoint))
+		if(H.reagents.has_any_reagent(pinpoint) || ingested?.has_any_reagent(pinpoint))
 			to_chat(user, "<span class='notice'>\The [H]'s pupils are already pinpoint and cannot narrow any more.</span>")
-		else if(H.shock_stage >= 30 || H.reagents.has_any_reagent(dilating) || ingested.has_any_reagent(dilating))
+		else if(H.shock_stage >= 30 || H.reagents.has_any_reagent(dilating) || ingested?.has_any_reagent(dilating))
 			to_chat(user, "<span class='notice'>\The [H]'s pupils narrow slightly, but are still very dilated.</span>")
 		else
 			to_chat(user, "<span class='notice'>\The [H]'s pupils narrow.</span>")
@@ -186,6 +196,10 @@
 	flashlight_range = 2
 	light_wedge = LIGHT_OMNI
 
+/obj/item/flashlight/pen/Initialize()
+	set_extension(src, /datum/extension/tool, list(TOOL_PEN = TOOL_QUALITY_DEFAULT), list(TOOL_PEN = list(TOOL_PROP_COLOR = "black", TOOL_PROP_COLOR_NAME = "black")))
+	. = ..()
+
 /obj/item/flashlight/maglight
 	name = "maglight"
 	desc = "A very, very heavy duty flashlight."
@@ -216,7 +230,7 @@
 	light_color = LIGHT_COLOR_FIRE
 
 /obj/item/flashlight/lantern/on_update_icon()
-	..()
+	. = ..()
 	if(on)
 		item_state = "lantern-on"
 	else
@@ -338,7 +352,7 @@
 		damtype = initial(damtype)
 
 /obj/item/flashlight/flare/on_update_icon()
-	..()
+	. = ..()
 	if(!on && fuel <= 0)
 		icon_state = "[initial(icon_state)]-empty"
 
@@ -363,21 +377,18 @@
 	light_color = color
 
 /obj/item/flashlight/flare/glowstick/on_update_icon()
-	item_state = "glowstick"
-	overlays.Cut()
-	if(fuel <= 0)
-		icon_state = "glowstick-empty"
+	var/nofuel = fuel <= 0
+	if(nofuel)
 		on = FALSE
-	else if (on)
-		var/image/I = overlay_image(icon,"glowstick-on",color)
+	. = ..()
+	icon_state = nofuel? "glowstick-empty" : icon_state
+	item_state = initial(item_state)
+	if(on)
+		var/image/I = overlay_image(icon, "glowstick-on", color)
 		I.blend_mode = BLEND_ADD
-		overlays += I
+		add_overlay(I)
 		item_state = "glowstick-on"
-	else
-		icon_state = "glowstick"
-	var/mob/M = loc
-	if(istype(M))
-		M.update_inv_hands()
+	update_held_icon()
 
 /obj/item/flashlight/flare/glowstick/activate(var/mob/user)
 	if(istype(user))
@@ -454,10 +465,8 @@
 	matter = list(/decl/material/solid/glass = MATTER_AMOUNT_REINFORCEMENT)
 
 /obj/item/flashlight/lamp/lava/on_update_icon()
-	overlays.Cut()
-	var/image/I = image(icon = icon, icon_state = "lavalamp-[on ? "on" : "off"]")
-	I.color = light_color
-	overlays += I
+	. = ..()
+	add_overlay(overlay_image(icon, "lavalamp-[on ? "on" : "off"]", light_color))
 
 /obj/item/flashlight/lamp/lava/red
 	desc = "A kitchy red decorative light."

@@ -1,6 +1,4 @@
 /datum/extension/network_device/acl
-	connection_type = NETWORK_CONNECTION_STRONG_WIRELESS
-
 	var/list/group_dict = list()	// Groups on the network, stored as strings.
 									// Parents groups with children have a list of child groups associated with the string key 
 

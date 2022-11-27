@@ -9,7 +9,7 @@
 	layer = LATTICE_LAYER
 	color = COLOR_STEEL
 	material = /decl/material/solid/metal/steel
-	obj_flags = OBJ_FLAG_NOFALL
+	obj_flags = OBJ_FLAG_NOFALL | OBJ_FLAG_MOVES_UNSUPPORTED
 	material_alteration = MAT_FLAG_ALTERATION_ALL
 
 /obj/structure/lattice/Initialize()
@@ -62,9 +62,9 @@
 		var/turf/T = get_turf(src)
 		T.attackby(C, user) //BubbleWrap - hand this off to the underlying turf instead
 		return
-	if(isWelder(C))
+	if(IS_WELDER(C))
 		var/obj/item/weldingtool/WT = C
-		if(WT.remove_fuel(0, user))
+		if(WT.weld(0, user))
 			deconstruct(user)
 		return
 	if(istype(C, /obj/item/gun/energy/plasmacutter))

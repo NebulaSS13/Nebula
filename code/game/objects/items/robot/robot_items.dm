@@ -1,4 +1,6 @@
 //This file was auto-corrected by findeclaration.exe on 25.5.2012 20:42:32
+/obj/item/borg
+	health = ITEM_HEALTH_NO_DAMAGE
 
 /**********************************************************************
 						Cyborg Spec Items
