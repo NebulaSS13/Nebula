@@ -255,12 +255,14 @@
 		pixel_y = 0
 		icon_state = "base"
 		add_overlay(emissive_overlay(icon = icon, icon_state = "glowbit", color = light_color))
+		z_flags |= ZMM_MANGLE_PLANES
 		set_light(2, 0.1) // Very dim so the rest of the thingie is barely visible - if the turf is completely dark, you can't see anything on it, no matter what
 	else
 		pixel_x = rand(-randpixel, randpixel)
 		pixel_y = rand(-randpixel, randpixel)
 		icon_state = "folded"
 		add_overlay(overlay_image(icon, "basebit", light_color))
+		z_flags &= ~ZMM_MANGLE_PLANES
 		set_light(0)
 
 /obj/item/stack/flag/proc/knock_down()

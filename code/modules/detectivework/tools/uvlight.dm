@@ -39,11 +39,13 @@
 
 /obj/item/uv_light/on_update_icon()
 	. = ..()
+	z_flags &= ~ZMM_MANGLE_PLANES
 	if(on)
 		if(plane == HUD_PLANE)
 			add_overlay("[icon_state]-on")
 		else
 			add_overlay(emissive_overlay(icon, "[icon_state]-on"))
+			z_flags |= ZMM_MANGLE_PLANES
 
 /obj/item/uv_light/proc/clear_last_scan()
 	if(scanned.len)

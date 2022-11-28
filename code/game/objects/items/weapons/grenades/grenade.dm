@@ -28,12 +28,14 @@
 
 /obj/item/grenade/on_update_icon()
 	. = ..()
+	z_flags &= ~ZMM_MANGLE_PLANES
 	if(active)
 		if(check_state_in_icon("[icon_state]-active", icon))
 			if(plane == HUD_PLANE)
 				add_overlay("[icon_state]-active")
 			else
 				add_overlay(emissive_overlay(icon, "[icon_state]-active"))
+				z_flags |= ZMM_MANGLE_PLANES
 	else if(check_state_in_icon("[icon_state]-pin", icon))
 		add_overlay("[icon_state]-pin")
 

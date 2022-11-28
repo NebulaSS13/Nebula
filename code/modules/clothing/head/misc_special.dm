@@ -186,11 +186,13 @@
 
 /obj/item/clothing/head/cakehat/on_update_icon(mob/user)
 	. = ..()
+	z_flags &= ~ZMM_MANGLE_PLANES
 	if(is_on_fire && check_state_in_icon("[icon_state]-flame", icon))
 		if(plane == HUD_PLANE)
 			add_overlay("[icon_state]-flame")
 		else
 			add_overlay(emissive_overlay(icon, "[icon_state]-flame"))
+			z_flags |= ZMM_MANGLE_PLANES
 
 // Overidable so species with limited headspace in the sprite bounding area can offset it (scavs)
 /obj/item/clothing/head/cakehat/proc/get_mob_flame_overlay(var/image/overlay, var/bodytype)
