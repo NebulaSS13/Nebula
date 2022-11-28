@@ -14,24 +14,46 @@
  &mdash; <a href="code/_helpers/text.html#define">Define Details</a></header>
 <main>
 <h1>code/_helpers/text.dm 
-            <a href="https://github.com/NebulaSS13/Nebula/blob/be96c8e223b6bf1b6acad4c2a29428432a988cc6/code/_helpers/text.dm">
+            <a href="https://github.com/NebulaSS13/Nebula/blob/88ba30a50427a7842f0b98cd8c37349e03bad0ad/code/_helpers/text.dm">
         <img src="git.png" width="16" height="16" title="code&#x2F;_helpers&#x2F;text.dm"/></a></h1>
 
 <table class="summary" cellspacing="0">
         <tr><th>/proc/<a href="global.html#proc/sanitize_for_file">sanitize_for_file</a></th>
                 <td>, $, (, ), *, -, _</td></tr>
         <tr><th><a href="code/_helpers/text.html#define/strip_improper">strip_improper</a></th><td>Strip out the special beyond characters for \proper and \improper
-from text that will be sent to the browser.</td></tr></table><h2 id="define">Define Details</h2>
+from text that will be sent to the browser.</td></tr>
+        <tr><th>/proc/<a href="global.html#proc/text_starts_with">text_starts_with</a></th>
+                <td>Returns true if the text starts with the given sequence of characters.</td></tr>
+        <tr><th>/proc/<a href="global.html#proc/text_ends_with">text_ends_with</a></th>
+                <td>Returns true if the text ends with the given sequence of characters.</td></tr>
+        <tr><th>/proc/<a href="global.html#proc/text_ends_with_any_of">text_ends_with_any_of</a></th>
+                <td>Returns true if the text ends with ANY of the given sequences of characters.</td></tr>
+        <tr><th>/var/<a href="global.html#var/plural_siblants">plural_siblants</a></th>
+                <td>Siblants that should end with es</td></tr>
+        <tr><th>/var/<a href="global.html#var/plural_vocalized_y">plural_vocalized_y</a></th>
+                <td>Vocalized y sounds that needs to end in -ies when made plural</td></tr>
+        <tr><th>/var/<a href="global.html#var/plural_endings_in_ves">plural_endings_in_ves</a></th>
+                <td>Plurals endings in -ves</td></tr>
+        <tr><th>/var/<a href="global.html#var/plural_endings_with_doubled_letter">plural_endings_with_doubled_letter</a></th>
+                <td>Plurals endings in -sses or -zzes</td></tr>
+        <tr><th>/var/<a href="global.html#var/apophonic_plurals">apophonic_plurals</a></th>
+                <td>Words that have a different plural form, and their plural form</td></tr>
+        <tr><th>/var/<a href="global.html#var/english_loanwords">english_loanwords</a></th>
+                <td>Used to tell how to make it a plural word and etc.</td></tr>
+        <tr><th>/var/<a href="global.html#var/plural_words_unchanged">plural_words_unchanged</a></th>
+                <td>Words that stay the same in plural</td></tr>
+        <tr><th>/proc/<a href="global.html#proc/text_make_plural">text_make_plural</a></th>
+                <td>Properly changes the given word (or the last word of the string) into a plural word. Applies a bunch of exceptions from the english language.</td></tr></table><h2 id="define">Define Details</h2>
 <h3 id="define/strip_improper"><aside class="declaration">#define </aside>strip_improper
             <aside>(input_text)</aside>
-            <a href="https://github.com/NebulaSS13/Nebula/blob/be96c8e223b6bf1b6acad4c2a29428432a988cc6/code/_helpers/text.dm#L509">
+            <a href="https://github.com/NebulaSS13/Nebula/blob/88ba30a50427a7842f0b98cd8c37349e03bad0ad/code/_helpers/text.dm#L509">
         <img src="git.png" width="16" height="16" title="code&#x2F;_helpers&#x2F;text.dm 509"/></a>
     </h3>
     <p>Strip out the special beyond characters for \proper and \improper
 from text that will be sent to the browser.</p></main>
 <footer>
     nebula.dme
-    <a href="https://github.com/NebulaSS13/Nebula/tree/be96c8e223b6bf1b6acad4c2a29428432a988cc6">be96c8e</a>
+    <a href="https://github.com/NebulaSS13/Nebula/tree/88ba30a50427a7842f0b98cd8c37349e03bad0ad">88ba30a</a>
         (dev) &mdash; <a href="https://github.com/SpaceManiac/SpacemanDMM/blob/master/src/dmdoc/README.md">dmdoc 1.4.1</a></footer>
 </body>
 </html>
