@@ -74,8 +74,9 @@
 	buildtype_select = TRUE
 
 /obj/item/stock_parts/circuitboard/airlock_controller/get_buildable_types()
+	var/static/list/AirlockControllerSubtypes = subtypesof(/obj/machinery/embedded_controller/radio) | subtypesof(/obj/machinery/embedded_controller/radio/airlock)
 	. = list()
-	for(var/path in (subtypesof(/obj/machinery/embedded_controller/radio) | subtypesof(/obj/machinery/embedded_controller/radio/airlock)))
+	for(var/path in AirlockControllerSubtypes)
 		var/obj/machinery/embedded_controller/radio/controller = path
 		var/base_type = initial(controller.base_type) || path
 		. |= base_type

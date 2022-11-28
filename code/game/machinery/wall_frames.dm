@@ -310,8 +310,9 @@
 	//Handle kit configuration
 	var/obj/machinery/M = /obj/machinery/dummy_airlock_controller
 	var/list/possible_kit_type_names = list(initial(M.name) = /obj/machinery/dummy_airlock_controller)
+	var/static/list/AirlockControllerSubtypes = subtypesof(/obj/machinery/embedded_controller/radio) | subtypesof(/obj/machinery/embedded_controller/radio/airlock)
 
-	for(var/path in (subtypesof(/obj/machinery/embedded_controller/radio) | subtypesof(/obj/machinery/embedded_controller/radio/airlock)))
+	for(var/path in AirlockControllerSubtypes)
 		var/obj/machinery/embedded_controller/radio/controller = path
 		var/base_type = initial(controller.base_type) || path
 		M = base_type
