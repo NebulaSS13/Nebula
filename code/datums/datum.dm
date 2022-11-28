@@ -69,6 +69,13 @@
 	CRASH("get_recursive_loc_of_type() called on datum type [type] - this proc should only be called on /atom.")
 
 /**
+ * Returns whether the object supports being cloned.
+ * This is useful for things that should only ever exist once in the world.
+ */
+/datum/proc/CanClone()
+	return TRUE
+
+/**
  * This proc returns a clone of the src datum.
  * Clone here implies a copy similar in terms of look and contents, but internally may differ a bit.
  * The clone shall not keep references onto instances owned by the original, in most cases.
@@ -76,6 +83,8 @@
  */
 /datum/proc/Clone()
 	SHOULD_CALL_PARENT(TRUE)
+	if(!CanClone())
+		CRASH("Called clone on ``[type]`` which does not support cloning!")
 	var/list/newargs = GetCloneArgs()
 	if(newargs)
 		. = new type(arglist(newargs))

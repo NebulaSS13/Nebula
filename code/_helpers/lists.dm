@@ -753,13 +753,14 @@ proc/dd_sortedObjectList(list/incoming)
 ///Same as deepCopyList but actually Clone() datums, and sub-lists. Will leave atom refs alone.
 /proc/listDeeperCopy(list/L)
 	if(isatom(L))
-		return L //Atom refs returns as-is
+		return L //Atom refs returns as-is, since we do cannot own them
 	if(istype(L, /datum))
 		var/datum/D = L
-		return D.Clone()
+		return D.CanClone()? D.Clone() : D //If the datum can be cloned, clone it, or just reference it otherwise
 	//Anything else that's not a list just return the ref
 	if(!islist(L))
 		return L
+
 	. = L.Copy()
 	for(var/i = 1 to length(L))
 		var/I = .[i]
