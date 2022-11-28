@@ -46,7 +46,7 @@
 			var/obj/structure/sign/S = new(user.loc)
 			S.SetName(name)
 			S.desc = desc
-			S.icon_state = sign_state			
+			S.icon_state = sign_state
 			switch(direction)
 				if("North")
 					S.set_dir(NORTH)
@@ -86,6 +86,7 @@
 /obj/structure/sign/warning
 	name = "\improper WARNING"
 	icon_state = "securearea"
+	directional_offset = "{'NORTH':{'y':-32}, 'SOUTH':{'y':32}, 'WEST':{'x':34}, 'EAST':{'x':-34}}"
 
 /obj/structure/sign/warning/detailed
 	icon_state = "securearea2"
