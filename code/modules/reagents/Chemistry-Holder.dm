@@ -32,8 +32,8 @@ var/global/obj/temp_reagents_holder = new
 //Don't forget to call set_holder() after getting the copy!
 /datum/reagents/PopulateClone(datum/reagents/clone)
 	clone.primary_reagent = primary_reagent
-	clone.reagent_volumes = listdeeperCopy(reagent_volumes)
-	clone.reagent_data    = listdeeperCopy(reagent_data)
+	clone.reagent_volumes = listDeeperCopy(reagent_volumes)
+	clone.reagent_data    = listDeeperCopy(reagent_data)
 	clone.total_volume    = total_volume
 	clone.maximum_volume  = maximum_volume
 	clone.cached_color    = cached_color

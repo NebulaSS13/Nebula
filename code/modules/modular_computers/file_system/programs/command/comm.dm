@@ -23,7 +23,7 @@
 /datum/computer_file/program/comm/PopulateClone(datum/computer_file/program/comm/clone)
 	clone = ..()
 	clone.message_core.messages = null
-	clone.message_core.messages = listdeeperCopy(message_core.messages)
+	clone.message_core.messages = listDeeperCopy(message_core.messages)
 	return clone
 
 /datum/nano_module/program/comm

@@ -40,11 +40,11 @@ var/global/file_uid = 0
 	clone.undeletable = undeletable
 	clone.size        = size
 	if(metadata)
-		clone.metadata = listdeeperCopy(metadata)
+		clone.metadata = listDeeperCopy(metadata)
 	clone.filetype     = filetype
-	clone.read_access  = listdeeperCopy(read_access)
-	clone.write_access = listdeeperCopy(write_access)
-	clone.mod_access   = listdeeperCopy(mod_access)
+	clone.read_access  = listDeeperCopy(read_access)
+	clone.write_access = listDeeperCopy(write_access)
+	clone.mod_access   = listDeeperCopy(mod_access)
 	return clone
 
 /**
