@@ -416,6 +416,7 @@ var/global/list/card_decks = list()
 /*** A special thing that steals a card from a deck, probably lost in maint somewhere. ***/
 /obj/item/hand/missing_card
 	name = "missing playing card"
+	is_spawnable_type = FALSE //Can't spawn this for tests because it kills itself
 
 /obj/item/hand/missing_card/Initialize()
 	. = ..()

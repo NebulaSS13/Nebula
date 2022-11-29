@@ -94,7 +94,7 @@
 	destruction_desc        = "tears"
 	icon_base               = 'icons/turf/walls/solid.dmi'
 	icon_reinf              = 'icons/turf/walls/reinforced.dmi'
-	integrity               = 3
+	integrity               = 10 //Probably don't wanna go below 10, because of the health multiplier on things, that would result in a value smaller than 1.
 	use_reinf_state         = null
 	flags                   = MAT_FLAG_BRITTLE
 	reflectiveness          = MAT_VALUE_DULL

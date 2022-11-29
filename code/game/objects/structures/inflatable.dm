@@ -74,14 +74,6 @@
 /obj/structure/inflatable/Process()
 	check_environment()
 
-/obj/structure/inflatable/show_examined_damage(mob/user, var/perc)
-	if(perc >= 1)
-		to_chat(user, SPAN_NOTICE("It's undamaged."))
-	else if(perc > 0.5)
-		to_chat(user, SPAN_WARNING("It's showing signs of damage."))
-	else if(perc > 0)
-		to_chat(user, SPAN_DANGER("It's heavily damaged!"))
-
 /obj/structure/inflatable/proc/check_environment()
 	var/min_pressure = INFINITY
 	var/max_pressure = 0

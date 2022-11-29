@@ -108,12 +108,14 @@
 	queue_transmit(dat)
 
 /obj/item/stock_parts/radio/transmitter/basic/buildable
+	max_health = null //Buildable variant may take damage
 	part_flags = PART_FLAG_HAND_REMOVE
 	name = "basic radio transmitter"
 	desc = "A stock radio transmitter machine component. Can transmit updates regularly or on change."
 	material = /decl/material/solid/metal/steel
 
 /obj/item/stock_parts/radio/transmitter/on_event/buildable
+	max_health = null //Buildable variant may take damage
 	part_flags = PART_FLAG_HAND_REMOVE
 	name = "event radio transmitter"
 	desc = "A radio transmitter machine component which transmits when activated by an event."

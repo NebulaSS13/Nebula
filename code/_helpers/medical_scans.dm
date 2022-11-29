@@ -78,7 +78,7 @@
 		O["name"] =                I.name
 		O["is_broken"] =           I.is_broken()
 		O["is_bruised"] =          I.is_bruised()
-		O["is_damaged"] =          I.is_damaged()
+		O["is_damaged"] =          I.damage > 0
 		O["scan_results"] =        I.get_scan_results(tag)
 		O["ailments"] =            I.has_diagnosable_ailments(scanner = TRUE)
 		scan["internal_organs"] += list(O)

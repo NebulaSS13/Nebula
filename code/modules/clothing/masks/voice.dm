@@ -1,7 +1,7 @@
 /obj/item/voice_changer
 	name = "voice changer"
 	desc = "A voice scrambling module. If you can see this, report it as a bug on the tracker."
-	health = ITEM_HEALTH_NO_DAMAGE
+	max_health = ITEM_HEALTH_NO_DAMAGE
 	var/voice //If set and item is present in mask/suit, this name will be used for the wearer's speech.
 	var/active
 

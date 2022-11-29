@@ -161,7 +161,7 @@
 	desc = "A hand-held harvest tool that resembles a sickle.  It uses energy to cut plant matter very efficently."
 	icon = 'icons/obj/items/borg_module/autoharvester.dmi'
 	icon_state = "autoharvester"
-	health = ITEM_HEALTH_NO_DAMAGE
+	max_health = ITEM_HEALTH_NO_DAMAGE
 
 /obj/item/robot_harvester/afterattack(var/atom/target, var/mob/living/user, proximity)
 	if(!target)
@@ -243,7 +243,7 @@
 	icon = 'icons/obj/items/paper_bin.dmi'
 	icon_state = "paper_bin1"
 	item_state = "sheet-metal"
-	health = ITEM_HEALTH_NO_DAMAGE
+	max_health = ITEM_HEALTH_NO_DAMAGE
 
 /obj/item/form_printer/attack(mob/living/carbon/M, mob/living/carbon/user)
 	return
@@ -293,7 +293,7 @@
 	icon = 'icons/obj/items/inflatable_dispenser.dmi'
 	icon_state = "inf_deployer"
 	w_class = ITEM_SIZE_LARGE
-	health = ITEM_HEALTH_NO_DAMAGE
+	material = /decl/material/solid/metal/steel
 
 	var/stored_walls = 5
 	var/stored_doors = 2
@@ -307,6 +307,7 @@
 	stored_doors = 5
 	max_walls = 10
 	max_doors = 5
+	max_health = ITEM_HEALTH_NO_DAMAGE
 
 /obj/item/inflatable_dispenser/examine(mob/user)
 	. = ..()
@@ -395,7 +396,7 @@
 /obj/item/robot_rack
 	name = "a generic robot rack"
 	desc = "A rack for carrying large items as a robot."
-	health = ITEM_HEALTH_NO_DAMAGE
+	max_health = ITEM_HEALTH_NO_DAMAGE
 	var/object_type                    //The types of object the rack holds (subtypes are allowed).
 	var/interact_type                  //Things of this type will trigger attack_hand when attacked by this.
 	var/capacity = 1                   //How many objects can be held.
@@ -440,7 +441,7 @@
 	desc = "An integrated power generator that runs on most kinds of biomass."
 	icon = 'icons/obj/power.dmi'
 	icon_state = "portgen0"
-	health = ITEM_HEALTH_NO_DAMAGE
+	max_health = ITEM_HEALTH_NO_DAMAGE
 
 	var/base_power_generation = 75 KILOWATTS
 	var/max_fuel_items = 5

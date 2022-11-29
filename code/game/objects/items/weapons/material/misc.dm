@@ -68,7 +68,7 @@
 	set_extension(src, /datum/extension/tool, list(TOOL_HATCHET = TOOL_QUALITY_DEFAULT))
 
 /obj/item/hatchet/unbreakable
-	unbreakable = TRUE
+	max_health = ITEM_HEALTH_NO_DAMAGE
 
 /obj/item/hatchet/machete
 	name = "machete"
@@ -94,7 +94,7 @@
 	. = ..()
 
 /obj/item/hatchet/machete/unbreakable
-	unbreakable = TRUE
+	max_health = ITEM_HEALTH_NO_DAMAGE
 
 /obj/item/hatchet/machete/steel
 	name = "fabricated machete"
@@ -123,7 +123,7 @@
 	applies_material_name = TRUE
 
 /obj/item/minihoe/unbreakable
-	unbreakable = TRUE
+	max_health = ITEM_HEALTH_NO_DAMAGE
 
 /obj/item/scythe
 	name = "scythe"

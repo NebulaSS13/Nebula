@@ -20,4 +20,4 @@
 	return ..()
 
 /obj/item/plunger/unbreakable
-	unbreakable = TRUE
+	max_health = ITEM_HEALTH_NO_DAMAGE

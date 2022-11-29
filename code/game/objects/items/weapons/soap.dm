@@ -13,7 +13,6 @@
 	throw_speed = 4
 	throw_range = 20
 	material = /decl/material/liquid/cleaner
-	health = 5
 	max_health = 5
 	var/key_data
 

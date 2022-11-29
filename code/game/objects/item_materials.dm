@@ -13,29 +13,58 @@
 /obj/item/apply_hit_effect(mob/living/target, mob/living/user, var/hit_zone)
 	. = ..()
 	if(material && (material.is_brittle() || target.get_blocked_ratio(hit_zone, BRUTE, damage_flags(), armor_penetration, force) * 100 >= material.hardness/5))
-		check_shatter()
+		apply_wear()
 
 /obj/item/on_parry(damage_source)
 	if(istype(damage_source, /obj/item))
-		check_shatter()
+		apply_wear()
 
-/obj/item/proc/check_shatter()
-	if(material && !unbreakable && prob(material.hardness))
+/**
+ * Whether the object will take wear damage when used as a weapon.
+ */
+/obj/item/proc/can_take_wear_damage()
+	return TRUE
+
+/obj/item/proc/apply_wear()
+	if(material && can_take_damage() && can_take_wear_damage() && prob(material.hardness))
 		if(material.is_brittle())
 			health = 0
 		else
 			health--
 		check_health()
 
-/obj/item/proc/check_health(var/consumed)
-	if(health<=0)
-		shatter(consumed)
+/obj/item/proc/check_health(var/lastdamage = null, var/lastdamtype = null, var/lastdamflags = 0, var/consumed = FALSE)
+	if(health > 0 || !can_take_damage())
+		return //If invincible, or if we're not dead yet, skip
+	if(lastdamtype == BRUTE)
+		if(material?.is_brittle())
+			shatter(consumed)
+			return
+	else if(lastdamtype == BURN)
+		melt()
+		return
+	physically_destroyed()
+
+/obj/item/melt()
+	for(var/mat in matter)
+		var/decl/material/M = GET_DECL(mat)
+		if(!M)
+			log_warning("[src] ([type]) has a bad material path in its matter var.")
+			continue
+		var/turf/T = get_turf(src)
+		//TODO: Would be great to just call a proc to do that, like "Material.place_burn_product(loc, amount_matter)" so no need to care if its a gas or something else
+		var/datum/gas_mixture/environment = T?.return_air()
+		if(M.burn_product)
+			environment.adjust_gas(M.burn_product, M.fuel_value * (matter[mat] / SHEET_MATERIAL_AMOUNT))
+
+	new /obj/effect/decal/cleanable/molten_item(src)
+	qdel(src)
 
 /obj/item/proc/shatter(var/consumed)
 	var/turf/T = get_turf(src)
-	T.visible_message(SPAN_DANGER("\The [src] [material ? material.destruction_desc : "shatters"]!"))
+	T?.visible_message(SPAN_DANGER("\The [src] [material ? material.destruction_desc : "shatters"]!"))
 	playsound(src, "shatter", 70, 1)
-	if(!consumed && material && w_class > ITEM_SIZE_SMALL)
+	if(!consumed && material && w_class > ITEM_SIZE_SMALL && T)
 		material.place_shards(T)
 	qdel(src)
 
@@ -73,8 +102,16 @@
 	if(new_material)
 		material = GET_DECL(new_material)
 	if(istype(material))
-		health = round(material_health_multiplier * material.integrity)
-		max_health = health
+		//Only set the health if health is null. Some things define their own health value.
+		if(isnull(max_health))
+			max_health = round(material_health_multiplier * material.integrity, 0.01)
+			if(max_health < 1)
+				//Make sure to warn us if the values we set make the max_health be under 1
+				log_warning("The 'max_health' of '[src]'([type]) made out of '[material]' was calculated as [material_health_multiplier] * [material.integrity] == [max_health], which is smaller than 1.")
+				
+		if(isnull(health)) //only set health if we didn't specify one already, so damaged objects on spawn and etc can be a thing
+			health = max_health
+		
 		if(material.products_need_process())
 			START_PROCESSING(SSobj, src)
 		if(material.conductive)

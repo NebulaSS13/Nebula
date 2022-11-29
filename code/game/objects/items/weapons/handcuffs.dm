@@ -4,7 +4,6 @@
 	gender = PLURAL
 	icon = 'icons/obj/items/handcuffs.dmi'
 	icon_state = ICON_STATE_WORLD
-	health = ITEM_HEALTH_NO_DAMAGE
 	obj_flags = OBJ_FLAG_CONDUCTIBLE
 	slot_flags = SLOT_LOWER_BODY
 	throwforce = 5
@@ -13,16 +12,28 @@
 	throw_range = 5
 	origin_tech = "{'materials':1}"
 	material = /decl/material/solid/metal/steel
+	max_health = ITEM_HEALTH_NO_DAMAGE //#TODO: Once we can work out something different for handling cuff breakout, change this. Since it relies on cuffs health to tell if you can actually breakout.
 	var/elastic
 	var/dispenser = 0
-	var/breakouttime = 1200 //Deciseconds = 120s = 2 minutes
+	var/breakouttime = 2 MINUTES //Deciseconds = 120s = 2 minutes
 	var/cuff_sound = 'sound/weapons/handcuffs.ogg'
 	var/cuff_type = "handcuffs"
 
+/obj/item/handcuffs/Destroy()
+	var/obj/item/clothing/shoes/S = loc
+	if(S && !QDELETED(S))
+		S.remove_cuffs()
+	. = ..()
+
+/obj/item/handcuffs/physically_destroyed(skip_qdel)
+	if(istype(loc, /obj/item/clothing/shoes))
+		loc.visible_message(SPAN_WARNING("\The [src] attached to \the [loc] snap and fall away!"), range = 1)
+	. = ..()
+
 /obj/item/handcuffs/examine(mob/user)
 	. = ..()
-	if (health)
-		var display = health / initial(health) * 100
+	if (health > 0 && max_health > 0)
+		var display = get_percent_health()
 		if (display > 66)
 			return
 		to_chat(user, SPAN_WARNING("They look [display < 33 ? "badly ": ""]damaged."))
@@ -96,7 +107,7 @@
 	target.equip_to_slot(cuffs, slot_handcuffed_str)
 	return 1
 
-var/global/last_chew = 0
+var/global/last_chew = 0 //#FIXME: Its funny how only one person in the world can chew their restraints every 2.6 seconds
 /mob/living/carbon/human/RestrainedClickOn(var/atom/A)
 	if (A != src) return ..()
 	if (last_chew + 26 > world.time) return
@@ -129,7 +140,6 @@ var/global/last_chew = 0
 	cuff_sound = 'sound/weapons/cablecuff.ogg'
 	cuff_type = "cable restraints"
 	elastic = 1
-	health = 75
 	max_health = 75
 	material = /decl/material/solid/plastic
 
@@ -168,6 +178,5 @@ var/global/last_chew = 0
 	icon = 'icons/obj/bureaucracy.dmi'
 	breakouttime = 200
 	cuff_type = "duct tape"
-	health = 50
 	max_health = 50
 	material = /decl/material/solid/plastic
