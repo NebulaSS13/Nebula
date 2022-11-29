@@ -30,6 +30,8 @@
 		// Exclude only this type, since it's not meant to be spawned but its subtypes are.
 		// TODO: Consider whether this warrants abstract_type?
 		/obj/machinery/power/smes,
+		// This is evil, evil code and destroys other tests.
+		/obj/effect/bhole,
 	)
 	// Instantiate all spawnable atoms
 	for(var/path in typesof(/obj/item, /obj/effect, /obj/structure, /obj/machinery, /obj/vehicle, /mob) - ignore)
