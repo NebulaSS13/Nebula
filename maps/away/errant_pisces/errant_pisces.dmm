@@ -2672,7 +2672,7 @@
 /turf/simulated/floor/wood,
 /area/errant_pisces/rooms)
 "gP" = (
-/obj/structure/filingcabinet/chestdrawer,
+/obj/structure/filing_cabinet/chestdrawer,
 /turf/simulated/floor/wood,
 /area/errant_pisces/rooms)
 "gQ" = (
@@ -3694,7 +3694,7 @@
 /turf/simulated/floor/tiled,
 /area/errant_pisces/science_wing)
 "jX" = (
-/obj/structure/filingcabinet/chestdrawer,
+/obj/structure/filing_cabinet/chestdrawer,
 /turf/simulated/floor/tiled,
 /area/errant_pisces/science_wing)
 "jY" = (

@@ -2886,7 +2886,7 @@
 /obj/effect/floor_decal/corner/red{
 	dir = 8
 	},
-/obj/structure/filingcabinet,
+/obj/structure/filing_cabinet,
 /turf/simulated/floor/tiled/steel_grid,
 /area/exodus/security/meeting)
 "agp" = (
@@ -3947,7 +3947,7 @@
 /turf/simulated/floor/tiled/dark,
 /area/exodus/security/brig/interrogation)
 "aiI" = (
-/obj/structure/filingcabinet,
+/obj/structure/filing_cabinet,
 /turf/simulated/floor/tiled/dark,
 /area/exodus/security/brig/processing)
 "aiJ" = (
@@ -6732,7 +6732,7 @@
 /obj/item/storage/secure/safe{
 	pixel_x = 32
 	},
-/obj/structure/filingcabinet/chestdrawer,
+/obj/structure/filing_cabinet/chestdrawer,
 /turf/simulated/floor/tiled/dark,
 /area/exodus/lawoffice)
 "anX" = (
@@ -6779,7 +6779,7 @@
 /turf/simulated/floor/plating,
 /area/exodus/maintenance/substation/security)
 "aod" = (
-/obj/structure/filingcabinet/chestdrawer,
+/obj/structure/filing_cabinet/chestdrawer,
 /turf/simulated/floor/lino,
 /area/exodus/security/detectives_office)
 "aoe" = (
@@ -8371,7 +8371,7 @@
 /obj/structure/extinguisher_cabinet{
 	pixel_x = -24
 	},
-/obj/structure/filingcabinet,
+/obj/structure/filing_cabinet,
 /turf/simulated/floor/tiled/dark,
 /area/exodus/lawoffice)
 "arq" = (
@@ -17060,7 +17060,7 @@
 /turf/simulated/floor/tiled/steel_grid,
 /area/exodus/hallway/secondary/entry/starboard)
 "aJI" = (
-/obj/structure/filingcabinet,
+/obj/structure/filing_cabinet,
 /turf/simulated/floor/wood/walnut,
 /area/exodus/library)
 "aJJ" = (
@@ -20113,7 +20113,7 @@
 /area/exodus/chapel/main)
 "aQc" = (
 /obj/machinery/door/airlock/external/bolted{
-	id_tag = "rescue_shuttle_dock_outer";
+	id_tag = "exodus_rescue_shuttle_dock_outer";
 	name = "Docking Port Airlock"
 	},
 /obj/machinery/shield_diffuser,
@@ -20121,11 +20121,11 @@
 /area/exodus/hallway/secondary/entry/aft)
 "aQd" = (
 /obj/machinery/door/airlock/external/bolted{
-	id_tag = "rescue_shuttle_dock_outer";
+	id_tag = "exodus_rescue_shuttle_dock_outer";
 	name = "Docking Port Airlock"
 	},
 /obj/machinery/button/access/exterior{
-	id_tag = "rescue_shuttle_dock_airlock";
+	id_tag = "exodus_rescue_shuttle_dock_airlock";
 	name = "exterior access button";
 	pixel_x = -26;
 	pixel_y = -5
@@ -26630,7 +26630,7 @@
 /turf/simulated/floor/lino,
 /area/exodus/security/vacantoffice)
 "bew" = (
-/obj/structure/filingcabinet,
+/obj/structure/filing_cabinet,
 /turf/simulated/floor/tiled/dark,
 /area/exodus/security/vacantoffice)
 "bex" = (
@@ -27416,8 +27416,8 @@
 /area/exodus/maintenance/locker)
 "bgj" = (
 /obj/structure/table,
-/obj/item/wrapping_paper,
-/obj/item/wrapping_paper,
+/obj/item/stack/package_wrap/fifty,
+/obj/item/stack/package_wrap/fifty,
 /obj/machinery/network/requests_console{
 	department = "Cargo Bay";
 	pixel_y = 30
@@ -28757,7 +28757,7 @@
 /turf/simulated/floor/tiled/steel_grid,
 /area/exodus/quartermaster/office)
 "bja" = (
-/obj/structure/filingcabinet,
+/obj/structure/filing_cabinet,
 /obj/effect/floor_decal/corner/white{
 	dir = 4
 	},
@@ -30720,7 +30720,7 @@
 	name = "Captain RC";
 	pixel_x = -30
 	},
-/obj/structure/filingcabinet,
+/obj/structure/filing_cabinet,
 /turf/simulated/floor/wood/walnut,
 /area/exodus/crew_quarters/captain)
 "bmP" = (
@@ -31625,7 +31625,7 @@
 /turf/simulated/floor/tiled/white,
 /area/exodus/research/robotics)
 "boN" = (
-/obj/structure/filingcabinet/chestdrawer,
+/obj/structure/filing_cabinet/chestdrawer,
 /obj/structure/extinguisher_cabinet{
 	pixel_x = 25
 	},
@@ -32376,7 +32376,7 @@
 /turf/simulated/wall/prepainted,
 /area/exodus/engineering/atmos/storage)
 "bqm" = (
-/obj/structure/filingcabinet/chestdrawer{
+/obj/structure/filing_cabinet/chestdrawer{
 	desc = "A large drawer filled with autopsy reports.";
 	name = "Autopsy Reports"
 	},
@@ -33936,7 +33936,7 @@
 /turf/simulated/floor/tiled/white,
 /area/exodus/medical/reception)
 "btx" = (
-/obj/structure/filingcabinet/chestdrawer{
+/obj/structure/filing_cabinet/chestdrawer{
 	name = "Medical Forms"
 	},
 /obj/structure/window/reinforced{
@@ -36911,7 +36911,7 @@
 /turf/simulated/floor/tiled/steel_grid,
 /area/exodus/quartermaster/office)
 "bzw" = (
-/obj/structure/filingcabinet,
+/obj/structure/filing_cabinet,
 /turf/simulated/floor/tiled/steel_grid,
 /area/exodus/quartermaster/office)
 "bzx" = (
@@ -39346,7 +39346,7 @@
 /turf/simulated/floor/plating,
 /area/exodus/quartermaster/storage)
 "bEg" = (
-/obj/structure/filingcabinet/chestdrawer,
+/obj/structure/filing_cabinet/chestdrawer,
 /obj/machinery/light{
 	dir = 8
 	},
@@ -40292,7 +40292,7 @@
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/exodus/hallway/primary/starboard)
 "bGe" = (
-/obj/structure/filingcabinet,
+/obj/structure/filing_cabinet,
 /turf/simulated/floor/tiled/steel_grid,
 /area/exodus/quartermaster/qm)
 "bGf" = (
@@ -43136,7 +43136,7 @@
 /obj/machinery/light{
 	dir = 1
 	},
-/obj/structure/filingcabinet/chestdrawer{
+/obj/structure/filing_cabinet/chestdrawer{
 	dir = 1
 	},
 /turf/simulated/floor/tiled/white,
@@ -47835,7 +47835,7 @@
 "bVa" = (
 /obj/machinery/light,
 /obj/effect/floor_decal/corner/grey/diagonal,
-/obj/structure/filingcabinet,
+/obj/structure/filing_cabinet,
 /turf/simulated/floor/tiled/white,
 /area/exodus/crew_quarters/medbreak)
 "bVb" = (
@@ -52735,7 +52735,7 @@
 	c_tag = "Medbay Mental Health Room";
 	dir = 1
 	},
-/obj/structure/filingcabinet/chestdrawer{
+/obj/structure/filing_cabinet/chestdrawer{
 	name = "Medical Forms"
 	},
 /turf/simulated/floor/carpet/blue,
@@ -59637,7 +59637,7 @@
 /turf/simulated/floor/tiled/steel_grid,
 /area/exodus/security/warden)
 "cuZ" = (
-/obj/structure/filingcabinet/chestdrawer,
+/obj/structure/filing_cabinet/chestdrawer,
 /obj/structure/cable/green{
 	icon_state = "4-8"
 	},
@@ -60238,7 +60238,7 @@
 	dir = 1;
 	pixel_y = -25
 	},
-/obj/structure/filingcabinet/chestdrawer,
+/obj/structure/filing_cabinet/chestdrawer,
 /obj/machinery/light,
 /obj/effect/floor_decal/corner/grey/diagonal{
 	dir = 4
@@ -60584,12 +60584,12 @@
 	dir = 5
 	},
 /obj/machinery/embedded_controller/radio/airlock/docking_port{
-	id_tag = "rescue_shuttle_dock_airlock";
+	id_tag = "exodus_rescue_shuttle_dock_airlock";
 	pixel_y = 25;
-	tag_airpump = "rescue_shuttle_dock_pump";
-	tag_chamber_sensor = "rescue_shuttle_dock_sensor";
-	tag_exterior_door = "rescue_shuttle_dock_outer";
-	tag_interior_door = "rescue_shuttle_dock_inner"
+	tag_airpump = "exodus_rescue_shuttle_dock_pump";
+	tag_chamber_sensor = "exodus_rescue_shuttle_dock_sensor";
+	tag_exterior_door = "exodus_rescue_shuttle_dock_outer";
+	tag_interior_door = "exodus_rescue_shuttle_dock_inner"
 	},
 /turf/simulated/floor/plating,
 /area/exodus/hallway/secondary/entry/aft)
@@ -60624,7 +60624,7 @@
 	},
 /obj/machinery/atmospherics/unary/vent_pump/high_volume/external_air{
 	dir = 4;
-	id_tag = "rescue_shuttle_dock_pump"
+	id_tag = "exodus_rescue_shuttle_dock_pump"
 	},
 /turf/simulated/floor/plating,
 /area/exodus/hallway/secondary/entry/aft)
@@ -60636,7 +60636,7 @@
 	dir = 9
 	},
 /obj/machinery/button/access/interior{
-	id_tag = "rescue_shuttle_dock_airlock";
+	id_tag = "exodus_rescue_shuttle_dock_airlock";
 	name = "interior access button";
 	pixel_x = -8;
 	pixel_y = 26
@@ -60661,7 +60661,7 @@
 	dir = 4
 	},
 /obj/machinery/door/airlock/external/bolted{
-	id_tag = "rescue_shuttle_dock_inner";
+	id_tag = "exodus_rescue_shuttle_dock_inner";
 	name = "Docking Port Airlock"
 	},
 /turf/simulated/floor/tiled/techfloor/grid,
@@ -60706,7 +60706,7 @@
 	},
 /obj/machinery/atmospherics/unary/vent_pump/high_volume/external_air{
 	dir = 1;
-	id_tag = "rescue_shuttle_dock_pump"
+	id_tag = "exodus_rescue_shuttle_dock_pump"
 	},
 /turf/simulated/floor/plating,
 /area/exodus/hallway/secondary/entry/aft)
@@ -60794,7 +60794,7 @@
 	dir = 10
 	},
 /obj/machinery/airlock_sensor{
-	id_tag = "rescue_shuttle_dock_sensor";
+	id_tag = "exodus_rescue_shuttle_dock_sensor";
 	pixel_x = -25
 	},
 /turf/simulated/floor/plating,
@@ -60821,7 +60821,7 @@
 /area/exodus/maintenance/incinerator)
 "cAk" = (
 /obj/machinery/door/airlock/external/bolted{
-	id_tag = "rescue_shuttle_dock_inner";
+	id_tag = "exodus_rescue_shuttle_dock_inner";
 	name = "Docking Port Airlock"
 	},
 /turf/simulated/floor/tiled/techfloor/grid,

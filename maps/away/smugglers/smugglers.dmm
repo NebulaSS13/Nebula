@@ -758,7 +758,7 @@
 /turf/simulated/floor/tiled,
 /area/smugglers/office)
 "bZ" = (
-/obj/structure/filingcabinet/chestdrawer,
+/obj/structure/filing_cabinet/chestdrawer,
 /turf/simulated/floor/tiled,
 /area/smugglers/office)
 "ca" = (

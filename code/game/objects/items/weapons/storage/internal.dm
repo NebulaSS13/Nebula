@@ -1,7 +1,7 @@
 //A storage item intended to be used by other items to provide storage functionality.
 //Types that use this should consider overriding emp_act() and hear_talk(), unless they shield their contents somehow.
 /obj/item/storage/internal
-	health = ITEM_HEALTH_NO_DAMAGE
+	max_health = ITEM_HEALTH_NO_DAMAGE
 	abstract_type = /obj/item/storage/internal
 	is_spawnable_type = FALSE
 	var/obj/item/master_item
@@ -11,6 +11,9 @@
 	master_item = loc
 	name = master_item.name
 	verbs -= /obj/item/verb/verb_pickup
+
+/obj/item/storage/internal/preserve_in_cryopod(var/obj/machinery/cryopod/pod)
+	return TRUE
 
 /obj/item/storage/internal/Destroy()
 	master_item = null

@@ -517,3 +517,11 @@
 		drop_held_items()
 	if(flash_strength > 5)
 		SET_STATUS_MAX(src, STAT_WEAK, 2)
+
+/mob/living/carbon/verb/showoff()
+	set name = "Show Held Item"
+	set category = "Object"
+
+	var/obj/item/I = get_active_hand()
+	if(I && I.simulated)
+		I.showoff(src)

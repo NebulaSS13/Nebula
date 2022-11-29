@@ -29,7 +29,7 @@
 		use_me = 1
 
 /mob/living/carbon/brain/isSynthetic()
-	return istype(loc, /obj/item/mmi/digital)
+	return istype(loc, /obj/item/mmi/digital) || istype(loc, /obj/item/organ/internal/posibrain)
 
 /mob/living/carbon/brain/binarycheck()
 	return isSynthetic()

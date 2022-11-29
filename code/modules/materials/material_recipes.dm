@@ -17,8 +17,11 @@
 		. += new recipe_type(src)
 
 /decl/material/proc/generate_recipes(var/reinforce_material)
-	. = list()
 
+	if(phase_at_temperature() != MAT_PHASE_SOLID)
+		return list()
+
+	. = list()
 	if(opacity < 0.6)
 		. += new/datum/stack_recipe/furniture/borderwindow(src, reinforce_material)
 		. += new/datum/stack_recipe/furniture/fullwindow(src, reinforce_material)

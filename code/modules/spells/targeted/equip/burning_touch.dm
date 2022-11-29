@@ -21,7 +21,7 @@
 	force = 10
 	damtype = BURN
 	simulated = 0
-	health = ITEM_HEALTH_NO_DAMAGE
+	max_health = ITEM_HEALTH_NO_DAMAGE
 	var/burn_power = 0
 	var/burn_timer
 

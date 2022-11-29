@@ -4,6 +4,7 @@
 	icon_state = "fuel_assembly"
 	layer = 4
 	abstract_type = /obj/item/fuel_assembly
+	max_health = 150
 
 	var/material_name
 	var/percent_depleted = 1

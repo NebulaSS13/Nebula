@@ -36,6 +36,8 @@ var/global/atom/movable/unit_test_last_obj_random_creation
 
 	for(var/choice in choices)
 		var/path = unit_test_select_heaviest(choice)
+		while(islist(path)) // Refine it down to a path.
+			path = unit_test_select_heaviest(path)
 		var/weight = unit_test_weight_of_path(path)
 		if(weight > heaviest_weight)
 			heaviest_weight = weight

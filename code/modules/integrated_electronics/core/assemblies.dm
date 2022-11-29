@@ -9,6 +9,8 @@
 	icon_state = "setup_small"
 	item_flags = ITEM_FLAG_NO_BLUDGEON
 	matter = list()		// To be filled later
+	pass_flags = 0
+	anchored = FALSE
 	var/list/assembly_components = list()
 	var/list/ckeys_allowed_to_scan = list() // Players who built the circuit can scan it as a ghost.
 	var/max_components = IC_MAX_SIZE_BASE
@@ -23,7 +25,7 @@
 	var/creator // circuit creator if any
 	var/interact_page = 0
 	var/components_per_page = 5
-	health = 30
+	max_health = 30
 	pass_flags = 0
 	anchored = FALSE
 	var/detail_color = COLOR_ASSEMBLY_BLACK
@@ -52,8 +54,8 @@
 		to_chat(user, "<span class='notice'>The anchoring bolts [anchored ? "are" : "can be"] <b>wrenched</b> in place and the maintenance panel [opened ? "can be" : "is"] <b>screwed</b> in place.</span>")
 	else
 		to_chat(user, "<span class='notice'>The maintenance panel [opened ? "can be" : "is"] <b>screwed</b> in place.</span>")
-	if(health != initial(health))
-		if(health <= initial(health)/2)
+	if(is_damaged())
+		if(get_percent_health() <= 50)
 			to_chat(user,"<span class='warning'>It looks pretty beat up.</span>")
 		else
 			to_chat(user, "<span class='warning'>Its got a few dents in it.</span>")
@@ -61,15 +63,14 @@
 	if((isobserver(user) && ckeys_allowed_to_scan[user.ckey]) || check_rights(R_ADMIN, 0, user))
 		to_chat(user, "You can <a href='?src=\ref[src];ghostscan=1'>scan</a> this circuit.");
 
-
-/obj/item/electronic_assembly/take_damage(amount, damtype, silent)
-	health = health - amount
-	if(health <= 0)
-		visible_message("<span class='danger'>\The [src] falls to pieces!</span>")
-		qdel(src)
-	else if(health < initial(health)*0.15 && prob(5))
-		visible_message("<span class='danger'>\The [src] starts to break apart!</span>")
-
+/obj/item/electronic_assembly/check_health(lastdamage, lastdamtype, lastdamflags, consumed)
+	if(!can_take_damage())
+		return
+	if(health < 1)
+		visible_message(SPAN_DANGER("\The [src] falls to pieces!"))
+		physically_destroyed()
+	else if((get_percent_health() < 15) && prob(5))
+		visible_message(SPAN_DANGER("\The [src] starts to break apart!"))
 
 /obj/item/electronic_assembly/proc/check_interactivity(mob/user)
 	return (!user.incapacitated() && CanUseTopic(user))
@@ -473,9 +474,9 @@
 		update_icon()
 	else if(IS_COIL(I))
 		var/obj/item/stack/cable_coil/C = I
-		if(health != initial(health) && do_after(user, 10, src) && C.use(1))
+		if(is_damaged() && do_after(user, 10, src) && C.use(1))
 			user.visible_message("\The [user] patches up \the [src].")
-			health = min(initial(health), health + 5)
+			health = min(max_health, health + 5)
 	else
 		if(user.a_intent == I_HURT) // Kill it
 			to_chat(user, "<span class='danger'>\The [user] hits \the [src] with \the [I]</span>")
@@ -563,7 +564,6 @@
 	w_class = ITEM_SIZE_NORMAL
 	max_components = IC_MAX_SIZE_BASE * 2
 	max_complexity = IC_COMPLEXITY_BASE * 2
-	health = 20
 	max_health = 20
 
 /obj/item/electronic_assembly/medium/default
@@ -603,7 +603,6 @@
 	w_class = ITEM_SIZE_LARGE
 	max_components = IC_MAX_SIZE_BASE * 4
 	max_complexity = IC_COMPLEXITY_BASE * 4
-	health = 30
 	max_health = 30
 
 /obj/item/electronic_assembly/large/default
@@ -643,7 +642,6 @@
 	max_complexity = IC_COMPLEXITY_BASE * 3
 	allowed_circuit_action_flags = IC_ACTION_MOVEMENT | IC_ACTION_COMBAT | IC_ACTION_LONG_RANGE
 	circuit_flags = 0
-	health = 50
 	max_health = 50
 
 /obj/item/electronic_assembly/drone/can_move()
@@ -684,7 +682,6 @@
 	w_class = ITEM_SIZE_NORMAL
 	max_components = IC_MAX_SIZE_BASE * 2
 	max_complexity = IC_COMPLEXITY_BASE * 2
-	health = 10
 	max_health = 10
 
 /obj/item/electronic_assembly/wallmount/afterattack(var/atom/a, var/mob/user, var/proximity)

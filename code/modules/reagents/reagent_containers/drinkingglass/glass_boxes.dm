@@ -30,6 +30,7 @@
 	name          = "box of glasses"
 	can_hold      = list(/obj/item/chems/drinks/glass2)
 	storage_slots = 7
+	abstract_type = /obj/item/storage/box/glasses
 
 /obj/item/storage/box/glasses/Initialize(ml, material_key)
 	. = ..()
@@ -38,12 +39,11 @@
 	if(length(contents))
 		make_exact_fit()
 
+///Looks at the contents of the box and name if after the first thing it finds inside
 /obj/item/storage/box/glasses/proc/setup_name()
-	//#TODO: This really should handle atom_creator stuff too..
-	var/list/cnt = WillContain()
-	if((islist(cnt) || ispath(cnt)) && length(cnt))
-		var/atom/movable/O = ispath(cnt) ? cnt : cnt[1]
-		SetName("box of [initial(O.name)]") //#FIXME: Can't get plural from name.
+	if(length(contents))
+		var/atom/movable/O = contents[1]
+		SetName("box of [text_make_plural(O.name)]")
 
 /obj/item/storage/box/glasses/square/WillContain()
 	return list(/obj/item/chems/drinks/glass2/square = storage_slots)
@@ -84,11 +84,9 @@
 		make_exact_fit()
 
 /obj/item/storage/box/glass_extras/proc/setup_name()
-	//#TODO: This really should handle atom_creator stuff too..
-	var/list/cnt = WillContain()
-	if((islist(cnt) || ispath(cnt)) && length(cnt))
-		var/atom/movable/O = ispath(cnt) ? cnt : cnt[1]
-		SetName("box of [initial(O.name)]")  //#FIXME: Can't get plural from name.
+	if(length(contents))
+		var/atom/movable/O = contents[1]
+		SetName("box of [text_make_plural(O.name)]")
 
 /obj/item/storage/box/glass_extras/straws/WillContain()
 	return list(/obj/item/glass_extra/straw = storage_slots)

@@ -10,6 +10,11 @@
 		custom_lawset.add_inherent_law(law)
 	return custom_lawset
 
+/datum/category_group/player_setup_category/law_pref
+	name = "Laws"
+	sort_order = 8
+	category_item_type = /datum/category_item/player_setup_item/law_pref
+
 /datum/category_item/player_setup_item/law_pref
 	name = "Laws"
 	sort_order = 1
@@ -26,8 +31,8 @@
 	if(!istype(pref.laws))	pref.laws = list()
 
 	var/decl/species/species = get_species_by_key(pref.species)
-	if(!(species && species.has_organ[BP_POSIBRAIN]))
-		pref.is_shackled = initial(pref.is_shackled)
+	if(!species?.can_be_shackled)
+		pref.is_shackled = FALSE
 	else
 		pref.is_shackled = sanitize_bool(pref.is_shackled, initial(pref.is_shackled))
 
@@ -35,14 +40,14 @@
 	. = list()
 	var/decl/species/species = get_species_by_key(pref.species)
 
-	if(!(species && species.has_organ[BP_POSIBRAIN]))
-		. += "<b>Your Species Has No Laws</b><br>"
+	if(!species?.can_be_shackled)
+		. += "<b>Your current species cannot be shackled.</b><br>"
 	else
 		. += "<b>Shackle: </b>"
 		if(!pref.is_shackled)
 			. += "<span class='linkOn'>Off</span>"
 			. += "<a href='?src=\ref[src];toggle_shackle=[pref.is_shackled]'>On</a>"
-			. += "<br>Only shackled positronics have laws in an integrated positronic chassis."
+			. += "<br>Only shackled synthetics have laws."
 			. += "<hr>"
 		else
 			. += "<a href='?src=\ref[src];toggle_shackle=[pref.is_shackled]'>Off</a>"
@@ -50,7 +55,7 @@
 			. += "<br>You are shackled and have laws that restrict your behaviour."
 			. += "<hr>"
 
-			. += "<b>Your Current Laws:</b><br>"
+			. += "<b>Your current laws:</b><br>"
 
 			if(!pref.laws.len)
 				. += "<b>You currently have no laws.</b><br>"
@@ -74,7 +79,7 @@
 		for(var/law_set_type in all_lawsets)
 			var/datum/ai_laws/ai_laws = law_set_type
 			var/ai_law_name = initial(ai_laws.name)
-			if(initial(ai_laws.shackles)) // Now this is one terribly snowflaky var
+			if(initial(ai_laws.is_shackle))
 				ADD_SORTED(valid_lawsets, ai_law_name, /proc/cmp_text_asc)
 				valid_lawsets[ai_law_name] = law_set_type
 
@@ -89,3 +94,19 @@
 				pref.laws += sanitize_text("[law.law]", default="")
 		return TOPIC_REFRESH
 	return ..()
+
+// Copies the shackles onto the mob on creation.
+/mob/new_player/create_character(var/turf/spawn_turf)
+	. = ..()
+	if(!ishuman(.))
+		return
+	var/mob/living/carbon/human/new_character = .
+	if(new_character.client?.prefs?.is_shackled && new_character.species.can_be_shackled && new_character.mind)
+		new_character.mind.set_shackle(new_character.client.prefs.get_lawset(), TRUE) // Silent as laws will be announced on Login() anyway.
+
+/decl/species
+	var/can_be_shackled
+
+/decl/species/Initialize()
+	. = ..()
+	can_be_shackled = !!(BP_POSIBRAIN in has_organ)

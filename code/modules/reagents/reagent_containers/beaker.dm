@@ -64,8 +64,7 @@
 	. = ..()
 	if(ATOM_IS_OPEN_CONTAINER(src))
 		reagents.splash(hit_atom, rand(reagents.total_volume*0.25,reagents.total_volume), min_spill = 60, max_spill = 100)
-	health -= rand(4,8)
-	check_health()
+	take_damage(rand(4,8))
 
 /obj/item/chems/glass/beaker/large
 	name = "large beaker"
@@ -138,7 +137,7 @@
 
 /obj/item/chems/glass/beaker/vial/throw_impact(atom/hit_atom)
 	. = ..()
-	if(material.is_brittle())
+	if(material?.is_brittle())
 		shatter()
 
 /obj/item/chems/glass/beaker/insulated

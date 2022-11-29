@@ -346,7 +346,7 @@
 	uses_charge = 1
 	charge_costs = list(500)
 	material = /decl/material/solid/metal/steel
-	health = ITEM_HEALTH_NO_DAMAGE
+	max_health = ITEM_HEALTH_NO_DAMAGE
 	is_spawnable_type = FALSE
 
 /obj/item/stack/material/strut/get_recipes()

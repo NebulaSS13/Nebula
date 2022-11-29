@@ -262,3 +262,13 @@
 	required_reagents = list(/decl/material/liquid/presyncopics = 1, /decl/material/liquid/antitoxins = 1)
 	minimum_temperature = 40 CELSIUS
 	result_amount = 2
+
+/decl/chemical_reaction/clotting_agent
+	name = "Clotting Agent"
+	result = /decl/material/liquid/clotting_agent
+	required_reagents = list(
+		/decl/material/liquid/brute_meds = 1,
+		/decl/material/solid/metal/iron = 2,
+		/decl/material/liquid/carpotoxin = 1
+	)
+	result_amount = 2

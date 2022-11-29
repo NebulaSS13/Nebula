@@ -42,6 +42,7 @@
 /obj/effect/decal/cleanable/blood/oil
 	basecolor = SYNTH_BLOOD_COLOR
 	chemical = /decl/material/liquid/lube
+	cleanable_scent = "industrial lubricant"
 
 /obj/effect/decal/cleanable/blood/oil/dry()
 	return

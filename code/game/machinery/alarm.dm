@@ -1041,8 +1041,8 @@ FIRE ALARM
 /obj/machinery/partyalarm
 	name = "\improper PARTY BUTTON"
 	desc = "Cuban Pete is in the house!"
-	icon = 'icons/obj/monitors.dmi'
-	icon_state = "fire0"
+	icon = 'icons/obj/firealarm.dmi'
+	icon_state = "casing"
 	anchored = TRUE
 	idle_power_usage = 2
 	active_power_usage = 6

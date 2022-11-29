@@ -123,11 +123,11 @@
 /area/icarus/vessel)
 "aG" = (
 /obj/machinery/light,
-/obj/structure/filingcabinet/tall,
+/obj/structure/filing_cabinet/tall,
 /turf/simulated/floor/wood,
 /area/icarus/vessel)
 "aH" = (
-/obj/structure/filingcabinet/tall,
+/obj/structure/filing_cabinet/tall,
 /turf/simulated/floor/wood,
 /area/icarus/vessel)
 "aI" = (
@@ -1267,7 +1267,7 @@
 /turf/simulated/floor/tiled/white,
 /area/icarus/open)
 "ep" = (
-/obj/structure/filingcabinet/tall,
+/obj/structure/filing_cabinet/tall,
 /obj/effect/decal/cleanable/dirt,
 /turf/simulated/floor/tiled,
 /area/icarus/open)
@@ -1312,7 +1312,7 @@
 /turf/simulated/floor/tiled,
 /area/icarus/open)
 "ey" = (
-/obj/structure/filingcabinet/tall,
+/obj/structure/filing_cabinet/tall,
 /turf/simulated/floor/tiled,
 /area/icarus/open)
 "ez" = (

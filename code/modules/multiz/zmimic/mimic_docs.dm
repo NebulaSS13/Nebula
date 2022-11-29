@@ -54,7 +54,7 @@ Implementation details:
 	Z-Mimic makes some assumptions. While it may continue to work if these are violated, don't be surprised if it behaves strangely, renders things in the incorrect order, or outright breaks.
 
 	Assumptions:
-	- Z-Stacks will not be taller than OPENSPACE_MAX_DEPTH.
+	- Z-Stacks will not be taller than OPENTURF_MAX_DEPTH.
 		- If violated: Warning emitted on boot, layering may break for items near the bottom of the z-stack.
 	- Atoms will render correctly if copied to another plane.
 	- Atoms will layer correctly if copied to the same plane as other arbitrary in-world atoms.
@@ -62,13 +62,20 @@ Implementation details:
 		- If violated: Atoms on the below floor may be partially visible on the current floor.
 	- Z-Stacks are 1:1 across the entire x/y plane.
 		- If violated: Z-turfs may form nonsensical connections.
+	- Z-Stacks are contiguous and linear -- get_step(UP) corresponds to moving up a z-level (within a z-stack) in all cases.
+		- If violated: layering becomes nonsensical.
 	- Z-Stacks will not be changed (note: adding new Z-stacks is OK) after an openturf has been initialized on that z-stack.
 		- If violated: Z-Turfs may act as if they are still connected even though they are not.
 	- /turf/space is never above another turf type in the Z-Stack.
-	- Turfs that are setting MIMIC_OVERWRITE do not care about their appearance.
+	- Turfs that are setting ZM_MIMIC_OVERWRITE do not care about their appearance.
 		- If violated: Appearance of turf is lost.
 	- Multiturf movable atoms are symmetric, and centered on their visual center.
 		- If violated: Multitile atoms may not render in cases where they should.
+	- SHADOWER_DARKENING_FACTOR and SHADOWER_DARKENING_COLOR represent the same shade of grey.
+		- If violated: unlit and lit z-turfs may look inconsistent with each other.
+	- Lighting will mimic correctly without being associated with a plane.
+		- If violated: depending on implementation, lighting may be inverted, or not render at all.
+		- This can usually be addressed by changing /atom/movable/openspace/multiplier/proc/copy_lighting().
 
 	Known Limitations:
 	- Multiturf movable atoms are not rendered if they are not centered on a z-turf, but overlap one.

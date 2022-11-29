@@ -144,7 +144,7 @@
 	name = "energy combat shield"
 	desc = "A shield capable of stopping most projectile and melee attacks. It can be retracted, expanded, and stored anywhere."
 	icon = 'icons/obj/items/shield/e_shield.dmi'
-	icon_state = "eshield" // eshield1 for expanded
+	icon_state = "eshield0" // eshield1 for expanded
 	obj_flags = OBJ_FLAG_CONDUCTIBLE
 	force = 3.0
 	throwforce = 5
@@ -164,6 +164,7 @@
 	var/shield_light_color = "#006aff"
 
 /obj/item/shield/energy/Initialize()
+	set_extension(src, /datum/extension/base_icon_state, copytext(initial(icon_state), 1, length(initial(icon_state))))
 	. = ..()
 	update_icon()
 
@@ -213,7 +214,8 @@
 
 /obj/item/shield/energy/on_update_icon()
 	. = ..()
-	icon_state = "[initial(icon_state)][active]"
+	var/datum/extension/base_icon_state/base_name = get_extension(src, /datum/extension/base_icon_state)
+	icon_state = "[base_name.base_icon_state][active]" 	//Replace 0 with current state
 	if(active)
 		set_light(1.5, 1.5, shield_light_color)
 	else

@@ -115,6 +115,9 @@
 	update_icon()
 	locked = 1
 
+/obj/item/mmi/preserve_in_cryopod(obj/machinery/cryopod/pod)
+	return brainmob && brainmob.client && brainmob.key
+
 /obj/item/mmi/relaymove(var/mob/user, var/direction)
 	if(user.incapacitated(INCAPACITATION_KNOCKOUT))
 		return

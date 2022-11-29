@@ -1036,7 +1036,7 @@
 /turf/simulated/floor/tiled,
 /area/unishi/living)
 "da" = (
-/obj/structure/filingcabinet/chestdrawer,
+/obj/structure/filing_cabinet/chestdrawer,
 /obj/machinery/atmospherics/unary/vent_scrubber/on{
 	dir = 4
 	},

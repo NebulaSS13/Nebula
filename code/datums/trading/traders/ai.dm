@@ -112,7 +112,7 @@ They sell generic supplies and ask for generic supplies.
 								/obj/item/honey_frame               = TRADER_THIS_TYPE,
 								/obj/item/target                    = TRADER_ALL,
 								/obj/structure/tank_rack            = TRADER_SUBTYPES_ONLY,
-								/obj/structure/filingcabinet        = TRADER_THIS_TYPE,
+								/obj/structure/filing_cabinet       = TRADER_THIS_TYPE,
 								/obj/structure/safe                 = TRADER_THIS_TYPE,
 								/obj/structure/plushie              = TRADER_SUBTYPES_ONLY,
 								/obj/structure/sign                 = TRADER_SUBTYPES_ONLY,

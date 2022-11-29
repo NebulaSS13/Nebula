@@ -366,10 +366,6 @@ INITIALIZE_IMMEDIATE(/mob/new_player)
 			spawning = 0 //abort
 			return null
 		new_character = new(spawn_turf, chosen_species.name)
-		if(chosen_species.has_organ[BP_POSIBRAIN] && client && client.prefs.is_shackled)
-			var/obj/item/organ/internal/posibrain/B = new_character.get_organ(BP_POSIBRAIN, /obj/item/organ/internal/posibrain)
-			if(B)
-				B.shackle(client.prefs.get_lawset())
 
 	if(!new_character)
 		new_character = new(spawn_turf)

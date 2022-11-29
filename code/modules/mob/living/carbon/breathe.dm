@@ -100,7 +100,7 @@
 		//by default, exhale
 		var/datum/gas_mixture/internals_air = internal?.return_air()
 		var/datum/gas_mixture/loc_air = loc?.return_air()
-		if(internals_air?.return_pressure() < loc_air.return_pressure()) // based on the assumption it has a one-way valve for gas release
+		if(internals_air && (internals_air.return_pressure() < loc_air.return_pressure())) // based on the assumption it has a one-way valve for gas release
 			internals_air?.merge(breath)
 		else
 			loc_air?.merge(breath)

@@ -1,0 +1,7 @@
+author: PsyCommando
+delete-after: true
+changes:
+  - bugfix: Mapped ladders no longer change the turf they're on to the map default's
+      open turf if they're on a lattice and any open turf types already during init.
+      This could cause exterior/unsimulated open turfs to replace a simulated open
+      turf and cause serious atmos issues.

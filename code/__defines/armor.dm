@@ -45,3 +45,6 @@
 #define  ARMOR_ENERGY_RESISTANT		40
 #define  ARMOR_ENERGY_STRONG		75
 #define  ARMOR_ENERGY_SHIELDED		100
+
+/**Armor piercing value that will bypass any armors completely */
+#define  ARMOR_PIERCING_BYPASSED	INFINITY

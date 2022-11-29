@@ -1,6 +1,7 @@
 /obj/structure/closet/crate
 	name = "crate"
 	desc = "A rectangular steel crate."
+	icon = 'icons/obj/closets/bases/crate.dmi'
 	closet_appearance = /decl/closet_appearance/crate
 	atom_flags = ATOM_FLAG_NO_TEMP_CHANGE | ATOM_FLAG_CLIMBABLE
 	setup = 0
@@ -89,6 +90,7 @@
 	name = "trash cart"
 	desc = "A heavy, metal trashcart with wheels."
 	closet_appearance = /decl/closet_appearance/cart/trash
+	icon = 'icons/obj/closets/bases/cart.dmi'
 
 /obj/structure/closet/crate/medical
 	name = "medical crate"
@@ -214,6 +216,7 @@
 	storage_capacity = 2 * MOB_SIZE_LARGE
 	storage_types = CLOSET_STORAGE_ITEMS|CLOSET_STORAGE_STRUCTURES
 	closet_appearance = /decl/closet_appearance/large_crate
+	icon = 'icons/obj/closets/bases/large_crate.dmi'
 
 /obj/structure/closet/crate/large/hydroponics
 	closet_appearance = /decl/closet_appearance/large_crate/hydroponics
@@ -225,6 +228,7 @@
 
 	storage_capacity = 2 * MOB_SIZE_LARGE
 	storage_types = CLOSET_STORAGE_ITEMS|CLOSET_STORAGE_STRUCTURES
+	icon = 'icons/obj/closets/bases/large_crate.dmi'
 
 /obj/structure/closet/crate/secure/large/supermatter
 	closet_appearance = /decl/closet_appearance/large_crate/secure/hazard
@@ -258,6 +262,7 @@
 	storage_capacity = 2 * MOB_SIZE_LARGE
 	storage_types = CLOSET_STORAGE_ITEMS|CLOSET_STORAGE_MOBS|CLOSET_STORAGE_STRUCTURES
 	movable_flags = MOVABLE_FLAG_WHEELED
+	icon = 'icons/obj/closets/bases/cart.dmi'
 
 /obj/structure/closet/crate/secure/biohazard/blanks/WillContain()
 	return list(/obj/structure/closet/body_bag/cryobag/blank)

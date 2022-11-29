@@ -204,7 +204,7 @@
 	w_class = ITEM_SIZE_LARGE
 	material = /decl/material/solid/plastic
 	matter = list(/decl/material/solid/metal/copper = MATTER_AMOUNT_SECONDARY, /decl/material/solid/metal/steel = MATTER_AMOUNT_SECONDARY)
-	health = ITEM_HEALTH_NO_DAMAGE
+	max_health = ITEM_HEALTH_NO_DAMAGE
 
 	var/safety = 1 //if you can zap people with the paddles on harm mode
 	var/combat = 0 //If it can be used to revive people wearing thick clothing (e.g. spacesuits)

@@ -232,7 +232,7 @@
 	base_parry_chance = 0 //Irrelevant for exosuits, revise if this changes
 	max_force = 25
 	material_force_multiplier = 0.75 // Equals 20 AP with 25 force
-	unbreakable = TRUE //Else we need a whole system for replacement blades
+	max_health = ITEM_HEALTH_NO_DAMAGE //Else we need a whole system for replacement blades
 
 /obj/item/hatchet/machete/mech/apply_hit_effect(mob/living/target, mob/living/user, hit_zone)
 	. = ..()

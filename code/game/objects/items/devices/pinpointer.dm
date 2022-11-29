@@ -15,6 +15,9 @@
 	target = null
 	. = ..()
 
+/obj/item/pinpointer/preserve_in_cryopod(var/obj/machinery/cryopod/pod)
+	return TRUE
+
 /obj/item/pinpointer/attack_self(mob/user)
 	toggle(user)
 

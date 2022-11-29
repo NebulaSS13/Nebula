@@ -246,7 +246,9 @@
 		to_chat(user, SPAN_NOTICE("Using your chemistry knowledge, you identify the following reagents in \the [src]: [reagents.get_reagents(!user.skill_check(SKILL_CHEMISTRY, SKILL_PROF), 5)]."))
 
 /obj/item/chems/shatter(consumed)
-	reagents.splash(get_turf(src), reagents.total_volume)
+	//Skip splashing if we are in nullspace, since splash isn't null guarded
+	if(loc)
+		reagents.splash(get_turf(src), reagents.total_volume)
 	. = ..()
 
 /obj/item/chems/initialize_reagents(populate = TRUE)

@@ -274,6 +274,22 @@
 ////////////////////////////////////////////////////////////////
 // Interactions
 ////////////////////////////////////////////////////////////////
+/**Returns a text string to describe the current damage level of the item, or null if non-applicable. */
+/obj/proc/get_examined_damage_string(var/health_ratio)
+	if(health_ratio >= 1)
+		return SPAN_NOTICE("It looks fully intact.")
+	else if(health_ratio > 0.75)
+		return SPAN_NOTICE("It has a few cracks.")
+	else if(health_ratio > 0.5)
+		return SPAN_WARNING("It looks slightly damaged.")
+	else if(health_ratio > 0.25)
+		return SPAN_WARNING("It looks moderately damaged.")
+	else
+		return SPAN_DANGER("It looks heavily damaged.")
+
+//
+// Alt Interactions
+//
 /obj/get_alt_interactions(var/mob/user)
 	. = ..()
 	LAZYADD(., /decl/interaction_handler/rotate)

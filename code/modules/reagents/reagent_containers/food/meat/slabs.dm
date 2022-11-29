@@ -5,7 +5,7 @@
 	icon_state = "meat"
 	slice_path = /obj/item/chems/food/rawcutlet
 	slices_num = 3
-	health = 180
+	max_health = 180
 	filling_color = "#ff1c1c"
 	center_of_mass = @"{'x':16,'y':14}"
 	material = /decl/material/solid/meat

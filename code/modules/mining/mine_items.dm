@@ -172,8 +172,7 @@
 	name           = "spade"
 	desc           = "A small tool for digging and moving dirt."
 	icon           = 'icons/obj/items/tool/shovels/spade.dmi'
-	icon_state     = "spade"
-	item_state     = "spade"
+	icon_state     = ICON_STATE_WORLD
 	force          = 5.0
 	throwforce     = 7
 	w_class        = ITEM_SIZE_SMALL

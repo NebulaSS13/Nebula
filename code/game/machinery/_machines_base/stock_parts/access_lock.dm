@@ -2,8 +2,9 @@
 	name = "access lock"
 	desc = "An id-based access lock preventing tampering with a machine's hardware."
 	icon_state = "lock"
-	part_flags = PART_FLAG_QDEL | PART_FLAG_NODAMAGE
+	part_flags = PART_FLAG_QDEL
 	req_access = list(access_engine_equip) // set req_access on this to impose access requirements.
+	max_health = ITEM_HEALTH_NO_DAMAGE
 	var/locked = FALSE
 	var/emagged = FALSE
 	var/autoset = FALSE  // Whether the machine should inherit access from surrounding areas
@@ -150,6 +151,7 @@
 		req_access = conf_access.Copy()
 
 /obj/item/stock_parts/access_lock/buildable
+	max_health = null //Buildable variant may take damage
 	part_flags = PART_FLAG_HAND_REMOVE
 	material = /decl/material/solid/metal/steel
 	matter = list(/decl/material/solid/fiberglass = MATTER_AMOUNT_REINFORCEMENT)

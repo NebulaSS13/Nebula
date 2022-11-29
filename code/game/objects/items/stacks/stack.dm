@@ -12,8 +12,7 @@
 /obj/item/stack
 	gender = PLURAL
 	origin_tech = "{'materials':1}"
-	health = 32      //Stacks should take damage even if no materials
-	max_health = 32
+	max_health = 32 //Stacks should take damage even if no materials
 	/// A copy of initial matter list when this atom initialized. Stack matter should always assume a single tile.
 	var/list/matter_per_piece
 	var/singular_name
@@ -58,7 +57,7 @@
 		return FALSE
 	var/real_amount = get_amount()
 	if (real_amount <= 0)
-		qdel(src)
+		on_used_last()
 		return TRUE
 	return FALSE
 
@@ -254,6 +253,9 @@
 			S.use_charge(charge_costs[i] * used) // Doesn't need to be deleted
 		update_icon()
 		return TRUE
+
+/obj/item/stack/proc/on_used_last()
+	qdel(src) //should be safe to qdel immediately since if someone is still using this stack it will persist for a little while longer
 
 /obj/item/stack/proc/add(var/extra)
 	if(!uses_charge)

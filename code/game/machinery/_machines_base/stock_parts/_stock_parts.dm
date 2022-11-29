@@ -63,18 +63,21 @@
 // RefreshParts has been called, likely meaning other componenets were added/removed.
 /obj/item/stock_parts/proc/on_refresh(var/obj/machinery/machine)
 
-/obj/item/stock_parts/take_damage(amount, damtype, silent)
-	if(!is_functional() || (damtype in ignore_damage_types))
+/obj/item/stock_parts/take_damage(damage, damage_type, damage_flags, inflicter, armor_pen)
+	if(damage_type in ignore_damage_types)
 		return
-	var/taken = min(amount, health)
-	health -= taken
-	. = taken
-	if(!is_functional())
-		var/obj/machinery/machine = loc
-		if(istype(machine))
-			on_fail(machine, damtype)
+	. = ..()
 
-/obj/item/stock_parts/proc/on_fail(var/obj/machinery/machine, damtype)
+/obj/item/stock_parts/check_health(lastdamage, lastdamtype, lastdamflags, consumed)
+	if(!can_take_damage())
+		return
+	if(!is_functional())
+		if(istype(loc, /obj/machinery))
+			on_fail(loc, lastdamtype)
+		else
+			physically_destroyed()
+
+/obj/item/stock_parts/proc/on_fail(var/obj/machinery/machine, var/damtype)
 	machine.on_component_failure(src)
 	var/cause = "shatters"
 	switch(damtype)
@@ -86,18 +89,19 @@
 	SetName("broken [name]")
 
 /obj/item/stock_parts/proc/is_functional()
-	return health > 0
+	return (!can_take_damage()) || (health > 0)
 
 /obj/item/stock_parts/examine(mob/user)
 	. = ..()
-	if(!is_functional())
-		to_chat(user, SPAN_WARNING("It is completely broken."))
-	else if(health < 0.5 * max_health)
-		to_chat(user, SPAN_WARNING("It is heavily damaged."))
-	else if(health < 0.75 * max_health)
-		to_chat(user, SPAN_NOTICE("It is showing signs of damage."))
-	else if(health < max_health)
-		to_chat(user, SPAN_NOTICE("It is showing some wear and tear."))
+	if(can_take_damage())
+		if(!is_functional())
+			to_chat(user, SPAN_WARNING("It is completely broken."))
+		else if(get_percent_health() < 50)
+			to_chat(user, SPAN_WARNING("It is heavily damaged."))
+		else if(get_percent_health() < 75)
+			to_chat(user, SPAN_NOTICE("It is showing signs of damage."))
+		else if(is_damaged())
+			to_chat(user, SPAN_NOTICE("It is showing some wear and tear."))
 
 //Machines handle damaging for us, so don't do it twice
 /obj/item/stock_parts/explosion_act(severity)

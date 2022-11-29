@@ -893,7 +893,7 @@
 /turf/simulated/floor/tiled/dark/airless,
 /area/constructionsite/hallway/fore)
 "cY" = (
-/obj/structure/filingcabinet/tall,
+/obj/structure/filing_cabinet/tall,
 /turf/simulated/floor/airless,
 /area/constructionsite/hallway/fore)
 "cZ" = (

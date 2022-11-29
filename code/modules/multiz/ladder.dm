@@ -37,10 +37,14 @@
 	if(maploading)
 		for(var/obj/structure/ladder/ladder in loc)
 			if(ladder != src)
+				log_warning("Deleting duplicate ladder at ([x], [y], [z])!")
 				qdel(ladder)
-		if(HasBelow(z) && (locate(/obj/structure/ladder) in GetBelow(src)))
-			var/turf/T = get_turf(src)
+		var/turf/T = get_turf(src)
+		if((locate(/obj/structure/ladder) in GetBelow(src)) && (!(locate(/obj/structure/lattice) in loc) || !T.is_open()))
+			var/old_turf_type = T.type
 			T.ReplaceWithLattice()
+			//Gonna keep logging those, since it's not clear if it's always a desired behavior. Since mappers would probably not want to rely on this.
+			log_debug("Ladder replaced turf type '[old_turf_type]' at ([x], [y], [z]) with a lattice and open turf '[loc]' of type '[loc.type]'.")
 	find_connections()
 	set_extension(src, /datum/extension/turf_hand)
 

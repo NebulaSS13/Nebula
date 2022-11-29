@@ -57,10 +57,6 @@
 
 	for(var/obj/item/storage/S in src)
 		L += S.return_inv()
-	for(var/obj/item/gift/G in src)
-		L += G.gift
-		if (istype(G.gift, /obj/item/storage))
-			L += G.gift:return_inv()
 	return L
 
 /obj/item/storage/proc/show_to(mob/user)
@@ -134,7 +130,10 @@
 			return 0
 
 	//If attempting to lable the storage item, silently fail to allow it
-	if(istype(W, /obj/item/hand_labeler) && user && user.a_intent != I_HELP)
+	if(istype(W, /obj/item/hand_labeler) && user?.a_intent != I_HELP)
+		return FALSE
+	//Prevent package wrapper from being inserted by default
+	if(istype(W, /obj/item/stack/package_wrap) && user?.a_intent != I_HELP)
 		return FALSE
 
 	// Don't allow insertion of unsafed compressed matter implants

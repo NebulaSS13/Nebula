@@ -349,7 +349,6 @@
 	. = ..()
 	to_chat(user, "It [get_visible_durability()].")
 
-
 /obj/item/drill_head/steel
 	material = /decl/material/solid/metal/steel
 

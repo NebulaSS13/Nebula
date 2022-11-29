@@ -144,14 +144,10 @@
 
 /obj/item/clothing/shoes/proc/handle_movement(var/turf/walking, var/running)
 	if (attached_cuffs && running)
-		if (attached_cuffs.health)
-			attached_cuffs.health -= 1
-			if (attached_cuffs.health < 1)
-				visible_message(SPAN_WARNING("\The [attached_cuffs] attached to \the [src] snap and fall away!"), range = 1)
-				verbs -= /obj/item/clothing/shoes/proc/remove_cuffs
-				LAZYINITLIST(slowdown_per_slot[slot_shoes_str])
-				slowdown_per_slot[slot_shoes_str] -= attached_cuffs.elastic ? 10 : 15
-				QDEL_NULL(attached_cuffs)
+		attached_cuffs.take_damage(1, armor_pen = 100)
+		if(QDELETED(attached_cuffs))
+			verbs -= /obj/item/clothing/shoes/proc/remove_cuffs
+			attached_cuffs = null
 	return
 
 /obj/item/clothing/shoes/update_clothing_icon()

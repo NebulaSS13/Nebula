@@ -73,7 +73,7 @@
 	name = "holosign switch"
 	desc = "A remote control switch for holosign."
 	icon = 'icons/obj/power.dmi'
-	icon_state = "crema_switch"
+	icon_state = "crematorium_switch"
 
 /obj/machinery/button/holosign/on_update_icon()
 	icon_state = "light[active]"

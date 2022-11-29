@@ -2,20 +2,20 @@
 	name =          ""
 	icon =          'icons/effects/landmarks.dmi'
 	icon_state =    "x2"
-	mouse_opacity = 0
-	alpha =         0
 	simulated =     FALSE
 	density =       FALSE
-	opacity =       FALSE
 	anchored =      TRUE
 	unacidable =    TRUE
-	invisibility =  INVISIBILITY_MAXIMUM+1
-	is_spawnable_type = FALSE
 	abstract_type = /obj/abstract
 
 /obj/abstract/Initialize()
 	. = ..()
 	verbs.Cut()
+	//Let mappers see the damn thing by just making them invisible here
+	opacity       =  FALSE
+	alpha         =  0
+	mouse_opacity = 0
+	invisibility  =  INVISIBILITY_MAXIMUM+1
 
 /obj/abstract/explosion_act()
 	SHOULD_CALL_PARENT(FALSE)

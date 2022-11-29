@@ -97,12 +97,18 @@
 		for(var/tag in vents_in_area) // The point of this test is that while the names list is registered at init, the info is transmitted by radio.
 			if(!A.air_vent_info[tag])
 				var/obj/machinery/atmospherics/unary/vent_pump/V = vents_in_area[tag]
-				log_bad("Vent [A.air_vent_names[tag]] ([V.x], [V.y], [V.z]) with id_tag [tag] did not update the air alarm in area [A].")
+				var/logtext = "Vent [A.air_vent_names[tag]] ([V.x], [V.y], [V.z]) with id_tag [tag] did not update the air alarm in area [A]."
+				if(!V.operable())
+					logtext = "[logtext] The vent was not functional."
+				log_bad(logtext)
 				failed = TRUE
 		for(var/tag in scrubbers_in_area)
 			if(!A.air_scrub_info[tag])
 				var/obj/machinery/atmospherics/unary/vent_scrubber/V = scrubbers_in_area[tag]
-				log_bad("Scrubber [A.air_scrub_names[tag]] ([V.x], [V.y], [V.z]) with id_tag [tag] did not update the air alarm in area [A].")
+				var/logtext = "Scrubber [A.air_scrub_names[tag]] ([V.x], [V.y], [V.z]) with id_tag [tag] did not update the air alarm in area [A]."
+				if(!V.operable())
+					logtext = "[logtext] The scrubber was not functional."
+				log_bad(logtext)
 				failed = TRUE
 
 	if(failed)
