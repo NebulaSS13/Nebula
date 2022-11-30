@@ -36,7 +36,7 @@
 
 /datum/computer_file/program/PopulateClone(datum/computer_file/program/clone)
 	clone = ..()
-	clone.read_access        = listDeeperCopy(read_access)
+	clone.read_access        = deepCopyList(read_access)
 	clone.nanomodule_path    = nanomodule_path
 	clone.filedesc           = filedesc
 	clone.program_icon_state = program_icon_state

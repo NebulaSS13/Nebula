@@ -147,7 +147,7 @@
 	clone.set_gender(gender, FALSE)
 	clone.set_dir(dir)
 
-	clone.blood_DNA    = listDeeperCopy(blood_DNA)
+	clone.blood_DNA    = listDeepClone(blood_DNA, TRUE)
 	clone.was_bloodied = was_bloodied
 	clone.blood_color  = blood_color
 	clone.germ_level   = germ_level

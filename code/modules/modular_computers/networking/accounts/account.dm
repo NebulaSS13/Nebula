@@ -78,8 +78,8 @@
 	clone.password      = password
 	clone.can_login     = can_login
 	clone.suspended     = suspended
-	clone.groups        = listDeeperCopy(groups)
-	clone.parent_groups = listDeeperCopy(parent_groups)
+	clone.groups        = groups.Copy()
+	clone.parent_groups = parent_groups.Copy()
 	clone.fullname      = fullname
 
 	// TODO: Don't backup e-mails for now - they are themselves other files which makes this complicated. In the future

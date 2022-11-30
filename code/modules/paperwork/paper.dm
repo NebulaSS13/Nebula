@@ -61,8 +61,8 @@
 	clone.rigged             = rigged
 	clone.is_crumpled        = is_crumpled
 	clone.stamp_text         = stamp_text
-	clone.applied_stamps     = LAZYLEN(applied_stamps)? listDeeperCopy(applied_stamps) : null
-	clone.metadata           = LAZYLEN(metadata)?       listDeeperCopy(metadata)       : null
+	clone.applied_stamps     = LAZYLEN(applied_stamps)? listDeepClone(applied_stamps) : null
+	clone.metadata           = LAZYLEN(metadata)?       listDeepClone(metadata, TRUE) : null
 	return clone
 
 /obj/item/paper/Clone()

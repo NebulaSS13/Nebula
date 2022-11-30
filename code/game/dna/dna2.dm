@@ -92,7 +92,7 @@ var/global/list/datum/dna/gene/dna_genes[0]
 	clone.b_type         = b_type
 	clone.real_name      = real_name
 	clone.species        = species || global.using_map.default_species
-	clone.body_markings  = listDeeperCopy(body_markings)
+	clone.body_markings  = deepCopyList(body_markings)
 	for(var/b in 1 to DNA_SE_LENGTH)
 		clone.SE[b] = SE[b]
 		if(b <= DNA_UI_LENGTH)
