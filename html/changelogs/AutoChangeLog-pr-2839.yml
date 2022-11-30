@@ -1,5 +1,0 @@
-author: PsyCommando
-delete-after: true
-changes:
-  - bugfix: Fixed some wall-mounted machines acting as fully constructed, when a circuitboard
-      was installed and no wiring installed.
