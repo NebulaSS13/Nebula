@@ -32,7 +32,7 @@ var/global/obj/temp_reagents_holder = new
 //Don't forget to call set_holder() after getting the copy!
 /datum/reagents/PopulateClone(datum/reagents/clone)
 	clone.primary_reagent = primary_reagent
-	clone.reagent_volumes = reagent_volumes.Copy()
+	clone.reagent_volumes = reagent_volumes?.Copy()
 	clone.reagent_data    = listDeepClone(reagent_data, TRUE)
 	clone.total_volume    = total_volume
 	clone.maximum_volume  = maximum_volume
