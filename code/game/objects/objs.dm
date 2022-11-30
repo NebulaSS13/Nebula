@@ -266,8 +266,8 @@
 //#TODO: Implement me for all other objects!
 /obj/PopulateClone(obj/clone)
 	clone = ..()
-	clone.req_access  = listDeeperCopy(req_access)
-	clone.matter      = listDeeperCopy(matter)
+	clone.req_access  = deepCopyList(req_access)
+	clone.matter      = deepCopyList(matter)
 	clone.anchor_fall = anchor_fall
 
 	//#TODO: once item damage in, check health!

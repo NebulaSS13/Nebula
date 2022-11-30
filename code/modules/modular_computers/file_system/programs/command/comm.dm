@@ -22,8 +22,7 @@
 
 /datum/computer_file/program/comm/PopulateClone(datum/computer_file/program/comm/clone)
 	clone = ..()
-	clone.message_core.messages = null
-	clone.message_core.messages = listDeeperCopy(message_core.messages)
+	clone.message_core = message_core.Clone()
 	return clone
 
 /datum/nano_module/program/comm
@@ -318,6 +317,11 @@ var/global/last_message_id = 0
 
 /datum/comm_message_listener/proc/Remove(var/list/message)
 	messages -= list(message)
+
+/datum/comm_message_listener/PopulateClone(datum/comm_message_listener/clone)
+	clone = ..()
+	clone.messages = listDeepClone(messages)
+	return clone
 
 /proc/post_status(var/command, var/data1, var/data2)
 
