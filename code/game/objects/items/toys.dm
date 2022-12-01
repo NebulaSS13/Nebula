@@ -41,7 +41,8 @@
 	icon_state                    = "waterballoon-e"
 	item_state                    = "balloon-empty"
 	w_class                       = ITEM_SIZE_TINY
-	item_flags                    = ITEM_FLAG_NO_BLUDGEON | ITEM_FLAG_HOLLOW
+	item_flags                    = ITEM_FLAG_NO_BLUDGEON
+	obj_flags                     = OBJ_FLAG_HOLLOW
 	atom_flags                    = ATOM_FLAG_OPEN_CONTAINER
 	hitsound                      = 'sound/weapons/throwtap.ogg'
 	throw_speed                   = 4

@@ -190,4 +190,4 @@
 	throw_speed = 4
 	throw_range = 5
 	material    = /decl/material/solid/cardboard
-	item_flags  = ITEM_FLAG_HOLLOW
+	obj_flags   = OBJ_FLAG_HOLLOW
