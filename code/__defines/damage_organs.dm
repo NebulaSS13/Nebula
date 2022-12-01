@@ -33,6 +33,7 @@
 #define FIRE_DAMAGE_MODIFIER 0.0215 // Higher values result in more external fire damage to the skin. (default 0.0215)
 #define  AIR_DAMAGE_MODIFIER 2.025  // More means less damage from hot air scalding lungs, less = more damage. (default 2.025)
 
+//Armor Resistance Types
 #define DEF_MELEE  "melee"   //Blunt and cutting weapons
 #define DEF_BULLET "bullet"  //Kinectic projectiles
 #define DEF_BOMB   "bomb"    //Explosions
@@ -40,6 +41,7 @@
 #define DEF_ENERGY "energy"  //Intense heat, electricity
 #define DEF_RAD    "rad"     //Ionizing radiation
 #define DEF_BIO    "bio"     //Biohazards toxin damage
+
 // Organ defines.
 #define ORGAN_CUT_AWAY   BITFLAG(0)  // The organ is in the process of being surgically removed.
 #define ORGAN_BLEEDING   BITFLAG(1)  // The organ is currently bleeding.

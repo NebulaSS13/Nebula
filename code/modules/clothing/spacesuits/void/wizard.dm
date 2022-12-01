@@ -3,7 +3,7 @@
 	name = "gem-encrusted voidsuit helmet"
 	desc = "A bizarre gem-encrusted helmet that radiates magical energies."
 	icon = 'icons/clothing/spacesuit/void/wizard/helmet.dmi'
-	//unacidable = 1 //No longer shall our kind be foiled by lone chemists with spray bottles! //I love these kinds of comments
+	unacidable = 1 //No longer shall our kind be foiled by lone chemists with spray bottles!
 	armor = list(
 		DEF_MELEE = ARMOR_MELEE_RESISTANT,
 		DEF_BULLET = ARMOR_BALLISTIC_PISTOL,

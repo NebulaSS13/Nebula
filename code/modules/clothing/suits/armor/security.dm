@@ -18,11 +18,11 @@
 	desc = "An armoured jacket with silver rank pips and livery."
 	icon = 'icons/clothing/suit/warden.dmi'
 	armor = list(
-		melee = ARMOR_MELEE_RESISTANT,
+		DEF_MELEE  = ARMOR_MELEE_RESISTANT,
 		DEF_BULLET = ARMOR_BALLISTIC_SMALL,
-		DEF_LASER = ARMOR_LASER_HANDGUNS,
+		DEF_LASER  = ARMOR_LASER_HANDGUNS,
 		DEF_ENERGY = ARMOR_ENERGY_MINOR,
-		DEF_BOMB = ARMOR_BOMB_MINOR
+		DEF_BOMB   = ARMOR_BOMB_MINOR
 		)
 	body_parts_covered = SLOT_UPPER_BODY|SLOT_LOWER_BODY|SLOT_ARMS
 	cold_protection = SLOT_UPPER_BODY|SLOT_LOWER_BODY|SLOT_ARMS
