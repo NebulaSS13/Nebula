@@ -176,7 +176,8 @@
 	throwforce = 5
 	throw_speed = 5
 	throw_range = 10
-	matter = list("cloth" = 1875, "plasteel" = 350)
+	material = /decl/material/solid/cloth
+	matter = list(/decl/material/solid/metal/plasteel = MATTER_AMOUNT_REINFORCEMENT)
 	max_amount = 30
 	center_of_mass = null
 	attack_verb = list("hit", "bludgeoned", "whacked")
