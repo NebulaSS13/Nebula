@@ -16,7 +16,7 @@
 	can_escape = TRUE //snip snip
 	pass_flags = PASS_FLAG_TABLE
 	natural_armor = list(
-		DEF_MELEE = ARMOR_MELEE_KNIVES
+		ARMOR_MELEE = ARMOR_MELEE_KNIVES
 		)
 
 	meat_amount =   3

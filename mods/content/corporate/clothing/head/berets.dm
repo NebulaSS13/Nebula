@@ -38,12 +38,12 @@
 	name = "heavy asset protection beret"
 	desc = "An armored red beret adorned with the crest of corporate asset protection. Doesn't sacrifice style or safety."
 	armor = list(
-		DEF_MELEE = ARMOR_MELEE_VERY_HIGH, 
-		DEF_BULLET = ARMOR_BALLISTIC_RIFLE, 
-		DEF_LASER = ARMOR_LASER_HANDGUNS,
-		DEF_ENERGY = ARMOR_ENERGY_SMALL, 
-		DEF_BOMB = ARMOR_BOMB_PADDED, 
-		DEF_BIO = ARMOR_BIO_RESISTANT, 
-		DEF_RAD = ARMOR_RAD_MINOR
+		ARMOR_MELEE = ARMOR_MELEE_VERY_HIGH,
+		ARMOR_BULLET = ARMOR_BALLISTIC_RIFLE,
+		ARMOR_LASER = ARMOR_LASER_HANDGUNS,
+		ARMOR_ENERGY = ARMOR_ENERGY_SMALL,
+		ARMOR_BOMB = ARMOR_BOMB_PADDED,
+		ARMOR_BIO = ARMOR_BIO_RESISTANT,
+		ARMOR_RAD = ARMOR_RAD_MINOR
 	)
 	siemens_coefficient = 0.9

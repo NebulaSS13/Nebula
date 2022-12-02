@@ -4,9 +4,9 @@
 	icon = 'icons/clothing/under/uniform_tacticool.dmi'
 	has_sensor = 0
 	armor = list(
-		DEF_MELEE = ARMOR_MELEE_SMALL, 
-		DEF_BULLET = ARMOR_BALLISTIC_MINOR, 
-		DEF_LASER = ARMOR_LASER_MINOR
+		ARMOR_MELEE = ARMOR_MELEE_SMALL,
+		ARMOR_BULLET = ARMOR_BALLISTIC_MINOR,
+		ARMOR_LASER = ARMOR_LASER_MINOR
 		)
 	siemens_coefficient = 0.9
 	matter = list(/decl/material/solid/metal/plasteel = MATTER_AMOUNT_TRACE)

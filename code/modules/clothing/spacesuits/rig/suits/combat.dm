@@ -4,13 +4,13 @@
 	suit_type = "combat hardsuit"
 	icon = 'icons/clothing/rigs/rig_security.dmi'
 	armor = list(
-		DEF_MELEE = ARMOR_MELEE_VERY_HIGH,
-		DEF_BULLET = ARMOR_BALLISTIC_RIFLE,
-		DEF_LASER = ARMOR_LASER_MAJOR,
-		DEF_ENERGY = ARMOR_ENERGY_MINOR,
-		DEF_BOMB = ARMOR_BOMB_RESISTANT,
-		DEF_BIO = ARMOR_BIO_SHIELDED,
-		DEF_RAD = ARMOR_RAD_RESISTANT
+		ARMOR_MELEE = ARMOR_MELEE_VERY_HIGH,
+		ARMOR_BULLET = ARMOR_BALLISTIC_RIFLE,
+		ARMOR_LASER = ARMOR_LASER_MAJOR,
+		ARMOR_ENERGY = ARMOR_ENERGY_MINOR,
+		ARMOR_BOMB = ARMOR_BOMB_RESISTANT,
+		ARMOR_BIO = ARMOR_BIO_SHIELDED,
+		ARMOR_RAD = ARMOR_RAD_RESISTANT
 		)
 	online_slowdown = 1
 	offline_slowdown = 3
@@ -77,13 +77,13 @@
 	icon = 'icons/clothing/rigs/rig_military.dmi'
 	suit_type = "military hardsuit"
 	armor = list(
-		DEF_MELEE = ARMOR_MELEE_VERY_HIGH,
-		DEF_BULLET = ARMOR_BALLISTIC_AP,
-		DEF_LASER = ARMOR_LASER_RIFLES,
-		DEF_ENERGY = ARMOR_ENERGY_MINOR,
-		DEF_BOMB = ARMOR_BOMB_RESISTANT,
-		DEF_BIO = ARMOR_BIO_SHIELDED,
-		DEF_RAD = ARMOR_RAD_MINOR
+		ARMOR_MELEE = ARMOR_MELEE_VERY_HIGH,
+		ARMOR_BULLET = ARMOR_BALLISTIC_AP,
+		ARMOR_LASER = ARMOR_LASER_RIFLES,
+		ARMOR_ENERGY = ARMOR_ENERGY_MINOR,
+		ARMOR_BOMB = ARMOR_BOMB_RESISTANT,
+		ARMOR_BIO = ARMOR_BIO_SHIELDED,
+		ARMOR_RAD = ARMOR_RAD_MINOR
 		)
 	online_slowdown = 1
 	offline_slowdown = 3
@@ -102,15 +102,15 @@
 		/obj/item/wirecutters,
 		/obj/item/wrench,
 		/obj/item/multitool,
-		/obj/item/radio, 
+		/obj/item/radio,
 		/obj/item/scanner/gas,
 		/obj/item/storage/briefcase/inflatable,
 		/obj/item/baton,
 		/obj/item/gun,
-		/obj/item/storage/firstaid, 
-		/obj/item/chems/hypospray, 
-		/obj/item/chems/inhaler, 
-		/obj/item/roller, 
+		/obj/item/storage/firstaid,
+		/obj/item/chems/hypospray,
+		/obj/item/chems/inhaler,
+		/obj/item/roller,
 		/obj/item/suit_cooling_unit
 	)
 

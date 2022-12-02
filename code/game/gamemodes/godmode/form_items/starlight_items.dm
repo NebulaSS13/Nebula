@@ -47,12 +47,12 @@
 	desc = "Now, you can be the knight in shining armor you've always wanted to be. With complementary sun insignia."
 	icon = 'icons/clothing/suit/deity/star_champion.dmi'
 	armor = list(
-		DEF_MELEE = ARMOR_MELEE_VERY_HIGH,
-		DEF_BULLET = ARMOR_BALLISTIC_AP,
-		DEF_LASER = ARMOR_LASER_HANDGUNS,
-		DEF_ENERGY = ARMOR_ENERGY_RESISTANT,
-		DEF_BOMB = ARMOR_BOMB_PADDED,
-		DEF_BIO = ARMOR_BIO_MINOR
+		ARMOR_MELEE = ARMOR_MELEE_VERY_HIGH,
+		ARMOR_BULLET = ARMOR_BALLISTIC_AP,
+		ARMOR_LASER = ARMOR_LASER_HANDGUNS,
+		ARMOR_ENERGY = ARMOR_ENERGY_RESISTANT,
+		ARMOR_BOMB = ARMOR_BOMB_PADDED,
+		ARMOR_BIO = ARMOR_BIO_MINOR
 	)
 
 /obj/item/clothing/head/helmet/sunhelm
@@ -66,12 +66,12 @@
 	desc = "The robes of a priest. One that praises the sun, apparently. Well, it certainly reflects light well."
 	icon = 'icons/clothing/suit/deity/star_oracle.dmi'
 	armor = list(
-		DEF_MELEE = ARMOR_MELEE_KNIVES,
-		DEF_BULLET = ARMOR_BALLISTIC_SMALL,
-		DEF_LASER = ARMOR_LASER_HANDGUNS,
-		DEF_ENERGY = ARMOR_ENERGY_RESISTANT,
-		DEF_BOMB = ARMOR_BOMB_PADDED,
-		DEF_BIO = ARMOR_BIO_MINOR
+		ARMOR_MELEE = ARMOR_MELEE_KNIVES,
+		ARMOR_BULLET = ARMOR_BALLISTIC_SMALL,
+		ARMOR_LASER = ARMOR_LASER_HANDGUNS,
+		ARMOR_ENERGY = ARMOR_ENERGY_RESISTANT,
+		ARMOR_BOMB = ARMOR_BOMB_PADDED,
+		ARMOR_BIO = ARMOR_BIO_MINOR
 	)
 
 /obj/item/clothing/suit/armor/sunrobe/Initialize()

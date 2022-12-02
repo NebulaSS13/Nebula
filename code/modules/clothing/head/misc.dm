@@ -215,8 +215,8 @@
 	flags_inv = BLOCK_HEAD_HAIR
 	color = "#5f5f5f"
 	armor = list(
-		DEF_MELEE = ARMOR_MELEE_KNIVES,
-		DEF_BOMB = ARMOR_BOMB_PADDED
+		ARMOR_MELEE = ARMOR_MELEE_KNIVES,
+		ARMOR_BOMB = ARMOR_BOMB_PADDED
 		)
 
 /obj/item/clothing/head/tank/olive

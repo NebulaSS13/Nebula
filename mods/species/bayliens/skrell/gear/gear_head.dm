@@ -3,13 +3,13 @@
 	icon = 'mods/species/bayliens/skrell/icons/clothing/head/skrell_helmet_white.dmi'
 	desc = "Smoothly contoured and polished to a shine. Still looks like a fishbowl."
 	armor = list(
-		DEF_MELEE = ARMOR_MELEE_KNIVES,
-		DEF_BULLET = ARMOR_BALLISTIC_PISTOL,
-		DEF_LASER = ARMOR_LASER_MAJOR,
-		DEF_ENERGY = ARMOR_ENERGY_STRONG,
-		DEF_BOMB = ARMOR_BOMB_RESISTANT,
-		DEF_BIO = ARMOR_BIO_SHIELDED,
-		DEF_RAD = ARMOR_RAD_SHIELDED
+		ARMOR_MELEE = ARMOR_MELEE_KNIVES,
+		ARMOR_BULLET = ARMOR_BALLISTIC_PISTOL,
+		ARMOR_LASER = ARMOR_LASER_MAJOR,
+		ARMOR_ENERGY = ARMOR_ENERGY_STRONG,
+		ARMOR_BOMB = ARMOR_BOMB_RESISTANT,
+		ARMOR_BIO = ARMOR_BIO_SHIELDED,
+		ARMOR_RAD = ARMOR_RAD_SHIELDED
 		)
 
 /obj/item/clothing/head/helmet/space/void/skrell/mob_can_equip(mob/living/M, slot, disable_warning = 0)

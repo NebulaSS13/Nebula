@@ -17,7 +17,7 @@
 	flags_inv = HIDETAIL
 
 	body_parts_covered = SLOT_UPPER_BODY | SLOT_LOWER_BODY| SLOT_ARMS
-	armor = list(DEF_LASER = ARMOR_LASER_MINOR, DEF_ENERGY = ARMOR_ENERGY_MINOR, DEF_BOMB = ARMOR_BOMB_MINOR)
+	armor = list(ARMOR_LASER = ARMOR_LASER_MINOR, ARMOR_ENERGY = ARMOR_ENERGY_MINOR, ARMOR_BOMB = ARMOR_BOMB_MINOR)
 	allowed = list(/obj/item/flashlight,/obj/item/tank/emergency,/obj/item/chems/spray/extinguisher,/obj/item/clothing/head/hardhat)
 
 	gas_transfer_coefficient = 0.90
@@ -45,11 +45,11 @@
 	desc = "Use in case of bomb."
 	icon = 'icons/clothing/head/bombsuit.dmi'
 	armor = list(
-		DEF_MELEE = ARMOR_MELEE_VERY_HIGH,
-		DEF_BULLET = ARMOR_BALLISTIC_MINOR,
-		DEF_LASER = ARMOR_LASER_SMALL,
-		DEF_ENERGY = ARMOR_ENERGY_RESISTANT,
-		DEF_BOMB = ARMOR_BOMB_SHIELDED
+		ARMOR_MELEE = ARMOR_MELEE_VERY_HIGH,
+		ARMOR_BULLET = ARMOR_BALLISTIC_MINOR,
+		ARMOR_LASER = ARMOR_LASER_SMALL,
+		ARMOR_ENERGY = ARMOR_ENERGY_RESISTANT,
+		ARMOR_BOMB = ARMOR_BOMB_SHIELDED
 		)
 	flags_inv = HIDEMASK|HIDEEARS|BLOCK_HEAD_HAIR
 	body_parts_covered = SLOT_HEAD|SLOT_FACE|SLOT_EYES|SLOT_EARS
@@ -63,11 +63,11 @@
 	gas_transfer_coefficient = 0.01
 	permeability_coefficient = 0.01
 	armor = list(
-		DEF_MELEE = ARMOR_MELEE_VERY_HIGH,
-		DEF_BULLET = ARMOR_BALLISTIC_MINOR,
-		DEF_LASER = ARMOR_LASER_SMALL,
-		DEF_ENERGY = ARMOR_ENERGY_RESISTANT,
-		DEF_BOMB = ARMOR_BOMB_SHIELDED
+		ARMOR_MELEE = ARMOR_MELEE_VERY_HIGH,
+		ARMOR_BULLET = ARMOR_BALLISTIC_MINOR,
+		ARMOR_LASER = ARMOR_LASER_SMALL,
+		ARMOR_ENERGY = ARMOR_ENERGY_RESISTANT,
+		ARMOR_BOMB = ARMOR_BOMB_SHIELDED
 		)
 	flags_inv = HIDEJUMPSUIT|HIDETAIL
 	heat_protection = SLOT_UPPER_BODY|SLOT_LOWER_BODY
@@ -97,8 +97,8 @@
 	flags_inv = HIDEMASK|HIDEEARS|HIDEEYES|HIDEFACE|BLOCK_ALL_HAIR
 	body_parts_covered = SLOT_HEAD|SLOT_FACE|SLOT_EYES|SLOT_EARS
 	armor = list(
-		DEF_BIO = ARMOR_BIO_RESISTANT,
-		DEF_RAD = ARMOR_RAD_SHIELDED
+		ARMOR_BIO = ARMOR_BIO_RESISTANT,
+		ARMOR_RAD = ARMOR_RAD_SHIELDED
 		)
 	matter = list(
 		/decl/material/solid/plastic = MATTER_AMOUNT_REINFORCEMENT,
@@ -117,8 +117,8 @@
 	body_parts_covered = SLOT_UPPER_BODY|SLOT_LOWER_BODY|SLOT_LEGS|SLOT_ARMS|SLOT_HANDS|SLOT_FEET
 	allowed = list(/obj/item/flashlight,/obj/item/tank/emergency,/obj/item/clothing/head/radiation,/obj/item/clothing/mask/gas,/obj/item/geiger)
 	armor = list(
-		DEF_BIO = ARMOR_BIO_RESISTANT,
-		DEF_RAD = ARMOR_RAD_SHIELDED
+		ARMOR_BIO = ARMOR_BIO_RESISTANT,
+		ARMOR_RAD = ARMOR_RAD_SHIELDED
 		)
 	flags_inv = HIDEJUMPSUIT|HIDETAIL|HIDEGLOVES|HIDESHOES
 	matter = list(
@@ -141,8 +141,8 @@
 	icon = 'icons/clothing/head/chem_hood.dmi'
 	permeability_coefficient = 0
 	armor = list(
-		DEF_BIO = ARMOR_BIO_RESISTANT,
-		DEF_RAD = ARMOR_RAD_MINOR
+		ARMOR_BIO = ARMOR_BIO_RESISTANT,
+		ARMOR_RAD = ARMOR_RAD_MINOR
 		)
 	flags_inv = HIDEEARS|BLOCK_HEAD_HAIR
 	item_flags = ITEM_FLAG_THICKMATERIAL
@@ -164,8 +164,8 @@
 	body_parts_covered = SLOT_UPPER_BODY|SLOT_LOWER_BODY|SLOT_LEGS|SLOT_FEET|SLOT_ARMS|SLOT_HANDS
 	allowed = list(/obj/item/tank/emergency,/obj/item/pen,/obj/item/flashlight/pen,/obj/item/scanner/health,/obj/item/scanner/breath,/obj/item/ano_scanner,/obj/item/clothing/head/chem_hood,/obj/item/clothing/mask/gas,/obj/item/geiger)
 	armor = list(
-		DEF_BIO = ARMOR_BIO_RESISTANT,
-		DEF_RAD = ARMOR_RAD_MINOR
+		ARMOR_BIO = ARMOR_BIO_RESISTANT,
+		ARMOR_RAD = ARMOR_RAD_MINOR
 		)
 	flags_inv = HIDEGLOVES|HIDESHOES|HIDEJUMPSUIT|HIDETAIL
 	item_flags = ITEM_FLAG_THICKMATERIAL

@@ -34,13 +34,13 @@
 #define  AIR_DAMAGE_MODIFIER 2.025  // More means less damage from hot air scalding lungs, less = more damage. (default 2.025)
 
 //Armor Resistance Types
-#define DEF_MELEE  "melee"   //Blunt and cutting weapons
-#define DEF_BULLET "bullet"  //Kinectic projectiles
-#define DEF_BOMB   "bomb"    //Explosions
-#define DEF_LASER  "laser"   //Laser weapons
-#define DEF_ENERGY "energy"  //Intense heat, electricity
-#define DEF_RAD    "rad"     //Ionizing radiation
-#define DEF_BIO    "bio"     //Biohazards toxin damage
+#define ARMOR_MELEE  "melee"   //Blunt and cutting weapons
+#define ARMOR_BULLET "bullet"  //Kinectic projectiles
+#define ARMOR_BOMB   "bomb"    //Explosions
+#define ARMOR_LASER  "laser"   //Laser weapons
+#define ARMOR_ENERGY "energy"  //Intense heat, electricity
+#define ARMOR_RAD    "rad"     //Ionizing radiation
+#define ARMOR_BIO    "bio"     //Biohazards toxin damage
 
 // Organ defines.
 #define ORGAN_CUT_AWAY   BITFLAG(0)  // The organ is in the process of being surgically removed.

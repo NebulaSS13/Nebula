@@ -77,23 +77,23 @@
 	switch(damage_type)
 		if(BRUTE)
 			if(damage_flags & DAM_BULLET)
-				key = DEF_BULLET
+				key = ARMOR_BULLET
 			else if(damage_flags & DAM_EXPLODE)
-				key = DEF_BOMB
+				key = ARMOR_BOMB
 			else
-				key = DEF_MELEE
+				key = ARMOR_MELEE
 		if(BURN)
 			if(damage_flags & DAM_LASER)
-				key = DEF_LASER
+				key = ARMOR_LASER
 			else if(damage_flags & DAM_EXPLODE)
-				key = DEF_BOMB
+				key = ARMOR_BOMB
 			else
-				key = DEF_ENERGY
+				key = ARMOR_ENERGY
 		if(TOX)
 			if(damage_flags & DAM_BIO)
-				key = DEF_BIO // Otherwise just not blocked by default.
+				key = ARMOR_BIO // Otherwise just not blocked by default.
 		if(IRRADIATE)
-			key = DEF_RAD
+			key = ARMOR_RAD
 	return key
 
 /datum/extension/armor/toggle

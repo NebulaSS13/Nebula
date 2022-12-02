@@ -18,13 +18,13 @@
 		/obj/item/tank
 	)
 	armor = list(
-		DEF_MELEE = ARMOR_MELEE_MAJOR, 
-		DEF_BULLET = ARMOR_BALLISTIC_PISTOL, 
-		DEF_LASER = ARMOR_LASER_HANDGUNS,
-		DEF_ENERGY = ARMOR_ENERGY_MINOR, 
-		DEF_BOMB = ARMOR_BOMB_PADDED, 
-		DEF_BIO = ARMOR_BIO_SMALL, 
-		DEF_RAD = ARMOR_RAD_MINOR
+		ARMOR_MELEE = ARMOR_MELEE_MAJOR,
+		ARMOR_BULLET = ARMOR_BALLISTIC_PISTOL,
+		ARMOR_LASER = ARMOR_LASER_HANDGUNS,
+		ARMOR_ENERGY = ARMOR_ENERGY_MINOR,
+		ARMOR_BOMB = ARMOR_BOMB_PADDED,
+		ARMOR_BIO = ARMOR_BIO_SMALL,
+		ARMOR_RAD = ARMOR_RAD_MINOR
 		)
 	siemens_coefficient = 0.6
 	heat_protection = SLOT_UPPER_BODY|SLOT_LOWER_BODY|SLOT_LEGS|SLOT_FEET|SLOT_ARMS|SLOT_HANDS
@@ -75,10 +75,10 @@
 	icon = 'mods/species/vox/icons/clothing/scrap_suit.dmi'
 	allowed = list(/obj/item/gun, /obj/item/tank)
 	armor = list(
-		DEF_MELEE = ARMOR_MELEE_VERY_HIGH,
-		DEF_BULLET = ARMOR_BALLISTIC_PISTOL,
-		DEF_LASER = ARMOR_LASER_MINOR,
-		DEF_BOMB = ARMOR_BOMB_PADDED) //Higher melee armor versus lower everything else.
+		ARMOR_MELEE = ARMOR_MELEE_VERY_HIGH,
+		ARMOR_BULLET = ARMOR_BALLISTIC_PISTOL,
+		ARMOR_LASER = ARMOR_LASER_MINOR,
+		ARMOR_BOMB = ARMOR_BOMB_PADDED) //Higher melee armor versus lower everything else.
 	body_parts_covered = SLOT_UPPER_BODY|SLOT_ARMS|SLOT_LOWER_BODY|SLOT_LEGS
 	bodytype_equip_flags = BODY_FLAG_VOX
 	siemens_coefficient = 1 //Its literally metal

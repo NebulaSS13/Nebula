@@ -1,4 +1,4 @@
-#define BASIC_ARMOUR_VALUES list(DEF_MELEE = ARMOR_MELEE_MAJOR, DEF_BULLET = ARMOR_BALLISTIC_RIFLE, DEF_LASER = ARMOR_LASER_HEAVY, DEF_ENERGY = ARMOR_ENERGY_STRONG, DEF_BOMB = ARMOR_BOMB_RESISTANT,DEF_RAD  = ARMOR_RAD_SHIELDED)
+#define BASIC_ARMOUR_VALUES list(ARMOR_MELEE = ARMOR_MELEE_MAJOR, ARMOR_BULLET = ARMOR_BALLISTIC_RIFLE, ARMOR_LASER = ARMOR_LASER_HEAVY, ARMOR_ENERGY = ARMOR_ENERGY_STRONG, ARMOR_BOMB = ARMOR_BOMB_RESISTANT,ARMOR_RAD  = ARMOR_RAD_SHIELDED)
 
 /decl/material/proc/generate_armor_values()
 	if(is_brittle())
@@ -7,15 +7,15 @@
 		armor_degradation_speed = max(0.01, 0.5 * (200-integrity)/200)
 
 	var/list/armor = BASIC_ARMOUR_VALUES
-	for(var/val in list(DEF_MELEE, DEF_BOMB))
+	for(var/val in list(ARMOR_MELEE, ARMOR_BOMB))
 		armor[val] *= hardness / 100
-	armor[DEF_BOMB] *= weight / MAT_VALUE_NORMAL
-	armor[DEF_BULLET] *= (hardness / 100) ** 2
+	armor[ARMOR_BOMB] *= weight / MAT_VALUE_NORMAL
+	armor[ARMOR_BULLET] *= (hardness / 100) ** 2
 	if(is_brittle())
-		armor[DEF_BULLET] *= 0.2
-	armor[DEF_LASER] *= (reflectiveness / 100) ** 2
-	armor[DEF_ENERGY] *= reflectiveness / 100
-	armor[DEF_RAD] *= (weight / 100) ** 2
+		armor[ARMOR_BULLET] *= 0.2
+	armor[ARMOR_LASER] *= (reflectiveness / 100) ** 2
+	armor[ARMOR_ENERGY] *= reflectiveness / 100
+	armor[ARMOR_RAD] *= (weight / 100) ** 2
 
 	//Sanitizing the list, rounding and discarding empty entries
 	for(var/val in armor)
