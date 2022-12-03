@@ -9,6 +9,7 @@
 #define ZM_ALLOW_ATMOS     8	//! If this turf permits passage of air.
 #define ZM_MIMIC_NO_AO    16	//! If the turf shouldn't apply regular turf AO and only do Z-mimic AO.
 #define ZM_NO_OCCLUDE     32	//! Don't occlude below atoms if we're a non-mimic z-turf.
+#define ZM_MIMIC_BASETURF 64	//! Mimic baseturf instead of the below atom. Sometimes useful for elevators.
 
 // Convenience flag.
 #define ZM_MIMIC_DEFAULTS (ZM_MIMIC_BELOW|ZM_ALLOW_LIGHTING)
@@ -20,7 +21,8 @@ var/global/list/mimic_defines = list(
 	"ZM_ALLOW_LIGHTING",
 	"ZM_ALLOW_ATMOS",
 	"ZM_MIMIC_NO_AO",
-	"ZM_NO_OCCLUDE"
+	"ZM_NO_OCCLUDE",
+	"ZM_MIMIC_BASETURF"
 )
 
 // Movable flags.

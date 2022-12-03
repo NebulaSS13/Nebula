@@ -139,6 +139,7 @@
 	var/mimiced_type
 	var/original_z
 	var/override_depth
+	var/have_performed_fixup = FALSE
 
 /atom/movable/openspace/mimic/New()
 	atom_flags |= ATOM_FLAG_INITIALIZED
