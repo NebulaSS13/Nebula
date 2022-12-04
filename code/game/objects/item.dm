@@ -151,7 +151,7 @@
 
 /obj/item/GetCloneArgs()
 	. = ..()
-	LAZYADD(., material)
+	LAZYADD(., material?.type)
 
 //#TODO: Implement this for all the sub class that need it
 /obj/item/PopulateClone(obj/item/clone)
