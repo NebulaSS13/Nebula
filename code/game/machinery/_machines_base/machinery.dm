@@ -492,3 +492,8 @@ Class Procs:
 
 /obj/machinery/get_matter_amount_modifier()
 	. = ..() * HOLLOW_OBJECT_MATTER_MULTIPLIER // machine matter is largely just the frame, and the components contribute most of the matter/value.
+
+///Handles updating stock parts and internal id tag when changing it to something else
+/obj/machinery/proc/set_id_tag(var/new_id_tag)
+	id_tag = new_id_tag
+	//#TODO: Add handling for components, when we're sure it will work for any kind of machinery. Some machines do not use the same id_tag on receiver and transmitters for example.

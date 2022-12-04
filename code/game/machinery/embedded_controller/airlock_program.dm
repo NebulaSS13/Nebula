@@ -259,8 +259,7 @@
 						signalPump(tag_pump_out_external, 0)
 				else
 					cycleDoors(target_state)
-					state = STATE_IDLE
-					target_state = TARGET_NONE
+					stop_cycling()
 
 
 		if(STATE_DEPRESSURIZE)
@@ -278,8 +277,7 @@
 							state = STATE_PREPARE
 					else
 						cycleDoors(target_state)
-						state = STATE_IDLE
-						target_state = TARGET_NONE
+						stop_cycling()
 
 
 	memory["processing"] = (state != target_state)
@@ -294,12 +292,14 @@
 	memory["purge"] = cycle_to_external_air
 	playsound(master, 'sound/machines/warning-buzzer.ogg', 50)
 	shutAlarm()
+	signalCycling(TRUE)
 
 /datum/computer/file/embedded_program/airlock/proc/begin_dock_cycle()
 	state = STATE_IDLE
 	target_state = TARGET_INOPEN
 	playsound(master, 'sound/machines/warning-buzzer.ogg', 50)
 	shutAlarm()
+	signalCycling(TRUE)
 
 /datum/computer/file/embedded_program/airlock/proc/begin_cycle_out()
 	state = STATE_IDLE
@@ -307,6 +307,7 @@
 	memory["purge"] = cycle_to_external_air
 	playsound(master, 'sound/machines/warning-buzzer.ogg', 50)
 	shutAlarm()
+	signalCycling(TRUE)
 
 /datum/computer/file/embedded_program/airlock/proc/close_doors()
 	toggleDoor(memory["interior_status"], tag_interior_door, 1, "close")
@@ -315,6 +316,7 @@
 /datum/computer/file/embedded_program/airlock/proc/stop_cycling()
 	state = STATE_IDLE
 	target_state = TARGET_NONE
+	signalCycling(FALSE)
 
 /datum/computer/file/embedded_program/airlock/proc/done_cycling()
 	return (state == STATE_IDLE && target_state == TARGET_NONE)
@@ -367,6 +369,28 @@
 		if(TARGET_INOPEN)
 			toggleDoor(memory["exterior_status"], tag_exterior_door, memory["secure"], "close")
 			toggleDoor(memory["interior_status"], tag_interior_door, memory["secure"], "open")
+
+/datum/computer/file/embedded_program/proc/signalCycling(var/cycling = TRUE)
+	var/datum/signal/signal = new
+	//Send signal to buttons first
+	signal.data["tag"] = id_tag
+	signal.data["set_airlock_cycling"] = cycling
+	post_signal(signal)
+
+/datum/computer/file/embedded_program/airlock/signalCycling(cycling = TRUE)
+	. = ..()
+	var/datum/signal/signal = new
+	signal.data["set_airlock_cycling"] = cycling
+	//Send signal to sensors
+	if(length(tag_chamber_sensor))
+		signal.data["tag"] = tag_chamber_sensor
+		post_signal(signal)
+	if(length(tag_interior_sensor))
+		signal.data["tag"] = tag_interior_sensor
+		post_signal(signal)
+	if(length(tag_exterior_sensor))
+		signal.data["tag"] = tag_exterior_sensor
+		post_signal(signal)
 
 /*----------------------------------------------------------
 toggleDoor()

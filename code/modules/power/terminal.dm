@@ -90,7 +90,7 @@
 		var/obj/machinery/machine = master_machine()
 		
 		// Wall frames and SMES have directional terminals.
-		if(!master.terminal_dir && !ispath(machine.frame_type, /obj/item/frame))
+		if(!master.terminal_dir && !ispath(machine.frame_type, /obj/item/frame) && master.loc == loc)
 			icon_state = "term-omni"
 		else
 			icon_state = "term"
