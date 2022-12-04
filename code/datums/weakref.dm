@@ -40,9 +40,5 @@
 /weakref/get_log_info_line()
 	return "[ref_name] ([ref_type]) ([ref]) (WEAKREF)"
 
-//Allow cloning weakrefs
-/weakref/PopulateClone(weakref/clone)
-	clone.ref = ref
-	clone.ref_name = ref_name
-	clone.ref_type = ref_type
-	return clone
+/weakref/CanClone()
+	return FALSE //Pass weakref as references since they're unique per atom instance
