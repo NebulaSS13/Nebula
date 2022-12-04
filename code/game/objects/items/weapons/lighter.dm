@@ -7,7 +7,7 @@
 	w_class = ITEM_SIZE_TINY
 	throwforce = 4
 	obj_flags = OBJ_FLAG_CONDUCTIBLE
-	item_flags = ITEM_FLAG_HOLLOW
+	obj_flags = OBJ_FLAG_HOLLOW
 	slot_flags = SLOT_LOWER_BODY
 	attack_verb = list("burnt", "singed")
 	lit_heat = 1500

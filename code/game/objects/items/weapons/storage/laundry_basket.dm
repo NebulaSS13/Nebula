@@ -19,7 +19,7 @@
 	allow_quick_gather = 1
 	collection_mode = 1
 	material = /decl/material/solid/plastic
-	item_flags = ITEM_FLAG_HOLLOW
+	obj_flags = OBJ_FLAG_HOLLOW
 	var/linked
 
 /obj/item/storage/laundry_basket/attack_hand(mob/user)

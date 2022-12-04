@@ -7,7 +7,7 @@
 	hitsound                      = 'sound/weapons/smash.ogg'
 	atom_flags                    = ATOM_FLAG_OPEN_CONTAINER
 	obj_flags                     = OBJ_FLAG_CONDUCTIBLE
-	item_flags                    = ITEM_FLAG_HOLLOW
+	obj_flags                     = OBJ_FLAG_HOLLOW
 	w_class                       = ITEM_SIZE_NORMAL
 	throw_speed                   = 2
 	throw_range                   = 10
@@ -76,7 +76,7 @@
 	//#TODO: That could definitely be improved. Would suggest to use process_momentum but its only for thrownthing
 	var/list/move_speed = list(1, 1, 1, 2, 2, 3)
 	for(var/i in 1 to 6)
-		if(C) 
+		if(C)
 			C.propelled = (6-i)
 		O.Move(get_step(user,movementdirection), movementdirection)
 		sleep(move_speed[i])

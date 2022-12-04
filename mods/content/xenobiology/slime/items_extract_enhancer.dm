@@ -4,7 +4,7 @@
 	icon = 'icons/obj/items/chem/bottle.dmi'
 	icon_state = "bottle17"
 	material = /decl/material/solid/plastic
-	item_flags = ITEM_FLAG_HOLLOW
+	obj_flags = OBJ_FLAG_HOLLOW
 
 /obj/item/slime_extract_enhancer/afterattack(obj/target, mob/user , flag)
 	if(!istype(target, /obj/item/slime_extract))

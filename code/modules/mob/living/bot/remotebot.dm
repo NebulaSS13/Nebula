@@ -165,7 +165,7 @@
 	desc = "The cover says 'control your own cardboard nuclear powered robot. Comes with real plutonium!"
 	icon = 'icons/obj/items/bot_kit.dmi'
 	icon_state = "remotebot"
-	item_flags = ITEM_FLAG_HOLLOW
+	obj_flags = OBJ_FLAG_HOLLOW
 	material = /decl/material/solid/cardboard
 
 /obj/item/bot_kit/attack_self(var/mob/user)

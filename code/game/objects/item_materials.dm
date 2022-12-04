@@ -80,7 +80,7 @@
 			new_force = material.get_edge_damage()
 		else
 			new_force = material.get_blunt_damage()
-			if(item_flags & ITEM_FLAG_HOLLOW)
+			if(obj_flags & OBJ_FLAG_HOLLOW)
 				new_force *= HOLLOW_OBJECT_MATTER_MULTIPLIER
 
 		new_force = round(new_force*material_force_multiplier)
@@ -93,7 +93,7 @@
 	if(material)
 		armor_penetration += 2*max(0, material.brute_armor - 2)
 		throwforce = material.get_blunt_damage() * thrown_material_force_multiplier
-		if(item_flags & ITEM_FLAG_HOLLOW)
+		if(obj_flags & OBJ_FLAG_HOLLOW)
 			throwforce *= HOLLOW_OBJECT_MATTER_MULTIPLIER
 		throwforce = round(throwforce)
 		attack_cooldown += material.get_attack_cooldown()
@@ -132,7 +132,7 @@
 
 /obj/item/get_matter_amount_modifier()
 	. = ..()
-	if(item_flags & ITEM_FLAG_HOLLOW)
+	if(obj_flags & OBJ_FLAG_HOLLOW)
 		. *= HOLLOW_OBJECT_MATTER_MULTIPLIER
 
 /obj/item/create_matter()

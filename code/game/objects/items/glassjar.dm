@@ -6,7 +6,8 @@
 	w_class = ITEM_SIZE_SMALL
 	material = /decl/material/solid/glass
 	material_force_multiplier = 0.1
-	item_flags = ITEM_FLAG_NO_BLUDGEON | ITEM_FLAG_HOLLOW
+	item_flags = ITEM_FLAG_NO_BLUDGEON
+	obj_flags = OBJ_FLAG_HOLLOW
 	drop_sound = 'sound/foley/bottledrop1.ogg'
 	pickup_sound = 'sound/foley/bottlepickup1.ogg'
 	var/list/accept_mobs = list(

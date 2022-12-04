@@ -393,7 +393,7 @@
 	icon              = 'icons/obj/items/tool/welders/welder_tanks.dmi'
 	icon_state        = "tank_normal"
 	w_class           = ITEM_SIZE_SMALL
-	item_flags        = ITEM_FLAG_HOLLOW
+	obj_flags         = OBJ_FLAG_HOLLOW
 	force             = 5
 	throwforce        = 5
 	volume            = 20
