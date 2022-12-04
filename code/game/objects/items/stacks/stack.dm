@@ -21,7 +21,6 @@
 	var/plural_icon_state
 	var/max_icon_state
 	var/amount = 1
-	var/list/initial_matter
 	var/matter_multiplier = 1
 	var/max_amount //also see stack recipes initialisation, param "max_res_amount" must be equal to this max_amount
 	var/stack_merge_type  //determines whether different stack types can merge
@@ -177,11 +176,8 @@
 
 		src.produce_recipe(R, multiplier, usr)
 
-	if (src && usr.machine==src) //do not reopen closed window
-		spawn( 0 )
-			src.interact(usr)
-			return
-	return
+	if(!QDELETED(src))
+		interact(usr)
 
 //Return 1 if an immediate subsequent call to use() would succeed.
 //Ensures that code dealing with stacks uses the same logic
@@ -191,16 +187,31 @@
 	return 1
 
 /obj/item/stack/create_matter()
-	matter_per_piece = matter?.Copy() // this is used for refreshing matter amount in update_matter()
-	if(istype(material))
-		LAZYINITLIST(matter_per_piece)
-		matter_per_piece[material.type] = max(matter_per_piece[material.type], round(MATTER_AMOUNT_PRIMARY * matter_multiplier))
-	. = ..()
 
+	// Append our material, if set; this would normally be done in the parent call.
+	if(istype(material))
+		LAZYSET(matter, material.type, MATTER_AMOUNT_PRIMARY) // No matter_multiplier as this is applied below.
+
+	// We do this here rather than a parent call because the base application would multiply by our stack amount.
+	// We want to keep a base init matter list so that we know how much matter is in one unit of the stack.
+	if(LAZYLEN(matter))
+		matter_per_piece = list()
+		for(var/mat in matter)
+			matter_per_piece[mat] = round(matter[mat] * matter_multiplier)
+
+	// No parent call because we're already tracking our materials and we're going to rebuild the matter list in
+	// update_matter() immediately anyway.
+	update_matter()
+
+// Nuke and rebuild matter from our matter_per_piece list to keep all our values in line.
 /obj/item/stack/proc/update_matter()
-	matter = list()
-	for(var/mat in matter_per_piece)
-		matter[mat] = (matter_per_piece[mat] * amount)
+	if(length(matter_per_piece))
+		matter = list()
+		for(var/mat in matter_per_piece)
+			matter[mat] = (matter_per_piece[mat] * amount)
+	else
+		matter_per_piece = null
+		matter = null
 
 /obj/item/stack/proc/use(var/used)
 	if (!can_use(used))
