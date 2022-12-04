@@ -20,8 +20,8 @@
 	return_damage_max = 5
 	harm_intent_damage = 1
 	natural_armor = list(
-		melee = ARMOR_MELEE_RESISTANT, 
-		bullet = ARMOR_BALLISTIC_PISTOL
+		ARMOR_MELEE = ARMOR_MELEE_RESISTANT,
+		ARMOR_BULLET = ARMOR_BALLISTIC_PISTOL
 		)
 	ability_cooldown = 2 MINUTES
 	var/mob/living/carbon/human/victim //the human we're grabbing
@@ -51,7 +51,7 @@
 	. = ..()
 	if(!.)
 		return
-	
+
 	if((health > maxHealth / 1.5) && enemies.len && prob(10))
 		if(victim)
 			release_grab()

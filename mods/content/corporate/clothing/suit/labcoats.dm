@@ -37,6 +37,6 @@
 	trim and the pockets are reinforced to hold tools. It seems to have an insulated material woven in to prevent static shocks."
 	markings_color = COLOR_NAVY_BLUE
 	armor = list(
-		melee = ARMOR_MELEE_MINOR
+		ARMOR_MELEE = ARMOR_MELEE_MINOR
 	)//They don't need to protect against the environment very much.
 	siemens_coefficient = 0.5 //These guys work with electronics. DAIS's labcoats shouldn't conduct very well.

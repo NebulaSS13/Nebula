@@ -4,7 +4,7 @@
 	name = "chief engineer's jumpsuit"
 	icon = 'icons/clothing/under/jumpsuits/jumpsuit_ce.dmi'
 	armor = list(
-		rad = ARMOR_RAD_MINOR
+		ARMOR_RAD = ARMOR_RAD_MINOR
 	)
 
 /obj/item/clothing/under/atmospheric_technician
@@ -17,7 +17,7 @@
 	name = "engineer's jumpsuit"
 	icon = 'icons/clothing/under/jumpsuits/jumpsuit_engineer.dmi'
 	armor = list(
-		rad = ARMOR_RAD_MINOR
+		ARMOR_RAD = ARMOR_RAD_MINOR
 		)
 
 /obj/item/clothing/under/roboticist

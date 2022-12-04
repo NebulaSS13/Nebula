@@ -7,15 +7,15 @@
 	name = "chief science officer's jumpsuit"
 	icon = 'icons/clothing/under/jumpsuits/jumpsuit_rd.dmi'
 	armor = list(
-		bio = ARMOR_BIO_MINOR
+		ARMOR_BIO = ARMOR_BIO_MINOR
 	)
-		
+
 /obj/item/clothing/under/research_director/rdalt
 	desc = "A dress suit and slacks stained with hard work and dedication to science. Perhaps other things as well, but mostly hard work and dedication."
 	name = "head researcher uniform"
 	icon = 'icons/clothing/under/uniform_rd_alt.dmi'
 	armor = list(
-		bio = ARMOR_BIO_MINOR
+		ARMOR_BIO = ARMOR_BIO_MINOR
 	)
 
 /obj/item/clothing/under/research_director/dress_rd
@@ -23,7 +23,7 @@
 	desc = "Feminine fashion for the style concious CSO. Its fabric provides minor protection from biological contaminants."
 	icon = 'icons/clothing/under/dresses/dress_rd.dmi'
 	armor = list(
-		bio = ARMOR_BIO_MINOR
+		ARMOR_BIO = ARMOR_BIO_MINOR
 	)
 	body_parts_covered = SLOT_UPPER_BODY|SLOT_LOWER_BODY|SLOT_ARMS
 
@@ -33,7 +33,7 @@
 	icon = 'icons/clothing/under/jumpsuits/jumpsuit_chemist.dmi'
 	permeability_coefficient = 0.50
 	armor = list(
-		bio = ARMOR_BIO_MINOR
+		ARMOR_BIO = ARMOR_BIO_MINOR
 		)
 /*
  * Medical
@@ -44,7 +44,7 @@
 	icon = 'icons/clothing/under/jumpsuits/jumpsuit_cmo.dmi'
 	permeability_coefficient = 0.50
 	armor = list(
-		bio = ARMOR_BIO_MINOR
+		ARMOR_BIO = ARMOR_BIO_MINOR
 		)
 
 /obj/item/clothing/under/geneticist
@@ -53,7 +53,7 @@
 	icon = 'icons/clothing/under/jumpsuits/jumpsuit_genetics.dmi'
 	permeability_coefficient = 0.50
 	armor = list(
-		bio = ARMOR_BIO_MINOR
+		ARMOR_BIO = ARMOR_BIO_MINOR
 		)
 
 /obj/item/clothing/under/virologist
@@ -62,7 +62,7 @@
 	icon = 'icons/clothing/under/jumpsuits/jumpsuit_virology.dmi'
 	permeability_coefficient = 0.50
 	armor = list(
-		bio = ARMOR_BIO_MINOR
+		ARMOR_BIO = ARMOR_BIO_MINOR
 		)
 
 /obj/item/clothing/under/nursesuit
@@ -71,7 +71,7 @@
 	icon = 'icons/clothing/under/nurse.dmi'
 	permeability_coefficient = 0.50
 	armor = list(
-		bio = ARMOR_BIO_MINOR
+		ARMOR_BIO = ARMOR_BIO_MINOR
 		)
 	body_parts_covered = SLOT_UPPER_BODY|SLOT_LOWER_BODY
 
@@ -81,7 +81,7 @@
 	icon = 'icons/clothing/under/nurse.dmi'
 	permeability_coefficient = 0.50
 	armor = list(
-		bio = ARMOR_BIO_MINOR
+		ARMOR_BIO = ARMOR_BIO_MINOR
 		)
 	body_parts_covered = SLOT_UPPER_BODY|SLOT_LOWER_BODY
 
@@ -91,7 +91,7 @@
 	icon = 'icons/clothing/under/uniform_orderly.dmi'
 	permeability_coefficient = 0.50
 	armor = list(
-		bio = ARMOR_BIO_MINOR
+		ARMOR_BIO = ARMOR_BIO_MINOR
 		)
 
 /obj/item/clothing/under/medical
@@ -100,7 +100,7 @@
 	icon = 'icons/clothing/under/jumpsuits/jumpsuit_medical.dmi'
 	permeability_coefficient = 0.50
 	armor = list(
-		bio = ARMOR_BIO_MINOR
+		ARMOR_BIO = ARMOR_BIO_MINOR
 	)
 
 /obj/item/clothing/under/medical/paramedic

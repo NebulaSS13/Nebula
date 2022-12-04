@@ -18,7 +18,7 @@
 
 // Generic non-bomb brute damage
 /decl/protection_type
-	var/armor_key = "melee"
+	var/armor_key = ARMOR_MELEE
 
 /decl/protection_type/proc/get_description(value)
 	switch(value)
@@ -39,7 +39,7 @@
 
 // Brute projectile attacks
 /decl/protection_type/ballistic
-	armor_key = "bullet"
+	armor_key = ARMOR_BULLET
 
 /decl/protection_type/ballistic/get_description(value)
 	switch(value)
@@ -60,7 +60,7 @@
 
 // Concentrated burn attacks
 /decl/protection_type/laser
-	armor_key = "laser"
+	armor_key = ARMOR_LASER
 
 /decl/protection_type/laser/get_description(value)
 	switch(value)
@@ -77,7 +77,7 @@
 
 // Dispersed burn attacks
 /decl/protection_type/energy
-	armor_key = "energy"
+	armor_key = ARMOR_ENERGY
 
 /decl/protection_type/energy/get_description(value)
 	switch(value)
@@ -92,7 +92,7 @@
 
 // Damage from explosions
 /decl/protection_type/bomb
-	armor_key = " bomb"
+	armor_key = ARMOR_BOMB
 
 /decl/protection_type/bomb/get_description(value)
 	switch(value)
@@ -105,7 +105,7 @@
 
 // Biohazards
 /decl/protection_type/bio
-	armor_key = "bio"
+	armor_key = ARMOR_BIO
 
 /decl/protection_type/bio/get_description(value)
 	switch(value)
@@ -118,7 +118,7 @@
 
 // Radiation
 /decl/protection_type/rad
-	armor_key = "rad"
+	armor_key = ARMOR_RAD
 
 /decl/protection_type/rad/get_description(value)
 	switch(value)

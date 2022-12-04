@@ -13,7 +13,7 @@
 	minbodytemp = 0
 	speed = 4
 	natural_armor = list(
-		melee = ARMOR_MELEE_KNIVES
+		ARMOR_MELEE = ARMOR_MELEE_KNIVES
 		)
 	bleed_colour = SYNTH_BLOOD_COLOR
 	gene_damage = -1
@@ -42,7 +42,7 @@
 	ranged = 1
 	can_escape = 1
 	natural_armor = list(
-		melee = ARMOR_MELEE_RESISTANT
+		ARMOR_MELEE = ARMOR_MELEE_RESISTANT
 		)
 
 /mob/living/simple_animal/hostile/hivebot/death()
@@ -145,8 +145,8 @@ The megabot
 	natural_weapon = /obj/item/natural_weapon/circular_saw
 	speed = 0
 	natural_armor = list(
-		melee = ARMOR_MELEE_RESISTANT,
-		bullet = ARMOR_BALLISTIC_PISTOL
+		ARMOR_MELEE = ARMOR_MELEE_RESISTANT,
+		ARMOR_BULLET = ARMOR_BALLISTIC_PISTOL
 		)
 	can_escape = TRUE
 	armor_type = /datum/extension/armor/toggle

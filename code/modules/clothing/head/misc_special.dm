@@ -22,7 +22,7 @@
 		/decl/material/solid/fiberglass = MATTER_AMOUNT_REINFORCEMENT
 	)
 	armor = list(
-		melee = ARMOR_MELEE_SMALL
+		ARMOR_MELEE = ARMOR_MELEE_SMALL
 	)
 	flags_inv = (HIDEMASK|HIDEEARS|HIDEEYES|HIDEFACE)
 	body_parts_covered = SLOT_HEAD|SLOT_FACE|SLOT_EYES

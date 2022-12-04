@@ -125,7 +125,7 @@
 	cold_protection = SLOT_UPPER_BODY|SLOT_LOWER_BODY|SLOT_ARMS
 	min_cold_protection_temperature = ARMOR_MIN_COLD_PROTECTION_TEMPERATURE
 	armor = list(
-		bio = ARMOR_BIO_MINOR
+		ARMOR_BIO = ARMOR_BIO_MINOR
 		)
 	hood = /obj/item/clothing/head/winterhood
 	allowed = list (/obj/item/pen, /obj/item/paper, /obj/item/flashlight,/obj/item/storage/fancy/cigarettes, /obj/item/storage/box/matches, /obj/item/chems/drinks/flask)
@@ -147,11 +147,11 @@
 	icon = 'icons/clothing/suit/wintercoat/captain.dmi'
 	hood = /obj/item/clothing/head/winterhood/captain
 	armor = list(
-		melee = ARMOR_MELEE_KNIVES,
-		bullet = ARMOR_BALLISTIC_MINOR,
-		laser = ARMOR_LASER_SMALL,
-		energy = ARMOR_ENERGY_MINOR,
-		bomb = ARMOR_BOMB_MINOR
+		ARMOR_MELEE = ARMOR_MELEE_KNIVES,
+		ARMOR_BULLET = ARMOR_BALLISTIC_MINOR,
+		ARMOR_LASER = ARMOR_LASER_SMALL,
+		ARMOR_ENERGY = ARMOR_ENERGY_MINOR,
+		ARMOR_BOMB = ARMOR_BOMB_MINOR
 	)
 
 /obj/item/clothing/head/winterhood/captain
@@ -162,11 +162,11 @@
 	icon = 'icons/clothing/suit/wintercoat/sec.dmi'
 	hood = /obj/item/clothing/head/winterhood/security
 	armor = list(
-		melee = ARMOR_MELEE_KNIVES,
-		bullet = ARMOR_BALLISTIC_SMALL,
-		laser = ARMOR_LASER_SMALL,
-		energy = ARMOR_ENERGY_MINOR,
-		bomb = ARMOR_BOMB_MINOR
+		ARMOR_MELEE = ARMOR_MELEE_KNIVES,
+		ARMOR_BULLET = ARMOR_BALLISTIC_SMALL,
+		ARMOR_LASER = ARMOR_LASER_SMALL,
+		ARMOR_ENERGY = ARMOR_ENERGY_MINOR,
+		ARMOR_BOMB = ARMOR_BOMB_MINOR
 	)
 
 /obj/item/clothing/head/winterhood/security
@@ -177,7 +177,7 @@
 	icon = 'icons/clothing/suit/wintercoat/med.dmi'
 	hood = /obj/item/clothing/head/winterhood/medical
 	armor = list(
-		bio = ARMOR_BIO_RESISTANT
+		ARMOR_BIO = ARMOR_BIO_RESISTANT
 	)
 
 /obj/item/clothing/head/winterhood/medical
@@ -188,7 +188,7 @@
 	icon = 'icons/clothing/suit/wintercoat/sci.dmi'
 	hood = /obj/item/clothing/head/winterhood/science
 	armor = list(
-		bomb = ARMOR_BOMB_MINOR
+		ARMOR_BOMB = ARMOR_BOMB_MINOR
 	)
 
 /obj/item/clothing/head/winterhood/science
@@ -199,7 +199,7 @@
 	icon = 'icons/clothing/suit/wintercoat/eng.dmi'
 	hood = /obj/item/clothing/head/winterhood/engineering
 	armor = list(
-		rad = ARMOR_RAD_MINOR
+		ARMOR_RAD = ARMOR_RAD_MINOR
 	)
 
 /obj/item/clothing/head/winterhood/engineering
@@ -234,7 +234,7 @@
 	hood = /obj/item/clothing/head/winterhood/mining
 	icon = 'icons/clothing/suit/wintercoat/mining.dmi'
 	armor = list(
-		melee = ARMOR_MELEE_SMALL
+		ARMOR_MELEE = ARMOR_MELEE_SMALL
 	)
 
 /obj/item/clothing/head/winterhood/mining

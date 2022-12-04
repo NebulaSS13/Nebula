@@ -20,7 +20,7 @@
 		/obj/item/storage/pill_bottle,
 		/obj/item/paper)
 	armor = list(
-		bio = ARMOR_BIO_RESISTANT
+		ARMOR_BIO = ARMOR_BIO_RESISTANT
 		)
 	valid_accessory_slots = list(ACCESSORY_SLOT_ARMBAND)
 	restricted_accessory_slots = list(ACCESSORY_SLOT_ARMBAND)

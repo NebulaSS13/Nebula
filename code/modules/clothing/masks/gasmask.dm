@@ -11,8 +11,8 @@
 	permeability_coefficient = 0.01
 	siemens_coefficient = 0.9
 	armor = list(
-		melee = ARMOR_MELEE_MINOR,
-		bio = ARMOR_BIO_STRONG
+		ARMOR_MELEE = ARMOR_MELEE_MINOR,
+		ARMOR_BIO = ARMOR_BIO_STRONG
 		)
 	filtered_gases = list(
 		/decl/material/gas/nitrous_oxide,
@@ -65,10 +65,10 @@
 	body_parts_covered = SLOT_FACE
 	w_class = ITEM_SIZE_SMALL
 	armor = list(
-		melee = ARMOR_MELEE_SMALL,
-		bullet = ARMOR_BALLISTIC_MINOR,
-		laser = ARMOR_LASER_MINOR,
-		bio = ARMOR_BIO_RESISTANT
+		ARMOR_MELEE = ARMOR_MELEE_SMALL,
+		ARMOR_BULLET = ARMOR_BALLISTIC_MINOR,
+		ARMOR_LASER = ARMOR_LASER_MINOR,
+		ARMOR_BIO = ARMOR_BIO_RESISTANT
 		)
 
 //In scaling order of utility and seriousness
@@ -79,9 +79,9 @@
 	icon = 'icons/clothing/mask/gas_mask.dmi'
 	body_parts_covered = SLOT_FACE|SLOT_EYES
 	armor = list(
-		melee = ARMOR_MELEE_MINOR,
-		bio = ARMOR_BIO_STRONG,
-		rad = ARMOR_RAD_SMALL
+		ARMOR_MELEE = ARMOR_MELEE_MINOR,
+		ARMOR_BIO = ARMOR_BIO_STRONG,
+		ARMOR_RAD = ARMOR_RAD_SMALL
 		)
 
 /obj/item/clothing/mask/gas/budget
@@ -90,8 +90,8 @@
 	icon = 'icons/clothing/mask/gas_mask_alt.dmi'
 	body_parts_covered = SLOT_FACE|SLOT_EYES
 	armor = list(
-		melee = ARMOR_MELEE_MINOR,
-		bio = ARMOR_BIO_SMALL
+		ARMOR_MELEE = ARMOR_MELEE_MINOR,
+		ARMOR_BIO = ARMOR_BIO_SMALL
 		)
 
 /obj/item/clothing/mask/gas/swat
@@ -101,10 +101,10 @@
 	siemens_coefficient = 0.7
 	body_parts_covered = SLOT_FACE|SLOT_EYES
 	armor = list(
-		melee = ARMOR_MELEE_SMALL,
-		bullet = ARMOR_BALLISTIC_MINOR,
-		laser = ARMOR_LASER_MINOR,
-		bio = ARMOR_BIO_STRONG
+		ARMOR_MELEE = ARMOR_MELEE_SMALL,
+		ARMOR_BULLET = ARMOR_BALLISTIC_MINOR,
+		ARMOR_LASER = ARMOR_LASER_MINOR,
+		ARMOR_BIO = ARMOR_BIO_STRONG
 		)
 	material = /decl/material/solid/metal/steel
 	matter = list(
@@ -119,10 +119,10 @@
 	icon = 'icons/clothing/mask/gas_mask_swat.dmi'
 	siemens_coefficient = 0.7
 	armor = list(
-		melee = ARMOR_MELEE_SMALL,
-		bullet = ARMOR_BALLISTIC_SMALL,
-		laser = ARMOR_LASER_MINOR,
-		bio = ARMOR_BIO_STRONG
+		ARMOR_MELEE = ARMOR_MELEE_SMALL,
+		ARMOR_BULLET = ARMOR_BALLISTIC_SMALL,
+		ARMOR_LASER = ARMOR_LASER_MINOR,
+		ARMOR_BIO = ARMOR_BIO_STRONG
 		)
 	material = /decl/material/solid/metal/steel
 	matter = list(
@@ -148,7 +148,7 @@
 	desc = "A modernised version of the classic design, this mask will not only filter out toxins, but it can also be connected to an air supply."
 	icon = 'icons/clothing/mask/gas_mask_plague.dmi'
 	armor = list(
-		bio = ARMOR_BIO_SHIELDED
+		ARMOR_BIO = ARMOR_BIO_SHIELDED
 		)
 	body_parts_covered = SLOT_HEAD|SLOT_FACE|SLOT_EYES
 	material = /decl/material/solid/cloth

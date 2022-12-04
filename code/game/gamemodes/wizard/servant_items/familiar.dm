@@ -8,9 +8,9 @@
 	desc = "It looks like a cross between Robin Hood's tunic and some patchwork leather armor. Whoever put this together must have been in a hurry."
 	icon = 'icons/clothing/under/tunic_familiar.dmi'
 	armor = list(
-		melee = ARMOR_MELEE_KNIVES, 
-		laser = ARMOR_LASER_MINOR, 
-		energy = ARMOR_ENERGY_SMALL
+		ARMOR_MELEE = ARMOR_MELEE_KNIVES,
+		ARMOR_LASER = ARMOR_LASER_MINOR,
+		ARMOR_ENERGY = ARMOR_ENERGY_SMALL
 	)
 	bodytype_equip_flags = BODY_FLAG_HUMANOID
 

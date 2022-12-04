@@ -10,10 +10,10 @@
 	desc = "A classy waistcoat. This one seems suspiciously more durable."
 	color = COLOR_GRAY15
 	armor = list(
-		bullet = ARMOR_BALLISTIC_SMALL,
-		laser = ARMOR_LASER_SMALL,
-		melee = ARMOR_MELEE_SMALL,
-		energy = ARMOR_ENERGY_MINOR
+		ARMOR_BULLET = ARMOR_BALLISTIC_SMALL,
+		ARMOR_LASER = ARMOR_LASER_SMALL,
+		ARMOR_MELEE = ARMOR_MELEE_SMALL,
+		ARMOR_ENERGY = ARMOR_ENERGY_MINOR
 		)
 	body_parts_covered = SLOT_UPPER_BODY
 	origin_tech = "{'combat':2,'materials':3,'esoteric':2}"
@@ -108,7 +108,7 @@
 	gas_transfer_coefficient = 0.90
 	permeability_coefficient = 0.50
 
-	armor = list(laser = ARMOR_LASER_MINOR, energy = ARMOR_ENERGY_MINOR, bomb = ARMOR_BOMB_MINOR)
+	armor = list(ARMOR_LASER = ARMOR_LASER_MINOR, ARMOR_ENERGY = ARMOR_ENERGY_MINOR, ARMOR_BOMB = ARMOR_BOMB_MINOR)
 	body_parts_covered = SLOT_LOWER_BODY | SLOT_LEGS
 	slowdown = 0.5
 

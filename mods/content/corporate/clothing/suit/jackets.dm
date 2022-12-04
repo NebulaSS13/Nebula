@@ -19,8 +19,8 @@
 	hood = /obj/item/clothing/head/winterhood/dais
 	siemens_coefficient = 0.5
 	armor = list(
-		melee = ARMOR_MELEE_SMALL,
-		energy = ARMOR_ENERGY_MINOR
+		ARMOR_MELEE = ARMOR_MELEE_SMALL,
+		ARMOR_ENERGY = ARMOR_ENERGY_MINOR
 		)
 	desc = "A hooded winter coat colored blue and white and bearing the logo of Deimos Advanced Information Systems."
 

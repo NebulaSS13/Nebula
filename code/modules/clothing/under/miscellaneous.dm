@@ -322,7 +322,7 @@
 	desc = "A charcoal suit and red tie. Very professional."
 	icon = 'icons/clothing/under/suits/suit_pants_charcoal.dmi'
 	starting_accessories = list(
-		/obj/item/clothing/accessory/navy, 
+		/obj/item/clothing/accessory/navy,
 		/obj/item/clothing/accessory/toggleable/charcoal_jacket
 	)
 
@@ -331,7 +331,7 @@
 	desc = "A navy suit and red tie, intended for the galaxy's finest."
 	icon = 'icons/clothing/under/suits/suit_pants_navy.dmi'
 	starting_accessories = list(
-		/obj/item/clothing/accessory/red, 
+		/obj/item/clothing/accessory/red,
 		/obj/item/clothing/accessory/toggleable/navy_jacket
 	)
 
@@ -349,7 +349,7 @@
 	desc = "That's a very nice suit you have there. Shame if something were to happen to it, eh?"
 	icon = 'icons/clothing/under/suits/suit_pants_checkered.dmi'
 	starting_accessories = list(
-		/obj/item/clothing/accessory/black, 
+		/obj/item/clothing/accessory/black,
 		/obj/item/clothing/accessory/toggleable/checkered_jacket
 	)
 
@@ -358,7 +358,7 @@
 	desc = "A tan suit. Smart, but casual."
 	icon = 'icons/clothing/under/suits/suit_pants_tan.dmi'
 	starting_accessories = list(
-		/obj/item/clothing/accessory/long/yellow, 
+		/obj/item/clothing/accessory/long/yellow,
 		/obj/item/clothing/accessory/toggleable/tan_jacket
 	)
 
@@ -426,8 +426,8 @@
 	icon = 'icons/clothing/under/jumpsuits/jumpsuit_hazard.dmi'
 	siemens_coefficient = 0.8
 	armor = list(
-		energy = ARMOR_ENERGY_SMALL, 
-		rad = ARMOR_RAD_MINOR
+		ARMOR_ENERGY = ARMOR_ENERGY_SMALL,
+		ARMOR_RAD = ARMOR_RAD_MINOR
 		)
 	max_heat_protection_temperature = FIRESUIT_MAX_HEAT_PROTECTION_TEMPERATURE
 
@@ -437,7 +437,7 @@
 	icon = 'icons/clothing/under/jumpsuits/jumpsuit_sterile.dmi'
 	permeability_coefficient = 0.50
 	armor = list(
-		bio = ARMOR_BIO_SMALL
+		ARMOR_BIO = ARMOR_BIO_SMALL
 		)
 
 /obj/item/clothing/under/kimono

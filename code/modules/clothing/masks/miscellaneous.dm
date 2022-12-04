@@ -37,7 +37,7 @@
 	gas_transfer_coefficient = 0.90
 	permeability_coefficient = 0.01
 	armor = list(
-		bio = ARMOR_BIO_RESISTANT
+		ARMOR_BIO = ARMOR_BIO_RESISTANT
 		)
 	down_gas_transfer_coefficient = 1
 	down_body_parts_covered = null

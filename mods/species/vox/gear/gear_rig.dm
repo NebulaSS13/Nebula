@@ -4,13 +4,13 @@
 	suit_type = "alien rig"
 	icon = 'mods/species/vox/icons/rig/rig.dmi'
 	armor = list(
-		melee = ARMOR_MELEE_MAJOR, 
-		bullet = ARMOR_BALLISTIC_RESISTANT, 
-		laser = ARMOR_LASER_HANDGUNS, 
-		energy = ARMOR_ENERGY_RESISTANT, 
-		bomb = ARMOR_BOMB_PADDED, 
-		bio = ARMOR_BIO_SHIELDED, 
-		rad = ARMOR_RAD_SHIELDED
+		ARMOR_MELEE = ARMOR_MELEE_MAJOR,
+		ARMOR_BULLET = ARMOR_BALLISTIC_RESISTANT,
+		ARMOR_LASER = ARMOR_LASER_HANDGUNS,
+		ARMOR_ENERGY = ARMOR_ENERGY_RESISTANT,
+		ARMOR_BOMB = ARMOR_BOMB_PADDED,
+		ARMOR_BIO = ARMOR_BIO_SHIELDED,
+		ARMOR_RAD = ARMOR_RAD_SHIELDED
 		)
 	max_heat_protection_temperature = FIRESUIT_MAX_HEAT_PROTECTION_TEMPERATURE
 	max_pressure_protection = FIRESUIT_MAX_PRESSURE
@@ -20,20 +20,20 @@
 	boots =      /obj/item/clothing/shoes/magboots/rig/vox_rig
 	gloves =     /obj/item/clothing/gloves/rig/vox_rig
 	air_supply = /obj/item/tank/nitrogen
-	
+
 	allowed = list(
-		/obj/item/flashlight, 
-		/obj/item/tank, 
-		/obj/item/ammo_magazine, 
-		/obj/item/ammo_casing, 
-		/obj/item/ammo_magazine/shotholder, 
-		/obj/item/handcuffs, 
-		/obj/item/radio, 
-		/obj/item/baton, 
-		/obj/item/gun, 
+		/obj/item/flashlight,
+		/obj/item/tank,
+		/obj/item/ammo_magazine,
+		/obj/item/ammo_casing,
+		/obj/item/ammo_magazine/shotholder,
+		/obj/item/handcuffs,
+		/obj/item/radio,
+		/obj/item/baton,
+		/obj/item/gun,
 		/obj/item/pickaxe
 	)
-	
+
 	online_slowdown = 1
 
 	initial_modules = list(
