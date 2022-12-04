@@ -52,6 +52,7 @@ var/global/list/registered_cyborg_weapons = list()
 /obj/item/gun/energy/Destroy()
 	if(self_recharge)
 		STOP_PROCESSING(SSobj, src)
+	QDEL_NULL(power_supply)
 	return ..()
 
 /obj/item/gun/energy/get_cell()

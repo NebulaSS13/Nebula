@@ -15,6 +15,10 @@
 	if(istype(parent_mob))
 		parent = parent_mob
 
+/datum/reagents/metabolism/Destroy()
+	parent = null
+	return ..()
+
 /datum/reagents/metabolism/proc/metabolize(var/list/dosage_tracker)
 	if(!parent || total_volume < MINIMUM_CHEMICAL_VOLUME || !length(reagent_volumes))
 		return

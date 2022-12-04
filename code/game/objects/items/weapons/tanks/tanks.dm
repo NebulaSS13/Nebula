@@ -545,6 +545,11 @@ var/global/list/global/tank_gauge_cache = list()
 	var/obj/item/tank/tank = null
 	var/obj/item/assembly_holder/assembly = null
 
+/obj/item/tankassemblyproxy/Destroy()
+	tank = null // We aren't responsible for our tank
+	QDEL_NULL(assembly) // but we're responsible for the assembly.
+	return ..()
+
 /obj/item/tankassemblyproxy/receive_signal()	//This is mainly called by the sensor through sense() to the holder, and from the holder to here.
 	tank.ignite()	//boom (or not boom if you made shijwtty mix)
 

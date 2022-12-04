@@ -14,6 +14,10 @@
 	. = ..()
 	create_storage()
 
+/obj/item/clothing/accessory/storage/Destroy()
+	QDEL_NULL(hold)
+	return ..()
+
 /obj/item/clothing/accessory/storage/proc/create_storage()
 	hold = new/obj/item/storage/internal/pockets(src, slots, max_w_class)
 
@@ -115,7 +119,7 @@
 	var/contents_count = min(length(contents), 2)
 	if(contents_count > 0 && check_state_in_icon("[icon_state]-[contents_count]", icon))
 		icon_state = "[icon_state]-[contents_count]"
-	
+
 /obj/item/clothing/accessory/storage/knifeharness/adjust_mob_overlay(var/mob/living/user_mob, var/bodytype,  var/image/overlay, var/slot, var/bodypart)
 	if(overlay)
 		var/contents_count = min(length(contents), 2)

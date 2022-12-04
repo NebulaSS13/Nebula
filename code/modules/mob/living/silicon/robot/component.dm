@@ -37,6 +37,13 @@
 	installed = -1
 	uninstall()
 
+/datum/robot_component/Destroy()
+	if(owner)
+		owner.components -= src
+	owner = null
+	wrapped = null
+	return ..()
+
 /datum/robot_component/proc/repair()
 	if (istype(wrapped, /obj/item/robot_parts/robot_component))
 		var/obj/item/robot_parts/robot_component/comp = wrapped
@@ -119,6 +126,10 @@
 	..()
 	stored_cell = owner.cell
 	owner.cell = null
+
+/datum/robot_component/cell/Destroy()
+	QDEL_NULL(stored_cell)
+	return ..()
 
 /datum/robot_component/cell/repair()
 	owner.cell = stored_cell

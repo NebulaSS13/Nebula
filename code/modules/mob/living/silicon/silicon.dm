@@ -72,8 +72,10 @@
 	global.silicon_mob_list -= src
 	QDEL_NULL(silicon_radio)
 	QDEL_NULL(silicon_camera)
+	QDEL_NULL(idcard)
 	for(var/datum/alarm_handler/AH in SSalarm.all_handlers)
 		AH.unregister_alarm(src)
+	QDEL_NULL_LIST(stock_parts)
 	return ..()
 
 /mob/living/silicon/fully_replace_character_name(new_name)

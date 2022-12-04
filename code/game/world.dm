@@ -71,7 +71,6 @@ GLOBAL_PROTECTED_UNTYPED(game_id, null)
 	return match
 
 /world/New()
-
 	//set window title
 	name = "[config.server_name] - [global.using_map.full_name]"
 
@@ -154,6 +153,7 @@ var/global/world_topic_last = world.timeofday
 	..(reason)
 
 /world/Del()
+	Master.Shutdown()
 	callHook("shutdown")
 	return ..()
 

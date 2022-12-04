@@ -315,7 +315,7 @@ regen() will cover update_icon() for this proc
 /obj/effect/blob/shield/Destroy()
 	set_density(0)
 	update_nearby_tiles()
-	..()
+	return ..()
 
 /obj/effect/blob/shield/on_update_icon()
 	if(health > maxHealth * 2 / 3)

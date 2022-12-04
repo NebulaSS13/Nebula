@@ -1,5 +1,6 @@
 /mob/living/carbon
 	gender = MALE
+	abstract_type = /mob/living/carbon
 
 	var/life_tick = 0      // The amount of life ticks that have processed on this mob.
 

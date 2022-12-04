@@ -77,7 +77,7 @@
 /obj/item/chems/food/csandwich/Destroy()
 	for(var/obj/item/O in ingredients)
 		qdel(O)
-	..()
+	return ..()
 
 /obj/item/chems/food/csandwich/examine(mob/user)
 	. = ..(user)

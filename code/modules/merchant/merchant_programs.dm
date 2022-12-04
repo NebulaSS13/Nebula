@@ -20,7 +20,8 @@
 /datum/computer_file/program/merchant/proc/get_current_hub(var/datum/trade_hub/supplied_hub)
 	if(supplied_hub)
 		current_hub = supplied_hub
-	if(!istype(current_hub) || QDELETED(current_hub) || !current_hub.is_accessible_from(get_turf(holder)))
+	var/obj/item/stock_parts/computer/hard_drive/hard_drive = holder?.resolve()
+	if(!istype(current_hub) || QDELETED(current_hub) || !hard_drive || !current_hub.is_accessible_from(get_turf(hard_drive)))
 		current_hub = null
 		current_trader = null
 	return current_hub

@@ -73,10 +73,10 @@ SUBSYSTEM_DEF(fluids)
 		flooded_a_neighbor = FALSE
 		UPDATE_FLUID_BLOCKED_DIRS(current_turf)
 		for(spread_dir in global.cardinal)
-			if(current_turf.fluid_blocked_dirs & spread_dir) 
+			if(current_turf.fluid_blocked_dirs & spread_dir)
 				continue
 			neighbor = get_step(current_turf, spread_dir)
-			if(!istype(neighbor) || neighbor.flooded) 
+			if(!istype(neighbor) || neighbor.flooded)
 				continue
 			UPDATE_FLUID_BLOCKED_DIRS(neighbor)
 			if((neighbor.fluid_blocked_dirs & global.reverse_dir[spread_dir]) || !neighbor.CanFluidPass(spread_dir) || checked_targets[neighbor])
@@ -192,7 +192,7 @@ SUBSYSTEM_DEF(fluids)
 			current_fluid.last_flow_dir = 0
 
 		if (MC_TICK_CHECK)
-			break 
+			break
 
 	if(!holders_copied_yet)
 		holders_copied_yet = TRUE
@@ -203,6 +203,8 @@ SUBSYSTEM_DEF(fluids)
 		processing_holders.len--
 		if(!QDELETED(reagent_holder))
 			reagent_holder.handle_update()
+		else
+			holders_to_update -= reagent_holder
 		if(MC_TICK_CHECK)
 			return
 

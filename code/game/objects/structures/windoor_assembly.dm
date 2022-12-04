@@ -32,7 +32,7 @@
 /obj/structure/windoor_assembly/Destroy()
 	set_density(0)
 	update_nearby_tiles()
-	..()
+	return ..()
 
 /obj/structure/windoor_assembly/on_update_icon()
 	..()
@@ -71,7 +71,7 @@
 	. = initial(name)
 	if(electronics)
 		. = "nearly complete [.]"
-	else 
+	else
 		if(wired)
 			. = "wired [.]"
 		if(anchored)
@@ -101,7 +101,7 @@
 			visible_message(SPAN_NOTICE("\The [user] finishes \the [windoor]!"))
 			windoor.construct_state.post_construct(windoor)
 			qdel(src)
-		return TRUE	
+		return TRUE
 	. = ..()
 
 /obj/structure/windoor_assembly/handle_default_screwdriver_attackby(var/mob/user, var/obj/item/screwdriver)

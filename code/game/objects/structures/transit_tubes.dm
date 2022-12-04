@@ -48,10 +48,8 @@
 
 
 /obj/structure/transit_tube_pod/Destroy()
-	for(var/atom/movable/AM in contents)
-		AM.dropInto(loc)
-
-	..()
+	dump_contents()
+	return ..()
 
 /obj/structure/transit_tube_pod/Initialize()
 	. = ..()

@@ -20,9 +20,9 @@
 	var/cuff_type = "handcuffs"
 
 /obj/item/handcuffs/Destroy()
-	var/obj/item/clothing/shoes/S = loc
-	if(S && !QDELETED(S))
-		S.remove_cuffs()
+	var/obj/item/clothing/shoes/attached_shoes = loc
+	if(istype(attached_shoes))
+		attached_shoes.remove_cuffs()
 	. = ..()
 
 /obj/item/handcuffs/physically_destroyed(skip_qdel)

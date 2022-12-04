@@ -228,6 +228,7 @@
 	events_repository.unregister(/decl/observ/moved, listener, src, /datum/sound_token/proc/PrivUpdateListenerLoc)
 	events_repository.unregister(/decl/observ/destroyed, listener, src, /datum/sound_token/proc/PrivRemoveListener)
 	listeners -= listener
+	listener_status -= listener
 
 /datum/sound_token/proc/PrivUpdateListenerLoc(var/atom/listener, var/update_sound = TRUE)
 	var/turf/source_turf = get_turf(source)

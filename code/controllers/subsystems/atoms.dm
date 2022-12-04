@@ -92,6 +92,7 @@ SUBSYSTEM_DEF(atoms)
 				else
 					A.LateInitialize(arglist(arguments))
 			if(INITIALIZE_HINT_QDEL)
+				A.atom_flags |= ATOM_FLAG_INITIALIZED // never call EarlyDestroy if we return this hint
 				qdel(A)
 				qdeleted = TRUE
 			else
@@ -139,8 +140,3 @@ SUBSYSTEM_DEF(atoms)
 	var/initlog = InitLog()
 	if(initlog)
 		text2file(initlog, "[global.log_directory]/initialize.log")
-
-#undef BAD_INIT_QDEL_BEFORE
-#undef BAD_INIT_DIDNT_INIT
-#undef BAD_INIT_SLEPT
-#undef BAD_INIT_NO_HINT

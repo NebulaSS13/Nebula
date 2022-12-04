@@ -11,7 +11,7 @@ var/global/list/local_networks = list()
 
 /datum/local_network/Destroy()
 	network_entities.Cut()
-	global.local_networks -= src
+	global.local_networks -= id_tag
 	. = ..()
 
 /datum/local_network/proc/within_radius(var/atom/checking)
@@ -23,11 +23,11 @@ var/global/list/local_networks = list()
 
 /datum/local_network/proc/add_device(var/obj/machinery/device)
 	var/list/entities = get_devices(device.type)
-	
+
 	if(!entities)
 		entities = list()
 		network_entities[device.type] = entities
-	
+
 	entities[device] = TRUE
 
 	return entities[device]

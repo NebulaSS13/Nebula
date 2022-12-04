@@ -36,7 +36,7 @@
 		QDEL_NULL(current_hand)
 
 /spell/hand/Destroy()
-	qdel(current_hand)
+	QDEL_NULL(current_hand)
 	. = ..()
 
 /spell/hand/proc/valid_target(var/atom/a,var/mob/user) //we use seperate procs for our target checking for the hand spells.

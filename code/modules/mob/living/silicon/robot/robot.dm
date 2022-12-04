@@ -217,6 +217,8 @@
 	connected_ai = null
 	QDEL_NULL(module)
 	QDEL_NULL(wires)
+	QDEL_NULL(cell)
+	QDEL_LIST_ASSOC_VAL(components)
 	. = ..()
 
 /mob/living/silicon/robot/proc/reset_module(var/suppress_alert = null)
@@ -760,7 +762,7 @@
 			dat += text("[obj]: <B>Activated</B><BR>")
 		else
 			dat += text("[obj]: <A HREF=?src=\ref[src];act=\ref[obj]>Activate</A><BR>")
-	if (emagged)
+	if (emagged && module.emag)
 		if(activated(module.emag))
 			dat += text("[module.emag]: <B>Activated</B><BR>")
 		else

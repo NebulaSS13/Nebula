@@ -108,7 +108,7 @@ var/global/list/ship_inertial_dampers = list()
 /obj/machinery/inertial_damper/Destroy()
 	QDEL_NULL(controller)
 	update_nearby_tiles(locs)
-	..()
+	return ..()
 
 /obj/machinery/inertial_damper/proc/toggle()
 	active = !active

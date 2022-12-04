@@ -198,6 +198,7 @@
 	desc = "some sort of runic symbol drawn in... crayon?"
 	icon = 'icons/obj/rune.dmi'
 	icon_state = "spellbound"
+	is_spawnable_type = FALSE // invalid without spell_type passed
 	var/datum/spellbound_type/stype
 	var/last_called = 0
 

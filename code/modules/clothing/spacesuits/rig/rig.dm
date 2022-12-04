@@ -182,11 +182,19 @@
 	update_icon(1)
 
 /obj/item/rig/Destroy()
-	for(var/obj/item/piece in list(gloves,boots,helmet,chest))
-		qdel(piece)
+	QDEL_NULL(gloves)
+	QDEL_NULL(boots)
+	QDEL_NULL(helmet)
+	QDEL_NULL(chest)
+	QDEL_NULL(wires)
+	QDEL_NULL(air_supply)
+	QDEL_NULL(cell)
+	QDEL_NULL(selected_module)
+	QDEL_NULL(visor)
+	QDEL_NULL(speech)
+	QDEL_LIST(installed_modules)
+	wearer = null
 	STOP_PROCESSING(SSobj, src)
-	qdel(wires)
-	wires = null
 	return ..()
 
 /obj/item/rig/proc/set_slowdown_and_vision(var/active)

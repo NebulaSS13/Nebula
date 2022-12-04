@@ -46,11 +46,20 @@
 		plural_name = "[singular_name]s"
 
 /obj/item/stack/Destroy()
-	if(uses_charge)
-		return 1
 	if (src && usr && usr.machine == src)
 		close_browser(usr, "window=stack")
+	if(length(synths))
+		synths.Cut()
 	return ..()
+
+/obj/item/stack/proc/delete_if_empty()
+	if (uses_charge)
+		return FALSE
+	var/real_amount = get_amount()
+	if (real_amount <= 0)
+		on_used_last()
+		return TRUE
+	return FALSE
 
 /obj/item/stack/examine(mob/user, distance)
 	. = ..()
@@ -187,7 +196,8 @@
 		list_recipes(usr, text2num(href_list["sublist"]))
 
 	if (href_list["make"])
-		if (src.get_amount() < 1) qdel(src) //Never should happen
+		if(delete_if_empty()) // Should never happen
+			return
 
 		var/list/recipes_list = get_recipes()
 		if (href_list["sublist"])
@@ -231,9 +241,7 @@
 		return FALSE
 	if(!uses_charge)
 		amount -= used
-		if (amount <= 0)
-			on_used_last()
-		else
+		if(!delete_if_empty())
 			update_icon()
 			update_matter()
 		return TRUE

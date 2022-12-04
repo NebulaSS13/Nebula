@@ -593,6 +593,10 @@
 	ion_trail = new /datum/effect/effect/system/trail/ion()
 	ion_trail.set_up(src)
 
+/obj/item/mech_equipment/ionjets/Destroy()
+	QDEL_NULL(ion_trail)
+	return ..()
+
 /obj/item/mech_equipment/ionjets/proc/allowSpaceMove()
 	if (!active)
 		return FALSE

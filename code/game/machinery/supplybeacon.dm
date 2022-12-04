@@ -100,7 +100,7 @@
 /obj/structure/supply_beacon/Destroy()
 	if(activated)
 		deactivate()
-	..()
+	return ..()
 
 /obj/structure/supply_beacon/Process()
 	if(expended || !activated)

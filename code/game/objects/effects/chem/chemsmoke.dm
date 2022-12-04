@@ -11,8 +11,6 @@
 	var/turf/destination
 
 /obj/effect/effect/smoke/chem/Initialize(mapload, smoke_duration, turf/dest_turf = null, icon/cached_icon = null)
-	time_to_live = smoke_duration
-
 	. = ..()
 
 	create_reagents(500)

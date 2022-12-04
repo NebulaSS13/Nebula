@@ -4,6 +4,7 @@
 	anchored = 1
 	invisibility = 101
 	light_color = COLOR_BLUE
+	is_spawnable_type = FALSE // invalid without parent passed
 
 	var/obj/effect/fusion_em_field/parent
 	var/mysize = 0

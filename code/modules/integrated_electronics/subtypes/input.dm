@@ -652,7 +652,6 @@
 
 /obj/item/integrated_circuit/input/signaler/Destroy()
 	radio_controller.remove_object(src,frequency)
-	QDEL_NULL(radio_connection)
 	frequency = 0
 	return ..()
 

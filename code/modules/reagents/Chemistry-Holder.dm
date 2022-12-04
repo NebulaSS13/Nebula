@@ -17,6 +17,8 @@ var/global/obj/temp_reagents_holder = new
 /datum/reagents/Destroy()
 	. = ..()
 	UNQUEUE_REACTIONS(src) // While marking for reactions should be avoided just before deleting if possible, the async nature means it might be impossible.
+	if(SSfluids.holders_to_update[src])
+		SSfluids.holders_to_update -= src
 	reagent_volumes = null
 	reagent_data = null
 	if(my_atom)

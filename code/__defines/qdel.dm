@@ -10,24 +10,23 @@
 #define QDEL_HINT_IFFAIL_FINDREFERENCE 6		//Above but only if gc fails.
 //defines for the gc_destroyed var
 
-#define GC_QUEUE_PREQUEUE 1
+#define GC_QUEUE_FILTER 1
 #define GC_QUEUE_CHECK 2
 #define GC_QUEUE_HARDDELETE 3
 #define GC_QUEUE_COUNT 3 //increase this when adding more steps.
 
-#define GC_QUEUED_FOR_QUEUING -1
-#define GC_QUEUED_FOR_HARD_DEL -2
-#define GC_CURRENTLY_BEING_QDELETED -3
+#define GC_QUEUED_FOR_HARD_DEL -1
+#define GC_CURRENTLY_BEING_QDELETED -2
 
 #define QDELING(X) (X.gc_destroyed)
-#define QDELETED(X) (!X || QDELING(X))
-#define QDESTROYING(X) (!X || X.gc_destroyed == GC_CURRENTLY_BEING_QDELETED)
+#define QDELETED(X) (isnull(X) || QDELING(X))
+#define QDESTROYING(X) (isnull(X) || X.gc_destroyed == GC_CURRENTLY_BEING_QDELETED)
 
 //Qdel helper macros.
-#define QDEL_IN(item, time) addtimer(CALLBACK(GLOBAL_PROC, .proc/qdel, item), time, TIMER_STOPPABLE)
-#define QDEL_IN_CLIENT_TIME(item, time) addtimer(CALLBACK(GLOBAL_PROC, .proc/qdel, item), time, TIMER_STOPPABLE | TIMER_CLIENT_TIME)
+#define QDEL_IN(item, time) if(!isnull(item)) {addtimer(CALLBACK(item, /datum/proc/qdel_self), time, TIMER_STOPPABLE)}
+#define QDEL_IN_CLIENT_TIME(item, time) if(!isnull(item)) {addtimer(CALLBACK(item, /datum/proc/qdel_self), time, TIMER_STOPPABLE | TIMER_CLIENT_TIME)}
 #define QDEL_NULL(item) if(item) {qdel(item); item = null}
-#define QDEL_NULL_SCREEN(item) if(client) { client.screen -= item; }; QDEL_NULL(item) 
+#define QDEL_NULL_SCREEN(item) if(client) { client.screen -= item; }; QDEL_NULL(item)
 #define QDEL_NULL_LIST(x) if(x) { for(var/y in x) { qdel(y) }}; if(x) {x.Cut(); x = null } // Second x check to handle items that LAZYREMOVE on qdel.
 #define QDEL_LIST(L) if(L) { for(var/I in L) qdel(I); L.Cut(); }
 #define QDEL_LIST_IN(L, time) addtimer(CALLBACK(GLOBAL_PROC, .proc/______qdel_list_wrapper, L), time, TIMER_STOPPABLE)

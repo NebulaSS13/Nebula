@@ -59,7 +59,7 @@
 	airlock_program.master_prog = src
 
 /datum/computer/file/embedded_program/docking/airlock/Destroy()
-	qdel(airlock_program)
+	QDEL_NULL(airlock_program)
 	return ..()
 
 /datum/computer/file/embedded_program/docking/airlock/receive_user_command(command)
