@@ -8,8 +8,7 @@
 	thrown_material_force_multiplier = 0.3
 	hitsound = 'sound/items/oneding.ogg'
 	material = /decl/material/solid/metal/aluminium
-	applies_material_colour = TRUE
-	applies_material_name = TRUE
+	material_alteration = MAT_FLAG_ALTERATION_COLOR | MAT_FLAG_ALTERATION_NAME
 
 /obj/item/bell/attack_hand(mob/user)
 	if (user.a_intent == I_GRAB)

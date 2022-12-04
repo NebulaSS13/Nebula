@@ -36,8 +36,7 @@
 
 /obj/item/clothing/gloves/thick/botany
 	desc = "These work gloves protect against thorns, barbs, prickles, spikes and other harmful objects of floral origin."
-	applies_material_colour = TRUE
-	applies_material_name = TRUE
+	material_alteration = MAT_FLAG_ALTERATION_COLOR | MAT_FLAG_ALTERATION_NAME
 
 /obj/item/clothing/gloves/thick/botany/on_update_icon()
 	. = ..()
@@ -61,8 +60,7 @@
 	icon = 'icons/clothing/hands/gauntlets.dmi'
 	material = /decl/material/solid/metal/steel
 	material_armor_multiplier = 1
-	applies_material_colour = TRUE
-	applies_material_name = TRUE
+	material_alteration = MAT_FLAG_ALTERATION_COLOR | MAT_FLAG_ALTERATION_NAME
 
 /obj/item/clothing/gloves/thick/craftable/set_material(var/new_material)
 	..()

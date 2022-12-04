@@ -15,7 +15,7 @@
 	desc = "Tall synthleather boots with an artificial shine."
 	icon = 'icons/clothing/feet/boots.dmi'
 	material = /decl/material/solid/leather/synth
-	applies_material_colour = TRUE
+	material_alteration = MAT_FLAG_ALTERATION_COLOR
 	force = 3
 	armor = list(
 		melee = ARMOR_MELEE_RESISTANT, 

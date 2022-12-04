@@ -145,8 +145,7 @@
 /obj/item/clothing/suit/leathercoat
 	name = "longcoat"
 	icon = 'icons/clothing/suit/leathercoat.dmi'
-	applies_material_colour = TRUE
-	applies_material_name = TRUE
+	material_alteration = MAT_FLAG_ALTERATION_COLOR | MAT_FLAG_ALTERATION_NAME
 	material_armor_multiplier = 0.8
 	material = /decl/material/solid/leather
 	var/shine

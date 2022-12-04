@@ -16,7 +16,7 @@
 	obj_flags = 0
 	volume = 60
 	material = /decl/material/solid/glass
-	applies_material_colour = TRUE
+	material_alteration = MAT_FLAG_ALTERATION_COLOR | MAT_FLAG_ALTERATION_NAME
 
 	var/label_color
 	var/lid_color = COLOR_GRAY80

@@ -6,8 +6,7 @@
 	icon_state = ICON_STATE_WORLD
 	center_of_mass = @"{'x':15,'y':10}"
 	material = /decl/material/solid/glass
-	applies_material_name = TRUE
-	applies_material_colour = TRUE
+	material_alteration = MAT_FLAG_ALTERATION_COLOR | MAT_FLAG_ALTERATION_NAME
 	material_force_multiplier = 0.25
 	atom_flags = ATOM_FLAG_OPEN_CONTAINER
 	presentation_flags = PRESENTATION_FLAG_NAME
@@ -100,8 +99,7 @@
 	atom_flags = ATOM_FLAG_NO_TEMP_CHANGE | ATOM_FLAG_OPEN_CONTAINER | ATOM_FLAG_NO_REACT
 	presentation_flags = PRESENTATION_FLAG_NAME
 	material = /decl/material/solid/metal/steel
-	applies_material_name = FALSE
-	applies_material_colour = FALSE
+	material_alteration = MAT_FLAG_ALTERATION_NONE
 	origin_tech = "{'materials':2}"
 	lid_color = COLOR_PALE_BLUE_GRAY
 
@@ -114,8 +112,7 @@
 	amount_per_transfer_from_this = 10
 	possible_transfer_amounts = @"[5,10,15,25,30,60,120,150,200,250,300]"
 	material_force_multiplier = 2.5
-	applies_material_colour = FALSE
-	applies_material_name = FALSE
+	material_alteration = MAT_FLAG_ALTERATION_NONE
 	material = /decl/material/solid/metal/steel
 	matter = list(
 		/decl/material/solid/metal/uranium = MATTER_AMOUNT_TRACE,
@@ -149,11 +146,9 @@
 	possible_transfer_amounts = @"[5,10,15,30]"
 	atom_flags = ATOM_FLAG_NO_TEMP_CHANGE | ATOM_FLAG_OPEN_CONTAINER
 	presentation_flags = PRESENTATION_FLAG_NAME
-	applies_material_colour = FALSE
 	temperature_coefficient = 1
 	material = /decl/material/solid/metal/steel
-	applies_material_name = FALSE
-	applies_material_colour = FALSE
+	material_alteration = MAT_FLAG_ALTERATION_NONE
 	lid_color = COLOR_GRAY40
 
 /obj/item/chems/glass/beaker/insulated/large

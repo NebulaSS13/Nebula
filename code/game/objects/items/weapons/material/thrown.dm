@@ -11,8 +11,7 @@
 	sharp = 1
 	edge =  1
 	material = /decl/material/solid/metal/steel
-	applies_material_colour = TRUE
-	applies_material_name = TRUE
+	material_alteration = MAT_FLAG_ALTERATION_COLOR | MAT_FLAG_ALTERATION_NAME
 
 /obj/item/star/throw_impact(atom/hit_atom)
 	..()

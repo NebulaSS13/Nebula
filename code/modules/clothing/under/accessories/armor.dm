@@ -103,8 +103,7 @@
 /obj/item/clothing/accessory/armguards/craftable
 	material_armor_multiplier = 1
 	matter = null
-	applies_material_colour = TRUE
-	applies_material_name = TRUE
+	material_alteration = MAT_FLAG_ALTERATION_COLOR | MAT_FLAG_ALTERATION_NAME
 
 //Leg guards
 /obj/item/clothing/accessory/legguards
@@ -132,8 +131,7 @@
 /obj/item/clothing/accessory/legguards/craftable
 	material_armor_multiplier = 1
 	matter = null
-	applies_material_colour = TRUE
-	applies_material_name =  TRUE
+	material_alteration = MAT_FLAG_ALTERATION_COLOR | MAT_FLAG_ALTERATION_NAME
 
 /obj/item/clothing/accessory/armor
 	name = "master armor"

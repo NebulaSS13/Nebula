@@ -16,8 +16,7 @@
 	valid_handle_colors = null
 	max_force = 5
 	material = /decl/material/solid/metal/steel
-	applies_material_colour = TRUE
-	applies_material_name = TRUE
+	material_alteration = MAT_FLAG_ALTERATION_COLOR | MAT_FLAG_ALTERATION_NAME
 
 	var/active_tool = SWISSKNF_CLOSED
 	var/can_use_tools = FALSE

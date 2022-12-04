@@ -14,8 +14,7 @@
 	item_state = "shard-glass"
 	attack_verb = list("stabbed", "slashed", "sliced", "cut")
 	material = /decl/material/solid/glass
-	applies_material_colour = TRUE
-	applies_material_name = TRUE
+	material_alteration = MAT_FLAG_ALTERATION_COLOR | MAT_FLAG_ALTERATION_NAME
 	item_flags = ITEM_FLAG_CAN_HIDE_IN_SHOES
 	var/has_handle
 

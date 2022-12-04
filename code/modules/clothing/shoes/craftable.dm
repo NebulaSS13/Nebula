@@ -3,8 +3,7 @@
 	desc = "A pair of shoes."
 	icon = 'icons/clothing/feet/generic_shoes.dmi'
 	material = /decl/material/solid/leather
-	applies_material_colour = TRUE
-	applies_material_name = TRUE
+	material_alteration = MAT_FLAG_ALTERATION_COLOR | MAT_FLAG_ALTERATION_NAME
 	cold_protection = SLOT_FEET
 	min_cold_protection_temperature = SHOE_MIN_COLD_PROTECTION_TEMPERATURE
 	heat_protection = SLOT_FEET

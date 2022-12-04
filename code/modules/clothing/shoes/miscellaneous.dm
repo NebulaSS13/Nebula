@@ -28,21 +28,21 @@
 /obj/item/clothing/shoes/jackboots/swat/combat //Basically SWAT shoes combined with galoshes.
 	name = "combat boots"
 	desc = "When you REALLY want to turn up the heat."
-	applies_material_colour = FALSE
+	material_alteration = MAT_FLAG_ALTERATION_NONE
 	color = "#694e30"
 	force = 5
 
 /obj/item/clothing/shoes/jackboots/jungleboots
 	name = "jungle boots"
 	desc = "A pair of durable brown boots. Waterproofed for use planetside."
-	applies_material_colour = FALSE
+	material_alteration = MAT_FLAG_ALTERATION_NONE
 	color = "#694e30"
 	artificail_shine = 0
 
 /obj/item/clothing/shoes/jackboots/desertboots
 	name = "desert boots"
 	desc = "A pair of durable tan boots. Designed for use in hot climates."
-	applies_material_colour = FALSE
+	material_alteration = MAT_FLAG_ALTERATION_NONE
 	color = "#9c8c6a"
 	artificail_shine = 0
 
@@ -54,7 +54,7 @@
 /obj/item/clothing/shoes/jackboots/tactical
 	name = "tactical boots"
 	desc = "Tan boots with extra padding and armor."
-	applies_material_colour = FALSE
+	material_alteration = MAT_FLAG_ALTERATION_NONE
 	color = "#9c8c6a"
 	artificail_shine = 0
 

@@ -86,8 +86,7 @@
 	edge = 1
 	attack_verb = list("attacked", "chopped", "cleaved", "torn", "cut")
 	material = /decl/material/solid/metal/steel
-	applies_material_colour = FALSE
-	applies_material_name = TRUE
+	material_alteration = MAT_FLAG_ALTERATION_NAME
 
 /obj/item/twohanded/fireaxe/Initialize()
 	. = ..()
@@ -119,8 +118,7 @@
 	sharp = 1
 	attack_verb = list("attacked", "poked", "jabbed", "torn", "gored")
 	material = /decl/material/solid/glass
-	applies_material_colour = TRUE
-	applies_material_name = TRUE
+	material_alteration = MAT_FLAG_ALTERATION_COLOR | MAT_FLAG_ALTERATION_NAME
 	does_spin = FALSE
 	var/shaft_material = /decl/material/solid/metal/steel
 	var/cable_color = COLOR_RED
@@ -177,8 +175,7 @@
 	attack_verb = list("smashed", "beaten", "slammed", "smacked", "struck", "battered", "bonked")
 	hitsound = 'sound/weapons/genhit3.ogg'
 	material = /decl/material/solid/wood/maple
-	applies_material_colour = TRUE
-	applies_material_name = TRUE
+	material_alteration = MAT_FLAG_ALTERATION_COLOR | MAT_FLAG_ALTERATION_NAME
 	max_force = 40	//for wielded
 	material_force_multiplier = 0.4           // 24 when wielded with weight 60 (steel)
 	unwielded_material_force_multiplier = 0.25 // 15 when unwielded based on above.
@@ -209,8 +206,7 @@
 	unwielded_material_force_multiplier = 0.3
 	attack_verb = list("bludgeoned", "slammed", "smashed", "wrenched")
 	material = /decl/material/solid/metal/steel
-	applies_material_colour = FALSE
-	applies_material_name = TRUE
+	material_alteration = MAT_FLAG_ALTERATION_NAME
 	w_class = ITEM_SIZE_NO_CONTAINER
 
 /obj/item/twohanded/pipewrench/Initialize()

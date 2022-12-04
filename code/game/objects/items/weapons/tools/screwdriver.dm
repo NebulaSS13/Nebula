@@ -10,7 +10,7 @@
 	attack_verb = list("stabbed")
 	lock_picking_level = 5
 	sharp = TRUE
-	applies_material_colour = TRUE
+	material_alteration = MAT_FLAG_ALTERATION_COLOR
 	drop_sound = 'sound/foley/singletooldrop2.ogg'
 
 	var/static/valid_colours = list(COLOR_RED, COLOR_CYAN_BLUE, COLOR_PURPLE, COLOR_CHESTNUT, COLOR_ASSEMBLY_YELLOW, COLOR_BOTTLE_GREEN)
