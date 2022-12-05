@@ -8,6 +8,7 @@ var/global/list/materials_by_gas_symbol = list()
 	layer = FIRE_LAYER
 	appearance_flags = RESET_COLOR
 	mouse_opacity = 0
+	material_alteration = MAT_FLAG_ALTERATION_COLOR
 
 INITIALIZE_IMMEDIATE(/obj/effect/gas_overlay)
 
@@ -25,15 +26,10 @@ INITIALIZE_IMMEDIATE(/obj/effect/gas_overlay)
 		log_warning("\The [src] ([x], [y], [z]) didn't have a valid material set at construction. Deleting!")
 		return INITIALIZE_HINT_QDEL
 
-/obj/effect/gas_overlay/set_material(new_material)
-	if(ispath(new_material, /decl/material))
-		material = GET_DECL(new_material)
-	else
-		material = new_material
-
-	if(material.gas_tile_overlay)
+/obj/effect/gas_overlay/update_material(keep_health, should_update_icon)
+	if(istype(material) && material.gas_tile_overlay)
 		icon_state = material.gas_tile_overlay
-	color = material.color
+	. = ..()
 
 /*
 	MATERIAL DATUMS

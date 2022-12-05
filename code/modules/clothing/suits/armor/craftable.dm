@@ -11,7 +11,7 @@
 	valid_accessory_slots = list(ACCESSORY_SLOT_OVER, ACCESSORY_SLOT_INSIGNIA, ACCESSORY_SLOT_ARMOR_A, ACCESSORY_SLOT_ARMOR_L)
 	restricted_accessory_slots = list(ACCESSORY_SLOT_OVER, ACCESSORY_SLOT_INSIGNIA, ACCESSORY_SLOT_ARMOR_A, ACCESSORY_SLOT_ARMOR_L)
 
-/obj/item/clothing/suit/armor/crafted/set_material(new_material)
+/obj/item/clothing/suit/armor/crafted/update_material(keep_health, should_update_icon)
 	. = ..()
 	update_strings()
 

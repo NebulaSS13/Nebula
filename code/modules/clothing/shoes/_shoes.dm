@@ -155,10 +155,13 @@
 		var/mob/M = src.loc
 		M.update_inv_shoes()
 
-/obj/item/clothing/shoes/set_material(var/new_material)
-	..()
-	if(shine != -1 && material.reflectiveness >= MAT_VALUE_DULL)
-		shine = material.reflectiveness
+/obj/item/clothing/shoes/update_material_properties()
+	. = ..()
+	if(istype(material) && shine != -1)
+		if(material.reflectiveness >= MAT_VALUE_DULL)
+			shine = material.reflectiveness
+		else
+			shine = 0
 
 /obj/item/clothing/shoes/on_update_icon()
 	. = ..()

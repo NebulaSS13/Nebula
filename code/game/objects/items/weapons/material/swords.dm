@@ -59,11 +59,15 @@
 	icon = 'icons/obj/items/weapon/swords/katana.dmi'
 	slot_flags = SLOT_LOWER_BODY | SLOT_BACK
 
-/obj/item/sword/katana/set_material(new_material)
-	. = ..()
+/obj/item/sword/katana/update_material_name(override_name)
 	if((material_alteration & MAT_FLAG_ALTERATION_NAME) && istype(material, /decl/material/solid/wood))
-		SetName("[material.solid_name] bokutou")
-		desc = "Finest wooden fibers folded exactly one thousand times by master robots."
+		override_name = "[material.solid_name] bokutou"
+	. = ..(override_name)
+
+/obj/item/sword/katana/update_material_desc(override_desc)
+	if((material_alteration & MAT_FLAG_ALTERATION_NAME) && istype(material, /decl/material/solid/wood))
+		override_desc = "Finest wooden fibers folded exactly one thousand times by master robots."
+	. = ..(override_desc)
 
 /obj/item/sword/katana/bamboo
 	material = /decl/material/solid/wood/bamboo

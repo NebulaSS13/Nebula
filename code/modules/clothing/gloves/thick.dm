@@ -62,9 +62,14 @@
 	material_armor_multiplier = 1
 	material_alteration = MAT_FLAG_ALTERATION_COLOR | MAT_FLAG_ALTERATION_NAME
 
-/obj/item/clothing/gloves/thick/craftable/set_material(var/new_material)
-	..()
-	if(material.conductive)
-		siemens_coefficient = 1
-	if(material.is_brittle())
-		item_flags &= ~ITEM_FLAG_THICKMATERIAL
+/obj/item/clothing/gloves/thick/craftable/update_material_properties()
+	. = ..()
+	if(istype(material))
+		if(material.conductive)
+			siemens_coefficient = 1
+		else
+			siemens_coefficient = initial(siemens_coefficient)
+		if(material.is_brittle())
+			item_flags &= ~ITEM_FLAG_THICKMATERIAL
+		else
+			item_flags = (item_flags & (~ITEM_FLAG_THICKMATERIAL)) | (initial(item_flags) & ITEM_FLAG_THICKMATERIAL)

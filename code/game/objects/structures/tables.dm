@@ -45,8 +45,6 @@
 	if(. != INITIALIZE_HINT_QDEL)
 		if(!material)
 			return INITIALIZE_HINT_QDEL
-		if(reinf_material || additional_reinf_material || felted)
-			tool_interaction_flags &= ~TOOL_INTERACTION_DECONSTRUCT
 
 		for(var/obj/structure/table/T in loc)
 			if(T != src)
@@ -68,16 +66,15 @@
 	// Destroy some stuff before passing off to dismantle(), which will return it in sheet form instead.
 	if(reinf_material && !prob(20))
 		reinf_material.place_shards(loc)
-		reinf_material = null
+		set_reinf_material(null, TRUE, TRUE, TRUE)
 	if(material && !prob(20))
 		material.place_shards(loc)
-		material = null
+		set_material(null, TRUE, TRUE, TRUE)
 	if(additional_reinf_material && !prob(20))
 		additional_reinf_material.place_shards(loc)
-		additional_reinf_material = null
+		set_additional_reinf_material(null, TRUE, TRUE, TRUE)
 	if(felted && prob(50))
 		felted = FALSE
-
 	. = ..()
 
 /obj/structure/table/create_dismantled_products(var/turf/T)
@@ -85,8 +82,8 @@
 		new /obj/item/stack/tile/carpet(T)
 		felted = FALSE
 	if(additional_reinf_material)
-		additional_reinf_material.place_dismantled_product(T)
-		additional_reinf_material = null
+		additional_reinf_material.place_sheet_matter(T, matter[additional_reinf_material.type])
+		set_additional_reinf_material(null, TRUE, TRUE)
 	. = ..()
 
 /obj/structure/table/Destroy()
@@ -141,13 +138,12 @@
 		if(check_reinf)
 			if(remove_mat != reinf_material)
 				return TRUE
-			reinf_material.create_object(src.loc)
+			reinf_material.place_sheet_matter(src.loc, matter[reinf_material.type])
 			set_reinf_material(null, TRUE)
-			tool_interaction_flags |= TOOL_INTERACTION_DECONSTRUCT
 		else
 			if(remove_mat != additional_reinf_material)
 				return TRUE
-			additional_reinf_material.create_object(src.loc)
+			additional_reinf_material.place_sheet_matter(src.loc, matter[additional_reinf_material.type])
 			set_additional_reinf_material(null, TRUE)
 
 		user.visible_message(SPAN_NOTICE("\The [user] removes the [remove_mat.solid_name] [remove_noun] from \the [src]."),
@@ -245,7 +241,6 @@
 	if(do_after(user, 2 SECONDS, src) && S.use(1) && !reinf_material)
 		user.visible_message(SPAN_NOTICE("\The [user] finishes adding \a [mat.solid_name] [top_surface_noun] to \the [src]."))
 		set_reinf_material(mat, TRUE)
-		tool_interaction_flags &= ~TOOL_INTERACTION_DECONSTRUCT
 
 	return TRUE
 
@@ -638,6 +633,14 @@
 
 	if(!skip_update_material)
 		update_material(keep_health)
+
+/obj/structure/table/update_material(keep_health, should_update_icon)
+	. = ..()
+	//Only allow deconstructing when there's no reinforcing left
+	if(reinf_material || additional_reinf_material || felted)
+		tool_interaction_flags &= ~TOOL_INTERACTION_DECONSTRUCT
+	else
+		tool_interaction_flags |= TOOL_INTERACTION_DECONSTRUCT
 
 /obj/structure/table/get_reinf_matter_amount()
 	return SHEET_MATERIAL_AMOUNT //Tables are reinforced with a single sheet

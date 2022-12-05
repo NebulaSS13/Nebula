@@ -37,8 +37,8 @@
 	matter = list(/decl/material/solid/metal/steel = MATTER_AMOUNT_REINFORCEMENT)
 	origin_tech = "{'materials':2,'engineering':2}"
 
-/obj/item/clothing/shoes/jackboots/set_material(var/new_material)
-	..()
+/obj/item/clothing/shoes/jackboots/update_material_properties()
+	. = ..()
 	shine = max(shine, artificail_shine)
 
 /obj/item/clothing/shoes/workboots

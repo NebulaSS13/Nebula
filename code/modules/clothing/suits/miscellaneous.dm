@@ -145,18 +145,19 @@
 /obj/item/clothing/suit/leathercoat
 	name = "longcoat"
 	icon = 'icons/clothing/suit/leathercoat.dmi'
-	material_alteration = MAT_FLAG_ALTERATION_COLOR | MAT_FLAG_ALTERATION_NAME
+	desc = "A long, thick coat."
+	material_alteration = MAT_FLAG_ALTERATION_ALL
 	material_armor_multiplier = 0.8
 	material = /decl/material/solid/leather
 	var/shine
 	var/artificial_shine
 
-/obj/item/clothing/suit/leathercoat/set_material(var/new_material)
-	..()
-	if(material)
-		if(material.reflectiveness >= MAT_VALUE_DULL)
-			shine = material.reflectiveness
-		desc = "A long, thick [material.use_name] coat."
+/obj/item/clothing/suit/leathercoat/update_material_properties()
+	. = ..()
+	if(istype(material) && (material.reflectiveness >= MAT_VALUE_DULL))
+		shine = material.reflectiveness
+	else
+		shine = null
 
 /obj/item/clothing/suit/leathercoat/adjust_mob_overlay(var/mob/living/user_mob, var/bodytype,  var/image/overlay, var/slot, var/bodypart)
 	if(overlay && shine > 0 && slot == slot_wear_suit_str)

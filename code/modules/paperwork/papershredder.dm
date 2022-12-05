@@ -217,10 +217,12 @@
 /obj/item/shreddedp/get_matter_amount_modifier()
 	return 0.2
 
-/obj/item/shreddedp/set_material(new_material)
-	. = ..()
-	if(material)
+/obj/item/shreddedp/update_material_name(override_name)
+	var/base_name = override_name || initial(name)
+	if(istype(material))
 		SetName("[initial(name)] [material.solid_name]")
+	else
+		SetName(base_name)
 
 /obj/item/shreddedp/attackby(var/obj/item/W, var/mob/user)
 	if(istype(W, /obj/item/flame/lighter))

@@ -128,12 +128,12 @@
 	desc = "A ragged cloak made of some sort of thick hide."
 	icon = 'icons/clothing/suit/cloaks/cloak_hide.dmi'
 	material = /decl/material/solid/leather
-	material_alteration = MAT_FLAG_ALTERATION_COLOR | MAT_FLAG_ALTERATION_NAME
+	material_alteration = MAT_FLAG_ALTERATION_ALL
 	armor_type = /datum/extension/armor/ablative
 	body_parts_covered = SLOT_UPPER_BODY|SLOT_LOWER_BODY
 	material_armor_multiplier = 0.5
 
-/obj/item/clothing/accessory/cloak/hide/set_material(var/new_material)
-	..()
+/obj/item/clothing/accessory/cloak/hide/update_material_desc(override_desc)
 	if(istype(material))
-		desc = "A ragged cloak made of [material.solid_name]."
+		override_desc = "A ragged cloak"
+	. = ..(override_desc)
