@@ -630,8 +630,20 @@
 	else
 		additional_reinf_material = mat
 
+	if(!skip_update_matter)
+		var/mat_units = get_additional_material_amount()
+		if(istype(old_material))
+			subtract_matter(old_material, mat_units) //Remove the matter we added for the previous material if applicable
+		add_matter(material, mat_units)
+
 	if(!skip_update_material)
 		update_material(keep_health)
+
+/obj/structure/table/get_reinf_matter_amount()
+	return SHEET_MATERIAL_AMOUNT //Tables are reinforced with a single sheet
+
+/obj/structure/table/proc/get_additional_material_amount()
+	return SHEET_MATERIAL_AMOUNT //Tables are reinforced with a single sheet
 
 // Table presets.
 /obj/structure/table/frame

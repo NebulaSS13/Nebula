@@ -28,7 +28,7 @@
 		material = new_material
 
 	if(!skip_update_matter)
-		var/mat_units = MATTER_AMOUNT_PRIMARY * get_matter_amount_modifier()
+		var/mat_units = get_primary_matter_amount()
 		if(istype(old_material))
 			subtract_matter(old_material, mat_units) //Remove the matter we added for the previous material if applicable
 		add_matter(material, mat_units)
@@ -155,14 +155,15 @@
  * Initialize the matter list contents.
  */
 /obj/proc/create_matter()
-	//Add primary material, and any reinforced material
-	add_matter(get_material(), MATTER_AMOUNT_PRIMARY) //Modifier applied below
-	add_matter(get_reinf_material(), MATTER_AMOUNT_REINFORCEMENT)
-
+	//Apply matter multiplier to matter list
 	var/amount_modifier = get_matter_amount_modifier()
-	if(length(matter))
-		for(var/M in matter)
-			matter[M] = round(matter[M] * amount_modifier)
+	for(var/M in matter)
+		matter[M] = round(matter[M] * amount_modifier)
+
+	//Add primary material, and any reinforced material
+	add_matter(get_material(),       get_primary_matter_amount())
+	add_matter(get_reinf_material(), get_reinf_matter_amount())
+
 	UNSETEMPTY(matter)
 
 /**
@@ -199,3 +200,15 @@
 	. = CEILING(w_class * BASE_OBJECT_MATTER_MULTPLIER)
 	if(obj_flags & OBJ_FLAG_HOLLOW)
 		. *= HOLLOW_OBJECT_MATTER_MULTIPLIER
+
+/**
+ * Since some things override the amount of matter that is assigned to the primary, secondary and reinforcing material, we have to handle it here.
+ */
+/obj/proc/get_primary_matter_amount()
+	return MATTER_AMOUNT_PRIMARY * get_matter_amount_modifier()
+
+/**
+ * Since some things override the amount of matter that is assigned to the primary, secondary and reinforcing material, we have to handle it here.
+ */
+/obj/proc/get_reinf_matter_amount()
+	return MATTER_AMOUNT_REINFORCEMENT * get_matter_amount_modifier()
