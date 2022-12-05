@@ -3,18 +3,18 @@
 /obj/item/shard
 	name = "shard"
 	icon = 'icons/obj/items/shards.dmi'
-	desc = "Made of nothing. How does this even exist?" // set based on material, if this desc is visible it's a bug (shards default to being made of glass)
+	desc = "It looks sharp, you wouldn't want to step on it barefoot. Could probably be used as ... a throwing weapon?"
 	icon_state = "large"
 	randpixel = 8
-	sharp = 1
-	edge = 1
+	sharp = TRUE
+	edge = TRUE
 	w_class = ITEM_SIZE_SMALL
 	material_force_multiplier = 0.12 // 6 with hardness 30 (glass)
 	thrown_material_force_multiplier = 0.1 // 3 with weight 30 (glass)
 	item_state = "shard-glass"
 	attack_verb = list("stabbed", "slashed", "sliced", "cut")
 	material = /decl/material/solid/glass
-	material_alteration = MAT_FLAG_ALTERATION_COLOR | MAT_FLAG_ALTERATION_NAME
+	material_alteration = MAT_FLAG_ALTERATION_COLOR | MAT_FLAG_ALTERATION_NAME | MAT_FLAG_ALTERATION_DESC
 	item_flags = ITEM_FLAG_CAN_HIDE_IN_SHOES
 	var/has_handle
 
@@ -32,34 +32,33 @@
 				to_chat(H, SPAN_DANGER("You slice your hand on \the [src]!"))
 				hand.take_external_damage(rand(5,10), used_weapon = src)
 
-/obj/item/shard/set_material(var/new_material)
-	..(new_material)
-	if(!istype(material))
-		return
-
-	icon_state = "[material.shard_icon][pick("large", "medium", "small")]"
-	update_icon()
-
-	if(material.shard_type)
-		SetName("[material.solid_name] [material.shard_type]")
-		desc = "A small piece of [material.solid_name]. It looks sharp, you wouldn't want to step on it barefoot. Could probably be used as ... a throwing weapon?"
-		switch(material.shard_type)
-			if(SHARD_SPLINTER, SHARD_SHRAPNEL)
-				gender = PLURAL
-			else
-				gender = NEUTER
-	else
-		qdel(src)
-
-/obj/item/shard/on_update_icon()
+/obj/item/shard/set_material(new_material, keep_health = FALSE, update_material = TRUE)
 	. = ..()
+	if(!istype(material))
+		return FALSE
+	if(!material.shard_type)
+		CRASH("'[type]' ([x], [y], [z]): set material to '[material]' which doesn't define a shard type!")
+	icon_state = "[material.shard_icon][pick("large", "medium", "small")]"
+
+/obj/item/shard/update_material_properties()
+	gender = (material?.shard_type == SHARD_SPLINTER || material?.shard_type == SHARD_SHRAPNEL)? PLURAL : NEUTER
+	. = ..()
+
+/obj/item/shard/update_material_desc(override_desc)
 	if(material)
-		color = material.color
-		// 1-(1-x)^2, so that glass shards with 0.3 opacity end up somewhat visible at 0.51 opacity
-		alpha = 255 * (1 - (1 - material.opacity)*(1 - material.opacity))
+		desc = "A small piece of [material.solid_name]. [override_desc || initial(desc)]"
 	else
-		color = "#ffffff"
-		alpha = 255
+		. = ..()
+
+/obj/item/shard/update_material_name(override_name)
+	. = ..(override_name || material.shard_type)
+
+/obj/item/shard/update_material_colour(override_colour, override_alpha)
+	if(!override_colour)
+		override_colour = material?.color || "#ffffff"
+	if(!override_alpha)
+		override_alpha = material? (255 * (1 - (1 - material.opacity)*(1 - material.opacity))) : 255
+	. = ..(override_colour, override_alpha)
 
 /obj/item/shard/attackby(obj/item/W, mob/user)
 	if(IS_WELDER(W) && material.shard_can_repair)

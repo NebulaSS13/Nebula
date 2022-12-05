@@ -78,8 +78,7 @@ a creative player the means to solve many problems.  Circuits are held inside an
 	setup_io(outputs, /datum/integrated_io, outputs_default, IC_OUTPUT)
 	outputs_default = null
 	setup_io(activators, /datum/integrated_io/activate, null, IC_ACTIVATOR)
-	if(!matter[/decl/material/solid/metal/steel])
-		matter[/decl/material/solid/metal/steel] = w_class * SScircuit.cost_multiplier // Default cost. //#TODO: Maybe move that stuff to the new material system that does essentially the same thing?
+	//#TODO: will need to rebalance integrated circuit material costs since they did weird conflicting things with the matter list.
 	. = ..()
 
 /obj/item/integrated_circuit/proc/on_data_written() //Override this for special behaviour when new data gets pushed to the circuit.

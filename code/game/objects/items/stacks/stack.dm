@@ -30,14 +30,13 @@
 	var/list/charge_costs
 	var/list/datum/matter_synth/synths
 
-/obj/item/stack/Initialize(mapload, amount, material)
-
-	if(ispath(amount, /decl/material))
-		PRINT_STACK_TRACE("Stack initialized with material ([amount]) instead of amount.")
-		material = amount
-	if (isnum(amount) && amount >= 1)
-		src.amount = amount
-	. = ..(mapload, material)
+/obj/item/stack/Initialize(mapload, _amount, material_key)
+	if(ispath(_amount, /decl/material))
+		PRINT_STACK_TRACE("Stack initialized with material ([_amount]) instead of amount.")
+		material = _amount
+	if (isnum(_amount) && _amount >= 1)
+		src.amount = _amount
+	. = ..(mapload, material_key)
 	if(!stack_merge_type)
 		stack_merge_type = type
 	if(!singular_name)
@@ -229,12 +228,18 @@
 	if(istype(material))
 		LAZYINITLIST(matter_per_piece)
 		matter_per_piece[material.type] = max(matter_per_piece[material.type], round(MATTER_AMOUNT_PRIMARY * matter_multiplier))
-	. = ..()
+		var/decl/material/reinf = get_reinf_material()
+		if(istype(reinf))
+			matter_per_piece[reinf.type] = max(matter_per_piece[reinf.type], round(MATTER_AMOUNT_REINFORCEMENT * matter_multiplier))
+		update_matter()
 
 /obj/item/stack/proc/update_matter()
 	matter = list()
 	for(var/mat in matter_per_piece)
 		matter[mat] = (matter_per_piece[mat] * amount)
+
+/obj/item/stack/set_material(new_material, keep_health = FALSE, update_material = TRUE, skip_update_matter = FALSE)
+	. = ..(new_material, keep_health, update_material, TRUE) //Always skip update the matter list for stacks, since the matter list is regenerated from scratch
 
 /obj/item/stack/proc/use(var/used)
 	if (!can_use(used))

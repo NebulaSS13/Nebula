@@ -8,9 +8,9 @@
 	unacidable = TRUE //Dissolving the case would also delete the gun.
 	alpha = 150
 	maxhealth = 100
-	hitsound = 'sound/effects/Glasshit.ogg'
 	req_access = null
-
+	material = /decl/material/solid/glass
+	obj_flags = OBJ_FLAG_HOLLOW
 	var/destroyed = FALSE
 	var/locked = TRUE
 
@@ -51,7 +51,7 @@
 	..()
 	take_damage(Proj.get_structure_damage())
 
-/obj/structure/proc/subtract_matter(var/obj/subtracting)
+/obj/structure/proc/subtract_matter_from_obj(var/obj/subtracting)
 	if(!length(matter))
 		return
 	if(!istype(subtracting) || !length(subtracting.matter))
@@ -75,7 +75,7 @@
 	if(.)
 		set_density(0)
 		destroyed = TRUE
-		subtract_matter(new /obj/item/shard(get_turf(src), material?.type))
+		subtract_matter_from_obj(new /obj/item/shard(get_turf(src), material?.type))
 		playsound(src, "shatter", 70, 1)
 		update_icon()
 

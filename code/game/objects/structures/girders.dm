@@ -15,7 +15,7 @@
 	var/cover = 50
 	var/prepped_for_fakewall
 
-/obj/structure/girder/Initialize()
+/obj/structure/girder/Initialize(ml, _mat, _reinf_mat)
 	set_extension(src, /datum/extension/penetration/simple, 100)
 	. = ..()
 

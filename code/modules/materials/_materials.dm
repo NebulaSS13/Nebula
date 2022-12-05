@@ -8,7 +8,6 @@ var/global/list/materials_by_gas_symbol = list()
 	layer = FIRE_LAYER
 	appearance_flags = RESET_COLOR
 	mouse_opacity = 0
-	var/decl/material/material
 
 INITIALIZE_IMMEDIATE(/obj/effect/gas_overlay)
 
@@ -18,11 +17,20 @@ INITIALIZE_IMMEDIATE(/obj/effect/gas_overlay)
 	animate(src, alpha = 0.8 * new_alpha, time = 10, easing = SINE_EASING | EASE_OUT, loop = -1)
 	animate(alpha = new_alpha, time = 10, easing = SINE_EASING | EASE_IN, loop = -1)
 
-/obj/effect/gas_overlay/Initialize(mapload, gas)
+/obj/effect/gas_overlay/Initialize(ml, gas)
+	if(ispath(gas))
+		material = gas //Base class handles getting the decl
 	. = ..()
-	material = GET_DECL(gas)
 	if(!istype(material))
+		log_warning("\The [src] ([x], [y], [z]) didn't have a valid material set at construction. Deleting!")
 		return INITIALIZE_HINT_QDEL
+
+/obj/effect/gas_overlay/set_material(new_material)
+	if(ispath(new_material, /decl/material))
+		material = GET_DECL(new_material)
+	else
+		material = new_material
+
 	if(material.gas_tile_overlay)
 		icon_state = material.gas_tile_overlay
 	color = material.color
@@ -51,11 +59,6 @@ INITIALIZE_IMMEDIATE(/obj/effect/gas_overlay)
 			plastic
 			wood
 */
-
-//Returns the material the object is made of, if applicable.
-//Will we ever need to return more than one value here? Or should we just return the "dominant" material.
-/obj/proc/get_material()
-	return
 
 //mostly for convenience
 /obj/proc/get_material_type()

@@ -878,6 +878,7 @@
 #include "code\game\objects\item_materials.dm"
 #include "code\game\objects\item_mob_overlay.dm"
 #include "code\game\objects\munition.dm"
+#include "code\game\objects\obj_materials.dm"
 #include "code\game\objects\objs.dm"
 #include "code\game\objects\topic.dm"
 #include "code\game\objects\auras\aura.dm"

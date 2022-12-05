@@ -1,58 +1,30 @@
 /obj/structure
-	var/decl/material/material
 	var/decl/material/reinf_material
-	var/material_alteration
 	var/dismantled
 
-/obj/structure/get_material()
-	. = material
+/obj/structure/get_reinf_material()
+	return reinf_material
 
-/obj/structure/proc/get_material_health_modifier()
-	. = 1
-
-/obj/structure/proc/update_materials(var/keep_health)
-	if(material_alteration & MAT_FLAG_ALTERATION_NAME)
-		update_material_name()
-	if(material_alteration & MAT_FLAG_ALTERATION_DESC)
-		update_material_desc()
-	if(material_alteration & MAT_FLAG_ALTERATION_COLOR)
-		update_material_colour()
-	if((alpha / 255) < 0.5)
-		set_opacity(FALSE)
+//Set the reinforced material for this structure. If keep_health is true, it will not reset the health value, and will instead just add the difference to it.
+/obj/structure/set_reinf_material(new_material, keep_health = FALSE, update_material = TRUE, skip_update_matter = FALSE)
+	var/decl/material/old_material = reinf_material
+	if(ispath(new_material))
+		reinf_material = GET_DECL(new_material)
 	else
-		set_opacity(initial(opacity))
-	hitsound = material?.hitsound || initial(hitsound)
-	if(maxhealth != -1)
-		maxhealth = initial(maxhealth) + material?.integrity * get_material_health_modifier()
-		if(reinf_material)
-			var/bonus_health = reinf_material.integrity * get_material_health_modifier()
-			maxhealth += bonus_health
-			if(!keep_health)
-				health += bonus_health
-		health = keep_health ? min(health, maxhealth) : maxhealth
-	update_icon()
+		reinf_material = new_material
 
-/obj/structure/proc/update_material_name(var/override_name)
-	var/base_name = override_name || initial(name)
-	if(istype(material))
-		SetName("[material.solid_name] [base_name]")
-	else
-		SetName(base_name)
+	if(!skip_update_matter)
+		var/mat_units = MATTER_AMOUNT_REINFORCEMENT * get_matter_amount_modifier()
+		if(istype(old_material))
+			subtract_matter(old_material, mat_units) //Remove the matter we added for the previous material if applicable
+		add_matter(material, mat_units)
 
-/obj/structure/proc/update_material_desc(var/override_desc)
-	var/base_desc = override_desc || initial(desc)
-	if(istype(material))
-		desc = "[base_desc] This one is made of [material.solid_name]."
-	else
-		desc = base_desc
+	if(update_material)
+		update_material(keep_health)
+	return TRUE
 
-/obj/structure/proc/update_material_colour(var/override_colour)
-	if(istype(material))
-		color = override_colour || material.color
-		alpha = clamp((50 + material.opacity * 255), 0, 255)
-	else
-		color = override_colour || initial(color)
-		alpha = initial(alpha)
+/obj/structure/update_material_name(override_name)
+	. = ..(override_name ? override_name : "[reinf_material ? "reinforced " : ""][material? "[material.solid_name] " : ""][name]")
 
 /obj/structure/proc/create_dismantled_products(var/turf/T)
 	SHOULD_CALL_PARENT(TRUE)

@@ -18,7 +18,17 @@
 /turf
 	temperature_coefficient = MIN_TEMPERATURE_COEFFICIENT
 
-/obj/Initialize(mapload)
+/obj/Initialize(ml)
+	//Setup material stuff
+	var/should_set_health = TRUE //#TODO: Replace when obj damage is in. We wanna prevent setting health when the object is invulnerable for instance.
+	var/mat  = get_material()
+	var/rmat = get_reinf_material()
+	if(mat)
+		set_material(mat, should_set_health, FALSE) //Keep health value if defined and don't do material updates
+	if(rmat)
+		set_reinf_material(rmat, should_set_health, FALSE) //Keep initially set health, and don't do material updates
+	//Setup armor, properties, health, matter etc
+	update_material(should_set_health, FALSE) //Don't update icon in the base class since some implementation of initialize need to do some other things before
 	. = ..()
 	temperature_coefficient = isnull(temperature_coefficient) ? clamp(MAX_TEMPERATURE_COEFFICIENT - w_class, MIN_TEMPERATURE_COEFFICIENT, MAX_TEMPERATURE_COEFFICIENT) : temperature_coefficient
 	create_matter()

@@ -19,6 +19,7 @@
 	. = ..()
 	update_top_paper()
 
+//#FIXME: This should do things in a slightly more standard way? Possibly using a stack as base class?
 /obj/item/sticky_pad/proc/update_matter()
 	matter = list(
 		/decl/material/solid/paper = round((papers * SHEET_MATERIAL_AMOUNT) * 0.2)

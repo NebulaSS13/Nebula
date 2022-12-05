@@ -20,3 +20,12 @@
 /obj/abstract/explosion_act()
 	SHOULD_CALL_PARENT(FALSE)
 	return
+
+/obj/abstract/update_material(keep_health, should_update_icon)
+	return
+
+/obj/abstract/create_matter()
+	return
+
+/obj/abstract/set_material(new_material, keep_heath, update_material)
+	return

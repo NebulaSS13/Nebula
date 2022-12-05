@@ -157,10 +157,10 @@ var/global/list/machine_path_to_circuit_type
 		LAZYINITLIST(uncreated_component_parts)
 		uncreated_component_parts[part] += 1
 	else // Wrong type
-		var/obj/item/stock_parts/building_material/material = get_component_of_type(/obj/item/stock_parts/building_material)
-		if(!material)
-			material = install_component(/obj/item/stock_parts/building_material, refresh_parts = FALSE)
-		material.add_material(part)
+		var/obj/item/stock_parts/building_material/BM = get_component_of_type(/obj/item/stock_parts/building_material)
+		if(!BM)
+			BM = install_component(/obj/item/stock_parts/building_material, refresh_parts = FALSE)
+		BM.add_material(part)
 
 	if(refresh_parts)
 		RefreshParts()
@@ -214,8 +214,8 @@ var/global/list/machine_path_to_circuit_type
 
 /obj/machinery/proc/number_of_components(var/part_type, var/only_functional)
 	if(!ispath(part_type, /obj/item/stock_parts))
-		var/obj/item/stock_parts/building_material/material = get_component_of_type(/obj/item/stock_parts/building_material)
-		return material && material.number_of_type(part_type)
+		var/obj/item/stock_parts/building_material/BM = get_component_of_type(/obj/item/stock_parts/building_material)
+		return BM?.number_of_type(part_type)
 	var/list/comps = types_of_component(part_type, only_functional)
 	. = 0
 	for(var/path in comps)

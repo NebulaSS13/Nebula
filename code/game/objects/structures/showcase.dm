@@ -3,6 +3,6 @@
 	icon = 'icons/obj/structures/showcase.dmi'
 	icon_state = "showcase_1"
 	desc = "A stand with the empty body of a cyborg bolted to it."
-	density = 1
-	anchored = 1
-	unacidable = 1//temporary until I decide whether the borg can be removed. -veyveyr
+	unacidable = 1//temporary until I decide whether the borg can be removed. -veyveyr	density = TRUE
+	anchored = TRUE
+	material = /decl/material/solid/metal/steel

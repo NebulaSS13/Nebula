@@ -19,23 +19,21 @@
 	var/holographic = 0 //if the obj is a holographic object spawned by the holodeck
 	var/tmp/directional_offset ///JSON list of directions to x,y offsets to be applied to the object depending on its direction EX: {'NORTH':{'x':12,'y':5}, 'EAST':{'x':10,'y':50}}
 
+	/// Reference to material decl. If set to a string corresponding to a material ID, will init the item with that material.
+	var/decl/material/material
+	///Will apply the flagged modifications to the object
+	var/material_alteration = MAT_FLAG_ALTERATION_NONE
+	///Sound to make when hit
+	var/hitsound = 'sound/weapons/smash.ogg'
+
 /obj/hitby(atom/movable/AM, var/datum/thrownthing/TT)
 	..()
 	if(!anchored)
 		step(src, AM.last_move)
 
-/obj/proc/create_matter()
-	if(length(matter))
-		for(var/mat in matter)
-			matter[mat] = round(matter[mat] * get_matter_amount_modifier())
-	UNSETEMPTY(matter)
-
 /obj/Destroy()
 	STOP_PROCESSING(SSobj, src)
 	return ..()
-
-/obj/proc/get_matter_amount_modifier()
-	. = CEILING(w_class * BASE_OBJECT_MATTER_MULTPLIER)
 
 /obj/assume_air(datum/gas_mixture/giver)
 	if(loc)
@@ -205,7 +203,7 @@
 	if(directional_offset)
 		update_directional_offset()
 
-/** 
+/**
  * Applies the offset stored in the directional_offset json list depending on the current direction.
  * force will force the default offset to be 0 if there are no directional_offset string.
  */
@@ -227,8 +225,8 @@
 		default_pixel_z = curoff["z"] || 0
 	reset_offsets(0)
 
-/** 
- * Returns whether the object should be considered as hanging off a wall. 
+/**
+ * Returns whether the object should be considered as hanging off a wall.
  * This is userful because wall-mounted things are actually on the adjacent floor tile offset towards the wall.
  * Which means we have to deal with directional offsets differently. Such as with buttons mounted on a table, or on a wall.
  */
@@ -237,7 +235,7 @@
 	if(obj_flags & OBJ_FLAG_MOVES_UNSUPPORTED || anchor_fall)
 		var/turf/forward = get_step(get_turf(src), dir)
 		var/turf/reverse = get_step(get_turf(src), global.reverse_dir[dir])
-		//If we're wall mounted and don't have a wall either facing us, or in the opposite direction, don't apply the offset. 
+		//If we're wall mounted and don't have a wall either facing us, or in the opposite direction, don't apply the offset.
 		// This is mainly for things that can be both wall mounted and floor mounted. Like buttons, which mappers seem to really like putting on tables.
 		// Its sort of a hack for now. But objects don't handle being on a wall or not. (They don't change their flags, layer, etc when on a wall or anything)
 		if(!forward?.is_wall() && !reverse?.is_wall())
@@ -265,11 +263,17 @@
 
 /**
  * Returns a list with the contents that may be spawned in this object.
- * This shouldn't include things that are necessary for the object to operate, like machine components. 
+ * This shouldn't include things that are necessary for the object to operate, like machine components.
  * Its mainly for populating storage and the like.
  */
 /obj/proc/WillContain()
 	return
+
+/**
+ * Returns a multiplier used to scale material integrity to be used as max_health for this obj.
+ */
+/obj/proc/get_material_health_modifier()
+	return 1
 
 ////////////////////////////////////////////////////////////////
 // Interactions

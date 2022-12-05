@@ -340,7 +340,7 @@
 	BP_SET_PROSTHETIC(src)
 	QDEL_NULL(dna)
 	reagents?.clear_reagents()
-	material = GET_DECL(apply_material)
+	set_material(GET_DECL(apply_material), skip_update_matter = TRUE)
 	matter = null
 	create_matter()
 

@@ -9,33 +9,32 @@
 	layer = ABOVE_WINDOW_LAYER
 	material_alteration = MAT_FLAG_ALTERATION_ALL
 	maxhealth = 100
+	material = /decl/material/solid/wood
 
 	var/spike_damage //how badly it smarts when you run into this like a rube
 	var/list/poke_description = list("gored", "spiked", "speared", "stuck", "stabbed")
 
 /obj/structure/barricade/spike
 	icon_state = "cheval"
+	reinf_material = /decl/material/solid/wood
 
-/obj/structure/barricade/spike/Initialize()
-	if(!reinf_material)
-		reinf_material = /decl/material/solid/wood
-	. = ..()
+/obj/structure/barricade/get_material_health_modifier()
+	return 2.0 //Double integrity
 
-/obj/structure/barricade/Initialize()
-	if(!material)
-		material = /decl/material/solid/wood
+/obj/structure/barricade/Initialize(ml, _mat, _reinf_mat)
 	. = ..()
 	if(!istype(material))
+		log_warning("\The [src] ([x], [y], [z]) had an invalid material. Deleting!")
 		return INITIALIZE_HINT_QDEL
 
-/obj/structure/barricade/update_materials(var/keep_health)
+/obj/structure/barricade/update_material_properties()
 	. = ..()
 	spike_damage = reinf_material?.hardness * 0.85
 
-/obj/structure/barricade/update_material_name()
+/obj/structure/barricade/update_material_name(override_name)
 	..(reinf_material ? "cheval-de-frise" : "barricade")
 
-/obj/structure/barricade/update_material_desc()
+/obj/structure/barricade/update_material_desc(override_desc)
 	if(reinf_material)
 		desc = "A rather simple [material.solid_name] barrier. It menaces with spikes of [reinf_material.solid_name]."
 	else
@@ -48,7 +47,7 @@
 		add_overlay(overlay_image(icon, "cheval_spikes", color = reinf_material.color, flags = RESET_COLOR))
 	else
 		icon_state = "barricade"
-	
+
 /obj/structure/barricade/attackby(obj/item/W, mob/user)
 	if(istype(W, /obj/item/stack/material/rods) && !reinf_material)
 		var/obj/item/stack/material/rods/R = W
@@ -58,8 +57,8 @@
 			visible_message(SPAN_NOTICE("\The [user] begins to work on \the [src]."))
 			if(do_after(user, 4 SECONDS, src) && !reinf_material && R.use(5))
 				visible_message(SPAN_NOTICE("\The [user] fastens \the [R] to \the [src]."))
-				reinf_material = R.material
-				update_materials(TRUE)
+				set_reinf_material(R.material, TRUE)
+		return TRUE
 	. = ..()
 
 /obj/structure/barricade/dismantle()

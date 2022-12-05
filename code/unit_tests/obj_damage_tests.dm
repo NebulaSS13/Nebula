@@ -55,7 +55,7 @@
 		return TRUE
 
 	if((I.max_health < 1.0) || (I.health < 1.0))
-		IT.report_failure(src, I.type, "Had its health/max_health set to a value < 1 by its material '[I.material.type]', where '[I.material.name]''s 'integrity' == '[I.material.integrity]', and '[I]''s 'material_health_multiplier' == '[I.material_health_multiplier]'.")
+		IT.report_failure(src, I.type, "Had its health/max_health set to a value < 1 by its material '[I.material.type]', where '[I.material.name]''s 'integrity' == '[I.material.integrity]', and '[I]''s 'material_health_modifier' == '[I.get_material_health_modifier()]'.")
 		return FALSE
 	return TRUE
 

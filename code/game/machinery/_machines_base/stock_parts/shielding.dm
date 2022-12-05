@@ -2,8 +2,10 @@
 //Components that soak damage before it reaches other components.
 /obj/item/stock_parts/shielding
 	base_type = /obj/item/stock_parts/shielding
-	material_health_multiplier = 0.4
 	var/list/protection_types	//types of damage it will soak
+
+/obj/item/stock_parts/shielding/get_material_health_modifier()
+	return 0.4
 
 /obj/item/stock_parts/shielding/electric
 	name = "fuse box"

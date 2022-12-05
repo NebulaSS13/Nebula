@@ -2,13 +2,15 @@
 	. = ..()
 	SHOULD_CALL_PARENT(TRUE)
 	cut_overlays()
-	if((material_alteration & MAT_FLAG_ALTERATION_COLOR) && material)
-		color = material.color
-		alpha = 100 + material.opacity * 255
 	if(blood_overlay)
 		add_overlay(blood_overlay)
 	if(global.contamination_overlay && contaminated)
 		overlays += global.contamination_overlay
+
+/obj/item/update_material_colour(override_colour, override_alpha)
+	if(material && (material_alteration & MAT_FLAG_ALTERATION_COLOR))
+		return ..(override_colour, override_alpha? override_alpha : (100 + (material.opacity * 255)))
+	return ..()
 
 /obj/item/apply_hit_effect(mob/living/target, mob/living/user, var/hit_zone)
 	. = ..()
@@ -68,9 +70,6 @@
 		material.place_shards(T)
 	qdel(src)
 
-/obj/item/get_material()
-	. = material
-
 /obj/item/proc/update_force()
 	var/new_force
 	if(!max_force)
@@ -98,29 +97,27 @@
 		throwforce = round(throwforce)
 		attack_cooldown += material.get_attack_cooldown()
 
-/obj/item/proc/set_material(var/new_material)
-	if(new_material)
-		material = GET_DECL(new_material)
+/obj/item/update_material(keep_health = FALSE, should_update_icon = TRUE)
+	. = ..()
+	update_force()
+
+/obj/item/update_material_health(override_max_health, keep_health)
+	//#TODO: Move this to obj level
 	if(istype(material))
+		var/mat_health_modifier = get_material_health_modifier()
 		//Only set the health if health is null. Some things define their own health value.
 		if(isnull(max_health))
-			max_health = round(material_health_multiplier * material.integrity, 0.01)
+			max_health = round(mat_health_modifier * material.integrity, 0.01)
 			if(max_health < 1)
 				//Make sure to warn us if the values we set make the max_health be under 1
-				log_warning("The 'max_health' of '[src]'([type]) made out of '[material]' was calculated as [material_health_multiplier] * [material.integrity] == [max_health], which is smaller than 1.")
-				
+				log_warning("The 'max_health' of '[src]'([type]) made out of '[material]' was calculated as [mat_health_modifier] * [material.integrity] == [max_health], which is smaller than 1.")
+
 		if(isnull(health)) //only set health if we didn't specify one already, so damaged objects on spawn and etc can be a thing
 			health = max_health
-		
-		if(material.products_need_process())
-			START_PROCESSING(SSobj, src)
-		if(material.conductive)
-			obj_flags |= OBJ_FLAG_CONDUCTIBLE
-		else
-			obj_flags &= (~OBJ_FLAG_CONDUCTIBLE)
-		update_force()
-		if(material_alteration & MAT_FLAG_ALTERATION_NAME)
-			SetName("[material.solid_name] [initial(name)]")
+
+/obj/item/update_material_armor(list/overriden_armor)
+	//#TODO: Move this to obj level
+	if(istype(material))
 		if(material_armor_multiplier)
 			armor = material.get_armor(material_armor_multiplier)
 			armor_degradation_speed = material.armor_degradation_speed
@@ -128,16 +125,3 @@
 				set_extension(src, armor_type, armor, armor_degradation_speed)
 			else
 				remove_extension(src, armor_type)
-	queue_icon_update()
-
-/obj/item/get_matter_amount_modifier()
-	. = ..()
-	if(obj_flags & OBJ_FLAG_HOLLOW)
-		. *= HOLLOW_OBJECT_MATTER_MULTIPLIER
-
-/obj/item/create_matter()
-	..()
-	LAZYINITLIST(matter)
-	if(istype(material))
-		matter[material.type] = max(matter[material.type], round(MATTER_AMOUNT_PRIMARY * get_matter_amount_modifier()))
-	UNSETEMPTY(matter)

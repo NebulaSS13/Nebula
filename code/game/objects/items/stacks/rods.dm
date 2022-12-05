@@ -41,12 +41,17 @@
 	max_health = ITEM_HEALTH_NO_DAMAGE
 	is_spawnable_type = FALSE
 
-/obj/item/stack/material/rods/Initialize()
+/obj/item/stack/material/rods/Initialize(mapload, amount, _material, _reinf_material)
 	. = ..()
-	update_icon()
-	throwforce = round(0.25*material.get_edge_damage())
-	force = round(0.5*material.get_blunt_damage())
 	set_extension(src, /datum/extension/tool, list(TOOL_DRILL = TOOL_QUALITY_WORST))
+	update_icon()
+
+/obj/item/stack/material/rods/update_material_properties()
+	. = ..()
+	if(!material)
+		return
+	throwforce = round(0.25 * material.get_edge_damage())
+	force      = round(0.50 * material.get_blunt_damage())
 
 /obj/item/stack/material/rods/update_state_from_amount()
 	if(max_icon_state && amount > 0.5*max_amount)

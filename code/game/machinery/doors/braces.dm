@@ -20,12 +20,13 @@
 	icon_state = "brace_open"
 	material = /decl/material/solid/metal/steel
 	matter = list(/decl/material/solid/fiberglass = MATTER_AMOUNT_REINFORCEMENT)
-	material_health_multiplier = 0.6
 	origin_tech = "{'engineering':3,'materials':2}"
 
 	var/obj/machinery/door/airlock/airlock = null
 	var/obj/item/stock_parts/circuitboard/airlock_electronics/brace/electronics
 
+/obj/item/airlock_brace/get_material_health_modifier()
+	return 0.6
 
 /obj/item/airlock_brace/examine(mob/user)
 	. = ..()

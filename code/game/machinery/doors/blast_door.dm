@@ -26,6 +26,7 @@
 	var/open_sound = 'sound/machines/blastdoor_open.ogg'
 	var/close_sound = 'sound/machines/blastdoor_close.ogg'
 
+	material = /decl/material/solid/metal/plasteel
 	closed_layer = ABOVE_WINDOW_LAYER
 	dir = NORTH
 	explosion_resistance = 25
@@ -36,7 +37,6 @@
 	block_air_zones = 0
 
 	var/begins_closed = TRUE
-	var/decl/material/implicit_material
 	autoset_access = FALSE // Uses different system with buttons.
 	pry_mod = 1.35
 
@@ -61,8 +61,6 @@
 		set_density(0)
 		set_opacity(0)
 		layer = open_layer
-
-	implicit_material = GET_DECL(/decl/material/solid/metal/plasteel)
 
 /obj/machinery/door/blast/examine(mob/user)
 	. = ..()
@@ -143,9 +141,6 @@
 		force_open()
 	else
 		force_close()
-
-/obj/machinery/door/blast/get_material()
-	return implicit_material
 
 // Proc: attackby()
 // Parameters: 2 (C - Item this object was clicked with, user - Mob which clicked this object)
@@ -322,6 +317,9 @@
 	maxhealth = 1000
 	block_air_zones = 1
 
+/obj/machinery/door/blast/regular/get_material_health_modifier()
+	return 8.0 //Blast door has high base hp, was 1,000 before switch to depend on material
+
 /obj/machinery/door/blast/regular/escape_pod
 	name = "Escape Pod release Door"
 
@@ -355,6 +353,9 @@
 	explosion_resistance = 10
 	pry_mod = 0.55
 	frame_type = /obj/structure/door_assembly/blast/shutter
+
+/obj/machinery/door/blast/shutters/get_material_health_modifier()
+	return 2.0 //Base health was 500 before
 
 /obj/machinery/door/blast/shutters/open
 	begins_closed = FALSE

@@ -72,6 +72,7 @@
 	opacity = TRUE
 	density = FALSE
 	anchored = TRUE
+	material_alteration = 0
 	var/curtain_kind_path = /decl/curtain_kind
 
 /obj/structure/curtain/open
@@ -92,7 +93,8 @@
 
 	SetName(kind.name)
 	curtain_kind_path = kind.type
-	material = GET_DECL(kind.material_key)
+	QDEL_NULL(matter) //Clear all old matter
+	set_material(kind.material_key)
 	create_matter()
 	update_icon()
 
@@ -102,6 +104,8 @@
 		qdel(src)
 	else
 		..(P, def_zone)
+/obj/structure/curtain/get_material_health_modifier()
+	return 0.25
 
 /obj/structure/curtain/attack_hand(mob/user)
 	toggle()
@@ -134,7 +138,7 @@
 	playsound(src, 'sound/effects/curtain.ogg', 15, 1, -5)
 	set_opacity(!opacity)
 
-/obj/structure/curtain/set_opacity()
+/obj/structure/curtain/set_opacity(new_opacity)
 	. = ..()
 	if(.)
 		update_icon()
