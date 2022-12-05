@@ -238,8 +238,8 @@
 	for(var/mat in matter_per_piece)
 		matter[mat] = (matter_per_piece[mat] * amount)
 
-/obj/item/stack/set_material(new_material, keep_health = FALSE, update_material = TRUE, skip_update_matter = FALSE)
-	. = ..(new_material, keep_health, update_material, TRUE) //Always skip update the matter list for stacks, since the matter list is regenerated from scratch
+/obj/item/stack/set_material(new_material, keep_health = FALSE, skip_update_material = FALSE, skip_update_matter = FALSE)
+	. = ..(new_material, keep_health, skip_update_material, TRUE) //Always skip update the matter list for stacks, since the matter list is regenerated from scratch
 
 /obj/item/stack/proc/use(var/used)
 	if (!can_use(used))

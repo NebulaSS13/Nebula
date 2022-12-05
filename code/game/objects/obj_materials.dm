@@ -17,10 +17,10 @@
  * Sets the primary material of this obj, and triggers material related updates.
  * Can take either null, a path to a material decl, or the material decl itself.
  * If keep_health is true, the health won't be reset to max_health after updating the material's max_health.
- * If update_material is true, the proc will call material updates, if false it will skip them.
+ * If skip_update_material is true, the proc will skip material updates, if false it will run them.
  * If skip_update_matter is true the matter list will not be changed.
  */
-/obj/proc/set_material(var/new_material, var/keep_health = FALSE, var/update_material = TRUE, var/skip_update_matter = FALSE)
+/obj/proc/set_material(var/new_material, var/keep_health = FALSE, var/skip_update_material = FALSE, var/skip_update_matter = FALSE)
 	var/decl/material/old_material = material
 	if(ispath(new_material, /decl/material))
 		material = GET_DECL(new_material)
@@ -33,7 +33,7 @@
 			subtract_matter(old_material, mat_units) //Remove the matter we added for the previous material if applicable
 		add_matter(material, mat_units)
 
-	if(update_material)
+	if(!skip_update_material)
 		update_material(keep_health)
 	return TRUE
 
@@ -41,10 +41,10 @@
  * Sets the reinforcing material of this obj, and triggers material related updates.
  * Can take either null, a path to a material decl, or the material decl itself.
  * If keep_health is true, the health won't be reset to max_health after updating the material's max_health.
- * If update_material is true, the proc will call material updates, if false it will skip them.
+ * If skip_update_material is true, the proc will skip material updates, if false it will run them.
  * If skip_update_matter is true the matter list will not be changed.
  */
-/obj/proc/set_reinf_material(var/new_material, var/keep_health = FALSE, var/update_material = TRUE, var/skip_update_matter = FALSE)
+/obj/proc/set_reinf_material(var/new_material, var/keep_health = FALSE, var/skip_update_material = FALSE, var/skip_update_matter = FALSE)
 	return FALSE //Stub
 
 /**

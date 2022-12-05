@@ -80,8 +80,8 @@
 /obj/item/stack/material/copy_from(var/obj/item/stack/material/other)
 	. = ..()
 	if(istype(other))
-		set_material(other.material, FALSE, FALSE, TRUE)
-		set_reinf_material(other.reinf_material, FALSE, FALSE, TRUE)
+		set_material(other.material, FALSE, TRUE, TRUE)
+		set_reinf_material(other.reinf_material, FALSE, TRUE, TRUE)
 		update_material()
 
 /obj/item/stack/material/attackby(var/obj/item/W, var/mob/user)
@@ -126,14 +126,14 @@
 /obj/item/stack/material/get_reinf_material()
 	return reinf_material
 
-/obj/item/stack/material/set_reinf_material(new_material, keep_health = FALSE, update_material = TRUE, skip_update_matter = FALSE)
+/obj/item/stack/material/set_reinf_material(new_material, keep_health = FALSE, skip_update_material = FALSE, skip_update_matter = FALSE)
 	if(ispath(new_material, /decl/material))
 		reinf_material = GET_DECL(new_material)
 	else
 		reinf_material = new_material
 
 	//For stacks, we never update the matter count in here
-	if(update_material)
+	if(!skip_update_material)
 		update_material(keep_health)
 	return TRUE
 

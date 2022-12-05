@@ -32,7 +32,7 @@
 				to_chat(H, SPAN_DANGER("You slice your hand on \the [src]!"))
 				hand.take_external_damage(rand(5,10), used_weapon = src)
 
-/obj/item/shard/set_material(new_material, keep_health = FALSE, update_material = TRUE)
+/obj/item/shard/set_material(new_material, keep_health = FALSE, skip_update_material = FALSE, skip_update_matter = FALSE)
 	. = ..()
 	if(!istype(material))
 		return FALSE

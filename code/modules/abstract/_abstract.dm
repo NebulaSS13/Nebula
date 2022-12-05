@@ -27,5 +27,5 @@
 /obj/abstract/create_matter()
 	return
 
-/obj/abstract/set_material(new_material, keep_heath, update_material)
+/obj/abstract/set_material(new_material, keep_health, skip_update_material, skip_update_matter)
 	return

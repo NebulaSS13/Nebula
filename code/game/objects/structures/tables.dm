@@ -36,11 +36,11 @@
 /obj/structure/table/set_connections(dirs, other_dirs)
 	connections = dirs_to_corner_states(dirs)
 
-/obj/structure/table/Initialize()
+/obj/structure/table/Initialize(ml, _mat, _reinf_mat)
 	if(ispath(additional_reinf_material, /decl/material))
 		additional_reinf_material = GET_DECL(additional_reinf_material)
 	//Only change health if we didn't set a starting health in the definition, don't update material, since base class does it
-	set_additional_reinf_material(additional_reinf_material, (initial(health) > 0), FALSE)
+	set_additional_reinf_material(additional_reinf_material, (initial(health) > 0), TRUE, TRUE)
 	. = ..()
 	if(. != INITIALIZE_HINT_QDEL)
 		if(!material)
@@ -623,13 +623,14 @@
 	return !reinf_material && ..()
 
 ///Sets the table's
-/obj/structure/table/proc/set_additional_reinf_material(var/mat, var/keep_health = FALSE, var/update_material = TRUE)
+/obj/structure/table/proc/set_additional_reinf_material(var/mat, var/keep_health = FALSE, var/skip_update_material = FALSE, var/skip_update_matter = FALSE)
+	var/decl/material/old_material = additional_reinf_material
 	if(ispath(mat, /decl/material))
 		additional_reinf_material = GET_DECL(mat)
 	else
 		additional_reinf_material = mat
 
-	if(update_material)
+	if(!skip_update_material)
 		update_material(keep_health)
 
 // Table presets.

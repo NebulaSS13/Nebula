@@ -24,9 +24,9 @@
 	var/mat  = get_material()
 	var/rmat = get_reinf_material()
 	if(mat)
-		set_material(mat, should_set_health, FALSE) //Keep health value if defined and don't do material updates
+		set_material(mat, should_set_health, TRUE, TRUE) //Keep health value if defined and don't do material updates
 	if(rmat)
-		set_reinf_material(rmat, should_set_health, FALSE) //Keep initially set health, and don't do material updates
+		set_reinf_material(rmat, should_set_health, TRUE, TRUE) //Keep initially set health, and don't do material updates
 	//Setup armor, properties, health, matter etc
 	update_material(should_set_health, FALSE) //Don't update icon in the base class since some implementation of initialize need to do some other things before
 	. = ..()

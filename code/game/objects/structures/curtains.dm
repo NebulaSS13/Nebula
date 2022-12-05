@@ -94,7 +94,7 @@
 	SetName(kind.name)
 	curtain_kind_path = kind.type
 	QDEL_NULL(matter) //Clear all old matter
-	set_material(kind.material_key)
+	set_material(kind.material_key, skip_update_matter = TRUE)
 	create_matter()
 	update_icon()
 
