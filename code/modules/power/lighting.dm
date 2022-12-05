@@ -486,6 +486,10 @@
 	var/list/lighting_modes = list()
 	var/sound_on
 
+/obj/item/light/Initialize(ml, obj/machinery/light/fixture = null)
+	. = ..(ml)
+	update_icon()
+
 /obj/item/light/get_color()
 	return b_color
 
@@ -577,10 +581,6 @@
 	var/image/I = image(icon, src, "[base_state]_attachment[broken ? "_broken" : ""]")
 	I.color = null
 	add_overlay(I)
-
-/obj/item/light/Initialize(mapload, obj/machinery/light/fixture = null)
-	. = ..()
-	update_icon()
 
 // attack bulb/tube with object
 // if a syringe, can inject flammable liquids to make it explode
