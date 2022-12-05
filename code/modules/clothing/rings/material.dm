@@ -1,21 +1,23 @@
 /////////////////////////////////////////
 //Material Rings
-/obj/item/clothing/ring/material/set_material(var/new_material)
+/obj/item/clothing/ring/material
+	name = "ring"
+	material_alteration = MAT_FLAG_ALTERATION_ALL
+	var/inscription
+
+/obj/item/clothing/ring/material/update_material_desc(override_desc)
 	. = ..()
-	if(istype(material))
-		name = "[material.solid_name] ring"
-		desc = "A ring made from [material.solid_name]."
-		color = material.color
+	if(length(inscription))
+		desc = "[desc] <br>Written on \the [src] is the inscription \"[inscription]\""
 
 /obj/item/clothing/ring/material/attackby(var/obj/item/S, var/mob/user)
 	if(S.sharp)
-		var/inscription = sanitize(input("Enter an inscription to engrave.", "Inscription") as null|text)
+		inscription = sanitize(input("Enter an inscription to engrave.", "Inscription") as null|text)
 		if(!user.stat && !user.incapacitated() && user.Adjacent(src) && S.loc == user)
 			if(!inscription)
 				return
-			desc = "A ring made from [material.solid_name]."
-			to_chat(user, "<span class='warning'>You carve \"[inscription]\" into \the [src].</span>")
-			desc += "<br>Written on \the [src] is the inscription \"[inscription]\""
+			to_chat(user, SPAN_NOTICE("You carve \"[inscription]\" into \the [src]."))
+			update_material_desc()
 
 /obj/item/clothing/ring/material/OnTopic(var/mob/user, var/list/href_list)
 	if(href_list["examine"])
