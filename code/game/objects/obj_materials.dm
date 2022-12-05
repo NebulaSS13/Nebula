@@ -88,7 +88,7 @@
 /obj/proc/update_material_desc(var/override_desc)
 	var/base_desc = override_desc || initial(desc)
 	if(istype(material))
-		desc = "[base_desc] This one is made of [material.solid_name]."
+		desc = "[base_desc] [(gender == PLURAL)? "These are" : "This one is"] made of [material.solid_name]."
 	else
 		desc = base_desc
 
