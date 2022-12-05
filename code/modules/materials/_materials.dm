@@ -515,6 +515,17 @@ INITIALIZE_IMMEDIATE(/obj/effect/gas_overlay)
 		LAZYSET(S.matter, type, matter_left)
 		LAZYADD(., S)
 
+///Place as many sheets/default sheet type as possible for the given matter units. Optionally, drop the remainder as cuttings.
+/decl/material/proc/place_sheet_matter(var/atom/target, var/matter_units, var/drop_remainder = FALSE)
+	//Make all the sheets we can
+	var/sheet_amount = round(matter_units / SHEET_MATERIAL_AMOUNT)
+	var/matter_left  = round(matter_units % SHEET_MATERIAL_AMOUNT)
+	LAZYADD(., create_object(target, sheet_amount))
+
+	//If we do something with the remainder, drop it as cuttings
+	if(drop_remainder && matter_left > 0)
+		LAZYADD(., place_cuttings(target, matter_left))
+
 // Used by walls and weapons to determine if they break or not.
 /decl/material/proc/is_brittle()
 	return !!(flags & MAT_FLAG_BRITTLE)
