@@ -57,3 +57,15 @@
 		if(!QDELETED(src))
 			qdel(src)
 	. = TRUE
+
+/obj/structure/update_material_health(override_max_health, keep_health)
+	//#TODO: move to /obj level
+	if(maxhealth != -1)
+		if(istype(material))
+			maxhealth = initial(maxhealth) + material?.integrity * get_material_health_modifier()
+			if(reinf_material)
+				var/bonus_health = reinf_material.integrity * get_material_health_modifier()
+				maxhealth += bonus_health
+				if(!keep_health)
+					health += bonus_health
+		health = keep_health ? min(health, maxhealth) : maxhealth
