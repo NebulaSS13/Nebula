@@ -126,7 +126,7 @@
 /obj/item/stack/material/get_reinf_material()
 	return reinf_material
 
-/obj/item/stack/material/set_reinf_material(new_material, keep_health = FALSE, skip_update_material = FALSE, skip_update_matter = FALSE)
+/obj/item/stack/material/set_reinf_material(new_material, keep_health, skip_update_material, skip_update_matter)
 	if(ispath(new_material, /decl/material))
 		reinf_material = GET_DECL(new_material)
 	else

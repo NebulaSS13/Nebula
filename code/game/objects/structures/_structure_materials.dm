@@ -6,7 +6,7 @@
 	return reinf_material
 
 //Set the reinforced material for this structure. If keep_health is true, it will not reset the health value, and will instead just add the difference to it.
-/obj/structure/set_reinf_material(new_material, keep_health = FALSE, skip_update_material = TRUE, skip_update_matter = FALSE)
+/obj/structure/set_reinf_material(new_material, keep_health, skip_update_material, skip_update_matter)
 	var/decl/material/old_material = reinf_material
 	if(ispath(new_material))
 		reinf_material = GET_DECL(new_material)
