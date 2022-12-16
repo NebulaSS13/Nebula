@@ -80,7 +80,7 @@
 	name = "openspace multiplier"
 	desc = "You shouldn't see this."
 	icon = 'icons/effects/lighting_overlay.dmi'
-	icon_state = "dark"
+	icon_state = "blank"
 	plane = OPENTURF_MAX_PLANE
 	layer = MIMICED_LIGHTING_LAYER
 	blend_mode = BLEND_MULTIPLY
