@@ -49,10 +49,12 @@
 	if(stat & (NOPOWER|BROKEN))
 		icon_state = "light-p"
 		set_light(0)
+		z_flags &= ~ZMM_MANGLE_PLANES
 	else
 		icon_state = "light[on]"
 		add_overlay(emissive_overlay(icon, "[icon_state]-overlay"))
 		set_light(2, 0.25, on ? "#82ff4c" : "#f86060")
+		z_flags |= ZMM_MANGLE_PLANES
 
 /obj/machinery/light_switch/examine(mob/user, distance)
 	. = ..()
@@ -81,5 +83,5 @@
 	. = ..()
 	if(!.)
 		to_chat(user, SPAN_NOTICE("You flick \the [src] with \the [I]."))
-		interface_interact(user) 
+		interface_interact(user)
 		return TRUE

@@ -78,7 +78,7 @@
 		if(user && !quiet)
 			to_chat(user, SPAN_WARNING("You must hold the welder in your hands to attach a tank."))
 		return
-	
+
 	if(user && !user.unEquip(T, src))
 		return
 
@@ -103,7 +103,7 @@
 	if(welding)
 		if(user)
 			to_chat(user, SPAN_WARNING("Stop welding first."))
-		return 
+		return
 
 	if(user && !user.is_holding_offhand(src))
 		if(user)
@@ -208,10 +208,10 @@
 /obj/item/weldingtool/proc/get_fuel()
 	return tank ? REAGENT_VOLUME(tank.reagents, /decl/material/liquid/fuel) : 0
 
-//Removes fuel from the welding tool. If a mob is passed, it will perform an eyecheck on the mob. 
+//Removes fuel from the welding tool. If a mob is passed, it will perform an eyecheck on the mob.
 /obj/item/weldingtool/proc/weld(var/fuel_usage = 1, var/mob/user = null)
 	if(!welding)
-		return 
+		return
 	if(get_fuel() < fuel_usage)
 		if(user)
 			to_chat(user, SPAN_NOTICE("You need more [welding_resource] to complete this task."))
@@ -231,7 +231,7 @@
 /**Handle the flame burning fuel while the welder is on */
 /obj/item/weldingtool/proc/idling(var/fuel_usage = 0.5)
 	if(!welding)
-		return 
+		return
 	if((!waterproof && submerged()) || (get_fuel() < fuel_usage))
 		turn_off()
 		return
@@ -246,7 +246,7 @@
 	else if(isobj(loc))
 		var/obj/O = loc
 		O.HandleObjectHeating(src, null, WELDING_TOOL_HOTSPOT_TEMP_IDLE)
-	
+
 	else if(isturf(loc))
 		var/turf/location = get_turf(src)
 		location.hotspot_expose(WELDING_TOOL_HOTSPOT_TEMP_IDLE, 5) //a bit colder when idling
@@ -274,6 +274,7 @@
 
 /obj/item/weldingtool/on_update_icon()
 	. = ..()
+	z_flags &= ~ZMM_MANGLE_PLANES
 	if(tank)
 		add_overlay("[icon_state]-[tank.icon_state]")
 	if(welding && check_state_in_icon("[icon_state]-lit", icon))
@@ -281,6 +282,7 @@
 			add_overlay(image(icon, "[icon_state]-lit"))
 		else
 			add_overlay(emissive_overlay(icon, "[icon_state]-lit"))
+			z_flags |= ZMM_MANGLE_PLANES
 		set_light(2.5, 0.6, lit_colour)
 	else
 		set_light(0)
@@ -311,7 +313,7 @@
 		user.visible_message(SPAN_NOTICE("\The [user] turns \the [src] on."), SPAN_NOTICE("You turn on \the [src]."))
 	else
 		visible_message(SPAN_WARNING("\The [src] turns on."))
-	
+
 	update_physical_damage()
 	playsound(src, activate_sound, 50, TRUE)
 	welding = TRUE
