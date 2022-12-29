@@ -78,10 +78,12 @@
 	desc = "This is some random junk."
 	icon = 'icons/obj/items/storage/trashbag.dmi'
 	icon_state = "trashbag3"
+	var/spawn_choice
 
 /obj/random/junk/spawn_choices()
-	var/static/list/spawnable_choices = list(get_random_junk_type())
-	return spawnable_choices
+	if(!spawn_choice)
+		spawn_choice = get_random_junk_type()
+	return list(spawn_choice)
 
 /obj/random/trash //Mostly remains and cleanable decals. Stuff a janitor could clean up
 	name = "random trash"
