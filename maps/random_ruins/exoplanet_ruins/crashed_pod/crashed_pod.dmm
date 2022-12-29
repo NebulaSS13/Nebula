@@ -913,7 +913,7 @@
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/map_template/crashed_pod)
 "bX" = (
-/obj/structure/closet/crate,
+/obj/structure/closet/crate/large,
 /obj/random/handgun,
 /obj/random/handgun,
 /obj/random/handgun,
@@ -953,18 +953,8 @@
 /obj/item/chems/drinks/milk,
 /obj/item/trash/liquidfood,
 /obj/item/trash/liquidfood,
-/obj/item/trash/liquidfood,
-/obj/item/trash/liquidfood,
 /obj/item/beartrap,
 /obj/item/knife/kitchen/cleaver,
-/obj/item/chems/food/liquidfood,
-/obj/item/chems/food/liquidfood,
-/obj/item/chems/food/liquidfood,
-/obj/item/chems/food/liquidfood,
-/obj/item/chems/food/liquidfood,
-/obj/item/chems/food/liquidfood,
-/obj/item/chems/food/liquidfood,
-/obj/item/chems/food/liquidfood,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/map_template/crashed_pod)
 "bZ" = (
