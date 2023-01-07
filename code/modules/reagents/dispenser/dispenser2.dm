@@ -136,9 +136,7 @@
 
 /obj/machinery/chemical_dispenser/proc/check_container_status()
 	if(container && (QDELETED(container) || container.loc != src))
-		events_repository.unregister(/decl/observ/moved, container, src)
-		events_repository.unregister(/decl/observ/destroyed, container, src)
-		container = null
+		set_container(null)
 
 /obj/machinery/chemical_dispenser/ui_interact(mob/user, ui_key = "main",var/datum/nanoui/ui = null, var/force_open = 1)
 	// this is the data which will be sent to the ui
@@ -202,13 +200,15 @@
 		if(!container)
 			return TOPIC_HANDLED
 
-		var/obj/item/chems/B = container
-		if(CanPhysicallyInteract(user))
-			user.put_in_hands(B)
-		else
-			B.dropInto(loc)
+		var/obj/item/chems/previous_container = container
 
 		set_container(null)
+
+		if(CanPhysicallyInteract(user))
+			user.put_in_hands(previous_container)
+		else
+			previous_container.dropInto(loc)
+
 		return TOPIC_REFRESH
 
 /obj/machinery/chemical_dispenser/interface_interact(mob/user)
@@ -218,8 +218,4 @@
 /obj/machinery/chemical_dispenser/on_update_icon()
 	cut_overlays()
 	if(container)
-		var/mutable_appearance/beaker_overlay
-		beaker_overlay = image(src, src, "lil_beaker")
-		beaker_overlay.pixel_y = beaker_offset
-		beaker_overlay.pixel_x = pick(beaker_positions)
-		add_overlay(beaker_overlay)
+		add_overlay(image(icon, "lil_beaker", pixel_x = pick(beaker_positions), pixel_y = beaker_offset))
