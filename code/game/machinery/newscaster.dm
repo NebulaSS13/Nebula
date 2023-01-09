@@ -124,9 +124,19 @@ var/global/list/allCasters = list() //Global list that will contain reference to
 		// 6 = ERROR: Cannot create feed story
 		// 7 = ERROR: Cannot create feed channel
 		// 8 = print newspaper
-		// 9 = viewing channel feeds
-		// 10 = censor feed story
-		// 11 = censor feed channel
+		// 9 = viewing channel stories
+		// 10 = select feed to censor story from
+		// 11 = d-notice channel list
+		// 12 = censor feed story
+		// 13 = d-notice feed view
+		// 14 = wanted issue menu
+		// 15 = wanted issue created successfully
+		// 16 = ERROR: Cannot create wanted issue
+		// 17 = wanted issue cancelled successfully
+		// 18 = view wanted issue
+		// 19 = edit wanted issue
+		// 20 = print successful
+		// 21 = ERROR: Printer out of paper
 		//Holy shit this is outdated, made this when I was still starting newscasters :3
 	var/paper_remaining = 0
 	var/securityCaster = 0
@@ -888,7 +898,7 @@ var/global/list/allCasters = list() //Global list that will contain reference to
 				src.scribble = s
 				src.attack_self(user)
 				return TRUE
-			return 
+			return
 	return ..()
 
 ////////////////////////////////////helper procs
