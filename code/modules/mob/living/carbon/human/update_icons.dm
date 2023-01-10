@@ -1,3 +1,12 @@
+var/global/list/_limb_mask_cache = list()
+/proc/get_limb_mask_for(var/decl/bodytype/bodytype, var/bodypart)
+	LAZYINITLIST(_limb_mask_cache[bodytype])
+	if(!_limb_mask_cache[bodytype][bodypart])
+		var/icon/limb_mask = icon(bodytype.icon_base, bodypart)
+		limb_mask.MapColors(0,0,0, 0,0,0, 0,0,0, 1,1,1)
+		_limb_mask_cache[bodytype][bodypart] = limb_mask
+	return _limb_mask_cache[bodytype][bodypart]
+
 /*
 	Global associative list for caching humanoid icons.
 	Index format m or f, followed by a string of 0 and 1 to represent bodyparts followed by husk 1 or 0.
@@ -301,10 +310,10 @@ var/global/list/damage_icon_parts = list()
 			continue
 		var/icon/DI
 		var/use_colour = (BP_IS_PROSTHETIC(O) ? SYNTH_BLOOD_COLOR : O.species.get_blood_color(src))
-		var/cache_index = "[O.damage_state]/[O.icon_name]/[use_colour]/[species.name]"
+		var/cache_index = "[O.damage_state]/[O.bodytype.type]/[O.icon_state]/[use_colour]/[species.name]"
 		if(damage_icon_parts[cache_index] == null)
 			DI = new /icon(bodytype.get_damage_overlays(src), O.damage_state) // the damage icon for whole human
-			DI.Blend(new /icon(O.icon, O.icon_name), ICON_MULTIPLY)  // mask with this organ's pixels
+			DI.Blend(get_limb_mask_for(O.bodytype, O.icon_state), ICON_MULTIPLY)  // mask with this organ's pixels
 			DI.Blend(use_colour, ICON_MULTIPLY)
 			damage_icon_parts[cache_index] = DI
 		else
@@ -326,7 +335,7 @@ var/global/list/damage_icon_parts = list()
 		for(var/obj/item/organ/external/O in get_external_organs())
 			var/bandage_level = O.bandage_level()
 			if(bandage_level)
-				standing_image.overlays += image(bandage_icon, "[O.icon_name][bandage_level]")
+				standing_image.overlays += image(bandage_icon, "[O.icon_state][bandage_level]")
 
 		overlays_standing[HO_DAMAGE_LAYER]	= standing_image
 	if(update_icons)
@@ -358,8 +367,8 @@ var/global/list/damage_icon_parts = list()
 	var/obj/item/organ/internal/eyes/eyes = get_organ((species.vision_organ || BP_EYES), /obj/item/organ/internal/eyes)
 	icon_key += istype(eyes) ? eyes.eye_colour : COLOR_BLACK
 
-	for(var/organ_tag in global.all_limb_tags)
-		var/obj/item/organ/external/part = GET_EXTERNAL_ORGAN(src, organ_tag)
+	for(var/limb_tag in global.all_limb_tags)
+		var/obj/item/organ/external/part = GET_EXTERNAL_ORGAN(src, limb_tag)
 		if(isnull(part) || part.skip_body_icon_draw)
 			icon_key += "0"
 			continue
@@ -846,7 +855,6 @@ var/global/list/damage_icon_parts = list()
 	if(update_icons)
 		queue_icon_update()
 
-
 /mob/living/carbon/human/update_fire(var/update_icons=1)
 	overlays_standing[HO_FIRE_LAYER] = null
 	if(on_fire)
@@ -867,21 +875,20 @@ var/global/list/damage_icon_parts = list()
 		var/surgery_icon = E.species.get_surgery_overlay_icon(src)
 		if(!surgery_icon)
 			continue
-		var/list/surgery_states = icon_states(surgery_icon)
-		var/base_state = "[E.icon_name][how_open]"
+		var/base_state = "[E.icon_state][how_open]"
 		var/overlay_state = "[base_state]-flesh"
 		var/list/overlays_to_add
-		if(overlay_state in surgery_states)
+		if(check_state_in_icon(overlay_state, surgery_icon))
 			var/image/flesh = image(icon = surgery_icon, icon_state = overlay_state, layer = -HO_SURGERY_LAYER)
 			flesh.color = E.species.get_flesh_colour(src)
 			LAZYADD(overlays_to_add, flesh)
 		overlay_state = "[base_state]-blood"
-		if(overlay_state in surgery_states)
+		if(check_state_in_icon(overlay_state, surgery_icon))
 			var/image/blood = image(icon = surgery_icon, icon_state = overlay_state, layer = -HO_SURGERY_LAYER)
 			blood.color = E.species.get_blood_color(src)
 			LAZYADD(overlays_to_add, blood)
 		overlay_state = "[base_state]-bones"
-		if(overlay_state in surgery_states)
+		if(check_state_in_icon(overlay_state, surgery_icon))
 			LAZYADD(overlays_to_add, image(icon = surgery_icon, icon_state = overlay_state, layer = -HO_SURGERY_LAYER))
 		total.overlays |= overlays_to_add
 

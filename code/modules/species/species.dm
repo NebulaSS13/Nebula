@@ -440,9 +440,20 @@ var/global/const/DEFAULT_SPECIES_HEALTH = 200
 /decl/species/validate()
 	. = ..()
 
+	for(var/decl/bodytype/bodytype in available_bodytypes)
+		var/bodytype_base_icon = bodytype.get_base_icon()
+		var/deformed_base_icon = bodytype.get_base_icon(get_deform = TRUE)
+		for(var/organ_tag in has_limbs)
+			if(organ_tag == BP_TAIL) // Tails are handled specially due to overlays and animations, will not be present in the base bodytype icon(s).
+				continue
+			if(bodytype_base_icon && !check_state_in_icon(organ_tag, bodytype_base_icon))
+				. += "missing state \"[organ_tag]\" from base icon [bodytype_base_icon] on bodytype [bodytype.type]"
+			if(deformed_base_icon && bodytype_base_icon != deformed_base_icon && !check_state_in_icon(organ_tag, deformed_base_icon))
+				. += "missing state \"[organ_tag]\" from deformed icon [deformed_base_icon] on bodytype [bodytype.type]"
+
 	for(var/organ_tag in vital_organs)
 		if(!(organ_tag in has_organ) && !(organ_tag in has_limbs))
-			. += "vital organ '[organ_tag]' not present in organ/limb lists"
+			. += "vital organ \"[organ_tag]\" not present in organ/limb lists"
 
 	for(var/trait_type in traits)
 		var/trait_level = traits[trait_type]

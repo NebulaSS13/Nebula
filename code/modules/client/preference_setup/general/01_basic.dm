@@ -33,7 +33,7 @@
 	W.write("spawnpoint", spawnpoint.name)
 
 /datum/category_item/player_setup_item/physical/basic/sanitize_character()
-	
+
 	var/valid_spawn = FALSE
 	for(var/decl/spawnpoint/spawnpoint as anything in global.using_map.allowed_spawns)
 		if(pref.spawnpoint == spawnpoint.type)

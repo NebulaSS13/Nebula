@@ -32,7 +32,7 @@
 		/decl/emote/exertion/biological/pant
 	)
 	var/blood_color
-	
+
 /decl/species/alium/Initialize()
 
 	//Coloring

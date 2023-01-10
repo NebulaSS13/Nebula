@@ -71,7 +71,6 @@
 	name = "first tendril"
 	amputation_point = "midpoint"
 	joint = "base"
-	icon_name = "l_leg"
 	organ_tag = BP_L_LEG
 	parent_organ =     BP_CHEST
 	max_damage =20
@@ -81,15 +80,12 @@
 
 /obj/item/organ/external/tendril/two
 	name = "second tendril"
-	icon_name = "r_leg"
 	organ_tag = BP_R_LEG
 
 /obj/item/organ/external/tendril/three
 	name = "third tendril"
-	icon_name = "l_foot"
 	organ_tag = BP_L_FOOT
 
 /obj/item/organ/external/tendril/four
 	name = "fourth tendril"
-	icon_name = "r_foot"
 	organ_tag = BP_R_FOOT
