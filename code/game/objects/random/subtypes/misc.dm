@@ -73,6 +73,26 @@
 	)
 	return spawnable_choices
 
+/obj/random/useful
+	name = "random useful item"
+	desc = "This is a random useful item."
+	icon = 'icons/obj/items/storage/trashbag.dmi'
+	icon_state = "trashbag3"
+
+/obj/random/useful/spawn_choices()
+	var/static/list/spawnable_choices = list(
+		/obj/random/crayon,
+		/obj/item/pen,
+		/obj/item/pen/blue,
+		/obj/item/pen/red,
+		/obj/item/pen/multi,
+		/obj/item/storage/box/matches,
+		/obj/item/stack/material/cardstock/mapped/cardboard,
+		/obj/item/storage/fancy/cigarettes,
+		/obj/item/deck/cards
+	)
+	return spawnable_choices
+
 /obj/random/junk //Broken items, or stuff that could be picked up
 	name = "random junk"
 	desc = "This is some random junk."
@@ -81,9 +101,32 @@
 	var/spawn_choice
 
 /obj/random/junk/spawn_choices()
-	if(!spawn_choice)
-		spawn_choice = get_random_junk_type()
-	return list(spawn_choice)
+	var/static/list/spawnable_choices
+	if(!spawnable_choices)
+		spawnable_choices = list(
+			/obj/effect/decal/cleanable/generic = 20,
+			/obj/effect/decal/cleanable/spiderling_remains = 95,
+			/obj/item/remains/mouse = 95,
+			/obj/item/remains/robot = 95,
+			/obj/item/paper/crumpled = 95,
+			/obj/item/inflatable/torn = 95,
+			/obj/effect/decal/cleanable/molten_item = 95,
+			/obj/item/shard = 95,
+			/obj/item/hand/missing_card = 95,
+			/obj/random/useful = 4
+		)
+		for(var/trash_type in subtypesof(/obj/item/trash))
+			spawnable_choices[trash_type] = 95
+		for(var/trash_type in typesof(/obj/item/trash/cigbutt))
+			spawnable_choices[trash_type] = 95
+		spawnable_choices -= /obj/item/trash/plate
+		spawnable_choices -= /obj/item/trash/snack_bowl
+		spawnable_choices -= /obj/item/trash/syndi_cakes
+		spawnable_choices -= /obj/item/trash/tray
+		var/lunches = lunchables_lunches()
+		for(var/lunch in lunches)
+			spawnable_choices[lunches[lunch]] = 1
+	return spawnable_choices
 
 /obj/random/trash //Mostly remains and cleanable decals. Stuff a janitor could clean up
 	name = "random trash"
