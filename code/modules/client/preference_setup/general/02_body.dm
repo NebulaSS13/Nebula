@@ -51,7 +51,7 @@
 			pref.f_style = accessory
 			break
 
-	// Get markings type. 
+	// Get markings type.
 	all_sprite_accessories = decls_repository.get_decls_of_subtype(/decl/sprite_accessory/marking)
 	for(var/marking in pref.body_markings)
 		for(var/accessory in all_sprite_accessories)
@@ -134,6 +134,7 @@
 
 	var/decl/species/mob_species = get_species_by_key(pref.species)
 	. += "Blood Type: <a href='?src=\ref[src];blood_type=1'>[pref.b_type]</a><br>"
+	. += "<a href='?src=\ref[src];random=1'>Randomize Appearance</A><br>"
 
 	if(has_flag(mob_species, HAS_A_SKIN_TONE))
 		. += "Skin Tone: <a href='?src=\ref[src];skin_tone=1'>[-pref.skin_tone + 35]/[mob_species.max_skin_tone()]</a><br>"
