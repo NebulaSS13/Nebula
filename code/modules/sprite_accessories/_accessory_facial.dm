@@ -14,7 +14,10 @@
 	name = "Shaved"
 	icon_state = "bald"
 	gender = null
-	species_allowed = list(SPECIES_HUMAN)
+	species_allowed = null
+	subspecies_allowed = null
+	bodytypes_allowed = null
+	bodytypes_denied = null
 
 /decl/sprite_accessory/facial_hair/watson
 	name = "Watson Mustache"
@@ -55,7 +58,6 @@
 /decl/sprite_accessory/facial_hair/elvis
 	name = "Elvis Sideburns"
 	icon_state = "facial_elvis"
-	species_allowed = list(SPECIES_HUMAN)
 
 /decl/sprite_accessory/facial_hair/abe
 	name = "Abraham Lincoln Beard"

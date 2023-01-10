@@ -805,11 +805,7 @@ var/global/const/DEFAULT_SPECIES_HEALTH = 200
 		var/list/all_hairstyles = decls_repository.get_decls_of_subtype(/decl/sprite_accessory/hair)
 		for(var/hairstyle in all_hairstyles)
 			var/decl/sprite_accessory/S = all_hairstyles[hairstyle]
-			if(check_gender && S.gender && gender != S.gender)
-				continue
-			if(S.species_allowed && !(get_root_species_name() in S.species_allowed))
-				continue
-			if(S.subspecies_allowed && !(name in S.subspecies_allowed))
+			if(!S.accessory_is_available(null, src, null, (check_gender && gender)))
 				continue
 			ADD_SORTED(hair_style_by_gender, hairstyle, /proc/cmp_text_asc)
 			hair_style_by_gender[hairstyle] = S
@@ -834,11 +830,7 @@ var/global/const/DEFAULT_SPECIES_HEALTH = 200
 		var/list/all_facial_styles = decls_repository.get_decls_of_subtype(/decl/sprite_accessory/facial_hair)
 		for(var/facialhairstyle in all_facial_styles)
 			var/decl/sprite_accessory/S = all_facial_styles[facialhairstyle]
-			if(check_gender && S.gender && gender != S.gender)
-				continue
-			if(S.species_allowed && !(get_root_species_name() in S.species_allowed))
-				continue
-			if(S.subspecies_allowed && !(name in S.subspecies_allowed))
+			if(!S.accessory_is_available(null, src, null, (check_gender && gender)))
 				continue
 			ADD_SORTED(facial_hair_style_by_gender, facialhairstyle, /proc/cmp_text_asc)
 			facial_hair_style_by_gender[facialhairstyle] = S
