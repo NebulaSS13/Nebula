@@ -203,7 +203,7 @@ var/global/list/gamemode_cache = list()
 	var/dsay_allowed = 1
 	var/aooc_allowed = 1
 
-	var/starlight = 0	// Whether space turfs have ambient light or not
+	var/ambient_light = 0	// Whether space turfs have ambient light or not
 
 	var/law_zero = "ERROR ER0RR $R0RRO$!R41.%%!!(%$^^__+ @#F0E4'ALL LAWS OVERRIDDEN#*?&110010"
 
@@ -741,9 +741,9 @@ var/global/list/gamemode_cache = list()
 					config.event_delay_upper[EVENT_LEVEL_MODERATE] = MinutesToTicks(values[2])
 					config.event_delay_upper[EVENT_LEVEL_MAJOR] = MinutesToTicks(values[3])
 
-				if("starlight")
+				if("ambient_light")
 					value = text2num(value)
-					config.starlight = value >= 0 ? value : 0
+					config.ambient_light = value >= 0 ? value : 0
 
 				if("law_zero")
 					law_zero = value
