@@ -19,3 +19,4 @@
 		weather.mob_shown_weather -=     mob_ref
 		weather.mob_shown_wind -=        mob_ref
 	global.current_mob_ambience -= mob_ref
+	refresh_lighting_master()

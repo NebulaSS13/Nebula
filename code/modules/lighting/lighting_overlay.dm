@@ -9,7 +9,7 @@
 	plane         = LIGHTING_PLANE
 	invisibility  = INVISIBILITY_LIGHTING
 	simulated     = FALSE
-	blend_mode    = BLEND_MULTIPLY
+	blend_mode    = BLEND_OVERLAY
 
 	var/needs_update = FALSE
 

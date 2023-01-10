@@ -35,6 +35,12 @@ var/global/const/DEFAULT_SPECIES_HEALTH = 200
 	var/flesh_color = "#ffc896"             // Pink.
 	var/blood_oxy = 1
 
+	// Darksight handling
+	var/base_low_light_vision = 0
+	var/low_light_vision_threshold = 0.3
+	var/low_light_vision_effectiveness = 0
+	var/low_light_vision_adjustment_speed = 0.15
+
 	// Used for initializing prefs/preview
 	var/base_color =      COLOR_BLACK
 	var/base_eye_color =  COLOR_BLACK
@@ -348,6 +354,10 @@ var/global/const/DEFAULT_SPECIES_HEALTH = 200
 /decl/species/Initialize()
 
 	. = ..()
+
+	if(config.grant_basic_darksight)
+		darksight_range = max(darksight_range, 2)
+		low_light_vision_effectiveness = max(low_light_vision_effectiveness, 0.05)
 
 	// Populate blood type table.
 	for(var/blood_type in blood_types)

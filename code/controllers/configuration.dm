@@ -253,6 +253,7 @@ var/global/list/gamemode_cache = list()
 	var/no_throttle_localhost
 
 	var/dex_malus_brainloss_threshold = 30 //The threshold of when brainloss begins to affect dexterity.
+	var/grant_basic_darksight = FALSE
 
 	var/static/list/protected_vars = list(
 		"comms_password",
@@ -904,7 +905,8 @@ var/global/list/gamemode_cache = list()
 					config.use_loyalty_implants = 1
 				if("dexterity_malus_brainloss_threshold")
 					config.dex_malus_brainloss_threshold = text2num(value)
-
+				if("grant_basic_darksight")
+					config.grant_basic_darksight = TRUE
 				else
 					log_misc("Unknown setting in configuration: '[name]'")
 
