@@ -29,7 +29,7 @@ General Public License version 3.
 
 
 <h3 id="modules">Modules
-<aside>(149 modules,
+<aside>(150 modules,
     48/4179 macros, 1.1%)</aside></h3>
 <ul class="index-tree modules">
     <li><a href="(builtins).html" title="(builtins)">(builtins)</a></li>
@@ -180,6 +180,7 @@ General Public License version 3.
 Thanks to forum_account for saving the day, the library can be found
 <a href="https://secure.byond.com/developer/Forum_account/Keyboard">here</a>!</li>
     <li><span class="no-substance">maps&#x2F;</span><a href="code/modules/maps/reader.html" title="code&#x2F;modules&#x2F;maps&#x2F;reader">reader</a></li>
+    <li><span class="no-substance">materials&#x2F;</span><a href="code/modules/materials/material_sheets.html" title="code&#x2F;modules&#x2F;materials&#x2F;material_sheets">material_sheets</a></li>
     <li class="has-children"><span title="code&#x2F;modules&#x2F;mining">mining</span><ul class="index-tree">
     <li><a href="code/modules/mining/mine_items.html" title="code&#x2F;modules&#x2F;mining&#x2F;mine_items">mine_items</a></li>
     <li><a href="code/modules/mining/mine_turfs.html" title="code&#x2F;modules&#x2F;mining&#x2F;mine_turfs">mine_turfs</a></li>
@@ -269,7 +270,7 @@ Thanks to forum_account for saving the day, the library can be found
 
 
 <h3 id="types">Types
-<aside>(133 detailed/320 documented/17986 total, 1.8%)</aside></h3>
+<aside>(133 detailed/321 documented/17987 total, 1.8%)</aside></h3>
 <ul class="index-tree">
     <li><a href="global.html" title="(global)">(global)</a></li>
     <li><a href="area.html" title="&#x2F;area">area</a></li>
@@ -642,7 +643,10 @@ Parameters: var/obj/item/card/id</li>
     <li><span class="no-substance" title="&#x2F;obj&#x2F;item&#x2F;scrying">scrying</span> - Scrying orb</li>
     <li><span class="no-substance" title="&#x2F;obj&#x2F;item&#x2F;shovel">shovel</span> - Shovel</li>
     <li class="has-children"><a href="obj/item/stack.html" title="&#x2F;obj&#x2F;item&#x2F;stack">stack</a><ul class="index-tree">
-    <li><span class="no-substance">material&#x2F;</span><a href="obj/item/stack/material/ore.html" title="&#x2F;obj&#x2F;item&#x2F;stack&#x2F;material&#x2F;ore">ore</a></li>
+    <li class="has-children"><span title="&#x2F;obj&#x2F;item&#x2F;stack&#x2F;material">material</span> - Material will be set only during Initialize, or the stack is invalid.
+As with material, these stacks should only set this in Initialize as they are abstract 'shapes' rather than discrete objects.<ul class="index-tree">
+    <li><a href="obj/item/stack/material/ore.html" title="&#x2F;obj&#x2F;item&#x2F;stack&#x2F;material&#x2F;ore">ore</a></li>
+    </ul></li>
     <li class="has-children"><a href="obj/item/stack/package_wrap.html" title="&#x2F;obj&#x2F;item&#x2F;stack&#x2F;package_wrap">package_wrap</a><ul class="index-tree">
     <li><span class="no-substance" title="&#x2F;obj&#x2F;item&#x2F;stack&#x2F;package_wrap&#x2F;gift">gift</span> - Variant of the wrapping paper that result in gift wrapped items.</li>
     </ul></li>
@@ -751,7 +755,7 @@ Parameters: var/obj/item/card/id</li>
 </main>
 <footer>
     nebula.dme
-    <a href="https://github.com/NebulaSS13/Nebula/tree/81209edf27063fd93c740a2e28ca9ca148565832">81209ed</a>
+    <a href="https://github.com/NebulaSS13/Nebula/tree/08bd44f2fe00b0b3c83ddc113cb9ce2693bfa9d3">08bd44f</a>
         (dev) &mdash; <a href="https://github.com/SpaceManiac/SpacemanDMM/blob/master/src/dmdoc/README.md">dmdoc 1.4.1</a></footer>
 </body>
 </html>
