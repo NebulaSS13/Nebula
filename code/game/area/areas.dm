@@ -75,6 +75,7 @@ var/global/list/areas = list()
 
 	icon = 'icons/turf/areas.dmi'
 	icon_state = "white"
+	color = null
 	blend_mode = BLEND_MULTIPLY
 
 // qdel(area) should not be attempted on an area with turfs in contents. ChangeArea every turf in it first.

@@ -11,6 +11,7 @@
 	icon_edge_layer = EXT_EDGE_GRASS_WILD
 	icon_has_corners = TRUE
 	color = "#799c4b"
+	base_color = "#799c4b"
 	footstep_type = /decl/footsteps/grass
 
 /turf/exterior/wildgrass/Initialize()
