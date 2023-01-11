@@ -67,7 +67,7 @@
 		if(presenting_to.client)
 			. += "<a href='?src=\ref[presenting_to.client];codex_search=1'>Search Codex</a>"
 			. += "<a href='?src=\ref[presenting_to.client];codex_index=1'>List All Entries</a>"
-	. += "<hr>"
+	. += "<hr><h2>[name]</h2>"
 
 /datum/codex_entry/proc/get_codex_footer(var/mob/presenting_to)
 	. = list()
