@@ -121,22 +121,21 @@
 
 /obj/machinery/media/jukebox/proc/emag_play()
 	playsound(loc, 'sound/items/AirHorn.ogg', 100, 1)
-	for(var/mob/living/carbon/M in ohearers(6, src))
-		if(istype(M, /mob/living/carbon/human))
-			var/mob/living/carbon/human/H = M
-			if(H.get_sound_volume_multiplier() < 0.2)
+	for(var/mob/living/carbon/carbon_hearer in ohearers(6, src))
+		if(istype(carbon_hearer, /mob/living/carbon/human))
+			var/mob/living/carbon/human/human_hearer = carbon_hearer
+			if(human_hearer.get_sound_volume_multiplier() < 0.2)
 				continue
-		M.set_status(STAT_ASLEEP,    0)
-		ADJ_STATUS(M, STAT_STUTTER,  20)
-		SET_STATUS_MAX(M, STAT_DEAF, 30)
-		SET_STATUS_MAX(M, STAT_WEAK,  3)
+		carbon_hearer.set_status(STAT_ASLEEP,    0)
+		ADJ_STATUS(carbon_hearer, STAT_STUTTER,  20)
+		SET_STATUS_MAX(carbon_hearer, STAT_DEAF, 30)
+		SET_STATUS_MAX(carbon_hearer, STAT_WEAK,  3)
 		if(prob(30))
-			SET_STATUS_MAX(M, STAT_STUN, 10)
-			SET_STATUS_MAX(M, STAT_PARA,  4)
+			SET_STATUS_MAX(carbon_hearer, STAT_STUN, 10)
+			SET_STATUS_MAX(carbon_hearer, STAT_PARA,  4)
 		else
-			M.set_status(STAT_JITTER, 400)
-	spawn(15)
-		explode()
+			carbon_hearer.set_status(STAT_JITTER, 400)
+	addtimer(CALLBACK(src, .proc/explode), 1.5 SECONDS)
 
 /obj/machinery/media/jukebox/interface_interact(var/mob/user)
 	ui_interact(user)
