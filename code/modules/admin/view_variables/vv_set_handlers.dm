@@ -155,7 +155,7 @@
 			if (istext(value) && !color_regex.Find(value))
 				to_chat(client, "<span class='alert'><pre>ambient_light</pre> must be a 6 digit (<pre>#AABBCC</pre>) hexadecimal color string.</span>")
 				return
-			T.set_ambient_light(COLOR_WHITE, value)
+			T.set_ambient_light(value)
 
 		if ("ambient_light_multiplier")
 			if (!isnum(value))

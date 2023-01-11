@@ -362,8 +362,8 @@ EVENT_CUSTOM_START_MAJOR 80;100
 ## Respawn delay in minutes before one may respawn as a crew member.
 #RESPAWN_DELAY 30
 
-## Percentile strength of ambient light (such as starlight). 0.5 is 50% lit.
-AMBIENT_LIGHT 0
+## Percentile strength of exterior ambient light (such as starlight). 0.5 is 50% lit.
+EXTERIOR_AMBIENT_LIGHT 0
 
 
 ## Defines how Law Zero is phrased. Primarily used in the Malfunction gamemode.
