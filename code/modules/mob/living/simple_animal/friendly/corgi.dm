@@ -65,9 +65,9 @@
 			if( !movement_target || !(movement_target.loc in oview(src, 3)) )
 				movement_target = null
 				stop_automated_movement = 0
-				for(var/obj/item/chems/food/S in oview(src,3))
-					if(isturf(S.loc) || ishuman(S.loc))
-						movement_target = S
+				for(var/obj/item/chems/food/food_target in oview(src,3))
+					if(isturf(food_target.loc) || ishuman(food_target.loc))
+						movement_target = food_target
 						break
 			if(movement_target)
 				stop_automated_movement = 1
@@ -95,29 +95,28 @@
 						visible_emote("stares at the [movement_target] that [movement_target.loc] has with sad puppy eyes.")
 
 		if(prob(1))
-			visible_emote(pick("dances around.","chases their tail."))
-			for(var/i in list(1,2,4,8,4,2,1,2,4,8,4,2,1,2,4,8,4,2))
-				set_dir(i)
-				sleep(1)
-				if(QDELETED(src) || client)
-					return
+			INVOKE_ASYNC(src, .proc/dance)
+
+/mob/living/simple_animal/corgi/proc/dance(ticks)
+	visible_emote(pick("dances around.","chases their tail."))
+	var/static/list/routine = list(1,2,4,8,4,2) // repeats
+	for(var/i in 1 to ticks)
+		set_dir(routine[i % length(routine)])
+		sleep(1)
+		if(QDELETED(src) || client) // stop dancing if we don't exist or are player controlled
+			return
 
 /obj/item/chems/food/meat/corgi
 	name = "corgi meat"
-	desc = "Tastes like... well you know..."
+	desc = "Tastes like... well, you know..."
 
-/mob/living/simple_animal/corgi/attackby(var/obj/item/O, var/mob/user)  //Marker -Agouri
-	if(istype(O, /obj/item/newspaper))
+/mob/living/simple_animal/corgi/attackby(obj/item/attacking_object, mob/user)
+	if(istype(attacking_object, /obj/item/newspaper))
 		if(!stat)
-			for(var/mob/M in viewers(user, null))
-				if ((M.client && !( M.blinded )))
-					M.show_message("<span class='notice'>[user] baps [name] on the nose with the rolled up [O]</span>")
-			spawn(0)
-				for(var/i in list(1,2,4,8,4,2,1,2))
-					set_dir(i)
-					sleep(1)
-	else
-		..()
+			user.visible_message(SPAN_NOTICE("[user] baps [src] on the nose with \the [attacking_object]."), SPAN_NOTICE("You bap [src] on the nose with \the [attacking_object]."))
+			INVOKE_ASYNC(src, .proc/dance)
+			return TRUE
+	return ..()
 
 /mob/living/simple_animal/corgi/puppy
 	name = "\improper corgi puppy"
@@ -169,17 +168,17 @@
 		turns_since_scan++
 		if(turns_since_scan > 15)
 			turns_since_scan = 0
-			var/alone = 1
-			var/ian = 0
-			for(var/mob/M in oviewers(7, src))
-				if(istype(M, /mob/living/simple_animal/corgi/Ian))
-					if(M.client)
-						alone = 0
+			var/alone = TRUE
+			var/ian = null
+			for(var/mob/living/potential_witness in oviewers(7, src))
+				if(istype(potential_witness, /mob/living/simple_animal/corgi/Ian))
+					if(potential_witness.client)
+						alone = FALSE
 						break
 					else
-						ian = M
+						ian = potential_witness
 				else
-					alone = 0
+					alone = FALSE
 					break
 			if(alone && ian && puppies < 4)
 				if(near_camera(src) || near_camera(ian))
@@ -187,9 +186,4 @@
 				new /mob/living/simple_animal/corgi/puppy(loc)
 
 		if(prob(1))
-			visible_emote(pick("dances around","chases her tail"))
-			for(var/i in list(1,2,4,8,4,2,1,2,4,8,4,2,1,2,4,8,4,2))
-				set_dir(i)
-				sleep(1)
-				if(QDELETED(src) || client)
-					return
+			INVOKE_ASYNC(src, .proc/dance)
