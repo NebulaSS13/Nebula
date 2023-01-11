@@ -6,11 +6,9 @@
 
 /mob/proc/get_equipment_visibility()
 	. = 0
-	for(var/hideflag in global.equipment_visibility_flags)
-		for(var/obj/item/thing in get_equipped_items(include_carried = FALSE))
-			if(thing.flags_inv & hideflag)
-				. |= hideflag
-				break
+	for(var/obj/item/thing in get_equipped_items(include_carried = FALSE))
+		. |= thing.flags_inv
+	return . & EQUIPMENT_VISIBILITY_FLAGS
 
 /mob/proc/show_examined_short_description(mob/user, distance, infix, suffix, hideflags, decl/pronouns/pronouns)
 	to_chat(user, "[html_icon(src)] That's \a [src][infix]. [suffix]")
@@ -62,10 +60,10 @@
 		. += "[pronouns.He] [pronouns.has] [back.get_examine_line()] on [pronouns.his] back."
 	//held items
 	var/list/held_slots = get_held_item_slots()
-	for(var/bp in held_slots)
-		var/datum/inventory_slot/inv_slot = LAZYACCESS(held_slots, bp)
+	for(var/hand_slot in held_slots)
+		var/datum/inventory_slot/inv_slot = LAZYACCESS(held_slots, hand_slot)
 		if(inv_slot?.holding)
-			var/obj/item/organ/external/E = GET_EXTERNAL_ORGAN(src, bp)
+			var/obj/item/organ/external/E = GET_EXTERNAL_ORGAN(src, hand_slot)
 			if(E)
 				. += "[pronouns.He] [pronouns.is] holding [inv_slot.holding.get_examine_line()] in [pronouns.his] [E.name]."
 	//gloves
@@ -90,8 +88,8 @@
 		. += "[pronouns.He] [pronouns.is] wearing [shoes.get_examine_line()] on [pronouns.his] feet."
 	else
 		var/datum/reagents/coating
-		for(var/bp in list(BP_L_FOOT, BP_R_FOOT))
-			var/obj/item/organ/external/E = GET_EXTERNAL_ORGAN(src, bp)
+		for(var/foot_tag in list(BP_L_FOOT, BP_R_FOOT))
+			var/obj/item/organ/external/E = GET_EXTERNAL_ORGAN(src, foot_tag)
 			if(E && E.coating)
 				coating = E.coating
 				break

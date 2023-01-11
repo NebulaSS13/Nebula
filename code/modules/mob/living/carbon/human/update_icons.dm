@@ -597,8 +597,8 @@ var/global/list/damage_icon_parts = list()
 		overlays_standing[HO_SHOES_LAYER] = shoes.get_mob_overlay(src,slot_shoes_str)
 	else
 		var/list/blood_color
-		for(var/bp in list(BP_L_FOOT, BP_R_FOOT))
-			var/obj/item/organ/external/stomper = GET_EXTERNAL_ORGAN(src, bp)
+		for(var/foot_tag in list(BP_L_FOOT, BP_R_FOOT))
+			var/obj/item/organ/external/stomper = GET_EXTERNAL_ORGAN(src, foot_tag)
 			if(stomper && stomper.coating)
 				blood_color = stomper.coating.get_color()
 
@@ -698,15 +698,15 @@ var/global/list/damage_icon_parts = list()
 
 /mob/living/carbon/human/update_inv_hands(var/update_icons=1)
 	overlays_standing[HO_INHAND_LAYER] = null
-	for(var/bp in held_item_slots)
-		var/datum/inventory_slot/inv_slot = held_item_slots[bp]
+	for(var/hand_slot in held_item_slots)
+		var/datum/inventory_slot/inv_slot = held_item_slots[hand_slot]
 		var/obj/item/held = inv_slot?.holding
 		if(istype(held))
 			// This should be moved out of icon code
 			if(get_equipped_item(slot_handcuffed_str))
 				drop_from_inventory(held)
 				continue
-			var/image/standing = held.get_mob_overlay(src, inv_slot.overlay_slot, bp)
+			var/image/standing = held.get_mob_overlay(src, inv_slot.overlay_slot, hand_slot)
 			if(standing)
 				standing.appearance_flags |= RESET_ALPHA
 				LAZYADD(overlays_standing[HO_INHAND_LAYER], standing)

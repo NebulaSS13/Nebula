@@ -126,9 +126,9 @@
 /obj/item/integrated_circuit/passive/power/chemical_cell/make_energy()
 	if(assembly)
 		if(assembly.battery)
-			var/bp = 5000
-			if((assembly.battery.maxcharge-assembly.battery.charge) / CELLRATE > bp && reagents.remove_reagent(/decl/material/liquid/blood, 1)) //only blood is powerful enough to power the station(c)
-				assembly.give_power(bp)
+			var/battery_charge = 5000
+			if((assembly.battery.maxcharge-assembly.battery.charge) / CELLRATE > battery_charge && reagents.remove_reagent(/decl/material/liquid/blood, 1)) //only blood is powerful enough to power the station(c)
+				assembly.give_power(battery_charge)
 			for(var/I in fuel)
 				if((assembly.battery.maxcharge-assembly.battery.charge) / CELLRATE > fuel[I])
 					if(reagents.remove_reagent(I, 1))

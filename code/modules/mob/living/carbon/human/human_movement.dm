@@ -109,8 +109,8 @@
 		return 0
 
 	//Check hands and mod slip
-	for(var/bp in held_item_slots)
-		var/datum/inventory_slot/inv_slot = held_item_slots[bp]
+	for(var/hand_slot in held_item_slots)
+		var/datum/inventory_slot/inv_slot = held_item_slots[hand_slot]
 		if(!inv_slot.holding)
 			prob_slip -= 2
 		else if(inv_slot.holding.w_class <= ITEM_SIZE_SMALL)

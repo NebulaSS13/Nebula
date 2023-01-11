@@ -319,11 +319,11 @@
 	<BR><HR>
 	<BR><B>Head(Mask):</B> <A href='?src=\ref[src];item=mask'>[(mask ? mask : "Nothing")]</A>"}
 
-	for(var/bp in held_item_slots)
-		var/obj/item/organ/external/E = GET_EXTERNAL_ORGAN(src, bp)
+	for(var/hand_slot in held_item_slots)
+		var/obj/item/organ/external/E = GET_EXTERNAL_ORGAN(src, hand_slot)
 		if(E)
-			var/datum/inventory_slot/inv_slot = held_item_slots[bp]
-			dat += "<BR><b>[capitalize(E.name)]:</b> <A href='?src=\ref[src];item=[bp]'>[inv_slot.holding?.name || "nothing"]</A>"
+			var/datum/inventory_slot/inv_slot = held_item_slots[hand_slot]
+			dat += "<BR><b>[capitalize(E.name)]:</b> <A href='?src=\ref[src];item=[hand_slot]'>[inv_slot.holding?.name || "nothing"]</A>"
 
 	var/obj/item/back = get_equipped_item(slot_back_str)
 	dat += {"<BR><B>Back:</B> <A href='?src=\ref[src];item=back'>[(back || "Nothing")]</A> [((istype(mask, /obj/item/clothing/mask) && istype(back, /obj/item/tank) && !( internal )) ? text(" <A href='?src=\ref[];item=internal'>Set Internal</A>", src) : "")]

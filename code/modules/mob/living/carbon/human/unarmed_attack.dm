@@ -42,8 +42,8 @@ var/global/list/sparring_attack_cache = list()
 
 /decl/natural_attack/proc/padded_by_user_gear(var/mob/living/carbon/human/user)
 	if(istype(user) && length(usable_with_limbs))
-		for(var/bp in usable_with_limbs)
-			var/obj/item/gear = user.get_covering_equipped_item_by_zone(bp)
+		for(var/limb_slot in usable_with_limbs)
+			var/obj/item/gear = user.get_covering_equipped_item_by_zone(limb_slot)
 			if(istype(gear) && (gear.item_flags & ITEM_FLAG_PADDED))
 				return TRUE
 	return FALSE
@@ -287,8 +287,8 @@ var/global/list/sparring_attack_cache = list()
 	if (!user.lying && (target.lying || (zone in list(BP_L_FOOT, BP_R_FOOT))))
 		if((user in target.grabbed_by) && target.lying)
 			return FALSE
-		for(var/bp in list(BP_L_FOOT, BP_R_FOOT))
-			if(GET_EXTERNAL_ORGAN(user, bp))
+		for(var/foot_tag in list(BP_L_FOOT, BP_R_FOOT))
+			if(GET_EXTERNAL_ORGAN(user, foot_tag))
 				return TRUE
 	return FALSE
 

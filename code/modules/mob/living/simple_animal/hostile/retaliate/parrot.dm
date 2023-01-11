@@ -490,8 +490,8 @@
 
 		if(iscarbon(AM))
 			var/mob/living/carbon/C = AM
-			for(var/bp in C.held_item_slots)
-				var/datum/inventory_slot/inv_slot = C.held_item_slots[bp]
+			for(var/hand_slot in C.held_item_slots)
+				var/datum/inventory_slot/inv_slot = C.held_item_slots[hand_slot]
 				if(inv_slot?.holding && can_pick_up(inv_slot.holding))
 					return C
 	return null
@@ -519,8 +519,8 @@
 
 		if(iscarbon(AM))
 			var/mob/living/carbon/C = AM
-			for(var/bp in C.held_item_slots)
-				var/datum/inventory_slot/inv_slot = C.held_item_slots[bp]
+			for(var/hand_slot in C.held_item_slots)
+				var/datum/inventory_slot/inv_slot = C.held_item_slots[hand_slot]
 				if(inv_slot?.holding && can_pick_up(inv_slot.holding))
 					return C
 	return null

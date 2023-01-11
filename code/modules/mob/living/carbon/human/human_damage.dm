@@ -179,8 +179,8 @@
 	pick_organs = shuffle(pick_organs.Copy())
 
 	// Prioritize damaging our filtration organs first.
-	for(var/bp in list(BP_KIDNEYS, BP_LIVER))
-		var/obj/item/organ/internal/lump = GET_INTERNAL_ORGAN(src, bp)
+	for(var/organ in list(BP_KIDNEYS, BP_LIVER))
+		var/obj/item/organ/internal/lump = GET_INTERNAL_ORGAN(src, organ)
 		if(lump)
 			pick_organs -= lump
 			pick_organs.Insert(1, lump)

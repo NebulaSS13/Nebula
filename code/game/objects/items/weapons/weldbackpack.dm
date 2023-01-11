@@ -131,8 +131,11 @@
 
 /obj/item/chems/weldpack/attack_hand(mob/user)
 	if(is_welder_attached())
+		if(user.is_holding_offhand(src))
+			detach_gun(user)
+			return TRUE
 		var/curslot = user.get_equipped_slot_for_item(src)
-		if(curslot == slot_back_str || curslot == slot_s_store_str || user.is_holding_offhand(src))
+		if(curslot == slot_back_str || curslot == slot_s_store_str)
 			detach_gun(user)
 			return TRUE
 	return ..()

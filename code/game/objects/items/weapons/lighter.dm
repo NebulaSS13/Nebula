@@ -26,7 +26,7 @@
 	if(!reagents)
 		create_reagents(max_fuel)
 	. = ..()
-	
+
 /obj/item/flame/lighter/populate_reagents()
 	reagents.add_reagent(/decl/material/liquid/fuel, max_fuel)
 
@@ -45,11 +45,9 @@
 		user.visible_message("<span class='notice'>After a few attempts, [user] manages to light the [src].</span>")
 	else
 		to_chat(user, "<span class='warning'>You burn yourself while lighting the lighter.</span>")
-		for(var/bp in user.held_item_slots)
-			var/datum/inventory_slot/inv_slot = user.held_item_slots[bp]
-			if(inv_slot.holding == src)
-				user.apply_damage(2, BURN, bp)
-				break
+		var/hand_tag = user.get_held_slot_for_item(src)
+		if(hand_tag)
+			user.apply_damage(2, BURN, hand_tag)
 		user.visible_message("<span class='notice'>After a few attempts, [user] manages to light the [src], burning their finger in the process.</span>")
 	playsound(src.loc, "light_bic", 100, 1, -4)
 
