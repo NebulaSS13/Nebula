@@ -169,11 +169,11 @@
 		SET_STATUS_MAX(src, STAT_WEAK, 3) //can't emote while weakened, apparently.
 
 /mob/living/carbon/human/proc/handle_grasp()
-	for(var/bp in held_item_slots)
-		var/datum/inventory_slot/inv_slot = held_item_slots[bp]
+	for(var/hand_slot in held_item_slots)
+		var/datum/inventory_slot/inv_slot = held_item_slots[hand_slot]
 		var/holding = inv_slot?.holding
 		if(holding)
-			var/obj/item/organ/external/E = GET_EXTERNAL_ORGAN(src, bp)
+			var/obj/item/organ/external/E = GET_EXTERNAL_ORGAN(src, hand_slot)
 			if((!E || !E.is_usable() || E.is_parent_dislocated()) && unEquip(holding))
 				grasp_damage_disarm(inv_slot)
 
@@ -199,8 +199,8 @@
 
 	var/list/drop_held_item_slots
 	if(istype(affected))
-		for(var/bp in (list(affected.organ_tag) | affected.children))
-			var/datum/inventory_slot/inv_slot = LAZYACCESS(held_item_slots, bp)
+		for(var/grasp_tag in (list(affected.organ_tag) | affected.children))
+			var/datum/inventory_slot/inv_slot = LAZYACCESS(held_item_slots, grasp_tag)
 			if(inv_slot?.holding)
 				LAZYDISTINCTADD(drop_held_item_slots, inv_slot)
 	else if(istype(affected, /datum/inventory_slot))

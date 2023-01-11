@@ -123,9 +123,9 @@
 			mymob?.client?.screen -= hand_hud_objects
 		QDEL_NULL_LIST(hand_hud_objects)
 	else
-		for(var/bp in removing)
+		for(var/hand_tag in removing)
 			for(var/obj/screen/inventory/inv_box in hand_hud_objects)
-				if(inv_box.slot_id == bp)
+				if(inv_box.slot_id == hand_tag)
 					if(mymob.client)
 						mymob.client.screen -= inv_box
 					hand_hud_objects -= inv_box
@@ -141,28 +141,28 @@
 	var/ui_style = ui_style2icon(mymob.client?.prefs.UI_style)
 	var/ui_color = mymob.client?.prefs?.UI_style_color
 	var/ui_alpha = mymob.client?.prefs?.UI_style_alpha || 255
-	for(var/bp in adding)
+	for(var/hand_tag in adding)
 		var/obj/screen/inventory/inv_box
 		for(var/obj/screen/inventory/existing_box in hand_hud_objects)
-			if(existing_box.slot_id == bp)
+			if(existing_box.slot_id == hand_tag)
 				inv_box = existing_box
 				break
 		if(!inv_box)
 			inv_box = new /obj/screen/inventory()
-		var/datum/inventory_slot/inv_slot = target.held_item_slots[bp]
-		inv_box.SetName(bp)
+		var/datum/inventory_slot/inv_slot = target.held_item_slots[hand_tag]
+		inv_box.SetName(hand_tag)
 		inv_box.icon = ui_style
 		inv_box.icon_state = "hand_base"
 
 		inv_box.cut_overlays()
-		inv_box.add_overlay("hand_[bp]")
+		inv_box.add_overlay("hand_[hand_tag]")
 		inv_box.add_overlay("hand_[inv_slot.ui_label]")
-		if(target.get_active_held_item_slot() == bp)
+		if(target.get_active_held_item_slot() == hand_tag)
 			inv_box.add_overlay("hand_selected")
 		inv_box.compile_overlays()
 
 		inv_box.screen_loc = inv_slot.ui_loc
-		inv_box.slot_id = bp
+		inv_box.slot_id = hand_tag
 		inv_box.color = ui_color
 		inv_box.alpha = ui_alpha
 		inv_box.appearance_flags |= KEEP_TOGETHER

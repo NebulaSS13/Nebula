@@ -214,9 +214,20 @@
 	return I.mob_can_unequip(src, slot)
 
 /mob/proc/get_equipped_slot_for_item(obj/item/I)
-	for(var/s in global.all_inventory_slots)
-		if(get_equipped_item(s) == I)
-			return s
+	var/list/slots = get_inventory_slots()
+	if(!length(slots))
+		return
+	for(var/slot in slots)
+		if(slots[slot] == I)
+			return slot
+
+/mob/proc/get_held_slot_for_item(obj/item/I)
+	var/list/slots = get_held_item_slots()
+	if(!length(slots))
+		return
+	for(var/slot in slots)
+		if(slots[slot] == I)
+			return slot
 
 /mob/proc/get_inventory_slot_datum(var/slot)
 	return
@@ -323,7 +334,7 @@
 	return
 
 /mob/proc/get_hands_organs()
-	for(var/bp in get_held_item_slots())
-		var/org = GET_EXTERNAL_ORGAN(src, bp)
+	for(var/hand_slot in get_held_item_slots())
+		var/org = GET_EXTERNAL_ORGAN(src, hand_slot)
 		if(org)
 			LAZYDISTINCTADD(., org)

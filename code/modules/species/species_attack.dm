@@ -123,8 +123,8 @@
 /decl/natural_attack/tail/is_usable(var/mob/living/carbon/human/user, var/mob/living/carbon/human/target, var/zone) //ensures that you can't tail someone in the skull
 	if(!(zone in can_hit_zones))
 		return FALSE
-	for(var/bp in list(BP_L_FOOT, BP_R_FOOT))
-		if(GET_EXTERNAL_ORGAN(user, bp))
+	for(var/foot_tag in list(BP_L_FOOT, BP_R_FOOT))
+		if(GET_EXTERNAL_ORGAN(user, foot_tag))
 			return TRUE
 	return FALSE
 

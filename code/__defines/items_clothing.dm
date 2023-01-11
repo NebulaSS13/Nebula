@@ -34,17 +34,7 @@
 #define BLOCK_HEAD_HAIR    BITFLAG(9)    // Hides the user's hair overlay, and replace it with short hairs. Leaves facial hair.
 #define BLOCK_FACIAL_HAIR  BITFLAG(10)    // Hides the user's hair, facial and otherwise.
 #define BLOCK_ALL_HAIR     (BLOCK_HEAD_HAIR | BLOCK_FACIAL_HAIR)
-
-var/global/list/equipment_visibility_flags = list(
-	HIDEGLOVES,
-	HIDESUITSTORAGE,
-	HIDEJUMPSUIT,
-	HIDESHOES,
-	HIDEMASK,
-	HIDEEYES,
-	HIDEEARS,
-	HIDEFACE
-)
+#define EQUIPMENT_VISIBILITY_FLAGS (HIDEGLOVES|HIDESUITSTORAGE|HIDEJUMPSUIT|HIDESHOES|HIDEMASK|HIDEEYES|HIDEEARS|HIDEFACE)
 
 // Inventory slot strings.
 // since numbers cannot be used as associative list keys.

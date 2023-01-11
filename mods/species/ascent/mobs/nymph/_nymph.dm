@@ -54,6 +54,7 @@
 	set_extension(src, /datum/extension/base_icon_state, icon_state)
 
 /mob/living/carbon/alien/ascent_nymph/show_examined_worn_held_items(mob/user, distance, infix, suffix, hideflags, decl/pronouns/pronouns)
+	. = ..()
 	if(holding_item)
 		to_chat(user, SPAN_NOTICE("It is holding \icon[holding_item] \a [holding_item]."))
 

@@ -114,8 +114,8 @@
 		if(shoes.coating && shoes.coating.total_volume > 1)
 			source = shoes
 	else
-		for(var/bp in list(BP_L_FOOT, BP_R_FOOT))
-			var/obj/item/organ/external/stomper = GET_EXTERNAL_ORGAN(src, bp)
+		for(var/foot_tag in list(BP_L_FOOT, BP_R_FOOT))
+			var/obj/item/organ/external/stomper = GET_EXTERNAL_ORGAN(src, foot_tag)
 			if(stomper && stomper.coating && stomper.coating.total_volume > 1)
 				source = stomper
 	if(!source)

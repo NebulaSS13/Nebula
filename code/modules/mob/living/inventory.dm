@@ -20,7 +20,7 @@
 	return inventory_slots
 
 /mob/living/get_inventory_slot_datum(var/slot)
-	return LAZYACCESS(inventory_slots, slot)
+	return LAZYACCESS(inventory_slots, slot) || LAZYACCESS(held_item_slots, slot)
 
 /mob/living/get_held_item_slots()
 	return held_item_slots
@@ -69,8 +69,8 @@
 		. = null
 
 /mob/living/get_inactive_held_items()
-	for(var/bp in (held_item_slots - get_active_held_item_slot()))
-		var/datum/inventory_slot/inv_slot = held_item_slots[bp]
+	for(var/hand_slot in (held_item_slots - get_active_held_item_slot()))
+		var/datum/inventory_slot/inv_slot = held_item_slots[hand_slot]
 		var/obj/item/thing = inv_slot?.holding
 		if(istype(thing))
 			LAZYADD(., thing)
@@ -83,21 +83,21 @@
 	select_held_item_slot(next_in_list(get_active_held_item_slot(), held_item_slots))
 
 /mob/living/get_empty_hand_slot()
-	for(var/bp in held_item_slots)
-		var/datum/inventory_slot/inv_slot = held_item_slots[bp]
+	for(var/hand_slot in held_item_slots)
+		var/datum/inventory_slot/inv_slot = held_item_slots[hand_slot]
 		if(inv_slot && !inv_slot.holding)
-			return bp
+			return hand_slot
 
 /mob/living/get_empty_hand_slots()
-	for(var/bp in held_item_slots)
-		var/datum/inventory_slot/inv_slot = held_item_slots[bp]
+	for(var/hand_slot in held_item_slots)
+		var/datum/inventory_slot/inv_slot = held_item_slots[hand_slot]
 		if(inv_slot && !inv_slot.holding)
-			LAZYADD(., bp)
+			LAZYADD(., hand_slot)
 
 /mob/living/get_equipped_item(var/slot)
 	. = ..()
 	if(!.)
-		var/datum/inventory_slot/inv_slot = LAZYACCESS(inventory_slots, slot)
+		var/datum/inventory_slot/inv_slot = get_inventory_slot_datum(slot)
 		return inv_slot?.holding
 
 /mob/living/drop_from_hand(var/slot, var/atom/Target)
@@ -109,8 +109,8 @@
 /mob/living/u_equip(obj/W)
 	. = ..()
 	if(!.)
-		for(var/bp in held_item_slots)
-			var/datum/inventory_slot/inv_slot = held_item_slots[bp]
+		for(var/hand_slot in held_item_slots)
+			var/datum/inventory_slot/inv_slot = held_item_slots[hand_slot]
 			if(inv_slot?.holding == W)
 				inv_slot.holding = null
 				. = TRUE

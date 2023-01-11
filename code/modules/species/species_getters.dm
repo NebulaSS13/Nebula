@@ -74,12 +74,12 @@
 /decl/species/proc/get_limb_from_zone(var/limb)
 	. = length(LAZYACCESS(limb_mapping, limb)) ? pick(limb_mapping[limb]) : limb
 
-/decl/species/proc/get_bodytype_by_name(var/bp)
-	if(!bp)
+/decl/species/proc/get_bodytype_by_name(var/bodytype_name)
+	bodytype_name = trim(lowertext(bodytype_name))
+	if(!bodytype_name)
 		return
-	bp = lowertext(bp)
 	for(var/decl/bodytype/bodytype in available_bodytypes)
-		if(lowertext(bodytype.name) == bp)
+		if(lowertext(bodytype.name) == bodytype_name)
 			return bodytype
 
 /decl/species/proc/get_bodytype_by_pronouns(var/decl/pronouns/pronouns)

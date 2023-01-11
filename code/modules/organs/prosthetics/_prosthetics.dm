@@ -58,19 +58,17 @@
 // Checks the organ list for limbs meeting a predicate. Way overengineered for such a limited use
 // case but I can see it being expanded in the future if meat limbs or doona limbs use it.
 /mob/living/carbon/human/proc/get_modular_limbs(var/return_first_found = FALSE, var/validate_proc)
-	for(var/bp in get_external_organs())
-		var/obj/item/organ/external/E = bp
-		if(!validate_proc || call(E, validate_proc)(src) > MODULAR_BODYPART_INVALID)
-			LAZYADD(., E)
+	for(var/obj/item/organ/external/limb as anything in get_external_organs())
+		if(!validate_proc || call(limb, validate_proc)(src) > MODULAR_BODYPART_INVALID)
+			LAZYADD(., limb)
 			if(return_first_found)
 				return
 	// Prune children so we can't remove every individual component of an entire prosthetic arm
 	// piece by piece. Technically a circular dependency here would remove the limb entirely but
 	// if there's a parent whose child is also its parent, there's something wrong regardless.
-	for(var/bp in .)
-		var/obj/item/organ/external/E = bp
-		if(length(E.children))
-			. -= E.children
+	for(var/obj/item/organ/external/limb as anything in .)
+		if(length(limb.children))
+			. -= limb.children
 
 // Called in robotize(), replaced() and removed() to update our modular limb verbs.
 /mob/living/carbon/human/proc/refresh_modular_limb_verbs()
