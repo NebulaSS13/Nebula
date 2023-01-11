@@ -48,11 +48,12 @@
 	OnDeathInLife()
 
 /mob/living/simple_animal/shade/proc/OnDeathInLife()
-	if(stat == 2)
-		new /obj/item/ectoplasm (src.loc)
-		for(var/mob/M in viewers(src, null))
-			if((M.client && !( M.blinded )))
-				M.show_message("<span class='warning'>[src] lets out a contented sigh as their form unwinds.</span>")
-				ghostize()
-		qdel(src)
+	if(stat != DEAD)
 		return
+	var/obj/item/ectoplasm/dropped_ectoplasm = new
+	dropped_ectoplasm.dropInto(loc)
+	audible_message(SPAN_WARNING("[src] lets out a contented sigh as their form unwinds."),
+		SPAN_NOTICE("You let out a contented sigh as your form unwinds."),
+		SPAN_WARNING("The [src] unravels before your very eyes."))
+	ghostize()
+	qdel(src)
