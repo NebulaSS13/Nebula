@@ -319,21 +319,21 @@ var/global/list/areas = list()
 
 var/global/list/mob/living/forced_ambiance_list = new
 
-/area/Entered(A)
-	if(!istype(A,/mob/living))
+/area/Entered(atom/movable/enterer)
+	if(!istype(enterer,/mob/living))
 		return
-	var/mob/living/L = A
-	if(!L.lastarea)
-		L.lastarea = get_area(L.loc)
-	var/area/oldarea = L.lastarea
+	var/mob/living/living_enterer = enterer
+	if(!living_enterer.lastarea)
+		living_enterer.lastarea = get_area(living_enterer.loc)
+	var/area/oldarea = living_enterer.lastarea
 	if(!oldarea || oldarea.has_gravity != has_gravity)
-		if(has_gravity == 1 && !MOVING_DELIBERATELY(L)) // Being ready when you change areas allows you to avoid falling.
-			thunk(L)
-		L.update_floating()
-	if(L.ckey)
-		play_ambience(L)
-		do_area_blurb(L)
-	L.lastarea = src
+		if(has_gravity == 1 && !MOVING_DELIBERATELY(living_enterer)) // Being ready when you change areas allows you to avoid falling.
+			thunk(living_enterer)
+		living_enterer.update_floating()
+	if(living_enterer.ckey)
+		play_ambience(living_enterer)
+		do_area_blurb(living_enterer)
+	living_enterer.lastarea = src
 
 
 /area/Exited(A)
