@@ -116,30 +116,26 @@
 	var/list/objs = list()
 	get_mobs_and_objs_in_view_fast(T, range, mobs, objs, checkghosts)
 
-	for(var/o in objs)
-		var/obj/O = o
-		O.show_message(message, VISIBLE_MESSAGE, blind_message, AUDIBLE_MESSAGE)
+	for(var/obj/obj_viewer as anything in objs)
+		obj_viewer.show_message(message, VISIBLE_MESSAGE, blind_message, AUDIBLE_MESSAGE)
 
-	for(var/m in mobs)
-		var/mob/M = m
+	for(var/mob/mob_viewer as anything in mobs)
 		var/mob_message = message
 
-		if(isghost(M))
-			if(ghost_skip_message(M))
+		if(isghost(mob_viewer))
+			if(ghost_skip_message(mob_viewer))
 				continue
-			mob_message = add_ghost_track(mob_message, M)
+			mob_message = add_ghost_track(mob_message, mob_viewer)
 
-		if(self_message && M == src)
-			M.show_message(self_message, VISIBLE_MESSAGE, blind_message, AUDIBLE_MESSAGE)
+		if(self_message && mob_viewer == src)
+			mob_viewer.show_message(self_message, VISIBLE_MESSAGE, blind_message, AUDIBLE_MESSAGE)
 			continue
 
-		if(!M.is_blind() || narrate)
-			M.show_message(mob_message, VISIBLE_MESSAGE, blind_message, AUDIBLE_MESSAGE)
+		if(!narrate && (mob_viewer.is_blind() || is_invisible_to(mob_viewer)) && blind_message)
+			mob_viewer.show_message(blind_message, AUDIBLE_MESSAGE)
 			continue
 
-		if(blind_message)
-			M.show_message(blind_message, AUDIBLE_MESSAGE)
-			continue
+		mob_viewer.show_message(mob_message, VISIBLE_MESSAGE, blind_message, AUDIBLE_MESSAGE)
 	//Multiz, have shadow do same
 	if(bound_overlay)
 		bound_overlay.visible_message(message, self_message, blind_message)
