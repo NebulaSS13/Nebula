@@ -319,24 +319,20 @@ var/global/list/areas = list()
 var/global/list/mob/living/forced_ambiance_list = new
 
 /area/Entered(A)
-	if(!istype(A,/mob/living))	return
-
+	if(!istype(A,/mob/living))
+		return
 	var/mob/living/L = A
-
 	if(!L.lastarea)
 		L.lastarea = get_area(L.loc)
-	var/area/newarea = get_area(L.loc)
 	var/area/oldarea = L.lastarea
-	if(oldarea.has_gravity != newarea.has_gravity)
-		if(newarea.has_gravity == 1 && !MOVING_DELIBERATELY(L)) // Being ready when you change areas allows you to avoid falling.
+	if(!oldarea || oldarea.has_gravity != has_gravity)
+		if(has_gravity == 1 && !MOVING_DELIBERATELY(L)) // Being ready when you change areas allows you to avoid falling.
 			thunk(L)
 		L.update_floating()
-
 	if(L.ckey)
 		play_ambience(L)
 		do_area_blurb(L)
-
-	L.lastarea = newarea
+	L.lastarea = src
 
 
 /area/Exited(A)
