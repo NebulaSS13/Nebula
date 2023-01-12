@@ -692,9 +692,12 @@ var/global/list/_item_blood_mask = icon('icons/effects/blood.dmi', "itemblood")
 	global._blood_overlay_cache[cache_key] = blood_overlay
 
 /obj/item/proc/showoff(mob/user)
-	for(var/mob/M in view(user))
-		if(!user.is_invisible_to(M))
-			M.show_message("[user] holds up [src]. <a HREF=?src=\ref[M];lookitem=\ref[src]>Take a closer look.</a>", 1)
+	for(var/mob/mob_viewer in view(user))
+		if(mob_viewer == src)
+			to_chat(mob_viewer, "You hold up \the [src].")
+			continue
+		if(!user.is_invisible_to(mob_viewer))
+			mob_viewer.show_message("<b>\The [user]</b> holds up \the [src]. <a HREF=?src=\ref[mob_viewer];lookitem=\ref[src]>Take a closer look.</a>", 1)
 
 /*
 For zooming with scope or binoculars. This is called from
