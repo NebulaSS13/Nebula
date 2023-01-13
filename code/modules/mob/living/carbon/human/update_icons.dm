@@ -114,32 +114,36 @@ Please contact me on #coderbus IRC. ~Carn x
 #define HO_DAMAGE_LAYER     3
 #define HO_SURGERY_LAYER    4 //bs12 specific.
 #define HO_UNDERWEAR_LAYER  5
-#define HO_TAIL_UNDER_LAYER 6
-#define HO_UNIFORM_LAYER    7
-#define HO_ID_LAYER         8
-#define HO_SHOES_LAYER      9
-#define HO_GLOVES_LAYER     10
-#define HO_BELT_LAYER       11
-#define HO_SUIT_LAYER       12
-#define HO_GLASSES_LAYER    13
-#define HO_BELT_LAYER_ALT   14
-#define HO_SUIT_STORE_LAYER 15
-#define HO_BACK_LAYER       16
-#define HO_TAIL_OVER_LAYER  17 //bs12 specific. this hack is probably gonna come back to haunt me
-#define HO_HAIR_LAYER       18 //TODO: make part of head layer?
-#define HO_GOGGLES_LAYER    19
-#define HO_EARS_LAYER       20
-#define HO_FACEMASK_LAYER   21
-#define HO_HEAD_LAYER       22
-#define HO_COLLAR_LAYER     23
-#define HO_HANDCUFF_LAYER   24
-#define HO_INHAND_LAYER     25
-#define HO_FIRE_LAYER       26 //If you're on fire
-#define TOTAL_LAYERS        26
+#define HO_UNIFORM_LAYER    6
+#define HO_ID_LAYER         7
+#define HO_SHOES_LAYER      8
+#define HO_GLOVES_LAYER     9
+#define HO_BELT_LAYER       10
+#define HO_SUIT_LAYER       11
+#define HO_GLASSES_LAYER    12
+#define HO_BELT_LAYER_ALT   13
+#define HO_SUIT_STORE_LAYER 14
+#define HO_BACK_LAYER       15
+#define HO_TAIL_LAYER       16 //bs12 specific. this hack is probably gonna come back to haunt me
+#define HO_HAIR_LAYER       17 //TODO: make part of head layer?
+#define HO_GOGGLES_LAYER    18
+#define HO_EARS_LAYER       19
+#define HO_FACEMASK_LAYER   20
+#define HO_HEAD_LAYER       21
+#define HO_COLLAR_LAYER     22
+#define HO_HANDCUFF_LAYER   23
+#define HO_INHAND_LAYER     24
+#define HO_FIRE_LAYER       25 //If you're on fire
+#define TOTAL_OVER_LAYERS   25
 //////////////////////////////////
 
+// Underlay defines; vestigal implementation currently.
+#define HU_TAIL_LAYER 1
+#define TOTAL_UNDER_LAYERS 1
+
 /mob/living/carbon/human
-	var/list/overlays_standing[TOTAL_LAYERS]
+	var/list/overlays_standing[TOTAL_OVER_LAYERS]
+	var/list/underlays_standing[TOTAL_UNDER_LAYERS]
 	var/previous_damage_appearance // store what the body last looked like, so we only have to update it if something changed
 
 /mob/living/carbon/human/proc/refresh_visible_overlays()
@@ -183,6 +187,7 @@ Please contact me on #coderbus IRC. ~Carn x
 		refresh_visible_overlays()
 
 	var/list/visible_overlays
+	var/list/visible_underlays
 	if(is_cloaked())
 		icon = 'icons/mob/human.dmi'
 		icon_state = "blank"
@@ -191,6 +196,7 @@ Please contact me on #coderbus IRC. ~Carn x
 		icon = stand_icon
 		icon_state = null
 		visible_overlays = overlays_standing
+		visible_underlays = underlays_standing
 
 	var/matrix/M = matrix()
 	if(lying && (bodytype.prone_overlay_offset[1] || bodytype.prone_overlay_offset[2]))
@@ -208,6 +214,16 @@ Please contact me on #coderbus IRC. ~Carn x
 				if(i != HO_DAMAGE_LAYER)
 					overlay.transform = M
 				add_overlay(overlay)
+
+	for(var/i = 1 to LAZYLEN(visible_underlays))
+		var/entry = visible_underlays[i]
+		if(istype(entry, /image))
+			var/image/underlay = entry
+			underlay.transform = M
+		else if(islist(entry))
+			for(var/image/underlay in entry)
+				underlay.transform = M
+	underlays = visible_underlays
 
 	var/obj/item/organ/external/head/head = get_organ(BP_HEAD, /obj/item/organ/external/head)
 	if(head)
@@ -698,8 +714,8 @@ var/global/list/damage_icon_parts = list()
 		queue_icon_update()
 
 /mob/living/carbon/human/proc/update_tail_showing(var/update_icons=1)
-	overlays_standing[HO_TAIL_OVER_LAYER] =  null
-	overlays_standing[HO_TAIL_UNDER_LAYER] = null
+	overlays_standing[HO_TAIL_LAYER] =  null
+	underlays_standing[HU_TAIL_LAYER] = null
 	var/obj/item/organ/external/tail/tail_organ = get_organ(BP_TAIL, /obj/item/organ/external/tail)
 	if(!istype(tail_organ))
 		return
@@ -707,7 +723,11 @@ var/global/list/damage_icon_parts = list()
 	var/tail_state = tail_organ.get_tail(tail_organ)
 	if(tail_state && (!suit || !(suit.flags_inv & HIDETAIL)))
 		var/icon/tail_s = get_tail_icon(tail_organ)
-		overlays_standing[(dir == NORTH) ? HO_TAIL_OVER_LAYER : HO_TAIL_UNDER_LAYER] = image(tail_s, icon_state = "[tail_state]_s")
+		var/tail_image = image(tail_s, icon_state = "[tail_state]_s")
+		if(dir == NORTH)
+			overlays_standing[HO_TAIL_LAYER] = tail_image
+		else
+			underlays_standing[HU_TAIL_LAYER] = tail_image
 		animate_tail_reset(0)
 
 	if(update_icons)
@@ -743,7 +763,7 @@ var/global/list/damage_icon_parts = list()
 
 
 /mob/living/carbon/human/proc/set_tail_state(var/t_state)
-	var/image/tail_overlay = overlays_standing[(dir == NORTH) ? HO_TAIL_OVER_LAYER : HO_TAIL_UNDER_LAYER]
+	var/image/tail_overlay = overlays_standing[HO_TAIL_LAYER] || underlays_standing[HU_TAIL_LAYER]
 	var/obj/item/organ/external/tail/tail_organ = get_organ(BP_TAIL, /obj/item/organ/external/tail)
 	if(!tail_organ)
 		return null
@@ -760,7 +780,7 @@ var/global/list/damage_icon_parts = list()
 		return
 	var/t_state = "[tail_organ.get_tail()]_once"
 
-	var/image/tail_overlay = overlays_standing[(dir == NORTH) ? HO_TAIL_OVER_LAYER : HO_TAIL_UNDER_LAYER]
+	var/image/tail_overlay = overlays_standing[HO_TAIL_LAYER] || underlays_standing[HU_TAIL_LAYER]
 	if(tail_overlay && tail_overlay.icon_state == t_state)
 		return //let the existing animation finish
 
@@ -768,7 +788,8 @@ var/global/list/damage_icon_parts = list()
 	if(tail_overlay)
 		spawn(20)
 			//check that the animation hasn't changed in the meantime
-			if(overlays_standing[(dir == NORTH) ? HO_TAIL_OVER_LAYER : HO_TAIL_UNDER_LAYER] == tail_overlay && tail_overlay.icon_state == t_state)
+			var/current_tail = overlays_standing[HO_TAIL_LAYER] || underlays_standing[HU_TAIL_LAYER]
+			if(current_tail == tail_overlay && tail_overlay.icon_state == t_state)
 				animate_tail_stop()
 
 	if(update_icons)
@@ -889,7 +910,6 @@ var/global/list/damage_icon_parts = list()
 #undef HO_DAMAGE_LAYER
 #undef HO_SURGERY_LAYER
 #undef HO_UNDERWEAR_LAYER
-#undef HO_TAIL_UNDER_LAYER
 #undef HO_UNIFORM_LAYER
 #undef HO_ID_LAYER
 #undef HO_SHOES_LAYER
@@ -901,7 +921,7 @@ var/global/list/damage_icon_parts = list()
 #undef HO_BELT_LAYER_ALT
 #undef HO_SUIT_STORE_LAYER
 #undef HO_BACK_LAYER
-#undef HO_TAIL_OVER_LAYER
+#undef HO_TAIL_LAYER
 #undef HO_HAIR_LAYER
 #undef HO_GOGGLES_LAYER
 #undef HO_FACEMASK_LAYER
@@ -910,4 +930,7 @@ var/global/list/damage_icon_parts = list()
 #undef HO_HANDCUFF_LAYER
 #undef HO_INHAND_LAYER
 #undef HO_FIRE_LAYER
-#undef TOTAL_LAYERS
+#undef TOTAL_OVER_LAYERS
+
+#undef HU_TAIL_LAYER
+#undef TOTAL_UNDER_LAYERS
