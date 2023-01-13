@@ -103,7 +103,7 @@
 	if(mannequin)
 		mannequin.delete_inventory(TRUE)
 		dress_preview_mob(mannequin)
-		update_character_previews(new /mutable_appearance(mannequin))
+		update_character_previews(mannequin)
 
 /datum/preferences/proc/get_random_name()
 	var/decl/cultural_info/culture/check_culture = cultural_info[TAG_CULTURE]

@@ -237,7 +237,7 @@ var/global/list/time_prefs_fixed = list()
 /datum/preferences/proc/update_setup_window(mob/user)
 	send_output(user, url_encode(get_content(user)), "preferences_browser:update_content")
 
-/datum/preferences/proc/update_character_previews(mutable_appearance/MA)
+/datum/preferences/proc/update_character_previews(mob/living/mannequin)
 	if(!client)
 		return
 
@@ -258,6 +258,8 @@ var/global/list/time_prefs_fixed = list()
 			O.pref = src
 			LAZYSET(char_render_holders, "[D]", O)
 			client.screen |= O
+		mannequin.set_dir(D) // necessary to update direction-dependent over/underlays like tails.
+		var/mutable_appearance/MA = new /mutable_appearance(mannequin)
 		O.appearance = MA
 		O.dir = D
 		O.screen_loc = preview_screen_locs["[D]"]
