@@ -120,16 +120,14 @@
 	)
 
 /obj/machinery/portable_atmospherics/hydroponics/proc/set_seed(var/new_seed)
-	if(seed)
-		clear_seed()
+	if(seed == new_seed)
+		return
 	seed = new_seed
-	if(seed.scannable_result)
+	if(seed?.scannable_result)
 		set_extension(src, /datum/extension/scannable, seed.scannable_result)
-
-/obj/machinery/portable_atmospherics/hydroponics/proc/clear_seed()
-	seed = null
-	if(has_extension(src, /datum/extension/scannable))
+	else if(has_extension(src, /datum/extension/scannable))
 		remove_extension(src, /datum/extension/scannable)
+	update_icon()
 
 /obj/machinery/portable_atmospherics/hydroponics/attack_ghost(var/mob/observer/ghost/user)
 	if(!(harvest && seed && ispath(seed.product_type, /mob)))
@@ -280,7 +278,7 @@
 
 	if(!seed.get_trait(TRAIT_HARVEST_REPEAT))
 		yield_mod = 0
-		clear_seed()
+		set_seed(null)
 		dead = 0
 		age = 0
 		sampled = 0
@@ -301,7 +299,7 @@
 	if(!silent)
 		to_chat(user, SPAN_NOTICE("You remove the dead [seed.display_name]."))
 
-	clear_seed()
+	set_seed(null)
 
 	dead = 0
 	sampled = 0
@@ -315,9 +313,6 @@
 // If a weed growth is sufficient, this proc is called.
 /obj/machinery/portable_atmospherics/hydroponics/proc/weed_invasion()
 
-	//Remove the seed if something is already planted.
-	if(seed)
-		clear_seed()
 	set_seed(SSplants.seeds[pick(list("reishi", "nettles", "amanita", "mushrooms", "plumphelmet", "towercap", "harebells", "weeds"))])
 
 	if(!seed)
