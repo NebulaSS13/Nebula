@@ -17,8 +17,8 @@
 	origin_tech = "{'programming':1,'engineering':1,'esoteric':3}"
 	material = /decl/material/solid/plastic
 	matter = list(
-		/decl/material/solid/metal/copper    = MATTER_AMOUNT_REINFORCEMENT, 
-		/decl/material/solid/silicon         = MATTER_AMOUNT_REINFORCEMENT, 
+		/decl/material/solid/metal/copper    = MATTER_AMOUNT_REINFORCEMENT,
+		/decl/material/solid/silicon         = MATTER_AMOUNT_REINFORCEMENT,
 		/decl/material/solid/glass           = MATTER_AMOUNT_TRACE,
 	)
 
@@ -128,7 +128,7 @@
 	view_camera(user)
 
 /obj/item/spy_monitor/proc/view_camera(mob/user)
-	user.machine = src
+	user.set_machine(src)
 	user.reset_view(selected_camera)
 
 /obj/item/spy_monitor/check_eye(mob/user)

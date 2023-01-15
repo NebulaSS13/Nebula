@@ -156,11 +156,11 @@
 /obj/machinery/turbine/interact(mob/user)
 
 	if ( (get_dist(src, user) > 1 ) || (stat & (NOPOWER|BROKEN)) && (!istype(user, /mob/living/silicon/ai)) )
-		user.machine = null
+		user.unset_machine()
 		close_browser(user, "window=turbine")
 		return
 
-	user.machine = src
+	user.set_machine(src)
 
 	var/t = "<TT><B>Gas Turbine Generator</B><HR><PRE>"
 
@@ -221,7 +221,7 @@
 	return TRUE
 
 /obj/machinery/computer/turbine_computer/interact(var/mob/user)
-	user.machine = src
+	user.set_machine(src)
 	var/dat
 	if(src.compressor)
 		dat += {"<BR><B>Gas turbine remote control system</B><HR>

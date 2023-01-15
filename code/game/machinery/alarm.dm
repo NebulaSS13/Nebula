@@ -1048,7 +1048,7 @@ FIRE ALARM
 	return TRUE
 
 /obj/machinery/partyalarm/interact(mob/user)
-	user.machine = src
+	user.set_machine(src)
 	var/area/A = get_area(src)
 	ASSERT(isarea(A))
 	var/d1

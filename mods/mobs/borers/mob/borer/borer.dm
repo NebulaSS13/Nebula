@@ -94,7 +94,7 @@
 	generation = gen
 	set_borer_name()
 
-	if(!roundstart) 
+	if(!roundstart)
 		request_player()
 
 /mob/living/simple_animal/borer/Destroy()
@@ -257,10 +257,10 @@
 	dropInto(host.loc)
 
 	reset_view(null)
-	machine = null
+	unset_machine()
 
 	host.reset_view(null)
-	host.machine = null
+	host.unset_machine()
 
 	var/mob/living/H = host
 	H.status_flags &= ~PASSEMOTES

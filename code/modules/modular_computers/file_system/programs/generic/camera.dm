@@ -57,7 +57,7 @@
 		ui.set_initial_data(data)
 		ui.open()
 
-	user.machine = nano_host()
+	user.set_machine(nano_host())
 
 /datum/nano_module/program/camera_monitor/Topic(href, href_list)
 	if(..())

@@ -10,7 +10,7 @@
 		return
 
 	if(machine && (machine.CanUseTopic(src, machine.DefaultTopicState()) == STATUS_CLOSE)) // unsure if this is a good idea, but using canmousedrop was ???
-		machine = null
+		unset_machine()
 
 	//Handle temperature/pressure differences between body and environment
 	handle_environment(loc.return_air())

@@ -50,13 +50,13 @@
 	if(in_use)
 		var/is_in_use = 0
 		var/list/nearby = viewers(1, src) | usr
-		for(var/mob/M in nearby)
-			if ((M.client && M.machine == src))
-				if(CanUseTopic(M, DefaultTopicState()) > STATUS_CLOSE)
+		for(var/mob/mob_viewer in nearby)
+			if ((mob_viewer.client && mob_viewer.machine == src))
+				if(CanUseTopic(mob_viewer, DefaultTopicState()) > STATUS_CLOSE)
 					is_in_use = 1
-					interact(M)
+					interact(mob_viewer)
 				else
-					M.unset_machine()
+					mob_viewer.unset_machine()
 		in_use = is_in_use
 
 /obj/proc/updateDialog()
