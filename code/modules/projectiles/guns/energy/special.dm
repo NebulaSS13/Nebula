@@ -14,6 +14,11 @@
 	fire_delay = 30
 	projectile_type = /obj/item/projectile/ion
 	combustion = 0
+	material = /decl/material/solid/metal/steel
+	matter = list(
+		/decl/material/solid/metal/uranium = MATTER_AMOUNT_REINFORCEMENT,
+		/decl/material/solid/metal/gold = MATTER_AMOUNT_REINFORCEMENT
+	)
 
 /obj/item/gun/energy/ionrifle/emp_act(severity)
 	..(max(severity, 2)) //so it doesn't EMP itself, I guess

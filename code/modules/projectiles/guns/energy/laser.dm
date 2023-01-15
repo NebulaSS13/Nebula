@@ -11,6 +11,10 @@
 	origin_tech = "{'combat':3,'magnets':2}"
 	material = /decl/material/solid/metal/steel
 	projectile_type = /obj/item/projectile/beam/midlaser
+	matter = list(
+		/decl/material/solid/fiberglass = MATTER_AMOUNT_REINFORCEMENT,
+		/decl/material/solid/metal/silver = MATTER_AMOUNT_REINFORCEMENT
+	)
 
 /obj/item/gun/energy/laser/mounted
 	self_recharge = 1
