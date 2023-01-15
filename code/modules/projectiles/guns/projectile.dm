@@ -220,6 +220,8 @@
 		..()
 	else if(manual_unload)
 		unload_ammo(user)
+	else
+		to_chat(user, SPAN_WARNING("You can't unload \the [src] manually. Maybe try a crowbar?"))
 
 /obj/item/gun/projectile/attack_hand(mob/user)
 	if(user.is_holding_offhand(src) && manual_unload)

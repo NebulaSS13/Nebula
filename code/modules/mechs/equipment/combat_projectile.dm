@@ -1,9 +1,11 @@
-/obj/item/mech_equipment/mounted_system/projectile/attackby(var/obj/item/O as obj, mob/user as mob)
+/obj/item/mech_equipment/mounted_system/projectile/attackby(var/obj/item/O, var/mob/user)
 	var/obj/item/gun/projectile/automatic/A = holding
+	if(!istype(A))
+		return
 	if(istype(O, /obj/item/crowbar))
 		A.unload_ammo(user)
 		to_chat(user, SPAN_NOTICE("You remove the ammo magazine from the [src]."))
-	if(istype(O, A.magazine_type))
+	else if(istype(O, A.magazine_type))
 		A.load_ammo(O, user)
 		to_chat(user, SPAN_NOTICE("You load the ammo magazine into the [src]."))
 
@@ -29,6 +31,7 @@
 	holding_type = /obj/item/gun/projectile/automatic/smg/mech
 	restricted_hardpoints = list(HARDPOINT_LEFT_HAND, HARDPOINT_RIGHT_HAND)
 	restricted_software = list(MECH_SOFTWARE_WEAPONS)
+	origin_tech = "{'programming':4,'combat':6,'engineering':5}"
 
 /obj/item/gun/projectile/automatic/smg/mech
 	magazine_type = /obj/item/ammo_magazine/mech/smg_top
@@ -49,6 +52,7 @@
 	holding_type = /obj/item/gun/projectile/automatic/assault_rifle/mech
 	restricted_hardpoints = list(HARDPOINT_LEFT_HAND, HARDPOINT_RIGHT_HAND)
 	restricted_software = list(MECH_SOFTWARE_WEAPONS)
+	origin_tech = "{'programming':4,'combat':8,'engineering':6}"
 
 /obj/item/gun/projectile/automatic/assault_rifle/mech
 	magazine_type = /obj/item/ammo_magazine/mech/rifle
@@ -114,16 +118,12 @@
 /mob/living/exosuit/can_autofire(obj/item/gun/autofiring, atom/autofiring_at)
 	if(autofiring.autofiring_by != src)
 		return FALSE
-	var/client/C
-	if(current_user)
-		C = current_user.client
-		if(current_user.incapacitated())
-			return FALSE
-	else
-		C = client
-		if(incapacitated())
-			return FALSE
-	if(!C || !(autofiring_at in view(C.view, src)))
+	var/client/C = current_user ? current_user.client : client
+
+	if(!C || !C.mob || C.mob.incapacitated())
+		return FALSE
+
+	if(!(autofiring_at in view(C.view, src)))
 		return FALSE
 	if(!(get_dir(src, autofiring_at) & dir))
 		return FALSE
@@ -147,22 +147,22 @@
 	var/obj/item/gun/gun = holding
 	if(istype(gun))
 		gun.clear_autofire()
-	owner.current_user = null
+	if(owner) // In case the owning exosuit has been gibbed etc.
+		owner.current_user = null
 
 /obj/item/mech_equipment/mounted_system/projectile/MouseDragInteraction(atom/src_object, atom/over_object, src_location, over_location, src_control, over_control, params, mob/user)
 	var/obj/item/gun/gun = holding
+	if(!owner)
+		gun?.clear_autofire()
+		return
 	if(!istype(gun))
-		owner.current_user = null
+		owner?.current_user = null
 		return
 	if(istype(over_object) && (isturf(over_object) || isturf(over_object.loc)))
-		if(user != owner)
-			if(user != owner.current_user || user.incapacitated())
-				gun.clear_autofire()
-				return
-		else if(owner.incapacitated())
+		if(user.incapacitated() || (user != owner && user != owner.current_user))
 			gun.clear_autofire()
 			return
 		gun.set_autofire(over_object, owner, FALSE)
 		return
-	
+
 	gun.clear_autofire()

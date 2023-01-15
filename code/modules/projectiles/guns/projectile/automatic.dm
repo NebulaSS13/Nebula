@@ -83,7 +83,7 @@
 	name = "assault rifle"
 	desc = "The Z8 Bulldog is an older model bullpup carbine. This one has an underslung grenade launcher. REALLY makes you feel like a space marine when you hold it."
 	origin_tech = "{'combat':8,'materials':3}"
-	
+
 	firemodes = list(
 		list(mode_name="semi auto",      burst=1,    fire_delay=null, use_launcher=null, one_hand_penalty=8,  burst_accuracy=null,            dispersion=null),
 		list(mode_name="3-round bursts", burst=3,    fire_delay=null, use_launcher=null, one_hand_penalty=9,  burst_accuracy=list(0,-1,-1),   dispersion=list(0.0, 0.6, 1.0)),
@@ -174,10 +174,9 @@
 		return FALSE
 
 	var/mob/living/M = user
-	if(!istype(M, /mob/living/exosuit))
-		if(!(MUTATION_HULK in M.mutations))
-			to_chat(user, SPAN_WARNING("You can barely lift \the [src], let alone fire it!"))
-			return FALSE
+	if(M.mob_size < MOB_SIZE_LARGE)
+		to_chat(user, SPAN_WARNING("You can barely lift \the [src], let alone fire it!"))
+		return FALSE
 	return TRUE
 
 /obj/item/gun/projectile/automatic/machine/set_autofire(atom/fire_at, mob/fire_by, autoturn)

@@ -9,7 +9,7 @@
 	return FALSE
 
 /mob/proc/OnMouseDrag(atom/src_object, atom/over_object, src_location, over_location, src_control, over_control, params)
-	if(istype(loc, /atom))
+	if(loc)
 		var/atom/A = loc
 		if(A.RelayMouseDrag(src_object, over_object, src_location, over_location, src_control, over_control, params, src))
 			return
@@ -19,7 +19,7 @@
 		gun.set_autofire(over_object, src)
 
 /mob/proc/OnMouseDown(atom/object, location, control, params)
-	if(istype(loc, /atom))
+	if(loc)
 		var/atom/A = loc
 		if(A.RelayMouseDown(object, location, control, params, src))
 			return
@@ -29,7 +29,7 @@
 		gun.set_autofire(object, src)
 
 /mob/proc/OnMouseUp(atom/object, location, control, params)
-	if(istype(loc, /atom))
+	if(loc)
 		var/atom/A = loc
 		if(A.RelayMouseUp(object, location, control, params, src))
 			return
