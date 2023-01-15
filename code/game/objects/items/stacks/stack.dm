@@ -210,8 +210,8 @@
 
 		src.produce_recipe(R, multiplier, usr)
 
-	if(!QDELETED(src))
-		interact(usr)
+	if (!QDELETED(src) && usr.machine == src) // refresh our window if it's open
+		list_recipes(usr)
 
 /**
  * Return 1 if an immediate subsequent call to use() would succeed.
@@ -386,9 +386,8 @@
 				user.put_in_hands(F)
 				src.add_fingerprint(user)
 				F.add_fingerprint(user)
-				spawn(0)
-					if (src && usr.machine==src)
-						src.interact(usr)
+				if (!QDELETED(src) && user.machine == src)
+					list_recipes(user)
 				return TRUE
 		return FALSE
 	return ..()
@@ -399,11 +398,11 @@
 		var/obj/item/stack/S = W
 		. = src.transfer_to(S)
 
-		spawn(0) //give the stacks a chance to delete themselves if necessary
-			if (S && usr.machine==S)
-				S.interact(usr)
-			if (src && usr.machine==src)
-				src.interact(usr)
+		//give the stacks a chance to delete themselves if necessary
+		if (!QDELETED(S) && usr.machine == S)
+			S.list_recipes(user)
+		if (!QDELETED(src) && usr.machine == src)
+			list_recipes(user)
 		return
 
 	return ..()
