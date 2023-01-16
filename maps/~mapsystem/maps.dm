@@ -119,6 +119,7 @@ var/global/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 	var/id_hud_icons = 'icons/mob/hud.dmi' // Used by the ID HUD (primarily sechud) overlay.
 
 	var/num_exoplanets = 0
+	var/force_exoplanet_type // Used to override exoplanet weighting and always pick the same exoplanet.
 	//dimensions of planet zlevels, defaults to world size if smaller, INCREASES world size if larger.
 	//Due to how maps are generated, must be (2^n+1) e.g. 17,33,65,129 etc. Map will just round up to those if set to anything other.
 	var/list/planet_size = list()
@@ -278,6 +279,8 @@ var/global/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 		new_planet.build_level(planet_size[1], planet_size[2])
 
 /datum/map/proc/pick_exoplanet()
+	if(force_exoplanet_type)
+		return force_exoplanet_type
 	var/planets = list()
 	for(var/T in subtypesof(/obj/effect/overmap/visitable/sector/exoplanet))
 		var/obj/effect/overmap/visitable/sector/exoplanet/planet_type = T
