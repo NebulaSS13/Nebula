@@ -2,8 +2,9 @@
 	name = "ground"
 	icon = 'icons/turf/exterior/barren.dmi'
 	icon_edge_layer = EXT_EDGE_BARREN
+	var/decal_state
 
-/turf/exterior/barren/on_update_icon()
+/turf/exterior/barren/Initialize()
 	. = ..()
 	if(prob(20))
-		add_overlay(image('icons/turf/flooring/decals.dmi', "asteroid[rand(0,9)]"))
+		decal_state = "asteroid[rand(0,9)]"
