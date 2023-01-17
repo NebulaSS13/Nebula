@@ -87,7 +87,7 @@
 
 /obj/item/stack/material/ore/update_strings()
 	. = ..()
-	SetName("[(material.ore_name ? material.ore_name : "[material.name] chunk")] [(amount > 1? "pile" : "")]")
+	SetName("[(material.ore_name ? material.ore_name : "[material.name] chunk")][(amount > 1? " pile" : "")]")
 	desc = material.ore_desc ? material.ore_desc : "A lump of ore."
 
 /obj/item/stack/material/ore/get_recipes()
