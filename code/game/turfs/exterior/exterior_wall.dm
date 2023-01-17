@@ -19,6 +19,7 @@ var/global/list/natural_walls = list()
 	var/decl/material/material
 	var/decl/material/reinf_material
 	var/floor_type = /turf/exterior/barren
+	var/static/list/exterior_wall_shine_cache = list()
 
 /turf/exterior/wall/examine(mob/user, distance, infix, suffix)
 	. = ..()
@@ -177,7 +178,15 @@ var/global/list/natural_walls = list()
 
 	var/material_icon_base = material.icon_base_natural || 'icons/turf/walls/natural.dmi'
 	var/base_color = paint_color ? paint_color : material.color
-	var/shine = (material?.reflectiveness > 0) ? clamp((material.reflectiveness * 0.01) * 255, 10, (0.6 * ReadHSV(RGBtoHSV(material.color))[3])) : 0 // patened formula based on color's Value (in HSV)
+
+	var/shine = 0
+	if(material?.reflectiveness > 0)
+		var/shine_cache_key = "[material.reflectiveness]-[material.color]"
+		shine = exterior_wall_shine_cache[shine_cache_key]
+		if(isnull(shine))
+			// patented formula based on color's value (in HSV)
+			shine = clamp((material.reflectiveness * 0.01) * 255, 10, (0.6 * ReadHSV(RGBtoHSV(material.color))[3]))
+			exterior_wall_shine_cache[shine_cache_key] = shine
 
 	icon = get_combined_wall_icon(wall_connections, null, material_icon_base, base_color, shine_value = shine)
 	icon_state = ""

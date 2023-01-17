@@ -57,7 +57,6 @@
 	QDEL_NULL_SCREEN(zone_sel)
 
 /mob/Initialize()
-	default_pixel_z = round(world.icon_size * 0.35)
 	. = ..()
 	if(ispath(skillset))
 		skillset = new skillset(src)

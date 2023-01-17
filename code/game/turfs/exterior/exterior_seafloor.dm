@@ -10,13 +10,6 @@
 	color = COLOR_LIQUID_WATER
 
 /turf/exterior/seafloor/Initialize()
+	if(prob(20))
+		LAZYADD(decals, image("asteroid[rand(0,9)]", 'icons/turf/mining_decals.dmi'))
 	. = ..()
-	color = null
-	if(isnull(detail_decal) && prob(20))
-		detail_decal = "asteroid[rand(0,9)]"
-		update_icon()
-
-/turf/exterior/seafloor/on_update_icon()
-	. = ..()
-	if(detail_decal)
-		add_overlay(image(icon = 'icons/turf/mining_decals.dmi', icon_state = detail_decal))
