@@ -49,12 +49,11 @@
 	to_chat(user, radio_desc)
 
 /obj/item/radio/headset/get_connection_from_message_mode(mob/living/M, message, message_mode)
-	if (message_mode == "special")
-		if (translate_binary)
-			var/decl/language/binary = GET_DECL(/decl/language/binary)
-			binary.broadcast(M, message)
-		return null
-	return ..()
+	if(message_mode == MESSAGE_MODE_SPECIAL && translate_binary)
+		var/decl/language/binary = GET_DECL(/decl/language/binary)
+		binary.broadcast(M, message)
+	else
+		return ..()
 
 /obj/item/radio/headset/receive_range(freq, level, aiOverride = 0)
 	if (aiOverride)
