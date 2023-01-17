@@ -230,7 +230,8 @@
 /obj/effect/overmap/visitable/sector/exoplanet/proc/generate_landing()
 	var/places = list()
 	var/attempts = 10*landing_points_to_place
-	var/border_padding = shuttle_size / 2 + 3
+	var/landing_radius = CEILING(shuttle_size / 2)
+	var/border_padding = landing_radius + 3
 
 	while(landing_points_to_place)
 		attempts--
@@ -241,7 +242,7 @@
 
 		if(attempts >= 0) // While we have the patience, try to find better spawn points. If out of patience, put them down wherever, so long as there are no repeats.
 			var/valid = 1
-			var/list/block_to_check = block(locate(T.x - shuttle_size / 2, T.y - shuttle_size / 2, T.z), locate(T.x + shuttle_size / 2, T.y + shuttle_size / 2, T.z))
+			var/list/block_to_check = block(locate(T.x - landing_radius, T.y - landing_radius, T.z), locate(T.x + landing_radius, T.y + landing_radius, T.z))
 			for(var/turf/check in block_to_check)
 				if(!istype(get_area(check), /area/exoplanet) || check.turf_flags & TURF_FLAG_NORUINS)
 					valid = 0
@@ -255,7 +256,7 @@
 
 		landing_points_to_place--
 		places += T
-		new /obj/effect/shuttle_landmark/automatic/clearing(T)
+		new /obj/effect/shuttle_landmark/automatic/clearing(T, landing_radius)
 
 /obj/effect/overmap/visitable/sector/exoplanet/get_scan_data(mob/user)
 	. = ..()

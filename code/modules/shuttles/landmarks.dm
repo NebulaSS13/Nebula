@@ -133,8 +133,10 @@ var/global/list/shuttle_landmarks = list()
 /obj/effect/shuttle_landmark/automatic/clearing
 	var/radius = 10
 
-/obj/effect/shuttle_landmark/automatic/clearing/Initialize()
+/obj/effect/shuttle_landmark/automatic/clearing/Initialize(var/ml, var/supplied_radius)
 	..()
+	if(!isnull(supplied_radius))
+		radius = supplied_radius
 	return INITIALIZE_HINT_LATELOAD
 
 /obj/effect/shuttle_landmark/automatic/clearing/LateInitialize()

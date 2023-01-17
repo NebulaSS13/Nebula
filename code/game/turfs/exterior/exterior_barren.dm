@@ -7,7 +7,3 @@
 	. = ..()
 	if(prob(20))
 		add_overlay(image('icons/turf/flooring/decals.dmi', "asteroid[rand(0,9)]"))
-
-/turf/exterior/barren/Initialize()
-	. = ..()
-	update_icon()
