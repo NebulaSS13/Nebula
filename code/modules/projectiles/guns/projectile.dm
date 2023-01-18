@@ -29,6 +29,7 @@
 	var/auto_eject_sound = null
 	var/mag_insert_sound = 'sound/weapons/guns/interaction/pistol_magin.ogg'
 	var/mag_remove_sound = 'sound/weapons/guns/interaction/pistol_magout.ogg'
+	var/manual_unload = TRUE //Whether or not the gun can be unloaded by hand.
 
 	var/is_jammed = 0           //Whether this gun is jammed
 	var/jam_chance = 0          //Chance it jams on fire
@@ -217,11 +218,13 @@
 /obj/item/gun/projectile/attack_self(mob/user)
 	if(firemodes.len > 1)
 		..()
-	else
+	else if(manual_unload)
 		unload_ammo(user)
+	else
+		to_chat(user, SPAN_WARNING("You can't unload \the [src] manually. Maybe try a crowbar?"))
 
 /obj/item/gun/projectile/attack_hand(mob/user)
-	if(user.is_holding_offhand(src))
+	if(user.is_holding_offhand(src) && manual_unload)
 		unload_ammo(user, allow_dump=0)
 	else
 		return ..()
