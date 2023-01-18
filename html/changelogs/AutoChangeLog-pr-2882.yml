@@ -1,4 +1,0 @@
-author: NataKilar
-delete-after: true
-changes:
-  - bugfix: Items no longer appear heavily damaged regardless of their health
