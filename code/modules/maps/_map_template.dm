@@ -61,7 +61,7 @@
 	tallness = bounds[MAP_MAXZ] - bounds[MAP_MINZ] + 1
 	return TRUE
 
-/datum/map_template/proc/init_atoms(var/list/atoms)
+/datum/map_template/proc/init_atoms(var/list/atoms, var/map_hash)
 	if (SSatoms.atom_init_stage == INITIALIZATION_INSSATOMS)
 		return // let proper initialisation handle it later
 
@@ -81,6 +81,8 @@
 			machines += A
 		if(istype(A, /obj/abstract/landmark/map_load_mark))
 			LAZYADD(subtemplates_to_spawn, A)
+		if(map_hash)
+			A.modify_mapped_vars(map_hash)
 
 	var/notsuspended
 	if(!SSmachines.suspended)
@@ -160,10 +162,6 @@
 	var/list/bounds = list(1.#INF, 1.#INF, 1.#INF, -1.#INF, -1.#INF, -1.#INF)
 	var/list/atoms_to_initialise = list()
 	var/shuttle_state = pre_init_shuttles()
-	var/map_hash = modify_tag_vars && "[sequential_id("map_id")]"
-	ASSERT(isnull(global._preloader.current_map_hash)) // Recursive maploading is possible, but not from this block: recursive loads should be triggered in Initialize, from init_atoms below.
-	global._preloader.current_map_hash = map_hash
-
 	var/initialized_areas_by_type = list()
 	for (var/mappath in mappaths)
 		var/datum/map_load_metadata/M = load_single_path(mappath, x, y, world.maxz + 1, bounds, initialized_areas_by_type, no_changeturf, FALSE)
@@ -174,10 +172,9 @@
 			global._preloader.current_map_hash = null //Clear current map hash to prevent problems if we load something else later and cause false positives
 			CRASH("Failed to load '[src]''s '[mappath]' map file!")
 
-	global._preloader.current_map_hash = null
-
 	//initialize things that are normally initialized after map load
-	init_atoms(atoms_to_initialise)
+	var/map_hash = modify_tag_vars && "[sequential_id("map_id")]"
+	init_atoms(atoms_to_initialise, map_hash)
 	init_shuttles(shuttle_state, map_hash, initialized_areas_by_type)
 	after_load()
 	for(var/z_index = bounds[MAP_MINZ] to bounds[MAP_MAXZ])
@@ -201,10 +198,6 @@
 	var/list/atoms_to_initialise = list()
 	var/shuttle_state = pre_init_shuttles()
 
-	var/map_hash = modify_tag_vars && "[sequential_id("map_id")]"
-	ASSERT(isnull(global._preloader.current_map_hash))
-	global._preloader.current_map_hash = map_hash
-
 	var/initialized_areas_by_type = list()
 	for (var/mappath in mappaths)
 		var/datum/map_load_metadata/M = load_single_path(mappath, T.x, T.y, T.z, null, initialized_areas_by_type, FALSE, TRUE)
@@ -215,10 +208,9 @@
 			global._preloader.current_map_hash = null //Clear current map hash to prevent problems if we load something else later and cause false positives
 			CRASH("Failed to load '[src]''s '[mappath]' map file!")
 
-	global._preloader.current_map_hash = null
-
 	//initialize things that are normally initialized after map load
-	init_atoms(atoms_to_initialise)
+	var/map_hash = modify_tag_vars && "[sequential_id("map_id")]"
+	init_atoms(atoms_to_initialise, map_hash)
 	init_shuttles(shuttle_state, map_hash, initialized_areas_by_type)
 	after_load()
 	if (SSlighting.initialized)

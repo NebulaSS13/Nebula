@@ -510,7 +510,6 @@ var/global/dmm_suite/preloader/_preloader = new
 	parent_type = /datum
 	var/list/attributes
 	var/target_path
-	var/current_map_hash
 
 /dmm_suite/preloader/proc/setup(list/the_attributes, path)
 	global.use_preloader = TRUE
@@ -534,8 +533,6 @@ var/global/dmm_suite/preloader/_preloader = new
 					break
 			if (!found)
 				throw ex
-	if(current_map_hash)
-		what.modify_mapped_vars(current_map_hash)
 	global.use_preloader = FALSE
 
 /area/template_noop

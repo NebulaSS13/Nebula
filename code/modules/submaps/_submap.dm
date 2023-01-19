@@ -13,7 +13,7 @@
 	SSmapping.submaps -= src
 	. = ..()
 
-/datum/submap/proc/setup_submap(var/decl/submap_archetype/_archetype)
+/datum/submap/proc/setup_submap(var/decl/submap_archetype/_archetype, var/submap_hash)
 	if(!istype(_archetype))
 		testing( "Submap error - [name] - null or invalid archetype supplied ([_archetype]).")
 		qdel(src)
@@ -52,7 +52,7 @@
 	// Add the spawn points to the appropriate job list.
 	var/registered_spawnpoint
 	for(var/check_z in SSmapping.get_connected_levels(associated_z))
-		for(var/obj/abstract/submap_landmark/spawnpoint/landmark in LAZYACCESS(global.submap_spawnpoints_by_z, "[check_z]"))
+		for(var/obj/abstract/submap_landmark/spawnpoint/landmark in LAZYACCESS(global.submap_spawnpoints_by_hash, submap_hash))
 			var/datum/job/submap/job = jobs[landmark.name]
 			if(istype(job))
 				job.spawnpoints += landmark
