@@ -289,7 +289,7 @@ its easier to just keep the beam vertical.
 		. = (severity <= 3)
 		if(.)
 			for(var/atom/movable/AM in get_contained_external_atoms())
-				AM.explosion_act(severity++)
+				AM.explosion_act(severity + 1)
 			try_detonate_reagents(severity)
 		currently_exploding = FALSE
 
