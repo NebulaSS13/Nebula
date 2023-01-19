@@ -48,11 +48,11 @@
 
 /datum/computer/file/embedded_program/airlock/reset_id_tags(base_tag)
 	. = ..()
-	if(cycle_to_external_air)
-		tag_pump_out_external = "[id_tag]_pump_out_external"
-		tag_pump_out_internal = "[id_tag]_pump_out_internal"
 	if(istype(master, /obj/machinery/embedded_controller/radio/airlock))	//if our controller is an airlock controller than we can auto-init our tags
 		var/obj/machinery/embedded_controller/radio/airlock/controller = master
+		if(cycle_to_external_air)
+			tag_pump_out_external = SET_AIRLOCK_TAG(controller.tag_pump_out_external, "[id_tag]_pump_out_external")
+			tag_pump_out_internal = SET_AIRLOCK_TAG(controller.tag_pump_out_internal, "[id_tag]_pump_out_internal")
 		tag_exterior_door = SET_AIRLOCK_TAG(controller.tag_exterior_door, "[id_tag]_outer")
 		tag_interior_door = SET_AIRLOCK_TAG(controller.tag_interior_door, "[id_tag]_inner")
 		tag_airpump = SET_AIRLOCK_TAG(controller.tag_airpump, "[id_tag]_pump")
