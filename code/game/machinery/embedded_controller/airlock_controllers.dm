@@ -13,6 +13,8 @@
 	var/tag_air_alarm
 	var/list/dummy_terminals = list() // Internal use only; set id_tag on the dummy terminal to be added.
 	var/cycle_to_external_air = 0
+	var/tag_pump_out_external
+	var/tag_pump_out_internal
 
 /obj/machinery/embedded_controller/radio/airlock/modify_mapped_vars(map_hash)
 	..()
@@ -23,6 +25,8 @@
 	ADJUST_TAG_VAR(tag_exterior_sensor, map_hash)
 	ADJUST_TAG_VAR(tag_interior_sensor, map_hash)
 	ADJUST_TAG_VAR(tag_air_alarm, map_hash)
+	ADJUST_TAG_VAR(tag_pump_out_external, map_hash)
+	ADJUST_TAG_VAR(tag_pump_out_internal, map_hash)
 
 /obj/machinery/embedded_controller/radio/airlock/Destroy()
 	for(var/obj/machinery/dummy_airlock_controller/terminal in dummy_terminals)
