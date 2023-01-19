@@ -65,7 +65,8 @@ SUBSYSTEM_DEF(atoms)
 	if(late_loaders.len)
 		for(var/I in late_loaders)
 			var/atom/A = I
-			A.LateInitialize(arglist(late_loaders[A]))
+			if(A.LateInitialize(arglist(late_loaders[A])) == INITIALIZE_HINT_QDEL)
+				qdel(A)
 		report_progress("Late initialized [late_loaders.len] atom\s")
 		late_loaders.Cut()
 
@@ -89,8 +90,10 @@ SUBSYSTEM_DEF(atoms)
 			if(INITIALIZE_HINT_LATELOAD)
 				if(arguments[1])	//mapload
 					late_loaders[A] = arguments
-				else
-					A.LateInitialize(arglist(arguments))
+				else if(A.LateInitialize(arglist(arguments)) == INITIALIZE_HINT_QDEL)
+					A.atom_flags |= ATOM_FLAG_INITIALIZED // never call EarlyDestroy if we return this hint
+					qdel(A)
+					qdeleted = TRUE
 			if(INITIALIZE_HINT_QDEL)
 				A.atom_flags |= ATOM_FLAG_INITIALIZED // never call EarlyDestroy if we return this hint
 				qdel(A)

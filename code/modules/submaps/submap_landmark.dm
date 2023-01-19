@@ -16,7 +16,12 @@
 	submap_hash = map_hash
 	. = ..()
 
-/obj/abstract/submap_landmark/joinable_submap/Initialize(var/mapload)
+/obj/abstract/submap_landmark/joinable_submap/Initialize(mapload)
+	..()
+	return INITIALIZE_HINT_LATELOAD
+
+// Initialize late so landmarks have registered.
+/obj/abstract/submap_landmark/joinable_submap/LateInitialize(var/mapload)
 	. = ..(mapload)
 	if(!SSmapping.submaps[name] && ispath(archetype, /decl/submap_archetype))
 		var/datum/submap/submap = new submap_datum_type(z)
