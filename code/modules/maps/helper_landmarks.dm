@@ -99,3 +99,37 @@
 	if(shuttle_datum)
 		events_repository.unregister(/decl/observ/shuttle_moved, shuttle_datum, src, .proc/delete_everything)
 	. = ..()
+
+// Has a percent chance on spawn to set the specified variable on the specified type to the specified value.
+
+/obj/abstract/landmark/variable_setter
+	var/type_to_find
+	var/variable_to_set
+	var/value_to_set
+	var/probability = 100
+
+/obj/abstract/landmark/variable_setter/Initialize()
+	. = ..()
+	if(!prob(probability))
+		return // Do nothing.
+	for(var/atom/candidate_atom in get_turf(src))
+		if(!istype(candidate_atom, type_to_find))
+			continue
+		if(try_set_variable(candidate_atom))
+			break
+	return INITIALIZE_HINT_QDEL
+
+/obj/abstract/landmark/variable_setter/proc/try_set_variable(atom/atom_to_modify)
+	// We don't have that variable! Give our own runtime to be more informative than the default one.
+	if(!(variable_to_set in atom_to_modify.vars))
+		CRASH("Unable to find variable [variable_to_set] to modify on type [atom_to_modify.type].")
+	// Already modified, if we're stacked we shouldn't modify the same one twice.
+	if(atom_to_modify.vars[variable_to_set] == value_to_set)
+		return FALSE
+	atom_to_modify.vars[variable_to_set] = value_to_set
+	return TRUE
+
+/obj/abstract/landmark/variable_setter/closet_opener
+	type_to_find = /obj/structure/closet
+	variable_to_set = "opened"
+	value_to_set = TRUE
