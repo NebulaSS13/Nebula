@@ -586,7 +586,9 @@
 	dir = 4;
 	pixel_x = 24
 	},
-/obj/machinery/computer/shuttle_control/explore/tradeship,
+/obj/machinery/computer/shuttle_control/explore/tradeship{
+	dir = 8
+	},
 /turf/simulated/floor/tiled/monotile,
 /area/ship/trade/dock)
 "bf" = (
@@ -1045,9 +1047,34 @@
 /turf/simulated/floor/tiled/monotile,
 /area/ship/trade/dock)
 "cb" = (
-/obj/effect/shuttle_landmark/docking_arm_starboard/pod,
-/turf/space,
-/area/space)
+/obj/structure/cable{
+	icon_state = "1-8"
+	},
+/obj/machinery/atmospherics/unary/vent_pump/high_volume/external_air{
+	dir = 8;
+	id_tag = "tradeship_rescue_shuttle_pump_out_internal"
+	},
+/obj/machinery/airlock_sensor{
+	id_tag = "tradeship_rescue_shuttle_sensor";
+	pixel_y = 20;
+	pixel_x = -22
+	},
+/obj/machinery/embedded_controller/radio/airlock/docking_port{
+	cycle_to_external_air = 1;
+	id_tag = "tradeship_rescue_shuttle";
+	pixel_y = 32;
+	tag_airpump = "tradeship_rescue_shuttle_pump";
+	tag_chamber_sensor = "tradeship_rescue_shuttle_sensor";
+	tag_exterior_door = "tradeship_rescue_shuttle_out";
+	dir = 4;
+	pixel_x = -20
+	},
+/obj/effect/floor_decal/corner/white{
+	dir = 9
+	},
+/obj/effect/shuttle_landmark/docking_arm_starboard/rescue,
+/turf/simulated/floor/tiled,
+/area/ship/trade/shuttle/rescue)
 "cc" = (
 /obj/machinery/door/airlock/hatch,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
@@ -2237,16 +2264,8 @@
 /turf/simulated/floor/tiled,
 /area/ship/trade/crew/kitchen)
 "fo" = (
-/obj/structure/table,
-/obj/item/glass_extra/straw,
-/obj/item/toy/therapy_blue,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
-/obj/item/defibrillator/compact/loaded,
-/obj/machinery/computer/modular/telescreen/preset/medical{
-	dir = 8;
-	pixel_x = 31;
-	pixel_y = -2
-	},
+/obj/structure/closet/crate/freezer,
 /turf/simulated/floor/tiled/white,
 /area/ship/trade/crew/medbay)
 "fp" = (
@@ -2307,6 +2326,11 @@
 /obj/item/stack/medical/advanced/bruise_pack,
 /obj/item/chems/syringe/antibiotic,
 /obj/item/scanner/health,
+/obj/item/defibrillator/compact/loaded,
+/obj/item/toy/therapy_blue,
+/obj/item/glass_extra/straw,
+/obj/item/tank/oxygen/yellow,
+/obj/structure/closet/emcloset,
 /turf/simulated/floor/tiled/white,
 /area/ship/trade/crew/medbay)
 "fx" = (
@@ -3086,6 +3110,7 @@
 /obj/random/loot,
 /obj/random/projectile,
 /obj/random/projectile,
+/obj/item/tank/oxygen/yellow,
 /turf/simulated/floor/plating,
 /area/ship/trade/hidden)
 "hD" = (
@@ -3669,6 +3694,22 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /turf/simulated/floor/plating,
 /area/ship/trade/maintenance/engine/aft)
+"iS" = (
+/obj/machinery/light{
+	dir = 4
+	},
+/obj/machinery/atmospherics/unary/vent_pump/high_volume/external_air{
+	dir = 4;
+	id_tag = "tradeship_rescue_shuttle_pump"
+	},
+/obj/effect/floor_decal/corner/white{
+	dir = 6
+	},
+/obj/structure/bed/chair{
+	dir = 1
+	},
+/turf/simulated/floor/tiled,
+/area/ship/trade/shuttle/rescue)
 "iT" = (
 /obj/machinery/atmospherics/unary/vent_scrubber/on{
 	dir = 1
@@ -4290,6 +4331,14 @@
 /obj/structure/lattice,
 /turf/space,
 /area/space)
+"kr" = (
+/obj/effect/wallframe_spawn/reinforced/titanium,
+/obj/machinery/atmospherics/pipe/manifold/hidden{
+	dir = 8
+	},
+/obj/machinery/door/firedoor,
+/turf/simulated/floor/plating,
+/area/ship/trade/shuttle/rescue)
 "ks" = (
 /obj/effect/floor_decal/corner/blue,
 /obj/effect/floor_decal/corner/yellow{
@@ -4545,6 +4594,23 @@
 /obj/effect/paint/brown,
 /turf/simulated/wall/r_wall,
 /area/ship/trade/crew/medbay/chemistry)
+"nm" = (
+/obj/machinery/power/apc{
+	dir = 4
+	},
+/obj/structure/cable,
+/obj/machinery/atmospherics/unary/vent_pump/high_volume/external_air{
+	dir = 4;
+	id_tag = "tradeship_rescue_shuttle_pump"
+	},
+/obj/effect/floor_decal/corner/white{
+	dir = 6
+	},
+/obj/structure/bed/chair{
+	dir = 1
+	},
+/turf/simulated/floor/tiled,
+/area/ship/trade/shuttle/rescue)
 "nu" = (
 /obj/structure/shuttle/engine/propulsion/burst/right{
 	dir = 1
@@ -4652,6 +4718,28 @@
 /obj/effect/paint/brown,
 /turf/simulated/wall/r_wall,
 /area/ship/trade/command/fmate)
+"oM" = (
+/obj/machinery/power/terminal{
+	dir = 1
+	},
+/obj/structure/cable{
+	icon_state = "0-2"
+	},
+/obj/machinery/atmospherics/unary/vent_pump/high_volume/external_air{
+	dir = 8;
+	id_tag = "tradeship_rescue_shuttle_pump_out_internal"
+	},
+/obj/structure/handrail{
+	dir = 4
+	},
+/obj/effect/floor_decal/corner/white{
+	dir = 9
+	},
+/obj/effect/floor_decal/corner/white{
+	dir = 4
+	},
+/turf/simulated/floor/tiled,
+/area/ship/trade/shuttle/rescue)
 "pb" = (
 /obj/item/radio/intercom{
 	pixel_y = 22
@@ -4746,6 +4834,22 @@
 	},
 /turf/simulated/floor/tiled/techmaint,
 /area/ship/trade/crew/hallway/port)
+"qA" = (
+/obj/structure/cable{
+	icon_state = "1-2"
+	},
+/obj/machinery/atmospherics/unary/vent_pump/high_volume/external_air{
+	dir = 8;
+	id_tag = "tradeship_rescue_shuttle_pump_out_internal"
+	},
+/obj/structure/handrail{
+	dir = 4
+	},
+/obj/effect/floor_decal/corner/white{
+	dir = 9
+	},
+/turf/simulated/floor/tiled,
+/area/ship/trade/shuttle/rescue)
 "qE" = (
 /obj/machinery/atmospherics/omni/mixer{
 	active_power_usage = 7500;
@@ -4761,6 +4865,14 @@
 	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/ship/trade/maintenance/atmos)
+"qM" = (
+/obj/effect/wallframe_spawn/reinforced/titanium,
+/obj/machinery/atmospherics/pipe/manifold/hidden{
+	dir = 4
+	},
+/obj/machinery/door/firedoor,
+/turf/simulated/floor/plating,
+/area/ship/trade/shuttle/rescue)
 "qO" = (
 /obj/effect/decal/cleanable/dirt,
 /obj/effect/floor_decal/industrial/outline/yellow,
@@ -5193,6 +5305,26 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/fuel,
 /turf/simulated/floor/plating,
 /area/ship/trade/maintenance/engine/aft)
+"xz" = (
+/obj/structure/closet/crate,
+/obj/item/tank/oxygen,
+/obj/item/tank/oxygen,
+/obj/item/roller,
+/obj/item/storage/firstaid/adv,
+/obj/item/storage/pill_bottle/painkillers,
+/obj/item/storage/pill_bottle/antitox,
+/obj/item/storage/pill_bottle/antibiotics,
+/obj/item/storage/pill_bottle/burn_meds,
+/obj/item/scanner/health,
+/obj/structure/handrail{
+	dir = 4
+	},
+/obj/effect/floor_decal/corner/white{
+	dir = 9
+	},
+/obj/effect/floor_decal/corner/white,
+/turf/simulated/floor/tiled,
+/area/ship/trade/shuttle/rescue)
 "xB" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 4
@@ -5381,6 +5513,13 @@
 /obj/machinery/door/airlock/hatch/autoname/engineering,
 /turf/simulated/floor/tiled,
 /area/ship/trade/maintenance/engine/aft)
+"AE" = (
+/obj/effect/paint/red,
+/obj/machinery/atmospherics/pipe/manifold/hidden{
+	dir = 4
+	},
+/turf/simulated/wall/titanium,
+/area/ship/trade/shuttle/rescue)
 "AH" = (
 /obj/effect/paint/brown,
 /turf/simulated/wall,
@@ -5500,6 +5639,10 @@
 	},
 /turf/simulated/floor/tiled,
 /area/ship/trade/crew/kitchen)
+"Cz" = (
+/obj/structure/shuttle/engine/propulsion/burst,
+/turf/simulated/floor/airless,
+/area/ship/trade/shuttle/rescue)
 "CD" = (
 /obj/effect/paint/red,
 /turf/simulated/wall/r_wall/hull,
@@ -5561,6 +5704,13 @@
 	},
 /turf/simulated/floor/tiled/steel_ridged,
 /area/ship/trade/crew/saloon)
+"Dj" = (
+/obj/machinery/power/smes/buildable/max_cap_in_out,
+/obj/structure/cable{
+	icon_state = "0-4"
+	},
+/turf/simulated/floor/tiled,
+/area/ship/trade/shuttle/rescue)
 "Dl" = (
 /obj/machinery/power/apc{
 	name = "Medical Bay APC"
@@ -5573,6 +5723,13 @@
 /obj/effect/paint/brown,
 /turf/simulated/wall,
 /area/ship/trade/crew/kitchen)
+"Dx" = (
+/obj/effect/paint/red,
+/obj/machinery/atmospherics/pipe/simple/hidden{
+	dir = 9
+	},
+/turf/simulated/wall/titanium,
+/area/ship/trade/shuttle/rescue)
 "DE" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
@@ -5586,6 +5743,19 @@
 /obj/effect/paint/brown,
 /turf/simulated/wall/r_wall,
 /area/ship/trade/command/bridge)
+"DY" = (
+/obj/machinery/door/airlock/external/bolted{
+	id_tag = "tradeship_rescue_shuttle_out"
+	},
+/obj/structure/cable{
+	icon_state = "4-8"
+	},
+/obj/machinery/atmospherics/pipe/manifold/hidden{
+	dir = 8
+	},
+/obj/effect/decal/warning_stripes,
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/ship/trade/shuttle/rescue)
 "Eb" = (
 /obj/machinery/light{
 	dir = 4;
@@ -5661,6 +5831,12 @@
 	},
 /turf/simulated/floor/tiled/techmaint,
 /area/ship/trade/crew/hallway/starboard)
+"EA" = (
+/obj/machinery/atmospherics/pipe/simple/hidden{
+	dir = 4
+	},
+/turf/simulated/wall/titanium,
+/area/ship/trade/shuttle/rescue)
 "EQ" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 4
@@ -5820,6 +5996,11 @@
 /obj/effect/decal/cleanable/dirt,
 /turf/simulated/floor/tiled/techmaint,
 /area/ship/trade/maintenance/hallway)
+"GO" = (
+/obj/effect/paint/red,
+/obj/machinery/atmospherics/pipe/simple/hidden,
+/turf/simulated/wall/titanium,
+/area/ship/trade/shuttle/rescue)
 "GT" = (
 /turf/simulated/floor/tiled/techmaint,
 /area/ship/trade/shieldbay)
@@ -5862,6 +6043,7 @@
 /turf/simulated/floor/plating,
 /area/ship/trade/crew/hallway/port)
 "Hs" = (
+/obj/machinery/light,
 /turf/simulated/floor/wood/yew,
 /area/ship/trade/unused)
 "HA" = (
@@ -5961,6 +6143,13 @@
 "IM" = (
 /turf/simulated/floor/airless,
 /area/ship/trade/command/captain)
+"IW" = (
+/obj/effect/paint/red,
+/obj/machinery/atmospherics/pipe/simple/hidden{
+	dir = 10
+	},
+/turf/simulated/wall/titanium,
+/area/ship/trade/shuttle/rescue)
 "Jb" = (
 /obj/structure/table,
 /obj/machinery/cell_charger,
@@ -6073,6 +6262,7 @@
 /obj/random/voidsuit,
 /obj/random/voidhelmet,
 /obj/random/voidhelmet,
+/obj/item/tank/oxygen,
 /turf/simulated/floor/tiled,
 /area/ship/trade/crew/saloon)
 "JX" = (
@@ -6361,6 +6551,8 @@
 /obj/structure/closet/emcloset,
 /obj/random/voidsuit,
 /obj/random/voidhelmet,
+/obj/item/tank/oxygen,
+/obj/item/tank/oxygen,
 /turf/simulated/floor/tiled/dark,
 /area/ship/trade/command/bridge)
 "Nx" = (
@@ -6487,6 +6679,29 @@
 /obj/effect/wallframe_spawn/reinforced,
 /turf/simulated/floor/plating,
 /area/ship/trade/command/captain)
+"PB" = (
+/obj/machinery/alarm{
+	dir = 8;
+	pixel_x = 24
+	},
+/obj/structure/cable{
+	icon_state = "1-2"
+	},
+/obj/machinery/atmospherics/unary/vent_pump/high_volume/external_air{
+	dir = 4;
+	id_tag = "tradeship_rescue_shuttle_pump"
+	},
+/obj/structure/bed/chair/comfy/brown{
+	dir = 1
+	},
+/obj/effect/floor_decal/corner/white{
+	dir = 6
+	},
+/obj/effect/floor_decal/corner/white{
+	dir = 1
+	},
+/turf/simulated/floor/tiled,
+/area/ship/trade/shuttle/rescue)
 "PE" = (
 /obj/structure/cable{
 	icon_state = "1-2"
@@ -6674,6 +6889,11 @@
 /obj/structure/handrail,
 /turf/simulated/floor/tiled,
 /area/ship/trade/crew/saloon)
+"RM" = (
+/obj/effect/wallframe_spawn/reinforced/titanium,
+/obj/machinery/door/firedoor,
+/turf/simulated/floor/plating,
+/area/ship/trade/shuttle/rescue)
 "RW" = (
 /obj/machinery/atmospherics/unary/engine{
 	dir = 1
@@ -6726,6 +6946,13 @@
 "Sr" = (
 /turf/simulated/floor/plating,
 /area/ship/trade/maintenance/hallway)
+"SB" = (
+/obj/structure/cable{
+	icon_state = "2-8"
+	},
+/obj/machinery/computer/shuttle_control/explore/rescue,
+/turf/simulated/floor/tiled,
+/area/ship/trade/shuttle/rescue)
 "SC" = (
 /obj/effect/paint/brown,
 /turf/simulated/wall/r_wall,
@@ -6797,6 +7024,11 @@
 /obj/structure/handrail{
 	dir = 8
 	},
+/obj/item/clothing/head/helmet/space/void/pilot,
+/obj/item/clothing/suit/space/void/pilot,
+/obj/item/tank/oxygen,
+/obj/item/tank/oxygen,
+/obj/item/tank/oxygen,
 /turf/simulated/floor/plating,
 /area/ship/trade/shuttle/outgoing)
 "Tp" = (
@@ -6898,10 +7130,29 @@
 	},
 /turf/simulated/floor/reinforced/airless,
 /area/ship/trade/maintenance/engine/aft)
+"UQ" = (
+/obj/effect/paint/red,
+/obj/machinery/atmospherics/pipe/manifold/hidden{
+	dir = 8
+	},
+/turf/simulated/wall/titanium,
+/area/ship/trade/shuttle/rescue)
 "UV" = (
 /obj/effect/decal/cleanable/dirt,
 /turf/simulated/floor/tiled/monotile,
 /area/ship/trade/dock)
+"UY" = (
+/obj/machinery/atmospherics/unary/tank/air{
+	dir = 4
+	},
+/obj/effect/floor_decal/corner/white{
+	dir = 6
+	},
+/obj/effect/floor_decal/corner/white{
+	dir = 8
+	},
+/turf/simulated/floor/tiled,
+/area/ship/trade/shuttle/rescue)
 "Vb" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 6
@@ -7046,6 +7297,19 @@
 	},
 /turf/simulated/floor/tiled/steel_ridged,
 /area/ship/trade/maintenance/atmos)
+"WK" = (
+/obj/machinery/atmospherics/unary/vent_pump/high_volume/external_air{
+	dir = 8;
+	id_tag = "tradeship_rescue_shuttle_pump_out_internal"
+	},
+/obj/structure/handrail{
+	dir = 4
+	},
+/obj/effect/floor_decal/corner/white{
+	dir = 9
+	},
+/turf/simulated/floor/tiled,
+/area/ship/trade/shuttle/rescue)
 "WO" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 4
@@ -7124,6 +7388,19 @@
 	},
 /turf/simulated/floor/tiled/techfloor,
 /area/ship/trade/maintenance/engineering)
+"Yl" = (
+/obj/machinery/atmospherics/unary/vent_pump/high_volume/external_air{
+	dir = 4;
+	id_tag = "tradeship_rescue_shuttle_pump"
+	},
+/obj/effect/floor_decal/corner/white{
+	dir = 6
+	},
+/obj/structure/bed/chair{
+	dir = 1
+	},
+/turf/simulated/floor/tiled,
+/area/ship/trade/shuttle/rescue)
 "Yt" = (
 /obj/structure/handrail{
 	dir = 8
@@ -7147,6 +7424,13 @@
 "YN" = (
 /turf/simulated/floor/plating,
 /area/ship/trade/crew/hallway/starboard)
+"YR" = (
+/obj/effect/paint/red,
+/obj/machinery/atmospherics/pipe/simple/hidden{
+	dir = 6
+	},
+/turf/simulated/wall/titanium,
+/area/ship/trade/shuttle/rescue)
 "YS" = (
 /obj/structure/lattice,
 /obj/effect/paint/brown,
@@ -7191,6 +7475,13 @@
 	},
 /turf/space,
 /area/space)
+"ZK" = (
+/obj/machinery/atmospherics/unary/vent_pump/high_volume/external_air{
+	dir = 1;
+	id_tag = "tradeship_rescue_shuttle_pump_out_external"
+	},
+/turf/simulated/floor/airless,
+/area/ship/trade/shuttle/rescue)
 
 (1,1,1) = {"
 aa
@@ -11151,15 +11442,15 @@ aa
 aa
 aa
 aa
-aa
-aa
-aa
-aa
-aa
-aa
-aa
-aa
-aa
+RM
+RM
+YR
+UQ
+DY
+kr
+GO
+UQ
+ZK
 aa
 aa
 om
@@ -11233,15 +11524,15 @@ aa
 aa
 aa
 aa
-aa
-aa
-aa
-aa
+RM
+Dj
+oM
+qA
 cb
-aa
-aa
-aa
-aa
+WK
+xz
+EA
+Cz
 aa
 aa
 om
@@ -11315,15 +11606,15 @@ aa
 aa
 aa
 aa
-aa
-aa
-aa
-aa
-aa
-aa
-aa
-aa
-aa
+RM
+SB
+PB
+nm
+iS
+Yl
+UY
+EA
+Cz
 aa
 aa
 aa
@@ -11397,15 +11688,15 @@ aa
 aa
 aa
 aa
-aa
-aa
-aa
-aa
-aa
-aa
-aa
-aa
-aa
+RM
+RM
+IW
+AE
+AE
+qM
+Dx
+IW
+ZK
 aa
 aa
 aa

@@ -2,11 +2,21 @@
 	name = "exploration shuttle console"
 	shuttle_tag = "Exploration Shuttle"
 
+/obj/machinery/computer/shuttle_control/explore/rescue
+	name = "rescue shuttle console"
+	shuttle_tag = "Rescue Shuttle"
+
 /datum/shuttle/autodock/overmap/exploration
 	name = "Exploration Shuttle"
 	shuttle_area = /area/ship/trade/shuttle/outgoing
 	dock_target = "tradeship_shuttle"
 	current_location = "nav_tradeship_port_dock_shuttle"
+
+/datum/shuttle/autodock/overmap/rescue
+	name = "Rescue Shuttle"
+	shuttle_area = /area/ship/trade/shuttle/rescue
+	dock_target = "rescue_shuttle"
+	current_location = "nav_tradeship_starboard_dock_rescue"
 
 //In case multiple shuttles can dock at a location,
 //subtypes can be used to hold the shuttle-specific data
@@ -14,8 +24,8 @@
 	name = "Tradeship Starboard-side Docking Arm"
 	docking_controller = "tradeship_starboard_dock"
 
-/obj/effect/shuttle_landmark/docking_arm_starboard/pod
-	landmark_tag = "nav_tradeship_starboard_dock_pod"
+/obj/effect/shuttle_landmark/docking_arm_starboard/rescue
+	landmark_tag = "nav_tradeship_starboard_dock_rescue"
 
 /obj/effect/shuttle_landmark/docking_arm_port
 	name = "Tradeship Port-side Docking Arm"
