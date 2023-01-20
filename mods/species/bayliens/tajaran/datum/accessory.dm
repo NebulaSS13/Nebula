@@ -1,13 +1,4 @@
 //Hairstyles
-
-/decl/sprite_accessory/facial_hair/shaved/Initialize()
-	. = ..()
-	species_allowed |= SPECIES_TAJARA
-
-/decl/sprite_accessory/hair/bald/Initialize()
-	. = ..()
-	species_allowed |= SPECIES_TAJARA
-
 /decl/sprite_accessory/hair/taj
 	name = "Tajaran Rattail"
 	icon_state = "hair_rattail"
@@ -138,12 +129,6 @@
 /decl/sprite_accessory/facial_hair/taj/smallstache
 	name = "Tajaran Small Moustache"
 	icon_state = "facial_smallstache"
-
-/decl/sprite_accessory/skin/tajaran
-	name = "Default Tajaran skin"
-	icon_state = "default"
-	icon = 'mods/species/bayliens/tajaran/icons/body.dmi'
-	species_allowed = list(SPECIES_TAJARA)
 
 /decl/sprite_accessory/marking/tajaran
 	name = "Tajaran Wide Ears"

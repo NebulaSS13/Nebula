@@ -12,8 +12,12 @@
 /decl/sprite_accessory/hair/bald
 	name = "Bald"
 	icon_state = "bald"
-	species_allowed = list(SPECIES_HUMAN)
 	flags = VERY_SHORT | HAIR_BALD
+	gender = null
+	species_allowed = null
+	subspecies_allowed = null
+	bodytypes_allowed = null
+	bodytypes_denied = null
 
 /decl/sprite_accessory/hair/short
 	name = "Short Hair"	  // try to capatilize the names please~
