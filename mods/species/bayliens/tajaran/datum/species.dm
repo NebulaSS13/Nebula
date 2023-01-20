@@ -126,4 +126,4 @@
 	eye_icon = 'mods/species/bayliens/tajaran/icons/eyes.dmi'
 
 /decl/species/tajaran/handle_additional_hair_loss(var/mob/living/carbon/human/H, var/defer_body_update = TRUE)
-	. = H && H.change_skin_color(189, 171, 143)
+	. = H && H.change_skin_color(rgb(189, 171, 143))
