@@ -402,26 +402,27 @@
 	if(density)
 		return OUTSIDE_NO
 
-	// What would we like to return in an ideal world?
-	if(is_outside == OUTSIDE_AREA)
+	// What is our local outside value?
+	// Some turfs can be roofed irrespective of the turf above them in multiz.
+	// I have the feeling this is redundat as a roofed turf below max z will
+	// have a floor above it, but ah well.
+	. = is_outside
+	if(. == OUTSIDE_AREA)
 		var/area/A = get_area(src)
 		. = A ? A.is_outside : OUTSIDE_NO
-	else
-		. = is_outside
 
-	// Notes for future self when confused: is_open() on higher
-	// turfs must match effective is_outside value if the turf
-	// should get to use the is_outside value it wants to. If it
-	// doesn't line up, we invert the outside value (roof is not
-	// open but turf wants to be outside, invert to OUTSIDE_NO).
-
-	// Do we have a roof over our head? Should we care?
+	// If we are in a multiz volume, we return the outside value of
+	// the highest unenclosed turf in the stack.
 	if(HasAbove(z))
+		. =  OUTSIDE_YES // assume for the moment we're unroofed until we learn otherwise.
 		var/turf/top_of_stack = src
 		while(HasAbove(top_of_stack.z))
-			top_of_stack = GetAbove(top_of_stack)
-			if(top_of_stack.is_open() != . || (top_of_stack.is_outside != OUTSIDE_AREA && top_of_stack.is_outside != .))
-				return !.
+			var/turf/next_turf = GetAbove(top_of_stack)
+			if(!next_turf.is_open())
+				return OUTSIDE_NO
+			top_of_stack = next_turf
+		// If we hit the top of the stack without finding a roof, we ask the upmost turf if we're outside.
+		return top_of_stack.is_outside()
 
 /turf/proc/set_outside(var/new_outside, var/skip_weather_update = FALSE)
 	if(is_outside != new_outside)
