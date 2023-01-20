@@ -53,17 +53,11 @@
 	START_PROCESSING(SSobj, src)
 	set_extension(src, /datum/extension/interactive/os/device)
 	set_extension(src, computer_type)
-
 	if(stores_pen && ispath(stored_pen))
 		stored_pen = new stored_pen(src)
-
 	update_icon()
 	update_verbs()
 	update_name()
-
-	var/datum/extension/assembly/modular_computer/assembly = get_extension(src, /datum/extension/assembly/modular_computer)
-	if(istype(assembly) && assembly.enabled_by_default)
-		enable_computer()
 	..()
 	return INITIALIZE_HINT_LATELOAD
 
@@ -71,6 +65,9 @@
 	. = ..()
 	install_default_hardware()
 	install_default_programs()
+	var/datum/extension/assembly/modular_computer/assembly = get_extension(src, /datum/extension/assembly)
+	if(istype(assembly) && assembly.enabled_by_default)
+		enable_computer()
 
 /obj/item/modular_computer/Destroy()
 	shutdown_computer(loud = FALSE)

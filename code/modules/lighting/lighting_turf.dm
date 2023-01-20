@@ -71,8 +71,14 @@
 	// 	else
 	// 		return
 
-	// inefficient :(
-	if (!corners)
+	// still inefficient :(
+	if(!corners || !lighting_corners_initialised)
+		/* Commented out pending working out why this doesn't work properly on Neb.
+		if(TURF_IS_DYNAMICALLY_LIT_UNSAFE(src))
+			generate_missing_corners()
+		else
+			return
+		*/
 		generate_missing_corners()
 
 	// This list can contain nulls on things like space turfs -- they only have their neighbors' corners.
