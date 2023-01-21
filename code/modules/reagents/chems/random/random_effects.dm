@@ -48,7 +48,7 @@
 	reagent.name = "[initial(reagent.name)]-[value]"
 
 /decl/random_chem_effect/general_properties/color/get_random_value()
-	return color_rotation(round(rand(0,360),20))
+	return color_matrix_rotate_hue(round(rand(0,360),20))
 
 /decl/random_chem_effect/general_properties/color/on_property_recompute(var/decl/material/liquid/random/reagent, var/value)
 	reagent.color = value
