@@ -215,9 +215,9 @@
 	if(prob(5))
 		to_chat(M, SPAN_WARNING("<font size = [rand(1,3)]>[pick(dose_messages)]</font>"))
 
-/decl/material/liquid/glowsap/gleam/on_leaving_metabolism(var/atom/parent, var/metabolism_class)
+/decl/material/liquid/glowsap/gleam/on_leaving_metabolism(datum/reagents/metabolism/holder)
 	. = ..()
-	var/mob/M = parent
+	var/mob/M = holder?.my_atom
 	if(istype(M))
 		M.remove_client_color(/datum/client_color/noir/thirdeye)
 
