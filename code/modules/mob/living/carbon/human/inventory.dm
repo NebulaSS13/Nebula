@@ -162,7 +162,7 @@ This saves us from having to call add_fingerprint() any time something is put in
 // Post hands rewrite I plan to conver the rest of the inventory system to a string-based inventory slot system
 // so at that point the numerical flags will be removed and this proc (and the rest of the chain) can be rewritten.
 
-/mob/living/carbon/human/equip_to_slot(obj/item/W, slot, redraw_mob = 1)
+/mob/living/carbon/human/equip_to_slot(obj/item/W, slot, redraw_mob = TRUE, delete_old_item = TRUE)
 
 	. = ..()
 	if(!. || !has_organ_for_slot(slot))
@@ -185,7 +185,9 @@ This saves us from having to call add_fingerprint() any time something is put in
 			if(W.action_button_name)
 				update_action_buttons()
 			if(old_item)
-				qdel(old_item)
+				u_equip(old_item)
+				if(delete_old_item)
+					qdel(old_item)
 			return TRUE
 	// End boilerplate.
 
@@ -200,9 +202,8 @@ This saves us from having to call add_fingerprint() any time something is put in
 			update_inv_back(redraw_mob)
 		if(slot_wear_mask_str)
 			_wear_mask = W
-			if(_wear_mask.flags_inv & BLOCK_ALL_HAIR)
-				update_hair(redraw_mob)	//rebuild hair
-				update_inv_ears(0)
+			update_hair(redraw_mob)	//rebuild hair
+			update_inv_ears(0)
 			W.equipped(src, slot)
 			update_inv_wear_mask(redraw_mob)
 		if(slot_handcuffed_str)
@@ -235,9 +236,9 @@ This saves us from having to call add_fingerprint() any time something is put in
 			update_inv_gloves(redraw_mob)
 		if(slot_head_str)
 			_head = W
-			if(_head.flags_inv & (BLOCK_ALL_HAIR|HIDEMASK))
-				update_hair(redraw_mob)	//rebuild hair
-				update_inv_ears(0)
+			update_hair(redraw_mob)	//rebuild hair
+			update_inv_ears(0)
+			if(_head.flags_inv & HIDEMASK)
 				update_inv_wear_mask(0)
 			if(istype(W,/obj/item/clothing/head/kitty))
 				W.update_icon(src)
@@ -296,9 +297,12 @@ This saves us from having to call add_fingerprint() any time something is put in
 	if(W.action_button_name)
 		update_action_buttons()
 
-	// if we replaced an item, delete the old item. do this at the end to make the replacement seamless
+	// seamless replacement deletes the old item by default, but can be disabled for special handling
+	// like job items going into storage when replaced by loadout items
 	if(old_item)
-		qdel(old_item)
+		u_equip(old_item)
+		if(delete_old_item)
+			qdel(old_item)
 
 	return 1
 
