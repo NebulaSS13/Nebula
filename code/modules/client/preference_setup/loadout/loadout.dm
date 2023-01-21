@@ -417,12 +417,15 @@ var/global/list/gear_datums = list()
 	if(metadata && !islist(metadata))
 		PRINT_STACK_TRACE("Loadout spawn_item() proc received non-null non-list metadata: '[json_encode(metadata)]'")
 
-/decl/loadout_option/proc/spawn_on_mob(var/mob/living/carbon/human/H, var/metadata)
-	var/obj/item/item = spawn_and_validate_item(H, metadata)
+/decl/loadout_option/proc/spawn_on_mob(mob/living/carbon/human/wearer, metadata, replace_existing = FALSE)
+	var/obj/item/item = spawn_and_validate_item(wearer, metadata)
 	if(!item)
 		return
 
-	if(H.equip_to_slot_if_possible(item, slot, del_on_fail = 1, force = 1))
+	if(!replace_existing && wearer.get_equipped_item(slot))
+		return
+
+	if(wearer.equip_to_slot_if_possible(item, slot, del_on_fail = TRUE, force = TRUE))
 		. = item
 
 /decl/loadout_option/proc/spawn_in_storage_or_drop(var/mob/living/carbon/human/H, var/metadata)

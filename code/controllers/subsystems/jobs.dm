@@ -408,7 +408,7 @@ SUBSYSTEM_DEF(jobs)
 	if(!H || !H.client)
 		return
 
-	// Equip custom gear loadout, replacing any job items
+	// Equip custom gear loadout, going into storage if the slot is full
 	var/list/spawn_in_storage = list()
 	var/list/loadout_taken_slots = list()
 	if(H.client.prefs.Gear() && job.loadout_allowed)
