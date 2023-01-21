@@ -425,9 +425,13 @@ var/global/list/gear_datums = list()
 	var/obj/item/old_item = wearer.get_equipped_item(slot)
 	if(wearer.equip_to_slot_if_possible(item, slot, del_on_fail = TRUE, force = TRUE, delete_old_item = FALSE))
 		. = item
-		if(old_item && old_item.type != item.type)
-			wearer.u_equip(old_item)
+		if(!old_item)
+			return
+		wearer.u_equip(old_item)
+		if(old_item.type != item.type)
 			place_in_storage_or_drop(wearer, old_item)
+		else
+			qdel(old_item)
 
 /decl/loadout_option/proc/spawn_in_storage_or_drop(mob/living/carbon/human/wearer, metadata)
 	var/obj/item/item = spawn_and_validate_item(wearer, metadata)
