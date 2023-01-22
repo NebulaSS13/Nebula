@@ -21,7 +21,7 @@
 	mechanics_text = "The place to start with <span codexlink='the codex'>The Codex</span><br>"
 
 /datum/codex_entry/nexus/get_codex_body(mob/presenting_to, include_header, include_footer)
-	. = list(get_codex_header(presenting_to))
+	. = get_codex_header(presenting_to)
 	. += "[mechanics_text]"
 	. += "<h3>Categories</h3>"
 	var/list/category_strings
