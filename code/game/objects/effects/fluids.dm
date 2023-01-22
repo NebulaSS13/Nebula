@@ -125,7 +125,8 @@ var/global/obj/abstract/flood/flood_object = new
 	color = COLOR_LIQUID_WATER
 	icon = 'icons/effects/liquids.dmi'
 	icon_state = "ocean"
-	alpha = FLUID_MAX_ALPHA
+	alpha = 140
+	invisibility = 0
 
 /obj/effect/fluid/fire_act(datum/gas_mixture/air, exposed_temperature, exposed_volume)
 	. = ..()
