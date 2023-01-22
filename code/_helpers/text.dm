@@ -22,6 +22,12 @@
  * Text sanitization
  */
 
+/**
+ * Strip out the special beyond characters for \proper and \improper
+ * from text that will be sent to the browser.
+ */
+#define strip_improper(input_text) replacetext(replacetext(input_text, "\proper", ""), "\improper", "")
+
 //Used for preprocessing entered text
 //Added in an additional check to alert players if input is too long
 /proc/sanitize(input, max_length = MAX_MESSAGE_LEN, encode = TRUE, trim = TRUE, extra = TRUE, ascii_only = FALSE)
@@ -34,6 +40,8 @@
 			to_chat(usr, SPAN_WARNING("Your message is too long by [input_length - max_length] character\s."))
 			return
 		input = copytext_char(input, 1, max_length + 1)
+
+	input = strip_improper(input)
 
 	if(extra)
 		input = replace_characters(input, list("\n"=" ","\t"=" "))
@@ -458,12 +466,6 @@
 	. = jointext(.,null)
 
 #define starts_with(string, substring) (copytext(string,1,1+length(substring)) == substring)
-
-/**
- * Strip out the special beyond characters for \proper and \improper
- * from text that will be sent to the browser.
- */
-#define strip_improper(input_text) replacetext(replacetext(input_text, "\proper", ""), "\improper", "")
 
 /proc/pencode2html(t)
 	t = replacetext(t, "\n", "<BR>")
