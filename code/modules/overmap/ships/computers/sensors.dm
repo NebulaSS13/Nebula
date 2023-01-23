@@ -175,6 +175,7 @@
 	stat_immune = NOSCREEN | NOINPUT
 	frame_type = /obj/machinery/constructable_frame
 	base_type = /obj/machinery/shipsensors
+	stock_part_presets = list(/decl/stock_part_preset/terminal_connect)
 
 /obj/machinery/shipsensors/proc/in_vacuum()
 	var/turf/T=get_turf(src)
