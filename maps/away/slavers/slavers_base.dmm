@@ -371,6 +371,9 @@
 /obj/structure/cable/cyan{
 	icon_state = "2-8"
 	},
+/obj/structure/cable/cyan{
+	icon_state = "4-8"
+	},
 /turf/simulated/floor/tiled/airless,
 /area/slavers_base/cells)
 "bp" = (
@@ -457,9 +460,10 @@
 /turf/simulated/floor/tiled/airless,
 /area/slavers_base/cells)
 "by" = (
-/obj/effect/wallframe_spawn/reinforced,
-/turf/simulated/floor/tiled/airless,
-/area/slavers_base/cells)
+/obj/machinery/atmospherics/pipe/manifold/visible/black,
+/obj/abstract/landmark/allowed_leak,
+/turf/simulated/floor/airless/ceiling,
+/area/slavers_base/powatm)
 "bz" = (
 /obj/structure/closet/crate/freezer/rations,
 /obj/effect/decal/cleanable/dirt,
@@ -727,11 +731,11 @@
 "cc" = (
 /obj/effect/decal/cleanable/dirt,
 /obj/effect/decal/cleanable/blood,
-/obj/structure/cable,
-/obj/structure/cable{
-	icon_state = "0-2"
-	},
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
+/obj/machinery/atmospherics/pipe/simple/hidden/supply,
+/obj/structure/cable{
+	icon_state = "1-2"
+	},
 /turf/simulated/floor/tiled/airless,
 /area/slavers_base/cells)
 "cd" = (
@@ -2102,12 +2106,14 @@
 /obj/machinery/atmospherics/pipe/simple/visible/black{
 	dir = 4
 	},
+/obj/abstract/landmark/allowed_leak,
 /turf/simulated/floor/airless/ceiling,
 /area/slavers_base/powatm)
 "fN" = (
 /obj/machinery/atmospherics/pipe/simple/visible/black{
 	dir = 10
 	},
+/obj/abstract/landmark/allowed_leak,
 /turf/simulated/floor/airless/ceiling,
 /area/slavers_base/powatm)
 "fO" = (
@@ -2218,6 +2224,7 @@
 /obj/machinery/atmospherics/omni/filter{
 	dir = 8
 	},
+/obj/abstract/landmark/allowed_leak,
 /turf/simulated/floor/airless/ceiling,
 /area/slavers_base/powatm)
 "gf" = (
@@ -3884,6 +3891,18 @@
 	},
 /turf/simulated/floor/tiled/white,
 /area/slavers_base/dorms)
+"nm" = (
+/obj/effect/decal/cleanable/dirt,
+/obj/machinery/atmospherics/unary/vent_scrubber/on,
+/turf/simulated/floor/tiled/airless,
+/area/slavers_base/demo)
+"EJ" = (
+/obj/machinery/atmospherics/pipe/simple/visible/black{
+	dir = 4
+	},
+/obj/abstract/landmark/allowed_leak,
+/turf/simulated/floor/airless/ceiling,
+/area/slavers_base/powatm)
 
 (1,1,1) = {"
 aa
@@ -14907,7 +14926,7 @@ eF
 da
 da
 fL
-gc
+by
 da
 da
 da
@@ -15513,7 +15532,7 @@ eH
 da
 da
 da
-gd
+EJ
 da
 da
 da
@@ -20138,7 +20157,7 @@ aM
 aM
 aM
 bo
-by
+cx
 aM
 aM
 aM
@@ -20975,7 +20994,7 @@ hr
 hH
 ie
 hd
-iI
+nm
 iZ
 jm
 jx

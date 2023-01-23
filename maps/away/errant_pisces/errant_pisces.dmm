@@ -800,12 +800,14 @@
 /obj/machinery/atmospherics/pipe/simple/visible/red{
 	dir = 4
 	},
+/obj/abstract/landmark/allowed_leak,
 /turf/simulated/floor/plating,
 /area/errant_pisces/atmos)
 "cw" = (
 /obj/machinery/atmospherics/omni/mixer{
 	dir = 1
 	},
+/obj/abstract/landmark/allowed_leak,
 /turf/simulated/floor/plating,
 /area/errant_pisces/atmos)
 "cx" = (
@@ -903,6 +905,7 @@
 /obj/effect/floor_decal/industrial/warning{
 	dir = 6
 	},
+/obj/abstract/landmark/allowed_leak,
 /turf/simulated/floor/plating,
 /area/errant_pisces/atmos)
 "cN" = (
@@ -6432,6 +6435,11 @@
 	},
 /turf/simulated/floor/tiled/white,
 /area/errant_pisces/head_m)
+"QS" = (
+/obj/machinery/atmospherics/pipe/simple/visible/blue,
+/obj/abstract/landmark/allowed_leak,
+/turf/simulated/floor/plating,
+/area/errant_pisces/atmos)
 "Ti" = (
 /obj/machinery/computer/modular{
 	dir = 4
@@ -25299,7 +25307,7 @@ aY
 bh
 bA
 bV
-bV
+QS
 cw
 cM
 cZ

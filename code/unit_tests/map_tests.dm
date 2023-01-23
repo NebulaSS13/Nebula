@@ -538,20 +538,20 @@
 
 //=======================================================================================
 
-/datum/unit_test/station_pipes_shall_not_leak
-	name = "MAP: Station pipes shall not leak"
+/datum/unit_test/pipes_shall_not_leak
+	name = "MAP: Pipes shall not leak unless allowed"
 
-/datum/unit_test/station_pipes_shall_not_leak/start_test()
+/datum/unit_test/pipes_shall_not_leak/start_test()
 	var/failures = 0
 	for(var/obj/machinery/atmospherics/pipe/P in SSmachines.machinery)
-		if(P.leaking && isStationLevel(P.z))
+		if(P.leaking && isPlayerLevel(P.z) && !(locate(/obj/abstract/landmark/allowed_leak) in get_turf(P)))
 			failures++
 			log_bad("Following pipe is leaking: [log_info_line(P)]")
 
 	if(failures)
-		fail("[failures] station pipe\s leak.")
+		fail("[failures] pipe\s leaking without allowed leak landmark!")
 	else
-		pass("No station pipes are leaking")
+		pass("No pipes are leaking.")
 	return 1
 
 //=======================================================================================
