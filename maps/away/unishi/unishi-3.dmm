@@ -1272,11 +1272,11 @@
 /area/unishi/living)
 "dE" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
-/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/item/caution,
 /obj/structure/cable{
 	icon_state = "1-2"
 	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /turf/simulated/floor/tiled,
 /area/unishi/living)
 "dF" = (
@@ -1959,6 +1959,12 @@
 /obj/random/clothing,
 /turf/simulated/floor/tiled,
 /area/unishi/living)
+"yC" = (
+/obj/machinery/atmospherics/unary/vent_pump/on{
+	dir = 8
+	},
+/turf/simulated/floor/tiled,
+/area/unishi/living)
 "zD" = (
 /obj/structure/closet/secure_closet/personal/cabinet,
 /obj/random/cash,
@@ -1967,6 +1973,14 @@
 /obj/random/clothing,
 /obj/random/hat,
 /turf/simulated/floor/wood,
+/area/unishi/living)
+"AF" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
+/obj/structure/cable{
+	icon_state = "1-2"
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/supply,
+/turf/simulated/floor/tiled,
 /area/unishi/living)
 "AK" = (
 /obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers{
@@ -1980,8 +1994,8 @@
 /obj/machinery/atmospherics/unary/vent_scrubber/on{
 	dir = 8
 	},
-/obj/machinery/atmospherics/unary/vent_pump/on{
-	dir = 8
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 4
 	},
 /turf/simulated/floor/tiled,
 /area/unishi/living)
@@ -6230,9 +6244,9 @@ aO
 aO
 aO
 aO
-aO
-aO
-aO
+aP
+aP
+aP
 aO
 aO
 aO
@@ -6940,7 +6954,7 @@ bn
 ds
 bn
 dE
-bn
+AF
 dR
 dU
 dY
@@ -7659,7 +7673,7 @@ aP
 aP
 aP
 aP
-aP
+yC
 aP
 aP
 aP
@@ -7862,9 +7876,9 @@ aO
 aO
 aO
 aO
-aO
-aO
-aO
+aP
+aP
+aP
 aO
 aO
 aO
