@@ -50,7 +50,7 @@ var/global/list/closets = list()
 /obj/structure/closet/LateInitialize(mapload, ...)
 	var/list/will_contain = WillContain()
 	if(will_contain)
-		create_objects_in_loc(src, will_contain)
+		create_objects_in_loc(opened ? loc : src, will_contain)
 
 	if(!opened && mapload) // if closed and it's the map loading phase, relevant items at the crate's loc are put in the contents
 		store_contents()
@@ -106,7 +106,7 @@ var/global/list/closets = list()
 		stored_units += store_mobs(stored_units)
 	if(storage_types & CLOSET_STORAGE_STRUCTURES)
 		stored_units += store_structures(stored_units)
-		
+
 /obj/structure/closet/proc/open()
 	if(src.opened)
 		return 0
@@ -237,7 +237,7 @@ var/global/list/closets = list()
 		take_damage(proj_damage)
 
 /obj/structure/closet/attackby(obj/item/W, mob/user)
-	
+
 	if(user.a_intent == I_HURT && W.force)
 		return ..()
 
@@ -419,7 +419,7 @@ var/global/list/closets = list()
 	open()
 
 /obj/structure/closet/onDropInto(var/atom/movable/AM)
-	return
+	return opened ? loc : null
 
 // If we use the /obj/structure/closet/proc/togglelock variant BYOND asks the user to select an input for id_card, which is then mostly irrelevant.
 /obj/structure/closet/proc/togglelock_verb()
