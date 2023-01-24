@@ -99,3 +99,9 @@
 	if(shuttle_datum)
 		events_repository.unregister(/decl/observ/shuttle_moved, shuttle_datum, src, .proc/delete_everything)
 	. = ..()
+
+/// Used to tell pipe leak unit tests that a leak is intentional. Placed over the pipe that leaks, not the tile missing a pipe.
+/obj/abstract/landmark/allowed_leak
+#ifndef UNIT_TEST
+	delete_me = TRUE
+#endif
