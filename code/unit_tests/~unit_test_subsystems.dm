@@ -108,7 +108,7 @@ SUBSYSTEM_DEF(unit_tests)
 		var/datum/unit_test/test = current_async[async.len]
 		for(var/S in test.subsystems_to_await())
 			var/datum/controller/subsystem/subsystem = S
-			if(subsystem.times_fired < 1)
+			if(subsystem.times_fired <= test.times_fired_at_setup[subsystem])
 				return
 		async.len--
 		if(check_unit_test(test, end_unit_tests))

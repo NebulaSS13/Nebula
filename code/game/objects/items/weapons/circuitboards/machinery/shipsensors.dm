@@ -10,5 +10,6 @@
 							/obj/item/stock_parts/subspace/transmitter = 1
 						  )
 	additional_spawn_components = list(
-		/obj/item/stock_parts/shielding/heat = 1
+		/obj/item/stock_parts/shielding/heat = 1,
+		/obj/item/stock_parts/power/terminal = 1
 	)
