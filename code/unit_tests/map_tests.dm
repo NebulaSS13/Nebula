@@ -544,7 +544,7 @@
 /datum/unit_test/pipes_shall_not_leak/start_test()
 	var/failures = 0
 	for(var/obj/machinery/atmospherics/pipe/P in SSmachines.machinery)
-		if(P.leaking && isPlayerLevel(P.z) && !(locate(/obj/abstract/landmark/allowed_leak) in get_turf(P)))
+		if(P.leaking && !(locate(/obj/abstract/landmark/allowed_leak) in get_turf(P)))
 			failures++
 			log_bad("Following pipe is leaking: [log_info_line(P)]")
 
