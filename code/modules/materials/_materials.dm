@@ -523,7 +523,7 @@ INITIALIZE_IMMEDIATE(/obj/effect/gas_overlay)
 /decl/material/proc/get_wall_texture()
 	return
 
-/decl/material/proc/on_leaving_metabolism(var/atom/parent, var/metabolism_class)
+/decl/material/proc/on_leaving_metabolism(datum/reagents/metabolism/holder)
 	return
 
 #define ACID_MELT_DOSE 10
