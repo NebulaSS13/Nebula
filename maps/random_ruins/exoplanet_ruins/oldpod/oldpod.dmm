@@ -46,6 +46,7 @@
 	dir = 8
 	},
 /obj/effect/decal/cleanable/dirt,
+/obj/abstract/landmark/allowed_leak,
 /turf/simulated/floor/plating,
 /area/map_template/oldpod)
 "ai" = (
@@ -62,6 +63,7 @@
 /obj/machinery/atmospherics/portables_connector{
 	dir = 8
 	},
+/obj/abstract/landmark/allowed_leak,
 /turf/simulated/floor/plating,
 /area/map_template/oldpod)
 "ak" = (
@@ -147,6 +149,7 @@
 /obj/effect/decal/cleanable/dirt,
 /obj/effect/decal/cleanable/dirt,
 /obj/effect/decal/cleanable/dirt,
+/obj/abstract/landmark/allowed_leak,
 /turf/simulated/floor/tiled/monotile,
 /area/map_template/oldpod)
 "av" = (
@@ -155,6 +158,7 @@
 	},
 /obj/effect/decal/cleanable/dirt,
 /obj/effect/decal/cleanable/dirt,
+/obj/abstract/landmark/allowed_leak,
 /turf/simulated/floor/tiled/monotile,
 /area/map_template/oldpod)
 "aw" = (
