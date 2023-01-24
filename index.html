@@ -29,7 +29,7 @@ General Public License version 3.
 
 
 <h3 id="modules">Modules
-<aside>(151 modules,
+<aside>(152 modules,
     48/4187 macros, 1.1%)</aside></h3>
 <ul class="index-tree modules">
     <li><a href="(builtins).html" title="(builtins)">(builtins)</a></li>
@@ -180,7 +180,10 @@ General Public License version 3.
     <li><a href="code/modules/keybindings.html" title="code&#x2F;modules&#x2F;keybindings">In-code keypress handling system</a> - This whole system is heavily based off of forum_account's keyboard library.
 Thanks to forum_account for saving the day, the library can be found
 <a href="https://secure.byond.com/developer/Forum_account/Keyboard">here</a>!</li>
-    <li><span class="no-substance">maps&#x2F;</span><a href="code/modules/maps/reader.html" title="code&#x2F;modules&#x2F;maps&#x2F;reader">reader</a></li>
+    <li class="has-children"><span title="code&#x2F;modules&#x2F;maps">maps</span><ul class="index-tree">
+    <li><a href="code/modules/maps/helper_landmarks.html" title="code&#x2F;modules&#x2F;maps&#x2F;helper_landmarks">helper_landmarks</a></li>
+    <li><a href="code/modules/maps/reader.html" title="code&#x2F;modules&#x2F;maps&#x2F;reader">reader</a></li>
+    </ul></li>
     <li><span class="no-substance">materials&#x2F;</span><a href="code/modules/materials/material_sheets.html" title="code&#x2F;modules&#x2F;materials&#x2F;material_sheets">material_sheets</a></li>
     <li class="has-children"><span title="code&#x2F;modules&#x2F;mining">mining</span><ul class="index-tree">
     <li><a href="code/modules/mining/mine_items.html" title="code&#x2F;modules&#x2F;mining&#x2F;mine_items">mine_items</a></li>
@@ -271,7 +274,7 @@ Thanks to forum_account for saving the day, the library can be found
 
 
 <h3 id="types">Types
-<aside>(134 detailed/323 documented/18001 total, 1.8%)</aside></h3>
+<aside>(134 detailed/324 documented/18002 total, 1.8%)</aside></h3>
 <ul class="index-tree">
     <li><a href="global.html" title="(global)">(global)</a></li>
     <li><a href="area.html" title="&#x2F;area">area</a></li>
@@ -533,7 +536,10 @@ Parameters: var/obj/item/card/id</li>
     <li><a href="mob/new_player.html" title="&#x2F;mob&#x2F;new_player">new_player</a></li>
     </ul></li>
     <li class="has-children"><a href="obj.html" title="&#x2F;obj">obj</a><ul class="index-tree">
-    <li><span class="no-substance">abstract&#x2F;</span><a href="obj/abstract/map_data.html" title="&#x2F;obj&#x2F;abstract&#x2F;map_data">map_data</a></li>
+    <li class="has-children"><span title="&#x2F;obj&#x2F;abstract">abstract</span><ul class="index-tree">
+    <li><span class="no-substance">landmark&#x2F;</span><span class="no-substance" title="&#x2F;obj&#x2F;abstract&#x2F;landmark&#x2F;allowed_leak">allowed_leak</span> - Used to tell pipe leak unit tests that a leak is intentional. Placed over the pipe that leaks, not the tile missing a pipe.</li>
+    <li><a href="obj/abstract/map_data.html" title="&#x2F;obj&#x2F;abstract&#x2F;map_data">map_data</a></li>
+    </ul></li>
     <li><a href="obj/compass_holder.html" title="&#x2F;obj&#x2F;compass_holder">compass_holder</a></li>
     <li class="has-children"><span title="&#x2F;obj&#x2F;effect">effect</span><ul class="index-tree">
     <li><span class="no-substance">decal&#x2F;cleanable&#x2F;blood&#x2F;</span><a href="obj/effect/decal/cleanable/blood/tracks.html" title="&#x2F;obj&#x2F;effect&#x2F;decal&#x2F;cleanable&#x2F;blood&#x2F;tracks">tracks</a></li>
@@ -758,7 +764,7 @@ As with material, these stacks should only set this in Initialize as they are ab
 </main>
 <footer>
     nebula.dme
-    <a href="https://github.com/NebulaSS13/Nebula/tree/6a8ec333df18432a2fba051caddd08b63a28d8dd">6a8ec33</a>
+    <a href="https://github.com/NebulaSS13/Nebula/tree/6d525ac0c56fb2ce487f98e33025f2f802a2b56b">6d525ac</a>
         (dev) &mdash; <a href="https://github.com/SpaceManiac/SpacemanDMM/blob/master/src/dmdoc/README.md">dmdoc 1.4.1</a></footer>
 </body>
 </html>
