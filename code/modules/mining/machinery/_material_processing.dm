@@ -90,6 +90,7 @@
 /obj/machinery/material_processing/Destroy()
 	input_turf = null
 	output_turf = null
+	events_repository.unregister(/decl/observ/moved, src, src, .proc/on_moved)
 	. = ..()
 
 /obj/machinery/material_processing/Initialize()
