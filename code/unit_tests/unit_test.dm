@@ -61,6 +61,7 @@ var/global/ascii_reset = "[ascii_esc]\[0m"
 	var/static/safe_landmark
 	var/static/space_landmark
 	var/check_cleanup
+	var/list/times_fired_at_setup
 
 /datum/unit_test/proc/log_debug(var/message)
 	log_unit_test("[ascii_yellow]---  DEBUG  --- \[[name]\]: [message][ascii_reset]")
@@ -85,6 +86,11 @@ var/global/ascii_reset = "[ascii_esc]\[0m"
 
 // Executed before the test runs - Primarily intended for shared setup (generally in templates)
 /datum/unit_test/proc/setup_test()
+	SHOULD_CALL_PARENT(TRUE)
+	if(async)
+		LAZYINITLIST(times_fired_at_setup)
+		for(var/datum/controller/subsystem/subsystem_to_await in subsystems_to_await())
+			times_fired_at_setup[subsystem_to_await] = subsystem_to_await.times_fired
 	return
 
 /datum/unit_test/proc/start_test()

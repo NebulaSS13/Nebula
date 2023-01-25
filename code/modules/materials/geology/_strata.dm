@@ -28,6 +28,6 @@
 	else if(isnull(ores_rich) && islist(ores_sparse))
 		ores_rich = ores_sparse.Copy()
 
-	for(var/mat_type in (ores_sparse|ores_rich))
+	for(var/mat_type in (base_materials|ores_sparse|ores_rich))
 		var/decl/material/mat = GET_DECL(mat_type)
 		maximum_temperature = min((mat.melting_point-1), maximum_temperature)

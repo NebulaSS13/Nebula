@@ -308,7 +308,7 @@ INITIALIZE_IMMEDIATE(/mob/new_player)
 				added_job = TRUE
 
 	if(!added_job)
-		dat += "<tr><td>No available positions.</td></tr>"
+		dat += "<tr><td colspan = 3>No available positions.</td></tr>"
 	// END MAIN MAP JOBS
 
 	// SUBMAP JOBS
