@@ -181,3 +181,17 @@
 	var/new_scale_y = variable == "icon_scale_y" ? var_value : A.icon_scale_y
 
 	A.set_scale(new_scale_x, new_scale_y)
+
+
+/decl/vv_set_handler/directional_offset_hander
+	handled_type = /obj
+	handled_vars = list("directional_offset")
+
+/decl/vv_set_handler/directional_offset_hander/handle_set_var(var/obj/O, variable, var_value, client)
+	if(!istext(var_value) && !isnull(var_value))
+		to_chat(client, SPAN_WARNING("You can only enter a JSON string, or nothing in this field!"))
+		return
+
+	//Set the offset and force update
+	O.directional_offset = var_value
+	O.update_directional_offset(TRUE)
