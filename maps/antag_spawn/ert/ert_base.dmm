@@ -2968,11 +2968,9 @@
 /obj/machinery/light{
 	dir = 8
 	},
-/turf/simulated/floor/tiled/white,
-/area/map_template/rescue_base/start)
-"gn" = (
-/obj/machinery/atmospherics/portables_connector,
-/obj/machinery/portable_atmospherics/canister/oxygen/prechilled,
+/obj/machinery/sleeper/standard{
+	dir = 8
+	},
 /turf/simulated/floor/tiled/white,
 /area/map_template/rescue_base/start)
 "go" = (
@@ -3009,18 +3007,6 @@
 /turf/simulated/floor/tiled/white,
 /area/map_template/rescue_base/start)
 "gw" = (
-/turf/simulated/floor/tiled/white,
-/area/map_template/rescue_base/start)
-"gx" = (
-/obj/machinery/atmospherics/pipe/simple/hidden{
-	dir = 5
-	},
-/turf/simulated/floor/tiled/white,
-/area/map_template/rescue_base/start)
-"gy" = (
-/obj/machinery/atmospherics/pipe/simple/hidden{
-	dir = 9
-	},
 /turf/simulated/floor/tiled/white,
 /area/map_template/rescue_base/start)
 "gz" = (
@@ -3066,12 +3052,6 @@
 /area/map_template/rescue_base/start)
 "gE" = (
 /obj/machinery/body_scanconsole{
-	dir = 8
-	},
-/turf/simulated/floor/tiled/white,
-/area/map_template/rescue_base/start)
-"gF" = (
-/obj/machinery/sleeper/standard{
 	dir = 8
 	},
 /turf/simulated/floor/tiled/white,
@@ -5452,7 +5432,7 @@ eQ
 eQ
 eU
 gm
-gx
+gw
 gw
 gw
 gR
@@ -5516,8 +5496,8 @@ eQ
 eQ
 eQ
 eU
-gn
-gy
+gw
+gw
 gw
 gw
 gw
@@ -5583,7 +5563,7 @@ eQ
 eU
 go
 gw
-gF
+gw
 gO
 gS
 ha
