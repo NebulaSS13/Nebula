@@ -539,7 +539,7 @@ var/global/list/supermatter_delam_accent_sounds = list(
 	if(!power)
 		animate_filter("outline", list(size = 0))
 
-	color = color_contrast(Interpolate(0, 50, clamp( (damage - emergency_point) / (explosion_point - emergency_point),0,1)))
+	color = color_matrix_contrast(Interpolate(1, 5, clamp( (damage - emergency_point) / (explosion_point - emergency_point), 0, 1)))
 
 	if (damage >= emergency_point && !damage_animation)
 		start_damage_animation()

@@ -28,9 +28,9 @@
 		var/mob/living/carbon/human/H = M
 		H.update_eyes()
 
-/decl/material/liquid/glowsap/on_leaving_metabolism(atom/parent, metabolism_class)
-	if(ishuman(parent))
-		var/mob/living/carbon/human/H = parent
+/decl/material/liquid/glowsap/on_leaving_metabolism(datum/reagents/metabolism/holder)
+	if(ishuman(holder?.my_atom))
+		var/mob/living/carbon/human/H = holder.my_atom
 		addtimer(CALLBACK(H, /mob/living/carbon/human/proc/update_eyes), 5 SECONDS)
 	. = ..()
 

@@ -3735,6 +3735,7 @@
 	},
 /obj/effect/floor_decal/corner/blue,
 /obj/machinery/portable_atmospherics/canister/oxygen,
+/obj/abstract/landmark/allowed_leak,
 /turf/simulated/floor/tiled/airless,
 /area/ship/scrap/maintenance/atmos)
 "hi" = (
@@ -3749,6 +3750,7 @@
 /obj/effect/floor_decal/corner/blue{
 	dir = 10
 	},
+/obj/abstract/landmark/allowed_leak,
 /turf/simulated/floor/tiled/airless,
 /area/ship/scrap/maintenance/atmos)
 "hj" = (
@@ -3771,6 +3773,7 @@
 	dir = 1
 	},
 /mob/living/simple_animal/hostile/carp,
+/obj/abstract/landmark/allowed_leak,
 /turf/simulated/floor/tiled/airless,
 /area/ship/scrap/maintenance/atmos)
 "hl" = (
@@ -4445,6 +4448,7 @@
 	dir = 4
 	},
 /obj/machinery/portable_atmospherics/powered/pump/filled,
+/obj/machinery/atmospherics/pipe/simple/visible/universal,
 /turf/simulated/floor/tiled/airless,
 /area/ship/scrap/maintenance/atmos)
 "iu" = (
@@ -4526,14 +4530,14 @@
 /turf/simulated/floor/tiled/airless,
 /area/ship/scrap/maintenance/atmos)
 "iE" = (
-/obj/machinery/atmospherics/pipe/manifold/visible/blue{
-	dir = 4
-	},
 /obj/effect/floor_decal/corner/blue,
 /obj/effect/floor_decal/corner/yellow{
 	dir = 4
 	},
 /obj/machinery/meter,
+/obj/machinery/atmospherics/pipe/manifold/visible/blue{
+	dir = 4
+	},
 /turf/simulated/floor/tiled/airless,
 /area/ship/scrap/maintenance/atmos)
 "iF" = (
@@ -4857,6 +4861,7 @@
 "js" = (
 /obj/machinery/atmospherics/valve/open,
 /obj/item/shard/borosilicate,
+/obj/abstract/landmark/allowed_leak,
 /turf/simulated/floor/airless,
 /area/ship/scrap/maintenance/engine/aft)
 "jt" = (
@@ -4969,6 +4974,7 @@
 /area/ship/scrap/maintenance/engine/aft)
 "jH" = (
 /obj/machinery/atmospherics/pipe/manifold/visible/fuel,
+/obj/abstract/landmark/allowed_leak,
 /turf/simulated/floor/airless,
 /area/ship/scrap/maintenance/engine/aft)
 "jI" = (
@@ -5020,6 +5026,7 @@
 	},
 /obj/effect/floor_decal/industrial/warning,
 /mob/living/simple_animal/hostile/carp,
+/obj/abstract/landmark/allowed_leak,
 /turf/simulated/floor/airless,
 /area/ship/scrap/maintenance/engine/aft)
 "jQ" = (

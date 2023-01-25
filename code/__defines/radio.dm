@@ -1,0 +1,7 @@
+#define MESSAGE_MODE_LEFT       "left"
+#define MESSAGE_MODE_RIGHT      "right"
+#define MESSAGE_MODE_INTERCOM   "intercom"
+#define MESSAGE_MODE_DEFAULT    "default"
+#define MESSAGE_MODE_WHISPER    "whisper"
+#define MESSAGE_MODE_DEPARTMENT "department"
+#define MESSAGE_MODE_SPECIAL    "special"

@@ -668,9 +668,9 @@
 		verb = pick(speak_emote)
 
 
-	var/message_mode=""
+	var/message_mode
 	if(copytext(message,1,2) == get_prefix_key(/decl/prefix/radio_main_channel))
-		message_mode = "headset"
+		message_mode = MESSAGE_MODE_DEFAULT
 		message = copytext(message,2)
 
 	if(length(message) >= 2)

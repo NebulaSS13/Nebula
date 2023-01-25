@@ -21,7 +21,7 @@
 /mob/living/simple_animal/hostile/retaliate/jelly/Initialize()
 	. = ..()
 	if(gets_random_color)
-		color = color_rotation(round(rand(0,360),20))
+		color = color_matrix_rotate_hue(round(rand(0,360),20))
 
 /mob/living/simple_animal/hostile/retaliate/jelly/alt
 	icon = 'icons/mob/simple_animal/jelly_alt.dmi'
@@ -46,7 +46,7 @@
 	if(W)
 		W.force *= jelly_scale
 	if(!megajelly_color)
-		megajelly_color = color_rotation(round(rand(0,360),20))
+		megajelly_color = color_matrix_rotate_hue(round(rand(0,360),20))
 	color = megajelly_color
 
 /mob/living/simple_animal/hostile/retaliate/jelly/mega/death()

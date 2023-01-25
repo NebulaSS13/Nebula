@@ -114,7 +114,7 @@
 	return ..(message_data)
 
 /mob/living/carbon/human/handle_message_mode(message_mode, message, verb, speaking, used_radios, alt_name)
-	if(message_mode == "whisper") //It's going to get sanitized again immediately, so decode.
+	if(message_mode == MESSAGE_MODE_WHISPER) //It's going to get sanitized again immediately, so decode.
 		whisper_say(html_decode(message), speaking, alt_name)
 		return TRUE
 	return ..()

@@ -1641,10 +1641,13 @@
 	},
 /obj/structure/closet/secure_closet{
 	name = "secure engineering voidsuit locker";
-	req_access = list("ACCESS_CHIEF_ENGINEER")
+	req_access = list("ACCESS_ENGINE_EQUIP")
 	},
 /obj/item/clothing/head/helmet/space/void/engineering/salvage,
 /obj/item/clothing/suit/space/void/engineering/salvage,
+/obj/item/tank/oxygen/yellow,
+/obj/item/tank/oxygen/yellow,
+/obj/item/tank/oxygen/yellow,
 /turf/simulated/floor/plating,
 /area/ship/trade/maintenance/storage)
 "eo" = (

@@ -127,14 +127,17 @@ var/global/list/shuttle_landmarks = list()
 
 /obj/effect/shuttle_landmark/automatic/sector_set(var/obj/effect/overmap/visitable/O)
 	..()
-	SetName("[O.name] - [initial(name)] ([x],[y])")
+	SetName("[initial(name)] ([x],[y])")
 
 //Subtype that calls explosion on init to clear space for shuttles
 /obj/effect/shuttle_landmark/automatic/clearing
+	name = "clearing"
 	var/radius = 10
 
-/obj/effect/shuttle_landmark/automatic/clearing/Initialize()
+/obj/effect/shuttle_landmark/automatic/clearing/Initialize(var/ml, var/supplied_radius)
 	..()
+	if(!isnull(supplied_radius))
+		radius = supplied_radius
 	return INITIALIZE_HINT_LATELOAD
 
 /obj/effect/shuttle_landmark/automatic/clearing/LateInitialize()

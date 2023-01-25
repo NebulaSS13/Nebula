@@ -134,3 +134,9 @@
 	type_to_find = /obj/structure/closet
 	variable_to_set = "opened"
 	value_to_set = TRUE
+
+/// Used to tell pipe leak unit tests that a leak is intentional. Placed over the pipe that leaks, not the tile missing a pipe.
+/obj/abstract/landmark/allowed_leak
+#ifndef UNIT_TEST
+	delete_me = TRUE
+#endif

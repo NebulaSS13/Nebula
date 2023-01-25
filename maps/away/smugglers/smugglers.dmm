@@ -83,6 +83,7 @@
 	icon_state = "door_closed";
 	name = "Internal Airlock"
 	},
+/obj/machinery/atmospherics/pipe/simple/visible/black,
 /turf/simulated/floor,
 /area/smugglers/base)
 "ar" = (

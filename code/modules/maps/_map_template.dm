@@ -104,14 +104,13 @@
 	SSshuttle.block_queue = pre_init_state
 	SSshuttle.clear_init_queue() // We will flush the queue unless there were other blockers, in which case they will do it.
 
-/datum/map_template/proc/load_new_z(no_changeturf = TRUE)
-
-	var/x = round((world.maxx - width)/2)
-	var/y = round((world.maxy - height)/2)
+/datum/map_template/proc/load_new_z(no_changeturf = TRUE, centered=TRUE)
+	var/x = max(round((world.maxx - width)/2), 1)
+	var/y = max(round((world.maxy - height)/2), 1)
+	if(!centered)
+		x = 1
+		y = 1
 	var/initial_z = world.maxz + 1
-
-	if (x < 1) x = 1
-	if (y < 1) y = 1
 
 	var/list/bounds = list(1.#INF, 1.#INF, 1.#INF, -1.#INF, -1.#INF, -1.#INF)
 	var/list/atoms_to_initialise = list()

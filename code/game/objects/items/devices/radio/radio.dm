@@ -238,7 +238,7 @@
 /obj/item/radio/proc/autosay(var/message, var/from, var/channel, var/sayverb = "states") //BS12 EDIT
 	var/datum/radio_frequency/connection = null
 	if(channel && channels && channels.len > 0)
-		if (channel == "department")
+		if (channel == MESSAGE_MODE_DEPARTMENT)
 			channel = channels[1]
 		connection = secure_radio_connections[channel]
 	else
@@ -254,12 +254,12 @@
 // Interprets the message mode when talking into a radio, possibly returning a connection datum
 /obj/item/radio/proc/get_connection_from_message_mode(mob/living/M, message, message_mode)
 	// If a channel isn't specified, send to common.
-	if(!message_mode || message_mode == "headset")
+	if(!message_mode || global.nondepartmental_message_modes[message_mode])
 		return radio_connection
 
 	// Otherwise, if a channel is specified, look for it.
 	if(channels && channels.len > 0)
-		if (message_mode == "department") // Department radio shortcut
+		if (message_mode == MESSAGE_MODE_DEPARTMENT) // Department radio shortcut
 			message_mode = channels[1]
 
 		if (channels[message_mode]) // only broadcast if the channel is set on
@@ -287,7 +287,8 @@
 			to_chat(M, SPAN_WARNING("You're disrupted as you reach for \the [src]."))
 			return 0
 
-		if(istype(M)) M.trigger_aiming(TARGET_CAN_RADIO)
+		if(istype(M))
+			M.trigger_aiming(TARGET_CAN_RADIO)
 
 	//  Uncommenting this. To the above comment:
 	// 	The permacell radios aren't suppose to be able to transmit, this isn't a bug and this "fix" is just making radio wires useless. -Giacom
@@ -296,7 +297,6 @@
 
 	if(!radio_connection)
 		set_frequency(frequency)
-
 
 	if(power_usage)
 		var/obj/item/cell/has_cell = get_cell()

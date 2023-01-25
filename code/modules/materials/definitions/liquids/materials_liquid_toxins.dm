@@ -149,8 +149,8 @@
 		M.timeofdeath = world.time
 	M.add_chemical_effect(CE_NOPULSE, 1)
 
-/decl/material/liquid/zombiepowder/on_leaving_metabolism(atom/parent, metabolism_class)
-	var/mob/M = parent
+/decl/material/liquid/zombiepowder/on_leaving_metabolism(datum/reagents/metabolism/holder)
+	var/mob/M = holder?.my_atom
 	if(istype(M))
 		M.status_flags &= ~FAKEDEATH
 	. = ..()

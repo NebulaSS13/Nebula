@@ -309,10 +309,10 @@
 		for(var/M in all_markings)
 			if(M in pref.body_markings)
 				continue
-			var/decl/sprite_accessory/S = all_markings[M]
-			if(is_type_in_list(S, disallowed_markings) || (S.species_allowed && !(mob_species.get_root_species_name() in S.species_allowed)) || (S.subspecies_allowed && !(mob_species.name in S.subspecies_allowed)))
-				continue
-			usable_markings += S
+			var/decl/sprite_accessory/accessory = all_markings[M]
+			var/decl/bodytype/mob_bodytype = mob_species.get_bodytype_by_name(pref.bodytype)
+			if(!is_type_in_list(accessory, disallowed_markings) && accessory.accessory_is_available(preference_mob(), mob_species, mob_bodytype.bodytype_flag, pref.gender))
+				usable_markings += accessory
 
 		var/decl/sprite_accessory/new_marking = input(user, "Choose a body marking:", CHARACTER_PREFERENCE_INPUT_TITLE)  as null|anything in usable_markings
 		if(new_marking && CanUseTopic(user))

@@ -26,6 +26,8 @@ var/global/repository/cameras/camera_repository = new()
 		devices_by_channel[channel] |= added
 
 /repository/cameras/proc/remove_camera_from_channels(var/datum/extension/network_device/camera/removed, var/list/channels)
+	if(!length(devices_by_channel))
+		return
 	if(!islist(channels))
 		channels = list(channels)
 	for(var/channel in channels)
