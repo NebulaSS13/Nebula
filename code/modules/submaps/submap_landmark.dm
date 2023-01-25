@@ -27,6 +27,7 @@
 var/global/list/submap_spawnpoints_by_z = list()
 INITIALIZE_IMMEDIATE(/obj/abstract/submap_landmark/spawnpoint)
 /obj/abstract/submap_landmark/spawnpoint
+	movable_flags = MOVABLE_FLAG_ALWAYS_SHUTTLEMOVE
 	icon_state = "x3"
 
 /obj/abstract/submap_landmark/spawnpoint/Initialize()
