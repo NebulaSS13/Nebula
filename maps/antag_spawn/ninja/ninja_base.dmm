@@ -92,13 +92,6 @@
 	icon_state = "white"
 	},
 /area/map_template/ninja_dojo/dojo)
-"ap" = (
-/obj/machinery/atmospherics/portables_connector,
-/obj/machinery/portable_atmospherics/canister/oxygen/prechilled,
-/turf/unsimulated/floor{
-	icon_state = "white"
-	},
-/area/map_template/ninja_dojo/dojo)
 "aq" = (
 /obj/structure/table/glass,
 /turf/unsimulated/floor{
@@ -124,22 +117,6 @@
 	},
 /obj/structure/window/reinforced/crescent{
 	dir = 4
-	},
-/turf/unsimulated/floor{
-	icon_state = "white"
-	},
-/area/map_template/ninja_dojo/dojo)
-"au" = (
-/obj/machinery/atmospherics/pipe/simple/hidden{
-	dir = 5
-	},
-/turf/unsimulated/floor{
-	icon_state = "white"
-	},
-/area/map_template/ninja_dojo/dojo)
-"av" = (
-/obj/machinery/atmospherics/pipe/simple/hidden{
-	dir = 9
 	},
 /turf/unsimulated/floor{
 	icon_state = "white"
@@ -1922,7 +1899,7 @@ ad
 ad
 aj
 ao
-au
+ao
 ao
 aK
 aT
@@ -1964,8 +1941,8 @@ ad
 ad
 ad
 aj
-ap
-av
+ao
+ao
 ao
 aL
 aG
