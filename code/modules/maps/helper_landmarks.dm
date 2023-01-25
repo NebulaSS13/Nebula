@@ -103,6 +103,7 @@
 // Has a percent chance on spawn to set the specified variable on the specified type to the specified value.
 
 /obj/abstract/landmark/variable_setter
+	is_spawnable_type = FALSE
 	var/type_to_find
 	var/variable_to_set
 	var/value_to_set
