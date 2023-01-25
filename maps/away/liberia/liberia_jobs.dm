@@ -36,7 +36,6 @@
 // Spawn points.
 /obj/abstract/submap_landmark/spawnpoint/liberia
 	name = "Merchant"
-	movable_flags = MOVABLE_FLAG_EFFECTMOVE
 
 /decl/hierarchy/outfit/job/merchant
 	name = "Job - Merchant - Liberia"

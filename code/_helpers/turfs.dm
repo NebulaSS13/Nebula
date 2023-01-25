@@ -133,7 +133,7 @@
 	var/supported = FALSE // Whether or not there's an object in the turf which can support other objects.
 	if(is_background)
 		new_turf = target
-	else	
+	else
 		new_turf = target.ChangeTurf(source.type, 1, 1)
 		new_turf.transport_properties_from(source)
 		new_turf.prev_type = target_type
@@ -144,12 +144,8 @@
 			break
 
 	for(var/obj/O in source)
-		if(O.simulated && (!is_background || supported || O.obj_flags & OBJ_FLAG_MOVES_UNSUPPORTED))
+		if((O.movable_flags & MOVABLE_FLAG_ALWAYS_SHUTTLEMOVE) || (O.simulated && (!is_background || supported || (O.obj_flags & OBJ_FLAG_MOVES_UNSUPPORTED))))
 			O.forceMove(new_turf)
-		else if(istype(O,/obj/effect)) // This is used for non-game objects like spawnpoints, so ignore the background check.
-			var/obj/effect/E = O
-			if(E.movable_flags & MOVABLE_FLAG_EFFECTMOVE)
-				E.forceMove(new_turf)
 
 	for(var/mob/M in source)
 		if(is_background && !supported)
@@ -160,5 +156,5 @@
 
 	if(is_background)
 		return list(new_turf, source)
-	
+
 	return new_turf

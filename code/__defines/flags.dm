@@ -53,7 +53,7 @@ The latter will result in a linter warning and will not work correctly.
 // Movable-level flags (/atom/movable/movable_flags)
 #define MOVABLE_FLAG_PROXMOVE             BITFLAG(0) // Does this object require proximity checking in Enter()?
 #define MOVABLE_FLAG_Z_INTERACT           BITFLAG(1) // Should attackby and attack_hand be relayed through ladders and open spaces?
-#define MOVABLE_FLAG_EFFECTMOVE           BITFLAG(2) // Is this an effect that should move?
+#define MOVABLE_FLAG_ALWAYS_SHUTTLEMOVE   BITFLAG(2) // Is this an effect that should move?
 #define MOVABLE_FLAG_DEL_SHUTTLE          BITFLAG(3) // Shuttle transistion will delete this.
 #define MOVABLE_FLAG_WHEELED              BITFLAG(4) // Movable has reduced stamina cost/speed reduction when pulled.
 
