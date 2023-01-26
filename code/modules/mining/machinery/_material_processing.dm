@@ -27,13 +27,13 @@
 /obj/machinery/material_processing/on_update_icon()
 
 	cut_overlays()
-	
+
 	icon_state = initial(icon_state)
 	if(panel_open)
 		add_overlay("[icon_state]-open")
 	if(!use_power || (stat & (BROKEN|NOPOWER)))
 		icon_state = "[icon_state]-off"
-	
+
 	var/overlay_dir = 0
 	if(input_turf)
 		overlay_dir = get_dir(src, input_turf)
@@ -90,6 +90,7 @@
 /obj/machinery/material_processing/Destroy()
 	input_turf = null
 	output_turf = null
+	events_repository.unregister(/decl/observ/moved, src, src, .proc/on_moved)
 	. = ..()
 
 /obj/machinery/material_processing/Initialize()
@@ -98,6 +99,13 @@
 	SET_OUTPUT(output_turf)
 	. = ..()
 	queue_icon_update()
+	events_repository.register(/decl/observ/moved, src, src, .proc/on_moved)
+
+/obj/machinery/material_processing/proc/on_moved(atom/moving, atom/old_loc, atom/new_loc)
+	if(istype(input_turf, /turf))
+		input_turf = get_step(get_turf(src), get_dir(get_turf(old_loc), input_turf))
+	if(istype(output_turf, /turf))
+		output_turf = get_step(get_turf(src), get_dir(get_turf(old_loc), output_turf))
 
 /obj/machinery/material_processing/OnTopic(var/user, var/list/href_list)
 	if(href_list["toggle_power"])

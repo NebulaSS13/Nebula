@@ -407,6 +407,7 @@ INITIALIZE_IMMEDIATE(/mob/new_player)
 	dat += html_crew_manifest(OOC = 1)
 	//show_browser(src, dat, "window=manifest;size=370x420;can_close=1")
 	var/datum/browser/popup = new(src, "Crew Manifest", "Crew Manifest", 370, 420, src)
+	popup.add_stylesheet("nano_shared", 'nano/css/shared.css')
 	popup.set_content(dat)
 	popup.open()
 
