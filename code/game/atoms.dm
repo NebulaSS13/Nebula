@@ -231,12 +231,12 @@
 
 /atom/proc/explosion_act(var/severity)
 	SHOULD_CALL_PARENT(TRUE)
-	if(!currently_exploding)
+	. = !currently_exploding && severity > 0 && severity <= 3
+	if(.)
 		currently_exploding = TRUE
-		. = (severity <= 3)
-		if(.)
+		if(severity < 3)
 			for(var/atom/movable/AM in get_contained_external_atoms())
-				AM.explosion_act(severity++)
+				AM.explosion_act(severity + 1)
 			try_detonate_reagents(severity)
 		currently_exploding = FALSE
 
