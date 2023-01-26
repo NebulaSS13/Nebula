@@ -96,14 +96,14 @@ PROCESSING_SUBSYSTEM_DEF(nano)
   *
   * @return int The number of uis updated
   */
-/datum/controller/subsystem/processing/nano/proc/update_user_uis(mob/user, src_object, ui_key)
+/datum/controller/subsystem/processing/nano/proc/update_user_uis(mob/user, src_object, ui_key = null, force_open = FALSE)
 	. = 0
 	if (!length(user.open_uis))
 		return // has no open uis
 
 	for (var/datum/nanoui/ui in user.open_uis)
 		if ((isnull(src_object) || ui.src_object == src_object) && (isnull(ui_key) || ui.ui_key == ui_key))
-			ui.try_update(1)
+			ui.try_update(update = TRUE, force_open = force_open)
 			.++
 
  /**

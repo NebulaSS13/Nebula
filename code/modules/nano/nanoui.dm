@@ -530,13 +530,13 @@ nanoui is used to open and update nano browser uis
   *
   * @return nothing
   */
-/datum/nanoui/proc/try_update(update = 0)
+/datum/nanoui/proc/try_update(update = 0, force_open = FALSE)
 	if (!src_object || !user)
 		close()
 		return
 
 	if (status && (update || is_auto_updating))
-		update() // Update the UI (update_status() is called whenever a UI is updated)
+		update(force_open) // Update the UI (update_status() is called whenever a UI is updated)
 	else
 		update_status(1) // Not updating UI, so lets check here if status has changed
 
