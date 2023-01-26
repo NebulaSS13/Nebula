@@ -16,7 +16,7 @@
 <h1>datum <aside>/<a href="datum.html">datum</a></aside>
         
     
-            <a href="https://github.com/NebulaSS13/Nebula/blob/39ddd22360c200c6d98ecda87b0020f5305e4fd2/code/datums/datum.dm#L1">
+            <a href="https://github.com/NebulaSS13/Nebula/blob/011e4f490e66c752cd785d6aaea6d8cdaea36068/code/datums/datum.dm#L1">
         <img src="git.png" width="16" height="16" title="code&#x2F;datums&#x2F;datum.dm 1"/></a></h1>
 
 <table class="summary" cellspacing="0"><tr><td colspan="2"><h2>Vars</h2></td></tr>
@@ -44,37 +44,37 @@ ui_interact is currently defined for /atom/movable</td></tr></table>
             <aside>&ndash; </aside>
         
     
-            <a href="https://github.com/NebulaSS13/Nebula/blob/39ddd22360c200c6d98ecda87b0020f5305e4fd2/code/datums/datum.dm#L3">
+            <a href="https://github.com/NebulaSS13/Nebula/blob/011e4f490e66c752cd785d6aaea6d8cdaea36068/code/datums/datum.dm#L3">
         <img src="git.png" width="16" height="16" title="code&#x2F;datums&#x2F;datum.dm 3"/></a></h3>
         <p>Used to indicate that this type is abstract and should not itself be instantiated.</p><h3 id="var/active_timers"><aside class="declaration">var </aside>active_timers
             <aside>&ndash; /list</aside>
         
     
-            <a href="https://github.com/NebulaSS13/Nebula/blob/39ddd22360c200c6d98ecda87b0020f5305e4fd2/code/datums/datum.dm#L19">
+            <a href="https://github.com/NebulaSS13/Nebula/blob/011e4f490e66c752cd785d6aaea6d8cdaea36068/code/datums/datum.dm#L19">
         <img src="git.png" width="16" height="16" title="code&#x2F;datums&#x2F;datum.dm 19"/></a></h3>
         <p>Used by the SStimer subsystem</p><h3 id="var/gc_destroyed"><aside class="declaration">var </aside>gc_destroyed
             <aside>&ndash; /tmp</aside>
         
     
-            <a href="https://github.com/NebulaSS13/Nebula/blob/39ddd22360c200c6d98ecda87b0020f5305e4fd2/code/datums/datum.dm#L5">
+            <a href="https://github.com/NebulaSS13/Nebula/blob/011e4f490e66c752cd785d6aaea6d8cdaea36068/code/datums/datum.dm#L5">
         <img src="git.png" width="16" height="16" title="code&#x2F;datums&#x2F;datum.dm 5"/></a></h3>
         <p>Time when this object was destroyed.</p><h3 id="var/is_processing"><aside class="declaration">var </aside>is_processing
             <aside>&ndash; /tmp</aside>
         
     
-            <a href="https://github.com/NebulaSS13/Nebula/blob/39ddd22360c200c6d98ecda87b0020f5305e4fd2/code/datums/datum.dm#L7">
+            <a href="https://github.com/NebulaSS13/Nebula/blob/011e4f490e66c752cd785d6aaea6d8cdaea36068/code/datums/datum.dm#L7">
         <img src="git.png" width="16" height="16" title="code&#x2F;datums&#x2F;datum.dm 7"/></a></h3>
         <p>Indicates if a processing subsystem is currenting queuing this datum</p><h2 id="proc">Proc Details</h2><h3 id="proc/CanClone"><aside class="declaration">proc </aside>CanClone<aside>() 
         
     
-            <a href="https://github.com/NebulaSS13/Nebula/blob/39ddd22360c200c6d98ecda87b0020f5305e4fd2/code/datums/datum.dm#L75">
+            <a href="https://github.com/NebulaSS13/Nebula/blob/011e4f490e66c752cd785d6aaea6d8cdaea36068/code/datums/datum.dm#L75">
         <img src="git.png" width="16" height="16" title="code&#x2F;datums&#x2F;datum.dm 75"/></a></aside>
         </h3>
         <p>Returns whether the object supports being cloned.
 This is useful for things that should only ever exist once in the world.</p><h3 id="proc/Clone"><aside class="declaration">proc </aside>Clone<aside>() 
         
     
-            <a href="https://github.com/NebulaSS13/Nebula/blob/39ddd22360c200c6d98ecda87b0020f5305e4fd2/code/datums/datum.dm#L84">
+            <a href="https://github.com/NebulaSS13/Nebula/blob/011e4f490e66c752cd785d6aaea6d8cdaea36068/code/datums/datum.dm#L84">
         <img src="git.png" width="16" height="16" title="code&#x2F;datums&#x2F;datum.dm 84"/></a></aside>
         </h3>
         <p>This proc returns a clone of the src datum.
@@ -83,14 +83,14 @@ The clone shall not keep references onto instances owned by the original, in mos
 Try to avoid overriding this proc directly and instead override GetCloneArgs() and PopulateClone().</p><h3 id="proc/GetCloneArgs"><aside class="declaration">proc </aside>GetCloneArgs<aside>() 
         
     
-            <a href="https://github.com/NebulaSS13/Nebula/blob/39ddd22360c200c6d98ecda87b0020f5305e4fd2/code/datums/datum.dm#L99">
+            <a href="https://github.com/NebulaSS13/Nebula/blob/011e4f490e66c752cd785d6aaea6d8cdaea36068/code/datums/datum.dm#L99">
         <img src="git.png" width="16" height="16" title="code&#x2F;datums&#x2F;datum.dm 99"/></a></aside>
         </h3>
         <p>Returns a list with the arguments passed to the new() of a cloned instance.
 Override this, instead of Clone() itself.</p><h3 id="proc/PopulateClone"><aside class="declaration">proc </aside>PopulateClone<aside>(/<a href="datum.html">datum</a>/clone) 
         
     
-            <a href="https://github.com/NebulaSS13/Nebula/blob/39ddd22360c200c6d98ecda87b0020f5305e4fd2/code/datums/datum.dm#L107">
+            <a href="https://github.com/NebulaSS13/Nebula/blob/011e4f490e66c752cd785d6aaea6d8cdaea36068/code/datums/datum.dm#L107">
         <img src="git.png" width="16" height="16" title="code&#x2F;datums&#x2F;datum.dm 107"/></a></aside>
         </h3>
         <p>Used to allow sub-classes to do further processing on the cloned instance returned by Clone().
@@ -98,7 +98,7 @@ Override this, instead of Clone() itself.
 ** Please avoid running update code in here if possible. You could always override Clone() for this kind of things, so we don't end up with 50 calls to update_icon in the chain. **</p><h3 id="proc/ui_data"><aside class="declaration">proc </aside>ui_data<aside>(/<a href="mob.html">mob</a>/user, ui_key) 
         
     
-            <a href="https://github.com/NebulaSS13/Nebula/blob/39ddd22360c200c6d98ecda87b0020f5305e4fd2/code/modules/nano/nanoexternal.dm#L66">
+            <a href="https://github.com/NebulaSS13/Nebula/blob/011e4f490e66c752cd785d6aaea6d8cdaea36068/code/modules/nano/nanoexternal.dm#L66">
         <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;nano&#x2F;nanoexternal.dm 66"/></a></aside>
         </h3>
         <p>Data to be sent to the UI.
@@ -108,7 +108,7 @@ This must be implemented for a UI to work.</p>
 <p>@return data /list Data to be sent to the UI</p><h3 id="proc/ui_interact"><aside class="declaration">proc </aside>ui_interact<aside>(/<a href="mob.html">mob</a>/user, ui_key, /<a href="datum.html">datum</a>/<a href="datum/nanoui.html">nanoui</a>/ui, force_open, /<a href="datum.html">datum</a>/<a href="datum/nanoui.html">nanoui</a>/master_ui, /<a href="datum.html">datum</a>/topic_state/state) 
         
     
-            <a href="https://github.com/NebulaSS13/Nebula/blob/39ddd22360c200c6d98ecda87b0020f5305e4fd2/code/modules/nano/nanoexternal.dm#L54">
+            <a href="https://github.com/NebulaSS13/Nebula/blob/011e4f490e66c752cd785d6aaea6d8cdaea36068/code/modules/nano/nanoexternal.dm#L54">
         <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;nano&#x2F;nanoexternal.dm 54"/></a></aside>
         </h3>
         <p>The ui_interact proc is used to open and update Nano UIs
@@ -121,7 +121,7 @@ ui_interact is currently defined for /atom/movable</p>
 <p>@return nothing</p></main>
 <footer>
     nebula.dme
-    <a href="https://github.com/NebulaSS13/Nebula/tree/39ddd22360c200c6d98ecda87b0020f5305e4fd2">39ddd22</a>
+    <a href="https://github.com/NebulaSS13/Nebula/tree/011e4f490e66c752cd785d6aaea6d8cdaea36068">011e4f4</a>
         (dev) &mdash; <a href="https://github.com/SpaceManiac/SpacemanDMM/blob/master/src/dmdoc/README.md">dmdoc 1.4.1</a></footer>
 </body>
 </html>
