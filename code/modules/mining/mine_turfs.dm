@@ -7,7 +7,6 @@
 	opacity = 1
 	turf_flags = TURF_IS_HOLOMAP_OBSTACLE
 
-var/global/list/mining_floors = list()
 /**********************Asteroid**************************/
 // Setting icon/icon_state initially will use these values when the turf is built on/replaced.
 // This means you can put grass on the asteroid etc.
@@ -29,16 +28,17 @@ var/global/list/mining_floors = list()
 	var/overlay_detail
 
 /turf/simulated/floor/asteroid/Initialize()
-	. = ..()
-	if (!global.mining_floors["[src.z]"])
-		global.mining_floors["[src.z]"] = list()
-	global.mining_floors["[src.z]"] += src
 	if(prob(20))
 		overlay_detail = "asteroid[rand(0,9)]"
+	. = ..()
+	var/obj/abstract/level_data/mining_level/level = SSmapping.levels_by_z[z]
+	if(istype(level))
+		LAZYADD(level.mining_turfs, src)
 
 /turf/simulated/floor/asteroid/Destroy()
-	if (global.mining_floors["[src.z]"])
-		global.mining_floors["[src.z]"] -= src
+	var/obj/abstract/level_data/mining_level/level = SSmapping.levels_by_z[z]
+	if(istype(level))
+		LAZYREMOVE(level.mining_turfs, src)
 	return ..()
 
 /turf/simulated/floor/asteroid/explosion_act(severity)
