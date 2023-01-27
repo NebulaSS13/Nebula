@@ -10,6 +10,7 @@
 	name = "PROXIMITY: " + name
 
 /datum/unit_test/proximity/setup_test()
+	..()
 	proximity_listener = new(get_turf(locate(/obj/abstract/landmark/proximity_spawner)))
 	wall = get_turf(locate(/obj/abstract/landmark/proximity_wall))
 

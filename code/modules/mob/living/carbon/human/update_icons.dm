@@ -464,14 +464,6 @@ var/global/list/damage_icon_parts = list()
 			queue_icon_update()
 		return
 
-	//masks and helmets can obscure our hair.
-	for(var/slot in global.airtight_slots)
-		var/obj/item/gear = get_equipped_item(slot)
-		if(gear && (gear.flags_inv & BLOCK_ALL_HAIR))
-			if(update_icons)
-				queue_icon_update()
-			return
-
 	overlays_standing[HO_HAIR_LAYER] = head_organ.get_hair_icon()
 	if(update_icons)
 		queue_icon_update()

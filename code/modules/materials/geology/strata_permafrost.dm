@@ -18,3 +18,4 @@
 		/decl/material/solid/ice/hydrate/krypton,
 		/decl/material/solid/ice/hydrate/xenon,
 	)
+	maximum_temperature = T0C

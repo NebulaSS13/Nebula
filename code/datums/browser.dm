@@ -47,7 +47,7 @@
 		add_stylesheet("common", common_stylesheet)
 
 /datum/browser/proc/set_title(ntitle)
-	title = replacetext(replacetext(ntitle,"\proper ",""),"\improper ","")
+	title = sanitize(ntitle)
 
 /datum/browser/proc/add_head_content(nhead_content)
 	head_content = nhead_content
