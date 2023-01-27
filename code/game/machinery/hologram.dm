@@ -111,7 +111,7 @@ var/global/const/HOLOPAD_MODE = RANGE_BASED
 				var/zlevels_long = list()
 				if(holopadType == HOLOPAD_LONG_RANGE && length(reachable_overmaps))
 					for(var/zlevel in global.overmap_sectors)
-						var/obj/effect/overmap/visitable/O = global.overmap_sectors["[zlevel]"]
+						var/obj/effect/overmap/visitable/O = global.overmap_sectors[num2text(zlevel)]
 						if(!isnull(O) && (O.overmap_id in reachable_overmaps))
 							zlevels_long |= O.map_z
 				for(var/obj/machinery/hologram/holopad/H in SSmachines.machinery)

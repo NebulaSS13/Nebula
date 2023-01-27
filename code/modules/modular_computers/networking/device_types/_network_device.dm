@@ -21,7 +21,7 @@
 	// These variables are for the *device's* public variables and methods, if they exist.
 	var/list/device_variables
 	var/list/device_methods
-	
+
 /datum/extension/network_device/New(datum/holder, n_id, n_key, r_type, autojoin = TRUE)
 	..()
 	network_id = n_id
@@ -211,7 +211,7 @@
 	// Overmap isn't used, a modem alone provides internet connection.
 	if(!length(global.using_map.overmap_ids))
 		return TRUE
-	var/obj/effect/overmap/visitable/sector = global.overmap_sectors["[get_z(holder)]"]
+	var/obj/effect/overmap/visitable/sector = global.overmap_sectors[num2text(get_z(holder))]
 	if(!istype(sector))
 		return
 	return sector.has_internet_connection(connecting_network)

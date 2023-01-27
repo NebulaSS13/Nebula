@@ -136,7 +136,7 @@ SUBSYSTEM_DEF(materials)
 /datum/controller/subsystem/materials/proc/get_strata(var/turf/exterior/wall/location)
 	if(!istype(location))
 		return
-	var/obj/effect/overmap/visitable/sector/exoplanet/planet = global.overmap_sectors["[location.z]"]
+	var/obj/effect/overmap/visitable/sector/exoplanet/planet = global.overmap_sectors[num2text(location.z)]
 	if(istype(planet))
 		return planet.get_strata(location)
 	var/s_key = "[location.z]"

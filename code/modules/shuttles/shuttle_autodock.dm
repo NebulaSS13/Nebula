@@ -33,7 +33,7 @@
 	if(active_docking_controller)
 		set_docking_codes(active_docking_controller.docking_codes)
 	else if(current_location?.overmap_id)
-		var/obj/effect/overmap/visitable/location = global.overmap_sectors["[current_location.z]"]
+		var/obj/effect/overmap/visitable/location = global.overmap_sectors[num2text(current_location.z)]
 		if(location && location.docking_codes)
 			set_docking_codes(location.docking_codes)
 	dock()
