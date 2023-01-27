@@ -91,9 +91,8 @@ SUBSYSTEM_DEF(mapping)
 	for(var/z = 1 to world.maxz)
 		var/obj/abstract/level_data/level = levels_by_z[z]
 		if(!istype(level))
-			// TODO: Remove this and swap log_debug() out for a stack trace when the system is more refined/robust.
 			level = new /obj/abstract/level_data/space(locate(round(world.maxx*0.5), round(world.maxy*0.5), z))
-			log_debug("Missing z-level data object for z[num2text(z)]!")
+			PRINT_STACK_TRACE("Missing z-level data object for z[num2text(z)]!")
 		level.setup_level_data()
 
 	. = ..()
