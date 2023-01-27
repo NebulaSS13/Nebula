@@ -131,7 +131,7 @@ var/global/list/known_overmap_sectors
 	var/datum/overmap/overmap = global.overmaps_by_z[num2text(z)]
 	if(istype(overmap))
 		for(var/zlevel in map_z)
-			global.overmap_sectors["[zlevel]"] = src
+			global.overmap_sectors[num2text(zlevel)] = src
 
 	SSmapping.player_levels |= map_z
 	if(!(sector_flags & OVERMAP_SECTOR_IN_SPACE))

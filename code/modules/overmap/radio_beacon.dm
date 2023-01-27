@@ -39,14 +39,14 @@
 	material = /decl/material/solid/metal/steel
 	matter = list(/decl/material/solid/metal/silver = MATTER_AMOUNT_TRACE, /decl/material/solid/metal/gold = MATTER_AMOUNT_REINFORCEMENT)
 
-	var/obj/effect/overmap/radio/signal	
+	var/obj/effect/overmap/radio/signal
 
 /obj/item/radio_beacon/attack_self(mob/user)
 	if(signal)
 		to_chat(user, SPAN_NOTICE("You deactivate \the [src], cutting short it's radio broadcast."))
 		QDEL_NULL(signal)
 		return
-	var/obj/effect/overmap/visitable/O = global.overmap_sectors["[get_z(src)]"]
+	var/obj/effect/overmap/visitable/O = global.overmap_sectors[num2text(get_z(src))]
 	if(!O)
 		to_chat(user, SPAN_WARNING("You cannot deploy \the [src] here."))
 		return
@@ -55,11 +55,10 @@
 		return
 
 	signal = new()
-	
+
 	signal.message = message
 	signal.set_origin(O)
 
 /obj/item/radio_beacon/Destroy()
 	QDEL_NULL(signal)
 	. = ..()
-	

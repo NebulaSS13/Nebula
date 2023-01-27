@@ -206,7 +206,7 @@ var/global/log_end= world.system_type == UNIX ? ascii2text(13) : ""
 /atom/movable/get_log_info_line()
 	var/turf/t = get_turf(src)
 	if(t)
-		var/obj/effect/overmap/visitable/O = global.overmap_sectors["[t.z]"]
+		var/obj/effect/overmap/visitable/O = global.overmap_sectors[num2text(t.z)]
 		if(istype(O))
 			return "[..()] ([t]) ([t.x],[t.y],[t.z] - [O.name]) ([t.type])"
 		return "[..()] ([t]) ([t.x],[t.y],[t.z]) ([t.type])"

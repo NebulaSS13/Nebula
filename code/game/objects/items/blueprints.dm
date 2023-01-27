@@ -43,7 +43,7 @@
 
 	var/turf/T = get_turf(src)
 	if(istype(T) && length(global.using_map.overmap_ids))
-		var/obj/effect/overmap/visitable/sector/S = global.overmap_sectors["[T.z]"]
+		var/obj/effect/overmap/visitable/sector/S = global.overmap_sectors[num2text(T.z)]
 		if(!S) // The blueprints are useless now, but keep them around for fluff.
 			desc = "Some dusty old blueprints. The markings are old, and seem entirely irrelevant for your wherabouts."
 			return FALSE
@@ -65,14 +65,14 @@
 	icon_state = "blueprints2"
 
 /obj/item/blueprints/outpost/attack_self(mob/user)
-	var/obj/effect/overmap/visitable/sector/S = global.overmap_sectors["[get_z(user)]"]
+	var/obj/effect/overmap/visitable/sector/S = global.overmap_sectors[num2text(get_z(user))]
 	area_prefix = S.name
 	. = ..()
 
 /obj/item/blueprints/outpost/set_valid_z_levels()
 	var/turf/T = get_turf(src)
 	if(istype(T) && length(global.using_map.overmap_ids))
-		var/obj/effect/overmap/visitable/sector/S = global.overmap_sectors["[T.z]"]
+		var/obj/effect/overmap/visitable/sector/S = global.overmap_sectors[num2text(T.z)]
 		if(istype(S))
 			T = locate(1, 1, S.z)
 			var/area/overmap/map = T && get_area(T)

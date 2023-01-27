@@ -25,7 +25,7 @@
 		return isAdminLevel(tz) || isStationLevel(tz) || isContactLevel(tz)
 
 	var/list/accessible_z_levels = SSmapping.get_connected_levels(oz)
-	var/obj/effect/overmap/sector = global.overmap_sectors["[oz]"]
+	var/obj/effect/overmap/sector = global.overmap_sectors[num2text(oz)]
 	if(sector)
 
 		var/list/neighbors_to_add = list()
