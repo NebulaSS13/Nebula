@@ -94,7 +94,7 @@ INITIALIZE_IMMEDIATE(/obj/abstract/level_data)
 /obj/abstract/level_data/proc/setup_level_data()
 
 	if(take_starlight_ambience)
-		ambient_light_level = config.starlight
+		ambient_light_level = config.exterior_ambient_light
 		ambient_light_color = SSskybox.background_color
 	if(base_turf)
 		SSmapping.base_turf_by_z[my_z] = base_turf
@@ -188,6 +188,11 @@ INITIALIZE_IMMEDIATE(/obj/abstract/level_data)
 // Used to generate mining ores etc.
 /obj/abstract/level_data/mining_level
 	level_flags = (ZLEVEL_PLAYER|ZLEVEL_SEALED)
+	var/list/mining_turfs
+
+/obj/abstract/level_data/mining_level/Destroy()
+	mining_turfs = null
+	return ..()
 
 /obj/abstract/level_data/mining_level/asteroid
 	base_turf = /turf/simulated/floor/asteroid
@@ -200,11 +205,10 @@ INITIALIZE_IMMEDIATE(/obj/abstract/level_data)
 
 /obj/abstract/level_data/mining_level/proc/refresh_mining_turfs()
 	set waitfor = FALSE
-	for(var/thing in global.mining_floors["[my_z]"])
-		var/turf/simulated/floor/asteroid/M = thing
-		if(istype(M))
-			M.updateMineralOverlays()
+	for(var/turf/simulated/floor/asteroid/mining_turf as anything in mining_turfs)
+		mining_turf.updateMineralOverlays()
 		CHECK_TICK
+	mining_turfs = null
 
 // Used as a dummy z-level for the overmap.
 /obj/abstract/level_data/overmap
