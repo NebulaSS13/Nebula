@@ -28,8 +28,7 @@ SUBSYSTEM_DEF(ticker)
 	var/looking_for_antags = 0
 
 /datum/controller/subsystem/ticker/Initialize()
-	to_world("<B>[SPAN_BLUE("Welcome to the pre-game lobby!")]</B>")
-	to_world("Please, setup your character and select ready. Game will start in [round(pregame_timeleft/10)] seconds")
+	print_lobby_message()
 	return ..()
 
 /datum/controller/subsystem/ticker/fire(resumed = 0)
@@ -464,3 +463,7 @@ Helpers
 		bypass_gamemode_vote = 1
 	Master.SetRunLevel(RUNLEVEL_SETUP)
 	return 1
+
+/datum/controller/subsystem/ticker/proc/print_lobby_message()
+	to_world("<B>[SPAN_BLUE("Welcome to the pre-game lobby!")]</B>")
+	to_world("Please, setup your character and select ready. Game will start in [round(pregame_timeleft/10)] seconds")
