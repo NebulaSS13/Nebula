@@ -18,7 +18,7 @@
 	var/spent_icon = "pistolcasing-spent"
 	var/bullet_color = COLOR_COPPER
 	var/marking_color
-	var/fall_sounds = list('sound/weapons/guns/casingfall1.ogg','sound/weapons/guns/casingfall2.ogg','sound/weapons/guns/casingfall3.ogg')
+	drop_sound = list('sound/weapons/guns/casingfall1.ogg','sound/weapons/guns/casingfall2.ogg','sound/weapons/guns/casingfall3.ogg')
 
 /obj/item/ammo_casing/Initialize()
 	if(ispath(projectile_type))
@@ -53,7 +53,7 @@
 			return
 
 		if(!MOVING_DELIBERATELY(L) && prob(10))
-			playsound(src, pick(fall_sounds), 50, 1)
+			playsound(src, pick(drop_sound), 50, 1)
 			var/turf/turf_current = get_turf(src)
 			var/turf/turf_destiinaton = get_step(turf_current, AM.dir)
 			if(turf_destiinaton.Adjacent(turf_current))
@@ -182,6 +182,7 @@
 		if(!user.unEquip(C, src))
 			return
 		stored_ammo.Add(C)
+		playsound(user, 'sound/weapons/guns/interaction/bullet_insert.ogg', 50, 1)
 		update_icon()
 	else ..()
 

@@ -39,8 +39,8 @@
 
 	if(chambered)//We have a shell in the chamber
 		chambered.dropInto(loc)//Eject casing
-		if(LAZYLEN(chambered.fall_sounds))
-			playsound(loc, pick(chambered.fall_sounds), 50, 1)
+		if(chambered.drop_sound)
+			playsound(loc, pick(chambered.drop_sound), 50, 1)
 		chambered = null
 
 	if(loaded.len)

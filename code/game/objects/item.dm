@@ -102,7 +102,7 @@
 
 /obj/item/proc/dropped_sound_callback()
 	if(!ismob(loc) && drop_sound)
-		playsound(src, drop_sound, 25, 0)
+		playsound(src, pick(drop_sound), 25, 0)
 
 /obj/item/proc/get_origin_tech()
 	return origin_tech
