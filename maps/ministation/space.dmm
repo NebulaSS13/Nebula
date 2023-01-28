@@ -453,6 +453,10 @@
 /obj/effect/step_trigger/teleporter/random,
 /turf/space/transit/north,
 /area/space)
+"YY" = (
+/obj/abstract/level_data/admin_level,
+/turf/space,
+/area/space)
 
 (1,1,1) = {"
 UO
@@ -840,7 +844,7 @@ aa
 aa
 aa
 aa
-aa
+YY
 aa
 aa
 "}

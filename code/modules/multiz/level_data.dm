@@ -162,6 +162,9 @@ INITIALIZE_IMMEDIATE(/obj/abstract/level_data)
 /*
  * Mappable subtypes.
  */
+/obj/abstract/level_data/debug
+	name = "Debug Level"
+
 /obj/abstract/level_data/main_level
 	level_flags = (ZLEVEL_STATION|ZLEVEL_CONTACT|ZLEVEL_PLAYER)
 
