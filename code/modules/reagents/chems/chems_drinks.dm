@@ -317,6 +317,7 @@
 	exoplanet_rarity = MAT_RARITY_NOWHERE
 	uid = "chem_drink_coffee"
 	var/list/flavour_modifiers = list()
+	var/od_jitter = 5
 
 /decl/material/liquid/drink/coffee/Initialize()
 	. = ..()
@@ -352,7 +353,7 @@
 	M.add_chemical_effect(CE_PULSE, 2)
 
 /decl/material/liquid/drink/coffee/affect_overdose(var/mob/living/M)
-	ADJ_STATUS(M, STAT_JITTER, 5)
+	ADJ_STATUS(M, STAT_JITTER, od_jitter)
 	M.add_chemical_effect(CE_PULSE, 1)
 
 /decl/material/liquid/drink/coffee/build_presentation_name_from_reagents(var/obj/item/prop, var/supplied)
@@ -369,14 +370,41 @@
 	var/chai =  REAGENT_VOLUME(prop.reagents, /decl/material/liquid/drink/tea/chai) ? "dirty " : ""
 	if(!soy && !milk && !cream)
 		if(is_flavoured)
-			. = "[.]flavoured [chai]coffee"
+			. = "[.]flavoured [chai][name]"
 		else
-			. = "[.][chai]coffee"
+			. = "[.][chai][name]"
 	else if((milk+cream) > soy)
 		. = "[.][chai]latte"
 	else
 		. = "[.][chai]soy latte"
 	. = ..(prop, .)
+
+/decl/material/liquid/drink/coffee/nullcaf
+	name = "nullcaf"
+	codex_name = null
+	lore_text = "Extra bitter coffee purged by a patented neutron bombing process. Guaranteed to contain no more than 2% inert dust."
+	taste_description = "pointless bitterness"
+	color = "#0d001a"
+	overdose = 30
+	glass_name = "nullcaf"
+	glass_desc = "Don't drop it."
+	uid = "chem_drink_nullcaf"
+	adj_dizzy = 0
+	adj_drowsy = -1
+	adj_sleepy = -1
+	od_jitter = 0
+
+/decl/material/liquid/drink/coffee/nullcaf/affect_overdose(var/mob/living/M)
+	if(prob(10) && M.can_feel_pain())
+		M.custom_pain(SPAN_NOTICE("A sudden spike of pain through your temples jolts you awake."), 5)
+		M.apply_effect(10, PAIN, 0)
+		ADJ_STATUS(M, STAT_DROWSY, -10)
+		ADJ_STATUS(M, STAT_ASLEEP, -10)
+
+/decl/material/liquid/drink/coffee/nullcaf/build_presentation_name_from_reagents(var/obj/item/prop, var/supplied)
+	. = ..()
+	if(!findtext(.,name))
+		return "evil [.]"
 
 /decl/material/liquid/drink/hot_coco
 	name = "hot chocolate"

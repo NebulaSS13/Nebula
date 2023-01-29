@@ -7,6 +7,9 @@
 	if(M.psi)
 		M.psi.check_latency_trigger(30, "a [name] overdose")
 
+/decl/material/liquid/drink/coffee/nullcaf
+	is_psionic_nullifier = TRUE
+
 /decl/chemical_reaction/synthesis/nullglass
 	name = "Soulstone"
 	result = null
@@ -28,3 +31,20 @@
 	else
 		for(var/i = 1, i <= created_volume*2, i++)
 			new /obj/item/shard(location, /decl/material/solid/gemstone/crystal)
+
+/datum/reagents/proc/disrupts_psionics()
+	. = FALSE
+	for(var/reagent_type in reagent_volumes)
+		var/decl/material/R = GET_DECL(reagent_type)
+		if(R.is_psi_null())
+			return R
+
+/decl/material/proc/on_psionic_stress(datum/reagents/metabolism/holder, stress, atom/source)
+	return
+
+/decl/material/liquid/drink/coffee/nullcaf/on_psionic_stress(datum/reagents/metabolism/holder, stress, atom/source)
+	var/used = min(stress, holder.reagent_volumes[type])
+	holder.remove_reagent(type, used)
+	if(ATOM_IS_TEMPERATURE_SENSITIVE(holder.my_atom))
+		ADJUST_ATOM_TEMPERATURE(holder.my_atom, holder.my_atom.temperature + 5*used)
+	return stress - used

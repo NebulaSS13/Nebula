@@ -176,6 +176,13 @@
 /obj/item/chems/drinks/coffee/populate_reagents()
 	reagents.add_reagent(/decl/material/liquid/drink/coffee, reagents.maximum_volume)
 
+/obj/item/chems/drinks/coffee/nullcaf
+	name = "cup of null"
+	desc = "Careful."
+
+/obj/item/chems/drinks/coffee/nullcaf/populate_reagents()
+	reagents.add_reagent(/decl/material/liquid/drink/coffee/nullcaf, reagents.maximum_volume)
+
 /obj/item/chems/drinks/ice
 	name = "cup of ice"
 	desc = "Careful, cold ice, do not chew."

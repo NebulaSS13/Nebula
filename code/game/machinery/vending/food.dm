@@ -192,6 +192,7 @@
 	vend_power_usage = 85000 //85 kJ to heat a 250 mL cup of coffee
 	products = list(
 		/obj/item/chems/drinks/coffee = 15,
+		/obj/item/chems/drinks/coffee/nullcaf = 10,
 		/obj/item/chems/drinks/tea/black = 15,
 		/obj/item/chems/drinks/tea/green = 15,
 		/obj/item/chems/drinks/tea/chai = 15,
