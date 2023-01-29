@@ -443,6 +443,9 @@
 /datum/fabricator_recipe/imprinter/circuit/merchant_pad
 	path = /obj/item/stock_parts/circuitboard/merchant_pad
 
+/datum/fabricator_recipe/imprinter/circuit/radiocarbon_spectrometer
+	path = /obj/item/stock_parts/circuitboard/radiocarbon_spectrometer
+
 /datum/fabricator_recipe/imprinter/circuit/jukebox
 	path = /obj/item/stock_parts/circuitboard/jukebox
 
