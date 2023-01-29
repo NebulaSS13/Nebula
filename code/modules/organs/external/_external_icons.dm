@@ -18,6 +18,7 @@ var/global/list/limb_icon_cache = list()
 	skin_colour = null
 	hair_colour = human.hair_colour
 	bodytype = human.bodytype
+	reset_status() // since we may have changed bodytype
 	if(BP_IS_PROSTHETIC(src) && model)
 		var/decl/prosthetics_manufacturer/franchise = GET_DECL(model)
 		if(!(franchise && franchise.skintone))
@@ -170,7 +171,7 @@ var/global/list/robot_hud_colours = list("#ffffff","#cccccc","#aaaaaa","#888888"
 	return applying
 
 /obj/item/organ/external/proc/bandage_level()
-	if(damage_state_text() == "00") 
+	if(damage_state_text() == "00")
 		return 0
 	if(!is_bandaged())
 		return 0
