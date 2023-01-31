@@ -1,0 +1,4 @@
+author: quardbreak
+delete-after: true
+changes:
+  - bugfix: Fixed missing circuit recipe for radiocarbon spectrometer.
