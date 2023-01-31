@@ -74,17 +74,17 @@
 /obj/structure/transit_tube/Bumped(mob/AM)
 	var/obj/structure/transit_tube/T = locate() in AM.loc
 	if(T)
-		to_chat(AM, "<span class='warning'>The tube's support pylons block your way.</span>")
+		to_chat(AM, SPAN_WARNING("The tube's support pylons block your way."))
 		return ..()
 	else
 		AM.dropInto(loc)
-		to_chat(AM, "<span class='info'>You slip under the tube.</span>")
+		to_chat(AM, SPAN_INFO("You slip under the tube."))
 
 /obj/structure/transit_tube/station/Bumped(mob/AM)
 	if(!pod_moving && icon_state == "open" && istype(AM, /mob))
 		for(var/obj/structure/transit_tube_pod/pod in loc)
 			if(pod.contents.len)
-				to_chat(AM, "<span class='notice'>The pod is already occupied.</span>")
+				to_chat(AM, SPAN_NOTICE("The pod is already occupied."))
 				return
 			else if(!pod.moving && (pod.dir in directions()))
 				AM.forceMove(pod)
@@ -545,7 +545,7 @@
 		if("SOUTHWEST", "SW")
 			return 10
 		else
-	return 0
+			return 0
 
 
 
@@ -570,4 +570,4 @@
 		if(10)
 			return "SW"
 		else
-	return
+			return
