@@ -267,6 +267,7 @@
 	name = "master flavorpod item"
 	desc = "A cellulose pod containing some kind of flavoring."
 	icon_state = "pill4"
+	presentation_flags = PRESENTATION_FLAG_NAME
 
 /obj/item/chems/pill/pod/cream
 	name = "creamer pod"

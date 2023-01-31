@@ -17,9 +17,9 @@
 	var/base_icon = null // Base icon name for fill states
 
 /obj/item/chems/drinks/Initialize()
-	. = ..()
 	if(!base_name)
 		base_name = name
+	. = ..()
 
 /obj/item/chems/drinks/dragged_onto(var/mob/user)
 	attack_self(user)
@@ -296,6 +296,7 @@
 	base_name = "cup"
 	base_icon = "cup"
 	volume = 30
+	presentation_flags = PRESENTATION_FLAG_NAME
 
 /obj/item/chems/drinks/tea/black
 	name = "cup of black tea"
