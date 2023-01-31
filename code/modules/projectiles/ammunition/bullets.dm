@@ -71,7 +71,7 @@
 	caliber = CALIBER_SHOTGUN
 	projectile_type = /obj/item/projectile/bullet/shotgun
 	material = /decl/material/solid/metal/steel
-	fall_sounds = list('sound/weapons/guns/shotgun_fall.ogg')
+	drop_sound = 'sound/weapons/guns/shotgun_fall.ogg'
 
 /obj/item/ammo_casing/shotgun/pellet
 	name = "shotgun shell"
