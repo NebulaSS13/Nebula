@@ -15,7 +15,7 @@
 
 /decl/loadout_option/accessory/armband_nt
 	name = "corporate armband"
-	path = /obj/item/clothing/accessory/armband/whitered
+	path = /obj/item/clothing/accessory/armband/whitegreen
 
 /decl/loadout_option/suit/labcoat_corp
 	name = "labcoat, corporate colors"
@@ -23,7 +23,7 @@
 	flags = GEAR_HAS_TYPE_SELECTION
 
 /decl/loadout_option/uniform/corporate
-	namename = "corporate uniform selection"
+	name = "corporate uniform selection"
 	path = /obj/item/clothing/under
 
 /decl/loadout_option/uniform/corporate/get_gear_tweak_options()
