@@ -123,7 +123,7 @@
 	if(randpixel && (!pixel_x && !pixel_y) && isturf(loc)) //hopefully this will prevent us from messing with mapper-set pixel_x/y
 		pixel_x = rand(-randpixel, randpixel)
 		pixel_y = rand(-randpixel, randpixel)
-	reconsider_single_icon()
+	reconsider_single_icon(FALSE)
 
 /obj/item/Destroy()
 

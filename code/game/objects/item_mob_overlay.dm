@@ -7,15 +7,17 @@ var/global/list/bodypart_to_slot_lookup_table = list(
 	BP_R_HAND = "slot_r_hand"
 )
 
-/obj/item/proc/reconsider_single_icon(var/update_icon)
-	use_single_icon = check_state_in_icon(ICON_STATE_INV, icon) || check_state_in_icon(ICON_STATE_WORLD, icon)
+/obj/item/proc/reconsider_single_icon(var/clear_preexisting = TRUE)
+	if(isnull(use_single_icon) || clear_preexisting)
+		use_single_icon = check_state_in_icon(ICON_STATE_INV, icon) || check_state_in_icon(ICON_STATE_WORLD, icon)
+		. = TRUE
 	if(use_single_icon)
 		has_inventory_icon = check_state_in_icon(ICON_STATE_INV, icon)
 		icon_state = get_world_inventory_state()
 		. = TRUE
 	else
 		has_inventory_icon = FALSE
-	if(. || update_icon)
+	if(.)
 		update_icon()
 
 // For checking if we have a specific state, for inventory icons and nonhumanoid species.
@@ -27,7 +29,7 @@ var/global/list/icon_state_cache = list()
 	// isicon() is apparently quite expensive so short-circuit out early if we can.
 	if(!istext(checkstate) || isnull(checkicon) || !(isfile(checkicon) || isicon(checkicon)))
 		return FALSE
-	var/checkkey = "\ref[checkicon]"
+	var/checkkey = "[checkicon]" || ref(checkicon)
 	var/list/check = global.icon_state_cache[checkkey]
 	if(!check)
 		check = list()

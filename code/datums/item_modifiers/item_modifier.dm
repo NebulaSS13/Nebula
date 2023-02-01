@@ -31,5 +31,5 @@
 		var/list/type_spritesheets = type_setup[SETUP_SPRITE_SHEETS]
 		var/obj/item/clothing/C = I
 		C.sprite_sheets = type_spritesheets?.Copy()
-	I.reconsider_single_icon(TRUE)
+	I.reconsider_single_icon()
 	return TRUE
