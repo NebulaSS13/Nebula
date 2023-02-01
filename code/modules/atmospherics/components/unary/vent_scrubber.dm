@@ -249,6 +249,8 @@
 		to_chat(user, "You are too far away to read the gauge.")
 	if(welded)
 		to_chat(user, "It seems welded shut.")
+	if(!(stat & NOPOWER) && use_power && user.skill_check(SKILL_ATMOS,SKILL_BASIC))
+		to_chat(user, "It's running in [scrubbing] mode.")
 
 /obj/machinery/atmospherics/unary/vent_scrubber/refresh()
 	..()
