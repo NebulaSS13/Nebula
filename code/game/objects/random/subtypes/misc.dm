@@ -350,7 +350,6 @@
 		/obj/item/storage/firstaid/surgery =                      4,
 		/obj/item/cell/infinite =                                 1,
 		/obj/random/archaeological_find =                         2,
-		/obj/structure/artifact =                                 1,
 		/obj/item/multitool/hacktool =                            2,
 		/obj/item/surgicaldrill =                                 7,
 		/obj/item/sutures =                                       7,
