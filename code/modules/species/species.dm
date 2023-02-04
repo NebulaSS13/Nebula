@@ -514,6 +514,9 @@ var/global/const/DEFAULT_SPECIES_HEALTH = 200
 		var/list/organ_data = has_limbs[limb_type]
 		var/limb_path = organ_data["path"]
 		var/obj/item/organ/external/E = new limb_path(H, null, H.dna) //explicitly specify the dna
+		if(E.parent_organ)
+			var/list/parent_organ_data = has_limbs[E.parent_organ]
+			parent_organ_data["has_children"]++
 		H.add_organ(E, null, FALSE, FALSE)
 		post_organ_rejuvenate(E, H)
 
