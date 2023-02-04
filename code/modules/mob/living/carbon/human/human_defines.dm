@@ -1,12 +1,12 @@
 /mob/living/carbon/human
 
-	var/h_style = /decl/sprite_accessory/hair/bald
-	var/f_style = /decl/sprite_accessory/facial_hair/shaved
+	var/h_style
+	var/f_style
 
-	var/hair_colour =        COLOR_BLACK
-	var/facial_hair_colour = COLOR_BLACK
-	var/skin_colour =        COLOR_BLACK
-	var/eye_colour =         COLOR_BLACK
+	var/hair_colour
+	var/facial_hair_colour
+	var/skin_colour
+	var/eye_colour
 
 	var/regenerate_body_icon = FALSE // If true, the next icon update will also regenerate the body.
 
@@ -16,7 +16,7 @@
 
 	var/lip_style = null	//no lipstick by default- arguably misleading, as it could be used for general makeup
 
-	var/b_type = "A+"	//Player's bloodtype
+	var/b_type	//Player's bloodtype
 
 	var/list/worn_underwear = list()
 
