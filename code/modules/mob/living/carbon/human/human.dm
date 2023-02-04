@@ -1359,6 +1359,18 @@
 
 	set_species(species_name)
 
+	if(!skin_colour)
+		skin_colour = species.base_color
+	if(!hair_colour)
+		hair_colour = species.base_hair_color
+	if(!facial_hair_colour)
+		facial_hair_colour = species.base_hair_color
+	if(!eye_colour)
+		eye_colour = species.base_eye_color
+	species.set_default_hair(src, override_existing = FALSE, defer_update_hair = TRUE)
+	if(!b_type && length(species?.blood_types))
+		b_type = pickweight(species.blood_types)
+
 	if(new_dna)
 		set_real_name(new_dna.real_name)
 	else

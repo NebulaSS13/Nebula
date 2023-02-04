@@ -141,15 +141,10 @@ var/global/list/datum/dna/gene/dna_genes[0]
 	SetUIState(DNA_UI_GENDER, character.gender!=MALE, 1)
 
 	// Hair
-	// FIXME:  Species-specific defaults pls
-	if(!character.h_style)
-		character.h_style = /decl/sprite_accessory/hair/bald
 	var/list/hair_types = decls_repository.get_decl_paths_of_subtype(/decl/sprite_accessory/hair)
 	SetUIValueRange(DNA_UI_HAIR_STYLE,  hair_types.Find(character.h_style),  length(hair_types), 1)
 
 	// Facial Hair
-	if(!character.f_style)
-		character.f_style = /decl/sprite_accessory/facial_hair/shaved
 	var/list/beard_types = decls_repository.get_decl_paths_of_subtype(/decl/sprite_accessory/facial_hair)
 	SetUIValueRange(DNA_UI_BEARD_STYLE, beard_types.Find(character.f_style), length(beard_types), 1)
 
@@ -157,6 +152,8 @@ var/global/list/datum/dna/gene/dna_genes[0]
 	for(var/obj/item/organ/external/E in character.get_external_organs())
 		if(LAZYLEN(E.markings))
 			body_markings[E.organ_tag] = E.markings.Copy()
+
+	b_type = character.b_type
 
 	UpdateUI()
 

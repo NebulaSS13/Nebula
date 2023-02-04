@@ -733,15 +733,15 @@ var/global/const/DEFAULT_SPECIES_HEALTH = 200
 					light -= H.equipment_light_protection
 	return clamp(max(prescriptions, light), 0, 7)
 
-/decl/species/proc/set_default_hair(var/mob/living/carbon/human/H)
-	if(H.h_style != H.species.default_h_style)
-		H.h_style = H.species.default_h_style
+/decl/species/proc/set_default_hair(mob/living/carbon/human/organism, override_existing = TRUE, defer_update_hair = FALSE)
+	if(!organism.h_style || (override_existing && (organism.h_style != default_h_style)))
+		organism.h_style = default_h_style
 		. = TRUE
-	if(H.f_style != H.species.default_f_style)
-		H.f_style = H.species.default_f_style
+	if(!organism.h_style || (override_existing && (organism.f_style != default_f_style)))
+		organism.f_style = default_f_style
 		. = TRUE
-	if(.)
-		H.update_hair()
+	if(. && !defer_update_hair)
+		organism.update_hair()
 
 /decl/species/proc/handle_additional_hair_loss(var/mob/living/carbon/human/H, var/defer_body_update = TRUE)
 	return FALSE
