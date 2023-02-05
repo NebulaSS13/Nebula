@@ -274,7 +274,7 @@
 	var/datum/computer_network/network = get_network()
 	if(!network)
 		return TRUE // If not on network, always TRUE for access, as there isn't anything to access.
-	var/obj/M = holder
+	var/obj/M = get_top_holder()
 	if(!accesses)
 		accesses  = list()
 	return M.check_access_list(accesses)
@@ -309,12 +309,12 @@
 	return public_variables
 
 /datum/extension/network_device/proc/get_holder_methods()
-	var/obj/machinery/M = holder
+	var/obj/machinery/M = get_top_holder()
 	if(istype(M))
 		return M.public_methods?.Copy()
 
 /datum/extension/network_device/proc/get_holder_variables()
-	var/obj/machinery/M = holder
+	var/obj/machinery/M = get_top_holder()
 	if(istype(M))
 		return M.public_variables?.Copy()
 
@@ -453,6 +453,10 @@
 /**Returns the outward facing URI for this network device.*/
 /datum/extension/network_device/proc/get_network_URI()
 	return "[network_tag].[network_id]"
+
+/**Returns the object that should be handling access and command checks.*/
+/datum/extension/network_device/proc/get_top_holder()
+	return holder
 
 //Subtype for passive devices, doesn't init until asked for
 /datum/extension/network_device/lazy
