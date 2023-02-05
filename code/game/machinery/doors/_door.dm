@@ -325,19 +325,35 @@
 	return FALSE
 
 /obj/machinery/door/take_damage(var/damage, damtype=BRUTE)
-	var/initialhealth = src.health
-	src.health = max(0, src.health - damage)
-	if(src.health <= 0 && initialhealth > 0)
+	if(!health)
+		..(damage, damtype)
+		update_icon()
+		return
+
+	var/component_damage = get_damage_leakthrough(damage, BRUTE)
+	damage -= component_damage
+
+	//Part of damage is soaked by our own health
+	var/initialhealth = health
+	health = max(0, health - damage)
+	if(health <= 0 && initialhealth > 0)
 		visible_message(SPAN_WARNING("\The [src] breaks down!"))
-		src.set_broken(TRUE)
-	else if(src.health < src.maxhealth / 4 && initialhealth >= src.maxhealth / 4)
+		set_broken(TRUE)
+	else if(health < maxhealth / 4 && initialhealth >= maxhealth / 4)
 		visible_message(SPAN_WARNING("\The [src] looks like it's about to break!"))
-	else if(src.health < src.maxhealth / 2 && initialhealth >= src.maxhealth / 2)
+	else if(health < maxhealth / 2 && initialhealth >= maxhealth / 2)
 		visible_message(SPAN_WARNING("\The [src] looks seriously damaged!"))
-	else if(src.health < src.maxhealth * 3/4 && initialhealth >= src.maxhealth * 3/4)
+	else if(health < maxhealth * 3/4 && initialhealth >= maxhealth * 3/4)
 		visible_message(SPAN_WARNING("\The [src] shows signs of damage!"))
-	..(max(0, damage - initialhealth), damtype)
+
+	..(component_damage, damtype)
 	update_icon()
+
+//How much damage should be passed to components inside even when door health is non zero
+/obj/machinery/door/proc/get_damage_leakthrough(var/damage, damtype=BRUTE)
+	if(health > 0.75 * maxhealth && damage < 10)
+		return 0
+	. = round((1 - health/maxhealth) * damage)
 
 /obj/machinery/door/examine(mob/user)
 	. = ..()
