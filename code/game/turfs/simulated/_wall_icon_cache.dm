@@ -4,6 +4,11 @@
 #define CACHE_EDGE_MARKER   4
 #define CACHE_SHINE_MARKER  5
 
+var/global/const/WALL_PAINT_STATE =  "paint"
+var/global/const/WALL_STRIPE_STATE = "stripe"
+var/global/const/WALL_OTHER_STATE =  "other"
+var/global/const/WALL_SHINE_STATE =  "shine"
+
 var/global/list/cached_wall_icons = list()
 /proc/_get_wall_subicon(var/material_icon_base, var/connections, var/color, var/state, var/alpha, var/cache_marker)
 	var/cache_key = jointext(list(cache_marker, material_icon_base, json_encode(connections), color), "-")
@@ -41,11 +46,11 @@ var/global/list/cached_wall_icons = list()
 	cache_key = jointext(cache_key, "-")
 
 	if(!global.cached_wall_icons[cache_key])
-		var/icon/wall_icon =        icon(_get_wall_subicon(material_icon_base, wall_connections, base_color,              cache_marker = CACHE_BASE_MARKER))
-		if(paint_color)  wall_icon.Blend(_get_wall_subicon(material_icon_base, wall_connections, paint_color,  "paint",   cache_marker = CACHE_PAINT_MARKER),                      ICON_OVERLAY)
-		if(stripe_color) wall_icon.Blend(_get_wall_subicon(material_icon_base, wall_connections, stripe_color, "stripes", cache_marker = CACHE_STRIPE_MARKER),                     ICON_OVERLAY)
-		if(edge_color)   wall_icon.Blend(_get_wall_subicon(material_icon_base, other_connections, edge_color,  "other",   cache_marker = CACHE_EDGE_MARKER),                       ICON_OVERLAY)
-		if(shine_value)  wall_icon.Blend(_get_wall_subicon(material_icon_base, other_connections, null,        "shine",   cache_marker = CACHE_SHINE_MARKER, alpha = shine_value), ICON_OVERLAY)
+		var/icon/wall_icon =        icon(_get_wall_subicon(material_icon_base, wall_connections, base_color,                      cache_marker = CACHE_BASE_MARKER))
+		if(paint_color)  wall_icon.Blend(_get_wall_subicon(material_icon_base, wall_connections, paint_color,  WALL_PAINT_STATE,  cache_marker = CACHE_PAINT_MARKER),                      ICON_OVERLAY)
+		if(stripe_color) wall_icon.Blend(_get_wall_subicon(material_icon_base, wall_connections, stripe_color, WALL_STRIPE_STATE, cache_marker = CACHE_STRIPE_MARKER),                     ICON_OVERLAY)
+		if(edge_color)   wall_icon.Blend(_get_wall_subicon(material_icon_base, other_connections, edge_color,  WALL_OTHER_STATE,  cache_marker = CACHE_EDGE_MARKER),                       ICON_OVERLAY)
+		if(shine_value)  wall_icon.Blend(_get_wall_subicon(material_icon_base, other_connections, null,        WALL_SHINE_STATE,  cache_marker = CACHE_SHINE_MARKER, alpha = shine_value), ICON_OVERLAY)
 		global.cached_wall_icons[cache_key] = wall_icon
 	return global.cached_wall_icons[cache_key]
 
