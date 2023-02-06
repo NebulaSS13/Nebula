@@ -6,9 +6,9 @@
 	return appearance_handlers[handler_type]
 
 /decl/appearance_manager/proc/add_appearance(var/mob/viewer, var/datum/appearance_data/ad)
-	var/PriorityQueue/pq = appearances_[viewer]
+	var/datum/priority_queue/pq = appearances_[viewer]
 	if(!pq)
-		pq = new/PriorityQueue(/proc/cmp_appearance_data)
+		pq = new /datum/priority_queue(/proc/cmp_appearance_data)
 		appearances_[viewer] = pq
 		events_repository.register(/decl/observ/logged_in, viewer, src, /decl/appearance_manager/proc/apply_appearance_images)
 		events_repository.register(/decl/observ/destroyed, viewer, src, /decl/appearance_manager/proc/remove_appearances)
@@ -16,7 +16,7 @@
 	reset_appearance_images(viewer)
 
 /decl/appearance_manager/proc/remove_appearance(var/mob/viewer, var/datum/appearance_data/ad, var/refresh_images)
-	var/PriorityQueue/pq = appearances_[viewer]
+	var/datum/priority_queue/pq = appearances_[viewer]
 	pq.Remove(ad)
 	if(viewer.client)
 		viewer.client.images -= ad.images
@@ -26,7 +26,7 @@
 		appearances_ -= viewer
 
 /decl/appearance_manager/proc/remove_appearances(var/mob/viewer)
-	var/PriorityQueue/pq = appearances_[viewer]
+	var/datum/priority_queue/pq = appearances_[viewer]
 	for(var/entry in pq.L)
 		var/datum/appearance_data/ad = entry
 		ad.RemoveViewer(viewer, FALSE)
@@ -40,7 +40,7 @@
 /decl/appearance_manager/proc/clear_appearance_images(var/mob/viewer)
 	if(!viewer.client)
 		return
-	var/PriorityQueue/pq = appearances_[viewer]
+	var/datum/priority_queue/pq = appearances_[viewer]
 	if(!pq)
 		return
 	for(var/entry in pq.L)
@@ -50,7 +50,7 @@
 /decl/appearance_manager/proc/apply_appearance_images(var/mob/viewer)
 	if(!viewer.client)
 		return
-	var/PriorityQueue/pq = appearances_[viewer]
+	var/datum/priority_queue/pq = appearances_[viewer]
 	if(!pq)
 		return
 	for(var/entry in pq.L)
