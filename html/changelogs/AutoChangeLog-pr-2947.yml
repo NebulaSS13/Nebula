@@ -1,5 +1,0 @@
-author: Chinsky
-delete-after: true
-changes:
-  - bugfix: Machines with network connector stock parts now expose all of their functions
-      over network
