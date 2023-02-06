@@ -658,6 +658,11 @@
 		"glass" = COLOR_WHITE
 	)
 
+/decl/closet_appearance/wall/suit
+	color = COLOR_LIGHT_CYAN
+	extra_decals = list(
+		"stripe_outer" = COLOR_OFF_WHITE
+	)
 /decl/closet_appearance/wall/medical
 	decals = null
 	color = COLOR_OFF_WHITE
