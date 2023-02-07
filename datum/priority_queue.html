@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <base href="../" />
+    <link rel="stylesheet" href="dmdoc.css" />
+    <title>&#x2F;datum&#x2F;priority_queue - Space Station 13 - Nebula13</title>
+</head>
+<body>
+<header>
+    <a href="index.html">Space Station 13 - Nebula13</a> -
+    <a href="index.html#modules">Modules</a> -
+    <a href="index.html#types">Types</a>
+ &mdash; <a href="datum/priority_queue.html#var">Var Details</a> - <a href="datum/priority_queue.html#proc">Proc Details</a></header>
+<main>
+<h1>priority_queue <aside>/<a href="datum.html">datum</a>/<a href="datum/priority_queue.html">priority_queue</a></aside>
+        
+    
+            <a href="https://github.com/NebulaSS13/Nebula/blob/f6b42aed8e2279f36ec69c09ac1998ee31122ddb/code/__datastructures/priority_queue.dm#L2">
+        <img src="git.png" width="16" height="16" title="code&#x2F;__datastructures&#x2F;priority_queue.dm 2"/></a></h1>
+
+<p>An automatically ordered list, using the cmp proc to weight the list items</p><table class="summary" cellspacing="0"><tr><td colspan="2"><h2>Vars</h2></td></tr>
+            <tr><th><a href="datum/priority_queue.html#var/L">L</a></th><td>The actual queue</td></tr>
+            <tr><th><a href="datum/priority_queue.html#var/cmp">cmp</a></th><td>The weight function used to order the queue</td></tr><tr><td colspan="2"><h2>Procs</h2></td></tr>
+            <tr><th><a href="datum/priority_queue.html#proc/Dequeue">Dequeue</a></th><td>Removes and returns the first item in the queue</td></tr>
+            <tr><th><a href="datum/priority_queue.html#proc/Enqueue">Enqueue</a></th><td>Add an <code>item</code> to the list, immediatly ordering it to its position using dichotomic search</td></tr>
+            <tr><th><a href="datum/priority_queue.html#proc/Get">Get</a></th><td>Gets the item at the positon <code>index</code></td></tr>
+            <tr><th><a href="datum/priority_queue.html#proc/IsEmpty">IsEmpty</a></th><td></td></tr>
+            <tr><th><a href="datum/priority_queue.html#proc/Length">Length</a></th><td></td></tr>
+            <tr><th><a href="datum/priority_queue.html#proc/List">List</a></th><td></td></tr>
+            <tr><th><a href="datum/priority_queue.html#proc/New">New</a></th><td>Takes a proc <code>comparer</code> that will be used to compare the items inserted</td></tr>
+            <tr><th><a href="datum/priority_queue.html#proc/ReSort">ReSort</a></th><td>Resorts the <code>item</code> to it's correct position in the queue.</td></tr>
+            <tr><th><a href="datum/priority_queue.html#proc/Remove">Remove</a></th><td>Removes an <code>item</code> from the list</td></tr>
+            <tr><th><a href="datum/priority_queue.html#proc/Seek">Seek</a></th><td>Finds an <code>item</code> in the list</td></tr></table>
+    <h2 id="var">Var Details</h2><h3 id="var/L"><aside class="declaration">var </aside>L
+            <aside>&ndash; /list</aside>
+        
+    
+            <a href="https://github.com/NebulaSS13/Nebula/blob/f6b42aed8e2279f36ec69c09ac1998ee31122ddb/code/__datastructures/priority_queue.dm#L4">
+        <img src="git.png" width="16" height="16" title="code&#x2F;__datastructures&#x2F;priority_queue.dm 4"/></a></h3>
+        <p>The actual queue</p><h3 id="var/cmp"><aside class="declaration">var </aside>cmp
+            <aside>&ndash; </aside>
+        
+    
+            <a href="https://github.com/NebulaSS13/Nebula/blob/f6b42aed8e2279f36ec69c09ac1998ee31122ddb/code/__datastructures/priority_queue.dm#L8">
+        <img src="git.png" width="16" height="16" title="code&#x2F;__datastructures&#x2F;priority_queue.dm 8"/></a></h3>
+        <p>The weight function used to order the queue</p><h2 id="proc">Proc Details</h2><h3 id="proc/Dequeue"><aside class="declaration">proc </aside>Dequeue<aside>() 
+        
+    
+            <a href="https://github.com/NebulaSS13/Nebula/blob/f6b42aed8e2279f36ec69c09ac1998ee31122ddb/code/__datastructures/priority_queue.dm#L25">
+        <img src="git.png" width="16" height="16" title="code&#x2F;__datastructures&#x2F;priority_queue.dm 25"/></a></aside>
+        </h3>
+        <p>Removes and returns the first item in the queue</p>
+<ul>
+<li>Returns: The first <code>item</code> in the queue, otherwise <code>FALSE</code></li>
+</ul><h3 id="proc/Enqueue"><aside class="declaration">proc </aside>Enqueue<aside>(item) 
+        
+    
+            <a href="https://github.com/NebulaSS13/Nebula/blob/f6b42aed8e2279f36ec69c09ac1998ee31122ddb/code/__datastructures/priority_queue.dm#L20">
+        <img src="git.png" width="16" height="16" title="code&#x2F;__datastructures&#x2F;priority_queue.dm 20"/></a></aside>
+        </h3>
+        <p>Add an <code>item</code> to the list, immediatly ordering it to its position using dichotomic search</p><h3 id="proc/Get"><aside class="declaration">proc </aside>Get<aside>(index) 
+        
+    
+            <a href="https://github.com/NebulaSS13/Nebula/blob/f6b42aed8e2279f36ec69c09ac1998ee31122ddb/code/__datastructures/priority_queue.dm#L48">
+        <img src="git.png" width="16" height="16" title="code&#x2F;__datastructures&#x2F;priority_queue.dm 48"/></a></aside>
+        </h3>
+        <p>Gets the item at the positon <code>index</code></p>
+<ul>
+<li>Returns: The <code>item</code> at the index, or <code>0</code> if outside the range of the queue</li>
+</ul><h3 id="proc/IsEmpty"><aside class="declaration">proc </aside>IsEmpty<aside>() 
+        
+    
+            <a href="https://github.com/NebulaSS13/Nebula/blob/f6b42aed8e2279f36ec69c09ac1998ee31122ddb/code/__datastructures/priority_queue.dm#L16">
+        <img src="git.png" width="16" height="16" title="code&#x2F;__datastructures&#x2F;priority_queue.dm 16"/></a></aside>
+        </h3>
+        <ul>
+<li>Returns: <code>TRUE</code> if the queue is empty, otherwise <code>FALSE</code></li>
+</ul><h3 id="proc/Length"><aside class="declaration">proc </aside>Length<aside>() 
+        
+    
+            <a href="https://github.com/NebulaSS13/Nebula/blob/f6b42aed8e2279f36ec69c09ac1998ee31122ddb/code/__datastructures/priority_queue.dm#L54">
+        <img src="git.png" width="16" height="16" title="code&#x2F;__datastructures&#x2F;priority_queue.dm 54"/></a></aside>
+        </h3>
+        <ul>
+<li>Returns: The length of the queue</li>
+</ul><h3 id="proc/List"><aside class="declaration">proc </aside>List<aside>() 
+        
+    
+            <a href="https://github.com/NebulaSS13/Nebula/blob/f6b42aed8e2279f36ec69c09ac1998ee31122ddb/code/__datastructures/priority_queue.dm#L38">
+        <img src="git.png" width="16" height="16" title="code&#x2F;__datastructures&#x2F;priority_queue.dm 38"/></a></aside>
+        </h3>
+        <ul>
+<li>Returns: A copy of the item list</li>
+</ul><h3 id="proc/New">New<aside>(comparer) 
+        
+    
+            <a href="https://github.com/NebulaSS13/Nebula/blob/f6b42aed8e2279f36ec69c09ac1998ee31122ddb/code/__datastructures/priority_queue.dm#L11">
+        <img src="git.png" width="16" height="16" title="code&#x2F;__datastructures&#x2F;priority_queue.dm 11"/></a></aside>
+        </h3>
+        <p>Takes a proc <code>comparer</code> that will be used to compare the items inserted</p>
+<ul>
+<li>Param <code>comparer</code> take two arguments and return the difference in their weight</li>
+<li>For example: /proc/CompareItems(atom/A, atom/B) return A.size - B.size</li>
+</ul><h3 id="proc/ReSort"><aside class="declaration">proc </aside>ReSort<aside>(item) 
+        
+    
+            <a href="https://github.com/NebulaSS13/Nebula/blob/f6b42aed8e2279f36ec69c09ac1998ee31122ddb/code/__datastructures/priority_queue.dm#L59">
+        <img src="git.png" width="16" height="16" title="code&#x2F;__datastructures&#x2F;priority_queue.dm 59"/></a></aside>
+        </h3>
+        <p>Resorts the <code>item</code> to it's correct position in the queue.</p>
+<ul>
+<li>For example: The queue is sorted based on weight and atom A changes weight after being added</li>
+</ul><h3 id="proc/Remove"><aside class="declaration">proc </aside>Remove<aside>(item) 
+        
+    
+            <a href="https://github.com/NebulaSS13/Nebula/blob/f6b42aed8e2279f36ec69c09ac1998ee31122ddb/code/__datastructures/priority_queue.dm#L34">
+        <img src="git.png" width="16" height="16" title="code&#x2F;__datastructures&#x2F;priority_queue.dm 34"/></a></aside>
+        </h3>
+        <p>Removes an <code>item</code> from the list</p>
+<ul>
+<li>Returns: <code>TRUE</code> if succesfully removed, otherwise <code>FALSE</code></li>
+</ul><h3 id="proc/Seek"><aside class="declaration">proc </aside>Seek<aside>(item) 
+        
+    
+            <a href="https://github.com/NebulaSS13/Nebula/blob/f6b42aed8e2279f36ec69c09ac1998ee31122ddb/code/__datastructures/priority_queue.dm#L43">
+        <img src="git.png" width="16" height="16" title="code&#x2F;__datastructures&#x2F;priority_queue.dm 43"/></a></aside>
+        </h3>
+        <p>Finds an <code>item</code> in the list</p>
+<ul>
+<li>Returns: The position of the <code>item</code>, or <code>0</code> if not found</li>
+</ul></main>
+<footer>
+    nebula.dme
+    <a href="https://github.com/NebulaSS13/Nebula/tree/f6b42aed8e2279f36ec69c09ac1998ee31122ddb">f6b42ae</a>
+        (dev) &mdash; <a href="https://github.com/SpaceManiac/SpacemanDMM/blob/master/src/dmdoc/README.md">dmdoc 1.4.1</a></footer>
+</body>
+</html>
