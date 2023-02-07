@@ -593,6 +593,26 @@
 			return
 		log_and_message_admins("removed \the [choice] to \the [L]")
 		qdel(choice)
+
+	else if(href_list["setmaterial"])
+		if(!check_rights(R_DEBUG))	return
+
+		var/obj/item/I = locate(href_list["setmaterial"])
+		if(!istype(I))
+			to_chat(usr, "This can only be done to instances of type /obj/item")
+			return
+
+		var/new_material = input("Please choose a new material.","Materials",null) as null|anything in SSmaterials.materials_by_name
+		if(!new_material)
+			return
+		if(QDELETED(I))
+			to_chat(usr, "Item doesn't exist anymore")
+			return
+
+		var/decl/material/M = SSmaterials.materials_by_name[new_material]
+		I.set_material(M.type)
+		to_chat(usr, "Set material of [I] to [I.get_material()].")
+
 	if(href_list["datumrefresh"])
 		var/datum/DAT = locate(href_list["datumrefresh"])
 		if(istype(DAT, /datum) || istype(DAT, /client))
