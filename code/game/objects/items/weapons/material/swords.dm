@@ -19,9 +19,12 @@
 	pickup_sound = 'sound/foley/knife1.ogg' 
 	drop_sound = 'sound/foley/knifedrop3.ogg'
 
-	var/draw_handle
+	var/draw_handle = TRUE
 
 /obj/item/sword/update_force()
+	sharp = initial(sharp)
+	edge = initial(edge)
+	hitsound = initial(hitsound)
 	if(material?.hardness < MAT_VALUE_HARD)
 		edge = 0
 		attack_verb = list("attacked", "stabbed", "jabbed", "smacked", "prodded")
