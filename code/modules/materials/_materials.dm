@@ -638,6 +638,9 @@ INITIALIZE_IMMEDIATE(/obj/effect/gas_overlay)
 	holder.remove_reagent(type, removed)
 
 /decl/material/proc/affect_blood(var/mob/living/M, var/removed, var/datum/reagents/holder)
+	if(M.status_flags & GODMODE)
+		return
+
 	if(radioactivity)
 		M.apply_damage(radioactivity * removed, IRRADIATE, armor_pen = 100)
 

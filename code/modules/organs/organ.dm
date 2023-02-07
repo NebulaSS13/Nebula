@@ -446,6 +446,8 @@ var/global/list/ailment_reference_cache = list()
 
 /obj/item/organ/proc/get_possible_ailments()
 	. = list()
+	if(owner.status_flags & GODMODE)
+		return .
 	for(var/ailment_type in subtypesof(/datum/ailment))
 		var/datum/ailment/ailment = ailment_type
 		if(initial(ailment.category) == ailment_type)
