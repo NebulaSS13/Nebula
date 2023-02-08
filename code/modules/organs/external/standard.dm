@@ -7,7 +7,6 @@
 /obj/item/organ/external/chest
 	name = "upper body"
 	organ_tag = BP_CHEST
-	icon_name = "torso"
 	max_damage = 100
 	min_broken_damage = 35
 	w_class = ITEM_SIZE_HUGE //Used for dismembering thresholds, in addition to storage. Humans are w_class 6, so it makes sense that chest is w_class 5.
@@ -39,7 +38,6 @@
 /obj/item/organ/external/groin
 	name = "lower body"
 	organ_tag = BP_GROIN
-	icon_name = "groin"
 	max_damage = 100
 	min_broken_damage = 35
 	w_class = ITEM_SIZE_LARGE
@@ -61,7 +59,6 @@
 /obj/item/organ/external/arm
 	organ_tag = BP_L_ARM
 	name = "left arm"
-	icon_name = "l_arm"
 	max_damage = 50
 	min_broken_damage = 30
 	w_class = ITEM_SIZE_NORMAL
@@ -77,7 +74,6 @@
 /obj/item/organ/external/arm/right
 	organ_tag = BP_R_ARM
 	name = "right arm"
-	icon_name = "r_arm"
 	body_part = SLOT_ARM_RIGHT
 	joint = "right elbow"
 	amputation_point = "right shoulder"
@@ -85,7 +81,6 @@
 /obj/item/organ/external/leg
 	organ_tag = BP_L_LEG
 	name = "left leg"
-	icon_name = "l_leg"
 	max_damage = 50
 	min_broken_damage = 30
 	w_class = ITEM_SIZE_NORMAL
@@ -102,7 +97,6 @@
 /obj/item/organ/external/leg/right
 	organ_tag = BP_R_LEG
 	name = "right leg"
-	icon_name = "r_leg"
 	body_part = SLOT_LEG_RIGHT
 	icon_position = RIGHT
 	joint = "right knee"
@@ -111,7 +105,6 @@
 /obj/item/organ/external/foot
 	organ_tag = BP_L_FOOT
 	name = "left foot"
-	icon_name = "l_foot"
 	max_damage = 30
 	min_broken_damage = 15
 	w_class = ITEM_SIZE_SMALL
@@ -127,7 +120,6 @@
 /obj/item/organ/external/foot/right
 	organ_tag = BP_R_FOOT
 	name = "right foot"
-	icon_name = "r_foot"
 	body_part = SLOT_FOOT_RIGHT
 	icon_position = RIGHT
 	parent_organ = BP_R_LEG
@@ -137,7 +129,6 @@
 /obj/item/organ/external/hand
 	organ_tag = BP_L_HAND
 	name = "left hand"
-	icon_name = "l_hand"
 	icon_position = LEFT
 	max_damage = 30
 	min_broken_damage = 15
@@ -165,7 +156,6 @@
 /obj/item/organ/external/hand/right
 	organ_tag = BP_R_HAND
 	name = "right hand"
-	icon_name = "r_hand"
 	icon_position = RIGHT
 	body_part = SLOT_HAND_RIGHT
 	parent_organ = BP_R_ARM

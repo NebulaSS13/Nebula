@@ -20,6 +20,14 @@
 	var/modular_prosthetic_tier = MODULAR_BODYPART_INVALID        // Determines how the limb behaves as a prosthetic with regards to manual attachment/detachment.
 	var/limb_tech = "{'engineering':1,'materials':1,'magnets':1}" // What tech levels should limbs of this type use/need?
 
+/decl/prosthetics_manufacturer/validate()
+	. = ..()
+	if(icon && (!applies_to_part || (BP_CHEST in applies_to_part)))
+		if(check_state_in_icon("torso", icon))
+			. += "deprecated \"torso\" state present in [icon]"
+		if(!check_state_in_icon(BP_CHEST, icon))
+			. += "[BP_CHEST] state not present in [icon]"
+
 /decl/prosthetics_manufacturer/proc/check_can_install(var/target_slot, var/target_bodytype, var/target_species)
 	. = istext(target_slot)
 	if(.)

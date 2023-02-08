@@ -1,6 +1,5 @@
 /obj/item/organ/external/head
 	organ_tag = BP_HEAD
-	icon_name = "head"
 	name = "head"
 	slot_flags = SLOT_LOWER_BODY
 	max_damage = 75
@@ -148,17 +147,18 @@
 	for (var/M in markings)
 		var/decl/sprite_accessory/marking/mark_style = GET_DECL(M)
 		if (mark_style.draw_target == MARKING_TARGET_HAIR)
-			var/icon/mark_icon = new/icon("icon" = mark_style.icon, "icon_state" = "[mark_style.icon_state]")
+
+			var/mark_color
 			if (!mark_style.do_colouration && owner.h_style)
 				var/decl/sprite_accessory/hair/hair_style = GET_DECL(owner.h_style)
 				if ((~hair_style.flags & HAIR_BALD) && hair_colour)
-					mark_icon.Blend(hair_colour, ICON_ADD)
+					mark_color = hair_colour
 				else //only baseline human skin tones; others will need species vars for coloration
-					mark_icon.Blend(rgb(200 + skin_tone, 150 + skin_tone, 123 + skin_tone), ICON_ADD)
+					mark_color = rgb(200 + skin_tone, 150 + skin_tone, 123 + skin_tone)
 			else
-				mark_icon.Blend(markings[M], ICON_ADD)
-			res.overlays |= mark_icon
-			icon_cache_key += "[M][markings[M]]"
+				mark_color = markings[M]
+			res.overlays |= mark_style.get_cached_marking_icon(bodytype, icon_state, mark_color)
+			icon_cache_key += "[M][mark_color]"
 
 	return res
 

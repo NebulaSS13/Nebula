@@ -40,7 +40,7 @@
 	)
 
 	flesh_color = "#ae7d32"
-	base_markings = list(/decl/sprite_accessory/marking/tajaran = "#ae7d32")
+	base_markings = list(/decl/sprite_accessory/marking/tajaran/ears = "#ae7d32")
 	base_hair_color = "#46321c"
 	base_color = "#ae7d32"
 	base_eye_color = "#00aa00"

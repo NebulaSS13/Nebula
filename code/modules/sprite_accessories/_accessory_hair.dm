@@ -7,6 +7,7 @@
 */
 
 /decl/sprite_accessory/hair
+	abstract_type = /decl/sprite_accessory/hair
 	icon = 'icons/mob/human_races/species/human/hair.dmi'
 
 /decl/sprite_accessory/hair/bald

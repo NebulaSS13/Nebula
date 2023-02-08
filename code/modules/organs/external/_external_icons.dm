@@ -58,12 +58,12 @@ var/global/list/limb_icon_cache = list()
 	for(var/M in markings)
 		var/decl/sprite_accessory/marking/mark_style = GET_DECL(M)
 		if (mark_style.draw_target == MARKING_TARGET_SKIN)
-			var/icon/mark_s = new/icon("icon" = mark_style.icon, "icon_state" = "[mark_style.icon_state]-[organ_tag]")
-			mark_s.Blend(markings[M], mark_style.blend)
+			var/mark_color = markings[M]
+			var/icon/mark_s = mark_style.get_cached_marking_icon(bodytype, icon_state, mark_color)
 			//#TODO: This probably should be added to a list that's applied on update icon, otherwise its gonna act really wonky!
 			add_overlay(mark_s) //So when it's not on your body, it has icons
 			mob_icon.Blend(mark_s, mark_style.layer_blend) //So when it's on your body, it has icons
-			icon_cache_key += "[M][markings[M]]"
+			icon_cache_key += "[M][mark_color]"
 
 /obj/item/organ/external/proc/update_limb_icon_file()
 	if (BP_IS_PROSTHETIC(src))
@@ -81,7 +81,7 @@ var/global/list/limb_icon_cache = list()
 
 /obj/item/organ/external/on_update_icon(var/regenerate = 0)
 	. = ..()
-	icon_state = "[icon_name]"
+	icon_state = organ_tag
 	icon_cache_key = "[icon_state]_[species ? species.name : "unknown"][render_alpha]"
 	if(model)
 		icon_cache_key += "_model_[model]"
@@ -93,12 +93,12 @@ var/global/list/limb_icon_cache = list()
 	for(var/M in markings)
 		var/decl/sprite_accessory/marking/mark_style = GET_DECL(M)
 		if (mark_style.draw_target == MARKING_TARGET_SKIN)
-			var/icon/mark_s = new/icon("icon" = mark_style.icon, "icon_state" = "[mark_style.icon_state]-[organ_tag]")
-			mark_s.Blend(markings[M], mark_style.blend)
+			var/mark_color = markings[M]
+			var/icon/mark_s = mark_style.get_cached_marking_icon(bodytype, icon_state, mark_color)
 			//#TODO: This probably should be added to a list that's applied on update icon, otherwise its gonna act really wonky!
 			add_overlay(mark_s) //So when it's not on your body, it has icons
 			mob_icon.Blend(mark_s, mark_style.layer_blend) //So when it's on your body, it has icons
-			icon_cache_key += "[M][markings[M]]"
+			icon_cache_key += "[M][mark_color]"
 
 	if(render_alpha < 255)
 		mob_icon += rgb(,,,render_alpha)
@@ -170,7 +170,7 @@ var/global/list/robot_hud_colours = list("#ffffff","#cccccc","#aaaaaa","#888888"
 	return applying
 
 /obj/item/organ/external/proc/bandage_level()
-	if(damage_state_text() == "00") 
+	if(damage_state_text() == "00")
 		return 0
 	if(!is_bandaged())
 		return 0

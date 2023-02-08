@@ -38,7 +38,6 @@
 	name = "central grasper"
 	joint = "central wrist"
 	organ_tag = BP_M_HAND
-	icon_name = BP_M_HAND
 	parent_organ = BP_CHEST
 	amputation_point = "central wrist"
 	icon_position = 0
@@ -51,7 +50,6 @@
 	joint = "left upper wrist"
 	amputation_point = "left upper wrist"
 	organ_tag = BP_L_HAND_UPPER
-	icon_name = BP_L_HAND_UPPER
 	gripper_ui_loc = "CENTER:16,BOTTOM+1:14"
 	gripper_ui_label = "UL"
 
@@ -70,7 +68,6 @@
 	joint = "right upper wrist"
 	amputation_point = "right upper wrist"
 	organ_tag = BP_R_HAND_UPPER
-	icon_name = BP_R_HAND_UPPER
 	gripper_ui_loc = "CENTER-1:16,BOTTOM+1:14"
 	gripper_ui_label = "UR"
 
@@ -137,7 +134,7 @@
 	if(.)
 		if(H.incapacitated())
 			to_chat(H, SPAN_WARNING("You can't produce eggs in your current state."))
-			return		
+			return
 		if(H.nutrition < egg_metabolic_cost)
 			to_chat(H, SPAN_WARNING("You are too ravenously hungry to produce more eggs."))
 			return
