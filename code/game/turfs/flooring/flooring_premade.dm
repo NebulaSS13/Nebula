@@ -342,12 +342,12 @@
 	name = "coastline"
 	icon = 'icons/misc/beach2.dmi'
 	icon_state = "sandwater"
-	turf_flags = TURF_IS_WET
+	turf_flags = TURF_IS_WET | TURF_IS_HOLOMAP_PATH
 
 /turf/simulated/floor/beach/water
 	name = "water"
 	icon_state = "water"
-	turf_flags = TURF_IS_WET
+	turf_flags = TURF_IS_WET | TURF_IS_HOLOMAP_PATH
 
 /turf/simulated/floor/beach/water/is_flooded(lying_mob, absolute)
 	. = absolute ? ..() : lying_mob

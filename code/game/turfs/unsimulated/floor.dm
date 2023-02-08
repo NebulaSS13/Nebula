@@ -2,6 +2,7 @@
 	name = "floor"
 	icon = 'icons/turf/floors.dmi'
 	icon_state = "Floor3"
+	turf_flags = TURF_IS_HOLOMAP_PATH
 
 /turf/unsimulated/floor/infinity //non-doomsday version for transit and wizden
 	name = "\proper infinity"

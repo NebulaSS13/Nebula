@@ -12,6 +12,7 @@ var/global/list/natural_walls = list()
 	opacity =    TRUE
 	density =    TRUE
 	blocks_air = TRUE
+	turf_flags = TURF_FLAG_BACKGROUND | TURF_IS_HOLOMAP_OBSTACLE
 
 	var/strata
 	var/paint_color

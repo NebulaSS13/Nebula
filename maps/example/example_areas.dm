@@ -1,3 +1,6 @@
+/area/example
+	holomap_color = HOLOMAP_AREACOLOR_CREW
+
 /area/example/first
 	name = "\improper Testing Site First Floor"
 	icon_state = "fsmaint"

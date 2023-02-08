@@ -12,6 +12,7 @@
 
 /area/exodus
 	secure = TRUE
+	holomap_color = HOLOMAP_AREACOLOR_CREW
 
 //COMMAND.
 
@@ -42,10 +43,12 @@
 /area/exodus/crew_quarters/heads/chief
 	name = "\improper Engineering - CE's Office"
 	req_access = list(access_ce)
+	holomap_color = HOLOMAP_AREACOLOR_ENGINEERING
 
 /area/exodus/crew_quarters/heads/hos
 	name = "\improper Security - HoS' Office"
 	req_access = list(access_hos)
+	holomap_color = HOLOMAP_AREACOLOR_SECURITY
 
 /area/exodus/crew_quarters/heads/hop
 	name = "\improper Command - HoP's Office"
@@ -54,10 +57,12 @@
 /area/exodus/crew_quarters/heads/hor
 	name = "\improper Research - RD's Office"
 	req_access = list(access_rd)
+	holomap_color = HOLOMAP_AREACOLOR_SCIENCE
 
 /area/exodus/crew_quarters/heads/cmo
 	name = "\improper Command - CMO's Office"
 	req_access = list(access_cmo)
+	holomap_color = HOLOMAP_AREACOLOR_MEDICAL
 
 //TCOMS.
 
@@ -157,6 +162,7 @@
 	icon_state = "engineering"
 	ambience = list('sound/ambience/ambisin1.ogg','sound/ambience/ambisin2.ogg','sound/ambience/ambisin3.ogg','sound/ambience/ambisin4.ogg')
 	req_access = list(access_engine)
+	holomap_color = HOLOMAP_AREACOLOR_ENGINEERING
 
 //Generic
 /area/exodus/engineering/foyer
@@ -183,6 +189,7 @@
 /area/exodus/engineering/engine_airlock
 	name = "\improper Engine Room Airlock"
 	icon_state = "engine"
+	holomap_color = HOLOMAP_AREACOLOR_AIRLOCK
 
 /area/exodus/engineering/engine_room
 	name = "\improper Engine Room"
@@ -224,6 +231,7 @@
 	name = "\improper Engineering Construction Area"
 	icon_state = "yellow"
 	req_access = list(access_construction)
+	holomap_color = HOLOMAP_AREACOLOR_ENGINEERING
 
 //ATMOSPHERICS.
 
@@ -242,6 +250,7 @@
 
 /area/exodus/medical
 	req_access = list(access_medical)
+	holomap_color = HOLOMAP_AREACOLOR_MEDICAL
 
 //Reception and such
 
@@ -389,6 +398,7 @@
 	name = "\improper Research and Development"
 	icon_state = "research"
 	req_access = list(access_research)
+	holomap_color = HOLOMAP_AREACOLOR_SCIENCE
 
 //Labs
 
@@ -456,6 +466,7 @@
 /area/exodus/security
 	area_flags = AREA_FLAG_SECURITY
 	req_access = list(access_security)
+	holomap_color = HOLOMAP_AREACOLOR_SECURITY
 
 //Lobby and such
 
@@ -561,6 +572,7 @@
 	name = "\improper Quartermasters"
 	icon_state = "quart"
 	req_access = list(access_cargo)
+	holomap_color = HOLOMAP_AREACOLOR_CARGO
 
 /area/exodus/quartermaster/office
 	name = "\improper Supply Office"
@@ -607,6 +619,7 @@
 	name = "\improper Engineering Washroom"
 	icon_state = "toilet"
 	sound_env = SMALL_ENCLOSED
+	holomap_color = HOLOMAP_AREACOLOR_ENGINEERING
 
 /area/exodus/crew_quarters/locker
 	name = "\improper Locker Room"
@@ -627,9 +640,9 @@
 	icon_state = "fitness"
 
 /area/exodus/library
- 	name = "\improper Library"
- 	icon_state = "library"
- 	sound_env = LARGE_SOFTFLOOR
+	name = "\improper Library"
+	icon_state = "library"
+	sound_env = LARGE_SOFTFLOOR
 
 
 //Service and such
@@ -779,6 +792,7 @@
 	turf_initializer = /decl/turf_initializer/maintenance
 	forced_ambience = list('sound/ambience/maintambience.ogg')
 	req_access = list(access_maint_tunnels)
+	holomap_color = HOLOMAP_AREACOLOR_MAINTENANCE
 
 /area/exodus/maintenance/atmos_control
 	name = "\improper Atmospherics Maintenance"
