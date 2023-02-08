@@ -87,6 +87,11 @@
 		<option value='?_src_=vars;emp=\ref[src]'>Trigger EM pulse</option>
 		"}
 
+/obj/item/get_view_variables_options()
+	return ..() + {"
+		<option value='?_src_=vars;setmaterial=\ref[src]'>Set material</option>
+		"}
+
 /turf/get_view_variables_options()
 	return ..() + {"
 		<option value='?_src_=vars;explode=\ref[src]'>Trigger explosion</option>
