@@ -258,6 +258,7 @@
 	default_solid_form = /obj/item/stack/material/slab
 	sound_manipulate = 'sound/foley/meat1.ogg'
 	sound_dropped = 'sound/foley/meat2.ogg'
+	hitsound = 'sound/effects/squelch1.ogg'
 
 /decl/material/solid/skin
 	name = "skin"
@@ -279,6 +280,7 @@
 	default_solid_form = /obj/item/stack/material/skin
 	sound_manipulate = 'sound/foley/meat1.ogg'
 	sound_dropped = 'sound/foley/meat2.ogg'
+	hitsound = "punch"
 	var/tans_to = /decl/material/solid/leather
 
 /decl/material/solid/skin/generate_recipes(var/reinforce_material)
