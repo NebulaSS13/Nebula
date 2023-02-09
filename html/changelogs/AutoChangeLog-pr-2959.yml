@@ -1,4 +1,0 @@
-author: PsyCommando
-delete-after: true
-changes:
-  - bugfix: fixed vents being nearly silent.
