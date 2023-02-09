@@ -1,8 +1,3 @@
-/**Define a poster's decl and its mapper type */
-#define DEFINE_POSTER(TYPENAME, ICONSTATE, NAME, DESC)\
-/decl/poster/##TYPENAME{name = NAME; desc = DESC; icon_state = ICONSTATE;};\
-/obj/structure/sign/poster/##TYPENAME{poster_type = /decl/poster/##TYPENAME; name = NAME; icon_state = ICONSTATE;};
-
 // baystation12 posters
 DEFINE_POSTER(bay_1,  "bsposter1",  "Unlucky Space Explorer",                          "This particular one depicts a skeletal form within a space suit.")
 DEFINE_POSTER(bay_2,  "bsposter2",  "Positronic Logic Conflicts",                      "This particular one depicts the cold, unmoving stare of a particular advanced AI.")
@@ -63,5 +58,3 @@ DEFINE_POSTER(bay_56, "bsposter56", "Mars appreciation poster",                 
 DEFINE_POSTER(bay_57, "bsposter57", "space carp warning poster",                       "This poster tells of the dangers of space carp infestations.")
 DEFINE_POSTER(bay_58, "bsposter58", "space carp information poster",                   "This poster showcases an old spacer saying on the dangers of migrant space carp.")
 DEFINE_POSTER(bay_59, "bsposter59", "poster - Miss Science 2299",                      "A large piece of space-resistant printed paper. This pin-up poster depicts a woman wearing a corporate labcoat, a bikini, and a sheepish grin. She's shyly posing atop some highly specialized research equipment.")
-
-#undef DEFINE_POSTER
