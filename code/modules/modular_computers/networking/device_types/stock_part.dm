@@ -15,17 +15,10 @@
 	return term.get_graph()
 
 /datum/extension/network_device/stock_part/get_command_target()
+	return get_top_holder()
+
+/datum/extension/network_device/stock_part/get_top_holder()
 	var/atom/A = holder
 	var/obj/machinery/M = A.loc
 	if(istype(M))
 		return M
-
-/datum/extension/network_device/stock_part/get_holder_methods()
-	var/obj/machinery/M = get_command_target()
-	if(istype(M))
-		return M.public_methods?.Copy()
-
-/datum/extension/network_device/stock_part/get_holder_variables()
-	var/obj/machinery/M = get_command_target()
-	if(istype(M))
-		return M.public_variables?.Copy()
