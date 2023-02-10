@@ -175,6 +175,9 @@ var/global/default_mobloc = null
 	var/ending_damage = damage_check(H, damagetype)
 
 	var/ending_health = H.health
+
+	H.Life()
+
 	qdel(H)
 
 	// Now test this stuff.
