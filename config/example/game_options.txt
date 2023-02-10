@@ -93,4 +93,8 @@ MAX_CLIENT_VIEW_Y 30
 #DEXTERITY_MALUS_BRAINLOSS_THRESHOLD 30
 
 ## Whether or not all human mobs have very basic darksight by default.
-#GRANT_BASIC_DARKSIGHT
+#GRANT_DEFAULT_DARKSIGHT
+
+## The range and effectiveness of default darksight if above is uncommented.
+#DEFAULT_DARKSIGHT_EFFECTIVENESS 0.05
+#DEFAULT_DARKSIGHT_RANGE 2
