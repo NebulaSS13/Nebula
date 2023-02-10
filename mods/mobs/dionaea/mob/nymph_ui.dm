@@ -36,6 +36,15 @@
 	var/obj/screen/diona/hat/hat
 	var/obj/screen/diona/held/held
 
+/datum/hud/diona_nymph/get_ui_style()
+	return 'mods/mobs/dionaea/icons/ui.dmi'
+
+/datum/hud/diona_nymph/get_ui_color()
+	return COLOR_WHITE
+
+/datum/hud/diona_nymph/get_ui_alpha()
+	return 255
+
 /datum/hud/diona_nymph/FinalizeInstantiation()
 
 	src.adding = list()
