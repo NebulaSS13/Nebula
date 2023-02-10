@@ -1,4 +1,0 @@
-author: Chinsky
-delete-after: true
-changes:
-  - bugfix: Remote terminal commands now properly check access of the target machine
