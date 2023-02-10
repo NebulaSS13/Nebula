@@ -477,22 +477,22 @@ var/global/const/DEFAULT_SPECIES_HEALTH = 200
 
 
 	if(base_low_light_vision > 1)
-		. += "base low light vision is greater 1 (over 100%)"
+		. += "base low light vision is greater than 1 (over 100%)"
 	else if(base_low_light_vision < 0)
 		. += "base low light vision is less than 0 (below 0%)"
 
 	if(low_light_vision_threshold > 1)
-		. += "low light vision threshold is greater 1 (over 100%)"
+		. += "low light vision threshold is greater than 1 (over 100%)"
 	else if(low_light_vision_threshold < 0)
 		. += "low light vision threshold is less than 0 (below 0%)"
 
 	if(low_light_vision_effectiveness > 1)
-		. += "low light vision effectiveness is greater 1 (over 100%)"
+		. += "low light vision effectiveness is greater than 1 (over 100%)"
 	else if(low_light_vision_effectiveness < 0)
 		. += "low light vision effectiveness is less than 0 (below 0%)"
 
 	if(low_light_vision_adjustment_speed > 1)
-		. += "low light vision adjustment speed is greater 1 (over 100%)"
+		. += "low light vision adjustment speed is greater than 1 (over 100%)"
 	else if(low_light_vision_adjustment_speed < 0)
 		. += "low light vision adjustment speed is less than 0 (below 0%)"
 
