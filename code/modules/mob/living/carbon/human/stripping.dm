@@ -147,33 +147,3 @@
 
 	admin_attack_log(user, src, "Toggled their suit sensors.", "Toggled their suit sensors.", "toggled the suit sensors of")
 	suit.set_sensors(user)
-
-// Set internals on or off.
-/mob/living/carbon/human/proc/toggle_internals(var/mob/living/user)
-	if(internal)
-		visible_message(SPAN_NOTICE("\The [user] disables \the [src]'s internals!"))
-		internal.add_fingerprint(user)
-		set_internals(null)
-		return
-
-	// Check for airtight mask/helmet.
-	var/found_mask = FALSE
-	for(var/slot in global.airtight_slots)
-		var/obj/item/gear = get_equipped_item(slot)
-		if(gear && (gear.item_flags & ITEM_FLAG_AIRTIGHT))
-			found_mask = TRUE
-			break
-	if(!found_mask)
-		to_chat(user, SPAN_WARNING("\The [src] does not have a suitable mask or helmet."))
-		return
-
-	// Find an internal source.
-	for(var/slot in list(slot_back_str, slot_s_store_str, slot_belt_str))
-		var/obj/item/tank/tank = get_equipped_item(slot)
-		if(istype(tank))
-			set_internals(tank)
-			visible_message(SPAN_NOTICE("\The [src] is now running on internals!"))
-			internal.add_fingerprint(user)
-			return
-	
-	to_chat(user, SPAN_WARNING("You could not find a suitable tank!"))
