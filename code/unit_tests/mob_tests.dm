@@ -178,6 +178,9 @@ var/global/default_mobloc = null
 
 	H.Life()
 
+	if(LAZYLEN(H.bad_external_organs))
+		testing(json_encode(H.bad_external_organs))
+
 	qdel(H)
 
 	// Now test this stuff.
