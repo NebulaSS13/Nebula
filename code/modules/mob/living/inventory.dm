@@ -17,7 +17,7 @@
 	var/list/inventory_slots
 
 /mob/living/get_inventory_slots()
-	return inventory_slots
+	return global.all_inventory_slots // inventory_slots
 
 /mob/living/get_inventory_slot_datum(var/slot)
 	return LAZYACCESS(inventory_slots, slot) || LAZYACCESS(held_item_slots, slot)
