@@ -172,6 +172,7 @@
 	lore_text = "A strong, flexible alloy of iron and carbon. Probably the single most fundamentally useful and ubiquitous substance in human space."
 	weight = MAT_VALUE_NORMAL
 	wall_support_value = MAT_VALUE_VERY_HEAVY // Ideal construction material.
+	hardness = MAT_VALUE_HARD
 	integrity = 150
 	brute_armor = 5
 	icon_base = 'icons/turf/walls/solid.dmi'
