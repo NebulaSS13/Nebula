@@ -214,12 +214,18 @@
 	return I.mob_can_unequip(src, slot)
 
 /mob/proc/get_equipped_slot_for_item(obj/item/I)
+	for(var/slot_str in global.all_inventory_slots)
+		if(get_equipped_item(slot_str) == I)
+			return slot_str
+
+/* Uncomment when inventory slot datums are implemented.
 	var/list/slots = get_inventory_slots()
 	if(!length(slots))
 		return
 	for(var/slot in slots)
 		if(slots[slot] == I)
 			return slot
+*/
 
 /mob/proc/get_held_slot_for_item(obj/item/I)
 	var/list/slots = get_held_item_slots()
