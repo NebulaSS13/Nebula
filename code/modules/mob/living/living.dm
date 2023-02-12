@@ -63,7 +63,7 @@ default behaviour is:
 	// End boilerplate.
 
 	spawn(0)
-		if ((!( yes ) || now_pushing) || !loc)
+		if (!yes || now_pushing || QDELETED(src) || QDELETED(AM) || !loc || !AM.loc)
 			return
 
 		now_pushing = 1
@@ -113,6 +113,8 @@ default behaviour is:
 
 		now_pushing = 0
 		spawn(0)
+			if (QDELETED(src) || QDELETED(AM) || !loc || !AM.loc)
+				return
 			..()
 			var/saved_dir = AM.dir
 			if (!istype(AM, /atom/movable) || AM.anchored)
