@@ -202,8 +202,8 @@
 
 /mob/proc/isEquipped(obj/item/I)
 	if(!I)
-		return 0
-	return get_equipped_slot_for_item(I) != 0
+		return FALSE
+	return !!get_equipped_slot_for_item(I)
 
 /mob/proc/canUnEquip(obj/item/I)
 	if(!I) //If there's nothing to drop, the drop is automatically successful.
