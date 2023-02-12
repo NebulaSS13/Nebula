@@ -45,7 +45,7 @@ var/global/list/ventcrawl_machinery = list(
 		return TRUE
 	if(carried_item in get_external_organs())
 		return TRUE
-	var/slot = get_inventory_slot(carried_item)
+	var/slot = get_equipped_slot_for_item(carried_item)
 	var/static/allowed_inventory_slots = list(slot_w_uniform_str, slot_gloves_str, slot_glasses_str, slot_wear_mask_str, slot_l_ear_str, slot_r_ear_str, slot_belt_str, slot_l_store_str, slot_r_store_str)
 	if(slot in allowed_inventory_slots)
 		return TRUE
