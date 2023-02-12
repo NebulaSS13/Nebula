@@ -1,15 +1,15 @@
 /obj/machinery/computer/shuttle_control/explore/tradeship
 	name = "exploration shuttle console"
-	shuttle_tag = "Exploration Shuttle"
+	shuttle_tag = "Bee Shuttle"
 
 /obj/machinery/computer/shuttle_control/explore/rescue
 	name = "rescue shuttle console"
 	shuttle_tag = "Rescue Shuttle"
 
 /datum/shuttle/autodock/overmap/exploration
-	name = "Exploration Shuttle"
-	shuttle_area = /area/ship/trade/shuttle/outgoing
-	dock_target = "tradeship_shuttle"
+	name = "Bee Shuttle"
+	shuttle_area = list(/area/ship/trade/shuttle/outgoing/general, /area/ship/trade/shuttle/outgoing/engineering)
+	dock_target = "bee_star"
 	current_location = "nav_tradeship_port_dock_shuttle"
 
 /datum/shuttle/autodock/overmap/rescue

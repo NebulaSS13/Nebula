@@ -265,9 +265,13 @@
 /area/ship/trade/shuttle
 	area_flags = AREA_FLAG_RAD_SHIELDED
 
-/area/ship/trade/shuttle/outgoing
-	name = "\improper Exploration Shuttle"
-	icon_state = "tcomsatcham"
+/area/ship/trade/shuttle/outgoing/general
+	name = "\improper Bee"
+	icon_state = "away"
+
+/area/ship/trade/shuttle/outgoing/engineering
+	name = "\improper Bee Skiff Engineering Compartment"
+	icon_state = "yellow"
 
 /area/ship/trade/shuttle/rescue
 	name = "\improper Rescue Shuttle"

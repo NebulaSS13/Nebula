@@ -17,3 +17,15 @@
 /obj/structure/closet/walllocker/Initialize()
 	. = ..()
 	tool_interaction_flags &= ~TOOL_INTERACTION_ANCHOR
+
+/obj/structure/closet/walllocker/suit
+	name = "wall suit storage"
+	desc = "A nook in the wall storing a couple of space suits."
+	closet_appearance = /decl/closet_appearance/wall/suit
+
+/obj/structure/closet/walllocker/suit/WillContain()
+	return list(
+		/obj/item/clothing/head/helmet/space = 2,
+		/obj/item/clothing/suit/space = 2,
+		/obj/item/tank/oxygen = 2
+	)
