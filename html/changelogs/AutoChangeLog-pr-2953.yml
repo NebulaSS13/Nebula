@@ -1,0 +1,5 @@
+author: Chinsky
+delete-after: true
+changes:
+  - bugfix: Steel katanas were woefully underpowered, they are now actually sharp
+  - tweak: Steel is harder now
