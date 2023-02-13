@@ -91,7 +91,8 @@
 
 /mob/living/swap_hand()
 	. = ..()
-	select_held_item_slot(next_in_list(get_active_held_item_slot(), held_item_slots))
+	if(length(held_item_slots))
+		select_held_item_slot(next_in_list(get_active_held_item_slot(), held_item_slots))
 
 /mob/living/get_empty_hand_slot()
 	for(var/hand_slot in held_item_slots)
