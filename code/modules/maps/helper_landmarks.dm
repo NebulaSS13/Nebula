@@ -32,11 +32,15 @@ INITIALIZE_IMMEDIATE(/obj/abstract/landmark/map_load_mark/non_template)
 	return INITIALIZE_HINT_LATELOAD
 
 /obj/abstract/landmark/carnage_mark/LateInitialize()
-	var/area/A = get_area(src)
-	for(var/atom/movable/AM in A)
-		if(AM && !AM.anchored && AM.simulated && prob(movement_prob))
-			spawn()
-				AM.throw_at_random(FALSE, movement_range, 1)
+	do_throw()
+
+/obj/abstract/landmark/carnage_mark/proc/do_throw()
+	set waitfor = FALSE
+	sleep(0)
+	var/area/our_area = get_area(src)
+	for(var/atom/movable/throw_candidate in our_area)
+		if(!QDELETED(throw_candidate) && !throw_candidate.anchored && throw_candidate.simulated && prob(movement_prob))
+			throw_candidate.throw_at_random(FALSE, movement_range, 1)
 	qdel(src)
 
 //Clears walls
