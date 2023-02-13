@@ -33,8 +33,12 @@
 		return
 
 	// Find an internal source.
-	for(var/slot in global.internal_source_slots)
-		var/obj/item/tank/tank = get_equipped_item(slot)
+	var/list/possible_sources = get_possible_internals_sources()
+	for(var/slot in possible_sources)
+		var/list/source_info = possible_sources[slot]
+		if(length(source_info) < 2)
+			continue
+		var/obj/item/tank/tank = source_info[1]
 		if(istype(tank))
 			set_internals(tank)
 			visible_message(SPAN_NOTICE("\The [src] is now running on internals!"))
@@ -45,9 +49,16 @@
 
 /mob/living/proc/breathing_hole_covered()
 	var/obj/item/mask = get_equipped_item(slot_wear_mask_str)
-	. = (mask && (mask?.item_flags & ITEM_FLAG_AIRTIGHT))
+	. = (mask?.item_flags & ITEM_FLAG_AIRTIGHT)
 
 /mob/living/proc/get_possible_internals_sources()
+	. = get_equipped_internals_sources()
+	for(var/slot in held_item_slots)
+		var/obj/item/tank/checking = get_equipped_item(slot)
+		if(istype(checking))
+			.[parse_zone(slot)] = list(checking, "in")
+
+/mob/living/proc/get_equipped_internals_sources()
 	. = list("back" = list(get_equipped_item(slot_back_str), "on"))
 
 /mob/living/proc/set_internals_to_best_available_tank(var/breathes_gas = /decl/material/gas/oxygen, var/list/poison_gas = list(/decl/material/gas/chlorine))
@@ -56,11 +67,6 @@
 		return
 
 	var/list/possible_sources = get_possible_internals_sources()
-	for(var/slot in held_item_slots)
-		var/obj/item/tank/checking = get_equipped_item(slot)
-		if(istype(checking))
-			possible_sources[slot] = list(checking, "in")
-
 	var/selected_slot
 	var/selected_from
 	var/obj/item/tank/selected_obj

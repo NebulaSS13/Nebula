@@ -88,10 +88,3 @@ var/global/list/hidden_inventory_slots = list(
 	slot_wear_suit_str,
 	slot_wear_mask_str
 )
-
-/// Slots checked when searching for internals sources.
-var/global/list/internal_source_slots = list(
-	slot_back_str,
-	slot_s_store_str,
-	slot_belt_str
-)
