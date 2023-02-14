@@ -11,11 +11,11 @@
 
 	L.fire_stacks = -20 //Douse ourselves with water to avoid fire more easily
 
-	if(!iscarbon(washing))
+	if(!isliving(washing))
 		washing.clean_blood()
 		return
 
-	var/mob/living/carbon/M = washing
+	var/mob/living/M = washing
 	for(var/obj/item/thing in M.get_held_items())
 		thing.clean_blood()
 

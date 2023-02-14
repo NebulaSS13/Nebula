@@ -488,8 +488,8 @@
 		if(isitem(AM) && can_pick_up(AM))
 			return AM
 
-		if(iscarbon(AM))
-			var/mob/living/carbon/C = AM
+		if(isliving(AM))
+			var/mob/living/C = AM
 			for(var/hand_slot in C.held_item_slots)
 				var/datum/inventory_slot/inv_slot = C.held_item_slots[hand_slot]
 				if(inv_slot?.holding && can_pick_up(inv_slot.holding))
@@ -517,8 +517,8 @@
 		if(isitem(AM) && can_pick_up(AM))
 			return AM
 
-		if(iscarbon(AM))
-			var/mob/living/carbon/C = AM
+		if(isliving(AM))
+			var/mob/living/C = AM
 			for(var/hand_slot in C.held_item_slots)
 				var/datum/inventory_slot/inv_slot = C.held_item_slots[hand_slot]
 				if(inv_slot?.holding && can_pick_up(inv_slot.holding))
@@ -577,7 +577,7 @@
 		return 1
 
 	var/obj/item/stolen_item = null
-	for(var/mob/living/carbon/C in view(1,src))
+	for(var/mob/living/C in view(1,src))
 		for(var/obj/item/thing in C.get_held_items())
 			if(can_pick_up(thing))
 				stolen_item = thing

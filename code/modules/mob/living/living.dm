@@ -360,7 +360,7 @@ default behaviour is:
 /mob/living/proc/restore_all_organs()
 	return
 
-/mob/living/proc/revive()
+/mob/living/revive()
 	rejuvenate()
 	if(buckled)
 		buckled.unbuckle_mob()
@@ -1142,7 +1142,7 @@ default behaviour is:
 	return shock_damage
 
 /mob/proc/swap_hand()
-	SHOULD_CALL_PARENT(TRUE)
+	return
 
 /mob/living/remove_screen_obj_references()
 	. = ..()
@@ -1220,3 +1220,19 @@ default behaviour is:
 	if(buckled && !istype(buckled, /obj/structure/bed/chair)) // buckling does not restrict hands
 		return FALSE
 	return TRUE
+
+/mob/living/get_sound_environment()
+	if (hallucination_power > 50 && GET_CHEMICAL_EFFECT(src, CE_MIND) < 1)
+		return PSYCHOTIC
+	if (HAS_STATUS(src, STAT_DRUGGY))
+		return DRUGGED
+	if (HAS_STATUS(src, STAT_DROWSY))
+		return DIZZY
+	if (HAS_STATUS(src, STAT_CONFUSE))
+		return DIZZY
+	if (stat == UNCONSCIOUS)
+		return UNDERWATER
+	var/turf/T = get_turf(src)
+	if(T?.is_flooded(lying))
+		return UNDERWATER
+	return ..()

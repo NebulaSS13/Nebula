@@ -213,8 +213,8 @@
 	if(ismob(user))
 		var/mob/M = user
 		if(M.client)
-			if(iscarbon(M))
-				var/mob/living/carbon/C = M
+			if(isliving(M))
+				var/mob/living/C = M
 				if(!C.get_equipped_item(slot_handcuffed_str))
 					SwitchState()
 			else
@@ -300,6 +300,6 @@
 
 /obj/item/storage/briefcase/inflatable/WillContain()
 	return list(
-			/obj/item/inflatable/door = 2, 
+			/obj/item/inflatable/door = 2,
 			/obj/item/inflatable      = 3
 		)

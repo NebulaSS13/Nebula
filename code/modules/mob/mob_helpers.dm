@@ -59,8 +59,8 @@
 	return ishuman(A)
 
 /proc/iscuffed(A)
-	if(istype(A, /mob/living/carbon))
-		var/mob/living/carbon/C = A
+	if(isliving(A))
+		var/mob/living/C = A
 		if(C.get_equipped_item(slot_handcuffed_str))
 			return 1
 	return 0
@@ -401,8 +401,8 @@ var/global/list/intents = list(I_HELP,I_DISARM,I_GRAB,I_HURT)
 				hud_used.action_intent.icon_state = I_HELP
 
 /proc/is_blind(A)
-	if(istype(A, /mob/living/carbon))
-		var/mob/living/carbon/C = A
+	if(isliving(A))
+		var/mob/living/C = A
 		if(C.sdisabilities & BLINDED|| C.blinded)
 			return 1
 	return 0

@@ -59,7 +59,7 @@
 	QDEL_NULL(proxy_listener)
 	. = ..()
 
-/obj/structure/leech_spawner/proc/burst(var/mob/living/carbon/victim)
+/obj/structure/leech_spawner/proc/burst(var/mob/living/victim)
 	if(!proxy_listener || !istype(victim) || !(victim in view(5, src)))
 		return
 	for(var/i in 1 to 12)

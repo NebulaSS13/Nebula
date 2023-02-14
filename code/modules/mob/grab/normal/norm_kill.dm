@@ -26,6 +26,6 @@
 	affecting.adjustOxyLoss(1)
 	affecting.apply_effect(STUTTER, 5) //It will hamper your voice, being choked and all.
 	SET_STATUS_MAX(affecting, STAT_WEAK, 5)	//Should keep you down unless you get help.
-	if(iscarbon(affecting))
-		var/mob/living/carbon/C = affecting
+	if(isliving(affecting))
+		var/mob/living/C = affecting
 		C.losebreath = max(C.losebreath + 2, 3)

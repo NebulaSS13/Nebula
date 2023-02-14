@@ -135,7 +135,7 @@
 			toggle_lavage()
 
 
-	if(iscarbon(occupant) && stasis > 1)
+	if(occupant && stasis > 1)
 		occupant.set_stasis(stasis)
 
 /obj/machinery/sleeper/on_update_icon()
@@ -376,7 +376,7 @@
 			O.dropInto(loc)
 	toggle_filter()
 
-/obj/machinery/sleeper/proc/set_occupant(var/mob/living/carbon/occupant)
+/obj/machinery/sleeper/proc/set_occupant(var/mob/living/occupant)
 	src.occupant = occupant
 	if(!occupant)
 		SetName(initial(name))

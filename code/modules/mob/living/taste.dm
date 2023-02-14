@@ -14,7 +14,7 @@
 catalogue the 'taste strength' of each one
 calculate text size per text.
 */
-/datum/reagents/proc/generate_taste_message(mob/living/carbon/taster = null, datum/reagents/source_holder = null)
+/datum/reagents/proc/generate_taste_message(mob/living/taster = null, datum/reagents/source_holder = null)
 	var/minimum_percent = 15
 	if(ishuman(taster))
 		var/mob/living/human/H = taster

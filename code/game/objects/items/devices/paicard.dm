@@ -247,7 +247,7 @@ var/global/list/pai_cards = list()
 		if(pai.master_dna)
 			return
 		var/mob/M = usr
-		if(!istype(M, /mob/living/carbon))
+		if(!M.dna)
 			to_chat(usr, "<span class='notice'>You don't have any DNA, or your DNA is incompatible with this device.</span>")
 		else
 			var/datum/dna/dna = usr.dna

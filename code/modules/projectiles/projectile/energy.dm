@@ -25,7 +25,7 @@
 	if(!istype(T)) return
 
 	//blind and confuse adjacent people
-	for (var/mob/living/carbon/M in viewers(T, flash_range))
+	for (var/mob/living/M in viewers(T, flash_range))
 		if(M.eyecheck() < FLASH_PROTECTION_MAJOR)
 			M.flash_eyes()
 			ADJ_STATUS(M, STAT_BLURRY, brightness / 2)
@@ -157,7 +157,7 @@
 	var/med_dizziness_amt = 120
 	var/max_dizziness_amt = 300
 
-/obj/item/projectile/energy/plasmastun/proc/bang(var/mob/living/carbon/M)
+/obj/item/projectile/energy/plasmastun/proc/bang(var/mob/living/M)
 
 	if(!istype(M))
 		return
@@ -209,7 +209,7 @@
 	med_dizziness_amt = 60
 	max_dizziness_amt = 120
 
-/obj/item/projectile/energy/plasmastun/sonic/bang(var/mob/living/carbon/M)
+/obj/item/projectile/energy/plasmastun/sonic/bang(var/mob/living/M)
 	..()
 	if(istype(M, /atom/movable) && M.simulated && !M.anchored)
 		M.throw_at(get_edge_target_turf(M, get_dir(src, M)), rand(1,5), 6)

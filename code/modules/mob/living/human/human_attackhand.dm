@@ -292,7 +292,7 @@
 	return
 
 //Breaks all grips and pulls that the mob currently has.
-/mob/living/human/proc/break_all_grabs(mob/living/carbon/user)
+/mob/living/human/proc/break_all_grabs(mob/living/user)
 	. = FALSE
 	for(var/obj/item/grab/grab in get_active_grabs())
 		if(grab.affecting)

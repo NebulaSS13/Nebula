@@ -51,7 +51,7 @@
 	if(owner)
 		var/datum/extension/access_provider/owner_access = get_extension(owner, /datum/extension/access_provider)
 		owner_access?.unregister_id(src)
-	var/mob/living/carbon/H = owner
+	var/mob/living/H = owner
 	. = ..()
 	if(H && !(locate(type) in H.get_internal_organs()))
 		H.remove_language(/decl/language/mantid/worldnet)

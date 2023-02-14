@@ -45,13 +45,13 @@
 	for(var/z in affecting_z)
 		SSradiation.z_radiate(locate(1, 1, z), radiation_level, 1)
 
-	for(var/mob/living/carbon/C in global.living_mob_list_)
+	for(var/mob/living/C in global.living_mob_list_)
 		var/area/A = get_area(C)
 		if(!A)
 			continue
 		if(A.area_flags & AREA_FLAG_RAD_SHIELDED)
 			continue
-		if(istype(C,/mob/living/human))
+		if(ishuman(C))
 			var/mob/living/human/H = C
 			if(prob(5 * (1 - H.get_blocked_ratio(null, IRRADIATE, damage_flags = DAM_DISPERSED, armor_pen = radiation_level))))
 				if (prob(75))

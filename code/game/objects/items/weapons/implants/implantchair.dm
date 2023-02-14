@@ -14,7 +14,7 @@
 	var/max_implants = 5
 	var/injection_cooldown = 600
 	var/replenish_cooldown = 6000
-	var/mob/living/carbon/occupant = null
+	var/mob/living/occupant = null
 	var/injecting = 0
 
 /obj/machinery/implantchair/Initialize()
@@ -97,11 +97,11 @@
 	return
 
 
-/obj/machinery/implantchair/proc/put_mob(mob/living/carbon/M)
-	if(!iscarbon(M))
+/obj/machinery/implantchair/proc/put_mob(mob/living/M)
+	if(!ishuman(M))
 		to_chat(usr, "<span class='warning'>\The [src] cannot hold this!</span>")
 		return
-	if(src.occupant)
+	if(occupant)
 		to_chat(usr, "<span class='warning'>\The [src] is already occupied!</span>")
 		return
 	if(M.client)
@@ -115,7 +115,7 @@
 
 
 /obj/machinery/implantchair/proc/implant(var/mob/M)
-	if (!istype(M, /mob/living/carbon))
+	if (!isliving(M))
 		return
 	if(!implant_list.len)	return
 	for(var/obj/item/implant/loyalty/imp in implant_list)

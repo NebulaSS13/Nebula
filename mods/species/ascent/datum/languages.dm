@@ -88,7 +88,7 @@
 	flags = LANG_FLAG_RESTRICTED | LANG_FLAG_NO_STUTTER | LANG_FLAG_NONVERBAL | LANG_FLAG_HIVEMIND
 	shorthand = "KB"
 
-/decl/language/mantid/worldnet/check_special_condition(var/mob/living/carbon/other)
+/decl/language/mantid/worldnet/check_special_condition(var/mob/living/other)
 	if(istype(other, /mob/living/silicon/robot/flying/ascent))
 		return TRUE
 	if(istype(other) && (locate(/obj/item/organ/internal/controller) in other.get_internal_organs()))

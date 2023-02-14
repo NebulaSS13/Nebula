@@ -34,7 +34,7 @@ Proc returns a boolean if successful.
 	if( !( damage_type in list( BRUTE, BURN, TOX, OXY, CLONE, PAIN ) ) ) //End the proc with a false return if we're not doing a valid damage type.
 		return FALSE
 
-	if(!iscarbon(target)) //No. You cannot backstab the borg.
+	if(!ishuman(target)) //No. You cannot backstab the borg.
 		return FALSE
 
 	if(damage < 0) //No negative values allowed.

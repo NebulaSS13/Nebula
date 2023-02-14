@@ -337,14 +337,12 @@
 	if(usr.incapacitated())
 		return 1
 
-	if(iscarbon(usr))
-		var/mob/living/carbon/C = usr
-		if(name in C.held_item_slots)
-			if(name == C.get_active_held_item_slot())
-				C.attack_empty_hand()
-			else
-				C.select_held_item_slot(name)
-			return TRUE
+	if(name in usr.get_held_item_slots())
+		if(name == usr.get_active_held_item_slot())
+			usr.attack_empty_hand()
+		else
+			usr.select_held_item_slot(name)
+		return TRUE
 
 	switch(name)
 		if("swap")

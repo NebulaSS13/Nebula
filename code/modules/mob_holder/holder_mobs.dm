@@ -11,7 +11,7 @@
 	return species.get_holder_color(src)
 
 //Mob procs for scooping up
-/mob/living/proc/get_scooped(var/mob/living/carbon/target, var/mob/living/initiator)
+/mob/living/proc/get_scooped(var/mob/living/target, var/mob/living/initiator)
 
 	if(!holder_type || buckled || LAZYLEN(pinned))
 		return FALSE

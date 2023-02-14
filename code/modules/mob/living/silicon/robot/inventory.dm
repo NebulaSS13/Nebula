@@ -258,3 +258,6 @@
 	if((I in module) || (I in src)) //Includes all modules and installed components.
 		return I.canremove          //Will be 0 for modules, but items held by grippers will also be checked here.
 	return 1
+
+/mob/living/silicon/robot/swap_hand()
+	cycle_modules()

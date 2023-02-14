@@ -365,9 +365,8 @@ var/global/list/click_catchers
 
 /obj/screen/click_catcher/Click(location, control, params)
 	var/list/modifiers = params2list(params)
-	if(modifiers["middle"] && istype(usr, /mob/living/carbon))
-		var/mob/living/carbon/C = usr
-		C.swap_hand()
+	if(modifiers["middle"])
+		usr.swap_hand()
 	else
 		var/turf/origin = get_turf(usr)
 		if(isturf(origin))

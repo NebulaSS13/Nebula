@@ -175,7 +175,7 @@
 	wrapped = null
 	//on_update_icon()
 
-/obj/item/gripper/attack(mob/living/carbon/M, mob/living/carbon/user)
+/obj/item/gripper/attack(mob/living/M, mob/living/user)
 	// Don't fall through and smack people with gripper, instead just no-op
 	return 0
 
@@ -290,7 +290,7 @@
 	plastic = null
 	return ..()
 
-/obj/item/matter_decompiler/attack(mob/living/carbon/M, mob/living/carbon/user)
+/obj/item/matter_decompiler/attack(mob/living/M, mob/living/user)
 	return
 
 /obj/item/matter_decompiler/afterattack(atom/target, mob/living/user, proximity, params)

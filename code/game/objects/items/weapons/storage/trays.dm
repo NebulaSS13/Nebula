@@ -18,7 +18,7 @@
 	use_sound = null
 	material = /decl/material/solid/cardboard
 	material_alteration = MAT_FLAG_ALTERATION_COLOR | MAT_FLAG_ALTERATION_NAME
-	
+
 	var/cooldown = 0	//Cooldown for banging the tray with a rolling pin. based on world.time. very silly
 	var/no_drop = FALSE
 
@@ -43,7 +43,7 @@
 	scatter_contents()
 	. = ..()
 
-/obj/item/storage/tray/attack(mob/living/carbon/M, mob/living/carbon/user)
+/obj/item/storage/tray/attack(mob/living/M, mob/living/user)
 	if((MUTATION_CLUMSY in user.mutations) && prob(50)) // There is a better way to do this but I'll be damned if I'm the one to fix it.
 		to_chat(user, SPAN_DANGER("You accidentally slam yourself with the [src]!"))
 		SET_STATUS_MAX(user, STAT_WEAK, 1)
@@ -158,7 +158,7 @@ TRAY TYPES GO HERE
 /obj/item/storage/tray/metal
 	obj_flags = OBJ_FLAG_CONDUCTIBLE
 
-/obj/item/storage/tray/metal/attack(mob/living/carbon/M, mob/living/carbon/user) // So metal trays make the fun noise
+/obj/item/storage/tray/metal/attack(mob/living/M, mob/living/user) // So metal trays make the fun noise
 	hitsound = pick('sound/items/trayhit1.ogg','sound/items/trayhit2.ogg')
 	. = ..()
 

@@ -34,7 +34,7 @@
 			var/obj/item/projectile/bullet/pellet/PP = chambered_round.BB
 			damage = PP.damage*PP.pellets
 		if(damage > 5)
-			var/mob/living/carbon/C = loc
+			var/mob/living/human/C = loc
 			if(istype(C))
 				C.visible_message("<span class='danger'>[src] explodes in [C]'s hands!</span>", "<span class='danger'>[src] explodes in your face!</span>")
 				C.drop_from_inventory(src)

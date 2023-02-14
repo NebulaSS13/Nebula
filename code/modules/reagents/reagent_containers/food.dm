@@ -70,9 +70,9 @@
 	attack(user, user)
 
 /obj/item/chems/food/self_feed_message(mob/user)
-	if(!iscarbon(user))
+	if(!isliving(user))
 		return ..()
-	var/mob/living/carbon/C = user
+	var/mob/living/C = user
 	var/fullness = C.get_fullness()
 	if (fullness <= 50)
 		to_chat(C, SPAN_WARNING("You hungrily chew out a piece of [src] and gobble it!"))
@@ -98,9 +98,9 @@
 		to_chat(user, "<span class='danger'>None of [src] left!</span>")
 		qdel(src)
 		return 0
-	if(istype(M, /mob/living/carbon))
+	if(isliving(M))
 		//TODO: replace with standard_feed_mob() call.
-		var/mob/living/carbon/C = M
+		var/mob/living/C = M
 		var/fullness = C.get_fullness()
 		if (fullness > 550)
 			var/message = C == user ? "You cannot force any more of [src] to go down your throat." : "[user] cannot force anymore of [src] down [M]'s throat."

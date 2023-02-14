@@ -47,8 +47,7 @@
 /obj/machinery/button/interface_interact(user)
 	if(!CanInteract(user, DefaultTopicState()))
 		return FALSE
-	if(istype(user, /mob/living/carbon))
-		playsound(src, "button", 60)
+	playsound(src, "button", 60)
 	activate(user)
 	return TRUE
 

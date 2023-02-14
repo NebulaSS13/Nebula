@@ -39,7 +39,7 @@
 		res.color = handle_color
 	return res
 
-/obj/item/screwdriver/attack(mob/living/carbon/M, mob/living/carbon/user)
+/obj/item/screwdriver/attack(mob/living/M, mob/living/user)
 	if(!istype(M) || user.a_intent == I_HELP)
 		return ..()
 	if(user.zone_sel.selecting != BP_EYES && user.zone_sel.selecting != BP_HEAD)

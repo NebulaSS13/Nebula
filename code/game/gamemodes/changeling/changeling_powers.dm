@@ -103,7 +103,7 @@ var/global/list/possible_changeling_IDs = list("Alpha","Beta","Gamma","Delta","E
 /mob/proc/changeling_power(var/required_chems=0, var/required_dna=0, var/max_genetic_damage=100, var/max_stat=0)
 
 	if(!src.mind)		return
-	if(!iscarbon(src))	return
+	if(!ishuman(src))	return
 
 	var/datum/changeling/changeling = src.mind.changeling
 	if(!changeling)
@@ -429,25 +429,23 @@ var/global/list/possible_changeling_IDs = list("Alpha","Beta","Gamma","Delta","E
 	set name = "Regenerative Stasis (20)"
 
 	var/datum/changeling/changeling = changeling_power(20,1,100,DEAD)
-	if(!changeling)	return
-
-	var/mob/living/carbon/C = src
-	if(!C.stat && alert("Are we sure we wish to fake our death?",,"Yes","No") == "No")//Confirmation for living changelings if they want to fake their death
+	if(!changeling)
 		return
-	to_chat(C, SPAN_NOTICE("We will attempt to regenerate our form."))
-	C.status_flags |= FAKEDEATH		//play dead
-	C.UpdateLyingBuckledAndVerbStatus()
-	C.remove_changeling_powers()
 
-	C.emote("gasp")
+	if(!stat && alert("Are we sure we wish to fake our death?",,"Yes","No") == "No")//Confirmation for living changelings if they want to fake their death
+		return
+	to_chat(src, SPAN_NOTICE("We will attempt to regenerate our form."))
+	status_flags |= FAKEDEATH		//play dead
+	UpdateLyingBuckledAndVerbStatus()
+	remove_changeling_powers()
+	emote("gasp")
 
 	spawn(rand(800,2000))
 		if(changeling_power(20,1,100,DEAD))
 			// charge the changeling chemical cost for stasis
 			changeling.chem_charges -= 20
-
-			to_chat(C, SPAN_NOTICE("<font size='5'>We are ready to rise.  Use the <b>Revive</b> verb when you are ready.</font>"))
-			C.verbs += /mob/proc/changeling_revive
+			to_chat(src, SPAN_NOTICE("<font size='5'>We are ready to rise.  Use the <b>Revive</b> verb when you are ready.</font>"))
+			verbs += /mob/proc/changeling_revive
 
 	SSstatistics.add_field_details("changeling_powers","FD")
 	return 1
@@ -456,18 +454,17 @@ var/global/list/possible_changeling_IDs = list("Alpha","Beta","Gamma","Delta","E
 	set category = "Changeling"
 	set name = "Revive"
 
-	var/mob/living/carbon/C = src
 	// restore us to health
-	C.revive()
+	revive()
 	// remove our fake death flag
-	C.status_flags &= ~(FAKEDEATH)
+	status_flags &= ~(FAKEDEATH)
 	// let us move again
-	C.UpdateLyingBuckledAndVerbStatus()
+	UpdateLyingBuckledAndVerbStatus()
 	// re-add out changeling powers
-	C.make_changeling()
+	make_changeling()
 	// sending display messages
-	to_chat(C, SPAN_NOTICE("We have regenerated."))
-	C.verbs -= /mob/proc/changeling_revive
+	to_chat(src, SPAN_NOTICE("We have regenerated."))
+	verbs -= /mob/proc/changeling_revive
 
 
 //Boosts the range of your next sting attack by 1

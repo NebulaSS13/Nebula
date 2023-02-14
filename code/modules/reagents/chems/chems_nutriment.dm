@@ -52,7 +52,7 @@
 	M.heal_organ_damage(0.5 * removed, 0) //what
 	M.add_chemical_effect(CE_BLOODRESTORE, 4 * removed)
 
-/decl/material/liquid/nutriment/proc/adjust_nutrition(var/mob/living/carbon/M, var/removed)
+/decl/material/liquid/nutriment/proc/adjust_nutrition(var/mob/living/M, var/removed)
 	var/nut_removed = removed
 	var/hyd_removed = removed
 	if(nutriment_factor)
@@ -90,7 +90,7 @@
 	color = "#440000"
 	uid = "chem_nutriment_protein"
 
-/decl/material/liquid/nutriment/protein/adjust_nutrition(mob/living/carbon/M, removed)
+/decl/material/liquid/nutriment/protein/adjust_nutrition(mob/living/M, removed)
 	var/malus_level = M.GetTraitLevel(/decl/trait/malus/animal_protein)
 	var/malus_factor = malus_level ? malus_level * 0.25 : 0
 	M.adjustToxLoss(removed * malus_factor)

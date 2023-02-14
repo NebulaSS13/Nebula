@@ -229,7 +229,7 @@ var/global/list/global/tank_gauge_cache = list()
 		proxyassembly.assembly.attack_self(user)
 
 /obj/item/tank/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1)
-	var/mob/living/carbon/location = get_recursive_loc_of_type(/mob/living/carbon)
+	var/mob/living/human/location = get_recursive_loc_of_type(/mob/living/human)
 
 	var/using_internal
 	if(istype(location))
@@ -301,8 +301,8 @@ var/global/list/global/tank_gauge_cache = list()
 
 /obj/item/tank/proc/toggle_valve(var/mob/user)
 
-	var/mob/living/carbon/location
-	if(istype(loc,/mob/living/carbon))
+	var/mob/living/location
+	if(isliving(loc))
 		location = loc
 	else if(istype(loc,/obj/item/rig))
 		var/obj/item/rig/rig = loc

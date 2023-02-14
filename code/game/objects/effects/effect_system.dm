@@ -188,12 +188,12 @@ steam.start() -- spawns the effect
 	if(!QDELETED(src))
 		qdel(src)
 
-/obj/effect/effect/smoke/Crossed(mob/living/carbon/M)
+/obj/effect/effect/smoke/Crossed(mob/living/M)
 	..()
 	if(istype(M))
 		affect(M)
 
-/obj/effect/effect/smoke/proc/affect(var/mob/living/carbon/M)
+/obj/effect/effect/smoke/proc/affect(var/mob/living/M)
 	if (!istype(M))
 		return 0
 	if(M.internal != null)
@@ -227,10 +227,10 @@ steam.start() -- spawns the effect
 
 /obj/effect/effect/smoke/bad/Move()
 	..()
-	for(var/mob/living/carbon/M in get_turf(src))
+	for(var/mob/living/M in get_turf(src))
 		affect(M)
 
-/obj/effect/effect/smoke/bad/affect(var/mob/living/carbon/M)
+/obj/effect/effect/smoke/bad/affect(var/mob/living/M)
 	if (!..())
 		return 0
 	M.drop_held_items()
@@ -255,10 +255,10 @@ steam.start() -- spawns the effect
 
 /obj/effect/effect/smoke/sleepy/Move()
 	..()
-	for(var/mob/living/carbon/M in get_turf(src))
+	for(var/mob/living/M in get_turf(src))
 		affect(M)
 
-/obj/effect/effect/smoke/sleepy/affect(mob/living/carbon/M)
+/obj/effect/effect/smoke/sleepy/affect(mob/living/M)
 	if (!..())
 		return 0
 

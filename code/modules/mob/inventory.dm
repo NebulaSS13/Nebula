@@ -331,6 +331,9 @@
 /mob/proc/get_held_item_slots()
 	return
 
+/mob/proc/select_held_item_slot(var/slot)
+	return
+
 /mob/proc/get_inventory_slots()
 	return
 

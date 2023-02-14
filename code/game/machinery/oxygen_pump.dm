@@ -10,7 +10,7 @@
 	anchored = TRUE
 
 	var/obj/item/tank/tank
-	var/mob/living/carbon/breather
+	var/mob/living/breather
 	var/obj/item/clothing/mask/breath/contained
 
 	var/spawn_type = /obj/item/tank/emergency/oxygen/engi
@@ -67,7 +67,7 @@
 	ui_interact(user)
 	return TRUE
 
-/obj/machinery/oxygen_pump/proc/attach_mask(var/mob/living/carbon/C)
+/obj/machinery/oxygen_pump/proc/attach_mask(var/mob/living/C)
 	if(C && istype(C))
 		contained.dropInto(C.loc)
 		C.equip_to_slot(contained, slot_wear_mask_str)
@@ -75,7 +75,7 @@
 			tank.forceMove(C)
 		breather = C
 
-/obj/machinery/oxygen_pump/proc/set_internals(var/mob/living/carbon/C)
+/obj/machinery/oxygen_pump/proc/set_internals(var/mob/living/C)
 	if(C && istype(C))
 		if(!C.internal && tank)
 			breather.set_internals(tank)

@@ -35,7 +35,7 @@
 			return
 		user.visible_message(SPAN_NOTICE("\The [user] unfolds \the [src]."), SPAN_NOTICE("You unfold \the [src]."))
 		if(my_paper)
-			user.put_in_active_hand(my_paper)		
+			user.put_in_active_hand(my_paper)
 	else if(my_paper)
 		my_paper.dropInto(loc)
 	my_paper = null
@@ -44,14 +44,14 @@
 
 /obj/item/paper_plane/throw_impact(atom/hit_atom, datum/thrownthing/TT)
 	. = ..()
-	if(istype(hit_atom, /mob/living/carbon))
-		var/mob/living/carbon/C = hit_atom
+	if(istype(hit_atom, /mob/living))
+		var/mob/living/C = hit_atom
 		//Only hurt if received right into the eyes
 		if(TT.target_zone == BP_EYES && !(BP_EYES in C.get_covered_body_parts()))
 			C.apply_damage(1, BRUTE, BP_EYES, 0, src, 0)
 			C.apply_effects(2, 0, 0, 0, 1, 0, 15)
 	take_damage(TT.speed * w_class, BRUTE)
-	
+
 /obj/item/paper_plane/attack_self(mob/user)
 	if(user.a_intent == I_HURT)
 		return crumple(user)

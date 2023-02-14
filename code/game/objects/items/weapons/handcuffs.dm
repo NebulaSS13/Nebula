@@ -38,7 +38,7 @@
 			return
 		to_chat(user, SPAN_WARNING("They look [display < 33 ? "badly ": ""]damaged."))
 
-/obj/item/handcuffs/attack(var/mob/living/carbon/C, var/mob/living/user)
+/obj/item/handcuffs/attack(var/mob/living/C, var/mob/living/user)
 
 	if(!user.check_dexterity(DEXTERITY_COMPLEX_TOOLS))
 		return
@@ -65,7 +65,7 @@
 	else
 		..()
 
-/obj/item/handcuffs/proc/place_handcuffs(var/mob/living/carbon/target, var/mob/user)
+/obj/item/handcuffs/proc/place_handcuffs(var/mob/living/target, var/mob/user)
 	playsound(src.loc, cuff_sound, 30, 1, -2)
 
 	var/mob/living/human/H = target

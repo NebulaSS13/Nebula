@@ -1050,13 +1050,13 @@ var/global/const/DEFAULT_SPECIES_HEALTH = 200
 
 	return preview_icon
 
-/decl/species/proc/handle_movement_flags_setup(var/mob/living/human/H)
+/decl/species/proc/handle_movement_flags_setup(var/mob/living/H)
 	H.mob_bump_flag = bump_flag
 	H.mob_swap_flags = swap_flags
 	H.mob_push_flags = push_flags
 	H.pass_flags = pass_flags
 
-/decl/species/proc/check_vital_organ_missing(var/mob/living/carbon/H)
+/decl/species/proc/check_vital_organ_missing(var/mob/living/H)
 	if(length(vital_organs))
 		for(var/organ_tag in vital_organs)
 			var/obj/item/organ/O = H.get_organ(organ_tag, /obj/item/organ)

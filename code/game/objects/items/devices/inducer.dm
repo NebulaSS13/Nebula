@@ -40,7 +40,7 @@
 	if(cell)
 		cell.emp_act(severity)
 
-/obj/item/inducer/afterattack(obj/O, mob/living/carbon/user, var/proximity)
+/obj/item/inducer/afterattack(obj/O, mob/living/user, var/proximity)
 	if (!proximity || user.a_intent == I_HURT || CannotUse(user) || !recharge(O, user))
 		return ..()
 

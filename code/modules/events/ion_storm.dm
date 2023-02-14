@@ -17,7 +17,7 @@
 	endWhen = rand(500, 1500)
 
 /datum/event/ionstorm/announce()
-	for(var/mob/living/carbon/S in SSmobs.mob_list)
+	for(var/mob/living/S in SSmobs.mob_list)
 		if (!S.isSynthetic())
 			continue
 		if(!(S.z in affecting_z))

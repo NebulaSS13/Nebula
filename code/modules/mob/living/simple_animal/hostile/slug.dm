@@ -30,7 +30,7 @@ Small, little HP, poisonous.
 		if(M.faction == faction)
 			. -= M
 
-/mob/living/simple_animal/hostile/slug/get_scooped(var/mob/living/carbon/target, var/mob/living/initiator)
+/mob/living/simple_animal/hostile/slug/get_scooped(var/mob/living/target, var/mob/living/initiator)
 	if(target == initiator || (istype(initiator) && initiator.faction == faction))
 		return ..()
 	to_chat(initiator, SPAN_WARNING("\The [src] wriggles out of your hands before you can pick it up!"))

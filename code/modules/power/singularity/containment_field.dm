@@ -36,7 +36,7 @@
 		if(istype(AM,/mob/living/silicon) && prob(40))
 			shock(AM)
 			return TRUE
-		if(istype(AM,/mob/living/carbon) && prob(50))
+		if(istype(AM,/mob/living) && prob(50))
 			shock(AM)
 			return TRUE
 		return FALSE

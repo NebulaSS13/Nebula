@@ -1227,3 +1227,7 @@
 		lighting_master = new
 	if(client)
 		client.screen |= lighting_master
+
+/mob/proc/revive()
+	return
+

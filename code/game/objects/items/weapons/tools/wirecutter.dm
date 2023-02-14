@@ -38,7 +38,7 @@
 		ret.color = handle_color
 	return ret
 
-/obj/item/wirecutters/attack(mob/living/carbon/C, mob/user)
+/obj/item/wirecutters/attack(mob/living/C, mob/user)
 	var/obj/item/handcuffs/cable/cuffs = C.get_equipped_item(slot_handcuffed_str)
 	if(istype(C) && user.a_intent == I_HELP && (istype(cuffs)))
 		usr.visible_message("\The [usr] cuts \the [C]'s restraints with \the [src]!",\

@@ -76,7 +76,7 @@
 /obj/item/assembly/mousetrap/Crossed(atom/movable/AM)
 	if(armed)
 		if(ishuman(AM))
-			var/mob/living/carbon/H = AM
+			var/mob/living/human/H = AM
 			if(!MOVING_DELIBERATELY(H))
 				triggered(H)
 				H.visible_message("<span class='warning'>[H] accidentally steps on [src].</span>", \

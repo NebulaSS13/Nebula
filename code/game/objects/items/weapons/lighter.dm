@@ -40,7 +40,7 @@
 	set_light(2, l_color = COLOR_PALE_ORANGE)
 	START_PROCESSING(SSobj, src)
 
-/obj/item/flame/lighter/proc/light_effects(mob/living/carbon/user)
+/obj/item/flame/lighter/proc/light_effects(mob/living/user)
 	if(prob(95))
 		user.visible_message("<span class='notice'>After a few attempts, [user] manages to light the [src].</span>")
 	else
@@ -80,7 +80,7 @@
 	else
 		add_overlay(overlay_image(icon, "[bis.base_icon_state]_striker", flags=RESET_COLOR))
 
-/obj/item/flame/lighter/attack(var/mob/living/M, var/mob/living/carbon/user)
+/obj/item/flame/lighter/attack(var/mob/living/M, var/mob/living/user)
 	if(!istype(M, /mob))
 		return
 

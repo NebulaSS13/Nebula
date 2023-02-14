@@ -110,8 +110,8 @@
 
 /obj/item/holder/attack(mob/target, mob/user)
 	// Devour on click on self with holder
-	if(target == user && istype(user,/mob/living/carbon))
-		var/mob/living/carbon/M = user
+	if(target == user && istype(user,/mob/living))
+		var/mob/living/M = user
 		for(var/mob/victim in src.contents)
 			M.devour(victim)
 		update_state()

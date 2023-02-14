@@ -30,7 +30,7 @@
 		TOOL_HEMOSTAT =  TOOL_QUALITY_MEDIOCRE
 	))
 
-/obj/item/kitchen/utensil/attack(mob/living/carbon/M, mob/living/carbon/user)
+/obj/item/kitchen/utensil/attack(mob/living/M, mob/living/user)
 	if(!istype(M))
 		return ..()
 

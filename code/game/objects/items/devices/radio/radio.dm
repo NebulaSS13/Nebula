@@ -278,7 +278,7 @@
 
 	if (!broadcasting)
 		// Sedation chemical effect should prevent radio use.
-		var/mob/living/carbon/C = M
+		var/mob/living/C = M
 		if(istype(C) && (C.has_chemical_effect(CE_SEDATE, 1) || C.incapacitated(INCAPACITATION_DISRUPTED)))
 			to_chat(M, SPAN_WARNING("You're unable to reach \the [src]."))
 			return 0
@@ -344,10 +344,6 @@
 	if (ishuman(M))
 		var/mob/living/human/H = M
 		jobname = H.get_assignment()
-
-	// --- Carbon Nonhuman ---
-	else if (iscarbon(M)) // Nonhuman carbon mob
-		jobname = "No id"
 
 	// --- AI ---
 	else if (isAI(M) || istype(M, /mob/announcer))
@@ -833,7 +829,7 @@
 
 /obj/item/radio/CouldUseTopic(var/mob/user)
 	..()
-	if(istype(user, /mob/living/carbon))
+	if(istype(user, /mob/living))
 		playsound(src, "button", 10)
 
 /obj/item/radio/intercept

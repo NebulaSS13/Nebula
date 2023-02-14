@@ -163,8 +163,7 @@
 		to_chat(user, SPAN_NOTICE("\The [src] is empty."))
 		return 1
 
-	// only carbons can eat
-	if(istype(target, /mob/living/carbon))
+	if(isliving(target))
 		if(target == user)
 			if(istype(user, /mob/living/human))
 				var/mob/living/human/H = user
@@ -231,7 +230,7 @@
 	to_chat(user, SPAN_NOTICE("You transfer [trans] unit\s of the solution to \the [target].  \The [src] now contains [src.reagents.total_volume] units."))
 	return 1
 
-/obj/item/chems/do_surgery(mob/living/carbon/M, mob/living/user)
+/obj/item/chems/do_surgery(mob/living/M, mob/living/user)
 	if(user.zone_sel.selecting != BP_MOUTH) //in case it is ever used as a surgery tool
 		return ..()
 

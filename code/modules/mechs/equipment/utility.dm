@@ -517,7 +517,7 @@
 			return
 
 	var/audible = "loudly grinding machinery"
-	if (iscarbon(target)) //splorch
+	if (isliving(target)) //splorch
 		audible = "a terrible rending of metal and flesh"
 
 	owner.visible_message(

@@ -37,7 +37,7 @@
 			handle_color = pick(valid_handle_colors)
 		add_overlay(overlay_image(icon, "[get_world_inventory_state()]_handle", handle_color, flags=RESET_COLOR|RESET_ALPHA))
 
-/obj/item/knife/attack(mob/living/carbon/M, mob/living/carbon/user, target_zone)
+/obj/item/knife/attack(mob/living/M, mob/living/user, target_zone)
 	if(!istype(M))
 		return ..()
 

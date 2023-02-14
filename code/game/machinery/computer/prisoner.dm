@@ -36,7 +36,7 @@
 			if((Tr) && !LEVELS_ARE_Z_CONNECTED(Tr.z, src.z))	continue // Out of range
 			if(!T.implanted) continue
 			var/loc_display = "Space"
-			var/mob/living/carbon/M = T.imp_in
+			var/mob/living/M = T.imp_in
 			if(!isspaceturf(M.loc))
 				var/turf/mob_loc = get_turf(M)
 				loc_display = mob_loc.loc
@@ -78,5 +78,5 @@
 		if(!warning) return
 		var/obj/item/implant/I = locate(href_list["warn"])
 		if((I)&&(I.imp_in))
-			var/mob/living/carbon/R = I.imp_in
+			var/mob/living/R = I.imp_in
 			to_chat(R, "<span class='notice'>You hear a voice in your head saying: '[warning]'</span>")

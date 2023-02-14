@@ -30,10 +30,10 @@
 
 /obj/item/organ/internal/posibrain/Initialize()
 	. = ..()
-	if(!brainmob && iscarbon(loc))
+	if(!brainmob && ishuman(loc))
 		init(loc) //Not sure why we're creating a braimob on load, and also why not installing it in the owner...
 
-/obj/item/organ/internal/posibrain/proc/init(var/mob/living/carbon/H)
+/obj/item/organ/internal/posibrain/proc/init(var/mob/living/human/H)
 	if(brainmob)
 		return
 	brainmob = new(src)
@@ -123,7 +123,7 @@
 	else
 		icon_state = "posibrain"
 
-/obj/item/organ/internal/posibrain/proc/transfer_identity(var/mob/living/carbon/H)
+/obj/item/organ/internal/posibrain/proc/transfer_identity(var/mob/living/H)
 	if(H && H.mind)
 		brainmob.set_stat(CONSCIOUS)
 		H.mind.transfer_to(brainmob)

@@ -150,7 +150,7 @@
 
 /obj/item/integrated_circuit/reagent/injector/proc/draw_after(var/weakref/target, var/amount)
 	busy = FALSE
-	var/mob/living/carbon/C = target_nearby(target)
+	var/mob/living/C = target_nearby(target)
 	if(!C)
 		activate_pin(3)
 		return
@@ -214,8 +214,8 @@
 
 		var/tramount = abs(transfer_amount)
 
-		if(istype(AM, /mob/living/carbon))
-			var/mob/living/carbon/C = AM
+		if(isliving(AM))
+			var/mob/living/C = AM
 			var/injection_status = C.can_inject(null, BP_CHEST)
 			var/injection_delay = 3 SECONDS
 			if(injection_status == INJECTION_PORT)

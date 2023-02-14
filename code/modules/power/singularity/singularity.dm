@@ -424,7 +424,7 @@ var/global/list/singularities = list()
 		M.apply_damage(toxdamage, TOX, null, damage_flags = DAM_DISPERSED)
 
 /obj/singularity/proc/mezzer()
-	for(var/mob/living/carbon/M in oviewers(8, src))
+	for(var/mob/living/M in oviewers(8, src))
 		if(isbrain(M)) //Ignore brains
 			continue
 		if(M.status_flags & GODMODE)

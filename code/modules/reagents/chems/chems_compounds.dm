@@ -382,7 +382,7 @@
 	color = "#13bc5e"
 	uid = "chem_crystalizing_agent"
 
-/decl/material/liquid/crystal_agent/proc/do_material_check(var/mob/living/carbon/M)
+/decl/material/liquid/crystal_agent/proc/do_material_check(var/mob/living/M)
 	. = /decl/material/solid/gemstone/crystal
 
 /decl/material/liquid/crystal_agent/affect_blood(var/mob/living/M, var/removed, var/datum/reagents/holder)

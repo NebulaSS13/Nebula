@@ -555,3 +555,7 @@
 /atom/proc/get_alt_interactions(var/mob/user)
 	SHOULD_CALL_PARENT(TRUE)
 	return list()
+
+/atom/proc/get_sound_environment()
+	var/area/A = get_area(src)
+	return A?.sound_env

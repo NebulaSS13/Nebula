@@ -45,8 +45,8 @@
 			return TRUE
 
 		user.visible_message(
-			SPAN_WARNING("<span class='warning'>[user] tries to pat out [src]'s flames!"),
-			SPAN_WARNING("<span class='warning'>You try to pat out [src]'s flames! Hot!")
+			SPAN_WARNING("[user] tries to pat out [src]'s flames!"),
+			SPAN_WARNING("You try to pat out [src]'s flames! Hot!")
 		)
 		if(do_mob(user, src, 15))
 			fire_stacks -= 0.5

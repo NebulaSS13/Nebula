@@ -56,7 +56,7 @@
 //////////////////////////////////////////////////////////////////////////////////////////////////////
 
 /datum/hallucination
-	var/mob/living/carbon/holder
+	var/mob/living/holder
 	var/allow_duplicates = 1
 	var/duration = 0
 	var/min_power = 0 //at what levels of hallucination power mobs should get it
@@ -68,7 +68,7 @@
 /datum/hallucination/proc/end()
 	return
 
-/datum/hallucination/proc/can_affect(var/mob/living/carbon/C)
+/datum/hallucination/proc/can_affect(var/mob/living/C)
 	if(!C.client)
 		return 0
 	if(min_power > C.hallucination_power)
@@ -134,7 +134,7 @@
 	holder.playsound_local(origin,gunshot,50)
 
 //Hearing someone talking to/about you.
-/datum/hallucination/talking/can_affect(var/mob/living/carbon/C)
+/datum/hallucination/talking/can_affect(var/mob/living/C)
 	if(!..())
 		return 0
 	for(var/mob/living/M in oview(C))
@@ -186,7 +186,7 @@
 	min_power = 40
 
 /datum/hallucination/spiderbabies/start()
-	var/mob/living/carbon/H = holder
+	var/mob/living/H = holder
 	var/list/limbs = H.get_external_organs()
 	if(!LAZYLEN(limbs))
 		return
@@ -279,7 +279,7 @@
 		to_chat(usr, SPAN_WARNING("Chemicals in your blood prevent you from using your power!"))
 
 	var/list/creatures = list()
-	for(var/mob/living/carbon/C in SSmobs.mob_list)
+	for(var/mob/living/C in SSmobs.mob_list)
 		creatures += C
 	creatures -= usr
 	var/mob/target = input("Who do you want to project your mind to?") as null|anything in creatures
@@ -295,7 +295,7 @@
 /datum/hallucination/fakeattack
 	min_power = 30
 
-/datum/hallucination/fakeattack/can_affect(var/mob/living/carbon/C)
+/datum/hallucination/fakeattack/can_affect(var/mob/living/C)
 	if(!..())
 		return 0
 	for(var/mob/living/M in oview(C,1))

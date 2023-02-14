@@ -39,11 +39,7 @@
 			attack_self()
 			return
 		if(SOUTHWEST)
-			if(iscarbon(usr))
-				var/mob/living/carbon/C = usr
-				C.toggle_throw_mode()
-			else
-				to_chat(usr, "<span class='warning'>This mob type cannot throw items.</span>")
+			usr.toggle_throw_mode()
 			return
 		if(NORTHWEST)
 			mob.hotkey_drop()
@@ -58,13 +54,7 @@
 
 /client/verb/swap_hand()
 	set hidden = 1
-	if(istype(mob, /mob/living/carbon))
-		var/mob/M = mob
-		M.swap_hand()
-	if(istype(mob,/mob/living/silicon/robot))
-		var/mob/living/silicon/robot/R = mob
-		R.cycle_modules()
-	return
+	mob.swap_hand()
 
 /client/verb/attack_self()
 	set hidden = 1
@@ -74,12 +64,8 @@
 
 /client/verb/toggle_throw_mode()
 	set hidden = 1
-	if(!istype(mob, /mob/living/carbon))
-		return
-	if (!mob.stat && isturf(mob.loc) && !mob.restrained())
-		mob:toggle_throw_mode()
-	else
-		return
+	if(!mob.stat && isturf(mob.loc) && !mob.restrained())
+		mob.toggle_throw_mode()
 
 /client/verb/drop_item()
 	set hidden = 1

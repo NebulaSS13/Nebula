@@ -3,24 +3,24 @@
 	origin_type = EFFECT_ORGANIC
 
 /datum/artifact_effect/heal/DoEffectTouch(var/mob/toucher)
-	if(iscarbon(toucher))
+	if(isliving(toucher))
 		heal(toucher, 25, 1)
 		return 1
 
 /datum/artifact_effect/heal/DoEffectAura()
 	if(holder)
 		var/turf/T = get_turf(holder)
-		for (var/mob/living/carbon/C in range(src.effect_range,T))
+		for (var/mob/living/C in range(src.effect_range,T))
 			heal(C, 1, msg_prob = 5)
 
 /datum/artifact_effect/heal/DoEffectPulse()
 	if(holder)
 		var/turf/T = get_turf(holder)
-		for (var/mob/living/carbon/C in range(effect_range,T))
+		for (var/mob/living/C in range(effect_range,T))
 			heal(C, 5)
 
 //todo: check over this properly
-/datum/artifact_effect/heal/proc/heal(mob/living/carbon/C, amount, strong, msg_prob = 100)
+/datum/artifact_effect/heal/proc/heal(mob/living/C, amount, strong, msg_prob = 100)
 	var/weakness = GetAnomalySusceptibility(C)
 	if(prob(weakness * 100))
 		if(prob(msg_prob))

@@ -104,7 +104,7 @@
 	if(isboozed(M))
 		M.add_chemical_effect(CE_BREATHLOSS, breathloss_severity*4) //Don't drink and OD on opiates folks
 
-/decl/material/liquid/painkillers/proc/isboozed(var/mob/living/carbon/M)
+/decl/material/liquid/painkillers/proc/isboozed(var/mob/living/M)
 	. = 0
 	if(!narcotic)
 		return

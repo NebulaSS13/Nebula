@@ -399,8 +399,8 @@
 /obj/machinery/computer/arcade/orion_trail/proc/emag_effect(var/event)
 	switch(event)
 		if(ORION_TRAIL_RAIDERS)
-			if(istype(usr,/mob/living/carbon))
-				var/mob/living/carbon/M = usr
+			if(isliving(usr))
+				var/mob/living/M = usr
 				if(prob(50))
 					to_chat(usr, "<span class='warning'>You hear battle shouts. The tramping of boots on cold metal. Screams of agony. The rush of venting air. Are you going insane?</span>")
 					M.set_hallucination(50, 50)
@@ -410,7 +410,7 @@
 			else
 				to_chat(usr, "<span class='warning'>The sounds of battle fill your ears...</span>")
 		if(ORION_TRAIL_ILLNESS)
-			if(istype(usr,/mob/living/human))
+			if(ishuman(usr))
 				var/mob/living/human/M = usr
 				to_chat(M, "<span class='warning'>An overpowering wave of nausea consumes over you. You hunch over, your stomach's contents preparing for a spectacular exit.</span>")
 				M.vomit()
@@ -421,8 +421,8 @@
 			var/mob/living/M = usr
 			M.adjustBruteLoss(10)
 		if(ORION_TRAIL_FLUX)
-			if(istype(usr,/mob/living/carbon) && prob(75))
-				var/mob/living/carbon/M = usr
+			if(isliving(usr) && prob(75))
+				var/mob/living/M = usr
 				SET_STATUS_MAX(M, STAT_WEAK, 3)
 				src.visible_message("A sudden gust of powerful wind slams \the [M] into the floor!", "You hear a large fwooshing sound, followed by a bang.")
 				M.take_organ_damage(10)

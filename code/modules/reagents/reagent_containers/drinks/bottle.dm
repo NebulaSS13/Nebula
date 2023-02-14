@@ -239,7 +239,7 @@
 	. = ..()
 	set_extension(src, /datum/extension/tool, list(TOOL_SCALPEL = TOOL_QUALITY_BAD))
 
-/obj/item/broken_bottle/attack(mob/living/carbon/M, mob/living/carbon/user)
+/obj/item/broken_bottle/attack(mob/living/M, mob/living/user)
 	playsound(loc, 'sound/weapons/bladeslice.ogg', 50, 1, -1)
 	return ..()
 

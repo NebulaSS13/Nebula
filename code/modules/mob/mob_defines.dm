@@ -136,7 +136,7 @@
 	var/faction = MOB_FACTION_NEUTRAL //Used for checking whether hostile simple animals will attack you, possibly more stuff later
 	var/blinded = null
 
-	//The last mob/living/carbon to push/drag/grab this mob (mostly used by slimes friend recognition)
+	//The last mob/living to push/drag/grab this mob (mostly used by slimes friend recognition)
 	var/weakref/last_handled_by_mob
 
 	mouse_drag_pointer = MOUSE_ACTIVE_POINTER

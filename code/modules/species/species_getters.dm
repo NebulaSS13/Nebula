@@ -47,7 +47,7 @@
 /decl/species/proc/get_vision_flags(var/mob/living/human/H)
 	return vision_flags
 
-/decl/species/proc/get_sex(var/mob/living/carbon/H)
+/decl/species/proc/get_sex(var/mob/living/H)
 	return H?.get_sex() || NEUTER
 
 /decl/species/proc/get_surgery_overlay_icon(var/mob/living/human/H)

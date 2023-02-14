@@ -149,7 +149,7 @@
 		reagents.trans_to_obj(C, (reagents.total_volume/contents.len))
 	..()
 
-/obj/item/storage/fancy/cigarettes/attack(mob/living/carbon/M, mob/living/carbon/user)
+/obj/item/storage/fancy/cigarettes/attack(mob/living/M, mob/living/user)
 	if(!istype(M, /mob))
 		return
 
@@ -321,7 +321,7 @@
 
 /obj/item/storage/fancy/cigar/remove_from_storage(obj/item/W, atom/new_location)
 	var/obj/item/clothing/mask/smokable/cigarette/cigar/C = W
-	if(!istype(C)) 
+	if(!istype(C))
 		return
 	reagents.trans_to_obj(C, (reagents.total_volume/contents.len))
 	return ..()

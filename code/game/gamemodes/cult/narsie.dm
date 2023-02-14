@@ -74,7 +74,7 @@ var/global/list/narsie_list = list()
 		consume(A)
 
 /obj/singularity/narsie/mezzer()
-	for(var/mob/living/carbon/M in oviewers(8, src))
+	for(var/mob/living/M in oviewers(8, src))
 		if(M.stat == CONSCIOUS)
 			if(M.status_flags & GODMODE)
 				continue

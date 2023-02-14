@@ -167,9 +167,6 @@
 					jobname = "Unknown"
 			else
 				jobname = H.get_assignment()
-
-		else if (iscarbon(speaker)) // Nonhuman carbon mob
-			jobname = "No id"
 		else if (isAI(speaker))
 			jobname = "AI"
 		else if (isrobot(speaker))

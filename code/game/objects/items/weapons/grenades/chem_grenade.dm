@@ -40,9 +40,7 @@
 		to_chat(user, "<span class='warning'>You prime \the [name]!</span>")
 		activate(user)
 		add_fingerprint(user)
-		if(iscarbon(user))
-			var/mob/living/carbon/C = user
-			C.throw_mode_on()
+		user.throw_mode_on()
 
 /obj/item/grenade/chem_grenade/on_update_icon()
 	. = ..()

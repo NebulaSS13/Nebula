@@ -7,7 +7,7 @@
 	return
 /mob/proc/apply_effect(var/effect = 0,var/effecttype = STUN, var/blocked = 0)
 	return
-// See /mob/living/carbon for this one.
+// See /mob/living/human for this one.
 /mob/proc/get_organ(var/organ_tag, var/expected_type)
 	return
 /mob/proc/get_organs()
@@ -26,7 +26,7 @@
 		if((grabber.mob_size == mob_size) && grabber.can_pull_mobs == MOB_PULL_SMALLER)
 			to_chat(grabber, SPAN_WARNING("\The [src] is too large for you to move!"))
 			return FALSE
-		if(iscarbon(grabber))
+		if(isliving(grabber))
 			last_handled_by_mob = weakref(grabber)
 
 /mob/proc/handle_grab_damage()

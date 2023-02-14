@@ -121,9 +121,9 @@
 		if(reagents.total_volume)
 			to_chat(user, SPAN_NOTICE("There is already a blood sample in this syringe."))
 			return
-		if(istype(target, /mob/living/carbon))
+		if(isliving(target))
 			var/amount = REAGENTS_FREE_SPACE(reagents)
-			var/mob/living/carbon/T = target
+			var/mob/living/T = target
 			if(!T.dna)
 				to_chat(user, SPAN_WARNING("You are unable to locate any blood."))
 				if(istype(target, /mob/living/human))
@@ -209,7 +209,7 @@
 		mode = SYRINGE_DRAW
 		update_icon()
 
-/obj/item/chems/syringe/proc/handleBodyBag(var/obj/structure/closet/body_bag/bag, var/mob/living/carbon/user)
+/obj/item/chems/syringe/proc/handleBodyBag(var/obj/structure/closet/body_bag/bag, var/mob/living/user)
 	if(bag.opened || !bag.contains_body)
 		return
 
@@ -217,7 +217,7 @@
 	if(L)
 		injectMob(L, user, bag)
 
-/obj/item/chems/syringe/proc/injectMob(var/mob/living/carbon/target, var/mob/living/carbon/user, var/atom/trackTarget)
+/obj/item/chems/syringe/proc/injectMob(var/mob/living/target, var/mob/living/user, var/atom/trackTarget)
 	if(!trackTarget)
 		trackTarget = target
 
@@ -258,7 +258,7 @@
 		mode = SYRINGE_DRAW
 		update_icon()
 
-/obj/item/chems/syringe/proc/syringestab(var/mob/living/carbon/target, var/mob/living/carbon/user)
+/obj/item/chems/syringe/proc/syringestab(var/mob/living/target, var/mob/living/user)
 
 	if(istype(target, /mob/living/human))
 
@@ -297,7 +297,7 @@
 	admin_inject_log(user, target, src, contained_reagents, trans, violent=1)
 	break_syringe(target, user)
 
-/obj/item/chems/syringe/proc/break_syringe(mob/living/carbon/target, mob/living/carbon/user)
+/obj/item/chems/syringe/proc/break_syringe(mob/living/target, mob/living/user)
 	desc += " It is broken."
 	mode = SYRINGE_BROKEN
 	if(target)
@@ -318,7 +318,7 @@
 /obj/item/chems/syringe/ld50_syringe/populate_reagents()
 	reagents.add_reagent(/decl/material/liquid/heartstopper, reagents.maximum_volume)
 
-/obj/item/chems/syringe/ld50_syringe/syringestab(var/mob/living/carbon/target, var/mob/living/carbon/user)
+/obj/item/chems/syringe/ld50_syringe/syringestab(var/mob/living/target, var/mob/living/user)
 	to_chat(user, SPAN_NOTICE("This syringe is too big to stab someone with it."))
 	return // No instant injecting
 

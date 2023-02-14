@@ -26,8 +26,6 @@
 
 #define isbrain(A) istype(A, /mob/living/brain)
 
-#define iscarbon(A) istype(A, /mob/living/carbon)
-
 #define iscolorablegloves(A) (istype(A, /obj/item/clothing/gloves/color)||istype(A, /obj/item/clothing/gloves/insulated)||istype(A, /obj/item/clothing/gloves/thick))
 
 #define isclient(A) istype(A, /client)

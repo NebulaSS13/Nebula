@@ -136,7 +136,7 @@ var/global/const/HOLOPAD_MODE = RANGE_BASED
 				to_chat(user, "<span class='notice'>A request for holographic communication was already sent recently.</span>")
 
 
-/obj/machinery/hologram/holopad/proc/make_call(var/obj/machinery/hologram/holopad/targetpad, var/mob/living/carbon/user)
+/obj/machinery/hologram/holopad/proc/make_call(var/obj/machinery/hologram/holopad/targetpad, var/mob/living/user)
 	targetpad.last_request = world.time
 	targetpad.sourcepad = src //This marks the holopad you are making the call from
 	targetpad.caller_id = user //This marks you as the caller
@@ -149,7 +149,7 @@ var/global/const/HOLOPAD_MODE = RANGE_BASED
 	to_chat(user, "<span class='notice'>Trying to establish a connection to the holopad in [target_area.proper_name]... Please await confirmation from recipient.</span>")
 
 
-/obj/machinery/hologram/holopad/proc/take_call(mob/living/carbon/user)
+/obj/machinery/hologram/holopad/proc/take_call(mob/living/user)
 	incoming_connection = 0
 	caller_id.machine = sourcepad
 	caller_id.reset_view(src)
@@ -199,7 +199,7 @@ var/global/const/HOLOPAD_MODE = RANGE_BASED
 		to_chat(user, "<span class='danger'>ERROR:</span> Unable to project hologram.")
 	return
 
-/obj/machinery/hologram/holopad/proc/activate_holocall(mob/living/carbon/caller_id)
+/obj/machinery/hologram/holopad/proc/activate_holocall(mob/living/caller_id)
 	if(caller_id)
 		src.visible_message("A holographic image of [caller_id] flicks to life right before your eyes!")
 		create_holo(0,caller_id)//Create one.
@@ -255,7 +255,7 @@ For the other part of the code, check silicon say.dm. Particularly robot talk.*/
 			var/rendered = "<i><span class='game say'>Holopad received, <span class='message'>[text]</span></span></i>"
 			//The lack of name_used is needed, because message already contains a name.  This is needed for simple mobs to emote properly.
 			master.show_message(rendered, 2)
-		for(var/mob/living/carbon/master in masters)
+		for(var/mob/living/master in masters)
 			//var/name_used = M.GetVoice()
 			var/rendered = "<i><span class='game say'>Holopad received, <span class='message'>[text]</span></span></i>"
 			//The lack of name_used is needed, because message already contains a name.  This is needed for simple mobs to emote properly.
@@ -269,15 +269,15 @@ For the other part of the code, check silicon say.dm. Particularly robot talk.*/
 		master.show_message(rendered, type)
 	if(findtext(msg, "Holopad received,"))
 		return
-	for(var/mob/living/carbon/master in masters)
+	for(var/mob/living/master in masters)
 		var/rendered = "<i><span class='game say'>The holographic image of <span class='message'>[msg]</span></span></i>"
 		master.show_message(rendered, type)
 	if(targetpad)
-		for(var/mob/living/carbon/master in view(targetpad))
+		for(var/mob/living/master in view(targetpad))
 			var/rendered = "<i><span class='game say'>The holographic image of <span class='message'>[msg]</span></span></i>"
 			master.show_message(rendered, type)
 
-/obj/machinery/hologram/holopad/proc/create_holo(mob/living/silicon/ai/A, mob/living/carbon/caller_id, turf/T = loc)
+/obj/machinery/hologram/holopad/proc/create_holo(mob/living/silicon/ai/A, mob/living/caller_id, turf/T = loc)
 	var/obj/effect/overlay/hologram = new(T)//Spawn a blank effect at the location.
 	if(caller_id)
 		hologram.overlays += getHologramIcon(getFlatIcon(caller_id), hologram_color = holopadType) // Add the callers image as an overlay to keep coloration!
@@ -306,7 +306,7 @@ For the other part of the code, check silicon say.dm. Particularly robot talk.*/
 	icon_state = "[base_icon]1"
 	return 1
 
-/obj/machinery/hologram/holopad/proc/clear_holo(mob/living/silicon/ai/user, mob/living/carbon/caller_id)
+/obj/machinery/hologram/holopad/proc/clear_holo(mob/living/silicon/ai/user, mob/living/caller_id)
 	if(user)
 		qdel(masters[user])//Get rid of user's hologram
 		user.holo = null

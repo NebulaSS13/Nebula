@@ -171,10 +171,10 @@ var/global/list/card_decks = list()
 
 	if(usr.stat || !Adjacent(usr)) return
 
-	if(!istype(usr,/mob/living/carbon))
+	if(!isliving(usr))
 		return
 
-	var/mob/living/carbon/user = usr
+	var/mob/living/user = usr
 
 	if(!cards.len)
 		to_chat(usr, "There are no cards in the deck.")

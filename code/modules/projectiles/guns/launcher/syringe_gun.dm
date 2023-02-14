@@ -55,7 +55,7 @@
 				syringe.reagents.trans_to_mob(L, 15, CHEM_INJECT)
 				admin_inject_log(TT.thrower? TT.thrower : null, L, src, reagent_log, 15, violent=1)
 
-		syringe.break_syringe(iscarbon(hit_atom)? hit_atom : null)
+		syringe.break_syringe(ishuman(hit_atom)? hit_atom : null)
 		syringe.update_icon()
 
 	icon_state = initial(icon_state) //reset icon state

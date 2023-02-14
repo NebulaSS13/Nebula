@@ -105,28 +105,7 @@ var/global/const/FALLOFF_SOUNDS = 0.5
 			envdry = abs(turf_source.z - T.z) * ZSOUND_DRYLOSS_PER_Z
 
 	if(!is_global)
-
-		if(istype(src,/mob/living/))
-			var/mob/living/carbon/M = src
-			if (istype(M) && M.hallucination_power > 50 && GET_CHEMICAL_EFFECT(M, CE_MIND) < 1)
-				S.environment = PSYCHOTIC
-			else if (HAS_STATUS(M, STAT_DRUGGY))
-				S.environment = DRUGGED
-			else if(HAS_STATUS(M, STAT_DROWSY))
-				S.environment = DIZZY
-			else if (HAS_STATUS(M, STAT_CONFUSE))
-				S.environment = DIZZY
-			else if (M.stat == UNCONSCIOUS)
-				S.environment = UNDERWATER
-			else if (T?.is_flooded(M.lying))
-				S.environment = UNDERWATER
-			else
-				var/area/A = get_area(src)
-				S.environment = A.sound_env
-
-		else
-			var/area/A = get_area(src)
-			S.environment = A.sound_env
+		S.environment = get_sound_environment()
 
 	var/list/echo_list = new(18)
 	echo_list[ECHO_DIRECT] = envdry

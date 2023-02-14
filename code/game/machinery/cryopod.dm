@@ -154,7 +154,7 @@
 	var/allow_occupant_types = list(/mob/living/human)
 	var/disallow_occupant_types = list()
 
-	var/mob/occupant = null       // Person waiting to be despawned.
+	var/mob/living/occupant       // Person waiting to be despawned.
 	var/time_till_despawn = 9000  // Down to 15 minutes //30 minutes-ish is too long
 	var/time_entered = 0          // Used to keep track of the safe period.
 
@@ -291,9 +291,8 @@
 //Lifted from Unity stasis.dm and refactored.
 /obj/machinery/cryopod/Process()
 	if(occupant)
-		if(applies_stasis && iscarbon(occupant) && (world.time > time_entered + 20 SECONDS))
-			var/mob/living/carbon/C = occupant
-			C.set_stasis(2)
+		if(applies_stasis && (world.time > time_entered + 20 SECONDS))
+			occupant.set_stasis(2)
 
 		//Allow a ten minute gap between entering the pod and actually despawning.
 		// Only provide the gap if the occupant hasn't ghosted
@@ -408,7 +407,7 @@
 		if(target != user)
 			if(alert(target,"Would you like to enter long-term storage?",,"Yes","No") != "Yes")
 				return
-	if(!user.incapacitated() && !user.anchored && user.Adjacent(src) && user.Adjacent(target))
+	if(isliving(target) && !user.incapacitated() && !user.anchored && user.Adjacent(src) && user.Adjacent(target))
 		visible_message("[user] starts putting [target] into \the [src].", range = 3)
 		if(!do_after(user, 20, src)|| QDELETED(target))
 			return
@@ -524,7 +523,7 @@
 
 	return
 
-/obj/machinery/cryopod/proc/set_occupant(var/mob/living/carbon/occupant, var/silent)
+/obj/machinery/cryopod/proc/set_occupant(var/mob/living/occupant, var/silent)
 	src.occupant = occupant
 	if(!occupant)
 		SetName(initial(name))
