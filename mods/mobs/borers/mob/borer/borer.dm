@@ -94,7 +94,7 @@
 	generation = gen
 	set_borer_name()
 
-	if(!roundstart) 
+	if(!roundstart)
 		request_player()
 
 /mob/living/simple_animal/borer/Destroy()
@@ -195,9 +195,9 @@
 	controlling = 0
 
 	host.remove_language(/decl/language/corticalborer)
-	host.verbs -= /mob/living/carbon/proc/release_control
-	host.verbs -= /mob/living/carbon/proc/punish_host
-	host.verbs -= /mob/living/carbon/proc/spawn_larvae
+	host.verbs -= /mob/living/proc/release_control
+	host.verbs -= /mob/living/proc/punish_host
+	host.verbs -= /mob/living/proc/spawn_larvae
 
 	if(host_brain)
 
