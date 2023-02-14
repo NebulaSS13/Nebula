@@ -23,13 +23,15 @@
 
 	// This block currently does nothing due to inventory slots being unimplemented.
 	// On full implementation it will replace the entire chunk of human inv code below.
+	/*
 	var/slot_datums = get_inventory_slots()
 	if(length(slot_datums))
-		for(var/slot in global.all_inventory_slots) // TODO: consider sorting inventory_slots instead of relying on this list order.
-			var/datum/inventory_slot/inv_slot = get_inventory_slot_datum(slot)
+		for(var/slot in slot_datums) // TODO: consider sorting inventory_slots instead of relying on this list order.
+			var/datum/inventory_slot/inv_slot = slot_datums[slot]
 			var/slot_desc = inv_slot?.get_examined_string(src, user, distance, hideflags, pronouns)
 			if(slot_desc)
 				. += slot_desc
+	*/
 
 	/*
 	 * Begin giant horrible lump of inventory text migrated down here from human/examine()

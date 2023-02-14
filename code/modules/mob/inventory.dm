@@ -217,9 +217,9 @@
 	var/list/slots = get_inventory_slots()
 	if(!length(slots))
 		return
-	for(var/slot in slots)
-		if(slots[slot] == I)
-			return slot
+	for(var/slot_str in slots)
+		if(get_equipped_item(slot_str) == I) // slots[slot]._holding == I
+			return slot_str
 
 /mob/proc/get_held_slot_for_item(obj/item/I)
 	var/list/slots = get_held_item_slots()
