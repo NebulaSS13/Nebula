@@ -18,6 +18,7 @@ var/global/list/limb_icon_cache = list()
 	skin_colour = null
 	hair_colour = human.hair_colour
 	bodytype = human.bodytype
+	reset_status() // since we may have changed bodytype
 	if(BP_IS_PROSTHETIC(src) && model)
 		var/decl/prosthetics_manufacturer/franchise = GET_DECL(model)
 		if(!(franchise && franchise.skintone))
