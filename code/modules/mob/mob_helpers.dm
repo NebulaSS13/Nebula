@@ -495,16 +495,9 @@ var/global/list/intents = list(I_HELP,I_DISARM,I_GRAB,I_HURT)
 
 #define SAFE_PERP -50
 /mob/living/proc/assess_perp(var/obj/access_obj, var/check_access, var/auth_weapons, var/check_records, var/check_arrest)
-	if(stat == DEAD)
+	if(stat == DEAD || get_equipped_item(slot_handcuffed_str))
 		return SAFE_PERP
-
 	return 0
-
-/mob/living/carbon/assess_perp(var/obj/access_obj, var/check_access, var/auth_weapons, var/check_records, var/check_arrest)
-	if(get_equipped_item(slot_handcuffed_str))
-		return SAFE_PERP
-
-	return ..()
 
 /mob/living/carbon/human/assess_perp(var/obj/access_obj, var/check_access, var/auth_weapons, var/check_records, var/check_arrest)
 	var/threatcount = ..()
@@ -716,7 +709,7 @@ var/global/list/intents = list(I_HELP,I_DISARM,I_GRAB,I_HURT)
 		return I
 
 	//Look if we're holding a pen elsewhere
-	for(I in get_held_items()) 
+	for(I in get_held_items())
 		if(IS_PEN(I))
 			return I
 

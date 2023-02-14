@@ -52,12 +52,8 @@
 	. = has_extension(src, /datum/extension/hattable)
 
 /mob/living/hotkey_drop()
-	if(length(get_active_grabs()) || ..())
-		drop_item()
-
-/mob/living/carbon/hotkey_drop()
 	var/obj/item/hand = get_active_hand()
-	if(hand?.can_be_dropped_by_client(src) || ..())
+	if(hand?.can_be_dropped_by_client(src) || length(get_active_grabs()) || ..())
 		drop_item()
 
 /client/verb/swap_hand()

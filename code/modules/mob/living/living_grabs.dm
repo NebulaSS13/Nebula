@@ -60,3 +60,12 @@
 /mob/living/ProcessGrabs()
 	if(LAZYLEN(grabbed_by))
 		resist()
+
+/mob/living/get_active_grabs()
+	. = list()
+	for(var/obj/item/grab/grab in get_held_items())
+		. += grab
+
+/mob/living/make_grab(var/atom/movable/target, var/grab_tag = /decl/grab/simple)
+	var/decl/species/my_species = get_species()
+	. = ..(target, my_species?.grab_type || grab_tag)

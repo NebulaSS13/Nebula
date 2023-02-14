@@ -309,7 +309,7 @@ var/global/list/Tier4Runes = list(
 		if(H.current && !H.current.stat)
 			to_chat(H.current, "<span class='cult'>[input]</span>")
 
-/mob/living/carbon/cult_communicate()
+/mob/living/cult_communicate()
 	if(incapacitated(INCAPACITATION_RESTRAINED))
 		to_chat(src, "<span class='warning'>You need at least your hands free to do this.</span>")
 		return

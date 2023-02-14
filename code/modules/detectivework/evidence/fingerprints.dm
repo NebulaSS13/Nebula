@@ -85,7 +85,7 @@
 /mob/proc/get_full_print()
 	return FALSE
 
-/mob/living/carbon/get_full_print()
+/mob/living/get_full_print()
 	if (!dna || (mFingerprints in mutations))
 		return FALSE
 	return md5(dna.uni_identity)

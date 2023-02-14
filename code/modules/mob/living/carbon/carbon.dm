@@ -267,11 +267,6 @@
 	onclose(user, "mob[name]")
 	return
 
-/mob/living/carbon/can_feel_pain(var/check_organ)
-	if(isSynthetic())
-		return FALSE
-	return !(species && species.species_flags & SPECIES_FLAG_NO_PAIN)
-
 /mob/living/carbon/check_has_mouth()
 	// carbon mobs have mouths by default
 	// behavior of this proc for humans is overridden in human.dm

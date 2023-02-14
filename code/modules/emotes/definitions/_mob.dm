@@ -11,6 +11,16 @@
 	if(!skip_sort)
 		usable_emotes = sortTim(usable_emotes, /proc/cmp_text_asc)
 
+/mob/living/update_emotes()
+	. = ..(skip_sort=1)
+	var/decl/species/my_species = get_species()
+	if(my_species)
+		for(var/emote in my_species.default_emotes)
+			var/decl/emote/emote_datum = GET_DECL(emote)
+			if(emote_datum.check_user(src))
+				usable_emotes[emote_datum.key] = emote_datum
+		usable_emotes = sortTim(usable_emotes, /proc/cmp_text_asc)
+
 /mob/Initialize()
 	. = ..()
 	update_emotes()
