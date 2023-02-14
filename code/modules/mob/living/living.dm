@@ -1120,3 +1120,6 @@ default behaviour is:
 		shock_damage = 1
 	apply_damage(shock_damage, BURN, def_zone, used_weapon = "Electrocution")
 	return shock_damage
+
+/mob/proc/swap_hand()
+	SHOULD_CALL_PARENT(TRUE)

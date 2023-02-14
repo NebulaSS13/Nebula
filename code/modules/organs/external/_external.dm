@@ -1628,3 +1628,51 @@ Note that amputating the affected organ does in fact remove the infection from t
 					vital_to_owner = TRUE
 					break
 	return vital_to_owner
+
+/obj/item/organ/external/proc/show_examine_status()
+	. = list()
+	var/feels = 1 + round(pain/100, 0.1)
+	var/feels_brute = (brute_dam * feels)
+	if(feels_brute > 0)
+		switch(feels_brute / max_damage)
+			if(0 to 0.35)
+				. += "slightly sore"
+			if(0.35 to 0.65)
+				. += "very sore"
+			if(0.65 to INFINITY)
+				. += "throbbing with agony"
+
+	var/feels_burn = (burn_dam * feels)
+	if(feels_burn > 0)
+		switch(feels_burn / max_damage)
+			if(0 to 0.35)
+				. += "tingling"
+			if(0.35 to 0.65)
+				. += "stinging"
+			if(0.65 to INFINITY)
+				. += "burning fiercely"
+
+	if(status & ORGAN_MUTATED)
+		. += "misshapen"
+	if(status & ORGAN_BLEEDING)
+		. += "<b>bleeding</b>"
+	if(is_dislocated())
+		. += "dislocated"
+	if(status & ORGAN_BROKEN)
+		status += "hurts when touched"
+
+	if(status & ORGAN_DEAD)
+		if(BP_IS_PROSTHETIC(src) || BP_IS_CRYSTAL(src))
+			. += "is irrecoverably damaged"
+		else
+			. += "is grey and necrotic"
+	else if(damage >= max_damage && germ_level >= INFECTION_LEVEL_TWO)
+		. += "is likely beyond saving, and has begun to decay"
+	if(!is_usable() || is_dislocated())
+		. += "dangling uselessly"
+
+	if(length(.))
+		. = english_list(.)
+		owner.show_message("My [name] is [SPAN_WARNING(.)].", VISIBLE_MESSAGE)
+	else
+		owner.show_message("My [name] is [SPAN_NOTICE("OK")].", VISIBLE_MESSAGE)

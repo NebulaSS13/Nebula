@@ -2,13 +2,6 @@
 /mob/living/carbon/alien/attack_ui(slot_id)
 	return
 
-
-/mob/living/carbon/alien/default_help_interaction(mob/user)
-	. = ..()
-	if(!.)
-		help_shake_act(user)
-		return TRUE
-
 /mob/living/carbon/alien/default_hurt_interaction(mob/user)
 	. = ..()
 	if(!.)

@@ -32,5 +32,3 @@
 	var/list/organs_by_tag
 	var/tmp/list/internal_organs
 	var/tmp/list/external_organs
-
-	var/player_triggered_sleeping = 0

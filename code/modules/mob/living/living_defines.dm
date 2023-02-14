@@ -56,3 +56,5 @@
 	var/life_tick = 0      // The amount of life ticks that have processed on this mob.
 
 	var/losebreath = 0 // Used to indicate we failed to retrieve a breath, or that we should miss a breath (due to choking)
+
+	var/player_triggered_sleeping = 0

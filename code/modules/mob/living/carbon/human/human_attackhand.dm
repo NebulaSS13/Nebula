@@ -25,6 +25,7 @@
 			. |= limb.unarmed_attacks
 
 /mob/living/carbon/human/default_help_interaction(mob/user)
+
 	if(user != src && ishuman(user) && (is_asystole() || (status_flags & FAKEDEATH) || failed_last_breath) && !on_fire && !(user.zone_sel.selecting == BP_R_ARM || user.zone_sel.selecting == BP_L_ARM))
 		if (performing_cpr)
 			performing_cpr = FALSE
@@ -32,10 +33,21 @@
 			performing_cpr = TRUE
 			start_compressions(user, TRUE)
 		return TRUE
-	if(!(user == src && apply_pressure(user, user.zone_sel.selecting)))
-		help_shake_act(user)
+
+	if(apply_pressure(user, user.zone_sel.selecting))
 		return TRUE
-	. = ..()
+
+	if(user == src)
+		var/decl/pronouns/G = get_pronouns()
+		visible_message( \
+			SPAN_NOTICE("\The [src] examines [G.self]."), \
+			SPAN_NOTICE("You check yourself for injuries.") \
+			)
+		for(var/obj/item/organ/external/org in get_external_organs())
+			org.show_examine_status(src)
+		return TRUE
+
+	return ..()
 
 /mob/living/carbon/human/default_disarm_interaction(mob/user)
 	var/decl/species/user_species = user.get_species()
