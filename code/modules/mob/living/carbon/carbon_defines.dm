@@ -21,9 +21,6 @@
 	var/performing_cpr = FALSE
 	var/lastpuke = 0
 
-	var/nutrition = 400
-	var/hydration = 400
-
 	var/obj/item/tank/internal = null//Human/Monkey
 	var/decl/species/species   // Contains environment tolerances and language information, set during New().
 	var/decl/bodytype/bodytype // Contains icon generation info, set during set_species().

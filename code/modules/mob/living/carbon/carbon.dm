@@ -379,18 +379,6 @@
 		stasis_value += stasis_sources[source]
 	stasis_sources.Cut()
 
-/mob/living/carbon/proc/set_nutrition(var/amt)
-	nutrition = clamp(amt, 0, initial(nutrition))
-
-/mob/living/carbon/adjust_nutrition(var/amt)
-	set_nutrition(nutrition + amt)
-
-/mob/living/carbon/proc/set_hydration(var/amt)
-	hydration = clamp(amt, 0, initial(hydration))
-
-/mob/living/carbon/adjust_hydration(var/amt)
-	set_hydration(hydration + amt)
-
 /mob/living/carbon/has_dexterity(var/dex_level)
 	. = ..() && (species.get_manual_dexterity() >= dex_level)
 

@@ -816,10 +816,16 @@ default behaviour is:
 	return FLASH_PROTECTION_NONE
 
 /mob/living/proc/adjust_nutrition(var/amt)
-	return
+	set_nutrition(nutrition + amt)
+
+/mob/living/proc/set_nutrition(var/amt)
+	nutrition = clamp(amt, 0, initial(nutrition))
+
+/mob/living/proc/set_hydration(var/amt)
+	hydration = clamp(amt, 0, initial(hydration))
 
 /mob/living/proc/adjust_hydration(var/amt)
-	return
+	set_hydration(hydration + amt)
 
 /mob/living/proc/has_chemical_effect(var/chem, var/threshold_over, var/threshold_under)
 	var/val = GET_CHEMICAL_EFFECT(src, chem)
@@ -1079,3 +1085,5 @@ default behaviour is:
 /mob/living/get_speech_bubble_state_modifier()
 	return isSynthetic() ? "synth" : ..()
 
+/mob/living/proc/get_fullness()
+	return nutrition + (REAGENT_VOLUME(reagents, /decl/material/liquid/nutriment) * 25)
