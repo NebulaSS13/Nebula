@@ -1,23 +1,18 @@
-/mob/living/carbon/var/hallucination_power = 0
-/mob/living/carbon/var/hallucination_duration = 0
-/mob/living/carbon/var/next_hallucination
-/mob/living/carbon/var/list/hallucinations = list()
+/mob/living
+	var/hallucination_power = 0
+	var/hallucination_duration = 0
+	var/next_hallucination
+	var/list/hallucinations
 
 /mob/living/proc/adjust_hallucination(duration, power)
-	return
-
-/mob/living/proc/set_hallucination(duration, power)
-	return
-
-/mob/living/carbon/set_hallucination(duration, power)
-	hallucination_duration = max(hallucination_duration, duration)
-	hallucination_power = max(hallucination_power, power)
-
-/mob/living/carbon/adjust_hallucination(duration, power)
 	hallucination_duration = max(0, hallucination_duration + duration)
 	hallucination_power = max(0, hallucination_power + power)
 
-/mob/living/carbon/proc/handle_hallucinations()
+/mob/living/proc/set_hallucination(duration, power)
+	hallucination_duration = max(hallucination_duration, duration)
+	hallucination_power = max(hallucination_power, power)
+
+/mob/living/proc/handle_hallucinations()
 	//Tick down the duration
 	hallucination_duration = max(0, hallucination_duration - 1)
 	//Adjust power if we have some chems that affect it
@@ -68,8 +63,10 @@
 	var/max_power = INFINITY
 
 /datum/hallucination/proc/start()
+	return
 
 /datum/hallucination/proc/end()
+	return
 
 /datum/hallucination/proc/can_affect(var/mob/living/carbon/C)
 	if(!C.client)
@@ -89,12 +86,12 @@
 /datum/hallucination/proc/activate()
 	if(!holder || !holder.client)
 		return
-	holder.hallucinations += src
+	LAZYADD(holder.hallucinations, src)
 	start()
 	spawn(duration)
 		if(holder)
 			end()
-			holder.hallucinations -= src
+			LAZYREMOVE(holder.hallucinations, src)
 		qdel(src)
 
 

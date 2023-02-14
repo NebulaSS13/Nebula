@@ -20,7 +20,6 @@
 	/// Whether the mob is performing cpr or not.
 	var/performing_cpr = FALSE
 	var/lastpuke = 0
-	var/lastcough = 0
 
 	var/nutrition = 400
 	var/hydration = 400

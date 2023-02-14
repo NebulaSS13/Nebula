@@ -223,7 +223,7 @@
 #define MOB_PULL_SAME 2
 #define MOB_PULL_LARGER 3
 
-//carbon taste sensitivity defines, used in mob/living/carbon/proc/ingest
+//carbon taste sensitivity defines, used in mob/living/proc/ingest
 #define TASTE_HYPERSENSITIVE 3 //anything below 5%
 #define TASTE_SENSITIVE 2 //anything below 7%
 #define TASTE_NORMAL 1 //anything below 15%
