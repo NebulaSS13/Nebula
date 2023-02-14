@@ -41,12 +41,14 @@
 	updatehealth()
 	return TRUE
 
-
 /mob/living/proc/apply_radiation(var/damage = 0)
-	if(!damage)
+	if(ignore_rads || !damage)
 		return FALSE
-
 	radiation = max(0, radiation + damage)
+	if(!isSynthetic())
+		var/decl/species/my_species = get_species()
+		adjustFireLoss(0.25 * damage * (my_species ? my_species.get_radiation_mod(src) : 1))
+		updatehealth()
 	return TRUE
 
 /mob/living/proc/apply_damages(var/brute = 0, var/burn = 0, var/tox = 0, var/oxy = 0, var/clone = 0, var/halloss = 0, var/def_zone = null, var/damage_flags = 0)

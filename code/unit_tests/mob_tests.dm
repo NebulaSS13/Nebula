@@ -288,7 +288,7 @@ var/global/default_mobloc = null
 /datum/unit_test/mob_nullspace/start_test()
 	// Simply create one of each species type in nullspace
 	for(var/species_name in get_all_species())
-		var/test_subject = new/mob/living/carbon/human(null, species_name)
+		var/test_subject = new /mob/living/carbon/human(null, species_name)
 		test_subjects += test_subject
 	return TRUE
 

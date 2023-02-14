@@ -13,6 +13,14 @@
 	var/step_count
 
 /mob/living/carbon/human/Initialize(mapload, var/species_name = null, var/datum/dna/new_dna = null)
+
+	if(!bloodstr)
+		bloodstr = new/datum/reagents/metabolism(120, src, CHEM_INJECT)
+	if(!reagents)
+		reagents = bloodstr
+	if(!touching)
+		touching = new/datum/reagents/metabolism(1000, src, CHEM_TOUCH)
+
 	setup_hud_overlays()
 	var/list/newargs = args.Copy(2)
 	setup(arglist(newargs))
@@ -20,6 +28,8 @@
 	. = ..()
 	if(. != INITIALIZE_HINT_QDEL)
 		post_setup(arglist(newargs))
+		if (!default_language && species_language)
+			default_language = species_language
 
 /mob/living/carbon/human/proc/setup_hud_overlays()
 	hud_list[HEALTH_HUD]      = new /image/hud_overlay('icons/mob/hud_med.dmi', src, "100")
@@ -40,6 +50,8 @@
 	QDEL_NULL(attack_selector)
 	QDEL_NULL(vessel)
 	LAZYCLEARLIST(smell_cooldown)
+	QDEL_NULL(touching)
+	QDEL_NULL(bloodstr)
 	. = ..()
 
 /mob/living/carbon/human/get_ingested_reagents()
@@ -1082,7 +1094,11 @@
 
 /mob/living/carbon/human/fluid_act(var/datum/reagents/fluids)
 	species.fluid_act(src, fluids)
-	..()
+	var/saturation =  min(fluids.total_volume, round(mob_size * 1.5 * reagent_permeability()) - touching.total_volume)
+	if(saturation > 0)
+		fluids.trans_to_holder(touching, saturation)
+	if(fluids.total_volume)
+		..()
 
 /mob/living/carbon/human/proc/set_cultural_value(var/token, var/decl/cultural_info/_culture, var/defer_language_update)
 	if(ispath(_culture, /decl/cultural_info))
@@ -1195,6 +1211,18 @@
 /mob/living/carbon/human/increaseBodyTemp(value)
 	bodytemperature += value
 	return bodytemperature
+
+/mob/living/carbon/human/get_species()
+	return species
+
+/mob/living/carbon/human/get_species_name()
+	return species.name
+
+/mob/living/carbon/human/get_contact_reagents()
+	return touching
+
+/mob/living/carbon/human/get_injected_reagents()
+	return bloodstr
 
 /mob/living/carbon/human/get_admin_job_string()
 	return job || uppertext(species.name)
@@ -1321,3 +1349,19 @@
 
 /mob/living/carbon/human/can_break_cuffs()
 	. = ..() || species.can_shred(src,1)
+
+/mob/living/carbon/human/Bump(var/atom/movable/AM, yes)
+	if(now_pushing || !yes)
+		return
+	..()
+
+/mob/living/carbon/human/fire_act(datum/gas_mixture/air, exposed_temperature, exposed_volume)
+	..()
+	bodytemperature += max(min(BODYTEMP_HEATING_MAX*(1-get_heat_protection()), exposed_temperature - bodytemperature), 0)
+
+/mob/living/carbon/human/proc/get_age()
+	. = LAZYACCESS(appearance_descriptors, "age") || 30
+
+/mob/living/carbon/human/proc/set_age(var/val)
+	var/datum/appearance_descriptor/age = LAZYACCESS(species.appearance_descriptors, "age")
+	LAZYSET(appearance_descriptors, "age", age.sanitize_value(val))

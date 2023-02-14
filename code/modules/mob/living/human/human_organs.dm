@@ -297,9 +297,9 @@
 
 	var/obj/item/organ/existing = LAZYACCESS(organs_by_tag, O.organ_tag)
 	if(existing && O != existing)
-		CRASH("mob/living/carbon/add_organ(): '[O]' tried to overwrite [src]'s existing organ '[existing]' in slot '[O.organ_tag]'!")
+		CRASH("mob/living/carbon/human/add_organ(): '[O]' tried to overwrite [src]'s existing organ '[existing]' in slot '[O.organ_tag]'!")
 	if(O.parent_organ && !LAZYACCESS(organs_by_tag, O.parent_organ))
-		CRASH("mob/living/carbon/add_organ(): Tried to add an internal organ to a non-existing parent external organ!")
+		CRASH("mob/living/carbon/human/add_organ(): Tried to add an internal organ to a non-existing parent external organ!")
 
 	//We don't add internal organs to the lists if we're detached
 	if(O.is_internal() && !detached)

@@ -66,3 +66,9 @@
 
 	var/obj/item/tank/internal
 	var/obj/screen/internals_ui
+
+	var/ignore_rads = FALSE
+
+	// TODO REMOVE DIRECT REFERENCES
+	var/obj/item/_handcuffed = null //Whether or not the mob is cuffed
+	// END TODO

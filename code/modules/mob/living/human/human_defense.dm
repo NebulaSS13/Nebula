@@ -28,7 +28,7 @@ meteor_act
 
 	return blocked
 
-/mob/living/carbon/human/stun_effect_act(var/stun_amount, var/agony_amount, var/def_zone)
+/mob/living/carbon/human/stun_effect_act(var/stun_amount, var/agony_amount, var/def_zone, var/used_weapon)
 	var/obj/item/organ/external/affected = GET_EXTERNAL_ORGAN(src, def_zone)
 	if(!affected)
 		return
@@ -538,11 +538,11 @@ meteor_act
 	return total_protection
 
 /mob/living/carbon/human/flash_eyes(var/intensity = FLASH_PROTECTION_MODERATE, override_blindness_check = FALSE, affect_silicon = FALSE, visual = FALSE, type = /obj/screen/fullscreen/flash)
-	if(species.has_organ[species.vision_organ])
+	. = ..()
+	if(. && species.has_organ[species.vision_organ])
 		var/obj/item/organ/internal/eyes/I = get_organ(species.vision_organ, /obj/item/organ/internal/eyes)
 		if(I)
 			I.additional_flash_effects(intensity)
-	return ..()
 
 /mob/living/carbon/human/proc/getFlashMod()
 	if(species.vision_organ)

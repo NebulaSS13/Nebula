@@ -1,5 +1,22 @@
 /mob/living/carbon/human
 
+	gender = MALE
+	abstract_type = /mob/living/carbon/human
+
+	//Surgery info
+	//Active emote/pose
+	var/pose = null
+	var/datum/reagents/metabolism/bloodstr
+	var/datum/reagents/metabolism/touching
+
+	var/coughedtime = null
+	/// Whether the mob is performing cpr or not.
+	var/performing_cpr = FALSE
+	var/lastpuke = 0
+
+	var/decl/species/species   // Contains environment tolerances and language information, set during New().
+	var/decl/bodytype/bodytype // Contains icon generation info, set during set_species().
+
 	var/h_style
 	var/f_style
 
@@ -103,10 +120,3 @@
 	var/list/external_organs
 
 	ai = /datum/ai/human
-
-/mob/living/carbon/human/proc/get_age()
-	. = LAZYACCESS(appearance_descriptors, "age") || 30
-
-/mob/living/carbon/human/proc/set_age(var/val)
-	var/datum/appearance_descriptor/age = LAZYACCESS(species.appearance_descriptors, "age")
-	LAZYSET(appearance_descriptors, "age", age.sanitize_value(val))

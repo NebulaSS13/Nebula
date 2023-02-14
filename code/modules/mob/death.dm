@@ -1,7 +1,13 @@
 //This is the proc for gibbing a mob. Cannot gib ghosts.
 //added different sort of gibs and animations. N
 /mob/proc/gib(anim="gibbed-m",do_gibs)
+
 	set waitfor = FALSE
+
+	for(var/mob/M in contents)
+		M.dropInto(loc)
+		visible_message(SPAN_DANGER("\The [M] bursts out of \the [src]!"))
+
 	death(1)
 	ADD_TRANSFORMATION_MOVEMENT_HANDLER(src)
 	icon = null

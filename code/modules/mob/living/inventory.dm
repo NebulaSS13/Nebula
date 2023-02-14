@@ -121,6 +121,13 @@
 /mob/living/u_equip(obj/W)
 	. = ..()
 	if(!.)
+		if(W == get_equipped_item(slot_handcuffed_str))
+			_handcuffed = null
+			update_inv_handcuffed()
+			if(buckled && buckled.buckle_require_restraints)
+				buckled.unbuckle_mob()
+			return TRUE
+
 		for(var/hand_slot in held_item_slots)
 			var/datum/inventory_slot/inv_slot = held_item_slots[hand_slot]
 			if(inv_slot?.holding == W)

@@ -522,6 +522,18 @@ default behaviour is:
 		handle_grabs_after_move(old_loc, Dir)
 		if (active_storage && !( active_storage in contents ) && get_turf(active_storage) != get_turf(src))	//check !( active_storage in contents ) first so we hopefully don't have to call get_turf() so much.
 			active_storage.close(src)
+		if(stat != DEAD)
+			var/nut_removed = DEFAULT_HUNGER_FACTOR/10
+			var/hyd_removed = DEFAULT_THIRST_FACTOR/10
+			if (move_intent.flags & MOVE_INTENT_EXERTIVE)
+				nut_removed *= 2
+				hyd_removed *= 2
+			adjust_nutrition(-nut_removed)
+			adjust_hydration(-hyd_removed)
+
+		// Moving around increases germ_level faster
+		if(germ_level < GERM_LEVEL_MOVE_CAP && prob(8))
+			germ_level++
 
 /mob/living/verb/resist()
 	set name = "Resist"
@@ -642,13 +654,14 @@ default behaviour is:
 
 //called when the mob receives a bright flash
 /mob/living/flash_eyes(intensity = FLASH_PROTECTION_MODERATE, override_blindness_check = FALSE, affect_silicon = FALSE, visual = FALSE, type = /obj/screen/fullscreen/flash)
-	if(override_blindness_check || !(disabilities & BLINDED))
-		..()
+	..()
+	if(eyecheck() < intensity && (override_blindness_check || !(disabilities & BLINDED)))
 		overlay_fullscreen("flash", type)
 		spawn(25)
 			if(src)
 				clear_fullscreen("flash", 25)
-		return 1
+		return TRUE
+	return FALSE
 
 /mob/living/proc/cannot_use_vents()
 	if(mob_size > MOB_SIZE_SMALL)
@@ -659,6 +672,11 @@ default behaviour is:
 	return TRUE
 
 /mob/living/proc/slip(var/slipped_on, stun_duration = 8)
+	if(has_gravity() && !buckled && !lying)
+		to_chat(src, SPAN_DANGER("You slipped on [slipped_on]!"))
+		playsound(loc, 'sound/misc/slip.ogg', 50, 1, -3)
+		SET_STATUS_MAX(src, STAT_WEAK, stun_duration)
+		return TRUE
 	return FALSE
 
 /mob/living/carbon/human/canUnEquip(obj/item/I)
@@ -743,6 +761,12 @@ default behaviour is:
 	if(auras)
 		for(var/a in auras)
 			remove_aura(a)
+	if(loc)
+		for(var/mob/M in contents)
+			M.dropInto(loc)
+	else
+		for(var/mob/M in contents)
+			qdel(M)
 	return ..()
 
 /mob/living/proc/melee_accuracy_mods()
@@ -1128,3 +1152,71 @@ default behaviour is:
 	set_nutrition(400)
 	set_hydration(400)
 	..()
+
+/mob/living/get_ai_type()
+	var/decl/species/my_species = get_species()
+	if(ispath(my_species?.ai))
+		return my_species.ai
+	return ..()
+
+/mob/living/verb/showoff()
+	set name = "Show Held Item"
+	set category = "Object"
+
+	var/obj/item/I = get_active_hand()
+	if(I && I.simulated)
+		I.showoff(src)
+
+/mob/living/handle_flashed(obj/item/flash/flash, flash_strength)
+	var/safety = eyecheck()
+	if(safety >= FLASH_PROTECTION_MODERATE || flash_strength <= 0) // May be modified by human proc.
+		return FALSE
+	flash_eyes(FLASH_PROTECTION_MODERATE - safety)
+	SET_STATUS_MAX(src, STAT_STUN, (flash_strength / 2))
+	SET_STATUS_MAX(src, STAT_BLURRY, flash_strength)
+	SET_STATUS_MAX(src, STAT_CONFUSE, (flash_strength + 2))
+	if(flash_strength > 3)
+		drop_held_items()
+	if(flash_strength > 5)
+		SET_STATUS_MAX(src, STAT_WEAK, 2)
+	return TRUE
+
+/mob/living/relaymove(var/mob/living/user, direction)
+	if((user in contents) && istype(user))
+		if(user.last_special <= world.time)
+			user.last_special = world.time + 50
+			src.visible_message("<span class='danger'>You hear something rumbling inside [src]'s stomach...</span>")
+			var/obj/item/I = user.get_active_hand()
+			if(I && I.force)
+				var/d = rand(round(I.force / 4), I.force)
+				var/obj/item/organ/external/organ = GET_EXTERNAL_ORGAN(src, BP_CHEST)
+				if(istype(organ))
+					organ.take_external_damage(d, 0)
+				else
+					take_organ_damage(d)
+				updatehealth()
+				user.visible_message("<span class='danger'>[user] attacks [src]'s stomach wall with the [I.name]!</span>")
+				playsound(user.loc, 'sound/effects/attackblob.ogg', 50, 1)
+				if(prob(src.getBruteLoss() - 50))
+					gib()
+
+/mob/living/has_dexterity(var/dex_level)
+	var/decl/species/my_species = get_species()
+	. = ..() && (my_species?.get_manual_dexterity() >= dex_level)
+
+/mob/living/verb/mob_sleep()
+	set name = "Sleep"
+	set category = "IC"
+
+	if(alert("Are you sure you want to [player_triggered_sleeping ? "wake up?" : "sleep for a while? Use 'sleep' again to wake up"]", "Sleep", "No", "Yes") == "Yes")
+		player_triggered_sleeping = !player_triggered_sleeping
+
+/mob/living/restrained()
+	return get_equipped_item(slot_handcuffed_str)
+
+/mob/living/can_use_hands()
+	if(get_equipped_item(slot_handcuffed_str))
+		return FALSE
+	if(buckled && !istype(buckled, /obj/structure/bed/chair)) // buckling does not restrict hands
+		return FALSE
+	return TRUE

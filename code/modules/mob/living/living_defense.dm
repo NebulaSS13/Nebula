@@ -69,9 +69,8 @@
 		if(result & AURA_CANCEL)
 			break
 
-
 //Handles the effects of "stun" weapons
-/mob/living/proc/stun_effect_act(var/stun_amount, var/agony_amount, var/def_zone, var/used_weapon=null)
+/mob/living/proc/stun_effect_act(var/stun_amount, var/agony_amount, var/def_zone, var/used_weapon)
 	flash_pain()
 
 	if (stun_amount)
@@ -86,7 +85,47 @@
 		apply_effect(agony_amount/10, EYE_BLUR)
 
 /mob/living/proc/electrocute_act(var/shock_damage, var/obj/source, var/siemens_coeff = 1.0, def_zone = null)
-	  return 0 //only carbon liveforms have this proc
+
+	if(status_flags & GODMODE)	return 0	//godmode
+
+	shock_damage = apply_shock(shock_damage, def_zone, siemens_coeff)
+
+	if(!shock_damage)
+		return 0
+
+	stun_effect_act(agony_amount=shock_damage, def_zone=def_zone)
+
+	playsound(loc, "sparks", 50, 1, -1)
+	if (shock_damage > 15)
+		src.visible_message(
+			"<span class='warning'>[src] was electrocuted[source ? " by the [source]" : ""]!</span>", \
+			"<span class='danger'>You feel a powerful shock course through your body!</span>", \
+			"<span class='warning'>You hear a heavy electrical crack.</span>" \
+		)
+	else
+		src.visible_message(
+			"<span class='warning'>[src] was shocked[source ? " by the [source]" : ""].</span>", \
+			"<span class='warning'>You feel a shock course through your body.</span>", \
+			"<span class='warning'>You hear a zapping sound.</span>" \
+		)
+
+	switch(shock_damage)
+		if(11 to 15)
+			SET_STATUS_MAX(src, STAT_STUN, 1)
+		if(16 to 20)
+			SET_STATUS_MAX(src, STAT_STUN, 2)
+		if(21 to 25)
+			SET_STATUS_MAX(src, STAT_WEAK, 2)
+		if(26 to 30)
+			SET_STATUS_MAX(src, STAT_WEAK, 5)
+		if(31 to INFINITY)
+			SET_STATUS_MAX(src, STAT_WEAK, 10) //This should work for now, more is really silly and makes you lay there forever
+
+	set_status(STAT_JITTER, min(shock_damage*5, 200))
+
+	spark_at(loc, amount=5, cardinal_only = TRUE)
+
+	return shock_damage
 
 /mob/living/emp_act(severity)
 	var/list/L = src.get_contents()
