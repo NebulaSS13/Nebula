@@ -40,5 +40,5 @@
 /mob/living/brain/can_use_rig()
 	return istype(loc, /obj/item/mmi)
 
-/mob/living/carbon/can_emote()
+/mob/living/brain/can_emote()
 	return (istype(container, /obj/item/mmi) && ..())

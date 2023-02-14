@@ -10,6 +10,10 @@
 /mob/living/proc/get_internal_organs()
 	return
 
+/mob/living/proc/delete_organs()
+	for(var/obj/item/organ/O in get_organs())
+		qdel(O)
+
 //Those are meant to be overriden with optimizations
 /mob/living/proc/has_organs()
 	return LAZYLEN(get_organs()) > 0

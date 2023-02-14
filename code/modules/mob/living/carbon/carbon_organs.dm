@@ -19,9 +19,8 @@
 	return LAZYLEN(internal_organs) > 0
 
 //Deletes all references to organs
-/mob/living/carbon/proc/delete_organs()
-	for(var/obj/item/organ/O in get_organs())
-		qdel(O)
+/mob/living/carbon/delete_organs()
+	..()
 	organs_by_tag = null
 	internal_organs = null
 	external_organs = null

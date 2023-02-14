@@ -3,7 +3,7 @@
 	. = ..()
 	if(stat == DEAD)
 		return
-	
+
 	// Generate some crystals over time.
 	if(nutrition >= 300 && crystal_reserve < ANYMPH_MAX_CRYSTALS)
 		crystal_reserve = min(ANYMPH_MAX_CRYSTALS, crystal_reserve + 15)
@@ -61,11 +61,11 @@
 	molt = min(molt + 1, 5)
 	var/mob/living/carbon/alien/ascent_nymph/nymph = usr
 	nymph.visible_message("\icon[nymph] [nymph] begins to shimmy and shake out of its old skin.")
-	if(molt == 5)		
+	if(molt == 5)
 		if(do_after(nymph, 10 SECONDS, nymph, FALSE))
 			var/mob/living/carbon/human/H = new(get_turf(usr), SPECIES_MANTID_ALATE)
 			H.dna.lineage = nymph.dna.lineage
-			H.real_name = "[random_id(/decl/species/mantid, 10000, 99999)] [H.get_gyne_name()]"
+			H.real_name = "[random_id(/decl/species/mantid, 10000, 99999)] [get_gyne_name(H.dna)]"
 			H.nutrition = nymph.nutrition * 0.25 // Homgry after molt.
 			nymph.mind.transfer_to(H)
 			qdel(nymph)
@@ -74,7 +74,7 @@
 		else
 			nymph.visible_message("\icon[nymph] [nymph] abruptly stops molting.")
 		return
-			
+
 	if(do_after(nymph, 5 SECONDS, nymph, FALSE))
 		var/matrix/M = matrix()
 		M.Scale(1 + (molt / 10))

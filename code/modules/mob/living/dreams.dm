@@ -1,5 +1,7 @@
+/mob/living
+	var/dreaming = 0
 
-/mob/living/carbon/proc/dream()
+/mob/living/proc/dream()
 	set waitfor = FALSE
 	dreaming = 1
 
@@ -11,8 +13,6 @@
 			return
 	dreaming = 0
 
-/mob/living/carbon/proc/handle_dreams()
+/mob/living/proc/handle_dreams()
 	if(client && !dreaming && prob(5))
 		dream()
-
-/mob/living/carbon/var/dreaming = 0
