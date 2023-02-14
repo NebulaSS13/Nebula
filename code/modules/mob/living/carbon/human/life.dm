@@ -63,7 +63,7 @@
 	voice = GetVoice()
 
 	//No need to update all of these procs if the guy is dead.
-	if(stat != DEAD && !InStasis())
+	if(stat != DEAD && !is_in_stasis())
 		//Updates the number of stored chemicals for powers
 		handle_changeling()
 
@@ -396,7 +396,7 @@
 			burn_dam = COLD_DAMAGE_LEVEL_2
 		else
 			burn_dam = COLD_DAMAGE_LEVEL_3
-		SetStasis(getCryogenicFactor(bodytemperature), STASIS_COLD)
+		set_stasis(getCryogenicFactor(bodytemperature), STASIS_COLD)
 		if(!has_chemical_effect(CE_CRYO, 1))
 			take_overall_damage(burn=burn_dam, used_weapon = "Low Body Temperature")
 			fire_alert = max(fire_alert, 1)

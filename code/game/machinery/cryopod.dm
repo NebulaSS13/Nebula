@@ -293,7 +293,7 @@
 	if(occupant)
 		if(applies_stasis && iscarbon(occupant) && (world.time > time_entered + 20 SECONDS))
 			var/mob/living/carbon/C = occupant
-			C.SetStasis(2)
+			C.set_stasis(2)
 
 		//Allow a ten minute gap between entering the pod and actually despawning.
 		// Only provide the gap if the occupant hasn't ghosted

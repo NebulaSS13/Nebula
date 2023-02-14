@@ -136,7 +136,7 @@
 
 
 	if(iscarbon(occupant) && stasis > 1)
-		occupant.SetStasis(stasis)
+		occupant.set_stasis(stasis)
 
 /obj/machinery/sleeper/on_update_icon()
 	cut_overlays()

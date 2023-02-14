@@ -29,7 +29,7 @@
 	if(!istype(H))
 		. = 0
 		CRASH("Someone gave [user.type] a [src.type] aura. This is invalid.")
-	if(!innate_heal || H.InStasis() || H.stat == DEAD)
+	if(!innate_heal || H.is_in_stasis() || H.stat == DEAD)
 		return 0
 	if(H.nutrition < nutrition_damage_mult)
 		low_nut_warning()
