@@ -206,7 +206,7 @@
 	if(ailment.treated_by_reagent_type)
 		for(var/datum/reagents/source in list(owner.get_injected_reagents(), owner.reagents, owner.get_ingested_reagents()))
 			for(var/reagent_type in source.reagent_volumes)
-				if(ailment.treated_by_medication(source.reagent_volumes[reagent_type]))
+				if(ailment.treated_by_medication(reagent_type, source.reagent_volumes[reagent_type]))
 					ailment.was_treated_by_medication(source, reagent_type)
 					return
 	if(ailment.treated_by_chem_effect && owner.has_chemical_effect(ailment.treated_by_chem_effect, ailment.treated_by_chem_effect_strength))
