@@ -20,9 +20,3 @@
 
 	var/decl/species/species   // Contains environment tolerances and language information, set during New().
 	var/decl/bodytype/bodytype // Contains icon generation info, set during set_species().
-
-	// organ-related variables, see organ.dm and human_organs.dm
-	//Shouldn't be accessed directly
-	var/list/organs_by_tag
-	var/tmp/list/internal_organs
-	var/tmp/list/external_organs

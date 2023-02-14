@@ -96,6 +96,12 @@
 
 	var/vital_organ_missing_time
 
+	// organ-related variables, see organ.dm and human_organs.dm
+	//Shouldn't be accessed directly
+	var/list/organs_by_tag
+	var/list/internal_organs
+	var/list/external_organs
+
 	ai = /datum/ai/human
 
 /mob/living/carbon/human/proc/get_age()

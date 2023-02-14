@@ -360,13 +360,6 @@ default behaviour is:
 /mob/living/proc/restore_all_organs()
 	return
 
-
-/mob/living/carbon/revive()
-	var/obj/item/cuffs = get_equipped_item(slot_handcuffed_str)
-	if (cuffs)
-		unEquip(cuffs, get_turf(src))
-	. = ..()
-
 /mob/living/proc/revive()
 	rejuvenate()
 	if(buckled)
@@ -376,6 +369,9 @@ default behaviour is:
 	BITSET(hud_updateflag, LIFE_HUD)
 	ExtinguishMob()
 	fire_stacks = 0
+	var/obj/item/cuffs = get_equipped_item(slot_handcuffed_str)
+	if (cuffs)
+		unEquip(cuffs, get_turf(src))
 
 /mob/living/proc/rejuvenate()
 
@@ -428,9 +424,18 @@ default behaviour is:
 
 /mob/living/proc/basic_revival(var/repair_brain = TRUE)
 
-	if(repair_brain && getBrainLoss() > 50)
-		repair_brain = FALSE
-		setBrainLoss(50)
+	if(repair_brain)
+		if(should_have_organ(BP_BRAIN))
+			var/obj/item/organ/internal/brain = GET_INTERNAL_ORGAN(src, BP_BRAIN)
+			if(brain)
+				if(brain.damage > (brain.max_damage/2))
+					brain.damage = (brain.max_damage/2)
+				if(brain.status & ORGAN_DEAD)
+					brain.status &= ~ORGAN_DEAD
+					START_PROCESSING(SSobj, brain)
+				brain.update_icon()
+		else if(getBrainLoss() > 50)
+			setBrainLoss(50)
 
 	if(stat == DEAD)
 		switch_from_dead_to_living_mob_list()
@@ -445,19 +450,6 @@ default behaviour is:
 
 	failed_last_breath = 0 //So mobs that died of oxyloss don't revive and have perpetual out of breath.
 	reload_fullscreen()
-
-/mob/living/carbon/basic_revival(var/repair_brain = TRUE)
-	if(repair_brain && should_have_organ(BP_BRAIN))
-		repair_brain = FALSE
-		var/obj/item/organ/internal/brain = GET_INTERNAL_ORGAN(src, BP_BRAIN)
-		if(brain)
-			if(brain.damage > (brain.max_damage/2))
-				brain.damage = (brain.max_damage/2)
-			if(brain.status & ORGAN_DEAD)
-				brain.status &= ~ORGAN_DEAD
-				START_PROCESSING(SSobj, brain)
-			brain.update_icon()
-	..(repair_brain)
 
 /mob/living/proc/UpdateDamageIcon()
 	return
