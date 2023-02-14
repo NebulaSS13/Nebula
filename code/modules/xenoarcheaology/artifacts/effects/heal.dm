@@ -30,7 +30,7 @@
 		C.adjustBrainLoss(-force)
 		if(strong)
 			C.apply_radiation(-25 * weakness)
-			C.bodytemperature = initial(C.bodytemperature)
+			C.bodytemperature = C.species?.body_temperature || initial(C.bodytemperature)
 			C.adjust_nutrition(50 * weakness)
 			if(ishuman(C))
 				var/mob/living/carbon/human/H = C
