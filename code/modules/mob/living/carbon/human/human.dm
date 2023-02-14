@@ -950,29 +950,6 @@
 	var/obj/item/organ/internal/heart/H = get_organ(BP_HEART, /obj/item/organ/internal/heart)
 	return H ? H.pulse : PULSE_NONE
 
-/mob/living/carbon/human/can_devour(atom/movable/victim, var/silent = FALSE)
-
-	if(!should_have_organ(BP_STOMACH))
-		return ..()
-
-	var/obj/item/organ/internal/stomach/stomach = get_organ(BP_STOMACH, /obj/item/organ/internal/stomach)
-	if(!stomach || !stomach.is_usable())
-		if(!silent)
-			to_chat(src, SPAN_WARNING("Your stomach is not functional!"))
-		return FALSE
-
-	if(!stomach.can_eat_atom(victim))
-		if(!silent)
-			to_chat(src, SPAN_WARNING("You are not capable of devouring \the [victim] whole!"))
-		return FALSE
-
-	if(stomach.is_full(victim))
-		if(!silent)
-			to_chat(src, SPAN_WARNING("Your [stomach.name] is full!"))
-		return FALSE
-
-	. = stomach.get_devour_time(victim) || ..()
-
 /mob/living/carbon/human/move_to_stomach(atom/movable/victim)
 	var/obj/item/organ/internal/stomach = GET_INTERNAL_ORGAN(src, BP_STOMACH)
 	if(istype(stomach))
