@@ -1409,3 +1409,6 @@
 		if(safety > FLASH_PROTECTION_NONE)
 			flash_strength = (flash_strength / 2)
 	. = ..()
+
+/mob/living/carbon/human/can_break_cuffs()
+	. = ..() || species.can_shred(src,1)

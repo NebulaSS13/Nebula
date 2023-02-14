@@ -545,6 +545,29 @@ default behaviour is:
 
 /mob/living/proc/process_resist()
 
+	//drop && roll
+	if(on_fire && !buckled)
+		fire_stacks -= 1.2
+		SET_STATUS_MAX(src, STAT_WEAK, 3)
+		spin(32,2)
+		visible_message(
+			"<span class='danger'>[src] rolls on the floor, trying to put themselves out!</span>",
+			"<span class='notice'>You stop, drop, and roll!</span>"
+			)
+		sleep(30)
+		if(fire_stacks <= 0)
+			visible_message(
+				"<span class='danger'>[src] has successfully extinguished themselves!</span>",
+				"<span class='notice'>You extinguish yourself.</span>"
+				)
+			ExtinguishMob()
+		return TRUE
+
+	if(istype(buckled, /obj/effect/vine))
+		var/obj/effect/vine/V = buckled
+		V.manual_unbuckle(src)
+		return TRUE
+
 	//Getting out of someone's inventory.
 	if(istype(src.loc, /obj/item/holder))
 		escape_inventory(src.loc)
@@ -552,7 +575,7 @@ default behaviour is:
 
 	//unbuckling yourself
 	if(buckled)
-		spawn() escape_buckle()
+		escape_buckle()
 		return TRUE
 
 	//Breaking out of a structure?
@@ -565,6 +588,12 @@ default behaviour is:
 	if(buckled_mob)
 		unbuckle_mob()
 		return TRUE
+
+	if(get_equipped_item(slot_handcuffed_str))
+		escape_handcuffs()
+		return TRUE
+
+	return FALSE
 
 /mob/living/proc/escape_inventory(obj/item/holder/H)
 	if(H != src.loc) return
@@ -597,14 +626,6 @@ default behaviour is:
 
 	if(loc != H)
 		qdel(H)
-
-/mob/living/proc/escape_buckle()
-	if(buckled)
-		if(buckled.can_buckle)
-			buckled.user_unbuckle_mob(src)
-		else
-			to_chat(usr, "<span class='warning'>You can't seem to escape from \the [buckled]!</span>")
-			return
 
 /mob/living/proc/resist_grab()
 	var/resisting = 0

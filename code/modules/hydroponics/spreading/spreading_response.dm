@@ -34,6 +34,7 @@
 	seed.do_sting(victim,src,pick(BP_R_FOOT,BP_L_FOOT,BP_R_LEG,BP_L_LEG))
 
 /obj/effect/vine/proc/manual_unbuckle(mob/user)
+	set waitfor = FALSE
 	if(!buckled_mob)
 		return
 	if(buckled_mob != user)
