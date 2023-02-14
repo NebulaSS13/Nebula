@@ -4,7 +4,7 @@
 	var/fire_mult = 1
 	var/tox_mult = 1
 
-/obj/aura/regenerating/life_tick()
+/obj/aura/regenerating/on_life_tick()
 	user.adjustBruteLoss(-brute_mult)
 	user.adjustFireLoss(-fire_mult)
 	user.adjustToxLoss(-tox_mult)
@@ -24,7 +24,7 @@
 /obj/aura/regenerating/human/proc/external_regeneration_effect(var/obj/item/organ/external/O, var/mob/living/carbon/human/H)
 	return
 
-/obj/aura/regenerating/human/life_tick()
+/obj/aura/regenerating/human/on_life_tick()
 	var/mob/living/carbon/human/H = user
 	if(!istype(H))
 		. = 0

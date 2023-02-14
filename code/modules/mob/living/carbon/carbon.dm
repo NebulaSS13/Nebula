@@ -341,9 +341,6 @@
 		return FALSE
 	return !(species && species.species_flags & SPECIES_FLAG_NO_PAIN)
 
-/mob/living/carbon/proc/need_breathe()
-	return
-
 /mob/living/carbon/check_has_mouth()
 	// carbon mobs have mouths by default
 	// behavior of this proc for humans is overridden in human.dm

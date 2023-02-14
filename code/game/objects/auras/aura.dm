@@ -23,7 +23,7 @@ They should also be used for when you want to effect the ENTIRE mob, like having
 /obj/aura/proc/removed()
 	user = null
 
-/obj/aura/proc/life_tick()
+/obj/aura/proc/on_life_tick()
 	return 0
 
 /obj/aura/attackby(var/obj/item/I, var/mob/user)
@@ -46,7 +46,7 @@ They should also be used for when you want to effect the ENTIRE mob, like having
 	log_debug("Bullet Act for \ref[src]: [P], [def_zone]")
 	return returning
 
-/obj/aura/debug/life_tick()
+/obj/aura/debug/on_life_tick()
 	log_debug("Life tick")
 	return returning
 

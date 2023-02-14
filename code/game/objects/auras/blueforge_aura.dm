@@ -4,7 +4,7 @@
 	icon_state = "eyes_blueforged_s"
 	layer = MOB_LAYER
 
-/obj/aura/blueforge_aura/life_tick()
+/obj/aura/blueforge_aura/on_life_tick()
 	user.adjustToxLoss(-10)
 	return 0
 

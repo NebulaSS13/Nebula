@@ -50,3 +50,9 @@
 	var/list/chem_doses
 	var/last_pain_message
 	var/next_pain_time = 0
+
+	var/stasis_value
+	var/list/stasis_sources
+	var/life_tick = 0      // The amount of life ticks that have processed on this mob.
+
+	var/losebreath = 0 // Used to indicate we failed to retrieve a breath, or that we should miss a breath (due to choking)

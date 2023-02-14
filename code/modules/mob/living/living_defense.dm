@@ -63,7 +63,7 @@
 			if(AURA_TYPE_THROWN)
 				result = aura.hitby(arglist(newargs))
 			if(AURA_TYPE_LIFE)
-				result = aura.life_tick()
+				result = aura.on_life_tick()
 		if(result & AURA_FALSE)
 			. = FALSE
 		if(result & AURA_CANCEL)

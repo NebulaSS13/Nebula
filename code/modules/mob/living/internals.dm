@@ -1,3 +1,15 @@
+/mob/living/proc/get_breath_from_internal(var/volume_needed=STD_BREATH_VOLUME) //hopefully this will allow overrides to specify a different default volume without breaking any cases where volume is passed in.
+	var/obj/item/tank/internal = get_internals()
+	if(!internal)
+		return
+	if (!contents.Find(internal))
+		set_internals(null)
+	var/obj/item/mask = get_equipped_item(slot_wear_mask_str)
+	if (!mask || !(mask.item_flags & ITEM_FLAG_AIRTIGHT))
+		set_internals(null)
+	internal = get_internals()
+	return internal?.remove_air_volume(volume_needed)
+
 /mob/living/proc/set_internals(obj/item/tank/source, source_string)
 	var/old_internal = get_internals()
 	if(!old_internal && source)

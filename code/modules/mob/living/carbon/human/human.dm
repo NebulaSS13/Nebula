@@ -985,9 +985,7 @@
 /mob/living/carbon/human/need_breathe()
 	if(mNobreath in mutations)
 		return FALSE
-	if(!species.breathing_organ || !should_have_organ(species.breathing_organ))
-		return FALSE
-	return TRUE
+	return ..()
 
 /mob/living/carbon/human/get_adjusted_metabolism(metabolism)
 	return ..() * (species ? species.metabolism_mod : 1)
