@@ -1,9 +1,3 @@
-#define ZLEVEL_STATION BITFLAG(0)
-#define ZLEVEL_ADMIN   BITFLAG(1)
-#define ZLEVEL_CONTACT BITFLAG(2)
-#define ZLEVEL_PLAYER  BITFLAG(3)
-#define ZLEVEL_SEALED  BITFLAG(4)
-
 /obj/abstract/level_data
 	/// Name displayed on GPS when this sector is shown.
 	var/gps_name
@@ -217,9 +211,3 @@ INITIALIZE_IMMEDIATE(/obj/abstract/level_data)
 /obj/abstract/level_data/overmap
 	name = "Sensor Display"
 	take_starlight_ambience = FALSE // Overmap doesn't care about ambient lighting
-
-#undef ZLEVEL_STATION
-#undef ZLEVEL_ADMIN
-#undef ZLEVEL_CONTACT
-#undef ZLEVEL_PLAYER
-#undef ZLEVEL_SEALED
