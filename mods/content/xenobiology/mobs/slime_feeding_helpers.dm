@@ -57,9 +57,6 @@ var/global/list/slime_pain_messages = list(
 
 // Handle cosmetic effects (currently) from being eaten by a slime, mostly pain-related.
 /mob/living/proc/handle_additional_slime_effects()
-	return
-
-/mob/living/carbon/handle_additional_slime_effects()
 	if(can_feel_pain())
 		to_chat(src, SPAN_DANGER(pick(global.slime_pain_messages)))
 

@@ -709,7 +709,6 @@ modules/mob/living/carbon/human/life.dm if you die, you will be zoomed out.
 		return
 
 	var/devicename = zoomdevicename || name
-
 	var/mob/living/carbon/human/H = user
 	if(user.incapacitated(INCAPACITATION_DISABLED))
 		to_chat(user, SPAN_WARNING("You are unable to focus through the [devicename]."))
@@ -753,8 +752,8 @@ modules/mob/living/carbon/human/life.dm if you die, you will be zoomed out.
 /obj/item/proc/zoom_drop(var/obj/item/I, var/mob/user)
 	unzoom(user)
 
-/obj/item/proc/unzoom(var/mob/user)
-	if(!zoom)
+/obj/item/proc/unzoom(var/mob/living/user)
+	if(!zoom || !istype(user))
 		return
 	zoom = 0
 

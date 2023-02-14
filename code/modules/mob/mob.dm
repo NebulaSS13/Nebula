@@ -38,7 +38,6 @@
 /mob/proc/remove_screen_obj_references()
 	QDEL_NULL_SCREEN(hands)
 	QDEL_NULL_SCREEN(purged)
-	QDEL_NULL_SCREEN(internals)
 	QDEL_NULL_SCREEN(oxygen)
 	QDEL_NULL_SCREEN(toxin)
 	QDEL_NULL_SCREEN(fire)
@@ -693,9 +692,9 @@
 /mob/proc/embedded_needs_process()
 	return !!LAZYLEN(embedded)
 
-/mob/proc/remove_implant(var/obj/item/implant, var/surgical_removal = FALSE)
+/mob/living/proc/remove_implant(var/obj/item/implant, var/surgical_removal = FALSE)
 	if(!LAZYLEN(get_visible_implants(0))) //Yanking out last object - removing verb.
-		verbs -= /mob/proc/yank_out_object
+		verbs -= /mob/living/proc/yank_out_object
 	for(var/obj/item/O in pinned)
 		if(O == implant)
 			LAZYREMOVE(pinned, O)
@@ -704,9 +703,18 @@
 	implant.dropInto(loc)
 	implant.add_blood(src)
 	implant.update_icon()
-	if(istype(implant,/obj/item/implant))
-		var/obj/item/implant/imp = implant
-		imp.removed()
+
+	if(!QDELETED(implant))
+		if(istype(implant,/obj/item/implant))
+			var/obj/item/implant/imp = implant
+			imp.removed()
+		else if(istype(implant, /mob/living/simple_animal/borer))
+			var/mob/living/simple_animal/borer/worm = implant
+			if(worm.controlling)
+				release_control()
+			worm.detatch()
+			worm.leave_host()
+
 	. = TRUE
 
 /mob/living/silicon/robot/remove_implant(var/obj/item/implant, var/surgical_removal = FALSE)
@@ -733,7 +741,7 @@
 				custom_pain("Something tears wetly in your [affected.name] as [implant] is pulled free!", 50, affecting = affected)
 	. = ..()
 
-/mob/proc/yank_out_object()
+/mob/living/proc/yank_out_object()
 	set category = "Object"
 	set name = "Yank out object"
 	set desc = "Remove an embedded item at the cost of bleeding and pain."

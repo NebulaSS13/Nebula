@@ -76,13 +76,14 @@
 		src.hotkeybuttons += mymob.throw_icon
 		hud_elements |= mymob.throw_icon
 
-	if(hud_data.has_internals)
-		mymob.internals = new /obj/screen()
-		mymob.internals.icon = ui_style
-		mymob.internals.icon_state = "internal0"
-		mymob.internals.SetName("internal")
-		mymob.internals.screen_loc = ui_internal
-		hud_elements |= mymob.internals
+	if(hud_data.has_internals && isliving(mymob))
+		var/mob/living/living_user = mymob
+		living_user.internals_ui = new /obj/screen()
+		living_user.internals_ui.icon = ui_style
+		living_user.internals_ui.icon_state = "internal0"
+		living_user.internals_ui.SetName("internal")
+		living_user.internals_ui.screen_loc = ui_internal
+		hud_elements |= living_user.internals_ui
 
 	if(hud_data.has_warnings)
 		mymob.healths = new /obj/screen()

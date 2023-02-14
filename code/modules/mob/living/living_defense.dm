@@ -193,7 +193,7 @@
 /mob/living/proc/embed(var/obj/O, var/def_zone=null, var/datum/wound/supplied_wound)
 	O.forceMove(src)
 	LAZYADD(embedded, O)
-	src.verbs += /mob/proc/yank_out_object
+	verbs |= /mob/living/proc/yank_out_object
 
 //This is called when the mob is thrown into a dense turf
 /mob/living/proc/turf_collision(var/turf/T, var/speed)

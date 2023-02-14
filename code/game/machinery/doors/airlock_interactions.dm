@@ -55,8 +55,6 @@
 
 /mob/living/airlock_crush(var/crush_damage)
 
-/mob/living/carbon/airlock_crush(var/crush_damage)
-
 	. = ..()
 
 	for(var/i in 1 to round(crush_damage/AIRLOCK_CRUSH_INCREMENT, 1))

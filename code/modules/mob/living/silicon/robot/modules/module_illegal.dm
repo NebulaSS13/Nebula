@@ -28,7 +28,7 @@
 
 /obj/item/robot_module/syndicate/finalize_equipment(var/mob/living/silicon/robot/R)
 	var/obj/item/tank/jetpack/carbondioxide/jetpack = locate() in equipment
-	R.internals = jetpack
+	R.internals_ui = jetpack
 	. = ..()
 
 /obj/item/robot_module/syndicate/Destroy()

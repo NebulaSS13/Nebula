@@ -8,7 +8,7 @@
 		animate(pain, alpha = target, time = 15, easing = ELASTIC_EASING)
 		animate(pain, alpha = 0, time = 20)
 
-/mob/living/proc/can_feel_pain(var/check_organ)
+/mob/living/proc/can_feel_pain(var/obj/item/organ/check_organ)
 	if(check_organ)
 		if(!istype(check_organ))
 			return FALSE
@@ -51,7 +51,7 @@
 /mob/living/proc/do_species_pain_emote(power)
 	var/decl/species/my_species = get_species()
 	var/force_emote = my_species?.get_pain_emote(src, power)
-		if(force_emote && prob(power))
-			var/decl/emote/use_emote = usable_emotes[force_emote]
-			if(!(use_emote.message_type == AUDIBLE_MESSAGE &&HAS_STATUS(src, STAT_SILENCE)))
-				emote(force_emote)
+	if(force_emote && prob(power))
+		var/decl/emote/use_emote = usable_emotes[force_emote]
+		if(!(use_emote.message_type == AUDIBLE_MESSAGE &&HAS_STATUS(src, STAT_SILENCE)))
+			emote(force_emote)

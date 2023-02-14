@@ -22,7 +22,7 @@
 				var/type = pickweight(corpses)
 				var/mob/M
 				if(istext(type))
-					M = new /mob/living/carbon/human()
+					M = new /mob/living/carbon/human
 					var/mob/living/carbon/human/H = M
 					H.set_species(type)
 					H.make_husked()
@@ -38,7 +38,7 @@
 				var/type = pickweight(corpses)
 				var/mob/M
 				if(istext(type))
-					M = new /mob/living/carbon/human()
+					M = new /mob/living/carbon/human
 					var/mob/living/carbon/human/H = M
 					H.set_species(type)
 					H.make_husked()

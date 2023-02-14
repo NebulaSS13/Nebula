@@ -2312,7 +2312,6 @@
 #include "code\modules\mob\living\carbon\give.dm"
 #include "code\modules\mob\living\carbon\hallucinations.dm"
 #include "code\modules\mob\living\carbon\immunity.dm"
-#include "code\modules\mob\living\carbon\internals.dm"
 #include "code\modules\mob\living\carbon\life.dm"
 #include "code\modules\mob\living\carbon\resist.dm"
 #include "code\modules\mob\living\carbon\taste.dm"

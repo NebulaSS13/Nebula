@@ -14,9 +14,6 @@
 /mob/living/carbon/Destroy()
 	QDEL_NULL(touching)
 	QDEL_NULL(bloodstr)
-	reagents = null //We assume reagents is a reference to bloodstr here
-	delete_organs()
-	QDEL_NULL_LIST(hallucinations)
 	if(loc)
 		for(var/mob/M in contents)
 			M.dropInto(loc)
@@ -24,11 +21,6 @@
 		for(var/mob/M in contents)
 			qdel(M)
 	return ..()
-
-/mob/living/carbon/rejuvenate()
-	set_nutrition(400)
-	set_hydration(400)
-	..()
 
 /mob/living/carbon/get_ai_type()
 	if(ispath(species?.ai))

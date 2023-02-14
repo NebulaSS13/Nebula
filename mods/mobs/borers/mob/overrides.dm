@@ -36,15 +36,6 @@
 			borer.detatch()
 	. = ..()
 
-/mob/living/carbon/remove_implant(var/obj/item/implant, var/surgical_removal = FALSE)
-	. = ..()
-	if(. && !QDELETED(implant) && istype(implant, /mob/living/simple_animal/borer))
-		var/mob/living/simple_animal/borer/worm = implant
-		if(worm.controlling)
-			release_control()
-		worm.detatch()
-		worm.leave_host()
-
 /obj/item/glass_jar/Initialize()
 	accept_mobs |= /mob/living/simple_animal/borer
 	. = ..()

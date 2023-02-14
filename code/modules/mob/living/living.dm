@@ -744,6 +744,10 @@ default behaviour is:
 			add_overlay(A)
 
 /mob/living/Destroy()
+	reagents = null //We assume reagents is a reference to bloodstr here
+	delete_organs()
+	QDEL_NULL_LIST(hallucinations)
+	QDEL_NULL(internal)
 	if(auras)
 		for(var/a in auras)
 			remove_aura(a)
@@ -1123,3 +1127,12 @@ default behaviour is:
 
 /mob/proc/swap_hand()
 	SHOULD_CALL_PARENT(TRUE)
+
+/mob/living/remove_screen_obj_references()
+	. = ..()
+	QDEL_NULL_SCREEN(internals_ui)
+
+/mob/living/rejuvenate()
+	set_nutrition(400)
+	set_hydration(400)
+	..()

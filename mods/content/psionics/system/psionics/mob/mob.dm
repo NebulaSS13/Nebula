@@ -39,17 +39,17 @@
 		return PROJECTILE_FORCE_MISS
 	. = ..()
 
-/mob/living/carbon/get_cuff_breakout_mod()
+/mob/living/get_cuff_breakout_mod()
 	. = ..()
 	if(psi)
 		. = clamp(. - (psi.get_rank(PSI_PSYCHOKINESIS)*0.2), 0, 1)
 
 /mob/living/can_break_cuffs()
-	. = (psi && psi.can_use() && psi.get_rank(PSI_PSYCHOKINESIS) >= PSI_RANK_PARAMOUNT)
+	. = (psi?.can_use() && psi.get_rank(PSI_PSYCHOKINESIS) >= PSI_RANK_PARAMOUNT)
 
-/mob/living/carbon/get_special_resist_time()
+/mob/living/get_special_resist_time()
 	. = ..()
-	if(psi && psi.can_use())
+	if(psi?.can_use())
 		. += ((25 SECONDS) * psi.get_rank(PSI_PSYCHOKINESIS))
 
 /mob/living/is_telekinetic()

@@ -203,7 +203,7 @@
 	else
 		R.module.equipment += new/obj/item/tank/jetpack/carbondioxide
 		for(var/obj/item/tank/jetpack/carbondioxide in R.module.equipment)
-			R.internals = src
+			R.internals_ui = src
 		//R.icon_state="Miner+j"
 		return 1
 

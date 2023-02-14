@@ -1380,7 +1380,7 @@ Note that amputating the affected organ does in fact remove the infection from t
 	LAZYDISTINCTADD(implants, W)
 
 	owner.embedded_flag = 1
-	owner.verbs += /mob/proc/yank_out_object
+	owner.verbs |= /mob/living/proc/yank_out_object
 	W.add_blood(owner)
 	if(ismob(W.loc))
 		var/mob/living/H = W.loc

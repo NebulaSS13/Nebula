@@ -19,9 +19,17 @@
 		playsound(src, 'sound/effects/internals.ogg', 50, 0)
 	if(old_internal && !source)
 		to_chat(src, SPAN_NOTICE("You are no longer running on internals."))
+	internal = source
+	if(internals_ui)
+		internals_ui.icon_state = "internal[!!internal]"
 
 /mob/living/proc/get_internals()
-	return
+	return internal
+
+/mob/living/hud_reset(full_reset = FALSE)
+	. = ..()
+	if(. && internals_ui && get_internals())
+		internals_ui.icon_state = "internal1"
 
 // Set internals on or off. Implemented properly on /carbon
 /mob/living/proc/toggle_internals(var/mob/living/user)

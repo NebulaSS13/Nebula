@@ -58,3 +58,11 @@
 	var/losebreath = 0 // Used to indicate we failed to retrieve a breath, or that we should miss a breath (due to choking)
 
 	var/player_triggered_sleeping = 0
+
+	//these two help govern taste. The first is the last time a taste message was shown to the plaer.
+	//the second is the message in question.
+	var/last_taste_time = 0
+	var/last_taste_text = ""
+
+	var/obj/item/tank/internal
+	var/obj/screen/internals_ui
