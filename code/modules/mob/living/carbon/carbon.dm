@@ -123,15 +123,6 @@
 
 	return shock_damage
 
-/mob/living/carbon/proc/apply_shock(var/shock_damage, var/def_zone, var/siemens_coeff = 1.0)
-	shock_damage *= siemens_coeff
-	if(shock_damage < 0.5)
-		return 0
-	if(shock_damage < 1)
-		shock_damage = 1
-	apply_damage(shock_damage, BURN, def_zone, used_weapon="Electrocution")
-	return(shock_damage)
-
 /mob/proc/swap_hand()
 	SHOULD_CALL_PARENT(TRUE)
 
@@ -345,11 +336,6 @@
 	// carbon mobs have mouths by default
 	// behavior of this proc for humans is overridden in human.dm
 	return 1
-
-/mob/living/carbon/proc/check_mouth_coverage()
-	// carbon mobs do not have blocked mouths by default
-	// overridden in human_defense.dm
-	return null
 
 /mob/living/carbon/has_dexterity(var/dex_level)
 	. = ..() && (species.get_manual_dexterity() >= dex_level)

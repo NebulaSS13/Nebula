@@ -1108,3 +1108,15 @@ default behaviour is:
 
 /mob/living/proc/get_fullness()
 	return nutrition + (REAGENT_VOLUME(reagents, /decl/material/liquid/nutriment) * 25)
+
+/mob/living/proc/check_mouth_coverage()
+	return // overridden in human_defense.dm
+
+/mob/living/proc/apply_shock(var/shock_damage, var/def_zone, var/siemens_coeff = 1.0)
+	shock_damage *= siemens_coeff
+	if(shock_damage < 0.5)
+		return 0
+	if(shock_damage < 1)
+		shock_damage = 1
+	apply_damage(shock_damage, BURN, def_zone, used_weapon = "Electrocution")
+	return shock_damage
