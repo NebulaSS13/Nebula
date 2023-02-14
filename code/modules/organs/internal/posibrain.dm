@@ -24,7 +24,7 @@
 	organ_properties = ORGAN_PROP_PROSTHETIC //triggers robotization on init
 	scale_max_damage_to_species_health = FALSE
 
-	var/mob/living/carbon/brain/brainmob = null
+	var/mob/living/brain/brainmob = null
 	var/searching = 0
 	var/askDelay = 60 SECONDS
 

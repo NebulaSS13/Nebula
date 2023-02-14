@@ -425,7 +425,7 @@ var/global/list/singularities = list()
 
 /obj/singularity/proc/mezzer()
 	for(var/mob/living/carbon/M in oviewers(8, src))
-		if(istype(M, /mob/living/carbon/brain)) //Ignore brains
+		if(isbrain(M)) //Ignore brains
 			continue
 		if(M.status_flags & GODMODE)
 			continue

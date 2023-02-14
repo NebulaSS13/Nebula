@@ -1,7 +1,7 @@
-/mob/living/carbon/brain/handle_breathing()
+/mob/living/brain/handle_breathing()
 	return
 
-/mob/living/carbon/brain/handle_mutations_and_radiation()
+/mob/living/brain/handle_mutations_and_radiation()
 	if (radiation)
 		if (radiation > 100)
 			radiation = 100
@@ -33,7 +33,7 @@
 				updatehealth()
 
 
-/mob/living/carbon/brain/handle_environment(datum/gas_mixture/environment)
+/mob/living/brain/handle_environment(datum/gas_mixture/environment)
 	..()
 	if(!environment)
 		return
@@ -48,7 +48,7 @@
 		bodytemperature += 0.1*(environment.temperature - bodytemperature)*environment_heat_capacity/(environment_heat_capacity + 270000)
 
 
-/mob/living/carbon/brain/proc/handle_temperature_damage(body_part, exposed_temperature, exposed_intensity)
+/mob/living/brain/proc/handle_temperature_damage(body_part, exposed_temperature, exposed_intensity)
 	if(status_flags & GODMODE) return
 
 	if(exposed_temperature > bodytemperature)
@@ -62,13 +62,13 @@
 		//adjustFireLoss(2.5*discomfort)
 		adjustFireLoss(5.0*discomfort)
 
-/mob/living/carbon/brain/apply_chemical_effects()
+/mob/living/brain/apply_chemical_effects()
 	. = ..()
 	if(resting)
 		ADJ_STATUS(src, STAT_DIZZY, -4)
 		return TRUE
 
-/mob/living/carbon/brain/handle_regular_status_updates()	//TODO: comment out the unused bits >_>
+/mob/living/brain/handle_regular_status_updates()	//TODO: comment out the unused bits >_>
 	updatehealth()
 
 	if(stat == DEAD)	//DEAD. BROWN BREAD. SWIMMING WITH THE SPESS CARP
@@ -136,7 +136,7 @@
 
 	return 1
 
-/mob/living/carbon/brain/handle_regular_hud_updates()
+/mob/living/brain/handle_regular_hud_updates()
 	update_sight()
 	if (healths)
 		if (stat != 2)
@@ -171,5 +171,5 @@
 				reset_view(null)
 	return 1
 
-/mob/living/carbon/brain/can_change_intent()
+/mob/living/brain/can_change_intent()
 	return TRUE

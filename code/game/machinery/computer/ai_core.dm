@@ -140,7 +140,7 @@ var/global/list/empty_playable_ai_cores = list()
 				if(circuit && circuit_secured)
 
 					if((istype(P, /obj/item/mmi) || istype(P, /obj/item/organ/internal/posibrain)) && wired && circuit && circuit_secured)
-						var/mob/living/carbon/brain/B
+						var/mob/living/brain/B
 						if(istype(P, /obj/item/mmi))
 							var/obj/item/mmi/M = P
 							B = M.brainmob

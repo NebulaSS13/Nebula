@@ -1,6 +1,6 @@
 //This file was auto-corrected by findeclaration.exe on 25.5.2012 20:42:32
 
-/mob/living/carbon/brain
+/mob/living/brain
 	var/obj/item/container = null
 	var/timeofhostdeath = 0
 	var/emp_damage = 0//Handles a type of MMI damage
@@ -10,30 +10,35 @@
 	icon_state = "brain1"
 	mob_sort_value = 7
 
-/mob/living/carbon/brain/Initialize()
+/mob/living/brain/Initialize()
 	create_reagents(1000)
 	. = ..()
 
-/mob/living/carbon/brain/Destroy()
+/mob/living/brain/Destroy()
 	if(key)				//If there is a mob connected to this thing. Have to check key twice to avoid false death reporting.
 		if(stat!=DEAD)	//If not dead.
 			death(1)	//Brains can die again. AND THEY SHOULD AHA HA HA HA HA HA
 		ghostize()		//Ghostize checks for key so nothing else is necessary.
 	. = ..()
 
-/mob/living/carbon/brain/say_understands(mob/speaker, decl/language/speaking)
+/mob/living/brain/say_understands(mob/speaker, decl/language/speaking)
 	return (issilicon(speaker) && istype(container, /obj/item/mmi)) || ishuman(speaker) || ..()
 
-/mob/living/carbon/brain/UpdateLyingBuckledAndVerbStatus()
+/mob/living/brain/UpdateLyingBuckledAndVerbStatus()
 	if(istype(loc, /obj/item/mmi))
 		use_me = 1
 
-/mob/living/carbon/brain/isSynthetic()
+/mob/living/brain/isSynthetic()
 	return istype(loc, /obj/item/mmi/digital) || istype(loc, /obj/item/organ/internal/posibrain)
 
-/mob/living/carbon/brain/binarycheck()
+/mob/living/brain/binarycheck()
 	return isSynthetic()
 
-/mob/living/carbon/brain/check_has_mouth()
+/mob/living/brain/check_has_mouth()
 	return 0
 
+/mob/living/brain/can_use_rig()
+	return istype(loc, /obj/item/mmi)
+
+/mob/living/carbon/can_emote()
+	return (istype(container, /obj/item/mmi) && ..())

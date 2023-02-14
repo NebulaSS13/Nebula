@@ -15,7 +15,7 @@
 	damage_reduction = 0
 	scale_max_damage_to_species_health = FALSE
 	var/can_use_mmi = TRUE
-	var/mob/living/carbon/brain/brainmob = null
+	var/mob/living/brain/brainmob = null
 	var/should_announce_brain_damage = TRUE
 	var/oxygen_reserve = 6
 
