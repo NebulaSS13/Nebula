@@ -139,10 +139,6 @@
 				BLOOD TRANSFERS
 ****************************************************/
 
-//Gets blood from mob to the container, preserving all data in it.
-/mob/living/carbon/proc/take_blood(obj/item/chems/container, var/amount)
-	container.reagents.add_reagent(species.blood_reagent, amount, get_blood_data())
-	return 1
 
 //For humans, blood does not appear from blue, it comes from vessels.
 /mob/living/carbon/human/take_blood(obj/item/chems/container, var/amount)
@@ -160,15 +156,6 @@
 		LAZYSET(vessel.reagent_data, species.blood_reagent, get_blood_data())
 	vessel.trans_to_holder(container.reagents, amount)
 	return 1
-
-//Transfers blood from container ot vessels
-/mob/living/carbon/proc/inject_blood(var/amount, var/datum/reagents/donor)
-	if(!species.blood_volume)
-		return //Don't divide by 0
-	var/injected_data = REAGENT_DATA(donor, species.blood_reagent)
-	var/chems = LAZYACCESS(injected_data, "trace_chem")
-	for(var/C in chems)
-		src.reagents.add_reagent(C, (text2num(chems[C]) / species.blood_volume) * amount)//adds trace chemicals to owner's blood
 
 //Transfers blood from reagents to vessel, respecting blood types compatability.
 /mob/living/carbon/human/inject_blood(var/amount, var/datum/reagents/donor)
@@ -197,21 +184,6 @@
 	if(amount)
 		adjust_blood(amount, get_blood_data())
 	return amount
-
-/mob/living/carbon/proc/get_blood_data()
-	var/data = list()
-	data["donor"] = weakref(src)
-	data["blood_DNA"] = dna.unique_enzymes
-	data["blood_type"] = dna.b_type
-	data["species"] = species.name
-	data["has_oxy"] = species.blood_oxy
-	var/list/temp_chem = list()
-	for(var/R in reagents.reagent_volumes)
-		temp_chem[R] = REAGENT_VOLUME(reagents, R)
-	data["trace_chem"] = temp_chem
-	data["dose_chem"] = chem_doses ? chem_doses.Copy() : list()
-	data["blood_color"] = species.get_blood_color(src)
-	return data
 
 /proc/blood_splatter(var/target, var/source, var/large, var/spray_dir)
 
