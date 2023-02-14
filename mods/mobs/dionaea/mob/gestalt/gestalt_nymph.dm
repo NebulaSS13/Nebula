@@ -1,4 +1,4 @@
-/mob/living/carbon/alien/diona/proc/gestalt_with(var/mob/living/carbon/alien/diona/chirp)
+/mob/living/alien/diona/proc/gestalt_with(var/mob/living/alien/diona/chirp)
 	if(!istype(chirp) || chirp == src || chirp.incapacitated() || incapacitated())
 		return FALSE
 	if(istype(chirp.loc, /obj/structure/diona_gestalt) || istype(loc, /obj/structure/diona_gestalt))
@@ -9,12 +9,12 @@
 	blob.roll_up_atom(src, silent = TRUE)
 	return TRUE
 
-/obj/structure/diona_gestalt/proc/roll_up_atom(var/mob/living/carbon/alien/diona/chirp, var/silent)
+/obj/structure/diona_gestalt/proc/roll_up_atom(var/mob/living/alien/diona/chirp, var/silent)
 	if(!istype(chirp))
 		return
 	if(!silent)
 		visible_message("<span class='notice'>\The [chirp] is engulfed by \the [src].</span>")
-	if(istype(chirp, /mob/living/carbon/alien/diona))
+	if(istype(chirp, /mob/living/alien/diona))
 		nymphs[chirp] = TRUE
 		queue_icon_update()
 	chirp.forceMove(src)
@@ -36,7 +36,7 @@
 		shedding.dropInto(loc)
 		if(!silent)
 			visible_message(SPAN_DANGER("\The [shedding] splits away from \the [src]!"))
-		if(forcefully) 
+		if(forcefully)
 			shedding.throw_at(get_edge_target_turf(src,pick(global.alldirs)),rand(1,3),rand(3,5))
 		if(update_nymphs)
 			check_nymphs()
@@ -45,7 +45,7 @@
 /obj/structure/diona_gestalt/proc/check_nymphs()
 	if(LAZYLEN(nymphs.len) >= 2)
 		for(var/nimp in nymphs)
-			var/mob/living/carbon/alien/diona/chirp = nimp
+			var/mob/living/alien/diona/chirp = nimp
 			if(chirp.client)
 				return
 	visible_message("<span class='danger'>\The [src] has completely split apart!</span>")

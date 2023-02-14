@@ -9,7 +9,6 @@
 	var/datum/reagents/metabolism/bloodstr
 	var/datum/reagents/metabolism/touching
 
-	var/coughedtime = null
 	/// Whether the mob is performing cpr or not.
 	var/performing_cpr = FALSE
 	var/lastpuke = 0

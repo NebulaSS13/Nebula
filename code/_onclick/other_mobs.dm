@@ -66,10 +66,10 @@
 	Aliens
 */
 
-/mob/living/carbon/alien/RestrainedClickOn(var/atom/A)
+/mob/living/alien/RestrainedClickOn(var/atom/A)
 	return
 
-/mob/living/carbon/alien/UnarmedAttack(var/atom/A, var/proximity)
+/mob/living/alien/UnarmedAttack(var/atom/A, var/proximity)
 
 	if(!..())
 		return 0

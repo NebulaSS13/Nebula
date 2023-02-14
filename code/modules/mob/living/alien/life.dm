@@ -1,5 +1,5 @@
 // Alien larva are quite simple.
-/mob/living/carbon/alien/Life()
+/mob/living/alien/Life()
 
 	set invisibility = 0
 	set background = 1
@@ -14,7 +14,7 @@
 	//Status updates, death etc.
 	update_icon()
 
-/mob/living/carbon/alien/handle_mutations_and_radiation()
+/mob/living/alien/handle_mutations_and_radiation()
 
 	if(!radiation)
 		return
@@ -27,7 +27,7 @@
 	adjustToxLoss(-(rads))
 	return
 
-/mob/living/carbon/alien/handle_regular_status_updates()
+/mob/living/alien/handle_regular_status_updates()
 
 	if(status_flags & GODMODE)	return 0
 
@@ -70,14 +70,14 @@
 			blinded = 1
 			set_status(STAT_BLURRY, 1)
 		else if(GET_STATUS(src, STAT_BLIND))
-			ADJ_STATUS(src, STAT_BLIND, -1) 
+			ADJ_STATUS(src, STAT_BLIND, -1)
 			blinded = 1
 
 		update_icon()
 
 	return 1
 
-/mob/living/carbon/alien/handle_regular_hud_updates()
+/mob/living/alien/handle_regular_hud_updates()
 	update_sight()
 	if (healths)
 		if(stat != DEAD)
@@ -112,7 +112,7 @@
 				reset_view(null)
 	return 1
 
-/mob/living/carbon/alien/handle_environment(var/datum/gas_mixture/environment)
+/mob/living/alien/handle_environment(var/datum/gas_mixture/environment)
 	..()
 	// Both alien subtypes survive in vaccum and suffer in high temperatures,
 	// so I'll just define this once, for both (see radiation comment above)
@@ -124,7 +124,7 @@
 	else
 		if (fire) fire.icon_state = "fire0"
 
-/mob/living/carbon/alien/handle_fire()
+/mob/living/alien/handle_fire()
 	if(..())
 		return
 	bodytemperature += BODYTEMP_HEATING_MAX //If you're on fire, you heat up!

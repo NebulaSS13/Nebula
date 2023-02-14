@@ -1,8 +1,8 @@
 //can't equip anything
-/mob/living/carbon/alien/attack_ui(slot_id)
+/mob/living/alien/attack_ui(slot_id)
 	return
 
-/mob/living/carbon/alien/default_hurt_interaction(mob/user)
+/mob/living/alien/default_hurt_interaction(mob/user)
 	. = ..()
 	if(!.)
 		var/damage = rand(1, 9)

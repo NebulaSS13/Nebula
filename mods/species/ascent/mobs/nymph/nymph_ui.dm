@@ -16,7 +16,7 @@
 	icon_state = "held"
 
 /obj/screen/ascent_nymph_held/Click()
-	var/mob/living/carbon/alien/ascent_nymph/nymph = usr
+	var/mob/living/alien/ascent_nymph/nymph = usr
 	if(istype(nymph) && nymph.holding_item) nymph.unEquip(nymph.holding_item)
 
 /obj/screen/ascent_nymph_molt
@@ -26,7 +26,7 @@
 	icon_state = "molt-on"
 
 /obj/screen/ascent_nymph_molt/Click()
-	var/mob/living/carbon/alien/ascent_nymph/nymph = usr
+	var/mob/living/alien/ascent_nymph/nymph = usr
 	if(istype(nymph)) nymph.molt()
 
 /datum/hud/ascent_nymph

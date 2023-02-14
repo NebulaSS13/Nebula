@@ -1,4 +1,4 @@
-/mob/living/carbon/alien/explosion_act(severity)
+/mob/living/alien/explosion_act(severity)
 	..()
 	var/b_loss = null
 	var/f_loss = null

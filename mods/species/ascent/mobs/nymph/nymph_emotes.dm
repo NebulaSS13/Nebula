@@ -1,4 +1,4 @@
-/mob/living/carbon/alien/ascent_nymph
+/mob/living/alien/ascent_nymph
 	default_emotes = list(
 		/decl/emote/visible,
 		/decl/emote/visible/scratch,

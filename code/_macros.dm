@@ -16,7 +16,7 @@
 
 #define isAI(A) istype(A, /mob/living/silicon/ai)
 
-#define isalien(A) istype(A, /mob/living/carbon/alien)
+#define isalien(A) istype(A, /mob/living/alien)
 
 #define isanimal(A) istype(A, /mob/living/simple_animal)
 
@@ -81,10 +81,10 @@
 #define isplunger(A) istype(A, /obj/item/plunger)
 
 /proc/isspecies(A, B)
-	if(!iscarbon(A))
+	if(!B || !isliving(A))
 		return FALSE
-	var/mob/living/carbon/C = A
-	return C.species?.name == B
+	var/mob/living/C = A
+	return C.get_species_name() == B
 
 #define sequential_id(key) uniqueness_repository.Generate(/datum/uniqueness_generator/id_sequential, key)
 

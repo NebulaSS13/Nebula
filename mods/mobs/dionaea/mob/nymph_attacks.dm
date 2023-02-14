@@ -1,4 +1,4 @@
-/mob/living/carbon/alien/diona/UnarmedAttack(var/atom/A)
+/mob/living/alien/diona/UnarmedAttack(var/atom/A)
 
 	setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
 
@@ -46,7 +46,7 @@
 
 	. = ..()
 
-/mob/living/carbon/alien/diona/RangedAttack(atom/A, var/params)
+/mob/living/alien/diona/RangedAttack(atom/A, var/params)
 	if((a_intent == I_HURT || a_intent == I_GRAB) && holding_item)
 		setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
 		visible_message(SPAN_DANGER("\The [src] spits \a [holding_item] at \the [A]!"))
@@ -57,7 +57,7 @@
 		return TRUE
 	. = ..()
 
-/mob/living/carbon/alien/diona/proc/handle_tray_interaction(var/obj/machinery/portable_atmospherics/hydroponics/tray)
+/mob/living/alien/diona/proc/handle_tray_interaction(var/obj/machinery/portable_atmospherics/hydroponics/tray)
 
 	if(incapacitated())
 		return

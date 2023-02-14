@@ -26,7 +26,7 @@
 	update_emotes()
 
 // Specific defines follow.
-/mob/living/carbon/alien
+/mob/living/alien
 	default_emotes = list(
 		/decl/emote/visible,
 		/decl/emote/visible/scratch,

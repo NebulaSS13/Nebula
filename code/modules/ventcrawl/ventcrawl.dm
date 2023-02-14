@@ -81,7 +81,7 @@ var/global/list/ventcrawl_machinery = list(
 	if(!is_physically_disabled() && pipe)
 		return pipe
 
-/mob/living/carbon/alien/ventcrawl_carry()
+/mob/living/alien/ventcrawl_carry()
 	return 1
 
 /mob/living/proc/handle_ventcrawl(var/atom/clicked_on)

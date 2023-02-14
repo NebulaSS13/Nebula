@@ -1,4 +1,4 @@
-/mob/living/carbon/alien/ascent_nymph/UnarmedAttack(var/atom/A)
+/mob/living/alien/ascent_nymph/UnarmedAttack(var/atom/A)
 	setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
 
 	if(a_intent == I_DISARM || a_intent == I_HELP)
@@ -12,7 +12,7 @@
 
 	. = ..()
 
-/mob/living/carbon/alien/ascent_nymph/RangedAttack(atom/A, var/params)
+/mob/living/alien/ascent_nymph/RangedAttack(atom/A, var/params)
 	if((a_intent == I_HURT || a_intent == I_GRAB) && holding_item)
 		setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
 		visible_message(SPAN_DANGER("\The [src] spits \a [holding_item] at \the [A]!"))

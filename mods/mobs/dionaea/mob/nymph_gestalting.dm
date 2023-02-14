@@ -1,4 +1,4 @@
-/mob/living/carbon/alien/diona/verb/split_away()
+/mob/living/alien/diona/verb/split_away()
 	set name = "Split From Gestalt"
 	set category = "IC"
 	set src = usr

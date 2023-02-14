@@ -1,4 +1,4 @@
-/mob/living/carbon/alien/ascent_nymph/Life()
+/mob/living/alien/ascent_nymph/Life()
 
 	. = ..()
 	if(stat == DEAD)
@@ -22,7 +22,7 @@
 
 	update_nymph_hud()
 
-/mob/living/carbon/alien/ascent_nymph/proc/update_nymph_hud()
+/mob/living/alien/ascent_nymph/proc/update_nymph_hud()
 	// Update the HUD.
 	var/datum/hud/ascent_nymph/nymph_hud = hud_used
 	if(istype(nymph_hud))
@@ -42,7 +42,7 @@
 				if(150 to 250)					nymph_hud.drink.icon_state = "hydration3"
 				else							nymph_hud.drink.icon_state = "hydration4"
 
-/mob/living/carbon/alien/ascent_nymph/proc/can_molt()
+/mob/living/alien/ascent_nymph/proc/can_molt()
 	if(crystal_reserve < ANYMPH_CRYSTAL_MOLT)
 		to_chat(src, SPAN_WARNING("You don't have enough crystalline matter stored up to molt right now."))
 		return FALSE
@@ -54,12 +54,12 @@
 		return FALSE
 	return TRUE
 
-/mob/living/carbon/alien/ascent_nymph/proc/molt()
+/mob/living/alien/ascent_nymph/proc/molt()
 	if(!can_molt())
 		return
 
 	molt = min(molt + 1, 5)
-	var/mob/living/carbon/alien/ascent_nymph/nymph = usr
+	var/mob/living/alien/ascent_nymph/nymph = usr
 	nymph.visible_message("\icon[nymph] [nymph] begins to shimmy and shake out of its old skin.")
 	if(molt == 5)
 		if(do_after(nymph, 10 SECONDS, nymph, FALSE))

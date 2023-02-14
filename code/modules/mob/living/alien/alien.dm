@@ -1,4 +1,4 @@
-/mob/living/carbon/alien
+/mob/living/alien
 	name = "alien"
 	desc = "What IS that?"
 	pass_flags = PASS_FLAG_TABLE
@@ -11,7 +11,7 @@
 	var/death_msg = "lets out a waning guttural screech, green blood bubbling from its maw."
 	var/instance_num
 
-/mob/living/carbon/alien/Initialize()
+/mob/living/alien/Initialize()
 	verbs += /mob/living/proc/ventcrawl
 	verbs += /mob/living/proc/hide
 
@@ -26,15 +26,15 @@
 	gender = NEUTER
 	. = ..()
 
-/mob/living/carbon/alien/u_equip(obj/item/W)
+/mob/living/alien/u_equip(obj/item/W)
 	SHOULD_CALL_PARENT(FALSE)
 	return FALSE
 
-/mob/living/carbon/alien/restrained()
+/mob/living/alien/restrained()
 	return 0
 
-/mob/living/carbon/alien/show_inv(mob/user)
+/mob/living/alien/show_inv(mob/user)
 	return //Consider adding cuffs and hats to this, for the sake of fun.
 
-/mob/living/carbon/alien/get_admin_job_string()
+/mob/living/alien/get_admin_job_string()
 	return "Alien"

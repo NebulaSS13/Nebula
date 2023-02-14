@@ -46,6 +46,7 @@
 	/// For leaping and vaulting.
 	var/jumping = FALSE
 
+	var/coughedtime = null
 	var/list/chem_effects
 	var/list/chem_doses
 	var/last_pain_message

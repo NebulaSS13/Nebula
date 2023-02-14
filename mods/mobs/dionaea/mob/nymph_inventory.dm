@@ -1,16 +1,16 @@
-/mob/living/carbon/alien/diona/drop_from_inventory(var/obj/item/I)
+/mob/living/alien/diona/drop_from_inventory(var/obj/item/I)
 	. = ..()
 	if(I == holding_item)
 		holding_item = null
 
-/mob/living/carbon/alien/diona/put_in_hands(var/obj/item/W) // No hands. Use mouth.
+/mob/living/alien/diona/put_in_hands(var/obj/item/W) // No hands. Use mouth.
 	if(can_collect(W))
 		collect(W)
 		return TRUE
 	W.forceMove(get_turf(src))
 	return TRUE
 
-/mob/living/carbon/alien/diona/proc/can_collect(var/obj/item/collecting)
+/mob/living/alien/diona/proc/can_collect(var/obj/item/collecting)
 	var/datum/extension/hattable/hattable = get_extension(src, /datum/extension/hattable)
 	return (!holding_item && \
 		istype(collecting) && \
@@ -21,7 +21,7 @@
 		collecting.w_class <= can_pull_size \
 	)
 
-/mob/living/carbon/alien/diona/proc/collect(var/obj/item/collecting)
+/mob/living/alien/diona/proc/collect(var/obj/item/collecting)
 	collecting.forceMove(src)
 	holding_item = collecting
 	visible_message(SPAN_NOTICE("\The [src] engulfs \the [holding_item]."))
@@ -44,14 +44,14 @@
 		holding_item.equipped(src)
 		holding_item.screen_loc = DIONA_SCREEN_LOC_HELD
 
-/mob/living/carbon/alien/diona/verb/drop_item_verb()
+/mob/living/alien/diona/verb/drop_item_verb()
 	set name = "Drop Held Item"
 	set desc = "Drop the item you are currently holding inside."
 	set category = "IC"
 	set src = usr
 	drop_item()
 
-/mob/living/carbon/alien/diona/drop_item()
+/mob/living/alien/diona/drop_item()
 	var/item = holding_item
 	if(item && unEquip(item))
 		visible_message(SPAN_NOTICE("\The [src] regurgitates \the [item]."))

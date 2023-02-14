@@ -25,7 +25,7 @@
 	icon_state = "held"
 
 /obj/screen/diona_held/Click()
-	var/mob/living/carbon/alien/diona/chirp = usr
+	var/mob/living/alien/diona/chirp = usr
 	if(istype(chirp) && chirp.holding_item) chirp.unEquip(chirp.holding_item)
 
 /datum/hud/diona_nymph

@@ -10,7 +10,7 @@
 		if(stepping)
 			step_towards(src, stepping)
 
-		
+
 	else if(istype(AM, /obj/structure/diona_gestalt) && AM != src) // Combine!?
 		var/obj/structure/diona_gestalt/gestalt = AM
 		if(LAZYLEN(gestalt.nymphs))
@@ -24,10 +24,10 @@
 
 /obj/structure/diona_gestalt/Bumped(var/atom/A)
 	. = ..()
-	if(istype(A, /mob/living/carbon/alien/diona) && A.Adjacent(src)) // Combine...
+	if(istype(A, /mob/living/alien/diona) && A.Adjacent(src)) // Combine...
 		roll_up_atom(A)
 
-/obj/structure/diona_gestalt/Move() 
+/obj/structure/diona_gestalt/Move()
 	. = ..()
 	if(.)
 		for(var/atom/movable/AM in loc)
