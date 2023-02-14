@@ -15,7 +15,7 @@
 		return
 
 	var/T = get_turf(mob)
-	var/mob/living/carbon/human/quantum/Q = new (T)
+	var/mob/living/human/quantum/Q = new (T)
 
 	prefs.copy_to(Q)
 
@@ -51,7 +51,7 @@
 	belt =     /obj/item/storage/belt/utility/full/quantum
 	id_slot =  slot_wear_id_str
 
-/mob/living/carbon/human/quantum
+/mob/living/human/quantum
 	status_flags = NO_ANTAG
 	universal_understand = TRUE
 	var/fall_override = TRUE
@@ -71,15 +71,15 @@
 		/datum/movement_handler/mob/movement
 	)
 
-/mob/living/carbon/human/quantum/can_inject(mob/user, target_zone)
+/mob/living/human/quantum/can_inject(mob/user, target_zone)
 	to_chat(user, SPAN_DANGER("\The [src] disarms you before you can inject them."))
 	user.drop_item()
 	return FALSE
 
-/mob/living/carbon/human/quantum/binarycheck()
+/mob/living/human/quantum/binarycheck()
 	return TRUE
 
-/mob/living/carbon/human/quantum/proc/delete_self()
+/mob/living/human/quantum/proc/delete_self()
 	if(QDELETED(src))
 		return
 
@@ -95,7 +95,7 @@
 
 	QDEL_IN(src, 7)
 
-/mob/living/carbon/human/quantum/verb/quantum_antigrav()
+/mob/living/human/quantum/verb/quantum_antigrav()
 	set name = "Toggle Gravity"
 	set desc = "Toggles falling."
 	set category = "Ω"
@@ -107,7 +107,7 @@
 		fall_override = TRUE
 		to_chat(usr, SPAN_NOTICE("You will no longer fall."))
 
-/mob/living/carbon/human/quantum/verb/quantum_walk()
+/mob/living/human/quantum/verb/quantum_walk()
 	set name = "Toggle Phase Walking"
 	set desc = "Uses quantum technology to phase through solid matter and move quickly."
 	set category = "Ω"
@@ -120,7 +120,7 @@
 		usr.ReplaceMovementHandler(/datum/movement_handler/mob/incorporeal)
 		to_chat(usr, SPAN_NOTICE("You will now phase through solid matter."))
 
-/mob/living/carbon/human/quantum/verb/quantum_recover()
+/mob/living/human/quantum/verb/quantum_recover()
 	set name = "Rejuvenate Self"
 	set desc = "Use quantum powers you to restore your health."
 	set category = "Ω"
@@ -128,14 +128,14 @@
 
 	revive()
 
-/mob/living/carbon/human/quantum/verb/quantum_quit()
+/mob/living/human/quantum/verb/quantum_quit()
 	set name = "Teleport Out"
 	set desc = "Activate quantum magic to leave and return to your original mob (if you have one)."
 	set category = "Ω"
 
 	delete_self()
 
-/mob/living/carbon/human/quantum/verb/quantum_tgm()
+/mob/living/human/quantum/verb/quantum_tgm()
 	set name = "Toggle Godmode"
 	set desc = "Enable or disable god mode. For testing things that require you to be vulnerable."
 	set category = "Ω"
@@ -152,7 +152,7 @@
 	if(!user)
 		return TRUE
 
-	if(!istype(user, /mob/living/carbon/human/quantum))
+	if(!istype(user, /mob/living/human/quantum))
 		to_chat(user, SPAN_WARNING("Your hand seems to go right through \the [src]. It's like it doesn't exist."))
 		return TRUE
 
@@ -169,7 +169,7 @@
 	if(!user)
 		return TRUE
 
-	if(!istype(user, /mob/living/carbon/human/quantum))
+	if(!istype(user, /mob/living/human/quantum))
 		to_chat(user, SPAN_WARNING("Your hand seems to go right through \the [src]. It's like it doesn't exist."))
 		return TRUE
 
@@ -195,7 +195,7 @@
 	if(!user)
 		return TRUE
 
-	if(!istype(user, /mob/living/carbon/human/quantum))
+	if(!istype(user, /mob/living/human/quantum))
 		to_chat(user, SPAN_WARNING("Your hand seems to go right through \the [src]. It's like it doesn't exist."))
 		return TRUE
 
@@ -212,7 +212,7 @@
 	if(!user)
 		return TRUE
 
-	if(!istype(user, /mob/living/carbon/human/quantum))
+	if(!istype(user, /mob/living/human/quantum))
 		to_chat(user, SPAN_WARNING("Your hand seems to go right through \the [src]. It's like it doesn't exist."))
 		return TRUE
 
@@ -249,7 +249,7 @@
 	if(!user)
 		return TRUE
 
-	if(!istype(user, /mob/living/carbon/human/quantum))
+	if(!istype(user, /mob/living/human/quantum))
 		to_chat(user, SPAN_WARNING("Your hand seems to go right through \the [src]. It's like it doesn't exist."))
 		return TRUE
 
@@ -265,7 +265,7 @@
 	if(!user)
 		return TRUE
 
-	if(!istype(user, /mob/living/carbon/human/quantum))
+	if(!istype(user, /mob/living/human/quantum))
 		to_chat(user, SPAN_WARNING("Your hand seems to go right through \the [src]. It's like it doesn't exist."))
 		return TRUE
 
@@ -283,7 +283,7 @@
 	if(!user)
 		return TRUE
 
-	if(!istype(user, /mob/living/carbon/human/quantum))
+	if(!istype(user, /mob/living/human/quantum))
 		to_chat(user, SPAN_WARNING("Your hand seems to go right through \the [src]. It's like it doesn't exist."))
 		return TRUE
 
@@ -295,8 +295,8 @@
 	// Full set of tools
 	new /obj/item/multitool(src)
 
-/mob/living/carbon/human/quantum/restrained()
+/mob/living/human/quantum/restrained()
 	return FALSE
 
-/mob/living/carbon/human/quantum/can_fall()
+/mob/living/human/quantum/can_fall()
 	return fall_override ? FALSE : ..()

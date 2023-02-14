@@ -50,7 +50,7 @@ GLOBAL_PROTECTED_UNTYPED(game_id, null)
 			if(special_role_name)
 				strings += special_role_name
 		if(ishuman(M))
-			var/mob/living/carbon/human/H = M
+			var/mob/living/human/H = M
 			if(H.species)
 				strings += H.species.name
 		for(var/text in strings)

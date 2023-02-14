@@ -45,7 +45,7 @@
 		return HIDING_MOB_LAYER
 	. = ..()
 
-/mob/living/carbon/human/get_base_layer()
+/mob/living/human/get_base_layer()
 	if(lying)
 		return LYING_HUMAN_LAYER
 	. = ..()

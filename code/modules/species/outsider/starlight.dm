@@ -27,7 +27,7 @@
 		TAG_CULTURE = /decl/cultural_info/culture/other
 	)
 
-/decl/species/starlight/handle_death(var/mob/living/carbon/human/H)
+/decl/species/starlight/handle_death(var/mob/living/human/H)
 	addtimer(CALLBACK(H,/mob/proc/dust),0)
 
 /decl/species/starlight/starborn
@@ -75,7 +75,7 @@
 		/obj/aura/starborn
 		)
 
-/decl/species/starlight/starborn/handle_death(var/mob/living/carbon/human/H)
+/decl/species/starlight/starborn/handle_death(var/mob/living/human/H)
 	..()
 	var/turf/T = get_turf(H)
 	var/obj/effect/fluid/F = locate() in T
@@ -107,6 +107,6 @@
 
 	override_organ_types = list(BP_EYES = /obj/item/organ/internal/eyes/blueforged)
 
-/decl/species/starlight/blueforged/handle_death(var/mob/living/carbon/human/H)
+/decl/species/starlight/blueforged/handle_death(var/mob/living/human/H)
 	..()
 	new /obj/effect/temporary(get_turf(H),11, 'icons/mob/mob.dmi', "liquify")

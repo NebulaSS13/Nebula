@@ -61,7 +61,7 @@
 		to_chat(user, SPAN_WARNING("You cannot wrap yourself!"))
 		return
 	if(ishuman(AM))
-		var/mob/living/carbon/human/H = AM
+		var/mob/living/human/H = AM
 		if(!H.incapacitated(INCAPACITATION_DISABLED | INCAPACITATION_RESTRAINED))
 			if(user)
 				to_chat(user, SPAN_WARNING("\The [H] is moving around too much. Restrain or incapacitate them first."))
@@ -95,7 +95,7 @@
 			qdel(wrapper)
 
 	else if(ishuman(target))
-		var/mob/living/carbon/human/H = target
+		var/mob/living/human/H = target
 		if(H.incapacitated(INCAPACITATION_DISABLED | INCAPACITATION_RESTRAINED))
 			var/obj/item/parcel/wrapper = new wrapped_result_type(get_turf(target))
 			if(wrapper.make_parcel(target, user)) //Call this directly so it applies our fingerprints

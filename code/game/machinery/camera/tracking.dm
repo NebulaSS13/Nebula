@@ -115,7 +115,7 @@
 		else
 			TB.names.Add(name)
 			TB.namecounts[name] = 1
-		if(istype(M, /mob/living/carbon/human))
+		if(istype(M, /mob/living/human))
 			TB.humans[name] = M
 		else
 			TB.others[name] = M
@@ -221,7 +221,7 @@
 		var/datum/extension/network_device/camera/robot/D = get_extension(src, /datum/extension/network_device)
 		return D && D.is_functional() ? TRACKING_POSSIBLE : TRACKING_NO_COVERAGE
 
-/mob/living/carbon/human/tracking_status()
+/mob/living/human/tracking_status()
 	if(is_cloaked())
 		. = TRACKING_TERMINATE
 	else

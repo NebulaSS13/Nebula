@@ -31,7 +31,7 @@
 	if(loc == user)
 		if(user.incapacitated() || user.restrained())
 			return
-		var/mob/living/carbon/human/H = user
+		var/mob/living/human/H = user
 		if(istype(H) && src == H.get_equipped_item(slot_wear_id_str))
 			return attack_self(user)
 	return ..()

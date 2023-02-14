@@ -14,7 +14,7 @@
 
 */
 
-/mob/living/carbon/human/proc/show_descriptors_to(var/mob/user)
+/mob/living/human/proc/show_descriptors_to(var/mob/user)
 	if(LAZYLEN(appearance_descriptors))
 		if(user == src)
 			for(var/entry in appearance_descriptors)
@@ -86,8 +86,8 @@
 
 /datum/appearance_descriptor/proc/get_initial_comparison_component(var/mob/me, var/mob/them, var/decl/pronouns/my_gender, var/decl/pronouns/other_gender, var/my_value)
 	if(!skip_species_mention)
-		var/mob/living/carbon/human/H = me
-		var/mob/living/carbon/human/O = them
+		var/mob/living/human/H = me
+		var/mob/living/human/O = them
 		if(istype(H) && (!istype(O) || H.species.name != O.species.name))
 			. = get_species_text("\improper [H.species.name]")
 	. = "[get_third_person_message_start(my_gender)] [get_standalone_value_descriptor(my_value)][.]"
@@ -113,7 +113,7 @@
 	// Append the same-descriptor comparison text.
 	var/comparing_value
 	if(ishuman(observer))
-		var/mob/living/carbon/human/human_observer = observer
+		var/mob/living/human/human_observer = observer
 		if(LAZYLEN(human_observer.appearance_descriptors) && !isnull(human_observer.species.appearance_descriptors[name]) && !isnull(human_observer.appearance_descriptors[name]))
 			var/datum/appearance_descriptor/obs_descriptor = human_observer.species.appearance_descriptors[name]
 			comparing_value = human_observer.appearance_descriptors[name] * obs_descriptor.relative_value_comparison_multiplier

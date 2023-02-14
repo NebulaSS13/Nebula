@@ -59,7 +59,7 @@
 	if (aiOverride)
 		return ..(freq, level)
 	if(ishuman(src.loc))
-		var/mob/living/carbon/human/H = src.loc
+		var/mob/living/human/H = src.loc
 		for(var/slot in global.ear_slots)
 			if(H.get_equipped_item(slot) == src)
 				return ..(freq, level)

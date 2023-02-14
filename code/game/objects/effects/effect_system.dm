@@ -280,10 +280,10 @@ steam.start() -- spawns the effect
 
 /obj/effect/effect/smoke/mustard/Move()
 	..()
-	for(var/mob/living/carbon/human/R in get_turf(src))
+	for(var/mob/living/human/R in get_turf(src))
 		affect(R)
 
-/obj/effect/effect/smoke/mustard/affect(var/mob/living/carbon/human/R)
+/obj/effect/effect/smoke/mustard/affect(var/mob/living/human/R)
 	if (!..())
 		return 0
 	if (R.get_equipped_item(slot_wear_suit_str))

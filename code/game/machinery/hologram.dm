@@ -63,7 +63,7 @@ var/global/const/HOLOPAD_MODE = RANGE_BASED
 	var/area/A = get_area(src)
 	desc = "It's a floor-mounted device for projecting holographic images. Its ID is '[A.proper_name]'"
 
-/obj/machinery/hologram/holopad/interface_interact(var/mob/living/carbon/human/user) //Carn: Hologram requests.
+/obj/machinery/hologram/holopad/interface_interact(var/mob/living/human/user) //Carn: Hologram requests.
 	if(!CanInteract(user, DefaultTopicState()))
 		return FALSE
 	if(incoming_connection && caller_id)

@@ -147,8 +147,8 @@
 	user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
 	if (user.a_intent && user.a_intent == I_HURT)
 
-		if (istype(user,/mob/living/carbon/human))
-			var/mob/living/carbon/human/H = user
+		if (istype(user,/mob/living/human))
+			var/mob/living/human/H = user
 			if(H.species.can_shred(H))
 				attack_generic(H,25)
 				return

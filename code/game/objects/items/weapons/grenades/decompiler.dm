@@ -99,7 +99,7 @@
 						thing = pick(options)
 
 				if(ishuman(thing))
-					var/mob/living/carbon/human/H = thing
+					var/mob/living/human/H = thing
 					for(var/obj/item/organ/external/limb in H.get_external_organs())
 						if(BP_IS_PROSTHETIC(limb) && !length(limb.children))
 							limb.dismember()

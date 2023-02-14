@@ -232,7 +232,7 @@
 	else
 		icon_state = "[bis.base_icon_state]_off"
 
-/obj/item/camera/attack(mob/living/carbon/human/M, mob/user)
+/obj/item/camera/attack(mob/living/human/M, mob/user)
 	return
 
 /obj/item/camera/attack_self(mob/user)

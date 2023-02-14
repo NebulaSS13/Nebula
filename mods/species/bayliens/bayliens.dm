@@ -1,7 +1,7 @@
 /decl/modpack/bayliens
 	name = "Baystation 12 Aliens"
 
-/mob/living/carbon/human/Process_Spacemove()
+/mob/living/human/Process_Spacemove()
 	. = ..()
 	if(!. && inertia_dir)
 		// This is horrible but short of spawning a jetpack inside the organ than locating

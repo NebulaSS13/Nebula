@@ -10,7 +10,7 @@
 	material = /decl/material/solid/plastic
 	matter = list(
 		/decl/material/solid/metal/copper    = MATTER_AMOUNT_REINFORCEMENT,
-		/decl/material/solid/silicon         = MATTER_AMOUNT_REINFORCEMENT, 
+		/decl/material/solid/silicon         = MATTER_AMOUNT_REINFORCEMENT,
 		/decl/material/solid/metal/steel     = MATTER_AMOUNT_REINFORCEMENT,
 		/decl/material/solid/metal/plutonium = MATTER_AMOUNT_TRACE,
 	)
@@ -212,7 +212,7 @@
 		sjm.enable()
 	jammer_method = sjm
 
-/obj/item/suit_sensor_jammer/proc/may_process_crew_data(var/mob/living/carbon/human/H, var/obj/item/clothing/under/C, var/turf/pos)
+/obj/item/suit_sensor_jammer/proc/may_process_crew_data(var/mob/living/human/H, var/obj/item/clothing/under/C, var/turf/pos)
 	if(!pos)
 		return FALSE
 	var/turf/T = get_turf(src)

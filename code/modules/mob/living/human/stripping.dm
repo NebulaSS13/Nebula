@@ -1,4 +1,4 @@
-/mob/living/carbon/human/proc/handle_strip(var/slot_to_strip_text,var/mob/living/user,var/obj/item/clothing/holder)
+/mob/living/human/proc/handle_strip(var/slot_to_strip_text,var/mob/living/user,var/obj/item/clothing/holder)
 	if(!slot_to_strip_text || !istype(user))
 		return
 
@@ -115,7 +115,7 @@
 			user.put_in_active_hand(held)
 
 // Empty out everything in the target's pockets.
-/mob/living/carbon/human/proc/empty_pockets(var/mob/living/user)
+/mob/living/human/proc/empty_pockets(var/mob/living/user)
 	for(var/slot in global.pocket_slots)
 		var/obj/item/pocket = get_equipped_item(slot)
 		if(pocket)
@@ -126,7 +126,7 @@
 	else
 		to_chat(user, SPAN_WARNING("\The [src] has nothing in their pockets."))
 
-/mob/living/carbon/human/proc/place_in_pockets(obj/item/I, var/mob/living/user)
+/mob/living/human/proc/place_in_pockets(obj/item/I, var/mob/living/user)
 	if(!user.unEquip(I))
 		return
 	for(var/slot in global.pocket_slots)
@@ -136,7 +136,7 @@
 	user.put_in_active_hand(I)
 
 // Modify the current target sensor level.
-/mob/living/carbon/human/proc/toggle_sensors(var/mob/living/user)
+/mob/living/human/proc/toggle_sensors(var/mob/living/user)
 	var/obj/item/clothing/under/suit = get_equipped_item(slot_w_uniform_str)
 	if(!istype(suit))
 		to_chat(user, "<span class='warning'>\The [src] is not wearing a suit with sensors.</span>")

@@ -209,7 +209,7 @@
 	ADJ_STATUS(M, STAT_JITTER, 3)
 	ADJ_STATUS(M, STAT_DIZZY,  3)
 	if(prob(0.1) && ishuman(M))
-		var/mob/living/carbon/human/H = M
+		var/mob/living/human/H = M
 		H.seizure()
 		H.adjustBrainLoss(rand(8, 12))
 	if(prob(5))
@@ -224,7 +224,7 @@
 /decl/material/liquid/glowsap/gleam/affect_overdose(var/mob/living/M)
 	M.adjustBrainLoss(rand(1, 5))
 	if(ishuman(M) && prob(10))
-		var/mob/living/carbon/human/H = M
+		var/mob/living/human/H = M
 		H.seizure()
 	if(prob(10))
 		to_chat(M, SPAN_DANGER("<font size = [rand(2,4)]>[pick(overdose_messages)]</font>"))

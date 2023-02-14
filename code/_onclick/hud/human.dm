@@ -1,4 +1,4 @@
-/mob/living/carbon/human
+/mob/living/human
 	hud_type = /datum/hud/human
 
 /datum/hud/human/FinalizeInstantiation()
@@ -7,7 +7,7 @@
 	var/ui_color = get_ui_color()
 	var/ui_alpha = get_ui_alpha()
 
-	var/mob/living/carbon/human/target = mymob
+	var/mob/living/human/target = mymob
 	var/datum/hud_data/hud_data = istype(target) ? target.species.hud : new()
 	if(hud_data.icon)
 		ui_style = hud_data.icon
@@ -217,7 +217,7 @@
 	hidden_inventory_update()
 	persistant_inventory_update()
 
-/mob/living/carbon/human/verb/toggle_hotkey_verbs()
+/mob/living/human/verb/toggle_hotkey_verbs()
 	set category = "OOC"
 	set name = "Toggle hotkey buttons"
 	set desc = "This disables or enables the user interface buttons which can be used with hotkeys."

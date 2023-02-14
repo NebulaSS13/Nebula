@@ -377,7 +377,7 @@
 
 					var/obj/item/paper/R = new(src.loc, null, txt, "Account balance: [authenticated_account.owner_name]")
 					R.apply_custom_stamp(
-						overlay_image('icons/obj/bureaucracy.dmi', "paper_stamp-boss", flags = RESET_COLOR), 
+						overlay_image('icons/obj/bureaucracy.dmi', "paper_stamp-boss", flags = RESET_COLOR),
 						"by the [machine_id]")
 
 				if(prob(50))
@@ -387,7 +387,7 @@
 			if ("print_transaction")
 				if(authenticated_account)
 					var/txt
-					
+
 					txt = "<b>Transaction logs</b><br>"
 					txt += "<i>Account holder:</i> [authenticated_account.owner_name]<br>"
 					txt += "<i>Account number:</i> [authenticated_account.account_number]<br>"
@@ -414,7 +414,7 @@
 					txt += "</table>"
 					var/obj/item/paper/R = new(src.loc, null, txt, "Transaction logs: [authenticated_account.owner_name]")
 					R.apply_custom_stamp(
-						overlay_image('icons/obj/bureaucracy.dmi', "paper_stamp-boss", flags = RESET_COLOR), 
+						overlay_image('icons/obj/bureaucracy.dmi', "paper_stamp-boss", flags = RESET_COLOR),
 						"by the [machine_id]")
 
 				if(prob(50))
@@ -441,14 +441,14 @@
 
 	interact(usr)
 
-/obj/machinery/atm/proc/scan_user(mob/living/carbon/human/human_user)
+/obj/machinery/atm/proc/scan_user(mob/living/human/human_user)
 	if(!authenticated_account)
 		var/obj/item/card/id/I = human_user.GetIdCard()
 		if(istype(I))
 			return I
 
 // put the currently held id on the ground or in the hand of the user
-/obj/machinery/atm/proc/release_held_id(mob/living/carbon/human/human_user)
+/obj/machinery/atm/proc/release_held_id(mob/living/human/human_user)
 	if(!held_card)
 		return
 

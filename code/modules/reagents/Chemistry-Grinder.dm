@@ -226,7 +226,7 @@
 	if(CanPhysicallyInteractWith(user, src))
 		interface_interact(user)
 
-/obj/machinery/reagentgrinder/proc/attempt_skill_effect(mob/living/carbon/human/user)
+/obj/machinery/reagentgrinder/proc/attempt_skill_effect(mob/living/human/user)
 	if(!istype(user) || !prob(user.skill_fail_chance(skill_to_check, 50, SKILL_BASIC)))
 		return FALSE
 	var/hand = pick(BP_L_HAND, BP_R_HAND)
@@ -270,7 +270,7 @@
 	item_size_limit = ITEM_SIZE_SMALL
 	skill_to_check = SKILL_COOKING
 
-/obj/machinery/reagentgrinder/juicer/attempt_skill_effect(mob/living/carbon/human/user)
+/obj/machinery/reagentgrinder/juicer/attempt_skill_effect(mob/living/human/user)
 	if(!istype(user) || !prob(user.skill_fail_chance(skill_to_check, 50, SKILL_BASIC)))
 		return
 	visible_message(SPAN_NOTICE("\The [src] whirrs violently and spills its contents all over \the [user]!"))

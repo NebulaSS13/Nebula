@@ -134,7 +134,7 @@ default behaviour is:
 						if(!tmob.buckled.anchored)
 							step(tmob.buckled, t)
 				if(ishuman(AM))
-					var/mob/living/carbon/human/M = AM
+					var/mob/living/human/M = AM
 					for(var/obj/item/grab/G in M.grabbed_by)
 						step(G.assailant, get_dir(G.assailant, AM))
 						G.adjust_position()
@@ -214,7 +214,7 @@ default behaviour is:
 		btemperature -= change
 		if(actual < desired)
 			btemperature = desired
-//	if(istype(src, /mob/living/carbon/human))
+//	if(istype(src, /mob/living/human))
 //		log_debug("[src] ~ [src.bodytemperature] ~ [temperature]")
 
 	return btemperature
@@ -679,7 +679,7 @@ default behaviour is:
 		return TRUE
 	return FALSE
 
-/mob/living/carbon/human/canUnEquip(obj/item/I)
+/mob/living/human/canUnEquip(obj/item/I)
 	if(!..())
 		return
 	if(I in get_organs())

@@ -107,7 +107,7 @@ var/global/list/wireColourNames = list("darkred" = "dark red")
 
 		var/colour_name = replace_colours[colour] || colour
 		if(colour_name in wireColourNames)
-			colour_name = wireColourNames[colour_name] 
+			colour_name = wireColourNames[colour_name]
 
 		html += "<tr>"
 		html += "<td[row_options1]><font color='[colour_name]'>&#9724;</font>[capitalize(colour_name)]</td>"
@@ -135,7 +135,7 @@ var/global/list/wireColourNames = list("darkred" = "dark red")
 
 			var/obj/item/offhand_item
 			if(ishuman(usr))
-				var/mob/living/carbon/human/H = usr
+				var/mob/living/human/H = usr
 				offhand_item = H.wearing_rig && H.wearing_rig.selected_module
 
 			holder.add_hiddenprint(L)

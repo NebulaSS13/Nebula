@@ -47,7 +47,7 @@
 	l_pocket = /obj/item/pinpointer
 	r_pocket = /obj/item/disk/nuclear
 
-/decl/special_role/deathsquad/equip(var/mob/living/carbon/human/player)
+/decl/special_role/deathsquad/equip(var/mob/living/human/player)
 	if (player.mind == leader)
 		default_outfit = /decl/hierarchy/outfit/commando/leader
 	else
@@ -83,7 +83,7 @@
 	player.current.real_name = player.name
 	player.current.SetName(player.current.name)
 
-	var/mob/living/carbon/human/H = player.current
+	var/mob/living/human/H = player.current
 	if(istype(H))
 		var/decl/pronouns/pronouns = pick(H.species.available_pronouns)
 		H.set_gender(pronouns.name)

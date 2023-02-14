@@ -316,8 +316,8 @@
 		to_chat(user, "There is no [get_fitting_name()] in this light.")
 		return TRUE
 
-	if(istype(user,/mob/living/carbon/human))
-		var/mob/living/carbon/human/H = user
+	if(istype(user,/mob/living/human))
+		var/mob/living/human/H = user
 		if(H.species.can_shred(H))
 			visible_message("<span class='warning'>[user.name] smashed the light!</span>", 3, "You hear a tinkle of breaking glass.")
 			broken()
@@ -327,7 +327,7 @@
 	if(on)
 
 		var/prot = FALSE
-		var/mob/living/carbon/human/H = user
+		var/mob/living/human/H = user
 		if(istype(H))
 			var/obj/item/clothing/gloves/G = H.get_equipped_item(slot_gloves_str)
 			if(istype(G) && G.max_heat_protection_temperature > LIGHT_BULB_TEMPERATURE)

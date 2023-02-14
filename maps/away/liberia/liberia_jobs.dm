@@ -25,7 +25,7 @@
 		SKILL_PILOT	   = SKILL_BASIC
 	)
 
-/datum/job/submap/merchant/equip(var/mob/living/carbon/human/H)
+/datum/job/submap/merchant/equip(var/mob/living/human/H)
 	to_chat(H, "Your connections helped you learn about the words that will help you identify a locals... Particularly interested buyers:")
 	to_chat(H, "<b>Code phases</b>: <span class='danger'>[syndicate_code_phrase]</span>")
 	to_chat(H, "<b>Responses to phrases</b>: <span class='danger'>[syndicate_code_response]</span>")

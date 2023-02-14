@@ -37,10 +37,10 @@
 	burn_timer = world.time + 5 SECONDS
 	burn_power++
 	force += 2
-	if(!istype(src.loc, /mob/living/carbon/human))
+	if(!istype(src.loc, /mob/living/human))
 		qdel(src)
 		return
-	var/mob/living/carbon/human/user = src.loc
+	var/mob/living/human/user = src.loc
 	var/obj/item/organ/external/hand
 	if(src == user.get_equipped_item(BP_L_HAND))
 		hand = GET_INTERNAL_ORGAN(user, BP_L_HAND)

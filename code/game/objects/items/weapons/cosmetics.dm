@@ -43,7 +43,7 @@
 	if(!open)	return
 
 	if(ishuman(A))
-		var/mob/living/carbon/human/H = A
+		var/mob/living/human/H = A
 		var/obj/item/organ/external/head/head = H.get_organ(BP_HEAD, /obj/item/organ/external/head)
 
 		if(!head)

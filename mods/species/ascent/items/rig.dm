@@ -231,7 +231,7 @@
 /obj/item/rig/mantid/mob_can_equip(var/mob/M, var/slot)
 	. = ..()
 	if(. && slot == slot_back_str)
-		var/mob/living/carbon/human/H = M
+		var/mob/living/human/H = M
 		if(!istype(H) || H.species.get_root_species_name(H) != mantid_caste)
 			to_chat(H, "<span class='danger'>Your species cannot wear \the [src].</span>")
 			. = 0

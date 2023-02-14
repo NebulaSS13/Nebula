@@ -105,7 +105,7 @@
 /mob/living/proc/HandleBloodTrail(turf/simulated/T, old_loc)
 	return
 
-/mob/living/carbon/human/HandleBloodTrail(turf/simulated/T, old_loc)
+/mob/living/human/HandleBloodTrail(turf/simulated/T, old_loc)
 	// Tracking blood
 	var/obj/item/source
 	var/obj/item/clothing/shoes/shoes = get_equipped_item(slot_shoes_str)
@@ -140,7 +140,7 @@
 			old_turf.AddTracks(species.get_move_trail(src), bloodDNA, 0, dir, bloodcolor) // Going
 
 //returns 1 if made bloody, returns 0 otherwise
-/turf/simulated/add_blood(mob/living/carbon/human/M)
+/turf/simulated/add_blood(mob/living/human/M)
 	if (!..())
 		return 0
 

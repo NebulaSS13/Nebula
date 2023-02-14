@@ -40,7 +40,7 @@ var/global/list/sparring_attack_cache = list()
 		return PAIN
 	return BRUTE
 
-/decl/natural_attack/proc/padded_by_user_gear(var/mob/living/carbon/human/user)
+/decl/natural_attack/proc/padded_by_user_gear(var/mob/living/human/user)
 	if(istype(user) && length(usable_with_limbs))
 		for(var/limb_slot in usable_with_limbs)
 			var/obj/item/gear = user.get_covering_equipped_item_by_zone(limb_slot)
@@ -48,7 +48,7 @@ var/global/list/sparring_attack_cache = list()
 				return TRUE
 	return FALSE
 
-/decl/natural_attack/proc/resolve_to_soft_variant(var/mob/living/carbon/human/user)
+/decl/natural_attack/proc/resolve_to_soft_variant(var/mob/living/human/user)
 	. = src
 	if(istype(user) && (user.pulling_punches || padded_by_user_gear(user)))
 		var/decl/natural_attack/soft_variant = get_sparring_variant()
@@ -58,7 +58,7 @@ var/global/list/sparring_attack_cache = list()
 /decl/natural_attack/proc/get_sparring_variant()
 	return sparring_variant_type && GET_DECL(sparring_variant_type)
 
-/decl/natural_attack/proc/is_usable(var/mob/living/carbon/human/user, var/mob/target, var/zone)
+/decl/natural_attack/proc/is_usable(var/mob/living/human/user, var/mob/target, var/zone)
 	if(!user.restrained() && !user.incapacitated())
 		for(var/etype in usable_with_limbs)
 			var/obj/item/organ/external/E = GET_EXTERNAL_ORGAN(user, etype)
@@ -69,7 +69,7 @@ var/global/list/sparring_attack_cache = list()
 /decl/natural_attack/proc/get_unarmed_damage()
 	return damage
 
-/decl/natural_attack/proc/apply_effects(var/mob/living/carbon/human/user,var/mob/living/carbon/human/target,var/attack_damage,var/zone)
+/decl/natural_attack/proc/apply_effects(var/mob/living/human/user,var/mob/living/human/target,var/attack_damage,var/zone)
 
 	if(target.stat == DEAD)
 		return
@@ -123,7 +123,7 @@ var/global/list/sparring_attack_cache = list()
 	if(istype(C) && prob(10))
 		C.leave_evidence(user)
 
-/decl/natural_attack/proc/show_attack(var/mob/living/carbon/human/user, var/mob/living/carbon/human/target, var/zone, var/attack_damage)
+/decl/natural_attack/proc/show_attack(var/mob/living/human/user, var/mob/living/human/target, var/zone, var/attack_damage)
 	var/msg = "\The [user] [pick(attack_verb)] \the [target]"
 	var/obj/item/organ/external/affecting = istype(target) && zone && GET_EXTERNAL_ORGAN(target, zone)
 	if(affecting)
@@ -134,7 +134,7 @@ var/global/list/sparring_attack_cache = list()
 		user.visible_message(SPAN_DANGER("[msg]!"))
 		playsound(user.loc, attack_sound, 25, 1, -1)
 
-/decl/natural_attack/proc/handle_eye_attack(var/mob/living/carbon/human/user, var/mob/living/carbon/human/target)
+/decl/natural_attack/proc/handle_eye_attack(var/mob/living/human/user, var/mob/living/human/target)
 	var/obj/item/organ/internal/eyes = GET_INTERNAL_ORGAN(target, BP_EYES)
 	var/decl/pronouns/G = user.get_pronouns()
 	if(eyes)
@@ -167,7 +167,7 @@ var/global/list/sparring_attack_cache = list()
 	sharp = 1
 	edge = 1
 
-/decl/natural_attack/bite/is_usable(var/mob/living/carbon/human/user, var/mob/living/carbon/human/target, var/zone)
+/decl/natural_attack/bite/is_usable(var/mob/living/human/user, var/mob/living/human/target, var/zone)
 
 	if(user.is_muzzled())
 		return 0
@@ -189,7 +189,7 @@ var/global/list/sparring_attack_cache = list()
 	sparring_variant_type = /decl/natural_attack/light_strike/punch
 	is_starting_default = TRUE
 
-/decl/natural_attack/punch/show_attack(var/mob/living/carbon/human/user, var/mob/living/carbon/human/target, var/zone, var/attack_damage)
+/decl/natural_attack/punch/show_attack(var/mob/living/human/user, var/mob/living/human/target, var/zone, var/attack_damage)
 
 	var/obj/item/organ/external/affecting = istype(target) && zone && GET_EXTERNAL_ORGAN(target, zone)
 	if(!affecting)
@@ -250,18 +250,18 @@ var/global/list/sparring_attack_cache = list()
 	usable_with_limbs = list(BP_L_FOOT, BP_R_FOOT)
 	sparring_variant_type = /decl/natural_attack/light_strike/kick
 
-/decl/natural_attack/kick/is_usable(var/mob/living/carbon/human/user, var/mob/living/carbon/human/target, var/zone)
+/decl/natural_attack/kick/is_usable(var/mob/living/human/user, var/mob/living/human/target, var/zone)
 	if(zone == BP_HEAD || zone == BP_EYES || zone == BP_MOUTH)
 		zone = BP_CHEST
 	. = ..()
 
-/decl/natural_attack/kick/get_unarmed_damage(var/mob/living/carbon/human/user)
+/decl/natural_attack/kick/get_unarmed_damage(var/mob/living/human/user)
 	var/obj/item/clothing/shoes = user.get_equipped_item(slot_shoes_str)
 	if(!istype(shoes))
 		return damage
 	return damage + (shoes ? shoes.force : 0)
 
-/decl/natural_attack/kick/show_attack(var/mob/living/carbon/human/user, var/mob/living/carbon/human/target, var/zone, var/attack_damage)
+/decl/natural_attack/kick/show_attack(var/mob/living/human/user, var/mob/living/human/target, var/zone, var/attack_damage)
 
 	var/obj/item/organ/external/affecting = istype(target) && zone && GET_EXTERNAL_ORGAN(target, zone)
 	if(!affecting)
@@ -281,7 +281,7 @@ var/global/list/sparring_attack_cache = list()
 	damage = 0
 	usable_with_limbs = list(BP_L_FOOT, BP_R_FOOT)
 
-/decl/natural_attack/stomp/is_usable(var/mob/living/carbon/human/user, var/mob/living/carbon/human/target, var/zone)
+/decl/natural_attack/stomp/is_usable(var/mob/living/human/user, var/mob/living/human/target, var/zone)
 	if(!istype(target))
 		return FALSE
 	if (!user.lying && (target.lying || (zone in list(BP_L_FOOT, BP_R_FOOT))))
@@ -292,11 +292,11 @@ var/global/list/sparring_attack_cache = list()
 				return TRUE
 	return FALSE
 
-/decl/natural_attack/stomp/get_unarmed_damage(var/mob/living/carbon/human/user)
+/decl/natural_attack/stomp/get_unarmed_damage(var/mob/living/human/user)
 	var/obj/item/clothing/shoes = user.get_equipped_item(slot_shoes_str)
 	return damage + (shoes ? shoes.force : 0)
 
-/decl/natural_attack/stomp/show_attack(var/mob/living/carbon/human/user, var/mob/living/carbon/human/target, var/zone, var/attack_damage)
+/decl/natural_attack/stomp/show_attack(var/mob/living/human/user, var/mob/living/human/target, var/zone, var/attack_damage)
 
 	var/obj/item/organ/external/affecting = istype(target) && zone && GET_EXTERNAL_ORGAN(target, zone)
 	if(!affecting)
@@ -341,7 +341,7 @@ var/global/list/sparring_attack_cache = list()
 	attack_noun = list("foot")
 	usable_with_limbs = list(BP_L_FOOT, BP_R_FOOT)
 
-/decl/natural_attack/light_strike/kick/is_usable(var/mob/living/carbon/human/user, var/mob/living/carbon/human/target, var/zone)
+/decl/natural_attack/light_strike/kick/is_usable(var/mob/living/human/user, var/mob/living/human/target, var/zone)
 	if(zone == BP_HEAD || zone == BP_EYES || zone == BP_MOUTH)
 		zone = BP_CHEST
 	. = ..()

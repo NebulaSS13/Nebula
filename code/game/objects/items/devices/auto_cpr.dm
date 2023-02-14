@@ -17,12 +17,12 @@
 	var/last_pump
 	var/skilled_setup
 
-/obj/item/auto_cpr/mob_can_equip(mob/living/carbon/human/H, slot, disable_warning = 0, force = 0)
+/obj/item/auto_cpr/mob_can_equip(mob/living/human/H, slot, disable_warning = 0, force = 0)
 	. = ..()
 	if(. && slot == slot_wear_suit_str)
 		. = H.get_bodytype_category() == BODYTYPE_HUMANOID
 
-/obj/item/auto_cpr/attack(mob/living/carbon/human/M, mob/living/user, var/target_zone)
+/obj/item/auto_cpr/attack(mob/living/human/M, mob/living/user, var/target_zone)
 	if(istype(M) && user.a_intent == I_HELP)
 		var/obj/item/suit = M.get_equipped_item(slot_wear_suit_str)
 		if(suit)
@@ -56,7 +56,7 @@
 	if(!ishuman(loc))
 		return PROCESS_KILL
 
-	var/mob/living/carbon/human/H = loc
+	var/mob/living/human/H = loc
 	if(H.get_equipped_slot_for_item(src) != slot_wear_suit_str)
 		return PROCESS_KILL
 

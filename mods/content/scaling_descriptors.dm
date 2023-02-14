@@ -1,4 +1,4 @@
-/mob/living/carbon/human/get_icon_scale_mult()
+/mob/living/human/get_icon_scale_mult()
 	. = ..()
 	if(LAZYLEN(appearance_descriptors))
 		var/modify_x = 1

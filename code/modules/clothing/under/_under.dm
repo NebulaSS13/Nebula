@@ -53,7 +53,7 @@
 		if(rolled_down && check_state_in_icon("[overlay.icon_state]-rolled", overlay.icon))
 			overlay.icon_state = "[overlay.icon_state]-rolled"
 		else
-			var/mob/living/carbon/human/user_human = user_mob
+			var/mob/living/human/user_human = user_mob
 			if(istype(user_human) && user_human.bodytype.uniform_state_modifier && check_state_in_icon("[overlay.icon_state]-[user_human.bodytype.uniform_state_modifier]", overlay.icon))
 				overlay.icon_state = "[overlay.icon_state]-[user_human.bodytype.uniform_state_modifier]"
 			if(rolled_sleeves && check_state_in_icon("[overlay.icon_state]-sleeves", overlay.icon))

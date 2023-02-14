@@ -75,7 +75,7 @@ Proc returns a boolean if successful.
 	if(damage >= 1) //Let's not do a damage check if it doesn't actually do damage.
 
 		//Let's actually do the backstab.
-		var/mob/living/carbon/human/H
+		var/mob/living/human/H
 
 		if(ishuman(target))
 

@@ -1,4 +1,4 @@
-/mob/living/carbon/human/proc/get_unarmed_attack(var/mob/target, var/hit_zone = null)
+/mob/living/human/proc/get_unarmed_attack(var/mob/target, var/hit_zone = null)
 	if(!hit_zone)
 		hit_zone = zone_sel.selecting
 	var/list/available_attacks = get_natural_attacks()
@@ -18,13 +18,13 @@
 			use_attack = pick(other_attacks)
 	. = use_attack?.resolve_to_soft_variant(src)
 
-/mob/living/carbon/human/proc/get_natural_attacks()
+/mob/living/human/proc/get_natural_attacks()
 	. = list()
 	for(var/obj/item/organ/external/limb in get_external_organs())
 		if(length(limb.unarmed_attacks) && limb.is_usable())
 			. |= limb.unarmed_attacks
 
-/mob/living/carbon/human/default_help_interaction(mob/user)
+/mob/living/human/default_help_interaction(mob/user)
 
 	if(user != src && ishuman(user) && (is_asystole() || (status_flags & FAKEDEATH) || failed_last_breath) && !on_fire && !(user.zone_sel.selecting == BP_R_ARM || user.zone_sel.selecting == BP_L_ARM))
 		if (performing_cpr)
@@ -49,7 +49,7 @@
 
 	return ..()
 
-/mob/living/carbon/human/default_disarm_interaction(mob/user)
+/mob/living/human/default_disarm_interaction(mob/user)
 	var/decl/species/user_species = user.get_species()
 	if(user_species)
 		admin_attack_log(user, src, "Disarmed their victim.", "Was disarmed.", "disarmed")
@@ -57,7 +57,7 @@
 		return TRUE
 	. = ..()
 
-/mob/living/carbon/human/default_hurt_interaction(mob/user)
+/mob/living/human/default_hurt_interaction(mob/user)
 	. = ..()
 	if(.)
 		return TRUE
@@ -70,7 +70,7 @@
 		attack_generic(user, rand(1,3), "punched")
 		return TRUE
 
-	var/mob/living/carbon/human/H = user
+	var/mob/living/human/H = user
 	var/rand_damage = rand(1, 5)
 	var/block = 0
 	var/accurate = 0
@@ -173,7 +173,7 @@
 	apply_damage(real_damage, attack.get_damage_type(), hit_zone, damage_flags=attack.damage_flags())
 	return TRUE
 
-/mob/living/carbon/human/attack_hand(mob/user)
+/mob/living/human/attack_hand(mob/user)
 
 	remove_cloaking_source(species)
 	if(user.a_intent != I_GRAB)
@@ -181,7 +181,7 @@
 			if(G.assailant == user && G.affecting == src && G.resolve_openhand_attack())
 				return TRUE
 	// Should this all be in Touch()?
-		var/mob/living/carbon/human/H = user
+		var/mob/living/human/H = user
 		if(istype(H))
 			if(H != src && check_shields(0, null, H, H.zone_sel.selecting, H.name))
 				H.do_attack_animation(src)
@@ -189,7 +189,7 @@
 
 	. = ..()
 
-/mob/living/carbon/human/proc/start_compressions(mob/living/carbon/human/H, starting = FALSE, cpr_mode)
+/mob/living/human/proc/start_compressions(mob/living/human/H, starting = FALSE, cpr_mode)
 	if(length(H.get_held_items()))
 		performing_cpr = FALSE
 		to_chat(H, SPAN_WARNING("You cannot perform CPR with anything in your hands."))
@@ -288,11 +288,11 @@
 	// Again.
 	start_compressions(H, FALSE, cpr_mode)
 
-/mob/living/carbon/human/proc/afterattack(atom/target, mob/living/user, inrange, params)
+/mob/living/human/proc/afterattack(atom/target, mob/living/user, inrange, params)
 	return
 
 //Breaks all grips and pulls that the mob currently has.
-/mob/living/carbon/human/proc/break_all_grabs(mob/living/carbon/user)
+/mob/living/human/proc/break_all_grabs(mob/living/carbon/user)
 	. = FALSE
 	for(var/obj/item/grab/grab in get_active_grabs())
 		if(grab.affecting)
@@ -308,7 +308,7 @@
 	If you are applying pressure to another and attempt to apply pressure to yourself, you'll have to switch to an empty hand which will also stop do_mob()
 	Changing targeted zones should also stop do_mob(), preventing you from applying pressure to more than one body part at once.
 */
-/mob/living/carbon/human/proc/apply_pressure(mob/living/user, var/target_zone)
+/mob/living/human/proc/apply_pressure(mob/living/user, var/target_zone)
 	var/obj/item/organ/external/organ = GET_EXTERNAL_ORGAN(src, target_zone)
 	if(!organ || !(organ.status & (ORGAN_BLEEDING|ORGAN_ARTERY_CUT)) || BP_IS_PROSTHETIC(organ))
 		return 0
@@ -347,7 +347,7 @@
 
 	return 1
 
-/mob/living/carbon/human/verb/set_default_unarmed_attack(var/atom/radial_target)
+/mob/living/human/verb/set_default_unarmed_attack(var/atom/radial_target)
 	set name = "Set Default Unarmed Attack"
 	set category = "IC"
 	set src = usr

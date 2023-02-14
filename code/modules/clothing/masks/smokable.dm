@@ -54,7 +54,7 @@
 	if(reagents && reagents.total_volume) // check if it has any reagents at all
 		var/smoke_loc = loc
 		if(ishuman(loc))
-			var/mob/living/carbon/human/C = loc
+			var/mob/living/human/C = loc
 			smoke_loc = C.loc
 			if ((src == C.get_equipped_item(slot_wear_mask_str) || manual) && C.check_has_mouth()) // if it's in the human/monkey mouth, transfer reagents to the mob
 				reagents.trans_to_mob(C, smoke_amount * amount, CHEM_INHALE, 0.2)
@@ -72,7 +72,7 @@
 	if(T)
 		var/datum/gas_mixture/environment = T.return_air()
 		if(ishuman(loc))
-			var/mob/living/carbon/human/C = loc
+			var/mob/living/human/C = loc
 			if (src == C.get_equipped_item(slot_wear_mask_str) && C.internal)
 				environment = C.internal.return_air()
 		if(environment.get_by_flag(XGM_GAS_OXIDIZER) < gas_consumption)
@@ -358,7 +358,7 @@
 
 	return
 
-/obj/item/clothing/mask/smokable/cigarette/attack(mob/living/carbon/human/H, mob/user, def_zone)
+/obj/item/clothing/mask/smokable/cigarette/attack(mob/living/human/H, mob/user, def_zone)
 	if(lit && H == user && istype(H))
 		var/obj/item/blocked = H.check_mouth_coverage()
 		if(blocked)

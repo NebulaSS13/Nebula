@@ -36,7 +36,7 @@
 		TOOL_SUTURES =  TOOL_QUALITY_BAD
 	))
 
-/obj/item/stack/tape_roll/duct_tape/attack(var/mob/living/carbon/human/H, var/mob/user)
+/obj/item/stack/tape_roll/duct_tape/attack(var/mob/living/human/H, var/mob/user)
 	if(!istype(H))
 		return
 	if(user.zone_sel.selecting == BP_EYES)

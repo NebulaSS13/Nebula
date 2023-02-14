@@ -281,7 +281,7 @@ var/global/list/decl/topic_command/topic_commands = list()
 				brain = L.getBrainLoss()
 			))
 			if(ishuman(M))
-				var/mob/living/carbon/human/H = M
+				var/mob/living/human/H = M
 				info["species"] = H.species.name
 			else
 				info["species"] = "non-human"

@@ -27,8 +27,8 @@ effective or pretty fucking useless.
 	origin_tech = "{'magnets':3,'combat':3,'esoteric':3}"
 	material = /decl/material/solid/plastic
 	matter = list(
-		/decl/material/solid/metal/gold     = MATTER_AMOUNT_REINFORCEMENT, 
-		/decl/material/solid/silicon        = MATTER_AMOUNT_REINFORCEMENT, 
+		/decl/material/solid/metal/gold     = MATTER_AMOUNT_REINFORCEMENT,
+		/decl/material/solid/silicon        = MATTER_AMOUNT_REINFORCEMENT,
 		/decl/material/solid/metal/titanium = MATTER_AMOUNT_REINFORCEMENT,
 		/decl/material/solid/metal/uranium  = MATTER_AMOUNT_TRACE,
 	)
@@ -43,7 +43,7 @@ effective or pretty fucking useless.
 		return
 
 	var/list/stun_victims = list()
-	for(var/mob/living/carbon/human/M in orange(10, user))
+	for(var/mob/living/human/M in orange(10, user))
 		stun_victims += M
 		spawn()
 			if(prob(50))

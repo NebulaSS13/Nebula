@@ -24,7 +24,7 @@
 		ARMOR_BULLET = ARMOR_BALLISTIC_PISTOL
 		)
 	ability_cooldown = 2 MINUTES
-	var/mob/living/carbon/human/victim //the human we're grabbing
+	var/mob/living/human/victim //the human we're grabbing
 	var/grab_duration = 3 //duration of disable in life ticks to simulate a grab
 	var/grab_damage = 6 //brute damage before reductions, per crab's life tick
 	var/list/grab_desc = list("thrashes", "squeezes", "crushes")
@@ -66,7 +66,7 @@
 /mob/living/simple_animal/hostile/retaliate/giant_crab/AttackingTarget()
 	. = ..()
 	if(ishuman(.))
-		var/mob/living/carbon/human/H = .
+		var/mob/living/human/H = .
 		if(victim == H)
 			if(!Adjacent(victim))
 				release_grab()
@@ -85,7 +85,7 @@
 			visible_message(SPAN_MFAUNA("\The [src] catches \the [victim] in its powerful pincer!"))
 			stop_automation = TRUE
 
-/mob/living/simple_animal/hostile/retaliate/giant_crab/can_perform_ability(mob/living/carbon/human/H)
+/mob/living/simple_animal/hostile/retaliate/giant_crab/can_perform_ability(mob/living/human/H)
 	. = ..()
 	if(!.)
 		return FALSE

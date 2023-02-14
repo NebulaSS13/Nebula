@@ -34,7 +34,7 @@
 // BRAIN WORM ZOMBIES AAAAH.
 /mob/living/simple_animal/borer/proc/replace_brain()
 
-	var/mob/living/carbon/human/H = host
+	var/mob/living/human/H = host
 
 	if(!istype(host))
 		to_chat(src, SPAN_WARNING("This host does not have a suitable brain."))
@@ -45,9 +45,9 @@
 	H.add_language(/decl/language/corticalborer)
 
 	if(host.stat == DEAD)
-		H.verbs |= /mob/living/carbon/human/proc/jumpstart
+		H.verbs |= /mob/living/human/proc/jumpstart
 
-	H.verbs |= /mob/living/carbon/human/proc/psychic_whisper
+	H.verbs |= /mob/living/human/proc/psychic_whisper
 	if(!neutered)
 		H.verbs |= /mob/living/proc/spawn_larvae
 
@@ -76,7 +76,7 @@
 	if(!H.lastKnownIP)
 		H.lastKnownIP = s2h_ip
 
-/mob/living/carbon/human/proc/jumpstart()
+/mob/living/human/proc/jumpstart()
 	set category = "Abilities"
 	set name = "Revive Host"
 	set desc = "Send a jolt of electricity through your host, reviving them."
@@ -85,7 +85,7 @@
 		to_chat(usr, SPAN_WARNING("Your host is already alive."))
 		return
 
-	verbs -= /mob/living/carbon/human/proc/jumpstart
+	verbs -= /mob/living/human/proc/jumpstart
 	visible_message(SPAN_DANGER("With a hideous, rattling moan, [src] shudders back to life!"))
 	rejuvenate()
 	UpdateLyingBuckledAndVerbStatus()

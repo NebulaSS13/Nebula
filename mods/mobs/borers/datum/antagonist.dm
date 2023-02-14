@@ -35,8 +35,8 @@
 /decl/special_role/borer/place_mob(var/mob/living/mob)
 	var/mob/living/simple_animal/borer/borer = mob
 	if(istype(borer))
-		var/mob/living/carbon/human/host
-		for(var/mob/living/carbon/human/H in SSmobs.mob_list)
+		var/mob/living/human/host
+		for(var/mob/living/human/H in SSmobs.mob_list)
 			if(H.stat != DEAD && !H.has_brain_worms())
 				var/obj/item/organ/external/head = GET_EXTERNAL_ORGAN(H, BP_HEAD)
 				if(head && !BP_IS_PROSTHETIC(head))

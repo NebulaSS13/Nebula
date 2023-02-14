@@ -73,7 +73,7 @@
 		B.set_dir(newdir)
 	bloodiness--
 
-/proc/equip_wheelchair(mob/living/carbon/human/H) //Proc for spawning in a wheelchair if a new character has no legs. Used in new_player.dm
+/proc/equip_wheelchair(mob/living/human/H) //Proc for spawning in a wheelchair if a new character has no legs. Used in new_player.dm
 	var/obj/structure/bed/chair/wheelchair/W = new(get_turf(H))
 	if(isturf(H.loc))
 		W.buckle_mob(H)
@@ -145,6 +145,6 @@
 
 /obj/item/wheelchair_kit/physically_destroyed(skip_qdel)
 	//Make sure if the kit is destroyed to drop the same stuff as the actual wheelchair
-	var/obj/structure/S = new structure_form_type(get_turf(src)) 
+	var/obj/structure/S = new structure_form_type(get_turf(src))
 	S.physically_destroyed()
 	. = ..()

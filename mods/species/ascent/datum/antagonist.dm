@@ -20,7 +20,7 @@
 	. = ..()
 	var lineage = create_gyne_name();
 	if(ishuman(player.current))
-		var/mob/living/carbon/human/H = player.current
+		var/mob/living/human/H = player.current
 		H.dna.lineage = lineage; // This makes all antag ascent have the same lineage on get_random_name.
 		if(!leader && is_species_whitelisted(player.current, SPECIES_MANTID_GYNE))
 			leader = player
@@ -35,7 +35,7 @@
 		H.real_name = ascent_culture.get_random_name(H, H.gender)
 		H.name = H.real_name
 
-/decl/special_role/hunter/equip(var/mob/living/carbon/human/player)
+/decl/special_role/hunter/equip(var/mob/living/human/player)
 	if(player?.species.get_root_species_name(player) == SPECIES_MANTID_GYNE)
 		rig_type = /obj/item/rig/mantid/gyne
 	else
@@ -44,7 +44,7 @@
 	if(.)
 		player.put_in_hands(new /obj/item/gun/energy/particle)
 
-/decl/special_role/hunter/equip_rig(rig_type, mob/living/carbon/human/player)
+/decl/special_role/hunter/equip_rig(rig_type, mob/living/human/player)
 	var/obj/item/rig/mantid/rig = ..()
 	if(rig)
 		rig.visible_name = player.real_name

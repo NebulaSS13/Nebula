@@ -1,4 +1,4 @@
-/mob/living/carbon/human/gib(anim="gibbed-m",do_gibs)
+/mob/living/human/gib(anim="gibbed-m",do_gibs)
 	for(var/obj/item/organ/I in get_internal_organs())
 		remove_organ(I)
 		if(!QDELETED(I) && isturf(loc))
@@ -19,20 +19,20 @@
 	if(last_loc)
 		gibs(last_loc, dna, null, species.get_flesh_colour(src), species.get_blood_color(src))
 
-/mob/living/carbon/human/dust()
+/mob/living/human/dust()
 	if(species)
 		..(species.dusted_anim, species.remains_type)
 	else
 		..()
 
-/mob/living/carbon/human/death(gibbed,deathmessage="seizes up and falls limp...", show_dead_message = "You have died.")
+/mob/living/human/death(gibbed,deathmessage="seizes up and falls limp...", show_dead_message = "You have died.")
 
 	if(stat == DEAD) return
 
 	BITSET(hud_updateflag, HEALTH_HUD)
 	BITSET(hud_updateflag, STATUS_HUD)
 	BITSET(hud_updateflag, LIFE_HUD)
-	
+
 	//Handle species-specific deaths.
 	species.handle_death(src)
 
@@ -57,10 +57,10 @@
 			playsound(loc, species.death_sound, 80, 1, 1)
 	handle_hud_list()
 
-/mob/living/carbon/human/proc/is_husked()
+/mob/living/human/proc/is_husked()
 	return (MUTATION_HUSK in mutations)
 
-/mob/living/carbon/human/proc/make_husked()
+/mob/living/human/proc/make_husked()
 	if(is_husked())
 		return
 
@@ -73,7 +73,7 @@
 		E.status |= ORGAN_DISFIGURED
 	update_body(1)
 
-/mob/living/carbon/human/physically_destroyed(var/skip_qdel, var/droplimb_type = DISMEMBER_METHOD_BLUNT)
+/mob/living/human/physically_destroyed(var/skip_qdel, var/droplimb_type = DISMEMBER_METHOD_BLUNT)
 	for(var/obj/item/organ/external/limb in get_external_organs())
 		var/limb_can_amputate = (limb.limb_flags & ORGAN_FLAG_CAN_AMPUTATE)
 		limb.limb_flags |= ORGAN_FLAG_CAN_AMPUTATE

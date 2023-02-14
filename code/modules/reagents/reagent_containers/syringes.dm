@@ -126,7 +126,7 @@
 			var/mob/living/carbon/T = target
 			if(!T.dna)
 				to_chat(user, SPAN_WARNING("You are unable to locate any blood."))
-				if(istype(target, /mob/living/carbon/human))
+				if(istype(target, /mob/living/human))
 					CRASH("[T] \[[T.type]\] was missing their dna datum!")
 				return
 
@@ -260,9 +260,9 @@
 
 /obj/item/chems/syringe/proc/syringestab(var/mob/living/carbon/target, var/mob/living/carbon/user)
 
-	if(istype(target, /mob/living/carbon/human))
+	if(istype(target, /mob/living/human))
 
-		var/mob/living/carbon/human/H = target
+		var/mob/living/human/H = target
 
 		var/target_zone = check_zone(user.zone_sel.selecting, H)
 		var/obj/item/organ/external/affecting = GET_EXTERNAL_ORGAN(H, target_zone)

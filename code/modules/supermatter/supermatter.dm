@@ -522,7 +522,7 @@ var/global/list/supermatter_delam_accent_sounds = list(
 
 		env.merge(removed)
 
-	for(var/mob/living/carbon/human/subject in view(src, min(7, round(sqrt(power/6)))))
+	for(var/mob/living/human/subject in view(src, min(7, round(sqrt(power/6)))))
 		var/obj/item/organ/internal/eyes/eyes = subject.get_organ(BP_EYES, /obj/item/organ/internal/eyes)
 		if (!eyes)
 			continue

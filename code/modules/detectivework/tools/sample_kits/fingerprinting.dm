@@ -33,7 +33,7 @@
 /obj/item/forensics/sample/print/merge_evidence_list(var/list/new_evidence)
 	for(var/datum/fingerprint/newprint in new_evidence)
 		for(var/datum/fingerprint/F in evidence)
-			if(F.merge(newprint))	
+			if(F.merge(newprint))
 				new_evidence -= newprint
 				break
 	..()
@@ -54,7 +54,7 @@
 	SetName("[initial(name)] (\the [M])")
 	update_icon()
 
-/obj/item/forensics/sample/print/proc/can_take_print_from(mob/living/carbon/human/H, user)
+/obj/item/forensics/sample/print/proc/can_take_print_from(mob/living/human/H, user)
 	if(LAZYLEN(evidence))
 		return
 
@@ -72,7 +72,7 @@
 			return TRUE
 	to_chat(user, SPAN_WARNING("They don't have any hands."))
 
-/obj/item/forensics/sample/print/attack(var/mob/living/carbon/human/H, var/mob/user)
+/obj/item/forensics/sample/print/attack(var/mob/living/human/H, var/mob/user)
 	if(!istype(H))
 		return ..()
 

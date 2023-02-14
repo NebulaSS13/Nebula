@@ -169,7 +169,7 @@
 			if(W)
 				health += (0.2 * W.force) //heal a bit on hit
 		if(ishuman(.))
-			var/mob/living/carbon/human/H = .
+			var/mob/living/human/H = .
 			var/obj/item/clothing/suit/space/S = H.get_covering_equipped_item_by_zone(BP_CHEST)
 			if(istype(S) && !length(S.breaches))
 				return
@@ -282,7 +282,7 @@ Nurse caste procs
 /mob/living/simple_animal/hostile/giant_spider/nurse/AttackingTarget()
 	. = ..()
 	if(ishuman(.))
-		var/mob/living/carbon/human/H = .
+		var/mob/living/human/H = .
 		if(prob(infest_chance) && max_eggs)
 			var/list/limbs = H.get_external_organs()
 			var/obj/item/organ/external/O = LAZYLEN(limbs)? pick(limbs) : null

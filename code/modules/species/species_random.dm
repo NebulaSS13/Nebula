@@ -9,7 +9,7 @@
 }
 
 #define SETUP_RANDOM_COLOR_SETTER(X, Y)\
-/mob/living/carbon/human/proc/randomize_##X(){\
+/mob/living/human/proc/randomize_##X(){\
 	if(!species){\
 		return;\
 	}\
@@ -60,18 +60,18 @@ SETUP_RANDOM_COLOR_SETTER(facial_hair_color, change_facial_hair_color)
 /decl/species/proc/get_random_skin_tone()
 	return random_skin_tone(src)
 
-/mob/living/carbon/human/proc/randomize_skin_tone()
+/mob/living/human/proc/randomize_skin_tone()
 	if(!species)
 		return
 	var/new_tone = species.get_random_skin_tone()
 	if(!isnull(new_tone))
 		change_skin_tone(new_tone)
 
-/mob/living/carbon/human/proc/randomize_hair_style()
+/mob/living/human/proc/randomize_hair_style()
 	var/list/L = get_valid_hairstyle_types()
 	change_hair(SAFEPICK(L))
 
-/mob/living/carbon/human/proc/randomize_facial_hair_style()
+/mob/living/human/proc/randomize_facial_hair_style()
 	var/list/L = get_valid_facial_hairstyle_types()
 	change_facial_hair(SAFEPICK(L))
 

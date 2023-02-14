@@ -24,7 +24,7 @@
 /proc/randmutb(var/mob/living/M)
 	if(!M) return
 	if(ishuman(M))
-		var/mob/living/carbon/human/H = M
+		var/mob/living/human/H = M
 		if(!H.should_have_organ(BP_HEART))
 			return
 	M.dna.check_integrity()
@@ -35,7 +35,7 @@
 /proc/randmutg(var/mob/living/M)
 	if(!M) return
 	if(ishuman(M))
-		var/mob/living/carbon/human/H = M
+		var/mob/living/human/H = M
 		if(!H.should_have_organ(BP_HEART))
 			return
 	M.dna.check_integrity()
@@ -133,12 +133,12 @@
 
 // Simpler. Don't specify UI in order for the mob to use its own.
 /mob/proc/UpdateAppearance(var/list/UI=null)
-	if(istype(src, /mob/living/carbon/human))
+	if(istype(src, /mob/living/human))
 		if(UI!=null)
 			src.dna.UI=UI
 			src.dna.UpdateUI()
 		dna.check_integrity()
-		var/mob/living/carbon/human/H = src
+		var/mob/living/human/H = src
 		H.hair_colour =        rgb(dna.GetUIValueRange(DNA_UI_HAIR_R,255),  dna.GetUIValueRange(DNA_UI_HAIR_G,255),  dna.GetUIValueRange(DNA_UI_HAIR_B,255))
 		H.facial_hair_colour = rgb(dna.GetUIValueRange(DNA_UI_BEARD_R,255), dna.GetUIValueRange(DNA_UI_BEARD_G,255), dna.GetUIValueRange(DNA_UI_BEARD_B,255))
 		H.skin_colour =        rgb(dna.GetUIValueRange(DNA_UI_SKIN_R,255),  dna.GetUIValueRange(DNA_UI_SKIN_G,255),  dna.GetUIValueRange(DNA_UI_SKIN_B,255))

@@ -17,9 +17,9 @@
 	desc = "Convert your mortal followers into immortal stone beings."
 	cost = 300
 	flags = PHENOMENA_NEAR_STRUCTURE|PHENOMENA_FOLLOWER
-	expected_type = /mob/living/carbon/human
+	expected_type = /mob/living/human
 
-/datum/phenomena/rock_form/activate(var/mob/living/carbon/human/H)
+/datum/phenomena/rock_form/activate(var/mob/living/human/H)
 	..()
 	to_chat(H, "<span class='danger'>You feel your body harden as it rapidly is transformed into living crystal!</span>")
 	H.change_species(SPECIES_GOLEM)

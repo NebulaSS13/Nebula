@@ -20,18 +20,18 @@
 /datum/artifact_effect/sleepy/DoEffectAura()
 	if(holder)
 		var/turf/T = get_turf(holder)
-		for(var/mob/living/carbon/human/H in range(effect_range,T))
+		for(var/mob/living/human/H in range(effect_range,T))
 			sleepify(H, 2, 25, 10)
 		return 1
 
 /datum/artifact_effect/sleepy/DoEffectPulse()
 	if(holder)
 		var/turf/T = get_turf(holder)
-		for(var/mob/living/carbon/human/H in range(effect_range, T))
+		for(var/mob/living/human/H in range(effect_range, T))
 			sleepify(H, rand(5,15), 50, 50)
 		return 1
 
-/datum/artifact_effect/sleepy/proc/sleepify(mob/living/carbon/human/H, speed, limit, message_prob)
+/datum/artifact_effect/sleepy/proc/sleepify(mob/living/human/H, speed, limit, message_prob)
 	var/weakness = GetAnomalySusceptibility(H)
 	if(prob(weakness * 100))
 		if(H.isSynthetic())

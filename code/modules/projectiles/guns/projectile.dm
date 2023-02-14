@@ -86,7 +86,7 @@
 /obj/item/gun/projectile/process_point_blank(obj/projectile, mob/user, atom/target)
 	..()
 	if(chambered && ishuman(target))
-		var/mob/living/carbon/human/H = target
+		var/mob/living/human/H = target
 		var/zone = BP_CHEST
 		if(user && user.zone_sel)
 			zone = user.zone_sel.selecting

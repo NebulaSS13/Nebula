@@ -198,14 +198,14 @@
 	if(T == src.loc)
 		unload(dir)
 
-/mob/living/bot/mulebot/Bump(var/mob/living/carbon/human/M)
+/mob/living/bot/mulebot/Bump(var/mob/living/human/M)
 	if(!safety && istype(M))
 		visible_message("<span class='warning'>[src] knocks over [M]!</span>")
 		SET_STATUS_MAX(M, STAT_STUN, 8)
 		SET_STATUS_MAX(M, STAT_WEAK, 5)
 	..()
 
-/mob/living/bot/mulebot/proc/runOver(var/mob/living/carbon/human/H)
+/mob/living/bot/mulebot/proc/runOver(var/mob/living/human/H)
 	if(istype(H)) // No safety checks - WILL run over lying humans. Stop ERPing in the maint!
 		visible_message("<span class='warning'>[src] drives over [H]!</span>")
 		playsound(loc, 'sound/effects/splat.ogg', 50, 1)

@@ -62,7 +62,7 @@ avoid code duplication. This includes items that may sometimes act as a standard
 
 	return I.attack(src, user, user.zone_sel ? user.zone_sel.selecting : ran_zone())
 
-/mob/living/carbon/human/attackby(obj/item/I, mob/user)
+/mob/living/human/attackby(obj/item/I, mob/user)
 	if(user == src && user.zone_sel.selecting == BP_MOUTH && can_devour(I, silent = TRUE))
 		var/obj/item/blocked = src.check_mouth_coverage()
 		if(blocked)

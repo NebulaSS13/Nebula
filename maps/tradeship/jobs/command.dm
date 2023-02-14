@@ -29,7 +29,7 @@
 	not_random_selectable = 1
 	forced_spawnpoint = /decl/spawnpoint/cryo/captain
 
-/datum/job/tradeship_captain/equip(var/mob/living/carbon/human/H)
+/datum/job/tradeship_captain/equip(var/mob/living/human/H)
 	. = ..()
 	if(H)
 		H.verbs |= /mob/proc/tradehouse_rename_ship

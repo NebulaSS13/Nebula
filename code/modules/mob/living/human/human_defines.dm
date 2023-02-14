@@ -1,7 +1,7 @@
-/mob/living/carbon/human
+/mob/living/human
 
 	gender = MALE
-	abstract_type = /mob/living/carbon/human
+	abstract_type = /mob/living/human
 
 	//Surgery info
 	//Active emote/pose

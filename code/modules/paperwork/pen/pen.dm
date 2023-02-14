@@ -35,7 +35,7 @@
 	if(ismob(A))
 		var/mob/M = A
 		if(ishuman(A) && user.a_intent == I_HELP && target_zone == BP_HEAD)
-			var/mob/living/carbon/human/H = M
+			var/mob/living/human/H = M
 			var/obj/item/organ/external/head/head = H.get_organ(BP_HEAD, /obj/item/organ/external/head)
 			if(istype(head))
 				head.write_on(user, "[stroke_colour_name] [medium_name]")

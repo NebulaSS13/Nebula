@@ -209,7 +209,7 @@
 /mob/proc/get_stamina_used_per_step()
 	return 1
 
-/mob/living/carbon/human/get_stamina_used_per_step()
+/mob/living/human/get_stamina_used_per_step()
 	var/mod = (1-((get_skill_value(SKILL_HAULING) - SKILL_MIN)/(SKILL_MAX - SKILL_MIN)))
 	if(species && (species.species_flags & SPECIES_FLAG_LOW_GRAV_ADAPTED))
 		if(has_gravity())

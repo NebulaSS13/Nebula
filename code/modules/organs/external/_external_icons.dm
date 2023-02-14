@@ -13,7 +13,7 @@ var/global/list/limb_icon_cache = list()
 				add_overlay(child.mob_icon)
 		add_overlay(organ.mob_icon)
 
-/obj/item/organ/external/proc/sync_colour_to_human(var/mob/living/carbon/human/human)
+/obj/item/organ/external/proc/sync_colour_to_human(var/mob/living/human/human)
 	skin_tone = null
 	skin_colour = null
 	hair_colour = human.hair_colour
@@ -44,7 +44,7 @@ var/global/list/limb_icon_cache = list()
 	if(species.appearance_flags & HAS_SKIN_COLOR)
 		skin_colour = rgb(dna.GetUIValue(DNA_UI_SKIN_R), dna.GetUIValue(DNA_UI_SKIN_G), dna.GetUIValue(DNA_UI_SKIN_B))
 
-/obj/item/organ/external/head/sync_colour_to_human(var/mob/living/carbon/human/human)
+/obj/item/organ/external/head/sync_colour_to_human(var/mob/living/human/human)
 	..()
 	var/obj/item/organ/internal/eyes/eyes = human.get_organ(BP_EYES, /obj/item/organ/internal/eyes)
 	if(eyes) eyes.update_colour()
@@ -53,7 +53,7 @@ var/global/list/limb_icon_cache = list()
 	update_icon(1)
 	if(last_owner)
 		SetName("[last_owner.real_name]'s head")
-		addtimer(CALLBACK(last_owner, /mob/living/carbon/human/proc/update_hair), 1, TIMER_UNIQUE)
+		addtimer(CALLBACK(last_owner, /mob/living/human/proc/update_hair), 1, TIMER_UNIQUE)
 	. = ..()
 	//Head markings, duplicated (sadly) below.
 	for(var/M in markings)

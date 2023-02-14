@@ -24,8 +24,8 @@
 
 /spell/targeted/projectile/dumbfire/stuncuff/prox_cast(var/list/targets, spell_holder)
 	for(var/mob/living/M in targets)
-		if(istype(M,/mob/living/carbon/human))
-			var/mob/living/carbon/human/H = M
+		if(istype(M,/mob/living/human))
+			var/mob/living/human/H = M
 			var/obj/item/handcuffs/wizard/cuffs = new()
 			H.equip_to_slot(cuffs, slot_handcuffed_str)
 			H.visible_message("Beams of light form around \the [H]'s hands!")

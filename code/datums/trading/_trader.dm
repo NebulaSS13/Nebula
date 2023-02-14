@@ -13,7 +13,7 @@
 	var/list/possible_wanted_items                              //List of all possible wanted items. Structure is (type = mode)
 	var/list/possible_trading_items                             //List of all possible trading items. Structure is (type = mode)
 	var/list/trading_items = list()                             //What items they are currently trading away.
-	var/list/blacklisted_trade_items = list(/mob/living/carbon/human)
+	var/list/blacklisted_trade_items = list(/mob/living/human)
 	                                                            //Things they will automatically refuse
 
 	var/list/speech = list()                                    //The list of all their replies and messages. Structure is (id = talk)
@@ -222,8 +222,8 @@
 
 /datum/trader/proc/hail(var/mob/user)
 	var/specific
-	if(istype(user, /mob/living/carbon/human))
-		var/mob/living/carbon/human/H = user
+	if(istype(user, /mob/living/human))
+		var/mob/living/human/H = user
 		if(H.species)
 			specific = H.species.name
 	else if(istype(user, /mob/living/silicon))

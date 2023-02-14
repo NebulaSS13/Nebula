@@ -18,7 +18,7 @@
 	RETURN_TYPE(/list)
 	return traits
 
-/mob/living/carbon/human/GetTraits()
+/mob/living/human/GetTraits()
 	if(traits)
 		return traits
 	return species.traits
@@ -32,7 +32,7 @@
 	LAZYSET(traits, trait_type, trait_level)
 	return TRUE
 
-/mob/living/carbon/human/SetTrait(trait_type, trait_level)
+/mob/living/human/SetTrait(trait_type, trait_level)
 	var/decl/trait/T = GET_DECL(trait_type)
 	if(!T.validate_level(trait_level))
 		return FALSE
@@ -48,7 +48,7 @@
 /mob/living/proc/RemoveTrait(trait_type)
 	LAZYREMOVE(traits, trait_type)
 
-/mob/living/carbon/human/RemoveTrait(trait_type)
+/mob/living/human/RemoveTrait(trait_type)
 	// If traits haven't been setup, but we're trying to remove a trait that exists on the species then setup traits
 	if(!traits && (trait_type in species.traits))
 		traits = species.traits.Copy()

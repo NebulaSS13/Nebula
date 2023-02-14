@@ -58,7 +58,7 @@
 	. = ..()
 	turfs = global.latejoin_cryo_locations
 
-/decl/spawnpoint/cryo/after_join(mob/living/carbon/human/victim)
+/decl/spawnpoint/cryo/after_join(mob/living/human/victim)
 	if(!istype(victim) || victim.buckled) // They may have spawned with a wheelchair; don't move them into a pod in that case.
 		return
 

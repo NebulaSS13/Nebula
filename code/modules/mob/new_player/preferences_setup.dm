@@ -1,5 +1,5 @@
 //The mob should have a gender you want before running this proc. Will run fine without H
-/datum/preferences/proc/randomize_appearance_and_body_for(var/mob/living/carbon/human/H)
+/datum/preferences/proc/randomize_appearance_and_body_for(var/mob/living/human/H)
 
 	var/decl/species/current_species = get_species_by_key(species || global.using_map.default_species)
 	var/decl/pronouns/pronouns = pick(current_species.available_pronouns)
@@ -39,7 +39,7 @@
 	if(H)
 		copy_to(H)
 
-/datum/preferences/proc/dress_preview_mob(var/mob/living/carbon/human/dummy/mannequin)
+/datum/preferences/proc/dress_preview_mob(var/mob/living/human/dummy/mannequin)
 
 	if(!mannequin)
 		return
@@ -100,7 +100,7 @@
 		mannequin.update_icon()
 
 /datum/preferences/proc/update_preview_icon()
-	var/mob/living/carbon/human/dummy/mannequin/mannequin = get_mannequin(client_ckey)
+	var/mob/living/human/dummy/mannequin/mannequin = get_mannequin(client_ckey)
 	if(mannequin)
 		mannequin.delete_inventory(TRUE)
 		dress_preview_mob(mannequin)

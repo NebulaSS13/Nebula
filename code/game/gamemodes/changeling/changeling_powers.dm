@@ -84,7 +84,7 @@ var/global/list/possible_changeling_IDs = list("Alpha","Beta","Gamma","Delta","E
 	for(var/language in languages)
 		mind.changeling.absorbed_languages |= language
 
-	var/mob/living/carbon/human/H = src
+	var/mob/living/human/H = src
 	if(istype(H))
 		var/datum/absorbed_dna/newDNA = new(H.real_name, H.dna, H.species.name, H.languages)
 		absorbDNA(newDNA)
@@ -155,7 +155,7 @@ var/global/list/possible_changeling_IDs = list("Alpha","Beta","Gamma","Delta","E
 		to_chat(src, SPAN_WARNING("We must be grabbing a creature in our active hand to absorb them."))
 		return
 
-	var/mob/living/carbon/human/T = G.get_affecting_mob()
+	var/mob/living/human/T = G.get_affecting_mob()
 	if(!istype(T))
 		to_chat(src, SPAN_WARNING("[T] is not compatible with our biology."))
 		return
@@ -307,7 +307,7 @@ var/global/list/possible_changeling_IDs = list("Alpha","Beta","Gamma","Delta","E
 	src.flavor_text = ""
 
 	if(ishuman(src))
-		var/mob/living/carbon/human/H = src
+		var/mob/living/human/H = src
 		var/newSpecies = chosen_dna.speciesName
 		H.set_species(newSpecies)
 		H.apply_species_appearance()
@@ -328,7 +328,7 @@ var/global/list/possible_changeling_IDs = list("Alpha","Beta","Gamma","Delta","E
 
 	handle_pre_transformation()
 
-	var/mob/living/carbon/human/H = src
+	var/mob/living/human/H = src
 
 	if(!istype(H) || !H.species.primitive_form)
 		to_chat(src, SPAN_WARNING("We cannot perform this ability in this form!"))
@@ -364,7 +364,7 @@ var/global/list/possible_changeling_IDs = list("Alpha","Beta","Gamma","Delta","E
 	if(!chosen_dna)
 		return
 
-	var/mob/living/carbon/human/C = src
+	var/mob/living/human/C = src
 
 	changeling.chem_charges--
 	C.remove_changeling_powers()
@@ -389,7 +389,7 @@ var/global/list/possible_changeling_IDs = list("Alpha","Beta","Gamma","Delta","E
 	for(var/obj/item/W in src)
 		C.drop_from_inventory(W)
 
-	var/mob/living/carbon/human/O = new(src)
+	var/mob/living/human/O = new(src)
 	if (C.dna.GetUIState(DNA_UI_GENDER))
 		O.set_gender(FEMALE)
 	else
@@ -497,7 +497,7 @@ var/global/list/possible_changeling_IDs = list("Alpha","Beta","Gamma","Delta","E
 	if(!changeling)	return 0
 	changeling.chem_charges -= 45
 
-	var/mob/living/carbon/human/C = src
+	var/mob/living/human/C = src
 	C.set_stat(CONSCIOUS)
 	C.set_status(STAT_PARA, 0)
 	C.set_status(STAT_STUN, 0)
@@ -531,7 +531,7 @@ var/global/list/possible_changeling_IDs = list("Alpha","Beta","Gamma","Delta","E
 	var/datum/changeling/changeling = changeling_power()
 	if(!changeling)	return 0
 
-	var/mob/living/carbon/human/C = src
+	var/mob/living/human/C = src
 	if(C.digitalcamo)	to_chat(C, SPAN_NOTICE("We return to normal."))
 	else				to_chat(C, SPAN_NOTICE("We distort our form to prevent AI-tracking."))
 	C.digitalcamo = !C.digitalcamo
@@ -557,7 +557,7 @@ var/global/list/possible_changeling_IDs = list("Alpha","Beta","Gamma","Delta","E
 	if(!changeling)	return 0
 	src.mind.changeling.chem_charges -= 30
 
-	var/mob/living/carbon/human/C = src
+	var/mob/living/human/C = src
 	spawn(0)
 		for(var/i = 0, i<10,i++)
 			if(C)
@@ -700,9 +700,9 @@ var/global/list/datum/absorbed_dna/hivemind_bank = list()
 	if(!changeling)								return
 
 	var/list/victims = list()
-	for(var/mob/living/carbon/human/C in oview(changeling.sting_range))
+	for(var/mob/living/human/C in oview(changeling.sting_range))
 		victims += C
-	var/mob/living/carbon/human/T = input(src, "Who will we sting?") as null|anything in victims
+	var/mob/living/human/T = input(src, "Who will we sting?") as null|anything in victims
 
 	if(!T) return
 	if(!(T in view(changeling.sting_range))) return
@@ -738,7 +738,7 @@ var/global/list/datum/absorbed_dna/hivemind_bank = list()
 	set name = "Hallucination Sting (15)"
 	set desc = "Causes terror in the target."
 
-	var/mob/living/carbon/human/T = changeling_sting(15,/mob/proc/changeling_lsdsting)
+	var/mob/living/human/T = changeling_sting(15,/mob/proc/changeling_lsdsting)
 	if(!T)	return 0
 	spawn(rand(300,600))
 		if(T)	T.set_hallucination(400, 80)
@@ -750,7 +750,7 @@ var/global/list/datum/absorbed_dna/hivemind_bank = list()
 	set name = "Silence sting (10)"
 	set desc="Sting target"
 
-	var/mob/living/carbon/human/T = changeling_sting(10,/mob/proc/changeling_silence_sting)
+	var/mob/living/human/T = changeling_sting(10,/mob/proc/changeling_silence_sting)
 	if(!T)	return 0
 	SET_STATUS_MAX(T, STAT_SILENCE, 30)
 	SSstatistics.add_field_details("changeling_powers","SS")
@@ -761,7 +761,7 @@ var/global/list/datum/absorbed_dna/hivemind_bank = list()
 	set name = "Blind sting (20)"
 	set desc="Sting target"
 
-	var/mob/living/carbon/human/T = changeling_sting(20,/mob/proc/changeling_blind_sting)
+	var/mob/living/human/T = changeling_sting(20,/mob/proc/changeling_blind_sting)
 	if(!T)	return 0
 	to_chat(T, SPAN_DANGER("Your eyes burn horrificly!"))
 	T.disabilities |= NEARSIGHTED
@@ -776,7 +776,7 @@ var/global/list/datum/absorbed_dna/hivemind_bank = list()
 	set name = "Deaf sting (5)"
 	set desc="Sting target:"
 
-	var/mob/living/carbon/human/T = changeling_sting(5,/mob/proc/changeling_deaf_sting)
+	var/mob/living/human/T = changeling_sting(5,/mob/proc/changeling_deaf_sting)
 	if(!T)	return 0
 	to_chat(T, SPAN_DANGER("Your ears pop and begin ringing loudly!"))
 	SET_STATUS_MAX(T, STAT_DEAF, 15)
@@ -789,7 +789,7 @@ var/global/list/datum/absorbed_dna/hivemind_bank = list()
 	set desc = "Causes spasms onto death."
 	var/loud = 1
 
-	var/mob/living/carbon/human/T = changeling_sting(40,/mob/proc/changeling_DEATHsting,loud)
+	var/mob/living/human/T = changeling_sting(40,/mob/proc/changeling_DEATHsting,loud)
 	if(!T)	return 0
 	to_chat(T, SPAN_DANGER("You feel a small prick and your chest becomes tight."))
 	ADJ_STATUS(T, STAT_JITTER, 400)
@@ -808,7 +808,7 @@ var/global/list/datum/absorbed_dna/hivemind_bank = list()
 	if(!changeling)
 		return 0
 
-	var/mob/living/carbon/human/T = changeling_sting(40, /mob/proc/changeling_extract_dna_sting)
+	var/mob/living/human/T = changeling_sting(40, /mob/proc/changeling_extract_dna_sting)
 	if(!T)	return 0
 	if(T.is_husked() || (T.species.species_flags & SPECIES_FLAG_NO_SCAN))
 		to_chat(src, SPAN_WARNING("We cannot extract DNA from this creature!"))

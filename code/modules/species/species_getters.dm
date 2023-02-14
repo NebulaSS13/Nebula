@@ -1,28 +1,28 @@
-/decl/species/proc/get_valid_shapeshifter_forms(var/mob/living/carbon/human/H)
+/decl/species/proc/get_valid_shapeshifter_forms(var/mob/living/human/H)
 	return list()
 
-/decl/species/proc/get_additional_examine_text(var/mob/living/carbon/human/H)
+/decl/species/proc/get_additional_examine_text(var/mob/living/human/H)
 	return
 
-/decl/species/proc/get_examine_name(var/mob/living/carbon/human/H)
+/decl/species/proc/get_examine_name(var/mob/living/human/H)
 	return name
 
 /decl/species/proc/get_station_variant()
 	return name
 
-/decl/species/proc/get_knockout_message(var/mob/living/carbon/human/H)
+/decl/species/proc/get_knockout_message(var/mob/living/human/H)
 	return ((H && H.isSynthetic()) ? "encounters a hardware fault and suddenly reboots!" : knockout_message)
 
-/decl/species/proc/get_death_message(var/mob/living/carbon/human/H)
+/decl/species/proc/get_death_message(var/mob/living/human/H)
 	return ((H && H.isSynthetic()) ? "gives one shrill beep before falling lifeless." : death_message)
 
-/decl/species/proc/get_ssd(var/mob/living/carbon/human/H)
+/decl/species/proc/get_ssd(var/mob/living/human/H)
 	return ((H && H.isSynthetic()) ? "flashing a 'system offline' glyph on their monitor" : show_ssd)
 
-/decl/species/proc/get_flesh_colour(var/mob/living/carbon/human/H)
+/decl/species/proc/get_flesh_colour(var/mob/living/human/H)
 	return ((H && H.isSynthetic()) ? SYNTH_FLESH_COLOUR : flesh_color)
 
-/decl/species/proc/get_environment_discomfort(var/mob/living/carbon/human/H, var/msg_type)
+/decl/species/proc/get_environment_discomfort(var/mob/living/human/H, var/msg_type)
 
 	if(!prob(5))
 		return
@@ -44,31 +44,31 @@
 			if(covered)
 				to_chat(H, "<span class='danger'>[pick(heat_discomfort_strings)]</span>")
 
-/decl/species/proc/get_vision_flags(var/mob/living/carbon/human/H)
+/decl/species/proc/get_vision_flags(var/mob/living/human/H)
 	return vision_flags
 
 /decl/species/proc/get_sex(var/mob/living/carbon/H)
 	return H?.get_sex() || NEUTER
 
-/decl/species/proc/get_surgery_overlay_icon(var/mob/living/carbon/human/H)
+/decl/species/proc/get_surgery_overlay_icon(var/mob/living/human/H)
 	return 'icons/mob/surgery.dmi'
 
-/decl/species/proc/get_footstep(var/mob/living/carbon/human/H, var/footstep_type)
+/decl/species/proc/get_footstep(var/mob/living/human/H, var/footstep_type)
 	return
 
-/decl/species/proc/get_brute_mod(var/mob/living/carbon/human/H)
+/decl/species/proc/get_brute_mod(var/mob/living/human/H)
 	. = brute_mod
 
-/decl/species/proc/get_burn_mod(var/mob/living/carbon/human/H)
+/decl/species/proc/get_burn_mod(var/mob/living/human/H)
 	. = burn_mod
 
-/decl/species/proc/get_radiation_mod(var/mob/living/carbon/human/H)
+/decl/species/proc/get_radiation_mod(var/mob/living/human/H)
 	. = (H && H.isSynthetic() ? 0.5 : radiation_mod)
 
-/decl/species/proc/get_slowdown(var/mob/living/carbon/human/H)
+/decl/species/proc/get_slowdown(var/mob/living/human/H)
 	. = (H && H.isSynthetic() ? 0 : slowdown)
 
-/decl/species/proc/get_root_species_name(var/mob/living/carbon/human/H)
+/decl/species/proc/get_root_species_name(var/mob/living/human/H)
 	return name
 
 /decl/species/proc/get_limb_from_zone(var/limb)

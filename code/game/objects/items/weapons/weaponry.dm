@@ -205,7 +205,7 @@
 
 /obj/effect/energy_net/attack_hand(var/mob/user)
 
-	var/mob/living/carbon/human/H = user
+	var/mob/living/human/H = user
 	if(istype(H))
 		if(H.species.can_shred(H))
 			playsound(src.loc, 'sound/weapons/slash.ogg', 80, 1)

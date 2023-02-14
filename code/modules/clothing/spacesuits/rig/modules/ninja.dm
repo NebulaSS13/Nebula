@@ -44,7 +44,7 @@
 	if(!..())
 		return 0
 
-	var/mob/living/carbon/human/H = holder.wearer
+	var/mob/living/human/H = holder.wearer
 
 	if(H.add_cloaking_source(src))
 		anim(H, 'icons/effects/effects.dmi', "electricity",null,20,null)
@@ -54,7 +54,7 @@
 	if(!..())
 		return 0
 
-	var/mob/living/carbon/human/H = holder.wearer
+	var/mob/living/human/H = holder.wearer
 
 	if(H.remove_cloaking_source(src))
 		anim(H,'icons/mob/mob.dmi',,"uncloak",,H.dir)
@@ -92,7 +92,7 @@
 
 /obj/item/rig_module/teleporter/engage(var/atom/target, var/notify_ai)
 
-	var/mob/living/carbon/human/H = holder.wearer
+	var/mob/living/human/H = holder.wearer
 
 	if(!isturf(H.loc))
 		to_chat(H, "<span class='warning'>You cannot teleport out of your current location.</span>")

@@ -40,7 +40,7 @@
 /obj/item/vampiric/Process()
 	//see if we've identified anyone nearby
 	if(world.time - last_bloodcall > bloodcall_interval && nearby_mobs.len)
-		var/mob/living/carbon/human/M = pop(nearby_mobs)
+		var/mob/living/human/M = pop(nearby_mobs)
 		if(M in view(7,src) && M.health > 20)
 			if(prob(50))
 				bloodcall(M)
@@ -100,7 +100,7 @@
 	if(world.time - last_bloodcall >= bloodcall_interval && (M in view(7, src)))
 		bloodcall(M)
 
-/obj/item/vampiric/proc/bloodcall(var/mob/living/carbon/human/M)
+/obj/item/vampiric/proc/bloodcall(var/mob/living/human/M)
 	last_bloodcall = world.time
 	if(istype(M))
 		playsound(src.loc, pick('sound/hallucinations/wail.ogg','sound/hallucinations/veryfar_noise.ogg','sound/hallucinations/far_noise.ogg'), 50, 1, -3)

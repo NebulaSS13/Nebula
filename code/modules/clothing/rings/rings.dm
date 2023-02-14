@@ -26,12 +26,12 @@
 	desc = "A strange ring with symbols carved on it in some arcane language."
 	icon = 'icons/clothing/rings/ring_magic.dmi'
 
-/obj/item/clothing/ring/magic/equipped(var/mob/living/carbon/human/H, var/slot)
+/obj/item/clothing/ring/magic/equipped(var/mob/living/human/H, var/slot)
 	..()
 	if(istype(H) && slot == SLOT_HANDS)
 		H.add_cloaking_source(src)
 
-/obj/item/clothing/ring/magic/dropped(var/mob/living/carbon/human/H)
+/obj/item/clothing/ring/magic/dropped(var/mob/living/human/H)
 	if(!..())
 		return 0
 
@@ -57,7 +57,7 @@
 		reagents.maximum_volume = max(volume, reagents.maximum_volume)
 	. = ..()
 
-/obj/item/clothing/ring/reagent/equipped(var/mob/living/carbon/human/H)
+/obj/item/clothing/ring/reagent/equipped(var/mob/living/human/H)
 	..()
 	if(istype(H) && H.get_equipped_item(slot_gloves_str) == src)
 		to_chat(H, SPAN_DANGER("You feel a prick as you slip on the ring."))

@@ -119,8 +119,8 @@
 	for(var/mob/living/mob in global.living_mob_list_)
 		var/turf/T = get_turf(mob)
 		if(T && (holder.z == T.z))
-			if(istype(mob, /mob/living/carbon/human))
-				var/mob/living/carbon/human/H = mob
+			if(istype(mob, /mob/living/human))
+				var/mob/living/human/H = mob
 				H.set_hallucination(rand(100,150), 51)
 
 	for(var/obj/machinery/fusion_fuel_injector/I in range(world.view, origin))

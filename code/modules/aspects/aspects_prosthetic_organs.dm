@@ -16,7 +16,7 @@
 /decl/aspect/prosthetic_organ/applies_to_organ(var/organ)
 	return apply_to_organ && organ == apply_to_organ
 
-/decl/aspect/prosthetic_organ/apply(var/mob/living/carbon/human/holder)
+/decl/aspect/prosthetic_organ/apply(var/mob/living/human/holder)
 	. = ..()
 	if(.)
 		var/obj/item/organ/internal/I = GET_INTERNAL_ORGAN(holder, apply_to_organ)

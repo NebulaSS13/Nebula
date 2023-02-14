@@ -263,7 +263,7 @@
 /obj/item/rig_module/proc/accepts_item(var/obj/item/input_device)
 	return 0
 
-/mob/living/carbon/human/Stat()
+/mob/living/human/Stat()
 	. = ..()
 
 	var/obj/item/rig/R = get_equipped_item(slot_back_str)

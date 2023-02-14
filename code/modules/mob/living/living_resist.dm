@@ -21,7 +21,7 @@
 	//A default in case you are somehow cuffed with something that isn't an obj/item/handcuffs type
 	var/breakouttime = istype(cuffs) ? cuffs.breakouttime : 2 MINUTES
 
-	var/mob/living/carbon/human/H = src
+	var/mob/living/human/H = src
 	if(istype(H) && istype(H.get_equipped_item(slot_gloves_str), /obj/item/clothing/gloves/rig))
 		breakouttime /= 2
 

@@ -10,7 +10,7 @@
 	if(spawner_type && deliveryamt)
 		var/turf/T = get_turf(src)
 		playsound(T, 'sound/effects/phasein.ogg', 100, 1)
-		for(var/mob/living/carbon/human/M in viewers(T, null))
+		for(var/mob/living/human/M in viewers(T, null))
 			if(M.eyecheck() < FLASH_PROTECTION_MODERATE)
 				M.flash_eyes()
 			for(var/i = 1 to deliveryamt)

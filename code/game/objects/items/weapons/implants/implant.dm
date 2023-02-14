@@ -47,7 +47,7 @@
 	return TRUE
 
 /obj/item/implant/proc/can_implant(mob/M, mob/user, var/target_zone)
-	var/mob/living/carbon/human/H = M
+	var/mob/living/human/H = M
 	if(istype(H) && !GET_EXTERNAL_ORGAN(H, target_zone))
 		to_chat(user, "<span class='warning'>\The [M] is missing that body part.</span>")
 		return FALSE
@@ -55,7 +55,7 @@
 
 /obj/item/implant/proc/implant_in_mob(mob/M, var/target_zone)
 	if (ishuman(M))
-		var/mob/living/carbon/human/H = M
+		var/mob/living/human/H = M
 		var/obj/item/organ/external/affected = GET_EXTERNAL_ORGAN(H, target_zone)
 		if(affected)
 			LAZYADD(affected.implants, src)

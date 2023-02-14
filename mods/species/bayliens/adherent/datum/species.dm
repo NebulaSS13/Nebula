@@ -116,7 +116,7 @@
 	max_players = 3
 	blood_volume = 0
 
-/decl/species/adherent/can_overcome_gravity(var/mob/living/carbon/human/H)
+/decl/species/adherent/can_overcome_gravity(var/mob/living/human/H)
 	. = FALSE
 	if(H && H.stat == CONSCIOUS)
 		for(var/obj/item/organ/internal/powered/float/float in H.get_internal_organs())
@@ -124,13 +124,13 @@
 				. = TRUE
 				break
 
-/decl/species/adherent/can_fall(var/mob/living/carbon/human/H)
+/decl/species/adherent/can_fall(var/mob/living/human/H)
 	. = !can_overcome_gravity(H)
 
-/decl/species/adherent/get_slowdown(var/mob/living/carbon/human/H)
+/decl/species/adherent/get_slowdown(var/mob/living/human/H)
 	return slowdown
 
-/decl/species/adherent/handle_fall_special(var/mob/living/carbon/human/H, var/turf/landing)
+/decl/species/adherent/handle_fall_special(var/mob/living/human/H, var/turf/landing)
 	var/float_is_usable = FALSE
 	if(H && H.stat == CONSCIOUS)
 		for(var/obj/item/organ/internal/powered/float/float in H.get_internal_organs())
@@ -152,7 +152,7 @@
 		if(2000 to 8000) . =  4
 		else             . =  8
 
-/decl/species/adherent/get_additional_examine_text(var/mob/living/carbon/human/H)
+/decl/species/adherent/get_additional_examine_text(var/mob/living/human/H)
 	if(can_overcome_gravity(H)) return "\nThey are floating on a cloud of shimmering distortion."
 
 /datum/hud_data/adherent

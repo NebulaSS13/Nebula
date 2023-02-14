@@ -33,5 +33,5 @@
 			C.bodytemperature = C.species?.body_temperature || initial(C.bodytemperature)
 			C.adjust_nutrition(50 * weakness)
 			if(ishuman(C))
-				var/mob/living/carbon/human/H = C
+				var/mob/living/human/H = C
 				H.regenerate_blood(5 * weakness)

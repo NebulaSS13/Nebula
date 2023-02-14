@@ -145,7 +145,7 @@ Targeted spells have two useful flags: INCLUDEUSER and SELECTABLE. These are exp
 	target.adjustToxLoss(amt_dam_tox)
 	target.adjustOxyLoss(amt_dam_oxy)
 	if(ishuman(target))
-		var/mob/living/carbon/human/H = target
+		var/mob/living/human/H = target
 		for(var/obj/item/organ/internal/affecting in H.get_internal_organs())
 			if(affecting && istype(affecting))
 				affecting.heal_damage(amt_organ, amt_organ)

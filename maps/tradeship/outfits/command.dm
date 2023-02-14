@@ -6,7 +6,7 @@
 	r_pocket = /obj/item/radio
 	id_type = /obj/item/card/id/gold
 
-/decl/hierarchy/outfit/job/tradeship/captain/post_equip(var/mob/living/carbon/human/H)
+/decl/hierarchy/outfit/job/tradeship/captain/post_equip(var/mob/living/human/H)
 	..()
 	var/obj/item/clothing/uniform = H.get_equipped_item(slot_w_uniform_str)
 	if(uniform)

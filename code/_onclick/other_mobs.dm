@@ -8,7 +8,7 @@
 
 	Otherwise pretty standard.
 */
-/mob/living/carbon/human/UnarmedAttack(var/atom/A, var/proximity)
+/mob/living/human/UnarmedAttack(var/atom/A, var/proximity)
 
 	if(!..())
 		return
@@ -40,7 +40,7 @@
 /mob/proc/attack_empty_hand()
 	return
 
-/mob/living/carbon/human/RestrainedClickOn(var/atom/A)
+/mob/living/human/RestrainedClickOn(var/atom/A)
 	return
 
 /mob/living/CtrlClickOn(var/atom/A)
@@ -48,7 +48,7 @@
 	if(!. && a_intent == I_GRAB && length(available_maneuvers))
 		. = perform_maneuver(prepared_maneuver || available_maneuvers[1], A)
 
-/mob/living/carbon/human/RangedAttack(var/atom/A, var/params)
+/mob/living/human/RangedAttack(var/atom/A, var/params)
 	//Climbing up open spaces
 	if((istype(A, /turf/simulated/floor) || istype(A, /turf/unsimulated/floor) || istype(A, /obj/structure/lattice) || istype(A, /obj/structure/catwalk)) && isturf(loc) && bound_overlay && !is_physically_disabled()) //Climbing through openspace
 		return climb_up(A)

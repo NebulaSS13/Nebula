@@ -34,7 +34,7 @@
 	if(species.organs_icon)
 		icon = species.organs_icon
 
-/obj/item/organ/internal/do_install(mob/living/carbon/human/target, obj/item/organ/external/affected, in_place, update_icon, detached)
+/obj/item/organ/internal/do_install(mob/living/human/target, obj/item/organ/external/affected, in_place, update_icon, detached)
 	. = ..()
 
 	if(!affected)

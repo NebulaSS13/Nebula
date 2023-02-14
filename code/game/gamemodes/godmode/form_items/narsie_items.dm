@@ -17,7 +17,7 @@
 		if(L.mind)
 			multiplier++
 		if(ishuman(L))
-			var/mob/living/carbon/human/H = L
+			var/mob/living/human/H = L
 			if(H.should_have_organ(BP_HEART))
 				multiplier++
 		if(L.stat == DEAD)

@@ -20,7 +20,7 @@
 /proc/random_name(gender, species)
 	if(species)
 		var/decl/species/current_species = get_species_by_key(species)
-		if(current_species) 
+		if(current_species)
 			var/decl/cultural_info/current_culture = GET_DECL(current_species.default_cultural_info[TAG_CULTURE])
 			if(current_culture)
 				return current_culture.get_random_name(null, gender)
@@ -242,8 +242,8 @@
 			if((M.stat != DEAD) || (!M.client))
 				continue
 			//They need a brain!
-			if(istype(M, /mob/living/carbon/human))
-				var/mob/living/carbon/human/H = M
+			if(istype(M, /mob/living/human))
+				var/mob/living/human/H = M
 				if(H.should_have_organ(BP_BRAIN) && !H.has_brain())
 					continue
 			if(M.ckey == find_key)

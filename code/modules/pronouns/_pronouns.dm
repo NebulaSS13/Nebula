@@ -77,7 +77,7 @@ var/global/list/byond_genders = list(MALE, FEMALE, NEUTER, PLURAL)
 	return pronouns || GET_DECL(/decl/pronouns)
 
 // Human concealment helper.
-/mob/living/carbon/human/get_pronouns(var/ignore_coverings)
+/mob/living/human/get_pronouns(var/ignore_coverings)
 	if(!ignore_coverings)
 		var/obj/item/suit = get_equipped_item(slot_wear_suit_str)
 		var/obj/item/head = get_equipped_item(slot_head_str)

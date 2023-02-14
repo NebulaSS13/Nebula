@@ -2,7 +2,7 @@
 	name = "blood packs box"
 	desc = "This box contains blood packs."
 	icon_state = "sterile"
-	
+
 /obj/item/storage/box/bloodpacks/WillContain()
 	return list(/obj/item/chems/ivbag = 7)
 
@@ -17,7 +17,7 @@
 	amount_per_transfer_from_this = REM
 	atom_flags = ATOM_FLAG_OPEN_CONTAINER
 
-	var/mob/living/carbon/human/attached
+	var/mob/living/human/attached
 
 /obj/item/chems/ivbag/Destroy()
 	STOP_PROCESSING(SSobj,src)

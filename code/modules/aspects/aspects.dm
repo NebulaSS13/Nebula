@@ -82,7 +82,7 @@ var/global/list/aspect_categories = list() // Containers for ease of printing da
 /decl/aspect/dd_SortValue()
 	return sort_value
 
-/decl/aspect/proc/apply(var/mob/living/carbon/human/holder)
+/decl/aspect/proc/apply(var/mob/living/human/holder)
 	return (istype(holder))
 
 // Called by preferences selection for HTML display.
@@ -175,7 +175,7 @@ var/global/list/aspect_categories = list() // Containers for ease of printing da
 				do_update = TRUE
 	return do_update
 
-/mob/living/carbon/human/apply_aspects(var/aspect_type)
+/mob/living/human/apply_aspects(var/aspect_type)
 	. = ..(aspect_type)
 	if(.)
 		update_body()

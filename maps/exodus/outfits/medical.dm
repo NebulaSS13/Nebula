@@ -51,7 +51,7 @@
 	name = "Job - Nurse"
 	suit = null
 
-/decl/hierarchy/outfit/job/medical/doctor/nurse/pre_equip(mob/living/carbon/human/H)
+/decl/hierarchy/outfit/job/medical/doctor/nurse/pre_equip(mob/living/human/H)
 	..()
 	if(H.gender == FEMALE)
 		if(prob(50))

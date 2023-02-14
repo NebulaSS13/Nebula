@@ -6,7 +6,7 @@
 
 /datum/spellbound_type/proc/spawn_servant(var/atom/a, var/mob/master, var/mob/user)
 	set waitfor = 0
-	var/mob/living/carbon/human/H = new(a)
+	var/mob/living/human/H = new(a)
 	H.ckey = user.ckey
 	H.change_appearance(APPEARANCE_GENDER|APPEARANCE_BODY|APPEARANCE_EYE_COLOR|APPEARANCE_HAIR|APPEARANCE_FACIAL_HAIR|APPEARANCE_HAIR_COLOR|APPEARANCE_FACIAL_HAIR_COLOR|APPEARANCE_SKIN)
 
@@ -25,7 +25,7 @@
 		H.SetName(name_choice)
 		H.real_name = name_choice
 
-/datum/spellbound_type/proc/equip_servant(var/mob/living/carbon/human/H)
+/datum/spellbound_type/proc/equip_servant(var/mob/living/human/H)
 	for(var/stype in spells)
 		var/spell/S = new stype()
 		if(S.spell_flags & NEEDSCLOTHES)
@@ -42,7 +42,7 @@
 /datum/spellbound_type/proc/set_antag(var/datum/mind/M, var/mob/master)
 	return
 
-/datum/spellbound_type/proc/modify_servant(var/list/items, var/mob/living/carbon/human/H)
+/datum/spellbound_type/proc/modify_servant(var/list/items, var/mob/living/human/H)
 	return
 
 /datum/spellbound_type/apprentice
@@ -97,7 +97,7 @@
 	equipment = list(/obj/item/clothing/head/bandana/familiarband = slot_head_str,
 					/obj/item/clothing/under/familiargarb = slot_w_uniform_str)
 
-/datum/spellbound_type/servant/familiar/modify_servant(var/list/equipment, var/mob/living/carbon/human/H)
+/datum/spellbound_type/servant/familiar/modify_servant(var/list/equipment, var/mob/living/human/H)
 	var/familiar_type
 	switch(input(H,"Choose your desired animal form:", "Form") as anything in list("Space Pike", "Mouse", "Cat", "Bear"))
 		if("Space Pike")
@@ -146,7 +146,7 @@
 				/spell/hand/charges/blood_shard
 				)
 
-/datum/spellbound_type/servant/fiend/equip_servant(var/mob/living/carbon/human/H)
+/datum/spellbound_type/servant/fiend/equip_servant(var/mob/living/human/H)
 	if(H.gender == MALE)
 		equipment = list(/obj/item/clothing/under/lawyer/fiendsuit = slot_w_uniform_str,
 						/obj/item/clothing/shoes/dress/devilshoes = slot_shoes_str)
@@ -165,7 +165,7 @@
 				/spell/targeted/exhude_pleasantness,
 				/spell/targeted/genetic/blind/hysteria)
 
-/datum/spellbound_type/servant/infiltrator/equip_servant(var/mob/living/carbon/human/H)
+/datum/spellbound_type/servant/infiltrator/equip_servant(var/mob/living/human/H)
 	if(H.gender == MALE)
 		equipment = list(/obj/item/clothing/under/lawyer/infil = slot_w_uniform_str,
 						/obj/item/clothing/shoes/dress/infilshoes = slot_shoes_str)
@@ -189,7 +189,7 @@
 				/spell/invisibility,
 				/spell/targeted/revoke)
 
-/datum/spellbound_type/servant/overseer/equip_servant(var/mob/living/carbon/human/H)
+/datum/spellbound_type/servant/overseer/equip_servant(var/mob/living/human/H)
 	..()
 	H.add_aura(new /obj/aura/regenerating(H))
 

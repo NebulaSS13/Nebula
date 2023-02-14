@@ -1,34 +1,34 @@
-/mob/living/carbon/human/get_organ(var/organ_tag, var/expected_type)
+/mob/living/human/get_organ(var/organ_tag, var/expected_type)
 	var/obj/item/organ = LAZYACCESS(organs_by_tag, organ_tag)
 	if(!expected_type || istype(organ, expected_type))
 		return organ
 
-/mob/living/carbon/human/get_external_organs()
+/mob/living/human/get_external_organs()
 	return external_organs
 
-/mob/living/carbon/human/get_internal_organs()
+/mob/living/human/get_internal_organs()
 	return internal_organs
 
-/mob/living/carbon/human/has_organs()
+/mob/living/human/has_organs()
 	return (LAZYLEN(external_organs) + LAZYLEN(internal_organs)) > 0
 
-/mob/living/carbon/human/has_external_organs()
+/mob/living/human/has_external_organs()
 	return LAZYLEN(external_organs) > 0
 
-/mob/living/carbon/human/has_internal_organs()
+/mob/living/human/has_internal_organs()
 	return LAZYLEN(internal_organs) > 0
 
-/mob/living/carbon/human/proc/update_eyes()
+/mob/living/human/proc/update_eyes()
 	var/obj/item/organ/internal/eyes/eyes = get_organ((species?.vision_organ || BP_EYES), /obj/item/organ/internal/eyes)
 	if(eyes)
 		eyes.update_colour()
 		refresh_visible_overlays()
 
-/mob/living/carbon/human/proc/get_bodypart_name(var/zone)
+/mob/living/human/proc/get_bodypart_name(var/zone)
 	var/obj/item/organ/external/E = GET_EXTERNAL_ORGAN(src, zone)
 	return E?.name
 
-/mob/living/carbon/human/proc/should_recheck_bad_external_organs()
+/mob/living/human/proc/should_recheck_bad_external_organs()
 	var/damage_this_tick = getToxLoss()
 	for(var/obj/item/organ/external/O in get_external_organs())
 		damage_this_tick += O.burn_dam + O.brute_dam
@@ -37,14 +37,14 @@
 		. = TRUE
 	last_dam = damage_this_tick
 
-/mob/living/carbon/human/proc/recheck_bad_external_organs()
+/mob/living/human/proc/recheck_bad_external_organs()
 	LAZYCLEARLIST(bad_external_organs)
 	for(var/obj/item/organ/external/E in get_external_organs())
 		if(E.need_process())
 			LAZYDISTINCTADD(bad_external_organs, E)
 
 // Takes care of organ related updates, such as broken and missing limbs
-/mob/living/carbon/human/proc/handle_organs()
+/mob/living/human/proc/handle_organs()
 
 	// Check for the presence (or lack of) vital organs like the brain.
 	// Set a timer after this point, since we want a little bit of
@@ -100,7 +100,7 @@
 					if (W.infection_check())
 						W.germ_level += 1
 
-/mob/living/carbon/human/proc/Check_Proppable_Object()
+/mob/living/human/proc/Check_Proppable_Object()
 	for(var/turf/simulated/T in RANGE_TURFS(src, 1)) //we only care for non-space turfs
 		if(T.density)	//walls work
 			return 1
@@ -111,7 +111,7 @@
 
 	return 0
 
-/mob/living/carbon/human/proc/handle_stance()
+/mob/living/human/proc/handle_stance()
 	set waitfor = FALSE // Can sleep in emotes.
 	// Don't need to process any of this if they aren't standing anyways
 	// unless their stance is damaged, and we want to check if they should stay down
@@ -188,7 +188,7 @@
 			custom_emote(VISIBLE_MESSAGE, "collapses!")
 		SET_STATUS_MAX(src, STAT_WEAK, 3) //can't emote while weakened, apparently.
 
-/mob/living/carbon/human/proc/handle_grasp()
+/mob/living/human/proc/handle_grasp()
 	for(var/hand_slot in held_item_slots)
 		var/datum/inventory_slot/inv_slot = held_item_slots[hand_slot]
 		var/holding = inv_slot?.holding
@@ -197,7 +197,7 @@
 			if((!E || !E.is_usable() || E.is_parent_dislocated()) && unEquip(holding))
 				grasp_damage_disarm(inv_slot)
 
-/mob/living/carbon/human/proc/stance_damage_prone(var/obj/item/organ/external/affected)
+/mob/living/human/proc/stance_damage_prone(var/obj/item/organ/external/affected)
 
 	if(affected && (!BP_IS_PROSTHETIC(affected) || affected.is_robotic()))
 		switch(affected.body_part)
@@ -215,7 +215,7 @@
 				return
 	SET_STATUS_MAX(src, STAT_WEAK, 4)
 
-/mob/living/carbon/human/proc/grasp_damage_disarm(var/obj/item/organ/external/affected)
+/mob/living/human/proc/grasp_damage_disarm(var/obj/item/organ/external/affected)
 
 	var/list/drop_held_item_slots
 	if(istype(affected))
@@ -258,7 +258,7 @@
 		else
 			visible_message("<B>\The [src]</B> drops what they were holding in their [grasp_name]!")
 
-/mob/living/carbon/human/proc/sync_organ_dna()
+/mob/living/human/proc/sync_organ_dna()
 	for(var/obj/item/organ/O in get_organs())
 		if(!BP_IS_PROSTHETIC(O))
 			O.setup_as_organic(dna)
@@ -268,7 +268,7 @@
 /mob/living/proc/is_asystole()
 	return FALSE
 
-/mob/living/carbon/human/is_asystole()
+/mob/living/human/is_asystole()
 	if(isSynthetic())
 		var/obj/item/organ/internal/cell/C = get_organ(BP_CELL, /obj/item/organ/internal/cell)
 		if(!C || !C.is_usable() || !C.percent())
@@ -279,11 +279,11 @@
 			return TRUE
 	return FALSE
 
-/mob/living/carbon/human/proc/is_lung_ruptured()
+/mob/living/human/proc/is_lung_ruptured()
 	var/obj/item/organ/internal/L = GET_INTERNAL_ORGAN(src, BP_LUNGS)
 	return L && L.is_bruised()
 
-/mob/living/carbon/human/proc/rupture_lung()
+/mob/living/human/proc/rupture_lung()
 	var/obj/item/organ/internal/lungs/L = get_organ(BP_LUNGS, /obj/item/organ/internal/lungs)
 	if(L)
 		L.rupture()
@@ -291,15 +291,15 @@
 //Registers an organ and setup the organ hierachy properly.
 //affected  : Parent organ if applicable.
 //in_place  : If true, we're performing an in-place replacement, without triggering anything related to adding the organ in-game as part of surgery or else.
-/mob/living/carbon/human/add_organ(obj/item/organ/O, obj/item/organ/external/affected, in_place, update_icon, detached)
+/mob/living/human/add_organ(obj/item/organ/O, obj/item/organ/external/affected, in_place, update_icon, detached)
 	if(!(. = ..()))
 		return
 
 	var/obj/item/organ/existing = LAZYACCESS(organs_by_tag, O.organ_tag)
 	if(existing && O != existing)
-		CRASH("mob/living/carbon/human/add_organ(): '[O]' tried to overwrite [src]'s existing organ '[existing]' in slot '[O.organ_tag]'!")
+		CRASH("mob/living/human/add_organ(): '[O]' tried to overwrite [src]'s existing organ '[existing]' in slot '[O.organ_tag]'!")
 	if(O.parent_organ && !LAZYACCESS(organs_by_tag, O.parent_organ))
-		CRASH("mob/living/carbon/human/add_organ(): Tried to add an internal organ to a non-existing parent external organ!")
+		CRASH("mob/living/human/add_organ(): Tried to add an internal organ to a non-existing parent external organ!")
 
 	//We don't add internal organs to the lists if we're detached
 	if(O.is_internal() && !detached)
@@ -328,7 +328,7 @@
 //ignore_children: Skips recursively removing this organ's child organs.
 //in_place       : If true we remove only the organ (no children items or implants) and avoid triggering mob changes and parent organs changes as much as possible.
 //  Meant to be used for init and species transforms, without triggering any updates to mob state or anything related to losing a limb as part of surgery or combat.
-/mob/living/carbon/human/remove_organ(obj/item/organ/O, drop_organ, detach, ignore_children,  in_place, update_icon)
+/mob/living/human/remove_organ(obj/item/organ/O, drop_organ, detach, ignore_children,  in_place, update_icon)
 	if(!(. = ..()))
 		return
 
@@ -352,7 +352,7 @@
 		hud_reset()
 		queue_icon_update() //Avoids calling icon updates 50 times when removing multiple organs
 
-/mob/living/carbon/human/on_lost_organ(var/obj/item/organ/O)
+/mob/living/human/on_lost_organ(var/obj/item/organ/O)
 	if(!(. = ..()))
 		return
 	//Move some blood over to the organ
@@ -360,7 +360,7 @@
 		vessel.trans_to(O, 5 - O.reagents.total_volume, 1, 1)
 
 //Deletes all references to organs
-/mob/living/carbon/human/delete_organs()
+/mob/living/human/delete_organs()
 	. = ..()
 	organs_by_tag = null
 	internal_organs = null

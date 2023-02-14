@@ -1,5 +1,5 @@
 
-/mob/living/carbon/human/proc/handle_pain()
+/mob/living/human/proc/handle_pain()
 	if(stat)
 		return
 	if(!can_feel_pain())

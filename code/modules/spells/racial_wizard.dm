@@ -15,10 +15,10 @@
 	)
 
 /obj/item/magic_rock/attack_self(mob/user)
-	if(!istype(user,/mob/living/carbon/human))
+	if(!istype(user,/mob/living/human))
 		to_chat(user, "\The [src] can do nothing for such a simple being.")
 		return
-	var/mob/living/carbon/human/H = user
+	var/mob/living/human/H = user
 	var/reward = potentials[H.species.get_root_species_name(H)] //we get body type because that lets us ignore subspecies.
 	if(!reward)
 		to_chat(user, "\The [src] does not know what to make of you.")

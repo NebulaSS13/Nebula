@@ -23,7 +23,7 @@
 
 /obj/item/scanner/autopsy/scan(atom/A, mob/user)
 	if(ishuman(A))
-		var/mob/living/carbon/human/M = A
+		var/mob/living/human/M = A
 		set_target(M, user)
 		timeofdeath = M.timeofdeath
 		var/obj/item/organ/external/S = GET_EXTERNAL_ORGAN(M, user.zone_sel.selecting)
@@ -42,8 +42,8 @@
 	else if(istype(A, /obj/item/organ/external))
 		set_target(A, user)
 		add_data(A)
-	
-	scan_title = "Autopsy Report ([target_name])" 
+
+	scan_title = "Autopsy Report ([target_name])"
 	scan_data = get_formatted_data()
 	playsound(src, 'sound/effects/fastbeep.ogg', 10)
 

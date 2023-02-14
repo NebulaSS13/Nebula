@@ -6,7 +6,7 @@
 Scent intensity
 *****/
 /decl/scent_intensity
-	var/cooldown = 5 MINUTES 
+	var/cooldown = 5 MINUTES
 	var/intensity = 1
 
 /decl/scent_intensity/proc/PrintMessage(var/mob/user, var/descriptor, var/scent)
@@ -63,7 +63,7 @@ Scent intensity
 		return PROCESS_KILL
 	emit_scent()
 
-/datum/extension/scent/proc/check_smeller(var/mob/living/carbon/human/smeller)
+/datum/extension/scent/proc/check_smeller(var/mob/living/human/smeller)
 	if(!istype(smeller) || smeller.stat != CONSCIOUS || smeller.failed_last_breath)
 		return FALSE
 	if(smeller.get_equipped_item(slot_wear_mask_str))
@@ -82,7 +82,7 @@ Scent intensity
 			continue
 		show_smell(M)
 
-/datum/extension/scent/proc/show_smell(var/mob/living/carbon/human/smeller)
+/datum/extension/scent/proc/show_smell(var/mob/living/human/smeller)
 	if(LAZYACCESS(smeller.smell_cooldown, scent) < world.time)
 		intensity.PrintMessage(smeller, descriptor, scent)
 		LAZYSET(smeller.smell_cooldown, scent, world.time + intensity.cooldown)
@@ -125,6 +125,6 @@ To add a scent extension to an atom using a reagent's info, where R. is the reag
 		var/r_scent_intensity = REAGENT_VOLUME(smelly_atom.reagents, reagent_type) * SI.intensity
 		if(r_scent_intensity > scent_intensity)
 			smelliest = R
-			scent_intensity = r_scent_intensity 
+			scent_intensity = r_scent_intensity
 	if(smelliest)
 		set_extension(smelly_atom, /datum/extension/scent/custom, smelliest.scent, smelliest.scent_intensity, smelliest.scent_descriptor, smelliest.scent_range)

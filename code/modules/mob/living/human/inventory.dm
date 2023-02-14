@@ -2,12 +2,12 @@
 Add fingerprints to items when we put them in our hands.
 This saves us from having to call add_fingerprint() any time something is put in a human's hands programmatically.
 */
-/mob/living/carbon/human/verb/quick_equip()
+/mob/living/human/verb/quick_equip()
 	set name = "quick-equip"
 	set hidden = 1
 
 	if(ishuman(src))
-		var/mob/living/carbon/human/H = src
+		var/mob/living/human/H = src
 		var/obj/item/I = H.get_active_hand()
 		if(!I)
 			to_chat(H, SPAN_NOTICE("You are not holding anything to equip."))
@@ -15,7 +15,7 @@ This saves us from having to call add_fingerprint() any time something is put in
 		if(!H.equip_to_appropriate_slot(I))
 			to_chat(H, SPAN_WARNING("You are unable to equip that."))
 
-/mob/living/carbon/human/proc/equip_in_one_of_slots(obj/item/W, list/slots, del_on_fail = 1)
+/mob/living/human/proc/equip_in_one_of_slots(obj/item/W, list/slots, del_on_fail = 1)
 	for (var/slot in slots)
 		if (equip_to_slot_if_possible(W, slots[slot], del_on_fail = 0))
 			return slot
@@ -23,18 +23,18 @@ This saves us from having to call add_fingerprint() any time something is put in
 		qdel(W)
 	return null
 
-/mob/living/carbon/human/put_in_hands(var/obj/item/W)
+/mob/living/human/put_in_hands(var/obj/item/W)
 	if(!W)
 		return 0
 	if(put_in_active_hand(W) || put_in_inactive_hand(W))
 		return 1
 	return ..()
 
-/mob/living/carbon/human/proc/has_organ(name)
+/mob/living/human/proc/has_organ(name)
 	var/obj/item/organ/external/O = GET_EXTERNAL_ORGAN(src, name)
 	return !!O
 
-/mob/living/carbon/human/proc/has_organ_for_slot(slot)
+/mob/living/human/proc/has_organ_for_slot(slot)
 	switch(slot)
 		if(slot_back_str)
 			return has_organ(BP_CHEST)
@@ -76,7 +76,7 @@ This saves us from having to call add_fingerprint() any time something is put in
 		else
 			return has_organ(slot)
 
-/mob/living/carbon/human/u_equip(obj/W)
+/mob/living/human/u_equip(obj/W)
 	. = ..()
 	if(!.)
 		. = TRUE
@@ -162,7 +162,7 @@ This saves us from having to call add_fingerprint() any time something is put in
 // Post hands rewrite I plan to conver the rest of the inventory system to a string-based inventory slot system
 // so at that point the numerical flags will be removed and this proc (and the rest of the chain) can be rewritten.
 
-/mob/living/carbon/human/equip_to_slot(obj/item/W, slot, redraw_mob = TRUE, delete_old_item = TRUE)
+/mob/living/human/equip_to_slot(obj/item/W, slot, redraw_mob = TRUE, delete_old_item = TRUE)
 
 	. = ..()
 	if(!. || !has_organ_for_slot(slot))
@@ -307,7 +307,7 @@ This saves us from having to call add_fingerprint() any time something is put in
 	return 1
 
 //Checks if a given slot can be accessed at this time, either to equip or unequip I
-/mob/living/carbon/human/slot_is_accessible(var/slot, var/obj/item/I, mob/user=null)
+/mob/living/human/slot_is_accessible(var/slot, var/obj/item/I, mob/user=null)
 	var/obj/item/covering = null
 	var/check_flags = 0
 
@@ -329,7 +329,7 @@ This saves us from having to call add_fingerprint() any time something is put in
 		return 0
 	return 1
 
-/mob/living/carbon/human/get_equipped_item(var/slot)
+/mob/living/human/get_equipped_item(var/slot)
 
 	switch(slot)
 		if(slot_wear_id_str)    return _wear_id
@@ -350,7 +350,7 @@ This saves us from having to call add_fingerprint() any time something is put in
 		if(slot_r_ear_str)      return _r_ear
 	. = ..()
 
-/mob/living/carbon/human/get_equipped_items(var/include_carried = 0)
+/mob/living/human/get_equipped_items(var/include_carried = 0)
 	. = ..()
 	for(var/slot in global.equipped_slots)
 		var/obj/item/thing = get_equipped_item(slot)
@@ -363,7 +363,7 @@ This saves us from having to call add_fingerprint() any time something is put in
 				LAZYADD(., thing)
 
 //Same as get_covering_equipped_items, but using target zone instead of bodyparts flags
-/mob/living/carbon/human/proc/get_covering_equipped_item_by_zone(var/zone)
+/mob/living/human/proc/get_covering_equipped_item_by_zone(var/zone)
 	var/obj/item/organ/external/O = GET_EXTERNAL_ORGAN(src, zone)
 	if(O)
 		return get_covering_equipped_item(O.body_part)

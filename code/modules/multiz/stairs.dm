@@ -33,7 +33,7 @@
 			for(var/obj/item/grab/G in L.get_active_grabs())
 				G.affecting.forceMove(target)
 		if(ishuman(A))
-			var/mob/living/carbon/human/H = A
+			var/mob/living/human/H = A
 			if(H.has_footsteps())
 				playsound(source, 'sound/effects/stairs_step.ogg', 50)
 				playsound(target, 'sound/effects/stairs_step.ogg', 50)

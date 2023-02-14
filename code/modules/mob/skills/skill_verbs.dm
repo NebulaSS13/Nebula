@@ -72,7 +72,7 @@ Robots and antags can instruct.
 		if(skillset.owner.skill_check(S.type, SKILL_EXPERT))
 			return 1
 
-/mob/proc/can_instruct(mob/living/carbon/human/target, var/get_options = FALSE)
+/mob/proc/can_instruct(mob/living/human/target, var/get_options = FALSE)
 
 	var/datum/skill_verb/instruct/SV = skillset.fetch_verb_datum(/datum/skill_verb/instruct)
 	if(!SV || !istype(target))
@@ -98,7 +98,7 @@ Robots and antags can instruct.
 			if(!target.skill_check(S.type, SKILL_BASIC) && skill_check(S.type, SKILL_EXPERT))
 				LAZYSET(., S.name, S)
 
-/mob/proc/instruct(mob/living/carbon/human/target as mob in oview(2))
+/mob/proc/instruct(mob/living/human/target as mob in oview(2))
 
 	set category = "IC"
 	set name = "Instruct"

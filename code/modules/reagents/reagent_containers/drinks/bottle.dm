@@ -3,7 +3,7 @@
 //Bottles now weaken and break when smashed on people's heads. - Giacom
 
 //#TODO: Maybe merge this with /obj/item/glass/bottle?
-/obj/item/chems/drinks/bottle 
+/obj/item/chems/drinks/bottle
 	amount_per_transfer_from_this = 10
 	volume = 100
 	item_state = "broken_beer" //Generic held-item sprite until unique ones are made.
@@ -161,7 +161,7 @@
 	if(!smash_check(1))
 		return //won't always break on the first hit
 
-	var/mob/living/carbon/human/H = target
+	var/mob/living/human/H = target
 	if(istype(H) && H.headcheck(hit_zone))
 		var/obj/item/organ/affecting = GET_EXTERNAL_ORGAN(H, hit_zone) //headcheck should ensure that affecting is not null
 		user.visible_message(SPAN_DANGER("\The [user] smashes \the [src] into [H]'s [affecting.name]!"))

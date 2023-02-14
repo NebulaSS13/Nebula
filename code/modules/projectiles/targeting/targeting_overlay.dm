@@ -109,7 +109,7 @@
 
 	var/cancel_aim = 1
 
-	if(!(aiming_with in owner) || (istype(owner, /mob/living/carbon/human) && !(aiming_with in owner.get_held_items())))
+	if(!(aiming_with in owner) || (istype(owner, /mob/living/human) && !(aiming_with in owner.get_held_items())))
 		to_chat(owner, SPAN_WARNING("You must keep hold of your weapon!"))
 	else if(GET_STATUS(owner, STAT_BLIND))
 		to_chat(owner, SPAN_WARNING("You are blind and cannot see your target!"))
@@ -173,7 +173,7 @@
 	LAZYDISTINCTADD(aiming_at.aimed_at_by, src)
 	toggle_active(1)
 	locked = 0
-	
+
 	update_icon()
 	lock_time = world.time + 35
 	events_repository.register(/decl/observ/moved, owner, src, /obj/aiming_overlay/proc/update_aiming)

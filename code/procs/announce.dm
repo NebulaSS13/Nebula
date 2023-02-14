@@ -130,7 +130,7 @@ var/global/datum/announcement/minor/minor_announcement = new(new_sound = 'sound/
 /proc/ion_storm_announcement(list/affecting_z)
 	command_announcement.Announce("It has come to our attention that the [station_name()] passed through an ion storm.  Please monitor all electronic equipment for malfunctions.", "Anomaly Alert", zlevels = affecting_z)
 
-/proc/AnnounceArrival(var/mob/living/carbon/human/character, var/datum/job/job, var/join_message)
+/proc/AnnounceArrival(var/mob/living/human/character, var/datum/job/job, var/join_message)
 	if(!istype(job) || !job.announced)
 		return
 	if (GAME_STATE != RUNLEVEL_GAME)

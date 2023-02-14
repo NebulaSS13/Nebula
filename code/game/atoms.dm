@@ -262,7 +262,7 @@
 		M.apply_damage(TT.speed*5, BRUTE)
 
 //returns 1 if made bloody, returns 0 otherwise
-/atom/proc/add_blood(mob/living/carbon/human/M)
+/atom/proc/add_blood(mob/living/human/M)
 	if(atom_flags & ATOM_FLAG_NO_BLOOD)
 		return 0
 
@@ -466,7 +466,7 @@
 		if(prob(25))
 
 			var/damage = rand(15,30)
-			var/mob/living/carbon/human/H = M
+			var/mob/living/human/H = M
 			if(!istype(H))
 				to_chat(H, "<span class='danger'>You land heavily!</span>")
 				M.adjustBruteLoss(damage)

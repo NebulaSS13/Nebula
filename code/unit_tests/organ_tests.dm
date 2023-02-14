@@ -22,7 +22,7 @@
 /datum/unit_test/species_organ_creation
 	name = "ORGAN: Species Organs are Created Correctly"
 
-/datum/unit_test/species_organ_creation/proc/check_internal_organs(var/mob/living/carbon/human/H, var/decl/species/species)
+/datum/unit_test/species_organ_creation/proc/check_internal_organs(var/mob/living/human/H, var/decl/species/species)
 	. = 1
 	for(var/organ_tag in species.has_organ)
 		var/obj/item/organ/I = GET_INTERNAL_ORGAN(H, organ_tag)
@@ -46,7 +46,7 @@
 			fail("[species.name] internal organ has invalid absolute_max_damage value ([I.absolute_max_damage]).")
 			. = 0
 
-/datum/unit_test/species_organ_creation/proc/check_external_organs(var/mob/living/carbon/human/H, var/decl/species/species)
+/datum/unit_test/species_organ_creation/proc/check_external_organs(var/mob/living/human/H, var/decl/species/species)
 	. = 1
 	for(var/organ_tag in species.has_limbs)
 		var/obj/item/organ/external/E = GET_EXTERNAL_ORGAN(H, organ_tag)
@@ -71,7 +71,7 @@
 			fail("[species.name] external organ has invalid absolute_max_damage value ([E.absolute_max_damage]).")
 			. = 0
 
-/datum/unit_test/species_organ_creation/proc/check_organ_parents(var/mob/living/carbon/human/H, var/decl/species/species)
+/datum/unit_test/species_organ_creation/proc/check_organ_parents(var/mob/living/human/H, var/decl/species/species)
 	. = 1
 	var/list/external_organs = H.get_external_organs()
 	for(var/obj/item/organ/external/E in external_organs)
@@ -117,7 +117,7 @@
 /datum/unit_test/species_organ_creation/start_test()
 	var/failcount = 0
 	for(var/decl/species/species in get_all_species())
-		var/mob/living/carbon/human/test_subject = new(null, species.name)
+		var/mob/living/human/test_subject = new(null, species.name)
 
 		var/fail = 0
 		fail |= !check_internal_organs(test_subject, species)
@@ -136,7 +136,7 @@
 /datum/unit_test/species_organ_lists_update
 	name = "ORGAN: Species Mob Organ Lists Update when Organs are Removed and Replaced."
 
-/datum/unit_test/species_organ_lists_update/proc/check_internal_organ_present(var/mob/living/carbon/human/H, var/obj/item/organ/internal/I)
+/datum/unit_test/species_organ_lists_update/proc/check_internal_organ_present(var/mob/living/human/H, var/obj/item/organ/internal/I)
 	if(!(I in H.get_internal_organs()))
 		fail("[H.species.name] internal organ [I] not in internal_organs.")
 		return 0
@@ -153,7 +153,7 @@
 		return 0
 	return 1
 
-/datum/unit_test/species_organ_lists_update/proc/check_internal_organ_removed(var/mob/living/carbon/human/H, var/obj/item/organ/internal/I, var/obj/item/organ/external/old_parent)
+/datum/unit_test/species_organ_lists_update/proc/check_internal_organ_removed(var/mob/living/human/H, var/obj/item/organ/internal/I, var/obj/item/organ/external/old_parent)
 	if(I in H.get_internal_organs())
 		fail("[H.species.name] internal organ [I] was not removed from internal_organs.")
 		return 0
@@ -166,7 +166,7 @@
 		return 0
 	return 1
 
-/datum/unit_test/species_organ_lists_update/proc/check_external_organ_present(var/mob/living/carbon/human/H, var/obj/item/organ/external/E)
+/datum/unit_test/species_organ_lists_update/proc/check_external_organ_present(var/mob/living/human/H, var/obj/item/organ/external/E)
 	if(!(E in H.get_external_organs()))
 		fail("[H.species.name] external organ [E] not in organs.")
 		return 0
@@ -187,7 +187,7 @@
 			return 0
 	return 1
 
-/datum/unit_test/species_organ_lists_update/proc/check_external_organ_removed(var/mob/living/carbon/human/H, var/obj/item/organ/external/E, var/obj/item/organ/external/old_parent = null)
+/datum/unit_test/species_organ_lists_update/proc/check_external_organ_removed(var/mob/living/human/H, var/obj/item/organ/external/E, var/obj/item/organ/external/old_parent = null)
 	if(E in H.get_external_organs())
 		fail("[H.species.name] external organ [E] was not removed from organs.")
 		return 0
@@ -201,7 +201,7 @@
 			return 0
 	return 1
 
-/datum/unit_test/species_organ_lists_update/proc/test_internal_organ(var/mob/living/carbon/human/H, var/obj/item/organ/internal/I)
+/datum/unit_test/species_organ_lists_update/proc/test_internal_organ(var/mob/living/human/H, var/obj/item/organ/internal/I)
 	if(!check_internal_organ_present(H, I))
 		fail("[H.species.name] internal organ [I] failed initial presence check.")
 		return 0
@@ -220,7 +220,7 @@
 
 	return 1
 
-/datum/unit_test/species_organ_lists_update/proc/test_external_organ(var/mob/living/carbon/human/H, var/obj/item/organ/external/E)
+/datum/unit_test/species_organ_lists_update/proc/test_external_organ(var/mob/living/human/H, var/obj/item/organ/external/E)
 	if(!check_external_organ_present(H, E))
 		fail("[H.species.name] external organ [E] failed initial presence check.")
 		return 0
@@ -242,7 +242,7 @@
 /datum/unit_test/species_organ_lists_update/start_test()
 	var/failcount = 0
 	for(var/decl/species/species in get_all_species())
-		var/mob/living/carbon/human/test_subject = new(null, species.name)
+		var/mob/living/human/test_subject = new(null, species.name)
 
 		for(var/O in test_subject.get_internal_organs())
 			if(!test_internal_organ(test_subject, O))

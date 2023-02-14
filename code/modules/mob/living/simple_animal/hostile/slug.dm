@@ -35,7 +35,7 @@ Small, little HP, poisonous.
 		return ..()
 	to_chat(initiator, SPAN_WARNING("\The [src] wriggles out of your hands before you can pick it up!"))
 
-/mob/living/simple_animal/hostile/slug/proc/attach(var/mob/living/carbon/human/H)
+/mob/living/simple_animal/hostile/slug/proc/attach(var/mob/living/human/H)
 	var/obj/item/clothing/suit/space/S = H.get_covering_equipped_item_by_zone(BP_CHEST)
 	if(istype(S) && !length(S.breaches))
 		S.create_breaches(BRUTE, 20)
@@ -49,8 +49,8 @@ Small, little HP, poisonous.
 
 /mob/living/simple_animal/hostile/slug/AttackingTarget()
 	. = ..()
-	if(istype(., /mob/living/carbon/human))
-		var/mob/living/carbon/human/H = .
+	if(istype(., /mob/living/human))
+		var/mob/living/human/H = .
 		if(prob(H.getBruteLoss()/2))
 			attach(H)
 
@@ -66,8 +66,8 @@ Small, little HP, poisonous.
 
 /obj/item/holder/slug/attack(var/mob/target, var/mob/user)
 	var/mob/living/simple_animal/hostile/slug/V = contents[1]
-	if(!V.stat && istype(target, /mob/living/carbon/human))
-		var/mob/living/carbon/human/H = target
+	if(!V.stat && istype(target, /mob/living/human))
+		var/mob/living/human/H = target
 		if(!do_mob(user, H, 30))
 			return
 		V.attach(H)

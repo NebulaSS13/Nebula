@@ -6,5 +6,5 @@
 #define BP_JETS         "maneuvering jets"
 #define BP_COOLING_FINS "cooling fins"
 
-/mob/living/carbon/human/adherent/Initialize(mapload)
+/mob/living/human/adherent/Initialize(mapload)
 	. = ..(mapload, SPECIES_ADHERENT)

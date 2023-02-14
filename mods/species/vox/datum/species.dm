@@ -166,7 +166,7 @@
 		/decl/emote/exertion/synthetic/creak
 	)
 
-/decl/species/vox/equip_survival_gear(var/mob/living/carbon/human/H)
+/decl/species/vox/equip_survival_gear(var/mob/living/human/H)
 	H.equip_to_slot_or_del(new /obj/item/clothing/mask/gas/vox(H), slot_wear_mask_str)
 	var/obj/item/storage/backpack/backpack = H.get_equipped_item(slot_back_str)
 	if(istype(backpack))
@@ -180,14 +180,14 @@
 		H.equip_to_slot_or_del(new /obj/item/storage/box/vox(H), BP_R_HAND)
 		H.set_internals(backpack)
 
-/decl/species/vox/disfigure_msg(var/mob/living/carbon/human/H)
+/decl/species/vox/disfigure_msg(var/mob/living/human/H)
 	var/decl/pronouns/G = H.get_pronouns()
 	return SPAN_DANGER("[G.His] beak-segments are cracked and chipped beyond recognition!\n")
 
 /decl/species/vox/skills_from_age(age)
 	. = 8
 
-/decl/species/vox/handle_death(var/mob/living/carbon/human/H)
+/decl/species/vox/handle_death(var/mob/living/human/H)
 	..()
 	var/obj/item/organ/internal/voxstack/stack = H.get_organ(BP_STACK, /obj/item/organ/internal/voxstack)
 	if (stack)

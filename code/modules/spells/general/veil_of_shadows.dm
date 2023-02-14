@@ -13,12 +13,12 @@
 	hud_state = "wiz_statue"
 
 /spell/veil_of_shadows/choose_targets()
-	if(!timer_id && istype(holder,/mob/living/carbon/human))
+	if(!timer_id && istype(holder,/mob/living/human))
 		return list(holder)
 	. = null
 
 /spell/veil_of_shadows/cast(var/list/targets, var/mob/user)
-	var/mob/living/carbon/human/H = user
+	var/mob/living/human/H = user
 	H.AddMovementHandler(/datum/movement_handler/mob/incorporeal)
 	if(H.add_cloaking_source(src))
 		H.visible_message("<span class='warning'>\The [H] shrinks from view!</span>")
@@ -26,7 +26,7 @@
 	timer_id = addtimer(CALLBACK(src,.proc/cancel_veil),duration, TIMER_STOPPABLE)
 
 /spell/veil_of_shadows/proc/cancel_veil()
-	var/mob/living/carbon/human/H = holder
+	var/mob/living/human/H = holder
 	H.RemoveMovementHandler(/datum/movement_handler/mob/incorporeal)
 	deltimer(timer_id)
 	timer_id = null
@@ -38,7 +38,7 @@
 		events_repository.register(/decl/observ/moved, H,src,.proc/drop_cloak)
 
 /spell/veil_of_shadows/proc/drop_cloak()
-	var/mob/living/carbon/human/H = holder
+	var/mob/living/human/H = holder
 	if(H.remove_cloaking_source(src))
 		H.visible_message("<span class='notice'>\The [H] appears from nowhere!</span>")
 	events_repository.unregister(/decl/observ/moved, H,src)

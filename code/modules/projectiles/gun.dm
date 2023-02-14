@@ -381,8 +381,8 @@
 		if(curloc)
 			curloc.hotspot_expose(700, 5)
 
-	if(istype(user,/mob/living/carbon/human) && user.is_cloaked()) //shooting will disable a rig cloaking device
-		var/mob/living/carbon/human/H = user
+	if(istype(user,/mob/living/human) && user.is_cloaked()) //shooting will disable a rig cloaking device
+		var/mob/living/human/H = user
 		var/obj/item/rig/R = H.get_equipped_item(slot_back_str)
 		if(istype(R))
 			for(var/obj/item/rig_module/stealth_field/S in R.installed_modules)
@@ -467,8 +467,8 @@
 
 	//shooting while in shock
 	var/shock_dispersion = 0
-	if(istype(user, /mob/living/carbon/human))
-		var/mob/living/carbon/human/mob = user
+	if(istype(user, /mob/living/human))
+		var/mob/living/human/mob = user
 		if(mob.shock_stage > 120)
 			shock_dispersion = rand(-4,4)
 		else if(mob.shock_stage > 70)
@@ -499,7 +499,7 @@
 /obj/item/gun/proc/handle_suicide(mob/living/user)
 	if(!ishuman(user))
 		return
-	var/mob/living/carbon/human/M = user
+	var/mob/living/human/M = user
 
 	mouthshoot = 1
 	admin_attacker_log(user, "is attempting to suicide with \a [src]")

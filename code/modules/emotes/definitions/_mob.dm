@@ -66,7 +66,7 @@
 		/decl/emote/visible/flash
 		)
 
-/mob/living/carbon/human
+/mob/living/human
 	default_emotes = list(
 		/decl/emote/visible/blink,
 		/decl/emote/audible/synth,

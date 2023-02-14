@@ -62,7 +62,7 @@
 
 /obj/item/clothing/mask/monitor/equipped()
 	..()
-	var/mob/living/carbon/human/H = loc
+	var/mob/living/human/H = loc
 	if(istype(H) && H.get_equipped_item(slot_wear_mask_str) == src)
 		canremove = 0
 		to_chat(H, SPAN_NOTICE("\The [src] connects to your display output."))
@@ -71,7 +71,7 @@
 	canremove = 1
 	return ..()
 
-/obj/item/clothing/mask/monitor/mob_can_equip(var/mob/living/carbon/human/user, var/slot)
+/obj/item/clothing/mask/monitor/mob_can_equip(var/mob/living/human/user, var/slot)
 	. = ..()
 	if(. && (slot == slot_head_str || slot == slot_wear_mask_str))
 		var/obj/item/organ/external/E = GET_EXTERNAL_ORGAN(user, BP_HEAD)
@@ -89,7 +89,7 @@
 	set category = "IC"
 	set src in usr
 
-	var/mob/living/carbon/human/H = loc
+	var/mob/living/human/H = loc
 	if(!istype(H) || H != usr)
 		return
 

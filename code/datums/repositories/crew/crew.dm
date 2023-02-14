@@ -52,8 +52,8 @@ var/global/datum/repository/crew/crew_repository = new()
 	for(var/obj/item/clothing/under/C in tracked)
 		var/turf/pos = get_turf(C)
 		if(C.has_sensor && pos && pos.z == z_level && C.sensor_mode != SUIT_SENSOR_OFF)
-			if(istype(C.loc, /mob/living/carbon/human))
-				var/mob/living/carbon/human/H = C.loc
+			if(istype(C.loc, /mob/living/human))
+				var/mob/living/human/H = C.loc
 				if(H.get_equipped_item(slot_w_uniform_str) != C)
 					continue
 
@@ -81,7 +81,7 @@ var/global/datum/repository/crew/crew_repository = new()
 
 /datum/repository/crew/proc/scan()
 	var/list/tracked = list()
-	for(var/mob/living/carbon/human/H in SSmobs.mob_list)
+	for(var/mob/living/human/H in SSmobs.mob_list)
 		var/obj/item/clothing/under/C = H.get_equipped_item(slot_w_uniform_str)
 		if(istype(C) && C.has_sensor)
 			tracked |= C
@@ -94,7 +94,7 @@ var/global/datum/repository/crew/crew_repository = new()
 			if(. & MOD_SUIT_SENSORS_REJECTED)
 				return
 
-/datum/repository/crew/proc/process_crew_data(var/datum/priority_queue/modifiers, var/mob/living/carbon/human/H, var/obj/item/clothing/under/C, var/turf/pos, var/list/crew_data)
+/datum/repository/crew/proc/process_crew_data(var/datum/priority_queue/modifiers, var/mob/living/human/H, var/obj/item/clothing/under/C, var/turf/pos, var/list/crew_data)
 	var/current_priority = INFINITY
 	var/list/modifiers_of_this_priority = list()
 

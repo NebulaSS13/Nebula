@@ -156,8 +156,8 @@
 	if (!intensity)
 		return
 
-	var/mob/living/carbon/human/h_user = null
-	if (!istype(user, /mob/living/carbon/human))
+	var/mob/living/human/h_user = null
+	if (!istype(user, /mob/living/human))
 		return
 	else
 		h_user = user

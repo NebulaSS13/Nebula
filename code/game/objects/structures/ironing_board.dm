@@ -84,7 +84,7 @@
 
 		// anti-wrinkle "massage"
 		if(buckled_mob && ishuman(buckled_mob))
-			var/mob/living/carbon/human/H = buckled_mob
+			var/mob/living/human/H = buckled_mob
 			var/zone = user.zone_sel.selecting
 			var/parsed = parse_zone(zone)
 

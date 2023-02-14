@@ -63,7 +63,7 @@
 /obj/item/storage/internal/proc/handle_attack_hand(mob/user)
 
 	if(ishuman(user))
-		var/mob/living/carbon/human/H = user
+		var/mob/living/human/H = user
 		for(var/slot in global.pocket_slots)
 			var/obj/item/pocket = H.get_equipped_item(slot)
 			if(pocket == master_item && !H.get_active_hand())

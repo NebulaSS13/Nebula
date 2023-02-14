@@ -14,7 +14,7 @@
 
 /obj/item/clothing/head/helmet/space/void/skrell/mob_can_equip(mob/living/M, slot, disable_warning = 0)
 	. = ..()
-	var/mob/living/carbon/human/H = M
+	var/mob/living/human/H = M
 	if(. && istype(H) && H.bodytype.name != BODYTYPE_SKRELL)
 		return FALSE
 
@@ -28,6 +28,6 @@
 
 /obj/item/clothing/head/helmet/skrell/mob_can_equip(mob/living/M, slot, disable_warning = 0)
 	. = ..()
-	var/mob/living/carbon/human/H = M
+	var/mob/living/human/H = M
 	if(. && istype(H) && H.bodytype.name != BODYTYPE_SKRELL)
 		return FALSE

@@ -19,14 +19,14 @@
 	skip_loadout_preview = TRUE
 	department_types = list(/decl/department/miscellaneous)
 
-/datum/job/computer/equip(var/mob/living/carbon/human/H)
+/datum/job/computer/equip(var/mob/living/human/H)
 	if(!H)	return 0
 	return 1
 
 /datum/job/computer/is_position_available()
 	return (empty_playable_ai_cores.len != 0)
 
-/datum/job/computer/handle_variant_join(var/mob/living/carbon/human/H, var/alt_title)
+/datum/job/computer/handle_variant_join(var/mob/living/human/H, var/alt_title)
 	return H
 
 /datum/job/computer/do_spawn_special(var/mob/living/character, var/mob/new_player/new_player_mob, var/latejoin)
@@ -67,11 +67,11 @@
 	skip_loadout_preview = TRUE
 	department_types = list(/decl/department/miscellaneous)
 
-/datum/job/robot/handle_variant_join(var/mob/living/carbon/human/H, var/alt_title)
+/datum/job/robot/handle_variant_join(var/mob/living/human/H, var/alt_title)
 	if(H)
 		return H.Robotize(SSrobots.get_mob_type_by_title(alt_title || title))
 
-/datum/job/robot/equip(var/mob/living/carbon/human/H)
+/datum/job/robot/equip(var/mob/living/human/H)
 	return !!H
 
 /datum/job/robot/New()

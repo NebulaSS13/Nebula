@@ -1,7 +1,7 @@
 /****************
  true human verbs
 ****************/
-/mob/living/carbon/human/verb/sniff_verb()
+/mob/living/human/verb/sniff_verb()
 	set name = "Sniff"
 	set desc = "Smell the local area."
 	set category = "IC"
@@ -11,7 +11,7 @@
 			visible_message(SPAN_NOTICE("\The [src] [species.sniff_message_3p]."), SPAN_NOTICE(species.sniff_message_1p))
 		LAZYCLEARLIST(smell_cooldown)
 
-/mob/living/carbon/human/proc/tie_hair()
+/mob/living/human/proc/tie_hair()
 	set name = "Tie Hair"
 	set desc = "Style your hair."
 	set category = "IC"
@@ -49,7 +49,7 @@
 /****************
  misc alien verbs
 ****************/
-/mob/living/carbon/human/proc/commune()
+/mob/living/human/proc/commune()
 	set category = "Abilities"
 	set name = "Commune with creature"
 	set desc = "Send a telepathic message to an unlucky recipient."
@@ -78,15 +78,15 @@
 	log_say("[key_name(src)] communed to [key_name(M)]: [text]")
 
 	to_chat(M, "<span class='notice'>Like lead slabs crashing into the ocean, alien thoughts drop into your mind: <i>[text]</i></span>")
-	if(istype(M,/mob/living/carbon/human))
-		var/mob/living/carbon/human/H = M
+	if(istype(M,/mob/living/human))
+		var/mob/living/human/H = M
 		if(H.species.name == src.species.name)
 			return
 		if(prob(75))
 			to_chat(H, "<span class='warning'>Your nose begins to bleed...</span>")
 			H.drip(1)
 
-/mob/living/carbon/human/proc/psychic_whisper(mob/M as mob in oview())
+/mob/living/human/proc/psychic_whisper(mob/M as mob in oview())
 	set name = "Psychic Whisper"
 	set desc = "Whisper silently to someone over a distance."
 	set category = "Abilities"
@@ -98,7 +98,7 @@
 		to_chat(src, "<span class='alium'>You channel a message: \"[msg]\" to [M]</span>")
 	return
 
-/mob/living/carbon/human/proc/change_colour()
+/mob/living/human/proc/change_colour()
 	set category = "Abilities"
 	set name = "Change Colour"
 	set desc = "Choose the colour of your skin."

@@ -103,7 +103,7 @@
 
 	if(ishuman(occupant))
 
-		var/mob/living/carbon/human/H = occupant
+		var/mob/living/human/H = occupant
 		var/repaired_organ
 
 		// Replace limbs for crystalline species.

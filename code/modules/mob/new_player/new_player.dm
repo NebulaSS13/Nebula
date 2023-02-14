@@ -131,7 +131,7 @@ INITIALIZE_IMMEDIATE(/mob/new_player)
 			if(isnull(client.holder))
 				announce_ghost_joinleave(src)
 
-			var/mob/living/carbon/human/dummy/mannequin = get_mannequin(client.ckey)
+			var/mob/living/human/dummy/mannequin = get_mannequin(client.ckey)
 			if(mannequin)
 				client.prefs.dress_preview_mob(mannequin)
 				observer.set_appearance(mannequin)
@@ -348,7 +348,7 @@ INITIALIZE_IMMEDIATE(/mob/new_player)
 	spawning = 1
 	close_spawn_windows()
 
-	var/mob/living/carbon/human/new_character
+	var/mob/living/human/new_character
 
 	var/decl/species/chosen_species
 	if(client.prefs.species)

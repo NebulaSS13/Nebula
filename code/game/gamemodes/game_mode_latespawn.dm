@@ -20,13 +20,13 @@
 	return TRUE
 
 //This can be overriden in case a game mode needs to do stuff when a player latejoins
-/datum/game_mode/proc/handle_latejoin(var/mob/living/carbon/human/character)
+/datum/game_mode/proc/handle_latejoin(var/mob/living/human/character)
 	if(character.mind)
 		character.mind.generate_goals(character.mind.assigned_job, is_spawning=TRUE)
 		character.show_goals()
 	return 0
 
-/datum/game_mode/proc/handle_offsite_latejoin(var/mob/living/carbon/human/character)
+/datum/game_mode/proc/handle_offsite_latejoin(var/mob/living/human/character)
 	return 0
 
 /datum/game_mode/proc/process_autoantag()

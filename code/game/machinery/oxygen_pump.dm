@@ -94,7 +94,7 @@
 	breather = null
 	update_use_power(POWER_USE_IDLE)
 
-/obj/machinery/oxygen_pump/proc/can_apply_to_target(var/mob/living/carbon/human/target, mob/user)
+/obj/machinery/oxygen_pump/proc/can_apply_to_target(var/mob/living/human/target, mob/user)
 	if(!user)
 		user = target
 	// Check target validity

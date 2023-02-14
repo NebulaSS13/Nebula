@@ -11,7 +11,7 @@
 		return
 
 	var/mob/oldmob = C.mob
-	var/mob/living/carbon/human/H = new(oldmob.loc)
+	var/mob/living/human/H = new(oldmob.loc)
 	C.prefs.copy_to(H)
 	H.key = C.key
 	qdel(oldmob)

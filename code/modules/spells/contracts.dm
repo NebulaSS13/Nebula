@@ -82,11 +82,11 @@
 	..()
 	if (!ishuman(user))
 		return 0
-	var/mob/living/carbon/human/H = user
+	var/mob/living/human/H = user
 	if (mRemotetalk in H.mutations)
 		return 0
 	H.mutations.Add(mRemotetalk)
-	H.verbs += /mob/living/carbon/human/proc/remotesay
+	H.verbs += /mob/living/human/proc/remotesay
 	to_chat(H, "<span class='notice'>You expand your mind outwards.</span>")
 	return 1
 

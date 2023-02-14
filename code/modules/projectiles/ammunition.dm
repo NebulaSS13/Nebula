@@ -64,7 +64,7 @@
 	var/obj/item/gun/G = get_recursive_loc_of_type(/obj/item/gun)
 	if(G)
 		put_residue_on(G)
-		var/mob/living/carbon/human/H = G.get_recursive_loc_of_type(/mob/living/carbon/human)
+		var/mob/living/human/H = G.get_recursive_loc_of_type(/mob/living/human)
 		if(H)
 			var/holding_slot = H.get_held_slot_for_item(G)
 			if(holding_slot)

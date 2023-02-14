@@ -18,7 +18,7 @@
 	if(.) update_w_class()
 
 /obj/item/storage/bag/can_be_inserted(obj/item/W, mob/user, stop_messages = 0)
-	var/mob/living/carbon/human/H = ishuman(user) ? user : null // if we're human, then we need to check if bag in a pocket
+	var/mob/living/human/H = ishuman(user) ? user : null // if we're human, then we need to check if bag in a pocket
 	if(istype(src.loc, /obj/item/storage) || H?.is_in_pocket(src))
 		if(!stop_messages)
 			to_chat(user, SPAN_NOTICE("Take \the [src] out of [istype(src.loc, /obj) ? "\the [src.loc]" : "the pocket"] first."))

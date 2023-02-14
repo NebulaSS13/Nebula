@@ -73,7 +73,7 @@
 /obj/structure/mirror/attack_hand(mob/user)
 	use_mirror(user)
 
-/obj/structure/mirror/proc/use_mirror(var/mob/living/carbon/human/user)
+/obj/structure/mirror/proc/use_mirror(var/mob/living/human/user)
 	if(shattered)
 		to_chat(user, SPAN_WARNING("You enter the key combination for the style you want on the panel, but the nanomachines inside \the [src] refuse to come out."))
 		return

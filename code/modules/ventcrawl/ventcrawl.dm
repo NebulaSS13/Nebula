@@ -38,7 +38,7 @@ var/global/list/ventcrawl_machinery = list(
 	if(is_type_in_list(carried_item, can_enter_vent_with))
 		return !get_equipped_slot_for_item(carried_item)
 
-/mob/living/carbon/human/is_allowed_vent_crawl_item(var/obj/item/carried_item)
+/mob/living/human/is_allowed_vent_crawl_item(var/obj/item/carried_item)
 	var/obj/item/organ/internal/stomach = GET_INTERNAL_ORGAN(src, BP_STOMACH)
 	if(stomach && (carried_item in stomach.contents))
 		return TRUE

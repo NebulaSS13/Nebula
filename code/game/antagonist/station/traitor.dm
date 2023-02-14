@@ -67,7 +67,7 @@
 					traitor.objectives += hijack_objective
 	return
 
-/decl/special_role/traitor/equip(var/mob/living/carbon/human/player)
+/decl/special_role/traitor/equip(var/mob/living/human/player)
 
 	. = ..()
 	if(istype(player, /mob/living/silicon)) // this needs to be here because ..() returns false if the mob isn't human
@@ -84,7 +84,7 @@
 		return FALSE
 
 	var/list/dudes = list()
-	for(var/mob/living/carbon/human/man in global.player_list)
+	for(var/mob/living/human/man in global.player_list)
 		if(man.client)
 			var/decl/cultural_info/culture = man.get_cultural_value(TAG_FACTION)
 			if(culture && prob(culture.subversive_potential))
@@ -92,7 +92,7 @@
 		dudes -= player
 
 	if(LAZYLEN(dudes))
-		var/mob/living/carbon/human/M = pick(dudes)
+		var/mob/living/human/M = pick(dudes)
 		to_chat(player, "We have received credible reports that [M.real_name] might be willing to help our cause. If you need assistance, consider contacting them.")
 		player.StoreMemory("<b>Potential Collaborator</b>: [M.real_name]", /decl/memory_options/system)
 		to_chat(M, "<span class='warning'>The subversive potential of your faction has been noticed, and you may be contacted for assistance soon...</span>")
@@ -104,7 +104,7 @@
 	player.StoreMemory("<b>Code Response</b>: [syndicate_code_response]", /decl/memory_options/system)
 	to_chat(player, "Use the code words, preferably in the order provided, during regular conversation, to identify other agents. Proceed with caution, however, as everyone is a potential foe.")
 
-/decl/special_role/traitor/proc/spawn_uplink(var/mob/living/carbon/human/traitor_mob)
+/decl/special_role/traitor/proc/spawn_uplink(var/mob/living/human/traitor_mob)
 	setup_uplink_source(traitor_mob, DEFAULT_TELECRYSTAL_AMOUNT)
 
 /decl/special_role/traitor/proc/add_law_zero(mob/living/silicon/ai/killer)

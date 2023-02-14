@@ -23,13 +23,13 @@ var/global/arrest_security_status =  "Arrest"
 	. = ..()
 	global.all_crew_records.Remove(src)
 
-/datum/computer_file/report/crew_record/proc/load_from_mob(var/mob/living/carbon/human/H)
+/datum/computer_file/report/crew_record/proc/load_from_mob(var/mob/living/human/H)
 
 	if(istype(H))
 		photo_front = getFlatIcon(H, SOUTH, always_use_defdir = 1)
 		photo_side = getFlatIcon(H, WEST, always_use_defdir = 1)
 	else
-		var/mob/living/carbon/human/dummy = new()
+		var/mob/living/human/dummy = new()
 		photo_front = getFlatIcon(dummy, SOUTH, always_use_defdir = 1)
 		photo_side = getFlatIcon(dummy, WEST, always_use_defdir = 1)
 		qdel(dummy)
@@ -204,7 +204,7 @@ var/global/arrest_security_status =  "Arrest"
 			return CR
 	return null
 
-/proc/GetAssignment(var/mob/living/carbon/human/H)
+/proc/GetAssignment(var/mob/living/human/H)
 	if(!H)
 		return "Unassigned"
 	if(!H.mind)

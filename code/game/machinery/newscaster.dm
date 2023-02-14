@@ -200,7 +200,7 @@ var/global/list/allCasters = list() //Global list that will contain reference to
 	return TRUE
 
 /obj/machinery/newscaster/interact(mob/user)            //########### THE MAIN BEEF IS HERE! And in the proc below this...############
-	if(istype(user, /mob/living/carbon/human) || istype(user,/mob/living/silicon) )
+	if(istype(user, /mob/living/human) || istype(user,/mob/living/silicon) )
 		var/mob/living/human_or_robot_user = user
 		var/dat
 		dat = text("<HEAD><TITLE>Newscaster</TITLE></HEAD><H3>Newscaster Unit #[src.unit_no]</H3>")
@@ -758,7 +758,7 @@ var/global/list/allCasters = list() //Global list that will contain reference to
 /obj/item/newspaper/attack_self(mob/user)
 	user.update_personal_goal(/datum/goal/achievement/newshound, TRUE)
 	if(ishuman(user))
-		var/mob/living/carbon/human/human_user = user
+		var/mob/living/human/human_user = user
 		var/dat
 		src.pages = 0
 		switch(screen)
@@ -888,15 +888,15 @@ var/global/list/allCasters = list() //Global list that will contain reference to
 				src.scribble = s
 				src.attack_self(user)
 				return TRUE
-			return 
+			return
 	return ..()
 
 ////////////////////////////////////helper procs
 
 
 /obj/machinery/newscaster/proc/scan_user(mob/living/user)
-	if(istype(user,/mob/living/carbon/human))                       //User is a human
-		var/mob/living/carbon/human/human_user = user
+	if(istype(user,/mob/living/human))                       //User is a human
+		var/mob/living/human/human_user = user
 		var/obj/item/card/id/id = human_user.GetIdCard()
 		if(istype(id))                                      //Newscaster scans you
 			src.scanned_user = GetNameAndAssignmentFromId(id)

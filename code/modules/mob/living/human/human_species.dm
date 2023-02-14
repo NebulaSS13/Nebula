@@ -1,22 +1,22 @@
-/mob/living/carbon/human/dummy
+/mob/living/human/dummy
 	real_name = "test dummy"
 	status_flags = GODMODE|CANPUSH
 	virtual_mob = null
 
-/mob/living/carbon/human/dummy/mannequin/Initialize()
+/mob/living/human/dummy/mannequin/Initialize()
 	. = ..()
 	STOP_PROCESSING(SSmobs, src)
 	global.human_mob_list -= src
 
-/mob/living/carbon/human/dummy/selfdress/Initialize()
+/mob/living/human/dummy/selfdress/Initialize()
 	. = ..()
 	for(var/obj/item/I in loc)
 		equip_to_appropriate_slot(I)
 
-/mob/living/carbon/human/corpse
+/mob/living/human/corpse
 	real_name = "corpse"
 
-/mob/living/carbon/human/corpse/Initialize(mapload, new_species, obj/abstract/landmark/corpse/corpse)
+/mob/living/human/corpse/Initialize(mapload, new_species, obj/abstract/landmark/corpse/corpse)
 
 	. = ..(mapload, new_species)
 
@@ -39,22 +39,22 @@
 		corpse.equip_outfit(src)
 	update_icon()
 
-/mob/living/carbon/human/dummy/mannequin/add_to_living_mob_list()
+/mob/living/human/dummy/mannequin/add_to_living_mob_list()
 	return FALSE
 
-/mob/living/carbon/human/dummy/mannequin/add_to_dead_mob_list()
+/mob/living/human/dummy/mannequin/add_to_dead_mob_list()
 	return FALSE
 
-/mob/living/carbon/human/dummy/mannequin/fully_replace_character_name(new_name, in_depth = TRUE)
+/mob/living/human/dummy/mannequin/fully_replace_character_name(new_name, in_depth = TRUE)
 	..("[new_name] (mannequin)", FALSE)
 
-/mob/living/carbon/human/dummy/mannequin/InitializeHud()
+/mob/living/human/dummy/mannequin/InitializeHud()
 	return	// Mannequins don't get HUDs
 
-/mob/living/carbon/human/monkey
+/mob/living/human/monkey
 	gender = PLURAL
 
-/mob/living/carbon/human/monkey/Initialize(mapload)
+/mob/living/human/monkey/Initialize(mapload)
 	if(gender == PLURAL)
 		gender = pick(MALE, FEMALE)
 	. = ..(mapload, SPECIES_MONKEY)

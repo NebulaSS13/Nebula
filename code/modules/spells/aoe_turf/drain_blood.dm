@@ -20,8 +20,8 @@
 			if(L.stat == DEAD || L == user)
 				continue
 			//Hurt target
-			if(istype(L, /mob/living/carbon/human))
-				var/mob/living/carbon/human/H = L
+			if(istype(L, /mob/living/human))
+				var/mob/living/human/H = L
 				H.vessel.remove_any(10)
 			else
 				L.adjustBruteLoss(10)
@@ -34,8 +34,8 @@
 			effect.launch(L, "chest")
 
 			//Heal self
-			if(istype(user, /mob/living/carbon/human))
-				var/mob/living/carbon/human/H = user
+			if(istype(user, /mob/living/human))
+				var/mob/living/human/H = user
 				var/amount = min(10, H.species.blood_volume - H.vessel.total_volume)
 				if(amount > 0)
 					H.adjust_blood(amount)

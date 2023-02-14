@@ -66,7 +66,7 @@ var/global/list/icon_state_cache = list()
 		var/mob_state = (item_state || icon_state)
 		var/mob_icon = global.default_onmob_icons[slot]
 		if(ishuman(user_mob))
-			var/mob/living/carbon/human/user_human = user_mob
+			var/mob/living/human/user_human = user_mob
 			var/use_slot = (bodypart in user_human.bodytype.equip_adjust) ? bodypart : slot
 			return user_human.bodytype.get_offset_overlay_image(FALSE, mob_icon, mob_state, color, use_slot)
 		return overlay_image(mob_icon, mob_state, color, RESET_COLOR)
@@ -111,7 +111,7 @@ var/global/list/icon_state_cache = list()
 // the bodytype offset proc, which can scrub icon/icon_state information as part of the offset process.
 /obj/item/proc/adjust_mob_overlay(var/mob/living/user_mob, var/bodytype,  var/image/overlay, var/slot, var/bodypart)
 	if(ishuman(user_mob))
-		var/mob/living/carbon/human/H = user_mob
+		var/mob/living/human/H = user_mob
 		if(H.get_bodytype_category() != bodytype)
 			var/list/overlays_to_offset = overlay.overlays
 			overlay = H.bodytype.get_offset_overlay_image(FALSE, overlay.icon, overlay.icon_state, color, (bodypart || slot))

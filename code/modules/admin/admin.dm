@@ -1324,7 +1324,7 @@ var/global/floorIsLava = 0
 	NM = new NM(usr, override = M.skillset)
 	NM.ui_interact(usr)
 
-/client/proc/update_mob_sprite(mob/living/carbon/human/H)
+/client/proc/update_mob_sprite(mob/living/human/H)
 	set category = "Admin"
 	set name = "Update Mob Sprite"
 	set desc = "Should fix any mob sprite update errors."

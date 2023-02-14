@@ -228,10 +228,10 @@ var/global/list/priv_region_access
 		LAZYDISTINCTADD(., botcard)
 
 // Gets the ID card of a mob, but will not check types in the exceptions list
-/mob/living/carbon/human/GetIdCard(exceptions = null)
+/mob/living/human/GetIdCard(exceptions = null)
 	return LAZYACCESS(GetIdCards(exceptions), 1)
 
-/mob/living/carbon/human/GetIdCards(exceptions = null)
+/mob/living/human/GetIdCards(exceptions = null)
 	. = ..()
 	var/list/candidates = get_held_items()
 	var/id = get_equipped_item(slot_wear_id_str)
@@ -244,7 +244,7 @@ var/global/list/priv_region_access
 		if(LAZYLEN(id_cards))
 			LAZYDISTINCTADD(., id_cards)
 
-/mob/living/carbon/human/GetAccess(var/union = TRUE)
+/mob/living/human/GetAccess(var/union = TRUE)
 	. = ..(union)
 
 /mob/living/silicon/GetIdCards()

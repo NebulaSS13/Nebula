@@ -36,7 +36,7 @@
 		M.clean_blood()
 		return
 
-	var/mob/living/carbon/human/H = M
+	var/mob/living/human/H = M
 	var/washgloves = 1
 	var/washshoes = 1
 	var/washmask = 1

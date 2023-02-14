@@ -98,7 +98,7 @@
 		if((MUTATION_CLUMSY in user.mutations) && prob(50))	//too dumb to use flashlight properly
 			return ..()	//just hit them in the head
 
-		var/mob/living/carbon/human/H = M	//mob has protective eyewear
+		var/mob/living/human/H = M	//mob has protective eyewear
 		if(istype(H))
 			for(var/slot in global.standard_headgear_slots)
 				var/obj/item/clothing/C = H.get_equipped_item(slot)
@@ -129,7 +129,7 @@
 		return ..()
 
 /obj/item/flashlight/proc/inspect_vision(obj/item/organ/vision, mob/living/user)
-	var/mob/living/carbon/human/H = vision.owner
+	var/mob/living/human/H = vision.owner
 
 	if(H == user)	//can't look into your own eyes buster
 		return

@@ -109,7 +109,7 @@
 		to_chat(user, "<span class='danger'>This is not suitable for \the [src]!</span>")
 		return
 
-	if(istype(victim,/mob/living/carbon/human) && !emagged)
+	if(istype(victim,/mob/living/human) && !emagged)
 		to_chat(user, "<span class='danger'>\The [src] safety guard is engaged!</span>")
 		return
 
@@ -181,7 +181,7 @@
 		var/mob/living/carbon/C = occupant
 		slab_nutrition = C.nutrition / 15
 
-	if(istype(occupant, /mob/living/carbon/human))
+	if(istype(occupant, /mob/living/human))
 		slab_name = occupant.real_name
 
 	// Small mobs don't give as much nutrition.

@@ -261,8 +261,8 @@ var/global/list/global/tank_gauge_cache = list()
 			var/obj/item/mask = location.get_equipped_item(slot_wear_mask_str)
 			if(mask && (mask.item_flags & ITEM_FLAG_AIRTIGHT))
 				data["maskConnected"] = 1
-			else if(istype(location, /mob/living/carbon/human))
-				var/mob/living/carbon/human/H = location
+			else if(istype(location, /mob/living/human))
+				var/mob/living/human/H = location
 				var/obj/item/head = H.get_equipped_item(slot_head_str)
 				if(head && (head.item_flags & ITEM_FLAG_AIRTIGHT))
 					data["maskConnected"] = 1
@@ -319,8 +319,8 @@ var/global/list/global/tank_gauge_cache = list()
 		var/obj/item/mask = location.get_equipped_item(slot_wear_mask_str)
 		if(mask && (mask.item_flags & ITEM_FLAG_AIRTIGHT))
 			can_open_valve = 1
-		else if(istype(location,/mob/living/carbon/human))
-			var/mob/living/carbon/human/H = location
+		else if(istype(location,/mob/living/human))
+			var/mob/living/human/H = location
 			var/obj/item/head = H.get_equipped_item(slot_head_str)
 			if(head && (head.item_flags & ITEM_FLAG_AIRTIGHT))
 				can_open_valve = 1

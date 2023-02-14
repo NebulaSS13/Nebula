@@ -65,7 +65,7 @@
 
 /obj/item/clothing/shoes/magboots/mob_can_equip(mob/M, slot, disable_warning = 0, force = 0)
 	var/obj/item/clothing/shoes/check_shoes
-	var/mob/living/carbon/human/H = M
+	var/mob/living/human/H = M
 	if(slot == slot_shoes_str && istype(H))
 		check_shoes = H.get_equipped_item(slot_shoes_str)
 		if(istype(check_shoes) && (!check_shoes.can_fit_under_magboots || !H.unEquip(check_shoes, src)))
@@ -90,7 +90,7 @@
 	if(istype(M))
 		M.update_floating()
 	if(covering_shoes)
-		var/mob/living/carbon/human/H = M
+		var/mob/living/human/H = M
 		var/obj/item/shoes = H.get_equipped_item(slot_shoes_str)
 		if(istype(H) && shoes != src)
 			H.equip_to_slot_if_possible(covering_shoes, slot_shoes_str, disable_warning = TRUE)
@@ -101,7 +101,7 @@
 
 /obj/item/clothing/shoes/magboots/dropped(var/mob/user)
 	..()
-	var/mob/living/carbon/human/H = user
+	var/mob/living/human/H = user
 	if(covering_shoes)
 		if(istype(H))
 			H.equip_to_slot_if_possible(covering_shoes, slot_shoes_str, disable_warning = TRUE)

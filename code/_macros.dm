@@ -38,7 +38,7 @@
 
 #define isEye(A) istype(A, /mob/observer/eye)
 
-#define ishuman(A) istype(A, /mob/living/carbon/human)
+#define ishuman(A) istype(A, /mob/living/human)
 
 #define isitem(A) istype(A, /obj/item)
 

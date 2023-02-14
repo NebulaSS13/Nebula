@@ -222,7 +222,7 @@
 		turn_on()
 		return
 
-/obj/vehicle/proc/insert_cell(var/obj/item/cell/C, var/mob/living/carbon/human/H)
+/obj/vehicle/proc/insert_cell(var/obj/item/cell/C, var/mob/living/human/H)
 	if(cell)
 		return
 	if(!istype(C))
@@ -233,7 +233,7 @@
 	powercheck()
 	to_chat(usr, "<span class='notice'>You install [C] in [src].</span>")
 
-/obj/vehicle/proc/remove_cell(var/mob/living/carbon/human/H)
+/obj/vehicle/proc/remove_cell(var/mob/living/human/H)
 	if(!cell)
 		return
 
@@ -242,7 +242,7 @@
 	cell = null
 	powercheck()
 
-/obj/vehicle/proc/RunOver(var/mob/living/carbon/human/H)
+/obj/vehicle/proc/RunOver(var/mob/living/human/H)
 	return		//write specifics for different vehicles
 
 //-------------------------------------------

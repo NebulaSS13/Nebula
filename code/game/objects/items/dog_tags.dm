@@ -15,7 +15,7 @@
 	set_name(M.real_name)
 	set_desc(M)
 
-/obj/item/clothing/accessory/badge/tags/set_desc(mob/living/carbon/human/H)
+/obj/item/clothing/accessory/badge/tags/set_desc(mob/living/human/H)
 	if(!istype(H))
 		return
 

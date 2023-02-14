@@ -151,7 +151,7 @@
 		transfer_identity(owner)
 	return ..()
 
-/obj/item/organ/internal/posibrain/do_install(mob/living/carbon/human/target, obj/item/organ/external/affected, in_place, update_icon, detached)
+/obj/item/organ/internal/posibrain/do_install(mob/living/human/target, obj/item/organ/external/affected, in_place, update_icon, detached)
 	if(!(. = ..()))
 		return
 	if(istype(owner))
@@ -277,7 +277,7 @@
 	persistantMind = null
 	return ..()
 
-/obj/item/organ/internal/mmi_holder/do_install(mob/living/carbon/human/target, obj/item/organ/external/affected, in_place)
+/obj/item/organ/internal/mmi_holder/do_install(mob/living/human/target, obj/item/organ/external/affected, in_place)
 	if(status & ORGAN_CUT_AWAY || !(. = ..()))
 		return
 

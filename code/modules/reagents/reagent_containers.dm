@@ -166,8 +166,8 @@
 	// only carbons can eat
 	if(istype(target, /mob/living/carbon))
 		if(target == user)
-			if(istype(user, /mob/living/carbon/human))
-				var/mob/living/carbon/human/H = user
+			if(istype(user, /mob/living/human))
+				var/mob/living/human/H = user
 				if(!H.check_has_mouth())
 					to_chat(user, "Where do you intend to put \the [src]? You don't have a mouth!")
 					return

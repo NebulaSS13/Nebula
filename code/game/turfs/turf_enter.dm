@@ -5,7 +5,7 @@
 	if(!istype(mover) || !(mover.movable_flags & MOVABLE_FLAG_PROXMOVE))
 		return
 	for(var/atom/movable/neighbor in range(1))
-		if(objects > ENTER_PROXIMITY_LOOP_SANITY) 
+		if(objects > ENTER_PROXIMITY_LOOP_SANITY)
 			break // Don't let ore piles kill the server as well as the client.
 		if(neighbor.movable_flags & MOVABLE_FLAG_PROXMOVE)
 			objects++
@@ -22,7 +22,7 @@
 		return
 
 	if(ishuman(A))
-		var/mob/living/carbon/human/H = A
+		var/mob/living/human/H = A
 		H.handle_footsteps()
 
 	queue_temperature_atoms(A)

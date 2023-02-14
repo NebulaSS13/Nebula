@@ -42,7 +42,7 @@
 	if(M.HasTrait(/decl/trait/metabolically_inert))
 		return
 	if(ishuman(M))
-		var/mob/living/carbon/human/H = M
+		var/mob/living/human/H = M
 		H.immunity = min(H.immunity + 0.25, H.immunity_norm*1.5)
 
 /decl/material/liquid/drink/juice/banana

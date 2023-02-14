@@ -83,7 +83,7 @@
 /obj/structure/closet/body_bag/cryobag/Process()
 	if(stasis_power < 2)
 		return PROCESS_KILL
-	var/mob/living/carbon/human/H = locate() in src
+	var/mob/living/human/H = locate() in src
 	if(!H)
 		return PROCESS_KILL
 	degradation_time--
@@ -131,7 +131,7 @@
 	qdel(src)
 
 /obj/structure/closet/body_bag/cryobag/blank/WillContain()
-	return list(/mob/living/carbon/human/blank)
+	return list(/mob/living/human/blank)
 
 /obj/structure/closet/body_bag/cryobag/blank/Initialize()
 	. = ..()

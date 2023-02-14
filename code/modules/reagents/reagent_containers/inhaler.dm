@@ -41,7 +41,7 @@
 	if(reagents.total_volume > 0)
 		add_overlay("[icon_state]_reagents")
 
-/obj/item/chems/inhaler/attack(var/mob/living/carbon/human/target, var/mob/user, var/proximity)
+/obj/item/chems/inhaler/attack(var/mob/living/human/target, var/mob/user, var/proximity)
 
 	if (!istype(target))
 		return ..()

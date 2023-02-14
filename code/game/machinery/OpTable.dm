@@ -80,7 +80,7 @@
 	if(!victim || !victim.lying || victim.loc != loc)
 		suppressing = FALSE
 		victim = null
-		for(var/mob/living/carbon/human/H in loc)
+		for(var/mob/living/human/H in loc)
 			if(H.lying)
 				victim = H
 				break
@@ -93,7 +93,7 @@
 /obj/machinery/optable/on_update_icon()
 	icon_state = "table2-idle"
 	if(ishuman(victim))
-		var/mob/living/carbon/human/H = victim
+		var/mob/living/human/H = victim
 		if(H.pulse())
 			icon_state = "table2-active"
 

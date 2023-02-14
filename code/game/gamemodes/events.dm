@@ -3,7 +3,7 @@ var/global/eventchance = 10 // Percent chance per 5 minutes.
 var/global/hadevent    = 0
 
 /proc/appendicitis()
-	for(var/mob/living/carbon/human/H in shuffle(global.living_mob_list_))
+	for(var/mob/living/human/H in shuffle(global.living_mob_list_))
 		if(H.client && H.stat != DEAD)
 			var/obj/item/organ/internal/appendix/A = H.get_organ(BP_APPENDIX, /obj/item/organ/internal/appendix)
 			if(!istype(A) || (A && A.inflamed))
@@ -77,7 +77,7 @@ Would like to add a law like "Law x is _______" where x = a number, and _____ is
 			var/allergysev = pick("deathly", "mildly", "severely", "contagiously")
 			var/crew
 			var/list/pos_crew = list()
-			for(var/mob/living/carbon/human/pos in global.player_list)
+			for(var/mob/living/human/pos in global.player_list)
 				pos_crew += pos.real_name
 			if(pos_crew.len)
 				crew = pick(pos_crew)

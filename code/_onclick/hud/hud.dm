@@ -313,7 +313,7 @@
 /mob/proc/minimize_hud_proc(var/full)
 	to_chat(usr, SPAN_WARNING("Inventory hiding is currently only supported for human mobs, sorry."))
 
-/mob/living/carbon/human/minimize_hud_proc(var/full)
+/mob/living/human/minimize_hud_proc(var/full)
 	if(!client)
 		return
 	if(!hud_used)

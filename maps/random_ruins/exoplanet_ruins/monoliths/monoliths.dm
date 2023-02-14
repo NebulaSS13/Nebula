@@ -46,10 +46,10 @@
 
 /obj/structure/monolith/attack_hand(mob/user)
 	visible_message("\The [user] touches \the [src].")
-	if(istype(user, /mob/living/carbon/human))
+	if(istype(user, /mob/living/human))
 		var/obj/effect/overmap/visitable/sector/exoplanet/E = global.overmap_sectors[num2text(z)]
 		if(istype(E))
-			var/mob/living/carbon/human/H = user
+			var/mob/living/human/H = user
 			if(!H.isSynthetic())
 				playsound(src, 'sound/effects/zapbeep.ogg', 100, 1)
 				active = 1

@@ -53,7 +53,7 @@
 	name = "default attack selector"
 	icon_state = "attack_selector"
 	screen_loc = ui_attack_selector
-	var/mob/living/carbon/human/owner
+	var/mob/living/human/owner
 
 /obj/screen/default_attack_selector/Click(location, control, params)
 	if(!owner || usr != owner || owner.incapacitated())
@@ -80,7 +80,7 @@
 		owner = null
 	. = ..()
 
-/obj/screen/default_attack_selector/proc/set_owner(var/mob/living/carbon/human/_owner)
+/obj/screen/default_attack_selector/proc/set_owner(var/mob/living/human/_owner)
 	owner = _owner
 	if(!owner)
 		qdel(src)
@@ -248,7 +248,7 @@
 
 		if("equip")
 			if(ishuman(usr))
-				var/mob/living/carbon/human/H = usr
+				var/mob/living/human/H = usr
 				H.quick_equip()
 
 		if("resist")

@@ -81,7 +81,7 @@
 /obj/item/projectile/energy/floramut/on_hit(var/atom/target, var/blocked = 0)
 	var/mob/living/M = target
 	if(ishuman(target))
-		var/mob/living/carbon/human/H = M
+		var/mob/living/human/H = M
 		if((H.species.species_flags & SPECIES_FLAG_IS_PLANT) && (H.nutrition < 500))
 			if(prob(15))
 				H.apply_damage((rand(30,80)),IRRADIATE, damage_flags = DAM_DISPERSED)
@@ -125,7 +125,7 @@
 /obj/item/projectile/energy/florayield/on_hit(var/atom/target, var/blocked = 0)
 	var/mob/M = target
 	if(ishuman(target))
-		var/mob/living/carbon/human/H = M
+		var/mob/living/human/H = M
 		if((H.species.species_flags & SPECIES_FLAG_IS_PLANT) && (H.nutrition < 500))
 			H.adjust_nutrition(30)
 	else if (istype(target, /mob/living/carbon/))
@@ -139,7 +139,7 @@
 
 /obj/item/projectile/beam/mindflayer/on_hit(var/atom/target, var/blocked = 0)
 	if(ishuman(target))
-		var/mob/living/carbon/human/M = target
+		var/mob/living/human/M = target
 		ADJ_STATUS(M, STAT_CONFUSE, rand(5,8))
 
 /obj/item/projectile/chameleon

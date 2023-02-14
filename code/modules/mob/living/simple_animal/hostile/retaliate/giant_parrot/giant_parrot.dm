@@ -50,7 +50,7 @@
 /mob/living/simple_animal/hostile/retaliate/parrot/space/AttackingTarget()
 	. = ..()
 	if(ishuman(.) && can_perform_ability(.))
-		var/mob/living/carbon/human/H = .
+		var/mob/living/human/H = .
 		if(prob(70))
 			SET_STATUS_MAX(H, STAT_WEAK, rand(2,3))
 			cooldown_ability(ability_cooldown / 1.5)
@@ -63,7 +63,7 @@
 				cooldown_ability(ability_cooldown)
 				H.unEquip(HAT, get_turf(src))
 
-/mob/living/simple_animal/hostile/retaliate/parrot/space/can_perform_ability(mob/living/carbon/human/H)
+/mob/living/simple_animal/hostile/retaliate/parrot/space/can_perform_ability(mob/living/human/H)
 	. = ..()
 	if(!.)
 		return FALSE

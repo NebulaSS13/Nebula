@@ -62,7 +62,7 @@
 	to_chat(user, SPAN_NOTICE("\The [src] has been upgraded. It now has X-Ray capability and EMP resistance."))
 	return 1
 
-/obj/machinery/camera/apply_visual(mob/living/carbon/human/M)
+/obj/machinery/camera/apply_visual(mob/living/human/M)
 	if(!M.client || !istype(M))
 		return
 	M.overlay_fullscreen("fishbed",/obj/screen/fullscreen/fishbed)
@@ -71,7 +71,7 @@
 	M.machine_visual = src
 	return 1
 
-/obj/machinery/camera/remove_visual(mob/living/carbon/human/M)
+/obj/machinery/camera/remove_visual(mob/living/human/M)
 	if(!M.client || !istype(M))
 		return
 	M.clear_fullscreen("fishbed",0)
@@ -195,7 +195,7 @@
 			visible_message("<span class='warning'><B>[src] was hit by [O].</B></span>")
 		take_damage(O.throwforce)
 
-/obj/machinery/camera/physical_attack_hand(mob/living/carbon/human/user)
+/obj/machinery/camera/physical_attack_hand(mob/living/human/user)
 	if(!istype(user))
 		return
 	if(user.species.can_shred(user))

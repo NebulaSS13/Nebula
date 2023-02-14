@@ -90,7 +90,7 @@
 		return FALSE
 	return md5(dna.uni_identity)
 
-/mob/living/carbon/human/get_full_print()
+/mob/living/human/get_full_print()
 	if(!..())
 		return FALSE
 

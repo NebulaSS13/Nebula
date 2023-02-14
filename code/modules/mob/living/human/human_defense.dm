@@ -7,7 +7,7 @@ meteor_act
 
 */
 
-/mob/living/carbon/human/bullet_act(var/obj/item/projectile/P, var/def_zone)
+/mob/living/human/bullet_act(var/obj/item/projectile/P, var/def_zone)
 
 	def_zone = check_zone(def_zone, src)
 	if(!has_organ(def_zone))
@@ -28,7 +28,7 @@ meteor_act
 
 	return blocked
 
-/mob/living/carbon/human/stun_effect_act(var/stun_amount, var/agony_amount, var/def_zone, var/used_weapon)
+/mob/living/human/stun_effect_act(var/stun_amount, var/agony_amount, var/def_zone, var/used_weapon)
 	var/obj/item/organ/external/affected = GET_EXTERNAL_ORGAN(src, def_zone)
 	if(!affected)
 		return
@@ -47,7 +47,7 @@ meteor_act
 
 	..(stun_amount, agony_amount, def_zone)
 
-/mob/living/carbon/human/get_blocked_ratio(def_zone, damage_type, damage_flags, armor_pen, damage)
+/mob/living/human/get_blocked_ratio(def_zone, damage_type, damage_flags, armor_pen, damage)
 	if(!def_zone && (damage_flags & DAM_DISPERSED))
 		var/tally
 		for(var/zone in organ_rel_size)
@@ -58,7 +58,7 @@ meteor_act
 		return
 	return ..()
 
-/mob/living/carbon/human/get_armors_by_zone(obj/item/organ/external/def_zone, damage_type, damage_flags)
+/mob/living/human/get_armors_by_zone(obj/item/organ/external/def_zone, damage_type, damage_flags)
 	if(!def_zone)
 		def_zone = ran_zone()
 	if(!istype(def_zone))
@@ -86,7 +86,7 @@ meteor_act
 	. += ..()
 
 //this proc returns the Siemens coefficient of electrical resistivity for a particular external organ.
-/mob/living/carbon/human/proc/get_siemens_coefficient_organ(var/obj/item/organ/external/def_zone)
+/mob/living/human/proc/get_siemens_coefficient_organ(var/obj/item/organ/external/def_zone)
 	if (!def_zone)
 		return 1.0
 
@@ -98,7 +98,7 @@ meteor_act
 
 	return siemens_coefficient
 
-/mob/living/carbon/human/proc/check_head_coverage()
+/mob/living/human/proc/check_head_coverage()
 	for(var/slot in global.standard_headgear_slots)
 		var/obj/item/clothing/clothes = get_equipped_item(slot)
 		if(istype(clothes) && (clothes.body_parts_covered & SLOT_HEAD))
@@ -106,13 +106,13 @@ meteor_act
 	return FALSE
 
 //Used to check if they can be fed food/drinks/pills
-/mob/living/carbon/human/check_mouth_coverage()
+/mob/living/human/check_mouth_coverage()
 	for(var/slot in global.standard_headgear_slots)
 		var/obj/item/gear = get_equipped_item(slot)
 		if(istype(gear) && (gear.body_parts_covered & SLOT_FACE) && !(gear.item_flags & ITEM_FLAG_FLEXIBLEMATERIAL))
 			return gear
 
-/mob/living/carbon/human/proc/check_shields(var/damage = 0, var/atom/damage_source = null, var/mob/attacker = null, var/def_zone = null, var/attack_text = "the attack")
+/mob/living/human/proc/check_shields(var/damage = 0, var/atom/damage_source = null, var/mob/attacker = null, var/def_zone = null, var/attack_text = "the attack")
 	var/list/checking_slots = get_held_items()
 	var/obj/item/suit = get_equipped_item(slot_wear_suit_str)
 	if(suit)
@@ -122,7 +122,7 @@ meteor_act
 			return TRUE
 	return FALSE
 
-/mob/living/carbon/human/resolve_item_attack(obj/item/I, mob/living/user, var/target_zone)
+/mob/living/human/resolve_item_attack(obj/item/I, mob/living/user, var/target_zone)
 
 	for (var/obj/item/grab/G in grabbed_by)
 		if(G.resolve_item_attack(user, I, target_zone))
@@ -152,7 +152,7 @@ meteor_act
 
 	return hit_zone
 
-/mob/living/carbon/human/hit_with_weapon(obj/item/I, mob/living/user, var/effective_force, var/hit_zone)
+/mob/living/human/hit_with_weapon(obj/item/I, mob/living/user, var/effective_force, var/hit_zone)
 	var/obj/item/organ/external/affecting = GET_EXTERNAL_ORGAN(src, hit_zone)
 	if(!affecting)
 		return //should be prevented by attacked_with_item() but for sanity.
@@ -168,7 +168,7 @@ meteor_act
 
 	return standard_weapon_hit_effects(I, user, effective_force, hit_zone)
 
-/mob/living/carbon/human/standard_weapon_hit_effects(obj/item/I, mob/living/user, var/effective_force, var/hit_zone)
+/mob/living/human/standard_weapon_hit_effects(obj/item/I, mob/living/user, var/effective_force, var/hit_zone)
 	var/obj/item/organ/external/affecting = GET_EXTERNAL_ORGAN(src, hit_zone)
 	if(!affecting)
 		return 0
@@ -212,7 +212,7 @@ meteor_act
 
 	return 1
 
-/mob/living/carbon/human/proc/attack_bloody(obj/item/W, mob/attacker, var/effective_force, var/hit_zone)
+/mob/living/human/proc/attack_bloody(obj/item/W, mob/attacker, var/effective_force, var/hit_zone)
 	if(W.damtype != BRUTE)
 		return
 
@@ -232,7 +232,7 @@ meteor_act
 		if(istype(location, /turf/simulated))
 			location.add_blood(src)
 		if(ishuman(attacker))
-			var/mob/living/carbon/human/H = attacker
+			var/mob/living/human/H = attacker
 			if(get_dist(H, src) <= 1) //people with TK won't get smeared with blood
 				H.bloody_body(src)
 				H.bloody_hands(src)
@@ -254,7 +254,7 @@ meteor_act
 			if(BP_CHEST)
 				bloody_body(src)
 
-/mob/living/carbon/human/proc/projectile_hit_bloody(obj/item/projectile/P, var/effective_force, var/hit_zone, var/obj/item/organ/external/organ)
+/mob/living/human/proc/projectile_hit_bloody(obj/item/projectile/P, var/effective_force, var/hit_zone, var/obj/item/organ/external/organ)
 	if(P.damage_type != BRUTE || P.nodamage)
 		return
 	if(!(P.sharp || prob(effective_force*4)))
@@ -271,7 +271,7 @@ meteor_act
 				C.add_blood(src)
 				C.update_clothing_icon()
 
-/mob/living/carbon/human/proc/attack_joint(var/obj/item/organ/external/organ, var/obj/item/W, var/effective_force, var/dislocate_mult, var/blocked)
+/mob/living/human/proc/attack_joint(var/obj/item/organ/external/organ, var/obj/item/W, var/effective_force, var/dislocate_mult, var/blocked)
 	if(!organ || organ.is_dislocated() || !(organ.limb_flags & ORGAN_FLAG_CAN_DISLOCATE) || blocked >= 100)
 		return 0
 	if(W.damtype != BRUTE)
@@ -285,7 +285,7 @@ meteor_act
 		return 1
 	return 0
 
-/mob/living/carbon/human/emag_act(var/remaining_charges, mob/user, var/emag_source)
+/mob/living/human/emag_act(var/remaining_charges, mob/user, var/emag_source)
 	var/obj/item/organ/external/affecting = GET_EXTERNAL_ORGAN(src, user.zone_sel.selecting)
 	if(!affecting || !affecting.is_robotic())
 		to_chat(user, "<span class='warning'>That limb isn't robotic.</span>")
@@ -298,7 +298,7 @@ meteor_act
 	return 1
 
 //this proc handles being hit by a thrown atom
-/mob/living/carbon/human/hitby(atom/movable/AM, var/datum/thrownthing/TT)
+/mob/living/human/hitby(atom/movable/AM, var/datum/thrownthing/TT)
 
 	if(istype(AM,/obj/))
 		var/obj/O = AM
@@ -369,14 +369,14 @@ meteor_act
 	else
 		..()
 
-/mob/living/carbon/human/embed(var/obj/O, var/def_zone=null, var/datum/wound/supplied_wound)
+/mob/living/human/embed(var/obj/O, var/def_zone=null, var/datum/wound/supplied_wound)
 	if(!def_zone) ..()
 
 	var/obj/item/organ/external/affecting = GET_EXTERNAL_ORGAN(src, def_zone)
 	if(affecting)
 		affecting.embed(O, supplied_wound = supplied_wound)
 
-/mob/living/carbon/human/proc/bloody_hands(var/mob/living/source, var/amount = 2)
+/mob/living/human/proc/bloody_hands(var/mob/living/source, var/amount = 2)
 	var/obj/item/clothing/gloves/gloves = get_equipped_item(slot_gloves_str)
 	if(istype(gloves))
 		gloves.add_blood(source, amount)
@@ -384,7 +384,7 @@ meteor_act
 		add_blood(source, amount)
 	update_inv_gloves()		//updates on-mob overlays for bloody hands and/or bloody gloves
 
-/mob/living/carbon/human/proc/bloody_body(var/mob/living/source)
+/mob/living/human/proc/bloody_body(var/mob/living/source)
 	var/obj/item/gear = get_equipped_item(slot_wear_suit_str)
 	if(gear)
 		gear.add_blood(source)
@@ -394,7 +394,7 @@ meteor_act
 		gear.add_blood(source)
 		update_inv_w_uniform(0)
 
-/mob/living/carbon/human/proc/handle_suit_punctures(var/damtype, var/damage, var/def_zone)
+/mob/living/human/proc/handle_suit_punctures(var/damtype, var/damage, var/def_zone)
 
 	// Tox and oxy don't matter to suits.
 	if(damtype != BURN && damtype != BRUTE) return
@@ -409,7 +409,7 @@ meteor_act
 	if(istype(suit))
 		suit.create_breaches(damtype, damage)
 
-/mob/living/carbon/human/reagent_permeability()
+/mob/living/human/reagent_permeability()
 	var/perm = 0
 
 	var/list/perm_by_part = list(
@@ -445,7 +445,7 @@ meteor_act
 
 	return perm
 
-/mob/living/carbon/human/lava_act(datum/gas_mixture/air, temperature, pressure)
+/mob/living/human/lava_act(datum/gas_mixture/air, temperature, pressure)
 	var/was_burned = FireBurn(0.4 * vsc.fire_firelevel_multiplier, temperature, pressure)
 	if (was_burned)
 		fire_act(air, temperature)
@@ -453,7 +453,7 @@ meteor_act
 
 //Removed the horrible safety parameter. It was only being used by ninja code anyways.
 //Now checks siemens_coefficient of the affected area by default
-/mob/living/carbon/human/electrocute_act(var/shock_damage, var/obj/source, var/base_siemens_coeff = 1.0, var/def_zone = null)
+/mob/living/human/electrocute_act(var/shock_damage, var/obj/source, var/base_siemens_coeff = 1.0, var/def_zone = null)
 
 	if(status_flags & GODMODE)	return 0	//godmode
 
@@ -469,7 +469,7 @@ meteor_act
 
 	return ..(shock_damage, source, base_siemens_coeff, def_zone)
 
-/mob/living/carbon/human/explosion_act(severity)
+/mob/living/human/explosion_act(severity)
 	..()
 	if(QDELETED(src))
 		return
@@ -508,7 +508,7 @@ meteor_act
 
 //Used by various things that knock people out by applying blunt trauma to the head.
 //Checks that the species has a "head" (brain containing organ) and that hit_zone refers to it.
-/mob/living/carbon/human/proc/headcheck(var/target_zone, var/brain_tag = BP_BRAIN)
+/mob/living/human/proc/headcheck(var/target_zone, var/brain_tag = BP_BRAIN)
 
 	target_zone = check_zone(target_zone, src)
 
@@ -526,7 +526,7 @@ meteor_act
 
 ///eyecheck()
 ///Returns a number between -1 to 2
-/mob/living/carbon/human/eyecheck()
+/mob/living/human/eyecheck()
 	var/total_protection = flash_protection
 	if(species.has_organ[species.vision_organ])
 		var/obj/item/organ/internal/eyes/I = get_organ(species.vision_organ, /obj/item/organ/internal/eyes)
@@ -537,14 +537,14 @@ meteor_act
 		return FLASH_PROTECTION_MAJOR
 	return total_protection
 
-/mob/living/carbon/human/flash_eyes(var/intensity = FLASH_PROTECTION_MODERATE, override_blindness_check = FALSE, affect_silicon = FALSE, visual = FALSE, type = /obj/screen/fullscreen/flash)
+/mob/living/human/flash_eyes(var/intensity = FLASH_PROTECTION_MODERATE, override_blindness_check = FALSE, affect_silicon = FALSE, visual = FALSE, type = /obj/screen/fullscreen/flash)
 	. = ..()
 	if(. && species.has_organ[species.vision_organ])
 		var/obj/item/organ/internal/eyes/I = get_organ(species.vision_organ, /obj/item/organ/internal/eyes)
 		if(I)
 			I.additional_flash_effects(intensity)
 
-/mob/living/carbon/human/proc/getFlashMod()
+/mob/living/human/proc/getFlashMod()
 	if(species.vision_organ)
 		var/obj/item/organ/internal/eyes/I = get_organ(species.vision_organ, /obj/item/organ/internal/eyes)
 		if(istype(I))

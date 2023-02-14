@@ -26,7 +26,7 @@
 		to_chat(user,  SPAN_WARNING("\The [src] is still and lifeless..."))
 		return
 
-	var/mob/living/carbon/human/H = user
+	var/mob/living/human/H = user
 	var/decl/species/species = user.get_species()
 	var/datum/appearance_descriptor/age/age = species && LAZYACCESS(species.appearance_descriptors, "age")
 	if(!ishuman(H) || H.isSynthetic() || !species || !age)
@@ -39,7 +39,7 @@
 	else
 		visible_message("\The [user] retracts their hand suddenly.")
 
-/obj/structure/fountain/proc/time_dilation(var/mob/living/carbon/human/user)
+/obj/structure/fountain/proc/time_dilation(var/mob/living/human/user)
 
 	for(var/mob/living/L in oviewers(7, src))
 		L.flash_eyes(3)
@@ -86,7 +86,7 @@
 	icon_state             = "fountain_g"
 	tool_interaction_flags = TOOL_INTERACTION_DECONSTRUCT
 	w_class                = ITEM_SIZE_STRUCTURE
-	material               = /decl/material/solid/stone/marble 
+	material               = /decl/material/solid/stone/marble
 	used                   = TRUE
 
 /obj/structure/fountain/mundane/Initialize(ml, _mat, _reinf_mat)
@@ -97,7 +97,7 @@
 /obj/structure/fountain/mundane/initialize_reagents(populate = TRUE)
 	create_reagents(500)
 	. = ..()
-	
+
 /obj/structure/fountain/mundane/populate_reagents()
 	reagents.add_reagent(/decl/material/liquid/water, reagents.maximum_volume) //Don't give free water when building one
 

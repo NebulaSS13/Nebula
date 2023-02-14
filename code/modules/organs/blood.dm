@@ -2,11 +2,11 @@
 				BLOOD SYSTEM
 ****************************************************/
 
-/mob/living/carbon/human
+/mob/living/human
 	var/datum/reagents/vessel // Container for blood and BLOOD ONLY. Do not transfer other chems here.
 
 //Initializes blood vessels
-/mob/living/carbon/human/proc/make_blood()
+/mob/living/human/proc/make_blood()
 	if(vessel)
 		return
 	vessel = new /datum/reagents(species.blood_volume, src)
@@ -15,7 +15,7 @@
 	reset_blood()
 
 //Modifies blood level
-/mob/living/carbon/human/proc/adjust_blood(var/amt, var/blood_data)
+/mob/living/human/proc/adjust_blood(var/amt, var/blood_data)
 	if(!vessel)
 		make_blood()
 
@@ -29,7 +29,7 @@
 			vessel.remove_any(abs(amt))
 
 //Resets blood data
-/mob/living/carbon/human/proc/reset_blood()
+/mob/living/human/proc/reset_blood()
 	if(!vessel)
 		make_blood()
 
@@ -55,7 +55,7 @@
 	))
 
 //Makes a blood drop, leaking amt units of blood from the mob
-/mob/living/carbon/human/proc/drip(var/amt, var/tar = src, var/ddir)
+/mob/living/human/proc/drip(var/amt, var/tar = src, var/ddir)
 	var/datum/reagents/bloodstream = get_injected_reagents()
 	if(remove_blood(amt))
 		if(bloodstream.total_volume && vessel.total_volume)
@@ -66,7 +66,7 @@
 	return 0
 
 #define BLOOD_SPRAY_DISTANCE 2
-/mob/living/carbon/human/proc/blood_squirt(var/amt, var/turf/sprayloc)
+/mob/living/human/proc/blood_squirt(var/amt, var/turf/sprayloc)
 	if(amt <= 0 || !istype(sprayloc))
 		return
 	var/spraydir = pick(global.alldirs)
@@ -91,7 +91,7 @@
 						break
 
 				if(ishuman(A))
-					var/mob/living/carbon/human/H = A
+					var/mob/living/human/H = A
 					if(!H.lying)
 						H.bloody_body(src)
 						H.bloody_hands(src)
@@ -125,7 +125,7 @@
 	return bled
 #undef BLOOD_SPRAY_DISTANCE
 
-/mob/living/carbon/human/proc/remove_blood(var/amt)
+/mob/living/human/proc/remove_blood(var/amt)
 	if(!should_have_organ(BP_HEART)) //TODO: Make drips come from the reagents instead.
 		return 0
 	if(!amt)
@@ -141,7 +141,7 @@
 
 
 //For humans, blood does not appear from blue, it comes from vessels.
-/mob/living/carbon/human/take_blood(obj/item/chems/container, var/amount)
+/mob/living/human/take_blood(obj/item/chems/container, var/amount)
 
 	if(!vessel)
 		make_blood()
@@ -158,7 +158,7 @@
 	return 1
 
 //Transfers blood from reagents to vessel, respecting blood types compatability.
-/mob/living/carbon/human/inject_blood(var/amount, var/datum/reagents/donor)
+/mob/living/human/inject_blood(var/amount, var/datum/reagents/donor)
 	if(!should_have_organ(BP_HEART))
 		reagents.add_reagent(species.blood_reagent, amount, REAGENT_DATA(donor, species.blood_reagent))
 		return
@@ -174,10 +174,10 @@
 		adjust_blood(amount, injected_data)
 	..()
 
-/mob/living/carbon/human/proc/blood_incompatible(blood_type)
+/mob/living/human/proc/blood_incompatible(blood_type)
 	return species.is_blood_incompatible(dna?.b_type, blood_type)
 
-/mob/living/carbon/human/proc/regenerate_blood(var/amount)
+/mob/living/human/proc/regenerate_blood(var/amount)
 	amount *= (species.blood_volume / SPECIES_BLOOD_DEFAULT)
 	var/blood_volume_raw = vessel.total_volume
 	amount = max(0,min(amount, species.blood_volume - blood_volume_raw))
@@ -217,7 +217,7 @@
 	var/blood_data
 	var/blood_type
 	if(ishuman(source))
-		var/mob/living/carbon/human/donor = source
+		var/mob/living/human/donor = source
 		blood_data = REAGENT_DATA(donor.vessel, donor.species.blood_reagent)
 		blood_type = donor.b_type
 	else if(isatom(source))
@@ -259,11 +259,11 @@
 	return splatter
 
 //Percentage of maximum blood volume.
-/mob/living/carbon/human/proc/get_blood_volume()
+/mob/living/human/proc/get_blood_volume()
 	return species.blood_volume? round((vessel.total_volume/species.blood_volume)*100) : 0
 
 //Percentage of maximum blood volume, affected by the condition of circulation organs
-/mob/living/carbon/human/proc/get_blood_circulation()
+/mob/living/human/proc/get_blood_circulation()
 	var/obj/item/organ/internal/heart/heart = get_organ(BP_HEART, /obj/item/organ/internal/heart)
 	var/blood_volume = get_blood_volume()
 	if(!heart)
@@ -300,11 +300,11 @@
 	return min(blood_volume, 100)
 
 //Whether the species needs blood to carry oxygen. Used in get_blood_oxygenation and may be expanded based on blood rather than species in the future.
-/mob/living/carbon/human/proc/blood_carries_oxygen()
+/mob/living/human/proc/blood_carries_oxygen()
 	return species.blood_oxy
 
 //Percentage of maximum blood volume, affected by the condition of circulation organs, affected by the oxygen loss. What ultimately matters for brain
-/mob/living/carbon/human/proc/get_blood_oxygenation()
+/mob/living/human/proc/get_blood_oxygenation()
 	var/blood_volume = get_blood_circulation()
 	if(blood_carries_oxygen())
 		if(is_asystole()) // Heart is missing or isn't beating and we're not breathing (hardcrit)

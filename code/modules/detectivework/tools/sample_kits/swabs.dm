@@ -6,7 +6,7 @@
 	evidence_type = "trace"
 	evidence_path = /obj/item/forensics/sample/swab
 	possible_evidence_types = list(
-		/datum/forensics/gunshot_residue, 
+		/datum/forensics/gunshot_residue,
 		/datum/forensics/trace_dna,
 		/datum/forensics/blood_dna
 	)
@@ -16,7 +16,7 @@
 		/decl/material/solid/glass = MATTER_AMOUNT_REINFORCEMENT,
 	)
 
-/obj/item/forensics/sample_kit/swabs/attack(var/mob/living/carbon/human/H, var/mob/user)
+/obj/item/forensics/sample_kit/swabs/attack(var/mob/living/human/H, var/mob/user)
 	if(!istype(H))
 		return ..()
 
@@ -79,7 +79,7 @@
 	icon = 'icons/obj/forensics.dmi'
 	icon_state = "swab"
 	possible_evidence_types = list(
-		/datum/forensics/gunshot_residue, 
+		/datum/forensics/gunshot_residue,
 		/datum/forensics/trace_dna,
 		/datum/forensics/blood_dna
 	)

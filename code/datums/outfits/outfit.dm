@@ -62,11 +62,11 @@ var/global/list/outfits_decls_by_type_
 		outfits_decls_by_type_[type] = src
 		dd_insertObjectList(outfits_decls_, src)
 
-/decl/hierarchy/outfit/proc/pre_equip(mob/living/carbon/human/H)
+/decl/hierarchy/outfit/proc/pre_equip(mob/living/human/H)
 	if(flags & OUTFIT_RESET_EQUIPMENT)
 		H.delete_inventory(TRUE)
 
-/decl/hierarchy/outfit/proc/post_equip(mob/living/carbon/human/H)
+/decl/hierarchy/outfit/proc/post_equip(mob/living/human/H)
 	if(flags & OUTFIT_HAS_JETPACK)
 		var/obj/item/tank/jetpack/J = locate(/obj/item/tank/jetpack) in H
 		if(!J)
@@ -74,7 +74,7 @@ var/global/list/outfits_decls_by_type_
 		J.toggle()
 		J.toggle_valve()
 
-/decl/hierarchy/outfit/proc/equip(mob/living/carbon/human/H, var/rank, var/assignment, var/equip_adjustments)
+/decl/hierarchy/outfit/proc/equip(mob/living/human/H, var/rank, var/assignment, var/equip_adjustments)
 	equip_base(H, equip_adjustments)
 
 	rank = id_pda_assignment || rank
@@ -97,7 +97,7 @@ var/global/list/outfits_decls_by_type_
 		H.set_id_info(W)
 	return 1
 
-/decl/hierarchy/outfit/proc/equip_base(mob/living/carbon/human/H, var/equip_adjustments)
+/decl/hierarchy/outfit/proc/equip_base(mob/living/human/H, var/equip_adjustments)
 	set waitfor = FALSE
 	pre_equip(H)
 
@@ -179,7 +179,7 @@ var/global/list/outfits_decls_by_type_
 	if(H.client?.prefs?.give_passport)
 		global.using_map.create_passport(H)
 
-/decl/hierarchy/outfit/proc/equip_id(var/mob/living/carbon/human/H, var/rank, var/assignment, var/equip_adjustments)
+/decl/hierarchy/outfit/proc/equip_id(var/mob/living/human/H, var/rank, var/assignment, var/equip_adjustments)
 	if(!id_slot || !id_type)
 		return
 	if(OUTFIT_ADJUSTMENT_SKIP_ID_PDA & equip_adjustments)
@@ -195,7 +195,7 @@ var/global/list/outfits_decls_by_type_
 	if(H.equip_to_slot_or_store_or_drop(W, id_slot))
 		return W
 
-/decl/hierarchy/outfit/proc/equip_pda(var/mob/living/carbon/human/H, var/rank, var/assignment, var/equip_adjustments)
+/decl/hierarchy/outfit/proc/equip_pda(var/mob/living/human/H, var/rank, var/assignment, var/equip_adjustments)
 	if(!pda_slot || !pda_type)
 		return
 	if(OUTFIT_ADJUSTMENT_SKIP_ID_PDA & equip_adjustments)

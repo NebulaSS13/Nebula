@@ -403,7 +403,7 @@ SUBSYSTEM_DEF(jobs)
 		return TRUE
 	return FALSE
 
-/datum/controller/subsystem/jobs/proc/equip_custom_loadout(var/mob/living/carbon/human/H, var/datum/job/job)
+/datum/controller/subsystem/jobs/proc/equip_custom_loadout(var/mob/living/human/H, var/datum/job/job)
 
 	if(!H || !H.client)
 		return
@@ -464,7 +464,7 @@ SUBSYSTEM_DEF(jobs)
 
 	return spawn_in_storage
 
-/datum/controller/subsystem/jobs/proc/equip_rank(var/mob/living/carbon/human/H, var/rank, var/joined_late = 0)
+/datum/controller/subsystem/jobs/proc/equip_rank(var/mob/living/human/H, var/rank, var/joined_late = 0)
 	if(!H)
 		return
 

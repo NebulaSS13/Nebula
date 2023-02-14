@@ -25,13 +25,13 @@
 /decl/material/liquid/glowsap/affect_blood(mob/living/M, removed, var/datum/reagents/holder)
 	M.add_chemical_effect(CE_GLOWINGEYES, 1)
 	if(ishuman(M))
-		var/mob/living/carbon/human/H = M
+		var/mob/living/human/H = M
 		H.update_eyes()
 
 /decl/material/liquid/glowsap/on_leaving_metabolism(datum/reagents/metabolism/holder)
 	if(ishuman(holder?.my_atom))
-		var/mob/living/carbon/human/H = holder.my_atom
-		addtimer(CALLBACK(H, /mob/living/carbon/human/proc/update_eyes), 5 SECONDS)
+		var/mob/living/human/H = holder.my_atom
+		addtimer(CALLBACK(H, /mob/living/human/proc/update_eyes), 5 SECONDS)
 	. = ..()
 
 /decl/material/liquid/glowsap/affect_overdose(var/mob/living/M)
@@ -104,7 +104,7 @@
 		return
 
 	if(ishuman(M))
-		var/mob/living/carbon/human/H = M
+		var/mob/living/human/H = M
 		if(!H.can_feel_pain())
 			return
 
@@ -192,7 +192,7 @@
 		return
 
 	if(ishuman(M))
-		var/mob/living/carbon/human/H = M
+		var/mob/living/human/H = M
 		if(!H.can_feel_pain())
 			return
 	if(LAZYACCESS(M.chem_doses, type) == metabolism)
@@ -225,7 +225,7 @@
 	if(M.isSynthetic())
 		return
 
-	var/mob/living/carbon/human/H = M
+	var/mob/living/human/H = M
 	if(istype(H) && (H.species.species_flags & SPECIES_FLAG_NO_SCAN))
 		return
 
@@ -273,7 +273,7 @@
 	uid = "chem_nanoblood"
 
 /decl/material/liquid/nanoblood/affect_blood(var/mob/living/M, var/removed, var/datum/reagents/holder)
-	var/mob/living/carbon/human/H = M
+	var/mob/living/human/H = M
 	if(!istype(H))
 		return
 	if(!H.should_have_organ(BP_HEART)) //We want the var for safety but we can do without the actual blood.
@@ -361,7 +361,7 @@
 	if(M.bodytemperature < 170)
 		M.heal_organ_damage(30 * removed, 30 * removed, affect_robo = 1)
 		if(ishuman(M))
-			var/mob/living/carbon/human/H = M
+			var/mob/living/human/H = M
 			for(var/obj/item/organ/internal/I in H.get_internal_organs())
 				if(BP_IS_PROSTHETIC(I))
 					I.heal_damage(20*removed)
@@ -388,7 +388,7 @@
 /decl/material/liquid/crystal_agent/affect_blood(var/mob/living/M, var/removed, var/datum/reagents/holder)
 	var/result_mat = do_material_check(M)
 	if(ishuman(M))
-		var/mob/living/carbon/human/H = M
+		var/mob/living/human/H = M
 		var/list/limbs = H.get_external_organs()
 		var/list/shuffled_limbs = LAZYLEN(limbs) ? shuffle(limbs.Copy()) : null
 		for(var/obj/item/organ/external/E in shuffled_limbs)

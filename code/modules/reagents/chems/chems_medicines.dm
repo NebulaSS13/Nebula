@@ -11,7 +11,7 @@
 
 /decl/material/liquid/eyedrops/affect_blood(var/mob/living/M, var/removed, var/datum/reagents/holder)
 	if(ishuman(M))
-		var/mob/living/carbon/human/H = M
+		var/mob/living/human/H = M
 		var/obj/item/organ/internal/E = GET_INTERNAL_ORGAN(H, BP_EYES)
 		if(E && istype(E) && !E.is_broken())
 			ADJ_STATUS(M, STAT_BLURRY, -5)
@@ -51,7 +51,7 @@
 	..()
 	if(ishuman(M))
 		M.add_chemical_effect(CE_BLOCKAGE, (15 + REAGENT_VOLUME(holder, type))/100)
-		var/mob/living/carbon/human/H = M
+		var/mob/living/human/H = M
 		for(var/obj/item/organ/external/E in H.get_external_organs())
 			if(E.status & ORGAN_ARTERY_CUT && prob(2 + REAGENT_VOLUME(holder, type) / overdose))
 				E.status &= ~ORGAN_ARTERY_CUT
@@ -147,13 +147,13 @@
 
 /decl/material/liquid/immunobooster/affect_blood(var/mob/living/M, var/removed, var/datum/reagents/holder)
 	if(ishuman(M) && REAGENT_VOLUME(holder, type) < REAGENTS_OVERDOSE)
-		var/mob/living/carbon/human/H = M
+		var/mob/living/human/H = M
 		H.immunity = min(H.immunity_norm * 0.5, removed + H.immunity) // Rapidly brings someone up to half immunity.
 
 /decl/material/liquid/immunobooster/affect_overdose(var/mob/living/M)
 	..()
 	M.add_chemical_effect(CE_TOXIN, 1)
-	var/mob/living/carbon/human/H = M
+	var/mob/living/human/H = M
 	if(istype(H))
 		H.immunity -= 0.5 //inverse effects when abused
 
@@ -215,7 +215,7 @@
 	uid = "chem_antibiotics"
 
 /decl/material/liquid/antibiotics/affect_blood(var/mob/living/M, var/removed, var/datum/reagents/holder)
-	var/mob/living/carbon/human/H = M
+	var/mob/living/human/H = M
 	if(!istype(H))
 		return
 	var/volume = REAGENT_VOLUME(holder, type)
@@ -228,7 +228,7 @@
 
 /decl/material/liquid/antibiotics/affect_overdose(var/mob/living/M)
 	..()
-	var/mob/living/carbon/human/H = M
+	var/mob/living/human/H = M
 	if(!istype(H))
 		return
 	H.immunity = max(H.immunity - 0.25, 0)
@@ -248,7 +248,7 @@
 /decl/material/liquid/retrovirals/affect_overdose(mob/living/M, datum/reagents/holder)
 	. = ..()
 	if(ishuman(M))
-		var/mob/living/carbon/human/H = M
+		var/mob/living/human/H = M
 		for(var/obj/item/organ/external/E in H.get_external_organs())
 			if(!BP_IS_PROSTHETIC(E) && prob(25) && !(E.status & ORGAN_MUTATED))
 				E.mutate()
@@ -294,7 +294,7 @@
 	if(volume >= 5 && M.is_asystole())
 		holder.remove_reagent(type, 5)
 		if(ishuman(M))
-			var/mob/living/carbon/human/H = M
+			var/mob/living/human/H = M
 			if(H.resuscitate())
 				var/obj/item/organ/internal/heart = GET_INTERNAL_ORGAN(H, BP_HEART)
 				heart.take_internal_damage(heart.max_damage * 0.15)
@@ -344,7 +344,7 @@
 	M.add_chemical_effect(CE_PAINKILLER, 10)
 	M.add_chemical_effect(CE_BRAIN_REGEN, 1)
 	if(ishuman(M))
-		var/mob/living/carbon/human/H = M
+		var/mob/living/human/H = M
 		ADJ_STATUS(H, STAT_CONFUSE, 1)
 		ADJ_STATUS(H, STAT_DROWSY, 1)
 

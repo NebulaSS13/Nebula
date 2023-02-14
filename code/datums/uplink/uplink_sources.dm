@@ -40,7 +40,7 @@ var/global/list/default_uplink_source_priority = list(
 	var/obj/item/uplink/T = new(P, M.mind, amount)
 	P.hidden_uplink = T
 	var/datum/computer_file/program/uplink/program = new(pda_pass)
-	var/datum/computer_file/directory/program_dir = HDD.parse_directory(OS_PROGRAMS_DIR, TRUE) // This is almost certainly already created, but just in case. 
+	var/datum/computer_file/directory/program_dir = HDD.parse_directory(OS_PROGRAMS_DIR, TRUE) // This is almost certainly already created, but just in case.
 	if(HDD.store_file(program, program_dir, TRUE, overwrite = TRUE) != OS_FILE_SUCCESS)
 		return SETUP_FAILED	//Not enough space or other issues.
 	to_chat(M, "<span class='notice'>A portable object teleportation relay has been installed in your [P.name]. Simply enter the code \"[pda_pass]\" in TaxQuickly program to unlock its hidden features.</span>")
@@ -78,7 +78,7 @@ var/global/list/default_uplink_source_priority = list(
 	name = "Implant"
 	desc = "Teleports an uplink implant into your head. Costs 20% of the initial TC amount."
 
-/decl/uplink_source/implant/setup_uplink_source(var/mob/living/carbon/human/H, var/amount)
+/decl/uplink_source/implant/setup_uplink_source(var/mob/living/human/H, var/amount)
 	if(!istype(H))
 		return SETUP_FAILED
 

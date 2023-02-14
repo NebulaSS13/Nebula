@@ -129,12 +129,12 @@
 		var/mob/tmob = AM
 
 		if(is_adult)
-			if(istype(tmob, /mob/living/carbon/human))
+			if(istype(tmob, /mob/living/human))
 				if(prob(90))
 					now_pushing = 0
 					return
 		else
-			if(istype(tmob, /mob/living/carbon/human))
+			if(istype(tmob, /mob/living/human))
 				now_pushing = 0
 				return
 

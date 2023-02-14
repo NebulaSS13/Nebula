@@ -1,7 +1,7 @@
-/mob/living/carbon/human
+/mob/living/human
 	move_intents = list(/decl/move_intent/walk)
 
-/mob/living/carbon/human/get_movement_delay(var/travel_dir)
+/mob/living/human/get_movement_delay(var/travel_dir)
 	var/tally = ..()
 
 	var/obj/item/organ/external/H = GET_EXTERNAL_ORGAN(src, BP_GROIN) // gets species slowdown, which can be reset by robotize()
@@ -66,11 +66,11 @@
 
 	return (tally+config.human_delay)
 
-/mob/living/carbon/human/size_strength_mod()
+/mob/living/human/size_strength_mod()
 	. = ..()
 	. += species.strength
 
-/mob/living/carbon/human/Process_Spacemove(var/allow_movement)
+/mob/living/human/Process_Spacemove(var/allow_movement)
 	var/obj/item/tank/jetpack/thrust = get_jetpack()
 
 	if(thrust && thrust.on && (allow_movement || thrust.stabilization_on) && thrust.allow_thrust(0.01, src))
@@ -79,7 +79,7 @@
 	. = ..()
 
 
-/mob/living/carbon/human/space_do_move(var/allow_move, var/direction)
+/mob/living/human/space_do_move(var/allow_move, var/direction)
 	if(allow_move == 1)
 		var/obj/item/tank/jetpack/thrust = get_jetpack()
 		if(thrust && thrust.on && prob(skill_fail_chance(SKILL_EVA, 10, SKILL_ADEPT)))
@@ -94,7 +94,7 @@
 
 	. = ..()
 
-/mob/living/carbon/human/proc/get_jetpack()
+/mob/living/human/proc/get_jetpack()
 	var/obj/item/back = get_equipped_item(slot_back_str)
 	if(back)
 		if(istype(back,/obj/item/tank/jetpack))
@@ -104,7 +104,7 @@
 			for(var/obj/item/rig_module/maneuvering_jets/module in rig.installed_modules)
 				return module.jets
 
-/mob/living/carbon/human/slip_chance(var/prob_slip = 5)
+/mob/living/human/slip_chance(var/prob_slip = 5)
 	if(!..())
 		return 0
 
@@ -118,7 +118,7 @@
 
 	return prob_slip
 
-/mob/living/carbon/human/Check_Shoegrip()
+/mob/living/human/Check_Shoegrip()
 	if(species.check_no_slip(src))
 		return 1
 	var/obj/item/shoes = get_equipped_item(slot_shoes_str)
@@ -126,7 +126,7 @@
 		return 1
 	return 0
 
-/mob/living/carbon/human/Move()
+/mob/living/human/Move()
 	. = ..()
 	if(.) //We moved
 
@@ -143,7 +143,7 @@
 			var/turf/B = GetAbove(src)
 			up_hint.icon_state = "uphint[!!(B && TURF_IS_MIMICKING(B))]"
 
-/mob/living/carbon/human/proc/handle_leg_damage()
+/mob/living/human/proc/handle_leg_damage()
 	if(!can_feel_pain())
 		return
 	var/crutches = 0
@@ -157,10 +157,10 @@
 			else
 				E.add_pain(10)
 
-/mob/living/carbon/human/can_sprint()
+/mob/living/human/can_sprint()
 	return (stamina > 0)
 
-/mob/living/carbon/human/UpdateLyingBuckledAndVerbStatus()
+/mob/living/human/UpdateLyingBuckledAndVerbStatus()
 	var/old_buckled_lying = !!buckled?.buckle_lying
 	var/old_lying = lying
 	. = ..()

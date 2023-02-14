@@ -430,8 +430,8 @@ var/global/list/singularities = list()
 		if(M.status_flags & GODMODE)
 			continue
 		if(M.stat == CONSCIOUS)
-			if (istype(M,/mob/living/carbon/human))
-				var/mob/living/carbon/human/H = M
+			if (istype(M,/mob/living/human))
+				var/mob/living/human/H = M
 				if(istype(H.get_equipped_item(slot_glasses_str), /obj/item/clothing/glasses/meson) && current_size != 11)
 					to_chat(H, "<span class=\"notice\">You look directly into \the [src], good thing you had your protective eyewear on!</span>")
 					return

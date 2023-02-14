@@ -4,7 +4,7 @@
 /mob/living/proc/handle_autohiss(message, decl/language/L)
 	return message // no autohiss at this level
 
-/mob/living/carbon/human/handle_autohiss(message, decl/language/L)
+/mob/living/human/handle_autohiss(message, decl/language/L)
 	if(!client || get_preference_value(/datum/client_preference/autohiss) == PREF_OFF) // no need to process if there's no client or they have autohiss off
 		return message
 	return species.handle_autohiss(message, L, get_preference_value(/datum/client_preference/autohiss))

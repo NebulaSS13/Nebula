@@ -31,8 +31,8 @@
 /obj/item/teleportation_scroll/Topic(href, href_list)
 	if(..())
 		return 1
-	var/mob/living/carbon/human/H = usr
-	if (!( istype(H, /mob/living/carbon/human)))
+	var/mob/living/human/H = usr
+	if (!( istype(H, /mob/living/human)))
 		return 1
 	if ((usr == src.loc || (in_range(src, usr) && isturf(src.loc))))
 		usr.set_machine(src)

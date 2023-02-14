@@ -29,7 +29,7 @@
 /mob/living/simple_animal/hostile/leech/AttackingTarget()
 	. = ..()
 	if(ishuman(.) && belly <= 75)
-		var/mob/living/carbon/human/H = .
+		var/mob/living/human/H = .
 		var/obj/item/clothing/suit/space/S = H.get_covering_equipped_item_by_zone(BP_CHEST)
 		if(istype(S) && !length(S.breaches))
 			return

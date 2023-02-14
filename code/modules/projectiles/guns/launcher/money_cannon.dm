@@ -148,7 +148,7 @@
 	if(!ishuman(user))
 		return
 
-	var/mob/living/carbon/human/M = user
+	var/mob/living/human/M = user
 	M.visible_message("<span class='danger'>[user] sticks [src] in their mouth, ready to pull the trigger...</span>")
 
 	if(!do_after(user, 40, progress = 0))

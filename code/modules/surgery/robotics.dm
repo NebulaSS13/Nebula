@@ -525,7 +525,7 @@
 
 	var/obj/item/mmi/M = tool
 	var/obj/item/organ/internal/mmi_holder/holder = new(target, 1)
-	var/mob/living/carbon/human/H = target
+	var/mob/living/human/H = target
 	H.add_organ(holder, affected, TRUE)
 	tool.forceMove(holder)
 	holder.stored_mmi = tool

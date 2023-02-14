@@ -71,8 +71,8 @@
 			if (!istype(A,/obj/item/storage))
 				to_chat(user, "<span class='warning'>The matter compressor safeties prevent you from doing that.</span>")
 			return
-		if(istype(A.loc,/mob/living/carbon/human))
-			var/mob/living/carbon/human/H = A.loc
+		if(istype(A.loc,/mob/living/human))
+			var/mob/living/human/H = A.loc
 			if(!H.unEquip(A))
 				return
 		else if(istype(A.loc,/obj/item/storage))

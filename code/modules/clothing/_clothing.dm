@@ -82,7 +82,7 @@
 
 		if(!(slot in user_mob?.held_item_slots))
 			if(ishuman(user_mob))
-				var/mob/living/carbon/human/user_human = user_mob
+				var/mob/living/human/user_human = user_mob
 				if(blood_DNA)
 					var/mob_blood_overlay = user_human.bodytype.get_blood_overlays(user_human)
 					if(mob_blood_overlay)
@@ -136,7 +136,7 @@
 /obj/item/clothing/mob_can_equip(mob/living/M, slot, disable_warning = FALSE, force = FALSE)
 	. = ..()
 	if(. && !isnull(bodytype_equip_flags) && ishuman(M) && !(slot in list(slot_l_store_str, slot_r_store_str, slot_s_store_str)) && !(slot in M.held_item_slots))
-		var/mob/living/carbon/human/H = M
+		var/mob/living/human/H = M
 		. = (bodytype_equip_flags & BODY_FLAG_EXCLUDE) ? !(bodytype_equip_flags & H.bodytype.bodytype_flag) : (bodytype_equip_flags & H.bodytype.bodytype_flag)
 		if(!. && !disable_warning)
 			to_chat(H, SPAN_WARNING("\The [src] [gender == PLURAL ? "do" : "does"] not fit you."))
@@ -227,5 +227,5 @@
 	for(var/obj/item/clothing/accessory/A in accessories)
 		. = min(., A.get_pressure_weakness(pressure,zone))
 
-/obj/item/clothing/proc/check_limb_support(var/mob/living/carbon/human/user)
+/obj/item/clothing/proc/check_limb_support(var/mob/living/human/user)
 	return FALSE

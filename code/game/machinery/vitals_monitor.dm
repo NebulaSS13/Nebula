@@ -12,7 +12,7 @@
 	uncreated_component_parts = null
 	construct_state = /decl/machine_construction/default/panel_closed
 
-	var/mob/living/carbon/human/victim
+	var/mob/living/human/victim
 	var/beep = TRUE
 
 /obj/machinery/vitals_monitor/Destroy()

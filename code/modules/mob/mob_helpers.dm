@@ -16,7 +16,7 @@
 /mob/living/proc/isSynthetic()
 	return 0
 
-/mob/living/carbon/human/isSynthetic()
+/mob/living/human/isSynthetic()
 	if(isnull(full_prosthetic))
 		robolimb_count = 0
 		var/list/limbs = get_external_organs()
@@ -33,7 +33,7 @@
 /mob/proc/isMonkey()
 	return 0
 
-/mob/living/carbon/human/isMonkey()
+/mob/living/human/isMonkey()
 	return istype(species, /decl/species/monkey)
 
 
@@ -125,7 +125,7 @@ var/global/list/global/organ_rel_size = list(
 	if(. == BP_EYES || . == BP_MOUTH)
 		. = BP_HEAD
 	if(ishuman(target) && !base_zone_only)
-		var/mob/living/carbon/human/H = target
+		var/mob/living/human/H = target
 		. = H.species.get_limb_from_zone(.)
 
 // Returns zone with a certain probability. If the probability fails, or no zone is specified, then a random body part is chosen.
@@ -499,7 +499,7 @@ var/global/list/intents = list(I_HELP,I_DISARM,I_GRAB,I_HURT)
 		return SAFE_PERP
 	return 0
 
-/mob/living/carbon/human/assess_perp(var/obj/access_obj, var/check_access, var/auth_weapons, var/check_records, var/check_arrest)
+/mob/living/human/assess_perp(var/obj/access_obj, var/check_access, var/auth_weapons, var/check_records, var/check_arrest)
 	var/threatcount = ..()
 	if(. == SAFE_PERP)
 		return SAFE_PERP
@@ -559,7 +559,7 @@ var/global/list/intents = list(I_HELP,I_DISARM,I_GRAB,I_HURT)
 /mob/observer/ghost/get_multitool()
 	return can_admin_interact() && ..(ghost_multitool)
 
-/mob/living/carbon/human/get_multitool()
+/mob/living/human/get_multitool()
 	return ..(get_active_hand())
 
 /mob/living/silicon/robot/get_multitool()

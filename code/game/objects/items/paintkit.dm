@@ -55,7 +55,7 @@
 		if(kit.new_light_overlay)
 			light_overlay = kit.new_light_overlay
 
-		var/mob/living/carbon/human/H = user
+		var/mob/living/human/H = user
 		if(istype(H))
 			bodytype_equip_flags = H.bodytype.bodytype_flag
 		kit.use(1,user)
@@ -74,7 +74,7 @@
 		desc = kit.new_desc
 		icon = kit.new_icon
 
-		var/mob/living/carbon/human/H = user
+		var/mob/living/human/H = user
 		if(istype(H))
 			bodytype_equip_flags = H.bodytype.bodytype_flag
 		kit.use(1,user)

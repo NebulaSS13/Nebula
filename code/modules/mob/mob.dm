@@ -497,7 +497,7 @@
 /mob/proc/pull_damage()
 	return 0
 
-/mob/living/carbon/human/pull_damage()
+/mob/living/human/pull_damage()
 	if(!lying || getBruteLoss() + getFireLoss() < 100)
 		return FALSE
 	for(var/obj/item/organ/external/e in get_external_organs())
@@ -723,7 +723,7 @@
 	adjustFireLoss(10)
 	. = ..()
 
-/mob/living/carbon/human/remove_implant(var/obj/item/implant, var/surgical_removal = FALSE, var/obj/item/organ/external/affected)
+/mob/living/human/remove_implant(var/obj/item/implant, var/surgical_removal = FALSE, var/obj/item/organ/external/affected)
 	if(!affected) //Grab the organ holding the implant.
 		for(var/obj/item/organ/external/organ in get_external_organs())
 			for(var/obj/item/O in organ.implants)
@@ -793,7 +793,7 @@
 	if(U.get_empty_hand_slot())
 		U.put_in_hands(selection)
 	if(ishuman(U))
-		var/mob/living/carbon/human/human_user = U
+		var/mob/living/human/human_user = U
 		human_user.bloody_hands(src)
 	return 1
 
@@ -1091,7 +1091,7 @@
 				if(tree.protects_against_weather)
 					LAZYADD(., tree)
 
-/mob/living/carbon/human/get_weather_protection()
+/mob/living/human/get_weather_protection()
 	. = ..()
 	if(!LAZYLEN(.))
 		var/obj/item/clothing/head/check_head = get_equipped_item(slot_head_str)

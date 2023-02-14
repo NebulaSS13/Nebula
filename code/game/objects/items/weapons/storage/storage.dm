@@ -265,7 +265,7 @@
 
 /obj/item/storage/attack_hand(mob/user)
 	if(ishuman(user))
-		var/mob/living/carbon/human/H = user
+		var/mob/living/human/H = user
 		for(var/slot in global.pocket_slots)
 			var/obj/item/pocket = H.get_equipped_item(slot)
 			if(pocket == src && !H.get_active_hand()) //Prevents opening if it's in a pocket.

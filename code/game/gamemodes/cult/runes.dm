@@ -467,7 +467,7 @@
 		var/dam_amt = 2 + length(casters)
 		victim.take_organ_damage(dam_amt, dam_amt) // This is to speed up the process and also damage mobs that don't take damage from being on fire, e.g. borgs
 		if(ishuman(victim))
-			var/mob/living/carbon/human/H = victim
+			var/mob/living/human/H = victim
 			if(H.is_asystole())
 				H.adjustBrainLoss(2 + casters.len)
 		sleep(40)
@@ -486,8 +486,8 @@
 		//TODO: other rewards?
 		/* old sac code - left there in case someone wants to salvage it
 		var/worth = 0
-		if(istype(H,/mob/living/carbon/human))
-			var/mob/living/carbon/human/lamb = H
+		if(istype(H,/mob/living/human))
+			var/mob/living/human/lamb = H
 			if(lamb.species.rarity_value > 3)
 				worth = 1
 
@@ -515,8 +515,8 @@
 	strokes = 3
 
 /obj/effect/rune/drain/cast(var/mob/living/user)
-	var/mob/living/carbon/human/victim
-	for(var/mob/living/carbon/human/M in get_turf(src))
+	var/mob/living/human/victim
+	for(var/mob/living/human/M in get_turf(src))
 		if(iscultist(M))
 			continue
 		victim = M
@@ -531,7 +531,7 @@
 	user.visible_message("<span class='warning'>Blood flows from \the [src] into \the [user]!</span>", "<span class='cult'>The blood starts flowing from \the [src] into your frail mortal body. [capitalize(english_list(heal_user(user), nothing_text = "you feel no different"))].</span>", "You hear liquid flow.")
 	user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
 
-/obj/effect/rune/drain/proc/heal_user(var/mob/living/carbon/human/user)
+/obj/effect/rune/drain/proc/heal_user(var/mob/living/human/user)
 	if(!istype(user))
 		return list("you feel no different")
 	var/list/statuses = list()
@@ -695,9 +695,9 @@
 	strokes = 4
 
 /obj/effect/rune/revive/cast(var/mob/living/user)
-	var/mob/living/carbon/human/target
+	var/mob/living/human/target
 	var/obj/item/soulstone/source
-	for(var/mob/living/carbon/human/M in get_turf(src))
+	for(var/mob/living/human/M in get_turf(src))
 		if(M.stat == DEAD)
 			if(iscultist(M))
 				if(M.key)

@@ -79,7 +79,7 @@
 		else if(!get_base_model(pref.species))
 			return FALSE
 
-/decl/aspect/prosthetic_limb/apply(var/mob/living/carbon/human/holder)
+/decl/aspect/prosthetic_limb/apply(var/mob/living/human/holder)
 	. = ..()
 
 	// Don't apply if there's a specific model selected.

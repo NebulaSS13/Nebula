@@ -42,7 +42,7 @@
 
 	// Misc.
 	var/landmark_id                         // Spawn point identifier.
-	var/mob_path = /mob/living/carbon/human // Mobtype this antag will use if none is provided.
+	var/mob_path = /mob/living/human // Mobtype this antag will use if none is provided.
 	var/minimum_player_age = 7            	// Players need to be at least minimum_player_age days old before they are eligable for auto-spawning
 	var/flags = 0                           // Various runtime options.
 	var/show_objectives_on_creation = 1     // Whether or not objectives are shown when a player is added to this antag datum

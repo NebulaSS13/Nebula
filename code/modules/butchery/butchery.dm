@@ -13,7 +13,7 @@
 	var/skull_type
 	var/butchery_rotation = 90
 
-/mob/living/carbon/human
+/mob/living/human
 	butchery_rotation = 180
 
 // Harvest an animal's delicious byproducts
@@ -33,7 +33,7 @@
 		for(var/obj/item/chems/food/meat/slab in .)
 			reagents.trans_to_obj(slab, reagent_split)
 
-/mob/living/carbon/human/harvest_meat()
+/mob/living/human/harvest_meat()
 	. = ..()
 	for(var/obj/item/organ/internal/I in get_internal_organs())
 		remove_organ(I)

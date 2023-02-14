@@ -30,7 +30,7 @@
 
 /obj/item/haircomb/brush/attack_self(mob/user)
 	if(ishuman(user) && !user.incapacitated())
-		var/mob/living/carbon/human/H = user
+		var/mob/living/human/H = user
 		var/decl/sprite_accessory/hair/hair_style = GET_DECL(H.h_style)
 		if(hair_style.flags & VERY_SHORT)
 			H.visible_message(SPAN_NOTICE("\The [H] just sort of runs \the [src] over their scalp."))

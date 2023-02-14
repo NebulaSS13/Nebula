@@ -29,7 +29,7 @@
 
 /obj/item/soap/populate_reagents()
 	wet()
-	
+
 /obj/item/soap/Initialize()
 	. = ..()
 	initialize_reagents()
@@ -87,7 +87,7 @@
 //attack_as_weapon
 /obj/item/soap/attack(mob/living/target, mob/living/user, var/target_zone)
 	if(ishuman(target) && user?.a_intent != I_HURT)
-		var/mob/living/carbon/human/victim = target
+		var/mob/living/human/victim = target
 		if(user.zone_sel?.selecting == BP_MOUTH && victim.check_has_mouth())
 			user.visible_message(SPAN_DANGER("\The [user] washes \the [target]'s mouth out with soap!"))
 			if(reagents)
@@ -117,6 +117,6 @@
 		add_overlay("soap_key_overlay")
 	else if(decal_name)
 		add_overlay("decal-[decal_name]")
-	
+
 #undef SOAP_MAX_VOLUME
 #undef SOAP_CLEANER_ON_WET

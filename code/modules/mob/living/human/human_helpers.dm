@@ -7,7 +7,7 @@
 	flash_protection += C.flash_protection; \
 	equipment_tint_total += C.tint;
 
-/mob/living/carbon/human/can_eat(var/food, var/feedback = 1)
+/mob/living/human/can_eat(var/food, var/feedback = 1)
 	var/list/status = can_eat_status()
 	if(status[1] == HUMAN_EATING_NO_ISSUE)
 		return 1
@@ -18,7 +18,7 @@
 			to_chat(src, "<span class='warning'>\The [status[2]] is in the way!</span>")
 	return 0
 
-/mob/living/carbon/human/can_force_feed(var/feeder, var/food, var/feedback = 1)
+/mob/living/human/can_force_feed(var/feeder, var/food, var/feedback = 1)
 	var/list/status = can_eat_status()
 	if(status[1] == HUMAN_EATING_NO_ISSUE)
 		return 1
@@ -29,7 +29,7 @@
 			to_chat(feeder, "<span class='warning'>\The [status[2]] is in the way!</span>")
 	return 0
 
-/mob/living/carbon/human/proc/can_eat_status()
+/mob/living/human/proc/can_eat_status()
 	if(!check_has_mouth())
 		return list(HUMAN_EATING_NBP_MOUTH)
 	var/obj/item/blocked = check_mouth_coverage()
@@ -41,7 +41,7 @@
 #undef HUMAN_EATING_NBP_MOUTH
 #undef HUMAN_EATING_BLOCKED_MOUTH
 
-/mob/living/carbon/human/proc/update_equipment_vision()
+/mob/living/human/proc/update_equipment_vision()
 	flash_protection = 0
 	equipment_tint_total = 0
 	equipment_see_invis	= 0
@@ -69,7 +69,7 @@
 		if(istype(rig))
 			process_rig(rig)
 
-/mob/living/carbon/human/proc/process_glasses(var/obj/item/clothing/glasses/G)
+/mob/living/human/proc/process_glasses(var/obj/item/clothing/glasses/G)
 	if(G)
 		// prescription applies regardless of if the glasses are active
 		equipment_prescription += G.prescription
@@ -88,12 +88,12 @@
 			add_clothing_protection(G)
 			G.process_hud(src)
 
-/mob/living/carbon/human/proc/process_rig(var/obj/item/rig/O)
+/mob/living/human/proc/process_rig(var/obj/item/rig/O)
 	var/obj/item/head = get_equipped_item(slot_head_str)
 	if(O.visor && O.visor.active && O.visor.vision && O.visor.vision.glasses && (!O.helmet || (head && O.helmet == head)))
 		process_glasses(O.visor.vision.glasses)
 
-/mob/living/carbon/human/fully_replace_character_name(var/new_name, var/in_depth = TRUE)
+/mob/living/human/fully_replace_character_name(var/new_name, var/in_depth = TRUE)
 	var/old_name = real_name
 	. = ..()
 	if(!. || !in_depth)
@@ -126,7 +126,7 @@
 
 //Get species or synthetic temp if the mob is a FBP. Used when a synthetic type human mob is exposed to a temp check.
 //Essentially, used when a synthetic human mob should act diffferently than a normal type mob.
-/mob/living/carbon/human/proc/getSpeciesOrSynthTemp(var/temptype)
+/mob/living/human/proc/getSpeciesOrSynthTemp(var/temptype)
 	switch(temptype)
 		if(COLD_LEVEL_1)
 			return isSynthetic()? SYNTH_COLD_LEVEL_1 : species.cold_level_1
@@ -141,7 +141,7 @@
 		if(HEAT_LEVEL_3)
 			return isSynthetic()? SYNTH_HEAT_LEVEL_3 : species.heat_level_3
 
-/mob/living/carbon/human/proc/getCryogenicFactor(var/bodytemperature)
+/mob/living/human/proc/getCryogenicFactor(var/bodytemperature)
 	if(isSynthetic())
 		return 0
 	if(!species)
@@ -160,10 +160,10 @@
 		. = max(20, .)
 	return round(.)
 
-/mob/living/carbon/human
+/mob/living/human
 	var/next_sonar_ping = 0
 
-/mob/living/carbon/human/proc/sonar_ping()
+/mob/living/human/proc/sonar_ping()
 	set name = "Listen In"
 	set desc = "Allows you to listen in to movement and noises around you."
 	set category = "IC"
@@ -215,10 +215,10 @@
 	if(!heard_something)
 		to_chat(src, "<span class='notice'>You hear no movement but your own.</span>")
 
-/mob/living/carbon/human/proc/has_headset_in_ears()
+/mob/living/human/proc/has_headset_in_ears()
 	return istype(get_equipped_item(slot_l_ear_str), /obj/item/radio/headset) || istype(get_equipped_item(slot_r_ear_str), /obj/item/radio/headset)
 
-/mob/living/carbon/human/welding_eyecheck()
+/mob/living/human/welding_eyecheck()
 	var/obj/item/organ/internal/eyes/E = get_organ(species.vision_organ, /obj/item/organ/internal/eyes)
 	if(!E)
 		return
@@ -255,11 +255,11 @@
 			spawn(100)
 				disabilities &= ~NEARSIGHTED
 
-/mob/living/carbon/human
+/mob/living/human
 	var/list/cloaking_sources
 
 // Returns true if, and only if, the human has gone from uncloaked to cloaked
-/mob/living/carbon/human/proc/add_cloaking_source(var/datum/cloaking_source)
+/mob/living/human/proc/add_cloaking_source(var/datum/cloaking_source)
 	var/has_uncloaked = clean_cloaking_sources()
 	LAZYDISTINCTADD(cloaking_sources, weakref(cloaking_source))
 
@@ -274,7 +274,7 @@
 #define CLOAK_APPEAR_SELF "<span class='notice'>You have re-appeared.</span>"
 
 // Returns true if, and only if, the human has gone from cloaked to uncloaked
-/mob/living/carbon/human/proc/remove_cloaking_source(var/datum/cloaking_source)
+/mob/living/human/proc/remove_cloaking_source(var/datum/cloaking_source)
 	var/was_cloaked = LAZYLEN(cloaking_sources)
 	clean_cloaking_sources()
 	LAZYREMOVE(cloaking_sources, weakref(cloaking_source))
@@ -289,7 +289,7 @@
 /mob/proc/is_cloaked()
 	return FALSE
 
-/mob/living/carbon/human/is_cloaked()
+/mob/living/human/is_cloaked()
 	if(clean_cloaking_sources())
 		update_icon()
 		visible_message(CLOAK_APPEAR_OTHER, CLOAK_APPEAR_SELF)
@@ -299,11 +299,11 @@
 #undef CLOAK_APPEAR_SELF
 
 // Returns true if the human is cloaked by the given source
-/mob/living/carbon/human/proc/is_cloaked_by(var/cloaking_source)
+/mob/living/human/proc/is_cloaked_by(var/cloaking_source)
 	return LAZYISIN(cloaking_sources, weakref(cloaking_source))
 
 // Returns true if this operation caused the mob to go from cloaked to uncloaked
-/mob/living/carbon/human/proc/clean_cloaking_sources()
+/mob/living/human/proc/clean_cloaking_sources()
 	if(!cloaking_sources)
 		return FALSE
 
@@ -321,22 +321,22 @@
 	UNSETEMPTY(cloaking_sources)
 	return !cloaking_sources // If cloaking_sources wasn't initially null but is now, we've uncloaked
 
-/mob/living/carbon/human/set_sdisability(sdisability)
+/mob/living/human/set_sdisability(sdisability)
 	if(isSynthetic())
 		return // Can't cure disabilites, so don't give them.
 	..()
 
-/mob/living/carbon/human/proc/has_meson_effect()
+/mob/living/human/proc/has_meson_effect()
 	var/datum/global_hud/global_hud = get_global_hud()
 	return (global_hud.meson in equipment_overlays)
 
-/mob/living/carbon/human/proc/is_in_pocket(var/obj/item/I)
+/mob/living/human/proc/is_in_pocket(var/obj/item/I)
 	for(var/slot in global.pocket_slots)
 		if(get_equipped_item(slot) == I)
 			return TRUE
 	return FALSE
 
-/mob/living/carbon/human/get_accessible_pen()
+/mob/living/human/get_accessible_pen()
 	if((. = ..()))
 		return .
 

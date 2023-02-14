@@ -10,7 +10,7 @@
 	center_of_mass = @"{'x':16,'y':14}"
 
 	var/growing = FALSE
-	var/monkey_type = /mob/living/carbon/human/monkey
+	var/monkey_type = /mob/living/human/monkey
 	var/wrapper_type
 
 /obj/item/chems/food/monkeycube/populate_reagents()
@@ -44,7 +44,7 @@
 
 /obj/item/chems/food/monkeycube/On_Consume(var/mob/M)
 	if(ishuman(M))
-		var/mob/living/carbon/human/H = M
+		var/mob/living/human/H = M
 		H.visible_message("<span class='warning'>A screeching creature bursts out of [M]'s chest!</span>")
 		var/obj/item/organ/external/organ = GET_EXTERNAL_ORGAN(H, BP_CHEST)
 		organ.take_external_damage(50, 0, 0, "Animal escaping the ribcage")

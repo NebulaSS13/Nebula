@@ -20,7 +20,7 @@
 	gene_damage = -1
 
 	var/cloaked = 0
-	var/mob/living/carbon/human/gripping = null
+	var/mob/living/human/gripping = null
 	var/blood_per_tick = 3
 	var/health_per_tick = 0.8
 	pass_flags = PASS_FLAG_TABLE
@@ -89,7 +89,7 @@
 /mob/living/simple_animal/hostile/vagrant/AttackingTarget()
 	. = ..()
 	if(ishuman(.))
-		var/mob/living/carbon/human/H = .
+		var/mob/living/human/H = .
 		if(gripping == H)
 			SET_STATUS_MAX(H, STAT_WEAK, 1)
 			SET_STATUS_MAX(H, STAT_STUN, 1)

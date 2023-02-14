@@ -13,7 +13,7 @@ the HUD updates properly! */
 	if(!can_process_hud(M))
 		return
 	var/datum/arranged_hud_process/P = arrange_hud_process(M, Alt, global.med_hud_users)
-	for(var/mob/living/carbon/human/patient in P.Mob.in_view(P.Turf))
+	for(var/mob/living/human/patient in P.Mob.in_view(P.Turf))
 
 		if(patient.is_invisible_to(P.Mob))
 			continue
@@ -38,7 +38,7 @@ the HUD updates properly! */
 	if(!can_process_hud(M))
 		return
 	var/datum/arranged_hud_process/P = arrange_hud_process(M, Alt, global.sec_hud_users)
-	for(var/mob/living/carbon/human/perp in P.Mob.in_view(P.Turf))
+	for(var/mob/living/human/perp in P.Mob.in_view(P.Turf))
 
 		if(perp.is_invisible_to(P.Mob))
 			continue
@@ -95,7 +95,7 @@ the HUD updates properly! */
 
 /mob/observer/eye/in_view(var/turf/T)
 	var/list/viewed = new
-	for(var/mob/living/carbon/human/H in SSmobs.mob_list)
+	for(var/mob/living/human/H in SSmobs.mob_list)
 		if(get_dist(H, T) <= 7)
 			viewed += H
 	return viewed

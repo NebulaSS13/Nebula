@@ -25,7 +25,7 @@
 			if(compressed >= MAX_COMPRESS_ORE_PER_TICK)
 				break
 		if(emagged)
-			for(var/mob/living/carbon/human/H in input_turf)
+			for(var/mob/living/human/H in input_turf)
 				for(var/obj/item/organ/external/crushing in H.get_external_organs())
 					if(!crushing.simulated || crushing.anchored || !prob(5))
 						continue

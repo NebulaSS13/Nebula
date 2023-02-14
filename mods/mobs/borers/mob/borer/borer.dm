@@ -44,7 +44,7 @@
 	var/has_reproduced                      // Whether or not the borer has reproduced, for objective purposes.
 	var/roundstart                          // Whether or not this borer has been mapped and should not look for a player initially.
 	var/neutered                            // 'borer lite' mode - fewer powers, less hostile to the host.
-	var/mob/living/carbon/human/host        // Human host for the brain worm.
+	var/mob/living/human/host        // Human host for the brain worm.
 	var/mob/living/captive_brain/host_brain // Used for swapping control of the body back and forth.
 
 /obj/item/holder/borer
@@ -187,8 +187,8 @@
 
 	if(!host || !controlling) return
 
-	if(istype(host,/mob/living/carbon/human))
-		var/mob/living/carbon/human/H = host
+	if(istype(host,/mob/living/human))
+		var/mob/living/human/H = host
 		var/obj/item/organ/external/head = GET_EXTERNAL_ORGAN(H, BP_HEAD)
 		LAZYREMOVE(head.implants, src)
 

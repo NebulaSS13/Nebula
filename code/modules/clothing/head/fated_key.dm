@@ -77,8 +77,8 @@
 
 /obj/item/projectile/sanctionedaction/check_penetrate(var/atom/A)
 	. = TRUE
-	if(istype(A, /mob/living/carbon/human))
-		var/mob/living/carbon/human/H = A
+	if(istype(A, /mob/living/human))
+		var/mob/living/human/H = A
 		var/list/external_organs = H.get_external_organs()
 		if(LAZYLEN(external_organs))
 			var/obj/item/organ/external/E = pick(external_organs)

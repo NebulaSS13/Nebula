@@ -342,7 +342,7 @@
 
 	// --- Human: use their actual job ---
 	if (ishuman(M))
-		var/mob/living/carbon/human/H = M
+		var/mob/living/human/H = M
 		jobname = H.get_assignment()
 
 	// --- Carbon Nonhuman ---

@@ -15,7 +15,7 @@
 	step_towards(src, S)
 	apply_damage(current_size * 3, IRRADIATE, damage_flags = DAM_DISPERSED)
 
-/mob/living/carbon/human/singularity_pull(S, current_size)
+/mob/living/human/singularity_pull(S, current_size)
 	if(current_size >= STAGE_THREE)
 		for(var/obj/item/hand in get_held_items())
 			if(prob(current_size*5) && hand.w_class >= ((11-current_size)/2) && unEquip(hand))

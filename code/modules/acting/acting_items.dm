@@ -26,7 +26,7 @@
 
 /obj/machinery/acting/changer/attack_hand(var/mob/user)
 	if(ishuman(user))
-		var/mob/living/carbon/human/H = user
+		var/mob/living/human/H = user
 		H.change_appearance(APPEARANCE_ALL, H.loc, H, H.generate_valid_species(), state = global.z_topic_state)
 		var/getName = sanitize(input(H, "Would you like to change your name to something else?", "Name change") as null|text, MAX_NAME_LEN)
 		if(getName)

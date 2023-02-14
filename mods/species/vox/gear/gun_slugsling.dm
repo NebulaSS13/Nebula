@@ -23,7 +23,7 @@
 	. = ..()
 	if(. && isliving(AM))
 		if(ishuman(AM))
-			var/mob/living/carbon/human/H = AM
+			var/mob/living/human/H = AM
 			if(H.get_bodytype_category() == BODYTYPE_VOX)
 				return FALSE
 		var/mob/living/L = AM
