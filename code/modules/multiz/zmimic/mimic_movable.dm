@@ -99,6 +99,7 @@
 	appearance = LO
 	layer = MIMICED_LIGHTING_LAYER
 	plane = OPENTURF_MAX_PLANE
+	blend_mode = BLEND_MULTIPLY
 	invisibility = 0
 
 	if (icon_state == LIGHTING_BASE_ICON_STATE)

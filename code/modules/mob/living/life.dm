@@ -186,8 +186,36 @@
 
 	handle_hud_icons()
 	handle_vision()
+	handle_low_light_vision()
 
 	return 1
+
+/mob/living/proc/handle_low_light_vision()
+
+	// No client means nothing to update.
+	if(!client || !lighting_master)
+		return
+
+	// No loc or species means we should just assume no adjustment.
+	var/decl/species/species = get_species()
+	var/turf/my_turf = get_turf(src)
+	if(!isturf(my_turf) || !species)
+		lighting_master.set_alpha(255)
+		return
+
+	// TODO: handling for being inside atoms.
+	var/target_value = 255 * (1-species.base_low_light_vision)
+	var/loc_lumcount = my_turf.get_lumcount()
+	if(loc_lumcount < species.low_light_vision_threshold)
+		target_value = round(target_value * (1-species.low_light_vision_effectiveness))
+
+	if(lighting_master.alpha == target_value)
+		return
+
+	var/difference = round((target_value-lighting_master.alpha) * species.low_light_vision_adjustment_speed)
+	if(abs(difference) > 1)
+		target_value = lighting_master.alpha + difference
+	lighting_master.set_alpha(target_value)
 
 /mob/living/proc/handle_vision()
 	update_sight()

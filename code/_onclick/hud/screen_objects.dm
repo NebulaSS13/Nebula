@@ -373,3 +373,15 @@
 	if(pref)
 		pref.bgstate = next_in_list(pref.bgstate, pref.bgstate_options)
 		pref.update_preview_icon()
+
+/obj/screen/lighting_plane_master
+	screen_loc = "CENTER"
+	appearance_flags = PLANE_MASTER
+	mouse_opacity = 0
+	plane = LIGHTING_PLANE
+	blend_mode = BLEND_MULTIPLY
+	alpha = 255
+
+/obj/screen/lighting_plane_master/proc/set_alpha(var/newalpha)
+	if(alpha != newalpha)
+		animate(src, alpha = newalpha, time = SSmobs.wait)
