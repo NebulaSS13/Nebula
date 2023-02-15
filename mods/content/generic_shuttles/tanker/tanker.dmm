@@ -83,7 +83,7 @@
 /area/tanker)
 "fi" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/fuel{
-	dir = 8
+	dir = 4
 	},
 /turf/simulated/floor/reinforced/oxygen,
 /area/tanker)
@@ -441,7 +441,7 @@
 "Sf" = (
 /obj/effect/wallframe_spawn/reinforced,
 /obj/machinery/atmospherics/pipe/simple/hidden/fuel{
-	dir = 8
+	dir = 4
 	},
 /turf/simulated/floor/plating,
 /area/tanker)
