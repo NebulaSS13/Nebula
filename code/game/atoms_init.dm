@@ -83,7 +83,8 @@
 
 	if(opacity)
 		updateVisibility(src)
-
+	if(atom_codex_ref && atom_codex_ref != TRUE) // may be null, TRUE or a datum instance
+		QDEL_NULL(atom_codex_ref)
 	return ..()
 
 // Called if an atom is deleted before it initializes. Only call Destroy in this if you know what you're doing.

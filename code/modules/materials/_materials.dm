@@ -447,8 +447,8 @@ INITIALIZE_IMMEDIATE(/obj/effect/gas_overlay)
 	hidden_from_codex = TRUE
 	exoplanet_rarity = MAT_RARITY_NOWHERE
 
-// Generic material product (sheets, bricks, etc). Used ALL THE TIME.
-// May return an instance list, a single instance, or nothing if there is no instance produced.
+/// Generic material product (sheets, bricks, etc). Used ALL THE TIME.
+/// May return an instance list, a single instance, or nothing if there is no instance produced.
 /decl/material/proc/create_object(var/atom/target, var/amount = 1, var/object_type, var/reinf_type)
 
 	if(!object_type)
