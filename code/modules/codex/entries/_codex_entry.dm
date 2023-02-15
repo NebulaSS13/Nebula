@@ -70,10 +70,10 @@
 	if(!name)
 		if(length(associated_strings))
 			name = associated_strings[1]
-		else
+		else if(store_codex_entry)
 			CRASH("Attempted to instantiate unnamed codex entry with no associated strings!")
 
-	if(store_codex_entry)
+	if(name && store_codex_entry)
 		SScodex.all_entries += src
 		LAZYDISTINCTADD(associated_strings, codex_sanitize(name))
 		for(var/associated_string in associated_strings)

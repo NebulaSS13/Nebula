@@ -62,3 +62,19 @@
 	else
 		pass("All codex links were functional.")
 	return 1
+
+/datum/unit_test/codex_dump_test
+	name = "CODEX - Codex Will Successfully Dump To Filesystem"
+
+/datum/unit_test/codex_dump_test/start_test()
+	var/dump_result
+	try
+		dump_result = SScodex.dump_to_filesystem()
+	catch(var/exception/E)
+		fail("Codex dump threw an exception: [EXCEPTION_TEXT(E)]")
+		return 1
+	if(dump_result)
+		pass("Codex dumped successfully.")
+	else
+		fail("Codex dump did not return true.")
+	return 1
