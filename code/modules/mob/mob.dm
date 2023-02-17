@@ -21,6 +21,7 @@
 	clear_fullscreen()
 	if(istype(ai))
 		QDEL_NULL(ai)
+	QDEL_NULL(lighting_master)
 	remove_screen_obj_references()
 	if(client)
 		for(var/atom/movable/AM in client.screen)
@@ -1211,3 +1212,10 @@
 		SStyping.set_indicator_state(client, FALSE)
 	if (message)
 		whisper(message)
+
+// Darksight procs.
+/mob/proc/refresh_lighting_master()
+	if(!lighting_master)
+		lighting_master = new
+	if(client)
+		client.screen |= lighting_master

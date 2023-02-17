@@ -180,3 +180,6 @@
 	var/atom/movable/typing_indicator/typing_indicator
 	/// Whether this mob is currently typing, if piloted by a player.
 	var/is_typing
+
+	/// Used for darksight, required on all mobs to ensure lighting renders properly.
+	var/obj/screen/lighting_plane_master/lighting_master
