@@ -155,7 +155,7 @@
 
 	if (href_list["print"])
 		playsound(loc, "sound/machines/dotprinter.ogg", 30, 1)
-		new/obj/item/paper/(get_turf(src), last_scan["data"], "paper (Sensor Scan - [last_scan["name"]])")
+		new/obj/item/paper/(get_turf(src), null, last_scan["data"], "paper (Sensor Scan - [last_scan["name"]])")
 		return TOPIC_HANDLED
 
 /obj/machinery/shipsensors
