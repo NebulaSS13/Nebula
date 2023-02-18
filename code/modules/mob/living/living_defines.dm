@@ -47,5 +47,3 @@
 	var/list/chem_doses
 	var/last_pain_message
 	var/next_pain_time = 0
-
-	var/obj/screen/lighting_plane_master/lighting_master
