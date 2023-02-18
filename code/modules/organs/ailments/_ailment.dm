@@ -99,8 +99,8 @@
 		stack.use(1)
 	qdel(src)
 
-/datum/ailment/proc/treated_by_medication(var/decl/material/reagent, var/dosage)
-	return treated_by_reagent_type && istype(reagent, treated_by_reagent_type) && dosage >= treated_by_reagent_dosage
+/datum/ailment/proc/treated_by_medication(var/reagent_type, var/dosage)
+	return treated_by_reagent_type && ispath(reagent_type, treated_by_reagent_type) && dosage >= treated_by_reagent_dosage
 
 /datum/ailment/proc/was_treated_by_medication(var/datum/reagents/source, var/reagent_type)
 	source.remove_reagent(reagent_type, treated_by_reagent_dosage)
