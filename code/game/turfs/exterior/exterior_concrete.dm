@@ -38,7 +38,7 @@ var/global/exterior_broken_states = icon_states('icons/turf/exterior/broken.dmi'
 
 /turf/exterior/concrete/reinforced
 	name = "reinforced concrete"
-	desc = "Stone-like artificial material. It has been reinforced with an unknown compound"
+	desc = "Stone-like artificial material. It has been reinforced with an unknown compound."
 
 /turf/exterior/concrete/reinforced/on_update_icon()
 	. = ..()
