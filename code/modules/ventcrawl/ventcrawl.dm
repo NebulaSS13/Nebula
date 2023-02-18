@@ -45,6 +45,8 @@ var/global/list/ventcrawl_machinery = list(
 		return TRUE
 	if(carried_item in get_external_organs())
 		return TRUE
+	if(carried_item in worn_underwear)
+		return TRUE
 	for(var/slot in list(slot_w_uniform_str, slot_glasses_str, slot_glasses_str, slot_wear_mask_str, slot_l_ear_str, slot_r_ear_str, slot_belt_str, slot_l_store_str, slot_r_store_str))
 		if(get_equipped_item(slot) == carried_item)
 			return TRUE
