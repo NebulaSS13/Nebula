@@ -150,9 +150,7 @@
 		setup_level_data()
 
 /datum/level_data/Destroy(force)
-	log_debug("Level data datum being destroyed: [log_info_line(src)]")
-	//Since this is a datum that lives inside the SSmapping subsystem, I'm not sure if we really need to prevent deletion.
-	// It was fine for the obj version of this, but not much point now?
+	//Since this is a datum that lives inside the SSmapping subsystem, I'm not sure if we really need to prevent deletion. It was fine for the obj version of this, but not much point now?
 	SSmapping.unregister_level_data(src)
 	. = ..()
 
@@ -166,7 +164,6 @@
 /datum/level_data/proc/replace_with(var/datum/level_data/new_level)
 	new_level.copy_from(src)
 
-///Handle copying data from a previous level_data we're replacing.
 /datum/level_data/proc/copy_from(var/datum/level_data/old_level)
 	return
 
