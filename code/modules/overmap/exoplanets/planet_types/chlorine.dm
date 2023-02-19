@@ -23,7 +23,7 @@
 	return "#e5f2bd"
 
 /obj/effect/overmap/visitable/sector/exoplanet/chlorine/generate_map()
-	var/obj/abstract/level_data/level_data = zlevels[1]
+	var/datum/level_data/level_data = zlevels[1]
 	if(prob(50))
 		level_data.ambient_light_level = rand(7,10)/10 //It could be night.
 	else

@@ -63398,7 +63398,7 @@
 /turf/simulated/floor/tiled/steel_grid,
 /area/ship/exodus_pod_mining)
 "doN" = (
-/obj/abstract/level_data/main_level{
+/obj/abstract/landmark/level_data_spawner/main_level{
 	name = "Exodus Operations Deck";
 },
 /turf/space,

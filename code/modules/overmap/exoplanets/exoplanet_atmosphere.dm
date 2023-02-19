@@ -10,13 +10,13 @@
 
 	//Skip fun gas gen for perfect terran worlds
 	if(habitability_class == HABITABILITY_IDEAL)
-		for(var/obj/abstract/level_data/level_data in zlevels)
+		for(var/datum/level_data/level_data in zlevels)
 			level_data.exterior_atmos_temp = target_temp
 			level_data.exterior_atmosphere = list(
 				/decl/material/gas/oxygen = MOLES_O2STANDARD,
 				/decl/material/gas/nitrogen = MOLES_N2STANDARD
 			)
-			level_data.setup_level_data()
+			level_data.setup_level_data() //#FIXME: That's not very nice! Calling this again, when it should have been called before?
 		return
 
 	var/total_moles = MOLES_CELLSTANDARD
@@ -90,7 +90,7 @@
 	for(var/g in gas_list)
 		var/adjusted_moles = gas_list[g] * target_moles / MOLES_CELLSTANDARD
 		set_gasmix[g] = adjusted_moles
-	for(var/obj/abstract/level_data/level_data in zlevels)
+	for(var/datum/level_data/level_data in zlevels)
 		level_data.exterior_atmos_temp = target_temp
 		level_data.exterior_atmosphere = set_gasmix.Copy()
 		level_data.setup_level_data()

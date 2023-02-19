@@ -222,8 +222,8 @@
 		if(length(possible_locations))
 			newz = pick(possible_locations)
 	if(!newz)
-		var/obj/abstract/level_data/level = SSmapping.increment_world_z_size(/obj/abstract/level_data/space)
-		newz = level?.my_z
+		var/datum/level_data/level = SSmapping.increment_world_z_size(/datum/level_data/space)
+		newz = level?.level_z
 
 	if(newz)
 		var/turf/nloc = locate(rand(TRANSITIONEDGE, world.maxx-TRANSITIONEDGE), rand(TRANSITIONEDGE, world.maxy-TRANSITIONEDGE), newz)

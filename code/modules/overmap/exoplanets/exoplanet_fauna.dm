@@ -29,7 +29,7 @@
 		A.SetName("alien creature")
 		A.real_name = "alien creature"
 		A.verbs |= /mob/living/simple_animal/proc/name_species
-	var/obj/abstract/level_data/level_data = zlevels[1]
+	var/datum/level_data/level_data = zlevels[1]
 	if(level_data.exterior_atmosphere)
 		//Set up gases for living things
 		var/list/all_gasses = decls_repository.get_decl_paths_of_subtype(/decl/material/gas)

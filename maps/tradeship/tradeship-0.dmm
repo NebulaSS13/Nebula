@@ -1631,7 +1631,7 @@
 /turf/simulated/floor,
 /area/ship/trade/fore_port_underside_maint)
 "Dt" = (
-/obj/abstract/level_data/main_level{
+/obj/abstract/landmark/level_data_spawner/main_level{
 	name = "Tradeship Basement Deck";
 },
 /turf/space,

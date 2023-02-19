@@ -20,7 +20,7 @@
 /turf/simulated/wall,
 /area/test_area/proximity)
 "Q" = (
-/obj/abstract/level_data/debug,
+/obj/abstract/landmark/level_data_spawner/debug,
 /turf/space,
 /area/space)
 

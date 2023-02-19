@@ -18,7 +18,7 @@
 	description = "An abandoned supply base."
 	suffixes = list("lost_supply_base/lost_supply_base.dmm")
 	cost = 1
-	level_data_type = /obj/abstract/level_data/mining_level
+	level_data_type = /datum/level_data/mining_level
 	area_usage_test_exempted_root_areas = list(/area/lost_supply_base)
 	apc_test_exempt_areas = list(
 		/area/lost_supply_base/solar = NO_SCRUBBER|NO_VENT

@@ -52,7 +52,7 @@ SUBSYSTEM_DEF(unit_tests)
 /datum/controller/subsystem/unit_tests/proc/load_template(datum/map_template/map_template)
 	// Suggestion: Do smart things here to squeeze as many templates as possible into the same Z-level
 	if(map_template.tallness == 1)
-		SSmapping.increment_world_z_size(/obj/abstract/level_data/unit_test)
+		SSmapping.increment_world_z_size(/datum/level_data/unit_test)
 		var/corner = locate(world.maxx/2, world.maxy/2, world.maxz)
 		log_unit_test("Loading template '[map_template]' ([map_template.type]) at [log_info_line(corner)]")
 		map_template.load(corner)
