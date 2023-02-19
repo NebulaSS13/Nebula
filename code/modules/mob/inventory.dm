@@ -73,7 +73,7 @@ var/global/list/slot_equipment_priority = list( \
 //puts the item "W" into an appropriate slot in a human's inventory
 //returns 0 if it cannot, 1 if successful
 /mob/proc/equip_to_appropriate_slot(obj/item/W, var/skip_store = 0)
-	if(!istype(W)) 
+	if(!istype(W))
 		return FALSE
 	for(var/slot in slot_equipment_priority)
 		if(skip_store)
@@ -275,9 +275,9 @@ var/global/list/slot_equipment_priority = list( \
 /mob/proc/get_equipped_item(var/slot)
 	SHOULD_CALL_PARENT(TRUE)
 	switch(slot)
-		if(slot_back_str) 
+		if(slot_back_str)
 			return back
-		if(slot_wear_mask_str) 
+		if(slot_wear_mask_str)
 			return wear_mask
 
 /mob/proc/get_equipped_items(var/include_carried = 0)
@@ -327,3 +327,7 @@ var/global/list/slot_equipment_priority = list( \
 
 /mob/proc/can_be_buckled(var/mob/user)
 	. = user.Adjacent(src) && !istype(user, /mob/living/silicon/pai)
+
+/// If this proc returns false, reconsider_client_screen_presence will set the item's screen_loc to null.
+/mob/proc/item_should_have_screen_presence(obj/item/item, slot)
+	return hud_used && slot && (client.mob.hud_used.inventory_shown || !(slot in client.mob.hud_used.hidden_inventory_slots))
