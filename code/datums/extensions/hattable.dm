@@ -11,7 +11,7 @@
 	..()
 
 /datum/extension/hattable/proc/wear_hat(var/mob/wearer, var/obj/item/clothing/head/new_hat)
-	if(hat || !new_hat)
+	if(hat || !istype(new_hat))
 		return FALSE
 	hat = new_hat
 	hat.forceMove(wearer)
