@@ -993,7 +993,7 @@ modules/mob/living/carbon/human/life.dm if you die, you will be zoomed out.
 		screen_loc = null
 	else if(client)
 		client.screen |= src
-		if(!client.mob || !client.mob.hud_used || !slot || (!client.mob.hud_used.inventory_shown && (slot in client.mob.hud_used.hidden_inventory_slots)))
+		if(!client.mob?.item_should_have_screen_presence(src, slot))
 			screen_loc = null
 
 /obj/item/proc/gives_weather_protection()
