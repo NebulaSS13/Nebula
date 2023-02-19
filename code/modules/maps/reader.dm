@@ -57,7 +57,7 @@ var/global/dmm_suite/preloader/_preloader = new
 	#endif
 	Master.StopLoadingMap()
 
-/dmm_suite/proc/load_map_impl(dmm_file, x_offset, y_offset, z_offset, cropMap, measureOnly, no_changeturf, clear_contents, x_lower = -INFINITY, x_upper = INFINITY, y_lower = -INFINITY, y_upper = INFINITY, initialized_areas_by_type, level_data_type = /obj/abstract/level_data/space)
+/dmm_suite/proc/load_map_impl(dmm_file, x_offset, y_offset, z_offset, cropMap, measureOnly, no_changeturf, clear_contents, x_lower = -INFINITY, x_upper = INFINITY, y_lower = -INFINITY, y_upper = INFINITY, initialized_areas_by_type, level_data_type = /datum/level_data/space)
 	var/tfile = dmm_file//the map file we're creating
 	if(isfile(tfile))
 		tfile = safe_file2text(tfile, FALSE)

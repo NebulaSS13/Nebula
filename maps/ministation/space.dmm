@@ -454,7 +454,7 @@
 /turf/space/transit/north,
 /area/space)
 "YY" = (
-/obj/abstract/level_data/admin_level,
+/obj/abstract/landmark/level_data_spawner/admin_level,
 /turf/space,
 /area/space)
 

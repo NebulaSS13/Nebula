@@ -41,7 +41,7 @@ SUBSYSTEM_DEF(ambience)
 
 	if(lit)
 		// Grab what we need to set ambient light from our level handler.
-		var/obj/abstract/level_data/level_data = SSmapping.levels_by_z[z]
+		var/datum/level_data/level_data = SSmapping.levels_by_z[z]
 		if(level_data?.ambient_light_level)
 			set_ambient_light(level_data.ambient_light_color, level_data.ambient_light_level)
 			return TRUE

@@ -31,12 +31,12 @@
 	if(prob(20))
 		overlay_detail = "asteroid[rand(0,9)]"
 	. = ..()
-	var/obj/abstract/level_data/mining_level/level = SSmapping.levels_by_z[z]
+	var/datum/level_data/mining_level/level = SSmapping.levels_by_z[z]
 	if(istype(level))
 		LAZYADD(level.mining_turfs, src)
 
 /turf/simulated/floor/asteroid/Destroy()
-	var/obj/abstract/level_data/mining_level/level = SSmapping.levels_by_z[z]
+	var/datum/level_data/mining_level/level = SSmapping.levels_by_z[z]
 	if(istype(level))
 		LAZYREMOVE(level.mining_turfs, src)
 	return ..()

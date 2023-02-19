@@ -89,9 +89,9 @@ SUBSYSTEM_DEF(mapping)
 	config.generate_map = TRUE
 #endif
 	for(var/z = 1 to world.maxz)
-		var/obj/abstract/level_data/level = levels_by_z[z]
+		var/datum/level_data/level = levels_by_z[z]
 		if(!istype(level))
-			level = new /obj/abstract/level_data/space(locate(round(world.maxx*0.5), round(world.maxy*0.5), z))
+			level = new /datum/level_data/space(z)
 			PRINT_STACK_TRACE("Missing z-level data object for z[num2text(z)]!")
 		level.setup_level_data()
 
@@ -141,9 +141,10 @@ SUBSYSTEM_DEF(mapping)
 // Z-Level procs after this point.
 /datum/controller/subsystem/mapping/proc/get_gps_level_name(var/z)
 	if(z)
-		var/obj/abstract/level_data/level = levels_by_z[z]
-		if(level?.name)
-			return level.get_gps_level_name()
+		var/datum/level_data/level = levels_by_z[z]
+		. = level?.get_display_name()
+		if(length(.))
+			return .
 	return "Unknown Sector"
 
 /datum/controller/subsystem/mapping/proc/reindex_lists()
@@ -162,8 +163,8 @@ SUBSYSTEM_DEF(mapping)
 		PRINT_STACK_TRACE("Missing z-level data type for z["[world.maxz]"]!")
 		return
 
-	var/obj/abstract/level_data/level = new new_level_type(locate(round(world.maxx*0.5), round(world.maxz*0.5), world.maxz), defer_setup)
-	level.initialize_level()
+	var/datum/level_data/level = new new_level_type(world.maxz, defer_setup)
+	level.initialize_new_level()
 	return level
 
 /datum/controller/subsystem/mapping/proc/get_connected_levels(z)
@@ -177,7 +178,7 @@ SUBSYSTEM_DEF(mapping)
 		. |= level+1
 	// Check stack for any laterally connected neighbors.
 	for(var/tz in .)
-		var/obj/abstract/level_data/level = levels_by_z[tz]
+		var/datum/level_data/level = levels_by_z[tz]
 		if(level)
 			level.find_connected_levels(.)
 
@@ -196,3 +197,28 @@ SUBSYSTEM_DEF(mapping)
 		connected_z_cache.len = zA
 	connected_z_cache[zA] = new_entry
 	return new_entry[zB]
+
+/// Registers all the needed infos from a level_data into the mapping subsystem
+/datum/controller/subsystem/mapping/proc/register_level_data(var/datum/level_data/LD)
+	if(LD.base_turf)
+		SSmapping.base_turf_by_z[LD.level_z] = LD.base_turf
+	if(LD.level_flags & ZLEVEL_STATION)
+		SSmapping.station_levels |= LD.level_z
+	if(LD.level_flags & ZLEVEL_ADMIN)
+		SSmapping.admin_levels   |= LD.level_z
+	if(LD.level_flags & ZLEVEL_CONTACT)
+		SSmapping.contact_levels |= LD.level_z
+	if(LD.level_flags & ZLEVEL_PLAYER)
+		SSmapping.player_levels  |= LD.level_z
+	if(LD.level_flags & ZLEVEL_SEALED)
+		SSmapping.sealed_levels  |= LD.level_z
+	return TRUE
+
+/datum/controller/subsystem/mapping/proc/unregister_level_data(var/datum/level_data/LD)
+	SSmapping.base_turf_by_z[LD.level_z] = world.turf
+	SSmapping.station_levels -= LD.level_z
+	SSmapping.admin_levels   -= LD.level_z
+	SSmapping.contact_levels -= LD.level_z
+	SSmapping.player_levels  -= LD.level_z
+	SSmapping.sealed_levels  -= LD.level_z
+	return TRUE

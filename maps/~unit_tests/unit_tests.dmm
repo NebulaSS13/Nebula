@@ -70,7 +70,7 @@
 /turf/space,
 /area/test_area/general)
 "X" = (
-/obj/abstract/level_data/debug,
+/obj/abstract/landmark/level_data_spawner/debug,
 /turf/unsimulated/floor{
 	icon_state = "hydrofloor"
 	},

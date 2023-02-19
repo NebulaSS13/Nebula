@@ -42,7 +42,7 @@
 	prefix = "mods/content/government/away_sites/"
 	suffixes = list("icarus/icarus-1.dmm", "icarus/icarus-2.dmm")
 	cost = 2
-	level_data_type = /obj/abstract/level_data/mining_level
+	level_data_type = /datum/level_data/mining_level
 	area_usage_test_exempted_root_areas = list(/area/icarus)
 	area_coherency_test_exempt_areas = list(/area/icarus/vessel, /area/icarus/open)
 	apc_test_exempt_areas = list(

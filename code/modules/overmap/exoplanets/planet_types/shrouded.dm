@@ -20,7 +20,7 @@
 
 // TODO check if ambient lighting handles negatives
 /obj/effect/overmap/visitable/sector/exoplanet/meat/generate_map()
-	var/obj/abstract/level_data/level_data = zlevels[1]
+	var/datum/level_data/level_data = zlevels[1]
 	level_data.ambient_light_level = -0.15
 	..()
 

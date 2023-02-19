@@ -20,7 +20,7 @@
 	description = "Asteroid with slavers base inside."
 	suffixes = list("slavers/slavers_base.dmm")
 	cost = 1
-	level_data_type = /obj/abstract/level_data/mining_level
+	level_data_type = /datum/level_data/mining_level
 	area_usage_test_exempted_root_areas = list(/area/slavers_base)
 	apc_test_exempt_areas = list(
 		/area/slavers_base/hangar = NO_SCRUBBER

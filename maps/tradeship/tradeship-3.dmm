@@ -567,7 +567,7 @@
 /turf/simulated/floor/plating,
 /area/ship/trade/bridge_unused)
 "dm" = (
-/obj/abstract/level_data/main_level{
+/obj/abstract/landmark/level_data_spawner/main_level{
 	name = "Tradeship Upper Deck";
 },
 /turf/space,

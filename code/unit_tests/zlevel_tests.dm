@@ -4,7 +4,7 @@
 /datum/unit_test/all_zlevels_will_have_a_non_filler_data_object/start_test()
 	var/list/failures = list()
 	for(var/z = 1 to world.maxz)
-		var/obj/abstract/level_data/level_data = SSmapping.levels_by_z[z]
+		var/datum/level_data/level_data = SSmapping.levels_by_z[z]
 		if(!level_data)
 			failures += "z[z] has no level data object"
 	if(length(failures))

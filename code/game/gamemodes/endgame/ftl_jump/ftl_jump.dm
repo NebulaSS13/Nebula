@@ -9,12 +9,12 @@
 	affected_levels = zlevels
 
 /datum/universal_state/jump/OnEnter()
-	var/obj/abstract/level_data/space_zlevel = SSmapping.increment_world_z_size(/obj/abstract/level_data/space) //get a place for stragglers
+	var/datum/level_data/space_zlevel = SSmapping.increment_world_z_size(/datum/level_data/space) //get a place for stragglers
 	for(var/mob/living/M in SSmobs.mob_list)
 		if(M.z in affected_levels)
 			var/area/A = get_area(M)
 			if(istype(A,/area/space)) //straggler
-				var/turf/T = locate(M.x, M.y, space_zlevel.my_z)
+				var/turf/T = locate(M.x, M.y, space_zlevel.level_z)
 				if(T)
 					M.forceMove(T)
 			else

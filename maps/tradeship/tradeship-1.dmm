@@ -2047,7 +2047,7 @@
 /turf/simulated/floor/tiled/techfloor,
 /area/ship/trade/maintenance/techstorage)
 "iS" = (
-/obj/abstract/level_data/main_level{
+/obj/abstract/landmark/level_data_spawner/main_level{
 	name = "Tradeship Cargo Deck";
 },
 /turf/space,

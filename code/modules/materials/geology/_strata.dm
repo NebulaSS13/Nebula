@@ -7,7 +7,7 @@
 	var/maximum_temperature = INFINITY
 
 /decl/strata/proc/is_valid_exoplanet_strata(var/obj/effect/overmap/visitable/sector/exoplanet/planet)
-	var/obj/abstract/level_data/level_data = planet?.zlevels[1]
+	var/datum/level_data/level_data = planet?.zlevels[1]
 	var/check_temp = level_data?.exterior_atmosphere?.temperature || 0
 	. = check_temp <= maximum_temperature
 

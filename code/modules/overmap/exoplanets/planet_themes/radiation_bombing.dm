@@ -3,7 +3,7 @@
 
 /datum/exoplanet_theme/radiation_bombing/adjust_atmosphere(obj/effect/overmap/visitable/sector/exoplanet/E)
 	var/add_temp = rand(20, 100)
-	for(var/obj/abstract/level_data/level_data in E.zlevels)
+	for(var/datum/level_data/level_data in E.zlevels)
 		level_data.exterior_atmos_temp += add_temp
 		if(level_data.exterior_atmosphere)
 			level_data.exterior_atmosphere.temperature = level_data.exterior_atmos_temp

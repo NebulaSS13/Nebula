@@ -9,7 +9,7 @@
 	var/use_mapped_z_levels = FALSE                     // If true, it will use the z level block on which it's mapped as the "Open Space" block; if false it creates a new block for that.
 	                                                    // If you use this, use /obj/effect/shuttle_landmark/ship as the landmark (set the landmark tag to match on the shuttle; no other setup needed)
 	var/status = SHIP_STATUS_LANDED
-	var/level_type = /obj/abstract/level_data/space
+	var/level_type = /datum/level_data/space
 	icon_state = "shuttle"
 	moving_state = "shuttle_moving"
 
