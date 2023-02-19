@@ -4,6 +4,7 @@
 var/global/const/DEFAULT_SPECIES_HEALTH = 200
 
 /decl/species
+	abstract_type = /decl/species
 
 	// Descriptors and strings.
 	var/name
@@ -539,7 +540,7 @@ var/global/const/DEFAULT_SPECIES_HEALTH = 200
 		if(heat_level_2 < heat_level_1)
 			. += "heat_level_2 ([heat_level_2]) was not higher than heat_level_1 ([heat_level_1])"
 
-	if(max(cold_level_1, cold_level_2, cold_level_3) <= min(heat_level_1, heat_level_2, heat_level_3))
+	if(min(heat_level_1, heat_level_2, heat_level_3) <= max(cold_level_1, cold_level_2, cold_level_3))
 		. += "heat and cold damage level thresholds overlap"
 
 	if(taste_sensitivity < 0)
