@@ -475,7 +475,6 @@ var/global/const/DEFAULT_SPECIES_HEALTH = 200
 		if(!T.validate_level(trait_level))
 			. += "invalid levels for species trait [trait_type]"
 
-
 	if(base_low_light_vision > 1)
 		. += "base low light vision is greater than 1 (over 100%)"
 	else if(base_low_light_vision < 0)
@@ -495,6 +494,56 @@ var/global/const/DEFAULT_SPECIES_HEALTH = 200
 		. += "low light vision adjustment speed is greater than 1 (over 100%)"
 	else if(low_light_vision_adjustment_speed < 0)
 		. += "low light vision adjustment speed is less than 0 (below 0%)"
+
+	if((appearance_flags & HAS_SKIN_COLOR) && isnull(base_color))
+		. += "uses skin color but missing base_color"
+	if((appearance_flags & HAS_HAIR_COLOR) && isnull(base_hair_color))
+		. += "uses hair color but missing base_hair_color"
+	if((appearance_flags & HAS_EYE_COLOR) && isnull(base_eye_color))
+		. += "uses eye color but missing base_eye_color"
+	if(isnull(default_h_style))
+		. += "null default_h_style (use a bald/hairless hairstyle if 'no hair' is intended)"
+	if(isnull(default_f_style))
+		. += "null default_f_style (use a shaved/hairless facial hair style if 'no facial hair' is intended)"
+	if(!length(blood_types))
+		. += "missing at least one blood type"
+	if(default_bodytype && !(default_bodytype in available_bodytypes))
+		. += "default bodytype is not in available bodytypes list"
+	if(!length(available_bodytypes))
+		. += "missing at least one bodytype"
+	// TODO: Maybe make age descriptors optional, in case someone wants a 'timeless entity' species?
+	if(isnull(age_descriptor))
+		. += "age descriptor was unset"
+	else if(!ispath(age_descriptor, /datum/appearance_descriptor/age))
+		. += "age descriptor was not a /datum/appearance_descriptor/age subtype"
+
+	if(cold_level_3)
+		if(cold_level_2)
+			if(cold_level_3 > cold_level_2)
+				. += "cold_level_3 ([cold_level_3]) was not lower than cold_level_2 ([cold_level_2])"
+			if(cold_level_1)
+				if(cold_level_3 > cold_level_1)
+					. += "cold_level_3 ([cold_level_3]) was not lower than cold_level_1 ([cold_level_1])"
+	if(cold_level_2 && cold_level_1)
+		if(cold_level_2 > cold_level_1)
+			. += "cold_level_2 ([cold_level_2]) was not lower than cold_level_1 ([cold_level_1])"
+
+	if(heat_level_3 != INFINITY)
+		if(heat_level_2 != INFINITY)
+			if(heat_level_3 < heat_level_2)
+				. += "heat_level_3 ([heat_level_3]) was not higher than heat_level_2 ([heat_level_2])"
+			if(heat_level_1 != INFINITY)
+				if(heat_level_3 < heat_level_1)
+					. += "heat_level_3 ([heat_level_3]) was not higher than heat_level_1 ([heat_level_1])"
+	if((heat_level_2 != INFINITY) && (heat_level_1 != INFINITY))
+		if(heat_level_2 < heat_level_1)
+			. += "heat_level_2 ([heat_level_2]) was not higher than heat_level_1 ([heat_level_1])"
+
+	if(max(cold_level_1, cold_level_2, cold_level_3) <= min(heat_level_1, heat_level_2, heat_level_3))
+		. += "heat and cold damage level thresholds overlap"
+
+	if(taste_sensitivity < 0)
+		. += "taste_sensitivity ([taste_sensitivity]) was negative"
 
 /decl/species/proc/equip_survival_gear(var/mob/living/carbon/human/H, var/box_type = /obj/item/storage/box/survival)
 	var/obj/item/storage/backpack/backpack = H.get_equipped_item(slot_back_str)
