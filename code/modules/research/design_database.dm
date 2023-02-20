@@ -14,6 +14,9 @@ var/global/list/default_initial_tech_levels
 	icon_state = "blackbox"
 	density = TRUE
 	anchored = TRUE
+	construct_state = /decl/machine_construction/default/panel_closed
+	uncreated_component_parts = null
+	stat_immune = 0
 
 	var/initial_network_id
 	var/initial_network_key
