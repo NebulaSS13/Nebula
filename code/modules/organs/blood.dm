@@ -290,13 +290,10 @@
 /mob/living/carbon/human/proc/get_blood_volume()
 	return species.blood_volume? round((vessel.total_volume/species.blood_volume)*100) : 0
 
-//Percentage of maximum blood volume, affected by the condition of circulation organs
-/mob/living/carbon/human/proc/get_blood_circulation()
+/mob/living/carbon/human/proc/get_pulse_mod()
 	var/obj/item/organ/internal/heart/heart = get_organ(BP_HEART, /obj/item/organ/internal/heart)
-	var/blood_volume = get_blood_volume()
 	if(!heart)
-		return 0.25 * blood_volume
-
+		return 0.25
 	var/recent_pump = LAZYACCESS(heart.external_pump, 1) > world.time - (20 SECONDS)
 	var/pulse_mod = 1
 	if((status_flags & FAKEDEATH) || BP_IS_PROSTHETIC(heart))
@@ -314,7 +311,16 @@
 				pulse_mod *= 1.1
 			if(PULSE_2FAST, PULSE_THREADY)
 				pulse_mod *= 1.25
-	blood_volume *= pulse_mod
+	return pulse_mod
+
+//Percentage of maximum blood volume, affected by the condition of circulation organs
+/mob/living/carbon/human/proc/get_blood_circulation()
+	var/obj/item/organ/internal/heart/heart = get_organ(BP_HEART, /obj/item/organ/internal/heart)
+	var/blood_volume = get_blood_volume() * get_pulse_mod()
+	if(!heart)
+		return blood_volume
+
+	var/recent_pump = LAZYACCESS(heart.external_pump, 1) > world.time - (20 SECONDS)
 
 	if(lying)
 		blood_volume *= 1.25

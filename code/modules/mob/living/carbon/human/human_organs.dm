@@ -315,3 +315,7 @@
 /mob/living/carbon/human/delete_organs()
 	. = ..()
 	LAZYCLEARLIST(bad_external_organs)
+
+/mob/living/carbon/human/inject_external_organ(obj/item/organ/external/limb, datum/reagents/reagents, amount)
+	. = reagents.trans_to_holder(limb.reagents, amount)
+	recheck_bad_external_organs() // force a recheck for reagent flow

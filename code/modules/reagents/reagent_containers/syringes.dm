@@ -209,7 +209,7 @@
 		mode = SYRINGE_DRAW
 		update_icon()
 
-/obj/item/chems/syringe/proc/handleBodyBag(var/obj/structure/closet/body_bag/bag, var/mob/living/carbon/user)
+/obj/item/chems/syringe/proc/handleBodyBag(var/obj/structure/closet/body_bag/bag, var/mob/living/user)
 	if(bag.opened || !bag.contains_body)
 		return
 
@@ -217,11 +217,13 @@
 	if(L)
 		injectMob(L, user, bag)
 
-/obj/item/chems/syringe/proc/injectMob(var/mob/living/carbon/target, var/mob/living/carbon/user, var/atom/trackTarget)
+/obj/item/chems/syringe/proc/injectMob(var/mob/living/target, var/mob/living/user, var/atom/trackTarget)
 	if(!trackTarget)
 		trackTarget = target
 
-	var/allow = target.can_inject(user, check_zone(user.zone_sel.selecting, target))
+	var/targeted_zone = check_zone(user.zone_sel.selecting, target)
+	var/obj/item/organ/external/targeted_organ = GET_EXTERNAL_ORGAN(target, targeted_zone)
+	var/allow = target.can_inject(user, targeted_zone)
 	if(!allow)
 		return
 
@@ -241,59 +243,56 @@
 	user.setClickCooldown(DEFAULT_QUICK_COOLDOWN)
 	user.do_attack_animation(trackTarget)
 
+	// TODO: make it faster/easier if we have a tourniquet on, since the vein is visible
 	if(!user.do_skilled(time, SKILL_MEDICAL, trackTarget))
 		return
 
 	if(target != user && target != trackTarget && target.loc != trackTarget)
 		return
 	admin_inject_log(user, target, src, reagents.get_reagents(), amount_per_transfer_from_this)
-	var/trans = reagents.trans_to_mob(target, amount_per_transfer_from_this, CHEM_INJECT)
-
+	var/trans = target.inject_external_organ(targeted_organ, reagents, amount_per_transfer_from_this)
 	if(target != user)
-		user.visible_message(SPAN_WARNING("\the [user] injects \the [target] with [visible_name]!"), SPAN_NOTICE("You inject \the [target] with [trans] units of the solution. \The [src] now contains [src.reagents.total_volume] units."))
+		var/decl/pronouns/target_pronouns = target.get_visible_pronouns(target.get_equipment_visibility())
+		user.visible_message(SPAN_WARNING("\The [user] injects \the [target] in [target_pronouns.his] [targeted_organ.name] with [visible_name]!"), SPAN_NOTICE("You inject \the [target] in [target_pronouns.his] [targeted_organ.name] with [trans] units of the solution. \The [src] now contains [src.reagents.total_volume] units."))
 	else
-		to_chat(user, SPAN_NOTICE("You inject yourself with [trans] units of the solution. \The [src] now contains [src.reagents.total_volume] units."))
+		to_chat(user, SPAN_NOTICE("You inject yourself in \the [targeted_organ] with [trans] units of the solution. \The [src] now contains [src.reagents.total_volume] units."))
 
 	if(reagents.total_volume <= 0 && mode == SYRINGE_INJECT)
 		mode = SYRINGE_DRAW
 		update_icon()
 
-/obj/item/chems/syringe/proc/syringestab(var/mob/living/carbon/target, var/mob/living/carbon/user)
+/obj/item/chems/syringe/proc/syringestab(var/mob/living/target, var/mob/living/carbon/user)
+	var/target_zone = check_zone(user.zone_sel.selecting, target)
+	var/obj/item/organ/external/affecting = GET_EXTERNAL_ORGAN(target, target_zone)
+	if(istype(target, /mob/living/carbon) && !affecting) // only check if the limb exists if we should have limbs to begin with
+		to_chat(user, SPAN_DANGER("They are missing that limb!"))
+		return
 
-	if(istype(target, /mob/living/carbon/human))
-
-		var/mob/living/carbon/human/H = target
-
-		var/target_zone = check_zone(user.zone_sel.selecting, H)
-		var/obj/item/organ/external/affecting = GET_EXTERNAL_ORGAN(H, target_zone)
-
-		if (!affecting)
-			to_chat(user, SPAN_DANGER("They are missing that limb!"))
+	if(target != user) // When done on someone else it's treated as an attack.
+		if(target.check_shields(7, src, user, "\the [src]"))
 			return
 
-		var/hit_area = affecting.name
-
-		if((user != target) && H.check_shields(7, src, user, "\the [src]"))
-			return
-
-		if (target != user && H.get_blocked_ratio(target_zone, BRUTE, damage_flags=DAM_SHARP) > 0.1 && prob(50))
-			user.visible_message(SPAN_WARNING("\The [user] tries to stab \the [target] in \the [hit_area] with \the [src], but the attack is deflected by armor!"))
+		if (target.get_blocked_ratio(target_zone, BRUTE, damage_flags=DAM_SHARP) > 0.1 && prob(50))
+			if(affecting) // might not be a mob type with limbs
+				user.visible_message(SPAN_WARNING("\The [user] tries to stab \the [target] in \the [affecting] with \the [src], but the attack is deflected by armor!"))
+			else
+				user.visible_message(SPAN_WARNING("\The [user] tries to stab \the [target] with \the [src], but the attack is deflected by armor!"))
 			qdel(src)
 
 			admin_attack_log(user, target, "Attacked using \a [src]", "Was attacked with \a [src]", "used \a [src] to attack")
 			return
 
-		user.visible_message(SPAN_DANGER("[user] stabs [target] in \the [hit_area] with [src.name]!"))
-		target.apply_damage(3, BRUTE, target_zone, damage_flags=DAM_SHARP)
-
+	if(affecting)
+		user.visible_message(SPAN_DANGER("[user] stabs [target] in \the [affecting] with \the [src]!"))
 	else
-		user.visible_message(SPAN_DANGER("[user] stabs [target] with [src.name]!"))
-		target.apply_damage(3, BRUTE)
+		user.visible_message(SPAN_DANGER("[user] stabs [target] with \the [src]!"))
+	target.apply_damage(3, BRUTE, target_zone, damage_flags=DAM_SHARP)
 
 	var/syringestab_amount_transferred = rand(0, (reagents.total_volume - 5)) //nerfed by popular demand
 	var/contained_reagents = reagents.get_reagents()
-	var/trans = reagents.trans_to_mob(target, syringestab_amount_transferred, CHEM_INJECT)
-	if(isnull(trans)) trans = 0
+	var/trans = target.inject_external_organ(affecting, reagents, syringestab_amount_transferred)
+	if(isnull(trans))
+		trans = 0
 	admin_inject_log(user, target, src, contained_reagents, trans, violent=1)
 	break_syringe(target, user)
 

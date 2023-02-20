@@ -112,16 +112,6 @@ meteor_act
 		if(istype(gear) && (gear.body_parts_covered & SLOT_FACE) && !(gear.item_flags & ITEM_FLAG_FLEXIBLEMATERIAL))
 			return gear
 
-/mob/living/carbon/human/proc/check_shields(var/damage = 0, var/atom/damage_source = null, var/mob/attacker = null, var/def_zone = null, var/attack_text = "the attack")
-	var/list/checking_slots = get_held_items()
-	var/obj/item/suit = get_equipped_item(slot_wear_suit_str)
-	if(suit)
-		LAZYDISTINCTADD(checking_slots, suit)
-	for(var/obj/item/shield in checking_slots)
-		if(shield.handle_shield(src, damage, damage_source, attacker, def_zone, attack_text))
-			return TRUE
-	return FALSE
-
 /mob/living/carbon/human/resolve_item_attack(obj/item/I, mob/living/user, var/target_zone)
 
 	for (var/obj/item/grab/G in grabbed_by)

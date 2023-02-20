@@ -686,6 +686,9 @@ This function completely restores a damaged organ to perfect condition.
 	if(length(ailments))
 		return TRUE
 
+	if(reagents.total_volume)
+		return TRUE
+
 	if(status & (ORGAN_CUT_AWAY|ORGAN_BLEEDING|ORGAN_BROKEN|ORGAN_DEAD|ORGAN_MUTATED|ORGAN_DISLOCATED))
 		return TRUE
 
@@ -719,6 +722,8 @@ This function completely restores a damaged organ to perfect condition.
 			update_wounds()
 		//Infections
 		update_germs()
+		// Circulate reagents
+		handle_flow()
 	else
 		pain = 0
 	..()
@@ -1628,3 +1633,27 @@ Note that amputating the affected organ does in fact remove the infection from t
 					vital_to_owner = TRUE
 					break
 	return vital_to_owner
+
+/obj/item/organ/external/proc/has_flow_to_parent()
+	if(!owner || !parent?.reagents)
+		return FALSE
+	// TODO: add tourniquet check here
+	return TRUE
+
+// Returns the number of reagents transferred.
+/obj/item/organ/external/proc/handle_flow()
+	if(!owner)
+		return 0
+	var/transfer_amount = owner.get_pulse_mod() // 0.25, 0.9, 1, 1.1, 1.25
+	// Every unit above 5u gives us an extra unit, up to a bonus of 5u
+	if(reagents.total_volume > 5)
+		transfer_amount += min(reagents.total_volume - 5, 5)
+	// TODO: generalize 'circulatory center' organs, maybe handle_flow on internal organs too?
+	var/obj/item/organ/internal/heart/heart = locate() in internal_organs
+	// Once we reach the heart, it spreads out to the entire mob and starts applying effects.
+	if(heart)
+		return reagents.trans_to_mob(owner, transfer_amount)
+	// Check for tourniquets, clots, etc.
+	if(!has_flow_to_parent())
+		return 0
+	return reagents.trans_to_holder(parent.reagents, transfer_amount)

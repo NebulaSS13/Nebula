@@ -115,9 +115,6 @@
 	create_reagents(5 * (w_class-1)**2)
 	. = ..()
 
-/obj/item/organ/populate_reagents()
-	reagents.add_reagent(/decl/material/liquid/nutriment/protein, reagents.maximum_volume)
-
 /obj/item/organ/proc/set_dna(var/datum/dna/new_dna)
 	QDEL_NULL(dna)
 	dna = new_dna.Clone()

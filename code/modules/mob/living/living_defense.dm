@@ -298,3 +298,17 @@
 	fire_act(air, temperature)
 	FireBurn(0.4*vsc.fire_firelevel_multiplier, temperature, pressure)
 	. =  (health <= 0) ? ..() : FALSE
+
+/mob/living/proc/check_shields(var/damage = 0, var/atom/damage_source = null, var/mob/attacker = null, var/def_zone = null, var/attack_text = "the attack")
+	var/list/checking_slots = get_held_items()
+	var/obj/item/suit = get_equipped_item(slot_wear_suit_str)
+	if(suit)
+		LAZYDISTINCTADD(checking_slots, suit)
+	for(var/obj/item/shield in checking_slots)
+		if(shield.handle_shield(src, damage, damage_source, attacker, def_zone, attack_text))
+			return TRUE
+	return FALSE
+
+/// Adds reagents to a limb if supported, or the mob otherwise. Used for syringe injections and human-level reagent circulation.
+/mob/living/proc/inject_external_organ(obj/item/organ/external/limb, datum/reagents/reagents, amount)
+	reagents.trans_to_mob(src, amount, CHEM_INJECT)
