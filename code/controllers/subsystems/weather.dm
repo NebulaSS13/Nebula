@@ -6,6 +6,7 @@ SUBSYSTEM_DEF(weather)
 	flags =      SS_BACKGROUND
 
 	var/list/weather_systems = list()
+	var/list/weather_by_z
 	var/list/processing_systems
 
 /datum/controller/subsystem/weather/stat_entry()
@@ -28,3 +29,40 @@ SUBSYSTEM_DEF(weather)
 		weather.tick()
 		if(MC_TICK_CHECK)
 			return
+
+///Sets a weather state to use for a given z level/z level stack.
+/datum/controller/subsystem/weather/proc/setup_weather_system(var/datum/level_data/topmost_level_data, var/decl/state/weather/initial_state)
+	//First check and clear any existing weather system on the level
+	var/obj/abstract/weather_system/WS = LAZYACCESS(weather_by_z, topmost_level_data.level_z)
+	if(WS)
+		unregister_weather_system(WS)
+		qdel(WS)
+	//Then create the new weather system
+	register_weather_system(new /obj/abstract/weather_system(locate(1, 1, topmost_level_data.level_z), topmost_level_data.level_z, initial_state))
+
+///Registers a given weather system obj for getting updates by SSweather.
+/datum/controller/subsystem/weather/proc/register_weather_system(var/obj/abstract/weather_system/WS)
+	if(LAZYACCESS(weather_by_z, WS.z))
+		CRASH("Trying to register another weather system on the same z-level([WS.z]) as an existing one!")
+	LAZYDISTINCTADD(weather_systems, WS)
+	if(weather_by_z.len < world.maxz)
+		weather_by_z.len = world.maxz
+
+	//Mark all affected z-levels
+	var/list/affected = SSmapping.get_connected_levels(WS.z)
+	for(var/Z in affected)
+		weather_by_z[Z] = WS
+
+///Remove a weather systeam from the processing lists.
+/datum/controller/subsystem/weather/proc/unregister_weather_system(var/obj/abstract/weather_system/WS)
+	//Clear any and all references to our weather object
+	for(var/Z = 1 to length(weather_by_z))
+		if(weather_by_z[Z] == WS)
+			weather_by_z[Z] = null
+	LAZYREMOVE(weather_systems, WS)
+
+///Returns the weather obj for a given z-level if it exists
+/datum/controller/subsystem/weather/proc/get_weather_for_level(var/z_level)
+	if(z_level > length(weather_by_z))
+		return null
+	return weather_by_z[z_level]

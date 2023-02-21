@@ -11,7 +11,7 @@
 		to_chat(usr, SPAN_WARNING("You need to have a turf to use this verb."))
 		return
 
-	var/obj/abstract/weather_system/weather = T.weather || global.weather_by_z["[T.z]"]
+	var/obj/abstract/weather_system/weather = T.weather || SSweather.get_weather_for_level(T.z)
 	if(!weather)
 		to_chat(usr, SPAN_WARNING("This z-level does not have weather."))
 		return
@@ -32,7 +32,7 @@
 		to_chat(usr, SPAN_WARNING("You need to have a turf to use this verb."))
 		return
 
-	var/obj/abstract/weather_system/weather = T.weather || global.weather_by_z["[T.z]"]
+	var/obj/abstract/weather_system/weather = T.weather || SSweather.get_weather_for_level(T.z)
 	if(weather)
 		to_chat(usr, SPAN_WARNING("This z-level already has weather."))
 		return
@@ -52,13 +52,13 @@
 		to_chat(usr, SPAN_WARNING("You need to have a turf to use this verb."))
 		return
 
-	var/obj/abstract/weather_system/weather = T.weather || global.weather_by_z["[T.z]"]
+	var/obj/abstract/weather_system/weather = T.weather || SSweather.get_weather_for_level(T.z)
 	if(!weather)
 		to_chat(usr, SPAN_WARNING("This z-level has no weather. Use <b>Initialize Weather For Level</b> if you want to create it."))
 		return
 
 	var/use_state = input(usr, "Which state do you wish to use?", "Target State") as null|anything in decls_repository.get_decl_paths_of_subtype(/decl/state/weather)
-	if(!use_state || weather != (T.weather || global.weather_by_z["[T.z]"]))
+	if(!use_state || weather != (T.weather || SSweather.get_weather_for_level(T.z)))
 		return
 	weather.weather_system.set_state(use_state)
 	var/decl/state/weather/weather_state = GET_DECL(use_state)

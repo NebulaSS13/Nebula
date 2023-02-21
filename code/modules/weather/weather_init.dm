@@ -1,7 +1,6 @@
 INITIALIZE_IMMEDIATE(/obj/abstract/weather_system)
 /obj/abstract/weather_system/Initialize(var/ml, var/target_z, var/initial_weather)
-
-	SSweather.weather_systems += src
+	SSweather.register_weather_system(src)
 
 	. = ..()
 
@@ -29,7 +28,6 @@ INITIALIZE_IMMEDIATE(/obj/abstract/weather_system)
 	for(var/tz in affecting_zs)
 		if(tz > highest_z)
 			highest_z = tz
-		global.weather_by_z["[tz]"] = src
 
 	// Update turf weather.
 	for(var/turf/T as anything in block(locate(1, 1, highest_z), locate(world.maxx, world.maxy, highest_z)))

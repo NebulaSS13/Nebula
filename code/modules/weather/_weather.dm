@@ -22,7 +22,6 @@
  *   instead.
  */
 
-var/global/list/weather_by_z = list()
 /obj/abstract/weather_system
 	plane =            DEFAULT_PLANE
 	layer =            ABOVE_PROJECTILE_LAYER
@@ -58,27 +57,25 @@ var/global/list/weather_by_z = list()
 
 
 /obj/abstract/weather_system/Destroy()
-	SSweather.weather_systems -= src
 	// Clean ourselves out of the vis_contents of our affected turfs.
 	for(var/tz in affecting_zs)
-		if(global.weather_by_z["[tz]"] == src)
-			global.weather_by_z -= "[tz]" 
 		for(var/turf/T as anything in block(locate(1, 1, tz), locate(world.maxx, world.maxy, tz)))
 			if(T.weather == src)
 				remove_vis_contents(T, vis_contents_additions)
 				T.weather = null
 	vis_contents_additions.Cut()
+	SSweather.unregister_weather_system(src)
 	QDEL_NULL(lightning_overlay)
 	. = ..()
 
 // Called by /turf/examine() to show current weather status.
-/obj/abstract/weather_system/examine(mob/user, distance)	
+/obj/abstract/weather_system/examine(mob/user, distance)
 	SHOULD_CALL_PARENT(FALSE)
 	var/decl/state/weather/weather_state = weather_system.current_state
 	if(istype(weather_state))
 		to_chat(user, weather_state.descriptor)
 	show_wind(user, force = TRUE)
-	
+
 // Called by /decl/state/weather to assess validity of a state in the weather FSM.
 /obj/abstract/weather_system/proc/supports_weather_state(var/decl/state/weather/next_state)
 	// Exoplanet stuff for the future:
