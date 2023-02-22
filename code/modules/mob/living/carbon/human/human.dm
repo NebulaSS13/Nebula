@@ -805,12 +805,14 @@
 	var/obj/item/organ/external/affecting = GET_EXTERNAL_ORGAN(src, target_zone)
 
 	if(!affecting)
-		to_chat(user, SPAN_WARNING("\The [src] is missing that limb."))
-		return 0
+		if(user)
+			to_chat(user, SPAN_WARNING("\The [src] is missing that limb."))
+		return FALSE
 
 	if(BP_IS_PROSTHETIC(affecting))
-		to_chat(user, SPAN_WARNING("That limb is prosthetic."))
-		return 0
+		if(user)
+			to_chat(user, SPAN_WARNING("That limb is prosthetic."))
+		return FALSE
 
 	. = CAN_INJECT
 	for(var/slot in list(slot_head_str, slot_wear_mask_str, slot_wear_suit_str, slot_w_uniform_str, slot_gloves_str, slot_shoes_str))
@@ -819,8 +821,9 @@
 			if(istype(C, /obj/item/clothing/suit/space))
 				. = INJECTION_PORT //it was going to block us, but it's a space suit so it doesn't because it has some kind of port
 			else
-				to_chat(user, "<span class='warning'>There is no exposed flesh or thin material on [src]'s [affecting.name] to inject into.</span>")
-				return 0
+				if(user)
+					to_chat(user, SPAN_WARNING("There is no exposed flesh or thin material on [src]'s [affecting.name] to inject into."))
+				return FALSE
 
 
 /mob/living/carbon/human/print_flavor_text(var/shrink = 1)

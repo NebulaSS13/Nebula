@@ -72,8 +72,9 @@
 	)
 
 /mob/living/carbon/human/quantum/can_inject(mob/user, target_zone)
-	to_chat(user, SPAN_DANGER("\The [src] disarms you before you can inject them."))
-	user.drop_item()
+	if(user)
+		to_chat(user, SPAN_DANGER("\The [src] disarms you before you can inject them."))
+		user.drop_item()
 	return FALSE
 
 /mob/living/carbon/human/quantum/binarycheck()
