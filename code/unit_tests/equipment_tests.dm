@@ -93,3 +93,45 @@
 		bad_tests++
 
 	return bad_tests
+
+// ============================================================================
+
+/datum/unit_test/equipment_slot_test
+	name = "EQUIPMENT: Equip procs should pass tests"
+
+/datum/unit_test/equipment_slot_test/proc/check_slot_successful(mob/living/carbon/human/subject, obj/item/item, which_slot, list/failure_list)
+	subject.equip_to_slot_if_possible(item, which_slot)
+	if(!subject.isEquipped(item))
+		failure_list += "[item] was equipped to [which_slot] but failed isEquipped."
+	else if(subject.get_equipped_slot_for_item(item) != which_slot)
+		var/equipped_location = subject.get_equipped_slot_for_item(item)
+		failure_list += "[item] was expected to be equipped to [which_slot] but get_equipped_slot_for_item returned [isnull(equipped_location) ? "NULL" : equipped_location]."
+	subject.unEquip(item)
+	if(subject.isEquipped(item))
+		failure_list += "[item] remained equipped to [subject.get_equipped_slot_for_item(item)] after unEquip was called."
+
+/datum/unit_test/equipment_slot_test/proc/check_slot_failure(mob/living/carbon/human/subject, obj/item/item, which_slot, list/failure_list)
+	subject.equip_to_slot_if_possible(item, which_slot)
+	if(subject.isEquipped(item))
+		var/equipped_location = subject.get_equipped_slot_for_item(item)
+		failure_list += "isEquipped([item]) returned true but should have failed (was equipped to [isnull(equipped_location) ? "NULL" : equipped_location])."
+	else if(subject.get_equipped_slot_for_item(item))
+		var/equipped_location = subject.get_equipped_slot_for_item(item)
+		failure_list += "[item] was equipped to [equipped_location] despite failing isEquipped (should not be equipped)."
+
+/datum/unit_test/equipment_slot_test/start_test()
+	var/mob/living/carbon/human/subject = new(get_safe_turf())
+	var/obj/item/clothing/head/hairflower/flower = new
+	var/list/failures = list()
+	check_slot_successful(subject, flower, slot_head_str, failures)
+	check_slot_successful(subject, flower, slot_l_ear_str, failures)
+	check_slot_successful(subject, flower, slot_r_ear_str, failures)
+	check_slot_failure(subject, flower, slot_back_str, failures)
+	if(length(failures))
+		fail("[length(failures)] problems with equipment slots:\n\t- [jointext(failures,"\n\t- ")]")
+	else
+		pass("No problems with equipment slots detected.")
+	QDEL_NULL(subject)
+	QDEL_NULL(flower)
+
+	return TRUE
