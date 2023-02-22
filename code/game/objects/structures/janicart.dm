@@ -162,7 +162,6 @@
 	if(signs)
 		add_overlay("cart_sign[signs]")
 
-//old style retardo-cart
 /datum/movement_handler/move_relay_self/janicart/MayMove(mob/mover, is_external)
 	. = ..()
 	if(. == MOVEMENT_PROCEED && !is_external && !(locate(/obj/item/janicart_key) in mover.get_held_items()))
@@ -170,6 +169,7 @@
 		to_chat(mover, SPAN_WARNING("You'll need the keys in one of your hands to drive this [istype(janicart) ? janicart.callme : host.name]."))
 		return MOVEMENT_STOP
 
+//old style cart
 /obj/structure/bed/chair/janicart
 	name = "janicart"
 	icon = 'icons/obj/vehicles.dmi'
