@@ -84,9 +84,8 @@
 
 	for(var/obj/effect/effect/smoke/chem/smoke in view(1, src))
 		if(smoke.reagents.total_volume)
-			smoke.reagents.trans_to_mob(src, 5, CHEM_INGEST, copy = 1)
-			smoke.reagents.trans_to_mob(src, 5, CHEM_INJECT, copy = 1)
-			// I dunno, maybe the reagents enter the blood stream through the lungs?
+			//maybe check air pressure here or something to see if breathing in smoke is even possible.
+			smoke.reagents.trans_to_mob(src, 10, CHEM_INHALE, copy = TRUE)
 			break // If they breathe in the nasty stuff once, no need to continue checking
 
 /mob/living/carbon/proc/get_breath_volume()
