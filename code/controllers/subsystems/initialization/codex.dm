@@ -9,7 +9,6 @@ SUBSYSTEM_DEF(codex)
 
 	var/list/all_entries =       list()
 	var/list/entries_by_path =   list()
-	var/list/entries_by_ref =    list()
 	var/list/entries_by_string = list()
 	var/list/index_file =        list()
 	var/list/search_cache =      list()

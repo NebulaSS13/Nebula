@@ -60,7 +60,19 @@
 	..()
 
 /datum/codex_entry/Destroy(force)
-	SScodex.all_entries -= src
+	if(store_codex_entry) // Gating here to avoid unnecessary list checking overhead.
+		SScodex.all_entries -= src
+		for(var/associated_string in associated_strings)
+			SScodex.entries_by_string -= associated_string
+		for(var/associated_path in associated_paths)
+			SScodex.entries_by_path -= associated_path
+		for(var/thing in SScodex.index_file)
+			if(src == SScodex.index_file[thing])
+				SScodex.index_file -= thing
+		for(var/thing in SScodex.search_cache)
+			var/list/cached = SScodex.search_cache[thing]
+			if(src in cached)
+				cached -= src
 	. = ..()
 
 /datum/codex_entry/proc/get_codex_header(var/mob/presenting_to)
