@@ -57,16 +57,16 @@
 		reagents.maximum_volume = max(volume, reagents.maximum_volume)
 	. = ..()
 
-/obj/item/clothing/ring/reagent/equipped(var/mob/living/carbon/human/H)
+/obj/item/clothing/ring/reagent/equipped(var/mob/living/carbon/human/target)
 	..()
-	if(istype(H) && H.get_equipped_item(slot_gloves_str) == src)
-		to_chat(H, SPAN_DANGER("You feel a prick as you slip on the ring."))
+	if(istype(target) && target.get_equipped_item(slot_gloves_str) == src)
+		var/obj/item/organ/external/affecting = SAFEPICK(target.get_hands_organs())
+		to_chat(target, SPAN_DANGER("You feel a prick on your [affecting?.name || "hand"] as you slip on the ring."))
 
-		if(reagents.total_volume)
-			if(H.reagents)
-				var/contained_reagents = reagents.get_reagents()
-				var/trans = reagents.trans_to_mob(H, reagents.total_volume, CHEM_INJECT)
-				admin_inject_log(usr, H, src, contained_reagents, trans)
+		if(target.can_inject(null, affecting) && reagents.total_volume)
+			var/contained_reagents = reagents.get_reagents()
+			var/trans = target.inject_external_organ(affecting, reagents, reagents.total_volume)
+			admin_inject_log(usr, target, src, contained_reagents, trans)
 	return
 
 //Sleepy Ring
