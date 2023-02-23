@@ -16,9 +16,10 @@
 
 /obj/item/projectile/bullet/chemdart/on_hit(var/atom/target, var/blocked = 0, var/def_zone = null)
 	if(blocked < 100 && isliving(target))
-		var/mob/living/L = target
-		if(L.can_inject(null, def_zone) == CAN_INJECT)
-			reagents.trans_to_mob(L, reagent_amount, CHEM_INJECT)
+		var/mob/living/victim = target
+		if(victim.can_inject(null, def_zone) == CAN_INJECT)
+			var/obj/item/organ/external/hit_limb = GET_EXTERNAL_ORGAN(victim, def_zone)
+			victim.inject_external_organ(hit_limb, reagents, reagent_amount)
 
 /obj/item/ammo_casing/chemdart
 	name = "chemical dart"
