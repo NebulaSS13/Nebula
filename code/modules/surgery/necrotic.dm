@@ -162,13 +162,12 @@
 /decl/surgery_step/necrotic/regeneration/end_step(mob/living/user, mob/living/target, target_zone, obj/item/tool)
 	var/target_organ = LAZYACCESS(global.surgeries_in_progress["\ref[target]"], target_zone)
 	var/obj/item/chems/C = tool
-	var/temp_holder = new /obj()
 	var/amount = C.amount_per_transfer_from_this
-	var/datum/reagents/temp_reagents = new /datum/reagents(amount, temp_holder)
+	var/datum/reagents/temp_reagents = new /datum/reagents(amount, global.temp_reagents_holder)
 	C.reagents.trans_to_holder(temp_reagents, amount)
 	var/usable_amount = temp_reagents.has_reagent(/decl/material/liquid/regenerator)
 	temp_reagents.clear_reagent(/decl/material/liquid/regenerator) //We'll manually calculate how much it should heal
-	temp_reagents.trans_to_mob(target, temp_reagents.total_volume, CHEM_INJECT) //And if there was something else, toss it in
+	target.inject_external_organ(GET_EXTERNAL_ORGAN(target, target_zone), temp_reagents, temp_reagents.total_volume) //And if there was something else, toss it in
 
 	if (usable_amount > 1)
 		var/obj/item/organ/O = target.get_organ(target_organ)
@@ -182,7 +181,6 @@
 	else
 		to_chat(user,SPAN_WARNING("You transferred too little for the organ to regenerate!"))
 	qdel(temp_reagents)
-	qdel(temp_holder)
 
 /decl/surgery_step/necrotic/regeneration/fail_step(mob/living/user, mob/living/target, target_zone, obj/item/tool)
 	if(!istype(tool) || !tool.reagents)

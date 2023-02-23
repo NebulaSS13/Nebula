@@ -193,17 +193,15 @@
 	var/obj/item/chems/container = tool
 
 	var/amount = container.amount_per_transfer_from_this
-	var/temp_holder = new/obj()
-	var/datum/reagents/temp_reagents = new(amount, temp_holder)
+	var/datum/reagents/temp_reagents = new(amount, global.temp_reagents_holder)
 	container.reagents.trans_to_holder(temp_reagents, amount)
 
 	var/trans = temp_reagents.trans_to_mob(target, temp_reagents.total_volume, CHEM_INJECT) //technically it's contact, but the reagents are being applied to internal tissue
 	if (trans > 0)
-		user.visible_message("<span class='notice'>[user] rubs [target]'s [affected.name] down with \the [tool]'s contents</span>.", \
-			"<span class='notice'>You rub [target]'s [affected.name] down with \the [tool]'s contents.</span>")
+		user.visible_message(SPAN_NOTICE("[user] rubs [target]'s [affected.name] down with \the [tool]'s contents."), \
+			SPAN_NOTICE("You rub [target]'s [affected.name] down with \the [tool]'s contents."))
 	affected.disinfect()
 	qdel(temp_reagents)
-	qdel(temp_holder)
 
 /decl/surgery_step/sterilize/fail_step(mob/living/user, mob/living/target, target_zone, obj/item/tool)
 	var/obj/item/organ/external/affected = GET_EXTERNAL_ORGAN(target, target_zone)
@@ -215,8 +213,8 @@
 
 	container.reagents.trans_to_mob(target, container.amount_per_transfer_from_this, CHEM_INJECT)
 
-	user.visible_message("<span class='warning'>[user]'s hand slips, spilling \the [tool]'s contents over the [target]'s [affected.name]!</span>" , \
-	"<span class='warning'>Your hand slips, spilling \the [tool]'s contents over the [target]'s [affected.name]!</span>")
+	user.visible_message(SPAN_WARNING("[user]'s hand slips, spilling \the [tool]'s contents over the [target]'s [affected.name]!") , \
+	SPAN_WARNING("Your hand slips, spilling \the [tool]'s contents over the [target]'s [affected.name]!"))
 	affected.disinfect()
 
 /decl/surgery_step/sterilize/proc/check_chemicals(var/obj/item/chems/container)
