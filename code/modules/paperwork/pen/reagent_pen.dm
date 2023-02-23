@@ -12,27 +12,28 @@
 	create_reagents(30)
 	. = ..()
 
-/obj/item/pen/reagent/attack(mob/living/M, mob/living/user, var/target_zone)
+/obj/item/pen/reagent/attack(mob/living/victim, mob/living/user, var/target_zone)
 
-	if(!istype(M))
+	if(!istype(victim))
 		return
 
 	. = ..()
 
-	var/allow = M.can_inject(user, target_zone)
-	if(allow)
-		if (allow == INJECTION_PORT)
-			if(M != user)
-				to_chat(user, SPAN_WARNING("You begin hunting for an injection port on \the [M]'s suit!"))
-			else
-				to_chat(user, SPAN_NOTICE("You begin hunting for an injection port on your suit."))
-			if(!user.do_skilled(INJECTION_PORT_DELAY, SKILL_MEDICAL, M))
-				return
-		if(reagents.total_volume)
-			if(M.reagents)
-				var/contained_reagents = reagents.get_reagents()
-				var/trans = reagents.trans_to_mob(M, 30, CHEM_INJECT)
-				admin_inject_log(user, M, src, contained_reagents, trans)
+	var/allow = victim.can_inject(user, target_zone)
+	if(!allow)
+		return
+	var/obj/item/organ/external/targeted_organ = GET_EXTERNAL_ORGAN(victim, target_zone) // done here since do_skilled sleeps
+	if (allow == INJECTION_PORT)
+		if(victim != user)
+			to_chat(user, SPAN_WARNING("You begin hunting for an injection port on \the [victim]'s suit!"))
+		else
+			to_chat(user, SPAN_NOTICE("You begin hunting for an injection port on your suit."))
+		if(!user.do_skilled(INJECTION_PORT_DELAY, SKILL_MEDICAL, victim))
+			return
+	if(reagents.total_volume && victim.reagents)
+		var/contained_reagents = reagents.get_reagents()
+		var/trans = victim.inject_external_organ(targeted_organ, reagents, 30)
+		admin_inject_log(user, victim, src, contained_reagents, trans)
 
 /*
  * Sleepy Pens
