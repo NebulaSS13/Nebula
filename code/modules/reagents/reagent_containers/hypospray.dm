@@ -33,45 +33,49 @@
 	var/time = (1 SECONDS) / 1.9
 	var/single_use = TRUE // autoinjectors are not refillable (overriden for hypospray)
 
-/obj/item/chems/hypospray/attack(mob/living/M, mob/user)
+/obj/item/chems/hypospray/attack(mob/living/victim, mob/user)
 	if(!reagents.total_volume)
 		to_chat(user, SPAN_WARNING("[src] is empty."))
 		return
-	if (!istype(M))
+	if (!istype(victim))
 		return
 
-	var/allow = M.can_inject(user, check_zone(user.zone_sel.selecting, M))
+	var/targeted_zone = check_zone(user.zone_sel.selecting, victim)
+	var/allow = victim.can_inject(user, targeted_zone)
 	if(!allow)
 		return
 
+	// done here since do_skilled can sleep
+	var/obj/item/organ/external/targeted_organ = GET_EXTERNAL_ORGAN(victim, targeted_zone)
+
 	if (allow == INJECTION_PORT)
-		if(M != user)
-			user.visible_message(SPAN_WARNING("\The [user] begins hunting for an injection port on \the [M]'s suit!"))
+		if(victim != user)
+			user.visible_message(SPAN_WARNING("\The [user] begins hunting for an injection port on \the [victim]'s suit!"))
 		else
 			to_chat(user, SPAN_NOTICE("You begin hunting for an injection port on your suit."))
-		if(!user.do_skilled(INJECTION_PORT_DELAY, SKILL_MEDICAL, M))
+		if(!user.do_skilled(INJECTION_PORT_DELAY, SKILL_MEDICAL, victim))
 			return
 
 	user.setClickCooldown(DEFAULT_QUICK_COOLDOWN)
-	user.do_attack_animation(M)
+	user.do_attack_animation(victim)
 
-	if(user != M && !M.incapacitated() && time) // you're injecting someone else who is concious, so apply the device's intrisic delay
-		to_chat(user, SPAN_WARNING("\The [user] is trying to inject \the [M] with \the [name]."))
-		if(!user.do_skilled(time, SKILL_MEDICAL, M))
+	if(user != victim && !victim.incapacitated() && time) // you're injecting someone else who is concious, so apply the device's intrisic delay
+		to_chat(user, SPAN_WARNING("\The [user] is trying to inject \the [victim] in \the [targeted_organ] with \the [name]."))
+		if(!user.do_skilled(time, SKILL_MEDICAL, victim))
 			return
 
 	if(single_use && reagents.total_volume <= 0) // currently only applies to autoinjectors
 		atom_flags &= ~ATOM_FLAG_OPEN_CONTAINER // Prevents autoinjectors to be refilled.
 
-	to_chat(user, SPAN_NOTICE("You inject [M] with [src]."))
-	to_chat(M, SPAN_NOTICE("You feel a tiny prick!"))
+	to_chat(user, SPAN_NOTICE("You inject [victim] with [src]."))
+	to_chat(victim, SPAN_NOTICE("You feel a tiny prick!"))
 	playsound(src, 'sound/effects/hypospray.ogg',25)
-	user.visible_message(SPAN_WARNING("[user] injects [M] with [src]."))
+	user.visible_message(SPAN_WARNING("[user] injects [victim] in \the [targeted_organ] with [src]."))
 
-	if(M.reagents)
+	if(victim.reagents)
 		var/contained = REAGENT_LIST(src)
-		var/trans = reagents.trans_to_mob(M, amount_per_transfer_from_this, CHEM_INJECT)
-		admin_inject_log(user, M, src, contained, trans)
+		var/trans = victim.inject_external_organ(targeted_organ, reagents, amount_per_transfer_from_this)
+		admin_inject_log(user, victim, src, contained, trans)
 		to_chat(user, SPAN_NOTICE("[trans] unit\s injected. [reagents.total_volume] unit\s remaining in \the [src]."))
 
 	return
