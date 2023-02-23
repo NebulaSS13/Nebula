@@ -1331,6 +1331,7 @@
 #include "code\game\objects\structures\flora\tree.dm"
 #include "code\game\objects\structures\stool_bed_chair_nest_sofa\bed.dm"
 #include "code\game\objects\structures\stool_bed_chair_nest_sofa\chairs.dm"
+#include "code\game\objects\structures\stool_bed_chair_nest_sofa\rollerbed.dm"
 #include "code\game\objects\structures\stool_bed_chair_nest_sofa\sofa.dm"
 #include "code\game\objects\structures\stool_bed_chair_nest_sofa\stools.dm"
 #include "code\game\objects\structures\stool_bed_chair_nest_sofa\wheelchair.dm"

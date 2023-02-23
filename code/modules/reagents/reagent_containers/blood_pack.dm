@@ -2,7 +2,7 @@
 	name = "blood packs box"
 	desc = "This box contains blood packs."
 	icon_state = "sterile"
-	
+
 /obj/item/storage/box/bloodpacks/WillContain()
 	return list(/obj/item/chems/ivbag = 7)
 
@@ -17,11 +17,11 @@
 	amount_per_transfer_from_this = REM
 	atom_flags = ATOM_FLAG_OPEN_CONTAINER
 
-	var/mob/living/carbon/human/attached
+	var/obj/item/organ/external/attached_limb
 
 /obj/item/chems/ivbag/Destroy()
 	STOP_PROCESSING(SSobj,src)
-	attached = null
+	attached_limb = null
 	. = ..()
 
 /obj/item/chems/ivbag/on_reagent_change()
@@ -36,16 +36,21 @@
 	var/percent = round(reagents.total_volume / volume * 100)
 	if(reagents.total_volume)
 		add_overlay(overlay_image(icon, "[round(percent,25)]", reagents.get_color()))
-	add_overlay(attached? "dongle" : "top")
+	add_overlay(attached_limb? "dongle" : "top")
 
 /obj/item/chems/ivbag/handle_mouse_drop(atom/over, mob/user)
 	if(ismob(loc))
-		if(attached)
-			visible_message(SPAN_NOTICE("\The [attached] is taken off \the [src]."))
-			attached = null
-		else if(ishuman(over) && do_IV_hookup(over, user, src))
-			attached = over
-			START_PROCESSING(SSobj, src)
+		if(attached_limb)
+			if(attached_limb.owner)
+				visible_message(SPAN_NOTICE("\The [attached_limb.owner] is taken off \the [src]."))
+			attached_limb = null
+		else if(ishuman(over))
+			var/mob/living/carbon/human/victim = over
+			var/target_zone = check_zone(user.zone_sel.selecting, victim) // deterministic, so we do it here and in do_IV_hookup
+			var/obj/item/organ/external/affecting = GET_EXTERNAL_ORGAN(victim, target_zone)
+			if(do_IV_hookup(victim, user, src))
+				attached_limb = affecting
+				START_PROCESSING(SSobj, src)
 		update_icon()
 		return TRUE
 	. = ..()
@@ -54,10 +59,12 @@
 	if(!ismob(loc))
 		return PROCESS_KILL
 
-	if(attached)
-		if(!loc.Adjacent(attached))
-			attached = null
-			visible_message("\The [attached] detaches from \the [src].")
+	var/mob/living/carbon/human/attached = attached_limb?.owner
+
+	if(attached_limb)
+		if(!attached || !loc.Adjacent(attached))
+			visible_message("\The [attached || attached_limb] detaches from \the [src].")
+			attached_limb = null
 			update_icon()
 			return PROCESS_KILL
 	else
@@ -70,7 +77,7 @@
 	if(!reagents.total_volume)
 		return
 
-	reagents.trans_to_mob(attached, amount_per_transfer_from_this, CHEM_INJECT)
+	attached.inject_external_organ(attached_limb, reagents, amount_per_transfer_from_this)
 	update_icon()
 
 /obj/item/chems/ivbag/nanoblood/populate_reagents()

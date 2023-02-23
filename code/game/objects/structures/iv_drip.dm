@@ -4,7 +4,7 @@
 	anchored = FALSE
 	density = FALSE
 
-	var/mob/living/carbon/human/attached
+	var/obj/item/organ/external/attached_limb
 	var/mode = 1 // 1 is injecting, 0 is taking blood.
 	var/obj/item/chems/beaker
 	var/list/transfer_amounts = list(REM, 1, 2)
@@ -34,7 +34,7 @@
 	..()
 
 	var/mutable_appearance/base = mutable_appearance(icon, "nothing")
-	base.icon_state = "[beaker ? "beaker" : "nothing"][attached ? "_hooked" : ""]"
+	base.icon_state = "[beaker ? "beaker" : "nothing"][attached_limb ? "_hooked" : ""]"
 	add_overlay(base)
 
 	if(beaker)
@@ -66,7 +66,7 @@
 			var/mutable_appearance/ivbaglabel = mutable_appearance(icon, "ivbag_label")
 			add_overlay(ivbaglabel)
 
-		if(attached)
+		if(attached_limb)
 			var/mutable_appearance/light = mutable_appearance(icon, "light_full")
 			if(percent < 15)
 				light.icon_state = "light_low"
@@ -76,7 +76,7 @@
 			add_overlay(light)
 
 /obj/structure/iv_drip/handle_mouse_drop(atom/over, mob/user)
-	if(attached)
+	if(attached_limb)
 		drip_detach()
 		return TRUE
 	if(ishuman(over))
@@ -99,13 +99,13 @@
 
 /obj/structure/iv_drip/Destroy()
 	STOP_PROCESSING(SSobj,src)
-	attached = null
+	attached_limb = null
 	QDEL_NULL(beaker)
 	return ..()
 
 /obj/structure/iv_drip/Process()
-	if(attached)
-		if(!Adjacent(attached))
+	if(attached_limb)
+		if(!attached_limb.owner || !Adjacent(attached_limb.owner))
 			rip_out()
 			return PROCESS_KILL
 	else
@@ -118,9 +118,11 @@
 	if(SSobj.times_fired % 2)
 		return
 
+	var/mob/living/carbon/human/attached = attached_limb.owner
+
 	if(mode) // Give blood
 		if(beaker.volume > 0)
-			beaker.reagents.trans_to_mob(attached, transfer_amount, CHEM_INJECT)
+			attached.inject_external_organ(attached_limb, beaker.reagents, transfer_amount)
 			queue_icon_update()
 	else // Take blood
 		var/amount = beaker.reagents.maximum_volume - beaker.reagents.total_volume
@@ -141,7 +143,7 @@
 			queue_icon_update()
 
 /obj/structure/iv_drip/attack_hand(mob/user)
-	if(attached)
+	if(attached_limb)
 		drip_detach()
 	else if(beaker)
 		beaker.dropInto(loc)
@@ -159,7 +161,7 @@
 	set name = "Detach IV Drip"
 	set src in range(1)
 
-	if(!attached)
+	if(!attached_limb)
 		return
 
 	if(!CanPhysicallyInteractWith(usr, src))
@@ -169,8 +171,9 @@
 	if(!usr.skill_check(SKILL_MEDICAL, SKILL_BASIC))
 		rip_out()
 	else
-		visible_message("\The [attached] is taken off \the [src].")
-		attached = null
+		if(attached_limb.owner) // don't give a message without an owner
+			visible_message("\The [attached_limb.owner] is taken off \the [src].")
+		attached_limb = null
 
 	queue_icon_update()
 	STOP_PROCESSING(SSobj,src)
@@ -202,27 +205,40 @@
 	else
 		to_chat(usr, SPAN_NOTICE("No chemicals are attached."))
 
-	to_chat(usr, SPAN_NOTICE("[attached ? attached : "No one"] is hooked up to it."))
+	to_chat(usr, SPAN_NOTICE("[attached_limb?.owner || "No one"] is hooked up to it."))
 
 /obj/structure/iv_drip/proc/rip_out()
-	visible_message("The needle is ripped out of [src.attached], doesn't that hurt?")
-	attached.apply_damage(1, BRUTE, pick(BP_R_ARM, BP_L_ARM), damage_flags=DAM_SHARP)
-	attached = null
+	var/mob/living/attached = attached_limb.owner
+	if(attached)
+		visible_message("The needle is ripped out of [attached]'s [attached_limb.name], doesn't that hurt?")
+		attached.apply_damage(1, BRUTE, pick(BP_R_ARM, BP_L_ARM), damage_flags=DAM_SHARP)
+	attached_limb = null
 
 /obj/structure/iv_drip/proc/hook_up(mob/living/carbon/human/target, mob/user)
+	var/target_zone = check_zone(user.zone_sel.selecting, target) // deterministic, so we do it here and in do_IV_hookup
+	var/obj/item/organ/external/affecting = GET_EXTERNAL_ORGAN(target, target_zone)
 	if(do_IV_hookup(target, user, src))
-		attached = target
+		attached_limb = affecting
 		START_PROCESSING(SSobj,src)
 
 /proc/do_IV_hookup(mob/living/carbon/human/target, mob/user, obj/IV)
-	to_chat(user, SPAN_NOTICE("You start to hook up \the [target] to \the [IV]."))
-	if(!user.do_skilled(2 SECONDS, SKILL_MEDICAL, target))
+	var/decl/pronouns/target_pronouns = target.get_visible_pronouns(target.get_equipment_visibility())
+	var/target_zone = check_zone(user.zone_sel.selecting, target)
+	var/obj/item/organ/external/affecting = GET_EXTERNAL_ORGAN(target, target_zone)
+	var/injection_status = target.can_inject(user, target_zone)
+	if(!injection_status)
+		return
+	to_chat(user, SPAN_NOTICE("You start to hook up \the [target]'s [affecting.name] to \the [IV]."))
+	var/delay = 2 SECONDS
+	if(injection_status == INJECTION_PORT)
+		delay += INJECTION_PORT_DELAY
+	if(!user.do_skilled(delay, SKILL_MEDICAL, target))
 		return FALSE
 
 	if(prob(user.skill_fail_chance(SKILL_MEDICAL, 80, SKILL_BASIC)))
-		user.visible_message("\The [user] fails to find the vein while trying to hook \the [target] up to \the [IV], stabbing them instead!")
-		target.apply_damage(2, BRUTE, pick(BP_R_ARM, BP_L_ARM), damage_flags=DAM_SHARP)
+		user.visible_message("\The [user] fails to find a vein in \the [target]'s [affecting.name] while hooking [target_pronouns.him] up to \the [IV], stabbing [target_pronouns.him] instead!")
+		target.apply_damage(2, BRUTE, target_zone, damage_flags=DAM_SHARP)
 		return FALSE
 
-	user.visible_message("\The [user] hooks \the [target] up to \the [IV].")
+	user.visible_message("\The [user] hooks \the [target]'s [affecting.name] up to \the [IV].")
 	return TRUE
