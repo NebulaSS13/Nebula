@@ -142,7 +142,7 @@ SUBSYSTEM_DEF(mapping)
 /datum/controller/subsystem/mapping/proc/get_gps_level_name(var/z)
 	if(z)
 		var/datum/level_data/level = levels_by_z[z]
-		. = level?.get_display_name()
+		. = level.get_display_name()
 		if(length(.))
 			return .
 	return "Unknown Sector"

@@ -22,7 +22,7 @@
 ///Keeps details on how to generate, maintain and access a zlevel
 /datum/level_data
 	///Name displayed to the player to refer to this level in user interfaces and etc. If null, one will be generated.
-	var/display_name
+	var/name
 
 	/// The z-level that was assigned to this level_data
 	var/level_z
@@ -68,7 +68,7 @@
 	// *** Atmos ***
 	/// Temperature of standard exterior atmosphere.
 	var/exterior_atmos_temp = T20C
-	/// Gaxmix datum returned to exterior return_air. Set to assoc list of material to moles to initialize the gas datum.
+	/// Gasmix datum returned to exterior return_air. Set to assoc list of material to moles to initialize the gas datum.
 	var/datum/gas_mixture/exterior_atmosphere
 
 	// *** Connections ***
@@ -104,6 +104,7 @@
 		setup_level_data()
 
 /datum/level_data/Destroy(force)
+	log_debug("Level data datum being destroyed: [log_info_line(src)]")
 	//Since this is a datum that lives inside the SSmapping subsystem, I'm not sure if we really need to prevent deletion. It was fine for the obj version of this, but not much point now?
 	SSmapping.unregister_level_data(src)
 	. = ..()
@@ -116,7 +117,7 @@
 
 ///Initialize the turfs on the z-level
 /datum/level_data/proc/initialize_new_level()
-	var/picked_turf = filler_turf? filler_turf : base_turf //Pick the filler_turf for filling if it's set, otherwise use the base_turf
+	var/picked_turf = filler_turf || base_turf //Pick the filler_turf for filling if it's set, otherwise use the base_turf
 	var/change_turf = (picked_turf && picked_turf != world.turf)
 	var/change_area = (base_area && base_area != world.area)
 	if(!change_turf && !change_area)
@@ -243,13 +244,13 @@
 		return gas
 
 /datum/level_data/proc/get_display_name()
-	if(!display_name)
+	if(!name)
 		var/obj/effect/overmap/overmap_entity = global.overmap_sectors[num2text(level_z)]
 		if(overmap_entity?.name)
-			display_name = overmap_entity.name
+			name = overmap_entity.name
 		else
-			display_name = "Sector #[level_z]"
-	return display_name
+			name = "Sector #[level_z]"
+	return name
 
 /datum/level_data/proc/get_connected_level_id(var/direction)
 	if(!length(cached_connections))
@@ -325,8 +326,8 @@ INITIALIZE_IMMEDIATE(/obj/abstract/landmark/level_data_spawner)
 /obj/abstract/landmark/level_data_spawner/Initialize()
 	var/datum/level_data/LD = new level_data_type(z)
 	//Let the mapper forward a level name for the level_data, if none was defined
-	if(!length(LD.display_name) && length(name))
-		LD.display_name = name
+	if(!length(LD.name) && length(name))
+		LD.name = name
 	. = ..()
 
 ////////////////////////////////////////////
@@ -357,7 +358,7 @@ INITIALIZE_IMMEDIATE(/obj/abstract/landmark/level_data_spawner)
 /datum/level_data/space
 
 /datum/level_data/debug
-	display_name = "Debug Level"
+	name = "Debug Level"
 
 /datum/level_data/main_level
 	level_flags = (ZLEVEL_STATION|ZLEVEL_CONTACT|ZLEVEL_PLAYER)
@@ -407,5 +408,5 @@ INITIALIZE_IMMEDIATE(/obj/abstract/landmark/level_data_spawner)
 
 // Used as a dummy z-level for the overmap.
 /datum/level_data/overmap
-	display_name = "Sensor Display"
+	name = "Sensor Display"
 	take_starlight_ambience = FALSE // Overmap doesn't care about ambient lighting
