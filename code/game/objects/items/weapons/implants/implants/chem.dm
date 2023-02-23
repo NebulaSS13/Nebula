@@ -33,12 +33,13 @@ var/global/list/chem_implants = list()
 	global.chem_implants -= src
 
 /obj/item/implant/chem/activate(var/amount)
-	if(malfunction || (!iscarbon(imp_in)))	return 0
+	if(malfunction || (!iscarbon(imp_in)))
+		return FALSE
 	if(!amount)
 		amount = rand(1,25)
-	var/mob/living/carbon/R = imp_in
-	reagents.trans_to_mob(R, amount, CHEM_INJECT)
-	to_chat(R, "<span class='notice'>You hear a faint *beep*.</span>")
+	var/mob/living/carbon/recipient = imp_in
+	recipient.inject_external_organ(part, reagents, amount)
+	to_chat(recipient, SPAN_NOTICE("You hear a faint *beep*."))
 
 /obj/item/implant/chem/attackby(obj/item/I, mob/user)
 	if(istype(I, /obj/item/chems/syringe))
