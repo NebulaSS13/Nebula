@@ -3411,6 +3411,7 @@
 #include "code\modules\xenoarcheaology\artifacts\triggers\temperature.dm"
 #include "code\modules\xenoarcheaology\artifacts\triggers\touch.dm"
 #include "code\modules\xenoarcheaology\datums\artifact_find.dm"
+#include "code\modules\xenoarcheaology\datums\engravings_flavor.dm"
 #include "code\modules\xenoarcheaology\datums\geosample.dm"
 #include "code\modules\xenoarcheaology\finds\_finds.dm"
 #include "code\modules\xenoarcheaology\finds\digsite_types.dm"
