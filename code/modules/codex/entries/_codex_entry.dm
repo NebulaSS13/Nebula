@@ -3,6 +3,7 @@
 
 /datum/codex_entry
 	var/name
+	var/store_codex_entry = TRUE
 	var/list/associated_strings
 	var/list/associated_paths
 	var/lore_text
@@ -11,9 +12,10 @@
 	var/disambiguator
 	var/list/categories
 
-/datum/codex_entry/New(var/_display_name, var/list/_associated_paths, var/list/_associated_strings, var/_lore_text, var/_mechanics_text, var/_antag_text)
+/datum/codex_entry/temporary
+	store_codex_entry = FALSE
 
-	SScodex.all_entries += src
+/datum/codex_entry/New(var/_display_name, var/list/_associated_paths, var/list/_associated_strings, var/_lore_text, var/_mechanics_text, var/_antag_text)
 
 	if(_display_name)       name =               _display_name
 	if(_associated_paths)   associated_paths =   _associated_paths
@@ -22,7 +24,7 @@
 	if(_mechanics_text)     mechanics_text =     _mechanics_text
 	if(_antag_text)         antag_text =         _antag_text
 
-	if(length(associated_paths))
+	if(store_codex_entry && length(associated_paths))
 		for(var/tpath in associated_paths)
 			var/atom/thing = tpath
 			var/thing_name = codex_sanitize(initial(thing.name))
@@ -40,23 +42,37 @@
 		else
 			CRASH("Attempted to instantiate unnamed codex entry with no associated strings!")
 
-	LAZYDISTINCTADD(associated_strings, codex_sanitize(name))
-	for(var/associated_string in associated_strings)
-		var/clean_string = codex_sanitize(associated_string)
-		if(!clean_string)
-			associated_strings -= associated_string
-			continue
-		if(clean_string != associated_string)
-			associated_strings -= associated_string
-			associated_strings |= clean_string
-		if(SScodex.entries_by_string[clean_string])
-			PRINT_STACK_TRACE("Trying to save codex entry for [name] by string [clean_string] but one already exists!")
-		SScodex.entries_by_string[clean_string] = src
+	if(store_codex_entry)
+		SScodex.all_entries += src
+		LAZYDISTINCTADD(associated_strings, codex_sanitize(name))
+		for(var/associated_string in associated_strings)
+			var/clean_string = codex_sanitize(associated_string)
+			if(!clean_string)
+				associated_strings -= associated_string
+				continue
+			if(clean_string != associated_string)
+				associated_strings -= associated_string
+				associated_strings |= clean_string
+			if(SScodex.entries_by_string[clean_string])
+				PRINT_STACK_TRACE("Trying to save codex entry for [name] by string [clean_string] but one already exists!")
+			SScodex.entries_by_string[clean_string] = src
 
 	..()
 
 /datum/codex_entry/Destroy(force)
-	SScodex.all_entries -= src
+	if(store_codex_entry) // Gating here to avoid unnecessary list checking overhead.
+		SScodex.all_entries -= src
+		for(var/associated_string in associated_strings)
+			SScodex.entries_by_string -= associated_string
+		for(var/associated_path in associated_paths)
+			SScodex.entries_by_path -= associated_path
+		for(var/thing in SScodex.index_file)
+			if(src == SScodex.index_file[thing])
+				SScodex.index_file -= thing
+		for(var/thing in SScodex.search_cache)
+			var/list/cached = SScodex.search_cache[thing]
+			if(src in cached)
+				cached -= src
 	. = ..()
 
 /datum/codex_entry/proc/get_codex_header(var/mob/presenting_to)
