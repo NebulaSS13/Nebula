@@ -315,6 +315,15 @@
 	update_values()
 	return 1
 
+/datum/gas_mixture/GetCloneArgs()
+	return list(volume, temperature, group_multiplier)
+
+/datum/gas_mixture/PopulateClone(datum/gas_mixture/clone)
+	clone.gas         = gas.Copy()
+	clone.total_moles = total_moles
+	update_values()
+	return clone
+
 //Checks if we are within acceptable range of another gas_mixture to suspend processing or merge.
 /datum/gas_mixture/proc/compare(const/datum/gas_mixture/sample, var/vacuum_exception = 0)
 	if(!sample) return 0
