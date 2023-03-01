@@ -236,6 +236,7 @@
 
 /obj/screen/Click(location, control, params)
 	if(!usr)	return 1
+
 	switch(name)
 		if("toggle")
 			if(usr.hud_used.inventory_shown)
@@ -264,7 +265,9 @@
 				L.lookup()
 
 		if("internal")
-			usr.ui_toggle_internals()
+			if(isliving(usr))
+				var/mob/living/M = usr
+				M.ui_toggle_internals()
 
 		if("act_intent")
 			usr.a_intent_change("right")

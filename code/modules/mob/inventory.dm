@@ -321,9 +321,6 @@
 /mob/proc/is_holding_offhand(var/thing)
 	return FALSE
 
-/mob/proc/ui_toggle_internals()
-	return FALSE
-
 /mob/proc/can_be_buckled(var/mob/user)
 	. = user.Adjacent(src) && !istype(user, /mob/living/silicon/pai)
 
