@@ -902,6 +902,7 @@ var/global/list/damage_icon_parts = list()
 		update_action_buttons()
 	if(internals && internal)
 		internals.icon_state = "internal1"
+	queue_hand_rebuild()
 
 //Human Overlays Indexes/////////
 #undef HO_MUTATIONS_LAYER

@@ -1,6 +1,6 @@
-#define DIONA_SCREEN_LOC_HELD   "EAST-8:16,SOUTH:5"
-#define DIONA_SCREEN_LOC_HAT    "EAST-7:16,SOUTH:5"
-#define DIONA_SCREEN_LOC_INTENT "EAST-2,SOUTH:5"
+#define DIONA_SCREEN_LOC_HELD   "RIGHT-8:16,BOTTOM:5"
+#define DIONA_SCREEN_LOC_HAT    "RIGHT-7:16,BOTTOM:5"
+#define DIONA_SCREEN_LOC_INTENT "RIGHT-2,BOTTOM:5"
 #define DIONA_SCREEN_LOC_HEALTH ui_alien_health
 
 /datum/extension/hattable/diona_nymph/wear_hat(mob/wearer, obj/item/clothing/head/new_hat)

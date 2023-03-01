@@ -27,6 +27,7 @@
 
 	var/obj/screen/lingchemdisplay
 	var/list/hand_hud_objects
+	var/list/swaphand_hud_objects
 	var/obj/screen/action_intent
 	var/obj/screen/move_intent
 	var/obj/screen/stamina/stamina_bar
@@ -54,6 +55,7 @@
 	hotkeybuttons = null
 	mymob = null
 	QDEL_NULL_LIST(hand_hud_objects)
+	QDEL_NULL_LIST(swaphand_hud_objects)
 
 /datum/hud/proc/update_stamina()
 	if(mymob && stamina_bar)
@@ -107,42 +109,36 @@
 		gear.screen_loc = hud_data["loc"]
 
 /datum/hud/proc/instantiate()
-	if(!ismob(mymob)) return 0
-	if(!mymob.client) return 0
-	var/ui_style = ui_style2icon(mymob.client.prefs.UI_style)
-	var/ui_color = mymob.client.prefs.UI_style_color
-	var/ui_alpha = mymob.client.prefs.UI_style_alpha
-	FinalizeInstantiation(ui_style, ui_color, ui_alpha)
+	if(ismob(mymob) && mymob.client)
+		FinalizeInstantiation()
+		return TRUE
+	return FALSE
 
-/datum/hud/proc/FinalizeInstantiation(var/ui_style, var/ui_color, var/ui_alpha)
+/datum/hud/proc/FinalizeInstantiation()
 	return
 
-/datum/hud/proc/rebuild_hands(list/adding, list/removing, skip_client_update = FALSE)
+/datum/hud/proc/get_ui_style()
+	return ui_style2icon(mymob?.client?.prefs?.UI_style) || 'icons/mob/screen/white.dmi'
 
-	if(isnull(removing))
-		if(!skip_client_update)
-			mymob?.client?.screen -= hand_hud_objects
-		QDEL_NULL_LIST(hand_hud_objects)
-	else
-		for(var/hand_tag in removing)
-			for(var/obj/screen/inventory/inv_box in hand_hud_objects)
-				if(inv_box.slot_id == hand_tag)
-					if(mymob.client)
-						mymob.client.screen -= inv_box
-					hand_hud_objects -= inv_box
-					qdel(inv_box)
+/datum/hud/proc/get_ui_color()
+	return mymob?.client?.prefs?.UI_style_color  || COLOR_WHITE
+
+/datum/hud/proc/get_ui_alpha()
+	return mymob?.client?.prefs?.UI_style_alpha || 255
+
+/datum/hud/proc/rebuild_hands()
 
 	var/mob/living/target = mymob
 	if(!istype(target))
 		return
 
-	if(isnull(adding))
-		adding = target.held_item_slots
+	var/ui_style = get_ui_style()
+	var/ui_color = get_ui_color()
+	var/ui_alpha = get_ui_alpha()
 
-	var/ui_style = ui_style2icon(mymob.client?.prefs.UI_style)
-	var/ui_color = mymob.client?.prefs?.UI_style_color
-	var/ui_alpha = mymob.client?.prefs?.UI_style_alpha || 255
-	for(var/hand_tag in adding)
+	// Build held item boxes for missing slots.
+	var/list/held_slots = mymob.get_held_item_slots()
+	for(var/hand_tag in held_slots)
 		var/obj/screen/inventory/inv_box
 		for(var/obj/screen/inventory/existing_box in hand_hud_objects)
 			if(existing_box.slot_id == hand_tag)
@@ -157,20 +153,157 @@
 
 		inv_box.cut_overlays()
 		inv_box.add_overlay("hand_[hand_tag]")
-		inv_box.add_overlay("hand_[inv_slot.ui_label]")
+		if(inv_slot.ui_label)
+			inv_box.add_overlay("hand_[inv_slot.ui_label]")
 		if(target.get_active_held_item_slot() == hand_tag)
 			inv_box.add_overlay("hand_selected")
 		inv_box.compile_overlays()
 
-		inv_box.screen_loc = inv_slot.ui_loc
 		inv_box.slot_id = hand_tag
 		inv_box.color = ui_color
 		inv_box.alpha = ui_alpha
 		inv_box.appearance_flags |= KEEP_TOGETHER
 
-		LAZYADD(hand_hud_objects, inv_box)
-		if(!skip_client_update)
-			mymob.client?.screen |= inv_box
+		LAZYDISTINCTADD(hand_hud_objects, inv_box)
+
+	// Clear held item boxes with no held slot.
+	for(var/obj/screen/inventory/inv_box in hand_hud_objects)
+		if(!(inv_box.slot_id in held_slots))
+			if(mymob.client)
+				mymob.client.screen -= inv_box
+			LAZYREMOVE(hand_hud_objects, inv_box)
+			qdel(inv_box)
+
+	// Rebuild offsets for the hand elements.
+	var/hand_y_offset = 5
+	var/list/elements = hand_hud_objects?.Copy()
+	while(length(elements))
+		var/copy_index = min(length(elements), 2)+1
+		var/list/sublist = elements.Copy(1, copy_index)
+		elements.Cut(1, copy_index)
+		var/obj/screen/inventory/inv_box
+		if(length(sublist) == 1)
+			inv_box = sublist[1]
+			inv_box.screen_loc = "CENTER,BOTTOM:[hand_y_offset]"
+		else
+			inv_box = sublist[1]
+			inv_box.screen_loc = "CENTER:-[world.icon_size/2],BOTTOM:[hand_y_offset]"
+			inv_box = sublist[2]
+			inv_box.screen_loc = "CENTER:[world.icon_size/2],BOTTOM:[hand_y_offset]"
+		hand_y_offset += world.icon_size
+		if(mymob.client)
+			mymob.client.screen |= inv_box
+
+	// Make sure all held items are on the screen and set to the correct screen loc.
+	var/datum/inventory_slot/inv_slot
+	for(var/obj/inv_elem in hand_hud_objects)
+		inv_slot = target.get_inventory_slot_datum(inv_elem.name)
+		if(inv_slot)
+			inv_slot.ui_loc = inv_elem.screen_loc
+			if(inv_slot.holding)
+				inv_slot.holding.screen_loc = inv_slot.ui_loc
+				if(mymob.client)
+					mymob.client.screen |= inv_slot.holding // just to make sure it's visible post-login
+
+	var/hand_x_offset = -(world.icon_size/2)
+	for(var/i = 1 to length(swaphand_hud_objects))
+		var/obj/swap_elem = swaphand_hud_objects[i]
+		swap_elem.screen_loc = "CENTER:[hand_x_offset],BOTTOM:[hand_y_offset]"
+		if(i > 1) // first two elems share a slot
+			hand_x_offset += world.icon_size
+		if(mymob.client)
+			mymob.client.screen |= swap_elem
+
+/datum/hud/proc/BuildInventoryUI()
+
+	var/ui_style = get_ui_style()
+	var/ui_color = get_ui_color()
+	var/ui_alpha = get_ui_alpha()
+
+	var/has_hidden_gear = FALSE
+
+	var/mob/living/carbon/human/target = mymob
+	var/datum/hud_data/hud_data = istype(target) ? target.species.hud : new()
+	var/list/held_slots = mymob.get_held_item_slots()
+
+	// Draw the various inventory equipment slots.
+	var/obj/screen/inventory/inv_box
+	for(var/gear_slot in hud_data.gear) // inventory_slots)
+
+		if(gear_slot in held_slots)
+			continue
+
+		inv_box = new /obj/screen/inventory()
+		inv_box.icon =  ui_style
+		inv_box.color = ui_color
+		inv_box.alpha = ui_alpha
+
+		var/list/slot_data =  hud_data.gear[gear_slot]
+		inv_box.screen_loc =  slot_data["loc"]
+		inv_box.slot_id =     slot_data["slot"]
+		inv_box.icon_state =  slot_data["state"]
+		inv_box.SetName(gear_slot)
+
+		if(slot_data["dir"])
+			inv_box.set_dir(slot_data["dir"])
+
+		if(slot_data["toggle"])
+			other += inv_box
+			has_hidden_gear = TRUE
+		else
+			adding += inv_box
+
+	if(has_hidden_gear)
+		var/obj/screen/using = new /obj/screen()
+		using.SetName("toggle")
+		using.icon = ui_style
+		using.icon_state = "other"
+		using.screen_loc = ui_inventory
+		using.color = ui_color
+		using.alpha = ui_alpha
+		adding += using
+
+/datum/hud/proc/BuildHandsUI()
+
+	var/ui_style = get_ui_style()
+	var/ui_color = get_ui_color()
+	var/ui_alpha = get_ui_alpha()
+
+	var/obj/screen/using
+
+	// Swap hand and quick equip screen elems.
+	using = new /obj/screen()
+	using.SetName("equip")
+	using.icon = ui_style
+	using.icon_state = "act_equip"
+	using.color = ui_color
+	using.alpha = ui_alpha
+	src.adding += using
+	LAZYADD(swaphand_hud_objects, using)
+
+	var/list/held_slots = mymob.get_held_item_slots()
+	if(length(held_slots) > 1)
+
+		using = new /obj/screen/inventory()
+		using.SetName("hand")
+		using.icon = ui_style
+		using.icon_state = "hand1"
+		using.color = ui_color
+		using.alpha = ui_alpha
+		src.adding += using
+		LAZYADD(swaphand_hud_objects, using)
+
+		using = new /obj/screen/inventory()
+		using.SetName("hand")
+		using.icon = ui_style
+		using.icon_state = "hand2"
+		using.color = ui_color
+		using.alpha = ui_alpha
+		src.adding += using
+		LAZYADD(swaphand_hud_objects, using)
+
+	// Actual hand elems.
+	rebuild_hands()
 
 /mob/verb/minimize_hud(full = FALSE as null)
 	set name = "Minimize Hud"
@@ -199,9 +332,12 @@
 		//Due to some poor coding some things need special treatment:
 		//These ones are a part of 'adding', 'other' or 'hotkeybuttons' but we want them to stay
 		if(!full)
-			src.client.screen += src.hud_used.hand_hud_objects	//we want the hands to be visible
-			src.client.screen += src.hud_used.action_intent		//we want the intent swticher visible
-			src.hud_used.action_intent.screen_loc = ui_acti_alt	//move this to the alternative position, where zone_select usually is.
+			if(LAZYLEN(hud_used.hand_hud_objects))
+				client.screen += hud_used.hand_hud_objects         // we want the hands to be visible
+			if(LAZYLEN(hud_used.swaphand_hud_objects))
+				client.screen += hud_used.swaphand_hud_objects     // we want the hands swap thingy to be visible
+			src.client.screen += src.hud_used.action_intent        // we want the intent swticher visible
+			src.hud_used.action_intent.screen_loc = ui_acti_alt    // move this to the alternative position, where zone_select usually is.
 		else
 			src.client.screen -= src.healths
 			src.client.screen -= src.internals

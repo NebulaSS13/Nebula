@@ -15,6 +15,7 @@
 	var/held_item_slot_selected
 	var/list/held_item_slots
 	var/list/inventory_slots
+	var/pending_hand_rebuild
 
 /mob/living/get_inventory_slots()
 	return global.all_inventory_slots // inventory_slots
@@ -30,9 +31,9 @@
 
 /mob/living/proc/add_held_item_slot(var/slot, var/new_ui_loc, var/new_overlay_slot, var/new_label)
 	LAZYSET(held_item_slots, slot, new /datum/inventory_slot(slot, new_ui_loc, new_overlay_slot, new_label))
-	hud_used?.rebuild_hands(list(slot), FALSE)
 	if(!get_active_hand())
 		select_held_item_slot(slot)
+	queue_hand_rebuild()
 
 /mob/living/proc/remove_held_item_slot(var/slot)
 	var/datum/inventory_slot/inv_slot = LAZYACCESS(held_item_slots, slot)
@@ -41,9 +42,9 @@
 			drop_from_inventory(inv_slot.holding)
 		held_item_slots -= slot
 		qdel(inv_slot)
-		hud_used?.rebuild_hands(FALSE, list(slot))
 		if(get_active_held_item_slot() == slot && length(held_item_slots))
 			select_held_item_slot(held_item_slots[1])
+		queue_hand_rebuild()
 
 /mob/living/proc/select_held_item_slot(var/slot)
 	var/last_slot = get_active_held_item_slot()
@@ -57,6 +58,16 @@
 		var/obj/item/I = get_active_hand()
 		if(istype(I))
 			I.on_active_hand()
+
+// Defer proc for the sake of delimbing root limbs with multiple graspers (serpentid)
+/mob/living/proc/queue_hand_rebuild()
+	set waitfor = FALSE
+	if(!pending_hand_rebuild)
+		pending_hand_rebuild = TRUE
+		sleep(1)
+		pending_hand_rebuild = FALSE
+		if(hud_used)
+			hud_used.rebuild_hands()
 
 /mob/living/get_active_hand()
 	var/datum/inventory_slot/inv_slot = LAZYACCESS(held_item_slots, get_active_held_item_slot())
@@ -80,7 +91,8 @@
 
 /mob/living/swap_hand()
 	. = ..()
-	select_held_item_slot(next_in_list(get_active_held_item_slot(), held_item_slots))
+	if(length(held_item_slots))
+		select_held_item_slot(next_in_list(get_active_held_item_slot(), held_item_slots))
 
 /mob/living/get_empty_hand_slot()
 	for(var/hand_slot in held_item_slots)
