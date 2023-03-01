@@ -227,3 +227,10 @@ var/global/const/DRINK_ICON_NOISY = "noise"
 	. = ..()
 	if(old_temp != temperature)
 		update_icon()
+
+/obj/item/chems/drinks/glass2/physically_destroyed(var/skip_qdel)
+	reagents.splash(loc, reagents.total_volume)
+	if(istype(material))
+		playsound(src, "shatter", 30, 1)
+		material.place_shards(get_turf(src), w_class)
+	return ..()
