@@ -121,7 +121,10 @@
 		BP_HINDTONGUE = /obj/item/organ/internal/hindtongue
 	)
 
-	available_pronouns = list(/decl/pronouns/neuter)
+	available_pronouns = list(
+		/decl/pronouns/neuter,
+		/decl/pronouns/neuter/person
+	)
 	available_bodytypes = list(/decl/bodytype/vox)
 
 	appearance_descriptors = list(
