@@ -37,15 +37,16 @@ SUBSYSTEM_DEF(weather)
 	if(WS)
 		unregister_weather_system(WS)
 		qdel(WS)
-	//Then create the new weather system
-	register_weather_system(new /obj/abstract/weather_system(locate(1, 1, topmost_level_data.level_z), topmost_level_data.level_z, initial_state))
+	//Create the new weather system and let it register itself
+	new /obj/abstract/weather_system(locate(1, 1, topmost_level_data.level_z), topmost_level_data.level_z, initial_state)
 
 ///Registers a given weather system obj for getting updates by SSweather.
 /datum/controller/subsystem/weather/proc/register_weather_system(var/obj/abstract/weather_system/WS)
 	if(LAZYACCESS(weather_by_z, WS.z))
 		CRASH("Trying to register another weather system on the same z-level([WS.z]) as an existing one!")
 	LAZYDISTINCTADD(weather_systems, WS)
-	if(weather_by_z.len < world.maxz)
+	LAZYINITLIST(weather_by_z)
+	if(length(weather_by_z) < world.maxz)
 		weather_by_z.len = world.maxz
 
 	//Mark all affected z-levels

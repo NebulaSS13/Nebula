@@ -51,9 +51,9 @@
 
 	if(grown_seed.mysterious && !grown_seed.scanned)
 		grown_seed.scanned = TRUE
-		var/area/map = locate(/area/overmap)
-		for(var/obj/effect/overmap/visitable/sector/exoplanet/P in map)
-			if(grown_seed in P.small_flora_types)
+		for(var/planetoid_id in SSmapping.planetoid_data_by_id)
+			var/datum/planetoid_data/P = SSmapping.planetoid_data_by_id[planetoid_id]
+			if(P.is_native_plant(grown_seed))
 				SSstatistics.add_field(STAT_XENOPLANTS_SCANNED, 1)
 				break
 

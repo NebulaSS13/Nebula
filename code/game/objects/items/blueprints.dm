@@ -78,7 +78,7 @@
 			var/area/overmap/map = T && get_area(T)
 			if(istype(map))
 				desc = "Blueprints for the daring souls wanting to establish a planetary outpost. Has some sketchy looking stains and what appears to be bite holes."
-				for(var/obj/effect/overmap/visitable/sector/exoplanet/E in map)
+				for(var/obj/effect/overmap/visitable/sector/planetoid/E in map)
 					valid_z_levels |= E.map_z
 				return TRUE
 	desc = "Some dusty old blueprints. The markings are old, and seem entirely irrelevant for your wherabouts."

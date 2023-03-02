@@ -108,6 +108,8 @@ var/global/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 	//dimensions of planet zlevels, defaults to world size if smaller, INCREASES world size if larger.
 	//Due to how maps are generated, must be (2^n+1) e.g. 17,33,65,129 etc. Map will just round up to those if set to anything other.
 	var/list/planet_size = list()
+	///The amount of z-levels generated for exoplanets. Default is 1. Be careful with this, since exoplanets are already pretty expensive.
+	var/planet_depth = 1
 	var/away_site_budget = 0
 
 	var/list/loadout_blacklist	//list of types of loadout items that will not be pickable
@@ -193,6 +195,8 @@ var/global/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 
 	if(!LAZYLEN(planet_size))
 		planet_size = list(world.maxx, world.maxy)
+	if(planet_depth <= 0)
+		planet_depth = 1
 
 	game_year = (text2num(time2text(world.realtime, "YYYY")) + game_year)
 
@@ -247,28 +251,39 @@ var/global/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 #endif
 
 /datum/map/proc/build_exoplanets()
-	if(!length(overmap_ids))
-		return
-	if(LAZYLEN(planet_size))
-		if(world.maxx < planet_size[1])
-			world.maxx = planet_size[1]
-		if(world.maxy < planet_size[2])
-			world.maxy = planet_size[2]
-	for(var/i = 0, i < num_exoplanets, i++)
-		var/exoplanet_type = pick_exoplanet()
-		var/datum/level_data/exoplanet/planet_level = SSmapping.increment_world_z_size(/datum/level_data/exoplanet, TRUE)
-		var/obj/effect/overmap/visitable/sector/exoplanet/new_planet = new exoplanet_type(null, world.maxz)
-		new_planet.zlevels += planet_level
-		new_planet.build_level(planet_size[1], planet_size[2])
+#ifdef UNIT_TEST
+	report_progress("Unit testing, so not loading exoplanets.")
+	return
+#else
+	report_progress("Instantiating exoplanets...")
+	var/list/planets_spawn_weight
+	var/list/planets_templates = SSmapping.get_templates_by_category(MAP_TEMPLATE_CATEGORY_EXOPLANET)
+	var/datum/map_template/planetoid/exoplanet/forced_planet //If we've got a forced exoplanet type, get the template
 
-/datum/map/proc/pick_exoplanet()
-	if(force_exoplanet_type)
-		return force_exoplanet_type
-	var/planets = list()
-	for(var/T in subtypesof(/obj/effect/overmap/visitable/sector/exoplanet))
-		var/obj/effect/overmap/visitable/sector/exoplanet/planet_type = T
-		planets[T] = initial(planet_type.spawn_weight)
-	return pickweight(planets)
+	//Guaranteed exoplanets should count towards the exoplanet limit. Since they're very expensive
+	var/left_to_pick = num_exoplanets
+	for(var/template_name in planets_templates)
+		var/datum/map_template/planetoid/exoplanet/E = planets_templates[template_name]
+		if((E.template_flags & TEMPLATE_FLAG_SPAWN_GUARANTEED) && E.load_new_z())
+			report_progress("Loaded guaranteed exoplanet [E]!")
+			left_to_pick--
+			continue
+
+		if(!force_exoplanet_type)
+			LAZYSET(planets_spawn_weight, E, E.get_spawn_weight())
+		else if(istype(E, force_exoplanet_type))
+			forced_planet = E
+			break
+
+	//Actually create the random exoplanets if we can
+	for(var/i = 0, i < left_to_pick, i++)
+		var/datum/map_template/planetoid/exoplanet/exoplanet_type = forced_planet || pickweight(planets_spawn_weight)
+		exoplanet_type.load_new_z()
+		var/datum/planetoid_data/P = SSmapping.planetoid_data_by_z[world.maxz]
+		P.begin_processing() //Let the planet know it can start processing daycycle and stuff
+
+	report_progress("Finished instantiating exoplanets.")
+#endif
 
 /datum/map/proc/get_network_access(var/network)
 	return 0

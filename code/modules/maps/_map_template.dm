@@ -1,4 +1,4 @@
-/datum/map_template
+/datum/map_template //#FIXME: Probably should be typed /decl since it's a singleton.
 	var/name = "Default Template Name"
 	var/width = 0
 	var/height = 0
@@ -135,7 +135,7 @@
 	after_load()
 	for(var/z_index = bounds[MAP_MINZ] to bounds[MAP_MAXZ])
 		var/datum/level_data/level = SSmapping.levels_by_z[z_index]
-		level.post_template_load(src)
+		level.after_template_load(src)
 		if(SSlighting.initialized)
 			SSlighting.InitializeZlev(z_index)
 	log_game("Z-level [name] loaded at [x],[y],[world.maxz]")

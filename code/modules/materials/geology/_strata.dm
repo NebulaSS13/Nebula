@@ -5,9 +5,11 @@
 	var/list/ores_rich
 	var/default_strata_candidate = FALSE
 	var/maximum_temperature = INFINITY
+	///The types of material to be used for rock walls for this strata. May have a weight as value for each material types
+	var/list/rock_material_types
 
-/decl/strata/proc/is_valid_exoplanet_strata(var/obj/effect/overmap/visitable/sector/exoplanet/planet)
-	var/datum/level_data/level_data = planet?.zlevels[1]
+/decl/strata/proc/is_valid_exoplanet_strata(var/datum/planetoid_data/planet)
+	var/datum/level_data/level_data = SSmapping.levels_by_id[planet.surface_level_id]
 	var/check_temp = level_data?.exterior_atmosphere?.temperature || 0
 	. = check_temp <= maximum_temperature
 

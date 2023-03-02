@@ -208,6 +208,9 @@ var/global/list/known_overmap_sectors
 	closeToolTip(usr) //No reason not to, really
 	..()
 
+/obj/effect/overmap/visitable/proc/get_topmost_level_data()
+	return SSmapping.levels_by_z[map_z[1]]
+
 /obj/effect/overmap/visitable/sector
 	name = "generic sector"
 	desc = "Sector with some stuff in it."

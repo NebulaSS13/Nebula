@@ -22,9 +22,9 @@
 	. = ..()
 	icon_state = "jaggy[rand(1,4)]"
 
-	var/obj/effect/overmap/visitable/sector/exoplanet/E = global.overmap_sectors[num2text(z)]
+	var/datum/planetoid_data/E = SSmapping.planetoid_data_by_z[z]
 	if(istype(E))
-		desc += "\nThere are images on it: [E.get_engravings()]"
+		desc += "\nThere are images on it: [E.engraving_generator.generate_engraving_text()]"
 	update_icon()
 
 /obj/structure/monolith/on_update_icon()
@@ -47,7 +47,7 @@
 /obj/structure/monolith/attack_hand(mob/user)
 	visible_message("\The [user] touches \the [src].")
 	if(istype(user, /mob/living/carbon/human))
-		var/obj/effect/overmap/visitable/sector/exoplanet/E = global.overmap_sectors[num2text(z)]
+		var/datum/planetoid_data/E = SSmapping.planetoid_data_by_z[z]
 		if(istype(E))
 			var/mob/living/carbon/human/H = user
 			if(!H.isSynthetic())
@@ -55,13 +55,10 @@
 				active = 1
 				update_icon()
 				if(prob(70))
-					to_chat(H, "<span class='notice'>As you touch \the [src], you suddenly get a vivid image - [E.get_engravings()]</span>")
+					to_chat(H, SPAN_NOTICE("As you touch \the [src], you suddenly get a vivid image - [E.engraving_generator.generate_engraving_text()]"))
 				else
-					to_chat(H, "<span class='warning'>An overwhelming stream of information invades your mind!</span>")
-					var/vision = ""
-					for(var/i = 1 to 10)
-						vision += pick(E.actors) + " " + pick("killing","dying","gored","expiring","exploding","mauled","burning","flayed","in agony") + ". "
-					to_chat(H, "<span class='danger'><font size=2>[uppertext(vision)]</font></span>")
+					to_chat(H, SPAN_WARNING("An overwhelming stream of information invades your mind!"))
+					to_chat(H, SPAN_DANGER("<font size=2>[uppertext(E.engraving_generator.generate_violent_vision_text())]</font>"))
 					SET_STATUS_MAX(H, STAT_PARA, 2)
 					H.set_hallucination(20, 100)
 				return

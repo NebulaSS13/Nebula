@@ -484,7 +484,7 @@
 	trap = GET_DECL(trap)
 	trap.forced(mob)
 
-/client/proc/spawn_exoplanet(exoplanet_type as anything in subtypesof(/obj/effect/overmap/visitable/sector/exoplanet))
+/client/proc/spawn_exoplanet(exoplanet_type as anything in subtypesof(/datum/map_template/planetoid/exoplanet))
 	set category = "Debug"
 	set name = "Create Exoplanet"
 
@@ -510,13 +510,17 @@
 	if (last_chance == "Cancel")
 		return
 
-	var/obj/effect/overmap/visitable/sector/exoplanet/new_planet = new exoplanet_type(null, world.maxx, world.maxy)
-	new_planet.features_budget = budget
-	new_planet.themes = list(new theme)
-	new_planet.daycycle = daycycle
-
-	new_planet.update_daynight()
-	new_planet.build_level()
+	//#TODO: This definitely could be improved.
+	var/datum/map_template/planetoid/exoplanet/planet_template = SSmapping.get_template_by_type(exoplanet_type)
+	var/datum/planetoid_data/PD = planet_template.create_planetoid_instance()
+	if(planet_template.subtemplate_budget != budget)
+		PD._budget_override = budget
+	if(theme)
+		PD._theme_forced = theme
+	planet_template.load_new_z(gen_data = PD)
+	if(!daycycle)
+		PD.day_duration = null
+		SSdaycyle.remove_linked_levels(PD.topmost_level_id)
 
 /client/proc/display_del_log()
 	set category = "Debug"

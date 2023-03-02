@@ -217,7 +217,7 @@
 		var/obj/effect/overmap/visitable/O = global.overmap_sectors[num2text(z)]
 		if(istype(O))
 			for(var/obj/effect/overmap/visitable/OO in range(O,2))
-				if((OO.sector_flags & OVERMAP_SECTOR_IN_SPACE) || istype(OO,/obj/effect/overmap/visitable/sector/exoplanet))
+				if((OO.sector_flags & OVERMAP_SECTOR_IN_SPACE) || istype(OO,/obj/effect/overmap/visitable/sector/planetoid))
 					LAZYDISTINCTADD(possible_locations, text2num(level))
 		if(length(possible_locations))
 			newz = pick(possible_locations)

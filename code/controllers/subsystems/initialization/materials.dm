@@ -136,9 +136,11 @@ SUBSYSTEM_DEF(materials)
 /datum/controller/subsystem/materials/proc/get_strata(var/turf/exterior/wall/location)
 	if(!istype(location))
 		return
-	var/obj/effect/overmap/visitable/sector/exoplanet/planet = global.overmap_sectors[num2text(location.z)]
-	if(istype(planet))
-		return planet.get_strata(location)
+	var/datum/planetoid_data/planet = SSmapping.planetoid_data_by_z[location.z]
+	var/decl/strata/S = planet?.get_strata()
+	. = S?.type
+	if(.)
+		return .
 	var/s_key = "[location.z]"
 	if(!global.default_strata_type_by_z[s_key])
 		global.default_strata_type_by_z[s_key] = pick(decls_repository.get_decl_paths_of_subtype(/decl/strata))

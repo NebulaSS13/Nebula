@@ -16,9 +16,9 @@
 
 /turf/exterior/wildgrass/Initialize()
 	. = ..()
-	var/obj/effect/overmap/visitable/sector/exoplanet/E = global.overmap_sectors[num2text(z)]
-	if(istype(E) && E.grass_color)
-		color = E.grass_color
+	var/datum/planetoid_data/P = SSmapping.planetoid_data_by_z[z]
+	if(istype(P) && P.get_grass_color())
+		color = P.get_grass_color()
 
 	var/datum/extension/buried_resources/resources = get_or_create_extension(src, /datum/extension/buried_resources)
 	if(prob(70))

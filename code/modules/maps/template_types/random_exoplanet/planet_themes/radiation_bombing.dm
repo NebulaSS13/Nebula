@@ -1,21 +1,19 @@
 /datum/exoplanet_theme/radiation_bombing
 	name = "Radiation Bombardment"
 
-/datum/exoplanet_theme/radiation_bombing/adjust_atmosphere(obj/effect/overmap/visitable/sector/exoplanet/E)
+/datum/exoplanet_theme/radiation_bombing/adjust_atmosphere(datum/planetoid_data/E)
 	var/add_temp = rand(20, 100)
-	for(var/datum/level_data/level_data in E.zlevels)
-		level_data.exterior_atmos_temp += add_temp
-		if(level_data.exterior_atmosphere)
-			level_data.exterior_atmosphere.temperature = level_data.exterior_atmos_temp
-			level_data.exterior_atmosphere.update_values()
+	if(E.atmosphere)
+		E.atmosphere.temperature += add_temp
+		E.atmosphere.update_values()
 
 /datum/exoplanet_theme/radiation_bombing/get_sensor_data()
 	return "Hotspots of radiation detected."
 
-/datum/exoplanet_theme/radiation_bombing/after_map_generation(obj/effect/overmap/visitable/sector/exoplanet/our_exoplanet)
+/datum/exoplanet_theme/radiation_bombing/after_map_generation(datum/planetoid_data/E)
 	var/radiation_power = rand(10, 37.5)
-	var/num_craters = round(min(0.5, rand()) * 0.02 * our_exoplanet.maxx * our_exoplanet.maxy)
-	var/area_turfs = get_area_turfs(our_exoplanet.planetary_area, list(/proc/not_turf_contains_dense_objects))
+	var/num_craters = round(min(0.5, rand()) * 0.02 * E.width * E.height)
+	var/area_turfs = get_area_turfs(E.surface_area, list(/proc/not_turf_contains_dense_objects))
 	for(var/i = 1 to num_craters)
 		var/turf/simulated/crater_center = pick_n_take(area_turfs)
 		if(!crater_center) // ran out of space somehow

@@ -490,12 +490,6 @@ INITIALIZE_IMMEDIATE(/obj/abstract/level_data_spawner)
 	level_flags = (ZLEVEL_CONTACT|ZLEVEL_PLAYER)
 
 /datum/level_data/exoplanet
-	exterior_atmosphere = list(
-		/decl/material/gas/oxygen =   MOLES_O2STANDARD,
-		/decl/material/gas/nitrogen = MOLES_N2STANDARD
-	)
-	exterior_atmos_temp = T20C
-	level_flags = (ZLEVEL_PLAYER|ZLEVEL_SEALED)
 	use_global_exterior_ambience = FALSE // This is set up by the exoplanet object.
 
 /datum/level_data/unit_test

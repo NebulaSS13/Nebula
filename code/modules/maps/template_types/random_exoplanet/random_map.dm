@@ -23,9 +23,9 @@
 	var/list/plantcolors = list("RANDOM")
 	var/list/grass_cache
 
-/datum/random_map/noise/exoplanet/New(var/tx, var/ty, var/tz, var/tlx, var/tly, var/do_not_apply, var/do_not_announce, var/used_area, var/list/_plant_colors)
+/datum/random_map/noise/exoplanet/New(var/tx, var/ty, var/tz, var/tlx, var/tly, var/do_not_apply, var/do_not_announce, var/used_area)
 	if(target_turf_type == null)
-		target_turf_type = world.turf
+		target_turf_type = SSmapping.base_turf_by_z[tz] || world.turf
 	water_level = rand(water_level_min,water_level_max)
 	//automagically adjust probs for bigger maps to help with lag
 	if(isnull(grass_prob)) grass_prob = flora_prob * 2
@@ -33,8 +33,10 @@
 	flora_prob *= size_mod
 	large_flora_prob *= size_mod
 	fauna_prob *= size_mod
-	if(_plant_colors)
-		plantcolors = _plant_colors
+
+	var/datum/planetoid_data/P = SSmapping.planetoid_data_by_z[tz]
+	if(istype(P) && P?.flora.plant_colors)
+		plantcolors = P.flora.plant_colors.Copy()
 	..()
 
 	SSmapping.base_turf_by_z[tz] = land_type
@@ -77,7 +79,7 @@
 	if(prob(megafauna_spawn_prob))
 		new /obj/abstract/landmark/exoplanet_spawn/megafauna(T)
 	else
-		new /obj/abstract/landmark/exoplanet_spawn(T)
+		new /obj/abstract/landmark/exoplanet_spawn/animal(T)
 
 /datum/random_map/noise/exoplanet/proc/get_grass_overlay()
 	var/grass_num = "[rand(1,6)]"

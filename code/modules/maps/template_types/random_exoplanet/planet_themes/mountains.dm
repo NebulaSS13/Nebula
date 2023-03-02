@@ -2,10 +2,8 @@
 	name = "Mountains"
 	var/rock_color
 
-/datum/exoplanet_theme/mountains/before_map_generation(obj/effect/overmap/visitable/sector/exoplanet/E)
-	rock_color = pick(E.rock_colors)
-	for(var/zlevel in E.map_z)
-		new /datum/random_map/automata/cave_system/mountains(E.x_origin, E.y_origin, zlevel, (E.x_origin + E.x_size), (E.x_origin + E.y_size), FALSE, TRUE, E.planetary_area, rock_color)
+/datum/exoplanet_theme/mountains/get_map_generators(datum/planetoid_data/E)
+	return list(/datum/random_map/automata/cave_system/mountains)
 
 /datum/exoplanet_theme/mountains/get_planet_image_extra()
 	var/image/res = image('icons/skybox/planet.dmi', "mountains")
@@ -25,9 +23,9 @@
 	if(_rock_color)
 		rock_color = _rock_color
 	if(target_turf_type == null)
-		target_turf_type = world.turf
+		target_turf_type = SSmapping.base_turf_by_z[tz] || world.turf
 	if(floor_type == null)
-		floor_type = world.turf
+		floor_type = SSmapping.base_turf_by_z[tz] || world.turf
 	..()
 
 /datum/random_map/automata/cave_system/mountains/get_additional_spawns(value, var/turf/exterior/wall/T)
