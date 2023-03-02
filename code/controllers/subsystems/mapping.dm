@@ -182,6 +182,40 @@ SUBSYSTEM_DEF(mapping)
 		if(level)
 			level.find_connected_levels(.)
 
+///Returns a list of all the level data of all the connected z levels to the given z.DBColumn
+/datum/controller/subsystem/mapping/proc/get_connected_levels_data(z)
+	if(z <= 0  || z > length(levels_by_z))
+		CRASH("Invalid z-level supplied to get_connected_levels: [isnull(z) ? "NULL" : z]")
+	. = list(levels_by_z[z])
+	// Traverse up and down to get the multiz stack.
+	for(var/level = z, HasBelow(level), level--)
+		. |= levels_by_z[level - 1]
+	for(var/level = z, HasAbove(level), level++)
+		. |= levels_by_z[level + 1]
+	// Check stack for any laterally connected neighbors.
+	for(var/tz in .)
+		var/datum/level_data/level = levels_by_z[tz]
+		if(level)
+			. |= level.get_all_connected_level_data()
+
+/datum/controller/subsystem/mapping/proc/get_connected_levels_ids(z)
+	if(z <= 0  || z > length(levels_by_z))
+		CRASH("Invalid z-level supplied to get_connected_levels: [isnull(z) ? "NULL" : z]")
+	var/datum/level_data/LD = levels_by_z[z]
+	. = list(LD.level_id)
+	// Traverse up and down to get the multiz stack.
+	for(var/level = z, HasBelow(level), level--)
+		var/datum/level_data/L = levels_by_z[level - 1]
+		. |= L.level_id
+	for(var/level = z, HasAbove(level), level++)
+		var/datum/level_data/L = levels_by_z[level + 1]
+		. |= L.level_id
+	// Check stack for any laterally connected neighbors.
+	for(var/tz in .)
+		var/datum/level_data/level = levels_by_z[tz]
+		if(level)
+			. |= level.get_all_connected_level_ids()
+
 /datum/controller/subsystem/mapping/proc/are_connected_levels(var/zA, var/zB)
 	if (zA <= 0 || zB <= 0 || zA > world.maxz || zB > world.maxz)
 		return FALSE

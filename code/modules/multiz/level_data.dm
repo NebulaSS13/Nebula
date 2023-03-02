@@ -77,6 +77,9 @@
 	///A cached list of connected directions to their connected level id
 	var/tmp/list/cached_connections
 
+	///A list of /datum/random_map to apply to this level if we're running level generation. Those are run before any parent map_generators.
+	var/list/level_generators
+
 /datum/level_data/New(var/_z_level, var/defer_level_setup = FALSE)
 	. = ..()
 	level_z = _z_level
@@ -136,10 +139,10 @@
 	setup_level_bounds()
 	setup_ambient()
 	setup_exterior_atmosphere()
-	if(config.generate_map)
-		generate_level()
-		post_generate_level()
+	generate_level()
+	after_generate_level()
 
+///Calculate the bounds of the level, the border area, and the inner accessible area.
 /datum/level_data/proc/setup_level_bounds()
 	level_max_width    = level_max_width  ? level_max_width  : world.maxx
 	level_max_height   = level_max_height ? level_max_height : world.maxy
@@ -148,13 +151,20 @@
 	level_inner_with   = level_max_width  - (2 * (TRANSITIONEDGE + 1))
 	level_inner_height = level_max_height - (2 * (TRANSITIONEDGE + 1))
 
+///Setup ambient lighting for the level
 /datum/level_data/proc/setup_ambient()
 	if(!take_starlight_ambience)
 		return
 	ambient_light_level = config.exterior_ambient_light
 	ambient_light_color = SSskybox.background_color
 
+///Setup/generate atmosphere for exterior turfs on the level.
 /datum/level_data/proc/setup_exterior_atmosphere()
+	//Skip setup if we've been set to a ref already
+	if(istype(exterior_atmosphere))
+		exterior_atmosphere.update_values() //Might as well update
+		exterior_atmosphere.check_tile_graphic()
+		return
 	var/list/exterior_atmos_composition = exterior_atmosphere
 	exterior_atmosphere = new
 	if(islist(exterior_atmos_composition))
@@ -170,18 +180,38 @@
 
 ///Called when setting up the level. Apply generators and anything that modifies the turfs of the level.
 /datum/level_data/proc/generate_level()
+	for(var/gen_type in level_generators)
+		if(ispath(gen_type, /datum/random_map/noise/exoplanet))
+			new gen_type(level_inner_x, level_inner_y, level_z, level_inner_with, level_inner_height, FALSE, TRUE, get_base_area_instance())  //#FIXME: Rock color!
+		else
+			new gen_type(level_inner_x, level_inner_y, level_z, level_inner_with, level_inner_height, FALSE, TRUE, get_base_area_instance())
 	return
 
+///Apply the parent entity's map generators. (Planets generally) This proc is to give a chance to level_data subtypes to individually chose to ignore the parent generators.
+/datum/level_data/proc/apply_map_generators(var/list/map_gen)
+	for(var/gen_type in map_gen)
+		if(ispath(gen_type, /datum/random_map/noise/exoplanet))
+			new gen_type(level_inner_x, level_inner_y, level_z, level_inner_with, level_inner_height, FALSE, TRUE, get_base_area_instance()) //#FIXME: Rock color!
+		else
+			new gen_type(level_inner_x, level_inner_y, level_z, level_inner_with, level_inner_height, FALSE, TRUE, get_base_area_instance())
+
 ///Called during level setup. Run anything that should happen only after the map is fully generated.
-/datum/level_data/proc/post_generate_level()
+/datum/level_data/proc/after_generate_level()
 	build_border()
 
+///Changes anything named we may need to rename accordingly to the parent location name. For instance, exoplanets levels.
+/datum/level_data/proc/adapt_location_name(var/location_name)
+	SHOULD_CALL_PARENT(TRUE)
+	if(!base_area || ispath(base_area, /area/space))
+		return FALSE
+	return TRUE
+
 ///Called while a map_template is being loaded on our z-level. Only apply to templates loaded onto new z-levels.
-/datum/level_data/proc/template_load(var/datum/map_template/template)
+/datum/level_data/proc/before_template_load(var/datum/map_template/template)
 	return
 
 ///Called after a map_template has been loaded on our z-level. Only apply to templates loaded onto new z-levels.
-/datum/level_data/proc/post_template_load(var/datum/map_template/template)
+/datum/level_data/proc/after_template_load(var/datum/map_template/template)
 	if(template.accessibility_weight)
 		SSmapping.accessible_z_levels[num2text(level_z)] = template.accessibility_weight
 	SSmapping.player_levels |= level_z
@@ -294,7 +324,6 @@
 		. |= LD.level_z
 		. |= LD.get_all_connected_level_z()
 
-
 /datum/level_data/proc/find_connected_levels(var/list/found)
 	for(var/other_id in connected_levels)
 		var/datum/level_data/neighbor = SSmapping.levels_by_id[other_id]
@@ -311,6 +340,15 @@
 		var/datum/level_data/neighbor = SSmapping.levels_by_id[other_id]
 		neighbor.add_connected_levels(found)
 
+///Returns the instance of the base area for this level
+/datum/level_data/proc/get_base_area_instance()
+	var/area/found = locate(base_area) in global.areas
+	if(found)
+		return found
+	else if(ispath(base_area))
+		return new base_area
+	else
+		return world.area
 
 ////////////////////////////////////////////
 // Level Data Spawner
@@ -393,7 +431,7 @@ INITIALIZE_IMMEDIATE(/obj/abstract/landmark/level_data_spawner)
 /datum/level_data/mining_level/asteroid
 	base_turf = /turf/simulated/floor/asteroid
 
-/datum/level_data/mining_level/post_template_load()
+/datum/level_data/mining_level/after_template_load()
 	..()
 	new /datum/random_map/automata/cave_system(1, 1, level_z, world.maxx, world.maxy)
 	new /datum/random_map/noise/ore(1, 1, level_z, world.maxx, world.maxy)

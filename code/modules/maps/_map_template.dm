@@ -1,4 +1,4 @@
-/datum/map_template
+/datum/map_template //#FIXME: Probably should be typed /decl since it's a singleton.
 	var/name = "Default Template Name"
 	var/width = 0
 	var/height = 0
@@ -116,7 +116,7 @@
 	var/shuttle_state = pre_init_shuttles()
 	for(var/z_index = bounds[MAP_MINZ] to bounds[MAP_MAXZ])
 		var/datum/level_data/level = SSmapping.levels_by_z[z_index]
-		level.template_load(src)
+		level.before_template_load(src)
 
 	var/map_hash = modify_tag_vars && "[sequential_id("map_id")]"
 	ASSERT(isnull(global._preloader.current_map_hash)) // Recursive maploading is possible, but not from this block: recursive loads should be triggered in Initialize, from init_atoms below.
@@ -139,7 +139,7 @@
 	after_load()
 	for(var/z_index = bounds[MAP_MINZ] to bounds[MAP_MAXZ])
 		var/datum/level_data/level = SSmapping.levels_by_z[z_index]
-		level.post_template_load(src)
+		level.after_template_load(src)
 		if(SSlighting.initialized)
 			SSlighting.InitializeZlev(z_index)
 	log_game("Z-level [name] loaded at [x],[y],[world.maxz]")
