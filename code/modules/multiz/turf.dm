@@ -351,22 +351,22 @@
 
 	return list(mirrored_x, mirrored_y)
 
-/proc/shared_transition_edge_get_mimic_coordinates(var/turf/T)
+/proc/shared_transition_edge_get_mimic_coordinates(var/turf/T, var/datum/level_data/target_ldat)
+	if(!target_ldat)
+		CRASH("Got transition_edge turf([T.x], [T.y], [T.z]) linking to a non-existent level!")
+	var/maxx = target_ldat?.level_max_width  ? target_ldat.level_max_width  : world.maxx
+	var/maxy = target_ldat?.level_max_height ? target_ldat.level_max_height : world.maxy
+	. = shared_transition_edge_get_mimic_turf(T.x, T.y, maxx, maxy)
+	. += target_ldat?.level_z //Append z coordinate to x and y
+
+/proc/shared_transition_edge_get_valid_level_data(var/turf/T)
 	var/datum/level_data/ldat = SSmapping.levels_by_z[T.z]
 	var/edge_dir         = get_turf_to_world_center_direction(T)
 	var/connected_lvl_id = ldat.get_connected_level_id(edge_dir)
 
 	if(!connected_lvl_id)
 		CRASH("Got transition_edge turf([T.x], [T.y], [T.z]) in direction [dir2text(edge_dir)] that doesn't connect to anything!")
-
-	var/datum/level_data/target_ldat = SSmapping.levels_by_id[connected_lvl_id]
-	if(!target_ldat)
-		CRASH("Got transition_edge turf([T.x], [T.y], [T.z]) linking to a non-existent level id '[connected_lvl_id]'!")
-
-	var/maxx = target_ldat?.level_max_width  ? target_ldat.level_max_width  : world.maxx
-	var/maxy = target_ldat?.level_max_height ? target_ldat.level_max_height : world.maxy
-	. = shared_transition_edge_get_mimic_turf(T.x, T.y, maxx, maxy)
-	. += target_ldat?.level_z //Append z coordinate to x and y
+	return SSmapping.levels_by_id[connected_lvl_id]
 
 /proc/shared_transition_edge_bumped(var/turf/T, var/atom/movable/AM, var/mimic_z)
 	var/datum/level_data/LD = SSmapping.levels_by_z[mimic_z]
@@ -402,7 +402,7 @@
 ///When soemthing touches this turf, it gets transported to the connected level matching the direction of the edge on the map
 #define IMPLEMENT_TRANSITION_EDGE(TURF_TYPE)\
 TURF_TYPE/mimic_edge/transition/setup_mimic(){\
-	var/list/coord = shared_transition_edge_get_mimic_coordinates(src);\
+	var/list/coord = shared_transition_edge_get_mimic_coordinates(src, shared_transition_edge_get_valid_level_data(src));\
 	set_mimic_turf(coord[1], coord[2], coord[3]);}\
 \
 TURF_TYPE/mimic_edge/transition/Bumped(atom/movable/AM){\
@@ -420,7 +420,12 @@ IMPLEMENT_TRANSITION_EDGE(/turf/exterior)
 ////////////////////////////////
 
 ///When something touches this turf, it gets transported to the symmetrically opposite turf it's mimicking.
-#define IMPLEMENT_LOOP_EDGE(TURF_TYPE) TURF_TYPE/mimic_edge/transition/loop/set_mimic_turf(_x, _y, _z){. = ..(_x, _y);}
+#define IMPLEMENT_LOOP_EDGE(TURF_TYPE) \
+TURF_TYPE/mimic_edge/transition/loop/set_mimic_turf(_x, _y, _z){. = ..(_x, _y);}\
+\
+TURF_TYPE/mimic_edge/transition/setup_mimic(){\
+	var/list/coord = shared_transition_edge_get_mimic_coordinates(src, SSmapping.levels_by_z[src.z]);\
+	set_mimic_turf(coord[1], coord[2], coord[3]);}
 
 IMPLEMENT_LOOP_EDGE(/turf/simulated)
 IMPLEMENT_LOOP_EDGE(/turf/unsimulated)
