@@ -273,7 +273,7 @@
 	return TRUE
 
 ///Called after a map_template has been loaded on our z-level. Only apply to templates loaded onto new z-levels.
-/datum/level_data/proc/post_template_load(var/datum/map_template/template)
+/datum/level_data/proc/after_template_load(var/datum/map_template/template)
 	if(template.accessibility_weight)
 		SSmapping.accessible_z_levels[num2text(level_z)] = template.accessibility_weight
 	SSmapping.player_levels |= level_z
@@ -412,9 +412,7 @@
 		if(LD.level_z in _connected_siblings)
 			continue
 		. |= LD.level_z
-		var/list/cur_con = LD.get_all_connected_level_z(_connected_siblings)
-		if(length(cur_con))
-			. |= cur_con
+		. |= LD.get_all_connected_level_z()
 
 
 /datum/level_data/proc/find_connected_levels(var/list/found)
