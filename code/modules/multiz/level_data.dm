@@ -1,23 +1,44 @@
-/// Returns all the turfs within a zlevel's transition edge, on a given direction
-/proc/get_transition_edge_turfs(var/z, var/dir_edge)
+/// Returns all the turfs within a zlevel's transition edge, on a given direction. If include corners is true, the corners of the map will be included.
+/proc/get_transition_edge_turfs(var/z, var/dir_edge, var/include_corners = FALSE)
 	var/datum/level_data/LD = SSmapping.levels_by_z[z]
+	//minimum and maximum corners making up the box, between which the transition edge is
+	var/min_x = 1
+	var/min_y = 1
+	var/max_x = 1
+	var/max_y = 1
+
+	//Beginning and ending of the edges on each axises. Including corners or not.
+	var/x_transit_beg = include_corners? (LD.level_inner_min_x - TRANSITIONEDGE) : (LD.level_inner_min_x)
+	var/x_transit_end = include_corners? (LD.level_inner_max_x + TRANSITIONEDGE) : (LD.level_inner_max_x)
+	var/y_transit_beg = include_corners? (LD.level_inner_min_y - TRANSITIONEDGE) : (LD.level_inner_min_y)
+	var/y_transit_end = include_corners? (LD.level_inner_max_y + TRANSITIONEDGE) : (LD.level_inner_max_y)
+
 	switch(dir_edge)
 		if(NORTH)
-			return block(
-				locate(1,              1,                   LD.level_z),
-				locate(TRANSITIONEDGE, LD.level_max_height, LD.level_z))
+			min_x = x_transit_beg //inner includes transition edge
+			min_y = LD.level_inner_max_y + 1
+			max_x = x_transit_end
+			max_y = LD.level_inner_max_y + TRANSITIONEDGE
 		if(SOUTH)
-			return block(
-				locate(LD.level_max_width - TRANSITIONEDGE, 1,                   LD.level_z),
-				locate(LD.level_max_width,                  LD.level_max_height, LD.level_z))
+			min_x = x_transit_beg //inner includes transition edge
+			min_y = LD.level_inner_min_y - TRANSITIONEDGE //inner includes transition edge
+			max_x = x_transit_end
+			max_y = LD.level_inner_min_y - 1
 		if(EAST)
-			return block(
-				locate(1,                  1,              LD.level_z),
-				locate(LD.level_max_width, TRANSITIONEDGE, LD.level_z))
+			min_x = LD.level_inner_max_x + 1
+			min_y = y_transit_beg
+			max_x = LD.level_inner_max_x + TRANSITIONEDGE
+			max_y = y_transit_end
 		if(WEST)
-			return block(
-				locate(1,                  LD.level_max_height - TRANSITIONEDGE, LD.level_z),
-				locate(LD.level_max_width, LD.level_max_height,                  LD.level_z))
+			min_x = LD.level_inner_min_x - TRANSITIONEDGE //inner includes transition edge
+			min_y = y_transit_beg
+			max_x = LD.level_inner_min_x - 1
+			max_y = y_transit_end
+
+	return block(
+		locate(min_x, min_y, LD.level_z),
+		locate(max_x, max_y, LD.level_z)
+	)
 
 ///Keeps details on how to generate, maintain and access a zlevel
 /datum/level_data
@@ -30,16 +51,24 @@
 	var/level_id
 	/// Various flags indicating what this level functions as.
 	var/level_flags
-	/// The desired width of the level, including the TRANSITIONEDGE. If world.maxx is bigger, the exceeding area will be filled with turfs of "border_filler" type if defined, or base_turf otherwise.
+	/// The desired width of the level, including the TRANSITIONEDGE.
+	///If world.maxx is bigger, the exceeding area will be filled with turfs of "border_filler" type if defined, or base_turf otherwise.
 	var/level_max_width
-	/// The desired height of the level, including the TRANSITIONEDGE. If world.maxy is bigger, the exceeding area will be filled with turfs of "border_filler" type if defined, or base_turf otherwise.
+	/// The desired height of the level, including the TRANSITIONEDGE.
+	///If world.maxy is bigger, the exceeding area will be filled with turfs of "border_filler" type if defined, or base_turf otherwise.
 	var/level_max_height
+
 	/// Filled by map gen on init. Indicates where the accessible level area starts past the transition edge.
-	var/tmp/level_inner_x
+	var/tmp/level_inner_min_x
 	/// Filled by map gen on init. Indicates where the accessible level area starts past the transition edge.
-	var/tmp/level_inner_y
+	var/tmp/level_inner_min_y
+	/// Filled by map gen on init. Indicates where the accessible level area starts past the transition edge.
+	var/tmp/level_inner_max_x
+	/// Filled by map gen on init. Indicates where the accessible level area starts past the transition edge.
+	var/tmp/level_inner_max_y
+
 	/// Filled by map gen on init. Indicates the width of the accessible area within the transition edges.
-	var/tmp/level_inner_with
+	var/tmp/level_inner_width
 	/// Filled by map gen on init.Indicates the height of the accessible area within the transition edges.
 	var/tmp/level_inner_height
 
@@ -144,12 +173,22 @@
 
 ///Calculate the bounds of the level, the border area, and the inner accessible area.
 /datum/level_data/proc/setup_level_bounds()
-	level_max_width    = level_max_width  ? level_max_width  : world.maxx
-	level_max_height   = level_max_height ? level_max_height : world.maxy
-	level_inner_x      = TRANSITIONEDGE + 1
-	level_inner_y      = TRANSITIONEDGE + 1
-	level_inner_with   = level_max_width  - (2 * (TRANSITIONEDGE + 1))
-	level_inner_height = level_max_height - (2 * (TRANSITIONEDGE + 1))
+	level_max_width  = level_max_width  ? level_max_width  : world.maxx
+	level_max_height = level_max_height ? level_max_height : world.maxy
+	var/x_origin     = round((world.maxx - level_max_width)  / 2)
+	var/y_origin     = round((world.maxy - level_max_height) / 2)
+
+	//The first x/y that's within the accessible level
+	level_inner_min_x = x_origin + TRANSITIONEDGE + 1
+	level_inner_min_y = y_origin + TRANSITIONEDGE + 1
+
+	//The last x/y that's within the accessible level
+	level_inner_max_x = (level_max_width  - level_inner_min_x) + 1
+	level_inner_max_y = (level_max_height - level_inner_min_y) + 1
+
+	//The width of the accessible inner area of the level
+	level_inner_width  = level_max_width  - (2 * TRANSITIONEDGE)
+	level_inner_height = level_max_height - (2 * TRANSITIONEDGE)
 
 ///Setup ambient lighting for the level
 /datum/level_data/proc/setup_ambient()
@@ -182,18 +221,17 @@
 /datum/level_data/proc/generate_level()
 	for(var/gen_type in level_generators)
 		if(ispath(gen_type, /datum/random_map/noise/exoplanet))
-			new gen_type(level_inner_x, level_inner_y, level_z, level_inner_with, level_inner_height, FALSE, TRUE, get_base_area_instance())  //#FIXME: Rock color!
+			new gen_type(level_inner_min_x, level_inner_min_y, level_z, level_inner_width, level_inner_height, FALSE, TRUE, get_base_area_instance())  //#FIXME: Rock color!
 		else
-			new gen_type(level_inner_x, level_inner_y, level_z, level_inner_with, level_inner_height, FALSE, TRUE, get_base_area_instance())
-	return
+			new gen_type(level_inner_min_x, level_inner_min_y, level_z, level_inner_width, level_inner_height, FALSE, TRUE, get_base_area_instance())
 
 ///Apply the parent entity's map generators. (Planets generally) This proc is to give a chance to level_data subtypes to individually chose to ignore the parent generators.
 /datum/level_data/proc/apply_map_generators(var/list/map_gen)
 	for(var/gen_type in map_gen)
 		if(ispath(gen_type, /datum/random_map/noise/exoplanet))
-			new gen_type(level_inner_x, level_inner_y, level_z, level_inner_with, level_inner_height, FALSE, TRUE, get_base_area_instance()) //#FIXME: Rock color!
+			new gen_type(level_inner_min_x, level_inner_min_y, level_z, level_inner_width, level_inner_height, FALSE, TRUE, get_base_area_instance()) //#FIXME: Rock color!
 		else
-			new gen_type(level_inner_x, level_inner_y, level_z, level_inner_with, level_inner_height, FALSE, TRUE, get_base_area_instance())
+			new gen_type(level_inner_min_x, level_inner_min_y, level_z, level_inner_width, level_inner_height, FALSE, TRUE, get_base_area_instance())
 
 ///Called during level setup. Run anything that should happen only after the map is fully generated.
 /datum/level_data/proc/after_generate_level()
@@ -216,53 +254,60 @@
 		SSmapping.accessible_z_levels[num2text(level_z)] = template.accessibility_weight
 	SSmapping.player_levels |= level_z
 
+#define LEVEL_EDGE_NONE 0
+#define LEVEL_EDGE_LOOP 1
+#define LEVEL_EDGE_WALL 2
+#define LEVEL_EDGE_CON  3
 ///Builds the map's transition edge if applicable
 /datum/level_data/proc/build_border()
-	var/const/static/EDGE_NONE = 0
-	var/const/static/EDGE_LOOP = 1
-	var/const/static/EDGE_WALL = 2
-	var/const/static/EDGE_CON  = 3
-
 	var/list/edge_states = list()
-	edge_states.len = 8
+	edge_states.len = WEST
+	var/should_loop_edges = ispath(loop_turf_type)
+	var/has_filler_edge   = ispath(border_filler)
 
 	//First determine and validate the borders
 	for(var/adir in global.cardinal)
 		//First check for connections, or loop
 		if(get_connected_level_id(adir))
-			edge_states[adir] = EDGE_CON
+			edge_states[adir] = LEVEL_EDGE_CON
 			var/reverse = global.reverse_dir[adir]
-			if(!ispath(loop_turf_type) || (ispath(loop_turf_type) && (edge_states[reverse] == EDGE_CON)))
-				continue //Skip filler wall when we're not looping borders or we're looping them and aren't facing a connected edge
-			//If we're looping borders and the opposite edge is facing a connected edge, let the default filler wall apply
+			//When facing a connected edge that wasn't set yet, make sure we don't put a loop edge opposite of it.
+			if(should_loop_edges && ((edge_states[reverse] == LEVEL_EDGE_LOOP) || !edge_states[reverse]))
+				edge_states[reverse] = has_filler_edge? LEVEL_EDGE_WALL : LEVEL_EDGE_NONE
 
-		else if(ispath(loop_turf_type))
-			edge_states[adir] = EDGE_LOOP
-			continue //Skip filler wall
-
-		///Apply filler wall last if we have no connections or loop
-		if(ispath(border_filler))
-			edge_states[adir] = EDGE_WALL
+		if(edge_states[adir])
+			continue //Skip edges which either connect to another z-level, or have been forced to a specific type already
+		if(should_loop_edges)
+			edge_states[adir] = LEVEL_EDGE_LOOP
+		else if(ispath(border_filler))
+			edge_states[adir] = LEVEL_EDGE_WALL //Apply filler wall last if we have no connections or loop
 		else
-			edge_states[adir] = EDGE_NONE
+			edge_states[adir] = LEVEL_EDGE_NONE
 
 	//Then apply the borders
 	for(var/adir in global.cardinal)
 		var/border_type = edge_states[adir]
-		if(border_type == EDGE_NONE)
+		if(border_type == LEVEL_EDGE_NONE)
 			continue
 
-		var/list/edge_turfs = get_transition_edge_turfs(level_z, adir)
+		var/list/edge_turfs
 		switch(border_type)
-			if(EDGE_LOOP)
+			if(LEVEL_EDGE_LOOP)
+				edge_turfs = get_transition_edge_turfs(level_z, adir, FALSE)
 				for(var/turf/T in edge_turfs)
 					T.ChangeTurf(loop_turf_type)
-			if(EDGE_CON)
+			if(LEVEL_EDGE_CON)
+				edge_turfs = get_transition_edge_turfs(level_z, adir, FALSE)
 				for(var/turf/T in edge_turfs)
 					T.ChangeTurf(transition_turf_type)
-			if(EDGE_WALL)
+			if(LEVEL_EDGE_WALL)
+				edge_turfs = get_transition_edge_turfs(level_z, adir, TRUE)
 				for(var/turf/T in edge_turfs)
 					T.ChangeTurf(border_filler)
+#undef LEVEL_EDGE_NONE
+#undef LEVEL_EDGE_LOOP
+#undef LEVEL_EDGE_WALL
+#undef LEVEL_EDGE_CON
 
 //
 // Accessors
@@ -295,50 +340,58 @@
 	return cached_connections[direction]
 
 ///Returns recursively a list of level_data for each connected levels.
-/datum/level_data/proc/get_all_connected_level_data()
-	if(!length(connected_levels))
-		return
+/datum/level_data/proc/get_all_connected_level_data(var/list/_connected_siblings)
 	. = list()
+	//Since levels may refer to eachothers, make sure we're in the siblings list to avoid infinite recursion
+	LAZYDISTINCTADD(_connected_siblings, src)
 	for(var/id in connected_levels)
 		var/datum/level_data/LD = SSmapping.levels_by_id[id]
+		if(LD in _connected_siblings)
+			continue
 		. |= LD
-		. |= LD.get_all_connected_level_data()
+		var/list/cur_con = LD.get_all_connected_level_data(_connected_siblings)
+		if(length(cur_con))
+			. |= cur_con
 
 ///Returns recursively a list of level_ids for each connected levels.
-/datum/level_data/proc/get_all_connected_level_ids()
-	if(!length(connected_levels))
-		return
+/datum/level_data/proc/get_all_connected_level_ids(var/list/_connected_siblings)
 	. = list()
+	//Since levels may refer to eachothers, make sure we're in the siblings list to avoid infinite recursion
+	LAZYDISTINCTADD(_connected_siblings, level_id)
 	for(var/id in connected_levels)
 		var/datum/level_data/LD = SSmapping.levels_by_id[id]
+		if(LD.level_id in _connected_siblings)
+			continue
 		. |= LD.level_id
-		. |= LD.get_all_connected_level_ids()
+		var/list/cur_con = LD.get_all_connected_level_ids(_connected_siblings)
+		if(length(cur_con))
+			. |= cur_con
 
-///Returns recursively a list of z-level indices for each connected levels.
-/datum/level_data/proc/get_all_connected_level_z()
-	if(!length(connected_levels))
-		return
+///Returns recursively a list of z-level indices for each connected levels. Parameter is to keep trakc
+/datum/level_data/proc/get_all_connected_level_z(var/list/_connected_siblings)
 	. = list()
+	//Since levels may refer to eachothers, make sure we're in the siblings list to avoid infinite recursion
+	LAZYDISTINCTADD(_connected_siblings, level_z)
 	for(var/id in connected_levels)
 		var/datum/level_data/LD = SSmapping.levels_by_id[id]
+		if(LD.level_z in _connected_siblings)
+			continue
 		. |= LD.level_z
-		. |= LD.get_all_connected_level_z()
+		var/list/cur_con = LD.get_all_connected_level_z(_connected_siblings)
+		if(length(cur_con))
+			. |= cur_con
+
 
 /datum/level_data/proc/find_connected_levels(var/list/found)
+	LAZYDISTINCTADD(found, level_z)
 	for(var/other_id in connected_levels)
 		var/datum/level_data/neighbor = SSmapping.levels_by_id[other_id]
-		neighbor.add_connected_levels(found)
-
-/datum/level_data/proc/add_connected_levels(var/list/found)
-	. = found
-	if((level_z in found))
-		return
-	LAZYADD(found, level_z)
-	if(!length(connected_levels))
-		return
-	for(var/other_id in connected_levels)
-		var/datum/level_data/neighbor = SSmapping.levels_by_id[other_id]
-		neighbor.add_connected_levels(found)
+		if(neighbor.level_z in found)
+			continue
+		LAZYADD(found, neighbor.level_z)
+		if(!length(neighbor.connected_levels))
+			continue
+		neighbor.find_connected_levels(found)
 
 ///Returns the instance of the base area for this level
 /datum/level_data/proc/get_base_area_instance()

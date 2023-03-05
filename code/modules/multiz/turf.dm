@@ -210,7 +210,7 @@
 	var/turf/NT = mimic_x && mimic_y && mimic_z && locate(mimic_x, mimic_y, mimic_z)
 	if(NT)
 		opacity = NT.opacity
-		log_debug("[src]([x],[y],[z]) mirroring [NT]([NT.x],[NT.y],[NT.z])")
+		//log_debug("[src]([x],[y],[z]) mirroring [NT]([NT.x],[NT.y],[NT.z])")
 		LAZYADD(., NT)
 
 /turf/simulated/mimic_edge/proc/set_mimic_turf(var/_x, var/_y, var/_z)
@@ -258,7 +258,7 @@
 	var/turf/NT = mimic_x && mimic_y && mimic_z && locate(mimic_x, mimic_y, mimic_z)
 	if(NT)
 		opacity = NT.opacity
-		log_debug("[src]([x],[y],[z]) mirroring [NT]([NT.x],[NT.y],[NT.z])")
+		//log_debug("[src]([x],[y],[z]) mirroring [NT]([NT.x],[NT.y],[NT.z])")
 		LAZYADD(., NT)
 
 /turf/unsimulated/mimic_edge/proc/set_mimic_turf(var/_x, var/_y, var/_z)
@@ -307,7 +307,7 @@
 	var/turf/NT = mimic_x && mimic_y && mimic_z && locate(mimic_x, mimic_y, mimic_z)
 	if(NT)
 		opacity = NT.opacity
-		log_debug("[src]([x],[y],[z]) mirroring [NT]([NT.x],[NT.y],[NT.z])")
+		//log_debug("[src]([x],[y],[z]) mirroring [NT]([NT.x],[NT.y],[NT.z])")
 		LAZYADD(., NT)
 
 /turf/exterior/mimic_edge/proc/set_mimic_turf(var/_x, var/_y, var/_z)
@@ -320,70 +320,105 @@
 // Transition Edges
 ////////////////////////////////
 
-///Returns the direction a turf on the map is in relation to the center of the world
-/proc/get_turf_to_world_center_direction(var/turf/T)
-	//Figure out turf orientation from the map center. (Don't use the helper procs, they don't behave like we want on the corner turfs)
-	. = 0 //Make it a number so we don't end up returning a list
-	var/halfmaxx = round(world.maxx/2) //get world center x
-	var/halfmaxy = round(world.maxy/2) //get world center y
-	if(T.x < halfmaxx)
-		. |= WEST
+///Returns the a cardinal direction for a turf on the map that's beyon the transition edge
+/proc/get_turf_transition_edge_direction(var/turf/T)
+	var/datum/level_data/LD = SSmapping.levels_by_z[T.z]
+
+	var/x_bef_left_transit   = T.x < LD.level_inner_min_x
+	var/x_aft_right_transit  = T.x > LD.level_inner_max_x
+	var/y_bef_bottom_transit = T.y < LD.level_inner_min_y
+	var/y_aft_top_transit    = T.y > LD.level_inner_max_y
+
+	if(x_bef_left_transit && !y_bef_bottom_transit && !y_aft_top_transit)
+		return WEST
+	else if(x_aft_right_transit && !y_bef_bottom_transit && !y_aft_top_transit)
+		return EAST
+	else if(y_bef_bottom_transit && !x_bef_left_transit && !x_aft_right_transit)
+		return SOUTH
+	else if(y_aft_top_transit && !x_bef_left_transit && !x_aft_right_transit)
+		return NORTH
 	else
-		. |= EAST
+		CRASH("Tried to get the transition edge direction of a corner turf!")
 
-	if(T.y < halfmaxy)
-		. |= SOUTH
+
+/proc/shared_transition_edge_get_mimic_turf(var/src_x, var/src_y, var/inner_min_x, var/inner_min_y, var/inner_max_x, var/inner_max_y)
+	var/x_bef_left_transit   = src_x < inner_min_x
+	var/x_aft_right_transit  = src_x > inner_max_x
+	var/y_bef_bottom_transit = src_y < inner_min_y
+	var/y_aft_top_transit    = src_y > inner_max_y
+
+	var/translate_from_dir
+	if(x_bef_left_transit && !y_bef_bottom_transit && !y_aft_top_transit)
+		translate_from_dir = WEST
+	else if(x_aft_right_transit && !y_bef_bottom_transit && !y_aft_top_transit)
+		translate_from_dir = EAST
+	else if(y_bef_bottom_transit && !x_bef_left_transit && !x_aft_right_transit)
+		translate_from_dir = SOUTH
+	else if(y_aft_top_transit && !x_bef_left_transit && !x_aft_right_transit)
+		translate_from_dir = NORTH
 	else
-		. |= NORTH
+		//In this case we're in the corners of the map. We shouldn't mimic.
+		return null
 
-/proc/shared_transition_edge_get_mimic_turf(var/src_x, var/src_y, var/level_max_width, var/level_max_height)
-	var/mirrored_x = src_x
-	if (src_x <= TRANSITIONEDGE)
-		mirrored_x = src_x + (level_max_width - 2*TRANSITIONEDGE) - 1
-	else if (src_x >= (level_max_width - TRANSITIONEDGE))
-		mirrored_x = src_x - (level_max_width  - 2*TRANSITIONEDGE) + 1
+	var/newx = src_x
+	var/newy = src_y
+	switch(translate_from_dir)
+		if(NORTH)
+			newy = (inner_min_y - 1) + (src_y - inner_max_y)
+		if(SOUTH)
+			newy = (inner_max_y + 1) - (inner_min_y - src_y)
+		if(EAST)
+			newx = (inner_min_x - 1) + (src_x - inner_max_x)
+		if(WEST)
+			newx = (inner_max_x + 1) - (inner_min_x - src_x)
 
-	var/mirrored_y = src_y
-	if(src_y <= TRANSITIONEDGE)
-		mirrored_y = src_y + (level_max_height - 2*TRANSITIONEDGE) - 1
-	else if (src_y >= (level_max_height - TRANSITIONEDGE))
-		mirrored_y = src_y - (level_max_height - 2*TRANSITIONEDGE) + 1
+	return list(newx, newy)
 
-	return list(mirrored_x, mirrored_y)
 
 /proc/shared_transition_edge_get_mimic_coordinates(var/turf/T, var/datum/level_data/target_ldat)
 	if(!target_ldat)
 		CRASH("Got transition_edge turf([T.x], [T.y], [T.z]) linking to a non-existent level!")
-	var/maxx = target_ldat?.level_max_width  ? target_ldat.level_max_width  : world.maxx
-	var/maxy = target_ldat?.level_max_height ? target_ldat.level_max_height : world.maxy
-	. = shared_transition_edge_get_mimic_turf(T.x, T.y, maxx, maxy)
-	. += target_ldat?.level_z //Append z coordinate to x and y
+	var/list/coord = shared_transition_edge_get_mimic_turf(
+		T.x,
+		T.y,
+		target_ldat.level_inner_min_x,
+		target_ldat.level_inner_min_y,
+		target_ldat.level_inner_max_x,
+		target_ldat.level_inner_max_y
+	)
+	if(isnull(coord))
+		log_warning("Transition turf at ([T.x], [T.y], [T.z]) was in a corner. That's likely a mistake!")
+		coord = list(T.x, T.y)
+	coord += target_ldat.level_z //Append z coordinate to x and y
+	return coord
 
 /proc/shared_transition_edge_get_valid_level_data(var/turf/T)
 	var/datum/level_data/ldat = SSmapping.levels_by_z[T.z]
-	var/edge_dir         = get_turf_to_world_center_direction(T)
+	var/edge_dir         = get_turf_transition_edge_direction(T)
 	var/connected_lvl_id = ldat.get_connected_level_id(edge_dir)
+	//log_debug("Got connected transition level id [connected_lvl_id] for turf [T]")
 
 	if(!connected_lvl_id)
 		CRASH("Got transition_edge turf([T.x], [T.y], [T.z]) in direction [dir2text(edge_dir)] that doesn't connect to anything!")
 	return SSmapping.levels_by_id[connected_lvl_id]
 
 /proc/shared_transition_edge_bumped(var/turf/T, var/atom/movable/AM, var/mimic_z)
-	var/datum/level_data/LD = SSmapping.levels_by_z[mimic_z]
-	var/maxx  = LD?.level_max_width  ? LD.level_max_width  : world.maxx
-	var/maxy  = LD?.level_max_height ? LD.level_max_height : world.maxy
+	var/datum/level_data/LDsrc = SSmapping.levels_by_z[T.z]
+	var/datum/level_data/LDdst = SSmapping.levels_by_z[mimic_z]
 	var/new_x = AM.x
 	var/new_y = AM.y
 
 	//Get the position to teleport the thing to
-	if(T.x <= TRANSITIONEDGE)
-		new_x = maxx - TRANSITIONEDGE - 1
-	else if (T.x >= (maxx - TRANSITIONEDGE))
-		new_x = TRANSITIONEDGE + 1
-	else if (T.y <= TRANSITIONEDGE)
-		new_y = maxy - TRANSITIONEDGE - 1
-	else if (T.y >= (maxy - TRANSITIONEDGE))
-		new_y = TRANSITIONEDGE + 1
+	if(T.x <= LDsrc.level_inner_min_x)
+		new_x = LDdst.level_inner_max_x
+	else if (T.x >= LDsrc.level_inner_max_x)
+		new_x = LDdst.level_inner_min_x
+	else if (T.y <= LDsrc.level_inner_min_y)
+		new_y = LDdst.level_inner_max_y
+	else if (T.y >= LDsrc.level_inner_max_y)
+		new_y = LDdst.level_inner_min_y
+	else
+		return //If we're teleporting into the same spot just quit early
 
 	//Teleport to the turf
 	var/turf/dest = locate(new_x, new_y, mimic_z)
@@ -400,35 +435,46 @@
 ////////////////////////////////
 
 ///When soemthing touches this turf, it gets transported to the connected level matching the direction of the edge on the map
-#define IMPLEMENT_TRANSITION_EDGE(TURF_TYPE)\
-TURF_TYPE/mimic_edge/transition/setup_mimic(){\
-	var/list/coord = shared_transition_edge_get_mimic_coordinates(src, shared_transition_edge_get_valid_level_data(src));\
-	set_mimic_turf(coord[1], coord[2], coord[3]);}\
-\
-TURF_TYPE/mimic_edge/transition/Bumped(atom/movable/AM){\
-	. = ..();\
-	shared_transition_edge_bumped(src, AM, mimic_z);}
+/turf/simulated/mimic_edge/transition/setup_mimic()
+	var/list/coord = shared_transition_edge_get_mimic_coordinates(src, shared_transition_edge_get_valid_level_data(src))
+	set_mimic_turf(coord[1], coord[2], coord[3])
+/turf/simulated/mimic_edge/transition/Bumped(atom/movable/AM)
+	. = ..()
+	shared_transition_edge_bumped(src, AM, mimic_z)
 
-IMPLEMENT_TRANSITION_EDGE(/turf/simulated)
-IMPLEMENT_TRANSITION_EDGE(/turf/unsimulated)
-IMPLEMENT_TRANSITION_EDGE(/turf/exterior)
+/turf/unsimulated/mimic_edge/transition/setup_mimic()
+	var/list/coord = shared_transition_edge_get_mimic_coordinates(src, shared_transition_edge_get_valid_level_data(src))
+	set_mimic_turf(coord[1], coord[2], coord[3])
+/turf/unsimulated/mimic_edge/transition/Bumped(atom/movable/AM)
+	. = ..()
+	shared_transition_edge_bumped(src, AM, mimic_z)
 
-#undef IMPLEMENT_TRANSITION_EDGE
+/turf/exterior/mimic_edge/transition/setup_mimic()
+	var/list/coord = shared_transition_edge_get_mimic_coordinates(src, shared_transition_edge_get_valid_level_data(src))
+	set_mimic_turf(coord[1], coord[2], coord[3])
+/turf/exterior/mimic_edge/transition/Bumped(atom/movable/AM)
+	. = ..()
+	shared_transition_edge_bumped(src, AM, mimic_z)
 
 ////////////////////////////////
 // Loop Edges
 ////////////////////////////////
 
 ///When something touches this turf, it gets transported to the symmetrically opposite turf it's mimicking.
-#define IMPLEMENT_LOOP_EDGE(TURF_TYPE) \
-TURF_TYPE/mimic_edge/transition/loop/set_mimic_turf(_x, _y, _z){. = ..(_x, _y);}\
-\
-TURF_TYPE/mimic_edge/transition/setup_mimic(){\
-	var/list/coord = shared_transition_edge_get_mimic_coordinates(src, SSmapping.levels_by_z[src.z]);\
-	set_mimic_turf(coord[1], coord[2], coord[3]);}
+/turf/simulated/mimic_edge/transition/loop/set_mimic_turf(_x, _y, _z)
+	. = ..(_x, _y)
+/turf/simulated/mimic_edge/transition/loop/setup_mimic()
+	var/list/coord = shared_transition_edge_get_mimic_coordinates(src, SSmapping.levels_by_z[src.z])
+	set_mimic_turf(coord[1], coord[2], coord[3])
 
-IMPLEMENT_LOOP_EDGE(/turf/simulated)
-IMPLEMENT_LOOP_EDGE(/turf/unsimulated)
-IMPLEMENT_LOOP_EDGE(/turf/exterior)
+/turf/unsimulated/mimic_edge/transition/loop/set_mimic_turf(_x, _y, _z)
+	. = ..(_x, _y)
+/turf/unsimulated/mimic_edge/transition/loop/setup_mimic()
+	var/list/coord = shared_transition_edge_get_mimic_coordinates(src, SSmapping.levels_by_z[src.z])
+	set_mimic_turf(coord[1], coord[2], coord[3])
 
-#undef IMPLEMENT_LOOP_EDGE
+/turf/exterior/mimic_edge/transition/loop/set_mimic_turf(_x, _y, _z)
+	. = ..(_x, _y)
+/turf/exterior/mimic_edge/transition/loop/setup_mimic()
+	var/list/coord = shared_transition_edge_get_mimic_coordinates(src, SSmapping.levels_by_z[src.z])
+	set_mimic_turf(coord[1], coord[2], coord[3])
