@@ -528,3 +528,15 @@
 	var/M = get_total_moles()
 	if(M)
 		return get_mass()/M
+
+///Returns a color blended from all materials the gas mixture contains
+/datum/gas_mixture/proc/get_overall_color()
+	if(!total_moles)
+		update_values()
+	for(var/g in gas)
+		var/decl/material/mat = GET_DECL(g)
+		var/percent = gas[g] / total_moles
+		if(.)
+			BlendRGB(., mat.color, percent)
+		else
+			. = mat.color

@@ -45,6 +45,8 @@
 	overmap_marker_type  = /obj/effect/overmap/visitable/sector/planetoid/exoplanet/shrouded
 	ruin_tags_blacklist  = RUIN_HABITAT
 	template_parent_type = /datum/map_template/planetoid/exoplanet
+	surface_light_level_min = 0.15
+	surface_light_level_max = 0.25
 	possible_rock_colors = list(
 		COLOR_INDIGO,
 		COLOR_DARK_BLUE_GRAY,
@@ -55,14 +57,8 @@
 		/datum/random_map/noise/ore/poor
 	)
 
-
 /datum/map_template/planetoid/exoplanet/shrouded/get_spawn_weight()
 	return 50
-
-// TODO check if ambient lighting handles negatives
-/datum/map_template/planetoid/exoplanet/shrouded/generate_daycycle(datum/planetoid_data/gen_data, datum/level_data/surface_level)
-	surface_level.ambient_light_level = -0.15
-	..()
 
 /datum/map_template/planetoid/exoplanet/shrouded/get_target_temperature()
 	return T20C - rand(10, 20)

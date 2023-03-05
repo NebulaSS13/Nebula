@@ -60,6 +60,11 @@
 	/// Ensure that the minimum is larger than [maxx * daycycle_column_delay]. Otherwise the right side of the exoplanet can get stuck in a forever day.
 	var/day_duration
 
+	///Ambient lighting level across the surface. All surface height levels will be set to this.
+	var/surface_light_level
+	///Lighjting color used for the entire surface.
+	var/surface_light_color
+
 	///The flora generator instance that generates and keep track of the flora types for this planet.
 	var/datum/flora_generator/flora
 	///The instance of the fauna generator currently managing our fauna if any

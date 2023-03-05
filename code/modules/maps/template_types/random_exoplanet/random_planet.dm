@@ -22,9 +22,6 @@
 	///Amount of adjacent z-levels to generate west of the root z-level stack.
 	var/adjacent_levels_west = 0
 
-	///Possible colors for rock walls and rocks in general on this planet (Honestly, should be handled via materal system maybe?)
-	var/list/possible_rock_colors = list(COLOR_ASTEROID_ROCK)
-
 	///A list of the same length as there are zlevels on this map(index is z level count in order).
 	///Each entry is a level_data type, or null. If defined, will override the level_data_type var for the specified z-level.
 	var/list/prefered_level_data_per_z
@@ -50,6 +47,17 @@
 	var/max_shuttle_radius = 20
 	///The type of engraving flavor text generator to use for the new planet
 	var/xenoarch_engraving_flavor_type = /datum/xenoarch_engraving_flavor
+
+	// *** Appearence ***
+	///Possible colors for rock walls and rocks in general on this planet (Honestly, should be handled via materal system maybe?)
+	var/list/possible_rock_colors = list(COLOR_ASTEROID_ROCK)
+	///Planet ambient lighting minimum possible value from 0 to 1. This value may be overridden in individual /datum/level_data.
+	var/surface_light_level_min = 0.45
+	///Planet ambient lighting maximum possible value from 0 to 1. This value may be overridden in individual /datum/level_data.
+	var/surface_light_level_max = 0.75
+	///Possible list of colors to pick for the ambient lighting color. Null means a random color will be generated.
+	///This value may be overridden by individual /datum/level_data.
+	var/list/surface_light_colors
 
 	// *** Fauna/Flora ***
 	///Set to the type of fauna generator to enforce on all planets z-levels, if we're generating fauna.
@@ -245,6 +253,7 @@
 	for(var/datum/exoplanet_theme/T in gen_data.themes)
 		T.adjust_atmosphere(gen_data)
 	generate_planet_materials(gen_data)
+	generate_ambient_lighting(gen_data)
 	gen_data.generate_life()
 
 /datum/map_template/planetoid/proc/after_planet_gen(var/datum/planetoid_data/gen_data, var/datum/level_data/topmost_level_data, var/datum/level_data/surface_level_data)
@@ -295,6 +304,25 @@
 /datum/map_template/planetoid/proc/generate_daycycle(var/datum/planetoid_data/gen_data, var/datum/level_data/surface_level)
 	gen_data.starts_at_night = (surface_level.ambient_light_level > 0.1)
 	gen_data.day_duration    = rand(global.config.exoplanet_min_day_duration, global.config.exoplanet_max_day_duration)
+
+/datum/map_template/planetoid/proc/generate_ambient_lighting(var/datum/planetoid_data/gen_data)
+	//Try to generate a surface light intensity if we don't have it yet
+	if(!gen_data.surface_light_level)
+		gen_data.surface_light_level = rand(surface_light_level_min * 100, surface_light_level_max * 100) / 100 //rand() doesn't work on decimal numbers
+
+	//Try to generate surface light color if we don't have any yet
+	if(!gen_data.surface_light_color)
+		if(length(surface_light_colors))
+			//If we have colors to pick from, go for it
+			gen_data.surface_light_color = pick(surface_light_colors)
+		else
+			//Otherwise generate it randomly
+			var/atmos_color = gen_data.atmosphere?.get_overall_color() || get_random_colour()
+			var/list/HSV    = rgb2num(atmos_color, COLORSPACE_HSV)
+			var/sat_factor  = rand(50, 80) / 100 //Make the color less saturated to around 50% to 80%
+			var/val_factor  = 1 + (rand(10, 50) / 100) //Make the color brighter within a factor of 10%-50%
+			//Scale and clamp to sane-ish values for lighting
+			gen_data.surface_light_color = hsv(HSV[1], clamp(round(HSV[2] * sat_factor), 40, 80), clamp(round(HSV[3] * val_factor), 60, 90), 200)
 
 ///Selects the base strata for the whole planet. The levels have the final say however in what to do with that.
 /datum/map_template/planetoid/proc/select_strata(var/datum/planetoid_data/gen_data)

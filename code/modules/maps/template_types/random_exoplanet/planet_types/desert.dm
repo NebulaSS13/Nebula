@@ -55,6 +55,8 @@
 	overmap_marker_type   = /obj/effect/overmap/visitable/sector/planetoid/exoplanet/desert
 	initial_weather_state = null
 	template_parent_type  = /datum/map_template/planetoid/exoplanet
+	surface_light_level_min = 0.5
+	surface_light_level_max = 0.95
 	possible_rock_colors = list(
 		COLOR_BEIGE,
 		COLOR_PALE_YELLOW,
@@ -65,11 +67,6 @@
 		/datum/random_map/noise/exoplanet/desert,
 		/datum/random_map/noise/ore/rich,
 	)
-
-/datum/map_template/planetoid/exoplanet/desert/generate_daycycle(datum/planetoid_data/gen_data, datum/level_data/surface_level)
-	if(prob(70))
-		surface_level.ambient_light_level = rand(5,10)/10	//deserts are usually :lit:
-	. = ..()
 
 /datum/map_template/planetoid/exoplanet/desert/get_target_temperature()
 	return T20C + rand(20, 100)

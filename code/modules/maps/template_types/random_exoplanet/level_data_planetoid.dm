@@ -8,6 +8,7 @@
 /datum/level_data/planetoid/exoplanet
 	base_area = /area/exoplanet
 	base_turf = /turf/exterior/dirt
+	ambient_light_level = 0.5
 
 /datum/level_data/planetoid/exoplanet/underground
 	base_area = /area/exoplanet/underground

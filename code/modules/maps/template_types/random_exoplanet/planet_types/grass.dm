@@ -72,16 +72,13 @@
 	fauna_generator_type = /datum/fauna_generator/grass
 	overmap_marker_type  = /obj/effect/overmap/visitable/sector/planetoid/exoplanet/grass
 	template_parent_type = /datum/map_template/planetoid/exoplanet
+	surface_light_level_min = 0.25 //give a chance of twilight jungle
+	surface_light_level_max = 0.75
 	possible_rock_colors = list(
 		COLOR_ASTEROID_ROCK,
 		COLOR_GRAY80,
 		COLOR_BROWN
 	)
-
-/datum/map_template/planetoid/exoplanet/grass/generate_daycycle(datum/planetoid_data/gen_data, datum/level_data/surface_level)
-	if(prob(40))
-		surface_level.ambient_light_level = rand(1,7)/10	//give a chance of twilight jungle
-	. = ..()
 
 /datum/map_template/planetoid/exoplanet/grass/get_target_temperature()
 	return T20C + rand(10, 30)

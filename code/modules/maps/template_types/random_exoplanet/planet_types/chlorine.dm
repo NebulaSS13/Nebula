@@ -46,6 +46,8 @@
 	fauna_generator_type = /datum/fauna_generator/chlorine
 	ruin_tags_blacklist  = RUIN_HABITAT|RUIN_WATER
 	template_parent_type = /datum/map_template/planetoid/exoplanet
+	surface_light_level_min = 0.65
+	surface_light_level_max = 0.85
 	possible_rock_colors = list(
 		COLOR_GRAY80,
 		COLOR_PALE_GREEN_GRAY,
@@ -65,12 +67,6 @@
 /datum/map_template/planetoid/exoplanet/chlorine/get_mandatory_gasses()
 	return list(/decl/material/gas/chlorine = MOLES_O2STANDARD)
 
-/datum/map_template/planetoid/exoplanet/chlorine/generate_daycycle(datum/planetoid_data/gen_data, datum/level_data/surface_level)
-	if(prob(50))
-		surface_level.ambient_light_level = rand(7,10)/10 //It could be night.
-	else
-		surface_level.ambient_light_level = 0.1
-	. = ..()
 
 /datum/random_map/noise/exoplanet/chlorine
 	descriptor = "chlorine exoplanet"
