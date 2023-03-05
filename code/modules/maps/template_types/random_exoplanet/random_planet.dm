@@ -9,7 +9,18 @@
 	template_parent_type = /datum/map_template/planetoid
 	level_data_type      = /datum/level_data/planetoid
 	modify_tag_vars      = FALSE //We don't really have to care about those
-	tallness             = 1
+	tallness             = 2
+
+	//#TODO: This could probably be simplified down.
+	///Amount of adjacent z-levels to generate north of the root z-level stack.
+	///Setting this to 1 for instance will generate a stack of zlevels connecting to the north of all z-levels below the root level.
+	var/adjacent_levels_north = 1
+	///Amount of adjacent z-levels to generate south of the root z-level stack.
+	var/adjacent_levels_south = 0
+	///Amount of adjacent z-levels to generate east of the root z-level stack.
+	var/adjacent_levels_east = 0
+	///Amount of adjacent z-levels to generate west of the root z-level stack.
+	var/adjacent_levels_west = 0
 
 	///Possible colors for rock walls and rocks in general on this planet (Honestly, should be handled via materal system maybe?)
 	var/list/possible_rock_colors = list(COLOR_ASTEROID_ROCK)
@@ -96,35 +107,88 @@
 /datum/map_template/planetoid/proc/generate_levels(var/datum/planetoid_data/gen_data, var/list/theme_generators)
 	//Register the planetoid so the planet stuff can properly look us up when initializing the z-levels.
 	SSmapping.register_planetoid(gen_data)
+	var/top_z_level = world.maxz + 1
+	//Build root z-stack first
+	var/list/lvl_to_build = prefered_level_data_per_z
 
-	. = list()
-	var/top_level_z = world.maxz + 1 //We haven't created the first z-level yet
-	for(var/i = 1 to tallness)
-		var/lvl_dat_type = LAZYACCESS(prefered_level_data_per_z, i) || level_data_type //Check if we override the level_data type for this zlevel
-		//Make sure the z level has the planetoid assigned before the level_data is created and spawn all its base turf
-		SSmapping.register_planetoid_levels(world.maxz + i, gen_data)
+	//Setup a list of level data types to use for each new z-levels
+	if(!length(lvl_to_build))
+		lvl_to_build = list()
+		for(var/i = 1 to tallness)
+			lvl_to_build += level_data_type
 
-		//Actually increment the world, and fill it with the base turfs
-		var/datum/level_data/planetoid/LD = SSmapping.increment_world_z_size(lvl_dat_type, TRUE)
+	log_debug("Planet Levels:\n\tTop Planet:[top_z_level]")
+	//Build root stack
 
-		//Make sure we keep track of the topmost level asap
-		if(i == 1)
-			gen_data.set_topmost_level(LD)
-		//Make sure we mark the surface level id
-		if(i == surface_level_index)
-			gen_data.set_surface_level(LD)
+	var/list/root_stack = buid_z_stack(null, null, lvl_to_build, gen_data)
 
-		// Apply, shared stuff between levels
-		LD.before_template_load(src, gen_data) //Apply planet name, etc..
-		. += LD
+	//Build any amount of adjacent stacks
+	var/list/north_stack = build_adjacent_z_stacks(adjacent_levels_north, NORTH, root_stack, lvl_to_build, gen_data)
+	var/list/south_stack = build_adjacent_z_stacks(adjacent_levels_south, SOUTH, root_stack, lvl_to_build, gen_data)
+	var/list/east_stack  = build_adjacent_z_stacks(adjacent_levels_east,  EAST,  root_stack, lvl_to_build, gen_data)
+	var/list/west_stack  = build_adjacent_z_stacks(adjacent_levels_west,  WEST,  root_stack, lvl_to_build, gen_data)
 
-	//Place map z stack obj now that the levels exist #TODO: Probably should be integrated into level_data??
-	new /obj/abstract/map_data(locate(1, 1, top_level_z), tallness) //Do before registering planetoid
+	. = root_stack
+	if(length(north_stack))
+		. += north_stack
+	if(length(south_stack))
+		. += north_stack
+	if(length(east_stack))
+		. += north_stack
+	if(length(west_stack))
+		. += north_stack
 
 	//Generate individual levels now that the z-level structure is properly setup
-	for(var/datum/level_data/planetoid/LD in .)
+	for(var/datum/level_data/LD in .)
 		LD.setup_level_data() //Do level gen
 		LD.apply_map_generators(length(theme_generators)? (map_generators | theme_generators) : map_generators) //Apply our own level gen and the theme's level gen
+
+
+///Build a stack that's adjacent to the specified stack.
+/datum/map_template/planetoid/proc/build_adjacent_z_stacks(var/amount, var/direction_from_root, var/list/adjacent_level_data, var/list/new_level_data_types, var/datum/planetoid_data/gen_data)
+	var/list/lvl_data = list()
+	if(amount < 1)
+		return lvl_data
+	lvl_data = buid_z_stack(direction_from_root, adjacent_level_data, new_level_data_types, gen_data)
+	if(amount < 2)
+		return lvl_data
+	//If amount if bigger than 2, build another adjacent stack to us
+	lvl_data += build_adjacent_z_stacks(amount - 1, direction_from_root, ., new_level_data_types, gen_data)
+	return lvl_data
+
+///Create a new z-level stack that's connected to an existing z stack, on the given direction.
+/datum/map_template/planetoid/proc/buid_z_stack(var/direction_from_root, var/list/adjacent_level_data, var/list/new_level_data_types, var/datum/planetoid_data/gen_data)
+	. = list()
+	var/top_level_z  = world.maxz + 1 //We haven't created the first z-level yet
+	var/stack_height = length(new_level_data_types)
+	log_debug("\n\tZ-Stack Top:[top_level_z], Direction:[dir_name(direction_from_root)]")
+	for(var/i = 1 to stack_height)
+		//Register the z-level to the planetoid, BEFORE the level_data runs its init code, so turfs get linked properly
+		SSmapping.register_planetoid_levels(world.maxz + 1, gen_data)
+
+		var/myty                   = new_level_data_types[i]
+		var/datum/level_data/LDadj = LAZYACCESS(adjacent_level_data, i)
+		var/datum/level_data/LDnew = SSmapping.increment_world_z_size(myty, TRUE)
+
+		log_debug("\n\t\tLevel Z:[world.maxz], [dir_name(direction_from_root)] of z-level [LDadj?.level_z]")
+
+		//Make sure the level connects to us if we have an adjacent level
+		if(LDadj)
+			LAZYSET(LDnew.connected_levels, LDadj.level_id, global.reverse_dir[direction_from_root])
+			LAZYSET(LDadj.connected_levels, LDnew.level_id, direction_from_root)
+		else
+			//If we don't have an adjacent level, we're the root level stack and need to set some extra stuff
+			if(i == 1)
+				gen_data.set_topmost_level(LDnew)
+			//Make sure we mark the surface level id
+			if(i == surface_level_index)
+				gen_data.set_surface_level(LDnew)
+
+		LDnew.before_template_load(src, gen_data) //Apply planet name, etc..
+		. += LDnew
+
+	//Make sure the stack has its stack top object
+	new /obj/abstract/map_data(locate(1, 1, top_level_z), stack_height)
 
 /datum/map_template/planetoid/load_new_z(no_changeturf = TRUE, centered = TRUE, datum/planetoid_data/gen_data) //centered == false should probably runtime, because it will never work properly
 	if(!gen_data)
