@@ -24,8 +24,9 @@
 	var/list/grass_cache
 
 /datum/random_map/noise/exoplanet/New(var/tx, var/ty, var/tz, var/tlx, var/tly, var/do_not_apply, var/do_not_announce, var/used_area)
+	var/datum/level_data/LD = SSmapping.levels_by_z[tz]
 	if(target_turf_type == null)
-		target_turf_type = SSmapping.base_turf_by_z[tz] || world.turf
+		target_turf_type = SSmapping.base_turf_by_z[tz] || LD.base_turf || world.turf
 	water_level = rand(water_level_min,water_level_max)
 	//automagically adjust probs for bigger maps to help with lag
 	if(isnull(grass_prob)) grass_prob = flora_prob * 2
@@ -39,7 +40,8 @@
 		plantcolors = P.flora.plant_colors.Copy()
 	..()
 
-	SSmapping.base_turf_by_z[tz] = land_type
+	//#TODO: Doublec check why random maps are messing with the base turf at all??
+	SSmapping.base_turf_by_z[tz] = land_type || SSmapping.base_turf_by_z[tz] || LD.base_turf || world.turf //Yes, it is necessary to be this thorough here
 
 /datum/random_map/noise/exoplanet/get_map_char(var/value)
 	if(water_type && noise2value(value) < water_level)
