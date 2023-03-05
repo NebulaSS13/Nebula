@@ -70,10 +70,10 @@ SUBSYSTEM_DEF(daycyle)
 
 /datum/ssdaycycle_registered/proc/add_level(var/level_id)
 	var/datum/level_data/LD = SSmapping.levels_by_id[level_id]
-	LAZYADD(x_min, (LD.level_inner_x || 1))
-	LAZYADD(y_min, (LD.level_inner_y || 1))
-	LAZYADD(x_max, (LD.level_inner_x? (LD.level_inner_x + LD.level_inner_with)   : world.maxx))
-	LAZYADD(y_max, (LD.level_inner_y? (LD.level_inner_y + LD.level_inner_height) : world.maxy))
+	LAZYADD(x_min, (LD.level_inner_min_x || 1))
+	LAZYADD(y_min, (LD.level_inner_min_y || 1))
+	LAZYADD(x_max, (LD.level_inner_min_x? LD.level_inner_max_x : world.maxx))
+	LAZYADD(y_max, (LD.level_inner_min_y? LD.level_inner_max_y : world.maxy))
 	LAZYADD(level_z, LD.level_z)
 
 /datum/ssdaycycle_registered/proc/remove_level(var/level_id)

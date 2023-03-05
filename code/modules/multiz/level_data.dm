@@ -278,6 +278,10 @@
 		SSmapping.accessible_z_levels[num2text(level_z)] = template.accessibility_weight
 	SSmapping.player_levels |= level_z
 
+#define LEVEL_EDGE_NONE 0
+#define LEVEL_EDGE_LOOP 1
+#define LEVEL_EDGE_WALL 2
+#define LEVEL_EDGE_CON  3
 ///Builds the map's transition edge if applicable
 /datum/level_data/proc/build_border()
 	var/list/edge_states = compute_level_edges_states()

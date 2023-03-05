@@ -241,6 +241,8 @@
 	gen_data.generate_life()
 
 /datum/map_template/planetoid/proc/after_planet_gen(var/datum/planetoid_data/gen_data, var/datum/level_data/topmost_level_data, var/datum/level_data/surface_level_data)
+	//#TODO: Generate vertical z-level connections (holes/stairs/ladders)
+
 	if(!gen_data.engraving_generator)
 		gen_data.set_engraving_generator(new xenoarch_engraving_flavor_type())
 
@@ -312,8 +314,8 @@
 	while(points_left)
 		attempts--
 		var/turf/T = locate(
-			rand(surface_level.level_inner_x + border_padding, (surface_level.level_inner_x + surface_level.level_inner_with)   - border_padding),
-			rand(surface_level.level_inner_y + border_padding, (surface_level.level_inner_y + surface_level.level_inner_height) - border_padding),
+			rand(surface_level.level_inner_min_x + border_padding, surface_level.level_inner_max_x  - border_padding),
+			rand(surface_level.level_inner_min_y + border_padding, surface_level.level_inner_max_y  - border_padding),
 			surface_level.level_z)
 
 		if(!T || (T in places)) // Two landmarks on one turf is forbidden as the landmark code doesn't work with it.

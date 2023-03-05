@@ -1,7 +1,8 @@
 /datum/level_data/planetoid
-	level_flags    = (ZLEVEL_PLAYER|ZLEVEL_SEALED)
-	border_filler  = /turf/unsimulated/mineral
-	loop_turf_type = /turf/exterior/mimic_edge/transition/loop
+	level_flags             = (ZLEVEL_PLAYER|ZLEVEL_SEALED)
+	border_filler           = /turf/unsimulated/mineral
+	loop_turf_type          = /turf/exterior/mimic_edge/transition/loop
+	transition_turf_type    = /turf/exterior/mimic_edge/transition
 	take_starlight_ambience = FALSE
 
 /datum/level_data/planetoid/exoplanet
