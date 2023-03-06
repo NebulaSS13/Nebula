@@ -19,9 +19,10 @@
 	floor_type = null
 	var/rock_color
 
-/datum/random_map/automata/cave_system/mountains/New(var/tx, var/ty, var/tz, var/tlx, var/tly, var/do_not_apply, var/do_not_announce, var/used_area, var/_rock_color)
-	if(_rock_color)
-		rock_color = _rock_color
+/datum/random_map/automata/cave_system/mountains/New(var/tx, var/ty, var/tz, var/tlx, var/tly, var/do_not_apply, var/do_not_announce, var/used_area)
+	if(!rock_color)
+		var/datum/planetoid_data/P = SSmapping.planetoid_data_by_z[tz]
+		rock_color = P?.get_rock_color()
 	var/datum/level_data/LD = SSmapping.levels_by_z[tz]
 	if(target_turf_type == null)
 		target_turf_type = SSmapping.base_turf_by_z[tz] || LD.base_turf || world.turf
