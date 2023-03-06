@@ -2154,6 +2154,7 @@
 #include "code\modules\maps\template_types\random_exoplanet\random_exoplanet.dm"
 #include "code\modules\maps\template_types\random_exoplanet\random_map.dm"
 #include "code\modules\maps\template_types\random_exoplanet\random_planet.dm"
+#include "code\modules\maps\template_types\random_exoplanet\random_planet_areas.dm"
 #include "code\modules\maps\template_types\random_exoplanet\random_planet_atmosphere.dm"
 #include "code\modules\maps\template_types\random_exoplanet\random_planet_subtemplates.dm"
 #include "code\modules\maps\template_types\random_exoplanet\random_planet_themes.dm"
