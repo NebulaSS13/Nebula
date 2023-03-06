@@ -47,3 +47,7 @@
 	var/list/chem_doses
 	var/last_pain_message
 	var/next_pain_time = 0
+
+	var/stress = 0
+	var/currently_updating_stress = FALSE
+	var/list/stressors

@@ -729,6 +729,8 @@ default behaviour is:
 			add_overlay(A)
 
 /mob/living/Destroy()
+	if(stressors) // Do not QDEL_NULL, keys are managed instances.
+		stressors = null
 	if(auras)
 		for(var/a in auras)
 			remove_aura(a)

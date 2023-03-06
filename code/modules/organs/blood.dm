@@ -192,6 +192,11 @@
 
 /mob/living/carbon/human/proc/regenerate_blood(var/amount)
 	amount *= (species.blood_volume / SPECIES_BLOOD_DEFAULT)
+
+	var/stress_modifier = get_stress_modifier()
+	if(stress_modifier)
+		amount *= 1-(config.stress_blood_recovery_constant * stress_modifier)
+
 	var/blood_volume_raw = vessel.total_volume
 	amount = max(0,min(amount, species.blood_volume - blood_volume_raw))
 	if(amount)

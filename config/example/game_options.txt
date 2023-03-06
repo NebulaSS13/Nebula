@@ -98,3 +98,12 @@ MAX_CLIENT_VIEW_Y 30
 ## The range and effectiveness of default darksight if above is uncommented.
 #DEFAULT_DARKSIGHT_EFFECTIVENESS 0.05
 #DEFAULT_DARKSIGHT_RANGE 2
+
+## Uncomment to allow stressors to impact shock, healing and blood recovery.
+#ADJUST_HEALING_FROM_STRESS
+## A multiplier for the impact stress has on shock recovery - 0.3 means maximum stress imposes a 30% penalty on shock recovery.
+#STRESS_SHOCK_RECOVERY_CONSTANT 0.5
+## A multiplier for the impact stress has on wound passive healing, as above.
+#STRESS_HEALING_RECOVERY_CONSTANT 0.3
+## A multiplier for the impact stress has on blood regeneration, as above.
+#STRESS_BLOOD_RECOVERY_CONSTANT 0.3

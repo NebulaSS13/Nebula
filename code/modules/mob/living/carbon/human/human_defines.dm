@@ -81,7 +81,9 @@
 	var/decl/natural_attack/default_attack	//default unarmed attack
 
 	var/obj/machinery/machine_visual //machine that is currently applying visual effects to this mob. Only used for camera monitors currently.
+
 	var/shock_stage
+	var/rounded_shock_stage
 
 	//vars for fountain of youth examine lines
 	var/became_older
