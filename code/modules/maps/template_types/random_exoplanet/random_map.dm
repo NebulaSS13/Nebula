@@ -1,8 +1,8 @@
-#define  COAST_VALUE  cell_range + 1
+#define COAST_VALUE (cell_range + 1)
 /datum/random_map/noise/exoplanet
-	descriptor = "exoplanet"
+	descriptor           = "exoplanet"
 	smoothing_iterations = 1
-	smooth_single_tiles =  TRUE
+	smooth_single_tiles  = TRUE
 
 	var/water_level
 	var/water_level_min = 0
@@ -28,16 +28,35 @@
 	if(target_turf_type == null)
 		target_turf_type = SSmapping.base_turf_by_z[tz] || LD.base_turf || world.turf
 	water_level = rand(water_level_min,water_level_max)
+
 	//automagically adjust probs for bigger maps to help with lag
-	if(isnull(grass_prob)) grass_prob = flora_prob * 2
+	if(isnull(grass_prob))
+		grass_prob = flora_prob * 2
 	var/size_mod = intended_x / tlx * intended_y / tly
 	flora_prob *= size_mod
 	large_flora_prob *= size_mod
 	fauna_prob *= size_mod
 
 	var/datum/planetoid_data/P = SSmapping.planetoid_data_by_z[tz]
-	if(istype(P) && P?.flora.plant_colors)
-		plantcolors = P.flora.plant_colors.Copy()
+	if(istype(P))
+		var/datum/flora_generator/floragen = P.flora
+		var/datum/fauna_generator/faunagen = P.fauna
+
+		//Prevent spawning some flora spawner type if they aren't available
+		if(!length(floragen?.small_flora_types))
+			flora_prob = 0
+		if(!length(floragen?.big_flora_types))
+			large_flora_prob = 0
+		if(floragen?.plant_colors)
+			plantcolors = floragen.plant_colors.Copy()
+		if(!floragen)
+			grass_prob = 0
+
+		//Prevent spawning some fauna spawner types if they aren't available
+		if(!length(faunagen?.megafauna_types))
+			megafauna_spawn_prob = 0
+		if(!length(faunagen?.fauna_types))
+			fauna_prob = 0
 	..()
 
 	//#TODO: Doublec check why random maps are messing with the base turf at all??
