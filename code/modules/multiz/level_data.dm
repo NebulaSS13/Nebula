@@ -219,19 +219,22 @@
 
 ///Called when setting up the level. Apply generators and anything that modifies the turfs of the level.
 /datum/level_data/proc/generate_level()
+	var/origx = level_inner_min_x
+	var/origy = level_inner_min_y
+	var/endx  = level_inner_min_x + level_inner_width
+	var/endy  = level_inner_min_y + level_inner_height
 	for(var/gen_type in level_generators)
-		if(ispath(gen_type, /datum/random_map/noise/exoplanet))
-			new gen_type(level_inner_min_x, level_inner_min_y, level_z, level_inner_width, level_inner_height, FALSE, TRUE, get_base_area_instance())  //#FIXME: Rock color!
-		else
-			new gen_type(level_inner_min_x, level_inner_min_y, level_z, level_inner_width, level_inner_height, FALSE, TRUE, get_base_area_instance())
+		new gen_type(origx, origy, level_z, endx, endy, FALSE, TRUE, get_base_area_instance())
 
-///Apply the parent entity's map generators. (Planets generally) This proc is to give a chance to level_data subtypes to individually chose to ignore the parent generators.
+///Apply the parent entity's map generators. (Planets generally)
+///This proc is to give a chance to level_data subtypes to individually chose to ignore the parent generators.
 /datum/level_data/proc/apply_map_generators(var/list/map_gen)
+	var/origx = level_inner_min_x
+	var/origy = level_inner_min_y
+	var/endx  = level_inner_min_x + level_inner_width
+	var/endy  = level_inner_min_y + level_inner_height
 	for(var/gen_type in map_gen)
-		if(ispath(gen_type, /datum/random_map/noise/exoplanet))
-			new gen_type(level_inner_min_x, level_inner_min_y, level_z, level_inner_width, level_inner_height, FALSE, TRUE, get_base_area_instance()) //#FIXME: Rock color!
-		else
-			new gen_type(level_inner_min_x, level_inner_min_y, level_z, level_inner_width, level_inner_height, FALSE, TRUE, get_base_area_instance())
+		new gen_type(origx, origy, level_z, endx, endy, FALSE, TRUE, get_base_area_instance())
 
 ///Called during level setup. Run anything that should happen only after the map is fully generated.
 /datum/level_data/proc/after_generate_level()
