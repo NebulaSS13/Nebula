@@ -9,6 +9,11 @@
 	base_area = /area/exoplanet
 	base_turf = /turf/exterior/dirt
 
+/datum/level_data/planetoid/exoplanet/underground
+	base_area = /area/exoplanet/underground
+	base_turf = /turf/exterior/volcanic
+	ambient_light_level = 0
+
 ///Prepare our level for generation/load. And sync with the planet template
 /datum/level_data/planetoid/before_template_load(datum/map_template/template, datum/planetoid_data/gen_data)
 	. = ..()
