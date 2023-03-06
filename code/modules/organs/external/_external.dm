@@ -847,10 +847,15 @@ Note that amputating the affected organ does in fact remove the infection from t
 		if (owner && !GET_CHEMICAL_EFFECT(owner, CE_TOXIN) && W.can_autoheal() && W.wound_damage() && brute_ratio < 0.5 && burn_ratio < 0.5)
 			heal_amt += 0.5
 
-		//we only update wounds once in [wound_update_accuracy] ticks so have to emulate realtime
+		// we only update wounds once in [wound_update_accuracy] ticks so have to emulate realtime
 		heal_amt = heal_amt * wound_update_accuracy
-		//configurable regen speed woo, no-regen hardcore or instaheal hugbox, choose your destiny
+		// configurable regen speed woo, no-regen hardcore or instaheal hugbox, choose your destiny
 		heal_amt = heal_amt * config.organ_regeneration_multiplier
+		// Apply a modifier based on how stressed we currently are.
+		if(owner)
+			var/stress_modifier = owner.get_stress_modifier()
+			if(stress_modifier)
+				heal_amt *= 1-(config.stress_healing_recovery_constant * stress_modifier)
 		// amount of healing is spread over all the wounds
 		heal_amt = heal_amt / (LAZYLEN(wounds) + 1)
 		// making it look prettier on scanners
