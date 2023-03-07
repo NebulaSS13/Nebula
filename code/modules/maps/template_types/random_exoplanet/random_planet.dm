@@ -12,25 +12,19 @@
 	tallness             = 1
 
 	//#TODO: This could probably be simplified down.
-	///Amount of adjacent z-levels to generate north of the root z-level stack.
-	///Setting this to 1 for instance will generate a stack of zlevels connecting to the north of all z-levels below the root level.
+	///Amount of adjacent stacked z-levels to generate north of the root z-level stack.
+	///Setting this to 1 for instance will generate a stack of zlevels connecting to the north of all z-levels below the root level. Tallness is same as root.
 	var/adjacent_levels_north = 0
-	///Amount of adjacent z-levels to generate south of the root z-level stack.
+	///Amount of adjacent stacked z-levels to generate south of the root z-level stack. Tallness is same as root.
 	var/adjacent_levels_south = 0
-	///Amount of adjacent z-levels to generate east of the root z-level stack.
+	///Amount of adjacent stacked z-levels to generate east of the root z-level stack. Tallness is same as root.
 	var/adjacent_levels_east = 0
-	///Amount of adjacent z-levels to generate west of the root z-level stack.
+	///Amount of adjacent stacked z-levels to generate west of the root z-level stack. Tallness is same as root.
 	var/adjacent_levels_west = 0
 
 	///A list of the same length as there are zlevels on this map(index is z level count in order).
 	///Each entry is a level_data type, or null. If defined, will override the level_data_type var for the specified z-level.
 	var/list/prefered_level_data_per_z
-	///The number of z-levels to generate.
-	var/prefered_tallness = 1
-	///The width of the planet's levels. If null, is up to level_data then world.maxx.
-	var/preferred_level_width
-	///The height of the planet's levels. If null, is up to level_data then world.maxx.
-	var/preferred_level_height
 	///A list of gas and their proportion to enforce on this planet.
 	///If get_mandatory_gases() returns gases, they will be added to this. If null is randomly generated.
 	var/list/initial_atmosphere_gases
@@ -38,8 +32,8 @@
 	var/initial_weather_state
 	///The type of overmap marker object to use for this planet
 	var/overmap_marker_type = /obj/effect/overmap/visitable/sector/planetoid
-	///The zlevel index of the level to be created that will be considered the planet's surface for this generated planet.
-	/// The surface here means the first "solid ground" z-level from the top.
+	///The index of the generated level that will be considered the planet's surface for this generated planet counting from top to bottom.
+	/// The surface here implies the first "solid ground" z-level from the top.
 	var/surface_level_index = 1
 	///Amount of shuttle landing points to generate on the surface level of the planet. If null, none will be generated.
 	var/amount_shuttle_landing_points
@@ -138,6 +132,7 @@
 	var/list/east_stack  = build_adjacent_z_stacks(adjacent_levels_east,  EAST,  root_stack, lvl_to_build, gen_data)
 	var/list/west_stack  = build_adjacent_z_stacks(adjacent_levels_west,  WEST,  root_stack, lvl_to_build, gen_data)
 
+	//Add them up, avoiding nulls
 	. = root_stack
 	if(length(north_stack))
 		. += north_stack
@@ -152,7 +147,7 @@
 	//Generate individual levels now that the z-level structure is properly setup
 	for(var/datum/level_data/LD in .)
 		log_debug("Setting up level [LD] ([LD.level_z]).")
-		LD.setup_level_data() //Do level gen
+		LD.setup_level_data() //Do level gen, place borders, etc..
 		LD.apply_map_generators(length(theme_generators)? (map_generators | theme_generators) : map_generators) //Apply our own level gen and the theme's level gen
 
 ///Build a stack that's adjacent to the specified stack.

@@ -71,7 +71,7 @@
 	var/datum/fauna_generator/fauna //#TODO: Temporary thing for allowing animal stuff to be customized in the map_template
 
 	// *** Special Overrides ***
-	//#TODO: There is probably a way to handle this that is less shitty?
+	//#TODO: There is probably a way to handle options set from manually spawning planets that is less shitty?
 	///Subtemplate budget override. If something overrode the map_template's base budget, this will be set. Otherwise, it'll stay null. (Used in manual exoplanet generation verb)
 	var/tmp/_budget_override
 	///Enforces a single theme. If something overrode the map template's base random themes list, this will be set. Otherwise it'll stay null. (Used in manual exoplanet generation verb)
