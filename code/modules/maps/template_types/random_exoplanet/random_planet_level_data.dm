@@ -8,12 +8,10 @@
 /datum/level_data/planetoid/exoplanet
 	base_area = /area/exoplanet
 	base_turf = /turf/exterior/dirt
-	ambient_light_level = 0.5
 
 /datum/level_data/planetoid/exoplanet/underground
 	base_area = /area/exoplanet/underground
 	base_turf = /turf/exterior/volcanic
-	ambient_light_level = 0
 
 ///Prepare our level for generation/load. And sync with the planet template
 /datum/level_data/planetoid/before_template_load(datum/map_template/template, datum/planetoid_data/gen_data)
@@ -36,11 +34,21 @@
 	//Rename main area and level
 	adapt_location_name(gen_data.name)
 
+	//Try to adopt our parent planet's ambient lighting preferences
+	apply_planet_ambient_lighting(gen_data)
+
 ///If we're getting atmos from our parent planet, decide if we're going to apply it, or ignore it
 /datum/level_data/planetoid/proc/apply_planet_atmosphere(var/datum/planetoid_data/P)
 	if(istype(exterior_atmosphere))
 		return //level atmos takes priority over planet atmos
 	exterior_atmosphere = P.atmosphere.Clone()
+
+///Apply our parent planet's ambient lighting settings if we want to.
+/datum/level_data/planetoid/proc/apply_planet_ambient_lighting(var/datum/planetoid_data/P)
+	if(!ambient_light_level)
+		ambient_light_level = P.surface_light_level
+	if(!ambient_light_color)
+		ambient_light_level = P.surface_light_color
 
 /datum/level_data/planetoid/adapt_location_name(location_name)
 	if(!(. = ..()))
