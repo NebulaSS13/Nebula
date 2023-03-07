@@ -15,13 +15,13 @@
 
 	switch(dir_edge)
 		if(NORTH)
-			min_x = x_transit_beg //inner includes transition edge
-			min_y = LD.level_inner_max_y + 1
+			min_x = x_transit_beg
+			min_y = LD.level_inner_max_y + 1 //Add one so we're outside the inner area
 			max_x = x_transit_end
-			max_y = LD.level_inner_max_y + TRANSITIONEDGE
+			max_y = LD.level_inner_max_y + TRANSITIONEDGE  //inner includes transition edge
 		if(SOUTH)
-			min_x = x_transit_beg //inner includes transition edge
-			min_y = LD.level_inner_min_y - TRANSITIONEDGE //inner includes transition edge
+			min_x = x_transit_beg
+			min_y = LD.level_inner_min_y - TRANSITIONEDGE
 			max_x = x_transit_end
 			max_y = LD.level_inner_min_y - 1
 		if(EAST)
@@ -30,7 +30,7 @@
 			max_x = LD.level_inner_max_x + TRANSITIONEDGE
 			max_y = y_transit_end
 		if(WEST)
-			min_x = LD.level_inner_min_x - TRANSITIONEDGE //inner includes transition edge
+			min_x = LD.level_inner_min_x - TRANSITIONEDGE
 			min_y = y_transit_beg
 			max_x = LD.level_inner_min_x - 1
 			max_y = y_transit_end
@@ -39,6 +39,26 @@
 		locate(min_x, min_y, LD.level_z),
 		locate(max_x, max_y, LD.level_z)
 	)
+
+///Returns all the turfs from all 4 corners of the transition edge border.
+/proc/get_transition_edge_corner_turfs(var/z)
+	var/datum/level_data/LD = SSmapping.levels_by_z[z]
+	//South-West
+	.  = block(
+			locate(LD.level_inner_min_x - TRANSITIONEDGE, LD.level_inner_min_y - TRANSITIONEDGE, LD.level_z),
+			locate(LD.level_inner_min_x - 1,              LD.level_inner_min_y - 1,              LD.level_z))
+	//South-East
+	. |= block(
+			locate(LD.level_inner_max_x + 1,              LD.level_inner_min_y - TRANSITIONEDGE, LD.level_z),
+			locate(LD.level_inner_max_x + TRANSITIONEDGE, LD.level_inner_min_y - 1,              LD.level_z))
+	//North-West
+	. |= block(
+			locate(LD.level_inner_min_x - TRANSITIONEDGE, LD.level_inner_max_y + 1,              LD.level_z),
+			locate(LD.level_inner_min_x - 1,              LD.level_inner_max_y + TRANSITIONEDGE, LD.level_z))
+	//North-East
+	. |= block(
+			locate(LD.level_inner_max_x + 1,              LD.level_inner_max_y + 1,              LD.level_z),
+			locate(LD.level_inner_max_x + TRANSITIONEDGE, LD.level_inner_max_y + TRANSITIONEDGE, LD.level_z))
 
 ///Keeps details on how to generate, maintain and access a zlevel
 /datum/level_data
@@ -307,6 +327,14 @@
 				edge_turfs = get_transition_edge_turfs(level_z, adir, TRUE)
 				for(var/turf/T in edge_turfs)
 					T.ChangeTurf(border_filler)
+
+	//Now prepare the corners of the border
+	for(var/turf/T in get_transition_edge_corner_turfs(level_z))
+		//In case we got filler turfs for borders, make sure to fill the corners with it
+		if(border_filler)
+			T.ChangeTurf(border_filler)
+		T.set_density(TRUE) //Force corner turfs to be solid, so nothing end up being lost stuck in there
+
 #undef LEVEL_EDGE_NONE
 #undef LEVEL_EDGE_LOOP
 #undef LEVEL_EDGE_WALL
