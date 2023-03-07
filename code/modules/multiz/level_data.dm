@@ -489,6 +489,8 @@ INITIALIZE_IMMEDIATE(/obj/abstract/landmark/level_data_spawner)
 
 /datum/level_data/mining_level/after_template_load()
 	..()
+	if(!config.generate_map)
+		return
 	new /datum/random_map/automata/cave_system(1, 1, level_z, world.maxx, world.maxy)
 	new /datum/random_map/noise/ore(1, 1, level_z, world.maxx, world.maxy)
 	refresh_mining_turfs()
