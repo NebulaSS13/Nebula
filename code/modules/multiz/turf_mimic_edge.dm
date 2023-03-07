@@ -21,7 +21,7 @@
 	desc             = MIMIC_EDGE_DESC
 	icon             = null
 	icon_state       = null
-	density          = TRUE
+	density          = FALSE
 	permit_ao        = FALSE
 	blocks_air       = TRUE
 	dynamic_lighting = FALSE
@@ -76,7 +76,7 @@
 	desc             = MIMIC_EDGE_DESC
 	icon             = null
 	icon_state       = null
-	density          = TRUE
+	density          = FALSE
 	permit_ao        = FALSE
 	blocks_air       = TRUE
 	dynamic_lighting = FALSE
@@ -131,7 +131,7 @@
 	desc             = MIMIC_EDGE_DESC
 	icon             = null
 	icon_state       = null
-	density          = TRUE
+	density          = FALSE
 	permit_ao        = FALSE
 	blocks_air       = TRUE
 	dynamic_lighting = FALSE
@@ -273,22 +273,28 @@
 /turf/simulated/mimic_edge/transition/setup_mimic()
 	var/list/coord = shared_transition_edge_get_coordinates_turf_to_mimic(src, shared_transition_edge_get_valid_level_data(src))
 	set_mimic_turf(coord[1], coord[2], coord[3])
-/turf/simulated/mimic_edge/transition/Bumped(atom/movable/AM)
+/turf/simulated/mimic_edge/transition/Entered(atom/movable/AM, atom/old_loc)
 	. = ..()
+	if(!AM.simulated || AM.anchored || istype(AM, /obj/effect/overlay))
+		return
 	shared_transition_edge_bumped(src, AM, mimic_z)
 
 /turf/unsimulated/mimic_edge/transition/setup_mimic()
 	var/list/coord = shared_transition_edge_get_coordinates_turf_to_mimic(src, shared_transition_edge_get_valid_level_data(src))
 	set_mimic_turf(coord[1], coord[2], coord[3])
-/turf/unsimulated/mimic_edge/transition/Bumped(atom/movable/AM)
+/turf/unsimulated/mimic_edge/transition/Entered(atom/movable/AM, atom/old_loc)
 	. = ..()
+	if(!AM.simulated || AM.anchored || istype(AM, /obj/effect/overlay))
+		return
 	shared_transition_edge_bumped(src, AM, mimic_z)
 
 /turf/exterior/mimic_edge/transition/setup_mimic()
 	var/list/coord = shared_transition_edge_get_coordinates_turf_to_mimic(src, shared_transition_edge_get_valid_level_data(src))
 	set_mimic_turf(coord[1], coord[2], coord[3])
-/turf/exterior/mimic_edge/transition/Bumped(atom/movable/AM)
+/turf/exterior/mimic_edge/transition/Entered(atom/movable/AM, atom/old_loc)
 	. = ..()
+	if(!AM.simulated || AM.anchored || istype(AM, /obj/effect/overlay))
+		return
 	shared_transition_edge_bumped(src, AM, mimic_z)
 
 ////////////////////////////////
