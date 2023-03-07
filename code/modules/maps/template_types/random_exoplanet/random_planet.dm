@@ -117,8 +117,8 @@
 			lvl_to_build += level_data_type
 
 	log_debug("Planet Levels:\n\tTop Planet:[world.maxz + 1]")
-	//Build root stack
 
+	//Build root stack
 	var/list/root_stack = buid_z_stack(null, null, lvl_to_build, gen_data)
 
 	//Build any amount of adjacent stacks
@@ -131,17 +131,18 @@
 	if(length(north_stack))
 		. += north_stack
 	if(length(south_stack))
-		. += north_stack
+		. += south_stack
 	if(length(east_stack))
-		. += north_stack
+		. += east_stack
 	if(length(west_stack))
-		. += north_stack
+		. += west_stack
 
+	log_debug("Preparing [length(.)] levels...")
 	//Generate individual levels now that the z-level structure is properly setup
 	for(var/datum/level_data/LD in .)
+		log_debug("Setting up level [LD] ([LD.level_z]).")
 		LD.setup_level_data() //Do level gen
 		LD.apply_map_generators(length(theme_generators)? (map_generators | theme_generators) : map_generators) //Apply our own level gen and the theme's level gen
-
 
 ///Build a stack that's adjacent to the specified stack.
 /datum/map_template/planetoid/proc/build_adjacent_z_stacks(var/amount, var/direction_from_root, var/list/adjacent_level_data, var/list/new_level_data_types, var/datum/planetoid_data/gen_data)
@@ -152,7 +153,7 @@
 	if(amount < 2)
 		return lvl_data
 	//If amount if bigger than 2, build another adjacent stack to us
-	lvl_data += build_adjacent_z_stacks(amount - 1, direction_from_root, ., new_level_data_types, gen_data)
+	lvl_data += build_adjacent_z_stacks(amount - 1, direction_from_root, lvl_data, new_level_data_types, gen_data)
 	return lvl_data
 
 ///Create a new z-level stack that's connected to an existing z stack, on the given direction.
