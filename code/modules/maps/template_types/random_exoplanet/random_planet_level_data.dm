@@ -53,3 +53,7 @@
 /datum/level_data/planetoid/adapt_location_name(location_name)
 	if(!(. = ..()))
 		return
+	if(ispath(base_area) && !ispath(base_area, world.area))
+		var/area/A = new base_area()
+		A.SetName("[location_name]")
+
