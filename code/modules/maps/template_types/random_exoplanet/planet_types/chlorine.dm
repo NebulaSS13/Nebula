@@ -1,3 +1,7 @@
+////////////////////////////////////////////////////////////////////////////
+// Overmap Marker
+////////////////////////////////////////////////////////////////////////////
+
 /obj/effect/overmap/visitable/sector/planetoid/exoplanet/chlorine
 	name          = "chlorine exoplanet"
 	desc          = "An exoplanet with a chlorine based ecosystem. Large quantities of liquid chlorine are present."
@@ -8,11 +12,22 @@
 /obj/effect/overmap/visitable/sector/planetoid/exoplanet/chlorine/get_atmosphere_color()
 	return "#e5f2bd"
 
+////////////////////////////////////////////////////////////////////////////
+// Level Data
+////////////////////////////////////////////////////////////////////////////
+
 /datum/level_data/planetoid/exoplanet/chlorine
 	base_area = /area/exoplanet/chlorine
 	base_turf = /turf/exterior/chlorine_sand
 	exterior_atmosphere = null
 	exterior_atmos_temp = null
+	level_generators = list(
+		/datum/random_map/noise/exoplanet/chlorine,
+	)
+
+////////////////////////////////////////////////////////////////////////////
+// Flora Generator
+////////////////////////////////////////////////////////////////////////////
 
 /datum/flora_generator/chlorine
 	has_trees       = FALSE
@@ -26,6 +41,10 @@
 		"#f2b3e0"
 	)
 
+////////////////////////////////////////////////////////////////////////////
+// Fauna Generator
+////////////////////////////////////////////////////////////////////////////
+
 /datum/fauna_generator/chlorine
 	fauna_types = list(
 		/mob/living/simple_animal/thinbug,
@@ -38,23 +57,30 @@
 		/mob/living/simple_animal/hostile/retaliate/jelly/mega,
 	)
 
+////////////////////////////////////////////////////////////////////////////
+// Map Template
+////////////////////////////////////////////////////////////////////////////
+
 /datum/map_template/planetoid/exoplanet/chlorine
-	name                 = "chlorine exoplanet"
-	level_data_type      = /datum/level_data/planetoid/exoplanet/chlorine
-	overmap_marker_type  = /obj/effect/overmap/visitable/sector/planetoid/exoplanet/desert
-	flora_generator_type = /datum/flora_generator/chlorine
-	fauna_generator_type = /datum/fauna_generator/chlorine
-	ruin_tags_blacklist  = RUIN_HABITAT|RUIN_WATER
-	template_parent_type = /datum/map_template/planetoid/exoplanet
+	name                    = "chlorine exoplanet"
+	overmap_marker_type     = /obj/effect/overmap/visitable/sector/planetoid/exoplanet/desert
+	flora_generator_type    = /datum/flora_generator/chlorine
+	fauna_generator_type    = /datum/fauna_generator/chlorine
+	ruin_tags_blacklist     = RUIN_HABITAT|RUIN_WATER
 	surface_light_level_min = 0.65
 	surface_light_level_max = 0.85
+	template_parent_type    = /datum/map_template/planetoid/exoplanet
+	level_data_type         = /datum/level_data/planetoid/exoplanet/chlorine
+	prefered_level_data_per_z = list(
+		/datum/level_data/planetoid/exoplanet/chlorine,
+		/datum/level_data/planetoid/exoplanet/underground
+	)
 	possible_rock_colors = list(
 		COLOR_GRAY80,
 		COLOR_PALE_GREEN_GRAY,
 		COLOR_PALE_BTL_GREEN
 	)
-	map_generators       = list(
-		/datum/random_map/noise/exoplanet/chlorine,
+	map_generators = list(
 		/datum/random_map/noise/ore/poor,
 	)
 
@@ -67,6 +93,9 @@
 /datum/map_template/planetoid/exoplanet/chlorine/get_mandatory_gasses()
 	return list(/decl/material/gas/chlorine = MOLES_O2STANDARD)
 
+////////////////////////////////////////////////////////////////////////////
+// Map Generator Surface
+////////////////////////////////////////////////////////////////////////////
 
 /datum/random_map/noise/exoplanet/chlorine
 	descriptor = "chlorine exoplanet"
@@ -78,6 +107,10 @@
 	fauna_prob = 2
 	flora_prob = 5
 	large_flora_prob = 0
+
+////////////////////////////////////////////////////////////////////////////
+// Areas
+////////////////////////////////////////////////////////////////////////////
 
 /area/exoplanet/chlorine
 	ambience = list(

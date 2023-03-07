@@ -1,3 +1,7 @@
+////////////////////////////////////////////////////////////////////////////
+// Overmap Marker
+////////////////////////////////////////////////////////////////////////////
+
 /obj/effect/overmap/visitable/sector/planetoid/exoplanet/volcanic
 	name          = "volcanic exoplanet"
 	desc          = "A tectonically unstable planet, extremely rich in minerals."
@@ -8,11 +12,23 @@
 /obj/effect/overmap/visitable/sector/planetoid/exoplanet/volcanic/get_atmosphere_color()
 	return COLOR_GRAY20
 
+////////////////////////////////////////////////////////////////////////////
+// Level Data
+////////////////////////////////////////////////////////////////////////////
+
 /datum/level_data/planetoid/exoplanet/volcanic
 	base_area = /area/exoplanet/volcanic
 	base_turf = /turf/exterior/volcanic
 	exterior_atmosphere = null
 	exterior_atmos_temp = null
+	level_generators = list(
+		/datum/random_map/automata/cave_system/mountains/volcanic,
+		/datum/random_map/noise/exoplanet/volcanic,
+	)
+
+////////////////////////////////////////////////////////////////////////////
+// Flora Generator
+////////////////////////////////////////////////////////////////////////////
 
 /datum/flora_generator/volcanic
 	has_trees       = FALSE
@@ -30,6 +46,10 @@
 	S.set_trait(TRAIT_REQUIRES_WATER,0)
 	S.set_trait(TRAIT_HEAT_TOLERANCE, 1000 + S.get_trait(TRAIT_HEAT_TOLERANCE))
 
+////////////////////////////////////////////////////////////////////////////
+// Fauna Generator
+////////////////////////////////////////////////////////////////////////////
+
 /datum/fauna_generator/volcanic
 	fauna_types = list(
 		/mob/living/simple_animal/thinbug,
@@ -45,9 +65,12 @@
 	Tmpl.heat_damage_per_tick = 0 //animals not hot, no burning in lava
 	return Tmpl
 
+////////////////////////////////////////////////////////////////////////////
+// Map Template
+////////////////////////////////////////////////////////////////////////////
+
 /datum/map_template/planetoid/exoplanet/volcanic
 	name                  = "volcanic exoplanet"
-	level_data_type       = /datum/level_data/planetoid/exoplanet/volcanic
 	flora_generator_type  = /datum/flora_generator/volcanic
 	fauna_generator_type  = /datum/fauna_generator/volcanic
 	overmap_marker_type   = /obj/effect/overmap/visitable/sector/planetoid/exoplanet/volcanic
@@ -55,6 +78,11 @@
 	ruin_tags_blacklist   = RUIN_HABITAT|RUIN_WATER
 	initial_weather_state = /decl/state/weather/ash
 	template_parent_type  = /datum/map_template/planetoid/exoplanet
+	level_data_type       = /datum/level_data/planetoid/exoplanet/volcanic
+	prefered_level_data_per_z = list(
+		/datum/level_data/planetoid/exoplanet/volcanic,
+		/datum/level_data/planetoid/exoplanet/underground
+	)
 	possible_rock_colors  = list(
 		COLOR_DARK_GRAY
 	)
@@ -63,8 +91,6 @@
 		/datum/exoplanet_theme/robotic_guardians = 10
 	)
 	map_generators = list(
-		/datum/random_map/automata/cave_system/mountains/volcanic,
-		/datum/random_map/noise/exoplanet/volcanic,
 		/datum/random_map/noise/ore/filthy_rich
 	)
 
@@ -73,6 +99,10 @@
 
 /datum/map_template/planetoid/exoplanet/volcanic/get_target_temperature()
 	return T20C + rand(220, 800)
+
+////////////////////////////////////////////////////////////////////////////
+// Map Generator Surface
+////////////////////////////////////////////////////////////////////////////
 
 /datum/random_map/noise/exoplanet/volcanic
 	descriptor = "volcanic exoplanet"
@@ -104,9 +134,10 @@
 			if(!frendos)
 				map[current_cell] = 1
 
-/area/exoplanet/volcanic
-	forced_ambience = list('sound/ambience/magma.ogg')
-	base_turf = /turf/exterior/volcanic
+
+////////////////////////////////////////////////////////////////////////////
+// Mountains Generator
+////////////////////////////////////////////////////////////////////////////
 
 /datum/random_map/automata/cave_system/mountains/volcanic
 	iterations = 2
@@ -119,3 +150,11 @@
 	..()
 	if(use_area && istype(T))
 		T.floor_type = prob(90) ? use_area.base_turf : /turf/exterior/lava
+
+////////////////////////////////////////////////////////////////////////////
+// Areas
+////////////////////////////////////////////////////////////////////////////
+
+/area/exoplanet/volcanic
+	forced_ambience = list('sound/ambience/magma.ogg')
+	base_turf = /turf/exterior/volcanic

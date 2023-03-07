@@ -9,12 +9,12 @@
 	template_parent_type = /datum/map_template/planetoid
 	level_data_type      = /datum/level_data/planetoid
 	modify_tag_vars      = TRUE //Would set it to false, since we're generating everything on the fly, but unit test doesn't like it
-	tallness             = 2
+	tallness             = 1
 
 	//#TODO: This could probably be simplified down.
 	///Amount of adjacent z-levels to generate north of the root z-level stack.
 	///Setting this to 1 for instance will generate a stack of zlevels connecting to the north of all z-levels below the root level.
-	var/adjacent_levels_north = 1
+	var/adjacent_levels_north = 0
 	///Amount of adjacent z-levels to generate south of the root z-level stack.
 	var/adjacent_levels_south = 0
 	///Amount of adjacent z-levels to generate east of the root z-level stack.

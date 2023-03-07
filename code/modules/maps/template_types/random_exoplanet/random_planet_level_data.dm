@@ -12,6 +12,9 @@
 /datum/level_data/planetoid/exoplanet/underground
 	base_area = /area/exoplanet/underground
 	base_turf = /turf/exterior/volcanic
+	level_generators = list(
+		/datum/random_map/noise/exoplanet/mantle,
+	)
 
 ///Prepare our level for generation/load. And sync with the planet template
 /datum/level_data/planetoid/before_template_load(datum/map_template/template, datum/planetoid_data/gen_data)
@@ -57,3 +60,20 @@
 		var/area/A = new base_area()
 		A.SetName("[location_name]")
 
+//
+//
+//
+
+///Random map generator for generating underground planetary levels.
+/datum/random_map/noise/exoplanet/mantle
+	descriptor           = "planetary mantle"
+	smoothing_iterations = 2
+	land_type            = /turf/exterior/volcanic
+	water_type           = /turf/exterior/lava
+	water_level_min      = 3
+	water_level_max      = 6
+	fauna_prob           = 0
+	megafauna_spawn_prob = 0
+	flora_prob           = 0
+	grass_prob           = 0
+	large_flora_prob     = 0

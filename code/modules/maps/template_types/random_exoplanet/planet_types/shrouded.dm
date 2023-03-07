@@ -1,3 +1,7 @@
+////////////////////////////////////////////////////////////////////////////
+// Overmap Marker
+////////////////////////////////////////////////////////////////////////////
+
 /obj/effect/overmap/visitable/sector/planetoid/exoplanet/shrouded
 	name          = "shrouded exoplanet"
 	desc          = "An exoplanet shrouded in a perpetual storm of bizzare, light absorbing particles."
@@ -8,11 +12,22 @@
 /obj/effect/overmap/visitable/sector/planetoid/exoplanet/shrouded/get_atmosphere_color()
 	return COLOR_BLACK
 
+////////////////////////////////////////////////////////////////////////////
+// Level Data
+////////////////////////////////////////////////////////////////////////////
+
 /datum/level_data/planetoid/exoplanet/shrouded
 	base_area = /area/exoplanet/shrouded
 	base_turf = /turf/exterior/shrouded
 	exterior_atmosphere = null
 	exterior_atmos_temp = null
+	level_generators = list(
+		/datum/random_map/noise/exoplanet/shrouded,
+	)
+
+////////////////////////////////////////////////////////////////////////////
+// Flora Generator
+////////////////////////////////////////////////////////////////////////////
 
 /datum/flora_generator/shrouded
 	flora_diversity = 3
@@ -29,6 +44,10 @@
 		"#580d6d"
 	)
 
+////////////////////////////////////////////////////////////////////////////
+// Fauna Generator
+////////////////////////////////////////////////////////////////////////////
+
 /datum/fauna_generator/shrouded
 	fauna_types = list(
 		/mob/living/simple_animal/hostile/retaliate/royalcrab,
@@ -37,23 +56,30 @@
 		/mob/living/simple_animal/hostile/leech
 	)
 
+////////////////////////////////////////////////////////////////////////////
+// Map Template
+////////////////////////////////////////////////////////////////////////////
+
 /datum/map_template/planetoid/exoplanet/shrouded
-	name                 = "shrouded exoplanet"
-	level_data_type      = /datum/level_data/planetoid/exoplanet/shrouded
-	flora_generator_type = /datum/flora_generator/shrouded
-	fauna_generator_type = /datum/fauna_generator/shrouded
-	overmap_marker_type  = /obj/effect/overmap/visitable/sector/planetoid/exoplanet/shrouded
-	ruin_tags_blacklist  = RUIN_HABITAT
-	template_parent_type = /datum/map_template/planetoid/exoplanet
+	name                    = "shrouded exoplanet"
+	flora_generator_type    = /datum/flora_generator/shrouded
+	fauna_generator_type    = /datum/fauna_generator/shrouded
+	overmap_marker_type     = /obj/effect/overmap/visitable/sector/planetoid/exoplanet/shrouded
+	ruin_tags_blacklist     = RUIN_HABITAT
 	surface_light_level_min = 0.15
 	surface_light_level_max = 0.25
+	template_parent_type    = /datum/map_template/planetoid/exoplanet
+	level_data_type         = /datum/level_data/planetoid/exoplanet/shrouded
+	prefered_level_data_per_z = list(
+		/datum/level_data/planetoid/exoplanet/shrouded,
+		/datum/level_data/planetoid/exoplanet/underground
+	)
 	possible_rock_colors = list(
 		COLOR_INDIGO,
 		COLOR_DARK_BLUE_GRAY,
 		COLOR_NAVY_BLUE
 	)
 	map_generators = list(
-		/datum/random_map/noise/exoplanet/shrouded,
 		/datum/random_map/noise/ore/poor
 	)
 
@@ -62,6 +88,10 @@
 
 /datum/map_template/planetoid/exoplanet/shrouded/get_target_temperature()
 	return T20C - rand(10, 20)
+
+////////////////////////////////////////////////////////////////////////////
+// Map Generator Surface
+////////////////////////////////////////////////////////////////////////////
 
 /datum/random_map/noise/exoplanet/shrouded
 	descriptor = "shrouded exoplanet"
@@ -78,6 +108,10 @@
 	..()
 	if(prob(2))
 		new/obj/structure/leech_spawner(T)
+
+////////////////////////////////////////////////////////////////////////////
+// Areas
+////////////////////////////////////////////////////////////////////////////
 
 /area/exoplanet/shrouded
 	forced_ambience = list(

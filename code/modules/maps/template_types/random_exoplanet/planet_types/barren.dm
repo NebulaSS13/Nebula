@@ -1,3 +1,7 @@
+////////////////////////////////////////////////////////////////////////////
+// Overmap Marker
+////////////////////////////////////////////////////////////////////////////
+
 /obj/effect/overmap/visitable/sector/planetoid/exoplanet/barren
 	name = "barren exoplanet"
 	desc = "An exoplanet that couldn't hold its atmosphere."
@@ -5,11 +9,22 @@
 	surface_color = "#807d7a"
 	water_color =    null
 
+////////////////////////////////////////////////////////////////////////////
+// Level Data
+////////////////////////////////////////////////////////////////////////////
+
 /datum/level_data/planetoid/exoplanet/barren
 	base_area = /area/exoplanet/barren
 	base_turf = /turf/exterior/barren
 	exterior_atmosphere = null
 	exterior_atmos_temp = null
+	level_generators = list(
+		/datum/random_map/noise/exoplanet/barren,
+	)
+
+////////////////////////////////////////////////////////////////////////////
+// Flora Generator
+////////////////////////////////////////////////////////////////////////////
 
 /datum/flora_generator/barren
 	has_trees = FALSE
@@ -18,15 +33,23 @@
 	if(prob(10))
 		flora_diversity = 1
 
+////////////////////////////////////////////////////////////////////////////
+// Map Template
+////////////////////////////////////////////////////////////////////////////
+
 /datum/map_template/planetoid/exoplanet/barren
 	name                  = "barren exoplanet"
-	level_data_type       = /datum/level_data/planetoid/exoplanet/barren
 	overmap_marker_type   = /obj/effect/overmap/visitable/sector/planetoid/exoplanet/barren
 	flora_generator_type  = /datum/flora_generator/barren
 	ruin_tags_blacklist   = RUIN_HABITAT|RUIN_WATER
 	subtemplate_budget    = 6
 	initial_weather_state = null
 	template_parent_type  = /datum/map_template/planetoid/exoplanet
+	level_data_type       = /datum/level_data/planetoid/exoplanet/barren
+	prefered_level_data_per_z = list(
+		/datum/level_data/planetoid/exoplanet/barren,
+		/datum/level_data/planetoid/exoplanet/underground
+	)
 	template_categories   = list(
 		MAP_TEMPLATE_CATEGORY_EXOPLANET
 	)
@@ -39,7 +62,6 @@
 		/datum/exoplanet_theme/mountains
 	)
 	map_generators = list(
-		/datum/random_map/noise/exoplanet/barren,
 		/datum/random_map/noise/ore/rich
 	)
 
@@ -52,6 +74,10 @@
 /datum/map_template/planetoid/exoplanet/barren/generate_habitability(datum/planetoid_data/gen_data)
 	gen_data.set_habitability(HABITABILITY_BAD)
 
+////////////////////////////////////////////////////////////////////////////
+// Map Generator Surface
+////////////////////////////////////////////////////////////////////////////
+
 /datum/random_map/noise/exoplanet/barren
 	descriptor = "barren exoplanet"
 	smoothing_iterations = 4
@@ -59,6 +85,10 @@
 	flora_prob = 0.1
 	large_flora_prob = 0
 	fauna_prob = 0
+
+////////////////////////////////////////////////////////////////////////////
+// Areas
+////////////////////////////////////////////////////////////////////////////
 
 /area/exoplanet/barren
 	name       = "\improper Planetary surface"

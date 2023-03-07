@@ -1,3 +1,7 @@
+////////////////////////////////////////////////////////////////////////////
+// Overmap Marker
+////////////////////////////////////////////////////////////////////////////
+
 ///Overmap marker for the grass exoplanet
 /obj/effect/overmap/visitable/sector/planetoid/exoplanet/grass
 	name = "lush exoplanet"
@@ -8,6 +12,10 @@
 	var/datum/planetoid_data/E = SSmapping.planetoid_data_by_id[planetoid_id]
 	return E?.get_grass_color()
 
+////////////////////////////////////////////////////////////////////////////
+// Level Data
+////////////////////////////////////////////////////////////////////////////
+
 ///Surface of a grass exoplanet
 /datum/level_data/planetoid/exoplanet/grass
 	base_area = /area/exoplanet/grass
@@ -17,6 +25,10 @@
 	level_generators = list(
 		/datum/random_map/noise/exoplanet/grass
 	)
+
+////////////////////////////////////////////////////////////////////////////
+// Flora Generator
+////////////////////////////////////////////////////////////////////////////
 
 ///Flora data for a grass exoplanet
 /datum/flora_generator/grass
@@ -53,6 +65,10 @@
 		else if(vine_prob < 30)
 			S.set_trait(TRAIT_SPREAD,1)
 
+////////////////////////////////////////////////////////////////////////////
+// Fauna Generator
+////////////////////////////////////////////////////////////////////////////
+
 /datum/fauna_generator/grass
 	fauna_types = list(
 		/mob/living/simple_animal/yithian,
@@ -64,16 +80,24 @@
 		/mob/living/simple_animal/hostile/retaliate/goose/dire
 	)
 
+////////////////////////////////////////////////////////////////////////////
+// Map Template
+////////////////////////////////////////////////////////////////////////////
+
 ///Map template for generating a grass exoplanet
 /datum/map_template/planetoid/exoplanet/grass
-	name                 = "lush exoplanet"
-	level_data_type      = /datum/level_data/planetoid/exoplanet/grass
-	flora_generator_type = /datum/flora_generator/grass
-	fauna_generator_type = /datum/fauna_generator/grass
-	overmap_marker_type  = /obj/effect/overmap/visitable/sector/planetoid/exoplanet/grass
-	template_parent_type = /datum/map_template/planetoid/exoplanet
+	name                    = "lush exoplanet"
+	flora_generator_type    = /datum/flora_generator/grass
+	fauna_generator_type    = /datum/fauna_generator/grass
+	overmap_marker_type     = /obj/effect/overmap/visitable/sector/planetoid/exoplanet/grass
 	surface_light_level_min = 0.25 //give a chance of twilight jungle
 	surface_light_level_max = 0.75
+	template_parent_type    = /datum/map_template/planetoid/exoplanet
+	level_data_type         = /datum/level_data/planetoid/exoplanet/grass
+	prefered_level_data_per_z = list(
+		/datum/level_data/planetoid/exoplanet/grass,
+		/datum/level_data/planetoid/exoplanet/underground
+	)
 	possible_rock_colors = list(
 		COLOR_ASTEROID_ROCK,
 		COLOR_GRAY80,
@@ -82,6 +106,25 @@
 
 /datum/map_template/planetoid/exoplanet/grass/get_target_temperature()
 	return T20C + rand(10, 30)
+
+////////////////////////////////////////////////////////////////////////////
+// Map Generator Surface
+////////////////////////////////////////////////////////////////////////////
+
+///Map generator for the grass exoplanet surface
+/datum/random_map/noise/exoplanet/grass
+	descriptor = "grass exoplanet"
+	land_type = /turf/exterior/wildgrass
+	water_type = /turf/exterior/water
+	coast_type = /turf/exterior/mud/dark
+	water_level_min = 3
+	flora_prob = 10
+	grass_prob = 50
+	large_flora_prob = 30
+
+////////////////////////////////////////////////////////////////////////////
+// Areas
+////////////////////////////////////////////////////////////////////////////
 
 ///Area for the grass exoplanet surface
 /area/exoplanet/grass
@@ -97,14 +140,3 @@
 	forced_ambience = list(
 		'sound/ambience/jungle.ogg'
 	)
-
-///Map generator for the grass exoplanet surface
-/datum/random_map/noise/exoplanet/grass
-	descriptor = "grass exoplanet"
-	land_type = /turf/exterior/wildgrass
-	water_type = /turf/exterior/water
-	coast_type = /turf/exterior/mud/dark
-	water_level_min = 3
-	flora_prob = 10
-	grass_prob = 50
-	large_flora_prob = 30

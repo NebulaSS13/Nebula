@@ -1,3 +1,7 @@
+////////////////////////////////////////////////////////////////////////////
+// Overmap Marker
+////////////////////////////////////////////////////////////////////////////
+
 /obj/effect/overmap/visitable/sector/planetoid/exoplanet/desert
 	name          = "desert exoplanet"
 	desc          = "An arid exoplanet with sparse biological resources but rich mineral deposits underground."
@@ -5,11 +9,22 @@
 	surface_color = "#d6cca4"
 	water_color   = null
 
+////////////////////////////////////////////////////////////////////////////
+// Level Data
+////////////////////////////////////////////////////////////////////////////
+
 /datum/level_data/planetoid/exoplanet/desert
 	base_turf = /turf/exterior/sand
 	base_area = /area/exoplanet/desert
 	exterior_atmosphere = null
 	exterior_atmos_temp = null
+	level_generators = list(
+		/datum/random_map/noise/exoplanet/desert
+	)
+
+////////////////////////////////////////////////////////////////////////////
+// Flora Generator
+////////////////////////////////////////////////////////////////////////////
 
 /datum/flora_generator/desert
 	has_trees       = FALSE
@@ -36,6 +51,10 @@
 		S.set_trait(TRAIT_CARNIVOROUS,2)
 	S.set_trait(TRAIT_SPREAD,0)
 
+////////////////////////////////////////////////////////////////////////////
+// Fauna Generator
+////////////////////////////////////////////////////////////////////////////
+
 /datum/fauna_generator/desert
 	fauna_types           = list(
 		/mob/living/simple_animal/thinbug,
@@ -47,16 +66,24 @@
 		/mob/living/simple_animal/hostile/antlion/mega,
 	)
 
+////////////////////////////////////////////////////////////////////////////
+// Map Template
+////////////////////////////////////////////////////////////////////////////
+
 /datum/map_template/planetoid/exoplanet/desert
-	name                  = "desert exoplanet"
-	level_data_type       = /datum/level_data/planetoid/exoplanet/desert
-	flora_generator_type  = /datum/flora_generator/desert
-	fauna_generator_type  = /datum/fauna_generator/desert
-	overmap_marker_type   = /obj/effect/overmap/visitable/sector/planetoid/exoplanet/desert
-	initial_weather_state = null
-	template_parent_type  = /datum/map_template/planetoid/exoplanet
+	name                    = "desert exoplanet"
+	flora_generator_type    = /datum/flora_generator/desert
+	fauna_generator_type    = /datum/fauna_generator/desert
+	overmap_marker_type     = /obj/effect/overmap/visitable/sector/planetoid/exoplanet/desert
+	initial_weather_state   = null
 	surface_light_level_min = 0.5
 	surface_light_level_max = 0.95
+	template_parent_type    = /datum/map_template/planetoid/exoplanet
+	level_data_type         = /datum/level_data/planetoid/exoplanet/desert
+	prefered_level_data_per_z = list(
+		/datum/level_data/planetoid/exoplanet/desert,
+		/datum/level_data/planetoid/exoplanet/underground
+	)
 	possible_rock_colors = list(
 		COLOR_BEIGE,
 		COLOR_PALE_YELLOW,
@@ -64,12 +91,15 @@
 		COLOR_BROWN
 	)
 	map_generators = list(
-		/datum/random_map/noise/exoplanet/desert,
 		/datum/random_map/noise/ore/rich,
 	)
 
 /datum/map_template/planetoid/exoplanet/desert/get_target_temperature()
 	return T20C + rand(20, 100)
+
+////////////////////////////////////////////////////////////////////////////
+// Map Generator Surface
+////////////////////////////////////////////////////////////////////////////
 
 /datum/random_map/noise/exoplanet/desert
 	descriptor = "desert exoplanet"
@@ -89,6 +119,10 @@
 	. = ..()
 	if(noise2value(value) > 6)
 		return /turf/exterior/dry
+
+////////////////////////////////////////////////////////////////////////////
+// Areas
+////////////////////////////////////////////////////////////////////////////
 
 /area/exoplanet/desert
 	ambience = list(
