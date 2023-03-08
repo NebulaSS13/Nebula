@@ -284,7 +284,7 @@
 ///Builds the map's transition edge if applicable
 /datum/level_data/proc/build_border()
 	var/list/edge_states = list()
-	edge_states.len = WEST
+	edge_states.len = 8 //Largest cardinal direction is WEST or 8
 	var/should_loop_edges = ispath(loop_turf_type)
 	var/has_filler_edge   = ispath(border_filler)
 
