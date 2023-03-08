@@ -179,7 +179,7 @@
 		return
 	var/corner_start = locate(1, 1, level_z)
 	var/corner_end =   locate(world.maxx, world.maxy, level_z)
-	var/area/A = change_area ? new base_area : null
+	var/area/A = change_area ? get_base_area_instance() : null
 	for(var/turf/T as anything in block(corner_start, corner_end))
 		if(change_turf)
 			T = T.ChangeTurf(picked_turf)
@@ -432,7 +432,7 @@
 
 ///Returns the instance of the base area for this level
 /datum/level_data/proc/get_base_area_instance()
-	var/area/found = locate(base_area) in global.areas
+	var/area/found = locate(base_area)
 	if(found)
 		return found
 	else if(ispath(base_area))
