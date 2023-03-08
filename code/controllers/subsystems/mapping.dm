@@ -248,25 +248,53 @@ SUBSYSTEM_DEF(mapping)
 
 /// Registers all the needed infos from a level_data into the mapping subsystem
 /datum/controller/subsystem/mapping/proc/register_level_data(var/datum/level_data/LD)
-	if(LD.base_turf)
-		SSmapping.base_turf_by_z[LD.level_z] = LD.base_turf || world.turf
+	if(levels_by_z.len < LD.level_z)
+		levels_by_z.len = max(levels_by_z.len, LD.level_z)
+		PRINT_STACK_TRACE("Attempting to initialize a z-level([LD.level_z]) that has not incremented world.maxz.")
+
+	//Assign level z
+	var/datum/level_data/old_level = levels_by_z[LD.level_z]
+	levels_by_z[LD.level_z] = LD
+
+	if(old_level)
+		// Swap out the old one but preserve any relevant references etc.
+		old_level.replace_with(LD)
+		QDEL_NULL(old_level)
+
+	//Setup ID ref
+	if(isnull(LD.level_id))
+		PRINT_STACK_TRACE("Null level_id specified for z[LD.level_z].")
+	else if(LD.level_id in levels_by_id)
+		PRINT_STACK_TRACE("Duplicate level_id '[LD.level_id]' for z[LD.level_z].")
+	else
+		levels_by_id[LD.level_id] = LD
+
+	//Always add base turf for Z. It'll get replaced as needed.
+	base_turf_by_z[LD.level_z] = LD.base_turf || world.turf
+
+	//Add to level flags lookup lists
 	if(LD.level_flags & ZLEVEL_STATION)
-		SSmapping.station_levels |= LD.level_z
+		station_levels |= LD.level_z
 	if(LD.level_flags & ZLEVEL_ADMIN)
-		SSmapping.admin_levels   |= LD.level_z
+		admin_levels   |= LD.level_z
 	if(LD.level_flags & ZLEVEL_CONTACT)
-		SSmapping.contact_levels |= LD.level_z
+		contact_levels |= LD.level_z
 	if(LD.level_flags & ZLEVEL_PLAYER)
-		SSmapping.player_levels  |= LD.level_z
+		player_levels  |= LD.level_z
 	if(LD.level_flags & ZLEVEL_SEALED)
-		SSmapping.sealed_levels  |= LD.level_z
+		sealed_levels  |= LD.level_z
 	return TRUE
 
 /datum/controller/subsystem/mapping/proc/unregister_level_data(var/datum/level_data/LD)
-	SSmapping.base_turf_by_z[LD.level_z] = world.turf
-	SSmapping.station_levels -= LD.level_z
-	SSmapping.admin_levels   -= LD.level_z
-	SSmapping.contact_levels -= LD.level_z
-	SSmapping.player_levels  -= LD.level_z
-	SSmapping.sealed_levels  -= LD.level_z
+	if(levels_by_z[LD.level_z] == LD)
+		//Temporarily clear the level z from the list if we're in it.
+		levels_by_z[LD.level_z] = null
+	levels_by_id -= LD.level_id
+
+	base_turf_by_z[LD.level_z] = world.turf
+	station_levels -= LD.level_z
+	admin_levels   -= LD.level_z
+	contact_levels -= LD.level_z
+	player_levels  -= LD.level_z
+	sealed_levels  -= LD.level_z
 	return TRUE
