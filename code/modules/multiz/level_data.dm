@@ -516,13 +516,19 @@ INITIALIZE_IMMEDIATE(/obj/abstract/level_data_spawner)
 
 /datum/level_data/mining_level/asteroid
 	base_turf = /turf/simulated/floor/asteroid
+	level_generators = list(
+		/datum/random_map/automata/cave_system,
+		/datum/random_map/noise/ore
+	)
 
 /datum/level_data/mining_level/generate_level()
 	//#FIXME: This config option is very ambiguous. Most RNG stuff doesn't care about it. Might be worth removing?
 	if(!config.generate_map)
 		return
-	new /datum/random_map/automata/cave_system(1, 1, level_z, world.maxx, world.maxy)
-	new /datum/random_map/noise/ore(1, 1, level_z, world.maxx, world.maxy)
+	. = ..()
+
+/datum/level_data/mining_level/after_generate_level()
+	..()
 	refresh_mining_turfs()
 
 /datum/level_data/mining_level/proc/refresh_mining_turfs()
