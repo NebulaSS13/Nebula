@@ -94,6 +94,7 @@ SUBSYSTEM_DEF(mapping)
 
 	// Build away sites.
 	global.using_map.build_away_sites()
+	global.using_map.build_exoplanets()
 
 	// Initialize z-level objects.
 #ifdef UNIT_TEST
