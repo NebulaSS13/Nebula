@@ -58,7 +58,9 @@
 		return
 	if(ispath(base_area) && !ispath(base_area, world.area))
 		var/area/A = get_base_area_instance()
-		A.SetName("[location_name]")
+		if(!istype(A, world.area))
+			global.using_map.area_purity_test_exempt_areas |= A.type //Make sure we add any of those, so unit tests calm down when we rename
+			A.SetName("[location_name]")
 
 ///Try to spawn the given amount of ruins onto our level. Returns the template types that were spawned
 /datum/level_data/planetoid/proc/seed_ruins(var/budget = 0, var/list/potentialRuins)
