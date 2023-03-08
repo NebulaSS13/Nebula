@@ -129,6 +129,9 @@
 	///A list of /datum/random_map to apply to this level if we're running level generation. Those are run before any parent map_generators.
 	var/list/level_generators
 
+	///Whether the level data was setup already.
+	var/_level_setup_completed = FALSE
+
 /datum/level_data/New(var/_z_level, var/defer_level_setup = FALSE)
 	. = ..()
 	level_z = _z_level
@@ -184,12 +187,15 @@
 			ChangeArea(T, A)
 
 /datum/level_data/proc/setup_level_data()
+	if(_level_setup_completed)
+		return //Since we can defer setup, make sure we only setup once
 	SSmapping.register_level_data(src)
 	setup_level_bounds()
 	setup_ambient()
 	setup_exterior_atmosphere()
 	generate_level()
 	after_generate_level()
+	_level_setup_completed = TRUE
 
 ///Calculate the bounds of the level, the border area, and the inner accessible area.
 /datum/level_data/proc/setup_level_bounds()
