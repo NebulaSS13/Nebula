@@ -5,8 +5,9 @@
 /// A randomly generated "tempate" for an planet-like objects. Meant to standardize how random planets are generated so it behave like all other map templates.
 /datum/map_template/planetoid
 	name                 = "random planet"
-	template_categories  = list(MAP_TEMPLATE_CATEGORY_PLANET)
+	abstract_type        = /datum/map_template/planetoid
 	template_parent_type = /datum/map_template/planetoid
+	template_categories  = list(MAP_TEMPLATE_CATEGORY_PLANET)
 	level_data_type      = /datum/level_data/planetoid
 	modify_tag_vars      = TRUE //Would set it to false, since we're generating everything on the fly, but unit test doesn't like it
 	tallness             = 1
@@ -36,7 +37,7 @@
 	/// The surface here implies the first "solid ground" z-level from the top.
 	var/surface_level_index = 1
 	///Amount of shuttle landing points to generate on the surface level of the planet. If null, none will be generated.
-	var/amount_shuttle_landing_points
+	var/amount_shuttle_landing_points = 2
 	///The maximum shuttle "radius" for the shuttle landing points that will be generated.
 	var/max_shuttle_radius = 20
 	///The type of engraving flavor text generator to use for the new planet
@@ -77,6 +78,16 @@
 	///Ruin sites map template category to use for creating ruins on this planet.
 	var/ruin_category = MAP_TEMPLATE_CATEGORY_PLANET_SITE
 
+/datum/map_template/planetoid/New(created_ad_hoc)
+	. = ..()
+	//Make sure we got a sensible surface_level_index
+	if(surface_level_index < 1)
+		log_warning("Map template: '[src]'([type]) had a 'surface_level_index' value that was '[isnull(surface_level_index)? "null" : surface_level_index]'. Forcing to 1!")
+		surface_level_index = 1
+	if(surface_level_index > tallness)
+		log_warning("Map template: '[src]'([type]) had an invalid 'surface_level_index' value of '[surface_level_index]', while 'tallness' is '[tallness]'. Clamping.")
+		surface_level_index = min(surface_level_index, tallness)
+
 /datum/map_template/planetoid/get_spawn_weight()
 	return 100
 
@@ -109,21 +120,14 @@
 /datum/map_template/planetoid/proc/generate_levels(var/datum/planetoid_data/gen_data, var/list/theme_generators)
 	//Register the planetoid so the planet stuff can properly look us up when initializing the z-levels.
 	SSmapping.register_planetoid(gen_data)
-	//Build root z-stack first
-	var/list/lvl_to_build = prefered_level_data_per_z?.Copy()
-	if(lvl_to_build)
-		if(length(lvl_to_build) > tallness || length(lvl_to_build) < tallness)
-			lvl_to_build.len = tallness //Enforce tallness
 
 	//Setup a list of level data types to use for each new z-levels
-	if(!length(lvl_to_build))
-		lvl_to_build = list()
-		for(var/i = 1 to tallness)
-			lvl_to_build += level_data_type
+	var/list/lvl_to_build = list()
+	for(var/i = 1 to tallness)
+		lvl_to_build += LAZYACCESS(prefered_level_data_per_z, i) || level_data_type
+	log_debug("Planet Levels:\n\tRoot Level:[world.maxz + 1]")
 
-	log_debug("Planet Levels:\n\tTop Planet:[world.maxz + 1]")
-
-	//Build root stack
+	//Build root z-stack first
 	var/list/root_stack = buid_z_stack(null, null, lvl_to_build, gen_data)
 
 	//Build any amount of adjacent stacks
@@ -166,13 +170,11 @@
 /datum/map_template/planetoid/proc/buid_z_stack(var/direction_from_root, var/list/adjacent_level_data, var/list/new_level_data_types, var/datum/planetoid_data/gen_data)
 	. = list()
 	var/stack_height = length(new_level_data_types)
-	var/surflvl_idx  = (stack_height - surface_level_index) + 1 //Invert the index so it matches the level gen order
 
 	//Must build levels from bottom to top for multi-z to work
 	for(var/i = stack_height, i >= 1, i--)
 		//Register the z-level to the planetoid, BEFORE the level_data runs its init code, so turfs get linked properly
 		SSmapping.register_planetoid_levels(world.maxz + 1, gen_data)
-
 		var/myty                   = new_level_data_types[i]
 		var/datum/level_data/LDadj = LAZYACCESS(adjacent_level_data, (stack_height - i) + 1) //stack is filled lowest level first, so we have to match in reverse
 		var/datum/level_data/LDnew = SSmapping.increment_world_z_size(myty, TRUE)
@@ -187,10 +189,8 @@
 			//If we don't have an adjacent level, we're the root level stack and need to set some extra stuff
 			if(i == stack_height)
 				gen_data.set_topmost_level(LDnew)
-				if(!surface_level_index)
-					gen_data.set_surface_level(LDnew)
 			//Make sure we mark the surface level id
-			if(i == surflvl_idx)
+			if(i == surface_level_index)
 				gen_data.set_surface_level(LDnew)
 
 		LDnew.before_template_load(src, gen_data) //Apply planet name, etc..

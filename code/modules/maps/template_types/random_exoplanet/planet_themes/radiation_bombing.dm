@@ -11,11 +11,21 @@
 	return "Hotspots of radiation detected."
 
 /datum/exoplanet_theme/radiation_bombing/after_map_generation(datum/planetoid_data/E)
+	var/datum/level_data/LD = SSmapping.levels_by_id[E.surface_level_id]
 	var/radiation_power = rand(10, 37.5)
-	var/num_craters = round(min(0.5, rand()) * 0.02 * E.width * E.height)
-	var/area_turfs = get_area_turfs(E.surface_area, list(/proc/not_turf_contains_dense_objects))
+	var/num_craters = round(min(0.5, rand()) * 0.02 * LD.level_inner_width * LD.level_inner_height)
+
+	//Grab all turfs that are within the level's borders
+	var/list/available_turfs = block(locate(LD.level_inner_min_x, LD.level_inner_min_y, LD.level_z), locate(LD.level_inner_max_x, LD.level_inner_max_y, LD.level_z))
+	var/list/picked_turfs = list()
+
+	//Manually filter out turfs
+	for(var/turf/T in available_turfs)
+		if(!turf_contains_dense_objects(T) && (T.loc == E.surface_area))
+			picked_turfs += T
+
 	for(var/i = 1 to num_craters)
-		var/turf/simulated/crater_center = pick_n_take(area_turfs)
+		var/turf/crater_center = pick_n_take(picked_turfs)
 		if(!crater_center) // ran out of space somehow
 			return
 		new/obj/structure/rubble/war(crater_center)

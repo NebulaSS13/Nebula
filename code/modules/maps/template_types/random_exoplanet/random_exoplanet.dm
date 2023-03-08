@@ -1,8 +1,9 @@
 ///Random map generator for exo planets
 /datum/map_template/planetoid/exoplanet
 	name                  = "random exoplanet"
+	abstract_type         = /datum/map_template/planetoid/exoplanet
+	template_parent_type  = /datum/map_template/planetoid/exoplanet
 	template_categories   = list(MAP_TEMPLATE_CATEGORY_EXOPLANET)
-	template_parent_type  = /datum/map_template/planetoid
 	tallness              = 2
 	level_data_type       = /datum/level_data/planetoid/exoplanet
 	prefered_level_data_per_z = list(
