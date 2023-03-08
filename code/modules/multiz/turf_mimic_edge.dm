@@ -22,9 +22,9 @@
 	icon             = null
 	icon_state       = null
 	density          = FALSE
-	permit_ao        = FALSE
-	blocks_air       = TRUE
-	dynamic_lighting = FALSE
+	permit_ao        = FALSE //would need AO proxy
+	blocks_air       = TRUE  //would need air zone proxy
+	dynamic_lighting = FALSE //Would need lighting proxy
 
 	///Mimicked turf's x position
 	var/mimic_x
@@ -37,6 +37,8 @@
 
 /turf/simulated/mimic_edge/Initialize(ml)
 	. = ..()
+	//Clear ourselves from the ambient queue
+	SSambience.queued -= src
 	//Need to put a mouse-opaque overlay there to prevent people turning/shooting towards ACTUAL location of vis_content things
 	click_eater = new(src)
 	setup_mimic()
@@ -66,6 +68,16 @@
 	mimic_y = _y
 	refresh_vis_contents()
 
+//Prevent ambient completely, we're not a real turf
+/turf/simulated/mimic_edge/set_ambient_light(color, multiplier)
+	return
+/turf/simulated/mimic_edge/update_ambient_light(no_corner_update)
+	return
+/turf/simulated/mimic_edge/update_ambient_light_from_z()
+	return
+/turf/simulated/mimic_edge/lighting_build_overlay(now)
+	return
+
 ////////////////////////////////
 // Unsimulated Mimic Edges
 ////////////////////////////////
@@ -92,6 +104,8 @@
 
 /turf/unsimulated/mimic_edge/Initialize(ml)
 	. = ..()
+	//Clear ourselves from the ambient queue
+	SSambience.queued -= src
 	//Need to put a mouse-opaque overlay there to prevent people turning/shooting towards ACTUAL location of vis_content things
 	click_eater = new(src)
 	setup_mimic()
@@ -121,6 +135,16 @@
 	mimic_y = _y
 	refresh_vis_contents()
 
+//Prevent ambient completely, we're not a real turf
+/turf/unsimulated/mimic_edge/set_ambient_light(color, multiplier)
+	return
+/turf/unsimulated/mimic_edge/update_ambient_light(no_corner_update)
+	return
+/turf/unsimulated/mimic_edge/update_ambient_light_from_z()
+	return
+/turf/unsimulated/mimic_edge/lighting_build_overlay(now)
+	return
+
 ////////////////////////////////
 // Exterior Mimic Edges
 ////////////////////////////////
@@ -147,6 +171,8 @@
 
 /turf/exterior/mimic_edge/Initialize(ml)
 	. = ..()
+	//Clear ourselves from the ambient queue
+	SSambience.queued -= src
 	//Need to put a mouse-opaque overlay there to prevent people turning/shooting towards ACTUAL location of vis_content things
 	click_eater = new(src)
 	setup_mimic()
@@ -175,6 +201,16 @@
 	mimic_x = _x
 	mimic_y = _y
 	refresh_vis_contents()
+
+//Prevent ambient completely, we're not a real turf
+/turf/exterior/mimic_edge/set_ambient_light(color, multiplier)
+	return
+/turf/exterior/mimic_edge/update_ambient_light(no_corner_update)
+	return
+/turf/exterior/mimic_edge/update_ambient_light_from_z()
+	return
+/turf/exterior/mimic_edge/lighting_build_overlay(now)
+	return
 
 ////////////////////////////////
 // Transition Edges Shared

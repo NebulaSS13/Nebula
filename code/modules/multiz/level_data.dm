@@ -1,46 +1,48 @@
-/// Returns all the turfs within a zlevel's transition edge, on a given direction. If include corners is true, the corners of the map will be included.
+/// Returns all the turfs within a zlevel's transition edge, on a given direction.
+/// If include corners is true, the corners of the map will be included.
 /proc/get_transition_edge_turfs(var/z, var/dir_edge, var/include_corners = FALSE)
 	var/datum/level_data/LD = SSmapping.levels_by_z[z]
-	//minimum and maximum corners making up the box, between which the transition edge is
-	var/min_x = 1
-	var/min_y = 1
-	var/max_x = 1
-	var/max_y = 1
 
-	//Beginning and ending of the edges on each axises. Including corners or not.
-	var/x_transit_beg = include_corners? (LD.level_inner_min_x - TRANSITIONEDGE) : (LD.level_inner_min_x)
-	var/x_transit_end = include_corners? (LD.level_inner_max_x + TRANSITIONEDGE) : (LD.level_inner_max_x)
-	var/y_transit_beg = include_corners? (LD.level_inner_min_y - TRANSITIONEDGE) : (LD.level_inner_min_y)
-	var/y_transit_end = include_corners? (LD.level_inner_max_y + TRANSITIONEDGE) : (LD.level_inner_max_y)
+	//minimum and maximum corners making up the box, between which the transition edge is
+	var/min_x = 1 //X of lower left corner of the edge
+	var/min_y = 1 //Y of lower left corner of the edge
+	var/max_x = 1 //X of upper right corner of the edge
+	var/max_y = 1 //Y of upper right corner of the edge
+
+	//Pos before or after the transition edge on either ends of each axis of the level. (Including corners or not)
+	var/x_bef_transit = include_corners? (LD.level_inner_min_x - TRANSITIONEDGE) : (LD.level_inner_min_x)
+	var/x_aft_transit = include_corners? (LD.level_inner_max_x + TRANSITIONEDGE) : (LD.level_inner_max_x)
+	var/y_bef_transit = include_corners? (LD.level_inner_min_y - TRANSITIONEDGE) : (LD.level_inner_min_y)
+	var/y_aft_transit = include_corners? (LD.level_inner_max_y + TRANSITIONEDGE) : (LD.level_inner_max_y)
 
 	switch(dir_edge)
 		if(NORTH)
-			min_x = x_transit_beg
-			min_y = LD.level_inner_max_y + 1 //Add one so we're outside the inner area
-			max_x = x_transit_end
-			max_y = LD.level_inner_max_y + TRANSITIONEDGE  //inner includes transition edge
+			min_x = x_bef_transit
+			min_y = LD.level_inner_max_y + 1 //Add one so we're outside the inner area (inner min/max are inclusive)
+			max_x = x_aft_transit
+			max_y = LD.level_inner_max_y + TRANSITIONEDGE  //End of the transition edge on that axis
 		if(SOUTH)
-			min_x = x_transit_beg
+			min_x = x_bef_transit
 			min_y = LD.level_inner_min_y - TRANSITIONEDGE
-			max_x = x_transit_end
+			max_x = x_aft_transit
 			max_y = LD.level_inner_min_y - 1
 		if(EAST)
 			min_x = LD.level_inner_max_x + 1
-			min_y = y_transit_beg
+			min_y = y_bef_transit
 			max_x = LD.level_inner_max_x + TRANSITIONEDGE
-			max_y = y_transit_end
+			max_y = y_aft_transit
 		if(WEST)
 			min_x = LD.level_inner_min_x - TRANSITIONEDGE
-			min_y = y_transit_beg
+			min_y = y_bef_transit
 			max_x = LD.level_inner_min_x - 1
-			max_y = y_transit_end
+			max_y = y_aft_transit
 
 	return block(
 		locate(min_x, min_y, LD.level_z),
 		locate(max_x, max_y, LD.level_z)
 	)
 
-///Returns all the turfs from all 4 corners of the transition edge border.
+///Returns all the turfs from all 4 corners of the transition border of a level.
 /proc/get_transition_edge_corner_turfs(var/z)
 	var/datum/level_data/LD = SSmapping.levels_by_z[z]
 	//South-West
@@ -60,7 +62,7 @@
 			locate(LD.level_inner_max_x + 1,              LD.level_inner_max_y + 1,              LD.level_z),
 			locate(LD.level_inner_max_x + TRANSITIONEDGE, LD.level_inner_max_y + TRANSITIONEDGE, LD.level_z))
 
-///Keeps details on how to generate, maintain and access a zlevel
+///Keeps details on how to generate, maintain and access a zlevel.
 /datum/level_data
 	///Name displayed to the player to refer to this level in user interfaces and etc. If null, one will be generated.
 	var/name
@@ -70,7 +72,7 @@
 	/// A unique string identifier for this particular z-level. Used to fetch a level without knowing its z-level.
 	var/level_id
 	/// Various flags indicating what this level functions as.
-	var/level_flags
+	var/level_flags = 0
 	/// The desired width of the level, including the TRANSITIONEDGE.
 	///If world.maxx is bigger, the exceeding area will be filled with turfs of "border_filler" type if defined, or base_turf otherwise.
 	var/level_max_width
@@ -79,37 +81,40 @@
 	var/level_max_height
 
 	/// Filled by map gen on init. Indicates where the accessible level area starts past the transition edge.
-	var/tmp/level_inner_min_x
+	var/level_inner_min_x
 	/// Filled by map gen on init. Indicates where the accessible level area starts past the transition edge.
-	var/tmp/level_inner_min_y
+	var/level_inner_min_y
 	/// Filled by map gen on init. Indicates where the accessible level area starts past the transition edge.
-	var/tmp/level_inner_max_x
+	var/level_inner_max_x
 	/// Filled by map gen on init. Indicates where the accessible level area starts past the transition edge.
-	var/tmp/level_inner_max_y
+	var/level_inner_max_y
 
 	/// Filled by map gen on init. Indicates the width of the accessible area within the transition edges.
-	var/tmp/level_inner_width
+	var/level_inner_width
 	/// Filled by map gen on init.Indicates the height of the accessible area within the transition edges.
-	var/tmp/level_inner_height
+	var/level_inner_height
 
 	// *** Lighting ***
-	/// Set to false to leave dark
-	var/take_starlight_ambience = TRUE
-	/// This default makes turfs not generate light. Adjust to have exterior areas be lit.
+	/// Set to false to override with our own.
+	var/use_global_exterior_ambience = TRUE
+	/// Ambient lighting light intensity turfs on this level should have. Value from 0 to 1.
 	var/ambient_light_level = 0
-	/// Colour of ambient light.
+	/// Colour of ambient light for turfs on this level.
 	var/ambient_light_color = COLOR_WHITE
 
 	// *** Level Gen ***
-	///The default base turf type for the whole level. It will be the base turf type for the z level, unless loaded by map. filler_turf overrides what turfs the level will be created with.
+	///The default base turf type for the whole level. It will be the base turf type for the z level, unless loaded by map.
+	/// filler_turf overrides what turfs the level will be created with.
 	var/base_turf = /turf/space
 	/// When the level is created dynamically, all turfs on the map will be changed to this one type. If null, will use the base_turf instead.
 	var/filler_turf
 	///The default area type for the whole level. It will be applied to all turfs in the level on creation, unless loaded by map.
 	var/base_area = /area/space
-	///The turf to fill the border area beyond the bounds of the level with. If null, nothing will be placed in the border area. (This is also placed when a border cannot be looped if loop_unconnected_borders is TRUE)
+	///The turf to fill the border area beyond the bounds of the level with.
+	/// If null, nothing will be placed in the border area. (This is also placed when a border cannot be looped if loop_unconnected_borders is TRUE)
 	var/border_filler// = /turf/unsimulated/mineral
-	/// If set we will put a looping edge on every unconnected edge of the map. If null, will not loop unconnected edges. If an unconnected edge is facing a connected edge, it will be instead filled with "border_filler" instead, if defined.
+	///If set we will put a looping edge on every unconnected edge of the map. If null, will not loop unconnected edges.
+	/// If an unconnected edge is facing a connected edge, it will be instead filled with "border_filler" instead, if defined.
 	var/loop_turf_type// = /turf/unsimulated/mimc_edge/transition/loop
 	/// The turf type to use for zlevel lateral connections
 	var/transition_turf_type = /turf/unsimulated/mimic_edge/transition
@@ -117,16 +122,17 @@
 	// *** Atmos ***
 	/// Temperature of standard exterior atmosphere.
 	var/exterior_atmos_temp = T20C
-	/// Gasmix datum returned to exterior return_air. Set to assoc list of material to moles to initialize the gas datum.
+	/// Gas mixture datum returned to exterior return_air. Set to assoc list of material to moles to initialize the gas datum.
 	var/datum/gas_mixture/exterior_atmosphere
 
 	// *** Connections ***
 	///A list of all level_ids, and a direction. Indicates what direction of the map connects to what level
 	var/list/connected_levels
-	///A cached list of connected directions to their connected level id
+	///A cached list of connected directions to their connected level id. Filled up at runtime.
 	var/tmp/list/cached_connections
 
-	///A list of /datum/random_map to apply to this level if we're running level generation. Those are run before any parent map_generators.
+	///A list of /datum/random_map types to apply to this level if we're running level generation.
+	/// Those are run before any parents/map_templates map generators.
 	var/list/level_generators
 
 	///Whether the level data was setup already.
@@ -137,41 +143,36 @@
 	level_z = _z_level
 	if(isnull(_z_level))
 		PRINT_STACK_TRACE("Attempting to initialize a null z-level.")
-	if(SSmapping.levels_by_z.len < level_z)
-		SSmapping.levels_by_z.len = max(SSmapping.levels_by_z.len, level_z)
-		PRINT_STACK_TRACE("Attempting to initialize a z-level([level_z]) that has not incremented world.maxz.")
 
-	// Swap out the old one but preserve any relevant references etc.
-	if(SSmapping.levels_by_z[level_z])
-		var/datum/level_data/old_level = SSmapping.levels_by_z[level_z]
-		old_level.replace_with(src)
-		qdel(old_level)
-
-	SSmapping.levels_by_z[level_z] = src
-	if(!level_id)
-		level_id = "leveldata_[level_z]_[sequential_id(/datum/level_data)]"
-	if(level_id in SSmapping.levels_by_id)
-		PRINT_STACK_TRACE("Duplicate level_id '[level_id]' for z[level_z].")
-	else
-		SSmapping.levels_by_id[level_id] = src
-
+	initialize_level_id()
+	SSmapping.register_level_data(src)
 	if(SSmapping.initialized && !defer_level_setup)
 		setup_level_data()
 
 /datum/level_data/Destroy(force)
 	log_debug("Level data datum being destroyed: [log_info_line(src)]")
-	//Since this is a datum that lives inside the SSmapping subsystem, I'm not sure if we really need to prevent deletion. It was fine for the obj version of this, but not much point now?
+	//Since this is a datum that lives inside the SSmapping subsystem, I'm not sure if we really need to prevent deletion.
+	// It was fine for the obj version of this, but not much point now?
 	SSmapping.unregister_level_data(src)
 	. = ..()
 
+///Generates a level_id if none were specified in the datum definition.
+/datum/level_data/proc/initialize_level_id()
+	if(level_id)
+		return
+	level_id = "leveldata_[level_z]_[sequential_id(/datum/level_data)]"
+
+///Handle a new level_data datum overwriting us.
 /datum/level_data/proc/replace_with(var/datum/level_data/new_level)
 	new_level.copy_from(src)
 
+///Handle copying data from a previous level_data we're replacing.
 /datum/level_data/proc/copy_from(var/datum/level_data/old_level)
 	return
 
-///Initialize the turfs on the z-level
+///Initialize the turfs on the z-level.
 /datum/level_data/proc/initialize_new_level()
+	//#TODO: Is it really necessary to do this for any and all levels? Seems mainly useful for space levels?
 	var/picked_turf = filler_turf || base_turf //Pick the filler_turf for filling if it's set, otherwise use the base_turf
 	var/change_turf = (picked_turf && picked_turf != world.turf)
 	var/change_area = (base_area && base_area != world.area)
@@ -186,10 +187,11 @@
 		if(change_area)
 			ChangeArea(T, A)
 
+///Prepare level for being used. Setup borders, lateral z connections, ambient lighting, atmosphere, etc..
 /datum/level_data/proc/setup_level_data()
 	if(_level_setup_completed)
 		return //Since we can defer setup, make sure we only setup once
-	SSmapping.register_level_data(src)
+
 	setup_level_bounds()
 	setup_ambient()
 	setup_exterior_atmosphere()
@@ -218,7 +220,7 @@
 
 ///Setup ambient lighting for the level
 /datum/level_data/proc/setup_ambient()
-	if(!take_starlight_ambience)
+	if(!use_global_exterior_ambience)
 		return
 	ambient_light_level = config.exterior_ambient_light
 	ambient_light_color = SSskybox.background_color
@@ -283,12 +285,17 @@
 		SSmapping.accessible_z_levels[num2text(level_z)] = template.accessibility_weight
 	SSmapping.player_levels |= level_z
 
-#define LEVEL_EDGE_NONE 0
-#define LEVEL_EDGE_LOOP 1
-#define LEVEL_EDGE_WALL 2
-#define LEVEL_EDGE_CON  3
 ///Builds the map's transition edge if applicable
 /datum/level_data/proc/build_border()
+	var/list/edge_states = compute_level_edges_states()
+	for(var/edge_dir in global.cardinal)
+		build_border_edge(edge_states[edge_dir], edge_dir)
+
+	//Now prepare the corners of the border
+	build_border_corners()
+
+///Loop through the edges of the level and determine if they're connected, looping, filled, or untouched.
+/datum/level_data/proc/compute_level_edges_states()
 	var/list/edge_states = list()
 	edge_states.len = 8 //Largest cardinal direction is WEST or 8
 	var/should_loop_edges = ispath(loop_turf_type)
@@ -313,38 +320,38 @@
 		else
 			edge_states[adir] = LEVEL_EDGE_NONE
 
-	//Then apply the borders
-	for(var/adir in global.cardinal)
-		var/border_type = edge_states[adir]
-		if(border_type == LEVEL_EDGE_NONE)
-			continue
+	return edge_states
 
-		var/list/edge_turfs
-		switch(border_type)
-			if(LEVEL_EDGE_LOOP)
-				edge_turfs = get_transition_edge_turfs(level_z, adir, FALSE)
-				for(var/turf/T in edge_turfs)
-					T.ChangeTurf(loop_turf_type)
-			if(LEVEL_EDGE_CON)
-				edge_turfs = get_transition_edge_turfs(level_z, adir, FALSE)
-				for(var/turf/T in edge_turfs)
-					T.ChangeTurf(transition_turf_type)
-			if(LEVEL_EDGE_WALL)
-				edge_turfs = get_transition_edge_turfs(level_z, adir, TRUE)
-				for(var/turf/T in edge_turfs)
-					T.ChangeTurf(border_filler)
+///Apply the specified edge type to the specified edge's turfs
+/datum/level_data/proc/build_border_edge(var/edge_type, var/edge_dir)
+	if(edge_type == LEVEL_EDGE_NONE)
+		return
 
+	var/list/edge_turfs
+	switch(edge_type)
+		if(LEVEL_EDGE_LOOP)
+			edge_turfs = get_transition_edge_turfs(level_z, edge_dir, FALSE)
+			for(var/turf/T in edge_turfs)
+				T.ChangeTurf(loop_turf_type)
+		if(LEVEL_EDGE_CON)
+			edge_turfs = get_transition_edge_turfs(level_z, edge_dir, FALSE)
+			for(var/turf/T in edge_turfs)
+				T.ChangeTurf(transition_turf_type)
+		if(LEVEL_EDGE_WALL)
+			edge_turfs = get_transition_edge_turfs(level_z, edge_dir, TRUE)
+			for(var/turf/T in edge_turfs)
+				T.ChangeTurf(border_filler)
+
+///Handle preparing the level's border's corners after we've stup the edges.
+/datum/level_data/proc/build_border_corners()
 	//Now prepare the corners of the border
-	for(var/turf/T in get_transition_edge_corner_turfs(level_z))
+	var/list/all_corner_turfs = get_transition_edge_corner_turfs(level_z)
+	for(var/turf/T in all_corner_turfs)
 		//In case we got filler turfs for borders, make sure to fill the corners with it
 		if(border_filler)
 			T.ChangeTurf(border_filler)
-		T.set_density(TRUE) //Force corner turfs to be solid, so nothing end up being lost stuck in there
-
-#undef LEVEL_EDGE_NONE
-#undef LEVEL_EDGE_LOOP
-#undef LEVEL_EDGE_WALL
-#undef LEVEL_EDGE_CON
+		//Force corner turfs to be solid, so nothing end up being lost/stuck in there
+		T.set_density(TRUE)
 
 //
 // Accessors
@@ -480,9 +487,6 @@ INITIALIZE_IMMEDIATE(/obj/abstract/landmark/level_data_spawner)
 ////////////////////////////////////////////
 // Level Data Implementations
 ////////////////////////////////////////////
-/*
- * Mappable subtypes.
- */
 /datum/level_data/space
 
 /datum/level_data/debug
@@ -504,12 +508,18 @@ INITIALIZE_IMMEDIATE(/obj/abstract/landmark/level_data_spawner)
 	)
 	exterior_atmos_temp = T20C
 	level_flags = (ZLEVEL_PLAYER|ZLEVEL_SEALED)
-	take_starlight_ambience = FALSE // This is set up by the exoplanet object.
+	use_global_exterior_ambience = FALSE // This is set up by the exoplanet object.
 
 /datum/level_data/unit_test
 	level_flags = (ZLEVEL_CONTACT|ZLEVEL_PLAYER|ZLEVEL_SEALED)
 
-// Used to generate mining ores etc.
+/datum/level_data/overmap
+	name = "Sensor Display"
+	level_flags = ZLEVEL_SEALED
+	use_global_exterior_ambience = FALSE // Overmap doesn't care about ambient lighting
+
+//#TODO: This seems like it could be generalized in a much better way?
+// Used specifically by /turf/simulated/floor/asteroid, and some away sites to generate mining turfs
 /datum/level_data/mining_level
 	level_flags = (ZLEVEL_PLAYER|ZLEVEL_SEALED)
 	var/list/mining_turfs
@@ -521,8 +531,8 @@ INITIALIZE_IMMEDIATE(/obj/abstract/landmark/level_data_spawner)
 /datum/level_data/mining_level/asteroid
 	base_turf = /turf/simulated/floor/asteroid
 
-/datum/level_data/mining_level/after_template_load()
-	..()
+/datum/level_data/mining_level/generate_level()
+	//#FIXME: This config option is very ambiguous. Most RNG stuff doesn't care about it. Might be worth removing?
 	if(!config.generate_map)
 		return
 	new /datum/random_map/automata/cave_system(1, 1, level_z, world.maxx, world.maxy)
@@ -535,8 +545,3 @@ INITIALIZE_IMMEDIATE(/obj/abstract/landmark/level_data_spawner)
 		mining_turf.updateMineralOverlays()
 		CHECK_TICK
 	mining_turfs = null
-
-// Used as a dummy z-level for the overmap.
-/datum/level_data/overmap
-	name = "Sensor Display"
-	take_starlight_ambience = FALSE // Overmap doesn't care about ambient lighting

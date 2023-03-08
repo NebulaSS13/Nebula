@@ -12,6 +12,15 @@
 ///Extra spacing needed between any random ruins and the transition edge of a level.
 #define RUIN_MAP_EDGE_PAD 15
 
+///Enum value for a level edge that's to be untouched
+#define LEVEL_EDGE_NONE 0
+///Enum value for a level edge that's to be looped with the opposite edge
+#define LEVEL_EDGE_LOOP 1
+///Enum value for a level edge that's to be filled with a wall filler turfs
+#define LEVEL_EDGE_WALL 2
+///Enum value for a level edge that's to be connected with another z-level
+#define LEVEL_EDGE_CON  3
+
 // Invisibility constants.
 #define INVISIBILITY_LIGHTING    20
 #define INVISIBILITY_LEVEL_ONE   35
