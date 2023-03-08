@@ -94,13 +94,6 @@
 /datum/map_template/planetoid/get_template_cost()
 	return 1
 
-///Returns the area matching the surface of the planetoid. Override this for planetoid whose's topmost level isn't their surface.
-/datum/map_template/planetoid/proc/get_surface_area_instance()
-	//Check if we override the default level_data_type in our override list, or use the default level_data_type.
-	var/datum/level_data/L = prefered_level_data_per_z?[surface_level_index] || level_data_type
-	var/area_type = initial(L.base_area) || world.area
-	return new area_type()
-
 /datum/map_template/planetoid/load(turf/T, centered = FALSE)
 	//Main reason for this is, map bounds are up to level_data. They're needed to tell what level of a planet is a level,
 	// but cannot be combined with existing level_data.

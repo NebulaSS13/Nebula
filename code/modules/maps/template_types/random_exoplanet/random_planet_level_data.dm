@@ -57,7 +57,7 @@
 	if(!(. = ..()))
 		return
 	if(ispath(base_area) && !ispath(base_area, world.area))
-		var/area/A = new base_area()
+		var/area/A = get_base_area_instance()
 		A.SetName("[location_name]")
 
 ///Try to spawn the given amount of ruins onto our level. Returns the template types that were spawned
