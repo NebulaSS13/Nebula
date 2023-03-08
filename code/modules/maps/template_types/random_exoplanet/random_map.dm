@@ -141,3 +141,21 @@
 				for(var/cell in neighbors)
 					if(noise2value(map[cell]) >= water_level)
 						map[cell] = COAST_VALUE
+
+//////////////////////////////////////////////////////////////////////////////
+// Definitions
+//////////////////////////////////////////////////////////////////////////////
+
+///Random map generator for generating underground planetary levels.
+/datum/random_map/noise/exoplanet/mantle
+	descriptor           = "planetary mantle"
+	smoothing_iterations = 3
+	land_type            = /turf/exterior/volcanic
+	water_type           = /turf/exterior/lava
+	water_level_min      = 4
+	water_level_max      = 6
+	fauna_prob           = 0
+	megafauna_spawn_prob = 0
+	flora_prob           = 0
+	grass_prob           = 0
+	large_flora_prob     = 0

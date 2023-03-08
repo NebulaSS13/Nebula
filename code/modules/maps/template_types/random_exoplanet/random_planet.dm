@@ -197,7 +197,7 @@
 /datum/map_template/planetoid/load_new_z(no_changeturf = TRUE, centered = TRUE, datum/planetoid_data/gen_data) //centered == false should probably runtime, because it will never work properly
 	if(!gen_data)
 		gen_data = create_planetoid_instance()
-	before_planet_gen(gen_data, world.maxz + 1)//We haven't created the first z-level yet
+	before_planet_gen(gen_data)
 
 	//Prepare themes, and apply ruin overrides
 	var/new_ruin_whitelist = ruin_tags_whitelist
@@ -232,8 +232,7 @@
 	loaded++
 	return locate(world.maxx/2, world.maxy/2, world.maxz)
 
-/datum/map_template/planetoid/proc/before_planet_gen(var/datum/planetoid_data/gen_data, var/assigned_z)
-	//Gen atmos
+/datum/map_template/planetoid/proc/before_planet_gen(var/datum/planetoid_data/gen_data)
 	make_planet_name(gen_data)
 	select_themes(gen_data)
 	generate_habitability(gen_data)
@@ -245,7 +244,7 @@
 	gen_data.generate_life()
 
 /datum/map_template/planetoid/proc/after_planet_gen(var/datum/planetoid_data/gen_data, var/datum/level_data/topmost_level_data, var/datum/level_data/surface_level_data)
-	//#TODO: Generate vertical z-level connections (holes/stairs/ladders)
+	//#TODO: Generate vertical z-level connections (holes/stairs/ladders)?
 
 	if(!gen_data.engraving_generator)
 		gen_data.set_engraving_generator(new xenoarch_engraving_flavor_type())

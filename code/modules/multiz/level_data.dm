@@ -150,7 +150,8 @@
 		setup_level_data()
 
 /datum/level_data/Destroy(force)
-	//Since this is a datum that lives inside the SSmapping subsystem, I'm not sure if we really need to prevent deletion. It was fine for the obj version of this, but not much point now?
+	//Since this is a datum that lives inside the SSmapping subsystem, I'm not sure if we really need to prevent deletion.
+	// It was fine for the obj version of this, but not much point now?
 	SSmapping.unregister_level_data(src)
 	. = ..()
 
@@ -164,6 +165,7 @@
 /datum/level_data/proc/replace_with(var/datum/level_data/new_level)
 	new_level.copy_from(src)
 
+///Handle copying data from a previous level_data we're replacing.
 /datum/level_data/proc/copy_from(var/datum/level_data/old_level)
 	return
 
@@ -278,10 +280,6 @@
 		SSmapping.accessible_z_levels[num2text(level_z)] = template.accessibility_weight
 	SSmapping.player_levels |= level_z
 
-#define LEVEL_EDGE_NONE 0
-#define LEVEL_EDGE_LOOP 1
-#define LEVEL_EDGE_WALL 2
-#define LEVEL_EDGE_CON  3
 ///Builds the map's transition edge if applicable
 /datum/level_data/proc/build_border()
 	var/list/edge_states = compute_level_edges_states()

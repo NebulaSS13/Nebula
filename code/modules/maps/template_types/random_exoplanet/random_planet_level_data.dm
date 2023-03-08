@@ -1,14 +1,18 @@
+///Base level data for levels that are subordinated to a /datum/planetoid_data entry.
+///A bunch of things are fetched from planet gen to stay in sync.
 /datum/level_data/planetoid
 	level_flags             = (ZLEVEL_PLAYER|ZLEVEL_SEALED)
 	border_filler           = /turf/unsimulated/mineral
 	loop_turf_type          = /turf/exterior/mimic_edge/transition/loop
 	transition_turf_type    = /turf/exterior/mimic_edge/transition
-	take_starlight_ambience = FALSE
+	use_global_exterior_ambience = FALSE
 
+///Level data for generating surface levels on exoplanets
 /datum/level_data/planetoid/exoplanet
 	base_area = /area/exoplanet
 	base_turf = /turf/exterior/dirt
 
+///Level data for generating underground levels on exoplanets
 /datum/level_data/planetoid/exoplanet/underground
 	base_area = /area/exoplanet/underground
 	base_turf = /turf/exterior/volcanic
@@ -16,11 +20,19 @@
 		/datum/random_map/noise/exoplanet/mantle,
 	)
 
+/datum/level_data/planetoid/initialize_level_id()
+	if(level_id)
+		return
+	level_id = "planetoid_[level_z]_[sequential_id(/datum/level_data)]"
+
 ///Prepare our level for generation/load. And sync with the planet template
 /datum/level_data/planetoid/before_template_load(datum/map_template/template, datum/planetoid_data/gen_data)
 	. = ..()
+	//In cases when the planetoid_data isn't shared with us, like from loading non-random planet map templates, we can try fetching it.
 	if(!gen_data)
-		return //If there's no data from generation, it's fine we'll allow it
+		gen_data = SSmapping.planetoid_data_by_z[level_z]
+	if(!gen_data)
+		CRASH("'[src]', id:'[level_id]', z:'[level_z]'. Couldn't access expected planetoid_data!")
 
 	//Apply parent's prefered bounds if we don't have any preferences
 	if(!level_max_width && gen_data.width)
@@ -44,7 +56,7 @@
 /datum/level_data/planetoid/proc/apply_planet_atmosphere(var/datum/planetoid_data/P)
 	if(istype(exterior_atmosphere))
 		return //level atmos takes priority over planet atmos
-	exterior_atmosphere = P.atmosphere.Clone()
+	exterior_atmosphere = P.atmosphere.Clone() //Make sure we get one instance per level
 
 ///Apply our parent planet's ambient lighting settings if we want to.
 /datum/level_data/planetoid/proc/apply_planet_ambient_lighting(var/datum/planetoid_data/P)
@@ -56,11 +68,13 @@
 /datum/level_data/planetoid/adapt_location_name(location_name)
 	if(!(. = ..()))
 		return
-	if(ispath(base_area) && !ispath(base_area, world.area))
-		var/area/A = get_base_area_instance()
-		if(!istype(A, world.area))
-			global.using_map.area_purity_test_exempt_areas |= A.type //Make sure we add any of those, so unit tests calm down when we rename
-			A.SetName("[location_name]")
+	if(!ispath(base_area) || ispath(base_area, world.area))
+		return
+	var/area/A = get_base_area_instance()
+	//Make sure we're not going to rename the world's base area
+	if(!istype(A, world.area))
+		global.using_map.area_purity_test_exempt_areas |= A.type //Make sure we add any of those, so unit tests calm down when we rename
+		A.SetName("[location_name]")
 
 ///Try to spawn the given amount of ruins onto our level. Returns the template types that were spawned
 /datum/level_data/planetoid/proc/seed_ruins(var/budget = 0, var/list/potentialRuins)
@@ -83,6 +97,7 @@
 		log_world("Ruin loader had no ruins to pick from with [budget] left to spend.")
 	return spawned_ruins
 
+///Attempts several times to find turfs where a ruin can be placed.
 /datum/level_data/planetoid/proc/try_place_ruin(var/datum/map_template/ruin, var/list/area_whitelist)
 	//#FIXME: Isn't trying to fit in a ruin by rolling randomly a bit inneficient?
 	// Try to place it
@@ -118,6 +133,7 @@
 		load_ruin(T, ruin)
 		return ruin
 
+///Actually handles loading a ruin template at the given turf.
 /datum/level_data/planetoid/proc/load_ruin(turf/central_turf, datum/map_template/template)
 	if(!template)
 		return FALSE
@@ -126,21 +142,3 @@
 			qdel(monster)
 	template.load(central_turf, centered = TRUE)
 	return TRUE
-
-//
-//
-//
-
-///Random map generator for generating underground planetary levels.
-/datum/random_map/noise/exoplanet/mantle
-	descriptor           = "planetary mantle"
-	smoothing_iterations = 3
-	land_type            = /turf/exterior/volcanic
-	water_type           = /turf/exterior/lava
-	water_level_min      = 4
-	water_level_max      = 6
-	fauna_prob           = 0
-	megafauna_spawn_prob = 0
-	flora_prob           = 0
-	grass_prob           = 0
-	large_flora_prob     = 0
