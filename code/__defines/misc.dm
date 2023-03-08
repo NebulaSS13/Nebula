@@ -7,7 +7,9 @@
 #define TURF_IS_HOLOMAP_PATH          BITFLAG(4)
 #define TURF_IS_HOLOMAP_ROCK          BITFLAG(5)
 
-#define TRANSITIONEDGE 7 // Distance from edge to move to another z-level.
+///Width or height of a transition edge area along the map's borders where transition edge turfs are placed to connect levels together.
+#define TRANSITIONEDGE 7
+///Extra spacing needed between any random ruins and the transition edge of a level.
 #define RUIN_MAP_EDGE_PAD 15
 
 // Invisibility constants.
