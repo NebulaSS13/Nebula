@@ -1,4 +1,6 @@
 #define COAST_VALUE (cell_range + 1)
+
+///Place down flora/fauna spawners, grass, water, and apply selected land type.
 /datum/random_map/noise/exoplanet
 	descriptor           = "exoplanet"
 	smoothing_iterations = 1
