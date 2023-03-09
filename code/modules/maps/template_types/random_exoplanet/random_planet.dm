@@ -140,12 +140,16 @@
 	if(length(west_stack))
 		. += west_stack
 
-	log_debug("Preparing [length(.)] levels...")
+	log_debug("Preparing [length(.)] planet levels...")
 	//Generate individual levels now that the z-level structure is properly setup
-	for(var/datum/level_data/LD in .)
+	for(var/datum/level_data/planetoid/LD in .)
 		log_debug("Setting up level [LD] ([LD.level_z]).")
-		LD.setup_level_data() //Do level gen, place borders, etc..
-		LD.apply_map_generators(length(theme_generators)? (map_generators | theme_generators) : map_generators) //Apply our own level gen and the theme's level gen
+		//place level transition borders and etc, but skip level gen
+		LD.setup_level_data(TRUE)
+		//Apply our own level gen and the theme's level gen (rock walls, debris, buildings, etc..)
+		LD.apply_map_generators(length(theme_generators)? (map_generators | theme_generators) : map_generators)
+		//Let the level apply its level-specific generators (flora/fauna/grass)
+		LD.generate_level()
 
 ///Build a stack that's adjacent to the specified stack.
 /datum/map_template/planetoid/proc/build_adjacent_z_stacks(var/amount, var/direction_from_root, var/list/adjacent_level_data, var/list/new_level_data_types, var/datum/planetoid_data/gen_data)

@@ -132,7 +132,7 @@
 	var/tmp/list/cached_connections
 
 	///A list of /datum/random_map types to apply to this level if we're running level generation.
-	/// Those are run before any parents/map_templates map generators.
+	/// May run before or after parent level gen
 	var/list/level_generators
 
 	///Whether the level data was setup already.
@@ -187,14 +187,15 @@
 			ChangeArea(T, A)
 
 ///Prepare level for being used. Setup borders, lateral z connections, ambient lighting, atmosphere, etc..
-/datum/level_data/proc/setup_level_data()
+/datum/level_data/proc/setup_level_data(var/skip_gen = FALSE)
 	if(_level_setup_completed)
 		return //Since we can defer setup, make sure we only setup once
 
 	setup_level_bounds()
 	setup_ambient()
 	setup_exterior_atmosphere()
-	generate_level()
+	if(!skip_gen)
+		generate_level()
 	after_generate_level()
 	_level_setup_completed = TRUE
 
