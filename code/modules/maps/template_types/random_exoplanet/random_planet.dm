@@ -88,6 +88,9 @@
 		log_warning("Map template: '[src]'([type]) had an invalid 'surface_level_index' value of '[surface_level_index]', while 'tallness' is '[tallness]'. Clamping.")
 		surface_level_index = min(surface_level_index, tallness)
 
+/datum/map_template/planetoid/is_runtime_generated()
+	return TRUE
+
 /datum/map_template/planetoid/get_spawn_weight()
 	return 100
 

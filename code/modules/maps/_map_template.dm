@@ -206,6 +206,10 @@
 			placement = corner
 	return block(placement, locate(placement.x+width-1, placement.y+height-1, placement.z))
 
+///Returns whether a given map template is generated at runtime. Mainly used by unit tests.
+/datum/map_template/proc/is_runtime_generated()
+	return FALSE
+
 //for your ever biggening badminnery kevinz000
 //? - Cyberboss
 /proc/load_new_z_level(var/file, var/name)
