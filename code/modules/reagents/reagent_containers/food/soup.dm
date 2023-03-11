@@ -8,7 +8,7 @@
 	icon_state = "meatballsoup"
 	trash = /obj/item/trash/snack_bowl
 	filling_color = "#785210"
-	center_of_mass = @"{'x':16,'y':8}"
+	center_of_mass = @'{"x":16,"y":8}'
 	bitesize = 5
 	eat_sound = list('sound/items/eatfood.ogg', 'sound/items/drink.ogg')
 
@@ -22,7 +22,7 @@
 	desc = "Smells like copper."
 	icon_state = "tomatosoup"
 	filling_color = "#ff0000"
-	center_of_mass = @"{'x':16,'y':7}"
+	center_of_mass = @'{"x":16,"y":7}'
 	bitesize = 5
 	eat_sound = 'sound/items/drink.ogg'
 
@@ -37,7 +37,7 @@
 	desc = "Not very funny."
 	icon_state = "clownstears"
 	filling_color = "#c4fbff"
-	center_of_mass = @"{'x':16,'y':7}"
+	center_of_mass = @'{"x":16,"y":7}'
 	nutriment_desc = list("salt" = 1, "the worst joke" = 3)
 	nutriment_amt = 4
 	bitesize = 5
@@ -54,7 +54,7 @@
 	icon_state = "vegetablesoup"
 	trash = /obj/item/trash/snack_bowl
 	filling_color = "#afc4b5"
-	center_of_mass = @"{'x':16,'y':8}"
+	center_of_mass = @'{"x":16,"y":8}'
 	nutriment_desc = list("carrot" = 2, "corn" = 2, "eggplant" = 2, "potato" = 2)
 	nutriment_amt = 8
 	bitesize = 5
@@ -70,7 +70,7 @@
 	icon_state = "nettlesoup"
 	trash = /obj/item/trash/snack_bowl
 	filling_color = "#afc4b5"
-	center_of_mass = @"{'x':16,'y':7}"
+	center_of_mass = @'{"x":16,"y":7}'
 	nutriment_desc = list("salad" = 4, "egg" = 2, "potato" = 2)
 	nutriment_amt = 8
 	bitesize = 5
@@ -87,7 +87,7 @@
 	icon_state = "mysterysoup"
 	trash = /obj/item/trash/snack_bowl
 	filling_color = "#f082ff"
-	center_of_mass = @"{'x':16,'y':6}"
+	center_of_mass = @'{"x":16,"y":6}'
 	nutriment_desc = list("backwash" = 1)
 	nutriment_amt = 1
 	bitesize = 5
@@ -149,7 +149,7 @@
 	icon_state = "wishsoup"
 	trash = /obj/item/trash/snack_bowl
 	filling_color = "#d1f4ff"
-	center_of_mass = @"{'x':16,'y':11}"
+	center_of_mass = @'{"x":16,"y":11}'
 	bitesize = 5
 	eat_sound = 'sound/items/drink.ogg'
 
@@ -166,7 +166,7 @@
 	icon_state = "hotchili"
 	trash = /obj/item/trash/snack_bowl
 	filling_color = "#ff3c00"
-	center_of_mass = @"{'x':15,'y':9}"
+	center_of_mass = @'{"x":15,"y":9}'
 	nutriment_desc = list("chilli peppers" = 2, "burning" = 1)
 	nutriment_amt = 3
 	bitesize = 5
@@ -182,7 +182,7 @@
 	desc = "This slush is barely a liquid!"
 	icon_state = "coldchili"
 	filling_color = "#2b00ff"
-	center_of_mass = @"{'x':15,'y':9}"
+	center_of_mass = @'{"x":15,"y":9}'
 	nutriment_desc = list("chilly peppers" = 3)
 	nutriment_amt = 3
 	trash = /obj/item/trash/snack_bowl
@@ -200,7 +200,7 @@
 	icon_state = "tomatosoup"
 	trash = /obj/item/trash/snack_bowl
 	filling_color = "#d92929"
-	center_of_mass = @"{'x':16,'y':7}"
+	center_of_mass = @'{"x":16,"y":7}'
 	nutriment_desc = list("soup" = 5)
 	nutriment_amt = 5
 	bitesize = 3
@@ -215,7 +215,7 @@
 	desc = "A nice and warm stew. Healthy and strong."
 	icon_state = "stew"
 	filling_color = "#9e673a"
-	center_of_mass = @"{'x':16,'y':5}"
+	center_of_mass = @'{"x":16,"y":5}'
 	nutriment_desc = list("tomato" = 2, "potato" = 2, "carrot" = 2, "eggplant" = 2, "mushroom" = 2)
 	nutriment_amt = 6
 	bitesize = 10
@@ -232,7 +232,7 @@
 	desc = "The universes best soup! Yum!!!"
 	icon_state = "milosoup"
 	trash = /obj/item/trash/snack_bowl
-	center_of_mass = @"{'x':16,'y':7}"
+	center_of_mass = @'{"x":16,"y":7}'
 	nutriment_desc = list("soy" = 8)
 	nutriment_amt = 8
 	bitesize = 4
@@ -248,7 +248,7 @@
 	icon_state = "mushroomsoup"
 	trash = /obj/item/trash/snack_bowl
 	filling_color = "#e386bf"
-	center_of_mass = @"{'x':17,'y':10}"
+	center_of_mass = @'{"x":17,"y":10}'
 	nutriment_desc = list("mushroom" = 8, "milk" = 2)
 	nutriment_amt = 8
 	bitesize = 3
@@ -260,7 +260,7 @@
 	icon_state = "beetsoup"
 	trash = /obj/item/trash/snack_bowl
 	filling_color = "#fac9ff"
-	center_of_mass = @"{'x':15,'y':8}"
+	center_of_mass = @'{"x":15,"y":8}'
 	nutriment_desc = list("tomato" = 4, "beet" = 4)
 	nutriment_amt = 8
 	bitesize = 2

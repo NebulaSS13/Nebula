@@ -7,7 +7,7 @@
 	icon_state = "monkeycube"
 	bitesize = 12
 	filling_color = "#adac7f"
-	center_of_mass = @"{'x':16,'y':14}"
+	center_of_mass = @'{"x":16,"y":14}'
 
 	var/growing = FALSE
 	var/monkey_type = /mob/living/carbon/human/monkey

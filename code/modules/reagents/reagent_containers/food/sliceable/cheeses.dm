@@ -5,7 +5,7 @@
 	slice_path = /obj/item/chems/food/cheesewedge
 	slices_num = 5
 	filling_color = "#fff700"
-	center_of_mass = @"{'x':16,'y':10}"
+	center_of_mass = @'{"x":16,"y":10}'
 	nutriment_desc = list("cheese" = 10)
 	nutriment_amt = 10
 	bitesize = 2
@@ -20,6 +20,6 @@
 	icon_state = "cheesewedge"
 	filling_color = "#fff700"
 	bitesize = 2
-	center_of_mass = @"{'x':16,'y':10}"
+	center_of_mass = @'{"x":16,"y":10}'
 
 // todo: non-cheddar cheeses

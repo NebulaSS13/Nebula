@@ -8,7 +8,7 @@
 	icon = 'icons/obj/items/chem/bottle.dmi'
 	icon_state = ICON_STATE_WORLD
 	randpixel = 7
-	center_of_mass = @"{'x':16,'y':15}"
+	center_of_mass = @'{"x":16,"y":15}'
 	amount_per_transfer_from_this = 10
 	possible_transfer_amounts = @"[5,10,15,25,30,60]"
 	w_class = ITEM_SIZE_SMALL

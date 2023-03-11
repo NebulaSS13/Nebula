@@ -3,7 +3,7 @@
 	desc = "Someone should be demoted from chef for this."
 	icon_state = "badrecipe"
 	filling_color = "#211f02"
-	center_of_mass = @"{'x':16,'y':12}"
+	center_of_mass = @'{"x":16,"y":12}'
 	bitesize = 2
 
 /obj/item/chems/food/badrecipe/populate_reagents()
@@ -16,7 +16,7 @@
 	desc = "Moist, peppery breadcrumbs for filling the body cavities of dead birds. Dig in!"
 	icon_state = "stuffing"
 	filling_color = "#c9ac83"
-	center_of_mass = @"{'x':16,'y':10}"
+	center_of_mass = @'{"x":16,"y":10}'
 	nutriment_amt = 3
 	nutriment_desc = list("dryness" = 2, "bread" = 2)
 	bitesize = 1
@@ -27,7 +27,7 @@
 	icon_state = "popcorn"
 	trash = /obj/item/trash/popcorn
 	filling_color = "#fffad4"
-	center_of_mass = @"{'x':16,'y':8}"
+	center_of_mass = @'{"x":16,"y":8}'
 	nutriment_desc = list("popcorn" = 3)
 	nutriment_amt = 2
 	bitesize = 0.1
@@ -37,7 +37,7 @@
 	desc = "Totally baked."
 	icon_state = "loadedbakedpotato"
 	filling_color = "#9c7a68"
-	center_of_mass = @"{'x':16,'y':10}"
+	center_of_mass = @'{"x":16,"y":10}'
 	nutriment_desc = list("baked potato" = 3)
 	nutriment_amt = 3
 	bitesize = 2
@@ -52,7 +52,7 @@
 	icon_state = "spacylibertyduff"
 	trash = /obj/item/trash/snack_bowl
 	filling_color = "#42b873"
-	center_of_mass = @"{'x':16,'y':8}"
+	center_of_mass = @'{"x":16,"y":8}'
 	nutriment_desc = list("mushroom" = 5, "rainbow" = 1)
 	nutriment_amt = 6
 	bitesize = 3
@@ -67,7 +67,7 @@
 	icon_state = "amanitajelly"
 	trash = /obj/item/trash/snack_bowl
 	filling_color = "#ed0758"
-	center_of_mass = @"{'x':16,'y':5}"
+	center_of_mass = @'{"x":16,"y":5}'
 	nutriment_desc = list("jelly" = 3, "mushroom" = 3)
 	nutriment_amt = 6
 	bitesize = 3
@@ -83,7 +83,7 @@
 	icon_state = "enchiladas"
 	trash = /obj/item/trash/tray
 	filling_color = "#a36a1f"
-	center_of_mass = @"{'x':16,'y':13}"
+	center_of_mass = @'{"x":16,"y":13}'
 	nutriment_desc = list("tortilla" = 3, "corn" = 3)
 	nutriment_amt = 2
 	bitesize = 4
@@ -99,7 +99,7 @@
 	icon_state = "monkeysdelight"
 	trash = /obj/item/trash/tray
 	filling_color = "#5c3c11"
-	center_of_mass = @"{'x':16,'y':13}"
+	center_of_mass = @'{"x":16,"y":13}'
 	bitesize = 6
 
 /obj/item/chems/food/monkeysdelight/populate_reagents()
@@ -114,7 +114,7 @@
 	desc = "An apple coated in sugary sweetness."
 	icon_state = "candiedapple"
 	filling_color = "#f21873"
-	center_of_mass = @"{'x':15,'y':13}"
+	center_of_mass = @'{"x":15,"y":13}'
 	nutriment_desc = list("apple" = 3, "caramel" = 3, "sweetness" = 2)
 	nutriment_amt = 3
 	bitesize = 3
@@ -124,7 +124,7 @@
 	desc = "A tasty after-dinner mint. It is only wafer thin."
 	icon_state = "mint"
 	filling_color = "#f2f2f2"
-	center_of_mass = @"{'x':16,'y':14}"
+	center_of_mass = @'{"x":16,"y":14}'
 	bitesize = 1
 
 /obj/item/chems/food/mint/populate_reagents()
@@ -136,7 +136,7 @@
 	desc = "This is a finely-prepared plump helmet biscuit. The ingredients are exceptionally minced plump helmet, and well-minced wheat flour."
 	icon_state = "phelmbiscuit"
 	filling_color = "#cfb4c4"
-	center_of_mass = @"{'x':16,'y':13}"
+	center_of_mass = @'{"x":16,"y":13}'
 	nutriment_desc = list("mushroom" = 4)
 	nutriment_amt = 5
 	bitesize = 2
@@ -155,7 +155,7 @@
 	icon_state = "gappletart"
 	trash = /obj/item/trash/plate
 	filling_color = "#ffff00"
-	center_of_mass = @"{'x':16,'y':18}"
+	center_of_mass = @'{"x":16,"y":18}'
 	nutriment_desc = list("apple" = 8)
 	nutriment_amt = 8
 	bitesize = 3
@@ -169,7 +169,7 @@
 	desc = "It's a salted cracker."
 	icon_state = "cracker"
 	filling_color = "#f5deb8"
-	center_of_mass = @"{'x':17,'y':6}"
+	center_of_mass = @'{"x":17,"y":6}'
 	nutriment_desc = list("salt" = 1, "cracker" = 2)
 	w_class = ITEM_SIZE_TINY
 	nutriment_amt = 1
@@ -184,7 +184,7 @@
 	desc = "Take a bite!"
 	icon_state = "taco"
 	bitesize = 3
-	center_of_mass = @"{'x':21,'y':12}"
+	center_of_mass = @'{"x":21,"y":12}'
 	nutriment_desc = list("cheese" = 2,"taco shell" = 2)
 	nutriment_amt = 4
 	nutriment_type = /decl/material/liquid/nutriment/bread
@@ -198,7 +198,7 @@
 	desc = "Raw meat appetizer."
 	icon_state = "pelmen"
 	filling_color = "#ffffff"
-	center_of_mass = @"{'x':16,'y':16}"
+	center_of_mass = @'{"x":16,"y":16}'
 	bitesize = 2
 
 /obj/item/chems/food/pelmen/populate_reagents()
@@ -210,7 +210,7 @@
 	desc = "A dish consisting of boiled pieces of meat wrapped in dough. Delicious!"
 	icon_state = "pelmeni_boiled"
 	filling_color = "#ffffff"
-	center_of_mass = @"{'x':16,'y':16}"
+	center_of_mass = @'{"x":16,"y":16}'
 	bitesize = 2
 
 /obj/item/chems/food/pelmeni_boiled/populate_reagents()
