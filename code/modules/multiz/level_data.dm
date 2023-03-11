@@ -502,6 +502,8 @@ INITIALIZE_IMMEDIATE(/obj/abstract/level_data_spawner)
 	name = "Sensor Display"
 	level_flags = ZLEVEL_SEALED
 	use_global_exterior_ambience = FALSE // Overmap doesn't care about ambient lighting
+	base_turf = /turf/unsimulated/dark_filler
+	transition_turf_type = null
 
 //#TODO: This seems like it could be generalized in a much better way?
 // Used specifically by /turf/simulated/floor/asteroid, and some away sites to generate mining turfs

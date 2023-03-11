@@ -45,7 +45,7 @@
 	..()
 
 /datum/overmap/proc/populate_overmap()
-	var/area/overmap/A = new overmap_area_type
+	var/area/overmap/A = locate(overmap_area_type) || new overmap_area_type //level_data should have initialized the area
 	for(var/square in block(locate(1, 1, assigned_z), locate(map_size_x, map_size_y, assigned_z)))
 		var/turf/T = square
 		if(T.x == map_size_x || T.y == map_size_y)
