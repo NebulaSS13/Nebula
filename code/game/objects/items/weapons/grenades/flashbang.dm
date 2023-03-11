@@ -2,7 +2,7 @@
 	name = "flashbang"
 	desc = "A grenade designed to blind, stun and disorient by means of an extremely bright flash and loud explosion."
 	icon = 'icons/obj/items/grenades/flashbang.dmi'
-	origin_tech = "{'materials':2,'combat':1}"
+	origin_tech = @'{"materials":2,"combat":1}'
 	var/banglet = 0
 
 /obj/item/grenade/flashbang/detonate()

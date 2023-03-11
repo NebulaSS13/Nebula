@@ -11,7 +11,7 @@
 	center_of_mass = null
 	randpixel = 0
 	matter = list(/decl/material/solid/metal/aluminium = MATTER_AMOUNT_REINFORCEMENT)
-	origin_tech = "{'materials':2,'engineering':2,'magnets':3}"
+	origin_tech = @'{"materials":2,"engineering":2,"magnets":3}'
 	var/magpulse = 0
 	var/obj/item/clothing/shoes/covering_shoes
 	var/online_slowdown = 3

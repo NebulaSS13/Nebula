@@ -2,7 +2,7 @@
 	name = "network analyzer"
 	desc = "A hand-held network scanner which detects nearby network devices and returns information about them."
 	icon = 'icons/obj/items/device/scanner/network_scanner.dmi'
-	origin_tech = "{'magnets':1,'engineering':1}"
+	origin_tech = @'{"magnets":1,"engineering":1}'
 	window_width = 350
 	window_height = 400
 

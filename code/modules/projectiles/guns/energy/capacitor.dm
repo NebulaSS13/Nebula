@@ -47,7 +47,7 @@ var/global/list/laser_wavelengths
 	desc = "An excitingly chunky directed energy weapon that uses a modular capacitor array to charge each shot."
 	icon = 'icons/obj/guns/capacitor_pistol.dmi'
 	icon_state = ICON_STATE_WORLD
-	origin_tech = "{'combat':4,'materials':4,'powerstorage':4}"
+	origin_tech = @'{"combat":4,"materials":4,"powerstorage":4}'
 	w_class = ITEM_SIZE_NORMAL
 	charge_cost = 100
 	accuracy = 2

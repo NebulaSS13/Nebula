@@ -2,7 +2,7 @@
 	name = "wired connection port"
 	desc = "A basic expansion port for use with wired connections."
 	power_usage = 30
-	origin_tech = "{'programming':1,'engineering':1}"
+	origin_tech = @'{"programming":1,"engineering":1}'
 	icon_state = "netcard_ethernet"
 	hardware_size = 3
 	material = /decl/material/solid/glass

@@ -18,7 +18,7 @@
 	hardness = MAT_VALUE_FLEXIBLE + 10
 	weight = MAT_VALUE_LIGHT
 	melting_point = T0C+371 //assuming heat resistant plastic
-	stack_origin_tech = "{'materials':3}"
+	stack_origin_tech = @'{"materials":3}'
 	conductive = 0
 	construction_difficulty = MAT_VALUE_NORMAL_DIY
 	reflectiveness = MAT_VALUE_SHINY
@@ -69,7 +69,7 @@
 	weight = MAT_VALUE_EXTREMELY_LIGHT - 5
 	ignition_point = T0C+232 //"the temperature at which book-paper catches fire, and burns." close enough
 	melting_point = T0C+232 //temperature at which cardboard walls would be destroyed
-	stack_origin_tech = "{'materials':1}"
+	stack_origin_tech = @'{"materials":1}'
 	door_icon_base = "wood"
 	destruction_desc = "crumples"
 	conductive = 0
@@ -96,7 +96,7 @@
 	uid                     = "solid_paper"
 	lore_text               = "Low tech writing medium made from cellulose fibers. Also used in wrappings and packaging."
 	color                   = "#cfcece"
-	stack_origin_tech       = "{'materials':1}"
+	stack_origin_tech       = @'{"materials":1}'
 	door_icon_base          = "wood"
 	destruction_desc        = "tears"
 	icon_base               = 'icons/turf/walls/solid.dmi'
@@ -133,7 +133,7 @@
 	uid = "solid_cotton"
 	use_name = "cotton"
 	color = "#ffffff"
-	stack_origin_tech = "{'materials':2}"
+	stack_origin_tech = @'{"materials":2}'
 	door_icon_base = "wood"
 	ignition_point = T0C+232
 	melting_point = T0C+300
@@ -467,7 +467,7 @@
 	name = "leather"
 	uid = "solid_leather"
 	color = "#5c4831"
-	stack_origin_tech = "{'materials':2}"
+	stack_origin_tech = @'{"materials":2}'
 	flags = MAT_FLAG_PADDING
 	ignition_point = T0C+300
 	melting_point = T0C+300

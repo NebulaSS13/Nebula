@@ -3,7 +3,7 @@
 	desc = "A status indicator for a combustion chamber, based on temperature."
 	icon = 'icons/obj/machines/door_timer.dmi'
 	icon_state = "doortimer-p"
-	directional_offset = "{'NORTH':{'y':-32}, 'SOUTH':{'y':32}, 'EAST':{'x':32}, 'WEST':{'x':-32}}"
+	directional_offset = @'{"NORTH":{"y":-32}, "SOUTH":{"y":32}, "EAST":{"x":32}, "WEST":{"x":-32}}'
 	obj_flags = OBJ_FLAG_MOVES_UNSUPPORTED
 	var/frequency = 1441
 	var/alert_temperature = 10000

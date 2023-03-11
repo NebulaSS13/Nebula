@@ -3,7 +3,7 @@
 	desc = "A small handheld device designed to disrupt energy barriers."
 	icon = 'icons/obj/machines/shielding.dmi'
 	icon_state = "hdiffuser_off"
-	origin_tech = "{'magnets':5,'powerstorage':5,'esoteric':2}"
+	origin_tech = @'{"magnets":5,"powerstorage":5,"esoteric":2}'
 	material = /decl/material/solid/metal/steel
 	matter = list(
 		/decl/material/solid/fiberglass = MATTER_AMOUNT_REINFORCEMENT,

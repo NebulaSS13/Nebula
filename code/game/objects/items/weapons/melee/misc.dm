@@ -10,7 +10,7 @@
 	item_flags = ITEM_FLAG_IS_WEAPON
 	throwforce = 7
 	w_class = ITEM_SIZE_NORMAL
-	origin_tech = "{'combat':4}"
+	origin_tech = @'{"combat":4}'
 	attack_verb = list("flicked", "whipped", "lashed")
 	material = /decl/material/solid/organic/leather
 
@@ -24,7 +24,7 @@
 	force = 16 //max hit with 60 strength and no equipment. Duel Arena no No forfeit - Snapshot
 	throwforce = 7
 	w_class = ITEM_SIZE_NORMAL
-	origin_tech = "{'combat':4}"
+	origin_tech = @'{"combat":4}'
 	attack_verb = list("flicked", "whipped", "lashed")
 
 /obj/item/whip/tail
@@ -35,7 +35,7 @@
 	obj_flags = null
 	force = 19
 	edge = TRUE
-	origin_tech = "{'combat':6,'materials':5}"
+	origin_tech = @'{"combat":6,"materials":5}'
 	material = /decl/material/solid/organic/leather/lizard
 
 /obj/item/whip/chainofcommand

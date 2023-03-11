@@ -100,7 +100,7 @@ var/global/list/all_apcs = list()
 	initial_access = list(access_engine_equip)
 	clicksound = "switch"
 	layer = ABOVE_WINDOW_LAYER
-	directional_offset = "{'NORTH':{'y':22}, 'SOUTH':{'y':-22}, 'EAST':{'x':22}, 'WEST':{'x':-22}}"
+	directional_offset = @'{"NORTH":{"y":22}, "SOUTH":{"y":-22}, "EAST":{"x":22}, "WEST":{"x":-22}}'
 
 	var/powered_down = FALSE
 	var/area/area

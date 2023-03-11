@@ -2,7 +2,7 @@
 	name = "dociler"
 	desc = "A complex single use recharging injector that spreads a complex neurological serum that makes animals docile and friendly. Somewhat."
 	w_class = ITEM_SIZE_NORMAL
-	origin_tech = "{'biotech':5,'materials':2}"
+	origin_tech = @'{"biotech":5,"materials":2}'
 	icon = 'icons/obj/items/device/animal_tagger.dmi'
 	icon_state = ICON_STATE_WORLD
 	force = 1

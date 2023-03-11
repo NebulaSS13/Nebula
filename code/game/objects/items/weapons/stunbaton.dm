@@ -10,7 +10,7 @@
 	edge = 0
 	throwforce = 7
 	w_class = ITEM_SIZE_NORMAL
-	origin_tech = "{'combat':2}"
+	origin_tech = @'{"combat":2}'
 	attack_verb = list("beaten")
 	base_parry_chance = 30
 	material = /decl/material/solid/metal/aluminium

@@ -9,7 +9,7 @@
 	sharp = 1
 	edge = 1
 	attack_verb = list("stabbed", "sliced", "cut")
-	origin_tech = "{'materials':1,'engineering':1,'combat':2}"
+	origin_tech = @'{"materials":1,"engineering":1,"combat":2}'
 	material = /decl/material/solid/metal/steel
 
 /obj/item/armblade/can_take_wear_damage()
@@ -26,14 +26,14 @@
 	augment_flags = AUGMENTATION_MECHANIC
 	material = /decl/material/solid/metal/steel
 	matter = list(/decl/material/solid/fiberglass = MATTER_AMOUNT_REINFORCEMENT)
-	
+
 /obj/item/armblade/claws
 	icon_state = "wolverine"
 	name = "combat claws"
 	desc = "These do not grow back."
 	base_parry_chance = 40
 	material_force_multiplier = 0.3
-	origin_tech = "{'materials':2,'engineering':2,'combat':3}"
+	origin_tech = @'{"materials":2,"engineering":2,"combat":3}'
 
 //Alternate look
 /obj/item/organ/internal/augment/active/simple/wolverine

@@ -8,7 +8,7 @@
 	attack_cooldown = 2*DEFAULT_WEAPON_COOLDOWN
 	melee_accuracy_bonus = -10
 	w_class = ITEM_SIZE_SMALL
-	origin_tech = "{'engineering':1}"
+	origin_tech = @'{"engineering":1}'
 	material = /decl/material/solid/metal/steel
 	center_of_mass = @'{"x":16,"y":20}'
 	attack_verb = list("attacked", "bashed", "battered", "bludgeoned", "whacked")

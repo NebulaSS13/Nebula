@@ -14,7 +14,7 @@
 	power_usage = 0
 	intercom = TRUE
 	intercom_handling = TRUE
-	directional_offset = "{'NORTH':{'y':-30}, 'SOUTH':{'y':20}, 'EAST':{'x':-22}, 'WEST':{'x':22}}"
+	directional_offset = @'{"NORTH":{"y":-30}, "SOUTH":{"y":20}, "EAST":{"x":-22}, "WEST":{"x":22}}'
 	var/last_tick //used to delay the powercheck
 
 /obj/item/radio/intercom/Initialize()

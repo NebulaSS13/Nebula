@@ -4,7 +4,7 @@
 	desc        = "Seems to have some unusal strata evident throughout it."
 	icon        = 'icons/obj/xenoarchaeology.dmi'
 	icon_state  = "strange"
-	origin_tech = "{'materials':5}"
+	origin_tech = @'{"materials":5}'
 	material    = /decl/material/solid/stone/sandstone
 	var/obj/item/inside
 

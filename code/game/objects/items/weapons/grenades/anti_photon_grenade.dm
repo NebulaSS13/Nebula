@@ -3,7 +3,7 @@
 	name = "photon disruption grenade"
 	icon = 'icons/obj/items/grenades/grenade_light.dmi'
 	det_time = 20
-	origin_tech = "{'wormholes':4,'materials':4}"
+	origin_tech = @'{"wormholes":4,"materials":4}'
 	material = /decl/material/solid/metal/steel
 	matter = list(
 		/decl/material/solid/fiberglass = MATTER_AMOUNT_REINFORCEMENT,

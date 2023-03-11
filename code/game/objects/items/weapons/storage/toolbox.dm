@@ -14,7 +14,7 @@
 	w_class = ITEM_SIZE_LARGE
 	max_w_class = ITEM_SIZE_NORMAL
 	max_storage_space = DEFAULT_LARGEBOX_STORAGE //enough to hold all starting contents
-	origin_tech = "{'combat':1}"
+	origin_tech = @'{"combat":1}'
 	attack_verb = list("robusted")
 	use_sound = 'sound/effects/storage/toolbox.ogg'
 	material = /decl/material/solid/metal/aluminium
@@ -69,7 +69,7 @@
 	desc = "A toolbox in black, with stylish red trim. This one feels particularly heavy, yet balanced."
 	icon_state = "syndicate"
 	item_state = "toolbox_syndi"
-	origin_tech = "{'combat':1,'esoteric':1}"
+	origin_tech = @'{"combat":1,"esoteric":1}'
 	attack_cooldown = 10
 
 /obj/item/storage/toolbox/syndicate/WillContain()

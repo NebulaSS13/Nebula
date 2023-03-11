@@ -1,7 +1,7 @@
 /obj/item/stock_parts/circuitboard/shuttle_console
 	name = "circuitboard (basic shuttle console)"
 	build_path = /obj/machinery/computer/shuttle_control
-	origin_tech = "{'programming':3}"
+	origin_tech = @'{"programming":3}'
 	var/shuttle_tag
 
 /obj/item/stock_parts/circuitboard/shuttle_console/construct(obj/machinery/computer/shuttle_control/M)

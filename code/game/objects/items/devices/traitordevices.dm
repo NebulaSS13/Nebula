@@ -24,7 +24,7 @@ effective or pretty fucking useless.
 	throw_speed = 4
 	throw_range = 10
 	obj_flags = OBJ_FLAG_CONDUCTIBLE
-	origin_tech = "{'magnets':3,'combat':3,'esoteric':3}"
+	origin_tech = @'{"magnets":3,"combat":3,"esoteric":3}'
 	material = /decl/material/solid/organic/plastic
 	matter = list(
 		/decl/material/solid/metal/gold     = MATTER_AMOUNT_REINFORCEMENT,

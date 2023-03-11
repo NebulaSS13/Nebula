@@ -7,7 +7,7 @@
 	desc = "A circuit. It has a label on it, it says \"Can handle heat levels up to 40 degrees celsius!\"."
 	build_path = /obj/machinery/firealarm
 	board_type = "wall"
-	origin_tech = "{'programming':1,'engineering':1}"
+	origin_tech = @'{"programming":1,"engineering":1}'
 	req_components = list()
 	additional_spawn_components = null
 
@@ -17,7 +17,7 @@
 	icon_state = "door_electronics"
 	build_path = /obj/machinery/alarm
 	board_type = "wall"
-	origin_tech = "{'programming':1,'engineering':1}"
+	origin_tech = @'{"programming":1,"engineering":1}'
 	req_components = list()
 	additional_spawn_components = null
 
@@ -31,7 +31,7 @@
 	obj_flags = OBJ_FLAG_CONDUCTIBLE
 	build_path = /obj/machinery/power/apc/buildable
 	board_type = "wall"
-	origin_tech = "{'programming':1,'engineering':1}"
+	origin_tech = @'{"programming":1,"engineering":1}'
 	req_components = list()
 	additional_spawn_components = list(
 		/obj/item/stock_parts/console_screen = 1,
@@ -45,7 +45,7 @@
 	name = "circuitboard (requests console)"
 	build_path = /obj/machinery/network/requests_console
 	board_type = "wall"
-	origin_tech = "{'programming':1,'engineering':1}"
+	origin_tech = @'{"programming":1,"engineering":1}'
 	req_components = list()
 	additional_spawn_components = list(
 		/obj/item/stock_parts/console_screen = 1,
@@ -65,7 +65,7 @@
 	name = "circuitboard (airlock controller)"
 	build_path = /obj/machinery/embedded_controller/radio/simple_docking_controller
 	board_type = "wall"
-	origin_tech = "{'programming':3,'engineering':3}"
+	origin_tech = @'{"programming":3,"engineering":3}'
 	req_components = list()
 	additional_spawn_components = list(
 		/obj/item/stock_parts/console_screen = 1,
@@ -86,7 +86,7 @@
 	name = "circuitboard (camera)"
 	build_path = /obj/machinery/camera
 	board_type = "wall"
-	origin_tech = "{'programming':1,'engineering':1}"
+	origin_tech = @'{"programming":1,"engineering":1}'
 	req_components = list()
 	additional_spawn_components = list(
 		/obj/item/stock_parts/power/apc/buildable = 1,

@@ -2,7 +2,7 @@
 	name = "circuitboard (bioprinter)"
 	build_path = /obj/machinery/fabricator/bioprinter
 	board_type = "machine"
-	origin_tech = "{'engineering':1,'biotech':3,'programming':3}"
+	origin_tech = @'{"engineering":1,"biotech":3,"programming":3}'
 	req_components = list(
 		/obj/item/scanner/health = 1,
 		/obj/item/stock_parts/matter_bin = 2,

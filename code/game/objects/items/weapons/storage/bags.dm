@@ -75,7 +75,7 @@
 		/decl/material/solid/metal/gold = MATTER_AMOUNT_REINFORCEMENT,
 		/decl/material/solid/metal/uranium = MATTER_AMOUNT_TRACE
 	)
-	origin_tech = "{'exoticmatter':5,'materials':6}"
+	origin_tech = @'{"exoticmatter":5,"materials":6}'
 
 /obj/item/storage/bag/trash/advanced/attackby(obj/item/W, mob/user)
 	if(istype(W, /obj/item/storage/backpack/holding) || istype(W, /obj/item/storage/bag/trash/advanced))

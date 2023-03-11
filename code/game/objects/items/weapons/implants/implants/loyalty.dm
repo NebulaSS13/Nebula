@@ -1,7 +1,7 @@
 /obj/item/implant/loyalty
 	name = "loyalty implant"
 	desc = "Makes you loyal or such."
-	origin_tech = "{'materials':1,'biotech':2,'esoteric':3}"
+	origin_tech = @'{"materials":1,"biotech":2,"esoteric":3}'
 	known = 1
 
 /obj/item/implant/loyalty/get_data()

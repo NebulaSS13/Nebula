@@ -2,7 +2,7 @@
 	name = "circuitboard (electric smelter)"
 	build_path = /obj/machinery/material_processing/smeltery
 	board_type = "machine"
-	origin_tech = "{'programming':2,'engineering':2}"
+	origin_tech = @'{"programming":2,"engineering":2}'
 	req_components = list(
 		/obj/item/stock_parts/manipulator = 1,
 		/obj/item/stock_parts/micro_laser = 2
@@ -17,7 +17,7 @@
 	name = "circuitboard (material compressor)"
 	build_path = /obj/machinery/material_processing/compressor
 	board_type = "machine"
-	origin_tech = "{'programming':2,'engineering':2}"
+	origin_tech = @'{"programming":2,"engineering":2}'
 	req_components = list(
 		/obj/item/stock_parts/manipulator = 1,
 		/obj/item/stock_parts/micro_laser = 2
@@ -32,7 +32,7 @@
 	name = "circuitboard (ore unloading machine)"
 	build_path = /obj/machinery/material_processing/unloader
 	board_type = "machine"
-	origin_tech = "{'programming':2,'engineering':2}"
+	origin_tech = @'{"programming":2,"engineering":2}'
 	req_components = list(
 		/obj/item/stock_parts/manipulator = 2
 		)
@@ -46,7 +46,7 @@
 	name = "circuitboard (material stacking machine)"
 	build_path = /obj/machinery/material_processing/stacker
 	board_type = "machine"
-	origin_tech = "{'programming':2,'engineering':2}"
+	origin_tech = @'{"programming":2,"engineering":2}'
 	req_components = list(
 		/obj/item/stock_parts/matter_bin = 1,
 		/obj/item/stock_parts/manipulator = 1
@@ -61,7 +61,7 @@
 	name = "circuitboard (mineral extractor)"
 	build_path = /obj/machinery/material_processing/extractor
 	board_type = "machine"
-	origin_tech = "{'programming':2,'engineering':2}"
+	origin_tech = @'{"programming":2,"engineering":2}'
 	req_components = list(
 		/obj/item/stock_parts/manipulator = 1,
 		/obj/item/stock_parts/micro_laser = 1,

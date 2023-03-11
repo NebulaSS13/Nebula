@@ -7,7 +7,7 @@
 	density = FALSE
 	obj_flags = OBJ_FLAG_MOVES_UNSUPPORTED
 	base_type = /obj/machinery/network/router/wall_mounted
-	directional_offset = "{'NORTH':{'y':-21}, 'SOUTH':{'y':21}, 'EAST':{'x':-21}, 'WEST':{'x':21}}"
+	directional_offset = @'{"NORTH":{"y":-21}, "SOUTH":{"y":21}, "EAST":{"x":-21}, "WEST":{"x":21}}'
 
 /obj/machinery/network/router/wall_mounted/Initialize()
 	. = ..()

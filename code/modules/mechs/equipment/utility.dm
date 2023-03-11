@@ -4,7 +4,7 @@
 	icon_state = "mech_clamp"
 	restricted_hardpoints = list(HARDPOINT_LEFT_HAND, HARDPOINT_RIGHT_HAND)
 	restricted_software = list(MECH_SOFTWARE_UTILITY)
-	origin_tech = "{'materials':2,'engineering':2}"
+	origin_tech = @'{"materials":2,"engineering":2}'
 	var/carrying_capacity = 5
 	var/list/obj/carrying = list()
 
@@ -197,7 +197,7 @@
 	item_state = "mech_floodlight"
 	restricted_hardpoints = list(HARDPOINT_HEAD, HARDPOINT_LEFT_SHOULDER, HARDPOINT_RIGHT_SHOULDER)
 	mech_layer = MECH_INTERMEDIATE_LAYER
-	origin_tech = "{'materials':1,'engineering':1}"
+	origin_tech = @'{"materials":1,"engineering":1}'
 
 	var/on = 0
 	var/l_power = 0.9
@@ -251,7 +251,7 @@
 	var/mode = CATAPULT_SINGLE
 	var/atom/movable/locked
 	equipment_delay = 30 //Stunlocks are not ideal
-	origin_tech = "{'materials':4,'engineering':4,'magnets':4}"
+	origin_tech = @'{"materials":4,"engineering":4,"magnets":4}'
 	require_adjacent = FALSE
 
 /obj/item/mech_equipment/catapult/get_hardpoint_maptext()
@@ -372,7 +372,7 @@
 
 	//Drill can have a head
 	var/obj/item/drill_head/drill_head
-	origin_tech = "{'materials':2,'engineering':2}"
+	origin_tech = @'{"materials":2,"engineering":2}'
 
 /obj/item/mech_equipment/drill/Initialize()
 	. = ..()
@@ -547,14 +547,14 @@
 	holding_type = /obj/item/gun/energy/plasmacutter/mounted/mech
 	restricted_hardpoints = list(HARDPOINT_LEFT_HAND, HARDPOINT_RIGHT_HAND, HARDPOINT_LEFT_SHOULDER, HARDPOINT_RIGHT_SHOULDER)
 	restricted_software = list(MECH_SOFTWARE_UTILITY)
-	origin_tech = "{'materials':4,'engineering':6,'exoticmatter':4,'combat':3}"
+	origin_tech = @'{"materials":4,"engineering":6,"exoticmatter":4,"combat":3}'
 
 /obj/item/mech_equipment/mounted_system/taser/autoplasma
 	icon_state = "mech_energy"
 	holding_type = /obj/item/gun/energy/plasmacutter/mounted/mech/auto
 	restricted_hardpoints = list(HARDPOINT_LEFT_HAND, HARDPOINT_RIGHT_HAND)
 	restricted_software = list(MECH_SOFTWARE_UTILITY)
-	origin_tech = "{'materials':5,'engineering':6,'exoticmatter':4,'combat':4}"
+	origin_tech = @'{"materials":5,"engineering":6,"exoticmatter":4,"combat":4}'
 
 /obj/item/gun/energy/plasmacutter/mounted/mech/auto
 	charge_cost = 13
@@ -576,7 +576,7 @@
 	passive_power_use = 0 KILOWATTS
 	var/activated_passive_power = 2 KILOWATTS
 	var/movement_power = 75
-	origin_tech = "{'magnets':3,'engineering':3,'exoticmatter':3}"
+	origin_tech = @'{"magnets":3,"engineering":3,"exoticmatter":3}'
 	var/datum/effect/effect/system/trail/ion/ion_trail
 	require_adjacent = FALSE
 	var/stabilizers = FALSE
@@ -700,7 +700,7 @@
 	restricted_software = list(MECH_SOFTWARE_UTILITY)
 	equipment_delay = 10
 
-	origin_tech = "{'materials':1,'engineering':1,'magnets':2}"
+	origin_tech = @'{"materials":1,"engineering":1,"magnets":2}'
 
 
 /obj/item/mech_equipment/camera/Initialize()

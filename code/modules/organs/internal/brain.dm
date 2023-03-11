@@ -9,7 +9,7 @@
 	throwforce = 1
 	throw_speed = 3
 	throw_range = 5
-	origin_tech = "{'biotech':3}"
+	origin_tech = @'{"biotech":3}'
 	attack_verb = list("attacked", "slapped", "whacked")
 	relative_size = 85
 	damage_reduction = 0

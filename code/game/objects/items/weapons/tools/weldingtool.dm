@@ -16,7 +16,7 @@
 	w_class                             = ITEM_SIZE_SMALL
 	material                            = /decl/material/solid/metal/steel
 	matter                              = list(/decl/material/solid/fiberglass = MATTER_AMOUNT_REINFORCEMENT)
-	origin_tech                         = "{'engineering':1}"
+	origin_tech                         = @'{"engineering":1}'
 	drop_sound                          = 'sound/foley/tooldrop1.ogg'
 	z_flags                             = ZMM_MANGLE_PLANES
 	attack_cooldown                     = DEFAULT_ATTACK_COOLDOWN

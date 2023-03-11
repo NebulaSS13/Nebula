@@ -7,7 +7,7 @@
 	slot_flags = SLOT_HEAD | SLOT_HOLSTER
 	origin_tech = null
 	pixel_y = 8
-	origin_tech = "{'biotech':1}"
+	origin_tech = @'{"biotech":1}'
 	use_single_icon = TRUE
 	item_state = null
 	is_spawnable_type = FALSE

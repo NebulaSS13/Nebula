@@ -14,7 +14,7 @@
 		/obj/item/wirecutters/finger,
 		/obj/item/multitool/finger
 	)
-	origin_tech = "{'materials':4,'magnets':3,'engineering':3}"
+	origin_tech = @'{"materials":4,"magnets":3,"engineering":3}'
 
 /obj/item/weldingtool/finger
 	name = "digital welder"

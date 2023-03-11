@@ -13,7 +13,7 @@
 	action_button_name = "Toggle Jetpack"
 	material = /decl/material/solid/metal/steel
 	matter = list(/decl/material/solid/metal/aluminium = MATTER_AMOUNT_REINFORCEMENT)
-	origin_tech = "{'materials':1,'engineering':3}"
+	origin_tech = @'{"materials":1,"engineering":3}'
 
 /obj/item/tank/jetpack/Initialize()
 	. = ..()

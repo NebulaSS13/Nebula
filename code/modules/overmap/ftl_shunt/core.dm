@@ -646,13 +646,13 @@
 	name = "circuit board (superluminal shunt)"
 	board_type = "machine"
 	build_path = /obj/machinery/ftl_shunt/core
-	origin_tech = "{'programming':3,'magnets':5,'materials':5,'wormholes':5}"
+	origin_tech = @'{"programming":3,"magnets":5,"materials":5,"wormholes":5}'
 	additional_spawn_components = list(/obj/item/stock_parts/power/terminal = 1)
 
 /obj/item/stock_parts/ftl_core
 	name = "exotic matter bridge"
 	desc = "The beating heart of a superluminal shunt - without this, the power to manipulate space-time is out of reach."
-	origin_tech = "{'programming':3,'magnets':5,'materials':5,'wormholes':5}"
+	origin_tech = @'{"programming":3,"magnets":5,"materials":5,"wormholes":5}'
 	icon = 'icons/obj/items/stock_parts/stock_parts.dmi'
 	icon_state = "smes_coil"
 	color = COLOR_YELLOW

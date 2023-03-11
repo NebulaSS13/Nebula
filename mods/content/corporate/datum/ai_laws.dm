@@ -1,7 +1,7 @@
 /obj/item/aiModule/nanotrasen // -- TLE
 	name = "'Corporate Default' Core AI Module"
 	desc = "A 'Corporate Default' Core AI Module: 'Reconfigures the AI's core laws.'."
-	origin_tech = "{'programming':3,'materials':4}"
+	origin_tech = @'{"programming":3,"materials":4}'
 	laws = new/datum/ai_laws/nanotrasen
 
 /datum/ai_laws/nanotrasen
@@ -18,7 +18,7 @@
 /obj/item/aiModule/corp
 	name = "\improper 'Corporate' core AI module"
 	desc = "A 'Corporate' Core AI Module: 'Reconfigures the AI's core laws.'."
-	origin_tech = "{'programming':3,'materials':4}"
+	origin_tech = @'{"programming":3,"materials":4}'
 	laws = new/datum/ai_laws/corporate
 
 /datum/ai_laws/corporate
@@ -51,5 +51,5 @@
 /obj/item/aiModule/dais
 	name = "\improper 'DAIS Experimental' core AI module"
 	desc = "A 'DAIS Experimental' Core AI Module: 'Reconfigures the AI's core laws.'."
-	origin_tech = "{'programming':4}"
+	origin_tech = @'{"programming":4}'
 	laws = new/datum/ai_laws/dais()

@@ -37,7 +37,7 @@
 	construct_state = /decl/machine_construction/wall_frame/panel_closed/simple
 	base_type = /obj/machinery/light
 	frame_type = /obj/item/frame/light
-	directional_offset = "{'NORTH':{'y':21}, 'EAST':{'x':10}, 'WEST':{'x':-10}}"
+	directional_offset = @'{"NORTH":{"y":21}, "EAST":{"x":10}, "WEST":{"x":-10}}'
 
 	var/on = 0					// 1 if on, 0 if off
 	var/flickering = 0

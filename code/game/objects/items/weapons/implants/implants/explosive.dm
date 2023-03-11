@@ -3,7 +3,7 @@
 	name = "explosive implant"
 	desc = "A military grade micro bio-explosive. Highly dangerous."
 	icon_state = "implant_evil"
-	origin_tech = "{'materials':1,'biotech':2,'esoteric':3}"
+	origin_tech = @'{"materials":1,"biotech":2,"esoteric":3}'
 	hidden = 1
 	var/elevel
 	var/phrase

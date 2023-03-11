@@ -233,7 +233,7 @@
 	holder_type = /obj/item/holder/runtime
 
 /obj/item/holder/runtime
-	origin_tech = "{'programming':1,'biotech':1}"
+	origin_tech = @'{"programming":1,"biotech":1}'
 
 /mob/living/simple_animal/cat/kitten
 	name = "kitten"

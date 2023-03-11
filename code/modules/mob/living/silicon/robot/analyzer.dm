@@ -12,7 +12,7 @@
 	w_class = ITEM_SIZE_SMALL
 	throw_speed = 5
 	throw_range = 10
-	origin_tech = "{'magnets':2,'biotech':1,'engineering':2}"
+	origin_tech = @'{"magnets":2,"biotech":1,"engineering":2}'
 	material = /decl/material/solid/metal/steel
 	matter = list(
 		/decl/material/solid/fiberglass = MATTER_AMOUNT_REINFORCEMENT,

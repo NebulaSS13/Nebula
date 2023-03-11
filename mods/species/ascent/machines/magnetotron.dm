@@ -66,7 +66,7 @@
 	name = "circuitboard (Ascent magnetotron)"
 	build_path = /obj/machinery/ascent_magnetotron
 	board_type = "machine"
-	origin_tech = "{'engineering':2,'magnets':4}"
+	origin_tech = @'{"engineering":2,"magnets":4}'
 	req_components = list(
 		/obj/item/stock_parts/matter_bin = 3,
 		/obj/item/stock_parts/manipulator = 1

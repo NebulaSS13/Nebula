@@ -8,7 +8,7 @@
 		/obj/item/stock_parts/computer/network_card = 1
 	)
 	build_path = /obj/machinery/network/message_server
-	origin_tech = "{'programming':4,'engineering':4}"
+	origin_tech = @'{"programming":4,"engineering":4}'
 	req_components = list(
 		/obj/item/stock_parts/subspace/ansible = 1,
 		/obj/item/stock_parts/subspace/filter = 1,
@@ -26,7 +26,26 @@
 		/obj/item/stock_parts/computer/network_card = 1
 	)
 	build_path = /obj/machinery/network/telecomms_hub
-	origin_tech = "{'programming':4,'engineering':4}"
+	origin_tech = @'{"programming":4,"engineering":4}'
+	req_components = list(
+							/obj/item/stock_parts/manipulator = 2,
+							/obj/item/stock_parts/subspace/filter = 1)
+
+/obj/item/stock_parts/circuitboard/telecomms/processor
+	name = "circuitboard (processor unit)"
+	build_path = /obj/machinery/telecomms/processor
+	origin_tech = @'{"programming":4,"engineering":4}'
+	req_components = list(
+							/obj/item/stock_parts/manipulator = 3,
+							/obj/item/stock_parts/subspace/filter = 1,
+							/obj/item/stock_parts/subspace/treatment = 2,
+							/obj/item/stock_parts/subspace/analyzer = 1,
+							/obj/item/stock_parts/subspace/amplifier = 1)
+
+/obj/item/stock_parts/circuitboard/telecomms/server
+	name = "circuitboard (telecommunication server)"
+	build_path = /obj/machinery/telecomms/server
+	origin_tech = @'{"programming":4,"engineering":4}'
 	req_components = list(
 		/obj/item/stock_parts/subspace/ansible = 1,
 		/obj/item/stock_parts/subspace/filter = 1,
@@ -41,7 +60,7 @@
 		/obj/item/stock_parts/power/apc/buildable = 1
 	)
 	build_path = /obj/machinery/shipcomms/broadcaster
-	origin_tech = "{'programming':4,'engineering':4}"
+	origin_tech = @'{"programming":4,"engineering":4}'
 	req_components = list(
 		/obj/item/stack/cable_coil = 20,
 		/obj/item/stock_parts/micro_laser/ultra = 5
@@ -54,7 +73,7 @@
 		/obj/item/stock_parts/power/apc/buildable = 1
 	)
 	build_path = /obj/machinery/shipcomms/receiver
-	origin_tech = "{'programming':4,'engineering':4}"
+	origin_tech = @'{"programming":4,"engineering":4}'
 	req_components = list(
 		/obj/item/stack/cable_coil = 20,
 		/obj/item/stock_parts/subspace/filter = 1,

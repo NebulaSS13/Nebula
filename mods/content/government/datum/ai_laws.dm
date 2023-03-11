@@ -25,7 +25,7 @@
 /obj/item/aiModule/solgov
 	name = "'SCG Expeditionary' Core AI Module"
 	desc = "An 'SCG Expeditionary' Core AI Module: 'Reconfigures the AI's core laws.'."
-	origin_tech = "{'programming':3,'materials':4}"
+	origin_tech = @'{"programming":3,"materials":4}'
 	laws = new/datum/ai_laws/solgov
 
 /******************** SCG Aggressive ********************/
@@ -33,5 +33,5 @@
 /obj/item/aiModule/solgov_aggressive
 	name = "\improper 'Military' Core AI Module"
 	desc = "A 'Military' Core AI Module: 'Reconfigures the AI's core laws.'."
-	origin_tech = "{'programming':3,'materials':4}"
+	origin_tech = @'{"programming":3,"materials":4}'
 	laws = new/datum/ai_laws/solgov_aggressive

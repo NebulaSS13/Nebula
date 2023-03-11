@@ -3,7 +3,7 @@
 	desc = "A bulky pump-action grenade launcher. Holds up to 6 grenades in a revolving magazine."
 	icon = 'icons/obj/guns/launcher/grenade.dmi'
 	icon_state = ICON_STATE_WORLD
-	origin_tech = "{'combat':2,'materials':3}"
+	origin_tech = @'{"combat":2,"materials":3}'
 	w_class = ITEM_SIZE_HUGE
 	force = 10
 

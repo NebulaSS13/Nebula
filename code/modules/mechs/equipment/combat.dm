@@ -449,7 +449,7 @@
 	restricted_software = list(MECH_SOFTWARE_WEAPONS)
 	active_power_use = 7 KILOWATTS
 	var/next_use = 0
-	origin_tech = "{'magnets':2,'combat':3}"
+	origin_tech = @'{"magnets":2,"combat":3}'
 
 /obj/item/mech_equipment/flash/proc/area_flash()
 	playsound(src.loc, 'sound/weapons/flash.ogg', 100, 1)

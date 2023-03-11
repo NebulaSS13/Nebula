@@ -5,7 +5,7 @@ var/global/list/pai_cards = list()
 	icon_state = ICON_STATE_WORLD
 	w_class = ITEM_SIZE_SMALL
 	slot_flags = SLOT_LOWER_BODY
-	origin_tech = "{'programming':2}"
+	origin_tech = @'{"programming":2}'
 	material = /decl/material/solid/fiberglass
 	matter = list(/decl/material/solid/metal/steel = MATTER_AMOUNT_REINFORCEMENT)
 

@@ -8,7 +8,7 @@
 	desc               = "You've been warned!"
 	icon               = 'icons/obj/signs/slim_warnings.dmi'
 	icon_state         = "securearea"
-	directional_offset = "{'NORTH':{'y':-32}, 'SOUTH':{'y':32}, 'WEST':{'x':34}, 'EAST':{'x':-34}}"
+	directional_offset = @'{"NORTH":{"y":-32}, "SOUTH":{"y":32}, "WEST":{"x":34}, "EAST":{"x":-34}}'
 
 /obj/structure/sign/warning/update_description()
 	desc = "A warning sign which reads '[sanitize(name)]'."

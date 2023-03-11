@@ -10,7 +10,7 @@
 	anchored = TRUE
 	movable_flags = MOVABLE_FLAG_PROXMOVE
 	obj_flags = OBJ_FLAG_MOVES_UNSUPPORTED
-	directional_offset = "{'SOUTH':{'y':21}, 'EAST':{'x':-10}, 'WEST':{'x':10}}"
+	directional_offset = @'{"SOUTH":{"y":21}, "EAST":{"x":-10}, "WEST":{"x":10}}'
 	base_type = /obj/machinery/camera
 	uncreated_component_parts = null
 	construct_state = /decl/machine_construction/wall_frame/panel_closed

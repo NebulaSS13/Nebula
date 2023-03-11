@@ -56,7 +56,7 @@
 	anchored           = TRUE
 	density            = FALSE
 	obj_flags          = OBJ_FLAG_MOVES_UNSUPPORTED
-	directional_offset = "{'NORTH':{'y':-20}, 'SOUTH':{'y':24}, 'EAST':{'x':-24}, 'WEST':{'x':24}}"
+	directional_offset = @'{"NORTH":{"y":-20}, "SOUTH":{"y":24}, "EAST":{"x":-24}, "WEST":{"x":24}}'
 	idle_power_usage   = 75
 	active_power_usage = 300
 	max_hardware_size  = 2 //make sure we can only put smaller components in here

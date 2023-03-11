@@ -2,7 +2,7 @@
 	name = "energy sword"
 	desc = "May the force be mass times acceleration."
 	icon = 'icons/obj/items/weapon/e_sword.dmi'
-	origin_tech = "{'magnets':3,'esoteric':4}"
+	origin_tech = @'{"magnets":3,"esoteric":4}'
 	active_parry_chance = 50
 
 	var/blade_color

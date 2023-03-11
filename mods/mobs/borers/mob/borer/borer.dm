@@ -48,7 +48,7 @@
 	var/mob/living/captive_brain/host_brain // Used for swapping control of the body back and forth.
 
 /obj/item/holder/borer
-	origin_tech = "{'biotech':6}"
+	origin_tech = @'{"biotech":6}'
 
 /mob/living/simple_animal/borer/roundstart
 	roundstart = TRUE
