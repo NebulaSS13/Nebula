@@ -5,7 +5,7 @@ PROCESSING_SUBSYSTEM_DEF(vines)
 	runlevels = RUNLEVEL_GAME|RUNLEVEL_POSTGAME
 	wait = 80
 
-	process_proc = /obj/effect/vine/Process
+	// process_proc = /obj/effect/vine/Process // this uses a subtype of datum process so it's fine
 
 	var/list/vine_list
 
