@@ -2,7 +2,7 @@
 	name = "circuitboard (cyborg recharging station)"
 	build_path = /obj/machinery/recharge_station
 	board_type = "machine"
-	origin_tech = "{'programming':3,'engineering':3}"
+	origin_tech = @'{"programming":3,"engineering":3}'
 	req_components = list(
 		/obj/item/stack/cable_coil = 5,
 		/obj/item/stock_parts/capacitor = 2,

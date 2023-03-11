@@ -22,7 +22,7 @@
 	weight = MAT_VALUE_NORMAL
 	melting_point = T0C+300 //okay, not melting in this case, but hot enough to destroy wood
 	ignition_point = T0C+288
-	stack_origin_tech = "{'materials':1,'biotech':1}"
+	stack_origin_tech = @'{"materials":1,"biotech":1}'
 	dooropen_noise = 'sound/effects/doorcreaky.ogg'
 	door_icon_base = "wood"
 	destruction_desc = "splinters"

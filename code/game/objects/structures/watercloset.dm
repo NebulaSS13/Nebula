@@ -208,7 +208,7 @@ var/global/list/hygiene_props = list()
 	icon_state = "urinal"
 	density = FALSE
 	anchored = TRUE
-	directional_offset = "{'NORTH':{'y':-32}, 'SOUTH':{'y':32}, 'EAST':{'x':-32}, 'WEST':{'x':32}}"
+	directional_offset = @'{"NORTH":{"y":-32}, "SOUTH":{"y":32}, "EAST":{"x":-32}, "WEST":{"x":32}}'
 	obj_flags = OBJ_FLAG_MOVES_UNSUPPORTED
 
 /obj/structure/hygiene/urinal/attackby(var/obj/item/I, var/mob/user)

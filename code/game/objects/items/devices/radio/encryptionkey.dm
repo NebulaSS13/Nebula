@@ -35,4 +35,4 @@
 /obj/item/encryptionkey/binary
 	icon_state = "cypherkey"
 	translate_binary = TRUE
-	origin_tech = "{'esoteric':3}"
+	origin_tech = @'{"esoteric":3}'

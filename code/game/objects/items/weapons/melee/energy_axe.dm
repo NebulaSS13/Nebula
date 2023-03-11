@@ -13,7 +13,7 @@
 	atom_flags = ATOM_FLAG_NO_BLOOD
 	obj_flags = OBJ_FLAG_CONDUCTIBLE
 	item_flags = ITEM_FLAG_IS_WEAPON
-	origin_tech = "{'magnets':3,'combat':4}"
+	origin_tech = @'{"magnets":3,"combat":4}'
 	active_attack_verb =   list("attacked", "chopped", "cleaved", "torn", "cut")
 	inactive_attack_verb = list("attacked", "chopped", "cleaved", "torn", "cut")
 	sharp = 1

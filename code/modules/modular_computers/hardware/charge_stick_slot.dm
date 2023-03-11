@@ -5,7 +5,7 @@
 	critical = 0
 	icon_state = "cardreader"
 	hardware_size = 1
-	origin_tech = "{'programming':2}"
+	origin_tech = @'{"programming":2}'
 	usage_flags = PROGRAM_ALL & ~PROGRAM_PDA
 	external_slot = TRUE
 	material = /decl/material/solid/metal/steel

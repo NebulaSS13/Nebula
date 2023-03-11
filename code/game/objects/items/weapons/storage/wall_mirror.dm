@@ -10,7 +10,7 @@
 	var/shattered = FALSE
 	var/list/ui_users
 	var/obj/item/storage/internal/mirror_storage/mirror_storage
-	directional_offset = "{'NORTH':{'y':-29}, 'SOUTH':{'y':29}, 'EAST':{'x':29}, 'WEST':{'x':-29}}"
+	directional_offset = @'{"NORTH":{"y":-29}, "SOUTH":{"y":29}, "EAST":{"x":29}, "WEST":{"x":-29}}'
 	obj_flags = OBJ_FLAG_MOVES_UNSUPPORTED
 
 /obj/structure/mirror/Initialize()

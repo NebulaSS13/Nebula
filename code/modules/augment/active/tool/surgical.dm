@@ -16,4 +16,4 @@
 		/obj/item/scalpel,
 		/obj/item/surgicaldrill
 	)
-	origin_tech = "{'materials':4,'magnets':3,'engineering':3}"
+	origin_tech = @'{"materials":4,"magnets":3,"engineering":3}'

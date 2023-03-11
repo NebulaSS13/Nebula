@@ -13,7 +13,7 @@
 	throw_range = 5
 
 	w_class = ITEM_SIZE_LARGE
-	origin_tech = "{'combat':1}"
+	origin_tech = @'{"combat":1}'
 	material = /decl/material/solid/metal/steel
 
 	var/fire_sound

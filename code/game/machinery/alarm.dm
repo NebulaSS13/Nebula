@@ -62,7 +62,7 @@
 	uncreated_component_parts = list(/obj/item/stock_parts/power/apc = 1)
 	construct_state = /decl/machine_construction/wall_frame/panel_closed
 	wires = /datum/wires/alarm
-	directional_offset = "{'NORTH':{'y':-21}, 'SOUTH':{'y':21}, 'EAST':{'x':-21}, 'WEST':{'x':21}}"
+	directional_offset = @'{"NORTH":{"y":-21}, "SOUTH":{"y":21}, "EAST":{"x":-21}, "WEST":{"x":21}}'
 
 	var/alarm_id = null
 	var/breach_detection = 1 // Whether to use automatic breach detection or not
@@ -824,7 +824,7 @@ FIRE ALARM
 	frame_type = /obj/item/frame/fire_alarm
 	uncreated_component_parts = list(/obj/item/stock_parts/power/apc = 1)
 	construct_state = /decl/machine_construction/wall_frame/panel_closed
-	directional_offset = "{'NORTH':{'y':-21}, 'SOUTH':{'y':21}, 'EAST':{'x':21}, 'WEST':{'x':-21}}"
+	directional_offset = @'{"NORTH":{"y":-21}, "SOUTH":{"y":21}, "EAST":{"x":21}, "WEST":{"x":-21}}'
 
 	var/detecting =    TRUE
 	var/working =      TRUE
@@ -1035,7 +1035,7 @@ FIRE ALARM
 	idle_power_usage = 2
 	active_power_usage = 6
 	obj_flags = OBJ_FLAG_MOVES_UNSUPPORTED
-	directional_offset = "{'NORTH':{'y':-21}, 'SOUTH':{'y':21}, 'EAST':{'x':21}, 'WEST':{'x':-21}}"
+	directional_offset = @'{"NORTH":{"y":-21}, "SOUTH":{"y":21}, "EAST":{"x":21}, "WEST":{"x":-21}}'
 	var/time =         1 SECOND
 	var/timing =       FALSE
 	var/working =      TRUE

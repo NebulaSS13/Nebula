@@ -4,7 +4,7 @@
 	icon = 'icons/obj/guns/railgun.dmi'
 	removable_components = TRUE // Can swap out the capacitor for more shots, or cell for longer usage before recharge
 	load_type = /obj/item/rcd_ammo
-	origin_tech = "{'combat':5,'materials':4,'magnets':4}"
+	origin_tech = @'{"combat":5,"materials":4,"magnets":4}'
 	projectile_type = /obj/item/projectile/bullet/magnetic/slug
 	one_hand_penalty = 6
 	power_cost = 300

@@ -7,7 +7,7 @@
 	blood_overlay_type = "maskblood"
 	material = /decl/material/solid/fiberglass
 	matter = list(/decl/material/solid/organic/plastic = MATTER_AMOUNT_REINFORCEMENT)
-	origin_tech = "{'materials':1,'engineering':1}"
+	origin_tech = @'{"materials":1,"engineering":1}'
 
 	var/voicechange = 0
 	var/list/say_messages

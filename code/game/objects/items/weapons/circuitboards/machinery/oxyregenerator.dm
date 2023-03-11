@@ -2,7 +2,7 @@
 	name = "circuitboard (oxygen regenerator)"
 	build_path = /obj/machinery/atmospherics/binary/oxyregenerator
 	board_type = "machine"
-	origin_tech = "{'magnets':2,'engineering':2}"
+	origin_tech = @'{"magnets":2,"engineering":2}'
 	req_components = list(
 		/obj/item/stock_parts/micro_laser = 1,
 		/obj/item/stock_parts/manipulator = 1,

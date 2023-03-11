@@ -5,7 +5,7 @@
 	icon = 'icons/obj/guns/xray.dmi'
 	icon_state = ICON_STATE_WORLD
 	slot_flags = SLOT_LOWER_BODY|SLOT_BACK
-	origin_tech = "{'combat':5,'materials':3,'magnets':2,'esoteric':2}"
+	origin_tech = @'{"combat":5,"materials":3,"magnets":2,"esoteric":2}'
 	projectile_type = /obj/item/projectile/beam/xray/midlaser
 	one_hand_penalty = 2
 	w_class = ITEM_SIZE_LARGE

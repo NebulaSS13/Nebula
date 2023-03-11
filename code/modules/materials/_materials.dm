@@ -109,7 +109,7 @@ INITIALIZE_IMMEDIATE(/obj/effect/gas_overlay)
 	var/table_icon_base = "metal"
 	var/table_icon_reinforced = "reinf_metal"
 
-	var/list/stack_origin_tech = "{'materials':1}" // Research level for stacks.
+	var/list/stack_origin_tech = @'{"materials":1}' // Research level for stacks.
 
 	// Attributes
 	/// How rare is this material in exoplanet xenoflora?

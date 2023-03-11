@@ -20,7 +20,7 @@
 	active_power_cost = 6 KILOWATTS		// 30 min battery life /w best (3kWh) cell
 	passive_power_cost = 0
 	module_cooldown = 10 SECONDS
-	origin_tech = "{'materials':5,'powerstorage':6,'magnets':6,'esoteric':6,'engineering':7}"
+	origin_tech = @'{"materials":5,"powerstorage":6,"magnets":6,"esoteric":6,"engineering":7}'
 	activate_string = "Enable Cloak"
 	deactivate_string = "Disable Cloak"
 
@@ -153,7 +153,7 @@
 
 	fabrication_type = /obj/item/energy_net
 	use_power_cost = 20 KILOWATTS
-	origin_tech = "{'materials':5,'powerstorage':6,'magnets':5,'esoteric':4,'engineering':6}"
+	origin_tech = @'{"materials":5,"powerstorage":6,"magnets":5,"esoteric":4,"engineering":6}'
 	material = /decl/material/solid/metal/steel
 	matter = list(
 		/decl/material/solid/fiberglass = MATTER_AMOUNT_REINFORCEMENT,

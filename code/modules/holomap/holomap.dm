@@ -13,7 +13,7 @@
 	construct_state = /decl/machine_construction/default/panel_closed
 	base_type = /obj/machinery/holomap
 	layer = ABOVE_WINDOW_LAYER	// Above windows.
-	directional_offset = "{'NORTH':{'y':-32}, 'SOUTH':{'y':32}, 'EAST':{'x':-32}, 'WEST':{'x':32}}"
+	directional_offset = @'{"NORTH":{"y":-32}, "SOUTH":{"y":32}, "EAST":{"x":-32}, "WEST":{"x":32}}'
 
 	var/light_power_on = 1
 	var/light_range_on = 2

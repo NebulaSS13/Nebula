@@ -6,7 +6,7 @@
 	item_state = "boombox"
 	force = 7
 	w_class = ITEM_SIZE_HUGE //forbid putting something that emits loud sounds forever into a backpack
-	origin_tech = "{'magnets':2,'combat':1}"
+	origin_tech = @'{"magnets":2,"combat":1}'
 	material = /decl/material/solid/organic/plastic
 	matter = list(
 		/decl/material/solid/metal/copper    = MATTER_AMOUNT_REINFORCEMENT,

@@ -1,7 +1,7 @@
 /obj/item/clothing
 	name = "clothing"
 	siemens_coefficient = 0.9
-	origin_tech = "{'materials':1,'engineering':1}"
+	origin_tech = @'{"materials":1,"engineering":1}'
 	material = /decl/material/solid/organic/cloth
 
 	var/wizard_garb = 0

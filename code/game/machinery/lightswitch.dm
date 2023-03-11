@@ -24,7 +24,7 @@
 		/obj/item/stock_parts/power/apc
 	)
 	base_type = /obj/machinery/light_switch
-	directional_offset = "{'NORTH':{'y':-20}, 'SOUTH':{'y':25}, 'EAST':{'x':-24}, 'WEST':{'x':24}}"
+	directional_offset = @'{"NORTH":{"y":-20}, "SOUTH":{"y":25}, "EAST":{"x":-24}, "WEST":{"x":24}}'
 
 /obj/machinery/light_switch/on
 	on = TRUE

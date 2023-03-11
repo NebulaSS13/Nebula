@@ -16,7 +16,7 @@
 		ARMOR_ENERGY = ARMOR_ENERGY_MINOR
 		)
 	body_parts_covered = SLOT_UPPER_BODY
-	origin_tech = "{'combat':2,'materials':3,'esoteric':2}"
+	origin_tech = @'{"combat":2,"materials":3,"esoteric":2}'
 
 /obj/item/clothing/accessory/suspenders
 	name = "suspenders"

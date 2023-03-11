@@ -20,7 +20,7 @@
 	matter = list(/decl/material/solid/fiberglass = MATTER_AMOUNT_REINFORCEMENT)
 	obj_flags = OBJ_FLAG_CONDUCTIBLE
 	w_class = ITEM_SIZE_SMALL
-	origin_tech = "{'materials':1,'biotech':1}"
+	origin_tech = @'{"materials":1,"biotech":1}'
 	drop_sound = 'sound/foley/knifedrop3.ogg'
 
 /obj/item/retractor/Initialize()
@@ -39,7 +39,7 @@
 	matter = list(/decl/material/solid/fiberglass = MATTER_AMOUNT_REINFORCEMENT)
 	obj_flags = OBJ_FLAG_CONDUCTIBLE
 	w_class = ITEM_SIZE_SMALL
-	origin_tech = "{'materials':1,'biotech':1}"
+	origin_tech = @'{"materials":1,"biotech":1}'
 	attack_verb = list("attacked", "pinched")
 	drop_sound = 'sound/foley/knifedrop3.ogg'
 
@@ -62,7 +62,7 @@
 	)
 	obj_flags = OBJ_FLAG_CONDUCTIBLE
 	w_class = ITEM_SIZE_SMALL
-	origin_tech = "{'materials':1,'biotech':1}"
+	origin_tech = @'{"materials":1,"biotech":1}'
 	attack_verb = list("burnt")
 
 /obj/item/cautery/Initialize()
@@ -83,7 +83,7 @@
 	obj_flags = OBJ_FLAG_CONDUCTIBLE
 	force = 15.0
 	w_class = ITEM_SIZE_NORMAL
-	origin_tech = "{'materials':1,'biotech':1}"
+	origin_tech = @'{"materials":1,"biotech":1}'
 	attack_verb = list("drilled")
 
 /obj/item/surgicaldrill/Initialize()
@@ -107,7 +107,7 @@
 	throwforce = 5
 	throw_speed = 3
 	throw_range = 5
-	origin_tech = "{'materials':1,'biotech':1}"
+	origin_tech = @'{"materials":1,"biotech":1}'
 	material = /decl/material/solid/metal/steel
 	matter = list(/decl/material/solid/fiberglass = MATTER_AMOUNT_REINFORCEMENT)
 	attack_verb = list("attacked", "slashed", "stabbed", "sliced", "torn", "ripped", "diced", "cut")
@@ -131,7 +131,7 @@
 	matter = list(/decl/material/solid/fiberglass = MATTER_AMOUNT_REINFORCEMENT)
 	pickup_sound = 'sound/foley/pickup2.ogg'
 	tool_quality = TOOL_QUALITY_DECENT
-	origin_tech = "{'biotech':2,'materials':2,'magnets':2}"
+	origin_tech = @'{"biotech":2,"materials":2,"magnets":2}'
 
 /obj/item/scalpel/laser/upgraded
 	name = "upgraded laser scalpel"
@@ -143,7 +143,7 @@
 		/decl/material/solid/metal/silver = MATTER_AMOUNT_TRACE
 	)
 	tool_quality = TOOL_QUALITY_GOOD
-	origin_tech = "{'biotech':3,'materials':4,'magnets':4}"
+	origin_tech = @'{"biotech":3,"materials":4,"magnets":4}'
 
 /obj/item/scalpel/laser/advanced
 	name = "advanced laser scalpel"
@@ -156,7 +156,7 @@
 		/decl/material/solid/metal/gold = MATTER_AMOUNT_TRACE
 	)
 	tool_quality = TOOL_QUALITY_BEST
-	origin_tech = "{'biotech':4,'materials':6,'magnets':5}"
+	origin_tech = @'{"biotech":4,"materials":6,"magnets":5}'
 
 /obj/item/incision_manager
 	name = "incision management system"
@@ -175,7 +175,7 @@
 		/decl/material/solid/gemstone/diamond = MATTER_AMOUNT_TRACE
 	)
 	pickup_sound = 'sound/foley/pickup2.ogg'
-	origin_tech = "{'biotech':4,'materials':7,'magnets':5,'programming':4}"
+	origin_tech = @'{"biotech":4,"materials":7,"magnets":5,"programming":4}'
 
 /obj/item/incision_manager/Initialize()
 	. = ..()
@@ -201,7 +201,7 @@
 	throwforce = 9
 	throw_speed = 3
 	throw_range = 5
-	origin_tech = "{'materials':1,'biotech':1}"
+	origin_tech = @'{"materials":1,"biotech":1}'
 	material = /decl/material/solid/metal/steel
 	matter = list(/decl/material/solid/fiberglass = MATTER_AMOUNT_REINFORCEMENT)
 	attack_verb = list("attacked", "slashed", "sawed", "cut")
@@ -240,7 +240,7 @@
 	icon_state = "fixovein"
 	force = 0
 	throwforce = 1
-	origin_tech = "{'materials':1,'biotech':3}"
+	origin_tech = @'{"materials":1,"biotech":3}'
 	w_class = ITEM_SIZE_SMALL
 	material = /decl/material/solid/organic/plastic
 

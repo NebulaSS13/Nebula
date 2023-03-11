@@ -184,12 +184,12 @@
 
 /obj/item/encryptionkey/mercenary
 	icon_state = "cypherkey"
-	origin_tech = "{'esoteric':2}"
+	origin_tech = @'{"esoteric":2}'
 	can_decrypt = list(access_mercenary)
 
 /obj/item/radio/headset/mercenary
 	can_use_analog = TRUE
-	origin_tech = "{'esoteric':2}"
+	origin_tech = @'{"esoteric":2}'
 	encryption_keys = list(/obj/item/encryptionkey/mercenary)
 	analog_secured = list((access_mercenary) = TRUE)
 
@@ -204,12 +204,12 @@
 
 /obj/item/encryptionkey/raider
 	icon_state = "cypherkey"
-	origin_tech = "{'esoteric':2}"
+	origin_tech = @'{"esoteric":2}'
 	can_decrypt = list(access_raider)
 
 /obj/item/radio/headset/raider
 	can_use_analog = TRUE
-	origin_tech = "{'esoteric':2}"
+	origin_tech = @'{"esoteric":2}'
 	encryption_keys = list(/obj/item/encryptionkey/raider)
 	analog_secured = list((access_raider) = TRUE)
 

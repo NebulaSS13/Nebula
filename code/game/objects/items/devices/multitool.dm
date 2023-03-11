@@ -21,7 +21,7 @@
 		/decl/material/solid/metal/steel = MATTER_AMOUNT_TRACE
 	)
 
-	origin_tech = "{'magnets':1,'engineering':1}"
+	origin_tech = @'{"magnets":1,"engineering":1}'
 
 	var/buffer_name
 	var/atom/buffer_object

@@ -31,7 +31,7 @@
 	matter = list(
 		/decl/material/solid/metal/steel = MATTER_AMOUNT_REINFORCEMENT
 	)
-	origin_tech = "{'materials':2,'engineering':2}"
+	origin_tech = @'{"materials":2,"engineering":2}'
 
 /obj/item/clothing/suit/fire/Initialize()
 	. = ..()
@@ -105,7 +105,7 @@
 		/decl/material/solid/metal/steel = MATTER_AMOUNT_REINFORCEMENT
 	)
 
-	origin_tech = "{'materials':2,'engineering':2}"
+	origin_tech = @'{"materials":2,"engineering":2}'
 
 /obj/item/clothing/suit/radiation
 	name = "radiation suit"
@@ -125,7 +125,7 @@
 		/decl/material/solid/organic/plastic = MATTER_AMOUNT_REINFORCEMENT,
 		/decl/material/solid/metal/steel = MATTER_AMOUNT_REINFORCEMENT
 	)
-	origin_tech = "{'materials':2,'engineering':2}"
+	origin_tech = @'{"materials":2,"engineering":2}'
 
 /obj/item/clothing/suit/radiation/Initialize()
 	. = ..()
@@ -152,7 +152,7 @@
 		/decl/material/solid/organic/plastic = MATTER_AMOUNT_REINFORCEMENT,
 		/decl/material/solid/metal/steel = MATTER_AMOUNT_REINFORCEMENT
 	)
-	origin_tech = "{'materials':2,'engineering':2}"
+	origin_tech = @'{"materials":2,"engineering":2}'
 
 /obj/item/clothing/suit/chem_suit
 	name = "chemical suit"
@@ -174,4 +174,4 @@
 		/decl/material/solid/organic/plastic = MATTER_AMOUNT_REINFORCEMENT,
 		/decl/material/solid/metal/steel = MATTER_AMOUNT_REINFORCEMENT
 	)
-	origin_tech = "{'materials':2,'engineering':2}"
+	origin_tech = @'{"materials":2,"engineering":2}'

@@ -5,7 +5,7 @@
 	icon_state = ICON_STATE_WORLD
 	one_hand_penalty = 5
 	fire_delay = 20
-	origin_tech = "{'combat':5,'materials':4,'esoteric':2,'magnets':4}"
+	origin_tech = @'{"combat":5,"materials":4,"esoteric":2,"magnets":4}'
 	w_class = ITEM_SIZE_LARGE
 	bulk = GUN_BULK_RIFLE
 	combustion = 1

@@ -54,7 +54,7 @@
 		/decl/material/solid/organic/plastic = MATTER_AMOUNT_TRACE,
 		/decl/material/solid/metal/gold = MATTER_AMOUNT_TRACE
 	)
-	origin_tech = "{'programming':6,'materials':5,'engineering':6}"
+	origin_tech = @'{"programming":6,"materials":5,"engineering":6}'
 
 	var/mob/integrated_ai // Direct reference to the actual mob held in the suit.
 	var/obj/item/ai_card  // Reference to the MMI, posibrain, inteliCard or pAI card previously holding the AI.
@@ -340,7 +340,7 @@
 	interface_name = "niling d-sink"
 	interface_desc = "Colloquially known as a power siphon, this module drains power through the suit hands into the suit battery."
 
-	origin_tech = "{'powerstorage':6,'engineering':6}"
+	origin_tech = @'{"powerstorage":6,"engineering":6}'
 	material = /decl/material/solid/metal/steel
 	matter = list(
 		/decl/material/solid/fiberglass = MATTER_AMOUNT_REINFORCEMENT,

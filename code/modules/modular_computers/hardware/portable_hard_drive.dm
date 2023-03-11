@@ -6,7 +6,7 @@
 	icon_state = "flashdrive_basic"
 	hardware_size = 1
 	max_capacity = 16
-	origin_tech = "{'programming':1}"
+	origin_tech = @'{"programming":1}'
 	material = /decl/material/solid/fiberglass
 
 /obj/item/stock_parts/computer/hard_drive/portable/advanced
@@ -16,7 +16,7 @@
 	icon_state = "flashdrive_advanced"
 	hardware_size = 1
 	max_capacity = 64
-	origin_tech = "{'programming':2}"
+	origin_tech = @'{"programming":2}'
 
 /obj/item/stock_parts/computer/hard_drive/portable/super
 	name = "super data crystal"
@@ -25,7 +25,7 @@
 	icon_state = "flashdrive_super"
 	hardware_size = 1
 	max_capacity = 256
-	origin_tech = "{'programming':4}"
+	origin_tech = @'{"programming":4}'
 
 /obj/item/stock_parts/computer/hard_drive/portable/Initialize()
 	. = ..()
@@ -63,4 +63,3 @@
 	readme.stored_data = jointext(readme_data, "\[br\]")
 	readme.filename = "___README___"
 	store_file(readme)
-	

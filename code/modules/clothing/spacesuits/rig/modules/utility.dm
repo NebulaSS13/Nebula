@@ -37,7 +37,7 @@
 	engage_string = "Display Readout"
 	usable = 1
 	use_power_cost = 200
-	origin_tech = "{'magnets':3,'biotech':3,'engineering':5}"
+	origin_tech = @'{"magnets":3,"biotech":3,"engineering":5}'
 	device = /obj/item/scanner/health
 	material = /decl/material/solid/organic/plastic
 	matter = list(
@@ -66,7 +66,7 @@
 	suit_overlay_inactive = null
 	use_power_cost = 3600 //2 Wh per use
 	module_cooldown = 0
-	origin_tech = "{'materials':6,'powerstorage':4,'engineering':6}"
+	origin_tech = @'{"materials":6,"powerstorage":4,"engineering":6}'
 	device = /obj/item/pickaxe/diamonddrill
 	material = /decl/material/solid/metal/steel
 	matter = list(
@@ -86,7 +86,7 @@
 	usable = 1
 	selectable = 0
 	device = /obj/item/ano_scanner
-	origin_tech = "{'wormholes':4,'magnets':4,'engineering':6}"
+	origin_tech = @'{"wormholes":4,"magnets":4,"engineering":6}'
 	material = /decl/material/solid/organic/plastic
 	matter = list(
 		/decl/material/solid/metal/steel = MATTER_AMOUNT_REINFORCEMENT,
@@ -105,7 +105,7 @@
 	toggleable = 1
 	use_power_cost = 200
 	device = /obj/item/scanner/mining
-	origin_tech = "{'materials':4,'magnets':4,'engineering':6}"
+	origin_tech = @'{"materials":4,"magnets":4,"engineering":6}'
 	material = /decl/material/solid/organic/plastic
 	matter = list(
 		/decl/material/solid/metal/steel = MATTER_AMOUNT_REINFORCEMENT,
@@ -128,7 +128,7 @@
 	usable = 1
 	engage_string = "Configure RCD"
 	use_power_cost = 300
-	origin_tech = "{'materials':6,'magnets':5,'engineering':7}"
+	origin_tech = @'{"materials":6,"magnets":5,"engineering":7}'
 	device = /obj/item/rcd/mounted
 	material = /decl/material/solid/metal/steel
 	matter = list(
@@ -383,7 +383,7 @@
 
 	interface_name = "maneuvering jets"
 	interface_desc = "An inbuilt EVA maneuvering system that runs off a seperate gas supply."
-	origin_tech = "{'materials':6,'engineering':7}"
+	origin_tech = @'{"materials":6,"engineering":7}'
 	material = /decl/material/solid/metal/steel
 	matter = list(
 		/decl/material/solid/organic/plastic = MATTER_AMOUNT_REINFORCEMENT,
@@ -523,7 +523,7 @@
 	icon_state = "ewar"
 	interface_name = "mounted matter decompiler"
 	interface_desc = "Eats trash like no one's business."
-	origin_tech = "{'materials':5,'engineering':5}"
+	origin_tech = @'{"materials":5,"engineering":5}'
 	device = /obj/item/matter_decompiler
 	material = /decl/material/solid/metal/steel
 	matter = list(
@@ -534,7 +534,7 @@
 /obj/item/rig_module/cooling_unit
 	name = "mounted cooling unit"
 	toggleable = 1
-	origin_tech = "{'magnets':2,'materials':2,'engineering':5}"
+	origin_tech = @'{"magnets":2,"materials":2,"engineering":5}'
 	interface_name = "mounted cooling unit"
 	interface_desc = "A heat sink with a liquid cooled radiator."
 	module_cooldown = 0 SECONDS //no cd because its critical for a life-support module

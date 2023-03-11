@@ -23,7 +23,7 @@
 	ignition_point = null
 	brute_armor = 10
 	burn_armor = 50		// Diamond walls are immune to fire, therefore it makes sense for them to be almost undamageable by burn damage type.
-	stack_origin_tech = "{'materials':6}"
+	stack_origin_tech = @'{"materials":6}'
 	hardness = MAT_VALUE_VERY_HARD + 20
 	construction_difficulty = MAT_VALUE_VERY_HARD_DIY
 	ore_name = "rough diamonds"

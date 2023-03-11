@@ -555,7 +555,7 @@
 	spawn_flags = IC_SPAWN_RESEARCH
 	action_flags = IC_ACTION_LONG_RANGE
 
-	origin_tech = "{'magnets':1,'wormholes':3}"
+	origin_tech = @'{"magnets":1,"wormholes":3}'
 	material = /decl/material/solid/metal/steel
 	matter = list(
 		/decl/material/solid/metal/silver = MATTER_AMOUNT_REINFORCEMENT,
@@ -606,7 +606,7 @@
 	power_draw_per_use = 20
 	var/obj/item/aicard
 	activators = list("Upwards" = IC_PINTYPE_PULSE_OUT, "Downwards" = IC_PINTYPE_PULSE_OUT, "Left" = IC_PINTYPE_PULSE_OUT, "Right" = IC_PINTYPE_PULSE_OUT)
-	origin_tech = "{'programming':4}"
+	origin_tech = @'{"programming":4}'
 	spawn_flags = IC_SPAWN_RESEARCH
 
 /obj/item/integrated_circuit/manipulation/ai/verb/open_menu()
@@ -681,7 +681,7 @@
 	cooldown_per_use = 2 SECOND
 	power_draw_per_use = 50
 	spawn_flags = IC_SPAWN_DEFAULT
-	origin_tech = "{'engineering':2}"
+	origin_tech = @'{"engineering":2}'
 
 /obj/item/integrated_circuit/manipulation/anchoring/do_work(ord)
 	if(!isturf(assembly.loc))
@@ -724,7 +724,7 @@
 	cooldown_per_use = 2 SECOND
 	power_draw_per_use = 50
 	spawn_flags = IC_SPAWN_DEFAULT
-	origin_tech = "{'engineering':2}"
+	origin_tech = @'{"engineering":2}'
 
 	var/lock_enabled = FALSE
 

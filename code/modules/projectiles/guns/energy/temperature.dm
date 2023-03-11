@@ -10,7 +10,7 @@
 		/decl/material/solid/metal/silver = MATTER_AMOUNT_TRACE
 	)
 	charge_cost = 10
-	origin_tech = "{'combat':3,'materials':4,'powerstorage':3,'magnets':2}"
+	origin_tech = @'{"combat":3,"materials":4,"powerstorage":3,"magnets":2}'
 	slot_flags = SLOT_LOWER_BODY|SLOT_BACK
 	one_hand_penalty = 2
 	projectile_type = /obj/item/projectile/temp

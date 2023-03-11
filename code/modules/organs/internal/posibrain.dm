@@ -10,7 +10,7 @@
 	throwforce = 1
 	throw_speed = 3
 	throw_range = 5
-	origin_tech = "{'engineering':4,'materials':4,'wormholes':2,'programming':4}"
+	origin_tech = @'{"engineering":4,"materials":4,"wormholes":2,"programming":4}'
 	attack_verb = list("attacked", "slapped", "whacked")
 	material = /decl/material/solid/metal/steel
 	matter = list(

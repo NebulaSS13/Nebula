@@ -12,7 +12,7 @@
 	down_body_parts_covered = null
 	down_item_flags = ITEM_FLAG_THICKMATERIAL
 	pull_mask = 1
-	origin_tech = "{'materials':1}"
+	origin_tech = @'{"materials":1}'
 	material = /decl/material/solid/organic/plastic
 
 /obj/item/clothing/mask/breath/medical

@@ -8,7 +8,7 @@
 	var/basetype = /obj/item/magnetic_ammo
 	w_class = ITEM_SIZE_SMALL
 	material = /decl/material/solid/metal/steel
-	origin_tech = "{'combat':1}"
+	origin_tech = @'{"combat":1}'
 	var/remaining = 9
 
 /obj/item/magnetic_ammo/examine(mob/user)

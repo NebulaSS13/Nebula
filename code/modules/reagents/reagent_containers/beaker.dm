@@ -99,7 +99,7 @@
 	presentation_flags = PRESENTATION_FLAG_NAME
 	material = /decl/material/solid/metal/steel
 	material_alteration = MAT_FLAG_ALTERATION_NONE
-	origin_tech = "{'materials':2}"
+	origin_tech = @'{"materials":2}'
 	lid_color = COLOR_PALE_BLUE_GRAY
 
 /obj/item/chems/glass/beaker/advanced
@@ -117,7 +117,7 @@
 		/decl/material/solid/metal/uranium = MATTER_AMOUNT_TRACE,
 		/decl/material/solid/gemstone/diamond = MATTER_AMOUNT_TRACE
 	)
-	origin_tech = "{'exoticmatter':2,'materials':6}"
+	origin_tech = @'{"exoticmatter":2,"materials":6}'
 	lid_color = COLOR_CYAN_BLUE
 
 /obj/item/chems/glass/beaker/vial

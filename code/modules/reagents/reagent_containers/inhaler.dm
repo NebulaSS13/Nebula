@@ -12,7 +12,7 @@
 	possible_transfer_amounts = null
 	atom_flags = ATOM_FLAG_OPEN_CONTAINER
 	slot_flags = SLOT_LOWER_BODY
-	origin_tech = "{'materials':2,'biotech':2}"
+	origin_tech = @'{"materials":2,"biotech":2}'
 	material = /decl/material/solid/organic/plastic
 	matter = list(
 		/decl/material/solid/fiberglass = MATTER_AMOUNT_REINFORCEMENT,

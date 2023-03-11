@@ -3,7 +3,7 @@ var/global/list/chem_implants = list()
 /obj/item/implant/chem
 	name = "chemical implant"
 	desc = "Injects things."
-	origin_tech = "{'materials':1,'biotech':2}"
+	origin_tech = @'{"materials":1,"biotech":2}'
 	known = 1
 
 /obj/item/implant/chem/get_data()

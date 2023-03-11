@@ -21,7 +21,7 @@
 	power_channel = ENVIRON
 	idle_power_usage = 10
 	active_power_usage = 120 // No idea what the realistic amount would be.
-	directional_offset = "{'NORTH':{'y':-24}, 'SOUTH':{'y':28}, 'EAST':{'x':24}, 'WEST':{'x':-24}}"
+	directional_offset = @'{"NORTH":{"y":-24}, "SOUTH":{"y":28}, "EAST":{"x":24}, "WEST":{"x":-24}}'
 
 /obj/machinery/oxygen_pump/Initialize()
 	. = ..()

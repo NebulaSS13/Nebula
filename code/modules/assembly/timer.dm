@@ -2,7 +2,7 @@
 	name = "timer"
 	desc = "Used to time things. Works well with contraptions which have to count down. Tick tock."
 	icon_state = "timer"
-	origin_tech = "{'magnets':1}"
+	origin_tech = @'{"magnets":1}'
 	material = /decl/material/solid/metal/steel
 	matter = list(
 		/decl/material/solid/fiberglass = MATTER_AMOUNT_REINFORCEMENT,

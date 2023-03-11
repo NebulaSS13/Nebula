@@ -8,7 +8,7 @@
 	hardware_size = 2
 	power_usage = 100
 	critical = 1
-	origin_tech = "{'programming':3,'engineering':2}"
+	origin_tech = @'{"programming":3,"engineering":2}'
 	material = /decl/material/solid/metal/steel
 
 	var/processing_power = 2 // Used for DDoS speed calculations
@@ -20,7 +20,7 @@
 	hardware_size = 1
 	power_usage = 25
 	processing_power = 1
-	origin_tech = "{'programming':2,'engineering':2}"
+	origin_tech = @'{"programming":2,"engineering":2}'
 	material = /decl/material/solid/metal/steel
 
 /obj/item/stock_parts/computer/processor_unit/photonic
@@ -30,7 +30,7 @@
 	hardware_size = 2
 	power_usage = 50
 	processing_power = 4
-	origin_tech = "{'programming':5,'engineering':4}"
+	origin_tech = @'{"programming":5,"engineering":4}'
 	material = /decl/material/solid/metal/steel
 	matter = list(/decl/material/solid/fiberglass = MATTER_AMOUNT_REINFORCEMENT)
 
@@ -41,6 +41,6 @@
 	hardware_size = 1
 	power_usage = 10
 	processing_power = 2
-	origin_tech = "{'programming':4,'engineering':3}"
+	origin_tech = @'{"programming":4,"engineering":3}'
 	material = /decl/material/solid/metal/steel
 	matter = list(/decl/material/solid/fiberglass = MATTER_AMOUNT_REINFORCEMENT)

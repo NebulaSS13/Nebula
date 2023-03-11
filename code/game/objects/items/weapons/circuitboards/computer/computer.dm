@@ -1,22 +1,22 @@
 /obj/item/stock_parts/circuitboard/message_monitor
 	name = "circuitboard (message monitor console)"
 	build_path = /obj/machinery/computer/message_monitor
-	origin_tech = "{'programming':3}"
+	origin_tech = @'{"programming":3}'
 
 /obj/item/stock_parts/circuitboard/aiupload
 	name = "circuitboard (AI upload console)"
 	build_path = /obj/machinery/computer/upload/ai
-	origin_tech = "{'programming':4}"
+	origin_tech = @'{"programming":4}'
 
 /obj/item/stock_parts/circuitboard/borgupload
 	name = "circuitboard (cyborg upload console)"
 	build_path = /obj/machinery/computer/upload/robot
-	origin_tech = "{'programming':4}"
+	origin_tech = @'{"programming":4}'
 
 /obj/item/stock_parts/circuitboard/teleporter
 	name = "circuitboard (teleporter control console)"
 	build_path = /obj/machinery/computer/teleporter
-	origin_tech = "{'programming':2,'wormholes':4}"
+	origin_tech = @'{"programming":2,"wormholes":4}'
 
 /obj/item/stock_parts/circuitboard/atmos_alert
 	name = "circuitboard (atmospheric alert console)"
@@ -25,22 +25,22 @@
 /obj/item/stock_parts/circuitboard/robotics
 	name = "circuitboard (robotics control console)"
 	build_path = /obj/machinery/computer/robotics
-	origin_tech = "{'programming':3}"
+	origin_tech = @'{"programming":3}'
 
 /obj/item/stock_parts/circuitboard/drone_control
 	name = "circuitboard (drone control console)"
 	build_path = /obj/machinery/computer/drone_control
-	origin_tech = "{'programming':3}"
+	origin_tech = @'{"programming":3}'
 
 /obj/item/stock_parts/circuitboard/arcade/battle
 	name = "circuitboard (battle arcade machine)"
 	build_path = /obj/machinery/computer/arcade/battle
-	origin_tech = "{'programming':1}"
+	origin_tech = @'{"programming":1}'
 
 /obj/item/stock_parts/circuitboard/arcade/orion_trail
 	name = "circuitboard (orion trail arcade machine)"
 	build_path = /obj/machinery/computer/arcade/orion_trail
-	origin_tech = "{'programming':1}"
+	origin_tech = @'{"programming":1}'
 
 /obj/item/stock_parts/circuitboard/turbine_control
 	name = "circuitboard (turbine control console)"
@@ -49,7 +49,7 @@
 /obj/item/stock_parts/circuitboard/solar_control
 	name = "circuitboard (solar control console)"
 	build_path = /obj/machinery/power/solar_control
-	origin_tech = "{'programming':2,'powerstorage':2}"
+	origin_tech = @'{"programming":2,"powerstorage":2}'
 
 /obj/item/stock_parts/circuitboard/prisoner
 	name = "circuitboard (prisoner management console)"
@@ -58,7 +58,7 @@
 /obj/item/stock_parts/circuitboard/operating
 	name = "circuitboard (patient monitoring console)"
 	build_path = /obj/machinery/computer/operating
-	origin_tech = "{'programming':2,'biotech':2}"
+	origin_tech = @'{"programming":2,"biotech":2}'
 
 /obj/item/stock_parts/circuitboard/helm
 	name = "circuitboard (helm control console)"
@@ -95,12 +95,12 @@
 /obj/item/stock_parts/circuitboard/central_atmos
 	name = "circuitboard (central atmospherics computer)"
 	build_path = /obj/machinery/computer/central_atmos
-	origin_tech = "{'programming':2}"
+	origin_tech = @'{"programming":2}'
 
 /obj/item/stock_parts/circuitboard/area_atmos
 	name = "circuitboard (air control console)"
 	build_path = /obj/machinery/computer/area_atmos
-	origin_tech = "{'programming':2}"
+	origin_tech = @'{"programming":2}'
 
 /obj/item/stock_parts/circuitboard/area_atmos/area
 	name = "circuitboard (area air control console)"

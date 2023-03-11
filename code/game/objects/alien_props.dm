@@ -7,7 +7,7 @@
 	icon = 'icons/obj/xenoarchaeology.dmi'
 	icon_state = "unknown1"
 	maxcharge = 5000
-	origin_tech = "{'powerstorage':7}"
+	origin_tech = @'{"powerstorage":7}'
 	var/static/base_icon
 
 /obj/item/cell/alien/on_update_icon()
