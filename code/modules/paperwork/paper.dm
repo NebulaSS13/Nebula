@@ -365,7 +365,7 @@
 		if(!B)
 			return
 		user.put_in_hands(B)
-		to_chat(user, SPAN_NOTICE("You clip \the [P] and [(name == initial(name)) ? "\the " : ""][name] together."))
+		to_chat(user, SPAN_NOTICE("You clip \the [P] and \the [name] together."))
 		return TRUE
 
 	else if(IS_PEN(P))
