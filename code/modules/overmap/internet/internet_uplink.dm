@@ -13,6 +13,7 @@ var/global/list/internet_uplinks = list()
 	construct_state = /decl/machine_construction/default/panel_closed
 	uncreated_component_parts = list(/obj/item/stock_parts/power/terminal)
 	stock_part_presets = list(/decl/stock_part_preset/terminal_setup)
+	base_type = /obj/machinery/internet_uplink
 
 	var/overmap_range = BASE_INTERNET_RANGE
 	var/max_overmap_range = BASE_INTERNET_RANGE
@@ -161,6 +162,7 @@ var/global/list/internet_uplinks = list()
 	light_color = COLOR_GREEN
 	idle_power_usage = 250
 	active_power_usage = 500
+	base_type = /obj/machinery/computer/internet_uplink
 	var/initial_id_tag = "plexus"
 
 	var/current_uplink = 1

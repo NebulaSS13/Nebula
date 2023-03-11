@@ -11,6 +11,7 @@ var/global/list/internet_repeaters = list()
 	use_power = POWER_USE_ACTIVE
 	idle_power_usage = 50
 	active_power_usage = 5000
+	construct_state = /decl/machine_construction/default/panel_closed
 
 /obj/machinery/internet_repeater/Initialize()
 	. = ..()
