@@ -17,7 +17,7 @@
 	atom_flags = ATOM_FLAG_OPEN_CONTAINER
 	possible_transfer_amounts = null
 	volume = 50
-	center_of_mass = @"{'x':16,'y':16}"
+	center_of_mass = @'{"x":16,"y":16}'
 	w_class = ITEM_SIZE_SMALL
 	abstract_type = /obj/item/chems/food
 

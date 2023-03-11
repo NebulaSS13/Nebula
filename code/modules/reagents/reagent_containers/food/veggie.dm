@@ -8,7 +8,7 @@
 	icon_state = "aesirsalad"
 	trash = /obj/item/trash/snack_bowl
 	filling_color = "#468c00"
-	center_of_mass = @"{'x':17,'y':11}"
+	center_of_mass = @'{"x":17,"y":11}'
 	nutriment_amt = 8
 	nutriment_desc = list("apples" = 3,"salad" = 4, "quintessence" = 2)
 	bitesize = 3
@@ -23,7 +23,7 @@
 	icon_state = "herbsalad"
 	trash = /obj/item/trash/snack_bowl
 	filling_color = "#76b87f"
-	center_of_mass = @"{'x':17,'y':11}"
+	center_of_mass = @'{"x":17,"y":11}'
 	nutriment_desc = list("salad" = 2, "tomato" = 2, "carrot" = 2, "apple" = 2)
 	nutriment_amt = 8
 	bitesize = 3
@@ -34,7 +34,7 @@
 	icon_state = "validsalad"
 	trash = /obj/item/trash/snack_bowl
 	filling_color = "#76b87f"
-	center_of_mass = @"{'x':17,'y':11}"
+	center_of_mass = @'{"x":17,"y":11}'
 	nutriment_desc = list("100% real salad")
 	nutriment_amt = 6
 	bitesize = 3
@@ -49,7 +49,7 @@
 	icon_state = "carrotfries"
 	trash = /obj/item/trash/plate
 	filling_color = "#faa005"
-	center_of_mass = @"{'x':16,'y':11}"
+	center_of_mass = @'{"x":16,"y":11}'
 	nutriment_desc = list("carrot" = 3, "salt" = 1)
 	nutriment_amt = 3
 	bitesize = 2
@@ -63,7 +63,7 @@
 	desc = "A slice from a huge mushroom."
 	icon_state = "hugemushroomslice"
 	filling_color = "#e0d7c5"
-	center_of_mass = @"{'x':17,'y':16}"
+	center_of_mass = @'{"x":17,"y":16}'
 	nutriment_amt = 3
 	nutriment_desc = list("raw" = 2, "mushroom" = 2)
 	bitesize = 6

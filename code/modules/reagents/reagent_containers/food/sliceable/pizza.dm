@@ -12,7 +12,7 @@
 	icon_state = "pizzamargherita"
 	slice_path = /obj/item/chems/food/slice/margherita
 	slices_num = 6
-	center_of_mass = @"{'x':16,'y':11}"
+	center_of_mass = @'{"x":16,"y":11}'
 	nutriment_desc = list("pizza crust" = 10, "tomato" = 10, "cheese" = 15)
 	nutriment_amt = 35
 	bitesize = 2
@@ -29,7 +29,7 @@
 	icon_state = "pizzamargheritaslice"
 	filling_color = "#baa14c"
 	bitesize = 2
-	center_of_mass = @"{'x':18,'y':13}"
+	center_of_mass = @'{"x":18,"y":13}'
 	whole_path = /obj/item/chems/food/sliceable/pizza/margherita
 
 /obj/item/chems/food/slice/margherita/filled
@@ -41,7 +41,7 @@
 	icon_state = "meatpizza"
 	slice_path = /obj/item/chems/food/slice/meatpizza
 	slices_num = 6
-	center_of_mass = @"{'x':16,'y':11}"
+	center_of_mass = @'{"x":16,"y":11}'
 	nutriment_desc = list("pizza crust" = 10, "tomato" = 10, "cheese" = 15)
 	nutriment_amt = 10
 	bitesize = 2
@@ -58,7 +58,7 @@
 	icon_state = "meatpizzaslice"
 	filling_color = "#baa14c"
 	bitesize = 2
-	center_of_mass = @"{'x':18,'y':13}"
+	center_of_mass = @'{"x":18,"y":13}'
 	whole_path = /obj/item/chems/food/sliceable/pizza/meatpizza
 
 /obj/item/chems/food/slice/meatpizza/filled
@@ -70,7 +70,7 @@
 	icon_state = "mushroompizza"
 	slice_path = /obj/item/chems/food/slice/mushroompizza
 	slices_num = 6
-	center_of_mass = @"{'x':16,'y':11}"
+	center_of_mass = @'{"x":16,"y":11}'
 	nutriment_desc = list("pizza crust" = 10, "tomato" = 10, "cheese" = 5, "mushroom" = 10)
 	nutriment_amt = 35
 	bitesize = 2
@@ -86,7 +86,7 @@
 	icon_state = "mushroompizzaslice"
 	filling_color = "#baa14c"
 	bitesize = 2
-	center_of_mass = @"{'x':18,'y':13}"
+	center_of_mass = @'{"x":18,"y":13}'
 	whole_path = /obj/item/chems/food/sliceable/pizza/mushroompizza
 
 /obj/item/chems/food/slice/mushroompizza/filled
@@ -98,7 +98,7 @@
 	icon_state = "vegetablepizza"
 	slice_path = /obj/item/chems/food/slice/vegetablepizza
 	slices_num = 6
-	center_of_mass = @"{'x':16,'y':11}"
+	center_of_mass = @'{"x":16,"y":11}'
 	nutriment_desc = list("pizza crust" = 10, "tomato" = 10, "cheese" = 5, "eggplant" = 5, "carrot" = 5, "corn" = 5)
 	nutriment_amt = 25
 	bitesize = 2
@@ -116,7 +116,7 @@
 	icon_state = "vegetablepizzaslice"
 	filling_color = "#baa14c"
 	bitesize = 2
-	center_of_mass = @"{'x':18,'y':13}"
+	center_of_mass = @'{"x":18,"y":13}'
 	whole_path = /obj/item/chems/food/sliceable/pizza/vegetablepizza
 
 /obj/item/chems/food/slice/vegetablepizza/filled

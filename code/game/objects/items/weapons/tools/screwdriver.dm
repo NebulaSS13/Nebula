@@ -6,7 +6,7 @@
 	slot_flags = SLOT_LOWER_BODY | SLOT_EARS
 	w_class = ITEM_SIZE_TINY
 	material = /decl/material/solid/metal/steel
-	center_of_mass = @"{'x':16,'y':7}"
+	center_of_mass = @'{"x":16,"y":7}'
 	attack_verb = list("stabbed")
 	lock_picking_level = 5
 	sharp = TRUE

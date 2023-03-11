@@ -5,7 +5,7 @@
 	desc = "A rapid and safe way to administer small amounts of drugs into the lungs by untrained or trained personnel."
 	icon = 'icons/obj/inhaler.dmi'
 	icon_state = ICON_STATE_WORLD
-	center_of_mass = @"{'x':16,'y':11}"
+	center_of_mass = @'{"x":16,"y":11}'
 	amount_per_transfer_from_this = 5
 	volume = 5
 	w_class = ITEM_SIZE_SMALL

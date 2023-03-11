@@ -5,7 +5,7 @@
 	icon = 'icons/obj/food_ingredients.dmi'
 	icon_state = "rawcutlet"
 	bitesize = 1
-	center_of_mass = @"{'x':17,'y':20}"
+	center_of_mass = @'{"x":17,"y":20}'
 	material = /decl/material/solid/organic/meat
 
 /obj/item/chems/food/rawcutlet/populate_reagents()
@@ -18,7 +18,7 @@
 	icon = 'icons/obj/food_ingredients.dmi'
 	icon_state = "cutlet"
 	bitesize = 2
-	center_of_mass = @"{'x':17,'y':20}"
+	center_of_mass = @'{"x":17,"y":20}'
 	material = /decl/material/solid/organic/meat
 
 /obj/item/chems/food/cutlet/populate_reagents()
@@ -31,7 +31,7 @@
 	icon = 'icons/obj/food_ingredients.dmi'
 	icon_state = "rawmeatball"
 	bitesize = 2
-	center_of_mass = @"{'x':16,'y':15}"
+	center_of_mass = @'{"x":16,"y":15}'
 	material = /decl/material/solid/organic/meat
 
 /obj/item/chems/food/rawmeatball/populate_reagents()
@@ -43,7 +43,7 @@
 	desc = "A great meal all round."
 	icon_state = "meatball"
 	filling_color = "#db0000"
-	center_of_mass = @"{'x':16,'y':16}"
+	center_of_mass = @'{"x":16,"y":16}'
 	bitesize = 2
 	material = /decl/material/solid/organic/meat
 
@@ -59,7 +59,7 @@
 	slice_path = /obj/item/chems/food/cutlet
 	slices_num = 3
 	filling_color = "#7a3d11"
-	center_of_mass = @"{'x':16,'y':13}"
+	center_of_mass = @'{"x":16,"y":13}'
 	bitesize = 3
 	material = /decl/material/solid/organic/meat
 
@@ -73,7 +73,7 @@
 	icon_state = "meatstake"
 	trash = /obj/item/trash/plate
 	filling_color = "#7a3d11"
-	center_of_mass = @"{'x':16,'y':13}"
+	center_of_mass = @'{"x":16,"y":13}'
 	bitesize = 3
 	material = /decl/material/solid/organic/meat
 
@@ -93,7 +93,7 @@
 	icon_state = "meatstake"
 	trash = /obj/item/trash/plate
 	filling_color = "#7a3d11"
-	center_of_mass = @"{'x':16,'y':13}"
+	center_of_mass = @'{"x":16,"y":13}'
 	nutriment_desc = list("onion" = 2, "mushroom" = 2)
 	nutriment_amt = 4
 	bitesize = 3
@@ -109,7 +109,7 @@
 	desc = "A slice from a huge tomato."
 	icon_state = "tomatomeat"
 	filling_color = "#db0000"
-	center_of_mass = @"{'x':17,'y':16}"
+	center_of_mass = @'{"x":17,"y":16}'
 	nutriment_amt = 3
 	nutriment_desc = list("raw" = 2, "tomato" = 3)
 	bitesize = 6
@@ -119,7 +119,7 @@
 	desc = "A very manly slab of meat."
 	icon_state = "bearmeat"
 	filling_color = "#db0000"
-	center_of_mass = @"{'x':16,'y':10}"
+	center_of_mass = @'{"x":16,"y":10}'
 	bitesize = 3
 	material = /decl/material/solid/organic/meat
 
@@ -133,7 +133,7 @@
 	desc = "An economical replacement for crab. In space! Would probably be a lot nicer cooked."
 	icon_state = "spiderleg"
 	filling_color = "#d5f5dc"
-	center_of_mass = @"{'x':16,'y':10}"
+	center_of_mass = @'{"x":16,"y":10}'
 	bitesize = 3
 	material = /decl/material/solid/organic/meat
 
@@ -152,7 +152,7 @@
 	desc = "A slab of green meat. Smells like acid."
 	icon_state = "xenomeat"
 	filling_color = "#43de18"
-	center_of_mass = @"{'x':16,'y':10}"
+	center_of_mass = @'{"x":16,"y":10}'
 	bitesize = 6
 	material = /decl/material/solid/organic/meat
 
@@ -167,7 +167,7 @@
 	icon = 'icons/obj/food_ingredients.dmi'
 	icon_state = "sausage"
 	filling_color = "#db0000"
-	center_of_mass = @"{'x':16,'y':16}"
+	center_of_mass = @'{"x":16,"y":16}'
 	bitesize = 2
 	material = /decl/material/solid/organic/meat
 
@@ -180,7 +180,7 @@
 	desc = "A piece of mixed, long meat, with some bite to it."
 	icon_state = "sausage"
 	filling_color = "#db0000"
-	center_of_mass = @"{'x':16,'y':16}"
+	center_of_mass = @'{"x":16,"y":16}'
 	bitesize = 2
 	material = /decl/material/solid/organic/meat
 
@@ -194,7 +194,7 @@
 	icon = 'icons/obj/surgery.dmi'
 	icon_state = "appendix"
 	filling_color = "#e00d34"
-	center_of_mass = @"{'x':16,'y':16}"
+	center_of_mass = @'{"x":16,"y":16}'
 	bitesize = 3
 
 /obj/item/chems/food/organ/populate_reagents()
@@ -208,7 +208,7 @@
 	desc = "Delicious meat, on a stick."
 	trash = /obj/item/stack/material/rods
 	filling_color = "#a85340"
-	center_of_mass = @"{'x':17,'y':15}"
+	center_of_mass = @'{"x":17,"y":15}'
 	bitesize = 2
 
 /obj/item/chems/food/meatkabob/populate_reagents()

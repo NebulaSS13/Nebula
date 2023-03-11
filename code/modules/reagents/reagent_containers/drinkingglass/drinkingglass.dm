@@ -20,7 +20,7 @@
 	var/filling_overlayed //if filling should go on top of the icon (e.g. opaque cups)
 	var/static/list/filling_icons_cache = list()
 
-	center_of_mass =@"{'x':16,'y':9}"
+	center_of_mass =@'{"x":16,"y":9}'
 
 	amount_per_transfer_from_this = 5
 	possible_transfer_amounts = @"[5,10,15,30]"

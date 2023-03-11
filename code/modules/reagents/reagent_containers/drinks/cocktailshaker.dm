@@ -5,7 +5,7 @@
 	amount_per_transfer_from_this = 10
 	possible_transfer_amounts = @"[5,10,15,25,30,60]" //Professional bartender should be able to transfer as much as needed
 	volume = 120
-	center_of_mass = @"{'x':17,'y':10}"
+	center_of_mass = @'{"x":17,"y":10}'
 	atom_flags = ATOM_FLAG_OPEN_CONTAINER | ATOM_FLAG_NO_REACT
 
 /obj/item/chems/drinks/shaker/attack_self(mob/user)

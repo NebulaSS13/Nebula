@@ -7,7 +7,7 @@
 	w_class = ITEM_SIZE_SMALL
 	origin_tech = "{'materials':1,'engineering':1}"
 	material = /decl/material/solid/metal/steel
-	center_of_mass = @"{'x':18,'y':10}"
+	center_of_mass = @'{"x":18,"y":10}'
 	attack_verb = list("pinched", "nipped")
 	sharp = 1
 	edge = 1
