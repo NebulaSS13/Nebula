@@ -5,6 +5,7 @@
 
 	#include "../../mods/content/government/away_sites/icarus/icarus.dm"
 	#include "../../mods/content/government/ruins/ec_old_crash/ec_old_crash.dm"
+	#include "../../mods/content/generic_shuttles/tanker/tanker.dm"
 	#include "../../mods/content/corporate/away_sites/lar_maria/lar_maria.dm"
 
 	#include "../away/bearcat/bearcat.dm"
