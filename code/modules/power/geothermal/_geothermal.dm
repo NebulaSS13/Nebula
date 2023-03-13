@@ -4,12 +4,16 @@ var/global/const/GEOTHERMAL_PRESSURE_CONSUMED_PER_TICK = 0.05
 var/global/const/GEOTHERMAL_PRESSURE_TO_POWER =          800
 var/global/const/MAX_GEOTHERMAL_PRESSURE =               12000
 
-//
+//////////////////////////////////////////////////////////////////////
+// Geyser Steam Particle Emitter
+//////////////////////////////////////////////////////////////////////
+
+///Particle emitter that emits a ~64 pixels by ~192 pixels high column of steam while active.
 /particles/geyser_steam
 	icon_state = "smallsmoke"
 	icon       = 'icons/effects/effects.dmi'
-	width      = WORLD_ICON_SIZE * 2
-	height     = WORLD_ICON_SIZE * 6 //Needs to be really tall, otherwise particles stop being drawn outside of the canvas.
+	width      = WORLD_ICON_SIZE * 2 //Particles expand a bit as they climb, so need a bit of space on the width
+	height     = WORLD_ICON_SIZE * 6 //Needs to be really tall, because particles stop being drawn outside of the canvas.
 	count      = 64
 	spawning   = 5
 	lifespan   = generator("num", 1 SECOND, 2.5 SECONDS, LINEAR_RAND)
@@ -18,14 +22,16 @@ var/global/const/MAX_GEOTHERMAL_PRESSURE =               12000
 	grow       = 0.1
 	velocity   = generator("vector", list(0, 0), list(0, 0.2))
 	position   = generator("circle", -6, 6, NORMAL_RAND)
-	//drift      = generator("vector", list(0, -0.2), list(0, 0.2))
 	gravity    = list(0, 0.40)
 	scale      = generator("vector", list(0.3, 0.3), list(1,1), NORMAL_RAND)
 	rotation   = generator("num", -45, 45)
 	spin       = generator("num", -20, 20)
 
 //////////////////////////////////////////////////////////////////////
+// Geyser Object
 //////////////////////////////////////////////////////////////////////
+
+///A prop that periodically emit steam spouts and can have a geothermal generator placed on top to generate power.
 /obj/effect/geyser
 	name       = "geothermal vent"
 	desc       = "A vent leading to an underground geothermally heated reservoir, which periodically spew superheated liquid."
@@ -46,10 +52,11 @@ var/global/const/MAX_GEOTHERMAL_PRESSURE =               12000
 	steamfx = new //Prepare our FX
 
 /obj/effect/geyser/proc/do_spout()
+	set waitfor = FALSE
 	particles = steamfx
 	particles.spawning = initial(particles.spawning)
-	spawn(6 SECONDS)
-		particles.spawning = 0
+	sleep(6 SECONDS)
+	particles.spawning = 0
 
 /obj/effect/geyser/explosion_act(severity)
 	. = ..()
@@ -64,7 +71,9 @@ var/global/const/MAX_GEOTHERMAL_PRESSURE =               12000
 	update_icon()
 
 //////////////////////////////////////////////////////////////////////
+// Underwater Geyser Variant
 //////////////////////////////////////////////////////////////////////
+
 /obj/effect/geyser/underwater
 	desc = "A crack in the ocean floor that occasionally vents gouts of superheated water and steam."
 
@@ -81,12 +90,10 @@ var/global/const/MAX_GEOTHERMAL_PRESSURE =               12000
 	//Do some bubbles or something
 
 //////////////////////////////////////////////////////////////////////
+// Geothermal Generator
 //////////////////////////////////////////////////////////////////////
-/obj/machinery/geothermal/buildable
-	anchored                  = FALSE
-	uncreated_component_parts = null
-	stock_part_presets        = null
 
+///A power generator that can create power from being placed on top of a geyser.
 /obj/machinery/geothermal
 	name                           = "geothermal generator"
 	icon                           = 'icons/obj/machines/power/geothermal.dmi'
@@ -100,12 +107,11 @@ var/global/const/MAX_GEOTHERMAL_PRESSURE =               12000
 	required_interaction_dexterity = DEXTERITY_SIMPLE_MACHINES
 	construct_state                = /decl/machine_construction/default/panel_closed
 	uncreated_component_parts      = list(
-		/obj/item/stock_parts/power/terminal = 1
+		/obj/item/stock_parts/power/terminal,
 	)
 	stock_part_presets             = list(
 		/decl/stock_part_preset/terminal_setup/offset_dir,
 	)
-	base_type = /obj/machinery/geothermal/buildable
 	var/tmp/neighbors              = 0
 	var/tmp/current_pressure       = 0
 	var/tmp/efficiency             = 0.5
@@ -116,7 +122,7 @@ var/global/const/MAX_GEOTHERMAL_PRESSURE =               12000
 	var/tmp/list/neighbor_connectors
 	var/tmp/list/neighbor_connectors_glow
 
-//#TODO: should cache neighbors and put listeners on neighbors
+//#TODO: Maybe should cache neighbors and put listeners on them?
 
 /obj/machinery/geothermal/Initialize(mapload, d, populate_parts = TRUE)
 	. = ..()
@@ -243,7 +249,6 @@ var/global/const/MAX_GEOTHERMAL_PRESSURE =               12000
 	add_overlay("geothermal-turbine-[clamp(round(output_ratio * 3), 0, 3)]")
 	glow.alpha = glow_alpha
 	add_overlay(glow)
-
 
 /obj/machinery/geothermal/dismantle()
 	. = ..()
