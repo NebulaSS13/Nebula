@@ -361,48 +361,44 @@
 			var/obj/item/stack/medical/MED = O
 			if(!MED.animal_heal)
 				to_chat(user, SPAN_WARNING("\The [MED] won't help \the [src] at all!"))
-				return
-			if(health < maxHealth)
-				if(MED.can_use(1))
-					adjustBruteLoss(-MED.animal_heal)
-					visible_message(SPAN_NOTICE("\The [user] applies \the [MED] to \the [src]."))
-					MED.use(1)
+			else if(health < maxHealth && MED.can_use(1))
+				adjustBruteLoss(-MED.animal_heal)
+				visible_message(SPAN_NOTICE("\The [user] applies \the [MED] to \the [src]."))
+				MED.use(1)
 		else
 			var/decl/pronouns/G = get_pronouns()
 			to_chat(user, SPAN_WARNING("\The [src] is dead, medical items won't bring [G.him] back to life."))
-		return
+		return TRUE
 
-	if(istype(O, /obj/item/flash))
-		if(stat != DEAD)
-			O.attack(src, user, user.zone_sel.selecting)
-			return
+	if(istype(O, /obj/item/flash) && stat != DEAD)
+		return O.attack(src, user, user.zone_sel.selecting)
 
 	if(meat_type && (stat == DEAD) && meat_amount)
 		if(istype(O, /obj/item/knife/kitchen/cleaver))
 			var/victim_turf = get_turf(src)
 			if(!locate(/obj/structure/table, victim_turf))
 				to_chat(user, SPAN_WARNING("You need to place \the [src] on a table to butcher it."))
-				return
+				return TRUE
 			var/time_to_butcher = (mob_size)
 			to_chat(user, SPAN_WARNING("You begin harvesting \the [src]."))
 			if(do_after(user, time_to_butcher, src, same_direction = TRUE))
 				if(prob(user.skill_fail_chance(SKILL_COOKING, 60, SKILL_ADEPT)))
 					to_chat(user, SPAN_DANGER("You botch harvesting \the [src], and ruin some of the meat in the process."))
 					subtract_meat(user)
-					return
 				else
 					harvest(user, user.get_skill_value(SKILL_COOKING))
-					return
 			else
 				to_chat(user, SPAN_DANGER("Your hand slips with your movement, and some of the meat is ruined."))
 				subtract_meat(user)
-				return
+			return TRUE
 
 	else
 		if(!O.force || (O.item_flags & ITEM_FLAG_NO_BLUDGEON))
 			visible_message(SPAN_NOTICE("\The [user] gently taps [src] with \the [O]."))
-		else
-			O.attack(src, user, user.zone_sel?.selecting || ran_zone())
+			return TRUE
+		return O.attack(src, user, user.zone_sel?.selecting || ran_zone())
+
+	return ..()
 
 /mob/living/simple_animal/hit_with_weapon(obj/item/O, mob/living/user, var/effective_force, var/hit_zone)
 
@@ -621,3 +617,18 @@
 
 /mob/living/simple_animal/get_speech_bubble_state_modifier()
 	return ..() || "rough"
+
+/mob/living/simple_animal/proc/can_perform_ability()
+	if(!can_act() || time_last_used_ability > world.time)
+		return FALSE
+	return TRUE
+
+/mob/living/simple_animal/proc/cooldown_ability(var/time)
+	if(!time)
+		time = ability_cooldown
+	time_last_used_ability = world.time + ability_cooldown
+
+/mob/living/simple_animal/proc/can_act()
+	if(QDELETED(src) || stat || incapacitated())
+		return FALSE
+	return TRUE
