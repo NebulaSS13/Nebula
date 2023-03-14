@@ -7,24 +7,8 @@
 	density = 0
 	obj_flags = OBJ_FLAG_MOVES_UNSUPPORTED
 	base_type = /obj/machinery/network/relay/wall_mounted
+	directional_offset = "{'NORTH':{'y':-21}, 'SOUTH':{'y':21}, 'EAST':{'x':-21}, 'WEST':{'x':21}}"
 
 /obj/machinery/network/relay/wall_mounted/Initialize()
 	. = ..()
 	queue_icon_update()
-
-/obj/machinery/network/relay/wall_mounted/on_update_icon()
-	. = ..()
-	// Set pixel offsets
-	pixel_x = 0
-	pixel_y = 0
-	var/turf/T = get_step(get_turf(src), turn(dir, 180))
-	if(istype(T) && T.density)
-		if(dir == NORTH)
-			default_pixel_y = -21
-		else if(dir == SOUTH)
-			default_pixel_y = 21
-		else if(dir == WEST)
-			default_pixel_x = 21
-		else if(dir == EAST)
-			default_pixel_x = -21
-	reset_offsets(0)
