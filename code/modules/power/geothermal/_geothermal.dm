@@ -34,7 +34,7 @@ var/global/const/MAX_GEOTHERMAL_PRESSURE =               12000
 ///A prop that periodically emit steam spouts and can have a geothermal generator placed on top to generate power.
 /obj/effect/geyser
 	name       = "geothermal vent"
-	desc       = "A vent leading to an underground geothermally heated reservoir, which periodically spew superheated liquid."
+	desc       = "A vent leading to an underground geothermally heated reservoir, which periodically spews superheated liquid."
 	icon       = 'icons/effects/geyser.dmi'
 	icon_state = "geyser"
 	anchored   = TRUE
@@ -87,7 +87,9 @@ var/global/const/MAX_GEOTHERMAL_PRESSURE =               12000
 			new /obj/random/seaweed(T)
 
 /obj/effect/geyser/underwater/do_spout()
-	//Do some bubbles or something
+	set waitfor = FALSE
+	var/turf/T = get_turf(src)
+	T.show_bubbles()
 
 //////////////////////////////////////////////////////////////////////
 // Geothermal Generator
@@ -164,7 +166,7 @@ var/global/const/MAX_GEOTHERMAL_PRESSURE =               12000
 		return TRUE
 
 /obj/machinery/geothermal/proc/unset_vent()
-	if(!vent || QDELETED(vent))
+	if(QDELETED(vent))
 		return
 	vent.set_my_generator(null)
 	vent = null
