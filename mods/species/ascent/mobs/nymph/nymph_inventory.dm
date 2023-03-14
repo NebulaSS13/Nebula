@@ -81,3 +81,7 @@
 		visible_message(SPAN_NOTICE("\The [src] regurgitates \the [item]."))
 		return TRUE
 	. = ..()
+
+// Makes it so that the held item's screen_loc isn't unset.
+/mob/living/carbon/alien/ascent_nymph/item_should_have_screen_presence(obj/item/item, slot)
+	return (item == holding_item) || ..()

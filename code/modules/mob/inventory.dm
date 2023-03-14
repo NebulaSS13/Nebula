@@ -324,6 +324,10 @@
 /mob/proc/can_be_buckled(var/mob/user)
 	. = user.Adjacent(src) && !istype(user, /mob/living/silicon/pai)
 
+/// If this proc returns false, reconsider_client_screen_presence will set the item's screen_loc to null.
+/mob/proc/item_should_have_screen_presence(obj/item/item, slot)
+	return hud_used && slot && (hud_used.inventory_shown || !(slot in global.hidden_inventory_slots))
+
 /mob/proc/get_held_item_slots()
 	return
 
