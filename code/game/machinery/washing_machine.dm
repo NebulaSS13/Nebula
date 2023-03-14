@@ -20,7 +20,7 @@
 	var/gibs_ready = 0
 	var/obj/crayon
 	var/obj/item/chems/pill/detergent/detergent
-	obj_flags = OBJ_FLAG_ANCHORABLE
+	obj_flags = OBJ_FLAG_ANCHORABLE | OBJ_FLAG_PARROT_PERCHABLE
 	clicksound = "button"
 	clickvol = 40
 

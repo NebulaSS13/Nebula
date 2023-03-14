@@ -4,7 +4,7 @@
 	icon_state = "yellow"
 	density = TRUE
 	var/health = 100.0
-	obj_flags = OBJ_FLAG_CONDUCTIBLE
+	obj_flags = OBJ_FLAG_CONDUCTIBLE | OBJ_FLAG_PARROT_PERCHABLE
 	w_class = ITEM_SIZE_GARGANTUAN
 	construct_state = /decl/machine_construction/pipe/welder
 	uncreated_component_parts = null

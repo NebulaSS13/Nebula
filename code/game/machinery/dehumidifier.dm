@@ -16,7 +16,7 @@
 	power_channel = LOCAL
 	use_power = POWER_USE_OFF
 
-	obj_flags = OBJ_FLAG_ANCHORABLE
+	obj_flags = OBJ_FLAG_ANCHORABLE | OBJ_FLAG_PARROT_PERCHABLE
 	atom_flags = ATOM_FLAG_CLIMBABLE
 	clicksound = "switch"
 

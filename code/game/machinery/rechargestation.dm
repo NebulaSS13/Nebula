@@ -10,6 +10,7 @@
 	uncreated_component_parts = null
 	stat_immune = 0
 	construct_state = /decl/machine_construction/default/panel_closed
+	obj_flags = OBJ_FLAG_PARROT_PERCHABLE
 
 	var/overlay_icon = 'icons/obj/objects.dmi'
 	var/mob/living/occupant = null

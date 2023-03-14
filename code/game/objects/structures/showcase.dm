@@ -6,3 +6,4 @@
 	density = TRUE
 	anchored = TRUE
 	unacidable = 1//temporary until I decide whether the borg can be removed. -veyveyr
+	obj_flags = OBJ_FLAG_PARROT_PERCHABLE

@@ -9,6 +9,7 @@
 	anchored   = TRUE
 	unacidable = TRUE
 	pixel_x    = -16
+	obj_flags  = OBJ_FLAG_PARROT_PERCHABLE
 	var/used   = FALSE
 	var/increase_age_prob = (100 / 6)
 

@@ -1,4 +1,24 @@
-/mob/living/simple_animal/hostile/retaliate/parrot/space
+/datum/ai/parrot/space
+	relax_chance = 60 //a gentle beast
+	impatience = 10
+	var/list/enemies
+
+/datum/ai/parrot/space/Destroy()
+	enemies = null
+	return ..()
+
+/datum/ai/parrot/space/perform_avian_threat_assessment(var/mob/living/target)
+	return (target in enemies) || ..()
+
+/datum/ai/parrot/space/attacked_by(mob/attacker)
+	LAZYDISTINCTADD(enemies, attacker)
+	. = ..()
+
+/datum/ai/parrot/space/cease_hostilities()
+	. = ..()
+	enemies = null
+
+/mob/living/simple_animal/parrot/space
 	name = "space parrot"
 	desc = "It could be some all-knowing being that, for reasons we could never hope to understand, is assuming the shape and general mannerisms of a parrot - or just a rather large bird."
 	gender = FEMALE
@@ -16,63 +36,70 @@
 	see_invisible = SEE_INVISIBLE_NOLIGHTING
 	see_in_dark = 7
 	can_escape = TRUE
-	relax_chance = 60 //a gentle beast
-	impatience = 10
-	parrot_isize = ITEM_SIZE_LARGE
-	simple_parrot = TRUE
-	ability_cooldown = 2 MINUTES
-
+	max_held_item_size = ITEM_SIZE_LARGE
 	meat_amount = 10
 	bone_amount = 20
 	skin_amount = 20
-
-	var/list/subspecies = list(/decl/parrot_subspecies,
-								/decl/parrot_subspecies/purple,
-								/decl/parrot_subspecies/blue,
-								/decl/parrot_subspecies/green,
-								/decl/parrot_subspecies/red,
-								/decl/parrot_subspecies/brown,
-								/decl/parrot_subspecies/black)
+	ai = /datum/ai/parrot/space
+	ability_cooldown = 2 MINUTES
 	var/get_subspecies_name = TRUE
 
-/mob/living/simple_animal/hostile/retaliate/parrot/space/Initialize()
+/mob/living/simple_animal/parrot/space/proc/get_subspecies()
+	return pick(list(
+		/decl/parrot_subspecies,
+		/decl/parrot_subspecies/purple,
+		/decl/parrot_subspecies/blue,
+		/decl/parrot_subspecies/green,
+		/decl/parrot_subspecies/red,
+		/decl/parrot_subspecies/brown,
+		/decl/parrot_subspecies/black
+	))
+
+/mob/living/simple_animal/parrot/space/Initialize()
 	. = ..()
-	var/subspecies_type = SAFEPICK(subspecies)
+	var/subspecies_type = get_subspecies()
 	if(subspecies_type)
 		var/decl/parrot_subspecies/ps = GET_DECL(subspecies_type)
-		icon_set = ps.icon_set
+		icon = ps.icon
+		check_mob_icon_states()
 		skin_material = ps.feathers
 		if(get_subspecies_name)
 			SetName(ps.name)
 	set_scale(2)
 	update_icon()
 
-/mob/living/simple_animal/hostile/retaliate/parrot/space/AttackingTarget()
-	. = ..()
-	if(ishuman(.) && can_act() && !is_on_special_ability_cooldown() && Adjacent(.))
+/mob/living/simple_animal/parrot/space/UnarmedAttack(atom/A)
+	if(a_intent == I_HURT && ishuman(A) && Adjacent(A) && !is_on_special_ability_cooldown())
 		var/mob/living/carbon/human/H = .
 		if(prob(70))
 			SET_STATUS_MAX(H, STAT_WEAK, rand(2,3))
 			set_special_ability_cooldown(ability_cooldown / 1.5)
 			visible_message(SPAN_MFAUNA("\The [src] flaps its wings mightily and bowls over \the [H] with a gust!"))
-
 		else if(H.get_equipped_item(slot_head_str))
 			var/obj/item/clothing/head/HAT = H.get_equipped_item(slot_head_str)
 			if(H.canUnEquip(HAT))
 				visible_message(SPAN_MFAUNA("\The [src] rips \the [H]'s [HAT] off!"))
 				set_special_ability_cooldown(ability_cooldown)
 				H.try_unequip(HAT, get_turf(src))
+		return
+	return ..()
 
 //subtypes
-/mob/living/simple_animal/hostile/retaliate/parrot/space/lesser
+/mob/living/simple_animal/parrot/space/lesser
 	name = "Avatar of the Howling Dark"
-	subspecies = list(/decl/parrot_subspecies/black)
 	get_subspecies_name = FALSE
 	natural_weapon = /obj/item/natural_weapon/large
 	health = 300
 	maxHealth = 300
 
-/mob/living/simple_animal/hostile/retaliate/parrot/space/megafauna
+/mob/living/simple_animal/parrot/space/lesser/get_subspecies()
+	return /decl/parrot_subspecies/black
+
+/datum/ai/parrot/megafauna
+	relax_chance = 30
+	impatience = 5
+
+/mob/living/simple_animal/parrot/space/megafauna
 	name = "giant parrot"
 	desc = "A huge parrot-like bird."
 	get_subspecies_name = FALSE
@@ -81,5 +108,4 @@
 	speak_emote = list("squawks")
 	emote_hear = list("preens itself")
 	natural_weapon = /obj/item/natural_weapon/large
-	relax_chance = 30
-	impatience = 5
+	ai = /datum/ai/parrot/megafauna

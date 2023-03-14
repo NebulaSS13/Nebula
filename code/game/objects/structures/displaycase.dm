@@ -10,6 +10,7 @@
 	maxhealth = 100
 	hitsound = 'sound/effects/Glasshit.ogg'
 	req_access = null
+	obj_flags = OBJ_FLAG_PARROT_PERCHABLE
 
 	var/destroyed = FALSE
 	var/locked = TRUE

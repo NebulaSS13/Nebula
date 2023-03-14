@@ -253,7 +253,7 @@
 		return 1
 	if(ispath(MP, /mob/living/simple_animal/hostile/bear))
 		return 1
-	if(ispath(MP, /mob/living/simple_animal/hostile/retaliate/parrot))
+	if(ispath(MP, /mob/living/simple_animal/parrot))
 		return 1
 
 	//Not in here? Must be untested!

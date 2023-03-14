@@ -9,6 +9,7 @@ var/global/list/closets = list()
 	maxhealth = 100
 	material = /decl/material/solid/metal/steel
 	tool_interaction_flags = TOOL_INTERACTION_ANCHOR
+	obj_flags = OBJ_FLAG_PARROT_PERCHABLE
 
 	var/welded = 0
 	var/large = 1

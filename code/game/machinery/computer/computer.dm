@@ -10,14 +10,15 @@
 	uncreated_component_parts = null
 	stat_immune = 0
 	frame_type = /obj/machinery/constructable_frame/computerframe/deconstruct
+	atom_flags = ATOM_FLAG_NO_TEMP_CHANGE | ATOM_FLAG_CLIMBABLE
+	clicksound = "keyboard"
+	obj_flags = OBJ_FLAG_PARROT_PERCHABLE
 
 	var/icon_keyboard = "generic_key"
 	var/icon_screen = "generic"
 	var/light_range_on = 2
 	var/light_power_on = 1
 	var/overlay_layer
-	atom_flags = ATOM_FLAG_NO_TEMP_CHANGE | ATOM_FLAG_CLIMBABLE
-	clicksound = "keyboard"
 
 /obj/machinery/computer/Initialize()
 	. = ..()

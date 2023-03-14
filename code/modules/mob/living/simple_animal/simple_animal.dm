@@ -227,6 +227,10 @@ var/global/list/simplemob_icon_bitflag_cache = list()
 	do_delayed_life_action()
 	performing_delayed_life_action = FALSE
 
+// Used by parrots to add radio tokens.
+/mob/living/simple_animal/proc/apply_speech_modifiers(var/message)
+	return message
+
 // For saner overriding; only override this.
 /mob/living/simple_animal/proc/do_delayed_life_action()
 	if(buckled && can_escape)
@@ -261,7 +265,7 @@ var/global/list/simplemob_icon_bitflag_cache = list()
 
 			switch(action)
 				if("speak")
-					say(pick(speak))
+					say(apply_speech_modifiers(pick(speak)))
 				if("emote_hear")
 					audible_emote("[pick(emote_hear)].")
 				if("emote_see")
@@ -407,12 +411,14 @@ var/global/list/simplemob_icon_bitflag_cache = list()
 				if(prob(user.skill_fail_chance(SKILL_COOKING, 60, SKILL_ADEPT)))
 					to_chat(user, SPAN_DANGER("You botch harvesting \the [src], and ruin some of the meat in the process."))
 					subtract_meat(user)
+					return TRUE
 				else
 					harvest(user, user.get_skill_value(SKILL_COOKING))
+					return TRUE
 			else
 				to_chat(user, SPAN_DANGER("Your hand slips with your movement, and some of the meat is ruined."))
 				subtract_meat(user)
-			return TRUE
+				return TRUE
 
 	else
 		if(!O.force || (O.item_flags & ITEM_FLAG_NO_BLUDGEON))

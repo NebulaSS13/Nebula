@@ -39,7 +39,7 @@
 		/mob/living/simple_animal/hostile/retaliate/beast/diyaab  = TRADER_THIS_TYPE,
 		/mob/living/simple_animal/hostile/bear                    = TRADER_THIS_TYPE,
 		/mob/living/simple_animal/hostile/retaliate/beast/shantak = TRADER_THIS_TYPE,
-		/mob/living/simple_animal/hostile/retaliate/parrot        = TRADER_THIS_TYPE,
+		/mob/living/simple_animal/parrot                          = TRADER_THIS_TYPE,
 		/mob/living/simple_animal/hostile/retaliate/beast/samak   = TRADER_THIS_TYPE,
 		/mob/living/simple_animal/hostile/retaliate/goat          = TRADER_THIS_TYPE,
 		/mob/living/simple_animal/hostile/carp                    = TRADER_THIS_TYPE
@@ -61,7 +61,7 @@
 		/mob/living/simple_animal/hostile/retaliate/beast/diyaab  = TRADER_THIS_TYPE,
 		/mob/living/simple_animal/hostile/bear                    = TRADER_THIS_TYPE,
 		/mob/living/simple_animal/hostile/retaliate/beast/shantak = TRADER_THIS_TYPE,
-		/mob/living/simple_animal/hostile/retaliate/parrot        = TRADER_THIS_TYPE,
+		/mob/living/simple_animal/parrot                          = TRADER_THIS_TYPE,
 		/mob/living/simple_animal/hostile/retaliate/beast/samak   = TRADER_THIS_TYPE,
 		/mob/living/simple_animal/hostile/retaliate/goat          = TRADER_THIS_TYPE,
 		/mob/living/simple_animal/hostile/carp                    = TRADER_THIS_TYPE,

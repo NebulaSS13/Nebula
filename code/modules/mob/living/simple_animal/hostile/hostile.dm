@@ -31,14 +31,16 @@
 	var/pry_desc = "prying" //"X begins pry_desc the door!"
 
 	//hostile mobs will bash through these in order with their natural weapon
-	var/list/valid_obstacles_by_priority = list(/obj/structure/window,
-												/obj/structure/closet,
-												/obj/machinery/door/window,
-												/obj/structure/table,
-												/obj/structure/grille,
-												/obj/structure/barricade,
-												/obj/structure/wall_frame,
-												/obj/structure/railing)
+	var/static/list/valid_obstacles_by_priority = list(
+		/obj/structure/window,
+		/obj/structure/closet,
+		/obj/machinery/door/window,
+		/obj/structure/table,
+		/obj/structure/grille,
+		/obj/structure/barricade,
+		/obj/structure/wall_frame,
+		/obj/structure/railing
+	)
 
 /mob/living/simple_animal/hostile/Destroy()
 	LAZYCLEARLIST(friends)

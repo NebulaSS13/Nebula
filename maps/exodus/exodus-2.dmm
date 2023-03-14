@@ -64022,7 +64022,7 @@
 /obj/structure/cable/green{
 	icon_state = "4-8"
 	},
-/mob/living/simple_animal/hostile/retaliate/parrot/Poly,
+/mob/living/simple_animal/parrot/Poly,
 /turf/simulated/floor/tiled/steel_grid,
 /area/exodus/crew_quarters/heads/chief)
 "kxa" = (

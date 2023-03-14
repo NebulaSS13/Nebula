@@ -105,13 +105,6 @@
 		if(!inv_slot?.get_equipped_item())
 			LAZYADD(., hand_slot)
 
-/mob/living/drop_from_hand(var/slot, var/atom/target)
-	var/datum/inventory_slot/inv_slot = get_inventory_slot_datum(slot)
-	var/held = inv_slot?.get_equipped_item()
-	if(held)
-		return drop_from_inventory(held, target)
-	. = ..()
-
 /mob/living/set_inventory_slots(var/list/new_slots)
 
 	var/list/old_slots = _inventory_slots

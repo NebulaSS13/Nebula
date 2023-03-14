@@ -10,7 +10,7 @@
 	density                = TRUE
 	anchored               = TRUE
 	atom_flags             = ATOM_FLAG_NO_TEMP_CHANGE | ATOM_FLAG_CLIMBABLE
-	obj_flags              = OBJ_FLAG_ANCHORABLE
+	obj_flags              = OBJ_FLAG_ANCHORABLE | OBJ_FLAG_PARROT_PERCHABLE
 	tool_interaction_flags = TOOL_INTERACTION_ANCHOR | TOOL_INTERACTION_DECONSTRUCT
 	var/tmp/list/can_hold  = list(
 		/obj/item/paper,

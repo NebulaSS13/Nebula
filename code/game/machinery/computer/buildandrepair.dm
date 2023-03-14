@@ -4,7 +4,7 @@
 	name = "computer frame"
 	icon = 'icons/obj/items/stock_parts/stock_parts.dmi'
 	icon_state = "unwired"
-	obj_flags = OBJ_FLAG_ROTATABLE
+	obj_flags = OBJ_FLAG_ROTATABLE | OBJ_FLAG_PARROT_PERCHABLE
 	expected_machine_type = "computer"
 
 /obj/machinery/constructable_frame/computerframe/on_update_icon()

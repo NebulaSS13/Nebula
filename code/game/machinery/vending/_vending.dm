@@ -9,7 +9,7 @@
 	layer = BELOW_OBJ_LAYER
 	anchored = TRUE
 	density = TRUE
-	obj_flags = OBJ_FLAG_ANCHORABLE | OBJ_FLAG_ROTATABLE
+	obj_flags = OBJ_FLAG_ANCHORABLE | OBJ_FLAG_ROTATABLE | OBJ_FLAG_PARROT_PERCHABLE
 	clicksound = "button"
 	clickvol = 40
 	base_type = /obj/machinery/vending/assist

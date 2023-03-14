@@ -3,7 +3,7 @@
 	icon = 'icons/obj/machines/floodlight.dmi'
 	icon_state = "flood00"
 	density = TRUE
-	obj_flags = OBJ_FLAG_ROTATABLE
+	obj_flags = OBJ_FLAG_ROTATABLE | OBJ_FLAG_PARROT_PERCHABLE
 	construct_state = /decl/machine_construction/default/panel_closed
 	uncreated_component_parts = null
 	required_interaction_dexterity = DEXTERITY_SIMPLE_MACHINES

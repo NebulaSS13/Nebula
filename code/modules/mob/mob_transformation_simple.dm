@@ -13,8 +13,8 @@ var/global/list/href_to_mob_type = list(
 		"Ian" =      /mob/living/simple_animal/corgi/Ian,
 		"Crab" =     /mob/living/simple_animal/crab,
 		"Coffee" =   /mob/living/simple_animal/crab/Coffee,
-		"Parrot" =   /mob/living/simple_animal/hostile/retaliate/parrot,
-		"Poly" =     /mob/living/simple_animal/hostile/retaliate/parrot/Poly,
+		"Parrot" =   /mob/living/simple_animal/parrot,
+		"Poly" =     /mob/living/simple_animal/parrot/Poly,
 	),
 	"Constructs" = list(
 		"Armoured" = /mob/living/simple_animal/construct/armoured,

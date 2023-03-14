@@ -3,3 +3,4 @@
 #define HAS_STATUS(MOB, COND)          (GET_STATUS(MOB, COND) > 0)
 #define ADJ_STATUS(MOB, COND, AMT)     (MOB.set_status(COND, PENDING_STATUS(MOB, COND) + AMT))
 #define SET_STATUS_MAX(MOB, COND, AMT) (MOB.set_status(COND, max(PENDING_STATUS(MOB, COND), AMT)))
+#define CLEAR_STATUS(MOB, COND)        (MOB.set_status(COND, 0))

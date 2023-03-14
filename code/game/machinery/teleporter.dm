@@ -174,6 +174,7 @@
 	icon = 'icons/obj/machines/teleporter.dmi'
 	density = TRUE
 	anchored = TRUE
+	obj_flags = OBJ_FLAG_PARROT_PERCHABLE
 
 /obj/machinery/teleport/hub
 	name = "teleporter pad"

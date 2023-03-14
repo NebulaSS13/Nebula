@@ -9,6 +9,7 @@
 	icon_state = "base"
 
 	initial_access = list(list(access_captain, access_bridge))
+	obj_flags = OBJ_FLAG_PARROT_PERCHABLE
 
 	var/active = 0          // PLEASE HOLD.
 	var/safeties = 1        // The cycler won't start with a living thing inside it unless safeties are off.

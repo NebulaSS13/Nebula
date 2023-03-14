@@ -76,7 +76,7 @@
 		/mob/living/simple_animal/hostile/retaliate/jelly
 	)
 	megafauna_types = list(
-		/mob/living/simple_animal/hostile/retaliate/parrot/space/megafauna,
+		/mob/living/simple_animal/parrot/space/megafauna,
 		/mob/living/simple_animal/hostile/retaliate/goose/dire
 	)
 
