@@ -7,10 +7,16 @@ var/global/list/internet_repeaters = list()
 	icon_state = "bus"
 	density = 1
 	anchored = 1
-	stat_immune = 0
 	use_power = POWER_USE_ACTIVE
 	idle_power_usage = 50
 	active_power_usage = 5000
+	construct_state = /decl/machine_construction/default/panel_closed
+	stock_part_presets = list(
+		/decl/stock_part_preset/terminal_setup,
+	)
+	uncreated_component_parts = list(
+		/obj/item/stock_parts/power/terminal,
+	)
 
 /obj/machinery/internet_repeater/Initialize()
 	. = ..()
