@@ -1,7 +1,8 @@
 /decl/pronouns
 	var/name = PLURAL
-	var/formal_term = "other"
+	var/bureaucratic_term  = "other"
 	var/informal_term = "hoopy frood"
+	var/pronoun_string
 
 	var/He   = "They"
 	var/he   = "they"
@@ -14,6 +15,10 @@
 	var/self = "themselves"
 	var/s    = ""
 	var/es   = ""
+
+/decl/pronouns/Initialize()
+	pronoun_string = "[He]/[him]/[his]"
+	. = ..()
 
 // I regret having to refactor this, but someone put it in unarmed attacks and here we are.
 /decl/pronouns/proc/get_message_for_being_kicked_in_the_dick()
@@ -60,7 +65,7 @@ var/global/list/byond_genders = list(MALE, FEMALE, NEUTER, PLURAL)
 	var/pronoun_gender
 	var/decl/pronouns/pronouns
 
-/mob/living/get_sex()
+/mob/living/get_gender()
 	if(!pronoun_gender)
 		pronoun_gender = gender
 	return pronoun_gender
@@ -73,7 +78,7 @@ var/global/list/byond_genders = list(MALE, FEMALE, NEUTER, PLURAL)
 
 /mob/living/get_pronouns(var/ignore_coverings)
 	if(!pronouns)
-		pronouns = get_pronouns_by_gender(get_sex())
+		pronouns = get_pronouns_by_gender(get_gender())
 	return pronouns || GET_DECL(/decl/pronouns)
 
 // Human concealment helper.

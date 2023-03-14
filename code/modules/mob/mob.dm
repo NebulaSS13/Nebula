@@ -947,7 +947,7 @@
 /mob/proc/can_drown()
 	return 0
 
-/mob/proc/get_sex()
+/mob/proc/get_gender()
 	return gender
 
 /mob/is_fluid_pushable(var/amt)

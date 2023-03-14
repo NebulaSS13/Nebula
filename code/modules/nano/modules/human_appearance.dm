@@ -95,7 +95,7 @@
 	if(data["change_gender"])
 		var/genders[0]
 		for(var/decl/pronouns/G as anything in owner.species.available_pronouns)
-			genders[++genders.len] =  list("gender_name" = capitalize(G.name), "gender_key" = G.name)
+			genders[++genders.len] =  list("gender_name" = G.pronoun_string, "gender_key" = G.name)
 		data["genders"] = genders
 
 	data["bodytype"] = capitalize(owner.bodytype.name)

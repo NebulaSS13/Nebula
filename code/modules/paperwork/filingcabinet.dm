@@ -113,7 +113,7 @@
 /obj/structure/filing_cabinet/records/medical/collate_data(var/datum/computer_file/report/crew_record/record)
 	. = list()
 	. += "<b>Name:</b> [record.get_name()]"
-	. += "<b>Gender:</b> [record.get_sex()]"
+	. += "<b>Gender:</b> [record.get_gender()]"
 	. += "<b>Species:</b> [record.get_species_name()]"
 	. += "<b>Blood Type:</b> [record.get_bloodtype()]"
 	. += "<b>Details:</b> [record.get_medical_record()]"
@@ -126,7 +126,7 @@
 /obj/structure/filing_cabinet/records/medical/collate_data(var/datum/computer_file/report/crew_record/record)
 	. = list()
 	. += "<b>Name:</b> [record.get_name()]"
-	. += "<b>Gender:</b> [record.get_sex()]"
+	. += "<b>Gender:</b> [record.get_gender()]"
 	. += "<b>Species:</b> [record.get_species_name()]"
 	. += "<b>Details:</b> [record.get_employment_record()]"
 	return jointext(., "<br>")

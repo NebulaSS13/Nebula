@@ -56,9 +56,9 @@ var/global/arrest_security_status =  "Arrest"
 	var/gender_term = "Unset"
 	if(H)
 		var/decl/pronouns/G = H.get_pronouns(ignore_coverings = TRUE)
-		if(G && G.formal_term)
-			gender_term = G.formal_term
-	set_sex(gender_term)
+		if(G && G.bureaucratic_term )
+			gender_term = G.bureaucratic_term
+	set_gender(gender_term)
 	set_age(H?.get_age() || 30)
 	set_status(global.default_physical_status)
 	set_species_name(H ? H.get_species_name() : global.using_map.default_species)
@@ -139,7 +139,7 @@ var/global/arrest_security_status =  "Arrest"
 	// Generic record
 	set_name(S ? S.real_name : "Unset")
 	set_formal_name(S ? S.real_name : "Unset")
-	set_sex("Unset")
+	set_gender("Unset")
 	set_status(global.default_physical_status)
 	var/silicon_type = "Synthetic Lifeform"
 	var/robojob = GetAssignment(S)
@@ -233,7 +233,7 @@ KEY.set_access(ACCESS, ACCESS_EDIT || ACCESS || access_bridge)}
 FIELD_SHORT("Name", name, null, access_change_ids, TRUE, TRUE)
 FIELD_SHORT("Formal Name", formal_name, null, access_change_ids, FALSE, TRUE)
 FIELD_SHORT("Job", job, null, access_change_ids, FALSE, TRUE)
-FIELD_LIST("Sex", sex, record_genders(), null, access_change_ids, TRUE)
+FIELD_LIST("Gender", gender, record_genders(), null, access_change_ids, TRUE)
 FIELD_NUM("Age", age, null, access_change_ids, TRUE)
 FIELD_LIST_EDIT("Status", status, global.physical_statuses, null, access_medical, TRUE)
 
@@ -276,14 +276,14 @@ FIELD_LONG("Exploitable Information", antag_record, access_hacked, access_hacked
 		var/datum/mil_rank/RA = branch.ranks[rank]
 		. |= RA.name
 
-/datum/report_field/options/crew_record/sex/proc/record_genders()
+/datum/report_field/options/crew_record/gender/proc/record_genders()
 	. = list()
 	. |= "Unset"
 	var/list/all_genders = decls_repository.get_decls_of_type(/decl/pronouns)
 	for(var/thing in all_genders)
 		var/decl/pronouns/G = all_genders[thing]
-		if(G.formal_term)
-			. |= G.formal_term
+		if(G.bureaucratic_term )
+			. |= G.bureaucratic_term
 
 /datum/report_field/options/crew_record/branch/proc/record_branches()
 	. = list()
