@@ -76,5 +76,5 @@
 		/obj/item/storage/med_pouch/radiation
 	)
 	contraband = list(/obj/item/chems/pill/bromide = 3, /obj/item/chems/hypospray/autoinjector/pain = 2)
-	directional_offset = "{'NORTH':{'y':-24}, 'SOUTH':{'y':24}, 'EAST':{'x':32}, 'WEST':{'x':-32}}"
+	directional_offset = "{'NORTH':{'y':-24}, 'SOUTH':{'y':24}, 'EAST':{'x':-24}, 'WEST':{'x':24}}"
 	obj_flags = OBJ_FLAG_MOVES_UNSUPPORTED
