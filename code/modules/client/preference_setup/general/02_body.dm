@@ -140,9 +140,9 @@
 		. += "Skin Tone: <a href='?src=\ref[src];skin_tone=1'>[-pref.skin_tone + 35]/[mob_species.max_skin_tone()]</a><br>"
 	. += "</td></tr></table><hr/>"
 
+	. += "<table width = '100%'>"
 	if(LAZYLEN(pref.appearance_descriptors))
-		. += "<h3>Physical Appearance</h3>"
-		. += "<table width = '100%'>"
+		. += "<tr><th colspan = 3><font size = 2>Physical Appearance</font></th></tr>"
 		for(var/entry in pref.appearance_descriptors)
 			var/datum/appearance_descriptor/descriptor = mob_species.appearance_descriptors[entry]
 			. += "<tr><td><b>[capitalize(descriptor.chargen_label)]</b></td>"
@@ -158,12 +158,10 @@
 				else
 					. += "<a href='?src=\ref[src];set_descriptor=\ref[descriptor];set_descriptor_value=[i]'>[use_string]</a>"
 			. += "</td></tr>"
-		. += "</table>"
 
-	. += "<h3>Colouration</h3>"
-	. += "<table width = '100%'>"
+	. += "<tr><th colspan = 3><font size = 2>Colouration</font></th></tr>"
 	. += "<tr>"
-	. += "<td><b>Hair</b></td>"
+	. += "<th style = 'background-color: #34494e;'><b>Hair</b></th>"
 	. += "<td><a href='?src=\ref[src];hair_style=1'>[GET_DECL(pref.h_style)]</a></td>"
 	. += "<td>"
 	if(has_flag(mob_species, HAS_HAIR_COLOR))
@@ -171,7 +169,7 @@
 	. += "</td>"
 	. += "<tr>"
 	. += "</tr>"
-	. += "<td><b>Facial</b></td>"
+	. += "<th style = 'background-color: #34494e;'><b>Facial</b></th>"
 	. += "<td><a href='?src=\ref[src];facial_style=1'>[GET_DECL(pref.f_style)]</a></td>"
 	. += "<td>"
 	if(has_flag(mob_species, HAS_HAIR_COLOR))
@@ -180,18 +178,16 @@
 	. += "</tr>"
 	if(has_flag(mob_species, HAS_EYE_COLOR))
 		. += "<tr>"
-		. += "<td><b>Eyes</b></td>"
-		. += "<td>[COLORED_SQUARE(pref.eye_colour)] <a href='?src=\ref[src];eye_color=1'>Change</a></td>"
+		. += "<th style = 'background-color: #34494e;'><b>Eyes</b></th>"
+		. += "<td colspan = 2>[COLORED_SQUARE(pref.eye_colour)] <a href='?src=\ref[src];eye_color=1'>Change</a></td>"
 		. += "</tr>"
 	if(has_flag(mob_species, HAS_SKIN_COLOR))
 		. += "<tr>"
-		. += "<td><b>Body</b></td>"
-		. += "<td>[COLORED_SQUARE(pref.skin_colour)] <a href='?src=\ref[src];skin_color=1'>Change</a></td>"
+		. += "<th style = 'background-color: #34494e;'><b>Body</b></th>"
+		. += "<td colspan = 2>[COLORED_SQUARE(pref.skin_colour)] <a href='?src=\ref[src];skin_color=1'>Change</a></td>"
 		. += "</tr>"
-	. += "</table>"
 
-	. += "<h3>Markings</h3>"
-	. += "<table width = '100%'>"
+	. += "<tr><th colspan = 3><font size = 2>Markings</font></th></tr>"
 	for(var/M in pref.body_markings)
 		var/decl/sprite_accessory/mark = GET_DECL(M)
 		. += "<tr>"

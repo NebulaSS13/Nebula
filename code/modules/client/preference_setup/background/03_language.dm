@@ -32,11 +32,10 @@
 
 /datum/category_item/player_setup_item/background/languages/content()
 	. = list()
-	. += "<tr><td colspan=3><center><h3>Languages</h3></td></tr>"
-	. += "<hr>"
 	. += "<table width = '100%'>"
+	. += "<tr><th colspan=3><center><font size = 3>Languages</font></center></th></tr>"
 	. += jointext(get_language_text(), null)
-	. += "</table></center><hr>"
+	. += "</table>"
 	. = jointext(.,null)
 
 /datum/category_item/player_setup_item/background/languages/OnTopic(var/href,var/list/href_list, var/mob/user)

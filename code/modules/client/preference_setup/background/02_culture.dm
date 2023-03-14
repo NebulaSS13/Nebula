@@ -86,7 +86,7 @@
 		var/decl/cultural_info/culture = GET_DECL(pref.cultural_info[token])
 
 		. += "<table width = '100%'>"
-		. += "<tr><td colspan=3><center><h3>[culture.desc_type]</h3>"
+		. += "<tr><th colspan=3><center><font size = 3>[culture.desc_type]</font></center></th></tr><tr><td colspan = 3><center>"
 		var/list/valid_values
 		GET_ALLOWED_VALUES(valid_values, token)
 		. += "</center></td></tr>"
@@ -97,7 +97,7 @@
 				. += "<span class='linkOn'>[culture_data.name]</span> "
 			else
 				. += "<a href='?src=\ref[src];set_token_entry_[token]=\ref[culture_data]'>[culture_data.name]</a> "
-		. += "</center><hr/></td></tr>"
+		. += "</center></td></tr>"
 
 		var/list/culture_info = culture.get_description(!hidden[token])
 		. += "<tr><td width = '200px'>"
@@ -107,7 +107,7 @@
 		. += "</td><td width = '50px'>"
 		. += "<a href='?src=\ref[src];toggle_verbose_[token]=1'>[hidden[token] ? "Expand" : "Collapse"]</a>"
 		. += "</td></tr>"
-		. += "</table><hr>"
+		. += "</table>"
 
 	. = jointext(.,null)
 
@@ -118,7 +118,7 @@
 		if(href_list["toggle_verbose_[token]"])
 			hidden[token] = !hidden[token]
 			return TOPIC_REFRESH
-		
+
 		var/decl/cultural_info/new_token = href_list["set_token_entry_[token]"]
 		if(!isnull(new_token))
 			new_token = locate(new_token)

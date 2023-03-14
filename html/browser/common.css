@@ -78,17 +78,23 @@ a.icon img, .linkOn.icon img
 	height: 18px;
 }
 
-table, th, td 
+table
 {
-	border: 1px solid;
-	border-color: #48656c;
+	border: 0px;
 	border-collapse: collapse;
-	padding: 3px;
+	padding: 1px;
 }
 
-th 
+tr {
+	background-color: #333333;
+}
+tr:nth-child(even) {
+	background-color: #3d3d3d;
+}
+th
 {
-	background-color: #48656c;
+	padding: 2px;
+	background-color: #33484d;
 }
 
 ul

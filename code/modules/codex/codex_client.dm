@@ -45,9 +45,9 @@
 	else
 		if(LAZYLEN(all_entries) > 1)
 			var/list/codex_data = list("<h3><b>[all_entries.len] matches</b> for '[searching]':</h3>")
-			if(LAZYLEN(all_entries) > max_codex_entries_shown)
-				codex_data += "Showing first <b>[max_codex_entries_shown]</b> entries. <b>[all_entries.len - 5] result\s</b> omitted.</br>"
 			codex_data += "<table width = 100%>"
+			if(LAZYLEN(all_entries) > max_codex_entries_shown)
+				codex_data += "<tr><th colspan = 2>Showing first <b>[max_codex_entries_shown]</b> entries. <b>[all_entries.len - 5] result\s</b> omitted.</th></tr>"
 			for(var/i = 1 to min(all_entries.len, max_codex_entries_shown))
 				var/datum/codex_entry/entry = all_entries[i]
 				codex_data += "<tr><td>[entry.name]</td><td><a href='?src=\ref[SScodex];show_examined_info=\ref[entry];show_to=\ref[mob]'>View</a></td></tr>"

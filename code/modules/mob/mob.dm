@@ -328,32 +328,32 @@
 		var/datum/inventory_slot/inv_slot = get_inventory_slot(slot)
 		if(inv_slot.skip_on_strip_display)
 			continue
-		var/item_string = "<tr style = 'border: 0px; padding: 1px;'><td width = 120px style = 'border: 0px; padding: 1px;'><b>[capitalize(inv_slot.slot_name)]</b></td><td style = 'border: 0px; padding: 1px;'><a href='?src=\ref[src];item=[inv_slot.slot_id]'>[capitalize(inv_slot.get_equipped_name() || "nothing")]</a></td></tr>"
+		var/item_string = "<tr><td width = 120px><b>[capitalize(inv_slot.slot_name)]</b></td><td><a href='?src=\ref[src];item=[inv_slot.slot_id]'>[capitalize(inv_slot.get_equipped_name() || "nothing")]</a></td></tr>"
 		if(slot in held_slots)
 			held_strings += item_string
 		else
 			inventory_strings += item_string
 			var/obj/item/clothing/C = inv_slot.get_equipped_item()
 			if(istype(C) && length(C.accessories))
-				inventory_strings += "<tr style = 'border: 0px; padding: 1px;'><td colspan = 2 align = center style = 'border: 0px; padding: 1px;'><a href='?src=\ref[src];item=tie;holder=\ref[C]'>Remove accessory</a></td></tr>"
+				inventory_strings += "<tr><td colspan = 2 align = center><a href='?src=\ref[src];item=tie;holder=\ref[C]'>Remove accessory</a></td></tr>"
 
 	if(length(held_strings))
-		dat += "<tr style = 'border: 0px; padding: 1px;'><th colspan = 2 style = 'border: 0px; padding: 1px;'><b>Held items</b></th></tr>"
+		dat += "<tr><th colspan = 2><b>Held items</b></th></tr>"
 		dat += held_strings
 
 	if(length(inventory_strings))
-		dat += "<tr style = 'border: 0px; padding: 1px;'><th colspan = 2 style = 'border: 0px; padding: 1px;'><b>Equipped items</b></th></tr>"
+		dat += "<tr><th colspan = 2><b>Equipped items</b></th></tr>"
 		dat += inventory_strings
 
 	// Internals setting.
-	dat += "<tr style = 'border: 0px; padding: 1px;'><th colspan = 2 style = 'border: 0px; padding: 1px;'>Options</th></tr>"
+	dat += "<tr><th colspan = 2>Options</th></tr>"
 	for(var/airtight_slot in global.airtight_slots)
 		var/obj/item/clothing/hat = get_equipped_item(airtight_slot)
 		if(hat && (hat.item_flags & ITEM_FLAG_AIRTIGHT))
 			for(var/slot in list(slot_back_str, slot_belt_str, slot_s_store_str))
 				var/obj/item/tank/tank = get_equipped_item(slot)
 				if(istype(tank))
-					dat += "<tr style = 'border: 0px; padding: 1px;'><td colspan = 2 align = center style = 'border: 0px; padding: 1px;'><a href='?src=\ref[src];item=internals'>Toggle internals.</a></td></tr>"
+					dat += "<tr><td colspan = 2 align = center><a href='?src=\ref[src];item=internals'>Toggle internals.</a></td></tr>"
 					break
 			break
 
@@ -363,26 +363,26 @@
 		var/l_pocket = get_equipped_item(slot_l_store_str)
 		var/r_pocket = get_equipped_item(slot_l_store_str)
 		if(l_pocket || r_pocket)
-			dat += "<tr style = 'border: 0px; padding: 1px;'><td colspan = 2 align = center style = 'border: 0px; padding: 1px;'><a href='?src=\ref[src];item=empty_pockets'>Empty Pockets</a></td></tr>"
+			dat += "<tr><td colspan = 2 align = center><a href='?src=\ref[src];item=empty_pockets'>Empty Pockets</a></td></tr>"
 		if(!l_pocket || !r_pocket)
-			dat += "<tr style = 'border: 0px; padding: 1px;'><td colspan = 2 align = center style = 'border: 0px; padding: 1px;'><a href='?src=\ref[src];item=put_in_pocket'>Place Item In Pocket</a></td></tr>"
+			dat += "<tr><td colspan = 2 align = center><a href='?src=\ref[src];item=put_in_pocket'>Place Item In Pocket</a></td></tr>"
 		if(istype(uniform) && uniform.has_sensor)
 			if(uniform.has_sensor == 1)
-				dat += "<tr style = 'border: 0px; padding: 1px;'><td colspan = 2 align = center style = 'border: 0px; padding: 1px;'><a href='?src=\ref[src];item=sensors'>Set sensors</a></td></tr>"
+				dat += "<tr><td colspan = 2 align = center><a href='?src=\ref[src];item=sensors'>Set sensors</a></td></tr>"
 			if(user.get_multitool())
-				dat += "<tr style = 'border: 0px; padding: 1px;'><td colspan = 2 align = center style = 'border: 0px; padding: 1px;'><a href='?src=\ref[src];item=lock_sensors'>[uniform.has_sensor == SUIT_LOCKED_SENSORS ? "Unlock" : "Lock"] sensors</a></td></tr>"
+				dat += "<tr><td colspan = 2 align = center><a href='?src=\ref[src];item=lock_sensors'>[uniform.has_sensor == SUIT_LOCKED_SENSORS ? "Unlock" : "Lock"] sensors</a></td></tr>"
 
 	// Cuffs.
 	if(get_equipped_item(slot_handcuffed_str))
-		dat += "<tr style = 'border: 0px; padding: 1px;'><td colspan = 2 align = center style = 'border: 0px; padding: 1px;'><a href='?src=\ref[src];item=[slot_handcuffed_str]'>Remove handcuffs</a></td></tr>"
+		dat += "<tr><td colspan = 2 align = center><a href='?src=\ref[src];item=[slot_handcuffed_str]'>Remove handcuffs</a></td></tr>"
 
 	var/list/additional_options = get_additional_stripping_options()
 	if(length(additional_options))
 		dat += additional_options
 
 	// Misc options.
-	dat += "<tr style = 'border: 0px; padding: 1px;'><td colspan = 2 align = center style = 'border: 0px; padding: 1px;'><a href='?src=\ref[src];refresh=1'>Refresh</a></td></tr>"
-	dat += "<tr style = 'border: 0px; padding: 1px;'><td colspan = 2 align = center style = 'border: 0px; padding: 1px;'><a href='?src=\ref[src];mach_close=mob_\ref[src]'>Close</a></td></tr>"
+	dat += "<tr><td colspan = 2 align = center><a href='?src=\ref[src];refresh=1'>Refresh</a></td></tr>"
+	dat += "<tr><td colspan = 2 align = center><a href='?src=\ref[src];mach_close=mob_\ref[src]'>Close</a></td></tr>"
 	dat += "</table>"
 
 	var/datum/browser/popup = new(user, "mob_\ref[src]", null, 430, 680)

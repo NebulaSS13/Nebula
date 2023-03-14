@@ -7,7 +7,7 @@
 	W.write("species", pref.species)
 
 /datum/category_item/player_setup_item/background/species/load_character(datum/pref_record_reader/R)
-	pref.species = R.read("species") 
+	pref.species = R.read("species")
 
 /datum/category_item/player_setup_item/background/species/sanitize_character()
 	. = ..()
@@ -35,7 +35,7 @@
 	var/decl/species/current_species = get_species_by_key(pref.species)
 	var/list/prefilter = get_playable_species()
 	var/list/playables = list()
-	
+
 	for(var/s in prefilter)
 		if(!check_rights(R_ADMIN, 0) && config.usealienwhitelist)
 			var/decl/species/checking_species = get_species_by_key(s)
@@ -47,7 +47,7 @@
 
 	. = list()
 	. += "<table width = '100%'>"
-	. += "<tr><td colspan=3><center><h3>Species</h3></center></td></tr>"
+	. += "<tr><th colspan=3><center><font size = 3>Species</font></center></th></tr>"
 	. += "<tr><td colspan=3><center>"
 	for(var/s in get_playable_species())
 		var/decl/species/list_species = get_species_by_key(s)
@@ -55,21 +55,21 @@
 			. += "<span class='linkOn'>[list_species.name]</span> "
 		else
 			. += "<a href='?src=\ref[src];set_species=[list_species.name]'>[list_species.name]</a> "
-	. += "</center><hr/></td></tr>"
+	. += "</center></td></tr>"
 
 	. += "<tr>"
 
 	var/icon/use_preview_icon = current_species.get_preview_icon()
 	if(use_preview_icon)
-		send_rsc(user, use_preview_icon, current_species.preview_icon_path)		
+		send_rsc(user, use_preview_icon, current_species.preview_icon_path)
 		. += "<td width = '200px' align='center'><img src='[current_species.preview_icon_path]' width='[current_species.preview_icon_width]px' height='[current_species.preview_icon_height]px'></td>"
 	else
 		. += "<td width = '200px' align='center'>No preview available.</td>"
-		
-	var/desc = current_species.description ? "<h3>Species Summary</h3><p>[current_species.description]</p>" : null
+
+	var/desc = current_species.description ? "<font size = 2>Species Summary</font><p>[current_species.description]</p>" : null
 	if(current_species.roleplay_summary)
-		desc = "[desc]<h3>Roleplaying Summary</h3><p>[current_species.roleplay_summary]</p>"
-		
+		desc = "[desc]<font size = 2>Roleplaying Summary</font><p>[current_species.roleplay_summary]</p>"
+
 	if(hide_species && length(desc) > 200)
 		desc = "[copytext(desc, 1, 194)] <small>\[...\]</small>"
 	. += "<td width>[desc]</td>"
@@ -77,7 +77,7 @@
 
 	. += "</tr>"
 
-	. += "</table><hr>"
+	. += "</table>"
 
 	. = jointext(.,null)
 

@@ -29,25 +29,44 @@
 			LAZYADD(links[starter], "<l>[item_entry.name]</l>")
 			LAZYDISTINCTADD(item_entry.categories, src)
 
+		var/list/link_headers = list()
 		var/list/link_cells = list()
 		for(var/letter in global.alphabet_capital)
 			if(length(links[letter]))
-				link_cells += "<td><b><center>[letter]</center></b>\n<hr>\n<br>\n[jointext(links[letter], "\n<br>\n")]</td>\n"
+				link_headers += "<th><b><center>[letter]</center></b></th>"
+				link_cells += "<td>\n[jointext(links[letter], "\n<br>\n")]</td>\n"
 
+		var/list/header_row = list()
+		var/list/cell_row = list()
 		var/list/link_table = list("<table>")
 		var/link_counter = 0
 		for(var/i = 1 to length(link_cells))
+
 			if(link_counter == 0)
-				link_table += "<tr>"
-			link_table += link_cells[i]
+				header_row += "<tr>"
+				cell_row += "<tr>"
+
+			header_row += link_headers[i]
+			cell_row += link_cells[i]
+
 			if(link_counter == link_columns)
-				link_table += "</tr>"
+				header_row += "</tr>"
+				cell_row += "</tr>"
+				link_table += header_row
+				link_table += cell_row
+				header_row = list()
+				cell_row = list()
+
 			link_counter++
 			if(link_counter > link_columns)
 				link_counter = 0
 
 		if(link_counter != link_columns)
-			link_table += "</tr>"
+			header_row += "</tr>"
+			cell_row += "</tr>"
+			link_table += header_row
+			link_table += cell_row
+
 		link_table += "</table>"
 
 		lore_text += jointext(link_table, "\n")
