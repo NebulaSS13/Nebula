@@ -1,5 +1,6 @@
 /datum/ai/slime
-	//expected_type = /mob/living/slime
+	expected_type = /mob/living/slime
+	run_interval = 1 SECOND
 	var/mood
 	var/chase_target = 0
 	var/mob/living/leader
@@ -223,6 +224,6 @@
 		LAZYSET(friendship_cooldown, user, world.time + (1 MINUTE))
 	LAZYINITLIST(observed_friends)
 	observed_friends[user] = observed_friends[user] + amount
-	if(observed_friends[user] <= 0) 
+	if(observed_friends[user] <= 0)
 		LAZYREMOVE(observed_friends, user)
 	return TRUE
