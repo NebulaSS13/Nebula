@@ -889,21 +889,6 @@ var/global/list/damage_icon_parts = list()
 	if(update_icons)
 		queue_icon_update()
 
-//Ported from hud login stuff
-//
-/mob/living/carbon/hud_reset(full_reset = FALSE)
-	if(!(. = ..()))
-		return .
-	for(var/obj/item/gear in get_equipped_items(TRUE))
-		client.screen |= gear
-	if(hud_used)
-		hud_used.hidden_inventory_update()
-		hud_used.persistant_inventory_update()
-		update_action_buttons()
-	if(internals && internal)
-		internals.icon_state = "internal1"
-	queue_hand_rebuild()
-
 //Human Overlays Indexes/////////
 #undef HO_MUTATIONS_LAYER
 #undef HO_SKIN_LAYER

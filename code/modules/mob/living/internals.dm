@@ -28,8 +28,19 @@
 
 /mob/living/hud_reset(full_reset = FALSE)
 	. = ..()
-	if(. && internals_ui && get_internals())
+	if(!.)
+		return
+	if(internals_ui && get_internals())
 		internals_ui.icon_state = "internal1"
+	for(var/obj/item/gear in get_equipped_items(TRUE))
+		client.screen |= gear
+	if(hud_used)
+		hud_used.hidden_inventory_update()
+		hud_used.persistant_inventory_update()
+		update_action_buttons()
+	if(internals_ui && internal)
+		internals_ui.icon_state = "internal1"
+	queue_hand_rebuild()
 
 // Set internals on or off. Implemented properly on /carbon
 /mob/living/proc/toggle_internals(var/mob/living/user)

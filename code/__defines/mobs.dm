@@ -223,18 +223,18 @@
 #define MOB_PULL_SAME 2
 #define MOB_PULL_LARGER 3
 
-//carbon taste sensitivity defines, used in mob/living/proc/ingest
+// taste sensitivity defines, used in mob/living/proc/ingest
 #define TASTE_HYPERSENSITIVE 3 //anything below 5%
 #define TASTE_SENSITIVE 2 //anything below 7%
 #define TASTE_NORMAL 1 //anything below 15%
 #define TASTE_DULL 0.5 //anything below 30%
 #define TASTE_NUMB 0.1 //anything below 150%
 
-//Used by show_message() and emotes
+// Used by show_message() and emotes
 #define VISIBLE_MESSAGE 1
 #define AUDIBLE_MESSAGE 2
 
-//used for getting species temp values
+// used for getting species temp values
 #define COLD_LEVEL_1 -1
 #define COLD_LEVEL_2 -2
 #define COLD_LEVEL_3 -3
@@ -242,7 +242,7 @@
 #define HEAT_LEVEL_2 2
 #define HEAT_LEVEL_3 3
 
-//Synthetic human temperature vals
+// Synthetic human temperature vals
 #define SYNTH_COLD_LEVEL_1 50
 #define SYNTH_COLD_LEVEL_2 -1
 #define SYNTH_COLD_LEVEL_3 -1
@@ -286,7 +286,7 @@
 
 #define SLIME_EVOLUTION_THRESHOLD 15
 
-//Used in mob/proc/get_input
+// Used in mob/proc/get_input
 #define MOB_INPUT_TEXT "text"
 #define MOB_INPUT_MESSAGE "message"
 #define MOB_INPUT_NUM "num"

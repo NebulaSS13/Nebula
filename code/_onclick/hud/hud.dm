@@ -222,7 +222,7 @@
 
 	var/has_hidden_gear = FALSE
 
-	var/mob/living/carbon/human/target = mymob
+	var/mob/living/human/target = mymob
 	var/datum/hud_data/hud_data = istype(target) ? target.species.hud : new()
 	var/list/held_slots = mymob.get_held_item_slots()
 

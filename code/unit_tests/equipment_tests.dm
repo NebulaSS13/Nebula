@@ -99,7 +99,7 @@
 /datum/unit_test/equipment_slot_test
 	name = "EQUIPMENT: Equip procs should pass tests"
 
-/datum/unit_test/equipment_slot_test/proc/check_slot_successful(mob/living/carbon/human/subject, obj/item/item, which_slot, list/failure_list)
+/datum/unit_test/equipment_slot_test/proc/check_slot_successful(mob/living/human/subject, obj/item/item, which_slot, list/failure_list)
 	subject.equip_to_slot_if_possible(item, which_slot)
 	if(!subject.isEquipped(item))
 		failure_list += "[item] was equipped to [which_slot] but failed isEquipped."
@@ -110,7 +110,7 @@
 	if(subject.isEquipped(item))
 		failure_list += "[item] remained equipped to [subject.get_equipped_slot_for_item(item)] after unEquip was called."
 
-/datum/unit_test/equipment_slot_test/proc/check_slot_failure(mob/living/carbon/human/subject, obj/item/item, which_slot, list/failure_list)
+/datum/unit_test/equipment_slot_test/proc/check_slot_failure(mob/living/human/subject, obj/item/item, which_slot, list/failure_list)
 	subject.equip_to_slot_if_possible(item, which_slot)
 	if(subject.isEquipped(item))
 		var/equipped_location = subject.get_equipped_slot_for_item(item)
@@ -120,7 +120,7 @@
 		failure_list += "[item] was equipped to [equipped_location] despite failing isEquipped (should not be equipped)."
 
 /datum/unit_test/equipment_slot_test/start_test()
-	var/mob/living/carbon/human/subject = new(get_safe_turf())
+	var/mob/living/human/subject = new(get_safe_turf())
 	var/obj/item/clothing/head/hairflower/flower = new
 	var/list/failures = list()
 	check_slot_successful(subject, flower, slot_head_str, failures)

@@ -704,18 +704,11 @@
 	implant.add_blood(src)
 	implant.update_icon()
 
-	if(!QDELETED(implant))
-		if(istype(implant,/obj/item/implant))
-			var/obj/item/implant/imp = implant
-			imp.removed()
-		else if(istype(implant, /mob/living/simple_animal/borer))
-			var/mob/living/simple_animal/borer/worm = implant
-			if(worm.controlling)
-				release_control()
-			worm.detatch()
-			worm.leave_host()
+	if(!QDELETED(implant) && istype(implant,/obj/item/implant))
+		var/obj/item/implant/imp = implant
+		imp.removed()
 
-	. = TRUE
+	return implant
 
 /mob/living/silicon/robot/remove_implant(var/obj/item/implant, var/surgical_removal = FALSE)
 	LAZYREMOVE(embedded, implant)

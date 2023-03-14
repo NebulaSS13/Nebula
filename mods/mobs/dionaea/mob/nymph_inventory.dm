@@ -59,5 +59,5 @@
 	. = ..()
 
 // Makes it so that the held item's screen_loc isn't unset.
-/mob/living/carbon/alien/diona/item_should_have_screen_presence(obj/item/item, slot)
+/mob/living/alien/diona/item_should_have_screen_presence(obj/item/item, slot)
 	return (item == holding_item) || ..()
