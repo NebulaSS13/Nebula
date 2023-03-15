@@ -22,7 +22,7 @@
 	Q.set_dir(mob.dir)
 	Q.ckey = ckey
 
-	var/decl/hierarchy/outfit/outfit = GET_DECL(/decl/hierarchy/outfit/quantum)
+	var/decl/hierarchy/outfit/outfit = outfit_by_type(/decl/hierarchy/outfit/quantum)
 	outfit.equip(Q)
 
 	//Sort out ID
