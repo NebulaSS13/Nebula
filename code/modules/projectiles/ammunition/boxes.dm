@@ -148,6 +148,10 @@
 	labels = list("flash")
 	ammo_type = /obj/item/ammo_casing/pistol/flash
 
+/obj/item/ammo_magazine/pistol/emp
+	labels = list("haywire")
+	ammo_type = /obj/item/ammo_casing/pistol/emp
+
 /obj/item/ammo_magazine/pistol/small
 	icon_state = "holdout"
 	material = /decl/material/solid/metal/steel
@@ -242,6 +246,14 @@
 	material = /decl/material/solid/metal/steel
 	max_ammo = 7
 	multiple_sprites = 1
+
+/obj/item/ammo_magazine/speedloader/rubber
+	labels = list("rubber")
+	ammo_type = /obj/item/ammo_casing/pistol/magnum/rubber
+
+/obj/item/ammo_magazine/speedloader/practice
+	labels = list("practice")
+	ammo_type = /obj/item/ammo_casing/pistol/magnum/practice
 
 /obj/item/ammo_magazine/speedloader/laser_revolver
 	caliber = CALIBER_PISTOL_LASBULB
