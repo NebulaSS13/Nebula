@@ -192,17 +192,17 @@ var/global/const/MAX_GEOTHERMAL_PRESSURE =               12000
 		var/consumed_pressure = current_pressure * GEOTHERMAL_PRESSURE_CONSUMED_PER_TICK
 		current_pressure -= consumed_pressure
 		var/remaining_pressure = consumed_pressure
-		consumed_pressure = round(consumed_pressure * efficiency)
+		consumed_pressure = round(consumed_pressure * efficiency, 0.01)
 		remaining_pressure -= consumed_pressure
 
-		last_generated = round(consumed_pressure * GEOTHERMAL_PRESSURE_TO_POWER)
+		last_generated = round(consumed_pressure * GEOTHERMAL_PRESSURE_TO_POWER, 0.01)
 		if(last_generated)
 			generate_power(last_generated)
 		remaining_pressure = round(remaining_pressure * GEOTHERMAL_PRESSURE_LOSS)
 		if(remaining_pressure)
 			addtimer(CALLBACK(src, .proc/propagate_pressure, remaining_pressure), 5)
 	update_icon()
-	if(current_pressure <= 10)
+	if(current_pressure <= 1)
 		return PROCESS_KILL
 
 /obj/machinery/geothermal/proc/propagate_pressure(var/remaining_pressure)
