@@ -40,6 +40,7 @@ var/global/const/MAX_GEOTHERMAL_PRESSURE =               12000
 	anchored   = TRUE
 	layer      = TURF_LAYER + 0.01
 	level      = 1 //Goes under floor/plating
+	///The particle emitter that will generate the steam column effect for this geyser
 	var/particles/geyser_steam/steamfx
 
 /obj/effect/geyser/Initialize(ml)
@@ -51,6 +52,7 @@ var/global/const/MAX_GEOTHERMAL_PRESSURE =               12000
 	set_extension(src, /datum/extension/geothermal_vent)
 	steamfx = new //Prepare our FX
 
+///Async proc that enables the particle emitter for the steam column for a few seconds
 /obj/effect/geyser/proc/do_spout()
 	set waitfor = FALSE
 	particles = steamfx
@@ -158,6 +160,7 @@ var/global/const/MAX_GEOTHERMAL_PRESSURE =               12000
 		to_chat(user, SPAN_INFO("Pressure: [current_pressure]kPa"))
 		to_chat(user, SPAN_INFO("Output:   [last_generated]W"))
 
+///Attempts to connect to any existing geothermal vents in our turf.
 /obj/machinery/geothermal/proc/setup_vent()
 	var/turf/T = get_turf(src)
 	for(var/obj/O in T)
@@ -168,6 +171,7 @@ var/global/const/MAX_GEOTHERMAL_PRESSURE =               12000
 		vent.set_my_generator(src)
 		return TRUE
 
+///Disconnect from any geothermal vents we may be connected to
 /obj/machinery/geothermal/proc/unset_vent()
 	if(QDELETED(vent))
 		return
