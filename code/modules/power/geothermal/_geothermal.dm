@@ -130,9 +130,7 @@ var/global/const/MAX_GEOTHERMAL_PRESSURE =               12000
 	. = ..()
 	if(get_turf(loc))
 		refresh_neighbors()
-		for(var/turf/T as anything in RANGE_TURFS(loc, 1))
-			for(var/obj/machinery/geothermal/neighbor in T)
-				neighbor.refresh_neighbors()
+		propagate_refresh_neighbors()
 	STOP_PROCESSING_MACHINE(src, MACHINERY_PROCESS_SELF)
 	return INITIALIZE_HINT_LATELOAD
 
@@ -145,9 +143,14 @@ var/global/const/MAX_GEOTHERMAL_PRESSURE =               12000
 	unset_vent()
 	. = ..()
 	if(istype(last_loc))
-		for(var/turf/T as anything in RANGE_TURFS(last_loc, 1))
-			for(var/obj/machinery/geothermal/neighbor in T)
-				neighbor.refresh_neighbors()
+		propagate_refresh_neighbors(last_loc)
+
+///Tell all neighbors of the center atom to call update neighbors
+/obj/machinery/geothermal/proc/propagate_refresh_neighbors(var/atom/center = src)
+	for(var/adir in global.alldirs)
+		var/obj/machinery/geothermal/G = locate(/obj/machinery/geothermal) in get_step(center, adir)
+		if(G?.anchored)
+			G.refresh_neighbors()
 
 /obj/machinery/geothermal/examine(mob/user, distance)
 	. = ..()
