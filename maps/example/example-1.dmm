@@ -427,7 +427,7 @@
 /turf/simulated/floor/tiled/steel_grid,
 /area/example/first)
 "tA" = (
-/obj/turbolift_map_holder/example,
+/obj/abstract/turbolift_spawner/example,
 /turf/simulated/floor,
 /area/turbolift/example/first)
 "uD" = (

@@ -46,6 +46,8 @@ SUBSYSTEM_DEF(mapping)
 	var/base_floor_area
 	/// A list of connected z-levels to avoid repeatedly rebuilding connections
 	var/list/connected_z_cache = list()
+	/// A list of turbolift holders to initialize.
+	var/list/turbolifts_to_initialize = list()
 
 /datum/controller/subsystem/mapping/PreInit()
 	reindex_lists()
@@ -72,6 +74,10 @@ SUBSYSTEM_DEF(mapping)
 		world.maxx = new_maxx
 	if (new_maxy > world.maxy)
 		world.maxy = new_maxy
+
+	// Generate turbolifts.
+	for(var/obj/abstract/turbolift_spawner/turbolift as anything in turbolifts_to_initialize)
+		turbolift.build_turbolift()
 
 	// Populate overmap.
 	if(length(global.using_map.overmap_ids))

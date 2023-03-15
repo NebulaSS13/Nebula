@@ -167,7 +167,7 @@
 /turf/simulated/floor/plating,
 /area/exodus/maintenance/sub/fore)
 "aB" = (
-/obj/turbolift_map_holder/exodus/sec,
+/obj/abstract/turbolift_spawner/exodus/sec,
 /turf/space,
 /area/exodus/maintenance/sub/fore)
 "aC" = (
@@ -1312,7 +1312,7 @@
 /turf/simulated/floor/plating,
 /area/exodus/maintenance/sub/starboard)
 "eh" = (
-/obj/turbolift_map_holder/exodus/cargo,
+/obj/abstract/turbolift_spawner/exodus/cargo,
 /turf/space,
 /area/exodus/maintenance/sub/port)
 "ei" = (
@@ -1989,7 +1989,7 @@
 /turf/simulated/floor/plating,
 /area/exodus/maintenance/sub/starboard)
 "fN" = (
-/obj/turbolift_map_holder/exodus/research,
+/obj/abstract/turbolift_spawner/exodus/research,
 /turf/space,
 /area/exodus/maintenance/sub/starboard)
 "fO" = (
@@ -4433,7 +4433,7 @@
 /turf/simulated/floor/tiled/steel_grid,
 /area/exodus/engineering/atmos)
 "lM" = (
-/obj/turbolift_map_holder/exodus/engineering,
+/obj/abstract/turbolift_spawner/exodus/engineering,
 /turf/space,
 /area/exodus/maintenance/sub/aft)
 "lN" = (
