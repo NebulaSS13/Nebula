@@ -287,7 +287,7 @@ SUBSYSTEM_DEF(mapping)
 
 /datum/controller/subsystem/mapping/proc/unregister_level_data(var/datum/level_data/LD)
 	if(levels_by_z[LD.level_z] == LD)
-		//Temporarily clear the level z from the list if we're in it.
+		//Clear the level data ref from the list if we're in it.
 		levels_by_z[LD.level_z] = null
 	levels_by_id -= LD.level_id
 

@@ -275,12 +275,8 @@
 		return FALSE
 	return TRUE
 
-///Called while a map_template is being loaded on our z-level. Only apply to templates loaded onto new z-levels.
-/datum/level_data/proc/before_template_load(var/datum/map_template/template)
-	return
-
 ///Called after a map_template has been loaded on our z-level. Only apply to templates loaded onto new z-levels.
-/datum/level_data/proc/after_template_load(var/datum/map_template/template)
+/datum/level_data/proc/post_template_load(var/datum/map_template/template)
 	if(template.accessibility_weight)
 		SSmapping.accessible_z_levels[num2text(level_z)] = template.accessibility_weight
 	SSmapping.player_levels |= level_z
@@ -442,10 +438,9 @@
 	var/area/found = locate(base_area)
 	if(found)
 		return found
-	else if(ispath(base_area))
+	if(ispath(base_area))
 		return new base_area
-	else
-		return world.area
+	return locate(world.area)
 
 ////////////////////////////////////////////
 // Level Data Spawner
