@@ -318,7 +318,7 @@
 		if(istype(LD))
 			base_area = LD.get_base_area_instance()
 		else
-			base_area = world.area
+			base_area = locate(world.area)
 
 	var/turf/center_turf
 	switch(dir)
