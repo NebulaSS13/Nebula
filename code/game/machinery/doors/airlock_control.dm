@@ -164,17 +164,13 @@
 	if(!(stat & (NOPOWER | BROKEN)))
 		var/datum/gas_mixture/air_sample = return_air()
 		var/new_pressure = round(air_sample.return_pressure(),0.1)
+		var/decl/public_access/public_variable/airlock_pressure/pressure_var = GET_DECL(/decl/public_access/public_variable/airlock_pressure)
+		pressure_var.write_var(src, new_pressure)
 
-		//Try preventing the sensor from spamming when there's no differences, and the controller isn't cycling.
-		//Can't rely only on difference, since it's possible for the pressure to stay nearly the same for a few calls, which prevents the machine var from updating
-		if(abs(pressure - new_pressure) > 0.001 || master_cycling)
-			var/decl/public_access/public_variable/airlock_pressure/pressure_var = GET_DECL(/decl/public_access/public_variable/airlock_pressure)
-			pressure_var.write_var(src, new_pressure)
-
-			var/new_alert = (pressure < ONE_ATMOSPHERE*0.8)
-			if(new_alert != alert)
-				alert = new_alert
-				update_icon()
+		var/new_alert = (pressure < ONE_ATMOSPHERE*0.8)
+		if(new_alert != alert)
+			alert = new_alert
+			update_icon()
 
 /**Meant to update the icon when the master airlock controller is cycling */
 /obj/machinery/airlock_sensor/proc/set_master_cycling(var/state)
