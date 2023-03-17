@@ -69,8 +69,7 @@
 	return
 
 /turf/simulated/mimic_edge/get_vis_contents_to_add()
-	. = ..()
-	shared_mimic_edge_get_add_vis_contents(src, get_mimic_turf(), .)
+	. = shared_mimic_edge_get_add_vis_contents(src, get_mimic_turf(), ..())
 
 /turf/simulated/mimic_edge/proc/get_mimic_turf()
 	return mimic_x && mimic_y && mimic_z && locate(mimic_x, mimic_y, mimic_z)
@@ -136,8 +135,7 @@
 	return
 
 /turf/unsimulated/mimic_edge/get_vis_contents_to_add()
-	. = ..()
-	shared_mimic_edge_get_add_vis_contents(src, get_mimic_turf(), .)
+	. = shared_mimic_edge_get_add_vis_contents(src, get_mimic_turf(), ..())
 
 /turf/unsimulated/mimic_edge/proc/get_mimic_turf()
 	return mimic_x && mimic_y && mimic_z && locate(mimic_x, mimic_y, mimic_z)
@@ -203,8 +201,7 @@
 	return
 
 /turf/exterior/mimic_edge/get_vis_contents_to_add()
-	. = ..()
-	shared_mimic_edge_get_add_vis_contents(src, get_mimic_turf(), .)
+	. = shared_mimic_edge_get_add_vis_contents(src, get_mimic_turf(), ..())
 
 /turf/exterior/mimic_edge/proc/get_mimic_turf()
 	return mimic_x && mimic_y && mimic_z && locate(mimic_x, mimic_y, mimic_z)
