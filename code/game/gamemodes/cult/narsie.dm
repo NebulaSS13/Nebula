@@ -191,7 +191,7 @@ var/global/list/narsie_list = list()
 			T.cultify()
 
 /obj/singularity/narsie/proc/old_narsie(const/atom/A)
-	if(!(A.singuloCanEat()))
+	if(!A.simulated)
 		return 0
 
 	if (istype(A, /mob/living/))
@@ -223,7 +223,7 @@ var/global/list/narsie_list = list()
 			T2.ChangeTurf(get_base_turf_by_area(A))
 
 /obj/singularity/narsie/consume(const/atom/A) //This one is for the small ones.
-	if(!(A.singuloCanEat()))
+	if(!A.simulated)
 		return 0
 
 	if (istype(A, /mob/living/))
@@ -251,7 +251,7 @@ var/global/list/narsie_list = list()
 				continue
 
 			if (dist > consume_range)
-				if(!(AM2.singuloCanEat()))
+				if(!AM2.simulated)
 					continue
 
 				if (101 == AM2.invisibility)

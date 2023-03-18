@@ -31,7 +31,7 @@
 	return
 
 /obj/singularity/narsie/large/exit/consume(const/atom/A)
-	if(!(A.singuloCanEat()))
+	if(!A.simulated)
 		return 0
 
 	if (istype(A, /mob/living) && length(global.endgame_safespawns))
@@ -58,7 +58,7 @@
 				continue
 
 			if (dist > consume_range)
-				if(!(AM.singuloCanEat()))
+				if(!A.simulated)
 					continue
 
 				if (101 == AM.invisibility)

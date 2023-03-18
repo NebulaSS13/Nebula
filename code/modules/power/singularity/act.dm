@@ -100,15 +100,3 @@
 
 /turf/space/singularity_act()
 	return
-
-/*******************
-* Nar-Sie Act/Pull *
-*******************/
-/atom/proc/singuloCanEat()
-	return 1
-
-/mob/observer/singuloCanEat()
-	return 0
-
-/mob/new_player/singuloCanEat()
-	return 0

@@ -70,9 +70,6 @@
 /atom/movable/openspace/singularity_pull()
 	return
 
-/atom/movable/openspace/singuloCanEat()
-	return
-
 // -- MULTIPLIER / SHADOWER --
 
 // Holder object used for dimming openspaces & copying lighting of below turf.

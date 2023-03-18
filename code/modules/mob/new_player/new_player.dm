@@ -2,6 +2,7 @@
 	universal_speak = TRUE
 	mob_sort_value = 10
 	invisibility = 101
+	simulated = FALSE
 
 	density = 0
 	stat = DEAD

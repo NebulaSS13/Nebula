@@ -403,6 +403,3 @@
 
 /atom/movable/z_observer/singularity_pull()
 	return
-
-/atom/movable/z_observer/singuloCanEat()
-	return
