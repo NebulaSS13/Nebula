@@ -27,14 +27,14 @@
 			SET_STATUS_MAX(src, STAT_WEAK, current_size)
 	..()
 
-/obj/singularity_act()
+/obj/effect/singularity_act()
 	if(simulated)
 		explosion_act(1)
 		if(!QDELETED(src))
 			qdel(src)
 		return 2
 
-/obj/singularity_pull(S, current_size)
+/obj/effect/singularity_pull(S, current_size)
 	if(simulated && !anchored)
 		step_towards(src, S)
 

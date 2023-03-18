@@ -167,7 +167,7 @@
 #define SPAN_MAROON(X)   SPAN_CLASS("font_maroon",   X)
 #define SPAN_PINK(X)     SPAN_CLASS("font_pink",     X)
 #define SPAN_PALEPINK(X) SPAN_CLASS("font_palepink", X)
-
+#define SPAN_SINISTER(X) SPAN_CLASS("sinister", X)
 // placeholders
 #define SPAN_GOOD(X)     SPAN_GREEN(X)
 #define SPAN_NEUTRAL(X)  SPAN_BLUE(X)

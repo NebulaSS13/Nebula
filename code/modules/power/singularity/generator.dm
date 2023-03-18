@@ -13,7 +13,7 @@
 	)
 
 	var/energy = 0
-	var/creation_type = /obj/singularity
+	var/creation_type = /obj/effect/singularity
 	var/is_activated = FALSE
 
 /obj/machinery/the_singularitygen/get_matter_amount_modifier()

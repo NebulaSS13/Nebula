@@ -30,12 +30,7 @@
 	else
 		dust()
 
-/mob/proc/see_narsie(var/obj/singularity/narsie/large/N, var/dir)
-	if(N.chained)
-		if(narsimage)
-			qdel(narsimage)
-			qdel(narglow)
-		return
+/mob/proc/see_narsie(var/obj/effect/narsie/N, var/dir)
 	if((N.z == src.z)&&(get_dist(N,src) <= (N.consume_range+10)) && !(N in view(src)))
 		if(!narsimage) //Create narsimage
 			narsimage = image('icons/obj/narsie.dmi',src.loc,"narsie",9,1)
