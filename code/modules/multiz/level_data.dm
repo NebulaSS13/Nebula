@@ -447,35 +447,35 @@
 ////////////////////////////////////////////
 
 /// Mapper helper for spawning a specific level_data datum with the map as it gets loaded
-/obj/abstract/landmark/level_data_spawner
+/obj/abstract/level_data_spawner
 	name = "space"
-	delete_me = TRUE
 	var/level_data_type = /datum/level_data/space
 
-INITIALIZE_IMMEDIATE(/obj/abstract/landmark/level_data_spawner)
-/obj/abstract/landmark/level_data_spawner/Initialize()
+INITIALIZE_IMMEDIATE(/obj/abstract/level_data_spawner)
+/obj/abstract/level_data_spawner/Initialize()
 	var/datum/level_data/LD = new level_data_type(z)
 	//Let the mapper forward a level name for the level_data, if none was defined
 	if(!length(LD.name) && length(name))
 		LD.name = name
-	. = ..()
+	..()
+	return INITIALIZE_HINT_QDEL
 
 ////////////////////////////////////////////
 // Mapper Templates
 ////////////////////////////////////////////
-/obj/abstract/landmark/level_data_spawner/player
+/obj/abstract/level_data_spawner/player
 	level_data_type = /datum/level_data/player_level
 
-/obj/abstract/landmark/level_data_spawner/main_level
+/obj/abstract/level_data_spawner/main_level
 	level_data_type = /datum/level_data/main_level
 
-/obj/abstract/landmark/level_data_spawner/admin_level
+/obj/abstract/level_data_spawner/admin_level
 	level_data_type = /datum/level_data/admin_level
 
-/obj/abstract/landmark/level_data_spawner/debug
+/obj/abstract/level_data_spawner/debug
 	level_data_type = /datum/level_data/debug
 
-/obj/abstract/landmark/level_data_spawner/mining_level
+/obj/abstract/level_data_spawner/mining_level
 	level_data_type = /datum/level_data/mining_level
 
 
