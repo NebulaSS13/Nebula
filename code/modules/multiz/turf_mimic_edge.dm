@@ -313,6 +313,8 @@
 	. = ..()
 	if(!AM.simulated || AM.anchored || istype(AM, /obj/effect/overlay))
 		return
+	if(istype(AM, /obj/effect/projectile)) //#FIXME: Once we support projectiles going through levels properly remove this
+		return
 	shared_transition_edge_bumped(src, AM, mimic_z)
 
 /turf/unsimulated/mimic_edge/transition/setup_mimic()
@@ -322,6 +324,8 @@
 	. = ..()
 	if(!AM.simulated || AM.anchored || istype(AM, /obj/effect/overlay))
 		return
+	if(istype(AM, /obj/effect/projectile)) //#FIXME: Once we support projectiles going through levels properly remove this
+		return
 	shared_transition_edge_bumped(src, AM, mimic_z)
 
 /turf/exterior/mimic_edge/transition/setup_mimic()
@@ -330,6 +334,8 @@
 /turf/exterior/mimic_edge/transition/Entered(atom/movable/AM, atom/old_loc)
 	. = ..()
 	if(!AM.simulated || AM.anchored || istype(AM, /obj/effect/overlay))
+		return
+	if(istype(AM, /obj/effect/projectile)) //#FIXME: Once we support projectiles going through levels properly remove this
 		return
 	shared_transition_edge_bumped(src, AM, mimic_z)
 
