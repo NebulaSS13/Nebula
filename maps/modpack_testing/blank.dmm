@@ -13,7 +13,7 @@
 /turf/simulated/floor/tiled,
 /area/space)
 "R" = (
-/obj/abstract/landmark/level_data_spawner/player,
+/obj/abstract/level_data_spawner/player,
 /turf/space,
 /area/space)
 

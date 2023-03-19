@@ -6280,7 +6280,7 @@
 /turf/simulated/floor/tiled,
 /area/liberia/hallway)
 "oJ" = (
-/obj/abstract/landmark/level_data_spawner/player{
+/obj/abstract/level_data_spawner/player{
 	name = "Liberia";
 },
 /turf/space,
