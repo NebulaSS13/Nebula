@@ -639,8 +639,7 @@
 	if(istype(new_bodytype) && bodytype != new_bodytype)
 		bodytype = new_bodytype
 		if(bodytype && rebuild_body)
-			force_update_limbs()
-			update_body()
+			UpdateAppearance() // force_update_limbs is insufficient because of internal organs
 
 //set_species should not handle the entirety of initing the mob, and should not trigger deep updates
 //It focuses on setting up species-related data, without force applying them uppon organs and the mob's appearance.
