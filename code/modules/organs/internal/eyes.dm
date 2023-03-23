@@ -41,13 +41,15 @@
 
 /obj/item/organ/internal/eyes/proc/get_eye_cache_key()
 	last_cached_eye_colour = eye_colour
-	last_eye_cache_key = "[type]-[eye_icon]-[last_cached_eye_colour]"
+	last_eye_cache_key = "[type]-[eye_icon]-[last_cached_eye_colour]-[bodytype.eye_offset]"
 	return last_eye_cache_key
 
 /obj/item/organ/internal/eyes/proc/get_onhead_icon()
 	var/cache_key = get_eye_cache_key()
 	if(!human_icon_cache[cache_key])
 		var/icon/eyes_icon = icon(icon = eye_icon, icon_state = "")
+		if(bodytype.eye_offset)
+			eyes_icon.Shift(NORTH, bodytype.eye_offset)
 		if(apply_eye_colour)
 			eyes_icon.Blend(last_cached_eye_colour, eye_blend)
 		human_icon_cache[cache_key] = eyes_icon
