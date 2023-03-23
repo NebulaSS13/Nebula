@@ -29,8 +29,8 @@ General Public License version 3.
 
 
 <h3 id="modules">Modules
-<aside>(154 modules,
-    49/4223 macros, 1.2%)</aside></h3>
+<aside>(157 modules,
+    55/4229 macros, 1.3%)</aside></h3>
 <ul class="index-tree modules">
     <li><a href="(builtins).html" title="(builtins)">(builtins)</a></li>
     <li class="has-children"><span title="code">code</span><ul class="index-tree">
@@ -44,6 +44,7 @@ General Public License version 3.
     <li><a href="code/__defines/gamemode.html" title="code&#x2F;__defines&#x2F;gamemode">gamemode</a></li>
     <li><a href="code/__defines/lists.html" title="code&#x2F;__defines&#x2F;lists">lists</a></li>
     <li><a href="code/__defines/mapping.html" title="code&#x2F;__defines&#x2F;mapping">mapping</a></li>
+    <li><a href="code/__defines/misc.html" title="code&#x2F;__defines&#x2F;misc">misc</a></li>
     <li><a href="code/__defines/zmimic.html" title="code&#x2F;__defines&#x2F;zmimic">zmimic</a></li>
     </ul></li>
     <li><span class="no-substance">_global_vars&#x2F;lists&#x2F;</span><a href="code/_global_vars/lists/objects.html" title="code&#x2F;_global_vars&#x2F;lists&#x2F;objects">objects</a></li>
@@ -198,6 +199,10 @@ Thanks to forum_account for saving the day, the library can be found
     <li><span class="no-substance">observer&#x2F;virtual&#x2F;</span><a href="code/modules/mob/observer/virtual/helpers.html" title="code&#x2F;modules&#x2F;mob&#x2F;observer&#x2F;virtual&#x2F;helpers">helpers</a></li>
     <li><span class="no-substance">skills&#x2F;</span><a href="code/modules/mob/skills/README_skills.html" title="code&#x2F;modules&#x2F;mob&#x2F;skills&#x2F;README_skills">README_skills</a></li>
     </ul></li>
+    <li class="has-children"><span title="code&#x2F;modules&#x2F;multiz">multiz</span><ul class="index-tree">
+    <li><a href="code/modules/multiz/level_data.html" title="code&#x2F;modules&#x2F;multiz&#x2F;level_data">level_data</a></li>
+    <li><a href="code/modules/multiz/turf_mimic_edge.html" title="code&#x2F;modules&#x2F;multiz&#x2F;turf_mimic_edge">turf_mimic_edge</a></li>
+    </ul></li>
     <li><span class="no-substance">nano&#x2F;</span><a href="code/modules/nano/nanoui.html" title="code&#x2F;modules&#x2F;nano&#x2F;nanoui">nanoui</a></li>
     <li class="has-children"><span title="code&#x2F;modules&#x2F;organs">organs</span><ul class="index-tree">
     <li class="has-children"><span title="code&#x2F;modules&#x2F;organs&#x2F;external">external</span><ul class="index-tree">
@@ -276,7 +281,7 @@ Thanks to forum_account for saving the day, the library can be found
 
 
 <h3 id="types">Types
-<aside>(140 detailed/330 documented/18053 total, 1.8%)</aside></h3>
+<aside>(145 detailed/337 documented/18069 total, 1.9%)</aside></h3>
 <ul class="index-tree">
     <li><a href="global.html" title="(global)">(global)</a></li>
     <li><a href="area.html" title="&#x2F;area">area</a></li>
@@ -371,6 +376,7 @@ Variable model is one full map line (e.g /turf/unsimulated/wall{icon_state = &qu
     <li><a href="datum/item_unit_test.html" title="&#x2F;datum&#x2F;item_unit_test">item_unit_test</a></li>
     <li><a href="datum/job.html" title="&#x2F;datum&#x2F;job">job</a></li>
     <li><a href="datum/keybinding.html" title="&#x2F;datum&#x2F;keybinding">keybinding</a></li>
+    <li><a href="datum/level_data.html" title="&#x2F;datum&#x2F;level_data">level_data</a> - Keeps details on how to generate, maintain and access a zlevel.</li>
     <li><a href="datum/map.html" title="&#x2F;datum&#x2F;map">map</a></li>
     <li><span class="no-substance" title="&#x2F;datum&#x2F;memory">memory</span> - Memories</li>
     <li><span class="no-substance" title="&#x2F;datum&#x2F;mil_branch">mil_branch</span> - A single military branch, such as Fleet or Marines</li>
@@ -544,7 +550,7 @@ Parameters: var/obj/item/card/id</li>
     <li class="has-children"><a href="obj.html" title="&#x2F;obj">obj</a><ul class="index-tree">
     <li class="has-children"><span title="&#x2F;obj&#x2F;abstract">abstract</span><ul class="index-tree">
     <li><span class="no-substance">landmark&#x2F;</span><span class="no-substance" title="&#x2F;obj&#x2F;abstract&#x2F;landmark&#x2F;allowed_leak">allowed_leak</span> - Used to tell pipe leak unit tests that a leak is intentional. Placed over the pipe that leaks, not the tile missing a pipe.</li>
-    <li><a href="obj/abstract/level_data.html" title="&#x2F;obj&#x2F;abstract&#x2F;level_data">level_data</a></li>
+    <li><span class="no-substance" title="&#x2F;obj&#x2F;abstract&#x2F;level_data_spawner">level_data_spawner</span> - Mapper helper for spawning a specific level_data datum with the map as it gets loaded</li>
     <li><a href="obj/abstract/map_data.html" title="&#x2F;obj&#x2F;abstract&#x2F;map_data">map_data</a></li>
     </ul></li>
     <li><a href="obj/compass_holder.html" title="&#x2F;obj&#x2F;compass_holder">compass_holder</a></li>
@@ -552,6 +558,7 @@ Parameters: var/obj/item/card/id</li>
     <li><span class="no-substance">decal&#x2F;cleanable&#x2F;blood&#x2F;</span><a href="obj/effect/decal/cleanable/blood/tracks.html" title="&#x2F;obj&#x2F;effect&#x2F;decal&#x2F;cleanable&#x2F;blood&#x2F;tracks">tracks</a></li>
     <li><span class="no-substance">effect&#x2F;</span><span class="no-substance" title="&#x2F;obj&#x2F;effect&#x2F;effect&#x2F;smoke">smoke</span> - SMOKE SYSTEMS</li>
     <li><a href="obj/effect/fusion_em_field.html" title="&#x2F;obj&#x2F;effect&#x2F;fusion_em_field">fusion_em_field</a></li>
+    <li><span class="no-substance">overlay&#x2F;</span><span class="no-substance" title="&#x2F;obj&#x2F;effect&#x2F;overlay&#x2F;click_bait">click_bait</span> - Dummy mouse-opaque overlay to prevent people turning/shooting towards ACTUAL location of vis_content thing</li>
     <li class="has-children"><span class="no-substance">overmap&#x2F;</span><a href="obj/effect/overmap/visitable.html" title="&#x2F;obj&#x2F;effect&#x2F;overmap&#x2F;visitable">visitable</a><ul class="index-tree">
     <li><a href="obj/effect/overmap/visitable/ship.html" title="&#x2F;obj&#x2F;effect&#x2F;overmap&#x2F;visitable&#x2F;ship">ship</a></li>
     </ul></li>
@@ -761,10 +768,17 @@ As with material, these stacks should only set this in Initialize as they are ab
     <li><span class="no-substance">aoe_turf&#x2F;conjure&#x2F;</span><span class="no-substance" title="&#x2F;spell&#x2F;aoe_turf&#x2F;conjure&#x2F;construct">construct</span> - Construct Spells</li>
     </ul></li>
     <li class="has-children"><a href="turf.html" title="&#x2F;turf">turf</a><ul class="index-tree">
+    <li><span class="no-substance">exterior&#x2F;</span><a href="turf/exterior/mimic_edge.html" title="&#x2F;turf&#x2F;exterior&#x2F;mimic_edge">mimic_edge</a> - Exterior turf meant to replicate the appearence of another.</li>
     <li class="has-children"><a href="turf/simulated.html" title="&#x2F;turf&#x2F;simulated">simulated</a><ul class="index-tree">
     <li><span class="no-substance">floor&#x2F;</span><span class="no-substance" title="&#x2F;turf&#x2F;simulated&#x2F;floor&#x2F;asteroid">asteroid</span> - Asteroid</li>
+    <li class="has-children"><a href="turf/simulated/mimic_edge.html" title="&#x2F;turf&#x2F;simulated&#x2F;mimic_edge">mimic_edge</a> - Simulated turf meant to replicate the appearence of another.<ul class="index-tree">
+    <li class="has-children"><a href="turf/simulated/mimic_edge/transition.html" title="&#x2F;turf&#x2F;simulated&#x2F;mimic_edge&#x2F;transition">transition</a><ul class="index-tree">
+    <li><a href="turf/simulated/mimic_edge/transition/loop.html" title="&#x2F;turf&#x2F;simulated&#x2F;mimic_edge&#x2F;transition&#x2F;loop">loop</a></li>
+    </ul></li>
+    </ul></li>
     </ul></li>
     <li><a href="turf/space.html" title="&#x2F;turf&#x2F;space">space</a></li>
+    <li><span class="no-substance">unsimulated&#x2F;</span><a href="turf/unsimulated/mimic_edge.html" title="&#x2F;turf&#x2F;unsimulated&#x2F;mimic_edge">mimic_edge</a> - Unsimulated turf meant to replicate the appearence of another.</li>
     </ul></li>
     </ul>
 
@@ -772,7 +786,7 @@ As with material, these stacks should only set this in Initialize as they are ab
 </main>
 <footer>
     nebula.dme
-    <a href="https://github.com/NebulaSS13/Nebula/tree/803123f108f21d172a8e439d76a4fc7c28593c7a">803123f</a>
+    <a href="https://github.com/NebulaSS13/Nebula/tree/e3b3d1f167521be5ba21d2e01935e840626f958a">e3b3d1f</a>
         (dev) &mdash; <a href="https://github.com/SpaceManiac/SpacemanDMM/blob/master/src/dmdoc/README.md">dmdoc 1.4.1</a></footer>
 </body>
 </html>
