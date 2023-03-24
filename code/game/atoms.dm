@@ -557,7 +557,7 @@
 	return list()
 
 /atom/proc/singularity_act()
-	return
+	return 0
 
 /atom/proc/singularity_pull(S, current_size)
 	return

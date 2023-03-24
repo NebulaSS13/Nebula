@@ -146,12 +146,6 @@
 	SHOULD_CALL_PARENT(FALSE)
 	return
 
-/atom/movable/lighting_overlay/singularity_act()
-	return
-
-/atom/movable/lighting_overlay/singularity_pull()
-	return
-
 /atom/movable/lighting_overlay/can_fall()
 	return FALSE
 

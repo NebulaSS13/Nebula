@@ -204,7 +204,7 @@
 /obj/structure/inflatable/door/CanPass(atom/movable/mover, turf/target, height=0, air_group=0)
 	if(air_group)
 		return state
-	if(istype(mover, /obj/effect/beam))
+	if(istype(mover, /obj/effect/ir_beam))
 		return !opacity
 	return !density
 
@@ -300,6 +300,6 @@
 
 /obj/item/storage/briefcase/inflatable/WillContain()
 	return list(
-			/obj/item/inflatable/door = 2, 
+			/obj/item/inflatable/door = 2,
 			/obj/item/inflatable      = 3
 		)

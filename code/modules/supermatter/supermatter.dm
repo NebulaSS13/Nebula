@@ -674,6 +674,20 @@ var/global/list/supermatter_delam_accent_sounds = list(
 		power *= max(1, 5 - severity)
 		log_and_message_admins("WARN: Explosion near the Supermatter! New EER: [power].")
 
+/obj/machinery/power/supermatter/singularity_act()
+	if(!src.loc)
+		return
+
+	var/prints = ""
+	if(src.fingerprintshidden)
+		prints = ", all touchers : " + src.fingerprintshidden
+
+	SetUniversalState(/datum/universal_state/supermatter_cascade)
+	log_and_message_admins("New super singularity made by eating a SM crystal [prints]. Last touched by [src.fingerprintslast].")
+	src.forceMove(null)
+	qdel(src)
+	return 50000
+
 /obj/machinery/power/supermatter/get_artifact_scan_data()
 	return "Superdense crystalline structure - appears to have been shaped or hewn, lattice is approximately 20 times denser than should be possible."
 
@@ -697,6 +711,11 @@ var/global/list/supermatter_delam_accent_sounds = list(
 
 /obj/machinery/power/supermatter/shard/announce_warning() //Shards don't get announcements
 	return
+
+/obj/machinery/power/supermatter/shard/singularity_act()
+	src.forceMove(null)
+	qdel(src)
+	return 5000
 
 #undef LIGHT_POWER_CALC
 #undef DETONATION_MOB_CONCUSSION

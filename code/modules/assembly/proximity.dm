@@ -43,7 +43,7 @@
 
 /obj/item/assembly/prox_sensor/HasProximity(atom/movable/AM)
 	. = ..()
-	if(. && !istype(AM, /obj/effect/beam) && AM.move_speed < 12)
+	if(. && !istype(AM, /obj/effect/ir_beam) && AM.move_speed < 12)
 		sense()
 
 /obj/item/assembly/prox_sensor/sense()

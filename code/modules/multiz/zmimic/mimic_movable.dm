@@ -64,12 +64,6 @@
 	SHOULD_CALL_PARENT(FALSE)
 	return
 
-/atom/movable/openspace/singularity_act()
-	return
-
-/atom/movable/openspace/singularity_pull()
-	return
-
 // -- MULTIPLIER / SHADOWER --
 
 // Holder object used for dimming openspaces & copying lighting of below turf.

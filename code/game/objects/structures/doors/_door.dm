@@ -138,7 +138,7 @@
 /obj/structure/door/CanPass(atom/movable/mover, turf/target, height=0, air_group=0)
 	if(air_group)
 		return !density
-	if(istype(mover, /obj/effect/beam))
+	if(istype(mover, /obj/effect/ir_beam))
 		return !opacity
 	return !density
 
