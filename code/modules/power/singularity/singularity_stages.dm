@@ -35,6 +35,15 @@
 	/// Will we wander around?
 	var/wander
 
+/decl/singularity_stage/validate()
+	. = ..()
+	if(consume_range < 0)
+		. += "negative consume_range"
+	if(grav_pull < 0)
+		. += "negative grav_pull"
+	if(grav_pull >= 0 && consume_range >= 0 && grav_pull < consume_range)
+		. += "grav_pull is smaller than consume_range; consume_range will be truncated"
+
 /decl/singularity_stage/proc/handle_dissipation(obj/effect/singularity/source)
 	if(dissipates_over_time)
 		if(ticks_since_last_dissipation >= ticks_between_dissipations)

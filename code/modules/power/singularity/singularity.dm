@@ -14,11 +14,10 @@ var/global/list/singularities = list()
 
 	/// A list of events. Toxins is in here twice to double the chance of proccing.
 	var/static/list/singularity_events = list(
-		/decl/singularity_event/empulse,
-		/decl/singularity_event/toxins,
-		/decl/singularity_event/toxins,
-		/decl/singularity_event/mesmerize,
-		/decl/singularity_event/nothing
+		/decl/singularity_event/empulse   = 1,
+		/decl/singularity_event/toxins    = 2,
+		/decl/singularity_event/mesmerize = 1,
+		/decl/singularity_event/nothing   = 1
 	)
 
 	/// When did we last emit a warning about a containment failure?
@@ -34,11 +33,11 @@ var/global/list/singularities = list()
 	/// Will not move in the same dir if it couldnt before, will help with the getting stuck on fields thing.
 	var/last_failed_movement = 0
 	/// How many atoms can we pull in a single tick?
-	var/const/max_atoms_consumed_per_tick = 100
+	var/const/max_atoms_assessed_per_tick = 1000
 
 /obj/effect/singularity/Initialize(mapload, var/starting_energy = 50, var/temp = 0)
 	. = ..(mapload)
-	var/found_containment = locate(/obj/machinery/containment_field) in orange(30, src)
+	var/found_containment = locate(/obj/effect/containment_field) in orange(30, src)
 	if(!found_containment)
 		last_warning = world.time
 		message_admins("A singulo has been created without containment fields active ([x], [y], [z] - <A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[x];Y=[y];Z=[z]'>JMP</a>).")
@@ -82,12 +81,12 @@ var/global/list/singularities = list()
 		if(consuming == src)
 			continue
 		var/dist = get_dist(consuming, src)
-		if(dist > current_stage.consume_range)
-			consuming.singularity_pull(src, current_stage.stage_size)
-		else if(dist <= current_stage.consume_range)
+		if(dist <= current_stage.consume_range)
 			consume(consuming)
+		else
+			consuming.singularity_pull(src, current_stage.stage_size)
 		consumed++
-		if(consumed >= max_atoms_consumed_per_tick || TICK_CHECK)
+		if(consumed >= max_atoms_assessed_per_tick || TICK_CHECK)
 			break
 
 	// Check if we should be shrinking this tick, and apply it if we should.
@@ -116,7 +115,7 @@ var/global/list/singularities = list()
 		var/movement_dir
 		if(target && prob(60))
 			movement_dir = get_dir(src, target) //moves to a singulo beacon, if there is one
-		else if(prob(16))
+		else if(prob(16) && !(locate(/obj/effect/containment_field) in orange(7, src)))
 			var/list/available_vertical_moves = list()
 			if(GetAbove(src))
 				available_vertical_moves += UP
@@ -142,7 +141,7 @@ var/global/list/singularities = list()
 		if(current_stage.stage_size >= STAGE_SUPER)
 			var/decl/singularity_event/wave_event = GET_DECL(/decl/singularity_event/supermatter_wave)
 			wave_event.handle_event(src)
-		var/decl/singularity_event/singularity_event = pick(singularity_events)
+		var/decl/singularity_event/singularity_event = pickweight(singularity_events)
 		singularity_event = GET_DECL(singularity_event)
 		singularity_event.handle_event(src)
 
@@ -164,15 +163,14 @@ var/global/list/singularities = list()
 		investigate_log("collapsed.", I_SINGULO)
 		qdel(src)
 		return FALSE
+
+	. = TRUE
 	var/list/singulo_stages = decls_repository.get_decls_of_subtype(/decl/singularity_stage)
 	for(var/stage_type in singulo_stages)
 		var/decl/singularity_stage/stage = singulo_stages[stage_type]
-		if(stage == current_stage)
-			continue
-		if(energy >= stage.min_energy && energy < stage.max_energy && stage.has_expansion_room(src))
+		if(stage != current_stage && energy >= stage.min_energy && energy < stage.max_energy && stage.has_expansion_room(src))
 			set_stage(stage)
-			return TRUE
-	return FALSE
+			return
 
 /obj/effect/singularity/proc/set_stage(decl/singularity_stage/next_stage)
 	if(!next_stage || next_stage == current_stage)
@@ -234,7 +232,7 @@ var/global/list/singularities = list()
 	if (!isturf(T))
 		return 0
 
-	if ((locate(/obj/machinery/containment_field) in T) || (locate(/obj/machinery/shieldwall) in T))
+	if ((locate(/obj/effect/containment_field) in T) || (locate(/obj/machinery/shieldwall) in T))
 		return 0
 	else if (locate(/obj/machinery/field_generator) in T)
 		var/obj/machinery/field_generator/G = locate(/obj/machinery/field_generator) in T
