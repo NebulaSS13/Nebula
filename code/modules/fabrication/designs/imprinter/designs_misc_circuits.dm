@@ -499,3 +499,6 @@
 
 /datum/fabricator_recipe/imprinter/circuit/holomap
 	path = /obj/item/stock_parts/circuitboard/holomap
+
+/datum/fabricator_recipe/imprinter/circuit/geothermal_generator
+	path = /obj/item/stock_parts/circuitboard/geothermal
