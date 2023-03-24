@@ -86,7 +86,7 @@ var/global/list/singularity_beacons = list()
 	name = "ominous beacon"
 	desc = "This looks suspicious..."
 	icon = 'icons/obj/singularity.dmi'
-	icon_state = "beacon"
+	icon_state = "beaconsynd"
 
 	uncreated_component_parts = list(/obj/item/stock_parts/power/terminal)
 	anchored = 0
@@ -94,8 +94,6 @@ var/global/list/singularity_beacons = list()
 	layer = BASE_ABOVE_OBJ_LAYER //so people can't hide it and it's REALLY OBVIOUS
 	stat = 0
 	use_power = POWER_USE_OFF
-
-	var/icontype = "beacon"
 
 /obj/machinery/singularity_beacon/Initialize()
 	. = ..()
@@ -111,7 +109,7 @@ var/global/list/singularity_beacons = list()
 	for(var/obj/effect/singularity/singulo in global.singularities)
 		if(singulo.z == z)
 			singulo.target = src
-	icon_state = "[icontype]1"
+	icon_state = "[initial(icon_state)]1"
 	update_use_power(POWER_USE_ACTIVE)
 	if(user)
 		to_chat(user, "<span class='notice'>You activate the beacon.</span>")
@@ -120,7 +118,7 @@ var/global/list/singularity_beacons = list()
 	for(var/obj/effect/singularity/singulo in global.singularities)
 		if(singulo.target == src)
 			singulo.target = null
-	icon_state = "[icontype]0"
+	icon_state = "[initial(icon_state)]0"
 	update_use_power(POWER_USE_OFF)
 	if(user)
 		to_chat(user, "<span class='notice'>You deactivate the beacon.</span>")
@@ -165,6 +163,3 @@ var/global/list/singularity_beacons = list()
 	if(stat & NOPOWER)
 		Deactivate()
 
-/obj/machinery/singularity_beacon/syndicate
-	icontype = "beaconsynd"
-	icon_state = "beaconsynd0"

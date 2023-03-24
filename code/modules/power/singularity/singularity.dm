@@ -11,7 +11,8 @@ var/global/list/singularities = list()
 	light_power = 1
 	light_range = 6
 	is_spawnable_type = FALSE // No...
-
+	/// Category used for investigation entries relating to this atom.
+	var/const/investigation_label = "singulo"
 	/// A list of events. Toxins is in here twice to double the chance of proccing.
 	var/static/list/singularity_events = list(
 		/decl/singularity_event/empulse   = 1,
@@ -41,7 +42,7 @@ var/global/list/singularities = list()
 	if(!found_containment)
 		last_warning = world.time
 		message_admins("A singulo has been created without containment fields active ([x], [y], [z] - <A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[x];Y=[y];Z=[z]'>JMP</a>).")
-	investigate_log("was created. [found_containment ? "" : "<font color='red'>No containment fields were active.</font>"]", I_SINGULO)
+	investigate_log("was created. [found_containment ? "" : "<font color='red'>No containment fields were active.</font>"]", investigation_label)
 	current_stage = GET_DECL(/decl/singularity_stage/stage_one)
 	energy = starting_energy
 	global.singularities += src
@@ -63,7 +64,7 @@ var/global/list/singularities = list()
 		return
 	if(severity == 1)
 		if(prob(25))
-			investigate_log("has been destroyed by an explosion.", I_SINGULO)
+			investigate_log("has been destroyed by an explosion.", investigation_label)
 			qdel(src)
 		else
 			energy += 50
@@ -97,24 +98,34 @@ var/global/list/singularities = list()
 		return // Just hangs out for now.
 
 	// Refresh our beacon target, if needed.
+	var/obj/machinery/singularity_beacon/target_beacon
 	if(length(global.singularity_beacons))
 		if(target)
-			var/obj/machinery/singularity_beacon/singubeacon = target.resolve()
-			if(!istype(singubeacon) || singubeacon.use_power != POWER_USE_ACTIVE)
+			target_beacon = target.resolve()
+			if(!istype(target_beacon) || target_beacon.use_power != POWER_USE_ACTIVE)
+				target_beacon = null
 				target = null
 		if(!target)
 			for(var/obj/machinery/singularity_beacon/singubeacon as anything in global.singularity_beacons)
 				if(singubeacon.use_power == POWER_USE_ACTIVE)
+					target_beacon = singubeacon
 					target = weakref(singubeacon)
+					break
 
 	// Move randomly towards our target, or in a random direction.
 	if(move_self)
 
 		// Get a direction to move.
-		var/single_step_only = FALSE
 		var/movement_dir
-		if(target && prob(60))
-			movement_dir = get_dir(src, target) //moves to a singulo beacon, if there is one
+		if(target_beacon && prob(60))
+			//moves to a singulo beacon, if there is one
+			if(target_beacon.z == z)
+				movement_dir = get_dir(src, target_beacon)
+			else if(target_beacon.z > z && GetAbove(src))
+				movement_dir = UP
+			else if(target_beacon.z < z && GetBelow(src))
+				movement_dir = DOWN
+
 		else if(prob(16) && !(locate(/obj/effect/containment_field) in orange(7, src)))
 			var/list/available_vertical_moves = list()
 			if(GetAbove(src))
@@ -122,13 +133,12 @@ var/global/list/singularities = list()
 			if(GetBelow(src))
 				available_vertical_moves += DOWN
 			if(length(available_vertical_moves))
-				single_step_only = TRUE // Moving multiple vertical steps is risky.
 				movement_dir = pick(available_vertical_moves)
 		if(!movement_dir || movement_dir == last_failed_movement)
 			movement_dir = pick(global.alldirs - last_failed_movement)
 
 		// Try to move in it.
-		if(!try_move(movement_dir, single_step_only))
+		if(!try_move(movement_dir, (movement_dir == UP || movement_dir == DOWN)))
 			last_failed_movement = movement_dir
 
 	// Feed any nearby rad collectors.
@@ -145,13 +155,14 @@ var/global/list/singularities = list()
 		singularity_event = GET_DECL(singularity_event)
 		singularity_event.handle_event(src)
 
-/obj/effect/singularity/proc/try_move(var/movement_dir, var/single_step_only)
+/obj/effect/singularity/proc/try_move(var/movement_dir, var/vertical_move)
 	set waitfor = FALSE
 	if(current_stage.stage_size >= STAGE_FIVE)//The superlarge one does not care about things in its way
 		step(src, movement_dir)
-		if(!single_step_only)
+		if(!vertical_move)
 			sleep(1)
-			step(src, movement_dir)
+			if(!QDELETED(src))
+				step(src, movement_dir)
 	else if(check_turfs_in(movement_dir))
 		last_failed_movement = 0 // Reset this because we moved
 		step(src, movement_dir)
@@ -160,7 +171,7 @@ var/global/list/singularities = list()
 
 /obj/effect/singularity/proc/check_energy()
 	if (energy <= 0)
-		investigate_log("collapsed.", I_SINGULO)
+		investigate_log("collapsed.", investigation_label)
 		qdel(src)
 		return FALSE
 
@@ -177,10 +188,10 @@ var/global/list/singularities = list()
 		return FALSE
 	if(next_stage.stage_size < current_stage.stage_size)
 		next_stage.shrink_to(src)
-		investigate_log("<font color='red'>shrank to size [next_stage.stage_size].</font>", I_SINGULO)
+		investigate_log("<font color='red'>shrank to size [next_stage.stage_size].</font>", investigation_label)
 	else if(next_stage.stage_size > current_stage.stage_size)
 		next_stage.grow_to(src)
-		investigate_log("<font color='red'>grew to size [next_stage.stage_size].</font>", I_SINGULO)
+		investigate_log("<font color='red'>grew to size [next_stage.stage_size].</font>", investigation_label)
 	current_stage = next_stage
 	update_icon()
 	update_strings()

@@ -555,3 +555,9 @@
 /atom/proc/get_alt_interactions(var/mob/user)
 	SHOULD_CALL_PARENT(TRUE)
 	return list()
+
+/atom/proc/singularity_act()
+	return
+
+/atom/proc/singularity_pull(S, current_size)
+	return
