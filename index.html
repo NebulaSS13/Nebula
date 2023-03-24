@@ -29,7 +29,7 @@ General Public License version 3.
 
 
 <h3 id="modules">Modules
-<aside>(157 modules,
+<aside>(158 modules,
     55/4229 macros, 1.3%)</aside></h3>
 <ul class="index-tree modules">
     <li><a href="(builtins).html" title="(builtins)">(builtins)</a></li>
@@ -221,7 +221,10 @@ Thanks to forum_account for saving the day, the library can be found
     <li><a href="code/modules/paperwork/photography.html" title="code&#x2F;modules&#x2F;paperwork&#x2F;photography">photography</a></li>
     <li><a href="code/modules/paperwork/silicon_photography.html" title="code&#x2F;modules&#x2F;paperwork&#x2F;silicon_photography">silicon_photography</a></li>
     </ul></li>
-    <li><span class="no-substance">power&#x2F;singularity&#x2F;</span><a href="code/modules/power/singularity/generator.html" title="code&#x2F;modules&#x2F;power&#x2F;singularity&#x2F;generator">generator</a></li>
+    <li class="has-children"><span title="code&#x2F;modules&#x2F;power">power</span><ul class="index-tree">
+    <li><span class="no-substance">geothermal&#x2F;</span><a href="code/modules/power/geothermal/_geothermal.html" title="code&#x2F;modules&#x2F;power&#x2F;geothermal&#x2F;_geothermal">_geothermal</a></li>
+    <li><span class="no-substance">singularity&#x2F;</span><a href="code/modules/power/singularity/generator.html" title="code&#x2F;modules&#x2F;power&#x2F;singularity&#x2F;generator">generator</a></li>
+    </ul></li>
     <li class="has-children"><span title="code&#x2F;modules&#x2F;reagents">reagents</span><ul class="index-tree">
     <li><span class="no-substance">dispenser&#x2F;</span><a href="code/modules/reagents/dispenser/cartridge_presets.html" title="code&#x2F;modules&#x2F;reagents&#x2F;dispenser&#x2F;cartridge_presets">cartridge_presets</a></li>
     <li class="has-children"><a href="code/modules/reagents/reagent_containers.html" title="code&#x2F;modules&#x2F;reagents&#x2F;reagent_containers">reagent_containers</a><ul class="index-tree">
@@ -281,7 +284,7 @@ Thanks to forum_account for saving the day, the library can be found
 
 
 <h3 id="types">Types
-<aside>(145 detailed/337 documented/18069 total, 1.9%)</aside></h3>
+<aside>(147 detailed/340 documented/18072 total, 1.9%)</aside></h3>
 <ul class="index-tree">
     <li><a href="global.html" title="(global)">(global)</a></li>
     <li><a href="area.html" title="&#x2F;area">area</a></li>
@@ -558,6 +561,7 @@ Parameters: var/obj/item/card/id</li>
     <li><span class="no-substance">decal&#x2F;cleanable&#x2F;blood&#x2F;</span><a href="obj/effect/decal/cleanable/blood/tracks.html" title="&#x2F;obj&#x2F;effect&#x2F;decal&#x2F;cleanable&#x2F;blood&#x2F;tracks">tracks</a></li>
     <li><span class="no-substance">effect&#x2F;</span><span class="no-substance" title="&#x2F;obj&#x2F;effect&#x2F;effect&#x2F;smoke">smoke</span> - SMOKE SYSTEMS</li>
     <li><a href="obj/effect/fusion_em_field.html" title="&#x2F;obj&#x2F;effect&#x2F;fusion_em_field">fusion_em_field</a></li>
+    <li><a href="obj/effect/geyser.html" title="&#x2F;obj&#x2F;effect&#x2F;geyser">geyser</a> - A prop that periodically emit steam spouts and can have a geothermal generator placed on top to generate power.</li>
     <li><span class="no-substance">overlay&#x2F;</span><span class="no-substance" title="&#x2F;obj&#x2F;effect&#x2F;overlay&#x2F;click_bait">click_bait</span> - Dummy mouse-opaque overlay to prevent people turning/shooting towards ACTUAL location of vis_content thing</li>
     <li class="has-children"><span class="no-substance">overmap&#x2F;</span><a href="obj/effect/overmap/visitable.html" title="&#x2F;obj&#x2F;effect&#x2F;overmap&#x2F;visitable">visitable</a><ul class="index-tree">
     <li><a href="obj/effect/overmap/visitable/ship.html" title="&#x2F;obj&#x2F;effect&#x2F;overmap&#x2F;visitable&#x2F;ship">ship</a></li>
@@ -718,6 +722,7 @@ As with material, these stacks should only set this in Initialize as they are ab
     </ul></li>
     <li><a href="obj/machinery/faxmachine.html" title="&#x2F;obj&#x2F;machinery&#x2F;faxmachine">faxmachine</a></li>
     <li><span class="no-substance">gateway&#x2F;</span><span class="no-substance" title="&#x2F;obj&#x2F;machinery&#x2F;gateway&#x2F;centeraway">centeraway</span> - Away</li>
+    <li><a href="obj/machinery/geothermal.html" title="&#x2F;obj&#x2F;machinery&#x2F;geothermal">geothermal</a> - A power generator that can create power from being placed on top of a geyser.</li>
     <li><a href="obj/machinery/holomap.html" title="&#x2F;obj&#x2F;machinery&#x2F;holomap">holomap</a></li>
     <li><span class="no-substance" title="&#x2F;obj&#x2F;machinery&#x2F;holosign">holosign</span> - HOLOSIGN</li>
     <li><a href="obj/machinery/microwave.html" title="&#x2F;obj&#x2F;machinery&#x2F;microwave">microwave</a></li>
@@ -764,6 +769,7 @@ As with material, these stacks should only set this in Initialize as they are ab
     <li><a href="obj/structure/tape_barricade.html" title="&#x2F;obj&#x2F;structure&#x2F;tape_barricade">tape_barricade</a></li>
     </ul></li>
     </ul></li>
+    <li><span class="no-substance">particles&#x2F;</span><span class="no-substance" title="&#x2F;particles&#x2F;geyser_steam">geyser_steam</span> - Particle emitter that emits a ~64 pixels by ~192 pixels high column of steam while active.</li>
     <li class="has-children"><a href="spell.html" title="&#x2F;spell">spell</a><ul class="index-tree">
     <li><span class="no-substance">aoe_turf&#x2F;conjure&#x2F;</span><span class="no-substance" title="&#x2F;spell&#x2F;aoe_turf&#x2F;conjure&#x2F;construct">construct</span> - Construct Spells</li>
     </ul></li>
@@ -786,7 +792,7 @@ As with material, these stacks should only set this in Initialize as they are ab
 </main>
 <footer>
     nebula.dme
-    <a href="https://github.com/NebulaSS13/Nebula/tree/e3b3d1f167521be5ba21d2e01935e840626f958a">e3b3d1f</a>
+    <a href="https://github.com/NebulaSS13/Nebula/tree/7c27da59301f4bea1e3b79bf7bd4baddf756c54a">7c27da5</a>
         (dev) &mdash; <a href="https://github.com/SpaceManiac/SpacemanDMM/blob/master/src/dmdoc/README.md">dmdoc 1.4.1</a></footer>
 </body>
 </html>
