@@ -190,7 +190,7 @@ SUBSYSTEM_DEF(mapping)
 	level.initialize_new_level()
 	return level
 
-/datum/controller/subsystem/mapping/proc/get_connected_levels(z)
+/datum/controller/subsystem/mapping/proc/get_connected_levels(z, include_lateral = TRUE)
 	if(z <= 0  || z > length(levels_by_z))
 		CRASH("Invalid z-level supplied to get_connected_levels: [isnull(z) ? "NULL" : z]")
 	var/list/root_stack = list(z)

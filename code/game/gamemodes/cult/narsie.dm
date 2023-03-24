@@ -1,47 +1,145 @@
+// show_to() and hide_from() do not work, but I am leaving the committed and commented out
+// so if in the future some brave soul wants to implement always-visible NarNar without having
+// her get output to every single client every time the thing moves, they can do so.
+/*
+/mob/Login()
+	..()
+	for(var/obj/effect/narsie/narsie in global.narsie_list)
+		narsie.show_to(src)
+
+/obj/effect/narsie/proc/show_to(var/mob/M)
+	if(override_image && M.client)
+		M.client.images |= override_image
+
+/obj/effect/narsie/proc/hide_from(var/mob/M)
+	if(override_image && M.client)
+		M.client.images -= override_image
+*/
+
 var/global/narsie_cometh = 0
 var/global/list/narsie_list = list()
-/obj/effect/narsie //Moving narsie to its own file for the sake of being clearer
+
+/obj/effect/narsie_footstep
+	name = "mark of the Geometer"
+	desc = "something that goes beyond your understanding went this way"
+	icon = 'icons/turf/flooring/cult.dmi'
+	icon_state = "narsie_footstep"
+	light_color = COLOR_RED
+	light_range = 1
+	light_power = 1
+
+/obj/effect/narsie
 	name = "Nar-Sie"
 	desc = "Your mind begins to bubble and ooze as it tries to comprehend what it sees."
 	icon = 'icons/obj/narsie.dmi'
-	icon_state = "narsie"//mobs perceive the geometer of blood through their see_narsie proc
+	icon_state = "narsie"
 	pixel_x = -236
 	pixel_y = -256
-	is_spawnable_type = FALSE
-
-	var/mob/target
+	plane = ABOVE_LIGHTING_PLANE
+	layer = ABOVE_LIGHTING_LAYER
 	light_range = 1
 	light_color = "#3e0000"
 
+	//is_spawnable_type = FALSE
+
+	/// Our image to show to clients.
+	var/image/override_image
+	/// The current target we're pursuing.
+	var/mob/target
 	/// Are we going to move around? Set by admin and mappers.
 	var/move_self = TRUE
 	/// How many tiles out do we pull?
 	var/consume_pull = 10
 	/// How many tiles out do we eat
-	var/consume_range = 3
+	var/consume_range = 6
+	/// Sanity check for consuming.
+	var/max_atoms_assessed_per_tick = 100
 
 /obj/effect/narsie/Initialize()
 	. = ..()
 	global.narsie_list.Add(src)
+	START_PROCESSING(SSobj, src)
 	announce_narsie()
+	update_icon()
 
 /obj/effect/narsie/Destroy()
 	target = null
 	global.narsie_list.Remove(src)
+	STOP_PROCESSING(SSobj, src)
+	for(var/client/C)
+		hide_from(C.mob)
 	. = ..()
+
+/obj/effect/narsie/Process_Spacemove(allow_movement)
+	return TRUE
+
+// See comment at the top of the file for why this sections of this are commented out.
+/obj/effect/narsie/on_update_icon()
+	. = ..()
+
+/*
+	if(override_image)
+		for(var/client/C)
+			hide_from(C.mob)
+
+*/
+	set_overlays("glow-narsie")
+/*
+	compile_overlays()
+	override_image = image(null)
+	override_image.appearance = src
+	override_image.loc = src
+	override_image.override = TRUE
+	override_image.pixel_y = null
+	override_image.pixel_x = null
+
+	for(var/client/C)
+		show_to(C.mob)
+*/
 
 /obj/effect/narsie/Process()
 
 	// Feed.
-	for(var/atom/movable/consuming in range(consume_pull, src))
-		if(get_dist(src, consuming) <= consume_range)
-			consume(consuming)
-		else
+	var/consumed = 0
+	for(var/atom/consuming in range(consume_pull, src))
+		if(get_dist(src, consuming) >= consume_range)
 			consuming.singularity_pull(src, 9)
+		else
+			consuming.on_narsie_defile()
+		if(consumed++ >= max_atoms_assessed_per_tick || TICK_CHECK)
+			break
+
+	if(TICK_CHECK)
+		return
 
 	// Find a target.
 	if (!target || prob(5))
-		pickcultist()
+		var/list/targets = list()
+		var/current_zs = SSmapping.get_connected_levels(z, include_lateral = FALSE) // can't really handle lateral connections
+		var/decl/special_role/cult = GET_DECL(/decl/special_role/cultist)
+		for(var/datum/mind/cult_nh_mind in cult.current_antagonists)
+			if(cult_nh_mind.current && !cult_nh_mind.current.stat &&  (get_z(cult_nh_mind.current) in current_zs))
+				targets += cult_nh_mind.current
+		// If we have no valid cultists, go for any human.
+		if(!length(targets))
+			for(var/mob/living/carbon/human/food in global.living_mob_list_)
+				if(food.stat)
+					var/turf/pos = get_turf(food)
+					if(pos?.z in current_zs)
+						targets += food
+			// Go for ghosts if nothing else is available.
+			if(!length(targets))
+				for(var/mob/observer/G in global.dead_mob_list_)
+					targets += G
+		// Pick a random candidate.
+		if(length(targets))
+			target = pick(targets)
+		var/capname = uppertext(name)
+		to_chat(target, SPAN_NOTICE("<b>[capname] HAS LOST INTEREST IN YOU.</b>"))
+		if (ishuman(target))
+			to_chat(target, SPAN_DANGER("[capname] HUNGERS FOR YOUR SOUL."))
+		else
+			to_chat(target, SPAN_DANGER("[capname] HAS CHOSEN YOU TO LEAD HIM TO HIS NEXT MEAL."))
 
 	// Move.
 	if(move_self)
@@ -49,7 +147,12 @@ var/global/list/narsie_list = list()
 		// Get a direction to move.
 		var/movement_dir
 		if(target && prob(60))
-			movement_dir = get_dir(src, target) //moves to a singulo beacon, if there is one
+			if(target.z == z)
+				movement_dir = get_dir(src, target)
+			else if(target.z > z && GetAbove(src))
+				movement_dir = UP
+			else if(target.z < z && GetBelow(src))
+				movement_dir = DOWN
 		else if(prob(16))
 			var/list/available_vertical_moves = list()
 			if(GetAbove(src))
@@ -63,29 +166,15 @@ var/global/list/narsie_list = list()
 
 		// Try to move in it.
 		step(src, movement_dir)
-		narsiefloor(get_turf(loc))
-		for(var/mob/M in global.player_list)
-			if(M.client)
-				M.see_narsie(src, movement_dir)
+		var/turf/T = get_turf(loc)
+		if(T && !T.is_open() && !(locate(/obj/effect/narsie_footstep) in T))
+			new /obj/effect/narsie_footstep(T)
 
 	if(prob(25))
 		for(var/mob/living/carbon/M in oviewers(8, src))
-			if(!M.stat == CONSCIOUS || (M.status_flags & GODMODE) || iscultist(M))
-				continue
-			to_chat(M, SPAN_DANGER("You feel your sanity crumble away in an instant as you gaze upon [src.name]..."))
-			M.apply_effect(3, STUN)
-
-/obj/effect/narsie/Bump(atom/A)
-	if(isturf(A))
-		narsiewall(A)
-	else if(istype(A, /obj/structure/cult))
-		qdel(A)
-
-/obj/effect/narsie/Bumped(atom/A)
-	if(isturf(A))
-		narsiewall(A)
-	else if(istype(A, /obj/structure/cult))
-		qdel(A)
+			if(M.stat == CONSCIOUS && !(M.status_flags & GODMODE) && !iscultist(M))
+				to_chat(M, SPAN_DANGER("You feel your sanity crumble away in an instant as you gaze upon [src.name]..."))
+				M.apply_effect(3, STUN)
 
 /obj/effect/narsie/proc/announce_narsie()
 	set waitfor = FALSE
@@ -111,92 +200,6 @@ var/global/list/narsie_list = list()
 	move_self = TRUE
 	icon = initial(icon)
 
-/obj/effect/narsie/proc/narsiefloor(var/turf/T)//leaving "footprints"
-	if(!(istype(T, /turf/simulated/wall/cult) || isspaceturf(T)))
-		if(T.icon_state != "cult-narsie")
-			T.desc = "something that goes beyond your understanding went this way"
-			T.icon = 'icons/turf/flooring/cult.dmi'
-			T.icon_state = "cult-narsie"
-			T.set_light(1)
-
-/obj/effect/narsie/proc/narsiewall(var/turf/T)
-	T.desc = "An opening has been made on that wall, but who can say if what you seek truly lies on the other side?"
-	T.icon = 'icons/turf/walls.dmi'
-	T.icon_state = "cult-narsie"
-	T.set_opacity(0)
-	T.set_density(0)
-	set_light(1)
-
 /obj/effect/narsie/explosion_act(severity) //No throwing bombs at it either. --NEO
 	SHOULD_CALL_PARENT(FALSE)
 	return
-
-/obj/effect/narsie/proc/pickcultist() //Narsie rewards his cultists with being devoured first, then picks a ghost to follow. --NEO
-	var/list/cultists = list()
-	var/decl/special_role/cult = GET_DECL(/decl/special_role/cultist)
-	for(var/datum/mind/cult_nh_mind in cult.current_antagonists)
-		if(!cult_nh_mind.current)
-			continue
-		if(cult_nh_mind.current.stat)
-			continue
-		if(get_z(cult_nh_mind.current) != z)
-			continue
-		cultists += cult_nh_mind.current
-	if(cultists.len)
-		acquire(pick(cultists))
-		return
-		//If there was living cultists, it picks one to follow.
-	for(var/mob/living/carbon/human/food in global.living_mob_list_)
-		if(food.stat)
-			continue
-		var/turf/pos = get_turf(food)
-		if(!pos)	//Catches failure of get_turf.
-			continue
-		if(pos.z != src.z)
-			continue
-		cultists += food
-	if(cultists.len)
-		acquire(pick(cultists))
-		return
-		//no living cultists, pick a living human instead.
-	for(var/mob/observer/ghost/ghost in global.player_list)
-		if(!ghost.client)
-			continue
-		var/turf/pos = get_turf(ghost)
-		if(pos.z != src.z)
-			continue
-		cultists += ghost
-	if(cultists.len)
-		acquire(pick(cultists))
-		return
-		//no living humans, follow a ghost instead.
-
-/obj/effect/narsie/proc/acquire(const/mob/food)
-	var/capname = uppertext(name)
-
-	to_chat(target, "<span class='notice'><b>[capname] HAS LOST INTEREST IN YOU.</b></span>")
-	target = food
-
-	if (ishuman(target))
-		to_chat(target, "<span class='danger'>[capname] HUNGERS FOR YOUR SOUL.</span>")
-	else
-		to_chat(target, "<span class='danger'>[capname] HAS CHOSEN YOU TO LEAD HIM TO HIS NEXT MEAL.</span>")
-
-/obj/effect/narsie/proc/consume(const/atom/A) //Has its own consume proc because it doesn't need energy and I don't want BoHs to explode it. --NEO
-	if (istype(A, /mob/) && (get_dist(A, src) <= 7))
-		var/mob/M = A
-		if(M.status_flags & GODMODE)
-			return 0
-		M.cultify()
-//TURF PROCESSING
-	else if (isturf(A))
-		var/dist = get_dist(A, src)
-		for (var/atom/movable/AM in A.contents)
-			if (dist <= consume_range)
-				consume(AM)
-				continue
-		if (dist <= consume_range && !isspaceturf(A))
-			var/turf/T = A
-			if(T.holy)
-				T.holy = 0 //Nar-Sie doesn't give a shit about sacred grounds.
-			T.cultify()

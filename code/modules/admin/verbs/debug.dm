@@ -319,7 +319,7 @@
 		if(F.anchored)
 			F.Varedit_start = 1
 	spawn(3 SECONDS)
-		for(var/obj/machinery/the_singularitygen/G in SSmachines.machinery)
+		for(var/obj/machinery/singularity_generator/G in SSmachines.machinery)
 			if(G.anchored)
 				new /obj/effect/singularity(get_turf(G), 1750)
 				qdel(G)

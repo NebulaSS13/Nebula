@@ -365,7 +365,7 @@
 		if(T.holy)
 			T.holy = 0
 		else
-			T.cultify()
+			T.on_narsie_defile()
 	visible_message("<span class='warning'>\The [src] embeds into the floor and walls around it, changing them!</span>", "You hear liquid flow.")
 	qdel(src)
 
@@ -616,7 +616,7 @@
 			if(T.holy)
 				T.holy = 0
 			else
-				T.cultify()
+				T.on_narsie_defile()
 	visible_message("<span class='warning'>\The [src] embeds into the floor and walls around it, changing them!</span>", "You hear liquid flow.")
 	qdel(src)
 
@@ -631,7 +631,7 @@
 		to_chat(user, "<span class='warning'>You need to be wearing your robes to use this rune.</span>")
 		return fizzle(user)
 	var/turf/T = get_turf(src)
-	if(T.icon_state != "cult" && T.icon_state != "cult-narsie")
+	if(T.is_defiled())
 		to_chat(user, "<span class='warning'>This rune needs to be placed on the defiled ground.</span>")
 		return fizzle(user)
 	speak_incantation(user, "N'ath reth sh'yro eth d[pick("'","`")]raggathnor!")
@@ -644,7 +644,7 @@
 
 /obj/effect/rune/shell/cast(var/mob/living/user)
 	var/turf/T = get_turf(src)
-	if(T.icon_state != "cult" && T.icon_state != "cult-narsie")
+	if(!T.is_defiled())
 		to_chat(user, "<span class='warning'>This rune needs to be placed on the defiled ground.</span>")
 		return fizzle(user)
 
@@ -796,7 +796,7 @@
 
 		for(var/turf/T in range(min(the_end_comes, 15)))
 			if(prob(the_end_comes / 3))
-				T.cultify()
+				T.on_narsie_defile()
 		sleep(10)
 
 	if(the_end_comes >= the_time_has_come)

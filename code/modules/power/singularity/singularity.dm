@@ -11,6 +11,7 @@ var/global/list/singularities = list()
 	light_power = 1
 	light_range = 6
 	is_spawnable_type = FALSE // No...
+
 	/// Category used for investigation entries relating to this atom.
 	var/const/investigation_label = "singulo"
 	/// A list of events. Toxins is in here twice to double the chance of proccing.
@@ -34,7 +35,7 @@ var/global/list/singularities = list()
 	/// Will not move in the same dir if it couldnt before, will help with the getting stuck on fields thing.
 	var/last_failed_movement = 0
 	/// How many atoms can we pull in a single tick?
-	var/const/max_atoms_assessed_per_tick = 1000
+	var/const/max_atoms_assessed_per_tick = 100
 
 /obj/effect/singularity/Initialize(mapload, var/starting_energy = 50, var/temp = 0)
 	. = ..(mapload)
@@ -54,6 +55,9 @@ var/global/list/singularities = list()
 	global.singularities -= src
 	STOP_PROCESSING(SSobj, src)
 	. = ..()
+
+/obj/effect/singularity/Process_Spacemove(allow_movement)
+	return TRUE
 
 /obj/effect/singularity/proc/consume(atom/A)
 	energy += A.singularity_act(src, current_stage.stage_size)
@@ -86,9 +90,11 @@ var/global/list/singularities = list()
 			consume(consuming)
 		else
 			consuming.singularity_pull(src, current_stage.stage_size)
-		consumed++
-		if(consumed >= max_atoms_assessed_per_tick || TICK_CHECK)
+		if(consumed++ >= max_atoms_assessed_per_tick || TICK_CHECK)
 			break
+
+	if(TICK_CHECK)
+		return
 
 	// Check if we should be shrinking this tick, and apply it if we should.
 	current_stage.handle_dissipation(src)

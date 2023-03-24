@@ -561,3 +561,6 @@
 
 /atom/proc/singularity_pull(S, current_size)
 	return
+
+/atom/proc/on_narsie_defile()
+	return

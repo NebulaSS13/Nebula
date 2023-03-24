@@ -25,6 +25,11 @@
 		return FALSE
 	if (istype(A, /mob/living) && length(global.endgame_safespawns))
 		var/mob/living/L = A
+		if(!length(global.endgame_safespawns))
+			to_chat(L, SPAN_NOTICE("You fall through the wormhole, and to safety, leaving behind the doom Universe that bore you..."))
+			L.ghostize()
+			qdel(L)
+			return
 		if(L.buckled && istype(L.buckled,/obj/structure/bed/))
 			var/turf/O = L.buckled
 			do_teleport(O, pick(global.endgame_safespawns))
