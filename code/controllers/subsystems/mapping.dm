@@ -201,12 +201,13 @@ SUBSYSTEM_DEF(mapping)
 		root_stack |= level+1
 	. = list()
 	// Check stack for any laterally connected neighbors.
-	for(var/tz in root_stack)
-		var/datum/level_data/level = levels_by_z[tz]
-		if(level)
-			var/list/cur_connected = level.get_all_connected_level_z()
-			if(length(cur_connected))
-				. |= cur_connected
+	if(include_lateral)
+		for(var/tz in root_stack)
+			var/datum/level_data/level = levels_by_z[tz]
+			if(level)
+				var/list/cur_connected = level.get_all_connected_level_z()
+				if(length(cur_connected))
+					. |= cur_connected
 	. |= root_stack
 
 ///Returns a list of all the level data of all the connected z levels to the given z.DBColumn

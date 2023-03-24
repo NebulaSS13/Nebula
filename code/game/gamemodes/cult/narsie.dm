@@ -1,27 +1,9 @@
-// show_to() and hide_from() do not work, but I am leaving the committed and commented out
-// so if in the future some brave soul wants to implement always-visible NarNar without having
-// her get output to every single client every time the thing moves, they can do so.
-/*
-/mob/Login()
-	..()
-	for(var/obj/effect/narsie/narsie in global.narsie_list)
-		narsie.show_to(src)
-
-/obj/effect/narsie/proc/show_to(var/mob/M)
-	if(override_image && M.client)
-		M.client.images |= override_image
-
-/obj/effect/narsie/proc/hide_from(var/mob/M)
-	if(override_image && M.client)
-		M.client.images -= override_image
-*/
-
 var/global/narsie_cometh = 0
 var/global/list/narsie_list = list()
 
 /obj/effect/narsie_footstep
 	name = "mark of the Geometer"
-	desc = "something that goes beyond your understanding went this way"
+	desc = "Something that goes beyond your understanding went this way."
 	icon = 'icons/turf/flooring/cult.dmi'
 	icon_state = "narsie_footstep"
 	light_color = COLOR_RED
@@ -33,17 +15,16 @@ var/global/list/narsie_list = list()
 	desc = "Your mind begins to bubble and ooze as it tries to comprehend what it sees."
 	icon = 'icons/obj/narsie.dmi'
 	icon_state = "narsie"
+	anchored = TRUE
+	unacidable = TRUE
 	pixel_x = -236
 	pixel_y = -256
 	plane = ABOVE_LIGHTING_PLANE
 	layer = ABOVE_LIGHTING_LAYER
 	light_range = 1
 	light_color = "#3e0000"
+	is_spawnable_type = FALSE
 
-	//is_spawnable_type = FALSE
-
-	/// Our image to show to clients.
-	var/image/override_image
 	/// The current target we're pursuing.
 	var/mob/target
 	/// Are we going to move around? Set by admin and mappers.
@@ -59,6 +40,7 @@ var/global/list/narsie_list = list()
 	. = ..()
 	global.narsie_list.Add(src)
 	START_PROCESSING(SSobj, src)
+	set_extension(src, /datum/extension/universally_visible)
 	announce_narsie()
 	update_icon()
 
@@ -66,8 +48,6 @@ var/global/list/narsie_list = list()
 	target = null
 	global.narsie_list.Remove(src)
 	STOP_PROCESSING(SSobj, src)
-	for(var/client/C)
-		hide_from(C.mob)
 	. = ..()
 
 /obj/effect/narsie/Process_Spacemove(allow_movement)
@@ -76,26 +56,22 @@ var/global/list/narsie_list = list()
 // See comment at the top of the file for why this sections of this are commented out.
 /obj/effect/narsie/on_update_icon()
 	. = ..()
-
-/*
-	if(override_image)
-		for(var/client/C)
-			hide_from(C.mob)
-
-*/
 	set_overlays("glow-narsie")
-/*
 	compile_overlays()
-	override_image = image(null)
-	override_image.appearance = src
-	override_image.loc = src
-	override_image.override = TRUE
-	override_image.pixel_y = null
-	override_image.pixel_x = null
+	var/datum/extension/universally_visible/univis = get_extension(src, /datum/extension/universally_visible)
+	univis.refresh()
 
-	for(var/client/C)
-		show_to(C.mob)
-*/
+/obj/effect/narsie/Move()
+	. = ..()
+	if(.)
+		var/datum/extension/universally_visible/univis = get_extension(src, /datum/extension/universally_visible)
+		univis.refresh()
+
+/obj/effect/narsie/forceMove(atom/dest)
+	. = ..()
+	if(.)
+		var/datum/extension/universally_visible/univis = get_extension(src, /datum/extension/universally_visible)
+		univis.refresh()
 
 /obj/effect/narsie/Process()
 
