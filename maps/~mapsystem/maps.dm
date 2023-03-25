@@ -42,6 +42,8 @@ var/global/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 	var/system_name = "Uncharted System"
 	var/ground_noun = "ground"
 
+	var/default_announcement_frequency = "Common"
+
 	// Current game year. Uses current system year + game_year num.
 	var/game_year = 288
 

@@ -138,8 +138,9 @@ var/global/datum/announcement/minor/minor_announcement = new(new_sound = 'sound/
 	var/rank = job.title
 	if(character.mind.role_alt_title)
 		rank = character.mind.role_alt_title
-
-	AnnounceArrivalSimple(character.real_name, rank, join_message, get_announcement_frequency(job))
+	var/announce_channel = get_announcement_frequency(job)
+	if(announce_channel)
+		AnnounceArrivalSimple(character.real_name, rank, join_message, announce_channel)
 
 /proc/AnnounceArrivalSimple(var/name, var/rank = "visitor", var/join_message = "has arrived on the [station_name()]", var/frequency)
 	var/obj/item/radio/announcer = get_global_announcer()
@@ -148,9 +149,10 @@ var/global/datum/announcement/minor/minor_announcement = new(new_sound = 'sound/
 /proc/get_announcement_frequency(var/datum/job/job)
 	// During red alert all jobs are announced on main frequency.
 	var/decl/security_state/security_state = GET_DECL(global.using_map.security_state)
-	if (security_state.current_security_level_is_same_or_higher_than(security_state.high_security_level))
-		return "Common"
-	var/decl/department/dept = SSjobs.get_department_by_type(job.primary_department)
-	if(dept?.announce_channel)
-		return dept.announce_channel
-	return "Common"
+	if(!security_state.current_security_level_is_same_or_higher_than(security_state.high_security_level))
+		var/decl/department/dept = SSjobs.get_department_by_type(job.primary_department)
+		if(dept?.announce_channel)
+			return dept.announce_channel
+	return global.using_map.default_announcement_frequency
+
+
