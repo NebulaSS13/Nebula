@@ -6907,7 +6907,7 @@
 /obj/machinery/light{
 	dir = 8
 	},
-/mob/living/simple_animal/chicken,
+/mob/living/simple_animal/fowl/chicken,
 /turf/simulated/floor/grass,
 /area/map_template/colony/hydroponics)
 "nm" = (
@@ -7806,7 +7806,7 @@
 /turf/exterior/concrete,
 /area/template_noop)
 "vt" = (
-/mob/living/simple_animal/chicken,
+/mob/living/simple_animal/fowl/chicken,
 /turf/simulated/floor/grass,
 /area/map_template/colony/hydroponics)
 "vJ" = (
