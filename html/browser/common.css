@@ -78,15 +78,13 @@ a.icon img, .linkOn.icon img
 	height: 18px;
 }
 
-table, th, td 
+table, th, td
 {
-	border: 1px solid;
-	border-color: #48656c;
 	border-collapse: collapse;
-	padding: 3px;
+	padding: 1px;
 }
 
-th 
+th
 {
 	background-color: #48656c;
 }
