@@ -62,14 +62,22 @@
 		move_intent = move_intents[1]
 	if(ispath(move_intent))
 		move_intent = GET_DECL(move_intent)
-	var/ai_type = get_ai_type()
-	if(ai_type)
-		ai = new ai_type(src)
+	refresh_ai_handler()
 	START_PROCESSING(SSmobs, src)
 
+/mob/proc/refresh_ai_handler()
+	var/ai_type = get_ai_type()
+	if(istype(ai))
+		if(ai_type == ai.type)
+			return // No need to refresh.
+		QDEL_NULL(ai)
+	if(ai_type)
+		ai = new ai_type(src)
+
 /mob/proc/get_ai_type()
-	if (ispath(ai))
-		return ai
+	var/ai_type = initial(ai)
+	if(ispath(ai_type))
+		return ai_type
 
 /mob/proc/show_message(msg, type, alt, alt_type)//Message, type of message (1 or 2), alternative message, alt message type (1 or 2)
 	if(!client)	return

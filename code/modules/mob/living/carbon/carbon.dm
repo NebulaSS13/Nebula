@@ -30,11 +30,6 @@
 	set_hydration(400)
 	..()
 
-/mob/living/carbon/get_ai_type()
-	if(ispath(species?.ai))
-		return species.ai
-	return ..()
-
 /mob/living/carbon/Move(NewLoc, direct)
 	. = ..()
 	if(!.)
@@ -209,7 +204,7 @@
 	src.throw_mode_off()
 	if(src.stat || !target)
 		return
-	if(target.type == /obj/screen) 
+	if(target.type == /obj/screen)
 		return
 
 	if(!item)
@@ -510,7 +505,7 @@
 					break
 			if(!is_poison)
 				valid_tank = TRUE
-			
+
 		if(valid_tank && (!selected_obj || selected_obj.air_contents.gas[breathes_gas] <  checking.air_contents.gas[breathes_gas]))
 			selected_obj =  checking
 			selected_slot = slot_name

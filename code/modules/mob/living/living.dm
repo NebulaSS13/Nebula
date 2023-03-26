@@ -5,6 +5,12 @@
 	else
 		add_to_living_mob_list()
 
+/mob/living/get_ai_type()
+	var/decl/species/my_species = get_species()
+	if(ispath(my_species?.ai))
+		return my_species.ai
+	return ..()
+
 /mob/living/examine(mob/user, distance, infix, suffix)
 	. = ..()
 	if (admin_paralyzed)

@@ -11,6 +11,14 @@
 		PRINT_STACK_TRACE("AI datum [type] received a body ([body ? body.type : "NULL"]) of unexpected type ([expected_type]).")
 	START_PROCESSING(SSai, src)
 
+/datum/ai/Destroy()
+	STOP_PROCESSING(SSai, src)
+	if(body)
+		if(body.ai == src)
+			body.ai = null
+		body = null
+	. = ..()
+
 /datum/ai/proc/can_process()
 	if(!body || ((body.client || body.mind) && !(body.status_flags & ENABLE_AI)))
 		return FALSE
@@ -30,9 +38,4 @@
 
 // This is the place to actually do work in the AI.
 /datum/ai/proc/do_process(var/time_elapsed)
-	
-/datum/ai/Destroy()
-	STOP_PROCESSING(SSai, src)
-	if(body.ai == src) body.ai = null
-	body = null
-	. = ..()
+	return
