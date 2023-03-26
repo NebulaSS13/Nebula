@@ -20,7 +20,7 @@
 		return get_footstep_for_mob(/decl/footsteps/plating, caller)
 
 /turf/simulated/floor/get_footstep_sound(var/mob/caller)
-	. = ..() || get_footstep_for_mob(flooring?.footstep_type || /decl/footsteps/blank, caller)
+	. = ..() || get_footstep_for_mob(get_flooring()?.footstep_type || /decl/footsteps/blank, caller)
 
 /mob/living/carbon/human/proc/has_footsteps()
 	if(species.silent_steps || buckled || lying || throwing)

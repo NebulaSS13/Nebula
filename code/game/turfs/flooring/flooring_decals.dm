@@ -49,8 +49,9 @@ var/global/list/floor_decals = list()
 /obj/effect/floor_decal/reset/Initialize()
 	..()
 	var/turf/T = get_turf(src)
-	T.remove_decals()
-	T.update_icon()
+	if(T)
+		LAZYCLEARLIST(T.decals)
+		T.update_icon()
 	atom_flags |= ATOM_FLAG_INITIALIZED
 	return INITIALIZE_HINT_QDEL
 
@@ -69,60 +70,66 @@ var/global/list/floor_decals = list()
 
 /obj/effect/floor_decal/carpet
 	name = "brown carpet"
-	icon = 'icons/turf/flooring/carpet.dmi'
-	icon_state = "brown_edges"
+	icon = 'icons/turf/flooring/carpet/carpet_brown.dmi'
+	icon_state = "brown_inner_edges"
 
 /obj/effect/floor_decal/carpet/blue
 	name = "blue carpet"
-	icon_state = "blue1_edges"
+	icon_state = "blue1_inner_edges"
+	icon = 'icons/turf/flooring/carpet/carpet_blue_orange.dmi'
 
 /obj/effect/floor_decal/carpet/blue2
 	name = "pale blue carpet"
-	icon_state = "blue2_edges"
+	icon = 'icons/turf/flooring/carpet/carpet_blue.dmi'
+	icon_state = "blue2_inner_edges"
 
 /obj/effect/floor_decal/carpet/purple
 	name = "purple carpet"
-	icon_state = "purple_edges"
+	icon_state = "purple_inner_edges"
+	icon = 'icons/turf/flooring/carpet/carpet_purple.dmi'
 
 /obj/effect/floor_decal/carpet/orange
 	name = "orange carpet"
-	icon_state = "orange_edges"
+	icon_state = "orange_inner_edges"
+	icon = 'icons/turf/flooring/carpet/carpet_orange.dmi'
 
 /obj/effect/floor_decal/carpet/green
 	name = "green carpet"
-	icon_state = "green_edges"
+	icon_state = "green_inner_edges"
+	icon = 'icons/turf/flooring/carpet/carpet_green.dmi'
 
 /obj/effect/floor_decal/carpet/red
 	name = "red carpet"
-	icon_state = "red_edges"
+	icon_state = "red_inner_edges"
+	icon = 'icons/turf/flooring/carpet/carpet_red.dmi'
 
 /obj/effect/floor_decal/carpet/corners
 	name = "brown carpet"
-	icon_state = "brown_corners"
+	icon_state = "brown_inner_corners"
 
 /obj/effect/floor_decal/carpet/blue/corners
 	name = "blue carpet"
-	icon_state = "blue1_corners"
+	icon_state = "blue1_inner_corners"
 
 /obj/effect/floor_decal/carpet/blue2/corners
 	name = "pale blue carpet"
-	icon_state = "blue2_corners"
+	icon_state = "blue2_inner_corners"
 
 /obj/effect/floor_decal/carpet/purple/corners
 	name = "purple carpet"
-	icon_state = "purple_corners"
+	icon_state = "purple_inner_corners"
 
 /obj/effect/floor_decal/carpet/orange/corners
 	name = "orange carpet"
-	icon_state = "orange_corners"
+	icon_state = "orange_inner_corners"
 
 /obj/effect/floor_decal/carpet/green/corners
 	name = "green carpet"
-	icon_state = "green_corners"
+	icon_state = "green_inner_corners"
 
 /obj/effect/floor_decal/carpet/red/corners
 	name = "red carpet"
-	icon_state = "red_corners"
+	icon_state = "red_inner_corners"
 
 /obj/effect/floor_decal/corner
 	icon_state = "corner_white"

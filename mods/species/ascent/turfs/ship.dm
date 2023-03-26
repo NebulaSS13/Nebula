@@ -11,14 +11,14 @@
 /turf/simulated/wall/ascent
 	color = COLOR_PURPLE
 
-/turf/simulated/wall/ascent/on_update_icon()
+/turf/simulated/wall/ascent/on_update_icon(var/update_neighbors = FALSE)
 	. = ..()
 	color = COLOR_PURPLE
 
 /turf/simulated/wall/r_wall/ascent
 	color = COLOR_PURPLE
 
-/turf/simulated/wall/r_wall/ascent/on_update_icon()
+/turf/simulated/wall/r_wall/ascent/on_update_icon(var/update_neighbors = FALSE)
 	. = ..()
 	color = COLOR_PURPLE
 
@@ -44,4 +44,4 @@
 	icon = 'icons/turf/flooring/alium.dmi'
 	color = COLOR_GRAY40
 	initial_gas = list(/decl/material/gas/methyl_bromide = MOLES_CELLSTANDARD * 0.5, /decl/material/gas/oxygen = MOLES_CELLSTANDARD * 0.5)
-	initial_flooring = /decl/flooring/tiling_ascent
+	flooring_layers = /decl/flooring/tiling_ascent

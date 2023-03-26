@@ -1,3 +1,6 @@
+/turf/exterior
+	var/strata_override
+
 /turf/exterior/wall/random
 	reinf_material = null
 

@@ -37,36 +37,26 @@
 "ai" = (
 /obj/structure/table/steel_reinforced,
 /obj/item/clothing/shoes/magboots/rig/combat,
-/turf/unsimulated/floor{
-	icon_state = "dark"
-	},
+/turf/unsimulated/floor/dark,
 /area/map_template/rescue_base/base)
 "aj" = (
 /obj/structure/table/steel_reinforced,
 /obj/item/storage/firstaid/regular,
-/turf/unsimulated/floor{
-	icon_state = "dark"
-	},
+/turf/unsimulated/floor/dark,
 /area/map_template/rescue_base/base)
 "ak" = (
 /obj/machinery/floodlight,
-/turf/unsimulated/floor{
-	icon_state = "dark"
-	},
+/turf/unsimulated/floor/dark,
 /area/map_template/rescue_base/base)
 "al" = (
 /obj/structure/table/steel_reinforced,
 /obj/item/storage/box/bodybags,
-/turf/unsimulated/floor{
-	icon_state = "dark"
-	},
+/turf/unsimulated/floor/dark,
 /area/map_template/rescue_base/base)
 "am" = (
 /obj/structure/table/steel_reinforced,
 /obj/item/storage/firstaid/surgery,
-/turf/unsimulated/floor{
-	icon_state = "dark"
-	},
+/turf/unsimulated/floor/dark,
 /area/map_template/rescue_base/base)
 "ao" = (
 /turf/unsimulated/floor{
@@ -86,21 +76,15 @@
 "aq" = (
 /obj/structure/table/steel_reinforced,
 /obj/item/taperecorder,
-/turf/unsimulated/floor{
-	icon_state = "dark"
-	},
+/turf/unsimulated/floor/dark,
 /area/map_template/rescue_base/base)
 "ar" = (
-/turf/unsimulated/floor{
-	icon_state = "dark"
-	},
+/turf/unsimulated/floor/dark,
 /area/map_template/rescue_base/base)
 "as" = (
 /obj/structure/table/steel_reinforced,
 /obj/item/bikehorn/rubberducky,
-/turf/unsimulated/floor{
-	icon_state = "dark"
-	},
+/turf/unsimulated/floor/dark,
 /area/map_template/rescue_base/base)
 "au" = (
 /obj/structure/hygiene/toilet{
@@ -130,23 +114,17 @@
 "ax" = (
 /obj/structure/table/steel_reinforced,
 /obj/item/assembly/mousetrap,
-/turf/unsimulated/floor{
-	icon_state = "dark"
-	},
+/turf/unsimulated/floor/dark,
 /area/map_template/rescue_base/base)
 "ay" = (
 /obj/structure/bed/chair,
-/turf/unsimulated/floor{
-	icon_state = "dark"
-	},
+/turf/unsimulated/floor/dark,
 /area/map_template/rescue_base/base)
 "az" = (
 /obj/structure/table/steel_reinforced,
 /obj/item/twohanded/baseballbat/aluminium,
 /obj/item/hatchet,
-/turf/unsimulated/floor{
-	icon_state = "dark"
-	},
+/turf/unsimulated/floor/dark,
 /area/map_template/rescue_base/base)
 "aB" = (
 /turf/unsimulated/floor{
@@ -235,17 +213,13 @@
 	pixel_x = 3;
 	pixel_y = 9
 	},
-/turf/unsimulated/floor{
-	icon_state = "dark"
-	},
+/turf/unsimulated/floor/dark,
 /area/map_template/rescue_base/base)
 "aI" = (
 /obj/structure/table/steel_reinforced,
 /obj/item/storage/belt/utility/full,
 /obj/item/assembly/igniter,
-/turf/unsimulated/floor{
-	icon_state = "dark"
-	},
+/turf/unsimulated/floor/dark,
 /area/map_template/rescue_base/base)
 "aK" = (
 /obj/structure/mopbucket,
@@ -254,9 +228,7 @@
 /obj/structure/hygiene/sink/kitchen{
 	pixel_y = 21
 	},
-/turf/unsimulated/floor{
-	icon_state = "dark"
-	},
+/turf/unsimulated/floor/dark,
 /area/map_template/rescue_base/base)
 "aL" = (
 /obj/structure/reagent_dispensers/watertank,
@@ -264,9 +236,7 @@
 /obj/item/radio/intercom{
 	pixel_y = 22
 	},
-/turf/unsimulated/floor{
-	icon_state = "dark"
-	},
+/turf/unsimulated/floor/dark,
 /area/map_template/rescue_base/base)
 "aM" = (
 /obj/structure/table/reinforced,
@@ -275,9 +245,7 @@
 /obj/item/radio/intercom{
 	pixel_y = 22
 	},
-/turf/unsimulated/floor{
-	icon_state = "dark"
-	},
+/turf/unsimulated/floor/dark,
 /area/map_template/rescue_base/base)
 "aN" = (
 /obj/structure/table/reinforced,
@@ -286,23 +254,17 @@
 /obj/machinery/vending/boozeomat{
 	pixel_y = 32
 	},
-/turf/unsimulated/floor{
-	icon_state = "dark"
-	},
+/turf/unsimulated/floor/dark,
 /area/map_template/rescue_base/base)
 "aO" = (
 /obj/structure/closet/secure_closet/freezer/fridge,
 /obj/effect/floor_decal/corner/blue/diagonal,
-/turf/unsimulated/floor{
-	icon_state = "dark"
-	},
+/turf/unsimulated/floor/dark,
 /area/map_template/rescue_base/base)
 "aP" = (
 /obj/effect/floor_decal/corner/blue/diagonal,
 /obj/structure/closet/secure_closet/freezer/meat,
-/turf/unsimulated/floor{
-	icon_state = "dark"
-	},
+/turf/unsimulated/floor/dark,
 /area/map_template/rescue_base/base)
 "aQ" = (
 /obj/machinery/door/airlock/centcom{
@@ -366,24 +328,18 @@
 /obj/machinery/door/airlock/centcom{
 	name = "Processing"
 	},
-/turf/unsimulated/floor{
-	icon_state = "dark"
-	},
+/turf/unsimulated/floor/dark,
 /area/map_template/rescue_base/base)
 "aZ" = (
 /obj/effect/floor_decal/corner/blue/diagonal,
-/turf/unsimulated/floor{
-	icon_state = "dark"
-	},
+/turf/unsimulated/floor/dark,
 /area/map_template/rescue_base/base)
 "ba" = (
 /obj/effect/floor_decal/corner/blue/diagonal,
 /obj/machinery/door/airlock/centcom{
 	name = "Storage"
 	},
-/turf/unsimulated/floor{
-	icon_state = "dark"
-	},
+/turf/unsimulated/floor/dark,
 /area/map_template/rescue_base/base)
 "bb" = (
 /obj/machinery/door/airlock/centcom{
@@ -455,9 +411,7 @@
 "bh" = (
 /obj/structure/table/reinforced,
 /obj/item/storage/box/handcuffs,
-/turf/unsimulated/floor{
-	icon_state = "dark"
-	},
+/turf/unsimulated/floor/dark,
 /area/map_template/rescue_base/base)
 "bi" = (
 /obj/structure/table/reinforced,
@@ -467,31 +421,23 @@
 /obj/item/radio/intercom{
 	pixel_y = 22
 	},
-/turf/unsimulated/floor{
-	icon_state = "dark"
-	},
+/turf/unsimulated/floor/dark,
 /area/map_template/rescue_base/base)
 "bj" = (
 /obj/structure/bed,
 /obj/item/bedsheet/orange,
-/turf/unsimulated/floor{
-	icon_state = "dark"
-	},
+/turf/unsimulated/floor/dark,
 /area/map_template/rescue_base/base)
 "bk" = (
 /obj/structure/hygiene/toilet{
 	dir = 8
 	},
-/turf/unsimulated/floor{
-	icon_state = "dark"
-	},
+/turf/unsimulated/floor/dark,
 /area/map_template/rescue_base/base)
 "bm" = (
 /obj/machinery/vending/dinnerware,
 /obj/effect/floor_decal/corner/blue/diagonal,
-/turf/unsimulated/floor{
-	icon_state = "dark"
-	},
+/turf/unsimulated/floor/dark,
 /area/map_template/rescue_base/base)
 "bn" = (
 /obj/structure/rack,
@@ -546,16 +492,12 @@
 /obj/structure/bed/chair/office/dark{
 	dir = 4
 	},
-/turf/unsimulated/floor{
-	icon_state = "dark"
-	},
+/turf/unsimulated/floor/dark,
 /area/map_template/rescue_base/base)
 "br" = (
 /obj/structure/table/reinforced,
 /obj/item/flash,
-/turf/unsimulated/floor{
-	icon_state = "dark"
-	},
+/turf/unsimulated/floor/dark,
 /area/map_template/rescue_base/base)
 "bs" = (
 /turf/unsimulated/floor{
@@ -567,18 +509,14 @@
 /obj/machinery/door/airlock/centcom{
 	name = "Cell 2"
 	},
-/turf/unsimulated/floor{
-	icon_state = "dark"
-	},
+/turf/unsimulated/floor/dark,
 /area/map_template/rescue_base/base)
 "bu" = (
 /obj/structure/rack,
 /obj/item/lightreplacer,
 /obj/item/lightreplacer,
 /obj/effect/floor_decal/corner/blue/diagonal,
-/turf/unsimulated/floor{
-	icon_state = "dark"
-	},
+/turf/unsimulated/floor/dark,
 /area/map_template/rescue_base/base)
 "bv" = (
 /obj/structure/rack,
@@ -598,17 +536,13 @@
 /obj/item/grenade/chem_grenade/cleaner,
 /obj/item/grenade/chem_grenade/cleaner,
 /obj/effect/floor_decal/corner/blue/diagonal,
-/turf/unsimulated/floor{
-	icon_state = "dark"
-	},
+/turf/unsimulated/floor/dark,
 /area/map_template/rescue_base/base)
 "bw" = (
 /obj/structure/table/reinforced,
 /obj/effect/floor_decal/corner/blue/diagonal,
 /obj/machinery/microwave,
-/turf/unsimulated/floor{
-	icon_state = "dark"
-	},
+/turf/unsimulated/floor/dark,
 /area/map_template/rescue_base/base)
 "bx" = (
 /obj/structure/table/reinforced,
@@ -619,9 +553,7 @@
 /obj/item/chems/condiment/small/peppermill{
 	pixel_x = 3
 	},
-/turf/unsimulated/floor{
-	icon_state = "dark"
-	},
+/turf/unsimulated/floor/dark,
 /area/map_template/rescue_base/base)
 "by" = (
 /obj/structure/table/reinforced,
@@ -630,18 +562,14 @@
 	pixel_x = 3;
 	pixel_y = 3
 	},
-/turf/unsimulated/floor{
-	icon_state = "dark"
-	},
+/turf/unsimulated/floor/dark,
 /area/map_template/rescue_base/base)
 "bz" = (
 /obj/effect/floor_decal/corner/blue/diagonal,
 /obj/item/storage/box/sinpockets,
 /obj/structure/closet/secure_closet/freezer/kitchen,
 /obj/item/chems/condiment/enzyme,
-/turf/unsimulated/floor{
-	icon_state = "dark"
-	},
+/turf/unsimulated/floor/dark,
 /area/map_template/rescue_base/base)
 "bA" = (
 /turf/unsimulated/floor{
@@ -694,31 +622,23 @@
 "bG" = (
 /obj/structure/table/reinforced,
 /obj/item/camera,
-/turf/unsimulated/floor{
-	icon_state = "dark"
-	},
+/turf/unsimulated/floor/dark,
 /area/map_template/rescue_base/base)
 "bH" = (
 /obj/item/stool,
-/turf/unsimulated/floor{
-	icon_state = "dark"
-	},
+/turf/unsimulated/floor/dark,
 /area/map_template/rescue_base/base)
 "bI" = (
 /obj/structure/table,
 /obj/item/paper,
 /obj/item/pen,
-/turf/unsimulated/floor{
-	icon_state = "dark"
-	},
+/turf/unsimulated/floor/dark,
 /area/map_template/rescue_base/base)
 "bJ" = (
 /obj/machinery/door/airlock/centcom{
 	name = "Galley"
 	},
-/turf/unsimulated/floor{
-	icon_state = "dark"
-	},
+/turf/unsimulated/floor/dark,
 /area/map_template/rescue_base/base)
 "bK" = (
 /obj/structure/flora/bush/fullgrass,
@@ -813,9 +733,7 @@
 /obj/machinery/door/airlock/centcom{
 	name = "Detention"
 	},
-/turf/unsimulated/floor{
-	icon_state = "dark"
-	},
+/turf/unsimulated/floor/dark,
 /area/map_template/rescue_base/base)
 "bU" = (
 /obj/machinery/acting/changer,
@@ -837,17 +755,13 @@
 /obj/machinery/door/airlock/centcom{
 	name = "Squad Bay"
 	},
-/turf/unsimulated/floor{
-	icon_state = "dark"
-	},
+/turf/unsimulated/floor/dark,
 /area/map_template/rescue_base/base)
 "bX" = (
 /obj/machinery/door/airlock/centcom{
 	name = "Cell 1"
 	},
-/turf/unsimulated/floor{
-	icon_state = "dark"
-	},
+/turf/unsimulated/floor/dark,
 /area/map_template/rescue_base/base)
 "bY" = (
 /obj/structure/undies_wardrobe,
@@ -862,9 +776,7 @@
 /obj/structure/closet{
 	name = "Prisoner's Locker"
 	},
-/turf/unsimulated/floor{
-	icon_state = "dark"
-	},
+/turf/unsimulated/floor/dark,
 /area/map_template/rescue_base/base)
 "ca" = (
 /obj/structure/table/reinforced,
@@ -1169,9 +1081,7 @@
 /area/map_template/rescue_base/base)
 "cv" = (
 /obj/machinery/hologram/holopad/longrange,
-/turf/unsimulated/floor{
-	icon_state = "dark"
-	},
+/turf/unsimulated/floor/dark,
 /area/map_template/rescue_base/base)
 "cw" = (
 /obj/structure/rack,
@@ -1225,15 +1135,11 @@
 /obj/structure/table/reinforced,
 /obj/item/paper_bin,
 /obj/item/pen,
-/turf/unsimulated/floor{
-	icon_state = "dark"
-	},
+/turf/unsimulated/floor/dark,
 /area/map_template/rescue_base/base)
 "cB" = (
 /obj/structure/table/reinforced,
-/turf/unsimulated/floor{
-	icon_state = "dark"
-	},
+/turf/unsimulated/floor/dark,
 /area/map_template/rescue_base/base)
 "cD" = (
 /obj/machinery/fabricator/hacked,
@@ -1310,9 +1216,7 @@
 /obj/structure/closet{
 	name = "insignias closet"
 	},
-/turf/unsimulated/floor{
-	icon_state = "dark"
-	},
+/turf/unsimulated/floor/dark,
 /area/map_template/rescue_base/base)
 "cJ" = (
 /obj/machinery/chem_master,
@@ -1380,9 +1284,7 @@
 /obj/structure/bed/chair{
 	dir = 1
 	},
-/turf/unsimulated/floor{
-	icon_state = "dark"
-	},
+/turf/unsimulated/floor/dark,
 /area/map_template/rescue_base/base)
 "cQ" = (
 /obj/structure/table/reinforced,
@@ -1903,30 +1805,22 @@
 "dS" = (
 /obj/structure/table/steel,
 /obj/item/radio/intercom,
-/turf/unsimulated/floor{
-	icon_state = "dark"
-	},
+/turf/unsimulated/floor/dark,
 /area/map_template/rescue_base/base)
 "dT" = (
 /obj/structure/table/steel,
-/turf/unsimulated/floor{
-	icon_state = "dark"
-	},
+/turf/unsimulated/floor/dark,
 /area/map_template/rescue_base/base)
 "dU" = (
 /obj/structure/table/steel,
 /obj/item/storage/box/fancy/cigar,
-/turf/unsimulated/floor{
-	icon_state = "dark"
-	},
+/turf/unsimulated/floor/dark,
 /area/map_template/rescue_base/base)
 "dV" = (
 /obj/machinery/door/airlock/centcom{
 	name = "Command"
 	},
-/turf/unsimulated/floor{
-	icon_state = "dark"
-	},
+/turf/unsimulated/floor/dark,
 /area/map_template/rescue_base/base)
 "dW" = (
 /obj/structure/reagent_dispensers/watertank,
@@ -2081,15 +1975,11 @@
 /area/map_template/rescue_base/base)
 "eq" = (
 /obj/machinery/mech_recharger,
-/turf/unsimulated/floor{
-	icon_state = "dark"
-	},
+/turf/unsimulated/floor/dark,
 /area/map_template/rescue_base/base)
 "er" = (
 /obj/item/card/id/centcom,
-/turf/unsimulated/floor{
-	icon_state = "dark"
-	},
+/turf/unsimulated/floor/dark,
 /area/map_template/rescue_base/base)
 "et" = (
 /obj/structure/rack,
@@ -2117,10 +2007,7 @@
 	pixel_x = -5;
 	pixel_y = 4
 	},
-/turf/unsimulated/floor{
-	icon_state = "cult";
-	name = "plating"
-	},
+/turf/unsimulated/floor/cult,
 /area/map_template/rescue_base/base)
 "ew" = (
 /obj/structure/table/woodentable{
@@ -2130,10 +2017,7 @@
 	desc = "Should anything ever go wrong...";
 	frequency = 1345
 	},
-/turf/unsimulated/floor{
-	icon_state = "cult";
-	name = "plating"
-	},
+/turf/unsimulated/floor/cult,
 /area/map_template/rescue_base/base)
 "ex" = (
 /obj/structure/table/woodentable{
@@ -2145,10 +2029,7 @@
 	pixel_x = 5;
 	pixel_y = 4
 	},
-/turf/unsimulated/floor{
-	icon_state = "cult";
-	name = "plating"
-	},
+/turf/unsimulated/floor/cult,
 /area/map_template/rescue_base/base)
 "ey" = (
 /obj/structure/rack,
@@ -2330,9 +2211,7 @@
 /obj/item/radio/intercom{
 	pixel_y = 22
 	},
-/turf/unsimulated/floor{
-	icon_state = "dark"
-	},
+/turf/unsimulated/floor/dark,
 /area/map_template/rescue_base/base)
 "eH" = (
 /obj/structure/table/woodentable{
@@ -2340,28 +2219,19 @@
 	},
 /obj/item/ashtray,
 /obj/item/trash/cigbutt/cigarbutt,
-/turf/unsimulated/floor{
-	icon_state = "cult";
-	name = "plating"
-	},
+/turf/unsimulated/floor/cult,
 /area/map_template/rescue_base/base)
 "eI" = (
 /obj/structure/bed/chair/comfy/brown{
 	dir = 1
 	},
-/turf/unsimulated/floor{
-	icon_state = "cult";
-	name = "plating"
-	},
+/turf/unsimulated/floor/cult,
 /area/map_template/rescue_base/base)
 "eJ" = (
 /obj/structure/table/woodentable{
 	dir = 5
 	},
-/turf/unsimulated/floor{
-	icon_state = "cult";
-	name = "plating"
-	},
+/turf/unsimulated/floor/cult,
 /area/map_template/rescue_base/base)
 "eK" = (
 /obj/machinery/door/airlock/centcom{
@@ -3284,35 +3154,27 @@
 	initial_network_id = "responsenet";
 	req_access = list("ACCESS_CENT_SPECOPS")
 	},
-/turf/unsimulated/floor{
-	icon_state = "dark"
-	},
+/turf/unsimulated/floor/dark,
 /area/map_template/rescue_base/base)
 "mp" = (
 /obj/machinery/door/airlock/centcom{
 	name = "Telecommunications"
 	},
-/turf/unsimulated/floor{
-	icon_state = "dark"
-	},
+/turf/unsimulated/floor/dark,
 /area/map_template/rescue_base/base)
 "qE" = (
 /obj/machinery/network/mainframe{
 	initial_network_id = "responsenet";
 	req_access = list("ACCESS_CENT_SPECOPS")
 	},
-/turf/unsimulated/floor{
-	icon_state = "dark"
-	},
+/turf/unsimulated/floor/dark,
 /area/map_template/rescue_base/base)
 "ty" = (
 /obj/machinery/computer/message_monitor{
 	dir = 4;
 	throwpass = 1
 	},
-/turf/unsimulated/floor{
-	icon_state = "dark"
-	},
+/turf/unsimulated/floor/dark,
 /area/map_template/rescue_base/base)
 "vA" = (
 /obj/machinery/network/relay/long_range{
@@ -3326,15 +3188,11 @@
 	initial_network_id = "responsenet";
 	req_access = list("ACCESS_CENT_SPECOPS")
 	},
-/turf/unsimulated/floor{
-	icon_state = "dark"
-	},
+/turf/unsimulated/floor/dark,
 /area/map_template/rescue_base/base)
 "Qa" = (
 /obj/machinery/network/telecomms_hub/ert,
-/turf/unsimulated/floor{
-	icon_state = "dark"
-	},
+/turf/unsimulated/floor/dark,
 /area/map_template/rescue_base/base)
 
 (1,1,1) = {"

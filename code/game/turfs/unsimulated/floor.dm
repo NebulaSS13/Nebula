@@ -23,3 +23,16 @@
 
 /turf/unsimulated/floor/shuttle_ceiling
 	icon_state = "reinforced"
+
+/turf/unsimulated/floor/white
+	icon = 'icons/turf/flooring/tiles/tile_white.dmi'
+	icon_state = "tiled_light"
+
+/turf/unsimulated/floor/dark
+	icon = 'icons/turf/flooring/static/floors.dmi'
+	icon_state = "dark"
+
+/turf/unsimulated/floor/cult
+	name = "plating"
+	icon = 'icons/turf/flooring/static/floors.dmi'
+	icon_state = "cult"

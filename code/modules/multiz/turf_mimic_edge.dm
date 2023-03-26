@@ -75,7 +75,7 @@
 /turf/simulated/mimic_edge/proc/setup_mimic()
 	return
 
-/turf/simulated/mimic_edge/on_update_icon()
+/turf/simulated/mimic_edge/on_update_icon(var/update_neighbors = FALSE)
 	return
 
 /turf/simulated/mimic_edge/get_vis_contents_to_add()
@@ -151,7 +151,7 @@
 /turf/unsimulated/mimic_edge/proc/setup_mimic()
 	return
 
-/turf/unsimulated/mimic_edge/on_update_icon()
+/turf/unsimulated/mimic_edge/on_update_icon(var/update_neighbors = FALSE)
 	return
 
 /turf/unsimulated/mimic_edge/get_vis_contents_to_add()
@@ -227,7 +227,7 @@
 /turf/exterior/mimic_edge/proc/setup_mimic()
 	return
 
-/turf/exterior/mimic_edge/on_update_icon()
+/turf/exterior/mimic_edge/on_update_icon(var/update_neighbors = FALSE)
 	return
 
 /turf/exterior/mimic_edge/get_vis_contents_to_add()

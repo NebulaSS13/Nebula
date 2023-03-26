@@ -13,69 +13,63 @@
 	return
 	// HOLOFLOOR DOES NOT GIVE A FUCK
 
-/turf/simulated/floor/holofloor/set_flooring()
+/turf/simulated/floor/holofloor/set_flooring_layers(var/decl/flooring/new_flooring, var/defer_icon_update, var/assume_unchanged = FALSE)
 	return
 
 /turf/simulated/floor/holofloor/carpet
 	name = "brown carpet"
-	icon = 'icons/turf/flooring/carpet.dmi'
+	icon = 'icons/turf/flooring/carpet/carpet_brown.dmi'
 	icon_state = "brown"
-	initial_flooring = /decl/flooring/carpet
-
-/turf/simulated/floor/holofloor/concrete
-	name = "brown carpet"
-	icon = 'icons/turf/flooring/carpet.dmi'
-	icon_state = "brown"
-	initial_flooring = /decl/flooring/carpet
+	flooring_layers = /decl/flooring/carpet
 
 /turf/simulated/floor/holofloor/concrete
 	name = "floor"
-	icon = 'icons/turf/flooring/misc.dmi'
+	icon = 'icons/turf/flooring/static/floors.dmi'
 	icon_state = "concrete"
-	initial_flooring = null
+	flooring_layers = null
 
 /turf/simulated/floor/holofloor/tiled
 	name = "floor"
-	icon = 'icons/turf/flooring/tiles.dmi'
-	icon_state = "steel"
-	initial_flooring = /decl/flooring/tiling
+	icon = 'icons/turf/flooring/tiles/tile.dmi'
+	icon_state = "tiled"
+	flooring_layers = /decl/flooring/tiling
 
 /turf/simulated/floor/holofloor/tiled/dark
 	name = "dark floor"
-	icon_state = "dark"
-	initial_flooring = /decl/flooring/tiling/dark
+	color = COLOR_OFF_WHITE
+	icon = 'icons/turf/flooring/tiles/tile_white.dmi'
+	icon_state = "tiled_light"
+	flooring_layers = /decl/flooring/tiling/dark
 
 /turf/simulated/floor/holofloor/tiled/stone
 	name = "stone floor"
+	icon = 'icons/turf/flooring/tiles/tile_stone.dmi'
 	icon_state = "stone"
-	initial_flooring = /decl/flooring/tiling/stone
+	flooring_layers = /decl/flooring/tiling/stone
 
 /turf/simulated/floor/holofloor/lino
 	name = "lino"
 	icon = 'icons/turf/flooring/linoleum.dmi'
 	icon_state = "lino"
-	initial_flooring = /decl/flooring/linoleum
+	flooring_layers = /decl/flooring/linoleum
 
 /turf/simulated/floor/holofloor/wood
 	name = "wooden floor"
 	icon = 'icons/turf/flooring/wood.dmi'
 	icon_state = "wood"
 	color = WOOD_COLOR_CHOCOLATE
-	initial_flooring = /decl/flooring/wood
+	flooring_layers = /decl/flooring/wood
 
 /turf/simulated/floor/holofloor/grass
 	name = "lush grass"
 	icon = 'icons/turf/flooring/grass.dmi'
 	icon_state = "grass0"
-	initial_flooring = /decl/flooring/grass
+	flooring_layers = /decl/flooring/grass
 
 /turf/simulated/floor/holofloor/snow
 	name = "snow"
-	base_name = "snow"
 	icon = 'icons/turf/floors.dmi'
-	base_icon = 'icons/turf/floors.dmi'
 	icon_state = "snow"
-	base_icon_state = "snow"
 
 /turf/simulated/floor/holofloor/space
 	icon = 'icons/turf/space.dmi'
@@ -83,8 +77,8 @@
 	icon_state = "0"
 
 /turf/simulated/floor/holofloor/reinforced
-	icon = 'icons/turf/flooring/tiles.dmi'
-	initial_flooring = /decl/flooring/reinforced
+	icon = 'icons/turf/flooring/tiles/tile_reinforced.dmi'
+	flooring_layers = /decl/flooring/reinforced
 	name = "reinforced holofloor"
 	icon_state = "reinforced"
 
@@ -94,38 +88,29 @@
 
 /turf/simulated/floor/holofloor/beach
 	desc = "Uncomfortably gritty for a hologram."
-	base_desc = "Uncomfortably gritty for a hologram."
 	icon = 'icons/misc/beach.dmi'
-	base_icon = 'icons/misc/beach.dmi'
-	initial_flooring = null
+	flooring_layers = null
 	abstract_type = /turf/simulated/floor/holofloor/beach
 
 /turf/simulated/floor/holofloor/beach/sand
 	name = "sand"
 	icon_state = "desert0"
-	base_icon_state = "desert0"
 
 /turf/simulated/floor/holofloor/beach/coastline
 	name = "coastline"
 	icon = 'icons/misc/beach2.dmi'
 	icon_state = "sandwater"
-	base_icon_state = "sandwater"
 
 /turf/simulated/floor/holofloor/beach/water
 	name = "water"
 	icon_state = "seashallow"
-	base_icon_state = "seashallow"
 
 /turf/simulated/floor/holofloor/desert
 	name = "desert sand"
-	base_name = "desert sand"
 	desc = "Uncomfortably gritty for a hologram."
-	base_desc = "Uncomfortably gritty for a hologram."
 	icon_state = "asteroid"
-	base_icon_state = "asteroid"
 	icon = 'icons/turf/flooring/asteroid.dmi'
-	base_icon = 'icons/turf/flooring/asteroid.dmi'
-	initial_flooring = null
+	flooring_layers = null
 
 /turf/simulated/floor/holofloor/desert/Initialize(var/ml)
 	. = ..()

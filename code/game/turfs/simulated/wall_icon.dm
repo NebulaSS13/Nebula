@@ -75,8 +75,10 @@
 /turf/simulated/wall/proc/apply_reinf_overlay()
 	. = istype(reinf_material)
 
-/turf/simulated/wall/on_update_icon()
-	. = ..()
+/turf/simulated/wall/on_update_icon(var/update_neighbors = FALSE)
+
+	SHOULD_CALL_PARENT(FALSE)
+
 	cut_overlays()
 
 	if(!istype(material))

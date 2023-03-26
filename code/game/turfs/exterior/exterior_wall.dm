@@ -60,6 +60,12 @@ var/global/list/natural_walls = list()
 	var/floor_type = /turf/exterior/barren
 	var/static/list/exterior_wall_shine_cache = list()
 
+/turf/exterior/wall/set_flooring_layers(var/decl/flooring/new_flooring, var/defer_icon_update, var/assume_unchanged = FALSE)
+	return
+
+/turf/exterior/wall/get_flooring()
+	return
+
 /turf/exterior/wall/examine(mob/user, distance, infix, suffix)
 	. = ..()
 	if(paint_color)
@@ -108,10 +114,7 @@ var/global/list/natural_walls = list()
 		var/turf/exterior/under = floor_type
 		icon             = initial(under.icon)
 		icon_state       = initial(under.icon_state)
-		icon_edge_layer  = initial(under.icon_edge_layer)
-		icon_edge_states = initial(under.icon_edge_states)
-		icon_has_corners = initial(under.icon_has_corners)
-		color            = initial(under.color)
+		flooring_layers  = initial(under.flooring_layers)
 
 		decals = null
 		var/turf/ramp_above = GetAbove(src)
@@ -128,9 +131,7 @@ var/global/list/natural_walls = list()
 
 		icon = 'icons/turf/walls/natural.dmi'
 		icon_state = "blank"
-		icon_edge_layer  = initial(icon_edge_layer)
-		icon_edge_states = initial(icon_edge_states)
-		icon_has_corners = initial(icon_has_corners)
+		flooring_layers  = initial(flooring_layers)
 
 	if(!skip_icon_update)
 		for(var/turf/exterior/wall/neighbor in RANGE_TURFS(src, 1))
@@ -300,7 +301,9 @@ var/global/list/natural_walls = list()
 				target_turf.update_icon()
 	update_icon()
 
-/turf/exterior/wall/on_update_icon()
+/turf/exterior/wall/on_update_icon(var/update_neighbors = FALSE)
+
+	SHOULD_CALL_PARENT(FALSE)
 
 	if(!istype(material))
 		return

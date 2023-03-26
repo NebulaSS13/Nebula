@@ -12,6 +12,7 @@
 	has_damage_range = null
 	flags = TURF_REMOVE_SCREWDRIVER
 	build_type = /obj/item/stack/tile/floor_nullglass
+	icon = 'mods/content/psionics/icons/plating.dmi'
 	psi_null = TRUE
 
 /obj/item/stack/tile/floor_nullglass

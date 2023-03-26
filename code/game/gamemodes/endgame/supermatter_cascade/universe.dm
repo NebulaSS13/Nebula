@@ -27,7 +27,7 @@ var/global/universe_has_ended = 0
 	if(istype(T,/turf/simulated/floor))
 		var/turf/simulated/floor/F=T
 		// Burnt?
-		if(!F.burnt)
+		if(!F.is_turf_burned())
 			F.burn_tile()
 		else
 			if(!istype(F,/turf/simulated/floor/plating))

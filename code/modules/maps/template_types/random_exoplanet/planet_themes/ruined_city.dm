@@ -109,9 +109,11 @@
 	if(istype(T, /turf/exterior/concrete/reinforced/road))
 		if(prob(1))
 			new/obj/structure/rubble/house(T)
+		/* TODO
 		if(prob(5))
 			var/turf/exterior/concrete/C = T
 			C.set_broken(TRUE)
+		*/
 
 /datum/random_map/city/apply_to_map()
 	..()
@@ -143,7 +145,7 @@
 		return
 	if(prob(10))
 		new/obj/item/remains/xeno/charred(T)
-	if((T.broken && prob(80)) || prob(10))
+	if((T.is_turf_broken() && prob(80)) || prob(10))
 		new/obj/structure/rubble/house(T)
 	if(prob(1))
 		new/obj/abstract/landmark/exoplanet_spawn/animal(T)

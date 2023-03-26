@@ -9,9 +9,8 @@
 	var/zone_membership_candidate = FALSE
 	/// Will participate in external atmosphere simulation if the turf is outside and no zone is set.
 	var/external_atmosphere_participation = TRUE
-
 	var/turf_flags
-
+	var/icon_base
 	var/holy = 0
 
 	// Initial air contents (in moles)
@@ -37,6 +36,7 @@
 	var/flooded // Whether or not this turf is absolutely flooded ie. a water source.
 	var/footstep_type
 	var/open_turf_type // Which open turf type to use by default above this turf in a multiz context. Overridden by area.
+	var/list/flooring_layers
 
 	var/tmp/changing_turf
 	var/tmp/prev_type // Previous type of the turf, prior to turf translation.
@@ -111,11 +111,39 @@
 	if (z_flags & ZM_MIMIC_BELOW)
 		setup_zmimic(mapload)
 
+	. = INITIALIZE_HINT_NORMAL
+
+	//Grab owner and set base area if we don't have a valid area
+	if(istype(loc, world.area))
+		var/datum/planetoid_data/owner = LAZYACCESS(SSmapping.planetoid_data_by_z, z)
+		if(istype(owner))
+			//Must be done here, as light data is not fully carried over by ChangeTurf (but overlays are).
+			//If on the surface level, and the planet defines a surface area, prioritize it.
+			var/datum/level_data/L = SSmapping.levels_by_z[z]
+			if(L.level_id == owner.surface_level_id && owner.surface_area)
+				ChangeArea(src, owner.surface_area)
+			//Otherwise fall back to the level_data's base_area
+			else if(L.base_area)
+				ChangeArea(src, L.get_base_area_instance())
+
+	if(_broken)
+		set_turf_broken(_broken, skip_icon_update = TRUE, force = TRUE)
+		. = INITIALIZE_HINT_LATELOAD
+	if(_burned)
+		set_turf_burned(_burned, skip_icon_update = TRUE, force = TRUE)
+		. = INITIALIZE_HINT_LATELOAD
 	if(flooded)
 		set_flooded(flooded, TRUE, skip_vis_contents_update = TRUE, mapload = mapload)
+		. = INITIALIZE_HINT_LATELOAD
+	if(flooring_layers)
+		set_flooring_layers(flooring_layers, defer_icon_update = TRUE, assume_unchanged = TRUE)
+		. = INITIALIZE_HINT_LATELOAD
+
 	update_vis_contents()
 
-	return INITIALIZE_HINT_NORMAL
+/turf/LateInitialize()
+	..()
+	update_icon()
 
 /turf/examine(mob/user, distance, infix, suffix)
 	. = ..()
@@ -143,6 +171,7 @@
 	SSambience.queued -= src
 
 	changing_turf = FALSE
+	flooring_layers = null
 
 	if (contents.len > !!lighting_overlay)
 		remove_cleanables()
@@ -169,22 +198,29 @@
 	QDEL_NULL(fluid_overlay)
 
 	..()
-
 	return QDEL_HINT_IWILLGC
 
 /turf/explosion_act(severity)
 	SHOULD_CALL_PARENT(FALSE)
-	if(severity == 1 || (severity == 2 && prob(70)))
+	if(severity == 1 || (severity == 2 && prob(40)))
 		drop_diggable_resources()
+		var/replacement_turf = get_base_turf_by_area(src)
+		if(!istype(src, replacement_turf))
+			ChangeTurf(replacement_turf)
 
 /turf/proc/is_solid_structure()
-	return !(turf_flags & TURF_FLAG_BACKGROUND) || locate(/obj/structure/lattice, src)
+	return locate(/obj/structure/lattice, src) || locate(/obj/structure/catwalk, src)
 
 /turf/proc/get_base_movement_delay(var/travel_dir, var/mob/mover)
-	return movement_delay
+	if(is_solid_structure())
+		return null // No base movement impact for walking on structures.
+	. = movement_delay
+	var/decl/flooring/flooring = get_flooring()
+	if(flooring)
+		. += flooring.get_flooring_movement_delay(travel_dir, mover)
 
 /turf/proc/get_terrain_movement_delay(var/travel_dir, var/mob/mover)
-	. = get_base_movement_delay(travel_dir, mover)
+	. = get_base_movement_delay()
 	if(weather)
 		. += weather.get_movement_delay(return_air(), travel_dir)
 	// TODO: check user species webbed feet, wearing swimming gear
@@ -358,9 +394,6 @@
 /turf/proc/update_blood_overlays()
 	return
 
-/turf/proc/remove_decals()
-	LAZYCLEARLIST(decals)
-
 // Called when turf is hit by a thrown object
 /turf/hitby(atom/movable/AM, var/datum/thrownthing/TT)
 	SHOULD_CALL_PARENT(FALSE) // /atom/hitby() applies damage to AM if it's a living mob.
@@ -429,7 +462,7 @@
 	return FALSE
 
 /turf/proc/is_floor()
-	return FALSE
+	return !density && !is_open()
 
 /turf/proc/update_weather(var/obj/abstract/weather_system/new_weather, var/force_update_below = FALSE)
 
@@ -487,9 +520,6 @@
 	if(density)
 		return OUTSIDE_NO
 
-	if(last_outside_check != OUTSIDE_UNCERTAIN)
-		return last_outside_check
-
 	// What is our local outside value?
 	// Some turfs can be roofed irrespective of the turf above them in multiz.
 	// I have the feeling this is redundat as a roofed turf below max z will
@@ -499,7 +529,7 @@
 		var/area/A = get_area(src)
 		. = A ? A.is_outside : OUTSIDE_NO
 
-	// If we are in a multiz volume and not already inside, we return
+// If we are in a multiz volume and not already inside, we return
 	// the outside value of the highest unenclosed turf in the stack.
 	if(HasAbove(z))
 		. =  OUTSIDE_YES // assume for the moment we're unroofed until we learn otherwise.
@@ -527,7 +557,6 @@
 
 	if(!HasBelow(z))
 		return TRUE
-
 	// Invalidate the outside check cache for turfs below us.
 	var/turf/checking = src
 	while(HasBelow(checking.z))
@@ -545,8 +574,6 @@
 	if(external_atmosphere_participation && is_outside())
 		var/datum/level_data/level = SSmapping.levels_by_z[z]
 		return level.exterior_atmosphere.graphic
-	var/datum/gas_mixture/environment = return_air()
-	return environment?.graphic
 
 /turf/get_vis_contents_to_add()
 	var/air_graphic = get_air_graphic()
@@ -587,8 +614,13 @@
 	return 2
 
 /turf/on_defilement()
+	SHOULD_CALL_PARENT(FALSE)
 	var/decl/special_role/cultist/cult = GET_DECL(/decl/special_role/cultist)
 	cult.add_cultiness(CULTINESS_PER_TURF)
+	if(density)
+		ChangeTurf(/turf/simulated/wall/cult)
+	else
+		ChangeTurf(/turf/simulated/floor/cult)
 
 /turf/proc/is_defiled()
 	return (locate(/obj/effect/narsie_footstep) in src)
@@ -599,14 +631,21 @@
 /// Return an assoc list of resource item type to a base and a random component
 /// ex. return list(/obj/item/stack/material/ore/sand = list(3, 2))
 /turf/proc/get_diggable_resources()
-	return null
+	var/decl/flooring/flooring = get_flooring()
+	return flooring?.get_diggable_resources(has_been_dug())
+
+/turf/proc/has_been_dug()
+	return TRUE
 
 /turf/proc/clear_diggable_resources()
 	SHOULD_CALL_PARENT(TRUE)
 	update_icon()
 
 /turf/proc/can_be_dug()
-	return FALSE
+	if(density || is_open())
+		return FALSE
+	var/decl/flooring/flooring = get_flooring()
+	return length(flooring?.diggable_resources)
 
 /turf/proc/drop_diggable_resources()
 	SHOULD_CALL_PARENT(TRUE)

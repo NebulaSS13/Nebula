@@ -1,18 +1,39 @@
 /turf/exterior/grass
 	name = "grass"
-	possible_states = 1
-	icon = 'icons/turf/exterior/grass.dmi'
+	icon = 'icons/turf/flooring/grass.dmi'
+	icon_state = "grass0"
+	flooring_layers = /decl/flooring/grass
+
+/decl/flooring/grass
+	name = "grass"
+	desc = "Do they smoke grass out in space, Bowie? Or do they smoke AstroTurf?"
+	icon_base = "grass"
+	has_base_range = 3
+	damage_temperature = T0C+80
+	flags = TURF_REMOVE_SHOVEL
+	build_type = /obj/item/stack/tile/grass
+	can_engrave = FALSE
+	icon = 'icons/turf/flooring/grass.dmi'
 	footstep_type = /decl/footsteps/grass
 	icon_edge_layer = EXT_EDGE_GRASS
 
 /turf/exterior/wildgrass
 	name = "wild grass"
-	icon = 'icons/turf/exterior/wildgrass.dmi'
-	icon_edge_layer = EXT_EDGE_GRASS_WILD
-	icon_has_corners = TRUE
+	icon = 'icons/turf/flooring/wildgrass.dmi'
 	color = "#799c4b"
-	base_color = "#799c4b"
+	icon_state = "wildgrass"
+	flooring_layers = /decl/flooring/wildgrass
+
+/decl/flooring/wildgrass
+	name = "wild grass"
+	desc = "Watch out for snakes!"
+	icon_base = "wildgrass"
+	icon = 'icons/turf/flooring/wildgrass.dmi'
+	color = "#799c4b"
+	damage_temperature = T0C+80
+	icon_edge_layer = EXT_EDGE_GRASS_WILD
 	footstep_type = /decl/footsteps/grass
+	can_engrave = FALSE
 
 /turf/exterior/wildgrass/Initialize(mapload, no_update_icon)
 	. = ..()
@@ -40,9 +61,12 @@
 
 /turf/exterior/wildgrass/handle_melting(list/meltable_materials)
 	. = ..()
-	if(icon_state != "scorched")
-		SetName("scorched ground")
-		icon_state = "scorched"
-		icon_edge_layer = -1
-		footstep_type = /decl/footsteps/asteroid
-		color = null
+	set_flooring_layers(/decl/flooring/scorched_ground)
+
+/decl/flooring/scorched_ground
+	name = "scorched ground"
+	icon_edge_layer = -1
+	icon_base = "scorched"
+	footstep_type = /decl/footsteps/asteroid
+	color = null
+	icon = 'icons/turf/flooring/scorched.dmi'

@@ -15,6 +15,9 @@
 	},
 /turf/simulated/floor/tiled/dark/monotile,
 /area/example/first)
+"ba" = (
+/turf/exterior/dirt,
+/area/example/first)
 "bK" = (
 /obj/machinery/atmospherics/pipe/simple/hidden{
 	dir = 4
@@ -42,6 +45,9 @@
 	dir = 1
 	},
 /turf/simulated/floor/tiled/steel_grid,
+/area/example/first)
+"cs" = (
+/turf/exterior/lava,
 /area/example/first)
 "cy" = (
 /obj/machinery/vending/snack,
@@ -138,6 +144,9 @@
 	},
 /turf/simulated/floor/tiled/dark/monotile,
 /area/example/first)
+"gG" = (
+/turf/exterior,
+/area/example/first)
 "gO" = (
 /turf/simulated/wall/titanium,
 /area/shuttle/ferry)
@@ -165,6 +174,9 @@
 	dir = 10
 	},
 /turf/simulated/floor/tiled/steel_grid,
+/area/example/first)
+"iF" = (
+/turf/exterior/shrouded,
 /area/example/first)
 "jg" = (
 /obj/machinery/embedded_controller/radio/simple_docking_controller{
@@ -194,12 +206,14 @@
 /obj/effect/floor_decal/industrial/outline/blue,
 /turf/simulated/floor/tiled/dark/monotile,
 /area/example/first)
+"ku" = (
+/turf/exterior/grass,
+/area/example/first)
 "kw" = (
-/obj/abstract/landmark/latejoin,
-/obj/machinery/atmospherics/pipe/simple/hidden{
-	dir = 4
-	},
-/turf/simulated/floor/tiled/steel_grid,
+/turf/exterior/concrete,
+/area/example/first)
+"kH" = (
+/turf/exterior/wildgrass,
 /area/example/first)
 "la" = (
 /obj/machinery/door/airlock/external/bolted{
@@ -315,6 +329,9 @@
 	},
 /turf/simulated/floor/tiled/steel_grid,
 /area/example/first)
+"pt" = (
+/turf/exterior/rock/volcanic,
+/area/example/first)
 "pv" = (
 /obj/structure/rack,
 /obj/item/gun/energy/laser,
@@ -322,6 +339,9 @@
 /obj/item/gun/energy/laser,
 /obj/machinery/light,
 /turf/simulated/floor/tiled/steel_grid,
+/area/example/first)
+"qj" = (
+/turf/simulated/floor/pool,
 /area/example/first)
 "qs" = (
 /obj/machinery/atmospherics/pipe/manifold/hidden{
@@ -332,6 +352,9 @@
 "qB" = (
 /obj/machinery/teleport/hub,
 /turf/simulated/floor/tiled/dark/monotile,
+/area/example/first)
+"qD" = (
+/turf/exterior/barren,
 /area/example/first)
 "qR" = (
 /obj/machinery/power/debug_items/infinite_generator,
@@ -536,6 +559,9 @@
 /obj/effect/floor_decal/industrial/outline/grey,
 /turf/simulated/floor,
 /area/example/first)
+"yK" = (
+/turf/exterior/clay,
+/area/example/first)
 "za" = (
 /obj/machinery/light{
 	dir = 1
@@ -559,6 +585,9 @@
 	pixel_y = -19
 	},
 /turf/simulated/floor/tiled/steel_grid,
+/area/example/first)
+"AI" = (
+/turf/exterior/meat,
 /area/example/first)
 "AJ" = (
 /obj/effect/shuttle_landmark/lower_level,
@@ -599,6 +628,9 @@
 	dir = 1
 	},
 /turf/simulated/floor/tiled/dark/monotile,
+/area/example/first)
+"Cs" = (
+/turf/exterior/seafloor,
 /area/example/first)
 "CO" = (
 /obj/effect/floor_decal/industrial/warning{
@@ -667,6 +699,9 @@
 	},
 /turf/simulated/floor,
 /area/example/first)
+"Hi" = (
+/turf/exterior/sand,
+/area/example/first)
 "Hk" = (
 /turf/space,
 /area/space)
@@ -710,6 +745,9 @@
 	dir = 1
 	},
 /turf/simulated/floor,
+/area/example/first)
+"JO" = (
+/turf/exterior/mud,
 /area/example/first)
 "JS" = (
 /obj/structure/closet/secure_closet/hos,
@@ -854,6 +892,9 @@
 	},
 /turf/simulated/floor/tiled/steel_grid,
 /area/example/first)
+"Rn" = (
+/turf/exterior/rock,
+/area/example/first)
 "RB" = (
 /obj/effect/floor_decal/industrial/warning{
 	dir = 9
@@ -867,6 +908,9 @@
 	dir = 8
 	},
 /turf/simulated/floor/tiled/steel_grid,
+/area/example/first)
+"RS" = (
+/turf/exterior/chlorine_sand,
 /area/example/first)
 "RV" = (
 /obj/effect/floor_decal/industrial/warning{
@@ -910,6 +954,9 @@
 	dir = 8
 	},
 /turf/simulated/floor/tiled/steel_grid,
+/area/example/first)
+"Ud" = (
+/turf/exterior/ice,
 /area/example/first)
 "Uw" = (
 /obj/machinery/atmospherics/portables_connector,
@@ -982,6 +1029,12 @@
 "WW" = (
 /obj/effect/floor_decal/industrial/warning,
 /turf/simulated/floor/tiled/steel_grid,
+/area/example/first)
+"Xs" = (
+/turf/exterior/snow,
+/area/example/first)
+"XK" = (
+/turf/exterior/dry,
 /area/example/first)
 "XZ" = (
 /turf/simulated/wall/r_wall/prepainted,
@@ -2568,10 +2621,10 @@ CU
 jB
 CU
 CU
-CU
-CU
-CU
-CU
+gG
+pt
+Xs
+iF
 ty
 XZ
 LW
@@ -2622,10 +2675,10 @@ CU
 XZ
 wG
 CU
-CU
-CU
-CU
-CU
+qD
+ba
+cs
+Hi
 ii
 XZ
 qB
@@ -2633,7 +2686,7 @@ CU
 WW
 Yp
 VY
-kw
+Mo
 Mo
 WW
 Yp
@@ -2676,10 +2729,10 @@ CU
 XZ
 nL
 CU
-CU
-CU
-CU
-CU
+RS
+XK
+AI
+Cs
 AF
 XZ
 PE
@@ -2687,7 +2740,7 @@ CU
 WW
 Yp
 VY
-kw
+Mo
 Mo
 WW
 Yp
@@ -2730,10 +2783,10 @@ CQ
 XZ
 gk
 CU
-CU
-CU
-CU
-CU
+yK
+ku
+JO
+kH
 CU
 Jc
 CU
@@ -2741,7 +2794,7 @@ CU
 WW
 Yp
 VY
-kw
+Mo
 Mo
 WW
 Yp
@@ -2784,10 +2837,10 @@ CU
 XZ
 cy
 CU
-CU
-CU
-CU
-CU
+kw
+Ud
+Rn
+qj
 CU
 Jc
 CU
@@ -2795,7 +2848,7 @@ CU
 WW
 Yp
 VY
-kw
+Mo
 Mo
 WW
 Yp
@@ -2849,7 +2902,7 @@ CU
 WW
 Yp
 VY
-kw
+Mo
 Mo
 WW
 Yp
@@ -2903,7 +2956,7 @@ xT
 gT
 Pp
 VY
-kw
+Mo
 Mo
 WW
 Yp
@@ -2957,7 +3010,7 @@ LP
 tA
 LM
 VY
-kw
+Mo
 Mo
 WW
 Yp

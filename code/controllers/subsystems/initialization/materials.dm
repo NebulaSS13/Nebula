@@ -181,9 +181,8 @@ SUBSYSTEM_DEF(materials)
 	if(!istype(location))
 		return
 	//#TODO: allow specifying rock color per z-level maybe?
-
-	if(istype(location.owner))
-		return location.owner.get_rock_color()
+	var/datum/planetoid_data/owner = LAZYACCESS(SSmapping.planetoid_data_by_z, location.z)
+	return owner?.get_rock_color()
 
 // There is a disconnect between legacy damage and armor code. This here helps bridge the gap.
 // This could eventually be removed if we used decls for damage types.

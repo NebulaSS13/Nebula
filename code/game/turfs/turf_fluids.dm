@@ -112,6 +112,7 @@
 	return 0
 
 /turf/simulated/floor/get_physical_height()
+	var/decl/flooring/flooring = get_flooring()
 	return flooring?.height || 0
 
 /turf/fluid_act(var/datum/reagents/fluids)

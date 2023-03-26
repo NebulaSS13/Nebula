@@ -130,7 +130,7 @@
 		if(emagged)
 			return 1
 		else
-			return (amount && (T.broken || T.burnt || (improvefloors && !T.flooring)))
+			return (amount && (T.is_turf_broken() || T.is_turf_burned() || (improvefloors && !T.get_flooring())))
 
 /mob/living/bot/floorbot/UnarmedAttack(var/atom/A, var/proximity)
 
@@ -148,7 +148,7 @@
 		var/turf/simulated/floor/F = A
 		busy = 1
 		update_icon()
-		if(F.flooring)
+		if(F.get_flooring())
 			visible_message("<span class='warning'>[src] begins to tear the floor tile from the floor.</span>")
 			if(do_after(src, 50, F))
 				F.break_tile_to_plating()
@@ -162,26 +162,26 @@
 		update_icon()
 	else if(istype(A, /turf/simulated/floor))
 		var/turf/simulated/floor/F = A
-		if(F.broken || F.burnt)
+		if(F.is_turf_broken() || F.is_turf_burned())
 			busy = 1
 			update_icon()
 			visible_message("<span class='notice'>[src] begins to remove the broken floor.</span>")
 			anchored = TRUE
 			if(do_after(src, 50, F))
-				if(F.broken || F.burnt)
+				if(F.is_turf_broken() || F.is_turf_burned())
 					F.make_plating()
 			anchored = FALSE
 			target = null
 			busy = 0
 			update_icon()
-		else if(!F.flooring && amount)
+		else if(!F.get_flooring() && amount)
 			busy = 1
 			update_icon()
 			visible_message("<span class='notice'>[src] begins to improve the floor.</span>")
 			anchored = TRUE
 			if(do_after(src, 50, F))
-				if(!F.flooring)
-					F.set_flooring(GET_DECL(floor_build_type))
+				if(!F.get_flooring())
+					F.set_flooring_layers(floor_build_type)
 					addTiles(-1)
 			anchored = FALSE
 			target = null
