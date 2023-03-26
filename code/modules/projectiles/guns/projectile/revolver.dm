@@ -41,6 +41,9 @@
 	chamber_offset = 0
 	return ..()
 
+/obj/item/gun/projectile/revolver/stun
+	ammo_type = /obj/item/ammo_casing/pistol/magnum/stun
+
 /obj/item/gun/projectile/revolver/capgun
 	name = "cap gun"
 	desc = "Looks almost like the real thing! Ages 8 and up."

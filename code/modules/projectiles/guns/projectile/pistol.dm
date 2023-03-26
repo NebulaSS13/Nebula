@@ -12,6 +12,9 @@
 /obj/item/gun/projectile/pistol/rubber
 	magazine_type = /obj/item/ammo_magazine/pistol/rubber
 
+/obj/item/gun/projectile/pistol/emp
+	magazine_type = /obj/item/ammo_magazine/pistol/emp
+
 /obj/item/gun/projectile/pistol/update_base_icon()
 	var/base_state = get_world_inventory_state()
 	if(!length(ammo_magazine?.stored_ammo) && check_state_in_icon("[base_state]-e", icon))

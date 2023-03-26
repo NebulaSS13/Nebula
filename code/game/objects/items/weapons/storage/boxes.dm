@@ -186,6 +186,9 @@
 /obj/item/storage/box/ammo/shotgunammo/WillContain()
 	return list(/obj/item/ammo_magazine/shotholder = 2)
 
+/obj/item/storage/box/ammo/shotgunammo/large/WillContain()
+	return list(/obj/item/ammo_magazine/shotholder = 4)
+
 /obj/item/storage/box/ammo/shotgunshells
 	name = "box of shotgun shells"
 /obj/item/storage/box/ammo/shotgunshells/WillContain()
@@ -200,6 +203,9 @@
 	name = "box of stun shells"
 /obj/item/storage/box/ammo/stunshells/WillContain()
 	return list(/obj/item/ammo_magazine/shotholder/stun = 2)
+
+/obj/item/storage/box/ammo/stunshells/large/WillContain()
+	return list(/obj/item/ammo_magazine/shotholder/stun = 4)
 
 /obj/item/storage/box/ammo/sniperammo
 	name = "box of sniper shells"
