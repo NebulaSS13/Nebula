@@ -193,12 +193,12 @@
 			if(i == surface_level_index)
 				gen_data.set_surface_level(LDnew)
 
-		LDnew.before_template_load(src, gen_data) //Apply planet name, etc..
+		LDnew.before_template_generation(src, gen_data) //Apply planet name, etc..
 		. += LDnew
 
 	log_debug("\n\tZ-Stack Top:[world.maxz], Direction:[dir_name(direction_from_root)]")
 	//Make sure the stack has its stack top object
-	var/obj/abstract/map_data/MD = new /obj/abstract/map_data(locate(1, 1, world.maxz), stack_height)
+	var/obj/abstract/map_data/MD = new /obj/abstract/map_data(locate(1, 1, world.maxz), stack_height) //#TODO: maybe combine map_data with level_data?
 	MD.SetName("ZStack: [gen_data.name] - [.[length(.)]]")
 
 /datum/map_template/planetoid/load_new_z(no_changeturf = TRUE, centered = TRUE, datum/planetoid_data/gen_data) //centered == false should probably runtime, because it will never work properly

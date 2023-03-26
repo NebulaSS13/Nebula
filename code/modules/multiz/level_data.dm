@@ -275,6 +275,12 @@
 		return FALSE
 	return TRUE
 
+//#TODO: this could probably be done in a more elegant way. Since most map templates will never call this.
+///Called before a runtime generated template is generated on our z-level. Only applies to templates generated onto new z-levels.
+/// Is never called by templates which are loaded from file!
+/datum/level_data/proc/before_template_generation(var/datum/map_template/template)
+	return
+
 ///Called after a map_template has been loaded on our z-level. Only apply to templates loaded onto new z-levels.
 /datum/level_data/proc/after_template_load(var/datum/map_template/template)
 	if(template.accessibility_weight)

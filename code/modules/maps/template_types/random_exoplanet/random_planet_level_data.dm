@@ -26,8 +26,7 @@
 	level_id = "planetoid_[level_z]_[sequential_id(/datum/level_data)]"
 
 ///Prepare our level for generation/load. And sync with the planet template
-/datum/level_data/planetoid/before_template_load(datum/map_template/template, datum/planetoid_data/gen_data)
-	. = ..()
+/datum/level_data/planetoid/before_template_generation(datum/map_template/template, var/datum/planetoid_data/gen_data)
 	//In cases when the planetoid_data isn't shared with us, like from loading non-random planet map templates, we can try fetching it.
 	if(!gen_data)
 		gen_data = SSmapping.planetoid_data_by_z[level_z]
