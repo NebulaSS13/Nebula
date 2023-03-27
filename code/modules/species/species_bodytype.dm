@@ -30,6 +30,8 @@ var/global/list/bodytypes_by_category = list()
 	var/antaghud_offset_x = 0                 // As above, but specifically for the antagHUD indicator.
 	var/antaghud_offset_y = 0                 // As above, but specifically for the antagHUD indicator.
 
+	var/eye_offset = 0                        // Amount to shift eyes on the Y axis to correct for non-32px height.
+
 	var/list/prone_overlay_offset = list(0, 0) // amount to shift overlays when lying
 
 	// Per-bodytype per-zone message strings, see /mob/proc/get_hug_zone_messages
