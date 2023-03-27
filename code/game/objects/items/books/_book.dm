@@ -57,7 +57,7 @@
 	if(carved == 1)
 		if(!store)
 			if(W.w_class < ITEM_SIZE_NORMAL)
-				if(!user.unEquip(W, src))
+				if(!user.try_unequip(W, src))
 					return
 				store = W
 				to_chat(user, "<span class='notice'>You put [W] in [title].</span>")

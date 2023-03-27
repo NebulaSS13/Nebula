@@ -17,7 +17,7 @@
 		return
 	// Fruits and vegetables.
 	if(istype(O, /obj/item/chems/food/grown) || istype(O, /obj/item/grown))
-		if(!user.unEquip(O))
+		if(!user.try_unequip(O))
 			return
 
 		var/datum/seed/new_seed_type

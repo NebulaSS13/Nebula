@@ -83,7 +83,7 @@
 
 /**Insert the given item into the bundle, optionally at the index specified, or otherwise at the end. */
 /obj/item/paper_bundle/proc/insert_sheet_at(var/mob/user, var/obj/item/sheet, var/index = null)
-	if (user && !user.unEquip(sheet, src))
+	if (user && !user.try_unequip(sheet, src))
 		return
 	else if(!user)
 		sheet.forceMove(src)
@@ -368,7 +368,7 @@
 		//Merge the thing
 		insert_sheet_at(user, I, at_hint)
 		if(user)
-			if(!user.unEquip(I, src))
+			if(!user.try_unequip(I, src))
 				to_chat(user, SPAN_WARNING("You can't unequip \the [I]!"))
 				return
 			I.add_fingerprint(user)
@@ -510,7 +510,7 @@
 	return //Don't merge
 
 /obj/item/paper_bundle/refill/break_bundle(mob/user)
-	user?.unEquip(src)
+	user?.try_unequip(src)
 	var/turf/T = get_turf(src)
 	for(var/i = 1 to bundle_size)
 		new /obj/item/paper(T)

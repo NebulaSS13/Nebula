@@ -39,7 +39,7 @@
 		SET_STATUS_MAX(C, STAT_STUN, 20)
 		SET_STATUS_MAX(C, STAT_SILENCE, 20)
 	admin_attack_log(user, M, "Used a stun talisman.", "Was victim of a stun talisman.", "used a stun talisman on")
-	user.unEquip(src)
+	user.try_unequip(src)
 	qdel(src)
 
 /obj/item/paper/talisman/emp/attack_self(var/mob/user)
@@ -55,5 +55,5 @@
 	user.say("Ta'gh fara[pick("'","`")]qha fel d'amar det!")
 	user.visible_message(SPAN_DANGER("\The [user] invokes \the [src] at [target]."), SPAN_DANGER("You invoke \the [src] at [target]."))
 	target.emp_act(1)
-	user.unEquip(src)
+	user.try_unequip(src)
 	qdel(src)

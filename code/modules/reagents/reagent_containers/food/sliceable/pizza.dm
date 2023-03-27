@@ -234,7 +234,7 @@
 				boxestoadd += i
 
 			if( (boxes.len+1) + boxestoadd.len <= 5 )
-				if(!user.unEquip(box, src))
+				if(!user.try_unequip(box, src))
 					return TRUE
 				box.boxes = list()// clear the box boxes so we don't have boxes inside boxes. - Xzibit
 				src.boxes.Add( boxestoadd )
@@ -253,7 +253,7 @@
 	if( istype(I, /obj/item/chems/food/sliceable/pizza/) )
 
 		if( src.open )
-			if(!user.unEquip(I, src))
+			if(!user.try_unequip(I, src))
 				return TRUE
 			src.pizza = I
 

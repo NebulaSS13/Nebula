@@ -24,7 +24,7 @@
 
 		var/obj/item/clothing/accessory/A = I
 		if(can_attach_accessory(A))
-			if(!user.unEquip(A))
+			if(!user.try_unequip(A))
 				return
 			attach_accessory(user, A)
 			return
@@ -54,7 +54,7 @@
 	if(ishuman(user) && loc == user && istype(over, /obj/screen/inventory))
 		var/obj/screen/inventory/inv = over
 		add_fingerprint(user)
-		if(user.unEquip(src))
+		if(user.try_unequip(src))
 			user.equip_to_slot_if_possible(src, inv.slot_id)
 		return TRUE
 	. = ..()

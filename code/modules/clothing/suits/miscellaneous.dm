@@ -132,7 +132,7 @@
 			var/mob/living/carbon/C = user
 			var/obj/item/cuffs = C.get_equipped_item(slot_handcuffed_str)
 			if(cuffs)
-				C.unEquip(cuffs)
+				C.try_unequip(cuffs)
 		user.drop_held_items()
 
 /obj/item/clothing/suit/ianshirt

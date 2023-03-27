@@ -35,7 +35,7 @@
 	. = istype(thing, completion_trigger_type)
 
 /decl/crafting_stage/proc/consume(var/mob/user, var/obj/item/thing, var/obj/item/target)
-	. = !consume_completion_trigger || (user.unEquip(thing) && thing.forceMove(target))
+	. = !consume_completion_trigger || (user.try_unequip(thing) && thing.forceMove(target))
 	if(. && stack_consume_amount > 0)
 		var/obj/item/stack/stack = thing
 		if(!istype(stack) || stack.amount < stack_consume_amount)

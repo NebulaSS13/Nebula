@@ -356,7 +356,7 @@
 	if(QDELETED(src))
 		return
 
-	if(!user.unEquip(src))
+	if(!user.try_unequip(src))
 		return
 
 	var/obj/item/chems/food/organ/O = new(get_turf(src))

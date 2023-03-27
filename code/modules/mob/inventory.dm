@@ -188,7 +188,7 @@
 	As far as I can tell the proc exists so that mobs with different inventory slots can override
 	the search through all the slots, without having to duplicate the rest of the item dropping.
 */
-/mob/proc/u_equip(obj/W)
+/mob/proc/unequip(obj/W)
 	SHOULD_CALL_PARENT(TRUE)
 	if(W == _back)
 		_back = null
@@ -233,7 +233,7 @@
 	return
 
 //This differs from remove_from_mob() in that it checks if the item can be unequipped first. Use drop_from_inventory if you don't want to check.
-/mob/proc/unEquip(obj/item/I, var/atom/target, var/play_dropsound = TRUE)
+/mob/proc/try_unequip(obj/item/I, var/atom/target, var/play_dropsound = TRUE)
 	if(!canUnEquip(I))
 		return FALSE
 	drop_from_inventory(I, target, play_dropsound)
@@ -243,7 +243,7 @@
 /mob/proc/remove_from_mob(var/obj/O, var/atom/target, var/play_dropsound = TRUE)
 	if(!O) // Nothing to remove, so we succeed.
 		return 1
-	src.u_equip(O)
+	src.unequip(O)
 	if (src.client)
 		src.client.screen -= O
 	O.reset_plane_and_layer()
@@ -259,7 +259,7 @@
 
 /mob/proc/drop_held_items()
 	for(var/thing in get_held_items())
-		unEquip(thing)
+		try_unequip(thing)
 
 //Returns the item equipped to the specified slot, if any.
 /mob/proc/get_equipped_item(var/slot)

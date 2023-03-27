@@ -12,7 +12,7 @@
 var/global/list/material_extractor_items_whitelist = list(/obj/item/stack/material/ore)
 
 ////////////////////////////////////////////////////
-// Holder for the reagents_holder. 
+// Holder for the reagents_holder.
 // Since reagents_holder can't exist on its own for some reasons
 ////////////////////////////////////////////////////
 /obj/input_holder
@@ -85,14 +85,14 @@ var/global/list/material_extractor_items_whitelist = list(/obj/item/stack/materi
 	. = ..()
 
 /obj/machinery/atmospherics/unary/material/extractor/Bumped(var/obj/O)
-	if(QDELETED(O)) //Because we qdel object at the input if we can process them. And its possible this might happen 
+	if(QDELETED(O)) //Because we qdel object at the input if we can process them. And its possible this might happen
 		return
 	//We only override for entities touching the machine from the input's direction only
 	if(get_dir(loc, O.loc) != get_input_dir() || inoperable() || !O.checkpass(PASS_FLAG_TABLE) || O.anchored)
 		return ..()
-	
-	//2 possible cases here. One we got something that we can turn into liquids or gas (with or without accompanying solid reagent at STP) 
-	// OR we get something that only contains matter that's solid at STP, which we should just pass along so whatever else is in the 
+
+	//2 possible cases here. One we got something that we can turn into liquids or gas (with or without accompanying solid reagent at STP)
+	// OR we get something that only contains matter that's solid at STP, which we should just pass along so whatever else is in the
 	// conveyor line can process it.
 	if(can_process_object(O))
 		if(calc_resulting_reagents_total_vol(O) > input_tank_free_volume())
@@ -125,16 +125,16 @@ var/global/list/material_extractor_items_whitelist = list(/obj/item/stack/materi
 	if(output_container)
 		var/output_desc = SPAN_NOTICE("It has \a [output_container.name] in place to receive reagents.")
 		if(is_output_container_full())
-			output_desc = "[output_desc] [SPAN_WARNING("It's full!")]" 
+			output_desc = "[output_desc] [SPAN_WARNING("It's full!")]"
 		to_chat(user, output_desc)
-	else 
+	else
 		to_chat(user, SPAN_NOTICE("It has nothing to pour reagents into."))
 
 /obj/machinery/atmospherics/unary/material/extractor/attackby(var/obj/item/I, var/mob/user)
 	if(istype(I, /obj/item/chems/glass))
 		add_fingerprint(user)
 		if(!output_container)
-			if(!user.unEquip(I, src))
+			if(!user.try_unequip(I, src))
 				return
 			output_container = I
 			user.visible_message(SPAN_NOTICE("\The [user] places \a [I] in \the [src]."), SPAN_NOTICE("You place \a [I] in \the [src]."))
@@ -158,11 +158,11 @@ var/global/list/material_extractor_items_whitelist = list(/obj/item/stack/materi
 
 /obj/machinery/atmospherics/unary/material/extractor/on_update_icon()
 	cut_overlays()
-	
+
 	var/initial_state = initial(icon_state)
 	if(!use_power || inoperable())
 		icon_state = "[initial_state]-off"
-	else 
+	else
 		icon_state = initial_state
 
 	if(panel_open)
@@ -227,7 +227,7 @@ var/global/list/material_extractor_items_whitelist = list(/obj/item/stack/materi
 
 /obj/machinery/atmospherics/unary/material/extractor/proc/is_input_tank_empty()
 	return round(input_buffer.reagents.total_volume, GAS_EXTRACTOR_MIN_REAGENT_AMOUNT) == 0
-	
+
 /obj/machinery/atmospherics/unary/material/extractor/proc/is_internal_tank_full()
 	return internal_tank_free_volume() <= 0
 
@@ -280,7 +280,7 @@ var/global/list/material_extractor_items_whitelist = list(/obj/item/stack/materi
 	for(var/mat in input_buffer.reagents?.reagent_volumes)
 		var/decl/material/M = GET_DECL(mat)
 		var/available_volume = round(REAGENT_VOLUME(input_buffer.reagents, M.type), GAS_EXTRACTOR_MIN_REAGENT_AMOUNT)
-		
+
 		//Don't bother if we got a really small quatity, and just get rid of it
 		if(available_volume < GAS_EXTRACTOR_MIN_REAGENT_AMOUNT)
 			input_buffer.reagents.clear_reagent(M.type)
@@ -333,12 +333,12 @@ var/global/list/material_extractor_items_whitelist = list(/obj/item/stack/materi
 
 //We want to convert a liquid to its gaseous state
 //So we want to convert liquid units to moles.
-// We need: 
+// We need:
 //	the volume of liquid
 //	the density of the liquid
 //	the molar mass of the liquid
 //Since we have none of those currently in the material datums, just assume everything is water
-// Density: 997.07 g/L 
+// Density: 997.07 g/L
 // Molar Mass: 18.02 g/mol
 //We'll assume a unit of reagent is 1 mL, so we'll divide the density by 1,000. We get 0.99707
 // 0.99707 / 18.02 => 0.553 mol/ml
@@ -401,7 +401,7 @@ var/global/list/material_extractor_items_whitelist = list(/obj/item/stack/materi
 	desc = "Empty the internal reagents tank on the floor."
 	call_proc = /obj/machinery/atmospherics/unary/material/extractor/verb/FlushReagents
 
-#undef GAS_EXTRACTOR_GAS_TANK 
+#undef GAS_EXTRACTOR_GAS_TANK
 #undef GAS_EXTRACTOR_REAGENTS_TANK
 #undef GAS_EXTRACTOR_REAGENTS_INPUT_TANK
 #undef GAS_EXTRACTOR_OPERATING_TEMP

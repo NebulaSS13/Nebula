@@ -173,7 +173,7 @@
 	if(IS_WRENCH(I) || istype(I, /obj/item/stack) || IS_WIRECUTTER(I))
 		return 1
 	if(iv_stand && !beaker && istype(I, /obj/item/chems))
-		if(!user.unEquip(I, src))
+		if(!user.try_unequip(I, src))
 			return
 		to_chat(user, "You attach \the [I] to \the [src].")
 		beaker = I
@@ -267,7 +267,7 @@
 	pickup_sound = 'sound/foley/pickup2.ogg'
 	material = /decl/material/solid/metal/steel
 	matter = list(
-		/decl/material/solid/plastic = MATTER_AMOUNT_SECONDARY, 
+		/decl/material/solid/plastic = MATTER_AMOUNT_SECONDARY,
 		/decl/material/solid/cloth = MATTER_AMOUNT_REINFORCEMENT,
 	)
 	var/structure_form_type = /obj/structure/bed/roller	//The deployed form path.

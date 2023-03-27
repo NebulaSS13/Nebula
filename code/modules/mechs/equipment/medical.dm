@@ -76,7 +76,7 @@
 //You cannot modify these, it'd probably end with something in nullspace. In any case basic meds are plenty for an ambulance
 /obj/machinery/sleeper/mounted/attackby(var/obj/item/I, var/mob/user)
 	if(istype(I, /obj/item/chems/glass))
-		if(!user.unEquip(I, src))
+		if(!user.try_unequip(I, src))
 			return
 
 		if(beaker)

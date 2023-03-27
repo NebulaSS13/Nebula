@@ -179,7 +179,7 @@
 	if(severity == 1)
 		qdel(src)
 
-/mob/living/slime/u_equip(obj/item/W)
+/mob/living/slime/unequip(obj/item/W)
 	SHOULD_CALL_PARENT(FALSE)
 	return FALSE
 

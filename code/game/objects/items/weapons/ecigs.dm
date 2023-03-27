@@ -133,7 +133,7 @@
 	if(istype(I, /obj/item/chems/ecig_cartridge))
 		if (ec_cartridge)//can't add second one
 			to_chat(user, SPAN_NOTICE("A cartridge has already been installed."))
-		else if(user.unEquip(I, src))//fits in new one
+		else if(user.try_unequip(I, src))//fits in new one
 			ec_cartridge = I
 			update_icon()
 			to_chat(user, SPAN_NOTICE("You insert \the [I] into \the [src]."))
@@ -148,7 +148,7 @@
 			to_chat(user, SPAN_NOTICE("There's no battery in \the [src]."))
 
 	if(istype(I, /obj/item/cell/device))
-		if(!cigcell && user.unEquip(I))
+		if(!cigcell && user.try_unequip(I))
 			I.forceMove(src)
 			cigcell = I
 			to_chat(user, SPAN_NOTICE("You install \the [cigcell] into \the [src]."))

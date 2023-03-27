@@ -70,7 +70,7 @@
 		return
 
 	if(user)
-		if(user.unEquip(C))
+		if(user.try_unequip(C))
 			to_chat(user, "<span class='notice'>You add \the [C] to \the [src].</span>")
 		else
 			return
@@ -114,7 +114,7 @@
 		if(!ATOM_IS_OPEN_CONTAINER(RC))
 			to_chat(user, "<span class='warning'>You don't see how \the [src] could dispense reagents into \the [RC].</span>")
 			return TRUE
-		if(!user.unEquip(RC, src))
+		if(!user.try_unequip(RC, src))
 			return TRUE
 		set_container(RC)
 		to_chat(user, "<span class='notice'>You set \the [RC] on \the [src].</span>")

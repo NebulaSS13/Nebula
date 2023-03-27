@@ -60,7 +60,7 @@
 		if(!det.secured)
 			to_chat(user, "<span class='warning'>Assembly must be secured with screwdriver.</span>")
 			return
-		if(!user.unEquip(det, src))
+		if(!user.try_unequip(det, src))
 			return
 		path = 1
 		log_and_message_admins("has attached \a [W] to \the [src].")
@@ -104,7 +104,7 @@
 			return
 		else
 			if(W.reagents.total_volume)
-				if(!user.unEquip(W, src))
+				if(!user.try_unequip(W, src))
 					return
 				to_chat(user, "<span class='notice'>You add \the [W] to the assembly.</span>")
 				beakers += W

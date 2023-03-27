@@ -76,7 +76,7 @@ This saves us from having to call add_fingerprint() any time something is put in
 		else
 			return has_organ(slot)
 
-/mob/living/carbon/human/u_equip(obj/W)
+/mob/living/carbon/human/unequip(obj/W)
 	. = ..()
 	if(!.)
 		. = TRUE
@@ -170,7 +170,7 @@ This saves us from having to call add_fingerprint() any time something is put in
 
 	// TODO: unify this block with below when inventory
 	// is rewritten to remove boilerplate horseshit.
-	u_equip(W)
+	unequip(W)
 	var/obj/item/old_item = get_equipped_item(slot)
 	if(!isnum(slot))
 		var/datum/inventory_slot/inv_slot = LAZYACCESS(held_item_slots, slot)
@@ -185,7 +185,7 @@ This saves us from having to call add_fingerprint() any time something is put in
 			if(W.action_button_name)
 				update_action_buttons()
 			if(old_item)
-				u_equip(old_item)
+				unequip(old_item)
 				if(delete_old_item)
 					qdel(old_item)
 			return TRUE
@@ -300,7 +300,7 @@ This saves us from having to call add_fingerprint() any time something is put in
 	// seamless replacement deletes the old item by default, but can be disabled for special handling
 	// like job items going into storage when replaced by loadout items
 	if(old_item)
-		u_equip(old_item)
+		unequip(old_item)
 		if(delete_old_item)
 			qdel(old_item)
 

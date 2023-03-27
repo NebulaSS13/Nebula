@@ -31,7 +31,7 @@
 	var/obj/item/gloves = M.get_equipped_item(slot_gloves_str)
 	if(slot == slot_gloves_str && istype(H) && gloves)
 		check_ring = gloves
-		if(!istype(check_ring) || !check_ring.can_fit_under_gloves || !H.unEquip(check_ring, src))
+		if(!istype(check_ring) || !check_ring.can_fit_under_gloves || !H.try_unequip(check_ring, src))
 			to_chat(M, SPAN_WARNING("You are unable to wear \the [src] as \the [gloves] are in the way."))
 			return FALSE
 	. = ..()

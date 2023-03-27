@@ -29,7 +29,7 @@
 			to_chat(user, "There is already a cylinder here.")
 			return
 		user.visible_message("[user] begins to carefully place [W] onto the Inserter.", "You begin to carefully place [W] onto the Inserter.")
-		if(do_after(user, 80, src) && user.unEquip(W, src))
+		if(do_after(user, 80, src) && user.try_unequip(W, src))
 			cylinder = W
 			density = 1
 			user.visible_message("[user] places [W] onto the Inserter.", "You place [W] onto the Inserter.")

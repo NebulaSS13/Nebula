@@ -99,7 +99,7 @@
 	insert_vial(new /obj/item/chems/glass/beaker/vial(src))
 
 /obj/item/chems/hypospray/vial/proc/insert_vial(var/obj/item/chems/glass/beaker/vial/V, var/mob/user)
-	if(user && !user.unEquip(V, src))
+	if(user && !user.try_unequip(V, src))
 		return
 
 	var/usermessage = ""

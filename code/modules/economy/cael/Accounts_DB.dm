@@ -34,7 +34,7 @@
 		return ..()
 
 	if(!held_card)
-		if(!user.unEquip(O, src))
+		if(!user.try_unequip(O, src))
 			return
 		held_card = O
 
@@ -144,7 +144,7 @@
 				else
 					var/obj/item/I = usr.get_active_hand()
 					if (istype(I, /obj/item/card/id))
-						if(!usr.unEquip(I, src))
+						if(!usr.try_unequip(I, src))
 							return
 						held_card = I
 

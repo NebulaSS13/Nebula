@@ -52,7 +52,7 @@
 		if(!user.incapacitated())
 			var/obj/screen/inventory/inv = over_object
 			master_item.add_fingerprint(user)
-			if(user.unEquip(master_item))
+			if(user.try_unequip(master_item))
 				user.equip_to_slot_if_possible(master_item, inv.slot_id)
 			return 0
 	return 0
@@ -67,7 +67,7 @@
 		for(var/slot in global.pocket_slots)
 			var/obj/item/pocket = H.get_equipped_item(slot)
 			if(pocket == master_item && !H.get_active_hand())
-				H.unEquip(master_item)
+				H.try_unequip(master_item)
 				H.put_in_hands(master_item)
 				return FALSE
 

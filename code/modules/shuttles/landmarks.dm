@@ -189,7 +189,7 @@ var/global/list/shuttle_landmarks = list()
 		return
 	var/turf/T = get_turf(src)
 	var/mob/M = loc
-	if(istype(M) && !M.unEquip(src, T))
+	if(istype(M) && !M.try_unequip(src, T))
 		return
 
 	active = 1

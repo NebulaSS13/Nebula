@@ -109,7 +109,7 @@
 		to_chat(user, SPAN_WARNING("You cannot deconstruct this item."))
 		return TRUE
 
-	if(user.unEquip(O, src))
+	if(user.try_unequip(O, src))
 		busy = TRUE
 		loaded_item = O
 		to_chat(user, SPAN_NOTICE("You add \the [O] to \the [src]."))

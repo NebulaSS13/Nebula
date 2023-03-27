@@ -46,7 +46,7 @@
 			return
 	else if(istype(W, /obj/item/assembly_holder) || istype(W, /obj/item/assembly))
 		if(rigged)
-			if(!user.unEquip(W, src))
+			if(!user.try_unequip(W, src))
 				return
 			to_chat(user, "<span class='notice'>You attach [W] to [src].</span>")
 			return

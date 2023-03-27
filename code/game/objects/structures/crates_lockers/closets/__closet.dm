@@ -268,7 +268,7 @@ var/global/list/closets = list()
 								 "<span class='notice'>You hear rustling of clothes.</span>")
 			return TRUE
 
-		if(user.unEquip(W, loc))
+		if(user.try_unequip(W, loc))
 			W.pixel_x = 0
 			W.pixel_y = 0
 			W.pixel_z = 0
@@ -522,7 +522,7 @@ var/global/list/closets = list()
 	if(.)
 		var/obj/structure/closet/C = target
 		. = !C.opened && (C.setup & CLOSET_HAS_LOCK)
-	
+
 /decl/interaction_handler/closet_lock_toggle/invoked(atom/target, mob/user, obj/item/prop)
 	var/obj/structure/closet/C = target
 	C.togglelock(user)

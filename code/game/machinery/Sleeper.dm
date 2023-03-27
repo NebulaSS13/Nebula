@@ -63,7 +63,7 @@
 					to_chat(user, SPAN_WARNING("Automatic safety checking indicates the present of a prohibited substance in this canister."))
 					return FALSE
 	var/mob/M = canister.loc
-	if(istype(M) && !M.unEquip(canister, src))
+	if(istype(M) && !M.try_unequip(canister, src))
 		return FALSE
 	if(canister.loc != src)
 		canister.forceMove(src)
@@ -275,7 +275,7 @@
 	if(istype(I, /obj/item/chems/glass))
 		add_fingerprint(user)
 		if(!beaker)
-			if(!user.unEquip(I, src))
+			if(!user.try_unequip(I, src))
 				return
 			beaker = I
 			user.visible_message(SPAN_NOTICE("\The [user] adds \a [I] to \the [src]."), SPAN_NOTICE("You add \a [I] to \the [src]."))

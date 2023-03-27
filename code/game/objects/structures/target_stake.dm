@@ -9,7 +9,7 @@
 	var/obj/item/target/pinned_target
 
 /obj/structure/target_stake/attackby(var/obj/item/W, var/mob/user)
-	if (!pinned_target && istype(W, /obj/item/target) && user.unEquip(W, get_turf(src)))
+	if (!pinned_target && istype(W, /obj/item/target) && user.try_unequip(W, get_turf(src)))
 		to_chat(user, "<span class='notice'>You slide [W] into the stake.</span>")
 		set_target(W)
 

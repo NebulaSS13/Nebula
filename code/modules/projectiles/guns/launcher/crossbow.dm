@@ -134,10 +134,10 @@
 
 
 /obj/item/gun/launcher/crossbow/attackby(obj/item/W, mob/user)
-	
+
 	if(istype(W, /obj/item/rcd))
 		var/obj/item/rcd/rcd = W
-		if(rcd.crafting && user.unEquip(rcd) && user.unEquip(src))
+		if(rcd.crafting && user.try_unequip(rcd) && user.try_unequip(src))
 			new /obj/item/gun/launcher/crossbow/rapidcrossbowdevice(get_turf(src))
 			qdel(rcd)
 			qdel_self()
@@ -146,7 +146,7 @@
 		return
 
 	if(!bolt)
-		if (istype(W,/obj/item/arrow) && user.unEquip(W, src))
+		if (istype(W,/obj/item/arrow) && user.try_unequip(W, src))
 			bolt = W
 			user.visible_message("[user] slides [bolt] into [src].","You slide [bolt] into [src].")
 			update_icon()
@@ -164,7 +164,7 @@
 
 	if(istype(W, /obj/item/cell))
 		if(!cell)
-			if(!user.unEquip(W, src))
+			if(!user.try_unequip(W, src))
 				return
 			cell = W
 			to_chat(user, "<span class='notice'>You jam [cell] into [src] and wire it to the firing coil.</span>")

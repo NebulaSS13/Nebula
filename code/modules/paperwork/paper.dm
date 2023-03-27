@@ -412,8 +412,8 @@
 		if(!user.canUnEquip(other))
 			to_chat(user, SPAN_WARNING("You can't unequip \the [other]!"))
 			return
-		user.unEquip(src, B)
-		user.unEquip(other, B)
+		user.try_unequip(src, B)
+		user.try_unequip(other, B)
 
 	if (name != initial(name))
 		B.SetName(name)

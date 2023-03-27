@@ -176,7 +176,7 @@
 		if(stored_ammo.len >= max_ammo)
 			to_chat(user, "<span class='warning'>[src] is full!</span>")
 			return
-		if(!user.unEquip(C, src))
+		if(!user.try_unequip(C, src))
 			return
 		stored_ammo.Add(C)
 		playsound(user, 'sound/weapons/guns/interaction/bullet_insert.ogg', 50, 1)

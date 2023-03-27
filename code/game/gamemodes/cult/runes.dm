@@ -409,17 +409,17 @@
 	visible_message("<span class='warning'>\The [src] disappears with a flash of red light, and a set of armor appears on \the [user].</span>", "<span class='warning'>You are blinded by the flash of red light. After you're able to see again, you see that you are now wearing a set of armor.</span>")
 
 	var/obj/O = user.get_equipped_item(slot_head_str) // This will most likely kill you if you are wearing a spacesuit, and it's 100% intended
-	if(O && !istype(O, /obj/item/clothing/head/culthood) && user.unEquip(O))
+	if(O && !istype(O, /obj/item/clothing/head/culthood) && user.try_unequip(O))
 		user.equip_to_slot_or_del(new /obj/item/clothing/head/culthood/alt(user), slot_head_str)
 	O = user.get_equipped_item(slot_wear_suit_str)
-	if(O && !istype(O, /obj/item/clothing/suit/cultrobes) && user.unEquip(O))
+	if(O && !istype(O, /obj/item/clothing/suit/cultrobes) && user.try_unequip(O))
 		user.equip_to_slot_or_del(new /obj/item/clothing/suit/cultrobes/alt(user), slot_wear_suit_str)
 	O = user.get_equipped_item(slot_shoes_str)
-	if(O && !istype(O, /obj/item/clothing/shoes/cult) && user.unEquip(O))
+	if(O && !istype(O, /obj/item/clothing/shoes/cult) && user.try_unequip(O))
 		user.equip_to_slot_or_del(new /obj/item/clothing/shoes/cult(user), slot_shoes_str)
 
 	O = user.get_equipped_item(slot_back_str)
-	if(istype(O, /obj/item/storage) && !istype(O, /obj/item/storage/backpack/cultpack) && user.unEquip(O))
+	if(istype(O, /obj/item/storage) && !istype(O, /obj/item/storage/backpack/cultpack) && user.try_unequip(O))
 		var/obj/item/storage/backpack/cultpack/C = new /obj/item/storage/backpack/cultpack(user)
 		user.equip_to_slot_or_del(C, slot_back_str)
 		if(C)

@@ -65,7 +65,7 @@
 		to_chat(user, SPAN_WARNING("\The [src] already has [attached_cuffs] attached."))
 		return
 	if (do_after(user, 5 SECONDS))
-		if(!user.unEquip(cuffs, src))
+		if(!user.try_unequip(cuffs, src))
 			return
 		user.visible_message(SPAN_ITALIC("\The [user] attaches \the [cuffs] to \the [src]."), range = 2)
 		verbs |= /obj/item/clothing/shoes/proc/remove_cuffs
@@ -110,7 +110,7 @@
 		to_chat(user, SPAN_WARNING("\The [I] is too large to fit in the [src]."))
 		return TRUE
 	if (do_after(user, 1 SECONDS))
-		if(!user.unEquip(I, src))
+		if(!user.try_unequip(I, src))
 			return TRUE
 		user.visible_message(SPAN_ITALIC("\The [user] shoves \the [I] into \the [src]."), range = 1)
 		verbs |= /obj/item/clothing/shoes/proc/remove_hidden

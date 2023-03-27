@@ -91,7 +91,7 @@
 			if(!do_after(user, delay, src) || user.get_active_hand() != system)
 				return FALSE
 
-			if(user.unEquip(system))
+			if(user.try_unequip(system))
 				to_chat(user, SPAN_NOTICE("You install \the [system] in \the [src]'s [system_hardpoint]."))
 				playsound(user.loc, 'sound/items/Screwdriver.ogg', 100, 1)
 			else return FALSE

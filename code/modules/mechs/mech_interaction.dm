@@ -465,7 +465,7 @@
 					to_chat(user, SPAN_WARNING("There is already a cell in there!"))
 					return
 
-				if(user.unEquip(thing))
+				if(user.try_unequip(thing))
 					thing.forceMove(body)
 					body.cell = thing
 					to_chat(user, SPAN_NOTICE("You install \the [body.cell] into \the [src]."))

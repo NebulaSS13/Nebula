@@ -130,7 +130,7 @@ var/global/list/empty_playable_ai_cores = list()
 					if(!wired)
 						to_chat(user, SPAN_WARNING("Wire \the [src] first."))
 						return TRUE
-					if(user.unEquip(P, src))
+					if(user.try_unequip(P, src))
 						playsound(loc, 'sound/items/Deconstruct.ogg', 50, 1)
 						to_chat(user, SPAN_NOTICE("You place the circuit board inside the frame."))
 						circuit = P
@@ -156,7 +156,7 @@ var/global/list/empty_playable_ai_cores = list()
 						if(jobban_isbanned(B, "AI"))
 							to_chat(user, SPAN_WARNING("This [P] does not seem to fit."))
 							return
-						if(!user.unEquip(P, src))
+						if(!user.try_unequip(P, src))
 							return
 						if(B.mind)
 							clear_antag_roles(B.mind, 1)

@@ -59,7 +59,7 @@
 		to_chat(user, "It contains [reagents.total_volume] units of fluid.")
 	else
 		to_chat(user, "It's empty.")
-		
+
 	if(reagents?.maximum_volume)
 		to_chat(user, "It may contain up to [reagents.maximum_volume] units of fluid.")
 
@@ -134,7 +134,7 @@
 
 /obj/structure/reagent_dispensers/watertank/attackby(obj/item/W, mob/user)
 	//FIXME: Maybe this should be handled differently? Since it can essentially make the tank unusable.
-	if((istype(W, /obj/item/robot_parts/l_arm) || istype(W, /obj/item/robot_parts/r_arm)) && user.unEquip(W))
+	if((istype(W, /obj/item/robot_parts/l_arm) || istype(W, /obj/item/robot_parts/r_arm)) && user.try_unequip(W))
 		to_chat(user, "You add \the [W] arm to \the [src].")
 		qdel(W)
 		new /obj/item/farmbot_arm_assembly(loc, src)
@@ -174,7 +174,7 @@
 			to_chat(user, SPAN_WARNING("There is another device already in the way."))
 			return ..()
 		visible_message(SPAN_NOTICE("\The [user] begins rigging \the [W] to \the [src]."))
-		if(do_after(user, 20, src) && user.unEquip(W, src))
+		if(do_after(user, 20, src) && user.try_unequip(W, src))
 			visible_message(SPAN_NOTICE("\The [user] rigs \the [W] to \the [src]."))
 			var/obj/item/assembly_holder/H = W
 			if (istype(H.a_left,/obj/item/assembly/igniter) || istype(H.a_right,/obj/item/assembly/igniter))
@@ -207,7 +207,7 @@
 				log_and_message_admins("[key_name_admin(Proj.firer)] shot a fuel tank in \the [area.proper_name].")
 			else
 				log_and_message_admins("shot a fuel tank outside the world.")
-		
+
 		if((Proj.damage_flags & DAM_EXPLODE) || (Proj.damage_type == BURN) || (Proj.damage_type == ELECTROCUTE) || (Proj.damage_type == BRUTE))
 			try_detonate_reagents()
 
@@ -274,7 +274,7 @@
 				qdel(C)
 				cups++
 		return TRUE
-	
+
 	. = ..()
 	if(!. && ATOM_IS_OPEN_CONTAINER(W))
 		flick("[icon_state]-vend", src)
@@ -297,7 +297,7 @@
 	icon_state       = "acidtank"
 	amount_dispensed = 10
 	anchored         = TRUE
-	
+
 /obj/structure/reagent_dispensers/acid/populate_reagents()
 	reagents.add_reagent(/decl/material/liquid/acid, reagents.maximum_volume)
 

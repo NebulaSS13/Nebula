@@ -124,7 +124,7 @@
 		if(user)
 			to_chat(user, SPAN_WARNING("\The [src] can only hold [max_installed_software] software modules."))
 		return
-	if(user && !user.unEquip(software))
+	if(user && !user.try_unequip(software))
 		return
 
 	if(user)

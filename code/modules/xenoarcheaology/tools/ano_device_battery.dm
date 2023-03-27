@@ -62,7 +62,7 @@
 /obj/item/anodevice/attackby(var/obj/I, var/mob/user)
 	if(istype(I, /obj/item/anobattery))
 		if(!inserted_battery)
-			if(!user.unEquip(I, src))
+			if(!user.try_unequip(I, src))
 				return
 			to_chat(user, "<span class='notice'>You insert \the [I] into \the [src].</span>")
 			inserted_battery = I

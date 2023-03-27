@@ -228,7 +228,7 @@ var/global/list/_wood_materials = list(
 			to_chat(user, SPAN_WARNING("You need to dry \the [src] first!"))
 			return TRUE
 
-		if(user.unEquip(W))
+		if(user.try_unequip(W))
 			var/obj/item/clothing/mask/smokable/cigarette/rolled/R = new(get_turf(src))
 			R.chem_volume = reagents.total_volume
 			R.brand = "[src] handrolled in \the [W]."

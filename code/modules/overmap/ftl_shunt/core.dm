@@ -589,7 +589,7 @@
 		if(!fuel)
 			if(!do_after(user, 2 SECONDS, src) || fuel)
 				return
-			if(!user || !user.unEquip(O, src))
+			if(!user || !user.try_unequip(O, src))
 				return
 			fuel = O
 			max_fuel = get_fuel_joules(TRUE)

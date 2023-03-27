@@ -89,7 +89,7 @@
 		if(!isnull(src.beaker))
 			to_chat(user, "There is already a reagent container loaded!")
 			return
-		if(!user.unEquip(W, src))
+		if(!user.try_unequip(W, src))
 			return
 		beaker = W
 		to_chat(user, "You attach \the [W] to \the [src].")

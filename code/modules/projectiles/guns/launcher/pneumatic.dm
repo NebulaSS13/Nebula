@@ -66,7 +66,7 @@
 		return ..()
 
 /obj/item/gun/launcher/pneumatic/attackby(obj/item/W, mob/user)
-	if(!tank && istype(W,/obj/item/tank) && user.unEquip(W, src))
+	if(!tank && istype(W,/obj/item/tank) && user.try_unequip(W, src))
 		tank = W
 		user.visible_message("[user] jams [W] into [src]'s valve and twists it closed.","You jam [W] into [src]'s valve and twist it closed.")
 		update_icon()
@@ -136,7 +136,7 @@
 
 /obj/item/gun/launcher/pneumatic/adjust_mob_overlay(var/mob/living/user_mob, var/bodytype,  var/image/overlay, var/slot, var/bodypart)
 	if(overlay && tank)
-		overlay.icon_state += "-tank" 
+		overlay.icon_state += "-tank"
 	. = ..()
 
 /obj/item/gun/launcher/pneumatic/small

@@ -25,7 +25,7 @@
 			to_chat(user, "<span class='warning'>There are already two tanks attached, remove one first.</span>")
 			return
 
-		if(!user.unEquip(item, src))
+		if(!user.try_unequip(item, src))
 			return
 		if(!tank_one)
 			tank_one = item
@@ -53,7 +53,7 @@
 		if(attached_device)
 			to_chat(user, "<span class='warning'>There is already an device attached to the valve, remove it first.</span>")
 			return
-		if(!user.unEquip(item, src))
+		if(!user.try_unequip(item, src))
 			return
 		attached_device = A
 		to_chat(user, "<span class='notice'>You attach the [item] to the valve controls and secure it.</span>")

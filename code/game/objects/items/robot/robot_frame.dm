@@ -56,7 +56,7 @@
 		if(parts[part.bp_tag])
 			to_chat(user, SPAN_WARNING("\The [src] already has \a [W] installed."))
 			return
-		if(part.can_install(user) && user.unEquip(W, src))
+		if(part.can_install(user) && user.try_unequip(W, src))
 			parts[part.bp_tag] = part
 			update_icon()
 
@@ -104,7 +104,7 @@
 			to_chat(user, SPAN_WARNING("\The [W] is completely unresponsive; there's no point."))
 			return
 
-		if(!user.unEquip(W))
+		if(!user.try_unequip(W))
 			return
 
 		SSstatistics.add_field("cyborg_frames_built",1)

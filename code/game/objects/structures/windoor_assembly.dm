@@ -131,7 +131,7 @@
 		else if(wired && !electronics && istype(W, /obj/item/stock_parts/circuitboard/airlock_electronics/windoor))
 			playsound(loc, 'sound/items/Screwdriver.ogg', 100, 1)
 			visible_message(SPAN_NOTICE("\The [user] starts installing \the [W] into \the [src]."))
-			if(do_after(user, 4 SECONDS, src) && wired && !electronics && anchored && !QDELETED(src) && user.unEquip(W, src))
+			if(do_after(user, 4 SECONDS, src) && wired && !electronics && anchored && !QDELETED(src) && user.try_unequip(W, src))
 				visible_message(SPAN_NOTICE("\The [user] finishes installing \the [W] into \the [src]."))
 				electronics = W
 			else

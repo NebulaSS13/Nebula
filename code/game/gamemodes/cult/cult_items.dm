@@ -26,7 +26,7 @@
 	user.apply_damage(rand(force/2, force), BRUTE, zone, (DAM_SHARP|DAM_EDGE), armor_pen = 100)
 	SET_STATUS_MAX(user, STAT_WEAK, 5)
 
-	if(user.unEquip(src))
+	if(user.try_unequip(src))
 		throw_at(get_edge_target_turf(src, pick(global.alldirs)), rand(1,3), throw_speed)
 
 	var/spooky = pick('sound/hallucinations/growl1.ogg', 'sound/hallucinations/growl2.ogg', 'sound/hallucinations/growl3.ogg', 'sound/hallucinations/wail.ogg')

@@ -77,7 +77,7 @@
 			contains = 1
 		if(contains != 1)
 			return
-		if(!user.unEquip(W, src))
+		if(!user.try_unequip(W, src))
 			return
 		var/obj/item/cash/S = W
 		user.visible_message("<span class='notice'>[user] puts \the [S] into \the [src].</span>")

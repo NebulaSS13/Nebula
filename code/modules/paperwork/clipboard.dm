@@ -31,7 +31,7 @@
 	if(ishuman(user) && istype(over, /obj/screen/inventory))
 		var/obj/screen/inventory/inv = over
 		add_fingerprint(user)
-		if(user.unEquip(src))
+		if(user.try_unequip(src))
 			user.equip_to_slot_if_possible(src, inv.slot_id)
 			return TRUE
 	. = ..()
@@ -78,7 +78,7 @@
 /obj/item/clipboard/attackby(obj/item/W, mob/user)
 	var/obj/item/top_paper = top_paper()
 	if(istype(W, /obj/item/paper) || istype(W, /obj/item/photo))
-		if(!user.unEquip(W, src))
+		if(!user.try_unequip(W, src))
 			return
 		push_paper(W)
 		to_chat(user, SPAN_NOTICE("You clip the [W] onto \the [src]."))
@@ -128,7 +128,7 @@
 	return
 
 /obj/item/clipboard/proc/add_pen(var/obj/item/I, var/mob/user)
-	if(!stored_pen && I.w_class <= ITEM_SIZE_TINY && IS_PEN(I) && user.unEquip(I, src))
+	if(!stored_pen && I.w_class <= ITEM_SIZE_TINY && IS_PEN(I) && user.try_unequip(I, src))
 		stored_pen = I
 		to_chat(user, SPAN_NOTICE("You slot \the [I] into \the [src]."))
 		updateUsrDialog()

@@ -64,7 +64,7 @@
 		if(lit)
 			to_chat(user, "<span class='warning'>[src] is lit already!</span>")
 			return
-		if(user.unEquip(I))
+		if(user.try_unequip(I))
 			to_chat(user, "<span class='notice'>You stick [I] into \the [src]</span>")
 			filter = 1
 			SetName("filtered [name]")

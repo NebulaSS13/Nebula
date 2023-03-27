@@ -23,7 +23,7 @@
 			else
 				body.throw_item(T)
 		else
-			body.unEquip(held)
+			body.try_unequip(held)
 
 	if(!held && !body.restrained() && prob(5))
 		var/list/touchables = list()

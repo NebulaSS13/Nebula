@@ -119,12 +119,12 @@
 /obj/machinery/washing_machine/attackby(obj/item/W, mob/user)
 	if(!(state & WASHER_STATE_CLOSED))
 		if(!crayon && IS_PEN(W))
-			if(!user.unEquip(W, src))
+			if(!user.try_unequip(W, src))
 				return
 			crayon = W
 			return TRUE
 		if(!detergent && istype(W,/obj/item/chems/pill/detergent))
-			if(!user.unEquip(W, src))
+			if(!user.try_unequip(W, src))
 				return
 			detergent = W
 			return TRUE
@@ -173,7 +173,7 @@
 
 		if(contents.len < 5)
 			if(!(state & WASHER_STATE_CLOSED))
-				if(!user.unEquip(W, src))
+				if(!user.try_unequip(W, src))
 					return
 				state |= WASHER_STATE_FULL
 				update_icon()

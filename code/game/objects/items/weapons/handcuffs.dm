@@ -92,7 +92,7 @@
 	var/obj/item/handcuffs/cuffs = src
 	if(dispenser)
 		cuffs = new(get_turf(user))
-	else if(!user.unEquip(cuffs))
+	else if(!user.try_unequip(cuffs))
 		return 0
 
 	admin_attack_log(user, H, "Attempted to handcuff the victim", "Was target of an attempted handcuff", "attempted to handcuff")

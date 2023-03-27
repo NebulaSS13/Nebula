@@ -73,7 +73,7 @@
 /obj/vehicle/bike/proc/load_engine(var/obj/item/engine/E, var/mob/user)
 	if(engine)
 		return
-	if(user && !user.unEquip(E))
+	if(user && !user.try_unequip(E))
 		return
 	engine = E
 	engine.forceMove(src)

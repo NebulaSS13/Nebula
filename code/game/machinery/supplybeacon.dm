@@ -18,7 +18,7 @@
 	user.visible_message(SPAN_NOTICE("\The [user] begins setting up \the [src]."))
 	if(!do_after(user, deploy_time, src))
 		return
-	if(!user.unEquip(src))
+	if(!user.try_unequip(src))
 		return
 	var/obj/S = new deploy_path(get_turf(user))
 	user.visible_message(SPAN_NOTICE("\The [user] deploys \the [S]."))

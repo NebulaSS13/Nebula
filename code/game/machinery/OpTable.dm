@@ -70,7 +70,7 @@
 /obj/machinery/optable/receive_mouse_drop(atom/dropping, mob/user)
 	. = ..()
 	if(!.)
-		if(istype(dropping, /obj/item) && user.get_active_hand() == dropping && user.unEquip(dropping, loc))
+		if(istype(dropping, /obj/item) && user.get_active_hand() == dropping && user.try_unequip(dropping, loc))
 			return FALSE
 		if(isliving(dropping) && check_table(dropping))
 			take_victim(dropping, user)

@@ -174,7 +174,7 @@
 		var/holding = inv_slot?.holding
 		if(holding)
 			var/obj/item/organ/external/E = GET_EXTERNAL_ORGAN(src, hand_slot)
-			if((!E || !E.is_usable() || E.is_parent_dislocated()) && unEquip(holding))
+			if((!E || !E.is_usable() || E.is_parent_dislocated()) && try_unequip(holding))
 				grasp_damage_disarm(inv_slot)
 
 /mob/living/carbon/human/proc/stance_damage_prone(var/obj/item/organ/external/affected)
@@ -210,7 +210,7 @@
 		return
 
 	for(var/datum/inventory_slot/inv_slot in drop_held_item_slots)
-		if(!unEquip(inv_slot.holding))
+		if(!try_unequip(inv_slot.holding))
 			continue
 		var/obj/item/organ/external/E = GET_EXTERNAL_ORGAN(src, inv_slot.slot_id)
 		if(!E)

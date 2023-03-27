@@ -68,7 +68,7 @@
 			to_chat(user, SPAN_WARNING("\The [src] already has a tank inside!"))
 			return
 		else
-			user.unEquip(W, src)
+			user.try_unequip(W, src)
 
 	update_icon()
 

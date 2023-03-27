@@ -56,7 +56,7 @@ avoid code duplication. This includes items that may sometimes act as a standard
 			if(hattable.hat)
 				to_chat(user, SPAN_WARNING("\The [src] is already wearing \the [hattable.hat]."))
 				return TRUE
-			if(user.unEquip(I) && hattable.wear_hat(src, I))
+			if(user.try_unequip(I) && hattable.wear_hat(src, I))
 				user.visible_message(SPAN_NOTICE("\The [user] puts \the [I] on \the [src]."))
 				return TRUE
 

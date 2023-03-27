@@ -82,7 +82,7 @@
 		qdel(G)
 		move_into_gibber(user,G.affecting)
 	else if(istype(W, /obj/item/organ))
-		if(!user.unEquip(W))
+		if(!user.try_unequip(W))
 			return
 		qdel(W)
 		user.visible_message("<span class='danger'>\The [user] feeds \the [W] into \the [src], obliterating it.</span>")

@@ -77,7 +77,7 @@
 /obj/item/defibrillator/handle_mouse_drop(var/atom/over, var/mob/user)
 	if(ismob(loc))
 		var/mob/M = loc
-		if(M.unEquip(src))
+		if(M.try_unequip(src))
 			add_fingerprint(usr)
 			M.put_in_hands(src)
 			return TRUE
@@ -90,7 +90,7 @@
 		if(bcell)
 			to_chat(user, "<span class='notice'>\the [src] already has a cell.</span>")
 		else
-			if(!user.unEquip(W))
+			if(!user.try_unequip(W))
 				return
 			W.forceMove(src)
 			bcell = W

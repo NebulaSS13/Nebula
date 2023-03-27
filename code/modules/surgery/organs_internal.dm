@@ -270,7 +270,7 @@
 	user.visible_message("<span class='notice'>\The [user] has [robotic_surgery ? "reinstalled" : "transplanted"] \the [tool] into [target]'s [affected.name].</span>", \
 	"<span class='notice'>You have [robotic_surgery ? "reinstalled" : "transplanted"] \the [tool] into [target]'s [affected.name].</span>")
 	var/obj/item/organ/O = tool
-	if(istype(O) && user.unEquip(O, target))
+	if(istype(O) && user.try_unequip(O, target))
 		//Place the organ but don't attach it yet
 		target.add_organ(O, affected, detached = TRUE)
 

@@ -44,7 +44,7 @@
 /datum/phenomena/herald/proc/equip_slot(var/mob/living/L, var/slot_id, var/new_item)
 	var/equipped = L.get_equipped_slot_for_item(slot_id)
 	if(equipped)
-		L.unEquip(equipped, get_turf(L))
+		L.try_unequip(equipped, get_turf(L))
 	L.equip_to_slot_if_possible(new_item, slot_id)
 
 /datum/phenomena/herald/Topic(var/href, var/list/href_list)

@@ -5,7 +5,7 @@
 		var/obj/item/glass_extra/GE = I
 		if(can_add_extra(GE))
 			extras += GE
-			if(!user.unEquip(GE, src))
+			if(!user.try_unequip(GE, src))
 				return
 			to_chat(user, "<span class=notice>You add \the [GE] to \the [src].</span>")
 			update_icon()
@@ -17,7 +17,7 @@
 			return
 		var/obj/item/chems/food/fruit_slice/FS = I
 		extras += FS
-		if(!user.unEquip(FS, src))
+		if(!user.try_unequip(FS, src))
 			return
 		reset_offsets(0) // Reset its pixel offsets so the icons work!
 		to_chat(user, "<span class=notice>You add \the [FS] to \the [src].</span>")

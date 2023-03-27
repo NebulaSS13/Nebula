@@ -52,7 +52,7 @@
 
 /obj/machinery/seed_storage/Destroy()
 	QDEL_NULL_LIST(piles)
-	. = ..()	
+	. = ..()
 
 /obj/machinery/seed_storage/random // This is mostly for testing, but I guess admins could spawn it
 	name = "Random seed storage"
@@ -344,7 +344,7 @@
 	if(!bypass_removal)
 		if (istype(O.loc, /mob))
 			var/mob/user = O.loc
-			if(!user.unEquip(O, src))
+			if(!user.try_unequip(O, src))
 				return
 		else if(istype(O.loc,/obj/item/storage))
 			var/obj/item/storage/S = O.loc

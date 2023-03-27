@@ -38,7 +38,7 @@
 /obj/item/gun/launcher/sealant/Initialize()
 	. = ..()
 	if(ispath(loaded_tank))
-		loaded_tank = new loaded_tank(src)	
+		loaded_tank = new loaded_tank(src)
 	update_icon()
 
 /obj/item/gun/launcher/sealant/Destroy()
@@ -60,7 +60,7 @@
 			to_chat(user, SPAN_WARNING("\The [src] has no sealant loaded."))
 
 /obj/item/gun/launcher/sealant/attackby(obj/item/W, mob/user)
-	if(istype(W, /obj/item/sealant_tank) && user.unEquip(W, src))
+	if(istype(W, /obj/item/sealant_tank) && user.try_unequip(W, src))
 		loaded_tank = W
 		to_chat(user, SPAN_NOTICE("You slot \the [loaded_tank] into \the [src]."))
 		update_icon()
@@ -72,7 +72,7 @@
 		unload_tank(user)
 		return TRUE
 	. = ..()
-	
+
 /obj/item/gun/launcher/sealant/proc/unload_tank(var/mob/user)
 	if(!loaded_tank)
 		to_chat(user, SPAN_WARNING("\The [src] has no tank loaded."))

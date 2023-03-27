@@ -26,7 +26,7 @@
 
 /obj/screen/diona_held/Click()
 	var/mob/living/carbon/alien/diona/chirp = usr
-	if(istype(chirp) && chirp.holding_item) chirp.unEquip(chirp.holding_item)
+	if(istype(chirp) && chirp.holding_item) chirp.try_unequip(chirp.holding_item)
 
 /datum/hud/diona_nymph
 	var/obj/screen/diona_hat/hat

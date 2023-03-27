@@ -394,7 +394,7 @@
 
 
 /mob/living/silicon/proc/try_stock_parts_install(obj/item/stock_parts/W, mob/user)
-	if(istype(W) && user.unEquip(W))
+	if(istype(W) && user.try_unequip(W))
 		W.forceMove(src)
 		stock_parts += W
 		to_chat(usr, "<span class='notice'>You install the [W.name].</span>")

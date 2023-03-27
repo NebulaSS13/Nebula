@@ -86,7 +86,7 @@
 	"You start attaching [E.name] to [target]'s [E.amputation_point].")
 
 /decl/surgery_step/limb/attach/end_step(mob/living/user, mob/living/target, target_zone, obj/item/tool)
-	if(!user.unEquip(tool))
+	if(!user.try_unequip(tool))
 		return
 	var/obj/item/organ/external/P = GET_EXTERNAL_ORGAN(target, target_zone)
 	var/obj/item/organ/external/E = tool

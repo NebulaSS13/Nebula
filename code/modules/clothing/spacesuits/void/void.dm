@@ -247,7 +247,7 @@ else if(##equipment_var) {\
 		if(helmet)
 			to_chat(user, "\The [src] already has a helmet installed.")
 		else
-			if(!user.unEquip(W, src))
+			if(!user.try_unequip(W, src))
 				return
 			to_chat(user, "You attach \the [W] to \the [src]'s helmet mount.")
 			src.helmet = W
@@ -260,7 +260,7 @@ else if(##equipment_var) {\
 		if(boots)
 			to_chat(user, "\The [src] already has magboots installed.")
 		else
-			if(!user.unEquip(W, src))
+			if(!user.try_unequip(W, src))
 				return
 			to_chat(user, "You attach \the [W] to \the [src]'s boot mounts.")
 			boots = W
@@ -273,7 +273,7 @@ else if(##equipment_var) {\
 		if(tank)
 			to_chat(user, "\The [src] already has an airtank installed.")
 		else
-			if(!user.unEquip(W, src))
+			if(!user.try_unequip(W, src))
 				return
 			to_chat(user, "You insert \the [W] into \the [src]'s storage compartment.")
 			tank = W

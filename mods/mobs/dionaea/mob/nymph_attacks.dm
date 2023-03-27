@@ -51,7 +51,7 @@
 		setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
 		visible_message(SPAN_DANGER("\The [src] spits \a [holding_item] at \the [A]!"))
 		var/atom/movable/temp = holding_item
-		unEquip(holding_item)
+		try_unequip(holding_item)
 		if(temp)
 			temp.throw_at(A, 10, rand(3,5), src)
 		return TRUE
@@ -64,7 +64,7 @@
 
 	if(!tray.seed && istype(holding_item, /obj/item/seeds))
 		var/atom/movable/temp = holding_item
-		unEquip(temp)
+		try_unequip(temp)
 		if(temp)
 			tray.plant_seed(src, temp)
 		return

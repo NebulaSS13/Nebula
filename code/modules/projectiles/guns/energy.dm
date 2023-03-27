@@ -177,7 +177,7 @@ var/global/list/registered_cyborg_weapons = list()
 		if(!do_after(user, 5, A, can_move = TRUE))
 			return TRUE
 
-		if(user.unEquip(A, src))
+		if(user.try_unequip(A, src))
 			power_supply = A
 			user.visible_message(SPAN_WARNING("\The [user] loads \the [A] into \the [src]!"))
 			playsound(src, 'sound/weapons/guns/interaction/energy_magin.ogg', 80)

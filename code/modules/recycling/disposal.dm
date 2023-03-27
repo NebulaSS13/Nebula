@@ -105,7 +105,7 @@ var/global/list/diversion_junctions = list()
 				admin_attack_log(usr, GM, "Placed the victim into \the [src].", "Was placed into \the [src] by the attacker.", "stuffed \the [src] with")
 		return
 
-	if(!user.unEquip(I, src) || QDELETED(I))
+	if(!user.try_unequip(I, src) || QDELETED(I))
 		return
 
 	user.visible_message("\The [user] places \the [I] into \the [src].", "You place \the [I] into \the [src].")

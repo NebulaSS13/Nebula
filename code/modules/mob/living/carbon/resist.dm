@@ -120,7 +120,7 @@
 			"<span class='warning'>You successfully break your [cuffs].</span>"
 		)
 
-		unEquip(cuffs)
+		try_unequip(cuffs)
 		qdel(cuffs)
 		if(buckled && buckled.buckle_require_restraints)
 			buckled.unbuckle_mob()

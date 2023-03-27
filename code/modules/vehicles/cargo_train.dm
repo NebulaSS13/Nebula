@@ -14,7 +14,7 @@
 	var/car_limit = 3		//how many cars an engine can pull before performance degrades
 	charge_use = 1 KILOWATTS
 	active_engines = 1
-	var/obj/item/key/cargo_train/key	
+	var/obj/item/key/cargo_train/key
 
 /obj/item/key/cargo_train
 	name = "key"
@@ -76,7 +76,7 @@
 /obj/vehicle/train/cargo/engine/attackby(obj/item/W, mob/user)
 	if(istype(W, /obj/item/key/cargo_train))
 		if(!key)
-			if(!user.unEquip(W, src))
+			if(!user.try_unequip(W, src))
 				return
 			key = W
 			verbs += /obj/vehicle/train/cargo/engine/verb/remove_key

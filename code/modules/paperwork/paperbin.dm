@@ -81,7 +81,7 @@
 		if(amount >= max_amount)
 			to_chat(user, SPAN_WARNING("\The [src] is full!"))
 			return
-		if(!user.unEquip(I, src))
+		if(!user.try_unequip(I, src))
 			return
 		add_paper(I)
 		to_chat(user, SPAN_NOTICE("You put [I] in [src]."))

@@ -59,7 +59,7 @@
 				else
 					return
 			to_chat(user, "You fasten \the [S] with your [W].")
-			user.unEquip(src)
+			user.try_unequip(src)
 			qdel(src)
 		return
 	else ..()

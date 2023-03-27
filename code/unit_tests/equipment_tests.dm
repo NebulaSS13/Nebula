@@ -106,7 +106,7 @@
 	else if(subject.get_equipped_slot_for_item(item) != which_slot)
 		var/equipped_location = subject.get_equipped_slot_for_item(item)
 		failure_list += "[item] was expected to be equipped to [which_slot] but get_equipped_slot_for_item returned [isnull(equipped_location) ? "NULL" : equipped_location]."
-	subject.unEquip(item)
+	subject.try_unequip(item)
 	if(subject.isEquipped(item))
 		failure_list += "[item] remained equipped to [subject.get_equipped_slot_for_item(item)] after unEquip was called."
 

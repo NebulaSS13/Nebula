@@ -31,11 +31,11 @@
 
 /obj/item/paper_plane/proc/unfold(var/mob/user)
 	if(user)
-		if(!user.unEquip(src))
+		if(!user.try_unequip(src))
 			return
 		user.visible_message(SPAN_NOTICE("\The [user] unfolds \the [src]."), SPAN_NOTICE("You unfold \the [src]."))
 		if(my_paper)
-			user.put_in_active_hand(my_paper)		
+			user.put_in_active_hand(my_paper)
 	else if(my_paper)
 		my_paper.dropInto(loc)
 	my_paper = null
@@ -51,7 +51,7 @@
 			C.apply_damage(1, BRUTE, BP_EYES, 0, src, 0)
 			C.apply_effects(2, 0, 0, 0, 1, 0, 15)
 	take_damage(TT.speed * w_class, BRUTE)
-	
+
 /obj/item/paper_plane/attack_self(mob/user)
 	if(user.a_intent == I_HURT)
 		return crumple(user)
@@ -68,7 +68,7 @@
 	else
 		//If no paper, just make one
 		if(user)
-			user.unEquip(src)
+			user.try_unequip(src)
 		var/obj/item/paper/P = new(loc)
 		P.crumple()
 		qdel(src)
@@ -87,7 +87,7 @@
 /decl/interaction_handler/make_paper_plane/invoked(obj/item/paper/target, mob/user)
 	user.visible_message(SPAN_NOTICE("\The [user] folds \the [target] into a plane."), SPAN_NOTICE("You fold \the [target] into a plane."))
 	var/obj/item/paper_plane/PP = new
-	user.unEquip(target, PP)
+	user.try_unequip(target, PP)
 	PP.set_paper(target)
 	user.put_in_hands(PP)
 	return TRUE

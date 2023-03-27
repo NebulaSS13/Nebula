@@ -111,7 +111,7 @@
 			if(cell)
 				to_chat(user, "<span class='warning'>\The [src] already has \a [cell] installed.</span>")
 				return
-			if(!user.unEquip(thing, src))
+			if(!user.try_unequip(thing, src))
 				return
 			cell = thing
 			playsound(loc, 'sound/machines/click.ogg', 10, 1)
@@ -134,7 +134,7 @@
 			if(capacitor)
 				to_chat(user, "<span class='warning'>\The [src] already has \a [capacitor] installed.</span>")
 				return
-			if(!user.unEquip(thing, src))
+			if(!user.try_unequip(thing, src))
 				return
 			capacitor = thing
 			playsound(loc, 'sound/machines/click.ogg', 10, 1)
@@ -158,7 +158,7 @@
 					to_chat(user, "<span class='warning'>\The [src] doesn't seem to accept \a [mag].</span>")
 					return
 				projectile_type = mag.projectile_type
-			if(!user.unEquip(thing, src))
+			if(!user.try_unequip(thing, src))
 				return
 
 			loaded = thing

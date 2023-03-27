@@ -130,7 +130,7 @@
 		updateUsrDialog()
 		return TRUE
 	// Take everything if we have a recycler.
-	if(can_ingest(O) && !is_robot_module(O) && user.unEquip(O))
+	if(can_ingest(O) && !is_robot_module(O) && user.try_unequip(O))
 		var/result = max(take_materials(O, user), max(reagents_taken, take_reagents(O, user, TRUE)))
 		show_intake_message(user, result, atom_name)
 		if(result == SUBSTANCE_TAKEN_NONE)

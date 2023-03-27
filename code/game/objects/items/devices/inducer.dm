@@ -66,7 +66,7 @@
 			return
 		if(opened)
 			if(!cell)
-				if(!user.unEquip(W, src))
+				if(!user.try_unequip(W, src))
 					return
 				to_chat(user, "<span class='notice'>You insert \the [W] into \the [src].</span>")
 				cell = W

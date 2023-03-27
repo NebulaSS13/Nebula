@@ -104,7 +104,7 @@
 		if(!W.simulated || W.anchored)
 			return
 
-		if(user.unEquip(W, src))
+		if(user.try_unequip(W, src))
 			W.pixel_x = 0
 			W.pixel_y = -7
 			update_icon()

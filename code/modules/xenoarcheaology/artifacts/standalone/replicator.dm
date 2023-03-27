@@ -126,7 +126,7 @@
 	show_browser(user, dat, "window=alien_replicator")
 
 /obj/machinery/replicator/attackby(obj/item/W, mob/user)
-	if(!user.unEquip(W, src))
+	if(!user.try_unequip(W, src))
 		return
 	stored_materials.Add(W)
 	src.visible_message("<span class='notice'>\The [user] inserts \the [W] into \the [src].</span>")

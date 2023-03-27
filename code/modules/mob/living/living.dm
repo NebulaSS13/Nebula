@@ -364,7 +364,7 @@ default behaviour is:
 /mob/living/carbon/revive()
 	var/obj/item/cuffs = get_equipped_item(slot_handcuffed_str)
 	if (cuffs)
-		unEquip(cuffs, get_turf(src))
+		try_unequip(cuffs, get_turf(src))
 	. = ..()
 
 /mob/living/proc/revive()

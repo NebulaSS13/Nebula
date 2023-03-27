@@ -73,7 +73,7 @@
 			return
 		if(istype(A.loc,/mob/living/carbon/human))
 			var/mob/living/carbon/human/H = A.loc
-			if(!H.unEquip(A))
+			if(!H.try_unequip(A))
 				return
 		else if(istype(A.loc,/obj/item/storage))
 			var/obj/item/storage/S = A.loc

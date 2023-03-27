@@ -40,7 +40,7 @@
 		if(installed_gun)
 			to_chat(user, "<span class='warning'>There's already a weapon installed.</span>")
 			return
-		if(!user.unEquip(gun,src))
+		if(!user.try_unequip(gun,src))
 			return
 		installed_gun = gun
 		to_chat(user, "<span class='notice'>You slide \the [gun] into the firing mechanism.</span>")
@@ -184,7 +184,7 @@
 	if(istype(G))
 		if(attached_grenade)
 			to_chat(user, "<span class='warning'>There is already a grenade attached!</span>")
-		else if(user.unEquip(G,src))
+		else if(user.try_unequip(G,src))
 			user.visible_message("<span class='warning'>\The [user] attaches \a [G] to \the [src]!</span>", "<span class='notice'>You attach \the [G] to \the [src].</span>")
 			attach_grenade(G)
 			G.forceMove(src)
@@ -518,7 +518,7 @@
 	// If the item is in mob's inventory, try to remove it from there.
 	if(ismob(A.loc))
 		var/mob/living/M = A.loc
-		if(!M.unEquip(A))
+		if(!M.try_unequip(A))
 			return
 
 	// If the item is in a grabber circuit we'll update the grabber's outputs after we've thrown it.
@@ -634,7 +634,7 @@
 		to_chat(user, "<span class='warning'>There is already a card in there!</span>")
 		return
 	var/mob/living/L = locate(/mob/living) in card.contents
-	if(L && L.key && user.unEquip(card))
+	if(L && L.key && user.try_unequip(card))
 		L.forceMove(src)
 		controlling = L
 		card.dropInto(src)

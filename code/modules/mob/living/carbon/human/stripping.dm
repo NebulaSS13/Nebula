@@ -102,12 +102,12 @@
 		return
 
 	if(stripping)
-		if(unEquip(target_slot))
+		if(try_unequip(target_slot))
 			admin_attack_log(user, src, "Stripped \a [target_slot]", "Was stripped of \a [target_slot].", "stripped \a [target_slot] from")
 			user.put_in_active_hand(target_slot)
 		else
 			admin_attack_log(user, src, "Attempted to strip \a [target_slot]", "Target of a failed strip of \a [target_slot].", "attempted to strip \a [target_slot] from")
-	else if(user.unEquip(held))
+	else if(user.try_unequip(held))
 		var/obj/item/clothing/C = get_equipped_item(slot_to_strip_text)
 		if(istype(C) && C.can_attach_accessory(held))
 			C.attach_accessory(user, held)
@@ -119,7 +119,7 @@
 	for(var/slot in global.pocket_slots)
 		var/obj/item/pocket = get_equipped_item(slot)
 		if(pocket)
-			unEquip(pocket)
+			try_unequip(pocket)
 			. = TRUE
 	if(.)
 		visible_message(SPAN_DANGER("\The [user] empties \the [src]'s pockets!"))
@@ -127,7 +127,7 @@
 		to_chat(user, SPAN_WARNING("\The [src] has nothing in their pockets."))
 
 /mob/living/carbon/human/proc/place_in_pockets(obj/item/I, var/mob/living/user)
-	if(!user.unEquip(I))
+	if(!user.try_unequip(I))
 		return
 	for(var/slot in global.pocket_slots)
 		if(!get_equipped_item(slot) && equip_to_slot_if_possible(I, slot, del_on_fail=0, disable_warning=1, redraw_mob=1))

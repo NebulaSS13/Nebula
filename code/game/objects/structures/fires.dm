@@ -209,7 +209,7 @@
 		light()
 		return TRUE
 
-	if((lit != FIRE_LIT || user.a_intent == I_HURT) && user.unEquip(thing, src))
+	if((lit != FIRE_LIT || user.a_intent == I_HURT) && user.try_unequip(thing, src))
 		user.visible_message(SPAN_NOTICE("\The [user] drops \the [thing] into \the [src]."))
 		update_icon()
 		return TRUE

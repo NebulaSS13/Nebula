@@ -79,7 +79,7 @@
 			to_chat(user, SPAN_WARNING("You must hold the welder in your hands to attach a tank."))
 		return
 
-	if(user && !user.unEquip(T, src))
+	if(user && !user.try_unequip(T, src))
 		return
 
 	tank    = T

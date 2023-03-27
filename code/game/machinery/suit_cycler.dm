@@ -183,7 +183,7 @@
 		if(boots)
 			to_chat(user, SPAN_WARNING("The cycler already contains some boots."))
 			return
-		if(!user.unEquip(I, src))
+		if(!user.try_unequip(I, src))
 			return
 		to_chat(user, "You fit \the [I] into the suit cycler.")
 		boots = I
@@ -199,7 +199,7 @@
 		if(helmet)
 			to_chat(user, SPAN_WARNING("The cycler already contains a helmet."))
 			return
-		if(!user.unEquip(I, src))
+		if(!user.try_unequip(I, src))
 			return
 		to_chat(user, "You fit \the [I] into the suit cycler.")
 		helmet = I
@@ -217,7 +217,7 @@
 			to_chat(user, SPAN_WARNING("The cycler already contains a voidsuit."))
 			return
 
-		if(!user.unEquip(I, src))
+		if(!user.try_unequip(I, src))
 			return
 		to_chat(user, "You fit \the [I] into the suit cycler.")
 		suit = I

@@ -30,7 +30,7 @@
 
 /obj/structure/rack/attackby(obj/item/O, mob/user, click_params)
 	. = ..()
-	if(!. && !isrobot(user) && O.loc == user && user.unEquip(O, loc))
+	if(!. && !isrobot(user) && O.loc == user && user.try_unequip(O, loc))
 		auto_align(O, click_params)
 		return TRUE
 

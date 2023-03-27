@@ -734,7 +734,7 @@ INITIALIZE_IMMEDIATE(/obj/effect/gas_overlay)
 				var/obj/item/thing = H.get_equipped_item(slot)
 				if(!istype(thing))
 					continue
-				if(thing.unacidable || !H.unEquip(thing))
+				if(thing.unacidable || !H.try_unequip(thing))
 					to_chat(H, SPAN_NOTICE("Your [thing] protects you from the acid."))
 					holder.remove_reagent(type, REAGENT_VOLUME(holder, type))
 					return
