@@ -30,11 +30,6 @@
 	set_hydration(400)
 	..()
 
-/mob/living/carbon/get_ai_type()
-	if(ispath(species?.ai))
-		return species.ai
-	return ..()
-
 /mob/living/carbon/Move(NewLoc, direct)
 	. = ..()
 	if(!.)
