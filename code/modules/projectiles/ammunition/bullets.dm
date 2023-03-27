@@ -33,6 +33,7 @@
 /obj/item/ammo_casing/pistol/small
 	desc = "A small pistol bullet casing."
 	color = COLOR_POLISHED_BRASS
+	bullet_color = COLOR_POLISHED_BRASS
 	icon = 'icons/obj/ammo/casings/small_pistol.dmi'
 	caliber = CALIBER_PISTOL_SMALL
 	projectile_type = /obj/item/projectile/bullet/pistol/holdout
@@ -59,6 +60,7 @@
 	desc = "A high-power pistol bullet casing."
 	caliber = CALIBER_PISTOL_MAGNUM
 	color = COLOR_POLISHED_BRASS
+	bullet_color = COLOR_POLISHED_BRASS
 	marking_color = COLOR_MAROON
 	projectile_type = /obj/item/projectile/bullet/pistol/strong
 	icon = 'icons/obj/ammo/casings/magnum.dmi'
@@ -171,6 +173,7 @@
 	projectile_type = /obj/item/projectile/bullet/rifle/shell
 	material = /decl/material/solid/metal/steel
 	color = COLOR_POLISHED_BRASS
+	bullet_color = COLOR_POLISHED_BRASS
 	icon = 'icons/obj/ammo/casings/anti_materiel.dmi'
 
 /obj/item/ammo_casing/shell/apds

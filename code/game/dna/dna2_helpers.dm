@@ -166,8 +166,8 @@
 					LAZYCLEARLIST(E.markings)
 
 		//Base skin and blend
-		for(var/obj/item/organ/external/E in H.get_external_organs())
-			E.set_dna(H.dna)
+		for(var/obj/item/organ/organ in H.get_organs())
+			organ.set_dna(H.dna)
 
 		//Hair
 		var/list/hair_subtypes = decls_repository.get_decl_paths_of_subtype(/decl/sprite_accessory/hair)

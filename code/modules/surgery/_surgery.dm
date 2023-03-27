@@ -201,11 +201,14 @@ var/global/list/surgery_tool_exception_cache = list()
 /obj/item/proc/do_surgery(mob/living/M, mob/living/user, fuckup_prob)
 
 	// Check for the Hippocratic oath.
-	if(!istype(M) || user.a_intent == I_HURT)
+	if(!istype(M) || !istype(user) || user.a_intent == I_HURT)
 		return FALSE
 
 	// Check for multi-surgery drifting.
-	var/zone = user.zone_sel.selecting
+	var/zone = user.zone_sel?.selecting
+	if(!zone)
+		return FALSE // Erroneous mob interaction
+
 	if(ishuman(M))
 		var/mob/living/carbon/human/H = M
 		if(length(LAZYACCESS(H.species.limb_mapping, zone)) > 1)
