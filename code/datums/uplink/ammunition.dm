@@ -34,12 +34,6 @@
 	item_cost = 8
 	path = /obj/item/ammo_magazine/rifle
 
-/datum/uplink_item/item/ammo/bullpup //for zipguns
-	name = "Bullpup Rifle Magazine"
-	desc = "A magazine for bullpup assault rifles. Contains 15 rounds."
-	item_cost = 8
-	path = /obj/item/ammo_magazine/rifle
-
 /datum/uplink_item/item/ammo/sniperammo
 	name = "Ammobox of Sniper Rounds"
 	desc = "A container of rounds for the anti-materiel rifle. Contains 7 rounds."

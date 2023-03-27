@@ -5,6 +5,12 @@
 	else
 		add_to_living_mob_list()
 
+/mob/living/get_ai_type()
+	var/decl/species/my_species = get_species()
+	if(ispath(my_species?.ai))
+		return my_species.ai
+	return ..()
+
 /mob/living/show_other_examine_strings(mob/user, distance, infix, suffix, hideflags, decl/pronouns/pronouns)
 	if(admin_paralyzed)
 		to_chat(user, SPAN_OCCULT("OOC: They have been paralyzed by staff. Please avoid interacting with them unless cleared to do so by staff."))
