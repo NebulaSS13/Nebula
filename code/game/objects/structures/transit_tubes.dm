@@ -90,16 +90,15 @@
 				AM.forceMove(pod)
 
 /obj/structure/transit_tube/station/attack_hand(mob/user)
-	if(!pod_moving)
-		for(var/obj/structure/transit_tube_pod/pod in loc)
-			if(!pod.moving && (pod.dir in directions()))
-				if(icon_state == "closed")
-					open_animation()
-
-				else if(icon_state == "open")
-					close_animation()
-
-
+	if(pod_moving || !user.check_dexterity(DEXTERITY_SIMPLE_MACHINES, TRUE))
+		return ..()
+	for(var/obj/structure/transit_tube_pod/pod in loc)
+		if(!pod.moving && (pod.dir in directions()))
+			if(icon_state == "closed")
+				open_animation()
+			else if(icon_state == "open")
+				close_animation()
+	return TRUE
 
 /obj/structure/transit_tube/station/proc/open_animation()
 	if(icon_state == "closed")

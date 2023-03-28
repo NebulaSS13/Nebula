@@ -105,7 +105,7 @@
 
 /obj/structure/curtain/attack_hand(mob/user)
 	toggle()
-	..()
+	return ..()
 
 /obj/structure/curtain/attackby(obj/item/W, mob/user)
 	if(IS_SCREWDRIVER(W))

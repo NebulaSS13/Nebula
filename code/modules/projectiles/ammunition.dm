@@ -196,18 +196,20 @@
 
 
 /obj/item/ammo_magazine/attack_hand(mob/user)
-	if(user.is_holding_offhand(src))
-		if(!stored_ammo.len)
-			to_chat(user, "<span class='notice'>[src] is already empty!</span>")
-		else
-			var/obj/item/ammo_casing/C = stored_ammo[stored_ammo.len]
-			stored_ammo-=C
-			user.put_in_hands(C)
-			user.visible_message("\The [user] removes \a [C] from [src].", "<span class='notice'>You remove \a [C] from [src].</span>")
-			update_icon()
-	else
-		..()
-		return
+	if(!user.is_holding_offhand(src) || !user.check_dexterity(DEXTERITY_GRIP, TRUE))
+		return ..()
+	if(!stored_ammo.len)
+		to_chat(user, SPAN_NOTICE("\The [src] is already empty!"))
+		return TRUE
+	var/obj/item/ammo_casing/C = stored_ammo[stored_ammo.len]
+	stored_ammo-=C
+	user.put_in_hands(C)
+	user.visible_message(
+		"\The [user] removes \a [C] from [src].",
+		SPAN_NOTICE("You remove \a [C] from [src].")
+	)
+	update_icon()
+	return TRUE
 
 /obj/item/ammo_magazine/on_update_icon()
 	. = ..()

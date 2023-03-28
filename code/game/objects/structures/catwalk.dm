@@ -184,10 +184,13 @@
 	return 0
 
 /obj/effect/catwalk_plated/attack_hand()
+	SHOULD_CALL_PARENT(FALSE)
 	activate()
+	return TRUE
 
 /obj/effect/catwalk_plated/attack_ghost()
 	activate()
+	return TRUE
 
 /obj/effect/catwalk_plated/proc/activate()
 	if(activated) return

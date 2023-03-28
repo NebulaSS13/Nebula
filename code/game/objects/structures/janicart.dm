@@ -85,8 +85,10 @@
 
 
 /obj/structure/janitorialcart/attack_hand(mob/user)
+	if(!user.check_dexterity(DEXTERITY_GRIP, TRUE))
+		return ..()
 	ui_interact(user)
-	return
+	return TRUE
 
 /obj/structure/janitorialcart/ui_interact(var/mob/user, var/ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1)
 	var/data[0]
@@ -229,11 +231,11 @@
 	. = ..()
 
 /obj/structure/bed/chair/janicart/attack_hand(mob/user)
-	if(mybag)
-		user.put_in_hands(mybag)
-		mybag = null
-	else
-		..()
+	if(!mybag || !user.check_dexterity(DEXTERITY_GRIP, TRUE))
+		return ..()
+	user.put_in_hands(mybag)
+	mybag = null
+	return TRUE
 
 /obj/structure/bed/chair/janicart/handle_buckled_relaymove(var/datum/movement_handler/mh, var/mob/mob, var/direction, var/mover)
 	if(isspaceturf(loc))

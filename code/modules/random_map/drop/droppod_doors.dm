@@ -13,8 +13,7 @@
 /obj/structure/droppod_door/Initialize(mapload, var/autoopen)
 	. = ..(mapload)
 	if(autoopen)
-		spawn(10 SECONDS)
-			deploy()
+		deploy(null, 10 SECONDS)
 
 /obj/structure/droppod_door/attack_ai(var/mob/user)
 	if(!user.Adjacent(src))
@@ -22,13 +21,24 @@
 	attack_hand(user)
 
 /obj/structure/droppod_door/attack_hand(var/mob/user)
-	if(deploying) return
-	to_chat(user, "<span class='danger'>You prime the explosive bolts. Better get clear!</span>")
-	sleep(30)
-	deploy()
+	if(deploying)
+		return ..()
+	deploy(user, 3 SECONDS)
+	return TRUE
 
-/obj/structure/droppod_door/proc/deploy()
+/obj/structure/droppod_door/proc/deploy(var/mob/user, var/delay)
+	set waitfor = FALSE
+
 	if(deployed)
+		return
+
+	if(user)
+		to_chat(user, SPAN_DANGER("You prime the explosive bolts. Better get clear!"))
+
+	if(delay)
+		sleep(delay)
+
+	if(deployed || QDELETED(src))
 		return
 
 	deployed = 1
@@ -39,7 +49,7 @@
 	for(var/obj/structure/droppod_door/D in orange(1,src))
 		if(D.deployed)
 			continue
-		D.deploy()
+		D.deploy(null, 0)
 
 	// Overwrite turfs.
 	var/turf/origin = get_turf(src)

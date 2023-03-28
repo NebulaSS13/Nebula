@@ -30,7 +30,7 @@
 				LAZYADD(cur_overlays, I.get_on_belt_overlay())
 			else
 				LAZYADD(cur_overlays, overlay_image('icons/obj/clothing/obj_belt_overlays.dmi', I.icon_state))
-				
+
 		if(LAZYLEN(cur_overlays))
 			add_overlay(cur_overlays)
 	update_clothing_icon()
@@ -75,11 +75,12 @@
 		. = ..(W, user)
 
 /obj/item/storage/belt/holster/attack_hand(mob/user)
+	if(!user.check_dexterity(DEXTERITY_GRIP, TRUE))
+		return ..()
 	var/datum/extension/holster/H = get_extension(src, /datum/extension/holster)
 	if(H.unholster(user))
-		return
-	else
-		. = ..(user)
+		return TRUE
+	return ..()
 
 /obj/item/storage/belt/holster/examine(mob/user)
 	. = ..()

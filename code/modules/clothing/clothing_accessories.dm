@@ -41,11 +41,11 @@
 
 /obj/item/clothing/attack_hand(var/mob/user)
 	//only forward to the attached accessory if the clothing is equipped (not in a storage)
-	if(accessories.len && src.loc == user)
-		for(var/obj/item/clothing/accessory/A in accessories)
-			A.attack_hand(user)
-		return
-	return ..()
+	if(!length(accessories) || loc != user)
+		return ..()
+	for(var/obj/item/clothing/accessory/A in accessories)
+		. = A.attack_hand(user) || .
+	return TRUE
 
 /obj/item/clothing/check_mousedrop_adjacency(var/atom/over, var/mob/user)
 	. = (loc == user && istype(over, /obj/screen)) || ..()

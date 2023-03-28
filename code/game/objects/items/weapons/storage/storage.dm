@@ -264,22 +264,21 @@
 	return handle_item_insertion(W)
 
 /obj/item/storage/attack_hand(mob/user)
-	if(ishuman(user))
-		var/mob/living/carbon/human/H = user
-		for(var/slot in global.pocket_slots)
-			var/obj/item/pocket = H.get_equipped_item(slot)
-			if(pocket == src && !H.get_active_hand()) //Prevents opening if it's in a pocket.
-				H.try_unequip(src)
-				H.put_in_hands(src)
-				return
-
-	if (src.loc == user)
-		src.open(user)
-	else
-		..()
-		storage_ui.on_hand_attack(user)
-	src.add_fingerprint(user)
-	return
+	if(!user.check_dexterity(DEXTERITY_SIMPLE_MACHINES, TRUE))
+		return ..()
+	for(var/slot in global.pocket_slots)
+		var/obj/item/pocket = user.get_equipped_item(slot)
+		if(pocket == src && !user.get_active_hand()) //Prevents opening if it's in a pocket.
+			if(user.try_unequip(src))
+				user.put_in_hands(src)
+			return TRUE
+	if(loc == user)
+		open(user)
+		add_fingerprint(user)
+		return TRUE
+	. = ..()
+	storage_ui.on_hand_attack(user)
+	add_fingerprint(user)
 
 /obj/item/storage/attack_ghost(mob/user)
 	var/mob/observer/ghost/G = user

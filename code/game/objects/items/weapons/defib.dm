@@ -68,10 +68,10 @@
 	toggle_paddles()
 
 /obj/item/defibrillator/attack_hand(mob/user)
-	if(loc == user)
-		toggle_paddles()
-	else
-		..()
+	if(loc != user || !user.check_dexterity(DEXTERITY_GRIP, TRUE))
+		return ..()
+	toggle_paddles()
+	return TRUE
 
 // what is this proc doing?
 /obj/item/defibrillator/handle_mouse_drop(var/atom/over, var/mob/user)

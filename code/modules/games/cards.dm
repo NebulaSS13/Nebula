@@ -137,13 +137,10 @@ var/global/list/card_decks = list()
 			cards += P
 
 /obj/item/deck/attack_hand(mob/user)
-	if(!istype(user))
-		return
-	if (user.a_intent == I_GRAB)
+	if(user.a_intent == I_GRAB || !user.check_dexterity(DEXTERITY_GRIP, TRUE))
 		return ..()
-	else
-		draw_card(user)
-		return TRUE
+	draw_card(user)
+	return TRUE
 
 /obj/item/deck/examine(mob/user)
 	. = ..()
@@ -310,33 +307,34 @@ var/global/list/card_decks = list()
 	user.visible_message("\The [user] [concealed ? "conceals" : "reveals"] their hand.")
 
 /obj/item/hand/attack_hand(mob/user)
-	if(src.loc == user)
-		// build the list of cards in the hand
-		var/list/to_discard = list()
-		for(var/datum/playingcard/P in cards)
-			to_discard[P.name] = P
-		var/discarding = null
-		//don't prompt if only 1 card
-		if(to_discard.len == 1)
-			discarding = to_discard[1]
-		else
-			discarding = input(user, "Which card do you wish to take?") as null|anything in to_discard
-		if(!discarding || !to_discard[discarding] || !CanPhysicallyInteract(user)) return
+	if(loc != user && !user.check_dexterity(DEXTERITY_GRIP, TRUE))
+		return ..()
 
-		var/datum/playingcard/card = to_discard[discarding]
-		var/obj/item/hand/new_hand = new(src.loc)
-		new_hand.cards += card
-		cards -= card
-		new_hand.concealed = 0
-		new_hand.update_icon()
-		src.update_icon()
-
-		if(!cards.len)
-			qdel(src)
-
-		user.put_in_hands(new_hand)
+	// build the list of cards in the hand
+	var/list/to_discard = list()
+	for(var/datum/playingcard/P in cards)
+		to_discard[P.name] = P
+	var/discarding = null
+	//don't prompt if only 1 card
+	if(to_discard.len == 1)
+		discarding = to_discard[1]
 	else
-		. = ..()
+		discarding = input(user, "Which card do you wish to take?") as null|anything in to_discard
+	if(!discarding || !to_discard[discarding] || !CanPhysicallyInteract(user))
+		return TRUE
+
+	var/datum/playingcard/card = to_discard[discarding]
+	var/obj/item/hand/new_hand = new(src.loc)
+	new_hand.cards += card
+	cards -= card
+	new_hand.concealed = 0
+	new_hand.update_icon()
+	src.update_icon()
+
+	if(!cards.len)
+		qdel(src)
+	user.put_in_hands(new_hand)
+	return TRUE
 
 /obj/item/hand/examine(mob/user)
 	. = ..()

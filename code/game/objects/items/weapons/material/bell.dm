@@ -11,15 +11,17 @@
 	material_alteration = MAT_FLAG_ALTERATION_COLOR | MAT_FLAG_ALTERATION_NAME
 
 /obj/item/bell/attack_hand(mob/user)
-	if (user.a_intent == I_GRAB)
+	if(user.a_intent == I_GRAB)
 		return ..()
-	else if (user.a_intent == I_HURT)
+
+	if(user.a_intent == I_HURT)
 		user.visible_message("<span class='warning'>\The [user] hammers \the [src]!</span>")
 		playsound(user.loc, 'sound/items/manydings.ogg', 60)
 	else
 		user.visible_message("<span class='notice'>\The [user] rings \the [src].</span>")
 		playsound(user.loc, 'sound/items/oneding.ogg', 20)
 	flick("bell_dingeth", src)
+	return TRUE
 
 /obj/item/bell/apply_hit_effect()
 	. = ..()

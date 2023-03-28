@@ -47,6 +47,7 @@
 	show_browser(user, "<html><head><title>[name]</title></head><body>[dat]</body></html>", "window=filingcabinet;size=350x300")
 
 /obj/structure/filing_cabinet/attack_hand(mob/user)
+	SHOULD_CALL_PARENT(FALSE)
 	return interact(user)
 
 /obj/structure/filing_cabinet/OnTopic(mob/user, href_list, datum/topic_state/state)

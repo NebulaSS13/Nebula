@@ -113,14 +113,11 @@
 	return ..()
 
 /obj/item/radio/intercom/attack_ai(mob/living/silicon/ai/user)
-	src.add_fingerprint(user)
-	spawn (0)
-		attack_self(user)
+	return attack_self(user)
 
 /obj/item/radio/intercom/attack_hand(mob/user)
-	src.add_fingerprint(user)
-	spawn (0)
-		attack_self(user)
+	SHOULD_CALL_PARENT(FALSE)
+	return attack_self(user)
 
 /obj/item/radio/intercom/receive_range(freq, level)
 	if (!on)

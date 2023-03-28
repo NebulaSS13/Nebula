@@ -124,17 +124,18 @@ var/global/list/image/splatter_cache=list()
 	STOP_PROCESSING(SSobj, src)
 
 /obj/effect/decal/cleanable/blood/attack_hand(mob/user)
-	..()
-	if (amount && length(blood_data) && ishuman(user))
-		var/mob/living/carbon/human/H = user
-		if(H.get_equipped_item(slot_gloves_str))
-			return
-		var/taken = rand(1,amount)
-		amount -= taken
-		to_chat(user, SPAN_NOTICE("You get some of \the [src] on your hands."))
-		for(var/bloodthing in blood_data)
-			user.add_blood(null, max(1, amount/length(blood_data)), blood_data[bloodthing])
-		user.verbs += /mob/living/carbon/human/proc/bloody_doodle
+	if(!amount || !length(blood_data) || !ishuman(user))
+		return ..()
+	var/mob/living/carbon/human/H = user
+	if(H.get_equipped_item(slot_gloves_str))
+		return ..()
+	var/taken = rand(1,amount)
+	amount -= taken
+	to_chat(user, SPAN_NOTICE("You get some of \the [src] on your hands."))
+	for(var/bloodthing in blood_data)
+		user.add_blood(null, max(1, amount/length(blood_data)), blood_data[bloodthing])
+	user.verbs += /mob/living/carbon/human/proc/bloody_doodle
+	return TRUE
 
 /obj/effect/decal/cleanable/blood/splatter
 	random_icon_states = list("mgibbl1", "mgibbl2", "mgibbl3", "mgibbl4", "mgibbl5")

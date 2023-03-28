@@ -29,7 +29,9 @@
 	color = DEAD_PLANT_COLOUR
 
 /obj/effect/dead_plant/attack_hand()
+	SHOULD_CALL_PARENT(FALSE)
 	qdel(src)
+	return TRUE
 
 /obj/effect/dead_plant/attackby()
 	..()

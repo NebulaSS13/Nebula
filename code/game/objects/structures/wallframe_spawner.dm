@@ -14,7 +14,9 @@
 	return 0
 
 /obj/effect/wallframe_spawn/attack_hand()
+	SHOULD_CALL_PARENT(FALSE)
 	activate()
+	return TRUE
 
 /obj/effect/wallframe_spawn/attack_ghost()
 	activate()

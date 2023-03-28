@@ -48,9 +48,9 @@
 			to_chat(user, SPAN_ITALIC("Something is hidden inside."))
 
 /obj/item/clothing/shoes/attack_hand(var/mob/user)
-	if (remove_hidden(user))
-		return
-	..()
+	if(user.check_dexterity(DEXTERITY_GRIP, TRUE) && remove_hidden(user))
+		return TRUE
+	return ..()
 
 /obj/item/clothing/shoes/attack_self(var/mob/user)
 	remove_cuffs(user)

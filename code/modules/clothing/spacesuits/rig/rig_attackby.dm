@@ -203,11 +203,9 @@
 
 
 /obj/item/rig/attack_hand(var/mob/user)
-
-	if(electrified != 0)
-		if(shock(user)) //Handles removing charge from the cell, as well. No need to do that here.
-			return
-	..()
+	if(electrified != 0 && shock(user)) //Handles removing charge from the cell, as well. No need to do that here.
+		return TRUE
+	return ..()
 
 /obj/item/rig/emag_act(var/remaining_charges, var/mob/user)
 	if(!subverted)

@@ -559,11 +559,14 @@
 	var/remains_type = /obj/item/remains/human
 
 /obj/structure/broken_cryo/attack_hand(mob/user)
-	..()
-	if (closed)
-		to_chat(user, SPAN_NOTICE("You tug at the glass but can't open it with your hands alone."))
+	. = ..()
+	if(.)
+		return
+	if(closed)
+		to_chat(user, SPAN_NOTICE("You tug at the glass, but can't open it further without a crowbar."))
 	else
 		to_chat(user, SPAN_NOTICE("The glass is already open."))
+	return TRUE
 
 /obj/structure/broken_cryo/attackby(obj/item/W, mob/user)
 	if (busy)

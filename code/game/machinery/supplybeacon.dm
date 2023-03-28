@@ -57,15 +57,14 @@
 	return ..()
 
 /obj/structure/supply_beacon/attack_hand(var/mob/user)
-
+	if(!user.check_dexterity(DEXTERITY_SIMPLE_MACHINES, TRUE))
+		return ..()
 	if(expended)
 		to_chat(user, SPAN_WARNING("\The [src] has used up its charge."))
 		return TRUE
-
 	if(!anchored)
 		to_chat(user, SPAN_WARNING("You need to secure \the [src] with a wrench first!"))
 		return TRUE
-
 	if(activated)
 		deactivate(user)
 	else

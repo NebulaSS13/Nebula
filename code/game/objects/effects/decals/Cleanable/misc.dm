@@ -13,11 +13,13 @@
 	icon_state = "ash"
 
 /obj/effect/decal/cleanable/ash/attack_hand(var/mob/user)
+	SHOULD_CALL_PARENT(FALSE)
 	to_chat(user, "<span class='notice'>[src] sifts through your fingers.</span>")
 	var/turf/simulated/floor/F = get_turf(src)
 	if (istype(F))
 		F.dirt += 4
 	qdel(src)
+	return TRUE
 
 /obj/effect/decal/cleanable/dirt
 	name = "dirt"

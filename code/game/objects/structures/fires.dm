@@ -140,7 +140,7 @@
 
 /obj/structure/fire_source/attack_hand(var/mob/user)
 
-	if(length(contents))
+	if(length(contents) && user.check_dexterity(DEXTERITY_GRIP, TRUE))
 		var/obj/item/removing = pick(contents)
 		removing.dropInto(loc)
 		user.put_in_hands(removing)
@@ -158,7 +158,7 @@
 			qdel(src)
 		return TRUE
 
-	. = ..()
+	return ..()
 
 /obj/structure/fire_source/grab_attack(var/obj/item/grab/G)
 	var/mob/living/affecting_mob = G.get_affecting_mob()

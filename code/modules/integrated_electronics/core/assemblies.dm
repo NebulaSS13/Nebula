@@ -512,10 +512,10 @@
 	return src
 
 /obj/item/electronic_assembly/attack_hand(mob/user)
-	if(anchored)
-		attack_self(user)
-		return
-	..()
+	if(!anchored)
+		return ..()
+	attack_self(user)
+	return TRUE
 
 /obj/item/electronic_assembly/default //The /default electronic_assemblys are to allow the introduction of the new naming scheme without breaking old saves.
   name = "type-a electronic assembly"

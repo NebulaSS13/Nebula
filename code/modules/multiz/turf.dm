@@ -107,6 +107,7 @@
 	return shared_open_turf_attackby(src, C, user)
 
 /turf/simulated/open/attack_hand(mob/user)
+	SHOULD_CALL_PARENT(FALSE)
 	return shared_open_turf_attackhand(src, user)
 
 //Most things use is_plating to test if there is a cover tile on top (like regular floors)
@@ -155,6 +156,7 @@
 	return shared_open_turf_attackby(src, C, user)
 
 /turf/exterior/open/attack_hand(mob/user)
+	SHOULD_CALL_PARENT(FALSE)
 	return shared_open_turf_attackhand(src, user)
 
 /turf/exterior/open/cannot_build_cable()

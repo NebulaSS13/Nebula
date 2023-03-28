@@ -23,19 +23,19 @@
 	var/autolabel = TRUE  		// if set, will add label with the name of the first initial reagent
 
 /obj/item/chems/glass/bottle/on_picked_up(mob/user)
-	..()
+	. = ..()
 	update_icon()
 
 /obj/item/chems/glass/bottle/dropped(mob/user)
-	..()
+	. = ..()
 	update_icon()
 
 /obj/item/chems/glass/bottle/attack_hand()
-	..()
+	. = ..()
 	update_icon()
 
 /obj/item/chems/glass/bottle/on_update_icon()
-	..()
+	. = ..()
 	cut_overlays()
 
 	if(reagents?.total_volume)

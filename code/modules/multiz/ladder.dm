@@ -134,8 +134,11 @@
 		I.forceMove(landing)
 		landing.visible_message(SPAN_DANGER("\The [I] falls from the top of \the [target_down]!"))
 
-/obj/structure/ladder/attack_hand(var/mob/M)
-	climb(M)
+/obj/structure/ladder/attack_hand(var/mob/user)
+	if(user.a_intent == I_HURT || !user.check_dexterity(DEXTERITY_SIMPLE_MACHINES))
+		return ..()
+	climb(user)
+	return TRUE
 
 /obj/structure/ladder/attack_ai(var/mob/M)
 	var/mob/living/silicon/ai/ai = M

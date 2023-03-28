@@ -15,7 +15,10 @@
 				entangle(M)
 
 /obj/effect/vine/attack_hand(var/mob/user)
+	if(!user.check_dexterity(DEXTERITY_SIMPLE_MACHINES))
+		return ..()
 	manual_unbuckle(user)
+	return TRUE
 
 /obj/effect/vine/Crossed(atom/movable/O)
 	if(isliving(O))

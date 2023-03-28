@@ -32,10 +32,13 @@
 	toggle_lock(user)
 
 /obj/structure/fireaxecabinet/attack_hand(var/mob/user)
+	if(!user.check_dexterity(DEXTERITY_SIMPLE_MACHINES, TRUE))
+		return ..()
 	if(!unlocked)
-		to_chat(user, "<span class='warning'>\The [src] is locked.</span>")
-		return
-	toggle_open(user)
+		to_chat(user, SPAN_WARNING("\The [src] is locked."))
+	else
+		toggle_open(user)
+	return TRUE
 
 /obj/structure/fireaxecabinet/handle_mouse_drop(atom/over, mob/user)
 	if(over == user)

@@ -173,9 +173,9 @@
 	unwrap(user)
 
 /obj/item/parcel/attack_hand(mob/user)
-	//Prevent picking up furnitures and human mobs
-	if(w_class < ITEM_SIZE_NO_CONTAINER)
-		. = ..()
+	if(w_class >= ITEM_SIZE_NO_CONTAINER)
+		return TRUE
+	return ..()
 
 /obj/item/parcel/attackby(obj/item/W, mob/user)
 	if(istype(W, /obj/item/destTagger))

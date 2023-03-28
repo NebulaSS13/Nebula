@@ -47,7 +47,9 @@
 	changing_state = FALSE
 
 /obj/structure/door/attack_hand(mob/user)
-	return density ? open() : close()
+	if(user.check_dexterity(DEXTERITY_SIMPLE_MACHINES, TRUE))
+		return density ? open() : close()
+	return ..()
 
 /obj/structure/door/proc/close()
 	set waitfor = 0

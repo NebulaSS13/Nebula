@@ -17,19 +17,19 @@
 	to_chat(user, " It can hold up to [volume] units.")
 
 /obj/item/chems/glass/beaker/on_picked_up(mob/user)
-	..()
+	. = ..()
 	update_icon()
 
 /obj/item/chems/glass/beaker/dropped(mob/user)
-	..()
+	. = ..()
 	update_icon()
 
 /obj/item/chems/glass/beaker/attack_hand()
-	..()
+	. = ..()
 	update_icon()
 
 /obj/item/chems/glass/beaker/on_update_icon()
-	..()
+	. = ..()
 	cut_overlays()
 
 	if(reagents?.total_volume)

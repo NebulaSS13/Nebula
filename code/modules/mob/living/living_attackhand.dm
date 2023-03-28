@@ -1,6 +1,5 @@
 /mob/living/attack_hand(mob/user)
-	SHOULD_CALL_PARENT(TRUE)
-	. = ..() || (user && default_interaction(user))
+	return ..() || (user && default_interaction(user))
 
 /mob/living/proc/default_interaction(var/mob/user)
 

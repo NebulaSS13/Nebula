@@ -37,14 +37,14 @@
 	allowed_magazines = /obj/item/ammo_magazine/pistol/small
 
 /obj/item/gun/projectile/pistol/holdout/attack_hand(mob/user)
-	if(silenced && user.is_holding_offhand(src))
-		to_chat(user, SPAN_NOTICE("You unscrew \the [silenced] from \the [src]."))
-		user.put_in_hands(silenced)
-		silenced = initial(silenced)
-		w_class = initial(w_class)
-		update_icon()
-		return
-	..()
+	if(!silenced || !user.is_holding_offhand(src) || !user.check_dexterity(DEXTERITY_COMPLEX_TOOLS, TRUE))
+		return ..()
+	to_chat(user, SPAN_NOTICE("You unscrew \the [silenced] from \the [src]."))
+	user.put_in_hands(silenced)
+	silenced = initial(silenced)
+	w_class = initial(w_class)
+	update_icon()
+	return TRUE
 
 /obj/item/gun/projectile/pistol/holdout/attackby(obj/item/I, mob/user)
 	if(istype(I, /obj/item/silencer))

@@ -145,13 +145,14 @@ var/global/list/registered_cyborg_weapons = list()
 
 //For removable cells.
 /obj/item/gun/energy/attack_hand(mob/user)
-	if(!user.is_holding_offhand(src)|| isnull(accepts_cell_type) || isnull(power_supply) )
+	if(!user.is_holding_offhand(src) || isnull(accepts_cell_type) || isnull(power_supply) || !user.check_dexterity(DEXTERITY_GRIP, TRUE))
 		return ..()
 	user.put_in_hands(power_supply)
 	power_supply = null
 	user.visible_message(SPAN_NOTICE("\The [user] unloads \the [src]."))
 	playsound(src,'sound/weapons/guns/interaction/smg_magout.ogg' , 50)
 	update_icon()
+	return TRUE
 
 /obj/item/gun/energy/attackby(var/obj/item/A, mob/user)
 

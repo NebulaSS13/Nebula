@@ -18,12 +18,13 @@
 	var/list/stored_ore
 
 /obj/structure/ore_box/attack_hand(mob/user)
-	if(total_ores > 0)
-		var/obj/item/stack/material/ore/O = pick(get_contained_external_atoms())
-		if(remove_ore(O, user))
-			to_chat(user, SPAN_NOTICE("You grab a random ore pile from \the [src]."))
-			return TRUE
-	. = ..()
+	if(total_ores <= 0 || !user.check_dexterity(DEXTERITY_GRIP, TRUE))
+		return ..()
+	var/obj/item/stack/material/ore/O = pick(get_contained_external_atoms())
+	if(!remove_ore(O, user))
+		return ..()
+	to_chat(user, SPAN_NOTICE("You grab a random ore pile from \the [src]."))
+	return TRUE
 
 /obj/structure/ore_box/attackby(obj/item/W, mob/user)
 	if (istype(W, /obj/item/stack/material/ore))

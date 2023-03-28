@@ -21,7 +21,10 @@
 	. = ..()
 
 /obj/structure/stasis_cage/attack_hand(var/mob/user)
+	if(!user.check_dexterity(DEXTERITY_SIMPLE_MACHINES, TRUE))
+		return ..()
 	try_release(user)
+	return TRUE
 
 /obj/structure/stasis_cage/attack_robot(var/mob/user)
 	if(CanPhysicallyInteract(user))

@@ -118,13 +118,15 @@
 	..()
 
 /obj/structure/bed/roller/ironingboard/attack_hand(var/mob/user)
+	if(!user.check_dexterity(DEXTERITY_SIMPLE_MACHINES, TRUE))
+		return ..()	//Takes care of unbuckling.
 	if(density) // check if it's deployed
 		if(holding && user.put_in_hands(holding))
 			remove_item(holding)
-			return
+			return TRUE
 		if(cloth && user.put_in_hands(cloth))
 			remove_item(cloth)
-			return
+			return TRUE
 		if(!buckled_mob)
 			to_chat(user, "You fold the ironing table down.")
 			set_density(0)
@@ -132,7 +134,7 @@
 		to_chat(user, "You deploy the ironing table.")
 		set_density(1)
 	update_icon()
-	. = ..()	//Takes care of unbuckling.
+	return TRUE
 
 /obj/structure/bed/roller/ironingboard/collapse()
 	var/turf/T = get_turf(src)

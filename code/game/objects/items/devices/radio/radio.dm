@@ -75,7 +75,10 @@
 	return ..()
 
 /obj/item/radio/attack_self(mob/user)
+	if(!user.check_dexterity(DEXTERITY_SIMPLE_MACHINES))
+		return
 	user.set_machine(src)
+	add_fingerprint(user)
 	interact(user)
 	return TRUE
 

@@ -283,7 +283,7 @@
 /obj/item/attack_hand(mob/user)
 
 	if(!user)
-		return
+		return FALSE
 
 	if(anchored)
 		return ..()
@@ -298,24 +298,24 @@
 					user.drop_from_inventory(src)
 				else
 					to_chat(user, SPAN_WARNING("You fail to remove \the [src]!"))
-				return
+				return TRUE
 
 			if(isturf(loc))
 				if(loc == get_turf(user))
 					attack_self(user)
 				else
 					dropInto(get_turf(user))
-				return
+				return TRUE
 
 			if(istype(loc, /obj/item/storage))
 				visible_message(SPAN_NOTICE("\The [user] fumbles \the [src] out of \the [loc]."))
 				var/obj/item/storage/bag = loc
 				bag.remove_from_storage(src)
 				dropInto(get_turf(bag))
-				return
+				return TRUE
 
 		to_chat(user, SPAN_WARNING("You are not dexterous enough to pick up \the [src]."))
-		return
+		return TRUE
 
 	var/old_loc = loc
 	if (istype(loc, /obj/item/storage))
@@ -327,15 +327,11 @@
 
 	if (loc == user)
 		if(!user.try_unequip(src))
-			return
-	else
-		if(isliving(loc))
-			return
+			return TRUE
+	else if(isliving(loc))
+		return TRUE
 
-	if(QDELETED(src))
-		return // Unequipping changes our state, so must check here.
-
-	if(user.put_in_active_hand(src))
+	if(!QDELETED(src) && user.put_in_active_hand(src))
 		on_picked_up(user)
 		if (isturf(old_loc))
 			var/obj/effect/temporary/item_pickup_ghost/ghost = new(old_loc, src)
@@ -347,6 +343,7 @@
 		else if(randpixel == 0)
 			pixel_x = 0
 			pixel_y = 0
+	return TRUE
 
 /obj/item/attack_ai(mob/living/silicon/ai/user)
 	if (istype(src.loc, /obj/item/robot_module))

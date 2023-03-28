@@ -31,14 +31,15 @@
 	update_icon()
 
 /obj/item/chems/syringe/on_reagent_change()
+	. = ..()
 	update_icon()
 
 /obj/item/chems/syringe/on_picked_up(mob/user)
-	..()
+	. = ..()
 	update_icon()
 
 /obj/item/chems/syringe/dropped(mob/user)
-	..()
+	. = ..()
 	update_icon()
 
 /obj/item/chems/syringe/attack_self(mob/user)
@@ -52,7 +53,7 @@
 	update_icon()
 
 /obj/item/chems/syringe/attack_hand()
-	..()
+	. = ..()
 	update_icon()
 
 /obj/item/chems/syringe/attackby(obj/item/I, mob/user)

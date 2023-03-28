@@ -223,8 +223,9 @@
 
 
 /obj/structure/synthesized_instrument/attack_hand(mob/user)
-	src.interact(user)
-
+	SHOULD_CALL_PARENT(FALSE)
+	interact(user)
+	return TRUE
 
 /obj/structure/synthesized_instrument/interact(mob/user) // CONDITIONS ..(user) that shit in subclasses
 	src.ui_interact(user)

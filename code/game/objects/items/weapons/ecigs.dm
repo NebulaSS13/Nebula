@@ -181,14 +181,14 @@
 			to_chat(user, SPAN_WARNING("\The [src] does not have a battery installed."))
 
 /obj/item/clothing/mask/smokable/ecig/attack_hand(mob/user)//eject cartridge
-	if(user.is_holding_offhand(src) && ec_cartridge)
-		lit = FALSE
-		user.put_in_hands(ec_cartridge)
-		to_chat(user, SPAN_NOTICE("You remove \the [ec_cartridge] from \the [src]."))
-		ec_cartridge = null
-		update_icon()
-	else
-		..()
+	if(!user.is_holding_offhand(src) || !ec_cartridge || !user.check_dexterity(DEXTERITY_GRIP))
+		return ..()
+	lit = FALSE
+	user.put_in_hands(ec_cartridge)
+	to_chat(user, SPAN_NOTICE("You remove \the [ec_cartridge] from \the [src]."))
+	ec_cartridge = null
+	update_icon()
+	return TRUE
 
 /obj/item/chems/ecig_cartridge
 	name = "tobacco flavour cartridge"

@@ -63,6 +63,8 @@
 	update_icon()
 
 /obj/machinery/holomap/attack_hand(var/mob/user)
+	if(user.a_intent == I_HURT)
+		return ..()
 	if(watching_mob && (watching_mob != user))
 		to_chat(user, SPAN_WARNING("Someone else is currently watching the holomap."))
 		return
@@ -70,6 +72,7 @@
 		to_chat(user, SPAN_WARNING("You need to stand in front of \the [src]."))
 		return
 	startWatching(user)
+	return TRUE
 
 // Let people bump up against it to watch
 /obj/machinery/holomap/Bumped(var/atom/movable/AM)

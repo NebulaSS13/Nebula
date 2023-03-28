@@ -26,6 +26,7 @@
 	return attack_hand(user)
 
 /obj/structure/lift/attack_hand(var/mob/user)
+	SHOULD_CALL_PARENT(FALSE)
 	return interact(user)
 
 /obj/structure/lift/interact(var/mob/user)

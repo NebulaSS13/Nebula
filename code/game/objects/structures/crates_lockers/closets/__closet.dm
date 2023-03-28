@@ -329,8 +329,11 @@ var/global/list/closets = list()
 		to_chat(user, "<span class='notice'>It won't budge!</span>")
 
 /obj/structure/closet/attack_hand(mob/user)
-	src.add_fingerprint(user)
-	src.toggle(user)
+	if(!user.check_dexterity(DEXTERITY_SIMPLE_MACHINES, TRUE))
+		return ..()
+	add_fingerprint(user)
+	toggle(user)
+	return TRUE
 
 /obj/structure/closet/attack_ghost(mob/ghost)
 	if(ghost.client && ghost.client.inquisitive_ghost)

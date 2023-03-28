@@ -27,14 +27,14 @@
 		add_overlay("tanks[length(tanks)]")
 
 /obj/structure/sealant_rack/attack_hand(mob/user)
-
+	if(!user.check_dexterity(DEXTERITY_GRIP, TRUE))
+		return ..()
 	if(loaded_gun)
 		loaded_gun.dropInto(loc)
 		user.put_in_hands(loaded_gun)
 		loaded_gun = null
 		update_icon()
 		return TRUE
-
 	if(length(tanks))
 		var/obj/tank = tanks[length(tanks)]
 		LAZYREMOVE(tanks, tank)
@@ -42,8 +42,7 @@
 		user.put_in_hands(tank)
 		update_icon()
 		return TRUE
-
-	. = ..()
+	return ..()
 
 /obj/structure/sealant_rack/attackby(obj/item/O, mob/user)
 

@@ -23,15 +23,16 @@
 	var/linked
 
 /obj/item/storage/laundry_basket/attack_hand(mob/user)
-	if(ishuman(user))
-		var/mob/living/carbon/human/H = user
-		var/obj/item/organ/external/temp = GET_EXTERNAL_ORGAN(H, H.get_active_held_item_slot())
-		if(!temp)
-			to_chat(user, SPAN_WARNING("You need two hands to pick this up!"))
-			return
+	if(!ishuman(user))
+		return ..()
+	var/mob/living/carbon/human/H = user
+	var/obj/item/organ/external/temp = GET_EXTERNAL_ORGAN(H, H.get_active_held_item_slot())
+	if(!temp)
+		to_chat(user, SPAN_WARNING("You need two hands to pick this up!"))
+		return TRUE
 	if(!user.get_empty_hand_slot())
 		to_chat(user, SPAN_WARNING("You need a hand to be empty."))
-		return
+		return TRUE
 	return ..()
 
 /obj/item/storage/laundry_basket/attack_self(mob/user)

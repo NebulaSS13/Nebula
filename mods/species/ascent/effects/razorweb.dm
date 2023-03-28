@@ -72,9 +72,11 @@
 	qdel_self()
 
 /obj/effect/razorweb/attack_hand(mob/user)
+	SHOULD_CALL_PARENT(FALSE)
 	user.visible_message(SPAN_DANGER("\The [user] yanks on \the [src]!"))
 	entangle(user, TRUE)
 	qdel_self()
+	return TRUE
 
 /obj/effect/razorweb/attackby(var/obj/item/thing, var/mob/user)
 

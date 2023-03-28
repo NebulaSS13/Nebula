@@ -104,4 +104,4 @@
 
 /obj/item/grenade/attack_hand()
 	walk(src, null, null)
-	..()
+	return ..()

@@ -19,9 +19,9 @@
 
 	var/temp = ""				// temporary feedback messages
 
-/obj/machinery/computer/telecomms/monitor/attack_hand(mob/user as mob)
-	if(stat & (BROKEN|NOPOWER))
-		return
+/obj/machinery/computer/telecomms/monitor/attack_hand(mob/user)
+	if((stat & (BROKEN|NOPOWER)) || !user.check_dexterity(DEXTERITY_KEYBOARDS))
+		return ..()
 	user.set_machine(src)
 	var/list/dat = list()
 	dat += "<TITLE>Telecommunications Monitor</TITLE><center><b>Telecommunications Monitor</b></center>"

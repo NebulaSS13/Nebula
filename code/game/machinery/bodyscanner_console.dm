@@ -42,10 +42,10 @@
 	return !!connected_displays.len
 
 /obj/machinery/body_scanconsole/attack_hand(mob/user)
-	if(!connected || (connected.stat & (NOPOWER|BROKEN)))
-		to_chat(user, "<span class='warning'>This console is not connected to a functioning body scanner.</span>")
-		return TRUE
-	return ..()
+	if(connected && !(connected.stat & (NOPOWER|BROKEN)))
+		return ..()
+	to_chat(user, "<span class='warning'>This console is not connected to a functioning body scanner.</span>")
+	return TRUE
 
 /obj/machinery/body_scanconsole/interface_interact(mob/user)
 	ui_interact(user)

@@ -14,6 +14,7 @@
 		contain(A)
 
 /obj/structure/anomaly_container/attack_hand(var/mob/user)
+	SHOULD_CALL_PARENT(FALSE)
 	release()
 	return TRUE
 
