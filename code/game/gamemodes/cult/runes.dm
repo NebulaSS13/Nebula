@@ -365,7 +365,7 @@
 		if(T.holy)
 			T.holy = 0
 		else
-			T.on_narsie_defile()
+			T.on_defilement()
 	visible_message("<span class='warning'>\The [src] embeds into the floor and walls around it, changing them!</span>", "You hear liquid flow.")
 	qdel(src)
 
@@ -616,7 +616,7 @@
 			if(T.holy)
 				T.holy = 0
 			else
-				T.on_narsie_defile()
+				T.on_defilement()
 	visible_message("<span class='warning'>\The [src] embeds into the floor and walls around it, changing them!</span>", "You hear liquid flow.")
 	qdel(src)
 
@@ -796,7 +796,7 @@
 
 		for(var/turf/T in range(min(the_end_comes, 15)))
 			if(prob(the_end_comes / 3))
-				T.on_narsie_defile()
+				T.on_defilement()
 		sleep(10)
 
 	if(the_end_comes >= the_time_has_come)

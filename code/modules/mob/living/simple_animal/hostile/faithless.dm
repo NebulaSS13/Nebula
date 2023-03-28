@@ -55,5 +55,5 @@
 /mob/living/simple_animal/hostile/faithless/cult
 	faction = "cult"
 
-/mob/living/simple_animal/hostile/faithless/cult/on_narsie_defile()
+/mob/living/simple_animal/hostile/faithless/cult/on_defilement()
 	return

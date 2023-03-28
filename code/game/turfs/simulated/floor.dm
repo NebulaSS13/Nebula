@@ -124,7 +124,7 @@
 /turf/simulated/floor/is_floor()
 	return TRUE
 
-/turf/simulated/floor/on_narsie_defile()
+/turf/simulated/floor/on_defilement()
 	if(flooring?.type != /decl/flooring/reinforced/cult)
 		..()
 		set_flooring(GET_DECL(/decl/flooring/reinforced/cult))

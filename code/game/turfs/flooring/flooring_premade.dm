@@ -162,7 +162,7 @@
 	icon_state = "cult"
 	initial_flooring = /decl/flooring/reinforced/cult
 
-/turf/simulated/floor/cult/on_narsie_defile()
+/turf/simulated/floor/cult/on_defilement()
 	return
 
 /turf/simulated/floor/cult/is_defiled()

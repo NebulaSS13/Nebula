@@ -288,7 +288,7 @@ var/global/list/wall_fullblend_objects = list(
 /turf/simulated/wall/is_wall()
 	return TRUE
 
-/turf/simulated/wall/on_narsie_defile()
+/turf/simulated/wall/on_defilement()
 	var/new_material
 	if(material?.type != /decl/material/solid/stone/cult)
 		new_material = /decl/material/solid/stone/cult

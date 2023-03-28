@@ -12,7 +12,7 @@
 	blocks_air = 1
 	explosion_resistance = 10
 
-/turf/simulated/shuttle/on_narsie_defile()
+/turf/simulated/shuttle/on_defilement()
 	..()
 	make_spooky()
 

@@ -81,7 +81,7 @@ var/global/list/narsie_list = list()
 		if(get_dist(src, consuming) >= consume_range)
 			consuming.singularity_pull(src, 9)
 		else
-			consuming.on_narsie_defile()
+			consuming.on_defilement()
 		if(consumed++ >= max_atoms_assessed_per_tick || TICK_CHECK)
 			break
 
@@ -109,13 +109,14 @@ var/global/list/narsie_list = list()
 					targets += G
 		// Pick a random candidate.
 		if(length(targets))
+			var/capname = uppertext(name)
+			if(target)
+				to_chat(target, SPAN_NOTICE("<b>[capname] HAS LOST INTEREST IN YOU.</b>"))
 			target = pick(targets)
-		var/capname = uppertext(name)
-		to_chat(target, SPAN_NOTICE("<b>[capname] HAS LOST INTEREST IN YOU.</b>"))
-		if (ishuman(target))
-			to_chat(target, SPAN_DANGER("[capname] HUNGERS FOR YOUR SOUL."))
-		else
-			to_chat(target, SPAN_DANGER("[capname] HAS CHOSEN YOU TO LEAD HIM TO HIS NEXT MEAL."))
+			if (ishuman(target))
+				to_chat(target, SPAN_DANGER("[capname] HUNGERS FOR YOUR SOUL."))
+			else
+				to_chat(target, SPAN_DANGER("[capname] HAS CHOSEN YOU TO LEAD HIM TO HIS NEXT MEAL."))
 
 	// Move.
 	if(move_self)

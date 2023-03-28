@@ -293,7 +293,7 @@
 	if(simulated)
 		if(current_size >= STAGE_THREE)
 			for(var/obj/item/hand in get_held_items())
-				if(prob(current_size*5) && hand.w_class >= (11-current_size)/2 && unEquip(hand))
+				if(prob(current_size*5) && hand.w_class >= (11-current_size)/2 && try_unequip(hand))
 					to_chat(src, SPAN_WARNING("\The [S] pulls \the [hand] from your grip!"))
 					hand.singularity_pull(S, current_size)
 			var/obj/item/shoes = get_equipped_item(slot_shoes_str)

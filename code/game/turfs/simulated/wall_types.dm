@@ -106,7 +106,7 @@
 	color = COLOR_RED_GRAY
 	material = /decl/material/solid/stone/cult
 
-/turf/simulated/wall/cult/on_narsie_defile()
+/turf/simulated/wall/cult/on_defilement()
 	return
 
 /turf/simulated/wall/cult/is_defiled()

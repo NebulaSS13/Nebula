@@ -187,7 +187,7 @@
 						I.pixel_x -= world.icon_size
 					add_overlay(I)
 
-/turf/exterior/on_narsie_defile()
+/turf/exterior/on_defilement()
 	..()
 	if(density)
 		ChangeTurf(/turf/simulated/wall/cult)

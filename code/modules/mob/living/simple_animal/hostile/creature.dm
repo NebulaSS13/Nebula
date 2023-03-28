@@ -16,5 +16,5 @@
 	max_gas = null
 	minbodytemp = 0
 
-/mob/living/simple_animal/hostile/creature/cult/on_narsie_defile()
+/mob/living/simple_animal/hostile/creature/cult/on_defilement()
 	return

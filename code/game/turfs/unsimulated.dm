@@ -5,5 +5,5 @@
 /turf/unsimulated/get_lumcount(var/minlum = 0, var/maxlum = 1)
 	return 0.8
 
-/turf/unsimulated/on_narsie_defile()
+/turf/unsimulated/on_defilement()
 	return

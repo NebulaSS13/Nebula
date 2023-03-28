@@ -1,7 +1,7 @@
-/mob/on_narsie_defile()
+/mob/on_defilement()
 	return
 
-/mob/observer/ghost/on_narsie_defile()
+/mob/observer/ghost/on_defilement()
 	if(icon_state != "ghost-narsie")
 		icon = 'icons/mob/mob.dmi'
 		icon_state = "ghost-narsie"
@@ -9,7 +9,7 @@
 		set_invisibility(0)
 		to_chat(src, SPAN_SINISTER("Even as a non-corporal being, you can feel Nar-Sie's presence altering you. You are now visible to everyone."))
 
-/mob/living/on_narsie_defile()
+/mob/living/on_defilement()
 	if(iscultist(src) && client)
 		var/mob/living/simple_animal/construct/harvester/C = new(get_turf(src))
 		mind.transfer_to(C)
