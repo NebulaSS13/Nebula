@@ -57,7 +57,7 @@
 		holding = null
 	return ..()
 
-/mob/living/bot/remotebot/proc/on_picked_up(var/obj/item/I)
+/mob/living/bot/remotebot/proc/pickup(var/obj/item/I)
 	if(holding || get_dist(src,I) > 1)
 		return
 	src.visible_message("<b>\The [src]</b> picks up \the [I].")
@@ -87,7 +87,7 @@
 	if(isturf(a) || get_dist(src,a) > 1)
 		walk_to(src,a,0,get_movement_delay(get_dir(src, a)))
 	else if(istype(a, /obj/item))
-		on_picked_up(a)
+		pickup(a)
 	else
 		hit(a)
 

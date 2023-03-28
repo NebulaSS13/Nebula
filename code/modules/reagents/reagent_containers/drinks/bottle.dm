@@ -215,7 +215,7 @@
 			stop_spin_bottle = FALSE
 
 /obj/item/chems/drinks/bottle/on_picked_up(mob/living/user)
-	animate(src, transform = null, time = 0) //Restore bottle to its original position
+	animate(src, transform = null, time = 0) //Restore bottle to its original position - animate() is needed to interrupt SpinAnimation()
 
 //Keeping this here for now, I'll ask if I should keep it here.
 /obj/item/broken_bottle

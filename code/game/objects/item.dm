@@ -398,7 +398,7 @@
 	RAISE_EVENT(/decl/observ/mob_unequipped, user, src)
 	RAISE_EVENT_REPEAT(/decl/observ/item_unequipped, src, user)
 
-// called just as an item is picked up (loc is not yet changed)
+// called just after an item is picked up, after it has been equipped to the mob.
 /obj/item/proc/on_picked_up(mob/user)
 	return
 
