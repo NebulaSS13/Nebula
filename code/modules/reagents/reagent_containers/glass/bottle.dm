@@ -22,7 +22,7 @@
 	var/lid_color = COLOR_GRAY80
 	var/autolabel = TRUE  		// if set, will add label with the name of the first initial reagent
 
-/obj/item/chems/glass/bottle/pickup(mob/user)
+/obj/item/chems/glass/bottle/on_picked_up(mob/user)
 	..()
 	update_icon()
 

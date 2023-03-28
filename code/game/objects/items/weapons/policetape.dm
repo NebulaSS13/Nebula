@@ -84,7 +84,7 @@ var/global/list/image/hazard_overlays //Cached hazard floor overlays for the bar
 	update_icon()
 	return ..()
 
-/obj/item/stack/tape_roll/barricade_tape/pickup(mob/user)
+/obj/item/stack/tape_roll/barricade_tape/on_picked_up(mob/user)
 	stop_unrolling()
 	update_icon()
 	return ..()

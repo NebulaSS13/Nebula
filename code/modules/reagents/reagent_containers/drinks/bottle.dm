@@ -214,7 +214,7 @@
 			sleep(sleep_not_stacking) //Not stacking
 			stop_spin_bottle = FALSE
 
-/obj/item/chems/drinks/bottle/pickup(mob/living/user)
+/obj/item/chems/drinks/bottle/on_picked_up(mob/living/user)
 	animate(src, transform = null, time = 0) //Restore bottle to its original position
 
 //Keeping this here for now, I'll ask if I should keep it here.

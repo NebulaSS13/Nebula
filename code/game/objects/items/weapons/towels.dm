@@ -56,7 +56,7 @@
 		pixel_y = 0
 		pixel_z = 0
 
-/obj/item/towel/pickup(mob/user)
+/obj/item/towel/on_picked_up(mob/user)
 	..()
 	if(icon != initial(icon))
 		icon = initial(icon)
