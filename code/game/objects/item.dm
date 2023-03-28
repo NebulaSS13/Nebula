@@ -318,7 +318,6 @@
 		return
 
 	var/old_loc = loc
-	on_picked_up(user)
 	if (istype(loc, /obj/item/storage))
 		var/obj/item/storage/S = loc
 		S.remove_from_storage(src)
@@ -337,6 +336,7 @@
 		return // Unequipping changes our state, so must check here.
 
 	if(user.put_in_active_hand(src))
+		on_picked_up(user)
 		if (isturf(old_loc))
 			var/obj/effect/temporary/item_pickup_ghost/ghost = new(old_loc, src)
 			ghost.animate_towards(user)
