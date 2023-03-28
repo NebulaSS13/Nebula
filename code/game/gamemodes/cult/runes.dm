@@ -631,7 +631,7 @@
 		to_chat(user, "<span class='warning'>You need to be wearing your robes to use this rune.</span>")
 		return fizzle(user)
 	var/turf/T = get_turf(src)
-	if(T.is_defiled())
+	if(!T.is_defiled())
 		to_chat(user, "<span class='warning'>This rune needs to be placed on the defiled ground.</span>")
 		return fizzle(user)
 	speak_incantation(user, "N'ath reth sh'yro eth d[pick("'","`")]raggathnor!")

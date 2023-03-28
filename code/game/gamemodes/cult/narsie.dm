@@ -143,7 +143,7 @@ var/global/list/narsie_list = list()
 		// Try to move in it.
 		step(src, movement_dir)
 		var/turf/T = get_turf(loc)
-		if(T && !T.is_open() && !(locate(/obj/effect/narsie_footstep) in T))
+		if(T && !T.is_open() && !(locate(/obj/effect/narsie_footstep) in T)) // Separate to /turf/proc/is_defiled() due to overrides up the turf tree.
 			new /obj/effect/narsie_footstep(T)
 
 	if(prob(25))
