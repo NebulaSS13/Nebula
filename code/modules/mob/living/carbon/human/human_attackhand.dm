@@ -175,7 +175,7 @@
 				H.do_attack_animation(src)
 				return TRUE
 
-	. = ..()
+	return ..()
 
 /mob/living/carbon/human/proc/start_compressions(mob/living/carbon/human/H, starting = FALSE, cpr_mode)
 	if(length(H.get_held_items()))

@@ -594,9 +594,7 @@ var/global/list/supermatter_delam_accent_sounds = list(
 	ui_interact(user)
 
 /obj/machinery/power/supermatter/attack_hand(mob/user)
-	if(Consume(null, user, TRUE))
-		return TRUE
-	return ..()
+	return Consume(null, user, TRUE) || ..()
 
 // This is purely informational UI that may be accessed by AIs or robots
 /obj/machinery/power/supermatter/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1)

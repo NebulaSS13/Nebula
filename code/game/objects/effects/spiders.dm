@@ -14,14 +14,13 @@
 		qdel(src)
 
 /obj/effect/spider/attack_hand(mob/user)
-
+	SHOULD_CALL_PARENT(FALSE)
 	user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
 	user.do_attack_animation(src)
 	if(prob(50))
 		visible_message(SPAN_WARNING("\The [user] tries to squash \the [src], but misses!"))
 		disturbed()
-		return
-
+		return TRUE
 	var/showed_msg = FALSE
 	if(ishuman(user))
 		var/mob/living/carbon/human/H = user
@@ -31,8 +30,8 @@
 			showed_msg = TRUE
 	if(!showed_msg)
 		visible_message(SPAN_DANGER("\The [user] squashes \the [src] flat!"))
-
 	die()
+	return TRUE
 
 /obj/effect/spider/attackby(var/obj/item/W, var/mob/user)
 	user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)

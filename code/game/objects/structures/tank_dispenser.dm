@@ -67,6 +67,8 @@
 		return attack_hand(user)
 
 /obj/structure/tank_rack/attack_hand(mob/user)
+	if(!user.check_dexterity(DEXTERITY_GRIP, TRUE))
+		return ..()
 	var/list/dat = list()
 	var/oxycount = LAZYLEN(oxygen_tanks)
 	dat += "Oxygen tanks: [oxycount] - [oxycount ? "<A href='?src=\ref[src];oxygen=1'>Dispense</A>" : "empty"]<br>"
@@ -75,6 +77,7 @@
 	var/datum/browser/popup = new(user, "window=tank_rack")
 	popup.set_content(jointext(dat, "<br>"))
 	popup.open()
+	return TRUE
 
 /obj/structure/tank_rack/attackby(obj/item/I, mob/user)
 	if(istype(I, /obj/item/tank))

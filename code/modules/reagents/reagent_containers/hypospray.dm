@@ -142,13 +142,13 @@
 	return TRUE
 
 /obj/item/chems/hypospray/vial/attack_hand(mob/user)
-	if(user.is_holding_offhand(src))
-		if(!loaded_vial)
-			to_chat(user, SPAN_NOTICE("There is no vial loaded in the [src]."))
-			return
+	if(!user.is_holding_offhand(src) || !user.check_dexterity(DEXTERITY_GRIP, TRUE))
+		return ..()
+	if(!loaded_vial)
+		to_chat(user, SPAN_NOTICE("There is no vial loaded in \the [src]."))
+	else
 		remove_vial(user)
-		return TRUE
-	return ..()
+	return TRUE
 
 /obj/item/chems/hypospray/vial/attackby(obj/item/W, mob/user)
 	if(istype(W, /obj/item/chems/glass/beaker/vial))

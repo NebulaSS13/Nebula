@@ -18,26 +18,30 @@
 	set_light(5, 0.5, light_color)
 
 /obj/structure/fountain/attack_hand(var/mob/user)
-	if(user.incapacitated())
-		return
-	if(!CanPhysicallyInteract(user))
-		return
+
+	if(user.a_intent == I_HURT)
+		return ..()
+
 	if(used)
 		to_chat(user,  SPAN_WARNING("\The [src] is still and lifeless..."))
-		return
+		return TRUE
 
 	var/mob/living/carbon/human/H = user
-	var/decl/species/species = user.get_species()
-	var/datum/appearance_descriptor/age/age = species && LAZYACCESS(species.appearance_descriptors, "age")
-	if(!ishuman(H) || H.isSynthetic() || !species || !age)
-		to_chat(user, SPAN_WARNING("A feeling of foreboding stills your hand. The fountain is not for your kind."))
+	var/decl/species/my_species = istype(H) && H.get_species()
+	if(!istype(my_species))
+		return ..()
+
+	var/datum/appearance_descriptor/age/age = my_species && LAZYACCESS(my_species.appearance_descriptors, "age")
+	if(H.isSynthetic() || !my_species || !age)
+		to_chat(H, SPAN_WARNING("A feeling of foreboding stills your hand. The fountain is not for your kind."))
 		return
 
 	if(alert("As you reach out to touch the fountain, a feeling of doubt overcomes you. Steel yourself and proceed?",,"Yes", "No") == "Yes")
-		visible_message("\The [user] touches \the [src].")
-		time_dilation(user)
+		visible_message("\The [H] touches \the [src].")
+		time_dilation(H)
 	else
-		visible_message("\The [user] retracts their hand suddenly.")
+		visible_message("\The [H] retracts their hand suddenly.")
+	return TRUE
 
 /obj/structure/fountain/proc/time_dilation(var/mob/living/carbon/human/user)
 
@@ -86,7 +90,7 @@
 	icon_state             = "fountain_g"
 	tool_interaction_flags = TOOL_INTERACTION_DECONSTRUCT
 	w_class                = ITEM_SIZE_STRUCTURE
-	material               = /decl/material/solid/stone/marble 
+	material               = /decl/material/solid/stone/marble
 	used                   = TRUE
 
 /obj/structure/fountain/mundane/Initialize(ml, _mat, _reinf_mat)
@@ -97,9 +101,11 @@
 /obj/structure/fountain/mundane/initialize_reagents(populate = TRUE)
 	create_reagents(500)
 	. = ..()
-	
+
 /obj/structure/fountain/mundane/populate_reagents()
 	reagents.add_reagent(/decl/material/liquid/water, reagents.maximum_volume) //Don't give free water when building one
 
 /obj/structure/fountain/mundane/attack_hand(mob/user)
-	return
+	if(user.a_intent == I_HURT)
+		return ..()
+	return TRUE

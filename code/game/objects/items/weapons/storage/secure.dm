@@ -92,18 +92,17 @@
 	matter = list(/decl/material/solid/plastic = MATTER_AMOUNT_REINFORCEMENT)
 
 /obj/item/storage/secure/briefcase/attack_hand(mob/user as mob)
+	if(!user.check_dexterity(DEXTERITY_GRIP, TRUE))
+		return ..()
 	var/datum/extension/lockable/lock = get_extension(src, /datum/extension/lockable)
 	if (loc == user && lock.locked)
 		to_chat(user, SPAN_WARNING("[src] is locked and cannot be opened!"))
-	else if (loc == user && !lock.locked)
-		src.open(user)
-	else
-		..()
-		for(var/mob/M in range(1))
-			if (M.active_storage == src)
-				src.close(M)
-	src.add_fingerprint(user)
-	return
+		return TRUE
+	if (loc == user && !lock.locked)
+		open(user)
+		add_fingerprint(user)
+		return TRUE
+	return ..()
 
 // -----------------------------
 //        Secure Safe

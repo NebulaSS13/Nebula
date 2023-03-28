@@ -28,12 +28,8 @@
 	. = ..()
 
 /obj/item/modular_computer/pda/wrist/attack_hand(var/mob/user)
-	if(loc == user)
-		if(user.incapacitated() || user.restrained())
-			return
-		var/mob/living/carbon/human/H = user
-		if(istype(H) && src == H.get_equipped_item(slot_wear_id_str))
-			return attack_self(user)
+	if(user.check_dexterity(DEXTERITY_KEYBOARDS, TRUE) && loc == user && !user.restrained() && src == user.get_equipped_item(slot_wear_id_str))
+		return attack_self(user)
 	return ..()
 
 /obj/item/modular_computer/pda/wrist/handle_mouse_drop(atom/over, mob/user)

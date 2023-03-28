@@ -43,10 +43,9 @@
 
 //default attack_hand behaviour
 /obj/item/clothing/accessory/attack_hand(mob/user)
-	var/obj/item/clothing/suit = loc
-	if(istype(suit))
+	if(istype(loc, /obj/item/clothing))
 		return TRUE //we aren't an object on the ground so don't call parent
-	..()
+	return ..()
 
 /obj/item/clothing/accessory/get_pressure_weakness(pressure,zone)
 	if(body_parts_covered & zone)

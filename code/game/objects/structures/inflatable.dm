@@ -106,9 +106,6 @@
 		else if(severity == 2 || (severity == 3 && prob(50)))
 			deflate(TRUE)
 
-/obj/structure/inflatable/attack_hand(mob/user)
-	add_fingerprint(user)
-
 /obj/structure/inflatable/can_repair_with(obj/item/tool)
 	. = istype(tool, /obj/item/stack/tape_roll/duct_tape) && (health < maxhealth)
 
@@ -199,6 +196,8 @@
 			return TryToSwitchState(user)
 
 /obj/structure/inflatable/door/attack_hand(mob/user)
+	if(user.a_intent == I_HURT || !user.check_dexterity(DEXTERITY_SIMPLE_MACHINES, TRUE))
+		return ..()
 	return TryToSwitchState(user)
 
 /obj/structure/inflatable/door/CanPass(atom/movable/mover, turf/target, height=0, air_group=0)

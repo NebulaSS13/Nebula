@@ -46,7 +46,7 @@
 
 /obj/item/auto_cpr/attack_hand(mob/user)
 	skilled_setup = user.skill_check(SKILL_ANATOMY, SKILL_BASIC) && user.skill_check(SKILL_MEDICAL, SKILL_BASIC)
-	..()
+	return ..()
 
 /obj/item/auto_cpr/dropped(mob/user)
 	STOP_PROCESSING(SSobj,src)

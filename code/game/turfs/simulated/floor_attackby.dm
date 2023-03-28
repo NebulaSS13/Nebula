@@ -1,10 +1,11 @@
 /turf/simulated/floor/attack_hand(mob/user)
-	if(ishuman(user))
-		var/mob/living/carbon/human/H = user
-		var/obj/item/hand = GET_EXTERNAL_ORGAN(H, H.get_active_held_item_slot())
-		if(hand && try_graffiti(H, hand))
-			return TRUE
-	. = ..()
+	if(!ishuman(user))
+		return ..()
+	var/mob/living/carbon/human/H = user
+	var/obj/item/hand = GET_EXTERNAL_ORGAN(H, H.get_active_held_item_slot())
+	if(hand && try_graffiti(H, hand))
+		return TRUE
+	return ..()
 
 /turf/simulated/floor/attackby(var/obj/item/C, var/mob/user)
 

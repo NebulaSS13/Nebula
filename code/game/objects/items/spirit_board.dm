@@ -14,11 +14,10 @@
 	to_chat(user, "The planchette is sitting at \"[planchette]\".")
 
 /obj/item/spirit_board/attack_hand(mob/user)
-	if (user.a_intent == I_GRAB)
+	if(user.a_intent == I_GRAB || !user.check_dexterity(DEXTERITY_GRIP, TRUE))
 		return ..()
-	else
-		spirit_board_pick_letter(user)
-
+	spirit_board_pick_letter(user)
+	return TRUE
 
 //ATTACK GHOST IGNORING PARENT RETURN VALUE
 /obj/item/spirit_board/attack_ghost(var/mob/observer/ghost/user)

@@ -28,7 +28,10 @@
 	..()
 
 /obj/structure/bed/chair/wheelchair/attack_hand(mob/user)
+	if(!user.check_dexterity(DEXTERITY_SIMPLE_MACHINES, TRUE))
+		return ..()
 	user_unbuckle_mob(user)
+	return TRUE
 
 /obj/structure/bed/chair/wheelchair/Bump(atom/A)
 	..()
@@ -145,6 +148,6 @@
 
 /obj/item/wheelchair_kit/physically_destroyed(skip_qdel)
 	//Make sure if the kit is destroyed to drop the same stuff as the actual wheelchair
-	var/obj/structure/S = new structure_form_type(get_turf(src)) 
+	var/obj/structure/S = new structure_form_type(get_turf(src))
 	S.physically_destroyed()
 	. = ..()

@@ -29,7 +29,7 @@
 
 	var/datum/computer_file/existing = LAZYACCESS(stored_files, F.filename)
 	if(existing && existing != F)
-		delete_file(F.filename) 
+		delete_file(F.filename)
 
 	LAZYSET(stored_files, F.filename, F)
 	free_blocks = clamp(round(free_blocks - F.block_size), 0, block_capacity)
@@ -111,9 +111,9 @@
 	var/datum/fabricator_recipe/blueprint
 
 /obj/item/disk/design_disk/attack_hand(mob/user)
-	if(user.a_intent == I_HURT && blueprint)
-		blueprint = null
-		SetName(initial(name))
-		to_chat(user, SPAN_DANGER("You flick the erase switch and wipe \the [src]."))
-		return TRUE
-	. = ..()
+	if(user.a_intent != I_HURT || !blueprint || !user.has_dexterity(DEXTERITY_KEYBOARDS))
+		return ..()
+	blueprint = null
+	SetName(initial(name))
+	to_chat(user, SPAN_DANGER("You flick the erase switch and wipe \the [src]."))
+	return TRUE

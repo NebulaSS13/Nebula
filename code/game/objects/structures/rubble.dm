@@ -47,21 +47,24 @@
 		add_overlay("twinkle[rand(1,3)]")
 
 /obj/structure/rubble/attack_hand(mob/user)
+	if(!user.check_dexterity(DEXTERITY_GRIP, TRUE))
+		return ..()
 	if(!is_rummaging)
 		if(!lootleft)
-			to_chat(user, "<span class='warning'>There's nothing left in this one but unusable garbage...</span>")
+			to_chat(user, SPAN_NOTICE("There's nothing left in this one but unusable garbage..."))
 			return
-		visible_message("[user] starts rummaging through \the [src].")
-		is_rummaging = 1
+		visible_message(SPAN_NOTICE("\The [user] starts rummaging through \the [src]."))
+		is_rummaging = TRUE
 		if(do_after(user, 30))
 			var/obj/item/booty = pickweight(loot)
 			booty = new booty(loc)
 			lootleft--
 			update_icon()
-			to_chat(user, "<span class='notice'>You find something and pull it carefully out of \the [src].</span>")
-		is_rummaging = 0
+			to_chat(user, SPAN_NOTICE("You find something and pull it carefully out of \the [src]."))
+		is_rummaging = FALSE
 	else
-		to_chat(user, "<span class='warning'>Someone is already rummaging here!</span>")
+		to_chat(user, SPAN_WARNING("Someone is already rummaging here!"))
+	return TRUE
 
 /obj/structure/rubble/attackby(var/obj/item/I, var/mob/user)
 	if (istype(I, /obj/item/pickaxe))

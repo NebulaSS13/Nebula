@@ -44,9 +44,10 @@
 	. = ..()
 
 /obj/structure/hand_cart/attack_hand(mob/user)
-	if(carrying)
-		unload_item(user)
-	. = ..()
+	if(!carrying || !user.check_dexterity(DEXTERITY_GRIP, TRUE))
+		return ..()
+	unload_item(user)
+	return TRUE
 
 /obj/structure/hand_cart/proc/load_item(var/obj/A, var/user)
 	if(!A.anchored && (A.w_class > min_object_size))

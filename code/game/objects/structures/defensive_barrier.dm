@@ -101,6 +101,9 @@
 
 /obj/structure/defensive_barrier/attack_hand(mob/user)
 
+	if(!user.check_dexterity(DEXTERITY_GRIP, TRUE))
+		return ..()
+
 	var/decl/species/species = user.get_species()
 	if(ishuman(user) && species?.can_shred(user) && user.a_intent == I_HURT)
 		take_damage(20)

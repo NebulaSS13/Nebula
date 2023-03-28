@@ -162,7 +162,7 @@
 	return ..()
 
 /obj/item/weldingtool/attack_hand(mob/user)
-	if (tank && user.is_holding_offhand(src))
+	if (tank && user.is_holding_offhand(src) && user.check_dexterity(DEXTERITY_GRIP, TRUE))
 		return remove_tank(user)
 	return ..()
 

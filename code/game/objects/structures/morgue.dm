@@ -73,12 +73,13 @@
 	update_icon()
 
 /obj/structure/morgue/attack_hand(mob/user)
+	if(!user.check_dexterity(DEXTERITY_SIMPLE_MACHINES, TRUE))
+		return ..()
 	if(open)
 		close()
 	else
 		open()
-
-	return ..()
+	return TRUE
 
 /obj/structure/morgue/attack_robot(mob/user)
 	if(CanPhysicallyInteract(user))
@@ -110,7 +111,7 @@
 
 /obj/structure/morgue_tray/attack_hand(mob/user)
 	if(Adjacent(user))
-		connected_morgue.attack_hand(user)
+		return connected_morgue.attack_hand(user)
 	return ..()
 
 /obj/structure/morgue_tray/attack_robot(mob/user)

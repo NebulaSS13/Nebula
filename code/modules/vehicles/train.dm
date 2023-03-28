@@ -118,17 +118,14 @@
 		return TRUE
 
 /obj/vehicle/train/attack_hand(mob/user)
-	if(user.stat || user.restrained() || !Adjacent(user))
-		return 0
-
+	SHOULD_CALL_PARENT(FALSE)
 	if(user != load && (user in src))
-		user.forceMove(loc)			//for handling players stuck in src
+		user.forceMove(loc)
 	else if(load)
-		unload(user)			//unload if loaded
+		unload(user)
 	else if(!load && !user.buckled)
-		load(user)				//else try climbing on board
-	else
-		return 0
+		load(user)
+	return TRUE
 
 /obj/vehicle/train/verb/unlatch_v()
 	set name = "Unlatch"

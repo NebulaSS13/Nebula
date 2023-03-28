@@ -211,10 +211,6 @@ var/global/list/solars_list = list()
 	var/glass_type
 	var/glass_reinforced
 
-/obj/item/solar_assembly/attack_hand(var/mob/user)
-	if(!anchored && isturf(loc)) // You can't pick it up
-		..()
-
 // Give back the glass type we were supplied with
 /obj/item/solar_assembly/proc/give_glass()
 	if(glass_type)

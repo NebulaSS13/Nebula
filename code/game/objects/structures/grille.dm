@@ -89,12 +89,15 @@
 
 /obj/structure/grille/attack_hand(mob/user)
 
+	if(user.a_intent != I_HURT)
+		return ..()
+
 	user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
 	playsound(loc, 'sound/effects/grillehit.ogg', 80, 1)
 	user.do_attack_animation(src)
 
 	if(shock(user, 70))
-		return
+		return TRUE
 
 	var/damage_dealt = 1
 	var/attack_message = "kicks"
@@ -103,8 +106,8 @@
 		if(H.species.can_shred(H))
 			attack_message = "mangles"
 			damage_dealt = 5
-
 	attack_generic(user,damage_dealt,attack_message)
+	return TRUE
 
 /obj/structure/grille/CanPass(atom/movable/mover, turf/target, height=0, air_group=0)
 	if(air_group || (height==0)) return 1

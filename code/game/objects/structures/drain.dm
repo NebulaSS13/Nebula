@@ -70,10 +70,12 @@
 	var/closed = FALSE
 
 /obj/structure/hygiene/drain/bath/attack_hand(mob/user)
-	. = ..()
-	if(!welded)
-		closed = !closed
-		user.visible_message(SPAN_NOTICE("\The [user] has [closed ? "closed" : "opened"] the drain."))
+	if(!user.check_dexterity(DEXTERITY_SIMPLE_MACHINES, TRUE))
+		return ..()
+	if(welded)
+		return ..()
+	closed = !closed
+	user.visible_message(SPAN_NOTICE("\The [user] has [closed ? "closed" : "opened"] the drain."))
 	update_icon()
 	return TRUE
 

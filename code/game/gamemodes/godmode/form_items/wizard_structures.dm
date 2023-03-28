@@ -9,15 +9,17 @@
 	build_cost = 700
 
 /obj/structure/deity/wizard_recharger/attack_hand(var/mob/hitter)
-	if(!hitter.mind || !hitter.mind.learned_spells || !hitter.mind.learned_spells.len)
-		to_chat(hitter, "<span class='warning'>You don't feel as if this will do anything for you.</span>")
-		return
+	SHOULD_CALL_PARENT(FALSE)
+	if(!length(hitter.mind?.learned_spells))
+		to_chat(hitter, SPAN_WARNING("You don't feel as if this will do anything for you."))
+		return TRUE
 
-	hitter.visible_message("<span class='notice'>\The [hitter] dips their hands into \the [src], a soft glow emanating from them.</span>")
+	hitter.visible_message(SPAN_NOTICE("\The [hitter] dips their hands into \the [src], a soft glow emanating from them."))
 	if(do_after(hitter,300,src,check_holding=0))
 		for(var/s in hitter.mind.learned_spells)
 			var/spell/spell = s
 			spell.charge_counter = spell.charge_max
-		to_chat(hitter, "<span class='notice'>You feel refreshed!</span>")
-		return
-	to_chat(hitter,"<span class='warning'>You need to keep in contact with \the [src]!</span>")
+		to_chat(hitter, SPAN_NOTICE("You feel refreshed!"))
+	else
+		to_chat(hitter, SPAN_WARNING("You need to keep in contact with \the [src]!"))
+	return TRUE

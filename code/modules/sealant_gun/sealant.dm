@@ -32,6 +32,7 @@
 		hardened = TRUE
 
 /obj/item/clothing/sealant/attack_hand(mob/user)
+	SHOULD_CALL_PARENT(FALSE)
 	break_apart(user)
 	return TRUE
 

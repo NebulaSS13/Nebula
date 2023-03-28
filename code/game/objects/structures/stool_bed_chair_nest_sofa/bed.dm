@@ -182,10 +182,10 @@
 	..()
 
 /obj/structure/bed/roller/attack_hand(mob/user)
-	if(beaker && !buckled_mob)
-		remove_beaker(user)
-	else
-		..()
+	if(!beaker || buckled_mob || !user.check_dexterity(DEXTERITY_GRIP, TRUE))
+		return ..()
+	remove_beaker(user)
+	return TRUE
 
 /obj/structure/bed/roller/proc/collapse()
 	visible_message("[usr] collapses [src].")

@@ -82,10 +82,10 @@
 
 /atom/movable/attack_hand(mob/user)
 	// Unbuckle anything buckled to us.
-	if(can_buckle && buckled_mob)
-		user_unbuckle_mob(user)
-		return TRUE
-	return ..()
+	if(!can_buckle || !buckled_mob || !user.check_dexterity(DEXTERITY_SIMPLE_MACHINES, TRUE))
+		return ..()
+	user_unbuckle_mob(user)
+	return TRUE
 
 /atom/movable/hitby(var/atom/movable/AM, var/datum/thrownthing/TT)
 	..()
@@ -321,8 +321,10 @@
 		return master.attackby(I, user)
 
 /atom/movable/overlay/attack_hand(mob/user)
+	SHOULD_CALL_PARENT(FALSE)
 	if (master)
 		return master.attack_hand(user)
+	return FALSE
 
 /atom/movable/proc/touch_map_edge(var/overmap_id)
 	if(!simulated)

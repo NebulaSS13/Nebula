@@ -25,7 +25,9 @@
 	light_color = "#3e0000"
 
 /obj/structure/cult/pylon/attack_hand(mob/M)
+	SHOULD_CALL_PARENT(FALSE)
 	attackpylon(M, 5)
+	return TRUE
 
 /obj/structure/cult/pylon/attack_generic(var/mob/user, var/damage)
 	attackpylon(user, damage)

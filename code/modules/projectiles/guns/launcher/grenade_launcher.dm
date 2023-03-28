@@ -85,10 +85,10 @@
 		..()
 
 /obj/item/gun/launcher/grenade/attack_hand(mob/user)
-	if(user.is_holding_offhand(src))
-		unload(user)
-	else
-		..()
+	if(!user.is_holding_offhand(src) || !user.check_dexterity(DEXTERITY_GRIP, TRUE))
+		return ..()
+	unload(user)
+	return TRUE
 
 /obj/item/gun/launcher/grenade/consume_next_projectile()
 	if(chambered)

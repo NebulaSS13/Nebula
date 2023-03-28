@@ -70,10 +70,10 @@
 
 
 /obj/item/taperecorder/attack_hand(mob/user)
-	if(user.is_holding_offhand(src) && mytape)
+	if(user.is_holding_offhand(src) && mytape && user.check_dexterity(DEXTERITY_SIMPLE_MACHINES))
 		eject()
-		return
-	..()
+		return TRUE
+	return ..()
 
 
 /obj/item/taperecorder/verb/eject()

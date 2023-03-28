@@ -18,7 +18,9 @@
 	return 0
 
 /obj/effect/wingrille_spawn/attack_hand()
+	SHOULD_CALL_PARENT(FALSE)
 	activate()
+	return TRUE
 
 /obj/effect/wingrille_spawn/attack_ghost()
 	activate()

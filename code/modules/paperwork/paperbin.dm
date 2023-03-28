@@ -28,20 +28,13 @@
 	. = ..()
 
 /obj/item/paper_bin/attack_hand(mob/user)
-	if(!Adjacent(user))
-		to_chat(user, SPAN_WARNING("You're too far!"))
-		return
 
-	if(ishuman(user))
-		var/mob/living/carbon/human/H = user
-		var/obj/item/organ/external/temp = GET_EXTERNAL_ORGAN(H, H.get_active_held_item_slot())
-		if(temp && !temp.is_usable())
-			to_chat(user, SPAN_NOTICE("You try to move your [temp.name], but cannot!"))
-			return
+	if(user.a_intent == I_HURT || !user.check_dexterity(DEXTERITY_GRIP, TRUE))
+		return ..()
 
 	if(LAZYLEN(papers) < 1 && amount < 1)
 		to_chat(user, SPAN_WARNING("[src] is empty!"))
-		return
+		return TRUE
 
 	var/obj/item/paper/P
 	if(LAZYLEN(papers) > 0)	//If there's any custom paper on the stack, use that instead of creating a new paper.
@@ -74,7 +67,7 @@
 	amount--
 	update_icon()
 	add_fingerprint(user)
-	return
+	return TRUE
 
 /obj/item/paper_bin/attackby(obj/item/I, mob/user)
 	if(istype(I, /obj/item/paper))

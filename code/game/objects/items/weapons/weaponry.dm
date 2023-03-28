@@ -204,21 +204,20 @@
 		healthcheck()
 
 /obj/effect/energy_net/attack_hand(var/mob/user)
-
-	var/mob/living/carbon/human/H = user
-	if(istype(H))
-		if(H.species.can_shred(H))
+	if(user.a_intent != I_HURT)
+		return ..()
+	var/decl/species/my_species = user.get_species()
+	if(my_species)
+		if(my_species.can_shred(user))
 			playsound(src.loc, 'sound/weapons/slash.ogg', 80, 1)
 			health -= rand(10, 20)
 		else
 			health -= rand(1,3)
 	else
 		health -= rand(5,8)
-
-	to_chat(H,"<span class='danger'>You claw at the energy net.</span>")
-
+	to_chat(user, SPAN_DANGER("You claw at the energy net."))
 	healthcheck()
-	return
+	return TRUE
 
 /obj/effect/energy_net/attackby(obj/item/W, mob/user)
 	health -= W.force

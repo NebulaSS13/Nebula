@@ -79,16 +79,16 @@
 	update_icon()
 
 /obj/structure/crematorium/attack_hand(mob/user)
+	if(!user.check_dexterity(DEXTERITY_GRIP, TRUE))
+		return ..()
 	if(locked)
 		to_chat(usr, SPAN_WARNING("It's currently locked."))
-		return
-
+		return TRUE
 	if(open)
 		close()
 	else
 		open()
-
-	return ..()
+	return TRUE
 
 /obj/structure/crematorium/attack_robot(mob/user)
 	if(CanPhysicallyInteract(user))

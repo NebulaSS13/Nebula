@@ -73,9 +73,9 @@
 	. = ..()
 
 /obj/item/stock_parts/printer/attack_hand(mob/user)
-	if(toner && istype(loc, /obj/machinery))
+	if(toner && istype(loc, /obj/machinery) && user.check_dexterity(DEXTERITY_GRIP, TRUE))
 		return remove_toner(user)
-	. = ..()
+	return ..()
 
 /obj/item/stock_parts/printer/attack_self(mob/user)
 	if(toner)

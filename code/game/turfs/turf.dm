@@ -144,12 +144,11 @@
 		. += weather.get_movement_delay(return_air(), travel_dir)
 
 /turf/attack_hand(mob/user)
+	SHOULD_CALL_PARENT(FALSE)
 	user.setClickCooldown(DEFAULT_QUICK_COOLDOWN)
-
 	if(user.restrained())
-		return 0
-
-	. = handle_hand_interception(user)
+		return FALSE
+	return handle_hand_interception(user)
 
 /turf/proc/handle_hand_interception(var/mob/user)
 	var/datum/extension/turf_hand/THE

@@ -115,13 +115,16 @@ var/global/list/hygiene_props = list()
 	update_icon()
 
 /obj/structure/hygiene/toilet/attack_hand(var/mob/user)
+	if(!user.check_dexterity(DEXTERITY_GRIP, TRUE))
+		return ..()
+
 	if(swirlie)
 		usr.visible_message(
 			SPAN_DANGER("\The [user] slams the toilet seat onto \the [swirlie]'s head!"),
 			SPAN_NOTICE("You slam the toilet seat onto \the [swirlie]'s head!"),
 			"You hear reverberating porcelain.")
 		swirlie.adjustBruteLoss(8)
-		return
+		return TRUE
 
 	if(cistern && !open)
 		if(!contents.len)
@@ -134,10 +137,14 @@ var/global/list/hygiene_props = list()
 				I.dropInto(loc)
 			to_chat(user, SPAN_NOTICE("You find \a [I] in the cistern."))
 			w_items -= I.w_class
-		return
+		return TRUE
 
-	open = !open
-	update_icon()
+	if(user.check_dexterity(DEXTERITY_SIMPLE_MACHINES, TRUE))
+		open = !open
+		update_icon()
+		return TRUE
+
+	return ..()
 
 /obj/structure/hygiene/toilet/on_update_icon()
 	..()
@@ -246,8 +253,11 @@ var/global/list/hygiene_props = list()
 	QDEL_NULL(sound_token)
 	. = ..()
 
-/obj/structure/hygiene/shower/attack_hand(mob/M)
-	switch_state(!on, M)
+/obj/structure/hygiene/shower/attack_hand(mob/user)
+	if(!user.check_dexterity(DEXTERITY_SIMPLE_MACHINES, TRUE))
+		return ..()
+	switch_state(!on, user)
+	return TRUE
 
 /obj/structure/hygiene/shower/proc/switch_state(new_state, mob/user)
 	if(new_state == on)
@@ -360,26 +370,26 @@ var/global/list/hygiene_props = list()
 /obj/structure/hygiene/sink/attack_hand(var/mob/user)
 
 	if(isrobot(user) || isAI(user) || !Adjacent(user))
-		return
+		return ..()
 
 	if(busy)
 		to_chat(user, SPAN_WARNING("Someone's already washing here."))
-		return
+		return TRUE
 
 	to_chat(usr, SPAN_NOTICE("You start washing your hands."))
 	playsound(loc, 'sound/effects/sink_long.ogg', 75, 1)
 
-	busy = 1
+	busy = TRUE
 	if(!do_after(user, 40, src))
-		busy = 0
+		busy = FALSE
 		return TRUE
-	busy = 0
+	busy = FALSE
 
 	user.clean_blood()
-	user.visible_message( \
-		SPAN_NOTICE("\The [user] washes their hands using \the [src]."), \
+	user.visible_message(
+		SPAN_NOTICE("\The [user] washes their hands using \the [src]."),
 		SPAN_NOTICE("You wash your hands using \the [src]."))
-
+	return TRUE
 
 /obj/structure/hygiene/sink/attackby(obj/item/O, var/mob/user)
 	if(isplunger(O) && clogged > 0)
@@ -458,9 +468,8 @@ var/global/list/hygiene_props = list()
 	clogged = -1 // how do you clog a puddle
 
 /obj/structure/hygiene/sink/puddle/attack_hand(var/mob/M)
-	icon_state = "puddle-splash"
-	..()
-	icon_state = "puddle"
+	flick("puddle-splash", src)
+	return ..()
 
 /obj/structure/hygiene/sink/puddle/attackby(obj/item/O, var/mob/user)
 	icon_state = "puddle-splash"
@@ -543,15 +552,16 @@ var/global/list/hygiene_props = list()
 	var/open = FALSE
 
 /obj/structure/hygiene/faucet/attack_hand(mob/user)
-	. = ..()
+	if(!user.check_dexterity(DEXTERITY_SIMPLE_MACHINES))
+		return ..()
 	open = !open
 	if(open)
 		playsound(src.loc, 'sound/effects/closet_open.ogg', 20, 1)
 	else
 		playsound(src.loc, 'sound/effects/closet_close.ogg', 20, 1)
-
 	user.visible_message(SPAN_NOTICE("\The [user] has [open ? "opened" : "closed"] the faucet."))
 	update_icon()
+	return TRUE
 
 /obj/structure/hygiene/faucet/on_update_icon()
 	..()

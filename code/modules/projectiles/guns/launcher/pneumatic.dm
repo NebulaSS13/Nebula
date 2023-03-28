@@ -60,10 +60,10 @@
 		to_chat(user, "There is nothing to remove in \the [src].")
 
 /obj/item/gun/launcher/pneumatic/attack_hand(mob/user)
-	if(user.is_holding_offhand(src))
-		unload_hopper(user)
-	else
+	if(!user.is_holding_offhand(src) || !user.check_dexterity(DEXTERITY_GRIP, TRUE))
 		return ..()
+	unload_hopper(user)
+	return TRUE
 
 /obj/item/gun/launcher/pneumatic/attackby(obj/item/W, mob/user)
 	if(!tank && istype(W,/obj/item/tank) && user.try_unequip(W, src))

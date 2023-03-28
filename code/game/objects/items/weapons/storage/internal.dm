@@ -20,7 +20,8 @@
 	. = ..()
 
 /obj/item/storage/internal/attack_hand()
-	return		//make sure this is never picked up
+	SHOULD_CALL_PARENT(FALSE)
+	return TRUE //make sure this is never picked up
 
 /obj/item/storage/internal/mob_can_equip()
 	return FALSE //make sure this is never picked up

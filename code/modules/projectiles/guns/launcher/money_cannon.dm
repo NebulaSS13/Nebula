@@ -106,10 +106,10 @@
 	to_chat(user, "<span class='notice'>You set [src] to dispense [dispensing] [cur.name_singular] at a time.</span>")
 
 /obj/item/gun/launcher/money/attack_hand(mob/user)
-	if(user.is_holding_offhand(src))
-		unload_receptacle(user)
-	else
+	if(!user.is_holding_offhand(src) || !user.check_dexterity(DEXTERITY_GRIP, TRUE))
 		return ..()
+	unload_receptacle(user)
+	return TRUE
 
 /obj/item/gun/launcher/money/attackby(obj/item/W, mob/user)
 	if(istype(W, /obj/item/cash/))

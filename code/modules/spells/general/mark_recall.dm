@@ -70,10 +70,11 @@
 	..()
 
 /obj/effect/cleanable/wizard_mark/attack_hand(var/mob/user)
-	if(user == spell.holder)
-		user.visible_message("\The [user] mutters an incantation and \the [src] disappears!")
-		qdel(src)
-	..()
+	if(user != spell.holder)
+		return ..()
+	user.visible_message("\The [user] mutters an incantation and \the [src] disappears!")
+	qdel(src)
+	return TRUE
 
 /obj/effect/cleanable/wizard_mark/attackby(var/obj/item/I, var/mob/user)
 	if(istype(I, /obj/item/nullrod) || istype(I, /obj/item/spellbook))

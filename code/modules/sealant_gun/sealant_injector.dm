@@ -79,14 +79,14 @@
 		playsound(loc, 'sound/effects/refill.ogg', 50, 1)
 
 /obj/structure/sealant_injector/attack_hand(mob/user)
-
+	if(!user.check_dexterity(DEXTERITY_GRIP, TRUE))
+		return ..()
 	if(loaded_tank)
 		loaded_tank.dropInto(get_turf(src))
 		user.put_in_hands(loaded_tank)
 		loaded_tank = null
 		update_icon()
 		return TRUE
-
 	if(length(cartridges))
 		var/obj/cartridge = pick(cartridges)
 		cartridges -= cartridge
@@ -94,8 +94,7 @@
 		user.put_in_hands(cartridge)
 		update_icon()
 		return TRUE
-
-	. = ..()
+	return ..()
 
 /obj/structure/sealant_injector/get_alt_interactions(var/mob/user)
 	. = ..()

@@ -19,12 +19,14 @@
 	return ..()
 
 /obj/structure/deity/pylon/attack_hand(var/mob/L)
+	SHOULD_CALL_PARENT(FALSE)
 	if(!linked_god)
-		return
+		return FALSE
 	if(L in intuned)
 		remove_intuned(L)
 	else
 		add_intuned(L)
+	return TRUE
 
 /obj/structure/deity/pylon/proc/add_intuned(var/mob/living/L)
 	if(L in intuned)

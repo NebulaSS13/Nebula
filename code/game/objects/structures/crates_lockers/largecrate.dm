@@ -15,7 +15,10 @@
 		I.forceMove(src)
 
 /obj/structure/largecrate/attack_hand(mob/user)
+	if(user.a_intent == I_HURT)
+		return ..()
 	to_chat(user, SPAN_WARNING("You need a crowbar to pry this open!"))
+	return TRUE
 
 /obj/structure/largecrate/attackby(obj/item/W, mob/user)
 	if(IS_CROWBAR(W))

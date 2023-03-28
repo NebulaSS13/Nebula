@@ -162,10 +162,12 @@ LINEN BINS
 
 /obj/structure/bedsheetbin/attack_hand(var/mob/user)
 	var/obj/item/bedsheet/B = remove_sheet()
-	if(B)
-		user.put_in_hands(B)
-		to_chat(user, SPAN_NOTICE("You take \a [B] out of \the [src]."))
-		add_fingerprint(user)
+	if(!B)
+		return ..()
+	user.put_in_hands(B)
+	to_chat(user, SPAN_NOTICE("You take \a [B] out of \the [src]."))
+	add_fingerprint(user)
+	return TRUE
 
 /obj/structure/bedsheetbin/do_simple_ranged_interaction(var/mob/user)
 	remove_sheet()

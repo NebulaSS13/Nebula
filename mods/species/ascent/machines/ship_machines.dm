@@ -160,20 +160,20 @@ MANTIDIFY(/obj/item/chems/chem_disp_cartridge, "canister", "chemical storage")
 	var/image/field_image
 
 /obj/machinery/power/ascent_reactor/attack_hand(mob/user)
-	. = ..()
-
+	if(!user.check_dexterity(DEXTERITY_COMPLEX_TOOLS, TRUE))
+		return ..()
 	if(ishuman(user))
 		var/mob/living/carbon/human/H = user
 		if(!(H.species.name in ALL_ASCENT_SPECIES))
 			to_chat(H, SPAN_WARNING("You have no idea how to use \the [src]."))
-			return
+			return TRUE
 	else if(!istype(user, /mob/living/silicon/robot/flying/ascent))
 		to_chat(user, SPAN_WARNING("You have no idea how to interface with \the [src]."))
-		return
-
+		return TRUE
 	user.visible_message(SPAN_NOTICE("\The [user] switches \the [src] [on ? "off" : "on"]."))
 	on = !on
 	update_icon()
+	return TRUE
 
 /obj/machinery/power/ascent_reactor/on_update_icon()
 	. = ..()

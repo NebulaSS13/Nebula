@@ -154,7 +154,9 @@
 	to_chat(user, SPAN_NOTICE("\The [src] is too far away."))
 
 /atom/movable/openspace/mimic/attack_hand(mob/user)
+	SHOULD_CALL_PARENT(FALSE)
 	to_chat(user, SPAN_NOTICE("You cannot reach \the [src] from here."))
+	return TRUE
 
 /atom/movable/openspace/mimic/examine(...)
 	SHOULD_CALL_PARENT(FALSE)
@@ -186,7 +188,8 @@
 	loc.attackby(W, user)
 
 /atom/movable/openspace/turf_proxy/attack_hand(mob/user as mob)
-	loc.attack_hand(user)
+	SHOULD_CALL_PARENT(FALSE)
+	return loc.attack_hand(user)
 
 /atom/movable/openspace/turf_proxy/attack_generic(mob/user as mob)
 	loc.attack_generic(user)
@@ -213,7 +216,9 @@
 	loc.attackby(W, user)
 
 /atom/movable/openspace/turf_mimic/attack_hand(mob/user as mob)
+	SHOULD_CALL_PARENT(FALSE)
 	to_chat(user, SPAN_NOTICE("You cannot reach \the [src] from here."))
+	return TRUE
 
 /atom/movable/openspace/turf_mimic/attack_generic(mob/user as mob)
 	to_chat(user, SPAN_NOTICE("You cannot reach \the [src] from here."))

@@ -190,23 +190,21 @@
 	. = ..()
 
 /obj/item/gun/magnetic/attack_hand(var/mob/user)
-	if(user.is_holding_offhand(src))
-		var/obj/item/removing
-
-		if(loaded)
-			removing = loaded
-			loaded = null
-		else if(cell && removable_components)
-			removing = cell
-			cell = null
-
-		if(removing)
-			user.put_in_hands(removing)
-			user.visible_message("<span class='notice'>\The [user] removes \the [removing] from \the [src].</span>")
-			playsound(loc, 'sound/machines/click.ogg', 10, 1)
-			update_icon()
-			return
-	. = ..()
+	if(!user.is_holding_offhand(src) || !user.check_dexterity(DEXTERITY_GRIP, TRUE))
+		return ..()
+	var/obj/item/removing
+	if(loaded)
+		removing = loaded
+		loaded = null
+	else if(cell && removable_components)
+		removing = cell
+		cell = null
+	if(removing)
+		user.put_in_hands(removing)
+		user.visible_message(SPAN_NOTICE("\The [user] removes \the [removing] from \the [src]."))
+		playsound(loc, 'sound/machines/click.ogg', 10, 1)
+		update_icon()
+	return TRUE
 
 /obj/item/gun/magnetic/proc/check_ammo()
 	return loaded

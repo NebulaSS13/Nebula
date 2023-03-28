@@ -83,13 +83,6 @@
 		to_chat(usr, SPAN_NOTICE("You roll [rolled_sleeves ? "up" : "down"] the sleeves of \the [src]."))
 		update_clothing_icon()
 
-/obj/item/clothing/under/attack_hand(var/mob/user)
-	if(accessories && accessories.len)
-		..()
-	if ((ishuman(usr) || issmall(usr)) && src.loc == user)
-		return
-	..()
-
 /obj/item/clothing/under/update_clothing_icon()
 	if(ismob(src.loc))
 		var/mob/M = src.loc

@@ -141,14 +141,15 @@
 			queue_icon_update()
 
 /obj/structure/iv_drip/attack_hand(mob/user)
+	if(!user.check_dexterity(DEXTERITY_COMPLEX_TOOLS))
+		return ..()
 	if(attached)
 		drip_detach()
 	else if(beaker)
 		beaker.dropInto(loc)
 		beaker = null
 		queue_icon_update()
-	else
-		return ..()
+	return TRUE
 
 /obj/structure/iv_drip/attack_robot(var/mob/user)
 	if(CanPhysicallyInteract(user))

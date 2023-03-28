@@ -58,19 +58,19 @@
 /obj/item/sticky_pad/attack_hand(var/mob/user)
 	if(user.a_intent == I_GRAB)
 		return ..()
-	else if(top)
-		user.put_in_active_hand(top)
-		top = null
-		papers--
-		update_top_paper()
-		to_chat(user, SPAN_NOTICE("You pull \the [top] off \the [src]."))
-
-		if(papers <= 0)
-			qdel(src)
-		else
-			update_top_paper()
-			update_icon()
+	if(!top)
 		return TRUE
+	user.put_in_active_hand(top)
+	top = null
+	papers--
+	update_top_paper()
+	to_chat(user, SPAN_NOTICE("You pull \the [top] off \the [src]."))
+	if(papers <= 0)
+		qdel(src)
+	else
+		update_top_paper()
+		update_icon()
+	return TRUE
 
 /**Creates the paper the user can write on, if there's any paper left. */
 /obj/item/sticky_pad/proc/update_top_paper()

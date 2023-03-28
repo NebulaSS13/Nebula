@@ -152,20 +152,21 @@
 	anchored = 1
 
 /obj/structure/aliumizer/attack_hand(mob/user)
+	SHOULD_CALL_PARENT(FALSE)
 	if(!ishuman(user))
 		to_chat(user, SPAN_WARNING("You've got no business touching this."))
-		return
+		return TRUE
 	var/decl/species/species = user.get_species()
 	if(!species)
-		return
+		return TRUE
 	if(species.name == SPECIES_ALIEN)
 		to_chat(user, SPAN_WARNING("You're already a [SPECIES_ALIEN]."))
-		return
+		return TRUE
 	if(alert("Are you sure you want to be an alien?", "Mom Look I'm An Alien!", "Yes", "No") == "No")
 		to_chat(user, SPAN_NOTICE("<b>You are now a [SPECIES_ALIEN]!</b>"))
-		return
+		return TRUE
 	if(species.name == SPECIES_ALIEN) //no spamming it to get free implants
-		return
+		return TRUE
 	to_chat(user, "You're now an alien humanoid of some undiscovered species. Make up what lore you want, no one knows a thing about your species! You can check info about your traits with Check Species Info verb in IC tab.")
 	to_chat(user, "You can't speak any other languages by default. You can use translator implant that spawns on top of this monolith - it will give you knowledge of any language if you hear it enough times.")
 	var/mob/living/carbon/human/H = user
@@ -174,3 +175,4 @@
 	var/decl/cultural_info/culture = H.get_cultural_value(TAG_CULTURE)
 	H.fully_replace_character_name(culture.get_random_name(H, H.gender))
 	H.rename_self("Humanoid Alien", 1)
+	return TRUE
