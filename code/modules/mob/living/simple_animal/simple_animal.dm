@@ -47,8 +47,6 @@
 	var/cold_damage_per_tick = 2	//same as heat_damage_per_tick, only if the bodytemperature it's lower than minbodytemp
 	var/fire_alert = 0
 
-	var/list/hat_offsets
-
 	//Atmos effect - Yes, you can make creatures that require arbitrary gasses to survive. N2O is a trace gas and handled separately, hence why it isn't here. It'd be hard to add it. Hard and me don't mix (Yes, yes make all the dick jokes you want with that.) - Errorage
 	var/list/min_gas = list(/decl/material/gas/oxygen = 5)
 	var/list/max_gas = list(
@@ -108,8 +106,6 @@
 		base_animal_type = type
 	if(LAZYLEN(natural_armor))
 		set_extension(src, armor_type, natural_armor)
-	if(islist(hat_offsets))
-		set_extension(src, /datum/extension/hattable/directional, hat_offsets)
 	if(scannable_result)
 		set_extension(src, /datum/extension/scannable, scannable_result)
 	setup_languages()
@@ -161,10 +157,20 @@ var/global/list/simplemob_icon_bitflag_cache = list()
 				z_flags |= ZMM_MANGLE_PLANES
 			add_overlay(I)
 
-	var/datum/extension/hattable/hattable = get_extension(src, /datum/extension/hattable)
-	var/image/I = hattable?.get_hat_overlay(src)
-	if(I)
+	var/obj/item/head = get_equipped_item(slot_head_str)
+	if(head)
+		var/image/I = head.get_mob_overlay(src, slot_head_str)
+		var/list/hat_offsets = get_hat_overlay_offsets()
+		if(islist(hat_offsets))
+			if(length(hat_offsets) >= 4) // Probably directional
+				offset_image(src, I, hat_offsets)
+			else if(length(hat_offsets) >= 2) // Probably not directional
+				I.pixel_x += hat_offsets[1]
+				I.pixel_y += hat_offsets[2]
 		add_overlay(I)
+
+/mob/living/simple_animal/proc/get_hat_overlay_offsets()
+	return
 
 /mob/living/simple_animal/get_eye_overlay()
 	var/eye_icon_state = "[icon_state]-eyes"
@@ -514,10 +520,6 @@ var/global/list/simplemob_icon_bitflag_cache = list()
 /mob/living/simple_animal/get_speech_ending(verb, var/ending)
 	return verb
 
-/mob/living/simple_animal/put_in_hands(var/obj/item/W) // No hands.
-	W.forceMove(get_turf(src))
-	return 1
-
 // Harvest an animal's delicious byproducts
 /mob/living/simple_animal/proc/harvest(var/mob/user, var/skill_level)
 	var/actual_meat_amount = round(max(1,(meat_amount / 2) + skill_level / 2))
@@ -595,6 +597,10 @@ var/global/list/simplemob_icon_bitflag_cache = list()
 			return FLASH_PROTECTION_MAJOR
 		else
 			return FLASH_PROTECTION_MAJOR
+
+/mob/living/simple_animal/get_all_valid_equipment_slots()
+	if(!isnull(get_hat_overlay_offsets()))
+		return list(slot_head_str)
 
 /mob/living/simple_animal/proc/reflect_unarmed_damage(var/mob/living/carbon/human/attacker, var/damage_type, var/description)
 	if(attacker.a_intent == I_HURT)

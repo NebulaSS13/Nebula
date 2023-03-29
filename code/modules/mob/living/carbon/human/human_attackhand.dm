@@ -70,12 +70,12 @@
 	if(!attack)
 		return TRUE
 
-	if(world.time < H.last_attack + attack.delay)
-		to_chat(H, SPAN_NOTICE("You can't attack again so soon."))
+	if(world.time < H.last_unarmed_attack + attack.delay)
+		to_chat(H, SPAN_WARNING("You can't attack again so soon."))
 		return TRUE
 
 	last_handled_by_mob = weakref(H)
-	H.last_attack = world.time
+	H.last_unarmed_attack = world.time
 
 
 	if(!affecting)
@@ -277,15 +277,6 @@
 
 /mob/living/carbon/human/proc/afterattack(atom/target, mob/living/user, inrange, params)
 	return
-
-//Breaks all grips and pulls that the mob currently has.
-/mob/living/carbon/human/proc/break_all_grabs(mob/living/carbon/user)
-	. = FALSE
-	for(var/obj/item/grab/grab in get_active_grabs())
-		if(grab.affecting)
-			visible_message(SPAN_DANGER("\The [user] has broken \the [src]'s grip on [grab.affecting]!"))
-			. = TRUE
-		drop_from_inventory(grab)
 
 /*
 	We want to ensure that a mob may only apply pressure to one organ of one mob at any given time. Currently this is done mostly implicitly through

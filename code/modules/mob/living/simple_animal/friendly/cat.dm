@@ -23,15 +23,14 @@
 	var/mob/living/simple_animal/mouse/movement_target
 	var/mob/flee_target
 
-/mob/living/simple_animal/cat/Initialize()
-	if(isnull(hat_offsets))
-		hat_offsets = list(
-			"[NORTH]" = list( 1,  -9),
-			"[SOUTH]" = list( 1, -12),
-			"[EAST]" =  list( 7, -10),
-			"[WEST]" =  list(-7, -10)
-		)
-	. = ..()
+/mob/living/simple_animal/cat/get_hat_overlay_offsets()
+	var/static/list/hat_overlay_offsets = list(
+		"[NORTH]" = list( 1,  -9),
+		"[SOUTH]" = list( 1, -12),
+		"[EAST]" =  list( 7, -10),
+		"[WEST]" =  list(-7, -10)
+	)
+	return hat_overlay_offsets
 
 /mob/living/simple_animal/cat/do_delayed_life_action()
 	..()
@@ -242,15 +241,17 @@
 	skin_amount = 3
 
 /mob/living/simple_animal/cat/kitten/Initialize()
-	if(isnull(hat_offsets))
-		hat_offsets = list(
-			"[NORTH]" = list( 1, -14),
-			"[SOUTH]" = list( 1, -14),
-			"[EAST]" =  list( 5, -14),
-			"[WEST]" =  list(-5, -14)
-		)
 	. = ..()
 	gender = pick(MALE, FEMALE)
+
+/mob/living/simple_animal/cat/kitten/get_hat_overlay_offsets()
+	var/static/list/hat_overlay_offsets = list(
+		"[NORTH]" = list( 1, -14),
+		"[SOUTH]" = list( 1, -14),
+		"[EAST]" =  list( 5, -14),
+		"[WEST]" =  list(-5, -14)
+	)
+	return hat_overlay_offsets
 
 /mob/living/simple_animal/cat/fluff/ran
 	name = "Runtime"

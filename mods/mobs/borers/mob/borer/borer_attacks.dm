@@ -1,7 +1,7 @@
 /mob/living/simple_animal/borer/UnarmedAttack(atom/A, proximity)
 
-	if(!isliving(A) || a_intent != I_GRAB)
-		return ..()
+	if(!..() || !isliving(A) || a_intent != I_GRAB)
+		return
 
 	if(host || !can_use_borer_ability(requires_host_value = FALSE, check_last_special = FALSE))
 		return

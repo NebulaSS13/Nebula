@@ -49,7 +49,7 @@
 			mob.hotkey_drop()
 
 /mob/proc/hotkey_drop()
-	. = has_extension(src, /datum/extension/hattable)
+	. = length(get_all_valid_equipment_slots())
 
 /mob/living/hotkey_drop()
 	if(length(get_active_grabs()) || ..())

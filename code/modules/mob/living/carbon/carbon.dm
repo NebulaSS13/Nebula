@@ -192,6 +192,9 @@
 /mob/proc/throw_item(atom/target)
 	return
 
+/mob/proc/get_throw_verb()
+	return "throws"
+
 /mob/living/carbon/throw_item(atom/target, obj/item/item)
 	src.throw_mode_off()
 	if(src.stat || !target)
@@ -232,7 +235,7 @@
 	if(!item || !isturf(item.loc))
 		return
 
-	var/message = "\The [src] has thrown \the [item]!"
+	var/message = "\The [src] [get_throw_verb()] \the [item]!"
 	var/skill_mod = 0.2
 	if(!skill_check(SKILL_HAULING, min(round(itemsize - ITEM_SIZE_HUGE) + 2, SKILL_MAX)))
 		if(prob(30))
@@ -304,11 +307,6 @@
 	// carbon mobs have mouths by default
 	// behavior of this proc for humans is overridden in human.dm
 	return 1
-
-/mob/living/carbon/proc/check_mouth_coverage()
-	// carbon mobs do not have blocked mouths by default
-	// overridden in human_defense.dm
-	return null
 
 /mob/living/carbon/get_max_nutrition()
 	return 400

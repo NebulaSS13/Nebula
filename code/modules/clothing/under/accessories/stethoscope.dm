@@ -4,7 +4,7 @@
 	icon = 'icons/clothing/accessories/stethoscope.dmi'
 	high_visibility = 1
 
-/obj/item/clothing/accessory/stethoscope/attack(mob/living/carbon/human/M, mob/living/user)
+/obj/item/clothing/accessory/stethoscope/attack(mob/living/M, mob/living/user)
 	if(ishuman(M) && isliving(user) && user.a_intent == I_HELP)
 		var/obj/item/organ/organ = GET_EXTERNAL_ORGAN(M, user.get_target_zone())
 		if(organ)

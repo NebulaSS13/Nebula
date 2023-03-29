@@ -16,21 +16,12 @@
 	icon_state = "hat"
 
 /obj/screen/diona_hat/Click()
-	var/datum/extension/hattable/hattable = get_extension(usr, /datum/extension/hattable)
-	hattable?.drop_hat(usr)
-
-/obj/screen/diona_held
-	name = "held item"
-	screen_loc =  DIONA_SCREEN_LOC_HELD
-	icon_state = "held"
-
-/obj/screen/diona_held/Click()
-	var/mob/living/carbon/alien/diona/chirp = usr
-	if(istype(chirp) && chirp.holding_item) chirp.try_unequip(chirp.holding_item)
+	var/hat = usr.get_equipped_item(slot_head_str)
+	if(hat)
+		usr.drop_from_inventory(hat)
 
 /datum/hud/diona_nymph
 	var/obj/screen/diona_hat/hat
-	var/obj/screen/diona_held/held
 
 /datum/hud/diona_nymph/get_ui_style()
 	return 'mods/mobs/dionaea/icons/ui.dmi'
@@ -55,12 +46,6 @@
 	hat.color = ui_color
 	hat.alpha = ui_alpha
 	adding += hat
-
-	held = new
-	held.icon =  ui_style
-	held.color = ui_color
-	held.alpha = ui_alpha
-	adding += held
 
 	action_intent = new /obj/screen/intent/diona_nymph()
 	action_intent.icon =  ui_style

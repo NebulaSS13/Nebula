@@ -296,7 +296,7 @@ var/global/list/_wood_materials = list(
 		return
 
 /obj/item/chems/food/grown/on_picked_up(mob/user)
-	..()
+	. = ..()
 	if(!seed)
 		return
 	if(seed.get_trait(TRAIT_STINGS))

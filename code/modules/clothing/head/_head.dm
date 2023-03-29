@@ -45,25 +45,6 @@
 	update_icon(user)
 	user.update_action_buttons()
 
-/obj/item/clothing/head/attack_ai(var/mob/user)
-	if(!mob_wear_hat(user))
-		return ..()
-
-/obj/item/clothing/head/attack_animal(var/mob/user)
-	if(!mob_wear_hat(user))
-		return ..()
-
-/obj/item/clothing/head/proc/mob_wear_hat(var/mob/user)
-	var/datum/extension/hattable/hattable = get_extension(user, /datum/extension/hattable)
-	if(Adjacent(user) && hattable)
-		if(hattable.hat)
-			to_chat(user, SPAN_WARNING("You are already wearing a hat."))
-			return TRUE
-		if(hattable.wear_hat(user, src))
-			to_chat(user, SPAN_NOTICE("You are now wearing \the [src]."))
-			return TRUE
-	return FALSE
-
 /obj/item/clothing/head/on_update_icon(var/mob/user)
 	. = ..()
 	if(on)

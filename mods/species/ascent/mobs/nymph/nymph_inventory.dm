@@ -1,72 +1,36 @@
-/mob/living/carbon/alien/ascent_nymph/drop_from_inventory(var/obj/item/dropping_item)
+/decl/material
+	var/crystalline_matter = 0
+/decl/material/solid/sand
+	crystalline_matter = 0.5
+/decl/material/solid/quartz
+	crystalline_matter = 1
+/decl/material/solid/glass
+	crystalline_matter = 0.75
+/decl/material/solid/gemstone
+	crystalline_matter = 1
+/decl/material/solid/gemstone/crystal
+	crystalline_matter = 1.25
+
+/datum/inventory_slot/gripper/mouth/ascent_nymph
+	slot_name = "Mouth"
+	ui_loc = "CENTER-1:16,BOTTOM:5"
+	ui_label = null
+
+/datum/inventory_slot/gripper/mouth/ascent_nymph/equipped(mob/living/user, obj/item/prop, var/silent = FALSE)
+	var/mob/living/carbon/alien/ascent_nymph/baby = user
+	if(!istype(baby))
+		return FALSE
+	var/crystals = 0
+	for(var/mat in prop?.matter)
+		var/decl/material/M = GET_DECL(mat)
+		crystals += M.crystalline_matter * prop.matter[mat]
+	crystals = round(crystals)
 	. = ..()
-	if(dropping_item == holding_item)
-		holding_item = null
-
-/mob/living/carbon/alien/ascent_nymph/put_in_hands(var/obj/item/W) // No hands. Use mouth.
-	if(can_collect(W))
-		collect(W)
-	else
-		W.forceMove(get_turf(src))
-	return 1
-
-
-/mob/living/carbon/alien/ascent_nymph/hotkey_drop()
-	if(holding_item)
-		drop_item()
-	else
-		to_chat(usr, SPAN_WARNING("You have nothing to drop."))
-
-/mob/living/carbon/alien/ascent_nymph/proc/can_collect(var/obj/item/collecting)
-	return (!holding_item && \
-		istype(collecting) && \
-		collecting.loc != src && \
-		!collecting.anchored && \
-		collecting.simulated && \
-		collecting.w_class <= can_pull_size \
-	)
-
-/mob/living/carbon/alien/ascent_nymph/proc/contains_crystals(var/obj/item/W)
-	for(var/mat in W.matter)
-		if(mat == /decl/material/solid/sand)
-			. += W.matter[mat]
-		else if(mat == /decl/material/solid/gemstone/crystal)
-			. += W.matter[mat]
-		else if(mat == /decl/material/solid/quartz)
-			. += W.matter[mat]
-		else if(mat == /decl/material/solid/glass)
-			. += W.matter[mat]
-
-/mob/living/carbon/alien/ascent_nymph/proc/collect(var/obj/item/collecting)
-	collecting.forceMove(src)
-	holding_item = collecting
-	visible_message(SPAN_NOTICE("\The [src] engulfs \the [holding_item]."))
-
-	// This means nymph can hoover up beakers as a kind of impromptu chem disposal
-	// technique, so long as they're okay with the reagents reacting inside them.
-	if(holding_item.reagents && holding_item.reagents.total_volume)
-		holding_item.reagents.trans_to_mob(src, holding_item.reagents.total_volume, CHEM_INGEST)
-
-	// It also means they can do the old school cartoon schtick of eating an entire sandwich
-	// and spitting up an empty plate. Ptooie.
-	if(istype(holding_item, /obj/item/chems/food))
-		var/obj/item/chems/food/food = holding_item
-		holding_item = null
-		if(food.trash) holding_item = new food.trash(src)
-		qdel(food)
-
-	var/crystals = contains_crystals(collecting)
-	if(crystals)
-		if(crystal_reserve < ANYMPH_MAX_CRYSTALS)
-			crystal_reserve = min(ANYMPH_MAX_CRYSTALS, crystal_reserve + crystals)
-			qdel(collecting)
-		else
-			to_chat(src, SPAN_WARNING("You've already filled yourself with as much crystalline matter as you can!"))
-			return
-
-	if(!QDELETED(holding_item))
-		holding_item.equipped(src)
-		holding_item.screen_loc = ANYMPH_SCREEN_LOC_HELD
+	if(. && !QDELETED(baby) && crystals > 0)
+		if(baby.crystal_reserve < ANYMPH_MAX_CRYSTALS)
+			baby.crystal_reserve = min(ANYMPH_MAX_CRYSTALS, baby.crystal_reserve + crystals)
+			if(!QDELETED(prop))
+				qdel(prop)
 
 /mob/living/carbon/alien/ascent_nymph/verb/drop_item_verb()
 	set name = "Drop Held Item"
@@ -74,14 +38,3 @@
 	set category = "IC"
 	set src = usr
 	drop_item()
-
-/mob/living/carbon/alien/ascent_nymph/drop_item()
-	var/item = holding_item
-	if(item && try_unequip(item))
-		visible_message(SPAN_NOTICE("\The [src] regurgitates \the [item]."))
-		return TRUE
-	. = ..()
-
-// Makes it so that the held item's screen_loc isn't unset.
-/mob/living/carbon/alien/ascent_nymph/item_should_have_screen_presence(obj/item/item, slot)
-	return (item == holding_item) || ..()

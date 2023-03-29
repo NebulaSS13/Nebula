@@ -174,7 +174,7 @@
 		. = equip_to_storage_or_drop(W)
 
 // Removes an item from inventory and places it in the target atom.
-// If canremove or other conditions need to be checked then use unEquip instead.
+// If canremove or other conditions need to be checked then use try_unequip instead.
 /mob/proc/drop_from_inventory(var/obj/item/dropping_item, var/atom/target = null, var/play_dropsound = TRUE)
 	if(dropping_item)
 		remove_from_mob(dropping_item, target, play_dropsound)
@@ -193,9 +193,6 @@
 				qdel(grab)
 				. = TRUE
 			return
-		var/datum/extension/hattable/hattable = get_extension(src, /datum/extension/hattable)
-		if(hattable?.drop_hat(src))
-			return TRUE
 	. = drop_from_inventory(get_active_hand(), Target)
 
 /*
@@ -359,14 +356,6 @@
 		var/obj/item/I = entry
 		. |= I.body_parts_covered
 
-// Returns the first item which covers any given body part
-/mob/proc/get_covering_equipped_item(var/body_parts)
-	if(isnum(body_parts))
-		for(var/entry in get_equipped_items())
-			var/obj/item/I = entry
-			if(I.body_parts_covered & body_parts)
-				return I
-
 // Returns all items which covers any given body part
 /mob/proc/get_covering_equipped_items(var/body_parts)
 	. = list()
@@ -374,6 +363,20 @@
 		var/obj/item/I = entry
 		if(I.body_parts_covered & body_parts)
 			. += I
+
+//Same as get_covering_equipped_items, but using target zone instead of bodyparts flags
+/mob/proc/get_covering_equipped_item_by_zone(var/zone)
+	var/obj/item/organ/external/O = GET_EXTERNAL_ORGAN(src, zone)
+	if(O)
+		return get_covering_equipped_item(O.body_part)
+
+// Returns the first item which covers any given body part
+/mob/proc/get_covering_equipped_item(var/body_parts)
+	if(isnum(body_parts))
+		for(var/entry in get_equipped_items())
+			var/obj/item/I = entry
+			if(I.body_parts_covered & body_parts)
+				return I
 
 /mob/proc/has_held_item_slot()
 	return !!length(get_held_item_slots())
@@ -423,3 +426,11 @@
 		var/org = GET_EXTERNAL_ORGAN(src, hand_slot)
 		if(org)
 			LAZYDISTINCTADD(., org)
+
+//Used to check if they can be fed food/drinks/pills
+/mob/proc/check_mouth_coverage()
+	if(length(get_inventory_slots()))
+		for(var/slot in global.standard_headgear_slots)
+			var/obj/item/gear = get_equipped_item(slot)
+			if(istype(gear) && (gear.body_parts_covered & SLOT_FACE) && !(gear.item_flags & ITEM_FLAG_FLEXIBLEMATERIAL))
+				return gear

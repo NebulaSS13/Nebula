@@ -7,8 +7,10 @@
 	return
 /mob/proc/apply_effect(var/effect = 0,var/effecttype = STUN, var/blocked = 0)
 	return
+
 /mob/proc/has_organ(organ_tag)
 	return !!get_organ(organ_tag, /obj/item/organ)
+
 /mob/proc/get_organ(var/organ_tag, var/expected_type)
 	RETURN_TYPE(/obj/item/organ)
 	return
@@ -45,8 +47,17 @@
 
 /mob/proc/get_active_grabs()
 	. = list()
-	for(var/obj/item/grab/grab in contents)
+	for(var/obj/item/grab/grab in get_held_items())
 		. += grab
+
+//Breaks all grips and pulls that the mob currently has.
+/mob/proc/break_all_grabs(mob/living/carbon/user)
+	. = FALSE
+	for(var/obj/item/grab/grab in get_active_grabs())
+		if(grab.affecting)
+			visible_message(SPAN_DANGER("\The [user] has broken \the [src]'s grip on [grab.affecting]!"))
+			. = TRUE
+		drop_from_inventory(grab)
 
 /mob/get_object_size()
 	return mob_size

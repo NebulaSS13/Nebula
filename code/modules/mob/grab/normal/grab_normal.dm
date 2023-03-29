@@ -215,7 +215,7 @@
 				return FALSE
 	return TRUE
 
-/decl/grab/normal/resolve_item_attack(var/obj/item/grab/G, var/mob/living/carbon/human/user, var/obj/item/I)
+/decl/grab/normal/resolve_item_attack(var/obj/item/grab/G, var/mob/living/user, var/obj/item/I)
 	switch(G.target_zone)
 		if(BP_HEAD)
 			return attack_throat(G, I, user)

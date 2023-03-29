@@ -616,7 +616,7 @@ var/global/const/DEFAULT_SPECIES_HEALTH = 200
 /decl/species/proc/update_skin(var/mob/living/carbon/human/H)
 	return
 
-/decl/species/proc/disarm_attackhand(var/mob/living/carbon/human/attacker, var/mob/living/carbon/human/target)
+/decl/species/proc/disarm_attackhand(var/mob/living/attacker, var/mob/living/target)
 	attacker.do_attack_animation(target)
 
 	var/obj/item/uniform = target.get_equipped_item(slot_w_uniform_str)

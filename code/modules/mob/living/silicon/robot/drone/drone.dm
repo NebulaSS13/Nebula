@@ -32,14 +32,10 @@
 	laws = /datum/ai_laws/drone
 
 	silicon_camera = /obj/item/camera/siliconcam/drone_camera
-
-	var/module_type = /obj/item/robot_module/drone
-	var/hat_x = 0
-	var/hat_y = -13
-
 	holder_type = /obj/item/holder/drone
 	os_type = null
 	starting_stock_parts = null
+	var/module_type = /obj/item/robot_module/drone
 
 /mob/living/silicon/robot/drone/Initialize()
 	. = ..()
@@ -49,7 +45,6 @@
 	remove_language(/decl/language/binary)
 	add_language(/decl/language/binary, 0)
 	add_language(/decl/language/binary/drone, 1)
-	set_extension(src, /datum/extension/hattable, list(hat_x, hat_y))
 
 	default_language = /decl/language/binary/drone
 	// NO BRAIN.
@@ -64,6 +59,24 @@
 	update_icon()
 
 	events_repository.register(/decl/observ/moved, src, src, /mob/living/silicon/robot/drone/proc/on_moved)
+
+/mob/living/silicon/robot/drone/proc/get_hat_offsets()
+	var/static/list/hat_offsets = list(0, -13)
+	return hat_offsets
+
+/mob/living/silicon/robot/drone/on_update_icon()
+	. = ..()
+	var/obj/item/hat = get_equipped_item(slot_head_str)
+	if(hat)
+		var/image/I = hat.get_mob_overlay(src, slot_head_str)
+		var/list/offsets = get_hat_offsets()
+		if(offsets)
+			I.pixel_x = offsets[1]
+			I.pixel_y = offsets[2]
+		add_overlay(I)
+
+/mob/living/silicon/robot/drone/get_all_valid_equipment_slots()
+	return list(slot_head_str)
 
 /mob/living/silicon/robot/drone/Destroy()
 	events_repository.unregister(/decl/observ/moved, src, src, /mob/living/silicon/robot/drone/proc/on_moved)
@@ -118,8 +131,10 @@
 	can_pull_mobs = MOB_PULL_SAME
 	integrated_light_power = 0.8
 	integrated_light_range = 5
-	hat_x = 1
-	hat_y = -12
+
+/mob/living/silicon/robot/drone/construction/get_hat_offsets()
+	var/static/list/hat_offsets = list(1, -12)
+	return hat_offsets
 
 /mob/living/silicon/robot/drone/init()
 	additional_law_channels["Drone"] = "d"

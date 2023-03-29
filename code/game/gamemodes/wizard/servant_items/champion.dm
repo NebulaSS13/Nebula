@@ -65,7 +65,7 @@
 		var/decl/special_role/wizard/wizards = GET_DECL(/decl/special_role/wizard)
 		if(!wizards.is_antagonist(user.mind) || user.mind.assigned_special_role != "Spellbound Servant")
 			START_PROCESSING(SSobj, src)
-			to_chat(user,"<span class='danger'>\The [src] heats up in your hands, burning you!</span>")
+			to_chat(user, SPAN_DANGER("\The [src] heats up in your hands, burning you!"))
 
 /obj/item/sword/excalibur/Process()
 	if(isliving(loc))
@@ -77,7 +77,7 @@
 			var/mob/living/M = loc
 			M.adjustFireLoss(2)
 		if(prob(2))
-			to_chat(loc,"<span class='danger'>\The [src] is burning you!</span>")
+			to_chat(loc, SPAN_DANGER("\The [src] is burning you!"))
 	return 1
 
 /obj/item/sword/excalibur/dropped()

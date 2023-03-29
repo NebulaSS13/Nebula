@@ -82,7 +82,8 @@
 
 /obj/screen/default_attack_selector/proc/set_owner(var/mob/living/carbon/human/_owner)
 	owner = _owner
-	if(!owner)
+	if(!istype(owner))
+		owner = null
 		qdel(src)
 	else
 		update_icon()

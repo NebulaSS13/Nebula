@@ -19,6 +19,8 @@
 
 	/// Used by the resist verb and some mob abilities.
 	var/next_special_ability = 0
+	var/pulling_punches = FALSE // Are you trying not to hurt your opponent? Primarily used by unarmed attack datums at human level.
+	var/last_unarmed_attack = 0 // The world_time where an unarmed attack was done. As above, used by unarmed attack datums.
 
 	var/now_pushing = null
 	var/mob_bump_flag = 0

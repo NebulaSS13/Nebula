@@ -63,20 +63,22 @@
 	renamed = 1
 	icon_changed = 1
 
-/obj/item/storage/bible/attack(mob/living/carbon/human/M, mob/living/carbon/human/user)
+/obj/item/storage/bible/attack(mob/living/M, mob/living/user)
 	if(user == M || !ishuman(user) || !ishuman(M))
 		return
-	if(user.mind?.assigned_job?.is_holy)
-		user.visible_message(SPAN_NOTICE("\The [user] places \the [src] on \the [M]'s forehead, reciting a prayer..."))
-		if(do_after(user, 5 SECONDS) && user.Adjacent(M))
-			var/decl/pronouns/G = user.get_pronouns()
-			user.visible_message( \
-				SPAN_NOTICE("\The [user] finishes reciting [G.his] prayer, removing \the [src] from \the [M]'s forehead."), \
-				SPAN_NOTICE("You finish reciting your prayer, removing \the [src] from \the [M]'s forehead."))
-			if(user.get_cultural_value(TAG_RELIGION) == M.get_cultural_value(TAG_RELIGION))
-				to_chat(M, SPAN_NOTICE("You feel calm and relaxed, at one with the universe."))
+	var/mob/living/carbon/human/priest = user
+	var/mob/living/carbon/human/congregant = M
+	if(priest.mind?.assigned_job?.is_holy)
+		priest.visible_message(SPAN_NOTICE("\The [priest] places \the [src] on \the [congregant]'s forehead, reciting a prayer..."))
+		if(do_after(priest, 5 SECONDS) && priest.Adjacent(congregant))
+			var/decl/pronouns/G = priest.get_pronouns()
+			priest.visible_message( \
+				SPAN_NOTICE("\The [priest] finishes reciting [G.his] prayer, removing \the [src] from \the [congregant]'s forehead."), \
+				SPAN_NOTICE("You finish reciting your prayer, removing \the [src] from \the [congregant]'s forehead."))
+			if(priest.get_cultural_value(TAG_RELIGION) == congregant.get_cultural_value(TAG_RELIGION))
+				to_chat(congregant, SPAN_NOTICE("You feel calm and relaxed, at one with the universe."))
 			else
-				to_chat(M, "Nothing happened.")
+				to_chat(congregant, "Nothing happened.")
 		..()
 
 /obj/item/storage/bible/afterattack(atom/A, mob/user, proximity)

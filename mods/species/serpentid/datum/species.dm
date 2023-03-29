@@ -179,13 +179,13 @@
 			return(threat_image)
 
 
-/decl/species/serpentid/disarm_attackhand(var/mob/living/carbon/human/attacker, var/mob/living/carbon/human/target)
+/decl/species/serpentid/disarm_attackhand(var/mob/living/attacker, var/mob/living/target)
 	if(attacker.pulling_punches || target.lying || attacker == target)
 		return ..(attacker, target)
-	if(world.time < attacker.last_attack + 20)
+	if(world.time < attacker.last_unarmed_attack + 20)
 		to_chat(attacker, SPAN_NOTICE("You can't attack again so soon."))
 		return 0
-	attacker.last_attack = world.time
+	attacker.last_unarmed_attack = world.time
 	var/turf/T = get_step(get_turf(target), get_dir(get_turf(attacker), get_turf(target)))
 	playsound(target.loc, 'sound/weapons/pushhiss.ogg', 50, 1, -1)
 	if(!T.density)

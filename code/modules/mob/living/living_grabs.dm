@@ -27,6 +27,11 @@
 
 /mob/living/proc/make_grab(var/atom/movable/target, var/grab_tag = /decl/grab/simple, var/defer_hand = FALSE)
 
+	// Some species have special grabs.
+	var/decl/species/my_species = get_species()
+	if(my_species?.grab_type)
+		grab_tag = my_species.grab_type
+
 	// Resolve to the 'topmost' atom in the buckle chain, as grabbing someone buckled to something tends to prevent further interaction.
 	var/atom/movable/original_target = target
 	var/mob/grabbing_mob = (ismob(target) && target)

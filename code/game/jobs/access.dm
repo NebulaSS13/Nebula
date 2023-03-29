@@ -210,6 +210,10 @@ var/global/list/priv_region_access
 		"Emergency Response Team",
 		"Emergency Response Team Leader")
 
+// Gets the ID card of a mob, but will not check types in the exceptions list
+/mob/GetIdCard(exceptions = null)
+	return LAZYACCESS(GetIdCards(exceptions), 1)
+
 /mob/observer/ghost
 	var/static/obj/item/card/id/all_access/ghost_all_access
 
@@ -222,16 +226,7 @@ var/global/list/priv_region_access
 		ghost_all_access = new()
 	LAZYDISTINCTADD(., ghost_all_access)
 
-/mob/living/bot/GetIdCards()
-	. = ..()
-	if(istype(botcard))
-		LAZYDISTINCTADD(., botcard)
-
-// Gets the ID card of a mob, but will not check types in the exceptions list
-/mob/living/carbon/human/GetIdCard(exceptions = null)
-	return LAZYACCESS(GetIdCards(exceptions), 1)
-
-/mob/living/carbon/human/GetIdCards(exceptions = null)
+/mob/living/GetIdCards(exceptions = null)
 	. = ..()
 	var/list/candidates = get_held_items()
 	var/id = get_equipped_item(slot_wear_id_str)
@@ -243,6 +238,11 @@ var/global/list/priv_region_access
 		var/list/obj/item/card/id/id_cards = candidate.GetIdCards()
 		if(LAZYLEN(id_cards))
 			LAZYDISTINCTADD(., id_cards)
+
+/mob/living/bot/GetIdCards()
+	. = ..()
+	if(istype(botcard))
+		LAZYDISTINCTADD(., botcard)
 
 /mob/living/carbon/human/GetAccess(var/union = TRUE)
 	. = ..(union)

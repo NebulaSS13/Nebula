@@ -38,4 +38,3 @@
 		if(E && BP_IS_PROSTHETIC(E))
 			return TRUE
 		return FALSE
-		

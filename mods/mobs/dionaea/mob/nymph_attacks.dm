@@ -1,3 +1,6 @@
+/mob/living/carbon/alien/diona/get_throw_verb()
+	return "spits out"
+
 /mob/living/carbon/alien/diona/UnarmedAttack(var/atom/A)
 
 	setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
@@ -31,14 +34,6 @@
 		return
 		// End superhacky stuff.
 
-	var/datum/extension/hattable/hattable = get_extension(src, /datum/extension/hattable)
-	if(hattable?.wear_hat(src, A))
-		return
-
-	if((a_intent == I_DISARM || a_intent == I_HELP) && can_collect(A))
-		collect(A)
-		return
-
 	if(istype(A, /mob))
 		if(src != A && !gestalt_with(A))
 			visible_message(SPAN_NOTICE("\The [src] butts its head into \the [A]."))
@@ -46,27 +41,15 @@
 
 	. = ..()
 
-/mob/living/carbon/alien/diona/RangedAttack(atom/A, var/params)
-	if((a_intent == I_HURT || a_intent == I_GRAB) && holding_item)
-		setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
-		visible_message(SPAN_DANGER("\The [src] spits \a [holding_item] at \the [A]!"))
-		var/atom/movable/temp = holding_item
-		try_unequip(holding_item)
-		if(temp)
-			temp.throw_at(A, 10, rand(3,5), src)
-		return TRUE
-	. = ..()
-
 /mob/living/carbon/alien/diona/proc/handle_tray_interaction(var/obj/machinery/portable_atmospherics/hydroponics/tray)
 
 	if(incapacitated())
 		return
 
-	if(!tray.seed && istype(holding_item, /obj/item/seeds))
-		var/atom/movable/temp = holding_item
-		try_unequip(temp)
-		if(temp)
-			tray.plant_seed(src, temp)
+	var/obj/item/seeds/seed = get_active_hand()
+	if(!tray.seed && istype(seed))
+		if(try_unequip(seed) && seed)
+			tray.plant_seed(src, seed)
 		return
 
 	if(tray.dead)

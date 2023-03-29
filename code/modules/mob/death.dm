@@ -70,11 +70,6 @@
 
 	drop_held_items()
 
-	var/datum/extension/hattable/hattable = get_extension(src, /datum/extension/hattable)
-	if(hattable?.hat)
-		hattable.hat.dropInto(get_turf(src))
-		hattable.hat = null
-
 	SSstatistics.report_death(src)
 
 	//TODO:  Change death state to health_dead for all these icon files.  This is a stop gap.

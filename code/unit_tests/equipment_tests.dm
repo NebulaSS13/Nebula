@@ -133,7 +133,7 @@
 	created_atoms |= item
 	subject.try_unequip(item)
 	if(subject.isEquipped(item))
-		failure_list += "[item] remained equipped to [subject.get_equipped_slot_for_item(item)] after unEquip was called."
+		failure_list += "[item] remained equipped to [subject.get_equipped_slot_for_item(item)] after try_unequip was called."
 
 /datum/unit_test/equipment_slot_test/proc/check_slot_equip_failure(mob/living/carbon/human/subject, obj/item/item, which_slot, list/failure_list)
 	created_atoms |= item

@@ -183,15 +183,17 @@
 	return
 
 /mob/living/UnarmedAttack(var/atom/A, var/proximity_flag)
-
 	if(GAME_STATE < RUNLEVEL_GAME)
 		to_chat(src, "You cannot attack people before the game has started.")
-		return 0
-
-	if(stat)
-		return 0
-
-	return 1
+		return FALSE
+	if(stat || !istype(A))
+		return FALSE
+	var/obj/item/clothing/gloves/G = get_equipped_item(slot_gloves_str) // not typecast specifically enough in defines
+	if(istype(G) && G.Touch(A,1))
+		return FALSE
+	if(check_dexterity(DEXTERITY_HOLD_ITEM))
+		return A.attack_hand(src)
+	return FALSE
 
 /*
 	Ranged unarmed attack:

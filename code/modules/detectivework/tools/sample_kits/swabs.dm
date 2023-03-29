@@ -16,7 +16,7 @@
 		/decl/material/solid/glass = MATTER_AMOUNT_REINFORCEMENT,
 	)
 
-/obj/item/forensics/sample_kit/swabs/attack(var/mob/living/carbon/human/H, var/mob/user)
+/obj/item/forensics/sample_kit/swabs/attack(var/mob/living/H, var/mob/user)
 	if(!istype(H))
 		return ..()
 

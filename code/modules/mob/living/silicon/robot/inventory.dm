@@ -247,10 +247,6 @@
 	else
 		to_chat(src, "<span class='notice'>You need to disable a module first!</span>")
 
-/mob/living/silicon/robot/put_in_hands(var/obj/item/W) // No hands.
-	W.forceMove(get_turf(src))
-	return 1
-
 //Robots don't use inventory slots, so we need to override this.
 /mob/living/silicon/robot/canUnEquip(obj/item/I)
 	if(!I)

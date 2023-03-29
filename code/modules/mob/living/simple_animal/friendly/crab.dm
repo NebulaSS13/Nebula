@@ -26,10 +26,14 @@
 	bone_material = null
 	bone_amount =   0
 
-/mob/living/simple_animal/crab/Initialize()
-	if(isnull(hat_offsets))
-		hat_offsets = list("[SOUTH]" = list(-1, -10))
-	. = ..()
+/mob/living/simple_animal/crab/get_hat_overlay_offsets()
+	var/static/list/hat_overlay_offsets = list(
+		"[NORTH]" = list(-1, -10),
+		"[SOUTH]" = list(-1, -10),
+		"[EAST]" =  list(-1, -10),
+		"[WEST]" =  list(-1, -10)
+	)
+	return hat_overlay_offsets
 
 /datum/ai/crab
 	expected_type = /mob/living/simple_animal/crab
