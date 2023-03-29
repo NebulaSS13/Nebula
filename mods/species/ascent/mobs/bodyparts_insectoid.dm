@@ -34,6 +34,14 @@
 	icon_position = LEFT
 	encased = "carapace"
 
+
+/datum/inventory_slot/gripper/midlimb
+	slot_name = "Midlimb"
+	slot_id = BP_M_HAND
+	requires_organ_tag = BP_M_HAND
+	ui_label = "M"
+	ui_loc = "CENTER,BOTTOM+1:14"
+
 /obj/item/organ/external/hand/insectoid/midlimb
 	name = "central grasper"
 	joint = "central wrist"
@@ -42,16 +50,21 @@
 	amputation_point = "central wrist"
 	icon_position = 0
 	encased = "carapace"
-	gripper_ui_loc = "CENTER,BOTTOM+1:14"
-	gripper_ui_label = "M"
+	gripper_type = /datum/inventory_slot/gripper/midlimb
+
+/datum/inventory_slot/gripper/upper_left_hand
+	slot_name = "Left Upper Hand"
+	slot_id = BP_L_HAND_UPPER
+	requires_organ_tag = BP_L_HAND_UPPER
+	ui_label = "UL"
+	ui_loc = "CENTER:16,BOTTOM+1:14"
 
 /obj/item/organ/external/hand/insectoid/upper
 	name = "left raptorial"
 	joint = "left upper wrist"
 	amputation_point = "left upper wrist"
 	organ_tag = BP_L_HAND_UPPER
-	gripper_ui_loc = "CENTER:16,BOTTOM+1:14"
-	gripper_ui_label = "UL"
+	gripper_type = /datum/inventory_slot/gripper/upper_left_hand
 
 /obj/item/organ/external/hand/insectoid/upper/get_dexterity()
 	. = DEXTERITY_GRIP
@@ -63,13 +76,19 @@
 	icon_position = RIGHT
 	encased = "carapace"
 
+/datum/inventory_slot/gripper/upper_right_hand
+	slot_name = "Right Upper Hand"
+	slot_id = BP_R_HAND_UPPER
+	requires_organ_tag = BP_R_HAND_UPPER
+	ui_label = "UR"
+	ui_loc = "CENTER-1:16,BOTTOM+1:14"
+
 /obj/item/organ/external/hand/right/insectoid/upper
 	name = "right raptorial"
 	joint = "right upper wrist"
 	amputation_point = "right upper wrist"
 	organ_tag = BP_R_HAND_UPPER
-	gripper_ui_loc = "CENTER-1:16,BOTTOM+1:14"
-	gripper_ui_label = "UR"
+	gripper_type = /datum/inventory_slot/gripper/upper_right_hand
 
 /obj/item/organ/external/hand/right/insectoid/upper/get_dexterity()
 	. = DEXTERITY_GRIP

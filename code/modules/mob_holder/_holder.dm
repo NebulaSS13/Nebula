@@ -106,7 +106,7 @@
 
 /obj/item/holder/attack_self()
 	for(var/mob/M in contents)
-		M.show_inv(usr)
+		M.show_stripping_window(usr)
 
 /obj/item/holder/attack(mob/target, mob/user)
 	// Devour on click on self with holder

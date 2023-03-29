@@ -700,7 +700,7 @@ var/global/list/damage_icon_parts = list()
 	overlays_standing[HO_INHAND_LAYER] = null
 	for(var/hand_slot in held_item_slots)
 		var/datum/inventory_slot/inv_slot = held_item_slots[hand_slot]
-		var/obj/item/held = inv_slot?.holding
+		var/obj/item/held = inv_slot?.get_equipped_item()
 		if(istype(held))
 			// This should be moved out of icon code
 			if(get_equipped_item(slot_handcuffed_str))

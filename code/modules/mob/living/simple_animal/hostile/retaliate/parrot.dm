@@ -127,7 +127,7 @@
 /*
  * Inventory
  */
-/mob/living/simple_animal/hostile/retaliate/parrot/show_inv(mob/user)
+/mob/living/simple_animal/hostile/retaliate/parrot/show_stripping_window(mob/user)
 	user.set_machine(src)
 	if(user.stat) return
 
@@ -492,7 +492,8 @@
 			var/mob/living/carbon/C = AM
 			for(var/hand_slot in C.held_item_slots)
 				var/datum/inventory_slot/inv_slot = C.held_item_slots[hand_slot]
-				if(inv_slot?.holding && can_pick_up(inv_slot.holding))
+				var/held = inv_slot.get_equipped_item()
+				if(held && can_pick_up(held))
 					return C
 	return null
 
@@ -521,7 +522,8 @@
 			var/mob/living/carbon/C = AM
 			for(var/hand_slot in C.held_item_slots)
 				var/datum/inventory_slot/inv_slot = C.held_item_slots[hand_slot]
-				if(inv_slot?.holding && can_pick_up(inv_slot.holding))
+				var/held = inv_slot.get_equipped_item()
+				if(held && can_pick_up(held))
 					return C
 	return null
 

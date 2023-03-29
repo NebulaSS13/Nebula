@@ -19,22 +19,81 @@
 	if(!istype(W) || !slot)
 		return FALSE
 
-	if(!W.mob_can_equip(src, slot, disable_warning, force))
-		if(del_on_fail)
-			qdel(W)
-		else if(!disable_warning)
-			to_chat(src, SPAN_WARNING("You are unable to equip that."))
-		return FALSE
+	. = (canUnEquip(W) && can_equip_anything_to_slot(slot) && has_organ_for_slot(slot) && W.mob_can_equip(src, slot, disable_warning, force))
+	if(.)
+		var/datum/inventory_slot/inv_slot = get_inventory_slot_datum(slot)
+		if(inv_slot)
+			. = inv_slot.can_equip_to_slot(src, W, slot)
 
-	if(canUnEquip(W))
+	if(.)
 		equip_to_slot(W, slot, redraw_mob, delete_old_item = delete_old_item) //This proc should not ever fail.
-		return TRUE
+	else if(del_on_fail)
+		qdel(W)
+	else if(!disable_warning)
+		to_chat(src, SPAN_WARNING("You are unable to equip that."))
+
+/mob/proc/can_equip_anything_to_slot(var/slot)
+	return (slot in get_all_valid_equipment_slots())
 
 //This is an UNSAFE proc. It merely handles the actual job of equipping. All the checks on whether you can or can't eqip need to be done before! Use mob_can_equip() for that task.
 //In most cases you will want to use equip_to_slot_if_possible()
-/mob/proc/equip_to_slot(obj/item/W, slot, delete_old_item = TRUE)
+/mob/proc/equip_to_slot(obj/item/W, slot, redraw_mob = TRUE, delete_old_item = TRUE)
 	SHOULD_CALL_PARENT(TRUE)
-	return istype(W) && !isnull(slot)
+	if(!istype(W) || isnull(slot))
+		return FALSE
+
+	unequip(W)
+	if(!isnum(slot))
+		var/datum/inventory_slot/inv_slot = get_inventory_slot_datum(slot)
+		if(inv_slot)
+			inv_slot.equipped(src, W, redraw_mob, delete_old_item)
+			if(W.action_button_name)
+				update_action_buttons()
+			return TRUE
+
+// Legacy code after this point.
+	var/obj/item/old_item = get_equipped_item(slot)
+	if(!set_item_equipped_legacy(W, slot, redraw_mob))
+		to_chat(src, SPAN_WARNING("You are trying to equip this item to an unsupported inventory slot. If possible, please write a ticket with steps to reproduce. Slot was: [slot]"))
+		return FALSE
+
+	W.forceMove(src)
+	W.hud_layerise()
+	set_equipment_screen_loc_legacy(W, slot)
+
+	if(W.action_button_name)
+		update_action_buttons()
+
+	// seamless replacement deletes the old item by default, but can be disabled for special handling
+	// like job items going into storage when replaced by loadout items
+	if(old_item)
+		unequip(old_item)
+		if(delete_old_item)
+			qdel(old_item)
+	return TRUE
+// End legacy code.
+
+/mob/proc/set_equipment_screen_loc_legacy(obj/item/W, slot)
+	W.screen_loc = null
+	var/decl/species/my_species = get_species()
+	for(var/s in my_species?.hud?.gear)
+		var/list/gear = my_species.hud.gear[s]
+		if(gear["slot"] == slot)
+			W.screen_loc = gear["loc"]
+
+/mob/proc/set_item_equipped_legacy(obj/item/W, slot, redraw_mob)
+	if(slot == slot_back_str)
+		_back = W
+		W.equipped(src, slot)
+		update_inv_back(redraw_mob)
+		return TRUE
+	if(slot == slot_wear_mask_str)
+		_wear_mask = W
+		update_inv_ears(0)
+		W.equipped(src, slot)
+		update_inv_wear_mask(redraw_mob)
+		return TRUE
+	return FALSE
 
 //This is just a commonly used configuration for the equip_to_slot_if_possible() proc, used to equip people when the rounds tarts and when events happen and such.
 /mob/proc/equip_to_slot_or_del(obj/item/W, slot)
@@ -188,7 +247,8 @@
 	As far as I can tell the proc exists so that mobs with different inventory slots can override
 	the search through all the slots, without having to duplicate the rest of the item dropping.
 */
-/mob/proc/unequip(obj/W)
+// This proc is going to be killed when inventory slots are merged, eta 300 years
+/mob/proc/set_item_unequipped_legacy(obj/W)
 	SHOULD_CALL_PARENT(TRUE)
 	if(W == _back)
 		_back = null
@@ -197,6 +257,17 @@
 	if(W == _wear_mask)
 		_wear_mask = null
 		update_inv_wear_mask(0)
+		return TRUE
+	return FALSE
+
+/mob/proc/unequip(obj/W)
+	SHOULD_CALL_PARENT(TRUE)
+	if(istype(W) && !QDELETED(W))
+		var/datum/inventory_slot/inv_slot = get_inventory_slot_datum(get_equipped_slot_for_item(W))
+		if(inv_slot)
+			return inv_slot.unequipped(src, W)
+	if(set_item_unequipped_legacy(W))
+		update_action_buttons()
 		return TRUE
 	return FALSE
 
@@ -266,16 +337,15 @@
 
 	// Check equipment slots.
 	SHOULD_CALL_PARENT(TRUE)
+	var/datum/inventory_slot/inv_slot = get_inventory_slot_datum(slot)
+	if(inv_slot)
+		return inv_slot.get_equipped_item()
+
 	switch(slot)
 		if(slot_back_str)
 			return _back
 		if(slot_wear_mask_str)
 			return _wear_mask
-
-	// Check held item slots.
-	var/held_slots = get_held_item_slots()
-	var/datum/inventory_slot/inv_slot = LAZYACCESS(held_slots, slot)
-	return inv_slot?.holding
 
 /mob/proc/get_equipped_items(var/include_carried = 0)
 	SHOULD_CALL_PARENT(TRUE)
@@ -291,6 +361,56 @@
 	for(var/entry in get_equipped_items(include_carried))
 		drop_from_inventory(entry)
 		qdel(entry)
+
+/mob/proc/has_organ_for_slot(slot)
+	if(slot in global.abstract_inventory_slots)
+		return TRUE
+	var/datum/inventory_slot/inv_slot = get_inventory_slot_datum(slot)
+	if(inv_slot)
+		return !!inv_slot.check_has_required_organ(src)
+
+// Legacy code after this point.
+	switch(slot)
+		if(slot_back_str)
+			return has_organ(BP_CHEST)
+		if(slot_wear_mask_str)
+			return has_organ(BP_HEAD)
+		if(slot_handcuffed_str)
+			return has_organ(BP_L_HAND) && has_organ(BP_R_HAND)
+		if(slot_belt_str)
+			return has_organ(BP_CHEST)
+		if(slot_wear_id_str)
+			// the only relevant check for this is the uniform check
+			return TRUE
+		if(slot_l_ear_str)
+			return has_organ(BP_HEAD)
+		if(slot_r_ear_str)
+			return has_organ(BP_HEAD)
+		if(slot_glasses_str)
+			return has_organ(BP_HEAD)
+		if(slot_gloves_str)
+			return has_organ(BP_L_HAND) || has_organ(BP_R_HAND)
+		if(slot_head_str)
+			return has_organ(BP_HEAD)
+		if(slot_shoes_str)
+			return has_organ(BP_L_FOOT) || has_organ(BP_R_FOOT)
+		if(slot_wear_suit_str)
+			return has_organ(BP_CHEST)
+		if(slot_w_uniform_str)
+			return has_organ(BP_CHEST)
+		if(slot_l_store_str)
+			return has_organ(BP_CHEST)
+		if(slot_r_store_str)
+			return has_organ(BP_CHEST)
+		if(slot_s_store_str)
+			return has_organ(BP_CHEST)
+		if(slot_in_backpack_str)
+			return TRUE
+		if(slot_tie_str)
+			return TRUE
+		else
+			return has_organ(slot)
+// End legacy code.
 
 // Returns all currently covered body parts
 /mob/proc/get_covered_body_parts()
@@ -333,6 +453,12 @@
 
 /mob/proc/get_inventory_slots()
 	return
+
+/mob/proc/get_all_valid_equipment_slots()
+	for(var/slot in get_held_item_slots())
+		LAZYDISTINCTADD(., slot)
+	for(var/slot in get_inventory_slots())
+		LAZYDISTINCTADD(., slot)
 
 /mob/proc/get_hands_organs()
 	for(var/hand_slot in get_held_item_slots())

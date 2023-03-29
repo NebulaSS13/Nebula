@@ -278,14 +278,14 @@
 /mob/living/carbon/restrained()
 	return get_equipped_item(slot_handcuffed_str)
 
-/mob/living/carbon/unequip(obj/item/W)
-	. = ..()
-	if(!. && W == get_equipped_item(slot_handcuffed_str))
+/mob/living/carbon/set_item_unequipped_legacy(obj/W)
+	if(W == _handcuffed)
 		_handcuffed = null
 		update_inv_handcuffed()
 		if(buckled && buckled.buckle_require_restraints)
 			buckled.unbuckle_mob()
 		return TRUE
+	return ..()
 
 /mob/living/carbon/verb/mob_sleep()
 	set name = "Sleep"
@@ -305,31 +305,6 @@
 		playsound(loc, 'sound/misc/slip.ogg', 50, 1, -3)
 		SET_STATUS_MAX(src, STAT_WEAK, stun_duration)
 		. = TRUE
-
-/mob/living/carbon/show_inv(mob/user)
-	user.set_machine(src)
-	var/obj/item/mask = get_equipped_item(slot_wear_mask_str)
-	var/dat = {"
-	<B><HR><FONT size=3>[name]</FONT></B>
-	<BR><HR>
-	<BR><B>Head(Mask):</B> <A href='?src=\ref[src];item=mask'>[(mask ? mask : "Nothing")]</A>"}
-
-	for(var/hand_slot in held_item_slots)
-		var/obj/item/organ/external/E = GET_EXTERNAL_ORGAN(src, hand_slot)
-		if(E)
-			var/datum/inventory_slot/inv_slot = held_item_slots[hand_slot]
-			dat += "<BR><b>[capitalize(E.name)]:</b> <A href='?src=\ref[src];item=[hand_slot]'>[inv_slot.holding?.name || "nothing"]</A>"
-
-	var/obj/item/back = get_equipped_item(slot_back_str)
-	dat += {"<BR><B>Back:</B> <A href='?src=\ref[src];item=back'>[(back || "Nothing")]</A> [((istype(mask, /obj/item/clothing/mask) && istype(back, /obj/item/tank) && !( internal )) ? text(" <A href='?src=\ref[];item=internal'>Set Internal</A>", src) : "")]
-	<BR>[(internal ? text("<A href='?src=\ref[src];item=internal'>Remove Internal</A>") : "")]
-	<BR><A href='?src=\ref[src];item=pockets'>Empty Pockets</A>
-	<BR><A href='?src=\ref[user];refresh=1'>Refresh</A>
-	<BR><A href='?src=\ref[user];mach_close=mob[name]'>Close</A>
-	<BR>"}
-	show_browser(user, dat, text("window=mob[];size=325x500", name))
-	onclose(user, "mob[name]")
-	return
 
 /**
  *  Return FALSE if victim can't be devoured, DEVOUR_FAST if they can be devoured quickly, DEVOUR_SLOW for slow devour

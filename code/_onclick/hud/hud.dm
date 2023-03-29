@@ -200,10 +200,11 @@
 		inv_slot = target.get_inventory_slot_datum(inv_elem.name)
 		if(inv_slot)
 			inv_slot.ui_loc = inv_elem.screen_loc
-			if(inv_slot.holding)
-				inv_slot.holding.screen_loc = inv_slot.ui_loc
+			var/obj/item/held = inv_slot.get_equipped_item()
+			if(held)
+				held.screen_loc = inv_slot.ui_loc
 				if(mymob.client)
-					mymob.client.screen |= inv_slot.holding // just to make sure it's visible post-login
+					mymob.client.screen |= held // just to make sure it's visible post-login
 
 	var/hand_x_offset = -(world.icon_size/2)
 	for(var/i = 1 to length(swaphand_hud_objects))

@@ -14,9 +14,6 @@
 	to_chat(user, "[html_icon(src)] That's \a [src][infix]. [suffix]")
 	to_chat(user, desc)
 
-/datum/inventory_slot/proc/get_examined_string()
-	return
-
 /mob/proc/show_examined_worn_held_items(mob/user, distance, infix, suffix, hideflags, decl/pronouns/pronouns)
 
 	. = list()
@@ -26,9 +23,10 @@
 	/*
 	var/slot_datums = get_inventory_slots()
 	if(length(slot_datums))
-		for(var/slot in slot_datums) // TODO: consider sorting inventory_slots instead of relying on this list order.
-			var/datum/inventory_slot/inv_slot = slot_datums[slot]
-			var/slot_desc = inv_slot?.get_examined_string(src, user, distance, hideflags, pronouns)
+		for(var/slot in slot_datums)
+			if(!inv_slot || inv_slot.skip_on_inventory_display)
+				continue
+			var/slot_desc = inv_slot.get_examined_string(src, user, distance, hideflags, pronouns)
 			if(slot_desc)
 				. += slot_desc
 	*/
@@ -64,10 +62,11 @@
 	var/list/held_slots = get_held_item_slots()
 	for(var/hand_slot in held_slots)
 		var/datum/inventory_slot/inv_slot = LAZYACCESS(held_slots, hand_slot)
-		if(inv_slot?.holding)
-			var/obj/item/organ/external/E = GET_EXTERNAL_ORGAN(src, hand_slot)
-			if(E)
-				. += "[pronouns.He] [pronouns.is] holding [inv_slot.holding.get_examine_line()] in [pronouns.his] [E.name]."
+		if(inv_slot.skip_on_inventory_display)
+			continue
+		var/slot_desc = inv_slot?.get_examined_string(src, user, distance, hideflags, pronouns)
+		if(slot_desc)
+			. += slot_desc
 	//gloves
 	var/obj/item/gloves = get_equipped_item(slot_gloves_str)
 	if(gloves && !(hideflags & HIDEGLOVES))
