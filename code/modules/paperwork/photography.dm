@@ -191,7 +191,7 @@
 		playsound(loc, "rustle", 50, 1, -5)
 		if(user.get_equipped_item(slot_back_str) == src)
 			add_fingerprint(user)
-			if(user.unEquip(src))
+			if(user.try_unequip(src))
 				user.equip_to_slot_if_possible(src, inv.slot_id)
 		else if(over == user && in_range(src, user) || loc == user)
 			if(user.active_storage)
@@ -270,7 +270,7 @@
 					user.visible_message(
 						SPAN_NOTICE("In a swift flick of the finger, [user] ejects \the [film], and slides in \the [I]!"),
 						SPAN_NOTICE("From habit you instinctively pop the old [film] from \the [src] and insert a new [I] deftly!"))
-					user.unEquip(I, src)
+					user.try_unequip(I, src)
 					user.put_in_active_hand(film)
 					film = I
 					return TRUE
@@ -288,7 +288,7 @@
 					user.visible_message(
 						SPAN_NOTICE("[user] inserts \a [I] into his [src]."),
 						SPAN_NOTICE("You insert \the [I] into \the [src]."))
-				user.unEquip(I, src)
+				user.try_unequip(I, src)
 				film = I
 				return TRUE
 			return

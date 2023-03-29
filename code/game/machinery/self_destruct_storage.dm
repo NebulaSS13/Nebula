@@ -68,7 +68,7 @@
 		if(operable() && locked && check_access(user))
 			locked = FALSE
 			user.visible_message(
-				"\The [user] unlocks \the [src].", 
+				"\The [user] unlocks \the [src].",
 				"You unlock \the [src]."
 			)
 			update_icon()
@@ -77,7 +77,7 @@
 		if(!locked)
 			open = !open
 			user.visible_message(
-				"\The [user] [open ? "opens" : "closes"] \the [src].", 
+				"\The [user] [open ? "opens" : "closes"] \the [src].",
 				"You [open ? "open" : "close"] \the [src]."
 			)
 			update_icon()
@@ -90,12 +90,12 @@
 		if(panel_open)
 			to_chat(user, SPAN_WARNING("\The [src] is currently in maintenance mode!"))
 			return
-	
+
 		var/obj/item/card/id/id = O
 		if(check_access(id))
 			locked = !locked
 			user.visible_message(
-				"\The [user] [locked ? "locks" : "unlocks"] \the [src].", 
+				"\The [user] [locked ? "locks" : "unlocks"] \the [src].",
 				"You [locked ? "lock" : "unlock"] \the [src]."
 			)
 			update_icon()
@@ -107,12 +107,12 @@
 			return
 
 		user.visible_message(
-			"\The [user] begins inserting \the [O] into storage.", 
+			"\The [user] begins inserting \the [O] into storage.",
 			"You begin inserting \the [O] into storage."
 		)
-		if(do_after(user, interact_time, src) && open && (length(cylinders) < max_cylinders) && user.unEquip(O, src))
+		if(do_after(user, interact_time, src) && open && (length(cylinders) < max_cylinders) && user.try_unequip(O, src))
 			user.visible_message(
-				"\The [user] places \the [O] into storage.", 
+				"\The [user] places \the [O] into storage.",
 				"You place \the [O] into storage."
 			)
 			cylinders.Add(O)
@@ -124,12 +124,12 @@
 	if(over == user && open && !panel_open && length(cylinders))
 		var/cylinder = cylinders[1]
 		user.visible_message(
-			"\The [user] begins to extract \the [cylinder].", 
+			"\The [user] begins to extract \the [cylinder].",
 			"You begin to extract \the [cylinder]."
 		)
 		if(do_after(user, interact_time, src) && open && cylinders.Find(cylinder))
 			user.visible_message(
-				"\The [user] picks up \the [cylinder].", 
+				"\The [user] picks up \the [cylinder].",
 				"You pick up \the [cylinder]."
 			)
 			user.put_in_hands(cylinder)

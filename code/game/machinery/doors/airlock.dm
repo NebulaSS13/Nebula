@@ -720,7 +720,7 @@ About the new airlock wires panel:
 		if(!length(A.req_access) && (alert("\the [A]'s 'Access Not Set' light is flashing. Install it anyway?", "Access not set", "Yes", "No") == "No"))
 			return TRUE
 
-		if(do_after(user, 50, src) && density && A && user.unEquip(A, src))
+		if(do_after(user, 50, src) && density && A && user.try_unequip(A, src))
 			to_chat(user, SPAN_NOTICE("You successfully install \the [A]."))
 			brace = A
 			brace.airlock = src

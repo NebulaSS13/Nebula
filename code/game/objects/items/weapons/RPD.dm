@@ -165,7 +165,7 @@ var/global/list/rpd_pipe_selection_skilled = list()
 
 /obj/item/rpd/attackby(var/obj/item/W, var/mob/user)
 	if(istype(W, /obj/item/pipe))
-		if(!user.unEquip(W))
+		if(!user.try_unequip(W))
 			return
 		recycle(W,user)
 		return

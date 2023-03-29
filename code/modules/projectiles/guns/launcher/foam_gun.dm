@@ -21,7 +21,7 @@
 /obj/item/gun/launcher/foam/attackby(obj/item/I, mob/user)
 	if(istype(I, /obj/item/foam_dart))
 		if(darts.len < max_darts)
-			if(!user.unEquip(I, src))
+			if(!user.try_unequip(I, src))
 				return
 			darts += I
 			to_chat(user, SPAN_NOTICE("You slot \the [I] into \the [src]."))
@@ -94,7 +94,7 @@
 /obj/item/foam_dart/Initialize()
 	mix_up()
 	. = ..()
-	
+
 /obj/item/foam_dart/proc/mix_up()
 	pixel_x = rand(-randpixel, randpixel)
 	pixel_y = rand(-randpixel, randpixel)

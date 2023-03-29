@@ -270,7 +270,7 @@
 			dropInto(get_turf(bag))
 		else if(istype(loc, /mob))
 			var/mob/M = loc
-			if(!M.unEquip(src, get_turf(src)))
+			if(!M.try_unequip(src, get_turf(src)))
 				return ..()
 		user.equip_to_slot_if_possible(src, inv.slot_id)
 		return TRUE
@@ -294,7 +294,7 @@
 
 			if(loc == user)
 				to_chat(user, SPAN_NOTICE("You begin trying to remove \the [src]..."))
-				if(do_after(user, 3 SECONDS, src) && user.unEquip(src))
+				if(do_after(user, 3 SECONDS, src) && user.try_unequip(src))
 					user.drop_from_inventory(src)
 				else
 					to_chat(user, SPAN_WARNING("You fail to remove \the [src]!"))
@@ -327,7 +327,7 @@
 		throwing.finalize(hit=TRUE)
 
 	if (loc == user)
-		if(!user.unEquip(src))
+		if(!user.try_unequip(src))
 			return
 	else
 		if(isliving(loc))

@@ -132,7 +132,7 @@
 			target.emote("scream")
 		for(var/hand_slot in target.held_item_slots)
 			var/obj/item/thing = target.get_equipped_item(hand_slot)
-			if(thing?.simulated && prob(75) && target.unEquip(thing))
+			if(thing?.simulated && prob(75) && target.try_unequip(thing))
 				var/obj/item/organ/external/E = GET_EXTERNAL_ORGAN(target, hand_slot)
 				target.visible_message(SPAN_DANGER("\The [target] drops what they were holding as their [E ? E.name : "hand"] spasms!"))
 		return TRUE

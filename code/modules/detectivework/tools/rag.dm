@@ -29,7 +29,7 @@
 	. = ..()
 
 /obj/item/chems/glass/rag/attack_self(mob/user)
-	if(on_fire && user.unEquip(src))
+	if(on_fire && user.try_unequip(src))
 		user.visible_message(SPAN_NOTICE("\The [user] stamps out [src]."), SPAN_NOTICE("You stamp out [src]."))
 		extinguish()
 	else

@@ -111,7 +111,7 @@
 				access_card = equipping
 			if("back")
 				messenger_bag = equipping
-		if(!user.unEquip(equipping, src))
+		if(!user.try_unequip(equipping, src))
 			return TOPIC_HANDLED
 		visible_message("<span class='notice'>\The [user] places \the [equipping] on to \the [src]'s [href_list["add_inv"]].</span>")
 		update_icon()

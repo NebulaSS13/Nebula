@@ -680,7 +680,7 @@
 
 		if(!do_after(M,seal_delay,src))
 			if(M && M.get_equipped_item(slot_back_str) == src)
-				if(!M.unEquip(src))
+				if(!M.try_unequip(src))
 					return
 			src.dropInto(loc)
 			return
@@ -770,7 +770,7 @@
 		for(var/list/slot in list(slot_head_str, slot_gloves_str, slot_shoes_str, slot_wear_suit_str))
 			var/obj/item/garbage = H.get_equipped_item(slot)
 			if(garbage)
-				H.unEquip(garbage)
+				H.try_unequip(garbage)
 				qdel(garbage)
 
 	for(var/piece in list("helmet","gauntlets","chest","boots"))

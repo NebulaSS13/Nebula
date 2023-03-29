@@ -36,7 +36,7 @@
 		if(airtank)
 			to_chat(user, "\The [src] already has an air tank installed.")
 			return 1
-		else if(user.unEquip(W))
+		else if(user.try_unequip(W))
 			W.forceMove(src)
 			airtank = W
 			to_chat(user, "You install \the [W] in \the [src].")
@@ -55,7 +55,7 @@
 		to_chat(user,"The distribution valve on \the [airtank] is set to '[airtank.distribute_pressure] kPa'.")
 	else
 		to_chat(user, "<span class='warning'>The air tank is missing.</span>")
-		
+
 /obj/structure/closet/body_bag/rescue
 	name = "rescue bag"
 	desc = "A reusable plastic bag designed to prevent additional damage to an occupant, especially useful if short on time or in \
@@ -92,7 +92,7 @@
 		if(airtank)
 			to_chat(user, "\The [src] already has an air tank installed.")
 			return 1
-		else if(user.unEquip(W, src))
+		else if(user.try_unequip(W, src))
 			set_tank(W)
 			to_chat(user, "You install \the [W] in \the [src].")
 			return 1

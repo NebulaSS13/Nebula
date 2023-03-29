@@ -46,7 +46,7 @@
 	// 	to_chat(user, SPAN_WARNING("\The [src] seems to be lacking power..."))
 	// 	return
 	use_power_oneoff(60)
-	user.unEquip(I, src)
+	user.try_unequip(I, src)
 
 	//If the material is too hard damage the shredder
 	var/decl/material/M = I.material

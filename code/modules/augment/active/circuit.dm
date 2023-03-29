@@ -24,7 +24,7 @@
 	if(istype(W, /obj/item/electronic_assembly/augment))
 		if(holding)
 			to_chat(user, SPAN_WARNING("There's already an assembly in there."))
-		else if(user.unEquip(W, src))
+		else if(user.try_unequip(W, src))
 			holding = W
 			holding.canremove = 0
 			playsound(loc, 'sound/items/Crowbar.ogg', 50, 1)

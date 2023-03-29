@@ -87,7 +87,7 @@
 		if(beaker)
 			to_chat(user, "<span class='notice'>]The [src] is already loaded.</span>")
 			return TRUE
-		else if(user.unEquip(O, src))
+		else if(user.try_unequip(O, src))
 			beaker = O
 			state = BG_READY
 			updateUsrDialog()
@@ -114,7 +114,7 @@
 
 	else if(!istype(O, /obj/item/chems/food/grown))
 		to_chat(user, "<span class='notice'>You cannot put this in \the [src].</span>")
-	else if(user.unEquip(O, src))
+	else if(user.try_unequip(O, src))
 		ingredients++
 		to_chat(user, "<span class='notice'>You put \the [O] in \the [src]</span>")
 	update_icon()

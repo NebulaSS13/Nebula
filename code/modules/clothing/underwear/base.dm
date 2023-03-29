@@ -76,7 +76,7 @@
 /obj/item/underwear/proc/EquipUnderwear(var/mob/user, var/mob/living/carbon/human/H)
 	if(!CanEquipUnderwear(user, H))
 		return FALSE
-	if(!user.unEquip(src))
+	if(!user.try_unequip(src))
 		return FALSE
 	return ForceEquipUnderwear(H)
 

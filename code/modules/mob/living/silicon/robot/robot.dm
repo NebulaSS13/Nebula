@@ -475,7 +475,7 @@
 		for(var/V in components)
 			var/datum/robot_component/C = components[V]
 			if(!C.installed && C.accepts_component(W))
-				if(!user.unEquip(W))
+				if(!user.try_unequip(W))
 					return
 				C.installed = 1
 				C.wrapped = W
@@ -590,7 +590,7 @@
 			to_chat(user, "There is a power cell already installed.")
 		else if(W.w_class != ITEM_SIZE_NORMAL)
 			to_chat(user, "\The [W] is too [W.w_class < ITEM_SIZE_NORMAL? "small" : "large"] to fit here.")
-		else if(user.unEquip(W, src))
+		else if(user.try_unequip(W, src))
 			cell = W
 			handle_selfinsert(W, user) //Just in case.
 			to_chat(user, "You insert the power cell.")
@@ -645,7 +645,7 @@
 			to_chat(usr, "The upgrade is locked and cannot be used yet!")
 		else
 			if(U.action(src))
-				if(!user.unEquip(U, src))
+				if(!user.try_unequip(U, src))
 					return
 				to_chat(usr, "You apply the upgrade to [src]!")
 				handle_selfinsert(W, user)

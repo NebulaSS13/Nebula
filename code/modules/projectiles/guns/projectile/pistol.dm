@@ -51,7 +51,7 @@
 		if(src in user.get_held_items())	//if we're not in his hands
 			to_chat(user, SPAN_WARNING("You'll need [src] in your hands to do that."))
 			return TRUE
-		if(user.unEquip(I, src))
+		if(user.try_unequip(I, src))
 			to_chat(user, SPAN_NOTICE("You screw [I] onto [src]."))
 			silenced = I	//dodgy?
 			w_class = ITEM_SIZE_NORMAL

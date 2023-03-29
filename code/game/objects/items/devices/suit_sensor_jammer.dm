@@ -10,7 +10,7 @@
 	material = /decl/material/solid/plastic
 	matter = list(
 		/decl/material/solid/metal/copper    = MATTER_AMOUNT_REINFORCEMENT,
-		/decl/material/solid/silicon         = MATTER_AMOUNT_REINFORCEMENT, 
+		/decl/material/solid/silicon         = MATTER_AMOUNT_REINFORCEMENT,
 		/decl/material/solid/metal/steel     = MATTER_AMOUNT_REINFORCEMENT,
 		/decl/material/solid/metal/plutonium = MATTER_AMOUNT_TRACE,
 	)
@@ -63,7 +63,7 @@
 	else if(istype(I, /obj/item/cell))
 		if(bcell)
 			to_chat(user, "<span class='warning'>There's already a cell in \the [src].</span>")
-		else if(user.unEquip(I))
+		else if(user.try_unequip(I))
 			I.forceMove(src)
 			bcell = I
 			to_chat(user, "<span class='notice'>You insert \the [bcell] into \the [src]..</span>")

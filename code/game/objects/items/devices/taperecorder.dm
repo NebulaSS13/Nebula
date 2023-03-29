@@ -53,7 +53,7 @@
 		if(mytape)
 			to_chat(user, "<span class='notice'>There's already a tape inside.</span>")
 			return
-		if(!user.unEquip(I))
+		if(!user.try_unequip(I))
 			return
 		I.forceMove(src)
 		mytape = I
@@ -488,7 +488,7 @@
 	if(max_capacity + other.max_capacity > initial(max_capacity))
 		to_chat(user, "<span class='notice'>You can't fit this much tape in!</span>")
 		return
-	if(user.unEquip(other))
+	if(user.try_unequip(other))
 		to_chat(user, "<span class='notice'>You join ends of the tape together.</span>")
 		max_capacity += other.max_capacity
 		used_capacity = min(used_capacity + other.used_capacity, max_capacity)

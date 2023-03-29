@@ -46,7 +46,7 @@
 			C.imp = imp
 			imp = null
 		C.update_icon()
-	else if(istype(I, /obj/item/implant) && user.unEquip(I, src))
+	else if(istype(I, /obj/item/implant) && user.try_unequip(I, src))
 		imp = I
 	update_icon()
 

@@ -17,7 +17,7 @@
 
 /obj/screen/ascent_nymph_held/Click()
 	var/mob/living/carbon/alien/ascent_nymph/nymph = usr
-	if(istype(nymph) && nymph.holding_item) nymph.unEquip(nymph.holding_item)
+	if(istype(nymph) && nymph.holding_item) nymph.try_unequip(nymph.holding_item)
 
 /obj/screen/ascent_nymph_molt
 	name = "molt"

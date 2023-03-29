@@ -138,7 +138,7 @@
 				SSnano.update_uis(src)
 			return
 		else
-			if (!user.unEquip(O, src))
+			if (!user.try_unequip(O, src))
 				return
 			user.visible_message( \
 				SPAN_NOTICE("\The [user] has added \the [O] to \the [src]."), \

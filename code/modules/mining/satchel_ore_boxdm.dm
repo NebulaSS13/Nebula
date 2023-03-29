@@ -24,7 +24,7 @@
 			to_chat(user, SPAN_NOTICE("You grab a random ore pile from \the [src]."))
 			return TRUE
 	. = ..()
-	
+
 /obj/structure/ore_box/attackby(obj/item/W, mob/user)
 	if (istype(W, /obj/item/stack/material/ore))
 		return insert_ore(W, user)
@@ -71,7 +71,7 @@
 		O = O.split(possible_amount)
 
 	if(user)
-		user.unEquip(O, src)
+		user.try_unequip(O, src)
 		add_fingerprint(user)
 	else
 		O.forceMove(src)
@@ -95,11 +95,11 @@
 		add_fingerprint(user)
 	else
 		O.forceMove(loc)
-	
+
 	LAZYSET(stored_ore, O.name, max(0, LAZYACCESS(stored_ore, O.name) - O.amount))
 	total_ores = max(0, total_ores - O.amount)
 	return O
-	
+
 /obj/structure/ore_box/proc/empty_box(var/mob/user)
 	if(total_ores <= 0)
 		if(user)

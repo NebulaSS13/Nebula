@@ -200,7 +200,7 @@
 				user.visible_message(
 					SPAN_DANGER("\The [user] shoots [G.self] in [pew_loc] with \the [src]!"),
 					SPAN_DANGER("You shoot yourself in [pew_loc] with \the [src]!"))
-				M.unEquip(src)
+				M.try_unequip(src)
 		else
 			handle_click_empty(user)
 		return 0

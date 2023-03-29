@@ -51,7 +51,7 @@
 	return
 
 /obj/item/mech_component/proc/install_component(var/obj/item/thing, var/mob/user)
-	if(user.unEquip(thing, src))
+	if(user.try_unequip(thing, src))
 		user.visible_message(SPAN_NOTICE("\The [user] installs \the [thing] in \the [src]."))
 		return 1
 

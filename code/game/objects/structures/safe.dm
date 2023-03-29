@@ -138,7 +138,7 @@ FLOOR SAFES
 /obj/structure/safe/attackby(obj/item/I, mob/user)
 	if(open)
 		if(I.w_class + space <= maxspace)
-			if(!user.unEquip(I, src))
+			if(!user.try_unequip(I, src))
 				return
 			space += I.w_class
 			to_chat(user, "<span class='notice'>You put [I] in [src].</span>")

@@ -165,7 +165,7 @@
 			to_chat(user, "<span class='notice'>There is already a beaker loaded.</span>")
 			return
 
-		if(!user.unEquip(O, src))
+		if(!user.try_unequip(O, src))
 			return
 		reagent_glass = O
 		to_chat(user, "<span class='notice'>You insert [O].</span>")

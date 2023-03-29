@@ -124,7 +124,7 @@
 			if(cell)
 				to_chat(user, "There is a [cell] already installed here.")
 			else
-				if(!user.unEquip(W, src))
+				if(!user.try_unequip(W, src))
 					return
 				cell = W
 				to_chat(user, "You insert the [cell].")

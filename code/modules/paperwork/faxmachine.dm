@@ -291,7 +291,7 @@ var/global/list/adminfaxes     = list()	//cache for faxes that have been sent to
 		else
 			disk_reader.insert_item(D, user)
 		return TOPIC_REFRESH
-		
+
 	if(href_list["eject_disk"])
 		eject_disk(user)
 		return TOPIC_REFRESH
@@ -339,7 +339,7 @@ var/global/list/adminfaxes     = list()	//cache for faxes that have been sent to
 		if(user)
 			to_chat(user, SPAN_WARNING("There is no disk drive!"))
 		return
-	else if(!D)	
+	else if(!D)
 		if(user)
 			to_chat(user, SPAN_WARNING("There is no disk in \the [disk_reader]!"))
 		return
@@ -350,10 +350,10 @@ var/global/list/adminfaxes     = list()	//cache for faxes that have been sent to
 		if(user)
 			to_chat(user, SPAN_WARNING("\The [src] already has something being scanned!"))
 		return FALSE
-	
+
 	if(user)
 		to_chat(user, SPAN_NOTICE("You place \the [I] into \the [src]'s scanner."))
-		if(!user.unEquip(I, src))
+		if(!user.try_unequip(I, src))
 			return FALSE
 	else
 		I.dropInto(src)
@@ -365,12 +365,12 @@ var/global/list/adminfaxes     = list()	//cache for faxes that have been sent to
 	if(QDELETED(scanner_item))
 		if(user)
 			to_chat(user, SPAN_WARNING("There's nothing to eject from \the [src]."))
-		return FALSE 
-	
+		return FALSE
+
 	if(user)
 		to_chat(user, SPAN_NOTICE("You eject \the [scanner_item] from \the [src]."))
 		user.put_in_hands(scanner_item)
-	else 
+	else
 		scanner_item.dropInto(get_turf(src))
 	scanner_item = null
 	update_ui()
@@ -380,7 +380,7 @@ var/global/list/adminfaxes     = list()	//cache for faxes that have been sent to
 	if(card_reader.should_swipe) //We don't support swiping
 		if(user)
 			to_chat(user, SPAN_WARNING("\The [card_reader] is currently set to swipe mode, which is unsupported by this machine. Please contact your system administrator."))
-		return 
+		return
 	if(user)
 		to_chat(user, SPAN_NOTICE("Loading \the '[C]'..."))
 	update_ui()
@@ -436,7 +436,7 @@ var/global/list/adminfaxes     = list()	//cache for faxes that have been sent to
 	if(!origin_network)
 		to_chat(user, SPAN_WARNING("No network connection!"))
 		return FALSE
-	
+
 	if(!length(target_net_id))
 		target_net_id = origin_network.network_id //Use the current network if none specified
 
@@ -477,7 +477,7 @@ var/global/list/adminfaxes     = list()	//cache for faxes that have been sent to
 		target_net = origin_network.get_internet_connection(target_net_id)
 	else
 		target_net = origin_network
-	
+
 	if(!target_net)
 		to_chat(user, SPAN_WARNING("No such network '[target_net_id]'!"))
 		return FALSE
@@ -560,14 +560,14 @@ var/global/list/adminfaxes     = list()	//cache for faxes that have been sent to
 		return FALSE
 	if((network_id != sender_net.network_id) && !sender.has_internet_connection(network_id))
 		return FALSE
-	
+
 	//Handle fake admin network addresses
 	var/target_uri = uppertext("[network_tag].[network_id]")
 	if(target_uri in global.using_map.map_admin_faxes)
 		var/list/admin_faxes    = LAZYACCESS(global.using_map.map_admin_faxes, target_uri)
 		var/list/required_access = LAZYACCESS(admin_faxes, "access")
 		return has_access(required_access, provided_access) //With access we can send faxes to the selected admin address
-	
+
 	var/datum/computer_network/target_net
 	if(network_id != sender_net.network_id)
 		target_net = sender_net?.get_internet_connection(network_id)

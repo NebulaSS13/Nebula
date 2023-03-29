@@ -1,4 +1,4 @@
-#define PRINTER_LOW_TONER_THRESHOLD 10 //Below this threshold we consider the toner to be low, and print lighter tones. 
+#define PRINTER_LOW_TONER_THRESHOLD 10 //Below this threshold we consider the toner to be low, and print lighter tones.
 
 ////////////////////////////////////////////////////////////////////////////////////////
 // Printer Component
@@ -15,7 +15,7 @@
 		/decl/material/solid/metal/steel  = MATTER_AMOUNT_SECONDARY,
 		/decl/material/solid/fiberglass   = MATTER_AMOUNT_REINFORCEMENT,
 		/decl/material/solid/metal/copper = MATTER_AMOUNT_REINFORCEMENT,
-	) 
+	)
 	base_type  = /obj/item/stock_parts/printer
 	max_health = ITEM_HEALTH_NO_DAMAGE
 	part_flags = PART_FLAG_QDEL
@@ -68,7 +68,7 @@
 	else if((istype(W, /obj/item/paper) || istype(W, /obj/item/paper_bundle)))
 		if(paper_left >= paper_max)
 			to_chat(user, SPAN_WARNING("There is no more room for paper in \the [src]!"))
-		else 
+		else
 			return insert_paper(W, user)
 	. = ..()
 
@@ -146,7 +146,7 @@
 			to_chat(user, SPAN_WARNING("There's already a cartridge in \the [src]."))
 		return
 
-	if(!user.unEquip(T, src))
+	if(!user.try_unequip(T, src))
 		return
 	toner = T
 	if(user)
@@ -185,7 +185,7 @@
 			if(user)
 				to_chat(user, SPAN_WARNING("\The [P] isn't blank!"))
 			return
-		if(!user?.unEquip(paper_refill))
+		if(!user?.try_unequip(paper_refill))
 			return
 		if(user)
 			to_chat(user, SPAN_NOTICE("You insert \a [paper_refill] in \the [src]."))
@@ -204,7 +204,7 @@
 		if(user)
 			to_chat(user, SPAN_NOTICE("You insert \a [paper_refill] in \the [src]."))
 		if(to_insert >= amt_papers)
-			if(user.unEquip(B))
+			if(user.try_unequip(B))
 				qdel(B)
 			else
 				return
@@ -292,7 +292,7 @@
 
 	//#TODO: machinery should allow a component to trigger and wait for an animation sequence. So that we can drop out the paper in sync.
 	queued_element.dropInto(get_turf(loc))
-	playsound(loc, "sound/machines/dotprinter.ogg", 50, TRUE) 
+	playsound(loc, "sound/machines/dotprinter.ogg", 50, TRUE)
 	return TRUE
 
 /obj/item/stock_parts/printer/proc/print_picture(var/obj/item/photo/P)

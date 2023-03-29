@@ -245,7 +245,7 @@
 		if(open)
 			if(cell)
 				to_chat(user, "<span class ='warning'>There is a power cell already installed.</span>")
-			else if(user.unEquip(W, src))
+			else if(user.try_unequip(W, src))
 				cell = W
 				to_chat(user, "<span class = 'notice'>You insert \the [cell].</span>")
 

@@ -44,7 +44,7 @@
 		if(istype(over, /obj/screen/inventory) && loc == user)
 			var/obj/screen/inventory/inv = over
 			add_fingerprint(usr)
-			if(user.unEquip(src))
+			if(user.try_unequip(src))
 				user.equip_to_slot_if_possible(src, inv.slot_id)
 				return TRUE
 	. = ..()
@@ -176,7 +176,7 @@
 		return 0
 	if(istype(W.loc, /mob))
 		var/mob/M = W.loc
-		if(!M.unEquip(W))
+		if(!M.try_unequip(W))
 			return
 	W.forceMove(src)
 	W.on_enter_storage(src)
@@ -269,7 +269,7 @@
 		for(var/slot in global.pocket_slots)
 			var/obj/item/pocket = H.get_equipped_item(slot)
 			if(pocket == src && !H.get_active_hand()) //Prevents opening if it's in a pocket.
-				H.unEquip(src)
+				H.try_unequip(src)
 				H.put_in_hands(src)
 				return
 

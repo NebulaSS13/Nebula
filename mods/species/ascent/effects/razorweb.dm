@@ -83,7 +83,7 @@
 		visible_message(SPAN_DANGER("\The [user] breaks \the [src] with \the [thing]!"))
 		destroy_self = TRUE
 
-	if(prob(15) && user.unEquip(thing))
+	if(prob(15) && user.try_unequip(thing))
 		visible_message(SPAN_DANGER("\The [thing] is sliced apart!"))
 		qdel(thing)
 

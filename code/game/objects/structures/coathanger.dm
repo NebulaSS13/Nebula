@@ -71,7 +71,7 @@
 	if(length(contents) >= max_items)
 		to_chat(user, SPAN_NOTICE("There is no room on \the [src] to hang \the [W]."))
 		return TRUE
-	if(user.unEquip(W, src))
+	if(user.try_unequip(W, src))
 		user.visible_message( \
 			SPAN_NOTICE("\The [user] hangs \the [W] on \the [src]."), \
 			SPAN_NOTICE("You hang \the [W] on the \the [src].") \

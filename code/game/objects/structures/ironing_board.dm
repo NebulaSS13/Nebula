@@ -74,7 +74,7 @@
 			to_chat(user, "<span class='notice'>[buckled_mob] is already on the ironing table!</span>")
 			return
 
-		if(user.unEquip(I, src))
+		if(user.try_unequip(I, src))
 			cloth = I
 			events_repository.register(/decl/observ/destroyed, I, src, /obj/structure/bed/roller/ironingboard/proc/remove_item)
 			update_icon()
@@ -99,7 +99,7 @@
 			return
 
 		if(!cloth)
-			if(!holding && !R.enabled && user.unEquip(I, src))
+			if(!holding && !R.enabled && user.try_unequip(I, src))
 				holding = R
 				events_repository.register(/decl/observ/destroyed, I, src, /obj/structure/bed/roller/ironingboard/proc/remove_item)
 				update_icon()

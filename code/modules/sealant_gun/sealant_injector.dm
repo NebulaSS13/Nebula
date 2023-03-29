@@ -24,7 +24,7 @@
 	..()
 	if(loaded_tank)
 		add_overlay("tank")
-	if(length(cartridges))	
+	if(length(cartridges))
 		add_overlay("carts[length(cartridges)]")
 
 /obj/structure/sealant_injector/Initialize(ml, _mat, _reinf_mat)
@@ -36,12 +36,12 @@
 	)
 
 /obj/structure/sealant_injector/attackby(obj/item/O, mob/user)
-	
+
 	if(istype(O, /obj/item/sealant_tank))
 		if(loaded_tank)
 			to_chat(user, SPAN_WARNING("\The [src] already has a sealant tank inserted."))
 			return TRUE
-		if(user.unEquip(O, src))
+		if(user.try_unequip(O, src))
 			loaded_tank = O
 			update_icon()
 			return TRUE
@@ -50,7 +50,7 @@
 		if(length(cartridges) >= max_cartridges)
 			to_chat(user, SPAN_WARNING("\The [src] is loaded to capacity with cartridges."))
 			return TRUE
-		if(user.unEquip(O, src))
+		if(user.try_unequip(O, src))
 			LAZYSET(cartridges, O, 1)
 			update_icon()
 			return TRUE
@@ -77,7 +77,7 @@
 		cart.reagents.trans_to_holder(loaded_tank.reagents, min(cart.reagents.total_volume, cartridges[cart] * fill_space))
 	if(injected)
 		playsound(loc, 'sound/effects/refill.ogg', 50, 1)
-	
+
 /obj/structure/sealant_injector/attack_hand(mob/user)
 
 	if(loaded_tank)

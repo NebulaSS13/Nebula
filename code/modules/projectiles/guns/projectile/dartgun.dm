@@ -75,7 +75,7 @@
 	if(beakers.len >= max_beakers)
 		to_chat(user, "<span class='warning'>[src] already has [max_beakers] beakers in it - another one isn't going to fit!</span>")
 		return
-	if(!user.unEquip(B, src))
+	if(!user.try_unequip(B, src))
 		return
 	beakers |= B
 	user.visible_message("\The [user] inserts \a [B] into [src].", "<span class='notice'>You slot [B] into [src].</span>")

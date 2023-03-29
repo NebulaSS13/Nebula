@@ -200,7 +200,7 @@
 	. = ..()
 
 	// Finally we can put the object onto the table.
-	if(!. && !isrobot(user) && W.loc == user && user.unEquip(W, src.loc))
+	if(!. && !isrobot(user) && W.loc == user && user.try_unequip(W, src.loc))
 		auto_align(W, click_params)
 		return TRUE
 
@@ -460,7 +460,7 @@
 
 /obj/structure/table/receive_mouse_drop(atom/dropping, mob/user)
 	. = ..()
-	if(!. && !isrobot(user) && isitem(dropping) && user.get_active_hand() == dropping && user.unEquip(dropping))
+	if(!. && !isrobot(user) && isitem(dropping) && user.get_active_hand() == dropping && user.try_unequip(dropping))
 		var/obj/item/I = dropping
 		I.dropInto(get_turf(src))
 		return TRUE

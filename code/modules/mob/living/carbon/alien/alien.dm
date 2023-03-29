@@ -26,7 +26,7 @@
 	gender = NEUTER
 	. = ..()
 
-/mob/living/carbon/alien/u_equip(obj/item/W)
+/mob/living/carbon/alien/unequip(obj/item/W)
 	SHOULD_CALL_PARENT(FALSE)
 	return FALSE
 

@@ -209,7 +209,7 @@
 
 		if(do_after(user, 40,src))
 			if(!src) return
-			if(!user.unEquip(W, src))
+			if(!user.try_unequip(W, src))
 				return
 			to_chat(user, "<span class='notice'>You installed the airlock electronics!</span>")
 			src.state = 2

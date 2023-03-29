@@ -52,9 +52,9 @@
 		if(user)
 			to_chat(user, SPAN_WARNING("There is already \a [get_inserted()] in \the [src]."))
 		return FALSE
-	
+
 	if(user)
-		if(user.unEquip(O, src))
+		if(user.try_unequip(O, src))
 			to_chat(user, SPAN_NOTICE("You insert \the [O] into \the [src]."))
 		else
 			return FALSE
@@ -73,7 +73,7 @@
 		if(user)
 			to_chat(user, SPAN_WARNING("There's no [get_description_insertable()] in \the [src]."))
 		return
-	
+
 	var/obj/O = get_inserted()
 	if(user)
 		user.put_in_hands(O)

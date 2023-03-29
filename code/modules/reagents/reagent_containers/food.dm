@@ -168,7 +168,7 @@
 		if (hide_item)
 			if (W.w_class >= src.w_class || is_robot_module(W) || istype(W,/obj/item/chems/condiment))
 				return
-			if(!user.unEquip(W, src))
+			if(!user.try_unequip(W, src))
 				return
 
 			to_chat(user, "<span class='warning'>You slip \the [W] inside \the [src].</span>")

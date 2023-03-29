@@ -186,7 +186,7 @@ var/global/list/hygiene_props = list()
 		if(w_items + I.w_class > ITEM_SIZE_HUGE)
 			to_chat(user, SPAN_WARNING("The cistern is full."))
 			return
-		if(!user.unEquip(I, src))
+		if(!user.try_unequip(I, src))
 			return
 		w_items += I.w_class
 		to_chat(user, SPAN_NOTICE("You carefully place \the [I] into the cistern."))
@@ -481,7 +481,7 @@ var/global/list/hygiene_props = list()
 	if (!do_after(user, 3 SECONDS, src))
 		to_chat(user, SPAN_WARNING("You must stay still to clog \the [src]."))
 		return
-	if (clogged || QDELETED(I) || !user.unEquip(I))
+	if (clogged || QDELETED(I) || !user.try_unequip(I))
 		return
 	to_chat(user, SPAN_NOTICE("You unceremoniously jam \the [src] with \the [I]. What a rebel."))
 	clog(1)

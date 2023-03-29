@@ -227,7 +227,7 @@
 		return
 	if(!istype(C))
 		return
-	if(!H.unEquip(C, src))
+	if(!H.try_unequip(C, src))
 		return
 	cell = C
 	powercheck()

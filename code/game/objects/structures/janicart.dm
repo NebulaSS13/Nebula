@@ -26,7 +26,7 @@
 
 /obj/structure/janitorialcart/attackby(obj/item/I, mob/user)
 	if(istype(I, /obj/item/storage/bag/trash) && !mybag)
-		if(!user.unEquip(I, src))
+		if(!user.try_unequip(I, src))
 			return
 		mybag = I
 		update_icon()
@@ -43,7 +43,7 @@
 				playsound(loc, 'sound/effects/slosh.ogg', 25, 1)
 				return
 		if(!mymop)
-			if(!user.unEquip(I, src))
+			if(!user.try_unequip(I, src))
 				return
 			mymop = I
 			update_icon()
@@ -51,7 +51,7 @@
 			to_chat(user, "<span class='notice'>You put [I] into [src].</span>")
 
 	else if(istype(I, /obj/item/chems/spray) && !myspray)
-		if(!user.unEquip(I, src))
+		if(!user.try_unequip(I, src))
 			return
 		myspray = I
 		update_icon()
@@ -59,7 +59,7 @@
 		to_chat(user, "<span class='notice'>You put [I] into [src].</span>")
 
 	else if(istype(I, /obj/item/lightreplacer) && !myreplacer)
-		if(!user.unEquip(I, src))
+		if(!user.try_unequip(I, src))
 			return
 		myreplacer = I
 		update_icon()
@@ -68,7 +68,7 @@
 
 	else if(istype(I, /obj/item/caution))
 		if(signs < 4)
-			if(!user.unEquip(I, src))
+			if(!user.try_unequip(I, src))
 				return
 			signs++
 			update_icon()
@@ -220,7 +220,7 @@
 		return TRUE
 
 	if(istype(I, /obj/item/storage/bag/trash))
-		if(!user.unEquip(I, src))
+		if(!user.try_unequip(I, src))
 			return
 		to_chat(user, SPAN_NOTICE("You hook \the [I] onto the [callme]."))
 		mybag = I

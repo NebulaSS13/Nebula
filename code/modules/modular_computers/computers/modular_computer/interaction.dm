@@ -90,7 +90,7 @@
 		if(istype(stored_pen))
 			to_chat(user, "<span class='notice'>There is already a pen in [src].</span>")
 			return
-		if(!user.unEquip(W, src))
+		if(!user.try_unequip(W, src))
 			return
 		stored_pen = W
 		update_verbs()

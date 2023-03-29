@@ -29,7 +29,7 @@
 
 /obj/structure/filing_cabinet/attackby(obj/item/P, mob/user)
 	if(is_type_in_list(P, can_hold))
-		if(!user.unEquip(P, src))
+		if(!user.try_unequip(P, src))
 			return
 		add_fingerprint(user)
 		to_chat(user, SPAN_NOTICE("You put [P] in [src]."))

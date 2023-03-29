@@ -404,7 +404,7 @@
 		to_chat(user, "It does not have a drill head installed.")
 
 /obj/item/mech_equipment/drill/proc/attach_head(obj/item/drill_head/DH, mob/user)
-	if (user && !user.unEquip(DH))
+	if (user && !user.try_unequip(DH))
 		return
 	if (drill_head)
 		visible_message(SPAN_NOTICE("\The [user] detaches \the [drill_head] mounted on \the [src]."))

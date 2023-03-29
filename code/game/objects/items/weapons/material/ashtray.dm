@@ -42,7 +42,7 @@
 		else
 			visible_message(SPAN_NOTICE("\The [user] places \the [W] in \the [src]."))
 
-		if(user.unEquip(W, src))
+		if(user.try_unequip(W, src))
 			set_extension(src, /datum/extension/scent/ashtray)
 			update_icon()
 	return ..()

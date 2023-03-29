@@ -196,7 +196,7 @@
 			return TRUE
 		machine.set_broken(TRUE, MACHINE_BROKEN_CONSTRUCT)
 		TRANSFER_STATE(diconnected_state)
-		user.unEquip(board, machine)
+		user.try_unequip(board, machine)
 		machine.install_component(board)
 		user.visible_message(SPAN_NOTICE("\The [user] inserts \the [board] into \the [machine]!"), SPAN_NOTICE("You insert \the [board] into \the [machine]!"))
 		machine.queue_icon_update()

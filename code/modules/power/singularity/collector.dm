@@ -97,7 +97,7 @@ var/global/list/rad_collectors = list()
 		if(src.loaded_tank)
 			to_chat(user, "<span class='warning'>There's already a tank loaded.</span>")
 			return 1
-		if(!user.unEquip(W, src))
+		if(!user.try_unequip(W, src))
 			return
 		src.loaded_tank = W
 		update_icon()

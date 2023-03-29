@@ -61,7 +61,7 @@
 			if(H.canUnEquip(HAT))
 				visible_message(SPAN_MFAUNA("\The [src] rips \the [H]'s [HAT] off!"))
 				cooldown_ability(ability_cooldown)
-				H.unEquip(HAT, get_turf(src))
+				H.try_unequip(HAT, get_turf(src))
 
 /mob/living/simple_animal/hostile/retaliate/parrot/space/can_perform_ability(mob/living/carbon/human/H)
 	. = ..()

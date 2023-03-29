@@ -36,7 +36,7 @@
 
 /obj/item/folder/attackby(obj/item/W, mob/user)
 	if(istype(W, /obj/item/paper) || istype(W, /obj/item/photo) || istype(W, /obj/item/paper_bundle))
-		if(!user.unEquip(W, src))
+		if(!user.try_unequip(W, src))
 			return
 		to_chat(user, SPAN_NOTICE("You put the [W] into \the [src]."))
 		updateUsrDialog()

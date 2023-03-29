@@ -45,7 +45,7 @@
 		if(beaker)
 			to_chat(user, SPAN_WARNING("A beaker is already loaded into the machine."))
 			return
-		if(!user.unEquip(B, src))
+		if(!user.try_unequip(B, src))
 			return
 		beaker = B
 		to_chat(user, SPAN_NOTICE("You add the beaker to the machine!"))
@@ -62,7 +62,7 @@
 		if(loaded_pill_bottle)
 			to_chat(user, SPAN_WARNING("A pill bottle is already loaded into the machine."))
 			return
-		if(!user.unEquip(B, src))
+		if(!user.try_unequip(B, src))
 			return
 		loaded_pill_bottle = B
 		to_chat(user, SPAN_NOTICE("You add the pill bottle into the dispenser slot!"))

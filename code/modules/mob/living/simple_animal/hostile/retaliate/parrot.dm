@@ -186,7 +186,7 @@
 						if( !istype(item_to_add,  /obj/item/radio/headset) )
 							to_chat(user, "<span class='warning'>This object won't fit.</span>")
 							return TOPIC_HANDLED
-						if(!user.unEquip(item_to_add, src))
+						if(!user.try_unequip(item_to_add, src))
 							return TOPIC_HANDLED
 						var/obj/item/radio/headset/headset_to_add = item_to_add
 
@@ -582,7 +582,7 @@
 			if(can_pick_up(thing))
 				stolen_item = thing
 				break
-		if(stolen_item && C.unEquip(stolen_item, src))
+		if(stolen_item && C.try_unequip(stolen_item, src))
 			held_item = stolen_item
 			visible_message("[src] grabs the [held_item] out of [C]'s hand!", "<span class='warning'>You snag the [held_item] out of [C]'s hand!</span>", "You hear the sounds of wings flapping furiously.")
 			return held_item

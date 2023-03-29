@@ -121,7 +121,7 @@ var/global/list/laser_wavelengths
 	if(istype(W, /obj/item/cell))
 		if(power_supply)
 			to_chat(user, SPAN_WARNING("\The [src] already has a cell installed."))
-		else if(user.unEquip(W, src))
+		else if(user.try_unequip(W, src))
 			power_supply = W
 			to_chat(user, SPAN_NOTICE("You fit \the [W] into \the [src]."))
 			update_icon()
@@ -130,7 +130,7 @@ var/global/list/laser_wavelengths
 	if(istype(W, /obj/item/stock_parts/capacitor))
 		if(length(capacitors) >= max_capacitors)
 			to_chat(user, SPAN_WARNING("\The [src] cannot fit any additional capacitors."))
-		else if(user.unEquip(W, src))
+		else if(user.try_unequip(W, src))
 			LAZYADD(capacitors, W)
 			to_chat(user, SPAN_NOTICE("You fit \the [W] into \the [src]."))
 			update_icon()

@@ -136,7 +136,7 @@
 	return ..()
 
 /obj/item/stack/tape_roll/duct_tape/proc/stick(var/obj/item/W, mob/user)
-	if(!(W.item_flags & ITEM_FLAG_CAN_TAPE) || !user.unEquip(W))
+	if(!(W.item_flags & ITEM_FLAG_CAN_TAPE) || !user.try_unequip(W))
 		return
 	if(!can_use(1))
 		return
@@ -220,7 +220,7 @@
 	user.put_in_hands(stuck)
 	stuck = null
 	crumpled = TRUE
-	user.unEquip(src, get_turf(user))
+	user.try_unequip(src, get_turf(user))
 
 /obj/item/duct_tape/afterattack(atom/target, mob/user, proximity_flag, click_parameters)
 
@@ -237,7 +237,7 @@
 			to_chat(user, "You cannot reach that from here.")// can only place stuck papers in cardinal directions, to
 			return											// reduce papers around corners issue.
 
-	if(!user.unEquip(src, source_turf))
+	if(!user.try_unequip(src, source_turf))
 		return
 	playsound(src, 'sound/effects/tape.ogg',25)
 

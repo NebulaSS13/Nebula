@@ -3,7 +3,7 @@
 //Bottles now weaken and break when smashed on people's heads. - Giacom
 
 //#TODO: Maybe merge this with /obj/item/glass/bottle?
-/obj/item/chems/drinks/bottle 
+/obj/item/chems/drinks/bottle
 	amount_per_transfer_from_this = 10
 	volume = 100
 	item_state = "broken_beer" //Generic held-item sprite until unique ones are made.
@@ -114,7 +114,7 @@
 /obj/item/chems/drinks/bottle/proc/insert_rag(obj/item/chems/glass/rag/R, mob/user)
 	if(!isGlass || rag) return
 
-	if(user.unEquip(R))
+	if(user.try_unequip(R))
 		to_chat(user, SPAN_NOTICE("You stuff [R] into [src]."))
 		rag = R
 		rag.forceMove(src)

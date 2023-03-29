@@ -299,7 +299,7 @@
 		if(encryption_keys.len >= max_keys)
 			to_chat(user, "The headset can't hold another key!")
 			return
-		if(user.unEquip(W, target = src))
+		if(user.try_unequip(W, target = src))
 			to_chat(user, "<span class='notice'>You put \the [W] into \the [src].</span>")
 			encryption_keys += W
 			recalculateChannels(1)

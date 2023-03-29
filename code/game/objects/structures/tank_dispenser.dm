@@ -89,7 +89,7 @@
 			to_chat(user, SPAN_WARNING("\The [src] is full."))
 			UNSETEMPTY(adding_to_list)
 			return TRUE
-		if(!user.unEquip(I, src))
+		if(!user.try_unequip(I, src))
 			return TRUE
 		LAZYADD(adding_to_list, weakref(I))
 		to_chat(user, SPAN_NOTICE("You put [I] in [src]."))

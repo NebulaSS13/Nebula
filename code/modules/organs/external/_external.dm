@@ -219,7 +219,7 @@
 
 			var/mob/M = loc
 			if(istype(M))
-				M.unEquip(src, E)
+				M.try_unequip(src, E)
 			else
 				dropInto(loc)
 				forceMove(E)
@@ -240,7 +240,7 @@
 				to_chat(usr, SPAN_WARNING("You cannot connect additional limbs to \the [src]."))
 				return
 
-			if(!user.unEquip(E, src))
+			if(!user.try_unequip(E, src))
 				return
 
 			if(istype(E.owner))
@@ -1109,7 +1109,7 @@ Note that amputating the affected organ does in fact remove the infection from t
 		holder.visible_message(\
 			"\The [cuffs] falls off of [holder.name].",\
 			"\The [cuffs] falls off you.")
-		holder.unEquip(cuffs)
+		holder.try_unequip(cuffs)
 
 // checks if all wounds on the organ are bandaged
 /obj/item/organ/external/proc/is_bandaged()

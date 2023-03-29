@@ -45,7 +45,7 @@ Buildable meters
 /obj/item/pipe/afterattack(turf/simulated/floor/target, mob/user, proximity)
 	if(!proximity) return
 	if(istype(target))
-		user.unEquip(src, target)
+		user.try_unequip(src, target)
 	else
 		return ..()
 

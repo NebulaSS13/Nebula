@@ -95,7 +95,7 @@ var/global/list/all_conveyor_switches = list()
 		to_chat(user, "<span class='notice'>You remove the conveyor belt.</span>")
 		qdel(src)
 		return
-	user.unEquip(I, get_turf(src))
+	user.try_unequip(I, get_turf(src))
 
 // make the conveyor broken
 // also propagate inoperability to any connected conveyor with the same id_tag
@@ -143,7 +143,7 @@ var/global/list/all_conveyor_switches = list()
 	if(!id_tag)
 		id_tag = newid
 	update_icon()
-	. = INITIALIZE_HINT_LATELOAD 
+	. = INITIALIZE_HINT_LATELOAD
 
 /obj/machinery/conveyor_switch/LateInitialize()
 	. = ..()
@@ -155,7 +155,7 @@ var/global/list/all_conveyor_switches = list()
 /obj/machinery/conveyor_switch/Destroy()
 	global.all_conveyor_switches -= src
 	. = ..()
-	
+
 // update the icon depending on the position
 
 /obj/machinery/conveyor_switch/on_update_icon()

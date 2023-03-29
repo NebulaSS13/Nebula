@@ -83,7 +83,7 @@
 
 /obj/item/baton/attackby(obj/item/W, mob/user)
 	if(istype(W, /obj/item/cell/device))
-		if(!bcell && user.unEquip(W))
+		if(!bcell && user.try_unequip(W))
 			W.forceMove(src)
 			bcell = W
 			to_chat(user, "<span class='notice'>You install a cell into the [src].</span>")

@@ -63,7 +63,7 @@
 
 /mob/living/carbon/alien/ascent_nymph/death(gibbed)
 	if(holding_item)
-		unEquip(holding_item)
+		try_unequip(holding_item)
 
 	return ..(gibbed,death_msg)
 

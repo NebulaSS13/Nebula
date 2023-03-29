@@ -20,7 +20,7 @@
 /obj/item/storage/box/botanydisk
 	name = "flora disk box"
 	desc = "A box of flora data disks, apparently."
-	
+
 /obj/item/storage/box/botanydisk/WillContain()
 	return list(/obj/item/disk/botany = 14)
 
@@ -74,7 +74,7 @@
 		var/obj/item/seeds/S =W
 		if(S.seed && S.seed.get_trait(TRAIT_IMMUTABLE) > 0)
 			to_chat(user, "That seed is not compatible with our genetics technology.")
-		else if(user.unEquip(W, src))
+		else if(user.try_unequip(W, src))
 			seed = W
 			to_chat(user, "You load [W] into [src].")
 		return
@@ -104,7 +104,7 @@
 				if(disk_needs_genes)
 					to_chat(user, "That disk does not have any gene data loaded.")
 					return
-			if(!user.unEquip(W, src))
+			if(!user.try_unequip(W, src))
 				return
 			loaded_disk = W
 			to_chat(user, "You load [W] into [src].")
@@ -235,7 +235,7 @@
 		degradation += rand(20,60) + user.skill_fail_chance(SKILL_BOTANY, 100, SKILL_ADEPT)
 		var/expertise = max(0, user.get_skill_value(SKILL_BOTANY) - SKILL_ADEPT)
 		degradation = max(0, degradation - 10*expertise)
-	
+
 		if(degradation >= 100)
 			failed_task = 1
 			genetics = null

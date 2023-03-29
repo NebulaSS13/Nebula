@@ -26,7 +26,7 @@
 /obj/item/gun/launcher/rocket/attackby(obj/item/I, mob/user)
 	if(istype(I, /obj/item/ammo_casing/rocket))
 		if(rockets.len < max_rockets)
-			if(!user.unEquip(I, src))
+			if(!user.try_unequip(I, src))
 				return
 			rockets += I
 			to_chat(user, "<span class='notice'>You put the rocket in [src].</span>")

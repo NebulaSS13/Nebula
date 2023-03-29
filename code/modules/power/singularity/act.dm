@@ -18,7 +18,7 @@
 /mob/living/carbon/human/singularity_pull(S, current_size)
 	if(current_size >= STAGE_THREE)
 		for(var/obj/item/hand in get_held_items())
-			if(prob(current_size*5) && hand.w_class >= ((11-current_size)/2) && unEquip(hand))
+			if(prob(current_size*5) && hand.w_class >= ((11-current_size)/2) && try_unequip(hand))
 				step_towards(hand, S)
 				to_chat(src, "<span class = 'warning'>\The [S] pulls \the [hand] from your grip!</span>")
 		var/obj/item/shoes = get_equipped_item(slot_shoes_str)

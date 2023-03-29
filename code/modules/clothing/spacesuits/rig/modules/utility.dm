@@ -402,7 +402,7 @@
 		if(jets)
 			to_chat(user, SPAN_WARNING("There's already a propellant tank inside of \the [src]!"))
 			return
-		if(user.unEquip(W))
+		if(user.try_unequip(W))
 			to_chat(user, SPAN_NOTICE("You insert \the [W] into [src]."))
 			W.forceMove(src)
 			jets = W

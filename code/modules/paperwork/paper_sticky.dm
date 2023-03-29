@@ -137,7 +137,7 @@
 			to_chat(user, SPAN_WARNING("You cannot reach that from here."))
 			return
 
-	if(user.unEquip(src, source_turf))
+	if(user.try_unequip(src, source_turf))
 		SSpersistence.track_value(src, /decl/persistence_handler/paper/sticky)
 		if(params)
 			var/list/mouse_control = params2list(params)

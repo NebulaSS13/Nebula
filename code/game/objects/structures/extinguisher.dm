@@ -18,7 +18,7 @@
 	if(isrobot(user))
 		return
 	if(istype(O, /obj/item/chems/spray/extinguisher))
-		if(!has_extinguisher && opened && user.unEquip(O, src))
+		if(!has_extinguisher && opened && user.try_unequip(O, src))
 			has_extinguisher = O
 			to_chat(user, "<span class='notice'>You place [O] in [src].</span>")
 			playsound(src.loc, 'sound/effects/extin.ogg', 50, 0)

@@ -38,7 +38,7 @@
 			"You hear the slow creaking of a spring."
 			)
 
-		if (do_after(user, 60, src) && user.unEquip(src))
+		if (do_after(user, 60, src) && user.try_unequip(src))
 			user.visible_message(
 				"<span class='danger'>\The [user] has deployed \the [src].</span>",
 				"<span class='danger'>You have deployed \the [src]!</span>",

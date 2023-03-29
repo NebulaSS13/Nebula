@@ -118,7 +118,7 @@
 		return drop_from_inventory(inv_slot.holding, Target)
 	. = ..()
 
-/mob/living/u_equip(obj/W)
+/mob/living/unequip(obj/W)
 	. = ..()
 	if(!.)
 		for(var/hand_slot in held_item_slots)

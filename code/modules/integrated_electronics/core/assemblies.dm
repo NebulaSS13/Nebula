@@ -347,7 +347,7 @@
 		to_chat(user, "<span class='warning'>You can't seem to add the '[IC]', since the case doesn't support the circuit type.</span>")
 		return FALSE
 
-	if(!user.unEquip(IC,src))
+	if(!user.try_unequip(IC,src))
 		return FALSE
 
 	to_chat(user, "<span class='notice'>You slide [IC] inside [src].</span>")
@@ -437,7 +437,7 @@
 				S.attackby_react(I,user,user.a_intent)
 			return ..()
 		var/obj/item/cell/cell = I
-		if(user.unEquip(I,loc))
+		if(user.try_unequip(I,loc))
 			user.drop_from_inventory(I, loc)
 			cell.forceMove(src)
 			battery = cell
@@ -720,7 +720,7 @@
 	user.visible_message("[user.name] attaches [src] to the wall.",
 		"<span class='notice'>You attach [src] to the wall.</span>",
 		"<span class='italics'>You hear clicking.</span>")
-	if(user.unEquip(src,T))
+	if(user.try_unequip(src,T))
 		var/matrix/M = matrix()
 		switch(ndir)
 			if(NORTH)

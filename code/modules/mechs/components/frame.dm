@@ -303,7 +303,7 @@
 		visible_message(SPAN_NOTICE("\The [user] begins installing \the [thing] into \the [src]."))
 		if(!user.canUnEquip(thing) || !do_after(user, 30 * user.skill_delay_mult(SKILL_DEVICES)) || user.get_active_hand() != thing)
 			return
-		if(!user.unEquip(thing))
+		if(!user.try_unequip(thing))
 			return
 	thing.forceMove(src)
 	visible_message(SPAN_NOTICE("\The [user] installs \the [thing] into \the [src]."))

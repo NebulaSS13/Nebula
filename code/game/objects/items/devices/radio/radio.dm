@@ -582,7 +582,7 @@
 				user.show_message("<span class='notice'>\The [src] can no longer be modified or attached!</span>")
 			updateDialog()
 			return
-	if(!cell && power_usage && istype(W, /obj/item/cell/device) && user.unEquip(W, target = src))
+	if(!cell && power_usage && istype(W, /obj/item/cell/device) && user.try_unequip(W, target = src))
 		to_chat(user, "<span class='notice'>You put [W] in \the [src].</span>")
 		cell = W
 		return
@@ -674,7 +674,7 @@
 			return
 
 		if(!keyslot)
-			if(!user.unEquip(W, src))
+			if(!user.try_unequip(W, src))
 				return
 			keyslot = W
 
