@@ -45,10 +45,8 @@
 	target_mob = null
 	return ..()
 
-/mob/living/simple_animal/hostile/proc/can_act()
-	if(QDELETED(src) || stat || stop_automation || incapacitated())
-		return FALSE
-	return TRUE
+/mob/living/simple_animal/hostile/can_act()
+	return !stop_automation && ..()
 
 /mob/living/simple_animal/hostile/proc/kick_stance()
 	if(target_mob)
@@ -310,13 +308,3 @@
 	else
 		visible_message("<span class='notice'>\The [user] is interrupted.</span>")
 		stop_automation = FALSE
-
-/mob/living/simple_animal/hostile/proc/can_perform_ability()
-	if(!can_act() || time_last_used_ability > world.time)
-		return FALSE
-	return TRUE
-
-/mob/living/simple_animal/hostile/proc/cooldown_ability(var/time)
-	if(!time)
-		time = ability_cooldown
-	time_last_used_ability = world.time + ability_cooldown
