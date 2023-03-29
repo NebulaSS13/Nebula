@@ -165,7 +165,7 @@ var/global/const/NO_EMAG_ACT = -50
 	var/blood_type = "\[UNSET\]"
 	var/dna_hash = "\[UNSET\]"
 	var/fingerprint_hash = "\[UNSET\]"
-	var/sex = "\[UNSET\]"
+	var/card_gender = "\[UNSET\]"
 	var/icon/front
 	var/icon/side
 
@@ -254,9 +254,9 @@ var/global/const/NO_EMAG_ACT = -50
 
 	var/decl/pronouns/G = get_pronouns()
 	if(G)
-		id_card.sex = capitalize(G.formal_term)
+		id_card.card_gender = capitalize(G.bureaucratic_term )
 	else
-		id_card.sex = "Unset"
+		id_card.card_gender = "Unset"
 	id_card.set_id_photo(src)
 
 	if(dna)
@@ -275,7 +275,7 @@ var/global/const/NO_EMAG_ACT = -50
 /obj/item/card/id/proc/dat()
 	var/list/dat = list("<table><tr><td>")
 	dat += text("Name: []</A><BR>", "[formal_name_prefix][registered_name][formal_name_suffix]")
-	dat += text("Sex: []</A><BR>\n", sex)
+	dat += text("Gender: []</A><BR>\n", card_gender)
 	dat += text("Age: []</A><BR>\n", age)
 
 	if(global.using_map.flags & MAP_HAS_BRANCH)

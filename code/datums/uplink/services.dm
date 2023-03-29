@@ -213,7 +213,7 @@
 	if(I)
 		new_record.set_name(I.registered_name)
 		new_record.set_formal_name("[I.formal_name_prefix][I.registered_name][I.formal_name_suffix]")
-		new_record.set_sex(I.sex)
+		new_record.set_gender(I.card_gender)
 		new_record.set_age(I.age)
 		new_record.set_job(I.assignment)
 		new_record.set_fingerprint(I.fingerprint_hash)

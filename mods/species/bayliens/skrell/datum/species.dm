@@ -140,7 +140,7 @@
 	if(water >= 40 && H.hydration < 400) //skrell passively absorb water.
 		H.hydration += 1
 
-/decl/species/skrell/get_sex(var/mob/living/carbon/human/H)
+/decl/species/skrell/get_gender(var/mob/living/carbon/human/H)
 	return istype(H) && (H.appearance_descriptors["headtail length"] == 1 ? MALE : FEMALE)
 
 /decl/species/skrell/handle_trail(mob/living/carbon/human/H, turf/simulated/T, old_loc)

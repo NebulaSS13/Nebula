@@ -334,3 +334,5 @@
 #define MOB_ICON_HAS_REST_STATE   BITFLAG(2)
 #define MOB_ICON_HAS_SLEEP_STATE  BITFLAG(3)
 #define MOB_ICON_HAS_GIB_STATE    BITFLAG(4)
+
+#define NEUTER_ANIMATE "animate singular neutral"

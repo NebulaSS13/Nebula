@@ -1,6 +1,6 @@
 /decl/pronouns/female
 	name = FEMALE
-	formal_term = "female"
+	bureaucratic_term  = "female"
 	informal_term = "lady"
 
 	He   = "She"
