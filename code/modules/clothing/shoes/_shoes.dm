@@ -24,6 +24,7 @@
 	var/shine = -1 // if material should apply shine overlay. Set to -1 for it to not do that
 	var/footstep_volume_mod = 1
 	var/footstep_range_mod  = 1
+	var/snow_slowdown_mod   = 0
 
 /obj/item/clothing/shoes/Destroy()
 	. = ..()

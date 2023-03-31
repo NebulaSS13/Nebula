@@ -216,7 +216,7 @@
 	. = 0
 	if(isturf(loc))
 		var/turf/T = loc
-		. += T.get_movement_delay(travel_dir)
+		. += T.get_terrain_movement_delay(travel_dir, src)
 	if(HAS_STATUS(src, STAT_DROWSY))
 		. += 6
 	if(lying) //Crawling, it's slower

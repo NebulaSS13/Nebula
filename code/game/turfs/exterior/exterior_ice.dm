@@ -11,6 +11,12 @@
 	possible_states = 13
 	dirt_color = "#e3e7e8"
 
+/turf/exterior/snow/get_base_movement_delay(travel_dir, mob/mover)
+	. = ..() + 2
+	var/obj/item/clothing/shoes/shoes = mover?.get_equipped_item(slot_shoes_str)
+	if(shoes)
+		. += shoes.snow_slowdown_mod
+
 /turf/exterior/snow/fire_act(datum/gas_mixture/air, exposed_temperature, exposed_volume)
 	melt()
 

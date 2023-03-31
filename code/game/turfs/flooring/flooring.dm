@@ -54,6 +54,9 @@
 /decl/flooring/proc/on_remove()
 	return
 
+/decl/flooring/proc/get_movement_delay(var/travel_dir, var/mob/mover)
+	return movement_delay
+
 /decl/flooring/grass
 	name = "grass"
 	desc = "Do they smoke grass out in space, Bowie? Or do they smoke AstroTurf?"
@@ -396,6 +399,7 @@
 	build_type = null
 	can_engrave = FALSE
 	footstep_type = /decl/footsteps/snow
+	movement_delay = 2
 
 /decl/flooring/pool
 	name = "pool floor"
