@@ -114,3 +114,21 @@
 	w_class = ITEM_SIZE_SMALL
 	can_hold = list(/obj/item/coin, /obj/item/cash)
 	material = /decl/material/solid/leather/synth
+
+/obj/item/storage/bag/cash/filled/Initialize()
+	. = ..()
+	new /obj/item/cash/c1000(src)
+	new /obj/item/cash/c1000(src)
+	new /obj/item/cash/c1000(src)
+	new /obj/item/cash/c1000(src)
+	new /obj/item/cash/c1000(src)
+	new /obj/item/cash/c1000(src)
+	new /obj/item/cash/c1000(src)
+	new /obj/item/cash/c1000(src)
+	new /obj/item/cash/c1000(src)
+	new /obj/item/cash/c1000(src)
+	new /obj/item/cash/c1000(src)
+	new /obj/item/cash/c1000(src)
+	new /obj/item/cash/c1000(src)
+	new /obj/item/cash/c1000(src)
+	make_exact_fit()
