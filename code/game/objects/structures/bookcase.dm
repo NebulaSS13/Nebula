@@ -1,7 +1,7 @@
 var/global/list/station_bookcases = list()
 /obj/structure/bookcase
 	name = "bookcase"
-	icon = 'icons/obj/library.dmi'
+	icon = 'icons/obj/structures/bookcase.dmi'
 	icon_state = "book-0"
 	anchored = 1
 	density = 1
@@ -72,7 +72,7 @@ var/global/list/station_bookcases = list()
 
 /obj/structure/bookcase/on_update_icon()
 	..()
-	if(contents.len < 5)
+	if(length(contents) < 5)
 		icon_state = "book-[contents.len]"
 	else
 		icon_state = "book-5"
@@ -88,7 +88,6 @@ var/global/list/station_bookcases = list()
 	new /obj/item/book/manual/chemistry_recipes(src)
 	update_icon()
 
-
 /obj/structure/bookcase/manuals/engineering
 	name = "Engineering Manuals bookcase"
 
@@ -103,3 +102,10 @@ var/global/list/station_bookcases = list()
 	new /obj/item/book/manual/evaguide(src)
 	new /obj/item/book/manual/rust_engine(src)
 	update_icon()
+
+/obj/structure/bookcase/cart
+	name = "book cart"
+	anchored = FALSE
+	desc = "A mobile cart for carrying books around."
+	movable_flags = MOVABLE_FLAG_WHEELED
+	icon = 'icons/obj/structures/book_cart.dmi'
