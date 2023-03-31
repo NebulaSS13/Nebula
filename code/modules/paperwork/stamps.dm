@@ -14,22 +14,6 @@
 	)
 	attack_verb = list("stamped")
 
-/obj/item/stamp/captain
-	name = "captain's rubber stamp"
-	icon_state = "stamp-cap"
-
-/obj/item/stamp/ce
-	name = "chief engineer's rubber stamp"
-	icon_state = "stamp-ce"
-
-/obj/item/stamp/rd
-	name = "chief science officer's rubber stamp"
-	icon_state = "stamp-rd"
-
-/obj/item/stamp/cmo
-	name = "chief medical officer's rubber stamp"
-	icon_state = "stamp-cmo"
-
 /obj/item/stamp/denied
 	name = "\improper DENIED rubber stamp"
 	icon_state = "stamp-deny"
@@ -46,10 +30,6 @@
 /obj/item/stamp/boss/Initialize()
 	name = "[global.using_map.boss_name]'s' rubber stamp"
 	. = ..()
-
-/obj/item/stamp/cargo
-	name = "cargo rubber stamp"
-	icon_state = "stamp-cargo"
 
 // Syndicate stamp to forge documents.
 /obj/item/stamp/chameleon/attack_self(mob/user)
