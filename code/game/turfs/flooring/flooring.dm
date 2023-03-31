@@ -409,7 +409,7 @@
 			. += shoes.snow_slowdown_mod
 		var/decl/species/my_species = mover.get_species()
 		if(my_species)
-			. += shoes.snow_slowdown_mod
+			. += my_species.snow_slowdown_mod
 		. = max(., 0)
 
 /decl/flooring/pool
