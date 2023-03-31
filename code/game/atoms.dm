@@ -161,7 +161,7 @@
 
 	// This attempts to mimic BYOND's handling of diagonal directions and cardinal icon states.
 	var/old_dir = dir
-	if((atom_flags & ATOM_FLAG_BLOCK_DIAGONAL_FACING) && !IsPowerOfTwo(new_dir))
+	if((atom_flags & ATOM_FLAG_BLOCK_DIAGONAL_FACING) && !IS_POWER_OF_TWO(new_dir))
 		if(old_dir & new_dir)
 			new_dir = old_dir
 		else

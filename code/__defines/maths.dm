@@ -17,3 +17,6 @@
 // Will filter out extra rotations and negative rotations
 // E.g: 540 becomes 180. -180 becomes 180.
 #define SIMPLIFY_DEGREES(degrees) (MODULUS_FLOAT((degrees), 360))
+
+#define IS_POWER_OF_TWO(VAL) ((VAL & (VAL-1)) == 0)
+#define ROUND_UP_TO_POWER_OF_TWO(VAL) (2 ** CEILING(log(2,VAL)))
