@@ -235,6 +235,11 @@
 	result_type = /obj/structure/bookcase
 	time = 15
 
+/datum/stack_recipe/furniture/book_cart
+	title = "book cart"
+	result_type = /obj/structure/bookcase/cart
+	time = 15
+
 /datum/stack_recipe/furniture/planting_bed
 	title = "planting bed"
 	result_type = /obj/machinery/portable_atmospherics/hydroponics/soil
