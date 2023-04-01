@@ -340,14 +340,12 @@
 
 ///Handle preparing the level's border's corners after we've stup the edges.
 /datum/level_data/proc/build_border_corners()
+	if(!border_filler)
+		return
 	//Now prepare the corners of the border
 	var/list/all_corner_turfs = get_transition_edge_corner_turfs(level_z)
 	for(var/turf/T in all_corner_turfs)
-		//In case we got filler turfs for borders, make sure to fill the corners with it
-		if(border_filler)
-			T.ChangeTurf(border_filler)
-		//Force corner turfs to be solid, so nothing end up being lost/stuck in there
-		T.set_density(TRUE)
+		T.ChangeTurf(border_filler) //Fill corners with border turf
 
 //
 // Accessors
