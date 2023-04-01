@@ -12,14 +12,14 @@ Class Vars:
 	air - The gas mixture that any turfs in this zone will return. Values are per-tile with a group multiplier.
 
 Class Procs:
-	add(turf/simulated/T)
+	add(turf/T)
 		Adds a turf to the contents, sets its zone and merges its air.
 
-	remove(turf/simulated/T)
+	remove(turf/T)
 		Removes a turf, sets its zone to null and erases any gas graphics.
 		Invalidates the zone if it has no more tiles.
 
-	c_merge(zone/into)
+	c_merge(var/zone/into)
 		Invalidates this zone and adds all its former contents to into.
 
 	c_invalidate()
@@ -28,7 +28,7 @@ Class Procs:
 	rebuild()
 		Invalidates the zone and marks all its former tiles for updates.
 
-	add_tile_air(turf/simulated/T)
+	add_tile_air(turf/T)
 		Adds the air contained in T.air to the zone's air supply. Called when adding a turf.
 
 	tick()
@@ -59,10 +59,11 @@ Class Procs:
 	air.group_multiplier = 1
 	air.volume = CELL_VOLUME
 
-/zone/proc/add(turf/simulated/T)
+/zone/proc/add(turf/T)
 #ifdef ZASDBG
 	ASSERT(!invalid)
 	ASSERT(istype(T))
+	ASSERT(T.zone_membership_candidate)
 	ASSERT(!TURF_HAS_VALID_ZONE(T))
 #endif
 
@@ -75,10 +76,11 @@ Class Procs:
 		SSair.active_fire_zones |= src
 	T.update_graphic(air.graphic)
 
-/zone/proc/remove(turf/simulated/T)
+/zone/proc/remove(turf/T)
 #ifdef ZASDBG
 	ASSERT(!invalid)
 	ASSERT(istype(T))
+	ASSERT(T.zone_membership_candidate)
 	ASSERT(T.zone == src)
 	soft_assert(T in contents, "Lists are weird broseph")
 #endif
@@ -91,7 +93,7 @@ Class Procs:
 	else
 		c_invalidate()
 
-/zone/proc/c_merge(zone/into)
+/zone/proc/c_merge(var/zone/into)
 #ifdef ZASDBG
 	ASSERT(!invalid)
 	ASSERT(istype(into))
@@ -99,7 +101,9 @@ Class Procs:
 	ASSERT(!into.invalid)
 #endif
 	c_invalidate()
-	for(var/turf/simulated/T in contents)
+	for(var/turf/T in contents)
+		if(!T.zone_membership_candidate)
+			continue
 		into.add(T)
 		T.update_graphic(graphic_remove = air.graphic)
 		#ifdef ZASDBG
@@ -117,7 +121,7 @@ Class Procs:
 	invalid = 1
 	SSair.remove_zone(src)
 	#ifdef ZASDBG
-	for(var/turf/simulated/T in contents)
+	for(var/turf/T in contents)
 		T.dbg(zasdbgovl_invalid_zone)
 	#endif
 
@@ -125,7 +129,7 @@ Class Procs:
 	set waitfor = 0
 	if(invalid) return //Short circuit for explosions where rebuild is called many times over.
 	c_invalidate()
-	for(var/turf/simulated/T in contents)
+	for(var/turf/T in contents)
 		T.update_graphic(graphic_remove = air.graphic) //we need to remove the overlays so they're not doubled when the zone is rebuilt
 		T.needs_air_update = 0 //Reset the marker so that it will be added to the list.
 		SSair.mark_for_update(T)
@@ -149,7 +153,7 @@ Class Procs:
 
 	// Update gas overlays.
 	if(air.check_tile_graphic(graphic_add, graphic_remove))
-		for(var/turf/simulated/T in contents)
+		for(var/turf/T in contents)
 			T.update_graphic(graphic_add, graphic_remove)
 			CHECK_TICK
 		graphic_add.len = 0
@@ -168,7 +172,7 @@ Class Procs:
 	// Update atom temperature.
 	if(abs(air.temperature - last_air_temperature) >= ATOM_TEMPERATURE_EQUILIBRIUM_THRESHOLD)
 		last_air_temperature = air.temperature
-		for(var/turf/simulated/T in contents)
+		for(var/turf/T in contents)
 			for(var/check_atom in T.contents)
 				var/atom/checking = check_atom
 				if(checking.simulated)

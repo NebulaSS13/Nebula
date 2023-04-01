@@ -43,18 +43,14 @@
 
 	// Get our location temperature if possible.
 	// Nullspace is room temperature, clearly.
-	var/adjust_temp
-	if(loc)
-		if(!istype(loc, /turf/simulated))
-			adjust_temp = loc.temperature
-		else
-			var/turf/simulated/T = loc
-			if(T.zone && T.zone.air)
-				adjust_temp = T.zone.air.temperature
-			else
-				adjust_temp = T20C
-	else
-		adjust_temp = T20C
+	var/adjust_temp = T20C
+	if(isturf(loc))
+		var/turf/T = loc
+		var/datum/gas_mixture/environment = T.return_air()
+		if(environment)
+			adjust_temp = environment.temperature
+	else if(loc)
+		adjust_temp = loc.temperature
 
 	var/diff_temp = adjust_temp - temperature
 	if(abs(diff_temp) >= ATOM_TEMPERATURE_EQUILIBRIUM_THRESHOLD)

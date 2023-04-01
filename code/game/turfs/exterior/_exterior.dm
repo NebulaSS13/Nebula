@@ -6,6 +6,7 @@
 	layer = PLATING_LAYER
 	open_turf_type = /turf/exterior/open
 	turf_flags = TURF_FLAG_BACKGROUND | TURF_IS_HOLOMAP_PATH
+	zone_membership_candidate = TRUE
 	var/base_color
 	var/diggable = 1
 	var/dirt_color = "#7c5e42"
@@ -13,7 +14,6 @@
 	var/icon_edge_layer = -1
 	var/icon_edge_states
 	var/icon_has_corners = FALSE
-	var/list/affecting_heat_sources
 	///If this turf is on a level that belongs to a planetoid, this is a reference to that planetoid.
 	var/datum/planetoid_data/owner
 
@@ -68,13 +68,6 @@
 /turf/exterior/is_floor()
 	return !density && !is_open()
 
-/turf/exterior/ChangeTurf(var/turf/N, var/tell_universe = TRUE, var/force_lighting_update = FALSE, var/keep_air = FALSE)
-	var/last_affecting_heat_sources = affecting_heat_sources
-	var/turf/exterior/ext = ..()
-	if(istype(ext))
-		ext.affecting_heat_sources = last_affecting_heat_sources
-	return ext
-
 /turf/exterior/is_plating()
 	return !density
 
@@ -83,26 +76,7 @@
 
 /turf/exterior/Destroy()
 	owner = null
-	for(var/thing in affecting_heat_sources)
-		var/obj/structure/fire_source/heat_source = thing
-		LAZYREMOVE(heat_source.affected_exterior_turfs, src)
-	affecting_heat_sources = null
 	. = ..()
-
-/turf/exterior/return_air()
-	var/datum/level_data/level = SSmapping.levels_by_z[z]
-	var/datum/gas_mixture/gas = level?.get_exterior_atmosphere()
-	if(!gas)
-		return
-	var/initial_temperature = gas.temperature
-	if(weather)
-		initial_temperature = weather.adjust_temperature(initial_temperature)
-	for(var/thing in affecting_heat_sources)
-		if((gas.temperature - initial_temperature) >= 100)
-			break
-		var/obj/structure/fire_source/heat_source = thing
-		gas.temperature = gas.temperature + heat_source.exterior_temperature / max(1, get_dist(src, get_turf(heat_source)))
-	return gas
 
 /turf/exterior/levelupdate()
 	for(var/obj/O in src)

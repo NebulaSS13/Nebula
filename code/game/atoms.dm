@@ -844,6 +844,9 @@
 	RETURN_TYPE(/list)
 	return list()
 
+/atom/proc/can_climb_from_below(var/mob/climber)
+	return FALSE
+
 /atom/proc/singularity_act()
 	return 0
 

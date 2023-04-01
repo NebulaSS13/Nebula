@@ -51,6 +51,7 @@
 	var/old_flooded =          flooded
 	var/old_outside =          is_outside
 	var/old_is_open =          is_open()
+	var/old_affecting_heat_sources = affecting_heat_sources
 
 	var/old_ambience =         ambient_light
 	var/old_ambience_mult =    ambient_light_multiplier
@@ -60,12 +61,15 @@
 
 	changing_turf = TRUE
 
+
 	qdel(src)
 	. = new N(src)
 
 	var/turf/W = .
 	W.above =            old_above     // Multiz ref tracking.
 	W.prev_type =        old_prev_type // Shuttle transition turf tracking.
+
+	W.affecting_heat_sources = old_affecting_heat_sources
 
 	if (permit_ao)
 		regenerate_ao()
@@ -122,11 +126,17 @@
 	// end of lighting stuff
 
 	// we check the var rather than the proc, because area outside values usually shouldn't be set on turfs
+	W.last_outside_check = OUTSIDE_UNCERTAIN
 	if(W.is_outside != old_outside)
 		W.set_outside(old_outside, skip_weather_update = TRUE)
 	W.update_weather(force_update_below = W.is_open() != old_is_open)
 
 /turf/proc/transport_properties_from(turf/other)
+	if(other.zone)
+		if(!air)
+			make_air()
+		air.copy_from(other.zone.air)
+		other.zone.remove(other)
 	if(!istype(other, src.type))
 		return 0
 	src.set_dir(other.dir)
@@ -148,18 +158,6 @@
 	if(broken || burnt)
 		queue_icon_update()
 	set_flooring(other.flooring)
-	return TRUE
-
-//I would name this copy_from() but we remove the other turf from their air zone for some reason
-/turf/simulated/transport_properties_from(turf/simulated/other)
-	if(!..())
-		return FALSE
-
-	if(other.zone)
-		if(!src.air)
-			src.make_air()
-		src.air.copy_from(other.zone.air)
-		other.zone.remove(other)
 	return TRUE
 
 /turf/simulated/wall/transport_properties_from(turf/simulated/wall/other)

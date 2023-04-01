@@ -5,6 +5,11 @@
 	is_spawnable_type = TRUE
 	layer = TURF_LAYER
 
+	/// Will participate in ZAS, join zones, etc.
+	var/zone_membership_candidate = FALSE
+	/// Will participate in external atmosphere simulation if the turf is outside and no zone is set.
+	var/external_atmosphere_participation = TRUE
+
 	var/turf_flags
 
 	var/holy = 0
@@ -51,6 +56,23 @@
 	// TL;DR: just leave these vars alone.
 	var/tmp/obj/abstract/weather_system/weather
 	var/tmp/is_outside = OUTSIDE_AREA
+	var/tmp/last_outside_check = OUTSIDE_UNCERTAIN
+
+	///The cached air mixture of a turf. Never directly access, use `return_air()`.
+	//This exists to store air during zone rebuilds, as well as for unsimulated turfs.
+	//They are never deleted to not overwhelm the garbage collector.
+	var/datum/gas_mixture/air
+	///Is this turf queued in the TURFS cycle of SSair?
+	var/needs_air_update = 0
+
+	///The turf's current zone.
+	var/zone/zone
+	///All directions in which a turf that can contain air is present.
+	var/airflow_open_directions
+
+	/// Used by exterior turfs to determine the warming effect of campfires and such.
+	var/list/affecting_heat_sources
+
 
 /turf/Initialize(mapload, ...)
 	. = null && ..()	// This weird construct is to shut up the 'parent proc not called' warning without disabling the lint for child types. We explicitly return an init hint so this won't change behavior.
@@ -98,6 +120,19 @@
 
 /turf/Destroy()
 
+	if(zone)
+		if(can_safely_remove_from_zone())
+			c_copy_air()
+			zone.remove(src)
+		else
+			zone.rebuild()
+
+	if(LAZYLEN(affecting_heat_sources))
+		for(var/thing in affecting_heat_sources)
+			var/obj/structure/fire_source/heat_source = thing
+			LAZYREMOVE(heat_source.affected_exterior_turfs, src)
+		affecting_heat_sources = null
+
 	if (!changing_turf)
 		PRINT_STACK_TRACE("Improper turf qdel. Do not qdel turfs directly.")
 
@@ -126,6 +161,7 @@
 		weather = null
 
 	..()
+
 	return QDEL_HINT_IWILLGC
 
 /turf/explosion_act(severity)
@@ -227,7 +263,7 @@
 				return 0
 	return 1 //Nothing found to block so return success!
 
-/turf/proc/adjacent_fire_act(turf/simulated/floor/source, exposed_temperature, exposed_volume)
+/turf/proc/adjacent_fire_act(turf/adj_turf, datum/gas_mixture/adj_air, adj_temp, adj_volume)
 	return
 
 /turf/proc/is_plating()
@@ -398,6 +434,9 @@
 	if(density)
 		return OUTSIDE_NO
 
+	if(last_outside_check != OUTSIDE_UNCERTAIN)
+		return last_outside_check
+
 	// What is our local outside value?
 	// Some turfs can be roofed irrespective of the turf above them in multiz.
 	// I have the feeling this is redundat as a roofed turf below max z will
@@ -418,16 +457,41 @@
 				return OUTSIDE_NO
 			top_of_stack = next_turf
 		// If we hit the top of the stack without finding a roof, we ask the upmost turf if we're outside.
-		return top_of_stack.is_outside()
+		. = top_of_stack.is_outside()
+	last_outside_check = . // Cache this for later calls.
 
 /turf/proc/set_outside(var/new_outside, var/skip_weather_update = FALSE)
-	if(is_outside != new_outside)
-		is_outside = new_outside
-		if(!skip_weather_update)
-			update_weather()
-		SSambience.queued += src
+	if(is_outside == new_outside)
+		return FALSE
+
+	is_outside = new_outside
+	if(!skip_weather_update)
+		update_weather()
+	SSambience.queued += src
+
+	last_outside_check = OUTSIDE_UNCERTAIN
+	if(is_outside())
+		if(zone && external_atmosphere_participation)
+			if(can_safely_remove_from_zone())
+				zone.remove(src)
+			else
+				zone.rebuild()
+	else if(zone_membership_candidate)
+		SSair.mark_for_update(src)
+
+	if(!HasBelow(z))
 		return TRUE
-	return FALSE
+
+	// Invalidate the outside check cache for turfs below us.
+	var/turf/checking = src
+	while(HasBelow(checking.z))
+		checking = GetBelow(checking)
+		if(!isturf(checking))
+			break
+		checking.last_outside_check = OUTSIDE_UNCERTAIN
+		if(!checking.is_open())
+			break
+	return TRUE
 
 /turf/proc/get_air_graphic()
 	var/datum/gas_mixture/environment = return_air()

@@ -12,7 +12,7 @@
 			if(2)
 				ChangeTurf(get_base_turf_by_area(src))
 			if(3)
-				if(prob(33)) 
+				if(prob(33))
 					var/decl/material/mat = GET_DECL(/decl/material/solid/metal/steel)
 					mat.place_shards(src)
 				if(prob(80))
@@ -38,7 +38,7 @@
 /turf/simulated/floor/proc/get_damage_temperature()
 	return flooring ? flooring.damage_temperature : null
 
-/turf/simulated/floor/adjacent_fire_act(turf/simulated/floor/adj_turf, datum/gas_mixture/adj_air, adj_temp, adj_volume)
+/turf/simulated/floor/adjacent_fire_act(turf/adj_turf, datum/gas_mixture/adj_air, adj_temp, adj_volume)
 	var/dir_to = get_dir(src, adj_turf)
 
 	for(var/obj/structure/window/W in src)

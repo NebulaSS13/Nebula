@@ -24,6 +24,9 @@
 	var/decl/flooring/flooring
 	var/lava = 0
 
+/turf/simulated/floor/can_climb_from_below(var/mob/climber)
+	return TRUE
+
 /turf/simulated/floor/is_plating()
 	return !flooring
 
