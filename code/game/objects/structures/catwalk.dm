@@ -41,6 +41,9 @@
 	update_connections(1)
 	update_icon()
 
+/obj/structure/catwalk/can_climb_from_below(var/mob/climber)
+	return TRUE
+
 /obj/structure/catwalk/Destroy()
 	var/turf/oldloc = loc
 	redraw_nearby_catwalks()

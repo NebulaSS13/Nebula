@@ -27,6 +27,9 @@
 	. = ..()
 	update_neighbors()
 
+/obj/structure/lattice/can_climb_from_below(var/mob/climber)
+	return TRUE
+
 /obj/structure/lattice/update_material_desc()
 	if(material)
 		desc = "A lightweight support [material.solid_name] lattice."
@@ -99,7 +102,7 @@
 		if(locate(/obj/structure/lattice, T) || locate(/obj/structure/catwalk, T))
 			dir_sum += direction
 		else
-			var/turf/O = get_step(src, direction) 
+			var/turf/O = get_step(src, direction)
 			if(!istype(O) || !O.is_open())
 				dir_sum += direction
 	icon_state = "lattice[dir_sum]"

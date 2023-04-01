@@ -445,14 +445,11 @@
 	var/minp=16777216;
 	var/maxp=0;
 	for(var/dir in global.cardinal)
-		var/turf/simulated/T=get_turf(get_step(loc,dir))
+		var/turf/T=get_turf(get_step(loc,dir))
 		var/cp=0
-		if(T && istype(T) && T.zone)
+		if(isturf(T) && T.zone)
 			var/datum/gas_mixture/environment = T.return_air()
-			cp = environment.return_pressure()
-		else
-			if(istype(T,/turf/simulated))
-				continue
+			cp = environment?.return_pressure()
 		if(cp<minp)minp=cp
 		if(cp>maxp)maxp=cp
 	return abs(minp-maxp)
@@ -465,6 +462,7 @@
 
 /proc/getCardinalAirInfo(var/turf/loc, var/list/stats=list("temperature"))
 	var/list/temps = new/list(4)
+	var/statslen = length(stats)
 	for(var/dir in global.cardinal)
 		var/direction
 		switch(dir)
@@ -476,25 +474,16 @@
 				direction = 3
 			if(WEST)
 				direction = 4
-		var/turf/simulated/T=get_turf(get_step(loc,dir))
-		var/list/rstats = new /list(stats.len)
-		if(T && istype(T) && T.zone)
+		var/turf/T=get_turf(get_step(loc,dir))
+		var/list/rstats = new /list(statslen)
+		if(isturf(T))
 			var/datum/gas_mixture/environment = T.return_air()
-			for(var/i=1;i<=stats.len;i++)
-				if(stats[i] == "pressure")
-					rstats[i] = environment.return_pressure()
-				else
-					rstats[i] = environment.vars[stats[i]]
-		else if(istype(T, /turf/simulated))
-			rstats = null // Exclude zone (wall, door, etc).
-		else if(isturf(T))
-			// Should still work.  (/turf/return_air())
-			var/datum/gas_mixture/environment = T.return_air()
-			for(var/i=1;i<=stats.len;i++)
-				if(stats[i] == "pressure")
-					rstats[i] = environment.return_pressure()
-				else
-					rstats[i] = environment.vars[stats[i]]
+			if(environment)
+				for(var/i= 1 to statslen)
+					if(stats[i] == "pressure")
+						rstats[i] = environment.return_pressure()
+					else
+						rstats[i] = environment.vars[stats[i]]
 		temps[direction] = rstats
 	return temps
 

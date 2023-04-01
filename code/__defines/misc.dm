@@ -278,6 +278,7 @@
 #define OUTSIDE_AREA null
 #define OUTSIDE_NO   FALSE
 #define OUTSIDE_YES  TRUE
+#define OUTSIDE_UNCERTAIN null
 
 // Weather exposure values for being rained on or hailed on.
 #define WEATHER_IGNORE   -1

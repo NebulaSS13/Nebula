@@ -53,21 +53,20 @@
 
 	if(lit != FIRE_LIT)
 		for(var/thing in affected_exterior_turfs)
-			var/turf/exterior/T = thing
+			var/turf/T = thing
 			LAZYREMOVE(T.affecting_heat_sources, src)
 		affected_exterior_turfs = null
 	else
 		var/list/new_affecting
-		for(var/turf/exterior/T in RANGE_TURFS(loc, light_range_high))
-			LAZYADD(new_affecting, T)
-		for(var/thing in affected_exterior_turfs)
-			var/turf/exterior/T = thing
-			if(!(thing in new_affecting))
+		for(var/turf/T as anything in RANGE_TURFS(loc, light_range_high))
+			if(T.external_atmosphere_participation)
+				LAZYADD(new_affecting, T)
+		for(var/turf/T as anything in affected_exterior_turfs)
+			if(!(T in new_affecting) || !T.external_atmosphere_participation)
 				LAZYREMOVE(T.affecting_heat_sources, src)
 				LAZYREMOVE(affected_exterior_turfs, T)
 			LAZYREMOVE(new_affecting, T)
-		for(var/thing in new_affecting)
-			var/turf/exterior/T = thing
+		for(var/turf/T as anything in new_affecting)
 			LAZYDISTINCTADD(T.affecting_heat_sources, src)
 			LAZYDISTINCTADD(affected_exterior_turfs, T)
 

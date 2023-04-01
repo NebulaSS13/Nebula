@@ -55,12 +55,8 @@ var/global/const/FALLOFF_SOUNDS = 0.5
 
 	volume *= pressure_factor
 
-	//Dense turfs are not in the zones, so they shouldn't be penalized here when source
-	if(!turf_source.blocks_air && istype(T,/turf/simulated) && istype(turf_source,/turf/simulated))
-		var/turf/simulated/sim_source = turf_source
-		var/turf/simulated/sim_destination = T
-		if(sim_destination.zone != sim_source.zone)
-			volume -= 30
+	if(!turf_source.blocks_air && (T.zone || turf_source.zone) && T.zone != turf_source.zone)
+		volume -= 30
 	return volume
 
 /mob/proc/playsound_local(var/turf/turf_source, soundin, vol as num, vary, frequency, falloff, is_global, extrarange, override_env, envdry, envwet)

@@ -5,6 +5,7 @@
 		/decl/material/gas/nitrogen = MOLES_N2STANDARD
 	)
 	open_turf_type = /turf/simulated/open
+	zone_membership_candidate = TRUE
 
 	var/wet = 0
 	var/image/wet_overlay = null
@@ -173,13 +174,4 @@
 	var/area/A = loc
 	holy = istype(A) && (A.area_flags & AREA_FLAG_HOLY)
 	levelupdate()
-	. = ..()
-
-/turf/simulated/Destroy()
-	if (zone)
-		if (can_safely_remove_from_zone())
-			c_copy_air()
-			zone.remove(src)
-		else
-			zone.rebuild()
 	. = ..()

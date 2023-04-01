@@ -4,6 +4,9 @@
 	icon_state = "Floor3"
 	turf_flags = TURF_IS_HOLOMAP_PATH
 
+/turf/unsimulated/floor/can_climb_from_below(var/mob/climber)
+	return TRUE
+
 /turf/unsimulated/floor/infinity //non-doomsday version for transit and wizden
 	name = "\proper infinity"
 	icon = 'icons/turf/space.dmi'
