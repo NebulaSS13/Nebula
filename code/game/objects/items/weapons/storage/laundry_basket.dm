@@ -39,7 +39,7 @@
 	to_chat(user, "<span class='notice'>You dump the [src]'s contents onto \the [T].</span>")
 	return ..()
 
-/obj/item/storage/laundry_basket/pickup(mob/user)
+/obj/item/storage/laundry_basket/on_picked_up(mob/user)
 	var/obj/item/storage/laundry_basket/offhand/O = new(user)
 	O.SetName("[name] - second hand")
 	O.desc = "Your second grip on the [name]."

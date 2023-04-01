@@ -40,7 +40,7 @@
 	. = ..()
 	check_loc()
 
-/obj/item/energy_blade/ninja/pickup(mob/user)
+/obj/item/energy_blade/ninja/on_picked_up(mob/user)
 	. = ..()
 	check_loc()
 

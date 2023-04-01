@@ -16,7 +16,7 @@
 	. = ..()
 	to_chat(user, " It can hold up to [volume] units.")
 
-/obj/item/chems/glass/beaker/pickup(mob/user)
+/obj/item/chems/glass/beaker/on_picked_up(mob/user)
 	..()
 	update_icon()
 

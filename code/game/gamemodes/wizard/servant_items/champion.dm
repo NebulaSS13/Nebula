@@ -60,7 +60,7 @@
 	attack_verb = list("slashed", "stabbed", "sliced", "torn", "ripped", "cleaved", "sundered")
 	material_alteration = MAT_FLAG_ALTERATION_NONE
 
-/obj/item/sword/excalibur/pickup(var/mob/living/user)
+/obj/item/sword/excalibur/on_picked_up(var/mob/living/user)
 	if(user.mind)
 		var/decl/special_role/wizard/wizards = GET_DECL(/decl/special_role/wizard)
 		if(!wizards.is_antagonist(user.mind) || user.mind.assigned_special_role != "Spellbound Servant")

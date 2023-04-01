@@ -295,7 +295,7 @@ var/global/list/_wood_materials = list(
 		qdel(src)
 		return
 
-/obj/item/chems/food/grown/pickup(mob/user)
+/obj/item/chems/food/grown/on_picked_up(mob/user)
 	..()
 	if(!seed)
 		return

@@ -318,7 +318,6 @@
 		return
 
 	var/old_loc = loc
-	pickup(user)
 	if (istype(loc, /obj/item/storage))
 		var/obj/item/storage/S = loc
 		S.remove_from_storage(src)
@@ -337,6 +336,7 @@
 		return // Unequipping changes our state, so must check here.
 
 	if(user.put_in_active_hand(src))
+		on_picked_up(user)
 		if (isturf(old_loc))
 			var/obj/effect/temporary/item_pickup_ghost/ghost = new(old_loc, src)
 			ghost.animate_towards(user)
@@ -398,8 +398,8 @@
 	RAISE_EVENT(/decl/observ/mob_unequipped, user, src)
 	RAISE_EVENT_REPEAT(/decl/observ/item_unequipped, src, user)
 
-// called just as an item is picked up (loc is not yet changed)
-/obj/item/proc/pickup(mob/user)
+// called just after an item is picked up, after it has been equipped to the mob.
+/obj/item/proc/on_picked_up(mob/user)
 	return
 
 // called when this item is removed from a storage item, which is passed on as S. The loc variable is already set to the new destination before this is called.

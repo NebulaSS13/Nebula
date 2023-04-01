@@ -24,7 +24,7 @@
 				if(delete_old)
 					qdel(old_item)
 			L.equip_to_slot(new_item, slot_id)
-			new_item.pickup(L)
+			new_item.on_picked_up(L)
 
 			if(duration)
 				summoned_items += new_item //we store it in a list to remove later
