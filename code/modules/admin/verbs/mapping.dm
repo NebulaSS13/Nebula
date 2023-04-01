@@ -208,8 +208,7 @@ var/global/list/debug_verbs = list (
 	testZAScolors_remove()
 
 	var/turf/location = get_turf(usr)
-
-	if(!isturf(location) && !location.zone)
+	if(!location?.zone)
 		to_chat(src, SPAN_WARNING("The turf you are standing on does not have a zone."))
 		return
 

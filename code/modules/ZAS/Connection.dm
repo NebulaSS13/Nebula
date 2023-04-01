@@ -72,7 +72,7 @@ Class Procs:
 	src.A = A
 	src.B = B
 	zoneA = A.zone
-	if(!SHOULD_PARTICIPATE_IN_ZAS(B))
+	if(!SHOULD_PARTICIPATE_IN_ZONES(B))
 		mark_space()
 		edge = SSair.get_edge(A.zone,B)
 		edge.add_connection(src)
@@ -131,7 +131,7 @@ Class Procs:
 		zas_log("Updated, \...")
 	#endif
 
-	if(!SHOULD_PARTICIPATE_IN_ZAS(A))
+	if(!SHOULD_PARTICIPATE_IN_ZONES(A))
 		#ifdef ZASDBG
 		if(verbose)
 			zas_log("Invalid A. Erasing...")
@@ -154,7 +154,7 @@ Class Procs:
 	else
 		mark_direct()
 
-	var/b_is_space = !SHOULD_PARTICIPATE_IN_ZAS(B)
+	var/b_is_space = !SHOULD_PARTICIPATE_IN_ZONES(B)
 
 	if(state & CONNECTION_SPACE)
 		if(!b_is_space)
