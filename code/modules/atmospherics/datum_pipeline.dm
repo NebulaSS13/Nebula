@@ -201,7 +201,7 @@
 	var/total_heat_capacity = air.heat_capacity()
 	var/partial_heat_capacity = total_heat_capacity*(share_volume/air.volume)
 
-	if(SHOULD_PARTICIPATE_IN_ZAS(target) && !target.blocks_air)
+	if(SHOULD_PARTICIPATE_IN_ZONES(target) && !target.blocks_air)
 		var/delta_temperature = 0
 		var/sharer_heat_capacity = 0
 

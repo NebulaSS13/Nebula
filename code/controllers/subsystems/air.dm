@@ -133,8 +133,8 @@ SUBSYSTEM_DEF(air)
 	report_progress("Processing Geometry...")
 
 	var/simulated_turf_count = 0
-	for(var/turf/T)
-		if(!SHOULD_PARTICIPATE_IN_ZAS(T))
+	for(var/turf/T in world)
+		if(!SHOULD_PARTICIPATE_IN_ZONES(T))
 			continue
 		simulated_turf_count++
 		T.update_air_properties()
@@ -322,11 +322,15 @@ Total Unsimulated Turfs: [world.maxx*world.maxy*world.maxz - simulated_turf_coun
 	ASSERT(A != B)
 	#endif
 
-	var/block = air_blocked(A,B) || !SHOULD_PARTICIPATE_IN_ZAS(A)
-	if(block & AIR_BLOCKED) return
+	if(!SHOULD_PARTICIPATE_IN_ZONES(A))
+		return
+
+	var/block = air_blocked(A,B)
+	if(block & AIR_BLOCKED)
+		return
 
 	var/direct = !(block & ZONE_BLOCKED)
-	var/space = !SHOULD_PARTICIPATE_IN_ZAS(B)
+	var/space = !SHOULD_PARTICIPATE_IN_ZONES(B)
 
 	if(!space)
 		if(min(A.zone.contents.len, B.zone.contents.len) < ZONE_MIN_SIZE || (direct && (equivalent_pressure(A.zone,B.zone) || times_fired == 0)))
@@ -358,7 +362,7 @@ Total Unsimulated Turfs: [world.maxx*world.maxy*world.maxz - simulated_turf_coun
 	#ifdef ZASDBG
 	ASSERT(isturf(T))
 	#endif
-	if(T.needs_air_update || !SHOULD_PARTICIPATE_IN_ZAS(T))
+	if(T.needs_air_update || !SHOULD_PARTICIPATE_IN_ZONES(T))
 		return
 	tiles_to_update += T
 	#ifdef ZASDBG

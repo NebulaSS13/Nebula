@@ -445,9 +445,9 @@
 	var/minp=16777216;
 	var/maxp=0;
 	for(var/dir in global.cardinal)
-		var/turf/T=get_turf(get_step(loc,dir))
+		var/turf/T = get_step(loc,dir)
 		var/cp=0
-		if(isturf(T) && T.zone)
+		if(T?.zone)
 			var/datum/gas_mixture/environment = T.return_air()
 			cp = environment?.return_pressure()
 		if(cp<minp)minp=cp
@@ -474,16 +474,15 @@
 				direction = 3
 			if(WEST)
 				direction = 4
-		var/turf/T=get_turf(get_step(loc,dir))
+		var/turf/T = get_step(loc,dir)
 		var/list/rstats = new /list(statslen)
-		if(isturf(T))
-			var/datum/gas_mixture/environment = T.return_air()
-			if(environment)
-				for(var/i= 1 to statslen)
-					if(stats[i] == "pressure")
-						rstats[i] = environment.return_pressure()
-					else
-						rstats[i] = environment.vars[stats[i]]
+		var/datum/gas_mixture/environment = T?.return_air()
+		if(environment)
+			for(var/i= 1 to statslen)
+				if(stats[i] == "pressure")
+					rstats[i] = environment.return_pressure()
+				else
+					rstats[i] = environment.vars[stats[i]]
 		temps[direction] = rstats
 	return temps
 
