@@ -41,7 +41,7 @@
 	if(loc)
 		return loc.assume_air(giver)
 	else
-		return null
+		return FALSE
 
 /obj/remove_air(amount)
 	if(loc)
