@@ -3,9 +3,9 @@ var/global/list/station_bookcases = list()
 	name = "bookcase"
 	icon = 'icons/obj/structures/bookcase.dmi'
 	icon_state = "book-0"
-	anchored = 1
-	density = 1
-	opacity = 1
+	anchored = TRUE
+	density = TRUE
+	opacity = TRUE
 	obj_flags = OBJ_FLAG_ANCHORABLE
 	material = /decl/material/solid/wood
 	tool_interaction_flags = (TOOL_INTERACTION_ANCHOR | TOOL_INTERACTION_DECONSTRUCT)
@@ -17,58 +17,27 @@ var/global/list/station_bookcases = list()
 			I.forceMove(src)
 	if(isStationLevel(z))
 		global.station_bookcases += src
+	get_or_create_extension(src, /datum/extension/labels/single)
 	. = ..()
 
 /obj/structure/bookcase/Destroy()
 	global.station_bookcases -= src
 	. = ..()
 
-/obj/structure/bookcase/physically_destroyed(skip_qdel)
-	for(var/obj/item/book/b in contents)
-		b.dropInto(loc)
-	. = ..()
-
 /obj/structure/bookcase/attackby(obj/item/O, mob/user)
-	. = ..()
-	if(!.)
-		if(istype(O, /obj/item/book) && user.try_unequip(O, src))
-			update_icon()
-		else if(IS_PEN(O))
-			var/newname = sanitize_safe(input("What would you like to title this bookshelf?"), MAX_NAME_LEN)
-			if(!newname)
-				return
-			else
-				SetName("bookcase ([newname])")
+	if(istype(O, /obj/item/book) && user.try_unequip(O, src))
+		update_icon()
+		return TRUE
+	return ..()
 
 /obj/structure/bookcase/attack_hand(var/mob/user)
-	if(contents.len)
-		var/obj/item/book/choice = input("Which book would you like to remove from the shelf?") as null|obj in contents
-		if(choice)
-			if(!CanPhysicallyInteract(user))
-				return
-			if(ishuman(user))
-				if(!user.get_active_hand())
-					user.put_in_hands(choice)
-			else
-				choice.dropInto(loc)
-			update_icon()
-
-/obj/structure/bookcase/explosion_act(severity)
-	..()
-	if(!QDELETED(src))
-		var/book_destroy_prob = 100
-		var/case_destroy_prob = 100
-		if(severity == 2)
-			book_destroy_prob = 50
-		else if(severity == 3)
-			case_destroy_prob = 50
-			book_destroy_prob = 0
-		if(prob(case_destroy_prob))
-			for(var/obj/item/book/b in contents)
-				b.dropInto(loc)
-				if(prob(book_destroy_prob))
-					qdel(b)
-			physically_destroyed()
+	if(!length(contents))
+		return ..()
+	var/obj/item/book/choice = input("Which book would you like to remove from the shelf?") as null|obj in contents
+	if(choice && (choice in contents) && CanPhysicallyInteract(user))
+		user.put_in_hands(choice)
+		update_icon()
+	return TRUE
 
 /obj/structure/bookcase/on_update_icon()
 	..()
@@ -106,6 +75,9 @@ var/global/list/station_bookcases = list()
 /obj/structure/bookcase/cart
 	name = "book cart"
 	anchored = FALSE
+	opacity = FALSE
 	desc = "A mobile cart for carrying books around."
 	movable_flags = MOVABLE_FLAG_WHEELED
 	icon = 'icons/obj/structures/book_cart.dmi'
+	tool_interaction_flags = TOOL_INTERACTION_DECONSTRUCT
+	obj_flags = 0
