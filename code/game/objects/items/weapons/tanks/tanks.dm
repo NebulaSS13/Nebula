@@ -357,7 +357,6 @@ var/global/list/global/tank_gauge_cache = list()
 	. = air_contents.merge(giver)
 	check_status()
 	queue_icon_update()
-	return .
 
 /obj/item/tank/proc/remove_air_volume(volume_to_return)
 	if(!air_contents)

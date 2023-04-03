@@ -285,7 +285,7 @@
 
 /turf/simulated/assume_air(datum/gas_mixture/giver)
 	var/datum/gas_mixture/my_air = return_air()
-	return my_air.merge(giver)
+	return my_air?.merge(giver)
 
 /turf/simulated/assume_gas(gasid, moles, temp = null)
 	var/datum/gas_mixture/my_air = return_air()
