@@ -30,3 +30,8 @@
 	procname = "remove_area"
 	button_icon_state = "remove_area"
 	target_type = EYE_TARGET
+
+// Shuttle blueprints subtype (handles shuttle.shuttle_area)
+/datum/extension/eye/blueprints/shuttle
+	expected_type = /obj/item/blueprints/shuttle
+	eye_type = /mob/observer/eye/blueprints/shuttle
