@@ -1,4 +1,0 @@
-author: MistakeNot4892
-delete-after: true
-changes:
-  - tweak: Tables now default to having no borders in browser pages.
