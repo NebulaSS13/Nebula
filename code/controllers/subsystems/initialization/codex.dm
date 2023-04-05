@@ -27,8 +27,9 @@ SUBSYSTEM_DEF(codex)
 	// Create general hardcoded entries.
 	for(var/ctype in subtypesof(/datum/codex_entry))
 		var/datum/codex_entry/centry = ctype
-		if(initial(centry.name))
-			centry = new centry()
+		if(TYPE_IS_ABSTRACT(centry) || initial(centry.skip_hardcoded_generation))
+			continue
+		centry = new centry()
 
 	// Create categorized entries.
 	var/list/deferred_population = list()

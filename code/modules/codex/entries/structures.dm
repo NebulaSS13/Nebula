@@ -31,6 +31,9 @@
 	mechanics_text = "A simple barricade is crafted from any material. You can make it a cheval de frise by adding rods of any material to a barricade constructed of any material, this structure will injure anyone who moves into it."
 	disambiguator = "structure"
 
+/datum/codex_entry/deity
+	abstract_type = /datum/codex_entry/deity
+
 /datum/codex_entry/deity/altar
 	associated_paths = list(/obj/structure/deity/altar)
 	mechanics_text = "To place someone upon the altar, first have them in an aggressive grab and click the altar while adjacent."

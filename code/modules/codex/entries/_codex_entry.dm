@@ -11,6 +11,7 @@
 	var/antag_text
 	var/disambiguator
 	var/list/categories
+	var/skip_hardcoded_generation // if TRUE, don't create this entry in codex init. where possible consider using abstract_type instead
 
 /datum/codex_entry/temporary
 	store_codex_entry = FALSE
@@ -103,14 +104,14 @@
 			. += header
 			. += "</span>"
 
-	. += "<span class='dmCodexBody'>"
+	. += "<div class='dmCodexBody'>"
 	if(lore_text)
-		. += "<p><span class='codexLore'>[TRIM_LINEBREAKS(lore_text)]</span></p>"
+		. += "<p><div class='codexLore'>[TRIM_LINEBREAKS(lore_text)]</div></p>"
 	if(mechanics_text)
-		. += "<h3>OOC Information</h3>\n<p><span class='codexMechanics'>[TRIM_LINEBREAKS(mechanics_text)]</span></p>"
+		. += "<h3>OOC Information</h3>\n<p><div class='codexMechanics'>[TRIM_LINEBREAKS(mechanics_text)]</div></p>"
 	if(antag_text && (!presenting_to || (presenting_to.mind && player_is_antag(presenting_to.mind))))
-		. += "<h3>Antagonist Information</h3>\n<p><span class='codexAntag'>[TRIM_LINEBREAKS(antag_text)]</span></p>"
-	. += "</span>"
+		. += "<h3>Antagonist Information</h3>\n<p><div class='codexAntag'>[TRIM_LINEBREAKS(antag_text)]</div></p>"
+	. += "</div>"
 
 	if(include_footer)
 		var/footer = get_codex_footer(presenting_to)
