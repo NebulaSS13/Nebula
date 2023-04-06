@@ -119,6 +119,8 @@
 
 /obj/vehicle/train/attack_hand(mob/user)
 	SHOULD_CALL_PARENT(FALSE)
+	if(!CanPhysicallyInteract(user))
+		return FALSE
 	if(user != load && (user in src))
 		user.forceMove(loc)
 	else if(load)

@@ -66,13 +66,15 @@
 	var/decl/special_role/cultist/cult = GET_DECL(/decl/special_role/cultist)
 	if(cult.powerless)
 		to_chat(user, "You read the words, but nothing happens.")
-		return fizzle(user)
+		fizzle(user)
+		return TRUE
 	cast(user)
 	return TRUE
 
 /obj/effect/rune/attack_ai(var/mob/user) // Cult borgs!
 	if(Adjacent(user))
-		attack_hand(user)
+		return attack_hand(user)
+	return FALSE
 
 /obj/effect/rune/proc/cast(var/mob/living/user)
 	fizzle(user)
