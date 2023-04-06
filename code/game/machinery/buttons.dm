@@ -42,7 +42,7 @@
 
 /obj/machinery/button/attackby(obj/item/W, mob/user)
 	if(!(. = component_attackby(W, user)))
-		return attack_hand(user)
+		return attack_hand_with_interaction_checks(user)
 
 /obj/machinery/button/interface_interact(user)
 	if(!CanInteract(user, DefaultTopicState()))

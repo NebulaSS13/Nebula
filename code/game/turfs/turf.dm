@@ -157,8 +157,7 @@
 	return FALSE
 
 /turf/attack_robot(var/mob/user)
-	if(CanPhysicallyInteract(user))
-		return attack_hand(user)
+	return attack_hand_with_interaction_checks(user)
 
 /turf/attackby(obj/item/W, mob/user)
 

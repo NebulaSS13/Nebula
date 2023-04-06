@@ -476,8 +476,7 @@
 
 	else if (istype(O, /obj/item/storage/plants))
 
-		attack_hand(user)
-
+		physical_attack_hand(user) // Harvests and clears out dead plants.
 		var/obj/item/storage/plants/S = O
 		for (var/obj/item/chems/food/grown/G in locate(user.x,user.y,user.z))
 			if(!S.can_be_inserted(G, user))

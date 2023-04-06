@@ -92,9 +92,8 @@
 	if(distance <= 1 && lock)
 		to_chat(user, SPAN_NOTICE("It appears to have a lock."))
 
-/obj/structure/door/attack_ai(mob/living/silicon/ai/user)
-	if(Adjacent(user) && isrobot(user))
-		return attack_hand(user)
+/obj/structure/door/attack_ai(mob/living/user)
+	return attack_hand_with_interaction_checks(user)
 
 /obj/structure/door/explosion_act(severity)
 	. = ..()

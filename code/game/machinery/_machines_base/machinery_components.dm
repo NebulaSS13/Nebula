@@ -268,7 +268,7 @@ var/global/list/machine_path_to_circuit_type
 			continue
 		if((. = part.attack_hand(user)))
 			return
-	return construct_state && construct_state.attack_hand(user, src)
+	return construct_state?.attack_hand(user, src)
 
 /*
 Standard helpers for users interacting with machinery parts.

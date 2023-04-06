@@ -241,11 +241,11 @@ var/global/list/closets = list()
 	if(!opened && (istype(W, /obj/item/stack/material) || IS_WRENCH(W)) )
 		return ..()
 
-	if(src.opened)
+	if(opened)
 		if(istype(W, /obj/item/grab))
 			var/obj/item/grab/G = W
 			src.receive_mouse_drop(G.affecting, user)      //act like they were dragged onto the closet
-			return 0
+			return TRUE
 		if(IS_WELDER(W))
 			var/obj/item/weldingtool/WT = W
 			if(WT.weld(0,user))
@@ -253,19 +253,21 @@ var/global/list/closets = list()
 				return TRUE
 		if(istype(W, /obj/item/gun/energy/plasmacutter))
 			var/obj/item/gun/energy/plasmacutter/cutter = W
-			if(!cutter.slice(user))
-				return
-			slice_into_parts(W, user)
+			if(cutter.slice(user))
+				slice_into_parts(W, user)
 			return TRUE
+
 		if(istype(W, /obj/item/storage/laundry_basket) && W.contents.len)
 			var/obj/item/storage/laundry_basket/LB = W
 			var/turf/T = get_turf(src)
 			for(var/obj/item/I in LB.contents)
 				LB.remove_from_storage(I, T, 1)
 			LB.finish_bulk_removal()
-			user.visible_message("<span class='notice'>[user] empties \the [LB] into \the [src].</span>", \
-								 "<span class='notice'>You empty \the [LB] into \the [src].</span>", \
-								 "<span class='notice'>You hear rustling of clothes.</span>")
+			user.visible_message(
+				SPAN_NOTICE("\The [user] empties \the [LB] into \the [src]."),
+				SPAN_NOTICE("You empty \the [LB] into \the [src]."),
+				SPAN_NOTICE("You hear rustling of clothes.")
+			)
 			return TRUE
 
 		if(user.try_unequip(W, loc))
@@ -274,38 +276,41 @@ var/global/list/closets = list()
 			W.pixel_z = 0
 			W.pixel_w = 0
 			return TRUE
-		return
-	else if(istype(W, /obj/item/energy_blade))
+		return FALSE
+
+	if(istype(W, /obj/item/energy_blade))
 		var/obj/item/energy_blade/blade = W
 		if(blade.is_special_cutting_tool() && emag_act(INFINITY, user, "<span class='danger'>The locker has been sliced open by [user] with \an [W]</span>!", "<span class='danger'>You hear metal being sliced and sparks flying.</span>"))
 			spark_at(src.loc, amount=5)
 			playsound(src.loc, 'sound/weapons/blade1.ogg', 50, 1)
 			open()
 		return TRUE
-	else if(istype(W, /obj/item/stack/package_wrap))
-		return //Return false to get afterattack to be called
-	else if(IS_WELDER(W) && (setup & CLOSET_CAN_BE_WELDED))
+
+	if(istype(W, /obj/item/stack/package_wrap))
+		return FALSE //Return false to get afterattack to be called
+
+	if(IS_WELDER(W) && (setup & CLOSET_CAN_BE_WELDED))
 		var/obj/item/weldingtool/WT = W
 		if(!WT.weld(0,user))
-			if(!WT.isOn())
-				return
-			else
-				to_chat(user, "<span class='notice'>You need more welding fuel to complete this task.</span>")
-				return
+			if(WT.isOn())
+				to_chat(user, SPAN_NOTICE("You need more welding fuel to complete this task."))
+			return
 		src.welded = !src.welded
 		src.update_icon()
-		user.visible_message("<span class='warning'>\The [src] has been [welded?"welded shut":"unwelded"] by \the [user].</span>", blind_message = "You hear welding.", range = 3)
+		user.visible_message(SPAN_WARNING("\The [src] has been [welded?"welded shut":"unwelded"] by \the [user]."), blind_message = "You hear welding.", range = 3)
 		return TRUE
 	else if(setup & CLOSET_HAS_LOCK)
 		src.togglelock(user, W)
 		return TRUE
-	else
-		src.attack_hand(user)
+
+	return attack_hand_with_interaction_checks(user)
 
 /obj/structure/closet/proc/slice_into_parts(obj/W, mob/user)
-	user.visible_message("<span class='notice'>\The [src] has been cut apart by [user] with \the [W].</span>", \
-						 "<span class='notice'>You have cut \the [src] apart with \the [W].</span>", \
-						 "You hear welding.")
+	user.visible_message(
+		SPAN_NOTICE("\The [src] has been cut apart by [user] with \the [W]."),
+		SPAN_NOTICE("You have cut \the [src] apart with \the [W]."),
+		"You hear welding."
+	)
 	physically_destroyed()
 
 /obj/structure/closet/receive_mouse_drop(atom/dropping, mob/user)
@@ -318,8 +323,9 @@ var/global/list/closets = list()
 		return TRUE
 
 /obj/structure/closet/attack_ai(mob/living/silicon/ai/user)
-	if(istype(user, /mob/living/silicon/robot) && Adjacent(user)) // Robots can open/close it, but not the AI.
-		attack_hand(user)
+	if(istype(user, /mob/living/silicon/robot)) // Robots can open/close it, but not the AI.
+		return attack_hand_with_interaction_checks(user)
+	return ..()
 
 /obj/structure/closet/relaymove(mob/user)
 	if(user.stat || !isturf(src.loc))

@@ -129,7 +129,7 @@
 		return TRUE
 	visible_message("<span class='warning'>\The [user] rips \the [src] in a single, decisive motion!</span>" )
 	playsound(src.loc, 'sound/items/poster_ripped.ogg', 100, 1)
-	ruined = 1
+	ruined = TRUE
 	icon_state = "poster_ripped"
 	SetName("ripped poster")
 	desc = "You can't make out anything from the poster's original print. It's ruined."

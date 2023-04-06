@@ -92,7 +92,7 @@
 	if(component_attackby(O, user))
 		return TRUE
 	if(panel_open && (IS_MULTITOOL(O) || IS_WIRECUTTER(O)))
-		attack_hand(user)
+		attack_hand_with_interaction_checks(user)
 		return TRUE
 	if((obj_flags & OBJ_FLAG_ANCHORABLE) && IS_WRENCH(O))
 		return ..()

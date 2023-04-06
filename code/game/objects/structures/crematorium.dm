@@ -91,8 +91,7 @@
 	return TRUE
 
 /obj/structure/crematorium/attack_robot(mob/user)
-	if(CanPhysicallyInteract(user))
-		return attack_hand(user)
+	return attack_hand_with_interaction_checks(user)
 
 /obj/structure/crematorium/relaymove(mob/user)
 	if(user.incapacitated() || locked)
@@ -206,13 +205,10 @@
 	return ..()
 
 /obj/structure/crematorium_tray/attack_hand(mob/user)
-	if(Adjacent(user))
-		connected_crematorium.attack_hand(user)
-	return ..()
+	return connected_crematorium.attack_hand_with_interaction_checks(user) || ..()
 
 /obj/structure/crematorium_tray/attack_robot(mob/user)
-	if(CanPhysicallyInteract(user))
-		return attack_hand(user)
+	return attack_hand_with_interaction_checks(user)
 
 /obj/structure/crematorium_tray/receive_mouse_drop(atom/dropping, mob/user)
 	. = ..()

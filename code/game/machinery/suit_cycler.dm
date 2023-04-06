@@ -162,7 +162,7 @@
 	//Hacking init.
 	if(IS_MULTITOOL(I) || IS_WIRECUTTER(I))
 		if(panel_open)
-			attack_hand(user)
+			physical_attack_hand(user)
 		return
 	//Other interface stuff.
 	if(istype(I, /obj/item/grab))
@@ -245,9 +245,9 @@
 	return 1
 
 /obj/machinery/suit_cycler/physical_attack_hand(mob/user)
-	if(electrified != 0)
-		if(shock(user, 100))
-			return TRUE
+	if(electrified != 0 && shock(user, 100))
+		return TRUE
+	return ..()
 
 /obj/machinery/suit_cycler/interface_interact(mob/user)
 	interact(user)

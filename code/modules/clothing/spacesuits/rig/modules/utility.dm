@@ -471,13 +471,11 @@
 	device = /obj/item/paper_bin
 
 /obj/item/rig_module/device/paperdispenser/engage(atom/target)
-
 	if(!..() || !device)
-		return 0
-
+		return FALSE
 	if(!target)
-		device.attack_hand(holder.wearer)
-		return 1
+		device.attack_hand_with_interaction_checks(holder.wearer)
+		return TRUE
 
 /obj/item/rig_module/device/pen
 	name = "mounted pen"

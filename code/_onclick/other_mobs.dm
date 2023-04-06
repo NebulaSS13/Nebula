@@ -105,4 +105,8 @@
 
 // Attack hand but for simple animals
 /atom/proc/attack_animal(mob/user)
+	return attack_hand_with_interaction_checks(user)
+
+// Used to check for physical interactivity in case of nonstandard attack_hand calls.
+/atom/proc/attack_hand_with_interaction_checks(var/mob/user)
 	return CanPhysicallyInteract(user) && attack_hand(user)

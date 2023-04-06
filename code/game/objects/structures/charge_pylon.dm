@@ -9,9 +9,7 @@
 	var/next_use
 
 /obj/structure/charge_pylon/attack_ai(var/mob/user)
-	if(Adjacent(user))
-		return attack_hand(user)
-	return ..()
+	return attack_hand_with_interaction_checks(user) || ..()
 
 /obj/structure/charge_pylon/attack_hand(var/mob/user)
 	SHOULD_CALL_PARENT(FALSE)

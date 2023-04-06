@@ -18,9 +18,6 @@
 	if(!location)
 		location = get_area(src)
 
-/obj/machinery/network/pager/attackby(obj/item/W, mob/user)
-	return attack_hand(user)
-
 /obj/machinery/network/pager/interface_interact(mob/living/user)
 	if(!CanInteract(user, global.default_topic_state))
 		return FALSE

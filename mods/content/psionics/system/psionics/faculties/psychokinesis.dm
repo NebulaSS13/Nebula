@@ -77,17 +77,17 @@
 			var/obj/item/psychic_power/telekinesis/tk = new(user)
 			if(tk.set_focus(target))
 				tk.sparkle()
-				user.visible_message("<span class='notice'>\The [user] reaches out.</span>")
+				user.visible_message(SPAN_NOTICE("\The [user] reaches out."))
 				return tk
 		else if(istype(target, /obj/structure))
-			user.visible_message("<span class='notice'>\The [user] makes a strange gesture.</span>")
+			user.visible_message(SPAN_NOTICE("\The [user] makes a strange gesture."))
 			var/obj/O = target
-			O.attack_hand(user)
+			O.attack_hand(user) // We bypass adjacency checks due to telekinetics.
 			return TRUE
 		else if(istype(target, /obj/machinery))
 			for(var/mtype in valid_machine_types)
 				if(istype(target, mtype))
 					var/obj/machinery/machine = target
-					machine.attack_hand(user)
+					machine.attack_hand(user) // We bypass adjacency checks due to telekinetics.
 					return TRUE
 	return FALSE

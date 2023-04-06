@@ -111,7 +111,7 @@
 		. = TOPIC_REFRESH
 
 	if(. == TOPIC_REFRESH)
-		attack_hand(user)
+		attack_hand_with_interaction_checks(user)
 
 /obj/machinery/keycard_auth/proc/reset()
 	active = 0

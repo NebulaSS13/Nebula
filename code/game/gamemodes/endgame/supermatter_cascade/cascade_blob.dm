@@ -50,9 +50,9 @@
 			T.ChangeTurf(type)
 
 /turf/unsimulated/wall/cascade/attack_robot(mob/user)
-	if(CanPhysicallyInteract(user))
-		return attack_hand(user)
-	user.examinate(src)
+	. = attack_hand_with_interaction_checks(user)
+	if(!.)
+		user.examinate(src)
 
 // /vg/: Don't let ghosts fuck with this.
 /turf/unsimulated/wall/cascade/attack_ghost(mob/user)
