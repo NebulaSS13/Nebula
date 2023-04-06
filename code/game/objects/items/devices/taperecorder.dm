@@ -420,12 +420,12 @@
 
 
 /obj/item/magnetic_tape/proc/ruin()
-	ruined = 1
+	ruined = TRUE
 	update_icon()
 
 
 /obj/item/magnetic_tape/proc/fix()
-	ruined = 0
+	ruined = FALSE
 	update_icon()
 
 
@@ -535,7 +535,7 @@
 	desc = "Quantum-enriched self-repairing nanotape, used for magnetic storage of information."
 	icon = 'icons/obj/items/device/tape_casette.dmi'
 	icon_state = "magtape"
-	ruined = 1
+	ruined = TRUE
 
 /obj/item/magnetic_tape/loose/fix()
 	return

@@ -29,6 +29,10 @@
 
 /obj/item/paper_bin/attack_hand(mob/user)
 
+	// This is required due to the mousedrop code calling attack_hand directly.
+	if(!CanPhysicallyInteract(user))
+		return FALSE
+
 	if(user.a_intent == I_HURT || !user.check_dexterity(DEXTERITY_GRIP, TRUE))
 		return ..()
 

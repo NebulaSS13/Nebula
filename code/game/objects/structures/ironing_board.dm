@@ -118,7 +118,7 @@
 	..()
 
 /obj/structure/bed/roller/ironingboard/attack_hand(var/mob/user)
-	if(!user.check_dexterity(DEXTERITY_SIMPLE_MACHINES, TRUE))
+	if(!user.check_dexterity(DEXTERITY_SIMPLE_MACHINES, TRUE) || buckled_mob)
 		return ..()	//Takes care of unbuckling.
 	if(density) // check if it's deployed
 		if(holding && user.put_in_hands(holding))

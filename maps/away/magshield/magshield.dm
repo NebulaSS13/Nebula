@@ -71,7 +71,7 @@
 		var/area/A = get_area(src)
 		log_game("EMP with size ([heavy_range], [lighter_range]) in area [A.proper_name] ([T.x], [T.y], [T.z])")
 		visible_message(
-			SPAN_DANGER("\the [src] suddenly activates!"),
+			SPAN_DANGER("\The [src] suddenly activates!"),
 			SPAN_DANGER("Electricity arcs between \the [src]'s rotating spokes as a powerful magnetic field tugs on every metallic object nearby.")
 		)
 		for(var/mob/living/carbon/M in hear(10, get_turf(src)))
