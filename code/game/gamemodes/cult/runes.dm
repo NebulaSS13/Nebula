@@ -72,9 +72,7 @@
 	return TRUE
 
 /obj/effect/rune/attack_ai(var/mob/user) // Cult borgs!
-	if(Adjacent(user))
-		return attack_hand(user)
-	return FALSE
+	return attack_hand_with_interaction_checks(user)
 
 /obj/effect/rune/proc/cast(var/mob/living/user)
 	fizzle(user)

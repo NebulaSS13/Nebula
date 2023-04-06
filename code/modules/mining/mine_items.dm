@@ -212,8 +212,7 @@
 
 /obj/item/stack/flag/attackby(var/obj/item/W, var/mob/user)
 	if(upright)
-		attack_hand(user)
-		return
+		return attack_hand_with_interaction_checks(user)
 	return ..()
 
 /obj/item/stack/flag/attack_hand(var/mob/user)

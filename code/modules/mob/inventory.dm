@@ -6,7 +6,7 @@
 		if(istype(W))
 			E.attackby(W,src)
 		else
-			E.attack_hand(src)
+			E.attack_hand(src) // We can assume it's physically accessible if it's on our person.
 	else
 		equip_to_slot_if_possible(W, slot)
 

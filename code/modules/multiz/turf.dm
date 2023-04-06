@@ -2,7 +2,7 @@
 /proc/shared_open_turf_attackhand(var/turf/target, var/mob/user)
 	for(var/atom/movable/M in target.below)
 		if(M.movable_flags & MOVABLE_FLAG_Z_INTERACT)
-			return M.attack_hand(user)
+			return M.attack_hand_with_interaction_checks(user)
 
 /proc/shared_open_turf_attackby(var/turf/target, obj/item/thing, mob/user)
 

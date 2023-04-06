@@ -29,7 +29,7 @@
 		)
 		physically_destroyed()
 		return TRUE
-	return attack_hand(user)
+	return attack_hand_with_interaction_checks(user)
 
 /obj/structure/largecrate/animal
 	name = "animal crate"

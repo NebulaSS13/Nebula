@@ -82,7 +82,7 @@
 		. = TOPIC_REFRESH
 
 	if(. == TOPIC_REFRESH)
-		attack_hand(user)
+		ui_interact(user)
 
 /obj/machinery/ai_slipper/proc/slip_process()
 	while(cooldown_time - world.timeofday > 0)

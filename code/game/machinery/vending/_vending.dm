@@ -172,11 +172,11 @@
 			return TRUE // don't smack that machine with your $2
 
 	if (istype(W, /obj/item/cash))
-		attack_hand(user)
+		attack_hand_with_interaction_checks(user)
 		return TRUE
 	if(IS_MULTITOOL(W) || IS_WIRECUTTER(W))
 		if(panel_open)
-			attack_hand(user)
+			attack_hand_with_interaction_checks(user)
 			return TRUE
 	if((user.a_intent == I_HELP) && attempt_to_stock(W, user))
 		return TRUE

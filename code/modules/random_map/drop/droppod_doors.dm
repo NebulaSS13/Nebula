@@ -16,9 +16,7 @@
 		deploy(null, 10 SECONDS)
 
 /obj/structure/droppod_door/attack_ai(var/mob/user)
-	if(!user.Adjacent(src))
-		return
-	attack_hand(user)
+	return attack_hand_with_interaction_checks(user)
 
 /obj/structure/droppod_door/attack_hand(var/mob/user)
 	if(deploying)

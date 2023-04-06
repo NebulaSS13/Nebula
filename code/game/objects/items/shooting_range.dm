@@ -30,8 +30,7 @@
 	// taking pinned targets off!
 	if(!stake || !user.check_dexterity(DEXTERITY_GRIP))
 		return ..()
-	stake.attack_hand(user)
-	return TRUE
+	return stake.attack_hand(user)
 
 /obj/item/target/syndicate
 	icon_state = "target_s"

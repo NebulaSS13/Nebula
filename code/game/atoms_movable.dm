@@ -322,9 +322,7 @@
 
 /atom/movable/overlay/attack_hand(mob/user)
 	SHOULD_CALL_PARENT(FALSE)
-	if (master)
-		return master.attack_hand(user)
-	return FALSE
+	return master?.attack_hand(user)
 
 /atom/movable/proc/touch_map_edge(var/overmap_id)
 	if(!simulated)

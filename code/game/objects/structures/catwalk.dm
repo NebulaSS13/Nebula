@@ -93,8 +93,7 @@
 		return TRUE
 
 /obj/structure/catwalk/attack_robot(var/mob/user)
-	if(CanPhysicallyInteract(user))
-		return attack_hand(user)
+	return attack_hand_with_interaction_checks(user)
 
 /obj/structure/catwalk/attackby(obj/item/C, mob/user)
 	. = ..()

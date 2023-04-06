@@ -249,7 +249,7 @@
 			var/atom/movable/M = A
 			if(istype(M) && M.movable_flags & MOVABLE_FLAG_Z_INTERACT)
 				if(isnull(I) || istype(I, /obj/item/grab))
-					M.attack_hand(user)
+					M.attack_hand_with_interaction_checks(user)
 				else
 					M.attackby(I, user)
 			return FALSE

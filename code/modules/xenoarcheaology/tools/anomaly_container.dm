@@ -19,8 +19,7 @@
 	return TRUE
 
 /obj/structure/anomaly_container/attack_robot(var/mob/user)
-	if(CanPhysicallyInteract(user))
-		return attack_hand(user)
+	return attack_hand_with_interaction_checks(user)
 
 /obj/structure/anomaly_container/proc/contain(var/obj/structure/artifact/artifact)
 	if(contained)

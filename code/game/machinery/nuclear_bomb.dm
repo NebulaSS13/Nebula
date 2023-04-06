@@ -71,7 +71,7 @@ var/global/bomb_set
 		return
 
 	if(panel_open && (IS_MULTITOOL(O) || IS_WIRECUTTER(O)))
-		return attack_hand(user)
+		return attack_hand_with_interaction_checks(user)
 
 	if(extended)
 		if(istype(O, /obj/item/disk/nuclear))
@@ -79,7 +79,7 @@ var/global/bomb_set
 				return
 			auth = O
 			add_fingerprint(user)
-			return attack_hand(user)
+			return attack_hand_with_interaction_checks(user)
 
 	if(anchored)
 		switch(removal_stage)

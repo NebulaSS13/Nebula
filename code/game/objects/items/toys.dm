@@ -561,7 +561,7 @@
 		user.visible_message("<span class='warning'><b>\The [user]</b> attempts to strangle [src]!</span>","<span class='warning'>You attempt to strangle [src]!</span>")
 	else
 		user.visible_message("<span class='notice'><b>\The [user]</b> pokes the [src].</span>","<span class='notice'>You poke the [src].</span>")
-		audible_message("<span class='game say'><span class='name'>\The [src]</span> says, <span class='message'><span class='body'>\"[phrase]\"</span></span>")
+		audible_message("<span class='game say'><span class='name'>\The [src]</span> says, <span class='message'><span class='body'>\"[phrase]\"</span></span></span>")
 	return TRUE
 
 /obj/structure/plushie/ian

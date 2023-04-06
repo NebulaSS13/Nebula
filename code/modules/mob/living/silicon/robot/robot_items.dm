@@ -88,7 +88,7 @@
 		/decl/material/solid/metal/steel  = MATTER_AMOUNT_SECONDARY,
 		/decl/material/solid/glass        = MATTER_AMOUNT_REINFORCEMENT,
 		/decl/material/solid/metal/copper = MATTER_AMOUNT_TRACE,
-		/decl/material/solid/silicon      = MATTER_AMOUNT_TRACE, 
+		/decl/material/solid/silicon      = MATTER_AMOUNT_TRACE,
 	)
 	var/activated = 0
 	var/strobe_effect = null
@@ -198,7 +198,7 @@
 /obj/item/pen/robopen/attack_self(mob/user)
 
 	var/choice = input("Would you like to change colour or mode?") as null|anything in list("Colour","Mode")
-	if(!choice) 
+	if(!choice)
 		return
 
 	playsound(src.loc, 'sound/effects/pop.ogg', 50, 0)
@@ -207,7 +207,7 @@
 
 		if("Colour")
 			var/newcolour = input("Which colour would you like to use?") as null|anything in list("black","blue","red","green","yellow")
-			if(newcolour) 
+			if(newcolour)
 				set_medium_color(newcolour, newcolour)
 
 		if("Mode")
@@ -432,8 +432,7 @@
 		to_chat(user, "<span class='notice'>\The [src] is full and can't store any more items.</span>")
 		return
 	if(istype(O, interact_type))
-		O.attack_hand(user)
-		return
+		return O.attack_hand(user)
 	. = ..()
 
 /obj/item/bioreactor

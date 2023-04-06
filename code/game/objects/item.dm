@@ -278,7 +278,7 @@
 	. = ..()
 
 /obj/item/proc/dragged_onto(var/mob/user)
-	attack_hand(user)
+	return attack_hand_with_interaction_checks(user)
 
 /obj/item/attack_hand(mob/user)
 

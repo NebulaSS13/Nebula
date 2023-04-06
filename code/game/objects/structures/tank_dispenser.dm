@@ -63,8 +63,7 @@
 			add_overlay("hydrogen-5")
 
 /obj/structure/tank_rack/attack_robot(mob/user)
-	if(CanPhysicallyInteract(user))
-		return attack_hand(user)
+	return attack_hand_with_interaction_checks(user)
 
 /obj/structure/tank_rack/attack_hand(mob/user)
 	if(!user.check_dexterity(DEXTERITY_GRIP, TRUE))
@@ -97,7 +96,7 @@
 		LAZYADD(adding_to_list, weakref(I))
 		to_chat(user, SPAN_NOTICE("You put [I] in [src]."))
 		update_icon()
-		attack_hand(user)
+		attack_hand_with_interaction_checks(user)
 		return TRUE
 	return ..()
 
@@ -119,7 +118,7 @@
 			O.dropInto(loc)
 			to_chat(user, SPAN_NOTICE("You take \the [O] out of \the [src]."))
 			update_icon()
-			attack_hand(user)
+			attack_hand_with_interaction_checks(user)
 		return TOPIC_REFRESH
 
 /*

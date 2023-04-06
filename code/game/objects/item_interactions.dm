@@ -20,7 +20,7 @@
 	expected_target_type = /obj/item
 
 /decl/interaction_handler/pick_up/invoked(atom/target, mob/user, obj/item/prop)
-	target.attack_hand(user)
+	target.attack_hand_with_interaction_checks(user)
 
 /decl/interaction_handler/drop
 	name = "Drop"

@@ -30,58 +30,62 @@ var/global/list/floor_light_cache = list()
 	update_icon()
 
 /obj/machinery/floor_light/attackby(var/obj/item/W, var/mob/user)
+
 	if(IS_SCREWDRIVER(W))
 		anchored = !anchored
 		if(use_power)
 			update_use_power(POWER_USE_OFF)
-		visible_message("<span class='notice'>\The [user] has [anchored ? "attached" : "detached"] \the [src].</span>")
-	else if(IS_WELDER(W) && (damaged || (stat & BROKEN)))
+		visible_message(SPAN_NOTICE("\The [user] has [anchored ? "attached" : "detached"] \the [src]."))
+		return TRUE
+
+	if(IS_WELDER(W) && (damaged || (stat & BROKEN)))
 		var/obj/item/weldingtool/WT = W
 		if(!WT.weld(0, user))
-			to_chat(user, "<span class='warning'>\The [src] must be on to complete this task.</span>")
-			return
+			to_chat(user, SPAN_WARNING("\The [src] must be on to complete this task."))
+			return TRUE
 		playsound(src.loc, 'sound/items/Welder.ogg', 50, 1)
-		if(!do_after(user, 20, src))
-			return
-		if(!src || !WT.isOn())
-			return
-		visible_message("<span class='notice'>\The [user] has repaired \the [src].</span>")
-		set_broken(FALSE)
-		damaged = null
-	else if(IS_WRENCH(W))
-		playsound(src.loc, 'sound/items/Ratchet.ogg', 75, 1)
-		to_chat(user, "<span class='notice'>You dismantle the floor light.</span>")
+		if(do_after(user, 20, src) && !QDELETED(src) && WT.isOn())
+			visible_message(SPAN_NOTICE("\The [user] has repaired \the [src]."))
+			set_broken(FALSE)
+			damaged = null
+		return TRUE
 
+	if(IS_WRENCH(W))
+		playsound(src.loc, 'sound/items/Ratchet.ogg', 75, 1)
+		to_chat(user, SPAN_NOTICE("You dismantle the floor light."))
 		SSmaterials.create_object(/decl/material/solid/metal/steel, loc, 1)
 		SSmaterials.create_object(/decl/material/solid/glass, loc, 1)
-
 		qdel(src)
-	else if(W.force && user.a_intent == "hurt")
-		attack_hand(user)
-	return
+		return TRUE
+
+	if(W.force && user.a_intent == I_HURT)
+		return physical_attack_hand(user)
+
+	return ..()
 
 /obj/machinery/floor_light/physical_attack_hand(var/mob/user)
 	if(user.a_intent == I_HURT && !issmall(user))
 		if(!isnull(damaged) && !(stat & BROKEN))
-			visible_message("<span class='danger'>\The [user] smashes \the [src]!</span>")
+			visible_message(SPAN_DANGER("\The [user] smashes \the [src]!"))
 			playsound(src, "shatter", 70, 1)
 			set_broken(TRUE)
 		else
-			visible_message("<span class='danger'>\The [user] attacks \the [src]!</span>")
+			visible_message(SPAN_DANGER("\The [user] attacks \the [src]!"))
 			playsound(src.loc, 'sound/effects/Glasshit.ogg', 75, 1)
-			if(isnull(damaged)) damaged = 0
+			if(isnull(damaged))
+				damaged = 0
 		return TRUE
 
 /obj/machinery/floor_light/interface_interact(var/mob/user)
 	if(!CanInteract(user, DefaultTopicState()))
 		return FALSE
 	if(!anchored)
-		to_chat(user, "<span class='warning'>\The [src] must be screwed down first.</span>")
+		to_chat(user, SPAN_WARNING("\The [src] must be screwed down first."))
 		return TRUE
 
 	var/on = (use_power == POWER_USE_ACTIVE)
 	update_use_power(on ? POWER_USE_OFF : POWER_USE_ACTIVE)
-	visible_message("<span class='notice'>\The [user] turns \the [src] [!on ? "on" : "off"].</span>")
+	visible_message(SPAN_NOTICE("\The [user] turns \the [src] [!on ? "on" : "off"]."))
 	return TRUE
 
 /obj/machinery/floor_light/set_broken(new_state)
