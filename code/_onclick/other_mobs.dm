@@ -105,4 +105,4 @@
 
 // Attack hand but for simple animals
 /atom/proc/attack_animal(mob/user)
-	return attack_hand(user)
+	return CanPhysicallyInteract(user) && attack_hand(user)
