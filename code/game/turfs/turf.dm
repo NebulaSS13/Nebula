@@ -145,20 +145,16 @@
 
 /turf/attack_hand(mob/user)
 	SHOULD_CALL_PARENT(FALSE)
-	user.setClickCooldown(DEFAULT_QUICK_COOLDOWN)
-	if(user.restrained())
-		return FALSE
-	return handle_hand_interception(user)
-
-/turf/proc/handle_hand_interception(var/mob/user)
-	var/datum/extension/turf_hand/THE
-	for (var/A in src)
-		var/datum/extension/turf_hand/TH = get_extension(A, /datum/extension/turf_hand)
-		if (istype(TH) && TH.priority > THE?.priority) //Only overwrite if the new one is higher. For matching values, its first come first served
-			THE = TH
-
-	if (THE)
-		return THE.OnHandInterception(user)
+	var/datum/extension/turf_hand/highest_priority_intercept
+	for(var/atom/thing in contents)
+		var/datum/extension/turf_hand/intercept = get_extension(thing, /datum/extension/turf_hand)
+		if(intercept?.intercept_priority > highest_priority_intercept?.intercept_priority)
+			highest_priority_intercept = intercept
+	if(highest_priority_intercept)
+		user.setClickCooldown(DEFAULT_QUICK_COOLDOWN)
+		var/atom/intercepting_atom = highest_priority_intercept.holder
+		return intercepting_atom.attack_hand(user)
+	return FALSE
 
 /turf/attack_robot(var/mob/user)
 	if(CanPhysicallyInteract(user))
