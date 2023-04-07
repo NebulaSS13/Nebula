@@ -2020,7 +2020,7 @@
 /turf/simulated/floor/tiled/steel_grid,
 /area/ship/trade/loading_bay)
 "Qy" = (
-/obj/turbolift_map_holder/tradeship{
+/obj/abstract/turbolift_spawner/tradeship{
 	dir = 1;
 	icon_state = ""
 	},

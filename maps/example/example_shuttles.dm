@@ -29,7 +29,7 @@
 	)
 	ceiling_type = /turf/simulated/floor/shuttle_ceiling
 
-/obj/turbolift_map_holder/example
+/obj/abstract/turbolift_spawner/example
 	name = "Testing Site elevator placeholder"
 	icon = 'icons/obj/turbolift_preview_nowalls_3x3.dmi'
 	depth = 3

@@ -1,5 +1,5 @@
 // Map object.
-/obj/turbolift_map_holder
+/obj/abstract/turbolift_spawner
 	name = "turbolift map placeholder"
 	icon = 'icons/obj/turbolift_preview_3x3.dmi'
 	dir = SOUTH         // Direction of the holder determines the placement of the lift control panel and doors.
@@ -21,9 +21,19 @@
 	var/floor_departure_sound
 	var/floor_arrival_sound
 
-
-/obj/turbolift_map_holder/Initialize()
+INITIALIZE_IMMEDIATE(/obj/abstract/turbolift_spawner)
+/obj/abstract/turbolift_spawner/Initialize()
 	. = ..()
+	if(SSmapping.initialized)
+		build_turbolift()
+	else
+		SSmapping.turbolifts_to_initialize += src
+
+/obj/abstract/turbolift_spawner/Destroy()
+	SSmapping.turbolifts_to_initialize -= src
+	return ..()
+
+/obj/abstract/turbolift_spawner/proc/build_turbolift()
 	// Create our system controller.
 	var/datum/turbolift/lift = new()
 	if(floor_departure_sound)
@@ -62,7 +72,7 @@
 
 		if(NORTH)
 
-			int_panel_x = ux + FLOOR(lift_size_x/2) 
+			int_panel_x = ux + FLOOR(lift_size_x/2)
 			int_panel_y = uy + 1
 			ext_panel_x = ux
 			ext_panel_y = ey + 2
@@ -79,7 +89,7 @@
 
 		if(SOUTH)
 
-			int_panel_x = ux + FLOOR(lift_size_x/2) 
+			int_panel_x = ux + FLOOR(lift_size_x/2)
 			int_panel_y = ey - 1
 			ext_panel_x = ex
 			ext_panel_y = uy - 2
@@ -234,6 +244,9 @@
 			light1.set_dir(SOUTH)
 			light2.set_dir(NORTH)
 
-	lift.open_doors()
+	if(SSmisc_late.initialized)
+		lift.open_doors()
+	else
+		SSmisc_late.turbolifts_to_open += lift
 
 	qdel(src) // We're done.

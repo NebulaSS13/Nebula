@@ -43,7 +43,7 @@
 	landmark_tag = "nav_tradeship_below_starboardastern"
 
 // Essentially a bare platform that moves up and down.
-/obj/turbolift_map_holder/tradeship
+/obj/abstract/turbolift_spawner/tradeship
 	name = "Tradeship cargo elevator placeholder"
 	depth = 4
 	lift_size_x = 3
