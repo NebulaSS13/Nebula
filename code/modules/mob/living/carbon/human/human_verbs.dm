@@ -175,7 +175,7 @@
 	var/self = (usr == src)
 	var/decl/pronouns/G = usr.get_pronouns()
 	if(!self)
-		var/decl/pronouns/target_gender = usr.get_pronouns()
+		var/decl/pronouns/target_gender = src.get_pronouns()
 		usr.visible_message( \
 			SPAN_NOTICE("\The [usr] kneels down, puts [G.his] hand on \the [src]'s wrist, and begins counting [target_gender.his] pulse."), \
 			SPAN_NOTICE("You begin counting \the [src]'s pulse."))
