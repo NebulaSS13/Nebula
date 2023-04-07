@@ -107,10 +107,10 @@
 	if(owner)
 		if(active)
 			owner.pass_flags |= PASS_FLAG_TABLE
-			if(owner.floatiness <= 5)
-				owner.make_floating(5)
+			owner.start_floating()
 		else
 			owner.pass_flags &= ~PASS_FLAG_TABLE
+			owner.update_floating() // stops conditionally, i.e. on solid ground but not in space
 
 /obj/item/organ/internal/eyes/adherent
 	name = "receptor prism"

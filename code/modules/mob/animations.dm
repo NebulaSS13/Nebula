@@ -1,31 +1,22 @@
 /mob/proc/do_jitter(amplitude)
 	pixel_x = default_pixel_x + rand(-amplitude, amplitude)
 	pixel_y = default_pixel_y + rand(-amplitude/3, amplitude/3)
-	
+
 //handles up-down floaty effect in space and zero-gravity
 /mob/var/is_floating = 0
-/mob/var/floatiness = 0
 
 /mob/proc/update_floating()
 
 	if(anchored || buckled || has_gravity())
-		make_floating(0)
+		stop_floating()
 		return
 
 	if(check_space_footing())
-		make_floating(0)
+		stop_floating()
 		return
 
-	make_floating(1)
+	start_floating()
 	return
-
-/mob/proc/make_floating(var/n)
-	floatiness = n
-
-	if(floatiness && !is_floating)
-		start_floating()
-	else if(!floatiness && is_floating)
-		stop_floating()
 
 /mob/proc/start_floating()
 
