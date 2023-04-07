@@ -11,6 +11,12 @@
 	possible_states = 13
 	dirt_color = "#e3e7e8"
 
+/turf/exterior/snow/get_base_movement_delay(travel_dir, mob/mover)
+	. = ..()
+	if(mover)
+		var/decl/flooring/snow = GET_DECL(/decl/flooring/snow)
+		. += snow.get_movement_delay(travel_dir, mover)
+
 /turf/exterior/snow/fire_act(datum/gas_mixture/air, exposed_temperature, exposed_volume)
 	melt()
 

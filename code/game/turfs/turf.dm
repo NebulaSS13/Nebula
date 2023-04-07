@@ -133,11 +133,11 @@
 /turf/proc/is_solid_structure()
 	return !(turf_flags & TURF_FLAG_BACKGROUND) || locate(/obj/structure/lattice, src)
 
-/turf/proc/get_base_movement_delay()
+/turf/proc/get_base_movement_delay(var/travel_dir, var/mob/mover)
 	return movement_delay
 
-/turf/proc/get_movement_delay(var/travel_dir)
-	. = get_base_movement_delay()
+/turf/proc/get_terrain_movement_delay(var/travel_dir, var/mob/mover)
+	. = get_base_movement_delay(travel_dir, mover)
 	if(weather)
 		. += weather.get_movement_delay(return_air(), travel_dir)
 

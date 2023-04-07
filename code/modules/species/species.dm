@@ -111,6 +111,9 @@ var/global/const/DEFAULT_SPECIES_HEALTH = 200
 	var/gibbed_anim =   "gibbed-h"
 	var/dusted_anim =   "dust-h"
 
+	/// A modifier applied to move delay when walking on snow.
+	var/snow_slowdown_mod = 0
+
 	var/death_sound
 	var/death_message = "seizes up and falls limp, their eyes dead and lifeless..."
 	var/knockout_message = "collapses, having been knocked unconscious."
