@@ -1,3 +1,6 @@
+/obj/machinery/suit_cycler/Initialize()
+	LAZYDISTINCTADD(available_bodytypes, BODYTYPE_FELINE)
+	. = ..()
 
 /obj/item/clothing/suit/space/void/merc/Initialize()
 	. = ..()
