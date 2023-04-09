@@ -233,6 +233,7 @@ var/global/dmm_suite/preloader/_preloader = new
 		/obj/item,
 		/obj/machinery,
 		/obj/structure,
+		/obj/abstract/landmark/exoplanet_spawn,
 	)
 
 /dmm_suite/proc/parse_grid(model as text, model_key as text, xcrd as num,ycrd as num,zcrd as num, no_changeturf as num, clear_contents as num, initialized_areas_by_type)

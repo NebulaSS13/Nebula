@@ -1,5 +1,4 @@
-
-
+///Subsystem for updating day/night ambient lighting for sets of z-levels that share a common day/night state.
 SUBSYSTEM_DEF(daycyle)
 	name       = "Day Cycle"
 	priority   = SS_PRIORITY_DAYCYCLE
@@ -7,7 +6,9 @@ SUBSYSTEM_DEF(daycyle)
 	flags      = SS_BACKGROUND | SS_POST_FIRE_TIMING | SS_NO_INIT
 	runlevels  = RUNLEVEL_GAME | RUNLEVEL_POSTGAME
 	init_order = SS_INIT_TICKER
+	///List of the topmost level_ids associated with their /datum/ssdaycycle_registered that contains the current daystate for that set of levels.
 	var/list/registered_levels
+	///List of /datum/ssdaycycle_registered currently being processed this tick
 	var/list/current_run
 
 ///Adds a set of levels that should all be updated at the same time and share the same day state
@@ -47,16 +48,26 @@ SUBSYSTEM_DEF(daycyle)
 
 ///Data on a set of z-levels getting daylight updates
 /datum/ssdaycycle_registered
+	///level_id strings for all the linked levels sharing a daycycle state.
 	var/list/level_ids
+	///Is this current cycle turning turfs to night, or day.
 	var/is_applying_night = FALSE
-	var/update_interval   = 5 MINUTES
+	///Time between updating all turfs in the current column.
+	var/update_interval = 5 MINUTES
+	///X position of the column currently having its lighting changed to day or night.
 	var/daycolumn_x = 1
+	///Time we last updated a column.
 	var/time_last_column_update
 
+	///Cached minimum inner area's X coordinate for each registered levels.
 	var/list/x_min
+	///Cached maximum inner area's X coordinate for each registered levels.
 	var/list/x_max
+	///Cached minimum inner area's Y coordinate for each registered levels.
 	var/list/y_min
+	///Cached maximum inner area's Y coordinate for each registered levels.
 	var/list/y_max
+	///Cached Z index for each registered levels.
 	var/list/level_z
 
 /datum/ssdaycycle_registered/New(var/list/_level_ids, var/_start_at_night = is_applying_night, var/_update_interval = update_interval)
@@ -68,6 +79,7 @@ SUBSYSTEM_DEF(daycyle)
 		add_level(ID)
 	daycolumn_x = world.maxx
 
+///Add the level with the specified level_id string to the levels managed by the this ssdaycycle_registered datum.
 /datum/ssdaycycle_registered/proc/add_level(var/level_id)
 	var/datum/level_data/LD = SSmapping.levels_by_id[level_id]
 	LAZYADD(x_min, (LD.level_inner_min_x || 1))
@@ -76,6 +88,7 @@ SUBSYSTEM_DEF(daycyle)
 	LAZYADD(y_max, (LD.level_inner_min_y? LD.level_inner_max_y : world.maxy))
 	LAZYADD(level_z, LD.level_z)
 
+///Remove the level with the specified level_id string from the levels managed by the this ssdaycycle_registered datum.
 /datum/ssdaycycle_registered/proc/remove_level(var/level_id)
 	if(!level_ids)
 		return
@@ -96,11 +109,13 @@ SUBSYSTEM_DEF(daycyle)
 	level_z.Cut(level_index, level_index)
 	ASSERT(length(level_ids) == length(x_min) == length(x_max) == length(y_min) == length(y_max) == length(level_z))
 
+///Returns the list of turfs on the level with the index specified from our managed level lists.
 /datum/ssdaycycle_registered/proc/get_level_column(var/level_index)
 	if(daycolumn_x < x_min[level_index] || daycolumn_x >= x_max[level_index])
 		return //Don't add turfs until daycolumn is within the actual level
 	. = block(locate(daycolumn_x, y_min[level_index], level_z[level_index]), locate(daycolumn_x, y_max[level_index], level_z[level_index]))
 
+///Increment the column we're currently updating for our set of managed z-level.
 /datum/ssdaycycle_registered/proc/increment_column()
 	if(daycolumn_x >= world.maxx)
 		is_applying_night = !is_applying_night
@@ -110,6 +125,7 @@ SUBSYSTEM_DEF(daycyle)
 	time_last_column_update = REALTIMEOFDAY
 	return daycolumn_x
 
+///Update the daystate for all the turfs within the current column for each managed z-levels.
 /datum/ssdaycycle_registered/proc/update_all_daycolumns()
 	for(var/i = 1 to length(level_ids))
 		update_level_daycolumn(i)

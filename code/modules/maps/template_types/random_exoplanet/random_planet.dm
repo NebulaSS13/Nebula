@@ -124,7 +124,7 @@
 	log_debug("Planet Levels:\n\tRoot Level:[world.maxz + 1]")
 
 	//Build root z-stack first
-	var/list/root_stack = buid_z_stack(null, null, lvl_to_build, gen_data)
+	var/list/root_stack = build_z_stack(null, null, lvl_to_build, gen_data)
 
 	//Build any amount of adjacent stacks
 	var/list/north_stack = build_adjacent_z_stacks(adjacent_levels_north, NORTH, root_stack, lvl_to_build, gen_data)
@@ -159,7 +159,7 @@
 	var/list/lvl_data = list()
 	if(amount < 1)
 		return lvl_data
-	lvl_data = buid_z_stack(direction_from_root, adjacent_level_data, new_level_data_types, gen_data)
+	lvl_data = build_z_stack(direction_from_root, adjacent_level_data, new_level_data_types, gen_data)
 	if(amount < 2)
 		return lvl_data
 	//If amount if bigger than 2, build another adjacent stack to us
@@ -167,7 +167,7 @@
 	return lvl_data
 
 ///Create a new z-level stack that's connected to an existing z stack, on the given direction.
-/datum/map_template/planetoid/proc/buid_z_stack(var/direction_from_root, var/list/adjacent_level_data, var/list/new_level_data_types, var/datum/planetoid_data/gen_data)
+/datum/map_template/planetoid/proc/build_z_stack(var/direction_from_root, var/list/adjacent_level_data, var/list/new_level_data_types, var/datum/planetoid_data/gen_data)
 	. = list()
 	var/stack_height = length(new_level_data_types)
 

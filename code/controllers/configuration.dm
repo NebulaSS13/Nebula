@@ -124,7 +124,8 @@ var/global/list/gamemode_cache = list()
 	var/max_character_aspects = 5
 
 	var/welder_vision = 1
-	var/generate_map = 0
+	///If false, skips all level generation.
+	var/roundstart_level_generation = 1
 	var/no_click_cooldown = 0
 
 	//Used for modifying movement speed for mobs.
@@ -407,8 +408,8 @@ var/global/list/gamemode_cache = list()
 				if ("log_runtime")
 					config.log_runtime = 1
 
-				if ("generate_asteroid")
-					config.generate_map = 1
+				if ("roundstart_level_generation")
+					config.roundstart_level_generation = text2num(value)
 
 				if ("no_click_cooldown")
 					config.no_click_cooldown = 1

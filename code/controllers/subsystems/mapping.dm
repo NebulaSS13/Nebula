@@ -98,7 +98,7 @@ SUBSYSTEM_DEF(mapping)
 
 	// Initialize z-level objects.
 #ifdef UNIT_TEST
-	config.generate_map = TRUE
+	config.roundstart_level_generation = FALSE
 #endif
 	for(var/z = 1 to world.maxz)
 		var/datum/level_data/level = levels_by_z[z]
@@ -170,6 +170,10 @@ SUBSYSTEM_DEF(mapping)
 	base_turf_by_z.len = world.maxz
 	planetoid_data_by_z.len = world.maxz
 	connected_z_cache.Cut()
+
+	//Update SSWeather's indexed lists, if we can.
+	if(SSweather?.weather_by_z)
+		SSweather.weather_by_z.len = world.maxz
 
 /datum/controller/subsystem/mapping/proc/increment_world_z_size(var/new_level_type, var/defer_setup = FALSE)
 

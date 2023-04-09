@@ -77,13 +77,17 @@
 
 ///Try to spawn the given amount of ruins onto our level. Returns the template types that were spawned
 /datum/level_data/planetoid/proc/seed_ruins(var/budget = 0, var/list/potentialRuins)
+	if(!length(potentialRuins))
+		log_world("Ruin loader was given no ruins to pick from.")
+		return list()
 	//#TODO: Fill in allowed area from a proc or something
 	var/list/areas_whitelist  = list(base_area)
 	var/list/candidates_ruins = potentialRuins.Copy()
 	var/list/spawned_ruins    = list()
 
 	//Each iteration needs to either place a ruin or strictly decrease either the budget or ruins.len (or break).
-	for(var/datum/map_template/R = candidates_ruins[1], length(candidates_ruins) && (budget > 0), R = pick(candidates_ruins))
+	while(length(candidates_ruins) && (budget > 0))
+		var/datum/map_template/R = pick(candidates_ruins)
 		if((R.get_template_cost() <= budget) && !LAZYISIN(SSmapping.banned_ruin_names, R.name) && try_place_ruin(R, areas_whitelist))
 			spawned_ruins += R
 			budget        -= R.get_template_cost()

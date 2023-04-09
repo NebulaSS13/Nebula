@@ -247,6 +247,8 @@
 
 ///Called when setting up the level. Apply generators and anything that modifies the turfs of the level.
 /datum/level_data/proc/generate_level()
+	if(!global.config.roundstart_level_generation)
+		return
 	var/origx = level_inner_min_x
 	var/origy = level_inner_min_y
 	var/endx  = level_inner_min_x + level_inner_width
@@ -257,6 +259,8 @@
 ///Apply the parent entity's map generators. (Planets generally)
 ///This proc is to give a chance to level_data subtypes to individually chose to ignore the parent generators.
 /datum/level_data/proc/apply_map_generators(var/list/map_gen)
+	if(!global.config.roundstart_level_generation)
+		return
 	var/origx = level_inner_min_x
 	var/origy = level_inner_min_y
 	var/endx  = level_inner_min_x + level_inner_width
@@ -527,12 +531,6 @@ INITIALIZE_IMMEDIATE(/obj/abstract/level_data_spawner)
 		/datum/random_map/automata/cave_system,
 		/datum/random_map/noise/ore
 	)
-
-/datum/level_data/mining_level/generate_level()
-	//#FIXME: This config option is very ambiguous. Most RNG stuff doesn't care about it. Might be worth removing?
-	if(!config.generate_map)
-		return
-	. = ..()
 
 /datum/level_data/mining_level/after_generate_level()
 	..()

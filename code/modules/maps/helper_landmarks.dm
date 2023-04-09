@@ -57,13 +57,18 @@
 /obj/abstract/landmark/clear
 	name = "clear turf"
 	icon_state = "clear"
-	delete_me = TRUE
+	//Don't set deleteme to true, since we work inside lateinitialize
 
 /obj/abstract/landmark/clear/Initialize()
+	..()
+	return INITIALIZE_HINT_LATELOAD
+
+/obj/abstract/landmark/clear/LateInitialize()
+	. = ..()
 	var/turf/simulated/wall/W = get_turf(src)
 	if(istype(W))
-		W.dismantle_wall(1,1,1)
-	. = ..()
+		W.dismantle_wall(TRUE, TRUE, TRUE)
+	qdel(src)
 
 //Applies fire act to the turf
 /obj/abstract/landmark/scorcher

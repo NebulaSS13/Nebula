@@ -16,6 +16,8 @@
 	var/list/graphic = list()
 	//Cache of gas overlay objects
 	var/list/tile_overlay_cache
+	///The last cached color of the gas mixture
+	var/tmp/cached_mix_color
 
 /datum/gas_mixture/New(_volume = CELL_VOLUME, _temperature = 0, _group_multiplier = 1)
 	volume = _volume
@@ -217,6 +219,8 @@
 		else
 			total_moles += gas[g]
 
+	//Mark the cached color for update
+	cached_mix_color = null
 
 //Returns the pressure of the gas mix.  Only accurate if there have been no gas modifications since update_values() has been called.
 /datum/gas_mixture/proc/return_pressure()
@@ -531,12 +535,31 @@
 
 ///Returns a color blended from all materials the gas mixture contains
 /datum/gas_mixture/proc/get_overall_color()
-	if(!total_moles)
-		update_values()
-	for(var/g in gas)
-		var/decl/material/mat = GET_DECL(g)
-		var/percent = gas[g] / total_moles
-		if(.)
-			BlendRGB(., mat.color, percent)
-		else
-			. = mat.color
+	if(!cached_mix_color)
+		if(!LAZYLEN(gas))
+			cached_mix_color = "#ffffffff"
+			return cached_mix_color
+
+		if(LAZYLEN(gas) == 1)
+			var/decl/material/G = GET_DECL(gas[1])
+			cached_mix_color = G.color + num2hex(G.opacity * 255)
+			return cached_mix_color
+
+		//If we really have to, add up all colors
+		var/list/colors        = list(0, 0, 0, 0)
+		var/total_color_weight = 0
+
+		for(var/mat_path in gas)
+			var/decl/material/G = GET_DECL(mat_path)
+			if(G.color_weight <= 0)
+				continue
+			var/hex = uppertext(G.color) + num2hex(G.opacity * 255)
+			var/mod = gas[mat_path] * G.color_weight
+			colors[1] += HEX_RED(hex)   * mod
+			colors[2] += HEX_GREEN(hex) * mod
+			colors[3] += HEX_BLUE(hex)  * mod
+			colors[4] += HEX_ALPHA(hex) * mod
+			total_color_weight += mod
+		cached_mix_color = rgb(colors[1] / total_color_weight, colors[2] / total_color_weight, colors[3] / total_color_weight, colors[4] / total_color_weight)
+
+	return cached_mix_color

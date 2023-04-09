@@ -23,7 +23,7 @@
 	var/list/colors = list()
 	//#TODO: Not sure why it's summing up all the z-level atmos color? I really doubt this was ever tested too...
 	for(var/lvl in map_z)
-		var/datum/level_data/level_data = map_z[lvl]
+		var/datum/level_data/level_data = SSmapping.levels_by_z[lvl]
 		for(var/g in level_data.exterior_atmosphere?.gas)
 			var/decl/material/mat = GET_DECL(g)
 			colors += mat.color
