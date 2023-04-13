@@ -70,6 +70,8 @@
 	surface_light_level_max    = 0.25
 	atmosphere_temperature_min = T0C
 	atmosphere_temperature_max = 10 CELSIUS
+	atmosphere_pressure_min    = 1 ATM
+	atmosphere_pressure_max    = 2.5 ATM
 	template_parent_type       = /datum/map_template/planetoid/exoplanet
 	level_data_type            = /datum/level_data/planetoid/exoplanet/shrouded
 	prefered_level_data_per_z  = list(

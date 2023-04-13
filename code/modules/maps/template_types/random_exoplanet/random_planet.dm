@@ -34,9 +34,9 @@
 	///Maximum possible base temperature range to pick from, in kelvins, when generating the atmosphere on this planet.
 	var/atmosphere_temperature_max = T100C
 	///Minimum atmospheric pressure in the range to pick from for this planet template.
-	var/atmosphere_pressure_min = 0.5 * ONE_ATMOSPHERE
+	var/atmosphere_pressure_min = 0.5 ATM
 	///Maximum atmospheric pressure in the range to pick from for this planet template.
-	var/atmosphere_pressure_max = 2 * ONE_ATMOSPHERE
+	var/atmosphere_pressure_max = 2 ATM
 
 	///What weather state to use for this planet initially. If null, will not initialize any weather system.
 	var/initial_weather_state

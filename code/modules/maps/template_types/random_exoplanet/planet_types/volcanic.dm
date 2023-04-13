@@ -79,6 +79,8 @@
 	initial_weather_state      = /decl/state/weather/ash
 	atmosphere_temperature_min = 240 CELSIUS
 	atmosphere_temperature_max = 820 CELSIUS
+	atmosphere_pressure_min    = 10 ATM //It's safe to say a volcanic world probably has a thick gas blanket if it's big enough to hold an atmosphere
+	atmosphere_pressure_min    = 90 ATM //Venus is 92.10 atm or 93 bar for reference
 	template_parent_type       = /datum/map_template/planetoid/exoplanet
 	level_data_type            = /datum/level_data/planetoid/exoplanet/volcanic
 	prefered_level_data_per_z  = list(

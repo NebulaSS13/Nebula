@@ -94,6 +94,8 @@
 	surface_light_level_max    = 0.75
 	atmosphere_temperature_min = 20 CELSIUS  //Within liquid water/humanoid "comfort" range
 	atmosphere_temperature_max = 50 CELSIUS  //Within liquid water/humanoid "comfort" range
+	atmosphere_pressure_min    = 0.8 ATM // Very approximate lower breathable threshold
+	atmosphere_pressure_max    = 1.5 ATM // Very approximate higher breathable threshold
 	template_parent_type       = /datum/map_template/planetoid/exoplanet
 	level_data_type            = /datum/level_data/planetoid/exoplanet/grass
 	prefered_level_data_per_z  = list(

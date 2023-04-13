@@ -46,6 +46,8 @@
 	initial_weather_state      = null
 	template_parent_type       = /datum/map_template/planetoid/exoplanet
 	level_data_type            = /datum/level_data/planetoid/exoplanet/barren
+	atmosphere_pressure_min    = 0.05 ATM
+	atmosphere_pressure_max    = 0.05 ATM
 	prefered_level_data_per_z  = list(
 		/datum/level_data/planetoid/exoplanet/barren,
 		/datum/level_data/planetoid/exoplanet/underground
@@ -67,9 +69,6 @@
 
 /datum/map_template/planetoid/exoplanet/barren/get_spawn_weight()
 	return 50
-
-/datum/map_template/planetoid/exoplanet/barren/get_target_pressure()
-	return ONE_ATMOSPHERE * 0.05
 
 /datum/map_template/planetoid/exoplanet/barren/generate_habitability(datum/planetoid_data/gen_data)
 	gen_data.set_habitability(HABITABILITY_BAD)
