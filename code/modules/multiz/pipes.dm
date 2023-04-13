@@ -126,13 +126,13 @@
 /obj/machinery/atmospherics/pipe/zpipe/up/fuel
 	name = "upwards fuel pipe"
 	color = PIPE_COLOR_ORANGE
-	maximum_pressure = 420*ONE_ATMOSPHERE
-	fatigue_pressure = 350*ONE_ATMOSPHERE
+	maximum_pressure = 420 ATM
+	fatigue_pressure = 350 ATM
 	connect_types = CONNECT_TYPE_FUEL
 
 /obj/machinery/atmospherics/pipe/zpipe/down/fuel
 	name = "downwards fuel pipe"
 	color = PIPE_COLOR_ORANGE
-	maximum_pressure = 420*ONE_ATMOSPHERE
-	fatigue_pressure = 350*ONE_ATMOSPHERE
+	maximum_pressure = 420 ATM
+	fatigue_pressure = 350 ATM
 	connect_types = CONNECT_TYPE_FUEL

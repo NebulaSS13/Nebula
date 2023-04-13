@@ -87,7 +87,7 @@
 	if (last_pressure_delta > 0 && recent_moles_transferred > 0)
 		if (temperature_overlay)
 			overlays += image('icons/obj/power.dmi', temperature_overlay)
-		if (last_pressure_delta > 5*ONE_ATMOSPHERE)
+		if (last_pressure_delta > (5 ATM))
 			overlays += image('icons/obj/power.dmi', "circ-run")
 		else
 			overlays += image('icons/obj/power.dmi', "circ-slow")

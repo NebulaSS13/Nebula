@@ -21,4 +21,4 @@
 	name = "emergency nitrogen tank"
 	desc = "An emergency air tank hastily painted red and issued to Vox crewmembers."
 	icon = 'mods/species/vox/icons/nitrogen_tank.dmi'
-	starting_pressure = list(/decl/material/gas/nitrogen = 10*ONE_ATMOSPHERE)
+	starting_pressure = list(/decl/material/gas/nitrogen = 10 ATM)

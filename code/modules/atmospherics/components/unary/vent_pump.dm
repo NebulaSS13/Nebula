@@ -345,7 +345,7 @@
 			return SPAN_WARNING("You must remove the plating first.")
 		var/datum/gas_mixture/int_air = return_air()
 		var/datum/gas_mixture/env_air = loc.return_air()
-		if ((int_air.return_pressure()-env_air.return_pressure()) > 2*ONE_ATMOSPHERE)
+		if ((int_air.return_pressure()-env_air.return_pressure()) > (2 ATM))
 			return SPAN_WARNING("You cannot unwrench \the [src], it is too exerted due to internal pressure.")
 	return ..()
 

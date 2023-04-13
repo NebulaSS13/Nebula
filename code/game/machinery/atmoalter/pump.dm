@@ -13,7 +13,7 @@
 	var/target_pressure = ONE_ATMOSPHERE
 
 	var/pressuremin = 0
-	var/pressuremax = 10 * ONE_ATMOSPHERE
+	var/pressuremax = 10 ATM
 
 	volume = 1000
 
@@ -21,7 +21,7 @@
 	power_losses = 150
 
 /obj/machinery/portable_atmospherics/powered/pump/filled
-	start_pressure = 90 * ONE_ATMOSPHERE
+	start_pressure = 90 ATM
 
 /obj/machinery/portable_atmospherics/powered/pump/Initialize()
 	. = ..()
@@ -148,7 +148,7 @@
 		. = TOPIC_REFRESH
 	if (href_list["pressure_adj"])
 		var/diff = text2num(href_list["pressure_adj"])
-		target_pressure = min(10*ONE_ATMOSPHERE, max(0, target_pressure+diff))
+		target_pressure = min(10 ATM, max(0, target_pressure+diff))
 		. = TOPIC_REFRESH
 
 	if(.)

@@ -113,7 +113,7 @@
 /obj/machinery/alarm/warm/Initialize()
 	. = ..()
 	TLV["temperature"] = list(T0C-26, T0C, T0C+75, T0C+85) // K
-	TLV["pressure"] = list(ONE_ATMOSPHERE*0.80,ONE_ATMOSPHERE*0.90,ONE_ATMOSPHERE*1.30,ONE_ATMOSPHERE*1.50) /* kpa */
+	TLV["pressure"] = list(0.80 ATM, 0.90 ATM, 1.30 ATM, 1.50 ATM) /* kpa */
 
 /obj/machinery/alarm/nobreach
 	breach_detection = 0
@@ -153,7 +153,7 @@
 	gas_mat = GET_DECL(/decl/material/gas/carbon_dioxide)
 	TLV[gas_mat.gas_name] = list(-1, -1, 5, 10) // Partial pressure, kpa
 	TLV["other"] =			list(-1, -1, 0.2, 0.5) // Partial pressure, kpa
-	TLV["pressure"] =		list(ONE_ATMOSPHERE*0.80,ONE_ATMOSPHERE*0.90,ONE_ATMOSPHERE*1.10,ONE_ATMOSPHERE*1.20) /* kpa */
+	TLV["pressure"] =		list(0.80 ATM, 0.90 ATM, 1.10 ATM, 1.20 ATM) /* kpa */
 	TLV["temperature"] =	list(T0C-26, T0C, T0C+40, T0C+66) // K
 
 	var/decl/environment_data/env_info = GET_DECL(environment_type)
@@ -192,7 +192,7 @@
 	var/datum/gas_mixture/environment = location.return_air()
 
 	//Handle temperature adjustment here.
-	if(environment.return_pressure() > ONE_ATMOSPHERE*0.05)
+	if(environment.return_pressure() > (0.05 ATM))
 		handle_heating_cooling(environment)
 
 	var/old_level = danger_level
@@ -207,7 +207,7 @@
 			mode = AALARM_MODE_OFF
 			apply_mode()
 
-	if (mode==AALARM_MODE_CYCLE && environment.return_pressure()<ONE_ATMOSPHERE*0.05)
+	if (mode==AALARM_MODE_CYCLE && environment.return_pressure() < (0.05 ATM))
 		mode=AALARM_MODE_FILL
 		apply_mode()
 
@@ -711,8 +711,8 @@
 						selected[threshold] = -1
 					else if (env=="temperature" && newval>5000)
 						selected[threshold] = 5000
-					else if (env=="pressure" && newval>50*ONE_ATMOSPHERE)
-						selected[threshold] = 50*ONE_ATMOSPHERE
+					else if (env=="pressure" && newval > (50 ATM))
+						selected[threshold] = 50 ATM
 					else if (env!="temperature" && env!="pressure" && newval>200)
 						selected[threshold] = 200
 					else

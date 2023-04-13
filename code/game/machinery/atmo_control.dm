@@ -7,7 +7,7 @@
 	var/frequency = 1441
 	var/datum/radio_frequency/radio_connection
 
-	var/pressure_setting = ONE_ATMOSPHERE * 45
+	var/pressure_setting = 45 ATM
 	var/input_flow_setting = 200
 	var/list/input_info = list()
 	var/list/output_info = list()

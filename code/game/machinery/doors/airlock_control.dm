@@ -169,7 +169,7 @@
 			var/decl/public_access/public_variable/airlock_pressure/pressure_var = GET_DECL(/decl/public_access/public_variable/airlock_pressure)
 			pressure_var.write_var(src, new_pressure)
 
-			var/new_alert = (pressure < ONE_ATMOSPHERE*0.8)
+			var/new_alert = (pressure < (0.8 ATM))
 			if(new_alert != alert)
 				alert = new_alert
 				update_icon()

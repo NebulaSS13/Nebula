@@ -137,12 +137,12 @@
 #define      GLOVES_MAX_HEAT_PROTECTION_TEMPERATURE 1500  // For some gloves.
 #define        SHOE_MAX_HEAT_PROTECTION_TEMPERATURE 1500  // For shoes.
 
-#define  FIRESUIT_MAX_PRESSURE 		100 * ONE_ATMOSPHERE   // Firesuis and atmos voidsuits
-#define  RIG_MAX_PRESSURE 			50 * ONE_ATMOSPHERE   // Rigs
-#define  LIGHT_RIG_MAX_PRESSURE 	25 * ONE_ATMOSPHERE   // Rigs
-#define  ENG_VOIDSUIT_MAX_PRESSURE 	50 * ONE_ATMOSPHERE
-#define  VOIDSUIT_MAX_PRESSURE 		25 * ONE_ATMOSPHERE
-#define  SPACE_SUIT_MAX_PRESSURE 	5 * ONE_ATMOSPHERE
+#define FIRESUIT_MAX_PRESSURE     (100 ATM)   // Firesuis and atmos voidsuits
+#define RIG_MAX_PRESSURE          (50 ATM)   // Rigs
+#define LIGHT_RIG_MAX_PRESSURE    (25 ATM)   // Rigs
+#define ENG_VOIDSUIT_MAX_PRESSURE (50 ATM)
+#define VOIDSUIT_MAX_PRESSURE     (25 ATM)
+#define SPACE_SUIT_MAX_PRESSURE   (5 ATM)
 
 // Fire.
 #define FIRE_MIN_STACKS          -20
