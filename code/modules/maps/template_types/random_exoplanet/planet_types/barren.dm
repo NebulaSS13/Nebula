@@ -38,15 +38,15 @@
 ////////////////////////////////////////////////////////////////////////////
 
 /datum/map_template/planetoid/exoplanet/barren
-	name                  = "barren exoplanet"
-	overmap_marker_type   = /obj/effect/overmap/visitable/sector/planetoid/exoplanet/barren
-	flora_generator_type  = /datum/flora_generator/barren
-	ruin_tags_blacklist   = RUIN_HABITAT|RUIN_WATER
-	subtemplate_budget    = 6
-	initial_weather_state = null
-	template_parent_type  = /datum/map_template/planetoid/exoplanet
-	level_data_type       = /datum/level_data/planetoid/exoplanet/barren
-	prefered_level_data_per_z = list(
+	name                       = "barren exoplanet"
+	overmap_marker_type        = /obj/effect/overmap/visitable/sector/planetoid/exoplanet/barren
+	flora_generator_type       = /datum/flora_generator/barren
+	ruin_tags_blacklist        = RUIN_HABITAT|RUIN_WATER
+	subtemplate_budget         = 6
+	initial_weather_state      = null
+	template_parent_type       = /datum/map_template/planetoid/exoplanet
+	level_data_type            = /datum/level_data/planetoid/exoplanet/barren
+	prefered_level_data_per_z  = list(
 		/datum/level_data/planetoid/exoplanet/barren,
 		/datum/level_data/planetoid/exoplanet/underground
 	)
@@ -79,12 +79,12 @@
 ////////////////////////////////////////////////////////////////////////////
 
 /datum/random_map/noise/exoplanet/barren
-	descriptor = "barren exoplanet"
+	descriptor           = "barren exoplanet"
+	land_type            = /turf/exterior/barren
+	flora_prob           = 0.1
+	large_flora_prob     = 0
+	fauna_prob           = 0
 	smoothing_iterations = 4
-	land_type = /turf/exterior/barren
-	flora_prob = 0.1
-	large_flora_prob = 0
-	fauna_prob = 0
 
 ////////////////////////////////////////////////////////////////////////////
 // Areas

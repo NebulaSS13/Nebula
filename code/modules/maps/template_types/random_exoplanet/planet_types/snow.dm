@@ -56,14 +56,16 @@
 ////////////////////////////////////////////////////////////////////////////
 
 /datum/map_template/planetoid/exoplanet/snow
-	name                    = "snow exoplanet"
-	flora_generator_type    = /datum/flora_generator/snow
-	fauna_generator_type    = /datum/fauna_generator/snow
-	initial_weather_state   = /decl/state/weather/snow
-	overmap_marker_type     = /obj/effect/overmap/visitable/sector/planetoid/exoplanet/snow
-	template_parent_type    = /datum/map_template/planetoid/exoplanet
-	level_data_type         = /datum/level_data/planetoid/exoplanet/snow
-	prefered_level_data_per_z = list(
+	name                       = "snow exoplanet"
+	flora_generator_type       = /datum/flora_generator/snow
+	fauna_generator_type       = /datum/fauna_generator/snow
+	initial_weather_state      = /decl/state/weather/snow
+	overmap_marker_type        = /obj/effect/overmap/visitable/sector/planetoid/exoplanet/snow
+	template_parent_type       = /datum/map_template/planetoid/exoplanet
+	level_data_type            = /datum/level_data/planetoid/exoplanet/snow
+	atmosphere_temperature_min = -120 CELSIUS // a bit lower than arctic temperatures
+	atmosphere_temperature_max = -10 CELSIUS
+	prefered_level_data_per_z  = list(
 		/datum/level_data/planetoid/exoplanet/snow,
 		/datum/level_data/planetoid/exoplanet/underground
 	)
@@ -79,32 +81,29 @@
 		/datum/random_map/noise/ore/poor
 	)
 
-/datum/map_template/planetoid/exoplanet/snow/get_target_temperature()
-	return T0C - rand(10, 100)
-
 ////////////////////////////////////////////////////////////////////////////
 // Mountains Generator
 ////////////////////////////////////////////////////////////////////////////
 
 /datum/random_map/automata/cave_system/mountains/snow
-	iterations = 2
-	descriptor = "ice mountains"
-	wall_type =  /turf/exterior/wall/ice
+	descriptor   = "ice mountains"
+	iterations   = 2
+	wall_type    =  /turf/exterior/wall/ice
 	mineral_turf = /turf/exterior/wall/random/ice
-	rock_color = COLOR_CYAN_BLUE
+	rock_color   = COLOR_CYAN_BLUE
 
 ////////////////////////////////////////////////////////////////////////////
 // Map Generator Surface
 ////////////////////////////////////////////////////////////////////////////
 
 /datum/random_map/noise/exoplanet/snow
-	descriptor = "snow exoplanet"
+	descriptor           = "snow exoplanet"
+	flora_prob           = 5
+	large_flora_prob     = 10
+	water_level_max      = 3
+	land_type            = /turf/exterior/snow
+	water_type           = /turf/exterior/ice
 	smoothing_iterations = 1
-	flora_prob = 5
-	large_flora_prob = 10
-	water_level_max = 3
-	land_type = /turf/exterior/snow
-	water_type = /turf/exterior/ice
 
 ////////////////////////////////////////////////////////////////////////////
 // Areas

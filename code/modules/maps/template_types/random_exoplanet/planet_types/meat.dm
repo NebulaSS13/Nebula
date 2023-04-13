@@ -14,11 +14,11 @@
 ////////////////////////////////////////////////////////////////////////////
 
 /datum/level_data/planetoid/exoplanet/meat
-	base_area = /area/exoplanet/meat
-	base_turf = /turf/exterior/meat
+	base_area           = /area/exoplanet/meat
+	base_turf           = /turf/exterior/meat
 	exterior_atmosphere = null
 	exterior_atmos_temp = null
-	level_generators = list(
+	level_generators    = list(
 		/datum/random_map/noise/exoplanet/meat,
 	)
 
@@ -34,6 +34,7 @@
 		"#eb9ee4",
 		"#4e348b"
 	)
+
 /datum/flora_generator/meat/adapt_seed(var/datum/seed/S)
 	..()
 	S.set_trait(TRAIT_CARNIVOROUS,2)
@@ -66,15 +67,17 @@
 ////////////////////////////////////////////////////////////////////////////
 
 /datum/map_template/planetoid/exoplanet/meat
-	name                 = "organic exoplanet"
-	flora_generator_type = /datum/flora_generator/meat
-	fauna_generator_type = /datum/fauna_generator/meat
-	overmap_marker_type  = /obj/effect/overmap/visitable/sector/planetoid/exoplanet/meat
-	ruin_tags_blacklist  = RUIN_HABITAT|RUIN_HUMAN|RUIN_WATER
-	template_parent_type = /datum/map_template/planetoid/exoplanet
-	level_data_type      = /datum/level_data/planetoid/exoplanet/meat
-	prefered_level_data_per_z = null
-	possible_rock_colors = list(
+	name                       = "organic exoplanet"
+	flora_generator_type       = /datum/flora_generator/meat
+	fauna_generator_type       = /datum/fauna_generator/meat
+	overmap_marker_type        = /obj/effect/overmap/visitable/sector/planetoid/exoplanet/meat
+	ruin_tags_blacklist        = RUIN_HABITAT|RUIN_HUMAN|RUIN_WATER
+	template_parent_type       = /datum/map_template/planetoid/exoplanet
+	level_data_type            = /datum/level_data/planetoid/exoplanet/meat
+	prefered_level_data_per_z  = null
+	atmosphere_temperature_min = 30 CELSIUS
+	atmosphere_temperature_max = 40 CELSIUS
+	possible_rock_colors       = list(
 		COLOR_OFF_WHITE,
 		"#f3ebd4",
 		"#f3d4f0"
@@ -89,9 +92,6 @@
 /datum/map_template/planetoid/exoplanet/meat/generate_daycycle(datum/planetoid_data/gen_data, datum/level_data/surface_level)
 	surface_level.ambient_light_level = rand(1,7)/10
 	..()
-
-/datum/map_template/planetoid/exoplanet/meat/get_target_temperature()
-	return T20C + rand(10, 20)
 
 /datum/map_template/planetoid/exoplanet/meat/select_strata(datum/planetoid_data/gen_data)
 	gen_data.set_strata(/decl/strata/sedimentary)
@@ -127,18 +127,18 @@
 ////////////////////////////////////////////////////////////////////////////
 
 /turf/exterior/meat
-	name = "fleshy ground"
-	icon = 'icons/turf/exterior/flesh.dmi'
-	desc = "It's disgustingly soft to the touch. And warm. Too warm."
-	dirt_color = "#c40031"
+	name          = "fleshy ground"
+	icon          = 'icons/turf/exterior/flesh.dmi'
+	desc          = "It's disgustingly soft to the touch. And warm. Too warm."
+	dirt_color    = "#c40031"
 	footstep_type = /decl/footsteps/mud
 
 /turf/exterior/water/stomach
-	name = "juices"
-	desc = "Half-digested chunks of vines are floating in the puddle of some liquid."
-	gender = PLURAL
-	icon = 'icons/turf/exterior/water_still.dmi'
+	name         = "juices"
+	desc         = "Half-digested chunks of vines are floating in the puddle of some liquid."
+	gender       = PLURAL
+	icon         = 'icons/turf/exterior/water_still.dmi'
 	reagent_type = /decl/material/liquid/acid/stomach
-	color = "#c7c27c"
-	base_color = "#c7c27c"
-	dirt_color = "#c40031"
+	color        = "#c7c27c"
+	base_color   = "#c7c27c"
+	dirt_color   = "#c40031"

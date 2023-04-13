@@ -17,11 +17,11 @@
 ////////////////////////////////////////////////////////////////////////////
 
 /datum/level_data/planetoid/exoplanet/shrouded
-	base_area = /area/exoplanet/shrouded
-	base_turf = /turf/exterior/shrouded
+	base_area           = /area/exoplanet/shrouded
+	base_turf           = /turf/exterior/shrouded
 	exterior_atmosphere = null
 	exterior_atmos_temp = null
-	level_generators = list(
+	level_generators    = list(
 		/datum/random_map/noise/exoplanet/shrouded,
 	)
 
@@ -31,7 +31,7 @@
 
 /datum/flora_generator/shrouded
 	flora_diversity = 3
-	plant_colors = list(
+	plant_colors    = list(
 		"#3c5434",
 		"#2f6655",
 		"#0e703f",
@@ -61,16 +61,18 @@
 ////////////////////////////////////////////////////////////////////////////
 
 /datum/map_template/planetoid/exoplanet/shrouded
-	name                    = "shrouded exoplanet"
-	flora_generator_type    = /datum/flora_generator/shrouded
-	fauna_generator_type    = /datum/fauna_generator/shrouded
-	overmap_marker_type     = /obj/effect/overmap/visitable/sector/planetoid/exoplanet/shrouded
-	ruin_tags_blacklist     = RUIN_HABITAT
-	surface_light_level_min = 0.15
-	surface_light_level_max = 0.25
-	template_parent_type    = /datum/map_template/planetoid/exoplanet
-	level_data_type         = /datum/level_data/planetoid/exoplanet/shrouded
-	prefered_level_data_per_z = list(
+	name                       = "shrouded exoplanet"
+	flora_generator_type       = /datum/flora_generator/shrouded
+	fauna_generator_type       = /datum/fauna_generator/shrouded
+	overmap_marker_type        = /obj/effect/overmap/visitable/sector/planetoid/exoplanet/shrouded
+	ruin_tags_blacklist        = RUIN_HABITAT
+	surface_light_level_min    = 0.15
+	surface_light_level_max    = 0.25
+	atmosphere_temperature_min = T0C
+	atmosphere_temperature_max = 10 CELSIUS
+	template_parent_type       = /datum/map_template/planetoid/exoplanet
+	level_data_type            = /datum/level_data/planetoid/exoplanet/shrouded
+	prefered_level_data_per_z  = list(
 		/datum/level_data/planetoid/exoplanet/shrouded,
 		/datum/level_data/planetoid/exoplanet/underground
 	)
@@ -86,23 +88,20 @@
 /datum/map_template/planetoid/exoplanet/shrouded/get_spawn_weight()
 	return 50
 
-/datum/map_template/planetoid/exoplanet/shrouded/get_target_temperature()
-	return T20C - rand(10, 20)
-
 ////////////////////////////////////////////////////////////////////////////
 // Map Generator Surface
 ////////////////////////////////////////////////////////////////////////////
 
 /datum/random_map/noise/exoplanet/shrouded
-	descriptor = "shrouded exoplanet"
+	descriptor           = "shrouded exoplanet"
 	smoothing_iterations = 2
-	flora_prob = 5
-	large_flora_prob = 20
+	flora_prob           = 5
+	large_flora_prob     = 20
 	megafauna_spawn_prob = 2 //Remember to change this if more types are added.
-	water_level_max = 3
-	water_level_min = 2
-	land_type = /turf/exterior/shrouded
-	water_type = /turf/exterior/water/tar
+	water_level_max      = 3
+	water_level_min      = 2
+	land_type            = /turf/exterior/shrouded
+	water_type           = /turf/exterior/water/tar
 
 /datum/random_map/noise/exoplanet/shrouded/get_additional_spawns(var/value, var/turf/T)
 	..()

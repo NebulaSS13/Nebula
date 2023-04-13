@@ -18,11 +18,11 @@
 
 ///Surface of a grass exoplanet
 /datum/level_data/planetoid/exoplanet/grass
-	base_area = /area/exoplanet/grass
-	base_turf = /turf/exterior/wildgrass
+	base_area           = /area/exoplanet/grass
+	base_turf           = /turf/exterior/wildgrass
 	exterior_atmosphere = null
 	exterior_atmos_temp = null
-	level_generators = list(
+	level_generators    = list(
 		/datum/random_map/noise/exoplanet/grass
 	)
 
@@ -86,15 +86,17 @@
 
 ///Map template for generating a grass exoplanet
 /datum/map_template/planetoid/exoplanet/grass
-	name                    = "lush exoplanet"
-	flora_generator_type    = /datum/flora_generator/grass
-	fauna_generator_type    = /datum/fauna_generator/grass
-	overmap_marker_type     = /obj/effect/overmap/visitable/sector/planetoid/exoplanet/grass
-	surface_light_level_min = 0.25 //give a chance of twilight jungle
-	surface_light_level_max = 0.75
-	template_parent_type    = /datum/map_template/planetoid/exoplanet
-	level_data_type         = /datum/level_data/planetoid/exoplanet/grass
-	prefered_level_data_per_z = list(
+	name                       = "lush exoplanet"
+	flora_generator_type       = /datum/flora_generator/grass
+	fauna_generator_type       = /datum/fauna_generator/grass
+	overmap_marker_type        = /obj/effect/overmap/visitable/sector/planetoid/exoplanet/grass
+	surface_light_level_min    = 0.25 //give a chance of twilight jungle
+	surface_light_level_max    = 0.75
+	atmosphere_temperature_min = 20 CELSIUS  //Within liquid water/humanoid "comfort" range
+	atmosphere_temperature_max = 50 CELSIUS  //Within liquid water/humanoid "comfort" range
+	template_parent_type       = /datum/map_template/planetoid/exoplanet
+	level_data_type            = /datum/level_data/planetoid/exoplanet/grass
+	prefered_level_data_per_z  = list(
 		/datum/level_data/planetoid/exoplanet/grass,
 		/datum/level_data/planetoid/exoplanet/underground
 	)
@@ -104,22 +106,19 @@
 		COLOR_BROWN
 	)
 
-/datum/map_template/planetoid/exoplanet/grass/get_target_temperature()
-	return T20C + rand(10, 30)
-
 ////////////////////////////////////////////////////////////////////////////
 // Map Generator Surface
 ////////////////////////////////////////////////////////////////////////////
 
 ///Map generator for the grass exoplanet surface
 /datum/random_map/noise/exoplanet/grass
-	descriptor = "grass exoplanet"
-	land_type = /turf/exterior/wildgrass
-	water_type = /turf/exterior/water
-	coast_type = /turf/exterior/mud/dark
-	water_level_min = 3
-	flora_prob = 10
-	grass_prob = 50
+	descriptor       = "grass exoplanet"
+	land_type        = /turf/exterior/wildgrass
+	water_type       = /turf/exterior/water
+	coast_type       = /turf/exterior/mud/dark
+	water_level_min  = 3
+	flora_prob       = 10
+	grass_prob       = 50
 	large_flora_prob = 30
 
 ////////////////////////////////////////////////////////////////////////////
@@ -128,8 +127,8 @@
 
 ///Area for the grass exoplanet surface
 /area/exoplanet/grass
-	base_turf       = /turf/exterior/wildgrass
-	ambience        = list(
+	base_turf = /turf/exterior/wildgrass
+	ambience  = list(
 		'sound/effects/wind/wind_2_1.ogg',
 		'sound/effects/wind/wind_2_2.ogg',
 		'sound/effects/wind/wind_3_1.ogg',

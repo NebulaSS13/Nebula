@@ -1,10 +1,10 @@
 ///Base level data for levels that are subordinated to a /datum/planetoid_data entry.
 ///A bunch of things are fetched from planet gen to stay in sync.
 /datum/level_data/planetoid
-	level_flags             = (ZLEVEL_PLAYER|ZLEVEL_SEALED)
-	border_filler           = /turf/unsimulated/mineral
-	loop_turf_type          = /turf/exterior/mimic_edge/transition/loop
-	transition_turf_type    = /turf/exterior/mimic_edge/transition
+	level_flags                  = (ZLEVEL_PLAYER|ZLEVEL_SEALED)
+	border_filler                = /turf/unsimulated/mineral
+	loop_turf_type               = /turf/exterior/mimic_edge/transition/loop
+	transition_turf_type         = /turf/exterior/mimic_edge/transition
 	use_global_exterior_ambience = FALSE
 
 ///Level data for generating surface levels on exoplanets

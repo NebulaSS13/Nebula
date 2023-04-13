@@ -14,11 +14,11 @@
 ////////////////////////////////////////////////////////////////////////////
 
 /datum/level_data/planetoid/exoplanet/desert
-	base_turf = /turf/exterior/sand
-	base_area = /area/exoplanet/desert
+	base_turf           = /turf/exterior/sand
+	base_area           = /area/exoplanet/desert
 	exterior_atmosphere = null
 	exterior_atmos_temp = null
-	level_generators = list(
+	level_generators    = list(
 		/datum/random_map/noise/exoplanet/desert
 	)
 
@@ -71,16 +71,18 @@
 ////////////////////////////////////////////////////////////////////////////
 
 /datum/map_template/planetoid/exoplanet/desert
-	name                    = "desert exoplanet"
-	flora_generator_type    = /datum/flora_generator/desert
-	fauna_generator_type    = /datum/fauna_generator/desert
-	overmap_marker_type     = /obj/effect/overmap/visitable/sector/planetoid/exoplanet/desert
-	initial_weather_state   = null
-	surface_light_level_min = 0.5
-	surface_light_level_max = 0.95
-	template_parent_type    = /datum/map_template/planetoid/exoplanet
-	level_data_type         = /datum/level_data/planetoid/exoplanet/desert
-	prefered_level_data_per_z = list(
+	name                       = "desert exoplanet"
+	flora_generator_type       = /datum/flora_generator/desert
+	fauna_generator_type       = /datum/fauna_generator/desert
+	overmap_marker_type        = /obj/effect/overmap/visitable/sector/planetoid/exoplanet/desert
+	initial_weather_state      = null //#TODO: Make desert weather stuff
+	surface_light_level_min    = 0.5
+	surface_light_level_max    = 0.95
+	atmosphere_temperature_min = 40 CELSIUS
+	atmosphere_temperature_max = 120 CELSIUS
+	template_parent_type       = /datum/map_template/planetoid/exoplanet
+	level_data_type            = /datum/level_data/planetoid/exoplanet/desert
+	prefered_level_data_per_z  = list(
 		/datum/level_data/planetoid/exoplanet/desert,
 		/datum/level_data/planetoid/exoplanet/underground
 	)
@@ -94,20 +96,17 @@
 		/datum/random_map/noise/ore/rich,
 	)
 
-/datum/map_template/planetoid/exoplanet/desert/get_target_temperature()
-	return T20C + rand(20, 100)
-
 ////////////////////////////////////////////////////////////////////////////
 // Map Generator Surface
 ////////////////////////////////////////////////////////////////////////////
 
 /datum/random_map/noise/exoplanet/desert
-	descriptor = "desert exoplanet"
+	descriptor           = "desert exoplanet"
+	land_type            = /turf/exterior/sand
+	flora_prob           = 5
+	grass_prob           = 2
+	large_flora_prob     = 0
 	smoothing_iterations = 4
-	land_type = /turf/exterior/sand
-	flora_prob = 5
-	grass_prob = 2
-	large_flora_prob = 0
 
 /datum/random_map/noise/exoplanet/desert/get_additional_spawns(var/value, var/turf/T)
 	..()

@@ -96,13 +96,12 @@
 /datum/map_template/planetoid/proc/get_mandatory_gasses(var/datum/planetoid_data/gen_data)
 	if(gen_data.habitability_class == HABITABILITY_OKAY)
 		return list(/decl/material/gas/oxygen = MOLES_O2STANDARD)
-	return list()
 
 /datum/map_template/planetoid/proc/get_target_temperature(var/datum/planetoid_data/gen_data)
-	return T20C + rand(-5,5)
+	return rand(atmosphere_temperature_min, atmosphere_temperature_max)
 
 /datum/map_template/planetoid/proc/get_target_pressure(var/datum/planetoid_data/gen_data)
-	return ONE_ATMOSPHERE * rand(8, 12)/10
+	return rand(atmosphere_pressure_min, atmosphere_pressure_max)
 
 /datum/map_template/planetoid/proc/generate_habitability(var/datum/planetoid_data/gen_data)
 	if(prob(10))

@@ -70,16 +70,18 @@
 ////////////////////////////////////////////////////////////////////////////
 
 /datum/map_template/planetoid/exoplanet/volcanic
-	name                  = "volcanic exoplanet"
-	flora_generator_type  = /datum/flora_generator/volcanic
-	fauna_generator_type  = /datum/fauna_generator/volcanic
-	overmap_marker_type   = /obj/effect/overmap/visitable/sector/planetoid/exoplanet/volcanic
-	max_themes            = 1
-	ruin_tags_blacklist   = RUIN_HABITAT|RUIN_WATER
-	initial_weather_state = /decl/state/weather/ash
-	template_parent_type  = /datum/map_template/planetoid/exoplanet
-	level_data_type       = /datum/level_data/planetoid/exoplanet/volcanic
-	prefered_level_data_per_z = list(
+	name                       = "volcanic exoplanet"
+	flora_generator_type       = /datum/flora_generator/volcanic
+	fauna_generator_type       = /datum/fauna_generator/volcanic
+	overmap_marker_type        = /obj/effect/overmap/visitable/sector/planetoid/exoplanet/volcanic
+	max_themes                 = 1
+	ruin_tags_blacklist        = RUIN_HABITAT|RUIN_WATER
+	initial_weather_state      = /decl/state/weather/ash
+	atmosphere_temperature_min = 240 CELSIUS
+	atmosphere_temperature_max = 820 CELSIUS
+	template_parent_type       = /datum/map_template/planetoid/exoplanet
+	level_data_type            = /datum/level_data/planetoid/exoplanet/volcanic
+	prefered_level_data_per_z  = list(
 		/datum/level_data/planetoid/exoplanet/volcanic,
 		/datum/level_data/planetoid/exoplanet/underground
 	)
@@ -97,25 +99,21 @@
 /datum/map_template/planetoid/exoplanet/volcanic/generate_habitability(datum/planetoid_data/gen_data)
 	gen_data.set_habitability(HABITABILITY_BAD)
 
-/datum/map_template/planetoid/exoplanet/volcanic/get_target_temperature()
-	return T20C + rand(220, 800)
-
 ////////////////////////////////////////////////////////////////////////////
 // Map Generator Surface
 ////////////////////////////////////////////////////////////////////////////
 
 /datum/random_map/noise/exoplanet/volcanic
-	descriptor = "volcanic exoplanet"
+	descriptor           = "volcanic exoplanet"
 	smoothing_iterations = 5
-	land_type = /turf/exterior/volcanic
-	water_type = /turf/exterior/lava
-	water_level_min = 5
-	water_level_max = 6
-
-	fauna_prob = 1
-	flora_prob = 3
-	grass_prob = 0
-	large_flora_prob = 0
+	land_type            = /turf/exterior/volcanic
+	water_type           = /turf/exterior/lava
+	water_level_min      = 5
+	water_level_max      = 6
+	fauna_prob           = 1
+	flora_prob           = 3
+	grass_prob           = 0
+	large_flora_prob     = 0
 
 //Squashing most of 1 tile lava puddles
 /datum/random_map/noise/exoplanet/volcanic/cleanup()
@@ -140,11 +138,11 @@
 ////////////////////////////////////////////////////////////////////////////
 
 /datum/random_map/automata/cave_system/mountains/volcanic
-	iterations = 2
-	descriptor = "space volcanic mountains"
-	wall_type =  /turf/exterior/wall/volcanic
+	descriptor   = "space volcanic mountains"
+	iterations   = 2
+	wall_type    =  /turf/exterior/wall/volcanic
 	mineral_turf =  /turf/exterior/wall/random/volcanic
-	rock_color = COLOR_DARK_GRAY
+	rock_color   = COLOR_DARK_GRAY
 
 /datum/random_map/automata/cave_system/mountains/volcanic/get_additional_spawns(value, var/turf/exterior/wall/T)
 	..()
@@ -157,4 +155,4 @@
 
 /area/exoplanet/volcanic
 	forced_ambience = list('sound/ambience/magma.ogg')
-	base_turf = /turf/exterior/volcanic
+	base_turf       = /turf/exterior/volcanic

@@ -10,7 +10,7 @@
 	template_categories  = list(MAP_TEMPLATE_CATEGORY_PLANET)
 	level_data_type      = /datum/level_data/planetoid
 	modify_tag_vars      = TRUE //Would set it to false, since we're generating everything on the fly, but unit test doesn't like it
-	tallness             = 1
+	tallness             = 1 //Amount of vertical z-levels to generate for this planet.
 
 	//#TODO: This could probably be simplified down.
 	///Amount of adjacent stacked z-levels to generate north of the root z-level stack.
@@ -29,6 +29,15 @@
 	///A list of gas and their proportion to enforce on this planet.
 	///If get_mandatory_gases() returns gases, they will be added to this. If null is randomly generated.
 	var/list/initial_atmosphere_gases
+	///Minimum possible base temperature range to pick from, in kelvins, when generating the atmosphere on this planet.
+	var/atmosphere_temperature_min = TCMB
+	///Maximum possible base temperature range to pick from, in kelvins, when generating the atmosphere on this planet.
+	var/atmosphere_temperature_max = T100C
+	///Minimum atmospheric pressure in the range to pick from for this planet template.
+	var/atmosphere_pressure_min = 0.5 * ONE_ATMOSPHERE
+	///Maximum atmospheric pressure in the range to pick from for this planet template.
+	var/atmosphere_pressure_max = 2 * ONE_ATMOSPHERE
+
 	///What weather state to use for this planet initially. If null, will not initialize any weather system.
 	var/initial_weather_state
 	///The type of overmap marker object to use for this planet
