@@ -34,11 +34,27 @@
 	var/obj/structure/hoist/source_hoist
 
 /obj/effect/hoist_hook/attack_hand(mob/user)
-	return // no, bad
+	if (user.incapacitated())
+		to_chat(user, SPAN_WARNING("You can't do that while incapacitated."))
+		return
+
+	if (!user.check_dexterity(DEXTERITY_GRIP))
+		return
+
+	if(source_hoist && source_hoist.hoistee)
+		source_hoist.check_consistency()
+		source_hoist.hoistee.forceMove(get_turf(src))
+		user.visible_message(SPAN_NOTICE("[user] detaches \the [source_hoist.hoistee] from the hoist clamp."), SPAN_NOTICE("You detach \the [source_hoist.hoistee] from the hoist clamp."), SPAN_NOTICE("You hear something unclamp."))
+		source_hoist.release_hoistee()
 
 /obj/effect/hoist_hook/receive_mouse_drop(atom/dropping, mob/user)
-	. = ..()
-	if(!. && istype(dropping, /atom/movable))
+	// skip the parent buckle logic, handle climbing directly
+	var/mob/living/H = user
+	if(istype(H) && !H.anchored && can_climb(H) && dropping == user)
+		do_climb(dropping)
+		return TRUE
+	// end copypasta'd code
+	if(istype(dropping, /atom/movable))
 		var/atom/movable/AM = dropping
 		if(!AM.simulated || AM.anchored)
 			to_chat(user, SPAN_WARNING("You can't do that with \the [AM]."))
@@ -46,6 +62,11 @@
 		if(source_hoist.hoistee)
 			to_chat(user, SPAN_NOTICE("\The [source_hoist.hoistee] is already attached to \the [src]!"))
 			return TRUE
+		if (user.incapacitated())
+			to_chat(user, SPAN_WARNING("You can't do that while incapacitated."))
+			return
+		if (!user.check_dexterity(DEXTERITY_GRIP))
+			return
 		source_hoist.attach_hoistee(AM)
 		user.visible_message(
 			SPAN_NOTICE("[user] attaches \the [AM] to \the [src]."),
@@ -57,7 +78,6 @@
 	hoistee = AM
 	if(ismob(AM))
 		source_hook.buckle_mob(AM)
-	AM.anchored = TRUE // why isn't this being set by buckle_mob for silicons?
 	source_hook.layer = AM.layer + 0.1
 	if (get_turf(AM) != get_turf(source_hook))
 		AM.forceMove(get_turf(source_hook))
@@ -65,7 +85,10 @@
 	events_repository.register(/decl/observ/destroyed, AM, src, .proc/release_hoistee)
 
 /obj/effect/hoist_hook/handle_mouse_drop(atom/over, mob/user)
-	if(source_hoist.hoistee && isturf(over) && !over.Adjacent(source_hoist.hoistee))
+	if(source_hoist.hoistee && isturf(over) && over.Adjacent(source_hoist.hoistee))
+		if(!user.check_dexterity(DEXTERITY_GRIP))
+			return TRUE
+
 		source_hoist.check_consistency()
 		var/turf/desturf = over
 		source_hoist.hoistee.forceMove(desturf)
@@ -75,7 +98,7 @@
 			"You hear something unclamp.")
 		source_hoist.release_hoistee()
 		return TRUE
-	. = ..()
+	return ..()
 
 // This will handle mobs unbuckling themselves.
 /obj/effect/hoist_hook/unbuckle_mob()
