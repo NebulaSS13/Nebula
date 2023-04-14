@@ -57,6 +57,11 @@
 	icon_state = "metal"
 	material = /decl/material/solid/metal/iron
 
+/turf/simulated/wall/plastic
+	color = COLOR_EGGSHELL
+	icon_state = "plastic"
+	material = /decl/material/solid/plastic
+
 /turf/simulated/wall/sandstone
 	color = COLOR_GOLD
 	icon_state = "stone"
