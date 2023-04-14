@@ -9,8 +9,8 @@
 	name = "orange jumpsuit"
 	desc = "It's standardised prisoner-wear. Its suit sensor controls are permanently set to the \"Fully On\" position."
 	icon = 'icons/clothing/under/jumpsuits/jumpsuit_prisoner.dmi'
-	has_sensor = 2
-	sensor_mode = 3
+	has_sensor = SUIT_LOCKED_SENSORS
+	sensor_mode = SUIT_SENSOR_TRACKING
 
 /obj/item/clothing/under/color/blackjumpshorts
 	name = "black jumpsuit shorts"
