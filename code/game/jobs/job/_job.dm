@@ -1,5 +1,5 @@
 /datum/job
-	var/title                                 // The name of the job	
+	var/title                                 // The name of the job
 	var/list/software_on_spawn = list()       // Defines the software files that spawn on tablets and labtops
 	var/list/department_types = list()        // What departments the job is in.
 	var/autoset_department = TRUE             // If department list is empty, use map default.
@@ -34,7 +34,7 @@
 	var/announced = TRUE                      // If their arrival is announced on radio
 	var/latejoin_at_spawnpoints               // If this job should use roundstart spawnpoints for latejoin (offstation jobs etc)
 	var/forced_spawnpoint                     // If set to a spawnpoint name, will use that spawn point for joining as this job.
-	var/hud_icon						      // icon used for Sec HUD overlay
+	var/hud_icon                              // icon used for Sec HUD overlay
 
 	//Job access. The use of minimal_access or access is determined by a config setting: config.jobs_have_minimal_access
 	var/list/minimal_access = list()          // Useful for servers which prefer to only have access given to the places a job absolutely needs (Larger server population)
@@ -44,19 +44,21 @@
 	var/min_skill = list(
 		SKILL_LITERACY = SKILL_ADEPT
 	)
-	var/max_skill = list()				  //Maximum skills allowed for the job.
-	var/skill_points = 16				  //The number of unassigned skill points the job comes with (on top of the minimum skills).
-	var/no_skill_buffs = FALSE			  //Whether skills can be buffed by age/species modifiers.
+	var/max_skill = list()                    //Maximum skills allowed for the job.
+	var/skill_points = 16                     //The number of unassigned skill points the job comes with (on top of the minimum skills).
+	var/no_skill_buffs = FALSE                //Whether skills can be buffed by age/species modifiers.
 	var/available_by_default = TRUE
 
 	var/list/possible_goals
 	var/min_goals = 1
 	var/max_goals = 3
 
-	var/defer_roundstart_spawn = FALSE // If true, the job will be put off until all other jobs have been populated.
+	var/defer_roundstart_spawn = FALSE        // If true, the job will be put off until all other jobs have been populated.
 	var/list/species_branch_rank_cache_ = list()
 
 	var/required_language
+
+	var/no_warn_unsafe                        // If true, we don't prompt the user to confirm on spawning if the environment is unsafe.
 
 /datum/job/New()
 

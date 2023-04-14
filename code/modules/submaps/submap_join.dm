@@ -47,7 +47,7 @@
 		to_chat(joining, "<span class='warning'>There are no available spawn points for that job.</span>")
 
 	var/turf/spawn_turf = get_turf(pick(job.spawnpoints))
-	if(!SSjobs.check_unsafe_spawn(joining, spawn_turf))
+	if(!job.no_warn_unsafe && !SSjobs.check_unsafe_spawn(joining, spawn_turf))
 		return
 
 	// check_unsafe_spawn() has an input() call, check blockers again.
