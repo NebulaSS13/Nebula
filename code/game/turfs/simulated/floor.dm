@@ -9,6 +9,7 @@
 	turf_flags = TURF_IS_HOLOMAP_PATH
 
 	// Damage to flooring.
+	// These are icon state suffixes, NOT booleans!
 	var/broken
 	var/burnt
 	// Plating data.
