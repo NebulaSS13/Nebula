@@ -139,6 +139,41 @@
 	variable_to_set = "opened"
 	value_to_set = TRUE
 
+// Has a percent chance on spawn to call the specified proc on the specified type with the specified arguments.
+/obj/abstract/landmark/proc_caller
+	is_spawnable_type = FALSE
+	var/type_to_find
+	var/proc_to_call
+	var/arguments_to_pass
+	var/probability = 100
+
+/obj/abstract/landmark/proc_caller/Initialize()
+	. = ..()
+	if(!prob(probability))
+		return // Do nothing.
+	// we don't use locate in case try_call_proc returns false on our first attempt
+	for(var/atom/candidate_atom in get_turf(src))
+		if(!istype(candidate_atom, type_to_find))
+			continue
+		if(try_call_proc(candidate_atom))
+			break
+	return INITIALIZE_HINT_QDEL
+
+/obj/abstract/landmark/proc_caller/proc/try_call_proc(atom/atom_to_modify)
+	// We don't have that proc! Give our own runtime to be more informative than the default one.
+	if(!hascall(atom_to_modify, proc_to_call))
+		CRASH("Unable to find proc [proc_to_call] to call on type [atom_to_modify.type].")
+	if(length(arguments_to_pass))
+		call(atom_to_modify, proc_to_call)(arglist(arguments_to_pass))
+	else
+		call(atom_to_modify, proc_to_call)()
+	return TRUE
+
+/obj/abstract/landmark/proc_caller/floor_burner
+	type_to_find = /turf/simulated/floor
+	proc_to_call = /turf/simulated/floor/proc/burn_tile
+	arguments_to_pass = null
+
 /// Used to tell pipe leak unit tests that a leak is intentional. Placed over the pipe that leaks, not the tile missing a pipe.
 /obj/abstract/landmark/allowed_leak
 #ifndef UNIT_TEST
