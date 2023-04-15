@@ -87,6 +87,8 @@
 	if(flooded && !density)
 		make_flooded(TRUE)
 
+	refresh_vis_contents()
+
 	return INITIALIZE_HINT_NORMAL
 
 /turf/examine(mob/user, distance, infix, suffix)

@@ -28,7 +28,6 @@
 		mimicy = y + (E.maxy - 2*TRANSITIONEDGE) - 1
 	else if (y >= (E.maxy - TRANSITIONEDGE))
 		mimicy = y - (E.maxy - 2*TRANSITIONEDGE) + 1
-	refresh_vis_contents()
 
 	//Need to put a mouse-opaque overlay there to prevent people turning/shooting towards ACTUAL location of vis_content things
 	var/obj/effect/overlay/O = new(src)
