@@ -16,7 +16,7 @@
 	power_losses = 150
 
 	var/minrate = 0
-	var/maxrate = 10 * ONE_ATMOSPHERE
+	var/maxrate = 10 ATM
 
 	var/list/scrubbing_gas
 

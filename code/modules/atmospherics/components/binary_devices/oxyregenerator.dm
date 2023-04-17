@@ -14,7 +14,7 @@
 	obj_flags = OBJ_FLAG_ANCHORABLE | OBJ_FLAG_ROTATABLE
 	layer = STRUCTURE_LAYER
 
-	var/target_pressure = 10*ONE_ATMOSPHERE
+	var/target_pressure = 10 ATM
 	var/power_setting = 1 //power consumption setting, 1 through five
 	var/carbon_stored = 0
 	var/carbon_efficiency = 0.5
@@ -63,7 +63,7 @@
 				use_power_oneoff(power_draw)
 			if(transfer_moles > 0)
 				update_networks(turn(dir, 180))
-		if (air1.return_pressure() < 0.1 * ONE_ATMOSPHERE || inner_tank.return_pressure() >= target_pressure * 0.95)//if pipe is good as empty or tank is full
+		if (air1.return_pressure() < (0.1 ATM) || inner_tank.return_pressure() >= target_pressure * 0.95)//if pipe is good as empty or tank is full
 			phase = "processing"
 
 	if (phase == "processing")//processing CO2 in tank

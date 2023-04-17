@@ -217,7 +217,7 @@
 	gauge_icon = null
 	obj_flags = OBJ_FLAG_CONDUCTIBLE
 	slot_flags = null
-	starting_pressure = list(/decl/material/gas/hydrogen = 2*ONE_ATMOSPHERE)
+	starting_pressure = list(/decl/material/gas/hydrogen = 2 ATM)
 
 	volume = 30
 	failure_temp = 1000

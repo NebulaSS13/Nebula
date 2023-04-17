@@ -73,10 +73,10 @@
 #define XGM_GAS_OXIDIZER    2
 #define XGM_GAS_CONTAMINANT 4
 
-#define TANK_LEAK_PRESSURE     (30 * ONE_ATMOSPHERE) // Tank starts leaking.
-#define TANK_RUPTURE_PRESSURE  (40 * ONE_ATMOSPHERE) // Tank spills all contents into atmosphere.
-#define TANK_FRAGMENT_PRESSURE (50 * ONE_ATMOSPHERE) // Boom 3x3 base explosion.
-#define TANK_FRAGMENT_SCALE    (10 * ONE_ATMOSPHERE) // +1 for each SCALE kPa above threshold. Was 2 atm.
+#define TANK_LEAK_PRESSURE     (30 ATM) // Tank starts leaking.
+#define TANK_RUPTURE_PRESSURE  (40 ATM) // Tank spills all contents into atmosphere.
+#define TANK_FRAGMENT_PRESSURE (50 ATM) // Boom 3x3 base explosion.
+#define TANK_FRAGMENT_SCALE    (10 ATM) // +1 for each SCALE kPa above threshold. Was 2 atm.
 
 #define NORMPIPERATE             30   // Pipe-insulation rate divisor.
 #define HEATPIPERATE             8    // Heat-exchange pipe insulation.

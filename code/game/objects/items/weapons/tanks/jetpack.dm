@@ -85,19 +85,19 @@
 	name = "void jetpack (oxygen)"
 	desc = "It works well in a void."
 	icon = 'icons/obj/items/tanks/jetpack_void.dmi'
-	starting_pressure = list(/decl/material/gas/oxygen = 6*ONE_ATMOSPHERE)
+	starting_pressure = list(/decl/material/gas/oxygen = 6 ATM)
 
 /obj/item/tank/jetpack/oxygen
 	name = "jetpack (oxygen)"
 	desc = "A tank of compressed oxygen for use as propulsion in zero-gravity areas. Use with caution."
-	starting_pressure = list(/decl/material/gas/oxygen = 6*ONE_ATMOSPHERE)
+	starting_pressure = list(/decl/material/gas/oxygen = 6 ATM)
 
 /obj/item/tank/jetpack/carbondioxide
 	name = "jetpack (carbon dioxide)"
 	desc = "A tank of compressed carbon dioxide for use as propulsion in zero-gravity areas. Painted black to indicate that it should not be used as a source for internals."
 	icon = 'icons/obj/items/tanks/jetpack_co2.dmi'
 	distribute_pressure = 0
-	starting_pressure = list(/decl/material/gas/carbon_dioxide = 6*ONE_ATMOSPHERE)
+	starting_pressure = list(/decl/material/gas/carbon_dioxide = 6 ATM)
 
 /obj/item/tank/jetpack/rig
 	name = "integrated manuvering module thrusterpack"

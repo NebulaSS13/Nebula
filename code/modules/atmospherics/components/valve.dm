@@ -57,7 +57,7 @@
 		..() // connect along each dir separately; this is base behavior
 
 /obj/machinery/atmospherics/valve/proc/open()
-	if(open) 
+	if(open)
 		return 0
 
 	open = TRUE
@@ -115,7 +115,7 @@
 /obj/machinery/atmospherics/valve/deconstruction_pressure_check()
 	var/datum/gas_mixture/int_air = return_air()
 	var/datum/gas_mixture/env_air = loc.return_air()
-	if ((int_air.return_pressure()-env_air.return_pressure()) > 2*ONE_ATMOSPHERE)
+	if ((int_air.return_pressure()-env_air.return_pressure()) > (2 ATM))
 		return FALSE
 	return TRUE
 

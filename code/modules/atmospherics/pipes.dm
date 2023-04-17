@@ -26,8 +26,8 @@
 	var/leaking = 0		// Do not set directly, use set_leaking(TRUE/FALSE)
 
 	//minimum pressure before check_pressure(...) should be called
-	var/maximum_pressure = 210 * ONE_ATMOSPHERE
-	var/fatigue_pressure = 170 * ONE_ATMOSPHERE
+	var/maximum_pressure = 210 ATM
+	var/fatigue_pressure = 170 ATM
 	var/datum/sound_token/sound_token
 
 /obj/machinery/atmospherics/pipe/drain_power()
@@ -128,7 +128,7 @@
 	var/datum/gas_mixture/int_air = return_air()
 	var/datum/gas_mixture/env_air = loc.return_air()
 
-	if ((int_air.return_pressure()-env_air.return_pressure()) > 2*ONE_ATMOSPHERE)
+	if ((int_air.return_pressure()-env_air.return_pressure()) > (2 ATM))
 		return FALSE
 	return TRUE
 
@@ -312,8 +312,8 @@
 /obj/machinery/atmospherics/pipe/simple/visible/fuel
 	name = "fuel pipe"
 	color = PIPE_COLOR_ORANGE
-	maximum_pressure = 420*ONE_ATMOSPHERE
-	fatigue_pressure = 350*ONE_ATMOSPHERE
+	maximum_pressure = 420 ATM
+	fatigue_pressure = 350 ATM
 	connect_types = CONNECT_TYPE_FUEL
 
 /obj/machinery/atmospherics/pipe/simple/hidden
@@ -360,8 +360,8 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/fuel
 	name = "fuel pipe"
 	color = PIPE_COLOR_ORANGE
-	maximum_pressure = 420*ONE_ATMOSPHERE
-	fatigue_pressure = 350*ONE_ATMOSPHERE
+	maximum_pressure = 420 ATM
+	fatigue_pressure = 350 ATM
 	connect_types = CONNECT_TYPE_FUEL
 
 /obj/machinery/atmospherics/pipe/manifold

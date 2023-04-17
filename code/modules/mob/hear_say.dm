@@ -21,7 +21,7 @@
 		if(pressure < SOUND_MINIMUM_PRESSURE && get_dist(speaker, src) > 1)
 			return
 
-		if (pressure < ONE_ATMOSPHERE*0.4) //sound distortion pressure, to help clue people in that the air is thin, even if it isn't a vacuum yet
+		if (pressure < (0.4 ATM)) //sound distortion pressure, to help clue people in that the air is thin, even if it isn't a vacuum yet
 			italics = 1
 			sound_vol *= 0.5 //muffle the sound a bit, so it's like we're actually talking through contact
 

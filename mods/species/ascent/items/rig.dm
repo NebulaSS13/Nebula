@@ -140,11 +140,11 @@
 	volume = 180
 
 /obj/item/tank/mantid/methyl_bromide
-	starting_pressure = list(/decl/material/gas/methyl_bromide = 6 * ONE_ATMOSPHERE)
+	starting_pressure = list(/decl/material/gas/methyl_bromide = 6 ATM)
 
 /obj/item/tank/mantid/oxygen
 	name = "mantid oxygen tank"
-	starting_pressure = list(OXYGEN = 6 * ONE_ATMOSPHERE)
+	starting_pressure = list(OXYGEN = 6 ATM)
 
 // Boilerplate due to hard typechecks in jetpack code. Todo: make it an extension.
 /obj/item/tank/jetpack/ascent
@@ -157,7 +157,7 @@
 
 /obj/item/tank/jetpack/ascent/Initialize()
 	starting_pressure = list()
-	starting_pressure[refill_gas_type] = (6 * ONE_ATMOSPHERE)
+	starting_pressure[refill_gas_type] = 6 ATM
 	. = ..()
 
 /obj/item/tank/jetpack/ascent/Process()
@@ -175,7 +175,7 @@
 
 /obj/item/tank/mantid/reactor/Initialize()
 	starting_pressure = list()
-	starting_pressure[refill_gas_type] = (6 * ONE_ATMOSPHERE)
+	starting_pressure[refill_gas_type] = 6 ATM
 	. = ..()
 
 /obj/item/tank/mantid/reactor/Process()

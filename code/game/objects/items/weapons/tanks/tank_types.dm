@@ -15,7 +15,7 @@
 	desc = "A tank of oxygen."
 	icon = 'icons/obj/items/tanks/tank_blue.dmi'
 	distribute_pressure = ONE_ATMOSPHERE*O2STANDARD
-	starting_pressure = list(/decl/material/gas/oxygen = 6*ONE_ATMOSPHERE)
+	starting_pressure = list(/decl/material/gas/oxygen = 6 ATM)
 	volume = 180
 
 /obj/item/tank/oxygen/yellow
@@ -32,7 +32,7 @@
 	name = "air tank"
 	desc = "Mixed anyone?"
 	icon = 'icons/obj/items/tanks/tank_blue.dmi'
-	starting_pressure = list(/decl/material/gas/oxygen = 6*ONE_ATMOSPHERE*O2STANDARD, /decl/material/gas/nitrogen = 6*ONE_ATMOSPHERE*N2STANDARD)
+	starting_pressure = list(/decl/material/gas/oxygen = (6 ATM) * O2STANDARD, /decl/material/gas/nitrogen = (6 ATM) * N2STANDARD)
 	volume = 180
 
 /*
@@ -46,7 +46,7 @@
 	gauge_icon = null
 	obj_flags = OBJ_FLAG_CONDUCTIBLE
 	slot_flags = null
-	starting_pressure = list(/decl/material/gas/hydrogen = 3*ONE_ATMOSPHERE)
+	starting_pressure = list(/decl/material/gas/hydrogen = 3 ATM)
 
 /obj/item/tank/hydrogen/empty
 	starting_pressure = list()
@@ -73,7 +73,7 @@
 	desc = "Used for emergencies. Contains very little oxygen, so try to conserve it until you actually need it."
 	icon = 'icons/obj/items/tanks/tank_emergency.dmi'
 	gauge_icon = "indicator_emergency"
-	starting_pressure = list(/decl/material/gas/oxygen = 10*ONE_ATMOSPHERE)
+	starting_pressure = list(/decl/material/gas/oxygen = 10 ATM)
 
 /obj/item/tank/emergency/oxygen/engi
 	name = "extended-capacity emergency oxygen tank"
@@ -101,5 +101,5 @@
 	desc = "A tank of nitrogen."
 	icon = 'icons/obj/items/tanks/tank_red.dmi'
 	distribute_pressure = ONE_ATMOSPHERE*O2STANDARD
-	starting_pressure = list(/decl/material/gas/nitrogen = 10*ONE_ATMOSPHERE)
+	starting_pressure = list(/decl/material/gas/nitrogen = 10 ATM)
 	volume = 180
