@@ -187,7 +187,7 @@
 		return species.can_fall(src)
 
 /atom/movable/proc/protected_from_fall_damage(var/turf/landing)
-	return !!(locate(/obj/structure/stairs) in src)
+	return !!(locate(/obj/structure/stairs) in landing)
 
 /mob/protected_from_fall_damage(var/turf/landing)
 	. = ..()
