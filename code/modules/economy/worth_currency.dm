@@ -14,7 +14,7 @@
 	name = "[value_name] [currency.name_singular] [name || "piece"]"
 	state = state || "cash"
 	marked_value = value
-	overlay = image(currency, state)
+	overlay = image(currency.icon, state)
 	overlay.color = colour
 	overlay.appearance_flags |= RESET_COLOR
 	overlay.plane = FLOAT_PLANE
