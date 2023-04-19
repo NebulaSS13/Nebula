@@ -14,6 +14,7 @@
 	var/icon_edge_states
 	var/icon_has_corners = FALSE
 	var/list/affecting_heat_sources
+	///If this turf is on a level that belongs to a planetoid, this is a reference to that planetoid.
 	var/datum/planetoid_data/owner
 
 // Bit faster than return_air() for exoplanet exterior turfs

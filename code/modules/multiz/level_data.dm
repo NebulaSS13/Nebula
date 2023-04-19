@@ -103,6 +103,10 @@
 	var/ambient_light_color = COLOR_WHITE
 
 	// *** Level Gen ***
+	///The mineral strata assigned to this level if any. Set to a path at definition, then to a decl/strata instance at runtime.
+	var/decl/strata/strata
+	///The base material randomly chosen from the strata for this level.
+	var/decl/material/strata_base_material
 	///The default base turf type for the whole level. It will be the base turf type for the z level, unless loaded by map.
 	/// filler_turf overrides what turfs the level will be created with.
 	var/base_turf = /turf/space
@@ -136,7 +140,9 @@
 	var/list/level_generators
 
 	///Whether the level data was setup already.
-	var/_level_setup_completed = FALSE
+	var/tmp/_level_setup_completed = FALSE
+	///This is set to prevent spamming the log when a turf has tried to grab our strata before we've been initialized
+	var/tmp/_has_warned_uninitialized_strata = FALSE
 
 /datum/level_data/New(var/_z_level, var/defer_level_setup = FALSE)
 	. = ..()
@@ -194,6 +200,7 @@
 	setup_level_bounds()
 	setup_ambient()
 	setup_exterior_atmosphere()
+	setup_strata()
 	if(!skip_gen)
 		generate_level()
 	after_generate_level()
@@ -240,6 +247,22 @@
 		exterior_atmosphere.temperature = exterior_atmos_temp
 		exterior_atmosphere.update_values()
 		exterior_atmosphere.check_tile_graphic()
+
+///Pick a strata for the given level if applicable.
+/datum/level_data/proc/setup_strata()
+	//If no strata, pick a random one
+	if(isnull(strata))
+		strata = pick(decls_repository.get_decl_paths_of_subtype(/decl/strata))
+	//Make sure we have a /decl/strata instance
+	if(ispath(strata))
+		strata = GET_DECL(strata)
+
+	//cache the strata base material we picked from the list. So all turfs use the same we picked.
+	if(strata && length(strata.base_materials) && !strata_base_material)
+		strata_base_material = pick(strata.base_materials)
+	if(ispath(strata_base_material, /decl/material))
+		strata_base_material = GET_DECL(strata_base_material)
+	return strata
 
 //
 // Level Load/Gen
@@ -448,6 +471,13 @@
 		return new base_area
 	return locate(world.area)
 
+///Warns exactly once about a turf trying to initialize it's strata from us when we haven't completed setup.
+/datum/level_data/proc/warn_bad_strata(var/turf/T)
+	if(_has_warned_uninitialized_strata)
+		return
+	PRINT_STACK_TRACE("Turf tried to init it's strata before it was setup for level '[level_id]' z:[level_z]! [log_info_line(T)]")
+	_has_warned_uninitialized_strata = TRUE
+
 ////////////////////////////////////////////
 // Level Data Spawner
 ////////////////////////////////////////////
@@ -542,3 +572,4 @@ INITIALIZE_IMMEDIATE(/obj/abstract/level_data_spawner)
 		mining_turf.updateMineralOverlays()
 		CHECK_TICK
 	mining_turfs = null
+

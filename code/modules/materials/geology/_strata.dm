@@ -7,9 +7,9 @@
 	var/maximum_temperature = INFINITY
 
 /decl/strata/proc/is_valid_exoplanet_strata(var/datum/planetoid_data/planet)
-	var/datum/level_data/level_data = SSmapping.levels_by_id[planet.surface_level_id]
-	var/check_temp = level_data?.exterior_atmosphere?.temperature || 0
-	. = check_temp <= maximum_temperature
+	if(istype(planet.atmosphere))
+		return planet.atmosphere.temperature <= maximum_temperature
+	return TCMB <= maximum_temperature
 
 /decl/strata/Initialize()
 	. = ..()

@@ -19,7 +19,7 @@
 	exterior_atmosphere = null
 	exterior_atmos_temp = null
 	level_generators = list(
-		/datum/random_map/automata/cave_system/mountains/snow,
+		/datum/random_map/automata/cave_system/mountains,
 		/datum/random_map/noise/exoplanet/snow,
 	)
 
@@ -80,17 +80,6 @@
 	map_generators = list(
 		/datum/random_map/noise/ore/poor
 	)
-
-////////////////////////////////////////////////////////////////////////////
-// Mountains Generator
-////////////////////////////////////////////////////////////////////////////
-
-/datum/random_map/automata/cave_system/mountains/snow
-	descriptor   = "ice mountains"
-	iterations   = 2
-	wall_type    =  /turf/exterior/wall/ice
-	mineral_turf = /turf/exterior/wall/random/ice
-	rock_color   = COLOR_CYAN_BLUE
 
 ////////////////////////////////////////////////////////////////////////////
 // Map Generator Surface

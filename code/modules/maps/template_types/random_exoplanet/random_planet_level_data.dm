@@ -25,6 +25,13 @@
 		return
 	level_id = "planetoid_[level_z]_[sequential_id(/datum/level_data)]"
 
+/datum/level_data/planetoid/setup_strata()
+	//If no fixed strata, grab the one from the owning planetoid_data if we have any
+	if(!strata)
+		var/datum/planetoid_data/planet = SSmapping.planetoid_data_by_z[level_z]
+		strata = planet?.get_strata()
+	. = ..()
+
 ///Prepare our level for generation/load. And sync with the planet template
 /datum/level_data/planetoid/before_template_generation(datum/map_template/template, var/datum/planetoid_data/gen_data)
 	//In cases when the planetoid_data isn't shared with us, like from loading non-random planet map templates, we can try fetching it.

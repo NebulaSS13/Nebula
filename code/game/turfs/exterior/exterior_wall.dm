@@ -1,7 +1,6 @@
 #define MAT_DROP_CHANCE 30
 
-var/global/list/default_strata_type_by_z = list()
-var/global/list/default_material_by_strata_and_z = list()
+///List of all the /turf/exterior/wall that exists in the world on all z-levels
 var/global/list/natural_walls = list()
 
 /turf/exterior/wall
@@ -14,7 +13,8 @@ var/global/list/natural_walls = list()
 	blocks_air = TRUE
 	turf_flags = TURF_FLAG_BACKGROUND | TURF_IS_HOLOMAP_OBSTACLE
 
-	var/strata
+	///Overrides the level's strata for this turf.
+	var/strata_override
 	var/paint_color
 	var/image/ore_overlay
 	var/decl/material/material

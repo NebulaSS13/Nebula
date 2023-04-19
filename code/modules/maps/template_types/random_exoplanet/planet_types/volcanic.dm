@@ -22,7 +22,7 @@
 	exterior_atmosphere = null
 	exterior_atmos_temp = null
 	level_generators = list(
-		/datum/random_map/automata/cave_system/mountains/volcanic,
+		/datum/random_map/automata/cave_system/mountains,
 		/datum/random_map/noise/exoplanet/volcanic,
 	)
 
@@ -133,23 +133,6 @@
 						break
 			if(!frendos)
 				map[current_cell] = 1
-
-
-////////////////////////////////////////////////////////////////////////////
-// Mountains Generator
-////////////////////////////////////////////////////////////////////////////
-
-/datum/random_map/automata/cave_system/mountains/volcanic
-	descriptor   = "space volcanic mountains"
-	iterations   = 2
-	wall_type    =  /turf/exterior/wall/volcanic
-	mineral_turf =  /turf/exterior/wall/random/volcanic
-	rock_color   = COLOR_DARK_GRAY
-
-/datum/random_map/automata/cave_system/mountains/volcanic/get_additional_spawns(value, var/turf/exterior/wall/T)
-	..()
-	if(use_area && istype(T))
-		T.floor_type = prob(90) ? use_area.base_turf : /turf/exterior/lava
 
 ////////////////////////////////////////////////////////////////////////////
 // Areas

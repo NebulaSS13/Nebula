@@ -133,18 +133,23 @@ SUBSYSTEM_DEF(materials)
 /datum/controller/subsystem/materials/proc/get_cocktails_by_primary_ingredient(var/primary)
 	. = cocktails_by_primary_ingredient[primary]
 
-/datum/controller/subsystem/materials/proc/get_strata(var/turf/exterior/wall/location)
+/datum/controller/subsystem/materials/proc/get_strata_type(var/turf/exterior/wall/location)
 	if(!istype(location))
 		return
-	var/datum/planetoid_data/planet = SSmapping.planetoid_data_by_z[location.z]
-	var/decl/strata/S = planet?.get_strata()
-	. = S?.type
-	if(.)
-		return .
-	var/s_key = "[location.z]"
-	if(!global.default_strata_type_by_z[s_key])
-		global.default_strata_type_by_z[s_key] = pick(decls_repository.get_decl_paths_of_subtype(/decl/strata))
-	return global.default_strata_type_by_z[s_key]
+
+	//Turf may override level_data strata
+	if(ispath(location.strata_override))
+		return location.strata_override
+
+	//Then level_data
+	var/datum/level_data/LD = SSmapping.levels_by_z[location.z]
+	if(!LD._level_setup_completed && !LD._has_warned_uninitialized_strata)
+		LD.warn_bad_strata(location) //If we haven't warned yet dump a stack trace and warn that strata was set before init
+
+	if(ispath(LD.strata, /decl/strata))
+		return LD.strata
+	else if(istype(LD.strata, /decl/strata))
+		return LD.strata.type
 
 /datum/controller/subsystem/materials/proc/get_material_by_name(var/mat_name)
 	if(mat_name)
@@ -154,14 +159,18 @@ SUBSYSTEM_DEF(materials)
 /datum/controller/subsystem/materials/proc/get_strata_material(var/turf/exterior/wall/location)
 	if(!istype(location))
 		return
-	if(!location.strata)
-		location.strata = get_strata(location)
-	var/skey = "[location.strata]-[location.z]"
-	if(!global.default_material_by_strata_and_z[skey])
-		var/decl/strata/strata = GET_DECL(location.strata)
-		if(length(strata.base_materials))
-			global.default_material_by_strata_and_z[skey] = pick(strata.base_materials)
-	return global.default_material_by_strata_and_z[skey]
+
+	//Turf strata overrides level strata
+	if(ispath(location.strata_override, /decl/strata))
+		var/decl/strata/S = GET_DECL(location.strata_override)
+		if(length(S.base_materials))
+			return pick(S.base_materials)
+
+	//Try to grab the material we picked for the level from the level data
+	var/datum/level_data/LD = SSmapping.levels_by_z[location.z]
+	if(!LD._level_setup_completed && !LD._has_warned_uninitialized_strata)
+		LD.warn_bad_strata(location) //If we haven't warned yet dump a stack trace and warn that strata was set before init
+	return LD.strata_base_material
 
 /datum/controller/subsystem/materials/proc/create_object(var/mat_type, var/atom/target, var/amount = 1, var/object_type, var/reinf_type)
 	var/decl/material/mat = GET_DECL(mat_type)
