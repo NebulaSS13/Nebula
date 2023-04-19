@@ -37,7 +37,7 @@
 		return ..()
 
 	if(LAZYLEN(papers) < 1 && amount < 1)
-		to_chat(user, SPAN_WARNING("[src] is empty!"))
+		to_chat(user, SPAN_WARNING("\The [src] is empty!"))
 		return TRUE
 
 	var/obj/item/paper/P

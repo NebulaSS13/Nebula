@@ -33,7 +33,7 @@
 	if(istype(O, /obj/item/card/id) && !held_card)
 		if(user.try_unequip(O, src))
 			held_card = O
-			ui_interact(user)
+			SSnano.update_uis(src)
 		return TRUE
 	return ..()
 
@@ -135,13 +135,14 @@
 					if(ishuman(usr) && !usr.get_active_hand())
 						usr.put_in_hands(held_card)
 					held_card = null
-
+					SSnano.update_uis(src)
 				else
 					var/obj/item/I = usr.get_active_hand()
 					if (istype(I, /obj/item/card/id))
 						if(!usr.try_unequip(I, src))
 							return
 						held_card = I
+						SSnano.update_uis(src)
 
 			if("view_account_detail")
 				var/index = text2num(href_list["account_index"])
