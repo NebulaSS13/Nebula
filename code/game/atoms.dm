@@ -1,43 +1,57 @@
 /atom
-	/// (1|2) Determines if an atom is below `1` or above `2` plating. TODO: Use defines.
+	/// (1 | 2) Determines if this atom is below `1` or above `2` plating. TODO: Use defines.
 	var/level = 2
 	/// (BITFLAG) See flags.dm
 	var/atom_flags = ATOM_FLAG_NO_TEMP_CHANGE
-	/// (DICTIONARY) A lazy map. The `key` is a MD5 playername and the `value` is the blood type.
-	var/list/blood_DNA
-	/// (BOOL) If the atom was bloodied before.
-	var/was_bloodied
-	/// (COLOR) The color of the blood shown on blood overlays.
-	var/blood_color
-	/// (NUMBER) The world.time that this atom last bumped another. Used mostly by mobs.
+	/// (FLOAT) The world.time that this atom last bumped another. Used mostly by mobs.
 	var/last_bumped = 0
 	/// (BITFLAG) See flags.dm
 	var/pass_flags = 0
 	/// (BOOL) If a thrown object can continue past this atom. Sometimes used for clicking as well? TODO: Rework this
 	var/throwpass = 0
-	/// (NUMBER) The number of germs on this atom.
+	/// (INTEGER) The number of germs on this atom.
 	var/germ_level = GERM_LEVEL_AMBIENT
 	/// (BOOL) If an atom should be interacted with by a number of systems (Atmos, Liquids, Turbolifts, Etc.)
 	var/simulated = TRUE
-	/// (1|2|3) If it shows up under UV light. 0 doesn't, 1 does, 2 is currently glowing due to UV light. TODO: Use defines
-	var/fluorescent
-	/// The checmical contents of the atom
+	/// The chemical contents of this atom
 	var/datum/reagents/reagents
+	/// (INTEGER) The amount an explosion's power is decreased when encountering this atom
+	var/explosion_resistance = 0
+	/// (BOOL) If it can be spawned normally
+	var/is_spawnable_type = FALSE
+
+
+	/// (DICTIONARY) A lazy map. The `key` is a MD5 player name and the `value` is the blood type.
+	var/list/blood_DNA
+	/// (BOOL) If this atom was bloodied before.
+	var/was_bloodied
+	/// (COLOR) The color of the blood shown on blood overlays.
+	var/blood_color
+	/// (1 | 2 | 3) If it shows up under UV light. 0 doesn't, 1 does, 2 is currently glowing due to UV light. TODO: Use defines
+	var/fluorescent
+
+
 	/// (LIST) A list of all mobs that are climbing or currently on this atom
 	var/list/climbers
+	/// (FLOAT) The climbing speed multiplier for this atom
 	var/climb_speed_mult = 1
-	var/explosion_resistance = 0
-	var/icon_scale_x = 1 // Holds state of horizontal scaling applied.
-	var/icon_scale_y = 1 // Ditto, for vertical scaling.
-	var/icon_rotation = 0 // And one for rotation as well.
-	var/transform_animate_time = 0 // If greater than zero, transform-based adjustments (scaling, rotating) will visually occur over this time.
+
+
+	/// (FLOAT) The horizontal scaling that should be applied.
+	var/icon_scale_x = 1
+	/// (FLOAT) The vertical scaling that should be applied.
+	var/icon_scale_y = 1
+	/// (FLOAT) The angle in degrees clockwise that should be applied.
+	var/icon_rotation = 0
+	/// (FLOAT) If greater than zero, transform-based adjustments (scaling, rotating) will visually occur over this time.
+	var/transform_animate_time = 0
+
 	var/tmp/currently_exploding = FALSE
 	var/tmp/default_pixel_x
 	var/tmp/default_pixel_y
 	var/tmp/default_pixel_z
 	var/tmp/default_pixel_w
-	/// (BOOL) If it can be spawned normally
-	var/is_spawnable_type = FALSE
+
 
 /**
 	Adjust variables prior to Initialize() based on the map
@@ -52,14 +66,16 @@
 
 /**
 	Attempt to merge a gas_mixture `giver` into this atom's gas_mixture
-	- Returns: `TRUE` if successful, otherwise `FALSE`
+
+	- Return: `TRUE` if successful, otherwise `FALSE`
 */
 /atom/proc/assume_air(datum/gas_mixture/giver)
 	return FALSE
 
 /**
-	Attempt to remove `amount` moles from the atom's gas_mixture
-	- Returns: A `/datum/gas_mixture` containing the gas removed if successful, otherwise `null`
+	Attempt to remove `amount` moles from this atom's gas_mixture
+
+	- Return: A `/datum/gas_mixture` containing the gas removed if successful, otherwise `null`
 */
 /atom/proc/remove_air(amount)
 	RETURN_TYPE(/datum/gas_mixture)
@@ -67,30 +83,33 @@
 
 /**
 	Get the air of this atom or its location's air
-	- Returns: The `/datum/gas_mixture` of this atom
+
+	- Return: The `/datum/gas_mixture` of this atom
 */
 /atom/proc/return_air()
 	RETURN_TYPE(/datum/gas_mixture)
 	return loc?.return_air()
 
 /**
-	Get the flags that should be added to the `users`'s sight var.
-	- Returns: Sight flags, or `-1` if the view should be reset
-	- TODO: Also sometimes handles reseting of view itself, probably should be more consistent.
+	Get the flags that should be added to the `users` sight var.
+
+	- Return: Sight flags, or `-1` if the view should be reset
+	- TODO: Also sometimes handles resetting of view itself, probably should be more consistent.
 */
 /atom/proc/check_eye(user)
-	if (istype(user, /mob/living/silicon/ai)) // WHYYYY
+	if (istype(user, /mob/living/silicon/ai)) // WHY
 		return 0
 	return -1
 
 /**
-	Get the flags that may be added as part of a mobs sight
+	Get sight flags that this atom should provide to a user
 	- See: /mob/var/sight
 */
 /atom/proc/additional_sight_flags()
 	SHOULD_BE_PURE(TRUE)
 	return 0
 
+/// Get the level of invisible sight this atom should provide to a user
 /atom/proc/additional_see_invisible()
 	SHOULD_BE_PURE(TRUE)
 	return 0
@@ -102,8 +121,9 @@
 /**
 	Handle an atom bumping this atom
 
-	Called by `AM`s Bump()
-	- `AM` The atom that bumped us
+	Called by `AMs` Bump()
+
+	- `AM`: The atom that bumped us
 */
 /atom/proc/Bumped(var/atom/movable/AM)
 	return
@@ -113,7 +133,7 @@
 
 	- `mover`: The atom trying to move
 	- `target`: The turf the atom is trying to move to
-	- Returns: `TRUE` if it can exit, otherwise `FALSE`
+	- Return: `TRUE` if it can exit, otherwise `FALSE`
 */
 /atom/proc/CheckExit(atom/movable/mover, turf/target)
 	SHOULD_BE_PURE(TRUE)
@@ -125,7 +145,8 @@
 	Called when an atom enters this atom's proximity. Both this and the other atom
 	need to have the PROXMOVE flag (as it helps reduce lag).
 
-	- Returns: `TRUE` if proximity should continue to be handled, otherwise `FALSE`
+	- `AM`: The atom entering proximity
+	- Return: `TRUE` if proximity should continue to be handled, otherwise `FALSE`
 	- TODO: Rename this to `handle_proximity`
 */
 /atom/proc/HasProximity(atom/movable/AM)
@@ -160,7 +181,7 @@
 
 	- `P`: The `/obj/item/projectile` hitting this atom
 	- `def_zone`: The zone `P` is hitting
-	- Returns: `0 to 100+`, representing the % damage blocked. Can also be special PROJECTILE values (misc.dm)
+	- Return: `0 to 100+`, representing the % damage blocked. Can also be special PROJECTILE values (misc.dm)
 */
 /atom/proc/bullet_act(obj/item/projectile/P, def_zone)
 	P.on_hit(src, 0, def_zone)
@@ -170,7 +191,7 @@
 	Check if this atom is in the path or atom `container`
 
 	- `container`: The path or atom to check
-	- Returns: `TRUE` if `container` contains this atom, otherwise `FALSE`
+	- Return: `TRUE` if `container` contains this atom, otherwise `FALSE`
 */
 /atom/proc/in_contents_of(container)
 	if(ispath(container))
@@ -184,8 +205,8 @@
 	Recursively search this atom's contents for an atom of type `path`
 
 	- `path`: The path of the atom to search for
-	- `filter_path`: A list of atom paths that only should be searched, or `null` to search all
-	- Returns: A list of atoms of type `path` found inside this atom
+	- `filter_path?`: A list of atom paths that only should be searched, or `null` to search all
+	- Return: A list of atoms of type `path` found inside this atom
 */
 /atom/proc/search_contents_for(path, list/filter_path=null)
 	RETURN_TYPE(/list)
@@ -216,7 +237,7 @@
 	- `distance`: The distance this atom is from the `user`
 	- `infix`: TODO
 	- `suffix`: TODO
-	- Returns: `TRUE` when the call chain is valid, otherwise `FALSE`
+	- Return: `TRUE` when the call chain is valid, otherwise `FALSE`
 	- Events: `atom_examined`
 */
 /atom/proc/examine(mob/user, distance, infix = "", suffix = "")
@@ -251,7 +272,7 @@
 	Set the direction of this atom to `new_dir`
 
 	- `new_dir`: The new direction the atom should face.
-	- Returns: `TRUE` if the direction has been changed.
+	- Return: `TRUE` if the direction has been changed.
 	- Events: `dir_set`
 */
 /atom/proc/set_dir(new_dir)
@@ -331,7 +352,7 @@
 	Handle the destruction of this atom, spilling it's contents by default
 
 	- `skip_qdel`: If calling qdel() on this atom should be skipped.
-	- Returns: Unknown, feel free to change this
+	- Return: Unknown, feel free to change this
 */
 /atom/proc/physically_destroyed(var/skip_qdel)
 	SHOULD_CALL_PARENT(TRUE)
@@ -347,15 +368,15 @@
 */
 /atom/proc/try_detonate_reagents(var/severity = 3)
 	if(reagents)
-		for(var/rtype in reagents.reagent_volumes)
-			var/decl/material/R = GET_DECL(rtype)
+		for(var/r_type in reagents.reagent_volumes)
+			var/decl/material/R = GET_DECL(r_type)
 			R.explosion_act(src, severity)
 
 /**
 	Handle an explosion of `severity` affecting this atom
 
 	- `severity`: Strength of the explosion ranging from 1 to 3. Higher is weaker
-	- Returns: TRUE if severity is within range and exploding should continue, otherwise FALSE
+	- Return: `TRUE` if severity is within range and exploding should continue, otherwise `FALSE`
 */
 /atom/proc/explosion_act(var/severity)
 	SHOULD_CALL_PARENT(TRUE)
@@ -396,7 +417,7 @@
 /**
 	Handle this atom being exposed to lava. Calls qdel() by default
 
-	- Returns: TRUE if qdel() was called, otherwise FALSE
+	- Returns: `TRUE` if qdel() was called, otherwise `FALSE`
 */
 /atom/proc/lava_act()
 	visible_message(SPAN_DANGER("\The [src] sizzles and melts away, consumed by the lava!"))
@@ -428,7 +449,7 @@
 	if(atom_flags & ATOM_FLAG_NO_BLOOD)
 		return FALSE
 
-	if(!blood_DNA || !istype(blood_DNA, /list))	//if our list of DNA doesn't exist yet (or isn't a list) initialise it.
+	if(!blood_DNA || !istype(blood_DNA, /list))	//if our list of DNA doesn't exist yet (or isn't a list) initialize it.
 		blood_DNA = list()
 
 	was_bloodied = 1
@@ -444,7 +465,7 @@
 /**
 	Remove any blood from this atom
 
-	- Returns: TRUE if blood with DNA was removed
+	- Return: `TRUE` if blood with DNA was removed
 */
 /atom/proc/clean_blood()
 	SHOULD_CALL_PARENT(TRUE)
@@ -481,14 +502,14 @@
 		return 0
 
 /**
-	Return if this atom can be passed by another given the flags provided
+	Check if this atom can be passed by another given the flags provided
 
-	- `passflag`: The flags to check. See: flags.dm
-	- Returns: A positive number if it can pass, otherwise `0`
+	- `pass_flag`: The flags to check. See: flags.dm
+	- Return: The flags present that allow it to pass, otherwise `0`
 */
-/atom/proc/checkpass(passflag)
+/atom/proc/checkpass(pass_flag)
 	SHOULD_BE_PURE(TRUE)
-	return pass_flags & passflag
+	return pass_flags & pass_flag
 
 /**
 	Show a message to all mobs and objects in sight of this atom.
@@ -496,16 +517,16 @@
 	Used for atoms performing visible actions
 
 	- `message`: The string output to any atom that can see this atom
-	- `self_message?`: The string displayed to `src` if it's a mob. See: mobs.dm
+	- `self_message?`: The string displayed to this atom if it's a mob. See: mobs.dm
 	- `blind_message?`: The string blind mobs will see. Example: "You hear something!"
-	- `range?`: The number of tiles away the message will be visable from. Default: world.view
-	- `checkghosts?`: Set to `TRUE` if ghosts should see the message if their preferences allow
+	- `range?`: The number of tiles away the message will be visible from. Default: world.view
+	- `check_ghosts?`: Set to `TRUE` if ghosts should see the message if their preferences allow
 */
-/atom/proc/visible_message(var/message, var/self_message, var/blind_message, var/range = world.view, var/checkghosts = null)
+/atom/proc/visible_message(var/message, var/self_message, var/blind_message, var/range = world.view, var/check_ghosts = null)
 	var/turf/T = get_turf(src)
 	var/list/mobs = list()
 	var/list/objs = list()
-	get_mobs_and_objs_in_view_fast(T,range, mobs, objs, checkghosts)
+	get_mobs_and_objs_in_view_fast(T,range, mobs, objs, check_ghosts)
 
 	for(var/o in objs)
 		var/obj/O = o
@@ -526,14 +547,14 @@
 	- `message`: The string to show to anyone who can hear this atom
 	- `dead_message?`: The string deaf mobs will see
 	- `hearing_distance?`: The number of tiles away the message can be heard. Defaults to world.view
-	- `checkghosts?`: TRUE if ghosts should hear the message if their preferences allow
+	- `check_ghosts?`: TRUE if ghosts should hear the message if their preferences allow
 	- `radio_message?`: The string to send over radios
 */
-/atom/proc/audible_message(var/message, var/deaf_message, var/hearing_distance = world.view, var/checkghosts = null, var/radio_message)
+/atom/proc/audible_message(var/message, var/deaf_message, var/hearing_distance = world.view, var/check_ghosts = null, var/radio_message)
 	var/turf/T = get_turf(src)
 	var/list/mobs = list()
 	var/list/objs = list()
-	get_mobs_and_objs_in_view_fast(T, hearing_distance, mobs, objs, checkghosts)
+	get_mobs_and_objs_in_view_fast(T, hearing_distance, mobs, objs, check_ghosts)
 
 	for(var/m in mobs)
 		var/mob/M = m
@@ -543,12 +564,12 @@
 		O.show_message(message,2,deaf_message,1)
 
 /**
-	Attempt to drop this atom onto the desination.
+	Attempt to drop this atom onto the destination.
 
 	The destination can instead return another location, recursively chaining.
 
-	- destination: The atom that this src is dropped onto.
-	- Returns: The result of the forceMove() at the end.
+	- `destination`: The atom that this atom is dropped onto.
+	- Return: The result of the forceMove() at the end.
 */
 /atom/movable/proc/dropInto(var/atom/destination)
 	while(istype(destination))
@@ -559,13 +580,13 @@
 	return forceMove(null)
 
 /**
-	Handle dropping an atom onto this object.
+	Handle dropping an atom onto this atom.
 
-	If the item should move into this object, return null. Otherwise, return
-	the destination object where the item should be moved.
+	If the item should move into this atom, return null. Otherwise, return
+	the destination atom where the item should be moved.
 
-	- `AM`: The atom being dropped onto this object
-	- Returns: A location for the atom AM to move to, or null to move it into this object.
+	- `AM`: The atom being dropped onto this atom
+	- Return: A location for the atom AM to move to, or null to move it into this atom.
 */
 /atom/proc/onDropInto(var/atom/movable/AM)
 	RETURN_TYPE(/atom)
@@ -574,8 +595,14 @@
 /atom/movable/onDropInto(var/atom/movable/AM)
 	return loc
 
-// Called when hitting the atom with a grab.
-// Will skip attackby() and afterattack() if returning TRUE.
+/**
+	Handle this atom being hit by a grab.
+
+	Called by resolve_attackby()
+
+	- `G`: The grab hitting this atom
+	- Return: `TRUE` to skip attackby() and afterattack() or `FALSE`
+*/
 /atom/proc/grab_attack(var/obj/item/grab/G)
 	return FALSE
 
@@ -588,31 +615,36 @@
 
 	do_climb(usr)
 
+/**
+	Check if a user can climb this atom.
+
+	- `user`: The mob to check
+	- `post_climb_check?`: If we should check if the user can continue climbing
+	- Return: `TRUE` if they can climb, otherwise `FALSE`
+*/
 /atom/proc/can_climb(var/mob/living/user, post_climb_check=0)
 	if (!(atom_flags & ATOM_FLAG_CLIMBABLE) || !user.can_touch(src) || (!post_climb_check && climbers && (user in climbers)))
-		return 0
+		return FALSE
 
 	if (!user.Adjacent(src))
 		to_chat(user, "<span class='danger'>You can't climb there, the way is blocked.</span>")
-		return 0
+		return FALSE
 
 	var/obj/occupied = turf_is_crowded(user)
 	if(occupied)
 		to_chat(user, "<span class='danger'>There's \a [occupied] in the way.</span>")
-		return 0
-	return 1
-
-/mob/proc/can_touch(var/atom/touching)
-	if(!touching.Adjacent(src) || incapacitated())
 		return FALSE
-	if(restrained())
-		to_chat(src, SPAN_WARNING("You are restrained."))
-		return FALSE
-	if (buckled)
-		to_chat(src, SPAN_WARNING("You are buckled down."))
 	return TRUE
 
+/**
+	Check if this atom's turf is blocked.
+
+	This doesn't handle border structures and should be preceded by an Adjacent() check.
+	- `ignore?`: An atom that should be ignored by the check.
+	- Return: The first atom blocking this atom's turf.
+*/
 /atom/proc/turf_is_crowded(var/atom/ignore)
+	RETURN_TYPE(/atom)
 	var/turf/T = get_turf(src)
 	if(!T || !istype(T))
 		return 0
@@ -625,9 +657,15 @@
 			return A
 	return 0
 
+/**
+	Handle `user` climbing onto this atom.
+
+	- `user`: The mob climbing onto this atom.
+	- Return: `TRUE` if the user successfully climbs onto this atom, otherwise `FALSE`.
+*/
 /atom/proc/do_climb(var/mob/living/user)
 	if (!can_climb(user))
-		return 0
+		return FALSE
 
 	add_fingerprint(user)
 	user.visible_message("<span class='warning'>\The [user] starts climbing onto \the [src]!</span>")
@@ -635,11 +673,11 @@
 
 	if(!do_after(user,(issmall(user) ? MOB_CLIMB_TIME_SMALL : MOB_CLIMB_TIME_MEDIUM) * climb_speed_mult, src))
 		LAZYREMOVE(climbers,user)
-		return 0
+		return FALSE
 
 	if(!can_climb(user, post_climb_check=1))
 		LAZYREMOVE(climbers,user)
-		return 0
+		return FALSE
 
 	var/target_turf = get_turf(src)
 
@@ -652,8 +690,9 @@
 	if (get_turf(user) == target_turf)
 		user.visible_message("<span class='warning'>\The [user] climbs onto \the [src]!</span>")
 	LAZYREMOVE(climbers,user)
-	return 1
+	return TRUE
 
+/// Shake this atom and all it's climbers.
 /atom/proc/object_shaken()
 	for(var/mob/living/M in climbers)
 		SET_STATUS_MAX(M, STAT_WEAK, 1)
@@ -689,23 +728,37 @@
 			H.updatehealth()
 	return
 
+/// Get the current color of this atom.
 /atom/proc/get_color()
 	return color
 
+/// Set the color of this atom to `new_color`.
 /atom/proc/set_color(new_color)
 	color = new_color
 
+/// Get any power cell associated with this atom.
 /atom/proc/get_cell()
+	RETURN_TYPE(/obj/item/cell)
 	return
 
-// This proc will retrieve any radios associated with this atom,
-// for use in handle_message_mode or other radio-based logic.
-// The message_mode argument is used to determine what subset of
-// radios are relevant to the current call (ie. intercoms or ear radios)
+/**
+	Get any radio associated with this atom.
+
+	Used for handle_message_mode or other radio-based logic.
+	- `message_mode?`: Used to determine what subset of radio should be returned (ie. intercoms or ear radios)
+	- Return: A radio appropriate for `message_mode`.
+*/
 /atom/proc/get_radio(var/message_mode)
+	RETURN_TYPE(/obj/item/radio)
 	return
 
+/**
+	Get the material cost of this atom.
+
+	- Return: An dictionary where key is the material and value is the amount.
+*/
 /atom/proc/building_cost()
+	RETURN_TYPE(/list)
 	. = list()
 
 /atom/Topic(href, href_list)
@@ -717,17 +770,31 @@
 			return TOPIC_HANDLED
 	. = ..()
 
+/// Get the temperature of this atom's heat source
 /atom/proc/get_heat()
 	. = temperature
 
+/// Check if this atom is a source of fire
 /atom/proc/isflamesource()
 	. = FALSE
 
-// Transform setters.
+// === Transform setters. ===
+
+/**
+	Set the rotation of this atom's transform
+
+	- `new_rotation`: The angle in degrees the transform will be rotated clockwise
+*/
 /atom/proc/set_rotation(new_rotation)
 	icon_rotation = new_rotation
 	update_transform()
 
+/**
+	Set the scale of this atom's transform.
+
+	- `new_scale_x`: The multiplier to apply to the X axis
+	- `new_scale_y`: The multiplier to apply to the Y axis
+*/
 /atom/proc/set_scale(new_scale_x, new_scale_y)
 	if(isnull(new_scale_y))
 		new_scale_y = new_scale_x
@@ -737,7 +804,17 @@
 		icon_scale_y = new_scale_y
 	update_transform()
 
+/**
+	Update this atom's transform from stored values.
+
+	Applies icon_scale and icon_rotation. When transform_animate_time is set,
+	the transform is animated over the specified duration. Otherwise, it is
+	applied instantly.
+
+	- Return: The transform `/matrix` after updates are applied
+*/
 /atom/proc/update_transform()
+	RETURN_TYPE(/matrix)
 	var/matrix/M = matrix()
 	M.Scale(icon_scale_x, icon_scale_y)
 	M.Turn(icon_rotation)
@@ -747,14 +824,22 @@
 		transform = M
 	return transform
 
-// Walks up the loc tree until it finds a loc of the given loc_type
+/// Get the first loc of the specified `loc_type` from walking up the loc tree of this atom.
 /atom/get_recursive_loc_of_type(var/loc_type)
+	RETURN_TYPE(/atom)
 	var/atom/check_loc = loc
 	while(check_loc)
 		if(istype(check_loc, loc_type))
 			return check_loc
 		check_loc = check_loc.loc
 
+/**
+	Get a list of alt interactions for a user from this atom.
+
+	- `user`: The mob that these alt interactions are for
+	- Return: A list containing the alt interactions
+*/
 /atom/proc/get_alt_interactions(var/mob/user)
 	SHOULD_CALL_PARENT(TRUE)
+	RETURN_TYPE(/list)
 	return list()

@@ -542,6 +542,16 @@
 /mob/proc/is_ready()
 	return client && !!mind
 
+/mob/proc/can_touch(var/atom/touching)
+	if(!touching.Adjacent(src) || incapacitated())
+		return FALSE
+	if(restrained())
+		to_chat(src, SPAN_WARNING("You are restrained."))
+		return FALSE
+	if (buckled)
+		to_chat(src, SPAN_WARNING("You are buckled down."))
+	return TRUE
+
 /mob/proc/see(message)
 	if(!is_active())
 		return 0
