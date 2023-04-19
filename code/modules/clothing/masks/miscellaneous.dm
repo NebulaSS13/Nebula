@@ -24,7 +24,7 @@
 /obj/item/clothing/mask/muzzle/attack_hand(mob/user)
 	if(user.get_equipped_item(slot_wear_mask_str) != src || user.check_dexterity(DEXTERITY_GRIP))
 		return ..()
-	to_chat(user, SPAN_WARNING("You cannot remove \the [src]."))
+	to_chat(user, SPAN_WARNING("You cannot remove \the [src] without help."))
 	return TRUE
 
 /obj/item/clothing/mask/surgical
