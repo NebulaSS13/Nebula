@@ -50,9 +50,12 @@ INITIALIZE_IMMEDIATE(/obj/abstract/landmark/map_load_mark/non_template)
 	delete_me = TRUE
 
 /obj/abstract/landmark/clear/Initialize()
-	var/turf/simulated/wall/W = get_turf(src)
-	if(istype(W))
-		W.dismantle_wall(1,1,1)
+	var/turf/simulated/wall/simulated_wall = get_turf(src)
+	if(istype(simulated_wall))
+		simulated_wall.dismantle_wall(TRUE, TRUE, TRUE)
+	else if(istype(simulated_wall, /turf/exterior/wall))
+		var/turf/exterior/wall/exterior_wall = simulated_wall
+		exterior_wall.dismantle_wall(TRUE)
 	. = ..()
 
 //Applies fire act to the turf
