@@ -22,7 +22,6 @@
 	exterior_atmosphere = null
 	exterior_atmos_temp = null
 	level_generators = list(
-		/datum/random_map/automata/cave_system/mountains,
 		/datum/random_map/noise/exoplanet/volcanic,
 	)
 
@@ -91,7 +90,8 @@
 		COLOR_DARK_GRAY
 	)
 	possible_themes = list(
-		/datum/exoplanet_theme = 100,
+		/datum/exoplanet_theme/mountains = 100,
+		/datum/exoplanet_theme = 90,
 		/datum/exoplanet_theme/robotic_guardians = 10
 	)
 	map_generators = list(

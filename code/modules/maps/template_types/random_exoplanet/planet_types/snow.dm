@@ -19,7 +19,6 @@
 	exterior_atmosphere = null
 	exterior_atmos_temp = null
 	level_generators = list(
-		/datum/random_map/automata/cave_system/mountains,
 		/datum/random_map/noise/exoplanet/snow,
 	)
 
