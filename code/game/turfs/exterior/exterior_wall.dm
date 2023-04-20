@@ -36,7 +36,7 @@ var/global/list/natural_walls = list()
 	color = null
 
 	// Init materials.
-	material = SSmaterials.get_strata_material(src)
+	material = SSmaterials.get_strata_material_type(src)
 
 	global.natural_walls += src
 

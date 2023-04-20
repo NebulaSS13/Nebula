@@ -156,7 +156,7 @@ SUBSYSTEM_DEF(materials)
 		mat_name = lowertext(mat_name)
 		return materials_by_name[mat_name]
 
-/datum/controller/subsystem/materials/proc/get_strata_material(var/turf/exterior/wall/location)
+/datum/controller/subsystem/materials/proc/get_strata_material_type(var/turf/exterior/wall/location)
 	if(!istype(location))
 		return
 
@@ -170,7 +170,7 @@ SUBSYSTEM_DEF(materials)
 	var/datum/level_data/LD = SSmapping.levels_by_z[location.z]
 	if(!LD._level_setup_completed && !LD._has_warned_uninitialized_strata)
 		LD.warn_bad_strata(location) //If we haven't warned yet dump a stack trace and warn that strata was set before init
-	return LD.strata_base_material
+	return LD.strata_base_material.type
 
 /datum/controller/subsystem/materials/proc/create_object(var/mat_type, var/atom/target, var/amount = 1, var/object_type, var/reinf_type)
 	var/decl/material/mat = GET_DECL(mat_type)
