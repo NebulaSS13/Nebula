@@ -18,13 +18,7 @@
 	if(!length(possible_subtemplates))
 		return //If we don't have any ruins, don't bother
 
-	for(var/datum/level_data/planetoid/LD in created_level_data)
-		if(prob(25))
-			continue //Skip features on a given zlevel randomly
-		var/level_budget = rand(1, my_budget) //Distribute feature budget randomly across levels
-		my_budget -= level_budget
-		possible_subtemplates -= gen_data.subtemplates //Remove those we already spawned
-		if(!length(possible_subtemplates))
-			break //If we removed all the possibilities, just stop
-		LAZYADD(gen_data.subtemplates, LD.seed_ruins(level_budget, possible_subtemplates)) //#TODO: dimensions and area have to be handled on a per level_data basis!!
-
+	//#TODO: Properly handle generating ruins and sites on the various levels of the planet.
+	var/datum/level_data/planetoid/surface_level = SSmapping.levels_by_id[gen_data.surface_level_id]
+	//#TODO: dimensions and area have to be handled on a per level_data basis!!
+	LAZYADD(gen_data.subtemplates, surface_level.seed_ruins(my_budget, possible_subtemplates))
