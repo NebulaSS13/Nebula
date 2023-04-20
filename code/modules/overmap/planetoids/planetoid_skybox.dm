@@ -66,7 +66,7 @@
 	for(var/datum/exoplanet_theme/TH in PD.themes)
 		var/img = TH.get_planet_image_extra(PD)
 		if(img)
-			surface |= img
+			surface.overlays |= img
 	return surface
 
 /// Generates the cloud cover over the planetoid.
