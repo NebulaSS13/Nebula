@@ -59,6 +59,12 @@ var/global/list/natural_walls = list()
 		var/turf/T = GetAbove(src)
 		if(!istype(T, floor_type) && T.is_open())
 			T.ChangeTurf(floor_type, keep_air = TRUE)
+	//Set the rock color
+	if(!paint_color)
+		var/rcolor = SSmaterials.get_rock_color(src)
+		if(rcolor)
+			paint_color = rcolor
+			queue_icon_update()
 
 /turf/exterior/wall/explosion_act(severity)
 	if(severity == 1 || (severity == 2 && prob(40)))

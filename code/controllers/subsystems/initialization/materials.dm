@@ -176,3 +176,11 @@ SUBSYSTEM_DEF(materials)
 	var/decl/material/mat = GET_DECL(mat_type)
 	return mat?.create_object(target, amount, object_type, reinf_type)
 
+///Returns the rock color for a given exterior wall
+/datum/controller/subsystem/materials/proc/get_rock_color(var/turf/exterior/wall/location)
+	if(!istype(location))
+		return
+	//#TODO: allow specifying rock color per z-level maybe?
+
+	if(istype(location.owner))
+		return location.owner.get_rock_color()

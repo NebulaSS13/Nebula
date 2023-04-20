@@ -109,7 +109,7 @@
 		O.hide(0)
 
 /turf/exterior/attackby(obj/item/C, mob/user)
-
+	//#TODO: Add some way to dig to lower levels?
 	if(diggable && IS_SHOVEL(C))
 		if(C.do_tool_interaction(TOOL_SHOVEL, user, src, 5 SECONDS))
 			new /obj/structure/pit(src)
