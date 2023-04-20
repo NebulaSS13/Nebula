@@ -87,6 +87,13 @@
 	///Ruin sites map template category to use for creating ruins on this planet.
 	var/ruin_category = MAP_TEMPLATE_CATEGORY_PLANET_SITE
 
+	///The chance that this planetoid template creates a planetoid with a ring.
+	var/ring_probability = 25
+	///Possible ring colors
+	var/list/possible_ring_color = list(COLOR_OFF_WHITE)
+	///Possible ring sprites that can be used for a possible ring
+	var/list/possible_ring_type_name = list("sparse", "dense")
+
 /datum/map_template/planetoid/New(created_ad_hoc)
 	. = ..()
 	//Make sure we got a sensible surface_level_index
@@ -257,7 +264,15 @@
 		T.adjust_atmosphere(gen_data)
 	generate_planet_materials(gen_data)
 	generate_ambient_lighting(gen_data)
+	generate_planetoid_rings(gen_data)
 	gen_data.generate_life()
+
+/datum/map_template/planetoid/proc/generate_planetoid_rings(var/datum/planetoid_data/gen_data)
+	if(!prob(ring_probability) || !length(possible_ring_type_name))
+		return
+	gen_data.has_rings      = TRUE
+	gen_data.ring_color     = length(possible_ring_color)? pick(possible_ring_color) : COLOR_OFF_WHITE
+	gen_data.ring_type_name = pick(possible_ring_type_name)
 
 /datum/map_template/planetoid/proc/after_planet_gen(var/datum/planetoid_data/gen_data, var/datum/level_data/topmost_level_data, var/datum/level_data/surface_level_data)
 	//#TODO: Generate vertical z-level connections (holes/stairs/ladders)?

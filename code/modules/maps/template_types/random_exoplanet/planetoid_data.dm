@@ -39,6 +39,12 @@
 	var/water_color = "#436499"
 	///The color for rocks on this planet. Null is the rock wall's material's default.
 	var/rock_color = COLOR_ASTEROID_ROCK
+	///Whether this planetoid has rings, used by the overmap marker to draw rings in the skybox and etc..
+	var/has_rings = FALSE
+	///If we have rings, this is the color they'll have on the overmap
+	var/ring_color = COLOR_OFF_WHITE
+	///If we have rings, this is the sprite we picked for it
+	var/ring_type_name = "sparse"
 	///The overall strata of the planet.
 	var/decl/strata/strata
 

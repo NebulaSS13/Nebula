@@ -2,7 +2,7 @@
 // Planetoid
 /////////////////////////////////////////////////////////////////////////
 
-///Overmap marker for a planet-like stellar body.
+///Overmap marker for a planet-like entity.
 /obj/effect/overmap/visitable/sector/planetoid
 	name         = "planetoid"
 	icon         = 'icons/obj/overmap.dmi'
@@ -44,7 +44,9 @@
 ///Update our name, and refs to match the planetoid we're representing
 /obj/effect/overmap/visitable/sector/planetoid/proc/update_from_data(var/datum/planetoid_data/P)
 	SetName("[P.name], \a [name]")
-	planetoid_id = P.id
+	planetoid_id  = P.id
+	surface_color = P.surface_color
+	water_color   = P.water_color
 
 /obj/effect/overmap/visitable/sector/planetoid/get_scan_data(mob/user)
 	. = ..()

@@ -1,14 +1,17 @@
 /// Whether to draw rings on the planet's skybox image, and aknowledge anywhere else that it has rings.
 /obj/effect/overmap/visitable/sector/planetoid/proc/has_rings()
-	return FALSE
+	var/datum/planetoid_data/PD = SSmapping.planetoid_data_by_id[planetoid_id]
+	return PD.has_rings
 
-/// Returns the name of the type of ring overlay to use for the planetary rings
+/// Returns the name of the type of ring overlay to use for the planetary rings. Basically, the icon_state for the planetoid's rings
 /obj/effect/overmap/visitable/sector/planetoid/proc/get_ring_type_name()
-	return "sparse" //pick("sparse", "dense")
+	var/datum/planetoid_data/PD = SSmapping.planetoid_data_by_id[planetoid_id]
+	return PD.ring_type_name
 
 /// Returns the color for the ring overlay
 /obj/effect/overmap/visitable/sector/planetoid/proc/get_ring_color()
-	return COLOR_OFF_WHITE //pick("#f0fcff", "#dcc4ad", "#d1dcad", "#adb8dc")
+	var/datum/planetoid_data/PD = SSmapping.planetoid_data_by_id[planetoid_id]
+	return PD.ring_color
 
 /// Get the primary surface color used for the skybox image
 /obj/effect/overmap/visitable/sector/planetoid/proc/get_surface_color()
@@ -16,18 +19,18 @@
 
 /obj/effect/overmap/visitable/sector/planetoid/proc/has_atmosphere()
 	var/datum/planetoid_data/PD = SSmapping.planetoid_data_by_id[planetoid_id]
-	var/datum/level_data/LD = SSmapping.levels_by_id[PD.surface_level_id]
+	var/datum/level_data/LD     = SSmapping.levels_by_id[PD.surface_level_id]
 	return !isnull(LD.exterior_atmosphere)
 
 /obj/effect/overmap/visitable/sector/planetoid/proc/get_atmosphere_color()
 	var/list/colors = list()
-	//#TODO: Not sure why it's summing up all the z-level atmos color? I really doubt this was ever tested too...
 	for(var/lvl in map_z)
 		var/datum/level_data/level_data = SSmapping.levels_by_z[lvl]
+		///#TODO: Check if the z-level is visible from space
 		for(var/g in level_data.exterior_atmosphere?.gas)
 			var/decl/material/mat = GET_DECL(g)
 			colors += mat.color
-	if(colors.len)
+	if(length(colors))
 		return MixColors(colors)
 
 /// Get cached skybox background image.
