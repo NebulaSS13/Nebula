@@ -57,10 +57,16 @@
 	var/image/secondary = get_skybox_secondary_surface()
 	primary.layer = 1.0
 	surface.overlays += primary
-
 	if(secondary)
 		secondary.layer = 3.0
 		surface.overlays += secondary
+
+	//Slap on anything added by themes to the surface
+	var/datum/planetoid_data/PD = SSmapping.planetoid_data_by_id[planetoid_id]
+	for(var/datum/exoplanet_theme/TH in PD.themes)
+		var/img = TH.get_planet_image_extra(PD)
+		if(img)
+			surface |= img
 	return surface
 
 /// Generates the cloud cover over the planetoid.

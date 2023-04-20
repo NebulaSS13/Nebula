@@ -11,7 +11,7 @@
 
 /datum/exoplanet_theme/proc/adjust_atmosphere(var/datum/planetoid_data/E)
 
-/datum/exoplanet_theme/proc/get_planet_image_extra()
+/datum/exoplanet_theme/proc/get_planet_image_extra(var/datum/planetoid_data/E)
 
 /datum/exoplanet_theme/proc/get_sensor_data()
 

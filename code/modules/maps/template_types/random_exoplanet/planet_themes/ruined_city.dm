@@ -31,7 +31,7 @@
 /datum/exoplanet_theme/ruined_city/get_sensor_data()
 	return "Extensive artificial structures detected on the surface."
 
-/datum/exoplanet_theme/ruined_city/get_planet_image_extra()
+/datum/exoplanet_theme/ruined_city/get_planet_image_extra(datum/planetoid_data/E)
 	return image('icons/skybox/planet.dmi', "ruins")
 
 // Generates a grid of roads with buildings between them
