@@ -18,6 +18,7 @@
 	base_turf = /turf/exterior/volcanic
 	level_generators = list(
 		/datum/random_map/noise/exoplanet/mantle,
+		/datum/random_map/automata/cave_system/mantle,
 	)
 
 /datum/level_data/planetoid/initialize_level_id()

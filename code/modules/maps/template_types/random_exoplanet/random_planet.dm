@@ -159,7 +159,7 @@
 		//place level transition borders and etc, but skip level gen
 		LD.setup_level_data(TRUE)
 		//Apply our own level gen and the theme's level gen (rock walls, debris, buildings, etc..)
-		LD.apply_map_generators(length(theme_generators)? (map_generators | theme_generators) : map_generators)
+		LD.apply_map_generators(length(theme_generators)? (map_generators | theme_generators) : map_generators) //#TODO: Theme generators should probably selectively apply to levels
 		//Let the level apply its level-specific generators (flora/fauna/grass)
 		LD.generate_level()
 

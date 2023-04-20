@@ -161,3 +161,10 @@
 	flora_prob           = 0
 	grass_prob           = 0
 	large_flora_prob     = 0
+
+//Random map generator to create rock walls underground
+/datum/random_map/automata/cave_system/mantle
+	descriptor       = "planetary mantle caves"
+	target_turf_type = /turf/exterior/volcanic //Only let it apply to non-lava turfs
+	floor_type       = null
+	wall_type        = /turf/exterior/wall
