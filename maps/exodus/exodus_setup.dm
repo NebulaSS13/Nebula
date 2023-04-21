@@ -13,8 +13,8 @@
 		welcome_text += "Time since last port visit:<br /><b>[rand(60,180)] days</b><br /><hr>"
 		welcome_text += "Scan results show the following points of interest:<br />"
 
-		for(var/zlevel in global.overmap_sectors)
-			var/obj/effect/overmap/visitable/O = global.overmap_sectors[zlevel]
+		for(var/zlevel in global.overmap_sectors_by_z)
+			var/obj/effect/overmap/visitable/O = global.overmap_sectors_by_z[zlevel]
 			if(O.name == exodus.name)
 				continue
 			if(istype(O, /obj/effect/overmap/visitable/ship/landable)) //Don't show shuttles

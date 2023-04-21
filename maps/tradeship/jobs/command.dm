@@ -48,8 +48,8 @@
 	global.using_map.station_short = ship
 	global.using_map.station_name = "Tradeship [ship]"
 
-	for(var/sz in global.overmap_sectors)
-		var/obj/effect/overmap/visitable/ship/tradeship/B = global.overmap_sectors[sz]
+	for(var/sz in global.overmap_sectors_by_z)
+		var/obj/effect/overmap/visitable/ship/tradeship/B = global.overmap_sectors_by_z[sz]
 		if(istype(B))
 			B.SetName(global.using_map.station_name)
 			command_announcement.Announce("Attention all hands on [global.using_map.station_name]! Thank you for your attention.", "Ship Re-Christened")

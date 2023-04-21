@@ -45,7 +45,7 @@
 		qdel(src)
 		return
 
-	var/obj/effect/overmap/visitable/cell = global.overmap_sectors[associated_z]
+	var/obj/effect/overmap/visitable/cell = global.overmap_sectors_by_z[associated_z]
 	if(istype(cell))
 		sync_cell(cell)
 

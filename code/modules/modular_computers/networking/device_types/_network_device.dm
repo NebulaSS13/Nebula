@@ -211,7 +211,7 @@
 	// Overmap isn't used, a modem alone provides internet connection.
 	if(!length(global.using_map.overmap_ids))
 		return TRUE
-	var/obj/effect/overmap/visitable/sector = global.overmap_sectors[get_z(holder)]
+	var/obj/effect/overmap/visitable/sector = global.overmap_sectors_by_z[get_z(holder)]
 	if(!istype(sector))
 		return
 	return sector.has_internet_connection(connecting_network)

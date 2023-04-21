@@ -53,7 +53,7 @@
 		return
 
 	for(var/i in affecting_z)
-		var/obj/effect/overmap/visitable/sector = global.overmap_sectors[i]
+		var/obj/effect/overmap/visitable/sector = global.overmap_sectors_by_z[i]
 		if(istype(sector))
 			overmap_sectors |= sector
 		else

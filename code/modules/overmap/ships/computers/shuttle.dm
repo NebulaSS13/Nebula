@@ -61,7 +61,7 @@
 		to_chat(usr, SPAN_WARNING("The manual controls look hopelessly complex to you!"))
 
 /obj/machinery/computer/shuttle_control/explore/proc/start_landing(var/mob/user, var/datum/shuttle/autodock/overmap/shuttle)
-	var/obj/effect/overmap/visitable/current_sector = global.overmap_sectors[z]
+	var/obj/effect/overmap/visitable/current_sector = global.overmap_sectors_by_z[z]
 	var/obj/effect/overmap/visitable/target_sector
 	if(current_sector && istype(current_sector))
 
@@ -100,7 +100,7 @@
 	var/mob/observer/eye/landing/landing_eye = eye_extension.extension_eye
 	var/turf/lz_turf = eye_extension.get_eye_turf()
 
-	var/obj/effect/overmap/visitable/sector = global.overmap_sectors[lz_turf.z]
+	var/obj/effect/overmap/visitable/sector = global.overmap_sectors_by_z[lz_turf.z]
 	if(!sector.allow_free_landing())	// Additional safety check to ensure the sector permits landing.
 		to_chat(user, SPAN_WARNING("Invalid landing zone!"))
 		return

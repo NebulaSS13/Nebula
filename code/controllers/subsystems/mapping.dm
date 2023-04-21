@@ -159,8 +159,9 @@ SUBSYSTEM_DEF(mapping)
 	connected_z_cache.Cut()
 
 	//Overmap stuff gotta stay up to date
-	global.overmap_sectors.len = world.maxz
-	global.overmaps_by_z.len   = world.maxz
+	global.overmap_sectors_by_z.len = world.maxz
+	global.overmaps_by_z.len        = world.maxz
+
 /datum/controller/subsystem/mapping/proc/increment_world_z_size(var/new_level_type, var/defer_setup = FALSE)
 
 	world.maxz++

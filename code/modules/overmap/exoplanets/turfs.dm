@@ -14,7 +14,7 @@
 
 /turf/exterior/planet_edge/Initialize()
 	. = ..()
-	var/obj/effect/overmap/visitable/sector/exoplanet/E = global.overmap_sectors[num2text(z)]
+	var/obj/effect/overmap/visitable/sector/exoplanet/E = global.overmap_sectors_by_z[num2text(z)]
 	if(!istype(E))
 		return
 	mimicx = x
@@ -37,7 +37,7 @@
 
 /turf/exterior/planet_edge/Bumped(atom/movable/A)
 	. = ..()
-	var/obj/effect/overmap/visitable/sector/exoplanet/E = global.overmap_sectors[num2text(z)]
+	var/obj/effect/overmap/visitable/sector/exoplanet/E = global.overmap_sectors_by_z[num2text(z)]
 	if(!istype(E))
 		return
 	if(E.planetary_area && istype(loc, world.area))

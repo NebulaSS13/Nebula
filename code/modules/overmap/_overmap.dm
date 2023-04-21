@@ -67,7 +67,7 @@
 	if (!T || !A)
 		return
 
-	var/obj/effect/overmap/visitable/M = global.overmap_sectors[T.z]
+	var/obj/effect/overmap/visitable/M = global.overmap_sectors_by_z[T.z]
 	if (!M)
 		return
 

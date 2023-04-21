@@ -214,7 +214,7 @@
 	var/newz
 	if(prob(10))
 		var/list/possible_locations
-		var/obj/effect/overmap/visitable/O = global.overmap_sectors[z]
+		var/obj/effect/overmap/visitable/O = global.overmap_sectors_by_z[z]
 		if(istype(O))
 			for(var/obj/effect/overmap/visitable/OO in range(O,2))
 				if((OO.sector_flags & OVERMAP_SECTOR_IN_SPACE) || istype(OO,/obj/effect/overmap/visitable/sector/exoplanet))

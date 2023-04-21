@@ -4,8 +4,8 @@
 /datum/unit_test/generic_shuttle_landmarks_shall_not_appear_in_restricted_list/start_test()
 	var/fail = FALSE
 
-	for(var/sz in global.overmap_sectors)
-		var/obj/effect/overmap/visitable/sector = global.overmap_sectors[sz]
+	for(var/sz in global.overmap_sectors_by_z)
+		var/obj/effect/overmap/visitable/sector = global.overmap_sectors_by_z[sz]
 		if(!istype(sector))
 			continue
 		var/list/failures = list()
