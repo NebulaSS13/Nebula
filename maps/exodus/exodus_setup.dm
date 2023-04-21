@@ -15,6 +15,8 @@
 
 		for(var/zlevel in global.overmap_sectors_by_z)
 			var/obj/effect/overmap/visitable/O = global.overmap_sectors_by_z[zlevel]
+			if(!O)
+				continue
 			if(O.name == exodus.name)
 				continue
 			if(istype(O, /obj/effect/overmap/visitable/ship/landable)) //Don't show shuttles
