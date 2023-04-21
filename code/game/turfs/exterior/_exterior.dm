@@ -30,7 +30,7 @@
 
 	if(possible_states > 0)
 		icon_state = "[rand(0, possible_states)]"
-	owner = LAZYACCESS(global.overmap_sectors_by_z, num2text(z))
+	owner = LAZYACCESS(global.overmap_sectors_by_z, z)
 	if(!istype(owner))
 		owner = null
 	else
