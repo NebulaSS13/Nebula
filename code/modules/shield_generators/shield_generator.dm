@@ -70,8 +70,8 @@
 	damaged_segments = null
 	mode_list = null
 	events_repository.unregister(/decl/observ/moved, src, src)
+	update_overmap_shield_list() //Must be called before we get moved to nullspace!
 	. = ..()
-	update_overmap_shield_list()
 
 /obj/machinery/shield_generator/proc/update_overmap_shield_list()
 	var/obj/effect/overmap/visitable/current_overmap_object = get_owning_overmap_object()
