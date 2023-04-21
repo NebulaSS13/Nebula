@@ -20,7 +20,7 @@
 				continue
 			obj_test_instances[path] = I
 		catch(var/exception/e)
-			failures += "Runtime during creation of [path]: [e]"
+			failures += "Runtime during creation of [path]: [e.file]:[e.line], [e]\n[e.desc]"
 
 	// Create tests + sort by type name so the test can run in alphabetical order
 	var/list/constant_tests = list()

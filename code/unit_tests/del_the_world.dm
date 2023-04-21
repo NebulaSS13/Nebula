@@ -44,7 +44,7 @@
 			if(!QDELETED(AM)) // could have returned the qdel hint
 				qdel(AM, force = TRUE) // must qdel prior to anything it spawns, just in case
 		catch(var/exception/e)
-			failures += "Runtime during creation of [path]: [e]"
+			failures += "Runtime during creation of [path]: [e.file]:[e.line], [e]\n[e.desc]"
 		// If it spawned anything else, delete that.
 		var/list/del_candidates = spawn_loc.contents - cached_contents
 		if(length(del_candidates)) // explicit length check is faster here
