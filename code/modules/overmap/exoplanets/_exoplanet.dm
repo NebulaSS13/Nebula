@@ -26,9 +26,3 @@
 	if(global.overmaps_by_name[overmap_id])
 		forceMove(locate(1, 1, z_level)) //#TODO: Figure out why this is done here? Since the base class already moves this thing to the right position on the overmap?
 	return ..()
-
-/obj/effect/overmap/visitable/sector/planetoid/exoplanet/get_ring_type_name()
-	return pick("sparse", "dense")
-
-/obj/effect/overmap/visitable/sector/planetoid/exoplanet/get_ring_color()
-	return pick("#f0fcff", "#dcc4ad", "#d1dcad", "#adb8dc")

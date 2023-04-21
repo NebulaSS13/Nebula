@@ -44,7 +44,7 @@
 	///If we have rings, this is the color they'll have on the overmap
 	var/ring_color = COLOR_OFF_WHITE
 	///If we have rings, this is the sprite we picked for it
-	var/ring_type_name = "sparse"
+	var/ring_type_name = SKYBOX_PLANET_RING_TYPE_SPARSE
 	///The overall strata of the planet.
 	var/decl/strata/strata
 

@@ -90,9 +90,9 @@
 	///The chance that this planetoid template creates a planetoid with a ring.
 	var/ring_probability = 25
 	///Possible ring colors
-	var/list/possible_ring_color = list(COLOR_OFF_WHITE)
+	var/list/possible_ring_color = list(COLOR_OFF_WHITE, "#f0fcff", "#dcc4ad", "#d1dcad", "#adb8dc")
 	///Possible ring sprites that can be used for a possible ring
-	var/list/possible_ring_type_name = list("sparse", "dense")
+	var/list/possible_ring_type_name = list(SKYBOX_PLANET_RING_TYPE_SPARSE, SKYBOX_PLANET_RING_TYPE_DENSE)
 
 /datum/map_template/planetoid/New(created_ad_hoc)
 	. = ..()
@@ -263,10 +263,11 @@
 	for(var/datum/exoplanet_theme/T in gen_data.themes)
 		T.adjust_atmosphere(gen_data)
 	generate_planet_materials(gen_data)
-	generate_ambient_lighting(gen_data)
 	generate_planetoid_rings(gen_data)
+	generate_ambient_lighting(gen_data)
 	gen_data.generate_life()
 
+///Generates data about any possible rings our planet may have
 /datum/map_template/planetoid/proc/generate_planetoid_rings(var/datum/planetoid_data/gen_data)
 	if(!prob(ring_probability) || !length(possible_ring_type_name))
 		return
@@ -323,6 +324,7 @@
 	gen_data.starts_at_night = (surface_level.ambient_light_level > 0.1)
 	gen_data.day_duration    = rand(global.config.exoplanet_min_day_duration, global.config.exoplanet_max_day_duration)
 
+///Calculate the color and intensity of the ambient starlight that this planet receives.
 /datum/map_template/planetoid/proc/generate_ambient_lighting(var/datum/planetoid_data/gen_data)
 	//Try to generate a surface light intensity if we don't have it yet
 	if(!gen_data.surface_light_level)

@@ -3,7 +3,8 @@
 	var/datum/planetoid_data/PD = SSmapping.planetoid_data_by_id[planetoid_id]
 	return PD.has_rings
 
-/// Returns the name of the type of ring overlay to use for the planetary rings. Basically, the icon_state for the planetoid's rings
+/// Returns the name of the type of ring overlay to use for the planetary rings.
+/// Basically, the icon_state for the planetoid's rings
 /obj/effect/overmap/visitable/sector/planetoid/proc/get_ring_type_name()
 	var/datum/planetoid_data/PD = SSmapping.planetoid_data_by_id[planetoid_id]
 	return PD.ring_type_name
@@ -43,7 +44,8 @@
 /obj/effect/overmap/visitable/sector/planetoid/proc/get_skybox_primary_surface()
 	return overlay_image(skybox_icon, "base", get_surface_color())
 
-/// Returns the image for the secondary planetary feature of the surface of the skybox background image. Usually is the color of the oceans on the surface.
+/// Returns the image for the secondary planetary feature of the surface of the
+/// skybox background image. Usually is the color of the oceans on the surface.
 /obj/effect/overmap/visitable/sector/planetoid/proc/get_skybox_secondary_surface()
 	if(!water_color)
 		return
@@ -58,18 +60,16 @@
 	var/image/surface   = image(skybox_icon, "")
 	var/image/primary   = get_skybox_primary_surface()
 	var/image/secondary = get_skybox_secondary_surface()
-	primary.layer = 1.0
-	surface.overlays += primary
+	surface.add_overlay(primary)
 	if(secondary)
-		secondary.layer = 3.0
-		surface.overlays += secondary
+		surface.add_overlay(secondary)
 
 	//Slap on anything added by themes to the surface
 	var/datum/planetoid_data/PD = SSmapping.planetoid_data_by_id[planetoid_id]
 	for(var/datum/exoplanet_theme/TH in PD.themes)
 		var/img = TH.get_planet_image_extra(PD)
 		if(img)
-			surface.overlays |= img
+			surface.add_overlay(img)
 	return surface
 
 /// Generates the cloud cover over the planetoid.
@@ -108,7 +108,8 @@
 
 /// Generates the skybox background displayed when a ship or viewer is in a sector above the planetoid
 /obj/effect/overmap/visitable/sector/planetoid/proc/generate_skybox_image()
-	//Everything is done in a separate proc for each layers, to allow for overriding for a variety of planetoids
+	//Everything is done in a separate proc for each layers, to allow for overriding
+	// for a variety of planetoids
 	skybox_image = generate_skybox_planetoid_surface()
 	ASSERT(skybox_image)
 	skybox_image.pixel_x = rand(0,64)
@@ -116,6 +117,6 @@
 	skybox_image.appearance_flags = RESET_COLOR
 
 	skybox_image.underlays += generate_skybox_planetoid_halo()
-	skybox_image.overlays  += generate_skybox_planetoid_clouds()
-	skybox_image.overlays  += generate_skybox_planetoid_shading()
-	skybox_image.overlays  += generate_skybox_planetoid_rings()
+	skybox_image.add_overlay(generate_skybox_planetoid_clouds())
+	skybox_image.add_overlay(generate_skybox_planetoid_shading())
+	skybox_image.add_overlay(generate_skybox_planetoid_rings())
