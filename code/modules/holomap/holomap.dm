@@ -315,7 +315,7 @@
 
 	//This is where the fun begins
 	if(length(global.using_map.overmap_ids))
-		var/obj/effect/overmap/visitable/O = global.overmap_sectors["[z]"]
+		var/obj/effect/overmap/visitable/O = global.overmap_sectors[z]
 
 		var/current_z_offset_x = (HOLOMAP_ICON_SIZE / 2) - world.maxx / 2
 		var/current_z_offset_y = (HOLOMAP_ICON_SIZE / 2) - world.maxy / 2

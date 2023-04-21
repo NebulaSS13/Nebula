@@ -358,7 +358,7 @@
 
 /datum/level_data/proc/get_display_name()
 	if(!name)
-		var/obj/effect/overmap/overmap_entity = global.overmap_sectors[num2text(level_z)]
+		var/obj/effect/overmap/overmap_entity = global.overmap_sectors[level_z]
 		if(overmap_entity?.name)
 			name = overmap_entity.name
 		else

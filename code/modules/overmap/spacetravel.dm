@@ -16,9 +16,9 @@
 /obj/effect/overmap/visitable/sector/temporary/Destroy()
 
 	for(var/num in map_z)
-		global.overmap_sectors -= "[num]"
+		global.overmap_sectors -= num
 
-	var/datum/overmap/overmap = global.overmaps_by_z[num2text(z)]
+	var/datum/overmap/overmap = global.overmaps_by_z[z]
 	if(istype(overmap))
 		overmap.discard_temporary_sector(src)
 

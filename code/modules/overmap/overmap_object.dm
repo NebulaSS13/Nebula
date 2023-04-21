@@ -88,10 +88,10 @@ var/global/list/overmap_unknown_ids = list()
 /obj/effect/overmap/proc/handle_wraparound()
 
 	var/turf/T = get_turf(src)
-	if(!istype(T) || !global.overmaps_by_z["[T.z]"])
+	if(!istype(T) || !global.overmaps_by_z[T.z])
 		PRINT_STACK_TRACE("Overmap effect handling wraparound on a non-overmap z-level.")
 
-	var/datum/overmap/overmap = global.overmaps_by_z["[T.z]"]
+	var/datum/overmap/overmap = global.overmaps_by_z[T.z]
 	var/nx = x
 	var/ny = y
 

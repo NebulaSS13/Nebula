@@ -104,7 +104,7 @@ SUBSYSTEM_DEF(skybox)
 /datum/controller/subsystem/skybox/proc/get_skybox(z)
 	if(!skybox_cache[num2text(z)])
 		skybox_cache[num2text(z)] = generate_skybox(z)
-		var/obj/effect/overmap/visitable/O = global.overmap_sectors[num2text(z)]
+		var/obj/effect/overmap/visitable/O = global.overmap_sectors[z]
 		if(istype(O))
 			for(var/zlevel in O.map_z)
 				skybox_cache["[zlevel]"] = skybox_cache[num2text(z)]
@@ -123,7 +123,7 @@ SUBSYSTEM_DEF(skybox)
 	res.overlays += base
 
 	if(use_overmap_details)
-		var/obj/effect/overmap/visitable/O = global.overmap_sectors[num2text(z)]
+		var/obj/effect/overmap/visitable/O = global.overmap_sectors[z]
 		if(istype(O))
 			var/image/overmap = image(skybox_icon)
 			overmap.overlays += O.generate_skybox()

@@ -33,9 +33,9 @@
 	if(!assigned_z)
 		PRINT_STACK_TRACE("Overmap datum generated null assigned z_level.")
 
-	if(global.overmaps_by_z["[assigned_z]"])
+	if(global.overmaps_by_z[assigned_z])
 		PRINT_STACK_TRACE("Duplicate overmap datum instantiated for z-level: [type], [assigned_z], [overmaps_by_name[name]]")
-	global.overmaps_by_z["[assigned_z]"] = src
+	global.overmaps_by_z[assigned_z] = src
 
 	for(var/event_type in subtypesof(/datum/overmap_event))
 		var/datum/overmap_event/event = event_type
@@ -67,7 +67,7 @@
 	if (!T || !A)
 		return
 
-	var/obj/effect/overmap/visitable/M = global.overmap_sectors[num2text(T.z)]
+	var/obj/effect/overmap/visitable/M = global.overmap_sectors[T.z]
 	if (!M)
 		return
 
