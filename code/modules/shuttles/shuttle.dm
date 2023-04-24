@@ -48,6 +48,7 @@
 		for(var/area_type in shuttle_area)
 			if(istype(area_type, /area)) // If the shuttle area is already an instance, it does not need to be located.
 				areas += area_type
+				events_repository.register(/decl/observ/destroyed, area_type, src, .proc/remove_shuttle_area)
 				continue
 			var/area/A
 			if(map_hash && islist(SSshuttle.map_hash_to_areas[map_hash]))
