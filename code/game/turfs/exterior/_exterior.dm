@@ -14,7 +14,8 @@
 	var/icon_edge_states
 	var/icon_has_corners = FALSE
 	var/list/affecting_heat_sources
-	var/obj/effect/overmap/visitable/sector/exoplanet/owner
+	///If this turf is on a level that belongs to a planetoid, this is a reference to that planetoid.
+	var/datum/planetoid_data/owner
 
 // Bit faster than return_air() for exoplanet exterior turfs
 /turf/exterior/get_air_graphic()
@@ -30,13 +31,20 @@
 
 	if(possible_states > 0)
 		icon_state = "[rand(0, possible_states)]"
-	owner = LAZYACCESS(global.overmap_sectors, num2text(z))
+
+	//Grab owner and set base area if we don't have a valid area
+	owner = LAZYACCESS(SSmapping.planetoid_data_by_z, z)
 	if(!istype(owner))
 		owner = null
-	else
+	else if(istype(loc, world.area))
 		//Must be done here, as light data is not fully carried over by ChangeTurf (but overlays are).
-		if(owner.planetary_area && istype(loc, world.area))
-			ChangeArea(src, owner.planetary_area)
+		//If on the surface level, and the planet defines a surface area, prioritize it.
+		var/datum/level_data/L = SSmapping.levels_by_z[z]
+		if(L.level_id == owner.surface_level_id && owner.surface_area)
+			ChangeArea(src, owner.surface_area)
+		//Otherwise fall back to the level_data's base_area
+		else if(L.base_area)
+			ChangeArea(src, L.get_base_area_instance())
 
 	. = ..(mapload)	// second param is our own, don't pass to children
 
@@ -101,7 +109,7 @@
 		O.hide(0)
 
 /turf/exterior/attackby(obj/item/C, mob/user)
-
+	//#TODO: Add some way to dig to lower levels?
 	if(diggable && IS_SHOVEL(C))
 		if(C.do_tool_interaction(TOOL_SHOVEL, user, src, 5 SECONDS))
 			new /obj/structure/pit(src)

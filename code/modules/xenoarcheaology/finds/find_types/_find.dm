@@ -73,10 +73,10 @@ var/global/list/responsive_carriers = list(
 	return
 
 /decl/archaeological_find/proc/generate_engravings(obj/item/I)
-	var/obj/effect/overmap/visitable/sector/exoplanet/E = global.overmap_sectors[num2text(get_z(I))]
+	var/datum/planetoid_data/P = SSmapping.planetoid_data_by_z[get_z(I)]
 	. = "[pick("Engraved","Carved","Etched")] on the item is [pick("an image of","a frieze of","a depiction of")] "
-	if(istype(E))
-		. += E.get_engravings()
+	if(istype(P) && P.engraving_generator)
+		. += P.engraving_generator.generate_engraving_text()
 	else
 		. += "[pick("an alien humanoid","an amorphic blob","a short, hairy being","a rodent-like creature","a robot","a primate","a reptilian alien","an unidentifiable object","a statue","a starship","unusual devices","a structure")] \
 		[pick("surrounded by","being held aloft by","being struck by","being examined by","communicating with")] \

@@ -107,6 +107,10 @@
 	if (!ml && loc)
 		loc.Entered(src, null)
 
+/atom/movable/EarlyDestroy(force = FALSE)
+	loc = null // should NOT use forceMove, in order to avoid events
+	return ..()
+
 /atom/movable/Destroy()
 	// Clear this up early so it doesn't complain about events being disposed while it's listening.
 	if(isatom(virtual_mob))

@@ -222,9 +222,10 @@
 #define ANIM_LYING_TIME 2
 
 //Planet habitability class
-#define HABITABILITY_IDEAL  1
-#define HABITABILITY_OKAY  2
-#define HABITABILITY_BAD  3
+#define HABITABILITY_IDEAL  1 //For planets with optimal conditions.
+#define HABITABILITY_OKAY   2 //For planets with survivable conditions.
+#define HABITABILITY_BAD    3 //For planets with very hazardous environment.
+#define HABITABILITY_DEAD   4 //For dead worlds(barren rocks with no atmosphere and etc..).
 
 #ifndef WINDOWS_HTTP_POST_DLL_LOCATION
 #define WINDOWS_HTTP_POST_DLL_LOCATION "lib/byhttp.dll"

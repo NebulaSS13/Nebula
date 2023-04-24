@@ -12,6 +12,19 @@
 	mouse_opacity = 2
 
 ////////////////////////////////
+// Shared Mimic Edges
+////////////////////////////////
+
+///Shared proc to provide the default vis_content for the edge_turf.
+/proc/shared_mimic_edge_get_add_vis_contents(var/turf/edge_turf, var/turf/mimic_turf, var/list/vis_cnt)
+	if(mimic_turf)
+		edge_turf.density = mimic_turf.density
+		edge_turf.opacity = mimic_turf.opacity
+		//log_debug("[src]([x],[y],[z]) mirroring [NT]([NT.x],[NT.y],[NT.z])")
+		LAZYADD(vis_cnt, mimic_turf)
+	return vis_cnt
+
+////////////////////////////////
 // Simulated Mimic Edges
 ////////////////////////////////
 
@@ -25,6 +38,7 @@
 	permit_ao        = FALSE //would need AO proxy
 	blocks_air       = TRUE  //would need air zone proxy
 	dynamic_lighting = FALSE //Would need lighting proxy
+	abstract_type    = /turf/simulated/mimic_edge
 
 	///Mimicked turf's x position
 	var/mimic_x
@@ -40,7 +54,7 @@
 	//Clear ourselves from the ambient queue
 	SSambience.queued -= src
 	//Need to put a mouse-opaque overlay there to prevent people turning/shooting towards ACTUAL location of vis_content things
-	click_eater = new(src)
+	click_eater = new(src) //#TODO: get rid of that once we got proper proxy atom handling
 	setup_mimic()
 
 /turf/simulated/mimic_edge/Destroy()
@@ -55,12 +69,10 @@
 	return
 
 /turf/simulated/mimic_edge/get_vis_contents_to_add()
-	. = ..()
-	var/turf/NT = mimic_x && mimic_y && mimic_z && locate(mimic_x, mimic_y, mimic_z)
-	if(NT)
-		opacity = NT.opacity
-		//log_debug("[src]([x],[y],[z]) mirroring [NT]([NT.x],[NT.y],[NT.z])")
-		LAZYADD(., NT)
+	. = shared_mimic_edge_get_add_vis_contents(src, get_mimic_turf(), ..())
+
+/turf/simulated/mimic_edge/proc/get_mimic_turf()
+	return mimic_x && mimic_y && mimic_z && locate(mimic_x, mimic_y, mimic_z)
 
 /turf/simulated/mimic_edge/proc/set_mimic_turf(var/_x, var/_y, var/_z)
 	mimic_z = _z? _z : z
@@ -92,6 +104,7 @@
 	permit_ao        = FALSE
 	blocks_air       = TRUE
 	dynamic_lighting = FALSE
+	abstract_type    = /turf/unsimulated/mimic_edge
 
 	///Mimicked turf's x position
 	var/mimic_x
@@ -122,12 +135,10 @@
 	return
 
 /turf/unsimulated/mimic_edge/get_vis_contents_to_add()
-	. = ..()
-	var/turf/NT = mimic_x && mimic_y && mimic_z && locate(mimic_x, mimic_y, mimic_z)
-	if(NT)
-		opacity = NT.opacity
-		//log_debug("[src]([x],[y],[z]) mirroring [NT]([NT.x],[NT.y],[NT.z])")
-		LAZYADD(., NT)
+	. = shared_mimic_edge_get_add_vis_contents(src, get_mimic_turf(), ..())
+
+/turf/unsimulated/mimic_edge/proc/get_mimic_turf()
+	return mimic_x && mimic_y && mimic_z && locate(mimic_x, mimic_y, mimic_z)
 
 /turf/unsimulated/mimic_edge/proc/set_mimic_turf(var/_x, var/_y, var/_z)
 	mimic_z = _z? _z : z
@@ -159,6 +170,7 @@
 	permit_ao        = FALSE
 	blocks_air       = TRUE
 	dynamic_lighting = FALSE
+	abstract_type    = /turf/exterior/mimic_edge
 
 	///Mimicked turf's x position
 	var/mimic_x
@@ -189,12 +201,10 @@
 	return
 
 /turf/exterior/mimic_edge/get_vis_contents_to_add()
-	. = ..()
-	var/turf/NT = mimic_x && mimic_y && mimic_z && locate(mimic_x, mimic_y, mimic_z)
-	if(NT)
-		opacity = NT.opacity
-		//log_debug("[src]([x],[y],[z]) mirroring [NT]([NT.x],[NT.y],[NT.z])")
-		LAZYADD(., NT)
+	. = shared_mimic_edge_get_add_vis_contents(src, get_mimic_turf(), ..())
+
+/turf/exterior/mimic_edge/proc/get_mimic_turf()
+	return mimic_x && mimic_y && mimic_z && locate(mimic_x, mimic_y, mimic_z)
 
 /turf/exterior/mimic_edge/proc/set_mimic_turf(var/_x, var/_y, var/_z)
 	mimic_z = _z? _z : z

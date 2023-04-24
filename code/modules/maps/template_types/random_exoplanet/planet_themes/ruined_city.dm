@@ -15,19 +15,23 @@
 		'sound/ambience/ominous3.ogg'
 		)
 
-/datum/exoplanet_theme/ruined_city/before_map_generation(obj/effect/overmap/visitable/sector/exoplanet/E)
-	E.ruin_tags_whitelist |= RUIN_ALIEN
-	for(var/zlevel in E.map_z)
-		new /datum/random_map/city(E.x_origin, E.y_origin, zlevel, E.x_size, E.y_size, FALSE, TRUE, E.planetary_area)
+/datum/exoplanet_theme/robotic_guardians/modify_ruin_whitelist(whitelist_flags)
+	return whitelist_flags | RUIN_ALIEN
 
-/datum/exoplanet_theme/ruined_city/after_map_generation(obj/effect/overmap/visitable/sector/exoplanet/E)
-	var/area/A = E.planetary_area
+/datum/exoplanet_theme/ruined_city/get_map_generators(/datum/planetoid_data/E)
+	return list(/datum/random_map/city)
+
+/datum/exoplanet_theme/ruined_city/after_map_generation(datum/planetoid_data/E)
+	var/datum/level_data/LD = SSmapping.levels_by_id[E.surface_level_id]
+	var/area/A = LD.get_base_area_instance()
+	if(istype(A, world.area))
+		PRINT_STACK_TRACE("Got '[world.area]' area as area for the surface level '[LD]' of planetoid '[E]'.") //Don't modify the ambience of the space area..
 	LAZYDISTINCTADD(A.ambience, spooky_ambience)
 
 /datum/exoplanet_theme/ruined_city/get_sensor_data()
 	return "Extensive artificial structures detected on the surface."
 
-/datum/exoplanet_theme/ruined_city/get_planet_image_extra()
+/datum/exoplanet_theme/ruined_city/get_planet_image_extra(datum/planetoid_data/E)
 	return image('icons/skybox/planet.dmi', "ruins")
 
 // Generates a grid of roads with buildings between them
@@ -142,7 +146,7 @@
 	if((T.broken && prob(80)) || prob(10))
 		new/obj/structure/rubble/house(T)
 	if(prob(1))
-		new/obj/abstract/landmark/exoplanet_spawn(T)
+		new/obj/abstract/landmark/exoplanet_spawn/animal(T)
 
 //Artifact containment lab
 /turf/simulated/wall/containment
@@ -214,6 +218,6 @@
 			new/obj/structure/rubble/lab(T)
 		if(prob(20))
 			new/obj/item/remains/xeno/charred(T)
-	
+
 
 #undef TRANSLATE_COORD

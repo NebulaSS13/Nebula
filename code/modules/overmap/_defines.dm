@@ -17,6 +17,16 @@
 /turf/unsimulated/map/edge
 	opacity = TRUE
 
+///Turf to hide the outside of the overmap
+/turf/unsimulated/dark_filler
+	name = "out of sight"
+	icon = 'icons/turf/space.dmi'
+	icon_state = "black"
+	permit_ao = FALSE
+	dynamic_lighting = FALSE
+	opacity = TRUE
+	density = TRUE
+
 /turf/unsimulated/map/Initialize(var/ml)
 	. = ..(ml)
 	name = "[x]-[y]"

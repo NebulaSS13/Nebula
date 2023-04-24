@@ -124,7 +124,8 @@ var/global/list/gamemode_cache = list()
 	var/max_character_aspects = 5
 
 	var/welder_vision = 1
-	var/generate_map = 0
+	///If false, skips all level generation.
+	var/roundstart_level_generation = 1
 	var/no_click_cooldown = 0
 
 	//Used for modifying movement speed for mobs.
@@ -267,6 +268,12 @@ var/global/list/gamemode_cache = list()
 
 	var/show_typing_indicator_for_whispers = FALSE // Do whispers show typing indicators overhead?
 
+
+	var/exoplanet_min_day_duration = 10 MINUTES
+	var/exoplanet_max_day_duration = 40 MINUTES
+	///If true, exoplanets won't have daycycles
+	var/disable_daycycle = FALSE
+
 /datum/configuration/VV_hidden()
 	. = ..() | protected_vars
 
@@ -401,8 +408,8 @@ var/global/list/gamemode_cache = list()
 				if ("log_runtime")
 					config.log_runtime = 1
 
-				if ("generate_asteroid")
-					config.generate_map = 1
+				if ("roundstart_level_generation")
+					config.roundstart_level_generation = text2num(value)
 
 				if ("no_click_cooldown")
 					config.no_click_cooldown = 1
@@ -913,6 +920,14 @@ var/global/list/gamemode_cache = list()
 					config.default_darksight_range = max(text2num(value), 0)
 				if("default_darksight_effectiveness")
 					config.default_darksight_effectiveness = clamp(text2num(value), 0, 1)
+
+
+				if("exoplanet_min_day_duration")
+					config.exoplanet_min_day_duration = text2num(value)
+				if("exoplanet_max_day_duration")
+					config.exoplanet_max_day_duration = text2num(value)
+				if("disable_daycycle")
+					config.disable_daycycle = TRUE
 				else
 					log_misc("Unknown setting in configuration: '[name]'")
 

@@ -50,16 +50,16 @@
 		return
 	if(!CanInteract(usr, global.conscious_topic_state))
 		return
-
-	for(var/obj/effect/overmap/visitable/sector/exoplanet/E)
-		if(src in E.animals)
+	for(var/planet_id in SSmapping.planetoid_data_by_id)
+		var/datum/planetoid_data/E = SSmapping.planetoid_data_by_id[planet_id]
+		if(istype(E) && (src in E.fauna.live_fauna))
 			var/newname = input("What do you want to name this species?", "Species naming", E.get_random_species_name()) as text|null
 			newname = sanitize_name(newname, allow_numbers = TRUE, force_first_letter_uppercase = FALSE)
 			if(newname && CanInteract(usr, global.conscious_topic_state))
 				if(E.rename_species(type, newname))
-					to_chat(usr,"<span class='notice'>This species will be known from now on as '[newname]'.</span>")
+					to_chat(usr, SPAN_NOTICE("This species will be known from now on as '[newname]'."))
 				else
-					to_chat(usr,"<span class='warning'>This species has already been named!</span>")
+					to_chat(usr, SPAN_WARNING("This species has already been named!"))
 			return
 
 /mob/living/simple_animal/hostile/retaliate/beast/samak

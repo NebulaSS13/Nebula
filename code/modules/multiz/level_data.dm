@@ -103,6 +103,10 @@
 	var/ambient_light_color = COLOR_WHITE
 
 	// *** Level Gen ***
+	///The mineral strata assigned to this level if any. Set to a path at definition, then to a decl/strata instance at runtime.
+	var/decl/strata/strata
+	///The base material randomly chosen from the strata for this level.
+	var/decl/material/strata_base_material
 	///The default base turf type for the whole level. It will be the base turf type for the z level, unless loaded by map.
 	/// filler_turf overrides what turfs the level will be created with.
 	var/base_turf = /turf/space
@@ -132,11 +136,13 @@
 	var/tmp/list/cached_connections
 
 	///A list of /datum/random_map types to apply to this level if we're running level generation.
-	/// Those are run before any parents/map_templates map generators.
+	/// May run before or after parent level gen
 	var/list/level_generators
 
 	///Whether the level data was setup already.
-	var/_level_setup_completed = FALSE
+	var/tmp/_level_setup_completed = FALSE
+	///This is set to prevent spamming the log when a turf has tried to grab our strata before we've been initialized
+	var/tmp/_has_warned_uninitialized_strata = FALSE
 
 /datum/level_data/New(var/_z_level, var/defer_level_setup = FALSE)
 	. = ..()
@@ -150,7 +156,6 @@
 		setup_level_data()
 
 /datum/level_data/Destroy(force)
-	log_debug("Level data datum being destroyed: [log_info_line(src)]")
 	//Since this is a datum that lives inside the SSmapping subsystem, I'm not sure if we really need to prevent deletion.
 	// It was fine for the obj version of this, but not much point now?
 	SSmapping.unregister_level_data(src)
@@ -188,14 +193,16 @@
 			ChangeArea(T, A)
 
 ///Prepare level for being used. Setup borders, lateral z connections, ambient lighting, atmosphere, etc..
-/datum/level_data/proc/setup_level_data()
+/datum/level_data/proc/setup_level_data(var/skip_gen = FALSE)
 	if(_level_setup_completed)
 		return //Since we can defer setup, make sure we only setup once
 
 	setup_level_bounds()
 	setup_ambient()
 	setup_exterior_atmosphere()
-	generate_level()
+	setup_strata()
+	if(!skip_gen)
+		generate_level()
 	after_generate_level()
 	_level_setup_completed = TRUE
 
@@ -241,12 +248,30 @@
 		exterior_atmosphere.update_values()
 		exterior_atmosphere.check_tile_graphic()
 
+///Pick a strata for the given level if applicable.
+/datum/level_data/proc/setup_strata()
+	//If no strata, pick a random one
+	if(isnull(strata))
+		strata = pick(decls_repository.get_decl_paths_of_subtype(/decl/strata))
+	//Make sure we have a /decl/strata instance
+	if(ispath(strata))
+		strata = GET_DECL(strata)
+
+	//cache the strata base material we picked from the list. So all turfs use the same we picked.
+	if(strata && length(strata.base_materials) && !strata_base_material)
+		strata_base_material = pick(strata.base_materials)
+	if(ispath(strata_base_material, /decl/material))
+		strata_base_material = GET_DECL(strata_base_material)
+	return strata
+
 //
 // Level Load/Gen
 //
 
 ///Called when setting up the level. Apply generators and anything that modifies the turfs of the level.
 /datum/level_data/proc/generate_level()
+	if(!global.config.roundstart_level_generation)
+		return
 	var/origx = level_inner_min_x
 	var/origy = level_inner_min_y
 	var/endx  = level_inner_min_x + level_inner_width
@@ -257,6 +282,8 @@
 ///Apply the parent entity's map generators. (Planets generally)
 ///This proc is to give a chance to level_data subtypes to individually chose to ignore the parent generators.
 /datum/level_data/proc/apply_map_generators(var/list/map_gen)
+	if(!global.config.roundstart_level_generation)
+		return
 	var/origx = level_inner_min_x
 	var/origy = level_inner_min_y
 	var/endx  = level_inner_min_x + level_inner_width
@@ -275,8 +302,14 @@
 		return FALSE
 	return TRUE
 
+//#TODO: this could probably be done in a more elegant way. Since most map templates will never call this.
+///Called before a runtime generated template is generated on our z-level. Only applies to templates generated onto new z-levels.
+/// Is never called by templates which are loaded from file!
+/datum/level_data/proc/before_template_generation(var/datum/map_template/template)
+	return
+
 ///Called after a map_template has been loaded on our z-level. Only apply to templates loaded onto new z-levels.
-/datum/level_data/proc/post_template_load(var/datum/map_template/template)
+/datum/level_data/proc/after_template_load(var/datum/map_template/template)
 	if(template.accessibility_weight)
 		SSmapping.accessible_z_levels[num2text(level_z)] = template.accessibility_weight
 	SSmapping.player_levels |= level_z
@@ -415,9 +448,7 @@
 		if(LD.level_z in _connected_siblings)
 			continue
 		. |= LD.level_z
-		var/list/cur_con = LD.get_all_connected_level_z(_connected_siblings)
-		if(length(cur_con))
-			. |= cur_con
+		. |= LD.get_all_connected_level_z()
 
 
 /datum/level_data/proc/find_connected_levels(var/list/found)
@@ -439,6 +470,13 @@
 	if(ispath(base_area))
 		return new base_area
 	return locate(world.area)
+
+///Warns exactly once about a turf trying to initialize it's strata from us when we haven't completed setup.
+/datum/level_data/proc/warn_bad_strata(var/turf/T)
+	if(_has_warned_uninitialized_strata)
+		return
+	PRINT_STACK_TRACE("Turf tried to init it's strata before it was setup for level '[level_id]' z:[level_z]! [log_info_line(T)]")
+	_has_warned_uninitialized_strata = TRUE
 
 ////////////////////////////////////////////
 // Level Data Spawner
@@ -495,12 +533,6 @@ INITIALIZE_IMMEDIATE(/obj/abstract/level_data_spawner)
 	level_flags = (ZLEVEL_CONTACT|ZLEVEL_PLAYER)
 
 /datum/level_data/exoplanet
-	exterior_atmosphere = list(
-		/decl/material/gas/oxygen =   MOLES_O2STANDARD,
-		/decl/material/gas/nitrogen = MOLES_N2STANDARD
-	)
-	exterior_atmos_temp = T20C
-	level_flags = (ZLEVEL_PLAYER|ZLEVEL_SEALED)
 	use_global_exterior_ambience = FALSE // This is set up by the exoplanet object.
 
 /datum/level_data/unit_test
@@ -510,6 +542,8 @@ INITIALIZE_IMMEDIATE(/obj/abstract/level_data_spawner)
 	name = "Sensor Display"
 	level_flags = ZLEVEL_SEALED
 	use_global_exterior_ambience = FALSE // Overmap doesn't care about ambient lighting
+	base_turf = /turf/unsimulated/dark_filler
+	transition_turf_type = null
 
 //#TODO: This seems like it could be generalized in a much better way?
 // Used specifically by /turf/simulated/floor/asteroid, and some away sites to generate mining turfs
@@ -523,13 +557,13 @@ INITIALIZE_IMMEDIATE(/obj/abstract/level_data_spawner)
 
 /datum/level_data/mining_level/asteroid
 	base_turf = /turf/simulated/floor/asteroid
+	level_generators = list(
+		/datum/random_map/automata/cave_system,
+		/datum/random_map/noise/ore
+	)
 
-/datum/level_data/mining_level/generate_level()
-	//#FIXME: This config option is very ambiguous. Most RNG stuff doesn't care about it. Might be worth removing?
-	if(!config.generate_map)
-		return
-	new /datum/random_map/automata/cave_system(1, 1, level_z, world.maxx, world.maxy)
-	new /datum/random_map/noise/ore(1, 1, level_z, world.maxx, world.maxy)
+/datum/level_data/mining_level/after_generate_level()
+	..()
 	refresh_mining_turfs()
 
 /datum/level_data/mining_level/proc/refresh_mining_turfs()
@@ -538,3 +572,4 @@ INITIALIZE_IMMEDIATE(/obj/abstract/level_data_spawner)
 		mining_turf.updateMineralOverlays()
 		CHECK_TICK
 	mining_turfs = null
+

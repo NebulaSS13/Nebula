@@ -61,13 +61,12 @@
 	. += "Breathes:\t[list_gases(min_gas)]"
 	. += "Known toxins:\t[list_gases(max_gas)]"
 	. += "Temperature comfort zone:\t[minbodytemp] K to [maxbodytemp] K"
-	var/area/map = locate(/area/overmap)
-	for(var/obj/effect/overmap/visitable/sector/exoplanet/P in map)
-		if((src in P.animals) || is_type_in_list(src, P.repopulate_types))
+
+	for(var/planet_id in SSmapping.planetoid_data_by_id)
+		var/datum/planetoid_data/P = SSmapping.planetoid_data_by_id[planet_id]
+		if(P.is_native_animal(src))
 			var/list/discovered = SSstatistics.get_field(STAT_XENOFAUNA_SCANNED)
-			if(!discovered)
-				discovered = list()
-			discovered |= "[P.name]-[type]"
+			LAZYDISTINCTADD(discovered, "[P.name]-[type]")
 			SSstatistics.set_field(STAT_XENOFAUNA_SCANNED, discovered)
 			. += "New xenofauna species discovered!"
 			break

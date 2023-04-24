@@ -1,7 +1,6 @@
 #define MAT_DROP_CHANCE 30
 
-var/global/list/default_strata_type_by_z = list()
-var/global/list/default_material_by_strata_and_z = list()
+///List of all the /turf/exterior/wall that exists in the world on all z-levels
 var/global/list/natural_walls = list()
 
 /turf/exterior/wall
@@ -14,7 +13,8 @@ var/global/list/natural_walls = list()
 	blocks_air = TRUE
 	turf_flags = TURF_FLAG_BACKGROUND | TURF_IS_HOLOMAP_OBSTACLE
 
-	var/strata
+	///Overrides the level's strata for this turf.
+	var/strata_override
 	var/paint_color
 	var/image/ore_overlay
 	var/decl/material/material
@@ -36,7 +36,7 @@ var/global/list/natural_walls = list()
 	color = null
 
 	// Init materials.
-	material = SSmaterials.get_strata_material(src)
+	material = SSmaterials.get_strata_material_type(src)
 
 	global.natural_walls += src
 
@@ -59,6 +59,12 @@ var/global/list/natural_walls = list()
 		var/turf/T = GetAbove(src)
 		if(!istype(T, floor_type) && T.is_open())
 			T.ChangeTurf(floor_type, keep_air = TRUE)
+	//Set the rock color
+	if(!paint_color)
+		var/rcolor = SSmaterials.get_rock_color(src)
+		if(rcolor)
+			paint_color = rcolor
+			queue_icon_update()
 
 /turf/exterior/wall/explosion_act(severity)
 	if(severity == 1 || (severity == 2 && prob(40)))

@@ -1,8 +1,10 @@
-#define  COAST_VALUE  cell_range + 1
+#define COAST_VALUE (cell_range + 1)
+
+///Place down flora/fauna spawners, grass, water, and apply selected land type.
 /datum/random_map/noise/exoplanet
-	descriptor = "exoplanet"
+	descriptor           = "exoplanet"
 	smoothing_iterations = 1
-	smooth_single_tiles =  TRUE
+	smooth_single_tiles  = TRUE
 
 	var/water_level
 	var/water_level_min = 0
@@ -23,21 +25,44 @@
 	var/list/plantcolors = list("RANDOM")
 	var/list/grass_cache
 
-/datum/random_map/noise/exoplanet/New(var/tx, var/ty, var/tz, var/tlx, var/tly, var/do_not_apply, var/do_not_announce, var/used_area, var/list/_plant_colors)
+/datum/random_map/noise/exoplanet/New(var/tx, var/ty, var/tz, var/tlx, var/tly, var/do_not_apply, var/do_not_announce, var/used_area)
+	var/datum/level_data/LD = SSmapping.levels_by_z[tz]
 	if(target_turf_type == null)
-		target_turf_type = world.turf
+		target_turf_type = SSmapping.base_turf_by_z[tz] || LD.base_turf || world.turf
 	water_level = rand(water_level_min,water_level_max)
+
 	//automagically adjust probs for bigger maps to help with lag
-	if(isnull(grass_prob)) grass_prob = flora_prob * 2
+	if(isnull(grass_prob))
+		grass_prob = flora_prob * 2
 	var/size_mod = intended_x / tlx * intended_y / tly
 	flora_prob *= size_mod
 	large_flora_prob *= size_mod
 	fauna_prob *= size_mod
-	if(_plant_colors)
-		plantcolors = _plant_colors
+
+	var/datum/planetoid_data/P = SSmapping.planetoid_data_by_z[tz]
+	if(istype(P))
+		var/datum/flora_generator/floragen = P.flora
+		var/datum/fauna_generator/faunagen = P.fauna
+
+		//Prevent spawning some flora spawner type if they aren't available
+		if(!length(floragen?.small_flora_types))
+			flora_prob = 0
+		if(!length(floragen?.big_flora_types))
+			large_flora_prob = 0
+		if(floragen?.plant_colors)
+			plantcolors = floragen.plant_colors.Copy()
+		if(!floragen)
+			grass_prob = 0
+
+		//Prevent spawning some fauna spawner types if they aren't available
+		if(!length(faunagen?.megafauna_types))
+			megafauna_spawn_prob = 0
+		if(!length(faunagen?.fauna_types))
+			fauna_prob = 0
 	..()
 
-	SSmapping.base_turf_by_z[tz] = land_type
+	//#TODO: Doublec check why random maps are messing with the base turf at all??
+	SSmapping.base_turf_by_z[tz] = land_type || SSmapping.base_turf_by_z[tz] || LD.base_turf || world.turf //Yes, it is necessary to be this thorough here
 
 /datum/random_map/noise/exoplanet/get_map_char(var/value)
 	if(water_type && noise2value(value) < water_level)
@@ -77,7 +102,7 @@
 	if(prob(megafauna_spawn_prob))
 		new /obj/abstract/landmark/exoplanet_spawn/megafauna(T)
 	else
-		new /obj/abstract/landmark/exoplanet_spawn(T)
+		new /obj/abstract/landmark/exoplanet_spawn/animal(T)
 
 /datum/random_map/noise/exoplanet/proc/get_grass_overlay()
 	var/grass_num = "[rand(1,6)]"
@@ -118,3 +143,28 @@
 				for(var/cell in neighbors)
 					if(noise2value(map[cell]) >= water_level)
 						map[cell] = COAST_VALUE
+
+//////////////////////////////////////////////////////////////////////////////
+// Definitions
+//////////////////////////////////////////////////////////////////////////////
+
+///Random map generator for generating underground planetary levels.
+/datum/random_map/noise/exoplanet/mantle
+	descriptor           = "planetary mantle"
+	smoothing_iterations = 3
+	land_type            = /turf/exterior/volcanic
+	water_type           = /turf/exterior/lava
+	water_level_min      = 4
+	water_level_max      = 6
+	fauna_prob           = 0
+	megafauna_spawn_prob = 0
+	flora_prob           = 0
+	grass_prob           = 0
+	large_flora_prob     = 0
+
+//Random map generator to create rock walls underground
+/datum/random_map/automata/cave_system/mantle
+	descriptor       = "planetary mantle caves"
+	target_turf_type = /turf/exterior/volcanic //Only let it apply to non-lava turfs
+	floor_type       = null
+	wall_type        = /turf/exterior/wall

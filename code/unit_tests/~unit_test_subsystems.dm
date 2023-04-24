@@ -44,6 +44,9 @@ SUBSYSTEM_DEF(unit_tests)
 		if(MAP_TEMPLATE_CATEGORY_AWAYSITE in map_template.template_categories)
 			report_progress("Skipping template '[map_template]' ([map_template.type]): Is an Away Site")
 			continue
+		if(map_template.is_runtime_generated())
+			report_progress("Skipping template '[map_template]' ([map_template.type]): Is Generated at Runtime")
+			continue
 		load_template(map_template)
 		if(map_template.template_flags & TEMPLATE_FLAG_TEST_DUPLICATES)
 			load_template(map_template)

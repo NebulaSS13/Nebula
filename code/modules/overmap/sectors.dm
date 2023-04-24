@@ -208,6 +208,23 @@ var/global/list/known_overmap_sectors
 	closeToolTip(usr) //No reason not to, really
 	..()
 
+///Returns the level_data for the highest level in the root z-stack associated to this marker.
+/obj/effect/overmap/visitable/proc/get_topmost_level_data()
+	if(!length(map_z))
+		CRASH("Tried to get the topmost level for an overmap marker that doesn't have associated z-levels.")
+
+	//Save some time for simple cases
+	if(length(map_z) == 1)
+		return SSmapping.levels_by_z[map_z[1]]
+
+	//Attempts grabbing the map_data for the current level stack, and use it if we have one
+	var/obj/abstract/map_data/M = global.get_map_data(map_z[1])
+	if(M)
+		return SSmapping.levels_by_z[M.z]
+
+	//If no z stack data, assume levels are laid out from the bottommost z level towards the topmost.
+	return SSmapping.levels_by_z[max(map_z)]
+
 /obj/effect/overmap/visitable/sector
 	name = "generic sector"
 	desc = "Sector with some stuff in it."
