@@ -63,7 +63,7 @@
 
 /datum/map_template/planetoid/exoplanet/chlorine
 	name                       = "chlorine exoplanet"
-	overmap_marker_type        = /obj/effect/overmap/visitable/sector/planetoid/exoplanet/desert
+	overmap_marker_type        = /obj/effect/overmap/visitable/sector/planetoid/exoplanet/chlorine
 	flora_generator_type       = /datum/flora_generator/chlorine
 	fauna_generator_type       = /datum/fauna_generator/chlorine
 	ruin_tags_blacklist        = RUIN_HABITAT|RUIN_WATER
