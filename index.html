@@ -29,8 +29,8 @@ General Public License version 3.
 
 
 <h3 id="modules">Modules
-<aside>(158 modules,
-    55/4233 macros, 1.3%)</aside></h3>
+<aside>(174 modules,
+    57/4240 macros, 1.3%)</aside></h3>
 <ul class="index-tree modules">
     <li><a href="(builtins).html" title="(builtins)">(builtins)</a></li>
     <li class="has-children"><span title="code">code</span><ul class="index-tree">
@@ -55,6 +55,7 @@ General Public License version 3.
     <li><a href="code/_helpers/icons.html" title="code&#x2F;_helpers&#x2F;icons">icons</a></li>
     <li><a href="code/_helpers/lists.html" title="code&#x2F;_helpers&#x2F;lists">lists</a></li>
     <li><a href="code/_helpers/matrices.html" title="code&#x2F;_helpers&#x2F;matrices">matrices</a></li>
+    <li><a href="code/_helpers/overmap.html" title="code&#x2F;_helpers&#x2F;overmap">overmap</a></li>
     <li><a href="code/_helpers/text.html" title="code&#x2F;_helpers&#x2F;text">text</a></li>
     <li><a href="code/_helpers/time.html" title="code&#x2F;_helpers&#x2F;time">time</a></li>
     <li><a href="code/_helpers/unsorted.html" title="code&#x2F;_helpers&#x2F;unsorted">unsorted</a></li>
@@ -70,6 +71,7 @@ General Public License version 3.
     <li><a href="code/controllers/hooks-defs.html" title="code&#x2F;controllers&#x2F;hooks-defs">hooks-defs</a></li>
     <li><a href="code/controllers/master.html" title="code&#x2F;controllers&#x2F;master">master</a></li>
     <li class="has-children"><span title="code&#x2F;controllers&#x2F;subsystems">subsystems</span><ul class="index-tree">
+    <li><a href="code/controllers/subsystems/daycycle.html" title="code&#x2F;controllers&#x2F;subsystems&#x2F;daycycle">daycycle</a></li>
     <li><a href="code/controllers/subsystems/garbage.html" title="code&#x2F;controllers&#x2F;subsystems&#x2F;garbage">garbage</a> - Number of times it was destroyed before Initialize().</li>
     <li><a href="code/controllers/subsystems/timer.html" title="code&#x2F;controllers&#x2F;subsystems&#x2F;timer">timer</a></li>
     </ul></li>
@@ -162,6 +164,7 @@ General Public License version 3.
     </ul></li>
     <li><span class="no-substance">random&#x2F;</span><a href="code/game/objects/random/date_based.html" title="code&#x2F;game&#x2F;objects&#x2F;random&#x2F;date_based">date_based</a></li>
     </ul></li>
+    <li><span class="no-substance">turfs&#x2F;exterior&#x2F;</span><a href="code/game/turfs/exterior/exterior_wall.html" title="code&#x2F;game&#x2F;turfs&#x2F;exterior&#x2F;exterior_wall">exterior_wall</a></li>
     </ul></li>
     <li class="has-children"><span title="code&#x2F;modules">modules</span><ul class="index-tree">
     <li class="has-children"><span title="code&#x2F;modules&#x2F;admin">admin</span><ul class="index-tree">
@@ -186,6 +189,18 @@ Thanks to forum_account for saving the day, the library can be found
     <li class="has-children"><span title="code&#x2F;modules&#x2F;maps">maps</span><ul class="index-tree">
     <li><a href="code/modules/maps/helper_landmarks.html" title="code&#x2F;modules&#x2F;maps&#x2F;helper_landmarks">helper_landmarks</a></li>
     <li><a href="code/modules/maps/reader.html" title="code&#x2F;modules&#x2F;maps&#x2F;reader">reader</a></li>
+    <li class="has-children"><span class="no-substance">template_types&#x2F;</span><span title="code&#x2F;modules&#x2F;maps&#x2F;template_types&#x2F;random_exoplanet">random_exoplanet</span><ul class="index-tree">
+    <li><a href="code/modules/maps/template_types/random_exoplanet/fauna_generator.html" title="code&#x2F;modules&#x2F;maps&#x2F;template_types&#x2F;random_exoplanet&#x2F;fauna_generator">fauna_generator</a></li>
+    <li><a href="code/modules/maps/template_types/random_exoplanet/flora_generator.html" title="code&#x2F;modules&#x2F;maps&#x2F;template_types&#x2F;random_exoplanet&#x2F;flora_generator">flora_generator</a></li>
+    <li><span class="no-substance">planet_types&#x2F;</span><a href="code/modules/maps/template_types/random_exoplanet/planet_types/grass.html" title="code&#x2F;modules&#x2F;maps&#x2F;template_types&#x2F;random_exoplanet&#x2F;planet_types&#x2F;grass">grass</a></li>
+    <li><a href="code/modules/maps/template_types/random_exoplanet/planetoid_data.html" title="code&#x2F;modules&#x2F;maps&#x2F;template_types&#x2F;random_exoplanet&#x2F;planetoid_data">planetoid_data</a></li>
+    <li><a href="code/modules/maps/template_types/random_exoplanet/random_exoplanet.html" title="code&#x2F;modules&#x2F;maps&#x2F;template_types&#x2F;random_exoplanet&#x2F;random_exoplanet">random_exoplanet</a></li>
+    <li><a href="code/modules/maps/template_types/random_exoplanet/random_map.html" title="code&#x2F;modules&#x2F;maps&#x2F;template_types&#x2F;random_exoplanet&#x2F;random_map">random_map</a></li>
+    <li><a href="code/modules/maps/template_types/random_exoplanet/random_planet.html" title="code&#x2F;modules&#x2F;maps&#x2F;template_types&#x2F;random_exoplanet&#x2F;random_planet">random_planet</a></li>
+    <li><a href="code/modules/maps/template_types/random_exoplanet/random_planet_areas.html" title="code&#x2F;modules&#x2F;maps&#x2F;template_types&#x2F;random_exoplanet&#x2F;random_planet_areas">random_planet_areas</a></li>
+    <li><a href="code/modules/maps/template_types/random_exoplanet/random_planet_landmarks.html" title="code&#x2F;modules&#x2F;maps&#x2F;template_types&#x2F;random_exoplanet&#x2F;random_planet_landmarks">random_planet_landmarks</a></li>
+    <li><a href="code/modules/maps/template_types/random_exoplanet/random_planet_level_data.html" title="code&#x2F;modules&#x2F;maps&#x2F;template_types&#x2F;random_exoplanet&#x2F;random_planet_level_data">random_planet_level_data</a></li>
+    </ul></li>
     </ul></li>
     <li><span class="no-substance">materials&#x2F;</span><a href="code/modules/materials/material_sheets.html" title="code&#x2F;modules&#x2F;materials&#x2F;material_sheets">material_sheets</a></li>
     <li class="has-children"><span title="code&#x2F;modules&#x2F;mining">mining</span><ul class="index-tree">
@@ -214,6 +229,10 @@ Thanks to forum_account for saving the day, the library can be found
     </ul></li>
     </ul></li>
     <li><span class="no-substance">internal&#x2F;</span><a href="code/modules/organs/internal/_internal.html" title="code&#x2F;modules&#x2F;organs&#x2F;internal&#x2F;_internal">_internal</a></li>
+    </ul></li>
+    <li class="has-children"><span title="code&#x2F;modules&#x2F;overmap">overmap</span><ul class="index-tree">
+    <li><a href="code/modules/overmap/_defines.html" title="code&#x2F;modules&#x2F;overmap&#x2F;_defines">_defines</a></li>
+    <li><span class="no-substance">planetoids&#x2F;</span><a href="code/modules/overmap/planetoids/_planetoids.html" title="code&#x2F;modules&#x2F;overmap&#x2F;planetoids&#x2F;_planetoids">_planetoids</a></li>
     </ul></li>
     <li class="has-children"><span title="code&#x2F;modules&#x2F;paperwork">paperwork</span><ul class="index-tree">
     <li><a href="code/modules/paperwork/faxmachine.html" title="code&#x2F;modules&#x2F;paperwork&#x2F;faxmachine">faxmachine</a></li>
@@ -257,7 +276,10 @@ Thanks to forum_account for saving the day, the library can be found
     <li><a href="code/modules/spells/construct_spells.html" title="code&#x2F;modules&#x2F;spells&#x2F;construct_spells">construct_spells</a></li>
     </ul></li>
     <li><span class="no-substance">synthesized_instruments&#x2F;docs&#x2F;</span><a href="code/modules/synthesized_instruments/docs/Structure.html" title="code&#x2F;modules&#x2F;synthesized_instruments&#x2F;docs&#x2F;Structure">Structure</a></li>
-    <li><span class="no-substance">xenoarcheaology&#x2F;finds&#x2F;find_types&#x2F;</span><a href="code/modules/xenoarcheaology/finds/find_types/fossils.html" title="code&#x2F;modules&#x2F;xenoarcheaology&#x2F;finds&#x2F;find_types&#x2F;fossils">fossils</a></li>
+    <li class="has-children"><span title="code&#x2F;modules&#x2F;xenoarcheaology">xenoarcheaology</span><ul class="index-tree">
+    <li><span class="no-substance">datums&#x2F;</span><a href="code/modules/xenoarcheaology/datums/engravings_flavor.html" title="code&#x2F;modules&#x2F;xenoarcheaology&#x2F;datums&#x2F;engravings_flavor">engravings_flavor</a></li>
+    <li><span class="no-substance">finds&#x2F;find_types&#x2F;</span><a href="code/modules/xenoarcheaology/finds/find_types/fossils.html" title="code&#x2F;modules&#x2F;xenoarcheaology&#x2F;finds&#x2F;find_types&#x2F;fossils">fossils</a></li>
+    </ul></li>
     </ul></li>
     <li class="has-children"><span title="code&#x2F;unit_tests">unit_tests</span><ul class="index-tree">
     <li><a href="code/unit_tests/food_tests.html" title="code&#x2F;unit_tests&#x2F;food_tests">food_tests</a></li>
@@ -284,10 +306,15 @@ Thanks to forum_account for saving the day, the library can be found
 
 
 <h3 id="types">Types
-<aside>(148 detailed/341 documented/18105 total, 1.9%)</aside></h3>
+<aside>(165 detailed/374 documented/18151 total, 2.1%)</aside></h3>
 <ul class="index-tree">
     <li><a href="global.html" title="(global)">(global)</a></li>
-    <li><a href="area.html" title="&#x2F;area">area</a></li>
+    <li class="has-children"><a href="area.html" title="&#x2F;area">area</a><ul class="index-tree">
+    <li class="has-children"><span class="no-substance" title="&#x2F;area&#x2F;exoplanet">exoplanet</span> - Windy surface<ul class="index-tree">
+    <li><span class="no-substance" title="&#x2F;area&#x2F;exoplanet&#x2F;grass">grass</span> - Area for the grass exoplanet surface</li>
+    <li><span class="no-substance" title="&#x2F;area&#x2F;exoplanet&#x2F;underground">underground</span> - Spoopy undergrounds</li>
+    </ul></li>
+    </ul></li>
     <li class="has-children"><a href="atom.html" title="&#x2F;atom">atom</a><ul class="index-tree">
     <li><a href="atom/movable.html" title="&#x2F;atom&#x2F;movable">movable</a> - Virtual Mob Creation</li>
     </ul></li>
@@ -334,17 +361,21 @@ Thanks to forum_account for saving the day, the library can be found
     </ul></li>
     </ul></li>
     <li><a href="datum/computer_file.html" title="&#x2F;datum&#x2F;computer_file">computer_file</a></li>
+    <li><a href="datum/configuration.html" title="&#x2F;datum&#x2F;configuration">configuration</a></li>
     <li class="has-children"><span title="&#x2F;datum&#x2F;controller">controller</span><ul class="index-tree">
     <li><a href="datum/controller/master.html" title="&#x2F;datum&#x2F;controller&#x2F;master">master</a></li>
     <li class="has-children"><a href="datum/controller/subsystem.html" title="&#x2F;datum&#x2F;controller&#x2F;subsystem">subsystem</a><ul class="index-tree">
+    <li><a href="datum/controller/subsystem/daycyle.html" title="&#x2F;datum&#x2F;controller&#x2F;subsystem&#x2F;daycyle">daycyle</a></li>
     <li><a href="datum/controller/subsystem/jobs.html" title="&#x2F;datum&#x2F;controller&#x2F;subsystem&#x2F;jobs">jobs</a></li>
     <li><a href="datum/controller/subsystem/mapping.html" title="&#x2F;datum&#x2F;controller&#x2F;subsystem&#x2F;mapping">mapping</a></li>
+    <li><a href="datum/controller/subsystem/materials.html" title="&#x2F;datum&#x2F;controller&#x2F;subsystem&#x2F;materials">materials</a></li>
     <li><a href="datum/controller/subsystem/networking.html" title="&#x2F;datum&#x2F;controller&#x2F;subsystem&#x2F;networking">networking</a></li>
     <li><span class="no-substance">processing&#x2F;</span><a href="datum/controller/subsystem/processing/nano.html" title="&#x2F;datum&#x2F;controller&#x2F;subsystem&#x2F;processing&#x2F;nano">nano</a></li>
     <li><a href="datum/controller/subsystem/secrets.html" title="&#x2F;datum&#x2F;controller&#x2F;subsystem&#x2F;secrets">secrets</a></li>
     <li><a href="datum/controller/subsystem/shuttle.html" title="&#x2F;datum&#x2F;controller&#x2F;subsystem&#x2F;shuttle">shuttle</a></li>
     <li><a href="datum/controller/subsystem/timer.html" title="&#x2F;datum&#x2F;controller&#x2F;subsystem&#x2F;timer">timer</a></li>
     <li><a href="datum/controller/subsystem/typing.html" title="&#x2F;datum&#x2F;controller&#x2F;subsystem&#x2F;typing">typing</a></li>
+    <li><a href="datum/controller/subsystem/weather.html" title="&#x2F;datum&#x2F;controller&#x2F;subsystem&#x2F;weather">weather</a></li>
     <li><a href="datum/controller/subsystem/zcopy.html" title="&#x2F;datum&#x2F;controller&#x2F;subsystem&#x2F;zcopy">zcopy</a></li>
     </ul></li>
     </ul></li>
@@ -370,17 +401,38 @@ remove_extension(atom, /datum/extension/scent)<ul class="index-tree">
     <li><a href="datum/extension/sorting_tag.html" title="&#x2F;datum&#x2F;extension&#x2F;sorting_tag">sorting_tag</a> - Sorting tag for the sorting machinery.</li>
     <li><a href="datum/extension/tool.html" title="&#x2F;datum&#x2F;extension&#x2F;tool">tool</a></li>
     </ul></li>
+    <li><a href="datum/fauna_generator.html" title="&#x2F;datum&#x2F;fauna_generator">fauna_generator</a></li>
+    <li class="has-children"><a href="datum/flora_generator.html" title="&#x2F;datum&#x2F;flora_generator">flora_generator</a> - A datum for generating a list of random plants fitting a given atmosphere<ul class="index-tree">
+    <li><span class="no-substance" title="&#x2F;datum&#x2F;flora_generator&#x2F;grass">grass</span> - Flora data for a grass exoplanet</li>
+    </ul></li>
     <li><span class="no-substance" title="&#x2F;datum&#x2F;follow_holder">follow_holder</span> - Follow Metadata</li>
     <li class="has-children"><a href="datum/game_mode.html" title="&#x2F;datum&#x2F;game_mode">game_mode</a><ul class="index-tree">
     <li><span class="no-substance" title="&#x2F;datum&#x2F;game_mode&#x2F;calamity">calamity</span> - .</li>
     </ul></li>
+    <li><a href="datum/gas_mixture.html" title="&#x2F;datum&#x2F;gas_mixture">gas_mixture</a></li>
+    <li><a href="datum/generated_fauna_template.html" title="&#x2F;datum&#x2F;generated_fauna_template">generated_fauna_template</a> - An internal template to generate randomized planet fauna that's adapted to where it was generated to spawn on.</li>
     <li><a href="datum/grid_load_metadata.html" title="&#x2F;datum&#x2F;grid_load_metadata">grid_load_metadata</a> - Fill a given tile with its area/turf/objects/mobs
 Variable model is one full map line (e.g /turf/unsimulated/wall{icon_state = &quot;rock&quot;}, /area/mine/explored)</li>
     <li><a href="datum/item_unit_test.html" title="&#x2F;datum&#x2F;item_unit_test">item_unit_test</a></li>
     <li><a href="datum/job.html" title="&#x2F;datum&#x2F;job">job</a></li>
     <li><a href="datum/keybinding.html" title="&#x2F;datum&#x2F;keybinding">keybinding</a></li>
-    <li><a href="datum/level_data.html" title="&#x2F;datum&#x2F;level_data">level_data</a> - Keeps details on how to generate, maintain and access a zlevel.</li>
+    <li class="has-children"><a href="datum/level_data.html" title="&#x2F;datum&#x2F;level_data">level_data</a> - Keeps details on how to generate, maintain and access a zlevel.<ul class="index-tree">
+    <li class="has-children"><a href="datum/level_data/planetoid.html" title="&#x2F;datum&#x2F;level_data&#x2F;planetoid">planetoid</a> - Base level data for levels that are subordinated to a /datum/planetoid_data entry.
+A bunch of things are fetched from planet gen to stay in sync.<ul class="index-tree">
+    <li class="has-children"><span class="no-substance" title="&#x2F;datum&#x2F;level_data&#x2F;planetoid&#x2F;exoplanet">exoplanet</span> - Level data for generating surface levels on exoplanets<ul class="index-tree">
+    <li><span class="no-substance" title="&#x2F;datum&#x2F;level_data&#x2F;planetoid&#x2F;exoplanet&#x2F;grass">grass</span> - Surface of a grass exoplanet</li>
+    <li><span class="no-substance" title="&#x2F;datum&#x2F;level_data&#x2F;planetoid&#x2F;exoplanet&#x2F;underground">underground</span> - Level data for generating underground levels on exoplanets</li>
+    </ul></li>
+    </ul></li>
+    </ul></li>
     <li><a href="datum/map.html" title="&#x2F;datum&#x2F;map">map</a></li>
+    <li class="has-children"><a href="datum/map_template.html" title="&#x2F;datum&#x2F;map_template">map_template</a><ul class="index-tree">
+    <li class="has-children"><a href="datum/map_template/planetoid.html" title="&#x2F;datum&#x2F;map_template&#x2F;planetoid">planetoid</a> - A randomly generated &quot;tempate&quot; for an planet-like objects. Meant to standardize how random planets are generated so it behave like all other map templates.<ul class="index-tree">
+    <li class="has-children"><span class="no-substance" title="&#x2F;datum&#x2F;map_template&#x2F;planetoid&#x2F;exoplanet">exoplanet</span> - Random map generator for exo planets<ul class="index-tree">
+    <li><span class="no-substance" title="&#x2F;datum&#x2F;map_template&#x2F;planetoid&#x2F;exoplanet&#x2F;grass">grass</span> - Map template for generating a grass exoplanet</li>
+    </ul></li>
+    </ul></li>
+    </ul></li>
     <li><span class="no-substance" title="&#x2F;datum&#x2F;memory">memory</span> - Memories</li>
     <li><span class="no-substance" title="&#x2F;datum&#x2F;mil_branch">mil_branch</span> - A single military branch, such as Fleet or Marines</li>
     <li><a href="datum/mil_branches.html" title="&#x2F;datum&#x2F;mil_branches">mil_branches</a> - Global object for handling branches</li>
@@ -392,6 +444,7 @@ Variable model is one full map line (e.g /turf/unsimulated/wall{icon_state = &qu
     <li><a href="datum/nanoui.html" title="&#x2F;datum&#x2F;nanoui">nanoui</a> - NANO UI FRAMEWORK</li>
     <li><span class="no-substance">node&#x2F;</span><span class="no-substance" title="&#x2F;datum&#x2F;node&#x2F;test">test</span> - Helpers</li>
     <li><a href="datum/overmap.html" title="&#x2F;datum&#x2F;overmap">overmap</a></li>
+    <li><a href="datum/planetoid_data.html" title="&#x2F;datum&#x2F;planetoid_data">planetoid_data</a> - Runtime data for a planetoid. Used by SSmapping for keeping track of a lot of data about planetoids</li>
     <li><a href="datum/powernet.html" title="&#x2F;datum&#x2F;powernet">powernet</a></li>
     <li><a href="datum/preferences.html" title="&#x2F;datum&#x2F;preferences">preferences</a></li>
     <li><a href="datum/priority_queue.html" title="&#x2F;datum&#x2F;priority_queue">priority_queue</a> - An automatically ordered list, using the cmp proc to weight the list items</li>
@@ -403,11 +456,16 @@ Total amount of milliseconds spent hard deleting this type.
 Number of times its not respected force=TRUE.
 Number of times it hasn't bothered to give a qdel hint.
 Number of times slept in its destroy.</li>
+    <li class="has-children"><span class="no-substance">random_map&#x2F;noise&#x2F;</span><span class="no-substance" title="&#x2F;datum&#x2F;random_map&#x2F;noise&#x2F;exoplanet">exoplanet</span> - Place down flora/fauna spawners, grass, water, and apply selected land type.<ul class="index-tree">
+    <li><span class="no-substance" title="&#x2F;datum&#x2F;random_map&#x2F;noise&#x2F;exoplanet&#x2F;grass">grass</span> - Map generator for the grass exoplanet surface</li>
+    <li><span class="no-substance" title="&#x2F;datum&#x2F;random_map&#x2F;noise&#x2F;exoplanet&#x2F;mantle">mantle</span> - Random map generator for generating underground planetary levels.</li>
+    </ul></li>
     <li><a href="datum/reagents.html" title="&#x2F;datum&#x2F;reagents">reagents</a></li>
     <li class="has-children"><a href="datum/shuttle.html" title="&#x2F;datum&#x2F;shuttle">shuttle</a><ul class="index-tree">
     <li><span class="no-substance">autodock&#x2F;ferry&#x2F;</span><a href="datum/shuttle/autodock/ferry/specops.html" title="&#x2F;datum&#x2F;shuttle&#x2F;autodock&#x2F;ferry&#x2F;specops">specops</a></li>
     </ul></li>
     <li><a href="datum/sortInstance.html" title="&#x2F;datum&#x2F;sortInstance">sortInstance</a></li>
+    <li><a href="datum/ssdaycycle_registered.html" title="&#x2F;datum&#x2F;ssdaycycle_registered">ssdaycycle_registered</a> - Data on a set of z-levels getting daylight updates</li>
     <li><span class="no-substance">stored_items&#x2F;</span><span class="no-substance" title="&#x2F;datum&#x2F;stored_items&#x2F;vending_products">vending_products</span> - Datum used to hold information about a product in a vending machine</li>
     <li><a href="datum/timedevent.html" title="&#x2F;datum&#x2F;timedevent">Timed Event</a> - This is the actual timer, it contains the callback and necessary data to maintain
 the timer.</li>
@@ -444,6 +502,7 @@ the timer.</li>
     <li><span class="no-substance" title="&#x2F;datum&#x2F;wound&#x2F;puncture">puncture</span> - PUNCTURES</li>
     <li><span class="no-substance" title="&#x2F;datum&#x2F;wound&#x2F;shatter">shatter</span> - CRYSTALLINE WOUNDS</li>
     </ul></li>
+    <li><a href="datum/xenoarch_engraving_flavor.html" title="&#x2F;datum&#x2F;xenoarch_engraving_flavor">xenoarch_engraving_flavor</a> - Contains generated xenorach flavor text for engravings. Was moved out of exoplanet gen.</li>
     </ul></li>
     <li class="has-children"><span title="&#x2F;decl">decl</span><ul class="index-tree">
     <li><span class="no-substance">backpack_outfit&#x2F;</span><span class="no-substance" title="&#x2F;decl&#x2F;backpack_outfit&#x2F;nothing">nothing</span> - Outfit Backpacks</li>
@@ -552,7 +611,12 @@ Parameters: var/obj/item/card/id</li>
     </ul></li>
     <li class="has-children"><a href="obj.html" title="&#x2F;obj">obj</a><ul class="index-tree">
     <li class="has-children"><span title="&#x2F;obj&#x2F;abstract">abstract</span><ul class="index-tree">
-    <li><span class="no-substance">landmark&#x2F;</span><span class="no-substance" title="&#x2F;obj&#x2F;abstract&#x2F;landmark&#x2F;allowed_leak">allowed_leak</span> - Used to tell pipe leak unit tests that a leak is intentional. Placed over the pipe that leaks, not the tile missing a pipe.</li>
+    <li class="has-children"><span class="no-substance" title="&#x2F;obj&#x2F;abstract&#x2F;landmark">landmark</span><ul class="index-tree">
+    <li><span class="no-substance" title="&#x2F;obj&#x2F;abstract&#x2F;landmark&#x2F;allowed_leak">allowed_leak</span> - Used to tell pipe leak unit tests that a leak is intentional. Placed over the pipe that leaks, not the tile missing a pipe.</li>
+    <li class="has-children"><span class="no-substance" title="&#x2F;obj&#x2F;abstract&#x2F;landmark&#x2F;exoplanet_spawn">exoplanet_spawn</span> - Landmarks placed by random map generator<ul class="index-tree">
+    <li><span class="no-substance" title="&#x2F;obj&#x2F;abstract&#x2F;landmark&#x2F;exoplanet_spawn&#x2F;animal">animal</span> - Landmarks placed by random map generator</li>
+    </ul></li>
+    </ul></li>
     <li><span class="no-substance" title="&#x2F;obj&#x2F;abstract&#x2F;level_data_spawner">level_data_spawner</span> - Mapper helper for spawning a specific level_data datum with the map as it gets loaded</li>
     <li><a href="obj/abstract/map_data.html" title="&#x2F;obj&#x2F;abstract&#x2F;map_data">map_data</a></li>
     </ul></li>
@@ -564,6 +628,9 @@ Parameters: var/obj/item/card/id</li>
     <li><a href="obj/effect/geyser.html" title="&#x2F;obj&#x2F;effect&#x2F;geyser">geyser</a> - A prop that periodically emit steam spouts and can have a geothermal generator placed on top to generate power.</li>
     <li><span class="no-substance">overlay&#x2F;</span><span class="no-substance" title="&#x2F;obj&#x2F;effect&#x2F;overlay&#x2F;click_bait">click_bait</span> - Dummy mouse-opaque overlay to prevent people turning/shooting towards ACTUAL location of vis_content thing</li>
     <li class="has-children"><span class="no-substance">overmap&#x2F;</span><a href="obj/effect/overmap/visitable.html" title="&#x2F;obj&#x2F;effect&#x2F;overmap&#x2F;visitable">visitable</a><ul class="index-tree">
+    <li class="has-children"><span class="no-substance">sector&#x2F;</span><a href="obj/effect/overmap/visitable/sector/planetoid.html" title="&#x2F;obj&#x2F;effect&#x2F;overmap&#x2F;visitable&#x2F;sector&#x2F;planetoid">planetoid</a> - Overmap marker for a planet-like entity.<ul class="index-tree">
+    <li><span class="no-substance">exoplanet&#x2F;</span><span class="no-substance" title="&#x2F;obj&#x2F;effect&#x2F;overmap&#x2F;visitable&#x2F;sector&#x2F;planetoid&#x2F;exoplanet&#x2F;grass">grass</span> - Overmap marker for the grass exoplanet</li>
+    </ul></li>
     <li><a href="obj/effect/overmap/visitable/ship.html" title="&#x2F;obj&#x2F;effect&#x2F;overmap&#x2F;visitable&#x2F;ship">ship</a></li>
     </ul></li>
     </ul></li>
@@ -776,7 +843,10 @@ As with material, these stacks should only set this in Initialize as they are ab
     <li><span class="no-substance">aoe_turf&#x2F;conjure&#x2F;</span><span class="no-substance" title="&#x2F;spell&#x2F;aoe_turf&#x2F;conjure&#x2F;construct">construct</span> - Construct Spells</li>
     </ul></li>
     <li class="has-children"><a href="turf.html" title="&#x2F;turf">turf</a><ul class="index-tree">
-    <li><span class="no-substance">exterior&#x2F;</span><a href="turf/exterior/mimic_edge.html" title="&#x2F;turf&#x2F;exterior&#x2F;mimic_edge">mimic_edge</a> - Exterior turf meant to replicate the appearence of another.</li>
+    <li class="has-children"><a href="turf/exterior.html" title="&#x2F;turf&#x2F;exterior">exterior</a><ul class="index-tree">
+    <li><a href="turf/exterior/mimic_edge.html" title="&#x2F;turf&#x2F;exterior&#x2F;mimic_edge">mimic_edge</a> - Exterior turf meant to replicate the appearence of another.</li>
+    <li><a href="turf/exterior/wall.html" title="&#x2F;turf&#x2F;exterior&#x2F;wall">wall</a></li>
+    </ul></li>
     <li class="has-children"><a href="turf/simulated.html" title="&#x2F;turf&#x2F;simulated">simulated</a><ul class="index-tree">
     <li><span class="no-substance">floor&#x2F;</span><span class="no-substance" title="&#x2F;turf&#x2F;simulated&#x2F;floor&#x2F;asteroid">asteroid</span> - Asteroid</li>
     <li class="has-children"><a href="turf/simulated/mimic_edge.html" title="&#x2F;turf&#x2F;simulated&#x2F;mimic_edge">mimic_edge</a> - Simulated turf meant to replicate the appearence of another.<ul class="index-tree">
@@ -786,7 +856,10 @@ As with material, these stacks should only set this in Initialize as they are ab
     </ul></li>
     </ul></li>
     <li><a href="turf/space.html" title="&#x2F;turf&#x2F;space">space</a></li>
-    <li><span class="no-substance">unsimulated&#x2F;</span><a href="turf/unsimulated/mimic_edge.html" title="&#x2F;turf&#x2F;unsimulated&#x2F;mimic_edge">mimic_edge</a> - Unsimulated turf meant to replicate the appearence of another.</li>
+    <li class="has-children"><span title="&#x2F;turf&#x2F;unsimulated">unsimulated</span><ul class="index-tree">
+    <li><span class="no-substance" title="&#x2F;turf&#x2F;unsimulated&#x2F;dark_filler">dark_filler</span> - Turf to hide the outside of the overmap</li>
+    <li><a href="turf/unsimulated/mimic_edge.html" title="&#x2F;turf&#x2F;unsimulated&#x2F;mimic_edge">mimic_edge</a> - Unsimulated turf meant to replicate the appearence of another.</li>
+    </ul></li>
     </ul></li>
     </ul>
 
@@ -794,7 +867,7 @@ As with material, these stacks should only set this in Initialize as they are ab
 </main>
 <footer>
     nebula.dme
-    <a href="https://github.com/NebulaSS13/Nebula/tree/e871aa04f8a577bd737d734001a69fd1e6e789d3">e871aa0</a>
+    <a href="https://github.com/NebulaSS13/Nebula/tree/1b56ee3189bd3fc79ad1d1dd4dcbf1fe1050bf44">1b56ee3</a>
         (dev) &mdash; <a href="https://github.com/SpaceManiac/SpacemanDMM/blob/master/src/dmdoc/README.md">dmdoc 1.4.1</a></footer>
 </body>
 </html>

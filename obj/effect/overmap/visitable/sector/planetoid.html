@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <base href="../../../../../" />
+    <link rel="stylesheet" href="dmdoc.css" />
+    <title>&#x2F;obj&#x2F;effect&#x2F;overmap&#x2F;visitable&#x2F;sector&#x2F;planetoid - Space Station 13 - Nebula13</title>
+</head>
+<body>
+<header>
+    <a href="index.html">Space Station 13 - Nebula13</a> -
+    <a href="index.html#modules">Modules</a> -
+    <a href="index.html#types">Types</a>
+ &mdash; <a href="obj/effect/overmap/visitable/sector/planetoid.html#var">Var Details</a> - <a href="obj/effect/overmap/visitable/sector/planetoid.html#proc">Proc Details</a></header>
+<main>
+<h1>planetoid <aside>/<a href="obj.html">obj</a>/<a href="obj/effect/overmap/visitable.html">effect/overmap/visitable</a>/<a href="obj/effect/overmap/visitable/sector/planetoid.html">sector/planetoid</a></aside>
+        
+    
+            <a href="https://github.com/NebulaSS13/Nebula/blob/1b56ee3189bd3fc79ad1d1dd4dcbf1fe1050bf44/code/modules/overmap/planetoids/_planetoids.dm#L6">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;overmap&#x2F;planetoids&#x2F;_planetoids.dm 6"/></a></h1>
+
+<p>Overmap marker for a planet-like entity.</p><table class="summary" cellspacing="0"><tr><td colspan="2"><h2>Vars</h2></td></tr>
+            <tr><th><a href="obj/effect/overmap/visitable/sector/planetoid.html#var/planetoid_id">planetoid_id</a></th><td>ID of the associated planetoid data id for lookup.</td></tr>
+            <tr><th><a href="obj/effect/overmap/visitable/sector/planetoid.html#var/skybox_icon">skybox_icon</a></th><td>The icon file to use for this planetoid's skybox image</td></tr>
+            <tr><th><a href="obj/effect/overmap/visitable/sector/planetoid.html#var/skybox_image">skybox_image</a></th><td>Skybox background image when floating in space above this sector. Generated at runtime</td></tr>
+            <tr><th><a href="obj/effect/overmap/visitable/sector/planetoid.html#var/surface_color">surface_color</a></th><td>Color of the primary layer of the skybox image</td></tr>
+            <tr><th><a href="obj/effect/overmap/visitable/sector/planetoid.html#var/water_color">water_color</a></th><td>Color of the secondary layer of the skybox image. Is usually water-like features.</td></tr><tr><td colspan="2"><h2>Procs</h2></td></tr>
+            <tr><th><a href="obj/effect/overmap/visitable/sector/planetoid.html#proc/generate_skybox_image">generate_skybox_image</a></th><td>Generates the skybox background displayed when a ship or viewer is in a sector above the planetoid</td></tr>
+            <tr><th><a href="obj/effect/overmap/visitable/sector/planetoid.html#proc/generate_skybox_planetoid_clouds">generate_skybox_planetoid_clouds</a></th><td>Generates the cloud cover over the planetoid.</td></tr>
+            <tr><th><a href="obj/effect/overmap/visitable/sector/planetoid.html#proc/generate_skybox_planetoid_halo">generate_skybox_planetoid_halo</a></th><td>Generates the halo underlay around the planetoid if there's any.</td></tr>
+            <tr><th><a href="obj/effect/overmap/visitable/sector/planetoid.html#proc/generate_skybox_planetoid_rings">generate_skybox_planetoid_rings</a></th><td>Generate the planetoid's rings overlay if it has rings</td></tr>
+            <tr><th><a href="obj/effect/overmap/visitable/sector/planetoid.html#proc/generate_skybox_planetoid_shading">generate_skybox_planetoid_shading</a></th><td>Generates the planetoid's shadow and rimlight overlays</td></tr>
+            <tr><th><a href="obj/effect/overmap/visitable/sector/planetoid.html#proc/generate_skybox_planetoid_surface">generate_skybox_planetoid_surface</a></th><td>Generates the raw base/surface of the planetoid skybox image.</td></tr>
+            <tr><th><a href="obj/effect/overmap/visitable/sector/planetoid.html#proc/get_atmosphere">get_atmosphere</a></th><td>Returns the planetoid's atmosphere if there's any</td></tr>
+            <tr><th><a href="obj/effect/overmap/visitable/sector/planetoid.html#proc/get_planetoid_data">get_planetoid_data</a></th><td>Returns the /datum/planetoid_data associated with planet this overmap marker represents.</td></tr>
+            <tr><th><a href="obj/effect/overmap/visitable/sector/planetoid.html#proc/get_ring_color">get_ring_color</a></th><td>Returns the color for the ring overlay</td></tr>
+            <tr><th><a href="obj/effect/overmap/visitable/sector/planetoid.html#proc/get_ring_type_name">get_ring_type_name</a></th><td>Returns the name of the type of ring overlay to use for the planetary rings.
+Basically, the icon_state for the planetoid's rings</td></tr>
+            <tr><th><a href="obj/effect/overmap/visitable/sector/planetoid.html#proc/get_skybox_primary_surface">get_skybox_primary_surface</a></th><td>Returns the image for the planetary surface of the skybox background image.</td></tr>
+            <tr><th><a href="obj/effect/overmap/visitable/sector/planetoid.html#proc/get_skybox_representation">get_skybox_representation</a></th><td>#TODO: Check if the z-level is visible from space
+Get cached skybox background image.</td></tr>
+            <tr><th><a href="obj/effect/overmap/visitable/sector/planetoid.html#proc/get_skybox_secondary_surface">get_skybox_secondary_surface</a></th><td>Returns the image for the secondary planetary feature of the surface of the
+skybox background image. Usually is the color of the oceans on the surface.</td></tr>
+            <tr><th><a href="obj/effect/overmap/visitable/sector/planetoid.html#proc/get_strata">get_strata</a></th><td>Returns the strata associated to the planetoid we represent</td></tr>
+            <tr><th><a href="obj/effect/overmap/visitable/sector/planetoid.html#proc/get_surface_area">get_surface_area</a></th><td>Returns the /area atom for the surface of the planetoid</td></tr>
+            <tr><th><a href="obj/effect/overmap/visitable/sector/planetoid.html#proc/get_surface_color">get_surface_color</a></th><td>Get the primary surface color used for the skybox image</td></tr>
+            <tr><th><a href="obj/effect/overmap/visitable/sector/planetoid.html#proc/has_rings">has_rings</a></th><td>Whether to draw rings on the planet's skybox image, and aknowledge anywhere else that it has rings.</td></tr>
+            <tr><th><a href="obj/effect/overmap/visitable/sector/planetoid.html#proc/update_from_data">update_from_data</a></th><td>Update our name, and refs to match the planetoid we're representing</td></tr></table>
+    <h2 id="var">Var Details</h2><h3 id="var/planetoid_id"><aside class="declaration">var </aside>planetoid_id
+            <aside>&ndash; </aside>
+        
+    
+            <a href="https://github.com/NebulaSS13/Nebula/blob/1b56ee3189bd3fc79ad1d1dd4dcbf1fe1050bf44/code/modules/overmap/planetoids/_planetoids.dm#L15">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;overmap&#x2F;planetoids&#x2F;_planetoids.dm 15"/></a></h3>
+        <p>ID of the associated planetoid data id for lookup.</p><h3 id="var/skybox_icon"><aside class="declaration">var </aside>skybox_icon
+            <aside>&ndash; /icon</aside>
+        
+    
+            <a href="https://github.com/NebulaSS13/Nebula/blob/1b56ee3189bd3fc79ad1d1dd4dcbf1fe1050bf44/code/modules/overmap/planetoids/_planetoids.dm#L17">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;overmap&#x2F;planetoids&#x2F;_planetoids.dm 17"/></a></h3>
+        <p>The icon file to use for this planetoid's skybox image</p><h3 id="var/skybox_image"><aside class="declaration">var </aside>skybox_image
+            <aside>&ndash; /tmp/image</aside>
+        
+    
+            <a href="https://github.com/NebulaSS13/Nebula/blob/1b56ee3189bd3fc79ad1d1dd4dcbf1fe1050bf44/code/modules/overmap/planetoids/_planetoids.dm#L19">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;overmap&#x2F;planetoids&#x2F;_planetoids.dm 19"/></a></h3>
+        <p>Skybox background image when floating in space above this sector. Generated at runtime</p><h3 id="var/surface_color"><aside class="declaration">var </aside>surface_color
+            <aside>&ndash; </aside>
+        
+    
+            <a href="https://github.com/NebulaSS13/Nebula/blob/1b56ee3189bd3fc79ad1d1dd4dcbf1fe1050bf44/code/modules/overmap/planetoids/_planetoids.dm#L21">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;overmap&#x2F;planetoids&#x2F;_planetoids.dm 21"/></a></h3>
+        <p>Color of the primary layer of the skybox image</p><h3 id="var/water_color"><aside class="declaration">var </aside>water_color
+            <aside>&ndash; </aside>
+        
+    
+            <a href="https://github.com/NebulaSS13/Nebula/blob/1b56ee3189bd3fc79ad1d1dd4dcbf1fe1050bf44/code/modules/overmap/planetoids/_planetoids.dm#L23">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;overmap&#x2F;planetoids&#x2F;_planetoids.dm 23"/></a></h3>
+        <p>Color of the secondary layer of the skybox image. Is usually water-like features.</p><h2 id="proc">Proc Details</h2><h3 id="proc/generate_skybox_image"><aside class="declaration">proc </aside>generate_skybox_image<aside>() 
+        
+    
+            <a href="https://github.com/NebulaSS13/Nebula/blob/1b56ee3189bd3fc79ad1d1dd4dcbf1fe1050bf44/code/modules/overmap/planetoids/planetoid_skybox.dm#L110">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;overmap&#x2F;planetoids&#x2F;planetoid_skybox.dm 110"/></a></aside>
+        </h3>
+        <p>Generates the skybox background displayed when a ship or viewer is in a sector above the planetoid</p><h3 id="proc/generate_skybox_planetoid_clouds"><aside class="declaration">proc </aside>generate_skybox_planetoid_clouds<aside>() 
+        
+    
+            <a href="https://github.com/NebulaSS13/Nebula/blob/1b56ee3189bd3fc79ad1d1dd4dcbf1fe1050bf44/code/modules/overmap/planetoids/planetoid_skybox.dm#L76">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;overmap&#x2F;planetoids&#x2F;planetoid_skybox.dm 76"/></a></aside>
+        </h3>
+        <p>Generates the cloud cover over the planetoid.</p><h3 id="proc/generate_skybox_planetoid_halo"><aside class="declaration">proc </aside>generate_skybox_planetoid_halo<aside>() 
+        
+    
+            <a href="https://github.com/NebulaSS13/Nebula/blob/1b56ee3189bd3fc79ad1d1dd4dcbf1fe1050bf44/code/modules/overmap/planetoids/planetoid_skybox.dm#L85">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;overmap&#x2F;planetoids&#x2F;planetoid_skybox.dm 85"/></a></aside>
+        </h3>
+        <p>Generates the halo underlay around the planetoid if there's any.</p><h3 id="proc/generate_skybox_planetoid_rings"><aside class="declaration">proc </aside>generate_skybox_planetoid_rings<aside>() 
+        
+    
+            <a href="https://github.com/NebulaSS13/Nebula/blob/1b56ee3189bd3fc79ad1d1dd4dcbf1fe1050bf44/code/modules/overmap/planetoids/planetoid_skybox.dm#L100">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;overmap&#x2F;planetoids&#x2F;planetoid_skybox.dm 100"/></a></aside>
+        </h3>
+        <p>Generate the planetoid's rings overlay if it has rings</p><h3 id="proc/generate_skybox_planetoid_shading"><aside class="declaration">proc </aside>generate_skybox_planetoid_shading<aside>() 
+        
+    
+            <a href="https://github.com/NebulaSS13/Nebula/blob/1b56ee3189bd3fc79ad1d1dd4dcbf1fe1050bf44/code/modules/overmap/planetoids/planetoid_skybox.dm#L91">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;overmap&#x2F;planetoids&#x2F;planetoid_skybox.dm 91"/></a></aside>
+        </h3>
+        <p>Generates the planetoid's shadow and rimlight overlays</p><h3 id="proc/generate_skybox_planetoid_surface"><aside class="declaration">proc </aside>generate_skybox_planetoid_surface<aside>() 
+        
+    
+            <a href="https://github.com/NebulaSS13/Nebula/blob/1b56ee3189bd3fc79ad1d1dd4dcbf1fe1050bf44/code/modules/overmap/planetoids/planetoid_skybox.dm#L59">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;overmap&#x2F;planetoids&#x2F;planetoid_skybox.dm 59"/></a></aside>
+        </h3>
+        <p>Generates the raw base/surface of the planetoid skybox image.</p><h3 id="proc/get_atmosphere"><aside class="declaration">proc </aside>get_atmosphere<aside>() 
+        
+    
+            <a href="https://github.com/NebulaSS13/Nebula/blob/1b56ee3189bd3fc79ad1d1dd4dcbf1fe1050bf44/code/modules/overmap/planetoids/_planetoids.dm#L30">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;overmap&#x2F;planetoids&#x2F;_planetoids.dm 30"/></a></aside>
+        </h3>
+        <p>Returns the planetoid's atmosphere if there's any</p><h3 id="proc/get_planetoid_data"><aside class="declaration">proc </aside>get_planetoid_data<aside>() 
+        
+    
+            <a href="https://github.com/NebulaSS13/Nebula/blob/1b56ee3189bd3fc79ad1d1dd4dcbf1fe1050bf44/code/modules/overmap/planetoids/_planetoids.dm#L26">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;overmap&#x2F;planetoids&#x2F;_planetoids.dm 26"/></a></aside>
+        </h3>
+        <p>Returns the /datum/planetoid_data associated with planet this overmap marker represents.</p><h3 id="proc/get_ring_color"><aside class="declaration">proc </aside>get_ring_color<aside>() 
+        
+    
+            <a href="https://github.com/NebulaSS13/Nebula/blob/1b56ee3189bd3fc79ad1d1dd4dcbf1fe1050bf44/code/modules/overmap/planetoids/planetoid_skybox.dm#L13">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;overmap&#x2F;planetoids&#x2F;planetoid_skybox.dm 13"/></a></aside>
+        </h3>
+        <p>Returns the color for the ring overlay</p><h3 id="proc/get_ring_type_name"><aside class="declaration">proc </aside>get_ring_type_name<aside>() 
+        
+    
+            <a href="https://github.com/NebulaSS13/Nebula/blob/1b56ee3189bd3fc79ad1d1dd4dcbf1fe1050bf44/code/modules/overmap/planetoids/planetoid_skybox.dm#L8">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;overmap&#x2F;planetoids&#x2F;planetoid_skybox.dm 8"/></a></aside>
+        </h3>
+        <p>Returns the name of the type of ring overlay to use for the planetary rings.
+Basically, the icon_state for the planetoid's rings</p><h3 id="proc/get_skybox_primary_surface"><aside class="declaration">proc </aside>get_skybox_primary_surface<aside>() 
+        
+    
+            <a href="https://github.com/NebulaSS13/Nebula/blob/1b56ee3189bd3fc79ad1d1dd4dcbf1fe1050bf44/code/modules/overmap/planetoids/planetoid_skybox.dm#L44">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;overmap&#x2F;planetoids&#x2F;planetoid_skybox.dm 44"/></a></aside>
+        </h3>
+        <p>Returns the image for the planetary surface of the skybox background image.</p><h3 id="proc/get_skybox_representation">get_skybox_representation<aside>() 
+        
+    
+            <a href="https://github.com/NebulaSS13/Nebula/blob/1b56ee3189bd3fc79ad1d1dd4dcbf1fe1050bf44/code/modules/overmap/planetoids/planetoid_skybox.dm#L38">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;overmap&#x2F;planetoids&#x2F;planetoid_skybox.dm 38"/></a></aside>
+        </h3>
+        <p>#TODO: Check if the z-level is visible from space
+Get cached skybox background image.</p><h3 id="proc/get_skybox_secondary_surface"><aside class="declaration">proc </aside>get_skybox_secondary_surface<aside>() 
+        
+    
+            <a href="https://github.com/NebulaSS13/Nebula/blob/1b56ee3189bd3fc79ad1d1dd4dcbf1fe1050bf44/code/modules/overmap/planetoids/planetoid_skybox.dm#L49">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;overmap&#x2F;planetoids&#x2F;planetoid_skybox.dm 49"/></a></aside>
+        </h3>
+        <p>Returns the image for the secondary planetary feature of the surface of the
+skybox background image. Usually is the color of the oceans on the surface.</p><h3 id="proc/get_strata"><aside class="declaration">proc </aside>get_strata<aside>() 
+        
+    
+            <a href="https://github.com/NebulaSS13/Nebula/blob/1b56ee3189bd3fc79ad1d1dd4dcbf1fe1050bf44/code/modules/overmap/planetoids/_planetoids.dm#L40">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;overmap&#x2F;planetoids&#x2F;_planetoids.dm 40"/></a></aside>
+        </h3>
+        <p>Returns the strata associated to the planetoid we represent</p><h3 id="proc/get_surface_area"><aside class="declaration">proc </aside>get_surface_area<aside>() 
+        
+    
+            <a href="https://github.com/NebulaSS13/Nebula/blob/1b56ee3189bd3fc79ad1d1dd4dcbf1fe1050bf44/code/modules/overmap/planetoids/_planetoids.dm#L35">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;overmap&#x2F;planetoids&#x2F;_planetoids.dm 35"/></a></aside>
+        </h3>
+        <p>Returns the /area atom for the surface of the planetoid</p><h3 id="proc/get_surface_color"><aside class="declaration">proc </aside>get_surface_color<aside>() 
+        
+    
+            <a href="https://github.com/NebulaSS13/Nebula/blob/1b56ee3189bd3fc79ad1d1dd4dcbf1fe1050bf44/code/modules/overmap/planetoids/planetoid_skybox.dm#L18">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;overmap&#x2F;planetoids&#x2F;planetoid_skybox.dm 18"/></a></aside>
+        </h3>
+        <p>Get the primary surface color used for the skybox image</p><h3 id="proc/has_rings"><aside class="declaration">proc </aside>has_rings<aside>() 
+        
+    
+            <a href="https://github.com/NebulaSS13/Nebula/blob/1b56ee3189bd3fc79ad1d1dd4dcbf1fe1050bf44/code/modules/overmap/planetoids/planetoid_skybox.dm#L2">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;overmap&#x2F;planetoids&#x2F;planetoid_skybox.dm 2"/></a></aside>
+        </h3>
+        <p>Whether to draw rings on the planet's skybox image, and aknowledge anywhere else that it has rings.</p><h3 id="proc/update_from_data"><aside class="declaration">proc </aside>update_from_data<aside>(/<a href="datum.html">datum</a>/<a href="datum/planetoid_data.html">planetoid_data</a>/P) 
+        
+    
+            <a href="https://github.com/NebulaSS13/Nebula/blob/1b56ee3189bd3fc79ad1d1dd4dcbf1fe1050bf44/code/modules/overmap/planetoids/_planetoids.dm#L45">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;overmap&#x2F;planetoids&#x2F;_planetoids.dm 45"/></a></aside>
+        </h3>
+        <p>Update our name, and refs to match the planetoid we're representing</p></main>
+<footer>
+    nebula.dme
+    <a href="https://github.com/NebulaSS13/Nebula/tree/1b56ee3189bd3fc79ad1d1dd4dcbf1fe1050bf44">1b56ee3</a>
+        (dev) &mdash; <a href="https://github.com/SpaceManiac/SpacemanDMM/blob/master/src/dmdoc/README.md">dmdoc 1.4.1</a></footer>
+</body>
+</html>
