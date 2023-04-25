@@ -55,7 +55,8 @@ var/global/const/FALLOFF_SOUNDS = 0.5
 
 	volume *= pressure_factor
 
-	if(istype(T,/turf/simulated) && istype(turf_source,/turf/simulated))
+	//Dense turfs are not in the zones, so they shouldn't be penalized here when source
+	if(!turf_source.blocks_air && istype(T,/turf/simulated) && istype(turf_source,/turf/simulated))
 		var/turf/simulated/sim_source = turf_source
 		var/turf/simulated/sim_destination = T
 		if(sim_destination.zone != sim_source.zone)
