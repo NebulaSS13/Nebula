@@ -262,10 +262,11 @@
 
 /mob/proc/unequip(obj/W)
 	SHOULD_CALL_PARENT(TRUE)
-	if(istype(W) && !QDELETED(W))
-		var/datum/inventory_slot/inv_slot = get_inventory_slot_datum(get_equipped_slot_for_item(W))
-		if(inv_slot)
-			return inv_slot.unequipped(src, W)
+	if(!istype(W))
+		return FALSE
+	var/datum/inventory_slot/inv_slot = get_inventory_slot_datum(get_equipped_slot_for_item(W))
+	if(inv_slot)
+		return inv_slot.unequipped(src, W)
 	if(set_item_unequipped_legacy(W))
 		update_action_buttons()
 		return TRUE
