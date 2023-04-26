@@ -409,7 +409,7 @@
 	value = 1.5
 	uid = "chem_detoxifier"
 
-/decl/material/liquid/detoxifier/affect_blood(var/mob/living/M, var/alien, var/removed, var/datum/reagents/holder)
+/decl/material/liquid/detoxifier/affect_blood(var/mob/living/M, var/removed, var/datum/reagents/holder)
 	var/charges = removed * DETOXIFIER_EFFECTIVENESS
 	var/dosecharges = LAZYACCESS(M.chem_doses, type) * DETOXIFIER_DOSE_EFFECTIVENESS
 	for(var/datum/reagents/container as anything in M.get_metabolizing_reagent_holders())
