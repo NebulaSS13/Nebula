@@ -18,7 +18,7 @@
 
 /decl/material/proc/generate_recipes(var/reinforce_material)
 
-	if(phase_at_stp() != MAT_PHASE_SOLID)
+	if(phase_at_temperature() != MAT_PHASE_SOLID)
 		return list()
 
 	. = list()
