@@ -117,13 +117,10 @@ This is /obj/machinery level code to properly manage power usage from the area.
 		return FALSE
 	. = TRUE
 	var/power = get_power_usage()
-	if(!power)
-		return // This is the most likely case anyway.
-
 	if(old_area)
 		old_area.power_use_change(power, 0, power_channel)
 		if(MACHINE_UPDATES_FROM_AREA_POWER)
-			events_repository.unregister(/decl/observ/area_power_change, old_area, src, .proc/power_change)	
+			events_repository.unregister(/decl/observ/area_power_change, old_area, src, .proc/power_change)
 	if(new_area)
 		new_area.power_use_change(0, power, power_channel)
 		if(MACHINE_UPDATES_FROM_AREA_POWER)

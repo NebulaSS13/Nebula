@@ -65,9 +65,12 @@
 
 /obj/abstract/landmark/clear/LateInitialize()
 	. = ..()
-	var/turf/simulated/wall/W = get_turf(src)
-	if(istype(W))
-		W.dismantle_wall(TRUE, TRUE, TRUE)
+	var/turf/simulated/wall/simulated_wall = get_turf(src)
+	if(istype(simulated_wall))
+		simulated_wall.dismantle_wall(TRUE, TRUE, TRUE)
+	else if(istype(simulated_wall, /turf/exterior/wall))
+		var/turf/exterior/wall/exterior_wall = simulated_wall
+		exterior_wall.dismantle_wall(TRUE)
 	qdel(src)
 
 //Applies fire act to the turf

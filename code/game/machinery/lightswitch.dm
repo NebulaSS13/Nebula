@@ -85,3 +85,14 @@
 		to_chat(user, SPAN_NOTICE("You flick \the [src] with \the [I]."))
 		interface_interact(user)
 		return TRUE
+
+/obj/machinery/light_switch/area_changed(area/old_area, area/new_area)
+	. = ..()
+	if(QDELETED(src))
+		return
+	if(other_area)
+		return
+	if(!new_area || old_area == new_area)
+		return
+	connected_area = new_area
+	sync_state()

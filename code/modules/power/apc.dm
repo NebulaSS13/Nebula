@@ -180,9 +180,9 @@ var/global/list/all_apcs = list()
 	global.all_apcs += src
 	if(areastring)
 		reset_area(null, get_area_by_name(strip_improper(areastring)))
-	else
+	else if (mapload) //if area isn't specified during mapload use current
 		reset_area(null, get_area(src))
-		//if area isn't specified use current
+	// otherwise, it'll be handled by Entered/area_changed
 	if(!area)
 		return ..() // Spawned in nullspace means it's a test entity or prototype.
 

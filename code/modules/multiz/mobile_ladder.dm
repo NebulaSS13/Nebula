@@ -30,7 +30,7 @@
 		else if(T.CanZPass(T, DOWN))
 			to_chat(user, SPAN_WARNING("You can't find anything to support \the [src] on!"))
 			return FALSE
-	else if (istype(T, /turf/simulated/floor) || istype(T, /turf/unsimulated/floor))
+	else if (T.is_floor())
 		target = GetAbove(A)
 		if(!istype(target) || !target.is_open() || target.contains_dense_objects())
 			to_chat(user, SPAN_WARNING("There is something above \the [T]. You can't deploy \the [src]!"))
