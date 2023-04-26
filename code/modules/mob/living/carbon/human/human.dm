@@ -172,7 +172,7 @@
 	// Other incidentals.
 	if(istype(suit))
 		dat += "<BR><b>Pockets:</b> <A href='?src=\ref[src];item=pockets'>Empty or Place Item</A>"
-		if(suit.has_sensor == 1)
+		if(suit.has_sensor == SUIT_HAS_SENSORS)
 			dat += "<BR><A href='?src=\ref[src];item=sensors'>Set sensors</A>"
 		if (suit.has_sensor && user.get_multitool())
 			dat += "<BR><A href='?src=\ref[src];item=lock_sensors'>[suit.has_sensor == SUIT_LOCKED_SENSORS ? "Unl" : "L"]ock sensors</A>"

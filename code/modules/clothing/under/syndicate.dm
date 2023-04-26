@@ -2,7 +2,7 @@
 	name = "tactical turtleneck"
 	desc = "It's some non-descript, slightly suspicious looking, civilian clothing."
 	icon = 'icons/clothing/under/uniform_tacticool.dmi'
-	has_sensor = 0
+	has_sensor = SUIT_NO_SENSORS
 	armor = list(
 		ARMOR_MELEE = ARMOR_MELEE_SMALL,
 		ARMOR_BULLET = ARMOR_BALLISTIC_MINOR,
