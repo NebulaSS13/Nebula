@@ -55,8 +55,10 @@
 	if(!receive_tag) return
 
 	if(receive_tag==tag_door)
-		memory["door_status"]["state"] = signal.data["door_status"]
-		memory["door_status"]["lock"] = signal.data["lock_status"]
+		if("door_status" in signal.data)
+			memory["door_status"]["state"] = signal.data["door_status"]
+		if("lock_status" in signal.data)
+			memory["door_status"]["lock"] = signal.data["lock_status"]
 
 	..(signal, receive_method, receive_param)
 
