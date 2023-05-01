@@ -38,22 +38,13 @@
 	. = CEILING(w_class * BASE_OBJECT_MATTER_MULTPLIER)
 
 /obj/assume_air(datum/gas_mixture/giver)
-	if(loc)
-		return loc.assume_air(giver)
-	else
-		return null
+	return loc?.assume_air(giver)
 
 /obj/remove_air(amount)
-	if(loc)
-		return loc.remove_air(amount)
-	else
-		return null
+	return loc?.remove_air(amount)
 
 /obj/return_air()
-	if(loc)
-		return loc.return_air()
-	else
-		return null
+	return loc?.return_air()
 
 /obj/proc/updateUsrDialog()
 	if(in_use)

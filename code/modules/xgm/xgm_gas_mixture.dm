@@ -88,11 +88,11 @@
 	update_values()
 
 
-//Merges all the gas from another mixture into this one.  Respects group_multipliers and adjusts temperature correctly.
-//Does not modify giver in any way.
+/// Merges all the gas from another mixture into this one.  Respects group_multipliers and adjusts temperature correctly.
+/// Does not modify giver in any way.
 /datum/gas_mixture/proc/merge(const/datum/gas_mixture/giver)
 	if(!giver)
-		return
+		return FALSE
 
 	if(abs(temperature-giver.temperature)>MINIMUM_TEMPERATURE_DELTA_TO_CONSIDER)
 		var/self_heat_capacity = heat_capacity()
@@ -109,6 +109,7 @@
 			gas[g] += giver.gas[g]
 
 	update_values()
+	return TRUE
 
 // Used to equalize the mixture between two zones before sleeping an edge.
 /datum/gas_mixture/proc/equalize(datum/gas_mixture/sharer)
