@@ -77,7 +77,7 @@
 	if(!can_open)
 		to_chat(user, "<span class='notice'>You push \the [src], but nothing happens.</span>")
 		playsound(src, hitsound, 25, 1)
-	else
+	else if (isnull(construction_stage) || !reinf_material)
 		toggle_open(user)
 
 /turf/simulated/wall/attack_hand(var/mob/user)
