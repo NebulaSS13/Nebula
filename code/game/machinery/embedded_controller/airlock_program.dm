@@ -89,24 +89,30 @@
 	if(!receive_tag) return
 
 	if(receive_tag==tag_chamber_sensor)
-		if(signal.data["pressure"])
+		if("pressure" in signal.data)
 			memory["chamber_sensor_pressure"] = text2num(signal.data["pressure"])
 
 	else if(receive_tag==tag_exterior_sensor)
-		memory["external_sensor_pressure"] = text2num(signal.data["pressure"])
+		if("pressure" in signal.data)
+			memory["external_sensor_pressure"] = text2num(signal.data["pressure"])
 
 	else if(receive_tag==tag_interior_sensor)
-		memory["internal_sensor_pressure"] = text2num(signal.data["pressure"])
+		if("pressure" in signal.data)
+			memory["internal_sensor_pressure"] = text2num(signal.data["pressure"])
 
 	else if(receive_tag==tag_exterior_door)
-		memory["exterior_status"]["state"] = signal.data["door_status"]
-		memory["exterior_status"]["lock"] = signal.data["lock_status"]
+		if("door_status" in signal.data)
+			memory["exterior_status"]["state"] = signal.data["door_status"]
+		if("lock_status" in signal.data)
+			memory["exterior_status"]["lock"] = signal.data["lock_status"]
 
 	else if(receive_tag==tag_interior_door)
-		memory["interior_status"]["state"] = signal.data["door_status"]
-		memory["interior_status"]["lock"] = signal.data["lock_status"]
+		if("door_status" in signal.data)
+			memory["interior_status"]["state"] = signal.data["door_status"]
+		if("lock_status" in signal.data)
+			memory["interior_status"]["lock"] = signal.data["lock_status"]
 
-	else if(receive_tag==tag_airpump || receive_tag==tag_pump_out_internal)
+	else if((receive_tag==tag_airpump || receive_tag==tag_pump_out_internal) && ("power" in signal.data))
 		if(signal.data["power"])
 			memory["pump_status"] = signal.data["direction"]
 		else
