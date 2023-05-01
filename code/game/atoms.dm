@@ -843,3 +843,12 @@
 	SHOULD_CALL_PARENT(TRUE)
 	RETURN_TYPE(/list)
 	return list()
+
+/atom/proc/singularity_act()
+	return 0
+
+/atom/proc/singularity_pull(S, current_size)
+	return
+
+/atom/proc/on_defilement()
+	return

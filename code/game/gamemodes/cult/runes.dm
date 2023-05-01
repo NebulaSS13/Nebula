@@ -365,7 +365,7 @@
 		if(T.holy)
 			T.holy = 0
 		else
-			T.cultify()
+			T.on_defilement()
 	visible_message("<span class='warning'>\The [src] embeds into the floor and walls around it, changing them!</span>", "You hear liquid flow.")
 	qdel(src)
 
@@ -616,7 +616,7 @@
 			if(T.holy)
 				T.holy = 0
 			else
-				T.cultify()
+				T.on_defilement()
 	visible_message("<span class='warning'>\The [src] embeds into the floor and walls around it, changing them!</span>", "You hear liquid flow.")
 	qdel(src)
 
@@ -631,7 +631,7 @@
 		to_chat(user, "<span class='warning'>You need to be wearing your robes to use this rune.</span>")
 		return fizzle(user)
 	var/turf/T = get_turf(src)
-	if(T.icon_state != "cult" && T.icon_state != "cult-narsie")
+	if(!T.is_defiled())
 		to_chat(user, "<span class='warning'>This rune needs to be placed on the defiled ground.</span>")
 		return fizzle(user)
 	speak_incantation(user, "N'ath reth sh'yro eth d[pick("'","`")]raggathnor!")
@@ -644,7 +644,7 @@
 
 /obj/effect/rune/shell/cast(var/mob/living/user)
 	var/turf/T = get_turf(src)
-	if(T.icon_state != "cult" && T.icon_state != "cult-narsie")
+	if(!T.is_defiled())
 		to_chat(user, "<span class='warning'>This rune needs to be placed on the defiled ground.</span>")
 		return fizzle(user)
 
@@ -760,7 +760,7 @@
 	cultname = "tear reality"
 	var/the_end_comes = 0
 	var/the_time_has_come = 300
-	var/obj/singularity/narsie/large/HECOMES = null
+	var/obj/effect/narsie/summoning_entity = null
 	strokes = 9
 
 /obj/effect/rune/tearreality/cast(var/mob/living/user)
@@ -796,18 +796,18 @@
 
 		for(var/turf/T in range(min(the_end_comes, 15)))
 			if(prob(the_end_comes / 3))
-				T.cultify()
+				T.on_defilement()
 		sleep(10)
 
 	if(the_end_comes >= the_time_has_come)
-		HECOMES = new /obj/singularity/narsie/large(get_turf(src))
+		summoning_entity = new /obj/effect/narsie(get_turf(src))
 	else
 		command_announcement.Announce("Gravitational anomaly has ceased.")
 		qdel(src)
 
 /obj/effect/rune/tearreality/attack_hand(var/mob/user)
 	..()
-	if(HECOMES && !iscultist(user))
+	if(summoning_entity && !iscultist(user))
 		var/input = input(user, "Are you SURE you want to sacrifice yourself?", "DO NOT DO THIS") in list("Yes", "No")
 		if(input != "Yes")
 			return
@@ -823,7 +823,7 @@
 		user.dust()
 		var/decl/special_role/cultist/cult = GET_DECL(/decl/special_role/cultist)
 		cult.powerless = 1
-		qdel(HECOMES)
+		qdel(summoning_entity)
 		qdel(src)
 		return
 

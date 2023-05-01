@@ -118,7 +118,7 @@
 
 /mob/living/silicon/electrocute_act(var/shock_damage, var/obj/source, var/siemens_coeff = 1.0, def_zone = null)
 
-	if (istype(source, /obj/machinery/containment_field))
+	if (istype(source, /obj/effect/containment_field))
 		spark_at(loc, amount=5, cardinal_only = TRUE)
 
 		shock_damage *= 0.75	//take reduced damage

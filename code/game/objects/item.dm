@@ -910,3 +910,17 @@ modules/mob/living/carbon/human/life.dm if you die, you will be zoomed out.
 	var/mob/M = src.loc
 	if(istype(M) && M.client && M.machine == src)
 		src.attack_self(M)
+
+/obj/item/singularity_pull(S, current_size)
+	set waitfor = FALSE
+	if(!simulated || anchored)
+		return
+	sleep(0) //this is needed or multiple items will be thrown sequentially and not simultaneously
+	if(current_size >= STAGE_FOUR)
+		//throw_at(S, 14, 3)
+		step_towards(src,S)
+		sleep(1)
+		step_towards(src,S)
+	else if(current_size > STAGE_ONE)
+		step_towards(src,S)
+	else ..()

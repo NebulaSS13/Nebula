@@ -106,6 +106,12 @@
 	color = COLOR_RED_GRAY
 	material = /decl/material/solid/stone/cult
 
+/turf/simulated/wall/cult/on_defilement()
+	return
+
+/turf/simulated/wall/cult/is_defiled()
+	return TRUE
+
 /turf/simulated/wall/cult/reinf
 	icon_state = "reinforced_cult"
 	reinf_material = /decl/material/solid/stone/cult/reinforced

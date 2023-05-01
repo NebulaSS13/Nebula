@@ -287,3 +287,17 @@ var/global/list/wall_fullblend_objects = list(
 
 /turf/simulated/wall/is_wall()
 	return TRUE
+
+/turf/simulated/wall/on_defilement()
+	var/new_material
+	if(material?.type != /decl/material/solid/stone/cult)
+		new_material = /decl/material/solid/stone/cult
+	var/new_rmaterial
+	if(reinf_material && reinf_material.type != /decl/material/solid/stone/cult/reinforced)
+		new_rmaterial = /decl/material/solid/stone/cult/reinforced
+	if(new_material || new_rmaterial)
+		..()
+		set_material(new_material, new_rmaterial)
+
+/turf/simulated/wall/is_defiled()
+	return material?.type == /decl/material/solid/stone/cult || reinf_material?.type == /decl/material/solid/stone/cult/reinforced || ..()

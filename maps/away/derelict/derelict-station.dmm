@@ -3401,7 +3401,7 @@
 /turf/simulated/floor/airless,
 /area/constructionsite/engineering)
 "mc" = (
-/obj/machinery/the_singularitygen,
+/obj/machinery/singularity_generator,
 /turf/simulated/floor/airless,
 /area/constructionsite/engineering)
 "md" = (

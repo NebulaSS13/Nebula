@@ -43,7 +43,7 @@
 
 	var/list/construct_spells = list()
 
-/mob/living/simple_animal/construct/cultify()
+/mob/living/simple_animal/construct/on_defilement()
 	return
 
 /mob/living/simple_animal/construct/Initialize()

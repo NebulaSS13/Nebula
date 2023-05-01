@@ -162,8 +162,11 @@
 	icon_state = "cult"
 	initial_flooring = /decl/flooring/reinforced/cult
 
-/turf/simulated/floor/cult/cultify()
+/turf/simulated/floor/cult/on_defilement()
 	return
+
+/turf/simulated/floor/cult/is_defiled()
+	return TRUE
 
 //Tiled floor + sub-types
 

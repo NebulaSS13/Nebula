@@ -36,7 +36,7 @@
 			target_amount = 6
 			loot = "a complete particle accelerator"
 		if(2)
-			target = /obj/machinery/the_singularitygen
+			target = /obj/machinery/singularity_generator
 			target_amount = 1
 			loot = "a gravitational generator"
 		if(3)

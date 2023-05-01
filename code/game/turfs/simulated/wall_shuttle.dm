@@ -12,6 +12,16 @@
 	blocks_air = 1
 	explosion_resistance = 10
 
+/turf/simulated/shuttle/on_defilement()
+	..()
+	make_spooky()
+
+/turf/simulated/shuttle/proc/make_spooky()
+	ChangeTurf(/turf/simulated/floor/cult)
+
+/turf/simulated/shuttle/wall/make_spooky()
+	ChangeTurf(/turf/simulated/wall/cult)
+
 /turf/simulated/shuttle/wall/corner
 	var/corner_overlay_state = "diagonalWall"
 	var/image/corner_overlay

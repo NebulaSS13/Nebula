@@ -123,3 +123,11 @@
 
 /turf/simulated/floor/is_floor()
 	return TRUE
+
+/turf/simulated/floor/on_defilement()
+	if(flooring?.type != /decl/flooring/reinforced/cult)
+		..()
+		set_flooring(GET_DECL(/decl/flooring/reinforced/cult))
+
+/turf/simulated/floor/is_defiled()
+	return flooring?.type == /decl/flooring/reinforced/cult || ..()

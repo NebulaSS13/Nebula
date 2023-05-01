@@ -1,3 +1,5 @@
+var/global/list/singularity_beacons = list()
+
 //This file was auto-corrected by findeclaration.exe on 25.5.2012 20:42:31
 
 //  Beacon randomly spawns in space
@@ -14,7 +16,7 @@
 
 	anchored = 1
 	density = 1
-	
+
 	var/temptext = ""
 	var/selfdestructing = 0
 	var/charges = 1
@@ -84,7 +86,7 @@
 	name = "ominous beacon"
 	desc = "This looks suspicious..."
 	icon = 'icons/obj/singularity.dmi'
-	icon_state = "beacon"
+	icon_state = "beaconsynd"
 
 	uncreated_component_parts = list(/obj/item/stock_parts/power/terminal)
 	anchored = 0
@@ -93,22 +95,30 @@
 	stat = 0
 	use_power = POWER_USE_OFF
 
-	var/icontype = "beacon"
+/obj/machinery/singularity_beacon/Initialize()
+	. = ..()
+	global.singularity_beacons += src
+
+/obj/machinery/singularity_beacon/Destroy()
+	if(use_power)
+		Deactivate()
+	global.singularity_beacons -= src
+	return ..()
 
 /obj/machinery/singularity_beacon/proc/Activate(mob/user = null)
-	for(var/obj/singularity/singulo in global.singularities)
+	for(var/obj/effect/singularity/singulo in global.singularities)
 		if(singulo.z == z)
 			singulo.target = src
-	icon_state = "[icontype]1"
+	icon_state = "[initial(icon_state)]1"
 	update_use_power(POWER_USE_ACTIVE)
 	if(user)
 		to_chat(user, "<span class='notice'>You activate the beacon.</span>")
 
 /obj/machinery/singularity_beacon/proc/Deactivate(mob/user = null)
-	for(var/obj/singularity/singulo in global.singularities)
+	for(var/obj/effect/singularity/singulo in global.singularities)
 		if(singulo.target == src)
 			singulo.target = null
-	icon_state = "[icontype]0"
+	icon_state = "[initial(icon_state)]0"
 	update_use_power(POWER_USE_OFF)
 	if(user)
 		to_chat(user, "<span class='notice'>You deactivate the beacon.</span>")
@@ -146,11 +156,6 @@
 		return TRUE
 	return ..()
 
-/obj/machinery/singularity_beacon/Destroy()
-	if(use_power)
-		Deactivate()
-	. = ..()
-
 /obj/machinery/singularity_beacon/power_change()
 	. = ..()
 	if(!. || !use_power)
@@ -158,6 +163,3 @@
 	if(stat & NOPOWER)
 		Deactivate()
 
-/obj/machinery/singularity_beacon/syndicate
-	icontype = "beaconsynd"
-	icon_state = "beaconsynd0"

@@ -41,7 +41,7 @@
 	return
 
 /obj/effect/projectile/singularity_act()
-	return
+	return 0
 
 /obj/effect/projectile/proc/scale_to(nx,ny,override=TRUE)
 	var/matrix/M

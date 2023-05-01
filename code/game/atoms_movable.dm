@@ -527,3 +527,15 @@
 /decl/interaction_handler/grab/invoked(atom/target, mob/user, obj/item/prop)
 	var/atom/movable/AM = target
 	AM.try_make_grab(user, defer_hand = TRUE)
+
+/atom/movable/singularity_act()
+	if(!simulated)
+		return 0
+	physically_destroyed()
+	if(!QDELETED(src))
+		qdel(src)
+	return 2
+
+/atom/movable/singularity_pull(S, current_size)
+	if(simulated && !anchored)
+		step_towards(src, S)

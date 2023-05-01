@@ -31,10 +31,10 @@ var/global/list/rad_collectors = list()
 
 /obj/machinery/rad_collector/Initialize()
 	. = ..()
-	rad_collectors += src
+	global.rad_collectors += src
 
 /obj/machinery/rad_collector/Destroy()
-	rad_collectors -= src
+	global.rad_collectors -= src
 	. = ..()
 
 /obj/machinery/rad_collector/Process()

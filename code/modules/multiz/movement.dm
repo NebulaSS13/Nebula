@@ -397,12 +397,3 @@
 /atom/movable/z_observer/explosion_act()
 	SHOULD_CALL_PARENT(FALSE)
 	return
-
-/atom/movable/z_observer/singularity_act()
-	return
-
-/atom/movable/z_observer/singularity_pull()
-	return
-
-/atom/movable/z_observer/singuloCanEat()
-	return

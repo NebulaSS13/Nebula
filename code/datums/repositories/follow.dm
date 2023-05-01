@@ -222,7 +222,7 @@ var/global/repository/follow/follow_repository = new()
 
 /datum/follow_holder/singularity
 	sort_order = 10
-	followed_type = /obj/singularity
+	followed_type = /obj/effect/singularity
 
 /datum/follow_holder/nuke_disc
 	sort_order = 11
