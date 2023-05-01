@@ -18,11 +18,11 @@
 "ac" = (
 /obj/structure/handrail,
 /obj/machinery/embedded_controller/radio/airlock/docking_port{
+	cycle_to_external_air = 1;
 	id_tag = "bee_star";
-	pixel_y = null;
-	tag_pump_out_external = "bee_pump_out_external";
+	pixel_y = 24;
 	tag_interior_sensor = "bee_interior_sensor";
-	cycle_to_external_air = 1
+	tag_pump_out_external = "bee_pump_out_external"
 	},
 /obj/structure/cable/orange{
 	icon_state = "4-8"
@@ -773,7 +773,7 @@
 	},
 /obj/machinery/airlock_sensor{
 	id_tag = "dock_star_sensor";
-	pixel_y = 0
+	pixel_y = 24
 	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/ship/trade/dock)
@@ -831,7 +831,7 @@
 	},
 /obj/machinery/airlock_sensor{
 	id_tag = "dock_port_sensor";
-	pixel_y = 0
+	pixel_y = 24
 	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/ship/trade/dock)
@@ -841,7 +841,7 @@
 	},
 /obj/machinery/embedded_controller/radio/airlock/docking_port{
 	id_tag = "tradeship_dock_port";
-	pixel_y = 0;
+	pixel_y = 24;
 	tag_airpump = "dock_port_pump";
 	tag_chamber_sensor = "dock_port_sensor";
 	tag_exterior_door = "dock_port_out";
@@ -870,7 +870,6 @@
 "bB" = (
 /obj/effect/decal/cleanable/dirt,
 /obj/structure/sign/warning/vacuum{
-	icon_state = "space";
 	dir = 4
 	},
 /turf/simulated/floor/tiled/monotile,
@@ -976,7 +975,8 @@
 "bJ" = (
 /obj/structure/handrail,
 /obj/machinery/airlock_sensor{
-	id_tag = "bee_star_sensor"
+	id_tag = "bee_star_sensor";
+	pixel_y = 24
 	},
 /obj/structure/cable/orange{
 	icon_state = "4-8"
@@ -997,8 +997,7 @@
 /obj/machinery/button/access/interior{
 	dir = 8;
 	id_tag = "bee_star";
-	pixel_x = 0;
-	pixel_y = 0
+	pixel_x = 20
 	},
 /turf/simulated/floor/tiled/steel_ridged,
 /area/ship/trade/shuttle/outgoing/general)
@@ -1025,8 +1024,7 @@
 /obj/machinery/button/access/interior{
 	dir = 4;
 	id_tag = "tradeship_dock_port";
-	pixel_x = 0;
-	pixel_y = 0
+	pixel_x = -20
 	},
 /turf/simulated/floor/tiled/monotile,
 /area/ship/trade/dock)
@@ -1039,8 +1037,8 @@
 	},
 /obj/machinery/button/access/interior{
 	dir = 8;
-	icon_state = "button";
-	id_tag = "tradeship_starboard_dock"
+	id_tag = "tradeship_starboard_dock";
+	pixel_x = 20
 	},
 /turf/simulated/floor/tiled/monotile,
 /area/ship/trade/dock)
@@ -1078,18 +1076,18 @@
 	},
 /obj/machinery/airlock_sensor{
 	id_tag = "tradeship_rescue_shuttle_sensor";
-	pixel_y = 20;
-	pixel_x = -22
+	pixel_x = -22;
+	pixel_y = 20
 	},
 /obj/machinery/embedded_controller/radio/airlock/docking_port{
 	cycle_to_external_air = 1;
+	dir = 4;
 	id_tag = "tradeship_rescue_shuttle";
+	pixel_x = -20;
 	pixel_y = 32;
 	tag_airpump = "tradeship_rescue_shuttle_pump";
 	tag_chamber_sensor = "tradeship_rescue_shuttle_sensor";
-	tag_exterior_door = "tradeship_rescue_shuttle_out";
-	dir = 4;
-	pixel_x = -20
+	tag_exterior_door = "tradeship_rescue_shuttle_out"
 	},
 /obj/effect/floor_decal/corner/white{
 	dir = 9
@@ -1417,7 +1415,8 @@
 /obj/structure/table,
 /obj/machinery/reagent_temperature,
 /obj/machinery/power/apc{
-	dir = 1
+	dir = 1;
+	pixel_y = 22
 	},
 /obj/machinery/light_switch{
 	pixel_x = 24
@@ -1702,7 +1701,8 @@
 /obj/structure/cable,
 /obj/machinery/power/apc{
 	dir = 4;
-	name = "Bathrooms APC"
+	name = "Bathrooms APC";
+	pixel_x = 22
 	},
 /obj/machinery/light_switch{
 	pixel_y = -25
@@ -1838,7 +1838,8 @@
 /obj/structure/disposalpipe/segment,
 /obj/machinery/power/apc{
 	dir = 4;
-	name = "Crew Deck APC"
+	name = "Crew Deck APC";
+	pixel_x = 22
 	},
 /obj/structure/cable{
 	icon_state = "0-2";
@@ -1920,7 +1921,8 @@
 	},
 /obj/machinery/power/apc{
 	dir = 4;
-	name = "Galley APC"
+	name = "Galley APC";
+	pixel_x = 22
 	},
 /obj/effect/floor_decal/corner/red/diagonal,
 /obj/structure/hygiene/sink{
@@ -2203,7 +2205,8 @@
 "fg" = (
 /obj/item/storage/pill_bottle/happy,
 /obj/machinery/power/apc{
-	dir = 1
+	dir = 1;
+	pixel_y = 22
 	},
 /obj/structure/cable{
 	icon_state = "0-4"
@@ -2343,7 +2346,8 @@
 /area/ship/trade/maintenance/engine/starboard)
 "fA" = (
 /obj/machinery/power/apc{
-	dir = 1
+	dir = 1;
+	pixel_y = 22
 	},
 /obj/structure/cable{
 	icon_state = "0-8"
@@ -2636,7 +2640,7 @@
 /obj/structure/sign/directions/medical{
 	dir = 4;
 	pixel_x = 32;
-	pixel_z = -4
+	pixel_y = -4
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/fuel,
 /turf/simulated/floor/tiled/techmaint,
@@ -2711,7 +2715,7 @@
 "gA" = (
 /obj/machinery/washing_machine,
 /obj/item/storage/box/monkeycubes{
-	pixel_z = 13
+	pixel_y = 13
 	},
 /turf/simulated/floor/tiled/freezer,
 /area/ship/trade/crew/wash)
@@ -3008,7 +3012,8 @@
 	dir = 4
 	},
 /obj/machinery/power/apc{
-	dir = 1
+	dir = 1;
+	pixel_y = 22
 	},
 /obj/structure/cable{
 	icon_state = "0-8"
@@ -3081,7 +3086,8 @@
 /area/ship/trade/maintenance/hallway)
 "hA" = (
 /obj/machinery/power/apc{
-	name = "Medical Bay APC"
+	name = "Medical Bay APC";
+	pixel_y = -22
 	},
 /obj/item/storage/backpack/dufflebag/syndie,
 /obj/machinery/alarm{
@@ -3152,7 +3158,8 @@
 	icon_state = "0-2"
 	},
 /obj/machinery/power/apc/high{
-	dir = 1
+	dir = 1;
+	pixel_y = 22
 	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/ship/trade/maintenance/atmos)
@@ -4464,19 +4471,24 @@
 /area/ship/trade/shuttle/outgoing/general)
 "lb" = (
 /obj/structure/catwalk,
-/obj/structure/handrail{
-	dir = 2
-	},
+/obj/structure/handrail,
 /obj/effect/floor_decal/industrial/warning{
 	dir = 4;
 	icon_state = "warning"
+	},
+/obj/machinery/button/access/exterior{
+	dir = 4;
+	id_tag = "bee_star";
+	pixel_x = 16;
+	pixel_y = 26
 	},
 /turf/space,
 /area/ship/trade/shuttle/outgoing/general)
 "ld" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/fuel,
 /obj/machinery/power/apc/high{
-	dir = 8
+	dir = 8;
+	pixel_x = -22
 	},
 /obj/structure/cable,
 /obj/structure/window/borosilicate_reinforced{
@@ -4524,7 +4536,7 @@
 /area/ship/trade/shuttle/outgoing/general)
 "lZ" = (
 /obj/structure/sign/redcross{
-	pixel_w = 32
+	pixel_x = 32
 	},
 /turf/simulated/floor/plating,
 /area/ship/trade/crew/hallway/starboard)
@@ -4661,7 +4673,8 @@
 /area/ship/trade/crew/medbay/chemistry)
 "nm" = (
 /obj/machinery/power/apc{
-	dir = 4
+	dir = 4;
+	pixel_x = 22
 	},
 /obj/structure/cable,
 /obj/machinery/atmospherics/unary/vent_pump/high_volume/external_air{
@@ -4902,7 +4915,7 @@
 	},
 /obj/machinery/biogenerator,
 /obj/machinery/light_switch{
-	pixel_w = 22
+	pixel_x = 22
 	},
 /turf/simulated/floor/tiled,
 /area/ship/trade/garden)
@@ -5032,15 +5045,6 @@
 	},
 /turf/simulated/floor/plating,
 /area/ship/trade/garden)
-"rn" = (
-/obj/machinery/button/access/exterior{
-	dir = 4;
-	id_tag = "bee_star";
-	pixel_x = 16;
-	pixel_y = -26
-	},
-/turf/space,
-/area/space)
 "rp" = (
 /obj/effect/wallframe_spawn/reinforced,
 /obj/machinery/door/firedoor,
@@ -5081,7 +5085,7 @@
 	},
 /obj/machinery/power/apc{
 	dir = 4;
-	pixel_w = 1
+	pixel_x = 22
 	},
 /obj/structure/cable{
 	icon_state = "0-8"
@@ -5113,7 +5117,7 @@
 	dir = 5
 	},
 /obj/machinery/keycard_auth{
-	dir = 2
+	pixel_y = 28
 	},
 /turf/simulated/floor/tiled/dark,
 /area/ship/trade/command/bridge)
@@ -5235,8 +5239,7 @@
 /obj/machinery/button/access/interior{
 	dir = 4;
 	id_tag = "bee_port";
-	pixel_x = 0;
-	pixel_y = 0
+	pixel_x = -20
 	},
 /turf/simulated/floor/tiled/steel_ridged,
 /area/ship/trade/shuttle/outgoing/general)
@@ -5273,7 +5276,8 @@
 	dir = 4
 	},
 /obj/machinery/power/apc/high{
-	dir = 8
+	dir = 8;
+	pixel_x = -22
 	},
 /obj/structure/cable{
 	icon_state = "0-2"
@@ -5285,7 +5289,8 @@
 	dir = 4
 	},
 /obj/machinery/power/apc{
-	dir = 8
+	dir = 8;
+	pixel_x = -22
 	},
 /obj/structure/cable{
 	icon_state = "0-4"
@@ -5361,15 +5366,14 @@
 	icon_state = "0-8"
 	},
 /obj/structure/sign{
+	dir = 4;
 	icon_state = "radiation";
-	dir = 4
+	pixel_x = 32
 	},
 /turf/simulated/floor/plating,
 /area/ship/trade/shuttle/outgoing/engineering)
 "uL" = (
-/obj/structure/railing/mapped{
-	dir = 2
-	},
+/obj/structure/railing/mapped,
 /obj/effect/floor_decal/techfloor/orange{
 	dir = 6
 	},
@@ -5456,9 +5460,7 @@
 /obj/item/handcuffs,
 /obj/item/boombox,
 /obj/item/stack/tape_roll/barricade_tape/bureaucracy,
-/obj/machinery/keycard_auth{
-	dir = 2
-	},
+/obj/machinery/keycard_auth,
 /turf/simulated/floor/wood,
 /area/ship/trade/command/captain)
 "vS" = (
@@ -5484,10 +5486,11 @@
 "vY" = (
 /obj/structure/handrail,
 /obj/machinery/embedded_controller/radio/airlock/docking_port{
+	cycle_to_external_air = 1;
 	id_tag = "bee_port";
-	tag_pump_out_external = "bee_pump_out_external";
+	pixel_y = 24;
 	tag_interior_sensor = "bee_interior_sensor";
-	cycle_to_external_air = 1
+	tag_pump_out_external = "bee_pump_out_external"
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/cyan{
 	dir = 6
@@ -5533,7 +5536,7 @@
 /area/ship/trade/maintenance/atmos)
 "wL" = (
 /obj/item/mollusc/barnacle{
-	pixel_w = -15
+	pixel_x = -15
 	},
 /turf/space,
 /area/space)
@@ -5639,8 +5642,8 @@
 /obj/machinery/door/airlock/hatch,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/structure/sign{
-	icon_state = "radiation";
-	dir = 4
+	dir = 4;
+	icon_state = "radiation"
 	},
 /obj/structure/cable{
 	icon_state = "1-2"
@@ -5649,7 +5652,7 @@
 /area/ship/trade/shuttle/outgoing/engineering)
 "xX" = (
 /obj/item/mollusc/barnacle{
-	pixel_w = 17
+	pixel_x = 17
 	},
 /turf/space,
 /area/space)
@@ -5929,8 +5932,7 @@
 	},
 /obj/machinery/button/blast_door{
 	id_tag = "fmate";
-	pixel_w = -47;
-	pixel_x = 25;
+	pixel_x = 22;
 	pixel_y = -2
 	},
 /turf/simulated/floor/wood,
@@ -5978,9 +5980,7 @@
 /obj/structure/railing/mapped{
 	dir = 8
 	},
-/obj/structure/railing/mapped{
-	dir = 2
-	},
+/obj/structure/railing/mapped,
 /obj/structure/catwalk,
 /obj/machinery/light/navigation{
 	color = "#ff3333"
@@ -6072,7 +6072,8 @@
 /area/ship/trade/shuttle/rescue)
 "Dl" = (
 /obj/machinery/power/apc{
-	name = "Medical Bay APC"
+	name = "Medical Bay APC";
+	pixel_y = -22
 	},
 /obj/structure/cable,
 /obj/machinery/icecream_vat,
@@ -6086,9 +6087,7 @@
 /obj/structure/railing/mapped{
 	dir = 4
 	},
-/obj/structure/railing/mapped{
-	dir = 2
-	},
+/obj/structure/railing/mapped,
 /obj/structure/catwalk,
 /obj/machinery/light/navigation{
 	color = "#00ff00"
@@ -6127,7 +6126,8 @@
 "DH" = (
 /obj/structure/handrail,
 /obj/machinery/airlock_sensor{
-	id_tag = "bee_port_sensor"
+	id_tag = "bee_port_sensor";
+	pixel_y = 24
 	},
 /obj/effect/floor_decal/industrial/warning{
 	dir = 8;
@@ -6159,7 +6159,8 @@
 	},
 /obj/machinery/power/apc{
 	dir = 1;
-	name = "Communications APC"
+	name = "Communications APC";
+	pixel_y = 22
 	},
 /obj/structure/cable{
 	icon_state = "0-2"
@@ -6196,7 +6197,8 @@
 /obj/random/hat,
 /obj/random/masks,
 /obj/machinery/power/apc{
-	dir = 8
+	dir = 8;
+	pixel_x = -22
 	},
 /obj/structure/cable{
 	icon_state = "0-6"
@@ -6385,9 +6387,7 @@
 /turf/simulated/floor/tiled/techmaint,
 /area/ship/trade/shieldbay)
 "GB" = (
-/obj/structure/railing/mapped{
-	dir = 2
-	},
+/obj/structure/railing/mapped,
 /obj/effect/floor_decal/techfloor/orange{
 	dir = 10
 	},
@@ -6420,7 +6420,7 @@
 /obj/structure/sign/directions/medical{
 	dir = 1;
 	pixel_x = 30;
-	pixel_z = 4
+	pixel_y = 4
 	},
 /obj/effect/decal/cleanable/dirt,
 /turf/simulated/floor/tiled/techmaint,
@@ -6686,13 +6686,14 @@
 	},
 /obj/machinery/power/apc{
 	dir = 1;
-	name = "Docking Area APC"
+	name = "Docking Area APC";
+	pixel_y = 22
 	},
 /turf/simulated/floor/tiled/monotile,
 /area/ship/trade/dock)
 "JA" = (
 /obj/machinery/keycard_auth{
-	dir = 2
+	pixel_y = 28
 	},
 /turf/simulated/floor/carpet,
 /area/ship/trade/command/fmate)
@@ -6797,14 +6798,12 @@
 	id_tag = "bee_star_pump_out_internal"
 	},
 /obj/structure/emergency_dispenser/west{
-	pixel_x = 0
+	pixel_x = 32
 	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/ship/trade/shuttle/outgoing/general)
 "KA" = (
-/obj/structure/railing/mapped{
-	dir = 2
-	},
+/obj/structure/railing/mapped,
 /obj/structure/handrail{
 	dir = 8
 	},
@@ -7006,7 +7005,8 @@
 	},
 /obj/machinery/power/apc{
 	dir = 1;
-	name = "Washroom APC"
+	name = "Washroom APC";
+	pixel_y = 22
 	},
 /obj/structure/cable{
 	icon_state = "0-4"
@@ -7202,7 +7202,8 @@
 	icon_state = "0-4"
 	},
 /obj/machinery/power/apc{
-	dir = 8
+	dir = 8;
+	pixel_x = -22
 	},
 /obj/structure/table,
 /turf/simulated/floor/plating,
@@ -7293,7 +7294,7 @@
 	opacity = 0
 	},
 /obj/item/mollusc/barnacle{
-	pixel_z = -11
+	pixel_y = -11
 	},
 /turf/simulated/floor/airless,
 /area/ship/trade/command/captain)
@@ -7335,7 +7336,7 @@
 	dir = 4
 	},
 /obj/machinery/keycard_auth{
-	dir = 2
+	pixel_y = 28
 	},
 /turf/simulated/floor/tiled/dark,
 /area/ship/trade/command/bridge)
@@ -7348,7 +7349,8 @@
 /obj/structure/table,
 /obj/structure/cable,
 /obj/machinery/power/apc{
-	name = "Medical Bay APC"
+	name = "Medical Bay APC";
+	pixel_y = -22
 	},
 /obj/machinery/light_switch{
 	pixel_x = -25
@@ -7390,7 +7392,8 @@
 	},
 /obj/machinery/power/apc{
 	dir = 4;
-	name = "Captain's Quarters APC"
+	name = "Captain's Quarters APC";
+	pixel_x = 22
 	},
 /obj/item/chems/drinks/glass2/coffeecup/one,
 /obj/machinery/firealarm{
@@ -7593,7 +7596,7 @@
 	dir = 8
 	},
 /obj/machinery/light_switch{
-	pixel_w = 27
+	pixel_x = 27
 	},
 /obj/structure/sign{
 	icon_state = "radiation";
@@ -7690,7 +7693,6 @@
 	id_tag = "bee_port_pump_out_internal"
 	},
 /obj/structure/emergency_dispenser/west{
-	pixel_x = 0;
 	dir = 4
 	},
 /turf/simulated/floor/tiled/techfloor/grid,
@@ -7759,8 +7761,9 @@
 /obj/random/closet,
 /obj/item/storage/backpack/dufflebag,
 /obj/machinery/airlock_sensor{
+	dir = 8;
 	id_tag = "bee_interior_sensor";
-	dir = 8
+	pixel_x = 22
 	},
 /turf/simulated/floor/tiled/steel_ridged,
 /area/ship/trade/shuttle/outgoing/general)
@@ -8008,7 +8011,8 @@
 	icon_state = "0-4"
 	},
 /obj/machinery/power/apc{
-	dir = 1
+	dir = 1;
+	pixel_y = 22
 	},
 /obj/structure/bed/padded,
 /obj/abstract/landmark/start{
@@ -8127,7 +8131,8 @@
 /obj/item/cell/device/standard,
 /obj/item/cell/device/standard,
 /obj/machinery/power/apc{
-	dir = 8
+	dir = 8;
+	pixel_x = -22
 	},
 /obj/structure/cable{
 	icon_state = "0-4"
@@ -8138,9 +8143,7 @@
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/ship/trade/maintenance/power)
 "Zf" = (
-/obj/structure/railing/mapped{
-	dir = 2
-	},
+/obj/structure/railing/mapped,
 /obj/structure/handrail{
 	dir = 4
 	},
@@ -10750,7 +10753,7 @@ bA
 bI
 bA
 aa
-rn
+aa
 aa
 aa
 aa
