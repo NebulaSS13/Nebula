@@ -2044,6 +2044,12 @@
 /obj/item/inflatable_dispenser,
 /turf/simulated/floor/tiled/techfloor,
 /area/ship/trade/maintenance/techstorage)
+"iQ" = (
+/obj/machinery/light{
+	dir = 1
+	},
+/turf/simulated/floor/reinforced,
+/area/ship/trade/artifact_storage)
 "iS" = (
 /obj/abstract/level_data_spawner/main_level{
 	name = "Tradeship Cargo Deck"
@@ -2251,6 +2257,7 @@
 /area/ship/trade/maintenance/techstorage)
 "nG" = (
 /obj/machinery/artifact_scanpad,
+/obj/machinery/light,
 /turf/simulated/floor/tiled/white,
 /area/ship/trade/artifact_storage)
 "od" = (
@@ -5722,7 +5729,7 @@ Mx
 ah
 ah
 aP
-lD
+iQ
 lD
 lD
 sB
