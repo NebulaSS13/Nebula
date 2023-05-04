@@ -122,7 +122,7 @@
 /obj/machinery/media/jukebox/proc/emag_play()
 	playsound(loc, 'sound/items/AirHorn.ogg', 100, 1)
 	for(var/mob/living/carbon/carbon_hearer in ohearers(6, src))
-		if(istype(carbon_hearer, /mob/living/carbon/human))
+		if(ishuman(carbon_hearer))
 			var/mob/living/carbon/human/human_hearer = carbon_hearer
 			if(human_hearer.get_sound_volume_multiplier() < 0.2)
 				continue

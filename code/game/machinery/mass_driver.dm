@@ -31,7 +31,7 @@
 	var/turf/our_turf = get_turf(src)
 	if(!istype(our_turf)) // don't fire in nullspace or in a closet etc
 		return
-	for(var/atom/movable/movable_to_throw in our_turf.get_contained_external_atoms())
+	for(var/atom/movable/movable_to_throw as anything in our_turf.get_contained_external_atoms())
 		if(!movable_to_throw.anchored)
 			if(++thrown_count >= 20)
 				audible_message(SPAN_NOTICE("The mass driver lets out a screech, it must not be able to handle any more items."), SPAN_NOTICE("The mass driver shudders and strains!"))

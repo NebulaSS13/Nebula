@@ -51,7 +51,7 @@
 		var/is_in_use = 0
 		var/list/nearby = viewers(1, src) | usr
 		for(var/mob/mob_viewer in nearby)
-			if ((mob_viewer.client && mob_viewer.machine == src))
+			if (mob_viewer.client && mob_viewer.machine == src)
 				if(CanUseTopic(mob_viewer, DefaultTopicState()) > STATUS_CLOSE)
 					is_in_use = 1
 					interact(mob_viewer)

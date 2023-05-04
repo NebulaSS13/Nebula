@@ -95,13 +95,15 @@
 						visible_emote("stares at the [movement_target] that [movement_target.loc] has with sad puppy eyes.")
 
 		if(prob(1))
-			INVOKE_ASYNC(src, .proc/dance)
+			dance(18)
 
 /mob/living/simple_animal/corgi/proc/dance(ticks)
+	set waitfor = FALSE
 	visible_emote(pick("dances around.","chases their tail."))
-	var/static/list/routine = list(1,2,4,8,4,2) // repeats
-	for(var/i in 1 to ticks)
-		set_dir(routine[i % length(routine)])
+	var/static/list/routine = list(NORTH,SOUTH,EAST,WEST,EAST,SOUTH) // repeats
+	var/step_count = length(routine)
+	for(var/i in 0 to ticks)
+		set_dir(routine[1 + (i % step_count)])
 		sleep(1)
 		if(QDELETED(src) || client) // stop dancing if we don't exist or are player controlled
 			return

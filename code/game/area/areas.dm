@@ -320,7 +320,7 @@ var/global/list/areas = list()
 var/global/list/mob/living/forced_ambiance_list = new
 
 /area/Entered(atom/movable/enterer)
-	if(!istype(enterer,/mob/living))
+	if(!isliving(enterer))
 		return
 	var/mob/living/living_enterer = enterer
 	if(!living_enterer.lastarea)
