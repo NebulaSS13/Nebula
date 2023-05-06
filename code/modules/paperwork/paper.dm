@@ -53,7 +53,7 @@
 
 /**Creates a complete copy of this object */
 /obj/item/paper/proc/Clone()
-	var/obj/item/paper/P = new(loc, , info, name)
+	var/obj/item/paper/P = new(loc, material?.type, info, name)
 	P.fields             = fields
 	P.last_modified_ckey = last_modified_ckey
 	P.rigged             = rigged
@@ -409,7 +409,7 @@
 		if(!user.canUnEquip(other))
 			to_chat(user, SPAN_WARNING("You can't unequip \the [other]!"))
 			return
-		user.unEquip(src, B) 
+		user.unEquip(src, B)
 		user.unEquip(other, B)
 
 	if (name != initial(name))
