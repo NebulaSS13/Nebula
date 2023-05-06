@@ -15,6 +15,9 @@
 	//Handle temperature/pressure differences between body and environment
 	handle_environment(loc.return_air())
 
+	if(stat != DEAD)
+		handle_nutrition_and_hydration()
+
 	blinded = 0 // Placing this here just show how out of place it is.
 	// human/handle_regular_status_updates() needs a cleanup, as blindness should be handled in handle_disabilities()
 	handle_regular_status_updates() // Status & health update, are we dead or alive etc.
@@ -37,6 +40,29 @@
 	handle_status_effects()
 
 	return 1
+
+/mob/living/proc/handle_nutrition_and_hydration()
+	SHOULD_CALL_PARENT(TRUE)
+	var/nut =    get_nutrition()
+	var/maxnut = get_max_nutrition()
+	if(nut < (maxnut * 0.3))
+		add_stressor(/datum/stressor/hungry_very, STRESSOR_DURATION_INDEFINITE)
+	else
+		remove_stressor(/datum/stressor/hungry_very)
+		if(nut < (maxnut * 0.5))
+			add_stressor(/datum/stressor/hungry, STRESSOR_DURATION_INDEFINITE)
+		else
+			remove_stressor(/datum/stressor/hungry)
+	var/hyd =    get_hydration()
+	var/maxhyd = get_max_hydration()
+	if(hyd < (maxhyd * 0.3))
+		add_stressor(/datum/stressor/thirsty_very, STRESSOR_DURATION_INDEFINITE)
+	else
+		remove_stressor(/datum/stressor/thirsty_very)
+		if(hyd < (maxhyd * 0.5))
+			add_stressor(/datum/stressor/thirsty, STRESSOR_DURATION_INDEFINITE)
+		else
+			remove_stressor(/datum/stressor/thirsty)
 
 /mob/living/proc/handle_breathing()
 	return

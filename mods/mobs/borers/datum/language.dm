@@ -25,6 +25,6 @@
 			if(B.host.nutrition < 50 || B.host.stat)
 				to_chat(speaker, SPAN_WARNING("Your host is too weak to relay your broadcast."))
 				return FALSE
-			B.host.nutrition -= rand(1, 3)
+			B.host.adjust_nutrition(-(rand(1, 3)))
 		speaker_mask = B.truename
 	..(speaker,message,speaker_mask)

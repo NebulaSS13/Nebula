@@ -103,7 +103,7 @@
 
 /mob/living/carbon/human/proc/handle_stamina()
 	if((world.time - last_quick_move_time) > 5 SECONDS)
-		var/mod = (lying + (nutrition / initial(nutrition))) / 2
+		var/mod = (lying + (nutrition / get_max_nutrition())) / 2
 		adjust_stamina(max(config.minimum_stamina_recovery, config.maximum_stamina_recovery * mod) * (1 + GET_CHEMICAL_EFFECT(src, CE_ENERGETIC)))
 
 /mob/living/carbon/human/set_stat(var/new_stat)
@@ -612,18 +612,19 @@
 					total_contamination += vsc.contaminant_control.CONTAMINATION_LOSS
 			adjustToxLoss(total_contamination)
 
-		// nutrition decrease
-		if(nutrition > 0)
-			adjust_nutrition(-species.hunger_factor)
-		if(hydration > 0)
-			adjust_hydration(-species.thirst_factor)
-
 		if(stasis_value > 1 && GET_STATUS(src, STAT_DROWSY) < stasis_value * 4)
 			ADJ_STATUS(src, STAT_DROWSY, min(stasis_value, 3))
 			if(!stat && prob(1))
 				to_chat(src, "<span class='notice'>You feel slow and sluggish...</span>")
 
 	return 1
+
+/mob/living/carbon/human/handle_nutrition_and_hydration()
+	if(nutrition > 0)
+		adjust_nutrition(-species.hunger_factor)
+	if(hydration > 0)
+		adjust_hydration(-species.thirst_factor)
+	..()
 
 /mob/living/carbon/human/handle_regular_hud_updates()
 	if(hud_updateflag) // update our mob's hud overlays, AKA what others see flaoting above our head

@@ -300,6 +300,9 @@
 			powerlevel = 10
 			adjustToxLoss(-10)
 
+/mob/living/slime/get_nutrition()
+	return nutrition
+
 /mob/living/slime/adjust_nutrition(var/amt)
 	nutrition = clamp(nutrition + amt, 0, get_max_nutrition())
 
