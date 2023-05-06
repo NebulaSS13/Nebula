@@ -620,7 +620,7 @@
 			to_chat(usr, "Nothing to remove.")
 			return
 		var/datum/stressor/stressor = input("Select a stressor to remove.", "Remove Stressor") as null|anything in L.stressors
-		if(stressor && (stressor in L.stressors) && L.remove_stressor(stressor))
+		if(L.remove_stressor(stressor))
 			log_and_message_admins("removed [stressor] from \the [src].")
 
 	else if(href_list["setmaterial"])

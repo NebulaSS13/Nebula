@@ -7,11 +7,6 @@ SUBSYSTEM_DEF(misc_late)
 
 /datum/controller/subsystem/misc_late/Initialize()
 
-	// Temp: create stressor tree.
-	for(var/stressor in subtypesof(/datum/stressor))
-		SSmanaged_instances.get(stressor, cache_category = /datum/stressor)
-
-	global.using_map.build_exoplanets()
 	var/decl/asset_cache/asset_cache = GET_DECL(/decl/asset_cache)
 	asset_cache.load()
 

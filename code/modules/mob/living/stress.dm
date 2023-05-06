@@ -1,4 +1,4 @@
-#define GET_STRESSOR(S) (istype(S, /datum/stressor) ? S : SSmanaged_instances.get(cache_id = S, cache_category = /datum/stressor))
+#define GET_STRESSOR(S) (istype(S, /datum/stressor) ? S : SSmanaged_instances.get(S, cache_category = /datum/stressor))
 
 /mob/living/proc/get_stress_modifier()
 	if(!config.adjust_healing_from_stress)

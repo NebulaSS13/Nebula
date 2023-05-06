@@ -24,10 +24,11 @@ SUBSYSTEM_DEF(managed_instances)
 		_managed_instance_cache[cache_category] = category_list
 
 	if(!.)
-		var/datum/managed_instance
-		LAZYINITLIST(instance_args)
-		managed_instance = new instance_type(arglist(instance_args))
+		// arglist() does not enjoy dealing with New(), so if you want a managed
+		// movable atom you'll have to place it manually after it initializes.
+		var/datum/managed_instance = new instance_type
 		category_list[cache_id] = managed_instance
+		LAZYINITLIST(instance_args)
 		instance_args.Insert(1, cache_id)
 		managed_instance.ManagedInstanceInitialize(arglist(instance_args)) // We do this after storing to avoid circular creation loops.
 		if(QDELETED(managed_instance))
