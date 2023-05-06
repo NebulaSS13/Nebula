@@ -40,10 +40,10 @@
 
 /datum/stressor/ManagedInstanceInitialize()
 	for(var/stressor_id in incompatible_with_stressors)
-		incompatible_with_stressors += SSmanaged_instances.get(cache_id = stressor_id, cache_category = /datum/stressor)
+		incompatible_with_stressors += SSmanaged_instances.get(stressor_id, cache_category = /datum/stressor)
 		incompatible_with_stressors -= stressor_id
 	for(var/stressor_id in suppress_stressors)
-		suppress_stressors += SSmanaged_instances.get(cache_id = stressor_id, cache_category = /datum/stressor)
+		suppress_stressors += SSmanaged_instances.get(stressor_id, cache_category = /datum/stressor)
 		suppress_stressors -= stressor_id
 
 /datum/stressor/Destroy(force)
