@@ -92,8 +92,8 @@
 	},
 /obj/machinery/button/access/exterior/cabled{
 	dir = 1;
-	icon_state = "button";
-	id_tag = "solars"
+	id_tag = "solars";
+	pixel_y = -22
 	},
 /turf/simulated/floor/reinforced/airless,
 /area/space)
@@ -150,7 +150,9 @@
 	},
 /obj/machinery/portable_atmospherics/canister/air/airlock,
 /obj/effect/floor_decal/industrial/outline/yellow,
-/obj/structure/sign/warning/airlock,
+/obj/structure/sign/warning/airlock{
+	pixel_y = 32
+	},
 /turf/simulated/floor/plating,
 /area/ship/trade/maintenance/solars)
 "au" = (
@@ -171,8 +173,6 @@
 /obj/machinery/embedded_controller/radio/airlock/airlock_controller{
 	dir = 8;
 	id_tag = "solars";
-	pixel_x = 0;
-	pixel_y = 0;
 	tag_airpump = "solars_pump";
 	tag_chamber_sensor = "solars_sensor";
 	tag_exterior_door = "solars_out";
@@ -251,8 +251,7 @@
 /obj/effect/floor_decal/industrial/outline/yellow,
 /obj/machinery/button/access/interior{
 	id_tag = "solars";
-	pixel_x = 0;
-	pixel_y = 0
+	pixel_y = 24
 	},
 /turf/simulated/floor/plating,
 /area/ship/trade/maintenance/solars)
@@ -449,7 +448,7 @@
 "bc" = (
 /obj/machinery/door/firedoor,
 /obj/structure/sign/warning/fall{
-	pixel_w = 32
+	pixel_x = 32
 	},
 /obj/structure/cable{
 	icon_state = "1-2"
@@ -462,7 +461,7 @@
 /area/space)
 "be" = (
 /obj/machinery/light_switch{
-	pixel_w = 24
+	pixel_x = 24
 	},
 /obj/structure/cable{
 	icon_state = "1-2"
@@ -510,7 +509,9 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
 	},
-/obj/machinery/power/apc,
+/obj/machinery/power/apc{
+	pixel_y = -22
+	},
 /obj/structure/cable{
 	icon_state = "0-8"
 	},
@@ -568,8 +569,8 @@
 /area/ship/trade/bridge_unused)
 "dm" = (
 /obj/abstract/level_data_spawner/main_level{
-	name = "Tradeship Upper Deck";
-},
+	name = "Tradeship Upper Deck"
+	},
 /turf/space,
 /area/space)
 "dq" = (
@@ -697,7 +698,7 @@
 /area/space)
 "mW" = (
 /obj/item/mollusc/barnacle{
-	pixel_w = -17
+	pixel_x = -17
 	},
 /turf/simulated/floor/reinforced/airless,
 /area/space)
@@ -1035,13 +1036,13 @@
 	dir = 8
 	},
 /obj/structure/sign/warning/fall{
-	pixel_w = -32
+	pixel_x = -32
 	},
 /turf/simulated/floor/plating,
 /area/ship/trade/maintenance/solars)
 "NY" = (
 /obj/item/mollusc/barnacle{
-	pixel_w = 16
+	pixel_x = 16
 	},
 /turf/simulated/floor/reinforced/airless,
 /area/space)

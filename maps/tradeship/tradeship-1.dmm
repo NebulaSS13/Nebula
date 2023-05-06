@@ -87,7 +87,7 @@
 /obj/machinery/embedded_controller/radio/airlock/docking_port{
 	dir = 4;
 	id_tag = "cargo";
-	pixel_x = 0;
+	pixel_x = -22;
 	tag_airpump = "cargo_pump";
 	tag_chamber_sensor = "cargo_sensor";
 	tag_exterior_door = "cargo_out";
@@ -178,14 +178,15 @@
 /obj/machinery/airlock_sensor{
 	dir = 8;
 	id_tag = "cargo_sensor";
-	pixel_x = 0
+	pixel_x = 22
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden,
 /turf/simulated/floor/plating,
 /area/ship/trade/cargo/lower)
 "aw" = (
 /obj/machinery/power/apc{
-	dir = 1
+	dir = 1;
+	pixel_y = 22
 	},
 /obj/effect/floor_decal/corner/yellow{
 	dir = 6
@@ -198,8 +199,8 @@
 /obj/machinery/portable_atmospherics/canister/air/airlock,
 /obj/machinery/button/access/interior{
 	dir = 8;
-	icon_state = "button";
-	id_tag = "tradeship_starboard_dock"
+	id_tag = "tradeship_starboard_dock";
+	pixel_x = 20
 	},
 /turf/simulated/floor/tiled/techfloor,
 /area/ship/trade/maintenance/eva)
@@ -317,9 +318,7 @@
 	},
 /obj/machinery/portable_atmospherics/canister/air/airlock,
 /obj/machinery/button/access/interior{
-	id_tag = "cargo";
-	pixel_x = 0;
-	pixel_y = 0
+	id_tag = "cargo"
 	},
 /turf/simulated/floor/tiled/steel_grid,
 /area/ship/trade/cargo/lower)
@@ -329,7 +328,7 @@
 	},
 /obj/machinery/embedded_controller/radio/airlock/airlock_controller{
 	id_tag = "eva";
-	pixel_y = 0;
+	pixel_y = 24;
 	tag_airpump = "eva_pump";
 	tag_chamber_sensor = "eva_sensor";
 	tag_exterior_door = "eva_out";
@@ -356,9 +355,8 @@
 	},
 /obj/effect/floor_decal/industrial/warning,
 /obj/machinery/airlock_sensor{
-	dir = 2;
 	id_tag = "eva_sensor";
-	pixel_y = 0
+	pixel_y = 24
 	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/ship/trade/maintenance/eva)
@@ -386,7 +384,6 @@
 	},
 /obj/machinery/button/access/exterior{
 	dir = 4;
-	icon_state = "button";
 	id_tag = "eva";
 	pixel_x = 12;
 	pixel_y = 24
@@ -489,7 +486,8 @@
 	pixel_x = 24
 	},
 /obj/machinery/power/apc{
-	dir = 1
+	dir = 1;
+	pixel_y = 22
 	},
 /obj/structure/cable{
 	icon_state = "0-2";
@@ -513,7 +511,8 @@
 	dir = 9
 	},
 /obj/machinery/power/apc{
-	dir = 8
+	dir = 8;
+	pixel_x = -22
 	},
 /obj/effect/floor_decal/industrial/outline/yellow,
 /obj/machinery/light{
@@ -593,16 +592,16 @@
 /area/ship/trade/maintenance/lower)
 "bj" = (
 /obj/machinery/power/apc{
-	dir = 1
+	dir = 1;
+	pixel_y = 22
 	},
 /obj/structure/cable{
 	icon_state = "0-2";
 	pixel_y = 1
 	},
 /obj/machinery/light_switch{
-	pixel_w = 33;
-	pixel_x = -24;
-	pixel_z = 21
+	pixel_x = 9;
+	pixel_y = 21
 	},
 /obj/effect/floor_decal/corner/beige{
 	dir = 5
@@ -831,7 +830,8 @@
 	dir = 8
 	},
 /obj/structure/sign/warning/fall{
-	pixel_w = -31
+	dir = 4;
+	pixel_x = -34
 	},
 /turf/simulated/floor/tiled/monotile,
 /area/ship/trade/cargo/lower)
@@ -905,11 +905,10 @@
 	},
 /obj/machinery/power/apc{
 	dir = 4;
-	pixel_w = 1
+	pixel_x = 22
 	},
 /obj/machinery/light_switch{
-	pixel_w = -1;
-	pixel_z = 23
+	pixel_y = 23
 	},
 /obj/structure/table,
 /obj/item/integrated_circuit_printer,
@@ -967,9 +966,8 @@
 	pixel_y = 1
 	},
 /obj/machinery/light_switch{
-	pixel_w = 33;
-	pixel_x = -24;
-	pixel_z = 21
+	pixel_x = 9;
+	pixel_y = 21
 	},
 /obj/effect/floor_decal/corner/beige{
 	dir = 5
@@ -979,7 +977,8 @@
 /obj/random/clothing,
 /obj/effect/decal/cleanable/cobweb,
 /obj/machinery/power/apc{
-	dir = 1
+	dir = 1;
+	pixel_y = 22
 	},
 /obj/random/gloves,
 /turf/simulated/floor/lino,
@@ -1464,9 +1463,6 @@
 	pixel_x = -22
 	},
 /obj/machinery/portable_atmospherics/hydroponics,
-/obj/machinery/light_switch{
-	pixel_w = -23
-	},
 /obj/structure/emergency_dispenser/south,
 /turf/simulated/floor/tiled/white,
 /area/ship/trade/science)
@@ -1520,7 +1516,8 @@
 	dir = 4
 	},
 /obj/machinery/power/apc{
-	dir = 1
+	dir = 1;
+	pixel_y = 22
 	},
 /turf/simulated/floor/tiled,
 /area/ship/trade/maintenance/lower)
@@ -1665,9 +1662,8 @@
 /obj/item/tank/jetpack/oxygen,
 /obj/item/clothing/mask/breath,
 /obj/machinery/light_switch{
-	pixel_w = 33;
-	pixel_x = -24;
-	pixel_z = 21
+	pixel_x = 9;
+	pixel_y = 21
 	},
 /turf/simulated/floor/plating,
 /area/ship/trade/maintenance/eva)
@@ -1799,7 +1795,7 @@
 /obj/effect/decal/cleanable/dirt,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/machinery/light_switch{
-	pixel_w = 22
+	pixel_x = 22
 	},
 /obj/structure/cable{
 	icon_state = "1-2"
@@ -1832,7 +1828,8 @@
 /area/ship/trade/maintenance/techstorage)
 "eW" = (
 /obj/machinery/computer/cryopod{
-	dir = 8
+	dir = 8;
+	pixel_x = 24
 	},
 /obj/machinery/light{
 	dir = 4
@@ -1859,7 +1856,7 @@
 /obj/machinery/power/apc{
 	dir = 4;
 	name = "Engineering Supply Storage APC";
-	pixel_w = 1
+	pixel_x = 22
 	},
 /obj/machinery/vending/engineering{
 	dir = 1
@@ -1891,7 +1888,8 @@
 	icon_state = "bulb1"
 	},
 /obj/machinery/power/apc{
-	dir = 1
+	dir = 1;
+	pixel_y = 22
 	},
 /obj/machinery/alarm{
 	dir = 1;
@@ -2046,10 +2044,16 @@
 /obj/item/inflatable_dispenser,
 /turf/simulated/floor/tiled/techfloor,
 /area/ship/trade/maintenance/techstorage)
+"iQ" = (
+/obj/machinery/light{
+	dir = 1
+	},
+/turf/simulated/floor/reinforced,
+/area/ship/trade/artifact_storage)
 "iS" = (
 /obj/abstract/level_data_spawner/main_level{
-	name = "Tradeship Cargo Deck";
-},
+	name = "Tradeship Cargo Deck"
+	},
 /turf/space,
 /area/space)
 "iW" = (
@@ -2122,7 +2126,8 @@
 /area/ship/trade/crew/dorms1)
 "lb" = (
 /obj/machinery/power/apc{
-	dir = 1
+	dir = 1;
+	pixel_y = 22
 	},
 /obj/structure/cable{
 	icon_state = "0-2";
@@ -2252,6 +2257,7 @@
 /area/ship/trade/maintenance/techstorage)
 "nG" = (
 /obj/machinery/artifact_scanpad,
+/obj/machinery/light,
 /turf/simulated/floor/tiled/white,
 /area/ship/trade/artifact_storage)
 "od" = (
@@ -2333,9 +2339,8 @@
 	},
 /obj/machinery/fabricator,
 /obj/machinery/light_switch{
-	pixel_w = 33;
-	pixel_x = -24;
-	pixel_z = 21
+	pixel_x = 9;
+	pixel_y = 21
 	},
 /turf/simulated/floor/tiled/techfloor,
 /area/ship/trade/maintenance/techstorage)
@@ -2397,7 +2402,8 @@
 	pixel_y = 1
 	},
 /obj/machinery/power/apc{
-	dir = 1
+	dir = 1;
+	pixel_y = 22
 	},
 /obj/item/stool/padded,
 /turf/simulated/floor/plating,
@@ -2505,7 +2511,9 @@
 	dir = 4;
 	icon_state = "bulb1"
 	},
-/obj/machinery/power/apc,
+/obj/machinery/power/apc{
+	pixel_y = -22
+	},
 /obj/machinery/alarm{
 	pixel_y = 17
 	},
@@ -3078,7 +3086,7 @@
 /obj/machinery/door/airlock/hatch/autoname/general,
 /obj/machinery/door/firedoor,
 /obj/structure/sign/warning/fall{
-	pixel_w = 32
+	pixel_x = 32
 	},
 /turf/simulated/floor/tiled,
 /area/ship/trade/cargo/lower)
@@ -3196,7 +3204,7 @@
 /area/ship/trade/science)
 "Tp" = (
 /obj/item/mollusc/barnacle{
-	pixel_w = 18
+	pixel_x = 18
 	},
 /turf/simulated/floor/airless,
 /area/space)
@@ -5721,7 +5729,7 @@ Mx
 ah
 ah
 aP
-lD
+iQ
 lD
 lD
 sB

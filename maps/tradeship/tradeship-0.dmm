@@ -203,8 +203,7 @@
 /obj/machinery/button/access/interior{
 	dir = 1;
 	id_tag = "lower_cargo";
-	pixel_y = 0;
-	pixel_z = 0
+	pixel_y = -18
 	},
 /turf/simulated/floor/tiled/steel_grid,
 /area/ship/trade/loading_bay)
@@ -254,7 +253,7 @@
 /obj/machinery/airlock_sensor{
 	dir = 4;
 	id_tag = "lower_cargo_sensor";
-	pixel_x = 0
+	pixel_x = -22
 	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/ship/trade/loading_bay)
@@ -537,7 +536,7 @@
 /obj/machinery/embedded_controller/radio/airlock/airlock_controller{
 	dir = 8;
 	id_tag = "lower_cargo";
-	pixel_x = 0;
+	pixel_x = 22;
 	tag_airpump = "lower_cargo_pump";
 	tag_chamber_sensor = "lower_cargo_sensor";
 	tag_exterior_door = "lower_cargo_out";
@@ -736,7 +735,7 @@
 "bD" = (
 /obj/machinery/power/apc{
 	name = "south bump";
-	pixel_y = -24
+	pixel_y = -22
 	},
 /obj/structure/cable{
 	icon_state = "0-8"
@@ -956,7 +955,7 @@
 "bZ" = (
 /obj/machinery/power/apc{
 	name = "south bump";
-	pixel_y = -24
+	pixel_y = -22
 	},
 /obj/structure/cable{
 	icon_state = "1-4"
@@ -1377,7 +1376,7 @@
 /obj/item/storage/box/monkeycubes,
 /obj/item/circular_saw,
 /obj/structure/extinguisher_cabinet{
-	pixel_z = 29
+	pixel_y = 29
 	},
 /turf/simulated/floor/tiled/white,
 /area/ship/trade/livestock)
@@ -1511,7 +1510,7 @@
 "xZ" = (
 /obj/machinery/power/apc{
 	name = "south bump";
-	pixel_y = -24
+	pixel_y = -22
 	},
 /obj/structure/cable{
 	icon_state = "0-8"
@@ -1632,8 +1631,8 @@
 /area/ship/trade/fore_port_underside_maint)
 "Dt" = (
 /obj/abstract/level_data_spawner/main_level{
-	name = "Tradeship Basement Deck";
-},
+	name = "Tradeship Basement Deck"
+	},
 /turf/space,
 /area/space)
 "Dz" = (
@@ -1731,7 +1730,7 @@
 	},
 /obj/machinery/power/apc{
 	name = "south bump";
-	pixel_y = -24
+	pixel_y = -22
 	},
 /turf/simulated/floor/bluegrid,
 /area/ship/trade/undercomms)
@@ -1773,7 +1772,7 @@
 	},
 /obj/machinery/power/apc{
 	name = "south bump";
-	pixel_y = -24
+	pixel_y = -22
 	},
 /obj/structure/cable{
 	icon_state = "0-4"
@@ -1844,8 +1843,7 @@
 "Lx" = (
 /obj/machinery/power/apc{
 	dir = 4;
-	name = "south bump";
-	pixel_x = 24
+	pixel_x = 22
 	},
 /obj/structure/cable{
 	icon_state = "0-2";
@@ -2176,7 +2174,7 @@
 "Zz" = (
 /obj/machinery/power/apc{
 	name = "south bump";
-	pixel_y = -24
+	pixel_y = -22
 	},
 /obj/structure/cable{
 	icon_state = "0-4"
