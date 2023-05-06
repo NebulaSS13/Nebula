@@ -826,8 +826,20 @@ default behaviour is:
 /mob/living/proc/eyecheck()
 	return FLASH_PROTECTION_NONE
 
+/mob/living/proc/get_max_nutrition()
+	return 500
+
+/mob/living/proc/get_nutrition()
+	return get_max_nutrition()
+
 /mob/living/proc/adjust_nutrition(var/amt)
 	return
+
+/mob/living/proc/get_max_hydration()
+	return 500
+
+/mob/living/proc/get_hydration()
+	return get_max_hydration()
 
 /mob/living/proc/adjust_hydration(var/amt)
 	return

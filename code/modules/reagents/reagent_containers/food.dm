@@ -20,6 +20,7 @@
 	center_of_mass = @"{'x':16,'y':16}"
 	w_class = ITEM_SIZE_SMALL
 
+	var/cooked_food = FALSE // Indicates the food should give a positive stress effect on eating. This is set to true if the food is created by a recipe.
 	var/bitesize = 1
 	var/bitecount = 0
 	var/slice_path
@@ -50,6 +51,9 @@
 
 	//Placeholder for effect that trigger on eating that aren't tied to reagents.
 /obj/item/chems/food/proc/On_Consume(var/mob/M)
+	if(isliving(M) && cooked_food)
+		var/mob/living/eater = M
+		eater.add_stressor(/datum/stressor/ate_cooked_food, 15 MINUTES)
 	if(!reagents.total_volume)
 		M.visible_message("<span class='notice'>[M] finishes eating \the [src].</span>","<span class='notice'>You finish eating \the [src].</span>")
 		M.drop_item()

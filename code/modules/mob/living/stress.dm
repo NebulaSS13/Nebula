@@ -1,10 +1,12 @@
+#define GET_STRESSOR(S) (istype(S, /datum/stressor) ? S : SSmanaged_instances.get(cache_id = S, cache_category = /datum/stressor))
+
 /mob/living/proc/get_stress_modifier()
 	if(!config.adjust_healing_from_stress)
 		return 0
 	return stress
 
 /mob/living/proc/add_stressor(var/stressor_id, duration)
-	var/datum/stressor/stressor = istype(stressor_id, /datum/stressor) ? stressor_id : SSmanaged_instances.get(cache_id = stressor_id, cache_category = /datum/stressor)
+	var/datum/stressor/stressor = GET_STRESSOR(stressor_id)
 	if(length(stressor.incompatible_with_stressors))
 		for(var/datum/stressor/other_stressor in stressor.incompatible_with_stressors)
 			if(other_stressor in stressors)
@@ -16,7 +18,7 @@
 	return TRUE
 
 /mob/living/proc/remove_stressor(var/stressor_id)
-	var/datum/stressor/stressor = istype(stressor_id, /datum/stressor) ? stressor_id : SSmanaged_instances.get(cache_id = stressor_id, cache_category = /datum/stressor)
+	var/datum/stressor/stressor = GET_STRESSOR(stressor_id)
 	if(stressor in stressors)
 		stressor.remove_from(src)
 		return TRUE
@@ -48,6 +50,10 @@
 	set category = "IC"
 	set src = usr
 
+	if(incapacitated(INCAPACITATION_KNOCKOUT))
+		to_chat(src, SPAN_WARNING("You are in no state for accurate self-assessment."))
+		return
+
 	if(length(stressors))
 
 		var/list/suppressed = list()
@@ -66,6 +72,7 @@
 			else
 				to_chat(src, "[SPAN_NEUTRAL("...[stressor.desc]")]")
 
+	// TODO: less loaded/more informative terminology
 	var/stress_string
 	if(stress <= -1)
 		stress_string = "extremely relaxed"
@@ -82,3 +89,5 @@
 	else
 		stress_string = "neither stressed nor relaxed"
 	to_chat(src, SPAN_NEUTRAL("Overall, you are feeling [stress_string]."))
+
+#undef GET_STRESSOR
