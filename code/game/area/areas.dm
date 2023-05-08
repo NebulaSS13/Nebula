@@ -58,6 +58,8 @@ var/global/list/areas = list()
 
 	var/tmp/is_outside = OUTSIDE_NO
 
+	var/tmp/saved_map_hash // Used for cleanup when loaded via map templates.
+
 /area/New()
 	icon_state = ""
 	uid = ++global_uid

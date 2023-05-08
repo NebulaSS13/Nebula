@@ -45,18 +45,20 @@
 	if(!isnull(shuttle_area))
 		if(!islist(shuttle_area))
 			shuttle_area = list(shuttle_area)
-		for(var/T in shuttle_area)
-			if(istype(T, /area)) // If the shuttle area is already a type, it does not need to be located.
-				areas += T
+		for(var/area_type in shuttle_area)
+			if(istype(area_type, /area)) // If the shuttle area is already an instance, it does not need to be located.
+				areas += area_type
+				events_repository.register(/decl/observ/destroyed, area_type, src, .proc/remove_shuttle_area)
 				continue
 			var/area/A
 			if(map_hash && islist(SSshuttle.map_hash_to_areas[map_hash]))
-				A = SSshuttle.map_hash_to_areas[map_hash][T] // We try to find the correct area of the given type.
+				A = SSshuttle.map_hash_to_areas[map_hash][area_type] // We try to find the correct area of the given type.
 			else
-				A = locate(T) // But if this is a mainmap shuttle, there is only one anyway so just find it.
+				A = locate(area_type) // But if this is a mainmap shuttle, there is only one anyway so just find it.
 			if(!istype(A))
-				CRASH("Shuttle \"[name]\" couldn't locate area [T].")
+				CRASH("Shuttle \"[name]\" couldn't locate area [area_type].")
 			areas += A
+			events_repository.register(/decl/observ/destroyed, A, src, .proc/remove_shuttle_area)
 		shuttle_area = areas
 
 	if(initial_location)
@@ -77,6 +79,13 @@
 		if(SSsupply.shuttle)
 			CRASH("A supply shuttle is already defined.")
 		SSsupply.shuttle = src
+
+/datum/shuttle/proc/remove_shuttle_area(area/area_to_remove)
+	events_repository.unregister(/decl/observ/destroyed, area_to_remove, src, .proc/remove_shuttle_area)
+	SSshuttle.shuttle_areas -= area_to_remove
+	shuttle_area -= area_to_remove
+	if(!length(shuttle_area))
+		qdel(src)
 
 /datum/shuttle/Destroy()
 	current_location = null

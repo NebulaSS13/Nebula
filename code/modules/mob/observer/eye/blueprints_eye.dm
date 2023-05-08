@@ -55,7 +55,7 @@
 	var/area_name = sanitize_safe(input("New area name:","Area Creation", ""), MAX_NAME_LEN)
 	if(!area_name || !length(area_name))
 		return
-	if(length(area_name) > 50)
+	if(length(area_name) > MAX_NAME_LEN)
 		to_chat(owner, SPAN_WARNING("That name is too long!"))
 		return
 
@@ -65,13 +65,17 @@
 
 	var/area/A = new
 	A.SetName(area_name)
-	A.power_equip = 0
-	A.power_light = 0
-	A.power_environ = 0
-	A.always_unpowered = 0
 	for(var/turf/T in selected_turfs)
 		ChangeArea(T, A)
+	finalize_area(A)
 	remove_selection() // Reset the selection for clarity.
+
+/mob/observer/eye/blueprints/proc/finalize_area(area/A)
+	A.power_equip = FALSE
+	A.power_light = FALSE
+	A.power_environ = FALSE
+	A.always_unpowered = FALSE
+	return A
 
 /mob/observer/eye/blueprints/proc/remove_area()
 	var/area/A = get_area(src)
@@ -82,8 +86,13 @@
 		return
 	to_chat(owner, SPAN_NOTICE("You scrub [A.proper_name] off the blueprints."))
 	log_and_message_admins("deleted area [A.proper_name] via station blueprints.")
+	var/turf/our_turf = get_turf(src)
+	var/datum/level_data/our_level_data = SSmapping.levels_by_z[our_turf.z]
+	var/area/base_area = our_level_data.get_base_area_instance()
 	for(var/turf/T in A.contents)
-		ChangeArea(T, global.space_area)
+		ChangeArea(T, base_area)
+	if(!(locate(/turf) in A))
+		qdel(A) // uh oh, is this safe?
 
 /mob/observer/eye/blueprints/proc/edit_area()
 	var/area/A = get_area(src)
@@ -93,7 +102,7 @@
 	var/new_area_name = sanitize_safe(input("Edit area name:","Area Editing", prevname), MAX_NAME_LEN)
 	if(!new_area_name || !LAZYLEN(new_area_name) || new_area_name==prevname)
 		return
-	if(length(new_area_name) > 50)
+	if(length(new_area_name) > MAX_NAME_LEN)
 		to_chat(owner, SPAN_WARNING("Text too long."))
 		return
 	new_area_name = replacetext(new_area_name, regex(@"^the "), "\improper ")
@@ -170,7 +179,8 @@
 	if(!(A.area_flags & AREA_FLAG_IS_BACKGROUND)) // Cannot create new areas over old ones.
 		LAZYDISTINCTADD(errors, "selection overlaps other area")
 		. = FALSE
-	if(istype(T, (A.base_turf ? A.base_turf : /turf/space)))
+	var/datum/level_data/our_level_data = SSmapping.levels_by_z[T.z]
+	if(istype(T, (A.base_turf ? A.base_turf : our_level_data.base_turf)))
 		LAZYDISTINCTADD(errors, "selection is exposed to the outside")
 		. = FALSE
 
@@ -269,5 +279,53 @@
 
 /mob/observer/eye/blueprints/additional_sight_flags()
 	return SEE_TURFS|BLIND
+
+// Shuttle blueprints eye
+/mob/observer/eye/blueprints/shuttle
+	var/shuttle_name
+
+/mob/observer/eye/blueprints/shuttle/Initialize(mapload, list/valid_zls, area_prefix, shuttle_name)
+	. = ..()
+	src.shuttle_name = shuttle_name
+
+/mob/observer/eye/blueprints/shuttle/check_modification_validity()
+	. = TRUE
+	var/area/A = get_area(src)
+	if(!(A.z in valid_z_levels))
+		to_chat(owner, SPAN_WARNING("The markings on this are entirely irrelevant to your whereabouts!"))
+		return FALSE
+	var/datum/shuttle/our_shuttle = SSshuttle.shuttles[shuttle_name]
+	if(!(A in our_shuttle.shuttle_area))
+		to_chat(owner, SPAN_WARNING("That's not a part of the [our_shuttle.display_name]!"))
+		return FALSE
+	if(!A || (A.area_flags & AREA_FLAG_IS_BACKGROUND))
+		to_chat(owner, SPAN_WARNING("This area is not marked on the blueprints!"))
+		return FALSE
+
+/mob/observer/eye/blueprints/shuttle/remove_area()
+	var/area/A = get_area(src)
+	if(!check_modification_validity())
+		return
+	if(A.apc)
+		to_chat(owner, SPAN_WARNING("You must remove the APC from this area before you can remove it from the blueprints!"))
+		return
+	var/datum/shuttle/our_shuttle = SSshuttle.shuttles[shuttle_name]
+	to_chat(owner, SPAN_NOTICE("You scrub [A.proper_name] off the blueprints."))
+	log_and_message_admins("deleted area [A.proper_name] from [our_shuttle.display_name] via shuttle blueprints.")
+	var/turf/our_turf = get_turf(src)
+	var/datum/level_data/our_level_data = SSmapping.levels_by_z[our_turf.z]
+	var/area/base_area = our_level_data.get_base_area_instance()
+	for(var/turf/T in A.contents)
+		ChangeArea(T, base_area)
+	if(!(locate(/turf) in A))
+		qdel(A) // uh oh, is this safe?
+
+/mob/observer/eye/blueprints/shuttle/finalize_area(area/A)
+	A = ..(A)
+	var/datum/shuttle/our_shuttle = SSshuttle.shuttles[shuttle_name]
+	our_shuttle.shuttle_area += A
+	SSshuttle.shuttle_areas += A
+	events_repository.register(/decl/observ/destroyed, A, our_shuttle, /datum/shuttle/proc/remove_shuttle_area)
+	return A
 
 #undef MAX_AREA_SIZE
