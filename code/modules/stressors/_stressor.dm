@@ -67,6 +67,8 @@
 
 /datum/stressor/proc/refresh(var/mob/living/owner, var/duration)
 	SHOULD_CALL_PARENT(TRUE)
+	if(!istype(owner) || !isnum(duration) || LAZYACCESS(owner.stressors, src) == duration)
+		return
 	LAZYINITLIST(owner.stressors)
 	if(duration == STRESSOR_DURATION_INDEFINITE)
 		owner.stressors[src] = STRESSOR_DURATION_INDEFINITE
@@ -78,7 +80,7 @@
 	SHOULD_CALL_PARENT(TRUE)
 	if(on_addition_message)
 		to_chat(owner, on_addition_message)
-	for(var/datum/stressor/stressor as anything in suppress_stressors)
+	for(var/stressor in suppress_stressors)
 		LAZYREMOVE(owner.stressors, stressor)
 	if(duration == STRESSOR_DURATION_INDEFINITE)
 		LAZYSET(owner.stressors, src, STRESSOR_DURATION_INDEFINITE)

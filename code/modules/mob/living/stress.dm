@@ -7,13 +7,13 @@
 
 /mob/living/proc/add_stressor(var/stressor_id, duration)
 	var/datum/stressor/stressor = GET_STRESSOR(stressor_id)
-	if(length(stressor.incompatible_with_stressors))
-		for(var/datum/stressor/other_stressor in stressor.incompatible_with_stressors)
-			if(other_stressor in stressors)
-				return FALSE
 	if(stressor in stressors)
 		stressor.refresh(src, duration)
 	else
+		if(length(stressor.incompatible_with_stressors))
+			for(var/datum/stressor/other_stressor in stressor.incompatible_with_stressors)
+				if(other_stressor in stressors)
+					return FALSE
 		stressor.add_to(src, duration)
 	return TRUE
 
