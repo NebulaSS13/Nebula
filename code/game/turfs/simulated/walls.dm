@@ -217,11 +217,16 @@ var/global/list/wall_fullblend_objects = list(
 
 	playsound(src, 'sound/items/Welder.ogg', 100, 1)
 	if(!no_product)
+		var/list/obj/structure/girder/placed_girders
 		if(girder_material)
-			girder_material.place_dismantled_girder(src, reinf_material)
+			placed_girders = girder_material.place_dismantled_girder(src, reinf_material)
 			material.place_dismantled_product(src,devastated)
 		else
-			material.place_dismantled_girder(src, reinf_material)
+			placed_girders = material.place_dismantled_girder(src, reinf_material)
+		for(var/obj/structure/girder/placed_girder in placed_girders)
+			placed_girder.anchored = TRUE
+			placed_girder.prepped_for_fakewall = can_open
+			placed_girder.update_icon()
 
 	for(var/obj/O in src.contents) //Eject contents!
 		if(istype(O,/obj/structure/sign/poster))
