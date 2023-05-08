@@ -24,9 +24,8 @@ SUBSYSTEM_DEF(managed_instances)
 		_managed_instance_cache[cache_category] = category_list
 
 	if(!.)
-		// arglist() does not enjoy dealing with New(), so if you want a managed
-		// movable atom you'll have to place it manually after it initializes.
-		var/datum/managed_instance = new instance_type
+		// arglist() passed to New() will runtime without at least one list entry.
+		var/datum/managed_instance = length(instance_args) ? (new instance_type(arglist(instance_args))) : (new instance_type)
 		category_list[cache_id] = managed_instance
 		LAZYINITLIST(instance_args)
 		instance_args.Insert(1, cache_id)
