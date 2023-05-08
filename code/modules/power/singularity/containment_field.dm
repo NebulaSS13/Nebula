@@ -22,6 +22,7 @@
 	. = ..()
 
 /obj/effect/containment_field/attack_hand(mob/user)
+	SHOULD_CALL_PARENT(FALSE)
 	return shock(user)
 
 /obj/effect/containment_field/explosion_act(severity)

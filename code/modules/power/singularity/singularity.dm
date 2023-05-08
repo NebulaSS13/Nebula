@@ -299,6 +299,7 @@ var/global/list/singularities = list()
 
 // Various overrides used to consume things interacting with the singularity.
 /obj/effect/singularity/attack_hand(mob/user)
+	SHOULD_CALL_PARENT(FALSE)
 	consume(user)
 	return TRUE
 
