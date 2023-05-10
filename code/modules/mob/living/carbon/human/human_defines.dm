@@ -26,23 +26,6 @@
 
 	var/obj/screen/default_attack_selector/attack_selector
 
-	//Equipment slots
-	// TODO REMOVE DIRECT REFERENCES
-	var/obj/item/_w_uniform
-	var/obj/item/_wear_suit
-	var/obj/item/_shoes
-	var/obj/item/_l_ear
-	var/obj/item/_r_ear
-	var/obj/item/_r_store
-	var/obj/item/_l_store
-	var/obj/item/_s_store
-	var/obj/item/_head
-	var/obj/item/_belt
-	var/obj/item/_gloves
-	var/obj/item/_glasses
-	var/obj/item/_wear_id
-	// END TODO
-
 	var/icon/stand_icon = null
 
 	var/voice = ""	//Instead of new say code calling GetVoice() over and over and over, we're just going to ask this variable, which gets updated in Life()

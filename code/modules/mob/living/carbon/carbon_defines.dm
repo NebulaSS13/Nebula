@@ -4,10 +4,6 @@
 
 	var/life_tick = 0      // The amount of life ticks that have processed on this mob.
 
-	// TODO REMOVE DIRECT REFERENCES
-	var/obj/item/_handcuffed = null //Whether or not the mob is cuffed
-	// END TODO
-
 	//Surgery info
 	//Active emote/pose
 	var/pose = null

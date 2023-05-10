@@ -332,29 +332,20 @@
 /obj/screen/inventory/Click()
 	// At this point in client Click() code we have passed the 1/10 sec check and little else
 	// We don't even know if it's a middle click
-	if(!usr.canClick())
-		return 1
-	if(usr.incapacitated())
-		return 1
+	if(!usr.canClick() || usr.incapacitated())
+		return TRUE
 
-	if(iscarbon(usr))
-		var/mob/living/carbon/C = usr
-		if(name in C.held_item_slots)
-			if(name == C.get_active_held_item_slot())
-				C.attack_empty_hand()
-			else
-				C.select_held_item_slot(name)
-			return TRUE
-
-	switch(name)
-		if("swap")
-			usr.swap_hand()
-		if("hand")
-			usr.swap_hand()
+	if(name == "swap" || name == "hand")
+		usr.swap_hand()
+	else if(name in usr.get_held_item_slots())
+		if(name == usr.get_active_held_item_slot())
+			usr.attack_empty_hand()
 		else
-			if(usr.attack_ui(slot_id))
-				usr.update_inv_hands(0)
-	return 1
+			usr.select_held_item_slot(name)
+	else if(usr.attack_ui(slot_id))
+		usr.update_inv_hands(0)
+
+	return TRUE
 
 // Character setup stuff
 /obj/screen/setup_preview

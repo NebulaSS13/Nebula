@@ -113,11 +113,6 @@
 	var/decl/move_intent/default_walk_intent
 	var/decl/move_intent/default_run_intent
 
-	// TODO: REMOVE DIRECT REFERENCES
-	var/obj/item/_back
-	var/obj/item/clothing/mask/_wear_mask
-	// END TODO
-
 	var/obj/item/storage/active_storage
 	var/obj/buckled = null//Living
 	var/in_throw_mode = 0

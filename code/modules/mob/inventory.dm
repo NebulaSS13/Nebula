@@ -41,7 +41,6 @@
 	SHOULD_CALL_PARENT(TRUE)
 	if(!istype(W) || isnull(slot))
 		return FALSE
-
 	unequip(W)
 	if(!isnum(slot))
 		var/datum/inventory_slot/inv_slot = get_inventory_slot_datum(slot)
@@ -50,49 +49,7 @@
 			if(W.action_button_name)
 				update_action_buttons()
 			return TRUE
-
-// Legacy code after this point.
-	var/obj/item/old_item = get_equipped_item(slot)
-	if(!set_item_equipped_legacy(W, slot, redraw_mob))
-		to_chat(src, SPAN_WARNING("You are trying to equip this item to an unsupported inventory slot. If possible, please write a ticket with steps to reproduce. Slot was: [slot]"))
-		return FALSE
-
-	W.forceMove(src)
-	W.hud_layerise()
-	set_equipment_screen_loc_legacy(W, slot)
-
-	if(W.action_button_name)
-		update_action_buttons()
-
-	// seamless replacement deletes the old item by default, but can be disabled for special handling
-	// like job items going into storage when replaced by loadout items
-	if(old_item)
-		unequip(old_item)
-		if(delete_old_item)
-			qdel(old_item)
-	return TRUE
-// End legacy code.
-
-/mob/proc/set_equipment_screen_loc_legacy(obj/item/W, slot)
-	W.screen_loc = null
-	var/decl/species/my_species = get_species()
-	for(var/s in my_species?.hud?.gear)
-		var/list/gear = my_species.hud.gear[s]
-		if(gear["slot"] == slot)
-			W.screen_loc = gear["loc"]
-
-/mob/proc/set_item_equipped_legacy(obj/item/W, slot, redraw_mob)
-	if(slot == slot_back_str)
-		_back = W
-		W.equipped(src, slot)
-		update_inv_back(redraw_mob)
-		return TRUE
-	if(slot == slot_wear_mask_str)
-		_wear_mask = W
-		update_inv_ears(0)
-		W.equipped(src, slot)
-		update_inv_wear_mask(redraw_mob)
-		return TRUE
+	to_chat(src, SPAN_WARNING("You are trying to equip this item to an unsupported inventory slot. If possible, please write a ticket with steps to reproduce. Slot was: [slot]"))
 	return FALSE
 
 //This is just a commonly used configuration for the equip_to_slot_if_possible() proc, used to equip people when the rounds tarts and when events happen and such.
@@ -247,19 +204,6 @@
 	As far as I can tell the proc exists so that mobs with different inventory slots can override
 	the search through all the slots, without having to duplicate the rest of the item dropping.
 */
-// This proc is going to be killed when inventory slots are merged, eta 300 years
-/mob/proc/set_item_unequipped_legacy(obj/W)
-	SHOULD_CALL_PARENT(TRUE)
-	if(W == _back)
-		_back = null
-		update_inv_back(0)
-		return TRUE
-	if(W == _wear_mask)
-		_wear_mask = null
-		update_inv_wear_mask(0)
-		return TRUE
-	return FALSE
-
 /mob/proc/unequip(obj/W)
 	SHOULD_CALL_PARENT(TRUE)
 	if(!istype(W))
@@ -267,9 +211,6 @@
 	var/datum/inventory_slot/inv_slot = get_inventory_slot_datum(get_equipped_slot_for_item(W))
 	if(inv_slot)
 		return inv_slot.unequipped(src, W)
-	if(set_item_unequipped_legacy(W))
-		update_action_buttons()
-		return TRUE
 	return FALSE
 
 /mob/proc/isEquipped(obj/item/I)
@@ -335,18 +276,9 @@
 
 //Returns the item equipped to the specified slot, if any.
 /mob/proc/get_equipped_item(var/slot)
-
-	// Check equipment slots.
 	SHOULD_CALL_PARENT(TRUE)
 	var/datum/inventory_slot/inv_slot = get_inventory_slot_datum(slot)
-	if(inv_slot)
-		return inv_slot.get_equipped_item()
-
-	switch(slot)
-		if(slot_back_str)
-			return _back
-		if(slot_wear_mask_str)
-			return _wear_mask
+	return inv_slot?.get_equipped_item()
 
 /mob/proc/get_equipped_items(var/include_carried = 0)
 	SHOULD_CALL_PARENT(TRUE)
@@ -452,7 +384,28 @@
 /mob/proc/get_held_item_slots()
 	return
 
+/mob/proc/add_held_item_slot(var/datum/inventory_slot/held_slot)
+	return
+
+/mob/proc/remove_held_item_slot(var/slot)
+	return
+
+/mob/proc/select_held_item_slot(var/slot)
+	return
+
 /mob/proc/get_inventory_slots()
+	return
+
+/mob/proc/set_inventory_slots()
+	return
+
+/mob/proc/add_inventory_slot()
+	return
+
+/mob/proc/remove_inventory_slot()
+	return
+
+/mob/proc/clear_inventory_slots()
 	return
 
 /mob/proc/get_all_valid_equipment_slots()

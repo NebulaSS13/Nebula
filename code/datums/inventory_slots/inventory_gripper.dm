@@ -2,8 +2,8 @@
 	var/can_use_held_item = TRUE
 	// For reference, grippers do not use ui_loc, they have it set dynamically during /datum/hud/proc/rebuild_hands()
 
-/datum/inventory_slot/gripper/clone()
-	return new type(slot_id, ui_loc, overlay_slot, ui_label)
+/datum/inventory_slot/gripper/GetCloneArgs()
+	return list(slot_id, ui_loc, overlay_slot, ui_label)
 
 /datum/inventory_slot/gripper/update_overlay(var/mob/living/user, var/obj/item/prop, var/redraw_mob = TRUE)
 	. = ..()
