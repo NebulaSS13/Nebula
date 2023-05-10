@@ -107,15 +107,14 @@
 /mob/living/carbon/human/slip_chance(var/prob_slip = 5)
 	if(!..())
 		return 0
-
 	//Check hands and mod slip
 	for(var/hand_slot in held_item_slots)
 		var/datum/inventory_slot/inv_slot = held_item_slots[hand_slot]
-		if(!inv_slot.holding)
+		var/obj/item/held = inv_slot?.get_equipped_item()
+		if(!held)
 			prob_slip -= 2
-		else if(inv_slot.holding.w_class <= ITEM_SIZE_SMALL)
+		else if(held.w_class <= ITEM_SIZE_SMALL)
 			prob_slip -= 1
-
 	return prob_slip
 
 /mob/living/carbon/human/Check_Shoegrip()

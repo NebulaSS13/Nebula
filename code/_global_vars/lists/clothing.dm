@@ -88,3 +88,11 @@ var/global/list/hidden_inventory_slots = list(
 	slot_wear_suit_str,
 	slot_wear_mask_str
 )
+
+var/global/list/abstract_inventory_slots = list(
+	slot_in_backpack_str,
+	slot_tie_str,
+	slot_undershirt_str,
+	slot_underpants_str,
+	slot_socks_str
+)

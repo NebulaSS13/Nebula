@@ -320,7 +320,70 @@
 		client.perspective = EYE_PERSPECTIVE
 		client.eye = loc
 
-/mob/proc/show_inv(mob/user)
+/mob/proc/get_descriptive_slot_name(var/slot)
+	return global.descriptive_slot_names[slot] || slot
+
+/mob/proc/show_stripping_window(mob/user)
+
+	if(user.incapacitated()  || !user.Adjacent(src) || !user.check_dexterity(DEXTERITY_SIMPLE_MACHINES))
+		return
+
+	user.set_machine(src)
+
+	var/dat = list()
+	dat += "<B><HR><FONT size=3>[name]</FONT></B>"
+	dat += "<HR>"
+
+	var/list/held_item_slots = get_held_item_slots()
+	for(var/hand_slot in held_item_slots)
+		var/datum/inventory_slot/inv_slot = get_inventory_slot_datum(hand_slot)
+		if(!inv_slot || inv_slot.skip_on_strip_display)
+			continue
+		var/obj/item/held = inv_slot.get_equipped_item()
+		dat += "<b>[capitalize(inv_slot.slot_name)]:</b> <A href='?src=\ref[src];item=[hand_slot]'>[held?.name || "nothing"]</A>"
+
+	var/list/all_slots = get_all_valid_equipment_slots()
+	if(all_slots)
+		for(var/slot in (all_slots-global.pocket_slots))
+			if(slot in held_item_slots)
+				continue
+			var/obj/item/thing_in_slot = get_equipped_item(slot)
+			dat += "<B>[capitalize(get_descriptive_slot_name(slot))]:</b> <a href='?src=\ref[src];item=[slot]'>[thing_in_slot || "nothing"]</a>"
+			if(istype(thing_in_slot, /obj/item/clothing))
+				var/obj/item/clothing/C = thing_in_slot
+				if(C.accessories.len)
+					dat += "<A href='?src=\ref[src];item=[slot_tie_str];holder=\ref[C]'>Remove accessory</A>"
+
+	// Do they get an option to set internals?
+	if(istype(get_equipped_item(slot_wear_mask_str), /obj/item/clothing/mask) || istype(get_equipped_item(slot_head_str), /obj/item/clothing/head/helmet/space))
+		for(var/slot in list(slot_back_str, slot_belt_str, slot_s_store_str))
+			var/obj/item/tank/tank = get_equipped_item(slot)
+			if(istype(tank))
+				dat += "<BR><A href='?src=\ref[src];item=internals'>Toggle internals.</A>"
+				break
+
+	// Other incidentals.
+	var/obj/item/clothing/under/suit = get_equipped_item(slot_w_uniform_str)
+	if(istype(suit))
+		dat += "<BR><b>Pockets:</b> <A href='?src=\ref[src];item=pockets'>Empty or Place Item</A>"
+		if(suit.has_sensor == SUIT_HAS_SENSORS)
+			dat += "<BR><A href='?src=\ref[src];item=sensors'>Set sensors</A>"
+		if (suit.has_sensor && user.get_multitool())
+			dat += "<BR><A href='?src=\ref[src];item=lock_sensors'>[suit.has_sensor == SUIT_LOCKED_SENSORS ? "Unl" : "L"]ock sensors</A>"
+	if(get_equipped_item(slot_handcuffed_str))
+		dat += "<BR><A href='?src=\ref[src];item=[slot_handcuffed_str]'>Handcuffed</A>"
+
+	var/list/strip_add = get_additional_stripping_options()
+	if(length(strip_add))
+		dat += strip_add
+
+	dat += "<BR><A href='?src=\ref[src];refresh=1'>Refresh</A>"
+
+	var/datum/browser/popup = new(user, "[name]", "Inventory of \the [name]", 325, 500, src)
+	popup.set_content(jointext(dat, "<br>"))
+	popup.open()
+
+/mob/proc/get_additional_stripping_options()
 	return
 
 //mob verbs are faster than object verbs. See http://www.byond.com/forum/?post=1326139&page=2#comment8198716 for why this isn't atom/verb/examine()
@@ -487,6 +550,16 @@
 
 // If usr != src, or if usr == src but the Topic call was not resolved, this is called next.
 /mob/OnTopic(mob/user, href_list, datum/topic_state/state)
+
+	if(href_list["refresh"])
+		show_stripping_window(user)
+		return TOPIC_HANDLED
+
+	if(href_list["item"])
+		if(!handle_strip(href_list["item"], user, locate(href_list["holder"])))
+			show_stripping_window(user)
+		return TOPIC_HANDLED
+
 	if(href_list["flavor_more"])
 		var/text = "<HTML><HEAD><TITLE>[name]</TITLE></HEAD><BODY><TT>[replacetext(flavor_text, "\n", "<BR>")]</TT></BODY></HTML>"
 		show_browser(user, text, "window=[name];size=500x200")
@@ -518,7 +591,7 @@
 
 /mob/handle_mouse_drop(atom/over, mob/user)
 	if(over == user && user != src && !istype(user, /mob/living/silicon/ai))
-		show_inv(user)
+		show_stripping_window(user)
 		return TRUE
 	if(!anchored && istype(over, /obj/vehicle/train))
 		var/obj/vehicle/train/beep = over
@@ -1237,3 +1310,12 @@
 		lighting_master = new
 	if(client)
 		client.screen |= lighting_master
+
+/mob/proc/set_internals(obj/item/tank/source, source_string)
+	return
+
+/mob/proc/get_internals()
+	return
+
+/mob/proc/toggle_internals(var/mob/living/user)
+	return

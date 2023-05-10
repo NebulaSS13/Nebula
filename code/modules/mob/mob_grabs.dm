@@ -7,7 +7,8 @@
 	return
 /mob/proc/apply_effect(var/effect = 0,var/effecttype = STUN, var/blocked = 0)
 	return
-// See /mob/living/carbon for this one.
+/mob/proc/has_organ(organ_tag)
+	return !!get_organ(organ_tag, /obj/item/organ)
 /mob/proc/get_organ(var/organ_tag, var/expected_type)
 	return
 /mob/proc/get_organs()

@@ -171,11 +171,11 @@
 /mob/living/carbon/human/proc/handle_grasp()
 	for(var/hand_slot in held_item_slots)
 		var/datum/inventory_slot/inv_slot = held_item_slots[hand_slot]
-		var/holding = inv_slot?.holding
+		var/holding = inv_slot?.get_equipped_item()
 		if(holding)
 			var/obj/item/organ/external/E = GET_EXTERNAL_ORGAN(src, hand_slot)
 			if((!E || !E.is_usable() || E.is_parent_dislocated()) && try_unequip(holding))
-				grasp_damage_disarm(inv_slot)
+				grasp_damage_disarm(E)
 
 /mob/living/carbon/human/proc/stance_damage_prone(var/obj/item/organ/external/affected)
 
@@ -201,7 +201,7 @@
 	if(istype(affected))
 		for(var/grasp_tag in (list(affected.organ_tag) | affected.children))
 			var/datum/inventory_slot/inv_slot = LAZYACCESS(held_item_slots, grasp_tag)
-			if(inv_slot?.holding)
+			if(inv_slot?.get_equipped_item())
 				LAZYDISTINCTADD(drop_held_item_slots, inv_slot)
 	else if(istype(affected, /datum/inventory_slot))
 		drop_held_item_slots = list(affected)
@@ -210,7 +210,7 @@
 		return
 
 	for(var/datum/inventory_slot/inv_slot in drop_held_item_slots)
-		if(!try_unequip(inv_slot.holding))
+		if(!try_unequip(inv_slot.get_equipped_item()))
 			continue
 		var/obj/item/organ/external/E = GET_EXTERNAL_ORGAN(src, inv_slot.slot_id)
 		if(!E)

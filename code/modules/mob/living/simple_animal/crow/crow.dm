@@ -46,7 +46,7 @@
 	if (istype(access_card))
 		LAZYDISTINCTADD(., access_card)
 
-/mob/living/simple_animal/crow/show_inv(var/mob/user)
+/mob/living/simple_animal/crow/show_stripping_window(var/mob/user)
 	if(user.incapacitated())
 		return
 	var/list/dat = list()
@@ -81,7 +81,7 @@
 			removed.dropInto(loc)
 			usr.put_in_hands(removed)
 			visible_message("<span class='notice'>\The [usr] removes \the [removed] from \the [src]'s [href_list["remove_inv"]].</span>")
-			show_inv(usr)
+			show_stripping_window(usr)
 			update_icon()
 		else
 			to_chat(user, "<span class='warning'>There is nothing to remove from \the [src]'s [href_list["remove_inv"]].</span>")
@@ -115,7 +115,7 @@
 			return TOPIC_HANDLED
 		visible_message("<span class='notice'>\The [user] places \the [equipping] on to \the [src]'s [href_list["add_inv"]].</span>")
 		update_icon()
-		show_inv(user)
+		show_stripping_window(user)
 		return TOPIC_HANDLED
 	return ..()
 

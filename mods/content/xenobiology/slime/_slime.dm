@@ -179,10 +179,6 @@
 	if(severity == 1)
 		qdel(src)
 
-/mob/living/slime/unequip(obj/item/W)
-	SHOULD_CALL_PARENT(FALSE)
-	return FALSE
-
 /mob/living/slime/attack_ui(slot)
 	return
 
