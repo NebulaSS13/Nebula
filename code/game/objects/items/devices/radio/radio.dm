@@ -78,15 +78,17 @@ var/global/list/initial_peer_to_peer_passwords = list()
 /obj/item/radio/get_radio(var/message_mode)
 	return src
 
-/obj/item/radio/proc/can_decrypt(var/secured)
+/obj/item/radio/proc/can_decrypt(var/list/secured)
 	if(decrypt_all_messages)
 		return TRUE
 	if(!secured)
 		return TRUE
+	var/list/needed_access = secured.Copy()
 	for(var/obj/item/encryptionkey/key in encryption_keys)
-		if(secured in key.can_decrypt)
+		needed_access -= key.can_decrypt
+		if (!length(needed_access))
 			return TRUE
-	return FALSE
+	return FALSE // not all keys were removed
 
 /obj/item/radio/proc/set_frequency(new_frequency)
 	frequency = new_frequency

@@ -12,7 +12,7 @@
 	var/list/can_decrypt
 
 /obj/item/encryptionkey/attack_self(mob/user)
-	if(input(user, "Do you wish to factory reset this encryption key? This will remove ALL channel access and cannot be undone.", "No", "Yes") != "No" && !user.incapacitated() && loc == user)
+	if(alert(user, "Do you wish to factory reset this encryption key? This will remove ALL channel access and cannot be undone.", "No", "Yes") != "No" && !user.incapacitated() && user.get_held_slot_for_item(src))
 		can_decrypt = null
 		to_chat(user, "You depress the factory reset switch and flush \the [src].")
 		return TRUE

@@ -1,4 +1,4 @@
-<!-- 
+<!--
 Title: Basic Radio UI
 Used In File(s): /code/game/objects/item/devices/radio/radio.dm
 -->
@@ -82,8 +82,8 @@ Used In File(s): /code/game/objects/item/devices/radio/radio.dm
 			{{:helper.link('On', null, null, 'disabled')}}
 			{{:helper.link('Off', null, null, 'disabled')}}
 		{{else}}
-			{{:helper.link('On', null, {'listen' : 0}, data.speaker ? 'selected' : null)}}
-			{{:helper.link('Off', null, {'listen' : 1}, data.speaker ? null : 'selected')}}
+			{{:helper.link('On', null, {'reception' : 0}, data.speaker ? 'selected' : null)}}
+			{{:helper.link('Off', null, {'reception' : 1}, data.speaker ? null : 'selected')}}
 		{{/if}}
 	</div>
 </div>
@@ -99,7 +99,7 @@ Used In File(s): /code/game/objects/item/devices/radio/radio.dm
 		</div>
 	</div>
 {{/if}}
-		
+
 {{if data.has_loudspeaker}}
 	<div class="item">
 		<div class="itemLabelWide">
