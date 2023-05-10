@@ -157,14 +157,14 @@
 
 /datum/hud_data/adherent
 	has_internals = FALSE
-	gear = list(
-		"l_ear" = list("loc" = ui_iclothing, "name" = "Aux Port", "slot" = slot_l_ear_str,   "state" = "ears", "toggle" = 1),
-		"head" =  list("loc" = ui_glasses,   "name" = "Hat",      "slot" = slot_head_str,    "state" = "hair", "toggle" = 1),
-		"back" =  list("loc" = ui_back,      "name" = "Back",     "slot" = slot_back_str,    "state" = "back"),
-		"id" =    list("loc" = ui_id,        "name" = "ID",       "slot" = slot_wear_id_str, "state" = "id"),
-		"belt" =  list("loc" = ui_belt,      "name" = "Belt",     "slot" = slot_belt_str,    "state" = "belt")
+	inventory_slots = list(
+		/datum/inventory_slot/handcuffs,
+		/datum/inventory_slot/ear/adherent,
+		/datum/inventory_slot/head/adherent,
+		/datum/inventory_slot/back,
+		/datum/inventory_slot/id,
+		/datum/inventory_slot/belt
 	)
-
 
 /decl/species/adherent
 	var/static/list/apply_encased = list(
@@ -181,3 +181,9 @@
 		E.arterial_bleed_severity = 0
 		if(E.organ_tag in apply_encased)
 			E.encased = "ceramic hull"
+
+/datum/inventory_slot/ear/adherent
+	ui_loc = ui_iclothing
+/datum/inventory_slot/head/adherent
+	ui_loc = ui_glasses
+

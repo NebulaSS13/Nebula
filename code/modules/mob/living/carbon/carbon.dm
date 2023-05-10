@@ -278,15 +278,6 @@
 /mob/living/carbon/restrained()
 	return get_equipped_item(slot_handcuffed_str)
 
-/mob/living/carbon/set_item_unequipped_legacy(obj/W)
-	if(W == _handcuffed)
-		_handcuffed = null
-		update_inv_handcuffed()
-		if(buckled && buckled.buckle_require_restraints)
-			buckled.unbuckle_mob()
-		return TRUE
-	return ..()
-
 /mob/living/carbon/verb/mob_sleep()
 	set name = "Sleep"
 	set category = "IC"

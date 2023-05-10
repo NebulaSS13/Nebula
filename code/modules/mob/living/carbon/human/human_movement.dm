@@ -30,14 +30,13 @@
 			tally += E ? E.get_movement_delay(4) : 4
 	else
 		var/total_item_slowdown = -1
-		for(var/slot in global.all_inventory_slots)
-			var/obj/item/I = get_equipped_item(slot)
-			if(istype(I))
-				var/item_slowdown = 0
-				item_slowdown += I.slowdown_general
-				item_slowdown += LAZYACCESS(I.slowdown_per_slot, slot)
-				item_slowdown += I.slowdown_accessory
-				total_item_slowdown += max(item_slowdown, 0)
+		for(var/obj/item/I in get_equipped_items(include_carried = TRUE))
+			var/item_slowdown = 0
+			var/slot = get_equipped_slot_for_item(I)
+			item_slowdown += LAZYACCESS(I.slowdown_per_slot, slot)
+			item_slowdown += I.slowdown_general
+			item_slowdown += I.slowdown_accessory
+			total_item_slowdown += max(item_slowdown, 0)
 		tally += total_item_slowdown
 
 		for(var/organ_name in list(BP_L_LEG, BP_R_LEG, BP_L_FOOT, BP_R_FOOT))

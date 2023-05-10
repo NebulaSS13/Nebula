@@ -87,26 +87,22 @@
 
 /datum/hud/proc/refresh_inventory_slots(var/list/checking_slots, var/show_hud)
 
-	var/decl/species/species = mymob?.get_species()
-	for(var/hud_slot in checking_slots)
+	for(var/slot in checking_slots)
+
+		var/datum/inventory_slot/inv_slot = mymob.get_inventory_slot_datum(slot)
+		if(!istype(inv_slot))
+			continue
 
 		// Check if we're even wearing anything in that slot.
-		var/obj/item/gear = mymob.get_equipped_item(checking_slots[hud_slot])
+		var/obj/item/gear = inv_slot.get_equipped_item()
 		if(!istype(gear))
 			continue
 
 		// We're not showing anything, hide it.
 		if(!show_hud)
-			gear.screen_loc = null
-			continue
-
-		var/list/hud_data = species.hud.gear[hud_slot]
-		if(!("loc" in hud_data))
-			gear.screen_loc = null
-			continue
-
-		// Set the loc.
-		gear.screen_loc = hud_data["loc"]
+			inv_slot.hide_slot()
+		else
+			inv_slot.show_slot()
 
 /datum/hud/proc/instantiate()
 	if(ismob(mymob) && mymob.client)
@@ -128,10 +124,6 @@
 
 /datum/hud/proc/rebuild_hands()
 
-	var/mob/living/target = mymob
-	if(!istype(target))
-		return
-
 	var/ui_style = get_ui_style()
 	var/ui_color = get_ui_color()
 	var/ui_alpha = get_ui_alpha()
@@ -146,7 +138,7 @@
 				break
 		if(!inv_box)
 			inv_box = new /obj/screen/inventory()
-		var/datum/inventory_slot/inv_slot = target.held_item_slots[hand_tag]
+		var/datum/inventory_slot/inv_slot = mymob.get_inventory_slot_datum(hand_tag)
 		inv_box.SetName(hand_tag)
 		inv_box.icon = ui_style
 		inv_box.icon_state = "hand_base"
@@ -155,7 +147,7 @@
 		inv_box.add_overlay("hand_[hand_tag]")
 		if(inv_slot.ui_label)
 			inv_box.add_overlay("hand_[inv_slot.ui_label]")
-		if(target.get_active_held_item_slot() == hand_tag)
+		if(mymob.get_active_held_item_slot() == hand_tag)
 			inv_box.add_overlay("hand_selected")
 		inv_box.compile_overlays()
 
@@ -197,7 +189,7 @@
 	// Make sure all held items are on the screen and set to the correct screen loc.
 	var/datum/inventory_slot/inv_slot
 	for(var/obj/inv_elem in hand_hud_objects)
-		inv_slot = target.get_inventory_slot_datum(inv_elem.name)
+		inv_slot = mymob.get_inventory_slot_datum(inv_elem.name)
 		if(inv_slot)
 			inv_slot.ui_loc = inv_elem.screen_loc
 			var/obj/item/held = inv_slot.get_equipped_item()
@@ -223,13 +215,11 @@
 
 	var/has_hidden_gear = FALSE
 
-	var/mob/living/carbon/human/target = mymob
-	var/datum/hud_data/hud_data = istype(target) ? target.species.hud : new()
-	var/list/held_slots = mymob.get_held_item_slots()
-
 	// Draw the various inventory equipment slots.
 	var/obj/screen/inventory/inv_box
-	for(var/gear_slot in hud_data.gear) // inventory_slots)
+	var/list/held_slots =      mymob.get_held_item_slots()
+	var/list/inventory_slots = mymob.get_inventory_slots()
+	for(var/gear_slot in inventory_slots)
 
 		if(gear_slot in held_slots)
 			continue
@@ -239,16 +229,16 @@
 		inv_box.color = ui_color
 		inv_box.alpha = ui_alpha
 
-		var/list/slot_data =  hud_data.gear[gear_slot]
-		inv_box.screen_loc =  slot_data["loc"]
-		inv_box.slot_id =     slot_data["slot"]
-		inv_box.icon_state =  slot_data["state"]
-		inv_box.SetName(gear_slot)
+		var/datum/inventory_slot/inv_slot = inventory_slots[gear_slot]
+		inv_box.SetName(inv_slot.slot_name)
+		inv_box.slot_id =    inv_slot.slot_id
+		inv_box.icon_state = inv_slot.slot_state
+		inv_box.screen_loc = inv_slot.ui_loc
 
-		if(slot_data["dir"])
-			inv_box.set_dir(slot_data["dir"])
+		if(inv_slot.slot_dir)
+			inv_box.set_dir(inv_slot.slot_dir)
 
-		if(slot_data["toggle"])
+		if(inv_slot.can_be_hidden)
 			other += inv_box
 			has_hidden_gear = TRUE
 		else

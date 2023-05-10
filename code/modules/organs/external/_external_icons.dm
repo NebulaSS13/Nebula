@@ -53,7 +53,7 @@ var/global/list/limb_icon_cache = list()
 	update_icon(1)
 	if(last_owner)
 		SetName("[last_owner.real_name]'s head")
-		addtimer(CALLBACK(last_owner, /mob/living/carbon/human/proc/update_hair), 1, TIMER_UNIQUE)
+		addtimer(CALLBACK(last_owner, /mob/proc/update_hair), 1, TIMER_UNIQUE)
 	. = ..()
 	//Head markings, duplicated (sadly) below.
 	for(var/M in markings)

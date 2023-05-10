@@ -95,9 +95,6 @@
 				return TRUE
 	return user.get_organ(requires_organ_tag)
 
-/datum/inventory_slot/proc/clone()
-	return new type
-
 /datum/inventory_slot/proc/equivalent_to(var/datum/inventory_slot/other_slot)
 	if(!istype(other_slot) || QDELETED(other_slot) || QDELETED(src))
 		return FALSE

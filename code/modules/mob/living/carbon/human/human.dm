@@ -639,6 +639,7 @@
 	if(!istype(move_intent))
 		set_next_usable_move_intent()
 	update_emotes()
+	apply_species_inventory_restrictions()
 	refresh_ai_handler()
 
 	// Update codex scannables.
@@ -667,14 +668,26 @@
 
 //Drop anything that cannot be worn by the current species of the mob
 /mob/living/carbon/human/proc/apply_species_inventory_restrictions()
-	if(species)
-		if(!(species.appearance_flags & HAS_UNDERWEAR))
-			QDEL_NULL_LIST(worn_underwear)
+
+	var/list/new_slots
+	var/list/held_slots = get_held_item_slots()
+	for(var/slot_id in species.hud.inventory_slots)
+		if(slot_id in held_slots)
+			continue
+		var/datum/inventory_slot/new_slot = species.hud.inventory_slots[slot_id]
+		var/datum/inventory_slot/old_slot = get_inventory_slot_datum(slot_id)
+		if(!old_slot || !old_slot.equivalent_to(new_slot))
+			LAZYSET(new_slots, slot_id, new_slot.Clone())
+		else
+			LAZYSET(new_slots, slot_id, old_slot)
+	set_inventory_slots(new_slots, preserve_hands = TRUE)
+
+	if(!(species.appearance_flags & HAS_UNDERWEAR))
+		QDEL_NULL_LIST(worn_underwear)
 
 	//recheck species-restricted clothing
-	for(var/slot in global.all_inventory_slots)
-		var/obj/item/C = get_equipped_item(slot)
-		if(istype(C) && !C.mob_can_equip(src, slot, TRUE, TRUE))
+	for(var/obj/item/C in get_equipped_items(include_carried = TRUE))
+		if(!C.mob_can_equip(src, get_equipped_slot_for_item(C), TRUE, TRUE))
 			drop_from_inventory(C)
 
 //This handles actually updating our visual appearance

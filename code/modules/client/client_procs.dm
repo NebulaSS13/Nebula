@@ -685,3 +685,10 @@ var/global/const/MAX_VIEW = 41
 		winset(src, "mapwindow.map", "right-click=false")
 		winset(src, "default.Shift", "is-disabled=true")
 		winset(src, "default.ShiftUp", "is-disabled=true")
+
+/client/verb/drop_item()
+	set hidden = 1
+	if(!isrobot(mob) && mob.stat == CONSCIOUS && isturf(mob.loc))
+		var/obj/item/I = mob.get_active_hand()
+		if(I && I.can_be_dropped_by_client(mob))
+			mob.drop_item()

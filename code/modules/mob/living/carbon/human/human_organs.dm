@@ -200,7 +200,7 @@
 	var/list/drop_held_item_slots
 	if(istype(affected))
 		for(var/grasp_tag in (list(affected.organ_tag) | affected.children))
-			var/datum/inventory_slot/inv_slot = LAZYACCESS(held_item_slots, grasp_tag)
+			var/datum/inventory_slot/inv_slot = get_inventory_slot_datum(grasp_tag)
 			if(inv_slot?.get_equipped_item())
 				LAZYDISTINCTADD(drop_held_item_slots, inv_slot)
 	else if(istype(affected, /datum/inventory_slot))
