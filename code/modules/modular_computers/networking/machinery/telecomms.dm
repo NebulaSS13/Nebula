@@ -199,6 +199,11 @@ var/global/list/telecomms_hubs = list()
 			for(var/mob/M in hearers(R.canhear_range, speaking_from))
 				LAZYSET(., M, overmap_object)
 
+	for(var/mob/observer/ghost/ghost_listener as anything in global.ghost_mob_list)
+		// Ghostship is magic: Ghosts can hear radio chatter from anywhere
+		if(ghost_listener.get_preference_value(/datum/client_preference/ghost_radio) == PREF_ALL_CHATTER)
+			LAZYSET(., ghost_listener, TRUE) // no overmap object, but tell us which the source is anyway
+
 /obj/machinery/network/telecomms_hub/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1)
 
 	var/list/data = list()
