@@ -68,3 +68,16 @@
 		if(ghost_listener.get_preference_value(/datum/client_preference/ghost_radio) == PREF_ALL_CHATTER)
 			. |= ghost_listener
 	return .
+
+/obj/item/radio/shortwave
+	name = "shortwave radio"
+	desc = "A shortwave radio. Unlike modern radios which support digital mode, this radio is dirt-cheap and solely supports analog connections."
+	radio_device_type = null // can only use analog
+	can_use_analog = TRUE
+	analog = TRUE
+	material = /decl/material/solid/metal/aluminium
+	matter = list(/decl/material/solid/fiberglass = MATTER_AMOUNT_REINFORCEMENT)
+	obj_flags = OBJ_FLAG_CONDUCTIBLE | OBJ_FLAG_HOLLOW // much cheaper, fewer internal components.
+
+/obj/item/radio/shortwave/off
+	listening = FALSE

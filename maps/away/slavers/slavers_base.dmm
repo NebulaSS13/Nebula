@@ -1531,7 +1531,7 @@
 "ep" = (
 /obj/structure/table/steel,
 /obj/item/flash,
-/obj/item/radio,
+/obj/item/radio/shortwave,
 /obj/item/paper{
 	info = "If this fuck from A-3 keeps thinking he's better then piece of meat, throw him to hangar and show how little pressure turns diamonds into shit.";
 	name = "Note"
@@ -2324,7 +2324,7 @@
 	},
 /obj/item/stock_parts/circuitboard/broken,
 /obj/item/contraband/poster,
-/obj/item/radio,
+/obj/item/radio/shortwave,
 /obj/machinery/light/small{
 	dir = 4
 	},
@@ -2642,7 +2642,7 @@
 /area/slavers_base/dorms)
 "hl" = (
 /obj/structure/bed,
-/obj/item/radio,
+/obj/item/radio/shortwave,
 /turf/simulated/floor/tiled/airless,
 /area/slavers_base/dorms)
 "hm" = (
@@ -2823,7 +2823,7 @@
 /obj/structure/bed/chair{
 	dir = 4
 	},
-/obj/item/radio,
+/obj/item/radio/shortwave,
 /turf/simulated/floor/tiled/airless,
 /area/slavers_base/demo)
 "hM" = (
@@ -2843,7 +2843,7 @@
 /area/slavers_base/demo)
 "hO" = (
 /obj/structure/table/woodentable,
-/obj/item/radio,
+/obj/item/radio/shortwave,
 /turf/simulated/floor/tiled/airless,
 /area/slavers_base/demo)
 "hP" = (
@@ -3379,7 +3379,7 @@
 /area/slavers_base/dorms)
 "jq" = (
 /obj/structure/table,
-/obj/item/radio,
+/obj/item/radio/shortwave,
 /obj/structure/cable{
 	icon_state = "1-2"
 	},
@@ -3815,7 +3815,7 @@
 /area/slavers_base/maint)
 "kM" = (
 /obj/structure/table,
-/obj/item/radio,
+/obj/item/radio/shortwave,
 /turf/simulated/floor/airless/ceiling,
 /area/slavers_base/maint)
 "kN" = (

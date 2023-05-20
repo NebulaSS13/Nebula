@@ -27,7 +27,7 @@
 		new /datum/atom_creator/weighted(list(/obj/item/flashlight, /obj/item/flashlight/flare,  /obj/item/flashlight/flare/glowstick/red)),
 		/obj/item/crowbar/red,
 		/obj/item/chems/spray/extinguisher/mini,
-		/obj/item/radio,
+		/obj/item/radio/shortwave,
 		/obj/item/weldingtool/mini,
 		/obj/item/chems/welder_tank/mini
 	)
@@ -40,11 +40,11 @@
 
 /obj/item/storage/toolbox/mechanical/WillContain()
 	return list(
-			/obj/item/screwdriver, 
-			/obj/item/wrench, 
-			/obj/item/weldingtool, 
-			/obj/item/crowbar, 
-			/obj/item/scanner/gas, 
+			/obj/item/screwdriver,
+			/obj/item/wrench,
+			/obj/item/weldingtool,
+			/obj/item/crowbar,
+			/obj/item/scanner/gas,
 			/obj/item/wirecutters
 		)
 
@@ -58,9 +58,9 @@
 	return list(
 			new /datum/atom_creator/weighted(list(/obj/item/clothing/gloves/insulated = 5, /obj/item/stack/cable_coil/random = 95)),
 			/obj/item/stack/cable_coil/random = 2,
-			/obj/item/screwdriver, 
-			/obj/item/wirecutters, 
-			/obj/item/t_scanner, 
+			/obj/item/screwdriver,
+			/obj/item/wirecutters,
+			/obj/item/t_scanner,
 			/obj/item/crowbar
 		)
 
@@ -74,21 +74,21 @@
 
 /obj/item/storage/toolbox/syndicate/WillContain()
 	return list(
-			/obj/item/clothing/gloves/insulated, 
-			/obj/item/screwdriver, 
-			/obj/item/wrench, 
-			/obj/item/weldingtool, 
-			/obj/item/crowbar, 
-			/obj/item/wirecutters, 
+			/obj/item/clothing/gloves/insulated,
+			/obj/item/screwdriver,
+			/obj/item/wrench,
+			/obj/item/weldingtool,
+			/obj/item/crowbar,
+			/obj/item/wirecutters,
 			/obj/item/multitool
 		)
 
 /obj/item/storage/toolbox/syndicate/powertools/WillContain()
 	return list(
-			/obj/item/clothing/gloves/insulated, 
-			/obj/item/power_drill, 
-			/obj/item/weldingtool/electric, 
-			/obj/item/hydraulic_cutter, 
+			/obj/item/clothing/gloves/insulated,
+			/obj/item/power_drill,
+			/obj/item/weldingtool/electric,
+			/obj/item/hydraulic_cutter,
 			/obj/item/multitool
 		)
 
