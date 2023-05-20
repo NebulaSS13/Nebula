@@ -1012,6 +1012,7 @@
 #include "code\game\objects\items\devices\radio\headsets_shared.dm"
 #include "code\game\objects\items\devices\radio\intercom.dm"
 #include "code\game\objects\items\devices\radio\radio.dm"
+#include "code\game\objects\items\devices\radio\radio_analog.dm"
 #include "code\game\objects\items\devices\radio\radio_announcer.dm"
 #include "code\game\objects\items\devices\radio\radio_borg.dm"
 #include "code\game\objects\items\devices\radio\radio_exosuit.dm"

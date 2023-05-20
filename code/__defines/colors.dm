@@ -118,6 +118,7 @@
 #define COMMS_COLOR_COMMAND    "#204090"
 #define COMMS_COLOR_CENTCOMM   "#5c5c7c"
 #define COMMS_COLOR_SYNDICATE  "#6d3f40"
+#define COMMS_COLOR_ANALOG     "#64706b" // special case, not in telecomms_colours
 
 var/global/list/telecomms_colours = list(
 	COMMS_COLOR_DEFAULT,

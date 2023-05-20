@@ -190,11 +190,7 @@
 /obj/item/radio/headset/mercenary
 	origin_tech = "{'esoteric':2}"
 	encryption_keys = list(/obj/item/encryptionkey/mercenary)
-	peer_to_peer_range = 100
-
-/obj/item/radio/headset/mercenary/Initialize()
-	peer_to_peer_password = get_initial_peer_to_peer_password("fatstacks")
-	. = ..()
+	analog_secured = list((access_mercenary) = TRUE)
 
 /obj/item/encryptionkey/entertainment
 	name = "entertainment radio key"
@@ -213,11 +209,7 @@
 /obj/item/radio/headset/raider
 	origin_tech = "{'esoteric':2}"
 	encryption_keys = list(/obj/item/encryptionkey/raider)
-	peer_to_peer_range = 100
-
-/obj/item/radio/headset/raider/Initialize()
-	peer_to_peer_password = get_initial_peer_to_peer_password("yarrharr")
-	. = ..()
+	analog_secured = list((access_raider) = TRUE)
 
 // Bowman alts
 /obj/item/radio/headset/headset_mining/bowman

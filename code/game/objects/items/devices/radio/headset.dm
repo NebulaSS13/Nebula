@@ -10,13 +10,12 @@
 	power_usage = 0
 	encryption_keys = list(/obj/item/encryptionkey)
 	encryption_key_capacity = 2
-	peer_to_peer_range = 25
 
 /obj/item/radio/headset/on_update_icon()
 	icon_state = get_world_inventory_state()
 	cut_overlays()
 	if(on)
-		if(peer_to_peer)
+		if(analog)
 			add_overlay("[icon_state]-local")
 		else
 			var/datum/extension/network_device/network_device = get_extension(src, /datum/extension/network_device)

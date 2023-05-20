@@ -19,20 +19,9 @@
 		var/obj/item/radio/radio = holder
 		radio.update_icon()
 
-var/global/datum/radio_channel/peer_to_peer_channel
-/proc/get_peer_to_peer_channel()
-	if(!global.peer_to_peer_channel)
-		global.peer_to_peer_channel = new(list("name" = "P2P", "frequency" = PUB_FREQ))
-	return global.peer_to_peer_channel
-
-var/global/list/initial_peer_to_peer_passwords = list()
-/proc/get_initial_peer_to_peer_password(var/key)
-	if(key && !global.initial_peer_to_peer_passwords[key])
-		global.initial_peer_to_peer_passwords[key] = "[key][random_id(key, 1000000, 9999999)]"
-	. = global.initial_peer_to_peer_passwords[key]
-
 /obj/item/radio
-	name = "shortwave radio"
+	name = "dual-band radio"
+	desc = "A radio that can transmit in analog or digital modes."
 	icon = 'icons/obj/items/device/radio/radio.dmi'
 	suffix = "\[3\]"
 	icon_state = "walkietalkie"
@@ -70,10 +59,11 @@ var/global/list/initial_peer_to_peer_passwords = list()
 	var/list/channels
 	var/default_color = "#6d3f40"
 	var/decrypt_all_messages = FALSE
-	var/can_use_peer_to_peer = TRUE
-	var/peer_to_peer_password
-	var/peer_to_peer = FALSE
-	var/peer_to_peer_range = 100
+	var/can_use_analog = TRUE
+	var/datum/extension/network_device/radio/radio_device_type = /datum/extension/network_device/radio
+	var/analog = FALSE
+	var/analog_secured = list() // list of accesses used for encrypted analog, mainly for mercs/raiders
+	var/datum/radio_frequency/analog_radio_connection
 
 /obj/item/radio/get_radio(var/message_mode)
 	return src
@@ -83,6 +73,8 @@ var/global/list/initial_peer_to_peer_passwords = list()
 		return TRUE
 	if(!secured)
 		return TRUE
+	if(!islist(secured))
+		secured = list(secured)
 	var/list/needed_access = secured.Copy()
 	for(var/obj/item/encryptionkey/key in encryption_keys)
 		needed_access -= key.can_decrypt
@@ -91,7 +83,12 @@ var/global/list/initial_peer_to_peer_passwords = list()
 	return FALSE // not all keys were removed
 
 /obj/item/radio/proc/set_frequency(new_frequency)
+	if(analog_radio_connection)
+		radio_controller.remove_object(src, frequency)
+		analog_radio_connection = null
 	frequency = new_frequency
+	if(analog && frequency)
+		analog_radio_connection = radio_controller.add_object(src, frequency, RADIO_CHAT)
 
 /obj/item/radio/Initialize()
 	. = ..()
@@ -101,7 +98,8 @@ var/global/list/initial_peer_to_peer_passwords = list()
 
 	global.listening_objects += src
 	set_frequency(sanitize_frequency(frequency, RADIO_LOW_FREQ, RADIO_HIGH_FREQ))
-	set_extension(src, /datum/extension/network_device/radio, initial_network_id, initial_network_key, RECEIVER_STRONG_WIRELESS)
+	if(radio_device_type)
+		set_extension(src, /datum/extension/network_device/radio, initial_network_id, initial_network_key, RECEIVER_STRONG_WIRELESS)
 
 	var/list/created_encryption_keys
 	for(var/keytype in encryption_keys)
@@ -131,6 +129,7 @@ var/global/list/initial_peer_to_peer_passwords = list()
 	QDEL_NULL(wires)
 	QDEL_NULL_LIST(encryption_keys)
 	global.listening_objects -= src
+	set_frequency(null) // clean up the radio connection
 	channels = null
 	. = ..()
 
@@ -149,6 +148,12 @@ var/global/list/initial_peer_to_peer_passwords = list()
 		wires.Interact(user)
 	return ui_interact(user)
 
+/obj/item/radio/proc/sanitize_analog_secured()
+	var/list/collected_access = list()
+	for(var/obj/item/encryptionkey/other_key in encryption_keys)
+		collected_access |= other_key.can_decrypt
+	analog_secured &= collected_access
+
 /obj/item/radio/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1)
 	var/data[0]
 
@@ -156,9 +161,13 @@ var/global/list/initial_peer_to_peer_passwords = list()
 	if(network_device)
 		var/datum/computer_network/network = network_device?.get_network()
 		data["network"] = "[network_device.network_tag] ([network ? network.network_id : "disconnected"])"
-	data["can_use_peer_to_peer"] = can_use_peer_to_peer
-	data["peer_to_peer_password"] = peer_to_peer_password || "UNSET"
-	data["peer_to_peer"] = peer_to_peer
+	data["can_use_analog"] = can_use_analog
+	data["analog"] = analog
+	data["analog_secured"] = analog_secured
+	var/list/collected_access = list()
+	for(var/obj/item/encryptionkey/other_key in encryption_keys)
+		collected_access |= other_key.can_decrypt
+	data["available_keys"] = collected_access
 	data["mic_status"] = broadcasting
 	data["speaker"] = listening
 	data["freq"] = format_frequency(frequency)
@@ -217,35 +226,33 @@ var/global/list/initial_peer_to_peer_passwords = list()
 		return STATUS_CLOSE
 	return ..()
 
-/obj/item/radio/Topic(href, href_list)
-	if(..())
-		return TRUE
+/obj/item/radio/OnTopic(href, href_list)
+	if((. = ..()))
+		return
 
 	usr.set_machine(src)
-	if (href_list["track"])
-		var/mob/target = locate(href_list["track"])
-		var/mob/living/silicon/ai/A = locate(href_list["track2"])
-		if(A && target)
-			A.ai_actual_track(target)
-		. = TRUE
-	else if(href_list["peer_to_peer"])
-		if(can_use_peer_to_peer)
-			peer_to_peer = text2num(href_list["peer_to_peer"])
-			. = TRUE
-	else if(href_list["change_peer_to_peer_pass"])
-		if(can_use_peer_to_peer)
-			var/new_pass = sanitize(input(usr, "Enter a new peer to peer password.", "Peer To Peer Password", peer_to_peer_password) as text)
-			if(length_char(new_pass) && CanPhysicallyInteract(usr))
-				peer_to_peer_password = new_pass
-				. = TRUE
-	else if(href_list["clear_peer_to_peer_pass"])
-		if(can_use_peer_to_peer)
-			peer_to_peer_password = null
-			. = TRUE
-
+	if(href_list["analog"])
+		if(can_use_analog)
+			analog = text2num(href_list["analog"])
+			set_frequency(frequency) // update analog status
+		. = TOPIC_REFRESH
+	else if(href_list["analog_secured"])
+		if(can_use_analog)
+			if(length(encryption_keys))
+				var/secured_key = href_list["analog_secured"]
+				if(can_decrypt(secured_key)) // making sure we're not href hacking
+					analog_secured[secured_key] = !analog_secured[secured_key]
+				sanitize_analog_secured()
+			else
+				analog_secured = list()
+			. = TOPIC_REFRESH
+	else if(href_list["clear_analog_secured"])
+		if(can_use_analog)
+			analog_secured = list()
+			. = TOPIC_REFRESH
 	else if(href_list["sync"])
 		sync_channels_with_network()
-		. = TRUE
+		. = TOPIC_REFRESH
 	else if (href_list["freq"])
 		var/new_frequency = (frequency + text2num(href_list["freq"]))
 		if ((new_frequency < PUBLIC_LOW_FREQ || new_frequency > PUBLIC_HIGH_FREQ))
@@ -254,12 +261,13 @@ var/global/list/initial_peer_to_peer_passwords = list()
 		if(hidden_uplink)
 			if(hidden_uplink.check_trigger(usr, frequency, traitor_frequency))
 				close_browser(usr, "window=radio")
-		. = TRUE
+		. = TOPIC_REFRESH
 	else if (href_list["talk"])
 		toggle_broadcast()
-		. = TRUE
+		. = TOPIC_REFRESH
 	else if(href_list["reception"])
 		toggle_reception()
+		. = TOPIC_REFRESH
 	else if(href_list["listen"])
 		var/listen_set = text2num(href_list["listen"])
 		var/chan_name = href_list["ch_name"]
@@ -268,14 +276,14 @@ var/global/list/initial_peer_to_peer_passwords = list()
 				if("[channel.frequency]" == chan_name)
 					channels[channel] = listen_set
 					break
-		. = TRUE
+		. = TOPIC_REFRESH
 	else if(href_list["spec_freq"])
 		var freq = href_list["spec_freq"]
 		if(has_channel_access(usr, freq))
 			set_frequency(text2num(freq))
-		. = TRUE
+		. = TOPIC_REFRESH
 	if(href_list["nowindow"]) // here for pAIs, maybe others will want it, idk
-		return TRUE
+		return TOPIC_HANDLED
 
 	if(href_list["remove_cell"])
 		if(cell)
@@ -283,12 +291,12 @@ var/global/list/initial_peer_to_peer_passwords = list()
 			user.put_in_hands(cell)
 			to_chat(user, SPAN_NOTICE("You remove [cell] from \the [src]."))
 			cell = null
-		return TRUE
+		. = TOPIC_REFRESH
 	if(href_list["network_settings"])
 		var/datum/extension/network_device/D = get_extension(src, /datum/extension/network_device)
 		D.ui_interact(usr)
-		return TRUE
-	if(.)
+		. = TOPIC_HANDLED
+	if(. & TOPIC_REFRESH)
 		SSnano.update_uis(src)
 
 /mob/announcer // used only for autosay
@@ -376,9 +384,8 @@ var/global/list/initial_peer_to_peer_passwords = list()
 
 	var/list/current_sector = SSmapping.get_connected_levels(position.z)
 	var/use_frequency = frequency
-	var/list/current_channels = get_available_channels()
-	if(message_mode)
-
+	if(message_mode && !analog)
+		var/list/current_channels = get_available_channels()
 		message_mode = lowertext(message_mode)
 		if(message_mode == MESSAGE_MODE_DEFAULT)
 			for(var/datum/radio_channel/channel in current_channels)
@@ -412,19 +419,11 @@ var/global/list/initial_peer_to_peer_passwords = list()
 	var/datum/radio_channel/channel
 	var/list/send_message_to
 	var/last_frequency = frequency
-	set_frequency(use_frequency)
-	if(peer_to_peer)
-		channel = get_peer_to_peer_channel()
-		for(var/obj/item/radio/radio in global.listening_objects)
-			var/turf/T = get_turf(radio)
-			if(!T || !(T.z in current_sector) || get_dist(position, T) > peer_to_peer_range)
-				continue
-			if(!radio.peer_to_peer || !radio.can_receive_message())
-				continue
-			if(!radio.decrypt_all_messages && peer_to_peer_password && radio.peer_to_peer_password != peer_to_peer_password)
-				continue
-			for(var/mob/listener in hearers(radio.canhear_range, T))
-				LAZYDISTINCTADD(send_message_to, listener)
+	if(last_frequency != use_frequency)
+		set_frequency(use_frequency)
+	if(analog && istype(analog_radio_connection))
+		broadcast_analog_radio_message(analog_radio_connection, speaker, src, message, intercom, message_compression, current_sector, verb, speaking, analog_secured)
+		// does not populate send_message_to, so after this we just reset frequency and end the proc
 	else
 		var/datum/extension/network_device/network_device = get_extension(src, /datum/extension/network_device)
 		var/datum/computer_network/network = network_device?.get_network()
@@ -433,26 +432,25 @@ var/global/list/initial_peer_to_peer_passwords = list()
 			if(istype(hub) && !QDELETED(hub) && hub.can_receive_message(network))
 				send_message_to = hub.get_recipients(network, use_frequency)
 				channel = hub.get_channel_from_freq_or_key(use_frequency)
-
-	set_frequency(last_frequency)
+	if(frequency != last_frequency)
+		set_frequency(last_frequency)
 
 	if(!length(send_message_to))
 		return
 
 	var/formatted_msg = "<span style='color:[channel?.color || default_color]'><small><b>\[[channel?.name || format_frequency(frequency)]\]</b></small> <span class='name'>"
 	var/send_name = istype(speaker) ? speaker.real_name : ("[speaker]" || "unknown")
-	var/send_message = message
 
 	var/turf/T = get_turf(src)
-	var/obj/send_overmap_object = istype(T) && global.overmap_sectors["[T.z]"]
+	var/obj/effect/overmap/visitable/send_overmap_object = istype(T) && global.overmap_sectors["[T.z]"]
 
 	for(var/mob/listener in send_message_to)
 		var/per_listener_send_name = send_name
-		if(send_overmap_object && send_overmap_object != send_message_to[listener])
-			var/obj/effect/overmap/sender_obj = send_message_to[listener]
-			if(sender_obj && (!istype(sender_obj) || sender_obj.ident_transmitter))
-				per_listener_send_name = "[per_listener_send_name] ([sender_obj.name])"
-		listener.hear_radio(send_message, verb, speaking, formatted_msg, "</span> <span class='message'>", "</span></span>", speaker, message_compression, per_listener_send_name)
+		// if we're sending from an overmap object AND our overmap object transmits its identity AND it's different than the listener's
+		if(send_overmap_object && send_overmap_object.ident_transmitter && send_overmap_object != send_message_to[listener])
+			// then append the overmap object name to it, so they know where we're from
+			per_listener_send_name = "[per_listener_send_name] ([send_overmap_object.name])"
+		listener.hear_radio(message, verb, speaking, formatted_msg, "</span> <span class='message'>", "</span></span>", speaker, message_compression, per_listener_send_name)
 
 /obj/item/radio/proc/can_receive_message(var/check_network_membership)
 	. = on
@@ -506,6 +504,7 @@ var/global/list/initial_peer_to_peer_passwords = list()
 			encryption_keys -= ekey
 			channels = null
 			to_chat(user, SPAN_NOTICE("You pop \the [ekey] out of \the [src]."))
+			sanitize_analog_secured()
 			return TRUE
 		return toggle_panel(user)
 

@@ -37,25 +37,31 @@ Used In File(s): /code/game/objects/item/devices/radio/radio.dm
 </div>
 {{/if}}
 
-{{if data.can_use_peer_to_peer}}
+{{if data.can_use_analog}}
+{{if data.network}}
 <div class="item">
 	<div class="itemLabelWide">
-		P2P/Local Transmission
+		Analog Transmission
 	</div>
 	<div class="itemContentMedium">
-		{{:helper.link('On',  null, {'peer_to_peer' : 1}, data.peer_to_peer ? 'selected' : null)}}
-		{{:helper.link('Off', null, {'peer_to_peer' : 0}, data.peer_to_peer ? null : 'selected')}}
+		{{:helper.link('On',  null, {'analog' : 1}, data.analog ? 'selected' : null)}}
+		{{:helper.link('Off', null, {'analog' : 0}, data.analog ? null : 'selected')}}
 	</div>
 </div>
+{{/if}}
+{{if data.analog && (data.available_keys || data.analog_secured)}}
 <div class="item">
 	<div class="itemLabelWide">
-		P2P/Local Password
+		Analog Encryption
 	</div>
 	<div class="itemContentMedium">
-		{{:helper.link(data.peer_to_peer_password, null, {'change_peer_to_peer_pass' : 1}, null)}}
-		{{:helper.link('Clear', null, {'clear_peer_to_peer_pass' : 1}, null)}}
+		{{for data.available_keys}}
+			{{:helper.link(value, null, {'analog_secured': value}, null, (data.analog_secured[value]) ? 'linkOn' : null)}}
+		{{/for}}
+		{{:helper.link('Clear', null, {'clear_analog_secured' : 1}, null)}}
 	</div>
 </div>
+{{/if}}
 {{/if}}
 
 <div class="item">
@@ -87,18 +93,6 @@ Used In File(s): /code/game/objects/item/devices/radio/radio.dm
 		{{/if}}
 	</div>
 </div>
-
-{{if data.has_subspace}}
-	<div class="item">
-		<div class="itemLabelWide">
-			Subspace Transmission:
-		</div>
-		<div class="itemContentMedium">
-			{{:helper.link('On', null, {'mode' : 1}, data.subspace ? 'selected' : null)}}
-			{{:helper.link('Off', null, {'mode' : 0}, data.subspace ? null : 'selected')}}
-		</div>
-	</div>
-{{/if}}
 
 {{if data.has_loudspeaker}}
 	<div class="item">
