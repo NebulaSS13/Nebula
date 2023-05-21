@@ -8,6 +8,7 @@
 	slot_flags = SLOT_EARS
 	cell = null
 	power_usage = 0
+	can_use_analog = FALSE
 	encryption_keys = list(/obj/item/encryptionkey)
 	encryption_key_capacity = 2
 
