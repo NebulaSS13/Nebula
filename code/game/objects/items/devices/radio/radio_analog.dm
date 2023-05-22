@@ -21,6 +21,7 @@
 	)
 
 	var/list/radios = list()
+	var/list/radios_insecure = list()
 	for(var/obj/item/radio/radio_receiver in connection.devices["[RADIO_CHAT]"])
 		// Quasi-wired mode; remove if intercoms ever use actual wired connections somehow.
 		if(intercom_only && !radio_receiver.intercom)
@@ -31,14 +32,16 @@
 			continue
 		if(!radio_receiver.can_receive_message())
 			continue
-		if(secured && !radio_receiver.can_decrypt(secured))
-			continue
 		if(radio_receiver.can_receive_analog(connection, levels))
-			radios += radio_receiver
 			radio_receiver.received_chatter(connection.frequency, levels)
+			if(secured && !radio_receiver.can_decrypt(secured))
+				radios_insecure += radio_receiver
+				continue
+			radios += radio_receiver
 
 	// Get a list of mobs who can hear from the radios we collected.
 	var/list/receive = get_mobs_in_analog_radio_ranges(radios)
+	var/list/receive_insecure = get_mobs_in_analog_radio_ranges(radios_insecure, include_ghosts = FALSE)
 
 	// Format the message
 	var/formatted_msg = "<span style='color:[COMMS_COLOR_ANALOG]'><small><b>\[[format_frequency(connection.frequency)]\]</b></small> <span class='name'>"
@@ -48,11 +51,17 @@
 	for (var/mob/receiver in receive)
 		receiver.hear_radio(message, verbage, speaking, formatted_msg, "</span> <span class='message'>", "</span></span>", speaker, hard_to_hear, send_name)
 
+	if(length(receive_insecure))
+		var/decl/language/machine/noise_lang = GET_DECL(/decl/language/machine)
+		var/scrambled_message = noise_lang.scramble(null, message, null)
+		for (var/mob/receiver in receive_insecure)
+			receiver.hear_radio(scrambled_message, verbage, speaking, formatted_msg, "</span> <span class='message'>", "</span></span>", speaker, hard_to_hear, "unknown")
+
 	return TRUE
 
 /// Returns a list of mobs who can hear any of the radios given in @radios
 /// Assume all the radios in the list are eligible; we just care about mobs
-/proc/get_mobs_in_analog_radio_ranges(list/obj/item/radio/radios)
+/proc/get_mobs_in_analog_radio_ranges(list/obj/item/radio/radios, include_ghosts = TRUE)
 	. = list()
 	for(var/obj/item/radio/receiver_candidate in radios)
 		if(receiver_candidate.virtual)
@@ -62,6 +71,9 @@
 			// Try to find all the players who can hear the message
 			for(var/mob/local_listener in hearers(receiver_candidate.canhear_range, speaking_from))
 				. |= local_listener
+
+	if (!include_ghosts)
+		return .
 
 	for(var/mob/observer/ghost/ghost_listener as anything in global.ghost_mob_list)
 		// Ghostship is magic: Ghosts can hear radio chatter from anywhere

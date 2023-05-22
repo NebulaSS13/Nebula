@@ -131,7 +131,7 @@
 
 	if(istype(speaker, /mob/living/carbon/human))
 		var/mob/living/carbon/human/H = speaker
-		if(H.voice)
+		if(H.voice && !vname)
 			speaker_name = H.voice
 
 	if(hard_to_hear)
