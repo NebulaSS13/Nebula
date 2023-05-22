@@ -1733,7 +1733,7 @@
 "dx" = (
 /obj/machinery/embedded_controller/radio/simple_docking_controller{
 	frequency = 1331;
-	id_tag = "rescue_base";
+	id_tag = "ert_rescue_base";
 	pixel_x = 5;
 	pixel_y = -25
 	},
@@ -1775,7 +1775,7 @@
 /area/map_template/rescue_base/base)
 "dC" = (
 /obj/machinery/door/airlock/external/shuttle{
-	id_tag = "rescue_base_hatch";
+	id_tag = "ert_rescue_base_hatch";
 	name = "Landing Pad"
 	},
 /turf/unsimulated/floor{
@@ -1881,7 +1881,7 @@
 "dQ" = (
 /obj/effect/floor_decal/industrial/outline/yellow,
 /obj/machinery/door/airlock/external/shuttle{
-	id_tag = "rescue_base_hatch"
+	id_tag = "ert_rescue_base_hatch"
 	},
 /turf/unsimulated/floor{
 	icon_state = "asteroidfloor"
@@ -2474,7 +2474,7 @@
 /area/map_template/rescue_base/start)
 "eX" = (
 /obj/machinery/door/airlock/external/shuttle{
-	id_tag = "rescue_shuttle_outer";
+	id_tag = "ert_rescue_shuttle_outer";
 	name = "Ship External Access"
 	},
 /obj/effect/shuttle_landmark/ert/start,
@@ -2510,10 +2510,10 @@
 "fc" = (
 /obj/machinery/atmospherics/unary/vent_pump/high_volume/shuttle{
 	dir = 4;
-	id_tag = "rescue_shuttle_pump"
+	id_tag = "ert_rescue_shuttle_pump"
 	},
 /obj/machinery/airlock_sensor/shuttle{
-	id_tag = "rescue_shuttle_sensor";
+	id_tag = "ert_rescue_shuttle_sensor";
 	pixel_x = 8;
 	pixel_y = 25
 	},
@@ -2532,11 +2532,11 @@
 "fe" = (
 /obj/machinery/atmospherics/unary/vent_pump/high_volume/shuttle{
 	dir = 8;
-	id_tag = "rescue_shuttle_pump"
+	id_tag = "ert_rescue_shuttle_pump"
 	},
 /obj/machinery/embedded_controller/radio/airlock/docking_port{
 	frequency = 1331;
-	id_tag = "rescue_shuttle";
+	id_tag = "ert_rescue_shuttle";
 	initial_access = list();
 	pixel_x = -8;
 	pixel_y = 25
@@ -2639,7 +2639,7 @@
 "ft" = (
 /obj/machinery/atmospherics/unary/vent_pump/high_volume/shuttle{
 	dir = 4;
-	id_tag = "rescue_shuttle_pump"
+	id_tag = "ert_rescue_shuttle_pump"
 	},
 /obj/machinery/light{
 	dir = 8
@@ -2658,7 +2658,7 @@
 "fw" = (
 /obj/machinery/atmospherics/unary/vent_pump/high_volume/shuttle{
 	dir = 8;
-	id_tag = "rescue_shuttle_pump"
+	id_tag = "ert_rescue_shuttle_pump"
 	},
 /obj/machinery/light{
 	dir = 4
@@ -2685,7 +2685,7 @@
 "fA" = (
 /obj/machinery/atmospherics/pipe/simple/visible,
 /obj/machinery/door/airlock/external/shuttle{
-	id_tag = "rescue_shuttle_inner";
+	id_tag = "ert_rescue_shuttle_inner";
 	name = "Ship External Access"
 	},
 /turf/simulated/floor/plating,
@@ -2744,7 +2744,7 @@
 "fH" = (
 /obj/machinery/atmospherics/pipe/manifold/visible,
 /obj/machinery/button/access/shuttle/interior{
-	id_tag = "rescue_shuttle";
+	id_tag = "ert_rescue_shuttle";
 	initial_access = list("ACCESS_CENT_SPECOPS");
 	name = "interior access button";
 	pixel_x = 25;
@@ -2968,6 +2968,9 @@
 /obj/machinery/light{
 	dir = 8
 	},
+/obj/machinery/sleeper/standard{
+	dir = 8
+	},
 /turf/simulated/floor/tiled/white,
 /area/map_template/rescue_base/start)
 "go" = (
@@ -3049,12 +3052,6 @@
 /area/map_template/rescue_base/start)
 "gE" = (
 /obj/machinery/body_scanconsole{
-	dir = 8
-	},
-/turf/simulated/floor/tiled/white,
-/area/map_template/rescue_base/start)
-"gF" = (
-/obj/machinery/sleeper/standard{
 	dir = 8
 	},
 /turf/simulated/floor/tiled/white,
@@ -3304,7 +3301,7 @@
 	icon_state = "asteroidfloor"
 	},
 /area/map_template/rescue_base/base)
-"mn" = (
+"jY" = (
 /obj/machinery/network/acl{
 	initial_network_id = "responsenet";
 	req_access = list("ACCESS_CENT_SPECOPS")
@@ -3313,7 +3310,40 @@
 	icon_state = "dark"
 	},
 /area/map_template/rescue_base/base)
-"sm" = (
+"mp" = (
+/obj/machinery/door/airlock/centcom{
+	name = "Telecommunications"
+	},
+/turf/unsimulated/floor{
+	icon_state = "dark"
+	},
+/area/map_template/rescue_base/base)
+"qE" = (
+/obj/machinery/network/mainframe{
+	initial_network_id = "responsenet";
+	req_access = list("ACCESS_CENT_SPECOPS")
+	},
+/turf/unsimulated/floor{
+	icon_state = "dark"
+	},
+/area/map_template/rescue_base/base)
+"ty" = (
+/obj/machinery/computer/message_monitor{
+	dir = 4;
+	throwpass = 1
+	},
+/turf/unsimulated/floor{
+	icon_state = "dark"
+	},
+/area/map_template/rescue_base/base)
+"vA" = (
+/obj/machinery/network/relay/long_range{
+	initial_network_id = "responsenet";
+	req_access = list("ACCESS_CENT_SPECOPS")
+	},
+/turf/simulated/floor/plating,
+/area/map_template/rescue_base/start)
+"NG" = (
 /obj/machinery/network/router{
 	initial_network_id = "responsenet";
 	req_access = list("ACCESS_CENT_SPECOPS")
@@ -3322,30 +3352,8 @@
 	icon_state = "dark"
 	},
 /area/map_template/rescue_base/base)
-"tO" = (
-/obj/machinery/network/relay/long_range{
-	initial_network_id = "responsenet";
-	req_access = list("ACCESS_CENT_SPECOPS")
-	},
-/turf/simulated/floor/plating,
-/area/map_template/rescue_base/start)
-"Ab" = (
-/obj/machinery/computer/message_monitor,
-/turf/unsimulated/floor{
-	icon_state = "dark"
-	},
-/area/map_template/rescue_base/base)
-"BI" = (
+"Qa" = (
 /obj/machinery/network/telecomms_hub/ert,
-/turf/unsimulated/floor{
-	icon_state = "dark"
-	},
-/area/map_template/rescue_base/base)
-"TK" = (
-/obj/machinery/network/mainframe{
-	initial_network_id = "responsenet";
-	req_access = list("ACCESS_CENT_SPECOPS")
-	},
 /turf/unsimulated/floor{
 	icon_state = "dark"
 	},
@@ -4335,8 +4343,8 @@ ad
 aR
 bc
 ad
-mn
-Ab
+jY
+ty
 ad
 ar
 ar
@@ -4400,9 +4408,9 @@ av
 aR
 bc
 ad
-TK
+qE
 ar
-ar
+mp
 ar
 ar
 bg
@@ -4465,8 +4473,8 @@ aB
 aS
 aB
 ad
-sm
-BI
+NG
+Qa
 ad
 ar
 ar
@@ -5029,7 +5037,7 @@ eU
 gu
 gu
 gK
-tO
+vA
 gY
 hf
 eQ
@@ -5612,7 +5620,7 @@ eQ
 eU
 go
 gw
-gF
+gw
 gO
 gS
 ha
