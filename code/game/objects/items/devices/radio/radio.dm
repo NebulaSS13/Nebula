@@ -49,13 +49,13 @@
 	var/list/encryption_keys
 	var/encryption_key_capacity
 
-	var/on = 1 // 0 for off
+	var/on = TRUE
 	var/frequency = PUB_FREQ
 	var/intercom_handling = FALSE
 	var/traitor_frequency = 0 //tune to frequency to unlock traitor supplies
 	var/canhear_range = 3 // the range which mobs can hear this radio from
-	var/broadcasting = 0
-	var/listening = 1
+	var/broadcasting = FALSE
+	var/listening = TRUE
 	var/list/channels
 	var/default_color = "#6d3f40"
 	var/decrypt_all_messages = FALSE
@@ -143,7 +143,7 @@
 
 /obj/item/radio/interact(mob/user)
 	if(!user)
-		return 0
+		return FALSE
 	if(panel_open)
 		wires.Interact(user)
 	return ui_interact(user)
@@ -296,6 +296,7 @@
 		. = TOPIC_HANDLED
 	if(. & TOPIC_REFRESH)
 		SSnano.update_uis(src)
+		update_icon()
 
 /mob/announcer // used only for autosay
 	is_spawnable_type = FALSE
