@@ -278,8 +278,6 @@ Turf and target are seperate in case you want to teleport some distance from a t
 	f = round(f)
 	f = max(low, f)
 	f = min(high, f)
-	if ((f % 2) == 0) //Ensure the last digit is an odd number
-		f += 1
 	return f
 
 //Turns 1479 into 147.9
