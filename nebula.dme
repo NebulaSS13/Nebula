@@ -2837,6 +2837,7 @@
 #include "code\modules\overmap\ships\landable.dm"
 #include "code\modules\overmap\ships\ship.dm"
 #include "code\modules\overmap\ships\ship_physics.dm"
+#include "code\modules\overmap\ships\computers\comms.dm"
 #include "code\modules\overmap\ships\computers\engine_control.dm"
 #include "code\modules\overmap\ships\computers\helm.dm"
 #include "code\modules\overmap\ships\computers\sensors.dm"

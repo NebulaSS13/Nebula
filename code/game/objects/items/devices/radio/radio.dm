@@ -429,7 +429,7 @@
 		for(var/weakref/H as anything in network?.connected_hubs)
 			var/obj/machinery/network/telecomms_hub/hub = H.resolve()
 			if(istype(hub) && !QDELETED(hub) && hub.can_receive_message(network))
-				send_message_to = hub.get_recipients(network, use_frequency)
+				send_message_to = hub.get_recipients(current_sector, network, use_frequency)
 				channel = hub.get_channel_from_freq_or_key(use_frequency)
 	if(frequency != last_frequency)
 		set_frequency(last_frequency)

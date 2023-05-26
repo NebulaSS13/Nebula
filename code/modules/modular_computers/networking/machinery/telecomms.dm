@@ -136,9 +136,16 @@ var/global/list/telecomms_hubs = list()
 		var/datum/extension/network_device/network_device = get_extension(src, /datum/extension/network_device)
 		return network_device?.get_network() == check_network_membership
 
-/obj/machinery/network/telecomms_hub/proc/get_recipients(var/datum/computer_network/network, var/frequency)
-
+/obj/machinery/network/telecomms_hub/proc/get_recipients(list/levels, datum/computer_network/network, frequency)
 	// TODO: cache this somehow. :( Generally make it cheaper.
+
+	// Find the z-chunks we can broadcast to, which is our local chunk plus any overmap sites in range,
+	// assuming we have a functioning comms maser and the overmap site has a telecomms hub and comms antenna.
+	levels |= SSmapping.get_connected_levels(z)
+	var/obj/effect/overmap/O = global.overmap_sectors["[z]"]
+	for(var/obj/machinery/shipcomms/broadcaster/our_maser in O?.comms_masers)
+		levels |= our_maser.get_available_z_levels()
+
 	// Collect the hubs that are accessible from this hub's network.
 	var/list/receiving_hubs = list()
 	if(global_radio_broadcaster)
@@ -146,6 +153,14 @@ var/global/list/telecomms_hubs = list()
 	else
 		var/list/checked_networks = list()
 		var/list/checking_networks =  list(network)
+		// Collect networks from the local z-stack and any comms masers
+		for(var/obj/machinery/network/telecomms_hub/other_hub in global.telecomms_hubs)
+			if(!(other_hub.z in levels))
+				continue
+			var/datum/extension/network_device/other_network_device = get_extension(other_hub, /datum/extension/network_device)
+			var/datum/computer_network/other_network = other_network_device?.get_network()
+			if(other_network)
+				checking_networks |= other_network
 		while(length(checking_networks))
 			var/datum/computer_network/check_network = checking_networks[1]
 			checking_networks -= check_network
@@ -182,6 +197,12 @@ var/global/list/telecomms_hubs = list()
 
 	// Broadcast to all radio devices in the receiving networks.
 	for(var/datum/computer_network/use_network in receiving_networks)
+		var/datum/radio_channel/other_channel = channel
+		if (use_network != network)
+			for(var/weakref/other_hub_ref in use_network.connected_hubs)
+				var/obj/machinery/network/telecomms_hub/other_hub = other_hub_ref.resolve()
+				if(other_hub)
+					other_channel = other_hub.get_channel_from_freq_or_key("[channel.frequency]")
 		for(var/weakref/W as anything in use_network.connected_radios)
 			var/obj/item/radio/R = W.resolve()
 			if(!istype(R) || QDELETED(R) || !R.can_receive_message(use_network))
@@ -189,10 +210,10 @@ var/global/list/telecomms_hubs = list()
 			var/turf/speaking_from = get_turf(R)
 			if(!speaking_from)
 				continue
-			if(!channel || !R.can_decrypt(channel.secured))
+			if(!other_channel || !R.can_decrypt(other_channel.secured))
 				continue
 			var/list/check_channels = R.get_available_channels()
-			if(!LAZYACCESS(check_channels, channel))
+			if(!LAZYACCESS(check_channels, other_channel))
 				continue
 			var/turf/T = get_turf(R)
 			var/overmap_object = istype(T) && global.overmap_sectors["[T.z]"]
