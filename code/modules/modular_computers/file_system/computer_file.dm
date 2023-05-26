@@ -8,7 +8,7 @@ var/global/file_uid = 0
 	var/filename = "NewFile" 								// Placeholder. No spacebars
 	var/filetype = "XXX" 									// File full names are [filename].[filetype] so like NewFile.XXX in this case
 	var/size = 1											// File size in GQ. Integers only!
-	var/weakref/holder								// Holder that contains this file. Refers to a obj/item/stock_parts/computer/hard_drive.
+	var/weakref/holder										// Holder that contains this file. Refers to a obj/item/stock_parts/computer/hard_drive.
 	var/unsendable = 0										// Whether the file may be sent to someone via file transfer or other means.
 	var/undeletable = 0										// Whether the file may be deleted. Setting to 1 prevents deletion/renaming/etc.
 	var/unrenamable = 0										// Whether the file may be renamed. Setting to 1 prevents renaming.
