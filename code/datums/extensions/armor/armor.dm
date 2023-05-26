@@ -94,6 +94,8 @@
 				key = ARMOR_BIO // Otherwise just not blocked by default.
 		if(IRRADIATE)
 			key = ARMOR_RAD
+		if(ELECTROCUTE)
+			key = ARMOR_ENERGY
 	return key
 
 /datum/extension/armor/toggle
