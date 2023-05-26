@@ -15,6 +15,8 @@
 	var/menu_icon = "menu"									// Icon state overlay when the computer is turned on, but no program is loaded that would override the screen.
 	var/screensaver_icon = "standby"
 	var/default_icon = "generic"							//Overlay icon for programs that have a screen overlay the host doesn't have.
+	var/os_name = "GOOSE"
+	var/os_full_name = "GOOSE v2.0.4b"
 
 	// Used for deciding if various tray icons need to be updated
 	var/last_battery_percent							
