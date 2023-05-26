@@ -19,7 +19,7 @@
 	var/os_full_name = "GOOSE v2.0.4b"
 
 	// Used for deciding if various tray icons need to be updated
-	var/last_battery_percent							
+	var/last_battery_percent
 	var/last_world_time
 	var/list/last_header_icons
 
@@ -64,7 +64,7 @@
 	var/datum/computer_file/data/account/access_account = get_account()
 	if(access_account)
 		var/datum/computer_network/network = get_network()
-		if(network) 	
+		if(network)
 			var/location = "[network.network_id]"
 			. += "[access_account.login]@[location]" // User access uses '@'
 			for(var/group in access_account.groups)
@@ -75,7 +75,7 @@
 		var/obj/item/card/id/I = user.GetIdCard()
 		if(I)
 			. += I.GetAccess(access_account?.login) // Ignore any access that's already on the user account.
-	
+
 // Returns the current account, if possible. User var is passed only for updating program access from ID, if no account is found.
 /datum/extension/interactive/os/proc/get_account(var/mob/user)
 	if(!current_account)
@@ -139,7 +139,7 @@
 	var/new_password = sanitize(input(user, "Enter your account password:", "Account password", default_password) as text|null)
 	if(!new_password || !CanUseTopic(user, global.default_topic_state))
 		return
-	
+
 	if(login_account(new_login, new_password, user))
 		to_chat(user, SPAN_NOTICE("Account login successful: Welcome [new_login]!"))
 	else
@@ -149,7 +149,7 @@
 	on = FALSE
 	for(var/datum/computer_file/program/P in running_programs)
 		kill_program(P, 1)
-	
+
 	var/obj/item/stock_parts/computer/network_card/network_card = get_component(PART_NETWORK)
 	if(network_card)
 		var/datum/extension/network_device/D = get_extension(network_card, /datum/extension/network_device)
@@ -217,8 +217,8 @@
 		P.program_state = PROGRAM_STATE_ACTIVE
 		active_program = P
 	else if(P.can_run(get_access(user), user, TRUE))
-		P.on_startup(user, src)
 		active_program = P
+		P.on_startup(user, src)
 	else
 		return
 	running_programs |= P
