@@ -201,7 +201,7 @@
 
 /datum/file_storage/proc/check_errors()
 	if(!istype(os))
-		return "No GOOSE compatible device found."
+		return "No compatible device found."
 
 /datum/file_storage/proc/get_transfer_speed()
 	return 1

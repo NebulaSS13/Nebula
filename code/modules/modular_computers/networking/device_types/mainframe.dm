@@ -1,7 +1,7 @@
 var/global/list/all_mainframe_roles = list(
 	MF_ROLE_SOFTWARE,
 	MF_ROLE_FILESERVER,
-	MF_ROLE_LOG_SERVER, 
+	MF_ROLE_LOG_SERVER,
 	MF_ROLE_CREW_RECORDS,
 	MF_ROLE_ACCOUNT_SERVER
 )
@@ -51,14 +51,14 @@ var/global/list/all_mainframe_roles = list(
 	var/obj/item/stock_parts/computer/hard_drive/HDD = get_storage()
 	if(!HDD)
 		return OS_HARDDRIVE_ERROR
-	
+
 	return HDD.store_file(file, directory, create_directories, accesses, user, overwrite)
 
 /datum/extension/network_device/mainframe/proc/try_store_file(datum/computer_file/file, directory, list/accesses, mob/user)
 	var/obj/item/stock_parts/computer/hard_drive/HDD = get_storage()
 	if(!HDD)
 		return OS_HARDDRIVE_ERROR
-	
+
 	return HDD.try_store_file(file, directory, accesses, user)
 
 /datum/extension/network_device/mainframe/proc/save_file(newname, directory, new_data, list/metadata, list/accesses, mob/user)
@@ -71,7 +71,7 @@ var/global/list/all_mainframe_roles = list(
 	var/obj/item/stock_parts/computer/hard_drive/HDD = get_storage()
 	if(!HDD)
 		return OS_HARDDRIVE_ERROR
-	
+
 	return HDD.parse_directory(directory_path, create_directories)
 
 /datum/extension/network_device/mainframe/proc/append_to_file(filename, directory, data)
@@ -102,18 +102,22 @@ var/global/list/all_mainframe_roles = list(
 	var/obj/item/stock_parts/computer/hard_drive/HDD = get_storage()
 	if(!HDD)
 		return 0
-	return HDD.used_capacity 
+	return HDD.used_capacity
 
 // Disk that spawns with everything old system had
 /obj/item/stock_parts/computer/hard_drive/cluster/fullhouse/Initialize()
 	. = ..()
-	
+
 	for(var/F in subtypesof(/datum/computer_file/report))
 		var/datum/computer_file/report/type = F
+		if(TYPE_IS_ABSTRACT(type))
+			continue
 		if(initial(type.available_on_network))
 			store_file(new type, "reports", TRUE)
 
 	for(var/F in subtypesof(/datum/computer_file/program))
 		var/datum/computer_file/program/type = F
+		if(TYPE_IS_ABSTRACT(type))
+			continue
 		if(initial(type.available_on_network))
 			store_file(new type, OS_PROGRAMS_DIR, TRUE)
