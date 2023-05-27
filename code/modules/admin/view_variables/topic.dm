@@ -470,7 +470,7 @@
 			to_chat(usr, "This can only be done to instances of type /mob/living/carbon")
 			return
 
-		var/new_organ = input("Please choose an organ to add.","Organ",null) as null|anything in subtypesof(/obj/item/organ)
+		var/obj/item/organ/new_organ = input("Please choose an organ to add.","Organ",null) as null|anything in subtypesof(/obj/item/organ)
 		if(!new_organ) return
 
 		if(!M)
@@ -481,7 +481,12 @@
 			to_chat(usr, "Mob already has that organ.")
 			return
 
-		new new_organ(M)
+		var/obj/item/organ/target_organ = M.get_organ(initial(new_organ.parent_organ))
+		if(!target_organ)
+			to_chat(usr, "Mob doesn't have \a [target_organ] to install that in.")
+			return
+		var/obj/item/organ/organ_instance = new new_organ(M)
+		M.add_organ(organ_instance, target_organ)
 
 
 	else if(href_list["remorgan"])
