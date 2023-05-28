@@ -10,18 +10,18 @@
 	adult_icon =   'mods/content/xenobiology/icons/slimes/slime_adult_orange.dmi'
 	extract_icon = 'mods/content/xenobiology/icons/slimes/slime_extract_orange.dmi'
 	reaction_strings = list(
-		/decl/material/liquid/blood =        "Synthesises a small amount of capsaicin.",
-		/decl/material/solid/metal/uranium = "Causes a violent conflagration after a few seconds. Run!"
+		/decl/material/liquid/blood = "Synthesises a small amount of capsaicin.",
+		/decl/material/solid/phoron = "Causes a violent conflagration after a few seconds. Run!"
 	)
 
 /decl/slime_colour/orange/handle_blood_reaction(var/datum/reagents/holder)
 	holder.add_reagent(/decl/material/liquid/capsaicin, 10)
 	return TRUE
 
-/decl/slime_colour/orange/handle_uranium_reaction(var/datum/reagents/holder)
+/decl/slime_colour/orange/handle_phoron_reaction(var/datum/reagents/holder)
 	. = TRUE
 	sleep(5 SECONDS)
 	var/turf/location = get_turf(holder.get_reaction_loc())
 	if(location)
-		location.assume_gas(/decl/material/gas/hydrogen, 250, 1400)
+		location.assume_gas(/decl/material/solid/phoron, 250, 1400)
 		location.hotspot_expose(700, 400)

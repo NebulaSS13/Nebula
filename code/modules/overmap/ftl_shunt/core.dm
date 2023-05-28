@@ -553,7 +553,7 @@
 		/decl/material/gas/hydrogen/tritium = 25000,
 		/decl/material/gas/hydrogen/deuterium = 25000,
 		/decl/material/gas/hydrogen = 25000,
-		/decl/material/solid/exotic_matter = 50000
+		/decl/material/solid/phoron = 50000
 		)
 	var/obj/item/fuel_assembly/fuel
 	var/obj/machinery/ftl_shunt/core/master
@@ -654,4 +654,4 @@
 	icon = 'icons/obj/items/stock_parts/stock_parts.dmi'
 	icon_state = "smes_coil"
 	color = COLOR_YELLOW
-	matter = list(/decl/material/solid/exotic_matter = MATTER_AMOUNT_REINFORCEMENT, /decl/material/solid/metal/plasteel = MATTER_AMOUNT_PRIMARY)
+	matter = list(/decl/material/solid/phoron = MATTER_AMOUNT_REINFORCEMENT, /decl/material/solid/metal/plasteel = MATTER_AMOUNT_PRIMARY)

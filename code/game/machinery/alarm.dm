@@ -6,14 +6,16 @@
 	)
 	var/list/dangerous_gasses = list(
 		/decl/material/gas/carbon_dioxide = TRUE,
-		/decl/material/gas/chlorine = TRUE
+		/decl/material/gas/chlorine = TRUE,
+		/decl/material/solid/phoron = TRUE
 	)
 	var/list/filter_gasses = list(
 		/decl/material/gas/oxygen,
 		/decl/material/gas/nitrogen,
 		/decl/material/gas/carbon_dioxide,
 		/decl/material/gas/nitrous_oxide,
-		/decl/material/gas/chlorine
+		/decl/material/gas/chlorine,
+		/decl/material/solid/phoron,
 	)
 
 ////////////////////////////////////////

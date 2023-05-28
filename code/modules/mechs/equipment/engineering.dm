@@ -6,7 +6,7 @@
 	restricted_software = list(MECH_SOFTWARE_ENGINEERING)
 	material = /decl/material/solid/metal/steel
 	matter = list(
-		/decl/material/solid/organic/plastic = MATTER_AMOUNT_REINFORCEMENT,
+		/decl/material/solid/phoron = MATTER_AMOUNT_REINFORCEMENT,
 		/decl/material/solid/metal/silver = MATTER_AMOUNT_TRACE,
 		/decl/material/solid/metal/gold = MATTER_AMOUNT_TRACE
 	)

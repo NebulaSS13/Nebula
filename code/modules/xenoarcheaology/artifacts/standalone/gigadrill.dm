@@ -12,6 +12,11 @@
 	var/active = 0
 	var/drill_time = 10
 	var/turf/drilling_turf
+	matter = list(
+		/decl/material/solid/metal/plasteel/ocp = MATTER_AMOUNT_PRIMARY,
+		/decl/material/solid/phoron = MATTER_AMOUNT_REINFORCEMENT,
+		/decl/material/solid/gemstone/diamond = MATTER_AMOUNT_REINFORCEMENT,
+	)
 
 /obj/machinery/giga_drill/physical_attack_hand(mob/user)
 	if(active)
@@ -39,4 +44,4 @@
 				anchored = FALSE
 
 /obj/machinery/giga_drill/get_artifact_scan_data()
-	return "Automated mining drill - structure composed of osmium-carbide alloy, with tip and drill lines edged in a complex lattice of diamond."
+	return "Automated mining drill - structure composed of osmium-carbide alloy, with tip and drill lines edged in a complex lattice of diamond and phoron."

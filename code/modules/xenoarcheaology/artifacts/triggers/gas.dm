@@ -29,5 +29,8 @@
 /datum/artifact_trigger/gas/n2
 	gas_needed = list(/decl/material/gas/nitrogen = 5)
 
+/datum/artifact_trigger/gas/phoron
+	gas_needed = list(/decl/material/solid/phoron = 5)
+
 /datum/artifact_trigger/gas/hydrogen
 	gas_needed = list(/decl/material/gas/hydrogen = 5)

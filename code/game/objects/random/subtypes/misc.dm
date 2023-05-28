@@ -182,7 +182,8 @@
 		/obj/item/coin/diamond  = 2,
 		/obj/item/coin/iron     = 4,
 		/obj/item/coin/uranium  = 3,
-		/obj/item/coin/platinum = 1
+		/obj/item/coin/platinum = 1,
+		/obj/item/coin/phoron   = 1
 	)
 	return spawnable_choices
 
@@ -355,6 +356,7 @@
 		/obj/item/stack/material/gemstone/mapped/diamond/ten          =  7,
 		/obj/item/stack/material/pane/mapped/rborosilicate/ten        =  7,
 		/obj/item/stack/material/brick/mapped/marble/ten              =  8,
+		/obj/item/stack/material/crystal/mapped/phoron/ten            = 7,
 		/obj/item/stack/material/ingot/mapped/gold/ten                =  7,
 		/obj/item/stack/material/ingot/mapped/silver/ten              =  7,
 		/obj/item/stack/material/ingot/mapped/osmium/ten              =  7,

@@ -53,7 +53,8 @@
 	material = /decl/material/solid/organic/plastic
 	matter = list(
 		/decl/material/solid/metal/gold = MATTER_AMOUNT_REINFORCEMENT,
-		/decl/material/solid/metal/uranium = MATTER_AMOUNT_TRACE
+		/decl/material/solid/metal/uranium = MATTER_AMOUNT_TRACE,
+		/decl/material/solid/phoron = MATTER_AMOUNT_TRACE
 	)
 	origin_tech = @'{"exoticmatter":5,"materials":6}'
 	storage = /datum/storage/bag/trash/advanced
