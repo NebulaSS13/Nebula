@@ -329,8 +329,8 @@
 	for(var/obj/machinery/rad_collector/Rad in SSmachines.machinery)
 		if(Rad.anchored)
 			if(!Rad.loaded_tank)
-				Rad.loaded_tank = new /obj/item/tank/hydrogen(Rad)
-				Rad.loaded_tank.air_contents.gas[/decl/material/gas/hydrogen] = 70
+				Rad.loaded_tank = new /obj/item/tank/phoron(Rad)
+				Rad.loaded_tank.air_contents.gas[/decl/material/solid/phoron] = 70
 				Rad.drainratio = 0
 			if(!Rad.active)
 				Rad.toggle_power()

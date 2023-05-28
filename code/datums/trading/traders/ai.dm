@@ -81,6 +81,7 @@ They sell generic supplies and ask for generic supplies.
 		/obj/item/stack/material/brick/mapped/marble              = TRADER_THIS_TYPE,
 		/obj/item/stack/material/gemstone/mapped/diamond          = TRADER_THIS_TYPE,
 		/obj/item/stack/material/puck/mapped/uranium              = TRADER_THIS_TYPE,
+		/obj/item/stack/material/crystal/mapped/phoron            = TRADER_THIS_TYPE,
 		/obj/item/stack/material/panel/mapped/plastic             = TRADER_THIS_TYPE,
 		/obj/item/stack/material/ingot/mapped/gold                = TRADER_THIS_TYPE,
 		/obj/item/stack/material/ingot/mapped/silver              = TRADER_THIS_TYPE,

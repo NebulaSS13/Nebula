@@ -14,6 +14,7 @@
 	body_parts_covered = SLOT_EYES
 	filtered_gases = list(
 		/decl/material/gas/oxygen,
+		/decl/material/solid/phoron,
 		/decl/material/gas/nitrous_oxide,
 		/decl/material/gas/chlorine,
 		/decl/material/gas/ammonia,

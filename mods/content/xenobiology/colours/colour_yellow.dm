@@ -10,9 +10,9 @@
 	adult_icon =   'mods/content/xenobiology/icons/slimes/slime_adult_yellow.dmi'
 	extract_icon = 'mods/content/xenobiology/icons/slimes/slime_extract_yellow.dmi'
 	reaction_strings = list(
-		/decl/material/liquid/blood =        "Causes a localized electromagnetic pulse.",
-		/decl/material/solid/metal/uranium = "Converts a slime core into a portable power source.",
-		/decl/material/liquid/water =        "Converts a slime core into a portable light source."
+		/decl/material/liquid/blood = "Causes a localized electromagnetic pulse.",
+		/decl/material/solid/phoron = "Converts a slime core into a portable power source.",
+		/decl/material/liquid/water = "Converts a slime core into a portable light source."
 	)
 
 /decl/slime_colour/yellow/Initialize()
@@ -25,7 +25,7 @@
 		empulse(location, 3, 7)
 	return TRUE
 
-/decl/slime_colour/yellow/handle_uranium_reaction(var/datum/reagents/holder)
+/decl/slime_colour/yellow/handle_phoron_reaction(var/datum/reagents/holder)
 	var/location = get_turf(holder.get_reaction_loc())
 	if(location)
 		new /obj/item/cell/slime(location)

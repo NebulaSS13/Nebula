@@ -127,7 +127,7 @@
 	material_alteration = MAT_FLAG_ALTERATION_NONE
 	material = /decl/material/solid/metal/steel
 	matter = list(
-		/decl/material/solid/metal/uranium = MATTER_AMOUNT_TRACE,
+		/decl/material/solid/phoron = MATTER_AMOUNT_REINFORCEMENT,
 		/decl/material/solid/gemstone/diamond = MATTER_AMOUNT_TRACE
 	)
 	origin_tech = @'{"exoticmatter":2,"materials":6}'

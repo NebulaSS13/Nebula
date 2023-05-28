@@ -130,7 +130,7 @@
 		return TRUE
 
 	if(istype(thing, /obj/machinery/power/supermatter/shard))
-		stored_material[/decl/material/solid/exotic_matter] = 5 * SHEET_MATERIAL_AMOUNT
+		stored_material[/decl/material/solid/supermatter] = 5 * SHEET_MATERIAL_AMOUNT
 		to_chat(user, SPAN_NOTICE("You awkwardly cram \the [thing] into \the [src]'s material buffer."))
 		qdel(thing)
 		return TRUE

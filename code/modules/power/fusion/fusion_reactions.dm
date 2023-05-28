@@ -91,17 +91,26 @@
 	instability =         2 * FUSION_PROCESSING_TIME_MULT
 	minimum_reaction_temperature = 10000
 
+/decl/fusion_reaction/phoron_hydrogen
+	p_react = /decl/material/gas/hydrogen
+	s_react = /decl/material/solid/phoron
+	energy_consumption = 10
+	energy_production = 0
+	instability = 5
+	products = list(/decl/material/solid/metallic_hydrogen = 1)
+	minimum_reaction_temperature = 8000
+
 // VERY UNIDEAL REACTIONS.
-/decl/fusion_reaction/helium_supermatter
-	p_react = /decl/material/solid/exotic_matter
-	s_react = /decl/material/gas/helium
+/decl/fusion_reaction/phoron_supermatter
+	p_react = /decl/material/solid/supermatter
+	s_react = /decl/material/solid/phoron
 	energy_consumption = 0
 	energy_production =  5 * FUSION_PROCESSING_TIME_MULT
 	radiation =         40 * FUSION_PROCESSING_TIME_MULT
 	instability =       20 * FUSION_PROCESSING_TIME_MULT
 	hidden_from_codex = TRUE
 
-/decl/fusion_reaction/helium_supermatter/handle_reaction_special(var/obj/effect/fusion_em_field/holder)
+/decl/fusion_reaction/phoron_supermatter/handle_reaction_special(var/obj/effect/fusion_em_field/holder)
 	set waitfor = FALSE
 	. = 1
 	var/datum/event/wormholes/WM = new /datum/event/wormholes(new /datum/event_meta(EVENT_LEVEL_MAJOR))
@@ -121,7 +130,7 @@
 			H.set_hallucination(rand(100,150), 51)
 
 	for(var/obj/machinery/fusion_fuel_injector/I in range(world.view, origin))
-		if(I.cur_assembly && I.cur_assembly.material && I.cur_assembly.material.type == /decl/material/solid/exotic_matter)
+		if(I.cur_assembly && I.cur_assembly.material && I.cur_assembly.material.type == /decl/material/solid/supermatter)
 			explosion(get_turf(I), 1, 2, 3)
 			if(!QDELETED(I))
 				QDEL_IN(I, 5)

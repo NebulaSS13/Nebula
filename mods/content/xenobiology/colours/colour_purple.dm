@@ -9,9 +9,9 @@
 	baby_icon =    'mods/content/xenobiology/icons/slimes/slime_baby_purple.dmi'
 	adult_icon =   'mods/content/xenobiology/icons/slimes/slime_adult_purple.dmi'
 	extract_icon = 'mods/content/xenobiology/icons/slimes/slime_extract_purple.dmi'
-	reaction_strings = list(/decl/material/solid/metal/uranium = "Synthesises a steroid capable of causing a slime to create additional slime cores.")
+	reaction_strings = list(/decl/material/solid/phoron = "Synthesises a steroid capable of causing a slime to create additional slime cores.")
 
-/decl/slime_colour/purple/handle_uranium_reaction(var/datum/reagents/holder)
+/decl/slime_colour/purple/handle_phoron_reaction(var/datum/reagents/holder)
 	var/turf/location = get_turf(holder.get_reaction_loc())
 	if(location)
 		new /obj/item/slime_steroid(location)

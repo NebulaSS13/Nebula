@@ -88,7 +88,7 @@
 	name = "fuel cell"
 	desc = "Produces electricity from chemicals."
 	icon_state = "chemical_cell"
-	extended_desc = "This is effectively an internal beaker. It will consume and produce power from hydrogen, welding fuel, carbon,\
+	extended_desc = "This is effectively an internal beaker. It will consume and produce power from phoron, hydrogen, welding fuel, carbon,\
 	 ethanol, nutriment, and blood in order of decreasing efficiency. It will consume fuel only if the battery can take more energy."
 	atom_flags = ATOM_FLAG_OPEN_CONTAINER
 	complexity = 4
@@ -98,6 +98,7 @@
 	spawn_flags = IC_SPAWN_DEFAULT|IC_SPAWN_RESEARCH
 	var/volume = 60
 	var/list/fuel = list(
+		/decl/material/solid/phoron =           50000,
 		/decl/material/gas/hydrogen =           50000,
 		/decl/material/gas/hydrogen/deuterium = 50000,
 		/decl/material/gas/hydrogen/tritium =   50000,

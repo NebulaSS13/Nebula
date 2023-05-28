@@ -107,7 +107,7 @@
 	material = /decl/material/solid/metal/steel
 	matter = list(
 		/decl/material/solid/fiberglass = MATTER_AMOUNT_REINFORCEMENT,
-		/decl/material/solid/metal/uranium = MATTER_AMOUNT_TRACE
+		/decl/material/solid/phoron = MATTER_AMOUNT_TRACE
 	)
 
 /obj/item/gun/energy/plasmacutter
@@ -128,7 +128,7 @@
 	matter = list(
 		/decl/material/solid/fiberglass = MATTER_AMOUNT_REINFORCEMENT,
 		/decl/material/solid/metal/gold = MATTER_AMOUNT_TRACE,
-		/decl/material/solid/metal/uranium = MATTER_AMOUNT_TRACE
+		/decl/material/solid/phoron = MATTER_AMOUNT_TRACE
 	)
 
 /obj/item/gun/energy/plasmacutter/Initialize()

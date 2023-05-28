@@ -15,6 +15,7 @@
 		ARMOR_BIO = ARMOR_BIO_STRONG
 		)
 	filtered_gases = list(
+		/decl/material/solid/phoron,
 		/decl/material/gas/nitrous_oxide,
 		/decl/material/gas/chlorine,
 		/decl/material/gas/ammonia,

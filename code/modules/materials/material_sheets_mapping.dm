@@ -51,6 +51,7 @@ STACK_SUBTYPES(concrete,       "concrete",                      solid/stone/conc
 STACK_SUBTYPES(graphite,       "graphite",                      solid/graphite,              brick,            null)
 STACK_SUBTYPES(diamond,        "diamond",                       solid/gemstone/diamond,      gemstone,         null)
 STACK_SUBTYPES(uranium,        "uranium",                       solid/metal/uranium,         puck,             null)
+STACK_SUBTYPES(phoron,         "phoron",                        solid/phoron,                crystal,          null)
 STACK_SUBTYPES(plastic,        "plastic",                       solid/organic/plastic,       panel,            null)
 STACK_SUBTYPES(fiberglass,     "fiberglass",                    solid/fiberglass,            sheet/reinforced, null)
 STACK_SUBTYPES(gold,           "gold",                          solid/metal/gold,            ingot,            null)

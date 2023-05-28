@@ -287,6 +287,11 @@ var/global/list/singularities = list()
 	if(last_pixel_x != default_pixel_x || last_pixel_y != default_pixel_y)
 		reset_offsets(0)
 
+/obj/effect/singularity/proc/pulse()
+	for(var/obj/machinery/rad_collector/R in global.rad_collectors)
+		if (get_dist(R, src) <= 15) //Better than using orange() every process.
+			R.receive_pulse(energy)
+
 /obj/effect/singularity/singularity_act(S, size)
 	if(current_stage.stage_size <= size)
 		var/gain = (energy/2)

@@ -77,13 +77,13 @@
 		max_pressure_diff =   species.max_pressure_diff
 		min_breath_pressure = species.breath_pressure
 		breath_type =         species.breath_type  || /decl/material/gas/oxygen
-		poison_types =        species.poison_types || list(/decl/material/gas/chlorine = TRUE)
+		poison_types =        species.poison_types || list(/decl/material/gas/chlorine = TRUE, /decl/material/solid/phoron = TRUE)
 		exhale_type =         species.exhale_type  || /decl/material/gas/carbon_dioxide
 	else
 		max_pressure_diff =   initial(max_pressure_diff)
 		min_breath_pressure = initial(min_breath_pressure)
 		breath_type =         /decl/material/gas/oxygen
-		poison_types =        list(/decl/material/gas/chlorine = TRUE)
+		poison_types =        list(/decl/material/gas/chlorine = TRUE, /decl/material/solid/phoron = TRUE)
 		exhale_type =         /decl/material/gas/carbon_dioxide
 
 

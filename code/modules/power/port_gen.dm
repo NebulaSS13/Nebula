@@ -113,7 +113,7 @@
 
 	/*
 		These values were chosen so that the generator can run safely up to 80 kW
-		A full 50 deuterium sheet stack should last 20 minutes at power_output = 4
+		A full 50 graphite sheet stack should last 20 minutes at power_output = 4
 		temperature_gain and max_temperature are set so that the max safe power level is 4.
 		Setting to 5 or higher can only be done temporarily before the generator overheats.
 	*/

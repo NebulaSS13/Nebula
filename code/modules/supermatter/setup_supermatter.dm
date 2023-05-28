@@ -6,6 +6,7 @@
 #define ENERGY_NITROGEN 115			// Roughly 8 emitter shots.
 #define ENERGY_CARBONDIOXIDE 150	// Roughly 10 emitter shots.
 #define ENERGY_HYDROGEN 300			// Roughly 20 emitter shots.
+#define ENERGY_PHORON 500			// Roughly 40 emitter shots.
 
 /datum/admins/proc/setup_supermatter()
 	set category = "Debug"
@@ -18,7 +19,7 @@
 		to_chat(usr, "Error: you are not an admin!")
 		return
 
-	var/response = input(usr, "Are you sure? This will start up the engine with selected gas as coolant.", "Engine setup") as null|anything in list("N2", "CO2", "H2", "Abort")
+	var/response = input(usr, "Are you sure? This will start up the engine with selected gas as coolant.", "Engine setup") as null|anything in list("N2", "CO2", "PH", "H2", "Abort")
 	if(!response || response == "Abort")
 		return
 
@@ -38,6 +39,9 @@
 			if("CO2")
 				C.canister_type = /obj/machinery/portable_atmospherics/canister/carbon_dioxide/engine_setup/
 				continue
+			if("PH")
+				C.canister_type = /obj/machinery/portable_atmospherics/canister/phoron/engine_setup/
+				continue
 			if("H2")
 				C.canister_type = /obj/machinery/portable_atmospherics/canister/hydrogen/engine_setup/
 				continue
@@ -49,6 +53,9 @@
 				continue
 			if("CO2")
 				C.energy_setting = ENERGY_CARBONDIOXIDE
+				continue
+			if("PH")
+				C.energy_setting = ENERGY_PHORON
 				continue
 			if("H2")
 				C.energy_setting = ENERGY_HYDROGEN
@@ -242,6 +249,9 @@ var/global/list/engine_setup_markers = list()
 			else if(coolant == "N2")
 				P.filtering = /decl/material/gas/nitrogen
 				break
+			if(coolant == "PH")
+				P.filtering = /decl/material/solid/phoron
+				break
 			else if(coolant == "H2")
 				P.filtering = /decl/material/gas/hydrogen
 				break
@@ -283,3 +293,4 @@ var/global/list/engine_setup_markers = list()
 #undef ENERGY_NITROGEN
 #undef ENERGY_CARBONDIOXIDE
 #undef ENERGY_HYDROGEN
+#undef ENERGY_PHORON

@@ -226,12 +226,12 @@
 	)
 
 /decl/cocktail/toxins_special
-	name = "H2 Special"
+	name = "Toxins Special"
 	description = "Raise a glass to the bomb technicians of yesteryear, wherever their ashes now reside."
 	ratios = list(
 		/decl/material/liquid/ethanol/rum = 1,
 		/decl/material/liquid/ethanol/vermouth = 1,
-		/decl/material/solid/metallic_hydrogen
+		/decl/material/solid/phoron
 	)
 
 /decl/cocktail/beepsky_smash

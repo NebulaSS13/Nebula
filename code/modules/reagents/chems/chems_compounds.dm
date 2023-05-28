@@ -94,7 +94,7 @@
 	exoplanet_rarity_gas = MAT_RARITY_EXOTIC
 
 	heating_point = T100C
-	heating_message = "darkens and thickens as it seperates from its water content"
+	heating_message = "darkens and thickens as it separates from its water content"
 	heating_products = list(
 		/decl/material/liquid/capsaicin/condensed = 0.5,
 		/decl/material/liquid/water = 0.5

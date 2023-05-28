@@ -14,6 +14,7 @@
 	pass_flags = PASS_FLAG_TABLE
 	base_movement_delay = 1
 	max_gas = list(
+		/decl/material/solid/phoron = 1,
 		/decl/material/gas/chlorine = 1,
 		/decl/material/gas/carbon_dioxide = 5,
 		/decl/material/gas/methyl_bromide = 1

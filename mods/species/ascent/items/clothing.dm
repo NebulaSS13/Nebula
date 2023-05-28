@@ -25,6 +25,7 @@
 	sprite_sheets = list(BODYTYPE_MANTID_LARGE = 'mods/species/ascent/icons/clothing/mask_gyne.dmi')
 	bodytype_equip_flags = BODY_EQUIP_FLAG_GYNE | BODY_EQUIP_FLAG_ALATE
 	filtered_gases = list(
+		/decl/material/solid/phoron,
 		/decl/material/gas/nitrous_oxide,
 		/decl/material/gas/chlorine,
 		/decl/material/gas/ammonia,

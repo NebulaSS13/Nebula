@@ -7,7 +7,7 @@
 	matter = list(
 		/decl/material/solid/metal/steel =   MATTER_AMOUNT_REINFORCEMENT,
 		/decl/material/solid/metal/copper =  MATTER_AMOUNT_SECONDARY,
-		/decl/material/solid/exotic_matter = MATTER_AMOUNT_TRACE
+		/decl/material/solid/supermatter = MATTER_AMOUNT_TRACE
 	)
 	var/chargetype
 	var/chargedesc

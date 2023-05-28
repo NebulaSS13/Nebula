@@ -4,8 +4,8 @@
 	adult_icon =   'mods/content/xenobiology/icons/slimes/slime_adult_sepia.dmi'
 	extract_icon = 'mods/content/xenobiology/icons/slimes/slime_extract_sepia.dmi'
 	reaction_strings = list(
-		/decl/material/liquid/blood =        "Synthesises a camera film refill.",
-		/decl/material/solid/metal/uranium = "Synthesises a camera."
+		/decl/material/liquid/blood = "Synthesises a camera film refill.",
+		/decl/material/solid/phoron = "Synthesises a camera."
 	)
 
 /decl/slime_colour/sepia/handle_blood_reaction(var/datum/reagents/holder)
@@ -15,7 +15,7 @@
 			new /obj/item/camera_film(location)
 	return TRUE
 
-/decl/slime_colour/sepia/handle_uranium_reaction(var/datum/reagents/holder)
+/decl/slime_colour/sepia/handle_phoron_reaction(var/datum/reagents/holder)
 	var/turf/location = get_turf(holder.get_reaction_loc())
 	if(location)
 		new /obj/item/camera(location)

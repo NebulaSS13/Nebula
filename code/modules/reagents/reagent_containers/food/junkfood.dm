@@ -323,7 +323,7 @@
 		/decl/material/liquid/capsaicin,
 		/decl/material/liquid/frostoil,
 		/decl/material/liquid/nutriment/sprinkles,
-		/decl/material/gas/chlorine,
+		/decl/material/solid/phoron,
 		/decl/material/liquid/nutriment/coco,
 		/decl/material/liquid/nutriment/banana_cream,
 		/decl/material/liquid/nutriment/cherryjelly,

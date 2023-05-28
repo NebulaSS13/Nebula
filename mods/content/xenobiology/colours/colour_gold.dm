@@ -9,7 +9,7 @@
 	baby_icon =    'mods/content/xenobiology/icons/slimes/slime_baby_gold.dmi'
 	adult_icon =   'mods/content/xenobiology/icons/slimes/slime_adult_gold.dmi'
 	extract_icon = 'mods/content/xenobiology/icons/slimes/slime_extract_gold.dmi'
-	reaction_strings = list(/decl/material/solid/metal/uranium = "Synthesises a cute critter.")
+	reaction_strings = list(/decl/material/solid/phoron = "Synthesises a cute critter.")
 	var/list/possible_mobs = list(
 		/mob/living/simple_animal/passive/cat,
 		/mob/living/simple_animal/passive/cat/kitten,
@@ -21,7 +21,7 @@
 		/mob/living/simple_animal/fowl/duck
 	)
 
-/decl/slime_colour/gold/handle_uranium_reaction(var/datum/reagents/holder)
+/decl/slime_colour/gold/handle_phoron_reaction(var/datum/reagents/holder)
 	var/location = get_turf(holder.get_reaction_loc())
 	if(location)
 		var/mob_type = pick(possible_mobs)

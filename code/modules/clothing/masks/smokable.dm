@@ -137,9 +137,10 @@
 			return
 		lit = TRUE
 		atom_damage_type = BURN
-		if(REAGENT_VOLUME(reagents, /decl/material/liquid/fuel)) // the fuel explodes
+		var/explosive_power = round(REAGENT_VOLUME(reagents, /decl/material/solid/phoron) / 2.5 + REAGENT_VOLUME(reagents, /decl/material/liquid/fuel) / 5, 1)
+		if(explosive_power > 0)
 			var/datum/effect/effect/system/reagents_explosion/e = new()
-			e.set_up(round(REAGENT_VOLUME(reagents, /decl/material/liquid/fuel) / 5, 1), get_turf(src), 0, 0)
+			e.set_up(explosive_power, get_turf(src), 0, 0)
 			e.start()
 			qdel(src)
 			return

@@ -510,7 +510,7 @@ var/global/list/global/tank_gauge_cache = list()
 	. = ..()
 
 	// Set up appearance/strings.
-	var/obj/item/tank/tank_copy = pick(typesof(/obj/item/tank/oxygen) + typesof(/obj/item/tank/hydrogen))
+	var/obj/item/tank/tank_copy = pick(typesof(/obj/item/tank/oxygen) + typesof(/obj/item/tank/hydrogen) + typesof(/obj/item/tank/phoron))
 	name = initial(tank_copy.name)
 	desc = initial(tank_copy.desc)
 	icon = initial(tank_copy.icon)

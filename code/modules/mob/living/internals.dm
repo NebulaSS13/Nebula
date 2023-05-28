@@ -59,7 +59,7 @@
 		"rig"  =         list(get_rig()?.air_supply,               "in")
 	)
 
-/mob/living/proc/set_internals_to_best_available_tank(var/breathes_gas = /decl/material/gas/oxygen, var/list/poison_gas = list(/decl/material/gas/chlorine))
+/mob/living/proc/set_internals_to_best_available_tank(var/breathes_gas = /decl/material/gas/oxygen, var/list/poison_gas = list(/decl/material/gas/chlorine, /decl/material/solid/phoron))
 
 	if(!ispath(breathes_gas))
 		return

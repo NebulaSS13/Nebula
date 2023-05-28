@@ -2,11 +2,12 @@ var/global/list/responsive_carriers = list(
 	/decl/material/solid/carbon          = "Trace organic cells",
 	/decl/material/solid/potassium       = "Long exposure particles",
 	/decl/material/liquid/fuel/hydrazine = "Trace water particles",
-	/decl/material/gas/ammonia 			 = "Crystalline structures",
+	/decl/material/gas/ammonia           = "Crystalline structures",
 	/decl/material/liquid/mercury        = "Metallic derivative",
 	/decl/material/solid/metal/iron      = "Metallic composite",
 	/decl/material/gas/chlorine          = "Metamorphic/igneous rock composite",
-	/decl/material/solid/phosphorus      = "Metamorphic/sedimentary rock composite"
+	/decl/material/solid/phosphorus      = "Metamorphic/sedimentary rock composite",
+	/decl/material/solid/phoron          = "Anomalous energetic material"
 )
 
 /decl/archaeological_find

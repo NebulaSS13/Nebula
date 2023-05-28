@@ -66,6 +66,11 @@
 /turf/wall/plastic/facade
 	girder_material = /decl/material/solid/organic/plastic
 
+/turf/wall/phoron
+	color = "#e37108"
+	icon_state = "stone"
+	material = /decl/material/solid/phoron
+
 /turf/wall/wood
 	color = COLOR_BROWN
 	icon_state = "wood"

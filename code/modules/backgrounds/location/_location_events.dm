@@ -57,7 +57,7 @@
 	. = "A [pick("festival","week long celebration","day of revelry","planet-wide holiday")] has been declared on [location.name] by [pick("Governor","Commissioner","General","Commandant","Administrator")] [random_name(pick(MALE,FEMALE))] to celebrate [pick("the birth of their [pick("son","daughter")]","coming of age of their [pick("son","daughter")]","the pacification of rogue military cell","the apprehension of a violent criminal who had been terrorising the planet")]. Massive stocks of food and meat have been bought driving up prices across the planet."
 
 /decl/location_event/research_breakthrough/announce(var/decl/background_detail/location)
-	. = "A major breakthough in the field of [pick("exotic matter research","super-compressed materials","nano-augmentation","wormhole research","volatile power manipulation")] \
+	. = "A major breakthough in the field of [pick("phoron research","super-compressed materials","nano-augmentation","wormhole research","volatile power manipulation")] \
 		was announced [pick("yesterday","a few days ago","last week","earlier this month")] by a private firm on [location.name]. \
 		[global.using_map.company_name] declined to comment as to whether this could impinge on profits."
 

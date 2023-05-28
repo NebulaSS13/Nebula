@@ -87,8 +87,11 @@
 /obj/item/fuel_assembly/tritium
 	material = /decl/material/gas/hydrogen/tritium
 
+/obj/item/fuel_assembly/phoron
+	material = /decl/material/solid/phoron
+
 /obj/item/fuel_assembly/supermatter
-	material = /decl/material/solid/exotic_matter
+	material = /decl/material/solid/supermatter
 
 /obj/item/fuel_assembly/hydrogen
 	material = /decl/material/gas/hydrogen

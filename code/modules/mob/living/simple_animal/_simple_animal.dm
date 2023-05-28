@@ -42,6 +42,7 @@
 	//Atmos effect - Yes, you can make creatures that require arbitrary gasses to survive. N2O is a trace gas and handled separately, hence why it isn't here. It'd be hard to add it. Hard and me don't mix (Yes, yes make all the dick jokes you want with that.) - Errorage
 	var/list/min_gas = list(/decl/material/gas/oxygen = 5)
 	var/list/max_gas = list(
+		/decl/material/solid/phoron = 1,
 		/decl/material/gas/chlorine = 1,
 		/decl/material/gas/carbon_dioxide = 5
 	)

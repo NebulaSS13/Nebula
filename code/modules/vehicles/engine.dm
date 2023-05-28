@@ -116,6 +116,9 @@
 			actually_flameable = 1
 		else if(istype(R,/decl/material/liquid/fuel))
 			actually_flameable = 1
+		else if(istype(R,/decl/material/solid/phoron))
+			new_multiplier = 2
+			actually_flameable = 1
 		else if(istype(R,/decl/material/liquid/frostoil))
 			new_multiplier = 0.1
 		else if(istype(R,/decl/material/liquid/water))

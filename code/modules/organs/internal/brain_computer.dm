@@ -98,6 +98,14 @@
 	desc = "A cube of shining metal, four inches to a side and covered in shallow grooves."
 	origin_tech = @'{"engineering":4,"materials":4,"wormholes":2,"programming":4}'
 	icon = 'icons/obj/items/brain_interface_robotic.dmi'
+	matter = list(
+		/decl/material/solid/glass = MATTER_AMOUNT_REINFORCEMENT,
+		/decl/material/solid/metal/silver = MATTER_AMOUNT_TRACE,
+		/decl/material/solid/metal/gold = MATTER_AMOUNT_TRACE,
+		/decl/material/solid/phoron = MATTER_AMOUNT_TRACE,
+		/decl/material/solid/gemstone/diamond = MATTER_AMOUNT_TRACE
+	)
+	scale_max_damage_to_species_health = FALSE
 
 /obj/item/organ/internal/brain/robotic/positronic/Initialize()
 	. = ..()

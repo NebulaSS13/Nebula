@@ -1,17 +1,15 @@
 var/global/list/rad_collectors = list()
 
-// TODO: swap the hydrogen tanks out for lithium sheets or something like that.
-
 /obj/machinery/rad_collector
 	name = "radiation collector array"
-	desc = "A device which uses radiation and hydrogen to produce power."
+	desc = "A device which uses radiation and phoron to produce power."
 	icon = 'icons/obj/machines/rad_collector.dmi'
 	icon_state = "ca"
 	anchored = FALSE
 	density = TRUE
 	initial_access = list(access_engine_equip)
 	max_health = 100
-	var/obj/item/tank/hydrogen/loaded_tank = null
+	var/obj/item/tank/phoron/loaded_tank = null
 
 	var/max_safe_temp = 1000 + T0C
 	var/melted
@@ -64,11 +62,11 @@ var/global/list/rad_collectors = list()
 			receive_pulse(12.5*(last_rads/max_rads)/(0.3+(last_rads/max_rads)))
 
 	if(loaded_tank)
-		if(loaded_tank.air_contents.gas[/decl/material/gas/hydrogen] == 0)
+		if(loaded_tank.air_contents.gas[/decl/material/solid/phoron] == 0)
 			investigate_log("<font color='red'>out of fuel</font>.","singulo")
 			eject()
 		else
-			loaded_tank.air_adjust_gas(/decl/material/gas/hydrogen, -0.01*drainratio*min(last_rads,max_rads)/max_rads) //fuel cost increases linearly with incoming radiation
+			loaded_tank.air_adjust_gas(/decl/material/solid/phoron, -0.01*drainratio*min(last_rads,max_rads)/max_rads) //fuel cost increases linearly with incoming radiation
 
 /obj/machinery/rad_collector/CanUseTopic(mob/user)
 	if(!anchored)
@@ -85,12 +83,12 @@ var/global/list/rad_collectors = list()
 		toggle_power()
 		user.visible_message("[user.name] turns \the [src] [active? "on":"off"].", \
 		"You turn \the [src] [active? "on":"off"].")
-		investigate_log("turned [active?"<font color='green'>on</font>":"<font color='red'>off</font>"] by [user.key]. [loaded_tank?"Fuel: [round(loaded_tank.air_contents.gas[/decl/material/gas/hydrogen]/0.29)]%":"<font color='red'>It is empty</font>"].","singulo")
+		investigate_log("turned [active?"<font color='green'>on</font>":"<font color='red'>off</font>"] by [user.key]. [loaded_tank?"Fuel: [round(loaded_tank.air_contents.gas[/decl/material/solid/phoron]/0.29)]%":"<font color='red'>It is empty</font>"].","singulo")
 	else
 		to_chat(user, "<span class='warning'>The controls are locked!</span>")
 
 /obj/machinery/rad_collector/attackby(obj/item/W, mob/user)
-	if(istype(W, /obj/item/tank/hydrogen))
+	if(istype(W, /obj/item/tank/phoron))
 		if(!src.anchored)
 			to_chat(user, "<span class='warning'>\The [src] needs to be secured to the floor first.</span>")
 			return 1
@@ -165,7 +163,7 @@ var/global/list/rad_collectors = list()
 
 /obj/machinery/rad_collector/proc/eject()
 	locked = 0
-	var/obj/item/tank/hydrogen/Z = src.loaded_tank
+	var/obj/item/tank/phoron/Z = src.loaded_tank
 	if (!Z)
 		return
 	Z.dropInto(loc)
@@ -179,7 +177,7 @@ var/global/list/rad_collectors = list()
 /obj/machinery/rad_collector/proc/receive_pulse(var/pulse_strength)
 	if(loaded_tank && active)
 		var/power_produced = 0
-		power_produced = min(100*loaded_tank.air_contents.gas[/decl/material/gas/hydrogen]*pulse_strength*pulse_coeff,max_power)
+		power_produced = min(100*loaded_tank.air_contents.gas[/decl/material/solid/phoron]*pulse_strength*pulse_coeff,max_power)
 		generate_power(power_produced)
 		last_power_new = power_produced
 		return

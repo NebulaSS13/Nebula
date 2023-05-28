@@ -11,8 +11,8 @@
 	var/reaction_sound = 'sound/effects/bubbles.ogg'
 	var/list/reaction_strings = list()
 	var/list/reaction_procs = list(
-		/decl/material/liquid/blood =        /decl/slime_colour/proc/try_blood_reaction,
-		/decl/material/solid/metal/uranium = /decl/slime_colour/proc/try_uranium_reaction
+		/decl/material/liquid/blood = /decl/slime_colour/proc/try_blood_reaction,
+		/decl/material/solid/phoron = /decl/slime_colour/proc/try_phoron_reaction
 	)
 
 /decl/slime_colour/proc/handle_reaction(var/datum/reagents/holder)
@@ -48,7 +48,7 @@
 	return handle_blood_reaction(holder)
 /decl/slime_colour/proc/handle_blood_reaction(var/datum/reagents/holder)
 	return FALSE
-/decl/slime_colour/proc/try_uranium_reaction(var/datum/reagents/holder)
-	return handle_uranium_reaction(holder)
-/decl/slime_colour/proc/handle_uranium_reaction(var/datum/reagents/holder)
+/decl/slime_colour/proc/try_phoron_reaction(var/datum/reagents/holder)
+	return handle_phoron_reaction(holder)
+/decl/slime_colour/proc/handle_phoron_reaction(var/datum/reagents/holder)
 	return FALSE

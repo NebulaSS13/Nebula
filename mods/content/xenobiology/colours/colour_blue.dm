@@ -9,8 +9,8 @@
 	baby_icon =    'mods/content/xenobiology/icons/slimes/slime_baby_blue.dmi'
 	adult_icon =   'mods/content/xenobiology/icons/slimes/slime_adult_blue.dmi'
 	extract_icon = 'mods/content/xenobiology/icons/slimes/slime_extract_blue.dmi'
-	reaction_strings = list(/decl/material/solid/metal/uranium = "Synthesises a small amount of frost oil.")
+	reaction_strings = list(/decl/material/solid/phoron = "Synthesises a small amount of frost oil.")
 
-/decl/slime_colour/blue/handle_uranium_reaction(var/datum/reagents/holder)
+/decl/slime_colour/blue/handle_phoron_reaction(var/datum/reagents/holder)
 	holder.add_reagent(/decl/material/liquid/frostoil, 10)
 	return TRUE

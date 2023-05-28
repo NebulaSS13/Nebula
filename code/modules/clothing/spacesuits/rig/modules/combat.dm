@@ -312,7 +312,7 @@
 		/decl/material/solid/fiberglass = MATTER_AMOUNT_REINFORCEMENT,
 		/decl/material/solid/organic/plastic = MATTER_AMOUNT_TRACE,
 		/decl/material/solid/metal/gold = MATTER_AMOUNT_TRACE,
-		/decl/material/solid/metal/uranium = MATTER_AMOUNT_TRACE
+		/decl/material/solid/phoron = MATTER_AMOUNT_TRACE
 	)
 
 /obj/item/rig_module/mounted/plasmacutter/engage(atom/target)

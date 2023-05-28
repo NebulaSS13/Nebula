@@ -113,8 +113,8 @@ var/global/list/supermatter_delam_accent_sounds = list(
 	light_range = 4
 	layer = ABOVE_HUMAN_LAYER
 	matter = list(
-		/decl/material/solid/exotic_matter = MATTER_AMOUNT_PRIMARY,
-		/decl/material/solid/metal/steel =   MATTER_AMOUNT_REINFORCEMENT
+		/decl/material/solid/supermatter = MATTER_AMOUNT_PRIMARY,
+		/decl/material/solid/metal/steel = MATTER_AMOUNT_REINFORCEMENT
 	)
 
 	var/nitrogen_retardation_factor = 0.15 // Higher == N2 slows reaction more
@@ -508,7 +508,7 @@ var/global/list/supermatter_delam_accent_sounds = list(
 
 		//Release reaction gasses
 		var/heat_capacity = removed.heat_capacity()
-		removed.adjust_multi(/decl/material/solid/exotic_matter, max(device_energy / product_release_modifier, 0), \
+		removed.adjust_multi(/decl/material/solid/phoron, max(device_energy / product_release_modifier, 0), \
 		                     /decl/material/gas/oxygen, max((device_energy + removed.temperature - T0C) / oxygen_release_modifier, 0))
 
 		var/thermal_power = thermal_release_modifier * device_energy

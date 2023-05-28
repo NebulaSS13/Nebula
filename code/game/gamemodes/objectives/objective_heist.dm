@@ -69,6 +69,7 @@
 		/decl/material/solid/metal/steel = 300,
 		/decl/material/solid/glass = 200,
 		/decl/material/solid/metal/plasteel = 100,
+		/decl/material/solid/phoron = 100,
 		/decl/material/solid/metal/silver = 50,
 		/decl/material/solid/metal/gold = 20,
 		/decl/material/solid/metal/uranium = 20,

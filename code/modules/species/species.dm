@@ -123,7 +123,10 @@ var/global/const/DEFAULT_SPECIES_HEALTH = 200
 	// Environment tolerance/life processes vars.
 	var/breath_pressure = 16                                    // Minimum partial pressure safe for breathing, kPa
 	var/breath_type = /decl/material/gas/oxygen                 // Non-oxygen gas breathed, if any.
-	var/poison_types = list(/decl/material/gas/chlorine = TRUE) // Noticeably poisonous air - ie. updates the toxins indicator on the HUD.
+	var/poison_types = list(                                    // Noticeably poisonous air - ie. updates the toxins indicator on the HUD.
+		/decl/material/solid/phoron = TRUE,
+		/decl/material/gas/chlorine = TRUE
+		)
 	var/exhale_type = /decl/material/gas/carbon_dioxide         // Exhaled gas type.
 	var/blood_reagent = /decl/material/liquid/blood
 

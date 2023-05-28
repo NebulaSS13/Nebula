@@ -8,7 +8,7 @@
 	density = TRUE
 	use_power = POWER_USE_OFF
 	matter = list(
-		/decl/material/solid/exotic_matter = MATTER_AMOUNT_PRIMARY,
+		/decl/material/solid/supermatter = MATTER_AMOUNT_PRIMARY,
 		/decl/material/solid/metal/steel = MATTER_AMOUNT_SECONDARY
 	)
 

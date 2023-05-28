@@ -9,9 +9,9 @@
 	baby_icon =    'mods/content/xenobiology/icons/slimes/slime_baby_darkblue.dmi'
 	adult_icon =   'mods/content/xenobiology/icons/slimes/slime_adult_darkblue.dmi'
 	extract_icon = 'mods/content/xenobiology/icons/slimes/slime_extract_darkblue.dmi'
-	reaction_strings = list(/decl/material/solid/metal/uranium = "Drastically lowers the bodytemperature of surrounding creatures.")
+	reaction_strings = list(/decl/material/solid/phoron = "Drastically lowers the bodytemperature of surrounding creatures.")
 
-/decl/slime_colour/dark_blue/handle_uranium_reaction(var/datum/reagents/holder)
+/decl/slime_colour/dark_blue/handle_phoron_reaction(var/datum/reagents/holder)
 	. = TRUE
 	sleep(5 SECONDS)
 	var/location = get_turf(holder.get_reaction_loc())

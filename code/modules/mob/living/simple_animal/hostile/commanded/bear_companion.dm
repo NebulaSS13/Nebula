@@ -6,6 +6,7 @@
 	density = TRUE
 	natural_weapon = /obj/item/natural_weapon/claws
 	max_gas = list(
+		/decl/material/solid/phoron = 2,
 		/decl/material/gas/chlorine = 2,
 		/decl/material/gas/carbon_dioxide = 5
 	)
