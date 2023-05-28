@@ -99,6 +99,7 @@
 #define AREA_FLAG_HOLY                 BITFLAG(10) // Area is holy for the purposes of marking turfs as cult-resistant.
 #define AREA_FLAG_SECURITY             BITFLAG(11) // Area is security for the purposes of newscaster init.
 #define AREA_FLAG_HIDE_FROM_HOLOMAP    BITFLAG(12) // if we shouldn't be drawn on station holomaps
+#define AREA_FLAG_IS_STATION_AREA      BITFLAG(13) // TODO: Polaris port.
 
 //Map template flags
 #define TEMPLATE_FLAG_ALLOW_DUPLICATES   BITFLAG(0)  // Lets multiple copies of the template to be spawned

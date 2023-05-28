@@ -19,6 +19,11 @@
 /obj/item/chems/pill/oxygen
 	name = "dexalin (15u)"
 
+/obj/item/chems/pill/oxygen/plus
+	name = "dexalin plus (15u)"
+	desc = "Used to treat extreme oxygen deprivation."
+	icon_state = "pill2"
+
 /obj/item/chems/pill/brute_meds
 	name = "bicaridine (20u)"
 
@@ -44,6 +49,9 @@
 
 /obj/item/pill_bottle/oxygen
 	labeled_name = "dexalin"
+
+/obj/item/pill_bottle/oxygen/plus
+	labeled_name = "dexalin plus"
 
 /obj/item/pill_bottle/antitoxins
 	labeled_name = "dylovene"

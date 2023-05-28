@@ -1,6 +1,3 @@
-var/global/const/CAMERA_CHANNEL_COMMAND = "Command"
-var/global/const/CAMERA_CHANNEL_ENGINE  = "Engine"
-var/global/const/CAMERA_CHANNEL_ENGINEERING_OUTPOST = "Engineering Outpost"
 //
 // Cameras
 //

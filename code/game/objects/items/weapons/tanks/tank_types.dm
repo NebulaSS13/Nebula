@@ -120,3 +120,14 @@
 	distribute_pressure = ONE_ATMOSPHERE*O2STANDARD
 	starting_pressure = list(/decl/material/gas/nitrogen = 10 ATM)
 	gas_volume = 180
+
+/*
+ * Sleeping gas (nitrous oxide)
+ */
+/obj/item/tank/anesthetic
+	name = "anesthetic tank"
+	desc = "A tank of breathable anaesthetic gas. Count backwards from ten..."
+	icon = 'icons/obj/items/tanks/tank_stirling.dmi' // placeholder! needs red stripe added and outline fixed
+	distribute_pressure = ONE_ATMOSPHERE
+	starting_pressure = list(/decl/material/gas/nitrous_oxide = 3 ATM * N2STANDARD, /decl/material/gas/oxygen = 3 ATM * O2STANDARD)
+	gas_volume = 180

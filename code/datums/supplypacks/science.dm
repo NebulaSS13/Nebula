@@ -74,4 +74,4 @@
 	)
 	containertype = /obj/structure/closet/crate/large
 	containername = "stasis cage crate"
-	access        = access_research
+	access        = access_xenofauna

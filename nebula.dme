@@ -1024,6 +1024,7 @@
 #include "code\game\objects\effects\fake_fire.dm"
 #include "code\game\objects\effects\footprints.dm"
 #include "code\game\objects\effects\force_portal.dm"
+#include "code\game\objects\effects\force_wall.dm"
 #include "code\game\objects\effects\gateway.dm"
 #include "code\game\objects\effects\gibspawner.dm"
 #include "code\game\objects\effects\item_pickup_ghost.dm"

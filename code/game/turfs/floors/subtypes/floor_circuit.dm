@@ -13,6 +13,10 @@
 	name        = "mainframe base" // TODO: force name overriding flooring?
 	temperature = 263
 
+/turf/floor/bluegrid/cryo
+	initial_gas = list(/decl/material/gas/nitrogen = MOLES_CELLSTANDARD)
+	temperature = 73
+
 /turf/floor/greengrid
 	name        = "mainframe floor"
 	icon        = 'icons/turf/flooring/circuit.dmi'

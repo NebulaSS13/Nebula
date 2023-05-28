@@ -194,3 +194,26 @@
 		/obj/item/food/plumphelmetbiscuit
 	)
 	return spawnable_choices
+
+/obj/random/mug
+	name = "random coffee cup"
+	desc = "A random coffee cup/mug."
+	icon = 'icons/obj/drink_glasses/coffecup.dmi'
+	icon_state = "coffeecup"
+
+/obj/random/mug/spawn_choices()
+	var/static/list/spawnable_choices = list(
+		/obj/item/chems/drinks/glass2/coffeecup,
+		/obj/item/chems/drinks/glass2/coffeecup/black,
+		/obj/item/chems/drinks/glass2/coffeecup/green,
+		/obj/item/chems/drinks/glass2/coffeecup/heart,
+		/obj/item/chems/drinks/glass2/coffeecup/one,
+		/obj/item/chems/drinks/glass2/coffeecup/rainbow,
+		/obj/item/chems/drinks/glass2/coffeecup/metal,
+		/obj/item/chems/drinks/glass2/coffeecup/STC,
+		/obj/item/chems/drinks/glass2/coffeecup/pawn,
+		/obj/item/chems/drinks/glass2/coffeecup/britcup,
+		/obj/item/chems/drinks/glass2/coffeecup/tall,
+		/obj/item/chems/drinks/glass2/coffeecup/teacup
+	)
+	return spawnable_choices

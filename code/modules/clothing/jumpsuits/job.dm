@@ -240,7 +240,6 @@
 /obj/item/clothing/jumpsuit/security/corporate
 	icon = 'icons/clothing/jumpsuits/jumpsuit_sec_corp.dmi'
 
-
 /*
  * Command
 */

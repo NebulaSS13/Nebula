@@ -59,7 +59,7 @@
 	speech_sounds = list('sound/voice/shriek1.ogg')
 	speech_chance = 20
 
-	preview_outfit = /decl/outfit/vox_raider
+	preview_outfit = /decl/outfit/vox/raider
 
 	gluttonous = GLUT_TINY|GLUT_ITEM_NORMAL
 	stomach_capacity = 12
@@ -129,19 +129,19 @@
 		/decl/emote/exertion/synthetic/creak
 	)
 
-/decl/species/vox/equip_survival_gear(var/mob/living/human/H)
-	H.equip_to_slot_or_del(new /obj/item/clothing/mask/gas/vox(H), slot_wear_mask_str)
-	var/obj/item/backpack/backpack = H.get_equipped_item(slot_back_str)
+/decl/species/vox/equip_survival_gear(mob/living/wearer, extended)
+	wearer.equip_to_slot_or_del(new /obj/item/clothing/mask/gas/vox(wearer), slot_wear_mask_str)
+	var/obj/item/backpack/backpack = wearer.get_equipped_item(slot_back_str)
 	if(istype(backpack))
-		H.equip_to_slot_or_del(new /obj/item/box/vox(backpack), slot_in_backpack_str)
-		var/obj/item/tank/nitrogen/tank = new(H)
-		H.equip_to_slot_or_del(tank, BP_R_HAND)
+		wearer.equip_to_slot_or_del(new /obj/item/box/vox(backpack), slot_in_backpack_str)
+		var/obj/item/tank/nitrogen/tank = new(wearer)
+		wearer.equip_to_slot_or_del(tank, BP_R_HAND)
 		if(tank)
-			H.set_internals(tank)
+			wearer.set_internals(tank)
 	else
-		H.equip_to_slot_or_del(new /obj/item/tank/nitrogen(H), slot_back_str)
-		H.equip_to_slot_or_del(new /obj/item/box/vox(H), BP_R_HAND)
-		H.set_internals(backpack)
+		wearer.equip_to_slot_or_del(new /obj/item/tank/nitrogen(wearer), slot_back_str)
+		wearer.equip_to_slot_or_del(new /obj/item/box/vox(wearer), BP_R_HAND)
+		wearer.set_internals(backpack)
 
 // Ideally this would all be on bodytype, but pressure is handled per-mob currently.
 var/global/list/vox_current_pressure_toggle = list()

@@ -11,6 +11,12 @@
 	siemens_coefficient = 0.7
 	material = /decl/material/solid/organic/leather
 
+/obj/item/clothing/suit/jacket/bomber/pilot
+	name = "pilot jacket"
+	desc = "A thick, blue bomber jacket."
+	icon = 'icons/clothing/suits/jackets/pilot.dmi'
+	min_cold_protection_temperature = SPACE_SUIT_MIN_COLD_PROTECTION_TEMPERATURE
+
 /obj/item/clothing/suit/jacket/leather
 	name = "black leather jacket"
 	desc = "A black leather coat."

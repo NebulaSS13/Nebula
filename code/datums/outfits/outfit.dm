@@ -270,3 +270,7 @@
 
 /decl/outfit/dd_SortValue()
 	return name
+
+// Stub for the sake of being able to make people spawn nude.
+/decl/outfit/naked
+	name = "Naked And Afraid"

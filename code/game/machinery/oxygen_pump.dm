@@ -281,3 +281,23 @@
 			lungs.heal_damage(1)
 		else
 			breather.suffocation_counter = max(breather.suffocation_counter - rand(1,5), 0)
+
+/obj/machinery/oxygen_pump/anesthetic
+	name = "anesthetic pump"
+	desc = "A wall-mounted anesthetic pump with a retractable mask that someone can pull over your face to knock you out."
+	spawn_type = /obj/item/tank/anesthetic
+	icon_state = "anesthetic_tank"
+	icon_state_closed = "anesthetic_tank"
+	icon_state_open = "anesthetic_tank_open"
+	mask_type = /obj/item/clothing/mask/breath/medical
+
+/obj/machinery/oxygen_pump/mobile/anesthetic
+	name = "portable anesthetic pump"
+	desc = "A portable anesthetic pump with a retractable mask that someone can pull over your face to knock you out."
+	spawn_type = /obj/item/tank/anesthetic
+	icon_state = "medpump_n2o"
+	icon_state_closed = "medpump_n2o"
+	icon_state_open = "medpump_n2o_open"
+	icon_state_active = "medpump_n2o_active"
+	mask_type = /obj/item/clothing/mask/breath // /obj/item/clothing/mask/breath/anesthetic // TODO implement
+

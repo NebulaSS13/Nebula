@@ -90,6 +90,7 @@
 	plural_icon_state = "sheet-phoron-mult"
 	max_icon_state = "sheet-phoron-max"
 	stack_merge_type = /obj/item/stack/material/crystal
+	can_be_pulverized = TRUE
 
 /obj/item/stack/material/segment
 	name = "segments"

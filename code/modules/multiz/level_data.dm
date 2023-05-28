@@ -678,6 +678,8 @@
 
 ///Returns the instance of the base area for this level
 /datum/level_data/proc/get_base_area_instance()
+	if(!base_area)
+		return null
 	var/area/found = locate(base_area)
 	if(found)
 		return found
