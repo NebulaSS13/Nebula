@@ -23,19 +23,19 @@
 /decl/protection_type/proc/get_description(value)
 	switch(value)
 		if(1 to ARMOR_MELEE_SMALL - 1)
-			. = "It provides minimal protection against blunt and edged weapons"
+			. = "It provides minimal protection against blunt and edged weapons."
 		if(ARMOR_MELEE_SMALL to ARMOR_MELEE_KNIVES - 1)
-			. = "It provides a bit of protection against blunt and edged weapons"
+			. = "It provides a bit of protection against blunt and edged weapons."
 		if(ARMOR_MELEE_KNIVES to ARMOR_MELEE_RESISTANT - 1)
-			. = "It will blunt most knife attacks and provides some padding against blunt weapons"
+			. = "It will blunt most knife attacks and provides some padding against blunt weapons."
 		if(ARMOR_MELEE_RESISTANT to ARMOR_MELEE_MAJOR - 1)
-			. = "It will likely blunt even large blades like swords, and cushion impacts from heavy weapons"
+			. = "It will likely blunt even large blades like swords, and cushion impacts from heavy weapons."
 		if(ARMOR_MELEE_MAJOR to ARMOR_MELEE_VERY_HIGH - 1)
-			. = "It provides good protection even against more penetrating melee weapons"
+			. = "It provides good protection even against more penetrating melee weapons."
 		if(ARMOR_MELEE_VERY_HIGH to ARMOR_MELEE_SHIELDED - 1)
-			. = "It will let you shrug off all but most powerful or armor piercing melee attacks"
+			. = "It will let you shrug off all but most powerful or armor piercing melee attacks."
 		if(ARMOR_MELEE_SHIELDED to INFINITY)
-			. = "It makes you almost invulnerable against melee weapons"
+			. = "It makes you almost invulnerable against melee weapons."
 
 // Brute projectile attacks
 /decl/protection_type/ballistic
@@ -44,19 +44,19 @@
 /decl/protection_type/ballistic/get_description(value)
 	switch(value)
 		if(1 to ARMOR_BALLISTIC_SMALL - 1)
-			. = "It provides close to no protection against the bullets"
+			. = "It provides close to no protection against bullets."
 		if(ARMOR_BALLISTIC_SMALL to ARMOR_BALLISTIC_PISTOL - 1)
-			. = "It provides minor padding against the kinetics"
+			. = "It provides minor padding against kinetic rounds."
 		if(ARMOR_BALLISTIC_PISTOL to ARMOR_BALLISTIC_RESISTANT - 1)
-			. = "It is rated to protect against the common pistol rounds"
+			. = "It is rated to protect against common pistol rounds."
 		if(ARMOR_BALLISTIC_RESISTANT to ARMOR_BALLISTIC_RIFLE - 1)
-			. = "It is rated to protect against the most handguns, but rifles will still blow through"
+			. = "It is rated to protect against most handguns, but rifles will still blow through."
 		if(ARMOR_BALLISTIC_RIFLE to ARMOR_BALLISTIC_AP - 1)
-			. = "It is rated to protect against the rifle rounds"
+			. = "It is rated to protect against rifle rounds."
 		if(ARMOR_BALLISTIC_AP to ARMOR_BALLISTIC_HEAVY - 1)
-			. = "It is rated to protect against most armor-piercing rounds"
+			. = "It is rated to protect against most armor-piercing rounds."
 		if(ARMOR_BALLISTIC_HEAVY to INFINITY)
-			. = "It is on par with lighter tanks in terms of ballistic protection"
+			. = "It is on par with lighter tanks in terms of ballistic protection."
 
 // Concentrated burn attacks
 /decl/protection_type/laser
@@ -65,15 +65,15 @@
 /decl/protection_type/laser/get_description(value)
 	switch(value)
 		if(1 to ARMOR_LASER_SMALL - 1)
-			. = "It provides close to no protection against the laser beams"
+			. = "It provides close to no protection against laser beams."
 		if(ARMOR_LASER_SMALL to ARMOR_LASER_HANDGUNS - 1)
-			. = "It is rated to protect against the beams of smaller laser handguns"
+			. = "It is rated to protect against the beams of smaller laser handguns."
 		if(ARMOR_LASER_HANDGUNS to ARMOR_LASER_RIFLES - 1)
-			. = "It is rated to protect against the beams of laser handguns"
+			. = "It is rated to protect against the beams of laser handguns."
 		if(ARMOR_LASER_RIFLES to ARMOR_LASER_HEAVY - 1)
-			. = "It is rated to protect against the beams of full sized laser rifles"
+			. = "It is rated to protect against the beams of full sized laser rifles."
 		if(ARMOR_LASER_HEAVY to INFINITY)
-			. = "It is on par with lighter tanks in terms of laser protection"
+			. = "It is on par with lighter tanks in terms of laser protection."
 
 // Dispersed burn attacks
 /decl/protection_type/energy
@@ -82,13 +82,13 @@
 /decl/protection_type/energy/get_description(value)
 	switch(value)
 		if(1 to ARMOR_ENERGY_SMALL - 1)
-			. = "It provides some shielding against the heat and other energies"
+			. = "It provides some shielding against thermal and electrical energy."
 		if(ARMOR_ENERGY_SMALL to ARMOR_ENERGY_RESISTANT - 1)
-			. = "It provides shielding against the heat and other energies"
+			. = "It provides shielding against thermal and electrical energy."
 		if(ARMOR_ENERGY_RESISTANT to ARMOR_ENERGY_STRONG - 1)
-			. = "It provides good shielding against the heat and other energies"
+			. = "It provides good shielding against thermal and electrical energy."
 		if(ARMOR_ENERGY_STRONG to INFINITY)
-			. = "It provides almost complete shielding against the heat and other energies"
+			. = "It provides almost complete shielding against thermal and electrical energy."
 
 // Damage from explosions
 /decl/protection_type/bomb
@@ -97,11 +97,11 @@
 /decl/protection_type/bomb/get_description(value)
 	switch(value)
 		if(1 to ARMOR_BOMB_PADDED - 1)
-			. = "It provides minor padding against the explosions"
+			. = "It provides minor padding against explosions."
 		if(ARMOR_BOMB_MINOR to ARMOR_BOMB_RESISTANT - 1)
-			. = "It provides padding and insulation against the explosions"
+			. = "It provides padding and insulation against explosions."
 		if(ARMOR_ENERGY_RESISTANT to INFINITY - 1)
-			. = "It provides major padding and insulation against the explosions"
+			. = "It provides major padding and insulation against explosions."
 
 // Biohazards
 /decl/protection_type/bio
@@ -123,10 +123,10 @@
 /decl/protection_type/rad/get_description(value)
 	switch(value)
 		if(1 to ARMOR_RAD_SMALL - 1)
-			. = "It provides minor shielding against radaition"
+			. = "It provides minor shielding against radiation."
 		if(ARMOR_BIO_SMALL to ARMOR_RAD_RESISTANT - 1)
-			. = "It provides shielding against radaition"
+			. = "It provides shielding against radiation."
 		if(ARMOR_RAD_RESISTANT to ARMOR_RAD_SHIELDED - 1)
-			. = "It provides strong shielding against radaition"
+			. = "It provides strong shielding against radiation."
 		if(ARMOR_RAD_SHIELDED to INFINITY)
-			. = "It provides almost complete shielding against radaition"
+			. = "It provides almost complete shielding against radiation."
