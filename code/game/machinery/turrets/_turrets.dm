@@ -48,7 +48,7 @@
 	var/default_bearing = null // If no target is found, the turret will return to this bearing automatically.
 
 	// Detection.
-	var/datum/proximity_trigger/angle/proximity = null
+	var/datum/proximity_trigger/angle/proximity
 	var/vision_range = 7	// How many tiles away the turret can see. Values higher than 7 will let the turret shoot offscreen, which might be unsporting.
 							// Higher values may also have a performance cost.
 
@@ -76,9 +76,10 @@
 		/obj/machinery/turret/proc/on_proximity,
 		/obj/machinery/turret/proc/on_changed_turf_visibility,
 		vision_range,
+		PROXIMITY_EXCLUDE_HOLDER_TURF,
+		src,
 		leftmost_traverse,
-		rightmost_traverse,
-		PROXIMITY_EXCLUDE_HOLDER_TURF
+		rightmost_traverse
 	)
 	proximity.register_turfs()
 

@@ -44,7 +44,7 @@ var/global/const/PROXIMITY_EXCLUDE_HOLDER_TURF = 1 // When acquiring turfs to mo
 /datum/proximity_trigger/angle
 	turf_selection = /decl/turf_selection/angle
 
-/datum/proximity_trigger/New(var/holder, var/on_turf_entered, var/on_turfs_changed, var/range = 2, var/l_angle = 0, var/r_angle = 0, var/proximity_flags = 0, var/proc_owner)
+/datum/proximity_trigger/New(var/holder, var/on_turf_entered, var/on_turfs_changed, var/range = 2, var/proximity_flags = 0, var/proc_owner, var/l_angle = 0, var/r_angle = 0)
 	..()
 
 	if(!ispath(turf_selection, /decl/turf_selection))
