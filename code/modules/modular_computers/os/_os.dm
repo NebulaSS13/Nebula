@@ -310,3 +310,19 @@
 	var/datum/computer_file/program/email_client/e_client = locate() in running_programs
 	if(e_client)
 		e_client.mail_received(received)
+
+/datum/extension/interactive/os/proc/run_script(mob/user, var/datum/computer_file/data/script)
+	open_terminal(user)
+	var/datum/terminal/T = has_terminal(user)
+	if(!istype(T))
+		return  TOPIC_HANDLED
+
+	T.show_terminal(user)
+	T.append_to_history(">Running '[script.filename].[script.filetype]'")
+	var/list/lines = splittext(script.stored_data, "\[br\]")
+	for(var/line in lines)
+		var/output = T.parse(line, user)
+		if(QDELETED(T)) // Check for exit.
+			return TOPIC_HANDLED
+		T.append_to_history(output)
+		CHECK_TICK
