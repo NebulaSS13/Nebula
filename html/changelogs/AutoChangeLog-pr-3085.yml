@@ -1,6 +1,0 @@
-author: Penelope Haze
-delete-after: true
-changes:
-  - tweak: Energy armor now protects against electrocution damage. However, unlike
-      insulated equipment, it doesn't do anything to prevent electrocution in the
-      first place.
