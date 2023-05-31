@@ -1,17 +1,31 @@
-/datum/map_template //#FIXME: Probably should be typed /decl since it's a singleton.
+/datum/map_template
+	///Name for differentiating templates
 	var/name = "Default Template Name"
-	var/width = 0
-	var/height = 0
-	var/tallness = 0
+	///The width of the template's levels. Size is preloaded from template during template registration.
+	var/tmp/width = 0
+	///The height of the template's levels. Size is preloaded from template during template registration.
+	var/tmp/height = 0
+	///The amount of template levels. Size is preloaded from template during template registration.
+	var/tmp/tallness = 0
+	///Path to the map files to load for this template.
 	var/list/mappaths = null
-	var/loaded = 0 // Times loaded this round
+	///Amount of times this template was loaded at runtime.
+	var/tmp/loaded = 0 // Times loaded this round
+	///Shuttles in this template's levels that need to be initialized with SSshuttle.
 	var/list/shuttles_to_initialise = list()
+	///Sub-templates to spawn on this template if any. Ruins and sites and etc..
 	var/list/subtemplates_to_spawn
+	///Percent of chances to end up onto a level from this template by spacewalking between space z-levels.
 	var/accessibility_weight = 0
+	///Flags for defining special properties of this template.
 	var/template_flags = TEMPLATE_FLAG_ALLOW_DUPLICATES
-	var/modify_tag_vars = TRUE // Will modify tag vars so that duplicate templates are handled properly. May have compatibility issues with legacy maps (esp. with ferry shuttles).
-	var/list/template_categories // List of strings to store the templates under for mass retrieval.
-	var/template_parent_type = /datum/map_template // If this is equal to current type, the datum is abstract and should not be created.
+	///Will modify tag vars so that duplicate templates are handled properly. May have compatibility issues with legacy maps (esp. with ferry shuttles).
+	var/modify_tag_vars = TRUE
+	///List of strings to store the templates under for mass retrieval.
+	var/list/template_categories
+	///If this is equal to current type, the datum is abstract and should not be created.
+	var/template_parent_type = /datum/map_template
+	///The initial type of level_data to instantiate new z-level with initially. (Is replaced by whatever is in the map file.) If null, will use default.
 	var/level_data_type
 
 /datum/map_template/New(var/created_ad_hoc)
