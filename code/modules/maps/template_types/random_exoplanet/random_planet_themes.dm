@@ -1,4 +1,4 @@
-/datum/map_template/planetoid/proc/select_themes(var/datum/planetoid_data/gen_data)
+/datum/map_template/planetoid/random/proc/select_themes(var/datum/planetoid_data/gen_data)
 	//Apply forced theme if there's one
 	if(gen_data._theme_forced)
 		LAZYADD(gen_data.themes, new gen_data._theme_forced)

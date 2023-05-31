@@ -471,7 +471,7 @@
 	trap = GET_DECL(trap)
 	trap.forced(mob)
 
-/client/proc/spawn_exoplanet(exoplanet_type as anything in subtypesof(/datum/map_template/planetoid/exoplanet))
+/client/proc/spawn_exoplanet(exoplanet_type as anything in subtypesof(/datum/map_template/planetoid/random/exoplanet))
 	set category = "Debug"
 	set name = "Create Exoplanet"
 
@@ -498,7 +498,7 @@
 		return
 
 	//#TODO: This definitely could be improved.
-	var/datum/map_template/planetoid/exoplanet/planet_template = SSmapping.get_template_by_type(exoplanet_type)
+	var/datum/map_template/planetoid/random/exoplanet/planet_template = SSmapping.get_template_by_type(exoplanet_type)
 	var/datum/planetoid_data/PD = planet_template.create_planetoid_instance()
 	if(planet_template.subtemplate_budget != budget)
 		PD._budget_override = budget

@@ -7,6 +7,10 @@
 	transition_turf_type         = /turf/exterior/mimic_edge/transition
 	use_global_exterior_ambience = FALSE
 
+	///The planetoid_data datum owning this level. At definition can be set to the planetoid_id of the planetoid to link up with on creation.
+	///Ideally this will eventually be the main reference for the z-level to the planet level contents are located on. So we don't need to link every single turfs to it.
+	var/datum/planetoid_data/parent_planetoid
+
 ///Level data for generating surface levels on exoplanets
 /datum/level_data/planetoid/exoplanet
 	base_area = /area/exoplanet
@@ -21,6 +25,17 @@
 		/datum/random_map/automata/cave_system/mantle,
 	)
 
+/datum/level_data/planetoid/setup_level_data(skip_gen)
+	//setup level may be run post level gen, or as soon as the level_data is constructed.
+	if(istext(parent_planetoid))
+		set_planetoid(parent_planetoid)
+	. = ..()
+
+/datum/level_data/planetoid/copy_from(datum/level_data/planetoid/old_level)
+	//Make sure we pass over the planetoid_data that's been assigned to our turfs for coherency's sake
+	if(istype(old_level) && old_level.parent_planetoid)
+		set_planetoid(old_level.parent_planetoid)
+
 /datum/level_data/planetoid/initialize_level_id()
 	if(level_id)
 		return
@@ -29,35 +44,39 @@
 /datum/level_data/planetoid/setup_strata()
 	//If no fixed strata, grab the one from the owning planetoid_data if we have any
 	if(!strata)
-		var/datum/planetoid_data/planet = SSmapping.planetoid_data_by_z[level_z]
-		strata = planet?.get_strata()
+		strata = parent_planetoid?.get_strata()
 	. = ..()
 
-///Prepare our level for generation/load. And sync with the planet template
-/datum/level_data/planetoid/before_template_generation(datum/map_template/template, var/datum/planetoid_data/gen_data)
-	//In cases when the planetoid_data isn't shared with us, like from loading non-random planet map templates, we can try fetching it.
-	if(!gen_data)
-		gen_data = SSmapping.planetoid_data_by_z[level_z]
-	if(!gen_data)
-		CRASH("'[src]', id:'[level_id]', z:'[level_z]'. Couldn't access expected planetoid_data!")
+///Make sure the planetoid we belong to knows about us and that we know about them.
+/datum/level_data/planetoid/proc/set_planetoid(var/datum/planetoid_data/P)
+	if(istext(P))
+		P = SSmapping.planetoid_data_by_id[P]
+	if(istype(P))
+		parent_planetoid = P
+		SSmapping.register_planetoid_levels(level_z, P)
+	if(!parent_planetoid)
+		CRASH("Failed to set planetoid data for level '[level_id]', z:[level_z]")
+
+	//If the planetoid_data has some pre-defined level id for top and surface levels, be sure to let it know we exist.
+	if(parent_planetoid.topmost_level_id == level_id)
+		parent_planetoid.set_topmost_level(src)
+	if(parent_planetoid.surface_level_id == level_id)
+		parent_planetoid.set_surface_level(src)
 
 	//Apply parent's prefered bounds if we don't have any preferences
-	if(!level_max_width && gen_data.width)
-		level_max_width = gen_data.width
-	if(!level_max_height && gen_data.height)
-		level_max_height = gen_data.height
+	if(!level_max_width && parent_planetoid.width)
+		level_max_width = parent_planetoid.width
+	if(!level_max_height && parent_planetoid.height)
+		level_max_height = parent_planetoid.height
 
 	//Refresh bounds
 	setup_level_bounds()
-
 	//override atmosphere
-	apply_planet_atmosphere(gen_data)
-
-	//Rename main area and level
-	adapt_location_name(gen_data.name)
-
+	apply_planet_atmosphere(parent_planetoid)
 	//Try to adopt our parent planet's ambient lighting preferences
-	apply_planet_ambient_lighting(gen_data)
+	apply_planet_ambient_lighting(parent_planetoid)
+	//Rename the surface area if we have one yet
+	adapt_location_name(parent_planetoid.name)
 
 ///If we're getting atmos from our parent planet, decide if we're going to apply it, or ignore it
 /datum/level_data/planetoid/proc/apply_planet_atmosphere(var/datum/planetoid_data/P)

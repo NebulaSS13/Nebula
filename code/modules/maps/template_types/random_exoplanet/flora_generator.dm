@@ -33,6 +33,9 @@
 
 ///Generates a bunch of seeds adapted to the specified climate
 /datum/flora_generator/proc/generate_flora(var/datum/gas_mixture/atmos)
+	if(atmos?.total_moles <= 0)
+		return
+
 	expected_temperature = atmos?.temperature || T20C
 	expected_pressure    = atmos?.return_pressure() || 0
 	for(var/gas in atmos.gas)
@@ -43,41 +46,49 @@
 		if(length(possible_grass))
 			grass_color = pick(possible_grass)
 
+	generate_small_flora(atmos)
+	if(has_trees)
+		generate_large_flora(atmos)
+
+
+/datum/flora_generator/proc/generate_small_flora(var/datum/gas_mixture/atmos)
 	for(var/i = 1 to flora_diversity)
-		var/datum/seed/S = new()
-		S.randomize(expected_temperature)
-		var/planticon = "alien[rand(1,4)]"
-		S.set_trait(TRAIT_PRODUCT_ICON,planticon)
-		S.set_trait(TRAIT_PLANT_ICON,planticon)
-		var/color = pick(plant_colors)
+		var/datum/seed/S = new
+		var/planticon    = "alien[rand(1,4)]"
+		var/color        = pick(plant_colors)
+		var/carnivorous  = prob(10)? 2 : (prob(20)? 1 : 0)
 		if(color == "RANDOM")
-			color = get_random_colour(0,75,190)
-		S.set_trait(TRAIT_PLANT_COLOUR,color)
-		var/carnivore_prob = rand(100)
-		if(carnivore_prob < 10)
-			S.set_trait(TRAIT_CARNIVOROUS,2)
+			color = get_random_colour(0, 75, 190)
+
+		S.randomize(expected_temperature)
+		S.set_trait(TRAIT_PRODUCT_ICON, planticon)
+		S.set_trait(TRAIT_PLANT_ICON,   planticon)
+		S.set_trait(TRAIT_PLANT_COLOUR, color)
+		S.set_trait(TRAIT_CARNIVOROUS,  carnivorous)
+		if(carnivorous == 2)
 			S.set_trait(TRAIT_SPREAD,1)
-		else if(carnivore_prob < 20)
-			S.set_trait(TRAIT_CARNIVOROUS,1)
+
 		adapt_seed(S, atmos)
 		LAZYADD(small_flora_types, S)
-	if(has_trees)
-		var/tree_diversity = max(1,flora_diversity/2)
-		for(var/i = 1 to tree_diversity)
-			var/datum/seed/S = new()
-			S.randomize(expected_temperature)
-			S.set_trait(TRAIT_PRODUCT_ICON,"alien[rand(1,5)]")
-			S.set_trait(TRAIT_PLANT_ICON,"tree")
-			S.set_trait(TRAIT_SPREAD,0)
-			S.set_trait(TRAIT_HARVEST_REPEAT,1)
-			S.set_trait(TRAIT_LARGE,1)
-			var/color = pick(plant_colors)
-			if(color == "RANDOM")
-				color = get_random_colour(0,75,190)
-			S.set_trait(TRAIT_LEAVES_COLOUR,color)
-			S.chems[/decl/material/solid/wood] = 1
-			adapt_seed(S, atmos)
-			LAZYADD(big_flora_types, S)
+
+/datum/flora_generator/proc/generate_large_flora(var/datum/gas_mixture/atmos)
+	var/tree_diversity = max(1, flora_diversity/2)
+	for(var/i = 1 to tree_diversity)
+		var/datum/seed/S = new
+		var/color        = pick(plant_colors)
+		if(color == "RANDOM")
+			color = get_random_colour(0, 75, 190)
+
+		S.randomize(expected_temperature)
+		S.set_trait(TRAIT_PRODUCT_ICON,   "alien[rand(1,5)]")
+		S.set_trait(TRAIT_PLANT_ICON,     "tree")
+		S.set_trait(TRAIT_SPREAD,         0)
+		S.set_trait(TRAIT_HARVEST_REPEAT, 1)
+		S.set_trait(TRAIT_LARGE,          1)
+		S.set_trait(TRAIT_LEAVES_COLOUR,  color)
+		S.chems[/decl/material/solid/wood] = 1  //#TODO: Maybe look at Why the seed creates injectable wood?
+		adapt_seed(S, atmos)
+		LAZYADD(big_flora_types, S)
 
 //Adapts seeds to this planet's atmopshere. Any special planet-speicific adaptations should go here too
 /datum/flora_generator/proc/adapt_seed(var/datum/seed/S, var/datum/gas_mixture/atmos)
