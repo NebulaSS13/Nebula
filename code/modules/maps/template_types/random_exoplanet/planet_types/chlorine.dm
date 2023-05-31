@@ -17,11 +17,11 @@
 ////////////////////////////////////////////////////////////////////////////
 
 /datum/level_data/planetoid/exoplanet/chlorine
-	base_area           = /area/exoplanet/chlorine
-	base_turf           = /turf/exterior/chlorine_sand
-	exterior_atmosphere = null
-	exterior_atmos_temp = null
-	level_generators    = list(
+	base_area                      = /area/exoplanet/chlorine
+	base_turf                      = /turf/exterior/chlorine_sand
+	exterior_atmosphere            = null
+	exterior_atmos_temp            = null
+	level_generators               = list(
 		/datum/random_map/noise/exoplanet/chlorine,
 	)
 
@@ -58,39 +58,43 @@
 	)
 
 ////////////////////////////////////////////////////////////////////////////
+// Planetoid Data
+////////////////////////////////////////////////////////////////////////////
+/datum/planetoid_data/random/chlorine
+	habitability_class             = null
+	forced_atmosphere_gen_gases    = list(/decl/material/gas/chlorine = MOLES_O2STANDARD)
+	atmosphere_gen_pressure_min    = 0.01 ATM
+	atmosphere_gen_pressure_max    = 0.05 ATM
+	atmosphere_gen_temperature_min = T0C
+	atmosphere_gen_temperature_max = T100C
+	surface_light_gen_level_min    = 0.65
+	surface_light_gen_level_max    = 0.85
+	flora                          = /datum/flora_generator/chlorine
+	fauna                          = /datum/fauna_generator/chlorine
+	possible_rock_colors           = list(
+		COLOR_GRAY80,
+		COLOR_PALE_GREEN_GRAY,
+		COLOR_PALE_BTL_GREEN
+	)
+
+////////////////////////////////////////////////////////////////////////////
 // Map Template
 ////////////////////////////////////////////////////////////////////////////
 
-/datum/map_template/planetoid/exoplanet/chlorine
+/datum/map_template/planetoid/random/exoplanet/chlorine
 	name                       = "chlorine exoplanet"
+	planetoid_data_type        = /datum/planetoid_data/random/chlorine
 	overmap_marker_type        = /obj/effect/overmap/visitable/sector/planetoid/exoplanet/chlorine
-	flora_generator_type       = /datum/flora_generator/chlorine
-	fauna_generator_type       = /datum/fauna_generator/chlorine
 	ruin_tags_blacklist        = RUIN_HABITAT|RUIN_WATER
-	surface_light_level_min    = 0.65
-	surface_light_level_max    = 0.85
-	atmosphere_temperature_min = T0C
-	atmosphere_temperature_max = T100C
-	template_parent_type       = /datum/map_template/planetoid/exoplanet
+	template_parent_type       = /datum/map_template/planetoid/random/exoplanet
 	level_data_type            = /datum/level_data/planetoid/exoplanet/chlorine
 	prefered_level_data_per_z  = list(
 		/datum/level_data/planetoid/exoplanet/chlorine,
 		/datum/level_data/planetoid/exoplanet/underground
 	)
-	possible_rock_colors = list(
-		COLOR_GRAY80,
-		COLOR_PALE_GREEN_GRAY,
-		COLOR_PALE_BTL_GREEN
-	)
 	map_generators = list(
 		/datum/random_map/noise/ore/poor,
 	)
-
-/datum/map_template/planetoid/exoplanet/chlorine/generate_habitability(datum/planetoid_data/gen_data)
-	gen_data.set_habitability(HABITABILITY_BAD)
-
-/datum/map_template/planetoid/exoplanet/chlorine/get_mandatory_gasses()
-	return list(/decl/material/gas/chlorine = MOLES_O2STANDARD)
 
 ////////////////////////////////////////////////////////////////////////////
 // Map Generator Surface

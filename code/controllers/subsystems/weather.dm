@@ -30,15 +30,18 @@ SUBSYSTEM_DEF(weather)
 		if(MC_TICK_CHECK)
 			return
 
-///Sets a weather state to use for a given z level/z level stack.
-/datum/controller/subsystem/weather/proc/setup_weather_system(var/datum/level_data/topmost_level_data, var/decl/state/weather/initial_state)
+///Sets a weather state to use for a given z level/z level stack. topmost_level may be a level_id or a level_data instance.
+/datum/controller/subsystem/weather/proc/setup_weather_system(var/datum/level_data/topmost_level, var/decl/state/weather/initial_state)
+	if(istext(topmost_level))
+		topmost_level = SSmapping.levels_by_id[topmost_level]
+
 	//First check and clear any existing weather system on the level
-	var/obj/abstract/weather_system/WS = weather_by_z[topmost_level_data.level_z]
+	var/obj/abstract/weather_system/WS = weather_by_z[topmost_level.level_z]
 	if(WS)
 		unregister_weather_system(WS)
 		qdel(WS)
 	//Create the new weather system and let it register itself
-	new /obj/abstract/weather_system(locate(1, 1, topmost_level_data.level_z), topmost_level_data.level_z, initial_state)
+	new /obj/abstract/weather_system(locate(1, 1, topmost_level.level_z), topmost_level.level_z, initial_state)
 
 ///Registers a given weather system obj for getting updates by SSweather.
 /datum/controller/subsystem/weather/proc/register_weather_system(var/obj/abstract/weather_system/WS)

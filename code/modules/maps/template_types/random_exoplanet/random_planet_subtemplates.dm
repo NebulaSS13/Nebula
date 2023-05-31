@@ -1,5 +1,5 @@
 ///Picks all ruins and tries to spawn them on the levels that make up the planet.
-/datum/map_template/planetoid/proc/generate_features(var/datum/planetoid_data/gen_data, var/list/created_level_data, var/whitelist = ruin_tags_whitelist, var/blacklist = ruin_tags_blacklist)
+/datum/map_template/planetoid/random/proc/generate_features(var/datum/planetoid_data/gen_data, var/list/created_level_data, var/whitelist = ruin_tags_whitelist, var/blacklist = ruin_tags_blacklist)
 	var/my_budget = gen_data._budget_override || subtemplate_budget
 	if(my_budget <= 0)
 		return

@@ -67,30 +67,37 @@
 	)
 
 ////////////////////////////////////////////////////////////////////////////
-// Map Template
+// Planetoid Data
 ////////////////////////////////////////////////////////////////////////////
 
-/datum/map_template/planetoid/exoplanet/desert
-	name                       = "desert exoplanet"
-	flora_generator_type       = /datum/flora_generator/desert
-	fauna_generator_type       = /datum/fauna_generator/desert
-	overmap_marker_type        = /obj/effect/overmap/visitable/sector/planetoid/exoplanet/desert
-	initial_weather_state      = null //#TODO: Make desert weather stuff
-	surface_light_level_min    = 0.5
-	surface_light_level_max    = 0.95
-	atmosphere_temperature_min = 40 CELSIUS
-	atmosphere_temperature_max = 120 CELSIUS
-	template_parent_type       = /datum/map_template/planetoid/exoplanet
-	level_data_type            = /datum/level_data/planetoid/exoplanet/desert
-	prefered_level_data_per_z  = list(
-		/datum/level_data/planetoid/exoplanet/desert,
-		/datum/level_data/planetoid/exoplanet/underground
-	)
-	possible_rock_colors = list(
+/datum/planetoid_data/random/desert
+	habitability_class             = null //Generate randomly
+	atmosphere_gen_temperature_min = 40 CELSIUS
+	atmosphere_gen_temperature_max = 120 CELSIUS
+	surface_light_gen_level_min    = 0.5
+	surface_light_gen_level_max    = 0.95
+	flora                          = /datum/flora_generator/desert
+	fauna                          = /datum/fauna_generator/desert
+	possible_rock_colors           = list(
 		COLOR_BEIGE,
 		COLOR_PALE_YELLOW,
 		COLOR_GRAY80,
 		COLOR_BROWN
+	)
+
+////////////////////////////////////////////////////////////////////////////
+// Map Template
+////////////////////////////////////////////////////////////////////////////
+
+/datum/map_template/planetoid/random/exoplanet/desert
+	name                       = "desert exoplanet"
+	planetoid_data_type        = /datum/planetoid_data/random/desert
+	overmap_marker_type        = /obj/effect/overmap/visitable/sector/planetoid/exoplanet/desert
+	template_parent_type       = /datum/map_template/planetoid/random/exoplanet
+	level_data_type            = /datum/level_data/planetoid/exoplanet/desert
+	prefered_level_data_per_z  = list(
+		/datum/level_data/planetoid/exoplanet/desert,
+		/datum/level_data/planetoid/exoplanet/underground
 	)
 	map_generators = list(
 		/datum/random_map/noise/ore/rich,

@@ -81,31 +81,49 @@
 	)
 
 ////////////////////////////////////////////////////////////////////////////
+// Planetoid Data
+////////////////////////////////////////////////////////////////////////////
+
+/datum/planetoid_data/random/grass
+	habitability_class             = null
+	atmosphere_gen_pressure_min    = 0.8 ATM
+	atmosphere_gen_pressure_max    = 1.5 ATM
+	atmosphere_gen_temperature_min = 20 CELSIUS  //Within liquid water/humanoid "comfort" range. Gets adjusted to default species.
+	atmosphere_gen_temperature_max = 50 CELSIUS  //Within liquid water/humanoid "comfort" range. Gets adjusted to default species.
+	surface_light_gen_level_min    = 0.25 //give a chance of twilight jungle
+	surface_light_gen_level_max    = 0.75
+	flora                          = /datum/flora_generator/grass
+	fauna                          = /datum/fauna_generator/grass
+	possible_rock_colors           = list(
+		COLOR_ASTEROID_ROCK,
+		COLOR_GRAY80,
+		COLOR_BROWN
+	)
+
+/datum/planetoid_data/random/grass/generate_habitability()
+	if(isnull(habitability_class))
+		if(prob(10))
+			. = HABITABILITY_IDEAL
+		else
+			. = HABITABILITY_OKAY
+	else
+		. = habitability_class
+	set_habitability(.)
+
+////////////////////////////////////////////////////////////////////////////
 // Map Template
 ////////////////////////////////////////////////////////////////////////////
 
 ///Map template for generating a grass exoplanet
-/datum/map_template/planetoid/exoplanet/grass
+/datum/map_template/planetoid/random/exoplanet/grass
 	name                       = "lush exoplanet"
-	flora_generator_type       = /datum/flora_generator/grass
-	fauna_generator_type       = /datum/fauna_generator/grass
+	planetoid_data_type        = /datum/planetoid_data/random/grass
 	overmap_marker_type        = /obj/effect/overmap/visitable/sector/planetoid/exoplanet/grass
-	surface_light_level_min    = 0.25 //give a chance of twilight jungle
-	surface_light_level_max    = 0.75
-	atmosphere_temperature_min = 20 CELSIUS  //Within liquid water/humanoid "comfort" range
-	atmosphere_temperature_max = 50 CELSIUS  //Within liquid water/humanoid "comfort" range
-	atmosphere_pressure_min    = 0.8 ATM // Very approximate lower breathable threshold
-	atmosphere_pressure_max    = 1.5 ATM // Very approximate higher breathable threshold
-	template_parent_type       = /datum/map_template/planetoid/exoplanet
+	template_parent_type       = /datum/map_template/planetoid/random/exoplanet
 	level_data_type            = /datum/level_data/planetoid/exoplanet/grass
 	prefered_level_data_per_z  = list(
 		/datum/level_data/planetoid/exoplanet/grass,
 		/datum/level_data/planetoid/exoplanet/underground
-	)
-	possible_rock_colors = list(
-		COLOR_ASTEROID_ROCK,
-		COLOR_GRAY80,
-		COLOR_BROWN
 	)
 
 ////////////////////////////////////////////////////////////////////////////

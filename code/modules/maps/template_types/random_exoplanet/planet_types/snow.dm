@@ -51,31 +51,40 @@
 	)
 
 ////////////////////////////////////////////////////////////////////////////
+// Planetoid Data
+////////////////////////////////////////////////////////////////////////////
+
+/datum/planetoid_data/random/snow
+	habitability_class             = null
+	atmosphere_gen_temperature_min = -120 CELSIUS // a bit lower than arctic temperatures
+	atmosphere_gen_temperature_max = -10 CELSIUS
+	initial_weather_state          = /decl/state/weather/snow
+	flora                          = /datum/flora_generator/snow
+	fauna                          = /datum/fauna_generator/snow
+	possible_rock_colors           = list(
+		COLOR_DARK_BLUE_GRAY,
+		COLOR_GUNMETAL,
+		COLOR_GRAY80,
+		COLOR_DARK_GRAY
+	)
+
+////////////////////////////////////////////////////////////////////////////
 // Map Template
 ////////////////////////////////////////////////////////////////////////////
 
-/datum/map_template/planetoid/exoplanet/snow
+/datum/map_template/planetoid/random/exoplanet/snow
 	name                       = "snow exoplanet"
-	flora_generator_type       = /datum/flora_generator/snow
-	fauna_generator_type       = /datum/fauna_generator/snow
-	initial_weather_state      = /decl/state/weather/snow
+	planetoid_data_type        = /datum/planetoid_data/random/snow
 	overmap_marker_type        = /obj/effect/overmap/visitable/sector/planetoid/exoplanet/snow
-	template_parent_type       = /datum/map_template/planetoid/exoplanet
+	template_parent_type       = /datum/map_template/planetoid/random/exoplanet
 	level_data_type            = /datum/level_data/planetoid/exoplanet/snow
-	atmosphere_temperature_min = -120 CELSIUS // a bit lower than arctic temperatures
-	atmosphere_temperature_max = -10 CELSIUS
 	prefered_level_data_per_z  = list(
 		/datum/level_data/planetoid/exoplanet/snow,
 		/datum/level_data/planetoid/exoplanet/underground
 	)
 	//#TODO: Do weather stuff to init properly
 	//water_material  = null // Will prevent the weather system causing rainfall.
-	possible_rock_colors = list(
-		COLOR_DARK_BLUE_GRAY,
-		COLOR_GUNMETAL,
-		COLOR_GRAY80,
-		COLOR_DARK_GRAY
-	)
+
 	map_generators = list(
 		/datum/random_map/noise/ore/poor
 	)

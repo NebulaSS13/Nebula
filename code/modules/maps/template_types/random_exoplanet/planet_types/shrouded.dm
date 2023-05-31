@@ -57,37 +57,45 @@
 	)
 
 ////////////////////////////////////////////////////////////////////////////
+// Planetoid Data
+////////////////////////////////////////////////////////////////////////////
+
+/datum/planetoid_data/random/shrouded
+	habitability_class             = null
+	atmosphere_gen_pressure_min    = 1 ATM
+	atmosphere_gen_pressure_max    = 2.5 ATM
+	atmosphere_gen_temperature_min = 0 CELSIUS
+	atmosphere_gen_temperature_max = 10 CELSIUS
+	surface_light_gen_level_min    = 0.15
+	surface_light_gen_level_max    = 0.25
+	flora                          = /datum/flora_generator/shrouded
+	fauna                          = /datum/fauna_generator/shrouded
+	possible_rock_colors           = list(
+		COLOR_INDIGO,
+		COLOR_DARK_BLUE_GRAY,
+		COLOR_NAVY_BLUE
+	)
+
+////////////////////////////////////////////////////////////////////////////
 // Map Template
 ////////////////////////////////////////////////////////////////////////////
 
-/datum/map_template/planetoid/exoplanet/shrouded
+/datum/map_template/planetoid/random/exoplanet/shrouded
 	name                       = "shrouded exoplanet"
-	flora_generator_type       = /datum/flora_generator/shrouded
-	fauna_generator_type       = /datum/fauna_generator/shrouded
+	planetoid_data_type        = /datum/planetoid_data/random/shrouded
 	overmap_marker_type        = /obj/effect/overmap/visitable/sector/planetoid/exoplanet/shrouded
 	ruin_tags_blacklist        = RUIN_HABITAT
-	surface_light_level_min    = 0.15
-	surface_light_level_max    = 0.25
-	atmosphere_temperature_min = T0C
-	atmosphere_temperature_max = 10 CELSIUS
-	atmosphere_pressure_min    = 1 ATM
-	atmosphere_pressure_max    = 2.5 ATM
-	template_parent_type       = /datum/map_template/planetoid/exoplanet
+	template_parent_type       = /datum/map_template/planetoid/random/exoplanet
 	level_data_type            = /datum/level_data/planetoid/exoplanet/shrouded
 	prefered_level_data_per_z  = list(
 		/datum/level_data/planetoid/exoplanet/shrouded,
 		/datum/level_data/planetoid/exoplanet/underground
 	)
-	possible_rock_colors = list(
-		COLOR_INDIGO,
-		COLOR_DARK_BLUE_GRAY,
-		COLOR_NAVY_BLUE
-	)
 	map_generators = list(
 		/datum/random_map/noise/ore/poor
 	)
 
-/datum/map_template/planetoid/exoplanet/shrouded/get_spawn_weight()
+/datum/map_template/planetoid/random/exoplanet/shrouded/get_spawn_weight()
 	return 50
 
 ////////////////////////////////////////////////////////////////////////////

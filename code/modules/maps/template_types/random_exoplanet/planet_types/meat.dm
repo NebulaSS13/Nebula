@@ -63,38 +63,42 @@
 	)
 
 ////////////////////////////////////////////////////////////////////////////
-// Map Template
+// Planetoid Data
 ////////////////////////////////////////////////////////////////////////////
 
-/datum/map_template/planetoid/exoplanet/meat
-	name                       = "organic exoplanet"
-	flora_generator_type       = /datum/flora_generator/meat
-	fauna_generator_type       = /datum/fauna_generator/meat
-	overmap_marker_type        = /obj/effect/overmap/visitable/sector/planetoid/exoplanet/meat
-	ruin_tags_blacklist        = RUIN_HABITAT|RUIN_HUMAN|RUIN_WATER
-	template_parent_type       = /datum/map_template/planetoid/exoplanet
-	level_data_type            = /datum/level_data/planetoid/exoplanet/meat
-	prefered_level_data_per_z  = null
-	atmosphere_temperature_min = 30 CELSIUS
-	atmosphere_temperature_max = 40 CELSIUS
-	possible_rock_colors       = list(
+/datum/planetoid_data/random/meat
+	habitability_class             = null
+	atmosphere_gen_temperature_min = 30 CELSIUS
+	atmosphere_gen_temperature_max = 40 CELSIUS
+	surface_light_gen_level_min    = 0.1
+	surface_light_gen_level_max    = 0.7
+	flora                          = /datum/flora_generator/meat
+	fauna                          = /datum/fauna_generator/meat
+	strata                         = /decl/strata/sedimentary
+	possible_rock_colors           = list(
 		COLOR_OFF_WHITE,
 		"#f3ebd4",
 		"#f3d4f0"
 	)
+
+////////////////////////////////////////////////////////////////////////////
+// Map Template
+////////////////////////////////////////////////////////////////////////////
+
+/datum/map_template/planetoid/random/exoplanet/meat
+	name                       = "organic exoplanet"
+	planetoid_data_type        = /datum/planetoid_data/random/meat
+	overmap_marker_type        = /obj/effect/overmap/visitable/sector/planetoid/exoplanet/meat
+	ruin_tags_blacklist        = RUIN_HABITAT|RUIN_HUMAN|RUIN_WATER
+	template_parent_type       = /datum/map_template/planetoid/random/exoplanet
+	level_data_type            = /datum/level_data/planetoid/exoplanet/meat
+	prefered_level_data_per_z  = null
 	map_generators = list(
 		/datum/random_map/noise/ore/poor
 	)
 
-/datum/map_template/planetoid/exoplanet/meat/get_spawn_weight()
+/datum/map_template/planetoid/random/exoplanet/meat/get_spawn_weight()
 	return 10
-
-/datum/map_template/planetoid/exoplanet/meat/generate_daycycle(datum/planetoid_data/gen_data, datum/level_data/surface_level)
-	surface_level.ambient_light_level = rand(1,7)/10
-	..()
-
-/datum/map_template/planetoid/exoplanet/meat/select_strata(datum/planetoid_data/gen_data)
-	gen_data.set_strata(/decl/strata/sedimentary)
 
 ////////////////////////////////////////////////////////////////////////////
 // Map Generator Surface
