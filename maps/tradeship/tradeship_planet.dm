@@ -112,11 +112,10 @@
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 /datum/level_data/planetoid/neutralia
-	parent_planetoid = "neutralia"
-	level_max_width  = 128
-	level_max_height = 128
-	loop_turf_type   = null
-	//loop_turf_type   = /turf/unsimulated/mimic_edge/transition/loop
+	parent_planetoid     = "neutralia"
+	level_max_width      = 128
+	level_max_height     = 128
+	loop_turf_type       = /turf/unsimulated/mimic_edge/transition/loop
 
 /datum/level_data/planetoid/neutralia/sky
 	name             = "neutralia sky"
@@ -130,7 +129,7 @@
 	level_id         = NEUTRALIA_SURFACE_LEVEL_ID
 	base_area        = /area/exoplanet/neutralia
 	base_turf        = /turf/exterior/barren
-	border_filler    = null // /turf/unsimulated/dark_filler
+	border_filler    = /turf/unsimulated/dark_filler
 
 /datum/level_data/planetoid/neutralia/underground
 	name             = "neutralia underground"
