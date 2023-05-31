@@ -540,9 +540,6 @@ INITIALIZE_IMMEDIATE(/obj/abstract/level_data_spawner)
 /datum/level_data/player_level
 	level_flags = (ZLEVEL_CONTACT|ZLEVEL_PLAYER)
 
-/datum/level_data/exoplanet
-	use_global_exterior_ambience = FALSE // This is set up by the exoplanet object.
-
 /datum/level_data/unit_test
 	level_flags = (ZLEVEL_CONTACT|ZLEVEL_PLAYER|ZLEVEL_SEALED)
 
