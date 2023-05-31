@@ -173,6 +173,7 @@
 
 ///Handle copying data from a previous level_data we're replacing.
 /datum/level_data/proc/copy_from(var/datum/level_data/old_level)
+	//#TODO: It's not really clear what should get moved over by default. But putting some time to reflect on this would be good..
 	return
 
 ///Initialize the turfs on the z-level.
@@ -195,6 +196,7 @@
 ///Prepare level for being used. Setup borders, lateral z connections, ambient lighting, atmosphere, etc..
 /datum/level_data/proc/setup_level_data(var/skip_gen = FALSE)
 	if(_level_setup_completed)
+		PRINT_STACK_TRACE("[src] tried to setup twice!")
 		return //Since we can defer setup, make sure we only setup once
 
 	setup_level_bounds()
@@ -207,23 +209,31 @@
 	_level_setup_completed = TRUE
 
 ///Calculate the bounds of the level, the border area, and the inner accessible area.
-/datum/level_data/proc/setup_level_bounds()
+/// * origin_is_world_center : An arg to clarify how level bounds work, and allow some control.
+///   Basically, by default levels are assumed to be loaded relative to the world center, so if they're smaller than the world
+///   they get their origin offset so they're in the middle of the world. By default templates are always loaded at origin 1,1.
+///   so that's useful to know and have control over!
+/datum/level_data/proc/setup_level_bounds(var/origin_is_world_center = TRUE)
+	//Get the width/height we got for the level and the edges
 	level_max_width  = level_max_width  ? level_max_width  : world.maxx
 	level_max_height = level_max_height ? level_max_height : world.maxy
-	var/x_origin     = round((world.maxx - level_max_width)  / 2)
-	var/y_origin     = round((world.maxy - level_max_height) / 2)
 
-	//The first x/y that's within the accessible level
-	level_inner_min_x = x_origin + TRANSITIONEDGE + 1
-	level_inner_min_y = y_origin + TRANSITIONEDGE + 1
-
-	//The last x/y that's within the accessible level
-	level_inner_max_x = (level_max_width  - level_inner_min_x) + 1
-	level_inner_max_y = (level_max_height - level_inner_min_y) + 1
-
-	//The width of the accessible inner area of the level
+	//The width of the accessible inner area of the level between the edges
 	level_inner_width  = level_max_width  - (2 * TRANSITIONEDGE)
 	level_inner_height = level_max_height - (2 * TRANSITIONEDGE)
+
+	//Get the origin of the lower left corner where the level's edge begins at on the world.
+	//#FIXME: This is problematic when dealing with an even width/height
+	var/x_origin = origin_is_world_center? max(FLOOR((world.maxx - level_max_width)  / 2) - 1, 1) : 1
+	var/y_origin = origin_is_world_center? max(FLOOR((world.maxy - level_max_height) / 2) - 1, 1) : 1
+
+	//The first x/y that's past the edge and within the accessible level
+	level_inner_min_x = x_origin + TRANSITIONEDGE
+	level_inner_min_y = y_origin + TRANSITIONEDGE
+
+	//The last x/y that's within the accessible level and before the edge
+	level_inner_max_x = ((x_origin + level_max_width)  - TRANSITIONEDGE)
+	level_inner_max_y = ((y_origin + level_max_height) - TRANSITIONEDGE)
 
 ///Setup ambient lighting for the level
 /datum/level_data/proc/setup_ambient()

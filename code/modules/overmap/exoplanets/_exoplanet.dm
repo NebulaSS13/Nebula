@@ -1,6 +1,8 @@
 /////////////////////////////////////////////////////////////////////////
 // Exoplanet
 /////////////////////////////////////////////////////////////////////////
+
+///Helper subtype for exoplanet overmap markers
 /obj/effect/overmap/visitable/sector/planetoid/exoplanet
 	name         = "exoplanet"
 	sector_flags = OVERMAP_SECTOR_KNOWN
@@ -21,8 +23,3 @@
 				ruin_num++
 		if(ruin_num)
 			. += "<br>[ruin_num] possible artificial structure\s detected.<br>"
-
-/obj/effect/overmap/visitable/sector/planetoid/exoplanet/Initialize(mapload, z_level)
-	if(global.overmaps_by_name[overmap_id])
-		forceMove(locate(1, 1, z_level)) //#TODO: Figure out why this is done here? Since the base class already moves this thing to the right position on the overmap?
-	return ..()
