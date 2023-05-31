@@ -2168,6 +2168,7 @@
 #include "code\modules\maps\template_types\away_site.dm"
 #include "code\modules\maps\template_types\ruins.dm"
 #include "code\modules\maps\template_types\ruins_exoplanet.dm"
+#include "code\modules\maps\template_types\mapped_planet\mapped_planet_template.dm"
 #include "code\modules\maps\template_types\random_exoplanet\fauna_generator.dm"
 #include "code\modules\maps\template_types\random_exoplanet\flora_generator.dm"
 #include "code\modules\maps\template_types\random_exoplanet\planetoid_data.dm"
