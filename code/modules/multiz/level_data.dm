@@ -224,16 +224,16 @@
 
 	//Get the origin of the lower left corner where the level's edge begins at on the world.
 	//#FIXME: This is problematic when dealing with an even width/height
-	var/x_origin = origin_is_world_center? max(FLOOR((world.maxx - level_max_width)  / 2) - 1, 1) : 1
-	var/y_origin = origin_is_world_center? max(FLOOR((world.maxy - level_max_height) / 2) - 1, 1) : 1
+	var/x_origin = origin_is_world_center? max(FLOOR((world.maxx - level_max_width)  / 2), 1) : 1
+	var/y_origin = origin_is_world_center? max(FLOOR((world.maxy - level_max_height) / 2), 1) : 1
 
 	//The first x/y that's past the edge and within the accessible level
 	level_inner_min_x = x_origin + TRANSITIONEDGE
 	level_inner_min_y = y_origin + TRANSITIONEDGE
 
 	//The last x/y that's within the accessible level and before the edge
-	level_inner_max_x = ((x_origin + level_max_width)  - TRANSITIONEDGE)
-	level_inner_max_y = ((y_origin + level_max_height) - TRANSITIONEDGE)
+	level_inner_max_x = ((x_origin + level_max_width)  - TRANSITIONEDGE) - 1
+	level_inner_max_y = ((y_origin + level_max_height) - TRANSITIONEDGE) - 1
 
 ///Setup ambient lighting for the level
 /datum/level_data/proc/setup_ambient()
