@@ -257,13 +257,13 @@ var/global/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 #else
 	report_progress("Instantiating exoplanets...")
 	var/list/planets_spawn_weight
-	var/list/planets_templates = SSmapping.get_templates_by_category(MAP_TEMPLATE_CATEGORY_EXOPLANET)
-	var/datum/map_template/planetoid/exoplanet/forced_planet //If we've got a forced exoplanet type, get the template
+	var/list/planets_templates = SSmapping.get_templates_by_category(MAP_TEMPLATE_CATEGORY_EXOPLANET) | SSmapping.get_templates_by_category(MAP_TEMPLATE_CATEGORY_PLANET)
+	var/datum/map_template/planetoid/forced_planet //If we've got a forced exoplanet type, get the template
 
 	//Guaranteed exoplanets should count towards the exoplanet limit. Since they're very expensive
 	var/left_to_pick = num_exoplanets
 	for(var/template_name in planets_templates)
-		var/datum/map_template/planetoid/exoplanet/E = planets_templates[template_name]
+		var/datum/map_template/planetoid/E = planets_templates[template_name]
 		if((E.template_flags & TEMPLATE_FLAG_SPAWN_GUARANTEED) && E.load_new_z())
 			report_progress("Loaded guaranteed exoplanet [E]!")
 			left_to_pick--
@@ -277,7 +277,7 @@ var/global/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 
 	//Actually create the random exoplanets if we can
 	for(var/i = 0, i < left_to_pick, i++)
-		var/datum/map_template/planetoid/exoplanet/exoplanet_type = forced_planet || pickweight(planets_spawn_weight)
+		var/datum/map_template/planetoid/exoplanet_type = forced_planet || pickweight(planets_spawn_weight)
 		exoplanet_type.load_new_z()
 		var/datum/planetoid_data/P = SSmapping.planetoid_data_by_z[world.maxz]
 		P.begin_processing() //Let the planet know it can start processing daycycle and stuff
