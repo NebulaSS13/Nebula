@@ -323,12 +323,14 @@ SUBSYSTEM_DEF(mapping)
 	sealed_levels  -= LD.level_z
 	return TRUE
 
-///Adds a planetoid/exoplanet's data to the lookup tables.
+///Adds a planetoid/exoplanet's data to the lookup tables. Optionally if the topmost_level_id var is set on P, will automatically assign all linked levels to P.
 /datum/controller/subsystem/mapping/proc/register_planetoid(var/datum/planetoid_data/P)
 	LAZYSET(planetoid_data_by_id, P.id, P)
 
 	//Keep track of the topmost z-level to speed up looking up things
 	var/datum/level_data/LD = levels_by_id[P.topmost_level_id]
+
+	//#TODO: Check if this actually works, because planetoid_data initializes so early it's not clear if the hierarchy can ever be fully available for this
 	//If we don't have level_data, we'll skip over assigning by z-level for now
 	if(LD)
 		//Assign all connected z-levels in the z list
