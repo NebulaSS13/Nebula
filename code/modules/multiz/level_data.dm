@@ -196,7 +196,7 @@
 ///Prepare level for being used. Setup borders, lateral z connections, ambient lighting, atmosphere, etc..
 /datum/level_data/proc/setup_level_data(var/skip_gen = FALSE)
 	if(_level_setup_completed)
-		PRINT_STACK_TRACE("[src] tried to setup twice!")
+		log_debug("level_data for [src], on z [level_z], had setup_level_data called more than once!")
 		return //Since we can defer setup, make sure we only setup once
 
 	setup_level_bounds()
