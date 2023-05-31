@@ -48,6 +48,7 @@
 	. = ..()
 
 ///Make sure the planetoid we belong to knows about us and that we know about them.
+/// * P: The planetoid data datum, or the planetoid id string of the planet.
 /datum/level_data/planetoid/proc/set_planetoid(var/datum/planetoid_data/P)
 	if(istext(P))
 		P = SSmapping.planetoid_data_by_id[P]
