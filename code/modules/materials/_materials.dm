@@ -428,7 +428,7 @@ INITIALIZE_IMMEDIATE(/obj/effect/gas_overlay)
 
 //Clausius–Clapeyron relation
 /decl/material/proc/get_boiling_temp(var/pressure = ONE_ATMOSPHERE)
-	return (1 / (1/max(boiling_point, TCMB)) - ((R_IDEAL_GAS_EQUATION * log(pressure / ONE_ATMOSPHERE)) / (latent_heat * molar_mass)))
+	return (1 / (1/max(boiling_point, TCMB)) - ((R_IDEAL_GAS_EQUATION * ((pressure > 0)? log(pressure / ONE_ATMOSPHERE) : 0)) / (latent_heat * molar_mass)))
 
 /// Returns the phase of the matterial at the given temperature and pressure
 /// Defaults to standard temperature and pressure (20c at one atmosphere)
