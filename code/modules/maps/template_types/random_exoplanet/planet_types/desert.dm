@@ -26,7 +26,7 @@
 // Flora Generator
 ////////////////////////////////////////////////////////////////////////////
 
-/datum/flora_generator/desert
+/datum/planet_flora/random/desert
 	has_trees       = FALSE
 	flora_diversity = 4
 	plant_colors    = list(
@@ -38,7 +38,7 @@
 		"#701732"
 	)
 
-/datum/flora_generator/desert/adapt_seed(var/datum/seed/S)
+/datum/planet_flora/random/desert/adapt_seed(var/datum/seed/S)
 	..()
 	if(prob(90))
 		S.set_trait(TRAIT_REQUIRES_WATER,0)
@@ -76,7 +76,7 @@
 	atmosphere_gen_temperature_max = 120 CELSIUS
 	surface_light_gen_level_min    = 0.5
 	surface_light_gen_level_max    = 0.95
-	flora                          = /datum/flora_generator/desert
+	flora                          = /datum/planet_flora/random/desert
 	fauna                          = /datum/fauna_generator/desert
 	possible_rock_colors           = list(
 		COLOR_BEIGE,

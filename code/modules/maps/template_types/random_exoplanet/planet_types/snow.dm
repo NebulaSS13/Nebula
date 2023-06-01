@@ -26,7 +26,7 @@
 // Flora Generator
 ////////////////////////////////////////////////////////////////////////////
 
-/datum/flora_generator/snow
+/datum/planet_flora/random/snow
 	plant_colors = list(
 		"#d0fef5",
 		"#93e1d8",
@@ -59,7 +59,7 @@
 	atmosphere_gen_temperature_min = -120 CELSIUS // a bit lower than arctic temperatures
 	atmosphere_gen_temperature_max = -10 CELSIUS
 	initial_weather_state          = /decl/state/weather/snow
-	flora                          = /datum/flora_generator/snow
+	flora                          = /datum/planet_flora/random/snow
 	fauna                          = /datum/fauna_generator/snow
 	possible_rock_colors           = list(
 		COLOR_DARK_BLUE_GRAY,

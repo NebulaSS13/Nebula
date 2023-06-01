@@ -29,7 +29,7 @@
 // Flora Generator
 ////////////////////////////////////////////////////////////////////////////
 
-/datum/flora_generator/shrouded
+/datum/planet_flora/random/shrouded
 	flora_diversity = 3
 	plant_colors    = list(
 		"#3c5434",
@@ -68,7 +68,7 @@
 	atmosphere_gen_temperature_max = 10 CELSIUS
 	surface_light_gen_level_min    = 0.15
 	surface_light_gen_level_max    = 0.25
-	flora                          = /datum/flora_generator/shrouded
+	flora                          = /datum/planet_flora/random/shrouded
 	fauna                          = /datum/fauna_generator/shrouded
 	possible_rock_colors           = list(
 		COLOR_INDIGO,

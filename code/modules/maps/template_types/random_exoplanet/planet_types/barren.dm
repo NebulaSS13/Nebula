@@ -26,9 +26,9 @@
 // Flora Generator
 ////////////////////////////////////////////////////////////////////////////
 
-/datum/flora_generator/barren
+/datum/planet_flora/random/barren
 	has_trees = FALSE
-/datum/flora_generator/barren/New()
+/datum/planet_flora/random/barren/New()
 	. = ..()
 	if(prob(10))
 		flora_diversity = 1
@@ -41,7 +41,7 @@
 
 /datum/planetoid_data/random/barren
 	habitability_class             = null
-	flora                          = /datum/flora_generator/barren
+	flora                          = /datum/planet_flora/random/barren
 	atmosphere_gen_pressure_min    = 0.01 ATM
 	atmosphere_gen_pressure_max    = 0.05 ATM
 	atmosphere_gen_temperature_min = -240 CELSIUS //-240c is about the surface temp of pluto for ref

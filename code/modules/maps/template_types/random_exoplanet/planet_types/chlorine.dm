@@ -29,7 +29,7 @@
 // Flora Generator
 ////////////////////////////////////////////////////////////////////////////
 
-/datum/flora_generator/chlorine
+/datum/planet_flora/random/chlorine
 	has_trees       = FALSE
 	flora_diversity = 5
 	plant_colors    = list(
@@ -69,7 +69,7 @@
 	atmosphere_gen_temperature_max = T100C
 	surface_light_gen_level_min    = 0.65
 	surface_light_gen_level_max    = 0.85
-	flora                          = /datum/flora_generator/chlorine
+	flora                          = /datum/planet_flora/random/chlorine
 	fauna                          = /datum/fauna_generator/chlorine
 	possible_rock_colors           = list(
 		COLOR_GRAY80,
