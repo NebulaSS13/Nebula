@@ -22,6 +22,12 @@
 	///Color of the secondary layer of the skybox image. Is usually water-like features.
 	var/water_color = "#436499"
 
+/obj/effect/overmap/visitable/sector/planetoid/Initialize(mapload)
+	. = ..()
+	if(length(planetoid_id))
+		var/datum/planetoid_data/P = get_planetoid_data()
+		P.set_overmap_marker(src)
+
 ///Returns the /datum/planetoid_data associated with planet this overmap marker represents.
 /obj/effect/overmap/visitable/sector/planetoid/proc/get_planetoid_data()
 	return LAZYACCESS(SSmapping.planetoid_data_by_id, planetoid_id)
