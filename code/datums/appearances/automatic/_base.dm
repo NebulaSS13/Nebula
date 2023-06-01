@@ -23,3 +23,12 @@
 /decl/appearance_handler/proc/DisplayAllAltAppearancesTo(var/viewer)
 	for(var/entry in appearance_sources)
 		DisplayAltAppearanceTo(entry, viewer)
+
+/decl/appearance_handler/proc/HideAltAppearanceFrom(source, viewer)
+	var/datum/appearance_data/ad = appearance_sources[source]
+	if(ad)
+		ad.RemoveViewer(viewer)
+
+/decl/appearance_handler/proc/HideAllAltAppearancesFrom(viewer)
+	for(var/entry in appearance_sources)
+		HideAltAppearanceFrom(entry, viewer)
