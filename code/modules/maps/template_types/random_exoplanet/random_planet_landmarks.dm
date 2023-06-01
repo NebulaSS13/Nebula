@@ -23,6 +23,7 @@
 ///Landmarks placed by random map generator
 /obj/abstract/landmark/exoplanet_spawn/animal
 	name = "spawn exoplanet animal"
+	icon_state = "fauna_spawn"
 
 /obj/abstract/landmark/exoplanet_spawn/animal/do_spawn(datum/planetoid_data/planet)
 	if(!istype(planet))
@@ -34,6 +35,7 @@
 ////////////////////////////////////////////////////////////////////////////////
 /obj/abstract/landmark/exoplanet_spawn/megafauna
 	name = "spawn exoplanet megafauna"
+	icon_state = "megafauna_spawn"
 
 /obj/abstract/landmark/exoplanet_spawn/megafauna/do_spawn(datum/planetoid_data/planet)
 	if(!istype(planet))
@@ -46,6 +48,7 @@
 // Landmarks placed by random map generator
 /obj/abstract/landmark/exoplanet_spawn/plant
 	name = "spawn exoplanet plant"
+	icon_state = "flora_spawn"
 
 /obj/abstract/landmark/exoplanet_spawn/plant/do_spawn(var/datum/planetoid_data/planet)
 	if(!istype(planet) || !planet.has_flora())
@@ -57,6 +60,7 @@
 /////////////////////////////////////////////////////////////////////////////////
 /obj/abstract/landmark/exoplanet_spawn/large_plant
 	name = "spawn exoplanet large plant"
+	icon_state = "bigflora_spawn"
 
 /obj/abstract/landmark/exoplanet_spawn/large_plant/do_spawn(var/datum/planetoid_data/planet)
 	if(!istype(planet) || !planet.flora)
