@@ -811,7 +811,7 @@
 			continue
 		if(!isturf(D.loc))
 			bad_doors++
-			log_bad("Invalid door turf: [log_info_line(D.loc)]]")
+			log_bad("Invalid door turf: [log_info_line(D.loc)]")
 		else
 			var/list/turf_exceptions
 			var/obj/abstract/map_data/MD = get_map_data(D.loc.z)
@@ -822,7 +822,7 @@
 			for(var/turf/T in D.locs)
 				if((istype(T, /turf/simulated/open) || isspaceturf(T)) && !(T.type in turf_exceptions))
 					is_bad_door = TRUE
-					log_bad("Invalid door turf: [log_info_line(T)]]")
+					log_bad("Invalid door turf: [log_info_line(T)]")
 			if(is_bad_door)
 				bad_doors++
 
