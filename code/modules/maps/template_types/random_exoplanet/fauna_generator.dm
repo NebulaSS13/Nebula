@@ -51,9 +51,9 @@
 	///Weighted list of megafauna that can possibly spawn.
 	var/list/megafauna_types
 	///Spawn info cached for each fauna types. Basically a cached entry for each critter that tells us what to change on them after spawn.
-	var/tmp/list/fauna_templates
+	var/list/fauna_templates
 	///Spawn info cached for each megafauna types. Basically a cached entry for each critter that tells us what to change on them after spawn.
-	var/tmp/list/megafauna_templates
+	var/list/megafauna_templates
 
 	///List of fauna/megafauna types to respawn after they died.
 	var/tmp/list/respawn_queue
@@ -74,7 +74,7 @@
 	var/repopulate_megafauna_threshold
 
 	///Realtime of day when we last repopulated
-	var/time_last_repop
+	var/tmp/time_last_repop
 	///Realtime interval between checks for repopulation
 	var/repopulation_interval = 5 MINUTES
 	///List of named species for this planet. Handles custom species names that can be attributed to animal via xenobio stuff.
