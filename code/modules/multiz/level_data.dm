@@ -503,6 +503,7 @@
 /// Mapper helper for spawning a specific level_data datum with the map as it gets loaded
 /obj/abstract/level_data_spawner
 	name = "space"
+	icon_state = "level_data"
 	var/level_data_type = /datum/level_data/space
 
 INITIALIZE_IMMEDIATE(/obj/abstract/level_data_spawner)
