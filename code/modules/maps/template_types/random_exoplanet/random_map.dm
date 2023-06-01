@@ -41,7 +41,7 @@
 
 	var/datum/planetoid_data/P = SSmapping.planetoid_data_by_z[tz]
 	if(istype(P))
-		var/datum/flora_generator/floragen = P.flora
+		var/datum/planet_flora/floragen = P.flora
 		var/datum/fauna_generator/faunagen = P.fauna
 
 		//Prevent spawning some flora spawner type if they aren't available

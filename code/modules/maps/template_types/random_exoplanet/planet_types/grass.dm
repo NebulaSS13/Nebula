@@ -31,7 +31,7 @@
 ////////////////////////////////////////////////////////////////////////////
 
 ///Flora data for a grass exoplanet
-/datum/flora_generator/grass
+/datum/planet_flora/random/grass
 	flora_diversity = 6
 	plant_colors    = list(
 		"#215a00",
@@ -41,7 +41,7 @@
 		"#6e7248",
 		"RANDOM"
 	)
-/datum/flora_generator/grass/adapt_seed(var/datum/seed/S)
+/datum/planet_flora/random/grass/adapt_seed(var/datum/seed/S)
 	. = ..()
 	var/carnivore_prob = rand(100)
 	if(carnivore_prob < 30)
@@ -92,7 +92,7 @@
 	atmosphere_gen_temperature_max = 50 CELSIUS  //Within liquid water/humanoid "comfort" range. Gets adjusted to default species.
 	surface_light_gen_level_min    = 0.25 //give a chance of twilight jungle
 	surface_light_gen_level_max    = 0.75
-	flora                          = /datum/flora_generator/grass
+	flora                          = /datum/planet_flora/random/grass
 	fauna                          = /datum/fauna_generator/grass
 	possible_rock_colors           = list(
 		COLOR_ASTEROID_ROCK,

@@ -26,7 +26,7 @@
 // Flora Generator
 ////////////////////////////////////////////////////////////////////////////
 
-/datum/flora_generator/meat
+/datum/planet_flora/random/meat
 	flora_diversity = 3
 	plant_colors    = list(
 		"#924585",
@@ -35,7 +35,7 @@
 		"#4e348b"
 	)
 
-/datum/flora_generator/meat/adapt_seed(var/datum/seed/S)
+/datum/planet_flora/random/meat/adapt_seed(var/datum/seed/S)
 	..()
 	S.set_trait(TRAIT_CARNIVOROUS,2)
 	if(prob(75))
@@ -72,7 +72,7 @@
 	atmosphere_gen_temperature_max = 40 CELSIUS
 	surface_light_gen_level_min    = 0.1
 	surface_light_gen_level_max    = 0.7
-	flora                          = /datum/flora_generator/meat
+	flora                          = /datum/planet_flora/random/meat
 	fauna                          = /datum/fauna_generator/meat
 	strata                         = /decl/strata/sedimentary
 	possible_rock_colors           = list(

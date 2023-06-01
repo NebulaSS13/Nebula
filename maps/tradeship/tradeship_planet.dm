@@ -16,15 +16,15 @@
 // Neutralia Flora
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-/datum/flora_generator/neutralia
-	flora_diversity = 1
+/datum/planet_flora/random/neutralia
+	flora_diversity = 2
 	has_trees       = TRUE
 	grass_color     = COLOR_GRAY80
 	plant_colors    = list(
-		COLOR_GRAY,
-		COLOR_GRAY15,
-		COLOR_GRAY20,
-		COLOR_GRAY40
+		COLOR_SURGERY_BLUE,
+		COLOR_SILVER,
+		COLOR_GRAY80,
+		COLOR_OFF_WHITE
 	)
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -71,7 +71,7 @@
 	day_duration        = 12 MINUTES
 	surface_light_level = 0.5
 	surface_light_color = COLOR_OFF_WHITE
-	flora               = /datum/flora_generator/neutralia
+	flora               = /datum/planet_flora/random/neutralia
 	fauna               = /datum/fauna_generator/neutralia
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////

@@ -29,7 +29,7 @@
 // Flora Generator
 ////////////////////////////////////////////////////////////////////////////
 
-/datum/flora_generator/volcanic
+/datum/planet_flora/random/volcanic
 	has_trees       = FALSE
 	flora_diversity = 3
 	plant_colors    = list(
@@ -40,7 +40,7 @@
 		"#7a5b3a",
 		"#471429"
 	)
-/datum/flora_generator/volcanic/adapt_seed(datum/seed/S)
+/datum/planet_flora/random/volcanic/adapt_seed(datum/seed/S)
 	..()
 	S.set_trait(TRAIT_REQUIRES_WATER, 0)
 	S.set_trait(TRAIT_HEAT_TOLERANCE, 1000 + S.get_trait(TRAIT_HEAT_TOLERANCE))
@@ -75,7 +75,7 @@
 	atmosphere_gen_pressure_min    = 10 ATM //It's safe to say a volcanic world probably has a thick gas blanket if it's big enough to hold an atmosphere
 	atmosphere_gen_pressure_max    = 90 ATM //Venus is 92.10 atm or 93 bar for reference
 	initial_weather_state          = /decl/state/weather/ash
-	flora                          = /datum/flora_generator/volcanic
+	flora                          = /datum/planet_flora/random/volcanic
 	fauna                          = /datum/fauna_generator/volcanic
 	possible_rock_colors           = list(
 		COLOR_DARK_GRAY

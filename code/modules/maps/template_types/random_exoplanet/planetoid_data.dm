@@ -79,7 +79,7 @@
 
 	// *** fauna/flora handling ***
 	///The flora generator instance that generates and keep track of the flora types for this planet. May be set to a path to instantiate.
-	var/datum/flora_generator/flora
+	var/datum/planet_flora/flora
 	///The instance of the fauna generator currently managing our fauna if any. May be set to a path to instantiate.
 	var/datum/fauna_generator/fauna //#TODO: Temporary thing for allowing animal stuff to be customized in the map_template
 
@@ -120,10 +120,9 @@
 
 	//Handle fauna/flora
 	if(ispath(flora))
-		setup_flora_generator(flora)
+		setup_flora_data(flora)
 	if(ispath(fauna))
 		setup_fauna_generator(fauna)
-	if(istype(flora) || istype(fauna))
 		generate_life()
 
 	//Xenoarch stuff
@@ -226,13 +225,15 @@
 /datum/planetoid_data/proc/get_rock_color()
 	return rock_color
 
-///Create the specified type of flora manager type for this planetoid
-/datum/planetoid_data/proc/setup_flora_generator(var/generator_type)
+///Create the specified type of flora data type for this planetoid
+/datum/planetoid_data/proc/setup_flora_data(var/flora_data_type)
 	if(istype(flora))
 		QDEL_NULL(flora)
 	else
 		flora = null
-	return (flora = new generator_type())
+	flora = new flora_data_type
+	flora.setup_flora(atmosphere)
+	return flora
 
 ///Create the specified type of fauna manager type for this planetoid
 /datum/planetoid_data/proc/setup_fauna_generator(var/generator_type)
@@ -277,8 +278,6 @@
 
 ///Make our fauna and flora gen setup.
 /datum/planetoid_data/proc/generate_life(var/list/breathable_gas, var/list/toxic_gases)
-	if(flora)
-		flora.generate_flora(atmosphere)
 	if(fauna)
 		fauna.generate_fauna(atmosphere, breathable_gas?.Copy(), toxic_gases?.Copy()) //Must be copies here #TODO: Fix this
 
