@@ -96,7 +96,7 @@
 	var/datum/computer_file/directory/target = parse_directory(directory, create_directories)
 	if(!istype(target) && directory) // The directory could not be parsed or created
 		return target
-	var/store_file = try_store_file(F, target)
+	var/store_file = try_store_file(F, target, accesses, user)
 	if(store_file != OS_FILE_SUCCESS)
 		if(store_file == OS_FILE_EXISTS)
 			if(!overwrite)

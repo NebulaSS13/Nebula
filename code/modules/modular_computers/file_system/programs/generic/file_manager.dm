@@ -14,7 +14,7 @@
 	var/error
 	var/list/disks = list() // List of list(/datum/file_storage, weakref(directory file)).
 	var/current_index
-	
+
 	var/datum/file_transfer/current_transfer	//ongoing file transfer between file_storage datums
 
 /datum/computer_file/program/filemanager/on_shutdown()
@@ -70,7 +70,7 @@
 		if(!avail_disk.hidden && avail_disk.check_access(accesses))
 			computer.unmount_storage(root_name)
 			return TOPIC_REFRESH
-		
+
 		to_chat(user, SPAN_WARNING("You lack permission to unmount this network drive!"))
 		return TOPIC_HANDLED
 
@@ -81,15 +81,15 @@
 			return TOPIC_REFRESH
 		current_index = disk_index
 		return TOPIC_REFRESH
-	
+
 	if(!current_index || current_index > disks.len)
 		current_index = 0
 		return TOPIC_REFRESH
-	
+
 	var/datum/file_storage/current_disk = disks[current_index]?[1]
 	if(!current_disk)
 		return TOPIC_HANDLED
-	
+
 	if(href_list["PRG_exit_disk"])
 		if(!current_index)
 			return TOPIC_HANDLED
@@ -132,7 +132,7 @@
 			else
 				to_chat(user, SPAN_WARNING("You do not have permission to read this file."))
 				return TOPIC_HANDLED
-			
+
 		if(istype(F, /datum/computer_file/data))
 			if(F.get_file_perms(accesses, user) & OS_READ_ACCESS)
 				open_file = href_list["PRG_openfile"]
@@ -165,7 +165,7 @@
 				else
 					to_chat(user, SPAN_WARNING("Unable to create new file. The hard drive may be non-functional."))
 					return TOPIC_REFRESH
-	
+
 	if(href_list["PRG_newdir"])
 		. = TOPIC_REFRESH
 		var/newname = sanitize_for_file(input(usr, "Enter directory name or leave blank to cancel:", "New directory"))
@@ -183,7 +183,7 @@
 				else
 					to_chat(user, SPAN_WARNING("Unable to create new directory. The hard drive may be non-functional."))
 					return TOPIC_REFRESH
-	
+
 	if(href_list["PRG_deletefile"])
 		var/datum/computer_file/del_file = current_disk.get_file(href_list["PRG_deletefile"], current_directory, accesses, user)
 		var/deleted = current_disk.delete_file(del_file, accesses, user)
@@ -210,7 +210,12 @@
 		if(cloned != OS_FILE_SUCCESS)
 			switch(cloned)
 				if(OS_FILE_NO_READ)
-					to_chat(user, SPAN_WARNING("You lack permission to clone the file '[href_list["PRG_clone"]]'."))
+					to_chat(user, SPAN_WARNING("You lack permission to read the file '[href_list["PRG_clone"]]'."))
+					return TOPIC_HANDLED
+				if(OS_FILE_NO_WRITE)
+					// Cheap hack to get the filename after cloning.
+					var/datum/computer_file/source_file = get_file(href_list["PRG_clone"], current_disk.get_dir_path(current_directory, TRUE))
+					to_chat(user, SPAN_WARNING("You lack permission to create the file '[href_list["PRG_clone"] + source_file.copy_string]'."))
 					return TOPIC_HANDLED
 				if(OS_NETWORK_ERROR)
 					to_chat(user, SPAN_WARNING("Unable to access file '[href_list["PRG_clone"]]' on the network."))
@@ -288,7 +293,7 @@
 			error = "I/O ERROR: Unable to transfer file."
 			return
 
-		var/copying = alert(usr, "Would you like to copy the file or transfer it? Transfering files requires write access.", "Copying file", "Copy", "Transfer")		
+		var/copying = alert(usr, "Would you like to copy the file or transfer it? Transfering files requires write access.", "Copying file", "Copy", "Transfer")
 		var/list/choices = list()
 		var/list/curr_fs_list = disks[current_index]
 		for(var/list/fs_list in disks)
@@ -299,9 +304,9 @@
 			var/datum/file_storage/FS = fs_list[1]
 			var/weakref/FS_dir_ref = fs_list[2]
 
-			var/datum/computer_file/directory/FS_dir = FS_dir_ref?.resolve() 
+			var/datum/computer_file/directory/FS_dir = FS_dir_ref?.resolve()
 			choices[FS.get_dir_path(FS_dir, TRUE)] = fs_list
-	
+
 		if(!length(choices))
 			to_chat(usr, SPAN_WARNING("You must open another disk to transfer files."))
 			return TOPIC_HANDLED
@@ -314,9 +319,9 @@
 			if(nope)
 				to_chat(user, SPAN_WARNING("Cannot transfer file to [dst] for following reason: [nope]"))
 				return
-			
+
 			var/weakref/dst_dir_ref = chosen_list[2]
-			var/datum/computer_file/directory/dst_dir = dst_dir_ref?.resolve() 
+			var/datum/computer_file/directory/dst_dir = dst_dir_ref?.resolve()
 
 			var/error = check_file_transfer(dst_dir, F, copying == "Copy", accesses, user)
 			if(error)
@@ -368,12 +373,12 @@
 
 			ui_disks.Add(list(list(
 				"name" = ui_disk.get_dir_path(ui_directory),
-				"index" = disk_index, 
+				"index" = disk_index,
 				"selected" = disk_index == current_index
 			)))
 			disk_index++
 		data["disks"] = ui_disks
-		
+
 		if(current_disk)
 			data["up_directory"] = !!current_directory
 			data["current_disk"] = current_disk.get_dir_path(current_directory, TRUE)
@@ -392,7 +397,7 @@
 					files.Add(list(list(
 						"name" = F.filename,
 						"type" = F.filetype,
-						"dir" = istype(F, /datum/computer_file/directory), 
+						"dir" = istype(F, /datum/computer_file/directory),
 						"size" = F.size,
 						"undeletable" = F.undeletable,
 						"unrenamable" = F.unrenamable,
@@ -401,7 +406,7 @@
 				data["files"] = files
 		else // No disk selected, option to create a new one.
 			var/list/avail_disks[0]
-			
+
 			for(var/root_name in computer.mounted_storage)
 				var/datum/file_storage/avail_disk = computer.mounted_storage[root_name]
 				if(!avail_disk.hidden && avail_disk.check_access(accesses))
@@ -448,5 +453,5 @@
 		if(disk == removed)
 			if(current_disk_list == disk_list)
 				current_index = null
-			
+
 			disks -= list(disk_list)
