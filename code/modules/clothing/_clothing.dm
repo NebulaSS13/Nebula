@@ -80,7 +80,7 @@
 		if(markings_icon && markings_color && check_state_in_icon("[overlay.icon_state][markings_icon]", overlay.icon))
 			overlay.overlays += mutable_appearance(overlay.icon, "[overlay.icon_state][markings_icon]", markings_color)
 
-		if(!(slot in user_mob?.held_item_slots))
+		if(!(slot in user_mob?.get_held_item_slots()))
 			if(ishuman(user_mob))
 				var/mob/living/carbon/human/user_human = user_mob
 				if(blood_DNA)
@@ -135,7 +135,7 @@
 
 /obj/item/clothing/mob_can_equip(mob/living/M, slot, disable_warning = FALSE, force = FALSE)
 	. = ..()
-	if(. && !isnull(bodytype_equip_flags) && ishuman(M) && !(slot in list(slot_l_store_str, slot_r_store_str, slot_s_store_str)) && !(slot in M.held_item_slots))
+	if(. && !isnull(bodytype_equip_flags) && ishuman(M) && !(slot in list(slot_l_store_str, slot_r_store_str, slot_s_store_str)) && !(slot in M.get_held_item_slots()))
 		var/mob/living/carbon/human/H = M
 		. = (bodytype_equip_flags & BODY_FLAG_EXCLUDE) ? !(bodytype_equip_flags & H.bodytype.bodytype_flag) : (bodytype_equip_flags & H.bodytype.bodytype_flag)
 		if(!. && !disable_warning)

@@ -18,13 +18,7 @@
 /mob/proc/equip_to_slot_if_possible(obj/item/W, slot, del_on_fail = 0, disable_warning = 0, redraw_mob = 1, force = FALSE, delete_old_item = TRUE)
 	if(!istype(W) || !slot)
 		return FALSE
-
 	. = (canUnEquip(W) && can_equip_anything_to_slot(slot) && has_organ_for_slot(slot) && W.mob_can_equip(src, slot, disable_warning, force))
-	if(.)
-		var/datum/inventory_slot/inv_slot = get_inventory_slot_datum(slot)
-		if(inv_slot)
-			. = inv_slot.can_equip_to_slot(src, W, slot)
-
 	if(.)
 		equip_to_slot(W, slot, redraw_mob, delete_old_item = delete_old_item) //This proc should not ever fail.
 	else if(del_on_fail)
@@ -61,10 +55,6 @@
 	if(!store)
 		return equip_to_storage_or_drop(W)
 	return store
-
-//Checks if a given slot can be accessed at this time, either to equip or unequip I
-/mob/proc/slot_is_accessible(var/slot, var/obj/item/I, mob/user=null)
-	return 1
 
 //puts the item "W" into an appropriate slot in a human's inventory
 //returns 0 if it cannot, 1 if successful
@@ -155,9 +145,11 @@
 
 /mob/proc/put_in_hands(var/obj/item/W)
 	if(!W)
-		return 0
+		return FALSE
+	if(put_in_active_hand(W) || put_in_inactive_hand(W))
+		return TRUE
 	drop_from_inventory(W)
-	return 0
+	return FALSE
 
 /mob/proc/put_in_hands_or_store_or_drop(var/obj/item/W)
 	. = put_in_hands(W)
@@ -369,7 +361,7 @@
 			. += I
 
 /mob/proc/has_held_item_slot()
-	return TRUE
+	return !!length(get_held_item_slots())
 
 /mob/proc/is_holding_offhand(var/thing)
 	return FALSE
@@ -396,16 +388,13 @@
 /mob/proc/get_inventory_slots()
 	return
 
-/mob/proc/set_inventory_slots()
+/mob/proc/set_inventory_slots(var/list/new_slots)
 	return
 
 /mob/proc/add_inventory_slot()
 	return
 
-/mob/proc/remove_inventory_slot()
-	return
-
-/mob/proc/clear_inventory_slots()
+/mob/proc/remove_inventory_slot(var/slot)
 	return
 
 /mob/proc/get_all_valid_equipment_slots()

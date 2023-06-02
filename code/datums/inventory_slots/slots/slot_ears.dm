@@ -3,7 +3,7 @@
 	slot_id = slot_l_ear_str
 	slot_state = "ears"
 	ui_loc = ui_l_ear
-	covering_slot = slot_head_str
+	covering_slots = slot_head_str
 	covering_flags = SLOT_EARS
 	can_be_hidden = TRUE
 	requires_organ_tag = BP_HEAD

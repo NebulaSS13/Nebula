@@ -669,26 +669,27 @@
 //Drop anything that cannot be worn by the current species of the mob
 /mob/living/carbon/human/proc/apply_species_inventory_restrictions()
 
+	if(!(species.appearance_flags & HAS_UNDERWEAR))
+		QDEL_NULL_LIST(worn_underwear)
+
 	var/list/new_slots
 	var/list/held_slots = get_held_item_slots()
 	for(var/slot_id in species.hud.inventory_slots)
+		var/datum/inventory_slot/old_slot = get_inventory_slot_datum(slot_id)
 		if(slot_id in held_slots)
+			LAZYSET(new_slots, slot_id, old_slot)
 			continue
 		var/datum/inventory_slot/new_slot = species.hud.inventory_slots[slot_id]
-		var/datum/inventory_slot/old_slot = get_inventory_slot_datum(slot_id)
 		if(!old_slot || !old_slot.equivalent_to(new_slot))
 			LAZYSET(new_slots, slot_id, new_slot.Clone())
 		else
 			LAZYSET(new_slots, slot_id, old_slot)
-	set_inventory_slots(new_slots, preserve_hands = TRUE)
-
-	if(!(species.appearance_flags & HAS_UNDERWEAR))
-		QDEL_NULL_LIST(worn_underwear)
+	set_inventory_slots(new_slots)
 
 	//recheck species-restricted clothing
-	for(var/obj/item/C in get_equipped_items(include_carried = TRUE))
-		if(!C.mob_can_equip(src, get_equipped_slot_for_item(C), TRUE, TRUE))
-			drop_from_inventory(C)
+	for(var/obj/item/carrying in get_equipped_items(include_carried = TRUE))
+		if(!carrying.mob_can_equip(src, get_equipped_slot_for_item(carrying), TRUE, TRUE))
+			drop_from_inventory(carrying)
 
 //This handles actually updating our visual appearance
 // Triggers deep update of limbs and hud

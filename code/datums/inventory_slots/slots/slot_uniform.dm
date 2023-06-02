@@ -4,7 +4,7 @@
 	ui_loc = ui_iclothing
 	slot_id = slot_w_uniform_str
 	can_be_hidden = TRUE
-	covering_slot = slot_wear_suit_str
+	covering_slots = slot_wear_suit_str
 	drop_slots_on_unequip = list(
 		slot_r_store_str,
 		slot_l_store_str,

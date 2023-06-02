@@ -169,8 +169,8 @@
 		SET_STATUS_MAX(src, STAT_WEAK, 3) //can't emote while weakened, apparently.
 
 /mob/living/carbon/human/proc/handle_grasp()
-	for(var/hand_slot in held_item_slots)
-		var/datum/inventory_slot/inv_slot = held_item_slots[hand_slot]
+	for(var/hand_slot in get_held_item_slots())
+		var/datum/inventory_slot/inv_slot = get_inventory_slot_datum(hand_slot)
 		var/holding = inv_slot?.get_equipped_item()
 		if(holding)
 			var/obj/item/organ/external/E = GET_EXTERNAL_ORGAN(src, hand_slot)

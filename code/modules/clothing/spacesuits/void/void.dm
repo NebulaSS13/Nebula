@@ -198,7 +198,7 @@ else if(##equipment_var) {\
 	if(!istype(H)) return
 	if(H.incapacitated()) return
 	var/slot = H.get_equipped_slot_for_item(src)
-	if(slot != slot_wear_suit_str && !(slot in H.held_item_slots))
+	if(slot != slot_wear_suit_str && !(slot in H.get_held_item_slots()))
 		return// let them eject those tanks when they're in hand or stuff for ease of use
 
 	to_chat(H, "<span class='info'>You press the emergency release, ejecting \the [tank] from your suit.</span>")

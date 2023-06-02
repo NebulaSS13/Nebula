@@ -21,7 +21,7 @@
 
 /spell/hand/burning_grip/cast_hand(var/mob/living/carbon/human/H, var/mob/user)
 	var/list/targets = list()
-	for(var/hand_slot in H.held_item_slots)
+	for(var/hand_slot in H.get_held_item_slots())
 		targets |= hand_slot
 
 	var/obj/O = new /obj/effect/temporary(get_turf(H),3, 'icons/effects/effects.dmi', "fire_goon")

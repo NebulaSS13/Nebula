@@ -488,14 +488,13 @@
 		if(isitem(AM) && can_pick_up(AM))
 			return AM
 
-		if(iscarbon(AM))
-			var/mob/living/carbon/C = AM
-			for(var/hand_slot in C.held_item_slots)
-				var/datum/inventory_slot/inv_slot = C.held_item_slots[hand_slot]
+		if(ismob(AM))
+			var/mob/M = AM
+			for(var/hand_slot in M.get_held_item_slots())
+				var/datum/inventory_slot/inv_slot = M.get_inventory_slot_datum(hand_slot)
 				var/held = inv_slot.get_equipped_item()
 				if(held && can_pick_up(held))
-					return C
-	return null
+					return M
 
 /mob/living/simple_animal/hostile/retaliate/parrot/proc/search_for_perch()
 	for(var/obj/O in view(src))
@@ -518,14 +517,13 @@
 		if(isitem(AM) && can_pick_up(AM))
 			return AM
 
-		if(iscarbon(AM))
-			var/mob/living/carbon/C = AM
-			for(var/hand_slot in C.held_item_slots)
-				var/datum/inventory_slot/inv_slot = C.held_item_slots[hand_slot]
-				var/held = inv_slot.get_equipped_item()
+		if(ismob(AM))
+			var/mob/M = AM
+			for(var/hand_slot in M.get_held_item_slots())
+				var/datum/inventory_slot/inv_slot = M.get_inventory_slot_datum(hand_slot)
+				var/held = inv_slot?.get_equipped_item()
 				if(held && can_pick_up(held))
-					return C
-	return null
+					return M
 
 /mob/living/simple_animal/hostile/retaliate/parrot/proc/give_up()
 	if(!length(enemies))

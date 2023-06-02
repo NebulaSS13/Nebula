@@ -217,7 +217,7 @@
 
 	var/obj/item/chems/food/result = new create_type()
 	//If the snack was in your hands, the result will be too
-	if (src in user.held_item_slots)
+	if (src in user.get_held_item_slots())
 		user.drop_from_inventory(src)
 		user.put_in_hands(result)
 	else
