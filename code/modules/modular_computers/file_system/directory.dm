@@ -15,7 +15,7 @@
 		if(held_file && hard_drive)
 			hard_drive.remove_file(held_file, forced = TRUE)
 
-	QDEL_NULL(temp_file_refs)
+	temp_file_refs.Cut()
 	. = ..()
 
 /datum/computer_file/directory/proc/get_held_files()
