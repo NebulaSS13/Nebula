@@ -18,7 +18,7 @@
 			to_chat(user, SPAN_DANGER("The parachute is unpacked."))
 
 /obj/item/storage/backpack/parachute/attack_self(mob/user)
-	if(!user.check_dexterity(DEXTERITY_GRIP, TRUE))
+	if(!user.check_dexterity(DEXTERITY_HOLD_ITEM, TRUE))
 		return ..()
 	var/initial_pack = packed
 	var/pack_msg = packed ? "unpack" : "pack"

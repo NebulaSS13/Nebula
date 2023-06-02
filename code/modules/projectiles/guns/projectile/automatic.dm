@@ -105,7 +105,7 @@
 		..()
 
 /obj/item/gun/projectile/automatic/assault_rifle/grenade/attack_hand(mob/user)
-	if(!user.is_holding_offhand(src) || !use_launcher || !user.check_dexterity(DEXTERITY_GRIP, TRUE))
+	if(!user.is_holding_offhand(src) || !use_launcher || !user.check_dexterity(DEXTERITY_HOLD_ITEM, TRUE))
 		return ..()
 	launcher.unload(user)
 	return TRUE

@@ -26,7 +26,7 @@
 		return ..()
 
 /obj/item/chems/drinks/glass2/attack_hand(mob/user)
-	if(!user.is_holding_offhand(src) || !user.check_dexterity(DEXTERITY_GRIP, TRUE))
+	if(!user.is_holding_offhand(src) || !user.check_dexterity(DEXTERITY_HOLD_ITEM, TRUE))
 		return ..()
 
 	if(!extras.len)

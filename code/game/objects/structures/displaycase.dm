@@ -113,7 +113,7 @@
 
 /obj/structure/displaycase/attack_hand(mob/user)
 
-	if(!user.check_dexterity(DEXTERITY_GRIP, TRUE))
+	if(!user.check_dexterity(DEXTERITY_HOLD_ITEM, TRUE))
 		return ..()
 
 	user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)

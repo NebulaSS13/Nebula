@@ -68,7 +68,7 @@
 	toggle_paddles()
 
 /obj/item/defibrillator/attack_hand(mob/user)
-	if(loc != user || !user.check_dexterity(DEXTERITY_GRIP, TRUE))
+	if(loc != user || !user.check_dexterity(DEXTERITY_HOLD_ITEM, TRUE))
 		return ..()
 	toggle_paddles()
 	return TRUE

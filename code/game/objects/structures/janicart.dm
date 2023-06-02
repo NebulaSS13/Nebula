@@ -85,7 +85,7 @@
 
 
 /obj/structure/janitorialcart/attack_hand(mob/user)
-	if(!user.check_dexterity(DEXTERITY_GRIP, TRUE))
+	if(!user.check_dexterity(DEXTERITY_HOLD_ITEM, TRUE))
 		return ..()
 	ui_interact(user)
 	return TRUE
@@ -231,7 +231,7 @@
 	. = ..()
 
 /obj/structure/bed/chair/janicart/attack_hand(mob/user)
-	if(!mybag || !user.check_dexterity(DEXTERITY_GRIP, TRUE))
+	if(!mybag || !user.check_dexterity(DEXTERITY_HOLD_ITEM, TRUE))
 		return ..()
 	user.put_in_hands(mybag)
 	mybag = null

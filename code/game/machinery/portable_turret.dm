@@ -802,7 +802,7 @@ var/global/list/turret_icons
 
 
 /obj/machinery/porta_turret_construct/attack_hand(mob/user)
-	if(!user.check_dexterity(DEXTERITY_GRIP))
+	if(!user.check_dexterity(DEXTERITY_HOLD_ITEM))
 		return ..()
 	if(build_step == 4)
 		if(!installation)

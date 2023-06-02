@@ -28,7 +28,7 @@
 
 /obj/item/target/attack_hand(var/mob/user)
 	// taking pinned targets off!
-	if(!stake || !user.check_dexterity(DEXTERITY_GRIP))
+	if(!stake || !user.check_dexterity(DEXTERITY_HOLD_ITEM))
 		return ..()
 	return stake.attack_hand(user)
 

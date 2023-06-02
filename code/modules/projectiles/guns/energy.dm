@@ -145,7 +145,7 @@ var/global/list/registered_cyborg_weapons = list()
 
 //For removable cells.
 /obj/item/gun/energy/attack_hand(mob/user)
-	if(!user.is_holding_offhand(src) || isnull(accepts_cell_type) || isnull(power_supply) || !user.check_dexterity(DEXTERITY_GRIP, TRUE))
+	if(!user.is_holding_offhand(src) || isnull(accepts_cell_type) || isnull(power_supply) || !user.check_dexterity(DEXTERITY_HOLD_ITEM, TRUE))
 		return ..()
 	user.put_in_hands(power_supply)
 	power_supply = null

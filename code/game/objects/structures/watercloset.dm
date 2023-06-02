@@ -115,7 +115,7 @@ var/global/list/hygiene_props = list()
 	update_icon()
 
 /obj/structure/hygiene/toilet/attack_hand(var/mob/user)
-	if(!user.check_dexterity(DEXTERITY_GRIP, TRUE))
+	if(!user.check_dexterity(DEXTERITY_HOLD_ITEM, TRUE))
 		return ..()
 
 	if(swirlie)

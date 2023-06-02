@@ -50,7 +50,7 @@
 			anchored = 1
 
 /obj/item/beartrap/attack_hand(mob/user)
-	if(!user.check_dexterity(DEXTERITY_GRIP, TRUE))
+	if(!user.check_dexterity(DEXTERITY_HOLD_ITEM, TRUE))
 		return ..()
 	if(buckled_mob)
 		user_unbuckle_mob(user)

@@ -189,14 +189,14 @@
 /obj/item/pizzabox/attack_hand(mob/user)
 
 	if(open && pizza)
-		if(user.check_dexterity(DEXTERITY_GRIP))
+		if(user.check_dexterity(DEXTERITY_HOLD_ITEM))
 			user.put_in_hands(pizza)
 			to_chat(user, SPAN_NOTICE("You take \the [src.pizza] out of \the [src]."))
 			pizza = null
 			update_icon()
 		return TRUE
 
-	if(length(boxes) && user.is_holding_offhand(src) && user.check_dexterity(DEXTERITY_GRIP))
+	if(length(boxes) && user.is_holding_offhand(src) && user.check_dexterity(DEXTERITY_HOLD_ITEM))
 		var/obj/item/pizzabox/box = boxes[boxes.len]
 		boxes -= box
 		user.put_in_hands(box)

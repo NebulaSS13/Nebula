@@ -31,7 +31,7 @@
 
 /obj/structure/extinguisher_cabinet/attack_hand(mob/user)
 
-	if(user.check_dexterity(DEXTERITY_GRIP, TRUE) && has_extinguisher)
+	if(user.check_dexterity(DEXTERITY_HOLD_ITEM, TRUE) && has_extinguisher)
 		user.put_in_hands(has_extinguisher)
 		to_chat(user, SPAN_NOTICE("You take [has_extinguisher] from [src]."))
 		playsound(src.loc, 'sound/effects/extout.ogg', 50, 0)

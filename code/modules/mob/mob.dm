@@ -1063,11 +1063,14 @@
 	return 1
 
 // Let simple mobs press buttons and levers but nothing more complex.
-/mob/proc/has_dexterity(var/dex_level)
-	. = dex_level <= DEXTERITY_SIMPLE_MACHINES
+/mob/proc/get_dexterity(var/silent = FALSE)
+	var/decl/species/my_species = get_species()
+	if(my_species)
+		return my_species.get_manual_dexterity()
+	return DEXTERITY_BASE
 
-/mob/proc/check_dexterity(var/dex_level, var/silent)
-	. = has_dexterity(dex_level)
+/mob/proc/check_dexterity(var/dex_level = DEXTERITY_FULL, var/silent = FALSE)
+	. = !!(get_dexterity(silent) & dex_level)
 	if(!. && !silent)
 		to_chat(src, FEEDBACK_YOU_LACK_DEXTERITY)
 

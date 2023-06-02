@@ -46,9 +46,6 @@
 	#define SEC_HUD 1 //Security HUD mode
 	#define MED_HUD 2 //Medical HUD mode
 
-/mob/living/silicon/has_dexterity(var/dex_level)
-	return dexterity >= dex_level
-
 /mob/living/silicon/Initialize()
 	global.silicon_mob_list += src
 	. = ..()

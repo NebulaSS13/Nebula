@@ -104,7 +104,9 @@
 		..(P, def_zone)
 
 /obj/structure/curtain/attack_hand(mob/user)
-	toggle()
+	if(user.check_dexterity(DEXTERITY_HOLD_ITEM))
+		toggle()
+		return TRUE
 	return ..()
 
 /obj/structure/curtain/attackby(obj/item/W, mob/user)

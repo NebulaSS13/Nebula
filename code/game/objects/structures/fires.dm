@@ -139,7 +139,7 @@
 
 /obj/structure/fire_source/attack_hand(var/mob/user)
 
-	if(length(contents) && user.check_dexterity(DEXTERITY_GRIP, TRUE))
+	if(length(contents) && user.check_dexterity(DEXTERITY_HOLD_ITEM, TRUE))
 		var/obj/item/removing = pick(contents)
 		removing.dropInto(loc)
 		user.put_in_hands(removing)

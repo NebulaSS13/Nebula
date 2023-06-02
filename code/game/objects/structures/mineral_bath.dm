@@ -66,7 +66,7 @@
 	return TRUE
 
 /obj/structure/mineral_bath/attack_hand(var/mob/user)
-	if(!user.check_dexterity(DEXTERITY_GRIP, TRUE))
+	if(!user.check_dexterity(DEXTERITY_HOLD_ITEM, TRUE))
 		return ..()
 	eject_occupant()
 	return TRUE

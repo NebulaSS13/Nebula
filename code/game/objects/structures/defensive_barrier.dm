@@ -101,7 +101,7 @@
 
 /obj/structure/defensive_barrier/attack_hand(mob/user)
 
-	if(!user.check_dexterity(DEXTERITY_GRIP, TRUE))
+	if(!user.check_dexterity(DEXTERITY_HOLD_ITEM, TRUE))
 		return ..()
 
 	var/decl/species/species = user.get_species()

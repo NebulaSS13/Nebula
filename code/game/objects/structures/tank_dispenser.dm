@@ -66,7 +66,7 @@
 	return attack_hand_with_interaction_checks(user)
 
 /obj/structure/tank_rack/attack_hand(mob/user)
-	if(!user.check_dexterity(DEXTERITY_GRIP, TRUE))
+	if(!user.check_dexterity(DEXTERITY_HOLD_ITEM, TRUE))
 		return ..()
 	var/list/dat = list()
 	var/oxycount = LAZYLEN(oxygen_tanks)

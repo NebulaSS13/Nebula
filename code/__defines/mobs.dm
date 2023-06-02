@@ -307,13 +307,27 @@
 #define MARKING_TARGET_HAIR 1 // Draw a /decl/sprite_accessory/marking to the mob's hair, eg. ears & horns
 
 #define DEXTERITY_NONE            0
-#define DEXTERITY_SIMPLE_MACHINES 1
-#define DEXTERITY_KEYBOARDS       2
-#define DEXTERITY_TOUCHSCREENS    3
-#define DEXTERITY_GRIP            4
-#define DEXTERITY_WEAPONS         5
-#define DEXTERITY_COMPLEX_TOOLS   6
-#define DEXTERITY_FULL            7
+#define DEXTERITY_SIMPLE_MACHINES BITFLAG(0)
+#define DEXTERITY_HOLD_ITEM       BITFLAG(1)
+#define DEXTERITY_EQUIP_ITEM      BITFLAG(2)
+#define DEXTERITY_KEYBOARDS       BITFLAG(3)
+#define DEXTERITY_TOUCHSCREENS    BITFLAG(4)
+// TODO: actually get grab code to check this one.
+#define DEXTERITY_GRAPPLE         BITFLAG(5)
+#define DEXTERITY_WEAPONS         BITFLAG(6)
+#define DEXTERITY_COMPLEX_TOOLS   BITFLAG(7)
+#define DEXTERITY_BASE (DEXTERITY_SIMPLE_MACHINES|DEXTERITY_HOLD_ITEM|DEXTERITY_EQUIP_ITEM)
+#define DEXTERITY_FULL (DEXTERITY_BASE|DEXTERITY_KEYBOARDS|DEXTERITY_TOUCHSCREENS|DEXTERITY_GRAPPLE|DEXTERITY_WEAPONS|DEXTERITY_COMPLEX_TOOLS)
+
+// List of dexterity flags ordered by 'complexity' for use in brainloss dex malus checking.
+var/global/list/dexterity_levels = list(
+	"[DEXTERITY_COMPLEX_TOOLS]",
+	"[DEXTERITY_WEAPONS]",
+	"[DEXTERITY_GRAPPLE]",
+	"[DEXTERITY_TOUCHSCREENS]",
+	"[DEXTERITY_KEYBOARDS]",
+	"[DEXTERITY_BASE]"
+)
 
 // used in /mob/living/carbon/human/can_inject, and by various callers of that proc
 #define CAN_INJECT 1

@@ -288,9 +288,9 @@
 	if(anchored)
 		return ..()
 
-	if(!user.check_dexterity(DEXTERITY_GRIP, silent = TRUE))
+	if(!user.check_dexterity(DEXTERITY_EQUIP_ITEM, silent = TRUE))
 
-		if(user.check_dexterity(DEXTERITY_KEYBOARDS, silent = TRUE))
+		if(user.check_dexterity(DEXTERITY_HOLD_ITEM, silent = TRUE))
 
 			if(loc == user)
 				to_chat(user, SPAN_NOTICE("You begin trying to remove \the [src]..."))

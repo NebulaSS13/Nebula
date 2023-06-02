@@ -44,7 +44,7 @@
 	. = ..()
 
 /obj/structure/hand_cart/attack_hand(mob/user)
-	if(!carrying || !user.check_dexterity(DEXTERITY_GRIP, TRUE))
+	if(!carrying || !user.check_dexterity(DEXTERITY_HOLD_ITEM, TRUE))
 		return ..()
 	unload_item(user)
 	return TRUE

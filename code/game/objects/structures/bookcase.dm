@@ -31,7 +31,7 @@ var/global/list/station_bookcases = list()
 	return ..()
 
 /obj/structure/bookcase/attack_hand(var/mob/user)
-	if(!length(contents) || !user.check_dexterity(DEXTERITY_GRIP, TRUE))
+	if(!length(contents) || !user.check_dexterity(DEXTERITY_HOLD_ITEM, TRUE))
 		return ..()
 	var/obj/item/book/choice = input("Which book would you like to remove from the shelf?") as null|obj in contents
 	if(choice && (choice in contents) && CanPhysicallyInteract(user))

@@ -196,7 +196,7 @@
 
 
 /obj/item/ammo_magazine/attack_hand(mob/user)
-	if(!user.is_holding_offhand(src) || !user.check_dexterity(DEXTERITY_GRIP, TRUE))
+	if(!user.is_holding_offhand(src) || !user.check_dexterity(DEXTERITY_HOLD_ITEM, TRUE))
 		return ..()
 	if(!stored_ammo.len)
 		to_chat(user, SPAN_NOTICE("\The [src] is already empty!"))

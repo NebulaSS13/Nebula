@@ -2,7 +2,7 @@
 	name = "mobile ladder"
 	desc = "A lightweight deployable ladder, which you can use to move up or down. Or alternatively, you can bash some faces in."
 	icon = 'icons/obj/mobile_ladder.dmi'
-	
+
 	material = /decl/material/solid/metal/steel
 	matter = list(/decl/material/solid/plastic = MATTER_AMOUNT_SECONDARY)
 	icon_state = ICON_STATE_WORLD
@@ -97,7 +97,7 @@
 			to_chat(user, SPAN_WARNING("You can't do that right now!"))
 			return
 
-		if(!user.check_dexterity(DEXTERITY_GRIP))
+		if(!user.check_dexterity(DEXTERITY_HOLD_ITEM))
 			return
 
 		user.visible_message(
