@@ -107,8 +107,8 @@
 	if(!..())
 		return 0
 	//Check hands and mod slip
-	for(var/hand_slot in held_item_slots)
-		var/datum/inventory_slot/inv_slot = held_item_slots[hand_slot]
+	for(var/hand_slot in get_held_item_slots())
+		var/datum/inventory_slot/inv_slot = get_inventory_slot_datum(hand_slot)
 		var/obj/item/held = inv_slot?.get_equipped_item()
 		if(!held)
 			prob_slip -= 2

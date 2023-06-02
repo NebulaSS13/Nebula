@@ -334,8 +334,8 @@
 	dat += "<B><HR><FONT size=3>[name]</FONT></B>"
 	dat += "<HR>"
 
-	var/list/held_item_slots = get_held_item_slots()
-	for(var/hand_slot in held_item_slots)
+	var/list/my_held_item_slots = get_held_item_slots()
+	for(var/hand_slot in my_held_item_slots)
 		var/datum/inventory_slot/inv_slot = get_inventory_slot_datum(hand_slot)
 		if(!inv_slot || inv_slot.skip_on_strip_display)
 			continue
@@ -345,7 +345,7 @@
 	var/list/all_slots = get_all_valid_equipment_slots()
 	if(all_slots)
 		for(var/slot in (all_slots-global.pocket_slots))
-			if(slot in held_item_slots)
+			if(slot in my_held_item_slots)
 				continue
 			var/obj/item/thing_in_slot = get_equipped_item(slot)
 			dat += "<B>[capitalize(get_descriptive_slot_name(slot))]:</b> <a href='?src=\ref[src];item=[slot]'>[thing_in_slot || "nothing"]</a>"

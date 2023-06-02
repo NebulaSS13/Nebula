@@ -3,7 +3,7 @@
 	slot_state = "gloves"
 	ui_loc = ui_gloves
 	slot_id = slot_gloves_str
-	covering_slot = slot_wear_suit_str
+	covering_slots = slot_wear_suit_str
 	can_be_hidden = TRUE
 	requires_organ_tag = list(
 		BP_L_HAND,

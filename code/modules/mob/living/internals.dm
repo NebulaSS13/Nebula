@@ -51,7 +51,7 @@
 
 /mob/living/proc/get_possible_internals_sources()
 	. = get_equipped_internals_sources()
-	for(var/slot in held_item_slots)
+	for(var/slot in get_held_item_slots())
 		var/obj/item/tank/checking = get_equipped_item(slot)
 		if(istype(checking))
 			.[parse_zone(slot)] = list(checking, "in")

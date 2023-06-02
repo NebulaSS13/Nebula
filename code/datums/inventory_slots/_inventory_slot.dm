@@ -12,7 +12,7 @@
 	var/obj/item/_holding
 	var/list/drop_slots_on_unequip
 	var/covering_flags = 0
-	var/covering_slot
+	var/covering_slots
 	var/can_be_hidden = FALSE
 	var/skip_on_inventory_display = FALSE
 	var/skip_on_strip_display = FALSE
@@ -65,9 +65,32 @@
 		_holding.screen_loc = null
 	_holding = null
 
-/datum/inventory_slot/proc/get_covering_item(var/mob/user)
-	if(covering_slot)
-		return user.get_equipped_item(covering_slot)
+/datum/inventory_slot/proc/is_accessible(var/mob/user, var/obj/item/prop, var/disable_warning)
+	if(!covering_flags)
+		return TRUE
+	var/list/covering_items = get_covering_items(user)
+	if(!length(covering_items))
+		return TRUE
+	var/coverage_flags = (prop.body_parts_covered|covering_flags)
+	for(var/obj/item/covering in covering_items)
+		if(covering.body_parts_covered & coverage_flags)
+			if(!disable_warning)
+				to_chat(user, SPAN_WARNING("\The [covering] is in the way."))
+			return FALSE
+	return TRUE
+
+/datum/inventory_slot/proc/get_covering_items(var/mob/user)
+	if(!covering_slots)
+		return null
+	if(islist(covering_slots))
+		for(var/covering_slot in covering_slots)
+			var/thing = user.get_equipped_item(covering_slot)
+			if(thing)
+				LAZYADD(., thing)
+	else
+		var/thing = user.get_equipped_item(covering_slots)
+		if(thing)
+			LAZYADD(., thing)
 
 /datum/inventory_slot/proc/get_covering_flags(var/mob/user)
 	return covering_flags
@@ -110,15 +133,8 @@
 		return FALSE
 	return TRUE
 
-/datum/inventory_slot/proc/can_equip_to_slot(var/mob/user, var/obj/item/prop, var/slot, var/disable_warning, var/force)
-	// Check that the slot is valid and free
-	if(_holding || !slot_id || slot != slot_id)
-		return FALSE
-	// Check that the item has the appropriate flags.
-	if(!prop_can_fit_in_slot)
-		return FALSE
-	// Other subtypes implement their own checking. We're good for now.
-	return passes_additional_slot_equip_checks()
+/datum/inventory_slot/proc/can_equip_to_slot(var/mob/user, var/obj/item/prop, var/disable_warning)
+	return (!_holding && prop && slot_id && prop_can_fit_in_slot(prop))
 
 /datum/inventory_slot/proc/prop_can_fit_in_slot(var/obj/item/prop)
 	return (isnull(requires_slot_flags) || (requires_slot_flags & prop.slot_flags))

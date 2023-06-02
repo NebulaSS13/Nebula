@@ -3,7 +3,7 @@
 	slot_state = "glasses"
 	ui_loc = ui_glasses
 	slot_id = slot_glasses_str
-	covering_slot = slot_head_str
+	covering_slots = slot_head_str
 	covering_flags = SLOT_EYES
 	can_be_hidden = TRUE
 	requires_organ_tag = BP_HEAD

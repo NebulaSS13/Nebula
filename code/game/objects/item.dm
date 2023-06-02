@@ -430,16 +430,14 @@
 		for(var/obj/item/held in M.get_held_items())
 			held.update_twohanding()
 
-	if(SSticker.mode && (equip_sound || pickup_sound))
-		if((slot_flags & global.slot_flags_enumeration[slot]) && equip_sound)
-			addtimer(CALLBACK(src, .proc/equipped_sound_callback), 0, (TIMER_OVERRIDE | TIMER_UNIQUE))
-		else if(isliving(user) && pickup_sound)
-			var/mob/living/L = user
-			if(slot in L.held_item_slots)
+	if(user)
+		if(SSticker.mode)
+			if(pickup_sound && (slot in user.get_held_item_slots()))
 				addtimer(CALLBACK(src, .proc/pickup_sound_callback), 0, (TIMER_OVERRIDE | TIMER_UNIQUE))
-
-	if(user && (z_flags & ZMM_MANGLE_PLANES))
-		addtimer(CALLBACK(user, /mob/proc/check_emissive_equipment), 0, TIMER_UNIQUE)
+			else if(equip_sound)
+				addtimer(CALLBACK(src, .proc/equipped_sound_callback), 0, (TIMER_OVERRIDE | TIMER_UNIQUE))
+		if(z_flags & ZMM_MANGLE_PLANES)
+			addtimer(CALLBACK(user, /mob/proc/check_emissive_equipment), 0, TIMER_UNIQUE)
 
 	RAISE_EVENT(/decl/observ/mob_equipped, user, src, slot)
 	RAISE_EVENT_REPEAT(/decl/observ/item_equipped, src, user, slot)
@@ -448,129 +446,30 @@
 /obj/item/proc/equipped_robot(var/mob/user)
 	return
 
-//Defines which slots correspond to which slot flags
-var/global/list/slot_flags_enumeration = list(
-	"[slot_wear_mask_str]" = SLOT_FACE,
-	"[slot_back_str]" = SLOT_BACK,
-	"[slot_wear_suit_str]" = SLOT_OVER_BODY,
-	"[slot_gloves_str]" = SLOT_HANDS,
-	"[slot_shoes_str]" = SLOT_FEET,
-	"[slot_belt_str]" = SLOT_LOWER_BODY,
-	"[slot_glasses_str]" = SLOT_EYES,
-	"[slot_head_str]" = SLOT_HEAD,
-	"[slot_l_ear_str]" = SLOT_EARS,
-	"[slot_r_ear_str]" = SLOT_EARS,
-	"[slot_w_uniform_str]" = SLOT_UPPER_BODY,
-	"[slot_wear_id_str]" = SLOT_ID,
-	"[slot_tie_str]" = SLOT_TIE,
-	)
-
 //the mob M is attempting to equip this item into the slot passed through as 'slot'. Return 1 if it can do this and 0 if it can't.
-//If you are making custom procs but would like to retain partial or complete functionality of this one, include a 'return ..()' to where you want this to happen.
 //Set disable_warning to 1 if you wish it to not give you outputs.
-//Should probably move the bulk of this into mob code some time, as most of it is related to the definition of slots and not item-specific
-//set force to ignore blocking overwear and occupied slots
 /obj/item/proc/mob_can_equip(mob/M, slot, disable_warning = FALSE, force = FALSE)
-
 	if(!slot || !M)
 		return FALSE
-
-	var/can_hold = FALSE
-	if(!isnum(slot))
-		var/list/held_slots = M.get_held_item_slots()
-		can_hold = !!LAZYACCESS(held_slots, slot)
-
-	//First check if the item can be equipped to the desired slot.
-	var/list/mob_equip
-	if(!can_hold)
-		mob_equip = M.get_all_valid_equipment_slots()
-		if(!(slot in mob_equip))
+	var/datum/inventory_slot/inv_slot = M.get_inventory_slot_datum(slot)
+	if(!inv_slot || !inv_slot.is_accessible(M, src, disable_warning) || !inv_slot.can_equip_to_slot(M, src, disable_warning))
+		return FALSE
+	var/already_equipped = inv_slot.get_equipped_item()
+	if(already_equipped)
+		if(!force)
 			return FALSE
-		var/associated_slot = global.slot_flags_enumeration[slot]
-		if(!isnull(associated_slot) && !(associated_slot & slot_flags))
-			return FALSE
-
-	if(!force)
-		//Next check that the slot is free
-		if(M.get_equipped_item(slot))
-			return FALSE
-		//Next check if the slot is accessible.
-		var/mob/_user = disable_warning? null : M
-		if(!M.slot_is_accessible(slot, src, _user))
-			return FALSE
-
-	//Lastly, check special rules for the desired slot.
-	switch(slot)
-		if(slot_l_ear_str, slot_r_ear_str)
-			if((w_class > ITEM_SIZE_TINY) && !(slot_flags & SLOT_EARS))
-				return FALSE
-		if(slot_belt_str)
-			if(slot == slot_belt_str && (item_flags & ITEM_FLAG_IS_BELT))
-				return TRUE
-			else if(!M.get_equipped_item(slot_w_uniform_str) && (slot_w_uniform_str in mob_equip))
-				if(!disable_warning)
-					to_chat(M, SPAN_WARNING("You need a jumpsuit before you can attach this [name]."))
-				return FALSE
-		if(slot_l_store_str, slot_r_store_str)
-			if(!M.get_equipped_item(slot_w_uniform_str) && (slot_w_uniform_str in mob_equip))
-				if(!disable_warning)
-					to_chat(M, SPAN_WARNING("You need a jumpsuit before you can attach this [name]."))
-				return FALSE
-			if( w_class > ITEM_SIZE_SMALL && !(slot_flags & SLOT_POCKET) )
-				return FALSE
-			if(get_storage_cost() >= ITEM_SIZE_NO_CONTAINER)
-				return FALSE
-		if(slot_s_store_str)
-			var/obj/item/suit = M.get_equipped_item(slot_wear_suit_str)
-			if(!suit && (slot_wear_suit_str in mob_equip))
-				if(!disable_warning)
-					to_chat(M, SPAN_WARNING("You need a suit before you can attach this [name]."))
-				return FALSE
-			if(suit && !suit.allowed)
-				if(!disable_warning)
-					to_chat(usr, SPAN_WARNING("You somehow have a suit with no defined allowed items for suit storage, stop that."))
-				return FALSE
-			if( !(istype(src, /obj/item/modular_computer/pda) || istype(src, /obj/item/pen) || is_type_in_list(src, suit.allowed)) )
-				return FALSE
-		if(slot_handcuffed_str)
-			if(!istype(src, /obj/item/handcuffs))
-				return FALSE
-		if(slot_in_backpack_str) //used entirely for equipping spawned mobs or at round start
-			var/obj/item/storage/backpack/B = M.get_equipped_item(slot_back_str)
-			if(!istype(B) || !B.can_be_inserted(src,M,1))
-				return FALSE
-		if(slot_tie_str)
-			var/obj/item/clothing/under/uniform = M.get_equipped_item(slot_w_uniform_str)
-			var/obj/item/clothing/suit = M.get_equipped_item(slot_wear_suit_str)
-			if((!uniform && (slot_w_uniform_str in mob_equip)) && (!suit && (slot_wear_suit_str in mob_equip)))
-				if(!disable_warning)
-					to_chat(M, SPAN_WARNING("You need something you can attach \the [src] to."))
-				return FALSE
-			if(istype(uniform) && (slot_w_uniform_str in mob_equip))
-				if(!uniform.can_attach_accessory(src))
-					if (!disable_warning)
-						to_chat(M, SPAN_WARNING("You cannot equip \the [src] to \the [uniform]."))
-					return FALSE
-				return TRUE
-			if(suit && (slot_wear_suit_str in mob_equip) && !suit.can_attach_accessory(src))
-				if (!disable_warning)
-					to_chat(M, SPAN_WARNING("You cannot equip \the [src] to \the [suit]."))
-				return FALSE
+		inv_slot.clear_slot()
+		qdel(already_equipped)
 	return TRUE
 
 /obj/item/proc/mob_can_unequip(mob/M, slot, disable_warning = 0)
-	if(!slot) return 0
-	if(!M) return 0
-
-	if(!canremove)
-		return 0
-	if(!M.slot_is_accessible(slot, src, disable_warning? null : M))
-		return 0
-	return 1
+	if(!slot || !M || !canremove)
+		return FALSE
+	var/datum/inventory_slot/inv_slot = M.get_inventory_slot_datum(slot)
+	return inv_slot?.is_accessible(M, src, disable_warning)
 
 /obj/item/proc/can_be_dropped_by_client(mob/M)
 	return M.canUnEquip(src)
-
 
 /obj/item/verb/verb_pickup()
 	set src in oview(1)

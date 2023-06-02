@@ -3,7 +3,7 @@
 	slot_state = "mask"
 	ui_loc = ui_mask
 	slot_id = slot_wear_mask_str
-	covering_slot = slot_head_str
+	covering_slots = slot_head_str
 	covering_flags = SLOT_FACE
 	requires_organ_tag = BP_HEAD
 	requires_slot_flags = SLOT_FACE
