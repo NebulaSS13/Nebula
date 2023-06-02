@@ -115,10 +115,13 @@
 	if(_holding || !slot_id || slot != slot_id)
 		return FALSE
 	// Check that the item has the appropriate flags.
-	if(!isnull(requires_slot_flags) && !(requires_slot_flags & prop.slot_flags))
+	if(!prop_can_fit_in_slot)
 		return FALSE
 	// Other subtypes implement their own checking. We're good for now.
-	return TRUE
+	return passes_additional_slot_equip_checks()
+
+/datum/inventory_slot/proc/prop_can_fit_in_slot(var/obj/item/prop)
+	return (isnull(requires_slot_flags) || (requires_slot_flags & prop.slot_flags))
 
 /datum/inventory_slot/proc/get_examined_string(mob/owner, mob/user, distance, hideflags, decl/pronouns/pronouns)
 	if(_holding)

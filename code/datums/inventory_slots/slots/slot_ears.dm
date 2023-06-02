@@ -26,8 +26,8 @@
 			if(inv_slot?.get_equipped_item() == prop)
 				inv_slot.clear_slot()
 
-/datum/inventory_slot/ear/can_equip_to_slot(var/mob/user, var/obj/item/prop, var/slot, var/disable_warning, var/force)
-	return ..() && prop.w_class <= ITEM_SIZE_TINY
+/datum/inventory_slot/ear/prop_can_fit_in_slot(var/obj/item/prop)
+	return ..() || prop.w_class <= ITEM_SIZE_TINY
 
 /datum/inventory_slot/ear/right
 	slot_name = "Right Ear"
