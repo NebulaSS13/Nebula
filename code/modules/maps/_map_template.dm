@@ -150,7 +150,7 @@
 ///Returns a list with an x and y coordinate where to place the template, depending on what it's aligned to, and its x/y offset
 /// * offset_x: the relative x offset of the template.
 /// * offset_y: the relative y offset of the template.
-/// * align_template_center: Whether we should offset the offset so the center of the template is at offset_x/y. This can be combined with centered_to_world.
+/// * align_template_center: Whether we should offset the offset so the center of the template is at offset_x/y.
 /datum/map_template/proc/calculate_template_origin(var/offset_x = 1, var/offset_y = 1, var/align_template_center = FALSE)
 	if(align_template_center)
 		offset_x = offset_x - (FLOOR(width  / 2) - 1)
