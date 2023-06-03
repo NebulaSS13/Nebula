@@ -449,7 +449,7 @@
 		return FALSE
 	var/obj/item/organ/internal/augment/A = organ_to_replace
 	if(istype(A) && !(A.augment_flags & AUGMENTATION_MECHANIC))
-		to_chat(user, SPAN_WARNING("\the [A] cannot function within a robotic limb"))
+		to_chat(user, SPAN_WARNING("\The [A] cannot function within a robotic limb."))
 		return FALSE
 	return organ_to_replace
 

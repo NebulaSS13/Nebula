@@ -93,7 +93,7 @@
 	. = jointext(., "<br>")
 
 /obj/machinery/forensic/proc/print_report()
-	var/obj/item/paper/report = new(get_turf(src), get_report(), "[src] report #[++report_num]: [sample.name]")
+	var/obj/item/paper/report = new(get_turf(src), null, get_report(), "[src] report #[++report_num]: [sample.name]")
 	playsound(loc, "sound/machines/dotprinter.ogg", 30, 1)
 	report.apply_custom_stamp(overlay_image('icons/obj/bureaucracy.dmi', icon_state = "paper_stamp-brig", flags = RESET_COLOR), "by \the [src]")
 

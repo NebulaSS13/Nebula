@@ -158,7 +158,7 @@ SUBSYSTEM_DEF(supply)
 			info +="[shoppinglist.len] PACKAGES IN THIS SHIPMENT<br>"
 			info +="CONTENTS:<br><ul>"
 
-			slip = new /obj/item/paper/manifest(A, JOINTEXT(info))
+			slip = new /obj/item/paper/manifest(A, null, JOINTEXT(info))
 			LAZYSET(slip.metadata, "order_total", SP.cost)
 			LAZYSET(slip.metadata, "is_copy",     FALSE)
 
