@@ -1,0 +1,4 @@
+author: Loaf
+delete-after: true
+changes:
+  - tweak: Total rewrite of telecomms, refer to GitHub PR for details.
