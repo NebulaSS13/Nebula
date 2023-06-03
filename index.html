@@ -29,8 +29,8 @@ General Public License version 3.
 
 
 <h3 id="modules">Modules
-<aside>(173 modules,
-    57/4250 macros, 1.3%)</aside></h3>
+<aside>(172 modules,
+    57/4247 macros, 1.3%)</aside></h3>
 <ul class="index-tree modules">
     <li><a href="(builtins).html" title="(builtins)">(builtins)</a></li>
     <li class="has-children"><span title="code">code</span><ul class="index-tree">
@@ -140,7 +140,6 @@ General Public License version 3.
     <li><a href="code/game/machinery/holosign.html" title="code&#x2F;game&#x2F;machinery&#x2F;holosign">holosign</a></li>
     <li><a href="code/game/machinery/requests_console.html" title="code&#x2F;game&#x2F;machinery&#x2F;requests_console">requests_console</a></li>
     <li><a href="code/game/machinery/self_destruct_storage.html" title="code&#x2F;game&#x2F;machinery&#x2F;self_destruct_storage">self_destruct_storage</a></li>
-    <li><span class="no-substance">telecomms&#x2F;</span><a href="code/game/machinery/telecomms/broadcaster.html" title="code&#x2F;game&#x2F;machinery&#x2F;telecomms&#x2F;broadcaster">broadcaster</a></li>
     <li><span class="no-substance">vending&#x2F;</span><a href="code/game/machinery/vending/_vending.html" title="code&#x2F;game&#x2F;machinery&#x2F;vending&#x2F;_vending">_vending</a></li>
     <li><a href="code/game/machinery/wall_frames.html" title="code&#x2F;game&#x2F;machinery&#x2F;wall_frames">wall_frames</a></li>
     </ul></li>
@@ -150,7 +149,7 @@ General Public License version 3.
     <li class="has-children"><span title="code&#x2F;game&#x2F;objects&#x2F;items&#x2F;devices">devices</span><ul class="index-tree">
     <li><a href="code/game/objects/items/devices/flashlight.html" title="code&#x2F;game&#x2F;objects&#x2F;items&#x2F;devices&#x2F;flashlight">flashlight</a></li>
     <li><a href="code/game/objects/items/devices/multitool.html" title="code&#x2F;game&#x2F;objects&#x2F;items&#x2F;devices&#x2F;multitool">multitool</a></li>
-    <li><span class="no-substance">radio&#x2F;</span><a href="code/game/objects/items/devices/radio/radio.html" title="code&#x2F;game&#x2F;objects&#x2F;items&#x2F;devices&#x2F;radio&#x2F;radio">radio</a></li>
+    <li><span class="no-substance">radio&#x2F;</span><a href="code/game/objects/items/devices/radio/radio_analog.html" title="code&#x2F;game&#x2F;objects&#x2F;items&#x2F;devices&#x2F;radio&#x2F;radio_analog">radio_analog</a></li>
     </ul></li>
     <li><span class="no-substance">robot&#x2F;</span><a href="code/game/objects/items/robot/robot_items.html" title="code&#x2F;game&#x2F;objects&#x2F;items&#x2F;robot&#x2F;robot_items">robot_items</a></li>
     <li class="has-children"><span title="code&#x2F;game&#x2F;objects&#x2F;items&#x2F;weapons">weapons</span><ul class="index-tree">
@@ -305,7 +304,7 @@ Thanks to forum_account for saving the day, the library can be found
 
 
 <h3 id="types">Types
-<aside>(168 detailed/376 documented/18183 total, 2.1%)</aside></h3>
+<aside>(171 detailed/378 documented/18117 total, 2.1%)</aside></h3>
 <ul class="index-tree">
     <li><a href="global.html" title="(global)">(global)</a></li>
     <li class="has-children"><a href="area.html" title="&#x2F;area">area</a><ul class="index-tree">
@@ -739,7 +738,9 @@ Parameters: var/obj/item/card/id</li>
     <li><a href="obj/item/parcel.html" title="&#x2F;obj&#x2F;item&#x2F;parcel">parcel</a> - A parcel wrapper for items and structures that can be wrapped in wrapping paper.</li>
     <li><span class="no-substance" title="&#x2F;obj&#x2F;item&#x2F;photo">photo</span> - photo</li>
     <li><span class="no-substance" title="&#x2F;obj&#x2F;item&#x2F;pickaxe">pickaxe</span> - 'pickaxes' but theyre drills actually</li>
-    <li><span class="no-substance">radio&#x2F;</span><span class="no-substance" title="&#x2F;obj&#x2F;item&#x2F;radio&#x2F;borg">borg</span> - Borg Radios</li>
+    <li class="has-children"><a href="obj/item/radio.html" title="&#x2F;obj&#x2F;item&#x2F;radio">radio</a><ul class="index-tree">
+    <li><a href="obj/item/radio/exosuit.html" title="&#x2F;obj&#x2F;item&#x2F;radio&#x2F;exosuit">exosuit</a></li>
+    </ul></li>
     <li><span class="no-substance" title="&#x2F;obj&#x2F;item&#x2F;scrying">scrying</span> - Scrying orb</li>
     <li><span class="no-substance" title="&#x2F;obj&#x2F;item&#x2F;shovel">shovel</span> - Shovel</li>
     <li class="has-children"><a href="obj/item/stack.html" title="&#x2F;obj&#x2F;item&#x2F;stack">stack</a><ul class="index-tree">
@@ -799,6 +800,10 @@ As with material, these stacks should only set this in Initialize as they are ab
     <li><a href="obj/machinery/holomap.html" title="&#x2F;obj&#x2F;machinery&#x2F;holomap">holomap</a></li>
     <li><span class="no-substance" title="&#x2F;obj&#x2F;machinery&#x2F;holosign">holosign</span> - HOLOSIGN</li>
     <li><a href="obj/machinery/microwave.html" title="&#x2F;obj&#x2F;machinery&#x2F;microwave">microwave</a></li>
+    <li class="has-children"><span title="&#x2F;obj&#x2F;machinery&#x2F;network">network</span><ul class="index-tree">
+    <li><a href="obj/machinery/network/message_server.html" title="&#x2F;obj&#x2F;machinery&#x2F;network&#x2F;message_server">message_server</a></li>
+    <li><a href="obj/machinery/network/telecomms_hub.html" title="&#x2F;obj&#x2F;machinery&#x2F;network&#x2F;telecomms_hub">telecomms_hub</a></li>
+    </ul></li>
     <li><a href="obj/machinery/newscaster.html" title="&#x2F;obj&#x2F;machinery&#x2F;newscaster">newscaster</a></li>
     <li><span class="no-substance">nuclear_cylinder_storage&#x2F;</span><span class="no-substance" title="&#x2F;obj&#x2F;machinery&#x2F;nuclear_cylinder_storage&#x2F;prefilled">prefilled</span> - Special subtype for mapping.</li>
     <li><a href="obj/machinery/papershredder.html" title="&#x2F;obj&#x2F;machinery&#x2F;papershredder">papershredder</a></li>
@@ -810,7 +815,6 @@ As with material, these stacks should only set this in Initialize as they are ab
     <li class="has-children"><a href="obj/machinery/smartfridge.html" title="&#x2F;obj&#x2F;machinery&#x2F;smartfridge">smartfridge</a><ul class="index-tree">
     <li><a href="obj/machinery/smartfridge/secure.html" title="&#x2F;obj&#x2F;machinery&#x2F;smartfridge&#x2F;secure">secure</a></li>
     </ul></li>
-    <li><span class="no-substance">telecomms&#x2F;</span><a href="obj/machinery/telecomms/broadcaster.html" title="&#x2F;obj&#x2F;machinery&#x2F;telecomms&#x2F;broadcaster">broadcaster</a></li>
     <li><a href="obj/machinery/vending.html" title="&#x2F;obj&#x2F;machinery&#x2F;vending">vending</a> - A vending machine</li>
     </ul></li>
     <li class="has-children"><span class="no-substance">random&#x2F;</span><span class="no-substance" title="&#x2F;obj&#x2F;random&#x2F;date_based">date_based</span> - Implementation<ul class="index-tree">
@@ -867,7 +871,7 @@ As with material, these stacks should only set this in Initialize as they are ab
 </main>
 <footer>
     nebula.dme
-    <a href="https://github.com/NebulaSS13/Nebula/tree/3491e3b18c9afb4aa912a4d4e6a8d7c4bc3decef">3491e3b</a>
+    <a href="https://github.com/NebulaSS13/Nebula/tree/f77c37d44a9de3bd3538168e4c53fbf3436a1731">f77c37d</a>
         (dev) &mdash; <a href="https://github.com/SpaceManiac/SpacemanDMM/blob/master/src/dmdoc/README.md">dmdoc 1.4.1</a></footer>
 </body>
 </html>
