@@ -273,7 +273,7 @@ var/global/list/telecomms_hubs = list()
 						. = TOPIC_REFRESH
 
 				if(href_list["change_key"])
-					var/new_key = input(user, "Enter a new key character.", "Channel Configuration", channel_datum.key) as text|null
+					var/new_key = lowertext(input(user, "Enter a new key character.", "Channel Configuration", channel_datum.key) as text|null)
 					new_key = sanitize(new_key, 1)
 					if(new_key != channel_datum.key && new_key && CanPhysicallyInteract(user))
 						if(new_key in global.special_channel_keys)

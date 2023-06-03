@@ -86,6 +86,7 @@ var/global/list/special_channel_keys = list(
 /mob/proc/parse_message_mode(var/message, var/standard_mode=MESSAGE_MODE_DEFAULT)
 	if(length(message) <= 0)
 		return null
+	message = lowertext(message)
 	var/initial_char = copytext_char(message,1,2)
 	if(initial_char == get_common_radio_prefix())
 		return standard_mode
