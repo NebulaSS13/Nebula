@@ -91,7 +91,7 @@
 		to_chat(user, "There is no scan data to print.")
 		return
 	playsound(loc, "sound/machines/dotprinter.ogg", 20, 1)
-	var/obj/item/paper/P = new(get_turf(src), scan_data, "paper - [scan_title]")
+	var/obj/item/paper/P = new(get_turf(src), null, scan_data, "paper - [scan_title]")
 	if(printout_color)
 		P.color = printout_color
 	user.put_in_hands(P)
