@@ -187,7 +187,7 @@
 /obj/structure/rack,
 /obj/item/gun/projectile/shotgun/pump,
 /obj/item/gun/projectile/shotgun/pump,
-/obj/item/radio/intercom/specops{
+/obj/item/radio/intercom{
 	pixel_y = 22
 	},
 /turf/unsimulated/floor{
@@ -261,7 +261,7 @@
 "aL" = (
 /obj/structure/reagent_dispensers/watertank,
 /obj/effect/floor_decal/corner/blue/diagonal,
-/obj/item/radio/intercom/specops{
+/obj/item/radio/intercom{
 	pixel_y = 22
 	},
 /turf/unsimulated/floor{
@@ -272,7 +272,7 @@
 /obj/structure/table/reinforced,
 /obj/machinery/chemical_dispenser/bar_soft/full,
 /obj/effect/floor_decal/corner/blue/diagonal,
-/obj/item/radio/intercom/specops{
+/obj/item/radio/intercom{
 	pixel_y = 22
 	},
 /turf/unsimulated/floor{
@@ -332,7 +332,7 @@
 	},
 /area/map_template/rescue_base/base)
 "aU" = (
-/obj/item/radio/intercom/specops{
+/obj/item/radio/intercom{
 	pixel_y = 22
 	},
 /turf/unsimulated/floor{
@@ -464,7 +464,7 @@
 /obj/machinery/recharger{
 	pixel_y = 4
 	},
-/obj/item/radio/intercom/specops{
+/obj/item/radio/intercom{
 	pixel_y = 22
 	},
 /turf/unsimulated/floor{
@@ -779,7 +779,7 @@
 "bQ" = (
 /obj/structure/bed/padded,
 /obj/item/bedsheet/captain,
-/obj/item/radio/intercom/specops{
+/obj/item/radio/intercom{
 	pixel_y = 22
 	},
 /turf/unsimulated/floor{
@@ -1107,7 +1107,7 @@
 /obj/item/cell/high,
 /obj/item/cell/high,
 /obj/item/cell/high,
-/obj/item/radio/intercom/specops{
+/obj/item/radio/intercom{
 	pixel_y = 22
 	},
 /turf/unsimulated/floor{
@@ -1721,7 +1721,7 @@
 	},
 /area/map_template/rescue_base/base)
 "dw" = (
-/obj/item/radio/intercom/specops{
+/obj/item/radio/intercom{
 	dir = 1;
 	pixel_y = -22
 	},
@@ -1804,7 +1804,7 @@
 /obj/structure/table/reinforced,
 /obj/item/aicard,
 /obj/item/pinpointer/advpinpointer,
-/obj/item/radio/intercom/specops{
+/obj/item/radio/intercom{
 	pixel_y = 22
 	},
 /turf/unsimulated/floor{
@@ -1844,7 +1844,7 @@
 /area/map_template/rescue_base/base)
 "dK" = (
 /obj/machinery/fabricator/pipe,
-/obj/item/radio/intercom/specops{
+/obj/item/radio/intercom{
 	pixel_y = 22
 	},
 /turf/unsimulated/floor{
@@ -1902,7 +1902,7 @@
 /area/map_template/rescue_base/base)
 "dS" = (
 /obj/structure/table/steel,
-/obj/item/radio/intercom/specops,
+/obj/item/radio/intercom,
 /turf/unsimulated/floor{
 	icon_state = "dark"
 	},
@@ -1983,7 +1983,7 @@
 /area/map_template/rescue_base/base)
 "ed" = (
 /obj/structure/table/reinforced,
-/obj/item/radio/intercom/specops{
+/obj/item/radio/intercom{
 	pixel_y = 22
 	},
 /turf/unsimulated/floor{
@@ -2327,7 +2327,7 @@
 	},
 /area/map_template/rescue_base/base)
 "eG" = (
-/obj/item/radio/intercom/specops{
+/obj/item/radio/intercom{
 	pixel_y = 22
 	},
 /turf/unsimulated/floor{
@@ -2562,7 +2562,7 @@
 /area/map_template/rescue_base/start)
 "fi" = (
 /obj/structure/table/steel_reinforced,
-/obj/item/radio/intercom/specops{
+/obj/item/radio/intercom{
 	dir = 8;
 	pixel_x = 22
 	},
@@ -2610,7 +2610,7 @@
 /turf/simulated/floor/tiled/dark,
 /area/map_template/rescue_base/start)
 "fq" = (
-/obj/item/radio/intercom/specops{
+/obj/item/radio/intercom{
 	dir = 8;
 	pixel_x = 22
 	},
@@ -2812,7 +2812,7 @@
 /turf/simulated/floor/tiled/dark,
 /area/map_template/rescue_base/start)
 "fP" = (
-/obj/item/radio/intercom/specops{
+/obj/item/radio/intercom{
 	dir = 8;
 	pixel_x = 22
 	},
@@ -2866,7 +2866,7 @@
 /turf/simulated/floor/tiled/dark,
 /area/map_template/rescue_base/start)
 "fX" = (
-/obj/item/radio/intercom/specops{
+/obj/item/radio/intercom{
 	dir = 1;
 	pixel_y = -22
 	},
@@ -3091,7 +3091,7 @@
 /turf/simulated/floor/tiled/white,
 /area/map_template/rescue_base/start)
 "gM" = (
-/obj/item/radio/intercom/specops{
+/obj/item/radio/intercom{
 	dir = 1;
 	pixel_y = -22
 	},
@@ -3102,7 +3102,7 @@
 /turf/simulated/floor/tiled/white,
 /area/map_template/rescue_base/start)
 "gO" = (
-/obj/item/radio/intercom/specops{
+/obj/item/radio/intercom{
 	dir = 8;
 	pixel_x = 22
 	},
@@ -3189,7 +3189,7 @@
 	},
 /obj/item/clothing/shoes/color/orange,
 /obj/item/clothing/under/color/orange,
-/obj/item/radio/intercom/specops{
+/obj/item/radio/intercom{
 	dir = 8;
 	pixel_x = 22
 	},
@@ -3299,6 +3299,63 @@
 	},
 /turf/unsimulated/floor{
 	icon_state = "asteroidfloor"
+	},
+/area/map_template/rescue_base/base)
+"jY" = (
+/obj/machinery/network/acl{
+	initial_network_id = "responsenet";
+	req_access = list("ACCESS_CENT_SPECOPS")
+	},
+/turf/unsimulated/floor{
+	icon_state = "dark"
+	},
+/area/map_template/rescue_base/base)
+"mp" = (
+/obj/machinery/door/airlock/centcom{
+	name = "Telecommunications"
+	},
+/turf/unsimulated/floor{
+	icon_state = "dark"
+	},
+/area/map_template/rescue_base/base)
+"qE" = (
+/obj/machinery/network/mainframe{
+	initial_network_id = "responsenet";
+	req_access = list("ACCESS_CENT_SPECOPS")
+	},
+/turf/unsimulated/floor{
+	icon_state = "dark"
+	},
+/area/map_template/rescue_base/base)
+"ty" = (
+/obj/machinery/computer/message_monitor{
+	dir = 4;
+	throwpass = 1
+	},
+/turf/unsimulated/floor{
+	icon_state = "dark"
+	},
+/area/map_template/rescue_base/base)
+"vA" = (
+/obj/machinery/network/relay/long_range{
+	initial_network_id = "responsenet";
+	req_access = list("ACCESS_CENT_SPECOPS")
+	},
+/turf/simulated/floor/plating,
+/area/map_template/rescue_base/start)
+"NG" = (
+/obj/machinery/network/router{
+	initial_network_id = "responsenet";
+	req_access = list("ACCESS_CENT_SPECOPS")
+	},
+/turf/unsimulated/floor{
+	icon_state = "dark"
+	},
+/area/map_template/rescue_base/base)
+"Qa" = (
+/obj/machinery/network/telecomms_hub/ert,
+/turf/unsimulated/floor{
+	icon_state = "dark"
 	},
 /area/map_template/rescue_base/base)
 
@@ -4286,9 +4343,9 @@ ad
 aR
 bc
 ad
-bA
-bB
-bg
+jY
+ty
+ad
 ar
 ar
 ad
@@ -4351,9 +4408,9 @@ av
 aR
 bc
 ad
-bB
-bK
-bg
+qE
+ar
+mp
 ar
 ar
 bg
@@ -4416,9 +4473,9 @@ aB
 aS
 aB
 ad
-bC
-bA
-bg
+NG
+Qa
+ad
 ar
 ar
 bg
@@ -4980,7 +5037,7 @@ eU
 gu
 gu
 gK
-gt
+vA
 gY
 hf
 eQ

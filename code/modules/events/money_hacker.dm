@@ -28,7 +28,6 @@ var/global/account_hack_attempted = 0
 		var/my_department = "[location_name()] Firewall Subroutines"
 		MS.send_rc_message("XO's Desk", my_department, message, "", "", 2)
 
-
 /datum/event/money_hacker/tick()
 	if(world.time >= end_time)
 		endWhen = activeFor
@@ -54,7 +53,6 @@ var/global/account_hack_attempted = 0
 		var/time1 = rand(0, 99999999)
 		var/time2 = "[round(time1 / 36000)+12]:[(time1 / 600 % 60) < 10 ? add_zero(time1 / 600 % 60, 1) : time1 / 600 % 60]"
 		T.time = pick("", stationtime2text(), time2)
-		
 		T.perform()
 
 	var/obj/machinery/network/message_server/MS

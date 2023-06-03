@@ -6,7 +6,6 @@
 /turf/unsimulated/wall,
 /area/centcom)
 "aae" = (
-/obj/machinery/telecomms/receiver/preset_cent,
 /obj/effect/floor_decal/corner/green/three_quarters{
 	dir = 8
 	},
@@ -15,38 +14,8 @@
 	},
 /area/centcom)
 "aaq" = (
-/obj/machinery/telecomms/bus/preset_cent,
 /obj/effect/floor_decal/corner/green{
 	dir = 5
-	},
-/turf/unsimulated/floor{
-	icon_state = "steel"
-	},
-/area/centcom)
-"aar" = (
-/obj/machinery/telecomms/processor/preset_cent,
-/obj/effect/floor_decal/corner/green{
-	dir = 5
-	},
-/turf/unsimulated/floor{
-	icon_state = "steel"
-	},
-/area/centcom)
-"aau" = (
-/obj/machinery/telecomms/server/presets/centcomm,
-/obj/effect/floor_decal/corner/green{
-	dir = 5
-	},
-/turf/unsimulated/floor{
-	icon_state = "steel"
-	},
-/area/centcom)
-"aav" = (
-/obj/effect/floor_decal/corner/green{
-	dir = 5
-	},
-/obj/machinery/telecomms/allinone{
-	intercept = 1
 	},
 /turf/unsimulated/floor{
 	icon_state = "steel"
@@ -143,24 +112,6 @@
 	},
 /area/centcom)
 "abC" = (
-/obj/machinery/telecomms/broadcaster/preset_cent,
-/obj/effect/floor_decal/corner/green{
-	dir = 10
-	},
-/turf/unsimulated/floor{
-	icon_state = "steel"
-	},
-/area/centcom)
-"abE" = (
-/obj/machinery/telecomms/hub/preset_cent,
-/obj/effect/floor_decal/corner/green{
-	dir = 10
-	},
-/turf/unsimulated/floor{
-	icon_state = "steel"
-	},
-/area/centcom)
-"aca" = (
 /obj/effect/floor_decal/corner/green{
 	dir = 10
 	},
@@ -266,7 +217,7 @@
 	},
 /area/centcom)
 "ala" = (
-/obj/item/radio/intercom/specops{
+/obj/item/radio/intercom{
 	pixel_y = 22
 	},
 /obj/structure/decoy{
@@ -604,14 +555,6 @@
 "aDl" = (
 /obj/effect/floor_decal/corner/green{
 	dir = 4
-	},
-/turf/unsimulated/floor{
-	icon_state = "steel"
-	},
-/area/centcom)
-"aDm" = (
-/obj/effect/floor_decal/corner/green{
-	dir = 5
 	},
 /turf/unsimulated/floor{
 	icon_state = "steel"
@@ -12129,10 +12072,10 @@ aab
 aab
 aab
 aad
-aar
+aaq
 aaK
 aaK
-abE
+abC
 aaR
 acm
 acQ
@@ -12331,12 +12274,12 @@ aab
 aab
 aab
 aad
-aau
+aaq
 aaK
 aaK
-aca
+abC
 aaR
-aca
+abC
 aaR
 aaR
 aaR
@@ -12345,7 +12288,7 @@ aaR
 aaR
 aad
 aad
-aDm
+aaq
 aGs
 aHg
 aHg
@@ -12533,12 +12476,12 @@ aab
 aab
 aab
 aad
-aav
+aaq
 aaK
 aaK
-aca
+abC
 aaR
-aca
+abC
 aaR
 aeQ
 auJ
@@ -12547,7 +12490,7 @@ aCb
 aCu
 aad
 aad
-aDm
+aaq
 aad
 aRl
 aRl
@@ -12740,7 +12683,7 @@ aad
 aad
 aad
 aad
-aca
+abC
 aaR
 aaK
 auW
@@ -12749,7 +12692,7 @@ auW
 aaK
 aCu
 aaR
-aDm
+aaq
 aaK
 aad
 aHG
@@ -12942,7 +12885,7 @@ aab
 aaR
 aaK
 aaK
-aca
+abC
 aaR
 aeR
 avf
@@ -12951,7 +12894,7 @@ aaK
 aCv
 aDk
 aaR
-aDm
+aaq
 aaK
 acf
 aHH
@@ -13144,7 +13087,7 @@ aab
 aaR
 aaK
 aci
-aca
+abC
 aaR
 ala
 avy
@@ -13153,7 +13096,7 @@ aaK
 aaK
 aaK
 aaR
-aDm
+aaq
 aci
 aHm
 aHW
@@ -13346,7 +13289,7 @@ aab
 aaR
 aaK
 aaK
-aca
+abC
 aaR
 alg
 avV
@@ -13355,7 +13298,7 @@ aCj
 aCv
 aDk
 aaR
-aDm
+aaq
 aaK
 aGs
 aHX
@@ -13548,7 +13491,7 @@ aad
 aad
 aad
 aad
-aca
+abC
 aaR
 aaK
 ayg
@@ -13557,7 +13500,7 @@ ayg
 aCx
 aCu
 aaR
-aDm
+aaq
 aaK
 aad
 aIh
@@ -13750,7 +13693,7 @@ aaK
 aaK
 aaK
 aaR
-aca
+abC
 aaR
 aeQ
 aaK
@@ -13759,7 +13702,7 @@ aCk
 aCy
 aad
 aad
-aDm
+aaq
 aad
 aRl
 aRl
@@ -13952,7 +13895,7 @@ aaK
 aaK
 aaK
 aaR
-aca
+abC
 aaR
 aaR
 aaR
@@ -13961,7 +13904,7 @@ aaR
 aaR
 aad
 aad
-aDm
+aaq
 aad
 aHp
 aIj

@@ -1128,3 +1128,11 @@
 	flick("blspell", animation)
 	sleep(5)
 	qdel(animation)
+
+/mob/living/silicon/robot/proc/handle_radio_transmission()
+	if(!is_component_functioning("radio"))
+		return FALSE
+	var/datum/robot_component/CO = get_component("radio")
+	if(!CO || !cell_use_power(CO.active_usage))
+		return FALSE
+	return TRUE

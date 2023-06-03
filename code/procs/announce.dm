@@ -140,11 +140,7 @@ var/global/datum/announcement/minor/minor_announcement = new(new_sound = 'sound/
 		rank = character.mind.role_alt_title
 	var/announce_channel = get_announcement_frequency(job)
 	if(announce_channel)
-		AnnounceArrivalSimple(character.real_name, rank, join_message, announce_channel)
-
-/proc/AnnounceArrivalSimple(var/name, var/rank = "visitor", var/join_message = "has arrived on the [station_name()]", var/frequency)
-	var/obj/item/radio/announcer = get_global_announcer()
-	announcer.autosay("[name], [rank], [join_message].", "Arrivals Announcement Computer", frequency)
+		do_telecomms_announcement(character, "[character.real_name], [rank], [join_message].", "Arrivals Announcement Computer", announce_channel)
 
 /proc/get_announcement_frequency(var/datum/job/job)
 	// During red alert all jobs are announced on main frequency.

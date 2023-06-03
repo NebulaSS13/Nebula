@@ -68,17 +68,14 @@
 /datum/fabricator_recipe/imprinter/circuit/robocontrol
 	path = /obj/item/stock_parts/circuitboard/robotics
 
-/datum/fabricator_recipe/imprinter/circuit/comm_monitor
-	path = /obj/item/stock_parts/circuitboard/comm_monitor
-
-/datum/fabricator_recipe/imprinter/circuit/comm_server
-	path = /obj/item/stock_parts/circuitboard/comm_server
-
 /datum/fabricator_recipe/imprinter/circuit/message_monitor
 	path = /obj/item/stock_parts/circuitboard/message_monitor
 
 /datum/fabricator_recipe/imprinter/circuit/message_server
-	path = /obj/item/stock_parts/circuitboard/telecomms/message_server
+	path = /obj/item/stock_parts/circuitboard/message_server
+
+/datum/fabricator_recipe/imprinter/circuit/telecomms_hub
+	path = /obj/item/stock_parts/circuitboard/telecomms_hub
 
 /datum/fabricator_recipe/imprinter/circuit/guestpass
 	path = /obj/item/stock_parts/circuitboard/guestpass
@@ -323,24 +320,6 @@
 /datum/fabricator_recipe/imprinter/circuit/disperser_console
 	path = /obj/item/stock_parts/circuitboard/disperser
 
-/datum/fabricator_recipe/imprinter/circuit/tcom_server
-	path = /obj/item/stock_parts/circuitboard/telecomms/server
-
-/datum/fabricator_recipe/imprinter/circuit/tcom_processor
-	path = /obj/item/stock_parts/circuitboard/telecomms/processor
-
-/datum/fabricator_recipe/imprinter/circuit/tcom_bus
-	path = /obj/item/stock_parts/circuitboard/telecomms/bus
-
-/datum/fabricator_recipe/imprinter/circuit/tcom_hub
-	path = /obj/item/stock_parts/circuitboard/telecomms/hub
-
-/datum/fabricator_recipe/imprinter/circuit/tcom_broadcaster
-	path = /obj/item/stock_parts/circuitboard/telecomms/broadcaster
-
-/datum/fabricator_recipe/imprinter/circuit/tcom_receiver
-	path = /obj/item/stock_parts/circuitboard/telecomms/receiver
-
 /datum/fabricator_recipe/imprinter/circuit/comms_relay
 	path = /obj/item/stock_parts/circuitboard/commsrelay
 
@@ -484,6 +463,9 @@
 
 /datum/fabricator_recipe/imprinter/circuit/relay_wall_mounted
 	path = /obj/item/stock_parts/circuitboard/relay/wall_mounted
+
+/datum/fabricator_recipe/imprinter/circuit/long_range_relay
+	path = /obj/item/stock_parts/circuitboard/relay/long_range
 
 /datum/fabricator_recipe/imprinter/circuit/inertial_damper
 	path = /obj/item/stock_parts/circuitboard/inertial_damper

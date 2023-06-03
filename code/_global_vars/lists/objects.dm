@@ -7,10 +7,6 @@ var/global/list/global_mutations = list() // List of hidden mutation things.
 var/global/list/reg_dna = list()
 var/global/list/global_map = list()
 
-// Announcer intercom, because too much stuff creates an intercom for one message then hard del()s it. Also headset, for things that should be affected by comms outages.
-GLOBAL_GETTER(announcer, /obj/item/radio/announcer, new)
-GLOBAL_GETTER(headset, /obj/item/radio/announcer/subspace, new)
-
 var/global/host = null //only here until check @ code\modules\ghosttrap\trap.dm:112 is fixed
 var/global/datum/sun/sun = new
 var/global/datum/universal_state/universe = new

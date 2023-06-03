@@ -244,14 +244,12 @@ INITIALIZE_IMMEDIATE(/mob/new_player)
 
 	qdel(src)
 
-
 /mob/new_player/proc/AnnounceCyborg(var/mob/living/character, var/rank, var/join_message)
 	if (GAME_STATE == RUNLEVEL_GAME)
 		if(character.mind.role_alt_title)
 			rank = character.mind.role_alt_title
 		// can't use their name here, since cyborg namepicking is done post-spawn, so we'll just say "A new Cyborg has arrived"/"A new Android has arrived"/etc.
-		var/obj/item/radio/announcer = get_global_announcer()
-		announcer.autosay("A new[rank ? " [rank]" : " visitor" ] [join_message ? join_message : "has arrived"].", "Arrivals Announcement Computer")
+		do_telecomms_announcement(character, "A new[rank ? " [rank]" : " visitor" ] [join_message ? join_message : "has arrived"].", "Arrivals Announcement Computer")
 
 /mob/new_player/proc/LateChoices()
 	var/name = client.prefs.be_random_name ? "friend" : client.prefs.real_name

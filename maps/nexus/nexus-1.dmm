@@ -1166,6 +1166,9 @@
 /obj/machinery/light/small/red{
 	dir = 4
 	},
+/obj/machinery/network/router/wall_mounted{
+	pixel_y = 21
+	},
 /turf/simulated/floor/plating,
 /area/nexus/command)
 "kq" = (
@@ -1765,8 +1768,7 @@
 /area/nexus/engineering/storage)
 "qt" = (
 /obj/machinery/network/mainframe{
-	initial_network_id = "nexus";
-	wired_connection = 1
+	initial_network_id = "nexus"
 	},
 /obj/structure/railing/mapped{
 	dir = 4
@@ -2557,8 +2559,8 @@
 /area/nexus/command)
 "xX" = (
 /obj/abstract/level_data_spawner/main_level{
-	name = "Nexus Lower Deck";
-},
+	name = "Nexus Lower Deck"
+	},
 /turf/space,
 /area/space)
 "yf" = (
@@ -5065,10 +5067,7 @@
 /obj/structure/railing/mapped{
 	dir = 4
 	},
-/obj/machinery/network/router{
-	initial_network_id = "nexus";
-	wired_connection = 1
-	},
+/obj/machinery/network/telecomms_hub,
 /turf/simulated/floor/plating,
 /area/nexus/command)
 "Wp" = (
@@ -5513,9 +5512,7 @@
 /obj/structure/cable{
 	icon_state = "4-8"
 	},
-/obj/machinery/computer/modular/telescreen/preset/engineering{
-	dir = 2
-	},
+/obj/machinery/computer/modular/telescreen/preset/engineering,
 /turf/simulated/floor/tiled,
 /area/nexus/engineering)
 "ZM" = (

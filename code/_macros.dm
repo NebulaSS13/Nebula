@@ -174,6 +174,8 @@
 #define SPAN_BAD(X)      SPAN_RED(X)
 #define SPAN_HARDSUIT(X) SPAN_BLUE(X)
 
+#define CSS_CLASS_RADIO "radio"
+
 #define STYLE_SMALLFONTS(X, S, C1) "<span style=\"font-family: 'Small Fonts'; color: [C1]; font-size: [S]px\">[X]</span>"
 
 #define STYLE_SMALLFONTS_OUTLINE(X, S, C1, C2) "<span style=\"font-family: 'Small Fonts'; color: [C1]; -dm-text-outline: 1 [C2]; font-size: [S]px\">[X]</span>"

@@ -68,15 +68,14 @@
 /mob/living/silicon/proc/statelaws(var/datum/ai_laws/laws)
 	var/prefix = ""
 	if(MAIN_CHANNEL == lawchannel)
-		prefix = ";"
-	else if(lawchannel == "Binary")
-		prefix = "[get_language_prefix()]b"
-	else if((lawchannel in additional_law_channels))
-		prefix = additional_law_channels[lawchannel]
+		prefix = get_common_radio_prefix()
 	else
-		prefix = get_radio_key_from_channel(lawchannel)
+		if(lawchannel == "Binary" || lawchannel == "Drone")
+			prefix = "[get_language_prefix()]b"
+		else if((lawchannel in additional_law_channels))
+			prefix = "[get_department_radio_prefix()][additional_law_channels[lawchannel]]"
 
-	dostatelaws(lawchannel, prefix, laws)
+	dostatelaws(lawchannel, (prefix || lawchannel), laws)
 
 /mob/living/silicon/proc/dostatelaws(var/method, var/prefix, var/datum/ai_laws/laws)
 	if(stating_laws[prefix])
@@ -106,8 +105,9 @@
 /mob/living/silicon/proc/law_channels()
 	var/list/channels = new()
 	channels += MAIN_CHANNEL
-	channels += silicon_radio.channels
 	channels += additional_law_channels
+	for(var/datum/radio_channel/channel in silicon_radio.get_available_channels())
+		channels |= channel.key
 	channels += "Binary"
 	return channels
 

@@ -115,9 +115,6 @@
 	dir = 1
 	},
 /obj/effect/floor_decal/steeldecal/steel_decals_central6,
-/obj/machinery/telecomms/allinone{
-	intercept = 1
-	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/map_template/merc_spawn)
 "am" = (
@@ -255,8 +252,9 @@
 /turf/simulated/floor/shuttle/darkred,
 /area/map_template/merc_shuttle)
 "az" = (
-/obj/structure/bed/chair/shuttle/blue{
-	dir = 8
+/obj/machinery/network/relay/long_range{
+	initial_network_id = "mercnet";
+	req_access = list("ACCESS_MERCENARY")
 	},
 /turf/simulated/floor/shuttle/darkred,
 /area/map_template/merc_shuttle)
@@ -403,6 +401,9 @@
 	pixel_x = -21;
 	req_access = list("ACCESS_MERCENARY")
 	},
+/obj/structure/bed/chair/shuttle/blue{
+	dir = 4
+	},
 /turf/simulated/floor/shuttle/darkred,
 /area/map_template/merc_shuttle)
 "aN" = (
@@ -504,6 +505,9 @@
 	},
 /obj/machinery/atmospherics/pipe/manifold/hidden/supply{
 	dir = 8
+	},
+/obj/structure/bed/chair/shuttle/blue{
+	dir = 4
 	},
 /turf/simulated/floor/shuttle/darkred,
 /area/map_template/merc_shuttle)
@@ -1618,9 +1622,12 @@
 /turf/simulated/floor/plating,
 /area/map_template/merc_shuttle/rear)
 "cU" = (
-/obj/vehicle/bike/electric,
+/obj/machinery/network/acl{
+	initial_network_id = "mercnet";
+	req_access = list("ACCESS_MERCENARY")
+	},
 /turf/simulated/floor/airless,
-/area/space)
+/area/map_template/merc_spawn)
 "cX" = (
 /obj/structure/handrail{
 	dir = 1
@@ -1658,6 +1665,9 @@
 	dir = 4
 	},
 /turf/simulated/floor/tiled,
+/area/map_template/merc_spawn)
+"dP" = (
+/turf/simulated/floor/airless,
 /area/map_template/merc_spawn)
 "eb" = (
 /obj/abstract/landmark{
@@ -2211,10 +2221,11 @@
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/map_template/merc_spawn)
 "vU" = (
-/obj/structure/window/reinforced/crescent{
-	dir = 4
+/obj/machinery/network/mainframe{
+	initial_network_id = "mercnet";
+	req_access = list("ACCESS_MERCENARY")
 	},
-/turf/simulated/floor/tiled/airless,
+/turf/simulated/floor/airless,
 /area/map_template/merc_spawn)
 "wG" = (
 /obj/effect/floor_decal/industrial/warning{
@@ -2238,10 +2249,15 @@
 /turf/simulated/floor/plating,
 /area/map_template/merc_spawn)
 "xw" = (
-/obj/structure/window/reinforced/crescent{
-	dir = 8
+/obj/machinery/network/router{
+	initial_network_id = "mercnet";
+	req_access = list("ACCESS_MERCENARY")
 	},
-/turf/simulated/floor/tiled/airless,
+/turf/simulated/floor/airless,
+/area/map_template/merc_spawn)
+"yr" = (
+/obj/machinery/computer/message_monitor,
+/turf/simulated/floor/airless,
 /area/map_template/merc_spawn)
 "yz" = (
 /obj/effect/shuttle_landmark/merc/nav3,
@@ -2288,6 +2304,10 @@
 	icon_state = "warningcorner"
 	},
 /turf/simulated/floor/tiled,
+/area/map_template/merc_spawn)
+"DM" = (
+/obj/vehicle/bike/electric,
+/turf/simulated/floor/airless,
 /area/map_template/merc_spawn)
 "Fm" = (
 /obj/structure/rack,
@@ -2543,11 +2563,9 @@
 /turf/space,
 /area/space)
 "NZ" = (
-/obj/effect/floor_decal/industrial/warning{
-	icon_state = "warning"
-	},
+/obj/machinery/network/telecomms_hub/mercenary,
 /turf/simulated/floor/airless,
-/area/space)
+/area/map_template/merc_spawn)
 "Ok" = (
 /obj/machinery/mining/brace,
 /obj/structure/railing/mapped/no_density{
@@ -9070,10 +9088,10 @@ aa
 aa
 aa
 aa
-aa
-aa
-aa
-aa
+XS
+XS
+XS
+XS
 aa
 aa
 aa
@@ -9169,13 +9187,13 @@ aa
 aa
 aa
 aa
-cY
-cY
-cY
-cY
 aa
 aa
 aa
+XS
+cU
+yr
+XS
 aa
 aa
 aa
@@ -9271,14 +9289,14 @@ aa
 aa
 aa
 aa
-cY
-cU
-Pb
-cY
 aa
 aa
 aa
-aa
+XS
+vU
+dP
+XS
+di
 di
 di
 XS
@@ -9373,17 +9391,17 @@ aa
 aa
 aa
 aa
-cY
-cU
-Pb
-cY
 aa
 aa
 aa
-aa
+XS
 xw
-Hz
-Mj
+dP
+sf
+dj
+dj
+dj
+rR
 FO
 FO
 xb
@@ -9475,17 +9493,17 @@ aa
 aa
 aa
 aa
-cY
-cU
-Pb
+aa
+aa
+aa
+XS
 NZ
-dh
-aa
-aa
-Hz
-vU
-vU
-Mj
+dP
+sf
+dk
+dk
+dk
+rR
 gZ
 gZ
 kc
@@ -9577,15 +9595,15 @@ aa
 aa
 aa
 aa
-cY
-cU
-Pb
 aa
 aa
-di
 aa
+XS
+DM
+DM
+XS
 dh
-aa
+dh
 dh
 XS
 Ip
@@ -9679,13 +9697,13 @@ aa
 aa
 aa
 aa
-cY
-cU
 aa
 aa
 aa
-aa
-aa
+XS
+DM
+DM
+XS
 aa
 aa
 aa
@@ -9781,13 +9799,13 @@ aa
 aa
 aa
 aa
-cY
-cU
 aa
 aa
 aa
-aa
-aa
+XS
+XS
+XS
+XS
 aa
 aa
 aa
@@ -9883,8 +9901,8 @@ aa
 aa
 aa
 aa
-cY
-cY
+aa
+aa
 aa
 aa
 aa

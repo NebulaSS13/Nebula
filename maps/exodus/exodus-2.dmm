@@ -724,7 +724,7 @@
 /obj/item/radio/intercom{
 	pixel_y = 22
 	},
-/obj/item/radio/intercom/department/security{
+/obj/item/radio/intercom{
 	dir = 1;
 	pixel_y = -22
 	},
@@ -2336,7 +2336,7 @@
 /obj/effect/floor_decal/corner/red{
 	dir = 4
 	},
-/obj/item/radio/intercom/department/security{
+/obj/item/radio/intercom{
 	dir = 8;
 	pixel_x = 22
 	},
@@ -2977,7 +2977,7 @@
 	pixel_y = -3
 	},
 /obj/effect/floor_decal/industrial/outline/yellow,
-/obj/item/radio/intercom/department/security{
+/obj/item/radio/intercom{
 	dir = 8;
 	pixel_x = 22
 	},
@@ -2987,7 +2987,7 @@
 /obj/machinery/light{
 	dir = 8
 	},
-/obj/item/radio/intercom/department/security{
+/obj/item/radio/intercom{
 	dir = 4;
 	pixel_x = -22
 	},
@@ -3668,7 +3668,7 @@
 /obj/machinery/camera/network/security{
 	c_tag = "Security - Interrogation"
 	},
-/obj/item/radio/intercom/interrogation{
+/obj/item/radio/intercom{
 	pixel_y = 22
 	},
 /turf/simulated/floor/tiled/dark,
@@ -3865,7 +3865,7 @@
 	c_tag = "Security - Interrogation Observation";
 	dir = 4
 	},
-/obj/item/radio/intercom/interrogation{
+/obj/item/radio/intercom{
 	dir = 4;
 	pixel_x = -22
 	},
@@ -4028,7 +4028,7 @@
 	c_tag = "Security - Processing";
 	dir = 4
 	},
-/obj/item/radio/intercom/department/security{
+/obj/item/radio/intercom{
 	dir = 4;
 	pixel_x = -22
 	},
@@ -4041,7 +4041,7 @@
 /obj/machinery/light{
 	dir = 4
 	},
-/obj/item/radio/intercom/department/security{
+/obj/item/radio/intercom{
 	dir = 8;
 	pixel_x = 22
 	},
@@ -4081,7 +4081,7 @@
 /obj/machinery/atmospherics/unary/vent_pump/on{
 	dir = 4
 	},
-/obj/item/radio/intercom/department/security{
+/obj/item/radio/intercom{
 	dir = 4;
 	pixel_x = -22
 	},
@@ -4583,7 +4583,7 @@
 	dir = 2;
 	icon_state = "pipe-c"
 	},
-/obj/item/radio/intercom/department/security{
+/obj/item/radio/intercom{
 	dir = 1;
 	pixel_y = -22
 	},
@@ -7633,7 +7633,7 @@
 /obj/effect/floor_decal/corner/red{
 	dir = 9
 	},
-/obj/item/radio/intercom/department/security{
+/obj/item/radio/intercom{
 	dir = 4;
 	pixel_x = -22
 	},
@@ -8327,7 +8327,7 @@
 /turf/simulated/floor/plating,
 /area/exodus/maintenance/evahallway)
 "arl" = (
-/obj/item/radio/intercom/department/security{
+/obj/item/radio/intercom{
 	dir = 1;
 	pixel_y = -22
 	},
@@ -10435,9 +10435,6 @@
 /turf/simulated/floor/plating,
 /area/exodus/engineering/sublevel_access)
 "avU" = (
-/obj/structure/fireaxecabinet{
-	pixel_y = -32
-	},
 /obj/structure/cable/green{
 	icon_state = "4-8"
 	},
@@ -10456,6 +10453,9 @@
 	},
 /obj/effect/floor_decal/corner/blue{
 	dir = 10
+	},
+/obj/structure/cable/green{
+	icon_state = "2-8"
 	},
 /turf/simulated/floor/tiled/steel_grid,
 /area/exodus/bridge)
@@ -19460,7 +19460,7 @@
 /obj/machinery/alarm{
 	pixel_y = 22
 	},
-/obj/item/radio/intercom/locked/confessional{
+/obj/item/radio/intercom{
 	dir = 8;
 	pixel_x = 22
 	},
@@ -19487,7 +19487,7 @@
 	pixel_x = -1;
 	pixel_y = 1
 	},
-/obj/item/radio/intercom/entertainment{
+/obj/item/radio/intercom{
 	dir = 8;
 	pixel_x = 22
 	},
@@ -21066,7 +21066,7 @@
 	dir = 1;
 	pixel_y = -22
 	},
-/obj/item/radio/intercom/locked/confessional{
+/obj/item/radio/intercom{
 	dir = 8;
 	pixel_x = 22
 	},
@@ -21934,7 +21934,7 @@
 /turf/simulated/wall/prepainted,
 /area/exodus/storage/art)
 "aUf" = (
-/obj/item/radio/intercom/entertainment{
+/obj/item/radio/intercom{
 	dir = 4;
 	pixel_x = -22
 	},
@@ -24142,12 +24142,11 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
 	},
-/obj/structure/extinguisher_cabinet{
-	pixel_x = -5;
-	pixel_y = -28
-	},
 /obj/effect/floor_decal/corner/blue{
 	dir = 10
+	},
+/obj/structure/fireaxecabinet{
+	pixel_y = -32
 	},
 /turf/simulated/floor/tiled/steel_grid,
 /area/exodus/bridge)
@@ -25631,7 +25630,7 @@
 	icon_state = "1-2"
 	},
 /turf/simulated/floor/airless,
-/area/space)
+/area/exodus/turret_protected/ai)
 "bcm" = (
 /obj/structure/bed/chair/comfy/black{
 	dir = 8
@@ -27872,14 +27871,14 @@
 /obj/structure/cable/cyan{
 	icon_state = "0-4"
 	},
-/obj/item/radio/intercom/private{
+/obj/item/radio/intercom{
 	pixel_y = 22
 	},
-/obj/item/radio/intercom/custom{
+/obj/item/radio/intercom{
 	dir = 1;
 	pixel_y = -22
 	},
-/obj/item/radio/intercom/broadcasting{
+/obj/item/radio/intercom{
 	dir = 4;
 	pixel_x = -22
 	},
@@ -28797,15 +28796,15 @@
 	pixel_x = 17;
 	pixel_y = 25
 	},
-/obj/item/radio/intercom/custom{
+/obj/item/radio/intercom{
 	pixel_x = -28;
 	pixel_y = 4
 	},
-/obj/item/radio/intercom/private{
+/obj/item/radio/intercom{
 	pixel_x = 28;
 	pixel_y = 4
 	},
-/obj/item/radio/intercom/broadcasting{
+/obj/item/radio/intercom{
 	pixel_y = 22
 	},
 /obj/structure/aicore/deactivated,
@@ -28838,14 +28837,14 @@
 /obj/structure/cable/cyan{
 	icon_state = "0-8"
 	},
-/obj/item/radio/intercom/private{
+/obj/item/radio/intercom{
 	dir = 1;
 	pixel_y = -22
 	},
-/obj/item/radio/intercom/custom{
+/obj/item/radio/intercom{
 	pixel_y = 22
 	},
-/obj/item/radio/intercom/broadcasting{
+/obj/item/radio/intercom{
 	dir = 8;
 	pixel_x = 22
 	},
@@ -30011,7 +30010,7 @@
 /turf/simulated/floor/wood/walnut,
 /area/exodus/bridge/meeting_room)
 "blt" = (
-/obj/item/radio/intercom/entertainment{
+/obj/item/radio/intercom{
 	pixel_y = 22
 	},
 /turf/simulated/floor/carpet,
@@ -30547,16 +30546,6 @@
 	},
 /turf/simulated/floor/tiled/white,
 /area/exodus/research)
-"bmy" = (
-/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
-	dir = 4
-	},
-/obj/item/radio/intercom/entertainment{
-	dir = 1;
-	pixel_y = -22
-	},
-/turf/simulated/floor/carpet,
-/area/exodus/bridge/meeting_room)
 "bmz" = (
 /obj/machinery/alarm{
 	pixel_y = 22
@@ -30941,7 +30930,7 @@
 /obj/effect/floor_decal/corner/paleblue/three_quarters{
 	dir = 8
 	},
-/obj/item/radio/intercom/entertainment{
+/obj/item/radio/intercom{
 	pixel_y = 22
 	},
 /turf/simulated/floor/tiled/white,
@@ -30956,7 +30945,7 @@
 /obj/effect/floor_decal/corner/paleblue/three_quarters{
 	dir = 1
 	},
-/obj/item/radio/intercom/entertainment{
+/obj/item/radio/intercom{
 	pixel_y = 22
 	},
 /turf/simulated/floor/tiled/white,
@@ -31396,7 +31385,7 @@
 /area/exodus/medical/exam_room)
 "bom" = (
 /obj/machinery/porta_turret,
-/obj/item/radio/intercom/locked/ai_private{
+/obj/item/radio/intercom{
 	pixel_x = -4;
 	pixel_y = 22
 	},
@@ -33179,7 +33168,7 @@
 /obj/effect/floor_decal/corner/paleblue{
 	dir = 5
 	},
-/obj/item/radio/intercom/department/medbay,
+/obj/item/radio/intercom,
 /turf/simulated/floor/tiled/steel_grid,
 /area/exodus/medical/reception)
 "brQ" = (
@@ -33990,10 +33979,6 @@
 /obj/structure/table{
 	name = "plastic table frame"
 	},
-/obj/item/radio/phone/medbay{
-	name = "reception emergency phone";
-	pixel_x = -5
-	},
 /turf/simulated/floor/tiled/steel_grid,
 /area/exodus/medical/reception)
 "btC" = (
@@ -34057,9 +34042,6 @@
 "btI" = (
 /obj/structure/table{
 	name = "plastic table frame"
-	},
-/obj/item/radio/phone/medbay{
-	name = "reception emergency phone"
 	},
 /turf/simulated/floor/tiled/steel_grid,
 /area/exodus/medical/reception)
@@ -34867,7 +34849,7 @@
 /turf/simulated/floor/tiled/freezer,
 /area/exodus/crew_quarters/captain)
 "bvi" = (
-/obj/item/radio/intercom/locked/ai_private{
+/obj/item/radio/intercom{
 	dir = 1;
 	pixel_y = -22
 	},
@@ -36387,7 +36369,7 @@
 /obj/effect/floor_decal/industrial/warning/corner{
 	dir = 4
 	},
-/obj/item/radio/intercom/locked/ai_private{
+/obj/item/radio/intercom{
 	pixel_x = -12;
 	pixel_y = 22
 	},
@@ -39519,7 +39501,7 @@
 /obj/effect/floor_decal/corner/paleblue{
 	dir = 5
 	},
-/obj/item/radio/intercom/department/medbay{
+/obj/item/radio/intercom{
 	pixel_y = 22
 	},
 /turf/simulated/floor/tiled/white,
@@ -42897,6 +42879,7 @@
 /obj/structure/rack{
 	dir = 8
 	},
+/obj/item/stock_parts/circuitboard/telecomms_hub,
 /turf/simulated/floor/plating,
 /area/exodus/storage/tech)
 "bLb" = (
@@ -43602,7 +43585,7 @@
 	pixel_x = -22
 	},
 /obj/random/medical,
-/obj/item/radio/intercom/department/medbay{
+/obj/item/radio/intercom{
 	dir = 1;
 	pixel_y = -22
 	},
@@ -43822,9 +43805,6 @@
 	name = "plastic table frame"
 	},
 /obj/effect/floor_decal/corner/grey/diagonal,
-/obj/item/radio/phone/medbay{
-	name = "break room emergency phone"
-	},
 /turf/simulated/floor/tiled/white,
 /area/exodus/crew_quarters/medbreak)
 "bMS" = (
@@ -44152,6 +44132,9 @@
 	dir = 8
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
+/obj/item/stock_parts/circuitboard/acl,
+/obj/item/stock_parts/circuitboard/relay,
+/obj/item/stock_parts/circuitboard/router,
 /turf/simulated/floor/plating,
 /area/exodus/storage/tech)
 "bNE" = (
@@ -46608,7 +46591,7 @@
 "bSw" = (
 /obj/machinery/hologram/holopad,
 /obj/effect/floor_decal/corner/grey/diagonal,
-/obj/item/radio/intercom/department/medbay{
+/obj/item/radio/intercom{
 	dir = 1;
 	pixel_y = -22
 	},
@@ -49380,7 +49363,7 @@
 /obj/machinery/light/small{
 	dir = 4
 	},
-/obj/item/radio/intercom/department/medbay{
+/obj/item/radio/intercom{
 	pixel_y = 22
 	},
 /obj/item/radio/intercom{
@@ -55203,9 +55186,6 @@
 /obj/effect/floor_decal/corner/blue{
 	dir = 9
 	},
-/obj/item/radio/phone/medbay{
-	name = "surgery emergency phone"
-	},
 /turf/simulated/floor/tiled/steel_grid,
 /area/exodus/medical/surgeryprep)
 "ckn" = (
@@ -60481,11 +60461,6 @@
 /obj/structure/disposalpipe/segment,
 /obj/item/chems/spray/cleaner,
 /obj/structure/table/glass,
-/obj/item/radio/phone/medbay{
-	name = "virology emergency phone";
-	pixel_x = -6;
-	pixel_y = 8
-	},
 /turf/simulated/floor/tiled/white,
 /area/exodus/medical/virology)
 "cyL" = (
@@ -63533,12 +63508,19 @@
 /obj/effect/floor_decal/corner/lime,
 /turf/simulated/floor/tiled/steel_grid,
 /area/exodus/hallway/secondary/entry/starboard)
+"eEn" = (
+/turf/simulated/floor/airless,
+/area/exodus/turret_protected/ai)
 "eEV" = (
 /obj/effect/floor_decal/corner/blue{
 	dir = 10
 	},
 /turf/simulated/floor/tiled/steel_grid,
 /area/exodus/hallway/primary/central_one)
+"eJK" = (
+/obj/machinery/network/relay,
+/turf/simulated/floor/plating,
+/area/exodus/maintenance/locker)
 "eKH" = (
 /obj/machinery/light/small{
 	dir = 8
@@ -63650,6 +63632,17 @@
 	},
 /turf/simulated/floor/tiled/steel_grid,
 /area/exodus/quartermaster/miningdock)
+"fPF" = (
+/obj/machinery/door/blast/regular/open{
+	dir = 2;
+	id_tag = "bridge blast";
+	name = "Bridge Blast Doors"
+	},
+/obj/effect/wallframe_spawn/reinforced,
+/obj/machinery/door/firedoor,
+/obj/structure/cable/green,
+/turf/simulated/floor/plating,
+/area/exodus/bridge)
 "fTj" = (
 /obj/machinery/mech_recharger,
 /obj/effect/floor_decal/industrial/outline/yellow,
@@ -63907,6 +63900,17 @@
 	},
 /turf/simulated/floor/tiled/dark/monotile,
 /area/shuttle/arrival/station)
+"iFX" = (
+/obj/structure/closet/emcloset,
+/obj/effect/floor_decal/corner/blue{
+	dir = 10
+	},
+/obj/structure/extinguisher_cabinet{
+	pixel_x = -5;
+	pixel_y = -28
+	},
+/turf/simulated/floor/tiled/steel_grid,
+/area/exodus/bridge)
 "iKS" = (
 /obj/machinery/conveyor{
 	id_tag = "cargo_mining_conveyor"
@@ -64966,6 +64970,9 @@
 /obj/structure/table,
 /turf/simulated/floor/tiled/white,
 /area/exodus/research/robotics)
+"wTf" = (
+/turf/simulated/floor/airless,
+/area/exodus/turret_protected/ai)
 "wTp" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 6
@@ -80887,7 +80894,7 @@ aNB
 aNg
 aLK
 bxH
-aXe
+eJK
 aXe
 aGw
 aYQ
@@ -91177,7 +91184,7 @@ bfp
 bgP
 bfj
 bhd
-bmy
+bjE
 bmG
 bnc
 bpD
@@ -93741,7 +93748,7 @@ aVU
 aVU
 aYY
 aUp
-aap
+eEn
 beb
 bfv
 bhS
@@ -93997,8 +94004,8 @@ ari
 auR
 avS
 avU
-aUp
-aap
+fPF
+wTf
 beb
 bgW
 aoi
@@ -96054,7 +96061,7 @@ mwu
 blu
 aZf
 baS
-bcf
+iFX
 bed
 bfE
 bhc

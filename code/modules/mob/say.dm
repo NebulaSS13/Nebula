@@ -1,3 +1,17 @@
+var/global/list/special_channel_keys = list(
+	"r" = MESSAGE_MODE_RIGHT,
+	"l" = MESSAGE_MODE_LEFT,
+	"i" = MESSAGE_MODE_INTERCOM,
+	"h" = MESSAGE_MODE_DEPARTMENT,
+	"+" = MESSAGE_MODE_SPECIAL,    //activate radio-specific special functions
+	"w" = MESSAGE_MODE_WHISPER,
+	"к" = MESSAGE_MODE_RIGHT,
+	"д" = MESSAGE_MODE_LEFT,
+	"ш" = MESSAGE_MODE_INTERCOM,
+	"р" = MESSAGE_MODE_DEPARTMENT,
+	"ц" = MESSAGE_MODE_WHISPER
+)
+
 /mob/proc/say()
 	return
 
@@ -31,9 +45,11 @@
 /mob/proc/say_understands(mob/speaker, decl/language/speaking)
 	if(stat == DEAD || universal_speak || universal_understand)
 		return TRUE
+	if(!istype(speaker))
+		return TRUE
 	if(speaking)
 		return speaking.can_be_understood_by(speaker, src)
-	return (!speaker || speaker.universal_speak || istype(speaker, type) || istype(src, speaker.type))
+	return (speaker.universal_speak || istype(speaker, type) || istype(src, speaker.type))
 
 /mob/proc/say_quote(var/message, var/decl/language/speaking = null)
 	var/ending = copytext(message, length(message))
@@ -67,13 +83,16 @@
 //parses the message mode code (e.g. :h, :w) from text, such as that supplied to say.
 //returns the message mode string or null for no message mode.
 //standard mode is the mode returned for the special ';' radio code.
-/mob/proc/parse_message_mode(var/message)
-	if(length(message) >= 1)
-		if(copytext_char(message,1,2) == get_prefix_key(/decl/prefix/radio_main_channel))
-			return MESSAGE_MODE_DEFAULT
-		if(length(message) >= 2)
-			var/channel_prefix = copytext_char(message, 1, 3)
-			return department_radio_keys[channel_prefix]
+/mob/proc/parse_message_mode(var/message, var/standard_mode=MESSAGE_MODE_DEFAULT)
+	if(length(message) <= 0)
+		return null
+	message = lowertext(message)
+	var/initial_char = copytext_char(message,1,2)
+	if(initial_char == get_common_radio_prefix())
+		return standard_mode
+	if(initial_char == get_department_radio_prefix() && length(message) >= 2)
+		var/channel_prefix = copytext(message, 2, 3)
+		. = global.special_channel_keys[channel_prefix] || channel_prefix
 
 //parses the language code (e.g. :j) from text, such as that supplied to say.
 //returns the language object only if the code corresponds to a language that src can speak, otherwise null.

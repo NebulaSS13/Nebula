@@ -6,6 +6,21 @@
 		/area/map_template/merc_spawn = NO_SCRUBBER|NO_VENT
 	)
 
+/obj/machinery/network/telecomms_hub/mercenary
+	req_access = list(access_mercenary)
+	initial_network_id = "mercnet"
+	channels = list(
+		COMMON_FREQUENCY_DATA,
+		list(
+			"name" = "Mercenary",
+			"key" = "t",
+			"frequency" = PUB_FREQ,
+			"color" = COMMS_COLOR_SYNDICATE,
+			"span_class" = CSS_CLASS_RADIO,
+			"secured" = access_mercenary
+		)
+	)
+
 /obj/effect/overmap/visitable/merc_base
 	name = "TCV Tersten Tenacity"
 	desc = "Sensor array detects a medium cargo vessel with high structural damage."
