@@ -1,7 +1,11 @@
 <div style="min-width: 480px">
-
+	{{if data.network}}
+	<div class='item'>
+		<div class='itemBody'>{{:helper.link("Network Settings", null, { "settings" : 1 })}}</div>
+	</div>
+	<hr>
+	{{/if}}
 	<h3>Power System</h3>
-
 	<div class="item">
 		<div class="itemLabel">
 			Power:
@@ -11,9 +15,7 @@
 			{{:helper.link('Off', 'close', {'set_enabled' : 0}, data.enabled ? null : 'selected')}}
 		</div>
 	</div>
-
 	<h3>Weapon System</h3>
-
 	<div class="item">
 		<div class="itemLabel">
 			Installed Weapon:
@@ -40,6 +42,19 @@
 			</div>
 		</div>
 	{{/if}}
+	<h3>Targeting Settings</h3>
+		{{for data.settings}}
+			<div class="item">
+				<div class="itemLabelWide">
+					{{:value.category}}
+				</div>
+				<div class="itemContentNarrow">
+					{{:helper.link('On', null, {'targeting_comm' : value.setting, 'targeting_value' : 1},  value.value ? 'selected' : null)}}
+					{{:helper.link('Off',null, {'targeting_comm' : value.setting, 'targeting_value' : 0}, !value.value ? 'selected' : null)}}
+				</div>
+			</div>
+		{{/for}}
+	<h3>Manual Control</h3>
 	<div class="item">
 		<div class="itemLabel">
 			Bearing:
@@ -68,7 +83,6 @@
 			{{:helper.link('Manual Fire', 'alert', {'manual_fire' : 1}, null, data.weaponName ? 'redButton' : 'disabled')}}
 		</div>
 	</div>
-
 </div>
 
 
