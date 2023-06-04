@@ -292,7 +292,7 @@
 		return src
 	if(device_methods && (public_thing.type in device_methods))
 		return src
-	if((public_thing.type in get_holder_variables()) || (public_thing in get_holder_methods()))
+	if((public_thing.type in get_holder_variables()) || (public_thing.type in get_holder_methods()))
 		return holder
 
 // Return the public methods and variables available for commands.
