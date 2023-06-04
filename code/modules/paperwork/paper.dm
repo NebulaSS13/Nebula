@@ -52,7 +52,7 @@
 		SSpersistence.track_value(src, /decl/persistence_handler/paper)
 
 /obj/item/paper/GetCloneArgs()
-	return list(null, material, info, name)
+	return list(null, material?.type, info, name)
 
 /obj/item/paper/PopulateClone(obj/item/paper/clone)
 	clone = ..()
