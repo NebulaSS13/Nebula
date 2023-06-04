@@ -44,5 +44,5 @@
 	return null
 
 /obj/item/gun/launcher/rocket/handle_post_fire(atom/movable/firer, atom/target)
-	log_and_message_admins("fired a rocket from a rocket launcher ([src.name]) at [target].")
+	log_and_message_admins("fired a rocket from a rocket launcher ([src.name]) at [target].", firer)
 	..()

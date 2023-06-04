@@ -378,7 +378,7 @@
 		if(screen_shake)
 			shake_camera(user, max(burst_delay*burst, fire_delay), screen_shake)
 
-		if(istype(user,/mob/living/carbon/human) && user.is_cloaked()) //shooting will disable a rig cloaking device
+		if(ishuman(user) && user.is_cloaked()) //shooting will disable a rig cloaking device
 			var/mob/living/carbon/human/H = user
 			var/obj/item/rig/R = H.get_equipped_item(slot_back_str)
 			if(istype(R))
