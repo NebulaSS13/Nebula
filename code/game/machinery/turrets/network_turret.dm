@@ -19,7 +19,7 @@
 	construct_state = /decl/machine_construction/default/panel_closed
 	stat_immune = NOSCREEN | NOINPUT
 
-	hostility = /datum/hostility/turret/network
+	hostility = /decl/hostility/turret/network
 
 	// Targeting modes.
 	var/check_access = FALSE
