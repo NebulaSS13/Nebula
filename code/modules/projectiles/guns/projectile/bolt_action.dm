@@ -28,7 +28,7 @@
 	..()
 	if(ismob(firer))
 		var/mob/user = firer
-		if(user && user.skill_check(SKILL_WEAPONS, SKILL_PROF))
+		if(user.skill_check(SKILL_WEAPONS, SKILL_PROF))
 			to_chat(user, "<span class='notice'>You work the bolt open with a reflexive motion, ejecting [chambered]!</span>")
 			unload_shell()
 
