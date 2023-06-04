@@ -57,14 +57,14 @@
 	var/weakref/target = null
 	var/list/potential_targets = list()
 	var/timer_id = null
-	var/datum/hostility/hostility = /datum/hostility/turret
+	var/decl/hostility/hostility = /decl/hostility/turret
 
 /obj/machinery/turret/Initialize()
 	if(ispath(installed_gun))
 		installed_gun = new installed_gun(src)
 		setup_gun()
 	if(ispath(hostility))
-		hostility = new hostility(src)
+		hostility = GET_DECL(hostility)
 
 	state_machine = add_state_machine(src, /datum/state_machine/turret)
 
@@ -102,8 +102,8 @@
 	target = null
 	potential_targets.Cut()
 
-	if(istype(hostility))
-		QDEL_NULL(hostility)
+	hostility = null
+
 	return ..()
 
 /obj/machinery/turret/dismantle()
@@ -302,7 +302,7 @@
 
 // Turret targeting
 /obj/machinery/turret/proc/can_be_hostile_to(atom/potential_target)
-	return hostility?.can_target(potential_target)
+	return hostility?.can_target(src, potential_target)
 
 /obj/machinery/turret/proc/set_target(atom/new_target)
 	if(is_valid_target(new_target))
@@ -385,8 +385,7 @@
 		state_machine.evaluate()
 
 /obj/machinery/turret/proc/emagged_targeting()
-	QDEL_NULL(hostility)
-	hostility = new /datum/hostility(src) // Shoots almost everyone.
+	hostility = GET_DECL(/decl/hostility) // Shoots almost everyone.
 	enabled = TRUE
 	state_machine.evaluate()
 
@@ -408,7 +407,7 @@
 	data["weaponName"] = installed_gun ? installed_gun.name : null
 	data["currentBearing"] = current_bearing
 
-	if(LAZYLEN(installed_gun.firemodes))
+	if(LAZYLEN(installed_gun?.firemodes))
 		var/fm_index = 1
 		var/list/fm_data = list()
 		for(var/datum/firemode/fm in installed_gun.firemodes)

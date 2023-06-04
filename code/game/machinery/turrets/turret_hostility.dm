@@ -1,14 +1,16 @@
-/datum/hostility/turret/can_special_target(atom/movable/target)
+/decl/hostility/turret/can_special_target(atom/movable/target)
 	if(isliving(target))
 		return TRUE
 
 // Network turret hostility
-/datum/hostility/turret/network
+/decl/hostility/turret/network
 	var/static/threat_level_threshold = 4
 
-/datum/hostility/turret/network/can_special_target(atom/movable/target)
+/decl/hostility/turret/network/can_special_target(atom/holder, atom/movable/target)
 	var/obj/machinery/turret/network/owner = holder
-
+	if(!istype(holder))
+		log_error("Network turret hostility referenced with a non turret holder: [holder]!")
+		return
 	if(!ishuman(target))
 		// Attack any living, non-small/silicon/human target.
 		if(owner.check_lifeforms)
