@@ -93,6 +93,7 @@
 
 /obj/machinery/turret/network/ui_interact(mob/user, ui_key = "main", datum/nanoui/ui = null, datum/topic_state/state = global.default_topic_state)
 	var/data = list()
+	data["network"] = TRUE
 	data["enabled"] = enabled
 	data["weaponName"] = installed_gun ? installed_gun.name : null
 	data["currentBearing"] = current_bearing
@@ -110,7 +111,7 @@
 
 	ui = SSnano.try_update_ui(user, src, ui_key, ui, data)
 	if (!ui)
-		ui = new(user, src, ui_key, "network_turret.tmpl", "Turret Controls", 600, 600, state = state)
+		ui = new(user, src, ui_key, "turret.tmpl", "Turret Controls", 600, 600, state = state)
 		ui.set_initial_data(data)
 		ui.open()
 		ui.set_auto_update(1)
