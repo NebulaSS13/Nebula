@@ -309,7 +309,7 @@
 	if(prob(30))
 		icon_state = "[donut_state]2"
 		overlay_state = "box-donut2"
-		SetName("frosted [name]]")
+		SetName("frosted [name]")
 		reagents.add_reagent(/decl/material/liquid/nutriment/sprinkles, 2)
 
 /obj/item/chems/food/donut/chaos
