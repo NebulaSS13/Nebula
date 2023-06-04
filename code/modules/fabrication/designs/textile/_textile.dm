@@ -3,6 +3,18 @@
 	category = "Textiles"
 	fabricator_types = list(FABRICATOR_CLASS_TEXTILE)
 
+/datum/fabricator_recipe/textiles/banner
+	path = /obj/item/banner
+
+/datum/fabricator_recipe/textiles/banner/green
+	path = /obj/item/banner/green
+
+/datum/fabricator_recipe/textiles/banner/red
+	path = /obj/item/banner/red
+
+/datum/fabricator_recipe/textiles/banner/blue
+	path = /obj/item/banner/blue
+
 /datum/fabricator_recipe/textiles/jeancasual
 	path = /obj/item/clothing/pants/casual
 
@@ -52,13 +64,13 @@
 /datum/fabricator_recipe/textiles/hat
 	category = "Headwear"
 	path = /obj/item/clothing/head/det
-	
+
 /datum/fabricator_recipe/textiles/hat/fedoragrey
 	path = /obj/item/clothing/head/det/grey
 
 /datum/fabricator_recipe/textiles/hat/fedoradisco
 	path = /obj/item/clothing/head/det/wack
-	
+
 /datum/fabricator_recipe/textiles/hat/bandanablack
 	path = /obj/item/clothing/mask/bandana
 

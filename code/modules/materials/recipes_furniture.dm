@@ -68,6 +68,11 @@
 	result_type = /obj/structure/barricade
 	time = 50
 
+/datum/stack_recipe/furniture/banner_frame
+	title = "banner frame"
+	result_type = /obj/structure/banner_frame
+	time = 25
+
 /datum/stack_recipe/furniture/stool
 	title = "stool"
 	result_type = /obj/item/stool
