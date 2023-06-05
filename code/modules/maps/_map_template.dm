@@ -133,7 +133,9 @@
 			bounds = extend_bounds_if_needed(bounds, M.bounds)
 			atoms_to_initialise += M.atoms_to_initialise
 		else
-			return FALSE
+			//Abort if loading failed
+			global._preloader.current_map_hash = null //Clear current map hash to prevent problems if we load something else later and cause false positives
+			CRASH("Failed to load '[src]''s '[mappath]' map file!")
 
 	global._preloader.current_map_hash = null
 
@@ -154,12 +156,8 @@
 /datum/map_template/proc/load(turf/T, centered=FALSE)
 	if(centered)
 		T = locate(T.x - round(width/2) , T.y - round(height/2) , T.z)
-	if(!T)
-		return
-	if(T.x+width > world.maxx)
-		return
-	if(T.y+height > world.maxy)
-		return
+	if(!T || ((T.x + width) > world.maxx) || ((T.y + height) > world.maxy))
+		CRASH("Couldn't fit the entire template '[src]' (size: [width]x[height]) between lower left corner ([T.x], [T.y])[centered?"(WORLD CENTER)":""] and upper right corner ([T.x + width], [T.y + height]) in current world size ([world.maxx], [world.maxy]).")
 
 	var/list/atoms_to_initialise = list()
 	var/shuttle_state = pre_init_shuttles()
@@ -174,7 +172,9 @@
 		if (M)
 			atoms_to_initialise += M.atoms_to_initialise
 		else
-			return FALSE
+			//Abort if loading failed
+			global._preloader.current_map_hash = null //Clear current map hash to prevent problems if we load something else later and cause false positives
+			CRASH("Failed to load '[src]''s '[mappath]' map file!")
 
 	global._preloader.current_map_hash = null
 
