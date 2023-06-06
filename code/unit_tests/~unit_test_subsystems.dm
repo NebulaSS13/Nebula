@@ -57,6 +57,8 @@ SUBSYSTEM_DEF(unit_tests)
 	if(map_template.tallness == 1)
 		SSmapping.increment_world_z_size(/datum/level_data/unit_test)
 		var/center = locate(world.maxx/2, world.maxy/2, world.maxz)
+		if(!center)
+			CRASH("'[map_template]' (size: [map_template.width]x[map_template.height]) couldn't locate center turf at ([world.maxx/2][world.maxy/2][world.maxz]) with world size ([world.maxx]x[world.maxy]x[world.maxz])")
 		log_unit_test("Loading template '[map_template]' ([map_template.type]) at [log_info_line(center)]")
 		map_template.load(center, centered = TRUE)
 	else // Multi-Z templates are loaded using different means
