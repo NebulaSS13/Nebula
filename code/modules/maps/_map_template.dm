@@ -156,7 +156,9 @@
 /datum/map_template/proc/load(turf/T, centered=FALSE)
 	if(centered)
 		T = locate(T.x - round(width/2) , T.y - round(height/2) , T.z)
-	if(!T || ((T.x + width) > world.maxx) || ((T.y + height) > world.maxy))
+	if(!T)
+		CRASH("Can't load '[src]' on a null turf! Current world size ([world.maxx], [world.maxy]).")
+	if(((T.x + width) > world.maxx) || ((T.y + height) > world.maxy))
 		CRASH("Couldn't fit the entire template '[src]' (size: [width]x[height]) between lower left corner ([T.x], [T.y])[centered?"(WORLD CENTER)":""] and upper right corner ([T.x + width], [T.y + height]) in current world size ([world.maxx], [world.maxy]).")
 
 	var/list/atoms_to_initialise = list()
